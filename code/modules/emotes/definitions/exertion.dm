@@ -6,7 +6,7 @@
 	emote_message_3p = "USER is sweating heavily."
 
 /singleton/emote/exertion/biological/check_user(mob/living/user)
-	if(istype(user) && !user.isSynthetic())
+	if (istype(user) && !user.isSynthetic())
 		return ..()
 	return FALSE
 
@@ -31,7 +31,7 @@
 	emote_message_3p = "USER's actuators whine with strain."
 
 /singleton/emote/exertion/synthetic/check_user(mob/living/user)
-	if(istype(user) && user.isSynthetic())
+	if (istype(user) && user.isSynthetic())
 		return ..()
 	return FALSE
 

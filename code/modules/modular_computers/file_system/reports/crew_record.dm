@@ -23,7 +23,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	GLOB.all_crew_records.Remove(src)
 
 /datum/computer_file/report/crew_record/proc/load_from_mob(mob/living/carbon/human/H)
-	if(istype(H))
+	if (istype(H))
 		photo_front = getFlatIcon(H, SOUTH, always_use_defdir = 1)
 		photo_side = getFlatIcon(H, WEST, always_use_defdir = 1)
 	else
@@ -34,12 +34,12 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 	// Add honorifics, etc.
 	var/formal_name = "Unset"
-	if(H)
+	if (H)
 		formal_name = H.real_name
-		if(H.client && H.client.prefs)
+		if (H.client && H.client.prefs)
 			for(var/culturetag in H.client.prefs.cultural_info)
 				var/singleton/cultural_info/culture = SSculture.get_culture(H.client.prefs.cultural_info[culturetag])
-				if(H.char_rank && H.char_rank.name_short)
+				if (H.char_rank && H.char_rank.name_short)
 					formal_name = "[formal_name][culture.get_formal_name_suffix()]"
 				else
 					formal_name = "[culture.get_formal_name_prefix()][formal_name][culture.get_formal_name_suffix()]"
@@ -49,9 +49,9 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_formal_name(formal_name)
 	set_job(H ? GetAssignment(H) : "Unset")
 	var/pronouns = "Unset"
-	if(H)
+	if (H)
 		var/datum/pronouns/P = H.choose_from_pronouns()
-		if(P)
+		if (P)
 			pronouns = P.formal_term
 	set_sex(pronouns)
 	set_age(H ? H.age : 30)
@@ -65,8 +65,8 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_bloodtype(H ? H.b_type : "Unset")
 	set_medRecord((H && H.med_record && !jobban_isbanned(H, "Records") ? html_decode(H.med_record) : "No record supplied"))
 
-	if(H)
-		if(H.isSynthetic())
+	if (H)
+		if (H.isSynthetic())
 			var/organ_data = list("Fully synthetic body")
 			for(var/obj/item/organ/internal/augment/A in H.internal_organs)
 				organ_data += "installed augment - [A.name]"
@@ -75,10 +75,10 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		else
 			var/organ_data = list("\[*\]")
 			for(var/obj/item/organ/external/E in H.organs)
-				if(BP_IS_ROBOTIC(E))
+				if (BP_IS_ROBOTIC(E))
 					organ_data += "[E.model ? "[E.model] " : null][E.name] prosthetic"
 			for(var/obj/item/organ/internal/I in H.internal_organs)
-				if(BP_IS_ASSISTED(I))
+				if (BP_IS_ASSISTED(I))
 					organ_data += I.get_mechanical_assisted_descriptor()
 				else if (BP_IS_ROBOTIC(I))
 					if (!istype(I, /obj/item/organ/internal/augment)) // Differentiate between augments and prosthetics
@@ -95,17 +95,17 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 	// Employment record
 	var/employment_record = "No record supplied"
-	if(H)
-		if(H.gen_record && !jobban_isbanned(H, "Records"))
+	if (H)
+		if (H.gen_record && !jobban_isbanned(H, "Records"))
 			employment_record = html_decode(H.gen_record)
-		if(H.client && H.client.prefs)
+		if (H.client && H.client.prefs)
 			var/list/qualifications
 			for(var/culturetag in H.client.prefs.cultural_info)
 				var/singleton/cultural_info/culture = SSculture.get_culture(H.client.prefs.cultural_info[culturetag])
 				var/extra_note = culture.get_qualifications()
-				if(extra_note)
+				if (extra_note)
 					LAZYADD(qualifications, extra_note)
-			if(LAZYLEN(qualifications))
+			if (LAZYLEN(qualifications))
 				employment_record = "[employment_record ? "[employment_record]\[br\]" : ""][jointext(qualifications, "\[br\]>")]"
 	set_emplRecord(employment_record)
 
@@ -113,11 +113,11 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_homeSystem(H ? html_decode(H.get_cultural_value(TAG_HOMEWORLD)) : "Unset")
 	set_religion(H ? html_decode(H.get_cultural_value(TAG_RELIGION)) : "Unset")
 
-	if(H)
+	if (H)
 		var/skills = list()
 		for(var/singleton/hierarchy/skill/S in GLOB.skills)
 			var/level = H.get_skill_value(S.type)
-			if(level > SKILL_UNSKILLED)
+			if (level > SKILL_UNSKILLED)
 				skills += "[S.name], [S.levels[level]]"
 
 		set_skillset(jointext(skills,"\n"))
@@ -140,11 +140,11 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	var/list/matches = list()
 	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
 		var/rank = CR.get_job()
-		if(blacklist)
-			if(!(rank in filter_positions))
+		if (blacklist)
+			if (!(rank in filter_positions))
 				matches.Add(CR)
 		else
-			if(rank in filter_positions)
+			if (rank in filter_positions)
 				matches.Add(CR)
 	return matches
 
@@ -154,9 +154,9 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	var/dat = "<tt><H2>RECORD DATABASE DATA DUMP</H2><i>Generated on: [stationdate2text()] [stationtime2text()]</i><br>******************************<br>"
 	dat += "<table>"
 	for(var/datum/report_field/F in CR.fields)
-		if(F.verify_access(access))
+		if (F.verify_access(access))
 			dat += "<tr><td><b>[F.display_name()]</b>"
-			if(F.needs_big_box)
+			if (F.needs_big_box)
 				dat += "<tr>"
 			dat += "<td>[F.get_value()]"
 	dat += "</tt>"
@@ -172,16 +172,16 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 
 /proc/GetAssignment(mob/living/carbon/human/H)
-	if(!H)
+	if (!H)
 		return "Unassigned"
-	if(!H.mind)
+	if (!H.mind)
 		return H.job
-	if(H.mind.role_alt_title)
+	if (H.mind.role_alt_title)
 		return H.mind.role_alt_title
 	return H.mind.assigned_role
 
-#define GETTER_SETTER(PATH, KEY) /datum/computer_file/report/crew_record/proc/get_##KEY(){var/datum/report_field/F = locate(/datum/report_field/##PATH/##KEY) in fields; if(F) return F.get_value()} \
-/datum/computer_file/report/crew_record/proc/set_##KEY(given_value){var/datum/report_field/F = locate(/datum/report_field/##PATH/##KEY) in fields; if(F) F.set_value(given_value)}
+#define GETTER_SETTER(PATH, KEY) /datum/computer_file/report/crew_record/proc/get_##KEY(){var/datum/report_field/F = locate(/datum/report_field/##PATH/##KEY) in fields; if (F) return F.get_value()} \
+/datum/computer_file/report/crew_record/proc/set_##KEY(given_value){var/datum/report_field/F = locate(/datum/report_field/##PATH/##KEY) in fields; if (F) F.set_value(given_value)}
 #define SETUP_FIELD(NAME, KEY, PATH, ACCESS, ACCESS_EDIT) GETTER_SETTER(PATH, KEY); /datum/report_field/##PATH/##KEY;\
 /datum/computer_file/report/crew_record/generate_fields(){..(); var/datum/report_field/##KEY = add_field(/datum/report_field/##PATH/##KEY, ##NAME);\
 KEY.set_access(ACCESS, ACCESS_EDIT || ACCESS || access_bridge)}
@@ -235,7 +235,7 @@ FIELD_LONG("Exploitable Information", antagRecord, access_syndicate, access_synd
 /datum/report_field/options/crew_record/rank/proc/record_ranks()
 	var/datum/computer_file/report/crew_record/record = owner
 	var/datum/mil_branch/branch = GLOB.mil_branches.get_branch(record.get_branch())
-	if(!branch)
+	if (!branch)
 		return
 	. = list()
 	. |= "Unset"

@@ -1,7 +1,7 @@
 // Subscribe to owner's movement event.
 /datum/goal/movement/New()
 	..()
-	if(owner)
+	if (owner)
 		var/datum/mind/mind = owner
 		GLOB.moved_event.register(mind.current, src, .proc/owner_moved)
 
@@ -9,7 +9,7 @@
 	return
 
 /datum/goal/movement/Destroy()
-	if(owner)
+	if (owner)
 		var/datum/mind/mind = owner
 		GLOB.moved_event.unregister(mind.current, src)
 	. = ..()
@@ -25,9 +25,9 @@
 	return TRUE
 
 /datum/goal/movement/walk/owner_moved()
-	if(steps < required_steps && valid_step())
+	if (steps < required_steps && valid_step())
 		steps++
-		if(steps >= required_steps)
+		if (steps >= required_steps)
 			on_completion()
 			GLOB.moved_event.unregister(owner, src)
 
@@ -40,7 +40,7 @@
 
 /datum/goal/movement/walk/check_success()
 	return (steps >= required_steps)
-	
+
 /datum/goal/movement/walk/update_strings()
 	description = "Stave off microgravity muscle atrophy by walking at least [required_steps] step\s this shift."
 

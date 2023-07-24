@@ -8,7 +8,7 @@
 
 
 /obj/item/stack/material/cyborg/New()
-	if(..())
+	if (..())
 		name = "[material.display_name] synthesiser"
 		desc = "A device that synthesises [material.display_name]."
 		matter = null

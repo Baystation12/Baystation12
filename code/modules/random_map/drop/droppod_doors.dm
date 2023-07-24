@@ -12,27 +12,27 @@
 
 /obj/structure/droppod_door/New(newloc, autoopen)
 	..(newloc)
-	if(autoopen)
+	if (autoopen)
 		spawn(10 SECONDS)
 			deploy()
 
 /obj/structure/droppod_door/attack_ai(mob/user)
-	if(!user.Adjacent(src))
+	if (!user.Adjacent(src))
 		return
 	attack_hand(user)
 
 /obj/structure/droppod_door/attack_generic(mob/user)
-	if(istype(user))
+	if (istype(user))
 		attack_hand(user)
 
 /obj/structure/droppod_door/attack_hand(mob/user)
-	if(deploying) return
+	if (deploying) return
 	to_chat(user, SPAN_DANGER("You prime the explosive bolts. Better get clear!"))
 	sleep(30)
 	deploy()
 
 /obj/structure/droppod_door/proc/deploy()
-	if(deployed)
+	if (deployed)
 		return
 
 	deployed = 1
@@ -41,7 +41,7 @@
 
 	// This is shit but it will do for the sake of testing.
 	for(var/obj/structure/droppod_door/D in orange(1,src))
-		if(D.deployed)
+		if (D.deployed)
 			continue
 		D.deploy()
 
@@ -55,11 +55,11 @@
 
 	// Destroy turf contents.
 	for(var/obj/O in origin)
-		if(!O.simulated)
+		if (!O.simulated)
 			continue
 		qdel(O) //crunch
 	for(var/obj/O in T)
-		if(!O.simulated)
+		if (!O.simulated)
 			continue
 		qdel(O) //crunch
 

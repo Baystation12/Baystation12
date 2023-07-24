@@ -24,10 +24,10 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
  *  Retrieve branch object by branch name
  */
 /datum/mil_branches/proc/get_branch(branch_name)
-	if(ispath(branch_name, /datum/mil_branch))
+	if (ispath(branch_name, /datum/mil_branch))
 		var/datum/mil_branch/branch = branch_name
 		branch_name = initial(branch.name)
-	if(branch_name && branch_name != "None")
+	if (branch_name && branch_name != "None")
 		return branches[branch_name]
 
 /**
@@ -42,26 +42,26 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
  *  Retrieve a rank object from given branch by name
  */
 /datum/mil_branches/proc/get_rank(branch_name, rank_name)
-	if(ispath(rank_name))
+	if (ispath(rank_name))
 		var/datum/mil_rank/rank = rank_name
 		rank_name = initial(rank.name)
-	if(rank_name && rank_name != "None")
+	if (rank_name && rank_name != "None")
 		var/datum/mil_branch/branch = get_branch(branch_name)
-		if(branch)
+		if (branch)
 			return branch.ranks[rank_name]
 
 /**
  *  Return all spawn branches for the given input
  */
 /datum/mil_branches/proc/spawn_branches(datum/species/S)
-	if(!S)
+	if (!S)
 		return spawn_branches_.Copy()
 	. = LAZYACCESS(spawn_branches_by_species_, S)
-	if(!.)
+	if (!.)
 		. = list()
 		LAZYSET(spawn_branches_by_species_, S, .)
 		for(var/spawn_branch in spawn_branches_)
-			if(!GLOB.using_map.is_species_branch_restricted(S, spawn_branches_[spawn_branch]))
+			if (!GLOB.using_map.is_species_branch_restricted(S, spawn_branches_[spawn_branch]))
 				. += spawn_branch
 
 /**
@@ -83,7 +83,7 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
  */
 /datum/mil_branches/proc/is_spawn_rank(branch_name, rank_name, datum/species/S)
 	var/datum/mil_branch/branch = get_branch(branch_name)
-	if(branch && (rank_name in branch.spawn_ranks(S)))
+	if (branch && (rank_name in branch.spawn_ranks(S)))
 		return TRUE
 	else
 		return FALSE
@@ -121,24 +121,24 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
 	spawn_ranks_by_species_ = list()
 
 	for(var/rank_path in rank_types)
-		if(!ispath(rank_path, /datum/mil_rank))
+		if (!ispath(rank_path, /datum/mil_rank))
 			crash_with("[name]'s rank_types includes [rank_path], which is not a subtype of /datum/mil_rank.")
 			continue
 		var/datum/mil_rank/rank = new rank_path ()
 		ranks[rank.name] = rank
 
-		if(rank_path in spawn_rank_types)
+		if (rank_path in spawn_rank_types)
 			spawn_ranks_[rank.name] = rank
 
 /datum/mil_branch/proc/spawn_ranks(datum/species/S)
-	if(!S)
+	if (!S)
 		return spawn_ranks_.Copy()
 	. = spawn_ranks_by_species_[S]
-	if(!.)
+	if (!.)
 		. = list()
 		spawn_ranks_by_species_[S] = .
 		for(var/spawn_rank in spawn_ranks_)
-			if(!GLOB.using_map.is_species_rank_restricted(S, src, spawn_ranks_[spawn_rank]))
+			if (!GLOB.using_map.is_species_rank_restricted(S, src, spawn_ranks_[spawn_rank]))
 				. += spawn_rank
 
 
@@ -146,7 +146,7 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
  *  Populate the global branches list from GLOB.using_map
  */
 /hook/startup/proc/populate_branches()
-	if(!(GLOB.using_map.flags & MAP_HAS_BRANCH) && !(GLOB.using_map.flags & MAP_HAS_RANK))
+	if (!(GLOB.using_map.flags & MAP_HAS_BRANCH) && !(GLOB.using_map.flags & MAP_HAS_RANK))
 		GLOB.mil_branches.branches  = null
 		GLOB.mil_branches.spawn_branches_ = null
 		GLOB.mil_branches.spawn_branches_by_species_ = null
@@ -156,14 +156,14 @@ GLOBAL_DATUM_INIT(mil_branches, /datum/mil_branches, new)
 	GLOB.mil_branches.spawn_branches_ = list()
 	GLOB.mil_branches.spawn_branches_by_species_ = list()
 	for(var/branch_path in GLOB.using_map.branch_types)
-		if(!ispath(branch_path, /datum/mil_branch))
+		if (!ispath(branch_path, /datum/mil_branch))
 			crash_with("populate_branches() attempted to instantiate object with path [branch_path], which is not a subtype of /datum/mil_branch.")
 			continue
 
 		var/datum/mil_branch/branch = new branch_path ()
 		GLOB.mil_branches.branches[branch.name] = branch
 
-		if(branch_path in GLOB.using_map.spawn_branch_types)
+		if (branch_path in GLOB.using_map.spawn_branch_types)
 			GLOB.mil_branches.spawn_branches_[branch.name] = branch
 
 	return 1

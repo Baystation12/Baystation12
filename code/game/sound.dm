@@ -59,7 +59,7 @@ GLOBAL_LIST_INIT(tray_hit_sound,list('sound/items/trayhit1.ogg', 'sound/items/tr
 
 	soundin = get_sfx(soundin) // same sound for everyone
 
-	if(isarea(source))
+	if (isarea(source))
 		error("[source] is an area and is trying to make the sound: [soundin]")
 		return
 	frequency = vary && isnull(frequency) ? get_rand_frequency() : frequency // Same frequency for everybody
@@ -67,26 +67,26 @@ GLOBAL_LIST_INIT(tray_hit_sound,list('sound/items/trayhit1.ogg', 'sound/items/tr
 
  	// Looping through the player list has the added bonus of working for mobs inside containers
 	for (var/mob/M in GLOB.player_list)
-		if(!M || !M.client)
+		if (!M || !M.client)
 			continue
-		if(get_dist(M, turf_source) <= (world.view + extrarange) * 2)
+		if (get_dist(M, turf_source) <= (world.view + extrarange) * 2)
 			var/turf/T = get_turf(M)
-			if(T && T.z == turf_source.z && (!is_ambiance || M.get_preference_value(/datum/client_preference/play_ambiance) == GLOB.PREF_YES))
+			if (T && T.z == turf_source.z && (!is_ambiance || M.get_preference_value(/datum/client_preference/play_ambiance) == GLOB.PREF_YES))
 				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, is_global, extrarange)
 
 var/global/const/FALLOFF_SOUNDS = 0.5
 
 /mob/proc/playsound_local(turf/turf_source, soundin, vol as num, vary, frequency, falloff, is_global, extrarange)
-	if(!src.client || ear_deaf > 0)	return
+	if (!src.client || ear_deaf > 0)	return
 	var/sound/S = soundin
-	if(!istype(S))
+	if (!istype(S))
 		soundin = get_sfx(soundin)
 		S = sound(soundin)
 		S.wait = 0 //No queue
 		S.channel = 0 //Any channel
 		S.volume = vol
 		S.environment = -1
-		if(frequency)
+		if (frequency)
 			S.frequency = frequency
 		else if (vary)
 			S.frequency = get_rand_frequency()
@@ -98,7 +98,7 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 
 	var/turf/T = get_turf(src)
 	// 3D sounds, the technology is here!
-	if(isturf(turf_source))
+	if (isturf(turf_source))
 		//sound volume falloff with distance
 		var/distance = get_dist(T, turf_source)
 
@@ -131,9 +131,9 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 		S.y = 1
 		S.falloff = (falloff ? falloff : FALLOFF_SOUNDS)
 
-	if(!is_global)
+	if (!is_global)
 
-		if(istype(src,/mob/living))
+		if (istype(src,/mob/living))
 			var/mob/living/carbon/M = src
 			if (istype(M) && M.hallucination_power > 50 && M.chem_effects[CE_MIND] < 1)
 				S.environment = PSYCHOTIC
@@ -170,7 +170,7 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 	return rand(32000, 55000) //Frequency stuff only works with 45kbps oggs.
 
 /proc/get_sfx(soundin)
-	if(istext(soundin))
+	if (istext(soundin))
 		switch(soundin)
 			if ("shatter") soundin = pick(GLOB.shatter_sound)
 			if ("explosion") soundin = pick(GLOB.explosion_sound)

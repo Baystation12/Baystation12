@@ -53,14 +53,14 @@
 /datum/powernet/proc/remove_cable(obj/structure/cable/C)
 	cables -= C
 	C.powernet = null
-	if(is_empty())//the powernet is now empty...
+	if (is_empty())//the powernet is now empty...
 		qdel(src)///... delete it
 
 //add a cable to the current powernet
 //Warning : this proc DON'T check if the cable exists
 /datum/powernet/proc/add_cable(obj/structure/cable/C)
-	if(C.powernet)// if C already has a powernet...
-		if(C.powernet == src)
+	if (C.powernet)// if C already has a powernet...
+		if (C.powernet == src)
 			return
 		else
 			C.powernet.remove_cable(C) //..remove it
@@ -73,15 +73,15 @@
 /datum/powernet/proc/remove_machine(obj/machinery/power/M)
 	nodes -=M
 	M.powernet = null
-	if(is_empty())//the powernet is now empty...
+	if (is_empty())//the powernet is now empty...
 		qdel(src)///... delete it - qdel
 
 
 //add a power machine to the current powernet
 //Warning : this proc DON'T check if the machine exists
 /datum/powernet/proc/add_machine(obj/machinery/power/M)
-	if(M.powernet)// if M already has a powernet...
-		if(M.powernet == src)
+	if (M.powernet)// if M already has a powernet...
+		if (M.powernet == src)
 			return
 		else
 			M.disconnect_from_network()//..remove it
@@ -98,17 +98,17 @@
 /datum/powernet/proc/reset()
 	var/numapc = 0
 
-	if(problem > 0)
+	if (problem > 0)
 		problem = max(problem - 1, 0)
 
-	if(nodes && length(nodes)) // Added to fix a bad list bug -- TLE
+	if (nodes && length(nodes)) // Added to fix a bad list bug -- TLE
 		for(var/obj/machinery/power/terminal/term in nodes)
-			if( istype( term.master_machine(), /obj/machinery/power/apc ) )
+			if ( istype( term.master_machine(), /obj/machinery/power/apc ) )
 				numapc++
 
 	netexcess = avail - load
 
-	if(numapc)
+	if (numapc)
 		//very simple load balancing. If there was a net excess this tick then it must have been that some APCs used less than perapc, since perapc*numapc = avail
 		//Therefore we can raise the amount of power rationed out to APCs on the assumption that those APCs that used less than perapc will continue to do so.
 		//If that assumption fails, then some APCs will miss out on power next tick, however it will be rebalanced for the tick after.
@@ -120,14 +120,14 @@
 		perapc = avail/numapc + perapc_excess
 
 	// At this point, all other machines have finished using power. Anything left over may be used up to charge SMESs.
-	if(length(inputting) && smes_demand)
+	if (length(inputting) && smes_demand)
 		var/smes_input_percentage = clamp((netexcess / smes_demand) * 100, 0, 100)
 		for(var/obj/machinery/power/smes/S in inputting)
 			S.input_power(smes_input_percentage)
 
 	netexcess = avail - load
 
-	if(netexcess)
+	if (netexcess)
 		var/perc = get_percent_load(1)
 		for(var/obj/machinery/power/smes/S in nodes)
 			S.restore(perc)
@@ -145,13 +145,13 @@
 	smes_newavail = 0
 
 /datum/powernet/proc/get_percent_load(smes_only = 0)
-	if(smes_only)
+	if (smes_only)
 		var/smes_used = load - (avail - smes_avail) 			// SMESs are always last to provide power
-		if(!smes_used || smes_used < 0 || !smes_avail)			// SMES power isn't available or being used at all, SMES load is therefore 0%
+		if (!smes_used || smes_used < 0 || !smes_avail)			// SMES power isn't available or being used at all, SMES load is therefore 0%
 			return 0
 		return clamp((smes_used / smes_avail) * 100, 0, 100)	// Otherwise return percentage load of SMESs.
 	else
-		if(!load)
+		if (!load)
 			return 0
 		return clamp((avail / load) * 100, 0, 100)
 
@@ -176,12 +176,12 @@
 /datum/powernet/proc/apcs_overload(failure_chance, overload_chance, reboot_chance)
 	for(var/obj/machinery/power/terminal/T in nodes)
 		var/obj/machinery/power/apc/A = T.master_machine()
-		if(istype(A))
+		if (istype(A))
 			if (prob(failure_chance))
 				A.set_broken(TRUE)
 			if (prob(overload_chance))
 				A.overload_lighting()
-			if(prob(reboot_chance))
+			if (prob(reboot_chance))
 				A.energy_fail(rand(30,60))
 
 ////////////////////////////////////////////////
@@ -192,10 +192,10 @@
 // return a knot cable (O-X) if one is present in the turf
 // null if there's none
 /turf/proc/get_cable_node()
-	if(!istype(src, /turf/simulated))
+	if (!istype(src, /turf/simulated))
 		return null
 	for(var/obj/structure/cable/C in src)
-		if(C.d1 == 0)
+		if (C.d1 == 0)
 			return C
 	return null
 

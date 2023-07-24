@@ -23,7 +23,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 	no_prior_faction = TRUE
 
 /datum/antagonist/vox/add_antagonist(datum/mind/player, ignore_role, do_not_equip, move_to_spawn, do_not_announce, preserve_appearance)
-	if(pending_item_spawn)
+	if (pending_item_spawn)
 		for(var/obj/effect/voxartifactspawner/S as anything in GLOB.vox_artifact_spawners)
 			S.spawn_artifact()
 		pending_item_spawn = FALSE
@@ -44,7 +44,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 		if (player_is_antag(player))
 			log_debug("[key_name(player)] is not eligible to become a [role_text]: They are already an antagonist!")
 			continue
-		if(!is_alien_whitelisted(player.current, all_species[SPECIES_VOX]))
+		if (!is_alien_whitelisted(player.current, all_species[SPECIES_VOX]))
 			log_debug("[player.current.ckey] is not whitelisted")
 			continue
 		var/result = can_become_antag_detailed(player)
@@ -59,25 +59,25 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 	var/candidates = list()
 
 	for(var/datum/mind/player in mode.get_players_for_role(id))
-		if(ghosts_only && !(isghostmind(player) || isnewplayer(player.current)))
-		else if(config.use_age_restriction_for_antags && player.current.client.player_age < minimum_player_age)
-		else if(player.special_role)
+		if (ghosts_only && !(isghostmind(player) || isnewplayer(player.current)))
+		else if (config.use_age_restriction_for_antags && player.current.client.player_age < minimum_player_age)
+		else if (player.special_role)
 		else if (player in pending_antagonists)
-		else if(!can_become_antag(player))
-		else if(player_is_antag(player))
-		else if(!is_alien_whitelisted(player.current, all_species[SPECIES_VOX]))
+		else if (!can_become_antag(player))
+		else if (player_is_antag(player))
+		else if (!is_alien_whitelisted(player.current, all_species[SPECIES_VOX]))
 		else
 			candidates |= player
 
 	return candidates
 
 /datum/antagonist/vox/can_become_antag_detailed(datum/mind/player, ignore_role)
-	if(!is_alien_whitelisted(player.current, all_species[SPECIES_VOX]))
+	if (!is_alien_whitelisted(player.current, all_species[SPECIES_VOX]))
 		return "Player doesn't have vox whitelist"
 	..()
 
 /datum/antagonist/vox/equip(mob/living/carbon/human/vox/player)
-	if(!..())
+	if (!..())
 		return FALSE
 
 	player.set_species(SPECIES_VOX)
@@ -114,11 +114,11 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 
 /obj/structure/voxuplink/attack_hand(mob/living/carbon/human/user)
 	var/obj/item/organ/internal/voxstack/stack = user.internal_organs_by_name[BP_STACK]
-	if(istype(stack) || ignore_wl)
-		if(!working)
+	if (istype(stack) || ignore_wl)
+		if (!working)
 			var/choice = input(user, "What would you like to request from Apex? You have [favors] favors left!", "Shoal Beacon") as null|anything in rewards
-			if(choice && !working)
-				if(rewards[choice][1] <= favors)
+			if (choice && !working)
+				if (rewards[choice][1] <= favors)
 					working = TRUE
 					on_update_icon()
 					to_chat(user, SPAN_NOTICE("The Apex rewards you with \the [choice]."))
@@ -127,7 +127,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 					on_update_icon()
 					favors -= rewards[choice][1]
 					for(var/I in rewards[choice])
-						if(!isnum(I))
+						if (!isnum(I))
 							new I(get_turf(src))
 				else
 					to_chat(user, SPAN_WARNING("You aren't worthy of \the [choice]!"))
@@ -138,7 +138,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 	..()
 
 /obj/structure/voxuplink/use_tool(obj/item/I, mob/user)
-	if(istype(I, /obj/item/voxartifact))
+	if (istype(I, /obj/item/voxartifact))
 		var/obj/item/voxartifact/A = I
 		favors += A.favor_value
 		qdel(A)
@@ -147,7 +147,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 			SPAN_NOTICE("You return \the [A] back to the Apex with \the [src].")
 		)
 		return TRUE
-	if(istype(I, /obj/item/bluecrystal))
+	if (istype(I, /obj/item/bluecrystal))
 		var/obj/item/bluecrystal/A = I
 		favors += A.favor_value
 		qdel(A)
@@ -159,7 +159,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 	return ..()
 
 /obj/structure/voxuplink/MouseDrop_T(obj/structure/voxartifactbig/I, mob/user)
-	if(istype(I, /obj/structure/voxartifactbig))
+	if (istype(I, /obj/structure/voxartifactbig))
 		favors += I.favor_value
 		qdel(I)
 		user.visible_message(
@@ -170,7 +170,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 	return ..()
 
 /obj/structure/voxuplink/on_update_icon()
-	if(working)
+	if (working)
 		icon_state = "printer-working"
 	else
 		icon_state = "printer"
@@ -208,7 +208,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 			activate()
 	else
 		if (do_after(user, 60 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER))
-			if(rand(open_chance))
+			if (rand(open_chance))
 				to_chat(user, SPAN_NOTICE("After tinkering with [src.name] for some time, it suddenly disappears leaving something behind!"))
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 				s.set_up(10, 1, src)
@@ -290,15 +290,15 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 		)
 
 /obj/structure/voxanalyzer/attack_hand(mob/living/carbon/human/user)
-	if(activated)
-		if(!working)
+	if (activated)
+		if (!working)
 			visible_message(SPAN_NOTICE("<b>\The [src]'s</b> microphone transmits, \"Nice find! We can send you a few of our prototypes in exchange for data about these crystals.\""))
 			var/choice = input(user, "Choose a prototype.\n [points] crystals sent.", "Oddity analyzer") as null|anything in rewards
 			if (choice)
-				if((rewards[choice][1] <= points) && choice)
+				if ((rewards[choice][1] <= points) && choice)
 					points -= rewards[choice][1]
 					for(var/I in rewards[choice])
-						if(!isnum(I))
+						if (!isnum(I))
 							new I(get_turf(src))
 				else
 					to_chat(user, SPAN_WARNING("\The [src.name] doesn't respond, maybe you should be less greedy next time?"))
@@ -309,8 +309,8 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 	..()
 
 /obj/structure/voxanalyzer/use_tool(obj/item/I, mob/user)
-	if(istype(I, /obj/item/bluecrystal))
-		if(!activated)
+	if (istype(I, /obj/item/bluecrystal))
+		if (!activated)
 			to_chat(user, SPAN_INFO("As soon as you bring [I] closer to [src] it powers up with shower of sparks!."))
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, src)
@@ -333,7 +333,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 	return ..()
 
 /obj/structure/voxanalyzer/on_update_icon()
-	if(working)
+	if (working)
 		icon_state = "scanner_active"
 	else
 		icon_state = "scanner"

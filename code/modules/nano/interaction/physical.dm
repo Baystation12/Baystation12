@@ -2,7 +2,7 @@ GLOBAL_DATUM_INIT(physical_state, /datum/topic_state/physical, new)
 
 /datum/topic_state/physical/can_use_topic(src_object, mob/user)
 	. = user.shared_nano_interaction(src_object)
-	if(. > STATUS_CLOSE)
+	if (. > STATUS_CLOSE)
 		return min(., user.check_physical_distance(src_object))
 
 /mob/proc/check_physical_distance(src_object)

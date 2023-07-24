@@ -22,7 +22,7 @@
 
 /obj/structure/janitorialcart/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
+	if (distance <= 1)
 		to_chat(user, "[src] [icon2html(src, viewers(get_turf(src)))] contains [reagents.total_volume] unit\s of liquid!")
 
 
@@ -154,44 +154,44 @@
 	data["signs"] = signs ? "[signs] sign\s" : null
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		ui = new(user, src, ui_key, "janitorcart.tmpl", "Janitorial cart", 240, 160)
 		ui.set_initial_data(data)
 		ui.open()
 
 /obj/structure/janitorialcart/Topic(href, href_list)
-	if(!in_range(src, usr))
+	if (!in_range(src, usr))
 		return
-	if(!isliving(usr))
+	if (!isliving(usr))
 		return
 	var/mob/living/user = usr
 
-	if(href_list["take"])
+	if (href_list["take"])
 		switch(href_list["take"])
-			if("garbage")
-				if(mybag)
+			if ("garbage")
+				if (mybag)
 					user.put_in_hands(mybag)
 					to_chat(user, SPAN_NOTICE("You take [mybag] from [src]."))
 					mybag = null
-			if("mop")
-				if(mymop)
+			if ("mop")
+				if (mymop)
 					user.put_in_hands(mymop)
 					to_chat(user, SPAN_NOTICE("You take [mymop] from [src]."))
 					mymop = null
-			if("spray")
-				if(myspray)
+			if ("spray")
+				if (myspray)
 					user.put_in_hands(myspray)
 					to_chat(user, SPAN_NOTICE("You take [myspray] from [src]."))
 					myspray = null
-			if("replacer")
-				if(myreplacer)
+			if ("replacer")
+				if (myreplacer)
 					user.put_in_hands(myreplacer)
 					to_chat(user, SPAN_NOTICE("You take [myreplacer] from [src]."))
 					myreplacer = null
-			if("sign")
-				if(signs)
+			if ("sign")
+				if (signs)
 					var/obj/item/caution/Sign = locate() in src
-					if(Sign)
+					if (Sign)
 						user.put_in_hands(Sign)
 						to_chat(user, SPAN_NOTICE("You take \a [Sign] from [src]."))
 						signs--
@@ -205,15 +205,15 @@
 
 /obj/structure/janitorialcart/on_update_icon()
 	overlays.Cut()
-	if(mybag)
+	if (mybag)
 		overlays += "cart_garbage"
-	if(mymop)
+	if (mymop)
 		overlays += "cart_mop"
-	if(myspray)
+	if (myspray)
 		overlays += "cart_spray"
-	if(myreplacer)
+	if (myreplacer)
 		overlays += "cart_replacer"
-	if(signs)
+	if (signs)
 		overlays += "cart_sign[signs]"
 
 
@@ -239,11 +239,11 @@
 
 /obj/structure/bed/chair/janicart/examine(mob/user, distance)
 	. = ..()
-	if(distance > 1)
+	if (distance > 1)
 		return
 
 	to_chat(user, "[icon2html(src, user)] This [callme] contains [reagents.total_volume] unit\s of water!")
-	if(mybag)
+	if (mybag)
 		to_chat(user, "\A [mybag] is hanging on the [callme].")
 
 
@@ -285,7 +285,7 @@
 
 
 /obj/structure/bed/chair/janicart/attack_hand(mob/user)
-	if(mybag)
+	if (mybag)
 		user.put_in_hands(mybag)
 		mybag = null
 	else
@@ -293,7 +293,7 @@
 
 
 /obj/structure/bed/chair/janicart/relaymove(mob/user, direction)
-	if(user.stat || user.stunned || user.weakened || user.paralysis)
+	if (user.stat || user.stunned || user.weakened || user.paralysis)
 		unbuckle_mob()
 	if (user.IsHolding(/obj/item/key))
 		step(src, direction)
@@ -304,7 +304,7 @@
 
 /obj/structure/bed/chair/janicart/Move()
 	..()
-	if(buckled_mob && (buckled_mob.buckled == src))
+	if (buckled_mob && (buckled_mob.buckled == src))
 		buckled_mob.dropInto(loc)
 
 
@@ -315,7 +315,7 @@
 
 /obj/structure/bed/chair/janicart/unbuckle_mob()
 	var/mob/living/M = ..()
-	if(M)
+	if (M)
 		M.pixel_x = 0
 		M.pixel_y = 0
 	return M
@@ -323,8 +323,8 @@
 
 /obj/structure/bed/chair/janicart/set_dir()
 	..()
-	if(buckled_mob)
-		if(buckled_mob.loc != loc)
+	if (buckled_mob)
+		if (buckled_mob.loc != loc)
 			buckled_mob.buckled = null //Temporary, so Move() succeeds.
 			buckled_mob.buckled = src //Restoring
 
@@ -332,26 +332,26 @@
 
 
 /obj/structure/bed/chair/janicart/proc/update_mob()
-	if(buckled_mob)
+	if (buckled_mob)
 		buckled_mob.set_dir(dir)
 		switch(dir)
-			if(SOUTH)
+			if (SOUTH)
 				buckled_mob.pixel_x = 0
 				buckled_mob.pixel_y = 7
-			if(WEST)
+			if (WEST)
 				buckled_mob.pixel_x = 13
 				buckled_mob.pixel_y = 7
-			if(NORTH)
+			if (NORTH)
 				buckled_mob.pixel_x = 0
 				buckled_mob.pixel_y = 4
-			if(EAST)
+			if (EAST)
 				buckled_mob.pixel_x = -13
 				buckled_mob.pixel_y = 7
 
 
 /obj/structure/bed/chair/janicart/bullet_act(obj/item/projectile/Proj)
-	if(buckled_mob)
-		if(prob(85))
+	if (buckled_mob)
+		if (prob(85))
 			return buckled_mob.bullet_act(Proj)
 	visible_message(SPAN_WARNING("[Proj] ricochets off the [callme]!"))
 

@@ -27,20 +27,20 @@
 
 /datum/evacuation_controller/proc/can_evacuate(mob/user, forced)
 
-	if(!isnull(evac_called_at))
+	if (!isnull(evac_called_at))
 		return 0
 
 	if (!GLOB.universe.OnShuttleCall(null))
 		return 0
 
-	if(!forced)
+	if (!forced)
 		for(var/predicate in evacuation_predicates)
 			var/datum/evacuation_predicate/esp = predicate
-			if(!esp.is_valid())
+			if (!esp.is_valid())
 				evacuation_predicates -= esp
 				qdel(esp)
 			else
-				if(!esp.can_call(user))
+				if (!esp.can_call(user))
 					return 0
 	return 1
 
@@ -49,21 +49,21 @@
 
 /datum/evacuation_controller/proc/can_cancel()
 	// Are we evacuating?
-	if(isnull(evac_called_at))
+	if (isnull(evac_called_at))
 		return 0
 	// Have we already launched?
-	if(state != EVAC_PREPPING)
+	if (state != EVAC_PREPPING)
 		return 0
 	// Are we already committed?
-	if(world.time > evac_no_return)
+	if (world.time > evac_no_return)
 		return 0
 	return 1
 
 /datum/evacuation_controller/proc/is_arriving()
-	if(state == EVAC_LAUNCHING)
+	if (state == EVAC_LAUNCHING)
 		return 0
 	return has_eta()
 
 /datum/evacuation_controller/proc/is_departing()
-	if(state == EVAC_LAUNCHING)
+	if (state == EVAC_LAUNCHING)
 		return 1

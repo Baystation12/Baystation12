@@ -29,14 +29,14 @@
 	icon_state = "igniter[on]"
 
 /obj/machinery/igniter/interface_interact(mob/user)
-	if(!CanInteract(user, DefaultTopicState()))
+	if (!CanInteract(user, DefaultTopicState()))
 		return FALSE
 	ignite()
 	visible_message(SPAN_NOTICE("\The [user] toggles \the [src]."))
 	return TRUE
 
 /obj/machinery/igniter/Process()
-	if(is_powered())
+	if (is_powered())
 		var/turf/location = src.loc
 		if (isturf(location))
 			location.hotspot_expose(1000,500,1)
@@ -45,7 +45,7 @@
 /obj/machinery/igniter/proc/ignite()
 	use_power_oneoff(2000)
 	on = !on
-	if(on)
+	if (on)
 		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 	else
 		STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
@@ -95,9 +95,9 @@
 
 /obj/machinery/sparker/on_update_icon()
 	..()
-	if(disable)
+	if (disable)
 		icon_state = "migniter-d"
-	else if(powered())
+	else if (powered())
 		icon_state = "migniter"
 //		src.sd_SetLuminosity(2)
 	else
@@ -105,12 +105,12 @@
 //		src.sd_SetLuminosity(0)
 
 /obj/machinery/sparker/attackby(obj/item/W as obj, mob/user as mob)
-	if(isScrewdriver(W))
+	if (isScrewdriver(W))
 		add_fingerprint(user)
 		disable = !disable
-		if(disable)
+		if (disable)
 			user.visible_message(SPAN_WARNING("[user] has disabled the [src]!"), SPAN_WARNING("You disable the connection to the [src]."))
-		else if(!disable)
+		else if (!disable)
 			user.visible_message(SPAN_WARNING("[user] has reconnected the [src]!"), SPAN_WARNING("You fix the connection to the [src]."))
 		update_icon()
 	else
@@ -142,7 +142,7 @@
 	return 1
 
 /obj/machinery/sparker/emp_act(severity)
-	if(inoperable())
+	if (inoperable())
 		..(severity)
 		return
 	ignite()

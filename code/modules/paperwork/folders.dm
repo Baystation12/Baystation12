@@ -27,19 +27,19 @@
 
 /obj/item/folder/on_update_icon()
 	overlays.Cut()
-	if(length(contents))
+	if (length(contents))
 		overlays += "folder_paper"
 	return
 
 /obj/item/folder/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo) || istype(W, /obj/item/paper_bundle))
-		if(!user.unEquip(W, src))
+	if (istype(W, /obj/item/paper) || istype(W, /obj/item/photo) || istype(W, /obj/item/paper_bundle))
+		if (!user.unEquip(W, src))
 			return
 		to_chat(user, SPAN_NOTICE("You put the [W] into \the [src]."))
 		update_icon()
-	else if(istype(W, /obj/item/pen))
+	else if (istype(W, /obj/item/pen))
 		var/n_name = sanitizeSafe(input(usr, "What would you like to label the folder?", "Folder Labelling", null)  as text, MAX_NAME_LEN)
-		if((loc == usr && usr.stat == 0))
+		if ((loc == usr && usr.stat == 0))
 			SetName("folder[(n_name ? text("- '[n_name]'") : null)]")
 	return
 
@@ -58,47 +58,47 @@
 
 /obj/item/folder/Topic(href, href_list)
 	..()
-	if((usr.stat || usr.restrained()))
+	if ((usr.stat || usr.restrained()))
 		return
 
-	if(src.loc == usr)
+	if (src.loc == usr)
 
-		if(href_list["remove"])
+		if (href_list["remove"])
 			var/obj/item/P = locate(href_list["remove"])
-			if(P && (P.loc == src) && istype(P))
+			if (P && (P.loc == src) && istype(P))
 				usr.put_in_hands(P)
 
-		else if(href_list["read"])
+		else if (href_list["read"])
 			var/obj/item/paper/P = locate(href_list["read"])
-			if(P && (P.loc == src) && istype(P))
-				if(!(istype(usr, /mob/living/carbon/human) || isghost(usr) || istype(usr, /mob/living/silicon)))
+			if (P && (P.loc == src) && istype(P))
+				if (!(istype(usr, /mob/living/carbon/human) || isghost(usr) || istype(usr, /mob/living/silicon)))
 					show_browser(usr, "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.show_info(usr))][P.stamps]</BODY></HTML>", "window=[P.name]")
 					onclose(usr, "[P.name]")
 				else
 					show_browser(usr, "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.show_info(usr)][P.stamps]</BODY></HTML>", "window=[P.name]")
 					onclose(usr, "[P.name]")
-		else if(href_list["look"])
+		else if (href_list["look"])
 			var/obj/item/photo/P = locate(href_list["look"])
-			if(P && (P.loc == src) && istype(P))
+			if (P && (P.loc == src) && istype(P))
 				P.show(usr)
-		else if(href_list["browse"])
+		else if (href_list["browse"])
 			var/obj/item/paper_bundle/P = locate(href_list["browse"])
-			if(P && (P.loc == src) && istype(P))
+			if (P && (P.loc == src) && istype(P))
 				P.attack_self(usr)
 				onclose(usr, "[P.name]")
-		else if(href_list["rename"])
+		else if (href_list["rename"])
 			var/obj/item/O = locate(href_list["rename"])
 
-			if(O && (O.loc == src))
-				if(istype(O, /obj/item/paper))
+			if (O && (O.loc == src))
+				if (istype(O, /obj/item/paper))
 					var/obj/item/paper/to_rename = O
 					to_rename.rename()
 
-				else if(istype(O, /obj/item/photo))
+				else if (istype(O, /obj/item/photo))
 					var/obj/item/photo/to_rename = O
 					to_rename.rename()
 
-				else if(istype(O, /obj/item/paper_bundle))
+				else if (istype(O, /obj/item/paper_bundle))
 					var/obj/item/paper_bundle/to_rename = O
 					to_rename.rename()
 
@@ -114,7 +114,7 @@
 	var/sealed = 1
 
 /obj/item/folder/envelope/on_update_icon()
-	if(sealed)
+	if (sealed)
 		icon_state = "envelope_sealed"
 	else
 		icon_state = "envelope[length(contents) > 0]"
@@ -125,21 +125,21 @@
 
 /obj/item/folder/envelope/proc/sealcheck(user)
 	var/ripperoni = alert("Are you sure you want to break the seal on \the [src]?", "Confirmation","Yes", "No")
-	if(ripperoni == "Yes")
+	if (ripperoni == "Yes")
 		visible_message("[user] breaks the seal on \the [src], and opens it.")
 		sealed = 0
 		update_icon()
 		return 1
 
 /obj/item/folder/envelope/attack_self(mob/user as mob)
-	if(sealed)
+	if (sealed)
 		sealcheck(user)
 		return
 	else
 		..()
 
 /obj/item/folder/envelope/attackby(obj/item/W as obj, mob/user as mob)
-	if(sealed)
+	if (sealed)
 		sealcheck(user)
 		return
 	else

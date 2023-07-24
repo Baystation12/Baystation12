@@ -9,7 +9,7 @@
 	return !(T && (T.z in GLOB.using_map.player_levels))
 
 /mob/living/silicon/ai/proc/get_camera_list()
-	if(src.stat == 2)
+	if (src.stat == 2)
 		return
 
 	var/list/T = list()
@@ -27,7 +27,7 @@
 	set category = "Silicon Commands"
 	set name = "Show Camera List"
 
-	if(check_unable())
+	if (check_unable())
 		return
 
 	if (!camera)
@@ -44,15 +44,15 @@
 	set desc = "Stores your current camera location by the given name."
 
 	loc = sanitize(loc)
-	if(!loc)
+	if (!loc)
 		to_chat(src, SPAN_WARNING("Must supply a location name"))
 		return
 
-	if(length(stored_locations) >= max_locations)
+	if (length(stored_locations) >= max_locations)
 		to_chat(src, SPAN_WARNING("Cannot store additional locations. Remove one first"))
 		return
 
-	if(loc in stored_locations)
+	if (loc in stored_locations)
 		to_chat(src, SPAN_WARNING("There is already a stored location by this name"))
 		return
 
@@ -100,14 +100,14 @@
 	var/list/cameras = list()
 
 /mob/living/silicon/ai/proc/trackable_mobs()
-	if(usr.stat == 2)
+	if (usr.stat == 2)
 		return list()
 
 	var/datum/trackable/TB = new()
 	for(var/mob/living/M in SSmobs.mob_list)
-		if(M == usr)
+		if (M == usr)
 			continue
-		if(M.tracking_status() != TRACKING_POSSIBLE)
+		if (M.tracking_status() != TRACKING_POSSIBLE)
 			continue
 
 		var/name = M.name
@@ -117,7 +117,7 @@
 		else
 			TB.names.Add(name)
 			TB.namecounts[name] = 1
-		if(istype(M, /mob/living/carbon/human))
+		if (istype(M, /mob/living/carbon/human))
 			TB.humans[name] = M
 		else
 			TB.others[name] = M
@@ -131,10 +131,10 @@
 	set name = "Follow With Camera"
 	set desc = "Select who you would like to track."
 
-	if(src.stat == 2)
+	if (src.stat == 2)
 		to_chat(src, "You can't follow [target_name] with cameras because you are dead!")
 		return
-	if(!target_name)
+	if (!target_name)
 		src.cameraFollow = null
 
 	var/mob/target = (isnull(track.humans[target_name]) ? track.others[target_name] : track.humans[target_name])
@@ -142,7 +142,7 @@
 	ai_actual_track(target)
 
 /mob/living/silicon/ai/proc/ai_cancel_tracking(forced = 0)
-	if(!cameraFollow)
+	if (!cameraFollow)
 		return
 
 	to_chat(src, "Follow camera mode [forced ? "terminated" : "ended"].")
@@ -212,53 +212,53 @@
 /mob/living/proc/near_camera()
 	if (!isturf(loc))
 		return 0
-	else if(!cameranet.is_visible(src))
+	else if (!cameranet.is_visible(src))
 		return 0
 	return 1
 
 /mob/living/proc/tracking_status()
 	// Easy checks first.
 	var/obj/item/card/id/id = GetIdCard()
-	if(id && id.prevent_tracking())
+	if (id && id.prevent_tracking())
 		return TRACKING_TERMINATE
-	if(InvalidPlayerTurf(get_turf(src)))
+	if (InvalidPlayerTurf(get_turf(src)))
 		return TRACKING_TERMINATE
-	if(invisibility >= INVISIBILITY_LEVEL_ONE) //cloaked
+	if (invisibility >= INVISIBILITY_LEVEL_ONE) //cloaked
 		return TRACKING_TERMINATE
-	if(digitalcamo)
+	if (digitalcamo)
 		return TRACKING_TERMINATE
-	if(istype(loc,/obj/effect/dummy))
+	if (istype(loc,/obj/effect/dummy))
 		return TRACKING_TERMINATE
 
 	 // Now, are they viewable by a camera? (This is last because it's the most intensive check)
 	return near_camera() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
 
 /mob/living/carbon/human/tracking_status()
-	if(is_cloaked())
+	if (is_cloaked())
 		. = TRACKING_TERMINATE
 	else
 		. = ..()
 
-	if(. == TRACKING_TERMINATE)
+	if (. == TRACKING_TERMINATE)
 		return
 
-	if(. == TRACKING_NO_COVERAGE)
+	if (. == TRACKING_NO_COVERAGE)
 		var/turf/T = get_turf(src)
-		if(T && (T.z in GLOB.using_map.station_levels) && hassensorlevel(src, SUIT_SENSOR_TRACKING))
+		if (T && (T.z in GLOB.using_map.station_levels) && hassensorlevel(src, SUIT_SENSOR_TRACKING))
 			return TRACKING_POSSIBLE
 
 /mob/living/proc/tracking_initiated()
 
 /mob/living/silicon/robot/tracking_initiated()
 	tracking_entities++
-	if(tracking_entities == 1 && has_zeroth_law())
+	if (tracking_entities == 1 && has_zeroth_law())
 		to_chat(src, SPAN_WARNING("Internal camera is currently being accessed."))
 
 /mob/living/proc/tracking_cancelled()
 
 /mob/living/silicon/robot/tracking_cancelled()
 	tracking_entities--
-	if(!tracking_entities && has_zeroth_law())
+	if (!tracking_entities && has_zeroth_law())
 		to_chat(src, SPAN_NOTICE("Internal camera is no longer being accessed."))
 
 

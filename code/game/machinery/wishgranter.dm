@@ -17,15 +17,15 @@
 /obj/machinery/wish_granter/attack_hand(mob/user as mob)
 	usr.set_machine(src)
 
-	if(charges <= 0)
+	if (charges <= 0)
 		to_chat(user, "The Wish Granter lies silent.")
 		return
 
-	else if(!istype(user, /mob/living/carbon/human))
+	else if (!istype(user, /mob/living/carbon/human))
 		to_chat(user, "You feel a dark stirring inside of the Wish Granter, something you want nothing of. Your instincts are better than any man's.")
 		return
 
-	else if(is_special_character(user))
+	else if (is_special_character(user))
 		to_chat(user, "Even to a heart as dark as yours, you know nothing good will come of this.  Something instinctual makes you pull away.")
 	else if (!insisting)
 		to_chat(user, "Your first touch makes the Wish Granter stir, listening to you.  Are you really sure you want to do this?")
@@ -53,7 +53,7 @@
 		if (!(MUTATION_COLD_RESISTANCE in user.mutations))
 			user.mutations.Add(MUTATION_COLD_RESISTANCE)
 
-		if(!(MUTATION_HEAL in user.mutations))
+		if (!(MUTATION_HEAL in user.mutations))
 			user.mutations.Add(MUTATION_HEAL)
 
 		user.update_mutations()

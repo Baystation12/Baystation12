@@ -6,16 +6,16 @@
 /datum/shuttle/autodock/ferry/emergency/New()
 	. = ..()
 	emergency_controller = evacuation_controller
-	if(!istype(emergency_controller))
+	if (!istype(emergency_controller))
 		CRASH("Escape shuttle created without the appropriate controller type.")
-	if(emergency_controller.shuttle)
+	if (emergency_controller.shuttle)
 		CRASH("An emergency shuttle has already been created.")
 	emergency_controller.shuttle = src
 
 /datum/shuttle/autodock/ferry/emergency/arrived()
 	. = ..()
 
-	if(!emergency_controller.has_evacuated())
+	if (!emergency_controller.has_evacuated())
 		emergency_controller.finish_preparing_evac()
 
 	if (istype(in_use, /obj/machinery/computer/shuttle_control/emergency))
@@ -26,10 +26,10 @@
 	..(destination, interim, emergency_controller.get_long_jump_time(), direction)
 
 /datum/shuttle/autodock/ferry/emergency/shuttle_moved()
-	if(next_location != waypoint_station)
+	if (next_location != waypoint_station)
 		emergency_controller.shuttle_leaving() // This is a hell of a line. v
 		priority_announcement.Announce(replacetext(replacetext((emergency_controller.emergency_evacuation ? GLOB.using_map.emergency_shuttle_leaving_dock : GLOB.using_map.shuttle_leaving_dock), "%dock_name%", "[GLOB.using_map.dock_name]"),  "%ETA%", "[round(emergency_controller.get_eta()/60,1)] minute\s"))
-	else if(next_location == waypoint_offsite && emergency_controller.has_evacuated())
+	else if (next_location == waypoint_offsite && emergency_controller.has_evacuated())
 		emergency_controller.shuttle_evacuated()
 	..()
 
@@ -51,7 +51,7 @@
 	return ..()
 
 /datum/shuttle/autodock/ferry/emergency/can_cancel(user)
-	if(emergency_controller.has_evacuated())
+	if (emergency_controller.has_evacuated())
 		return 0
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))
 		var/obj/machinery/computer/shuttle_control/emergency/C = user
@@ -67,7 +67,7 @@
 			emergency_controller.autopilot = 0
 			to_world(SPAN_NOTICE("<b>Alert: The shuttle autopilot has been overridden. Launch sequence initiated!</b>"))
 
-	if(usr)
+	if (usr)
 		log_and_message_admins("has overridden the shuttle autopilot and activated launch sequence")
 
 	..(user)
@@ -80,7 +80,7 @@
 			emergency_controller.autopilot = 0
 			to_world(SPAN_NOTICE("<b>Alert: The shuttle autopilot has been overridden. Bluespace drive engaged!</b>"))
 
-	if(usr)
+	if (usr)
 		log_and_message_admins("has overridden the shuttle autopilot and forced immediate launch")
 
 	..(user)
@@ -89,14 +89,14 @@
 
 	if (!can_cancel(user)) return
 
-	if(!emergency_controller.shuttle_preparing())
+	if (!emergency_controller.shuttle_preparing())
 
 		if (istype(user, /obj/machinery/computer/shuttle_control/emergency))	//if we were given a command by an emergency shuttle console
 			if (emergency_controller.autopilot)
 				emergency_controller.autopilot = 0
 				to_world(SPAN_NOTICE("<b>Alert: The shuttle autopilot has been overridden. Launch sequence aborted!</b>"))
 
-		if(usr)
+		if (usr)
 			log_and_message_admins("has overridden the shuttle autopilot and cancelled launch sequence")
 
 	..(user)
@@ -132,7 +132,7 @@
 
 	var/obj/item/card/id/ID = ident.GetIdCard()
 
-	if(!ID)
+	if (!ID)
 		return
 
 	access = ID.access
@@ -155,7 +155,7 @@
 	if (req_authorizations - length(authorized))
 		to_world(SPAN_NOTICE("<b>Alert: [req_authorizations - length(authorized)] authorization\s needed to override the shuttle autopilot.</b>"))
 
-	if(usr)
+	if (usr)
 		log_and_message_admins("has inserted [ID] into the shuttle control computer - [req_authorizations - length(authorized)] authorisation\s needed")
 
 	return 1
@@ -178,24 +178,24 @@
 
 	var/shuttle_state
 	switch(shuttle.moving_status)
-		if(SHUTTLE_IDLE) shuttle_state = "idle"
-		if(SHUTTLE_WARMUP) shuttle_state = "warmup"
-		if(SHUTTLE_INTRANSIT) shuttle_state = "in_transit"
+		if (SHUTTLE_IDLE) shuttle_state = "idle"
+		if (SHUTTLE_WARMUP) shuttle_state = "warmup"
+		if (SHUTTLE_INTRANSIT) shuttle_state = "in_transit"
 
 	var/shuttle_status
 	switch (shuttle.process_state)
-		if(IDLE_STATE)
+		if (IDLE_STATE)
 			if (shuttle.in_use)
 				shuttle_status = "Busy."
 			else if (!shuttle.location)
 				shuttle_status = "Standing-by at [GLOB.using_map.station_name]."
 			else
 				shuttle_status = "Standing-by at [GLOB.using_map.dock_name]."
-		if(WAIT_LAUNCH, FORCE_LAUNCH)
+		if (WAIT_LAUNCH, FORCE_LAUNCH)
 			shuttle_status = "Shuttle has received command and will depart shortly."
-		if(WAIT_ARRIVE)
+		if (WAIT_ARRIVE)
 			shuttle_status = "Proceeding to destination."
-		if(WAIT_FINISH)
+		if (WAIT_FINISH)
 			shuttle_status = "Arriving at destination now."
 
 	//build a list of authorizations
@@ -237,12 +237,12 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/computer/shuttle_control/emergency/OnTopic(user, href_list)
-	if(href_list["removeid"])
+	if (href_list["removeid"])
 		var/dna_hash = href_list["removeid"]
 		authorized -= dna_hash
 		. = TOPIC_REFRESH
 
-	else if(!emagged && href_list["scanid"])
+	else if (!emagged && href_list["scanid"])
 		//They selected an empty entry. Try to scan their id.
 		var/mob/living/carbon/human/H = user
 		if (istype(H))

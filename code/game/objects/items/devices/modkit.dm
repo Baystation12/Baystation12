@@ -16,20 +16,20 @@
 		)
 
 /obj/item/device/modkit/afterattack(obj/O, mob/user as mob, proximity)
-	if(!proximity)
+	if (!proximity)
 		return
 
 	if (!target_species)
 		return	//it shouldn't be null, okay?
 
-	if(!parts)
+	if (!parts)
 		to_chat(user, SPAN_WARNING("This kit has no parts for this modification left."))
 		qdel(src)
 		return
 
 	var/allowed = 0
 	for (var/permitted_type in permitted_types)
-		if(istype(O, permitted_type))
+		if (istype(O, permitted_type))
 			allowed = 1
 
 	var/obj/item/clothing/I = O
@@ -43,7 +43,7 @@
 		to_chat(user, SPAN_NOTICE("[I] is already modified."))
 		return
 
-	if(!isturf(O.loc))
+	if (!isturf(O.loc))
 		to_chat(user, SPAN_WARNING("[O] must be safely placed on the ground for modification."))
 		return
 
@@ -58,7 +58,7 @@
 	if (istype(I, /obj/item/clothing/suit))
 		parts &= ~MODKIT_SUIT
 
-	if(!parts)
+	if (!parts)
 		qdel(src)
 
 /obj/item/device/modkit/examine(mob/user)

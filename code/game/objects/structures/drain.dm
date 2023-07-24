@@ -45,13 +45,13 @@
 	icon_state = "[initial(icon_state)][welded ? "-welded" : ""]"
 
 /obj/structure/hygiene/drain/Process()
-	if(welded)
+	if (welded)
 		return
 	..()
 
 /obj/structure/hygiene/drain/examine(mob/user)
 	. = ..()
-	if(welded)
+	if (welded)
 		to_chat(user, "It is welded shut.")
 
 //for construction.
@@ -63,7 +63,7 @@
 	var/constructed_type = /obj/structure/hygiene/drain
 
 /obj/item/drain/attackby(obj/item/thing, mob/user)
-	if(isWrench(thing))
+	if (isWrench(thing))
 		if (!isturf(loc))
 			USE_FEEDBACK_FAILURE("\The [src] needs to be placed on the floor before you can secure it.")
 			return TRUE
@@ -82,13 +82,13 @@
 
 /obj/structure/hygiene/drain/bath/attack_hand(mob/user)
 	. = ..()
-	if(!welded)
+	if (!welded)
 		closed = !closed
 		user.visible_message(SPAN_NOTICE("\The [user] has [closed ? "closed" : "opened"] the drain."))
 	update_icon()
 
 /obj/structure/hygiene/drain/bath/on_update_icon()
-	if(welded)
+	if (welded)
 		icon_state = "[initial(icon_state)]-welded"
 	else
 		icon_state = "[initial(icon_state)][closed ? "-closed" : ""]"
@@ -98,7 +98,7 @@
 	to_chat(user, "It is [closed ? "closed" : "open"]")
 
 /obj/structure/hygiene/drain/bath/Process()
-	if(closed)
+	if (closed)
 		return
 	..()
 /obj/item/drain/bath

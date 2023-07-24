@@ -50,19 +50,19 @@
 	to_chat(user,"Its outlet port is to the [dir2text(dir)]")
 
 /obj/machinery/atmospherics/binary/oxyregenerator/attackby(obj/item/O as obj, mob/user as mob)
-	if(component_attackby(O, user))
+	if (component_attackby(O, user))
 		return TRUE
-	if(isWrench(O))
+	if (isWrench(O))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		anchored = !anchored
 		user.visible_message("[user.name] [anchored ? "secures" : "unsecures"] the bolts holding [src.name] to the floor.", \
 					"You [anchored ? "secure" : "unsecure"] the bolts holding [src] to the floor.", \
 					"You hear a ratchet")
 
-		if(anchored)
-			if(dir & (NORTH|SOUTH))
+		if (anchored)
+			if (dir & (NORTH|SOUTH))
 				initialize_directions = NORTH|SOUTH
-			else if(dir & (EAST|WEST))
+			else if (dir & (EAST|WEST))
 				initialize_directions = EAST|WEST
 
 			atmos_init()
@@ -74,10 +74,10 @@
 				node2.atmos_init()
 				node2.build_network()
 		else
-			if(node1)
+			if (node1)
 				node1.disconnect(src)
 				qdel(network1)
-			if(node2)
+			if (node2)
 				node2.disconnect(src)
 				qdel(network2)
 
@@ -106,7 +106,7 @@
 
 /obj/machinery/atmospherics/binary/oxyregenerator/Process(delay)
 	..()
-	if((inoperable()) || !use_power)
+	if ((inoperable()) || !use_power)
 		return
 
 	var/power_draw = -1
@@ -120,7 +120,7 @@
 			if (power_draw >= 0)
 				last_power_draw = power_draw
 				use_power_oneoff(power_draw)
-				if(network1)
+				if (network1)
 					network1.update = 1
 		if (air1.return_pressure() < 0.1 * ONE_ATMOSPHERE || inner_tank.return_pressure() >= target_pressure * 0.95)//if pipe is good as empty or tank is full
 			phase = "processing"
@@ -154,7 +154,7 @@
 			if (power_draw >= 0)
 				last_power_draw = power_draw
 				use_power_oneoff(power_draw)
-				if(network2)
+				if (network2)
 					network2.update = 1
 		else//can't push outside harder than target pressure. Device is not intended to be used as a pump after all
 			phase = "filling"
@@ -162,7 +162,7 @@
 			phase = "filling"
 
 /obj/machinery/atmospherics/binary/oxyregenerator/on_update_icon()
-	if(!is_powered())
+	if (!is_powered())
 		icon_state = "off"
 	else
 		icon_state = "[use_power ? "on" : "off"]"
@@ -189,19 +189,19 @@
 		data["o2"] = 0
 		// update the ui if it exists, returns null if no ui is passed/found
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		ui = new(user, src, ui_key, "oxyregenerator.tmpl", "Oxygen Regeneration System", 440, 300)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
 
 /obj/machinery/atmospherics/binary/oxyregenerator/Topic(href, href_list)
-	if(..())
+	if (..())
 		return 1
-	if(href_list["toggleStatus"])
+	if (href_list["toggleStatus"])
 		update_use_power(!use_power)
 		update_icon()
 		return 1
-	if(href_list["setPower"]) //setting power to 0 is redundant anyways
+	if (href_list["setPower"]) //setting power to 0 is redundant anyways
 		power_setting = clamp(text2num(href_list["setPower"]), 1, 5)
 		return 1

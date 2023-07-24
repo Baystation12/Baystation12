@@ -38,9 +38,9 @@
 	. = ..()
 
 /obj/machinery/robotics_fabricator/Process()
-	if(stat)
+	if (stat)
 		return
-	if(busy)
+	if (busy)
 		update_use_power(POWER_USE_ACTIVE)
 		progress += speed
 		check_build()
@@ -50,11 +50,11 @@
 
 /obj/machinery/robotics_fabricator/on_update_icon()
 	overlays.Cut()
-	if(panel_open)
+	if (panel_open)
 		icon_state = "fab-o"
 	else
 		icon_state = "fab-idle"
-	if(busy)
+	if (busy)
 		overlays += "fab-active"
 
 /obj/machinery/robotics_fabricator/dismantle()
@@ -79,17 +79,17 @@
 	var/data[0]
 
 	var/datum/design/current = length(queue) ? queue[1] : null
-	if(current)
+	if (current)
 		data["current"] = current.name
 	data["queue"] = get_queue_names()
 	data["buildable"] = get_build_options()
 	data["category"] = category
 	data["categories"] = categories
-	if(all_robolimbs)
+	if (all_robolimbs)
 		var/list/T = list()
 		for(var/A in all_robolimbs)
 			var/datum/robolimb/R = all_robolimbs[A]
-			if(R.unavailable_at_fab || length(R.applies_to_part))
+			if (R.unavailable_at_fab || length(R.applies_to_part))
 				continue
 			T += list(list("id" = A, "company" = R.company))
 		data["manufacturers"] = T
@@ -97,38 +97,38 @@
 	data["materials"] = get_materials()
 	data["maxres"] = res_max_amount
 	data["sync"] = sync_message
-	if(current)
+	if (current)
 		data["builtperc"] = round((progress / current.time) * 100)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		ui = new(user, src, ui_key, "mechfab.tmpl", "Exosuit Fabricator UI", 800, 600)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
 
 /obj/machinery/robotics_fabricator/Topic(href, href_list)
-	if(..())
+	if (..())
 		return
 
-	if(href_list["build"])
+	if (href_list["build"])
 		add_to_queue(text2num(href_list["build"]))
 
-	if(href_list["remove"])
+	if (href_list["remove"])
 		remove_from_queue(text2num(href_list["remove"]))
 
-	if(href_list["category"])
-		if(href_list["category"] in categories)
+	if (href_list["category"])
+		if (href_list["category"] in categories)
 			category = href_list["category"]
 
-	if(href_list["manufacturer"])
-		if(href_list["manufacturer"] in all_robolimbs)
+	if (href_list["manufacturer"])
+		if (href_list["manufacturer"] in all_robolimbs)
 			manufacturer = href_list["manufacturer"]
 
-	if(href_list["eject"])
+	if (href_list["eject"])
 		eject_materials(href_list["eject"], text2num(href_list["amount"]))
 
-	if(href_list["sync"])
+	if (href_list["sync"])
 		sync()
 	else
 		sync_message = ""
@@ -139,15 +139,15 @@
 	return !busy && ..()
 
 /obj/machinery/robotics_fabricator/cannot_transition_to(state_path)
-	if(busy)
+	if (busy)
 		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
 	return ..()
 
 /obj/machinery/robotics_fabricator/attackby(obj/item/I, mob/user)
-	if(busy)
+	if (busy)
 		to_chat(user, SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation."))
 		return 1
-	if(!istype(I, /obj/item/stack/material))
+	if (!istype(I, /obj/item/stack/material))
 		return ..()
 
 	var/obj/item/stack/material/stack = I
@@ -156,15 +156,15 @@
 	var/stack_plural = "[stack.material.use_name] [stack.material.sheet_plural_name]" // eg "steel sheets", "wood planks"
 	var/amnt = stack.perunit
 
-	if(stack.uses_charge)
+	if (stack.uses_charge)
 		return
 
-	if(!(material in materials))
+	if (!(material in materials))
 		to_chat(user, SPAN_WARNING("\The [src] does not accept [stack_plural]!"))
 		return
 
-	if(materials[material] + amnt <= res_max_amount)
-		if(stack && stack.can_use(1))
+	if (materials[material] + amnt <= res_max_amount)
+		if (stack && stack.can_use(1))
 			var/count = 0
 			overlays += "fab-load-metal"
 			spawn(10)
@@ -190,8 +190,8 @@
 	return 1
 
 /obj/machinery/robotics_fabricator/proc/update_busy()
-	if(length(queue))
-		if(can_build(queue[1]))
+	if (length(queue))
+		if (can_build(queue[1]))
 			busy = 1
 		else
 			busy = 0
@@ -204,7 +204,7 @@
 	update_busy()
 
 /obj/machinery/robotics_fabricator/proc/remove_from_queue(index)
-	if(index == 1)
+	if (index == 1)
 		progress = 0
 	if (length(queue) >= index)
 		queue.Cut(index, index + 1)
@@ -212,27 +212,27 @@
 
 /obj/machinery/robotics_fabricator/proc/can_build(datum/design/D)
 	for(var/M in D.materials)
-		if(materials[M] <= D.materials[M] * mat_efficiency)
+		if (materials[M] <= D.materials[M] * mat_efficiency)
 			return 0
 	return 1
 
 /obj/machinery/robotics_fabricator/proc/check_build()
-	if(!length(queue))
+	if (!length(queue))
 		progress = 0
 		return
 	var/datum/design/D = queue[1]
-	if(!can_build(D))
+	if (!can_build(D))
 		progress = 0
 		return
-	if(D.time > progress)
+	if (D.time > progress)
 		return
 	for(var/M in D.materials)
 		materials[M] = max(0, materials[M] - D.materials[M] * mat_efficiency)
-	if(D.build_path)
+	if (D.build_path)
 		var/obj/new_item = D.Fabricate(loc, src)
 		visible_message("\The [src] pings, indicating that \the [D] is complete.", "You hear a ping.")
-		if(mat_efficiency != 1)
-			if(new_item.matter && length(new_item.matter) > 0)
+		if (mat_efficiency != 1)
+			if (new_item.matter && length(new_item.matter) > 0)
 				for(var/i in new_item.matter)
 					new_item.matter[i] = new_item.matter[i] * mat_efficiency
 	remove_from_queue(1)
@@ -247,7 +247,7 @@
 	. = list()
 	for(var/i = 1 to length(files.known_designs))
 		var/datum/design/D = files.known_designs[i]
-		if(!D.build_path || !(D.build_type & MECHFAB))
+		if (!D.build_path || !(D.build_type & MECHFAB))
 			continue
 		. += list(list("name" = D.name, "id" = i, "category" = D.category, "resourses" = get_design_resourses(D), "time" = get_design_time(D)))
 
@@ -266,10 +266,10 @@
 /obj/machinery/robotics_fabricator/proc/update_categories()
 	categories = list()
 	for(var/datum/design/D in files.known_designs)
-		if(!D.build_path || !(D.build_type & MECHFAB))
+		if (!D.build_path || !(D.build_type & MECHFAB))
 			continue
 		categories |= D.category
-	if(!category || !(category in categories))
+	if (!category || !(category in categories))
 		category = categories[1]
 
 /obj/machinery/robotics_fabricator/proc/get_materials()
@@ -282,43 +282,43 @@
 	material = lowertext(material)
 	var/mattype
 	switch(material)
-		if(MATERIAL_STEEL)
+		if (MATERIAL_STEEL)
 			mattype = /obj/item/stack/material/steel
-		if(MATERIAL_GLASS)
+		if (MATERIAL_GLASS)
 			mattype = /obj/item/stack/material/glass
-		if(MATERIAL_ALUMINIUM)
+		if (MATERIAL_ALUMINIUM)
 			mattype = /obj/item/stack/material/aluminium
-		if(MATERIAL_PLASTIC)
+		if (MATERIAL_PLASTIC)
 			mattype = /obj/item/stack/material/plastic
-		if(MATERIAL_GOLD)
+		if (MATERIAL_GOLD)
 			mattype = /obj/item/stack/material/gold
-		if(MATERIAL_SILVER)
+		if (MATERIAL_SILVER)
 			mattype = /obj/item/stack/material/silver
-		if(MATERIAL_DIAMOND)
+		if (MATERIAL_DIAMOND)
 			mattype = /obj/item/stack/material/diamond
-		if(MATERIAL_PHORON)
+		if (MATERIAL_PHORON)
 			mattype = /obj/item/stack/material/phoron
-		if(MATERIAL_URANIUM)
+		if (MATERIAL_URANIUM)
 			mattype = /obj/item/stack/material/uranium
 		else
 			return
 	var/obj/item/stack/material/S = new mattype(loc)
-	if(amount <= 0)
+	if (amount <= 0)
 		amount = S.max_amount
 	var/ejected = min(round(materials[material] / S.perunit), amount)
 	S.amount = min(ejected, amount)
-	if(S.amount <= 0)
+	if (S.amount <= 0)
 		qdel(S)
 		return
 	materials[material] -= ejected * S.perunit
-	if(recursive && materials[material] >= S.perunit)
+	if (recursive && materials[material] >= S.perunit)
 		eject_materials(material, -1)
 	update_busy()
 
 /obj/machinery/robotics_fabricator/proc/sync()
 	sync_message = "Error: no console found."
 	for(var/obj/machinery/computer/rdconsole/RDC in get_area_all_atoms(get_area(src)))
-		if(!RDC.sync)
+		if (!RDC.sync)
 			continue
 		for(var/datum/tech/T in RDC.files.known_tech)
 			files.AddTech2Known(T)

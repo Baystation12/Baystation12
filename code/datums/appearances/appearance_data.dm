@@ -19,16 +19,16 @@
 	. = ..()
 
 /datum/appearance_data/proc/AddViewer(mob/viewer, check_if_viewer = TRUE)
-	if(check_if_viewer && (viewer in viewers))
+	if (check_if_viewer && (viewer in viewers))
 		return FALSE
-	if(!istype(viewer))
+	if (!istype(viewer))
 		return FALSE
 	viewers |= viewer
 	appearance_manager.add_appearance(viewer, src)
 	return TRUE
 
 /datum/appearance_data/proc/RemoveViewer(mob/viewer, refresh_images = TRUE)
-	if(!(viewer in viewers))
+	if (!(viewer in viewers))
 		return FALSE
 	viewers -= viewer
 	appearance_manager.remove_appearance(viewer, src, refresh_images)

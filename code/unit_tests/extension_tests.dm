@@ -13,25 +13,25 @@
 
 	var/number_of_failures = 0
 	for(var/extension in O.extensions)
-		if(!islist(O.extensions[extension]))
+		if (!islist(O.extensions[extension]))
 			log_unit_test("[extension] was initalized.")
 			number_of_failures++
 
 	var/datum/extension/one = get_extension(O, /datum/extension/test_one)
 	for(var/extension in O.extensions)
-		if(islist(O.extensions[extension]))
+		if (islist(O.extensions[extension]))
 			log_unit_test("[extension] was not initalized.")
 			number_of_failures++
 
-	if(one.type != /datum/extension/test_one)
+	if (one.type != /datum/extension/test_one)
 		log_unit_test("[log_info_line(one)] was not strictly of the type [/datum/extension/test_one]")
 		number_of_failures++
 
-	if(one.holder != O)
+	if (one.holder != O)
 		log_unit_test("[log_info_line(one)] had an unexpected holder: [log_info_line(one.holder)]")
 		number_of_failures++
 
-	if(number_of_failures)
+	if (number_of_failures)
 		fail("[number_of_failures] failed assertion\s.")
 	else
 		pass("All assertions passed.")
@@ -49,20 +49,20 @@
 
 	var/number_of_failures = 0
 	for(var/extension in O.extensions)
-		if(islist(O.extensions[extension]))
+		if (islist(O.extensions[extension]))
 			log_unit_test("[extension] was not initalized.")
 			number_of_failures++
 
 	var/datum/extension/two = get_extension(O, /datum/extension/test_two)
-	if(two.type != /datum/extension/test_two)
+	if (two.type != /datum/extension/test_two)
 		log_unit_test("[log_info_line(two)] was not strictly of the type [/datum/extension/test_two]")
 		number_of_failures++
 
-	if(two.holder != O)
+	if (two.holder != O)
 		log_unit_test("[log_info_line(two)] had an unexpected holder: [log_info_line(two.holder)]")
 		number_of_failures++
 
-	if(number_of_failures)
+	if (number_of_failures)
 		fail("[number_of_failures] failed assertion\s.")
 	else
 		pass("All assertions passed.")
@@ -79,7 +79,7 @@
 	set_extension(O, /datum/extension/test_three/subtype)
 
 	var/datum/extension/three = get_extension(O, /datum/extension/test_three)
-	if(three.type == /datum/extension/test_three/subtype)
+	if (three.type == /datum/extension/test_three/subtype)
 		pass("All assertions passed.")
 	else
 		fail("[log_info_line(three)] was not strictly of the type [/datum/extension/test_three/subtype]")
@@ -96,7 +96,7 @@
 	set_extension(O, /datum/extension/test_four, list("a", "b"), list("c", "d"))
 
 	var/datum/extension/test_four/four = get_extension(O, /datum/extension/test_four)
-	if(four.holder == O && islist(four.first_argument) && islist(four.second_argument) && four.first_argument[1] == "a" && four.first_argument[2] == "b" &&	four.second_argument[1] == "c" && four.second_argument[2] == "d")
+	if (four.holder == O && islist(four.first_argument) && islist(four.second_argument) && four.first_argument[1] == "a" && four.first_argument[2] == "b" &&	four.second_argument[1] == "c" && four.second_argument[2] == "d")
 		pass("All assertions passed.")
 	else
 		fail("[log_info_line(four)] had unexpected arguments:\n[log_info_line(four.holder)]\n[log_info_line(four.first_argument)]\n[log_info_line(four.second_argument)]")
@@ -112,7 +112,7 @@
 	set_extension(O, /datum/extension/test_five, list("a", "b"), list("c", "d"))
 
 	var/datum/extension/test_five/five = get_extension(O, /datum/extension/test_five)
-	if(five.holder == O && islist(five.first_argument) && islist(five.second_argument) && five.first_argument[1] == "a" && five.first_argument[2] == "b" &&	five.second_argument[1] == "c" && five.second_argument[2] == "d")
+	if (five.holder == O && islist(five.first_argument) && islist(five.second_argument) && five.first_argument[1] == "a" && five.first_argument[2] == "b" &&	five.second_argument[1] == "c" && five.second_argument[2] == "d")
 		pass("All assertions passed.")
 	else
 		fail("[log_info_line(five)] had unexpected arguments:\n[log_info_line(five.holder)]\n[log_info_line(five.first_argument)]\n[log_info_line(five.second_argument)]")
@@ -128,15 +128,15 @@
 	var/datum/extension/test_one/one = get_or_create_extension(O, /datum/extension/test_one)
 
 	var/number_of_failures = 0
-	if(one.type != /datum/extension/test_one)
+	if (one.type != /datum/extension/test_one)
 		log_unit_test("[log_info_line(one)] was not strictly of the type [/datum/extension/test_one]")
 		number_of_failures++
 
-	if(one.holder != O)
+	if (one.holder != O)
 		log_unit_test("[log_info_line(one)] had an unexpected holder: [log_info_line(one.holder)]")
 		number_of_failures++
 
-	if(number_of_failures)
+	if (number_of_failures)
 		fail("[number_of_failures] failed assertion\s.")
 	else
 		pass("All assertions passed.")
@@ -151,7 +151,7 @@
 	var/obj/O = new(start)
 
 	var/datum/extension/test_four/four = get_or_create_extension(O, /datum/extension/test_four, list("a", "b"), list("c", "d"))
-	if(four.holder == O && islist(four.first_argument) && islist(four.second_argument) && four.first_argument[1] == "a" && four.first_argument[2] == "b" &&	four.second_argument[1] == "c" && four.second_argument[2] == "d")
+	if (four.holder == O && islist(four.first_argument) && islist(four.second_argument) && four.first_argument[1] == "a" && four.first_argument[2] == "b" &&	four.second_argument[1] == "c" && four.second_argument[2] == "d")
 		pass("All assertions passed.")
 	else
 		fail("[log_info_line(four)] had unexpected arguments:\n[log_info_line(four.holder)]\n[log_info_line(four.first_argument)]\n[log_info_line(four.second_argument)]")

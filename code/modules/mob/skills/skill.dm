@@ -18,9 +18,9 @@ GLOBAL_LIST_EMPTY(skills)
 
 /singleton/hierarchy/skill/proc/get_cost(level)
 	switch(level)
-		if(SKILL_BASIC, SKILL_TRAINED)
+		if (SKILL_BASIC, SKILL_TRAINED)
 			return difficulty
-		if(SKILL_EXPERIENCED, SKILL_MASTER)
+		if (SKILL_EXPERIENCED, SKILL_MASTER)
 			return 2*difficulty
 		else
 			return 0
@@ -29,8 +29,8 @@ GLOBAL_LIST_EMPTY(skills)
 
 /singleton/hierarchy/skill/Initialize()
 	. = ..()
-	if(is_hidden_category())
-		if(!length(GLOB.skills))
+	if (is_hidden_category())
+		if (!length(GLOB.skills))
 			for(var/singleton/hierarchy/skill/C in children)
 				GLOB.skills += C.get_descendents()
 		else
@@ -187,11 +187,11 @@ GLOBAL_LIST_EMPTY(skills)
 
 /singleton/hierarchy/skill/security/combat/get_cost(level)
 	switch(level)
-		if(SKILL_BASIC)
+		if (SKILL_BASIC)
 			return difficulty
-		if(SKILL_TRAINED, SKILL_EXPERIENCED)
+		if (SKILL_TRAINED, SKILL_EXPERIENCED)
 			return 2*difficulty
-		if(SKILL_MASTER)
+		if (SKILL_MASTER)
 			return 4*difficulty
 		else
 			return 0
@@ -208,13 +208,13 @@ GLOBAL_LIST_EMPTY(skills)
 
 /singleton/hierarchy/skill/security/weapons/get_cost(level)
 	switch(level)
-		if(SKILL_BASIC)
+		if (SKILL_BASIC)
 			return difficulty
-		if(SKILL_TRAINED)
+		if (SKILL_TRAINED)
 			return 2*difficulty
-		if(SKILL_EXPERIENCED)
+		if (SKILL_EXPERIENCED)
 			return 3*difficulty
-		if(SKILL_MASTER)
+		if (SKILL_MASTER)
 			return 4*difficulty
 		else
 			return 0
@@ -232,9 +232,9 @@ GLOBAL_LIST_EMPTY(skills)
 
 /singleton/hierarchy/skill/security/forensics/get_cost(level)
 	switch(level)
-		if(SKILL_BASIC, SKILL_TRAINED, SKILL_EXPERIENCED)
+		if (SKILL_BASIC, SKILL_TRAINED, SKILL_EXPERIENCED)
 			return difficulty * 2
-		if(SKILL_MASTER)
+		if (SKILL_MASTER)
 			return 3 * difficulty
 		else
 			return 0

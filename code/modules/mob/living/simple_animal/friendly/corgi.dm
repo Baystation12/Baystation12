@@ -42,25 +42,25 @@
 
 /mob/living/simple_animal/passive/corgi/Ian/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
 
 	//Feeding, chasing food, FOOOOODDDD
-	if(!resting && !buckled)
+	if (!resting && !buckled)
 		turns_since_scan++
-		if(turns_since_scan > 5)
+		if (turns_since_scan > 5)
 			turns_since_scan = 0
-			if((movement_target) && !(isturf(movement_target.loc) || ishuman(movement_target.loc) ))
+			if ((movement_target) && !(isturf(movement_target.loc) || ishuman(movement_target.loc) ))
 				movement_target = null
 				set_AI_busy(FALSE)
-			if( !movement_target || !(movement_target.loc in oview(src, 3)) )
+			if ( !movement_target || !(movement_target.loc in oview(src, 3)) )
 				movement_target = null
 				set_AI_busy(FALSE)
 				for(var/obj/item/reagent_containers/food/snacks/S in oview(src,3))
-					if(isturf(S.loc) || ishuman(S.loc))
+					if (isturf(S.loc) || ishuman(S.loc))
 						movement_target = S
 						break
-			if(movement_target)
+			if (movement_target)
 				set_AI_busy(TRUE)
 				step_to(src,movement_target,1)
 				sleep(3)
@@ -68,7 +68,7 @@
 				sleep(3)
 				step_to(src,movement_target,1)
 
-				if(movement_target)		//Not redundant due to sleeps, Item can be gone in 6 decisecomds
+				if (movement_target)		//Not redundant due to sleeps, Item can be gone in 6 decisecomds
 					if (movement_target.loc.x < src.x)
 						set_dir(WEST)
 					else if (movement_target.loc.x > src.x)
@@ -80,12 +80,12 @@
 					else
 						set_dir(SOUTH)
 
-					if(isturf(movement_target.loc) )
+					if (isturf(movement_target.loc) )
 						UnarmedAttack(movement_target)
-					else if(ishuman(movement_target.loc) && prob(20))
+					else if (ishuman(movement_target.loc) && prob(20))
 						visible_emote("stares at the [movement_target] that [movement_target.loc] has with sad puppy eyes.")
 
-		if(prob(1))
+		if (prob(1))
 			visible_emote(pick("dances around.","chases their tail."))
 			spawn(0)
 				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
@@ -127,22 +127,22 @@
 /mob/living/simple_animal/passive/corgi/regenerate_icons()
 	overlays = list()
 
-	if(inventory_head)
+	if (inventory_head)
 		var/head_icon_state = inventory_head.icon_state
-		if(health <= 0)
+		if (health <= 0)
 			head_icon_state += "2"
 
 		var/icon/head_icon = image('icons/mob/simple_animal/corgi_head.dmi',head_icon_state)
-		if(head_icon)
+		if (head_icon)
 			overlays += head_icon
 
-	if(inventory_back)
+	if (inventory_back)
 		var/back_icon_state = inventory_back.icon_state
-		if(health <= 0)
+		if (health <= 0)
 			back_icon_state += "2"
 
 		var/icon/back_icon = image('icons/mob/simple_animal/corgi_back.dmi',back_icon_state)
-		if(back_icon)
+		if (back_icon)
 			overlays += back_icon
 
 /mob/living/simple_animal/passive/corgi/puppy
@@ -158,7 +158,7 @@
 
 //pupplies cannot wear anything.
 /mob/living/simple_animal/passive/corgi/puppy/OnTopic(mob/user, href_list)
-	if(href_list["remove_inv"] || href_list["add_inv"])
+	if (href_list["remove_inv"] || href_list["add_inv"])
 		to_chat(user, SPAN_WARNING("You can't fit this on [src]"))
 		return TOPIC_HANDLED
 	return ..()
@@ -180,25 +180,25 @@
 
 //Lisa already has a cute bow!
 /mob/living/simple_animal/passive/corgi/Lisa/OnTopic(mob/user, href_list)
-	if(href_list["remove_inv"] || href_list["add_inv"])
+	if (href_list["remove_inv"] || href_list["add_inv"])
 		to_chat(user, SPAN_WARNING("[src] already has a cute bow!"))
 		return TOPIC_HANDLED
 	return ..()
 
 /mob/living/simple_animal/passive/corgi/Lisa/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
 
-	if(!resting && !buckled)
+	if (!resting && !buckled)
 		turns_since_scan++
-		if(turns_since_scan > 15)
+		if (turns_since_scan > 15)
 			turns_since_scan = 0
 			var/alone = 1
 			var/ian = 0
 			for(var/mob/M in oviewers(7, src))
-				if(istype(M, /mob/living/simple_animal/passive/corgi/Ian))
-					if(M.client)
+				if (istype(M, /mob/living/simple_animal/passive/corgi/Ian))
+					if (M.client)
 						alone = 0
 						break
 					else
@@ -206,13 +206,13 @@
 				else
 					alone = 0
 					break
-			if(alone && ian && puppies < 4)
-				if(near_camera(src) || near_camera(ian))
+			if (alone && ian && puppies < 4)
+				if (near_camera(src) || near_camera(ian))
 					return
 				new /mob/living/simple_animal/passive/corgi/puppy(loc)
 
 
-		if(prob(1))
+		if (prob(1))
 			visible_emote(pick("dances around","chases her tail"))
 			spawn(0)
 				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))

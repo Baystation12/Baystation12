@@ -79,17 +79,17 @@
 
 /// Tries to find the file by filename. Returns null on failure
 /obj/item/stock_parts/computer/hard_drive/proc/find_file_by_name(filename)
-	if(!filename)
+	if (!filename)
 		return
-	if(!check_functionality())
+	if (!check_functionality())
 		return
 	for(var/datum/computer_file/F in stored_files)
-		if(F.filename == filename)
+		if (F.filename == filename)
 			return F
 
 /// Use this proc to add Data file to the drive.
 /obj/item/stock_parts/computer/hard_drive/proc/create_data_file(filename, data, file_type = /datum/computer_file/data, list/metadata)
-	if(!filename)
+	if (!filename)
 		return
 
 	var/datum/computer_file/data/F = new file_type(md = metadata)
@@ -100,14 +100,14 @@
 
 /// Use this proc to save Data file to the drive.
 /obj/item/stock_parts/computer/hard_drive/proc/save_data_file(filename, data, file_type = /datum/computer_file/data, list/metadata)
-	if(!filename)
+	if (!filename)
 		return
 
 	var/datum/computer_file/data/EF = find_file_by_name(filename)
-	if(!istype(EF))
+	if (!istype(EF))
 		return create_data_file(filename, data, file_type, metadata)
 
-	if(EF.read_only)
+	if (EF.read_only)
 		return
 
 	EF = EF.clone()
@@ -118,20 +118,20 @@
 
 /// Use this proc to add data to a Data file on the drive. Unlike using save_data_file directly, this enforces exact file type match with existing file
 /obj/item/stock_parts/computer/hard_drive/proc/update_data_file(filename, new_data, file_type = /datum/computer_file/data, list/metadata, replace_content = FALSE)
-	if(!filename || !new_data)
+	if (!filename || !new_data)
 		return
 
 	var/datum/computer_file/data/F = find_file_by_name(filename)
-	if(!istype(F, file_type))
+	if (!istype(F, file_type))
 		return create_data_file(filename, new_data, file_type, metadata)
-	else if(F.type != file_type)
+	else if (F.type != file_type)
 		return
 	else
 		return save_data_file(filename, (replace_content ? new_data : F.stored_data + new_data), file_type, metadata)
 
 /// Use this proc to add file to the drive. Contains necessary sanity checks.
 /obj/item/stock_parts/computer/hard_drive/proc/create_file(datum/computer_file/F)
-	if(!try_create_file(F))
+	if (!try_create_file(F))
 		return
 	F.holder = src
 	stored_files += F
@@ -141,14 +141,14 @@
 /// Use this proc to add file or update it if it already exists. Contains necessary sanity checks.
 /obj/item/stock_parts/computer/hard_drive/proc/save_file(datum/computer_file/F)
 	var/datum/computer_file/EF = find_file_by_name(F.filename)
-	if(!istype(EF))
+	if (!istype(EF))
 		return create_file(F)
 
-	if(!can_write_file(F))
+	if (!can_write_file(F))
 		return
-	if(!can_store_file(F.size, EF.size))
+	if (!can_store_file(F.size, EF.size))
 		return
-	if(F in stored_files)
+	if (F in stored_files)
 		return
 
 	EF.holder = null
@@ -161,9 +161,9 @@
 /// Use this proc to remove file from the drive. Contains necessary sanity checks.
 /obj/item/stock_parts/computer/hard_drive/proc/remove_file(datum/computer_file/F)
 	. = FALSE
-	if(!can_write_file(F))
+	if (!can_write_file(F))
 		return
-	if(!(F in stored_files))
+	if (!(F in stored_files))
 		return
 
 	F.holder = null
@@ -174,13 +174,13 @@
 /// Use this proc to rename file on the drive. Contains necessary sanity checks.
 /obj/item/stock_parts/computer/hard_drive/proc/rename_file(datum/computer_file/F, filename_new)
 	. = FALSE
-	if(!can_write_file(F))
+	if (!can_write_file(F))
 		return
-	if(!validate_name(filename_new))
+	if (!validate_name(filename_new))
 		return
 
 	var/datum/computer_file/EF = find_file_by_name(filename_new)
-	if(istype(EF))
+	if (istype(EF))
 		return
 
 	F.filename = filename_new
@@ -189,17 +189,17 @@
 /// Use this proc to check if the file can be created.
 /obj/item/stock_parts/computer/hard_drive/proc/try_create_file(datum/computer_file/F)
 	. = FALSE
-	if(!can_write_file(F))
+	if (!can_write_file(F))
 		return
-	if(!can_store_file(F.size))
+	if (!can_store_file(F.size))
 		return
-	if(!validate_name(F.filename))
+	if (!validate_name(F.filename))
 		return
-	if(F in stored_files)
+	if (F in stored_files)
 		return
 
 	var/datum/computer_file/EF = find_file_by_name(F.filename)
-	if(istype(EF))
+	if (istype(EF))
 		return
 
 	return TRUE
@@ -215,19 +215,19 @@
 /obj/item/stock_parts/computer/hard_drive/proc/can_store_file(size = 1, replaced_size = 0)
 	// In the unlikely event someone manages to create that many files.
 	// BYOND is acting weird with numbers above 999 in loops (infinite loop prevention)
-	if(length(stored_files) >= 999)
+	if (length(stored_files) >= 999)
 		return FALSE
-	if(used_capacity + size - replaced_size > max_capacity)
+	if (used_capacity + size - replaced_size > max_capacity)
 		return FALSE
 	return TRUE
 
 /// Checks whether the file can be written to the drive.
 /obj/item/stock_parts/computer/hard_drive/proc/can_write_file(datum/computer_file/F)
-	if(!istype(F))
+	if (!istype(F))
 		return FALSE
-	if(!check_functionality())
+	if (!check_functionality())
 		return FALSE
-	if(read_only)
+	if (read_only)
 		return FALSE
 	return TRUE
 
@@ -235,7 +235,7 @@
 /obj/item/stock_parts/computer/hard_drive/proc/validate_name(filename)
 	var/list/badchars = list("/","\\",":","*","?","\"","<",">","|","#",".",","," ")
 	for(var/char in badchars)
-		if(findtext(filename, char))
+		if (findtext(filename, char))
 			return FALSE
 	return TRUE
 

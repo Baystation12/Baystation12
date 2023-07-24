@@ -24,7 +24,7 @@
 	icon_state = "harpoon_bomb"
 
 /obj/item/material/harpoon/bomb/has_embedded()
-	if(spent)
+	if (spent)
 		return
 	audible_message(SPAN_WARNING("\The [src] emits a long, harsh tone!"))
 	playsound(loc, 'sound/weapons/bombwhine.ogg', 100, 0, -3)

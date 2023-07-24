@@ -34,10 +34,10 @@
 
 		// --- Main Menu ---
 
-		if(0)
+		if (0)
 			dat += "<br>[temp]<br>"
 			dat += "<br>Current Network: <a href='?src=\ref[src];network=1'>[network]</a><br>"
-			if(length(servers))
+			if (length(servers))
 				dat += "<br>Detected Telecommunication Servers:<ul>"
 				for(var/obj/machinery/telecomms/T in servers)
 					dat += "<li><a href='?src=\ref[src];viewserver=[T.id]'>\ref[T] [T.name]</a> ([T.id])</li>"
@@ -50,13 +50,13 @@
 
 		// --- Viewing Server ---
 
-		if(1)
+		if (1)
 			dat += "<br>[temp]<br>"
 			dat += "<center><a href='?src=\ref[src];operation=mainmenu'>\[Main Menu\]</a>     <a href='?src=\ref[src];operation=refresh'>\[Refresh\]</a></center>"
 			dat += "<br>Current Network: [network]"
 			dat += "<br>Selected Server: [SelectedServer.id]"
 
-			if(SelectedServer.totaltraffic >= 1024)
+			if (SelectedServer.totaltraffic >= 1024)
 				dat += "<br>Total recorded traffic: [round(SelectedServer.totaltraffic / 1024)] Terrabytes<br><br>"
 			else
 				dat += "<br>Total recorded traffic: [SelectedServer.totaltraffic] Gigabytes<br><br>"
@@ -69,7 +69,7 @@
 
 
 				// If the log is a speech file
-				if(C.input_type == "Speech File")
+				if (C.input_type == "Speech File")
 
 					dat += "<li>[SPAN_COLOR("#008f00", C.name)]  <a href='?src=\ref[src];delete=[i]'>[SPAN_COLOR("#ff0000", "\[X\]")]</a><br>"
 
@@ -80,12 +80,12 @@
 
 					// -- If the orator is a human, or universal translate is active, OR mob has universal speech on --
 
-					if(universal_translate || C.parameters["uspeech"] || C.parameters["intelligible"])
+					if (universal_translate || C.parameters["uspeech"] || C.parameters["intelligible"])
 						dat += "<u>[SPAN_COLOR("#18743e", "Data type")]</u>: [C.input_type]<br>"
 						dat += "<u>[SPAN_COLOR("#18743e", "Source")]</u>: [C.parameters["name"]] (Job: [C.parameters["job"]])<br>"
 						dat += "<u>[SPAN_COLOR("#18743e", "Class")]</u>: [race]<br>"
 						dat += "<u>[SPAN_COLOR("#18743e", "Contents")]</u>: \"[C.parameters["message"]]\"<br>"
-						if(language)
+						if (language)
 							dat += "<u>[SPAN_COLOR("#18743e", "Language")]</u>: [language]<br/>"
 
 					// -- Orator is not human and universal translate not active --
@@ -98,7 +98,7 @@
 
 					dat += "</li><br>"
 
-				else if(C.input_type == "Execution Error")
+				else if (C.input_type == "Execution Error")
 
 					dat += "<li>[SPAN_COLOR("#990000", C.name)]  [SPAN_COLOR("#ff0000", "<a href='?src=\ref[src];delete=[i]'>\[X\]</a>")]<br>"
 					dat += "<u>[SPAN_COLOR("#787700", "Output")]</u>: \"[C.parameters["message"]]\"<br>"
@@ -117,51 +117,51 @@
 
 
 /obj/machinery/computer/telecomms/server/OnTopic(mob/user, list/href_list, datum/topic_state/state)
-	if(href_list["viewserver"])
+	if (href_list["viewserver"])
 		screen = 1
 		for(var/obj/machinery/telecomms/T in servers)
-			if(T.id == href_list["viewserver"])
+			if (T.id == href_list["viewserver"])
 				SelectedServer = T
 				break
 
-	if(href_list["operation"])
+	if (href_list["operation"])
 		switch(href_list["operation"])
 
-			if("release")
+			if ("release")
 				servers = list()
 				screen = 0
 
-			if("mainmenu")
+			if ("mainmenu")
 				screen = 0
 
-			if("scan")
-				if(length(servers) > 0)
+			if ("scan")
+				if (length(servers) > 0)
 					temp = SPAN_COLOR("#d70b00", "- FAILED: CANNOT PROBE WHEN BUFFER FULL -")
 
 				else
 					for(var/obj/machinery/telecomms/server/T in range(25, src))
-						if(T.network == network)
+						if (T.network == network)
 							servers.Add(T)
 
-					if(!length(servers))
+					if (!length(servers))
 						temp = SPAN_COLOR("#d70b00", "- FAILED: UNABLE TO LOCATE SERVERS IN \[[network]\] -")
 					else
 						temp = SPAN_COLOR("#336699", "- [length(servers)] SERVERS PROBED & BUFFERED -")
 
 					screen = 0
 
-	if(href_list["delete"])
+	if (href_list["delete"])
 
-		if(!src.allowed(usr) && !emagged)
+		if (!src.allowed(usr) && !emagged)
 			to_chat(usr, SPAN_WARNING("ACCESS DENIED."))
 			return
 
-		if(SelectedServer)
+		if (SelectedServer)
 			var/key = text2num(href_list["delete"])
-			if(!is_valid_index(key, SelectedServer.log_entries))
+			if (!is_valid_index(key, SelectedServer.log_entries))
 				return TOPIC_REFRESH
 			var/datum/comm_log_entry/D = SelectedServer.log_entries[key]
-			if(!D)
+			if (!D)
 				return TOPIC_REFRESH
 
 			temp = SPAN_COLOR("#336699", "- DELETED ENTRY: [D.name] -")
@@ -172,12 +172,12 @@
 		else
 			temp = SPAN_COLOR("#d70b00", "- FAILED: NO SELECTED MACHINE -")
 
-	if(href_list["network"])
+	if (href_list["network"])
 
 		var/newnet = input(usr, "Which network do you want to view?", "Comm Monitor", network) as null|text
 
-		if(newnet && ((usr in range(1, src) || issilicon(usr))))
-			if(length(newnet) > 15)
+		if (newnet && ((usr in range(1, src) || issilicon(usr))))
+			if (length(newnet) > 15)
 				temp = SPAN_COLOR("#d70b00", "- FAILED: NETWORK TAG STRING TOO LENGHTLY -")
 
 			else
@@ -190,7 +190,7 @@
 	updateUsrDialog()
 
 /obj/machinery/computer/telecomms/server/emag_act(remaining_charges, mob/user)
-	if(!emagged)
+	if (!emagged)
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = TRUE
 		req_access.Cut()

@@ -8,19 +8,19 @@
 	set category = "IC"
 	set src = usr
 
-	if(!mob || !SScodex)
+	if (!mob || !SScodex)
 		return
 
-	if(codex_on_cooldown || !mob.can_use_codex())
+	if (codex_on_cooldown || !mob.can_use_codex())
 		to_chat(src, SPAN_WARNING("You cannot perform codex actions currently."))
 		return
 
-	if(!searching)
+	if (!searching)
 		searching = input("Enter a search string.", "Codex Search") as text|null
-		if(!searching)
+		if (!searching)
 			return
 
-	if(codex_on_cooldown || !mob.can_use_codex())
+	if (codex_on_cooldown || !mob.can_use_codex())
 		to_chat(src, SPAN_WARNING("You cannot perform codex actions currently."))
 		return
 
@@ -28,24 +28,24 @@
 	addtimer(new Callback(src, .proc/reset_codex_cooldown), 3 SECONDS)
 
 	var/list/all_entries = SScodex.retrieve_entries_for_string(searching)
-	if(mob && mob.mind && !player_is_antag(mob.mind))
+	if (mob && mob.mind && !player_is_antag(mob.mind))
 		all_entries = all_entries.Copy() // So we aren't messing with the codex search cache.
 		for(var/datum/codex_entry/entry in all_entries)
-			if(entry.antag_text && !entry.mechanics_text && !entry.lore_text)
+			if (entry.antag_text && !entry.mechanics_text && !entry.lore_text)
 				all_entries -= entry
 
 	//Put entries with match in the name first
 	for(var/datum/codex_entry/entry in all_entries)
-		if(findtext(entry.display_name, searching))
+		if (findtext(entry.display_name, searching))
 			all_entries -= entry
 			all_entries.Insert(1, entry)
 
-	if(LAZYLEN(all_entries) == 1)
+	if (LAZYLEN(all_entries) == 1)
 		SScodex.present_codex_entry(mob, all_entries[1])
 	else
-		if(LAZYLEN(all_entries) > 1)
+		if (LAZYLEN(all_entries) > 1)
 			var/list/codex_data = list("<h3><b>[length(all_entries)] matches</b> for '[searching]':</h3>")
-			if(LAZYLEN(all_entries) > max_codex_entries_shown)
+			if (LAZYLEN(all_entries) > max_codex_entries_shown)
 				codex_data += "Showing first <b>[max_codex_entries_shown]</b> entries. <b>[length(all_entries) - 5] result\s</b> omitted.</br>"
 			codex_data += "<table width = 100%>"
 			for(var/i = 1 to min(length(all_entries), max_codex_entries_shown))
@@ -64,10 +64,10 @@
 	set category = "IC"
 	set src = usr
 
-	if(!mob || !SScodex.initialized)
+	if (!mob || !SScodex.initialized)
 		return
 
-	if(codex_on_cooldown || !mob.can_use_codex())
+	if (codex_on_cooldown || !mob.can_use_codex())
 		to_chat(src, SPAN_WARNING("You cannot perform codex actions currently."))
 		return
 	codex_on_cooldown = TRUE
@@ -84,11 +84,11 @@
 	for(var/thing in SScodex.index_file)
 
 		var/datum/codex_entry/entry = SScodex.index_file[thing]
-		if(!antag_check && entry.antag_text && !entry.mechanics_text && !entry.lore_text)
+		if (!antag_check && entry.antag_text && !entry.mechanics_text && !entry.lore_text)
 			continue
 
 		var/first_letter = uppertext(copytext(thing, 1, 2))
-		if(first_letter != last_first_letter)
+		if (first_letter != last_first_letter)
 			last_first_letter = first_letter
 			codex_data += "<tr><td colspan = 2><hr></td></tr>"
 			codex_data += "<tr><td colspan = 2>[last_first_letter]</td></tr>"
@@ -106,10 +106,10 @@
 	set category = "IC"
 	set src = usr
 
-	if(!mob || !SScodex)
+	if (!mob || !SScodex)
 		return
 
-	if(codex_on_cooldown || !mob.can_use_codex())
+	if (codex_on_cooldown || !mob.can_use_codex())
 		to_chat(src, SPAN_WARNING("You cannot perform codex actions currently."))
 		return
 

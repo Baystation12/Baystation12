@@ -27,9 +27,9 @@
 
 	switch(state)
 
-		if(0)
+		if (0)
 			// State 0
-			if(isWrench(W) && isturf(src.loc))
+			if (isWrench(W) && isturf(src.loc))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 				to_chat(user, "You wrench the assembly into place.")
 				anchored = TRUE
@@ -38,16 +38,16 @@
 				auto_turn()
 				return
 
-		if(1)
+		if (1)
 			// State 1
-			if(isWelder(W))
-				if(weld(W, user))
+			if (isWelder(W))
+				if (weld(W, user))
 					to_chat(user, "You weld the assembly securely into place.")
 					anchored = TRUE
 					state = 2
 				return
 
-			else if(isWrench(W))
+			else if (isWrench(W))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 				to_chat(user, "You unattach the assembly from its place.")
 				anchored = FALSE
@@ -55,38 +55,38 @@
 				state = 0
 				return
 
-		if(2)
+		if (2)
 			// State 2
-			if(isCoil(W))
+			if (isCoil(W))
 				var/obj/item/stack/cable_coil/C = W
-				if(C.use(2))
+				if (C.use(2))
 					to_chat(user, SPAN_NOTICE("You add wires to the assembly."))
 					state = 3
 				else
 					to_chat(user, SPAN_WARNING("You need 2 coils of wire to wire the assembly."))
 				return
 
-			else if(isWelder(W))
+			else if (isWelder(W))
 
-				if(weld(W, user))
+				if (weld(W, user))
 					to_chat(user, "You unweld the assembly from its place.")
 					state = 1
 					anchored = TRUE
 				return
 
 
-		if(3)
+		if (3)
 			// State 3
-			if(isScrewdriver(W))
+			if (isScrewdriver(W))
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 
 				var/input = sanitize(input(usr, "Which networks would you like to connect this camera to? Separate networks with a comma. No Spaces!\nFor example: Exodus,Security,Secret", "Set Network", camera_network ? camera_network : NETWORK_EXODUS))
-				if(!input)
+				if (!input)
 					to_chat(usr, "No input found please hang up and try your call again.")
 					return
 
 				var/list/tempnetwork = splittext(input, ",")
-				if(length(tempnetwork) < 1)
+				if (length(tempnetwork) < 1)
 					to_chat(usr, "No network found please hang up and try your call again.")
 					return
 
@@ -107,16 +107,16 @@
 
 				for(var/i = 5; i >= 0; i -= 1)
 					var/direct = input(user, "Direction?", "Assembling Camera", null) in list("LEAVE IT", "NORTH", "EAST", "SOUTH", "WEST" )
-					if(direct != "LEAVE IT")
+					if (direct != "LEAVE IT")
 						C.dir = text2dir(direct)
-					if(i != 0)
+					if (i != 0)
 						var/confirm = alert(user, "Is this what you want? Chances Remaining: [i]", "Confirmation", "Yes", "No")
-						if(confirm == "Yes")
+						if (confirm == "Yes")
 							C.update_icon()
 							break
 				return
 
-			else if(isWirecutter(W))
+			else if (isWirecutter(W))
 
 				new/obj/item/stack/cable_coil(get_turf(src), 2)
 				playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
@@ -125,15 +125,15 @@
 				return
 
 	// Upgrades!
-	if(is_type_in_list(W, possible_upgrades) && !is_type_in_list(W, upgrades) && user.unEquip(W, src)) // Is a possible upgrade and isn't in the camera already.
+	if (is_type_in_list(W, possible_upgrades) && !is_type_in_list(W, upgrades) && user.unEquip(W, src)) // Is a possible upgrade and isn't in the camera already.
 		to_chat(user, "You attach \the [W] into the assembly inner circuits.")
 		upgrades += W
 		return
 
 	// Taking out upgrades
-	else if(isCrowbar(W) && length(upgrades))
+	else if (isCrowbar(W) && length(upgrades))
 		var/obj/U = locate(/obj) in upgrades
-		if(U)
+		if (U)
 			to_chat(user, "You unattach an upgrade from the assembly.")
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 			U.dropInto(loc)
@@ -143,25 +143,25 @@
 	..()
 
 /obj/item/camera_assembly/on_update_icon()
-	if(anchored)
+	if (anchored)
 		icon_state = "camera1"
 	else
 		icon_state = "cameracase"
 
 /obj/item/camera_assembly/attack_hand(mob/user as mob)
-	if(!anchored)
+	if (!anchored)
 		..()
 
 /obj/item/camera_assembly/proc/weld(obj/item/weldingtool/WT, mob/user)
 
-	if(busy)
+	if (busy)
 		return 0
 
-	if(WT.remove_fuel(0, user))
+	if (WT.remove_fuel(0, user))
 		to_chat(user, SPAN_NOTICE("You start to weld \the [src].."))
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 		busy = 1
-		if(do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) && WT.isOn())
+		if (do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) && WT.isOn())
 			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 			busy = 0
 			return 1

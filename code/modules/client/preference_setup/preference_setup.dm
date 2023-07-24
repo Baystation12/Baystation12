@@ -87,30 +87,30 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 /datum/category_collection/player_setup_collection/proc/header()
 	var/dat = ""
 	for(var/datum/category_group/player_setup_category/PS in categories)
-		if(PS == selected_category)
+		if (PS == selected_category)
 			dat += "[PS.name] "	// TODO: Check how to properly mark a href/button selected in a classic browser window
 		else
 			dat += "<a href='?src=\ref[src];category=\ref[PS]'>[PS.name]</a> "
 	return dat
 
 /datum/category_collection/player_setup_collection/proc/content(mob/user)
-	if(selected_category)
+	if (selected_category)
 		return selected_category.content(user)
 
 /datum/category_collection/player_setup_collection/Topic(href,list/href_list)
-	if(..())
+	if (..())
 		return 1
 	var/mob/user = usr
-	if(!user.client)
+	if (!user.client)
 		return 1
 
-	if(href_list["category"])
+	if (href_list["category"])
 		var/category = locate(href_list["category"])
-		if(category && (category in categories))
+		if (category && (category in categories))
 			selected_category = category
 		. = 1
 
-	if(.)
+	if (.)
 		user.client.prefs.update_setup_window(user)
 
 /**************************
@@ -155,7 +155,7 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	var/current = 0
 	var/wrap_index = item_wrap_index || length(items) / 2
 	for(var/datum/category_item/player_setup_item/player_setup_item in items)
-		if(wrap_index && current++ >= wrap_index)
+		if (wrap_index && current++ >= wrap_index)
 			wrap_index = 0
 			. += "</td><td></td><td style='width:50%'>"
 		. += "[player_setup_item.content(user)]<br>"
@@ -218,20 +218,20 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	return
 
 /datum/category_item/player_setup_item/Topic(href,list/href_list)
-	if(..())
+	if (..())
 		return 1
 	var/mob/pref_mob = preference_mob()
-	if(!pref_mob || !pref_mob.client)
+	if (!pref_mob || !pref_mob.client)
 		return 1
 	// If the usr isn't trying to alter their own mob then they must instead be an admin
-	if(usr != pref_mob && !check_rights(R_ADMIN, 0, usr))
+	if (usr != pref_mob && !check_rights(R_ADMIN, 0, usr))
 		return 1
 
 	. = OnTopic(href, href_list, usr)
 
 	// The user might have joined the game or otherwise had a change of mob while tweaking their preferences.
 	pref_mob = preference_mob()
-	if(!pref_mob || !pref_mob.client)
+	if (!pref_mob || !pref_mob.client)
 		return 1
 
 	if (. & TOPIC_UPDATE_PREVIEW)
@@ -248,13 +248,13 @@ var/global/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	return TOPIC_NOACTION
 
 /datum/category_item/player_setup_item/proc/preference_mob()
-	if(!pref.client)
+	if (!pref.client)
 		for(var/client/C)
-			if(C.ckey == pref.client_ckey)
+			if (C.ckey == pref.client_ckey)
 				pref.client = C
 				break
 
-	if(pref.client)
+	if (pref.client)
 		return pref.client.mob
 
 /datum/category_item/player_setup_item/proc/preference_species()

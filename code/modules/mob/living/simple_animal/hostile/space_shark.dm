@@ -20,8 +20,8 @@
 
 /mob/living/simple_animal/hostile/carp/shark/do_special_attack(atom/A)
 	var/mob/living/L = A
-	if(istype(L))
-		if(prob(45))//if one is unlucky enough, they get tackled few tiles away
+	if (istype(L))
+		if (prob(45))//if one is unlucky enough, they get tackled few tiles away
 			L.visible_message(SPAN_DANGER("\The [src] tackles [L]!"))
 			var/tackle_length = rand(3,5)
 			for (var/i = 1 to tackle_length)

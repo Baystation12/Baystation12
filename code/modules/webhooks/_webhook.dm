@@ -24,9 +24,9 @@
 
 /singleton/webhook/proc/send(list/data)
 	var/message = get_message(data)
-	if(message)
-		if(mentions)
-			if(message["content"])
+	if (message)
+		if (mentions)
+			if (message["content"])
 				message["content"] = "[mentions]: [message["content"]]"
 			else
 				message["content"] = "[mentions]"
@@ -34,7 +34,7 @@
 		. = TRUE
 		for(var/target_url in urls)
 			var/list/httpresponse = http_post(target_url, message)
-			if(!islist(httpresponse))
+			if (!islist(httpresponse))
 				. = FALSE
 				continue
 			switch(httpresponse["status_code"])

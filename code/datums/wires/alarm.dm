@@ -18,7 +18,7 @@ var/global/const/AALARM_WIRE_AALARM = 16
 
 /datum/wires/alarm/CanUse(mob/living/L)
 	var/obj/machinery/alarm/A = holder
-	if(A.wiresexposed && A.buildstage == 2)
+	if (A.wiresexposed && A.buildstage == 2)
 		return 1
 	return 0
 
@@ -35,13 +35,13 @@ var/global/const/AALARM_WIRE_AALARM = 16
 /datum/wires/alarm/UpdateCut(index, mended)
 	var/obj/machinery/alarm/A = holder
 	switch(index)
-		if(AALARM_WIRE_IDSCAN)
-			if(!mended)
+		if (AALARM_WIRE_IDSCAN)
+			if (!mended)
 				A.locked = 1
 //				log_debug("Idscan wire cut")
 
 
-		if(AALARM_WIRE_POWER)
+		if (AALARM_WIRE_POWER)
 			A.shock(usr, 50)
 			A.shorted = !mended
 			A.update_icon()
@@ -54,14 +54,14 @@ var/global/const/AALARM_WIRE_AALARM = 16
 //				log_debug("AI Control Wire Cut")
 
 
-		if(AALARM_WIRE_SYPHON)
-			if(!mended)
+		if (AALARM_WIRE_SYPHON)
+			if (!mended)
 				A.mode = 3 // AALARM_MODE_PANIC
 				A.apply_mode()
 //				log_debug("Syphon Wire Cut")
 
 
-		if(AALARM_WIRE_AALARM)
+		if (AALARM_WIRE_AALARM)
 			if (A.alarm_area.atmosalert(2, A))
 				A.post_alert(2)
 			A.update_icon()
@@ -69,7 +69,7 @@ var/global/const/AALARM_WIRE_AALARM = 16
 /datum/wires/alarm/UpdatePulsed(index)
 	var/obj/machinery/alarm/A = holder
 	switch(index)
-		if(AALARM_WIRE_IDSCAN)
+		if (AALARM_WIRE_IDSCAN)
 			A.locked = !A.locked
 //			log_debug("Idscan wire pulsed")
 
@@ -77,12 +77,12 @@ var/global/const/AALARM_WIRE_AALARM = 16
 		if (AALARM_WIRE_POWER)
 //			log_debug("Power wire pulsed")
 
-			if(A.shorted == 0)
+			if (A.shorted == 0)
 				A.shorted = 1
 				A.update_icon()
 
 			spawn(12000)
-				if(A.shorted == 1)
+				if (A.shorted == 1)
 					A.shorted = 0
 					A.update_icon()
 
@@ -97,16 +97,16 @@ var/global/const/AALARM_WIRE_AALARM = 16
 				if (A.aidisabled == 1)
 					A.aidisabled = 0
 
-		if(AALARM_WIRE_SYPHON)
+		if (AALARM_WIRE_SYPHON)
 //			log_debug("Syphon wire pulsed")
 
-			if(A.mode == 1) // AALARM_MODE_SCRUB
+			if (A.mode == 1) // AALARM_MODE_SCRUB
 				A.mode = 3 // AALARM_MODE_PANIC
 			else
 				A.mode = 1 // AALARM_MODE_SCRUB
 			A.apply_mode()
 
-		if(AALARM_WIRE_AALARM)
+		if (AALARM_WIRE_AALARM)
 //			log_debug("Aalarm wire pulsed")
 
 			if (A.alarm_area.atmosalert(0, A))

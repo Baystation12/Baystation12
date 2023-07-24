@@ -24,11 +24,11 @@
 	for(i = 1, i <= length(outputs), i++)
 		var/datum/integrated_io/O = outputs[i]
 		var/data = "nothing"
-		if(isweakref(O.data))
+		if (isweakref(O.data))
 			var/datum/d = O.data_as_type(/datum)
-			if(d)
+			if (d)
 				data = "[d]"
-		else if(!isnull(O.data))
+		else if (!isnull(O.data))
 			data = O.data
 		to_chat(user, "\The [src] has [data] saved to address [i].")
 
@@ -93,45 +93,45 @@
 
 /obj/item/integrated_circuit/memory/constant/save_special()
 	var/datum/integrated_io/O = outputs[1]
-	if(istext(O.data) || isnum(O.data))
+	if (istext(O.data) || isnum(O.data))
 		return O.data
 
 /obj/item/integrated_circuit/memory/constant/load_special(special_data)
 	var/datum/integrated_io/O = outputs[1]
-	if(istext(special_data) || isnum(special_data))
+	if (istext(special_data) || isnum(special_data))
 		O.data = special_data
 
 /obj/item/integrated_circuit/memory/constant/attack_self(mob/user)
 	var/datum/integrated_io/O = outputs[1]
-	if(!user.IsAdvancedToolUser())
+	if (!user.IsAdvancedToolUser())
 		return
 	var/type_to_use = input("Please choose a type to use.","[src] type setting") as null|anything in list("string","number","ref", "null")
 
 	var/new_data = null
 	switch(type_to_use)
-		if("string")
+		if ("string")
 			accepting_refs = FALSE
 			new_data = input("Now type in a string.","[src] string writing") as null|text
-			if(istext(new_data) && user.IsAdvancedToolUser())
+			if (istext(new_data) && user.IsAdvancedToolUser())
 				O.data = new_data
 				to_chat(user, SPAN_NOTICE("You set \the [src]'s memory to [O.display_data(O.data)]."))
-		if("number")
+		if ("number")
 			accepting_refs = FALSE
 			new_data = input("Now type in a number.","[src] number writing") as null|num
-			if(isnum(new_data) && user.IsAdvancedToolUser())
+			if (isnum(new_data) && user.IsAdvancedToolUser())
 				O.data = new_data
 				to_chat(user, SPAN_NOTICE("You set \the [src]'s memory to [O.display_data(O.data)]."))
-		if("ref")
+		if ("ref")
 			accepting_refs = TRUE
 			to_chat(user, SPAN_NOTICE("You turn \the [src]'s ref scanner on.  Slide it across \
 			an object for a ref of that object to save it in memory."))
-		if("null")
+		if ("null")
 			O.data = null
 			to_chat(user, SPAN_NOTICE("You set \the [src]'s memory to absolutely nothing."))
 
 /obj/item/integrated_circuit/memory/constant/afterattack(atom/target, mob/living/user, proximity)
 	. = ..()
-	if(accepting_refs && proximity)
+	if (accepting_refs && proximity)
 		var/datum/integrated_io/O = outputs[1]
 		O.data = weakref(target)
 		visible_message(SPAN_NOTICE("[user] slides \a [src]'s over \the [target]."))

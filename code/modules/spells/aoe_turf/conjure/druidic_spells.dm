@@ -4,9 +4,9 @@
 
 /spell/aoe_turf/conjure/summon/before_cast()
 	..()
-	if(name_summon)
+	if (name_summon)
 		var/newName = sanitize(input("Would you like to name your summon?") as null|text, MAX_NAME_LEN)
-		if(newName)
+		if (newName)
 			newVars["name"] = newName
 
 /spell/aoe_turf/conjure/summon/conjure_animation(atom/movable/overlay/animation, turf/target)
@@ -36,7 +36,7 @@
 	hud_state = "wiz_bats"
 
 /spell/aoe_turf/conjure/summon/bats/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 
 	newVars = list("maxHealth" = 20 + spell_levels[Sp_POWER]*5, "health" = 20 + spell_levels[Sp_POWER]*5, "melee_damage_lower" = 10 + spell_levels[Sp_POWER], "melee_damage_upper" = 10 + spell_levels[Sp_POWER]*2)

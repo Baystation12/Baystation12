@@ -18,7 +18,7 @@
 	var/list/turfs = getline(T,A) - T
 	for(var/t in turfs)
 		var/turf/turf = t
-		if(turf.density || istype(turf, /turf/space))
+		if (turf.density || istype(turf, /turf/space))
 			break
 		new /obj/effect/fake_fire/sunwrath(t)
 	return 1

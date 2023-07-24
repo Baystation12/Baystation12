@@ -22,11 +22,11 @@
 	pref.spawnpoint         = sanitize_inlist(pref.spawnpoint, spawntypes(), initial(pref.spawnpoint))
 	// This is a bit noodly. If pref.cultural_info[TAG_CULTURE] is null, then we haven't finished loading/sanitizing, which means we might purge
 	// numbers or w/e from someone's name by comparing them to the map default. So we just don't bother sanitizing at this point otherwise.
-	if(pref.cultural_info[TAG_CULTURE])
+	if (pref.cultural_info[TAG_CULTURE])
 		var/singleton/cultural_info/check = SSculture.get_culture(pref.cultural_info[TAG_CULTURE])
-		if(check)
+		if (check)
 			pref.real_name = check.sanitize_name(pref.real_name, pref.species)
-			if(!pref.real_name)
+			if (!pref.real_name)
 				pref.real_name = random_name(pref.gender, pref.species)
 
 
@@ -38,29 +38,29 @@
 
 
 /datum/category_item/player_setup_item/physical/basic/OnTopic(href,list/href_list, mob/user)
-	if(href_list["rename"])
+	if (href_list["rename"])
 		var/raw_name = input(user, "Choose your character's name:", "Character Name")  as text|null
 		if (!isnull(raw_name) && CanUseTopic(user))
 
 			var/singleton/cultural_info/check = SSculture.get_culture(pref.cultural_info[TAG_CULTURE])
 			var/new_name = check.sanitize_name(raw_name, pref.species)
-			if(new_name)
+			if (new_name)
 				pref.real_name = new_name
 				return TOPIC_REFRESH
 			else
 				to_chat(user, SPAN_WARNING("Invalid name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ' and ."))
 				return TOPIC_NOACTION
 
-	else if(href_list["random_name"])
+	else if (href_list["random_name"])
 		pref.real_name = random_name(pref.gender, pref.species)
 		return TOPIC_REFRESH
 
-	else if(href_list["spawnpoint"])
+	else if (href_list["spawnpoint"])
 		var/list/spawnkeys = list()
 		for(var/spawntype in spawntypes())
 			spawnkeys += spawntype
 		var/choice = input(user, "Where would you like to spawn when late-joining?") as null|anything in spawnkeys
-		if(!choice || !spawntypes()[choice] || !CanUseTopic(user))	return TOPIC_NOACTION
+		if (!choice || !spawntypes()[choice] || !CanUseTopic(user))	return TOPIC_NOACTION
 		pref.spawnpoint = choice
 		return TOPIC_REFRESH
 

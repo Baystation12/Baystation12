@@ -32,6 +32,6 @@
 	..()
 	var/obj/item/device/lightreplacer/LR = locate() in equipment
 	LR.Charge(R, amount)
-	if(emag)
+	if (emag)
 		var/obj/item/reagent_containers/spray/S = emag
 		S.reagents.add_reagent(/datum/reagent/oil, 20 * amount)

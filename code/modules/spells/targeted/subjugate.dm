@@ -23,10 +23,10 @@
 	hud_state = "wiz_subj"
 
 /spell/targeted/subjugation/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 
-	if(spell_levels[Sp_POWER] == level_max[Sp_POWER])
+	if (spell_levels[Sp_POWER] == level_max[Sp_POWER])
 		max_targets = 0
 
 		return "[src] will now effect everyone in the area."

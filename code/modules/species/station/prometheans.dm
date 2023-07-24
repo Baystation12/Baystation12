@@ -89,10 +89,10 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 /datum/species/shapeshifter/promethean/handle_environment_special(mob/living/carbon/human/H)
 
 	var/turf/T = H.loc
-	if(istype(T))
+	if (istype(T))
 		var/obj/effect/decal/cleanable/C = locate() in T
-		if(C)
-			if(H.nutrition < 300)
+		if (C)
+			if (H.nutrition < 300)
 				H.adjust_nutrition(rand(10,20))
 			qdel(C)
 
@@ -102,7 +102,7 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 	// Theoretically the only internal organ a slime will have
 	// is the slime core. but we might as well be thorough.
 	for(var/obj/item/organ/I in H.internal_organs)
-		if(I.damage > 0)
+		if (I.damage > 0)
 			I.damage = max(I.damage - heal_rate, 0)
 			if (prob(5))
 				to_chat(H, SPAN_NOTICE("You feel a soothing sensation within your [I.name]..."))
@@ -111,11 +111,11 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 	// Replace completely missing limbs.
 	for(var/limb_type in has_limbs)
 		var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-		if(E && !E.is_usable() && !(E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))
+		if (E && !E.is_usable() && !(E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))
 			E.removed()
-			if(!QDELETED(E))
+			if (!QDELETED(E))
 				QDEL_NULL(E)
-		if(!E)
+		if (!E)
 			var/list/organ_data = has_limbs[limb_type]
 			var/limb_path = organ_data["path"]
 			var/obj/item/organ/O = new limb_path(H)
@@ -144,16 +144,16 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 
 /datum/species/shapeshifter/promethean/get_additional_examine_text(mob/living/carbon/human/H)
 
-	if(!stored_shock_by_ref["\ref[H]"])
+	if (!stored_shock_by_ref["\ref[H]"])
 		return
 	var/datum/gender/G = GLOB.gender_datums[H.gender]
 
 	switch(stored_shock_by_ref["\ref[H]"])
-		if(1 to 10)
+		if (1 to 10)
 			return "[G.He] [G.is] flickering gently with a little electrical activity."
-		if(11 to 20)
+		if (11 to 20)
 			return "[G.He] [G.is] glowing gently with moderate levels of electrical activity.\n"
-		if(21 to 35)
+		if (21 to 35)
 			return SPAN_WARNING("[G.He] [G.is] glowing brightly with high levels of electrical activity.")
-		if(35 to INFINITY)
+		if (35 to INFINITY)
 			return SPAN_DANGER("[G.He] [G.is] radiating massive levels of electrical activity!")

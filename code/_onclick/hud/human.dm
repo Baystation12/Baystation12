@@ -3,12 +3,12 @@
 /datum/hud/human/FinalizeInstantiation(ui_style='icons/mob/screen1_White.dmi', ui_color = "#ffffff", ui_alpha = 255)
 	var/mob/living/carbon/human/target = mymob
 	var/datum/hud_data/hud_data
-	if(!istype(target))
+	if (!istype(target))
 		hud_data = new()
 	else
 		hud_data = target.species.hud
 
-	if(hud_data.icon)
+	if (hud_data.icon)
 		ui_style = hud_data.icon
 
 	adding = list()
@@ -37,16 +37,16 @@
 		inv_box.slot_id =     slot_data["slot"]
 		inv_box.icon_state =  slot_data["state"]
 
-		if(slot_data["dir"])
+		if (slot_data["dir"])
 			inv_box.set_dir(slot_data["dir"])
 
-		if(slot_data["toggle"])
+		if (slot_data["toggle"])
 			src.other += inv_box
 			has_hidden_gear = 1
 		else
 			src.adding += inv_box
 
-	if(has_hidden_gear)
+	if (has_hidden_gear)
 		using = new /obj/screen()
 		using.SetName("toggle")
 		using.icon = ui_style
@@ -57,7 +57,7 @@
 		src.adding += using
 
 	// Draw the attack intent dialogue.
-	if(hud_data.has_a_intent)
+	if (hud_data.has_a_intent)
 
 		using = new /obj/screen/intent()
 		src.adding += using
@@ -65,7 +65,7 @@
 
 		hud_elements |= using
 
-	if(hud_data.has_m_intent)
+	if (hud_data.has_m_intent)
 		using = new /obj/screen/movement()
 		using.SetName("movement method")
 		using.icon = ui_style
@@ -76,7 +76,7 @@
 		src.adding += using
 		move_intent = using
 
-	if(hud_data.has_drop)
+	if (hud_data.has_drop)
 		using = new /obj/screen()
 		using.SetName("drop")
 		using.icon = ui_style
@@ -86,7 +86,7 @@
 		using.alpha = ui_alpha
 		src.hotkeybuttons += using
 
-	if(hud_data.has_hands)
+	if (hud_data.has_hands)
 
 		using = new /obj/screen()
 		using.SetName("equip")
@@ -101,7 +101,7 @@
 		inv_box.SetName("r_hand")
 		inv_box.icon = ui_style
 		inv_box.icon_state = "r_hand_inactive"
-		if(mymob && !mymob.hand)	//This being 0 or null means the right hand is in use
+		if (mymob && !mymob.hand)	//This being 0 or null means the right hand is in use
 			inv_box.icon_state = "r_hand_active"
 		inv_box.screen_loc = ui_rhand
 		inv_box.slot_id = slot_r_hand
@@ -115,7 +115,7 @@
 		inv_box.SetName("l_hand")
 		inv_box.icon = ui_style
 		inv_box.icon_state = "l_hand_inactive"
-		if(mymob && mymob.hand)	//This being 1 means the left hand is in use
+		if (mymob && mymob.hand)	//This being 1 means the left hand is in use
 			inv_box.icon_state = "l_hand_active"
 		inv_box.screen_loc = ui_lhand
 		inv_box.slot_id = slot_l_hand
@@ -142,7 +142,7 @@
 		using.alpha = ui_alpha
 		src.adding += using
 
-	if(hud_data.has_resist)
+	if (hud_data.has_resist)
 		using = new /obj/screen()
 		using.SetName("resist")
 		using.icon = ui_style
@@ -152,7 +152,7 @@
 		using.alpha = ui_alpha
 		src.hotkeybuttons += using
 
-	if(hud_data.has_throw)
+	if (hud_data.has_throw)
 		mymob.throw_icon = new /obj/screen()
 		mymob.throw_icon.icon = ui_style
 		mymob.throw_icon.icon_state = "act_throw_off"
@@ -171,7 +171,7 @@
 		src.hotkeybuttons += mymob.pullin
 		hud_elements |= mymob.pullin
 
-	if(hud_data.has_internals)
+	if (hud_data.has_internals)
 		mymob.internals = new /obj/screen()
 		mymob.internals.icon = ui_style
 		mymob.internals.icon_state = "internal0"
@@ -179,7 +179,7 @@
 		mymob.internals.screen_loc = ui_internal
 		hud_elements |= mymob.internals
 
-	if(hud_data.has_warnings)
+	if (hud_data.has_warnings)
 		mymob.healths = new /obj/screen()
 		mymob.healths.icon = ui_style
 		mymob.healths.icon_state = "health0"
@@ -208,7 +208,7 @@
 		mymob.fire.screen_loc = ui_fire
 		hud_elements |= mymob.fire
 
-	if(hud_data.has_pressure)
+	if (hud_data.has_pressure)
 		mymob.pressure = new /obj/screen/pressure()
 		mymob.pressure.icon = 'icons/mob/status_indicators.dmi'
 		mymob.pressure.icon_state = "pressure0"
@@ -216,7 +216,7 @@
 		mymob.pressure.screen_loc = ui_temp
 		hud_elements |= mymob.pressure
 
-	if(hud_data.has_bodytemp)
+	if (hud_data.has_bodytemp)
 		mymob.bodytemp = new /obj/screen/bodytemp()
 		mymob.bodytemp.icon = 'icons/mob/status_indicators.dmi'
 		mymob.bodytemp.icon_state = "temp1"
@@ -224,7 +224,7 @@
 		mymob.bodytemp.screen_loc = ui_temp
 		hud_elements |= mymob.bodytemp
 
-	if(target.isSynthetic())
+	if (target.isSynthetic())
 		target.cells = new /obj/screen()
 		target.cells.icon = 'icons/mob/screen1_robot.dmi'
 		target.cells.icon_state = "charge-empty"
@@ -232,7 +232,7 @@
 		target.cells.screen_loc = ui_nutrition
 		hud_elements |= target.cells
 
-	else if(hud_data.has_nutrition)
+	else if (hud_data.has_nutrition)
 		mymob.nutrition_icon = new /obj/screen/food()
 		mymob.nutrition_icon.icon = 'icons/mob/status_hunger.dmi'
 		mymob.nutrition_icon.pixel_w = 8
@@ -292,7 +292,7 @@
 	set name = "Toggle hotkey buttons"
 	set desc = "This disables or enables the user interface buttons which can be used with hotkeys."
 
-	if(hud_used.hotkey_ui_hidden)
+	if (hud_used.hotkey_ui_hidden)
 		client.screen += hud_used.hotkeybuttons
 		hud_used.hotkey_ui_hidden = 0
 	else
@@ -303,83 +303,83 @@
 // a bunch of fairly blobby logic for every click override on these objects.
 
 /obj/screen/food/Click(location, control, params)
-	if(istype(usr) && usr.nutrition_icon == src)
+	if (istype(usr) && usr.nutrition_icon == src)
 		switch(icon_state)
-			if("nutrition0")
+			if ("nutrition0")
 				to_chat(usr, SPAN_WARNING("You are completely stuffed."))
-			if("nutrition1")
+			if ("nutrition1")
 				to_chat(usr, SPAN_NOTICE("You are not hungry."))
-			if("nutrition2")
+			if ("nutrition2")
 				to_chat(usr, SPAN_NOTICE("You are a bit peckish."))
-			if("nutrition3")
+			if ("nutrition3")
 				to_chat(usr, SPAN_WARNING("You are quite hungry."))
-			if("nutrition4")
+			if ("nutrition4")
 				to_chat(usr, SPAN_DANGER("You are starving!"))
 
 /obj/screen/drink/Click(location, control, params)
-	if(istype(usr) && usr.hydration_icon == src)
+	if (istype(usr) && usr.hydration_icon == src)
 		switch(icon_state)
-			if("hydration0")
+			if ("hydration0")
 				to_chat(usr, SPAN_WARNING("You are overhydrated."))
-			if("hydration1")
+			if ("hydration1")
 				to_chat(usr, SPAN_NOTICE("You are not thirsty."))
-			if("hydration2")
+			if ("hydration2")
 				to_chat(usr, SPAN_NOTICE("You are a bit thirsty."))
-			if("hydration3")
+			if ("hydration3")
 				to_chat(usr, SPAN_WARNING("You are quite thirsty."))
-			if("hydration4")
+			if ("hydration4")
 				to_chat(usr, SPAN_DANGER("You are dying of thirst!"))
 
 /obj/screen/bodytemp/Click(location, control, params)
-	if(istype(usr) && usr.bodytemp == src)
+	if (istype(usr) && usr.bodytemp == src)
 		switch(icon_state)
-			if("temp4")
+			if ("temp4")
 				to_chat(usr, SPAN_DANGER("You are being cooked alive!"))
-			if("temp3")
+			if ("temp3")
 				to_chat(usr, SPAN_DANGER("Your body is burning up!"))
-			if("temp2")
+			if ("temp2")
 				to_chat(usr, SPAN_DANGER("You are overheating."))
-			if("temp1")
+			if ("temp1")
 				to_chat(usr, SPAN_WARNING("You are uncomfortably hot."))
-			if("temp-4")
+			if ("temp-4")
 				to_chat(usr, SPAN_DANGER("You are being frozen solid!"))
-			if("temp-3")
+			if ("temp-3")
 				to_chat(usr, SPAN_DANGER("You are freezing cold!"))
-			if("temp-2")
+			if ("temp-2")
 				to_chat(usr, SPAN_WARNING("You are dangerously chilled"))
-			if("temp-1")
+			if ("temp-1")
 				to_chat(usr, SPAN_NOTICE("You are uncomfortably cold."))
 			else
 				to_chat(usr, SPAN_NOTICE("Your body is at a comfortable temperature."))
 
 /obj/screen/pressure/Click(location, control, params)
-	if(istype(usr) && usr.pressure == src)
+	if (istype(usr) && usr.pressure == src)
 		switch(icon_state)
-			if("pressure2")
+			if ("pressure2")
 				to_chat(usr, SPAN_DANGER("The air pressure here is crushing!"))
-			if("pressure1")
+			if ("pressure1")
 				to_chat(usr, SPAN_WARNING("The air pressure here is dangerously high."))
-			if("pressure-1")
+			if ("pressure-1")
 				to_chat(usr, SPAN_WARNING("The air pressure here is dangerously low."))
-			if("pressure-2")
+			if ("pressure-2")
 				to_chat(usr, SPAN_DANGER("There is nearly no air pressure here!"))
 			else
 				to_chat(usr, SPAN_NOTICE("The local air pressure is comfortable."))
 
 /obj/screen/toxins/Click(location, control, params)
-	if(istype(usr) && usr.toxin == src)
-		if(icon_state == "tox0")
+	if (istype(usr) && usr.toxin == src)
+		if (icon_state == "tox0")
 			to_chat(usr, SPAN_NOTICE("The air is clear of toxins."))
 		else
 			to_chat(usr, SPAN_DANGER("The air is eating away at your skin!"))
 
 /obj/screen/oxygen/Click(location, control, params)
-	if(istype(usr) && usr.oxygen == src)
-		if(icon_state == "oxy0")
+	if (istype(usr) && usr.oxygen == src)
+		if (icon_state == "oxy0")
 			to_chat(usr, SPAN_NOTICE("You are breathing easy."))
 		else
 			to_chat(usr, SPAN_DANGER("You cannot breathe!"))
 
 /obj/screen/movement/Click(location, control, params)
-	if(istype(usr))
+	if (istype(usr))
 		usr.set_next_usable_move_intent()

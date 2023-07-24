@@ -12,7 +12,7 @@
 	var/fuel_cost_multiplier = 10
 
 /obj/item/weldingtool/electric/Initialize()
-	if(ispath(cell))
+	if (ispath(cell))
 		cell = new cell(src)
 	. = ..()
 
@@ -24,18 +24,18 @@
 		to_chat(user, (distance == 0 ? "It has [get_fuel()] [welding_resource] remaining. " : "") + "[cell] is attached.")
 
 /obj/item/weldingtool/electric/afterattack(obj/O, mob/user, proximity)
-	if(proximity && istype(O, /obj/structure/reagent_dispensers/fueltank))
-		if(!welding)
+	if (proximity && istype(O, /obj/structure/reagent_dispensers/fueltank))
+		if (!welding)
 			to_chat(user, SPAN_WARNING("\The [src] runs on an internal charge and does not need to be refuelled."))
 		return
 	. = ..()
 
 /obj/item/weldingtool/electric/get_cell()
-	if(cell)
+	if (cell)
 		. = cell
-	else if(istype(loc, /obj/item/rig_module))
+	else if (istype(loc, /obj/item/rig_module))
 		var/obj/item/rig_module/module = loc
-		if(istype(module.holder))
+		if (istype(module.holder))
 			. = module.holder.get_cell()
 
 /obj/item/weldingtool/electric/get_fuel()
@@ -46,10 +46,10 @@
 	return cell ? cell.charge : 0
 
 /obj/item/weldingtool/electric/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/stack/material/rods) || istype(W, /obj/item/welder_tank))
+	if (istype(W,/obj/item/stack/material/rods) || istype(W, /obj/item/welder_tank))
 		return
-	if(isScrewdriver(W))
-		if(cell)
+	if (isScrewdriver(W))
+		if (cell)
 			cell.dropInto(get_turf(src))
 			user.put_in_hands(cell)
 			to_chat(user, SPAN_NOTICE("You pop \the [cell] out of \the [src]."))
@@ -59,10 +59,10 @@
 		else
 			to_chat(user, SPAN_WARNING("\The [src] has no cell installed."))
 		return
-	else if(istype(W, /obj/item/cell))
-		if(cell)
+	else if (istype(W, /obj/item/cell))
+		if (cell)
 			to_chat(user, SPAN_WARNING("\The [src] already has a cell installed."))
-		else if(user.unEquip(W))
+		else if (user.unEquip(W))
 			cell = W
 			cell.forceMove(src)
 			to_chat(user, SPAN_NOTICE("You slot \the [cell] into \the [src]."))
@@ -73,26 +73,26 @@
 /obj/item/weldingtool/electric/burn_fuel(amount)
 	spend_charge(amount * fuel_cost_multiplier)
 	var/turf/T = get_turf(src)
-	if(T)
+	if (T)
 		T.hotspot_expose(700, 5)
 
 /obj/item/weldingtool/electric/on_update_icon()
 	underlays.Cut()
-	if(welding)
+	if (welding)
 		icon_state = "welder_arc1"
 		set_light(0.6, 0.5, 2.5, l_color = COLOR_LIGHT_CYAN)
 	else
 		icon_state = "welder_arc"
 		set_light(0)
-	if(cell)
+	if (cell)
 		underlays += image(icon = icon, icon_state = "[initial(icon_state)]_cell")
 	item_state = welding ? "welder1" : "welder"
 	var/mob/M = loc
-	if(istype(M))
+	if (istype(M))
 		M.update_inv_l_hand()
 		M.update_inv_r_hand()
 
 /obj/item/weldingtool/electric/proc/spend_charge(amount)
 	var/obj/item/cell/cell = get_cell()
-	if(cell)
+	if (cell)
 		cell.use(amount * CELLRATE)

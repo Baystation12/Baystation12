@@ -36,22 +36,22 @@
 /datum/omni_port/New(obj/machinery/atmospherics/omni/M, direction = NORTH)
 	..()
 	dir = direction
-	if(istype(M))
+	if (istype(M))
 		master = M
 	air = new
 	air.volume = 200
 
 /datum/omni_port/proc/connect()
-	if(node)
+	if (node)
 		return
 	master.atmos_init()
 	master.build_network()
-	if(node)
+	if (node)
 		node.atmos_init()
 		node.build_network()
 
 /datum/omni_port/proc/disconnect()
-	if(node)
+	if (node)
 		node.disconnect(master)
 		master.disconnect(node)
 
@@ -66,16 +66,16 @@
 /proc/dir_name(dir, capitalize = 0)
 	var/string = null
 	switch(dir)
-		if(NORTH)
+		if (NORTH)
 			string = "North"
-		if(SOUTH)
+		if (SOUTH)
 			string = "South"
-		if(EAST)
+		if (EAST)
 			string = "East"
-		if(WEST)
+		if (WEST)
 			string = "West"
 
-	if(!capitalize && string)
+	if (!capitalize && string)
 		string = lowertext(string)
 
 	return string
@@ -85,13 +85,13 @@
 /proc/dir_flag(dir)
 	dir = lowertext(dir)
 	switch(dir)
-		if("north")
+		if ("north")
 			return NORTH
-		if("south")
+		if ("south")
 			return SOUTH
-		if("east")
+		if ("east")
 			return EAST
-		if("west")
+		if ("west")
 			return WEST
 		else
 			return 0

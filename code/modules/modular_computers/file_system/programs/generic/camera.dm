@@ -1,26 +1,26 @@
 // Returns which access is relevant to passed network. Used by the program.
 // A return value of 0 indicates no access reqirement
 /proc/get_camera_access(network)
-	if(!network)
+	if (!network)
 		return 0
 	. = GLOB.using_map.get_network_access(network)
-	if(.)
+	if (.)
 		return
 
 	switch(network)
-		if(NETWORK_ENGINEERING, NETWORK_ALARM_ATMOS, NETWORK_ALARM_CAMERA, NETWORK_ALARM_FIRE, NETWORK_ALARM_POWER)
+		if (NETWORK_ENGINEERING, NETWORK_ALARM_ATMOS, NETWORK_ALARM_CAMERA, NETWORK_ALARM_FIRE, NETWORK_ALARM_POWER)
 			return access_engine
-		if(NETWORK_CRESCENT, NETWORK_ERT)
+		if (NETWORK_CRESCENT, NETWORK_ERT)
 			return access_cent_specops
-		if(NETWORK_MEDICAL)
+		if (NETWORK_MEDICAL)
 			return access_medical
-		if(NETWORK_MINE)
+		if (NETWORK_MINE)
 			return access_mailsorting // Cargo office - all cargo staff should have access here.
-		if(NETWORK_RESEARCH)
+		if (NETWORK_RESEARCH)
 			return access_research
-		if(NETWORK_THUNDER)
+		if (NETWORK_THUNDER)
 			return 0
-		if(NETWORK_HELMETS)
+		if (NETWORK_HELMETS)
 			return access_eva
 
 	return access_security // Default for all other networks
@@ -66,7 +66,7 @@
 
 	data["networks"] = all_networks
 
-	if(current_network)
+	if (current_network)
 		data["cameras"] = camera_repository.cameras_in_network(current_network)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -88,23 +88,23 @@
 
 /datum/nano_module/camera_monitor/proc/can_access_network(mob/user, network_access)
 	// No access passed, or 0 which is considered no access requirement. Allow it.
-	if(!network_access)
+	if (!network_access)
 		return 1
 
 	return check_access(user, access_security) || check_access(user, network_access)
 
 /datum/nano_module/camera_monitor/Topic(href, href_list)
-	if(..())
+	if (..())
 		return 1
 
-	if(href_list["switch_camera"])
+	if (href_list["switch_camera"])
 		var/obj/machinery/camera/C = locate(href_list["switch_camera"]) in cameranet.cameras
 		var/datum/extension/interactive/ntos/os = get_extension(nano_host(), /datum/extension/interactive/ntos)
-		if(!C)
+		if (!C)
 			return
-		if(!(current_network in C.network))
+		if (!(current_network in C.network))
 			return
-		if(!AreConnectedZLevels(get_z(C), get_z(host)) && !(get_z(C) in GLOB.using_map.admin_levels))
+		if (!AreConnectedZLevels(get_z(C), get_z(host)) && !(get_z(C) in GLOB.using_map.admin_levels))
 			to_chat(usr, "Unable to establish a connection.")
 			return
 		if (!os?.get_ntnet_status() && !C.is_helmet_cam)
@@ -117,25 +117,25 @@
 		switch_to_camera(usr, C)
 		return 1
 
-	else if(href_list["switch_network"])
+	else if (href_list["switch_network"])
 		// Either security access, or access to the specific camera network's department is required in order to access the network.
-		if(can_access_network(usr, get_camera_access(href_list["switch_network"])))
+		if (can_access_network(usr, get_camera_access(href_list["switch_network"])))
 			current_network = href_list["switch_network"]
 		else
 			to_chat(usr, "\The [nano_host()] shows an \"Network Access Denied\" error message.")
 		return 1
 
-	else if(href_list["reset"])
+	else if (href_list["reset"])
 		reset_current()
 		usr.reset_view(current_camera)
 		return 1
 
 /datum/nano_module/camera_monitor/proc/switch_to_camera(mob/user, obj/machinery/camera/C)
 	//don't need to check if the camera works for AI because the AI jumps to the camera location and doesn't actually look through cameras.
-	if(isAI(user))
+	if (isAI(user))
 		var/mob/living/silicon/ai/A = user
 		// Only allow non-carded AIs to view because the interaction with the eye gets all wonky otherwise.
-		if(!A.is_in_chassis())
+		if (!A.is_in_chassis())
 			return 0
 
 		A.eyeobj.setLoc(get_turf(C))
@@ -146,18 +146,18 @@
 	return 1
 
 /datum/nano_module/camera_monitor/proc/set_current(obj/machinery/camera/C)
-	if(current_camera == C)
+	if (current_camera == C)
 		return
 
-	if(current_camera)
+	if (current_camera)
 		reset_current()
 
 	current_camera = C
-	if(current_camera)
+	if (current_camera)
 		GLOB.destroyed_event.register(current_camera, src, .proc/reset_current)
 		GLOB.moved_event.register(current_camera, src, .proc/camera_moved)
 		var/mob/living/L = current_camera.loc
-		if(istype(L))
+		if (istype(L))
 			L.tracking_initiated()
 
 /datum/nano_module/camera_monitor/proc/camera_moved(atom/movable/moved_atom, atom/old_loc, atom/new_loc)
@@ -166,16 +166,16 @@
 	reset_current()
 
 /datum/nano_module/camera_monitor/proc/reset_current()
-	if(current_camera)
+	if (current_camera)
 		GLOB.destroyed_event.unregister(current_camera, src, .proc/reset_current)
 		GLOB.moved_event.unregister(current_camera, src, .proc/camera_moved)
 		var/mob/living/L = current_camera.loc
-		if(istype(L))
+		if (istype(L))
 			L.tracking_cancelled()
 	current_camera = null
 
 /datum/nano_module/camera_monitor/check_eye(mob/user as mob)
-	if(!current_camera)
+	if (!current_camera)
 		return 0
 	var/viewflag = current_camera.check_eye(user)
 	if ( viewflag < 0 ) //camera doesn't work
@@ -204,11 +204,11 @@
 	return networks
 
 /datum/nano_module/camera_monitor/apply_visual(mob/M)
-	if(current_camera)
+	if (current_camera)
 		current_camera.apply_visual(M)
 	else
 		remove_visual(M)
 
 /datum/nano_module/camera_monitor/remove_visual(mob/M)
-	if(current_camera)
+	if (current_camera)
 		current_camera.remove_visual(M)

@@ -31,7 +31,7 @@
 	data["power_usage"] = program.computer.get_power_usage()
 	var/obj/item/stock_parts/computer/battery_module/battery_module = program.computer.get_component(PART_BATTERY)
 	data["battery_exists"] = !!battery_module
-	if(battery_module)
+	if (battery_module)
 		data["battery_rating"] = battery_module.battery.maxcharge
 		data["battery_percent"] = round(battery_module.battery.percent())
 

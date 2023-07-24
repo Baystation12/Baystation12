@@ -43,7 +43,7 @@
 		hurt_players(FALSE)
 		playsound(holder, activation_sound, 100)
 		var/datum/gas_mixture/env = holder.loc.return_air()
-		if(env && env.temperature < target_temp)
+		if (env && env.temperature < target_temp)
 			env.temperature += rand(2, 10)
 		if (send_message)
 			holder.visible_message(SPAN_DANGER("\The [holder] [pick(activation_messages)]"))
@@ -122,7 +122,7 @@
 
 	DoEffectPulse(FALSE)
 	for(var/mob/M in GLOB.player_list)
-		if((M.z == holder.z) && !istype(M,/mob/new_player))
+		if ((M.z == holder.z) && !istype(M,/mob/new_player))
 			to_chat(M, SPAN_DANGER(FONT_LARGE("Agonized screams fill your ears as the world around you briefly burns in hellfire!")))
 			if (istype(M, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M

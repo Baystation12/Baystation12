@@ -51,7 +51,7 @@
 	)
 
 /datum/species/golem/handle_post_spawn(mob/living/carbon/human/H)
-	if(H.mind)
+	if (H.mind)
 		H.mind.reset()
 		H.mind.assigned_role = "Golem"
 		H.mind.special_role = "Golem"

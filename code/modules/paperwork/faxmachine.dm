@@ -52,13 +52,13 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 
 /obj/machinery/photocopier/faxmachine/attackby(obj/item/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/paper))
+	if (istype(O, /obj/item/paper))
 		var/obj/item/paper/P = O
-		if(!P.readable)
+		if (!P.readable)
 			to_chat(user, SPAN_NOTICE("\The [src] beeps. Error, invalid document detected."))
 			return
-	if(istype(O, /obj/item/card/id))
-		if(!user.unEquip(O, src))
+	if (istype(O, /obj/item/card/id))
+		if (!user.unEquip(O, src))
 			return
 		scan = O
 		to_chat(user, SPAN_NOTICE("You insert \the [O] into \the [src]."))
@@ -131,24 +131,24 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	dat += "Linked PDAs: [LAZYLEN(linked_pdas)]<br />"
 
 	var/scan_name
-	if(scan)
+	if (scan)
 		scan_name = scan.name
 	else
 		scan_name = "--------"
 
 	dat += "Confirm Identity: <a href='byond://?src=\ref[src];scan=1'>[scan_name]</a><br>"
 
-	if(authenticated)
+	if (authenticated)
 		dat += "<a href='byond://?src=\ref[src];logout=1'>{Log Out}</a>"
 	else
 		dat += "<a href='byond://?src=\ref[src];auth=1'>{Log In}</a>"
 
 	dat += "<hr>"
 
-	if(authenticated)
+	if (authenticated)
 		dat += "<b>Logged in to:</b> [GLOB.using_map.boss_name] Quantum Entanglement Network<br><br>"
 
-		if(copyitem)
+		if (copyitem)
 			dat += "<a href='byond://?src=\ref[src];remove=1'>Remove Item</a><br><br>"
 			dat += "<a href='byond://?src=\ref[src];send=1'>Send</a><br>"
 			dat += "<b>Currently sending:</b> [copyitem.name]<br>"
@@ -160,7 +160,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	else
 		dat += "Proper authentication is required to use this device.<br><br>"
 
-		if(copyitem)
+		if (copyitem)
 			dat += "<a href ='byond://?src=\ref[src];remove=1'>Remove Item</a><br>"
 
 	show_browser(user, dat, "window=copier")
@@ -168,21 +168,21 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	return
 
 /obj/machinery/photocopier/faxmachine/OnTopic(mob/user, href_list, state)
-	if(href_list["send"])
-		if(copyitem)
+	if (href_list["send"])
+		if (copyitem)
 			if (destination in GLOB.admin_departments)
 				send_admin_fax(user, destination)
 			else
 				sendfax(destination)
 		return TOPIC_REFRESH
 
-	if(href_list["remove"])
+	if (href_list["remove"])
 		OnRemove(user)
 		return TOPIC_REFRESH
 
-	if(href_list["scan"])
+	if (href_list["scan"])
 		if (scan)
-			if(ishuman(user))
+			if (ishuman(user))
 				user.put_in_hands(scan)
 			else
 				scan.dropInto(loc)
@@ -194,24 +194,24 @@ GLOBAL_LIST_EMPTY(admin_departments)
 		authenticated = 0
 		return TOPIC_REFRESH
 
-	if(href_list["dept"])
+	if (href_list["dept"])
 		var/desired_destination = input(user, "Which department?", "Choose a department", "") as null|anything in (GLOB.alldepartments + GLOB.admin_departments)
-		if(desired_destination && CanInteract(user, state))
+		if (desired_destination && CanInteract(user, state))
 			destination = desired_destination
 		return TOPIC_REFRESH
 
-	if(href_list["auth"])
+	if (href_list["auth"])
 		if ( (!( authenticated ) && (scan)) )
 			if (has_access(send_access, scan.GetAccess()))
 				authenticated = 1
 		return TOPIC_REFRESH
 
-	if(href_list["logout"])
+	if (href_list["logout"])
 		authenticated = 0
 		return TOPIC_REFRESH
 
 /obj/machinery/photocopier/faxmachine/proc/sendfax(destination)
-	if(inoperable())
+	if (inoperable())
 		return
 
 	use_power_oneoff(200)
@@ -267,7 +267,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 
 /obj/machinery/photocopier/faxmachine/proc/send_admin_fax(mob/sender, destination)
-	if(inoperable())
+	if (inoperable())
 		return
 
 	use_power_oneoff(200)
@@ -301,7 +301,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	msg = SPAN_NOTICE(msg)
 
 	for(var/client/C as anything in GLOB.admins)
-		if(check_rights((R_ADMIN|R_MOD),0,C))
+		if (check_rights((R_ADMIN|R_MOD),0,C))
 			to_chat(C, msg)
 			sound_to(C, 'sound/machines/dotprinter.ogg')
 

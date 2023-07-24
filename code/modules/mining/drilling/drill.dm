@@ -47,56 +47,56 @@
 	var/need_player_check = 0
 
 /obj/machinery/mining/drill/Process()
-	if(need_player_check)
+	if (need_player_check)
 		return
 
 	check_supports()
 
-	if(!active) return
+	if (!active) return
 
-	if(!anchored)
+	if (!anchored)
 		system_error("system configuration error")
 		return
 
-	if(!is_powered())
+	if (!is_powered())
 		system_error("insufficient charge")
 		return
 
-	if(need_update_field)
+	if (need_update_field)
 		get_resource_field()
 
-	if(world.time % 10 == 0)
+	if (world.time % 10 == 0)
 		update_icon()
 
-	if(!active)
+	if (!active)
 		return
 
 	//Drill through the flooring, if any.
-	if(istype(get_turf(src), /turf/simulated/floor/asteroid))
+	if (istype(get_turf(src), /turf/simulated/floor/asteroid))
 		var/turf/simulated/floor/asteroid/T = get_turf(src)
-		if(!T.dug)
+		if (!T.dug)
 			T.gets_dug()
-	else if(istype(get_turf(src), /turf/simulated/floor/exoplanet))
+	else if (istype(get_turf(src), /turf/simulated/floor/exoplanet))
 		var/turf/simulated/floor/exoplanet/T = get_turf(src)
-		if(T.diggable)
+		if (T.diggable)
 			new /obj/structure/pit(T)
 			T.diggable = 0
-	else if(istype(get_turf(src), /turf/simulated/floor))
+	else if (istype(get_turf(src), /turf/simulated/floor))
 		var/turf/simulated/floor/T = get_turf(src)
 		T.ex_act(EX_ACT_HEAVY)
 
 	//Dig out the tasty ores.
-	if(length(resource_field))
+	if (length(resource_field))
 		var/turf/simulated/harvesting = pick(resource_field)
 
 		while(length(resource_field) && !harvesting.resources)
 			harvesting.has_resources = 0
 			harvesting.resources = null
 			resource_field -= harvesting
-			if(length(resource_field))
+			if (length(resource_field))
 				harvesting = pick(resource_field)
 
-		if(!harvesting || !harvesting.resources)
+		if (!harvesting || !harvesting.resources)
 			return
 
 		var/total_harvest = harvest_speed //Ore harvest-per-tick.
@@ -104,23 +104,23 @@
 
 		for(var/metal in ore_types)
 
-			if(length(contents) >= capacity)
+			if (length(contents) >= capacity)
 				system_error("insufficient storage space")
 				set_active(FALSE)
 				need_player_check = 1
 				update_icon()
 				return
 
-			if(length(contents) + total_harvest >= capacity)
+			if (length(contents) + total_harvest >= capacity)
 				total_harvest = capacity - length(contents)
 
-			if(total_harvest <= 0) break
-			if(harvesting.resources[metal])
+			if (total_harvest <= 0) break
+			if (harvesting.resources[metal])
 
 				found_resource  = 1
 
 				var/create_ore = 0
-				if(harvesting.resources[metal] >= total_harvest)
+				if (harvesting.resources[metal] >= total_harvest)
 					harvesting.resources[metal] -= total_harvest
 					create_ore = total_harvest
 					total_harvest = 0
@@ -133,7 +133,7 @@
 					var/oretype = ore_types[metal]
 					new oretype(src)
 
-		if(!found_resource)
+		if (!found_resource)
 			harvesting.has_resources = 0
 			harvesting.resources = null
 			resource_field -= harvesting
@@ -143,12 +143,12 @@
 		update_icon()
 
 /obj/machinery/mining/drill/proc/set_active(new_active)
-	if(active != new_active)
+	if (active != new_active)
 		active = new_active
 		update_use_power(active ? POWER_USE_ACTIVE : POWER_USE_OFF)
 
 /obj/machinery/mining/drill/cannot_transition_to(state_path)
-	if(active)
+	if (active)
 		return SPAN_NOTICE("You must turn \the [src] off first.")
 	return ..()
 
@@ -157,19 +157,19 @@
 
 /obj/machinery/mining/drill/physical_attack_hand(mob/user as mob)
 	check_supports()
-	if(need_player_check)
-		if(can_use_power_oneoff(10 KILOWATTS))
+	if (need_player_check)
+		if (can_use_power_oneoff(10 KILOWATTS))
 			system_error("insufficient charge")
-		else if(anchored)
+		else if (anchored)
 			get_resource_field()
 		to_chat(user, "You hit the manual override and reset the drill's error checking.")
 		need_player_check = 0
 		update_icon()
 		return TRUE
-	if(supported && !panel_open)
-		if(is_powered())
+	if (supported && !panel_open)
+		if (is_powered())
 			set_active(!active)
-			if(active)
+			if (active)
 				visible_message(SPAN_NOTICE("\The [src] lurches downwards, grinding noisily."))
 				need_update_field = 1
 			else
@@ -183,12 +183,12 @@
 	return TRUE
 
 /obj/machinery/mining/drill/on_update_icon()
-	if(need_player_check)
+	if (need_player_check)
 		icon_state = "mining_drill_error"
-	else if(active)
+	else if (active)
 		var/status = clamp(round( (length(contents) / capacity) * 4 ), 0, 3)
 		icon_state = "mining_drill_active[status]"
-	else if(supported)
+	else if (supported)
 		icon_state = "mining_drill_braced"
 	else
 		icon_state = "mining_drill"
@@ -205,20 +205,20 @@
 
 	supported = 0
 
-	if((!supports || !length(supports)) && initial(anchored) == 0)
+	if ((!supports || !length(supports)) && initial(anchored) == 0)
 		anchored = FALSE
 		set_active(FALSE)
 	else
 		anchored = TRUE
 
-	if(supports && length(supports) >= braces_needed)
+	if (supports && length(supports) >= braces_needed)
 		supported = 1
 
 	update_icon()
 
 /obj/machinery/mining/drill/proc/system_error(error)
 
-	if(error)
+	if (error)
 		src.visible_message(SPAN_NOTICE("\The [src] flashes a '[error]' warning."))
 	need_player_check = 1
 	set_active(FALSE)
@@ -240,10 +240,10 @@
 	set category = "Object"
 	set src in oview(1)
 
-	if(usr.stat) return
+	if (usr.stat) return
 
 	var/obj/structure/ore_box/B = locate() in orange(1)
-	if(B)
+	if (B)
 		for(var/obj/item/ore/O in contents)
 			O.forceMove(B)
 		to_chat(usr, SPAN_NOTICE("You unload the drill's storage cache into the ore box."))
@@ -264,19 +264,19 @@
 	var/obj/machinery/mining/drill/connected
 
 /obj/machinery/mining/brace/cannot_transition_to(state_path)
-	if(connected && connected.active)
+	if (connected && connected.active)
 		return SPAN_NOTICE("You can't work with the brace of a running drill!")
 	return ..()
 
 /obj/machinery/mining/brace/attackby(obj/item/W as obj, mob/user as mob)
-	if(connected && connected.active)
+	if (connected && connected.active)
 		to_chat(user, SPAN_NOTICE("You can't work with the brace of a running drill!"))
 		return TRUE
-	if(component_attackby(W, user))
+	if (component_attackby(W, user))
 		return TRUE
-	if(isWrench(W))
+	if (isWrench(W))
 
-		if(istype(get_turf(src), /turf/space))
+		if (istype(get_turf(src), /turf/space))
 			to_chat(user, SPAN_NOTICE("You can't anchor something to empty space. Idiot."))
 			return
 
@@ -284,7 +284,7 @@
 		to_chat(user, SPAN_NOTICE("You [anchored ? "un" : ""]anchor the brace."))
 
 		anchored = !anchored
-		if(anchored)
+		if (anchored)
 			connect()
 		else
 			disconnect()
@@ -294,14 +294,14 @@
 	var/turf/T = get_step(get_turf(src), src.dir)
 
 	for(var/thing in T.contents)
-		if(istype(thing, /obj/machinery/mining/drill))
+		if (istype(thing, /obj/machinery/mining/drill))
 			connected = thing
 			break
 
-	if(!connected)
+	if (!connected)
 		return
 
-	if(!connected.supports)
+	if (!connected.supports)
 		connected.supports = list()
 
 	icon_state = "mining_brace_active"
@@ -311,9 +311,9 @@
 
 /obj/machinery/mining/brace/proc/disconnect()
 
-	if(!connected) return
+	if (!connected) return
 
-	if(!connected.supports) connected.supports = list()
+	if (!connected.supports) connected.supports = list()
 
 	icon_state = "mining_brace"
 
@@ -322,6 +322,6 @@
 	connected = null
 
 /obj/machinery/mining/brace/dismantle()
-	if(connected)
+	if (connected)
 		disconnect()
 	..()

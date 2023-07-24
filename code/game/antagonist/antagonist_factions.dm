@@ -1,30 +1,30 @@
 /mob/living/proc/convert_to_rev(mob/M as mob in able_mobs_in_oview(src))
 	set name = "Recruit to Faction"
 	set category = "Abilities"
-	if(!M.mind || !M.client)
+	if (!M.mind || !M.client)
 		return
 	convert_to_faction(M.mind, GLOB.revs)
 
 /mob/living/proc/convert_to_faction(datum/mind/player, datum/antagonist/faction)
 
-	if(!player || !faction || !player.current)
+	if (!player || !faction || !player.current)
 		return
 
-	if(!faction.faction_verb || !faction.faction_descriptor || !faction.faction_verb)
+	if (!faction.faction_verb || !faction.faction_descriptor || !faction.faction_verb)
 		return
 
-	if(player_is_antag(player))
+	if (player_is_antag(player))
 		to_chat(src, SPAN_WARNING("\The [player.current]'s loyalties seem to be elsewhere..."))
 		log_debug("\The [src] attempted to convert \the [player.current] to [faction], but failed: Player is already an antagonist.")
 		return
 
 	var/result = faction.can_become_antag_detailed(player, TRUE)
-	if(result)
+	if (result)
 		to_chat(src, SPAN_WARNING("\The [player.current] cannot be \a [faction.faction_role_text]!"))
 		log_debug("\The [src] attempted to convert \the [player.current] to [faction], but failed: [result]")
 		return
 
-	if(world.time < player.rev_cooldown)
+	if (world.time < player.rev_cooldown)
 		to_chat(src, SPAN_DANGER("You must wait five seconds between attempts."))
 		return
 
@@ -35,7 +35,7 @@
 	player.rev_cooldown = world.time + 5 SECONDS
 	if (!faction.is_antagonist(player))
 		var/choice = alert(player.current,"Asked by [src]: Do you want to join the [faction.faction_descriptor]?","Join the [faction.faction_descriptor]?","No!","Yes!")
-		if(choice == "Yes!" && faction.add_antagonist_mind(player, 0, faction.faction_role_text, faction.faction_welcome))
+		if (choice == "Yes!" && faction.add_antagonist_mind(player, 0, faction.faction_role_text, faction.faction_welcome))
 			to_chat(src, SPAN_NOTICE("\The [player.current] joins the [faction.faction_descriptor]!"))
 			log_debug("\The [src] has successfully converted \the [player.current] to [faction].")
 			return
@@ -47,6 +47,6 @@
 /mob/living/proc/convert_to_loyalist(mob/M as mob in able_mobs_in_oview(src))
 	set name = "Convert"
 	set category = "Abilities"
-	if(!M.mind || !M.client)
+	if (!M.mind || !M.client)
 		return
 	convert_to_faction(M.mind, GLOB.loyalists)

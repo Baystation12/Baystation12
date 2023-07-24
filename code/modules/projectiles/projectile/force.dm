@@ -10,7 +10,7 @@
 	name = "force bolt"
 
 /obj/item/projectile/forcebolt/on_hit(atom/movable/target, blocked = 0)
-	if(istype(target))
+	if (istype(target))
 		var/throwdir = get_dir(firer,target)
 		target.throw_at(get_edge_target_turf(target, throwdir),10,10)
 		return 1

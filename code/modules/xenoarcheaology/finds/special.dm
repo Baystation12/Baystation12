@@ -32,16 +32,16 @@
 	return ..()
 
 /obj/item/clothing/mask/gas/poltergeist/Process()
-	if(length(heard_talk) && istype(src.loc, /mob/living) && prob(10))
+	if (length(heard_talk) && istype(src.loc, /mob/living) && prob(10))
 		var/mob/living/M = src.loc
 		M.say(pick(heard_talk))
 
 /obj/item/clothing/mask/gas/poltergeist/hear_talk(mob/M as mob, text)
 	..()
-	if(length(heard_talk) > max_stored_messages)
+	if (length(heard_talk) > max_stored_messages)
 		heard_talk.Remove(pick(heard_talk))
 	heard_talk.Add(text)
-	if(istype(src.loc, /mob/living) && world.time - last_twitch > 50)
+	if (istype(src.loc, /mob/living) && world.time - last_twitch > 50)
 		last_twitch = world.time
 
 
@@ -73,19 +73,19 @@
 
 /obj/item/vampiric/Process()
 	//see if we've identified anyone nearby
-	if(world.time - last_bloodcall > bloodcall_interval && length(nearby_mobs))
+	if (world.time - last_bloodcall > bloodcall_interval && length(nearby_mobs))
 		var/mob/living/carbon/human/M = pop(nearby_mobs)
-		if(M in view(7,src) && M.health > 20)
-			if(prob(50))
+		if (M in view(7,src) && M.health > 20)
+			if (prob(50))
 				bloodcall(M)
 				nearby_mobs.Add(M)
 
 	//suck up some blood to gain power
-	if(world.time - last_eat > eat_interval)
+	if (world.time - last_eat > eat_interval)
 		var/obj/effect/decal/cleanable/blood/B = locate() in range(2,src)
-		if(B)
+		if (B)
 			last_eat = world.time
-			if(istype(B, /obj/effect/decal/cleanable/blood/drip))
+			if (istype(B, /obj/effect/decal/cleanable/blood/drip))
 				charges += 0.25
 			else
 				charges += 1
@@ -93,50 +93,50 @@
 			qdel(B)
 
 	//use up stored charges
-	if(charges >= 10)
+	if (charges >= 10)
 		charges -= 10
 		new /obj/effect/spider/eggcluster(pick(view(1,src)))
 
-	if(charges >= 3)
-		if(prob(5))
+	if (charges >= 3)
+		if (prob(5))
 			charges -= 1
 			var/spawn_type = pick(/mob/living/simple_animal/hostile/creature)
 			new spawn_type(pick(view(1,src)))
 			playsound(src.loc, pick('sound/hallucinations/growl1.ogg','sound/hallucinations/growl2.ogg','sound/hallucinations/growl3.ogg'), 50, 1, -3)
 
-	if(charges >= 1)
-		if(length(shadow_wights) < 5 && prob(5))
+	if (charges >= 1)
+		if (length(shadow_wights) < 5 && prob(5))
 			shadow_wights.Add(new /obj/effect/shadow_wight(src.loc))
 			playsound(src.loc, 'sound/effects/ghost.ogg', 50, 1, -3)
 			charges -= 0.1
 
-	if(charges >= 0.1)
-		if(prob(5))
+	if (charges >= 0.1)
+		if (prob(5))
 			src.visible_message(SPAN_WARNING("[icon2html(src, viewers(get_turf(src)))] [src]'s eyes glow ruby red for a moment!"))
 			charges -= 0.1
 
 	//check on our shadow wights
-	if(length(shadow_wights))
+	if (length(shadow_wights))
 		wight_check_index++
-		if(wight_check_index > length(shadow_wights))
+		if (wight_check_index > length(shadow_wights))
 			wight_check_index = 1
 
 		var/obj/effect/shadow_wight/W = shadow_wights[wight_check_index]
-		if(isnull(W))
+		if (isnull(W))
 			shadow_wights.Remove(wight_check_index)
-		else if(isnull(W.loc))
+		else if (isnull(W.loc))
 			shadow_wights.Remove(wight_check_index)
-		else if(get_dist(W, src) > 10)
+		else if (get_dist(W, src) > 10)
 			shadow_wights.Remove(wight_check_index)
 
 /obj/item/vampiric/hear_talk(mob/M as mob, text)
 	..()
-	if(world.time - last_bloodcall >= bloodcall_interval && (M in view(7, src)))
+	if (world.time - last_bloodcall >= bloodcall_interval && (M in view(7, src)))
 		bloodcall(M)
 
 /obj/item/vampiric/proc/bloodcall(mob/living/carbon/human/M)
 	last_bloodcall = world.time
-	if(istype(M))
+	if (istype(M))
 		playsound(src.loc, pick('sound/hallucinations/wail.ogg','sound/hallucinations/veryfar_noise.ogg','sound/hallucinations/far_noise.ogg'), 50, 1, -3)
 		nearby_mobs.Add(M)
 
@@ -164,20 +164,20 @@
 	return ..()
 
 /obj/effect/decal/cleanable/blood/splatter/animated/Process()
-	if(target_turf && src.loc != target_turf)
+	if (target_turf && src.loc != target_turf)
 		step_towards(src,target_turf)
-		if(src.loc == loc_last_process)
+		if (src.loc == loc_last_process)
 			target_turf = null
 		loc_last_process = src.loc
 
 		//leave some drips behind
-		if(prob(50))
+		if (prob(50))
 			var/obj/effect/decal/cleanable/blood/drip/D = new(src.loc)
 			D.blood_DNA = src.blood_DNA.Copy()
-			if(prob(50))
+			if (prob(50))
 				D = new(src.loc)
 				D.blood_DNA = src.blood_DNA.Copy()
-				if(prob(50))
+				if (prob(50))
 					D = new(src.loc)
 					D.blood_DNA = src.blood_DNA.Copy()
 	else
@@ -198,10 +198,10 @@
 	return ..()
 
 /obj/effect/shadow_wight/Process()
-	if(loc)
+	if (loc)
 		step_rand(src)
 		var/mob/living/carbon/M = locate() in src.loc
-		if(M)
+		if (M)
 			playsound(src.loc, pick('sound/hallucinations/behind_you1.ogg',\
 			'sound/hallucinations/behind_you2.ogg',\
 			'sound/hallucinations/i_see_you1.ogg',\

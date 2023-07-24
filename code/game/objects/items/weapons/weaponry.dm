@@ -22,8 +22,8 @@
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(M)
-	//if(user != M)
-	if(M.mind && LAZYLEN(M.mind.learned_spells))
+	//if (user != M)
+	if (M.mind && LAZYLEN(M.mind.learned_spells))
 		M.silence_spells(300) //30 seconds
 		to_chat(M, SPAN_DANGER("You've been silenced!"))
 		return
@@ -38,7 +38,7 @@
 		user.Paralyse(20)
 		return
 
-	if(GLOB.cult && iscultist(M))
+	if (GLOB.cult && iscultist(M))
 		M.visible_message(SPAN_NOTICE("\The [user] waves \the [src] over \the [M]'s head."))
 		GLOB.cult.offer_uncult(M)
 		return
@@ -62,7 +62,7 @@
 /obj/item/energy_net/dropped()
 	..()
 	spawn(10)
-		if(src) qdel(src)
+		if (src) qdel(src)
 
 /obj/item/energy_net/throw_impact(atom/hit_atom)
 	..()
@@ -71,19 +71,19 @@
 // This will validate the hit_atom, then spawn an energy_net effect and qdel itself
 /obj/item/energy_net/proc/try_capture_mob(mob/living/M)
 
-	if(!istype(M) || locate(/obj/effect/energy_net) in M.loc)
+	if (!istype(M) || locate(/obj/effect/energy_net) in M.loc)
 		qdel(src)
 		return FALSE
 
 	var/turf/T = get_turf(M)
-	if(T)
+	if (T)
 		var/obj/effect/energy_net/net_effect = new net_type(T)
 		net_effect.capture_mob(M)
 		qdel(src)
 
 	// If we miss or hit an obstacle, we still want to delete the net.
 	spawn(10)
-		if(src) qdel(src)
+		if (src) qdel(src)
 
 /obj/effect/energy_net
 	name = "energy net"
@@ -121,30 +121,30 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/effect/energy_net/Destroy()
-	if(istype(captured, /mob/living/carbon))
-		if(captured.handcuffed == src)
+	if (istype(captured, /mob/living/carbon))
+		if (captured.handcuffed == src)
 			captured.handcuffed = null
-	if(captured)
+	if (captured)
 		unbuckle_mob()
 	STOP_PROCESSING(SSobj, src)
 	captured = null
 	return ..()
 
 /obj/effect/energy_net/Process()
-	if(temporary)
+	if (temporary)
 		countdown--
-	if(!captured || captured.buckled != src)
+	if (!captured || captured.buckled != src)
 		kill_health()
-	if(get_turf(src) != get_turf(captured))  //just in case they somehow teleport around or
+	if (get_turf(src) != get_turf(captured))  //just in case they somehow teleport around or
 		countdown = 0
-	if(countdown <= 0)
+	if (countdown <= 0)
 		visible_message(SPAN_WARNING("\The [src] fades away!"))
 		qdel(src)
 
 /obj/effect/energy_net/Move()
 	..()
 
-	if(buckled_mob)
+	if (buckled_mob)
 		buckled_mob.forceMove(src.loc)
 	else
 		countdown = 0
@@ -152,17 +152,17 @@
 
 /obj/effect/energy_net/proc/capture_mob(mob/living/M)
 	captured = M
-	if(M.buckled)
+	if (M.buckled)
 		M.buckled.unbuckle_mob()
 	buckle_mob(M)
-	if(istype(M, /mob/living/carbon))
+	if (istype(M, /mob/living/carbon))
 		var/mob/living/carbon/C = M
-		if(!C.handcuffed)
+		if (!C.handcuffed)
 			C.handcuffed = src
 	return 1
 
 /obj/effect/energy_net/post_buckle_mob(mob/living/M)
-	if(buckled_mob)
+	if (buckled_mob)
 		layer = ABOVE_HUMAN_LAYER
 		visible_message("\The [M] was caught in [src]!")
 	else
@@ -182,8 +182,8 @@
 		SPAN_WARNING("You claw at \the [src]!")
 	)
 	var/mob/living/carbon/human/H = user
-	if(istype(H))
-		if(H.species.can_shred(H))
+	if (istype(H))
+		if (H.species.can_shred(H))
 			playsound(src.loc, 'sound/weapons/slash.ogg', 80, 1)
 			damage_health(rand(10, 20))
 		else

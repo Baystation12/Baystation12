@@ -20,25 +20,25 @@
 
 /singleton/security_state/New()
 	// Setup the severe security level
-	if(!(severe_security_level in all_security_levels))
+	if (!(severe_security_level in all_security_levels))
 		severe_security_level = all_security_levels[length(all_security_levels)]
 	severe_security_level = GET_SINGLETON(severe_security_level)
 
 	// Setup the high security level
-	if(!(high_security_level in all_security_levels))
+	if (!(high_security_level in all_security_levels))
 		high_security_level = all_security_levels[length(all_security_levels) - 1]
 	high_security_level = GET_SINGLETON(high_security_level)
 
 	// Setup the highest standard security level
-	if(highest_standard_security_level || isnull(highest_standard_security_level))
-		if(!(highest_standard_security_level in all_security_levels))
+	if (highest_standard_security_level || isnull(highest_standard_security_level))
+		if (!(highest_standard_security_level in all_security_levels))
 			highest_standard_security_level = all_security_levels[length(all_security_levels) - 1]
 		highest_standard_security_level = GET_SINGLETON(highest_standard_security_level)
 	else
 		highest_standard_security_level = null
 
 	// Setup the current security level
-	if(current_security_level in all_security_levels)
+	if (current_security_level in all_security_levels)
 		current_security_level = GET_SINGLETON(current_security_level)
 	else
 		current_security_level = GET_SINGLETON(all_security_levels[1])
@@ -53,20 +53,20 @@
 	// Setup the list of normally selectable security levels
 	for(var/security_level in all_security_levels)
 		standard_security_levels += security_level
-		if(security_level == highest_standard_security_level)
+		if (security_level == highest_standard_security_level)
 			break
 
 	comm_console_security_levels = list()
 	// Setup the list of selectable security levels available in the comm. console
 	for(var/security_level in all_security_levels)
-		if(security_level == highest_standard_security_level)
+		if (security_level == highest_standard_security_level)
 			break
 		comm_console_security_levels += security_level
 
 	// Now we ensure the high security level is not above the severe one (but we allow them to be equal)
 	var/severe_index = all_security_levels.Find(severe_security_level)
 	var/high_index = all_security_levels.Find(high_security_level)
-	if(high_index > severe_index)
+	if (high_index > severe_index)
 		high_security_level = severe_security_level
 
 /singleton/security_state/Initialize()
@@ -78,7 +78,7 @@
 	return current_security_level in standard_security_levels
 
 /singleton/security_state/proc/can_switch_to(given_security_level)
-	if(!can_change_security_level())
+	if (!can_change_security_level())
 		return FALSE
 	return given_security_level in standard_security_levels
 
@@ -101,11 +101,11 @@
 	return given_index && current_index > given_index
 
 /singleton/security_state/proc/set_security_level(singleton/security_level/new_security_level, force_change = FALSE)
-	if(new_security_level == current_security_level)
+	if (new_security_level == current_security_level)
 		return FALSE
-	if(!(new_security_level in all_security_levels))
+	if (!(new_security_level in all_security_levels))
 		return FALSE
-	if(!force_change && !can_switch_to(new_security_level))
+	if (!force_change && !can_switch_to(new_security_level))
 		return FALSE
 
 	var/singleton/security_level/previous_security_level = current_security_level
@@ -114,7 +114,7 @@
 	var/previous_index = all_security_levels.Find(previous_security_level)
 	var/new_index      = all_security_levels.Find(new_security_level)
 
-	if(new_index > previous_index)
+	if (new_index > previous_index)
 		previous_security_level.switching_up_from()
 		new_security_level.switching_up_to()
 	else
@@ -131,7 +131,7 @@
 // This proc decreases the current security level, if possible
 /singleton/security_state/proc/decrease_security_level(force_change = FALSE)
 	var/current_index = all_security_levels.Find(current_security_level)
-	if(current_index == 1)
+	if (current_index == 1)
 		return FALSE
 	return set_security_level(all_security_levels[current_index - 1], force_change)
 
@@ -184,18 +184,18 @@
 	var/static/datum/announcement/priority/security/security_announcement_down = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice1.ogg'))
 
 /singleton/security_level/default/switching_up_to()
-	if(up_description)
+	if (up_description)
 		security_announcement_up.Announce(up_description, "Attention! Alert level elevated to [name]!")
 	notify_station()
 
 /singleton/security_level/default/switching_down_to()
-	if(down_description)
+	if (down_description)
 		security_announcement_down.Announce(down_description, "Attention! Alert level changed to [name]!")
 	notify_station()
 
 /singleton/security_level/default/proc/notify_station()
 	for(var/obj/machinery/firealarm/FA in SSmachines.machinery)
-		if(FA.z in GLOB.using_map.contact_levels)
+		if (FA.z in GLOB.using_map.contact_levels)
 			FA.update_icon()
 	for (var/obj/machinery/rotating_alarm/security_alarm/SA in SSmachines.machinery)
 		if (SA.z in GLOB.using_map.contact_levels)

@@ -21,59 +21,59 @@
 	If you have any  questions about this stuff feel free to ask. ~Carn
 	*/
 /client/Topic(href, href_list, hsrc)
-	if(!usr || usr != mob)	//stops us calling Topic for somebody else's client. Also helps prevent usr=null
+	if (!usr || usr != mob)	//stops us calling Topic for somebody else's client. Also helps prevent usr=null
 		return
-	if(!user_acted(src))
+	if (!user_acted(src))
 		return
 
 	#if defined(TOPIC_DEBUGGING)
 	log_debug("[src]'s Topic: [href] destined for [hsrc].")
 
-	if(href_list["nano_err"]) //nano throwing errors
+	if (href_list["nano_err"]) //nano throwing errors
 		log_debug("## NanoUI, Subject [src]: " + html_decode(href_list["nano_err"]))//NANO DEBUG HOOK
 
 
 	#endif
 
 	// asset_cache
-	if(href_list["asset_cache_confirm_arrival"])
+	if (href_list["asset_cache_confirm_arrival"])
 //		to_chat(src, "ASSET JOB [href_list["asset_cache_confirm_arrival"]] ARRIVED.")
 		var/job = text2num(href_list["asset_cache_confirm_arrival"])
 		completed_asset_jobs += job
 		return
 
 	//search the href for script injection
-	if( findtext(href,"<script",1,0) )
+	if ( findtext(href,"<script",1,0) )
 		to_world_log("Attempted use of scripts within a topic call, by [src]")
 		message_admins("Attempted use of scripts within a topic call, by [src]")
 		//qdel(usr)
 		return
 
 	//Admin PM
-	if(href_list["priv_msg"])
+	if (href_list["priv_msg"])
 		var/client/C = locate(href_list["priv_msg"])
 		var/datum/ticket/ticket = locate(href_list["ticket"])
 
-		if(ismob(C)) 		//Old stuff can feed-in mobs instead of clients
+		if (ismob(C)) 		//Old stuff can feed-in mobs instead of clients
 			var/mob/M = C
 			C = M.client
 		cmd_admin_pm(C, null, ticket)
 		return
 
-	if(href_list["irc_msg"])
-		if(!holder && received_irc_pm < world.time - 6000) //Worse they can do is spam IRC for 10 minutes
+	if (href_list["irc_msg"])
+		if (!holder && received_irc_pm < world.time - 6000) //Worse they can do is spam IRC for 10 minutes
 			to_chat(usr, SPAN_WARNING("You are no longer able to use this, it's been more then 10 minutes since an admin on IRC has responded to you"))
 			return
-		if(mute_irc)
+		if (mute_irc)
 			to_chat(usr, SPAN_WARNING("You cannot use this as your client has been muted from sending messages to the admins on IRC"))
 			return
 		cmd_admin_irc_pm(href_list["irc_msg"])
 		return
 
-	if(href_list["close_ticket"])
+	if (href_list["close_ticket"])
 		var/datum/ticket/ticket = locate(href_list["close_ticket"])
 
-		if(isnull(ticket))
+		if (isnull(ticket))
 			return
 
 		ticket.close(client_repository.get_lite_client(usr.client))
@@ -82,20 +82,20 @@
 		to_chat(GLOB.href_logfile, "<small>[time2text(world.timeofday,"hh:mm")] [src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]<br>")
 
 	switch(href_list["_src_"])
-		if("holder")	hsrc = holder
-		if("usr")		hsrc = mob
-		if("prefs")		return prefs.process_link(usr,href_list)
-		if("vars")		return view_var_Topic(href,href_list,hsrc)
-		if("chat")		return chatOutput.Topic(href, href_list)
+		if ("holder")	hsrc = holder
+		if ("usr")		hsrc = mob
+		if ("prefs")		return prefs.process_link(usr,href_list)
+		if ("vars")		return view_var_Topic(href,href_list,hsrc)
+		if ("chat")		return chatOutput.Topic(href, href_list)
 
 	switch(href_list["action"])
-		if("openLink")
+		if ("openLink")
 			send_link(src, href_list["link"])
 
-	if(codex_topic(href, href_list))
+	if (codex_topic(href, href_list))
 		return
 
-	if(href_list["SDQL_select"])
+	if (href_list["SDQL_select"])
 		debug_variables(locate(href_list["SDQL_select"]))
 		return
 
@@ -103,9 +103,9 @@
 
 //This stops files larger than UPLOAD_LIMIT being sent from client to server via input(), client.Import() etc.
 /client/AllowUpload(filename, filelength)
-	if(!user_acted(src))
+	if (!user_acted(src))
 		return 0
-	if(filelength > UPLOAD_LIMIT)
+	if (filelength > UPLOAD_LIMIT)
 		to_chat(src, SPAN_COLOR("red", "Error: AllowUpload(): File Upload too large. Upload Limit: [UPLOAD_LIMIT/1024]KiB."))
 		return 0
 	return 1
@@ -127,19 +127,19 @@
 		qdel(src)
 		return
 
-	if("[byond_version].[byond_build]" in config.forbidden_versions)
+	if ("[byond_version].[byond_build]" in config.forbidden_versions)
 		_DB_staffwarn_record(ckey, "Tried to connect with broken and possibly exploitable BYOND build.")
 		to_chat(src, "You are attempting to connect with a broken and possibly exploitable BYOND build. Please update to the latest version at http://www.byond.com/ before trying again.")
 		qdel(src)
 		return
 
-	if(!config.guests_allowed && IsGuestKey(key))
+	if (!config.guests_allowed && IsGuestKey(key))
 		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
 		qdel(src)
 		return
 
-	if(config.player_limit != 0)
-		if((length(GLOB.clients) >= config.player_limit) && !(ckey in admin_datums))
+	if (config.player_limit != 0)
+		if ((length(GLOB.clients) >= config.player_limit) && !(ckey in admin_datums))
 			alert(src,"This server is currently full and not accepting new connections.","Server Full","OK")
 			log_admin("[ckey] tried to join and was turned away due to the server being full (player_limit=[config.player_limit])")
 			qdel(src)
@@ -151,11 +151,11 @@
 			break
 
 	// Change the way they should download resources.
-	if(config.resource_urls && length(config.resource_urls))
+	if (config.resource_urls && length(config.resource_urls))
 		src.preload_rsc = pick(config.resource_urls)
 	else src.preload_rsc = 1 // If config.resource_urls is not set, preload like normal.
 
-	if(byond_version < DM_VERSION)
+	if (byond_version < DM_VERSION)
 		to_chat(src, SPAN_WARNING("You are running an older version of BYOND than the server and may experience issues."))
 		to_chat(src, SPAN_WARNING("It is recommended that you update to at least [DM_VERSION] at http://www.byond.com/download/."))
 	to_chat(src, SPAN_WARNING("If the title screen is black, resources are still downloading. Please be patient until the title screen appears."))
@@ -164,13 +164,13 @@
 
 	//Admin Authorisation
 	holder = admin_datums[ckey]
-	if(holder)
+	if (holder)
 		GLOB.admins += src
 		holder.owner = src
 
 	//preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum)
 	prefs = SScharacter_setup.preferences_datums[ckey]
-	if(!prefs)
+	if (!prefs)
 		prefs = new /datum/preferences(src)
 	prefs.last_ip = address				//these are gonna be used for banning
 	prefs.last_id = computer_id			//these are gonna be used for banning
@@ -186,14 +186,14 @@
 		to_chat(src, SPAN_CLASS("alert", "[config.event]"))
 		to_chat(src, "<br>")
 
-	if(holder)
+	if (holder)
 		add_admin_verbs()
 		admin_memo_show()
 
 	// Forcibly enable hardware-accelerated graphics, as we need them for the lighting overlays.
 	// (but turn them off first, since sometimes BYOND doesn't turn them on properly otherwise)
 	spawn(5) // And wait a half-second, since it sounds like you can do this too fast.
-		if(src)
+		if (src)
 			winset(src, null, "command=\".configure graphics-hwmode off\"")
 			sleep(2) // wait a bit more, possibly fixes hardware mode not re-activating right
 			winset(src, null, "command=\".configure graphics-hwmode on\"")
@@ -205,16 +205,16 @@
 	if (GLOB.changelog_hash && prefs.lastchangelog != GLOB.changelog_hash) //bolds the changelog button on the interface so we know there are updates.
 		to_chat(src, SPAN_INFO("You have unread updates in the changelog."))
 		winset(src, "rpane.changelog", "background-color=#eaeaea;font-style=bold")
-		if(config.aggressive_changelog)
+		if (config.aggressive_changelog)
 			src.changes()
 
-	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
+	if (!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
 		to_chat(src, SPAN_WARNING("Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you."))
 
-	if(!tooltips)
+	if (!tooltips)
 		tooltips = new /datum/tooltip(src)
 
-	if(holder)
+	if (holder)
 		src.control_freak = 0 //Devs need 0 for profiler access
 
 	// This turns out to be a touch too much when a bunch of people are connecting at once from a restart during init.
@@ -263,7 +263,7 @@
 
 /proc/get_player_age(key)
 	establish_db_connection()
-	if(!dbcon.IsConnected())
+	if (!dbcon.IsConnected())
 		return null
 
 	var/sql_ckey = sql_sanitize_text(ckey(key))
@@ -271,7 +271,7 @@
 	var/DBQuery/query = dbcon.NewQuery("SELECT datediff(Now(),firstseen) as age FROM erro_player WHERE ckey = '[sql_ckey]'")
 	query.Execute()
 
-	if(query.NextRow())
+	if (query.NextRow())
 		return text2num(query.item[1])
 	else
 		return -1
@@ -283,7 +283,7 @@
 		return
 
 	establish_db_connection()
-	if(!dbcon.IsConnected())
+	if (!dbcon.IsConnected())
 		return
 
 	var/sql_ckey = sql_sanitize_text(src.ckey)
@@ -313,14 +313,14 @@
 
 	var/DBQuery/query_staffwarn = dbcon.NewQuery("SELECT staffwarn FROM erro_player WHERE ckey = '[sql_ckey]' AND !ISNULL(staffwarn)")
 	query_staffwarn.Execute()
-	if(query_staffwarn.NextRow())
+	if (query_staffwarn.NextRow())
 		src.staffwarn = query_staffwarn.item[1]
 
 	//Just the standard check to see if it's actually a number
-	if(sql_id)
-		if(istext(sql_id))
+	if (sql_id)
+		if (istext(sql_id))
 			sql_id = text2num(sql_id)
-		if(!isnum(sql_id))
+		if (!isnum(sql_id))
 			return
 
 	var/sql_ip = sql_sanitize_text(src.address)
@@ -328,7 +328,7 @@
 	var/sql_admin_rank = sql_sanitize_text("Player")
 
 
-	if(sql_id)
+	if (sql_id)
 		//Player already identified previously, we need to just update the 'lastseen', 'ip' and 'computer_id' variables
 		var/DBQuery/query_update = dbcon.NewQuery("UPDATE erro_player SET lastseen = Now(), ip = '[sql_ip]', computerid = '[sql_computerid]', lastadminrank = '[sql_admin_rank]' WHERE id = [sql_id]")
 		query_update.Execute()
@@ -348,7 +348,7 @@
 //checks if a client is afk
 //3000 frames = 5 minutes
 /client/proc/is_afk(duration=3000)
-	if(inactivity > duration)	return inactivity
+	if (inactivity > duration)	return inactivity
 	return 0
 
 /client/proc/inactivity2text()
@@ -403,7 +403,7 @@
 	return 0
 
 /client/proc/MayRespawn()
-	if(mob)
+	if (mob)
 		return mob.MayRespawn()
 
 	// Something went wrong, client is usually kicked or transfered to a new mob at this point
@@ -412,19 +412,19 @@
 /client/verb/character_setup()
 	set name = "Character Setup"
 	set category = "OOC"
-	if(prefs)
+	if (prefs)
 		prefs.open_setup_window(usr)
 
 
 /client/MouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
 	. = ..()
 	var/mob/living/M = mob
-	if(istype(M))
+	if (istype(M))
 		M.OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
 
 	var/datum/click_handler/build_mode/B = M.GetClickHandler()
 	if (istype(B))
-		if(B.current_build_mode && src_control == "mapwindow.map" && src_control == over_control)
+		if (B.current_build_mode && src_control == "mapwindow.map" && src_control == over_control)
 			build_drag(src,B.current_build_mode,src_object,over_object,src_location,over_location,src_control,over_control,params)
 
 /client/verb/toggle_fullscreen()

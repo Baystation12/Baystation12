@@ -18,9 +18,9 @@
 	var/datum/turbolift_floor/floor
 
 /obj/machinery/door/airlock/lift/Destroy()
-	if(lift)
+	if (lift)
 		lift.doors -= src
-	if(floor)
+	if (floor)
 		floor.doors -= src
 	return ..()
 
@@ -33,16 +33,16 @@
 /obj/machinery/door/airlock/lift/close(forced=0)
 	for(var/turf/turf in locs)
 		for(var/mob/living/LM in turf)
-			if(LM.mob_size <= MOB_TINY)
+			if (LM.mob_size <= MOB_TINY)
 				var/moved = 0
 				for(dir in shuffle(GLOB.cardinal.Copy()))
 					var/dest = get_step(LM,dir)
-					if(!(locate(/obj/machinery/door/airlock/lift) in dest))
-						if(LM.Move(dest))
+					if (!(locate(/obj/machinery/door/airlock/lift) in dest))
+						if (LM.Move(dest))
 							moved = 1
 							LM.visible_message("\The [LM] scurries away from the closing doors.")
 							break
-				if(!moved) // nowhere to go....
+				if (!moved) // nowhere to go....
 					LM.gib()
 			else // the mob is too big to just move, so we need to give up what we're doing
 				audible_message("\The [src]'s motors grind as they quickly reverse direction, unable to safely close.")

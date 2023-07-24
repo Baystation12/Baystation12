@@ -31,13 +31,13 @@
 
 /mob/living/simple_animal/passive/crab/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
 	//CRAB movement
-	if(!ckey && !stat)
-		if(isturf(src.loc) && !resting && !buckled)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
+	if (!ckey && !stat)
+		if (isturf(src.loc) && !resting && !buckled)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
 			turns_since_move++
-			if(turns_since_move >= turns_per_move)
+			if (turns_since_move >= turns_per_move)
 				Move(get_step(src,pick(4,8)))
 				turns_since_move = 0
 	regenerate_icons()

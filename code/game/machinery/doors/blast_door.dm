@@ -54,7 +54,7 @@
 /obj/machinery/door/blast/Initialize()
 	. = ..()
 
-	if(!begins_closed)
+	if (!begins_closed)
 		icon_state = icon_state_open
 		set_density(0)
 		set_opacity(0)
@@ -64,14 +64,14 @@
 
 /obj/machinery/door/blast/examine(mob/user)
 	. = ..()
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		to_chat(user, "It's broken.")
 
 // Proc: Bumped()
 // Parameters: 1 (AM - Atom that tried to walk through this object)
 // Description: If we are open returns zero, otherwise returns result of parent function.
 /obj/machinery/door/blast/Bumped(atom/AM)
-	if(!density)
+	if (!density)
 		return ..()
 	else
 		return 0
@@ -80,13 +80,13 @@
 // Parameters: None
 // Description: Updates icon of this object. Uses icon state variables.
 /obj/machinery/door/blast/on_update_icon()
-	if(density)
-		if(MACHINE_IS_BROKEN(src))
+	if (density)
+		if (MACHINE_IS_BROKEN(src))
 			icon_state = icon_state_closed_broken
 		else
 			icon_state = icon_state_closed
 	else
-		if(MACHINE_IS_BROKEN(src))
+		if (MACHINE_IS_BROKEN(src))
 			icon_state = icon_state_open_broken
 		else
 			icon_state = icon_state_open
@@ -127,7 +127,7 @@
 // Parameters: None
 // Description: Opens or closes the door, depending on current state. No checks are done inside this proc.
 /obj/machinery/door/blast/proc/force_toggle()
-	if(density)
+	if (density)
 		force_open()
 	else
 		force_close()
@@ -144,26 +144,26 @@
 // This only works on broken doors or doors without power. Also allows repair with Plasteel.
 /obj/machinery/door/blast/attackby(obj/item/C as obj, mob/user as mob)
 	add_fingerprint(user, 0, C)
-	if(isCrowbar(C) || (istype(C, /obj/item/material/twohanded/fireaxe) && C:wielded == 1))
-		if(((!is_powered()) || MACHINE_IS_BROKEN(src)) && !( operating ))
+	if (isCrowbar(C) || (istype(C, /obj/item/material/twohanded/fireaxe) && C:wielded == 1))
+		if (((!is_powered()) || MACHINE_IS_BROKEN(src)) && !( operating ))
 			to_chat(user, SPAN_NOTICE("You begin prying at \the [src]..."))
-			if(do_after(user, (C.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
+			if (do_after(user, (C.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
 				force_toggle()
 		else
 			to_chat(user, SPAN_NOTICE("[src]'s motors resist your effort."))
 		return
-	if(istype(C, /obj/item/stack/material) && C.get_material_name() == MATERIAL_PLASTEEL)
+	if (istype(C, /obj/item/stack/material) && C.get_material_name() == MATERIAL_PLASTEEL)
 		var/amt = ceil(get_damage_value() / 150)
-		if(!amt)
+		if (!amt)
 			to_chat(user, SPAN_NOTICE("\The [src] is already fully functional."))
 			return
 		var/obj/item/stack/P = C
-		if(!P.can_use(amt))
+		if (!P.can_use(amt))
 			to_chat(user, SPAN_WARNING("You don't have enough sheets to repair this! You need at least [amt] sheets."))
 			return
 		to_chat(user, SPAN_NOTICE("You begin repairing \the [src]..."))
-		if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			if(P.use(amt))
+		if (do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
+			if (P.use(amt))
 				to_chat(user, SPAN_NOTICE("You have repaired \the [src]."))
 				revive_health()
 			else
@@ -186,7 +186,7 @@
 	if (operating || (MACHINE_IS_BROKEN(src) || !is_powered()))
 		return
 	force_open()
-	if(autoclose)
+	if (autoclose)
 		spawn(150)
 			close()
 	return 1
@@ -205,7 +205,7 @@
 	force_toggle()
 
 /obj/machinery/door/blast/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group) return 1
+	if (air_group) return 1
 	return ..()
 
 /obj/machinery/door/blast/do_simple_ranged_interaction(mob/user)
@@ -244,7 +244,7 @@
 	frequency = BLAST_DOORS_FREQ
 
 /obj/machinery/button/blast_door/on_update_icon()
-	if(operating)
+	if (operating)
 		icon_state = "blastctrl1"
 	else
 		icon_state = "blastctrl"
@@ -270,7 +270,7 @@
 	name = "escape pod release door"
 
 /obj/machinery/door/blast/regular/escape_pod/Process()
-	if(evacuation_controller.emergency_evacuation && evacuation_controller.state >= EVAC_LAUNCHING && src.icon_state == icon_state_closed)
+	if (evacuation_controller.emergency_evacuation && evacuation_controller.state >= EVAC_LAUNCHING && src.icon_state == icon_state_closed)
 		src.force_open()
 	. = ..()
 

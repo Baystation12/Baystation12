@@ -2,7 +2,7 @@
 	var/static/list/teleport_blacklist = list(/obj/item/disk/nuclear, /obj/item/storage/backpack/holding, /obj/effect/sparks) //Items that cannot be teleported, or be in the contents of someone who is teleporting.
 
 /singleton/teleport/proc/teleport(atom/target, atom/destination, precision = 0)
-	if(!can_teleport(target,destination))
+	if (!can_teleport(target,destination))
 		target.visible_message(SPAN_WARNING("\The [target] bounces off the teleporter!"))
 		return
 
@@ -15,22 +15,22 @@
 		return
 
 	target.forceMove(destination)
-	if(isliving(target))
+	if (isliving(target))
 		var/mob/living/L = target
-		if(L.buckled)
+		if (L.buckled)
 			var/atom/movable/buckled = L.buckled
 			buckled.forceMove(destination)
 
 
 /singleton/teleport/proc/can_teleport(atom/movable/target, atom/destination)
-	if(!destination || !target || !target.loc || destination.z > max_default_z_level())
+	if (!destination || !target || !target.loc || destination.z > max_default_z_level())
 		return 0
 
-	if(is_type_in_list(target, teleport_blacklist))
+	if (is_type_in_list(target, teleport_blacklist))
 		return 0
 
 	for(var/type in teleport_blacklist)
-		if(length(target.search_contents_for(type)))
+		if (length(target.search_contents_for(type)))
 			return 0
 	return 1
 
@@ -38,7 +38,7 @@
 	var/datum/effect/effect/system/spark_spread/spark = new
 
 /singleton/teleport/sparks/proc/do_spark(atom/target)
-	if(!target.simulated)
+	if (!target.simulated)
 		return
 	var/turf/T = get_turf(target)
 	spark.set_up(5,1,target)

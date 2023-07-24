@@ -7,7 +7,7 @@
 	icon_state = "radial_center"
 
 /obj/screen/radial/persistent/center/Click(location, control, params)
-	if(usr.client == parent.current_user)
+	if (usr.client == parent.current_user)
 		parent.element_chosen(null,usr)
 
 /obj/screen/radial/persistent/center/MouseEntered(location, control, params)
@@ -30,7 +30,7 @@
 	invoke(select_proc_callback, choices_values[choice_id])
 
 /datum/radial_menu/persistent/proc/change_choices(list/newchoices, tooltips)
-	if(!length(newchoices))
+	if (!length(newchoices))
 		return
 	Reset()
 	set_choices(newchoices,tooltips)
@@ -50,18 +50,18 @@
 	Clicking the center button will return a choice of null
 */
 /proc/show_radial_menu_persistent(mob/user, atom/anchor, list/choices, datum/callback/select_proc, uniqueid, radius, tooltips = FALSE)
-	if(!user || !anchor || !length(choices) || !select_proc)
+	if (!user || !anchor || !length(choices) || !select_proc)
 		return
-	if(!uniqueid)
+	if (!uniqueid)
 		uniqueid = "defmenu_\ref[user]_\ref[anchor]"
 
-	if(global.radial_menus[uniqueid])
+	if (global.radial_menus[uniqueid])
 		return
 
 	var/datum/radial_menu/persistent/menu = new
 	menu.uniqueid = uniqueid
 	global.radial_menus[uniqueid] = menu
-	if(radius)
+	if (radius)
 		menu.radius = radius
 	menu.select_proc_callback = select_proc
 	menu.anchor = anchor

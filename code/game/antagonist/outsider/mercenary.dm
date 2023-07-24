@@ -23,14 +23,14 @@ GLOBAL_DATUM_INIT(mercs, /datum/antagonist/mercenary, new)
 	base_to_load = /datum/map_template/ruin/antag_spawn/mercenary
 
 /datum/antagonist/mercenary/create_global_objectives()
-	if(!..())
+	if (!..())
 		return 0
 	global_objectives = list()
 	global_objectives |= new /datum/objective/nuclear
 	return 1
 
 /datum/antagonist/mercenary/equip(mob/living/carbon/human/player)
-	if(!..())
+	if (!..())
 		return 0
 
 	var/singleton/hierarchy/outfit/mercenary = outfit_by_type(/singleton/hierarchy/outfit/mercenary)

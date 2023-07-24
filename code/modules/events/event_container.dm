@@ -22,22 +22,22 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 	var/last_world_time = 0
 
 /datum/event_container/proc/process()
-	if(!next_event_time)
+	if (!next_event_time)
 		set_event_delay()
 
-	if(delayed || !config.allow_random_events)
+	if (delayed || !config.allow_random_events)
 		next_event_time += (world.time - last_world_time)
-	else if(world.time > next_event_time)
+	else if (world.time > next_event_time)
 		start_event()
 
 	last_world_time = world.time
 
 /datum/event_container/proc/start_event()
-	if(!next_event)	// If non-one has explicitly set an event, randomly pick one
+	if (!next_event)	// If non-one has explicitly set an event, randomly pick one
 		next_event = acquire_event()
 
 	// Has an event been acquired?
-	if(next_event)
+	if (next_event)
 		// Set when the event of this type was last fired, and prepare the next event start
 		last_event_time[next_event] = world.time
 		set_event_delay()
@@ -53,17 +53,17 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 
 
 /datum/event_container/proc/acquire_event()
-	if(length(available_events) == 0)
+	if (length(available_events) == 0)
 		return
 	var/active_with_role = number_active_with_role()
 
 	var/list/possible_events = list()
 	for(var/datum/event_meta/EM in available_events)
 		var/event_weight = get_weight(EM, active_with_role)
-		if(event_weight)
+		if (event_weight)
 			possible_events[EM] = event_weight
 
-	if(length(possible_events) == 0)
+	if (length(possible_events) == 0)
 		return null
 
 	// Select an event and remove it from the pool of available events
@@ -72,12 +72,12 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 	return picked_event
 
 /datum/event_container/proc/get_weight(datum/event_meta/EM, list/active_with_role)
-	if(!EM.enabled)
+	if (!EM.enabled)
 		return 0
 
 	var/weight = EM.get_weight(active_with_role)
 	var/last_time = last_event_time[EM]
-	if(last_time)
+	if (last_time)
 		var/time_passed = world.time - last_time
 		var/weight_modifier = max(0, round((config.expected_round_length - time_passed) / 300))
 		weight = weight - weight_modifier
@@ -86,7 +86,7 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 
 /datum/event_container/proc/set_event_delay()
 	// If the next event time has not yet been set and we have a custom first time start
-	if(next_event_time == 0 && config.event_first_run[severity])
+	if (next_event_time == 0 && config.event_first_run[severity])
 		var/lower = config.event_first_run[severity]["lower"]
 		var/upper = config.event_first_run[severity]["upper"]
 		var/event_delay = rand(lower, upper)
@@ -95,15 +95,15 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 	else
 		var/playercount_modifier = 1
 		switch(length(GLOB.player_list))
-			if(0 to 10)
+			if (0 to 10)
 				playercount_modifier = 1.2
-			if(11 to 15)
+			if (11 to 15)
 				playercount_modifier = 1.1
-			if(16 to 25)
+			if (16 to 25)
 				playercount_modifier = 1
-			if(26 to 35)
+			if (26 to 35)
 				playercount_modifier = 0.9
-			if(36 to 100000)
+			if (36 to 100000)
 				playercount_modifier = 0.8
 		playercount_modifier = playercount_modifier * delay_modifier
 
@@ -114,9 +114,9 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 
 /datum/event_container/proc/SelectEvent()
 	var/datum/event_meta/EM = input("Select an event to queue up.", "Event Selection", null) as null|anything in available_events
-	if(!EM)
+	if (!EM)
 		return
-	if(next_event)
+	if (next_event)
 		available_events += next_event
 	available_events -= EM
 	next_event = EM

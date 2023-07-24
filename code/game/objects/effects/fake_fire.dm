@@ -13,7 +13,7 @@
 	..()
 	set_light(0.5, 1, 3, l_color = color)
 	START_PROCESSING(SSobj,src)
-	if(lifetime)
+	if (lifetime)
 		QDEL_IN(src,lifetime)
 
 /obj/effect/fake_fire/Process()

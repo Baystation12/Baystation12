@@ -37,11 +37,11 @@ SUBSYSTEM_DEF(robots)
 		var/obj/item/robot_module/module = module_type
 		var/module_category = initial(module.module_category)
 		var/module_name = initial(module.display_name)
-		if(module_name && module_category)
-			if(initial(module.upgrade_locked))
+		if (module_name && module_category)
+			if (initial(module.upgrade_locked))
 				LAZYINITLIST(upgrade_modules_by_category[module_category])
 				LAZYSET(upgrade_modules_by_category[module_category], module_name, module)
-			else if(initial(module.crisis_locked))
+			else if (initial(module.crisis_locked))
 				LAZYINITLIST(crisis_modules_by_category[module_category])
 				LAZYSET(crisis_modules_by_category[module_category], module_name, module)
 			else
@@ -52,13 +52,13 @@ SUBSYSTEM_DEF(robots)
 
 /datum/controller/subsystem/robots/proc/get_available_modules(module_category, crisis_mode, include_override)
 	. = list()
-	if(modules_by_category[module_category])
+	if (modules_by_category[module_category])
 		. += modules_by_category[module_category]
-	if(crisis_mode && crisis_modules_by_category[module_category])
+	if (crisis_mode && crisis_modules_by_category[module_category])
 		. |= crisis_modules_by_category[module_category]
-	if(include_override && upgrade_modules_by_category[module_category])
+	if (include_override && upgrade_modules_by_category[module_category])
 		var/list/modules = upgrade_modules_by_category[module_category]
-		if(modules[include_override])
+		if (modules[include_override])
 			.[include_override] = modules[include_override]
 
 /datum/controller/subsystem/robots/proc/get_mmi_type_by_title(check_title)

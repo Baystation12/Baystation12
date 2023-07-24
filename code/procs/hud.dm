@@ -10,36 +10,36 @@ the HUD updates properly! */
 
 //Medical HUD outputs. Called by the Life() proc of the mob using it, usually.
 /proc/process_med_hud(mob/M, local_scanner, mob/Alt)
-	if(!can_process_hud(M))
+	if (!can_process_hud(M))
 		return
 
 	var/datum/arranged_hud_process/P = arrange_hud_process(M, Alt, GLOB.med_hud_users)
 	for(var/mob/living/carbon/human/patient in P.Mob.in_view(P.Turf))
 
-		if(patient.is_invisible_to(P.Mob))
+		if (patient.is_invisible_to(P.Mob))
 			continue
 
-		if(local_scanner)
+		if (local_scanner)
 			P.Client.images += patient.hud_list[HEALTH_HUD]
 			P.Client.images += patient.hud_list[STATUS_HUD]
 		else
-			if(hassensorlevel(patient, SUIT_SENSOR_VITAL))
+			if (hassensorlevel(patient, SUIT_SENSOR_VITAL))
 				P.Client.images += patient.hud_list[HEALTH_HUD]
-			if(hassensorlevel(patient, SUIT_SENSOR_BINARY))
+			if (hassensorlevel(patient, SUIT_SENSOR_BINARY))
 				P.Client.images += patient.hud_list[LIFE_HUD]
 
 //Security HUDs. Pass a value for the second argument to enable implant viewing or other special features.
 /proc/process_sec_hud(mob/M, advanced_mode, mob/Alt)
-	if(!can_process_hud(M))
+	if (!can_process_hud(M))
 		return
 	var/datum/arranged_hud_process/P = arrange_hud_process(M, Alt, GLOB.sec_hud_users)
 	for(var/mob/living/carbon/human/perp in P.Mob.in_view(P.Turf))
 
-		if(perp.is_invisible_to(P.Mob))
+		if (perp.is_invisible_to(P.Mob))
 			continue
 
 		P.Client.images += perp.hud_list[ID_HUD]
-		if(advanced_mode && !perp.fake_name)
+		if (advanced_mode && !perp.fake_name)
 			P.Client.images += perp.hud_list[WANTED_HUD]
 			P.Client.images += perp.hud_list[IMPTRACK_HUD]
 			P.Client.images += perp.hud_list[IMPLOYAL_HUD]
@@ -48,7 +48,7 @@ the HUD updates properly! */
 /proc/process_jani_hud(mob/M, mob/Alt)
 	var/datum/arranged_hud_process/P = arrange_hud_process(M, Alt, GLOB.jani_hud_users)
 	for (var/obj/effect/decal/cleanable/dirtyfloor in view(P.Mob))
-		if(P.Client)
+		if (P.Client)
 			P.Client.images += dirtyfloor.hud_overlay
 
 /datum/arranged_hud_process
@@ -66,17 +66,17 @@ the HUD updates properly! */
 	return P
 
 /proc/can_process_hud(mob/M)
-	if(!M)
+	if (!M)
 		return 0
-	if(!M.client)
+	if (!M.client)
 		return 0
-	if(M.stat != CONSCIOUS)
+	if (M.stat != CONSCIOUS)
 		return 0
 	return 1
 
 //Deletes the current HUD images so they can be refreshed with new ones.
 /mob/proc/handle_hud_glasses() //Used in the life.dm of mobs that can use HUDs.
-	if(client)
+	if (client)
 		for(var/image/hud_overlay/hud in client.images)
 			client.images -= hud
 	GLOB.med_hud_users -= src
@@ -91,6 +91,6 @@ the HUD updates properly! */
 	RETURN_TYPE(/list)
 	var/list/viewed = new
 	for(var/mob/living/carbon/human/H in SSmobs.mob_list)
-		if(get_dist(H, T) <= 7)
+		if (get_dist(H, T) <= 7)
 			viewed += H
 	return viewed

@@ -60,13 +60,13 @@
 /obj/machinery/ion_engine/proc/get_status()
 	. = list()
 	.+= "Location: [get_area(src)]."
-	if(!powered())
+	if (!powered())
 		.+= "Insufficient power to operate."
 
 	. = jointext(.,"<br>")
 
 /obj/machinery/ion_engine/proc/burn()
-	if(!on && !powered())
+	if (!on && !powered())
 		return 0
 	use_power_oneoff(burn_cost)
 	. = thrust_limit * generated_thrust

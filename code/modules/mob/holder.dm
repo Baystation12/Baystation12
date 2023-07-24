@@ -45,31 +45,31 @@ var/global/list/holder_mob_icon_cache = list()
 		update_state()
 
 /obj/item/holder/proc/update_state()
-	if(last_holder != loc)
+	if (last_holder != loc)
 		for(var/mob/M in contents)
 			unregister_all_movement(last_holder, M)
 
-	if(istype(loc,/turf) || !(length(contents)))
+	if (istype(loc,/turf) || !(length(contents)))
 		for(var/mob/M in contents)
 			var/atom/movable/mob_container = M
 			mob_container.dropInto(loc)
 			M.reset_view()
 		qdel(src)
-	else if(last_holder != loc)
+	else if (last_holder != loc)
 		for(var/mob/M in contents)
 			register_all_movement(loc, M)
 
 	last_holder = loc
 
 /obj/item/holder/onDropInto(atom/movable/AM)
-	if(ismob(loc))   // Bypass our holding mob and drop directly to its loc
+	if (ismob(loc))   // Bypass our holding mob and drop directly to its loc
 		return loc.loc
 	return ..()
 
 /obj/item/holder/GetIdCard()
 	for(var/mob/M in contents)
 		var/obj/item/I = M.GetIdCard()
-		if(I)
+		if (I)
 			return I
 	return null
 
@@ -85,14 +85,14 @@ var/global/list/holder_mob_icon_cache = list()
 		H.species.hug(H, M)
 
 /obj/item/holder/MouseDrop(atom/over_atom, atom/source_loc, atom/over_loc, source_control, over_control, list/mouse_params)
-	if(over_atom != usr)
+	if (over_atom != usr)
 		return ..()
 	for(var/mob/M in contents)
 		M.show_inv(usr)
 
 /obj/item/holder/attack(mob/target, mob/user)
 	// Devour on click on self with holder
-	if(target == user && istype(user,/mob/living/carbon))
+	if (target == user && istype(user,/mob/living/carbon))
 		var/mob/living/carbon/M = user
 
 		for(var/mob/victim in src.contents)
@@ -154,25 +154,25 @@ var/global/list/holder_mob_icon_cache = list()
 /mob/living/var/holder_type
 
 /mob/living/proc/get_scooped(mob/living/carbon/human/grabber, self_grab)
-	if(!holder_type || buckled || length(pinned))
+	if (!holder_type || buckled || length(pinned))
 		return
 
-	if(self_grab)
-		if(src.incapacitated()) return
+	if (self_grab)
+		if (src.incapacitated()) return
 	else
-		if(grabber.incapacitated()) return
+		if (grabber.incapacitated()) return
 
 	var/obj/item/holder/H = new holder_type(get_turf(src))
 
-	if(self_grab)
-		if(!grabber.equip_to_slot_if_possible(H, slot_back, TRYEQUIP_REDRAW | TRYEQUIP_SILENT))
+	if (self_grab)
+		if (!grabber.equip_to_slot_if_possible(H, slot_back, TRYEQUIP_REDRAW | TRYEQUIP_SILENT))
 			to_chat(src, SPAN_WARNING("You can't climb onto [grabber]!"))
 			return
 
 		to_chat(grabber, SPAN_NOTICE("\The [src] clambers onto you!"))
 		to_chat(src, SPAN_NOTICE("You climb up onto \the [grabber]!"))
 	else
-		if(!grabber.put_in_hands(H))
+		if (!grabber.put_in_hands(H))
 			to_chat(grabber, SPAN_WARNING("Your hands are full!"))
 			return
 
@@ -186,8 +186,8 @@ var/global/list/holder_mob_icon_cache = list()
 	return H
 
 /mob/living/MouseDrop(mob/living/carbon/human/over_object)
-	if(istype(over_object) && Adjacent(over_object) && (usr == src || usr == over_object) && over_object.a_intent == I_GRAB)
-		if(scoop_check(over_object))
+	if (istype(over_object) && Adjacent(over_object) && (usr == src || usr == over_object) && over_object.a_intent == I_GRAB)
+		if (scoop_check(over_object))
 			get_scooped(over_object, (usr == src))
 			return
 	return ..()

@@ -9,12 +9,12 @@
 	for(var/obj/item/photo/borg_photo in silicon_camera.aipictures)
 		var/copied = FALSE
 		for(var/obj/item/photo/ai_photo in master_cam.aipictures)
-			if(borg_photo.id == ai_photo.id)
+			if (borg_photo.id == ai_photo.id)
 				copied = TRUE
 				break
-		if(!copied)
+		if (!copied)
 			master_cam.injectaialbum(borg_photo.copy(1), " (synced from [name])")
 			synced = TRUE
 
-	if(synced)
+	if (synced)
 		to_chat(src, SPAN_NOTICE("Images synced with AI. Local images will be retained in the case of loss of connection with the AI."))

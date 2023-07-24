@@ -46,15 +46,15 @@
 	install()
 
 /datum/robot_component/proc/take_damage(brute, electronics, sharp, edge)
-	if(installed != 1) return
+	if (installed != 1) return
 
 	brute_damage += brute
 	electronics_damage += electronics
 
-	if(brute_damage + electronics_damage >= max_damage) destroy()
+	if (brute_damage + electronics_damage >= max_damage) destroy()
 
 /datum/robot_component/proc/heal_damage(brute, electronics)
-	if(installed != 1)
+	if (installed != 1)
 		// If it's not installed, can't repair it.
 		return 0
 
@@ -65,10 +65,10 @@
 	return (installed == 1) && (brute_damage + electronics_damage < max_damage) && (!idle_usage || powered)
 
 /datum/robot_component/proc/update_power_state()
-	if(toggled == 0)
+	if (toggled == 0)
 		powered = 0
 		return
-	if(owner.cell_use_power(idle_usage))
+	if (owner.cell_use_power(idle_usage))
 		powered = 1
 	else
 		powered = 0
@@ -202,9 +202,9 @@
 	brute += brute_amt
 	burn += burn_amt
 	total_dam = brute+burn
-	if(total_dam >= max_dam)
+	if (total_dam >= max_dam)
 		var/obj/item/stock_parts/circuitboard/broken/broken_device = new (get_turf(src))
-		if(icon_state_broken != "broken")
+		if (icon_state_broken != "broken")
 			broken_device.icon = src.icon
 			broken_device.icon_state = icon_state_broken
 		broken_device.name = "broken [name]"

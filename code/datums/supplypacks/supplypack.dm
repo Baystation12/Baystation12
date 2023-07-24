@@ -15,7 +15,7 @@
 
 //Is run once on init for non-base-category supplypacks.
 /singleton/hierarchy/supply_pack/proc/setup()
-	if(!num_contained)
+	if (!num_contained)
 		for(var/entry in contains)
 			num_contained += max(1, contains[entry])
 
@@ -23,18 +23,18 @@
 	manifest = sm.setup_manifest(src)
 
 /singleton/hierarchy/supply_pack/proc/sec_available()
-	if(isnull(security_level))
+	if (isnull(security_level))
 		return TRUE
 	var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 	switch(security_level)
-		if(SUPPLY_SECURITY_ELEVATED)
-			if(length(security_state.all_security_levels) > 1)
+		if (SUPPLY_SECURITY_ELEVATED)
+			if (length(security_state.all_security_levels) > 1)
 				security_level = security_state.all_security_levels[2]
 			else
 				security_level = security_state.high_security_level
-		if(SUPPLY_SECURITY_HIGH)
+		if (SUPPLY_SECURITY_HIGH)
 			security_level = security_state.high_security_level
-	if(!istype(security_level))
+	if (!istype(security_level))
 		return TRUE
 	return security_state.current_security_level_is_same_or_higher_than(security_level)
 
@@ -53,15 +53,15 @@
 
 var/global/list/supply_methods_
 /proc/get_supply_method(method_type)
-	if(!supply_methods_)
+	if (!supply_methods_)
 		supply_methods_ = list()
 	. = supply_methods_[method_type]
-	if(!.)
+	if (!.)
 		. = new method_type()
 		supply_methods_[method_type] = .
 
 /singleton/supply_method/proc/spawn_contents(singleton/hierarchy/supply_pack/sp, location)
-	if(!sp || !location)
+	if (!sp || !location)
 		return
 	. = list()
 	for(var/entry in sp.contains)
@@ -73,14 +73,14 @@ var/global/list/supply_methods_
 	. += "<ul>"
 	for(var/path in sp.contains)
 		var/atom/A = path
-		if(!ispath(A))
+		if (!ispath(A))
 			continue
 		. += "<li>[initial(A.name)]</li>"
 	. += "</ul>"
 	. = jointext(.,null)
 
 /singleton/supply_method/randomized/spawn_contents(singleton/hierarchy/supply_pack/sp, location)
-	if(!sp || !location)
+	if (!sp || !location)
 		return
 	. = list()
 	for(var/j = 1 to sp.num_contained)

@@ -23,9 +23,9 @@
 	sound_id = "[type]_[sequential_id(type)]"
 
 /obj/item/device/geiger/proc/update_sound(playing)
-	if(playing && !sound_token)
+	if (playing && !sound_token)
 		sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, "sound/items/geiger.ogg", volume = geiger_volume, range = 4, falloff = 3, prefer_mute = TRUE)
-	else if(!playing && sound_token)
+	else if (!playing && sound_token)
 		QDEL_NULL(sound_token)
 
 /obj/item/device/geiger/Destroy()
@@ -34,7 +34,7 @@
 	update_sound(0)
 
 /obj/item/device/geiger/Process()
-	if(!scanning)
+	if (!scanning)
 		return
 	radiation_count = SSradiation.get_rads_at_turf(get_turf(src))
 	update_icon()
@@ -42,14 +42,14 @@
 /obj/item/device/geiger/examine(mob/user)
 	. = ..()
 	var/msg = "[scanning ? "ambient" : "stored"] Radiation level: [radiation_count ? radiation_count : "0"] IU/s."
-	if(radiation_count > RAD_LEVEL_LOW)
+	if (radiation_count > RAD_LEVEL_LOW)
 		to_chat(user, SPAN_WARNING("[msg]"))
 	else
 		to_chat(user, SPAN_NOTICE("[msg]"))
 
 /obj/item/device/geiger/attack_self(mob/user)
 	scanning = !scanning
-	if(scanning)
+	if (scanning)
 		START_PROCESSING(SSobj, src)
 	else
 		STOP_PROCESSING(SSobj, src)
@@ -57,32 +57,32 @@
 	to_chat(user, SPAN_NOTICE("[icon2html(src, user)] You switch [scanning ? "on" : "off"] [src]."))
 
 /obj/item/device/geiger/on_update_icon()
-	if(!scanning)
+	if (!scanning)
 		icon_state = "geiger_off"
 		update_sound(0)
 		return 1
 
-	if(!sound_token) update_sound(1)
+	if (!sound_token) update_sound(1)
 
 	switch(radiation_count)
-		if(null) icon_state = "geiger_on_1"
-		if(-INFINITY to RAD_LEVEL_LOW)
+		if (null) icon_state = "geiger_on_1"
+		if (-INFINITY to RAD_LEVEL_LOW)
 			icon_state = "geiger_on_1"
 			geiger_volume = 0
 			sound_token.SetVolume(geiger_volume)
-		if(RAD_LEVEL_LOW + 0.01 to RAD_LEVEL_MODERATE)
+		if (RAD_LEVEL_LOW + 0.01 to RAD_LEVEL_MODERATE)
 			icon_state = "geiger_on_2"
 			geiger_volume = 10
 			sound_token.SetVolume(geiger_volume)
-		if(RAD_LEVEL_MODERATE + 0.1 to RAD_LEVEL_HIGH)
+		if (RAD_LEVEL_MODERATE + 0.1 to RAD_LEVEL_HIGH)
 			icon_state = "geiger_on_3"
 			geiger_volume = 25
 			sound_token.SetVolume(geiger_volume)
-		if(RAD_LEVEL_HIGH + 1 to RAD_LEVEL_VERY_HIGH)
+		if (RAD_LEVEL_HIGH + 1 to RAD_LEVEL_VERY_HIGH)
 			icon_state = "geiger_on_4"
 			geiger_volume = 40
 			sound_token.SetVolume(geiger_volume)
-		if(RAD_LEVEL_VERY_HIGH + 1 to INFINITY)
+		if (RAD_LEVEL_VERY_HIGH + 1 to INFINITY)
 			icon_state = "geiger_on_5"
 			geiger_volume = 60
 			sound_token.SetVolume(geiger_volume)

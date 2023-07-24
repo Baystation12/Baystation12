@@ -2,7 +2,7 @@ var/global/list/event_last_fired = list()
 
 //Always triggers an event when called, dynamically chooses events based on job population
 /proc/spawn_dynamic_event()
-	if(!config.allow_random_events)
+	if (!config.allow_random_events)
 		return
 
 	var/minutes_passed = world.time/600
@@ -28,7 +28,7 @@ var/global/list/event_last_fired = list()
 	possibleEvents[/datum/event/mundane_news] = 300
 
 	possibleEvents[/datum/event/money_lotto] = max(min(5, length(GLOB.player_list)), 50)
-	if(account_hack_attempted)
+	if (account_hack_attempted)
 		possibleEvents[/datum/event/money_hacker] = max(min(25, length(GLOB.player_list)) * 4, 200)
 
 
@@ -45,23 +45,23 @@ var/global/list/event_last_fired = list()
 	possibleEvents[/datum/event/electrical_storm] = 15 * active_with_role["Janitor"] + 5 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/wallrot] = 30 * active_with_role["Engineer"] + 50 * active_with_role["Gardener"]
 
-	if(!spacevines_spawned)
+	if (!spacevines_spawned)
 		possibleEvents[/datum/event/spacevine] = 10 + 5 * active_with_role["Engineer"]
-	if(minutes_passed >= 30) // Give engineers time to set up engine
+	if (minutes_passed >= 30) // Give engineers time to set up engine
 		possibleEvents[/datum/event/meteor_wave] = 10 * active_with_role["Engineer"]
 		possibleEvents[/datum/event/blob] = 10 * active_with_role["Engineer"]
 
-	if(active_with_role["Medical"] > 0)
+	if (active_with_role["Medical"] > 0)
 		possibleEvents[/datum/event/radiation_storm] = active_with_role["Medical"] * 10
 		possibleEvents[/datum/event/spontaneous_appendicitis] = active_with_role["Medical"] * 10
 
 	possibleEvents[/datum/event/prison_break] = active_with_role["Security"] * 50
-	if(active_with_role["Security"] > 0)
-		if(!sent_spiders_to_station)
+	if (active_with_role["Security"] > 0)
+		if (!sent_spiders_to_station)
 			possibleEvents[/datum/event/spider_infestation] = max(active_with_role["Security"], 5) + 5
 		possibleEvents[/datum/event/random_antag] = max(active_with_role["Security"], 5) + 2.5
 
-	for(var/event_type in event_last_fired) if(possibleEvents[event_type])
+	for(var/event_type in event_last_fired) if (possibleEvents[event_type])
 		var/time_passed = world.time - event_last_fired[event_type]
 		var/full_recharge_after = 60 * 60 * 10 * 3 // 3 hours
 		var/weight_modifier = max(0, (full_recharge_after - time_passed) / 300)
@@ -81,7 +81,7 @@ var/global/list/event_last_fired = list()
 	debug_message += "|||Picked:[picked_event]"
 	log_debug(debug_message)
 
-	if(!picked_event)
+	if (!picked_event)
 		return
 
 	//The event will add itself to the MC's event list
@@ -105,45 +105,45 @@ var/global/list/event_last_fired = list()
 	active_with_role["Gardener"] = 0
 
 	for(var/mob/M in GLOB.player_list)
-		if(!M.mind || !M.client || M.client.is_afk(10 MINUTES)) // longer than 10 minutes AFK counts them as inactive
+		if (!M.mind || !M.client || M.client.is_afk(10 MINUTES)) // longer than 10 minutes AFK counts them as inactive
 			continue
 
 		active_with_role["Any"]++
 
-		if(istype(M, /mob/living/silicon/robot))
+		if (istype(M, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/R = M
-			if(R.module)
-				if(istype(R.module, /obj/item/robot_module/engineering))
+			if (R.module)
+				if (istype(R.module, /obj/item/robot_module/engineering))
 					active_with_role["Engineer"]++
-				else if(istype(R.module, /obj/item/robot_module/security))
+				else if (istype(R.module, /obj/item/robot_module/security))
 					active_with_role["Security"]++
-				else if(istype(R.module, /obj/item/robot_module/medical))
+				else if (istype(R.module, /obj/item/robot_module/medical))
 					active_with_role["Medical"]++
-				else if(istype(R.module, /obj/item/robot_module/research))
+				else if (istype(R.module, /obj/item/robot_module/research))
 					active_with_role["Scientist"]++
 
-		if(M.mind.assigned_role in SSjobs.titles_by_department(ENG))
+		if (M.mind.assigned_role in SSjobs.titles_by_department(ENG))
 			active_with_role["Engineer"]++
 
-		if(M.mind.assigned_role in SSjobs.titles_by_department(MED))
+		if (M.mind.assigned_role in SSjobs.titles_by_department(MED))
 			active_with_role["Medical"]++
 
-		if(M.mind.assigned_role in SSjobs.titles_by_department(SEC))
+		if (M.mind.assigned_role in SSjobs.titles_by_department(SEC))
 			active_with_role["Security"]++
 
-		if(M.mind.assigned_role in SSjobs.titles_by_department(SCI))
+		if (M.mind.assigned_role in SSjobs.titles_by_department(SCI))
 			active_with_role["Scientist"]++
 
-		if(M.mind.assigned_role == "AI")
+		if (M.mind.assigned_role == "AI")
 			active_with_role["AI"]++
 
-		if(M.mind.assigned_role == "Robot")
+		if (M.mind.assigned_role == "Robot")
 			active_with_role["Robot"]++
 
-		if(M.mind.assigned_role == "Janitor")
+		if (M.mind.assigned_role == "Janitor")
 			active_with_role["Janitor"]++
 
-		if(M.mind.assigned_role == "Gardener")
+		if (M.mind.assigned_role == "Gardener")
 			active_with_role["Gardener"]++
 
 	return active_with_role

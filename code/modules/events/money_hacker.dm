@@ -7,7 +7,7 @@ var/global/account_hack_attempted = 0
 
 /datum/event/money_hacker/setup()
 	end_time = world.time + 6000
-	if(length(all_money_accounts))
+	if (length(all_money_accounts))
 		affected_account = pick(all_money_accounts)
 
 		account_hack_attempted = 1
@@ -16,7 +16,7 @@ var/global/account_hack_attempted = 0
 
 /datum/event/money_hacker/announce()
 	var/obj/machinery/message_server/MS = get_message_server()
-	if(MS)
+	if (MS)
 		// Hide the account number for now since it's all you need to access a standard-security account. Change when that's no longer the case.
 		var/message = "A brute force hack has been detected (in progress since [stationtime2text()]). The target of the attack is: Financial account #[affected_account.account_number], \
 		without intervention this attack will succeed in approximately 10 minutes. Required intervention: temporary suspension of affected accounts until the attack has ceased. \
@@ -26,14 +26,14 @@ var/global/account_hack_attempted = 0
 
 
 /datum/event/money_hacker/tick()
-	if(world.time >= end_time)
+	if (world.time >= end_time)
 		endWhen = activeFor
 	else
 		endWhen = activeFor + 10
 
 /datum/event/money_hacker/end()
 	var/message = "The attack has ceased, the affected accounts can now be brought online."
-	if(affected_account && !affected_account.suspended)
+	if (affected_account && !affected_account.suspended)
 		//hacker wins
 		message = "The hack attempt has succeeded."
 
@@ -54,6 +54,6 @@ var/global/account_hack_attempted = 0
 		T.perform()
 
 	var/obj/machinery/message_server/MS = get_message_server()
-	if(MS)
+	if (MS)
 		var/my_department = "[location_name()] Firewall Subroutines"
 		MS.send_rc_message("XO's Desk", my_department, message, "", "", 2)

@@ -8,7 +8,7 @@
 	var/i
 	for(i=0;i<5;i++)
 		P = new()
-		if(prob(1))
+		if (prob(1))
 			P.name = "Spaceball Jones, [GLOB.using_map.game_year] Brickburn Galaxy Trekers"
 			P.desc = "An autographed Spaceball Jones card!!"
 			P.card_icon = "spaceball_jones"

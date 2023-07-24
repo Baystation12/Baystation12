@@ -16,9 +16,9 @@
 /singleton/communication_channel/dsay/can_communicate(client/communicator, message, speech_method_type)
 	var/singleton/dsay_communication/speech_method = GET_SINGLETON(speech_method_type)
 	switch(speech_method.can_communicate(communicator, message))
-		if(DSAY_CAN_COMMUNICATE)
+		if (DSAY_CAN_COMMUNICATE)
 			return TRUE
-		if(DSAY_ASK_BASE)
+		if (DSAY_ASK_BASE)
 			return ..()
 
 /singleton/communication_channel/dsay/do_communicate(client/communicator, message, speech_method_type)
@@ -27,31 +27,31 @@
 	speech_method.adjust_channel(src)
 
 	for(var/mob/M in GLOB.player_list)
-		if(!speech_method.can_receive(communicator, M))
+		if (!speech_method.can_receive(communicator, M))
 			continue
 		var/sent_message = speech_method.get_message(communicator, M, message)
 		receive_communication(communicator, M, SPAN_CLASS("deadsay", "[create_text_tag("dead", "DEAD:", M.client)] [sent_message]"))
 
 /singleton/dsay_communication/proc/can_communicate(client/communicator, message)
-	if(!istype(communicator))
+	if (!istype(communicator))
 		return FALSE
-	if(communicator.mob.stat != DEAD)
+	if (communicator.mob.stat != DEAD)
 		to_chat(communicator, SPAN_WARNING("You're not sufficiently dead to use DSAY!"))
 		return FALSE
 	return DSAY_ASK_BASE
 
 /singleton/dsay_communication/proc/can_receive(client/C, mob/M)
-	if(istype(C) && C.mob == M)
+	if (istype(C) && C.mob == M)
 		return TRUE
-	if(M.get_preference_value(/datum/client_preference/show_dsay) == GLOB.PREF_HIDE)
+	if (M.get_preference_value(/datum/client_preference/show_dsay) == GLOB.PREF_HIDE)
 		return FALSE
-	if(istype(C) && M.is_key_ignored(C.key))
+	if (istype(C) && M.is_key_ignored(C.key))
 		return FALSE
 	if (M.client.holder)
 		return TRUE
-	if(M.stat != DEAD)
+	if (M.stat != DEAD)
 		return FALSE
-	if(isnewplayer(M))
+	if (isnewplayer(M))
 		return FALSE
 	return TRUE
 
@@ -60,14 +60,14 @@
 	var/keyname
 
 	keyname = C.key
-	if(C.mob) //Most of the time this is the dead/observer mob; we can totally use him if there is no better name
+	if (C.mob) //Most of the time this is the dead/observer mob; we can totally use him if there is no better name
 		var/mindname
 		var/realname = C.mob.real_name
-		if(C.mob.mind)
+		if (C.mob.mind)
 			mindname = C.mob.mind.name
-			if(C.mob.mind.original && C.mob.mind.original.real_name)
+			if (C.mob.mind.original && C.mob.mind.original.real_name)
 				realname = C.mob.mind.original.real_name
-		if(mindname && mindname != realname)
+		if (mindname && mindname != realname)
 			name = "[realname] died as [mindname]"
 		else
 			name = realname
@@ -76,14 +76,14 @@
 	var/mob/observer/ghost/DM
 	var/hide_deadchat_ckey = C.get_preference_value(/datum/client_preference/show_ckey_deadchat) == GLOB.PREF_HIDE
 
-	if(isghost(C.mob))
+	if (isghost(C.mob))
 		DM = C.mob
-	if(M.client.holder) 							// What admins see
+	if (M.client.holder) 							// What admins see
 		lname = "[keyname][(DM && hide_deadchat_ckey) ? "*" : (DM ? "" : "^")] ([name])"
 	else
-		if(DM && hide_deadchat_ckey)						// If the person is actually observer they have the option to be anonymous
+		if (DM && hide_deadchat_ckey)						// If the person is actually observer they have the option to be anonymous
 			lname = "Ghost of [name]"
-		else if(DM)									// Non-anons
+		else if (DM)									// Non-anons
 			lname = "[keyname] ([name])"
 		else										// Everyone else (dead people who didn't ghost yet, etc.)
 			lname = name
@@ -108,9 +108,9 @@
 	..()
 
 /singleton/dsay_communication/admin/can_communicate(client/communicator, message, singleton/communication_channel/dsay)
-	if(!istype(communicator))
+	if (!istype(communicator))
 		return FALSE
-	if(!communicator.holder)
+	if (!communicator.holder)
 		to_chat(communicator, SPAN_WARNING("You do not have sufficent permissions to use DSAY!"))
 		return FALSE
 	return DSAY_ASK_BASE

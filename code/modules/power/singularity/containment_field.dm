@@ -17,9 +17,9 @@
 	var/hasShocked = 0 //Used to add a delay between shocks. In some cases this used to crash servers by spawning hundreds of sparks every second.
 
 /obj/machinery/containment_field/Destroy()
-	if(FG1 && !FG1.clean_up)
+	if (FG1 && !FG1.clean_up)
 		FG1.cleanup()
-	if(FG2 && !FG2.clean_up)
+	if (FG2 && !FG2.clean_up)
 		FG2.cleanup()
 	. = ..()
 
@@ -30,10 +30,10 @@
 	return 0
 
 /obj/machinery/containment_field/HasProximity(atom/movable/AM as mob|obj)
-	if(istype(AM,/mob/living/silicon) && prob(40))
+	if (istype(AM,/mob/living/silicon) && prob(40))
 		shock(AM)
 		return 1
-	if(istype(AM,/mob/living/carbon) && prob(50))
+	if (istype(AM,/mob/living/carbon) && prob(50))
 		shock(AM)
 		return 1
 	return 0
@@ -41,12 +41,12 @@
 
 
 /obj/machinery/containment_field/shock(mob/living/user as mob)
-	if(hasShocked)
+	if (hasShocked)
 		return 0
-	if(!FG1 || !FG2)
+	if (!FG1 || !FG2)
 		qdel(src)
 		return 0
-	if(isliving(user))
+	if (isliving(user))
 		hasShocked = 1
 		var/shock_damage = min(rand(30,40),rand(30,40))
 		user.electrocute_act(shock_damage, src)
@@ -60,7 +60,7 @@
 		return TRUE
 
 /obj/machinery/containment_field/proc/set_master(master1,master2)
-	if(!master1 || !master2)
+	if (!master1 || !master2)
 		return 0
 	FG1 = master1
 	FG2 = master2

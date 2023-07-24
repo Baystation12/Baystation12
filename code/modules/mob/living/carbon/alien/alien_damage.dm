@@ -1,7 +1,7 @@
 /mob/living/carbon/alien/ex_act(severity)
 	if (status_flags & GODMODE)
 		return
-	if(!blinded)
+	if (!blinded)
 		flash_eyes()
 
 	var/b_loss = null
@@ -21,7 +21,7 @@
 			ear_damage += 30
 			ear_deaf += 120
 
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			b_loss += 30
 			if (prob(50))
 				Paralyse(1)

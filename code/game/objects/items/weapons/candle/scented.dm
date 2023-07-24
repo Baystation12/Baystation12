@@ -16,7 +16,7 @@
 
 /obj/item/flame/candle/scented/attack_self(mob/user as mob)
 	..()
-	if(!lit)
+	if (!lit)
 		remove_extension(src, /datum/extension/scent)
 
 /obj/item/flame/candle/scented/extinguish(mob/user, no_message)
@@ -25,16 +25,16 @@
 
 /obj/item/flame/candle/scented/light(mob/user)
 	..()
-	if(lit)
+	if (lit)
 		set_extension(src, style.scent_datum)
 
 /obj/item/flame/candle/scented/proc/get_scent()
 	var/scent_type = DEFAULTPICK(scent_types, null)
-	if(scent_type)
+	if (scent_type)
 		style = GET_SINGLETON(scent_type)
 		color = style.color
 		scent = style.scent
-	if(scent)
+	if (scent)
 		desc += " This one smells of [scent]."
 	update_icon()
 

@@ -50,32 +50,32 @@
 
 /obj/item/device/assembly/process_cooldown()
 	cooldown--
-	if(cooldown <= 0)	return 0
+	if (cooldown <= 0)	return 0
 	spawn(10)
 		process_cooldown()
 	return 1
 
 
 /obj/item/device/assembly/pulsed(radio = 0)
-	if(holder && (wires & WIRE_RECEIVE))
+	if (holder && (wires & WIRE_RECEIVE))
 		activate()
-	if(radio && (wires & WIRE_RADIO_RECEIVE))
+	if (radio && (wires & WIRE_RADIO_RECEIVE))
 		activate()
 	return 1
 
 
 /obj/item/device/assembly/pulse(radio = 0)
-	if(holder && (wires & WIRE_PULSE))
+	if (holder && (wires & WIRE_PULSE))
 		holder.process_activation(src, 1, 0)
-	if(holder && (wires & WIRE_PULSE_SPECIAL))
+	if (holder && (wires & WIRE_PULSE_SPECIAL))
 		holder.process_activation(src, 0, 1)
-//		if(radio && (wires & WIRE_RADIO_PULSE))
+//		if (radio && (wires & WIRE_RADIO_PULSE))
 		//Not sure what goes here quite yet send signal?
 	return 1
 
 
 /obj/item/device/assembly/activate()
-	if(!secured || (cooldown > 0))	return 0
+	if (!secured || (cooldown > 0))	return 0
 	cooldown = 2
 	spawn(10)
 		process_cooldown()
@@ -142,15 +142,15 @@
 
 /obj/item/device/assembly/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1 || loc == user)
-		if(secured)
+	if (distance <= 1 || loc == user)
+		if (secured)
 			to_chat(user, "\The [src] is ready!")
 		else
 			to_chat(user, "\The [src] can be attached!")
 
 
 /obj/item/device/assembly/attack_self(mob/user as mob)
-	if(!user)	return 0
+	if (!user)	return 0
 	user.set_machine(src)
 	interact(user)
 	return 1
@@ -159,7 +159,7 @@
 	return //HTML MENU FOR WIRES GOES HERE
 
 /obj/item/device/assembly/nano_host()
-	if(istype(loc, /obj/item/device/assembly_holder))
+	if (istype(loc, /obj/item/device/assembly_holder))
 		return loc.nano_host()
 	return ..()
 
@@ -176,7 +176,7 @@
 
 
 	Activate()
-		if(cooldown > 0)
+		if (cooldown > 0)
 			return 0
 		cooldown = 2
 		spawn(10)
@@ -187,15 +187,15 @@
 
 	Process_cooldown()
 		cooldown--
-		if(cooldown <= 0)	return 0
+		if (cooldown <= 0)	return 0
 		spawn(10)
 			Process_cooldown()
 		return 1
 
 
 	Attach_Holder(var/obj/H, var/mob/user)
-		if(!H)	return 0
-		if(!H.IsAssemblyHolder())	return 0
+		if (!H)	return 0
+		if (!H.IsAssemblyHolder())	return 0
 		//Remember to have it set its loc somewhere in here
 
 

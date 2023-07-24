@@ -16,12 +16,12 @@
 	set category = "Object"
 	set desc = "Alter the message shouted by your hailer."
 
-	if(!isnull(insults))
+	if (!isnull(insults))
 		to_chat(usr, "The hailer is fried. The tiny input screen just shows a waving ASCII penis.")
 		return
 
 	var/new_message = input(usr, "Please enter new message (leave blank to reset).") as text
-	if(!new_message || new_message == "")
+	if (!new_message || new_message == "")
 		use_message = "Halt! Security!"
 	else
 		use_message = capitalize(copytext(sanitize(new_message), 1, MAX_LNAME_LEN))
@@ -32,7 +32,7 @@
 	if (spamcheck)
 		return
 
-	if(isnull(insults))
+	if (isnull(insults))
 		playsound(get_turf(src), 'sound/voice/halt.ogg', 100, 1, vary = 0)
 		user.audible_message(
 			SPAN_WARNING("[user]'s [name] rasps, \"[use_message]\""),
@@ -47,7 +47,7 @@
 		spamcheck = 0
 
 /obj/item/device/hailer/emag_act(remaining_charges, mob/user)
-	if(isnull(insults))
+	if (isnull(insults))
 		to_chat(user, SPAN_DANGER("You overload \the [src]'s voice synthesizer."))
 		insults = rand(1, 3)//to prevent dickflooding
 		return 1

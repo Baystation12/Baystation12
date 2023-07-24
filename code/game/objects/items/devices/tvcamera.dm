@@ -50,44 +50,44 @@
 	popup.open()
 
 /obj/item/device/camera/tvcamera/Topic(bred, href_list, state = GLOB.physical_state)
-	if(..())
+	if (..())
 		return 1
 	if (href_list["photo"])
 		on = !on
 	if (href_list["focus"])
 		change_size()
-	if(href_list["channel"])
+	if (href_list["channel"])
 		var/nc = sanitize(input(usr, "Channel name", "Select new channel name", channel) as text|null)
-		if(nc)
+		if (nc)
 			channel = nc
 			camera.c_tag = channel
 			to_chat(usr, SPAN_NOTICE("New channel name: '[channel]' has been set."))
-	if(href_list["video"])
+	if (href_list["video"])
 		camera.set_status(!camera.status)
-		if(camera.status)
+		if (camera.status)
 			to_chat(usr,SPAN_NOTICE("Video streaming: Activated. Broadcasting on channel: '[channel]'"))
 		else
 			to_chat(usr,SPAN_NOTICE("Video streaming: Deactivated."))
 		update_icon()
-	if(href_list["sound"])
+	if (href_list["sound"])
 		radio.ToggleBroadcast()
-		if(radio.broadcasting)
+		if (radio.broadcasting)
 			to_chat(usr,SPAN_NOTICE("Audio streaming: Activated. Broadcasting on frequency: [format_frequency(radio.frequency)]."))
 		else
 			to_chat(usr,SPAN_NOTICE("Audio streaming: Deactivated."))
-	if(!href_list["close"])
+	if (!href_list["close"])
 		attack_self(usr)
 
 /obj/item/device/camera/tvcamera/on_update_icon()
 	..()
-	if(camera.status)
+	if (camera.status)
 		icon_state = "camcorder_on"
 		item_state = "camcorder_on"
 	else
 		icon_state = "camcorder"
 		item_state = "camcorder"
 	var/mob/living/carbon/human/H = loc
-	if(istype(H))
+	if (istype(H))
 		H.update_inv_r_hand(0)
 		H.update_inv_l_hand()
 
@@ -115,23 +115,23 @@ Using robohead because of restricting to roboticist */
 
 /obj/item/TVAssembly/attackby(obj/item/W, mob/user)
 	switch(buildstep)
-		if(0)
-			if(istype(W, /obj/item/robot_parts/robot_component/camera))
+		if (0)
+			if (istype(W, /obj/item/robot_parts/robot_component/camera))
 				to_chat(user, SPAN_NOTICE("You add the camera module to [src]"))
 				qdel(W)
 				desc = "This TV camera assembly has a camera module."
 				buildstep++
-		if(1)
-			if(istype(W, /obj/item/device/taperecorder))
+		if (1)
+			if (istype(W, /obj/item/device/taperecorder))
 				qdel(W)
 				buildstep++
 				to_chat(user, SPAN_NOTICE("You add the tape recorder to [src]"))
 				desc = "This TV camera assembly has a camera and audio module."
 				return
-		if(2)
-			if(isCoil(W))
+		if (2)
+			if (isCoil(W))
 				var/obj/item/stack/cable_coil/C = W
-				if(!C.use(3))
+				if (!C.use(3))
 					to_chat(user, SPAN_NOTICE("You need three cable coils to wire the devices."))
 					..()
 					return
@@ -139,16 +139,16 @@ Using robohead because of restricting to roboticist */
 				to_chat(user, SPAN_NOTICE("You wire the assembly"))
 				desc = "This TV camera assembly has wires sticking out."
 				return
-		if(3)
-			if(isWirecutter(W))
+		if (3)
+			if (isWirecutter(W))
 				to_chat(user, SPAN_NOTICE(" You trim the wires."))
 				buildstep++
 				desc = "This TV camera assembly needs casing."
 				return
-		if(4)
-			if(istype(W, /obj/item/stack/material/steel))
+		if (4)
+			if (istype(W, /obj/item/stack/material/steel))
 				var/obj/item/stack/material/steel/S = W
-				if(S.use(1))
+				if (S.use(1))
 					buildstep++
 					to_chat(user, SPAN_NOTICE("You encase the assembly."))
 					var/turf/T = get_turf(src)

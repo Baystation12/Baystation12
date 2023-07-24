@@ -26,23 +26,23 @@
 
 /mob/observer/eye/aiEye/setLoc(T, cancel_tracking = 1)
 	. = ..()
-	if(. && isAI(owner))
+	if (. && isAI(owner))
 		var/mob/living/silicon/ai/ai = owner
-		if(cancel_tracking)
+		if (cancel_tracking)
 			ai.ai_cancel_tracking()
 
 		//Holopad
-		if(ai.holo && ai.hologram_follow)
+		if (ai.holo && ai.hologram_follow)
 			ai.holo.move_hologram(ai)
 		return 1
 
 /mob/observer/eye/aiEye/set_dir(new_dir)
 	. = ..()
-	if(. && isAI(owner))
+	if (. && isAI(owner))
 		var/mob/living/silicon/ai/ai = owner
 
 		//Holopad
-		if(ai.holo && ai.hologram_follow)
+		if (ai.holo && ai.hologram_follow)
 			ai.holo.set_dir_hologram(new_dir, ai)
 		return 1
 
@@ -54,17 +54,17 @@
 	var/obj/machinery/hologram/holopad/holo = null
 
 /mob/living/silicon/ai/proc/destroy_eyeobj(atom/new_eye)
-	if(!eyeobj) return
-	if(!new_eye)
+	if (!eyeobj) return
+	if (!new_eye)
 		new_eye = src
 	qdel(eyeobj) // No AI, no Eye
 	eyeobj = null
-	if(client)
+	if (client)
 		client.eye = new_eye
 
 /mob/living/silicon/ai/proc/create_eyeobj(newloc)
-	if(eyeobj) destroy_eyeobj()
-	if(!newloc) newloc = get_turf(src)
+	if (eyeobj) destroy_eyeobj()
+	if (!newloc) newloc = get_turf(src)
 	eyeobj = new /mob/observer/eye/aiEye(newloc)
 	eyeobj.possess(src)
 
@@ -82,9 +82,9 @@
  * Handles moving an AI's 'eye' to a location on click.
  */
 /atom/proc/move_camera_by_click()
-	if(istype(usr, /mob/living/silicon/ai))
+	if (istype(usr, /mob/living/silicon/ai))
 		var/mob/living/silicon/ai/AI = usr
-		if(AI.eyeobj && AI.client.eye == AI.eyeobj)
+		if (AI.eyeobj && AI.client.eye == AI.eyeobj)
 			AI.eyeobj.setLoc(src)
 
 // Return to the Core.
@@ -98,7 +98,7 @@
 	camera = null
 	unset_machine()
 
-	if(!src.eyeobj)
+	if (!src.eyeobj)
 		return
 
 	eyeobj.possess(src)
@@ -107,7 +107,7 @@
 	set category = "Silicon Commands"
 	set name = "Toggle Camera Acceleration"
 
-	if(!eyeobj)
+	if (!eyeobj)
 		return
 
 	eyeobj.acceleration = !eyeobj.acceleration

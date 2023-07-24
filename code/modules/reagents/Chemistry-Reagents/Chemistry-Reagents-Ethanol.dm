@@ -195,7 +195,7 @@
 	M.dizziness = max(0, M.dizziness - 5)
 	M.drowsyness = max(0, M.drowsyness - 3)
 	M.sleeping = max(0, M.sleeping - 2)
-	if(M.bodytemperature > 310)
+	if (M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 /datum/reagent/ethanol/coffee/overdose(mob/living/carbon/M)
@@ -1160,13 +1160,13 @@
 
 /datum/reagent/ethanol/pwine/affect_ingest(mob/living/carbon/M, removed)
 	..()
-	if(M.chem_doses[type] > 30)
+	if (M.chem_doses[type] > 30)
 		M.adjustToxLoss(2 * removed)
-	if(M.chem_doses[type] > 60 && ishuman(M) && prob(5))
+	if (M.chem_doses[type] > 60 && ishuman(M) && prob(5))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
 		if (L && istype(L))
-			if(M.chem_doses[type] < 120)
+			if (M.chem_doses[type] < 120)
 				L.take_internal_damage(10 * removed, 0)
 			else
 				L.take_internal_damage(100, 0)
@@ -1523,16 +1523,16 @@
 
 /datum/reagent/ethanol/alien/qokkloa/affect_ingest(mob/living/carbon/M, removed)
 	..()
-	if(M.HasTrait(/singleton/trait/boon/clear_mind))
+	if (M.HasTrait(/singleton/trait/boon/clear_mind))
 		return
 
-	if(M.chem_doses[type] < 5)
+	if (M.chem_doses[type] < 5)
 		M.adjustToxLoss(5 * removed)
-	if(M.chem_doses[type] > 5 && ishuman(M))
+	if (M.chem_doses[type] > 5 && ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
 		if (istype(L))
-			if(M.chem_doses[type] < 10)
+			if (M.chem_doses[type] < 10)
 				L.take_internal_damage(2 * removed, 0)
 				M.adjustToxLoss(5 * removed)
 			else

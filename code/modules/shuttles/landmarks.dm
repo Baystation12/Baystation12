@@ -25,13 +25,13 @@
 
 /obj/effect/shuttle_landmark/Initialize()
 	. = ..()
-	if(docking_controller)
+	if (docking_controller)
 		. = INITIALIZE_HINT_LATELOAD
 
-	if(flags & SLANDMARK_FLAG_AUTOSET)
+	if (flags & SLANDMARK_FLAG_AUTOSET)
 		base_area = get_area(src)
 		var/turf/T = get_turf(src)
-		if(T)
+		if (T)
 			base_turf = T.type
 	else
 		base_area = locate(base_area || world.area)
@@ -40,25 +40,25 @@
 	SSshuttle.register_landmark(landmark_tag, src)
 
 /obj/effect/shuttle_landmark/LateInitialize()
-	if(!docking_controller)
+	if (!docking_controller)
 		return
 	var/docking_tag = docking_controller
 	docking_controller = SSshuttle.docking_registry[docking_tag]
-	if(!istype(docking_controller))
+	if (!istype(docking_controller))
 		CRASH("Could not find docking controller for shuttle waypoint '[name]', docking tag was '[docking_tag]'.")
-	if(GLOB.using_map.use_overmap)
+	if (GLOB.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/location = map_sectors["[z]"]
-		if(location && location.docking_codes)
+		if (location && location.docking_codes)
 			docking_controller.docking_codes = location.docking_codes
 
 /obj/effect/shuttle_landmark/forceMove()
 	var/obj/effect/overmap/visitable/map_origin = map_sectors["[z]"]
 	. = ..()
 	var/obj/effect/overmap/visitable/map_destination = map_sectors["[z]"]
-	if(map_origin != map_destination)
-		if(map_origin)
+	if (map_origin != map_destination)
+		if (map_origin)
 			map_origin.remove_landmark(src, shuttle_restricted)
-		if(map_destination)
+		if (map_destination)
 			map_destination.add_landmark(src, shuttle_restricted)
 
 //Called when the landmark is added to an overmap sector.
@@ -66,15 +66,15 @@
 	shuttle_restricted = shuttle_name
 
 /obj/effect/shuttle_landmark/proc/is_valid(datum/shuttle/shuttle)
-	if(shuttle.current_location == src)
+	if (shuttle.current_location == src)
 		return FALSE
 	for(var/area/A in shuttle.shuttle_area)
 		var/list/translation = get_turf_translation(get_turf(shuttle.current_location), get_turf(src), A.contents)
-		if(check_collision(base_area, list_values(translation)))
+		if (check_collision(base_area, list_values(translation)))
 			return FALSE
 	var/conn = GetConnectedZlevels(z)
 	for(var/w in (z - shuttle.multiz) to z)
-		if(!(w in conn))
+		if (!(w in conn))
 			return FALSE
 	return TRUE
 
@@ -86,11 +86,11 @@
 /proc/check_collision(area/target_area, list/target_turfs)
 	for(var/target_turf in target_turfs)
 		var/turf/target = target_turf
-		if(!target)
+		if (!target)
 			return TRUE //collides with edge of map
-		if(target.loc != target_area)
+		if (target.loc != target_area)
 			return TRUE //collides with another area
-		if(target.density)
+		if (target.density)
 			return TRUE //dense turf
 	return FALSE
 
@@ -119,7 +119,7 @@
 /obj/effect/shuttle_landmark/automatic/clearing/LateInitialize()
 	..()
 	for(var/turf/T in range(radius, src))
-		if(T.density)
+		if (T.density)
 			T.ChangeTurf(get_base_turf_by_area(T))
 
 

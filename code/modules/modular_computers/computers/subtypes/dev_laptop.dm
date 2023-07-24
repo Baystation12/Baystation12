@@ -25,9 +25,9 @@
 /obj/item/modular_computer/laptop/AltClick(mob/user)
 // Prevents carrying of open laptops inhand.
 // While they work inhand, i feel it'd make tablets lose some of their high-mobility advantage they have over laptops now.
-	if(!CanPhysicallyInteract(user))
+	if (!CanPhysicallyInteract(user))
 		return FALSE
-	if(!isturf(loc))
+	if (!isturf(loc))
 		to_chat(usr, "\The [src] has to be on a stable surface first!")
 		return TRUE
 	anchored = !anchored
@@ -36,7 +36,7 @@
 	return TRUE
 
 /obj/item/modular_computer/laptop/on_update_icon()
-	if(anchored)
+	if (anchored)
 		..()
 	else
 		overlays.Cut()

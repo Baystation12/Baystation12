@@ -24,9 +24,9 @@
 
 /obj/machinery/meter/Initialize()
 	. = ..()
-	if(!target)
+	if (!target)
 		set_target(locate(/obj/machinery/atmospherics/pipe) in loc)
-	if(!target)
+	if (!target)
 		set_target(loc)
 
 /obj/machinery/meter/proc/set_target(atom/new_target)
@@ -35,12 +35,12 @@
 	GLOB.destroyed_event.register(target, src, .proc/clear_target)
 
 /obj/machinery/meter/proc/clear_target()
-	if(target)
+	if (target)
 		GLOB.destroyed_event.unregister(target, src)
 		target = null
 
 /obj/machinery/meter/return_air()
-	if(target)
+	if (target)
 		return target.return_air()
 	return ..()
 
@@ -50,29 +50,29 @@
 
 /obj/machinery/meter/Process()
 	..()
-	if(!target)
+	if (!target)
 		icon_state = "meterX"
 		return 0
 
-	if(inoperable())
+	if (inoperable())
 		icon_state = "meter0"
 		return 0
 
 	var/datum/gas_mixture/environment = return_air()
-	if(!environment)
+	if (!environment)
 		icon_state = "meterX"
 		return 0
 
 	var/env_pressure = environment.return_pressure()
-	if(env_pressure <= 0.15*ONE_ATMOSPHERE)
+	if (env_pressure <= 0.15*ONE_ATMOSPHERE)
 		icon_state = "meter0"
-	else if(env_pressure <= 1.8*ONE_ATMOSPHERE)
+	else if (env_pressure <= 1.8*ONE_ATMOSPHERE)
 		var/val = round(env_pressure/(ONE_ATMOSPHERE*0.3) + 0.5)
 		icon_state = "meter1_[val]"
-	else if(env_pressure <= 30*ONE_ATMOSPHERE)
+	else if (env_pressure <= 30*ONE_ATMOSPHERE)
 		var/val = round(env_pressure/(ONE_ATMOSPHERE*5)-0.35) + 1
 		icon_state = "meter2_[val]"
-	else if(env_pressure <= 59*ONE_ATMOSPHERE)
+	else if (env_pressure <= 59*ONE_ATMOSPHERE)
 		var/val = round(env_pressure/(ONE_ATMOSPHERE*5) - 6) + 1
 		icon_state = "meter3_[val]"
 	else
@@ -82,15 +82,15 @@
 /obj/machinery/meter/examine(mob/user, distance)
 	. = ..()
 
-	if(distance > 3 && !(istype(user, /mob/living/silicon/ai) || isghost(user)))
+	if (distance > 3 && !(istype(user, /mob/living/silicon/ai) || isghost(user)))
 		to_chat(user, SPAN_WARNING("You are too far away to read it."))
 
-	else if(inoperable())
+	else if (inoperable())
 		to_chat(user, SPAN_WARNING("The display is off."))
 
-	else if(src.target)
+	else if (src.target)
 		var/datum/gas_mixture/environment = target.return_air()
-		if(environment)
+		if (environment)
 			to_chat(user, "The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]K ([round(environment.temperature-T0C,0.01)]&deg;C)")
 		else
 			to_chat(user, "The sensor error light is blinking.")

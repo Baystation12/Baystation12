@@ -47,7 +47,7 @@
 /obj/structure/ship_munition/disperser_charge/mining/fire(turf/target, strength, range)
 	var/list/victims = range(range * 3, target)
 	for(var/turf/simulated/mineral/M in victims)
-		if(prob(strength * 100 / 6)) //6 instead of 5 so there are always leftovers
+		if (prob(strength * 100 / 6)) //6 instead of 5 so there are always leftovers
 			M.GetDrilled(TRUE) //no artifacts survive this
 	for(var/mob/living/L in victims)
 		to_chat(L, SPAN_DANGER("You feel an incredible force ripping and tearing at you."))

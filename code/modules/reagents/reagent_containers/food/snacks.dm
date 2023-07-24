@@ -56,25 +56,25 @@
 
 
 /obj/item/reagent_containers/food/snacks/attack(mob/M as mob, mob/user as mob, def_zone)
-	if(!reagents || !reagents.total_volume)
+	if (!reagents || !reagents.total_volume)
 		to_chat(user, SPAN_DANGER("None of [src] left!"))
 		qdel(src)
 		return 0
-	if(!is_open_container())
+	if (!is_open_container())
 		to_chat(user, SPAN_NOTICE("\The [src] isn't open!"))
 		return 0
-	if(istype(M, /mob/living/carbon))
+	if (istype(M, /mob/living/carbon))
 		//TODO: replace with standard_feed_mob() call.
 		var/mob/living/carbon/C = M
 		var/fullness = C.get_fullness()
-		if(C == user)								//If you're eating it yourself
-			if(istype(C,/mob/living/carbon/human))
+		if (C == user)								//If you're eating it yourself
+			if (istype(C,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
-				if(!H.check_has_mouth())
+				if (!H.check_has_mouth())
 					to_chat(user, "Where do you intend to put \the [src]? You don't have a mouth!")
 					return
 				var/obj/item/blocked = H.check_mouth_coverage()
-				if(blocked)
+				if (blocked)
 					to_chat(user, SPAN_WARNING("\The [blocked] is in the way!"))
 					return
 
@@ -91,7 +91,7 @@
 				to_chat(C, SPAN_DANGER("You cannot force any more of [src] to go down your throat."))
 				return 0
 		else
-			if(!M.can_force_feed(user, src))
+			if (!M.can_force_feed(user, src))
 				return
 
 			if (fullness <= 550)
@@ -101,7 +101,7 @@
 				return 0
 
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			if(!do_after(user, 3 SECONDS, M, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)) return
+			if (!do_after(user, 3 SECONDS, M, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)) return
 
 			if (user.get_active_hand() != src)
 				return
@@ -110,11 +110,11 @@
 			admin_attack_log(user, M, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
 			user.visible_message(SPAN_DANGER("[user] feeds [M] [src]."))
 
-		if(reagents) //Handle ingestion of the reagent.
-			if(eat_sound)
+		if (reagents) //Handle ingestion of the reagent.
+			if (eat_sound)
 				playsound(M, pick(eat_sound), rand(10, 50), 1)
-			if(reagents.total_volume)
-				if(reagents.total_volume > bitesize)
+			if (reagents.total_volume)
+				if (reagents.total_volume > bitesize)
 					reagents.trans_to_mob(M, bitesize, CHEM_INGEST)
 				else
 					reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
@@ -126,7 +126,7 @@
 
 /obj/item/reagent_containers/food/snacks/examine(mob/user, distance)
 	. = ..()
-	if(distance > 1)
+	if (distance > 1)
 		return
 	if (bitecount==0)
 		return
@@ -138,17 +138,17 @@
 		to_chat(user, SPAN_NOTICE("\The [src] was bitten multiple times!"))
 
 /obj/item/reagent_containers/food/snacks/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/storage))
+	if (istype(W,/obj/item/storage))
 		..()// -> item/attackby()
 		return
-	if(!is_open_container())
+	if (!is_open_container())
 		to_chat(user, SPAN_NOTICE("\The [src] isn't open!"))
 		return 0
 	// Eating with forks
-	if(istype(W,/obj/item/material/kitchen/utensil))
+	if (istype(W,/obj/item/material/kitchen/utensil))
 		var/obj/item/material/kitchen/utensil/U = W
-		if(U.scoop_food)
-			if(!U.reagents)
+		if (U.scoop_food)
+			if (!U.reagents)
 				U.create_reagents(5)
 
 			if (U.reagents.total_volume > 0)
@@ -164,7 +164,7 @@
 			I.color = src.filling_color
 			U.overlays += I
 
-			if(!reagents)
+			if (!reagents)
 				crash_with("A snack [type] failed to have a reagent holder when attacked with a [W.type]. It was [QDELETED(src) ? "" : "not"] being deleted.")
 			else
 				reagents.trans_to_obj(U, min(reagents.total_volume,5))
@@ -185,7 +185,7 @@
 		if (hide_item)
 			if (W.w_class >= src.w_class || is_robot_module(W) || istype(W,/obj/item/reagent_containers/food/condiment))
 				return
-			if(!user.unEquip(W, src))
+			if (!user.unEquip(W, src))
 				return
 
 			to_chat(user, SPAN_WARNING("You slip \the [W] inside \the [src]."))
@@ -210,7 +210,7 @@
 				var/obj/item/reagent_containers/food/snacks/S = new slice_path (src.loc)
 				reagents.trans_to_obj(S, reagents_per_slice)
 
-				if(istype(src, /obj/item/reagent_containers/food/snacks/sliceable/variable))
+				if (istype(src, /obj/item/reagent_containers/food/snacks/sliceable/variable))
 					S.SetName("[name] slice")
 					S.filling_color = filling_color
 					var/image/I = image(S.icon, "[S.icon_state]_filling")
@@ -224,24 +224,24 @@
 	return (slices_num && slice_path && slices_num > 0)
 
 /obj/item/reagent_containers/food/snacks/Destroy()
-	if(contents)
+	if (contents)
 		for(var/atom/movable/something in contents)
 			something.dropInto(loc)
 	. = ..()
 
 /obj/item/reagent_containers/food/snacks/afterattack(obj/item/reagent_containers/food/drinks/glass2/glass, mob/user, proximity)
 	..()
-	if(!proximity)
+	if (!proximity)
 		return
-	if(istype(glass))
-		if(w_class != ITEM_SIZE_TINY)
+	if (istype(glass))
+		if (w_class != ITEM_SIZE_TINY)
 			to_chat(user, SPAN_NOTICE("\The [src] is too big to properly dip in \the [glass]."))
 			return
 		var/transfered = glass.reagents.trans_to_obj(src, volume)
-		if(transfered)	//if reagents were transfered, show the message
+		if (transfered)	//if reagents were transfered, show the message
 			to_chat(user, SPAN_NOTICE("You dip \the [src] into \the [glass]."))
 		else			//if not, either the glass was empty, or the food was full
-			if(!glass.reagents.total_volume)
+			if (!glass.reagents.total_volume)
 				to_chat(user, SPAN_NOTICE("\The [glass] is empty."))
 			else
 				to_chat(user, SPAN_NOTICE("\The [src] is full."))
@@ -250,14 +250,14 @@
 /// FOOD END
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/reagent_containers/food/snacks/attack_animal(mob/living/user)
-	if(!isanimal(user) && !isalien(user))
+	if (!isanimal(user) && !isalien(user))
 		return
 	user.visible_message("<b>[user]</b> nibbles away at \the [src].","You nibble away at \the [src].")
 	bitecount++
-	if(reagents && user.reagents)
+	if (reagents && user.reagents)
 		reagents.trans_to_mob(user, bitesize, CHEM_INGEST)
 	spawn(5)
-		if(!src && !user.client)
+		if (!src && !user.client)
 			user.custom_emote(1,"[pick("burps", "cries for more", "burps twice", "looks at the area where the food was")]")
 			qdel(src)
 	OnConsume(user, user)
@@ -321,16 +321,16 @@
 	reagents.add_reagent(/datum/reagent/nutriment/protein/egg, 3)
 
 /obj/item/reagent_containers/food/snacks/egg/afterattack(obj/O as obj, mob/user as mob, proximity)
-	if(istype(O,/obj/machinery/microwave))
+	if (istype(O,/obj/machinery/microwave))
 		return ..()
-	if(!(proximity && O.is_open_container()))
+	if (!(proximity && O.is_open_container()))
 		return
 	to_chat(user, "You crack \the [src] into \the [O].")
 	reagents.trans_to(O, reagents.total_volume)
 	qdel(src)
 
 /obj/item/reagent_containers/food/snacks/egg/throw_impact(atom/hit_atom)
-	if(QDELETED(src))
+	if (QDELETED(src))
 		return // Could potentially happen with unscupulous atoms on hitby() throwing again, etc.
 	new/obj/effect/decal/cleanable/egg_smudge(src.loc)
 	reagents.splash(hit_atom, reagents.total_volume)
@@ -339,11 +339,11 @@
 	qdel(src)
 
 /obj/item/reagent_containers/food/snacks/egg/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype( W, /obj/item/pen/crayon ))
+	if (istype( W, /obj/item/pen/crayon ))
 		var/obj/item/pen/crayon/C = W
 		var/clr = C.colourName
 
-		if(!(clr in list("blue","green","mime","orange","purple","rainbow","red","yellow")))
+		if (!(clr in list("blue","green","mime","orange","purple","rainbow","red","yellow")))
 			to_chat(usr, SPAN_NOTICE("The egg refuses to take on this color!"))
 			return
 
@@ -385,7 +385,7 @@
 /obj/item/reagent_containers/food/snacks/egg/lizard/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein/egg, 5)
-	if(prob(30))	//extra nutriment
+	if (prob(30))	//extra nutriment
 		reagents.add_reagent(/datum/reagent/nutriment/protein, 5)
 
 /obj/item/reagent_containers/food/snacks/friedegg
@@ -681,7 +681,7 @@
 	bitesize = 2
 /obj/item/reagent_containers/food/snacks/roburger/Initialize()
 	.=..()
-	if(prob(5))
+	if (prob(5))
 		reagents.add_reagent(/datum/reagent/nanites, 2)
 
 /obj/item/reagent_containers/food/snacks/roburgerbig
@@ -895,7 +895,7 @@
 	bitesize = 2
 /obj/item/reagent_containers/food/snacks/plump_pie/Initialize()
 	.=..()
-	if(prob(10))
+	if (prob(10))
 		name = "exceptional plump pie"
 		desc = "Microwave is taken by a fey mood! It has cooked an exceptional plump pie!"
 		reagents.add_reagent(/datum/reagent/tricordrazine, 5)
@@ -1259,37 +1259,37 @@
 /obj/item/reagent_containers/food/snacks/mysterysoup/Initialize()
 	.=..()
 	switch(rand(1,10))
-		if(1)
+		if (1)
 			reagents.add_reagent(/datum/reagent/nutriment, 6)
 			reagents.add_reagent(/datum/reagent/capsaicin, 3)
 			reagents.add_reagent(/datum/reagent/drink/juice/tomato, 2)
-		if(2)
+		if (2)
 			reagents.add_reagent(/datum/reagent/nutriment, 6)
 			reagents.add_reagent(/datum/reagent/frostoil, 3)
 			reagents.add_reagent(/datum/reagent/drink/juice/tomato, 2)
-		if(3)
+		if (3)
 			reagents.add_reagent(/datum/reagent/nutriment, 5)
 			reagents.add_reagent(/datum/reagent/water, 5)
 			reagents.add_reagent(/datum/reagent/tricordrazine, 5)
-		if(4)
+		if (4)
 			reagents.add_reagent(/datum/reagent/nutriment, 5)
 			reagents.add_reagent(/datum/reagent/water, 10)
-		if(5)
+		if (5)
 			reagents.add_reagent(/datum/reagent/nutriment, 2)
 			reagents.add_reagent(/datum/reagent/drink/juice/banana, 10)
-		if(6)
+		if (6)
 			reagents.add_reagent(/datum/reagent/nutriment, 6)
 			reagents.add_reagent(/datum/reagent/blood, 10)
-		if(7)
+		if (7)
 			reagents.add_reagent(/datum/reagent/slimejelly, 10)
 			reagents.add_reagent(/datum/reagent/water, 10)
-		if(8)
+		if (8)
 			reagents.add_reagent(/datum/reagent/carbon, 10)
 			reagents.add_reagent(/datum/reagent/toxin, 10)
-		if(9)
+		if (9)
 			reagents.add_reagent(/datum/reagent/nutriment, 5)
 			reagents.add_reagent(/datum/reagent/drink/juice/tomato, 10)
-		if(10)
+		if (10)
 			reagents.add_reagent(/datum/reagent/nutriment, 6)
 			reagents.add_reagent(/datum/reagent/drink/juice/tomato, 5)
 			reagents.add_reagent(/datum/reagent/imidazoline, 5)
@@ -1307,7 +1307,7 @@
 /obj/item/reagent_containers/food/snacks/wishsoup/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/water, 10)
-	if(prob(25))
+	if (prob(25))
 		src.desc = "A wish come true!"
 		reagents.add_reagent(/datum/reagent/nutriment, 8, list("something good" = 8))
 
@@ -1363,11 +1363,11 @@
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 10)
 
 /obj/item/reagent_containers/food/snacks/monkeycube/attack_self(mob/user)
-	if(wrapped)
+	if (wrapped)
 		Unwrap(user)
 
 /obj/item/reagent_containers/food/snacks/monkeycube/proc/Expand()
-	if(!growing)
+	if (!growing)
 		growing = TRUE
 		src.visible_message(SPAN_NOTICE("\The [src] expands!"))
 		var/mob/monkey = new monkey_type
@@ -1405,7 +1405,7 @@
 	Expand()
 
 /obj/item/reagent_containers/food/snacks/monkeycube/on_reagent_change()
-	if(reagents.has_reagent(/datum/reagent/water))
+	if (reagents.has_reagent(/datum/reagent/water))
 		Expand()
 
 /obj/item/reagent_containers/food/snacks/monkeycube/wrapped
@@ -1482,7 +1482,7 @@
 	var/spawn_type = /mob/living/carbon/human
 
 /obj/item/reagent_containers/food/snacks/corpse_cube/use_tool(obj/item/device/dna_sampler/W, mob/user)
-	if(istype(W))
+	if (istype(W))
 		if (W.loaded == 1)
 			to_chat(user, "You inject the DNA sample into the cube.")
 			CorpseExpand(W.src_dna,W.src_name,W.src_species,W.src_pronouns,W.src_faction,W.src_flavor)
@@ -1504,7 +1504,7 @@
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 10)
 
 /obj/item/reagent_containers/food/snacks/corpse_cube/proc/CorpseExpand(source_DNA,source_name,source_species,source_pronouns, source_faction, source_flavor)
-	if(!growing)
+	if (!growing)
 		growing = TRUE
 		var/mob/living/carbon/human/H = new spawn_type
 		H.dna = source_DNA
@@ -1791,7 +1791,7 @@
 	bitesize = 2
 
 /obj/item/reagent_containers/food/snacks/boiledrice/use_tool(obj/item/reagent_containers/food/snacks/W as obj, mob/user as mob)
-	if(istype(W) && W.sushi_overlay)
+	if (istype(W) && W.sushi_overlay)
 		new /obj/item/reagent_containers/food/snacks/sushi(get_turf(src), src, W)
 		return TRUE
 	return ..()
@@ -2023,7 +2023,7 @@
 	bitesize = 2
 /obj/item/reagent_containers/food/snacks/plumphelmetbiscuit/Initialize()
 	.=..()
-	if(prob(10))
+	if (prob(10))
 		name = "exceptional plump helmet biscuit"
 		desc = "Microwave is taken by a fey mood! It has cooked an exceptional plump helmet biscuit!"
 		reagents.add_reagent(/datum/reagent/nutriment, 3)
@@ -2128,9 +2128,9 @@
  */
 /obj/item/reagent_containers/food/snacks/slice/Initialize()
 	.=..()
-	if(filled)
+	if (filled)
 		var/obj/item/reagent_containers/food/snacks/whole = new whole_path()
-		if(whole && whole.slices_num)
+		if (whole && whole.slices_num)
 			var/reagent_amount = whole.reagents.total_volume/whole.slices_num
 			whole.reagents.trans_to_obj(src, reagent_amount)
 		qdel(whole)
@@ -2760,29 +2760,29 @@
 	overlays.Cut()
 
 	// Set appropriate description
-	if( open && pizza )
+	if ( open && pizza )
 		desc = "A box suited for pizzas. It appears to have a [pizza.name] inside."
-	else if( length(boxes) > 0 )
+	else if ( length(boxes) > 0 )
 		desc = "A pile of boxes suited for pizzas. There appears to be [length(boxes) + 1] boxes in the pile."
 
 		var/obj/item/pizzabox/topbox = boxes[length(boxes)]
 		var/toptag = topbox.boxtag
-		if( toptag != "" )
+		if ( toptag != "" )
 			desc = "[desc] The box on top has a tag, it reads: '[toptag]'."
 	else
 		desc = "A box suited for pizzas."
 
-		if( boxtag != "" )
+		if ( boxtag != "" )
 			desc = "[desc] The box has a tag, it reads: '[boxtag]'."
 
 	// Icon states and overlays
-	if( open )
-		if( ismessy )
+	if ( open )
+		if ( ismessy )
 			icon_state = "pizzabox_messy"
 		else
 			icon_state = "pizzabox_open"
 
-		if( pizza )
+		if ( pizza )
 			var/image/pizzaimg = image("food.dmi", icon_state = pizza.icon_state)
 			pizzaimg.pixel_y = -3
 			overlays += pizzaimg
@@ -2791,15 +2791,15 @@
 	else
 		// Stupid code because byondcode sucks
 		var/doimgtag = 0
-		if( length(boxes) > 0 )
+		if ( length(boxes) > 0 )
 			var/obj/item/pizzabox/topbox = boxes[length(boxes)]
-			if( topbox.boxtag != "" )
+			if ( topbox.boxtag != "" )
 				doimgtag = 1
 		else
-			if( boxtag != "" )
+			if ( boxtag != "" )
 				doimgtag = 1
 
-		if( doimgtag )
+		if ( doimgtag )
 			var/image/tagimg = image("food.dmi", icon_state = "pizzabox_tag")
 			tagimg.pixel_y = length(boxes) * 3
 			overlays += tagimg
@@ -2808,7 +2808,7 @@
 
 /obj/item/pizzabox/attack_hand( mob/user as mob )
 
-	if( open && pizza )
+	if ( open && pizza )
 		user.put_in_hands( pizza )
 
 		to_chat(user, SPAN_WARNING("You take \the [src.pizza] out of \the [src]."))
@@ -2816,8 +2816,8 @@
 		update_icon()
 		return
 
-	if( length(boxes) > 0 )
-		if( user.get_inactive_hand() != src )
+	if ( length(boxes) > 0 )
+		if ( user.get_inactive_hand() != src )
 			..()
 			return
 
@@ -2833,29 +2833,29 @@
 
 /obj/item/pizzabox/attack_self( mob/user as mob )
 
-	if( length(boxes) > 0 )
+	if ( length(boxes) > 0 )
 		return
 
 	open = !open
 
-	if( open && pizza )
+	if ( open && pizza )
 		ismessy = 1
 
 	update_icon()
 
 /obj/item/pizzabox/attackby( obj/item/I as obj, mob/user as mob )
-	if( istype(I, /obj/item/pizzabox) )
+	if ( istype(I, /obj/item/pizzabox) )
 		var/obj/item/pizzabox/box = I
 
-		if( !box.open && !src.open )
+		if ( !box.open && !src.open )
 			// make a list of all boxes to be added
 			var/list/boxestoadd = list()
 			boxestoadd += box
 			for(var/obj/item/pizzabox/i in box.boxes)
 				boxestoadd += i
 
-			if( (length(boxes)+1) + length(boxestoadd) <= 5 )
-				if(!user.unEquip(box, src))
+			if ( (length(boxes)+1) + length(boxestoadd) <= 5 )
+				if (!user.unEquip(box, src))
 					return
 				box.boxes = list()// clear the box boxes so we don't have boxes inside boxes. - Xzibit
 				src.boxes.Add( boxestoadd )
@@ -2871,10 +2871,10 @@
 
 		return
 
-	if( istype(I, /obj/item/reagent_containers/food/snacks/sliceable/pizza) )
+	if ( istype(I, /obj/item/reagent_containers/food/snacks/sliceable/pizza) )
 
-		if( src.open )
-			if(!user.unEquip(I, src))
+		if ( src.open )
+			if (!user.unEquip(I, src))
 				return
 			src.pizza = I
 
@@ -2885,15 +2885,15 @@
 			to_chat(user, SPAN_WARNING("You try to push \the [I] through the lid but it doesn't work!"))
 		return
 
-	if( istype(I, /obj/item/pen) )
+	if ( istype(I, /obj/item/pen) )
 
-		if( src.open )
+		if ( src.open )
 			return
 
 		var/t = sanitize(input("Enter what you want to add to the tag:", "Write", null, null) as text, 30)
 
 		var/obj/item/pizzabox/boxtotagto = src
-		if( length(boxes) > 0 )
+		if ( length(boxes) > 0 )
 			boxtotagto = boxes[length(boxes)]
 
 		boxtotagto.boxtag = copytext("[boxtotagto.boxtag][t]", 1, 30)
@@ -2967,7 +2967,7 @@
 
 // Dough + rolling pin = flat dough
 /obj/item/reagent_containers/food/snacks/dough/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/material/kitchen/rollingpin))
+	if (istype(W,/obj/item/material/kitchen/rollingpin))
 		new /obj/item/reagent_containers/food/snacks/sliceable/flatdough(src)
 		to_chat(user, "You flatten the dough.")
 		qdel(src)
@@ -3027,27 +3027,27 @@
 
 /obj/item/reagent_containers/food/snacks/bun/use_tool(obj/item/W as obj, mob/user as mob)
 	// bun + meatball or cutlet = burger
-	if(istype(W,/obj/item/reagent_containers/food/snacks/meatball) || istype(W,/obj/item/reagent_containers/food/snacks/cutlet))
+	if (istype(W,/obj/item/reagent_containers/food/snacks/meatball) || istype(W,/obj/item/reagent_containers/food/snacks/cutlet))
 		new /obj/item/reagent_containers/food/snacks/plainburger(src)
 		to_chat(user, "You make a burger.")
 		qdel(W)
 		qdel(src)
 
 	// bun + sausage = hotdog
-	else if(istype(W,/obj/item/reagent_containers/food/snacks/sausage))
+	else if (istype(W,/obj/item/reagent_containers/food/snacks/sausage))
 		new /obj/item/reagent_containers/food/snacks/hotdog(src)
 		to_chat(user, "You make a hotdog.")
 		qdel(W)
 		qdel(src)
 
 	// bun + bun = bunbun
-	else if(istype(W,/obj/item/reagent_containers/food/snacks/bun))
+	else if (istype(W,/obj/item/reagent_containers/food/snacks/bun))
 		new /obj/item/reagent_containers/food/snacks/bunbun(src)
 		to_chat(user, "You make a bun bun.")
 		qdel(W)
 		qdel(src)
 
-	else if(istype(W, /obj/item/reagent_containers/food/snacks))
+	else if (istype(W, /obj/item/reagent_containers/food/snacks))
 		var/obj/item/reagent_containers/food/snacks/F = W
 		var /obj/item/reagent_containers/food/snacks/customburger/C = new(src)
 		C.SetName("[F.name]-burger")
@@ -3063,7 +3063,7 @@
 
 // burger + cheese wedge = cheeseburger
 /obj/item/reagent_containers/food/snacks/plainburger/use_tool(obj/item/reagent_containers/food/snacks/cheesewedge/W as obj, mob/user as mob)
-	if(istype(W))// && !istype(src,/obj/item/reagent_containers/food/snacks/cheesewedge))
+	if (istype(W))// && !istype(src,/obj/item/reagent_containers/food/snacks/cheesewedge))
 		new /obj/item/reagent_containers/food/snacks/cheeseburger(src)
 		to_chat(user, "You make a cheeseburger.")
 		qdel(W)
@@ -3072,7 +3072,7 @@
 
 // Human burger + cheese wedge = cheeseburger
 /obj/item/reagent_containers/food/snacks/human/burger/use_tool(obj/item/reagent_containers/food/snacks/cheesewedge/W as obj, mob/user as mob)
-	if(istype(W))
+	if (istype(W))
 		new /obj/item/reagent_containers/food/snacks/cheeseburger(src)
 		to_chat(user, "You make a cheeseburger.")
 		qdel(W)
@@ -3081,7 +3081,7 @@
 
 // Spaghetti + meatball = spaghetti with meatball(s)
 /obj/item/reagent_containers/food/snacks/boiledspagetti/use_tool(obj/item/reagent_containers/food/snacks/meatball/W as obj, mob/user as mob)
-	if(istype(W))
+	if (istype(W))
 		new /obj/item/reagent_containers/food/snacks/meatballspagetti(src)
 		to_chat(user, "You add some meatballs to the spaghetti.")
 		qdel(W)
@@ -3090,7 +3090,7 @@
 
 // Spaghetti with meatballs + meatball = spaghetti with more meatball(s)
 /obj/item/reagent_containers/food/snacks/meatballspagetti/use_tool(obj/item/reagent_containers/food/snacks/meatball/W as obj, mob/user as mob)
-	if(istype(W))
+	if (istype(W))
 		new /obj/item/reagent_containers/food/snacks/spesslaw(src)
 		to_chat(user, "You add some more meatballs to the spaghetti.")
 		qdel(W)
@@ -3218,7 +3218,7 @@
 
 // potato + knife = raw sticks
 /obj/item/reagent_containers/food/snacks/grown/potato/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/material/knife))
+	if (istype(W,/obj/item/material/knife))
 		new /obj/item/reagent_containers/food/snacks/rawsticks(src)
 		to_chat(user, "You cut the potato.")
 		qdel(src)
@@ -3246,7 +3246,7 @@
 
 /obj/item/reagent_containers/food/snacks/canned/Initialize()
 	. = ..()
-	if(!sealed)
+	if (!sealed)
 		unseal()
 
 /obj/item/reagent_containers/food/snacks/canned/examine(mob/user)
@@ -3259,13 +3259,13 @@
 	update_icon()
 
 /obj/item/reagent_containers/food/snacks/canned/attack_self(mob/user)
-	if(sealed)
+	if (sealed)
 		playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
 		to_chat(user, SPAN_NOTICE("You unseal \the [src] with a crack of metal."))
 		unseal()
 
 /obj/item/reagent_containers/food/snacks/canned/on_update_icon()
-	if(!sealed)
+	if (!sealed)
 		icon_state = "[initial(icon_state)]-open"
 
 //Just a short line of Canned Consumables, great for treasure in faraway abandoned outposts
@@ -3691,7 +3691,7 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 1)
 
-	if(prob(30))
+	if (prob(30))
 		src.icon_state = "donut2"
 		filling_color = "#ff7fc1"
 		src.SetName("frosted donut")
@@ -3734,7 +3734,7 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 1)
 	reagents.add_reagent(/datum/reagent/drink/juice/berry, 5)
-	if(prob(30))
+	if (prob(30))
 		src.icon_state = "jdonut2"
 		filling_color = "#ff7fc1"
 		src.SetName("frosted jelly donut")
@@ -3752,7 +3752,7 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 1)
 	reagents.add_reagent(/datum/reagent/slimejelly, 5)
-	if(prob(30))
+	if (prob(30))
 		src.icon_state = "jdonut2"
 		filling_color = "#ff7fc1"
 		src.SetName("frosted jelly donut")
@@ -3770,7 +3770,7 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 1)
 	reagents.add_reagent(/datum/reagent/nutriment/cherryjelly, 5)
-	if(prob(30))
+	if (prob(30))
 		src.icon_state = "jdonut2"
 		filling_color = "#ff7fc1"
 		src.SetName("frosted jelly donut")

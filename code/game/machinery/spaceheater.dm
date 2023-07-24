@@ -21,50 +21,50 @@
 	update_icon()
 
 /obj/machinery/space_heater/on_update_icon(rebuild_overlay = 0)
-	if(!on)
+	if (!on)
 		icon_state = "sheater-off"
 		set_light(0)
-	else if(active > 0)
+	else if (active > 0)
 		icon_state = "sheater-heat"
 		set_light(0.7, 1, 2, 3, COLOR_SEDONA)
-	else if(active < 0)
+	else if (active < 0)
 		icon_state = "sheater-cool"
 		set_light(0.7, 1, 2, 3, COLOR_DEEP_SKY_BLUE)
 	else
 		icon_state = "sheater-standby"
 		set_light(0)
 
-	if(rebuild_overlay)
+	if (rebuild_overlay)
 		overlays.Cut()
-		if(panel_open)
+		if (panel_open)
 			overlays  += "sheater-open"
 
 /obj/machinery/space_heater/examine(mob/user)
 	. = ..()
 
 	to_chat(user, "The heater is [on ? "on" : "off"] and the hatch is [panel_open ? "open" : "closed"].")
-	if(panel_open)
+	if (panel_open)
 		to_chat(user, "The power cell is [cell ? "installed" : "missing"].")
 	else
 		to_chat(user, "The charge meter reads [cell ? round(cell.percent(),1) : 0]%")
 
 /obj/machinery/space_heater/emp_act(severity)
-	if(inoperable())
+	if (inoperable())
 		..(severity)
 		return
-	if(cell)
+	if (cell)
 		cell.emp_act(severity)
 	..(severity)
 
 /obj/machinery/space_heater/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/cell))
-		if(panel_open)
-			if(cell)
+	if (istype(I, /obj/item/cell))
+		if (panel_open)
+			if (cell)
 				to_chat(user, "There is already a power cell inside.")
 				return
 			else
 				// insert cell
-				if(!user.unEquip(I, src))
+				if (!user.unEquip(I, src))
 					return
 				cell = I
 				user.visible_message(SPAN_NOTICE("[user] inserts a power cell into [src]."), SPAN_NOTICE("You insert the power cell into [src]."))
@@ -72,14 +72,14 @@
 		else
 			to_chat(user, "The hatch must be open to insert a power cell.")
 			return
-	else if(isScrewdriver(I))
+	else if (isScrewdriver(I))
 		panel_open = !panel_open
 		user.visible_message(
 			SPAN_NOTICE("\The [user] [panel_open ? "opens" : "closes"] the hatch on \the [src]."),
 			SPAN_NOTICE("You [panel_open ? "open" : "close"] the hatch on \the [src].")
 		)
 		update_icon(1)
-		if(!panel_open && user.machine == src)
+		if (!panel_open && user.machine == src)
 			show_browser(user, null, "window=spaceheater")
 			user.unset_machine()
 	else
@@ -87,15 +87,15 @@
 	return
 
 /obj/machinery/space_heater/interface_interact(mob/user)
-	if(panel_open)
+	if (panel_open)
 		interact(user)
 		return TRUE
 
 /obj/machinery/space_heater/interact(mob/user)
-	if(panel_open)
+	if (panel_open)
 		var/list/dat = list()
 		dat += "Power cell: "
-		if(cell)
+		if (cell)
 			dat += "<A href='byond://?src=\ref[src];op=cellremove'>Installed</A><BR>"
 		else
 			dat += "<A href='byond://?src=\ref[src];op=cellinstall'>Removed</A><BR>"
@@ -117,7 +117,7 @@
 	return
 
 /obj/machinery/space_heater/physical_attack_hand(mob/user)
-	if(!panel_open)
+	if (!panel_open)
 		on = !on
 		user.visible_message(
 			SPAN_NOTICE("[user] switches [on ? "on" : "off"] the [src]."),
@@ -134,14 +134,14 @@
 
 	switch(href_list["op"])
 
-		if("temp")
+		if ("temp")
 			var/value = text2num(href_list["val"])
 
 			// limit to 0-90 degC
 			set_temperature = dd_range(T0C, T0C + 90, set_temperature + value)
 
-		if("cellremove")
-			if(panel_open && cell && !usr.get_active_hand())
+		if ("cellremove")
+			if (panel_open && cell && !usr.get_active_hand())
 				usr.visible_message(SPAN_NOTICE("\The [usr] removes \the [cell] from \the [src]."), SPAN_NOTICE("You remove \the [cell] from \the [src]."))
 				cell.update_icon()
 				usr.put_in_hands(cell)
@@ -149,11 +149,11 @@
 				cell = null
 				power_change()
 
-		if("cellinstall")
-			if(panel_open && !cell)
+		if ("cellinstall")
+			if (panel_open && !cell)
 				var/obj/item/cell/C = usr.get_active_hand()
-				if(istype(C))
-					if(!usr.unEquip(C, src))
+				if (istype(C))
+					if (!usr.unEquip(C, src))
 						return
 					cell = C
 					C.add_fingerprint(usr)
@@ -163,19 +163,19 @@
 	updateDialog()
 
 /obj/machinery/space_heater/Process()
-	if(on)
-		if(powered() || (cell && cell.charge))
+	if (on)
+		if (powered() || (cell && cell.charge))
 			var/datum/gas_mixture/env = loc.return_air()
-			if(env && abs(env.temperature - set_temperature) <= 0.1)
+			if (env && abs(env.temperature - set_temperature) <= 0.1)
 				active = 0
 			else
 				var/transfer_moles = 0.25 * env.total_moles
 				var/datum/gas_mixture/removed = env.remove(transfer_moles)
 
-				if(removed)
+				if (removed)
 					var/heat_transfer = removed.get_thermal_energy_change(set_temperature)
 					var/power_draw
-					if(heat_transfer > 0)	//heating air
+					if (heat_transfer > 0)	//heating air
 						heat_transfer = min( heat_transfer , heating_power ) //limit by the power rating of the heater
 
 						removed.add_thermal_energy(heat_transfer)
@@ -190,7 +190,7 @@
 						heat_transfer = removed.add_thermal_energy(-heat_transfer)	//get the actual heat transfer
 
 						power_draw = abs(heat_transfer)/cop
-					if(!powered())
+					if (!powered())
 						cell.use(power_draw*CELLRATE)
 					else
 						use_power_oneoff(power_draw)

@@ -25,7 +25,7 @@
 	return ..()
 
 /obj/machinery/embedded_controller/radio/airlock/CanUseTopic(mob/user)
-	if(!allowed(user))
+	if (!allowed(user))
 		return min(STATUS_UPDATE, ..())
 	else
 		return ..()

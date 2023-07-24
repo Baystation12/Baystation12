@@ -17,7 +17,7 @@
 // Note that `holder` is NOT the FSM, but instead the thing the FSM is attached to.
 /singleton/state/proc/get_open_transitions(datum/holder)
 	for(var/singleton/state_transition/T as anything in transitions)
-		if(T.is_open(holder))
+		if (T.is_open(holder))
 			LAZYADD(., T)
 
 // Stub for child states to modify the holder when switched to.

@@ -16,50 +16,50 @@
 	xorigin = x
 	yorigin = y
 	zorigin = z
-	if(!lock_data && lock_complexity_max > 0)
+	if (!lock_data && lock_complexity_max > 0)
 		lock_data = generateRandomString(rand(lock_complexity_min,lock_complexity_max))
 
 /datum/room_theme/proc/apply_room_theme(x,y,value)
 	var/turf/T = locate(x,y,zorigin)
-	if(!T)
+	if (!T)
 		return 0
 	var/path
 	switch(value)
-		if(WALL_CHAR)
-			if(!wall_type)
+		if (WALL_CHAR)
+			if (!wall_type)
 				return
 			path = wall_type
-		if(ARTIFACT_TURF_CHAR)
-			if(!wall_type)
+		if (ARTIFACT_TURF_CHAR)
+			if (!wall_type)
 				return
 			path = wall_type
 		else
-			if(!floor_type)
+			if (!floor_type)
 				return
 			path = floor_type
 	T.ChangeTurf(path)
 
 /datum/room_theme/proc/apply_room_door(x,y)
-	if(!door_type)
+	if (!door_type)
 		return 0
 	var/turf/T = locate(xorigin+x-1,yorigin+y-1,zorigin)
 	for(var/i = -1; i <= 1; i++)
 		for(var/j = -1; j <= 1; j++)
 			var/turf/check = locate(T.x + i, T.y + j, T.z)
-			if(!check)
+			if (!check)
 				continue
 			for(var/atom/movable/M in check.contents)
-				if(!istype(M, /atom/movable/lighting_overlay) && M.density)
+				if (!istype(M, /atom/movable/lighting_overlay) && M.density)
 					return 0
-	if(!T)
+	if (!T)
 		return 0
-	if(ispath(door_type,/obj/machinery/door/unpowered/simple))
+	if (ispath(door_type,/obj/machinery/door/unpowered/simple))
 		new door_type(T,null,lock_data)
 	else
 		new door_type(T)
 
 /datum/room_theme/proc/get_a_room_layout()
-	if(length(room_layouts) && prob(layout_chance))
+	if (length(room_layouts) && prob(layout_chance))
 		return pickweight(room_layouts)
 	return null
 

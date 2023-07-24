@@ -32,7 +32,7 @@
 	. = ..()
 
 /datum/nano_module/program/newscast/Topic(href, href_list)
-	if(..())
+	if (..())
 		return TRUE
 
 	if (href_list["view_channel"])

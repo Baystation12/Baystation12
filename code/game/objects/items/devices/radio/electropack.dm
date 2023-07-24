@@ -13,7 +13,7 @@
 	var/code = 2
 
 /obj/item/device/radio/electropack/attack_hand(mob/user as mob)
-	if(src == user.back)
+	if (src == user.back)
 		to_chat(user, SPAN_NOTICE("You need help taking this off!"))
 		return
 	..()
@@ -53,36 +53,36 @@
 
 /obj/item/device/radio/electropack/Topic(href, href_list)
 	//..()
-	if(usr.stat || usr.restrained())
+	if (usr.stat || usr.restrained())
 		return
-	if(((istype(usr, /mob/living/carbon/human) && (usr.IsAdvancedToolUser() && usr.contents.Find(src))) || (usr.contents.Find(master) || (in_range(src, usr) && istype(loc, /turf)))))
+	if (((istype(usr, /mob/living/carbon/human) && (usr.IsAdvancedToolUser() && usr.contents.Find(src))) || (usr.contents.Find(master) || (in_range(src, usr) && istype(loc, /turf)))))
 		usr.set_machine(src)
-		if(href_list["freq"])
+		if (href_list["freq"])
 			var/new_frequency = sanitize_frequency(frequency + text2num(href_list["freq"]))
 			set_frequency(new_frequency)
 		else
-			if(href_list["code"])
+			if (href_list["code"])
 				code += text2num(href_list["code"])
 				code = round(code)
 				code = min(100, code)
 				code = max(1, code)
 			else
-				if(href_list["power"])
+				if (href_list["power"])
 					on = !( on )
 					icon_state = "electropack[on]"
-		if(!( master ))
-			if(istype(loc, /mob))
+		if (!( master ))
+			if (istype(loc, /mob))
 				attack_self(loc)
 			else
 				for(var/mob/M in viewers(1, src))
-					if(M.client)
+					if (M.client)
 						attack_self(M)
 		else
-			if(istype(master.loc, /mob))
+			if (istype(master.loc, /mob))
 				attack_self(master.loc)
 			else
 				for(var/mob/M in viewers(1, master))
-					if(M.client)
+					if (M.client)
 						attack_self(M)
 	else
 		close_browser(usr, "window=radio")
@@ -90,18 +90,18 @@
 	return
 
 /obj/item/device/radio/electropack/receive_signal(datum/signal/signal)
-	if(!signal || signal.encryption != code)
+	if (!signal || signal.encryption != code)
 		return
 
-	if(ismob(loc) && on)
+	if (ismob(loc) && on)
 		var/mob/M = loc
 		var/turf/T = M.loc
-		if(istype(T, /turf))
-			if(!M.moved_recently && M.last_move)
+		if (istype(T, /turf))
+			if (!M.moved_recently && M.last_move)
 				M.moved_recently = 1
 				step(M, M.last_move)
 				sleep(50)
-				if(M)
+				if (M)
 					M.moved_recently = 0
 		to_chat(M, SPAN_DANGER("You feel a sharp shock!"))
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -110,13 +110,13 @@
 
 		M.Weaken(10)
 
-	if(master && listening)
+	if (master && listening)
 		master.receive_signal()
 	return
 
 /obj/item/device/radio/electropack/attack_self(mob/user as mob, flag1)
 
-	if(!istype(user, /mob/living/carbon/human))
+	if (!istype(user, /mob/living/carbon/human))
 		return
 	user.set_machine(src)
 	var/dat = {"<TT>

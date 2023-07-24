@@ -10,7 +10,7 @@
 	var/hud_icon_state
 
 /singleton/move_intent/proc/can_be_used_by(mob/user)
-	if(flags & MOVE_INTENT_QUICK)
+	if (flags & MOVE_INTENT_QUICK)
 		return user.can_sprint()
 	return TRUE
 

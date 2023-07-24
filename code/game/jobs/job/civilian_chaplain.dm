@@ -12,13 +12,13 @@
 
 /datum/job/chaplain/equip(mob/living/carbon/human/H, alt_title, ask_questions = TRUE)
 	. = ..()
-	if(!.)
+	if (!.)
 		return
-	if(!ask_questions)
+	if (!ask_questions)
 		return
 
 	var/obj/item/storage/bible/B = locate(/obj/item/storage/bible) in H
-	if(!B)
+	if (!B)
 		return
 
 	spawn(0)
@@ -28,25 +28,25 @@
 		if (!new_religion)
 			new_religion = religion_name
 		switch(lowertext(new_religion))
-			if("christianity")
+			if ("christianity")
 				B.SetName(pick("The Holy Bible","The Dead Sea Scrolls"))
-			if("satanism")
+			if ("satanism")
 				B.SetName("The Unholy Bible")
-			if("cthulu")
+			if ("cthulu")
 				B.SetName("The Necronomicon")
-			if("islam")
+			if ("islam")
 				B.SetName("Quran")
-			if("scientology")
+			if ("scientology")
 				B.SetName(pick("The Biography of L. Ron Hubbard","Dianetics"))
-			if("chaos")
+			if ("chaos")
 				B.SetName("The Book of Lorgar")
-			if("imperium")
+			if ("imperium")
 				B.SetName("Uplifting Primer")
-			if("toolboxia")
+			if ("toolboxia")
 				B.SetName("Toolbox Manifesto")
-			if("homosexuality")
+			if ("homosexuality")
 				B.SetName("Guys Gone Wild")
-			if("science")
+			if ("science")
 				B.SetName(pick("Principle of Relativity", "Quantum Enigma: Physics Encounters Consciousness", "Programming the Universe", "Quantum Physics and Theology", "String Theory for Dummies", "How To: Build Your Own Warp Drive", "The Mysteries of Bluespace", "Playing God: Collector's Edition"))
 			else
 				B.SetName("The Holy Book of [new_religion]")
@@ -66,43 +66,43 @@
 		var/new_book_style = "Bible"
 
 		while(!accepted)
-			if(!B) break // prevents possible runtime errors
+			if (!B) break // prevents possible runtime errors
 			new_book_style = input(H,"Which bible style would you like?") in list("Bible", "Koran", "Scrapbook", "Creeper", "White Bible", "Holy Light", "Athiest", "Tome", "The King in Yellow", "Ithaqua", "Scientology", "the bible melts", "Necronomicon")
 			switch(new_book_style)
-				if("Koran")
+				if ("Koran")
 					B.icon_state = "koran"
 					B.item_state = "koran"
-				if("Scrapbook")
+				if ("Scrapbook")
 					B.icon_state = "scrapbook"
 					B.item_state = "scrapbook"
-				if("Creeper")
+				if ("Creeper")
 					B.icon_state = "creeper"
 					B.item_state = "syringe_kit"
-				if("White Bible")
+				if ("White Bible")
 					B.icon_state = "white"
 					B.item_state = "syringe_kit"
-				if("Holy Light")
+				if ("Holy Light")
 					B.icon_state = "holylight"
 					B.item_state = "syringe_kit"
-				if("Athiest")
+				if ("Athiest")
 					B.icon_state = "athiest"
 					B.item_state = "syringe_kit"
-				if("Tome")
+				if ("Tome")
 					B.icon_state = "tome"
 					B.item_state = "syringe_kit"
-				if("The King in Yellow")
+				if ("The King in Yellow")
 					B.icon_state = "kingyellow"
 					B.item_state = "kingyellow"
-				if("Ithaqua")
+				if ("Ithaqua")
 					B.icon_state = "ithaqua"
 					B.item_state = "ithaqua"
-				if("Scientology")
+				if ("Scientology")
 					B.icon_state = "scientology"
 					B.item_state = "scientology"
-				if("the bible melts")
+				if ("the bible melts")
 					B.icon_state = "melted"
 					B.item_state = "melted"
-				if("Necronomicon")
+				if ("Necronomicon")
 					B.icon_state = "necronomicon"
 					B.item_state = "necronomicon"
 				else
@@ -112,10 +112,10 @@
 			H.update_inv_l_hand() // so that it updates the bible's item_state in his hand
 
 			switch(input(H,"Look at your bible - is this what you want?") in list("Yes","No"))
-				if("Yes")
+				if ("Yes")
 					accepted = 1
-				if("No")
-					if(outoftime)
+				if ("No")
+					if (outoftime)
 						to_chat(H, "Welp, out of time, buddy. You're stuck. Next time choose faster.")
 						accepted = 1
 	return 1

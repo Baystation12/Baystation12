@@ -172,10 +172,10 @@
 	#define FIRST capitalize(pick(gender == FEMALE ? GLOB.first_names_female : GLOB.first_names_male))
 	#define NAME capitalize(pick(gender == FEMALE ? GLOB.first_names_female : GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 	switch(rand(1,4))
-		if(1) return NAME
-		if(2) return "[LTR][LTR]-[FIRST]"
-		if(3) return "[FIRST]-[NUM][NUM][NUM]"
-		if(4) return "[NUM][NUM][NUM]-[FIRST]"
+		if (1) return NAME
+		if (2) return "[LTR][LTR]-[FIRST]"
+		if (3) return "[FIRST]-[NUM][NUM][NUM]"
+		if (4) return "[NUM][NUM][NUM]-[FIRST]"
 	. = 1 // Never executed, works around http://www.byond.com/forum/?post=2072419
 	#undef LTR
 	#undef NUM

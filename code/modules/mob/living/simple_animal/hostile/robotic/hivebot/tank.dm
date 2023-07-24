@@ -82,13 +82,13 @@
 
 // Ablative Hivebots can reflect lasers just like humans.
 /mob/living/simple_animal/hostile/hivebot/tank/armored/anti_laser/bullet_act(obj/item/projectile/P)
-	if(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam))
+	if (istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam))
 		var/reflect_prob = reflect_chance - round(P.damage/3)
-		if(prob(reflect_prob))
+		if (prob(reflect_prob))
 			visible_message(SPAN_DANGER("The [P.name] gets reflected by \the [src]'s armor!"))
 
 			// Find a turf near or on the original location to bounce to
-			if(P.starting)
+			if (P.starting)
 				var/new_x = P.starting.x + pick(0, 0, -1, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3)
 				var/new_y = P.starting.y + pick(0, 0, -1, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3)
 				var/turf/curloc = get_turf(src)

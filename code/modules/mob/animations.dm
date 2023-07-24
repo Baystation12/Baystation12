@@ -12,12 +12,12 @@ below 100 is not dizzy
 /mob/var/is_dizzy = 0
 
 /mob/proc/make_dizzy(amount)
-	if(!istype(src, /mob/living/carbon/human)) // for the moment, only humans get dizzy
+	if (!istype(src, /mob/living/carbon/human)) // for the moment, only humans get dizzy
 		return
 
 	dizziness = min(1000, dizziness + amount)	// store what will be new value
 													// clamped to max 1000
-	if(dizziness > 100 && !is_dizzy)
+	if (dizziness > 100 && !is_dizzy)
 		spawn(0)
 			dizzy_process()
 
@@ -30,7 +30,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/proc/dizzy_process()
 	is_dizzy = 1
 	while(dizziness > 100)
-		if(client)
+		if (client)
 			var/amplitude = dizziness*(sin(dizziness * 0.044 * world.time) + 1) / 70
 			client.pixel_x = amplitude * sin(0.008 * dizziness * world.time)
 			client.pixel_y = amplitude * cos(0.008 * dizziness * world.time)
@@ -38,7 +38,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 		sleep(1)
 	//endwhile - reset the pixel offsets to zero
 	is_dizzy = 0
-	if(client)
+	if (client)
 		client.pixel_x = 0
 		client.pixel_y = 0
 
@@ -50,13 +50,13 @@ note dizziness decrements automatically in the mob's Life() proc.
 	return //Only for living/carbon/human
 
 /mob/living/carbon/human/make_jittery(amount)
-	if(!istype(src, /mob/living/carbon/human)) // for the moment, only humans get jittery
+	if (!istype(src, /mob/living/carbon/human)) // for the moment, only humans get jittery
 		return
-	if(!jittery_damage())
+	if (!jittery_damage())
 		return //Robotic hearts don't get jittery.
 	jitteriness = min(1000, jitteriness + amount)	// store what will be new value
 													// clamped to max 1000
-	if(jitteriness > 100 && !is_jittery)
+	if (jitteriness > 100 && !is_jittery)
 		spawn(0)
 			jittery_process()
 
@@ -81,11 +81,11 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /mob/proc/update_floating()
 
-	if(anchored || buckled || has_gravity())
+	if (anchored || buckled || has_gravity())
 		make_floating(0)
 		return
 
-	if(check_space_footing())
+	if (check_space_footing())
 		make_floating(0)
 		return
 
@@ -95,9 +95,9 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/proc/make_floating(n)
 	floatiness = n
 
-	if(floatiness && !is_floating)
+	if (floatiness && !is_floating)
 		start_floating()
-	else if(!floatiness && is_floating)
+	else if (!floatiness && is_floating)
 		stop_floating()
 
 /mob/proc/start_floating()
@@ -125,20 +125,20 @@ note dizziness decrements automatically in the mob's Life() proc.
 	var/pixel_x_diff = 0
 	var/pixel_y_diff = 0
 	var/direction = get_dir(src, A)
-	if(direction & NORTH)
+	if (direction & NORTH)
 		pixel_y_diff = -8
-	else if(direction & SOUTH)
+	else if (direction & SOUTH)
 		pixel_y_diff = 8
 
-	if(direction & EAST)
+	if (direction & EAST)
 		pixel_x_diff = -8
-	else if(direction & WEST)
+	else if (direction & WEST)
 		pixel_x_diff = 8
 
 	var/default_pixel_x = initial(pixel_x)
 	var/default_pixel_y = initial(pixel_y)
 	var/mob/mob = src
-	if(istype(mob))
+	if (istype(mob))
 		default_pixel_x = mob.default_pixel_x
 		default_pixel_y = mob.default_pixel_y
 
@@ -151,31 +151,31 @@ note dizziness decrements automatically in the mob's Life() proc.
 	var/pixel_y_diff = 0
 	var/direction = get_dir(src, A)
 	switch(direction)
-		if(NORTH)
+		if (NORTH)
 			pixel_y_diff = 8
-		if(SOUTH)
+		if (SOUTH)
 			pixel_y_diff = -8
-		if(EAST)
+		if (EAST)
 			pixel_x_diff = 8
-		if(WEST)
+		if (WEST)
 			pixel_x_diff = -8
-		if(NORTHEAST)
+		if (NORTHEAST)
 			pixel_x_diff = 8
 			pixel_y_diff = 8
-		if(NORTHWEST)
+		if (NORTHWEST)
 			pixel_x_diff = -8
 			pixel_y_diff = 8
-		if(SOUTHEAST)
+		if (SOUTHEAST)
 			pixel_x_diff = 8
 			pixel_y_diff = -8
-		if(SOUTHWEST)
+		if (SOUTHWEST)
 			pixel_x_diff = -8
 			pixel_y_diff = -8
 
 	var/default_pixel_x = initial(pixel_x)
 	var/default_pixel_y = initial(pixel_y)
 	var/mob/mob = src
-	if(istype(mob))
+	if (istype(mob))
 		default_pixel_x = mob.default_pixel_x
 		default_pixel_y = mob.default_pixel_y
 
@@ -227,17 +227,17 @@ note dizziness decrements automatically in the mob's Life() proc.
 	I.SetTransform(scale = 0.75)
 	// Set the direction of the icon animation.
 	var/direction = get_dir(src, A)
-	if(direction & NORTH)
+	if (direction & NORTH)
 		I.pixel_y = -16
-	else if(direction & SOUTH)
+	else if (direction & SOUTH)
 		I.pixel_y = 16
 
-	if(direction & EAST)
+	if (direction & EAST)
 		I.pixel_x = -16
-	else if(direction & WEST)
+	else if (direction & WEST)
 		I.pixel_x = 16
 
-	if(!direction) // Attacked self?!
+	if (!direction) // Attacked self?!
 		I.pixel_z = 16
 
 	// And animate the attack!
@@ -253,19 +253,19 @@ note dizziness decrements automatically in the mob's Life() proc.
 	while(spintime >= speed)
 		sleep(speed)
 		switch(D)
-			if(NORTH)
+			if (NORTH)
 				D = EAST
-			if(SOUTH)
+			if (SOUTH)
 				D = WEST
-			if(EAST)
+			if (EAST)
 				D = SOUTH
-			if(WEST)
+			if (WEST)
 				D = NORTH
 		set_dir(D)
 		spintime -= speed
 
 /mob/proc/phase_in(turf/T)
-	if(!T)
+	if (!T)
 		return
 
 	playsound(T, 'sound/effects/phasein.ogg', 25, 1)
@@ -273,20 +273,20 @@ note dizziness decrements automatically in the mob's Life() proc.
 	anim(src,'icons/mob/mob.dmi',,"phasein",,dir)
 
 /mob/proc/phase_out(turf/T)
-	if(!T)
+	if (!T)
 		return
 	playsound(T, "sparks", 50, 1)
 	anim(src,'icons/mob/mob.dmi',,"phaseout",,dir)
 
 /mob/living/proc/on_structure_offset(offset = 0)
-	if(offset)
+	if (offset)
 		var/check = default_pixel_z + offset
-		if(pixel_z != check)
+		if (pixel_z != check)
 			animate(src, pixel_z = check, time = 2, easing = SINE_EASING)
-	else if(pixel_z != default_pixel_z)
+	else if (pixel_z != default_pixel_z)
 		var/turf/T = get_turf(src)
 		for(var/obj/structure/S in T.contents)
-			if(S && S.mob_offset)
+			if (S && S.mob_offset)
 				return
 		animate(src, pixel_z = default_pixel_z, time = 2, easing = SINE_EASING)
 

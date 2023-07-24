@@ -204,7 +204,7 @@
 /obj/item/tank/skrell/Process()
 	..()
 	var/obj/item/rig/holder = loc
-	if(air_contents.total_moles < gas_regen_cap && istype(holder) && holder.cell && holder.cell.use(charge_cost))
+	if (air_contents.total_moles < gas_regen_cap && istype(holder) && holder.cell && holder.cell.use(charge_cost))
 		air_contents.adjust_gas(refill_gas_type, gas_regen_amount)
 
 //More Skrell Modules to replace Mantid
@@ -221,7 +221,7 @@
 	selectable = TRUE
 
 /obj/item/rig_module/device/multitool/skrell/IsMultitool()
-	if(holder)
+	if (holder)
 		return TRUE
 	else
 		return FALSE
@@ -290,7 +290,7 @@
 	. = ..()
 
 /obj/item/cell/skrell/Process()
-	if(charge < maxcharge)
+	if (charge < maxcharge)
 		give(recharge_amount)
 
 /obj/item/clustertool
@@ -305,7 +305,7 @@
 
 /obj/item/clustertool/attack_self(mob/user)
 	var/new_index = _list_find(tool_modes, tool_mode) + 1
-	if(new_index > length(tool_modes))
+	if (new_index > length(tool_modes))
 		new_index = 1
 	tool_mode = tool_modes[new_index]
 	name = "[initial(name)] ([tool_mode])"

@@ -6,7 +6,7 @@
 
 /datum/admin_secret_item/admin_secret/show_signalers/execute(mob/user)
 	. = ..()
-	if(!.)
+	if (!.)
 		return
 
 	var/dat = "<B>Showing last [length(GLOB.lastsignalers)] signalers.</B><HR>"

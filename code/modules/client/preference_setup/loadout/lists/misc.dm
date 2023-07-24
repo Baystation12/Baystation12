@@ -18,7 +18,7 @@
 
 /datum/gear/union_card/spawn_on_mob(mob/living/carbon/human/H, metadata)
 	. = ..()
-	if(.)
+	if (.)
 		var/obj/item/card/union/card = .
 		card.signed_by = H.real_name
 
@@ -97,7 +97,7 @@
 	var/list/lunchboxes = list()
 	for(var/lunchbox_type in typesof(/obj/item/storage/lunchbox))
 		var/obj/item/storage/lunchbox/lunchbox = lunchbox_type
-		if(!initial(lunchbox.filled))
+		if (!initial(lunchbox.filled))
 			lunchboxes[initial(lunchbox.name)] = lunchbox_type
 	gear_tweaks += new/datum/gear_tweak/path(lunchboxes)
 	gear_tweaks += new/datum/gear_tweak/contents(lunchables_lunches(), lunchables_snacks(), lunchables_drinks())

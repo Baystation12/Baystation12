@@ -14,11 +14,11 @@
 
 /datum/computer_file/program/revelation/on_startup(mob/living/user, datum/extension/interactive/ntos/new_host)
 	. = ..(user, new_host)
-	if(armed)
+	if (armed)
 		activate()
 
 /datum/computer_file/program/revelation/proc/activate()
-	if(!computer)
+	if (!computer)
 		return
 
 	computer.visible_error("Hardware error: Voltage reaching unsafe leve-")
@@ -26,22 +26,22 @@
 	computer.voltage_overload()
 
 /datum/computer_file/program/revelation/Topic(href, href_list)
-	if(..())
+	if (..())
 		return TOPIC_HANDLED
-	else if(href_list["PRG_arm"])
+	else if (href_list["PRG_arm"])
 		armed = !armed
 		return TOPIC_HANDLED
-	else if(href_list["PRG_activate"])
+	else if (href_list["PRG_activate"])
 		activate()
 		return TOPIC_HANDLED
-	else if(href_list["PRG_obfuscate"])
+	else if (href_list["PRG_obfuscate"])
 		var/mob/living/user = usr
 		var/newname = sanitize(input(user, "Enter new program name: "))
-		if(newname && program_state == PROGRAM_STATE_ACTIVE)
+		if (newname && program_state == PROGRAM_STATE_ACTIVE)
 			filedesc = newname
-			if(ntnet_global)
+			if (ntnet_global)
 				for(var/datum/computer_file/program/P in ntnet_global.available_station_software)
-					if(filedesc == P.filedesc)
+					if (filedesc == P.filedesc)
 						program_menu_icon = P.program_menu_icon
 						break
 		return TOPIC_HANDLED
@@ -57,7 +57,7 @@
 /datum/nano_module/program/revelation/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
 	var/list/data = list()
 	var/datum/computer_file/program/revelation/PRG = program
-	if(!istype(PRG))
+	if (!istype(PRG))
 		return
 
 	data = PRG.get_header_data()

@@ -17,13 +17,13 @@
 
 /spell/targeted/shatter/cast(list/targets, mob/user)
 	var/mob/living/carbon/human/H = targets[1]
-	if(prob(50))
+	if (prob(50))
 		sound_to(user, get_sfx("swing_hit"))
-	if(prob(5))
+	if (prob(5))
 		to_chat(H, SPAN_WARNING("You feel unhinged."))
 	H.adjust_hallucination(5,5)
 	H.confused += 2
 	H.dizziness += 2
-	if(H.hallucination_power > 50)
+	if (H.hallucination_power > 50)
 		H.adjustBrainLoss(5)
 		to_chat(H, SPAN_DANGER("You feel your mind tearing apart!"))

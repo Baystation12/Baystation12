@@ -16,32 +16,32 @@
 
 	for(var/check_appearance in typesof(/singleton/closet_appearance)-except_appearances)
 		var/singleton/closet_appearance/closet = GET_SINGLETON(check_appearance)
-		if(!closet)
+		if (!closet)
 			LAZYADD(bad_singleton, "[check_appearance]")
 			continue
 
-		if(!closet.icon)
+		if (!closet.icon)
 			LAZYADD(bad_icon, "[closet.type]")
-		if(!closet.color)
+		if (!closet.color)
 			LAZYADD(bad_colour, "[closet.type]")
-		if(!closet.base_icon)
+		if (!closet.base_icon)
 			LAZYADD(bad_base_icon, "[closet.type]")
 		else
 			var/list/base_states = icon_states(closet.base_icon)
 			for(var/thing in check_base_states)
-				if(!(thing in base_states))
+				if (!(thing in base_states))
 					LAZYADD(bad_base_state, "[closet.type] - [thing] - [closet.base_icon]")
-		if(LAZYLEN(closet.decals) && !closet.decal_icon)
+		if (LAZYLEN(closet.decals) && !closet.decal_icon)
 			LAZYADD(bad_decal_icon, "[closet.type]")
 		else
 			var/list/decal_states = icon_states(closet.decal_icon)
 			for(var/thing in closet.decals)
-				if(isnull(closet.decals[thing]))
+				if (isnull(closet.decals[thing]))
 					LAZYADD(bad_decal_colour, "[check_appearance] - [thing]")
-				if(!(thing in decal_states))
+				if (!(thing in decal_states))
 					LAZYADD(bad_decal_state, "[check_appearance] - [thing] - [closet.decal_icon]")
 
-	if( \
+	if ( \
 		 LAZYLEN(bad_singleton)         || \
 		 LAZYLEN(bad_icon)         || \
 		 LAZYLEN(bad_colour)       || \
@@ -52,21 +52,21 @@
 		 LAZYLEN(bad_decal_state)     \
 		)
 		var/fail_msg = "Insane closet appearances found: "
-		if(LAZYLEN(bad_singleton))
+		if (LAZYLEN(bad_singleton))
 			fail_msg += "\nSingleton did not add itself to appropriate global list:\n[jointext("\t[bad_icon]", "\n")]."
-		if(LAZYLEN(bad_icon))
+		if (LAZYLEN(bad_icon))
 			fail_msg += "\nNull final icon values:\n[jointext("\t[bad_icon]", "\n")]."
-		if(LAZYLEN(bad_colour))
+		if (LAZYLEN(bad_colour))
 			fail_msg += "\nNull color values:\n[jointext("\t[bad_colour]", "\n")]."
-		if(LAZYLEN(bad_base_icon))
+		if (LAZYLEN(bad_base_icon))
 			fail_msg += "\nNull base icon value:\n[jointext("\t[bad_base_icon]", "\n")]."
-		if(LAZYLEN(bad_base_state))
+		if (LAZYLEN(bad_base_state))
 			fail_msg += "\nMissing state from base icon:\n[jointext("\t[bad_base_state]", "\n")]."
-		if(LAZYLEN(bad_decal_icon))
+		if (LAZYLEN(bad_decal_icon))
 			fail_msg += "\nDecal icon not set but decal lists populated:\n[jointext("\t[bad_decal_icon]", "\n")]."
-		if(LAZYLEN(bad_decal_colour))
+		if (LAZYLEN(bad_decal_colour))
 			fail_msg += "\nNull color in final decal entry:\n[jointext("\t[bad_decal_colour]", "\n")]."
-		if(LAZYLEN(bad_decal_state))
+		if (LAZYLEN(bad_decal_state))
 			fail_msg += "\nNon-existent decal icon state:\n[jointext("\t[bad_decal_state]", "\n")]."
 
 		fail(fail_msg)

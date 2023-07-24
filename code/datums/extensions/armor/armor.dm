@@ -17,14 +17,14 @@
 
 /datum/extension/armor/New(atom/movable/holder, list/armor)
 	..()
-	if(armor)
+	if (armor)
 		armor_values = armor.Copy()
 
 // Takes in incoming damage value
 // Applies state changes to self, holder, and whatever else caused by damage mitigation
 // Returns modified damage, a list to allow for flag modification or damage conversion, in the same format as the arguments.
 /datum/extension/armor/proc/apply_damage_modifications(damage, damage_type, damage_flags, mob/living/victim, armor_pen, silent = FALSE)
-	if(damage <= 0)
+	if (damage <= 0)
 		return args.Copy()
 
 	var/blocked = get_blocked(damage_type, damage_flags, armor_pen, damage)
@@ -32,8 +32,8 @@
 
 	// Blocking values that mean the damage was under armor, so all dangerous flags are removed (edge/sharp)
 	var/armor_border_blocking = 1 - (under_armor_mult * 1/armor_range_mult)
-	if(blocked >= armor_border_blocking)
-		if(damage_flags & DAMAGE_FLAG_LASER)
+	if (blocked >= armor_border_blocking)
+		if (damage_flags & DAMAGE_FLAG_LASER)
 			damage *= FLUIDLOSS_CONC_BURN/FLUIDLOSS_WIDE_BURN
 		damage_flags &= ~(DAMAGE_FLAG_SHARP | DAMAGE_FLAG_EDGE | DAMAGE_FLAG_LASER)
 	if (damage_type == DAMAGE_RADIATION)
@@ -41,10 +41,10 @@
 		silent = TRUE
 	damage *= 1 - blocked
 
-	if(!silent)
-		if(blocked > 0.7)
+	if (!silent)
+		if (blocked > 0.7)
 			to_chat(victim, SPAN_NOTICE(full_block_message))
-		else if(blocked > 0.2)
+		else if (blocked > 0.2)
 			to_chat(victim, SPAN_NOTICE(partial_block_message))
 	return args.Copy()
 
@@ -53,18 +53,18 @@
 // A simpler proc used as a helper for above but can also be used externally. Does not modify state.
 /datum/extension/armor/proc/get_blocked(damage_type, damage_flags, armor_pen = 0, damage = 5)
 	var/key = get_armor_key(damage_type, damage_flags)
-	if(!key)
+	if (!key)
 		return 0
 
 	var/armor = max(0, get_value(key) - armor_pen)
-	if(!armor)
+	if (!armor)
 		return 0
 	var/efficiency = min(damage / (armor_range_mult * armor), 1)
 	var/coef = damage <= armor ? under_armor_mult : over_armor_mult
 	return max(1 - coef * efficiency, 0)
 
 /datum/extension/armor/proc/get_value(key)
-	if(isnull(armor_values[key]))
+	if (isnull(armor_values[key]))
 		return 0
 	return min(armor_values[key], 100)
 
@@ -76,21 +76,21 @@
 	var/key
 	switch(damage_type)
 		if (DAMAGE_BRUTE)
-			if(damage_flags & DAMAGE_FLAG_BULLET)
+			if (damage_flags & DAMAGE_FLAG_BULLET)
 				key = "bullet"
-			else if(damage_flags & DAMAGE_FLAG_EXPLODE)
+			else if (damage_flags & DAMAGE_FLAG_EXPLODE)
 				key = "bomb"
 			else
 				key = "melee"
 		if (DAMAGE_BURN)
-			if(damage_flags & DAMAGE_FLAG_LASER)
+			if (damage_flags & DAMAGE_FLAG_LASER)
 				key = "laser"
-			else if(damage_flags & DAMAGE_FLAG_EXPLODE)
+			else if (damage_flags & DAMAGE_FLAG_EXPLODE)
 				key = "bomb"
 			else
 				key = "energy"
 		if (DAMAGE_TOXIN)
-			if(damage_flags & DAMAGE_FLAG_BIO)
+			if (damage_flags & DAMAGE_FLAG_BIO)
 				key = "bio" // Otherwise just not blocked by default.
 		if (DAMAGE_RADIATION)
 			key = "rad"

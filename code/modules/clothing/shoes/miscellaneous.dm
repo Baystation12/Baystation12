@@ -127,8 +127,8 @@
 	slowdown_per_slot[slot_shoes]  = 1
 
 /obj/item/clothing/shoes/clown_shoes/handle_movement(turf/walking, running)
-	if(running)
-		if(footstep >= 2)
+	if (running)
+		if (footstep >= 2)
 			footstep = 0
 			playsound(src, "clownstep", 50, 1) // this will get annoying very fast.
 		else
@@ -230,7 +230,7 @@
 	var/icon_state_modified = "foamclog-toeless"
 
 /obj/item/clothing/shoes/foamclog/use_tool(obj/item/W, mob/user)
-	if(istype(W, /obj/item/wirecutters) || istype(W, /obj/item/scalpel))
+	if (istype(W, /obj/item/wirecutters) || istype(W, /obj/item/scalpel))
 		if (clipped)
 			to_chat(user, SPAN_NOTICE("\The [src] have already been modified!"))
 			update_icon()
@@ -245,7 +245,7 @@
 	name = "toe-less [name]"
 	desc = "[desc]<br>They have been modified to accommodate a different shape."
 	icon_state = icon_state_modified
-	if("exclude" in species_restricted)
+	if ("exclude" in species_restricted)
 		species_restricted -= SPECIES_UNATHI
 	update_icon()
 	return

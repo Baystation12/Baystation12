@@ -13,13 +13,13 @@
 	. = ..()
 
 /datum/extension/on_click/alt/ghost_admin_killer/on_click(mob/user)
-	if(!valid_preconditions(user))
+	if (!valid_preconditions(user))
 		return FALSE
 
 	var/key_name = key_name(living_holder)
-	if(alert(user, "Do you wish to kill [key_name]?", "Kill [living_holder]?", "No", "Yes") != "Yes")
+	if (alert(user, "Do you wish to kill [key_name]?", "Kill [living_holder]?", "No", "Yes") != "Yes")
 		return FALSE
-	if(!valid_preconditions(user))
+	if (!valid_preconditions(user))
 		to_chat(user, SPAN_NOTICE("You were unable to kill [key_name]"))
 		return FALSE
 
@@ -29,21 +29,21 @@
 	return TRUE
 
 /datum/extension/on_click/alt/ghost_admin_killer/proc/valid_preconditions(mob/observer/ghost/user)
-	if(QDELETED(living_holder))               // Sanity check
+	if (QDELETED(living_holder))               // Sanity check
 		return FALSE
-	if(!istype(user))                         // Only ghosts may attempt to alt-kill mobs
+	if (!istype(user))                         // Only ghosts may attempt to alt-kill mobs
 		return FALSE
-	if(!check_rights(R_INVESTIGATE, 0, user)) // And only if they're investigators - Power creep
+	if (!check_rights(R_INVESTIGATE, 0, user)) // And only if they're investigators - Power creep
 		return FALSE
-	if(!living_holder.client)                 // And only if the target mob is currently possessed
+	if (!living_holder.client)                 // And only if the target mob is currently possessed
 		to_chat(user, SPAN_NOTICE("\The [living_holder] is not currently possessed."))
 		return FALSE
-	if(living_holder.stat == DEAD)            // No point in killing the already dead
+	if (living_holder.stat == DEAD)            // No point in killing the already dead
 		to_chat(user, SPAN_NOTICE("\The [living_holder] is already dead."))
 		return FALSE
 	return TRUE
 
 /mob/living/Initialize()
 	. = ..()
-	if(possession_candidate)
+	if (possession_candidate)
 		set_extension(src, /datum/extension/on_click/alt/ghost_admin_killer)

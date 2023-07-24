@@ -9,7 +9,7 @@
 	for(var/path in board.get_buildable_types())
 		var/obj/thing = path
 		dat += "<tr>"
-		if(path == board.build_path)
+		if (path == board.build_path)
 			dat += "<td>[SPAN_GOOD("&#9724")]</td><td>[initial(thing.name)]</td>"
 		else
 			dat += "<td>[SPAN_BAD("&#9724")]</td><td><a href='?src=\ref[src];choose=\ref[path]'>[initial(thing.name)]</a></td>"
@@ -19,9 +19,9 @@
 
 /datum/extension/interactive/multitool/circuitboards/buildtype_select/on_topic(href, href_list, user)
 	var/obj/item/stock_parts/circuitboard/board = holder
-	if(href_list["choose"])
+	if (href_list["choose"])
 		var/path = locate(href_list["choose"])
-		if(path && (path in board.get_buildable_types()))
+		if (path && (path in board.get_buildable_types()))
 			board.build_path = path
 			var/obj/thing = path
 			board.SetName("circuit board ([initial(thing.name)])")

@@ -50,15 +50,15 @@
 	color_weight = 20
 
 /datum/reagent/paint/touch_turf(turf/T)
-	if(istype(T) && !istype(T, /turf/space))
+	if (istype(T) && !istype(T, /turf/space))
 		T.color = color
 
 /datum/reagent/paint/touch_obj(obj/O)
-	if(istype(O))
+	if (istype(O))
 		O.color = color
 
 /datum/reagent/paint/touch_mob(mob/M)
-	if(istype(M) && !isobserver(M)) //painting observers: not allowed
+	if (istype(M) && !isobserver(M)) //painting observers: not allowed
 		M.color = color //maybe someday change this to paint only clothes and exposed body parts for human mobs.
 
 /datum/reagent/paint/get_data()
@@ -74,11 +74,11 @@
 
 	var/hex1 = uppertext(color)
 	var/hex2 = uppertext(newdata)
-	if(length(hex1) == 7)
+	if (length(hex1) == 7)
 		hex1 += "FF"
-	if(length(hex2) == 7)
+	if (length(hex2) == 7)
 		hex2 += "FF"
-	if(length(hex1) != 9 || length(hex2) != 9)
+	if (length(hex1) != 9 || length(hex2) != 9)
 		return
 	colors[1] += hex2num(copytext(hex1, 2, 4)) * volume
 	colors[2] += hex2num(copytext(hex1, 4, 6)) * volume
@@ -144,10 +144,10 @@
 	M.apply_damage(5 * removed, DAMAGE_RADIATION, armor_pen = 100)
 
 /datum/reagent/uranium/touch_turf(turf/T)
-	if(volume >= 3)
-		if(!istype(T, /turf/space))
+	if (volume >= 3)
+		if (!istype(T, /turf/space))
 			var/obj/effect/decal/cleanable/greenglow/glow = locate(/obj/effect/decal/cleanable/greenglow, T)
-			if(!glow)
+			if (!glow)
 				new /obj/effect/decal/cleanable/greenglow(T)
 			return
 
@@ -161,16 +161,16 @@
 
 /datum/reagent/water/holywater/affect_ingest(mob/living/carbon/M, removed)
 	..()
-	if(ishuman(M)) // Any location
-		if(iscultist(M))
-			if(prob(10))
+	if (ishuman(M)) // Any location
+		if (iscultist(M))
+			if (prob(10))
 				GLOB.cult.offer_uncult(M)
-			if(prob(2))
+			if (prob(2))
 				var/obj/effect/spider/spiderling/S = new /obj/effect/spider/spiderling(M.loc)
 				M.visible_message(SPAN_WARNING("\The [M] coughs up \the [S]!"))
 
 /datum/reagent/water/holywater/touch_turf(turf/T)
-	if(volume >= 5)
+	if (volume >= 5)
 		T.holy = 1
 	return
 
@@ -207,8 +207,8 @@
 	value = 6
 
 /datum/reagent/thermite/touch_turf(turf/T)
-	if(volume >= 5)
-		if(istype(T, /turf/simulated/wall))
+	if (volume >= 5)
+		if (istype(T, /turf/simulated/wall))
 			var/turf/simulated/wall/W = T
 			W.thermite = 1
 			W.overlays += image('icons/effects/effects.dmi',icon_state = "#673910")
@@ -216,7 +216,7 @@
 	return
 
 /datum/reagent/thermite/touch_mob(mob/living/L, amount)
-	if(istype(L))
+	if (istype(L))
 		L.adjust_fire_stacks(amount / 5)
 
 /datum/reagent/thermite/affect_blood(mob/living/carbon/M, removed)
@@ -236,7 +236,7 @@
 	remove_self(volume)
 
 /datum/reagent/napalm/touch_mob(mob/living/L, amount)
-	if(istype(L))
+	if (istype(L))
 		L.adjust_fire_stacks(amount / 100)
 
 /datum/reagent/napalm/b
@@ -256,11 +256,11 @@
 	O.clean_blood()
 
 /datum/reagent/space_cleaner/touch_turf(turf/T)
-	if(volume >= 1)
-		if(istype(T, /turf/simulated))
+	if (volume >= 1)
+		if (istype(T, /turf/simulated))
 			var/turf/simulated/S = T
 			S.dirt = 0
-			if(S.wet > 1)
+			if (S.wet > 1)
 				S.unwet_floor(FALSE)
 		T.clean_blood()
 
@@ -271,22 +271,22 @@
 /datum/reagent/space_cleaner/affect_touch(mob/living/carbon/M, removed)
 	for (var/obj/item/item as anything in M.GetAllHeld())
 		item.clean_blood()
-	if(M.wear_mask)
-		if(M.wear_mask.clean_blood())
+	if (M.wear_mask)
+		if (M.wear_mask.clean_blood())
 			M.update_inv_wear_mask(0)
-	if(ishuman(M))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(H.head)
-			if(H.head.clean_blood())
+		if (H.head)
+			if (H.head.clean_blood())
 				H.update_inv_head(0)
-		if(H.wear_suit)
-			if(H.wear_suit.clean_blood())
+		if (H.wear_suit)
+			if (H.wear_suit.clean_blood())
 				H.update_inv_wear_suit(0)
-		else if(H.w_uniform)
-			if(H.w_uniform.clean_blood())
+		else if (H.w_uniform)
+			if (H.w_uniform.clean_blood())
 				H.update_inv_w_uniform(0)
-		if(H.shoes)
-			if(H.shoes.clean_blood())
+		if (H.shoes)
+			if (H.shoes.clean_blood())
 				H.update_inv_shoes(0)
 		else
 			H.clean_blood(1)
@@ -301,7 +301,7 @@
 	color = "#000000"
 
 /datum/reagent/oil/touch_turf(turf/simulated/T)
-	if(!istype(T, /turf/space))
+	if (!istype(T, /turf/space))
 		new /obj/effect/decal/cleanable/blood/oil/streak(T)
 
 /datum/reagent/glycerol
@@ -335,14 +335,14 @@
 	value = 0.8
 
 /datum/reagent/coolant/touch_turf(turf/simulated/T)
-	if(!istype(T))
+	if (!istype(T))
 		return
 
 	var/datum/gas_mixture/environment = T.return_air()
 	var/min_temperature = 0 // Room temperature + some variance. An actual diminishing return would be better, but this is *like* that. In a way. . This has the potential for weird behavior, but I says fuck it. Water grenades for everyone.
 
 	var/hotspot = (locate(/obj/hotspot) in T)
-	if(hotspot && !istype(T, /turf/space))
+	if (hotspot && !istype(T, /turf/space))
 		var/datum/gas_mixture/lowertemp = T.remove_air(T:air:total_moles)
 		lowertemp.temperature = max(min(lowertemp.temperature-2000, lowertemp.temperature / 2), 0)
 		lowertemp.react()
@@ -432,27 +432,27 @@
 	metabolism = 0.05 // As with helium.
 
 /datum/reagent/carbon_monoxide/affect_blood(mob/living/carbon/human/M, removed)
-	if(!istype(M) || IS_METABOLICALLY_INERT(M))
+	if (!istype(M) || IS_METABOLICALLY_INERT(M))
 		return
 	var/warning_message
 	var/warning_prob = 10
 	var/dosage = M.chem_doses[type]
-	if(dosage >= 3)
+	if (dosage >= 3)
 		warning_message = pick("extremely dizzy","short of breath","faint","confused")
 		warning_prob = 15
 		M.adjustOxyLoss(10,20)
 		M.co2_alert = 1
-	else if(dosage >= 1.5)
+	else if (dosage >= 1.5)
 		warning_message = pick("dizzy","short of breath","faint","momentarily confused")
 		M.co2_alert = 1
 		M.adjustOxyLoss(3,5)
-	else if(dosage >= 0.25)
+	else if (dosage >= 0.25)
 		warning_message = pick("a little dizzy","short of breath")
 		warning_prob = 10
 		M.co2_alert = 0
 	else
 		M.co2_alert = 0
-	if(warning_message && prob(warning_prob))
+	if (warning_message && prob(warning_prob))
 		to_chat(M, SPAN_WARNING("You feel [warning_message]."))
 
 /datum/reagent/dye

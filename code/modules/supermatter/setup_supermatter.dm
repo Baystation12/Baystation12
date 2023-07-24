@@ -22,7 +22,7 @@
 		return
 
 	var/response = input(usr, "Are you sure? This will start up the engine with selected gas as coolant.", "Engine setup") as null|anything in list("N2", "CO2", "PH", "H2", "Abort")
-	if(!response || response == "Abort")
+	if (!response || response == "Abort")
 		return
 
 	var/errors = 0
@@ -35,31 +35,31 @@
 	// Coolant canisters, set types according to response.
 	for(var/obj/effect/engine_setup/coolant_canister/C in world)
 		switch(response)
-			if("N2")
+			if ("N2")
 				C.canister_type = /obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup
 				continue
-			if("CO2")
+			if ("CO2")
 				C.canister_type = /obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup
 				continue
-			if("PH")
+			if ("PH")
 				C.canister_type = /obj/machinery/portable_atmospherics/canister/phoron/engine_setup
 				continue
-			if("H2")
+			if ("H2")
 				C.canister_type = /obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup
 				continue
 
 	for(var/obj/effect/engine_setup/core/C in world)
 		switch(response)
-			if("N2")
+			if ("N2")
 				C.energy_setting = ENERGY_NITROGEN
 				continue
-			if("CO2")
+			if ("CO2")
 				C.energy_setting = ENERGY_CARBONDIOXIDE
 				continue
-			if("PH")
+			if ("PH")
 				C.energy_setting = ENERGY_PHORON
 				continue
-			if("H2")
+			if ("H2")
 				C.energy_setting = ENERGY_HYDROGEN
 				continue
 
@@ -71,31 +71,31 @@
 	for(var/obj/effect/engine_setup/S in world)
 		var/result = S.activate(0)
 		switch(result)
-			if(SETUP_OK)
+			if (SETUP_OK)
 				success++
 				continue
-			if(SETUP_WARNING)
+			if (SETUP_WARNING)
 				warnings++
 				continue
-			if(SETUP_ERROR)
+			if (SETUP_ERROR)
 				errors++
 				log_and_message_admins("## SUPERMATTER SETUP - Error encountered! Aborting.")
 				break
-			if(SETUP_DELAYED)
+			if (SETUP_DELAYED)
 				delayed_objects.Add(S)
 				continue
 
-	if(!errors)
+	if (!errors)
 		for(var/obj/effect/engine_setup/S in delayed_objects)
 			var/result = S.activate(1)
 			switch(result)
-				if(SETUP_OK)
+				if (SETUP_OK)
 					success++
 					continue
-				if(SETUP_WARNING)
+				if (SETUP_WARNING)
 					warnings++
 					continue
-				if(SETUP_ERROR)
+				if (SETUP_ERROR)
 					errors++
 					log_and_message_admins("## SUPERMATTER SETUP - Error encountered! Aborting.")
 					break
@@ -127,7 +127,7 @@
 /obj/effect/engine_setup/pump_max/activate()
 	..()
 	var/obj/machinery/atmospherics/binary/pump/P = locate() in get_turf(src)
-	if(!P)
+	if (!P)
 		log_and_message_admins("## WARNING: Unable to locate pump at [x] [y] [z]!")
 		return SETUP_WARNING
 	P.target_pressure = P.max_pressure_setting
@@ -144,7 +144,7 @@
 /obj/effect/engine_setup/empty_canister/activate()
 	..()
 	var/obj/machinery/atmospherics/portables_connector/P = locate() in get_turf(src)
-	if(!P)
+	if (!P)
 		log_and_message_admins("## WARNING: Unable to locate connector port at [x] [y] [z]!")
 		return SETUP_WARNING
 	new/obj/machinery/portable_atmospherics/canister(get_turf(src)) // Canisters automatically connect to connectors in New()
@@ -162,10 +162,10 @@
 /obj/effect/engine_setup/coolant_canister/activate()
 	..()
 	var/obj/machinery/atmospherics/portables_connector/P = locate() in get_turf(src)
-	if(!P)
+	if (!P)
 		log_and_message_admins("## ERROR: Unable to locate coolant connector port at [x] [y] [z]!")
 		return SETUP_ERROR
-	if(!canister_type)
+	if (!canister_type)
 		log_and_message_admins("## ERROR: Canister type unset at [x] [y] [z]!")
 		return SETUP_ERROR
 	new canister_type(get_turf(src))
@@ -179,14 +179,14 @@
 	var/energy_setting = 0
 
 /obj/effect/engine_setup/core/activate(last = 0)
-	if(!last)
+	if (!last)
 		return SETUP_DELAYED
 	..()
 	var/obj/machinery/power/supermatter/SM = locate() in get_turf(src)
-	if(!SM)
+	if (!SM)
 		log_and_message_admins("## ERROR: Unable to locate supermatter core at [x] [y] [z]!")
 		return SETUP_ERROR
-	if(!energy_setting)
+	if (!energy_setting)
 		log_and_message_admins("## ERROR: Energy setting unset at [x] [y] [z]!")
 		return SETUP_ERROR
 	SM.power = energy_setting
@@ -201,7 +201,7 @@
 /obj/effect/engine_setup/smes/activate()
 	..()
 	var/obj/machinery/power/smes/S = locate() in get_turf(src)
-	if(!S)
+	if (!S)
 		log_and_message_admins("## WARNING: Unable to locate SMES unit at [x] [y] [z]!")
 		return SETUP_WARNING
 	S.input_attempt = 1
@@ -221,25 +221,25 @@
 /obj/effect/engine_setup/filter/activate()
 	..()
 	var/obj/machinery/atmospherics/omni/filter/F = locate() in get_turf(src)
-	if(!F)
+	if (!F)
 		log_and_message_admins("## WARNING: Unable to locate omni filter at [x] [y] [z]!")
 		return SETUP_WARNING
-	if(!coolant)
+	if (!coolant)
 		log_and_message_admins("## WARNING: No coolant type set at [x] [y] [z]!")
 		return SETUP_WARNING
 
 	// Non-co2 coolant, adjust the filter's config first.
-	if(coolant != "CO2")
+	if (coolant != "CO2")
 		for(var/datum/omni_port/P in F.ports)
-			if(P.mode != ATM_CO2)
+			if (P.mode != ATM_CO2)
 				continue
-			if(coolant == "PH")
+			if (coolant == "PH")
 				P.mode = ATM_P
 				break
-			else if(coolant == "N2")
+			else if (coolant == "N2")
 				P.mode = ATM_N2
 				break
-			else if(coolant == "H2")
+			else if (coolant == "H2")
 				P.mode = ATM_H2
 				break
 			else

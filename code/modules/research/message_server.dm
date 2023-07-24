@@ -12,23 +12,23 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	var/priority = "Normal"
 
 /datum/data_rc_msg/New(param_rec = "",param_sender = "",param_message = "",param_stamp = "",param_id_auth = "",param_priority)
-	if(param_rec)
+	if (param_rec)
 		rec_dpt = param_rec
-	if(param_sender)
+	if (param_sender)
 		send_dpt = param_sender
-	if(param_message)
+	if (param_message)
 		message = param_message
-	if(param_stamp)
+	if (param_stamp)
 		stamp = param_stamp
-	if(param_id_auth)
+	if (param_id_auth)
 		id_auth = param_id_auth
-	if(param_priority)
+	if (param_priority)
 		switch(param_priority)
-			if(1)
+			if (1)
 				priority = "Normal"
-			if(2)
+			if (2)
 				priority = "High"
-			if(3)
+			if (3)
 				priority = "Extreme"
 			else
 				priority = "Undetermined"
@@ -64,15 +64,15 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 
 /obj/machinery/message_server/Process()
 	..()
-	if(active && (inoperable()))
+	if (active && (inoperable()))
 		active = 0
 		power_failure = 10
 		update_icon()
 		return
-	else if(inoperable())
+	else if (inoperable())
 		return
-	else if(power_failure > 0)
-		if(!(--power_failure))
+	else if (power_failure > 0)
+		if (!(--power_failure))
 			active = 1
 			update_icon()
 
@@ -86,22 +86,22 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	. = FALSE
 	var/list/good_z = GetConnectedZlevels(z)
 	for (var/obj/machinery/requests_console/Console in allConsoles)
-		if(!(Console.z in good_z))
+		if (!(Console.z in good_z))
 			continue
 		if (ckey(Console.department) == ckey(recipient))
-			if(Console.inoperable())
+			if (Console.inoperable())
 				Console.message_log += "<B>Message lost due to console failure.</B><BR>Please contact [station_name()] system administrator or AI for technical assistance.<BR>"
 				continue
 			. = TRUE
-			if(Console.newmessagepriority < priority)
+			if (Console.newmessagepriority < priority)
 				Console.newmessagepriority = priority
 				Console.icon_state = "req_comp[priority]"
-			if(priority > 1)
+			if (priority > 1)
 				playsound(Console.loc, 'sound/machines/chime.ogg', 80, 1)
 				Console.audible_message("[icon2html(Console, viewers(get_turf(Console)))][SPAN_WARNING("\The [Console] announces: 'High priority message received from [sender]!'")]", hearing_distance = 8)
 				Console.message_log += "[SPAN_COLOR("red", "High Priority message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A>")]<BR>[authmsg]"
 			else
-				if(!Console.silent)
+				if (!Console.silent)
 					playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
 					Console.audible_message("[icon2html(Console, viewers(get_turf(Console)))][SPAN_NOTICE("\The [Console] announces: 'Message received from [sender].'")]", hearing_distance = 5)
 				Console.message_log += "<B>Message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A></B><BR>[authmsg]"
@@ -109,7 +109,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 
 
 /obj/machinery/message_server/interface_interact(mob/user)
-	if(!CanInteract(user, DefaultTopicState()))
+	if (!CanInteract(user, DefaultTopicState()))
 		return FALSE
 	to_chat(user, "You toggle PDA message passing from [active ? "On" : "Off"] to [active ? "Off" : "On"]")
 	active = !active
@@ -127,7 +127,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 		..(O, user)
 
 /obj/machinery/message_server/on_update_icon()
-	if((inoperable()))
+	if ((inoperable()))
 		icon_state = "server-nopower"
 	else if (!active)
 		icon_state = "server-off"
@@ -141,18 +141,18 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 
 	for(var/mob/living/carbon/human/H in GLOB.human_mobs)
 		var/obj/item/modular_computer/device = locate() in H
-		if(!device || !(get_z(device) in GLOB.using_map.station_levels))
+		if (!device || !(get_z(device) in GLOB.using_map.station_levels))
 			continue
 
 		var/rank = H.get_authentification_rank()
 		var/datum/job/J = SSjobs.get_by_title(rank)
 		if (!J)
 			continue
-		if(!istype(J))
+		if (!istype(J))
 			log_debug(append_admin_tools("MESSAGE SERVER: Mob has an invalid job, skipping. Mob: '[H]'. Rank: '[rank]'. Job: '[J]'."))
 			continue
 
-		if(J.department_flag & department)
+		if (J.department_flag & department)
 			to_chat(H, SPAN_NOTICE("Your [device.name] alerts you to the fact that somebody is requesting your presence at your department."))
 			reached++
 

@@ -35,7 +35,7 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 
 /datum/job/submap/pod/New(datum/submap/_owner, abstract_job = FALSE)
 	..()
-	if(_owner) // Might be called from admin tools, etc
+	if (_owner) // Might be called from admin tools, etc
 		info = "Your ship, the [_owner.name], has been destroyed by a terrible disaster, \
 		leaving you stranded in your survival pod on a hostile exoplanet. Your pod's distress \
 		signal appear to be malfunctioning. All you can do now is survive, and hope for a passing ship..."

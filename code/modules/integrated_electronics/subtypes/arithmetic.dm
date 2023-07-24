@@ -31,7 +31,7 @@
 	var/result = 0
 	for(var/k in 1 to length(inputs))
 		var/I = get_pin_data(IC_INPUT, k)
-		if(isnum(I))
+		if (isnum(I))
 			result += I
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -51,13 +51,13 @@
 
 /obj/item/integrated_circuit/arithmetic/subtraction/do_work()
 	var/datum/integrated_io/A = inputs[1]
-	if(!isnum(A.data))
+	if (!isnum(A.data))
 		return
 	var/result = A.data
 
 	for(var/k in 2 to length(inputs))
 		var/I = get_pin_data(IC_INPUT, k)
-		if(isnum(I))
+		if (isnum(I))
 			result -= I
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -78,12 +78,12 @@
 
 /obj/item/integrated_circuit/arithmetic/multiplication/do_work()
 	var/datum/integrated_io/A = inputs[1]
-	if(!isnum(A.data))
+	if (!isnum(A.data))
 		return
 	var/result = A.data
 	for(var/k in 2 to length(inputs))
 		var/I = get_pin_data(IC_INPUT, k)
-		if(isnum(I))
+		if (isnum(I))
 			result *= I
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -103,14 +103,14 @@
 
 /obj/item/integrated_circuit/arithmetic/division/do_work()
 	var/datum/integrated_io/A = inputs[1]
-	if(!isnum(A.data))
+	if (!isnum(A.data))
 		return
 	var/result = A.data
 
 
 	for(var/k in 2 to length(inputs))
 		var/I = get_pin_data(IC_INPUT, k)
-		if(isnum(I) && (I != 0))
+		if (isnum(I) && (I != 0))
 			result /= I
 
 
@@ -131,7 +131,7 @@
 	var/result = 0
 	var/datum/integrated_io/A = inputs[1]
 	var/datum/integrated_io/B = inputs[2]
-	if(isnum(A.data) && isnum(B.data))
+	if (isnum(A.data) && isnum(B.data))
 		result = A.data ** B.data
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -151,8 +151,8 @@
 /obj/item/integrated_circuit/arithmetic/sign/do_work()
 	var/result = 0
 	var/datum/integrated_io/A = inputs[1]
-	if(isnum(A.data))
-		if(A.data > 0)
+	if (isnum(A.data))
+		if (A.data > 0)
 			result = 1
 		else if (A.data < 0)
 			result = -1
@@ -177,8 +177,8 @@
 	var/result = 0
 	var/datum/integrated_io/A = inputs[1]
 	var/datum/integrated_io/B = inputs[2]
-	if(isnum(A.data))
-		if(isnum(B.data) && B.data != 0)
+	if (isnum(A.data))
+		if (isnum(B.data) && B.data != 0)
 			result = round(A.data, B.data)
 		else
 			result = round(A.data)
@@ -201,7 +201,7 @@
 	for(var/k in 1 to length(inputs))
 		var/datum/integrated_io/I = inputs[k]
 		I.pull_data()
-		if(isnum(I.data))
+		if (isnum(I.data))
 			result = abs(I.data)
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -222,11 +222,11 @@
 	var/inputs_used = 0
 	for(var/k in 2 to length(inputs))
 		var/I = get_pin_data(IC_INPUT, k)
-		if(isnum(I))
+		if (isnum(I))
 			inputs_used++
 			result += I
 
-	if(inputs_used)
+	if (inputs_used)
 		result = result / inputs_used
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -265,7 +265,7 @@
 	var/L = get_pin_data(IC_INPUT, 1)
 	var/H = get_pin_data(IC_INPUT, 2)
 
-	if(isnum(L) && isnum(H))
+	if (isnum(L) && isnum(H))
 		result = rand(L, H)
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -284,7 +284,7 @@
 /obj/item/integrated_circuit/arithmetic/square_root/do_work()
 	var/result = 0
 	var/I = get_pin_data(IC_INPUT, 1)
-	if(isnum(I))
+	if (isnum(I))
 		result = sqrt(I)
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -304,7 +304,7 @@
 	var/result = 0
 	var/A = get_pin_data(IC_INPUT, 1)
 	var/B = get_pin_data(IC_INPUT, 2)
-	if(isnum(A) && isnum(B) && B != 0)
+	if (isnum(A) && isnum(B) && B != 0)
 		result = A % B
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -324,11 +324,11 @@
 	var/result
 	for(var/k in 1 to length(inputs))
 		var/I = get_pin_data(IC_INPUT, k)
-		if(!isnum(I))
+		if (!isnum(I))
 			continue
-		if(!isnum(result) || (!min_comparision && I > result) || (min_comparision && I < result))
+		if (!isnum(result) || (!min_comparision && I > result) || (min_comparision && I < result))
 			result = I
-	if(!isnum(result))
+	if (!isnum(result))
 		result = 0
 	set_pin_data(IC_OUTPUT, 1, result)
 	push_data()

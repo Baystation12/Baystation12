@@ -27,7 +27,7 @@
 
 /datum/species/human/gravworlder/can_float(mob/living/carbon/human/H)
 	. = ..()
-	if(.)
+	if (.)
 		return H.skill_check(SKILL_HAULING, SKILL_EXPERIENCED) //Hard for them to swim
 
 /datum/species/human/spacer
@@ -140,8 +140,8 @@
 	appearance_flags = SPECIES_APPEARANCE_HAS_HAIR_COLOR | SPECIES_APPEARANCE_HAS_SKIN_TONE_TRITON | SPECIES_APPEARANCE_HAS_LIPS | SPECIES_APPEARANCE_HAS_UNDERWEAR | SPECIES_APPEARANCE_HAS_EYE_COLOR
 
 /datum/species/human/tritonian/can_float(mob/living/carbon/human/H)
-	if(!H.is_physically_disabled())
-		if(H.encumbrance() < 2)
+	if (!H.is_physically_disabled())
+		if (H.encumbrance() < 2)
 			return TRUE
 	return FALSE
 
@@ -167,14 +167,14 @@
 	max_age =       45
 
 /datum/species/human/mule/handle_post_spawn(mob/living/carbon/human/H)
-	if(!H.psi)
+	if (!H.psi)
 		H.psi = new(H)
 		var/list/faculties = list("[PSI_COERCION]", "[PSI_REDACTION]", "[PSI_ENERGISTICS]", "[PSI_PSYCHOKINESIS]")
 		for(var/i = 1 to rand(2,3))
 			H.set_psi_rank(pick_n_take(faculties), 1)
 	H.psi.max_stamina = 70
 	var/obj/item/organ/external/E = pick(H.organs)
-	if(!BP_IS_ROBOTIC(E))
+	if (!BP_IS_ROBOTIC(E))
 		E.mutate()
 		E.limb_flags |= ORGAN_FLAG_DEFORMED
 		E.status |= ORGAN_DISFIGURED

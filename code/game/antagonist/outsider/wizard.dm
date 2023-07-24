@@ -21,7 +21,7 @@ GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
 
 /datum/antagonist/wizard/create_objectives(datum/mind/wizard)
 
-	if(!..())
+	if (!..())
 		return
 
 	var/kill
@@ -30,33 +30,33 @@ GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
 	var/hijack
 
 	switch(rand(1,100))
-		if(1 to 30)
+		if (1 to 30)
 			escape = 1
 			kill = 1
-		if(31 to 60)
+		if (31 to 60)
 			escape = 1
 			steal = 1
-		if(61 to 99)
+		if (61 to 99)
 			kill = 1
 			steal = 1
 		else
 			hijack = 1
 
-	if(kill)
+	if (kill)
 		var/datum/objective/assassinate/kill_objective = new
 		kill_objective.owner = wizard
 		kill_objective.find_target()
 		wizard.objectives |= kill_objective
-	if(steal)
+	if (steal)
 		var/datum/objective/steal/steal_objective = new
 		steal_objective.owner = wizard
 		steal_objective.find_target()
 		wizard.objectives |= steal_objective
-	if(escape)
+	if (escape)
 		var/datum/objective/survive/survive_objective = new
 		survive_objective.owner = wizard
 		wizard.objectives |= survive_objective
-	if(hijack)
+	if (hijack)
 		var/datum/objective/hijack/hijack_objective = new
 		hijack_objective.owner = wizard
 		wizard.objectives |= hijack_objective
@@ -70,7 +70,7 @@ GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
 
 /datum/antagonist/wizard/equip(mob/living/carbon/human/wizard_mob)
 
-	if(!..())
+	if (!..())
 		return 0
 
 	var/outfit_type = pick(subtypesof(/singleton/hierarchy/outfit/wizard))
@@ -84,7 +84,7 @@ GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
 	for(var/p in current_antagonists)
 		var/datum/mind/player = p
 		var/text = "<b>[player.name]'s spells were:</b>"
-		if(!player.learned_spells || !length(player.learned_spells))
+		if (!player.learned_spells || !length(player.learned_spells))
 			text += "<br>None!"
 		else
 			for(var/s in player.learned_spells)
@@ -97,7 +97,7 @@ GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
 
 //To batch-remove wizard spells. Linked to mind.dm.
 /mob/proc/spellremove()
-	if(!mind || !mind.learned_spells)
+	if (!mind || !mind.learned_spells)
 		return
 	for(var/spell/spell_to_remove in mind.learned_spells)
 		remove_spell(spell_to_remove)
@@ -116,13 +116,13 @@ Made a proc so this is not repeated 14 (or more) times.*/
 
 // Humans can wear clothes.
 /mob/living/carbon/human/wearing_wiz_garb()
-	if(!is_wiz_garb(src.wear_suit) && (!src.species.hud || (slot_wear_suit in src.species.hud.equip_slots)))
+	if (!is_wiz_garb(src.wear_suit) && (!src.species.hud || (slot_wear_suit in src.species.hud.equip_slots)))
 		to_chat(src, SPAN_WARNING("I don't feel strong enough without my robe."))
 		return 0
-	if(!is_wiz_garb(src.shoes) && (!species.hud || (slot_shoes in src.species.hud.equip_slots)))
+	if (!is_wiz_garb(src.shoes) && (!species.hud || (slot_shoes in src.species.hud.equip_slots)))
 		to_chat(src, SPAN_WARNING("I don't feel strong enough without my sandals."))
 		return 0
-	if(!is_wiz_garb(src.head) && (!species.hud || (slot_head in src.species.hud.equip_slots)))
+	if (!is_wiz_garb(src.head) && (!species.hud || (slot_head in src.species.hud.equip_slots)))
 		to_chat(src, SPAN_WARNING("I don't feel strong enough without my hat."))
 		return 0
 	return 1

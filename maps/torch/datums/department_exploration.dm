@@ -22,7 +22,7 @@
 	var/area/map = locate(/area/overmap)
 	for(var/obj/effect/overmap/visitable/sector/exoplanet/P in map)
 		total_seeds += length(P.seeds)
-	if(total_seeds)
+	if (total_seeds)
 		seeds = max(1, round(0.5 * total_seeds))
 	..()
 

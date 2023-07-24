@@ -8,7 +8,7 @@
 
 /obj/item/farmbot_arm_assembly/Initialize(ml, theTank)
 	. = ..()
-	if(!theTank)
+	if (!theTank)
 		theTank = new /obj/structure/reagent_dispensers/watertank
 	tank = theTank
 	tank.forceMove(src)

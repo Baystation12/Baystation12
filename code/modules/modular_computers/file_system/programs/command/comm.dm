@@ -46,10 +46,10 @@
 	var/list/data = host.initial_data()
 	var/authenticated = check_access(user, admin_access)
 
-	if(program && program.computer)
+	if (program && program.computer)
 		data["net_comms"] = program.computer.get_ntnet_capability(NTNET_COMMUNICATION)
 		data["net_syscont"] = program.computer.get_ntnet_capability(NTNET_SYSTEMCONTROL)
-		if(program.computer)
+		if (program.computer)
 			data["emagged"] = program.computer.emagged()
 			data["have_printer"] =  program.computer.has_component(PART_PRINTER)
 		else
@@ -85,13 +85,13 @@
 	data["messages"] = l.messages
 	data["message_deletion_allowed"] = l != global_message_listener
 	data["message_current_id"] = current_viewing_message_id
-	if(current_viewing_message)
+	if (current_viewing_message)
 		data["message_current"] = current_viewing_message
 
 	var/list/processed_evac_options = list()
-	if(!isnull(evacuation_controller))
+	if (!isnull(evacuation_controller))
 		for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
-			if(EO.abandon_ship)
+			if (EO.abandon_ship)
 				continue
 			var/list/option = list()
 			option["option_text"] = EO.option_text
@@ -102,64 +102,64 @@
 	data["evac_options"] = processed_evac_options
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		ui = new(user, src, ui_key, "communication.tmpl", name, 550, 420, state = state)
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
 
 /datum/nano_module/program/comm/proc/is_authenticated(authenticated, mob/user)
-	if(program)
+	if (program)
 		return program.can_run(user)
 	return TRUE
 
 /datum/nano_module/program/comm/proc/obtain_message_listener()
-	if(program)
+	if (program)
 		var/datum/computer_file/program/comm/P = program
 		return P.message_core
 	return global_message_listener
 
 /datum/nano_module/program/comm/Topic(href, href_list)
-	if(..())
+	if (..())
 		return TOPIC_HANDLED
 	var/mob/user = usr
 	var/ntn_comm = (program && program.computer) ? program.computer.get_ntnet_capability(NTNET_COMMUNICATION) : TRUE
 	var/ntn_cont = (program && program.computer) ? program.computer.get_ntnet_capability(NTNET_SYSTEMCONTROL) : TRUE
 	var/datum/comm_message_listener/l = obtain_message_listener()
 	switch(href_list["action"])
-		if("sw_menu")
+		if ("sw_menu")
 			. = TOPIC_HANDLED
 			current_status = text2num(href_list["target"])
-		if("announce")
+		if ("announce")
 			. = TOPIC_HANDLED
-			if(is_authenticated(user) && !issilicon(usr) && ntn_comm)
-				if(user)
+			if (is_authenticated(user) && !issilicon(usr) && ntn_comm)
+				if (user)
 					var/obj/item/card/id/id_card = user.GetIdCard()
 					crew_announcement.announcer = GetNameAndAssignmentFromId(id_card)
 				else
 					crew_announcement.announcer = "Unknown"
-				if(announcment_cooldown)
+				if (announcment_cooldown)
 					to_chat(usr, "Please allow at least one minute to pass between announcements")
 					return
 				var/input = input(usr, "Please write a message to announce to the [station_name()].", "Priority Announcement") as null|message
-				if(!input || !can_still_topic())
+				if (!input || !can_still_topic())
 					return
 				var/affected_zlevels = GetConnectedZlevels(get_host_z())
 				crew_announcement.Announce(input, zlevels = affected_zlevels)
 				announcment_cooldown = 1
 				spawn(600)//One minute cooldown
 					announcment_cooldown = 0
-		if("message")
+		if ("message")
 			. = TOPIC_HANDLED
-			if(href_list["target"] == "emagged")
-				if(program)
-					if(is_authenticated(user) && program.computer.emagged() && !issilicon(usr) && ntn_comm)
-						if(centcomm_message_cooldown)
+			if (href_list["target"] == "emagged")
+				if (program)
+					if (is_authenticated(user) && program.computer.emagged() && !issilicon(usr) && ntn_comm)
+						if (centcomm_message_cooldown)
 							to_chat(usr, SPAN_WARNING("Arrays recycling. Please stand by."))
 							SSnano.update_uis(src)
 							return
 						var/input = sanitize(input(usr, "Please choose a message to transmit to \[ABNORMAL ROUTING CORDINATES\] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination. Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
-						if(!input || !can_still_topic())
+						if (!input || !can_still_topic())
 							return
 						Syndicate_announce(input, usr)
 						to_chat(usr, SPAN_NOTICE("Message transmitted."))
@@ -167,17 +167,17 @@
 						centcomm_message_cooldown = 1
 						spawn(300)//30 second cooldown
 							centcomm_message_cooldown = 0
-			else if(href_list["target"] == "regular")
-				if(is_authenticated(user) && !issilicon(usr) && ntn_comm)
-					if(centcomm_message_cooldown)
+			else if (href_list["target"] == "regular")
+				if (is_authenticated(user) && !issilicon(usr) && ntn_comm)
+					if (centcomm_message_cooldown)
 						to_chat(usr, SPAN_WARNING("Arrays recycling. Please stand by."))
 						SSnano.update_uis(src)
 						return
-					if(!is_relay_online())//Contact Centcom has a check, Syndie doesn't to allow for Traitor funs.
+					if (!is_relay_online())//Contact Centcom has a check, Syndie doesn't to allow for Traitor funs.
 						to_chat(usr, SPAN_WARNING("No Emergency Bluespace Relay detected. Unable to transmit message."))
 						return
 					var/input = sanitize(input("Please choose a message to transmit to [GLOB.using_map.boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
-					if(!input || !can_still_topic())
+					if (!input || !can_still_topic())
 						return
 					Centcomm_announce(input, usr)
 					to_chat(usr, SPAN_NOTICE("Message transmitted."))
@@ -185,9 +185,9 @@
 					centcomm_message_cooldown = 1
 					spawn(300) //30 second cooldown
 						centcomm_message_cooldown = 0
-		if("evac")
+		if ("evac")
 			. = TOPIC_HANDLED
-			if(is_authenticated(user))
+			if (is_authenticated(user))
 				var/datum/evacuation_option/selected_evac_option = evacuation_controller.evacuation_options[href_list["target"]]
 				if (isnull(selected_evac_option) || !istype(selected_evac_option))
 					return
@@ -198,64 +198,64 @@
 				var/confirm = alert("Are you sure you want to [selected_evac_option.option_desc]?", name, "No", "Yes")
 				if (confirm == "Yes" && can_still_topic())
 					evacuation_controller.handle_evac_option(selected_evac_option.option_target, user)
-		if("setstatus")
+		if ("setstatus")
 			. = TOPIC_HANDLED
-			if(is_authenticated(user) && ntn_cont)
+			if (is_authenticated(user) && ntn_cont)
 				switch(href_list["target"])
-					if("line1")
+					if ("line1")
 						var/linput = reject_bad_text(sanitize(input("Line 1", "Enter Message Text", msg_line1) as text|null, 40), 40)
-						if(can_still_topic())
+						if (can_still_topic())
 							msg_line1 = linput
-					if("line2")
+					if ("line2")
 						var/linput = reject_bad_text(sanitize(input("Line 2", "Enter Message Text", msg_line2) as text|null, 40), 40)
-						if(can_still_topic())
+						if (can_still_topic())
 							msg_line2 = linput
-					if("message")
+					if ("message")
 						post_status("message", msg_line1, msg_line2)
-					if("image")
+					if ("image")
 						post_status("image", href_list["image"])
 					else
 						post_status(href_list["target"])
-		if("setalert")
+		if ("setalert")
 			. = TOPIC_HANDLED
-			if(is_authenticated(user) && !issilicon(usr) && ntn_cont && ntn_comm)
+			if (is_authenticated(user) && !issilicon(usr) && ntn_cont && ntn_comm)
 				var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 				var/singleton/security_level/target_level = locate(href_list["target"]) in security_state.comm_console_security_levels
-				if(target_level && security_state.can_switch_to(target_level))
+				if (target_level && security_state.can_switch_to(target_level))
 					var/confirm = alert("Are you sure you want to change the alert level to [target_level.name]?", name, "No", "Yes")
-					if(confirm == "Yes" && can_still_topic())
+					if (confirm == "Yes" && can_still_topic())
 						security_state.set_security_level(target_level)
 			else
 				to_chat(usr, "You press the button, but a red light flashes and nothing happens.") //This should never happen
 
 			current_status = STATE_DEFAULT
-		if("viewmessage")
+		if ("viewmessage")
 			. = TOPIC_HANDLED
-			if(is_authenticated(user) && ntn_comm)
+			if (is_authenticated(user) && ntn_comm)
 				current_viewing_message_id = text2num(href_list["target"])
 				for(var/list/m in l.messages)
-					if(m["id"] == current_viewing_message_id)
+					if (m["id"] == current_viewing_message_id)
 						current_viewing_message = m
 				current_status = STATE_VIEWMESSAGE
-		if("delmessage")
+		if ("delmessage")
 			. = TOPIC_HANDLED
-			if(is_authenticated(user) && ntn_comm && l != global_message_listener)
+			if (is_authenticated(user) && ntn_comm && l != global_message_listener)
 				l.Remove(current_viewing_message)
 			current_status = STATE_MESSAGELIST
-		if("printmessage")
+		if ("printmessage")
 			. = TOPIC_HANDLED
-			if(is_authenticated(user) && ntn_comm)
-				if(!program.computer.print_paper(current_viewing_message["contents"],current_viewing_message["title"]))
+			if (is_authenticated(user) && ntn_comm)
+				if (!program.computer.print_paper(current_viewing_message["contents"],current_viewing_message["title"]))
 					to_chat(usr, SPAN_NOTICE("Hardware Error: Printer was unable to print the selected file."))
-		if("unbolt_doors")
+		if ("unbolt_doors")
 			GLOB.using_map.unbolt_saferooms()
 			to_chat(usr, SPAN_NOTICE("The console beeps, confirming the signal was sent to have the saferooms unbolted."))
-		if("bolt_doors")
+		if ("bolt_doors")
 			GLOB.using_map.bolt_saferooms()
 			to_chat(usr, SPAN_NOTICE("The console beeps, confirming the signal was sent to have the saferooms bolted."))
-		if("toggle_alert_border")
+		if ("toggle_alert_border")
 			. = TOPIC_HANDLED
-			if(is_authenticated(user) && ntn_comm)
+			if (is_authenticated(user) && ntn_comm)
 				post_status("toggle_alert_border")
 
 #undef STATE_DEFAULT
@@ -302,20 +302,20 @@ var/global/last_message_id = 0
 
 	var/datum/radio_frequency/frequency = radio_controller.return_frequency(1435)
 
-	if(!frequency) return
+	if (!frequency) return
 
 	var/datum/signal/status_signal = new
 	status_signal.transmission_method = 1
 	status_signal.data["command"] = command
 
 	switch(command)
-		if("message")
+		if ("message")
 			status_signal.data["msg1"] = data1
 			status_signal.data["msg2"] = data2
 			log_admin("STATUS: [key_name(usr)] set status screen message with: [data1] [data2]")
-		if("image")
+		if ("image")
 			status_signal.data["picture_state"] = data1
-		if("toggle_alert_border")
+		if ("toggle_alert_border")
 			status_signal.data["toggle_alert_border"] = TRUE
 	frequency.post_signal(signal = status_signal)
 
@@ -323,7 +323,7 @@ var/global/last_message_id = 0
 	if (!evacuation_controller)
 		return
 
-	if(evacuation_controller.cancel_evacuation())
+	if (evacuation_controller.cancel_evacuation())
 		log_and_message_admins("has cancelled the evacuation.", user)
 
 	return
@@ -331,7 +331,7 @@ var/global/last_message_id = 0
 
 /proc/is_relay_online()
 	for(var/obj/machinery/bluespacerelay/M in SSmachines.machinery)
-		if(M.stat == EMPTY_BITFIELD)
+		if (M.stat == EMPTY_BITFIELD)
 			return 1
 	return 0
 
@@ -339,29 +339,29 @@ var/global/last_message_id = 0
 	if (!evacuation_controller)
 		return
 
-	if(isnull(emergency))
+	if (isnull(emergency))
 		emergency = 1
 
-	if(!GLOB.universe.OnShuttleCall(usr))
+	if (!GLOB.universe.OnShuttleCall(usr))
 		to_chat(user, SPAN_NOTICE("Cannot establish a bluespace connection."))
 		return
 
-	if(GLOB.deathsquad.deployed)
+	if (GLOB.deathsquad.deployed)
 		to_chat(user, "[GLOB.using_map.boss_short] will not allow an evacuation to take place. Consider all contracts terminated.")
 		return
 
-	if(evacuation_controller.deny)
+	if (evacuation_controller.deny)
 		to_chat(user, "An evacuation cannot be called at this time. Please try again later.")
 		return
 
-	if(evacuation_controller.is_on_cooldown()) // Ten minute grace period to let the game get going without lolmetagaming. -- TLE
+	if (evacuation_controller.is_on_cooldown()) // Ten minute grace period to let the game get going without lolmetagaming. -- TLE
 		to_chat(user, evacuation_controller.get_cooldown_message())
 
-	if(evacuation_controller.is_evacuating())
+	if (evacuation_controller.is_evacuating())
 		to_chat(user, "An evacuation is already underway.")
 		return
 
-	if(evacuation_controller.call_evacuation(user, _emergency_evac = emergency))
+	if (evacuation_controller.call_evacuation(user, _emergency_evac = emergency))
 		log_and_message_admins("[user? key_name(user) : "Autotransfer"] has called the shuttle.")
 
 /proc/init_autotransfer()
@@ -370,7 +370,7 @@ var/global/last_message_id = 0
 		return
 
 	. = evacuation_controller.call_evacuation(null, _emergency_evac = FALSE, autotransfer = TRUE)
-	if(.)
+	if (.)
 		//delay events in case of an autotransfer
 		var/delay = evacuation_controller.evac_arrival_time - world.time + (2 MINUTES)
 		SSevent.delay_events(EVENT_LEVEL_MODERATE, delay)

@@ -11,14 +11,14 @@
 	return material
 
 /obj/item/ore/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/device/core_sampler))
+	if (istype(W,/obj/item/device/core_sampler))
 		var/obj/item/device/core_sampler/C = W
 		C.sample_item(src, user)
 	else
 		return ..()
 
 /obj/item/ore/New(newloc, _mat)
-	if(_mat)
+	if (_mat)
 		matter = list()
 		matter[_mat] = SHEET_MATERIAL_AMOUNT
 	..(newloc)
@@ -26,15 +26,15 @@
 /obj/item/ore/Initialize()
 	for(var/stuff in matter)
 		var/material/M = SSmaterials.get_material_by_name(stuff)
-		if(M)
+		if (M)
 			name = M.ore_name
 			desc = M.ore_desc ? M.ore_desc : "A lump of ore."
 			material = M
 			color = M.icon_colour
 			icon_state = M.ore_icon_overlay
-			if(M.ore_desc)
+			if (M.ore_desc)
 				desc = M.ore_desc
-			if(icon_state == "dust")
+			if (icon_state == "dust")
 				slot_flags = SLOT_HOLSTER
 			break
 	. = ..()
@@ -42,9 +42,9 @@
 // POCKET SAND!
 /obj/item/ore/throw_impact(atom/hit_atom)
 	..()
-	if(icon_state == "dust")
+	if (icon_state == "dust")
 		var/mob/living/carbon/human/H = hit_atom
-		if(istype(H) && H.has_eyes() && prob(85))
+		if (istype(H) && H.has_eyes() && prob(85))
 			to_chat(H, SPAN_WARNING("Some of \the [src] gets in your eyes!"))
 			H.eye_blind += 5
 			H.eye_blurry += 10

@@ -20,14 +20,14 @@
 /datum/random_map/noise/set_map_size()
 	// Make sure the grid is a square with limits that are
 	// (n^2)+1, otherwise diamond-square won't work.
-	if(!IsPowerOfTwo((limit_x-1)))
+	if (!IsPowerOfTwo((limit_x-1)))
 		limit_x = Ceilp(limit_x, 2) + 1
-	if(!IsPowerOfTwo((limit_y-1)))
+	if (!IsPowerOfTwo((limit_y-1)))
 		limit_y = Ceilp(limit_y, 2) + 1
 	// Sides must be identical lengths.
-	if(limit_x > limit_y)
+	if (limit_x > limit_y)
 		limit_y = limit_x
-	else if(limit_y > limit_x)
+	else if (limit_y > limit_x)
 		limit_x = limit_y
 	..()
 
@@ -50,7 +50,7 @@
 
 /datum/random_map/noise/get_map_char(value)
 	var/val = min(9,max(0,round((value/cell_range)*10)))
-	if(isnull(val)) val = 0
+	if (isnull(val)) val = 0
 	return "[val]"
 
 /datum/random_map/noise/proc/noise2value(value)
@@ -102,13 +102,13 @@
 		map[TRANSLATE_COORD(x+isize,y)] \
 		)/4)
 
-	if(prob(random_variance_chance))
+	if (prob(random_variance_chance))
 		map[current_cell] *= (rand(1,2)==1 ? (1.0-random_element) : (1.0+random_element))
 		map[current_cell] = max(0,min(cell_range,map[current_cell]))
 
  	// Recurse until size is too small to subdivide.
-	if(isize>3)
-		if(!priority_process)
+	if (isize>3)
+		if (!priority_process)
 			CHECK_TICK
 		iteration++
 		subdivide(iteration, x,       y,       hsize)
@@ -161,16 +161,16 @@
 
 				total = round(total/val_count)
 
-				if(abs(map[current_cell]-total) <= cell_smooth_amt)
+				if (abs(map[current_cell]-total) <= cell_smooth_amt)
 					map[current_cell] = total
-				else if(map[current_cell] < total)
+				else if (map[current_cell] < total)
 					map[current_cell]+=cell_smooth_amt
-				else if(map[current_cell] < total)
+				else if (map[current_cell] < total)
 					map[current_cell]-=cell_smooth_amt
 				map[current_cell] = max(0,min(cell_range,map[current_cell]))
 		map = next_map
 
-	if(smooth_single_tiles)
+	if (smooth_single_tiles)
 		var/list/buddies = list()
 		for(var/x in 1 to limit_x - 1)
 			for(var/y in 1 to limit_y - 1)
@@ -178,23 +178,23 @@
 				var/list/neighbors = get_neighbors(x, y)
 				buddies.Cut()
 				for(var/cell in neighbors)
-					if(noise2value(map[cell]) == noise2value(map[mapcell]))
+					if (noise2value(map[cell]) == noise2value(map[mapcell]))
 						buddies |= cell
-				if(!length(buddies))
+				if (!length(buddies))
 					map[mapcell] = map[pick(neighbors)]
 
 /datum/random_map/noise/proc/get_neighbors(x, y, include_diagonals)
 	. = list()
-	if(!include_diagonals)
+	if (!include_diagonals)
 		var/static/list/ortho_offsets = list(list(-1, 0), list(1, 0), list(0, 1), list(0,-1))
 		for(var/list/offset in ortho_offsets)
 			var/tmp_cell = get_map_cell(x+offset[1],y+offset[2])
-			if(tmp_cell)
+			if (tmp_cell)
 				. += tmp_cell
 	else
 		for(var/dx in -1 to 1)
 			for(var/dy in -1 to 1)
 				var/tmp_cell = get_map_cell(x+dx,y+dy)
-				if(tmp_cell)
+				if (tmp_cell)
 					. += tmp_cell
 		. -= get_map_cell(x,y)

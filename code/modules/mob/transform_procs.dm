@@ -24,7 +24,7 @@
 	UpdateLyingBuckledAndVerbStatus()
 	set_invisibility(initial(invisibility))
 
-	if(!species.primitive_form) //If the creature in question has no primitive set, this is going to be messy.
+	if (!species.primitive_form) //If the creature in question has no primitive set, this is going to be messy.
 		gib()
 		return
 
@@ -62,14 +62,14 @@
 	return ..()
 
 /mob/proc/AIize(move=1)
-	if(client)
+	if (client)
 		sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// stop the jams for AIs
 
 
 	var/mob/living/silicon/ai/O = new (loc, GLOB.using_map.default_law_type,,1)//No MMI but safety is in effect.
 	O.set_invisibility(0)
 	O.aiRestorePowerRoutine = 0
-	if(mind)
+	if (mind)
 		mind.transfer_to(O)
 		O.mind.original = O
 		var/datum/job/job = SSjobs.get_by_title(O.mind.assigned_role)
@@ -77,7 +77,7 @@
 	else
 		O.key = key
 
-	if(move)
+	if (move)
 		var/obj/loc_landmark
 		for(var/obj/effect/landmark/start/sloc in landmarks_list)
 			if (sloc.name != "AI")
@@ -88,7 +88,7 @@
 		if (!loc_landmark)
 			for(var/obj/effect/landmark/tripai in landmarks_list)
 				if (tripai.name == "tripai")
-					if((locate(/mob/living) in tripai.loc) || (locate(/obj/structure/AIcore) in tripai.loc))
+					if ((locate(/mob/living) in tripai.loc) || (locate(/obj/structure/AIcore) in tripai.loc))
 						continue
 					loc_landmark = tripai
 		if (!loc_landmark)
@@ -128,15 +128,15 @@
 	O.gender = gender
 	O.set_invisibility(0)
 
-	if(mind)
+	if (mind)
 		mind.transfer_to(O)
-		if(O.mind && O.mind.assigned_role == "Robot")
+		if (O.mind && O.mind.assigned_role == "Robot")
 			O.mind.original = O
 			var/mmi_type = SSrobots.get_mmi_type_by_title(O.mind.role_alt_title ? O.mind.role_alt_title : O.mind.assigned_role)
-			if(mmi_type)
+			if (mmi_type)
 				O.mmi = new mmi_type(O)
 				O.mmi.transfer_identity(src)
-		if(O.mind.assigned_job && O.mind.assigned_job.faction)
+		if (O.mind.assigned_job && O.mind.assigned_job.faction)
 			O.faction = O.mind.assigned_job.faction
 			O.mind.faction = O.mind.assigned_job.faction
 		else
@@ -165,7 +165,7 @@
 		qdel(t)
 
 	var/mob/living/carbon/slime/new_slime
-	if(reproduce)
+	if (reproduce)
 		var/number = pick(14;2,3,4)	//reproduce (has a small chance of producing 3 or 4 offspring)
 		var/list/babies = list()
 		for(var/i=1,i<=number,i++)
@@ -176,7 +176,7 @@
 		new_slime = pick(babies)
 	else
 		new_slime = new /mob/living/carbon/slime(loc)
-		if(adult)
+		if (adult)
 			new_slime.is_adult = 1
 		else
 	new_slime.key = key
@@ -210,11 +210,11 @@
 	var/list/mobtypes = typesof(/mob/living/simple_animal)
 	var/mobpath = input("Which type of mob should [src] turn into?", "Choose a type") in mobtypes
 
-	if(!safe_animal(mobpath))
+	if (!safe_animal(mobpath))
 		to_chat(usr, SPAN_WARNING("Sorry but this mob type is currently unavailable."))
 		return
 
-	if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
+	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
@@ -243,7 +243,7 @@
 	var/list/mobtypes = typesof(/mob/living/simple_animal)
 	var/mobpath = input("Which type of mob should [src] turn into?", "Choose a type") in mobtypes
 
-	if(!safe_animal(mobpath))
+	if (!safe_animal(mobpath))
 		to_chat(usr, SPAN_WARNING("Sorry but this mob type is currently unavailable."))
 		return
 
@@ -263,41 +263,41 @@
 /mob/proc/safe_animal(MP)
 
 //Bad mobs! - Remember to add a comment explaining what's wrong with the mob
-	if(!MP)
+	if (!MP)
 		return 0	//Sanity, this should never happen.
 
-	if(ispath(MP, /mob/living/simple_animal/construct/behemoth))
+	if (ispath(MP, /mob/living/simple_animal/construct/behemoth))
 		return 0 //I think this may have been an unfinished WiP or something. These constructs should really have their own class simple_animal/construct/subtype
 
-	if(ispath(MP, /mob/living/simple_animal/construct/armoured))
+	if (ispath(MP, /mob/living/simple_animal/construct/armoured))
 		return 0 //Verbs do not appear for players. These constructs should really have their own class simple_animal/construct/subtype
 
-	if(ispath(MP, /mob/living/simple_animal/construct/wraith))
+	if (ispath(MP, /mob/living/simple_animal/construct/wraith))
 		return 0 //Verbs do not appear for players. These constructs should really have their own class simple_animal/construct/subtype
 
-	if(ispath(MP, /mob/living/simple_animal/construct/builder))
+	if (ispath(MP, /mob/living/simple_animal/construct/builder))
 		return 0 //Verbs do not appear for players. These constructs should really have their own class simple_animal/construct/subtype
 
 //Good mobs!
-	if(ispath(MP, /mob/living/simple_animal/passive/cat))
+	if (ispath(MP, /mob/living/simple_animal/passive/cat))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/passive/corgi))
+	if (ispath(MP, /mob/living/simple_animal/passive/corgi))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/passive/crab))
+	if (ispath(MP, /mob/living/simple_animal/passive/crab))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/hostile/carp))
+	if (ispath(MP, /mob/living/simple_animal/hostile/carp))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/passive/mushroom))
+	if (ispath(MP, /mob/living/simple_animal/passive/mushroom))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/shade))
+	if (ispath(MP, /mob/living/simple_animal/shade))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/passive/tomato))
+	if (ispath(MP, /mob/living/simple_animal/passive/tomato))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/passive/mouse))
+	if (ispath(MP, /mob/living/simple_animal/passive/mouse))
 		return 1 //It is impossible to pull up the player panel for mice (Fixed! - Nodrak)
-	if(ispath(MP, /mob/living/simple_animal/hostile/bear))
+	if (ispath(MP, /mob/living/simple_animal/hostile/bear))
 		return 1 //Bears will auto-attack mobs, even if they're player controlled (Fixed! - Nodrak)
-	if(ispath(MP, /mob/living/simple_animal/hostile/retaliate/parrot))
+	if (ispath(MP, /mob/living/simple_animal/hostile/retaliate/parrot))
 		return 1 //Parrots are no longer unfinished! -Nodrak
 
 	//Not in here? Must be untested!

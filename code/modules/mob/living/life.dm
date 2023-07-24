@@ -9,22 +9,22 @@
 	if (!loc)
 		return
 
-	if(machine && !CanMouseDrop(machine, src))
+	if (machine && !CanMouseDrop(machine, src))
 		machine = null
 
 	//Handle temperature/pressure differences between body and environment
 	var/datum/gas_mixture/environment = loc.return_air()
-	if(environment)
+	if (environment)
 		handle_environment(environment)
 
 	blinded = 0 // Placing this here just show how out of place it is.
 	// human/handle_regular_status_updates() needs a cleanup, as blindness should be handled in handle_disabilities()
 	handle_regular_status_updates() // Status & health update, are we dead or alive etc.
 
-	if(stat != DEAD)
+	if (stat != DEAD)
 		aura_check(AURA_TYPE_LIFE)
 
-		if(!InStasis())
+		if (!InStasis())
 			//Mutations and radiation
 			handle_mutations_and_radiation()
 
@@ -60,15 +60,15 @@
 	return
 
 /mob/living/proc/update_pulling()
-	if(pulling)
-		if(incapacitated())
+	if (pulling)
+		if (incapacitated())
 			stop_pulling()
 
 //This updates the health and status of the mob (conscious, unconscious, dead)
 /mob/living/proc/handle_regular_status_updates()
 	updatehealth()
-	if(stat != DEAD)
-		if(paralysis)
+	if (stat != DEAD)
+		if (paralysis)
 			set_stat(UNCONSCIOUS)
 		else if (status_flags & FAKEDEATH)
 			set_stat(UNCONSCIOUS)
@@ -87,43 +87,43 @@
 	handle_confused()
 
 /mob/living/proc/handle_stunned()
-	if(stunned)
+	if (stunned)
 		AdjustStunned(-1)
-		if(!stunned)
+		if (!stunned)
 			update_icons()
 	return stunned
 
 /mob/living/proc/handle_weakened()
-	if(weakened)
+	if (weakened)
 		weakened = max(weakened-1,0)
-		if(!weakened)
+		if (!weakened)
 			update_icons()
 	return weakened
 
 /mob/living/proc/handle_stuttering()
-	if(stuttering)
+	if (stuttering)
 		stuttering = max(stuttering-1, 0)
 	return stuttering
 
 /mob/living/proc/handle_silent()
-	if(silent)
+	if (silent)
 		silent = max(silent-1, 0)
 	return silent
 
 /mob/living/proc/handle_drugged()
-	if(druggy)
+	if (druggy)
 		druggy = max(druggy-1, 0)
 	return druggy
 
 /mob/living/proc/handle_slurring()
-	if(slurring)
+	if (slurring)
 		slurring = max(slurring-1, 0)
 	return slurring
 
 /mob/living/proc/handle_paralysed()
-	if(paralysis)
+	if (paralysis)
 		AdjustParalysis(-1)
-		if(!paralysis)
+		if (!paralysis)
 			update_icons()
 	return paralysis
 
@@ -132,32 +132,32 @@
 	handle_impaired_hearing()
 
 /mob/living/proc/handle_confused()
-	if(confused)
+	if (confused)
 		confused = max(0, confused - 1)
 	return confused
 
 /mob/living/proc/handle_impaired_vision()
 	//Eyes
-	if(sdisabilities & BLINDED || stat)	//blindness from disability or unconsciousness doesn't get better on its own
+	if (sdisabilities & BLINDED || stat)	//blindness from disability or unconsciousness doesn't get better on its own
 		eye_blind = max(eye_blind, 1)
-	else if(eye_blind)			//blindness, heals slowly over time
+	else if (eye_blind)			//blindness, heals slowly over time
 		eye_blind = max(eye_blind-1,0)
-	else if(eye_blurry)			//blurry eyes heal slowly
+	else if (eye_blurry)			//blurry eyes heal slowly
 		eye_blurry = max(eye_blurry-1, 0)
 
 /mob/living/proc/handle_impaired_hearing()
 	//Ears
-	if(sdisabilities & DEAFENED)	//disabled-deaf, doesn't get better on its own
+	if (sdisabilities & DEAFENED)	//disabled-deaf, doesn't get better on its own
 		setEarDamage(null, max(ear_deaf, 1))
-	else if(ear_damage < 25)
+	else if (ear_damage < 25)
 		adjustEarDamage(-0.05, -1)	// having ear damage impairs the recovery of ear_deaf
-	else if(ear_damage < 100)
+	else if (ear_damage < 100)
 		adjustEarDamage(-0.05, 0)	// deafness recovers slowly over time, unless ear_damage is over 100. TODO meds that heal ear_damage
 
 
 //this handles hud updates. Calls update_vision() and handle_hud_icons()
 /mob/living/proc/handle_regular_hud_updates()
-	if(!client)	return 0
+	if (!client)	return 0
 
 	handle_hud_icons()
 	handle_vision()
@@ -167,10 +167,10 @@
 /mob/living/proc/handle_vision()
 	update_sight()
 
-	if(stat == DEAD)
+	if (stat == DEAD)
 		return
 
-	if(eye_blind)
+	if (eye_blind)
 		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 	else
 		clear_fullscreen("blind")
@@ -180,22 +180,22 @@
 
 	set_fullscreen(stat == UNCONSCIOUS, "blackout", /obj/screen/fullscreen/blackout)
 
-	if(machine)
+	if (machine)
 		var/viewflags = machine.check_eye(src)
-		if(viewflags < 0)
+		if (viewflags < 0)
 			reset_view(null, 0)
-		else if(viewflags)
+		else if (viewflags)
 			set_sight(viewflags)
-	else if(eyeobj)
-		if(eyeobj.owner != src)
+	else if (eyeobj)
+		if (eyeobj.owner != src)
 			reset_view(null)
-	else if(!client?.adminobs)
+	else if (!client?.adminobs)
 		reset_view(null)
 
 /mob/living/proc/update_sight()
 	set_sight(0)
 	set_see_in_dark(0)
-	if(stat == DEAD || eyeobj)
+	if (stat == DEAD || eyeobj)
 		update_dead_sight()
 	else
 		update_living_sight()
@@ -206,7 +206,7 @@
 
 /mob/living/proc/update_living_sight()
 	var/set_sight_flags = sight & ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
-	if(stat & UNCONSCIOUS)
+	if (stat & UNCONSCIOUS)
 		set_sight_flags |= BLIND
 	else
 		set_sight_flags &= ~BLIND

@@ -27,7 +27,7 @@ SUBSYSTEM_DEF(shuttle)
 	last_landmark_registration_time = world.time
 	for(var/shuttle_type in subtypesof(/datum/shuttle)) // This accounts for most shuttles, though away maps can queue up more.
 		var/datum/shuttle/shuttle = shuttle_type
-		if(!initial(shuttle.defer_initialisation))
+		if (!initial(shuttle.defer_initialisation))
 			LAZYDISTINCTADD(shuttles_to_initialize, shuttle_type)
 	block_queue = FALSE
 	clear_init_queue()
@@ -40,14 +40,14 @@ SUBSYSTEM_DEF(shuttle)
 	while (length(working_shuttles))
 		var/datum/shuttle/shuttle = working_shuttles[length(working_shuttles)]
 		LIST_DEC(working_shuttles)
-		if(shuttle.process_state && (shuttle.Process(wait, times_fired, src) == PROCESS_KILL))
+		if (shuttle.process_state && (shuttle.Process(wait, times_fired, src) == PROCESS_KILL))
 			process_shuttles -= shuttle
 
 		if (MC_TICK_CHECK)
 			return
 
 /datum/controller/subsystem/shuttle/proc/clear_init_queue()
-	if(block_queue)
+	if (block_queue)
 		return
 	initialize_shuttles()
 	initialize_sectors()
@@ -56,7 +56,7 @@ SUBSYSTEM_DEF(shuttle)
 	var/list/shuttles_made = list()
 	for(var/shuttle_type in shuttles_to_initialize)
 		var/shuttle = initialize_shuttle(shuttle_type)
-		if(shuttle)
+		if (shuttle)
 			shuttles_made += shuttle
 	hook_up_motherships(shuttles_made)
 	shuttles_to_initialize = null
@@ -74,10 +74,10 @@ SUBSYSTEM_DEF(shuttle)
 		last_landmark_registration_time = world.time
 
 		var/obj/effect/overmap/visitable/O = landmarks_still_needed[shuttle_landmark_tag]
-		if(O) //These need to be added to sectors, which we handle.
+		if (O) //These need to be added to sectors, which we handle.
 			try_add_landmark_tag(shuttle_landmark_tag, O)
 			landmarks_still_needed -= shuttle_landmark_tag
-		else if(istype(shuttle_landmark, /obj/effect/shuttle_landmark/automatic)) //These find their sector automatically
+		else if (istype(shuttle_landmark, /obj/effect/shuttle_landmark/automatic)) //These find their sector automatically
 			O = map_sectors["[shuttle_landmark.z]"]
 			O ? O.add_landmark(shuttle_landmark, shuttle_landmark.shuttle_restricted) : (landmarks_awaiting_sector += shuttle_landmark)
 
@@ -90,53 +90,53 @@ SUBSYSTEM_DEF(shuttle)
 	given_sector.populate_sector_objects() // This is a late init operation that sets up the sector's map_z and does non-overmap-related init tasks.
 
 	for(var/landmark_tag in given_sector.initial_generic_waypoints)
-		if(!try_add_landmark_tag(landmark_tag, given_sector))
+		if (!try_add_landmark_tag(landmark_tag, given_sector))
 			landmarks_still_needed[landmark_tag] = given_sector
 
 	for(var/shuttle_name in given_sector.initial_restricted_waypoints)
 		for(var/landmark_tag in given_sector.initial_restricted_waypoints[shuttle_name])
-			if(!try_add_landmark_tag(landmark_tag, given_sector))
+			if (!try_add_landmark_tag(landmark_tag, given_sector))
 				landmarks_still_needed[landmark_tag] = given_sector
 
 	var/landmarks_to_check = landmarks_awaiting_sector.Copy()
 	for(var/thing in landmarks_to_check)
 		var/obj/effect/shuttle_landmark/automatic/landmark = thing
-		if(landmark.z in given_sector.map_z)
+		if (landmark.z in given_sector.map_z)
 			given_sector.add_landmark(landmark, landmark.shuttle_restricted)
 			landmarks_awaiting_sector -= landmark
 
 /datum/controller/subsystem/shuttle/proc/try_add_landmark_tag(landmark_tag, obj/effect/overmap/visitable/given_sector)
 	var/obj/effect/shuttle_landmark/landmark = get_landmark(landmark_tag)
-	if(!landmark)
+	if (!landmark)
 		return
 
-	if(landmark.landmark_tag in given_sector.initial_generic_waypoints)
+	if (landmark.landmark_tag in given_sector.initial_generic_waypoints)
 		given_sector.add_landmark(landmark)
 		. = 1
 	for(var/shuttle_name in given_sector.initial_restricted_waypoints)
-		if(landmark.landmark_tag in given_sector.initial_restricted_waypoints[shuttle_name])
+		if (landmark.landmark_tag in given_sector.initial_restricted_waypoints[shuttle_name])
 			given_sector.add_landmark(landmark, shuttle_name)
 			. = 1
 
 /datum/controller/subsystem/shuttle/proc/initialize_shuttle(shuttle_type)
 	var/datum/shuttle/shuttle = shuttle_type
-	if(initial(shuttle.category) != shuttle_type)
+	if (initial(shuttle.category) != shuttle_type)
 		shuttle = new shuttle()
 		shuttle_areas |= shuttle.shuttle_area
 		return shuttle
 
 /datum/controller/subsystem/shuttle/proc/hook_up_motherships(shuttles_list)
 	for(var/datum/shuttle/S in shuttles_list)
-		if(S.mothershuttle && !S.motherdock)
+		if (S.mothershuttle && !S.motherdock)
 			var/datum/shuttle/mothership = shuttles[S.mothershuttle]
-			if(mothership)
+			if (mothership)
 				S.motherdock = S.current_location.landmark_tag
 				mothership.shuttle_area |= S.shuttle_area
 			else
 				error("Shuttle [S] was unable to find mothership [mothership]!")
 
 /datum/controller/subsystem/shuttle/proc/toggle_overmap(new_setting)
-	if(overmap_halted == new_setting)
+	if (overmap_halted == new_setting)
 		return
 	overmap_halted = !overmap_halted
 	for(var/ship in ships)

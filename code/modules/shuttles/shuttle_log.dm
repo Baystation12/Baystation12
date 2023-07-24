@@ -11,7 +11,7 @@
 
 /datum/shuttle_log/New(datum/shuttle/given_shuttle)
 	..()
-	if(given_shuttle.logging_home_tag)
+	if (given_shuttle.logging_home_tag)
 		shuttle_name = given_shuttle.name
 		home_base = given_shuttle.logging_home_tag
 		SSshuttle.shuttle_logs[given_shuttle] = src
@@ -28,23 +28,23 @@
 	registered += module
 
 /datum/shuttle_log/proc/unregister(datum/nano_module/module)
-	registered -= module	
+	registered -= module
 
 /datum/shuttle_log/proc/update_registred()
 	for(var/datum/nano_module/module in registered)
 		SSnano.update_uis(module)
 
 /datum/shuttle_log/proc/submit_report(datum/shuttle_mission/mission, datum/computer_file/report/report, mob/user)
-	if(!report.submit(user))
+	if (!report.submit(user))
 		return 0
-	if(istype(report, /datum/computer_file/report/flight_plan))
-		if(mission.flight_plan)
+	if (istype(report, /datum/computer_file/report/flight_plan))
+		if (mission.flight_plan)
 			qdel(mission.flight_plan)
 		mission.flight_plan = report
-	if(istype(report, /datum/computer_file/report/recipient/shuttle))
+	if (istype(report, /datum/computer_file/report/recipient/shuttle))
 		var/datum/computer_file/report/recipient/shuttle/new_report = report
 		var/old_report = locate(report.type) in mission.other_reports
-		if(old_report)
+		if (old_report)
 			mission.other_reports -= old_report
 			qdel(old_report)
 		new_report.mission.set_value(mission.name)
@@ -53,22 +53,22 @@
 	return 1
 
 /datum/shuttle_log/proc/process_queue()
-	if(current_mission) //Process queue changes due to stage changes.
+	if (current_mission) //Process queue changes due to stage changes.
 		switch(current_mission.stage)
-			if(SHUTTLE_MISSION_FINISHED)
+			if (SHUTTLE_MISSION_FINISHED)
 				current_mission = null
-			if(SHUTTLE_MISSION_STARTED)
-				if(current_mission in queued_missions)
+			if (SHUTTLE_MISSION_STARTED)
+				if (current_mission in queued_missions)
 					queued_missions -= current_mission
 					missions += current_mission
-	if(!current_mission && length(queued_missions))
+	if (!current_mission && length(queued_missions))
 		current_mission = queued_missions[1]
 		current_mission.stage = SHUTTLE_MISSION_PLANNED
 	update_registred()
 
 /datum/shuttle_log/proc/create_mission(name)
 	var/datum/shuttle_mission/mission = new()
-	if(name)
+	if (name)
 		mission.name = name
 	else
 		mission.name = "[shuttle_name]: Mission [length(missions)+1]"
@@ -79,9 +79,9 @@
 	return mission
 
 /datum/shuttle_log/proc/rename_mission(datum/shuttle_mission/mission, name)
-	if(!(mission in (missions + queued_missions)))
+	if (!(mission in (missions + queued_missions)))
 		return
-	if(name)
+	if (name)
 		mission.name = name
 		for(var/datum/computer_file/report/recipient/shuttle/report in mission.other_reports)
 			report.mission.set_value(name)
@@ -89,10 +89,10 @@
 
 //Only missions that haven't started can be deleted; returns 0 on failure.
 /datum/shuttle_log/proc/delete_mission(datum/shuttle_mission/mission)
-	if(!(mission in queued_missions))
+	if (!(mission in queued_missions))
 		return 0
 	queued_missions -= mission
-	if(current_mission == mission)
+	if (current_mission == mission)
 		current_mission = null
 	qdel(mission)
 	process_queue()
@@ -100,9 +100,9 @@
 
 //Tries to move the mission in the queue, relative position = 1 means one ahead in the queue, -1 one back.
 /datum/shuttle_log/proc/move_in_queue(datum/shuttle_mission/mission, relative_position)
-	if(!(mission in queued_missions))
+	if (!(mission in queued_missions))
 		return
-	if(current_mission in queued_missions)
+	if (current_mission in queued_missions)
 		current_mission.stage = SHUTTLE_MISSION_QUEUED
 		current_mission = null //We'll reset this at the end.
 	var/index = queued_missions.Find(mission)
@@ -113,25 +113,25 @@
 
 /datum/shuttle_log/proc/mission_from_ID(given_id)
 	for(var/datum/shuttle_mission/mission in (missions + queued_missions))
-		if(given_id == mission.ID)
+		if (given_id == mission.ID)
 			return mission
 
 /datum/shuttle_log/proc/handle_move(obj/effect/shuttle_landmark/origin, obj/effect/shuttle_landmark/destination)
 	var/obj/effect/shuttle_landmark/home = SSshuttle.get_landmark(home_base)
-	if(origin == home)
+	if (origin == home)
 		shuttle_launched()
-	if(destination == home)
+	if (destination == home)
 		shuttle_returned()
 
 /datum/shuttle_log/proc/shuttle_launched()
-	if(!current_mission || (current_mission.stage != SHUTTLE_MISSION_PLANNED))
+	if (!current_mission || (current_mission.stage != SHUTTLE_MISSION_PLANNED))
 		create_mission()
 	current_mission.stage = SHUTTLE_MISSION_STARTED
 	current_mission.depart_time = stationtime2text()
 	process_queue()
 
 /datum/shuttle_log/proc/shuttle_returned()
-	if(!current_mission || (current_mission.stage != SHUTTLE_MISSION_STARTED))
+	if (!current_mission || (current_mission.stage != SHUTTLE_MISSION_STARTED))
 		current_mission = null
 		CRASH("Shuttle returned, but mission stage was incorrect or no mission was logged.")
 	current_mission.stage = SHUTTLE_MISSION_FINISHED

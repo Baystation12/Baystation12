@@ -17,14 +17,14 @@
 /obj/item/organ/internal/liver/Process()
 
 	..()
-	if(!owner)
+	if (!owner)
 		return
 
 	if (germ_level > INFECTION_LEVEL_ONE)
-		if(prob(1))
+		if (prob(1))
 			to_chat(owner, SPAN_DANGER("Your skin itches."))
 	if (germ_level > INFECTION_LEVEL_TWO)
-		if(prob(1))
+		if (prob(1))
 			spawn owner.vomit()
 
 	//Detox can heal small amounts of damage
@@ -33,28 +33,28 @@
 
 	// Get the effectiveness of the liver.
 	var/filter_effect = 3
-	if(is_bruised())
+	if (is_bruised())
 		filter_effect -= 1
-	if(is_broken())
+	if (is_broken())
 		filter_effect -= 2
 	// Robotic organs filter better but don't get benefits from dylovene for filtering.
-	if(BP_IS_ROBOTIC(src))
+	if (BP_IS_ROBOTIC(src))
 		filter_effect += 1
-	else if(owner.chem_effects[CE_ANTITOX])
+	else if (owner.chem_effects[CE_ANTITOX])
 		filter_effect += 1
 	// If you're not filtering well, you're in trouble. Ammonia buildup to toxic levels and damage from alcohol
-	if(filter_effect < 2)
-		if(owner.chem_effects[CE_ALCOHOL])
+	if (filter_effect < 2)
+		if (owner.chem_effects[CE_ALCOHOL])
 			owner.adjustToxLoss(0.5 * max(2 - filter_effect, 0) * (owner.chem_effects[CE_ALCOHOL_TOXIC] + 0.5 * owner.chem_effects[CE_ALCOHOL]))
 
-	if(owner.chem_effects[CE_ALCOHOL_TOXIC])
+	if (owner.chem_effects[CE_ALCOHOL_TOXIC])
 		take_internal_damage(owner.chem_effects[CE_ALCOHOL_TOXIC], prob(90)) // Chance to warn them
 
 	// Heal a bit if needed and we're not busy. This allows recovery from low amounts of toxloss.
-	if(!owner.chem_effects[CE_ALCOHOL] && !owner.chem_effects[CE_TOXIN] && !owner.radiation && damage > 0)
-		if(damage < min_broken_damage)
+	if (!owner.chem_effects[CE_ALCOHOL] && !owner.chem_effects[CE_TOXIN] && !owner.radiation && damage > 0)
+		if (damage < min_broken_damage)
 			heal_damage(0.2)
-		if(damage < min_bruised_damage)
+		if (damage < min_bruised_damage)
 			heal_damage(0.3)
 
 	//Blood regeneration if there is some space
@@ -62,10 +62,10 @@
 
 	// Blood loss or liver damage make you lose nutriments
 	var/blood_volume = owner.get_blood_volume()
-	if(blood_volume < BLOOD_VOLUME_SAFE || is_bruised())
-		if(owner.nutrition >= 300)
+	if (blood_volume < BLOOD_VOLUME_SAFE || is_bruised())
+		if (owner.nutrition >= 300)
 			owner.adjust_nutrition(-10)
-		else if(owner.nutrition >= 200)
+		else if (owner.nutrition >= 200)
 			owner.adjust_nutrition(-3)
 
 //We got it covered in Process with more detailed thing

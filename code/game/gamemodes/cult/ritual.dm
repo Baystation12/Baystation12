@@ -9,14 +9,14 @@
 	carved = 2 // Don't carve it
 
 /obj/item/book/tome/attack_self(mob/living/user)
-	if(!iscultist(user))
+	if (!iscultist(user))
 		to_chat(user, SPAN_NOTICE("\The [src] seems full of illegible scribbles. Is this a joke?"))
 	else
 		to_chat(user, "Hold \the [src] in your hand while drawing a rune to use it.")
 
 /obj/item/book/tome/examine(mob/user)
 	. = ..()
-	if(!iscultist(user))
+	if (!iscultist(user))
 		to_chat(user, "An old, dusty tome with frayed edges and a sinister looking cover.")
 	else
 		to_chat(user, "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though.")
@@ -37,9 +37,9 @@
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 
 /obj/item/book/tome/afterattack(atom/A, mob/user, proximity)
-	if(!proximity || !iscultist(user))
+	if (!proximity || !iscultist(user))
 		return
-	if(A.reagents && A.reagents.has_reagent(/datum/reagent/water/holywater))
+	if (A.reagents && A.reagents.has_reagent(/datum/reagent/water/holywater))
 		to_chat(user, SPAN_NOTICE("You unbless \the [A]."))
 		var/holy2water = A.reagents.get_reagent_amount(/datum/reagent/water/holywater)
 		A.reagents.del_reagent(/datum/reagent/water/holywater)
@@ -50,36 +50,36 @@
 	var/has_robes = 0
 	var/cult_ground = 0
 
-	if(!has_tome && tome_required && mob_needs_tome())
+	if (!has_tome && tome_required && mob_needs_tome())
 		to_chat(src, SPAN_WARNING("This rune is too complex to draw by memory, you need to have a tome in your hand to draw it."))
 		return
-	if(istype(get_equipped_item(slot_head), /obj/item/clothing/head/culthood) && istype(get_equipped_item(slot_wear_suit), /obj/item/clothing/suit/cultrobes) && istype(get_equipped_item(slot_shoes), /obj/item/clothing/shoes/cult))
+	if (istype(get_equipped_item(slot_head), /obj/item/clothing/head/culthood) && istype(get_equipped_item(slot_wear_suit), /obj/item/clothing/suit/cultrobes) && istype(get_equipped_item(slot_shoes), /obj/item/clothing/shoes/cult))
 		has_robes = 1
 	var/turf/T = get_turf(src)
-	if(T.holy)
+	if (T.holy)
 		to_chat(src, SPAN_WARNING("This place is blessed, you may not draw runes on it - defile it first."))
 		return
-	if(!istype(T, /turf/simulated))
+	if (!istype(T, /turf/simulated))
 		to_chat(src, SPAN_WARNING("You need more space to draw a rune here."))
 		return
-	if(locate(/obj/effect/rune) in T)
+	if (locate(/obj/effect/rune) in T)
 		to_chat(src, SPAN_WARNING("There's already a rune here.")) // Don't cross the runes
 		return
-	if(T.icon_state == "cult" || T.icon_state == "cult-narsie")
+	if (T.icon_state == "cult" || T.icon_state == "cult-narsie")
 		cult_ground = 1
 	var/self
 	var/timer
 	var/damage = 1
-	if(has_tome)
-		if(has_robes && cult_ground)
+	if (has_tome)
+		if (has_robes && cult_ground)
 			self = "Feeling greatly empowered, you slice open your finger and make a rune on the engraved floor. It shifts when your blood touches it, and starts vibrating as you begin to chant the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world."
 			timer = 1 SECOND
 			damage = 0.2
-		else if(has_robes)
+		else if (has_robes)
 			self = "Feeling empowered in your robes, you slice open your finger and start drawing a rune, chanting the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world."
 			timer = 3 SECONDS
 			damage = 0.8
-		else if(cult_ground)
+		else if (cult_ground)
 			self = "You slice open your finger and slide it over the engraved floor, watching it shift when your blood touches it. It vibrates when you begin to chant the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world." // Sadly, you don't have access to the bell nor the candelbarum
 			timer = 2 SECONDS
 			damage = 0.8
@@ -88,13 +88,13 @@
 			timer = 4 SECONDS
 	else
 		self = "Working without your tome, you try to draw the rune from your memory"
-		if(has_robes && cult_ground)
+		if (has_robes && cult_ground)
 			self += ". You feel that you remember it perfectly, finishing it with a few bold strokes. The engraved floor shifts under your touch, and vibrates once you begin your chants."
 			timer = 3 SECONDS
-		else if(has_robes)
+		else if (has_robes)
 			self += ". You don't remember it well, but you feel strangely empowered. You begin chanting, the unknown words slipping into your mind from beyond."
 			timer = 5 SECONDS
-		else if(cult_ground)
+		else if (cult_ground)
 			self += ", watching as the floor shifts under your touch, correcting the rune. You begin your chants, and the ground starts to vibrate."
 			timer = 4 SECONDS
 		else
@@ -102,9 +102,9 @@
 			timer = 8 SECONDS
 			damage = 2
 	visible_message(SPAN_WARNING("\The [src] slices open a finger and begins to chant and paint symbols on the floor."), SPAN_NOTICE("[self]"), "You hear chanting.")
-	if(do_after(src, timer, T, DO_PUBLIC_UNIQUE))
+	if (do_after(src, timer, T, DO_PUBLIC_UNIQUE))
 		remove_blood_simple(cost * damage)
-		if(locate(/obj/effect/rune) in T)
+		if (locate(/obj/effect/rune) in T)
 			return
 		var/obj/effect/rune/R = new rune(T, get_rune_color(), get_blood_name())
 		var/area/A = get_area(R)
@@ -114,7 +114,7 @@
 	return 0
 
 /mob/living/carbon/human/make_rune(rune, cost, tome_required)
-	if(should_have_organ(BP_HEART) && vessel && !vessel.has_reagent(/datum/reagent/blood, species.blood_volume * 0.7))
+	if (should_have_organ(BP_HEART) && vessel && !vessel.has_reagent(/datum/reagent/blood, species.blood_volume * 0.7))
 		to_chat(src, SPAN_DANGER("You are too weak to draw runes."))
 		return
 	..()
@@ -123,7 +123,7 @@
 	return
 
 /mob/living/carbon/human/remove_blood_simple(blood)
-	if(should_have_organ(BP_HEART))
+	if (should_have_organ(BP_HEART))
 		vessel.remove_reagent(/datum/reagent/blood, blood)
 
 /mob/proc/get_blood_name()
@@ -133,7 +133,7 @@
 	return "oil"
 
 /mob/living/carbon/human/get_blood_name()
-	if(species)
+	if (species)
 		return species.get_blood_name()
 	return "blood"
 
@@ -306,7 +306,7 @@ var/global/list/Tier4Runes = list(
 	set category = "Cult Magic"
 	set name = "Communicate"
 
-	if(incapacitated())
+	if (incapacitated())
 		to_chat(src, SPAN_WARNING("Not when you are incapacitated."))
 		return
 
@@ -314,7 +314,7 @@ var/global/list/Tier4Runes = list(
 	remove_blood_simple(3)
 
 	var/input = input(src, "Please choose a message to tell to the other acolytes.", "Voice of Blood", "")
-	if(!input)
+	if (!input)
 		return
 
 	whisper("[input]")
@@ -322,11 +322,11 @@ var/global/list/Tier4Runes = list(
 	input = sanitize(input)
 	log_and_message_admins("used a communicate verb to say '[input]'")
 	for(var/datum/mind/H in GLOB.cult.current_antagonists)
-		if(H.current && !H.current.stat)
+		if (H.current && !H.current.stat)
 			to_chat(H.current, SPAN_OCCULT("[input]"))
 
 /mob/living/carbon/cult_communicate()
-	if(incapacitated(INCAPACITATION_RESTRAINED))
+	if (incapacitated(INCAPACITATION_RESTRAINED))
 		to_chat(src, SPAN_WARNING("You need at least your hands free to do this."))
 		return
 	..()

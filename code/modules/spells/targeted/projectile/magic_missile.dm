@@ -32,10 +32,10 @@
 	return
 
 /spell/targeted/projectile/magic_missile/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 
-	if(spell_levels[Sp_POWER] == level_max[Sp_POWER])
+	if (spell_levels[Sp_POWER] == level_max[Sp_POWER])
 		amt_paralysis += 2
 		amt_stunned += 2
 		return "[src] will now stun people for a longer duration."

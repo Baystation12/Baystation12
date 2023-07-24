@@ -46,19 +46,19 @@
 
 /obj/item/reagent_containers/glass/examine(mob/user, distance)
 	. = ..()
-	if(distance > 2)
+	if (distance > 2)
 		return
 
-	if(reagents && length(reagents.reagent_list))
+	if (reagents && length(reagents.reagent_list))
 		to_chat(user, SPAN_NOTICE("It contains [reagents.total_volume] units of liquid."))
 	else
 		to_chat(user, SPAN_NOTICE("It is empty."))
-	if(!is_open_container())
+	if (!is_open_container())
 		to_chat(user, SPAN_NOTICE("The airtight lid seals it completely."))
 
 /obj/item/reagent_containers/glass/attack_self()
 	..()
-	if(is_open_container())
+	if (is_open_container())
 		to_chat(usr, SPAN_NOTICE("You put the lid on \the [src]."))
 		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
 	else
@@ -67,23 +67,23 @@
 	update_icon()
 
 /obj/item/reagent_containers/glass/attack(mob/M as mob, mob/user as mob, def_zone)
-	if(force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
+	if (force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
 		return	..()
-	if(standard_feed_mob(user, M))
+	if (standard_feed_mob(user, M))
 		return
 	return 0
 
 /obj/item/reagent_containers/glass/standard_feed_mob(mob/user, mob/target)
-	if(!is_open_container())
+	if (!is_open_container())
 		to_chat(user, SPAN_NOTICE("You need to open \the [src] first."))
 		return 1
-	if(user.a_intent == I_HURT)
+	if (user.a_intent == I_HURT)
 		return 1
 	return ..()
 
 /obj/item/reagent_containers/glass/self_feed_message(mob/user)
 	to_chat(user, SPAN_NOTICE("You swallow a gulp from \the [src]."))
-	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
+	if (user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
 		for(var/datum/reagent/R in reagents.reagent_list)
 			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R.type)
 
@@ -299,8 +299,8 @@
 	volume = 200
 
 /obj/item/reagent_containers/glass/bucket/attackby(obj/D, mob/user as mob)
-	if(istype(D, /obj/item/mop))
-		if(reagents.total_volume < 1)
+	if (istype(D, /obj/item/mop))
+		if (reagents.total_volume < 1)
 			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
 		else
 			reagents.trans_to_obj(D, 5)
@@ -315,7 +315,7 @@
 	if (!is_open_container())
 		var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
 		overlays += lid
-	else if(reagents.total_volume && round((reagents.total_volume / volume) * 100) > 80)
+	else if (reagents.total_volume && round((reagents.total_volume / volume) * 100) > 80)
 		var/image/filling = image('icons/obj/reagentfillings.dmi', src, "bucket")
 		filling.color = reagents.get_color()
 		overlays += filling
@@ -330,11 +330,11 @@
 
 	on_reagent_change()
 		switch(src.reagents.total_volume)
-			if(0)
+			if (0)
 				icon_state = "blender_jug_e"
-			if(1 to 75)
+			if (1 to 75)
 				icon_state = "blender_jug_h"
-			if(76 to 100)
+			if (76 to 100)
 				icon_state = "blender_jug_f"
 
 /obj/item/reagent_containers/glass/canister		//not used apparantly

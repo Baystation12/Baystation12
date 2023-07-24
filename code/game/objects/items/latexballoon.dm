@@ -39,7 +39,7 @@
 	burst()
 
 /obj/item/latexballon/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > T0C+100)
+	if (exposed_temperature > T0C+100)
 		burst()
 	return
 

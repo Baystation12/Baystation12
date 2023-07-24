@@ -39,11 +39,11 @@
 /mob/living/simple_animal/hostile/retaliate/parrot/space/Initialize()
 	. = ..()
 	var/subspecies_type = DEFAULTPICK(subspecies, null)
-	if(subspecies_type)
+	if (subspecies_type)
 		var/singleton/parrot_subspecies/ps = GET_SINGLETON(subspecies_type)
 		icon_set = ps.icon_set
 		skin_material = ps.feathers
-		if(get_subspecies_name)
+		if (get_subspecies_name)
 			SetName(ps.name)
 	SetTransform(scale = 2)
 	update_icon()
@@ -51,24 +51,24 @@
 /mob/living/simple_animal/hostile/retaliate/parrot/space/can_special_attack(mob/living/carbon/human/H)
 	. = ..()
 
-	if(!.)
+	if (!.)
 		return FALSE
-	if(!Adjacent(H))
+	if (!Adjacent(H))
 		return FALSE
 
 /mob/living/simple_animal/hostile/retaliate/parrot/space/do_special_attack(atom/A)
 	. = ..()
 
-	if(ishuman(A) && can_special_attack(A))
+	if (ishuman(A) && can_special_attack(A))
 		var/mob/living/carbon/human/H = A
-		if(prob(70))
+		if (prob(70))
 			H.Weaken(rand(2,3))
 			// cooldown_ability(ability_cooldown / 1.5)
 			visible_message(SPAN_MFAUNA("\The [src] flaps its wings mightily and bowls over \the [H] with a gust!"))
 
-		else if(H.get_equipped_item(slot_head))
+		else if (H.get_equipped_item(slot_head))
 			var/obj/item/clothing/head/HAT = H.get_equipped_item(slot_head)
-			if(H.canUnEquip(HAT))
+			if (H.canUnEquip(HAT))
 				visible_message(SPAN_MFAUNA("\The [src] rips \the [H]'s [HAT] off!"))
 				// cooldown_ability(ability_cooldown)
 				H.unEquip(HAT, get_turf(src))

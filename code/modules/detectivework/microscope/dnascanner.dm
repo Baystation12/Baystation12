@@ -17,17 +17,17 @@
 
 /obj/machinery/dnaforensics/attackby(obj/item/W, mob/user as mob)
 
-	if(bloodsamp)
+	if (bloodsamp)
 		to_chat(user, SPAN_WARNING("There is already a sample in the machine."))
 		return
 
-	if(closed)
+	if (closed)
 		to_chat(user, SPAN_WARNING("Open the cover before inserting the sample."))
 		return
 
 	var/obj/item/forensics/swab/swab = W
-	if(istype(swab) && swab.is_used())
-		if(!user.unEquip(W, src))
+	if (istype(swab) && swab.is_used())
+		if (!user.unEquip(W, src))
 			return
 		src.bloodsamp = swab
 		to_chat(user, SPAN_NOTICE("You insert \the [W] into \the [src]."))
@@ -36,8 +36,8 @@
 		return
 
 /obj/machinery/dnaforensics/ui_interact(mob/user, ui_key = "main",datum/nanoui/ui = null)
-	if(!is_powered()) return
-	if(user.stat || user.restrained()) return
+	if (!is_powered()) return
+	if (user.stat || user.restrained()) return
 	var/list/data = list()
 	data["scan_progress"] = round(scanner_progress)
 	data["scanning"] = scanning
@@ -54,17 +54,17 @@
 
 /obj/machinery/dnaforensics/Topic(href, href_list)
 
-	if(..()) return 1
+	if (..()) return 1
 
-	if(!is_powered())
+	if (!is_powered())
 		return 0 // don't update UIs attached to this object
 
-	if(href_list["scanItem"])
-		if(scanning)
+	if (href_list["scanItem"])
+		if (scanning)
 			scanning = 0
 		else
-			if(bloodsamp)
-				if(closed == 1)
+			if (bloodsamp)
+				if (closed == 1)
 					scanner_progress = 0
 					scanning = 1
 					to_chat(usr, SPAN_NOTICE("Scan initiated."))
@@ -74,22 +74,22 @@
 			else
 				to_chat(usr, SPAN_WARNING("Insert an item to scan."))
 
-	if(href_list["ejectItem"])
-		if(bloodsamp)
+	if (href_list["ejectItem"])
+		if (bloodsamp)
 			bloodsamp.forceMove(src.loc)
 			bloodsamp = null
 
-	if(href_list["toggleLid"])
+	if (href_list["toggleLid"])
 		toggle_lid()
 
 	return 1
 
 /obj/machinery/dnaforensics/Process()
-	if(scanning)
-		if(!bloodsamp || bloodsamp.loc != src)
+	if (scanning)
+		if (!bloodsamp || bloodsamp.loc != src)
 			bloodsamp = null
 			scanning = 0
-		else if(scanner_progress >= 100)
+		else if (scanner_progress >= 100)
 			complete_scan()
 			return
 		else
@@ -101,14 +101,14 @@
 /obj/machinery/dnaforensics/proc/complete_scan()
 	src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] makes an insistent chime."), 2)
 	update_icon()
-	if(bloodsamp)
+	if (bloodsamp)
 		var/obj/item/paper/P = new(src)
 		P.SetName("[src] report #[++report_num]: [bloodsamp.name]")
 		P.stamped = list(/obj/item/stamp)
 		P.overlays = list("paper_stamped")
 		//dna data itself
 		var/data = "No scan information available."
-		if(bloodsamp.dna != null || bloodsamp.trace_dna != null)
+		if (bloodsamp.dna != null || bloodsamp.trace_dna != null)
 			data = "Spectometric analysis on provided sample has determined the presence of DNA.<br><br>"
 			for(var/blood in bloodsamp.dna)
 				data += "[SPAN_NOTICE("Blood type: [bloodsamp.dna[blood]]<br>DNA: [blood]")]<br><br>"
@@ -133,10 +133,10 @@
 	set name = "Toggle Lid"
 	set src in oview(1)
 
-	if(usr.stat || !isliving(usr))
+	if (usr.stat || !isliving(usr))
 		return
 
-	if(scanning)
+	if (scanning)
 		to_chat(usr, SPAN_WARNING("You can't do that while [src] is scanning!"))
 		return
 
@@ -145,9 +145,9 @@
 
 /obj/machinery/dnaforensics/on_update_icon()
 	..()
-	if(is_powered() && scanning)
+	if (is_powered() && scanning)
 		icon_state = "dnaworking"
-	else if(closed)
+	else if (closed)
 		icon_state = "dnaclosed"
 	else
 		icon_state = "dnaopen"

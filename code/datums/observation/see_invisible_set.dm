@@ -20,6 +20,6 @@ GLOBAL_DATUM_INIT(see_invisible_set_event, /singleton/observ/see_invisible_set, 
 
 /mob/proc/set_see_invisible(new_see_invisible)
 	var/old_see_invisible = see_invisible
-	if(old_see_invisible != new_see_invisible)
+	if (old_see_invisible != new_see_invisible)
 		see_invisible = new_see_invisible
 		GLOB.see_invisible_set_event.raise_event(src, old_see_invisible, new_see_invisible)

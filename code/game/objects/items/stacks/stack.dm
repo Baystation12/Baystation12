@@ -38,12 +38,12 @@
 
 /obj/item/stack/Initialize()
 	. = ..()
-	if(!plural_name)
+	if (!plural_name)
 		plural_name = "[singular_name]s"
 
 
 /obj/item/stack/Destroy()
-	if(uses_charge)
+	if (uses_charge)
 		return 1
 	if (src && usr && usr.machine == src)
 		close_browser(usr, "window=stack")
@@ -51,8 +51,8 @@
 
 /obj/item/stack/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
-		if(!uses_charge)
+	if (distance <= 1)
+		if (!uses_charge)
 			to_chat(user, "There [amount == 1 ? "is 1 [singular_name]" : "are [amount] [plural_name]"] in the stack.")
 		else
 			to_chat(user, "There is enough charge for [get_amount() == 1 ? "1 [singular_name]" : "[amount] [plural_name]"].")
@@ -95,7 +95,7 @@
 				title+= "[R.display_name()]"
 			title+= " ([R.req_amount] [src.singular_name]\s)"
 			var/skill_label = ""
-			if(!user.skill_check(SKILL_CONSTRUCTION, R.difficulty))
+			if (!user.skill_check(SKILL_CONSTRUCTION, R.difficulty))
 				var/singleton/hierarchy/skill/S = GET_SINGLETON(SKILL_CONSTRUCTION)
 				skill_label = SPAN_COLOR("red", "\[[S.levels[R.difficulty]]\]")
 			if (can_build)
@@ -132,7 +132,7 @@
 			to_chat(user, SPAN_WARNING("You haven't got enough [src] to build \the [recipe.display_name()]!"))
 		return
 
-	if(!recipe.can_make(user))
+	if (!recipe.can_make(user))
 		return
 
 	if (recipe.time)
@@ -141,7 +141,7 @@
 			return
 
 	if (use(required))
-		if(user.skill_fail_prob(SKILL_CONSTRUCTION, 90, recipe.difficulty))
+		if (user.skill_fail_prob(SKILL_CONSTRUCTION, 90, recipe.difficulty))
 			to_chat(user, SPAN_WARNING("You waste some [name] and fail to build \the [recipe.display_name()]!"))
 			return
 		var/atom/O = recipe.spawn_result(user, user.loc, produced)
@@ -189,7 +189,7 @@
 /obj/item/stack/proc/use(used)
 	if (!can_use(used))
 		return 0
-	if(!uses_charge)
+	if (!uses_charge)
 		amount -= used
 		if (amount <= 0)
 			qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer
@@ -197,7 +197,7 @@
 			update_icon()
 		return 1
 	else
-		if(get_amount() < used)
+		if (get_amount() < used)
 			return 0
 		for(var/i = 1 to length(charge_costs))
 			var/datum/matter_synth/S = synths[i]
@@ -205,14 +205,14 @@
 		return 1
 
 /obj/item/stack/proc/add(extra)
-	if(!uses_charge)
-		if(amount + extra > get_max_amount())
+	if (!uses_charge)
+		if (amount + extra > get_max_amount())
 			return 0
 		else
 			amount += extra
 			update_icon()
 		return 1
-	else if(!synths || length(synths) < uses_charge)
+	else if (!synths || length(synths) < uses_charge)
 		return 0
 	else
 		for(var/i = 1 to uses_charge)
@@ -254,7 +254,7 @@
 	var/orig_amount = src.amount
 	if (transfer && src.use(transfer))
 		var/obj/item/stack/newstack
-		if(uses_charge)
+		if (uses_charge)
 			newstack = new src.stacktype(loc, transfer)
 		else
 			newstack = new src.type(loc, transfer)
@@ -268,12 +268,12 @@
 	color = other.color
 
 /obj/item/stack/proc/get_amount()
-	if(uses_charge)
-		if(!synths || length(synths) < uses_charge)
+	if (uses_charge)
+		if (!synths || length(synths) < uses_charge)
 			return 0
 		var/datum/matter_synth/S = synths[1]
 		. = round(S.get_charge() / charge_costs[1])
-		if(length(charge_costs) > 1)
+		if (length(charge_costs) > 1)
 			for(var/i = 2 to length(charge_costs))
 				S = synths[i]
 				. = min(., round(S.get_charge() / charge_costs[i]))
@@ -281,12 +281,12 @@
 	return amount
 
 /obj/item/stack/proc/get_max_amount()
-	if(uses_charge)
-		if(!synths || length(synths) < uses_charge)
+	if (uses_charge)
+		if (!synths || length(synths) < uses_charge)
 			return 0
 		var/datum/matter_synth/S = synths[1]
 		. = round(S.max_energy / charge_costs[1])
-		if(uses_charge > 1)
+		if (uses_charge > 1)
 			for(var/i = 2 to uses_charge)
 				S = synths[i]
 				. = min(., round(S.max_energy / charge_costs[i]))
@@ -295,7 +295,7 @@
 
 /obj/item/stack/proc/add_to_stacks(mob/user, check_hands)
 	var/list/stacks = list()
-	if(check_hands)
+	if (check_hands)
 		for (var/obj/item/stack/stack as anything in user.GetAllHeld(/obj/item/stack))
 			stacks += stack
 	for (var/obj/item/stack/item in user.loc)
@@ -306,7 +306,7 @@
 		var/transfer = src.transfer_to(item)
 		if (transfer)
 			to_chat(user, SPAN_NOTICE("You add a new [item.singular_name] to the stack. It now contains [item.get_exact_name(item.amount)]."))
-		if(!amount)
+		if (!amount)
 			break
 
 /obj/item/stack/get_storage_cost()	//Scales storage cost to stack size
@@ -317,7 +317,7 @@
 /obj/item/stack/attack_hand(mob/user as mob)
 	if (user.get_inactive_hand() == src)
 		var/N = input("How many [plural_name] of \the [src] would you like to split off?", "Split stacks", 1) as num|null
-		if(N)
+		if (N)
 			var/obj/item/stack/F = src.split(N)
 			if (F)
 				user.put_in_hands(F)
@@ -405,23 +405,23 @@
 	var/apply_material_name = 1 //Whether the recipe will prepend a material name to the title - 'steel clipboard' vs 'clipboard'
 
 /datum/stack_recipe/New(material/material, reinforce_material)
-	if(material)
+	if (material)
 		use_material = material.name
 		difficulty += material.construction_difficulty
 		difficulty = clamp(difficulty, MATERIAL_EASY_DIY, MATERIAL_VERY_HARD_DIY)
-	if(reinforce_material)
+	if (reinforce_material)
 		use_reinf_material = reinforce_material
 
 /datum/stack_recipe/proc/display_name()
-	if(!use_material || !apply_material_name)
+	if (!use_material || !apply_material_name)
 		return title
 	. = "[material_display_name(use_material)] [title]"
-	if(use_reinf_material)
+	if (use_reinf_material)
 		. = "[material_display_name(use_reinf_material)]-reinforced [.]"
 
 /datum/stack_recipe/proc/spawn_result(mob/user, location, amount)
 	var/atom/O
-	if(send_material_data && use_material)
+	if (send_material_data && use_material)
 		O = new result_type(location, use_material, use_reinf_material)
 	else
 		O = new result_type(location)

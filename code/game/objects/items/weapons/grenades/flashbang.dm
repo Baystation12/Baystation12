@@ -31,36 +31,36 @@
 	//Checking for protections
 	var/eye_safety = 0
 	var/ear_safety = 0
-	if(iscarbon(M))
+	if (iscarbon(M))
 		eye_safety = M.eyecheck()
-		if(ishuman(M))
-			if(M.get_sound_volume_multiplier() < 0.2)
+		if (ishuman(M))
+			if (M.get_sound_volume_multiplier() < 0.2)
 				ear_safety += 2
-			if(MUTATION_HULK in M.mutations)
+			if (MUTATION_HULK in M.mutations)
 				ear_safety += 1
 			var/mob/living/carbon/human/H = M
-			if(istype(H.head, /obj/item/clothing/head/helmet))
+			if (istype(H.head, /obj/item/clothing/head/helmet))
 				ear_safety += 1
 
 	//Flashing everyone
 	M.flash_eyes(FLASH_PROTECTION_MODERATE)
-	if(eye_safety < FLASH_PROTECTION_MODERATE)
+	if (eye_safety < FLASH_PROTECTION_MODERATE)
 		M.Stun(2)
 		M.confused += 5
 
 	//Now applying sound
-	if(ear_safety)
-		if(ear_safety < 2 && get_dist(M, T) <= 2)
+	if (ear_safety)
+		if (ear_safety < 2 && get_dist(M, T) <= 2)
 			M.Stun(1)
 			M.confused += 3
 
-	else if(get_dist(M, T) <= 2)
+	else if (get_dist(M, T) <= 2)
 		M.Stun(3)
 		M.confused += 8
 		M.ear_damage += rand(0, 5)
 		M.ear_deaf = max(M.ear_deaf,15)
 
-	else if(get_dist(M, T) <= 5)
+	else if (get_dist(M, T) <= 5)
 		M.Stun(2)
 		M.confused += 5
 		M.ear_damage += rand(0, 3)
@@ -97,7 +97,7 @@
 	var/numspawned = rand(4,8)
 	var/again = 0
 	for(var/more = numspawned,more > 0,more--)
-		if(prob(35))
+		if (prob(35))
 			again++
 			numspawned --
 
@@ -132,7 +132,7 @@
 /obj/item/grenade/flashbang/clusterbang/segment/detonate(mob/living/user)
 	var/numspawned = rand(4,8)
 	for(var/more = numspawned,more > 0,more--)
-		if(prob(35))
+		if (prob(35))
 			numspawned --
 
 	for(,numspawned > 0, numspawned--)

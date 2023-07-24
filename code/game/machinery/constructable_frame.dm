@@ -30,9 +30,9 @@
 
 /obj/machinery/constructable_frame/machine_frame/on_update_icon()
 	switch(construct_state && construct_state.type)
-		if(/singleton/machine_construction/frame/awaiting_circuit)
+		if (/singleton/machine_construction/frame/awaiting_circuit)
 			icon_state = "box_1"
-		if(/singleton/machine_construction/frame/awaiting_parts)
+		if (/singleton/machine_construction/frame/awaiting_parts)
 			icon_state = "box_2"
 		else
 			icon_state = "box_0"

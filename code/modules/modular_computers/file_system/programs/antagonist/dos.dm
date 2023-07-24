@@ -17,15 +17,15 @@
 
 /datum/computer_file/program/ntnet_dos/process_tick()
 	dos_speed = computer.get_ntnet_speed(computer.get_ntnet_status()) * (NTNETSPEED_DOS_AMPLIFICATION + operator_skill - SKILL_BASIC)
-	if(target && executed)
+	if (target && executed)
 		target.dos_overload += dos_speed
-		if(!target.operable())
+		if (!target.operable())
 			target.dos_sources.Remove(src)
 			target = null
 			error = "Connection to destination relay lost."
 
 /datum/computer_file/program/ntnet_dos/on_shutdown(forced)
-	if(target)
+	if (target)
 		target.dos_sources.Remove(src)
 		target = null
 	executed = FALSE
@@ -36,17 +36,17 @@
 	name = "DoS Traffic Generator"
 
 /datum/nano_module/program/computer_dos/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
-	if(!ntnet_global)
+	if (!ntnet_global)
 		return
 	var/datum/computer_file/program/ntnet_dos/PRG = program
 	var/list/data = list()
-	if(!istype(PRG))
+	if (!istype(PRG))
 		return
 	data = PRG.get_header_data()
 
-	if(PRG.error)
+	if (PRG.error)
 		data["error"] = PRG.error
-	else if(PRG.target && PRG.executed)
+	else if (PRG.target && PRG.executed)
 		data["target"] = 1
 		data["speed"] = PRG.dos_speed
 
@@ -77,22 +77,22 @@
 		ui.set_auto_update(1)
 
 /datum/computer_file/program/ntnet_dos/Topic(href, href_list)
-	if(..())
+	if (..())
 		return TOPIC_HANDLED
-	if(href_list["PRG_target_relay"])
+	if (href_list["PRG_target_relay"])
 		for(var/obj/machinery/ntnet_relay/R in ntnet_global.relays)
-			if("[R.uid]" == href_list["PRG_target_relay"])
+			if ("[R.uid]" == href_list["PRG_target_relay"])
 				target = R
 		return TOPIC_HANDLED
-	if(href_list["PRG_reset"])
-		if(target)
+	if (href_list["PRG_reset"])
+		if (target)
 			target.dos_sources.Remove(src)
 			target = null
 		executed = FALSE
 		error = ""
 		return TOPIC_HANDLED
-	if(href_list["PRG_execute"])
-		if(!target)
+	if (href_list["PRG_execute"])
+		if (!target)
 			return TOPIC_HANDLED
 		executed = TRUE
 		target.dos_sources.Add(src)
@@ -100,11 +100,11 @@
 
 		var/list/sources_to_show = list(computer.get_network_tag())
 		var/extra_to_show = 2 * max(operator_skill - SKILL_TRAINED, 0)
-		if(extra_to_show)
+		if (extra_to_show)
 			for(var/i = 1, i <= extra_to_show, i++)
 				var/nid = pick(ntnet_global.registered_nids)
 				var/datum/extension/interactive/ntos/os = ntnet_global.registered_nids[nid]
-				if(os.get_ntnet_status())
+				if (os.get_ntnet_status())
 					sources_to_show |= os.get_network_tag()
 
 		ntnet_global.add_log_with_ids_check("Excess traffic flood targeting Quantum Relay ([target.uid]) detected from [length(sources_to_show)] device\s: [english_list(sources_to_show)]")

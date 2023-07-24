@@ -2,16 +2,16 @@ var/global/list/mob_hat_cache = list()
 /proc/get_hat_icon(obj/item/hat, offset_x = 0, offset_y = 0)
 	RETURN_TYPE(/image)
 	var/t_state = hat.icon_state
-	if(hat.item_state_slots && hat.item_state_slots[slot_head_str])
+	if (hat.item_state_slots && hat.item_state_slots[slot_head_str])
 		t_state = hat.item_state_slots[slot_head_str]
-	else if(hat.item_state)
+	else if (hat.item_state)
 		t_state = hat.item_state
 	var/key = "[t_state]_[offset_x]_[offset_y]"
-	if(!mob_hat_cache[key])            // Not ideal as there's no guarantee all hat icon_states
+	if (!mob_hat_cache[key])            // Not ideal as there's no guarantee all hat icon_states
 		var/t_icon = GLOB.default_onmob_icons[slot_head_str] // are unique across multiple dmis, but whatever.
-		if(hat.icon_override)
+		if (hat.icon_override)
 			t_icon = hat.icon_override
-		else if(hat.item_icons && (slot_head_str in hat.item_icons))
+		else if (hat.item_icons && (slot_head_str in hat.item_icons))
 			t_icon = hat.item_icons[slot_head_str]
 		var/image/I = image(icon = t_icon, icon_state = t_state)
 		I.pixel_x = offset_x
@@ -77,7 +77,7 @@ var/global/list/mob_hat_cache = list()
 	mmi = null
 
 	//We need to screw with their HP a bit. They have around one fifth as much HP as a full borg.
-	for(var/V in components) if(V != "power cell")
+	for(var/V in components) if (V != "power cell")
 		var/datum/robot_component/C = components[V]
 		C.max_damage = 10
 
@@ -90,7 +90,7 @@ var/global/list/mob_hat_cache = list()
 	GLOB.moved_event.register(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
 
 /mob/living/silicon/robot/drone/Destroy()
-	if(hat)
+	if (hat)
 		hat.dropInto(loc)
 		hat = null
 	GLOB.moved_event.unregister(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
@@ -108,25 +108,25 @@ var/global/list/mob_hat_cache = list()
 	self_destruct()
 
 /mob/living/silicon/robot/drone/can_be_possessed_by(mob/observer/ghost/possessor)
-	if(!istype(possessor) || !possessor.client || !possessor.ckey)
+	if (!istype(possessor) || !possessor.client || !possessor.ckey)
 		return 0
-	if(!config.allow_drone_spawn)
+	if (!config.allow_drone_spawn)
 		to_chat(src, SPAN_DANGER("Playing as drones is not currently permitted."))
 		return 0
-	if(too_many_active_drones())
+	if (too_many_active_drones())
 		to_chat(src, SPAN_DANGER("The maximum number of active drones has been reached.."))
 		return 0
-	if(jobban_isbanned(possessor,"Robot"))
+	if (jobban_isbanned(possessor,"Robot"))
 		to_chat(usr, SPAN_DANGER("You are banned from playing synthetics and cannot spawn as a drone."))
 		return 0
-	if(!possessor.MayRespawn(1,DRONE_SPAWN_DELAY))
+	if (!possessor.MayRespawn(1,DRONE_SPAWN_DELAY))
 		return 0
 	return 1
 
 /mob/living/silicon/robot/drone/do_possession(mob/observer/ghost/possessor)
-	if(!(istype(possessor) && possessor.ckey))
+	if (!(istype(possessor) && possessor.ckey))
 		return 0
-	if(src.ckey || src.client)
+	if (src.ckey || src.client)
 		to_chat(possessor, SPAN_WARNING("\The [src] already has a player."))
 		return 0
 	message_admins(SPAN_CLASS("adminnotice", "[key_name_admin(possessor)] has taken control of \the [src]."))
@@ -147,7 +147,7 @@ var/global/list/mob_hat_cache = list()
 
 /mob/living/silicon/robot/drone/init()
 	additional_law_channels["Drone"] = ":d"
-	if(!module) module = new module_type(src)
+	if (!module) module = new module_type(src)
 
 	flavor_text = "It's a tiny little repair drone. The casing is stamped with an corporate logo and the subscript: '[GLOB.using_map.company_name] Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
@@ -165,15 +165,15 @@ var/global/list/mob_hat_cache = list()
 /mob/living/silicon/robot/drone/on_update_icon()
 
 	overlays.Cut()
-	if(stat == 0)
-		if(emagged)
+	if (stat == 0)
+		if (emagged)
 			overlays += "eyes-[icon_state]-emag"
 		else
 			overlays += "eyes-[icon_state]"
 	else
 		overlays -= "eyes"
 
-	if(hat) // Let the drones wear hats.
+	if (hat) // Let the drones wear hats.
 		overlays |= get_hat_icon(hat, hat_x_offset, hat_y_offset)
 
 /mob/living/silicon/robot/drone/choose_icon()
@@ -183,7 +183,7 @@ var/global/list/mob_hat_cache = list()
 	return
 
 /mob/living/silicon/robot/drone/proc/wear_hat(obj/item/new_hat)
-	if(hat)
+	if (hat)
 		return
 	hat = new_hat
 	new_hat.forceMove(src)
@@ -253,11 +253,11 @@ var/global/list/mob_hat_cache = list()
 
 
 /mob/living/silicon/robot/drone/emag_act(remaining_charges, mob/user)
-	if(!client || stat == 2)
+	if (!client || stat == 2)
 		to_chat(user, SPAN_DANGER("There's not much point subverting this heap of junk."))
 		return
 
-	if(emagged)
+	if (emagged)
 		to_chat(src, SPAN_DANGER("\The [user] attempts to load subversive software into you, but your hacked subroutines ignore the attempt."))
 		to_chat(user, SPAN_DANGER("You attempt to subvert [src], but the sequencer has no effect."))
 		return
@@ -282,7 +282,7 @@ var/global/list/mob_hat_cache = list()
 //DRONE LIFE/DEATH
 //For some goddamn reason robots have this hardcoded. Redefining it for our fragile friends here.
 /mob/living/silicon/robot/drone/updatehealth()
-	if(status_flags & GODMODE)
+	if (status_flags & GODMODE)
 		health = 35
 		set_stat(CONSCIOUS)
 		return
@@ -293,10 +293,10 @@ var/global/list/mob_hat_cache = list()
 //Standard robots use config for crit, which is somewhat excessive for these guys.
 //Drones killed by damage will gib.
 /mob/living/silicon/robot/drone/handle_regular_status_updates()
-	if(health <= -35 && src.stat != DEAD)
+	if (health <= -35 && src.stat != DEAD)
 		self_destruct()
 		return
-	if(health <= 0 && src.stat != DEAD)
+	if (health <= 0 && src.stat != DEAD)
 		death()
 		return
 	..()
@@ -312,8 +312,8 @@ var/global/list/mob_hat_cache = list()
 
 //CONSOLE PROCS
 /mob/living/silicon/robot/drone/proc/law_resync()
-	if(stat != 2)
-		if(emagged)
+	if (stat != 2)
+		if (emagged)
 			to_chat(src, SPAN_DANGER("You feel something attempting to modify your programming, but your hacked subroutines are unaffected."))
 		else
 			to_chat(src, SPAN_DANGER("A reset-to-factory directive packet filters through your data connection, and you obediently modify your programming to suit it."))
@@ -322,8 +322,8 @@ var/global/list/mob_hat_cache = list()
 
 /mob/living/silicon/robot/drone/proc/shut_down()
 
-	if(stat != 2)
-		if(emagged)
+	if (stat != 2)
+		if (emagged)
 			to_chat(src, SPAN_DANGER("You feel a system kill order percolate through your tiny brain, but it doesn't seem like a good idea to you."))
 		else
 			to_chat(src, SPAN_DANGER("You feel a system kill order percolate through your tiny brain, and you obediently destroy yourself."))
@@ -340,16 +340,16 @@ var/global/list/mob_hat_cache = list()
 //Reboot procs.
 
 /mob/living/silicon/robot/drone/proc/request_player()
-	if(too_many_active_drones())
+	if (too_many_active_drones())
 		return
 	var/datum/ghosttrap/G = get_ghost_trap("maintenance drone")
 	G.request_player(src, "Someone is attempting to reboot a maintenance drone.", 30 SECONDS)
 
 /mob/living/silicon/robot/drone/proc/transfer_personality(client/player)
-	if(!player) return
+	if (!player) return
 	src.ckey = player.ckey
 
-	if(player.mob && player.mob.mind)
+	if (player.mob && player.mob.mind)
 		player.mob.mind.transfer_to(src)
 
 	lawupdate = FALSE
@@ -382,6 +382,6 @@ var/global/list/mob_hat_cache = list()
 /proc/too_many_active_drones()
 	var/drones = 0
 	for(var/mob/living/silicon/robot/drone/D in GLOB.silicon_mobs)
-		if(D.key && D.client)
+		if (D.key && D.client)
 			drones++
 	return drones >= config.max_maint_drones

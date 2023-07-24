@@ -23,7 +23,7 @@
 
 /obj/item/device/camera/siliconcam/proc/injectmasteralbum(obj/item/photo/p) //stores image information to a list similar to that of the datacore
 	var/mob/living/silicon/robot/C = usr
-	if(C.connected_ai)
+	if (C.connected_ai)
 		C.connected_ai.silicon_camera.injectaialbum(p.copy(1), " (synced from [C.name])")
 		to_chat(C.connected_ai, SPAN_CLASS("unconscious", "Image uploaded by [C.name]"))
 		to_chat(usr, SPAN_CLASS("unconscious", "Image synced to remote database, and can be printed from any photocopier."))//feedback to the Cyborg player that the picture was taken
@@ -33,28 +33,28 @@
 	injectaialbum(p)
 
 /obj/item/device/camera/siliconcam/proc/selectpicture(obj/item/device/camera/siliconcam/cam)
-	if(!cam)
+	if (!cam)
 		cam = getsource()
 
 	var/list/nametemp = list()
 	var/find
-	if(length(cam.aipictures) == 0)
+	if (length(cam.aipictures) == 0)
 		to_chat(usr, SPAN_CLASS("userdanger", "No images saved"))
 		return
 	for(var/obj/item/photo/t in cam.aipictures)
 		nametemp += t.name
 	find = input("Select image (numbered in order taken)") as null|anything in nametemp
-	if(!find)
+	if (!find)
 		return
 
 	for(var/obj/item/photo/q in cam.aipictures)
-		if(q.name == find)
+		if (q.name == find)
 			return q
 
 /obj/item/device/camera/siliconcam/proc/viewpictures()
 	var/obj/item/photo/selection = selectpicture()
 
-	if(!selection)
+	if (!selection)
 		return
 
 	selection.show(usr)
@@ -62,7 +62,7 @@
 /obj/item/device/camera/siliconcam/proc/deletepicture(obj/item/device/camera/siliconcam/cam)
 	var/selection = selectpicture(cam)
 
-	if(!selection)
+	if (!selection)
 		return
 
 	aipictures -= selection
@@ -73,7 +73,7 @@
 	return ai.TurfAdjacent(T)
 
 /obj/item/device/camera/siliconcam/proc/toggle_camera_mode()
-	if(in_camera_mode)
+	if (in_camera_mode)
 		camera_mode_off()
 	else
 		camera_mode_on()
@@ -139,18 +139,18 @@
 	deletepicture(src)
 
 /obj/item/device/camera/siliconcam/proc/getsource()
-	if(istype(src.loc, /mob/living/silicon/ai))
+	if (istype(src.loc, /mob/living/silicon/ai))
 		return src
 
 	var/mob/living/silicon/robot/C = usr
 	var/obj/item/device/camera/siliconcam/Cinfo
-	if(C.connected_ai)
+	if (C.connected_ai)
 		Cinfo = C.connected_ai.silicon_camera
 	else
 		Cinfo = src
 	return Cinfo
 
 /mob/living/silicon/proc/GetPicture()
-	if(!silicon_camera)
+	if (!silicon_camera)
 		return
 	return silicon_camera.selectpicture()

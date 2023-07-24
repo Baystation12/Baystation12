@@ -15,7 +15,7 @@
 	icon_state = "netshell"
 
 /obj/item/net_shell/attackby(obj/item/gun/launcher/net/I, mob/user)
-	if(istype(I) && I.can_load(src, user))
+	if (istype(I) && I.can_load(src, user))
 		I.load(src, user)
 		to_chat(usr, "You load \the [src] into \the [I].")
 	else
@@ -23,29 +23,29 @@
 
 /obj/item/gun/launcher/net/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 2 && chambered)
+	if (distance <= 2 && chambered)
 		to_chat(user, "\A [chambered] is chambered.")
 
 /obj/item/gun/launcher/net/proc/can_load(obj/item/net_shell/S, mob/user)
-	if(chambered)
+	if (chambered)
 		to_chat(user, SPAN_WARNING("\The [src] already has a shell loaded."))
 		return FALSE
 	return TRUE
 
 /obj/item/gun/launcher/net/proc/finish_loading(obj/item/net_shell/S, mob/user)
 	chambered = S
-	if(user)
+	if (user)
 		user.visible_message("\The [user] inserts \a [S] into \the [src].", SPAN_NOTICE("You insert \a [S] into \the [src]."))
 
 /obj/item/gun/launcher/net/proc/load(obj/item/net_shell/S, mob/user)
-	if(!can_load(S, user))
+	if (!can_load(S, user))
 		return
-	if(user && !user.unEquip(S, src))
+	if (user && !user.unEquip(S, src))
 		return
 	finish_loading(S, user)
 
 /obj/item/gun/launcher/net/proc/unload(mob/user)
-	if(chambered)
+	if (chambered)
 		user.visible_message("\The [user] removes \the [chambered] from \the [src].", SPAN_NOTICE("You remove \the [chambered] from \the [src]."))
 		user.put_in_hands(chambered)
 		chambered = null
@@ -63,13 +63,13 @@
 
 
 /obj/item/gun/launcher/net/attack_hand(mob/user)
-	if(user.get_inactive_hand() == src)
+	if (user.get_inactive_hand() == src)
 		unload(user)
 	else
 		..()
 
 /obj/item/gun/launcher/net/consume_next_projectile()
-	if(chambered)
+	if (chambered)
 		qdel(chambered)
 		chambered = null
 		return new /obj/item/energy_net/safari(src)
@@ -86,13 +86,13 @@
 		load(new /obj/item/net_shell)
 
 /obj/item/gun/launcher/net/borg/can_load(obj/item/net_shell/S, mob/user)
-	if(LAZYLEN(shells) >= max_shells)
+	if (LAZYLEN(shells) >= max_shells)
 		to_chat(user, SPAN_WARNING("\The [src] already has the maximum number of shells loaded."))
 		return FALSE
 	return TRUE
 
 /obj/item/gun/launcher/net/borg/proc/update_chambered_shell()
-	if(!chambered && LAZYLEN(shells))
+	if (!chambered && LAZYLEN(shells))
 		chambered = shells[1]
 		LAZYREMOVE(shells, chambered)
 

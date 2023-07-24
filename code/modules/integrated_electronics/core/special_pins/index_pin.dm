@@ -5,15 +5,15 @@
 
 /datum/integrated_io/index/ask_for_pin_data(mob/user)
 	var/new_data = input("Please type in an index.","[src] index writing") as num
-	if(isnum(new_data) && holder.check_interactivity(user))
+	if (isnum(new_data) && holder.check_interactivity(user))
 		to_chat(user, SPAN_NOTICE("You input [new_data] into the pin."))
 		write_data_to_pin(new_data)
 
 /datum/integrated_io/index/write_data_to_pin(new_data)
-	if(isnull(new_data))
+	if (isnull(new_data))
 		new_data = 0
 
-	if(isnum(new_data))
+	if (isnum(new_data))
 		data = clamp(round(new_data), 0, IC_MAX_LIST_LENGTH)
 		holder.on_data_written()
 

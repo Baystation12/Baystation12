@@ -36,24 +36,24 @@
 	for(var/d in GLOB.cardinal)
 		var/datum/omni_port/new_port = new(src, d)
 		switch(d)
-			if(NORTH)
+			if (NORTH)
 				new_port.mode = tag_north
-			if(SOUTH)
+			if (SOUTH)
 				new_port.mode = tag_south
-			if(EAST)
+			if (EAST)
 				new_port.mode = tag_east
-			if(WEST)
+			if (WEST)
 				new_port.mode = tag_west
-		if(new_port.mode > 0)
+		if (new_port.mode > 0)
 			initialize_directions |= d
 		ports += new_port
 
 	build_icons()
 
 /obj/machinery/atmospherics/omni/on_update_icon()
-	if(!is_powered())
+	if (!is_powered())
 		overlays = overlays_off
-	else if(error_check())
+	else if (error_check())
 		overlays = overlays_error
 	else
 		overlays = use_power ? (overlays_on) : (overlays_off)
@@ -69,15 +69,15 @@
 	last_power_draw = 0
 	last_flow_rate = 0
 
-	if(error_check())
+	if (error_check())
 		update_use_power(POWER_USE_OFF)
 
-	if((inoperable()) || !use_power)
+	if ((inoperable()) || !use_power)
 		return 0
 	return 1
 
 /obj/machinery/atmospherics/omni/attackby(obj/item/W as obj, mob/user as mob)
-	if(!isWrench(W))
+	if (!isWrench(W))
 		return ..()
 
 	var/int_pressure = 0
@@ -90,7 +90,7 @@
 		return 1
 	to_chat(user, SPAN_NOTICE("You begin to unfasten \the [src]..."))
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	if(do_after(user, (W.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT))
+	if (do_after(user, (W.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT))
 		user.visible_message( \
 			SPAN_NOTICE("\The [user] unfastens \the [src]."), \
 			SPAN_NOTICE("You have unfastened \the [src]."), \
@@ -103,19 +103,19 @@
 	return TRUE
 
 /obj/machinery/atmospherics/omni/proc/build_icons()
-	if(!check_icon_cache())
+	if (!check_icon_cache())
 		return
 
 	var/core_icon = null
-	if(istype(src, /obj/machinery/atmospherics/omni/mixer))
+	if (istype(src, /obj/machinery/atmospherics/omni/mixer))
 		core_icon = "mixer"
-	else if(istype(src, /obj/machinery/atmospherics/omni/filter))
+	else if (istype(src, /obj/machinery/atmospherics/omni/filter))
 		core_icon = "filter"
 	else
 		return
 
 	//directional icons are layers 1-4, with the core icon on layer 5
-	if(core_icon)
+	if (core_icon)
 		overlays_off[5] = icon_manager.get_atmos_icon("omni", , , core_icon)
 		overlays_on[5] = icon_manager.get_atmos_icon("omni", , , core_icon + "_glow")
 
@@ -123,28 +123,28 @@
 		overlays_error[2] = icon_manager.get_atmos_icon("omni", , , "error")
 
 /obj/machinery/atmospherics/omni/proc/update_port_icons()
-	if(!check_icon_cache())
+	if (!check_icon_cache())
 		return
 
 	for(var/datum/omni_port/P in ports)
-		if(P.update)
+		if (P.update)
 			var/ref_layer = 0
 			switch(P.dir)
-				if(NORTH)
+				if (NORTH)
 					ref_layer = 1
-				if(SOUTH)
+				if (SOUTH)
 					ref_layer = 2
-				if(EAST)
+				if (EAST)
 					ref_layer = 3
-				if(WEST)
+				if (WEST)
 					ref_layer = 4
 
-			if(!ref_layer)
+			if (!ref_layer)
 				continue
 
 			var/list/port_icons = select_port_icons(P)
-			if(port_icons)
-				if(P.node)
+			if (port_icons)
+				if (P.node)
 					underlays_current[ref_layer] = port_icons["pipe_icon"]
 				else
 					underlays_current[ref_layer] = null
@@ -158,21 +158,21 @@
 	update_icon()
 
 /obj/machinery/atmospherics/omni/proc/select_port_icons(datum/omni_port/P)
-	if(!istype(P))
+	if (!istype(P))
 		return
 
-	if(P.mode > 0)
+	if (P.mode > 0)
 		var/ic_dir = dir_name(P.dir)
 		var/ic_on = ic_dir
 		var/ic_off = ic_dir
 		switch(P.mode)
-			if(ATM_INPUT)
+			if (ATM_INPUT)
 				ic_on += "_in_glow"
 				ic_off += "_in"
-			if(ATM_OUTPUT)
+			if (ATM_OUTPUT)
 				ic_on += "_out_glow"
 				ic_off += "_out"
-			if(ATM_GAS_MIN to ATM_GAS_MAX)
+			if (ATM_GAS_MIN to ATM_GAS_MAX)
 				ic_on += "_filter"
 				ic_off += "_out"
 
@@ -181,9 +181,9 @@
 
 		var/pipe_state
 		var/turf/T = get_turf(src)
-		if(!istype(T))
+		if (!istype(T))
 			return
-		if(!T.is_plating() && istype(P.node, /obj/machinery/atmospherics/pipe) && P.node.level == ATOM_LEVEL_UNDER_TILE )
+		if (!T.is_plating() && istype(P.node, /obj/machinery/atmospherics/pipe) && P.node.level == ATOM_LEVEL_UNDER_TILE )
 			//pipe_state = icon_manager.get_atmos_icon("underlay_down", P.dir, color_cache_name(P.node))
 			pipe_state = icon_manager.get_atmos_icon("underlay", P.dir, color_cache_name(P.node), "down")
 		else
@@ -214,11 +214,11 @@
 
 /obj/machinery/atmospherics/omni/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 	for(var/datum/omni_port/P in ports)
-		if(reference == P.node)
+		if (reference == P.node)
 			P.network = new_network
 			break
 
-	if(new_network.normal_members.Find(src))
+	if (new_network.normal_members.Find(src))
 		return 0
 
 	new_network.normal_members += src
@@ -227,7 +227,7 @@
 
 /obj/machinery/atmospherics/omni/Destroy()
 	for(var/datum/omni_port/P in ports)
-		if(P.node)
+		if (P.node)
 			P.node.disconnect(src)
 			qdel(P.network)
 			P.node = null
@@ -237,10 +237,10 @@
 /obj/machinery/atmospherics/omni/atmos_init()
 	..()
 	for(var/datum/omni_port/P in ports)
-		if(P.node || P.mode == 0)
+		if (P.node || P.mode == 0)
 			continue
 		for(var/obj/machinery/atmospherics/target in get_step(src, P.dir))
-			if(target.initialize_directions & get_dir(target,src))
+			if (target.initialize_directions & get_dir(target,src))
 				if (check_connect_types(target,src))
 					P.node = target
 					break
@@ -252,7 +252,7 @@
 
 /obj/machinery/atmospherics/omni/build_network()
 	for(var/datum/omni_port/P in ports)
-		if(!P.network && P.node)
+		if (!P.network && P.node)
 			P.network = new /datum/pipe_network()
 			P.network.normal_members += src
 			P.network.build_network(P.node, src)
@@ -261,14 +261,14 @@
 	build_network()
 
 	for(var/datum/omni_port/P in ports)
-		if(reference == P.node)
+		if (reference == P.node)
 			return P.network
 
 	return null
 
 /obj/machinery/atmospherics/omni/reassign_network(datum/pipe_network/old_network, datum/pipe_network/new_network)
 	for(var/datum/omni_port/P in ports)
-		if(P.network == old_network)
+		if (P.network == old_network)
 			P.network = new_network
 
 	return 1
@@ -277,14 +277,14 @@
 	var/list/results = list()
 
 	for(var/datum/omni_port/P in ports)
-		if(P.network == reference)
+		if (P.network == reference)
 			results += P.air
 
 	return results
 
 /obj/machinery/atmospherics/omni/disconnect(obj/machinery/atmospherics/reference)
 	for(var/datum/omni_port/P in ports)
-		if(reference == P.node)
+		if (reference == P.node)
 			qdel(P.network)
 			P.node = null
 			P.update = 1

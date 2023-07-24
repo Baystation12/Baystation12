@@ -6,13 +6,13 @@
 	var/atom/storing_object
 
 /datum/stored_items/New(atom/storing_object, path, name = null, amount = 0)
-	if(!istype(storing_object))
+	if (!istype(storing_object))
 		CRASH("Unexpected storing object.")
 	src.storing_object = storing_object
 	src.item_path = path
 	src.amount = amount
 
-	if(!name)
+	if (!name)
 		var/atom/tmp = path
 		src.item_name = initial(tmp.name)
 	else
@@ -31,9 +31,9 @@
 	return amount
 
 /datum/stored_items/proc/add_product(atom/movable/product)
-	if(product.type != item_path)
+	if (product.type != item_path)
 		return 0
-	if(product in instances)
+	if (product in instances)
 		return 0
 	product.forceMove(storing_object)
 	LAZYADD(instances, product)
@@ -41,11 +41,11 @@
 	return 1
 
 /datum/stored_items/proc/get_product(product_location)
-	if(!get_amount() || !product_location)
+	if (!get_amount() || !product_location)
 		return
 
 	var/atom/movable/product
-	if(LAZYLEN(instances))
+	if (LAZYLEN(instances))
 		product = instances[length(instances)]	// Remove the last added product
 		LAZYREMOVE(instances, product)
 	else
@@ -56,19 +56,19 @@
 	return product
 
 /datum/stored_items/proc/get_specific_product(product_location, atom/movable/product)
-	if(!get_amount() || !instances || !product_location || !product)
+	if (!get_amount() || !instances || !product_location || !product)
 		return FALSE
 
 	. = instances.Remove(product)
-	if(.)
+	if (.)
 		product.forceMove(product_location)
 
 /datum/stored_items/proc/merge(datum/stored_items/other)
-	if(other.item_path != item_path)
+	if (other.item_path != item_path)
 		return FALSE
 	for(var/atom/movable/thing in other.instances)
 		other.instances -= thing
-		if(thing in instances)
+		if (thing in instances)
 			amount-- // Don't double-count
 		else
 			thing.forceMove(storing_object)

@@ -36,13 +36,13 @@ SUBSYSTEM_DEF(supply)
 	//Build master supply list
 	var/singleton/hierarchy/supply_pack/root = GET_SINGLETON(/singleton/hierarchy/supply_pack)
 	for (var/singleton/hierarchy/supply_pack/sp in root.children)
-		if(sp.is_category())
+		if (sp.is_category())
 			for(var/singleton/hierarchy/supply_pack/spc in sp.get_descendents())
 				spc.setup()
 				master_supply_list += spc
 
 	for (var/material/mat in SSmaterials.materials)
-		if(mat.sale_price > 0)
+		if (mat.sale_price > 0)
 			point_source_descriptions[mat.display_name] = "From exported [mat.display_name]"
 
 // Just add points over time.
@@ -78,7 +78,7 @@ SUBSYSTEM_DEF(supply)
 
 	for(var/i=1, i<=length(A.contents), i++)
 		var/atom/B = A.contents[i]
-		if(.(B))
+		if (.(B))
 			return TRUE
 
 /datum/controller/subsystem/supply/proc/sell()
@@ -86,9 +86,9 @@ SUBSYSTEM_DEF(supply)
 
 	for(var/area/subarea in shuttle.shuttle_area)
 		for(var/atom/movable/AM in subarea)
-			if(AM.anchored)
+			if (AM.anchored)
 				continue
-			if(istype(AM, /obj/structure/closet/crate))
+			if (istype(AM, /obj/structure/closet/crate))
 				var/obj/structure/closet/crate/CR = AM
 				callHook("sell_crate", list(CR, subarea))
 				add_points_from_source(CR.points_per_crate, "crate")
@@ -97,24 +97,24 @@ SUBSYSTEM_DEF(supply)
 				for(var/atom in CR)
 					// Sell manifests
 					var/atom/A = atom
-					if(find_slip && istype(A,/obj/item/paper/manifest))
+					if (find_slip && istype(A,/obj/item/paper/manifest))
 						var/obj/item/paper/manifest/slip = A
-						if(!slip.is_copy && slip.stamped && length(slip.stamped)) //Any stamp works.
+						if (!slip.is_copy && slip.stamped && length(slip.stamped)) //Any stamp works.
 							add_points_from_source(points_per_slip, "manifest")
 							find_slip = 0
 						continue
 
 					// Sell materials
-					if(istype(A, /obj/item/stack/material))
+					if (istype(A, /obj/item/stack/material))
 						var/obj/item/stack/material/P = A
-						if(P.material && P.material.sale_price > 0)
+						if (P.material && P.material.sale_price > 0)
 							material_count[P.material.display_name] += P.get_amount() * P.material.sale_price * P.matter_multiplier
-						if(P.reinf_material && P.reinf_material.sale_price > 0)
+						if (P.reinf_material && P.reinf_material.sale_price > 0)
 							material_count[P.reinf_material.display_name] += P.get_amount() * P.reinf_material.sale_price * P.matter_multiplier * 0.5
 						continue
 
 					// Must sell ore detector disks in crates
-					if(istype(A, /obj/item/disk/survey))
+					if (istype(A, /obj/item/disk/survey))
 						var/obj/item/disk/survey/D = A
 						add_points_from_source(round(D.Value() * 0.05), "gep")
 
@@ -181,7 +181,7 @@ SUBSYSTEM_DEF(supply)
 
 			qdel(AM)
 
-	if(length(material_count))
+	if (length(material_count))
 		for(var/material_type in material_count)
 			add_points_from_source(material_count[material_type], material_type)
 
@@ -190,28 +190,28 @@ SUBSYSTEM_DEF(supply)
 
 	for(var/area/subarea in shuttle.shuttle_area)
 		for(var/turf/T in subarea)
-			if(T.density)
+			if (T.density)
 				continue
 			var/occupied = 0
 			for(var/atom/A in T.contents)
-				if(!A.simulated)
+				if (!A.simulated)
 					continue
 				occupied = 1
 				break
-			if(!occupied)
+			if (!occupied)
 				clear_turfs += T
 
 	return clear_turfs
 
 //Buyin
 /datum/controller/subsystem/supply/proc/buy()
-	if(!length(shoppinglist))
+	if (!length(shoppinglist))
 		return
 
 	var/list/clear_turfs = get_clear_turfs()
 
 	for(var/S in shoppinglist)
-		if(!length(clear_turfs))
+		if (!length(clear_turfs))
 			break
 		var/turf/pickedloc = pick_n_take(clear_turfs)
 		shoppinglist -= S
@@ -225,7 +225,7 @@ SUBSYSTEM_DEF(supply)
 		//supply manifest generation begin
 
 		var/obj/item/paper/manifest/slip
-		if(!SP.contraband)
+		if (!SP.contraband)
 			var/info = list()
 			info +="<h3>[GLOB.using_map.boss_name] Shipping Manifest</h3><hr><br>"
 			info +="Order #[SO.ordernum]<br>"
@@ -237,15 +237,15 @@ SUBSYSTEM_DEF(supply)
 			slip.is_copy = FALSE
 
 		//spawn the stuff, finish generating the manifest while you're at it
-		if(SP.access)
-			if(!islist(SP.access))
+		if (SP.access)
+			if (!islist(SP.access))
 				A.req_access = list(SP.access)
-			else if(islist(SP.access))
+			else if (islist(SP.access))
 				var/list/L = SP.access // access var is a plain var, we need a list
 				A.req_access = L.Copy()
 
 		var/list/spawned = SP.spawn_contents(A)
-		if(slip)
+		if (slip)
 			for(var/atom/content in spawned)
 				slip.info += "<li>[content.name]</li>" //add the item to the manifest
 			slip.info += "</ul><br>CHECK CONTENTS AND STAMP BELOW THE LINE TO CONFIRM RECEIPT OF GOODS<hr>"
@@ -253,7 +253,7 @@ SUBSYSTEM_DEF(supply)
 // Adds any given item to the supply shuttle
 /datum/controller/subsystem/supply/proc/addAtom(atom/movable/A)
 	var/list/clear_turfs = get_clear_turfs()
-	if(!length(clear_turfs))
+	if (!length(clear_turfs))
 		return FALSE
 
 	var/turf/pickedloc = pick(clear_turfs)

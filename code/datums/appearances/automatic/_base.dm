@@ -7,21 +7,21 @@
 	appearance_sources = list()
 
 /singleton/appearance_handler/proc/AddAltAppearance(source, list/images, list/viewers = list())
-	if(source in appearance_sources)
+	if (source in appearance_sources)
 		return FALSE
 	appearance_sources[source] = new/datum/appearance_data(images, viewers, priority)
 	GLOB.destroyed_event.register(source, src, /singleton/appearance_handler/proc/RemoveAltAppearance)
 
 /singleton/appearance_handler/proc/RemoveAltAppearance(source)
 	var/datum/appearance_data/ad = appearance_sources[source]
-	if(ad)
+	if (ad)
 		GLOB.destroyed_event.unregister(source, src)
 		appearance_sources -= source
 		qdel(ad)
 
 /singleton/appearance_handler/proc/DisplayAltAppearanceTo(source, viewer)
 	var/datum/appearance_data/ad = appearance_sources[source]
-	if(ad)
+	if (ad)
 		ad.AddViewer(viewer)
 
 /singleton/appearance_handler/proc/DisplayAllAltAppearancesTo(viewer)

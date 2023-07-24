@@ -31,7 +31,7 @@
 
 /obj/machinery/optable/Destroy()
 	victim = null
-	if(connected_monitor)
+	if (connected_monitor)
 		connected_monitor.update_victim()
 		connected_monitor.update_optable()
 	. = ..()
@@ -43,40 +43,40 @@
 /obj/machinery/optable/ex_act(severity)
 
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			//SN src = null
 			qdel(src)
 			return
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			if (prob(50))
 				//SN src = null
 				qdel(src)
 				return
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			if (prob(25))
 				src.set_density(0)
 
 /obj/machinery/optable/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()
-	if(istype(new_state))
+	if (istype(new_state))
 		updateUsrDialog()
 
 /obj/machinery/optable/physical_attack_hand(mob/user)
-	if(MUTATION_HULK in user.mutations)
+	if (MUTATION_HULK in user.mutations)
 		visible_message(SPAN_DANGER("\The [usr] destroys \the [src]!"))
 		src.set_density(0)
 		qdel(src)
 		return TRUE
 
-	if(!victim)
+	if (!victim)
 		to_chat(user, SPAN_WARNING("There is nobody on \the [src]. It would be pointless to turn the suppressor on."))
 		return TRUE
 
-	if(user != victim && !suppressing) // Skip checks if you're doing it to yourself or turning it off, this is an anti-griefing mechanic more than anything.
+	if (user != victim && !suppressing) // Skip checks if you're doing it to yourself or turning it off, this is an anti-griefing mechanic more than anything.
 		user.visible_message(SPAN_WARNING("\The [user] begins switching on \the [src]'s neural suppressor."))
-		if(!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) || !user || !src || user.incapacitated() || !user.Adjacent(src))
+		if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) || !user || !src || user.incapacitated() || !user.Adjacent(src))
 			return TRUE
-		if(!victim)
+		if (!victim)
 			to_chat(user, SPAN_WARNING("There is nobody on \the [src]. It would be pointless to turn the suppressor on."))
 			return TRUE
 
@@ -87,29 +87,29 @@
 	return TRUE
 
 /obj/machinery/optable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
+	if (air_group || (height==0)) return 1
 
-	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
+	if (istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
 		return 1
 	else
 		return 0
 
 /obj/machinery/optable/proc/check_victim()
-	if(!victim || !victim.lying || victim.loc != loc)
+	if (!victim || !victim.lying || victim.loc != loc)
 		suppressing = FALSE
 		victim = null
-		if(connected_monitor)
+		if (connected_monitor)
 			connected_monitor.update_victim()
-		if(locate(/mob/living/carbon/human) in loc)
+		if (locate(/mob/living/carbon/human) in loc)
 			for(var/mob/living/carbon/human/H in loc)
-				if(H.lying)
+				if (H.lying)
 					victim = H
-					if(connected_monitor)
+					if (connected_monitor)
 						connected_monitor.update_victim(H)
 					break
 	icon_state = (victim && victim.pulse()) ? "table2-active" : "table2-idle"
-	if(victim)
-		if(suppressing && victim.sleeping < 3)
+	if (victim)
+		if (suppressing && victim.sleeping < 3)
 			victim.Sleeping(3 - victim.sleeping)
 		return 1
 	return 0
@@ -132,10 +132,10 @@
 	C.dropInto(loc)
 	C.set_dir(SOUTH) //Make patient lie on their back.
 	C.remove_grabs_and_pulls()
-	if(ishuman(C))
+	if (ishuman(C))
 		var/mob/living/carbon/human/H = C
 		src.victim = H
-		if(connected_monitor)
+		if (connected_monitor)
 			connected_monitor.update_victim(H)
 		icon_state = H.pulse() ? "table2-active" : "table2-idle"
 	else
@@ -143,14 +143,14 @@
 
 /obj/machinery/optable/MouseDrop_T(mob/target, mob/user)
 	var/mob/living/M = user
-	if(user.stat || user.restrained() || !iscarbon(target) || !check_table(target))
+	if (user.stat || user.restrained() || !iscarbon(target) || !check_table(target))
 		return
 	for (var/obj/item/grab/grab in target.grabbed_by)
 		if (grab.assailant == target || grab.assailant == user)
 			continue
 		USE_FEEDBACK_FAILURE("\The [target] is being grabbed by \the [grab.assailant] and can't be placed on \the [src].")
 		return
-	if(istype(M))
+	if (istype(M))
 		take_victim(target,user)
 	else
 		return ..()
@@ -160,17 +160,17 @@
 	return TRUE
 
 /obj/machinery/optable/climb_on()
-	if(usr.stat || !ishuman(usr) || usr.restrained() || !check_table(usr))
+	if (usr.stat || !ishuman(usr) || usr.restrained() || !check_table(usr))
 		return
 
 	take_victim(usr,usr)
 
 /obj/machinery/optable/proc/check_table(mob/living/carbon/patient as mob)
 	check_victim()
-	if(src.victim && get_turf(victim) == get_turf(src) && victim.lying)
+	if (src.victim && get_turf(victim) == get_turf(src) && victim.lying)
 		to_chat(usr, SPAN_WARNING("\The [src] is already occupied!"))
 		return 0
-	if(patient.buckled)
+	if (patient.buckled)
 		to_chat(usr, SPAN_NOTICE("Unbuckle \the [patient] first!"))
 		return 0
 	return 1

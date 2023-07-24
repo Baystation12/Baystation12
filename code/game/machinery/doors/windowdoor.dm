@@ -22,15 +22,15 @@
 	update_nearby_tiles()
 
 /obj/machinery/door/window/Initialize(mapload, obj/structure/windoor_assembly/assembly)
-	if(assembly)
+	if (assembly)
 		set_dir(assembly.dir)
 		set_density(0)
-		if(assembly.electronics)
-			if(assembly.electronics.autoset)
+		if (assembly.electronics)
+			if (assembly.electronics.autoset)
 				autoset_access = TRUE // Being careful in case of subtypes or something.
 			else
 				req_access = assembly.electronics.conf_access
-				if(assembly.electronics.one_access)
+				if (assembly.electronics.one_access)
 					req_access = list(req_access)
 				autoset_access = FALSE
 			electronics = assembly.electronics
@@ -38,7 +38,7 @@
 	. = ..()
 
 /obj/machinery/door/window/on_update_icon()
-	if(density)
+	if (density)
 		icon_state = base_state
 	else
 		icon_state = "[base_state]open"
@@ -48,7 +48,7 @@
 	var/obj/item/stack/cable_coil/CC = new /obj/item/stack/cable_coil(src.loc)
 	CC.amount = 2
 	var/obj/item/airlock_electronics/ae
-	if(!electronics)
+	if (!electronics)
 		create_electronics()
 	ae = electronics
 	electronics = null
@@ -58,7 +58,7 @@
 		operating = DOOR_OPERATING_NO
 	set_density(0)
 	playsound(src, "shatter", 70, 1)
-	if(display_message)
+	if (display_message)
 		visible_message("[src] shatters!")
 	qdel(src)
 
@@ -73,8 +73,8 @@
 /obj/machinery/door/window/Bumped(atom/movable/AM as mob|obj)
 	if (!( ismob(AM) ))
 		var/mob/living/bot/bot = AM
-		if(istype(bot))
-			if(density && src.check_access(bot.botcard))
+		if (istype(bot))
+			if (density && src.check_access(bot.botcard))
 				open()
 				addtimer(new Callback(src, .proc/close), 5 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
 		return
@@ -84,7 +84,7 @@
 	if (src.density && (!issmall(M) || ishuman(M) || issilicon(M)) && src.allowed(AM))
 		open()
 		var/open_timer
-		if(src.check_access(null))
+		if (src.check_access(null))
 			open_timer = 5 SECONDS
 		else //secure doors close faster
 			open_timer = 2 SECONDS
@@ -92,18 +92,18 @@
 	return
 
 /obj/machinery/door/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
+	if (istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return 1
-	if(get_dir(loc, target) & dir) //Make sure looking at appropriate border
-		if(air_group) return 0
+	if (get_dir(loc, target) & dir) //Make sure looking at appropriate border
+		if (air_group) return 0
 		return !density
 	else
 		return 1
 
 /obj/machinery/door/window/CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
-	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
+	if (istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return 1
-	if(get_dir(loc, target) == dir)
+	if (get_dir(loc, target) == dir)
 		return !density
 	else
 		return 1
@@ -127,7 +127,7 @@
 	update_icon()
 	update_nearby_tiles()
 
-	if(operating == DOOR_OPERATING_YES) //emag again
+	if (operating == DOOR_OPERATING_YES) //emag again
 		operating = DOOR_OPERATING_NO
 
 /obj/machinery/door/window/close()
@@ -151,9 +151,9 @@
 	shatter()
 
 /obj/machinery/door/window/physical_attack_hand(mob/user)
-	if(istype(user,/mob/living/carbon/human))
+	if (istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		if(H.species.can_shred(H))
+		if (H.species.can_shred(H))
 			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 			visible_message(SPAN_DANGER("[user] smashes against the [src.name]."), 1)
 			damage_health(25, DAMAGE_BRUTE)
@@ -176,7 +176,7 @@
 	return TRUE
 
 /obj/machinery/door/window/emp_act(severity)
-	if(prob(20/severity))
+	if (prob(20/severity))
 		spawn(0)
 			open()
 	..()
@@ -192,7 +192,7 @@
 
 	//Emags and ninja swords? You may pass.
 	if (istype(I, /obj/item/melee/energy/blade))
-		if(emag_act(10, user))
+		if (emag_act(10, user))
 			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 			spark_system.set_up(5, 0, src.loc)
 			spark_system.start()

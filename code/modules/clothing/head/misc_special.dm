@@ -35,7 +35,7 @@
 	tint = TINT_HEAVY
 
 /obj/item/clothing/head/welding/attack_self()
-	if(!base_state)
+	if (!base_state)
 		base_state = icon_state
 	toggle()
 
@@ -45,8 +45,8 @@
 	set name = "Adjust welding mask"
 	set src in usr
 
-	if(CanPhysicallyInteract(usr))
-		if(src.up)
+	if (CanPhysicallyInteract(usr))
+		if (src.up)
 			src.up = !src.up
 			body_parts_covered |= (EYES|FACE)
 			flags_inv |= (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
@@ -122,14 +122,14 @@
 	item_flags = null
 
 /obj/item/clothing/head/cakehat/Process()
-	if(!onfire)
+	if (!onfire)
 		STOP_PROCESSING(SSobj, src)
 		return
 
 	var/turf/location = src.loc
-	if(ismob(location))
+	if (ismob(location))
 		var/mob/living/carbon/human/M = location
-		if(M.IsHolding(src) || M.head == src)
+		if (M.IsHolding(src) || M.head == src)
 			location = M.loc
 
 	if (istype(location, /turf))
@@ -164,7 +164,7 @@
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/head/ushanka/attack_self(mob/user as mob)
-	if(icon_state == initial(icon_state))
+	if (icon_state == initial(icon_state))
 		icon_state = icon_state_up
 		to_chat(user, "You raise the ear flaps on the ushanka.")
 	else
@@ -203,7 +203,7 @@
 	item_icons = list()
 
 /obj/item/clothing/head/kitty/on_update_icon(mob/living/carbon/human/user)
-	if(!istype(user)) return
+	if (!istype(user)) return
 	var/icon/ears = new/icon("icon" = 'icons/mob/onmob/onmob_head.dmi', "icon_state" = "kitty")
 	ears.Blend(user.head_hair_color, ICON_ADD)
 

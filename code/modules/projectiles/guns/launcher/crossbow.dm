@@ -37,7 +37,7 @@
 	icon_state = "metal-rod"
 
 /obj/item/arrow/rod/removed(mob/user)
-	if(throwforce == 15) // The rod has been superheated - we don't want it to be useable when removed from the bow.
+	if (throwforce == 15) // The rod has been superheated - we don't want it to be useable when removed from the bow.
 		to_chat(user, "[src] shatters into a scattering of overstressed metal shards as it leaves the crossbow.")
 		var/obj/item/material/shard/shrapnel/steel/shrapnel = new
 		shrapnel.dropInto(loc)
@@ -70,7 +70,7 @@
 	release_force = tension*release_speed
 
 /obj/item/gun/launcher/crossbow/consume_next_projectile(mob/user=null)
-	if(tension <= 0)
+	if (tension <= 0)
 		to_chat(user, SPAN_WARNING("\The [src] is not drawn back!"))
 		return null
 	return bolt
@@ -82,8 +82,8 @@
 	..()
 
 /obj/item/gun/launcher/crossbow/attack_self(mob/living/user as mob)
-	if(tension)
-		if(bolt)
+	if (tension)
+		if (bolt)
 			user.visible_message("[user] relaxes the tension on [src]'s string and removes [bolt].","You relax the tension on [src]'s string and remove [bolt].")
 			bolt.dropInto(loc)
 			var/obj/item/arrow/A = bolt
@@ -98,11 +98,11 @@
 
 /obj/item/gun/launcher/crossbow/proc/draw(mob/user as mob)
 
-	if(!bolt)
+	if (!bolt)
 		to_chat(user, "You don't have anything nocked to [src].")
 		return
 
-	if(user.restrained())
+	if (user.restrained())
 		return
 
 	current_user = user
@@ -110,20 +110,20 @@
 	tension = 1
 
 	while(bolt && tension && loc == current_user)
-		if(!do_after(user, draw_time, src, DO_PUBLIC_UNIQUE)) //crossbow strings don't just magically pull back on their own.
+		if (!do_after(user, draw_time, src, DO_PUBLIC_UNIQUE)) //crossbow strings don't just magically pull back on their own.
 			user.visible_message("[usr] stops drawing and relaxes the string of [src].",SPAN_WARNING("You stop drawing back and relax the string of [src]."))
 			tension = 0
 			update_icon()
 			return
 
 		//double check that the user hasn't removed the bolt in the meantime
-		if(!(bolt && tension && loc == current_user))
+		if (!(bolt && tension && loc == current_user))
 			return
 
 		tension++
 		update_icon()
 
-		if(tension >= max_tension)
+		if (tension >= max_tension)
 			tension = max_tension
 			to_chat(usr, "[src] clunks as you draw the string to its maximum tension!")
 			return
@@ -132,7 +132,7 @@
 
 /obj/item/gun/launcher/crossbow/proc/increase_tension(mob/user as mob)
 
-	if(!bolt || !tension || current_user != user) //Arrow has been fired, bow has been relaxed or user has changed.
+	if (!bolt || !tension || current_user != user) //Arrow has been fired, bow has been relaxed or user has changed.
 		return
 
 
@@ -268,10 +268,10 @@
 
 
 /obj/item/gun/launcher/crossbow/proc/superheat_rod(mob/user)
-	if(!user || !cell || !bolt) return
-	if(cell.charge < 500) return
-	if(bolt.throwforce >= 15) return
-	if(!istype(bolt,/obj/item/arrow/rod)) return
+	if (!user || !cell || !bolt) return
+	if (cell.charge < 500) return
+	if (bolt.throwforce >= 15) return
+	if (!istype(bolt,/obj/item/arrow/rod)) return
 
 	to_chat(user, SPAN_NOTICE("[bolt] plinks and crackles as it begins to glow red-hot."))
 	bolt.throwforce = 15
@@ -279,9 +279,9 @@
 	cell.use(500)
 
 /obj/item/gun/launcher/crossbow/on_update_icon()
-	if(tension > 1)
+	if (tension > 1)
 		icon_state = "crossbow-drawn"
-	else if(bolt)
+	else if (bolt)
 		icon_state = "crossbow-nocked"
 	else
 		icon_state = "crossbow"
@@ -307,7 +307,7 @@
 	var/boltcost = 30
 
 /obj/item/gun/launcher/crossbow/rapidcrossbowdevice/proc/generate_bolt(mob/user)
-	if(stored_matter >= boltcost && !bolt)
+	if (stored_matter >= boltcost && !bolt)
 		bolt = new/obj/item/arrow/rapidcrossbowdevice(src)
 		stored_matter -= boltcost
 		to_chat(user, SPAN_NOTICE("The RCD flashforges a new bolt!"))
@@ -318,7 +318,7 @@
 
 
 /obj/item/gun/launcher/crossbow/rapidcrossbowdevice/attack_self(mob/living/user as mob)
-	if(tension)
+	if (tension)
 		user.visible_message("[user] relaxes the tension on [src]'s string.","You relax the tension on [src]'s string.")
 		tension = 0
 		update_icon()
@@ -380,18 +380,18 @@
 /obj/item/gun/launcher/crossbow/rapidcrossbowdevice/on_update_icon()
 	overlays.Cut()
 
-	if(bolt)
+	if (bolt)
 		overlays += "rxb-bolt"
 
 	var/ratio = 0
-	if(stored_matter < boltcost)
+	if (stored_matter < boltcost)
 		ratio = 0
 	else
 		ratio = stored_matter / max_stored_matter
 		ratio = max(round(ratio, 0.25) * 100, 25)
 	overlays += "rxb-[ratio]"
 
-	if(tension > 1)
+	if (tension > 1)
 		icon_state = "rxb-drawn"
 	else
 		icon_state = "rxb"

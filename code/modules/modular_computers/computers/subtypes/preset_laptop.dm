@@ -34,10 +34,10 @@
 /obj/item/modular_computer/laptop/preset/custom_loadout/install_default_programs()
 	..()
 	var/mob/living/carbon/human/H = get_holder_of_type(src, /mob)
-	if(!istype(H)) return
+	if (!istype(H)) return
 	install_default_programs_by_job(H)
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
+	if (os)
 		os.create_file(new/datum/computer_file/program/wordprocessor())
 
 //Map presets
@@ -56,6 +56,6 @@
 /obj/item/modular_computer/laptop/preset/records/install_default_programs()
 	..()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
+	if (os)
 		os.create_file(new /datum/computer_file/program/wordprocessor())
 		os.create_file(new /datum/computer_file/program/records())

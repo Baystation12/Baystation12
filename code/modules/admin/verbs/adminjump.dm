@@ -9,9 +9,9 @@
 	set name = "Jump to Area"
 	set desc = "Area to jump to"
 	set category = "Admin"
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if (!check_rights(R_ADMIN|R_MOD|R_DEBUG))
 		return
-	if(!config.allow_admin_jump)
+	if (!config.allow_admin_jump)
 		return alert("Admin jumping disabled")
 
 	var/list/areas = area_repository.get_areas_by_z_level()
@@ -22,9 +22,9 @@
 /client/proc/jumptoturf(turf/T)
 	set name = "Jump to Turf"
 	set category = "Admin"
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if (!check_rights(R_ADMIN|R_MOD|R_DEBUG))
 		return
-	if(!config.allow_admin_jump)
+	if (!config.allow_admin_jump)
 		return alert("Admin jumping disabled")
 
 	log_and_message_admins("jumped to [T.x],[T.y],[T.z] in [T.loc]")
@@ -35,14 +35,14 @@
 	set category = "Admin"
 	set name = "Jump to Mob"
 
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if (!check_rights(R_ADMIN|R_MOD|R_DEBUG))
 		return
 
-	if(config.allow_admin_jump)
+	if (config.allow_admin_jump)
 		log_and_message_admins("jumped to [key_name(M)]")
-		if(mob)
+		if (mob)
 			var/turf/T = get_turf(M)
-			if(T && isturf(T))
+			if (T && isturf(T))
 				mob.jumpTo(T)
 			else
 				to_chat(mob, "This mob is not located in the game world.")
@@ -53,17 +53,17 @@
 	set category = "Admin"
 	set name = "Jump to Coordinate"
 
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if (!check_rights(R_ADMIN|R_MOD|R_DEBUG))
 		return
 
-	if(!config.allow_admin_jump)
+	if (!config.allow_admin_jump)
 		alert("Admin jumping disabled")
 		return
-	if(!mob)
+	if (!mob)
 		return
 
 	var/turf/T = locate(tx, ty, tz)
-	if(!T)
+	if (!T)
 		return
 	mob.jumpTo(T)
 	log_and_message_admins("jumped to coordinates [tx], [ty], [tz]")
@@ -76,11 +76,11 @@
 	set category = "Admin"
 	set name = "Jump to Key"
 
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if (!check_rights(R_ADMIN|R_MOD|R_DEBUG))
 		return
 
-	if(config.allow_admin_jump)
-		if(!istype(C))
+	if (config.allow_admin_jump)
+		if (!istype(C))
 			to_chat(usr, "[C] is not a client, somehow.")
 			return
 
@@ -95,9 +95,9 @@
 	set category = "Admin"
 	set name = "Get Mob"
 	set desc = "Mob to teleport"
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if (!check_rights(R_ADMIN|R_MOD|R_DEBUG))
 		return
-	if(config.allow_admin_jump)
+	if (config.allow_admin_jump)
 		log_and_message_admins("teleported [key_name(M)] to self.")
 		M.jumpTo(get_turf(mob))
 	else
@@ -108,22 +108,22 @@
 	set name = "Get Key"
 	set desc = "Key to teleport"
 
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if (!check_rights(R_ADMIN|R_MOD|R_DEBUG))
 		return
 
-	if(config.allow_admin_jump)
+	if (config.allow_admin_jump)
 		var/list/keys = list()
 		for(var/mob/M in GLOB.player_list)
 			keys += M.client
 		var/selection = input("Please, select a player!", "Admin Jumping", null, null) as null|anything in sortKey(keys)
-		if(!selection)
+		if (!selection)
 			return
 		var/mob/M = selection:mob
 
-		if(!M)
+		if (!M)
 			return
 		log_and_message_admins("teleported [key_name(M)] to self.")
-		if(M)
+		if (M)
 			M.jumpTo(get_turf(mob))
 	else
 		alert("Admin jumping disabled")
@@ -131,15 +131,15 @@
 /client/proc/sendmob(mob/M in sortmobs())
 	set category = "Admin"
 	set name = "Send Mob"
-	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
+	if (!check_rights(R_ADMIN|R_MOD|R_DEBUG))
 		return
-	if(!config.allow_admin_jump)
+	if (!config.allow_admin_jump)
 		alert("Admin jumping disabled")
 		return
 
 	var/list/areas = area_repository.get_areas_by_name()
 	var/area/A = input(usr, "Pick an area.", "Pick an area") as null|anything in areas
 	A = A ? areas[A] : A
-	if(A)
+	if (A)
 		M.jumpTo(pick(get_area_turfs(A)))
 		log_and_message_admins("teleported [key_name(M)] to [A].")

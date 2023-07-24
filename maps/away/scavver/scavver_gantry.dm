@@ -76,16 +76,16 @@
 	desc = "An outdated mech designed to strip and repair ships by crawling along their hull. This one won't be doing many repairs anymore."
 
 /mob/living/exosuit/premade/salvage_gantry/Initialize()
-	if(!body)
+	if (!body)
 		body = new /obj/item/mech_component/chassis/pod(src)
 		body.color = COLOR_ORANGE
-	if(!legs)
+	if (!legs)
 		legs = new /obj/item/mech_component/propulsion/spider(src)
 		legs.color = COLOR_GUNMETAL
-	if(!arms)
+	if (!arms)
 		arms = new /obj/item/mech_component/manipulators/powerloader(src)
 		arms.color = COLOR_GUNMETAL
-	if(!head)
+	if (!head)
 		head = new /obj/item/mech_component/sensors/light/salvage(src)
 		head.color = COLOR_GUNMETAL
 

@@ -16,23 +16,23 @@
 
 /singleton/machine_construction/default/panel_closed/validate_state(obj/machinery/machine)
 	. = ..()
-	if(!.)
+	if (!.)
 		try_change_state(machine, down_state)
 
 /singleton/machine_construction/default/panel_closed/attackby(obj/item/I, mob/user, obj/machinery/machine)
-	if((. = ..()))
+	if ((. = ..()))
 		return
 	if (!machine.can_use_tools)
 		to_chat(user, SPAN_WARNING("\The [src] cannot be modified!"))
 		return TRUE
-	if(isScrewdriver(I))
+	if (isScrewdriver(I))
 		TRANSFER_STATE(down_state)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		machine.panel_open = TRUE
 		to_chat(user, SPAN_NOTICE("You open the maintenance hatch of \the [machine]."))
 		machine.update_icon()
 		return
-	if(istype(I, /obj/item/storage/part_replacer))
+	if (istype(I, /obj/item/storage/part_replacer))
 		machine.display_parts(user)
 		return TRUE
 
@@ -58,17 +58,17 @@
 
 /singleton/machine_construction/default/panel_open/validate_state(obj/machinery/machine)
 	. = ..()
-	if(!.)
+	if (!.)
 		try_change_state(machine, up_state)
 
 /singleton/machine_construction/default/panel_open/attackby(obj/item/I, mob/user, obj/machinery/machine)
-	if((. = ..()))
+	if ((. = ..()))
 		return
-	if(isCrowbar(I))
+	if (isCrowbar(I))
 		TRANSFER_STATE(down_state)
 		machine.dismantle()
 		return
-	if(isScrewdriver(I))
+	if (isScrewdriver(I))
 		TRANSFER_STATE(up_state)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		machine.panel_open = FALSE
@@ -76,13 +76,13 @@
 		machine.update_icon()
 		return
 
-	if(istype(I, /obj/item/storage/part_replacer))
+	if (istype(I, /obj/item/storage/part_replacer))
 		return machine.part_replacement(user, I)
 
-	if(isWrench(I))
+	if (isWrench(I))
 		return machine.part_removal(user)
 
-	if(istype(I))
+	if (istype(I))
 		return machine.part_insertion(user, I)
 
 /singleton/machine_construction/default/panel_open/mechanics_info()

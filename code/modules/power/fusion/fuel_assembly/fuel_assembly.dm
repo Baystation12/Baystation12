@@ -20,24 +20,24 @@
 /obj/item/fuel_assembly/Initialize()
 	. = ..()
 
-	if(ispath(fuel_type, /datum/reagent))
+	if (ispath(fuel_type, /datum/reagent))
 		var/datum/reagent/R = fuel_type
 		fuel_type = lowertext(initial(R.name))
 		fuel_colour = initial(R.color)
 		initial_amount = 50000
 
 	var/material/material = SSmaterials.get_material_by_name(fuel_type)
-	if(istype(material))
+	if (istype(material))
 		initial_amount = material.units_per_sheet * 5 // Fuel compressor eats 5 sheets.
 		SetName("[material.use_name] fuel rod assembly")
 		desc = "A fuel rod for a fusion reactor. This one is made from [material.use_name]."
 		fuel_colour = material.icon_colour
 		fuel_type = material.use_name
-		if(material.radioactivity)
+		if (material.radioactivity)
 			radioactivity = material.radioactivity
 			desc += " It is warm to the touch."
 			START_PROCESSING(SSobj, src)
-		if(material.luminescence)
+		if (material.luminescence)
 			set_light(material.luminescence, material.luminescence, material.icon_colour)
 	else
 		SetName("[fuel_type] fuel rod assembly")
@@ -50,10 +50,10 @@
 	rod_quantities[fuel_type] = initial_amount
 
 /obj/item/fuel_assembly/Process()
-	if(!radioactivity)
+	if (!radioactivity)
 		return PROCESS_KILL
 
-	if(istype(loc, /turf))
+	if (istype(loc, /turf))
 		SSradiation.radiate(src, max(1,ceil(radioactivity/15)))
 
 /obj/item/fuel_assembly/Destroy()

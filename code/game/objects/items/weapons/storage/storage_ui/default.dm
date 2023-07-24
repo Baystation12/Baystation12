@@ -73,7 +73,7 @@
 	user.s_active = null
 
 /datum/storage_ui/default/on_insertion(mob/user)
-	if(user.s_active)
+	if (user.s_active)
 		user.s_active.show_to(user)
 
 /datum/storage_ui/default/on_pre_remove(mob/user, obj/item/W)
@@ -83,7 +83,7 @@
 				M.client.screen -= W
 
 /datum/storage_ui/default/on_post_remove(mob/user)
-	if(user?.s_active)
+	if (user?.s_active)
 		user.s_active.show_to(user)
 
 /datum/storage_ui/default/on_hand_attack(mob/user)
@@ -92,12 +92,12 @@
 			storage.close(M)
 
 /datum/storage_ui/default/show_to(mob/user)
-	if(!user.client) return
-	if(user.s_active != storage)
+	if (!user.client) return
+	if (user.s_active != storage)
 		for(var/obj/item/I in storage)
-			if(I.on_found(user))
+			if (I.on_found(user))
 				return
-	if(user.s_active)
+	if (user.s_active)
 		user.s_active.hide_from(user)
 	user.client.screen -= boxes
 	user.client.screen -= storage_start
@@ -107,7 +107,7 @@
 	user.client.screen -= storage.contents
 	user.client.screen += closer
 	user.client.screen += storage.contents
-	if(storage.storage_slots)
+	if (storage.storage_slots)
 		user.client.screen += boxes
 	else
 		user.client.screen += storage_start
@@ -118,7 +118,7 @@
 
 /datum/storage_ui/default/hide_from(mob/user)
 	is_seeing -= user
-	if(!user.client)
+	if (!user.client)
 		return
 	user.client.screen -= boxes
 	user.client.screen -= storage_start
@@ -126,13 +126,13 @@
 	user.client.screen -= storage_end
 	user.client.screen -= closer
 	user.client.screen -= storage.contents
-	if(user.s_active == storage)
+	if (user.s_active == storage)
 		user.s_active = null
 
 //Creates the storage UI
 /datum/storage_ui/default/prepare_ui()
 	//if storage slots is null then use the storage space UI, otherwise use the slots UI
-	if(storage.storage_slots == null)
+	if (storage.storage_slots == null)
 		space_orient_objs()
 	else
 		slot_orient_objs()
@@ -145,7 +145,7 @@
 /datum/storage_ui/default/proc/can_see_contents()
 	var/list/cansee = list()
 	for(var/mob/M in is_seeing)
-		if(M.s_active == storage && M.client)
+		if (M.s_active == storage && M.client)
 			cansee |= M
 		else
 			is_seeing -= M
@@ -240,5 +240,5 @@
 	if (adjusted_contents > 7)
 		row_num = round((adjusted_contents-1) / 7) // 7 is the maximum allowed width.
 	arrange_item_slots(row_num, col_count)
-	if(user && user.s_active)
+	if (user && user.s_active)
 		user.s_active.show_to(user)

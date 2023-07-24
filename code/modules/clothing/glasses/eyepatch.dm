@@ -16,7 +16,7 @@
 		return
 
 	src.flipped = !src.flipped
-	if(src.flipped)
+	if (src.flipped)
 		icon_state = "[icon_state]_r"
 	else
 		src.icon_state = initial(icon_state)
@@ -54,14 +54,14 @@
 /obj/item/clothing/glasses/eyepatch/hud/on_update_icon()
 	..()
 	overlays.Cut()
-	if(active)
+	if (active)
 		var/image/eye = overlay_image(icon, "[icon_state]_eye", flags=RESET_COLOR)
 		eye.color = eye_color
 		overlays += eye
 
 /obj/item/clothing/glasses/eyepatch/hud/get_mob_overlay(mob/user_mob, slot)
 	var/image/res = ..()
-	if(active)
+	if (active)
 		var/image/eye = overlay_image(res.icon, "[icon_state]_eye", flags=RESET_COLOR)
 		eye.color = eye_color
 		eye.layer = FLOAT_LAYER

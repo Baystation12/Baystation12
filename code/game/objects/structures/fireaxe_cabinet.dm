@@ -15,10 +15,10 @@
 	attack_animation(user)
 	playsound(user, 'sound/effects/Glasshit.ogg', 50, 1)
 	visible_message(SPAN_DANGER("[user] [attack_verb] \the [src]!"))
-	if(damage_threshold > damage)
+	if (damage_threshold > damage)
 		to_chat(user, SPAN_DANGER("Your strike is deflected by the reinforced glass!"))
 		return
-	if(shattered)
+	if (shattered)
 		return
 	shattered = 1
 	unlocked = 1
@@ -28,11 +28,11 @@
 
 /obj/structure/fireaxecabinet/on_update_icon()
 	overlays.Cut()
-	if(fireaxe)
+	if (fireaxe)
 		overlays += image(icon, "fireaxe_item")
-	if(shattered)
+	if (shattered)
 		overlays += image(icon, "fireaxe_window_broken")
-	else if(!open)
+	else if (!open)
 		overlays += image(icon, "fireaxe_window")
 
 /obj/structure/fireaxecabinet/New()
@@ -41,22 +41,22 @@
 	update_icon()
 
 /obj/structure/fireaxecabinet/attack_hand(mob/user)
-	if(!unlocked)
+	if (!unlocked)
 		to_chat(user, SPAN_WARNING("\The [src] is locked."))
 		return
 	toggle_open(user)
 
 /obj/structure/fireaxecabinet/MouseDrop(over_object, src_location, over_location)
-	if(over_object == usr)
+	if (over_object == usr)
 		var/mob/user = over_object
-		if(!istype(user))
+		if (!istype(user))
 			return
 
-		if(!open)
+		if (!open)
 			to_chat(user, SPAN_WARNING("\The [src] is closed."))
 			return
 
-		if(!fireaxe)
+		if (!fireaxe)
 			to_chat(user, SPAN_WARNING("\The [src] is empty."))
 			return
 
@@ -67,7 +67,7 @@
 	return
 
 /obj/structure/fireaxecabinet/Destroy()
-	if(fireaxe)
+	if (fireaxe)
 		fireaxe.dropInto(loc)
 		fireaxe = null
 	return ..()
@@ -131,7 +131,7 @@
 
 
 /obj/structure/fireaxecabinet/proc/toggle_open(mob/user)
-	if(shattered)
+	if (shattered)
 		open = 1
 		unlocked = 1
 	else

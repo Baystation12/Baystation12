@@ -14,12 +14,12 @@
 		to_chat(usr, "Error: you are not an admin!")
 		return
 
-	if(!(locate(/obj/machinery/power/fusion_core/mapped) in world))
+	if (!(locate(/obj/machinery/power/fusion_core/mapped) in world))
 		to_chat(usr, "This map is not appropriate for this verb.")
 		return
 
 	var/response = input(usr, "Are you sure?", "Engine setup") as null|anything in list("No", "Yes")
-	if(!response || response == "No")
+	if (!response || response == "No")
 		return
 
 	var/errors = 0
@@ -33,38 +33,38 @@
 		injector.BeginInjecting()
 
 	var/obj/machinery/power/fusion_core/mapped/core = locate() in SSmachines.machinery
-	if(core.jumpstart(15000))
+	if (core.jumpstart(15000))
 		var/list/delayed_objects = list()
 
 		// SETUP PHASE
 		for(var/obj/effect/engine_setup/S in world)
 			var/result = S.activate(0)
 			switch(result)
-				if(SETUP_OK)
+				if (SETUP_OK)
 					success++
 					continue
-				if(SETUP_WARNING)
+				if (SETUP_WARNING)
 					warnings++
 					continue
-				if(SETUP_ERROR)
+				if (SETUP_ERROR)
 					errors++
 					log_and_message_admins("## FUSION CORE SETUP - Error encountered! Aborting.")
 					break
-				if(SETUP_DELAYED)
+				if (SETUP_DELAYED)
 					delayed_objects.Add(S)
 					continue
 
-		if(!errors)
+		if (!errors)
 			for(var/obj/effect/engine_setup/S in delayed_objects)
 				var/result = S.activate(1)
 				switch(result)
-					if(SETUP_OK)
+					if (SETUP_OK)
 						success++
 						continue
-					if(SETUP_WARNING)
+					if (SETUP_WARNING)
 						warnings++
 						continue
-					if(SETUP_ERROR)
+					if (SETUP_ERROR)
 						errors++
 						log_and_message_admins("## FUSION CORE SETUP - Error encountered! Aborting.")
 						break

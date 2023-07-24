@@ -16,13 +16,13 @@
 
 /singleton/closet_appearance/New()
 	// Build our colour and decal lists.
-	if(LAZYLEN(extra_decals))
-		if(!decals)
+	if (LAZYLEN(extra_decals))
+		if (!decals)
 			decals = list()
 		for(var/thing in extra_decals)
 			decals[thing] = extra_decals[thing]
 	for(var/thing in decals)
-		if(isnull(decals[thing]))
+		if (isnull(decals[thing]))
 			decals[thing] = color
 
 	// Declare storage vars for icons.
@@ -40,7 +40,7 @@
 	open_icon.Blend(icon(base_icon, "open"), ICON_OVERLAY)
 	open_icon.Blend(color, BLEND_ADD)
 	open_icon.Blend(icon(base_icon, "interior"), ICON_OVERLAY)
-	if(decal_icon)
+	if (decal_icon)
 		for(var/thing in decals)
 			var/icon/this_decal_icon = icon(decal_icon, "[thing]_open")
 			this_decal_icon.Blend(decals[thing], BLEND_ADD)
@@ -48,10 +48,10 @@
 
 	// Generate basic closed icons.
 	closed_emagged_icon = icon(base_icon, "base")
-	if(can_lock)
+	if (can_lock)
 		closed_emagged_icon.Blend(icon(base_icon, "lock"), ICON_OVERLAY)
 	closed_emagged_icon.Blend(color, BLEND_ADD)
-	if(decal_icon)
+	if (decal_icon)
 		for(var/thing in decals)
 			var/icon/this_decal_icon = icon(decal_icon, thing)
 			this_decal_icon.Blend(decals[thing], BLEND_ADD)
@@ -60,7 +60,7 @@
 	closed_unlocked_icon = icon(closed_emagged_icon)
 
 	// Add lock lights.
-	if(can_lock)
+	if (can_lock)
 		var/icon/light = icon(base_icon, "light")
 		light.Blend(COLOR_RED, BLEND_ADD)
 		closed_locked_icon.Blend(light, ICON_OVERLAY)

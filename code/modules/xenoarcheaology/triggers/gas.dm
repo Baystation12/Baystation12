@@ -4,7 +4,7 @@
 	var/list/gas_needed	//list of gas=percentage needed in air to activate
 
 /datum/artifact_trigger/gas/New()
-	if(!gas_needed)
+	if (!gas_needed)
 		//pick from the subtypes traits if we don't spawn as one
 		var/gas = pick(GAS_CO2, GAS_OXYGEN, GAS_NITROGEN, GAS_PHORON)
 		name = "concentration of [gas]"
@@ -14,7 +14,7 @@
 	. = TRUE
 	for(var/g in gas_needed)
 		var/percentage = round(gas.gas[g]/gas.total_moles * 100, 0.01)
-		if(percentage < gas_needed[g])
+		if (percentage < gas_needed[g])
 			return FALSE
 
 /datum/artifact_trigger/gas/co2

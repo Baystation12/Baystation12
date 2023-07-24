@@ -16,15 +16,15 @@
 		to_chat(user, "The device hasn't been linked to a transport network.")
 
 /obj/item/device/drone_designator/proc/recursive_validate_contents(atom/A, depth = 1)
-	if(depth >= 4)
+	if (depth >= 4)
 		return TRUE
-	if(istype(A, /obj/machinery/stasis_cage))
+	if (istype(A, /obj/machinery/stasis_cage))
 		return TRUE //This is fine
-	if(istype(A,/mob/living))
+	if (istype(A,/mob/living))
 		return FALSE
 
 	for(var/atom/B as anything in A)
-		if(!recursive_validate_contents(B, depth + 1))
+		if (!recursive_validate_contents(B, depth + 1))
 			return FALSE
 
 	return TRUE
@@ -48,7 +48,7 @@
 	if (lan)
 		var/list/drone_pads = lan.get_devices(/obj/machinery/drone_pad)
 		for(var/obj/machinery/drone_pad/pad in drone_pads)
-			if(pad.attempt_to_transport(target, user, src))
+			if (pad.attempt_to_transport(target, user, src))
 				return
 		to_chat(user, SPAN_WARNING("It would seem there are no available drones to process this request!"))
 	else
@@ -70,9 +70,9 @@
 		var/datum/beam/B = user.Beam(BeamTarget = T, icon_state = "n_beam", maxdistance = get_dist(user, T), beam_type = /obj/effect/ebeam)
 		user.visible_message(SPAN_NOTICE("\The [user] points \the [src] at \the [target]."))
 		playsound(src,'sound/effects/scanbeep.ogg',30,0)
-		if(do_after(user, 2 SECONDS, target, (DO_PUBLIC_UNIQUE & ~DO_USER_SAME_HAND) | DO_MOVE_CHECKS_TURFS))
+		if (do_after(user, 2 SECONDS, target, (DO_PUBLIC_UNIQUE & ~DO_USER_SAME_HAND) | DO_MOVE_CHECKS_TURFS))
 			QDEL_NULL(B)
-			if(!validate_target(target, user)) //Repeat checks
+			if (!validate_target(target, user)) //Repeat checks
 				return
 
 			perform_pickup(target, user)
@@ -127,7 +127,7 @@
 		if (network && operable())
 			overlays += emissive_appearance(icon, "pad_waiting")
 			overlays += image(icon, "pad_waiting")
-	if(panel_open)
+	if (panel_open)
 		overlays += image(icon, "pad_maintenance")
 
 /obj/machinery/drone_pad/examine(mob/user, distance)
@@ -204,7 +204,7 @@
 	update_icon()
 
 /obj/machinery/drone_pad/proc/attempt_to_transport(obj/target, mob/user, obj/item/device/drone_designator/designator)
-	if(inoperable())
+	if (inoperable())
 		return FALSE
 
 	if (current_flight)

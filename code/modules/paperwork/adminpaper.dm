@@ -82,12 +82,12 @@
 
 
 /obj/item/paper/admin/Topic(href, href_list)
-	if(href_list["write"])
+	if (href_list["write"])
 		var/id = href_list["write"]
 
 		var/t =  sanitize(input("Enter what you want to write:", "Write", unformatedText, null) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
 
-		if(!t)
+		if (!t)
 			return
 
 		var last_fields_value = fields
@@ -99,12 +99,12 @@
 		t = parsepencode(t, null, null, isCrayon, null, TRUE) // Encode everything from pencode to html
 
 
-		if(fields > 50)//large amount of fields creates a heavy load on the server, see updateinfolinks() and addtofield()
+		if (fields > 50)//large amount of fields creates a heavy load on the server, see updateinfolinks() and addtofield()
 			to_chat(usr, SPAN_WARNING("Too many fields. Sorry, you can't do this."))
 			fields = last_fields_value
 			return
 
-		if(id!="end")
+		if (id!="end")
 			addtofield(text2num(id), t) // He wants to edit a field, let him.
 		else
 			info = t // set the file to the new text
@@ -118,45 +118,45 @@
 		update_icon()
 		return
 
-	if(href_list["confirm"])
+	if (href_list["confirm"])
 		switch(alert("Are you sure you want to send the fax as is?",, "Yes", "No"))
-			if("Yes")
-				if(headerOn)
+			if ("Yes")
+				if (headerOn)
 					info = header + info
-				if(footerOn)
+				if (footerOn)
 					info += footer
 				updateinfolinks()
 				close_browser(usr, "window=[name]")
 				admindatum.faxCallback(src)
 		return
 
-	if(href_list["penmode"])
+	if (href_list["penmode"])
 		isCrayon = !isCrayon
 		generateInteractions()
 		updateDisplay()
 		return
 
-	if(href_list["cancel"])
+	if (href_list["cancel"])
 		close_browser(usr, "window=[name]")
 		qdel(src)
 		return
 
-	if(href_list["clear"])
+	if (href_list["clear"])
 		clearpaper()
 		updateDisplay()
 		return
 
-	if(href_list["toggleheader"])
+	if (href_list["toggleheader"])
 		headerOn = !headerOn
 		updateDisplay()
 		return
 
-	if(href_list["togglefooter"])
+	if (href_list["togglefooter"])
 		footerOn = !footerOn
 		updateDisplay()
 		return
 
-	if(href_list["changelogo"])
+	if (href_list["changelogo"])
 		logo = input(usr, "What logo?", "Choose a logo", "") as null|anything in (logo_list)
 		generateHeader()
 		updateDisplay()

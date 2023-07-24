@@ -15,15 +15,15 @@
 	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/beast/antlion/mega)
 
 /obj/effect/overmap/visitable/sector/exoplanet/desert/generate_map()
-	if(prob(70))
+	if (prob(70))
 		lightlevel = rand(5,10)/10	//deserts are usually :lit:
 	..()
 
 /obj/effect/overmap/visitable/sector/exoplanet/desert/generate_atmosphere()
 	..()
-	if(atmosphere)
+	if (atmosphere)
 		var/limit = 1000
-		if(habitability_class <= HABITABILITY_OKAY)
+		if (habitability_class <= HABITABILITY_OKAY)
 			var/datum/species/human/H = /datum/species/human
 			limit = initial(H.heat_level_1) - rand(1,10)
 		atmosphere.temperature = min(T20C + rand(20, 100), limit)
@@ -31,14 +31,14 @@
 
 /obj/effect/overmap/visitable/sector/exoplanet/desert/adapt_seed(datum/seed/S)
 	..()
-	if(prob(90))
+	if (prob(90))
 		S.set_trait(TRAIT_REQUIRES_WATER,0)
 	else
 		S.set_trait(TRAIT_REQUIRES_WATER,1)
 		S.set_trait(TRAIT_WATER_CONSUMPTION,1)
-	if(prob(75))
+	if (prob(75))
 		S.set_trait(TRAIT_STINGS,1)
-	if(prob(75))
+	if (prob(75))
 		S.set_trait(TRAIT_CARNIVOROUS,2)
 	S.set_trait(TRAIT_SPREAD,0)
 
@@ -53,7 +53,7 @@
 /datum/random_map/noise/exoplanet/desert/get_additional_spawns(value, turf/T)
 	..()
 	var/v = noise2value(value)
-	if(v > 6 && prob(2))
+	if (v > 6 && prob(2))
 		new/obj/effect/quicksand(T)
 
 /area/exoplanet/desert
@@ -81,11 +81,11 @@
 	if (!can_unbuckle(user))
 		return
 	if (!user.stat && !user.restrained())
-		if(busy)
+		if (busy)
 			to_chat(user, SPAN_NOTICE("\The [buckled_mob] is already getting out, be patient."))
 			return
 		var/delay = 6 SECONDS
-		if(user == buckled_mob)
+		if (user == buckled_mob)
 			delay *=2
 			user.visible_message(
 				SPAN_NOTICE("\The [user] tries to climb out of \the [src]."),
@@ -99,10 +99,10 @@
 				SPAN_NOTICE("You hear water sloshing.")
 				)
 		busy = TRUE
-		if(do_after(user, delay, src, DO_PUBLIC_UNIQUE) && can_unbuckle(user))
+		if (do_after(user, delay, src, DO_PUBLIC_UNIQUE) && can_unbuckle(user))
 			busy = FALSE
-			if(user == buckled_mob)
-				if(prob(80))
+			if (user == buckled_mob)
+				if (prob(80))
 					to_chat(user, SPAN_WARNING("You slip and fail to get out!"))
 					return
 				user.visible_message(SPAN_NOTICE("\The [buckled_mob] pulls himself out of \the [src]."))
@@ -123,15 +123,15 @@
 	update_icon()
 
 /obj/effect/quicksand/on_update_icon()
-	if(!exposed)
+	if (!exposed)
 		return
 	icon_state = "open"
 	overlays.Cut()
-	if(buckled_mob)
+	if (buckled_mob)
 		overlays += image(icon,icon_state="overlay",layer=ABOVE_HUMAN_LAYER)
 
 /obj/effect/quicksand/proc/expose()
-	if(exposed)
+	if (exposed)
 		return
 	visible_message(SPAN_WARNING("The upper crust breaks, exposing the treacherous quicksand underneath!"))
 	SetName(initial(name))
@@ -151,11 +151,11 @@
 
 
 /obj/effect/quicksand/Crossed(atom/movable/AM)
-	if(isliving(AM))
+	if (isliving(AM))
 		var/mob/living/L = AM
-		if(L.throwing || L.can_overcome_gravity() || !can_buckle(L))
+		if (L.throwing || L.can_overcome_gravity() || !can_buckle(L))
 			return
 		buckle_mob(L)
-		if(!exposed)
+		if (!exposed)
 			expose()
 		to_chat(L, SPAN_DANGER("You fall into \the [src]!"))

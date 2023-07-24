@@ -35,16 +35,16 @@
 		activate()
 
 /obj/item/implant/freedom/activate()
-	if(uses < 1 || malfunction)	return 0
-	if(remove_cuffs_and_unbuckle(imp_in))
+	if (uses < 1 || malfunction)	return 0
+	if (remove_cuffs_and_unbuckle(imp_in))
 		uses--
 		to_chat(imp_in, "You feel a faint click.")
 
 /obj/item/implant/freedom/proc/remove_cuffs_and_unbuckle(mob/living/carbon/user)
-	if(!user.handcuffed)
+	if (!user.handcuffed)
 		return 0
 	. = user.unEquip(user.handcuffed)
-	if(. && user.buckled && user.buckled.buckle_require_restraints)
+	if (. && user.buckled && user.buckled.buckle_require_restraints)
 		user.buckled.unbuckle_mob()
 	return
 

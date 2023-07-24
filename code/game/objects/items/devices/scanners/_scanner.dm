@@ -37,23 +37,23 @@
 	return TRUE
 
 /obj/item/device/scanner/afterattack(atom/A, mob/user, proximity)
-	if(!proximity)
+	if (!proximity)
 		return
-	if(!can_use(user))
+	if (!can_use(user))
 		return
-	if(is_valid_scan_target(A))
+	if (is_valid_scan_target(A))
 		user.visible_message(
 			SPAN_NOTICE("\The [user] runs \the [src] over \the [A]."),
 			SPAN_NOTICE("You run \the [src] over \the [A]."),
 			range = 2
 		)
-		if(scan_sound)
+		if (scan_sound)
 			playsound(src, scan_sound, 30)
-		if(use_delay && !do_after(user, use_delay, A, DO_PUBLIC_UNIQUE))
+		if (use_delay && !do_after(user, use_delay, A, DO_PUBLIC_UNIQUE))
 			to_chat(user, "You stop scanning \the [A] with \the [src].")
 			return
 		scan(A, user)
-		if(!scan_title)
+		if (!scan_title)
 			scan_title = "[capitalize(name)] scan - [A]"
 	else
 		to_chat(user, "You cannot get any results from \the [A] with \the [src].")
@@ -69,28 +69,28 @@
 	set src = usr
 
 	var/mob/user = usr
-	if(!istype(user))
+	if (!istype(user))
 		return
 	if (user.incapacitated())
 		return
 	print_report(user)
 
 /obj/item/device/scanner/OnTopic(user, list/href_list)
-	if(href_list["print"])
+	if (href_list["print"])
 		print_report(user)
 		return 1
-	if(href_list["clear"])
+	if (href_list["clear"])
 		to_chat(user, "You clear data buffer on [src].")
 		scan_data = null
 		scan_title = null
 		return 1
 
 /obj/item/device/scanner/proc/print_report(mob/living/user)
-	if(!scan_data)
+	if (!scan_data)
 		to_chat(user, "There is no scan data to print.")
 		return
 	var/obj/item/paper/P = new(get_turf(src), scan_data, "paper - [scan_title]")
-	if(printout_color)
+	if (printout_color)
 		P.color = printout_color
 	user.put_in_hands(P)
 	user.visible_message("\The [src] spits out a piece of paper.")

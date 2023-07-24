@@ -47,7 +47,7 @@
 
 
 /obj/item/paper/talisman/attack_self(mob/living/user)
-	if(iscultist(user))
+	if (iscultist(user))
 		to_chat(user, "Attack your target to use this talisman.")
 	else
 		to_chat(user, "You see strange symbols on the paper. Are they supposed to mean something?")

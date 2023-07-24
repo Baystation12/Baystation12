@@ -63,7 +63,7 @@
 
 /obj/item/integrated_circuit/time/delay/custom/do_work()
 	var/delay_input = get_pin_data(IC_INPUT, 1)
-	if(delay_input && isnum(delay_input) )
+	if (delay_input && isnum(delay_input) )
 		var/new_delay = clamp(delay_input ,1 ,36000) //An hour.
 		delay = new_delay
 
@@ -83,23 +83,23 @@
 	power_draw_per_use = 4
 
 /obj/item/integrated_circuit/time/ticker/Destroy()
-	if(is_running)
+	if (is_running)
 		STOP_PROCESSING(SSfastprocess, src)
 	return ..()
 
 /obj/item/integrated_circuit/time/ticker/on_data_written()
 	var/do_tick = get_pin_data(IC_INPUT, 1)
-	if(do_tick && !is_running)
+	if (do_tick && !is_running)
 		is_running = TRUE
 		tick()
-	else if(!do_tick && is_running)
+	else if (!do_tick && is_running)
 		is_running = FALSE
 
 
 /obj/item/integrated_circuit/time/ticker/proc/tick()
-	if(is_running)
+	if (is_running)
 		addtimer(new Callback(src, .proc/tick), delay)
-		if(world.time > next_fire)
+		if (world.time > next_fire)
 			next_fire = world.time + delay
 			activate_pin(1)
 
@@ -118,7 +118,7 @@
 
 /obj/item/integrated_circuit/time/ticker/custom/on_data_written()
 	var/delay_input = get_pin_data(IC_INPUT, 2)
-	if(delay_input && isnum(delay_input) )
+	if (delay_input && isnum(delay_input) )
 		var/new_delay = clamp(delay_input ,1 ,1 HOURS)
 		delay = new_delay
 	..()

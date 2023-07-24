@@ -12,18 +12,18 @@
 	. = ..()
 	pixel_x = 0
 	pixel_y = 0
-	if(dir & NORTH)
+	if (dir & NORTH)
 		pixel_y = -32
-	else if(dir & SOUTH)
+	else if (dir & SOUTH)
 		pixel_y = 32
-	else if(dir & EAST)
+	else if (dir & EAST)
 		pixel_x = -32
-	else if(dir & WEST)
+	else if (dir & WEST)
 		pixel_x = 32
 
 /obj/structure/lift/proc/pressed(mob/user)
-	if(!istype(user, /mob/living/silicon))
-		if(user.a_intent == I_HURT)
+	if (!istype(user, /mob/living/silicon))
+		if (user.a_intent == I_HURT)
 			user.visible_message(SPAN_DANGER("\The [user] hammers on the lift button!"))
 		else
 			user.visible_message(SPAN_NOTICE("\The [user] presses the lift button."))
@@ -43,7 +43,7 @@
 	return interact(user)
 
 /obj/structure/lift/interact(mob/user)
-	if(!lift.is_functional())
+	if (!lift.is_functional())
 		return 0
 	return 1
 // End base.
@@ -58,7 +58,7 @@
 	mouse_opacity = 2 //No more eyestrain aiming at tiny pixels
 
 /obj/structure/lift/button/Destroy()
-	if(floor && floor.ext_panel == src)
+	if (floor && floor.ext_panel == src)
 		floor.ext_panel = null
 	floor = null
 	return ..()
@@ -68,11 +68,11 @@
 	update_icon()
 
 /obj/structure/lift/button/interact(mob/user)
-	if(!..())
+	if (!..())
 		return
 	light_up()
 	pressed(user)
-	if(floor == lift.current_floor)
+	if (floor == lift.current_floor)
 		lift.open_doors()
 		spawn(3)
 			reset()
@@ -84,7 +84,7 @@
 	update_icon()
 
 /obj/structure/lift/button/on_update_icon()
-	if(light_up)
+	if (light_up)
 		icon_state = "button_lit"
 	else
 		icon_state = initial(icon_state)
@@ -102,7 +102,7 @@
 	return interact(user)
 
 /obj/structure/lift/panel/interact(mob/user)
-	if(!..())
+	if (!..())
 		return
 
 	var/dat = list()
@@ -117,7 +117,7 @@
 		dat += "[SPAN_COLOR((floor in lift.queued_floors) ? COLOR_YELLOW : COLOR_WHITE, "<a href='?src=\ref[src];move_to_floor=["\ref[floor]"]'>[label]</a>: [floor.name]")]<br>"
 
 	dat += "<hr>"
-	if(lift.doors_are_open())
+	if (lift.doors_are_open())
 		dat += "<a href='?src=\ref[src];close_doors=1'>Close Doors</a><br>"
 	else
 		dat += "<a href='?src=\ref[src];open_doors=1'>Open Doors</a><br>"
@@ -130,20 +130,20 @@
 	return
 
 /obj/structure/lift/panel/OnTopic(user, href_list)
-	if(href_list["move_to_floor"])
+	if (href_list["move_to_floor"])
 		lift.queue_move_to(locate(href_list["move_to_floor"]))
 		. = TOPIC_REFRESH
-	if(href_list["open_doors"])
+	if (href_list["open_doors"])
 		lift.open_doors()
 		. = TOPIC_REFRESH
-	if(href_list["close_doors"])
+	if (href_list["close_doors"])
 		lift.close_doors()
 		. = TOPIC_REFRESH
-	if(href_list["emergency_stop"])
+	if (href_list["emergency_stop"])
 		lift.emergency_stop()
 		. = TOPIC_REFRESH
 
-	if(. == TOPIC_REFRESH)
+	if (. == TOPIC_REFRESH)
 		pressed(user)
 
 // End panel.

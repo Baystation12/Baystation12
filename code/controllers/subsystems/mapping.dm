@@ -50,14 +50,14 @@ SUBSYSTEM_DEF(mapping)
 	for(var/item in sortList(subtypesof(/datum/map_template), /proc/cmp_ruincost_priority))
 		var/datum/map_template/map_template_type = item
 		// screen out the abstract subtypes
-		if(!initial(map_template_type.id))
+		if (!initial(map_template_type.id))
 			continue
 		var/datum/map_template/MT = new map_template_type()
 
 		if (banned_maps)
 			var/is_banned = FALSE
 			for (var/mappath in MT.mappaths)
-				if(banned_maps.Find(mappath))
+				if (banned_maps.Find(mappath))
 					is_banned = TRUE
 					break
 			if (is_banned)
@@ -66,18 +66,18 @@ SUBSYSTEM_DEF(mapping)
 		map_templates[MT.name] = MT
 
 		// This is nasty..
-		if(istype(MT, /datum/map_template/ruin/exoplanet))
+		if (istype(MT, /datum/map_template/ruin/exoplanet))
 			exoplanet_ruins_templates[MT.name] = MT
-		else if(istype(MT, /datum/map_template/ruin/space))
+		else if (istype(MT, /datum/map_template/ruin/space))
 			space_ruins_templates[MT.name] = MT
-		else if(istype(MT, /datum/map_template/ruin/away_site))
+		else if (istype(MT, /datum/map_template/ruin/away_site))
 			away_sites_templates[MT.name] = MT
 
 /proc/generateMapList(filename)
 	RETURN_TYPE(/list)
 	var/list/potentialMaps = list()
 	var/list/Lines = world.file2list(filename)
-	if(!length(Lines))
+	if (!length(Lines))
 		return
 	for (var/t in Lines)
 		if (!t)

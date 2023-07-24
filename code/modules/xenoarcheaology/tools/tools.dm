@@ -48,7 +48,7 @@
 	interact(user)
 
 /obj/item/device/ano_scanner/interact(mob/living/user)
-	if(world.time - last_scan_time >= scan_delay)
+	if (world.time - last_scan_time >= scan_delay)
 		last_scan_time = world.time
 
 		var/nearestTargetDist = -1
@@ -58,27 +58,27 @@
 		var/turf/cur_turf = get_turf(src)
 
 		for (var/turf/simulated/mineral/T as anything in GLOB.xeno_artifact_turfs)
-			if(T.density && T.artifact_find)
-				if(T.z == cur_turf.z)
+			if (T.density && T.artifact_find)
+				if (T.z == cur_turf.z)
 					var/cur_dist = get_dist(cur_turf, T) * 2
-					if(nearestTargetDist < 0 || cur_dist < nearestTargetDist)
+					if (nearestTargetDist < 0 || cur_dist < nearestTargetDist)
 						nearestTargetDist = cur_dist + rand() * 2 - 1
 						nearestTargetId = T.artifact_find.artifact_id
 			else
 				GLOB.xeno_artifact_turfs -= T
 
 		for(var/turf/simulated/mineral/T as anything in GLOB.xeno_digsite_turfs)
-			if(T.density && T.finds && length(T.finds))
-				if(T.z == cur_turf.z)
+			if (T.density && T.finds && length(T.finds))
+				if (T.z == cur_turf.z)
 					var/cur_dist = get_dist(cur_turf, T) * 2
-					if(nearestSimpleTargetDist < 0 || cur_dist < nearestSimpleTargetDist)
+					if (nearestSimpleTargetDist < 0 || cur_dist < nearestSimpleTargetDist)
 						nearestSimpleTargetDist = cur_dist + rand() * 2 - 1
 			else
 				GLOB.xeno_digsite_turfs -= T
 
-		if(nearestTargetDist >= 0)
+		if (nearestTargetDist >= 0)
 			to_chat(user, SPAN_NOTICE("Exotic energy detected on wavelength '[nearestTargetId]' in a radius of [nearestTargetDist]m[nearestSimpleTargetDist > 0 ? "; small anomaly detected in a radius of [nearestSimpleTargetDist]m" : ""]"))
-		else if(nearestSimpleTargetDist >= 0)
+		else if (nearestSimpleTargetDist >= 0)
 			to_chat(user, SPAN_NOTICE("Small anomaly detected in a radius of [nearestSimpleTargetDist]m."))
 		else
 			to_chat(user, SPAN_NOTICE("Background radiation levels detected."))
@@ -111,9 +111,9 @@
 /obj/item/device/depth_scanner/proc/scan_atom(mob/user, atom/A)
 	user.visible_message(SPAN_NOTICE("\The [user] scans \the [A], the air around them humming gently."))
 
-	if(istype(A, /turf/simulated/mineral))
+	if (istype(A, /turf/simulated/mineral))
 		var/turf/simulated/mineral/M = A
-		if((M.finds && length(M.finds)) || M.artifact_find)
+		if ((M.finds && length(M.finds)) || M.artifact_find)
 
 			//create a new scanlog entry
 			var/datum/depth_scan/D = new()
@@ -123,7 +123,7 @@
 			D.material = M.mineral ? M.mineral.ore_name : "Rock"
 
 			//find the first artifact and store it
-			if(length(M.finds))
+			if (length(M.finds))
 				var/datum/find/F = M.finds[1]
 				D.depth = "[F.excavation_required - F.clearance_range] - [F.excavation_required]"
 				D.clearance = F.clearance_range
@@ -134,9 +134,9 @@
 			to_chat(user, SPAN_NOTICE("[icon2html(src, user)] [src] pings."))
 			playsound(loc, 'sound/machines/twobeep.ogg', 40)
 
-	else if(istype(A, /obj/structure/boulder))
+	else if (istype(A, /obj/structure/boulder))
 		var/obj/structure/boulder/B = A
-		if(B.artifact_find)
+		if (B.artifact_find)
 			//create a new scanlog entry
 			var/datum/depth_scan/D = new()
 			D.coords = "[B.x]:[B.y]:[B.z]"
@@ -164,7 +164,7 @@
 
 	dat += "<A href='?src=\ref[src];clear=0'>== Clear all ==</a><br>"
 
-	if(current)
+	if (current)
 		dat += "Time: [current.time]<br>"
 		dat += "Coords: [current.coords]<br>"
 		dat += "Anomaly depth: [current.depth] cm<br>"
@@ -179,7 +179,7 @@
 		dat += "Select an entry from the list<br>"
 		dat += "<br><br><br><br>"
 	dat += "<hr>"
-	if(length(positive_locations))
+	if (length(positive_locations))
 		for(var/index = 1 to length(positive_locations))
 			var/datum/depth_scan/D = positive_locations[index]
 			dat += "<A href='?src=\ref[src];select=[index]'>[D.time], coords: [D.coords]</a><br>"
@@ -195,15 +195,15 @@
 	onclose(user, "depth_scanner")
 
 /obj/item/device/depth_scanner/OnTopic(user, href_list)
-	if(href_list["select"])
+	if (href_list["select"])
 		var/index = text2num(href_list["select"])
-		if(index && index <= length(positive_locations))
+		if (index && index <= length(positive_locations))
 			current = positive_locations[index]
 		. = TOPIC_REFRESH
-	else if(href_list["clear"])
+	else if (href_list["clear"])
 		var/index = text2num(href_list["clear"])
-		if(index)
-			if(index <= length(positive_locations))
+		if (index)
+			if (index <= length(positive_locations))
 				var/datum/depth_scan/D = positive_locations[index]
 				positive_locations.Remove(D)
 				qdel(D)
@@ -212,7 +212,7 @@
 			positive_locations = list()
 			QDEL_NULL(current)
 		. = TOPIC_REFRESH
-	else if(href_list["close"])
+	else if (href_list["close"])
 		close_browser(user, "window=depth_scanner")
 		return TOPIC_HANDLED
 
@@ -231,11 +231,11 @@
 	var/zlevels = GetConnectedZlevels(T.z)
 	var/cur_dist = world.maxx+world.maxy
 	for(var/obj/machinery/tele_beacon/R in world)
-		if(!R.functioning())
+		if (!R.functioning())
 			continue
-		if(R.z in zlevels)
+		if (R.z in zlevels)
 			var/check_dist = get_dist(src,R)
-			if(check_dist < cur_dist)
+			if (check_dist < cur_dist)
 				cur_dist = check_dist
 				. = weakref(R)
 
@@ -258,20 +258,20 @@
 	onclose(user, "locater")
 
 /obj/item/pinpointer/radio/OnTopic(user, href_list)
-	if(href_list["toggle"])
+	if (href_list["toggle"])
 		toggle(user)
 		. = TOPIC_REFRESH
 
-	if(href_list["reset_tracking"])
+	if (href_list["reset_tracking"])
 		target = acquire_target()
 		. = TOPIC_REFRESH
 
-	else if(href_list["freq"])
+	else if (href_list["freq"])
 		var/new_frequency = (tracking_freq + text2num(href_list["freq"]))
 		if (new_frequency < 1200 || new_frequency > 1600)
 			new_frequency = sanitize_frequency(new_frequency, 1499)
 		tracking_freq = new_frequency
 		. = TOPIC_REFRESH
 
-	if(. == TOPIC_REFRESH)
+	if (. == TOPIC_REFRESH)
 		interact(user)

@@ -276,7 +276,7 @@
 	set_dir(dir) //Theres ways to make vis contents inherit dir but eh
 
 /obj/aura/mobshield/Destroy()
-	if(user)
+	if (user)
 		GLOB.dir_set_event.unregister(user, src, /obj/aura/mechshield/proc/update_dir)
 		user.vis_contents -= src
 	. = ..()
@@ -289,7 +289,7 @@
 
 		var/bad_arc = reverse_direction(user.dir) //arc of directions from which we cannot block
 
-		if(check_shield_arc(user, bad_arc, source, attacker))
+		if (check_shield_arc(user, bad_arc, source, attacker))
 			effective_block = 100 //Front and sides
 		else
 			effective_block = 0 //From behind

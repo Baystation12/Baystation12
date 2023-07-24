@@ -21,59 +21,59 @@
 
 /datum/wires/fabricator/CanUse()
 	var/obj/machinery/fabricator/A = holder
-	if(A.panel_open)
+	if (A.panel_open)
 		return 1
 	return 0
 
 /datum/wires/fabricator/UpdateCut(index, mended)
 	var/obj/machinery/fabricator/A = holder
 	switch(index)
-		if(AUTOLATHE_HACK_WIRE)
-			if(mended)
+		if (AUTOLATHE_HACK_WIRE)
+			if (mended)
 				A.fab_status_flags &= ~FAB_HACKED
 			else
 				A.fab_status_flags |= FAB_HACKED
-		if(AUTOLATHE_SHOCK_WIRE)
-			if(mended)
+		if (AUTOLATHE_SHOCK_WIRE)
+			if (mended)
 				A.fab_status_flags &= ~FAB_SHOCKED
 			else
 				A.fab_status_flags |= FAB_SHOCKED
-		if(AUTOLATHE_DISABLE_WIRE)
-			if(mended)
+		if (AUTOLATHE_DISABLE_WIRE)
+			if (mended)
 				A.fab_status_flags &= ~FAB_DISABLED
 			else
 				A.fab_status_flags |= FAB_DISABLED
 
 /datum/wires/fabricator/UpdatePulsed(index)
-	if(IsIndexCut(index))
+	if (IsIndexCut(index))
 		return
 	var/obj/machinery/fabricator/A = holder
 	switch(index)
-		if(AUTOLATHE_HACK_WIRE)
-			if(A.fab_status_flags & FAB_HACKED)
+		if (AUTOLATHE_HACK_WIRE)
+			if (A.fab_status_flags & FAB_HACKED)
 				A.fab_status_flags &= ~FAB_HACKED
 			else
 				A.fab_status_flags |= FAB_HACKED
 			spawn(50)
-				if(A && !IsIndexCut(index))
+				if (A && !IsIndexCut(index))
 					A.fab_status_flags &= ~FAB_HACKED
 					Interact(usr)
-		if(AUTOLATHE_SHOCK_WIRE)
-			if(A.fab_status_flags & FAB_SHOCKED)
+		if (AUTOLATHE_SHOCK_WIRE)
+			if (A.fab_status_flags & FAB_SHOCKED)
 				A.fab_status_flags &= ~FAB_SHOCKED
 			else
 				A.fab_status_flags |= FAB_SHOCKED
 			spawn(50)
-				if(A && !IsIndexCut(index))
+				if (A && !IsIndexCut(index))
 					A.fab_status_flags &= ~FAB_SHOCKED
 					Interact(usr)
-		if(AUTOLATHE_DISABLE_WIRE)
-			if(A.fab_status_flags & FAB_DISABLED)
+		if (AUTOLATHE_DISABLE_WIRE)
+			if (A.fab_status_flags & FAB_DISABLED)
 				A.fab_status_flags &= ~FAB_DISABLED
 			else
 				A.fab_status_flags |= FAB_DISABLED
 			spawn(50)
-				if(A && !IsIndexCut(index))
+				if (A && !IsIndexCut(index))
 					A.fab_status_flags &= ~FAB_DISABLED
 					Interact(usr)
 

@@ -4,14 +4,14 @@
 
 /datum/admin_secret_item/fun_secret/waddle/do_execute(mob/user)
 	waddling = !waddling
-	if(waddling)
+	if (waddling)
 		GLOB.moved_event.register_global(src, .proc/waddle)
 	else
 		GLOB.moved_event.unregister_global(src, .proc/waddle)
 
 /datum/admin_secret_item/fun_secret/waddle/proc/waddle(atom/movable/AM)
 	var/mob/living/L = AM
-	if(!istype(L) || L.incapacitated() || L.lying)
+	if (!istype(L) || L.incapacitated() || L.lying)
 		return
 	animate(L, pixel_z = 4, time = 0)
 	animate(

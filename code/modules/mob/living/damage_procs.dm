@@ -8,21 +8,21 @@
 	standard 0 if fail
 */
 /mob/living/proc/apply_damage(damage = 0, damagetype = DAMAGE_BRUTE, def_zone = null, damage_flags = EMPTY_BITFIELD, used_weapon, armor_pen, silent = FALSE)
-	if(!damage)
+	if (!damage)
 		return FALSE
 
 	var/list/after_armor = modify_damage_by_armor(def_zone, damage, damagetype, damage_flags, src, armor_pen, silent)
 	damage = after_armor[1]
 	damagetype = after_armor[2]
 	damage_flags = after_armor[3] // args modifications in case of parent calls
-	if(!damage)
+	if (!damage)
 		return FALSE
 
 	switch(damagetype)
 		if (DAMAGE_BRUTE)
 			adjustBruteLoss(damage)
 		if (DAMAGE_BURN)
-			if(MUTATION_COLD_RESISTANCE in mutations)
+			if (MUTATION_COLD_RESISTANCE in mutations)
 				damage = 0
 			adjustFireLoss(damage)
 		if (DAMAGE_TOXIN)
@@ -43,7 +43,7 @@
 
 
 /mob/living/proc/apply_radiation(damage = 0)
-	if(!damage)
+	if (!damage)
 		return FALSE
 
 	radiation += damage
@@ -53,9 +53,9 @@
 /mob/living/proc/apply_damages(brute = 0, burn = 0, tox = 0, oxy = 0, clone = 0, halloss = 0, def_zone = null, damage_flags = 0)
 	if (brute)
 		apply_damage(brute, DAMAGE_BRUTE, def_zone)
-	if(burn)
+	if (burn)
 		apply_damage(burn, DAMAGE_BURN, def_zone)
-	if(tox)
+	if (tox)
 		apply_damage(tox, DAMAGE_TOXIN, def_zone)
 	if (oxy)
 		apply_damage(oxy, DAMAGE_OXY, def_zone)
@@ -67,7 +67,7 @@
 
 
 /mob/living/proc/apply_effect(effect = 0, effecttype = EFFECT_STUN, blocked = 0)
-	if(!effect || (blocked >= 100))	return FALSE
+	if (!effect || (blocked >= 100))	return FALSE
 
 	switch(effecttype)
 		if (EFFECT_STUN)
@@ -79,7 +79,7 @@
 		if (EFFECT_PAIN)
 			adjustHalLoss(effect * blocked_mult(blocked))
 		if (EFFECT_STUTTER)
-			if(status_flags & CANSTUN) // stun is usually associated with stutter - TODO CANSTUTTER flag?
+			if (status_flags & CANSTUN) // stun is usually associated with stutter - TODO CANSTUTTER flag?
 				stuttering = max(stuttering, effect * blocked_mult(blocked))
 		if (EFFECT_EYE_BLUR)
 			eye_blurry = max(eye_blurry, effect * blocked_mult(blocked))

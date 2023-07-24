@@ -75,9 +75,9 @@
 	moonwalk = FALSE
 
 /datum/ai_holder/simple_animal/ranged/kiting/on_engagement(atom/A)
-	if(get_dist(holder, A) < run_if_this_close)
+	if (get_dist(holder, A) < run_if_this_close)
 		holder.IMove(get_step_away(holder, A, run_if_this_close))
-		if(moonwalk)
+		if (moonwalk)
 			holder.face_atom(A)
 
 // Closes distance from the target even while in range.
@@ -87,7 +87,7 @@
 	var/closest_distance = 1
 
 /datum/ai_holder/simple_animal/ranged/aggressive/on_engagement(atom/A)
-	if(get_dist(holder, A) > closest_distance)
+	if (get_dist(holder, A) > closest_distance)
 		holder.IMove(get_step_towards(holder, A))
 		holder.face_atom(A)
 
@@ -120,7 +120,7 @@
 /datum/ai_holder/simple_animal/melee/evasive
 
 /datum/ai_holder/simple_animal/melee/evasive/post_melee_attack(atom/A)
-	if(holder.Adjacent(A))
+	if (holder.Adjacent(A))
 		holder.IMove(get_step(holder, pick(GLOB.alldirs)))
 		holder.face_atom(A)
 
@@ -133,8 +133,8 @@
 
 // Used for the 'running' part of hit and run.
 /datum/ai_holder/simple_animal/melee/hit_and_run/special_flee_check()
-	if(!holder.is_cloaked())
-		if(isliving(target))
+	if (!holder.is_cloaked())
+		if (isliving(target))
 			var/mob/living/L = target
 			return !L.incapacitated(INCAPACITATION_DISABLED) // Don't flee if our target is stunned in some form, even if uncloaked. This is so the mob keeps attacking a stunned opponent.
 		return TRUE // We're out in the open, uncloaked, and our target isn't stunned, so lets flee.
@@ -180,10 +180,10 @@
 /datum/ai_holder/simple_animal/humanoid/hostile/post_ranged_attack(atom/A)
 	//Pick a random turf to step into
 	var/turf/T = get_step(holder, pick(GLOB.alldirs))
-	if(check_trajectory(A, T)) // Can we even hit them from there?
+	if (check_trajectory(A, T)) // Can we even hit them from there?
 		holder.IMove(T)
 		holder.face_atom(A)
 
-	if(get_dist(holder, A) < run_if_this_close)
+	if (get_dist(holder, A) < run_if_this_close)
 		holder.IMove(get_step_away(holder, A))
 		holder.face_atom(A)

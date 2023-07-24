@@ -9,7 +9,7 @@
 	..()
 
 /obj/item/stock_parts/circuitboard/stationalert/construct(obj/machinery/computer/station_alert/SA)
-	if(..(SA))
+	if (..(SA))
 		SA.unregister_monitor()
 
 		var/datum/nano_module/alarm_monitor/monitor = new(SA)
@@ -21,9 +21,9 @@
 		return 1
 
 /obj/item/stock_parts/circuitboard/stationalert/deconstruct(obj/machinery/computer/station_alert/SA)
-	if(..(SA))
+	if (..(SA))
 		alarm_handlers.Cut()
-		if(SA.alarm_monitor)
+		if (SA.alarm_monitor)
 			for(var/alarm_handler in SA.alarm_monitor.alarm_handlers)
 				alarm_handlers += alarm_handler
 		return 1

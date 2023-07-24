@@ -11,9 +11,9 @@
 		who = world
 	else
 		who = src
-	if(lawupdate)
+	if (lawupdate)
 		if (connected_ai)
-			if(connected_ai.stat || connected_ai.control_disabled)
+			if (connected_ai.stat || connected_ai.control_disabled)
 				to_chat(src, "<b>AI signal lost, unable to sync laws.</b>")
 
 			else
@@ -21,7 +21,7 @@
 				photosync()
 				to_chat(src, "<b>Laws synced with AI, be sure to note any changes.</b>")
 				// TODO: Update to new antagonist system.
-				if(mind && mind.special_role == "traitor" && mind.original == src)
+				if (mind && mind.special_role == "traitor" && mind.original == src)
 					to_chat(src, "<b>Remember, your AI does NOT share or know about your law 0.</b>")
 		else
 			to_chat(src, "<b>No AI selected to sync laws with, disabling lawsync protocol.</b>")

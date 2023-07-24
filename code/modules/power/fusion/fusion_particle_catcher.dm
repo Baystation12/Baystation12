@@ -18,13 +18,13 @@
 	UpdateSize()
 
 /obj/effect/fusion_particle_catcher/proc/AddParticles(name, quantity = 1)
-	if(parent && parent.size >= mysize)
+	if (parent && parent.size >= mysize)
 		parent.AddParticles(name, quantity)
 		return 1
 	return 0
 
 /obj/effect/fusion_particle_catcher/proc/UpdateSize()
-	if(parent.size >= mysize)
+	if (parent.size >= mysize)
 		set_density(1)
 		SetName("collector [mysize] ON")
 	else

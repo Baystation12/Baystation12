@@ -13,10 +13,10 @@
 	for(var/omt in subtypesof(/obj/effect/overmap))
 		var/obj/overmap = omt
 		var/color = initial(overmap.color)
-		if(!color || color == COLOR_WHITE)
+		if (!color || color == COLOR_WHITE)
 			invalid_overmap_types += omt
 
-	if(length(invalid_overmap_types))
+	if (length(invalid_overmap_types))
 		fail("Following /obj/effect/overmap types types have invalid colors: [english_list(invalid_overmap_types)]")
 	else
 		pass("All /obj/effect/overmap types have a valid color")

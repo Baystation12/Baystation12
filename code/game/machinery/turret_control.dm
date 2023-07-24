@@ -38,24 +38,24 @@
 	icon_state = "control_kill"
 
 /obj/machinery/turretid/Destroy()
-	if(control_area)
+	if (control_area)
 		var/area/A = control_area
-		if(A && istype(A))
+		if (A && istype(A))
 			A.turret_controls -= src
 	. = ..()
 
 /obj/machinery/turretid/Initialize()
-	if(!control_area)
+	if (!control_area)
 		control_area = get_area(src)
-	else if(istext(control_area))
+	else if (istext(control_area))
 		for(var/area/A in world)
-			if(A.name && A.name==control_area)
+			if (A.name && A.name==control_area)
 				control_area = A
 				break
 
-	if(control_area)
+	if (control_area)
 		var/area/A = control_area
-		if(istype(A))
+		if (istype(A))
 			A.turret_controls += src
 		else
 			control_area = null
@@ -64,34 +64,34 @@
 	. = ..()
 
 /obj/machinery/turretid/proc/isLocked(mob/user)
-	if(ailock && issilicon(user))
+	if (ailock && issilicon(user))
 		to_chat(user, SPAN_NOTICE("There seems to be a firewall preventing you from accessing this device."))
 		return 1
 
-	if(malf_upgraded && master_ai)
-		if((user == master_ai) || (user in master_ai.connected_robots))
+	if (malf_upgraded && master_ai)
+		if ((user == master_ai) || (user in master_ai.connected_robots))
 			return 0
 		return 1
 
-	if(locked && !issilicon(user))
+	if (locked && !issilicon(user))
 		to_chat(user, SPAN_NOTICE("Access denied."))
 		return 1
 
 	return 0
 
 /obj/machinery/turretid/CanUseTopic(mob/user)
-	if(isLocked(user))
+	if (isLocked(user))
 		return STATUS_CLOSE
 
 	return ..()
 
 /obj/machinery/turretid/attackby(obj/item/W, mob/user)
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		return
 
-	if(istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
-		if(src.allowed(usr))
-			if(emagged)
+	if (istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
+		if (src.allowed(usr))
+			if (emagged)
 				to_chat(user, SPAN_NOTICE("The turret control is unresponsive."))
 			else
 				locked = !locked
@@ -100,7 +100,7 @@
 	return ..()
 
 /obj/machinery/turretid/emag_act(remaining_charges, mob/user)
-	if(!emagged)
+	if (!emagged)
 		to_chat(user, SPAN_DANGER("You short out the turret controls' access analysis module."))
 		emagged = TRUE
 		req_access.Cut()
@@ -120,7 +120,7 @@
 	data["is_lethal"] = 1
 	data["lethal"] = lethal
 
-	if(data["access"])
+	if (data["access"])
 		var/settings[0]
 		settings[LIST_PRE_INC(settings)] = list("category" = "Neutralize All Non-Synthetics", "setting" = "check_synth", "value" = check_synth)
 		settings[LIST_PRE_INC(settings)] = list("category" = "Check Weapon Authorization", "setting" = "check_weapons", "value" = check_weapons)
@@ -138,36 +138,36 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/turretid/Topic(href, href_list)
-	if(..())
+	if (..())
 		return 1
 
 
-	if(href_list["command"] && href_list["value"])
+	if (href_list["command"] && href_list["value"])
 		var/log_action = null
 
 		var/list/toggle = list("disabled","enabled")
 
 		var/value = text2num(href_list["value"])
-		if(href_list["command"] == "enable")
+		if (href_list["command"] == "enable")
 			enabled = value
 			log_action = "[toggle[enabled+1]] the turrets"
-		else if(href_list["command"] == "lethal")
+		else if (href_list["command"] == "lethal")
 			lethal = value
 			log_action = "[toggle[lethal+1]] the turrets lethal mode."
-		else if(href_list["command"] == "check_synth")
+		else if (href_list["command"] == "check_synth")
 			check_synth = value
-		else if(href_list["command"] == "check_weapons")
+		else if (href_list["command"] == "check_weapons")
 			check_weapons = value
-		else if(href_list["command"] == "check_records")
+		else if (href_list["command"] == "check_records")
 			check_records = value
-		else if(href_list["command"] == "check_arrest")
+		else if (href_list["command"] == "check_arrest")
 			check_arrest = value
-		else if(href_list["command"] == "check_access")
+		else if (href_list["command"] == "check_access")
 			check_access = value
-		else if(href_list["command"] == "check_anomalies")
+		else if (href_list["command"] == "check_anomalies")
 			check_anomalies = value
 
-		if(!isnull(log_action))
+		if (!isnull(log_action))
 			log_and_message_admins("has [log_action]", usr, loc)
 
 		updateTurrets()
@@ -185,7 +185,7 @@
 	TC.check_anomalies = check_anomalies
 	TC.ailock = ailock
 
-	if(istype(control_area))
+	if (istype(control_area))
 		for (var/obj/machinery/porta_turret/aTurret in control_area)
 			aTurret.setState(TC)
 
@@ -193,7 +193,7 @@
 
 /obj/machinery/turretid/on_update_icon()
 	..()
-	if(!is_powered())
+	if (!is_powered())
 		icon_state = "control_off"
 		set_light(0)
 	else if (enabled)
@@ -208,7 +208,7 @@
 		set_light(1, 0.5, 2, 2, "#003300")
 
 /obj/machinery/turretid/emp_act(severity)
-	if(enabled)
+	if (enabled)
 		//if the turret is on, the EMP no matter how severe disables the turret for a while
 		//and scrambles its settings, with a slight chance of having an emag effect
 
@@ -224,7 +224,7 @@
 		updateTurrets()
 
 		spawn(rand(60,600))
-			if(!enabled)
+			if (!enabled)
 				enabled=1
 				updateTurrets()
 

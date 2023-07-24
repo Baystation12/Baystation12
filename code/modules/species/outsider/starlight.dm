@@ -28,7 +28,7 @@
 	)
 
 /datum/species/starlight/handle_death_check(mob/living/carbon/human/H)
-	if(H.health == 0)
+	if (H.health == 0)
 		return TRUE
 	return FALSE
 

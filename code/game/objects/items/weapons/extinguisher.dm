@@ -41,7 +41,7 @@
 /obj/item/extinguisher/Initialize()
 	. = ..()
 	create_reagents(max_water)
-	if(starting_water > 0)
+	if (starting_water > 0)
 		reagents.add_reagent(/datum/reagent/water, starting_water)
 
 /obj/item/extinguisher/empty
@@ -52,7 +52,7 @@
 
 /obj/item/extinguisher/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 0)
+	if (distance <= 0)
 		to_chat(user, text("[icon2html(src, viewers(get_turf(src)))] [] contains [] units of water left!", src, src.reagents.total_volume))
 
 /obj/item/extinguisher/attack_self(mob/user as mob)
@@ -63,10 +63,10 @@
 	return
 
 /obj/item/extinguisher/attack(mob/living/M, mob/user)
-	if(user.a_intent == I_HELP)
-		if(src.safety || (world.time < src.last_use + 20)) // We still catch help intent to not randomly attack people
+	if (user.a_intent == I_HELP)
+		if (src.safety || (world.time < src.last_use + 20)) // We still catch help intent to not randomly attack people
 			return
-		if(src.reagents.total_volume < 1)
+		if (src.reagents.total_volume < 1)
 			to_chat(user, SPAN_NOTICE("\The [src] is empty."))
 			return
 
@@ -80,15 +80,15 @@
 	return ..()
 
 /obj/item/extinguisher/proc/propel_object(obj/O, mob/user, movementdirection)
-	if(O.anchored) return
+	if (O.anchored) return
 
 	var/obj/structure/bed/chair/C
-	if(istype(O, /obj/structure/bed/chair))
+	if (istype(O, /obj/structure/bed/chair))
 		C = O
 
 	var/list/move_speed = list(1, 1, 1, 2, 2, 3)
 	for(var/i in 1 to 6)
-		if(C) C.propelled = (6-i)
+		if (C) C.propelled = (6-i)
 		O.Move(get_step(user,movementdirection), movementdirection)
 		sleep(move_speed[i])
 
@@ -142,12 +142,12 @@
 
 		var/direction = get_dir(target, src)
 
-		if(user.buckled && isobj(user.buckled))
+		if (user.buckled && isobj(user.buckled))
 			addtimer(new Callback(src, .proc/propel_object, user.buckled, user, direction), 0)
 
 		addtimer(new Callback(src, .proc/do_spray, target), 0)
 
-		if(!user.check_space_footing())
+		if (!user.check_space_footing())
 			step(user, direction)
 
 	else
@@ -158,7 +158,7 @@
 	var/turf/T = get_turf(Target)
 	var/per_particle = min(spray_amount, reagents.total_volume)/spray_particles
 	for(var/a = 1 to spray_particles)
-		if(!src || !reagents.total_volume) return
+		if (!src || !reagents.total_volume) return
 
 		var/obj/effect/effect/water/W = new /obj/effect/effect/water(get_turf(src))
 		W.create_reagents(per_particle)

@@ -168,10 +168,10 @@ var/global/list/datum/power/changeling/powerinstances = list()
 	set category = "Changeling"
 	set desc = "Level up!"
 
-	if(!usr || !usr.mind || !usr.mind.changeling)	return
+	if (!usr || !usr.mind || !usr.mind.changeling)	return
 	src = usr.mind.changeling
 
-	if(!length(powerinstances))
+	if (!length(powerinstances))
 		for(var/P in powers)
 			powerinstances += new P()
 
@@ -191,12 +191,12 @@ var/global/list/datum/power/changeling/powerinstances = list()
 					var filter_text = document.getElementById('filter');
 					var filter = filter_text.value.toLowerCase();
 
-					if(complete_list != null && complete_list != ""){
+					if (complete_list != null && complete_list != ""){
 						var mtbl = document.getElementById("maintable_data_archive");
 						mtbl.innerHTML = complete_list;
 					}
 
-					if(filter.value == ""){
+					if (filter.value == ""){
 						return;
 					}else{
 
@@ -206,7 +206,7 @@ var/global/list/datum/power/changeling/powerinstances = list()
 						{
 							try{
 								var tr = ltr\[i\];
-								if(tr.getAttribute("id").indexOf("data") != 0){
+								if (tr.getAttribute("id").indexOf("data") != 0){
 									continue;
 								}
 								var ltd = tr.getElementsByTagName("td");
@@ -248,7 +248,7 @@ var/global/list/datum/power/changeling/powerinstances = list()
 
 					body += "<span style='font-size: 13px; color: red'><b>"+helptext+"</b></span><BR>"
 
-					if(!ownsthis)
+					if (!ownsthis)
 					{
 						body += "<a href='?src=\ref[src];P="+power+"'>Evolve</a>"
 					}
@@ -268,19 +268,19 @@ var/global/list/datum/power/changeling/powerinstances = list()
 
 						var id = span.getAttribute("id");
 
-						if(!(id.indexOf("item")==0))
+						if (!(id.indexOf("item")==0))
 							continue;
 
 						var pass = 1;
 
 						for(var j = 0; j < locked_tabs.length; j++){
-							if(locked_tabs\[j\]==id){
+							if (locked_tabs\[j\]==id){
 								pass = 0;
 								break;
 							}
 						}
 
-						if(pass != 1)
+						if (pass != 1)
 							continue;
 
 
@@ -293,7 +293,7 @@ var/global/list/datum/power/changeling/powerinstances = list()
 				function addToLocked(id,link_id,notice_span_id){
 					var link = document.getElementById(link_id);
 					var decision = link.getAttribute("name");
-					if(decision == "1"){
+					if (decision == "1"){
 						link.setAttribute("name","2");
 					}else{
 						link.setAttribute("name","1");
@@ -303,12 +303,12 @@ var/global/list/datum/power/changeling/powerinstances = list()
 
 					var pass = 1;
 					for(var j = 0; j < locked_tabs.length; j++){
-						if(locked_tabs\[j\]==id){
+						if (locked_tabs\[j\]==id){
 							pass = 0;
 							break;
 						}
 					}
-					if(!pass)
+					if (!pass)
 						return;
 					locked_tabs.push(id);
 					var notice_span = document.getElementById(notice_span_id);
@@ -327,13 +327,13 @@ var/global/list/datum/power/changeling/powerinstances = list()
 					var index = 0;
 					var pass = 0;
 					for(var j = 0; j < locked_tabs.length; j++){
-						if(locked_tabs\[j\]==id){
+						if (locked_tabs\[j\]==id){
 							pass = 1;
 							index = j;
 							break;
 						}
 					}
-					if(!pass)
+					if (!pass)
 						return;
 					locked_tabs\[index\] = "";
 					var notice_span = document.getElementById(notice_span_id);
@@ -388,12 +388,12 @@ var/global/list/datum/power/changeling/powerinstances = list()
 	for(var/datum/power/changeling/P in powerinstances)
 		var/ownsthis = 0
 
-		if(P in purchasedpowers)
+		if (P in purchasedpowers)
 			ownsthis = 1
 
 
 		var/color = "#e6e6e6"
-		if(i%2 == 0)
+		if (i%2 == 0)
 			color = "#f2f2f2"
 
 
@@ -433,12 +433,12 @@ var/global/list/datum/power/changeling/powerinstances = list()
 
 /datum/changeling/Topic(href, href_list)
 	..()
-	if(!ismob(usr))
+	if (!ismob(usr))
 		return
 
-	if(href_list["P"])
+	if (href_list["P"])
 		var/datum/mind/M = usr.mind
-		if(!istype(M))
+		if (!istype(M))
 			return
 		purchasePower(M, href_list["P"])
 		call(/datum/changeling/proc/EvolutionMenu)()
@@ -446,7 +446,7 @@ var/global/list/datum/power/changeling/powerinstances = list()
 
 
 /datum/changeling/proc/purchasePower(datum/mind/M, Pname, remake_verbs = 1)
-	if(!M || !M.changeling)
+	if (!M || !M.changeling)
 		return
 
 	var/datum/power/changeling/Thepower = Pname
@@ -455,21 +455,21 @@ var/global/list/datum/power/changeling/powerinstances = list()
 	for (var/datum/power/changeling/P in powerinstances)
 //		log_debug("[P] - [Pname] = [P.name == Pname ? "True" : "False"]")
 
-		if(P.name == Pname)
+		if (P.name == Pname)
 			Thepower = P
 			break
 
 
-	if(Thepower == null)
+	if (Thepower == null)
 		to_chat(M.current, "This is awkward.  Changeling power purchase failed, please report this bug to a coder!")
 		return
 
-	if(Thepower in purchasedpowers)
+	if (Thepower in purchasedpowers)
 		to_chat(M.current, "We have already evolved this ability!")
 		return
 
 
-	if(geneticpoints < Thepower.genomecost)
+	if (geneticpoints < Thepower.genomecost)
 		to_chat(M.current, "We cannot evolve this... yet.  We must acquire more DNA.")
 		return
 
@@ -477,7 +477,7 @@ var/global/list/datum/power/changeling/powerinstances = list()
 
 	purchasedpowers += Thepower
 
-	if(!Thepower.isVerb && Thepower.verbpath)
+	if (!Thepower.isVerb && Thepower.verbpath)
 		call(M.current, Thepower.verbpath)()
-	else if(remake_verbs)
+	else if (remake_verbs)
 		M.current.make_changeling()

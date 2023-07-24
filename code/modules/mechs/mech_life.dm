@@ -5,38 +5,38 @@
 
 	for(var/thing in pilots)
 		var/mob/pilot = thing
-		if(pilot.loc != src) // Admin jump or teleport/grab.
-			if(pilot.client)
+		if (pilot.loc != src) // Admin jump or teleport/grab.
+			if (pilot.client)
 				pilot.client.screen -= hud_elements
 				LAZYREMOVE(pilots, pilot)
 				UNSETEMPTY(pilots)
 		update_pilots()
 
-	if(radio)
+	if (radio)
 		radio.on = (head && head.radio && head.radio.is_functional() && get_cell())
 
 	body.update_air(hatch_closed && use_air)
 
 	var/powered = FALSE
-	if(get_cell())
+	if (get_cell())
 		powered = get_cell().drain_power(0, 0, calc_power_draw()) > 0
 
-	if(!powered)
+	if (!powered)
 		//Shut down all systems
-		if(head)
+		if (head)
 			head.active_sensors = FALSE
 			hud_camera.queue_icon_update()
 		for(var/hardpoint in hardpoints)
 			var/obj/item/mech_equipment/M = hardpoints[hardpoint]
-			if(istype(M) && M.active && M.passive_power_use)
+			if (istype(M) && M.active && M.passive_power_use)
 				M.deactivate()
 
 
 	updatehealth()
-	if(health <= 0 && stat != DEAD)
+	if (health <= 0 && stat != DEAD)
 		death()
 
-	if(emp_damage > 0)
+	if (emp_damage > 0)
 		emp_damage -= min(1, emp_damage) //Reduce emp accumulation over time
 
 	..() //Handles stuff like environment
@@ -48,7 +48,7 @@
 
 /mob/living/exosuit/get_cell(force)
 	RETURN_TYPE(/obj/item/cell)
-	if(power == MECH_POWER_ON || force) //For most intents we can assume that a powered off exosuit acts as if it lacked a cell
+	if (power == MECH_POWER_ON || force) //For most intents we can assume that a powered off exosuit acts as if it lacked a cell
 		return body ? body.cell : null
 	return null
 
@@ -57,40 +57,40 @@
 	var/total_draw = 0
 	for(var/hardpoint in hardpoints)
 		var/obj/item/mech_equipment/I = hardpoints[hardpoint]
-		if(!istype(I))
+		if (!istype(I))
 			continue
 		total_draw += I.passive_power_use
 
-	if(head && head.active_sensors)
+	if (head && head.active_sensors)
 		total_draw += head.power_use
 
-	if(body)
+	if (body)
 		total_draw += body.power_use
 
 	return total_draw
 
 /mob/living/exosuit/handle_environment(datum/gas_mixture/environment)
-	if(!environment) return
+	if (!environment) return
 	//Mechs and vehicles in general can be assumed to just tend to whatever ambient temperature
-	if(abs(environment.temperature - bodytemperature) > 0 )
+	if (abs(environment.temperature - bodytemperature) > 0 )
 		bodytemperature += ((environment.temperature - bodytemperature) / 6)
 
-	if(bodytemperature > material.melting_point * 1.45 ) //A bit higher because I like to assume there's a difference between a mech and a wall
+	if (bodytemperature > material.melting_point * 1.45 ) //A bit higher because I like to assume there's a difference between a mech and a wall
 		var/damage = 5
-		if(bodytemperature > material.melting_point * 1.75 )
+		if (bodytemperature > material.melting_point * 1.75 )
 			damage = 10
-		if(bodytemperature > material.melting_point * 2.15 )
+		if (bodytemperature > material.melting_point * 2.15 )
 			damage = 15
 		apply_damage(damage, DAMAGE_BURN)
 	//A possibility is to hook up interface icons here. But this works pretty well in my experience
-		if(prob(damage))
+		if (prob(damage))
 			visible_message(SPAN_DANGER("\The [src]'s hull bends and buckles under the intense heat!"))
 
 	hud_heat.Update()
 
 /mob/living/exosuit/death(gibbed)
 	// Eject the pilot.
-	if(LAZYLEN(pilots))
+	if (LAZYLEN(pilots))
 		hatch_locked = 0 // So they can get out.
 		for(var/pilot in pilots)
 			eject(pilot, silent=1)
@@ -102,14 +102,14 @@
 	// Handle the rest of things.
 	..(gibbed, (gibbed ? "explodes!" : "grinds to a halt before collapsing!"))
 
-	if(!gibbed)
-		if(arms.loc != src)
+	if (!gibbed)
+		if (arms.loc != src)
 			arms = null
-		if(legs.loc != src)
+		if (legs.loc != src)
 			legs = null
-		if(head.loc != src)
+		if (head.loc != src)
 			head = null
-		if(body.loc != src)
+		if (body.loc != src)
 			body = null
 		qdel(src)
 
@@ -118,16 +118,16 @@
 
 	// Get a turf to play with.
 	var/turf/T = get_turf(src)
-	if(!T)
+	if (!T)
 		qdel(src)
 		return
 
 	// Hurl our component pieces about.
 	var/list/stuff_to_throw = list()
 	for(var/obj/item/thing in list(arms, legs, head, body))
-		if(thing) stuff_to_throw += thing
+		if (thing) stuff_to_throw += thing
 	for(var/hardpoint in hardpoints)
-		if(hardpoints[hardpoint])
+		if (hardpoints[hardpoint])
 			var/obj/item/thing = hardpoints[hardpoint]
 			thing.screen_loc = null
 			stuff_to_throw += thing
@@ -140,13 +140,13 @@
 
 /mob/living/exosuit/handle_vision(powered)
 	var/was_blind = sight & BLIND
-	if(head)
+	if (head)
 		sight = head.get_sight(powered)
 		see_invisible = head.get_invisible(powered)
-	if(body && (body.pilot_coverage < 100 || body.transparent_cabin) || !hatch_closed)
+	if (body && (body.pilot_coverage < 100 || body.transparent_cabin) || !hatch_closed)
 		sight &= ~BLIND
 
-	if(sight & BLIND && !was_blind)
+	if (sight & BLIND && !was_blind)
 		for(var/mob/pilot in pilots)
 			to_chat(pilot, SPAN_WARNING("The sensors are not operational and you cannot see a thing!"))
 

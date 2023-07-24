@@ -126,7 +126,7 @@
 
 /turf/simulated/floor/holofloor/desert/New()
 	..()
-	if(prob(10))
+	if (prob(10))
 		overlays += "asteroid[rand(0,9)]"
 
 /obj/structure/holostool
@@ -157,7 +157,7 @@
 
 /obj/structure/window/reinforced/holowindow/shatter(display_message = 1)
 	playsound(src, "shatter", 70, 1)
-	if(display_message)
+	if (display_message)
 		visible_message("[src] fades away as it shatters!")
 	qdel(src)
 	return
@@ -194,7 +194,7 @@
 /obj/machinery/door/window/holowindoor/shatter(display_message = 1)
 	src.set_density(0)
 	playsound(src, "shatter", 70, 1)
-	if(display_message)
+	if (display_message)
 		visible_message("[src] fades away as it shatters!")
 	qdel(src)
 
@@ -231,7 +231,7 @@
 
 /obj/item/holo/esword/handle_shield(mob/user, damage, atom/damage_source = null, mob/attacker = null, def_zone = null, attack_text = "the attack")
 	. = ..()
-	if(.)
+	if (.)
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 		spark_system.set_up(5, 0, user.loc)
 		spark_system.start()
@@ -286,9 +286,9 @@
 /obj/structure/holohoop/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if (istype(mover,/obj/item) && mover.throwing)
 		var/obj/item/I = mover
-		if(istype(I, /obj/item/projectile))
+		if (istype(I, /obj/item/projectile))
 			return
-		if(prob(50))
+		if (prob(50))
 			I.dropInto(loc)
 			visible_message(SPAN_NOTICE("Swish! \the [I] lands in \the [src]."), range = 3)
 		else
@@ -324,9 +324,9 @@
 /obj/structure/holonet/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if (istype(mover,/obj/item) && mover.throwing)
 		var/obj/item/I = mover
-		if(istype(I, /obj/item/projectile))
+		if (istype(I, /obj/item/projectile))
 			return
-		if(prob(10))
+		if (prob(10))
 			I.dropInto(loc)
 			visible_message(SPAN_NOTICE("Swish! \the [I] gets caught in \the [src]."), range = 3)
 			return 0
@@ -362,11 +362,11 @@
 
 /obj/machinery/readybutton/physical_attack_hand(mob/user)
 	currentarea = get_area(src)
-	if(!currentarea)
+	if (!currentarea)
 		qdel(src)
 		return TRUE
 
-	if(eventstarted)
+	if (eventstarted)
 		to_chat(user, "The event has already begun!")
 		return TRUE
 
@@ -381,12 +381,12 @@
 		if (button.ready)
 			numready++
 
-	if(numbuttons == numready)
+	if (numbuttons == numready)
 		begin_event()
 	return TRUE
 
 /obj/machinery/readybutton/on_update_icon()
-	if(ready)
+	if (ready)
 		icon_state = "auth_on"
 	else
 		icon_state = "auth_off"
@@ -429,13 +429,13 @@
 	var/obj/item/NW = get_natural_weapon()
 	if (safe)
 		faction = MOB_FACTION_NEUTRAL
-		if(NW)
+		if (NW)
 			NW.force = 0
 		environment_smash = 0
 		destroy_surroundings = 0
 	else
 		faction = "carp"
-		if(NW)
+		if (NW)
 			NW.force = initial(NW.force)
 		environment_smash = initial(environment_smash)
 		destroy_surroundings = initial(destroy_surroundings)

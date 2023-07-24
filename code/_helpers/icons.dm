@@ -189,7 +189,7 @@ mob
 			for(var/i = 0 to 1000)
 				// The third parameter forces it to generate a new one, even if it's already cached
 				getFlatIcon(src,0,2)
-				if(prob(5))
+				if (prob(5))
 					Add_Overlay()
 			Browse_Icon()
 
@@ -243,11 +243,11 @@ world
 
 	var/icon/upper = (255-gray) ? new(src) : null
 
-	if(gray)
+	if (gray)
 		MapColors(255/gray,0,0, 0,255/gray,0, 0,0,255/gray, 0,0,0)
 		Blend(tone, ICON_MULTIPLY)
 	else SetIntensity(0)
-	if(255-gray)
+	if (255-gray)
 		upper.Blend(rgb(gray,gray,gray), ICON_SUBTRACT)
 		upper.MapColors((255-TONE[1])/(255-gray),0,0,0, 0,(255-TONE[2])/(255-gray),0,0, 0,0,(255-TONE[3])/(255-gray),0, 0,0,0,0, 0,0,0,1)
 		Blend(upper, ICON_ADD)
@@ -262,7 +262,7 @@ world
 	// Take the maximum color of two icons; combine opacity as if blending with ICON_OR
 /icon/proc/MaxColors(icon)
 	var/icon/I
-	if(isicon(icon))
+	if (isicon(icon))
 		I = new(icon)
 	else
 		// solid color
@@ -320,99 +320,99 @@ world
 
 /proc/ReadRGB(rgb)
 	RETURN_TYPE(/list)
-	if(!rgb) return
+	if (!rgb) return
 
 	// interpret the HSV or HSVA value
 	var/i=1,start=1
-	if(text2ascii(rgb) == 35) ++start // skip opening #
+	if (text2ascii(rgb) == 35) ++start // skip opening #
 	var/ch,which=0,r=0,g=0,b=0,alpha=0,usealpha
 	var/digits=0
 	for(i=start, i<=length(rgb), ++i)
 		ch = text2ascii(rgb, i)
-		if(ch < 48 || (ch > 57 && ch < 65) || (ch > 70 && ch < 97) || ch > 102) break
+		if (ch < 48 || (ch > 57 && ch < 65) || (ch > 70 && ch < 97) || ch > 102) break
 		++digits
-		if(digits == 8) break
+		if (digits == 8) break
 
 	var/single = digits < 6
-	if(digits != 3 && digits != 4 && digits != 6 && digits != 8) return
-	if(digits == 4 || digits == 8) usealpha = 1
+	if (digits != 3 && digits != 4 && digits != 6 && digits != 8) return
+	if (digits == 4 || digits == 8) usealpha = 1
 	for(i=start, digits>0, ++i)
 		ch = text2ascii(rgb, i)
-		if(ch >= 48 && ch <= 57) ch -= 48
-		else if(ch >= 65 && ch <= 70) ch -= 55
-		else if(ch >= 97 && ch <= 102) ch -= 87
+		if (ch >= 48 && ch <= 57) ch -= 48
+		else if (ch >= 65 && ch <= 70) ch -= 55
+		else if (ch >= 97 && ch <= 102) ch -= 87
 		else break
 		--digits
 		switch(which)
-			if(0)
+			if (0)
 				r = SHIFTL(r, 4) | ch
-				if(single)
+				if (single)
 					r |= SHIFTL(r, 4)
 					++which
-				else if(!(digits & 1)) ++which
-			if(1)
+				else if (!(digits & 1)) ++which
+			if (1)
 				g = SHIFTL(g, 4) | ch
-				if(single)
+				if (single)
 					g |= SHIFTL(g, 4)
 					++which
-				else if(!(digits & 1)) ++which
-			if(2)
+				else if (!(digits & 1)) ++which
+			if (2)
 				b = SHIFTL(b, 4) | ch
-				if(single)
+				if (single)
 					b |= SHIFTL(b, 4)
 					++which
-				else if(!(digits & 1)) ++which
-			if(3)
+				else if (!(digits & 1)) ++which
+			if (3)
 				alpha = SHIFTL(alpha, 4) | ch
-				if(single) alpha |= SHIFTL(alpha, 4)
+				if (single) alpha |= SHIFTL(alpha, 4)
 
 	. = list(r, g, b)
-	if(usealpha) . += alpha
+	if (usealpha) . += alpha
 
 /proc/ReadHSV(hsv)
 	RETURN_TYPE(/list)
-	if(!hsv) return
+	if (!hsv) return
 
 	// interpret the HSV or HSVA value
 	var/i=1,start=1
-	if(text2ascii(hsv) == 35) ++start // skip opening #
+	if (text2ascii(hsv) == 35) ++start // skip opening #
 	var/ch,which=0,hue=0,sat=0,val=0,alpha=0,usealpha
 	var/digits=0
 	for(i=start, i<=length(hsv), ++i)
 		ch = text2ascii(hsv, i)
-		if(ch < 48 || (ch > 57 && ch < 65) || (ch > 70 && ch < 97) || ch > 102) break
+		if (ch < 48 || (ch > 57 && ch < 65) || (ch > 70 && ch < 97) || ch > 102) break
 		++digits
-		if(digits == 9) break
-	if(digits > 7) usealpha = 1
-	if(digits <= 4) ++which
-	if(digits <= 2) ++which
+		if (digits == 9) break
+	if (digits > 7) usealpha = 1
+	if (digits <= 4) ++which
+	if (digits <= 2) ++which
 	for(i=start, digits>0, ++i)
 		ch = text2ascii(hsv, i)
-		if(ch >= 48 && ch <= 57) ch -= 48
-		else if(ch >= 65 && ch <= 70) ch -= 55
-		else if(ch >= 97 && ch <= 102) ch -= 87
+		if (ch >= 48 && ch <= 57) ch -= 48
+		else if (ch >= 65 && ch <= 70) ch -= 55
+		else if (ch >= 97 && ch <= 102) ch -= 87
 		else break
 		--digits
 		switch(which)
-			if(0)
+			if (0)
 				hue = SHIFTL(hue, 4) | ch
-				if(digits == (usealpha ? 6 : 4)) ++which
-			if(1)
+				if (digits == (usealpha ? 6 : 4)) ++which
+			if (1)
 				sat = SHIFTL(sat, 4) | ch
-				if(digits == (usealpha ? 4 : 2)) ++which
-			if(2)
+				if (digits == (usealpha ? 4 : 2)) ++which
+			if (2)
 				val = SHIFTL(val, 4) | ch
-				if(digits == (usealpha ? 2 : 0)) ++which
-			if(3)
+				if (digits == (usealpha ? 2 : 0)) ++which
+			if (3)
 				alpha = SHIFTL(alpha, 4) | ch
 
 	. = list(hue, sat, val)
-	if(usealpha) . += alpha
+	if (usealpha) . += alpha
 
 /proc/HSVtoRGB(hsv)
-	if(!hsv) return "#000000"
+	if (!hsv) return "#000000"
 	var/list/HSV = ReadHSV(hsv)
-	if(!HSV) return "#000000"
+	if (!HSV) return "#000000"
 
 	var/hue = HSV[1]
 	var/sat = HSV[2]
@@ -420,27 +420,27 @@ world
 
 	// Compress hue into easier-to-manage range
 	hue -= SHIFTR(hue, 8)
-	if(hue >= 0x5fa) hue -= 0x5fa
+	if (hue >= 0x5fa) hue -= 0x5fa
 
 	var/hi,mid,lo,r,g,b
 	hi = val
 	lo = round((255 - sat) * val / 255, 1)
 	mid = lo + round(abs(round(hue, 510) - hue) * (hi - lo) / 255, 1)
-	if(hue >= 765)
-		if(hue >= 1275)      {r=hi;  g=lo;  b=mid}
-		else if(hue >= 1020) {r=mid; g=lo;  b=hi }
+	if (hue >= 765)
+		if (hue >= 1275)      {r=hi;  g=lo;  b=mid}
+		else if (hue >= 1020) {r=mid; g=lo;  b=hi }
 		else                 {r=lo;  g=mid; b=hi }
 	else
-		if(hue >= 510)       {r=lo;  g=hi;  b=mid}
-		else if(hue >= 255)  {r=mid; g=hi;  b=lo }
+		if (hue >= 510)       {r=lo;  g=hi;  b=mid}
+		else if (hue >= 255)  {r=mid; g=hi;  b=lo }
 		else                 {r=hi;  g=mid; b=lo }
 
 	return (length(HSV) > 3) ? rgb(r,g,b,HSV[4]) : rgb(r,g,b)
 
 /proc/RGBtoHSV(rgb)
-	if(!rgb) return "#0000000"
+	if (!rgb) return "#0000000"
 	var/list/RGB = ReadRGB(rgb)
-	if(!RGB) return "#0000000"
+	if (!RGB) return "#0000000"
 
 	var/r = RGB[1]
 	var/g = RGB[2]
@@ -452,32 +452,32 @@ world
 	var/sat = hi ? round((hi-lo) * 255 / hi, 1) : 0
 	var/hue = 0
 
-	if(sat)
+	if (sat)
 		var/dir
 		var/mid
-		if(hi == r)
-			if(lo == b) {hue=0; dir=1; mid=g}
+		if (hi == r)
+			if (lo == b) {hue=0; dir=1; mid=g}
 			else {hue=1535; dir=-1; mid=b}
-		else if(hi == g)
-			if(lo == r) {hue=512; dir=1; mid=b}
+		else if (hi == g)
+			if (lo == r) {hue=512; dir=1; mid=b}
 			else {hue=511; dir=-1; mid=r}
-		else if(hi == b)
-			if(lo == g) {hue=1024; dir=1; mid=r}
+		else if (hi == b)
+			if (lo == g) {hue=1024; dir=1; mid=r}
 			else {hue=1023; dir=-1; mid=g}
 		hue += dir * round((mid-lo) * 255 / (hi-lo), 1)
 
 	return hsv(hue, sat, val, (length(RGB)>3 ? RGB[4] : null))
 
 /proc/hsv(hue, sat, val, alpha)
-	if(hue < 0 || hue >= 1536) hue %= 1536
-	if(hue < 0) hue += 1536
-	if((hue & 0xFF) == 0xFF)
+	if (hue < 0 || hue >= 1536) hue %= 1536
+	if (hue < 0) hue += 1536
+	if ((hue & 0xFF) == 0xFF)
 		++hue
-		if(hue >= 1536) hue = 0
-	if(sat < 0) sat = 0
-	if(sat > 255) sat = 255
-	if(val < 0) val = 0
-	if(val > 255) val = 255
+		if (hue >= 1536) hue = 0
+	if (sat < 0) sat = 0
+	if (sat > 255) sat = 255
+	if (val < 0) val = 0
+	if (val > 255) val = 255
 	. = "#"
 	. += TO_HEX_DIGIT(SHIFTR(hue, 8))
 	. += TO_HEX_DIGIT(SHIFTR(hue, 4))
@@ -486,9 +486,9 @@ world
 	. += TO_HEX_DIGIT(sat)
 	. += TO_HEX_DIGIT(SHIFTR(val, 4))
 	. += TO_HEX_DIGIT(val)
-	if(!isnull(alpha))
-		if(alpha < 0) alpha = 0
-		if(alpha > 255) alpha = 255
+	if (!isnull(alpha))
+		if (alpha < 0) alpha = 0
+		if (alpha > 255) alpha = 255
 		. += TO_HEX_DIGIT(SHIFTR(alpha, 4))
 		. += TO_HEX_DIGIT(alpha)
 
@@ -506,32 +506,32 @@ world
 	var/list/HSV2 = ReadHSV(hsv2)
 
 	// add missing alpha if needed
-	if(length(HSV1) < length(HSV2)) HSV1 += 255
-	else if(length(HSV2) < length(HSV1)) HSV2 += 255
+	if (length(HSV1) < length(HSV2)) HSV1 += 255
+	else if (length(HSV2) < length(HSV1)) HSV2 += 255
 	var/usealpha = length(HSV1) > 3
 
 	// normalize hsv values in case anything is screwy
-	if(HSV1[1] > 1536) HSV1[1] %= 1536
-	if(HSV2[1] > 1536) HSV2[1] %= 1536
-	if(HSV1[1] < 0) HSV1[1] += 1536
-	if(HSV2[1] < 0) HSV2[1] += 1536
-	if(!HSV1[3]) {HSV1[1] = 0; HSV1[2] = 0}
-	if(!HSV2[3]) {HSV2[1] = 0; HSV2[2] = 0}
+	if (HSV1[1] > 1536) HSV1[1] %= 1536
+	if (HSV2[1] > 1536) HSV2[1] %= 1536
+	if (HSV1[1] < 0) HSV1[1] += 1536
+	if (HSV2[1] < 0) HSV2[1] += 1536
+	if (!HSV1[3]) {HSV1[1] = 0; HSV1[2] = 0}
+	if (!HSV2[3]) {HSV2[1] = 0; HSV2[2] = 0}
 
 	// no value for one color means don't change saturation
-	if(!HSV1[3]) HSV1[2] = HSV2[2]
-	if(!HSV2[3]) HSV2[2] = HSV1[2]
+	if (!HSV1[3]) HSV1[2] = HSV2[2]
+	if (!HSV2[3]) HSV2[2] = HSV1[2]
 	// no saturation for one color means don't change hues
-	if(!HSV1[2]) HSV1[1] = HSV2[1]
-	if(!HSV2[2]) HSV2[1] = HSV1[1]
+	if (!HSV1[2]) HSV1[1] = HSV2[1]
+	if (!HSV2[2]) HSV2[1] = HSV1[1]
 
 	// Compress hues into easier-to-manage range
 	HSV1[1] -= SHIFTR(HSV1[1], 8)
 	HSV2[1] -= SHIFTR(HSV2[1], 8)
 
 	var/hue_diff = HSV2[1] - HSV1[1]
-	if(hue_diff > 765) hue_diff -= 1530
-	else if(hue_diff <= -765) hue_diff += 1530
+	if (hue_diff > 765) hue_diff -= 1530
+	else if (hue_diff <= -765) hue_diff += 1530
 
 	var/hue = round(HSV1[1] + hue_diff * amount, 1)
 	var/sat = round(HSV1[2] + (HSV2[2] - HSV1[2]) * amount, 1)
@@ -539,8 +539,8 @@ world
 	var/alpha = usealpha ? round(HSV1[4] + (HSV2[4] - HSV1[4]) * amount, 1) : null
 
 	// normalize hue
-	if(hue < 0 || hue >= 1530) hue %= 1530
-	if(hue < 0) hue += 1530
+	if (hue < 0 || hue >= 1530) hue %= 1530
+	if (hue < 0) hue += 1530
 	// decompress hue
 	hue += round(hue / 255)
 
@@ -560,8 +560,8 @@ world
 	var/list/RGB2 = ReadRGB(rgb2)
 
 	// add missing alpha if needed
-	if(length(RGB1) < length(RGB2)) RGB1 += 255
-	else if(length(RGB2) < length(RGB1)) RGB2 += 255
+	if (length(RGB1) < length(RGB2)) RGB1 += 255
+	else if (length(RGB2) < length(RGB1)) RGB2 += 255
 	var/usealpha = length(RGB1) > 3
 
 	var/r = round(RGB1[1] + (RGB2[1] - RGB1[1]) * amount, 1)
@@ -576,15 +576,15 @@ world
 
 /proc/HueToAngle(hue)
 	// normalize hsv in case anything is screwy
-	if(hue < 0 || hue >= 1536) hue %= 1536
-	if(hue < 0) hue += 1536
+	if (hue < 0 || hue >= 1536) hue %= 1536
+	if (hue < 0) hue += 1536
 	// Compress hue into easier-to-manage range
 	hue -= SHIFTR(hue, 8)
 	return hue / (1530/360)
 
 /proc/AngleToHue(angle)
 	// normalize hsv in case anything is screwy
-	if(angle < 0 || angle >= 360) angle -= 360 * round(angle / 360)
+	if (angle < 0 || angle >= 360) angle -= 360 * round(angle / 360)
 	var/hue = angle * (1530/360)
 	// Decompress hue
 	hue += round(hue / 255)
@@ -596,18 +596,18 @@ world
 	var/list/HSV = ReadHSV(hsv)
 
 	// normalize hsv in case anything is screwy
-	if(HSV[1] >= 1536) HSV[1] %= 1536
-	if(HSV[1] < 0) HSV[1] += 1536
+	if (HSV[1] >= 1536) HSV[1] %= 1536
+	if (HSV[1] < 0) HSV[1] += 1536
 
 	// Compress hue into easier-to-manage range
 	HSV[1] -= SHIFTR(HSV[1], 8)
 
-	if(angle < 0 || angle >= 360) angle -= 360 * round(angle / 360)
+	if (angle < 0 || angle >= 360) angle -= 360 * round(angle / 360)
 	HSV[1] = round(HSV[1] + angle * (1530/360), 1)
 
 	// normalize hue
-	if(HSV[1] < 0 || HSV[1] >= 1530) HSV[1] %= 1530
-	if(HSV[1] < 0) HSV[1] += 1530
+	if (HSV[1] < 0 || HSV[1] >= 1530) HSV[1] %= 1530
+	if (HSV[1] < 0) HSV[1] += 1530
 	// decompress hue
 	HSV[1] += round(HSV[1] / 255)
 
@@ -627,7 +627,7 @@ world
 	var/gray = RGB[1]*0.3 + RGB[2]*0.59 + RGB[3]*0.11
 	var/tone_gray = TONE[1]*0.3 + TONE[2]*0.59 + TONE[3]*0.11
 
-	if(gray <= tone_gray) return BlendRGB("#000000", tone, gray/(tone_gray || 1))
+	if (gray <= tone_gray) return BlendRGB("#000000", tone, gray/(tone_gray || 1))
 	else return BlendRGB(tone, "#ffffff", (gray-tone_gray)/((255-tone_gray) || 1))
 
 
@@ -641,41 +641,41 @@ The _flatIcons list is a cache for generated icon files.
 	RETURN_TYPE(/icon)
 	// We start with a blank canvas, otherwise some icon procs crash silently
 	var/icon/flat = icon('icons/effects/effects.dmi', "icon_state"="nothing") // Final flattened icon
-	if(!A)
+	if (!A)
 		return flat
-	if(A.alpha <= 0)
+	if (A.alpha <= 0)
 		return flat
 	var/noIcon = FALSE
 
 	var/curicon
-	if(A.icon)
+	if (A.icon)
 		curicon = A.icon
 	else
 		curicon = deficon
 
-	if(!curicon)
+	if (!curicon)
 		noIcon = TRUE // Do not render this object.
 
 	var/curstate
-	if(A.icon_state)
+	if (A.icon_state)
 		curstate = A.icon_state
 	else
 		curstate = defstate
 
-	if(!noIcon && !(curstate in icon_states(curicon)))
-		if("" in icon_states(curicon))
+	if (!noIcon && !(curstate in icon_states(curicon)))
+		if ("" in icon_states(curicon))
 			curstate = ""
 		else
 			noIcon = TRUE // Do not render this object.
 
 	var/curdir
-	if(A.dir != 2 && !always_use_defdir)
+	if (A.dir != 2 && !always_use_defdir)
 		curdir = A.dir
 	else
 		curdir = defdir
 
 	var/curblend
-	if(A.blend_mode == BLEND_DEFAULT)
+	if (A.blend_mode == BLEND_DEFAULT)
 		curblend = defblend
 	else
 		curblend = A.blend_mode
@@ -684,7 +684,7 @@ The _flatIcons list is a cache for generated icon files.
 	var/list/layers = list()
 	var/image/copy
 	// Add the atom's icon itself, without pixel_x/y offsets.
-	if(!noIcon)
+	if (!noIcon)
 		copy = image(icon=curicon, icon_state=curstate, layer=A.layer, dir=curdir)
 		copy.color = A.color
 		copy.alpha = A.alpha
@@ -700,13 +700,13 @@ The _flatIcons list is a cache for generated icon files.
 	var/compare // The overlay 'add' is being compared against
 	var/cmpIndex // The index in the layers list of 'compare'
 	while(TRUE)
-		if(curIndex<=length(process))
+		if (curIndex<=length(process))
 			current = process[curIndex]
-			if(current)
+			if (current)
 				currentLayer = current:layer
-				if(currentLayer<0) // Special case for FLY_LAYER
-					if(currentLayer <= -1000) return flat
-					if(pSet == 0) // Underlay
+				if (currentLayer<0) // Special case for FLY_LAYER
+					if (currentLayer <= -1000) return flat
+					if (pSet == 0) // Underlay
 						currentLayer = A.layer+currentLayer/1000
 					else // Overlay
 						currentLayer = A.layer+(1000+currentLayer)/1000
@@ -714,15 +714,15 @@ The _flatIcons list is a cache for generated icon files.
 				// Sort add into layers list
 				for(cmpIndex=1,cmpIndex<=length(layers),cmpIndex++)
 					compare = layers[cmpIndex]
-					if(currentLayer < layers[compare]) // Associated value is the calculated layer
+					if (currentLayer < layers[compare]) // Associated value is the calculated layer
 						layers.Insert(cmpIndex,current)
 						layers[current] = currentLayer
 						break
-				if(cmpIndex>length(layers)) // Reached end of list without inserting
+				if (cmpIndex>length(layers)) // Reached end of list without inserting
 					layers[current]=currentLayer // Place at end
 
 			curIndex++
-		else if(pSet == 0) // Switch to overlays
+		else if (pSet == 0) // Switch to overlays
 			curIndex = 1
 			pSet = 1
 			process = A.overlays
@@ -744,17 +744,17 @@ The _flatIcons list is a cache for generated icon files.
 
 	for(var/I in layers)
 
-		if(I:plane == EMISSIVE_PLANE) //Just replace this with whatever it is TG is doing these days sometime. Getflaticon breaks emissives
+		if (I:plane == EMISSIVE_PLANE) //Just replace this with whatever it is TG is doing these days sometime. Getflaticon breaks emissives
 			continue
 
-		if(I:alpha == 0)
+		if (I:alpha == 0)
 			continue
 
-		if(I == copy) // 'I' is an /image based on the object being flattened.
+		if (I == copy) // 'I' is an /image based on the object being flattened.
 			curblend = BLEND_OVERLAY
 			add = icon(I:icon, I:icon_state, I:dir)
 		else // 'I' is an appearance object.
-			if(istype(A,/obj/machinery/atmospherics) && (I in A.underlays))
+			if (istype(A,/obj/machinery/atmospherics) && (I in A.underlays))
 				var/image/Im = I
 				add = getFlatIcon(new/image(I), Im.dir, curicon, curstate, curblend, 1)
 			else
@@ -766,24 +766,24 @@ The _flatIcons list is a cache for generated icon files.
 		addY1 = min(flatY1, I:pixel_y+1)
 		addY2 = max(flatY2, I:pixel_y+add.Height())
 
-		if(addX1!=flatX1 || addX2!=flatX2 || addY1!=flatY1 || addY2!=flatY2)
+		if (addX1!=flatX1 || addX2!=flatX2 || addY1!=flatY1 || addY2!=flatY2)
 			// Resize the flattened icon so the new icon fits
 			flat.Crop(addX1-flatX1+1, addY1-flatY1+1, addX2-flatX1+1, addY2-flatY1+1)
 			flatX1=addX1;flatX2=addX2
 			flatY1=addY1;flatY2=addY2
 		var/iconmode
-		if(I in A.overlays)
+		if (I in A.overlays)
 			iconmode = ICON_OVERLAY
-		else if(I in A.underlays)
+		else if (I in A.underlays)
 			iconmode = ICON_UNDERLAY
 		else
 			iconmode = blendMode2iconMode(curblend)
 		// Blend the overlay into the flattened icon
 		flat.Blend(add, iconmode, I:pixel_x + 2 - flatX1, I:pixel_y + 2 - flatY1)
 
-	if(A.color)
+	if (A.color)
 		flat.Blend(A.color, ICON_MULTIPLY)
-	if(A.alpha < 255)
+	if (A.alpha < 255)
 		flat.Blend(rgb(255, 255, 255, A.alpha), ICON_MULTIPLY)
 
 	return icon(flat, "", SOUTH)
@@ -792,7 +792,7 @@ The _flatIcons list is a cache for generated icon files.
 	RETURN_TYPE(/icon)
 	var/icon/alpha_mask = new(A.icon,A.icon_state)//So we want the default icon and icon state of A.
 	for(var/I in A.overlays)//For every image in overlays. var/image/I will not work, don't try it.
-		if(I:layer>A.layer)	continue//If layer is greater than what we need, skip it.
+		if (I:layer>A.layer)	continue//If layer is greater than what we need, skip it.
 		var/icon/image_overlay = new(I:icon,I:icon_state)//Blend only works with icon objects.
 		//Also, icons cannot directly set icon_state. Slower than changing variables but whatever.
 		alpha_mask.Blend(image_overlay,ICON_OR)//OR so they are lumped together in a nice overlay.
@@ -808,10 +808,10 @@ The _flatIcons list is a cache for generated icon files.
 	for(var/i=0,i<5,i++)//And now we add it as overlays. It's faster than creating an icon and then merging it.
 		var/image/I = image("icon" = opacity_icon, "icon_state" = A.icon_state, "layer" = layer+0.8)//So it's above other stuff but below weapons and the like.
 		switch(i)//Now to determine offset so the result is somewhat blurred.
-			if(1)	I.pixel_x--
-			if(2)	I.pixel_x++
-			if(3)	I.pixel_y--
-			if(4)	I.pixel_y++
+			if (1)	I.pixel_x--
+			if (2)	I.pixel_x++
+			if (3)	I.pixel_y--
+			if (4)	I.pixel_y++
 		overlays += I//And finally add the overlay.
 
 #define HOLOPAD_SHORT_RANGE 1 //For determining the color of holopads based on whether they're short or long range.
@@ -821,7 +821,7 @@ The _flatIcons list is a cache for generated icon files.
 	RETURN_TYPE(/icon)
 	var/icon/flat_icon = safety ? A : new(A)//Has to be a new icon to not constantly change the same icon.
 	if (noDecolor == FALSE)
-		if(hologram_color == HOLOPAD_LONG_RANGE)
+		if (hologram_color == HOLOPAD_LONG_RANGE)
 			flat_icon.ColorTone(rgb(225,223,125)) //Light yellow if it's a call to a long-range holopad.
 		else
 			flat_icon.ColorTone(rgb(125,180,225))//Let's make it bluish.
@@ -857,14 +857,14 @@ The _flatIcons list is a cache for generated icon files.
 	var/swapped = 1
 	while (gap > 1 || swapped)
 		swapped = 0
-		if(gap > 1)
+		if (gap > 1)
 			gap = round(gap / 1.3) // 1.3 is the emperic comb sort coefficient
-		if(gap < 1)
+		if (gap < 1)
 			gap = 1
 		for(var/i = 1; gap + i <= length(result); i++)
 			var/atom/l = result[i]		//Fucking hate
 			var/atom/r = result[gap+i]	//how lists work here
-			if(l.plane > r.plane || (l.plane == r.plane && l.layer > r.layer))		//no "result[i].layer" for me
+			if (l.plane > r.plane || (l.plane == r.plane && l.layer > r.layer))		//no "result[i].layer" for me
 				result.Swap(i, gap + i)
 				swapped = 1
 	return result
@@ -881,26 +881,26 @@ lighting determines lighting capturing (optional), suppress_errors suppreses err
 	for(var/xoff = 0 to range)
 		for(var/yoff = 0 to range)
 			var/turf/T = locate(tx + xoff,ty + yoff,tz)
-			if(T)
-				if(cap_mode == CAPTURE_MODE_REGULAR)
-					if(user.can_capture_turf(T))
+			if (T)
+				if (cap_mode == CAPTURE_MODE_REGULAR)
+					if (user.can_capture_turf(T))
 						turfstocapture.Add(T)
 						continue
 				else
 					turfstocapture.Add(T)
 			else
 				//Capture includes non-existan turfs
-				if(!suppress_errors)
+				if (!suppress_errors)
 					return
 	//Lines below determine what objects will be rendered
 	var/list/atoms = list()
 	for(var/turf/T in turfstocapture)
 		atoms.Add(T)
 		for(var/atom/A in T)
-			if(istype(A, /atom/movable/lighting_overlay) && lighting) //Special case for lighting
+			if (istype(A, /atom/movable/lighting_overlay) && lighting) //Special case for lighting
 				atoms.Add(A)
 				continue
-			if(A.invisibility) continue
+			if (A.invisibility) continue
 			atoms.Add(A)
 	//Lines below actually render all colected data
 	atoms = sort_atoms_by_layer(atoms)
@@ -908,10 +908,10 @@ lighting determines lighting capturing (optional), suppress_errors suppreses err
 	cap.Scale(range*32, range*32)
 	cap.Blend("#000", ICON_OVERLAY)
 	for(var/atom/A in atoms)
-		if(A)
+		if (A)
 			var/icon/img = getFlatIcon(A)
-			if(istype(img, /icon))
-				if(istype(A, /mob/living) && A:lying)
+			if (istype(img, /icon))
+				if (istype(A, /mob/living) && A:lying)
 					img.BecomeLying()
 				var/xoff = (A.x - tx) * 32
 				var/yoff = (A.y - ty) * 32

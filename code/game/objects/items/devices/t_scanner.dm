@@ -39,12 +39,12 @@
 
 /obj/item/device/t_scanner/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	var/obj/structure/disposalpipe/D = target
-	if(D && istype(D))
+	if (D && istype(D))
 		to_chat(user, SPAN_INFO("Pipe segment integrity: [100 - D.get_damage_percentage()]%"))
 
 /obj/item/device/t_scanner/proc/set_active(active)
 	on = active
-	if(on)
+	if (on)
 		START_PROCESSING(SSfastprocess, src)
 	else
 		STOP_PROCESSING(SSfastprocess, src)
@@ -53,17 +53,17 @@
 
 //If reset is set, then assume the client has none of our overlays, otherwise we only send new overlays.
 /obj/item/device/t_scanner/Process()
-	if(!on) return
+	if (!on) return
 
 	//handle clients changing
 	var/client/loc_client = null
-	if(ismob(src.loc))
+	if (ismob(src.loc))
 		var/mob/M = src.loc
 		loc_client = M.client
 	set_user_client(loc_client)
 
 	//no sense processing if no-one is going to see it.
-	if(!user_client) return
+	if (!user_client) return
 
 	//get all objects in scan range
 	var/list/scanned = get_scanned_objects(scan_range)
@@ -85,7 +85,7 @@
 /obj/item/device/t_scanner/proc/get_overlay(atom/movable/scanned)
 	//Use a cache so we don't create a whole bunch of new images just because someone's walking back and forth in a room.
 	//Also means that images are reused if multiple people are using t-rays to look at the same objects.
-	if(scanned in overlay_cache)
+	if (scanned in overlay_cache)
 		. = overlay_cache[scanned]
 	else
 		var/image/I = image(loc = scanned, icon = scanned.icon, icon_state = scanned.icon_state)
@@ -94,16 +94,16 @@
 		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_ALPHA
 
 		//Pipes are special
-		if(istype(scanned, /obj/machinery/atmospherics/pipe))
+		if (istype(scanned, /obj/machinery/atmospherics/pipe))
 			var/obj/machinery/atmospherics/pipe/P = scanned
 			I.color = P.pipe_color
 			I.overlays += P.overlays
 			I.underlays += P.underlays
 
-		if(ismob(scanned))
-			if(ishuman(scanned))
+		if (ismob(scanned))
+			if (ishuman(scanned))
 				var/mob/living/carbon/human/H = scanned
-				if(H.species.appearance_flags & SPECIES_APPEARANCE_HAS_SKIN_COLOR)
+				if (H.species.appearance_flags & SPECIES_APPEARANCE_HAS_SKIN_COLOR)
 					I.color = H.skin_color
 					I.icon = 'icons/mob/mob.dmi'
 					I.icon_state = "phaseout"
@@ -118,45 +118,45 @@
 
 	// Add it to cache, cutting old entries if the list is too long
 	overlay_cache[scanned] = .
-	if(length(overlay_cache) > OVERLAY_CACHE_LEN)
+	if (length(overlay_cache) > OVERLAY_CACHE_LEN)
 		overlay_cache.Cut(1, length(overlay_cache)-OVERLAY_CACHE_LEN-1)
 
 /obj/item/device/t_scanner/proc/get_scanned_objects(scan_dist)
 	. = list()
 
 	var/turf/center = get_turf(src.loc)
-	if(!center) return
+	if (!center) return
 
 	for(var/turf/T in range(scan_range, center))
 		for(var/mob/M in T.contents)
-			if(ishuman(M))
+			if (ishuman(M))
 				var/mob/living/carbon/human/H = M
-				if(H.is_cloaked())
+				if (H.is_cloaked())
 					. += M
-			else if(M.alpha < 255)
+			else if (M.alpha < 255)
 				. += M
-			else if(round_is_spooky() && isobserver(M))
+			else if (round_is_spooky() && isobserver(M))
 				. += M
 
-		if(!!T.is_plating())
+		if (!!T.is_plating())
 			continue
 
 		for(var/obj/O in T.contents)
-			if(O.level != ATOM_LEVEL_UNDER_TILE)
+			if (O.level != ATOM_LEVEL_UNDER_TILE)
 				continue
-			if(!O.invisibility)
+			if (!O.invisibility)
 				continue //if it's already visible don't need an overlay for it
 			. += O
 
 
 
 /obj/item/device/t_scanner/proc/set_user_client(client/new_client)
-	if(new_client == user_client)
+	if (new_client == user_client)
 		return
-	if(user_client)
+	if (user_client)
 		for(var/scanned in active_scanned)
 			user_client.images -= active_scanned[scanned]
-	if(new_client)
+	if (new_client)
 		for(var/scanned in active_scanned)
 			new_client.images += active_scanned[scanned]
 	else

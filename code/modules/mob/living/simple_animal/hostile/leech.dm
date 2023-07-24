@@ -34,23 +34,23 @@ Tiny, weak, and mostly harmless alone. dangerous in groups.
 	. = ..()
 
 	var/mob/living/simple_animal/hostile/leech/L = holder
-	if(ishuman(.) && L.belly <= 75)
+	if (ishuman(.) && L.belly <= 75)
 		var/mob/living/carbon/human/H = .
 		var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
-		if(istype(S) && !length(S.breaches))
+		if (istype(S) && !length(S.breaches))
 			return
 		H.remove_blood_simple(L.suck_potency)
-		if(L.health < L.maxHealth)
+		if (L.health < L.maxHealth)
 			L.health += L.suck_potency / 1.5
 		L.belly += clamp(L.suck_potency, 0, 100)
 
 
 /mob/living/simple_animal/hostile/leech/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
 
-	if(target_mob)
+	if (target_mob)
 		belly -= 3
 	else
 		belly -= 1
@@ -72,7 +72,7 @@ Tiny, weak, and mostly harmless alone. dangerous in groups.
 	START_PROCESSING(SSobj, src)
 
 /obj/structure/leech_spawner/Process()
-	if(!spent && (locate(/mob/living/carbon/human) in orange(5, src)))
+	if (!spent && (locate(/mob/living/carbon/human) in orange(5, src)))
 		burst()
 
 /obj/structure/leech_spawner/proc/burst()

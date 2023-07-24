@@ -1,12 +1,12 @@
 /client/proc/cmd_admin_drop_everything(mob/M as mob in SSmobs.mob_list)
 	set category = null
 	set name = "Drop Everything"
-	if(!holder)
+	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
 		return
 
 	var/confirm = alert(src, "Make [M] drop everything?", "Message", "Yes", "No")
-	if(confirm != "Yes")
+	if (confirm != "Yes")
 		return
 
 	for(var/obj/item/W in M)
@@ -18,11 +18,11 @@
 /client/proc/cmd_admin_prison(mob/M as mob in SSmobs.mob_list)
 	set category = "Admin"
 	set name = "Prison"
-	if(!holder)
+	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
 		return
 	if (ismob(M))
-		if(istype(M, /mob/living/silicon/ai))
+		if (istype(M, /mob/living/silicon/ai))
 			alert("The AI can't be sent to prison you jerk!", null, null, null, null, null)
 			return
 		//strip their stuff before they teleport into a cell :downs:
@@ -32,7 +32,7 @@
 		M.Paralyse(5)
 		sleep(5)	//so they black out before warping
 		M.forceMove(pick(GLOB.prisonwarp))
-		if(istype(M, /mob/living/carbon/human))
+		if (istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/prisoner = M
 			prisoner.equip_to_slot_or_del(new /obj/item/clothing/under/color/orange(prisoner), slot_w_uniform)
 			prisoner.equip_to_slot_or_del(new /obj/item/clothing/shoes/orange(prisoner), slot_shoes)
@@ -43,12 +43,12 @@
 /client/proc/cmd_check_new_players()	//Allows admins to determine who the newer players are.
 	set category = "Admin"
 	set name = "Check new Players"
-	if(!holder)
+	if (!holder)
 		to_chat(src, "Only staff members may use this command.")
 
 	var/age = alert(src, "Age check", "Show accounts yonger then _____ days","7", "30" , "All")
 
-	if(age == "All")
+	if (age == "All")
 		age = 9999999
 	else
 		age = text2num(age)
@@ -57,16 +57,16 @@
 	var/msg = ""
 
 	for(var/client/C in GLOB.clients)
-		if(C.player_age == "Requires database")
+		if (C.player_age == "Requires database")
 			missing_ages = 1
 			continue
-		if(C.player_age < age)
+		if (C.player_age < age)
 			msg += "[key_name(C, 1, 1, 1)]: account is [C.player_age] days old<br>"
 
-	if(missing_ages)
+	if (missing_ages)
 		to_chat(src, "Some accounts did not have proper ages set in their clients.  This function requires database to be present")
 
-	if(msg != "")
+	if (msg != "")
 		show_browser(src, msg, "window=Player_age_check")
 	else
 		to_chat(src, "No matches for that age range found.")
@@ -77,7 +77,7 @@
 	set name = "Global Narrate"
 	set desc = "Narrate to everyone, or players on specific z-levels."
 
-	if(!check_rights(R_ADMIN))
+	if (!check_rights(R_ADMIN))
 		return
 
 	var/region = input("Narrate Globally, single Z level, or connected Z levels?", "Region") as null | anything in list(
@@ -180,15 +180,15 @@
 	set name = "Narrate"
 	set desc = "Selection of narrates targeting a mob."
 
-	if(!check_rights(R_INVESTIGATE))
+	if (!check_rights(R_INVESTIGATE))
 		return
 
 	var/options = list()
 
-	if(ismob(A))
+	if (ismob(A))
 		options += list("Direct Narrate")
 
-	if(check_rights(R_MOD, FALSE))
+	if (check_rights(R_MOD, FALSE))
 		options += list("Visual Narrate", "Audible Narrate")
 
 	var/result = input("What type of narrate?") as null | anything in options
@@ -234,7 +234,7 @@
 	set name = "Local Narrate"
 	set desc = "Narrate to everyone who can see the turf your mob is on."
 
-	if(!check_rights(R_MOD))
+	if (!check_rights(R_MOD))
 		return
 
 	var/result = cmd_admin_narrate_helper(src)
@@ -254,12 +254,12 @@
 	set name = "Visible Narrate"
 	set desc = "Narrate to those who can see the given atom."
 
-	if(!check_rights(R_MOD))
+	if (!check_rights(R_MOD))
 		return
 
 	var/mob/M = mob
 
-	if(!M)
+	if (!M)
 		to_chat(src, "You must be in control of a mob to use this.")
 		return
 
@@ -277,13 +277,13 @@
 	set name = "Audible Narrate"
 	set desc = "Narrate to those who can hear the given atom."
 
-	if(!holder)
+	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
 		return
 
 	var/mob/M = mob
 
-	if(!M)
+	if (!M)
 		to_chat(src, "You must be in control of a mob to use this.")
 		return
 
@@ -297,7 +297,7 @@
 /client/proc/cmd_admin_godmode(mob/M as mob in SSmobs.mob_list)
 	set category = "Special Verbs"
 	set name = "Godmode"
-	if(!holder)
+	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
 		return
 	M.status_flags ^= GODMODE
@@ -317,32 +317,32 @@
 	log_and_message_admins("has toggled [key_name(M)]'s notarget to [(M.status_flags & NOTARGET) ? "On" : "Off"]")
 
 /proc/cmd_admin_mute(mob/M as mob, mute_type)
-	if(!usr || !usr.client)
+	if (!usr || !usr.client)
 		return
-	if(!usr.client.holder)
+	if (!usr.client.holder)
 		to_chat(usr, SPAN_COLOR("red", "Error: cmd_admin_mute: You don't have permission to do this."))
 		return
-	if(!M.client)
+	if (!M.client)
 		to_chat(usr, SPAN_COLOR("red", "Error: cmd_admin_mute: This mob doesn't have a client tied to it."))
-	if(M.client.holder)
+	if (M.client.holder)
 		to_chat(usr, SPAN_COLOR("red", "Error: cmd_admin_mute: You cannot mute an admin/mod."))
-	if(!M.client)		return
-	if(M.client.holder)	return
+	if (!M.client)		return
+	if (M.client.holder)	return
 
 	var/muteunmute
 	var/mute_string
 
 	switch(mute_type)
-		if(MUTE_IC)			mute_string = "IC (say and emote)"
-		if(MUTE_OOC)		mute_string = "OOC"
-		if(MUTE_PRAY)		mute_string = "pray"
-		if(MUTE_ADMINHELP)	mute_string = "adminhelp, admin PM and ASAY"
-		if(MUTE_DEADCHAT)	mute_string = "deadchat and DSAY"
-		if(MUTE_ALL)		mute_string = "everything"
+		if (MUTE_IC)			mute_string = "IC (say and emote)"
+		if (MUTE_OOC)		mute_string = "OOC"
+		if (MUTE_PRAY)		mute_string = "pray"
+		if (MUTE_ADMINHELP)	mute_string = "adminhelp, admin PM and ASAY"
+		if (MUTE_DEADCHAT)	mute_string = "deadchat and DSAY"
+		if (MUTE_ALL)		mute_string = "everything"
 		else				return
 
 
-	if(M.client.prefs.muted & mute_type)
+	if (M.client.prefs.muted & mute_type)
 		muteunmute = "unmuted"
 		M.client.prefs.muted &= ~mute_type
 	else
@@ -356,16 +356,16 @@
 /client/proc/cmd_admin_add_random_ai_law()
 	set category = "Fun"
 	set name = "Add Random AI Law"
-	if(!holder)
+	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
 		return
 	var/confirm = alert(src, "You sure?", "Confirm", "Yes", "No")
-	if(confirm != "Yes") return
+	if (confirm != "Yes") return
 	log_admin("[key_name(src)] has added a random AI law.")
 	message_admins("[key_name_admin(src)] has added a random AI law.", 1)
 
 	var/show_log = alert(src, "Show ion message?", "Message", "Yes", "No")
-	if(show_log == "Yes")
+	if (show_log == "Yes")
 		command_announcement.Announce("Ion storm detected near the [station_name()]. Please check all AI-controlled equipment for errors.", "Anomaly Alert", new_sound = 'sound/AI/ionstorm.ogg')
 
 	IonStorm(0)
@@ -386,15 +386,15 @@ Ccomp's first proc.
 	for(var/mob/observer/ghost/M in sortmob)
 		mobs.Add(M)                                             //filter it where it's only ghosts
 		any = 1                                                 //if no ghosts show up, any will just be 0
-	if(!any)
-		if(notify)
+	if (!any)
+		if (notify)
 			to_chat(src, "There doesn't appear to be any ghosts for you to select.")
 		return
 
 	for(var/mob/M in mobs)
 		var/name = M.name
 		ghosts[name] = M                                        //get the name of the mob for the popup list
-	if(what==1)
+	if (what==1)
 		return ghosts
 	else
 		return mobs
@@ -410,21 +410,21 @@ Ccomp's first proc.
 	set name = "Allow player to respawn"
 	set desc = "Allows the player bypass the wait to respawn or allow them to re-enter their corpse."
 
-	if(!check_rights(R_ADMIN))
+	if (!check_rights(R_ADMIN))
 		return
 
 	var/list/ghosts = get_ghosts_by_key()
 	var/mob/observer/ghost/G = ghosts[selection]
-	if(!istype(G))
+	if (!istype(G))
 		to_chat(src, SPAN_WARNING("[selection] no longer has an associated ghost."))
 		return
 
-	if(G.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
+	if (G.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
 		var/response = alert(src, "[selection] has enabled antagHUD. Are you sure you wish to allow them to respawn?","Ghost has used AntagHUD","No","Yes")
-		if(response == "No") return
+		if (response == "No") return
 	else
 		var/response = alert(src, "Are you sure you wish to allow [selection] to respawn?","Allow respawn","No","Yes")
-		if(response == "No") return
+		if (response == "No") return
 
 	G.timeofdeath=-19999						/* time of death is checked in /mob/verb/abandon_mob() which is the Respawn verb.
 									   timeofdeath is used for bodies on autopsy but since we're messing with a ghost I'm pretty sure
@@ -441,7 +441,7 @@ Ccomp's first proc.
 	set category = "Special Verbs"
 	set name = "Allow Respawn"
 	set desc = "Allows a ghost or lobby player to bypass respawn timers."
-	if(!check_rights(R_ADMIN))
+	if (!check_rights(R_ADMIN))
 		return
 	var/time = world.time
 	var/list/candidates = list()
@@ -507,14 +507,14 @@ Ccomp's first proc.
 	set name = "Toggle antagHUD usage"
 	set desc = "Toggles antagHUD usage for observers"
 
-	if(!holder)
+	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
 	var/action=""
-	if(config.antag_hud_allowed)
+	if (config.antag_hud_allowed)
 		for(var/mob/observer/ghost/g in get_ghosts())
-			if(!g.client.holder)						//Remove the verb from non-admin ghosts
+			if (!g.client.holder)						//Remove the verb from non-admin ghosts
 				g.verbs -= /mob/observer/ghost/verb/toggle_antagHUD
-			if(g.antagHUD)
+			if (g.antagHUD)
 				g.antagHUD = 0						// Disable it on those that have it enabled
 				g.has_enabled_antagHUD = 2				// We'll allow them to respawn
 				to_chat(g, SPAN_DANGER("The Administrator has disabled AntagHUD"))
@@ -523,7 +523,7 @@ Ccomp's first proc.
 		action = "disabled"
 	else
 		for(var/mob/observer/ghost/g in get_ghosts())
-			if(!g.client.holder)						// Add the verb back for all non-admin ghosts
+			if (!g.client.holder)						// Add the verb back for all non-admin ghosts
 				g.verbs += /mob/observer/ghost/verb/toggle_antagHUD
 				to_chat(g, SPAN_NOTICE("<B>The Administrator has enabled AntagHUD </B>"))// Notify all observers they can now use AntagHUD
 
@@ -541,10 +541,10 @@ Ccomp's first proc.
 	set category = "Server"
 	set name = "Toggle antagHUD Restrictions"
 	set desc = "Restricts players that have used antagHUD from being able to join this round."
-	if(!holder)
+	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
 	var/action=""
-	if(config.antag_hud_restricted)
+	if (config.antag_hud_restricted)
 		for(var/mob/observer/ghost/g in get_ghosts())
 			to_chat(g, SPAN_NOTICE("<B>The administrator has lifted restrictions on joining the round if you use AntagHUD</B>"))
 		action = "lifted restrictions"
@@ -566,11 +566,11 @@ Ccomp's first proc.
 /client/proc/cmd_admin_add_freeform_ai_law()
 	set category = "Fun"
 	set name = "Add Custom AI law"
-	if(!holder)
+	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
 		return
 	var/input = sanitize(input(usr, "Please enter anything you want the AI to do. Anything. Serious.", "What?", "") as text|null)
-	if(!input)
+	if (!input)
 		return
 	for(var/mob/living/silicon/ai/M in SSmobs.mob_list)
 		if (M.stat == 2)
@@ -587,21 +587,21 @@ Ccomp's first proc.
 	message_admins("Admin [key_name_admin(usr)] has added a new AI law - [input]", 1)
 
 	var/show_log = alert(src, "Show ion message?", "Message", "Yes", "No")
-	if(show_log == "Yes")
+	if (show_log == "Yes")
 		command_announcement.Announce("Ion storm detected near the [station_name()]. Please check all AI-controlled equipment for errors.", "Anomaly Alert", new_sound = 'sound/AI/ionstorm.ogg')
 
 /client/proc/cmd_admin_rejuvenate(mob/living/M as mob in SSmobs.mob_list)
 	set category = "Special Verbs"
 	set name = "Rejuvenate"
-	if(!holder)
+	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
 		return
-	if(!mob)
+	if (!mob)
 		return
-	if(!istype(M))
+	if (!istype(M))
 		alert("Cannot revive a ghost")
 		return
-	if(config.allow_admin_rev)
+	if (config.allow_admin_rev)
 		M.revive()
 
 		log_and_message_admins("healed / revived [key_name_admin(M)]!")
@@ -611,23 +611,23 @@ Ccomp's first proc.
 /client/proc/cmd_admin_create_centcom_report()
 	set category = "Special Verbs"
 	set name = "Create Command Report"
-	if(!holder)
+	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
 		return
 	var/input = sanitize(input(usr, "Please enter anything you want. Anything. Serious.", "What?", "") as message|null, extra = 0)
 	var/customname = sanitizeSafe(input(usr, "Pick a title for the report.", "Title") as text|null)
-	if(!input)
+	if (!input)
 		return
-	if(!customname)
+	if (!customname)
 		customname = "[GLOB.using_map.boss_name] Update"
 
 	//New message handling
 	post_comm_message(customname, replacetext(input, "\n", "<br/>"))
 
 	switch(alert("Should this be announced to the general population?",,"Yes","No"))
-		if("Yes")
+		if ("Yes")
 			command_announcement.Announce(input, customname, new_sound = GLOB.using_map.command_report_sound, msg_sanitized = 1);
-		if("No")
+		if ("No")
 			minor_announcement.Announce(message = "New [GLOB.using_map.company_name] Update available at all communication consoles.")
 
 	log_admin("[key_name(src)] has created a command report: [input]")
@@ -666,7 +666,7 @@ Ccomp's first proc.
 	set category = "Special Verbs"
 	set name = "Explosion"
 
-	if(!check_rights(R_DEBUG|R_FUN))	return
+	if (!check_rights(R_DEBUG|R_FUN))	return
 
 	var/range = input("Explosion radius (in tiles):") as num|null
 	if (isnull(range) || range <= 0)
@@ -683,7 +683,7 @@ Ccomp's first proc.
 		if ("Light")
 			max_power = EX_ACT_LIGHT
 	var/shaped = 0
-	if(alert(src, "Shaped explosion?", "Shape", "Yes", "No") == "Yes")
+	if (alert(src, "Shaped explosion?", "Shape", "Yes", "No") == "Yes")
 		shaped = input("Shaped where to?", "Input")  as anything in list("NORTH","SOUTH","EAST","WEST")
 		shaped = text2dir(shaped)
 	if (range > 20)
@@ -698,12 +698,12 @@ Ccomp's first proc.
 	set category = "Special Verbs"
 	set name = "EM Pulse"
 
-	if(!check_rights(R_DEBUG|R_FUN))	return
+	if (!check_rights(R_DEBUG|R_FUN))	return
 
 	var/heavy = input("Range of heavy pulse.", text("Input"))  as num|null
-	if(heavy == null) return
+	if (heavy == null) return
 	var/light = input("Range of light pulse.", text("Input"))  as num|null
-	if(light == null) return
+	if (light == null) return
 
 	if (heavy || light)
 
@@ -719,17 +719,17 @@ Ccomp's first proc.
 	set category = "Special Verbs"
 	set name = "Gib"
 
-	if(!check_rights(R_ADMIN|R_FUN))	return
+	if (!check_rights(R_ADMIN|R_FUN))	return
 
 	var/confirm = alert(src, "You sure?", "Confirm", "Yes", "No")
-	if(confirm != "Yes") return
+	if (confirm != "Yes") return
 	//Due to the delay here its easy for something to have happened to the mob
-	if(!M)	return
+	if (!M)	return
 
 	log_admin("[key_name(usr)] has gibbed [key_name(M)]")
 	message_admins("[key_name_admin(usr)] has gibbed [key_name_admin(M)]", 1)
 
-	if(isobserver(M))
+	if (isobserver(M))
 		gibs(M.loc)
 		return
 
@@ -740,7 +740,7 @@ Ccomp's first proc.
 	set category = "Fun"
 
 	var/confirm = alert(src, "You sure?", "Confirm", "Yes", "No")
-	if(confirm == "Yes")
+	if (confirm == "Yes")
 		if (isobserver(mob)) // so they don't spam gibs everywhere
 			return
 		else
@@ -765,7 +765,7 @@ Ccomp's first proc.
 /client/proc/cmd_admin_remove_phoron()
 	set category = "Debug"
 	set name = "Stabilize Atmos."
-	if(!holder)
+	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
 		return
 // DEFERRED
@@ -796,7 +796,7 @@ Ccomp's first proc.
 	set name = "Change View Range"
 	set desc = "switches between 1x and custom views"
 
-	if(view == world.view)
+	if (view == world.view)
 		view = input("Select view range:", "FUCK YE", 7) in list(1,2,3,4,5,6,7,8,9,10,11,12,13,14,128)
 	else
 		view = world.view
@@ -808,15 +808,15 @@ Ccomp's first proc.
 	set category = "Admin"
 	set name = "Call Evacuation"
 
-	if(!SSticker.mode || !evacuation_controller)
+	if (!SSticker.mode || !evacuation_controller)
 		return
 
-	if(!check_rights(R_ADMIN))	return
+	if (!check_rights(R_ADMIN))	return
 
-	if(alert(src, "Are you sure?", "Confirm", "Yes", "No") != "Yes") return
+	if (alert(src, "Are you sure?", "Confirm", "Yes", "No") != "Yes") return
 
-	if(SSticker.mode.auto_recall_shuttle)
-		if(input("The evacuation will just be cancelled if you call it. Call anyway?") in list("Confirm", "Cancel") != "Confirm")
+	if (SSticker.mode.auto_recall_shuttle)
+		if (input("The evacuation will just be cancelled if you call it. Call anyway?") in list("Confirm", "Cancel") != "Confirm")
 			return
 
 	var/choice = input("Is this an emergency evacuation or a crew transfer?") in list("Emergency", "Crew Transfer")
@@ -828,11 +828,11 @@ Ccomp's first proc.
 	set category = "Admin"
 	set name = "Cancel Evacuation"
 
-	if(!check_rights(R_ADMIN))	return
+	if (!check_rights(R_ADMIN))	return
 
-	if(alert(src, "You sure?", "Confirm", "Yes", "No") != "Yes") return
+	if (alert(src, "You sure?", "Confirm", "Yes", "No") != "Yes") return
 
-	if(!evacuation_controller)
+	if (!evacuation_controller)
 		return
 
 	evacuation_controller.cancel_evacuation()
@@ -845,7 +845,7 @@ Ccomp's first proc.
 	if (!evacuation_controller)
 		return
 
-	if(!check_rights(R_ADMIN))	return
+	if (!check_rights(R_ADMIN))	return
 
 	evacuation_controller.deny = !evacuation_controller.deny
 
@@ -866,9 +866,9 @@ Ccomp's first proc.
 	set name = "Toggle random events on/off"
 
 	set desc = "Toggles random events such as meteors, black holes, blob (but not space dust) on/off"
-	if(!check_rights(R_SERVER))	return
+	if (!check_rights(R_SERVER))	return
 
-	if(!config.allow_random_events)
+	if (!config.allow_random_events)
 		config.allow_random_events = 1
 		to_chat(usr, "Random events enabled")
 		message_admins("Admin [key_name_admin(usr)] has enabled random events.", 1)

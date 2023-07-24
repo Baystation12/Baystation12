@@ -60,12 +60,12 @@ var/global/list/department_radio_keys = list(
 var/global/list/channel_to_radio_key = new
 /proc/get_radio_key_from_channel(channel)
 	var/key = channel_to_radio_key[channel]
-	if(!key)
+	if (!key)
 		for(var/radio_key in department_radio_keys)
-			if(department_radio_keys[radio_key] == channel)
+			if (department_radio_keys[radio_key] == channel)
 				key = radio_key
 				break
-		if(!key)
+		if (!key)
 			key = ""
 		channel_to_radio_key[channel] = key
 
@@ -82,12 +82,12 @@ var/global/list/channel_to_radio_key = new
 	var/mob/living/carbon/human/H = src
 	if (H.l_ear || H.r_ear)
 		var/obj/item/device/radio/headset/dongle
-		if(istype(H.l_ear,/obj/item/device/radio/headset))
+		if (istype(H.l_ear,/obj/item/device/radio/headset))
 			dongle = H.l_ear
 		else
 			dongle = H.r_ear
-		if(!istype(dongle)) return
-		if(dongle.translate_binary) return 1
+		if (!istype(dongle)) return
+		if (dongle.translate_binary) return 1
 
 /mob/living/proc/get_default_language()
 	return default_language
@@ -103,20 +103,20 @@ var/global/list/channel_to_radio_key = new
 
 	. = 0
 
-	if((MUTATION_HULK in mutations) && health >= 25 && length(message))
+	if ((MUTATION_HULK in mutations) && health >= 25 && length(message))
 		message = "[uppertext(message)]!!!"
 		verb = pick("yells","roars","hollers")
 		message_data[3] = 0
 		. = 1
-	else if(slurring)
+	else if (slurring)
 		message = slur(message)
 		verb = pick("slobbers","slurs")
 		. = 1
-	else if(stuttering)
+	else if (stuttering)
 		message = NewStutter(message)
 		verb = pick("stammers","stutters")
 		. = 1
-	else if(has_chem_effect(CE_SQUEAKY, 1))
+	else if (has_chem_effect(CE_SQUEAKY, 1))
 		message = "<span style='font-family: Comic Sans MS'>[message]</span>"
 		verb = "squeaks"
 		. = 1
@@ -125,7 +125,7 @@ var/global/list/channel_to_radio_key = new
 	message_data[2] = verb
 
 /mob/living/proc/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
-	if(message_mode == "intercom")
+	if (message_mode == "intercom")
 		for(var/obj/item/device/radio/intercom/I in view(1, null))
 			I.talk_into(src, message, verb, speaking)
 			used_radios += I
@@ -138,45 +138,45 @@ var/global/list/channel_to_radio_key = new
 	return returns
 
 /mob/living/proc/get_speech_ending(verb, ending)
-	if(ending=="!")
+	if (ending=="!")
 		return pick("exclaims","shouts","yells")
-	if(ending=="?")
+	if (ending=="?")
 		return "asks"
 	return verb
 
 /mob/living/proc/format_say_message(message = null)
-	if(!message)
+	if (!message)
 		return
 
 	message = html_decode(message)
 
 	var/end_char = copytext_char(message, -1)
-	if(!(end_char in list(".", "?", "!", "-", "~", ":")))
+	if (!(end_char in list(".", "?", "!", "-", "~", ":")))
 		message += "."
 
 	return html_encode(message)
 
 /mob/living/say(message, datum/language/speaking = null, verb="says", alt_name="", whispering)
-	if(client)
-		if(client.prefs.muted & MUTE_IC)
+	if (client)
+		if (client.prefs.muted & MUTE_IC)
 			to_chat(src, SPAN_WARNING("You cannot speak in IC (Muted)."))
 			return
 
-	if(stat)
-		if(stat == 2)
+	if (stat)
+		if (stat == 2)
 			return say_dead(message)
 		return
 
 	var/prefix = copytext_char(message, 1, 2)
-	if(prefix == get_prefix_key(/singleton/prefix/custom_emote))
+	if (prefix == get_prefix_key(/singleton/prefix/custom_emote))
 		return emote(copytext_char(message, 2))
-	if(prefix == get_prefix_key(/singleton/prefix/visible_emote))
+	if (prefix == get_prefix_key(/singleton/prefix/visible_emote))
 		return custom_emote(1, copytext_char(message, 2))
 
 	//parse the language code and consume it
-	if(!speaking)
+	if (!speaking)
 		speaking = parse_language(message)
-		if(speaking)
+		if (speaking)
 			message = copytext_char(message, 2 + length_char(speaking.key))
 		else
 			speaking = get_default_language()
@@ -193,16 +193,16 @@ var/global/list/channel_to_radio_key = new
 
 	// This is broadcast to all mobs with the language,
 	// irrespective of distance or anything else.
-	if(speaking && (speaking.flags & HIVEMIND))
+	if (speaking && (speaking.flags & HIVEMIND))
 		speaking.broadcast(src,trimtext(message))
 		return 1
 
-	if((is_muzzled()) && !(speaking && (speaking.flags & SIGNLANG)))
+	if ((is_muzzled()) && !(speaking && (speaking.flags & SIGNLANG)))
 		to_chat(src, SPAN_DANGER("You're muzzled and cannot speak!"))
 		return
 
 	if (speaking)
-		if(whispering)
+		if (whispering)
 			verb = speaking.whisper_verb ? speaking.whisper_verb : speaking.speech_verb
 		else
 			verb = say_quote(message, speaking)
@@ -212,20 +212,20 @@ var/global/list/channel_to_radio_key = new
 	message = format_say_message(message)
 	message = process_chat_markup(message)
 
-	if(speaking && !speaking.can_be_spoken_properly_by(src))
+	if (speaking && !speaking.can_be_spoken_properly_by(src))
 		message = speaking.muddle(message)
 
-	if(!(speaking && (speaking.flags & NO_STUTTER)))
+	if (!(speaking && (speaking.flags & NO_STUTTER)))
 		var/list/message_data = list(message, verb, 0)
-		if(handle_speech_problems(message_data))
+		if (handle_speech_problems(message_data))
 			message = message_data[1]
 			verb = message_data[2]
 
-	if(!message || message == "")
+	if (!message || message == "")
 		return 0
 
 	var/list/obj/item/used_radios = new
-	if(handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name))
+	if (handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name))
 		return 1
 
 	var/list/handle_v = handle_speech_sound()
@@ -235,17 +235,17 @@ var/global/list/channel_to_radio_key = new
 	var/italics = 0
 	var/message_range = world.view
 
-	if(whispering)
+	if (whispering)
 		italics = 1
 		message_range = 1
 
 	//speaking into radios
-	if(length(used_radios))
+	if (length(used_radios))
 		italics = 1
 		message_range = 1
-		if(speaking)
+		if (speaking)
 			message_range = speaking.get_talkinto_msg_range(message)
-		if(!speaking || !(speaking.flags & NO_TALK_MSG))
+		if (!speaking || !(speaking.flags & NO_TALK_MSG))
 			src.visible_message(SPAN_NOTICE("\The [src] talks into \the [used_radios[1]]."), blind_message = SPAN_NOTICE("You hear someone talk into their headset."), range = 5, exclude_mobs = list(src))
 			if (speech_sound)
 				sound_vol *= 0.5
@@ -264,11 +264,11 @@ var/global/list/channel_to_radio_key = new
 			log_say("[name]/[key] : SIGN: [message]")
 			return say_signlang(message, pick(speaking.signlang_verb), speaking)
 
-	if(T)
+	if (T)
 		//make sure the air can transmit speech - speaker's side
 		var/datum/gas_mixture/environment = T.return_air()
 		var/pressure = (environment)? environment.return_pressure() : 0
-		if(pressure < SOUND_MINIMUM_PRESSURE)
+		if (pressure < SOUND_MINIMUM_PRESSURE)
 			message_range = 1
 
 		if (pressure < ONE_ATMOSPHERE*0.4) //sound distortion pressure, to help clue people in that the air is thin, even if it isn't a vacuum yet
@@ -279,18 +279,18 @@ var/global/list/channel_to_radio_key = new
 
 	var/list/speech_bubble_recipients = list()
 	for(var/mob/M in listening)
-		if(M)
+		if (M)
 			M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
-			if(M.client)
+			if (M.client)
 				speech_bubble_recipients += M.client
 
 
 	for(var/obj/O in listening_obj)
 		spawn(0)
-			if(O) //It's possible that it could be deleted in the meantime.
+			if (O) //It's possible that it could be deleted in the meantime.
 				O.hear_talk(src, message, verb, speaking)
 
-	if(whispering)
+	if (whispering)
 		var/eavesdroping_range = 5
 		var/list/eavesdroping = list()
 		var/list/eavesdroping_obj = list()
@@ -298,20 +298,20 @@ var/global/list/channel_to_radio_key = new
 		eavesdroping -= listening
 		eavesdroping_obj -= listening_obj
 		for(var/mob/M in eavesdroping)
-			if(M)
+			if (M)
 				M.hear_say(stars(message), verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
-				if(M.client)
+				if (M.client)
 					speech_bubble_recipients |= M.client
 
 		for(var/obj/O in eavesdroping)
 			spawn(0)
-				if(O) //It's possible that it could be deleted in the meantime.
+				if (O) //It's possible that it could be deleted in the meantime.
 					O.hear_talk(src, stars(message), verb, speaking)
 
-	if(mind)
+	if (mind)
 		mind.last_words = message
 
-	if(whispering)
+	if (whispering)
 		log_whisper("[name]/[key] : [message]")
 	else
 		log_say("[name]/[key] : [message]")

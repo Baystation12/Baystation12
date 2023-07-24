@@ -12,20 +12,20 @@
 
 /singleton/random_chem_effect/proc/get_random_value()
 	switch(mode)
-		if(RANDOM_CHEM_EFFECT_TRUE)
+		if (RANDOM_CHEM_EFFECT_TRUE)
 			return 1
-		if(RANDOM_CHEM_EFFECT_INT)
+		if (RANDOM_CHEM_EFFECT_INT)
 			return rand(minimum, maximum)
-		if(RANDOM_CHEM_EFFECT_FLOAT)
+		if (RANDOM_CHEM_EFFECT_FLOAT)
 			return rand() * (maximum - minimum) + minimum
 
 /singleton/random_chem_effect/proc/mix_data(first_value, first_ratio, second_value)
 	switch(mode)
-		if(RANDOM_CHEM_EFFECT_TRUE)
+		if (RANDOM_CHEM_EFFECT_TRUE)
 			return !!(first_value * first_ratio + second_value * (1 - first_ratio)) // Basically |, unless ratio is 0 or 1
-		if(RANDOM_CHEM_EFFECT_INT)
+		if (RANDOM_CHEM_EFFECT_INT)
 			return round(first_value * first_ratio + second_value * (1 - first_ratio))
-		if(RANDOM_CHEM_EFFECT_FLOAT)
+		if (RANDOM_CHEM_EFFECT_FLOAT)
 			return first_value * first_ratio + second_value * (1 - first_ratio)
 
 /singleton/random_chem_effect/proc/prototype_process(datum/reagent/random/prototype, temperature)
@@ -44,11 +44,11 @@
 // This is referring to monetary value.
 /singleton/random_chem_effect/proc/get_value(value)
 	switch(beneficial)
-		if(1)
+		if (1)
 			return cost * (value - minimum)/(maximum - minimum)
-		if(0)
+		if (0)
 			return 0
-		if(-1)
+		if (-1)
 			return -3 * cost * (value - minimum)/(maximum - minimum)
 
 // All general properties will be chosen.
@@ -142,43 +142,43 @@
 /singleton/random_chem_effect/random_properties/proc/set_caches(datum/reagent/random/prototype, list/whitelist)
 	LAZYSET(reaction_rate_cache, prototype.type, 1.5 * rand() + 0.5)
 	for(var/i = 1, i <= number_of_reaction_modifiers, i++)
-		if(length(whitelist))
+		if (length(whitelist))
 			LAZYINITLIST(distillation_inhibitor_cache)
 			LAZYADD(distillation_inhibitor_cache[prototype.type], pick_n_take(whitelist))
-		if(length(whitelist))
+		if (length(whitelist))
 			LAZYINITLIST(cooling_enhancer_cache)
 			LAZYADD(cooling_enhancer_cache[prototype.type], pick_n_take(whitelist))
 
 /singleton/random_chem_effect/random_properties/distillation_act(datum/reagent/random/reagent, datum/reagents/reagents, value)
 	var/list/inhibitors = distillation_inhibitor_cache[reagent.type]
-	if(reagents.has_any_reagent(inhibitors))
+	if (reagents.has_any_reagent(inhibitors))
 		return
 	return purify(reagent, reagents, value)
 
 /singleton/random_chem_effect/random_properties/cooling_act(datum/reagent/random/reagent, datum/reagents/reagents, value)
 	var/list/enhancers = cooling_enhancer_cache[reagent.type]
-	if(!reagents.has_any_reagent(enhancers))
+	if (!reagents.has_any_reagent(enhancers))
 		return
 	return purify(reagent, reagents, value)
 
 /singleton/random_chem_effect/random_properties/proc/purify(datum/reagent/random/reagent, datum/reagents/reagents, value)
 	var/target = reagents.has_reagent(/datum/reagent/toxin/phoron) ? minimum : maximum
-	if(target == value)
+	if (target == value)
 		return
 	var/rate = reaction_rate_cache[reagent.type]
 	switch(mode)
-		if(RANDOM_CHEM_EFFECT_TRUE)
-			if(prob(10 * rate))
+		if (RANDOM_CHEM_EFFECT_TRUE)
+			if (prob(10 * rate))
 				return target
 			return value // this will keep us reacting
-		if(RANDOM_CHEM_EFFECT_INT)
+		if (RANDOM_CHEM_EFFECT_INT)
 			var/amount = (target - value) * rate * 0.1
-			if(abs(amount) >= 1)
+			if (abs(amount) >= 1)
 				return round(amount + value)
-			else if(prob(100 * abs(amount)))
+			else if (prob(100 * abs(amount)))
 				return value + sign(amount)
 			return value
-		if(RANDOM_CHEM_EFFECT_FLOAT)
+		if (RANDOM_CHEM_EFFECT_FLOAT)
 			var/resolution = (maximum - minimum)/100
 			var/new_val = value + (target - value) * rate * 0.1
 			var/round_dir = new_val > value ? -1 : 1                                   // Rounds up if going up, to nearest percent of max - min
@@ -188,29 +188,29 @@
 /singleton/random_chem_effect/random_properties/cooling_act(datum/reagent/random/reagent, datum/reagents/reagents)
 
 /singleton/random_chem_effect/random_properties/affect_blood(mob/living/carbon/M, removed, value)
-	if(chem_effect_define && !IS_METABOLICALLY_INERT(M)) // screw diona
+	if (chem_effect_define && !IS_METABOLICALLY_INERT(M)) // screw diona
 		M.add_chemical_effect(chem_effect_define, value)
 
 /singleton/random_chem_effect/random_properties/get_interactions(datum/reagent/random/reagent, sci_skill, chem_skill)
-	if(chem_skill < SKILL_EXPERIENCED)
+	if (chem_skill < SKILL_EXPERIENCED)
 		return
 	. = list("<br>")
-	if(sci_skill > SKILL_TRAINED)
+	if (sci_skill > SKILL_TRAINED)
 		. += "For [desc]:<br>"
 	var/list/interactions = list()
-	if(chem_skill == SKILL_MASTER)
+	if (chem_skill == SKILL_MASTER)
 		. += "Heating: "
 	for(var/interaction in distillation_inhibitor_cache[reagent.type])
 		var/datum/reagent/R = interaction
 		interactions += initial(R.name)
-	if(chem_skill == SKILL_MASTER)
+	if (chem_skill == SKILL_MASTER)
 		. += english_list(interactions)
 		interactions.Cut()
 		. += ". Cooling: "
 	for(var/interaction in cooling_enhancer_cache[reagent.type])
 		var/datum/reagent/R = interaction
 		interactions += initial(R.name)
-	if(chem_skill <= SKILL_MASTER)
+	if (chem_skill <= SKILL_MASTER)
 		shuffle(interactions)
 	. += english_list(interactions)
 	. += "."

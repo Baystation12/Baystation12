@@ -17,7 +17,7 @@
 
 /spell/contract/return_master/cast(mob/target,mob/user)
 	target = ..(target,user)
-	if(!target)
+	if (!target)
 		return
 
 	user.forceMove(get_turf(target))

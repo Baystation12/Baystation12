@@ -13,13 +13,13 @@
 	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna, /mob/living/simple_animal/hostile/retaliate/goose/dire)
 
 /obj/effect/overmap/visitable/sector/exoplanet/grass/generate_map()
-	if(prob(40))
+	if (prob(40))
 		lightlevel = rand(1,7)/10	//give a chance of twilight jungle
 	..()
 
 /obj/effect/overmap/visitable/sector/exoplanet/grass/generate_atmosphere()
 	..()
-	if(atmosphere)
+	if (atmosphere)
 		atmosphere.temperature = T20C + rand(10, 30)
 		atmosphere.update_values()
 
@@ -29,25 +29,25 @@
 /obj/effect/overmap/visitable/sector/exoplanet/grass/adapt_seed(datum/seed/S)
 	..()
 	var/carnivore_prob = rand(100)
-	if(carnivore_prob < 30)
+	if (carnivore_prob < 30)
 		S.set_trait(TRAIT_CARNIVOROUS,2)
-		if(prob(75))
+		if (prob(75))
 			S.get_trait(TRAIT_STINGS, 1)
-	else if(carnivore_prob < 60)
+	else if (carnivore_prob < 60)
 		S.set_trait(TRAIT_CARNIVOROUS,1)
-		if(prob(50))
+		if (prob(50))
 			S.get_trait(TRAIT_STINGS)
-	if(prob(15) || (S.get_trait(TRAIT_CARNIVOROUS) && prob(40)))
+	if (prob(15) || (S.get_trait(TRAIT_CARNIVOROUS) && prob(40)))
 		S.set_trait(TRAIT_BIOLUM,1)
 		S.set_trait(TRAIT_BIOLUM_COLOUR,get_random_colour(0,75,190))
 
-	if(prob(30))
+	if (prob(30))
 		S.set_trait(TRAIT_PARASITE,1)
-	if(!S.get_trait(TRAIT_LARGE))
+	if (!S.get_trait(TRAIT_LARGE))
 		var/vine_prob = rand(100)
-		if(vine_prob < 15)
+		if (vine_prob < 15)
 			S.set_trait(TRAIT_SPREAD,2)
-		else if(vine_prob < 30)
+		else if (vine_prob < 30)
 			S.set_trait(TRAIT_SPREAD,1)
 
 /area/exoplanet/grass
@@ -96,7 +96,7 @@
 
 /obj/effect/overmap/visitable/sector/exoplanet/grass/terraformed/generate_atmosphere()
 	..()
-	if(atmosphere)
+	if (atmosphere)
 		atmosphere.temperature = T0C + rand(0, 50)
 		atmosphere.update_values()
 

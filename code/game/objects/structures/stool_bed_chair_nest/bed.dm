@@ -18,10 +18,10 @@
 	..(newloc)
 	color = null
 	material = SSmaterials.get_material_by_name(new_material)
-	if(!istype(material))
+	if (!istype(material))
 		qdel(src)
 		return
-	if(new_padding_material)
+	if (new_padding_material)
 		padding_material = SSmaterials.get_material_by_name(new_padding_material)
 	update_icon()
 
@@ -35,46 +35,46 @@
 	overlays.Cut()
 	// Base icon.
 	var/cache_key = "[base_icon]-[material.name]"
-	if(isnull(stool_cache[cache_key]))
+	if (isnull(stool_cache[cache_key]))
 		var/image/I = image('icons/obj/furniture.dmi', base_icon)
-		if(material_alteration & MATERIAL_ALTERATION_COLOR)
+		if (material_alteration & MATERIAL_ALTERATION_COLOR)
 			I.color = material.icon_colour
 		stool_cache[cache_key] = I
 	overlays |= stool_cache[cache_key]
 	// Padding overlay.
-	if(padding_material)
+	if (padding_material)
 		var/padding_cache_key = "[base_icon]-padding-[padding_material.name]"
-		if(isnull(stool_cache[padding_cache_key]))
+		if (isnull(stool_cache[padding_cache_key]))
 			var/image/I =  image(icon, "[base_icon]_padding")
-			if(material_alteration & MATERIAL_ALTERATION_COLOR)
+			if (material_alteration & MATERIAL_ALTERATION_COLOR)
 				I.color = padding_material.icon_colour
 			stool_cache[padding_cache_key] = I
 		overlays |= stool_cache[padding_cache_key]
 
 	// Strings.
-	if(material_alteration & MATERIAL_ALTERATION_NAME)
+	if (material_alteration & MATERIAL_ALTERATION_NAME)
 		SetName(padding_material ? "[padding_material.adjective_name] [initial(name)]" : "[material.adjective_name] [initial(name)]") //this is not perfect but it will do for now.
 
-	if(material_alteration & MATERIAL_ALTERATION_DESC)
+	if (material_alteration & MATERIAL_ALTERATION_DESC)
 		desc = initial(desc)
 		desc += padding_material ? " It's made of [material.use_name] and covered with [padding_material.use_name]." : " It's made of [material.use_name]."
 
 /obj/structure/bed/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
+	if (istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
 		return 1
 	else
 		return ..()
 
 /obj/structure/bed/ex_act(severity)
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			qdel(src)
 			return
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
 				return
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			if (prob(5))
 				qdel(src)
 				return
@@ -174,7 +174,7 @@
 
 
 /obj/structure/bed/proc/remove_padding()
-	if(padding_material)
+	if (padding_material)
 		padding_material.place_sheet(get_turf(src))
 		padding_material = null
 	update_icon()
@@ -185,7 +185,7 @@
 
 /obj/structure/bed/proc/dismantle()
 	material.place_sheet(get_turf(src))
-	if(padding_material)
+	if (padding_material)
 		padding_material.place_sheet(get_turf(src))
 
 /obj/structure/bed/psych

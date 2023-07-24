@@ -14,23 +14,23 @@
 	return ..()
 
 /obj/item/clothing/suit/storage/hooded/proc/MakeHood()
-	if(!hood)
+	if (!hood)
 		hood = new hoodtype(src)
 
 /obj/item/clothing/suit/storage/hooded/ui_action_click(mob/living/user)
 	ToggleHood()
 
 /obj/item/clothing/suit/storage/hooded/equipped(mob/user, slot)
-	if(slot != slot_wear_suit)
+	if (slot != slot_wear_suit)
 		RemoveHood()
 	..()
 
 /obj/item/clothing/suit/storage/hooded/proc/RemoveHood()
-	if(!hood)
+	if (!hood)
 		return
 	suittoggled = 0
 	update_icon()
-	if(ishuman(hood.loc))
+	if (ishuman(hood.loc))
 		var/mob/living/carbon/H = hood.loc
 		H.drop_from_inventory(hood)
 		H.update_inv_wear_suit()
@@ -40,13 +40,13 @@
 	RemoveHood()
 
 /obj/item/clothing/suit/storage/hooded/proc/ToggleHood()
-	if(!suittoggled)
-		if(ishuman(loc))
+	if (!suittoggled)
+		if (ishuman(loc))
 			var/mob/living/carbon/human/H = src.loc
-			if(H.wear_suit != src)
+			if (H.wear_suit != src)
 				to_chat(H, SPAN_WARNING("You must be wearing \the [src] to put up the hood!"))
 				return
-			if(H.head)
+			if (H.head)
 				to_chat(H, SPAN_WARNING("You're already wearing something on your head!"))
 				return
 			else
@@ -58,7 +58,7 @@
 		RemoveHood()
 
 /obj/item/clothing/suit/storage/hooded/on_update_icon()
-	if(suittoggled)
+	if (suittoggled)
 		icon_state = "[initial(icon_state)]_t"
 	else
 		icon_state = "[initial(icon_state)]"

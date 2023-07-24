@@ -32,7 +32,7 @@
 //mostly for convenience
 /obj/proc/get_material_name()
 	var/material/material = get_material()
-	if(material)
+	if (material)
 		return material.name
 
 /obj/proc/get_material_display_name()
@@ -153,17 +153,17 @@
 
 // Placeholders for light tiles and rglass.
 /material/proc/reinforce(mob/user, obj/item/stack/material/used_stack, obj/item/stack/material/target_stack)
-	if(!used_stack.can_use(1))
+	if (!used_stack.can_use(1))
 		USE_FEEDBACK_STACK_NOT_ENOUGH(used_stack, 1, "to reinforce \the [target_stack].")
 		return
 
 	var/needed_sheets = 2 * used_stack.matter_multiplier
-	if(!target_stack.can_use(needed_sheets))
+	if (!target_stack.can_use(needed_sheets))
 		USE_FEEDBACK_STACK_NOT_ENOUGH(target_stack, needed_sheets, "for reinforcement with \the [used_stack].")
 		return
 
 	var/material/reinf_mat = used_stack.material
-	if(reinf_mat.integrity <= integrity || reinf_mat.is_brittle())
+	if (reinf_mat.integrity <= integrity || reinf_mat.is_brittle())
 		to_chat(user, SPAN_WARNING("The [reinf_mat.display_name] is too structurally weak to reinforce the [display_name]."))
 		return
 
@@ -176,10 +176,10 @@
 	S.dropInto(target_loc)
 
 /material/proc/build_wired_product(mob/user, obj/item/stack/used_stack, obj/item/stack/target_stack)
-	if(!wire_product)
+	if (!wire_product)
 		to_chat(user, SPAN_WARNING("You cannot make anything out of \the [target_stack]"))
 		return
-	if(!used_stack.can_use(5) || !target_stack.can_use(1))
+	if (!used_stack.can_use(5) || !target_stack.can_use(1))
 		to_chat(user, SPAN_WARNING("You need five wires and one sheet of [display_name] to make anything useful."))
 		return
 
@@ -193,15 +193,15 @@
 // Make sure we have a display name and shard icon even if they aren't explicitly set.
 /material/New()
 	..()
-	if(!display_name)
+	if (!display_name)
 		display_name = name
-	if(!use_name)
+	if (!use_name)
 		use_name = display_name
-	if(!adjective_name)
+	if (!adjective_name)
 		adjective_name = display_name
-	if(!shard_icon)
+	if (!shard_icon)
 		shard_icon = shard_type
-	if(!burn_armor)
+	if (!burn_armor)
 		burn_armor = brute_armor
 
 // Return the matter comprising this material.
@@ -219,9 +219,9 @@
 	return hardness //todo
 
 /material/proc/get_attack_cooldown()
-	if(weight <= MATERIAL_LIGHT)
+	if (weight <= MATERIAL_LIGHT)
 		return FAST_WEAPON_COOLDOWN
-	if(weight >= MATERIAL_HEAVY)
+	if (weight >= MATERIAL_HEAVY)
 		return SLOW_WEAPON_COOLDOWN
 	return DEFAULT_WEAPON_COOLDOWN
 
@@ -240,7 +240,7 @@
 // Places a girder object when a wall is dismantled, also applies reinforced material.
 /material/proc/place_dismantled_girder(turf/target, material/reinf_material)
 	var/obj/structure/girder/G = new(target)
-	if(reinf_material)
+	if (reinf_material)
 		G.reinf_material = reinf_material
 		G.reinforce_girder()
 
@@ -260,7 +260,7 @@
 
 // As above.
 /material/proc/place_shard(turf/target)
-	if(shard_type)
+	if (shard_type)
 		return new /obj/item/material/shard(target, src.name)
 
 // Used by walls and weapons to determine if they break or not.

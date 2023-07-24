@@ -10,7 +10,7 @@
 	var/obj/item/implant/imp = null
 
 /obj/item/implanter/New()
-	if(ispath(imp))
+	if (ispath(imp))
 		imp = new imp(src)
 	..()
 	update_icon()
@@ -23,19 +23,19 @@
 
 /obj/item/implanter/proc/can_use()
 
-	if(!ismob(loc))
+	if (!ismob(loc))
 		return 0
 
 	var/mob/M = loc
 
-	if(M.incapacitated())
+	if (M.incapacitated())
 		return 0
-	if((src in M.contents) || (istype(loc, /turf) && in_range(src, M)))
+	if ((src in M.contents) || (istype(loc, /turf) && in_range(src, M)))
 		return 1
 	return 0
 
 /obj/item/implanter/attackby(obj/item/I, mob/user)
-	if(!imp && istype(I, /obj/item/implant) && user.unEquip(I,src))
+	if (!imp && istype(I, /obj/item/implant) && user.unEquip(I,src))
 		to_chat(usr, SPAN_NOTICE("You slide \the [I] into \the [src]."))
 		imp = I
 		update_icon()
@@ -52,10 +52,10 @@
 		user.do_attack_animation(M)
 
 		var/target_zone = user.zone_sel.selecting
-		if(src.imp.can_implant(M, user, target_zone))
+		if (src.imp.can_implant(M, user, target_zone))
 			var/imp_name = imp.name
 
-			if(do_after(user, 5 SECONDS, M, DO_EQUIP) && src.imp?.implant_in_mob(M, target_zone))
+			if (do_after(user, 5 SECONDS, M, DO_EQUIP) && src.imp?.implant_in_mob(M, target_zone))
 				M.visible_message(SPAN_WARNING("[M] has been implanted by [user]."))
 				admin_attack_log(user, M, "Implanted using \the [src] ([imp_name])", "Implanted with \the [src] ([imp_name])", "used an implanter, \the [src] ([imp_name]), on")
 

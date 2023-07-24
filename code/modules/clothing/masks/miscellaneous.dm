@@ -23,7 +23,7 @@
 
 // Clumsy folks can't take the mask off themselves.
 /obj/item/clothing/mask/muzzle/attack_hand(mob/user as mob)
-	if(user.wear_mask == src && !user.IsAdvancedToolUser())
+	if (user.wear_mask == src && !user.IsAdvancedToolUser())
 		return 0
 	..()
 
@@ -109,19 +109,19 @@
 	..()
 
 /obj/item/clothing/mask/ai/Destroy()
-	if(eye)
-		if(active)
+	if (eye)
+		if (active)
 			disengage_mask(eye.owner)
 		qdel(eye)
 		eye = null
 	..()
 
 /obj/item/clothing/mask/ai/attack_self(mob/user)
-	if(user.incapacitated())
+	if (user.incapacitated())
 		return
 	active = !active
 	to_chat(user, SPAN_NOTICE("You [active ? "" : "dis"]engage \the [src]."))
-	if(active)
+	if (active)
 		engage_mask(user)
 	else
 		disengage_mask(user)
@@ -135,16 +135,16 @@
 	disengage_mask(user)
 
 /obj/item/clothing/mask/ai/proc/engage_mask(mob/user)
-	if(!active)
+	if (!active)
 		return
-	if(user.get_equipped_item(slot_wear_mask) != src)
+	if (user.get_equipped_item(slot_wear_mask) != src)
 		return
 
 	eye.possess(user)
 	to_chat(eye.owner, SPAN_NOTICE("You feel disorented for a moment as your mind connects to the camera network."))
 
 /obj/item/clothing/mask/ai/proc/disengage_mask(mob/user)
-	if(user == eye.owner)
+	if (user == eye.owner)
 		to_chat(eye.owner, SPAN_NOTICE("You feel disorented for a moment as your mind disconnects from the camera network."))
 		eye.release(eye.owner)
 		eye.forceMove(src)
@@ -191,9 +191,9 @@
 	..()
 	visible_name = species
 	var/datum/species/S = all_species[species]
-	if(istype(S))
+	if (istype(S))
 		var/singleton/cultural_info/C = SSculture.get_culture(S.default_cultural_info[TAG_CULTURE])
-		if(istype(C))
+		if (istype(C))
 			visible_name = C.get_random_name(pick(MALE,FEMALE))
 
 /obj/item/clothing/mask/rubber/species/cat
@@ -235,7 +235,7 @@
 
 /obj/item/clothing/mask/bandana/equipped(mob/user, slot)
 	switch(slot)
-		if(slot_wear_mask) //Mask is the default for all the settings
+		if (slot_wear_mask) //Mask is the default for all the settings
 			flags_inv = initial(flags_inv)
 			body_parts_covered = initial(body_parts_covered)
 			icon_state = initial(icon_state)
@@ -243,7 +243,7 @@
 				SPECIES_VOX = 'icons/mob/species/vox/onmob_mask_vox.dmi',
 				SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_mask_unathi.dmi'
 				)
-		if(slot_head)
+		if (slot_head)
 			flags_inv = 0
 			body_parts_covered = HEAD
 			icon_state = "[initial(icon_state)]_up"

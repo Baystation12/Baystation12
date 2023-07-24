@@ -17,19 +17,19 @@
 /obj/item/integrated_circuit/smart/basic_pathfinder/do_work()
 	var/datum/integrated_io/I = inputs[1]
 	set_pin_data(IC_OUTPUT, 1, null)
-	if(!isweakref(I.data))
+	if (!isweakref(I.data))
 		activate_pin(3)
 		return
 	var/atom/A = I.data.resolve()
-	if(!A)
+	if (!A)
 		activate_pin(3)
 		return
-	if(!(A in view(get_turf(src))))
+	if (!(A in view(get_turf(src))))
 		push_data()
 		activate_pin(3)
 		return // Can't see the target.
 
-	if(get_pin_data(IC_INPUT, 2))
+	if (get_pin_data(IC_INPUT, 2))
 		set_pin_data(IC_OUTPUT, 1, get_dir(get_turf(src), get_turf(A)))
 	else
 		set_pin_data(IC_OUTPUT, 1, get_dir(get_turf(src), get_step_towards2(get_turf(src),A)))
@@ -53,7 +53,7 @@
 	power_draw_per_use = 40
 
 /obj/item/integrated_circuit/smart/coord_basic_pathfinder/do_work()
-	if(!assembly)
+	if (!assembly)
 		activate_pin(3)
 		return
 	var/turf/T = get_turf(assembly)
@@ -61,10 +61,10 @@
 	var/target_y = clamp(get_pin_data(IC_INPUT, 2), 0, world.maxy)
 	var/turf/A = locate(target_x, target_y, T.z)
 	set_pin_data(IC_OUTPUT, 1, null)
-	if(!A||A==T)
+	if (!A||A==T)
 		activate_pin(3)
 		return
-	if(get_pin_data(IC_INPUT, 2))
+	if (get_pin_data(IC_INPUT, 2))
 		set_pin_data(IC_OUTPUT, 1, get_dir(get_turf(src), get_turf(A)))
 	else
 		set_pin_data(IC_OUTPUT, 1, get_dir(get_turf(src), get_step_towards2(get_turf(src),A)))
@@ -96,32 +96,32 @@
 	return ..()
 
 /obj/item/integrated_circuit/smart/advanced_pathfinder/do_work()
-	if(!assembly)
+	if (!assembly)
 		activate_pin(3)
 		return
 	var/Ps = get_pin_data(IC_INPUT, 4)
-	if(!Ps)
+	if (!Ps)
 		return
 
 	var/list/signature_and_data = splittext(Ps, ":")
 
-	if(length(signature_and_data) < 2)
+	if (length(signature_and_data) < 2)
 		return
 
 	var/signature = signature_and_data[1]
 	var/result = signature_and_data[2]
 
-	if(!check_data_signature(signature, result))
+	if (!check_data_signature(signature, result))
 		activate_pin(3)
 		return
 
 	var/list/Pl = json_decode(result)
-	if(Pl&&islist(Pl))
+	if (Pl&&islist(Pl))
 		idc.access = Pl
 	var/turf/a_loc = get_turf(assembly)
 	var/list/P = AStar(a_loc, locate(get_pin_data(IC_INPUT, 1), get_pin_data(IC_INPUT, 2), a_loc.z), /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 200, id=idc, exclude=get_turf(get_pin_data_as_type(IC_INPUT, 3, /atom)))
 
-	if(!P)
+	if (!P)
 		activate_pin(3)
 		return
 	else

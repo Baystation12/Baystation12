@@ -32,7 +32,7 @@
 		)
 
 /obj/item/reagent_containers/food/condiment/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/pen) || istype(W, /obj/item/device/flashlight/pen))
+	if (istype(W, /obj/item/pen) || istype(W, /obj/item/device/flashlight/pen))
 		var/label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
 		if (!label)
 			return
@@ -42,24 +42,24 @@
 	return
 
 /obj/item/reagent_containers/food/condiment/attack(mob/M as mob, mob/user as mob, def_zone)
-	if(standard_feed_mob(user, M))
+	if (standard_feed_mob(user, M))
 		return
 
 /obj/item/reagent_containers/food/condiment/afterattack(obj/target, mob/user, proximity)
-	if(!proximity)
+	if (!proximity)
 		return
 
-	if(standard_dispenser_refill(user, target))
+	if (standard_dispenser_refill(user, target))
 		return
-	if(standard_pour_into(user, target))
+	if (standard_pour_into(user, target))
 		return
 
-	if(istype(target, /obj/item/reagent_containers/food/snacks)) // These are not opencontainers but we can transfer to them
-		if(!reagents || !reagents.total_volume)
+	if (istype(target, /obj/item/reagent_containers/food/snacks)) // These are not opencontainers but we can transfer to them
+		if (!reagents || !reagents.total_volume)
 			to_chat(user, SPAN_NOTICE("There is no condiment left in \the [src]."))
 			return
 
-		if(!target.reagents.get_free_space())
+		if (!target.reagents.get_free_space())
 			to_chat(user, SPAN_NOTICE("You can't add more condiment to \the [target]."))
 			return
 
@@ -81,7 +81,7 @@
 
 /obj/item/reagent_containers/food/condiment/on_reagent_change()
 	var/reagent = reagents.get_master_reagent_type()
-	if(reagent in special_bottles)
+	if (reagent in special_bottles)
 		var/obj/item/reagent_containers/food/condiment/special_bottle = special_bottles[reagent]
 		SetName(initial(special_bottle.name))
 		desc = initial(special_bottle.desc)
@@ -91,7 +91,7 @@
 		SetName(initial(name))
 		desc = initial(desc)
 		center_of_mass = initial(center_of_mass)
-		if(length(reagents.reagent_list) > 0)
+		if (length(reagents.reagent_list) > 0)
 			icon_state = "mixedcondiments"
 		else
 			icon_state = "emptycondiment"

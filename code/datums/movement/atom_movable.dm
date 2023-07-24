@@ -9,10 +9,10 @@
 // Movement relay
 /datum/movement_handler/move_relay/DoMove(direction, mover)
 	var/atom/movable/AM = host.loc
-	if(!istype(AM))
+	if (!istype(AM))
 		return
 	. = AM.DoMove(direction, mover, FALSE)
-	if(!(. & MOVEMENT_HANDLED) && !(direction & (UP|DOWN)))
+	if (!(. & MOVEMENT_HANDLED) && !(direction & (UP|DOWN)))
 		AM.relaymove(mover, direction)
 	return MOVEMENT_HANDLED
 

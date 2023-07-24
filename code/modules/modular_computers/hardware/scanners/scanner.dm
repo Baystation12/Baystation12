@@ -25,18 +25,18 @@
 
 /obj/item/stock_parts/computer/scanner/proc/do_after_install(user, atom/device)
 	var/datum/extension/interactive/ntos/os = get_extension(device, /datum/extension/interactive/ntos)
-	if(!driver_type || !device || !os)
+	if (!driver_type || !device || !os)
 		return FALSE
-	if(!os.has_component(PART_HDD))
+	if (!os.has_component(PART_HDD))
 		to_chat(user, "Driver installation for \the [src] failed: \the [device] lacks a hard drive.")
 		return FALSE
 	var/datum/computer_file/program/scanner/old_driver = os.get_file(initial(driver_type.filename))
-	if(istype(old_driver))
+	if (istype(old_driver))
 		to_chat(user, "Drivers found on \the [device]; \the [src] has been installed.")
 		old_driver.connect_scanner()
 		return TRUE
 	var/datum/computer_file/program/scanner/driver_file = new driver_type
-	if(!os.save_file(driver_file))
+	if (!os.save_file(driver_file))
 		to_chat(user, "Driver installation for \the [src] failed: file could not be written to the hard drive.")
 		return FALSE
 	to_chat(user, "Driver software for \the [src] has been installed on \the [device].")
@@ -45,9 +45,9 @@
 	return TRUE
 
 /obj/item/stock_parts/computer/scanner/proc/do_before_uninstall()
-	if(driver)
+	if (driver)
 		driver.disconnect_scanner()
-	if(driver)	//In case the driver doesn't find it.
+	if (driver)	//In case the driver doesn't find it.
 		driver = null
 
 /obj/item/stock_parts/computer/scanner/proc/run_scan(mob/user, datum/computer_file/program/scanner/program) //For scans done from the software.
@@ -80,12 +80,12 @@
 /obj/item/stock_parts/computer/scanner/proc/do_on_attackby(mob/user, atom/target)
 
 /obj/item/stock_parts/computer/scanner/proc/can_use_scanner(mob/user, atom/target, proximity = TRUE)
-	if(!check_functionality())
+	if (!check_functionality())
 		return FALSE
-	if(user.incapacitated())
+	if (user.incapacitated())
 		return FALSE
-	if(!user.IsAdvancedToolUser())
+	if (!user.IsAdvancedToolUser())
 		return FALSE
-	if(!proximity)
+	if (!proximity)
 		return FALSE
 	return TRUE

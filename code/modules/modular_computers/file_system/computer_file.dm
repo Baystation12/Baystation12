@@ -28,12 +28,12 @@ var/global/file_uid = 0
 	..()
 	uid = file_uid
 	file_uid++
-	if(islist(md))
+	if (islist(md))
 		metadata = md.Copy()
 
 /datum/computer_file/Destroy()
 	. = ..()
-	if(!holder)
+	if (!holder)
 		return
 	holder.remove_file(src)
 
@@ -44,7 +44,7 @@ var/global/file_uid = 0
 	temp.undeletable = undeletable
 	temp.hidden = hidden
 	temp.size = size
-	if(metadata)
+	if (metadata)
 		temp.metadata = metadata.Copy()
 	temp.filename = filename
 	temp.filetype = filetype

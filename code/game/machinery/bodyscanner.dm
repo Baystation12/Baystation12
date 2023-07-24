@@ -46,7 +46,7 @@
 	add_fingerprint(usr)
 
 /obj/machinery/bodyscanner/AltClick(mob/user)
-	if(CanPhysicallyInteract(user))
+	if (CanPhysicallyInteract(user))
 		eject()
 		return TRUE
 	return ..()
@@ -56,7 +56,7 @@
 	set category = "Object"
 	set name = "Enter Body Scanner"
 
-	if(!user_can_move_target_inside(usr,usr))
+	if (!user_can_move_target_inside(usr,usr))
 		return
 	usr.visible_message(
 		SPAN_NOTICE("\The [usr] climbs into \the [src]."),
@@ -87,7 +87,7 @@
 
 /obj/machinery/bodyscanner/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()
-	if(istype(new_state))
+	if (istype(new_state))
 		updateUsrDialog()
 
 /obj/machinery/bodyscanner/proc/move_target_inside(mob/target, mob/user)
@@ -173,18 +173,18 @@
 
 /obj/machinery/bodyscanner/ex_act(severity)
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			for(var/atom/movable/A as mob|obj in src)
 				A.dropInto(loc)
 				A.ex_act(severity)
 			qdel(src)
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			if (prob(50))
 				for(var/atom/movable/A as mob|obj in src)
 					A.dropInto(loc)
 					A.ex_act(severity)
 				qdel(src)
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			if (prob(25))
 				for(var/atom/movable/A as mob|obj in src)
 					A.dropInto(loc)
@@ -193,7 +193,7 @@
 
 
 /obj/machinery/bodyscanner/Destroy()
-	if(occupant)
+	if (occupant)
 		occupant.dropInto(loc)
 		occupant = null
 	. = ..()

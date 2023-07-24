@@ -33,7 +33,7 @@
 
 /obj/item/device/spy_bug/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 0)
+	if (distance <= 0)
 		to_chat(user, "It's a tiny camera, microphone, and transmission device in a happy union.")
 		to_chat(user, "Needs to be both configured and brought in contact with monitor device to be fully functional.")
 
@@ -81,11 +81,11 @@
 
 /obj/item/device/spy_monitor/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
+	if (distance <= 1)
 		to_chat(user, "The time '12:00' is blinking in the corner of the screen and \the [src] looks very cheaply made.")
 
 /obj/item/device/spy_monitor/attack_self(mob/user)
-	if(operating)
+	if (operating)
 		return
 
 	radio.attack_self(user)
@@ -102,7 +102,7 @@
 
 
 /obj/item/device/spy_monitor/proc/pair(obj/item/device/spy_bug/SB, mob/living/user)
-	if(SB.camera in cameras)
+	if (SB.camera in cameras)
 		to_chat(user, SPAN_NOTICE("\The [SB] has been unpaired from \the [src]."))
 		cameras -= SB.camera
 	else
@@ -110,7 +110,7 @@
 		cameras += SB.camera
 
 /obj/item/device/spy_monitor/proc/view_cameras(mob/user)
-	if(!can_use_cam(user))
+	if (!can_use_cam(user))
 		return
 
 	selected_camera = cameras[1]
@@ -126,7 +126,7 @@
 	spawn(0)
 		while(selected_camera && Adjacent(user))
 			var/turf/T = get_turf(selected_camera)
-			if(!T || !is_on_same_plane_or_station(T.z, user.z) || !selected_camera.can_use())
+			if (!T || !is_on_same_plane_or_station(T.z, user.z) || !selected_camera.can_use())
 				user.unset_machine()
 				user.reset_view(null)
 				to_chat(user, SPAN_NOTICE("[selected_camera] unavailable."))
@@ -139,10 +139,10 @@
 		user.reset_view(null)
 
 /obj/item/device/spy_monitor/proc/can_use_cam(mob/user)
-	if(operating)
+	if (operating)
 		return
 
-	if(!length(cameras))
+	if (!length(cameras))
 		to_chat(user, SPAN_WARNING("No paired cameras detected!"))
 		to_chat(user, SPAN_WARNING("Bring a bug in contact with this device to pair the camera."))
 		return

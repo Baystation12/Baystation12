@@ -29,7 +29,7 @@
 
 
 /obj/machinery/computer/area_atmos/attack_hand(mob/user)
-	if(..(user))
+	if (..(user))
 		return
 	var/dat = {"
 	<html>
@@ -77,9 +77,9 @@
 	if (..())
 		return
 	usr.set_machine(src)
-	if(href_list["scan"])
+	if (href_list["scan"])
 		scanscrubbers()
-	else if(href_list["toggle"])
+	else if (href_list["toggle"])
 		var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber = locate(href_list["scrub"])
 		if (!validscrubber(scrubber))
 			spawn(20)

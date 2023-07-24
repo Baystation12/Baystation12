@@ -18,18 +18,18 @@
 /obj/machinery/pointdefense_control/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/local_network_member/multilevel)
-	if(initial_id_tag)
+	if (initial_id_tag)
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.set_tag(null, initial_id_tag)
 		//No more than 1 controller please.
 		var/datum/local_network/lan = pointdefense.get_local_network()
-		if(lan)
+		if (lan)
 			var/list/pointdefense_controllers = lan.get_devices(/obj/machinery/pointdefense_control)
-			if(length(pointdefense_controllers) > 1)
+			if (length(pointdefense_controllers) > 1)
 				lan.remove_device(src)
 
 /obj/machinery/pointdefense_control/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	if(ui_template)
+	if (ui_template)
 		var/list/data = build_ui_data()
 		ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 		if (!ui)
@@ -44,17 +44,17 @@
 
 /obj/machinery/pointdefense_control/OnTopic(mob/user, href_list, datum/topic_state/state)
 
-	if(href_list["toggle_active"])
+	if (href_list["toggle_active"])
 		var/obj/machinery/pointdefense/PD = locate(href_list["toggle_active"])
-		if(!istype(PD))
+		if (!istype(PD))
 			return TOPIC_NOACTION
 
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		var/datum/local_network/lan = pointdefense.get_local_network()
-		if(!lan || !lan.is_connected(PD))
+		if (!lan || !lan.is_connected(PD))
 			return TOPIC_NOACTION
 
-		if(!PD.Activate()) //Startup() whilst the device is active will return null.
+		if (!PD.Activate()) //Startup() whilst the device is active will return null.
 			PD.Deactivate()
 		return TOPIC_REFRESH
 
@@ -65,7 +65,7 @@
 	data["id"] = lan ? lan.id_tag : "unset"
 	data["name"] = name
 	var/list/turrets = list()
-	if(lan)
+	if (lan)
 		var/list/pointdefense_turrets = lan.get_devices(/obj/machinery/pointdefense)
 		for(var/i = 1 to LAZYLEN(pointdefense_turrets))
 			var/list/turret = list()
@@ -83,14 +83,14 @@
 	return data
 
 /obj/machinery/pointdefense_control/attackby(obj/item/thing, mob/user)
-	if(isMultitool(thing))
+	if (isMultitool(thing))
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.get_new_tag(user)
 		//Check if there is more than 1 controller
 		var/datum/local_network/lan = pointdefense.get_local_network()
-		if(lan)
+		if (lan)
 			var/list/pointdefense_controllers = lan.get_devices(/obj/machinery/pointdefense_control)
-			if(pointdefense_controllers && length(pointdefense_controllers) > 1)
+			if (pointdefense_controllers && length(pointdefense_controllers) > 1)
 				lan.remove_device(src)
 		return
 	else
@@ -124,12 +124,12 @@
 /obj/machinery/pointdefense/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/local_network_member/multilevel)
-	if(initial_id_tag)
+	if (initial_id_tag)
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.set_tag(null, initial_id_tag)
 
 /obj/machinery/pointdefense/attackby(obj/item/thing, mob/user)
-	if(isMultitool(thing))
+	if (isMultitool(thing))
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.get_new_tag(user)
 		return TRUE
@@ -138,13 +138,13 @@
 //Guns cannot shoot through hull or generally dense turfs.
 /obj/machinery/pointdefense/proc/space_los(meteor)
 	for(var/turf/T in getline(src,meteor))
-		if(T.density)
+		if (T.density)
 			return FALSE
 	return TRUE
 
 /obj/machinery/pointdefense/proc/Shoot(weakref/target)
 	var/obj/effect/meteor/M = target.resolve()
-	if(!istype(M))
+	if (!istype(M))
 		return
 	engaging = TRUE
 	addtimer(new Callback(src, .proc/finish_shot, target), rotation_speed)
@@ -163,17 +163,17 @@
 	var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 	var/datum/local_network/lan = pointdefense.get_local_network()
 	var/obj/machinery/pointdefense_control/PC = null
-	if(lan)
+	if (lan)
 		var/list/pointdefense_controllers = lan.get_devices(/obj/machinery/pointdefense_control)
 		PC = pointdefense_controllers[1]
-	if(istype(PC))
+	if (istype(PC))
 		PC.targets -= target
 
 
 	engaging = FALSE
 	last_shot = world.time
 	var/obj/effect/meteor/M = target.resolve()
-	if(!istype(M))
+	if (!istype(M))
 		return
 	//We throw a laser but it doesnt have to hit for meteor to explode
 	var/obj/item/projectile/beam/pointdefense/beam = new (get_turf(src))
@@ -185,50 +185,50 @@
 
 /obj/machinery/pointdefense/Process()
 	..()
-	if(inoperable())
+	if (inoperable())
 		return
-	if(!active)
+	if (!active)
 		return
 	var/desiredir = transform.get_angle() > 0 ? NORTH : SOUTH
-	if(dir != desiredir)
+	if (dir != desiredir)
 		set_dir(desiredir)
-	if(engaging || ((world.time - last_shot) < charge_cooldown))
+	if (engaging || ((world.time - last_shot) < charge_cooldown))
 		return
 
-	if(length(GLOB.meteor_list) == 0)
+	if (length(GLOB.meteor_list) == 0)
 		return
 	var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 	var/datum/local_network/lan = pointdefense.get_local_network()
 	var/obj/machinery/pointdefense_control/PC = null
-	if(lan)
+	if (lan)
 		var/list/pointdefense_controllers = lan.get_devices(/obj/machinery/pointdefense_control)
-		if(pointdefense_controllers)
+		if (pointdefense_controllers)
 			PC = LAZYACCESS(pointdefense_controllers, 1)
-	if(!istype(PC))
+	if (!istype(PC))
 		return
 
 	for(var/obj/effect/meteor/M in GLOB.meteor_list)
 		var/already_targeted = FALSE
 		for(var/weakref/WR in PC.targets)
 			var/obj/effect/meteor/m = WR.resolve()
-			if(m == M)
+			if (m == M)
 				already_targeted = TRUE
 				break
-			if(!istype(m))
+			if (!istype(m))
 				PC.targets -= WR
 
-		if(already_targeted)
+		if (already_targeted)
 			continue
 
-		if(!(M.z in GetConnectedZlevels(z)))
+		if (!(M.z in GetConnectedZlevels(z)))
 			continue
-		if(get_dist(M, src) > kill_range)
+		if (get_dist(M, src) > kill_range)
 			continue
 
 		if (!can_see(src, M, kill_range))
 			continue
 
-		if(!emagged && space_los(M))
+		if (!emagged && space_los(M))
 			var/weakref/target = weakref(M)
 			PC.targets +=target
 			Shoot(target)
@@ -251,14 +251,14 @@
 	rotation_speed = 0.5 SECONDS / (rotation_divisor ? rotation_divisor : 1)
 
 /obj/machinery/pointdefense/proc/Activate()
-	if(active)
+	if (active)
 		return FALSE
 
 	active = TRUE
 	return TRUE
 
 /obj/machinery/pointdefense/proc/Deactivate()
-	if(!active)
+	if (!active)
 		return FALSE
 	playsound(src, 'sound/machines/apc_nopower.ogg', 50, 0)
 	active = FALSE

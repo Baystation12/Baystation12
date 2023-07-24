@@ -43,18 +43,18 @@
 	. = ..()
 
 	//Set pixel offsets based on dir
-	if(dir == NORTH)
+	if (dir == NORTH)
 		pixel_y = -32
-	if(dir == SOUTH)
+	if (dir == SOUTH)
 		pixel_y = 32
-	if(dir == WEST)
+	if (dir == WEST)
 		pixel_x = 32
-	if(dir == EAST)
+	if (dir == EAST)
 		pixel_x = -32
 
 	SSminimap.station_holomaps += src
 
-	if(SSminimap.initialized)
+	if (SSminimap.initialized)
 		update_map_data()
 
 	floor_markings = image('icons/obj/machines/stationmap.dmi', "decal_station_map")
@@ -62,7 +62,7 @@
 	update_icon()
 
 /obj/machinery/ship_map/proc/update_map_data()
-	if(!SSminimap.holomaps[original_zLevel])
+	if (!SSminimap.holomaps[original_zLevel])
 		bogus = TRUE
 		holomap_datum.initialize_holomap_bogus()
 		update_icon()
@@ -79,31 +79,31 @@
 	update_icon()
 
 /obj/machinery/ship_map/attack_hand(mob/user)
-	if(watching_mob && (watching_mob != user))
+	if (watching_mob && (watching_mob != user))
 		to_chat(user, SPAN_WARNING("Someone else is currently watching the holomap."))
 		return
-	if(user.loc != loc)
+	if (user.loc != loc)
 		to_chat(user, SPAN_WARNING("You need to stand in front of \the [src]."))
 		return
 	startWatching(user)
 
 // Let people bump up against it to watch
 /obj/machinery/ship_map/Bumped(atom/movable/AM)
-	if(!watching_mob && isliving(AM) && AM.loc == loc)
+	if (!watching_mob && isliving(AM) && AM.loc == loc)
 		startWatching(AM)
 
 // In order to actually get Bumped() we need to block movement.  We're (visually) on a wall, so people
 // couldn't really walk into us anyway.  But in reality we are on the turf in front of the wall, so bumping
 // against where we seem is actually trying to *exit* our real loc
 /obj/machinery/ship_map/CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
-	if(get_dir(target, loc) == dir) // Opposite of "normal" since we are visually in the next turf over
+	if (get_dir(target, loc) == dir) // Opposite of "normal" since we are visually in the next turf over
 		return FALSE
 	else
 		return TRUE
 
 /obj/machinery/ship_map/proc/startWatching(mob/user)
-	if(isliving(user) && anchored && operable())
-		if(user.client)
+	if (isliving(user) && anchored && operable())
+		if (user.client)
 			holomap_datum.station_map.loc = GLOB.global_hud.holomap  // Put the image on the holomap hud
 			holomap_datum.station_map.alpha = 0 // Set to transparent so we can fade in
 			animate(holomap_datum.station_map, alpha = 255, time = 5, easing = LINEAR_EASING)
@@ -116,7 +116,7 @@
 			GLOB.destroyed_event.register(watching_mob, src, /obj/machinery/ship_map/proc/stopWatching)
 			update_use_power(POWER_USE_ACTIVE)
 
-			if(bogus)
+			if (bogus)
 				to_chat(user, SPAN_WARNING("The holomap failed to initialize. This area of space cannot be mapped."))
 			else
 				to_chat(user, SPAN_NOTICE("A hologram of your current location appears before your eyes."))
@@ -124,17 +124,17 @@
 			START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
 /obj/machinery/ship_map/Process()
-	if((inoperable()))
+	if ((inoperable()))
 		stopWatching()
 		return PROCESS_KILL
 
 /obj/machinery/ship_map/proc/checkPosition()
-	if(!watching_mob || (watching_mob.loc != loc) || (dir != watching_mob.dir))
+	if (!watching_mob || (watching_mob.loc != loc) || (dir != watching_mob.dir))
 		stopWatching()
 
 /obj/machinery/ship_map/proc/stopWatching()
-	if(watching_mob)
-		if(watching_mob.client)
+	if (watching_mob)
+		if (watching_mob.client)
 			animate(holomap_datum.station_map, alpha = 0, time = 5, easing = LINEAR_EASING)
 			var/mob/M = watching_mob
 			addtimer(new Callback(src, .proc/clear_image, M, holomap_datum.station_map),  0.5 SECONDS)//we give it time to fade out
@@ -142,7 +142,7 @@
 		GLOB.destroyed_event.unregister(watching_mob, src)
 	watching_mob = null
 	update_use_power(POWER_USE_IDLE)
-	if(holomap_datum)
+	if (holomap_datum)
 		holomap_datum.legend_deselect()
 
 /obj/machinery/ship_map/proc/clear_image(mob/M, image/I)
@@ -152,10 +152,10 @@
 /obj/machinery/ship_map/on_update_icon()
 	. = ..()
 	overlays.Cut()
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		icon_state = "station_mapb"
 		set_light(0)
-	else if((!is_powered()) || !anchored)
+	else if ((!is_powered()) || !anchored)
 		icon_state = "station_map0"
 		set_light(0)
 	else
@@ -163,28 +163,28 @@
 		set_light(0.8, 0.1, 2, 2, "#1dbe17")
 
 		// Put the little "map" overlay down where it looks nice
-		if(small_station_map)
+		if (small_station_map)
 			overlays.Add(small_station_map)
 
-	if(floor_markings)
+	if (floor_markings)
 		floor_markings.dir = src.dir
 		floor_markings.pixel_x = -src.pixel_x
 		floor_markings.pixel_y = -src.pixel_y
 		src.overlays.Add(floor_markings)
 
-	if(panel_open)
+	if (panel_open)
 		overlays.Add("station_map-panel")
 
 /obj/machinery/ship_map/ex_act(severity)
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			qdel(src)
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
 			else
 				set_broken()
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			if (prob(25))
 				set_broken()
 
@@ -206,16 +206,16 @@
 	icon_state = "fup"
 
 /obj/screen/levelselect/up/Click()
-	if(..())
-		if(owner)
+	if (..())
+		if (owner)
 			owner.set_level(owner.displayed_level - 1)
 
 /obj/screen/levelselect/down
 	icon_state = "fdn"
 
 /obj/screen/levelselect/down/Click()
-	if(..())
-		if(owner)
+	if (..())
+		if (owner)
 			owner.set_level(owner.displayed_level + 1)
 
 /obj/screen/legend
@@ -243,8 +243,8 @@
 	alpha = 254
 
 /obj/screen/legend/Click(location, control, params)
-	if(!usr.incapacitated() && !isghost(usr))
-		if(istype(owner))
+	if (!usr.incapacitated() && !isghost(usr))
+		if (istype(owner))
 			owner.legend_select(src)
 
 /obj/screen/legend/proc/Setup(z_level)
@@ -252,7 +252,7 @@
 	//Get the areas for this z level and mark if we're empty
 	overlays.Cut()
 	for(var/area/A in SSminimap.holomaps[z_level].holomap_areas)
-		if(A.holomap_color == saved_color)
+		if (A.holomap_color == saved_color)
 			var/image/area = image(SSminimap.holomaps[z_level].holomap_areas[A])
 			area.pixel_x = ((HOLOMAP_ICON_SIZE / 2) - world.maxx / 2) - pixel_x
 			area.pixel_y = ((HOLOMAP_ICON_SIZE / 2) - world.maxy / 2) - pixel_y
@@ -300,13 +300,13 @@
 
 /datum/station_holomap/proc/initialize_holomap(turf/T, isAI = null, mob/user = null, reinit = FALSE)
 	z = T.z
-	if(!station_map || reinit)
+	if (!station_map || reinit)
 		station_map = image(SSminimap.holomaps[z].holomap_combined)
-	if(!cursor || reinit)
+	if (!cursor || reinit)
 		cursor = image('icons/misc/holomap_markers.dmi', "you")
 		cursor.layer = HUD_ABOVE_ITEM_LAYER
-	if(!LAZYLEN(legend) || reinit)
-		if(LAZYLEN(legend))
+	if (!LAZYLEN(legend) || reinit)
+		if (LAZYLEN(legend))
 			QDEL_NULL_LIST(legend)
 		LAZYINITLIST(legend)
 		LAZYADD(legend, new /obj/screen/legend(null ,HOLOMAP_AREACOLOR_COMMAND, "■ Command"))
@@ -320,7 +320,7 @@
 		LAZYADD(legend, new /obj/screen/legend(null ,HOLOMAP_AREACOLOR_ESCAPE, "■ Escape"))
 		LAZYADD(legend, new /obj/screen/legend(null ,HOLOMAP_AREACOLOR_CREW, "■ Crew"))
 		LAZYADD(legend, new /obj/screen/legend/cursor(null ,HOLOMAP_AREACOLOR_BASE, "You are here"))
-	if(reinit)
+	if (reinit)
 		QDEL_NULL_LIST(maptexts)
 		QDEL_NULL_LIST(levels)
 		QDEL_NULL_LIST(z_levels)
@@ -330,20 +330,20 @@
 	station_map.layer = UNDER_HUD_LAYER
 
 	//This is where the fun begins
-	if(GLOB.using_map.use_overmap)
+	if (GLOB.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/O = map_sectors["[z]"]
 
 		var/current_z_offset_x = (HOLOMAP_ICON_SIZE / 2) - world.maxx / 2
 		var/current_z_offset_y = (HOLOMAP_ICON_SIZE / 2) - world.maxy / 2
 
 		//For the given z level fetch the related map sector and build the list
-		if(istype(O))
+		if (istype(O))
 			var/z_count = length(O.map_z)
 			var/current_z_index = 1
 			z_levels = O.map_z.Copy()
 
-			if(z_count > 1)
-				if(!LAZYLEN(lbuttons))
+			if (z_count > 1)
+				if (!LAZYLEN(lbuttons))
 					//Add the buttons for switching levels
 					LAZYADD(lbuttons, new /obj/screen/levelselect/up(null, src))
 					LAZYADD(lbuttons, new /obj/screen/levelselect/down(null, src))
@@ -382,14 +382,14 @@
 
 			//Reset to starting zlevel
 			set_level(current_z_index)
-		if(isAI)
+		if (isAI)
 			T = get_turf(user.client.eye)
 		cursor.pixel_x = (T.x - 6 + current_z_offset_x) * PIXEL_MULTIPLIER
 		cursor.pixel_y = (T.y - 6 + current_z_offset_y) * PIXEL_MULTIPLIER
 
 
 /datum/station_holomap/proc/set_level(level)
-	if(level > length(z_levels))
+	if (level > length(z_levels))
 		return
 
 	displayed_level = level
@@ -397,7 +397,7 @@
 	station_map.overlays.Cut()
 	station_map.vis_contents.Cut()
 
-	if(z == z_levels[displayed_level])
+	if (z == z_levels[displayed_level])
 		station_map.overlays += cursor
 
 	station_map.overlays += levels["[z_levels[displayed_level]]"]
@@ -409,14 +409,14 @@
 		element.owner = src
 		element.pixel_y = pixel_y //Set adjusted pixel y as it will be needed for area placement
 		element.Setup(z_levels[displayed_level])
-		if(element.has_areas)
+		if (element.has_areas)
 			pixel_y -= 10
 			station_map.vis_contents += element
 
-	if(displayed_level > 1)
+	if (displayed_level > 1)
 		station_map.vis_contents += lbuttons[1]
 
-	if(displayed_level < length(z_levels))
+	if (displayed_level < length(z_levels))
 		station_map.vis_contents += lbuttons[2]
 
 /datum/station_holomap/proc/legend_select(obj/screen/legend/L)

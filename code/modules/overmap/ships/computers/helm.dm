@@ -53,8 +53,8 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 
 	if (autopilot && dx && dy)
 		var/turf/T = locate(dx,dy,GLOB.using_map.overmap_z)
-		if(linked.loc == T)
-			if(linked.is_still())
+		if (linked.loc == T)
+			if (linked.is_still())
 				autopilot = 0
 			else
 				linked.decelerate(accellimit)
@@ -82,8 +82,8 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 		return
 
 /obj/machinery/computer/ship/helm/relaymove(mob/user, direction)
-	if(viewing_overmap(user) && linked)
-		if(prob(user.skill_fail_chance(SKILL_PILOT, 50, linked.skill_needed, factor = 1)))
+	if (viewing_overmap(user) && linked)
+		if (prob(user.skill_fail_chance(SKILL_PILOT, 50, linked.skill_needed, factor = 1)))
 			direction = turn(direction,pick(90,-90))
 		linked.relaymove(user, direction, accellimit)
 		set_operator(user)
@@ -92,7 +92,7 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 /obj/machinery/computer/ship/helm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/data[0]
 
-	if(!linked)
+	if (!linked)
 		display_reconnect_dialog(user, "helm")
 	else
 		var/turf/T = get_turf(linked)
@@ -118,13 +118,13 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 		data["accellimit"] = accellimit*1000
 
 		var/speed = round(linked.get_speed()*1000, 0.01)
-		if(linked.get_speed() < SHIP_SPEED_SLOW)
+		if (linked.get_speed() < SHIP_SPEED_SLOW)
 			speed = SPAN_GOOD("[speed]")
-		if(linked.get_speed() > SHIP_SPEED_FAST)
+		if (linked.get_speed() > SHIP_SPEED_FAST)
 			speed = SPAN_CLASS("average", "[speed]")
 		data["speed"] = speed
 
-		if(linked.get_speed())
+		if (linked.get_speed())
 			data["ETAnext"] = "[round(linked.ETA()/10)] seconds"
 		else
 			data["ETAnext"] = "N/A"
@@ -149,33 +149,33 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 			ui.set_auto_update(1)
 
 /obj/machinery/computer/ship/helm/OnTopic(mob/user, list/href_list, state)
-	if(..())
+	if (..())
 		return TOPIC_HANDLED
 
-	if(!linked)
+	if (!linked)
 		return TOPIC_HANDLED
 
 	if (href_list["add"])
 		var/datum/computer_file/data/waypoint/R = new()
 		var/sec_name = input("Input naviation entry name", "New navigation entry", "Sector #[length(known_sectors)]") as text
-		if(!CanInteract(user,state))
+		if (!CanInteract(user,state))
 			return TOPIC_NOACTION
-		if(!sec_name)
+		if (!sec_name)
 			sec_name = "Sector #[length(known_sectors)]"
 		R.fields["name"] = sec_name
-		if(sec_name in known_sectors)
+		if (sec_name in known_sectors)
 			to_chat(user, SPAN_WARNING("Sector with that name already exists, please input a different name."))
 			return TOPIC_REFRESH
 		switch(href_list["add"])
-			if("current")
+			if ("current")
 				R.fields["x"] = linked.x
 				R.fields["y"] = linked.y
-			if("new")
+			if ("new")
 				var/newx = input("Input new entry x coordinate", "Coordinate input", linked.x) as num
-				if(!CanInteract(user,state))
+				if (!CanInteract(user,state))
 					return TOPIC_REFRESH
 				var/newy = input("Input new entry y coordinate", "Coordinate input", linked.y) as num
-				if(!CanInteract(user,state))
+				if (!CanInteract(user,state))
 					return TOPIC_NOACTION
 				R.fields["x"] = clamp(newx, 1, world.maxx)
 				R.fields["y"] = clamp(newy, 1, world.maxy)
@@ -183,20 +183,20 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 
 	if (href_list["remove"])
 		var/datum/computer_file/data/waypoint/R = locate(href_list["remove"])
-		if(R)
+		if (R)
 			known_sectors.Remove(R.fields["name"])
 			qdel(R)
 
 	if (href_list["setx"])
 		var/newx = input("Input new destination x coordinate", "Coordinate input", dx) as num|null
-		if(!CanInteract(user,state))
+		if (!CanInteract(user,state))
 			return
 		if (newx)
 			dx = clamp(newx, 1, world.maxx)
 
 	if (href_list["sety"])
 		var/newy = input("Input new destination y coordinate", "Coordinate input", dy) as num|null
-		if(!CanInteract(user,state))
+		if (!CanInteract(user,state))
 			return
 		if (newy)
 			dy = clamp(newy, 1, world.maxy)
@@ -221,7 +221,7 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 
 	if (href_list["move"])
 		var/ndir = text2num(href_list["move"])
-		if(prob(user.skill_fail_chance(SKILL_PILOT, 50, linked.skill_needed, factor = 1)))
+		if (prob(user.skill_fail_chance(SKILL_PILOT, 50, linked.skill_needed, factor = 1)))
 			ndir = turn(ndir,pick(90,-90))
 		linked.relaymove(user, ndir, accellimit)
 
@@ -334,7 +334,7 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 	machine_desc = "Used to view a sensor-assisted readout of the current sector and its surrounding areas."
 
 /obj/machinery/computer/ship/navigation/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	if(!linked)
+	if (!linked)
 		display_reconnect_dialog(user, "Navigation")
 		return
 
@@ -356,7 +356,7 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 	data["heading"] = linked.get_heading_angle() ? linked.get_heading_angle() : 0
 	data["viewing"] = viewing_overmap(user)
 
-	if(linked.get_speed())
+	if (linked.get_speed())
 		data["ETAnext"] = "[round(linked.ETA()/10)] seconds"
 	else
 		data["ETAnext"] = "N/A"
@@ -369,7 +369,7 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 		ui.set_auto_update(1)
 
 /obj/machinery/computer/ship/navigation/OnTopic(mob/user, list/href_list)
-	if(..())
+	if (..())
 		return TOPIC_HANDLED
 
 	if (!linked)
@@ -386,7 +386,7 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 	machine_desc = "A compact, slimmed-down version of the navigation console."
 
 /obj/machinery/computer/ship/navigation/telescreen/on_update_icon()
-	if(reason_broken & MACHINE_BROKEN_NO_PARTS || !is_powered() || MACHINE_IS_BROKEN(src))
+	if (reason_broken & MACHINE_BROKEN_NO_PARTS || !is_powered() || MACHINE_IS_BROKEN(src))
 		icon_state = "tele_off"
 		set_light(0)
 	else

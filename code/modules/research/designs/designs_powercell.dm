@@ -10,7 +10,7 @@
 	name = "Device cell model ([item_name])"
 
 /datum/design/item/powercell/AssembleDesignDesc()
-	if(build_path)
+	if (build_path)
 		var/obj/item/cell/C = build_path
 		desc = "Allows the construction of power cells that can hold [initial(C.maxcharge)] units of energy."
 

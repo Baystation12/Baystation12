@@ -10,51 +10,51 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 	return STATUS_CLOSE // By default no mob can do anything with NanoUI
 
 /mob/observer/ghost/default_can_use_topic(src_object)
-	if(can_admin_interact())
+	if (can_admin_interact())
 		return STATUS_INTERACTIVE							// Admins are more equal
-	if(!client || get_dist(src_object, src)	> client.view)	// Preventing ghosts from having a million windows open by limiting to objects in range
+	if (!client || get_dist(src_object, src)	> client.view)	// Preventing ghosts from having a million windows open by limiting to objects in range
 		return STATUS_CLOSE
 	return STATUS_UPDATE									// Ghosts can view updates
 
 /mob/living/silicon/pai/default_can_use_topic(src_object)
-	if((src_object == src || src_object == silicon_radio) && !stat)
+	if ((src_object == src || src_object == silicon_radio) && !stat)
 		return STATUS_INTERACTIVE
 	else
 		return ..()
 
 /mob/living/silicon/robot/default_can_use_topic(src_object)
 	. = shared_nano_interaction()
-	if(. <= STATUS_DISABLED)
+	if (. <= STATUS_DISABLED)
 		return
 
 	// robots can interact with things they can see within their view range
-	if((src_object in view(src)) && get_dist(src_object, src) <= src.client.view)
+	if ((src_object in view(src)) && get_dist(src_object, src) <= src.client.view)
 		return STATUS_INTERACTIVE	// interactive (green visibility)
 	return STATUS_DISABLED			// no updates, completely disabled (red visibility)
 
 /mob/living/silicon/ai/default_can_use_topic(src_object)
 	. = shared_nano_interaction()
-	if(. != STATUS_INTERACTIVE)
+	if (. != STATUS_INTERACTIVE)
 		return
 
 	// Prevents the AI from using Topic on admin levels (by for example viewing through the court/thunderdome cameras)
 	// unless it's on the same level as the object it's interacting with.
 	var/turf/T = get_turf(src_object)
 	var/turf/A = get_turf(src)
-	if(!A || !T || !AreConnectedZLevels(A.z, T.z))
+	if (!A || !T || !AreConnectedZLevels(A.z, T.z))
 		return STATUS_CLOSE
 
 	// If an object is in view then we can interact with it
-	if(src_object in view(client.view, src))
+	if (src_object in view(client.view, src))
 		return STATUS_INTERACTIVE
 
 	// If we're installed in a chassi, rather than transfered to an inteliCard or other container, then check if we have camera view
-	if(is_in_chassis())
+	if (is_in_chassis())
 		//stop AIs from leaving windows open and using then after they lose vision
-		if(cameranet && !cameranet.is_turf_visible(get_turf(src_object)))
+		if (cameranet && !cameranet.is_turf_visible(get_turf(src_object)))
 			return STATUS_CLOSE
 		return STATUS_INTERACTIVE
-	else if(get_dist(src_object, src) <= client.view)	// View does not return what one would expect while installed in an inteliCard
+	else if (get_dist(src_object, src) <= client.view)	// View does not return what one would expect while installed in an inteliCard
 		return STATUS_INTERACTIVE
 
 	return STATUS_CLOSE
@@ -89,18 +89,18 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 
 /mob/living/default_can_use_topic(src_object)
 	. = shared_nano_interaction(src_object)
-	if(. != STATUS_CLOSE)
-		if(loc)
+	if (. != STATUS_CLOSE)
+		if (loc)
 			. = min(., loc.contents_nano_distance(src_object, src))
-	if(. == STATUS_INTERACTIVE)
+	if (. == STATUS_INTERACTIVE)
 		return STATUS_UPDATE
 
 /mob/living/carbon/human/default_can_use_topic(src_object)
 	. = shared_nano_interaction(src_object)
-	if(. != STATUS_CLOSE)
-		if(loc)
+	if (. != STATUS_CLOSE)
+		if (loc)
 			. = min(., loc.contents_nano_distance(src_object, src))
 		else
 			. = min(., shared_living_nano_distance(src_object))
-		if(. == STATUS_UPDATE && (psi && !psi.suppressed && psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_OPERANT))
+		if (. == STATUS_UPDATE && (psi && !psi.suppressed && psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_OPERANT))
 			return STATUS_INTERACTIVE

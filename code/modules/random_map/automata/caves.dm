@@ -55,24 +55,24 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 	var/list/minerals_rich
 
 /datum/random_map/automata/cave_system/New()
-	if(!minerals_sparse) minerals_sparse = GLOB.weighted_minerals_sparse
-	if(!minerals_rich)   minerals_rich =   GLOB.weighted_minerals_rich
+	if (!minerals_sparse) minerals_sparse = GLOB.weighted_minerals_sparse
+	if (!minerals_rich)   minerals_rich =   GLOB.weighted_minerals_rich
 	..()
 
 /datum/random_map/automata/cave_system/get_appropriate_path(value)
 	switch(value)
-		if(DOOR_CHAR, EMPTY_CHAR)
+		if (DOOR_CHAR, EMPTY_CHAR)
 			return mineral_turf
-		if(FLOOR_CHAR)
+		if (FLOOR_CHAR)
 			return floor_type
-		if(WALL_CHAR)
+		if (WALL_CHAR)
 			return wall_type
 
 /datum/random_map/automata/cave_system/get_map_char(value)
 	switch(value)
-		if(DOOR_CHAR)
+		if (DOOR_CHAR)
 			return "x"
-		if(EMPTY_CHAR)
+		if (EMPTY_CHAR)
 			return "X"
 	return ..(value)
 
@@ -91,12 +91,12 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 	var/empty_count = 0
 	while((ore_count>0) && (length(ore_turfs)>0))
 
-		if(!priority_process)
+		if (!priority_process)
 			CHECK_TICK
 
 		var/check_cell = pick(ore_turfs)
 		ore_turfs -= check_cell
-		if(prob(75))
+		if (prob(75))
 			map[check_cell] = DOOR_CHAR  // Mineral block
 			door_count += 1
 		else
@@ -110,9 +110,9 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 
 /datum/random_map/automata/cave_system/apply_to_map()
 	..()
-	if(!origin_x) origin_x = 1
-	if(!origin_y) origin_y = 1
-	if(!origin_z) origin_z = 1
+	if (!origin_x) origin_x = 1
+	if (!origin_y) origin_y = 1
+	if (!origin_z) origin_z = 1
 
 	var/tmp_cell
 	var/new_path
@@ -127,15 +127,15 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 
 		var/minerals
 		switch (map[tmp_cell])
-			if(DOOR_CHAR)
+			if (DOOR_CHAR)
 				new_path = mineral_turf
 				minerals = pickweight(minerals_sparse)
-			if(EMPTY_CHAR)
+			if (EMPTY_CHAR)
 				new_path = mineral_turf
 				minerals = pickweight(minerals_rich)
-			if(FLOOR_CHAR)
+			if (FLOOR_CHAR)
 				new_path = floor_type
-			if(WALL_CHAR)
+			if (WALL_CHAR)
 				new_path = wall_type
 
 		if (!new_path)

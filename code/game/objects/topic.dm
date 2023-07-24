@@ -7,10 +7,10 @@
 	return GLOB.default_state
 
 /atom/Topic(href, href_list = list(), datum/topic_state/state)
-	if((. = ..()))
+	if ((. = ..()))
 		return
 	state = state || DefaultTopicState() || GLOB.default_state
-	if(CanUseTopic(usr, state, href_list) == STATUS_INTERACTIVE)
+	if (CanUseTopic(usr, state, href_list) == STATUS_INTERACTIVE)
 		CouldUseTopic(usr)
 		return OnTopic(usr, href_list, state)
 	CouldNotUseTopic(usr)
@@ -38,7 +38,7 @@
 
 /mob/living/CanUseObjTopic(obj/O, datum/topic_state/state)
 	. = ..()
-	if(state.check_access && !O.check_access(src))
+	if (state.check_access && !O.check_access(src))
 		. = min(., STATUS_UPDATE)
 
 /mob/proc/CanUseObjTopic()
@@ -54,20 +54,20 @@
 	user.AddTopicPrint(src)
 
 /mob/proc/AddTopicPrint(atom/target)
-	if(!istype(target))
+	if (!istype(target))
 		return
 	target.add_hiddenprint(src)
 
 /mob/living/AddTopicPrint(atom/target)
-	if(!istype(target))
+	if (!istype(target))
 		return
-	if(Adjacent(target))
+	if (Adjacent(target))
 		target.add_fingerprint(src)
 	else
 		target.add_hiddenprint(src)
 
 /mob/living/silicon/ai/AddTopicPrint(atom/target)
-	if(!istype(target))
+	if (!istype(target))
 		return
 	target.add_hiddenprint(src)
 

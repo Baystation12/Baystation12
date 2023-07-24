@@ -44,30 +44,30 @@ var/global/nttransfer_uid = 0
 /datum/computer_file/program/nttransfer/process_tick()
 	..()
 	// Server mode
-	if(provided_file)
+	if (provided_file)
 		for(var/datum/computer_file/program/nttransfer/C in connected_clients)
 			// Transfer speed is limited by device which uses slower connectivity.
 			// We can have multiple clients downloading at same time, but let's assume we use some sort of multicast transfer
 			// so they can all run on same speed.
 			C.actual_netspeed = min(C.get_ntnet_speed(), get_ntnet_speed())
 			C.download_completion += C.actual_netspeed
-			if(C.download_completion >= provided_file.size)
+			if (C.download_completion >= provided_file.size)
 				C.finish_download()
-	else if(downloaded_file) // Client mode
-		if(!remote)
+	else if (downloaded_file) // Client mode
+		if (!remote)
 			crash_download("Connection to remote server lost")
 
 /// Returns the current ntnet speed of the computer the program is running on. NTTransfer needs to be able to get the speed from instances on other computers.
 /datum/computer_file/program/nttransfer/proc/get_ntnet_speed()
-	if(computer)
+	if (computer)
 		return computer.get_ntnet_speed(computer.get_ntnet_status())
 	return 0
 
 /datum/computer_file/program/nttransfer/on_shutdown(forced = FALSE)
-	if(downloaded_file) // Client mode, clean up variables for next use
+	if (downloaded_file) // Client mode, clean up variables for next use
 		finalize_download()
 
-	if(provided_file) // Server mode, disconnect all clients
+	if (provided_file) // Server mode, disconnect all clients
 		for(var/datum/computer_file/program/nttransfer/P in connected_clients)
 			P.crash_download("Connection terminated by remote server")
 		downloaded_file = null
@@ -75,7 +75,7 @@ var/global/nttransfer_uid = 0
 
 /// Finishes download and attempts to store the file on HDD
 /datum/computer_file/program/nttransfer/proc/finish_download()
-	if(!computer || !computer.create_file(downloaded_file))
+	if (!computer || !computer.create_file(downloaded_file))
 		error = "I/O Error: Unable to save file. Check your hard drive and try again."
 	finalize_download()
 
@@ -86,7 +86,7 @@ var/global/nttransfer_uid = 0
 
 /// Cleans up variables for next use
 /datum/computer_file/program/nttransfer/proc/finalize_download()
-	if(remote)
+	if (remote)
 		remote.connected_clients.Remove(src)
 	downloaded_file = null
 	remote = null
@@ -97,17 +97,17 @@ var/global/nttransfer_uid = 0
 	name = "NTNet P2P Transfer Client"
 
 /datum/nano_module/program/computer_nttransfer/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
-	if(!program)
+	if (!program)
 		return
 	var/datum/computer_file/program/nttransfer/PRG = program
-	if(!istype(PRG))
+	if (!istype(PRG))
 		return
 
 	var/list/data = program.get_header_data()
 
-	if(PRG.error)
+	if (PRG.error)
 		data["error"] = PRG.error
-	else if(PRG.downloaded_file)
+	else if (PRG.downloaded_file)
 		data["downloading"] = TRUE
 		data["download_size"] = PRG.downloaded_file.size
 		data["download_progress"] = PRG.download_completion
@@ -131,7 +131,7 @@ var/global/nttransfer_uid = 0
 	else
 		var/list/all_servers[0]
 		for(var/datum/computer_file/program/nttransfer/P in ntnet_global.fileservers)
-			if(!P.provided_file)
+			if (!P.provided_file)
 				continue
 			all_servers.Add(list(list(
 				"uid" = P.unique_token,
@@ -150,50 +150,50 @@ var/global/nttransfer_uid = 0
 		ui.set_auto_update(1)
 
 /datum/computer_file/program/nttransfer/Topic(href, href_list)
-	if(..())
+	if (..())
 		return TOPIC_HANDLED
-	if(href_list["PRG_downloadfile"])
+	if (href_list["PRG_downloadfile"])
 		. = TOPIC_HANDLED
 		for(var/datum/computer_file/program/nttransfer/P in ntnet_global.fileservers)
-			if("[P.unique_token]" == href_list["PRG_downloadfile"])
+			if ("[P.unique_token]" == href_list["PRG_downloadfile"])
 				remote = P
 				break
-		if(!remote || !remote.provided_file)
+		if (!remote || !remote.provided_file)
 			return
-		if(remote.server_password)
+		if (remote.server_password)
 			var/pass = sanitize(input(usr, "Code 401 Unauthorized. Please enter password:", "Password required"))
-			if(pass != remote.server_password)
+			if (pass != remote.server_password)
 				error = "Incorrect Password"
 				return
 		downloaded_file = remote.provided_file.clone()
 		remote.connected_clients.Add(src)
 		return
-	if(href_list["PRG_reset"])
+	if (href_list["PRG_reset"])
 		. = TOPIC_HANDLED
 		error = ""
 		upload_menu = FALSE
 		finalize_download()
-		if(src in ntnet_global.fileservers)
+		if (src in ntnet_global.fileservers)
 			ntnet_global.fileservers.Remove(src)
 		for(var/datum/computer_file/program/nttransfer/T in connected_clients)
 			T.crash_download("Remote server has forcibly closed the connection")
 		provided_file = null
 		return
-	if(href_list["PRG_setpassword"])
+	if (href_list["PRG_setpassword"])
 		. = TOPIC_HANDLED
 		var/pass = sanitize(input(usr, "Enter new server password. Leave blank to cancel, input 'none' to disable password.", "Server security", "none"))
-		if(!pass)
+		if (!pass)
 			return
-		if(pass == "none")
+		if (pass == "none")
 			server_password = ""
 			return
 		server_password = pass
 		return
-	if(href_list["PRG_uploadfile"])
+	if (href_list["PRG_uploadfile"])
 		. = TOPIC_HANDLED
 		for(var/datum/computer_file/F in computer.get_all_files())
-			if("[F.uid]" == href_list["PRG_uploadfile"])
-				if(F.unsendable)
+			if ("[F.uid]" == href_list["PRG_uploadfile"])
+				if (F.unsendable)
 					error = "I/O Error: File locked."
 					return
 				provided_file = F
@@ -201,7 +201,7 @@ var/global/nttransfer_uid = 0
 				return
 		error = "I/O Error: Unable to locate file on hard drive."
 		return
-	if(href_list["PRG_uploadmenu"])
+	if (href_list["PRG_uploadmenu"])
 		upload_menu = TRUE
 		return TOPIC_HANDLED
 	return TOPIC_NOACTION

@@ -9,12 +9,12 @@
 
 /obj/structure/closet/coffin/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1 && !opened)
+	if (distance <= 1 && !opened)
 		to_chat(user, "The lid is [locked ? "tightly secured with screws." : "unsecured and can be opened."]")
 
 /obj/structure/closet/coffin/can_open()
 	. =  ..()
-	if(locked)
+	if (locked)
 		return FALSE
 
 
@@ -46,12 +46,12 @@
 
 
 /obj/structure/closet/coffin/toggle(mob/user as mob)
-	if(!(opened ? close() : open()))
+	if (!(opened ? close() : open()))
 		to_chat(user, SPAN_NOTICE("It won't budge!"))
 
 /obj/structure/closet/coffin/req_breakout()
 	. = ..()
-	if(locked)
+	if (locked)
 		return TRUE
 
 

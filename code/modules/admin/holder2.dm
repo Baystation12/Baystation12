@@ -18,11 +18,11 @@ var/global/list/admin_datums = list()
 	var/admincaster_signature	//What you'll sign the newsfeeds as
 
 /datum/admins/proc/marked_datum()
-	if(marked_datum_weak)
+	if (marked_datum_weak)
 		return marked_datum_weak.resolve()
 
 /datum/admins/New(initial_rank = "Temporary Admin", initial_rights = 0, ckey)
-	if(!ckey)
+	if (!ckey)
 		error("Admin datum created without a ckey argument. Datum has been deleted")
 		qdel(src)
 		return
@@ -34,8 +34,8 @@ var/global/list/admin_datums = list()
 		world.SetConfig("APP/admin", ckey, "role=admin")
 
 /datum/admins/proc/associate(client/C)
-	if(istype(C))
-		if(admin_datums[C.ckey] != src)
+	if (istype(C))
+		if (admin_datums[C.ckey] != src)
 			return
 		owner = C
 		owner.holder = src
@@ -43,14 +43,14 @@ var/global/list/admin_datums = list()
 		GLOB.admins |= C
 
 /datum/admins/proc/disassociate()
-	if(owner)
+	if (owner)
 		GLOB.admins -= owner
 		owner.remove_admin_verbs()
 		owner.deadmin_holder = owner.holder
 		owner.holder = null
 
 /datum/admins/proc/reassociate()
-	if(owner)
+	if (owner)
 		GLOB.admins += owner
 		owner.holder = src
 		owner.deadmin_holder = null
@@ -64,7 +64,7 @@ if it doesn't return 1 and show_msg=1 it will prints a message explaining why th
 generally it would be used like so:
 
 /proc/admin_proc()
-	if(!check_rights(R_ADMIN)) return
+	if (!check_rights(R_ADMIN)) return
 	to_chat(usr, "you have enough rights!")
 
 NOTE: It checks usr by default. Supply the "user" argument if you wish to check for a specific mob.
@@ -87,41 +87,41 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 
 //probably a bit iffy - will hopefully figure out a better solution
 /proc/check_if_greater_rights_than(client/other)
-	if(usr && usr.client)
-		if(usr.client.holder)
-			if(!other || !other.holder)
+	if (usr && usr.client)
+		if (usr.client.holder)
+			if (!other || !other.holder)
 				return 1
-			if(usr.client.holder.rights != other.holder.rights)
-				if( (usr.client.holder.rights & other.holder.rights) == other.holder.rights )
+			if (usr.client.holder.rights != other.holder.rights)
+				if ( (usr.client.holder.rights & other.holder.rights) == other.holder.rights )
 					return 1	//we have all the rights they have and more
 		to_chat(usr, SPAN_COLOR("red", "Error: Cannot proceed. They have more or equal rights to us."))
 	return 0
 
 /client/proc/deadmin()
-	if(holder)
+	if (holder)
 		holder.disassociate()
 		//qdel(holder)
 	return 1
 
 /mob/Stat()
 	. = ..()
-	if(!client)
+	if (!client)
 		return
 
 	var/stealth_status = client.is_stealthed()
-	if(stealth_status && statpanel("Status"))
+	if (stealth_status && statpanel("Status"))
 		stat("Stealth", "Engaged [client.holder.stealthy_ == STEALTH_AUTO ? "(Auto)" : "(Manual)"]")
 
 /client/proc/is_stealthed()
-	if(!holder)
+	if (!holder)
 		return FALSE
 
 	var/auto_stealth = (inactivity >= world.time) || (config.autostealth && (inactivity >= MinutesToTicks(config.autostealth)))
 	// If someone has been AFK since round-start or longer, stealth them
 	// BYOND keeps track of inactivity between rounds as long as it's not a full stop/start.
-	if(holder.stealthy_ == STEALTH_OFF && auto_stealth)
+	if (holder.stealthy_ == STEALTH_OFF && auto_stealth)
 		holder.stealthy_ = STEALTH_AUTO
-	else if(holder.stealthy_ == STEALTH_AUTO && !auto_stealth)
+	else if (holder.stealthy_ == STEALTH_AUTO && !auto_stealth)
 		// And if someone has been set to auto-stealth and returns, unstealth them
 		holder.stealthy_ = STEALTH_OFF
 	return holder.stealthy_
@@ -133,12 +133,12 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 	set category = "Admin"
 	set name = "Stealth Mode"
 
-	if(!holder)
+	if (!holder)
 		to_chat(src, SPAN_WARNING("Error: You are not an admin."))
 		return
 
 	holder.stealthy_ = holder.stealthy_ == STEALTH_OFF ? STEALTH_MANUAL : STEALTH_OFF
-	if(holder.stealthy_)
+	if (holder.stealthy_)
 		to_chat(src, SPAN_NOTICE("You are now stealthed."))
 	else
 		to_chat(src, SPAN_NOTICE("You are no longer stealthed."))

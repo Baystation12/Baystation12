@@ -16,29 +16,29 @@
 	return 1
 
 /proc/investigate_reset()
-	if(fdel(INVESTIGATE_DIR))	return 1
+	if (fdel(INVESTIGATE_DIR))	return 1
 	return 0
 
 /atom/proc/investigate_log(message, subject)
-	if(!message)	return
+	if (!message)	return
 	var/F = investigate_subject2file(subject)
-	if(!F)	return
+	if (!F)	return
 	to_chat(F, "<small>[time_stamp()] \ref[src] ([x],[y],[z])</small> || [src] [message]<br>")
 
 //ADMINVERBS
 /client/proc/investigate_show( subject in list("hrefs","notes","singulo","telesci") )
 	set name = "Investigate"
 	set category = "Admin"
-	if(!holder)	return
+	if (!holder)	return
 	switch(subject)
-		if("singulo", "telesci")			//general one-round-only stuff
+		if ("singulo", "telesci")			//general one-round-only stuff
 			var/F = investigate_subject2file(subject)
-			if(!F)
+			if (!F)
 				to_chat(src, SPAN_WARNING("Error: admin_investigate: [INVESTIGATE_DIR][subject] is an invalid path or cannot be accessed."))
 				return
 			show_browser(src, F,"window=investigate[subject];size=800x300")
 
-		if("hrefs")				//persistant logs and stuff
+		if ("hrefs")				//persistant logs and stuff
 			if (GLOB.href_logfile)
 				show_browser(src, GLOB.href_logfile, "window=investigate[subject];size=800x300")
 			else

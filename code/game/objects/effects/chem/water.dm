@@ -11,21 +11,21 @@
 
 /obj/effect/effect/water/proc/set_up(turf/target, step_count = 5, delay = 5)
 	set waitfor = FALSE
-	if(!target)
+	if (!target)
 		return
 	for(var/i = 1 to step_count)
-		if(!loc)
+		if (!loc)
 			return
 		step_towards(src, target)
 		var/turf/T = get_turf(src)
-		if(T && reagents)
+		if (T && reagents)
 			var/list/splash_mobs = list()
 			var/list/splash_others = list(T)
 			for(var/atom/A in T)
-				if(A.simulated)
-					if(!ismob(A))
+				if (A.simulated)
+					if (!ismob(A))
 						splash_others += A
-					else if(isliving(A))
+					else if (isliving(A))
 						splash_mobs += A
 
 			//each step splash 1/5 of the reagents on non-mobs
@@ -34,9 +34,9 @@
 				reagents.splash(A, (reagents.total_volume/step_count)/length(splash_others))
 			for(var/mob/living/M in splash_mobs)
 				reagents.splash(M, reagents.total_volume/length(splash_mobs))
-			if(reagents.total_volume < 1)
+			if (reagents.total_volume < 1)
 				break
-			if(T == get_turf(target))
+			if (T == get_turf(target))
 				for(var/atom/A in splash_others)
 					reagents.splash(A, reagents.total_volume/length(splash_others)) //splash anything left
 				break
@@ -46,12 +46,12 @@
 	qdel(src)
 
 /obj/effect/effect/water/Move(turf/newloc)
-	if(newloc.density)
+	if (newloc.density)
 		return 0
 	. = ..()
 
 /obj/effect/effect/water/Bump(atom/A)
-	if(reagents)
+	if (reagents)
 		reagents.touch(A)
 	return ..()
 

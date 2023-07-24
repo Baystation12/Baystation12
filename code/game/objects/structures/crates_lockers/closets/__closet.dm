@@ -29,12 +29,12 @@
 /obj/structure/closet/Initialize()
 	..()
 
-	if((setup & CLOSET_HAS_LOCK))
+	if ((setup & CLOSET_HAS_LOCK))
 		verbs += /obj/structure/closet/proc/togglelock_verb
 
-	if(ispath(closet_appearance))
+	if (ispath(closet_appearance))
 		var/singleton/closet_appearance/app = GET_SINGLETON(closet_appearance)
-		if(app)
+		if (app)
 			icon = app.icon
 			color = null
 			queue_icon_update()
@@ -45,10 +45,10 @@
 
 /obj/structure/closet/LateInitialize(mapload, ...)
 	var/list/will_contain = WillContain()
-	if(will_contain)
+	if (will_contain)
 		create_objects_in_loc(src, will_contain)
 
-	if(!opened && mapload) // if closed and it's the map loading phase, relevant items at the crate's loc are put in the contents
+	if (!opened && mapload) // if closed and it's the map loading phase, relevant items at the crate's loc are put in the contents
 		store_contents()
 
 /obj/structure/closet/proc/WillContain()
@@ -56,30 +56,30 @@
 
 /obj/structure/closet/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1 && !opened)
+	if (distance <= 1 && !opened)
 		var/content_size = 0
 		for(var/atom/movable/AM in src.contents)
-			if(!AM.anchored)
+			if (!AM.anchored)
 				content_size += content_size(AM)
-		if(!content_size)
+		if (!content_size)
 			to_chat(user, "It is empty.")
-		else if(storage_capacity > content_size*4)
+		else if (storage_capacity > content_size*4)
 			to_chat(user, "It is barely filled.")
-		else if(storage_capacity > content_size*2)
+		else if (storage_capacity > content_size*2)
 			to_chat(user, "It is less than half full.")
-		else if(storage_capacity > content_size)
+		else if (storage_capacity > content_size)
 			to_chat(user, "There is still some free space.")
 		else
 			to_chat(user, "It is full.")
 
 /obj/structure/closet/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0 || wall_mounted)) return 1
+	if (air_group || (height==0 || wall_mounted)) return 1
 	return (!density)
 
 /obj/structure/closet/proc/can_open()
-	if((setup & CLOSET_HAS_LOCK) && locked)
+	if ((setup & CLOSET_HAS_LOCK) && locked)
 		return 0
-	if((setup & CLOSET_CAN_BE_WELDED) && welded)
+	if ((setup & CLOSET_CAN_BE_WELDED) && welded)
 		return 0
 	return 1
 
@@ -96,7 +96,7 @@
 /obj/structure/closet/proc/dump_contents()
 	for(var/mob/M in src)
 		M.dropInto(loc)
-		if(M.client)
+		if (M.client)
 			M.client.eye = M.client.mob
 			M.client.perspective = MOB_PERSPECTIVE
 
@@ -106,18 +106,18 @@
 /obj/structure/closet/proc/store_contents()
 	var/stored_units = 0
 
-	if(storage_types & CLOSET_STORAGE_ITEMS)
+	if (storage_types & CLOSET_STORAGE_ITEMS)
 		stored_units += store_items(stored_units)
-	if(storage_types & CLOSET_STORAGE_MOBS)
+	if (storage_types & CLOSET_STORAGE_MOBS)
 		stored_units += store_mobs(stored_units)
-	if(storage_types & CLOSET_STORAGE_STRUCTURES)
+	if (storage_types & CLOSET_STORAGE_STRUCTURES)
 		stored_units += store_structures(stored_units)
 
 /obj/structure/closet/proc/open()
-	if(src.opened)
+	if (src.opened)
 		return 0
 
-	if(!src.can_open())
+	if (!src.can_open())
 		return 0
 
 	src.dump_contents()
@@ -129,16 +129,16 @@
 	return 1
 
 /obj/structure/closet/proc/close()
-	if(!src.opened)
+	if (!src.opened)
 		return 0
-	if(!src.can_close())
+	if (!src.can_close())
 		return 0
 
 	store_contents()
 	src.opened = 0
 
 	playsound(src.loc, close_sound, 50, 0, -3)
-	if(!wall_mounted)
+	if (!wall_mounted)
 		set_density(TRUE)
 
 	update_icon()
@@ -150,16 +150,16 @@
 	. = 0
 
 	for(var/obj/effect/dummy/chameleon/AD in loc)
-		if(CLOSET_CHECK_TOO_BIG(1))
+		if (CLOSET_CHECK_TOO_BIG(1))
 			break
 		.++
 		AD.forceMove(src)
 
 	for(var/obj/item/I in loc)
-		if(I.anchored)
+		if (I.anchored)
 			continue
 		var/item_size = content_size(I)
-		if(CLOSET_CHECK_TOO_BIG(item_size))
+		if (CLOSET_CHECK_TOO_BIG(item_size))
 			break
 		. += item_size
 		I.forceMove(src)
@@ -170,13 +170,13 @@
 /obj/structure/closet/proc/store_mobs(stored_units)
 	. = 0
 	for(var/mob/living/M in loc)
-		if(M.buckled || length(M.pinned) || M.anchored)
+		if (M.buckled || length(M.pinned) || M.anchored)
 			continue
 		var/mob_size = content_size(M)
-		if(CLOSET_CHECK_TOO_BIG(mob_size))
+		if (CLOSET_CHECK_TOO_BIG(mob_size))
 			break
 		. += mob_size
-		if(M.client)
+		if (M.client)
 			M.client.perspective = EYE_PERSPECTIVE
 			M.client.eye = src
 		M.forceMove(src)
@@ -185,21 +185,21 @@
 	. = 0
 
 	for(var/obj/structure/S in loc)
-		if(S == src)
+		if (S == src)
 			continue
-		if(S.anchored)
+		if (S.anchored)
 			continue
 		var/structure_size = content_size(S)
-		if(CLOSET_CHECK_TOO_BIG(structure_size))
+		if (CLOSET_CHECK_TOO_BIG(structure_size))
 			break
 		. += structure_size
 		S.forceMove(src)
 
 	for(var/obj/machinery/M in loc)
-		if(M.anchored)
+		if (M.anchored)
 			continue
 		var/structure_size = content_size(M)
-		if(CLOSET_CHECK_TOO_BIG(structure_size))
+		if (CLOSET_CHECK_TOO_BIG(structure_size))
 			break
 		. += structure_size
 		M.forceMove(src)
@@ -208,20 +208,20 @@
 
 // If you adjust any of the values below, please also update /proc/unit_test_weight_of_path(var/path)
 /obj/structure/closet/proc/content_size(atom/movable/AM)
-	if(ismob(AM))
+	if (ismob(AM))
 		var/mob/M = AM
 		return M.mob_size
-	if(istype(AM, /obj/item))
+	if (istype(AM, /obj/item))
 		var/obj/item/I = AM
 		return (I.w_class / 2)
-	if(istype(AM, /obj/structure) || istype(AM, /obj/machinery))
+	if (istype(AM, /obj/structure) || istype(AM, /obj/machinery))
 		return MOB_LARGE
 	return 0
 
 /obj/structure/closet/proc/toggle(mob/user as mob)
-	if(locked)
+	if (locked)
 		togglelock(user)
-	else if(!(src.opened ? src.close() : src.open()))
+	else if (!(src.opened ? src.close() : src.open()))
 		to_chat(user, SPAN_NOTICE("It won't budge!"))
 		update_icon()
 
@@ -249,7 +249,7 @@
 			else
 				A.bullet_act(Proj)
 			Proj.penetrating -= 1
-			if(!Proj.penetrating)
+			if (!Proj.penetrating)
 				break
 	. = ..()
 
@@ -369,37 +369,37 @@
 /obj/structure/closet/MouseDrop_T(atom/movable/O as mob|obj, mob/user as mob)
 	if (!O)
 		return
-	if(istype(O, /obj/screen))	//fix for HUD elements making their way into the world	-Pete
+	if (istype(O, /obj/screen))	//fix for HUD elements making their way into the world	-Pete
 		return
-	if(O.loc == user)
+	if (O.loc == user)
 		return
-	if(ismob(O) && src.large)
+	if (ismob(O) && src.large)
 		return
-	if(user.restrained() || user.stat || user.weakened || user.stunned || user.paralysis)
+	if (user.restrained() || user.stat || user.weakened || user.stunned || user.paralysis)
 		return
-	if((!( istype(O, /atom/movable) ) || O.anchored || !Adjacent(user) || !Adjacent(O) || !user.Adjacent(O) || user.contents.Find(src)))
+	if ((!( istype(O, /atom/movable) ) || O.anchored || !Adjacent(user) || !Adjacent(O) || !user.Adjacent(O) || user.contents.Find(src)))
 		return
-	if(!isturf(user.loc)) // are you in a container/closet/pod/etc?
+	if (!isturf(user.loc)) // are you in a container/closet/pod/etc?
 		return
-	if(!src.opened)
+	if (!src.opened)
 		return
-	if(istype(O, /obj/structure/closet))
+	if (istype(O, /obj/structure/closet))
 		return
 	step_towards(O, src.loc)
-	if(user != O)
+	if (user != O)
 		user.show_viewers(SPAN_DANGER("[user] stuffs [O] into [src]!"))
 	src.add_fingerprint(user)
 	return
 
 /obj/structure/closet/attack_ai(mob/user)
-	if(istype(user, /mob/living/silicon/robot) && Adjacent(user)) // Robots can open/close it, but not the AI.
+	if (istype(user, /mob/living/silicon/robot) && Adjacent(user)) // Robots can open/close it, but not the AI.
 		attack_hand(user)
 
 /obj/structure/closet/relaymove(mob/user as mob)
-	if(user.stat || !isturf(src.loc))
+	if (user.stat || !isturf(src.loc))
 		return
 
-	if(!src.open())
+	if (!src.open())
 		to_chat(user, SPAN_NOTICE("It won't budge!"))
 
 /obj/structure/closet/attack_hand(mob/user as mob)
@@ -407,7 +407,7 @@
 	src.toggle(user)
 
 /obj/structure/closet/attack_ghost(mob/ghost)
-	if(ghost.client && ghost.client.inquisitive_ghost)
+	if (ghost.client && ghost.client.inquisitive_ghost)
 		examinate(ghost, src)
 		if (!src.opened)
 			to_chat(ghost, "It contains: [english_list(contents)].")
@@ -417,24 +417,24 @@
 	set category = "Object"
 	set name = "Toggle Open"
 
-	if(!CanPhysicallyInteract(usr))
+	if (!CanPhysicallyInteract(usr))
 		return
 
-	if(ishuman(usr))
+	if (ishuman(usr))
 		src.add_fingerprint(usr)
 		src.toggle(usr)
 	else
 		to_chat(usr, SPAN_WARNING("This mob type can't use this verb."))
 
 /obj/structure/closet/on_update_icon()
-	if(opened)
+	if (opened)
 		icon_state = "open"
 		overlays.Cut()
 	else
-		if(broken)
+		if (broken)
 			icon_state = "closed_emagged[welded ? "_welded" : ""]"
 		else
-			if(locked)
+			if (locked)
 				icon_state = "closed_locked[welded ? "_welded" : ""]"
 			else
 				icon_state = "closed_unlocked[welded ? "_welded" : ""]"
@@ -445,9 +445,9 @@
 	qdel(src)
 
 /obj/structure/closet/proc/req_breakout()
-	if(opened)
+	if (opened)
 		return 0 //Door's open... wait, why are you in it's contents then?
-	if((setup & CLOSET_HAS_LOCK) && locked)
+	if ((setup & CLOSET_HAS_LOCK) && locked)
 		return 1 // Closed and locked
 	return (!welded) //closed but not welded...
 
@@ -455,7 +455,7 @@
 
 	. = ..()
 	var/breakout_time = 2 //2 minutes by default
-	if(breakout || !req_breakout())
+	if (breakout || !req_breakout())
 		return FALSE
 
 	. = TRUE
@@ -468,11 +468,11 @@
 
 	breakout = 1 //can't think of a better way to do this right now.
 	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
-		if(!do_after(escapee, 5 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED)) //5 seconds
+		if (!do_after(escapee, 5 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED)) //5 seconds
 			breakout = 0
 			return FALSE
 		//Perform the same set of checks as above for weld and lock status to determine if there is even still a point in 'resisting'...
-		if(!req_breakout())
+		if (!req_breakout())
 			breakout = 0
 			return FALSE
 
@@ -491,11 +491,11 @@
 /obj/structure/closet/proc/break_open()
 	welded = 0
 
-	if((setup & CLOSET_HAS_LOCK) && locked)
+	if ((setup & CLOSET_HAS_LOCK) && locked)
 		make_broken()
 
 	//Do this to prevent contents from being opened into nullspace (read: bluespace)
-	if(istype(loc, /obj/structure/bigDelivery))
+	if (istype(loc, /obj/structure/bigDelivery))
 		var/obj/structure/bigDelivery/BD = loc
 		BD.unwrap()
 	open()
@@ -512,30 +512,30 @@
 	return togglelock(usr)
 
 /obj/structure/closet/proc/togglelock(mob/user, obj/item/card/id/id_card)
-	if(!(setup & CLOSET_HAS_LOCK))
+	if (!(setup & CLOSET_HAS_LOCK))
 		return FALSE
-	if(!CanPhysicallyInteract(user))
+	if (!CanPhysicallyInteract(user))
 		return FALSE
-	if(src.opened)
+	if (src.opened)
 		to_chat(user, SPAN_NOTICE("Close \the [src] first."))
 		return FALSE
-	if(src.broken)
+	if (src.broken)
 		to_chat(user, SPAN_WARNING("\The [src] appears to be broken."))
 		return FALSE
-	if(user.loc == src)
+	if (user.loc == src)
 		to_chat(user, SPAN_NOTICE("You can't reach the lock from inside."))
 		return FALSE
 
 	add_fingerprint(user)
 
-	if(!id_card)
+	if (!id_card)
 		id_card = user.GetIdCard()
 
-	if(!user.IsAdvancedToolUser())
+	if (!user.IsAdvancedToolUser())
 		to_chat(user, FEEDBACK_YOU_LACK_DEXTERITY)
 		return FALSE
 
-	if(CanToggleLock(user, id_card))
+	if (CanToggleLock(user, id_card))
 		locked = !locked
 		visible_message(
 			SPAN_NOTICE("\The [src] has been [locked ? null : "un"]locked by \the [user]."),
@@ -551,7 +551,7 @@
 	return allowed(user) || (istype(id_card) && check_access_list(id_card.GetAccess()))
 
 /obj/structure/closet/AltClick(mob/user)
-	if(!src.opened)
+	if (!src.opened)
 		togglelock(user)
 		return TRUE
 	return ..()
@@ -563,12 +563,12 @@
 /obj/structure/closet/emp_act(severity)
 	for (var/atom/A as anything in src)
 		A.emp_act(severity)
-	if(!broken && (setup & CLOSET_HAS_LOCK))
-		if(prob(50/severity))
+	if (!broken && (setup & CLOSET_HAS_LOCK))
+		if (prob(50/severity))
 			locked = !locked
 			src.update_icon()
-		if(prob(20/severity) && !opened)
-			if(!locked)
+		if (prob(20/severity) && !opened)
+			if (!locked)
 				open()
 			else
 				src.req_access = list()
@@ -576,11 +576,11 @@
 	..()
 
 /obj/structure/closet/emag_act(remaining_charges, mob/user, emag_source, visual_feedback = "", audible_feedback = "")
-	if(!opened && make_broken())
+	if (!opened && make_broken())
 		update_icon()
-		if(visual_feedback)
+		if (visual_feedback)
 			visible_message(visual_feedback, audible_feedback)
-		else if(user && emag_source)
+		else if (user && emag_source)
 			visible_message(SPAN_WARNING("\The [src] has been broken by \the [user] with \an [emag_source]!"), "You hear a faint electrical spark.")
 		else
 			visible_message(SPAN_WARNING("\The [src] sparks and breaks open!"), "You hear a faint electrical spark.")
@@ -589,9 +589,9 @@
 		. = ..()
 
 /obj/structure/closet/proc/make_broken()
-	if(broken)
+	if (broken)
 		return FALSE
-	if(!(setup & CLOSET_HAS_LOCK))
+	if (!(setup & CLOSET_HAS_LOCK))
 		return FALSE
 	broken = TRUE
 	locked = FALSE

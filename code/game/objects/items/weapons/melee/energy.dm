@@ -14,7 +14,7 @@
 
 /obj/item/melee/energy/Initialize()
 	. = ..()
-	if(active)
+	if (active)
 		active = FALSE
 		activate()
 	else
@@ -23,13 +23,13 @@
 
 /obj/item/melee/energy/on_update_icon()
 	. = ..()
-	if(active)
+	if (active)
 		icon_state = active_icon
 	else
 		icon_state = initial(icon_state)
 
 /obj/item/melee/energy/proc/activate(mob/living/user)
-	if(active)
+	if (active)
 		return
 	active = TRUE
 	force = active_force
@@ -39,13 +39,13 @@
 	slot_flags |= SLOT_DENYPOCKET
 	attack_verb = active_attack_verb
 	update_icon()
-	if(user)
+	if (user)
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("\The [src] is now energised."))
 	set_light(0.8, 1, 2, 4, lighting_color)
 
 /obj/item/melee/energy/proc/deactivate(mob/living/user)
-	if(!active)
+	if (!active)
 		return
 	active = FALSE
 	force = initial(force)
@@ -55,14 +55,14 @@
 	slot_flags = initial(slot_flags)
 	attack_verb = inactive_attack_verb
 	update_icon()
-	if(user)
+	if (user)
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("\The [src] deactivates!"))
 	set_light(0)
 
 /obj/item/melee/energy/attack_self(mob/living/user as mob)
-	if(active)
-		if((MUTATION_CLUMSY in user.mutations) && prob(50))
+	if (active)
+		if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 			user.visible_message(SPAN_DANGER("\The [user] accidentally cuts \himself with \the [src]."),\
 			SPAN_DANGER("You accidentally cut yourself with \the [src]."))
 			user.take_organ_damage(5,5)
@@ -70,7 +70,7 @@
 	else
 		activate(user)
 
-	if(istype(user,/mob/living/carbon/human))
+	if (istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		H.update_inv_l_hand()
 		H.update_inv_r_hand()
@@ -79,7 +79,7 @@
 	return
 
 /obj/item/melee/energy/get_storage_cost()
-	if(active)
+	if (active)
 		return ITEM_SIZE_NO_CONTAINER
 	return ..()
 
@@ -143,7 +143,7 @@
 	var/blade_color
 
 /obj/item/melee/energy/sword/Initialize()
-	if(!blade_color)
+	if (!blade_color)
 		blade_color = pick("red","blue","green","purple")
 
 	active_icon = "sword[blade_color]"
@@ -169,12 +169,12 @@
 
 /obj/item/melee/energy/sword/dropped(mob/user)
 	..()
-	if(!istype(loc,/mob))
+	if (!istype(loc,/mob))
 		deactivate(user)
 
 /obj/item/melee/energy/sword/handle_shield(mob/user, damage, atom/damage_source = null, mob/attacker = null, def_zone = null, attack_text = "the attack")
 	. = ..()
-	if(.)
+	if (.)
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 		spark_system.set_up(5, 0, user.loc)
 		spark_system.start()
@@ -248,12 +248,12 @@
 /obj/item/melee/energy/blade/Process()
 	if (!creator || loc != creator || !creator.IsHolding(src))
 		// Tidy up a bit.
-		if(istype(loc,/mob/living))
+		if (istype(loc,/mob/living))
 			var/mob/living/carbon/human/host = loc
-			if(istype(host))
+			if (istype(host))
 				for(var/obj/item/organ/external/organ in host.organs)
 					for(var/obj/item/O in organ.implants)
-						if(O == src)
+						if (O == src)
 							organ.implants -= src
 			host.pinned -= src
 			host.embedded -= src

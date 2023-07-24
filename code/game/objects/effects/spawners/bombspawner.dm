@@ -61,7 +61,7 @@
 			p3.air_contents.temperature = btemp + T0C
 			p2.secured = 1
 
-			if(src.active)
+			if (src.active)
 				R.part1.secured = 1
 				R.part1.icon_state = text("motion[]", 1)
 				R.c_state(1, src)
@@ -83,7 +83,7 @@
 			p3.air_contents.temperature = btemp + T0C
 			p2.secured = 1
 		//bombvest
-		if(3)
+		if (3)
 			var/obj/item/clothing/suit/armor/a_i_a_ptank/R = new /obj/item/clothing/suit/armor/a_i_a_ptank(src.loc)
 			var/obj/item/tank/phoron/p4 = new /obj/item/tank/phoron(R)
 			var/obj/item/device/scanner/health/p1 = new /obj/item/device/scanner/health(R)
@@ -110,18 +110,18 @@
 	set desc = "Spawn a tank transfer valve bomb"
 	set name = "Instant TTV"
 
-	if(!check_rights(R_SPAWN)) return
+	if (!check_rights(R_SPAWN)) return
 
 	var/obj/effect/spawner/newbomb/proto = /obj/effect/spawner/newbomb/radio/custom
 
 	var/p = input("Enter phoron amount (mol):","Phoron", initial(proto.phoron_amt)) as num|null
-	if(p == null) return
+	if (p == null) return
 
 	var/o = input("Enter oxygen amount (mol):","Oxygen", initial(proto.oxygen_amt)) as num|null
-	if(o == null) return
+	if (o == null) return
 
 	var/c = input("Enter carbon dioxide amount (mol):","Carbon Dioxide", initial(proto.carbon_amt)) as num|null
-	if(c == null) return
+	if (c == null) return
 
 	new /obj/effect/spawner/newbomb/radio/custom(get_turf(mob), p, o, c)
 
@@ -158,9 +158,9 @@
 	assembly_type = /obj/item/device/assembly/prox_sensor
 
 /obj/effect/spawner/newbomb/radio/custom/New(newloc, ph, ox, co)
-	if(ph != null) phoron_amt = ph
-	if(ox != null) oxygen_amt = ox
-	if(co != null) carbon_amt = co
+	if (ph != null) phoron_amt = ph
+	if (ox != null) oxygen_amt = ox
+	if (co != null) carbon_amt = co
 	..()
 
 /obj/effect/spawner/newbomb/Initialize()

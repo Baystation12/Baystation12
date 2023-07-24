@@ -25,22 +25,22 @@
 /obj/effect/fluid/Initialize()
 	. = ..()
 	start_loc = get_turf(src)
-	if(!istype(start_loc) || start_loc.flooded)
+	if (!istype(start_loc) || start_loc.flooded)
 		qdel(src)
 		return
 	var/turf/simulated/T = start_loc
-	if(istype(T))
+	if (istype(T))
 		T.unwet_floor(FALSE)
 	forceMove(start_loc)
 	update_icon()
 
 /obj/effect/fluid/Destroy()
-	if(start_loc)
+	if (start_loc)
 		var/turf/simulated/T = start_loc
-		if(istype(T))
+		if (istype(T))
 			T.wet_floor()
 		start_loc = null
-	if(islist(equalizing_fluids))
+	if (islist(equalizing_fluids))
 		equalizing_fluids.Cut()
 	REMOVE_ACTIVE_FLUID(src)
 	. = ..()
@@ -49,23 +49,23 @@
 
 	overlays.Cut()
 
-	if(fluid_amount > FLUID_OVER_MOB_HEAD)
+	if (fluid_amount > FLUID_OVER_MOB_HEAD)
 		layer = DEEP_FLUID_LAYER
 	else
 		layer = SHALLOW_FLUID_LAYER
 
-	if(fluid_amount > FLUID_DEEP)
+	if (fluid_amount > FLUID_DEEP)
 		alpha = FLUID_MAX_ALPHA
 	else
 		alpha = min(FLUID_MAX_ALPHA,max(FLUID_MIN_ALPHA,ceil(255*(fluid_amount/FLUID_DEEP))))
 
-	if(fluid_amount > FLUID_DELETING && fluid_amount <= FLUID_EVAPORATION_POINT)
+	if (fluid_amount > FLUID_DELETING && fluid_amount <= FLUID_EVAPORATION_POINT)
 		APPLY_FLUID_OVERLAY("shallow_still")
-	else if(fluid_amount > FLUID_EVAPORATION_POINT && fluid_amount < FLUID_SHALLOW)
+	else if (fluid_amount > FLUID_EVAPORATION_POINT && fluid_amount < FLUID_SHALLOW)
 		APPLY_FLUID_OVERLAY("mid_still")
-	else if(fluid_amount >= FLUID_SHALLOW && fluid_amount < (FLUID_DEEP*2))
+	else if (fluid_amount >= FLUID_SHALLOW && fluid_amount < (FLUID_DEEP*2))
 		APPLY_FLUID_OVERLAY("deep_still")
-	else if(fluid_amount >= (FLUID_DEEP*2))
+	else if (fluid_amount >= (FLUID_DEEP*2))
 		APPLY_FLUID_OVERLAY("ocean")
 
 // Map helper.
@@ -80,9 +80,9 @@
 /obj/effect/fluid_mapped/Initialize()
 	..()
 	var/turf/T = get_turf(src)
-	if(istype(T))
+	if (istype(T))
 		var/obj/effect/fluid/F = locate() in T
-		if(!F) F = new(T)
+		if (!F) F = new(T)
 		SET_FLUID_DEPTH(F, fluid_amount)
 	return INITIALIZE_HINT_QDEL
 

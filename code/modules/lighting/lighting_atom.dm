@@ -33,29 +33,29 @@
 /atom/proc/set_light(l_max_bright, l_inner_range, l_outer_range, l_falloff_curve = NONSENSICAL_VALUE, l_color = NONSENSICAL_VALUE)
 	. = 0 //make it less costly if nothing's changed
 
-	if(l_max_bright != null && l_max_bright != light_max_bright)
+	if (l_max_bright != null && l_max_bright != light_max_bright)
 		light_max_bright = l_max_bright
 		. = 1
-	if(l_outer_range != null && l_outer_range != light_outer_range)
+	if (l_outer_range != null && l_outer_range != light_outer_range)
 		light_outer_range = l_outer_range
 		. = 1
-	if(l_inner_range != null && l_inner_range != light_inner_range)
-		if(light_inner_range >= light_outer_range)
+	if (l_inner_range != null && l_inner_range != light_inner_range)
+		if (light_inner_range >= light_outer_range)
 			light_inner_range = light_outer_range / 4
 		else
 			light_inner_range = l_inner_range
 		. = 1
-	if(l_falloff_curve != NONSENSICAL_VALUE)
-		if(!l_falloff_curve || l_falloff_curve <= 0)
+	if (l_falloff_curve != NONSENSICAL_VALUE)
+		if (!l_falloff_curve || l_falloff_curve <= 0)
 			light_falloff_curve = DEFAULT_FALLOFF_CURVE
-		if(l_falloff_curve != light_falloff_curve)
+		if (l_falloff_curve != light_falloff_curve)
 			light_falloff_curve = l_falloff_curve
 			. = 1
-	if(l_color != NONSENSICAL_VALUE && l_color != light_color)
+	if (l_color != NONSENSICAL_VALUE && l_color != light_color)
 		light_color = l_color
 		. = 1
 
-	if(.) update_light()
+	if (.) update_light()
 
 #undef NONSENSICAL_VALUE
 #undef DEFAULT_FALLOFF_CURVE
@@ -66,33 +66,33 @@
 /atom/proc/update_light()
 	set waitfor = FALSE
 
-	if(!light_max_bright || !light_outer_range || light_max_bright > 1)
-		if(light)
+	if (!light_max_bright || !light_outer_range || light_max_bright > 1)
+		if (light)
 			light.destroy()
 			light = null
-		if(light_max_bright > 1)
+		if (light_max_bright > 1)
 			light_max_bright = 1
 			CRASH("Attempted to call update_light() on atom [src] \ref[src] with a light_max_bright value greater than one")
 	else
-		if(!istype(loc, /atom/movable))
+		if (!istype(loc, /atom/movable))
 			. = src
 		else
 			. = loc
 
-		if(light)
+		if (light)
 			light.update(.)
 		else
 			light = new /datum/light_source(src, .)
 
 /atom/Destroy()
-	if(light)
+	if (light)
 		light.destroy()
 		light = null
 	return ..()
 
 /atom/set_opacity()
 	. = ..()
-	if(.)
+	if (.)
 		var/turf/T = loc
-		if(istype(T))
+		if (istype(T))
 			T.RecalculateOpacity()

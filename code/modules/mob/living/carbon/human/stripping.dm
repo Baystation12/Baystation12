@@ -1,8 +1,8 @@
 /mob/living/carbon/human/proc/handle_strip(slot_to_strip_text,mob/living/user,obj/item/clothing/holder)
-	if(!slot_to_strip_text || !istype(user))
+	if (!slot_to_strip_text || !istype(user))
 		return
 
-	if(user.incapacitated()  || !user.Adjacent(src))
+	if (user.incapacitated()  || !user.Adjacent(src))
 		show_browser(user, null, "window=mob[src.name]")
 		return TRUE
 
@@ -16,7 +16,7 @@
 		to_chat(user, SPAN_WARNING("You cannot do this with the hand that has an active grab!"))
 		return
 
-	if(!istype(held) || is_robot_module(held))
+	if (!istype(held) || is_robot_module(held))
 		stripping = TRUE
 
 	switch (slot_to_strip_text)
@@ -134,13 +134,13 @@
 	visible_message(SPAN_DANGER("\The [user] empties [src]'s pockets!"))
 
 /mob/living/carbon/human/proc/place_in_pockets(obj/item/I, mob/living/user)
-	if(!user.unEquip(I))
+	if (!user.unEquip(I))
 		return
-	if(!r_store)
-		if(equip_to_slot_if_possible(I, slot_r_store, TRYEQUIP_REDRAW | TRYEQUIP_SILENT))
+	if (!r_store)
+		if (equip_to_slot_if_possible(I, slot_r_store, TRYEQUIP_REDRAW | TRYEQUIP_SILENT))
 			return
-	if(!l_store)
-		if(equip_to_slot_if_possible(I, slot_l_store, TRYEQUIP_REDRAW | TRYEQUIP_SILENT))
+	if (!l_store)
+		if (equip_to_slot_if_possible(I, slot_l_store, TRYEQUIP_REDRAW | TRYEQUIP_SILENT))
 			return
 	to_chat(user, SPAN_WARNING("You are unable to place [I] in [src]'s pockets."))
 	user.put_in_active_hand(I)
@@ -148,7 +148,7 @@
 // Modify the current target sensor level.
 /mob/living/carbon/human/proc/toggle_sensors(mob/living/user)
 	var/obj/item/clothing/under/suit = w_uniform
-	if(!suit)
+	if (!suit)
 		to_chat(user, SPAN_WARNING("\The [src] is not wearing a suit with sensors."))
 		return
 	if (suit.has_sensor >= 2)
@@ -160,24 +160,24 @@
 
 // Set internals on or off.
 /mob/living/carbon/human/proc/toggle_internals(mob/living/user)
-	if(internal)
+	if (internal)
 		visible_message(SPAN_DANGER("\The [user] disables \the [src]'s internals!"))
 		internal.add_fingerprint(user)
 		set_internals(null)
 		return
 	else
 		// Check for airtight mask/helmet.
-		if(!(wear_mask && wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
-			if(!(head && head.item_flags & ITEM_FLAG_AIRTIGHT))
+		if (!(wear_mask && wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
+			if (!(head && head.item_flags & ITEM_FLAG_AIRTIGHT))
 				to_chat(user, SPAN_WARNING("\The [src] does not have a suitable mask or helmet."))
 				return
 
 		// Find an internal source.
-		if(istype(back, /obj/item/tank))
+		if (istype(back, /obj/item/tank))
 			set_internals(back)
-		else if(istype(s_store, /obj/item/tank))
+		else if (istype(s_store, /obj/item/tank))
 			set_internals(s_store)
-		else if(istype(belt, /obj/item/tank))
+		else if (istype(belt, /obj/item/tank))
 			set_internals(belt)
 		else
 			to_chat(user, SPAN_WARNING("You could not find a suitable tank!"))

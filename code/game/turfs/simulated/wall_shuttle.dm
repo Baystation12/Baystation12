@@ -23,13 +23,13 @@
 //Grabs the base turf type from our area and copies its appearance
 /turf/simulated/shuttle/wall/corner/proc/reset_base_appearance()
 	var/turf/base_type = get_base_turf_by_area(src)
-	if(!base_type) return
+	if (!base_type) return
 
 	icon = initial(base_type.icon)
 	icon_state = initial(base_type.icon_state)
 
 /turf/simulated/shuttle/wall/corner/proc/reset_overlay()
-	if(corner_overlay)
+	if (corner_overlay)
 		overlays -= corner_overlay
 	else
 		corner_overlay = image(icon = 'icons/turf/shuttle.dmi', icon_state = corner_overlay_state, dir = src.dir)

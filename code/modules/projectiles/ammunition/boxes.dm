@@ -73,13 +73,13 @@
 /obj/item/ammo_magazine/shotholder/on_update_icon()
 	..()
 	overlays.Cut()
-	if(marking_color)
+	if (marking_color)
 		var/image/I = image(icon, "shotholder-marking")
 		I.color = marking_color
 		overlays += I
 
 /obj/item/ammo_magazine/shotholder/attack_hand(mob/user)
-	if((user.a_intent == I_HURT) && (length(stored_ammo)))
+	if ((user.a_intent == I_HURT) && (length(stored_ammo)))
 		var/obj/item/ammo_casing/C = stored_ammo[length(stored_ammo)]
 		stored_ammo-=C
 		user.put_in_hands(C)

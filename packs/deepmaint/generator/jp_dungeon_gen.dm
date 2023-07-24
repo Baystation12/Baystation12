@@ -135,13 +135,13 @@
 	//Doesn't just go list(get_step(blah blah), get_step(blah blah) etc. because that could return null if on the border of the map
 	.=list()
 	var/k = get_step(t,NORTH)
-	if(k).+=k
+	if (k).+=k
 	k = get_step(t,SOUTH)
-	if(k).+=k
+	if (k).+=k
 	k = get_step(t,EAST)
-	if(k).+=k
+	if (k).+=k
 	k = get_step(t,WEST)
-	if(k).+=k
+	if (k).+=k
 
 
 /**
@@ -154,46 +154,46 @@
 	var/k = null
 	k = get_step(t,NORTH)
 	while(counter > 0)
-		if(k)
+		if (k)
 			k = get_step(k,NORTH)
 			counter--
 		else
 			k = null
 			break;
-	if(k)
+	if (k)
 		.+=k
 	counter = num
 	k = get_step(t,SOUTH)
 	while(counter > 0)
-		if(k)
+		if (k)
 			k = get_step(k,SOUTH)
 			counter--
 		else
 			k = null
 			break;
-	if(k)
+	if (k)
 		.+=k
 	counter = num
 	k = get_step(t,EAST)
 	while(counter > 0)
-		if(k)
+		if (k)
 			k = get_step(k,EAST)
 			counter--
 		else
 			k = null
 			break;
-	if(k)
+	if (k)
 		.+=k
 	counter = num
 	k = get_step(t,WEST)
 	while(counter > 0)
-		if(k)
+		if (k)
 			k = get_step(k,WEST)
 			counter--
 		else
 			k = null
 			break;
-	if(k)
+	if (k)
 		.+=k
 
 /**
@@ -226,21 +226,21 @@
 */
 /obj/procedural/jp_DungeonGenerator/proc/errString(e)
 	switch(e)
-		if(0) return "No error"
-		if(ERROR_NO_ROOMS) return "The allowedRooms list was either empty, or an illegal value"
-		if(ERROR_BAD_AREA) return "The area that the generator is allowed to work on was either empty, or crossed a z-level"
-		if(ERROR_NO_WALLTYPE) return "The types that are walls were either not specified, or weren't a typepath or list of typepaths"
-		if(ERROR_NO_FLOORTYPE) return "The type used for floors either wasn't specified, or wasn't a typepath"
-		if(ERROR_NUMROOMS_BAD) return "The number of rooms to place was either negative, or not an integer"
-		if(ERROR_NUMEXTRAPATHS_BAD) return "The number of extra paths to place was either negative, or not an integer"
-		if(ERROR_ROOM_SIZE_BAD) return "One of the minimum and maximum room sizes was negative, or not an integer. Alternatively, the minimum room size was larger than the maximum room size"
-		if(ERROR_PATH_LENGTH_BAD) return "One of the path-length parameters was negative, or not an integer. Alternatively, either minimum path length or minimum long path length was larger than maximum path length"
-		if(ERROR_PATHENDCHANCE_BAD) return "The pathend chance was either less than 0 or greater than 100"
-		if(ERROR_LONGPATHCHANCE_BAD) return "The long-path chance was either less than 0, or greater than 100"
-		if(ERROR_MAX_ITERATIONS_ROOMS) return "Maximum iterations was reached while placing rooms on the map. The number of rooms you specified may not have been placed. The dungeon should still be usable"
-		if(ERROR_MAX_ITERATIONS_CONNECTIVITY) return "Maximum iterations was reached while ensuring connectivity. No guarantees can be made about reachability. This dungeon is likely unusable"
-		if(ERROR_MAX_ITERATIONS_EXTRAPATHS) return "Maximum iterations was reached while placing extra paths. The number of extra paths you specified may not have been placed. The dungeon should still be usable"
-		if(ERROR_NO_SUBMAPS) return "No submaps were provided for room types that require to load them."
+		if (0) return "No error"
+		if (ERROR_NO_ROOMS) return "The allowedRooms list was either empty, or an illegal value"
+		if (ERROR_BAD_AREA) return "The area that the generator is allowed to work on was either empty, or crossed a z-level"
+		if (ERROR_NO_WALLTYPE) return "The types that are walls were either not specified, or weren't a typepath or list of typepaths"
+		if (ERROR_NO_FLOORTYPE) return "The type used for floors either wasn't specified, or wasn't a typepath"
+		if (ERROR_NUMROOMS_BAD) return "The number of rooms to place was either negative, or not an integer"
+		if (ERROR_NUMEXTRAPATHS_BAD) return "The number of extra paths to place was either negative, or not an integer"
+		if (ERROR_ROOM_SIZE_BAD) return "One of the minimum and maximum room sizes was negative, or not an integer. Alternatively, the minimum room size was larger than the maximum room size"
+		if (ERROR_PATH_LENGTH_BAD) return "One of the path-length parameters was negative, or not an integer. Alternatively, either minimum path length or minimum long path length was larger than maximum path length"
+		if (ERROR_PATHENDCHANCE_BAD) return "The pathend chance was either less than 0 or greater than 100"
+		if (ERROR_LONGPATHCHANCE_BAD) return "The long-path chance was either less than 0, or greater than 100"
+		if (ERROR_MAX_ITERATIONS_ROOMS) return "Maximum iterations was reached while placing rooms on the map. The number of rooms you specified may not have been placed. The dungeon should still be usable"
+		if (ERROR_MAX_ITERATIONS_CONNECTIVITY) return "Maximum iterations was reached while ensuring connectivity. No guarantees can be made about reachability. This dungeon is likely unusable"
+		if (ERROR_MAX_ITERATIONS_EXTRAPATHS) return "Maximum iterations was reached while placing extra paths. The number of extra paths you specified may not have been placed. The dungeon should still be usable"
+		if (ERROR_NO_SUBMAPS) return "No submaps were provided for room types that require to load them."
 
 /**
 	Sets the number of rooms that will be placed in the dungeon to 'r'.
@@ -362,7 +362,7 @@
 	Returns null if the area isn't specified.
 */
 /obj/procedural/jp_DungeonGenerator/proc/getMinX()
-	if(!corner1||!corner2) return null
+	if (!corner1||!corner2) return null
 	return min(corner1.x, corner2.x)
 
 /**
@@ -370,7 +370,7 @@
 	Returns null if the area isn't specified.
 */
 /obj/procedural/jp_DungeonGenerator/proc/getMaxX()
-	if(!corner1||!corner2) return null
+	if (!corner1||!corner2) return null
 	return max(corner1.x, corner2.x)
 
 /**
@@ -378,7 +378,7 @@
 	Returns null if the area isn't specified.
 */
 /obj/procedural/jp_DungeonGenerator/proc/getMinY()
-	if(!corner1||!corner2) return null
+	if (!corner1||!corner2) return null
 	return min(corner1.y, corner2.y)
 
 /**
@@ -386,7 +386,7 @@
 	Returns null if the area isn't specified.
 */
 /obj/procedural/jp_DungeonGenerator/proc/getMaxY()
-	if(!corner1||!corner2) return null
+	if (!corner1||!corner2) return null
 	return max(corner1.y, corner2.y)
 
 /**
@@ -394,7 +394,7 @@
 	Returns null if the area isn't specified.
 */
 /obj/procedural/jp_DungeonGenerator/proc/getZ()
-	if(!corner1||!corner2) return null
+	if (!corner1||!corner2) return null
 	return corner1.z
 
 /**
@@ -410,7 +410,7 @@
 	the list if it doesn't exist yet.
 */
 /obj/procedural/jp_DungeonGenerator/proc/addAllowedRoom(r, maxsize=-1, minsize=-1, required=-1, maxnum=-1)
-	if(!allowedRooms) allowedRooms = list()
+	if (!allowedRooms) allowedRooms = list()
 	allowedRooms["[r]"] = new /obj/procedural/jp_dungeonroomEntry/(r, maxsize, minsize, required, maxnum)
 
 /**
@@ -419,13 +419,13 @@
 */
 /obj/procedural/jp_DungeonGenerator/proc/removeAllowedRoom(r)
 	allowedRooms["[r]"] = null
-	if(!allowedRooms || !length(allowedRooms)) allowedRooms = null
+	if (!allowedRooms || !length(allowedRooms)) allowedRooms = null
 
 /**
 	Returns the list of allowed jp_dungeonrooms. This may be null, if the list is empty
 */
 /obj/procedural/jp_DungeonGenerator/proc/getAllowedRooms()
-	if(!allowedRooms) return null
+	if (!allowedRooms) return null
 	var/list/l = list()
 	for(var/k in allowedRooms) l+=text2path(k)
 	return l
@@ -478,16 +478,16 @@
 	Adds the typepath 'w' to the list of types considered walls.
 */
 /obj/procedural/jp_DungeonGenerator/proc/addWallType(w)
-	if(!walltype) walltype = list()
-	if(!islist(walltype)) walltype = list(walltype)
+	if (!walltype) walltype = list()
+	if (!islist(walltype)) walltype = list(walltype)
 	walltype+=w
 
 /**
 	Removes 'w' from the list of types considered walls
 */
 /obj/procedural/jp_DungeonGenerator/proc/removeWallType(w)
-	if(!islist(walltype))
-		if(walltype==w) walltype = null
+	if (!islist(walltype))
+		if (walltype==w) walltype = null
 		return
 	walltype-=w
 
@@ -500,7 +500,7 @@
 
 /obj/procedural/jp_DungeonGenerator/proc/getNeighboringRegions(list/R)
 	var/list/regs = list()
-	if(length(R) == 1)
+	if (length(R) == 1)
 		regs += R[1]
 		regs += R[1]
 		return regs
@@ -509,14 +509,14 @@
 	var/obj/procedural/jp_DungeonRegion/r2 = null
 	var/r_distance = 127 // At this time, get_dist() never returns a value greater than 127 - thank you, byond, very cool.
 	for(var/obj/procedural/jp_DungeonRegion/region in R)
-		if(r1 == region)
+		if (r1 == region)
 			continue
 		var/dist = get_dist(r1.center, region.center)
-		if(dist < r_distance)
+		if (dist < r_distance)
 			r2 = region
 			r_distance = dist
 
-	if(r2)
+	if (r2)
 		regs += r2
 		return regs
 
@@ -544,7 +544,7 @@
 */
 /obj/procedural/jp_DungeonGenerator/proc/generate(seed=null)
 	set background = 1
-	if(!check_params()) return
+	if (!check_params()) return
 	out_numPaths = 0
 	out_numLongPaths = 0
 
@@ -569,7 +569,7 @@
 
 	var/timer = world.timeofday
 
-	if(seed==null)
+	if (seed==null)
 		out_seed = rand(-65535, 65535)
 		rand_seed(out_seed)
 	else
@@ -583,38 +583,38 @@
 	miny = min(corner1.y, corner2.y) + roomMaxSize + 1
 	maxy = max(corner1.y, corner2.y) - roomMaxSize - 1
 
-	if(minx>maxx || miny>maxy)
+	if (minx>maxx || miny>maxy)
 		out_error = ERROR_BAD_AREA
 		return
 
-	if(usePreexistingRegions)
+	if (usePreexistingRegions)
 		examined = list()
 		for(var/turf/t in block(locate(getMinX(), getMinY(), getZ()), locate(getMaxX(), getMaxY(), getZ())))
-			if(!t.is_wall()) if(!(t in examined)) rooms+=regionCreate(t)
+			if (!t.is_wall()) if (!(t in examined)) rooms+=regionCreate(t)
 
 	for(var/k in allowedRooms)
 		nextentry = allowedRooms[k]
-		if(nextentry.required>0) required+=nextentry
+		if (nextentry.required>0) required+=nextentry
 
 	var/rooms_placed = 0
 	while(rooms_placed<numRooms)
-		if(numits>maximumIterations)
+		if (numits>maximumIterations)
 			out_error=ERROR_MAX_ITERATIONS_ROOMS
 			break
 
 		nextloc = locate(rand(minx, maxx), rand(miny, maxy), z)
 
-		if(!length(required)) nextentry = allowedRooms[pick(allowedRooms)]
+		if (!length(required)) nextentry = allowedRooms[pick(allowedRooms)]
 		else
 			nextentry = required[1]
-			if(nextentry.count>=nextentry.required)
+			if (nextentry.count>=nextentry.required)
 				required-=nextentry
 				continue
-		if(nextentry.maxnum>-1 && nextentry.count>=nextentry.maxnum) continue
+		if (nextentry.maxnum>-1 && nextentry.count>=nextentry.maxnum) continue
 		nextroom = new nextentry.roomtype(rand((nextentry.minsize<0)?(roomMinSize):(nextentry.minsize), (nextentry.maxsize<0)?(roomMaxSize):(nextentry.maxsize)), nextloc, src)
 		numits++
-		if(!nextroom.ok()) continue
-		if(!rooms || !intersects(nextroom, rooms))
+		if (!nextroom.ok()) continue
+		if (!rooms || !intersects(nextroom, rooms))
 			nextroom.place()
 			numits=0
 			rooms+=nextroom
@@ -625,8 +625,8 @@
 	border_turfs = list()
 
 	for(var/obj/procedural/jp_dungeonroom/r in rooms)
-		if(!r.doesMultiborder())
-			if(length(r.border) == 0)
+		if (!r.doesMultiborder())
+			if (length(r.border) == 0)
 				continue
 			var/obj/procedural/jp_DungeonRegion/reg = new /obj/procedural/jp_DungeonRegion(src)
 			reg.addTurfs(r.getTurfs(), 1)
@@ -645,9 +645,9 @@
 
 	for(var/turf/t in border_turfs)
 		for(var/turf/t2 in range(t, 1))
-			if(t2.is_wall()&&!(t2 in border_turfs))
+			if (t2.is_wall()&&!(t2 in border_turfs))
 				for(var/turf/t3 in range(t2, 1))
-					if(!t3.is_wall())
+					if (!t3.is_wall())
 						border_turfs+=t2
 						break
 
@@ -655,8 +655,8 @@
 	paths = numExtraPaths
 
 	while(length(regions)>1 || paths>0)
-		if(numits>maximumIterations)
-			if(length(regions)>1) out_error = ERROR_MAX_ITERATIONS_CONNECTIVITY
+		if (numits>maximumIterations)
+			if (length(regions)>1) out_error = ERROR_MAX_ITERATIONS_CONNECTIVITY
 			else out_error = ERROR_MAX_ITERATIONS_EXTRAPATHS
 			break
 		numits++
@@ -664,22 +664,22 @@
 		region1 = neighbors[1]
 		region2 = neighbors[2]
 
-		if(region1==region2)
-			if(length(regions)>1)
+		if (region1==region2)
+			if (length(regions)>1)
 				continue
 
 		var/list/regBord = region1.getBorder()
-		if(!length(regBord))
+		if (!length(regBord))
 			regions -= region1
 			continue
 
 		var/list/turf/path = getPath(region1, region2, regions)
 
-		if(!path || !length(path)) continue
+		if (!path || !length(path)) continue
 
 		numits = 0
 
-		if(region1==region2) if(length(regions)<=1) paths--
+		if (region1==region2) if (length(regions)<=1) paths--
 
 		for(var/turf/t in path)
 			path-=t
@@ -689,13 +689,13 @@
 
 		region1.addTurfs(path)
 
-		if(region1!=region2)
+		if (region1!=region2)
 			region1.addTurfs(region2.getTurfs(), 1)
 			region1.addBorder(region2.getBorder())
 			regions-=region2
 
-		for(var/turf/t in region1.getBorder()) if(!(t in border_turfs)) border_turfs+=t
-		for(var/turf/t in path)	for(var/turf/t2 in range(t, 1))	if(!(t2 in border_turfs)) border_turfs+=t2
+		for(var/turf/t in region1.getBorder()) if (!(t in border_turfs)) border_turfs+=t
+		for(var/turf/t in path)	for(var/turf/t2 in range(t, 1))	if (!(t2 in border_turfs)) border_turfs+=t2
 
 	for(var/obj/procedural/jp_dungeonroom/r in rooms)
 		r.finalise()
@@ -742,18 +742,18 @@
 
 		next-=nt
 		examined+=nt
-		if(nt.x<getMinX() || nt.x>getMaxX() || nt.y<getMinY() || nt.y>getMaxY()) continue
-		if(nt.is_wall())
+		if (nt.x<getMinX() || nt.x>getMaxX() || nt.y<getMinY() || nt.y>getMaxY()) continue
+		if (nt.is_wall())
 			border+=nt
 			continue
 
-		if(nt.x<minx) minx=nt.x
-		if(nt.x>maxx) maxx=nt.x
-		if(nt.y<miny) miny=nt.y
-		if(nt.y>maxy) maxy=nt.y
-		if(!nt.density)
+		if (nt.x<minx) minx=nt.x
+		if (nt.x>maxx) maxx=nt.x
+		if (nt.y<miny) miny=nt.y
+		if (nt.y>maxy) maxy=nt.y
+		if (!nt.density)
 			turfs+=nt
-			for(var/turf/t2 in getAdjacent(nt))	if(!((t2 in border) || (t2 in turfs))) next+=t2
+			for(var/turf/t2 in getAdjacent(nt))	if (!((t2 in border) || (t2 in turfs))) next+=t2
 		else
 			walls+=nt
 
@@ -775,9 +775,9 @@
 /obj/procedural/jp_DungeonGenerator/proc/intersects(obj/procedural/jp_dungeonroom/newroom, list/obj/procedural/jp_dungeonroom/rooms)
 	for(var/obj/procedural/jp_dungeonroom/r in rooms)
 		. = newroom.getSize() + r.getSize() + 2
-		if((. > abs(newroom.getX() - r.getX())) && (. > abs(newroom.getY() - r.getY())))
-			if(!doAccurateRoomPlacementCheck) return TRUE
-			if(!(newroom.doesAccurate() && r.doesAccurate())) return TRUE
+		if ((. > abs(newroom.getX() - r.getX())) && (. > abs(newroom.getY() - r.getY())))
+			if (!doAccurateRoomPlacementCheck) return TRUE
+			if (!(newroom.doesAccurate() && r.doesAccurate())) return TRUE
 
 			var/intx1=-1
 			var/intx2=-1
@@ -794,31 +794,31 @@
 			var/sy1 = newroom.getY()-newroom.getSize()-1
 			var/sy2 = newroom.getY()+newroom.getSize()+1
 
-			if(rx1>=sx1 && rx1<=sx2) intx1 = rx1
-			if(rx2>=sx1 && rx2<=sx2)
-				if(intx1<0) intx1=rx2
+			if (rx1>=sx1 && rx1<=sx2) intx1 = rx1
+			if (rx2>=sx1 && rx2<=sx2)
+				if (intx1<0) intx1=rx2
 				else intx2 = rx2
-			if(sx1>rx1 && sx1<rx2)
-				if(intx1<0) intx1 = sx1
+			if (sx1>rx1 && sx1<rx2)
+				if (intx1<0) intx1 = sx1
 				else intx2 = sx1
-			if(sx2>rx1 && sx2<rx2)
-				if(intx1<0) intx1 = sx2
+			if (sx2>rx1 && sx2<rx2)
+				if (intx1<0) intx1 = sx2
 				else intx2 = sx2
 
-			if(ry1>=sy1 && ry1<=sy2) inty1 = ry1
-			if(ry2>=sy1 && ry2<=sy2)
-				if(inty1<0) inty1=ry2
+			if (ry1>=sy1 && ry1<=sy2) inty1 = ry1
+			if (ry2>=sy1 && ry2<=sy2)
+				if (inty1<0) inty1=ry2
 				else inty2 = ry2
-			if(sy1>ry1 && sy1<ry2)
-				if(inty1<0) inty1 = sy1
+			if (sy1>ry1 && sy1<ry2)
+				if (inty1<0) inty1 = sy1
 				else inty2 = sy1
-			if(sy2>ry1 && sy2<ry2)
-				if(inty1<0) inty1 = sy2
+			if (sy2>ry1 && sy2<ry2)
+				if (inty1<0) inty1 = sy2
 				else inty2 = sy2
 
 			for(var/turf/t in block(locate(intx1, inty1, getZ()), locate(intx2, inty2, getZ())))
 				var/ret = (t in newroom.getTurfs()) + (t in newroom.getBorder()) + (t in newroom.getWalls()) + (t in r.getTurfs()) + (t in r.getBorder()) + (t in r.getWalls())
-				if(ret>1) return TRUE
+				if (ret>1) return TRUE
 	return FALSE
 /**
 	Returns an X by X square of turfs with initial turf being in bottom right
@@ -840,7 +840,7 @@
 	var/turf/end
 	var/long = FALSE
 	var/minlength = minPathLength
-	if(prob(longPathChance))
+	if (prob(longPathChance))
 		minlength=minLongPathLength
 		long = TRUE
 
@@ -856,20 +856,20 @@
 	var/list/turf/next = getAdjacent(start)
 	var/list/turf/cost = list("\ref[start]"=0)
 
-	if(minlength<=0)
-		if(start in region2.getBorder()) //We've somehow managed to link the two rooms in a single turf
+	if (minlength<=0)
+		if (start in region2.getBorder()) //We've somehow managed to link the two rooms in a single turf
 			out_numPaths++
-			if(long) out_numLongPaths++
+			if (long) out_numLongPaths++
 			end = start
 			return retPath(end, previous, pathWidth, start, end)
 
 	next-=borders
 	for(var/turf/t in next)
-		if(!t.is_wall()) next-=t
+		if (!t.is_wall()) next-=t
 		previous["\ref[t]"] = start
 		cost["\ref[t]"]=1
 
-	if(!length(next)) return list() //We've somehow found a route that can not be continued.
+	if (!length(next)) return list() //We've somehow found a route that can not be continued.
 	var/check_tick_in = 3
 	while(1)
 		check_tick_in = check_tick_in - 1
@@ -877,19 +877,19 @@
 		var/mincost = maxPathLength
 
 		for(var/turf/t in next)
-			if((cost["\ref[t]"]<mincost) || (cost["\ref[t]"]==mincost && prob(50)))
+			if ((cost["\ref[t]"]<mincost) || (cost["\ref[t]"]==mincost && prob(50)))
 				min = t
 				mincost=cost["\ref[t]"]
 
-		if(!min) return list() //We've managed to outgrow our cost
+		if (!min) return list() //We've managed to outgrow our cost
 
 		done += min
 		next -= min
 
-		if(min in region2.getBorder()) //We've reached our destination
-			if(mincost>minlength && prob(pathEndChance))
+		if (min in region2.getBorder()) //We've reached our destination
+			if (mincost>minlength && prob(pathEndChance))
 				out_numPaths++
-				if(long) out_numLongPaths++
+				if (long) out_numLongPaths++
 				end = min
 				break
 			else
@@ -898,17 +898,17 @@
 		for(var/turf/t in getAdjacent(min))
 			var/stop_looking = FALSE
 			for(var/turf/t1 in GetSquare(t, pathWidth + 1))
-				if(!(t1.is_wall() && !(t1 in borders)))
+				if (!(t1.is_wall() && !(t1 in borders)))
 					stop_looking = TRUE
 					break
-			if(stop_looking)
+			if (stop_looking)
 				continue
-			if(!(t in done) && !(t in next))
+			if (!(t in done) && !(t in next))
 				next+=t
 				previous["\ref[t]"] = min
 				cost["\ref[t]"] = mincost+1
 
-		if(!check_tick_in)
+		if (!check_tick_in)
 			check_tick_in = 3
 			CHECK_TICK
 	return retPath(end, previous, pathWidth, start, end)
@@ -918,60 +918,60 @@
 	ret += GetSquare(end, pathWidth)
 	var/turf/last = end
 	while(1)
-		if(last==start) break
+		if (last==start) break
 		ret+= GetSquare(previous["\ref[last]"], pathWidth)
 		last=previous["\ref[last]"]
 
 	return ret
 
 /obj/procedural/jp_DungeonGenerator/proc/check_params()
-	if(!islist(allowedRooms) || length(allowedRooms)<=0)
+	if (!islist(allowedRooms) || length(allowedRooms)<=0)
 		out_error = ERROR_NO_ROOMS
 		return 0
 
-	if(!corner1 || !corner2 || corner1.z!=corner2.z)
+	if (!corner1 || !corner2 || corner1.z!=corner2.z)
 		out_error = ERROR_BAD_AREA
 		return 0
 
-	if(!walltype || (islist(walltype) && length(walltype)<=0))
+	if (!walltype || (islist(walltype) && length(walltype)<=0))
 		out_error = ERROR_NO_WALLTYPE
 		return 0
 
-	if(islist(walltype))
+	if (islist(walltype))
 		for(var/k in walltype)
-			if(!ispath(k))
+			if (!ispath(k))
 				out_error = ERROR_NO_WALLTYPE
 				return 0
 	else
-		if(!ispath(walltype))
+		if (!ispath(walltype))
 			out_error = ERROR_NO_WALLTYPE
 			return 0
 
-	if(!floortype || !ispath(floortype))
+	if (!floortype || !ispath(floortype))
 		out_error = ERROR_NO_FLOORTYPE
 		return 0
 
-	if(numRooms<0 || round(numRooms)!=numRooms)
+	if (numRooms<0 || round(numRooms)!=numRooms)
 		out_error = ERROR_NUMROOMS_BAD
 		return 0
 
-	if(numExtraPaths<0 || round(numExtraPaths)!=numExtraPaths)
+	if (numExtraPaths<0 || round(numExtraPaths)!=numExtraPaths)
 		out_error = ERROR_NUMEXTRAPATHS_BAD
 		return 0
 
-	if(roomMinSize>roomMaxSize || roomMinSize<0 || roomMaxSize<0 || round(roomMinSize)!=roomMinSize || round(roomMaxSize)!=roomMaxSize)
+	if (roomMinSize>roomMaxSize || roomMinSize<0 || roomMaxSize<0 || round(roomMinSize)!=roomMinSize || round(roomMaxSize)!=roomMaxSize)
 		out_error = ERROR_ROOM_SIZE_BAD
 		return 0
 
-	if(minPathLength>maxPathLength || minLongPathLength>maxPathLength || minPathLength<0 || maxPathLength<0 || minLongPathLength<0 || round(minPathLength)!=minPathLength || round(maxPathLength)!=maxPathLength || round(minLongPathLength)!=minLongPathLength)
+	if (minPathLength>maxPathLength || minLongPathLength>maxPathLength || minPathLength<0 || maxPathLength<0 || minLongPathLength<0 || round(minPathLength)!=minPathLength || round(maxPathLength)!=maxPathLength || round(minLongPathLength)!=minLongPathLength)
 		out_error = ERROR_PATH_LENGTH_BAD
 		return 0
 
-	if(pathEndChance<0 || pathEndChance>100)
+	if (pathEndChance<0 || pathEndChance>100)
 		out_error = ERROR_PATHENDCHANCE_BAD
 		return 0
 
-	if(longPathChance<0 || longPathChance>100)
+	if (longPathChance<0 || longPathChance>100)
 		out_error = ERROR_LONGPATHCHANCE_BAD
 		return 0
 
@@ -1023,18 +1023,18 @@ Make a new jp_DungeonRegion, and set its reference to its generator object
 */
 /obj/procedural/jp_DungeonRegion/proc/addTurfs(list/turf/l, noborder=0)
 	for(var/turf/t in l)
-		if(t in border) border-=t
-		if(!(t in contained))
+		if (t in border) border-=t
+		if (!(t in contained))
 			contained+=t
-			if(!noborder)
+			if (!noborder)
 				for(var/turf/t2 in gen.getAdjacent(t))
-					if(t2.is_wall() && !(t2 in border)) border+=t2
+					if (t2.is_wall() && !(t2 in border)) border+=t2
 
 /**
 	Adds a list of turfs to the border of the region.
 */
 /obj/procedural/jp_DungeonRegion/proc/addBorder(list/turf/l)
-	for(var/turf/t in l) if(!(t in border)) border+=t
+	for(var/turf/t in l) if (!(t in border)) border+=t
 
 /**
 	Returns the list of floors in this region
@@ -1191,9 +1191,9 @@ to the floor that return true from is_wall().
 
 	for(var/turf/t in turfs)
 		for(var/turf/t2 in gen.getAdjacent(t))
-			if(t2 in turfs)
+			if (t2 in turfs)
 				continue
-			if(t2.is_wall() && !(t2 in border))
+			if (t2.is_wall() && !(t2 in border))
 				border += t2
 
 	border -= getCorners() //If the path width is more than 1, the corner and path connection looks really ugly
@@ -1222,7 +1222,7 @@ return true from is_wall()
 		var/ti = t.x-getX()
 		var/tj = t.y-getY()
 
-		if(ti*ti + tj*tj>radsqr) continue
+		if (ti*ti + tj*tj>radsqr) continue
 
 		turfs += t
 
@@ -1230,9 +1230,9 @@ return true from is_wall()
 
 	for(var/turf/t in turfs)
 		for(var/turf/t2 in gen.getAdjacent(t))
-			if(t2 in turfs)
+			if (t2 in turfs)
 				continue
-			if(t2.is_wall() && !(t2 in border))
+			if (t2.is_wall() && !(t2 in border))
 				border+=t2
 
 /obj/procedural/jp_dungeonroom/preexist/circle/place()
@@ -1253,12 +1253,12 @@ the arms of the plus sign - there are only four.
 /obj/procedural/jp_dungeonroom/preexist/cross/New()
 	..()
 	for(var/turf/t in range(centre, size))
-		if(t.x == getX() || t.y == getY())
+		if (t.x == getX() || t.y == getY())
 			turfs += t
 
 	for(var/turf/t in range(centre, size+1))
-		if(t in turfs) continue
-		if(t.is_wall() && (t.x == getX() || t.y == getY()))
+		if (t in turfs) continue
+		if (t.is_wall() && (t.x == getX() || t.y == getY()))
 			border+=t
 
 /obj/procedural/jp_dungeonroom/preexist/cross/place()
@@ -1286,9 +1286,9 @@ the arms of the plus sign - there are only four.
 	return TRUE
 
 /obj/procedural/jp_dungeonroom/preexist/square/submap/finalise()
-	if(length(border) < 1)
+	if (length(border) < 1)
 		testing("ROOM [my_map.name] HAS NO BORDERS! at [centre.x], [centre.y]!")
-	if(my_map)
+	if (my_map)
 		my_map.load(centre, centered = TRUE)
 	else
 		gen.out_error = gen.ERROR_NO_SUBMAPS

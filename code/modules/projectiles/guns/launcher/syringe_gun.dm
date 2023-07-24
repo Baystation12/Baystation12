@@ -14,12 +14,12 @@
 
 /obj/item/syringe_cartridge/on_update_icon()
 	underlays.Cut()
-	if(syringe)
+	if (syringe)
 		underlays += image(syringe.icon, src, syringe.icon_state)
 		underlays += syringe.filling
 
 /obj/item/syringe_cartridge/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/reagent_containers/syringe) && user.unEquip(I, src))
+	if (istype(I, /obj/item/reagent_containers/syringe) && user.unEquip(I, src))
 		syringe = I
 		to_chat(user, SPAN_NOTICE("You carefully insert [syringe] into [src]."))
 		sharp = TRUE
@@ -27,7 +27,7 @@
 		update_icon()
 
 /obj/item/syringe_cartridge/attack_self(mob/user)
-	if(syringe)
+	if (syringe)
 		to_chat(user, SPAN_NOTICE("You remove [syringe] from [src]."))
 		user.put_in_hands(syringe)
 		syringe = null
@@ -42,13 +42,13 @@
 
 /obj/item/syringe_cartridge/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	..() //handles embedding for us. Should have a decent chance if thrown fast enough
-	if(syringe)
+	if (syringe)
 		//check speed to see if we hit hard enough to trigger the rapid injection
 		//incidentally, this means syringe_cartridges can be used with the pneumatic launcher
-		if(TT.speed >= 10 && isliving(hit_atom))
+		if (TT.speed >= 10 && isliving(hit_atom))
 			var/mob/living/L = hit_atom
 			//unfortuately we don't know where the dart will actually hit, since that's done by the parent.
-			if(L.can_inject(null, ran_zone(TT.target_zone, 30)) == CAN_INJECT && syringe.reagents)
+			if (L.can_inject(null, ran_zone(TT.target_zone, 30)) == CAN_INJECT && syringe.reagents)
 				var/should_admin_log = syringe.reagents.should_admin_log()
 				var/reagent_log = syringe.reagents.get_reagents()
 				var/trans = syringe.reagents.trans_to_mob(L, 15, CHEM_BLOOD)
@@ -83,7 +83,7 @@
 	var/obj/item/syringe_cartridge/next
 
 /obj/item/gun/launcher/syringe/consume_next_projectile()
-	if(next)
+	if (next)
 		next.prime()
 		return next
 	return null
@@ -94,21 +94,21 @@
 	next = null
 
 /obj/item/gun/launcher/syringe/attack_self(mob/living/user as mob)
-	if(next)
+	if (next)
 		user.visible_message("[user] unlatches and carefully relaxes the bolt on [src].", SPAN_WARNING("You unlatch and carefully relax the bolt on [src], unloading the spring."))
 		next = null
-	else if(length(darts))
+	else if (length(darts))
 		playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
 		user.visible_message("[user] draws back the bolt on [src], clicking it into place.", SPAN_WARNING("You draw back the bolt on the [src], loading the spring!"))
 		next = darts[1]
 	add_fingerprint(user)
 
 /obj/item/gun/launcher/syringe/attack_hand(mob/living/user as mob)
-	if(user.get_inactive_hand() == src)
-		if(!length(darts))
+	if (user.get_inactive_hand() == src)
+		if (!length(darts))
 			to_chat(user, SPAN_WARNING("[src] is empty."))
 			return
-		if(next)
+		if (next)
 			to_chat(user, SPAN_WARNING("[src]'s cover is locked shut."))
 			return
 		var/obj/item/syringe_cartridge/C = darts[1]
@@ -160,5 +160,5 @@
 
 /obj/item/gun/launcher/syringe/disguised/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
+	if (distance <= 1)
 		to_chat(user, "The button is a little stiff.")

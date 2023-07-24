@@ -20,6 +20,6 @@ GLOBAL_DATUM_INIT(sight_set_event, /singleton/observ/sight_set, new)
 
 /mob/proc/set_sight(new_sight)
 	var/old_sight = sight
-	if(old_sight != new_sight)
+	if (old_sight != new_sight)
 		sight = new_sight
 		GLOB.sight_set_event.raise_event(src, old_sight, new_sight)

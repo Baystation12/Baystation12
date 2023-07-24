@@ -42,18 +42,18 @@
 	force = round(0.5*material.get_blunt_damage())
 
 /obj/item/stack/material/rods/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWelder(W))
+	if (isWelder(W))
 		var/obj/item/weldingtool/WT = W
 
-		if(material.ignition_point)
+		if (material.ignition_point)
 			to_chat(user, SPAN_WARNING("You can't weld this material into sheets."))
 			return
 
-		if(!can_use(2))
+		if (!can_use(2))
 			to_chat(user, SPAN_WARNING("You need at least two rods to do this."))
 			return
 
-		if(WT.remove_fuel(0,user))
+		if (WT.remove_fuel(0,user))
 			var/obj/item/stack/material/new_item = material.place_sheet(usr.loc)
 			new_item.add_to_stacks(usr)
 			user.visible_message(
@@ -72,6 +72,6 @@
 /obj/item/stack/material/rods/attack_self(mob/user as mob)
 	src.add_fingerprint(user)
 
-	if(!istype(user.loc,/turf)) return 0
+	if (!istype(user.loc,/turf)) return 0
 
 	place_grille(user, user.loc, src)

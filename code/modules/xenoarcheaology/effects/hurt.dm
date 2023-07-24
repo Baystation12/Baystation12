@@ -3,9 +3,9 @@
 	effect_type = EFFECT_ORGANIC
 
 /datum/artifact_effect/hurt/DoEffectTouch(mob/toucher)
-	if(toucher)
+	if (toucher)
 		var/weakness = GetAnomalySusceptibility(toucher)
-		if(iscarbon(toucher) && prob(weakness * 100))
+		if (iscarbon(toucher) && prob(weakness * 100))
 			var/mob/living/carbon/C = toucher
 			to_chat(C, SPAN_DANGER("A painful discharge of energy strikes you!"))
 			do_damage(C, rand(5,25), rand(5,25), rand(5,25), rand(5,25), rand(1, 5))
@@ -15,21 +15,21 @@
 			C.weakened += 6 * weakness
 
 /datum/artifact_effect/hurt/DoEffectAura()
-	if(holder)
+	if (holder)
 		var/turf/T = get_turf(holder)
 		for (var/mob/living/carbon/C in range(src.effectrange,T))
 			var/weakness = GetAnomalySusceptibility(C)
-			if(prob(weakness * 100))
-				if(prob(10))
+			if (prob(weakness * 100))
+				if (prob(10))
 					to_chat(C, SPAN_DANGER("You feel a painful force radiating from something nearby."))
 				do_damage(C)
 
 /datum/artifact_effect/hurt/DoEffectPulse()
-	if(holder)
+	if (holder)
 		var/turf/T = get_turf(holder)
 		for (var/mob/living/carbon/C in range(effectrange, T))
 			var/weakness = GetAnomalySusceptibility(C)
-			if(prob(weakness * 100))
+			if (prob(weakness * 100))
 				to_chat(C, SPAN_DANGER("A wave of painful energy strikes you!"))
 				do_damage(C, 3, 3, 3, 3)
 
@@ -45,10 +45,10 @@
 /datum/artifact_effect/hurt/destroyed_effect()
 	. = ..()
 
-	if(holder)
+	if (holder)
 		var/turf/T = get_turf(holder)
 		for (var/mob/living/carbon/C in range(effectrange, T))
 			var/weakness = GetAnomalySusceptibility(C)
-			if(prob(weakness * 100))
+			if (prob(weakness * 100))
 				to_chat(C, SPAN_DANGER("A wave of extremely painful energy strikes you!"))
 				do_damage(C, 6, 6, 6, 6)

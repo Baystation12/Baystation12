@@ -24,17 +24,17 @@
 	src.verbs -= /obj/item/reagent_containers/verb/set_amount_per_transfer_from_this
 
 /obj/item/reagent_containers/spray/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
-	if(istype(A, /obj/item/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/closet) || istype(A, /obj/item/reagent_containers) || istype(A, /obj/structure/hygiene/sink) || istype(A, /obj/structure/janitorialcart))
+	if (istype(A, /obj/item/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/closet) || istype(A, /obj/item/reagent_containers) || istype(A, /obj/structure/hygiene/sink) || istype(A, /obj/structure/janitorialcart))
 		return
 
-	if(istype(A, /spell))
+	if (istype(A, /spell))
 		return
 
-	if(proximity)
-		if(standard_dispenser_refill(user, A))
+	if (proximity)
+		if (standard_dispenser_refill(user, A))
 			return
 
-	if(reagents.total_volume < amount_per_transfer_from_this)
+	if (reagents.total_volume < amount_per_transfer_from_this)
 		to_chat(user, SPAN_NOTICE("\The [src] is empty!"))
 		return
 
@@ -53,7 +53,7 @@
 			admin_attacker_log(user, "Used \the [name] containing [contained] to spray \the [A]")
 	if (A.density && proximity)
 		reagents.splash(A, amount_per_transfer_from_this)
-		if(A == user)
+		if (A == user)
 			A.visible_message(SPAN_NOTICE("\The [user] sprays themselves with \the [src]."))
 		else
 			A.visible_message(SPAN_NOTICE("\The [user] sprays \the [A] with \the [src]."))
@@ -62,14 +62,14 @@
 			var/obj/effect/effect/water/chempuff/D = new/obj/effect/effect/water/chempuff(get_turf(src))
 			var/turf/my_target = get_turf(A)
 			D.create_reagents(amount_per_transfer_from_this)
-			if(!src)
+			if (!src)
 				return
 			reagents.trans_to_obj(D, amount_per_transfer_from_this)
 			D.set_up(my_target, spray_size, step_delay)
 	return
 
 /obj/item/reagent_containers/spray/attack_self(mob/user)
-	if(!possible_transfer_amounts)
+	if (!possible_transfer_amounts)
 		return
 	amount_per_transfer_from_this = next_in_list(amount_per_transfer_from_this, cached_number_list_decode(possible_transfer_amounts))
 	spray_size = next_in_list(spray_size, spray_sizes)
@@ -77,10 +77,10 @@
 
 /obj/item/reagent_containers/spray/examine(mob/user, distance)
 	. = ..()
-	if(distance > 0)
+	if (distance > 0)
 		return
 
-	if(length(reagents?.reagent_list))
+	if (length(reagents?.reagent_list))
 		to_chat(user, SPAN_NOTICE("It contains [round(reagents.total_volume)] units of liquid."))
 	else
 		to_chat(user, SPAN_NOTICE("It is empty."))
@@ -93,7 +93,7 @@
 
 	if (alert(usr, "Are you sure you want to empty that?", "Empty Bottle:", "Yes", "No") != "Yes")
 		return
-	if(isturf(usr.loc))
+	if (isturf(usr.loc))
 		to_chat(usr, SPAN_NOTICE("You empty \the [src] onto the floor."))
 		reagents.splash(usr.loc, reagents.total_volume)
 
@@ -140,7 +140,7 @@
 
 /obj/item/reagent_containers/spray/pepper/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
+	if (distance <= 1)
 		to_chat(user, "The safety is [safety ? "on" : "off"].")
 
 /obj/item/reagent_containers/spray/pepper/attack_self(mob/user)
@@ -148,7 +148,7 @@
 	to_chat(usr, SPAN_NOTICE("You switch the safety [safety ? "on" : "off"]."))
 
 /obj/item/reagent_containers/spray/pepper/Spray_at(atom/A as mob|obj)
-	if(safety)
+	if (safety)
 		to_chat(usr, SPAN_WARNING("The safety is on!"))
 		return
 	..()
@@ -196,11 +196,11 @@
 
 	for(var/a = 1 to 3)
 		spawn(0)
-			if(reagents.total_volume < 1) break
+			if (reagents.total_volume < 1) break
 			var/obj/effect/effect/water/chempuff/D = new/obj/effect/effect/water/chempuff(get_turf(src))
 			var/turf/my_target = the_targets[a]
 			D.create_reagents(amount_per_transfer_from_this)
-			if(!src)
+			if (!src)
 				return
 			reagents.trans_to_obj(D, amount_per_transfer_from_this)
 			D.set_color()
@@ -220,9 +220,9 @@
 	reagents.add_reagent(/datum/reagent/toxin/plantbgone, 100)
 
 /obj/item/reagent_containers/spray/plantbgone/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
-	if(!proximity) return
+	if (!proximity) return
 
-	if(istype(A, /obj/effect/blob)) // blob damage in blob code
+	if (istype(A, /obj/effect/blob)) // blob damage in blob code
 		return
 
 	..()

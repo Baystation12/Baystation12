@@ -30,7 +30,7 @@
 	update_icon()
 
 /obj/structure/railing/Process()
-	if(!material || !material.radioactivity)
+	if (!material || !material.radioactivity)
 		return
 	for(var/mob/living/L in range(1,src))
 		L.apply_damage(round(material.radioactivity/20), DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
@@ -42,9 +42,9 @@
 		material = material_key
 	if (!material)
 		material = DEFAULT_FURNITURE_MATERIAL
-	if(!isnull(material) && !istype(material))
+	if (!isnull(material) && !istype(material))
 		material = SSmaterials.get_material_by_name(material)
-	if(!istype(material))
+	if (!istype(material))
 		return INITIALIZE_HINT_QDEL
 
 	name = "[material.display_name] [initial(name)]"
@@ -52,9 +52,9 @@
 	set_max_health(material.integrity / 5)
 	color = material.icon_colour
 
-	if(material.products_need_process())
+	if (material.products_need_process())
 		START_PROCESSING(SSobj, src)
-	if(material.conductive)
+	if (material.conductive)
 		obj_flags |= OBJ_FLAG_CONDUCTIBLE
 	else
 		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
@@ -69,9 +69,9 @@
 	. = ..()
 
 /obj/structure/railing/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(!istype(mover) || mover.checkpass(PASS_FLAG_TABLE))
+	if (!istype(mover) || mover.checkpass(PASS_FLAG_TABLE))
 		return TRUE
-	if(get_dir(loc, target) == dir)
+	if (get_dir(loc, target) == dir)
 		return !density
 	return TRUE
 
@@ -147,17 +147,17 @@
 			overlays += image(icon, "frontoverlay_r[density]")
 			if (density)
 				overlays += image(icon, "_frontoverlay_r1", layer = ABOVE_HUMAN_LAYER)
-			if(neighbor_status & 4)
+			if (neighbor_status & 4)
 				var/pix_offset_x = 0
 				var/pix_offset_y = 0
 				switch(dir)
-					if(NORTH)
+					if (NORTH)
 						pix_offset_x = 32
-					if(SOUTH)
+					if (SOUTH)
 						pix_offset_x = -32
-					if(EAST)
+					if (EAST)
 						pix_offset_y = -32
-					if(WEST)
+					if (WEST)
 						pix_offset_y = 32
 				overlays += image(icon, "mcorneroverlay[density]", pixel_x = pix_offset_x, pixel_y = pix_offset_y)
 				if (density)
@@ -168,14 +168,14 @@
 	set category = "Object"
 	set src in oview(1)
 
-	if(usr.incapacitated())
+	if (usr.incapacitated())
 		return 0
 
-	if(anchored)
+	if (anchored)
 		to_chat(usr, SPAN_WARNING("It is fastened to the floor and cannot be flipped."))
 		return 0
 
-	if(!turf_is_crowded())
+	if (!turf_is_crowded())
 		to_chat(usr, SPAN_WARNING("You can't flip \the [src] - something is in the way."))
 		return 0
 
@@ -184,10 +184,10 @@
 	update_icon()
 
 /obj/structure/railing/CheckExit(atom/movable/O, turf/target)
-	if(istype(O) && O.checkpass(PASS_FLAG_TABLE))
+	if (istype(O) && O.checkpass(PASS_FLAG_TABLE))
 		return 1
-	if(get_dir(O.loc, target) == dir)
-		if(!density)
+	if (get_dir(O.loc, target) == dir)
+		if (!density)
 			return 1
 		return 0
 	return 1
@@ -325,8 +325,8 @@
 
 /obj/structure/railing/do_climb(mob/living/user)
 	. = ..()
-	if(.)
-		if(!anchored || material.is_brittle())
+	if (.)
+		if (!anchored || material.is_brittle())
 			kill_health() // Fatboy
 
 		user.jump_layer_shift()

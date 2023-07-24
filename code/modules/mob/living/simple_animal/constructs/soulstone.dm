@@ -34,7 +34,7 @@
 
 /obj/item/device/soulstone/withstand_psi_stress(stress, atom/source)
 	. = ..(stress, source)
-	if(. > 0)
+	if (. > 0)
 		. = max(0, . - rand(2,5))
 		shatter()
 
@@ -48,19 +48,19 @@
 
 /obj/item/device/soulstone/examine(mob/user)
 	. = ..()
-	if(full == SOULSTONE_EMPTY)
+	if (full == SOULSTONE_EMPTY)
 		to_chat(user, "The shard still flickers with a fraction of the full artifact's power, but it needs to be filled with the essence of someone's life before it can be used.")
-	if(full == SOULSTONE_ESSENCE)
+	if (full == SOULSTONE_ESSENCE)
 		to_chat(user,"The shard has gone transparent, a seeming window into a dimension of unspeakable horror.")
-	if(full == SOULSTONE_CRACKED)
+	if (full == SOULSTONE_CRACKED)
 		to_chat(user, "This one is cracked and useless.")
 
 /obj/item/device/soulstone/on_update_icon()
-	if(full == SOULSTONE_EMPTY)
+	if (full == SOULSTONE_EMPTY)
 		icon_state = "soulstone"
-	if(full == SOULSTONE_ESSENCE)
+	if (full == SOULSTONE_ESSENCE)
 		icon_state = "soulstone2" //TODO: A spookier sprite. Also unique sprites.
-	if(full == SOULSTONE_CRACKED)
+	if (full == SOULSTONE_CRACKED)
 		icon_state = "soulstone"//TODO: cracked sprite
 		SetName("cracked soulstone")
 
@@ -106,14 +106,14 @@
 
 
 /obj/item/device/soulstone/attack(mob/living/simple_animal/M, mob/user)
-	if(M == shade)
+	if (M == shade)
 		to_chat(user, SPAN_NOTICE("You recapture \the [M]."))
 		M.forceMove(src)
 		return
-	if(full == SOULSTONE_ESSENCE)
+	if (full == SOULSTONE_ESSENCE)
 		to_chat(user, SPAN_NOTICE("\The [src] is already full."))
 		return
-	if(M.stat != DEAD && !M.is_asystole())
+	if (M.stat != DEAD && !M.is_asystole())
 		to_chat(user, SPAN_NOTICE("Kill or maim the victim first."))
 		return
 	for(var/obj/item/W in M)
@@ -122,24 +122,24 @@
 	set_full(SOULSTONE_ESSENCE)
 
 /obj/item/device/soulstone/attack_self(mob/user)
-	if(full != SOULSTONE_ESSENCE) // No essence - no shade
+	if (full != SOULSTONE_ESSENCE) // No essence - no shade
 		to_chat(user, SPAN_NOTICE("This [src] has no life essence."))
 		return
 
-	if(!shade.key) // No key = hasn't been used
+	if (!shade.key) // No key = hasn't been used
 		to_chat(user, SPAN_NOTICE("You cut your finger and let the blood drip on \the [src]."))
 		user.remove_blood_simple(1)
 		var/datum/ghosttrap/cult/shade/S = get_ghost_trap("soul stone")
 		S.request_player(shade, "The soul stone shade summon ritual has been performed. ")
-	else if(!shade.client) // Has a key but no client - shade logged out
+	else if (!shade.client) // Has a key but no client - shade logged out
 		to_chat(user, SPAN_NOTICE("\The [shade] in \the [src] is dormant."))
 		return
-	else if(shade.loc == src)
+	else if (shade.loc == src)
 		var/choice = alert("Would you like to invoke the spirit within?",,"Yes","No")
-		if(choice == "Yes")
+		if (choice == "Yes")
 			shade.dropInto(loc)
 			to_chat(user, SPAN_NOTICE("You summon \the [shade]."))
-		if(choice == "No")
+		if (choice == "No")
 			return
 
 /obj/item/device/soulstone/proc/set_full(f)

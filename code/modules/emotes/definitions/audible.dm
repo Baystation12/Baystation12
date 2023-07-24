@@ -5,7 +5,7 @@
 	var/list/emote_sound
 
 /singleton/emote/audible/do_extra(atom/user)
-	if(emote_sound)
+	if (emote_sound)
 		var/playable = emote_sound
 		if (islist(emote_sound))
 			playable = pick(emote_sound)

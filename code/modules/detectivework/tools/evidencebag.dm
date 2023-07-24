@@ -22,24 +22,24 @@
 		if (!user.Adjacent(I))
 			return
 
-	if(!istype(I) || I.anchored)
+	if (!istype(I) || I.anchored)
 		return
 
-	if(istype(I, /obj/item/evidencebag))
+	if (istype(I, /obj/item/evidencebag))
 		to_chat(user, SPAN_NOTICE("You find putting an evidence bag in another evidence bag to be slightly absurd."))
 		return
 
-	if(I.w_class > ITEM_SIZE_NORMAL)
+	if (I.w_class > ITEM_SIZE_NORMAL)
 		to_chat(user, SPAN_NOTICE("[I] won't fit in [src]."))
 		return
 
-	if(stored_item)
+	if (stored_item)
 		to_chat(user, SPAN_NOTICE("[src] already has something inside it."))
 		return
 
 	else
 		//If it isn't on the floor. Do some checks to see if it's in our hands or a box. Otherwise give up.
-		if(istype(I.loc,/obj/item/storage))	//in a container.
+		if (istype(I.loc,/obj/item/storage))	//in a container.
 			var/sdepth = I.storage_depth(user)
 			if (sdepth == -1 || sdepth > 1)
 				return	//too deeply nested to access
@@ -47,14 +47,14 @@
 			var/obj/item/storage/U = I.loc
 			user.client.screen -= I
 			U.contents.Remove(I)
-		else if(user.l_hand == I)					//in a hand
+		else if (user.l_hand == I)					//in a hand
 			user.drop_l_hand()
-		else if(user.r_hand == I)					//in a hand
+		else if (user.r_hand == I)					//in a hand
 			user.drop_r_hand()
 
 	user.visible_message("[user] puts [I] into [src]", "You put [I] inside [src].",\
 	"You hear a rustle as someone puts something into a plastic bag.")
-	if(!user.skill_check(SKILL_FORENSICS, SKILL_BASIC))
+	if (!user.skill_check(SKILL_FORENSICS, SKILL_BASIC))
 		I.add_fingerprint(user)
 	I.forceMove(src)
 	stored_item = I
@@ -63,7 +63,7 @@
 
 /obj/item/evidencebag/on_update_icon()
 	underlays.Cut()
-	if(stored_item)
+	if (stored_item)
 		icon_state = "evidence"
 		desc = "An evidence bag containing \a [stored_item]."
 		var/mutable_appearance/MA = new(stored_item)
@@ -80,7 +80,7 @@
 		desc = "An empty evidence bag."
 
 /obj/item/evidencebag/attack_self(mob/user)
-	if(stored_item)
+	if (stored_item)
 		user.visible_message("[user] takes [stored_item] out of [src]", "You take [stored_item] out of [src].",\
 		"You hear someone rustle around in a plastic bag, and remove something.")
 

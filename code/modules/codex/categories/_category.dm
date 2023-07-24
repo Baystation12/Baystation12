@@ -5,7 +5,7 @@
 
 //Children should call ..() at the end after filling the items list
 /datum/codex_category/proc/Initialize()
-	if(length(items))
+	if (length(items))
 		var/datum/codex_entry/entry = new(_display_name = "[name] (category)")
 		entry.lore_text = desc + "<hr>"
 		var/list/links = list()

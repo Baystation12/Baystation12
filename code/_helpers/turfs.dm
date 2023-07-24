@@ -9,7 +9,7 @@
 
 /proc/turf_clear(turf/T)
 	for(var/atom/A in T)
-		if(A.simulated)
+		if (A.simulated)
 			return 0
 	return 1
 
@@ -17,51 +17,51 @@
 // If no such turf exists, picks any random turf from the given list of turfs.
 /proc/pick_mobless_turf_if_exists(list/start_turfs)
 	RETURN_TYPE(/turf)
-	if(!length(start_turfs))
+	if (!length(start_turfs))
 		return null
 
 	var/list/available_turfs = list()
 	for(var/start_turf in start_turfs)
 		var/mob/M = locate() in start_turf
-		if(!M)
+		if (!M)
 			available_turfs += start_turf
-	if(!length(available_turfs))
+	if (!length(available_turfs))
 		available_turfs = start_turfs
 	return pick(available_turfs)
 
 /proc/get_random_edge_turf(dir, clearance = TRANSITIONEDGE + 1, Z)
 	RETURN_TYPE(/turf)
-	if(!dir)
+	if (!dir)
 		return
 
 	switch(dir)
-		if(NORTH)
+		if (NORTH)
 			return locate(rand(clearance, world.maxx - clearance), world.maxy - clearance, Z)
-		if(SOUTH)
+		if (SOUTH)
 			return locate(rand(clearance, world.maxx - clearance), clearance, Z)
-		if(EAST)
+		if (EAST)
 			return locate(world.maxx - clearance, rand(clearance, world.maxy - clearance), Z)
-		if(WEST)
+		if (WEST)
 			return locate(clearance, rand(clearance, world.maxy - clearance), Z)
 
 /proc/get_random_turf_in_range(atom/origin, outer_range, inner_range)
 	RETURN_TYPE(/turf)
 	origin = get_turf(origin)
-	if(!origin)
+	if (!origin)
 		return
 	var/list/turfs = list()
 	for(var/turf/T in orange(origin, outer_range))
-		if(!(T.z in GLOB.using_map.sealed_levels)) // Picking a turf outside the map edge isn't recommended
-			if(T.x >= world.maxx-TRANSITIONEDGE || T.x <= TRANSITIONEDGE)	continue
-			if(T.y >= world.maxy-TRANSITIONEDGE || T.y <= TRANSITIONEDGE)	continue
-		if(!inner_range || get_dist(origin, T) >= inner_range)
+		if (!(T.z in GLOB.using_map.sealed_levels)) // Picking a turf outside the map edge isn't recommended
+			if (T.x >= world.maxx-TRANSITIONEDGE || T.x <= TRANSITIONEDGE)	continue
+			if (T.y >= world.maxy-TRANSITIONEDGE || T.y <= TRANSITIONEDGE)	continue
+		if (!inner_range || get_dist(origin, T) >= inner_range)
 			turfs += T
-	if(length(turfs))
+	if (length(turfs))
 		return pick(turfs)
 
 /proc/screen_loc2turf(text, turf/origin)
 	RETURN_TYPE(/turf)
-	if(!origin)
+	if (!origin)
 		return null
 	var/tZ = splittext(text, ",")
 	var/tX = splittext(tZ[1], "-")
@@ -111,10 +111,10 @@
 	if (!T)
 		return "The spawn location doesn't seem to exist. Please contact an admin via adminhelp if this error persists."
 
-	if(istype(T, /turf/space)) // Space tiles
+	if (istype(T, /turf/space)) // Space tiles
 		return "Spawn location is open to space."
 	var/datum/gas_mixture/air = T.return_air()
-	if(!air)
+	if (!air)
 		return "Spawn location lacks atmosphere."
 	return get_atmosphere_issues(air, 1)
 
@@ -124,7 +124,7 @@
 /proc/is_below_sound_pressure(turf/T)
 	var/datum/gas_mixture/environment = T ? T.return_air() : null
 	var/pressure =  environment ? environment.return_pressure() : 0
-	if(pressure < SOUND_MINIMUM_PRESSURE)
+	if (pressure < SOUND_MINIMUM_PRESSURE)
 		return TRUE
 	return FALSE
 
@@ -143,7 +143,7 @@
 		var/z_pos = (source.z - src_origin.z)
 
 		var/turf/target = locate(dst_origin.x + x_pos, dst_origin.y + y_pos, dst_origin.z + z_pos)
-		if(!target)
+		if (!target)
 			error("Null turf in translation @ ([dst_origin.x + x_pos], [dst_origin.y + y_pos], [dst_origin.z + z_pos])")
 		turf_map[source] = target //if target is null, preserve that information in the turf map
 
@@ -155,8 +155,8 @@
 
 		var/turf/target = translation[source]
 
-		if(target)
-			if(base_area)
+		if (target)
+			if (base_area)
 				ChangeArea(target, get_area(source))
 				ChangeArea(source, base_area)
 			transport_turf_contents(source, target)
@@ -173,15 +173,15 @@
 	new_turf.transport_properties_from(source)
 
 	for(var/obj/O in source)
-		if(O.simulated)
+		if (O.simulated)
 			O.forceMove(new_turf)
-		else if(istype(O,/obj/effect))
+		else if (istype(O,/obj/effect))
 			var/obj/effect/E = O
-			if(E.movable_flags & MOVABLE_FLAG_EFFECTMOVE)
+			if (E.movable_flags & MOVABLE_FLAG_EFFECTMOVE)
 				E.forceMove(new_turf)
 
 	for(var/mob/M in source)
-		if(isEye(M)) continue // If we need to check for more mobs, I'll add a variable
+		if (isEye(M)) continue // If we need to check for more mobs, I'll add a variable
 		M.forceMove(new_turf)
 
 	if (GLOB.mob_spawners[source])

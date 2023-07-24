@@ -5,9 +5,9 @@
 	var/mob/living/silicon/ai/owner = null		// AI which owns this.
 
 /datum/malf_hardware/proc/install()
-	if(owner && istype(owner))
+	if (owner && istype(owner))
 		owner.hardware = src
-		if(driver)
+		if (driver)
 			owner.verbs += driver
 
 /datum/malf_hardware/proc/get_examine_desc()
@@ -23,9 +23,9 @@
 
 /datum/malf_hardware/apu_gen/get_examine_desc()
 	var/msg = "It seems to have some sort of power generator attached to its core."
-	if(owner.hardware_integrity() < 50)
+	if (owner.hardware_integrity() < 50)
 		msg += SPAN_WARNING(" It seems to be too damaged to function properly.")
-	else if(owner.APU_power)
+	else if (owner.APU_power)
 		msg += " The generator appears to be active."
 	return msg
 

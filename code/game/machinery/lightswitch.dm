@@ -16,25 +16,25 @@
 
 /obj/machinery/light_switch/Initialize()
 	. = ..()
-	if(other_area)
+	if (other_area)
 		src.connected_area = locate(other_area)
 	else
 		src.connected_area = get_area(src)
 
-	if(name == initial(name))
+	if (name == initial(name))
 		SetName("light switch ([connected_area.name])")
 
 	connected_area.set_lightswitch(on)
 	update_icon()
 
 /obj/machinery/light_switch/on_update_icon()
-	if(!overlay)
+	if (!overlay)
 		overlay = image(icon, "light1-overlay")
 		overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		overlay.layer = ABOVE_LIGHTING_LAYER
 
 	overlays.Cut()
-	if(inoperable())
+	if (inoperable())
 		icon_state = "light-p"
 		set_light(0)
 	else
@@ -45,29 +45,29 @@
 
 /obj/machinery/light_switch/examine(mob/user, distance)
 	. = ..()
-	if(distance)
+	if (distance)
 		to_chat(user, "A light switch. It is [on? "on" : "off"].")
 
 /obj/machinery/light_switch/proc/set_state(newstate)
-	if(on != newstate)
+	if (on != newstate)
 		on = newstate
 		connected_area.set_lightswitch(on)
 		update_icon()
 
 /obj/machinery/light_switch/proc/sync_state()
-	if(connected_area && on != connected_area.lightswitch)
+	if (connected_area && on != connected_area.lightswitch)
 		on = connected_area.lightswitch
 		update_icon()
 		return 1
 
 /obj/machinery/light_switch/interface_interact(mob/user)
-	if(CanInteract(user, DefaultTopicState()))
+	if (CanInteract(user, DefaultTopicState()))
 		playsound(src, "switch", 30)
 		set_state(!on)
 		return TRUE
 
 /obj/machinery/light_switch/attackby(obj/item/tool as obj, mob/user as mob)
-	if(istype(tool, /obj/item/screwdriver))
+	if (istype(tool, /obj/item/screwdriver))
 		new /obj/item/frame/light_switch(user.loc, 1)
 		qdel(src)
 
@@ -78,11 +78,11 @@
 /obj/machinery/light_switch/power_change()
 	. = ..()
 	//synch ourselves to the new state
-	if(connected_area) //If an APC initializes before we do it will force a power_change() before we can get our connected area
+	if (connected_area) //If an APC initializes before we do it will force a power_change() before we can get our connected area
 		sync_state()
 
 /obj/machinery/light_switch/emp_act(severity)
-	if(inoperable())
+	if (inoperable())
 		..(severity)
 		return
 	power_change()

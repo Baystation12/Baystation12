@@ -32,7 +32,7 @@ MRE Stuff
 	to_chat(user, meal_desc)
 
 /obj/item/storage/mre/on_update_icon()
-	if(opened)
+	if (opened)
 		icon_state = "[initial(icon_state)][opened]"
 	. = ..()
 
@@ -40,7 +40,7 @@ MRE Stuff
 	open(user)
 
 /obj/item/storage/mre/open(mob/user)
-	if(!opened)
+	if (!opened)
 		to_chat(usr, SPAN_NOTICE("You tear open the bag, breaking the vacuum seal."))
 	. = ..()
 
@@ -196,7 +196,7 @@ MRE Stuff
 	. = ..()
 
 /obj/item/storage/mrebag/on_update_icon()
-	if(opened)
+	if (opened)
 		icon_state = "[initial(icon_state)][opened]"
 	. = ..()
 
@@ -204,7 +204,7 @@ MRE Stuff
 	open(user)
 
 /obj/item/storage/mrebag/open(mob/user)
-	if(!opened)
+	if (!opened)
 		to_chat(usr, SPAN_NOTICE("The pouch heats up as you break the vaccum seal."))
 	. = ..()
 

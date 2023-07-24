@@ -15,29 +15,29 @@
 // Global procs.
 /proc/get_antag_data(antag_type)
 	RETURN_TYPE(/datum/antagonist)
-	if(GLOB.all_antag_types_[antag_type])
+	if (GLOB.all_antag_types_[antag_type])
 		return GLOB.all_antag_types_[antag_type]
 	else
 		var/list/all_antag_types = GLOB.all_antag_types_
 		for(var/cur_antag_type in all_antag_types)
 			var/datum/antagonist/antag = all_antag_types[cur_antag_type]
-			if(antag && antag.is_type(antag_type))
+			if (antag && antag.is_type(antag_type))
 				return antag
 
 /proc/clear_antag_roles(datum/mind/player, implanted)
 	var/list/all_antag_types = GLOB.all_antag_types_
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
-		if(!implanted || !(antag.flags & ANTAG_IMPLANT_IMMUNE))
+		if (!implanted || !(antag.flags & ANTAG_IMPLANT_IMMUNE))
 			antag.remove_antagonist(player, 1, implanted)
 
 /proc/update_antag_icons(datum/mind/player)
 	var/list/all_antag_types = GLOB.all_antag_types_
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
-		if(player)
+		if (player)
 			antag.update_icons_removed(player)
-			if(antag.is_antagonist(player))
+			if (antag.is_antagonist(player))
 				antag.update_icons_added(player)
 		else
 			antag.update_all_icons()
@@ -45,7 +45,7 @@
 /proc/get_antags(atype)
 	RETURN_TYPE(/list)
 	var/datum/antagonist/antag = GLOB.all_antag_types_[atype]
-	if(antag && islist(antag.current_antagonists))
+	if (antag && islist(antag.current_antagonists))
 		return antag.current_antagonists
 	return list()
 
@@ -54,11 +54,11 @@
 	var/list/all_antag_types = GLOB.all_antag_types_
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
-		if(only_offstation_roles && !(antag.flags & ANTAG_OVERRIDE_JOB))
+		if (only_offstation_roles && !(antag.flags & ANTAG_OVERRIDE_JOB))
 			continue
-		if(player in antag.current_antagonists)
+		if (player in antag.current_antagonists)
 			return antag
-		if(player in antag.pending_antagonists)
+		if (player in antag.pending_antagonists)
 			return antag
 	return 0
 

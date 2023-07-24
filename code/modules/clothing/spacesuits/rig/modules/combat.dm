@@ -42,7 +42,7 @@
 
 /obj/item/rig_module/device/flash/installed()
 	. = ..()
-	if(!holder.glove_type)//gives select option for gloveless suits, why even use rig at this point
+	if (!holder.glove_type)//gives select option for gloveless suits, why even use rig at this point
 		selectable = 1
 		activates_on_touch = 0
 		toggleable = 0
@@ -52,28 +52,28 @@
 		toggleable = 1
 
 /obj/item/rig_module/device/flash/engage(atom/target)
-	if(!check() || !device)
+	if (!check() || !device)
 		return 0
 
-	if(!holder.cell.check_charge(use_power_cost * CELLRATE))
+	if (!holder.cell.check_charge(use_power_cost * CELLRATE))
 		to_chat(holder.wearer,SPAN_WARNING("Not enough stored power."))
 		return 0
 
-	if(!target)
-		if(device.attack_self(holder.wearer))
+	if (!target)
+		if (device.attack_self(holder.wearer))
 			holder.cell.use(use_power_cost * CELLRATE)
 		return 1
 
-	if(!target.Adjacent(holder.wearer) || !ismob(target))
+	if (!target.Adjacent(holder.wearer) || !ismob(target))
 		return 0
 
 	var/resolved = target.attackby(device,holder.wearer)
-	if(resolved)
+	if (resolved)
 		holder.cell.use(use_power_cost * CELLRATE)
 	return resolved
 
 /obj/item/rig_module/device/flash/activate()
-	if(active || !check())
+	if (active || !check())
 		return
 
 	to_chat(holder.wearer, SPAN_NOTICE("Your hardsuit gauntlets heat up and lock into place, ready to be used."))
@@ -103,20 +103,20 @@
 
 /obj/item/rig_module/grenade_launcher/accepts_item(obj/item/input_device, mob/living/user)
 
-	if(!istype(input_device) || !istype(user))
+	if (!istype(input_device) || !istype(user))
 		return 0
 
 	var/datum/rig_charge/accepted_item
 	for(var/charge in charges)
 		var/datum/rig_charge/charge_datum = charges[charge]
-		if(input_device.type == charge_datum.product_type)
+		if (input_device.type == charge_datum.product_type)
 			accepted_item = charge_datum
 			break
 
-	if(!accepted_item)
+	if (!accepted_item)
 		return 0
 
-	if(accepted_item.charges >= 5)
+	if (accepted_item.charges >= 5)
 		to_chat(user, SPAN_DANGER("Another grenade of that type will not fit into the module."))
 		return 0
 
@@ -127,24 +127,24 @@
 
 /obj/item/rig_module/grenade_launcher/engage(atom/target)
 
-	if(!..())
+	if (!..())
 		return 0
 
-	if(!target)
+	if (!target)
 		return 0
 
 	var/mob/living/carbon/human/H = holder.wearer
 
-	if(!charge_selected)
+	if (!charge_selected)
 		to_chat(H, SPAN_DANGER("You have not selected a grenade type."))
 		return 0
 
 	var/datum/rig_charge/charge = charges[charge_selected]
 
-	if(!charge)
+	if (!charge)
 		return 0
 
-	if(charge.charges <= 0)
+	if (charge.charges <= 0)
 		to_chat(H, SPAN_DANGER("Insufficient grenades!"))
 		return 0
 
@@ -211,16 +211,16 @@
 
 /obj/item/rig_module/mounted/Initialize()
 	. = ..()
-	if(ispath(gun))
+	if (ispath(gun))
 		gun = new gun(src)
 		gun.canremove = 0
 
 /obj/item/rig_module/mounted/engage(atom/target)
 
-	if(!..() || !gun)
+	if (!..() || !gun)
 		return 0
 
-	if(!target)
+	if (!target)
 		gun.attack_self(holder.wearer)
 		return
 
@@ -284,15 +284,15 @@
 
 /obj/item/rig_module/mounted/plasmacutter/engage(atom/target)
 
-	if(!check() || !gun)
+	if (!check() || !gun)
 		return 0
 
-	if(holder.wearer.a_intent == I_HURT || !target.Adjacent(holder.wearer))
+	if (holder.wearer.a_intent == I_HURT || !target.Adjacent(holder.wearer))
 		gun.Fire(target,holder.wearer)
 		return 1
 	else
 		var/resolved = target.attackby(gun,holder.wearer)
-		if(!resolved && gun && target)
+		if (!resolved && gun && target)
 			gun.afterattack(target,holder.wearer,1)
 			return 1
 
@@ -321,8 +321,8 @@
 
 /obj/item/rig_module/mounted/energy_blade/Process()
 
-	if(holder && holder.wearer)
-		if(!(locate(/obj/item/melee/energy/blade) in holder.wearer))
+	if (holder && holder.wearer)
+		if (!(locate(/obj/item/melee/energy/blade) in holder.wearer))
 			deactivate()
 			return 0
 
@@ -340,7 +340,7 @@
 	blade.creator = M
 	M.put_in_hands(blade)
 
-	if(!..() || !gun)
+	if (!..() || !gun)
 		return 0
 
 /obj/item/rig_module/mounted/energy_blade/deactivate()
@@ -349,7 +349,7 @@
 
 	var/mob/living/M = holder.wearer
 
-	if(!M)
+	if (!M)
 		return
 
 	for(var/obj/item/melee/energy/blade/blade in M.contents)
@@ -375,12 +375,12 @@
 
 /obj/item/rig_module/fabricator/engage(atom/target)
 
-	if(!..())
+	if (!..())
 		return 0
 
 	var/mob/living/H = holder.wearer
 
-	if(target)
+	if (target)
 		var/obj/item/firing = new fabrication_type()
 		firing.dropInto(loc)
 		H.visible_message(SPAN_DANGER("[H] launches \a [firing]!"))

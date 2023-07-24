@@ -6,7 +6,7 @@
 	choices = list(CHOICE_RESTART, CHOICE_CONTINUE)
 
 /datum/vote/restart/can_run(mob/creator, automatic)
-	if(!automatic && !config.allow_vote_restart && !isadmin(creator))
+	if (!automatic && !config.allow_vote_restart && !isadmin(creator))
 		return FALSE // Admins and autovotes bypass the config setting.
 	return ..()
 
@@ -15,9 +15,9 @@
 	choices[CHOICE_CONTINUE] += non_voters
 
 /datum/vote/restart/report_result()
-	if(..())
+	if (..())
 		return 1
-	if(result[1] == CHOICE_RESTART)
+	if (result[1] == CHOICE_RESTART)
 		SSvote.restart_world()
 
 #undef CHOICE_RESTART

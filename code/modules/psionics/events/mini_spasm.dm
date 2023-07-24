@@ -21,9 +21,9 @@
 /datum/event/minispasm/start()
 	var/list/victims = list()
 	for(var/obj/item/device/radio/radio in GLOB.listening_objects)
-		if(radio.on)
+		if (radio.on)
 			for(var/mob/living/victim in range(radio.canhear_range, radio.loc))
-				if(isnull(victims[victim]) && victim.stat == CONSCIOUS && !victim.ear_deaf)
+				if (isnull(victims[victim]) && victim.stat == CONSCIOUS && !victim.ear_deaf)
 					victims[victim] = radio
 	for(var/thing in victims)
 		var/mob/living/victim = thing
@@ -33,15 +33,15 @@
 /datum/event/minispasm/proc/do_spasm(mob/living/victim, obj/item/device/radio/source)
 	set waitfor = 0
 
-	if(iscarbon(victim) && !victim.isSynthetic())
+	if (iscarbon(victim) && !victim.isSynthetic())
 		var/list/disabilities = list(NEARSIGHTED, EPILEPSY, NERVOUS)
 		for(var/disability in disabilities)
-			if(victim.disabilities & disability)
+			if (victim.disabilities & disability)
 				disabilities -= disability
-		if(length(disabilities))
+		if (length(disabilities))
 			victim.disabilities |= pick(disabilities)
 
-	if(victim.psi)
+	if (victim.psi)
 		to_chat(victim, SPAN_DANGER("A hauntingly familiar sound hisses from [icon2html(source, victim)] \the [source], and your vision flickers!"))
 		victim.psi.backblast(rand(5,15))
 		victim.Paralyse(5)

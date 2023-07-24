@@ -23,13 +23,13 @@ var/global/list/default_pai_software = list()
 	var/r = 1 // I would use ., but it'd sacrifice runtime detection
 	for(var/type in typesof(/datum/pai_software) - /datum/pai_software)
 		var/datum/pai_software/P = new type()
-		if(pai_software_by_key[P.id])
+		if (pai_software_by_key[P.id])
 			var/datum/pai_software/O = pai_software_by_key[P.id]
 			log_error(SPAN_WARNING("pAI software module [P.name] has the same key as [O.name]!"))
 			r = 0
 			continue
 		pai_software_by_key[P.id] = P
-		if(P.default)
+		if (P.default)
 			default_pai_software[P.id] = P
 	return r
 
@@ -43,16 +43,16 @@ var/global/list/default_pai_software = list()
 	ui_interact(src)
 
 /mob/living/silicon/pai/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	if(user != src)
-		if(ui) ui.set_status(STATUS_CLOSE, 0)
+	if (user != src)
+		if (ui) ui.set_status(STATUS_CLOSE, 0)
 		return
 
-	if(ui_key != "main")
+	if (ui_key != "main")
 		var/datum/pai_software/S = software[ui_key]
-		if(S && !S.toggle)
+		if (S && !S.toggle)
 			S.on_ui_interact(src, ui, force_open)
 		else
-			if(ui) ui.set_status(STATUS_CLOSE, 0)
+			if (ui) ui.set_status(STATUS_CLOSE, 0)
 		return
 
 	var/data[0]
@@ -67,7 +67,7 @@ var/global/list/default_pai_software = list()
 		var/software_data[0]
 		software_data["name"] = S.name
 		software_data["id"] = S.id
-		if(key in software)
+		if (key in software)
 			software_data["on"] = S.is_active(src)
 			bought_software[LIST_PRE_INC(bought_software)] = software_data
 		else
@@ -98,33 +98,33 @@ var/global/list/default_pai_software = list()
 
 /mob/living/silicon/pai/OnSelfTopic(href_list, topic_status)
 	if (topic_status == STATUS_INTERACTIVE)
-		if(href_list["software"])
+		if (href_list["software"])
 			var/soft = href_list["software"]
 			var/datum/pai_software/S = software[soft]
-			if(S.toggle)
+			if (S.toggle)
 				S.toggle(src)
 			else
 				ui_interact(src, ui_key = soft)
 			return TOPIC_HANDLED
 
-		else if(href_list["stopic"])
+		else if (href_list["stopic"])
 			var/soft = href_list["stopic"]
 			var/datum/pai_software/S = software[soft]
-			if(S)
+			if (S)
 				return S.Topic(list2params(href_list), href_list)
 
-		else if(href_list["purchase"])
+		else if (href_list["purchase"])
 			var/soft = href_list["purchase"]
 			var/datum/pai_software/S = pai_software_by_key[soft]
-			if(S && (ram >= S.ram_cost))
+			if (S && (ram >= S.ram_cost))
 				ram -= S.ram_cost
 				software[S.id] = S
 				S.on_purchase(src)
 			return TOPIC_HANDLED
 
-		else if(href_list["image"])
+		else if (href_list["image"])
 			var/img = text2num(href_list["image"])
-			if(1 <= img && img <= length(pai_emotions))
+			if (1 <= img && img <= length(pai_emotions))
 				card.setEmotion(img)
 			return TOPIC_HANDLED
 

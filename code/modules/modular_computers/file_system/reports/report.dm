@@ -44,15 +44,15 @@
   * If the override option is set to FALSE, the access supplied will instead be added as another access pattern, rather than resetting the access.
   */
 /datum/computer_file/report/proc/set_access(access, access_edit, recursive = 1, override = 1)
-	if(access)
-		if(!islist(access))
+	if (access)
+		if (!islist(access))
 			access = list(access)
 		override ? (src.access = list(access)) : (src.access += list(access))  //Note that this is a list of lists.
-	if(access_edit)
-		if(!islist(access_edit))
+	if (access_edit)
+		if (!islist(access_edit))
 			access_edit = list(access_edit)
 		override ? (src.access_edit = list(access_edit)) : (src.access_edit += list(access_edit))
-	if(recursive)
+	if (recursive)
 		for(var/datum/report_field/field in fields)
 			field.set_access(access, access_edit, override)
 
@@ -61,19 +61,19 @@
 	return has_access_pattern(access, given_access)
 
 /datum/computer_file/report/proc/verify_access_edit(given_access)
-	if(!verify_access(given_access))
+	if (!verify_access(given_access))
 		return //Need access for access_edit
 	return has_access_pattern(access_edit, given_access)
 
 /// Looking up fields. Names might not be unique unless you ensure otherwise.
 /datum/computer_file/report/proc/field_from_ID(ID)
 	for(var/datum/report_field/field in fields)
-		if(field.ID == ID)
+		if (field.ID == ID)
 			return field
 
 /datum/computer_file/report/proc/field_from_name(name)
 	for(var/datum/report_field/field in fields)
-		if(field.display_name() == name)
+		if (field.display_name() == name)
 			return field
 
 /// The place to enter fields for report subtypes, via add_field.
@@ -81,10 +81,10 @@
 	return
 
 /datum/computer_file/report/proc/submit(mob/user)
-	if(!istype(user))
+	if (!istype(user))
 		return 0
 	for(var/datum/report_field/field in fields)
-		if(field.required && !field.get_value())
+		if (field.required && !field.get_value())
 			to_chat(user, SPAN_NOTICE("You are missing a required field!"))
 			return 0
 	creator = user.name
@@ -95,7 +95,7 @@
 /datum/computer_file/report/proc/rename_file(append)
 	append = append || time_stamp()
 	append = replacetext(append, ":", "_")
-	if(istype(holder, /obj/item/stock_parts/computer/hard_drive))
+	if (istype(holder, /obj/item/stock_parts/computer/hard_drive))
 		holder.rename_file(src, "[form_name]_[append]")
 	else
 		filename = "[form_name]_[append]"
@@ -104,9 +104,9 @@
 /datum/computer_file/report/proc/add_field(field_type, name, value = null, required = 0)
 	var/datum/report_field/field = new field_type(src)
 	field.name = name
-	if(value)
+	if (value)
 		field.value = value
-	if(required)
+	if (required)
 		field.required = 1
 	field.ID = sequential_id(type)
 	fields += field
@@ -136,7 +136,7 @@
 	.["creator"] = creator
 	.["file_time"] = file_time
 	.["fields"] = list()
-	if(given_access)
+	if (given_access)
 		.["access"] = verify_access(given_access)
 		.["access_edit"] = verify_access_edit(given_access)
 	for(var/datum/report_field/field in fields)
@@ -155,7 +155,7 @@
 		. += F.generate_row_pencode(access, with_fields)
 	. += "\[/grid\]"
 	. = JOINTEXT(.)
-	if(no_html)
+	if (no_html)
 		. = html2pencode(.)
 
 /// Recipient reports have a designated recipients field, for receiving submitted reports.
@@ -170,5 +170,5 @@
 	recipients = add_field(/datum/report_field/people/list_from_manifest, "Send Copies To")
 
 /datum/computer_file/report/recipient/submit(mob/user)
-	if((. = ..()))
+	if ((. = ..()))
 		recipients.send_email(user)

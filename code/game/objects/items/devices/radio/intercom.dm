@@ -165,14 +165,14 @@
 /obj/item/device/radio/intercom/receive_range(freq, level)
 	if (!on)
 		return -1
-	if(!(0 in level))
+	if (!(0 in level))
 		var/turf/position = get_turf(src)
-		if(isnull(position) || !(position.z in level))
+		if (isnull(position) || !(position.z in level))
 			return -1
 	if (!src.listening)
 		return -1
-	if(freq in ANTAG_FREQS)
-		if(!(src.syndie))
+	if (freq in ANTAG_FREQS)
+		if (!(src.syndie))
 			return -1//Prevents broadcast of messages over devices lacking the encryption
 
 	return canhear_range
@@ -325,15 +325,15 @@
 	if (wiresexposed)
 		on = FALSE
 		return
-	if(((world.timeofday - last_tick) > 30) || ((world.timeofday - last_tick) < 0))
+	if (((world.timeofday - last_tick) > 30) || ((world.timeofday - last_tick) < 0))
 		last_tick = world.timeofday
 		var/old_on = on
 
-		if(!src.loc)
+		if (!src.loc)
 			on = FALSE
 		else
 			var/area/A = get_area(src)
-			if(!A)
+			if (!A)
 				on = FALSE
 			else
 				on = A.powered(EQUIP) // set "on" to the power status

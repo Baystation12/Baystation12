@@ -361,7 +361,7 @@ badges
 	set_desc(M)
 
 /obj/item/clothing/accessory/badge/solgov/tags/set_desc(mob/living/carbon/human/H)
-	if(!istype(H))
+	if (!istype(H))
 		return
 	owner_rank = H.char_rank && H.char_rank.name
 	owner_name = H.real_name

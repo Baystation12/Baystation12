@@ -3,18 +3,18 @@ var/global/list/client_preference_stats_
 /proc/client_preference_stats_for_usr(mob/user = usr)
 	RETURN_TYPE(/list)
 	. = list()
-	if(!user)
+	if (!user)
 		return
-	if(!SScharacter_setup.initialized)
+	if (!SScharacter_setup.initialized)
 		return
-	if(!client_preference_stats_)
+	if (!client_preference_stats_)
 		client_preference_stats_ = list()
 		for(var/datum/client_preference/client_pref in get_client_preferences())
 			client_preference_stats_[client_pref.description] = new /stat_client_preference(null, client_pref)
 
 	for(var/client_pref_description in client_preference_stats_)
 		var/stat_client_preference/scp = client_preference_stats_[client_pref_description]
-		if(scp.client_preference.may_set(user))
+		if (scp.client_preference.may_set(user))
 			scp.update_name(user)
 			.[client_pref_description] = scp
 
@@ -25,12 +25,12 @@ var/global/list/client_preference_stats_
 
 	var/list/client_stats = client_preference_stats_for_usr()
 	var/stat_client_preference/scp = client_stats[client_pref_name]
-	if(istype(scp))
+	if (istype(scp))
 		scp.Click()
 
 /mob/Stat()
 	. = ..()
-	if(!client || !statpanel("Preferences"))
+	if (!client || !statpanel("Preferences"))
 		return
 	var/list/preferences = client_preference_stats_for_usr(src)
 	for(var/client_preference_description in preferences)
@@ -52,10 +52,10 @@ var/global/list/client_preference_stats_
 	. = ..()
 
 /stat_client_preference/Click()
-	if(!usr.client)
+	if (!usr.client)
 		return
 
-	if(!usr.cycle_preference(client_preference))
+	if (!usr.cycle_preference(client_preference))
 		return
 
 	SScharacter_setup.queue_preferences_save(usr.client.prefs)

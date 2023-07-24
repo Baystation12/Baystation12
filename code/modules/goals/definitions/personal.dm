@@ -14,9 +14,9 @@
 	return (cleaned >= need_cleaned)
 
 /datum/goal/clean/update_progress(progress)
-	if(cleaned < need_cleaned)
+	if (cleaned < need_cleaned)
 		cleaned += progress
-		if(cleaned >= need_cleaned)
+		if (cleaned >= need_cleaned)
 			on_completion()
 
 /datum/goal/clean/get_summary_value()
@@ -29,7 +29,7 @@
 	target_amount = rand(100, 200)
 	var/datum/mind/mind = owner
 	for(var/datum/money_account/acct in all_money_accounts)
-		if(acct.owner_name == mind.current.real_name)
+		if (acct.owner_name == mind.current.real_name)
 			target_amount = acct.get_balance() * rand(2,3)
 			break
 	description = "End the round with bank balance higher than $[target_amount]."
@@ -37,7 +37,7 @@
 /datum/goal/money/check_success()
 	var/datum/mind/mind = owner
 	for(var/datum/money_account/acct in all_money_accounts)
-		if(acct.owner_name == mind.current.real_name)
+		if (acct.owner_name == mind.current.real_name)
 			return acct.get_balance() > target_amount
 	return FALSE
 
@@ -59,9 +59,9 @@
 	return (reps >= need_reps)
 
 /datum/goal/weights/update_progress(progress)
-	if(reps < need_reps)
+	if (reps < need_reps)
 		reps += progress
-		if(reps >= need_reps)
+		if (reps >= need_reps)
 			on_completion()
 
 /datum/goal/weights/get_summary_value()
@@ -84,9 +84,9 @@
 	return (hits >= need_hits)
 
 /datum/goal/punchingbag/update_progress(progress)
-	if(hits < need_hits)
+	if (hits < need_hits)
 		hits += progress
-		if(hits >= need_hits)
+		if (hits >= need_hits)
 			on_completion()
 
 /datum/goal/punchingbag/get_summary_value()

@@ -24,28 +24,28 @@
 
 /obj/structure/cargopile/attack_hand(mob/user)
 	. = ..()
-	if(Adjacent(user))
+	if (Adjacent(user))
 		var/obj/chosen_obj = input(user, "Choose an object to grab.", "Cargo pile") as null|anything in contents
-		if(!chosen_obj)
+		if (!chosen_obj)
 			return
-		if(chosen_obj.density)
+		if (chosen_obj.density)
 			for(var/atom/A in get_turf(src))
-				if(A != src && A.density && !(A.atom_flags & ATOM_FLAG_CHECKS_BORDER))
+				if (A != src && A.density && !(A.atom_flags & ATOM_FLAG_CHECKS_BORDER))
 					to_chat(user, SPAN_WARNING("\The [A] blocks you from pulling out \the [chosen_obj]."))
 					return
-		if(!do_after(user, 0.5 SECONDS, src, DO_PUBLIC_UNIQUE)) return
-		if(!chosen_obj) return
-		if(chosen_obj.density)
+		if (!do_after(user, 0.5 SECONDS, src, DO_PUBLIC_UNIQUE)) return
+		if (!chosen_obj) return
+		if (chosen_obj.density)
 			for(var/atom/A in get_turf(src))
-				if(A != src && A.density && !(A.atom_flags & ATOM_FLAG_CHECKS_BORDER))
+				if (A != src && A.density && !(A.atom_flags & ATOM_FLAG_CHECKS_BORDER))
 					to_chat(user, SPAN_WARNING("\The [A] blocks you from pulling out \the [chosen_obj]."))
 					return
-		if(user.put_in_active_hand(chosen_obj))
+		if (user.put_in_active_hand(chosen_obj))
 			src.visible_message(SPAN_NOTICE("\The [user] carefully grabs \the [chosen_obj] from \the [src]."))
-		else if(chosen_obj.dropInto(get_turf(src)))
+		else if (chosen_obj.dropInto(get_turf(src)))
 			src.visible_message(SPAN_NOTICE("\The [user] pulls \the [chosen_obj] from \the [src]."))
 
-		if(!length(contents))
+		if (!length(contents))
 			qdel_self()
 		else update_icon()
 
@@ -60,19 +60,19 @@
 	var/list/obj/carrying = list()
 
 /obj/item/mech_equipment/clamp/resolve_attackby(atom/A, mob/user, click_params)
-	if(owner)
+	if (owner)
 		return 0
 	return ..()
 
 /obj/item/mech_equipment/clamp/attack_hand(mob/user)
-	if(owner && LAZYISIN(owner.pilots, user))
-		if(!owner.hatch_closed && length(carrying))
+	if (owner && LAZYISIN(owner.pilots, user))
+		if (!owner.hatch_closed && length(carrying))
 			var/obj/chosen_obj = input(user, "Choose an object to grab.", "Clamp Claw") as null|anything in carrying
-			if(!chosen_obj)
+			if (!chosen_obj)
 				return
-			if(!do_after(user, 2 SECONDS, owner, DO_PUBLIC_UNIQUE)) return
-			if(owner.hatch_closed || !chosen_obj) return
-			if(user.put_in_active_hand(chosen_obj))
+			if (!do_after(user, 2 SECONDS, owner, DO_PUBLIC_UNIQUE)) return
+			if (owner.hatch_closed || !chosen_obj) return
+			if (user.put_in_active_hand(chosen_obj))
 				owner.visible_message(SPAN_NOTICE("\The [user] carefully grabs \the [chosen_obj] from \the [src]."))
 				playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
 				carrying -= chosen_obj
@@ -81,22 +81,22 @@
 /obj/item/mech_equipment/clamp/afterattack(atom/target, mob/living/user, inrange, params)
 	. = ..()
 
-	if(.)
-		if(istype(target, /obj))
+	if (.)
+		if (istype(target, /obj))
 			var/obj/O = target
-			if(O.buckled_mob)
+			if (O.buckled_mob)
 				return
-			if(locate(/mob/living) in O)
+			if (locate(/mob/living) in O)
 				to_chat(user, SPAN_WARNING("You can't load living things into the cargo compartment."))
 				return
 
-			if(O.anchored)
+			if (O.anchored)
 				//Special door handling
-				if(istype(O, /obj/machinery/door/firedoor))
+				if (istype(O, /obj/machinery/door/firedoor))
 					var/obj/machinery/door/firedoor/FD = O
-					if(FD.blocked)
+					if (FD.blocked)
 						FD.visible_message(SPAN_DANGER("\The [owner] begins prying on \the [FD]!"))
-						if(do_after(owner, 10 SECONDS, FD, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && FD.blocked)
+						if (do_after(owner, 10 SECONDS, FD, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && FD.blocked)
 							playsound(FD, 'sound/effects/meteorimpact.ogg', 100, 1)
 							playsound(FD, 'sound/machines/airlock_creaking.ogg', 100, 1)
 							FD.blocked = FALSE
@@ -105,21 +105,21 @@
 							FD.visible_message(SPAN_WARNING("\The [owner] tears \the [FD] open!"))
 					else
 						FD.visible_message(SPAN_DANGER("\The [owner] begins forcing \the [FD]!"))
-						if(do_after(owner, 4 SECONDS, FD, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && !FD.blocked)
+						if (do_after(owner, 4 SECONDS, FD, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && !FD.blocked)
 							playsound(FD, 'sound/machines/airlock_creaking.ogg', 100, 1)
-							if(FD.density)
+							if (FD.density)
 								FD.visible_message(SPAN_DANGER("\The [owner] forces \the [FD] open!"))
 								addtimer(new Callback(FD, /obj/machinery/door/firedoor/.proc/open, TRUE), 0)
 							else
 								FD.visible_message(SPAN_WARNING("\The [owner] forces \the [FD] closed!"))
 								addtimer(new Callback(FD, /obj/machinery/door/firedoor/.proc/close, TRUE), 0)
 					return
-				else if(istype(O, /obj/machinery/door/airlock))
+				else if (istype(O, /obj/machinery/door/airlock))
 					var/obj/machinery/door/airlock/AD = O
-					if(!AD.operating && !AD.locked)
-						if(AD.welded)
+					if (!AD.operating && !AD.locked)
+						if (AD.welded)
 							AD.visible_message(SPAN_DANGER("\The [owner] begins prying on \the [AD]!"))
-							if(do_after(owner, 15 SECONDS, AD, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && !AD.locked)
+							if (do_after(owner, 15 SECONDS, AD, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && !AD.locked)
 								AD.welded = FALSE
 								AD.update_icon()
 								playsound(AD, 'sound/effects/meteorimpact.ogg', 100, 1)
@@ -130,34 +130,34 @@
 								return
 						else
 							AD.visible_message(SPAN_DANGER("\The [owner] begins forcing \the [AD]!"))
-							if((MACHINE_IS_BROKEN(AD) || !AD.is_powered() || do_after(owner, 5 SECONDS, AD, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)) && !(AD.operating || AD.welded || AD.locked))
+							if ((MACHINE_IS_BROKEN(AD) || !AD.is_powered() || do_after(owner, 5 SECONDS, AD, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)) && !(AD.operating || AD.welded || AD.locked))
 								playsound(AD, 'sound/machines/airlock_creaking.ogg', 100, 1)
-								if(AD.density)
+								if (AD.density)
 									addtimer(new Callback(AD, /obj/machinery/door/airlock/.proc/open, TRUE), 0)
-									if(!MACHINE_IS_BROKEN(AD) && AD.is_powered())
+									if (!MACHINE_IS_BROKEN(AD) && AD.is_powered())
 										AD.set_broken(TRUE)
 									AD.visible_message(SPAN_DANGER("\The [owner] forces \the [AD] open!"))
 								else
 									addtimer(new Callback(AD, /obj/machinery/door/airlock/.proc/close, TRUE), 0)
-									if(!MACHINE_IS_BROKEN(AD) && AD.is_powered())
+									if (!MACHINE_IS_BROKEN(AD) && AD.is_powered())
 										AD.set_broken(TRUE)
 									AD.visible_message(SPAN_DANGER("\The [owner] forces \the [AD] closed!"))
-					if(AD.locked)
+					if (AD.locked)
 						to_chat(user, SPAN_NOTICE("The airlock's bolts prevent it from being forced."))
 					return
 
 				to_chat(user, SPAN_WARNING("\The [target] is firmly secured."))
 				return
 
-			if(length(carrying) >= carrying_capacity)
+			if (length(carrying) >= carrying_capacity)
 				to_chat(user, SPAN_WARNING("\The [src] is fully loaded!"))
 				return
 
 			owner.visible_message(SPAN_NOTICE("\The [owner] begins loading \the [O]."))
-			if(do_after(owner, 2 SECONDS, O, DO_PUBLIC_UNIQUE & ~DO_USER_SAME_HAND))
-				if(O in carrying || O.buckled_mob || O.anchored || (locate(/mob/living) in O)) //Repeat checks
+			if (do_after(owner, 2 SECONDS, O, DO_PUBLIC_UNIQUE & ~DO_USER_SAME_HAND))
+				if (O in carrying || O.buckled_mob || O.anchored || (locate(/mob/living) in O)) //Repeat checks
 					return
-				if(length(carrying) >= carrying_capacity)
+				if (length(carrying) >= carrying_capacity)
 					to_chat(user, SPAN_WARNING("\The [src] is fully loaded!"))
 					return
 				O.forceMove(src)
@@ -166,12 +166,12 @@
 				playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
 
 		//attacking - Cannot be carrying something, cause then your clamp would be full
-		else if(istype(target,/mob/living))
+		else if (istype(target,/mob/living))
 			var/mob/living/M = target
-			if(user.a_intent == I_HURT)
+			if (user.a_intent == I_HURT)
 				admin_attack_log(user, M, "attempted to clamp [M] with [src] ", "Was subject to a clamping attempt.", ", using \a [src], attempted to clamp")
 				owner.setClickCooldown(owner.arms ? owner.arms.action_delay * 3 : 30) //This is an inefficient use of your powers
-				if(prob(33))
+				if (prob(33))
 					owner.visible_message(SPAN_DANGER("[owner] swings its [src] in a wide arc at [target] but misses completely!"))
 					return
 				M.attack_generic(owner, (owner.arms ? owner.arms.melee_damage * 1.5 : 0), "slammed") //Honestly you should not be able to do this without hands, but still
@@ -185,27 +185,27 @@
 
 /obj/item/mech_equipment/clamp/attack_self(mob/user)
 	. = ..()
-	if(.)
+	if (.)
 		drop_carrying(user, TRUE)
 
 /obj/item/mech_equipment/clamp/CtrlClick(mob/user)
-	if(owner)
+	if (owner)
 		drop_carrying(user, FALSE)
 		return TRUE
 	return ..()
 
 /obj/item/mech_equipment/clamp/proc/drop_carrying(mob/user, choose_object)
-	if(!length(carrying))
+	if (!length(carrying))
 		to_chat(user, SPAN_WARNING("You are not carrying anything in \the [src]."))
 		return
 	var/obj/chosen_obj = carrying[1]
-	if(choose_object)
+	if (choose_object)
 		chosen_obj = input(user, "Choose an object to set down.", "Clamp Claw") as null|anything in carrying
-	if(!chosen_obj)
+	if (!chosen_obj)
 		return
-	if(chosen_obj.density)
+	if (chosen_obj.density)
 		for(var/atom/A in get_turf(src))
-			if(A != owner && A.density && !(A.atom_flags & ATOM_FLAG_CHECKS_BORDER))
+			if (A != owner && A.density && !(A.atom_flags & ATOM_FLAG_CHECKS_BORDER))
 				to_chat(user, SPAN_WARNING("\The [A] blocks you from putting down \the [chosen_obj]."))
 				return
 
@@ -215,27 +215,27 @@
 	carrying -= chosen_obj
 
 /obj/item/mech_equipment/clamp/get_hardpoint_status_value()
-	if(length(carrying) > 1)
+	if (length(carrying) > 1)
 		return length(carrying)/carrying_capacity
 	return null
 
 /obj/item/mech_equipment/clamp/get_hardpoint_maptext()
-	if(length(carrying) == 1)
+	if (length(carrying) == 1)
 		return carrying[1].name
-	else if(length(carrying) > 1)
+	else if (length(carrying) > 1)
 		return "Multiple"
 	. = ..()
 
 /obj/item/mech_equipment/clamp/proc/create_spill()
-	if(length(carrying))
+	if (length(carrying))
 		var/denseCount = 0
 		for(var/obj/load in carrying)
-			if(load.density)
+			if (load.density)
 				denseCount += 1
-			if(denseCount > 1)
+			if (denseCount > 1)
 				break
 
-		if(denseCount > 1)
+		if (denseCount > 1)
 			var/obj/structure/cargopile/pile = new(get_turf(src))
 			for(var/obj/load in carrying)
 				load.forceMove(pile)
@@ -245,15 +245,15 @@
 			for(var/obj/load in carrying)
 				var/turf/location = get_turf(src)
 				var/list/turfs = location.AdjacentTurfsSpace()
-				if(load.density)
-					if(length(turfs) > 0)
+				if (load.density)
+					if (length(turfs) > 0)
 						location = pick(turfs)
 						turfs -= location
 					else
 						load.dropInto(location)
 						load.throw_at_random(FALSE, rand(2,4), 4)
 						location = null
-				if(location)
+				if (location)
 					load.dropInto(location)
 				carrying -= load
 
@@ -285,7 +285,7 @@
 
 /obj/item/mech_equipment/light/attack_self(mob/user)
 	. = ..()
-	if(.)
+	if (.)
 		toggle()
 		to_chat(user, "You switch \the [src] [on ? "on" : "off"].")
 
@@ -297,12 +297,12 @@
 	passive_power_use = on ? 0.1 KILOWATTS : 0
 
 /obj/item/mech_equipment/light/deactivate()
-	if(on)
+	if (on)
 		toggle()
 	..()
 
 /obj/item/mech_equipment/light/on_update_icon()
-	if(on)
+	if (on)
 		icon_state = "[initial(icon_state)]-on"
 		set_light(l_max_bright, l_inner_range, l_outer_range)
 	else
@@ -310,7 +310,7 @@
 		set_light(0, 0)
 
 	//Check our layers
-	if(owner && (owner.hardpoints[HARDPOINT_HEAD] == src))
+	if (owner && (owner.hardpoints[HARDPOINT_HEAD] == src))
 		mech_layer = MECH_INTERMEDIATE_LAYER
 	else mech_layer = initial(mech_layer)
 
@@ -349,42 +349,42 @@
 	z_flags = ZMM_IGNORE
 
 /obj/item/mech_equipment/catapult/proc/beamdestroyed()
-	if(beam)
+	if (beam)
 		GLOB.destroyed_event.unregister(beam, src, .proc/beamdestroyed)
 		beam = null
-	if(locked)
-		if(owner)
+	if (locked)
+		if (owner)
 			for(var/pilot in owner.pilots)
 				to_chat(pilot, SPAN_NOTICE("Lock on \the [locked] disengaged."))
 		endanimation()
 		locked = null
 	//It's possible beam self destroyed, match active
-	if(active)
+	if (active)
 		deactivate()
 
 /obj/item/mech_equipment/catapult/proc/endanimation()
-	if(locked)
+	if (locked)
 		animate(locked,pixel_y= initial(locked.pixel_y), time = 0)
 
 /obj/item/mech_equipment/catapult/get_hardpoint_maptext()
 	var/string
-	if(locked)
+	if (locked)
 		string = locked.name + " - "
-	if(mode == 1)
+	if (mode == 1)
 		string += "Pull"
 	else string += "Push"
 	return string
 
 /obj/item/mech_equipment/catapult/deactivate()
 	. = ..()
-	if(beam)
+	if (beam)
 		QDEL_NULL(beam)
 	passive_power_use = 0
 
 /obj/item/mech_equipment/catapult/attack_self(mob/user)
 	. = ..()
-	if(.)
-		if(!locked)
+	if (.)
+		if (!locked)
 			mode = mode == CATAPULT_SINGLE ? CATAPULT_AREA : CATAPULT_SINGLE
 			to_chat(user, SPAN_NOTICE("You set \the [src] to [mode == CATAPULT_SINGLE ? "single" : "multi"]-target mode."))
 			update_icon()
@@ -393,12 +393,12 @@
 
 /obj/item/mech_equipment/catapult/afterattack(atom/target, mob/living/user, inrange, params)
 	. = ..()
-	if(.)
+	if (.)
 		switch(mode)
-			if(CATAPULT_SINGLE)
-				if(!locked && (get_dist(owner, target) <= max_dist))
+			if (CATAPULT_SINGLE)
+				if (!locked && (get_dist(owner, target) <= max_dist))
 					var/atom/movable/AM = target
-					if(!istype(AM) || AM.anchored || !AM.simulated)
+					if (!istype(AM) || AM.anchored || !AM.simulated)
 						to_chat(user, SPAN_NOTICE("Unable to lock on [target]."))
 						return
 					locked = AM
@@ -412,8 +412,8 @@
 					passive_power_use = activated_passive_power
 					to_chat(user, SPAN_NOTICE("Locked on [AM]."))
 					return
-				else if(target != locked)
-					if(locked in view(owner))
+				else if (target != locked)
+					if (locked in view(owner))
 						log_and_message_admins("used [src] to throw [locked] at [target].", user, owner.loc)
 						endanimation() //End animation without waiting for delete, so throw won't be affected
 						locked.throw_at(target, 14, 1.5, owner)
@@ -421,13 +421,13 @@
 						deactivate()
 
 						var/obj/item/cell/C = owner.get_cell()
-						if(istype(C))
+						if (istype(C))
 							C.use(active_power_use * CELLRATE)
 
 					else
 						deactivate()
-			if(CATAPULT_AREA)
-				if(!warpeffect)
+			if (CATAPULT_AREA)
+				if (!warpeffect)
 					warpeffect = new
 
 				//effect and sound
@@ -444,18 +444,18 @@
 				playsound(warpeffect, 'sound/effects/heavy_cannon_blast.ogg', 50, 1)
 
 				var/list/atoms = list()
-				if(isturf(target))
+				if (isturf(target))
 					atoms = range(target,3)
 				else
 					atoms = orange(target,3)
 				for(var/atom/movable/A in atoms)
-					if(A.anchored || !A.simulated) continue
+					if (A.anchored || !A.simulated) continue
 					var/dist = 5-get_dist(A,target)
 					A.throw_at(get_edge_target_turf(A,get_dir(target, A)),dist,0.7)
 
 				log_and_message_admins("used [src]'s area throw on [target].", user, owner.loc)
 				var/obj/item/cell/C = owner.get_cell()
-				if(istype(C))
+				if (istype(C))
 					C.use(active_power_use * CELLRATE * 2) //bit more expensive to throw all
 
 #undef CATAPULT_SINGLE
@@ -520,13 +520,13 @@
 
 /obj/item/mech_equipment/drill/attack_self(mob/user)
 	. = ..()
-	if(.)
-		if(drill_head)
+	if (.)
+		if (drill_head)
 			owner.visible_message(SPAN_WARNING("[owner] revs the [drill_head], menancingly."))
 			playsound(src, 'sound/mecha/mechdrill.ogg', 50, 1)
 
 /obj/item/mech_equipment/drill/get_hardpoint_maptext()
-	if(drill_head)
+	if (drill_head)
 		return "Integrity: [drill_head.get_percent_durability()]%"
 	return
 
@@ -627,10 +627,10 @@
 	EM.set_dir(reverse_direction(owner.dir))
 
 	if (!do_after(owner, delay, target, (DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) & ~DO_USER_CAN_TURN))
-		if(EM)
+		if (EM)
 			EM.particles.spawning = FALSE
 		return
-	if(EM)
+	if (EM)
 		EM.particles.spawning = FALSE
 	if (src != owner.selected_system)
 		to_chat(user, SPAN_WARNING("You must keep \the [src] selected to use it."))
@@ -797,7 +797,7 @@
 	else
 		icon_state = "mech_jet_off"
 		set_light(0)
-	if(owner)
+	if (owner)
 		owner.update_icon()
 
 /obj/item/mech_equipment/ionjets/get_hardpoint_maptext()
@@ -863,7 +863,7 @@
 
 /obj/item/mech_equipment/camera/installed(mob/living/exosuit/_owner)
 	. = ..()
-	if(owner)
+	if (owner)
 		camera.c_tag = "[owner.name] camera feed"
 		invalidateCameraCache()
 
@@ -889,27 +889,27 @@
 /obj/item/mech_equipment/camera/attackby(obj/item/W, mob/user)
 	. = ..()
 
-	if(isScrewdriver(W))
+	if (isScrewdriver(W))
 		var/list/all_networks = list()
 		for(var/network in GLOB.using_map.station_networks)
-			if(has_access(get_camera_access(network), GetIdCard(user)))
+			if (has_access(get_camera_access(network), GetIdCard(user)))
 				all_networks += network
 
 		all_networks += additional_networks
 
 		var/network = input("Which network would you like to configure it for?") as null|anything in (all_networks)
-		if(!network)
+		if (!network)
 			to_chat(user, SPAN_WARNING("You cannot connect to any camera network!."))
 		var/delay = 2 SECONDS * user.skill_delay_mult(SKILL_DEVICES)
-		if(do_after(user, delay, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT) && network)
+		if (do_after(user, delay, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT) && network)
 			camera.network = list(network)
 			camera.update_coverage(TRUE)
 			to_chat(user, SPAN_NOTICE("You configure the camera for \the [network] network."))
 
 /obj/item/mech_equipment/camera/attack_self(mob/user)
 	. = ..()
-	if(.)
-		if(active)
+	if (.)
+		if (active)
 			deactivate()
 		else
 			activate()

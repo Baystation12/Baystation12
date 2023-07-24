@@ -8,7 +8,7 @@
 	hud_state = "const_shell"
 
 /spell/toggle_armor/New()
-	if(armor_pieces)
+	if (armor_pieces)
 		var/list/nlist = list()
 		for(var/type in armor_pieces)
 			var/obj/item/I = new type(null)
@@ -17,7 +17,7 @@
 	return ..()
 
 /spell/toggle_armor/proc/drop_piece(obj/I)
-	if(istype(I.loc, /mob))
+	if (istype(I.loc, /mob))
 		var/mob/M = I.loc
 		M.drop_from_inventory(I)
 
@@ -27,7 +27,7 @@
 /spell/toggle_armor/cast(list/targets, mob/user)
 	equip = !equip
 	name = "[initial(name)] ([equip ? "off" : "on"])"
-	if(equip)
+	if (equip)
 		for(var/piece in armor_pieces)
 			var/slot = armor_pieces[piece]
 			drop_piece(piece)

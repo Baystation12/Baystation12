@@ -13,7 +13,7 @@
 
 /datum/persistent/filth/FinalizeTokens(list/tokens)
 	. = ..()
-	if(.["path"] && !ispath(.["path"]))
+	if (.["path"] && !ispath(.["path"]))
 		.["path"] = text2path(.["path"])
 	. = tokens
 

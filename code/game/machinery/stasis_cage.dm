@@ -41,7 +41,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	battery = get_component_of_type(/obj/item/stock_parts/power/battery)
 
 	var/mob/living/A = locate() in loc
-	if(!A)
+	if (!A)
 		release(A)
 	else
 		contain(A)
@@ -62,7 +62,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 				SA.status_flags ^= GODMODE
 
 /obj/machinery/stasis_cage/proc/try_release(mob/user)
-	if(!contained)
+	if (!contained)
 		to_chat(user, SPAN_WARNING("There's no animals inside \the [src]"))
 		return
 	if (broken)
@@ -79,7 +79,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 		return
 
 	user.visible_message("[user] begins undoing the locks and latches on \the [src].")
-	if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) && user.use_sanity_check(src))
+	if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) && user.use_sanity_check(src))
 		user.visible_message("[user] releases \the [contained] from \the [src]!")
 		release()
 
@@ -95,7 +95,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 		update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/stasis_cage/proc/contain(mob/user, mob/thing)
-	if(contained || broken)
+	if (contained || broken)
 		return
 	if (!is_powered())
 		to_chat(usr, SPAN_WARNING("\The [src] is unpowered."))
@@ -178,14 +178,14 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 				USE_FEEDBACK_FAILURE("\The [src] must be emptied before repairs can be done!")
 				return TRUE
 			var/obj/item/stack/cable_coil/I = tool
-			if(!I.can_use(10))
+			if (!I.can_use(10))
 				USE_FEEDBACK_STACK_NOT_ENOUGH(I, 10, "to repair \the [src].")
 				return TRUE
 			user.visible_message(
 				SPAN_NOTICE("[user] begins to repair \the [src]'s electronics with \the [tool]."),
 				SPAN_NOTICE("You being to repair \the [src]'s electronics with \the [tool].")
 			)
-			if(!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
+			if (!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 				return TRUE
 			if (!prob(20 * (user.get_skill_value(SKILL_DEVICES))))
 				USE_FEEDBACK_FAILURE("You fail to successfully repair \the [src]'s electronics.")
@@ -230,7 +230,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 /obj/machinery/stasis_cage/return_air() //Used to make stasis cage protect from vacuum.
 	if (!is_powered())
 		return
-	if(airtank)
+	if (airtank)
 		return airtank
 	..()
 
@@ -253,8 +253,8 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 		return
 	if (inoperable())
 		return
-	if(contained)
-		if(prob(30))
+	if (contained)
+		if (prob(30))
 			visible_message(SPAN_DANGER("\The [src]'s lights flicker, unlocking the container!"))
 			release()
 			broken = TRUE
@@ -301,7 +301,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	)
 
 /obj/machinery/stasis_cage/MouseDrop_T(mob/target, mob/user)
-	if(!CanMouseDrop(target, user))
+	if (!CanMouseDrop(target, user))
 		return
 	if (!isanimal(target) && safety)
 		to_chat(user, SPAN_WARNING("\The [src] smartly refuses \the [target]."))

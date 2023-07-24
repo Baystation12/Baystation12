@@ -42,7 +42,7 @@
 
 /obj/structure/filingcabinet/Initialize()
 	for(var/obj/item/I in loc)
-		if(is_type_in_list(I, can_hold))
+		if (is_type_in_list(I, can_hold))
 			I.forceMove(src)
 	. = ..()
 
@@ -65,7 +65,7 @@
 
 
 /obj/structure/filingcabinet/attack_hand(mob/user as mob)
-	if(length(contents) <= 0)
+	if (length(contents) <= 0)
 		to_chat(user, SPAN_NOTICE("\The [src] is empty."))
 		return
 
@@ -77,12 +77,12 @@
 	show_browser(user, "<html><head><title>[name]</title></head><body>[jointext(dat,null)]</body></html>", "window=filingcabinet;size=350x300")
 
 /obj/structure/filingcabinet/Topic(href, href_list)
-	if(href_list["retrieve"])
+	if (href_list["retrieve"])
 		show_browser(usr, "", "window=filingcabinet") // Close the menu
 
 		//var/retrieveindex = text2num(href_list["retrieve"])
 		var/obj/item/P = locate(href_list["retrieve"])//contents[retrieveindex]
-		if(istype(P) && (P.loc == src) && src.Adjacent(usr))
+		if (istype(P) && (P.loc == src) && src.Adjacent(usr))
 			usr.put_in_hands(P)
 			updateUsrDialog()
 			flick("[initial(icon_state)]-open",src)

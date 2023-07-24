@@ -10,17 +10,17 @@
 	target_temp = rand(300, 600)
 
 /datum/artifact_effect/heat/DoEffectTouch(mob/user)
-	if(holder)
+	if (holder)
 		if (istype(user))
 			to_chat(user, SPAN_WARNING("You feel a wave of heat travel up your spine!"))
 		var/datum/gas_mixture/env = holder.loc.return_air()
-		if(env)
+		if (env)
 			env.temperature += rand(5,50)
 
 /datum/artifact_effect/heat/DoEffectAura()
-	if(holder)
+	if (holder)
 		var/datum/gas_mixture/env = holder.loc.return_air()
-		if(env && env.temperature < target_temp)
+		if (env && env.temperature < target_temp)
 			env.temperature += pick(0, 0, 1)
 
 /datum/artifact_effect/heat/destroyed_effect()

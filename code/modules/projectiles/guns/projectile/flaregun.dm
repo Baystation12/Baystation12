@@ -23,20 +23,20 @@
 
 /obj/item/gun/projectile/flare/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 2 && length(loaded))
+	if (distance <= 2 && length(loaded))
 		to_chat(user, "\A [loaded[1]] is chambered.")
 
 /obj/item/gun/projectile/flare/special_check()
-	if(length(loaded))
+	if (length(loaded))
 		var/obj/item/ammo_casing/casing = loaded[1]
-		if(istype(casing) && istype(casing.BB) && !istype(casing, /obj/item/ammo_casing/shotgun/flash))
+		if (istype(casing) && istype(casing.BB) && !istype(casing, /obj/item/ammo_casing/shotgun/flash))
 			var/damage = casing.BB.get_structure_damage()
-			if(istype(casing.BB, /obj/item/projectile/bullet/pellet))
+			if (istype(casing.BB, /obj/item/projectile/bullet/pellet))
 				var/obj/item/projectile/bullet/pellet/PP = casing.BB
 				damage = PP.damage*PP.pellets
-			if(damage > 5)
+			if (damage > 5)
 				var/mob/living/carbon/C = loc
-				if(istype(C))
+				if (istype(C))
 					C.visible_message(SPAN_DANGER("[src] explodes in [C]'s hands!"), SPAN_DANGER("[src] explodes in your face!"))
 					C.drop_from_inventory(src)
 					for(var/zone in list(BP_L_HAND, BP_R_HAND))

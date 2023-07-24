@@ -15,7 +15,7 @@ SUBSYSTEM_DEF(webhooks)
 
 /datum/controller/subsystem/webhooks/proc/load_webhooks()
 
-	if(!fexists(HTTP_POST_DLL_LOCATION))
+	if (!fexists(HTTP_POST_DLL_LOCATION))
 		to_world_log("Unable to locate HTTP POST lib at [HTTP_POST_DLL_LOCATION], webhooks will not function on this run.")
 		return
 
@@ -23,21 +23,21 @@ SUBSYSTEM_DEF(webhooks)
 	var/list/all_webhooks = GET_SINGLETON_SUBTYPE_MAP(/singleton/webhook)
 	for(var/wid in all_webhooks)
 		var/singleton/webhook/webhook = all_webhooks[wid]
-		if(webhook.id)
+		if (webhook.id)
 			all_webhooks_by_id[webhook.id] = webhook
 
 	webhook_singletons.Cut()
 	var/webhook_config = file2text("config/webhooks.json") || "{}"
-	if(webhook_config)
+	if (webhook_config)
 		for(var/webhook_data in json_decode(webhook_config))
 			var/wid = webhook_data["id"]
 			var/wurl = webhook_data["url"]
 			var/wmention = webhook_data["mentions"]
 			to_world_log("Setting up webhook [wid].")
-			if(wid && wurl && all_webhooks_by_id[wid])
+			if (wid && wurl && all_webhooks_by_id[wid])
 				var/singleton/webhook/webhook = all_webhooks_by_id[wid]
 				webhook.urls = islist(wurl) ? wurl : list(wurl)
-				if(wmention)
+				if (wmention)
 					webhook.mentions = jointext(wmention, ", ")
 				webhook_singletons[wid] = webhook
 				to_world_log("Webhook [wid] ready.")
@@ -46,8 +46,8 @@ SUBSYSTEM_DEF(webhooks)
 
 /datum/controller/subsystem/webhooks/proc/send(wid, wdata)
 	var/singleton/webhook/webhook = webhook_singletons[wid]
-	if(webhook)
-		if(webhook.send(wdata))
+	if (webhook)
+		if (webhook.send(wdata))
 			to_world_log("Sent webhook [webhook.id].")
 			log_debug("Webhook sent: [webhook.id].")
 		else
@@ -58,10 +58,10 @@ SUBSYSTEM_DEF(webhooks)
 	set name = "Reload Webhooks"
 	set category = "Debug"
 
-	if(!holder)
+	if (!holder)
 		return
 
-	if(!SSwebhooks.initialized)
+	if (!SSwebhooks.initialized)
 		to_chat(usr, SPAN_WARNING("Let the webhook subsystem initialize before trying to reload it."))
 		return
 
@@ -73,15 +73,15 @@ SUBSYSTEM_DEF(webhooks)
 	set name = "Ping Webhook"
 	set category = "Debug"
 
-	if(!holder)
+	if (!holder)
 		return
 
-	if(!length(SSwebhooks.webhook_singletons))
+	if (!length(SSwebhooks.webhook_singletons))
 		to_chat(usr, "Webhook list is empty; either webhooks are disabled, webhooks aren't configured, or the subsystem hasn't initialized.")
 		return
 
 	var/choice = input(usr, "Select a webhook to ping.", "Ping Webhook") as null|anything in SSwebhooks.webhook_singletons
-	if(choice && SSwebhooks.webhook_singletons[choice])
+	if (choice && SSwebhooks.webhook_singletons[choice])
 		var/singleton/webhook/webhook = SSwebhooks.webhook_singletons[choice]
 		log_and_message_admins("has pinged webhook [choice].", usr)
 		to_world_log("[usr.key] has pinged webhook [choice].")

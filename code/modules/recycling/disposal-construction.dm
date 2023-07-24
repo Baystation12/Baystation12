@@ -18,8 +18,8 @@
 
 /obj/structure/disposalconstruct/New(loc, P = null)
 	. = ..()
-	if(P)
-		if(istype(P, /obj/structure/disposalpipe))//Unfortunately a necessary evil since some things are machines and other things are structures
+	if (P)
+		if (istype(P, /obj/structure/disposalpipe))//Unfortunately a necessary evil since some things are machines and other things are structures
 			var/obj/structure/disposalpipe/D = P
 			SetName(D.name)
 			desc = D.desc
@@ -32,7 +32,7 @@
 			dpdir = D.dpdir
 			constructed_path = D.type
 			set_dir(D.dir) // Needs to be set after turn and possibly other state.
-		if(istype(P, /obj/machinery/disposal))
+		if (istype(P, /obj/machinery/disposal))
 			var/obj/machinery/disposal/D = P
 			SetName(D.name)
 			desc = D.desc
@@ -50,14 +50,14 @@
 	. = ..()
 
 /obj/structure/disposalconstruct/proc/update_verbs()
-	if(anchored)
+	if (anchored)
 		verbs -= /obj/structure/disposalconstruct/proc/flip
 	else
 		verbs += /obj/structure/disposalconstruct/proc/flip
 
 // update iconstate and dpdir due to dir and type
 /obj/structure/disposalconstruct/proc/update()
-	if(invisibility)      // if invisible, fade icon
+	if (invisibility)      // if invisible, fade icon
 		alpha = 128
 	else
 		alpha = 255
@@ -73,16 +73,16 @@
 	set category = "Object"
 	set name = "Flip Pipe"
 	set src in view(1)
-	if(usr.incapacitated())
+	if (usr.incapacitated())
 		return
 
-	if(anchored)
+	if (anchored)
 		to_chat(usr, "You must unfasten the pipe before flipping it.")
 		return
 
-	if(ispath(constructed_path, /obj/structure/disposalpipe))
+	if (ispath(constructed_path, /obj/structure/disposalpipe))
 		var/obj/structure/disposalpipe/fake_pipe = constructed_path
-		if(initial(fake_pipe.flipped_state))
+		if (initial(fake_pipe.flipped_state))
 			constructed_path = initial(fake_pipe.flipped_state)
 			fake_pipe = constructed_path
 			turn = initial(fake_pipe.turn)
@@ -93,18 +93,18 @@
 	set_dir(turn(dir, 180))
 
 /obj/structure/disposalconstruct/on_update_icon()
-	if("con[built_icon_state]" in icon_states(icon))
+	if ("con[built_icon_state]" in icon_states(icon))
 		icon_state = "con[built_icon_state]"
 	else
 		icon_state = built_icon_state
 
 /obj/structure/disposalconstruct/proc/flip_dirs(flipvalue)
 	. = dir
-	if(flipvalue & DISPOSAL_FLIP_FLIP)
+	if (flipvalue & DISPOSAL_FLIP_FLIP)
 		. |= turn(dir,180)
-	if(flipvalue & DISPOSAL_FLIP_LEFT)
+	if (flipvalue & DISPOSAL_FLIP_LEFT)
 		. |= turn(dir,90)
-	if(flipvalue & DISPOSAL_FLIP_RIGHT)
+	if (flipvalue & DISPOSAL_FLIP_RIGHT)
 		. |= turn(dir,-90)
 
 /obj/structure/disposalconstruct/set_dir(new_dir)
@@ -189,18 +189,18 @@
 	return anchored
 
 /obj/structure/disposalconstruct/proc/check_buildability(obj/structure/disposalpipe/CP, mob/user)
-	if(!CP)
+	if (!CP)
 		return TRUE
 	var/pdir = CP.dpdir
-	if(istype(CP, /obj/structure/disposalpipe/broken))
+	if (istype(CP, /obj/structure/disposalpipe/broken))
 		pdir = CP.dir
-	if(pdir & dpdir)
+	if (pdir & dpdir)
 		to_chat(user, "There is already a disposals pipe at that location.")
 		return FALSE
 	return TRUE
 
 /obj/structure/disposalconstruct/proc/wrench_down(anchor)
-	if(anchor)
+	if (anchor)
 		anchored = TRUE
 		level = ATOM_LEVEL_UNDER_TILE // We don't want disposal bins to disappear under the floors
 		set_density(0)
@@ -210,8 +210,8 @@
 		set_density(1)
 
 /obj/structure/disposalconstruct/machine/check_buildability(obj/structure/disposalpipe/CP, mob/user)
-	if(CP) // There's something there
-		if(!istype(CP,/obj/structure/disposalpipe/trunk))
+	if (CP) // There's something there
+		if (!istype(CP,/obj/structure/disposalpipe/trunk))
 			to_chat(user, "\The [src] requires a trunk underneath it in order to work.")
 			return FALSE
 		return TRUE
@@ -246,7 +246,7 @@
 	P.mode = 0 // start with pump off
 
 /obj/structure/disposalconstruct/machine/on_update_icon()
-	if(anchored)
+	if (anchored)
 		icon_state = built_icon_state
 	else
 		..()

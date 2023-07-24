@@ -5,7 +5,7 @@
 	var/list/blacklisted_objects
 
 /datum/goal/achievement/specific_object/New()
-	if(LAZYLEN(blacklisted_objects))
+	if (LAZYLEN(blacklisted_objects))
 		possible_objects -= blacklisted_objects
 	object_path = pick(possible_objects)
 	possible_objects = null
@@ -13,15 +13,15 @@
 	..()
 
 /datum/goal/achievement/specific_object/update_progress(progress)
-	if(!success)
-		if(ispath(progress))
-			if(ispath(progress, object_path) || ispath(object_path, progress))
+	if (!success)
+		if (ispath(progress))
+			if (ispath(progress, object_path) || ispath(object_path, progress))
 				success = TRUE
-		else if(isatom(progress))
+		else if (isatom(progress))
 			var/atom/A = progress
-			if(istype(A, object_path) || ispath(object_path, A.type))
+			if (istype(A, object_path) || ispath(object_path, A.type))
 				success = TRUE
-		if(success)
+		if (success)
 			on_completion()
 
 /datum/goal/achievement/specific_object/food

@@ -71,7 +71,7 @@
 
 /obj/item/gun/energy/gun/secure/mounted/Initialize()
 	var/mob/borg = get_holder_of_type(src, /mob/living/silicon/robot)
-	if(!borg)
+	if (!borg)
 		CRASH("Invalid spawn location.")
 	registered_owner = borg.name
 	GLOB.secure_weapons |= src

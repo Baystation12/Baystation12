@@ -9,11 +9,11 @@
 		to_chat(src, SPAN_NOTICE("You can only speak your species language, [src.species_language]."))
 		return 0
 
-	if(language == all_languages[src.species_language])
+	if (language == all_languages[src.species_language])
 		to_chat(src, SPAN_NOTICE("You will now speak your standard default language, [language], if you do not specify a language when speaking."))
 	else if (language)
 
-		if(language && !can_speak(language))
+		if (language && !can_speak(language))
 			to_chat(src, SPAN_NOTICE("You are unable to speak that language."))
 			return
 
@@ -32,7 +32,7 @@
 	set name = "Check Default Language"
 	set category = "IC"
 
-	if(default_language)
+	if (default_language)
 		to_chat(src, SPAN_NOTICE("You are currently speaking [default_language] by default."))
 	else
 		to_chat(src, SPAN_NOTICE("Your current default language is your species or mob type default."))

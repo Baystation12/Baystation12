@@ -17,12 +17,12 @@
 /obj/structure/lattice/Initialize(mapload, new_material)
 	. = ..()
 	DELETE_IF_DUPLICATE_OF(/obj/structure/lattice)
-	if(!(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open)))
+	if (!(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open)))
 		return INITIALIZE_HINT_QDEL
-	if(!new_material)
+	if (!new_material)
 		new_material = init_material
 	material = SSmaterials.get_material_by_name(new_material)
-	if(!istype(material))
+	if (!istype(material))
 		return INITIALIZE_HINT_QDEL
 
 	SetName("[material.display_name] lattice")
@@ -30,23 +30,23 @@
 	color =  material.icon_colour
 
 	update_icon()
-	if(!mapload)
+	if (!mapload)
 		update_neighbors()
 
 /obj/structure/lattice/Destroy()
 	var/turf/old_loc = get_turf(src)
 	. = ..()
-	if(old_loc)
+	if (old_loc)
 		update_neighbors(old_loc)
 
 /obj/structure/lattice/proc/update_neighbors(location = loc)
 	for (var/dir in GLOB.cardinal)
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, get_step(location, dir))
-		if(L)
+		if (L)
 			L.update_icon()
 
 /obj/structure/lattice/ex_act(severity)
-	if(severity <= EX_ACT_HEAVY)
+	if (severity <= EX_ACT_HEAVY)
 		qdel(src)
 
 /obj/structure/lattice/proc/deconstruct(mob/user, obj/item/tool)
@@ -57,7 +57,7 @@
 	var/obj/item/stack/material/rods/rods = new(loc, 1, material.name)
 	transfer_fingerprints_to(rods)
 	var/turf/source = get_turf(src)
-	if(locate(/obj/structure/cable, source))
+	if (locate(/obj/structure/cable, source))
 		for(var/obj/structure/cable/C in source)
 			C.visible_message(SPAN_WARNING("\The [C] snaps!"))
 			new/obj/item/stack/cable_coil(source, (C.d1 ? 2 : 1), C.color)
@@ -109,10 +109,10 @@
 	var/dir_sum = 0
 	for (var/direction in GLOB.cardinal)
 		var/turf/T = get_step(src, direction)
-		if(locate(/obj/structure/lattice, T) || locate(/obj/structure/catwalk, T))
+		if (locate(/obj/structure/lattice, T) || locate(/obj/structure/catwalk, T))
 			dir_sum += direction
 		else
-			if(!(istype(get_step(src, direction), /turf/space)) && !(istype(get_step(src, direction), /turf/simulated/open)))
+			if (!(istype(get_step(src, direction), /turf/space)) && !(istype(get_step(src, direction), /turf/simulated/open)))
 				dir_sum += direction
 
 	icon_state = "lattice[dir_sum]"

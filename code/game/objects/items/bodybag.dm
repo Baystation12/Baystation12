@@ -72,13 +72,13 @@
 
 
 /obj/structure/closet/body_bag/on_update_icon()
-	if(opened)
+	if (opened)
 		icon_state = "open"
 	else
 		icon_state = "closed_unlocked"
 
 	src.overlays.Cut()
-	if(label)
+	if (label)
 		src.overlays += image(src.icon, "bodybag_label")
 
 /obj/structure/closet/body_bag/store_mobs(stored_units)
@@ -86,21 +86,21 @@
 	return contains_body
 
 /obj/structure/closet/body_bag/close()
-	if(..())
+	if (..())
 		set_density(0)
 		return 1
 	return 0
 
 /obj/structure/closet/body_bag/proc/fold(user)
-	if(!(ishuman(user) || isrobot(user)))
+	if (!(ishuman(user) || isrobot(user)))
 		to_chat(user, SPAN_NOTICE("You lack the dexterity to close \the [name]."))
 		return FALSE
 
-	if(opened)
+	if (opened)
 		to_chat(user, SPAN_NOTICE("You must close \the [name] before it can be folded."))
 		return FALSE
 
-	if(length(contents))
+	if (length(contents))
 		to_chat(user, SPAN_NOTICE("You can't fold \the [name] while it has something inside it."))
 		return FALSE
 
@@ -110,7 +110,7 @@
 
 /obj/structure/closet/body_bag/MouseDrop(over_object, src_location, over_location)
 	..()
-	if((over_object == usr && (in_range(src, usr) || usr.contents.Find(src))))
+	if ((over_object == usr && (in_range(src, usr) || usr.contents.Find(src))))
 		fold(usr)
 
 /obj/item/robot_rack/body_bag

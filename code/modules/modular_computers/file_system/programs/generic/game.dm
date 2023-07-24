@@ -36,7 +36,7 @@
 // When running the program, we also want to pass our enemy name to the nano module.
 /datum/computer_file/program/game/on_startup()
 	. = ..()
-	if(. && NM)
+	if (. && NM)
 		var/datum/nano_module/arcade_classic/NMC = NM
 		NMC.enemy_name = picked_enemy_name
 
@@ -74,19 +74,19 @@
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "arcade_classic.tmpl", "Defeat [enemy_name]", 500, 350, state = state)
-		if(host.update_layout())
+		if (host.update_layout())
 			ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
 
 // Three helper procs i've created. These are unique to this particular nano module. If you are creating your own nano module, you'll most likely create similar procs too.
 /datum/nano_module/arcade_classic/proc/enemy_play()
-	if((enemy_mana < 5) && prob(60))
+	if ((enemy_mana < 5) && prob(60))
 		var/steal = rand(2, 3)
 		player_mana -= steal
 		enemy_mana += steal
 		information += "[enemy_name] steals [steal] of your power!"
-	else if((enemy_health < 15) && (enemy_mana > 3) && prob(80))
+	else if ((enemy_health < 15) && (enemy_mana > 3) && prob(80))
 		var/healamt = min(rand(3, 5), enemy_mana)
 		enemy_mana -= healamt
 		enemy_health += healamt
@@ -97,14 +97,14 @@
 		information += "[enemy_name] attacks for [dam] damage!"
 
 /datum/nano_module/arcade_classic/proc/check_gameover()
-	if((player_health <= 0) || player_mana <= 0)
-		if(enemy_health <= 0)
+	if ((player_health <= 0) || player_mana <= 0)
+		if (enemy_health <= 0)
 			information += "You have defeated [enemy_name], but you have died in the fight!"
 		else
 			information += "You have been defeated by [enemy_name]!"
 		gameover = 1
 		return TRUE
-	else if(enemy_health <= 0)
+	else if (enemy_health <= 0)
 		gameover = 1
 		information += "Congratulations! You have defeated [enemy_name]!"
 		return TRUE
@@ -121,21 +121,21 @@
 
 
 /datum/nano_module/arcade_classic/Topic(href, href_list)
-	if(..())		// Always begin your Topic() calls with a parent call!
+	if (..())		// Always begin your Topic() calls with a parent call!
 		return 1
-	if(href_list["new_game"])
+	if (href_list["new_game"])
 		new_game()
 		return 1	// Returning 1 (TRUE) in Topic automatically handles UI updates.
-	if(gameover)	// If the game has already ended, we don't want the following three topic calls to be processed at all.
+	if (gameover)	// If the game has already ended, we don't want the following three topic calls to be processed at all.
 		return 1	// Instead of adding checks into each of those three, we can easily add this one check here to reduce on code copy-paste.
-	if(href_list["attack"])
+	if (href_list["attack"])
 		var/damage = rand(2, 6)
 		information = "You attack for [damage] damage."
 		enemy_health -= damage
 		enemy_play()
 		check_gameover()
 		return 1
-	if(href_list["heal"])
+	if (href_list["heal"])
 		var/healfor = rand(6, 8)
 		var/cost = rand(1, 3)
 		information = "You heal yourself for [healfor] damage, using [cost] energy in the process."
@@ -144,7 +144,7 @@
 		enemy_play()
 		check_gameover()
 		return 1
-	if(href_list["regain_mana"])
+	if (href_list["regain_mana"])
 		var/regen = rand(4, 7)
 		information = "You rest of a while, regaining [regen] energy."
 		player_mana += regen

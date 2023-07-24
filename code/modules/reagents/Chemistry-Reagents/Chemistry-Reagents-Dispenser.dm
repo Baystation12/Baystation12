@@ -17,15 +17,15 @@
 	M.adjustToxLoss(removed * 3)
 
 /datum/reagent/acetone/touch_obj(obj/O)	//I copied this wholesale from ethanol and could likely be converted into a shared proc. ~Techhead
-	if(istype(O, /obj/item/paper))
+	if (istype(O, /obj/item/paper))
 		var/obj/item/paper/paperaffected = O
 		paperaffected.clearpaper()
 		to_chat(usr, "The solution dissolves the ink on the paper.")
 		return
-	if(istype(O, /obj/item/book))
-		if(volume < 5)
+	if (istype(O, /obj/item/book))
+		if (volume < 5)
 			return
-		if(istype(O, /obj/item/book/tome))
+		if (istype(O, /obj/item/book/tome))
 			to_chat(usr, SPAN_NOTICE("The solution does nothing. Whatever this is, it isn't normal ink."))
 			return
 		var/obj/item/book/affectedbook = O
@@ -80,12 +80,12 @@
 	if (ingested && length(ingested.reagent_list) > 1) // Need to have at least 2 reagents - cabon and something to remove
 		var/effect = 1 / (length(ingested.reagent_list) - 1)
 		for(var/datum/reagent/R in ingested.reagent_list)
-			if(R == src)
+			if (R == src)
 				continue
 			ingested.remove_reagent(R.type, removed * effect)
 
 /datum/reagent/carbon/touch_turf(turf/T)
-	if(!istype(T, /turf/space))
+	if (!istype(T, /turf/space))
 		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, T)
 		if (!dirtoverlay)
 			dirtoverlay = new/obj/effect/decal/cleanable/dirt(T)
@@ -124,7 +124,7 @@
 	accelerant_quality = 5
 
 /datum/reagent/ethanol/touch_mob(mob/living/L, amount)
-	if(istype(L))
+	if (istype(L))
 		L.adjust_fire_stacks(amount / 15)
 
 /datum/reagent/ethanol/affect_blood(mob/living/carbon/M, removed)
@@ -141,47 +141,47 @@
 	M.add_chemical_effect(CE_ALCOHOL, 1)
 	var/effective_dose = M.chem_doses[type] * strength_mod * (1 + volume/60) //drinking a LOT will make you go down faster
 
-	if(effective_dose >= strength) // Early warning
+	if (effective_dose >= strength) // Early warning
 		M.make_dizzy(6) // It is decreased at the speed of 3 per tick
-	if(effective_dose >= strength * 2) // Slurring
+	if (effective_dose >= strength * 2) // Slurring
 		M.add_chemical_effect(CE_PAINKILLER, 150/strength)
 		M.slurring = max(M.slurring, 30)
-	if(effective_dose >= strength * 3) // Confusion - walking in random directions
+	if (effective_dose >= strength * 3) // Confusion - walking in random directions
 		M.add_chemical_effect(CE_PAINKILLER, 150/strength)
 		M.confused = max(M.confused, 20)
-	if(effective_dose >= strength * 4) // Blurry vision
+	if (effective_dose >= strength * 4) // Blurry vision
 		M.add_chemical_effect(CE_PAINKILLER, 150/strength)
 		M.eye_blurry = max(M.eye_blurry, 10)
-	if(effective_dose >= strength * 5) // Drowsyness - periodically falling asleep
+	if (effective_dose >= strength * 5) // Drowsyness - periodically falling asleep
 		M.add_chemical_effect(CE_PAINKILLER, 150/strength)
 		M.drowsyness = max(M.drowsyness, 20)
-	if(effective_dose >= strength * 6) // Toxic dose
+	if (effective_dose >= strength * 6) // Toxic dose
 		M.add_chemical_effect(CE_ALCOHOL_TOXIC, toxicity)
-	if(effective_dose >= strength * 7) // Pass out
+	if (effective_dose >= strength * 7) // Pass out
 		M.Paralyse(20)
 		M.Sleeping(30)
 
-	if(druggy != 0)
+	if (druggy != 0)
 		M.druggy = max(M.druggy, druggy)
 
-	if(adj_temp > 0 && M.bodytemperature < targ_temp) // 310 is the normal bodytemp. 310.055
+	if (adj_temp > 0 && M.bodytemperature < targ_temp) // 310 is the normal bodytemp. 310.055
 		M.bodytemperature = min(targ_temp, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
-	if(adj_temp < 0 && M.bodytemperature > targ_temp)
+	if (adj_temp < 0 && M.bodytemperature > targ_temp)
 		M.bodytemperature = min(targ_temp, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 
-	if(halluci)
+	if (halluci)
 		M.adjust_hallucination(halluci, halluci)
 
 /datum/reagent/ethanol/touch_obj(obj/O)
-	if(istype(O, /obj/item/paper))
+	if (istype(O, /obj/item/paper))
 		var/obj/item/paper/paperaffected = O
 		paperaffected.clearpaper()
 		to_chat(usr, "The solution dissolves the ink on the paper.")
 		return
-	if(istype(O, /obj/item/book))
-		if(volume < 5)
+	if (istype(O, /obj/item/book))
+		if (volume < 5)
 			return
-		if(istype(O, /obj/item/book/tome))
+		if (istype(O, /obj/item/book/tome))
 			to_chat(usr, SPAN_NOTICE("The solution does nothing. Whatever this is, it isn't normal ink."))
 			return
 		var/obj/item/book/affectedbook = O
@@ -233,9 +233,9 @@
 
 /datum/reagent/lithium/affect_blood(mob/living/carbon/M, removed)
 	if (!IS_METABOLICALLY_INERT(M))
-		if(istype(M.loc, /turf/space))
+		if (istype(M.loc, /turf/space))
 			M.SelfMove(pick(GLOB.cardinal))
-		if(prob(5))
+		if (prob(5))
 			M.emote(pick("twitch", "drool", "moan"))
 
 /datum/reagent/mercury
@@ -248,9 +248,9 @@
 
 /datum/reagent/mercury/affect_blood(mob/living/carbon/M, removed)
 	if (!IS_METABOLICALLY_INERT(M))
-		if(istype(M.loc, /turf/space))
+		if (istype(M.loc, /turf/space))
 			M.SelfMove(pick(GLOB.cardinal))
-		if(prob(5))
+		if (prob(5))
 			M.emote(pick("twitch", "drool", "moan"))
 		M.adjustBrainLoss(0.1)
 
@@ -272,9 +272,9 @@
 	should_admin_log = TRUE
 
 /datum/reagent/potassium/affect_blood(mob/living/carbon/M, removed)
-	if(volume > 3)
+	if (volume > 3)
 		M.add_chemical_effect(CE_PULSE, 1)
-	if(volume > 10)
+	if (volume > 10)
 		M.add_chemical_effect(CE_PULSE, 1)
 
 /datum/reagent/radium
@@ -290,10 +290,10 @@
 	M.apply_damage(10 * removed, DAMAGE_RADIATION, armor_pen = 100) // Radium may increase your chances to cure a disease
 
 /datum/reagent/radium/touch_turf(turf/T)
-	if(volume >= 3)
-		if(!istype(T, /turf/space))
+	if (volume >= 3)
+		if (!istype(T, /turf/space))
 			var/obj/effect/decal/cleanable/greenglow/glow = locate(/obj/effect/decal/cleanable/greenglow, T)
-			if(!glow)
+			if (!glow)
 				new /obj/effect/decal/cleanable/greenglow(T)
 			return
 
@@ -321,68 +321,68 @@
 		SPAN_DANGER("Your skin sizzles and burns!.")
 		)
 
-	if(ishuman(M))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(H.head)
-			if(H.head.unacidable)
+		if (H.head)
+			if (H.head.unacidable)
 				to_chat(H, SPAN_WARNING("Your [H.head] protects you from the liquid."))
 				remove_self(volume)
 				return
-			else if(removed > meltdose)
+			else if (removed > meltdose)
 				to_chat(H, SPAN_DANGER("Your [H.head] melts away!"))
 				qdel(H.head)
 				H.update_inv_head(1)
 				H.update_hair(1)
 				removed -= meltdose
-		if(removed <= 0)
+		if (removed <= 0)
 			return
 
-		if(H.wear_mask)
-			if(H.wear_mask.unacidable)
+		if (H.wear_mask)
+			if (H.wear_mask.unacidable)
 				to_chat(H, SPAN_WARNING("Your [H.wear_mask] protects you from the liquid."))
 				remove_self(volume)
 				return
-			else if(removed > meltdose)
+			else if (removed > meltdose)
 				to_chat(H, SPAN_DANGER("Your [H.wear_mask] melts away!"))
 				qdel(H.wear_mask)
 				H.update_inv_wear_mask(1)
 				H.update_hair(1)
 				removed -= meltdose
-		if(removed <= 0)
+		if (removed <= 0)
 			return
 
-		if(H.glasses)
-			if(H.glasses.unacidable)
+		if (H.glasses)
+			if (H.glasses.unacidable)
 				to_chat(H, SPAN_WARNING("Your [H.glasses] partially protect you from the liquid!"))
 				removed /= 2
-			else if(removed > meltdose)
+			else if (removed > meltdose)
 				to_chat(H, SPAN_DANGER("Your [H.glasses] melt away!"))
 				qdel(H.glasses)
 				H.update_inv_glasses(1)
 				removed -= meltdose / 2
-		if(removed <= 0)
+		if (removed <= 0)
 			return
 
-	if(M.unacidable)
+	if (M.unacidable)
 		return
 
-	if(removed < meltdose) // Not enough to melt anything
+	if (removed < meltdose) // Not enough to melt anything
 		M.take_organ_damage(0, min(removed * power * 0.1, max_damage)) //burn damage, since it causes chemical burns. Acid doesn't make bones shatter, like brute trauma would.
 	else
 		M.take_organ_damage(0, min(removed * power * 0.2, max_damage))
-		if(ishuman(M)) // Applies disfigurement
+		if (ishuman(M)) // Applies disfigurement
 			var/mob/living/carbon/human/H = M
 			var/screamed
 			for(var/obj/item/organ/external/affecting in H.organs)
-				if(!screamed && affecting.can_feel_pain())
+				if (!screamed && affecting.can_feel_pain())
 					screamed = 1
 					H.emote("scream")
 				affecting.status |= ORGAN_DISFIGURED
 
 /datum/reagent/acid/touch_obj(obj/O)
-	if(O.unacidable)
+	if (O.unacidable)
 		return
-	if((istype(O, /obj/item) || istype(O, /obj/effect/vine)) && (volume > meltdose))
+	if ((istype(O, /obj/item) || istype(O, /obj/effect/vine)) && (volume > meltdose))
 		var/obj/effect/decal/cleanable/molten_item/I = new/obj/effect/decal/cleanable/molten_item(O.loc)
 		I.desc = "Looks like this was \an [O] some time ago."
 		for(var/mob/M in viewers(5, O))

@@ -1,5 +1,5 @@
 /obj/item/reagent_containers/food/snacks/slice/bread/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/material/shard) || istype(W,/obj/item/reagent_containers/food/snacks))
+	if (istype(W,/obj/item/material/shard) || istype(W,/obj/item/reagent_containers/food/snacks))
 		if (is_path_in_list(W.type, list(/obj/item/reagent_containers/food/snacks/custombowl, /obj/item/reagent_containers/food/snacks/csandwich)))
 			return
 		var/obj/item/reagent_containers/food/snacks/csandwich/S = new(get_turf(src))
@@ -24,9 +24,9 @@
 	var/mob/user = usr
 	var/sandwich_label = ""
 
-	if(!renamed)
+	if (!renamed)
 		sandwich_label = sanitizeSafe(input(user, "Enter a new name for \the [src].", "Name", label_text), MAX_NAME_LEN)
-		if(sandwich_label)
+		if (sandwich_label)
 			to_chat(user, SPAN_NOTICE("You rename \the [src] to \"[sandwich_label] sandwich\"."))
 			SetName("\improper [sandwich_label] sandwich")
 			renamed = 1
@@ -35,22 +35,22 @@
 
 	var/sandwich_limit = 4
 	for(var/obj/item/O in ingredients)
-		if(istype(O,/obj/item/reagent_containers/food/snacks/slice/bread))
+		if (istype(O,/obj/item/reagent_containers/food/snacks/slice/bread))
 			sandwich_limit += 4
 
-	if(length(src.contents) > sandwich_limit)
+	if (length(src.contents) > sandwich_limit)
 		to_chat(user, SPAN_WARNING("If you put anything else on \the [src] it's going to collapse."))
 		return
-	else if(istype(W,/obj/item/material/shard))
-		if(!user.unEquip(W, src))
+	else if (istype(W,/obj/item/material/shard))
+		if (!user.unEquip(W, src))
 			return
 		to_chat(user, SPAN_WARNING("You hide [W] in \the [src]."))
 		update()
 		return
-	else if(istype(W,/obj/item/reagent_containers/food/snacks))
+	else if (istype(W,/obj/item/reagent_containers/food/snacks))
 		if (is_path_in_list(W.type, list(/obj/item/reagent_containers/food/snacks/custombowl, /obj/item/reagent_containers/food/snacks/csandwich)))
 			return
-		if(!user.unEquip(W, src))
+		if (!user.unEquip(W, src))
 			return
 		user.visible_message(
 			SPAN_NOTICE("\The [user] layers \the [W] over \the [src]."),
@@ -89,7 +89,7 @@
 	fullname = english_list(ingredient_names)
 	SetName(lowertext("[fullname] sandwich"))
 	renamed = 0 //updating removes custom name
-	if(length(name) > 80) SetName("[pick(list("absurd","colossal","enormous","ridiculous"))] sandwich")
+	if (length(name) > 80) SetName("[pick(list("absurd","colossal","enormous","ridiculous"))] sandwich")
 	w_class = ceil(clamp((length(ingredients)/2),2,4))
 
 /obj/item/reagent_containers/food/snacks/csandwich/Destroy()
@@ -105,15 +105,15 @@
 
 	var/obj/item/shard
 	for(var/obj/item/O in contents)
-		if(istype(O,/obj/item/material/shard))
+		if (istype(O,/obj/item/material/shard))
 			shard = O
 			break
 
 	var/mob/living/H
-	if(istype(M,/mob/living))
+	if (istype(M,/mob/living))
 		H = M
 
-	if(H && shard && M == user) //This needs a check for feeding the food to other people, but that could be abusable.
+	if (H && shard && M == user) //This needs a check for feeding the food to other people, but that could be abusable.
 		to_chat(H, SPAN_WARNING("You lacerate your mouth on a [shard.name] in the sandwich!"))
 		H.adjustBruteLoss(5) //TODO: Target head if human.
 	..()

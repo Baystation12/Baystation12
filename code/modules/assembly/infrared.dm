@@ -29,16 +29,16 @@
 	. = ..()
 
 /obj/item/device/assembly/infra/activate()
-	if(!..())
+	if (!..())
 		return 0//Cooldown check
 	set_active(!on)
 	return 1
 
 /obj/item/device/assembly/infra/proc/set_active(new_on)
-	if(new_on == on)
+	if (new_on == on)
 		return
 	on = new_on
-	if(on)
+	if (on)
 		proximity_trigger.register_turfs()
 	else
 		proximity_trigger.unregister_turfs()
@@ -51,16 +51,16 @@
 
 /obj/item/device/assembly/infra/on_update_icon()
 	overlays.Cut()
-	if(on)
+	if (on)
 		overlays += "infrared_on"
-	if(holder)
+	if (holder)
 		holder.update_icon()
 	update_beams()
 
 /obj/item/device/assembly/infra/interact(mob/user as mob)//TODO: change this this to the wire control panel
-	if(!secured)
+	if (!secured)
 		return
-	if(!CanInteract(user, GLOB.physical_state))
+	if (!CanInteract(user, GLOB.physical_state))
 		return
 
 	user.set_machine(src)
@@ -72,37 +72,37 @@
 	onclose(user, "infra")
 
 /obj/item/device/assembly/infra/Topic(href, href_list, state = GLOB.physical_state)
-	if(..())
+	if (..())
 		close_browser(usr, "window=infra")
 		onclose(usr, "infra")
 		return 1
 
-	if(href_list["state"])
+	if (href_list["state"])
 		set_active(!on)
 
-	if(href_list["visible"])
+	if (href_list["visible"])
 		visible = !(visible)
 		update_icon()
 
-	if(href_list["close"])
+	if (href_list["close"])
 		close_browser(usr, "window=infra")
 		return
 
-	if(usr)
+	if (usr)
 		attack_self(usr)
 
 /obj/item/device/assembly/infra/proc/on_beam_entered(atom/enterer)
-	if(enterer == src)
+	if (enterer == src)
 		return
-	if(enterer.invisibility > INVISIBILITY_LEVEL_TWO)
+	if (enterer.invisibility > INVISIBILITY_LEVEL_TWO)
 		return
-	if(!secured || !on || cooldown > 0)
+	if (!secured || !on || cooldown > 0)
 		return 0
-	if((ismob(enterer) && !isliving(enterer))) // Observers and their ilk don't count even if visible
+	if ((ismob(enterer) && !isliving(enterer))) // Observers and their ilk don't count even if visible
 		return
 
 	pulse(0)
-	if(!holder)
+	if (!holder)
 		visible_message("[icon2html(src, viewers(get_turf(src)))] *beep* *beep*")
 	cooldown = 2
 	spawn(10)
@@ -116,7 +116,7 @@
 	create_update_and_delete_beams(on, visible, dir, seen_turfs, beams)
 
 /proc/create_update_and_delete_beams(active, visible, dir, list/seen_turfs, list/existing_beams)
-	if(!active)
+	if (!active)
 		for(var/b in existing_beams)
 			qdel(b)
 		existing_beams.Cut()
@@ -126,14 +126,14 @@
 
 	for(var/b in existing_beams)
 		var/obj/effect/beam/ir_beam/beam = b
-		if(beam.loc in turfs_that_need_beams)
+		if (beam.loc in turfs_that_need_beams)
 			turfs_that_need_beams -= beam.loc
 			beam.set_invisibility(visible ? 0 : INVISIBILITY_MAXIMUM)
 		else
 			existing_beams -= beam
 			qdel(beam)
 
-	if(!visible)
+	if (!visible)
 		return
 
 	for(var/t in turfs_that_need_beams)

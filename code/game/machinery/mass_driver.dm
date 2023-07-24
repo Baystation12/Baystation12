@@ -24,15 +24,15 @@
 	stock_part_presets = list(/singleton/stock_part_preset/radio/receiver/driver = 1)
 
 /obj/machinery/mass_driver/proc/drive(amount)
-	if(inoperable())
+	if (inoperable())
 		return
 	use_power_oneoff(500)
 	var/O_limit
 	var/atom/target = get_edge_target_turf(src, dir)
 	for(var/atom/movable/O in loc)
-		if(!O.anchored)
+		if (!O.anchored)
 			O_limit++
-			if(O_limit >= 20)
+			if (O_limit >= 20)
 				for(var/mob/M in hearers(src, null))
 					to_chat(M, SPAN_NOTICE("The mass driver lets out a screech, it mustn't be able to handle any more items."))
 				break
@@ -43,7 +43,7 @@
 	return
 
 /obj/machinery/mass_driver/emp_act(severity)
-	if(inoperable())
+	if (inoperable())
 		return
 	drive()
 	..(severity)

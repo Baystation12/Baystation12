@@ -15,7 +15,7 @@
 	adjust_solar_output(1.5)
 
 /datum/event/solar_storm/proc/adjust_solar_output(mult = 1)
-	if(isnull(base_solar_gen_rate)) base_solar_gen_rate = solar_gen_rate
+	if (isnull(base_solar_gen_rate)) base_solar_gen_rate = solar_gen_rate
 	solar_gen_rate = mult * base_solar_gen_rate
 
 
@@ -25,23 +25,23 @@
 
 
 /datum/event/solar_storm/tick()
-	if(activeFor % rad_interval == 0)
+	if (activeFor % rad_interval == 0)
 		radiate()
 
 /datum/event/solar_storm/proc/radiate()
 	// Note: Too complicated to be worth trying to use the radiation system for this.  Its only in space anyway, so we make an exception in this case.
 	for(var/mob/living/L in GLOB.alive_mobs)
-		if(istype(L.loc, /mob/living/exosuit)) //Todo, generalize this further like I did for rads if other things need to block or mitigate heat - CrimsonShrike
+		if (istype(L.loc, /mob/living/exosuit)) //Todo, generalize this further like I did for rads if other things need to block or mitigate heat - CrimsonShrike
 			continue
 		var/turf/T = get_turf(L)
-		if(!T || !(T.z in GLOB.using_map.player_levels))
+		if (!T || !(T.z in GLOB.using_map.player_levels))
 			continue
 
-		if(!istype(T.loc,/area/space) && !istype(T,/turf/space))	//Make sure you're in a space area or on a space turf
+		if (!istype(T.loc,/area/space) && !istype(T,/turf/space))	//Make sure you're in a space area or on a space turf
 			continue
 
 		//Apply some heat or burn damage from the sun.
-		if(istype(L, /mob/living/carbon/human) || istype(L, /mob/living/exosuit))
+		if (istype(L, /mob/living/carbon/human) || istype(L, /mob/living/exosuit))
 			L.bodytemperature += temp_incr
 		else
 			L.adjustFireLoss(fire_loss)

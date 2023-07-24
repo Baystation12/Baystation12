@@ -11,29 +11,29 @@
 
 	..(newloc)
 
-	if(istype(topping))
+	if (istype(topping))
 		for(var/taste_thing in topping.nutriment_desc)
-			if(!nutriment_desc[taste_thing]) nutriment_desc[taste_thing] = 0
+			if (!nutriment_desc[taste_thing]) nutriment_desc[taste_thing] = 0
 			nutriment_desc[taste_thing] += topping.nutriment_desc[taste_thing]
 
 		sushi_overlay = topping.sushi_overlay
 		var/image/I = image(icon, sushi_overlay)
-		if(sushi_overlay == "fish" || sushi_overlay == "meat")
+		if (sushi_overlay == "fish" || sushi_overlay == "meat")
 			I.color = topping.filling_color
 		overlays += I
 
-		if(istype(topping, /obj/item/reagent_containers/food/snacks/sashimi))
+		if (istype(topping, /obj/item/reagent_containers/food/snacks/sashimi))
 			var/obj/item/reagent_containers/food/snacks/sashimi/sashimi = topping
 			sushi_type = sashimi.fish_type
 		else
 			sushi_type = topping.name
 			if (text_starts_with(sushi_type, "raw"))
 				sushi_type = trimtext(copytext(sushi_type, 4))
-		if(topping.reagents)
+		if (topping.reagents)
 			topping.reagents.trans_to(src, topping.reagents.total_volume)
 
 		var/mob/M = topping.loc
-		if(istype(M)) M.drop_from_inventory(topping)
+		if (istype(M)) M.drop_from_inventory(topping)
 		qdel(topping)
 
 	else
@@ -41,12 +41,12 @@
 		I.color = "#ff4040"
 		overlays += I
 
-	if(istype(rice))
-		if(rice.reagents)
+	if (istype(rice))
+		if (rice.reagents)
 			rice.reagents.trans_to(src, 1)
-		if(!rice.reagents || !rice.reagents.total_volume)
+		if (!rice.reagents || !rice.reagents.total_volume)
 			var/mob/M = rice.loc
-			if(istype(M)) M.drop_from_inventory(rice)
+			if (istype(M)) M.drop_from_inventory(rice)
 			qdel(rice)
 	update_icon()
 

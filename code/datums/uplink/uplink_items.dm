@@ -12,14 +12,14 @@ var/global/datum/uplink/uplink = new()
 	categories = dd_sortedObjectList(categories)
 
 	for(var/datum/uplink_item/item in items)
-		if(!item.name)
+		if (!item.name)
 			items -= item
 			continue
 
 		items_assoc[item.type] = item
 
 		for(var/datum/uplink_category/category in categories)
-			if(item.category == category.type)
+			if (item.category == category.type)
 				category.items += item
 				item.category = category
 
@@ -39,16 +39,16 @@ var/global/datum/uplink/uplink = new()
 
 /datum/uplink_item/proc/buy(obj/item/device/uplink/U, mob/user)
 	var/extra_args = extra_args(user)
-	if(!extra_args)
+	if (!extra_args)
 		return
 
-	if(!can_buy(U))
+	if (!can_buy(U))
 		return
 
 	var/cost = cost(U.uses, U)
 
 	var/goods = get_goods(U, get_turf(user), user, extra_args)
-	if(!goods)
+	if (!goods)
 		return
 
 	purchase_log(U, user, cost)
@@ -61,7 +61,7 @@ var/global/datum/uplink/uplink = new()
 	return 1
 
 /datum/uplink_item/proc/can_buy(obj/item/device/uplink/U)
-	if(cost(U.uses, U) > U.uses)
+	if (cost(U.uses, U) > U.uses)
 		return 0
 
 	return can_view(U)
@@ -84,10 +84,10 @@ var/global/datum/uplink/uplink = new()
 
 /datum/uplink_item/proc/cost(telecrystals, obj/item/device/uplink/U)
 	. = item_cost
-	if(U && U.uplink_owner)
+	if (U && U.uplink_owner)
 		for(var/antag_role in antag_costs)
 			var/datum/antagonist/antag = GLOB.all_antag_types_[antag_role]
-			if(antag.is_antagonist(U.uplink_owner))
+			if (antag.is_antagonist(U.uplink_owner))
 				. = min(antag_costs[antag_role], .)
 	return max(1, U ?  U.get_item_cost(src, .) : .)
 
@@ -106,7 +106,7 @@ var/global/datum/uplink/uplink = new()
 
 /datum/uplink_item/proc/purchase_log(obj/item/device/uplink/U, mob/user, cost)
 	log_and_message_admins("used \the [U.loc] to buy \a [src]")
-	if(user)
+	if (user)
 		uplink_purchase_repository.add_entry(user.mind, src, cost)
 
 /datum/uplink_item/dd_SortValue()
@@ -119,14 +119,14 @@ var/global/datum/uplink/uplink = new()
 ********************************/
 /datum/uplink_item/item/buy(obj/item/device/uplink/U, mob/user)
 	var/obj/item/I = ..()
-	if(!I)
+	if (!I)
 		return
 
-	if(istype(I, /list))
+	if (istype(I, /list))
 		var/list/L = I
-		if(length(L)) I = L[1]
+		if (length(L)) I = L[1]
 
-	if(istype(I) && ishuman(user))
+	if (istype(I) && ishuman(user))
 		var/mob/living/carbon/human/A = user
 		A.put_in_any_hand_if_possible(I)
 	return I
@@ -136,7 +136,7 @@ var/global/datum/uplink/uplink = new()
 	return I
 
 /datum/uplink_item/item/description()
-	if(!desc)
+	if (!desc)
 		// Fallback description
 		var/obj/temp = src.path
 		desc = initial(temp.desc)
@@ -155,7 +155,7 @@ var/global/datum/uplink/uplink = new()
 	while(remaining_TC)
 		var/datum/uplink_random_selection/uplink_selection = get_uplink_random_selection_by_type(/datum/uplink_random_selection/default)
 		var/datum/uplink_item/I = uplink_selection.get_random_item(remaining_TC, U, bought_items)
-		if(!I)
+		if (!I)
 			break
 		bought_items += I
 		remaining_TC -= I.cost(remaining_TC, U)

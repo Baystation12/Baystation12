@@ -12,7 +12,7 @@
 
 /datum/language/binary/broadcast(mob/living/speaker,message,speaker_mask)
 
-	if(!speaker.binarycheck())
+	if (!speaker.binarycheck())
 		return
 
 	if (!message)
@@ -25,13 +25,13 @@
 		O.show_message("[message_start] ([ghost_follow_link(speaker, O)]) [message_body]", 2)
 
 	for (var/mob/M in GLOB.dead_mobs)
-		if(!istype(M,/mob/new_player) && !istype(M,/mob/living/carbon/brain)) //No meta-evesdropping
+		if (!istype(M,/mob/new_player) && !istype(M,/mob/living/carbon/brain)) //No meta-evesdropping
 			M.show_message("[message_start] ([ghost_follow_link(speaker, M)]) [message_body]", 2)
 
 	for (var/mob/living/S in GLOB.alive_mobs)
-		if(drone_only && !istype(S,/mob/living/silicon/robot/drone))
+		if (drone_only && !istype(S,/mob/living/silicon/robot/drone))
 			continue
-		else if(istype(S , /mob/living/silicon/ai))
+		else if (istype(S , /mob/living/silicon/ai))
 			message_start = "[name], <a href='byond://?src=\ref[S];track2=\ref[S];track=\ref[speaker];trackname=[html_encode(speaker.name)]'>[SPAN_CLASS("name", speaker.name)]</a>"
 		else if (!S.binarycheck())
 			continue
@@ -42,7 +42,7 @@
 	listening -= src
 
 	for (var/mob/living/M in listening)
-		if(istype(M, /mob/living/silicon) || M.binarycheck())
+		if (istype(M, /mob/living/silicon) || M.binarycheck())
 			continue
 		M.show_message("<i>[SPAN_CLASS("game say", "[SPAN_CLASS("name", "synthesised voice")] [SPAN_CLASS("message", "beeps, \"beep beep beep\"")]")]</i>",2)
 
@@ -81,6 +81,6 @@
 	return speaker.isSynthetic()
 
 /datum/language/machine/get_random_name()
-	if(prob(70))
+	if (prob(70))
 		return "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
 	return pick(GLOB.ai_names)

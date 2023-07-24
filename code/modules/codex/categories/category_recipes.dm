@@ -4,7 +4,7 @@
 
 /datum/codex_category/recipes/Initialize()
 	for(var/datum/microwave_recipe/recipe in GLOB.microwave_recipes)
-		if(recipe.hidden_from_codex || !recipe.result_path)
+		if (recipe.hidden_from_codex || !recipe.result_path)
 			continue
 
 		var/mechanics_text = ""
@@ -21,10 +21,10 @@
 		var/atom/movable/recipe_product = recipe.result_path
 		mechanics_text += "<br>This recipe takes [ceil(recipe.time/10)] second\s to cook in a microwave and creates \a [initial(recipe_product.name)]."
 		var/lore_text = recipe.lore_text
-		if(!lore_text)
+		if (!lore_text)
 			lore_text = initial(recipe_product.desc)
 		var/recipe_name = recipe.display_name
-		if(!recipe_name)
+		if (!recipe_name)
 			recipe_name = sanitize(initial(recipe_product.name))
 
 		var/datum/codex_entry/entry = new(                   \

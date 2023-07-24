@@ -26,53 +26,53 @@
 	username = "DefaultUser[rand(100, 999)]"
 
 /datum/computer_file/program/chatclient/Topic(href, href_list)
-	if(..())
+	if (..())
 		return TOPIC_HANDLED
 
-	if(href_list["PRG_speak"])
+	if (href_list["PRG_speak"])
 		. = TOPIC_HANDLED
-		if(!channel)
+		if (!channel)
 			return TOPIC_HANDLED
 		var/mob/living/user = usr
 		var/message = sanitize(input(user, "Enter message or leave blank to cancel: "), 512)
-		if(!message || !channel)
+		if (!message || !channel)
 			return
 		channel.add_message(message, username)
 
-	if(href_list["PRG_joinchannel"])
+	if (href_list["PRG_joinchannel"])
 		. = TOPIC_HANDLED
 		var/datum/ntnet_conversation/C
 		for(var/datum/ntnet_conversation/chan in ntnet_global.chat_channels)
-			if(chan.id == text2num(href_list["PRG_joinchannel"]))
+			if (chan.id == text2num(href_list["PRG_joinchannel"]))
 				C = chan
 				break
 
-		if(!C)
+		if (!C)
 			return TOPIC_HANDLED
 
-		if(netadmin_mode)
+		if (netadmin_mode)
 			channel = C		// Bypasses normal leave/join and passwords. Technically makes the user invisible to others.
 			return TOPIC_HANDLED
 
-		if(C.password)
+		if (C.password)
 			var/mob/living/user = usr
 			var/password = sanitize(input(user,"Access Denied. Enter password:"))
-			if(C && (password == C.password))
+			if (C && (password == C.password))
 				C.add_client(src)
 				channel = C
 			return TOPIC_HANDLED
 		C.add_client(src)
 		channel = C
-	if(href_list["PRG_leavechannel"])
+	if (href_list["PRG_leavechannel"])
 		. = TOPIC_HANDLED
-		if(channel)
+		if (channel)
 			channel.remove_client(src)
 		channel = null
-	if(href_list["PRG_newchannel"])
+	if (href_list["PRG_newchannel"])
 		. = TOPIC_HANDLED
 		var/mob/living/user = usr
 		var/channel_title = sanitizeSafe(input(user,"Enter channel name or leave blank to cancel:"), 64)
-		if(!channel_title)
+		if (!channel_title)
 			return
 		var/atom/A = computer.get_physical_host()
 		var/datum/ntnet_conversation/C = new/datum/ntnet_conversation(A.z)
@@ -80,42 +80,42 @@
 		C.operator = src
 		channel = C
 		C.title = channel_title
-	if(href_list["PRG_toggleadmin"])
+	if (href_list["PRG_toggleadmin"])
 		. = TOPIC_HANDLED
-		if(netadmin_mode)
+		if (netadmin_mode)
 			netadmin_mode = FALSE
-			if(channel)
+			if (channel)
 				channel.remove_client(src) // We shouldn't be in channel's user list, but just in case...
 				channel = null
 			return TOPIC_HANDLED
 		var/mob/living/user = usr
-		if(can_run(usr, TRUE, access_network_admin))
-			if(channel)
+		if (can_run(usr, TRUE, access_network_admin))
+			if (channel)
 				var/response = alert(user, "Really engage admin-mode? You will be disconnected from your current channel!", "NTNRC Admin mode", "Yes", "No")
-				if(response == "Yes")
-					if(channel)
+				if (response == "Yes")
+					if (channel)
 						channel.remove_client(src)
 						channel = null
 				else
 					return
 			netadmin_mode = TRUE
-	if(href_list["PRG_changename"])
+	if (href_list["PRG_changename"])
 		. = TOPIC_HANDLED
 		var/mob/living/user = usr
 		var/newname = sanitize(input(user,"Enter new nickname or leave blank to cancel:"), 20)
-		if(!newname)
+		if (!newname)
 			return
-		if(channel)
+		if (channel)
 			channel.add_status_message("[username] is now known as [newname].")
 		username = newname
 
-	if(href_list["PRG_savelog"])
+	if (href_list["PRG_savelog"])
 		. = TOPIC_HANDLED
-		if(!channel)
+		if (!channel)
 			return
 		var/mob/living/user = usr
 		var/filename = input(user,"Enter desired logfile name (.LOG) or leave blank to cancel:")
-		if(!filename || !channel)
+		if (!filename || !channel)
 			return
 
 		var/content = "\[b\]Logfile dump from NTNRC channel [channel.title]\[/b\]\[BR\]"
@@ -123,34 +123,34 @@
 			content += "[logstring]\[BR\]"
 		content += "\[b\]Logfile dump completed.\[/b\]"
 
-		if(!computer.create_data_file(filename, content, /datum/computer_file/data/logfile))
+		if (!computer.create_data_file(filename, content, /datum/computer_file/data/logfile))
 			computer.show_error(user, "I/O Error - Check hard drive and free space.")
-	if(href_list["PRG_renamechannel"])
+	if (href_list["PRG_renamechannel"])
 		. = TOPIC_HANDLED
-		if(!operator_mode || !channel)
+		if (!operator_mode || !channel)
 			return
 		var/mob/living/user = usr
 		var/newname = sanitize(input(user, "Enter new channel name or leave blank to cancel:"), 64)
-		if(!newname || !channel)
+		if (!newname || !channel)
 			return
 		channel.add_status_message("Channel renamed from [channel.title] to [newname] by operator.")
 		channel.title = newname
-	if(href_list["PRG_deletechannel"])
+	if (href_list["PRG_deletechannel"])
 		. = TOPIC_HANDLED
-		if(channel && ((channel.operator == src) || netadmin_mode))
+		if (channel && ((channel.operator == src) || netadmin_mode))
 			qdel(channel)
 			channel = null
-	if(href_list["PRG_setpassword"])
+	if (href_list["PRG_setpassword"])
 		. = TOPIC_HANDLED
-		if(!channel || ((channel.operator != src) && !netadmin_mode))
+		if (!channel || ((channel.operator != src) && !netadmin_mode))
 			return
 
 		var/mob/living/user = usr
 		var/newpassword = sanitize(input(user, "Enter new password for this channel. Leave blank to cancel, enter 'nopassword' to remove password completely:"))
-		if(!channel || !newpassword || ((channel.operator != src) && !netadmin_mode))
+		if (!channel || !newpassword || ((channel.operator != src) && !netadmin_mode))
 			return
 
-		if(newpassword == "nopassword")
+		if (newpassword == "nopassword")
 			channel.password = ""
 		else
 			channel.password = newpassword
@@ -158,26 +158,26 @@
 /datum/computer_file/program/chatclient/process_tick()
 	..()
 	var/atom/A = computer.get_physical_host()
-	if(channel && !(channel.source_z in GetConnectedZlevels(A.z)))
+	if (channel && !(channel.source_z in GetConnectedZlevels(A.z)))
 		channel.remove_client(src)
 		channel = null
 
-	if(program_state != PROGRAM_STATE_KILLED)
+	if (program_state != PROGRAM_STATE_KILLED)
 		ui_header = "ntnrc_idle.gif"
-		if(channel)
+		if (channel)
 			// Remember the last message. If there is no message in the channel remember null.
 			last_message = length(channel.messages) ? channel.messages[length(channel.messages) - 1] : null
 		else
 			last_message = null
 		return
 
-	if(channel && channel.messages && length(channel.messages))
+	if (channel && channel.messages && length(channel.messages))
 		ui_header = last_message == channel.messages[length(channel.messages) - 1] ? "ntnrc_idle.gif" : "ntnrc_new.gif"
 	else
 		ui_header = "ntnrc_idle.gif"
 
 /datum/computer_file/program/chatclient/on_shutdown(forced = FALSE)
-	if(channel)
+	if (channel)
 		channel.remove_client(src)
 		channel = null
 	..(forced)
@@ -186,19 +186,19 @@
 	name = "NTNet Relay Chat Client"
 
 /datum/nano_module/program/computer_chatclient/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
-	if(!ntnet_global || !ntnet_global.chat_channels)
+	if (!ntnet_global || !ntnet_global.chat_channels)
 		return
 
 	var/list/data = list()
-	if(program)
+	if (program)
 		data = program.get_header_data()
 
 	var/datum/computer_file/program/chatclient/C = program
-	if(!istype(C))
+	if (!istype(C))
 		return
 
 	data["adminmode"] = C.netadmin_mode
-	if(C.channel)
+	if (C.channel)
 		data["title"] = C.channel.title
 		var/list/messages[0]
 		for(var/M in C.channel.messages)
@@ -220,7 +220,7 @@
 		var/atom/A = C.computer.get_physical_host()
 		var/list/connected_zs = GetConnectedZlevels(A.z)
 		for(var/datum/ntnet_conversation/conv in ntnet_global.chat_channels)
-			if(conv && conv.title && (conv.source_z in connected_zs))
+			if (conv && conv.title && (conv.source_z in connected_zs))
 				all_channels.Add(list(list(
 					"chan" = conv.title,
 					"id" = conv.id

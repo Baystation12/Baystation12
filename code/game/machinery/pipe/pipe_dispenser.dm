@@ -20,13 +20,13 @@
 
 /obj/machinery/pipedispenser/Initialize()//for mapping purposes. Anchor them by map var edit if needed.
 	. = ..()
-	if(anchored)
+	if (anchored)
 		update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/pipedispenser/proc/get_console_data(list/pipe_categories, color_options = FALSE)
 	. = list()
 	. += "<table>"
-	if(color_options)
+	if (color_options)
 		. += "<tr><td>Color</td><td><a href='?src=\ref[src];color=\ref[src]'>[SPAN_COLOR(pipe_color, pipe_color)]</a></td></tr>"
 	for(var/category in pipe_categories)
 		var/datum/pipe/cat = category
@@ -43,20 +43,20 @@
 		use_power_oneoff(500)
 
 /obj/machinery/pipedispenser/Topic(href, href_list)
-	if((. = ..()))
+	if ((. = ..()))
 		return
-	if(href_list["build"])
+	if (href_list["build"])
 		var/datum/pipe/P = locate(href_list["build"])
 		build_quantity(P, 1)
-	if(href_list["buildfive"])
+	if (href_list["buildfive"])
 		var/datum/pipe/P = locate(href_list["buildfive"])
 		build_quantity(P, 5)
-	if(href_list["buildten"])
+	if (href_list["buildten"])
 		var/datum/pipe/P = locate(href_list["buildten"])
 		build_quantity(P, 10)
-	if(href_list["color"])
+	if (href_list["color"])
 		var/choice = input(usr, "What color do you want pipes to have?") as null|anything in pipe_colors
-		if(!choice)
+		if (!choice)
 			return 1
 		pipe_color = choice
 		updateUsrDialog()
@@ -72,16 +72,16 @@
 
 /obj/machinery/pipedispenser/attackby(obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/machine_chassis))
-		if(!user.unEquip(W))
+		if (!user.unEquip(W))
 			return
 		to_chat(user, SPAN_NOTICE("You put \the [W] back into \the [src]."))
 		add_fingerprint(user)
 		qdel(W)
 		return
-	if(!panel_open)
-		if(isWrench(W))
+	if (!panel_open)
+		if (isWrench(W))
 			add_fingerprint(user)
-			if(anchored)
+			if (anchored)
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 				to_chat(user, SPAN_NOTICE("You begin to unfasten \the [src] from the floor..."))
 				if (do_after(user, (W.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT))
@@ -92,7 +92,7 @@
 					anchored = FALSE
 					set_stat(MACHINE_STAT_MAINT, TRUE)
 					update_use_power(POWER_USE_OFF)
-					if(user.machine==src)
+					if (user.machine==src)
 						close_browser(user, "window=pipedispenser")
 			else
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
@@ -117,7 +117,7 @@
 
 //Allow you to drag-drop disposal pipes into it
 /obj/machinery/pipedispenser/disposal/MouseDrop_T(obj/structure/disposalconstruct/pipe as obj, mob/user as mob)
-	if(!CanPhysicallyInteract(user))
+	if (!CanPhysicallyInteract(user))
 		return
 
 	if (!istype(pipe) || get_dist(src,pipe) > 1 )

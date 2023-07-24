@@ -16,7 +16,7 @@
 	return ..()
 
 /obj/item/gun/launcher/alien/Process()
-	if(ammo < max_ammo && world.time > last_regen + ammo_gen_time)
+	if (ammo < max_ammo && world.time > last_regen + ammo_gen_time)
 		ammo++
 		last_regen = world.time
 		update_icon()
@@ -26,8 +26,8 @@
 	to_chat(user, "It has [ammo] [ammo_name]\s remaining.")
 
 /obj/item/gun/launcher/alien/consume_next_projectile()
-	if(ammo < 1) return null
-	if(ammo == max_ammo) //stops people from buffering a reload (gaining effectively +1 to the clip)
+	if (ammo < 1) return null
+	if (ammo == max_ammo) //stops people from buffering a reload (gaining effectively +1 to the clip)
 		last_regen = world.time
 	ammo--
 	return new ammo_type

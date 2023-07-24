@@ -9,9 +9,9 @@
 	var/datum/hud/hud_used = null
 
 /mob/proc/InitializeHud()
-	if(hud_used)
+	if (hud_used)
 		qdel(hud_used)
-	if(hud_type)
+	if (hud_type)
 		hud_used = new hud_type(src)
 	else
 		hud_used = new /datum/hud
@@ -57,102 +57,102 @@
 	mymob = null
 
 /datum/hud/proc/update_stamina()
-	if(mymob && stamina_bar)
+	if (mymob && stamina_bar)
 		stamina_bar.invisibility = INVISIBILITY_MAXIMUM
 		var/stamina = mymob.get_stamina()
-		if(stamina < 100)
+		if (stamina < 100)
 			stamina_bar.invisibility = 0
 			stamina_bar.icon_state = "priv_prog_bar_[floor(stamina/5)*5]"
 
 /datum/hud/proc/hidden_inventory_update()
-	if(!mymob) return
-	if(ishuman(mymob))
+	if (!mymob) return
+	if (ishuman(mymob))
 		var/mob/living/carbon/human/H = mymob
 		for(var/gear_slot in H.species.hud.gear)
 			var/list/hud_data = H.species.hud.gear[gear_slot]
-			if(inventory_shown && hud_shown)
+			if (inventory_shown && hud_shown)
 				switch(hud_data["slot"])
-					if(slot_head)
-						if(H.head)      H.head.screen_loc =      hud_data["loc"]
-					if(slot_shoes)
-						if(H.shoes)     H.shoes.screen_loc =     hud_data["loc"]
-					if(slot_l_ear)
-						if(H.l_ear)     H.l_ear.screen_loc =     hud_data["loc"]
-					if(slot_r_ear)
-						if(H.r_ear)     H.r_ear.screen_loc =     hud_data["loc"]
-					if(slot_gloves)
-						if(H.gloves)    H.gloves.screen_loc =    hud_data["loc"]
-					if(slot_glasses)
-						if(H.glasses)   H.glasses.screen_loc =   hud_data["loc"]
-					if(slot_w_uniform)
-						if(H.w_uniform) H.w_uniform.screen_loc = hud_data["loc"]
-					if(slot_wear_suit)
-						if(H.wear_suit) H.wear_suit.screen_loc = hud_data["loc"]
-					if(slot_wear_mask)
-						if(H.wear_mask) H.wear_mask.screen_loc = hud_data["loc"]
+					if (slot_head)
+						if (H.head)      H.head.screen_loc =      hud_data["loc"]
+					if (slot_shoes)
+						if (H.shoes)     H.shoes.screen_loc =     hud_data["loc"]
+					if (slot_l_ear)
+						if (H.l_ear)     H.l_ear.screen_loc =     hud_data["loc"]
+					if (slot_r_ear)
+						if (H.r_ear)     H.r_ear.screen_loc =     hud_data["loc"]
+					if (slot_gloves)
+						if (H.gloves)    H.gloves.screen_loc =    hud_data["loc"]
+					if (slot_glasses)
+						if (H.glasses)   H.glasses.screen_loc =   hud_data["loc"]
+					if (slot_w_uniform)
+						if (H.w_uniform) H.w_uniform.screen_loc = hud_data["loc"]
+					if (slot_wear_suit)
+						if (H.wear_suit) H.wear_suit.screen_loc = hud_data["loc"]
+					if (slot_wear_mask)
+						if (H.wear_mask) H.wear_mask.screen_loc = hud_data["loc"]
 			else
 				switch(hud_data["slot"])
-					if(slot_head)
-						if(H.head)      H.head.screen_loc =      null
-					if(slot_shoes)
-						if(H.shoes)     H.shoes.screen_loc =     null
-					if(slot_l_ear)
-						if(H.l_ear)     H.l_ear.screen_loc =     null
-					if(slot_r_ear)
-						if(H.r_ear)     H.r_ear.screen_loc =     null
-					if(slot_gloves)
-						if(H.gloves)    H.gloves.screen_loc =    null
-					if(slot_glasses)
-						if(H.glasses)   H.glasses.screen_loc =   null
-					if(slot_w_uniform)
-						if(H.w_uniform) H.w_uniform.screen_loc = null
-					if(slot_wear_suit)
-						if(H.wear_suit) H.wear_suit.screen_loc = null
-					if(slot_wear_mask)
-						if(H.wear_mask) H.wear_mask.screen_loc = null
+					if (slot_head)
+						if (H.head)      H.head.screen_loc =      null
+					if (slot_shoes)
+						if (H.shoes)     H.shoes.screen_loc =     null
+					if (slot_l_ear)
+						if (H.l_ear)     H.l_ear.screen_loc =     null
+					if (slot_r_ear)
+						if (H.r_ear)     H.r_ear.screen_loc =     null
+					if (slot_gloves)
+						if (H.gloves)    H.gloves.screen_loc =    null
+					if (slot_glasses)
+						if (H.glasses)   H.glasses.screen_loc =   null
+					if (slot_w_uniform)
+						if (H.w_uniform) H.w_uniform.screen_loc = null
+					if (slot_wear_suit)
+						if (H.wear_suit) H.wear_suit.screen_loc = null
+					if (slot_wear_mask)
+						if (H.wear_mask) H.wear_mask.screen_loc = null
 
 
 /datum/hud/proc/persistant_inventory_update()
-	if(!mymob)
+	if (!mymob)
 		return
 
-	if(ishuman(mymob))
+	if (ishuman(mymob))
 		var/mob/living/carbon/human/H = mymob
 		for(var/gear_slot in H.species.hud.gear)
 			var/list/hud_data = H.species.hud.gear[gear_slot]
-			if(hud_shown)
+			if (hud_shown)
 				switch(hud_data["slot"])
-					if(slot_s_store)
-						if(H.s_store) H.s_store.screen_loc = hud_data["loc"]
-					if(slot_wear_id)
-						if(H.wear_id) H.wear_id.screen_loc = hud_data["loc"]
-					if(slot_belt)
-						if(H.belt)    H.belt.screen_loc =    hud_data["loc"]
-					if(slot_back)
-						if(H.back)    H.back.screen_loc =    hud_data["loc"]
-					if(slot_l_store)
-						if(H.l_store) H.l_store.screen_loc = hud_data["loc"]
-					if(slot_r_store)
-						if(H.r_store) H.r_store.screen_loc = hud_data["loc"]
+					if (slot_s_store)
+						if (H.s_store) H.s_store.screen_loc = hud_data["loc"]
+					if (slot_wear_id)
+						if (H.wear_id) H.wear_id.screen_loc = hud_data["loc"]
+					if (slot_belt)
+						if (H.belt)    H.belt.screen_loc =    hud_data["loc"]
+					if (slot_back)
+						if (H.back)    H.back.screen_loc =    hud_data["loc"]
+					if (slot_l_store)
+						if (H.l_store) H.l_store.screen_loc = hud_data["loc"]
+					if (slot_r_store)
+						if (H.r_store) H.r_store.screen_loc = hud_data["loc"]
 			else
 				switch(hud_data["slot"])
-					if(slot_s_store)
-						if(H.s_store) H.s_store.screen_loc = null
-					if(slot_wear_id)
-						if(H.wear_id) H.wear_id.screen_loc = null
-					if(slot_belt)
-						if(H.belt)    H.belt.screen_loc =    null
-					if(slot_back)
-						if(H.back)    H.back.screen_loc =    null
-					if(slot_l_store)
-						if(H.l_store) H.l_store.screen_loc = null
-					if(slot_r_store)
-						if(H.r_store) H.r_store.screen_loc = null
+					if (slot_s_store)
+						if (H.s_store) H.s_store.screen_loc = null
+					if (slot_wear_id)
+						if (H.wear_id) H.wear_id.screen_loc = null
+					if (slot_belt)
+						if (H.belt)    H.belt.screen_loc =    null
+					if (slot_back)
+						if (H.back)    H.back.screen_loc =    null
+					if (slot_l_store)
+						if (H.l_store) H.l_store.screen_loc = null
+					if (slot_r_store)
+						if (H.r_store) H.r_store.screen_loc = null
 
 
 /datum/hud/proc/instantiate()
-	if(!ismob(mymob)) return 0
-	if(!mymob.client) return 0
+	if (!ismob(mymob)) return 0
+	if (!mymob.client) return 0
 	var/ui_style = ui_style2icon(mymob.client.prefs.UI_style)
 	var/ui_color = mymob.client.prefs.UI_style_color
 	var/ui_alpha = mymob.client.prefs.UI_style_alpha
@@ -168,29 +168,29 @@
 	set name = "F12"
 	set hidden = 1
 
-	if(!hud_used)
+	if (!hud_used)
 		to_chat(usr, SPAN_WARNING("This mob type does not use a HUD."))
 		return
 
-	if(!ishuman(src))
+	if (!ishuman(src))
 		to_chat(usr, SPAN_WARNING("Inventory hiding is currently only supported for human mobs, sorry."))
 		return
 
-	if(!client) return
-	if(client.view != world.view)
+	if (!client) return
+	if (client.view != world.view)
 		return
-	if(hud_used.hud_shown)
+	if (hud_used.hud_shown)
 		hud_used.hud_shown = 0
-		if(src.hud_used.adding)
+		if (src.hud_used.adding)
 			src.client.screen -= src.hud_used.adding
-		if(src.hud_used.other)
+		if (src.hud_used.other)
 			src.client.screen -= src.hud_used.other
-		if(src.hud_used.hotkeybuttons)
+		if (src.hud_used.hotkeybuttons)
 			src.client.screen -= src.hud_used.hotkeybuttons
 
 		//Due to some poor coding some things need special treatment:
 		//These ones are a part of 'adding', 'other' or 'hotkeybuttons' but we want them to stay
-		if(!full)
+		if (!full)
 			src.client.screen += src.hud_used.l_hand_hud_object	//we want the hands to be visible
 			src.client.screen += src.hud_used.r_hand_hud_object	//we want the hands to be visible
 			src.client.screen += src.hud_used.action_intent		//we want the intent swticher visible
@@ -205,17 +205,17 @@
 
 	else
 		hud_used.hud_shown = 1
-		if(src.hud_used.adding)
+		if (src.hud_used.adding)
 			src.client.screen += src.hud_used.adding
-		if(src.hud_used.other && src.hud_used.inventory_shown)
+		if (src.hud_used.other && src.hud_used.inventory_shown)
 			src.client.screen += src.hud_used.other
-		if(src.hud_used.hotkeybuttons && !src.hud_used.hotkey_ui_hidden)
+		if (src.hud_used.hotkeybuttons && !src.hud_used.hotkey_ui_hidden)
 			src.client.screen += src.hud_used.hotkeybuttons
-		if(src.healths)
+		if (src.healths)
 			src.client.screen |= src.healths
-		if(src.internals)
+		if (src.internals)
 			src.client.screen |= src.internals
-		if(src.gun_setting_icon)
+		if (src.gun_setting_icon)
 			src.client.screen |= src.gun_setting_icon
 
 		src.hud_used.action_intent.screen_loc = ui_acti //Restore intent selection to the original position
@@ -227,34 +227,34 @@
 
 //Similar to button_pressed_F12() but keeps zone_sel, gun_setting_icon, and healths.
 /mob/proc/toggle_zoom_hud()
-	if(!hud_used)
+	if (!hud_used)
 		return
-	if(!ishuman(src))
+	if (!ishuman(src))
 		return
-	if(!client)
+	if (!client)
 		return
-	if(client.view != world.view)
+	if (client.view != world.view)
 		return
 
-	if(hud_used.hud_shown)
+	if (hud_used.hud_shown)
 		hud_used.hud_shown = 0
-		if(src.hud_used.adding)
+		if (src.hud_used.adding)
 			src.client.screen -= src.hud_used.adding
-		if(src.hud_used.other)
+		if (src.hud_used.other)
 			src.client.screen -= src.hud_used.other
-		if(src.hud_used.hotkeybuttons)
+		if (src.hud_used.hotkeybuttons)
 			src.client.screen -= src.hud_used.hotkeybuttons
 		src.client.screen -= src.internals
 		src.client.screen += src.hud_used.action_intent		//we want the intent swticher visible
 	else
 		hud_used.hud_shown = 1
-		if(src.hud_used.adding)
+		if (src.hud_used.adding)
 			src.client.screen += src.hud_used.adding
-		if(src.hud_used.other && src.hud_used.inventory_shown)
+		if (src.hud_used.other && src.hud_used.inventory_shown)
 			src.client.screen += src.hud_used.other
-		if(src.hud_used.hotkeybuttons && !src.hud_used.hotkey_ui_hidden)
+		if (src.hud_used.hotkeybuttons && !src.hud_used.hotkey_ui_hidden)
 			src.client.screen += src.hud_used.hotkeybuttons
-		if(src.internals)
+		if (src.internals)
 			src.client.screen |= src.internals
 		src.hud_used.action_intent.screen_loc = ui_acti //Restore intent selection to the original position
 

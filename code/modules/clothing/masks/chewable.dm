@@ -20,12 +20,12 @@
 
 /obj/item/clothing/mask/chewable/equipped(mob/living/user, slot)
 	..()
-	if(slot == slot_wear_mask)
+	if (slot == slot_wear_mask)
 		sprite_sheets = list(
 				SPECIES_VOX = 'icons/mob/species/vox/onmob_mask_vox.dmi',
 				SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_mask_unathi.dmi'
 				)
-		if(user.check_has_mouth())
+		if (user.check_has_mouth())
 			START_PROCESSING(SSobj, src)
 		else
 			to_chat(user, SPAN_NOTICE("You don't have a mouth, and can't make much use of \the [src]."))
@@ -42,8 +42,8 @@
 
 /obj/item/clothing/mask/chewable/proc/chew(amount)
 	chewtime -= amount
-	if(reagents && reagents.total_volume)
-		if(ishuman(loc))
+	if (reagents && reagents.total_volume)
+		if (ishuman(loc))
 			var/mob/living/carbon/human/C = loc
 			if (src == C.wear_mask && C.check_has_mouth())
 				reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.2)
@@ -53,7 +53,7 @@
 
 /obj/item/clothing/mask/chewable/Process()
 	chew(1)
-	if(chewtime < 1)
+	if (chewtime < 1)
 		extinguish()
 
 /obj/item/clothing/mask/chewable/tobacco
@@ -79,9 +79,9 @@
 		var/obj/item/butt = new type_butt(get_turf(src))
 		transfer_fingerprints_to(butt)
 		butt.color = color
-		if(brand)
+		if (brand)
 			butt.desc += " This one is \a [brand]."
-		if(ismob(loc))
+		if (ismob(loc))
 			var/mob/living/M = loc
 			if (!no_message)
 				to_chat(M, SPAN_NOTICE("You spit out the [name]."))

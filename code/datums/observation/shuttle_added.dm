@@ -18,5 +18,5 @@ GLOBAL_DATUM_INIT(shuttle_added, /singleton/observ/shuttle_added, new)
 
 /datum/controller/subsystem/shuttle/initialize_shuttle()
 	. = ..()
-	if(.)
+	if (.)
 		GLOB.shuttle_added.raise_event(.)

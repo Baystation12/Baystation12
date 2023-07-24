@@ -16,9 +16,9 @@
 //look at it
 /obj/item/device/holowarrant/examine(mob/user, distance)
 	. = ..()
-	if(active)
+	if (active)
 		to_chat(user, "It's a holographic warrant for '[active.fields["namewarrant"]]'.")
-	if(distance <= 1)
+	if (distance <= 1)
 		show_content(user)
 	else
 		to_chat(user, SPAN_NOTICE("You have to be closer if you want to read it."))
@@ -27,10 +27,10 @@
 /obj/item/device/holowarrant/GetAccess()
 	. = list()
 
-	if(!active)
+	if (!active)
 		return
 
-	if(active.archived)
+	if (active.archived)
 		return
 
 	. |= active.fields["access"]
@@ -40,9 +40,9 @@
 	active = null
 	var/list/warrants = list()
 	for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
-		if(!W.archived)
+		if (!W.archived)
 			warrants["[W.fields["namewarrant"]] ([capitalize(W.fields["arrestsearch"])])"] = W
-	if(length(warrants) == 0)
+	if (length(warrants) == 0)
 		to_chat(user,SPAN_NOTICE("There are no warrants available"))
 		return
 	var/datum/computer_file/data/warrant/temp
@@ -87,15 +87,15 @@
 	examinate(M, src)
 
 /obj/item/device/holowarrant/on_update_icon()
-	if(active)
+	if (active)
 		icon_state = "holowarrant_filled"
 	else
 		icon_state = "holowarrant"
 
 /obj/item/device/holowarrant/proc/show_content(mob/user, forceshow)
-	if(!active)
+	if (!active)
 		return
-	if(active.fields["arrestsearch"] == "arrest")
+	if (active.fields["arrestsearch"] == "arrest")
 		var/output = {"
 		<HTML><HEAD><TITLE>[active.fields["namewarrant"]]</TITLE></HEAD>
 		<BODY bgcolor='#ffffff'><center><large><b>SCG SFP Warrant Tracker System</b></large></br>
@@ -114,7 +114,7 @@
 		"}
 
 		show_browser(user, output, "window=Warrant for the arrest of [active.fields["namewarrant"]]")
-	if(active.fields["arrestsearch"] ==  "search")
+	if (active.fields["arrestsearch"] ==  "search")
 		var/output= {"
 		<HTML><HEAD><TITLE>Search Warrant: [active.fields["namewarrant"]]</TITLE></HEAD>
 		<BODY bgcolor='#ffffff'><center><large><b>SCG SFP Warrant Tracker System</b></large></br>

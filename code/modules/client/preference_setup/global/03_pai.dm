@@ -8,31 +8,31 @@
 	var/list/bgstate_options = list("FFF", MATERIAL_STEEL, "white")
 
 /datum/category_item/player_setup_item/player_global/pai/load_preferences(datum/pref_record_reader/R)
-	if(!candidate)
+	if (!candidate)
 		candidate = new()
 
-	if(!preference_mob())
+	if (!preference_mob())
 		return
 
 	candidate.savefile_load(preference_mob())
 
 /datum/category_item/player_setup_item/player_global/pai/save_preferences(datum/pref_record_writer/W)
-	if(!candidate)
+	if (!candidate)
 		return
 
-	if(!preference_mob())
+	if (!preference_mob())
 		return
 
 	candidate.savefile_save(preference_mob())
 
 /datum/category_item/player_setup_item/player_global/pai/content(mob/user)
-	if(!candidate)
+	if (!candidate)
 		candidate = new()
 	if (!pai_preview)
 		update_pai_preview(user)
 
 	. += "<b>pAI:</b><br>"
-	if(!candidate)
+	if (!candidate)
 		log_debug("[user] pAI prefs have a null candidate var.")
 		return .
 	. += "Name: <a href='?src=\ref[src];option=name'>[candidate.name ? candidate.name : "None Set"]</a><br>"
@@ -45,33 +45,33 @@
 	. += "</td></tr></table>"
 
 /datum/category_item/player_setup_item/player_global/pai/OnTopic(href,list/href_list, mob/user)
-	if(href_list["option"])
+	if (href_list["option"])
 		var/t
 		. = TOPIC_REFRESH
 		switch(href_list["option"])
-			if("name")
+			if ("name")
 				t = sanitizeName(input(user, "Enter a name for your pAI", "Global Preference", candidate.name) as text|null, MAX_NAME_LEN, 1)
-				if(t && CanUseTopic(user))
+				if (t && CanUseTopic(user))
 					candidate.name = t
-			if("desc")
+			if ("desc")
 				t = input(user, "Enter a description for your pAI", "Global Preference", html_decode(candidate.description)) as message|null
-				if(!isnull(t) && CanUseTopic(user))
+				if (!isnull(t) && CanUseTopic(user))
 					candidate.description = sanitize(t)
-			if("role")
+			if ("role")
 				t = input(user, "Enter a role for your pAI", "Global Preference", html_decode(candidate.role)) as text|null
-				if(!isnull(t) && CanUseTopic(user))
+				if (!isnull(t) && CanUseTopic(user))
 					candidate.role = sanitize(t)
-			if("ooc")
+			if ("ooc")
 				t = input(user, "Enter any OOC comments", "Global Preference", html_decode(candidate.comments)) as message
-				if(!isnull(t) && CanUseTopic(user))
+				if (!isnull(t) && CanUseTopic(user))
 					candidate.comments = sanitize(t)
-			if("chassis")
+			if ("chassis")
 				candidate.chassis = input(user,"What would you like to use for your mobile chassis icon?") as null|anything in GLOB.possible_chassis
 				update_pai_preview(user)
 				. = TOPIC_HARD_REFRESH
-			if("say")
+			if ("say")
 				candidate.say_verb = input(user,"What theme would you like to use for your speech verbs?") as null|anything in GLOB.possible_say_verbs
-			if("cyclebg")
+			if ("cyclebg")
 				bgstate = next_in_list(bgstate, bgstate_options)
 				update_pai_preview(user)
 				. = TOPIC_HARD_REFRESH

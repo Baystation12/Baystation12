@@ -3,9 +3,9 @@
 	set desc = "Flood the turf you are standing on."
 	set category = "Debug"
 
-	if(!check_rights(R_SPAWN)) return
+	if (!check_rights(R_SPAWN)) return
 	var/mob/user = usr
-	if(istype(user) && user.client)
+	if (istype(user) && user.client)
 		for(var/thing in trange(1, get_turf(user)))
 			var/turf/T = thing
 			T.add_fluid(2000, /datum/reagent/water)
@@ -16,10 +16,10 @@
 	set desc = "Jump to an active fluid source."
 	set category = "Debug"
 
-	if(!check_rights(R_SPAWN)) return
+	if (!check_rights(R_SPAWN)) return
 	var/mob/user = usr
-	if(istype(user) && user.client)
-		if(length(SSfluids.water_sources))
+	if (istype(user) && user.client)
+		if (length(SSfluids.water_sources))
 			user.forceMove(get_turf(pick(SSfluids.water_sources)))
 		else
 			to_chat(usr, "No active fluid sources.")
@@ -30,10 +30,10 @@
 	set desc = "Jump to an active fluid overlay."
 	set category = "Debug"
 
-	if(!check_rights(R_SPAWN)) return
+	if (!check_rights(R_SPAWN)) return
 	var/mob/user = usr
-	if(istype(user) && user.client)
-		if(length(SSfluids.active_fluids))
+	if (istype(user) && user.client)
+		if (length(SSfluids.active_fluids))
 			user.forceMove(get_turf(pick(SSfluids.active_fluids)))
 		else
 			to_chat(usr, "No active fluids.")

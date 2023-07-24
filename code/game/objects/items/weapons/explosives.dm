@@ -25,17 +25,17 @@
 	return ..()
 
 /obj/item/plastique/attackby(obj/item/I, mob/user)
-	if(isScrewdriver(I))
+	if (isScrewdriver(I))
 		open_panel = !open_panel
 		to_chat(user, SPAN_NOTICE("You [open_panel ? "open" : "close"] the wire panel."))
-	else if(isWirecutter(I) || isMultitool(I) || istype(I, /obj/item/device/assembly/signaler ))
+	else if (isWirecutter(I) || isMultitool(I) || istype(I, /obj/item/device/assembly/signaler ))
 		wires.Interact(user)
 	else
 		..()
 
 /obj/item/plastique/attack_self(mob/user as mob)
 	var/newtime = input(usr, "Please set the timer.", "Timer", 10) as num
-	if(user.get_active_hand() == src)
+	if (user.get_active_hand() == src)
 		newtime = clamp(newtime, 10, 60000)
 		timer = newtime
 		to_chat(user, "Timer set for [timer] seconds.")
@@ -48,8 +48,8 @@
 	to_chat(user, "Planting explosives...")
 	user.do_attack_animation(target)
 
-	if(do_after(user, 5 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT) && in_range(user, target))
-		if(!user.unequip_item())
+	if (do_after(user, 5 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT) && in_range(user, target))
+		if (!user.unequip_item())
 			return
 		src.target = target
 		forceMove(null)
@@ -67,22 +67,22 @@
 		run_timer()
 
 /obj/item/plastique/proc/explode(location)
-	if(!target)
+	if (!target)
 		target = get_atom_on_turf(src)
-	if(!target)
+	if (!target)
 		target = src
-	if(location)
+	if (location)
 		explosion(location, 2, EX_ACT_LIGHT)
 
-	if(target)
+	if (target)
 		if (istype(target, /turf/simulated/wall))
 			var/turf/simulated/wall/W = target
 			W.kill_health()
-		else if(istype(target, /mob/living))
+		else if (istype(target, /mob/living))
 			target.ex_act(EX_ACT_HEAVY) // c4 can't gib mobs anymore.
 		else
 			target.ex_act(EX_ACT_DEVASTATING)
-	if(target)
+	if (target)
 		target.overlays -= image_overlay
 	qdel(src)
 
@@ -91,7 +91,7 @@
 	var/T = timer
 	while(T > 0)
 		sleep(1 SECOND)
-		if(target)
+		if (target)
 			playsound(target, 'sound/items/timer.ogg', 50)
 		else
 			playsound(loc, 'sound/items/timer.ogg', 50)

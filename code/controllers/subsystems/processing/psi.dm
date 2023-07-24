@@ -28,7 +28,7 @@ PROCESSING_SUBSYSTEM_DEF(psi)
 	var/list/powers = GET_SINGLETON_SUBTYPE_MAP(/singleton/psionic_power)
 	for(var/ptype in powers)
 		var/singleton/psionic_power/power = powers[ptype]
-		if(!is_abstract(power) && power.faculty)
+		if (!is_abstract(power) && power.faculty)
 			var/singleton/psionic_faculty/faculty = get_faculty(power.faculty)
-			if(faculty)
+			if (faculty)
 				faculty.powers |= power

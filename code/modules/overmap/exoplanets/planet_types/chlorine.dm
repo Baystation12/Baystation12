@@ -19,7 +19,7 @@
 	return "#e5f2bd"
 
 /obj/effect/overmap/visitable/sector/exoplanet/chlorine/generate_map()
-	if(prob(50))
+	if (prob(50))
 		lightlevel = rand(7,10)/10 //It could be night.
 	else
 		lightlevel = 0.1
@@ -27,7 +27,7 @@
 
 /obj/effect/overmap/visitable/sector/exoplanet/chlorine/generate_atmosphere()
 	..()
-	if(atmosphere)
+	if (atmosphere)
 		atmosphere.adjust_gas(GAS_CHLORINE, MOLES_O2STANDARD)
 		atmosphere.temperature = T100C - rand(0, 100)
 		atmosphere.update_values()

@@ -46,7 +46,7 @@
 		return
 
 	var/obj/effect/overmap/visitable/O = map_sectors["[get_z(src)]"]
-	if(!O)
+	if (!O)
 		to_chat(user, SPAN_WARNING("You cannot deploy \the [src] here."))
 		return
 
@@ -81,7 +81,7 @@
 /obj/machinery/radio_beacon/proc/activate()
 	var/obj/effect/overmap/visitable/O = map_sectors["[get_z(src)]"]
 	var/message = sanitize(input("What should it broadcast?") as message|null)
-	if(!message)
+	if (!message)
 		return
 
 	visible_message(SPAN_NOTICE("\The [src] whirrs to life, starting its radio broadcast."))
@@ -132,17 +132,17 @@
 
 /obj/machinery/radio_beacon/power_change()
 	. = ..()
-	if(!. || !use_power) return
+	if (!. || !use_power) return
 
-	if(!is_powered())
+	if (!is_powered())
 		deactivate()
 
 /obj/machinery/radio_beacon/on_update_icon()
 	overlays.Cut()
 	icon_state = signal ? "active" : "inactive"
-	if(emergency_signal)
+	if (emergency_signal)
 		overlays += "distress"
-	if(panel_open)
+	if (panel_open)
 		overlays += "panel"
 	. = ..()
 /obj/machinery/radio_beacon/Destroy()

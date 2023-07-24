@@ -1,5 +1,5 @@
 /mob/living/carbon/alien/diona/proc/do_merge(mob/living/carbon/human/H)
-	if(!istype(H) || !src || !(src.Adjacent(H)) || src.incapacitated() || H.incapacitated())
+	if (!istype(H) || !src || !(src.Adjacent(H)) || src.incapacitated() || H.incapacitated())
 		return 0
 	to_chat(H, "You feel your being twine with that of \the [src] as it merges with your biomass.")
 	H.status_flags |= PASSEMOTES
@@ -12,24 +12,24 @@
 	set category = "IC"
 	set src = usr
 
-	if(incapacitated())
+	if (incapacitated())
 		return
 
-	if(istype(loc, /obj/structure/diona_gestalt)) // Handle nymph katamari.
+	if (istype(loc, /obj/structure/diona_gestalt)) // Handle nymph katamari.
 		var/obj/structure/diona_gestalt/gestalt = loc
 		gestalt.visible_message(SPAN_NOTICE("\The [src] wriggles out of \the [gestalt] and plops to the ground."))
 		gestalt.shed_atom(src, TRUE, FALSE)
 		return
 
-	if(ishuman(loc)) // Handle larger gestalts. If they are being held inhand, their loc will be a holder item, not the mob.
+	if (ishuman(loc)) // Handle larger gestalts. If they are being held inhand, their loc will be a holder item, not the mob.
 		var/mob/living/carbon/human/H = loc
-		if(H.species.name == SPECIES_DIONA)
+		if (H.species.name == SPECIES_DIONA)
 			var/nymph_count = 0
 			for(var/mob/living/carbon/alien/diona/chirp in H)
 				nymph_count++
-				if(nymph_count >= 3)
+				if (nymph_count >= 3)
 					break
-			if(nymph_count < 3)
+			if (nymph_count < 3)
 				split_into_nymphs(H) // plop
 			else
 				to_chat(H, "You feel a pang of loss as \the [src] splits away from your gestalt.")
@@ -44,7 +44,7 @@
 	set desc = "Split your humanoid form into its constituent nymphs."
 	set category = "Abilities"
 	set src = usr.contents
-	if(ishuman(loc))
+	if (ishuman(loc))
 		split_into_nymphs(loc)
 
 /mob/living/carbon/alien/diona/verb/jump_to_next_nymph()
@@ -57,7 +57,7 @@
 		var/mob/living/carbon/alien/diona/S = next_nymph
 		transfer_languages(src, S)
 
-		if(mind)
+		if (mind)
 			to_chat(src, SPAN_INFO("You're now in control of [S]."))
 			mind.transfer_to(S)
 			log_and_message_admins("has transfered to another nymph; player now controls [key_name_admin(S)]", src)

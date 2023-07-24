@@ -37,7 +37,7 @@ SUBSYSTEM_DEF(minimap)
 
 	//Update machinery if it has not been
 	for(var/obj/machinery/ship_map/M in station_holomaps)
-		if(istype(M) && !QDELETED(M))
+		if (istype(M) && !QDELETED(M))
 			M.update_map_data()
 
 
@@ -50,7 +50,7 @@ SUBSYSTEM_DEF(minimap)
 
 	for(var/area/A in data.holomap_areas)
 		var/icon/single = data.holomap_areas[A]
-		if(A.holomap_color)
+		if (A.holomap_color)
 			single.Blend(A.holomap_color, ICON_MULTIPLY)
 		combinedareas.Blend(single, ICON_OVERLAY)
 
@@ -90,24 +90,24 @@ SUBSYSTEM_DEF(minimap)
 
 	// Sanity checks - Better to generate a helpful error message now than have DrawBox() runtime
 	var/icon/canvas = icon(HOLOMAP_ICON, "blank")
-	if(world.maxx + offset_x > canvas.Width())
+	if (world.maxx + offset_x > canvas.Width())
 		crash_with("Minimap for z=[zlevel] : world.maxx ([world.maxx]) + holomap_offset_x ([offset_x]) must be <= [canvas.Width()]")
-	if(world.maxy + offset_y > canvas.Height())
+	if (world.maxy + offset_y > canvas.Height())
 		crash_with("Minimap for z=[zlevel] : world.maxy ([world.maxy]) + holomap_offset_y ([offset_y]) must be <= [canvas.Height()]")
 
 	for(var/x = 1 to world.maxx)
 		for(var/y = 1 to world.maxy)
 			var/turf/tile = locate(x, y, zlevel)
 			var/area/A
-			if(tile)
+			if (tile)
 				A = tile.loc
 				if (A.area_flags & AREA_FLAG_HIDE_FROM_HOLOMAP)
 					continue
-				if(IS_ROCK(tile))
+				if (IS_ROCK(tile))
 					continue
-				if(IS_OBSTACLE(tile))
+				if (IS_OBSTACLE(tile))
 					canvas.DrawBox(HOLOMAP_OBSTACLE, x + offset_x, y + offset_y)
-				else if(IS_PATH(tile))
+				else if (IS_PATH(tile))
 					canvas.DrawBox(HOLOMAP_PATH, x + offset_x, y + offset_y)
 
 		CHECK_TICK
@@ -124,10 +124,10 @@ SUBSYSTEM_DEF(minimap)
 	for(var/x = 1 to world.maxx)
 		for(var/y = 1 to world.maxy)
 			var/turf/tile = locate(x, y, zlevel)
-			if(tile && tile.loc)
+			if (tile && tile.loc)
 				var/area/areaToPaint = tile.loc
-				if(areaToPaint.holomap_color)
-					if(!areas[areaToPaint])
+				if (areaToPaint.holomap_color)
+					if (!areas[areaToPaint])
 						areas[areaToPaint] = icon(HOLOMAP_ICON, "blank")
 					areas[areaToPaint].DrawBox(HOLOMAP_AREACOLOR_BASE, x + offset_x, y + offset_y) //We draw white because we want a generic version to use later. However if there is no colour we ignore it
 	return areas

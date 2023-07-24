@@ -20,14 +20,14 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 
 /singleton/uplink_source/pda/setup_uplink_source(mob/M, amount)
 	var/obj/item/modular_computer/pda/P = find_in_mob(M, /obj/item/modular_computer/pda)
-	if(!P || !P.hard_drive)
+	if (!P || !P.hard_drive)
 		return SETUP_FAILED
 
 	var/pda_pass = "[rand(100,999)] [pick(GLOB.greek_letters)]"
 	var/obj/item/device/uplink/T = new(P, M.mind, amount)
 	P.hidden_uplink = T
 	var/datum/computer_file/program/uplink/program = new(pda_pass)
-	if(!P.hard_drive.save_file(program))
+	if (!P.hard_drive.save_file(program))
 		return SETUP_FAILED	//Not enough space or other issues.
 	to_chat(M, SPAN_NOTICE("A portable object teleportation relay has been installed in your [P.name]. Simply enter the code \"[pda_pass]\" in TaxQuickly program to unlock its hidden features."))
 	M.StoreMemory("<B>Uplink passcode:</B> [pda_pass] ([P.name]).", /singleton/memory_options/system)
@@ -39,7 +39,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 
 /singleton/uplink_source/radio/setup_uplink_source(mob/M, amount)
 	var/obj/item/device/radio/R = find_in_mob(M, /obj/item/device/radio)
-	if(!R)
+	if (!R)
 		return SETUP_FAILED
 
 	var/freq = PUBLIC_LOW_FREQ
@@ -63,11 +63,11 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	desc = "Teleports an uplink implant into your head. Costs 20% of the initial TC amount."
 
 /singleton/uplink_source/implant/setup_uplink_source(mob/living/carbon/human/H, amount)
-	if(!istype(H))
+	if (!istype(H))
 		return SETUP_FAILED
 
 	var/obj/item/organ/external/head = H.organs_by_name[BP_HEAD]
-	if(!head)
+	if (!head)
 		return SETUP_FAILED
 
 	var/obj/item/implant/uplink/U = new(H, round(amount * 0.8))
@@ -97,38 +97,38 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 
 /singleton/uplink_source/proc/find_in_mob(mob/M, type)
 	for(var/item in M.get_equipped_items(TRUE))
-		if(!istype(item, type))
+		if (!istype(item, type))
 			continue
 		var/obj/item/I = item
-		if(!I.hidden_uplink)
+		if (!I.hidden_uplink)
 			return I
 
 /singleton/uplink_source/proc/put_on_mob(mob/M, atom/movable/AM, text)
 	var/obj/O = M.equip_to_storage(AM)
-	if(O)
+	if (O)
 		to_chat(M, SPAN_NOTICE("[text] can be found in your [O.name]."))
-	else if(M.put_in_hands(AM))
+	else if (M.put_in_hands(AM))
 		to_chat(M, SPAN_NOTICE("[text] appear in your hands."))
 	else
 		AM.dropInto(M.loc)
 		to_chat(M, SPAN_NOTICE("[text] appear at your location."))
 
 /proc/setup_uplink_source(mob/M, amount = DEFAULT_TELECRYSTAL_AMOUNT)
-	if(!istype(M) || !M.mind)
+	if (!istype(M) || !M.mind)
 		return FALSE
 
 	var/list/priority_order
-	if(M.client && M.client.prefs)
+	if (M.client && M.client.prefs)
 		priority_order = M.client.prefs.uplink_sources
 
-	if(!priority_order || !length(priority_order))
+	if (!priority_order || !length(priority_order))
 		priority_order = list()
 		for(var/entry in GLOB.default_uplink_source_priority)
 			priority_order += GET_SINGLETON(entry)
 
 	for(var/entry in priority_order)
 		var/singleton/uplink_source/US = entry
-		if(US.setup_uplink_source(M, amount) != SETUP_FAILED)
+		if (US.setup_uplink_source(M, amount) != SETUP_FAILED)
 			return TRUE
 
 	to_chat(M, SPAN_WARNING("Either by choice or circumstance you will be without an uplink."))

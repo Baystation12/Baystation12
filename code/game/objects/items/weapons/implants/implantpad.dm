@@ -28,9 +28,9 @@
 
 /obj/item/implantpad/attackby(obj/item/I, mob/user)
 	..()
-	if(istype(I, /obj/item/implantcase))
+	if (istype(I, /obj/item/implantcase))
 		var/obj/item/implantcase/C = I
-		if(!imp && C.imp)
+		if (!imp && C.imp)
 			C.imp.forceMove(src)
 			imp = C.imp
 			C.imp = null
@@ -39,9 +39,9 @@
 			C.imp = imp
 			imp = null
 		C.update_icon()
-	else if(istype(I, /obj/item/implanter))
+	else if (istype(I, /obj/item/implanter))
 		var/obj/item/implanter/C = I
-		if(!imp && C.imp)
+		if (!imp && C.imp)
 			C.imp.forceMove(src)
 			imp = C.imp
 			C.imp = null
@@ -50,7 +50,7 @@
 			C.imp = imp
 			imp = null
 		C.update_icon()
-	else if(istype(I, /obj/item/implant) && user.unEquip(I, src))
+	else if (istype(I, /obj/item/implant) && user.unEquip(I, src))
 		imp = I
 	update_icon()
 

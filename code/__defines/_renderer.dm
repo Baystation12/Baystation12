@@ -91,7 +91,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 	if (!renderers)
 		renderers = list()
 	for (var/atom/movable/renderer/renderer as anything in subtypesof(/atom/movable/renderer))
-		if(ispath(renderer, /atom/movable/renderer/shared))
+		if (ispath(renderer, /atom/movable/renderer/shared))
 			continue
 		renderer = new renderer (null, src)
 		renderers[renderer] = renderer.plane // (renderer = plane) format for visual debugging
@@ -106,7 +106,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 
 /// Removes the mob's renderers on /Logout()
 /mob/proc/RemoveRenderers()
-	if(my_client)
+	if (my_client)
 		for(var/atom/movable/renderer/renderer as anything in renderers)
 			my_client.screen -= renderer
 			if (renderer.relay)
@@ -292,18 +292,18 @@ GLOBAL_LIST_EMPTY(zmimic_renderers)
 /atom/movable/renderer/heat/proc/Setup()
 	var/mob/M = owner
 
-	if(istype(M))
+	if (istype(M))
 		var/quality = M.get_preference_value(/datum/client_preference/graphics_quality)
 
-		if(gas_heat_object)
+		if (gas_heat_object)
 			vis_contents -= gas_heat_object
 
 		if (quality == GLOB.PREF_LOW)
-			if(!istype(gas_heat_object, /obj/effect/heat))
+			if (!istype(gas_heat_object, /obj/effect/heat))
 				QDEL_NULL(gas_heat_object)
 				gas_heat_object = new /obj/effect/heat(null)
 		else
-			if(!istype(gas_heat_object, /obj/particle_emitter/heat))
+			if (!istype(gas_heat_object, /obj/particle_emitter/heat))
 				QDEL_NULL(gas_heat_object)
 				gas_heat_object = new /obj/particle_emitter/heat(null, -1)
 			if (quality == GLOB.PREF_MED)

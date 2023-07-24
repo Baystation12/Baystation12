@@ -15,7 +15,7 @@
 
 /datum/computer_file/program/docking/on_startup()
 	. = ..()
-	if(NM)
+	if (NM)
 		var/datum/nano_module/docking/NMD = NM
 		NMD.refresh_docks()
 
@@ -31,15 +31,15 @@
 	docking_controllers.Cut()
 	var/list/zlevels = GetConnectedZlevels(get_host_z())
 	for(var/obj/machinery/embedded_controller/radio/airlock/docking_port/D in SSmachines.machinery)
-		if(D.z in zlevels)
+		if (D.z in zlevels)
 			var/shuttleside = 0
 			for(var/sname in SSshuttle.shuttles) //do not touch shuttle-side ones
 				var/datum/shuttle/autodock/S = SSshuttle.shuttles[sname]
-				if(istype(S) && S.shuttle_docking_controller)
-					if(S.shuttle_docking_controller.id_tag == D.program.id_tag)
+				if (istype(S) && S.shuttle_docking_controller)
+					if (S.shuttle_docking_controller.id_tag == D.program.id_tag)
 						shuttleside = 1
 						break
-			if(shuttleside)
+			if (shuttleside)
 				continue
 			docking_controllers += D.program.id_tag
 
@@ -48,7 +48,7 @@
 	var/list/docks = list()
 	for(var/docktag in docking_controllers)
 		var/datum/computer/file/embedded_program/docking/P = SSshuttle.docking_registry[docktag]
-		if(P)
+		if (P)
 			var/docking_attempt = P.tag_target && !P.dock_state
 			var/docked = P.tag_target && (P.dock_state == STATE_DOCKED)
 			docks.Add(list(list(
@@ -68,24 +68,24 @@
 		ui.open()
 
 /datum/nano_module/docking/Topic(href, href_list, state)
-	if(..())
+	if (..())
 		return 1
-	if(istext(href_list["edit_code"]))
+	if (istext(href_list["edit_code"]))
 		var/datum/computer/file/embedded_program/docking/P = SSshuttle.docking_registry[href_list["edit_code"]]
-		if(P)
+		if (P)
 			var/newcode = input("Input new docking codes", "Docking codes", P.docking_codes) as text|null
-			if(!CanInteract(usr,state))
+			if (!CanInteract(usr,state))
 				return
 			if (newcode)
 				P.docking_codes = uppertext(newcode)
 		return 1
-	if(istext(href_list["dock"]))
+	if (istext(href_list["dock"]))
 		var/datum/computer/file/embedded_program/docking/P = SSshuttle.docking_registry[href_list["dock"]]
-		if(P)
+		if (P)
 			P.receive_user_command("dock")
 		return 1
-	if(istext(href_list["undock"]))
+	if (istext(href_list["undock"]))
 		var/datum/computer/file/embedded_program/docking/P = SSshuttle.docking_registry[href_list["undock"]]
-		if(P)
+		if (P)
 			P.receive_user_command("undock")
 		return 1

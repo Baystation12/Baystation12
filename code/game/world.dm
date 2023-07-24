@@ -27,29 +27,29 @@ GLOBAL_VAR(href_logfile)
 	var/list/match = list()
 
 	for(var/mob/M in SSmobs.mob_list)
-		if(restrict_type && !istype(M, restrict_type))
+		if (restrict_type && !istype(M, restrict_type))
 			continue
 		var/strings = list(M.name, M.ckey)
-		if(M.mind)
+		if (M.mind)
 			strings += M.mind.assigned_role
 			strings += M.mind.special_role
-		if(ishuman(M))
+		if (ishuman(M))
 			var/mob/living/carbon/human/H = M
-			if(H.species)
+			if (H.species)
 				strings += H.species.name
 		for(var/text in strings)
-			if(ckey(text) in ckeysearch)
+			if (ckey(text) in ckeysearch)
 				match[M] += 10 // an exact match is far better than a partial one
 			else
 				for(var/searchstr in search)
-					if(findtext(text, searchstr))
+					if (findtext(text, searchstr))
 						match[M] += 1
 
 	var/maxstrength = 0
 	for(var/mob/M in match)
 		maxstrength = max(match[M], maxstrength)
 	for(var/mob/M in match)
-		if(match[M] < maxstrength)
+		if (match[M] < maxstrength)
 			match -= M
 
 	return match
@@ -144,10 +144,10 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 			x++
 		return x
 
-	else if(T == "players")
+	else if (T == "players")
 		var/n = 0
 		for(var/mob/M in GLOB.player_list)
-			if(M.client)
+			if (M.client)
 				n++
 		return n
 
@@ -173,32 +173,32 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		var/list/admins = list()
 		var/legacy = input["status"] != "2"
 		for(var/client/C in GLOB.clients)
-			if(C.holder)
-				if(C.is_stealthed())
+			if (C.holder)
+				if (C.is_stealthed())
 					continue	//so stealthmins aren't revealed by the hub
 				admins[C.key] = C.holder.rank
-			if(legacy)
+			if (legacy)
 				s["player[length(players)]"] = C.key
 			players += C.key
-			if(istype(C.mob, /mob/living))
+			if (istype(C.mob, /mob/living))
 				active++
 
 		s["players"] = length(players)
 		s["admins"] = length(admins)
-		if(!legacy)
+		if (!legacy)
 			s["playerlist"] = list2params(players)
 			s["adminlist"] = list2params(admins)
 			s["active_players"] = active
 
 		return list2params(s)
 
-	else if(T == "manifest")
+	else if (T == "manifest")
 		var/list/positions = list()
 		var/list/nano_crew_manifest = nano_crew_manifest()
 		// We rebuild the list in the format external tools expect
 		for(var/dept in nano_crew_manifest)
 			var/list/dept_list = nano_crew_manifest[dept]
-			if(length(dept_list) > 0)
+			if (length(dept_list) > 0)
 				positions[dept] = list()
 				for(var/list/person in dept_list)
 					positions[dept][person["name"]] = person["rank"]
@@ -208,7 +208,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 
 		return list2params(positions)
 
-	else if(T == "revision")
+	else if (T == "revision")
 		var/list/L = list()
 		L["gameid"] = game_id
 		L["dm_version"] = DM_VERSION // DreamMaker version compiled in
@@ -216,7 +216,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		L["dd_version"] = world.byond_version // DreamDaemon version running on
 		L["dd_build"] = world.byond_build // DreamDaemon build running on
 
-		if(revdata.revision)
+		if (revdata.revision)
 			L["revision"] = revdata.revision
 			L["branch"] = revdata.branch
 			L["date"] = revdata.date
@@ -230,12 +230,12 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 	* The following topic calls are only available if a ban comms secret has been defined, supplied, and is correct.
 	* * * * * * * */
 
-	if(copytext(T,1,14) == "placepermaban")
+	if (copytext(T,1,14) == "placepermaban")
 		var/input[] = params2list(T)
-		if(!config.ban_comms_password)
+		if (!config.ban_comms_password)
 			SET_THROTTLE(10 SECONDS, "Bans Not Enabled")
 			return "Not Enabled"
-		if(input["bankey"] != config.ban_comms_password)
+		if (input["bankey"] != config.ban_comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Bans Key")
 			return "Bad Key"
 
@@ -243,15 +243,15 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 
 		var/client/C
 		for(var/client/K in GLOB.clients)
-			if(K.ckey == target)
+			if (K.ckey == target)
 				C = K
 				break
-		if(!C)
+		if (!C)
 			return "No client with that name found on server"
-		if(!C.mob)
+		if (!C.mob)
 			return "Client missing mob"
 
-		if(!_DB_ban_record(input["id"], "0", "127.0.0.1", 1, C.mob, -1, input["reason"]))
+		if (!_DB_ban_record(input["id"], "0", "127.0.0.1", 1, C.mob, -1, input["reason"]))
 			return "Save failed"
 		ban_unban_log_save("[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.")
 		notes_add(target,"[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.",input["id"])
@@ -266,28 +266,28 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		SET_THROTTLE(10 SECONDS, "Comms Not Enabled")
 		return "Not enabled"
 
-	else if(copytext(T,1,5) == "laws")
+	else if (copytext(T,1,5) == "laws")
 		var/input[] = params2list(T)
-		if(input["key"] != config.comms_password)
+		if (input["key"] != config.comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
 
 		var/list/match = text_find_mobs(input["laws"], /mob/living/silicon)
 
-		if(!length(match))
+		if (!length(match))
 			return "No matches"
-		else if(length(match) == 1)
+		else if (length(match) == 1)
 			var/mob/living/silicon/S = match[1]
 			var/info = list()
 			info["name"] = S.name
 			info["key"] = S.key
 
-			if(istype(S, /mob/living/silicon/robot))
+			if (istype(S, /mob/living/silicon/robot))
 				var/mob/living/silicon/robot/R = S
 				info["master"] = R.connected_ai?.name
 				info["sync"] = R.lawupdate
 
-			if(!S.laws)
+			if (!S.laws)
 				info["laws"] = null
 				return list2params(info)
 
@@ -313,17 +313,17 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 				ret[M.key] = M.name
 			return list2params(ret)
 
-	else if(copytext(T,1,5) == "info")
+	else if (copytext(T,1,5) == "info")
 		var/input[] = params2list(T)
-		if(input["key"] != config.comms_password)
+		if (input["key"] != config.comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
 
 		var/list/match = text_find_mobs(input["info"])
 
-		if(!length(match))
+		if (!length(match))
 			return "No matches"
-		else if(length(match) == 1)
+		else if (length(match) == 1)
 			var/mob/M = match[1]
 			var/info = list()
 			info["key"] = M.key
@@ -337,7 +337,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 			info["hasbeenrev"] = M.mind ? M.mind.has_been_rev : "No mind"
 			info["stat"] = M.stat
 			info["type"] = M.type
-			if(isliving(M))
+			if (isliving(M))
 				var/mob/living/L = M
 				info["damage"] = list2params(list(
 							oxy = L.getOxyLoss(),
@@ -347,7 +347,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 							clone = L.getCloneLoss(),
 							brain = L.getBrainLoss()
 						))
-				if(ishuman(M))
+				if (ishuman(M))
 					var/mob/living/carbon/human/H = M
 					info["species"] = H.species.name
 				else
@@ -363,7 +363,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 				ret[M.key] = M.name
 			return list2params(ret)
 
-	else if(copytext(T,1,9) == "adminmsg")
+	else if (copytext(T,1,9) == "adminmsg")
 		/*
 			We got an adminmsg from IRC bot lets split the input then validate the input.
 			expected output:
@@ -375,7 +375,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 
 
 		var/input[] = params2list(T)
-		if(input["key"] != config.comms_password)
+		if (input["key"] != config.comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
 
@@ -383,16 +383,16 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		var/req_ckey = ckey(input["adminmsg"])
 
 		for(var/client/K in GLOB.clients)
-			if(K.ckey == req_ckey)
+			if (K.ckey == req_ckey)
 				C = K
 				break
-		if(!C)
+		if (!C)
 			return "No client with that name on server"
 
 		var/rank = input["rank"]
-		if(!rank)
+		if (!rank)
 			rank = "Admin"
-		if(rank == "Unknown")
+		if (rank == "Unknown")
 			rank = "Staff"
 
 		var/message =	SPAN_CLASS("pm", "[rank] PM from <b><a href='?irc_msg=[input["sender"]]'>[input["sender"]]</a></b>: [input["msg"]]")
@@ -405,11 +405,11 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		to_chat(C, message)
 
 		for(var/client/A as anything in GLOB.admins)
-			if(A != C)
+			if (A != C)
 				to_chat(A, amessage)
 		return "Message Successful"
 
-	else if(copytext(T,1,6) == "notes")
+	else if (copytext(T,1,6) == "notes")
 		/*
 			We got a request for notes from the IRC Bot
 			expected output:
@@ -417,19 +417,19 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 				2. validationkey = the key the bot has, it should match the gameservers commspassword in it's configuration.
 		*/
 		var/input[] = params2list(T)
-		if(input["key"] != config.comms_password)
+		if (input["key"] != config.comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
 		return show_player_info_irc(ckey(input["notes"]))
 
-	else if(copytext(T,1,4) == "age")
+	else if (copytext(T,1,4) == "age")
 		var/input[] = params2list(T)
-		if(input["key"] != config.comms_password)
+		if (input["key"] != config.comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
 		var/age = get_player_age(input["age"])
-		if(isnum(age))
-			if(age >= 0)
+		if (isnum(age))
+			if (age >= 0)
 				return "[age]"
 			else
 				return "Ckey not found"
@@ -448,13 +448,13 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 	var/datum/chatOutput/co
 	for(var/client/C in GLOB.clients)
 		co = C.chatOutput
-		if(co)
+		if (co)
 			co.ehjax_send(data = "roundrestart")
-	if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
+	if (config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
 		for(var/client/C in GLOB.clients)
 			send_link(C, "byond://[config.server]")
 
-	if(config.wait_for_sigusr1_reboot && reason != 3)
+	if (config.wait_for_sigusr1_reboot && reason != 3)
 		text2file("foo", "reboot_called")
 		to_world(SPAN_DANGER("World reboot waiting for external scripts. Please be patient."))
 		return
@@ -467,12 +467,12 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 	return 1
 
 /world/proc/load_mode()
-	if(!fexists("data/mode.txt"))
+	if (!fexists("data/mode.txt"))
 		return
 
 	var/list/Lines = file2list("data/mode.txt")
-	if(length(Lines))
-		if(Lines[1])
+	if (length(Lines))
+		if (Lines[1])
 			SSticker.master_mode = Lines[1]
 			log_misc("Saved mode is '[SSticker.master_mode]'")
 
@@ -490,7 +490,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 
 /world/proc/SetupLogs()
 	GLOB.log_directory = "data/logs/[time2text(world.realtime, "YYYY/MM/DD")]/round-"
-	if(game_id)
+	if (game_id)
 		GLOB.log_directory += "[game_id]"
 	else
 		GLOB.log_directory += "[replacetext(time_stamp(), ":", ".")]"
@@ -500,7 +500,7 @@ var/global/failed_db_connections = 0
 var/global/failed_old_db_connections = 0
 
 /hook/startup/proc/connectDB()
-	if(!setup_database_connection())
+	if (!setup_database_connection())
 		to_world_log("Your server failed to establish a connection with the feedback database.")
 	else
 		to_world_log("Feedback database connection established.")
@@ -509,9 +509,9 @@ var/global/failed_old_db_connections = 0
 /proc/setup_database_connection()
 	if (!sqlenabled)
 		return 0
-	if(failed_db_connections > FAILED_DB_CONNECTION_CUTOFF)	//If it failed to establish a connection more than 5 times in a row, don't bother attempting to conenct anymore.
+	if (failed_db_connections > FAILED_DB_CONNECTION_CUTOFF)	//If it failed to establish a connection more than 5 times in a row, don't bother attempting to conenct anymore.
 		return 0
-	if(!dbcon)
+	if (!dbcon)
 		dbcon = new()
 	var/user = sqlfdbklogin
 	var/pass = sqlfdbkpass
@@ -531,16 +531,16 @@ var/global/failed_old_db_connections = 0
 /proc/establish_db_connection()
 	if (!sqlenabled)
 		return 0
-	if(failed_db_connections > FAILED_DB_CONNECTION_CUTOFF)
+	if (failed_db_connections > FAILED_DB_CONNECTION_CUTOFF)
 		return 0
-	if(!dbcon || !dbcon.IsConnected())
+	if (!dbcon || !dbcon.IsConnected())
 		return setup_database_connection()
 	else
 		return 1
 
 
 /hook/startup/proc/connectOldDB()
-	if(!setup_old_database_connection())
+	if (!setup_old_database_connection())
 		to_world_log("Your server failed to establish a connection with the SQL database.")
 	else
 		to_world_log("SQL database connection established.")
@@ -550,9 +550,9 @@ var/global/failed_old_db_connections = 0
 /proc/setup_old_database_connection()
 	if (!sqlenabled)
 		return 0
-	if(failed_old_db_connections > FAILED_DB_CONNECTION_CUTOFF)	//If it failed to establish a connection more than 5 times in a row, don't bother attempting to conenct anymore.
+	if (failed_old_db_connections > FAILED_DB_CONNECTION_CUTOFF)	//If it failed to establish a connection more than 5 times in a row, don't bother attempting to conenct anymore.
 		return 0
-	if(!dbcon_old)
+	if (!dbcon_old)
 		dbcon_old = new()
 	var/user = sqllogin
 	var/pass = sqlpass
@@ -573,10 +573,10 @@ var/global/failed_old_db_connections = 0
 /proc/establish_old_db_connection()
 	if (!sqlenabled)
 		return 0
-	if(failed_old_db_connections > FAILED_DB_CONNECTION_CUTOFF)
+	if (failed_old_db_connections > FAILED_DB_CONNECTION_CUTOFF)
 		return 0
 
-	if(!dbcon_old || !dbcon_old.IsConnected())
+	if (!dbcon_old || !dbcon_old.IsConnected())
 		return setup_old_database_connection()
 	else
 		return 1

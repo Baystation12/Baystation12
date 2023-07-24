@@ -4,7 +4,7 @@
 GLOBAL_DATUM_INIT(inventory_state, /datum/topic_state/inventory_state, new)
 
 /datum/topic_state/inventory_state/can_use_topic(src_object, mob/user)
-	if(!(src_object in user))
+	if (!(src_object in user))
 		return STATUS_CLOSE
 
 	return user.shared_nano_interaction()

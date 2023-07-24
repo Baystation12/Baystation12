@@ -5,13 +5,13 @@
 /// See /weakref's documentation for more information.
 /proc/weakref(datum/D)
 	RETURN_TYPE(/weakref)
-	if(!istype(D))
+	if (!istype(D))
 		return
-	if(QDELETED(D))
+	if (QDELETED(D))
 		return
-	if(istype(D, /weakref))
+	if (istype(D, /weakref))
 		return D
-	if(!D.weakref)
+	if (!D.weakref)
 		D.weakref = new/weakref(D)
 	return D.weakref
 
@@ -81,7 +81,7 @@
 
 /weakref/proc/resolve()
 	var/datum/D = locate(ref)
-	if(D && D.weakref == src)
+	if (D && D.weakref == src)
 		return D
 	return null
 

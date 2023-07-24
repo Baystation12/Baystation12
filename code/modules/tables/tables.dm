@@ -27,22 +27,22 @@
 	connections = list("nw0", "ne0", "sw0", "se0")
 
 /obj/structure/table/New()
-	if(istext(material))
+	if (istext(material))
 		material = SSmaterials.get_material_by_name(material)
-	if(istext(reinforced))
+	if (istext(reinforced))
 		reinforced = SSmaterials.get_material_by_name(reinforced)
 	..()
 
 /obj/structure/table/proc/update_material()
 	var/new_health = 0
-	if(!material)
+	if (!material)
 		new_health = 10
 		damage_hitsound = initial(damage_hitsound)
 		health_min_damage = 0
 	else
 		new_health = material.integrity / 2
 		health_min_damage = material.hardness
-		if(reinforced)
+		if (reinforced)
 			new_health += reinforced.integrity / 2
 			health_min_damage += reinforced.hardness
 		health_min_damage = round(health_min_damage / 10)
@@ -69,7 +69,7 @@
 
 	// One table per turf.
 	for(var/obj/structure/table/T in loc)
-		if(T != src)
+		if (T != src)
 			// There's another table here that's not us, break to metal.
 			// break_to_parts calls qdel(src)
 			break_to_parts(full_return = 1)
@@ -228,41 +228,41 @@
 
 
 /obj/structure/table/MouseDrop_T(obj/item/stack/material/what)
-	if(can_reinforce && isliving(usr) && (!usr.stat) && istype(what) && usr.get_active_hand() == what && Adjacent(usr))
+	if (can_reinforce && isliving(usr) && (!usr.stat) && istype(what) && usr.get_active_hand() == what && Adjacent(usr))
 		reinforce_table(what, usr)
 	else
 		return ..()
 
 /obj/structure/table/proc/reinforce_table(obj/item/stack/material/S, mob/user)
-	if(reinforced)
+	if (reinforced)
 		to_chat(user, SPAN_WARNING("\The [src] is already reinforced!"))
 		return
 
-	if(!can_reinforce)
+	if (!can_reinforce)
 		to_chat(user, SPAN_WARNING("\The [src] cannot be reinforced!"))
 		return
 
-	if(!material)
+	if (!material)
 		to_chat(user, SPAN_WARNING("Plate \the [src] before reinforcing it!"))
 		return
 
-	if(flipped)
+	if (flipped)
 		to_chat(user, SPAN_WARNING("Put \the [src] back in place before reinforcing it!"))
 		return
 
 	reinforced = common_material_add(S, user, "reinforc")
-	if(reinforced)
+	if (reinforced)
 		update_desc()
 		update_icon()
 		update_material()
 
 /obj/structure/table/proc/update_desc()
-	if(material)
+	if (material)
 		name = "[material.display_name] table"
 	else
 		name = "table frame"
 
-	if(reinforced)
+	if (reinforced)
 		name = "reinforced [name]"
 		desc = "[initial(desc)] This one seems to be reinforced with [reinforced.display_name]."
 	else
@@ -271,14 +271,14 @@
 // Returns the material to set the table to.
 /obj/structure/table/proc/common_material_add(obj/item/stack/material/S, mob/user, verb) // Verb is actually verb without 'e' or 'ing', which is added. Works for 'plate'/'plating' and 'reinforce'/'reinforcing'.
 	var/material/M = S.get_material()
-	if(!istype(M))
+	if (!istype(M))
 		to_chat(user, SPAN_WARNING("You cannot [verb]e \the [src] with \the [S]."))
 		return null
 
-	if(manipulating) return M
+	if (manipulating) return M
 	manipulating = 1
 	to_chat(user, SPAN_NOTICE("You begin [verb]ing \the [src] with [M.display_name]."))
-	if(!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) || !S.use(1))
+	if (!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) || !S.use(1))
 		manipulating = 0
 		return null
 	user.visible_message(SPAN_NOTICE("\The [user] [verb]es \the [src] with [M.display_name]."), SPAN_NOTICE("You finish [verb]ing \the [src]."))
@@ -287,17 +287,17 @@
 
 // Returns the material to set the table to.
 /obj/structure/table/proc/common_material_remove(mob/user, material/M, delay, what, type_holding, sound)
-	if(!M.stack_type)
+	if (!M.stack_type)
 		to_chat(user, SPAN_WARNING("You are unable to remove the [what] from this table!"))
 		return M
 
-	if(manipulating) return M
+	if (manipulating) return M
 	manipulating = 1
 	user.visible_message(SPAN_NOTICE("\The [user] begins removing the [type_holding] holding \the [src]'s [M.display_name] [what] in place."),
 	                              SPAN_NOTICE("You begin removing the [type_holding] holding \the [src]'s [M.display_name] [what] in place."))
-	if(sound)
+	if (sound)
 		playsound(src.loc, sound, 50, 1)
-	if(!do_after(user, delay, src, DO_REPAIR_CONSTRUCT))
+	if (!do_after(user, delay, src, DO_REPAIR_CONSTRUCT))
 		manipulating = 0
 		return M
 	user.visible_message(SPAN_NOTICE("\The [user] removes the [M.display_name] [what] from \the [src]."),
@@ -317,12 +317,12 @@
 		return
 
 	reset_mobs_offset()
-	if(manipulating) return
+	if (manipulating) return
 	manipulating = 1
 	user.visible_message(SPAN_NOTICE("\The [user] begins dismantling \the [src]."),
 								SPAN_NOTICE("You begin dismantling \the [src]."))
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	if(!do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
+	if (!do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
 		manipulating = 0
 		return
 	user.visible_message(SPAN_NOTICE("\The [user] dismantles \the [src]."),
@@ -336,38 +336,38 @@
 
 // The repeated
 //     S = [x].place_shard(loc)
-//     if(S) shards += S
+//     if (S) shards += S
 // is to avoid filling the list with nulls, as place_shard won't place shards of certain materials (holo-wood, holo-steel)
 
 /obj/structure/table/proc/break_to_parts(full_return = 0)
 	reset_mobs_offset()
 	var/list/shards = list()
 	var/obj/item/material/shard/S = null
-	if(reinforced)
-		if(reinforced.stack_type && (full_return || prob(20)))
+	if (reinforced)
+		if (reinforced.stack_type && (full_return || prob(20)))
 			reinforced.place_sheet(loc)
 		else
 			S = reinforced.place_shard(loc)
-			if(S) shards += S
-	if(material)
-		if(material.stack_type && (full_return || prob(20)))
+			if (S) shards += S
+	if (material)
+		if (material.stack_type && (full_return || prob(20)))
 			material.place_sheet(loc)
 		else
 			S = material.place_shard(loc)
-			if(S) shards += S
-	if(carpeted && (full_return || prob(50))) // Higher chance to get the carpet back intact, since there's no non-intact option
+			if (S) shards += S
+	if (carpeted && (full_return || prob(50))) // Higher chance to get the carpet back intact, since there's no non-intact option
 		new /obj/item/stack/tile/carpet(src.loc)
-	if(full_return || prob(20))
+	if (full_return || prob(20))
 		new /obj/item/stack/material/steel(src.loc)
 	else
 		var/material/M = SSmaterials.get_material_by_name(MATERIAL_STEEL)
 		S = M.place_shard(loc)
-		if(S) shards += S
+		if (S) shards += S
 	qdel(src)
 	return shards
 
 /obj/structure/table/on_update_icon()
-	if(!flipped)
+	if (!flipped)
 		mob_offset = initial(mob_offset)
 		icon_state = "blank"
 		overlays.Cut()
@@ -380,22 +380,22 @@
 			overlays += I
 
 		// Standard table image
-		if(material)
+		if (material)
 			for(var/i = 1 to 4)
 				I = image(icon, "[material.table_icon_base]_[connections[i]]", dir = SHIFTL(1, i - 1))
-				if(material.icon_colour) I.color = material.icon_colour
+				if (material.icon_colour) I.color = material.icon_colour
 				I.alpha = 255 * material.opacity
 				overlays += I
 
 		// Reinforcements
-		if(reinforced)
+		if (reinforced)
 			for(var/i = 1 to 4)
 				I = image(icon, "[material.table_icon_reinf]_[connections[i]]", dir = SHIFTL(1, i - 1))
 				I.color = reinforced.icon_colour
 				I.alpha = 255 * reinforced.opacity
 				overlays += I
 
-		if(carpeted)
+		if (carpeted)
 			for(var/i = 1 to 4)
 				I = image(icon, "carpet_[connections[i]]", dir = SHIFTL(1, i - 1))
 				overlays += I
@@ -418,7 +418,7 @@
 				type += "+"
 
 		icon_state = "flip[type]"
-		if(material)
+		if (material)
 			var/image/I = image(icon, "[material.table_icon_base]_flip[type]")
 			I.color = material.icon_colour
 			I.alpha = 255 * material.opacity
@@ -427,13 +427,13 @@
 		else
 			name = "table frame"
 
-		if(reinforced)
+		if (reinforced)
 			var/image/I = image(icon, "[material.table_icon_reinf]_flip[type]")
 			I.color = reinforced.icon_colour
 			I.alpha = 255 * reinforced.opacity
 			overlays += I
 
-		if(carpeted)
+		if (carpeted)
 			overlays += "carpet_flip[type]"
 
 /obj/structure/table/proc/can_connect()
@@ -441,17 +441,17 @@
 
 // set propagate if you're updating a table that should update tables around it too, for example if it's a new table or something important has changed (like material).
 /obj/structure/table/update_connections(propagate=0)
-	if(!material)
+	if (!material)
 		connections = list("0", "0", "0", "0")
 
-		if(propagate)
+		if (propagate)
 			for(var/obj/structure/table/T in oview(src, 1))
 				T.update_connections()
 		return
 
 	var/list/blocked_dirs = list()
 	for(var/obj/structure/window/W in get_turf(src))
-		if(W.is_fulltile())
+		if (W.is_fulltile())
 			connections = list("0", "0", "0", "0")
 			return
 		blocked_dirs |= W.dir
@@ -459,36 +459,36 @@
 	for(var/D in list(NORTH, SOUTH, EAST, WEST) - blocked_dirs)
 		var/turf/T = get_step(src, D)
 		for(var/obj/structure/window/W in T)
-			if(W.is_fulltile() || W.dir == GLOB.reverse_dir[D])
+			if (W.is_fulltile() || W.dir == GLOB.reverse_dir[D])
 				blocked_dirs |= D
 				break
 			else
-				if(W.dir != D) // it's off to the side
+				if (W.dir != D) // it's off to the side
 					blocked_dirs |= W.dir|D // blocks the diagonal
 
 	for(var/D in list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST) - blocked_dirs)
 		var/turf/T = get_step(src, D)
 
 		for(var/obj/structure/window/W in T)
-			if(W.is_fulltile() || (W.dir & GLOB.reverse_dir[D]))
+			if (W.is_fulltile() || (W.dir & GLOB.reverse_dir[D]))
 				blocked_dirs |= D
 				break
 
 	// Blocked cardinals block the adjacent diagonals too. Prevents weirdness with tables.
 	for(var/x in list(NORTH, SOUTH))
 		for(var/y in list(EAST, WEST))
-			if((x in blocked_dirs) || (y in blocked_dirs))
+			if ((x in blocked_dirs) || (y in blocked_dirs))
 				blocked_dirs |= x|y
 
 	var/list/connection_dirs = list()
 
 	for(var/obj/structure/table/T in orange(src, 1))
-		if(!T.can_connect()) continue
+		if (!T.can_connect()) continue
 		var/T_dir = get_dir(src, T)
-		if(T_dir in blocked_dirs) continue
-		if(material && T.material && material.name == T.material.name && flipped == T.flipped)
+		if (T_dir in blocked_dirs) continue
+		if (material && T.material && material.name == T.material.name && flipped == T.flipped)
 			connection_dirs |= T_dir
-		if(propagate)
+		if (propagate)
 			spawn(0)
 				T.update_connections()
 				T.update_icon()
@@ -509,18 +509,18 @@
 
 /proc/dirs_to_corner_states(list/dirs)
 	RETURN_TYPE(/list)
-	if(!istype(dirs)) return
+	if (!istype(dirs)) return
 
 	var/list/ret = list(NORTHWEST, SOUTHEAST, NORTHEAST, SOUTHWEST)
 
 	for(var/i = 1 to length(ret))
 		var/dir = ret[i]
 		. = CORNER_NONE
-		if(dir in dirs)
+		if (dir in dirs)
 			. |= CORNER_DIAGONAL
-		if(turn(dir,45) in dirs)
+		if (turn(dir,45) in dirs)
 			. |= CORNER_COUNTERCLOCKWISE
-		if(turn(dir,-45) in dirs)
+		if (turn(dir,-45) in dirs)
 			. |= CORNER_CLOCKWISE
 		ret[i] = "[.]"
 

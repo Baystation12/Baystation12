@@ -36,13 +36,13 @@ var/global/total_lighting_sources = 0
 /datum/light_source/New(atom/owner, atom/top)
 	total_lighting_sources++
 	source_atom = owner // Set our new owner.
-	if(!source_atom.light_sources)
+	if (!source_atom.light_sources)
 		source_atom.light_sources = list()
 
 	source_atom.light_sources += src // Add us to the lights of our owner.
 	top_atom = top
-	if(top_atom != source_atom)
-		if(!top.light_sources)
+	if (top_atom != source_atom)
+		if (!top.light_sources)
 			top.light_sources     = list()
 
 		top_atom.light_sources += src
@@ -80,17 +80,17 @@ var/global/total_lighting_sources = 0
 	total_lighting_sources--
 	destroyed = TRUE
 	force_update()
-	if(source_atom && source_atom.light_sources)
+	if (source_atom && source_atom.light_sources)
 		source_atom.light_sources -= src
 
-	if(top_atom && top_atom.light_sources)
+	if (top_atom && top_atom.light_sources)
 		top_atom.light_sources    -= src
 
 // Call it dirty, I don't care.
 // This is here so there's no performance loss on non-instant updates from the fact that the engine can also do instant updates.
 // If you're wondering what's with the "BYOND" argument: BYOND won't let me have a() macro that has no arguments :|.
 #define effect_update(BYOND)            \
-	if(!needs_update)                  \
+	if (!needs_update)                  \
 	{                                   \
 		SSlighting.light_queue += src;  \
 		needs_update            = TRUE; \
@@ -99,14 +99,14 @@ var/global/total_lighting_sources = 0
 // This proc will cause the light source to update the top atom, and add itself to the update queue.
 /datum/light_source/proc/update(atom/new_top_atom)
 	// This top atom is different.
-	if(new_top_atom && new_top_atom != top_atom)
-		if(top_atom != source_atom) // Remove ourselves from the light sources of that top atom.
+	if (new_top_atom && new_top_atom != top_atom)
+		if (top_atom != source_atom) // Remove ourselves from the light sources of that top atom.
 			top_atom.light_sources -= src
 
 		top_atom = new_top_atom
 
-		if(top_atom != source_atom)
-			if(!top_atom.light_sources)
+		if (top_atom != source_atom)
+			if (!top_atom.light_sources)
 				top_atom.light_sources = list()
 
 			top_atom.light_sources += src // Add ourselves to the light sources of our new top atom.
@@ -127,49 +127,49 @@ var/global/total_lighting_sources = 0
 
 // Will check if we actually need to update, and update any variables that may need to be updated.
 /datum/light_source/proc/check()
-	if(!source_atom || !light_outer_range || !light_max_bright)
+	if (!source_atom || !light_outer_range || !light_max_bright)
 		destroy()
 		return 1
 
-	if(!top_atom)
+	if (!top_atom)
 		top_atom = source_atom
 		. = 1
 
-	if(isturf(top_atom))
-		if(source_turf != top_atom)
+	if (isturf(top_atom))
+		if (source_turf != top_atom)
 			source_turf = top_atom
 			. = 1
-	else if(top_atom.loc != source_turf)
+	else if (top_atom.loc != source_turf)
 		source_turf = top_atom.loc
 		. = 1
 
-	if(source_atom.light_max_bright != light_max_bright)
+	if (source_atom.light_max_bright != light_max_bright)
 		light_max_bright = source_atom.light_max_bright
 		. = 1
 
-	if(source_atom.light_inner_range != light_inner_range)
+	if (source_atom.light_inner_range != light_inner_range)
 		light_inner_range = source_atom.light_inner_range
 		. = 1
 
-	if(source_atom.light_outer_range != light_outer_range)
+	if (source_atom.light_outer_range != light_outer_range)
 		light_outer_range = source_atom.light_outer_range
 		. = 1
 
-	if(source_atom.light_falloff_curve != light_falloff_curve)
+	if (source_atom.light_falloff_curve != light_falloff_curve)
 		light_falloff_curve = source_atom.light_falloff_curve
 		. = 1
 
-	if(light_max_bright && light_outer_range && !applied)
+	if (light_max_bright && light_outer_range && !applied)
 		. = 1
 
-	if(source_atom.light_color != light_color)
+	if (source_atom.light_color != light_color)
 		light_color = source_atom.light_color
 		parse_light_color()
 		. = 1
 
 // Decompile the hexadecimal colour into lumcounts of each perspective.
 /datum/light_source/proc/parse_light_color()
-	if(light_color)
+	if (light_color)
 		lum_r = GetRedPart  (light_color) / 255
 		lum_g = GetGreenPart(light_color) / 255
 		lum_b = GetBluePart (light_color) / 255
@@ -226,17 +226,17 @@ var/global/total_lighting_sources = 0
 		check_t:
 		if (!T)
 			continue
-		if(!T.lighting_corners_initialised)
+		if (!T.lighting_corners_initialised)
 			T.generate_missing_corners()
 
 		for(var/datum/lighting_corner/C in T.get_corners())
-			if(C.update_gen == update_gen)
+			if (C.update_gen == update_gen)
 				continue
 
 			C.update_gen = update_gen
 			C.affecting += src
 
-			if(!C.active)
+			if (!C.active)
 				effect_str[C] = 0
 				continue
 
@@ -269,7 +269,7 @@ var/global/total_lighting_sources = 0
 	effect_str.Cut()
 
 /datum/light_source/proc/recalc_corner(datum/lighting_corner/C)
-	if(effect_str.Find(C)) // Already have one.
+	if (effect_str.Find(C)) // Already have one.
 		REMOVE_CORNER(C)
 
 	APPLY_CORNER(C)
@@ -280,13 +280,13 @@ var/global/total_lighting_sources = 0
 	FOR_DVIEW(var/turf/T, light_outer_range, source_turf, 0)
 		if (!T)
 			continue
-		if(!T.lighting_corners_initialised)
+		if (!T.lighting_corners_initialised)
 			T.generate_missing_corners()
 		corners |= T.get_corners()
 		turfs   += T
 
 		var/turf/simulated/open/O = T
-		if(istype(O) && O.below)
+		if (istype(O) && O.below)
 			// Consider the turf below us as well. (Z-lights)
 			for(T = O.below; !isnull(T); T = update_the_turf(T,corners, turfs));
 	END_FOR_DVIEW
@@ -303,7 +303,7 @@ var/global/total_lighting_sources = 0
 
 	for(var/datum/lighting_corner/C in corners - effect_str) // New corners
 		C.affecting += src
-		if(!C.active)
+		if (!C.active)
 			effect_str[C] = 0
 			continue
 
@@ -316,13 +316,13 @@ var/global/total_lighting_sources = 0
 
 
 /datum/light_source/proc/update_the_turf(turf/T, list/datum/lighting_corner/corners, list/turf/turfs)
-	if(!T.lighting_corners_initialised)
+	if (!T.lighting_corners_initialised)
 		T.generate_missing_corners()
 	corners |= T.get_corners()
 	turfs   += T
 
 	var/turf/simulated/open/O = T
-	if(istype(O) && O.below)
+	if (istype(O) && O.below)
 		return O.below
 	return null
 

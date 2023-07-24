@@ -39,36 +39,36 @@ var/global/solar_gen_rate = 1500
 
 //set the control of the panel to a given computer if closer than SOLAR_MAX_DIST
 /obj/machinery/power/solar/proc/set_control(obj/machinery/power/solar_control/SC)
-	if(SC && (get_dist(src, SC) > SOLAR_MAX_DIST))
+	if (SC && (get_dist(src, SC) > SOLAR_MAX_DIST))
 		return 0
 	control = SC
 	return 1
 
 //set the control of the panel to null and removes it from the control list of the previous control computer if needed
 /obj/machinery/power/solar/proc/unset_control()
-	if(control)
+	if (control)
 		control.connected_panels.Remove(src)
 	control = null
 
 /obj/machinery/power/solar/proc/Make(obj/item/solar_assembly/S)
-	if(!S)
+	if (!S)
 		S = new /obj/item/solar_assembly(src)
 		S.glass_type = /obj/item/stack/material/glass
 		S.anchored = TRUE
 	S.forceMove(src)
-	if(S.glass_type == /obj/item/stack/material/glass/reinforced) //if the panel is in reinforced glass
+	if (S.glass_type == /obj/item/stack/material/glass/reinforced) //if the panel is in reinforced glass
 		set_max_health(health_max * 2)
 	update_icon()
 
 
 
 /obj/machinery/power/solar/attackby(obj/item/W, mob/user)
-	if(isCrowbar(W))
+	if (isCrowbar(W))
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		user.visible_message(SPAN_NOTICE("[user] begins to take the glass off the solar panel."))
-		if(do_after(user, (W.toolspeed * 5) SECONDS, src, DO_REPAIR_CONSTRUCT))
+		if (do_after(user, (W.toolspeed * 5) SECONDS, src, DO_REPAIR_CONSTRUCT))
 			var/obj/item/solar_assembly/S = locate() in src
-			if(S)
+			if (S)
 				S.dropInto(loc)
 				S.give_glass()
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
@@ -81,7 +81,7 @@ var/global/solar_gen_rate = 1500
 /obj/machinery/power/solar/on_update_icon()
 	..()
 	overlays.Cut()
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel-b", layer = ABOVE_HUMAN_LAYER)
 	else
 		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel", layer = ABOVE_HUMAN_LAYER)
@@ -90,14 +90,14 @@ var/global/solar_gen_rate = 1500
 
 //calculates the fraction of the sunlight that the panel receives
 /obj/machinery/power/solar/proc/update_solar_exposure()
-	if(obscured)
+	if (obscured)
 		sunfrac = 0
 		return
 
 	//find the smaller angle between the direction the panel is facing and the direction of the sun (the sign is not important here)
 	var/p_angle = min(abs(adir - GLOB.sun_angle), 360 - abs(adir - GLOB.sun_angle))
 
-	if(p_angle > 90)			// if facing more than 90deg from sun, zero output
+	if (p_angle > 90)			// if facing more than 90deg from sun, zero output
 		sunfrac = 0
 		return
 
@@ -105,14 +105,14 @@ var/global/solar_gen_rate = 1500
 	//isn't the power received from the incoming light proportional to cos(p_angle) (Lambert's cosine law) rather than cos(p_angle)^2 ?
 
 /obj/machinery/power/solar/Process()
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		return
-	if(!control) //if there's no sun or the panel is not linked to a solar control computer, no need to proceed
+	if (!control) //if there's no sun or the panel is not linked to a solar control computer, no need to proceed
 		return
 
-	if(powernet)
-		if(powernet == control.powernet)//check if the panel is still connected to the computer
-			if(obscured) //get no light from the sun, so don't generate power
+	if (powernet)
+		if (powernet == control.powernet)//check if the panel is still connected to the computer
+			if (obscured) //get no light from the sun, so don't generate power
 				return
 			var/sgen = solar_gen_rate * sunfrac * efficiency
 			add_avail(sgen)
@@ -122,7 +122,7 @@ var/global/solar_gen_rate = 1500
 
 /obj/machinery/power/solar/set_broken(new_state)
 	. = ..()
-	if(. && new_state && !health_dead())
+	if (. && new_state && !health_dead())
 		kill_health()
 
 /obj/machinery/power/solar/on_death()
@@ -135,13 +135,13 @@ var/global/solar_gen_rate = 1500
 
 /obj/machinery/power/solar/ex_act(severity)
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
-			if(prob(15))
+		if (EX_ACT_DEVASTATING)
+			if (prob(15))
 				new /obj/item/material/shard( src.loc )
 			qdel(src)
 			return
 
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			if (prob(25))
 				new /obj/item/material/shard( src.loc )
 				qdel(src)
@@ -150,7 +150,7 @@ var/global/solar_gen_rate = 1500
 			if (prob(50))
 				set_broken(TRUE)
 
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			if (prob(25))
 				set_broken(TRUE)
 	return
@@ -172,9 +172,9 @@ var/global/solar_gen_rate = 1500
 
 	// On planets, we take fewer steps because the light is mostly up
 	// Also, many planets barely have any spots with enough clear space around
-	if(GLOB.using_map.use_overmap)
+	if (GLOB.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
-		if(istype(E))
+		if (istype(E))
 			steps = 5
 
 	for(var/i = 1 to steps)
@@ -183,10 +183,10 @@ var/global/solar_gen_rate = 1500
 
 		T = locate( round(ax,0.5),round(ay,0.5),z)
 
-		if(!T || T.x == 1 || T.x==world.maxx || T.y==1 || T.y==world.maxy)		// not obscured if we reach the edge
+		if (!T || T.x == 1 || T.x==world.maxx || T.y==1 || T.y==world.maxy)		// not obscured if we reach the edge
 			break
 
-		if(T.opacity)			// if we hit a solid turf, panel is obscured
+		if (T.opacity)			// if we hit a solid turf, panel is obscured
 			obscured = 1
 			return
 
@@ -210,12 +210,12 @@ var/global/solar_gen_rate = 1500
 	var/glass_type = null
 
 /obj/item/solar_assembly/attack_hand(mob/user)
-	if(!anchored && isturf(loc)) // You can't pick it up
+	if (!anchored && isturf(loc)) // You can't pick it up
 		..()
 
 // Give back the glass type we were supplied with
 /obj/item/solar_assembly/proc/give_glass()
-	if(glass_type)
+	if (glass_type)
 		var/obj/item/stack/material/S = new glass_type(src.loc)
 		S.amount = 2
 		glass_type = null
@@ -223,8 +223,8 @@ var/global/solar_gen_rate = 1500
 
 /obj/item/solar_assembly/attackby(obj/item/W, mob/user)
 
-	if(!anchored && isturf(loc))
-		if(isWrench(W))
+	if (!anchored && isturf(loc))
+		if (isWrench(W))
 			anchored = TRUE
 			pixel_x = 0
 			pixel_y = 0
@@ -233,19 +233,19 @@ var/global/solar_gen_rate = 1500
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			return 1
 	else
-		if(isWrench(W))
+		if (isWrench(W))
 			anchored = FALSE
 			user.visible_message(SPAN_NOTICE("[user] unwrenches the solar assembly from it's place."))
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			return 1
 
-		if(istype(W, /obj/item/stack/material) && W.get_material_name() == MATERIAL_GLASS)
+		if (istype(W, /obj/item/stack/material) && W.get_material_name() == MATERIAL_GLASS)
 			var/obj/item/stack/material/S = W
-			if(S.use(2))
+			if (S.use(2))
 				glass_type = W.type
 				playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 				user.visible_message(SPAN_NOTICE("[user] places the glass on the solar assembly."))
-				if(tracker)
+				if (tracker)
 					new /obj/machinery/power/tracker(get_turf(src), src)
 				else
 					new /obj/machinery/power/solar(get_turf(src), src)
@@ -254,14 +254,14 @@ var/global/solar_gen_rate = 1500
 				return
 			return 1
 
-	if(!tracker)
-		if(istype(W, /obj/item/tracker_electronics))
+	if (!tracker)
+		if (istype(W, /obj/item/tracker_electronics))
 			tracker = 1
 			qdel(W)
 			user.visible_message(SPAN_NOTICE("[user] inserts the electronics into the solar assembly."))
 			return 1
 	else
-		if(isCrowbar(W))
+		if (isCrowbar(W))
 			new /obj/item/tracker_electronics(src.loc)
 			tracker = 0
 			user.visible_message(SPAN_NOTICE("[user] takes out the electronics from the solar assembly."))
@@ -303,7 +303,7 @@ var/global/solar_gen_rate = 1500
 /obj/machinery/power/solar_control/Destroy()
 	for(var/obj/machinery/power/solar/M in connected_panels)
 		M.unset_control()
-	if(connected_tracker)
+	if (connected_tracker)
 		connected_tracker.unset_control()
 	..()
 
@@ -313,37 +313,37 @@ var/global/solar_gen_rate = 1500
 
 /obj/machinery/power/solar_control/connect_to_network()
 	var/to_return = ..()
-	if(powernet) //if connected and not already in solar_list...
+	if (powernet) //if connected and not already in solar_list...
 		GLOB.solar_controllers |= src
 	return to_return
 
 //search for unconnected panels and trackers in the computer powernet and connect them
 /obj/machinery/power/solar_control/proc/search_for_connected()
-	if(powernet)
+	if (powernet)
 		for(var/obj/machinery/power/M in powernet.nodes)
-			if(istype(M, /obj/machinery/power/solar))
+			if (istype(M, /obj/machinery/power/solar))
 				var/obj/machinery/power/solar/S = M
-				if(!S.control) //i.e unconnected
-					if(S.set_control(src))
+				if (!S.control) //i.e unconnected
+					if (S.set_control(src))
 						connected_panels |= S
-			else if(istype(M, /obj/machinery/power/tracker))
-				if(!connected_tracker) //if there's already a tracker connected to the computer don't add another
+			else if (istype(M, /obj/machinery/power/tracker))
+				if (!connected_tracker) //if there's already a tracker connected to the computer don't add another
 					var/obj/machinery/power/tracker/T = M
-					if(!T.control) //i.e unconnected
-						if(T.set_control(src))
+					if (!T.control) //i.e unconnected
+						if (T.set_control(src))
 							connected_tracker = T
 
 //called by the sun controller, update the facing angle (either manually or via tracking) and rotates the panels accordingly
 /obj/machinery/power/solar_control/proc/update()
-	if(inoperable())
+	if (inoperable())
 		return
 
 	switch(track)
-		if(1)
-			if(trackrate) //we're manual tracking. If we set a rotation speed...
+		if (1)
+			if (trackrate) //we're manual tracking. If we set a rotation speed...
 				cdir = targetdir //...the current direction is the targetted one (and rotates panels to it)
-		if(2) // auto-tracking
-			if(connected_tracker)
+		if (2) // auto-tracking
+			if (connected_tracker)
 				connected_tracker.set_angle(GLOB.sun_angle)
 
 	set_panels(cdir)
@@ -351,21 +351,21 @@ var/global/solar_gen_rate = 1500
 
 /obj/machinery/power/solar_control/Initialize()
 	. = ..()
-	if(!connect_to_network()) return
+	if (!connect_to_network()) return
 	set_panels(cdir)
 
 /obj/machinery/power/solar_control/on_update_icon()
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		icon_state = "broken"
 		overlays.Cut()
 		return
-	if(!is_powered())
+	if (!is_powered())
 		icon_state = "c_unpowered"
 		overlays.Cut()
 		return
 	icon_state = "solar"
 	overlays.Cut()
-	if(cdir > -1)
+	if (cdir > -1)
 		overlays += image('icons/obj/computer.dmi', "solcon-o", ABOVE_OBJ_LAYER, angle2dir(cdir))
 	return
 
@@ -380,11 +380,11 @@ var/global/solar_gen_rate = 1500
 	t += "<B>[SPAN_CLASS("highlight", "Array Orientation")]</B>: [rate_control(src,"cdir","[cdir]&deg",1,15)] ([angle2text(cdir)])<BR>"
 	t += "<B>[SPAN_CLASS("highlight", "Tracking:")]</B><div class='statusDisplay'>"
 	switch(track)
-		if(0)
+		if (0)
 			t += "[SPAN_CLASS("linkOn", "Off")] <A href='?src=\ref[src];track=1'>Timed</A> <A href='?src=\ref[src];track=2'>Auto</A><BR>"
-		if(1)
+		if (1)
 			t += "<A href='?src=\ref[src];track=0'>Off</A> [SPAN_CLASS("linkOn", "Timed")] <A href='?src=\ref[src];track=2'>Auto</A><BR>"
-		if(2)
+		if (2)
 			t += "<A href='?src=\ref[src];track=0'>Off</A> <A href='?src=\ref[src];track=1'>Timed</A> [SPAN_CLASS("linkOn", "Auto")]<BR>"
 
 	t += "Tracking Rate: [rate_control(src,"tdir","[trackrate] deg/h ([trackrate<0 ? "CCW" : "CW"])",1,30,180)]</div><BR>"
@@ -405,56 +405,56 @@ var/global/solar_gen_rate = 1500
 	lastgen = gen
 	gen = 0
 
-	if(inoperable())
+	if (inoperable())
 		return
 
-	if(connected_tracker) //NOTE : handled here so that we don't add trackers to the processing list
-		if(connected_tracker.powernet != powernet)
+	if (connected_tracker) //NOTE : handled here so that we don't add trackers to the processing list
+		if (connected_tracker.powernet != powernet)
 			connected_tracker.unset_control()
 
-	if(track==1 && trackrate) //manual tracking and set a rotation speed
-		if(nexttime <= world.time) //every time we need to increase/decrease the angle by 1°...
+	if (track==1 && trackrate) //manual tracking and set a rotation speed
+		if (nexttime <= world.time) //every time we need to increase/decrease the angle by 1°...
 			targetdir = (targetdir + trackrate/abs(trackrate) + 360) % 360 	//... do it
 			nexttime += 36000/abs(trackrate) //reset the counter for the next 1°
 
 	updateDialog()
 
 /obj/machinery/power/solar_control/Topic(href, href_list)
-	if(..())
+	if (..())
 		close_browser(usr, "window=solcon")
 		usr.unset_machine()
 		return 0
-	if(href_list["close"] )
+	if (href_list["close"] )
 		close_browser(usr, "window=solcon")
 		usr.unset_machine()
 		return 0
 
-	if(href_list["rate control"])
-		if(href_list["cdir"])
+	if (href_list["rate control"])
+		if (href_list["cdir"])
 			src.cdir = dd_range(0,359,(360+src.cdir+text2num(href_list["cdir"]))%360)
 			src.targetdir = src.cdir
-			if(track == 2) //manual update, so losing auto-tracking
+			if (track == 2) //manual update, so losing auto-tracking
 				track = 0
 			spawn(1)
 				set_panels(cdir)
-		if(href_list["tdir"])
+		if (href_list["tdir"])
 			src.trackrate = dd_range(-7200,7200,src.trackrate+text2num(href_list["tdir"]))
-			if(src.trackrate) nexttime = world.time + 36000/abs(trackrate)
+			if (src.trackrate) nexttime = world.time + 36000/abs(trackrate)
 
-	if(href_list["track"])
+	if (href_list["track"])
 		track = text2num(href_list["track"])
-		if(track == 2)
-			if(connected_tracker)
+		if (track == 2)
+			if (connected_tracker)
 				connected_tracker.set_angle(GLOB.sun_angle)
 				set_panels(cdir)
 		else if (track == 1) //begin manual tracking
 			src.targetdir = src.cdir
-			if(src.trackrate) nexttime = world.time + 36000/abs(trackrate)
+			if (src.trackrate) nexttime = world.time + 36000/abs(trackrate)
 			set_panels(targetdir)
 
-	if(href_list["search_connected"])
+	if (href_list["search_connected"])
 		src.search_for_connected()
-		if(connected_tracker && track == 2)
+		if (connected_tracker && track == 2)
 			connected_tracker.set_angle(GLOB.sun_angle)
 		src.set_panels(cdir)
 
@@ -471,14 +471,14 @@ var/global/solar_gen_rate = 1500
 
 /obj/machinery/power/solar_control/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if (1.0)
 			//SN src = null
 			qdel(src)
 			return
-		if(2.0)
+		if (2.0)
 			if (prob(50))
 				set_broken(TRUE)
-		if(3.0)
+		if (3.0)
 			if (prob(25))
 				set_broken(TRUE)
 
@@ -488,7 +488,7 @@ var/global/solar_gen_rate = 1500
 
 /obj/machinery/power/solar_control/autostart/Initialize()
 	search_for_connected()
-	if(connected_tracker && track == 2)
+	if (connected_tracker && track == 2)
 		connected_tracker.set_angle(GLOB.sun_angle)
 		set_panels(cdir)
 	. = ..()
@@ -504,5 +504,5 @@ var/global/solar_gen_rate = 1500
 /proc/rate_control(S, V, C, Min=1, Max=5, Limit=null) //How not to name vars
 	var/href = "<A href='?src=\ref[S];rate control=1;[V]"
 	var/rate = "[href]=-[Max]'>-</A>[href]=-[Min]'>-</A> [(C?C : 0)] [href]=[Min]'>+</A>[href]=[Max]'>+</A>"
-	if(Limit) return "[href]=-[Limit]'>-</A>"+rate+"[href]=[Limit]'>+</A>"
+	if (Limit) return "[href]=-[Limit]'>-</A>"+rate+"[href]=[Limit]'>+</A>"
 	return rate

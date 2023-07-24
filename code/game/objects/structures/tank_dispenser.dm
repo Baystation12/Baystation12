@@ -26,14 +26,14 @@
 /obj/structure/dispenser/on_update_icon()
 	overlays.Cut()
 	switch(oxygentanks)
-		if(1 to 3)	overlays += "oxygen-[oxygentanks]"
-		if(4 to INFINITY) overlays += "oxygen-4"
+		if (1 to 3)	overlays += "oxygen-[oxygentanks]"
+		if (4 to INFINITY) overlays += "oxygen-4"
 	switch(phorontanks)
-		if(1 to 4)	overlays += "phoron-[phorontanks]"
-		if(5 to INFINITY) overlays += "phoron-5"
+		if (1 to 4)	overlays += "phoron-[phorontanks]"
+		if (5 to INFINITY) overlays += "phoron-5"
 
 /obj/structure/dispenser/attack_ai(mob/user as mob)
-	if(user.Adjacent(src))
+	if (user.Adjacent(src))
 		return attack_hand(user)
 	..()
 
@@ -90,14 +90,14 @@
 
 
 /obj/structure/dispenser/Topic(href, href_list)
-	if(usr.stat || usr.restrained())
+	if (usr.stat || usr.restrained())
 		return
-	if(Adjacent(usr))
+	if (Adjacent(usr))
 		usr.set_machine(src)
-		if(href_list["oxygen"])
-			if(oxygentanks > 0)
+		if (href_list["oxygen"])
+			if (oxygentanks > 0)
 				var/obj/item/tank/oxygen/O
-				if(length(oxytanks) == oxygentanks)
+				if (length(oxytanks) == oxygentanks)
 					O = oxytanks[1]
 					oxytanks.Remove(O)
 				else
@@ -106,10 +106,10 @@
 				to_chat(usr, SPAN_NOTICE("You take [O] out of [src]."))
 				oxygentanks--
 				update_icon()
-		if(href_list["phoron"])
-			if(phorontanks > 0)
+		if (href_list["phoron"])
+			if (phorontanks > 0)
 				var/obj/item/tank/phoron/P
-				if(length(platanks) == phorontanks)
+				if (length(platanks) == phorontanks)
 					P = platanks[1]
 					platanks.Remove(P)
 				else

@@ -10,7 +10,7 @@
 
 /datum/language/ling/broadcast(mob/living/speaker,message,speaker_mask)
 
-	if(speaker.mind && speaker.mind.changeling)
+	if (speaker.mind && speaker.mind.changeling)
 		..(speaker,message,speaker.mind.changeling.changelingID)
 	else
 		..(speaker,message)
@@ -31,15 +31,15 @@
 
 	var/mob/living/simple_animal/borer/B
 
-	if(istype(speaker,/mob/living/carbon))
+	if (istype(speaker,/mob/living/carbon))
 		var/mob/living/carbon/M = speaker
 		B = M.has_brain_worms()
-	else if(istype(speaker,/mob/living/simple_animal/borer))
+	else if (istype(speaker,/mob/living/simple_animal/borer))
 		B = speaker
 
-	if(B)
-		if(B.host)
-			if(B.host.nutrition < 50 || B.host.stat)
+	if (B)
+		if (B.host)
+			if (B.host.nutrition < 50 || B.host.stat)
 				to_chat(speaker, SPAN_WARNING("Your host is too weak to relay your broadcast."))
 				return FALSE
 			B.host.nutrition -= rand(1, 3)
@@ -62,11 +62,11 @@
 	has_written_form = TRUE
 
 /datum/language/vox/can_speak_special(mob/speaker)
-	if(!ishuman(speaker))
+	if (!ishuman(speaker))
 		return FALSE
 	var/mob/living/carbon/human/H = speaker
 	var/obj/item/organ/internal/hindtongue/tongue = H.internal_organs_by_name[BP_HINDTONGUE]
-	if(!istype(tongue) || !tongue.is_usable())
+	if (!istype(tongue) || !tongue.is_usable())
 		to_chat(speaker, SPAN_WARNING("You are not capable of speaking [name]!"))
 		return FALSE
 	return TRUE

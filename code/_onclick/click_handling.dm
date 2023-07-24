@@ -2,7 +2,7 @@
 	Custom click handling
 */
 #define SETUP_CLICK_HANDLERS \
-if(!click_handlers) { \
+if (!click_handlers) { \
 	click_handlers = new(); \
 	click_handlers += new/datum/click_handler/default(src) \
 }
@@ -25,11 +25,11 @@ var/global/const/CLICK_HANDLER_ALL                  = ( CLICK_HANDLER_REMOVE_ON_
 /datum/click_handler/New(mob/user)
 	..()
 	src.user = user
-	if(flags & (CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT))
+	if (flags & (CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT))
 		GLOB.logged_out_event.register(user, src, /datum/click_handler/proc/OnMobLogout)
 
 /datum/click_handler/Destroy()
-	if(flags & (CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT))
+	if (flags & (CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT))
 		GLOB.logged_out_event.unregister(user, src, /datum/click_handler/proc/OnMobLogout)
 	user = null
 	. = ..()
@@ -61,53 +61,53 @@ var/global/const/CLICK_HANDLER_ALL                  = ( CLICK_HANDLER_REMOVE_ON_
 
 // Returns TRUE if the given click handler was removed, otherwise FALSE
 /mob/proc/RemoveClickHandler(datum/click_handler/click_handler)
-	if(!click_handlers)
+	if (!click_handlers)
 		return FALSE
-	if(ispath(click_handler)) // If we were given a path instead of an instance, find the first matching instance by type
+	if (ispath(click_handler)) // If we were given a path instead of an instance, find the first matching instance by type
 		// No removing of the default click handler
-		if(click_handler == /datum/click_handler/default)
+		if (click_handler == /datum/click_handler/default)
 			return FALSE
 		click_handler = get_instance_of_strict_type(click_handlers, click_handler)
-	if(!click_handler)
+	if (!click_handler)
 		return FALSE
 
 	. = (click_handler in click_handlers)
-	if(!.)
+	if (!.)
 		return
 
 	var/was_top = click_handlers[1] == click_handler
 
-	if(was_top)
+	if (was_top)
 		click_handler.Exit()
 	click_handlers.Remove(click_handler)
 	qdel(click_handler)
 
-	if(!was_top)
+	if (!was_top)
 		return
 	click_handler = click_handlers[1]
-	if(click_handler)
+	if (click_handler)
 		click_handler.Enter()
 
 // Returns TRUE if the given click handler type was NOT previously the top click handler but now is
 /mob/proc/PushClickHandler(datum/click_handler/new_click_handler_type)
 	// No manipulation of the default click handler
-	if(new_click_handler_type == /datum/click_handler/default)
+	if (new_click_handler_type == /datum/click_handler/default)
 		return FALSE
-	if((initial(new_click_handler_type.flags) & CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT) && !client)
+	if ((initial(new_click_handler_type.flags) & CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT) && !client)
 		return FALSE
 	SETUP_CLICK_HANDLERS
 
 	var/datum/click_handler/click_handler = click_handlers[1]
-	if(click_handler.type == new_click_handler_type)
+	if (click_handler.type == new_click_handler_type)
 		return FALSE // If the top click handler is already the same as the desired one, bow out
 
 	click_handler.Exit()
-	if(click_handler.flags & CLICK_HANDLER_REMOVE_IF_NOT_TOP)
+	if (click_handler.flags & CLICK_HANDLER_REMOVE_IF_NOT_TOP)
 		click_handlers.Remove(click_handler)
 		qdel(click_handler)
 
 	click_handler = get_instance_of_strict_type(click_handlers, click_handler)
-	if(click_handler)
+	if (click_handler)
 		click_handlers.Remove(click_handler)
 	else
 		click_handler = new new_click_handler_type(src)

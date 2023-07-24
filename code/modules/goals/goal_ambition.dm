@@ -3,7 +3,7 @@
 
 /datum/goal/ambition/New()
 	..()
-	if(owner)
+	if (owner)
 		SSgoals.ambitions[owner] = src
 
 /datum/goal/ambition/Destroy()

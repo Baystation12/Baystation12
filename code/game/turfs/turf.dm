@@ -47,7 +47,7 @@
 
 /turf/Initialize(mapload, ...)
 	. = ..()
-	if(dynamic_lighting)
+	if (dynamic_lighting)
 		luminosity = 0
 	else
 		luminosity = 1
@@ -65,10 +65,10 @@
 	queue_ao(FALSE)
 
 /turf/proc/update_flood_overlay()
-	if(is_flooded(absolute = TRUE))
-		if(!flood_object)
+	if (is_flooded(absolute = TRUE))
+		if (!flood_object)
 			flood_object = new(src)
-	else if(flood_object)
+	else if (flood_object)
 		QDEL_NULL(flood_object)
 
 /turf/Destroy()
@@ -100,12 +100,12 @@
 /turf/attack_hand(mob/user)
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 
-	if(user.restrained())
+	if (user.restrained())
 		return 0
 	if (user.pulling)
-		if(user.pulling.anchored || !isturf(user.pulling.loc))
+		if (user.pulling.anchored || !isturf(user.pulling.loc))
 			return 0
-		if(user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1)
+		if (user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1)
 			return 0
 		do_pull_click(user, src)
 
@@ -124,13 +124,13 @@
 		return THE.OnHandInterception(user)
 
 /turf/attack_robot(mob/user)
-	if(Adjacent(user))
+	if (Adjacent(user))
 		attack_hand(user)
 
 /turf/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/storage))
+	if (istype(W, /obj/item/storage))
 		var/obj/item/storage/S = W
-		if(S.use_to_pickup && S.collection_mode)
+		if (S.use_to_pickup && S.collection_mode)
 			S.gather_all(src, user)
 	return ..()
 
@@ -143,22 +143,22 @@
 
 	//First, check objects to block exit that are not on the border
 	for(var/obj/obstacle in mover.loc)
-		if(!(obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER) && (mover != obstacle) && (forget != obstacle))
-			if(!obstacle.CheckExit(mover, src))
+		if (!(obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER) && (mover != obstacle) && (forget != obstacle))
+			if (!obstacle.CheckExit(mover, src))
 				mover.Bump(obstacle, 1)
 				return 0
 
 	//Now, check objects to block exit that are on the border
 	for(var/obj/border_obstacle in mover.loc)
-		if((border_obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER) && (mover != border_obstacle) && (forget != border_obstacle))
-			if(!border_obstacle.CheckExit(mover, src))
+		if ((border_obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER) && (mover != border_obstacle) && (forget != border_obstacle))
+			if (!border_obstacle.CheckExit(mover, src))
 				mover.Bump(border_obstacle, 1)
 				return 0
 
 	//Next, check objects to block entry that are on the border
 	for(var/obj/border_obstacle in src)
-		if(border_obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER)
-			if(!border_obstacle.CanPass(mover, mover.loc, 1, 0) && (forget != border_obstacle))
+		if (border_obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER)
+			if (!border_obstacle.CanPass(mover, mover.loc, 1, 0) && (forget != border_obstacle))
 				mover.Bump(border_obstacle, 1)
 				return 0
 
@@ -169,8 +169,8 @@
 
 	//Finally, check objects/mobs to block entry that are not on the border
 	for(var/atom/movable/obstacle in src)
-		if(!(obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER))
-			if(!obstacle.CanPass(mover, mover.loc, 1, 0) && (forget != obstacle))
+		if (!(obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER))
+			if (!obstacle.CanPass(mover, mover.loc, 1, 0) && (forget != obstacle))
 				mover.Bump(obstacle, 1)
 				return 0
 	return 1 //Nothing found to block so return success!
@@ -182,22 +182,22 @@ var/global/const/enterloopsanity = 100
 
 	QUEUE_TEMPERATURE_ATOMS(atom)
 
-	if(!istype(atom, /atom/movable))
+	if (!istype(atom, /atom/movable))
 		return
 
 	var/atom/movable/A = atom
 
-	if(ismob(A))
+	if (ismob(A))
 		var/mob/M = A
 		M.make_floating(0) //we know we're not on solid ground so skip the checks to save a bit of processing
 
 	var/objects = 0
-	if(A && (A.movable_flags & MOVABLE_FLAG_PROXMOVE))
+	if (A && (A.movable_flags & MOVABLE_FLAG_PROXMOVE))
 		for(var/atom/movable/thing in range(1))
-			if(objects > enterloopsanity) break
+			if (objects > enterloopsanity) break
 			objects++
 			spawn(0)
-				if(A)
+				if (A)
 					A.HasProximity(thing)
 					if ((thing && A) && (thing.movable_flags & MOVABLE_FLAG_PROXMOVE))
 						thing.HasProximity(A)
@@ -219,9 +219,9 @@ var/global/const/enterloopsanity = 100
 /turf/proc/AdjacentTurfs(check_blockage = TRUE)
 	. = list()
 	for(var/turf/t in (trange(1,src) - src))
-		if(check_blockage)
-			if(!t.density)
-				if(!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
+		if (check_blockage)
+			if (!t.density)
+				if (!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
 					. += t
 		else
 			. += t
@@ -230,11 +230,11 @@ var/global/const/enterloopsanity = 100
 	. = list()
 	for(var/ad in AdjacentTurfs(check_blockage))
 		var/turf/T = ad
-		if(T.x == src.x || T.y == src.y)
+		if (T.x == src.x || T.y == src.y)
 			. += T
 
 /turf/proc/Distance(turf/t)
-	if(get_dist(src,t) == 1)
+	if (get_dist(src,t) == 1)
 		var/cost = (src.x - t.x) * (src.x - t.x) + (src.y - t.y) * (src.y - t.y)
 		cost *= (pathweight+t.pathweight)/2
 		return cost
@@ -244,27 +244,27 @@ var/global/const/enterloopsanity = 100
 /turf/proc/AdjacentTurfsSpace()
 	var/L[] = new()
 	for(var/turf/t in oview(src,1))
-		if(!t.density)
-			if(!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
+		if (!t.density)
+			if (!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
 				L.Add(t)
 	return L
 
 /turf/proc/contains_dense_objects()
-	if(density)
+	if (density)
 		return 1
 	for(var/atom/A in src)
-		if(A.density && !(A.atom_flags & ATOM_FLAG_CHECKS_BORDER))
+		if (A.density && !(A.atom_flags & ATOM_FLAG_CHECKS_BORDER))
 			return 1
 	return 0
 
 //expects an atom containing the reagents used to clean the turf
 /turf/proc/clean(atom/source, mob/user = null, time = null, message = null)
-	if(source.reagents.has_reagent(/datum/reagent/water, 1) || source.reagents.has_reagent(/datum/reagent/space_cleaner, 1))
-		if(user && time && !do_after(user, time, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+	if (source.reagents.has_reagent(/datum/reagent/water, 1) || source.reagents.has_reagent(/datum/reagent/space_cleaner, 1))
+		if (user && time && !do_after(user, time, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 			return
 		clean_blood()
 		remove_cleanables()
-		if(message)
+		if (message)
 			to_chat(user, message)
 	else
 		to_chat(user, SPAN_WARNING("\The [source] is too dry to wash that."))
@@ -272,27 +272,27 @@ var/global/const/enterloopsanity = 100
 
 /turf/proc/remove_cleanables(skip_blood = TRUE)
 	for(var/obj/effect/O in src)
-		if(istype(O,/obj/effect/rune) || (istype(O,/obj/effect/decal/cleanable) && (!skip_blood || !istype(O, /obj/effect/decal/cleanable/blood))))
+		if (istype(O,/obj/effect/rune) || (istype(O,/obj/effect/decal/cleanable) && (!skip_blood || !istype(O, /obj/effect/decal/cleanable/blood))))
 			qdel(O)
 
 /turf/proc/update_blood_overlays()
 	return
 
 /turf/proc/remove_decals()
-	if(decals && length(decals))
+	if (decals && length(decals))
 		decals.Cut()
 		decals = null
 
 // Called when turf is hit by a thrown object
 /turf/hitby(atom/movable/AM as mob|obj, datum/thrownthing/TT)
-	if(src.density)
-		if(isliving(AM))
+	if (src.density)
+		if (isliving(AM))
 			var/mob/living/M = AM
 			M.turf_collision(src, TT.speed)
-			if(length(M.pinned))
+			if (length(M.pinned))
 				return
 
-			if(M.pinned)
+			if (M.pinned)
 				return
 		addtimer(new Callback(src, /turf/proc/bounce_off, AM, TT.init_dir), 2)
 
@@ -306,30 +306,30 @@ var/global/const/enterloopsanity = 100
 
 /turf/proc/try_graffiti(mob/vandal, obj/item/tool)
 
-	if(!tool.sharp || !can_engrave() || vandal.a_intent != I_HELP)
+	if (!tool.sharp || !can_engrave() || vandal.a_intent != I_HELP)
 		return FALSE
 
-	if(jobban_isbanned(vandal, "Graffiti"))
+	if (jobban_isbanned(vandal, "Graffiti"))
 		to_chat(vandal, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
 		return
 
 	var/too_much_graffiti = 0
 	for(var/obj/effect/decal/writing/W in src)
 		too_much_graffiti++
-	if(too_much_graffiti >= 5)
+	if (too_much_graffiti >= 5)
 		to_chat(vandal, SPAN_WARNING("There's too much graffiti here to add more."))
 		return FALSE
 
 	var/message = sanitize(input("Enter a message to engrave.", "Graffiti") as null|text, trim = TRUE)
-	if(!message)
+	if (!message)
 		return FALSE
 
-	if(!vandal || vandal.incapacitated() || !Adjacent(vandal) || !tool.loc == vandal)
+	if (!vandal || vandal.incapacitated() || !Adjacent(vandal) || !tool.loc == vandal)
 		return FALSE
 
 	vandal.visible_message(SPAN_WARNING("\The [vandal] begins carving something into \the [src]."))
 
-	if(!do_after(vandal, max(20, length(message)), src, DO_PUBLIC_UNIQUE))
+	if (!do_after(vandal, max(20, length(message)), src, DO_PUBLIC_UNIQUE))
 		return FALSE
 
 	vandal.visible_message(SPAN_DANGER("\The [vandal] carves some graffiti into \the [src]."))
@@ -338,7 +338,7 @@ var/global/const/enterloopsanity = 100
 	graffiti.author = vandal.ckey
 	vandal.update_personal_goal(/datum/goal/achievement/graffiti, TRUE)
 
-	if(lowertext(message) == "elbereth")
+	if (lowertext(message) == "elbereth")
 		to_chat(vandal, SPAN_NOTICE("You feel much safer."))
 
 	return TRUE
@@ -366,9 +366,9 @@ var/global/const/enterloopsanity = 100
  * Returns false if stepping into a tile would cause harm (e.g. open space while unable to fly, water tile while a slime, lava, etc).
  */
 /turf/proc/is_safe_to_enter(mob/living/L)
-	if(LAZYLEN(dangerous_objects))
+	if (LAZYLEN(dangerous_objects))
 		for(var/obj/O in dangerous_objects)
-			if(!O.is_safe_to_step(L))
+			if (!O.is_safe_to_step(L))
 				return FALSE
 	return TRUE
 
@@ -377,7 +377,7 @@ var/global/const/enterloopsanity = 100
  * This uses lazy list macros to reduce memory footprint since for 99% of turfs the list would've been empty anyway.
  */
 /turf/proc/register_dangerous_object(obj/O)
-	if(!istype(O))
+	if (!istype(O))
 		return FALSE
 	LAZYADD(dangerous_objects, O)
 
@@ -385,7 +385,7 @@ var/global/const/enterloopsanity = 100
  * Similar to `register_dangerous_object()`, for when the dangerous object stops being dangerous/gets deleted/moved/etc.
  */
 /turf/proc/unregister_dangerous_object(obj/O)
-	if(!istype(O))
+	if (!istype(O))
 		return FALSE
 	LAZYREMOVE(dangerous_objects, O)
 	UNSETEMPTY(dangerous_objects) // This nulls the list var if it's empty.
@@ -421,7 +421,7 @@ var/global/const/enterloopsanity = 100
 /turf/Exited(atom/movable/AM, atom/newloc)
 	. = ..()
 	if (istype(AM))
-		if(AM.density)
+		if (AM.density)
 			has_dense_atom = null
 		if (AM.opacity)
 			has_opaque_atom = null

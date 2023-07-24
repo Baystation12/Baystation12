@@ -41,7 +41,7 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 /datum/proximity_trigger/New(holder, on_turf_entered, on_turfs_changed, range = 2, proximity_flags = 0, proc_owner)
 	..()
 
-	if(!ispath(turf_selection, /singleton/turf_selection))
+	if (!ispath(turf_selection, /singleton/turf_selection))
 		CRASH("Invalid turf selection type set: [turf_selection]")
 	turf_selection = GET_SINGLETON(turf_selection)
 
@@ -67,19 +67,19 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 	return length(turfs_in_range)
 
 /datum/proximity_trigger/proc/set_range(new_range)
-	if(range_ == new_range)
+	if (range_ == new_range)
 		return
 	range_ = new_range
-	if(is_active())
+	if (is_active())
 		register_turfs()
 
 /datum/proximity_trigger/proc/register_turfs()
-	if(ismovable(holder))
+	if (ismovable(holder))
 		GLOB.moved_event.register(holder, src, /datum/proximity_trigger/proc/on_holder_moved)
 	GLOB.dir_set_event.register(holder, src, /datum/proximity_trigger/proc/register_turfs) // Changing direction might alter the relevant turfs
 
 	var/list/new_turfs = acquire_relevant_turfs()
-	if(listequal(turfs_in_range, new_turfs))
+	if (listequal(turfs_in_range, new_turfs))
 		return
 
 	for(var/t in (turfs_in_range - new_turfs))
@@ -91,7 +91,7 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 	on_turf_visibility_changed()
 
 /datum/proximity_trigger/proc/unregister_turfs()
-	if(ismovable(holder))
+	if (ismovable(holder))
 		GLOB.moved_event.unregister(holder, src, /datum/proximity_trigger/proc/on_holder_moved)
 	GLOB.dir_set_event.unregister(holder, src, /datum/proximity_trigger/proc/register_turfs)
 
@@ -107,7 +107,7 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 
 /datum/proximity_trigger/proc/on_turf_visibility_changed()
 	var/list/new_seen_turfs_ = get_seen_turfs()
-	if(listequal(seen_turfs_, new_seen_turfs_))
+	if (listequal(seen_turfs_, new_seen_turfs_))
 		return
 
 	call(proc_owner, on_turfs_changed)(seen_turfs_.Copy(), new_seen_turfs_.Copy())
@@ -122,31 +122,31 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 /datum/proximity_trigger/proc/on_holder_moved(holder, old_loc, new_loc)
 	var/old_turf = get_turf(old_loc)
 	var/new_turf = get_turf(new_loc)
-	if(old_turf == new_turf)
+	if (old_turf == new_turf)
 		return
 	call(proc_owner, on_turf_entered)(holder)
 	register_turfs()
 
 /datum/proximity_trigger/proc/on_turf_entered(turf/T, atom/enterer)
-	if(enterer == holder) // We have an explicit call for holder, in case it moved somewhere we're not listening to.
+	if (enterer == holder) // We have an explicit call for holder, in case it moved somewhere we're not listening to.
 		return
-	if(enterer.opacity)
+	if (enterer.opacity)
 		on_turf_visibility_changed()
 	call(proc_owner, on_turf_entered)(enterer)
 
 /datum/proximity_trigger/proc/get_seen_turfs()
 	. = list()
 	var/turf/center = get_turf(holder)
-	if(!center)
+	if (!center)
 		return
 
 	for(var/T in dview(range_, center))
-		if(T in turfs_in_range)
+		if (T in turfs_in_range)
 			. += T
 
 /datum/proximity_trigger/proc/acquire_relevant_turfs()
 	. = turf_selection.get_turfs(holder, range_)
-	if(proximity_flags & PROXIMITY_EXCLUDE_HOLDER_TURF)
+	if (proximity_flags & PROXIMITY_EXCLUDE_HOLDER_TURF)
 		. -= get_turf(holder)
 
 

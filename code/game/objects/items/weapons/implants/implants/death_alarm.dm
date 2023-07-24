@@ -24,23 +24,23 @@
 	if (!implanted) return
 	var/mob/M = imp_in
 
-	if(isnull(M)) // If the mob got gibbed
+	if (isnull(M)) // If the mob got gibbed
 		activate(null)
-	else if(M.stat == DEAD)
+	else if (M.stat == DEAD)
 		activate("death")
 
 /obj/item/implant/death_alarm/activate(cause = "emp")
-	if(malfunction) return
+	if (malfunction) return
 	var/mob/M = imp_in
 	var/area/t = get_area(M)
 	var/location = t.name
 	if (cause == "emp" && prob(50))
 		location =  pick(teleportlocs)
-	if(!t.requires_power) // We assume areas that don't use power are some sort of special zones
+	if (!t.requires_power) // We assume areas that don't use power are some sort of special zones
 		var/area/default = world.area
 		location = initial(default.name)
 	var/death_message = "[mobname] has died in [location]!"
-	if(!cause)
+	if (!cause)
 		death_message = "[mobname] has died-zzzzt in-in-in..."
 	STOP_PROCESSING(SSobj, src)
 
@@ -49,12 +49,12 @@
 
 /obj/item/implant/death_alarm/disable()
 	. = ..()
-	if(.)
+	if (.)
 		STOP_PROCESSING(SSobj, src)
 
 /obj/item/implant/death_alarm/restore()
 	. = ..()
-	if(.)
+	if (.)
 		START_PROCESSING(SSobj, src)
 
 /obj/item/implant/death_alarm/meltdown()

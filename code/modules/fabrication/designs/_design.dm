@@ -15,21 +15,20 @@
 // Populate name and resources from the product type.
 /datum/fabricator_recipe/New()
 	..()
-	if(!path)
+	if (!path)
 		return
-	if(!name)
+	if (!name)
 		var/obj/O = path
 		name = initial(O.name)
-	if(!resources)
+	if (!resources)
 		resources = list()
 	var/obj/item/I = new path
-	if(length(I.matter))
+	if (length(I.matter))
 		for(var/material in I.matter)
 			var/material/M = SSmaterials.get_material_by_name(material)
-			if(istype(M) && !ignore_materials[M.type])
+			if (istype(M) && !ignore_materials[M.type])
 				resources[M.type] = I.matter[material] * FABRICATOR_EXTRA_COST_FACTOR
-	if(I.reagents && length(I.reagents.reagent_list))
+	if (I.reagents && length(I.reagents.reagent_list))
 		for(var/datum/reagent/R in I.reagents.reagent_list)
 			resources[R.type] = R.volume * FABRICATOR_EXTRA_COST_FACTOR
 	qdel(I)
-

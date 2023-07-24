@@ -13,7 +13,7 @@
 	compatible_targets = list(/mob/living/carbon/human)
 
 /spell/hand/burning_grip/valid_target(mob/living/L, mob/user)
-	if(!..())
+	if (!..())
 		return 0
 	if (L.HandsEmpty())
 		return 0
@@ -21,9 +21,9 @@
 
 /spell/hand/burning_grip/cast_hand(mob/living/carbon/human/H, mob/user)
 	var/list/targets = list()
-	if(H.l_hand)
+	if (H.l_hand)
 		targets += BP_L_HAND
-	if(H.r_hand)
+	if (H.r_hand)
 		targets += BP_R_HAND
 
 	var/obj/O = new /obj/effect/temporary(get_turf(H),3, 'icons/effects/effects.dmi', "fire_goon")
@@ -32,7 +32,7 @@
 	for(var/organ in targets)
 		var/obj/item/organ/external/E = H.get_organ(organ)
 		E.take_external_damage(burn=10, used_weapon = "hot iron")
-		if(E.can_feel_pain())
+		if (E.can_feel_pain())
 			H.grasp_damage_disarm(E)
 		else
 			E.take_external_damage(burn=6, used_weapon = "hot iron")

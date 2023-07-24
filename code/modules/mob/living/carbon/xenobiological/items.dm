@@ -14,11 +14,11 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/slime_extract/attackby(obj/item/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/slimesteroid2))
-		if(enhanced == 1)
+	if (istype(O, /obj/item/slimesteroid2))
+		if (enhanced == 1)
 			to_chat(user, SPAN_WARNING(" This extract has already been enhanced!"))
 			return ..()
-		if(Uses == 0)
+		if (Uses == 0)
 			to_chat(user, SPAN_WARNING(" You can't enhance a used extract!"))
 			return ..()
 		to_chat(user, "You apply the enhancer. It now has triple the amount of uses.")
@@ -133,16 +133,16 @@
 	icon_state = "Pinkpotion"
 
 /obj/item/slimepotion/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
-	if(!istype(M, /mob/living/carbon/slime))//If target is not a slime.
+	if (!istype(M, /mob/living/carbon/slime))//If target is not a slime.
 		to_chat(user, SPAN_WARNING(" The potion only works on baby slimes!"))
 		return ..()
-	if(M.is_adult) //Can't tame adults
+	if (M.is_adult) //Can't tame adults
 		to_chat(user, SPAN_WARNING(" Only baby slimes can be tamed!"))
 		return..()
-	if(M.stat)
+	if (M.stat)
 		to_chat(user, SPAN_WARNING(" The slime is dead!"))
 		return..()
-	if(M.mind)
+	if (M.mind)
 		to_chat(user, SPAN_WARNING(" The slime resists!"))
 		return ..()
 	var/mob/living/simple_animal/slime/pet = new /mob/living/simple_animal/slime(M.loc)
@@ -167,13 +167,13 @@
 	icon_state = "LPinkpotion"
 
 /obj/item/slimepotion2/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
-	if(!istype(M, /mob/living/carbon/slime))
+	if (!istype(M, /mob/living/carbon/slime))
 		to_chat(user, SPAN_WARNING(" The potion only works on slimes!"))
 		return ..()
-	if(M.stat)
+	if (M.stat)
 		to_chat(user, SPAN_WARNING(" The slime is dead!"))
 		return..()
-	if(M.mind)
+	if (M.mind)
 		to_chat(user, SPAN_WARNING(" The slime resists!"))
 		return ..()
 	var/mob/living/simple_animal/adultslime/pet = new /mob/living/simple_animal/adultslime(M.loc)
@@ -199,16 +199,16 @@
 	icon_state = "Greenpotion"
 
 /obj/item/slimesteroid/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
-	if(!istype(M, /mob/living/carbon/slime))//If target is not a slime.
+	if (!istype(M, /mob/living/carbon/slime))//If target is not a slime.
 		to_chat(user, SPAN_WARNING(" The steroid only works on baby slimes!"))
 		return ..()
-	if(M.is_adult) //Can't tame adults
+	if (M.is_adult) //Can't tame adults
 		to_chat(user, SPAN_WARNING(" Only baby slimes can use the steroid!"))
 		return..()
-	if(M.stat)
+	if (M.stat)
 		to_chat(user, SPAN_WARNING(" The slime is dead!"))
 		return..()
-	if(M.cores == 3)
+	if (M.cores == 3)
 		to_chat(user, SPAN_WARNING(" The slime already has the maximum amount of extract!"))
 		return..()
 
@@ -223,12 +223,12 @@
 	icon_state = "Ceruleanpotion"
 
 /obj/item/slimesteroid2/afterattack(obj/target, mob/user , flag)
-	if(istype(target, /obj/item/slime_extract))
+	if (istype(target, /obj/item/slime_extract))
 		var/obj/item/slime_extract/extract = target
-		if(extract.enhanced == 1)
+		if (extract.enhanced == 1)
 			to_chat(user, SPAN_WARNING(" This extract has already been enhanced!"))
 			return ..()
-		if(extract.Uses == 0)
+		if (extract.Uses == 0)
 			to_chat(user, SPAN_WARNING(" You can't enhance a used extract!"))
 			return ..()
 		to_chat(user, "You apply the enhancer. It now has triple the amount of uses.")
@@ -244,16 +244,16 @@
 	icon_state= "Goldpotion"
 
 /obj/item/slimepotion3/attack(mob/living/carbon/slime/M, mob/user)
-	if(!istype(M)) //If target is not a slime.
+	if (!istype(M)) //If target is not a slime.
 		to_chat(user, SPAN_WARNING("\The [src] only works on slimes!"))
 		return..()
-	if(M.is_adult) //Can't revive adults
+	if (M.is_adult) //Can't revive adults
 		to_chat(user, SPAN_WARNING("Only baby slimes can use \the [src]!"))
 		return FALSE
-	if(M.cores < 1)
+	if (M.cores < 1)
 		to_chat(user, SPAN_WARNING("\The [M] has no cores!"))
 		return FALSE
-	if(M.stat== CONSCIOUS)//need to change this to living?
+	if (M.stat== CONSCIOUS)//need to change this to living?
 		to_chat(user, SPAN_WARNING("\The [M] is already alive!"))
 		return FALSE
 	user.visible_message(
@@ -280,11 +280,11 @@
 /obj/effect/golemrune/Process()
 	var/mob/observer/ghost/ghost
 	for(var/mob/observer/ghost/O in src.loc)
-		if(!O.client)	continue
-		if(O.mind && O.mind.current && O.mind.current.stat != DEAD)	continue
+		if (!O.client)	continue
+		if (O.mind && O.mind.current && O.mind.current.stat != DEAD)	continue
 		ghost = O
 		break
-	if(ghost)
+	if (ghost)
 		icon_state = "golem2"
 	else
 		icon_state = "golem"
@@ -292,13 +292,13 @@
 /obj/effect/golemrune/attack_hand(mob/living/user as mob)
 	var/mob/observer/ghost/ghost
 	for(var/mob/observer/ghost/O in src.loc)
-		if(!O.client)
+		if (!O.client)
 			continue
-		if(O.mind && O.mind.current && O.mind.current.stat != DEAD)
+		if (O.mind && O.mind.current && O.mind.current.stat != DEAD)
 			continue
 		ghost = O
 		break
-	if(!ghost)
+	if (!ghost)
 		to_chat(user, SPAN_WARNING("The rune fizzles uselessly."))
 		return
 	visible_message(SPAN_WARNING("A craggy humanoid figure coalesces into being!"))
@@ -322,7 +322,7 @@
 
 /obj/effect/golemrune/proc/announce_to_ghosts()
 	for(var/mob/observer/ghost/G in GLOB.player_list)
-		if(G.client)
+		if (G.client)
 			var/area/A = get_area(src)
-			if(A)
+			if (A)
 				to_chat(G, "Golem rune created in [A.name].")

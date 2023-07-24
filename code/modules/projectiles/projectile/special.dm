@@ -41,20 +41,20 @@
 	nodamage = TRUE
 
 /obj/item/projectile/meteor/Bump(atom/A as mob|obj|turf|area, forced=0)
-	if(A == firer)
+	if (A == firer)
 		forceMove(A.loc)
 		return
 
 	sleep(-1) //Might not be important enough for a sleep(-1) but the sleep/spawn itself is necessary thanks to explosions and metoerhits
 
-	if(src)//Do not add to this if() statement, otherwise the meteor won't delete them
-		if(A)
+	if (src)//Do not add to this if () statement, otherwise the meteor won't delete them
+		if (A)
 
 			A.ex_act(EX_ACT_HEAVY)
 			playsound(src.loc, 'sound/effects/meteorimpact.ogg', 40, 1)
 
 			for(var/mob/M in range(10, src))
-				if(!M.stat && !istype(M, /mob/living/silicon/ai))\
+				if (!M.stat && !istype(M, /mob/living/silicon/ai))\
 					shake_camera(M, 3, 1)
 			qdel(src)
 			return 1
@@ -71,16 +71,16 @@
 
 /obj/item/projectile/energy/floramut/on_hit(atom/target, blocked = 0)
 	var/mob/living/M = target
-	if(ishuman(target))
+	if (ishuman(target))
 		var/mob/living/carbon/human/H = M
-		if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
-			if(prob(15))
+		if ((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
+			if (prob(15))
 				H.apply_damage((rand(30,80)), DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 				H.Weaken(5)
 				for (var/mob/V in viewers(src))
 					V.show_message(SPAN_WARNING("[M] writhes in pain as \his vacuoles boil."), 3, SPAN_WARNING("You hear the crunching of leaves."), 2)
-			if(prob(35))
-				if(prob(80))
+			if (prob(35))
+				if (prob(80))
 					randmutb(M)
 					domutcheck(M,null)
 				else
@@ -89,7 +89,7 @@
 			else
 				M.adjustFireLoss(rand(5,15))
 				M.show_message(SPAN_DANGER("The radiation beam singes you!"))
-	else if(istype(target, /mob/living/carbon))
+	else if (istype(target, /mob/living/carbon))
 		M.show_message(SPAN_NOTICE("The radiation beam dissipates harmlessly through your body."))
 	else
 		return 1
@@ -113,9 +113,9 @@
 
 /obj/item/projectile/energy/florayield/on_hit(atom/target, blocked = 0)
 	var/mob/M = target
-	if(ishuman(target)) //These rays make plantmen fat.
+	if (ishuman(target)) //These rays make plantmen fat.
 		var/mob/living/carbon/human/H = M
-		if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
+		if ((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
 			H.adjust_nutrition(30)
 	else if (istype(target, /mob/living/carbon))
 		M.show_message(SPAN_NOTICE("The radiation beam dissipates harmlessly through your body."))
@@ -127,7 +127,7 @@
 	name = "flayer ray"
 
 /obj/item/projectile/beam/mindflayer/on_hit(atom/target, blocked = 0)
-	if(ishuman(target))
+	if (ishuman(target))
 		var/mob/living/carbon/human/M = target
 		M.confused += rand(5,8)
 
@@ -196,7 +196,7 @@
 /obj/item/projectile/venom/on_hit(atom/target, blocked, def_zone)
 	. = ..()
 	var/mob/living/L = target
-	if(L.reagents)
+	if (L.reagents)
 		L.reagents.add_reagent(/datum/reagent/toxin/venom, 5)
 
 /obj/item/missile
@@ -206,7 +206,7 @@
 	throwforce = 15
 
 /obj/item/missile/throw_impact(atom/hit_atom)
-	if(primed)
+	if (primed)
 		explosion(hit_atom, 3, EX_ACT_HEAVY)
 		qdel(src)
 	else
@@ -223,7 +223,7 @@
 
 /obj/item/projectile/hotgas/on_hit(atom/target, blocked, def_zone)
 	. = ..()
-	if(isliving(target))
+	if (isliving(target))
 		var/mob/living/L = target
 		to_chat(target, SPAN_WARNING("You feel a wave of heat wash over you!"))
 		L.adjust_fire_stacks(rand(5,8))

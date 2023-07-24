@@ -130,7 +130,7 @@ var/global/list/string_slot_flags = list(
 
 	for (var/language_name in all_languages)
 		var/datum/language/L = all_languages[language_name]
-		if(!(L.flags & NONGLOBAL))
+		if (!(L.flags & NONGLOBAL))
 			language_keys[lowertext(L.key)] = L
 
 	var/rkey = 0
@@ -140,20 +140,20 @@ var/global/list/string_slot_flags = list(
 		rkey++
 
 		var/datum/species/S = T
-		if(!initial(S.name))
+		if (!initial(S.name))
 			continue
 
 		S = new T
 		S.race_key = rkey //Used in mob icon caching.
 		all_species[S.name] = S
-		if(!(S.spawn_flags & SPECIES_IS_RESTRICTED))
+		if (!(S.spawn_flags & SPECIES_IS_RESTRICTED))
 			playable_species += S.name
 
 	//Grabs
 	paths = typesof(/datum/grab) - /datum/grab
 	for(var/T in paths)
 		var/datum/grab/G = new T
-		if(G.state_name)
+		if (G.state_name)
 			all_grabstates[G.state_name] = G
 
 	paths = typesof(/obj/item/grab) - /obj/item/grab
@@ -175,7 +175,7 @@ var/global/list/paramslist_cache = list()
 
 /proc/cached_params_decode(params_data, decode_proc)
 	. = paramslist_cache[params_data]
-	if(!.)
+	if (!.)
 		. = call(decode_proc)(params_data)
 		paramslist_cache[params_data] = .
 

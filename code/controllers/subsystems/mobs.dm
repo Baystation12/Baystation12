@@ -53,7 +53,7 @@ else {\
 
 
 #define STOP_PROCESSING_MOB(MOB) \
-if(MOB.is_processing == SSmobs) {\
+if (MOB.is_processing == SSmobs) {\
 	MOB.is_processing = null;\
 	SSmobs.mob_list -= MOB;\
 	SSmobs.queue -= MOB;\

@@ -26,11 +26,11 @@
 
 /obj/structure/reagent_dispensers/examine(mob/user, distance)
 	. = ..()
-	if(distance > 2)
+	if (distance > 2)
 		return
 
 	to_chat(user, SPAN_NOTICE("It contains:"))
-	if(reagents && length(reagents.reagent_list))
+	if (reagents && length(reagents.reagent_list))
 		for(var/datum/reagent/R in reagents.reagent_list)
 			to_chat(user, SPAN_NOTICE("[R.volume] units of [R.name]"))
 	else
@@ -40,11 +40,11 @@
 	set name = "Set transfer amount"
 	set category = "Object"
 	set src in view(1)
-	if(!CanPhysicallyInteract(usr))
+	if (!CanPhysicallyInteract(usr))
 		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!'"))
 		return
 	var/N = input("Amount per transfer from this:","[src]") as null|anything in cached_number_list_decode(possible_transfer_amounts)
-	if(!CanPhysicallyInteract(usr))  // because input takes time and the situation can change
+	if (!CanPhysicallyInteract(usr))  // because input takes time and the situation can change
 		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!'"))
 		return
 	if (N)
@@ -52,15 +52,15 @@
 
 /obj/structure/reagent_dispensers/ex_act(severity)
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			qdel(src)
 			return
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			if (prob(50))
 				new /obj/effect/effect/water(src.loc)
 				qdel(src)
 				return
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			if (prob(5))
 				new /obj/effect/effect/water(src.loc)
 				qdel(src)
@@ -69,7 +69,7 @@
 	return
 
 /obj/structure/reagent_dispensers/AltClick(mob/user)
-	if(possible_transfer_amounts)
+	if (possible_transfer_amounts)
 		set_amount_per_transfer_from_this()
 		return TRUE
 	return ..()
@@ -90,30 +90,30 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 
 /obj/structure/reagent_dispensers/watertank/proc/drain_water()
-	if(reagents.total_volume <= 0)
+	if (reagents.total_volume <= 0)
 		return
 
 	// To prevent it from draining while in a container.
-	if(!isturf(src.loc))
+	if (!isturf(src.loc))
 		return
 
 	// Check for depth first, and pass if the water's too high. A four foot high water tank
 	// cannot jettison water above the level of a grown adult's head!
 	var/turf/T = get_turf(src)
 
-	if(!T || T.get_fluid_depth() > fill_level)
+	if (!T || T.get_fluid_depth() > fill_level)
 		return
 
 	// For now, this cheats and only checks/leaks water, pending additions to the fluid system.
 	var/W = reagents.remove_reagent(/datum/reagent/water, amount_per_transfer_from_this * 5)
-	if(W > 0)
+	if (W > 0)
 		// Artificially increased flow - a 1:1 rate doesn't result in very much water at all.
 		T.add_fluid(W * 100, /datum/reagent/water)
 
 /obj/structure/reagent_dispensers/watertank/examine(mob/user)
 	. = ..()
 
-	if(modded)
+	if (modded)
 		to_chat(user, SPAN_WARNING("Someone has wrenched open its tap - it's spilling everywhere!"))
 
 
@@ -151,7 +151,7 @@
 
 
 /obj/structure/reagent_dispensers/watertank/Process()
-	if(modded)
+	if (modded)
 		drain_water()
 
 /obj/structure/reagent_dispensers/watertank/Destroy()
@@ -175,13 +175,13 @@
 
 	if (modded)
 		to_chat(user, SPAN_WARNING("The faucet is wrenched open, leaking fuel!"))
-	if(rig)
+	if (rig)
 		to_chat(user, SPAN_NOTICE("There is some kind of device rigged to the tank."))
 
 /obj/structure/reagent_dispensers/fueltank/attack_hand()
 	if (rig)
 		usr.visible_message(SPAN_NOTICE("\The [usr] begins to detach \the [rig] from \the [src]."), SPAN_NOTICE("You begin to detach \the [rig] from \the [src]."))
-		if(do_after(usr, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if (do_after(usr, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			usr.visible_message(SPAN_NOTICE("\The [usr] detaches \the [rig] from \the [src]."), SPAN_NOTICE("You detach [rig] from \the [src]"))
 			rig.dropInto(usr.loc)
 			rig = null
@@ -270,16 +270,16 @@
 
 
 /obj/structure/reagent_dispensers/fueltank/bullet_act(obj/item/projectile/Proj)
-	if(Proj.get_structure_damage())
-		if(istype(Proj.firer))
+	if (Proj.get_structure_damage())
+		if (istype(Proj.firer))
 			var/turf/turf = get_turf(src)
-			if(turf)
+			if (turf)
 				var/area/area = turf.loc || "*unknown area*"
 				log_and_message_admins("[key_name_admin(Proj.firer)] shot a fuel tank in \the [area].")
 			else
 				log_and_message_admins("shot a fuel tank outside the world.")
 
-		if(!istype(Proj ,/obj/item/projectile/beam/lastertag) && !istype(Proj ,/obj/item/projectile/beam/practice) )
+		if (!istype(Proj ,/obj/item/projectile/beam/lastertag) && !istype(Proj ,/obj/item/projectile/beam/practice) )
 			explode()
 
 /obj/structure/reagent_dispensers/fueltank/proc/explode()
@@ -332,7 +332,7 @@
 	var/cup_type = /obj/item/reagent_containers/food/drinks/sillycup
 
 /obj/structure/reagent_dispensers/water_cooler/attack_hand(mob/user)
-	if(cups > 0)
+	if (cups > 0)
 		var/visible_messages = DispenserMessages(user)
 		visible_message(visible_messages[1], visible_messages[2])
 		var/cup = new cup_type(loc)

@@ -35,58 +35,58 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	. = ..()
 
 	for(var/I in extras)
-		if(istype(I, /obj/item/glass_extra))
+		if (istype(I, /obj/item/glass_extra))
 			to_chat(M, "There is \a [I] in \the [src].")
-		else if(istype(I, /obj/item/reagent_containers/food/snacks/fruit_slice))
+		else if (istype(I, /obj/item/reagent_containers/food/snacks/fruit_slice))
 			to_chat(M, "There is \a [I] on the rim.")
 		else
 			to_chat(M, "There is \a [I] somewhere on the glass. Somehow.")
 
-	if(has_ice())
+	if (has_ice())
 		to_chat(M, "There is some ice floating in the drink.")
 
-	if(has_fizz())
+	if (has_fizz())
 		to_chat(M, "It is fizzing slightly.")
 
 /obj/item/reagent_containers/food/drinks/glass2/proc/has_ice()
-	if(length(reagents?.reagent_list))
+	if (length(reagents?.reagent_list))
 		var/datum/reagent/R = reagents.get_master_reagent()
-		if(!((R.type == /datum/reagent/drink/ice) || ("ice" in R.glass_special))) // if it's not a cup of ice, and it's not already supposed to have ice in, see if the bartender's put ice in it
-			if(reagents.has_reagent(/datum/reagent/drink/ice, reagents.total_volume / 10)) // 10% ice by volume
+		if (!((R.type == /datum/reagent/drink/ice) || ("ice" in R.glass_special))) // if it's not a cup of ice, and it's not already supposed to have ice in, see if the bartender's put ice in it
+			if (reagents.has_reagent(/datum/reagent/drink/ice, reagents.total_volume / 10)) // 10% ice by volume
 				return 1
 
 	return 0
 
 /obj/item/reagent_containers/food/drinks/glass2/proc/has_fizz()
-	if(length(reagents?.reagent_list))
+	if (length(reagents?.reagent_list))
 		var/datum/reagent/R = reagents.get_master_reagent()
-		if(("fizz" in R.glass_special))
+		if (("fizz" in R.glass_special))
 			return 1
 		var/totalfizzy = 0
 		for(var/datum/reagent/re in reagents.reagent_list)
-			if("fizz" in re.glass_special)
+			if ("fizz" in re.glass_special)
 				totalfizzy += re.volume
-		if(totalfizzy >= reagents.total_volume / 5) // 20% fizzy by volume
+		if (totalfizzy >= reagents.total_volume / 5) // 20% fizzy by volume
 			return 1
 	return 0
 
 /obj/item/reagent_containers/food/drinks/glass2/proc/has_vapor()
-	if(length(reagents?.reagent_list))
-		if(temperature > T0C + 40)
+	if (length(reagents?.reagent_list))
+		if (temperature > T0C + 40)
 			return 1
 		var/datum/reagent/R = reagents.get_master_reagent()
-		if(!("vapor" in R.glass_special))
+		if (!("vapor" in R.glass_special))
 			var/totalvape = 0
 			for(var/datum/reagent/re in reagents.reagent_list)
-				if("vapor" in re.glass_special)
+				if ("vapor" in re.glass_special)
 					totalvape += re.volume
-			if(totalvape >= volume * 0.6) // 60% vapor by container volume
+			if (totalvape >= volume * 0.6) // 60% vapor by container volume
 				return 1
 	return 0
 
 /obj/item/reagent_containers/food/drinks/glass2/Initialize()
 	. = ..()
-	if(!icon_state)
+	if (!icon_state)
 		icon_state = base_icon
 
 /obj/item/reagent_containers/food/drinks/glass2/on_reagent_change()
@@ -94,10 +94,10 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	update_icon()
 
 /obj/item/reagent_containers/food/drinks/glass2/throw_impact(atom/hit_atom)
-	if(QDELETED(src))
+	if (QDELETED(src))
 		return
-	if(prob(80))
-		if(length(reagents?.reagent_list))
+	if (prob(80))
+		if (length(reagents?.reagent_list))
 			visible_message(
 				SPAN_DANGER("\The [src] shatters from the impact and spills all its contents!"),
 				SPAN_DANGER("You hear the sound of glass shattering!")
@@ -126,18 +126,18 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 		playsound(src.loc, "sound/effects/Glasshit.ogg", 50)
 
 /obj/item/reagent_containers/food/drinks/glass2/proc/can_add_extra(obj/item/glass_extra/GE)
-	if(!("[base_icon]_[GE.glass_addition]left" in icon_states(icon)))
+	if (!("[base_icon]_[GE.glass_addition]left" in icon_states(icon)))
 		return 0
-	if(!("[base_icon]_[GE.glass_addition]right" in icon_states(icon)))
+	if (!("[base_icon]_[GE.glass_addition]right" in icon_states(icon)))
 		return 0
 
 	return 1
 
 /obj/item/reagent_containers/food/drinks/glass2/proc/get_filling_overlay(amount, overlay)
 	var/image/I = new()
-	if(!filling_icons_cache["[base_icon][amount][overlay]"])
+	if (!filling_icons_cache["[base_icon][amount][overlay]"])
 		var/icon/base = new/icon(icon, "[base_icon][amount]")
-		if(overlay)
+		if (overlay)
 			var/icon/extra = new/icon('icons/obj/drink_glasses/extras.dmi', overlay)
 			base.Blend(extra, ICON_MULTIPLY)
 		filling_icons_cache["[base_icon][amount][overlay]"] = image(base)
@@ -158,26 +158,26 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 
 		var/amnt = get_filling_state()
 
-		if(has_ice())
+		if (has_ice())
 			over_liquid |= image(icon, src, "[base_icon][amnt]_ice")
 
-		if(has_fizz())
+		if (has_fizz())
 			over_liquid |= get_filling_overlay(amnt, "fizz")
 
-		if(has_vapor())
+		if (has_vapor())
 			over_liquid |= image(icon, src, "[base_icon]_vapor")
 
 		for(var/S in R.glass_special)
-			if("[base_icon]_[S]" in icon_states(icon))
+			if ("[base_icon]_[S]" in icon_states(icon))
 				under_liquid |= image(icon, src, "[base_icon]_[S]")
-			else if("[base_icon][amnt]_[S]" in icon_states(icon))
+			else if ("[base_icon][amnt]_[S]" in icon_states(icon))
 				over_liquid |= image(icon, src, "[base_icon][amnt]_[S]")
 
 		underlays += under_liquid
 
 		var/image/filling = get_filling_overlay(amnt, R.glass_icon)
 		filling.color = reagents.get_color()
-		if(filling_overlayed)
+		if (filling_overlayed)
 			overlays += filling
 		else
 			underlays += filling
@@ -190,12 +190,12 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 
 	var/side = "left"
 	for(var/item in extras)
-		if(istype(item, /obj/item/glass_extra))
+		if (istype(item, /obj/item/glass_extra))
 			var/obj/item/glass_extra/GE = item
 			var/image/I = image(icon, src, "[base_icon]_[GE.glass_addition][side]")
 			I.color = GE.color
 			underlays += I
-		else if(rim_pos && istype(item, /obj/item/reagent_containers/food/snacks/fruit_slice))
+		else if (rim_pos && istype(item, /obj/item/reagent_containers/food/snacks/fruit_slice))
 			var/obj/FS = item
 			var/image/I = image(FS)
 
@@ -213,11 +213,11 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	splashtarget(target, user)
 
 /obj/item/reagent_containers/food/drinks/glass2/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/material/kitchen/utensil/spoon))
-		if(user.a_intent == I_HURT)
+	if (istype(W, /obj/item/material/kitchen/utensil/spoon))
+		if (user.a_intent == I_HURT)
 			user.visible_message(SPAN_WARNING("[user] bashes \the [src] with a spoon, shattering it to pieces! What a rube."))
 			playsound(src, "shatter", 30, 1)
-			if(reagents)
+			if (reagents)
 				user.visible_message(SPAN_NOTICE("The contents of \the [src] splash all over [user]!"))
 				reagents.splash(user, reagents.total_volume)
 			qdel(src)
@@ -229,5 +229,5 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 /obj/item/reagent_containers/food/drinks/glass2/ProcessAtomTemperature()
 	var/old_temp = temperature
 	. = ..()
-	if(old_temp != temperature)
+	if (old_temp != temperature)
 		update_icon()

@@ -54,7 +54,7 @@ code\game\dna\genes\goon_powers.dm
 	cast_sound = 'sound/magic/blind.ogg'
 
 /spell/targeted/genetic/blind/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 	duration += 100
 

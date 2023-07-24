@@ -107,7 +107,7 @@ Teleporter beacon, and its subtypes
 
 /mob/living/simple_animal/hostile/hivebot/tele/Life()
 	. = ..()
-	if(. && spawn_time && spawn_time <= world.time)
+	if (. && spawn_time && spawn_time <= world.time)
 		warpbots()
 
 /mob/living/simple_animal/hostile/hivebot/tele/strong
@@ -179,10 +179,10 @@ The megabot
 
 /mob/living/simple_animal/hostile/hivebot/mega/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return
 
-	if(time_last_used_ability < world.time)
+	if (time_last_used_ability < world.time)
 		switch_mode(ATTACK_MODE_ROCKET)
 
 /mob/living/simple_animal/hostile/hivebot/mega/emp_act(severity)
@@ -192,8 +192,8 @@ The megabot
 	deactivate()
 
 /mob/living/simple_animal/hostile/hivebot/mega/on_update_icon()
-	if(stat != DEAD)
-		if(deactivated)
+	if (stat != DEAD)
+		if (deactivated)
 			icon_state = "megabot_standby"
 			icon_living = "megabot_standby"
 			return
@@ -201,19 +201,19 @@ The megabot
 		overlays.Cut()
 		overlays += image(icon, "active_indicator")
 		switch(attack_mode)
-			if(ATTACK_MODE_MELEE)
+			if (ATTACK_MODE_MELEE)
 				overlays += image(icon, "melee")
-			if(ATTACK_MODE_LASER)
+			if (ATTACK_MODE_LASER)
 				overlays += image(icon, "laser")
-			if(ATTACK_MODE_ROCKET)
+			if (ATTACK_MODE_ROCKET)
 				overlays += image(icon, "rocket")
 
 /mob/living/simple_animal/hostile/hivebot/mega/proc/switch_mode(new_mode)
-	if(!new_mode || new_mode == attack_mode)
+	if (!new_mode || new_mode == attack_mode)
 		return
 
 	switch(new_mode)
-		if(ATTACK_MODE_MELEE)
+		if (ATTACK_MODE_MELEE)
 			attack_mode = ATTACK_MODE_MELEE
 			ranged = FALSE
 			projectilesound = null
@@ -221,7 +221,7 @@ The megabot
 			num_shots = 0
 			visible_message(SPAN_MFAUNA("\The [src]'s circular saw spins up!"))
 			deactivate()
-		if(ATTACK_MODE_LASER)
+		if (ATTACK_MODE_LASER)
 			attack_mode = ATTACK_MODE_LASER
 			ranged = TRUE
 			projectilesound = 'sound/weapons/Laser.ogg'
@@ -229,7 +229,7 @@ The megabot
 			num_shots = 12
 			fire_desc = "fires a laser"
 			visible_message(SPAN_MFAUNA("\The [src]'s laser cannon whines!"))
-		if(ATTACK_MODE_ROCKET)
+		if (ATTACK_MODE_ROCKET)
 			attack_mode = ATTACK_MODE_ROCKET
 			ranged = TRUE
 			projectilesound = 'sound/effects/Explosion1.ogg'
@@ -247,7 +247,7 @@ The megabot
 	visible_message(SPAN_MFAUNA("\The [src] clicks loudly as its lights fade and its motors grind to a halt!"))
 	update_icon()
 	var/datum/extension/armor/toggle/armor = get_extension(src, /datum/extension/armor)
-	if(armor)
+	if (armor)
 		armor.toggle(FALSE)
 	addtimer(new Callback(src, .proc/reactivate), 4 SECONDS)
 
@@ -256,13 +256,13 @@ The megabot
 	deactivated = FALSE
 	visible_message(SPAN_MFAUNA("\The [src] whirs back to life!"))
 	var/datum/extension/armor/toggle/armor = get_extension(src, /datum/extension/armor)
-	if(armor)
+	if (armor)
 		armor.toggle(TRUE)
 	update_icon()
 
 /mob/living/simple_animal/hostile/hivebot/mega/shoot_target(target_mob)
-	if(num_shots <= 0)
-		if(attack_mode == ATTACK_MODE_ROCKET)
+	if (num_shots <= 0)
+		if (attack_mode == ATTACK_MODE_ROCKET)
 			switch_mode(ATTACK_MODE_LASER)
 		else
 			switch_mode(ATTACK_MODE_MELEE)
@@ -286,7 +286,7 @@ The megabot
 	. = ..()
 
 	var/mob/living/simple_animal/hostile/hivebot/tele/T = holder
-	if(..() && !T.spawn_time)
+	if (..() && !T.spawn_time)
 		T.spawn_time = world.time + T.spawn_delay
 		T.visible_message(SPAN_DANGER("\The [src] turns on!"))
 		T.icon_state = "def_radar"

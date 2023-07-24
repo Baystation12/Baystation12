@@ -16,7 +16,7 @@ In short:
 /datum/universal_state/hell/OnShuttleCall(mob/user)
 	return 1
 	/*
-	if(user)
+	if (user)
 		to_chat(user, SPAN_CLASS("sinister", "All you hear on the frequency is static and panicked screaming. There will be no shuttle call today."))
 	return 0
 	*/
@@ -47,10 +47,10 @@ In short:
 
 /datum/universal_state/hell/proc/MiscSet()
 	for(var/turf/simulated/floor/T)
-		if(!T.holy && prob(1))
+		if (!T.holy && prob(1))
 			new /obj/effect/gateway/active/cult(T)
 
 /datum/universal_state/hell/proc/KillMobs()
 	for(var/mob/living/simple_animal/M in SSmobs.mob_list)
-		if(M && !M.client)
+		if (M && !M.client)
 			M.set_stat(DEAD)

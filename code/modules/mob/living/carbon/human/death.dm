@@ -1,7 +1,7 @@
 /mob/living/carbon/human/gib()
 	for(var/obj/item/organ/I in internal_organs)
 		I.removed()
-		if(!QDELETED(I) && isturf(loc))
+		if (!QDELETED(I) && isturf(loc))
 			I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
 
 	for(var/obj/item/organ/external/E in src.organs)
@@ -11,21 +11,21 @@
 
 	for(var/obj/item/I in src)
 		drop_from_inventory(I)
-		if(!QDELETED(I))
+		if (!QDELETED(I))
 			I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)), rand(1,3), round(30/I.w_class))
 
 	..(species.gibbed_anim)
 	gibs(loc, dna, null, species.get_flesh_colour(src), species.get_blood_colour(src))
 
 /mob/living/carbon/human/dust()
-	if(species)
+	if (species)
 		..(species.dusted_anim, species.remains_type)
 	else
 		..()
 
 /mob/living/carbon/human/death(gibbed,deathmessage="seizes up and falls limp...", show_dead_message = "You have died.")
 
-	if(stat == DEAD) return
+	if (stat == DEAD) return
 
 	SET_BIT(hud_updateflag, HEALTH_HUD)
 	SET_BIT(hud_updateflag, STATUS_HUD)
@@ -40,15 +40,15 @@
 	var/obj/item/organ/external/head = get_organ(BP_HEAD)
 	var/mob/living/simple_animal/borer/B
 
-	if(head)
+	if (head)
 		for(var/I in head.implants)
-			if(istype(I,/mob/living/simple_animal/borer))
+			if (istype(I,/mob/living/simple_animal/borer))
 				B = I
-		if(B)
-			if(!B.ckey && ckey && B.controlling)
+		if (B)
+			if (!B.ckey && ckey && B.controlling)
 				B.ckey = ckey
 				B.controlling = 0
-			if(B.host_brain.ckey)
+			if (B.host_brain.ckey)
 				ckey = B.host_brain.ckey
 				B.host_brain.ckey = null
 				B.host_brain.SetName("host brain")
@@ -58,26 +58,26 @@
 
 	callHook("death", list(src, gibbed))
 
-	if(SSticker.mode)
+	if (SSticker.mode)
 		SSticker.mode.check_win()
 
-	if(wearing_rig)
+	if (wearing_rig)
 		wearing_rig.notify_ai(SPAN_DANGER("Warning: user death event. Mobility control passed to integrated intelligence system."))
 
 	. = ..(gibbed,"no message")
-	if(!gibbed)
+	if (!gibbed)
 		handle_organs()
-		if(species.death_sound)
+		if (species.death_sound)
 			playsound(loc, species.death_sound, 80, 1, 1)
 	handle_hud_list()
 
 /mob/living/carbon/human/proc/ChangeToHusk()
-	if(MUTATION_HUSK in mutations)	return
+	if (MUTATION_HUSK in mutations)	return
 
-	if(species.name in HUMAN_SPECIES) //Only change hair, and not say, tentacles
-		if(facial_hair_style)
+	if (species.name in HUMAN_SPECIES) //Only change hair, and not say, tentacles
+		if (facial_hair_style)
 			facial_hair_style = "Shaved"		//we only change the icon_state of the hair datum, so it doesn't mess up their UI/UE
-		if(head_hair_style)
+		if (head_hair_style)
 			head_hair_style = "Bald"
 		update_hair(0)
 
@@ -93,11 +93,11 @@
 	return
 
 /mob/living/carbon/human/proc/ChangeToSkeleton()
-	if(MUTATION_SKELETON in src.mutations)	return
+	if (MUTATION_SKELETON in src.mutations)	return
 
-	if(facial_hair_style)
+	if (facial_hair_style)
 		facial_hair_style = "Shaved"
-	if(head_hair_style)
+	if (head_hair_style)
 		head_hair_style = "Bald"
 	update_hair(0)
 

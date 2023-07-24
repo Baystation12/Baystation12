@@ -1,9 +1,9 @@
 /mob/living/silicon/ai/death(gibbed, deathmessage, show_dead_message)
 
-	if(stat == DEAD)
+	if (stat == DEAD)
 		return
 
-	if(src.eyeobj)
+	if (src.eyeobj)
 		src.eyeobj.setLoc(get_turf(src))
 
 

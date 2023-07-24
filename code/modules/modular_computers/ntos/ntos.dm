@@ -40,21 +40,21 @@
 	. = ..()
 
 /datum/extension/interactive/ntos/Process()
-	if(on && !host_status())
+	if (on && !host_status())
 		system_shutdown()
-	if(!on)
+	if (!on)
 		return
 
 	// Clear the cached values
 	ntnet_status = null
 	network_tag = null
 
-	if(updating)
+	if (updating)
 		process_updates()
 		return
 
 	for(var/datum/computer_file/program/P in running_programs)
-		if((P.requires_ntnet && !get_ntnet_status()) || (P.requires_ntnet_feature && !get_ntnet_capability(P.requires_ntnet_feature)))
+		if ((P.requires_ntnet && !get_ntnet_status()) || (P.requires_ntnet_feature && !get_ntnet_capability(P.requires_ntnet_feature)))
 			P.event_networkfailure(P != active_program)
 		else
 			P.process_tick()
@@ -70,23 +70,23 @@
 		kill_program(P, TRUE)
 
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
-	if(network_card)
+	if (network_card)
 		ntnet_global.unregister(network_card.identification_id)
 
 	on = FALSE
 	ntnet_status = null
 	network_tag = null
 
-	if(updating)
+	if (updating)
 		updating = FALSE
 		updates = 0
 		update_progress = 0
 		var/obj/item/stock_parts/computer/hard_drive/hard_drive = get_component(PART_HDD)
-		if(hard_drive)
-			if(prob(10))
+		if (hard_drive)
+			if (prob(10))
 				hard_drive.visible_message(SPAN_WARNING("[src] emits some ominous clicks."))
 				hard_drive.set_damage_malfunction()
-			else if(prob(5))
+			else if (prob(5))
 				hard_drive.visible_message(SPAN_WARNING("[src] emits some ominous clicks."))
 				hard_drive.set_damage_failure()
 	update_host_icon()
@@ -96,11 +96,11 @@
 	on = TRUE
 
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
-	if(network_card)
+	if (network_card)
 		ntnet_global.register(network_card.identification_id, src)
 
 	var/datum/computer_file/data/autorun = get_file("autorun")
-	if(istype(autorun))
+	if (istype(autorun))
 		run_program(autorun.stored_data)
 
 	update_host_icon()
@@ -111,7 +111,7 @@
 
 /// Attempts to kill a program.
 /datum/extension/interactive/ntos/proc/kill_program_remote(datum/computer_file/program/P, forced = FALSE, mob/user = null)
-	if(!P)
+	if (!P)
 		return
 
 	if (!forced && GET_FLAGS(P.usage_flags, PROGRAM_NO_KILL))
@@ -120,9 +120,9 @@
 
 	P.on_shutdown(forced)
 	running_programs -= P
-	if(active_program == P)
+	if (active_program == P)
 		active_program = null
-		if(ismob(user))
+		if (ismob(user))
 			ui_interact(user) // Re-open the UI on this computer. It should show the main screen now.
 	update_host_icon()
 
@@ -130,7 +130,7 @@
 /datum/extension/interactive/ntos/proc/run_program(filename)
 	var/mob/user = usr
 	var/datum/computer_file/program/P = run_program_remote(filename, user, 1)
-	if(!istype(P))
+	if (!istype(P))
 		return
 
 	activate_program(P, user)
@@ -140,22 +140,22 @@
 /datum/extension/interactive/ntos/proc/run_program_remote(filename, mob/user = null, loud = 0)
 	var/datum/computer_file/program/P = get_file(filename)
 
-	if(!istype(P))
+	if (!istype(P))
 		loud && show_error(user, "I/O ERROR - Unable to run [filename]")
 		return
-	if(!P.is_supported_by_hardware(get_hardware_flag()))
+	if (!P.is_supported_by_hardware(get_hardware_flag()))
 		loud && show_error(user, "Hardware Error - Incompatible software")
 		return
-	if(P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature))
+	if (P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature))
 		loud && show_error(user, "Unable to establish a working network connection. Please try again later. If problem persists, please contact your system administrator.")
 		return
 
-	if(P in running_programs)
+	if (P in running_programs)
 		return P
-	if(length(running_programs) >= get_program_capacity())
+	if (length(running_programs) >= get_program_capacity())
 		loud && show_error(user, "Kernel Error - Insufficient CPU resources available to allocate.")
 		return
-	if(!P.can_run(user, loud))
+	if (!P.can_run(user, loud))
 		return
 
 	P.on_startup(user, src)
@@ -164,9 +164,9 @@
 
 /// Make a program the currently active one if it is running. Returns the program on success, otherwise null.
 /datum/extension/interactive/ntos/proc/activate_program(datum/computer_file/program/P, mob/user = null)
-	if(!istype(P))
+	if (!istype(P))
 		return
-	if((P in running_programs) && P != active_program && P.program_state != PROGRAM_STATE_KILLED)
+	if ((P in running_programs) && P != active_program && P.program_state != PROGRAM_STATE_KILLED)
 		minimize_program(user)
 		P.program_state = PROGRAM_STATE_ACTIVE
 		active_program = P
@@ -175,37 +175,37 @@
 
 /// Minimize the currently active program.
 /datum/extension/interactive/ntos/proc/minimize_program(mob/user = null)
-	if(!active_program)
+	if (!active_program)
 		return
 	active_program.program_state = PROGRAM_STATE_BACKGROUND // Should close any existing UIs
 	SSnano.close_uis(active_program.NM ? active_program.NM : active_program)
 	active_program = null
 	update_host_icon()
-	if(istype(user))
+	if (istype(user))
 		ui_interact(user) // Re-open the UI on this computer. It should show the main screen now.
 
 /// Set a filename name that the system should attempt to run as a program when it boots up. Returns the autorun file on success, otherwise null.
 /datum/extension/interactive/ntos/proc/set_autorun(filename)
-	if(!filename)
+	if (!filename)
 		return delete_file("autorun")
 	return update_data_file("autorun", "[filename]", replace_content = TRUE)
 
 /// Returns the number number of programs this system can run at the same time.
 /datum/extension/interactive/ntos/proc/get_program_capacity()
 	var/obj/item/stock_parts/computer/processor_unit/C = get_component(PART_CPU)
-	if(!istype(C))
+	if (!istype(C))
 		return 0
 	return 1 + C.processing_power
 
 /// Adds an entry to the NTNet log with this computer's identity, if the computer has a connection. Returns TRUE on success, otherwise FALSE.
 /datum/extension/interactive/ntos/proc/add_log(text)
-	if(!get_ntnet_status())
+	if (!get_ntnet_status())
 		return FALSE
 	return ntnet_global.add_log(text, get_component(PART_NETWORK))
 
 /datum/extension/interactive/ntos/proc/get_physical_host()
 	var/atom/A = holder
-	if(istype(A))
+	if (istype(A))
 		return A
 
 /datum/extension/interactive/ntos/proc/handle_updates(shutdown_after)
@@ -215,11 +215,11 @@
 
 /// Used by camera monitor program
 /datum/extension/interactive/ntos/proc/check_eye(mob/user)
-	if(active_program)
+	if (active_program)
 		return active_program.check_eye(user)
 
 /datum/extension/interactive/ntos/proc/process_updates()
-	if(update_progress < updates)
+	if (update_progress < updates)
 		update_progress += rand(0, 2500)
 		return
 
@@ -229,7 +229,7 @@
 	updates = 0
 	update_progress = 0
 
-	if(update_postshutdown)
+	if (update_postshutdown)
 		system_shutdown()
 
 /datum/extension/interactive/ntos/proc/event_powerfailure()
@@ -242,13 +242,13 @@
 
 /datum/extension/interactive/ntos/proc/has_terminal(mob/user)
 	for(var/datum/terminal/terminal in terminals)
-		if(terminal.get_user() == user)
+		if (terminal.get_user() == user)
 			return terminal
 
 /datum/extension/interactive/ntos/proc/open_terminal(mob/user)
-	if(!on)
+	if (!on)
 		return
-	if(has_terminal(user))
+	if (has_terminal(user))
 		return
 	LAZYADD(terminals, new /datum/terminal/(user, src))
 

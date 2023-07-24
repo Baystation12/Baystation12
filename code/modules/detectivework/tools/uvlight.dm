@@ -20,7 +20,7 @@
 
 /obj/item/device/uv_light/attack_self(mob/user)
 	on = !on
-	if(on)
+	if (on)
 		set_light(0.5, 0.1, range, 2, "#007fff")
 		START_PROCESSING(SSobj, src)
 		icon_state = "uv_on"
@@ -31,44 +31,44 @@
 		icon_state = "uv_off"
 
 /obj/item/device/uv_light/proc/clear_last_scan()
-	if(length(scanned))
+	if (length(scanned))
 		for(var/atom/O in scanned)
 			O.set_invisibility(scanned[O])
-			if(O.fluorescent == ATOM_FLOURESCENCE_ACTVE)
+			if (O.fluorescent == ATOM_FLOURESCENCE_ACTVE)
 				O.fluorescent = ATOM_FLOURESCENCE_INACTIVE
 		scanned.Cut()
-	if(length(stored_alpha))
+	if (length(stored_alpha))
 		for(var/atom/O in stored_alpha)
 			O.alpha = stored_alpha[O]
-			if(O.fluorescent == ATOM_FLOURESCENCE_ACTVE)
+			if (O.fluorescent == ATOM_FLOURESCENCE_ACTVE)
 				O.fluorescent = ATOM_FLOURESCENCE_INACTIVE
 		stored_alpha.Cut()
-	if(length(reset_objects))
+	if (length(reset_objects))
 		for(var/obj/item/I in reset_objects)
 			I.overlays -= I.blood_overlay
-			if(I.fluorescent == ATOM_FLOURESCENCE_ACTVE)
+			if (I.fluorescent == ATOM_FLOURESCENCE_ACTVE)
 				I.fluorescent = ATOM_FLOURESCENCE_INACTIVE
 		reset_objects.Cut()
 
 /obj/item/device/uv_light/Process()
 	clear_last_scan()
-	if(on)
+	if (on)
 		step_alpha = round(255/range)
 		var/turf/origin = get_turf(src)
-		if(!origin)
+		if (!origin)
 			return
 		for(var/turf/T in range(range, origin))
 			var/use_alpha = 255 - (step_alpha * get_dist(origin, T))
 			for(var/atom/A in T.contents)
-				if(A.fluorescent == ATOM_FLOURESCENCE_INACTIVE)
+				if (A.fluorescent == ATOM_FLOURESCENCE_INACTIVE)
 					A.fluorescent = ATOM_FLOURESCENCE_ACTVE
-					if(A.invisibility)
+					if (A.invisibility)
 						scanned[A] = A.invisibility
 						A.set_invisibility(0)
 						stored_alpha[A] = A.alpha
 						A.alpha = use_alpha
-					if(istype(A, /obj/item))
+					if (istype(A, /obj/item))
 						var/obj/item/O = A
-						if(O.was_bloodied && !(O.blood_overlay in O.overlays))
+						if (O.was_bloodied && !(O.blood_overlay in O.overlays))
 							O.overlays |= O.blood_overlay
 							reset_objects |= O

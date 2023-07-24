@@ -21,10 +21,10 @@
 	var/paper_type
 
 /datum/computer_file/program/scanner/proc/connect_scanner()
-	if(!computer)
+	if (!computer)
 		return FALSE
 	var/obj/item/stock_parts/computer/scanner/scanner = computer.get_component(PART_SCANNER)
-	if(scanner && istype(src, scanner.driver_type))
+	if (scanner && istype(src, scanner.driver_type))
 		using_scanner = TRUE
 		scanner.driver = src
 		return TRUE
@@ -32,63 +32,63 @@
 
 /datum/computer_file/program/scanner/proc/disconnect_scanner()
 	using_scanner = FALSE
-	if(computer)
+	if (computer)
 		var/obj/item/stock_parts/computer/scanner/scanner = computer.get_component(PART_SCANNER)
-		if(scanner && (src == scanner.driver))
+		if (scanner && (src == scanner.driver))
 			scanner.driver = null
 	data_buffer = null
 	metadata_buffer.Cut()
 	return TRUE
 
 /datum/computer_file/program/scanner/proc/save_scan(name)
-	if(!data_buffer)
+	if (!data_buffer)
 		return FALSE
-	if(!computer.create_data_file(name, data_buffer, scan_file_type, metadata_buffer.Copy()))
+	if (!computer.create_data_file(name, data_buffer, scan_file_type, metadata_buffer.Copy()))
 		return FALSE
 	return TRUE
 
 /datum/computer_file/program/scanner/proc/check_scanning()
-	if(!computer)
+	if (!computer)
 		return FALSE
 	var/obj/item/stock_parts/computer/scanner/scanner = computer.get_component(PART_SCANNER)
-	if(!scanner)
+	if (!scanner)
 		return FALSE
-	if(!scanner.can_run_scan)
+	if (!scanner.can_run_scan)
 		return FALSE
-	if(!scanner.check_functionality())
+	if (!scanner.check_functionality())
 		return FALSE
-	if(!using_scanner)
+	if (!using_scanner)
 		return FALSE
-	if(src != scanner.driver)
+	if (src != scanner.driver)
 		return FALSE
 	return TRUE
 
 /datum/computer_file/program/scanner/Topic(href, href_list)
-	if(..())
+	if (..())
 		return TOPIC_HANDLED
 
-	if(href_list["connect_scanner"])
-		if(text2num(href_list["connect_scanner"]))
-			if(!connect_scanner())
+	if (href_list["connect_scanner"])
+		if (text2num(href_list["connect_scanner"]))
+			if (!connect_scanner())
 				to_chat(usr, "Scanner installation failed.")
 		else
 			disconnect_scanner()
 		return TOPIC_HANDLED
 
-	if(href_list["scan"])
-		if(check_scanning())
+	if (href_list["scan"])
+		if (check_scanning())
 			metadata_buffer.Cut()
 			var/obj/item/stock_parts/computer/scanner/scanner = computer.get_component(PART_SCANNER)
 			scanner.run_scan(usr, src)
 		return TOPIC_HANDLED
 
-	if(href_list["save"])
+	if (href_list["save"])
 		var/name = sanitize(input(usr, "Enter file name:", "Save As") as text|null)
-		if(!save_scan(name))
+		if (!save_scan(name))
 			to_chat(usr, "Scan save failed.")
 		return TOPIC_HANDLED
 
-	if(.)
+	if (.)
 		SSnano.update_uis(NM)
 
 /datum/nano_module/program/scanner
@@ -97,17 +97,17 @@
 /datum/nano_module/program/scanner/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 	var/datum/computer_file/program/scanner/prog = program
-	if(!prog.computer)
+	if (!prog.computer)
 		return
 	var/obj/item/stock_parts/computer/scanner/scanner = prog.computer.get_component(PART_SCANNER)
-	if(scanner)
+	if (scanner)
 		data["scanner_name"] = scanner.name
 		data["scanner_enabled"] = scanner.enabled
 		data["can_view_scan"] = scanner.can_view_scan
 		data["can_save_scan"] = (scanner.can_save_scan && prog.data_buffer)
 	data["using_scanner"] = prog.using_scanner
 	data["check_scanning"] = prog.check_scanning()
-	if(length(prog.metadata_buffer) > 0 && prog.paper_type == /obj/item/paper/bodyscan)
+	if (length(prog.metadata_buffer) > 0 && prog.paper_type == /obj/item/paper/bodyscan)
 		data["data_buffer"] = display_medical_data(prog.metadata_buffer.Copy(), user.get_skill_value(SKILL_MEDICAL, TRUE))
 	else
 		data["data_buffer"] = digitalPencode2html(prog.data_buffer)

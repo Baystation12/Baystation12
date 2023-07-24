@@ -6,7 +6,7 @@
 // The name is used on /vg/ for species with predefined genetic traits,
 //  and for the DNA panel in the player panel.
 /proc/getAssignedBlock(name,list/blocksLeft, activity_bounds=DNA_DEFAULT_BOUNDS)
-	if(length(blocksLeft)==0)
+	if (length(blocksLeft)==0)
 		warning("[name]: No more blocks left to assign!")
 		return 0
 	var/assigned = pick(blocksLeft)
@@ -72,12 +72,12 @@
 	var/list/blocks_assigned[DNA_SE_LENGTH]
 	for(var/gene_type in typesof(/datum/dna/gene))
 		var/datum/dna/gene/G = new gene_type
-		if(G.block)
-			if(G.block in blocks_assigned)
+		if (G.block)
+			if (G.block in blocks_assigned)
 				warning("DNA2: Gene [G.name] trying to use already-assigned block [G.block] (used by [english_list(blocks_assigned[G.block])])")
 			dna_genes.Add(G)
 			var/list/assignedToBlock[0]
-			if(blocks_assigned[G.block])
+			if (blocks_assigned[G.block])
 				assignedToBlock=blocks_assigned[G.block]
 			assignedToBlock.Add(G.name)
 			blocks_assigned[G.block]=assignedToBlock

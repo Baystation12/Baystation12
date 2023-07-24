@@ -105,7 +105,7 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/Destroy()
 	var/area/area = get_area(src)
-	if(area)
+	if (area)
 		area.air_vent_info -= id_tag
 		area.air_vent_names -= id_tag
 		LAZYREMOVE(area.vent_pumps, src)
@@ -122,7 +122,7 @@
 
 
 /obj/machinery/atmospherics/unary/vent_pump/on_update_icon(safety = 0)
-	if(!check_icon_cache())
+	if (!check_icon_cache())
 		return
 	if (!node)
 		return
@@ -132,15 +132,15 @@
 	var/vent_icon = "vent"
 
 	var/turf/T = get_turf(src)
-	if(!istype(T))
+	if (!istype(T))
 		return
 
-	if(!T.is_plating() && node && node.level == ATOM_LEVEL_UNDER_TILE && istype(node, /obj/machinery/atmospherics/pipe))
+	if (!T.is_plating() && node && node.level == ATOM_LEVEL_UNDER_TILE && istype(node, /obj/machinery/atmospherics/pipe))
 		vent_icon += "h"
 
-	if(welded)
+	if (welded)
 		vent_icon += "weld"
-	else if(!powered())
+	else if (!powered())
 		vent_icon += "off"
 	else
 		vent_icon += "[use_power ? "[pump_direction ? "out" : "in"]" : "off"]"
@@ -148,15 +148,15 @@
 	overlays += icon_manager.get_atmos_icon("device", , , vent_icon)
 
 /obj/machinery/atmospherics/unary/vent_pump/update_underlays()
-	if(..())
+	if (..())
 		underlays.Cut()
 		var/turf/T = get_turf(src)
-		if(!istype(T))
+		if (!istype(T))
 			return
-		if(!T.is_plating() && node && node.level == ATOM_LEVEL_UNDER_TILE && istype(node, /obj/machinery/atmospherics/pipe))
+		if (!T.is_plating() && node && node.level == ATOM_LEVEL_UNDER_TILE && istype(node, /obj/machinery/atmospherics/pipe))
 			return
 		else
-			if(node)
+			if (node)
 				add_underlay(T, node, dir, node.icon_connect_type)
 			else
 				add_underlay(T,, dir)
@@ -166,11 +166,11 @@
 	update_underlays()
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/can_pump()
-	if(inoperable())
+	if (inoperable())
 		return 0
-	if(!use_power)
+	if (!use_power)
 		return 0
-	if(welded)
+	if (welded)
 		return 0
 	return 1
 
@@ -182,7 +182,7 @@
 
 	if (!node)
 		update_use_power(POWER_USE_OFF)
-	if(!can_pump())
+	if (!can_pump())
 		return 0
 
 	var/datum/gas_mixture/environment = loc.return_air()
@@ -192,8 +192,8 @@
 	//Figure out the target pressure difference
 	var/pressure_delta = get_pressure_delta(environment)
 
-	if((environment.temperature || air_contents.temperature) && pressure_delta > 0.5)
-		if(pump_direction) //internal -> external
+	if ((environment.temperature || air_contents.temperature) && pressure_delta > 0.5)
+		if (pump_direction) //internal -> external
 			var/transfer_moles = calculate_transfer_moles(air_contents, environment, pressure_delta)
 			power_draw = pump_gas(src, air_contents, environment, transfer_moles, power_rating)
 		else //external -> internal
@@ -206,14 +206,14 @@
 	else
 		//If we're in an area that is fucking ideal, and we don't have to do anything, chances are we won't next tick either so why redo these calculations?
 		//JESUS FUCK.  THERE ARE LITERALLY 250 OF YOU MOTHERFUCKERS ON ZLEVEL ONE AND YOU DO THIS SHIT EVERY TICK WHEN VERY OFTEN THERE IS NO REASON TO
-		if(pump_direction && pressure_checks == PRESSURE_CHECK_EXTERNAL) //99% of all vents
+		if (pump_direction && pressure_checks == PRESSURE_CHECK_EXTERNAL) //99% of all vents
 			hibernate = world.time + (rand(100,200))
 
 
 	if (power_draw >= 0)
 		last_power_draw = power_draw
 		use_power_oneoff(power_draw)
-		if(network)
+		if (network)
 			network.update = 1
 
 	return 1
@@ -222,15 +222,15 @@
 	var/pressure_delta = DEFAULT_PRESSURE_DELTA
 	var/environment_pressure = environment.return_pressure()
 
-	if(pump_direction) //internal -> external
-		if(pressure_checks & PRESSURE_CHECK_EXTERNAL)
+	if (pump_direction) //internal -> external
+		if (pressure_checks & PRESSURE_CHECK_EXTERNAL)
 			pressure_delta = min(pressure_delta, external_pressure_bound - environment_pressure) //increasing the pressure here
-		if(pressure_checks & PRESSURE_CHECK_INTERNAL)
+		if (pressure_checks & PRESSURE_CHECK_INTERNAL)
 			pressure_delta = min(pressure_delta, air_contents.return_pressure() - internal_pressure_bound) //decreasing the pressure here
 	else //external -> internal
-		if(pressure_checks & PRESSURE_CHECK_EXTERNAL)
+		if (pressure_checks & PRESSURE_CHECK_EXTERNAL)
 			pressure_delta = min(pressure_delta, environment_pressure - external_pressure_bound) //decreasing the pressure here
-		if(pressure_checks & PRESSURE_CHECK_INTERNAL)
+		if (pressure_checks & PRESSURE_CHECK_INTERNAL)
 			pressure_delta = min(pressure_delta, internal_pressure_bound - air_contents.return_pressure()) //increasing the pressure here
 
 	return pressure_delta
@@ -241,9 +241,9 @@
 /obj/machinery/atmospherics/unary/vent_pump/Initialize()
 	if (!id_tag)
 		id_tag = num2text(sequential_id("obj/machinery"))
-	if(controlled)
+	if (controlled)
 		var/area/A = get_area(src)
-		if(A && !A.air_vent_names[id_tag])
+		if (A && !A.air_vent_names[id_tag])
 			var/new_name = "[A.name] Vent Pump #[length(A.air_vent_names)+1]"
 			A.air_vent_names[id_tag] = new_name
 			SetName(new_name)
@@ -263,29 +263,29 @@
 	toggle_input_toggle()
 
 /obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W, mob/user)
-	if(isWelder(W))
+	if (isWelder(W))
 
 		var/obj/item/weldingtool/WT = W
 
-		if(!WT.isOn())
+		if (!WT.isOn())
 			to_chat(user, SPAN_NOTICE("The welding tool needs to be on to start this task."))
 			return 1
 
-		if(!WT.remove_fuel(0,user))
+		if (!WT.remove_fuel(0,user))
 			to_chat(user, SPAN_WARNING("You need more welding fuel to complete this task."))
 			return 1
 
 		to_chat(user, SPAN_NOTICE("Now welding \the [src]."))
 		playsound(src, 'sound/items/Welder.ogg', 50, 1)
 
-		if(!do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
+		if (!do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
 			to_chat(user, SPAN_NOTICE("You must remain close to finish this task."))
 			return 1
 
-		if(!src)
+		if (!src)
 			return 1
 
-		if(!WT.isOn())
+		if (!WT.isOn())
 			to_chat(user, SPAN_NOTICE("The welding tool needs to be on to finish this task."))
 			return 1
 
@@ -302,15 +302,15 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
+	if (distance <= 1)
 		to_chat(user, "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W")
 	else
 		to_chat(user, "You are too far away to read the gauge.")
-	if(welded)
+	if (welded)
 		to_chat(user, "It seems welded shut.")
 
 /obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWrench(W))
+	if (isWrench(W))
 		if (is_powered() && use_power)
 			to_chat(user, SPAN_WARNING("You cannot unwrench \the [src], turn it off first."))
 			return 1
@@ -333,7 +333,7 @@
 				"You hear a ratchet.")
 			new /obj/item/pipe(loc, src)
 			qdel(src)
-	if(isMultitool(W))
+	if (isMultitool(W))
 		var/datum/browser/popup = new(user, "Vent Configuration Utility", "[src] Configuration Panel", 600, 200)
 		popup.set_content(jointext(get_console_data(),"<br>"))
 		popup.open()
@@ -349,9 +349,9 @@
 	. = JOINTEXT(.)
 
 /obj/machinery/atmospherics/unary/vent_pump/OnTopic(mob/user, href_list, datum/topic_state/state)
-	if((. = ..()))
+	if ((. = ..()))
 		return
-	if(href_list["switchMode"])
+	if (href_list["switchMode"])
 		pump_direction = !pump_direction
 		to_chat(user, SPAN_NOTICE("The multitool emits a short beep confirming the change."))
 		queue_icon_update() //force the icon to refresh after changing directional mode.
@@ -369,10 +369,10 @@
 	return machine.pump_direction ? "release" : "siphon"
 
 /singleton/public_access/public_variable/pump_dir/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
-	if(!(new_value in list("release", "siphon")))
+	if (!(new_value in list("release", "siphon")))
 		return FALSE
 	. = ..()
-	if(.)
+	if (.)
 		machine.pump_direction = (new_value == "release")
 
 /singleton/public_access/public_variable/pump_checks
@@ -387,13 +387,13 @@
 	return machine.pressure_checks
 
 /singleton/public_access/public_variable/pump_checks/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
-	if(new_value == "default")
+	if (new_value == "default")
 		new_value = machine.pressure_checks_default
 	var/sanitized = sanitize_integer(new_value, 0, 3)
-	if(new_value != sanitized)
+	if (new_value != sanitized)
 		return FALSE
 	. = ..()
-	if(.)
+	if (.)
 		machine.pressure_checks = new_value
 
 /singleton/public_access/public_variable/pressure_bound
@@ -408,11 +408,11 @@
 	return machine.internal_pressure_bound
 
 /singleton/public_access/public_variable/pressure_bound/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
-	if(new_value == "default")
+	if (new_value == "default")
 		new_value = machine.internal_pressure_bound_default
 	new_value = clamp(text2num(new_value), 0, MAX_PUMP_PRESSURE)
 	. = ..()
-	if(.)
+	if (.)
 		machine.internal_pressure_bound = new_value
 
 /singleton/public_access/public_variable/pressure_bound/external
@@ -424,11 +424,11 @@
 	return machine.external_pressure_bound
 
 /singleton/public_access/public_variable/pressure_bound/external/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
-	if(new_value == "default")
+	if (new_value == "default")
 		new_value = machine.external_pressure_bound_default
 	new_value = clamp(text2num(new_value), 0, MAX_PUMP_PRESSURE)
 	. = ..()
-	if(.)
+	if (.)
 		machine.external_pressure_bound = new_value
 
 /singleton/public_access/public_method/purge_pump

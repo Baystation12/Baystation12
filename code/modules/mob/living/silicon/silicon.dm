@@ -41,9 +41,9 @@
 	GLOB.silicon_mobs += src
 	. = ..()
 
-	if(silicon_radio)
+	if (silicon_radio)
 		silicon_radio = new silicon_radio(src)
-	if(silicon_camera)
+	if (silicon_camera)
 		silicon_camera = new silicon_camera(src)
 
 	add_language(LANGUAGE_HUMAN_EURO)
@@ -62,11 +62,11 @@
 /mob/living/silicon/fully_replace_character_name(new_name)
 	..()
 	create_or_rename_email(new_name, "root.rt")
-	if(istype(idcard))
+	if (istype(idcard))
 		idcard.registered_name = new_name
 
 /mob/living/silicon/proc/init_id()
-	if(ispath(idcard))
+	if (ispath(idcard))
 		idcard = new idcard(src)
 		set_id_info(idcard)
 
@@ -80,11 +80,11 @@
 	if (status_flags & GODMODE)
 		return
 	switch(severity)
-		if(EMP_ACT_HEAVY)
+		if (EMP_ACT_HEAVY)
 			take_organ_damage(0, 16, ORGAN_DAMAGE_SILICON_EMP)
-			if(prob(50)) Stun(rand(5,10))
+			if (prob(50)) Stun(rand(5,10))
 			else confused = (min(confused + 2, 40))
-		if(EMP_ACT_LIGHT)
+		if (EMP_ACT_LIGHT)
 			take_organ_damage(0, 7, ORGAN_DAMAGE_SILICON_EMP)
 			confused = (min(confused + 2, 30))
 	flash_eyes(affect_silicon = 1)
@@ -107,7 +107,7 @@
 		visible_message(SPAN_WARNING("\The [src] was shocked by \the [source]!"), \
 			SPAN_DANGER("Energy pulse detected, system damaged!"), \
 			SPAN_WARNING("You hear an electrical crack"))
-		if(prob(20))
+		if (prob(20))
 			Stun(2)
 		return
 
@@ -121,7 +121,7 @@
 	if (status_flags & GODMODE)
 		return PROJECTILE_FORCE_MISS
 
-	if(!Proj.nodamage)
+	if (!Proj.nodamage)
 		switch(Proj.damage_type)
 			if (DAMAGE_BRUTE)
 				adjustBruteLoss(Proj.damage)
@@ -136,7 +136,7 @@
 	return 0//The only effect that can hit them atm is flashes and they still directly edit so this works for now
 
 /proc/islinked(mob/living/silicon/robot/bot, mob/living/silicon/ai/ai)
-	if(!istype(bot) || !istype(ai))
+	if (!istype(bot) || !istype(ai))
 		return 0
 	if (bot.connected_ai == ai)
 		return 1
@@ -145,7 +145,7 @@
 
 // this function shows the health of the AI in the Status panel
 /mob/living/silicon/proc/show_system_integrity()
-	if(!src.stat)
+	if (!src.stat)
 		stat(null, text("System integrity: [round((health/maxHealth)*100)]%"))
 	else
 		stat(null, text("Systems nonfunctional"))
@@ -157,15 +157,15 @@
 
 // this function displays the shuttles ETA in the status panel if the shuttle has been called
 /mob/living/silicon/proc/show_emergency_shuttle_eta()
-	if(evacuation_controller)
+	if (evacuation_controller)
 		var/eta_status = evacuation_controller.get_status_panel_eta()
-		if(eta_status)
+		if (eta_status)
 			stat(null, eta_status)
 
 
 // This adds the basic clock, shuttle recall timer, and malf_ai info to all silicon lifeforms
 /mob/living/silicon/Stat()
-	if(statpanel("Status"))
+	if (statpanel("Status"))
 		show_emergency_shuttle_eta()
 		show_system_integrity()
 		show_malf_ai()
@@ -184,7 +184,7 @@
 
 /mob/living/silicon/add_language(language, can_speak=1)
 	var/datum/language/added_language = all_languages[language]
-	if(!added_language)
+	if (!added_language)
 		return
 
 	. = ..(language)
@@ -194,7 +194,7 @@
 
 /mob/living/silicon/remove_language(rem_language)
 	var/datum/language/removed_language = all_languages[rem_language]
-	if(!removed_language)
+	if (!removed_language)
 		return
 
 	..(rem_language)
@@ -207,13 +207,13 @@
 
 	var/dat = "<b>[FONT_GIANT("Known Languages")]</b><br/><br/>"
 
-	if(default_language)
+	if (default_language)
 		dat += "Current default language: [default_language] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
 
 	for(var/datum/language/L in languages)
-		if(!(L.flags & NONGLOBAL))
+		if (!(L.flags & NONGLOBAL))
 			var/default_str
-			if(L == default_language)
+			if (L == default_language)
 				default_str = " - default - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a>"
 			else
 				default_str = " - <a href='byond://?src=\ref[src];default_lang=\ref[L]'>set default</a>"
@@ -257,19 +257,19 @@
 /mob/living/silicon/ex_act(severity)
 	if (status_flags & GODMODE)
 		return
-	if(!blinded)
+	if (!blinded)
 		flash_eyes()
 
 	var/brute
 	var/burn
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			brute = 400
 			burn = 100
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			brute = 60
 			burn = 60
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			brute = 30
 
 	apply_damage(brute, DAMAGE_BRUTE, damage_flags = DAMAGE_FLAG_EXPLODE)
@@ -302,15 +302,15 @@
 
 /mob/living/silicon/reset_view()
 	..()
-	if(cameraFollow)
+	if (cameraFollow)
 		cameraFollow = null
 
 /mob/living/silicon/proc/clear_client()
 	//Handle job slot/tater cleanup.
-	if(mind)
-		if(mind.assigned_job)
+	if (mind)
+		if (mind.assigned_job)
 			mind.assigned_job.clear_slot()
-		if(length(mind.objectives))
+		if (length(mind.objectives))
 			qdel(mind.objectives)
 			mind.special_role = null
 		clear_antag_roles(mind)
@@ -318,7 +318,7 @@
 	qdel(src)
 
 /mob/living/silicon/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
-	if(affect_silicon)
+	if (affect_silicon)
 		return ..()
 
 /mob/living/silicon/seizure()

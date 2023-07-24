@@ -24,12 +24,12 @@
 	for(var/obj/singularity/narsie/large/N in narsie_list)
 		destination = N.loc
 		break
-	if(destination)
+	if (destination)
 		var/prey = 0
 		for(var/mob/living/M in targets)
-			if(!findNullRod(M))
+			if (!findNullRod(M))
 				M.forceMove(destination)
-				if(M != user)
+				if (M != user)
 					prey = 1
 		to_chat(user, SPAN_CLASS("sinister", "You warp back to Nar-Sie[prey ? " along with your prey":""]."))
 	else

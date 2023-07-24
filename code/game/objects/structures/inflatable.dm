@@ -7,7 +7,7 @@
 	var/deploy_path = null
 
 /obj/item/inflatable/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
-	if(!deploy_path)
+	if (!deploy_path)
 		return
 	if (loc != user)
 		return
@@ -110,7 +110,7 @@
 		max_pressure = max(max_pressure, pressure)
 		max_local_temp = max(max_local_temp, env.temperature)
 
-	if(prob(50) && (max_pressure - min_pressure > max_pressure_diff || max_local_temp > max_temp))
+	if (prob(50) && (max_pressure - min_pressure > max_pressure_diff || max_local_temp > max_temp))
 		var/initial_damage_percentage = get_damage_percentage()
 		damage_health(1)
 		var/damage_percentage = get_damage_percentage()
@@ -182,13 +182,13 @@
 
 /obj/structure/inflatable/proc/deflate(violent=0)
 	playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
-	if(violent)
+	if (violent)
 		visible_message("[src] rapidly deflates!")
 		var/obj/item/inflatable/torn/R = new /obj/item/inflatable/torn(loc)
 		src.transfer_fingerprints_to(R)
 		qdel(src)
 	else
-		if(!undeploy_path)
+		if (!undeploy_path)
 			return
 		visible_message("\The [src] slowly deflates.")
 		spawn(50)
@@ -202,7 +202,7 @@
 	set category = "Object"
 	set src in oview(1)
 
-	if(isobserver(usr) || usr.restrained() || !usr.Adjacent(src))
+	if (isobserver(usr) || usr.restrained() || !usr.Adjacent(src))
 		return FALSE
 
 	verbs -= /obj/structure/inflatable/verb/hand_deflate
@@ -225,36 +225,36 @@
 	var/isSwitchingStates = 0
 
 /obj/structure/inflatable/door/attack_ai(mob/user as mob) //those aren't machinery, they're just big fucking slabs of a mineral
-	if(isAI(user)) //so the AI can't open it
+	if (isAI(user)) //so the AI can't open it
 		return
-	else if(isrobot(user)) //but cyborgs can
-		if(get_dist(user,src) <= 1) //not remotely though
+	else if (isrobot(user)) //but cyborgs can
+		if (get_dist(user,src) <= 1) //not remotely though
 			return TryToSwitchState(user)
 
 /obj/structure/inflatable/door/attack_hand(mob/user as mob)
 	return TryToSwitchState(user)
 
 /obj/structure/inflatable/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group)
+	if (air_group)
 		return state
-	if(istype(mover, /obj/effect/beam))
+	if (istype(mover, /obj/effect/beam))
 		return !opacity
 	return !density
 
 /obj/structure/inflatable/door/proc/TryToSwitchState(atom/user)
-	if(isSwitchingStates) return
-	if(ismob(user))
+	if (isSwitchingStates) return
+	if (ismob(user))
 		var/mob/M = user
-		if(M.client)
-			if(iscarbon(M))
+		if (M.client)
+			if (iscarbon(M))
 				var/mob/living/carbon/C = M
-				if(!C.handcuffed)
+				if (!C.handcuffed)
 					SwitchState()
 			else
 				SwitchState()
 
 /obj/structure/inflatable/door/proc/SwitchState()
-	if(state)
+	if (state)
 		Close()
 	else
 		Open()
@@ -288,14 +288,14 @@
 	isSwitchingStates = 0
 
 /obj/structure/inflatable/door/on_update_icon()
-	if(state)
+	if (state)
 		icon_state = "door_open"
 	else
 		icon_state = "door_closed"
 
 /obj/structure/inflatable/door/deflate(violent=0)
 	playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
-	if(violent)
+	if (violent)
 		visible_message("[src] rapidly deflates!")
 		var/obj/item/inflatable/door/torn/R = new /obj/item/inflatable/door/torn(loc)
 		src.transfer_fingerprints_to(R)

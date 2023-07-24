@@ -34,9 +34,9 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/item/anodevice/attackby(obj/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/anobattery))
-		if(!inserted_battery)
-			if(!user.unEquip(I, src))
+	if (istype(I, /obj/item/anobattery))
+		if (!inserted_battery)
+			if (!user.unEquip(I, src))
 				return
 			to_chat(user, SPAN_NOTICE("You insert the battery."))
 			inserted_battery = I
@@ -49,14 +49,14 @@
 
 /obj/item/anodevice/interact(mob/user)
 	var/dat = "<b>Anomalous Materials Energy Utiliser</b><br>"
-	if(inserted_battery)
-		if(activated)
+	if (inserted_battery)
+		if (activated)
 			dat += "Device active.<br>"
 
 		dat += "[inserted_battery] inserted, anomaly ID: [(inserted_battery.battery_effect?.artifact_id) ? inserted_battery.battery_effect.artifact_id : "NA"]<BR>"
 		dat += "<b>Charge:</b> [inserted_battery.stored_charge] / [inserted_battery.capacity]<BR>"
 		dat += "<b>Time left activated:</b> [round(max((time_end - last_process) / 10, 0))]<BR>"
-		if(activated)
+		if (activated)
 			dat += "<a href='?src=\ref[src];shutdown=1'>Shutdown</a><br>"
 		else
 			dat += "<A href='?src=\ref[src];startup=1'>Start</a><BR>"
@@ -80,29 +80,29 @@
 
 /obj/item/anodevice/Process()
 	updateSelfDialog()
-	if(activated)
-		if(inserted_battery && inserted_battery.battery_effect && (inserted_battery.stored_charge > 0) )
+	if (activated)
+		if (inserted_battery && inserted_battery.battery_effect && (inserted_battery.stored_charge > 0) )
 			//make sure the effect is active
-			if(!inserted_battery.battery_effect.activated)
+			if (!inserted_battery.battery_effect.activated)
 				inserted_battery.battery_effect.ToggleActivate(1)
 
 			//update the effect loc
 			var/turf/T = get_turf(src)
-			if(T != archived_loc)
+			if (T != archived_loc)
 				archived_loc = T
 				inserted_battery.battery_effect.UpdateMove()
 
 			//if someone is holding the device, do the effect on them
 			var/mob/holder
-			if(ismob(src.loc))
+			if (ismob(src.loc))
 				holder = src.loc
 
 			//handle charge
-			if(world.time - last_activation > interval)
-				if(inserted_battery.battery_effect.effect == EFFECT_TOUCH)
-					if(interval > 0)
+			if (world.time - last_activation > interval)
+				if (inserted_battery.battery_effect.effect == EFFECT_TOUCH)
+					if (interval > 0)
 						//apply the touch effect to the holder
-						if(holder)
+						if (holder)
 							to_chat(holder, "The [icon2html(src, holder)] [src] held by [holder] shudders in your grasp.")
 						else
 							src.loc.visible_message("The [icon2html(src, viewers(src.loc))] [src] shudders.")
@@ -114,7 +114,7 @@
 						//consume power equal to time passed
 						inserted_battery.use_power(world.time - last_process)
 
-				else if(inserted_battery.battery_effect.effect == EFFECT_PULSE)
+				else if (inserted_battery.battery_effect.effect == EFFECT_PULSE)
 					inserted_battery.battery_effect.chargelevel = inserted_battery.battery_effect.chargelevelmax
 
 					//consume power relative to the time the artifact takes to charge and the effect range
@@ -130,10 +130,10 @@
 			inserted_battery.battery_effect.process()
 
 			//work out if we need to shutdown
-			if(inserted_battery.stored_charge <= 0)
+			if (inserted_battery.stored_charge <= 0)
 				src.loc.visible_message(SPAN_NOTICE("[icon2html(src, viewers(src.loc))] [src] buzzes."), SPAN_NOTICE("[icon2html(src, src.loc)] You hear something buzz."))
 				shutdown_emission()
-			else if(world.time > time_end)
+			else if (world.time > time_end)
 				src.loc.visible_message(SPAN_NOTICE("[icon2html(src, viewers(src.loc))] [src] chimes."), SPAN_NOTICE("[icon2html(src, src.loc)] You hear something chime."))
 				shutdown_emission()
 		else
@@ -142,57 +142,57 @@
 		last_process = world.time
 
 /obj/item/anodevice/proc/shutdown_emission()
-	if(activated)
+	if (activated)
 		activated = 0
-		if(inserted_battery.battery_effect.activated)
+		if (inserted_battery.battery_effect.activated)
 			inserted_battery.battery_effect.ToggleActivate(1)
-		if(inserted_battery.stored_charge <= 0)
+		if (inserted_battery.stored_charge <= 0)
 			inserted_battery.battery_effect = null
 
 /obj/item/anodevice/Topic(user, href_list, state = GLOB.inventory_state)
 	..()
 
 /obj/item/anodevice/OnTopic(user, href_list)
-	if(href_list["changetime"])
+	if (href_list["changetime"])
 		var/timedif = text2num(href_list["changetime"])
-		if(href_list["duration"])
+		if (href_list["duration"])
 			duration += timedif
 			//max 30 sec duration
 			duration = min(max(duration, 0), 300)
-			if(activated)
+			if (activated)
 				time_end += timedif
-		else if(href_list["interval"])
+		else if (href_list["interval"])
 			interval += timedif
 			//max 10 sec interval
 			interval = min(max(interval, 0), 100)
 		. = TOPIC_REFRESH
-	else if(href_list["startup"])
-		if(inserted_battery && inserted_battery.battery_effect && (inserted_battery.stored_charge > 0) )
+	else if (href_list["startup"])
+		if (inserted_battery && inserted_battery.battery_effect && (inserted_battery.stored_charge > 0) )
 			activated = 1
 			last_process = world.time
 			src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [src] whirrs."), SPAN_NOTICE("[icon2html(src, src)] You hear something whirr."))
-			if(!inserted_battery.battery_effect.activated)
+			if (!inserted_battery.battery_effect.activated)
 				inserted_battery.battery_effect.ToggleActivate(1)
 			time_end = world.time + duration
 		. = TOPIC_REFRESH
-	else if(href_list["shutdown"])
+	else if (href_list["shutdown"])
 		activated = 0
 		. = TOPIC_REFRESH
-	else if(href_list["ejectbattery"])
+	else if (href_list["ejectbattery"])
 		shutdown_emission()
 		inserted_battery.dropInto(loc)
 		inserted_battery = null
 		UpdateSprite()
 		. = TOPIC_REFRESH
-	if(href_list["close"])
+	if (href_list["close"])
 		close_browser(user, "window=anodevice")
 		. = TOPIC_HANDLED
 
-	if(. == TOPIC_REFRESH)
+	if (. == TOPIC_REFRESH)
 		interact(user)
 
 /obj/item/anodevice/proc/UpdateSprite()
-	if(!inserted_battery)
+	if (!inserted_battery)
 		icon_state = "anodev"
 		return
 	var/p = (inserted_battery.stored_charge/inserted_battery.capacity)*100
@@ -207,12 +207,12 @@
 	if (!istype(M))
 		return
 
-	if(activated && inserted_battery.battery_effect.effect == EFFECT_TOUCH && !isnull(inserted_battery))
+	if (activated && inserted_battery.battery_effect.effect == EFFECT_TOUCH && !isnull(inserted_battery))
 		inserted_battery.battery_effect.DoEffectTouch(M)
 		inserted_battery.use_power(energy_consumed_on_touch)
 		user.visible_message(SPAN_NOTICE("[user] taps [M] with [src], and it shudders on contact."))
 	else
 		user.visible_message(SPAN_NOTICE("[user] taps [M] with [src], but nothing happens."))
 
-	if(inserted_battery.battery_effect)
+	if (inserted_battery.battery_effect)
 		admin_attack_log(user, M, "Tapped their victim with \a [src] (EFFECT: [inserted_battery.battery_effect.name])", "Was tapped by \a [src] (EFFECT: [inserted_battery.battery_effect.name])", "used \a [src] (EFFECT: [inserted_battery.battery_effect.name]) to tap")

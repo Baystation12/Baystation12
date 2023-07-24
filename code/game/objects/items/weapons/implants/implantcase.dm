@@ -12,7 +12,7 @@
 	var/obj/item/implant/imp = null
 
 /obj/item/implantcase/New()
-	if(ispath(imp))
+	if (ispath(imp))
 		imp = new imp(src)
 		update_description()
 	..()
@@ -38,17 +38,17 @@
 		var/t = input(user, "What would you like the label to be?", src.name, null)
 		if (user.get_active_hand() != I)
 			return
-		if((!in_range(src, usr) && loc != user))
+		if ((!in_range(src, usr) && loc != user))
 			return
 		t = sanitizeSafe(t, MAX_NAME_LEN)
-		if(t)
+		if (t)
 			SetName("glass case - '[t]'")
 			desc = "A case containing \a [t] implant."
 		else
 			SetName(initial(name))
 			desc = "A case containing an implant."
-	else if(istype(I, /obj/item/reagent_containers/syringe))
-		if(istype(imp,/obj/item/implant/chem))
+	else if (istype(I, /obj/item/reagent_containers/syringe))
+		if (istype(imp,/obj/item/implant/chem))
 			imp.attackby(I,user)
 	else if (istype(I, /obj/item/implanter))
 		var/obj/item/implanter/M = I

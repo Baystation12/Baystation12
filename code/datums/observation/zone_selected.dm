@@ -21,5 +21,5 @@ GLOBAL_DATUM_INIT(zone_selected_event, /singleton/observ/zone_selected, new)
 
 /obj/screen/zone_sel/set_selected_zone(bodypart)
 	var/old_selecting = selecting
-	if((. = ..()))
+	if ((. = ..()))
 		GLOB.zone_selected_event.raise_event(src, old_selecting, selecting)

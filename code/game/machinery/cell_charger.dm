@@ -13,9 +13,9 @@
 
 /obj/machinery/cell_charger/on_update_icon()
 	icon_state = "ccharger[charging ? 1 : 0]"
-	if(charging && operable())
+	if (charging && operable())
 		var/newlevel = 	round(charging.percent() * 4.0 / 99)
-		if(chargelevel != newlevel)
+		if (chargelevel != newlevel)
 			overlays.Cut()
 			overlays += "ccharger-o[newlevel]"
 			chargelevel = newlevel
@@ -24,25 +24,25 @@
 
 /obj/machinery/cell_charger/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 5)
+	if (distance <= 5)
 		to_chat(user, "There's [charging ? "a" : "no"] cell in the charger.")
-		if(charging)
+		if (charging)
 			to_chat(user, "Current charge: [charging.charge]")
 
 /obj/machinery/cell_charger/attackby(obj/item/W, mob/user)
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		return
 
-	if(istype(W, /obj/item/cell) && anchored)
-		if(charging)
+	if (istype(W, /obj/item/cell) && anchored)
+		if (charging)
 			to_chat(user, SPAN_WARNING("There is already a cell in the charger."))
 			return
 		else
 			var/area/a = get_area(loc)
-			if(a.power_equip == 0) // There's no APC in this area, don't try to cheat power!
+			if (a.power_equip == 0) // There's no APC in this area, don't try to cheat power!
 				to_chat(user, SPAN_WARNING("The [name] blinks red as you try to insert the cell!"))
 				return
-			if(!user.unEquip(W, src))
+			if (!user.unEquip(W, src))
 				return
 			charging = W
 			set_power()
@@ -50,8 +50,8 @@
 			user.visible_message("[user] inserts a cell into the charger.", "You insert a cell into the charger.")
 			chargelevel = -1
 		queue_icon_update()
-	else if(isWrench(W))
-		if(charging)
+	else if (isWrench(W))
+		if (charging)
 			to_chat(user, SPAN_WARNING("Remove the cell first!"))
 			return
 
@@ -61,7 +61,7 @@
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 
 /obj/machinery/cell_charger/physical_attack_hand(mob/user)
-	if(charging)
+	if (charging)
 		user.put_in_hands(charging)
 		charging.add_fingerprint(user)
 		charging.update_icon()
@@ -74,15 +74,15 @@
 		return TRUE
 
 /obj/machinery/cell_charger/emp_act(severity)
-	if(inoperable())
+	if (inoperable())
 		return
-	if(charging)
+	if (charging)
 		charging.emp_act(severity)
 	..(severity)
 
 /obj/machinery/cell_charger/proc/set_power()
 	queue_icon_update()
-	if(inoperable() || !anchored)
+	if (inoperable() || !anchored)
 		update_use_power(POWER_USE_OFF)
 		return
 	if (charging && !charging.fully_charged())
@@ -92,7 +92,7 @@
 
 /obj/machinery/cell_charger/Process()
 	. = ..()
-	if(!charging)
+	if (!charging)
 		return
 	. = 0
 	charging.give(active_power_usage*CELLRATE)

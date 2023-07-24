@@ -56,23 +56,23 @@
  * If the parts are too far apart from eachother, it won't work.
  */
 /obj/machinery/computer/ship/disperser/proc/link_parts()
-	if(is_valid_setup())
+	if (is_valid_setup())
 		return TRUE
 
 	for(var/obj/machinery/disperser/front/F in SSmachines.machinery)
-		if(get_dist(src, F) >= link_range)
+		if (get_dist(src, F) >= link_range)
 			continue
 		var/backwards = turn(F.dir, 180)
 		var/obj/machinery/disperser/middle/M = locate() in get_step(F, backwards)
-		if(!M || get_dist(src, M) >= link_range)
+		if (!M || get_dist(src, M) >= link_range)
 			continue
 		var/obj/machinery/disperser/back/B = locate() in get_step(M, backwards)
-		if(!B || get_dist(src, B) >= link_range)
+		if (!B || get_dist(src, B) >= link_range)
 			continue
 		front = F
 		middle = M
 		back = B
-		if(is_valid_setup())
+		if (is_valid_setup())
 			GLOB.destroyed_event.register(F, src, .proc/release_links)
 			GLOB.destroyed_event.register(M, src, .proc/release_links)
 			GLOB.destroyed_event.register(B, src, .proc/release_links)
@@ -83,7 +83,7 @@
  * Checks order of parts.
  */
 /obj/machinery/computer/ship/disperser/proc/is_valid_setup()
-	if(front && middle && back)
+	if (front && middle && back)
 		var/everything_in_range = (get_dist(src, front) < link_range) && (get_dist(src, middle) < link_range) && (get_dist(src, back) < link_range)
 		var/everything_in_order = (middle.Adjacent(front) && middle.Adjacent(back)) && (front.dir == middle.dir && middle.dir == back.dir)
 		return everything_in_order && everything_in_range
@@ -106,9 +106,9 @@
 /obj/machinery/computer/ship/disperser/proc/get_calibration()
 	var/list/calresult[caldigit]
 	for(var/i = 1 to caldigit)
-		if(calibration[i] == calexpected[i])
+		if (calibration[i] == calexpected[i])
 			calresult[i] = 2
-		else if(calibration[i] in calexpected)
+		else if (calibration[i] in calexpected)
 			calresult[i] = 1
 		else
 			calresult[i] = 0
@@ -144,23 +144,23 @@
 
 /obj/machinery/computer/ship/disperser/proc/get_charge_type()
 	var/obj/structure/ship_munition/disperser_charge/B = locate() in get_turf(back)
-	if(B)
+	if (B)
 		return B.chargetype
 	var/obj/structure/closet/C = locate() in get_turf(back)
-	if(C)
+	if (C)
 		return OVERMAP_WEAKNESS_DROPPOD
 	return OVERMAP_WEAKNESS_NONE
 
 /obj/machinery/computer/ship/disperser/proc/get_charge()
 	var/obj/structure/ship_munition/disperser_charge/B = locate() in get_turf(back)
-	if(B)
+	if (B)
 		return B
 
 	var/obj/structure/closet/C = locate() in get_turf(back)
 	return C
 
 /obj/machinery/computer/ship/disperser/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = TRUE)
-	if(!linked)
+	if (!linked)
 		display_reconnect_dialog(user, "disperser synchronization")
 		return
 
@@ -184,9 +184,9 @@
 
 		var/charge = SPAN_BOLD("UNKNOWN ERROR")
 		switch(get_charge_type())
-			if(OVERMAP_WEAKNESS_NONE)
+			if (OVERMAP_WEAKNESS_NONE)
 				charge = "[SPAN_BOLD("ERROR")]: No valid charge detected."
-			if(OVERMAP_WEAKNESS_DROPPOD)
+			if (OVERMAP_WEAKNESS_DROPPOD)
 				charge = "HERMES"
 			else
 				var/obj/structure/ship_munition/disperser_charge/B = get_charge()
@@ -202,10 +202,10 @@
 
 /obj/machinery/computer/ship/disperser/OnTopic(mob/user, list/href_list, state)
 	. = ..()
-	if(.)
+	if (.)
 		return
 
-	if(!linked)
+	if (!linked)
 		return TOPIC_HANDLED
 
 	if (href_list["choose"])
@@ -214,21 +214,21 @@
 
 	if (href_list["setx"])
 		var/newx = input("Input new target x coordinate", "Coordinate input", tx) as num|null
-		if(!CanInteract(user,state))
+		if (!CanInteract(user,state))
 			return
 		if (newx)
 			tx = clamp(newx, 1, world.maxx - TRANSITIONEDGE)
 
 	if (href_list["sety"])
 		var/newy = input("Input new target y coordinate", "Coordinate input", ty) as num|null
-		if(!CanInteract(user,state))
+		if (!CanInteract(user,state))
 			return
 		if (newy)
 			ty = clamp(newy, 1, world.maxy - TRANSITIONEDGE)
 
 	if (href_list["setz"])
 		var/newz = input("Input new target z coordinate", "Coordinate input", tz) as num|null
-		if(!CanInteract(user,state))
+		if (!CanInteract(user,state))
 			return
 		if (newz)
 			tz = clamp(newz, 1, world.maxz)
@@ -238,31 +238,31 @@
 		ty = 0
 		tz = 0
 
-	if(href_list["calibration"])
+	if (href_list["calibration"])
 		var/input = input("0-9", "disperser calibration", 0) as num|null
 		// Can be zero so we explicitly check for null
-		if(!isnull(input))
+		if (!isnull(input))
 			var/calnum = sanitize_integer(text2num(href_list["calibration"]), 0, caldigit) // sanitiiiiize
 			// Must add 1 because nanoui indexes from 0
 			calibration[calnum + 1] = sanitize_integer(input, 0, 9, 0)
 
-	if(href_list["skill_calibration"])
+	if (href_list["skill_calibration"])
 		for(var/i = 1 to min(caldigit, user.get_skill_value(core_skill) - skill_offset))
 			calibration[i] = calexpected[i]
 
-	if(href_list["strength"])
+	if (href_list["strength"])
 		var/input = input("1-5", "disperser strength", 1) as num|null
-		if(input && CanInteract(user, state))
+		if (input && CanInteract(user, state))
 			strength = sanitize_integer(input, 1, 5, 1)
 			middle.idle_power_usage = strength * range * 100
 
-	if(href_list["range"])
+	if (href_list["range"])
 		var/input = input("1-5", "disperser radius", 1) as num|null
-		if(input && CanInteract(user, state))
+		if (input && CanInteract(user, state))
 			range = sanitize_integer(input, 1, 5, 1)
 			middle.idle_power_usage = strength * range * 100
 
-	if(href_list["fire"])
+	if (href_list["fire"])
 		fire(user)
 
 	return TOPIC_REFRESH

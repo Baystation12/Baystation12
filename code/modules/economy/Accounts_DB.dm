@@ -14,9 +14,9 @@
 /obj/machinery/computer/account_database/proc/get_access_level()
 	if (!held_card)
 		return 0
-	if(access_cent_captain in held_card.access)
+	if (access_cent_captain in held_card.access)
 		return 2
-	else if(access_hop in held_card.access || (access_captain in held_card.access))
+	else if (access_hop in held_card.access || (access_captain in held_card.access))
 		return 1
 
 /obj/machinery/computer/account_database/proc/accounting_letterhead(report_name)
@@ -32,11 +32,11 @@
 	..()
 
 /obj/machinery/computer/account_database/attackby(obj/O, mob/user)
-	if(!istype(O, /obj/item/card/id))
+	if (!istype(O, /obj/item/card/id))
 		return ..()
 
-	if(!held_card)
-		if(!user.unEquip(O, src))
+	if (!held_card)
+		if (!user.unEquip(O, src))
 			return
 		held_card = O
 
@@ -101,22 +101,22 @@
 		ui.open()
 
 /obj/machinery/computer/account_database/Topic(href, href_list)
-	if(..())
+	if (..())
 		return 1
 
 	var/datum/nanoui/ui = SSnano.get_open_ui(usr, src, "main")
 
-	if(href_list["choice"])
+	if (href_list["choice"])
 		switch(href_list["choice"])
-			if("create_account")
+			if ("create_account")
 				creating_new_account = 1
 
-			if("toggle_suspension")
-				if(detailed_account_view)
+			if ("toggle_suspension")
+				if (detailed_account_view)
 					detailed_account_view.suspended = !detailed_account_view.suspended
 					callHook("change_account_status", list(detailed_account_view))
 
-			if("finalise_create_account")
+			if ("finalise_create_account")
 				var/account_name = href_list["holder_name"]
 				var/starting_funds = max(text2num(href_list["starting_funds"]), 0)
 
@@ -124,7 +124,7 @@
 				starting_funds = min(starting_funds, fund_cap)						// Not authorized to give more than the fund cap.
 
 				var/datum/money_account/new_account = create_account("[account_name]'s Personal Account", account_name, starting_funds, ACCOUNT_TYPE_PERSONAL, src)
-				if(starting_funds > 0)
+				if (starting_funds > 0)
 					//subtract the money
 					station_account.money -= starting_funds
 
@@ -135,37 +135,37 @@
 					ui.close()
 
 				creating_new_account = 0
-			if("insert_card")
-				if(held_card)
+			if ("insert_card")
+				if (held_card)
 					held_card.dropInto(loc)
 
-					if(ishuman(usr) && !usr.get_active_hand())
+					if (ishuman(usr) && !usr.get_active_hand())
 						usr.put_in_hands(held_card)
 					held_card = null
 
 				else
 					var/obj/item/I = usr.get_active_hand()
 					if (istype(I, /obj/item/card/id))
-						if(!usr.unEquip(I, src))
+						if (!usr.unEquip(I, src))
 							return
 						held_card = I
 
-			if("view_account_detail")
+			if ("view_account_detail")
 				var/index = text2num(href_list["account_index"])
-				if(index && index <= length(all_money_accounts))
+				if (index && index <= length(all_money_accounts))
 					detailed_account_view = all_money_accounts[index]
 
-			if("view_accounts_list")
+			if ("view_accounts_list")
 				detailed_account_view = null
 				creating_new_account = 0
 
-			if("revoke_payroll")
+			if ("revoke_payroll")
 				var/funds = detailed_account_view.money
 				detailed_account_view.transfer(station_account, funds, "Revocation of payroll")
 
 				callHook("revoke_payroll", list(detailed_account_view))
 
-			if("print")
+			if ("print")
 				var/text
 				var/obj/item/paper/P = new(loc)
 				if (detailed_account_view)

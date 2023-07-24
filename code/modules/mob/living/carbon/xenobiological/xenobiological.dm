@@ -100,19 +100,19 @@
 	var/tally = ..()
 
 	var/health_deficiency = (maxHealth - health)
-	if(health_deficiency >= 30) tally += (health_deficiency / 25)
+	if (health_deficiency >= 30) tally += (health_deficiency / 25)
 
 	if (bodytemperature < 183.222)
 		tally += (283.222 - bodytemperature) / 10 * 1.75
 
-	if(reagents)
-		if(reagents.has_reagent(/datum/reagent/hyperzine)) // Hyperzine slows slimes down
+	if (reagents)
+		if (reagents.has_reagent(/datum/reagent/hyperzine)) // Hyperzine slows slimes down
 			tally *= 2
 
-		if(reagents.has_reagent(/datum/reagent/frostoil)) // Frostoil also makes them move VEEERRYYYYY slow
+		if (reagents.has_reagent(/datum/reagent/frostoil)) // Frostoil also makes them move VEEERRYYYYY slow
 			tally *= 5
 
-	if(health <= 0) // if damaged, the slime moves twice as slow
+	if (health <= 0) // if damaged, the slime moves twice as slow
 		tally *= 2
 
 	return tally
@@ -122,31 +122,31 @@
 		return
 	now_pushing = 1
 
-	if(isobj(AM) && !client && powerlevel > 0)
+	if (isobj(AM) && !client && powerlevel > 0)
 		var/probab = 10
 		switch(powerlevel)
-			if(1 to 2)	probab = 20
-			if(3 to 4)	probab = 30
-			if(5 to 6)	probab = 40
-			if(7 to 8)	probab = 60
-			if(9)		probab = 70
-			if(10)		probab = 95
-		if(prob(probab))
-			if(istype(AM, /obj/structure/window) || istype(AM, /obj/structure/grille))
-				if(nutrition <= get_hunger_nutrition())
+			if (1 to 2)	probab = 20
+			if (3 to 4)	probab = 30
+			if (5 to 6)	probab = 40
+			if (7 to 8)	probab = 60
+			if (9)		probab = 70
+			if (10)		probab = 95
+		if (prob(probab))
+			if (istype(AM, /obj/structure/window) || istype(AM, /obj/structure/grille))
+				if (nutrition <= get_hunger_nutrition())
 					if (is_adult || prob(5))
 						UnarmedAttack(AM)
 
-	if(ismob(AM))
+	if (ismob(AM))
 		var/mob/tmob = AM
 
-		if(is_adult)
-			if(istype(tmob, /mob/living/carbon/human))
-				if(prob(90))
+		if (is_adult)
+			if (istype(tmob, /mob/living/carbon/human))
+				if (prob(90))
 					now_pushing = 0
 					return
 		else
-			if(istype(tmob, /mob/living/carbon/human))
+			if (istype(tmob, /mob/living/carbon/human))
 				now_pushing = 0
 				return
 
@@ -163,8 +163,8 @@
 
 	if (client.statpanel == "Status")
 		stat(null, "Nutrition: [nutrition]/[get_max_nutrition()]")
-		if(amount_grown >= 10)
-			if(is_adult)
+		if (amount_grown >= 10)
+			if (is_adult)
 				stat(null, "You can reproduce!")
 			else
 				stat(null, "You can evolve!")
@@ -206,7 +206,7 @@
 			f_loss += 60
 
 
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			b_loss += 30
 
 	adjustBruteLoss(b_loss)
@@ -225,9 +225,9 @@
 
 	..()
 
-	if(Victim)
-		if(Victim == M)
-			if(prob(60))
+	if (Victim)
+		if (Victim == M)
+			if (prob(60))
 				visible_message(SPAN_WARNING("\The [M] attempts to wrestle \the [src] off!"))
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 
@@ -242,7 +242,7 @@
 			return
 
 		else
-			if(prob(30))
+			if (prob(30))
 				visible_message(SPAN_WARNING("\The [M] attempts to wrestle \the [src] off \the [Victim]!"))
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 
@@ -264,7 +264,7 @@
 		if (I_DISARM)
 			var/success = prob(40)
 			visible_message(SPAN_WARNING("\The [M] pushes \the [src]![success ? " \The [src] looks momentarily disoriented!" : ""]"))
-			if(success)
+			if (success)
 				confused = max(confused, 2)
 				UpdateFace()
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
@@ -279,7 +279,7 @@
 			if (prob(90))
 				if (MUTATION_HULK in M.mutations)
 					damage += 5
-					if(Victim || Target)
+					if (Victim || Target)
 						Feedstop()
 						Target = null
 					spawn(0)
@@ -341,9 +341,9 @@
 
 /mob/living/carbon/slime/proc/gain_nutrition(amount)
 	adjust_nutrition(amount)
-	if(prob(amount * 2)) // Gain around one level per 50 nutrition
+	if (prob(amount * 2)) // Gain around one level per 50 nutrition
 		powerlevel++
-		if(powerlevel > 10)
+		if (powerlevel > 10)
 			powerlevel = 10
 			adjustToxLoss(-10)
 

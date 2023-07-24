@@ -6,7 +6,7 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
-	if(wearer && wearer.back == src)
+	if (wearer && wearer.back == src)
 		ui_interact(usr)
 
 /obj/item/rig/verb/toggle_vision()
@@ -16,25 +16,25 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
-	if(!istype(wearer) || !wearer.back == src)
+	if (!istype(wearer) || !wearer.back == src)
 		to_chat(usr, SPAN_WARNING("The hardsuit is not being worn."))
 		return
 
-	if(!check_power_cost(usr))
+	if (!check_power_cost(usr))
 		return
 
-	if(canremove)
+	if (canremove)
 		to_chat(usr, SPAN_WARNING("The suit is not active."))
 		return
 
-	if(!check_suit_access(usr))
+	if (!check_suit_access(usr))
 		return
 
-	if(!visor)
+	if (!visor)
 		to_chat(usr, SPAN_WARNING("The hardsuit does not have a configurable visor."))
 		return
 
-	if(!visor.active)
+	if (!visor.active)
 		visor.activate()
 	else
 		visor.deactivate()
@@ -46,11 +46,11 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
-	if(!istype(wearer) || !wearer.back == src)
+	if (!istype(wearer) || !wearer.back == src)
 		to_chat(usr, SPAN_WARNING("The hardsuit is not being worn."))
 		return
 
-	if(!check_suit_access(usr))
+	if (!check_suit_access(usr))
 		return
 
 	toggle_piece("helmet",wearer)
@@ -62,14 +62,14 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
-	if(!istype(wearer) || !wearer.back == src)
+	if (!istype(wearer) || !wearer.back == src)
 		to_chat(usr, SPAN_WARNING("The hardsuit is not being worn."))
 		return
 
-	if(!check_suit_access(usr))
+	if (!check_suit_access(usr))
 		return
 
-	if(!check_power_cost(usr))
+	if (!check_power_cost(usr))
 		return
 
 	deploy(wearer)
@@ -81,11 +81,11 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
-	if(!istype(wearer) || !wearer.back == src)
+	if (!istype(wearer) || !wearer.back == src)
 		to_chat(usr, SPAN_WARNING("The hardsuit is not being worn."))
 		return
 
-	if(!check_suit_access(usr))
+	if (!check_suit_access(usr))
 		return
 
 	toggle_seals(wearer)
@@ -97,24 +97,24 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
-	if(malfunction_check(usr))
+	if (malfunction_check(usr))
 		return
 
-	if(!check_power_cost(usr, 0, 0, 0, 0))
+	if (!check_power_cost(usr, 0, 0, 0, 0))
 		return
 
-	if(canremove)
+	if (canremove)
 		to_chat(usr, SPAN_WARNING("The suit is not active."))
 		return
 
-	if(!visor)
+	if (!visor)
 		to_chat(usr, SPAN_WARNING("The hardsuit does not have a configurable visor."))
 		return
 
-	if(!visor.active)
+	if (!visor.active)
 		visor.activate()
 
-	if(!visor.active)
+	if (!visor.active)
 		to_chat(usr, SPAN_WARNING("The visor is suffering a hardware fault and cannot be configured."))
 		return
 
@@ -127,18 +127,18 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
-	if(malfunction_check(usr))
+	if (malfunction_check(usr))
 		return
 
-	if(canremove)
+	if (canremove)
 		to_chat(usr, SPAN_WARNING("The suit is not active."))
 		return
 
-	if(!istype(wearer) || !wearer.back == src)
+	if (!istype(wearer) || !wearer.back == src)
 		to_chat(usr, SPAN_WARNING("The hardsuit is not being worn."))
 		return
 
-	if(!speech)
+	if (!speech)
 		to_chat(usr, SPAN_WARNING("The hardsuit does not have a speech synthesiser."))
 		return
 
@@ -151,28 +151,28 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
-	if(malfunction_check(usr))
+	if (malfunction_check(usr))
 		return
 
-	if(!check_power_cost(usr, 0, 0, 0, 0))
+	if (!check_power_cost(usr, 0, 0, 0, 0))
 		return
 
-	if(canremove)
+	if (canremove)
 		to_chat(usr, SPAN_WARNING("The suit is not active."))
 		return
 
-	if(!istype(wearer) || !wearer.back == src)
+	if (!istype(wearer) || !wearer.back == src)
 		to_chat(usr, SPAN_WARNING("The hardsuit is not being worn."))
 		return
 
 	var/list/selectable = list()
 	for(var/obj/item/rig_module/module in installed_modules)
-		if(module.selectable)
+		if (module.selectable)
 			selectable |= module
 
 	var/obj/item/rig_module/module = input("Which module do you wish to select?") as null|anything in selectable
 
-	if(!istype(module))
+	if (!istype(module))
 		deselect_module()
 		to_chat(usr, SPAN_INFO("<b>Primary system is now: deselected.</b>"))
 		return
@@ -187,31 +187,31 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
-	if(malfunction_check(usr))
+	if (malfunction_check(usr))
 		return
 
-	if(!check_power_cost(usr, 0, 0, 0, 0))
+	if (!check_power_cost(usr, 0, 0, 0, 0))
 		return
 
-	if(canremove)
+	if (canremove)
 		to_chat(usr, SPAN_WARNING("The suit is not active."))
 		return
 
-	if(!istype(wearer) || !wearer.back == src)
+	if (!istype(wearer) || !wearer.back == src)
 		to_chat(usr, SPAN_WARNING("The hardsuit is not being worn."))
 		return
 
 	var/list/selectable = list()
 	for(var/obj/item/rig_module/module in installed_modules)
-		if(module.toggleable)
+		if (module.toggleable)
 			selectable |= module
 
 	var/obj/item/rig_module/module = input("Which module do you wish to toggle?") as null|anything in selectable
 
-	if(!istype(module))
+	if (!istype(module))
 		return
 
-	if(module.active)
+	if (module.active)
 		to_chat(usr, SPAN_INFO("<b>You attempt to deactivate \the [module.interface_name].</b>"))
 		module.deactivate()
 	else
@@ -225,28 +225,28 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
-	if(malfunction_check(usr))
+	if (malfunction_check(usr))
 		return
 
-	if(canremove)
+	if (canremove)
 		to_chat(usr, SPAN_WARNING("The suit is not active."))
 		return
 
-	if(!istype(wearer) || !wearer.back == src)
+	if (!istype(wearer) || !wearer.back == src)
 		to_chat(usr, SPAN_WARNING("The hardsuit is not being worn."))
 		return
 
-	if(!check_power_cost(usr, 0, 0, 0, 0))
+	if (!check_power_cost(usr, 0, 0, 0, 0))
 		return
 
 	var/list/selectable = list()
 	for(var/obj/item/rig_module/module in installed_modules)
-		if(module.usable)
+		if (module.usable)
 			selectable |= module
 
 	var/obj/item/rig_module/module = input("Which module do you wish to engage?") as null|anything in selectable
 
-	if(!istype(module))
+	if (!istype(module))
 		return
 
 	to_chat(usr, SPAN_INFO("<b>You attempt to engage the [module.interface_name].</b>"))

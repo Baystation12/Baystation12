@@ -106,7 +106,7 @@
 	if (!hidden)
 		return list()
 	. = vars - hidden
-	if(!usr || !check_rights(R_ADMIN|R_DEBUG, FALSE))
+	if (!usr || !check_rights(R_ADMIN|R_DEBUG, FALSE))
 		. -= VV_secluded()
 
 /datum/proc/get_variable_value(varname)

@@ -24,9 +24,9 @@
 
 /spell/area_teleport/choose_targets()
 	var/area/thearea
-	if(!randomise_selection)
+	if (!randomise_selection)
 		thearea = input("Area to teleport to", "Teleport") as null|anything in wizteleportlocs
-		if(!thearea)
+		if (!thearea)
 			return
 	else
 		thearea = pick(wizteleportlocs)
@@ -36,7 +36,7 @@
 	playsound(get_turf(user),cast_sound,50,1)
 	var/turf/end = user.try_teleport(thearea)
 
-	if(!end)
+	if (!end)
 		to_chat(user, "The spell matrix was unable to locate a suitable teleport destination for an unknown reason. Sorry.")
 		return
 	return
@@ -50,9 +50,9 @@
 	return
 
 /spell/area_teleport/invocation(mob/user, area/chosenarea)
-	if(!istype(chosenarea))
+	if (!istype(chosenarea))
 		return //can't have that, can we
-	if(!invocation_area || !chosenarea)
+	if (!invocation_area || !chosenarea)
 		..()
 	else
 		invocation += "[uppertext(chosenarea.name)]"

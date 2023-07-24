@@ -27,11 +27,11 @@
 
 /obj/effect/paint/LateInitialize()
 	var/turf/simulated/wall/W = get_turf(src)
-	if(istype(W))
+	if (istype(W))
 		W.paint_color = color
 		W.update_icon()
 	var/obj/structure/wall_frame/WF = locate() in loc
-	if(WF)
+	if (WF)
 		WF.paint_color = color
 		WF.update_icon()
 	qdel(src)
@@ -80,11 +80,11 @@
 
 /obj/effect/paint_stripe/LateInitialize()
 	var/turf/simulated/wall/W = get_turf(src)
-	if(istype(W))
+	if (istype(W))
 		W.stripe_color = color
 		W.update_icon()
 	var/obj/structure/wall_frame/WF = locate() in loc
-	if(WF)
+	if (WF)
 		WF.stripe_color = color
 		WF.update_icon()
 	qdel(src)
@@ -126,7 +126,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 	atom_flags |= ATOM_FLAG_INITIALIZED
 	var/obj/machinery/atmospherics/pipe/P = locate() in loc
-	if(P && !P.air_temporary)
+	if (P && !P.air_temporary)
 		P.air_temporary = new(P.volume, tempurature)
 		var/datum/gas_mixture/G = P.air_temporary
 		G.adjust_gas(GAS_OXYGEN,((pressure*P.volume)/(R_IDEAL_GAS_EQUATION*temperature)))

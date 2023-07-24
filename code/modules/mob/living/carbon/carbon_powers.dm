@@ -7,7 +7,7 @@
 
 	var/mob/living/simple_animal/borer/B = has_brain_worms()
 
-	if(B && B.host_brain)
+	if (B && B.host_brain)
 		to_chat(src, SPAN_DANGER("You withdraw your probosci, releasing control of [B.host_brain]"))
 
 		B.detatch()
@@ -27,10 +27,10 @@
 
 	var/mob/living/simple_animal/borer/B = has_brain_worms()
 
-	if(!B)
+	if (!B)
 		return
 
-	if(B.host_brain.ckey)
+	if (B.host_brain.ckey)
 		to_chat(src, SPAN_DANGER("You send a punishing spike of psychic agony lancing into your host's brain."))
 		if (!can_feel_pain())
 			to_chat(B.host_brain, SPAN_WARNING("You feel a strange sensation as a foreign influence prods your mind."))
@@ -45,10 +45,10 @@
 
 	var/mob/living/simple_animal/borer/B = has_brain_worms()
 
-	if(!B)
+	if (!B)
 		return
 
-	if(B.chemicals >= 100)
+	if (B.chemicals >= 100)
 		to_chat(src, SPAN_DANGER("Your host twitches and quivers as you rapidly excrete a larva from your sluglike body."))
 		visible_message(SPAN_DANGER("\The [src] heaves violently, expelling a rush of vomit and a wriggling, sluglike creature!"))
 		B.chemicals -= 100
@@ -69,20 +69,20 @@
  */
 /mob/living/carbon/proc/devour(atom/movable/victim)
 	var/can_eat = can_devour(victim)
-	if(!can_eat)
+	if (!can_eat)
 		return FALSE
 
 	var/eat_speed = 100
-	if(can_eat == DEVOUR_FAST)
+	if (can_eat == DEVOUR_FAST)
 		eat_speed = 30
 	src.visible_message(SPAN_DANGER("\The [src] is attempting to devour \the [victim] whole!"))
 	var/mob/target = victim
-	if(isobj(victim))
+	if (isobj(victim))
 		target = src
-	if(!do_after(src, eat_speed, target, DO_PUBLIC_UNIQUE))
+	if (!do_after(src, eat_speed, target, DO_PUBLIC_UNIQUE))
 		return FALSE
 	src.visible_message(SPAN_DANGER("\The [src] devours \the [victim] whole!"))
-	if(ismob(victim))
+	if (ismob(victim))
 		admin_attack_log(src, victim, "Devoured.", "Was devoured by.", "devoured")
 	else
 		src.drop_from_inventory(victim)

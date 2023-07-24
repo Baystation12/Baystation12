@@ -39,7 +39,7 @@
 
 /obj/machinery/gravity_generator/proc/locatelocalareas()
 	for(var/area/A in range(src,effectiverange))
-		if(istype(A,/area/space))
+		if (istype(A,/area/space))
 			continue // No (de)gravitizing space.
 		localareas |= A
 
@@ -54,8 +54,8 @@
 
 	var/dat = "<h3>Generator Control System</h3>"
 	//dat += SPAN_SIZE("-1", "<a href='byond://?src=\ref[src];refresh=1'>Refresh</a>")
-	if(gravity_generator)
-		if(gravity_generator.on)
+	if (gravity_generator)
+		if (gravity_generator.on)
 			dat += "[SPAN_COLOR("green", "<br><tt>Gravity Status: ON</tt>")]<br>"
 		else
 			dat += "[SPAN_COLOR("red", "<br><tt>Gravity Status: OFF</tt>")]<br>"
@@ -63,7 +63,7 @@
 		dat += "<br><tt>Currently Supplying Gravitons To:</tt><br>"
 
 		for(var/area/A in gravity_generator.localareas)
-			if(A.has_gravity && gravity_generator.on)
+			if (A.has_gravity && gravity_generator.on)
 				dat += "<tt>[SPAN_COLOR("green", A)]</tt><br>"
 
 			else if (A.has_gravity)
@@ -73,7 +73,7 @@
 				dat += "<tt>[SPAN_COLOR("red", A)]</tt><br>"
 
 		dat += "<br><tt>Maintainence Functions:</tt><br>"
-		if(gravity_generator.on)
+		if (gravity_generator.on)
 			dat += "<a href='byond://?src=\ref[src];gentoggle=1'>[SPAN_COLOR("red", " TURN GRAVITY GENERATOR OFF. ")]</a>"
 		else
 			dat += "<a href='byond://?src=\ref[src];gentoggle=1'>[SPAN_COLOR("green", " TURN GRAVITY GENERATOR ON. ")]</a>"
@@ -87,20 +87,20 @@
 
 /obj/machinery/computer/gravity_control_computer/Topic(href, href_list)
 	set background = 1
-	if((. = ..()))
+	if ((. = ..()))
 		close_browser(usr, "window=air_alarm")
 		return
 
-	if(href_list["gentoggle"])
-		if(gravity_generator.on)
+	if (href_list["gentoggle"])
+		if (gravity_generator.on)
 			gravity_generator.on = 0
 
 			for(var/area/A in gravity_generator.localareas)
 				var/obj/machinery/gravity_generator/G
 				for(G in SSmachines.machinery)
-					if((A in G.localareas) && (G.on))
+					if ((A in G.localareas) && (G.on))
 						break
-				if(!G)
+				if (!G)
 					A.gravitychange(0)
 		else
 			for(var/area/A in gravity_generator.localareas)

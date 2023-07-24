@@ -18,5 +18,5 @@ GLOBAL_DATUM_INIT(death_event, /singleton/observ/death, new)
 
 /mob/living/add_to_dead_mob_list()
 	. = ..()
-	if(.)
+	if (.)
 		GLOB.death_event.raise_event(src)

@@ -149,12 +149,12 @@
 
 /obj/particle_emitter/Initialize(mapload, time, _color)
 	. = ..()
-	if(time > 0)
+	if (time > 0)
 		QDEL_IN(src, time)
 	color = _color
 
 /obj/particle_emitter/proc/enable(on)
-	if(on)
+	if (on)
 		particles.spawning = initial(particles.spawning)
 	else
 		particles.spawning = 0
@@ -167,13 +167,13 @@
 	..()
 	var/list/min
 	var/list/max
-	if(dir == NORTH)
+	if (dir == NORTH)
 		min = list(-3, 2, -1)
 		max = list(3, 12, 0)
-	else if(dir == SOUTH)
+	else if (dir == SOUTH)
 		min = list(-3, 2, 0)
 		max = list(3, 12, 1)
-	else if(dir == EAST)
+	else if (dir == EAST)
 		min = list(1, 3, 0)
 		max = list(6, 12, 0)
 	else

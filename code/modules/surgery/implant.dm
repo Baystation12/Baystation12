@@ -34,7 +34,7 @@
 
 /singleton/surgery_step/cavity/make_space/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && affected.cavity_name && !affected.cavity)
+	if (affected && affected.cavity_name && !affected.cavity)
 		return affected
 
 /singleton/surgery_step/cavity/make_space/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -66,7 +66,7 @@
 
 /singleton/surgery_step/cavity/close_space/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && affected.cavity)
+	if (affected && affected.cavity)
 		return affected
 
 /singleton/surgery_step/cavity/close_space/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -92,28 +92,28 @@
 	max_duration = 100
 
 /singleton/surgery_step/cavity/place_item/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(istype(user,/mob/living/silicon/robot))
+	if (istype(user,/mob/living/silicon/robot))
 		return FALSE
 	. = ..()
 
 /singleton/surgery_step/cavity/place_item/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && affected.cavity)
+	if (affected && affected.cavity)
 		return affected
 
 /singleton/surgery_step/cavity/place_item/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(affected && affected.cavity)
+	if (affected && affected.cavity)
 		var/max_volume = BASE_STORAGE_CAPACITY(affected.cavity_max_w_class)
-		if(tool.w_class > affected.cavity_max_w_class)
+		if (tool.w_class > affected.cavity_max_w_class)
 			to_chat(user, SPAN_WARNING("\The [tool] is too big for [affected.cavity_name] cavity."))
 			return FALSE
 		var/total_volume = tool.get_storage_cost()
 		for(var/obj/item/I in affected.implants)
-			if(istype(I,/obj/item/implant))
+			if (istype(I,/obj/item/implant))
 				continue
 			total_volume += I.get_storage_cost()
-		if(total_volume > max_volume)
+		if (total_volume > max_volume)
 			to_chat(user, SPAN_WARNING("There isn't enough space left in [affected.cavity_name] cavity for [tool]."))
 			return FALSE
 		return TRUE
@@ -128,7 +128,7 @@
 
 /singleton/surgery_step/cavity/place_item/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
-	if(!user.unEquip(tool, affected))
+	if (!user.unEquip(tool, affected))
 		return
 	user.visible_message(SPAN_NOTICE("[user] puts \the [tool] inside [target]'s [affected.cavity_name] cavity."), \
 	SPAN_NOTICE("You put \the [tool] inside [target]'s [affected.cavity_name] cavity.") )
@@ -153,9 +153,9 @@
 
 /singleton/surgery_step/cavity/implant_removal/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected)
+	if (affected)
 		for(var/obj/O in affected.implants)
-			if(!istype(O, /obj/item/organ/internal))
+			if (!istype(O, /obj/item/organ/internal))
 				return affected
 	return FALSE
 
@@ -169,18 +169,18 @@
 /singleton/surgery_step/cavity/implant_removal/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
 	var/exposed = 0
-	if(affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED))
+	if (affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED))
 		exposed = 1
-	if(BP_IS_ROBOTIC(affected) && affected.hatch_state == HATCH_OPENED)
+	if (BP_IS_ROBOTIC(affected) && affected.hatch_state == HATCH_OPENED)
 		exposed = 1
 
 	var/find_prob = 0
 	var/list/loot = list()
-	if(exposed)
+	if (exposed)
 		loot = affected.implants
 	else
 		for(var/datum/wound/wound in affected.wounds)
-			if(LAZYLEN(wound.embedded_objects))
+			if (LAZYLEN(wound.embedded_objects))
 				loot |= wound.embedded_objects
 			find_prob += 50
 
@@ -188,7 +188,7 @@
 
 		var/obj/item/obj = pick(loot)
 
-		if(istype(obj,/obj/item/implant))
+		if (istype(obj,/obj/item/implant))
 			var/obj/item/implant/imp = obj
 			if (imp.islegal())
 				find_prob +=60
@@ -205,9 +205,9 @@
 			SET_BIT(target.hud_updateflag, IMPLOYAL_HUD)
 
 			//Handle possessive brain borers.
-			if(istype(obj,/mob/living/simple_animal/borer))
+			if (istype(obj,/mob/living/simple_animal/borer))
 				var/mob/living/simple_animal/borer/worm = obj
-				if(worm.controlling)
+				if (worm.controlling)
 					target.release_control()
 				worm.detatch()
 				worm.leave_host()

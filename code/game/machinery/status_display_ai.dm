@@ -33,7 +33,7 @@ var/global/list/ai_status_emotions = list(
 	var/list/emotions = new
 	for(var/emotion_name in ai_status_emotions)
 		var/datum/ai_emotion/emotion = ai_status_emotions[emotion_name]
-		if(!emotion.ckey || emotion.ckey == ckey)
+		if (!emotion.ckey || emotion.ckey == ckey)
 			emotions += emotion_name
 
 	return emotions
@@ -42,15 +42,15 @@ var/global/list/ai_status_emotions = list(
 	var/list/ai_emotions = get_ai_emotions(user.ckey)
 	var/emote = input("Please, select a status!", "AI Status", null, null) in ai_emotions
 	for (var/obj/machinery/M in SSmachines.machinery) //change status
-		if(istype(M, /obj/machinery/ai_status_display))
+		if (istype(M, /obj/machinery/ai_status_display))
 			var/obj/machinery/ai_status_display/AISD = M
 			AISD.emotion = emote
 			AISD.update_icon()
 		//if Friend Computer, change ALL displays
-		else if(istype(M, /obj/machinery/status_display))
+		else if (istype(M, /obj/machinery/status_display))
 
 			var/obj/machinery/status_display/SD = M
-			if(emote=="Friend Computer")
+			if (emote=="Friend Computer")
 				SD.friendc = 1
 			else
 				SD.friendc = 0
@@ -76,22 +76,22 @@ var/global/list/ai_status_emotions = list(
 	src.emotion = emote
 
 /obj/machinery/ai_status_display/on_update_icon()
-	if(inoperable())
+	if (inoperable())
 		overlays.Cut()
 		return
 
 	switch(mode)
-		if(0) //Blank
+		if (0) //Blank
 			overlays.Cut()
-		if(1) // AI emoticon
+		if (1) // AI emoticon
 			var/datum/ai_emotion/ai_emotion = ai_status_emotions[emotion]
 			set_picture(ai_emotion.overlay)
-		if(2) // BSOD
+		if (2) // BSOD
 			set_picture("ai_bsod")
 
 /obj/machinery/ai_status_display/proc/set_picture(state)
 	picture_state = state
-	if(length(overlays))
+	if (length(overlays))
 		overlays.Cut()
 	overlays += overlay_image('icons/obj/status_display.dmi', icon_state=picture_state, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 	set_light(0.8, 0.1, 1, l_color = "#0093ff")

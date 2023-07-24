@@ -232,18 +232,18 @@
 
 /datum/mil_rank/grade()
 	. = ..()
-	if(!sort_order)
+	if (!sort_order)
 		return ""
-	if(sort_order <= 10)
+	if (sort_order <= 10)
 		return "E[sort_order]"
 	return "O[sort_order - 10]"
 
 // Within the scope of the Torch, this is the only necessary differentiation.
 /datum/mil_rank/rank_category()
 	. = ..()
-	if(!sort_order)
+	if (!sort_order)
 		return null
-	if(sort_order <= 10)
+	if (sort_order <= 10)
 		return GET_SINGLETON(/singleton/rank_category/enlisted)
 	else
 		return GET_SINGLETON(/singleton/rank_category/commissioned)

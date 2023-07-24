@@ -33,10 +33,10 @@ SUBSYSTEM_DEF(character_setup)
 		var/datum/preferences/prefs = save_queue[length(save_queue)]
 		LIST_DEC(save_queue)
 
-		if(!QDELETED(prefs))
+		if (!QDELETED(prefs))
 			prefs.save_preferences()
 
-		if(MC_TICK_CHECK)
+		if (MC_TICK_CHECK)
 			return
 
 /datum/controller/subsystem/character_setup/proc/queue_preferences_save(datum/preferences/prefs)

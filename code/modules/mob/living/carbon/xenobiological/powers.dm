@@ -51,17 +51,17 @@
 	var/totalDrained = 0
 
 	while(Victim && stat != 2)
-		if(Adjacent(M))
+		if (Adjacent(M))
 			UpdateFeed()
 
 			var/hazmat = 1 - M.get_blocked_ratio(null, DAMAGE_TOXIN, damage_flags = DAMAGE_FLAG_DISPERSED | DAMAGE_FLAG_BIO) //scale feeding rate by overall bio protection
-			if(istype(M, /mob/living/carbon))
+			if (istype(M, /mob/living/carbon))
 				Victim.adjustCloneLoss(5 * hazmat)
 				Victim.adjustToxLoss(1 * hazmat)
-				if(Victim.health <= 0)
+				if (Victim.health <= 0)
 					Victim.adjustToxLoss(1 * hazmat)
 
-			else if(istype(M, /mob/living/simple_animal))
+			else if (istype(M, /mob/living/simple_animal))
 				Victim.adjustBruteLoss(10 * hazmat)
 
 			else
@@ -69,7 +69,7 @@
 				Feedstop()
 				break
 
-			if(prob(15) && M.client && istype(M, /mob/living/carbon))
+			if (prob(15) && M.client && istype(M, /mob/living/carbon))
 				var/painMes = pick("You can feel your body becoming weak!", "You feel like you're about to die!", "You feel every part of your body screaming in agony!", "A low, rolling pain passes through your body!", "Your body feels as if it's falling apart!", "You feel extremely weak!", "A sharp, deep pain bathes every inch of your body!")
 				if (ishuman(M))
 					var/mob/living/carbon/human/H = M
@@ -82,7 +82,7 @@
 
 			gain_nutrition(20 * hazmat)
 			totalDrained += 20 * hazmat
-			if(totalDrained > 200)
+			if (totalDrained > 200)
 				happyWithFood = 1
 
 			var/heal_amt = 10 * hazmat
@@ -91,10 +91,10 @@
 			adjustFireLoss(-heal_amt)
 			adjustCloneLoss(-heal_amt)
 			updatehealth()
-			if(Victim)
+			if (Victim)
 				Victim.updatehealth()
 
-			if(invalidFeedTarget(M) && totalDrained > 40) // Drained
+			if (invalidFeedTarget(M) && totalDrained > 40) // Drained
 				happyWithFood = 1
 				break
 
@@ -102,10 +102,10 @@
 		else
 			break
 
-	if(happyWithFood) // This means that the slime has either drained the victim or let it go
-		if(!client)
-			if(Victim && !rabid && !attacked && Victim.LAssailant && Victim.LAssailant != Victim)
-				if(!(Victim.LAssailant in Friends))
+	if (happyWithFood) // This means that the slime has either drained the victim or let it go
+		if (!client)
+			if (Victim && !rabid && !attacked && Victim.LAssailant && Victim.LAssailant != Victim)
+				if (!(Victim.LAssailant in Friends))
 					Friends[Victim.LAssailant] = 1
 				else
 					++Friends[Victim.LAssailant]
@@ -116,23 +116,23 @@
 	Victim = null
 
 /mob/living/carbon/slime/proc/Feedstop()
-	if(Victim)
+	if (Victim)
 		Victim = null
 
 /mob/living/carbon/slime/proc/UpdateFeed()
-	if(Victim)
+	if (Victim)
 		forceMove(Victim.loc) // simple "attach to head" effect!
 
 /mob/living/carbon/slime/verb/Evolve()
 	set category = "Slime"
 	set desc = "This will let you evolve from baby to adult slime."
 
-	if(stat)
+	if (stat)
 		to_chat(src, SPAN_NOTICE("I must be conscious to do this..."))
 		return
 
-	if(!is_adult)
-		if(amount_grown >= SLIME_EVOLUTION_THRESHOLD)
+	if (!is_adult)
+		if (amount_grown >= SLIME_EVOLUTION_THRESHOLD)
 			is_adult = 1
 			maxHealth = 200
 			amount_grown = 0
@@ -147,13 +147,13 @@
 	set category = "Slime"
 	set desc = "This will make you split into four slimes."
 
-	if(stat)
+	if (stat)
 		to_chat(src, SPAN_NOTICE("I must be conscious to do this..."))
 		return
 
-	if(is_adult)
-		if(amount_grown >= SLIME_EVOLUTION_THRESHOLD)
-			if(stat)
+	if (is_adult)
+		if (amount_grown >= SLIME_EVOLUTION_THRESHOLD)
+			if (stat)
 				to_chat(src, SPAN_NOTICE("I must be conscious to do this..."))
 				return
 
@@ -164,14 +164,14 @@
 				if (length(mutations) && prob(mutation_chance))
 					t = pick(mutations)
 				var/mob/living/carbon/slime/M = new /mob/living/carbon/slime(loc, t)
-				if(i != 1)
+				if (i != 1)
 					step_away(M, src)
 				M.Friends = Friends.Copy()
 				babies += M
 
 			var/mob/living/carbon/slime/new_slime = babies[1]
 			new_slime.universal_speak = universal_speak
-			if(src.mind)
+			if (src.mind)
 				src.mind.transfer_to(new_slime)
 			else
 				new_slime.key = src.key

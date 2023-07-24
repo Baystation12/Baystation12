@@ -386,7 +386,7 @@
 /turf/simulated/floor/bluespace/Entered(mob/living/L)
 	. = ..()
 
-	if(istype(L) && prob(75))
+	if (istype(L) && prob(75))
 		L.visible_message(
 			SPAN_WARNING("\The [L] starts flickering in and out of existence as they step onto the bluespace!"),
 			SPAN_WARNING("You feel your entire body tingle, and something pulling you away!")

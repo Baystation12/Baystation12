@@ -222,9 +222,9 @@
 	// Additional check not covered can_buckle(), due to attempting to buckle allowing you to move an adjacent target to the object.
 	if (M.loc != loc)
 		return  FALSE
-	if(ismob(src))
+	if (ismob(src))
 		var/mob/living/carbon/C = src //Don't wanna forget the xenos.
-		if(M != src && C.incapacitated())
+		if (M != src && C.incapacitated())
 			return 0
 
 	M.buckled = src
@@ -311,12 +311,12 @@
 	add_fingerprint(user)
 
 	//can't buckle unless you share locs so try to move M to the obj.
-	if(M.loc != src.loc)
+	if (M.loc != src.loc)
 		step_towards(M, src)
 
 	. = buckle_mob(M)
-	if(.)
-		if(M == user)
+	if (.)
+		if (M == user)
 			user.visible_message(
 				SPAN_NOTICE("\The [user] buckles themselves to \the [src]."),
 				SPAN_NOTICE("You buckle yourself to \the [src]."),
@@ -348,8 +348,8 @@
 	if (!can_unbuckle(user, silent))
 		return
 	var/mob/living/M = unbuckle_mob()
-	if(M)
-		if(M != user)
+	if (M)
+		if (M != user)
 			user.visible_message(
 				SPAN_WARNING("\The [user] unbuckles \the [M] from \the [src]."),
 				SPAN_DANGER("You unbuckle \the [M] from \the [src]"),

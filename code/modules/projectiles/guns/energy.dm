@@ -23,7 +23,7 @@
 
 /obj/item/gun/energy/switch_firemodes()
 	. = ..()
-	if(.)
+	if (.)
 		update_icon()
 
 /obj/item/gun/energy/emp_act(severity)
@@ -32,16 +32,16 @@
 
 /obj/item/gun/energy/Initialize()
 	. = ..()
-	if(cell_type)
+	if (cell_type)
 		power_supply = new cell_type(src)
 	else
 		power_supply = new /obj/item/cell/device/variable(src, max_shots*charge_cost)
-	if(self_recharge)
+	if (self_recharge)
 		START_PROCESSING(SSobj, src)
 	update_icon()
 
 /obj/item/gun/energy/Destroy()
-	if(self_recharge)
+	if (self_recharge)
 		STOP_PROCESSING(SSobj, src)
 	return ..()
 
@@ -49,17 +49,17 @@
 	return power_supply
 
 /obj/item/gun/energy/Process()
-	if(self_recharge) //Every [recharge_time] ticks, recharge a shot for the cyborg
+	if (self_recharge) //Every [recharge_time] ticks, recharge a shot for the cyborg
 		charge_tick++
-		if(charge_tick < recharge_time) return 0
+		if (charge_tick < recharge_time) return 0
 		charge_tick = 0
 
-		if(!power_supply || power_supply.charge >= power_supply.maxcharge)
+		if (!power_supply || power_supply.charge >= power_supply.maxcharge)
 			return 0 // check if we actually need to recharge
 
-		if(use_external_power)
+		if (use_external_power)
 			var/obj/item/cell/external = get_external_power_supply()
-			if(!external || !external.use(charge_cost)) //Take power from the borg...
+			if (!external || !external.use(charge_cost)) //Take power from the borg...
 				return 0
 
 		power_supply.give(charge_cost) //... to recharge the shot
@@ -67,18 +67,18 @@
 	return 1
 
 /obj/item/gun/energy/consume_next_projectile()
-	if(!power_supply) return null
-	if(!ispath(projectile_type)) return null
-	if(!power_supply.checked_use(charge_cost)) return null
+	if (!power_supply) return null
+	if (!ispath(projectile_type)) return null
+	if (!power_supply.checked_use(charge_cost)) return null
 	return new projectile_type(src)
 
 /obj/item/gun/energy/proc/get_external_power_supply()
-	if(isrobot(loc) || istype(loc, /obj/item/rig_module) || istype(loc, /obj/item/mech_equipment))
+	if (isrobot(loc) || istype(loc, /obj/item/rig_module) || istype(loc, /obj/item/mech_equipment))
 		return loc.get_cell()
 
 /obj/item/gun/energy/examine(mob/user)
 	. = ..(user)
-	if(!power_supply)
+	if (!power_supply)
 		to_chat(user, "Seems like it's dead.")
 		return
 	if (charge_cost == 0)
@@ -89,17 +89,17 @@
 
 /obj/item/gun/energy/on_update_icon()
 	..()
-	if(charge_meter && power_supply)
+	if (charge_meter && power_supply)
 		var/ratio = power_supply.percent()
 
 		//make sure that rounding down will not give us the empty state even if we have charge for a shot left.
 		// Also make sure cells adminbussed with higher-than-max charge don't break sprites
-		if(power_supply.charge < charge_cost)
+		if (power_supply.charge < charge_cost)
 			ratio = 0
 		else
 			ratio = clamp(round(ratio, 25), 25, 100)
 
-		if(modifystate)
+		if (modifystate)
 			icon_state = "[modifystate][ratio]"
 		else
 			icon_state = "[initial(icon_state)][ratio]"

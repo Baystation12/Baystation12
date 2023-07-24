@@ -40,7 +40,7 @@
 	)
 
 /datum/job/ai/equip(mob/living/carbon/human/H)
-	if(!H)	return 0
+	if (!H)	return 0
 	return 1
 
 /datum/job/ai/is_position_available()

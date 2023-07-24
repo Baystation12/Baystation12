@@ -39,7 +39,7 @@
 	if (ispath(loaded))
 		loaded = new loaded (src, load_sheet_max)
 
-	if(capacitor)
+	if (capacitor)
 		power_per_tick = (power_cost*0.15) * capacitor.rating
 	update_icon()
 	. = ..()
@@ -55,52 +55,52 @@
 	return cell
 
 /obj/item/gun/magnetic/Process()
-	if(capacitor)
-		if(cell)
-			if(capacitor.charge < capacitor.max_charge && cell.checked_use(power_per_tick))
+	if (capacitor)
+		if (cell)
+			if (capacitor.charge < capacitor.max_charge && cell.checked_use(power_per_tick))
 				capacitor.charge(power_per_tick)
 		else
-			if(capacitor)
+			if (capacitor)
 				capacitor.use(capacitor.charge * 0.05)
 	update_icon()
 
 /obj/item/gun/magnetic/on_update_icon()
 	. = ..()
 	var/list/overlays_to_add = list()
-	if(removable_components)
-		if(cell)
+	if (removable_components)
+		if (cell)
 			overlays_to_add += image(icon, "[icon_state]_cell")
-		if(capacitor)
+		if (capacitor)
 			overlays_to_add += image(icon, "[icon_state]_capacitor")
-	if(!cell || !capacitor)
+	if (!cell || !capacitor)
 		overlays_to_add += image(icon, "[icon_state]_red")
-	else if(capacitor.charge < power_cost)
+	else if (capacitor.charge < power_cost)
 		overlays_to_add += image(icon, "[icon_state]_amber")
 	else
 		overlays_to_add += image(icon, "[icon_state]_green")
-	if(loaded)
+	if (loaded)
 		overlays_to_add += image(icon, "[icon_state]_loaded")
 		var/obj/item/magnetic_ammo/mag = loaded
-		if(istype(mag))
-			if(mag.remaining)
+		if (istype(mag))
+			if (mag.remaining)
 				overlays_to_add += image(icon, "[icon_state]_ammo")
 
 	overlays += overlays_to_add
 
 /obj/item/gun/magnetic/proc/show_ammo(mob/user)
-	if(loaded)
+	if (loaded)
 		to_chat(user, SPAN_NOTICE("It has \a [loaded] loaded."))
 
 /obj/item/gun/magnetic/examine(mob/user)
 	. = ..()
-	if(cell)
+	if (cell)
 		to_chat(user, SPAN_NOTICE("The installed [cell.name] has a charge level of [round((cell.charge/cell.maxcharge)*100)]%."))
-	if(capacitor)
+	if (capacitor)
 		to_chat(user, SPAN_NOTICE("The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%."))
-	if(!cell || !capacitor)
+	if (!cell || !capacitor)
 		to_chat(user, SPAN_NOTICE("The capacitor charge indicator is blinking [SPAN_COLOR("[COLOR_RED]", "red")]. Maybe you should check the cell or capacitor."))
 	else
-		if(capacitor.charge < power_cost)
+		if (capacitor.charge < power_cost)
 			to_chat(user, SPAN_NOTICE("The capacitor charge indicator is [SPAN_COLOR("[COLOR_ORANGE]", "amber")]."))
 		else
 			to_chat(user, SPAN_NOTICE("The capacitor charge indicator is [SPAN_COLOR("[COLOR_GREEN]", "green")]."))
@@ -220,17 +220,17 @@
 
 
 /obj/item/gun/magnetic/attack_hand(mob/user)
-	if(user.get_inactive_hand() == src)
+	if (user.get_inactive_hand() == src)
 		var/obj/item/removing
 
-		if(loaded)
+		if (loaded)
 			removing = loaded
 			loaded = null
-		else if(cell && removable_components)
+		else if (cell && removable_components)
 			removing = cell
 			cell = null
 
-		if(removing)
+		if (removing)
 			user.put_in_hands(removing)
 			user.visible_message(SPAN_NOTICE("\The [user] removes \the [removing] from \the [src]."))
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
@@ -247,14 +247,14 @@
 
 /obj/item/gun/magnetic/consume_next_projectile()
 
-	if(!check_ammo() || !capacitor || capacitor.charge < power_cost)
+	if (!check_ammo() || !capacitor || capacitor.charge < power_cost)
 		return
 
 	use_ammo()
 	capacitor.use(power_cost)
 	update_icon()
 
-	if(gun_unreliable && prob(gun_unreliable))
+	if (gun_unreliable && prob(gun_unreliable))
 		spawn(3) // So that it will still fire - considered modifying Fire() to return a value but burst fire makes that annoying.
 			visible_message(SPAN_DANGER("\The [src] explodes with the force of the shot!"))
 			explosion(get_turf(src), 2, EX_ACT_LIGHT)

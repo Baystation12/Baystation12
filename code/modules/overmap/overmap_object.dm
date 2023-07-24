@@ -38,24 +38,24 @@
 	. = ..()
 	add_scan_data("base_scan", desc)
 
-	if(!GLOB.using_map.use_overmap)
+	if (!GLOB.using_map.use_overmap)
 		return INITIALIZE_HINT_QDEL
 
-	if(scannable)
+	if (scannable)
 		unknown_id = "[pick(GLOB.phonetic_alphabet)]-[random_id(/obj/effect/overmap, 100, 999)]"
 
-	if(requires_contact)
+	if (requires_contact)
 		invisibility = INVISIBILITY_OVERMAP // Effects that require identification have their images cast to the client via sensors.
 
 	update_icon()
 
 /obj/effect/overmap/Crossed(obj/effect/overmap/visitable/other)
-	if(istype(other))
+	if (istype(other))
 		for(var/obj/effect/overmap/visitable/O in loc)
 			SSskybox.rebuild_skyboxes(O.map_z)
 
 /obj/effect/overmap/Uncrossed(obj/effect/overmap/visitable/other)
-	if(istype(other))
+	if (istype(other))
 		SSskybox.rebuild_skyboxes(other.map_z)
 		for(var/obj/effect/overmap/visitable/O in loc)
 			SSskybox.rebuild_skyboxes(O.map_z)
@@ -83,7 +83,7 @@
 
 	var/datum/sector_scan/new_scan = new()
 	//If id isn't specified, generate unique-ish one
-	if(!id)
+	if (!id)
 		id = "scan_data_[next_id++]"
 
 	if (scans[id])
@@ -101,7 +101,7 @@
 	return TRUE
 
 /obj/effect/overmap/proc/remove_scan_data(id)
-	if(!scans[id])
+	if (!scans[id])
 		return FALSE
 
 	var/datum/scan = scans[id]

@@ -15,7 +15,7 @@ SUBSYSTEM_DEF(unit_tests)
 /datum/controller/subsystem/unit_tests/Initialize(start_uptime)
 
 	#ifndef UNIT_TEST_COLOURED
-	if(world.system_type != UNIX) // Not a Unix/Linux/etc system, we probably don't want to print color escapes (unless UNIT_TEST_COLOURED was defined to force escapes)
+	if (world.system_type != UNIX) // Not a Unix/Linux/etc system, we probably don't want to print color escapes (unless UNIT_TEST_COLOURED was defined to force escapes)
 		ascii_esc = ""
 		ascii_red = ""
 		ascii_green = ""
@@ -44,7 +44,7 @@ SUBSYSTEM_DEF(unit_tests)
 			continue
 
 		// Suggestion: Do smart things here to squeeze as many templates as possible into the same Z-level
-		if(map_template.tallness == 1)
+		if (map_template.tallness == 1)
 			INCREMENT_WORLD_Z_SIZE
 			GLOB.using_map.sealed_levels += world.maxz
 			var/corner = locate(world.maxx/2, world.maxy/2, world.maxz)
@@ -70,7 +70,7 @@ SUBSYSTEM_DEF(unit_tests)
 	log_unit_test("Game start has been requested.")
 
 /datum/controller/subsystem/unit_tests/proc/await_game_running()
-	if(GAME_STATE == RUNLEVEL_GAME)
+	if (GAME_STATE == RUNLEVEL_GAME)
 		log_unit_test("The game is now in progress.")
 		stage++
 
@@ -79,7 +79,7 @@ SUBSYSTEM_DEF(unit_tests)
 	while (length(curr))
 		var/datum/unit_test/test = curr[length(curr)]
 		LIST_DEC(curr)
-		if(do_unit_test(test, end_unit_tests) && test.async)
+		if (do_unit_test(test, end_unit_tests) && test.async)
 			async_tests += test
 		total_unit_tests++
 		if (MC_TICK_CHECK)
@@ -96,10 +96,10 @@ SUBSYSTEM_DEF(unit_tests)
 		var/datum/unit_test/test = current_async[length(async)]
 		for(var/S in test.subsystems_to_await())
 			var/datum/controller/subsystem/subsystem = S
-			if(subsystem.times_fired < 1)
+			if (subsystem.times_fired < 1)
 				return
 		LIST_DEC(async)
-		if(check_unit_test(test, end_unit_tests))
+		if (check_unit_test(test, end_unit_tests))
 			async_tests -= test
 		if (MC_TICK_CHECK)
 			return

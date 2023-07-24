@@ -60,7 +60,7 @@
 	command_announcement.Announce(start_text, alert_title)
 	for(var/obj/machinery/shield_diffuser/SD in SSmachines.machinery)
 		SD.meteor_alarm(INFINITY)
-	if(GLOB.using_map.use_overmap)
+	if (GLOB.using_map.use_overmap)
 		var/area/map = locate(/area/overmap)
 		for(var/turf/T in map)
 			T.overlays += image('icons/obj/overmap.dmi', "meteor[rand(1,4)]")
@@ -68,41 +68,41 @@
 
 /datum/game_mode/meteor/process()
 	// Send an alert halfway through the round.
-	if((round_duration_in_ticks >= (next_wave / 2)) && !alert_sent)
+	if ((round_duration_in_ticks >= (next_wave / 2)) && !alert_sent)
 		on_meteor_warn()
 	// And then another one when the meteors start flying around.
-	if((round_duration_in_ticks >= next_wave) && (alert_sent == 1))
+	if ((round_duration_in_ticks >= next_wave) && (alert_sent == 1))
 		on_enter_field()
-	if((round_duration_in_ticks >= METEOR_FAILSAFE_THRESHOLD) && (meteor_severity < 15) && !failsafe_triggered)
+	if ((round_duration_in_ticks >= METEOR_FAILSAFE_THRESHOLD) && (meteor_severity < 15) && !failsafe_triggered)
 		log_and_message_admins("Meteor mode severity failsafe triggered: Severity forced to 15.")
 		meteor_severity = 15
 		failsafe_triggered = 1
 
-	if(round_duration_in_ticks >= next_wave)
+	if (round_duration_in_ticks >= next_wave)
 		next_wave = round_duration_in_ticks + meteor_wave_delay
 		// Starts as barely noticeable dust impact, ends as barrage of most severe meteor types the code has to offer. Have fun.
 		spawn()
 			spawn_meteors(meteor_severity, get_meteor_types(), pick(GLOB.cardinal), pick(GLOB.using_map.station_levels))
 		var/escalated = FALSE
-		if(prob(escalation_probability) && (meteor_severity < maximal_severity))
+		if (prob(escalation_probability) && (meteor_severity < maximal_severity))
 			meteor_severity++
 			escalated = TRUE
-		if(send_admin_broadcasts)
+		if (send_admin_broadcasts)
 			log_and_message_admins("Meteor: Wave fired. Escalation: [escalated ? "Yes" : "No"]. Severity: [meteor_severity]/[maximal_severity]")
 
 /datum/game_mode/meteor/proc/get_meteor_types()
 	switch(meteor_severity)
-		if(1 to 9)
+		if (1 to 9)
 			return meteors_dust
-		if(10 to 19)
+		if (10 to 19)
 			return meteors_normal
-		if(20 to 29)
+		if (20 to 29)
 			return meteors_threatening
-		if(30 to 34)
+		if (30 to 34)
 			return meteors_catastrophic
-		if(35 to 39)
+		if (35 to 39)
 			return meteors_armageddon
-		if(40 to INFINITY)
+		if (40 to INFINITY)
 			return meteors_cataclysm
 	// Just in case we /somehow/ get here (looking at you, varedit)
 	return meteors_normal

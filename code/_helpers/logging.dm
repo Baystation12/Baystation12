@@ -57,7 +57,7 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 
 /proc/to_debug_listeners(text, prefix = "DEBUG")
 	for(var/client/C as anything in GLOB.admins)
-		if(C.get_preference_value(/datum/client_preference/staff/show_debug_logs) == GLOB.PREF_SHOW)
+		if (C.get_preference_value(/datum/client_preference/staff/show_debug_logs) == GLOB.PREF_SHOW)
 			to_chat(C, SPAN_DEBUG("<b>[prefix]</b>: [text]"))
 
 /proc/log_game(text)
@@ -111,18 +111,18 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 //This replaces world.log so it displays both in DD and the file
 /proc/log_world(text)
 	to_world_log(text) //this comes before the config check because it can't possibly runtime
-	if(config.log_world_output)
+	if (config.log_world_output)
 		game_log("DD_OUTPUT", text)
 
 //pretty print a direction bitflag, can be useful for debugging.
 /proc/dir_text(dir)
 	var/list/comps = list()
-	if(dir & NORTH) comps += "NORTH"
-	if(dir & SOUTH) comps += "SOUTH"
-	if(dir & EAST) comps += "EAST"
-	if(dir & WEST) comps += "WEST"
-	if(dir & UP) comps += "UP"
-	if(dir & DOWN) comps += "DOWN"
+	if (dir & NORTH) comps += "NORTH"
+	if (dir & SOUTH) comps += "SOUTH"
+	if (dir & EAST) comps += "EAST"
+	if (dir & WEST) comps += "WEST"
+	if (dir & UP) comps += "UP"
+	if (dir & DOWN) comps += "DOWN"
 
 	return english_list(comps, nothing_text="0", and_text="|", comma_text="|")
 
@@ -132,22 +132,22 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 	var/client/C
 	var/key
 
-	if(!whom)	return "*null*"
-	if(istype(whom, /client))
+	if (!whom)	return "*null*"
+	if (istype(whom, /client))
 		C = whom
 		M = C.mob
 		key = C.key
-	else if(ismob(whom))
+	else if (ismob(whom))
 		M = whom
 		C = M.client
 		key = LAST_KEY(M)
-	else if(istype(whom, /datum/mind))
+	else if (istype(whom, /datum/mind))
 		var/datum/mind/D = whom
 		key = D.key
 		M = D.current
-		if(D.current)
+		if (D.current)
 			C = D.current.client
-	else if(istype(whom, /datum))
+	else if (istype(whom, /datum))
 		var/datum/D = whom
 		return "*invalid:[D.type]*"
 	else
@@ -155,28 +155,28 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 
 	. = ""
 
-	if(key)
-		if(include_link && C)
+	if (key)
+		if (include_link && C)
 			. += "<a href='?priv_msg=\ref[C];ticket=\ref[ticket]'>"
 
 		. += key
 
-		if(include_link)
-			if(C)	. += "</a>"
+		if (include_link)
+			if (C)	. += "</a>"
 			else	. += " (DC)"
 	else
 		. += "*no key*"
 
-	if(include_name && M)
+	if (include_name && M)
 		var/name
 
-		if(M.real_name)
+		if (M.real_name)
 			name = M.real_name
-		else if(M.name)
+		else if (M.name)
 			name = M.name
 
 
-		if(is_special_character(M) && highlight_special_characters)
+		if (is_special_character(M) && highlight_special_characters)
 			. += "/([SPAN_COLOR("#ffa500", name)])" //Orange
 		else
 			. += "/([name])"
@@ -204,16 +204,16 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 	return ckey ? "[..()] ([ckey])" : ..()
 
 /proc/log_info_line(datum/d)
-	if(isnull(d))
+	if (isnull(d))
 		return "*null*"
-	if(islist(d))
+	if (islist(d))
 		var/list/L = list()
 		for(var/e in d)
 			// Indexing on numbers just gives us the same number again in the best case and causes an index out of bounds runtime in the worst
 			var/v = isnum(e) ? null : d[e]
 			L += "[log_info_line(e)][v ? " - [log_info_line(v)]" : ""]"
 		return "\[[jointext(L, ", ")]\]" // We format the string ourselves, rather than use json_encode(), because it becomes difficult to read recursively escaped "
-	if(!istype(d))
+	if (!istype(d))
 		return json_encode(d)
 	return d.get_log_info_line()
 

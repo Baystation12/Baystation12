@@ -13,7 +13,7 @@
 	if (!chameleon_choices)
 		var/chameleon_type = base_type || holder.parent_type
 		chameleon_choices = LAZYACCESS(chameleon_choices_by_type, chameleon_type)
-		if(!chameleon_choices)
+		if (!chameleon_choices)
 			chameleon_choices = generate_chameleon_choices(chameleon_type)
 			LAZYSET(chameleon_choices_by_type, chameleon_type, chameleon_choices)
 	else
@@ -114,7 +114,7 @@
 	if (choice)
 		if (QDELETED(user) || QDELETED(holder))
 			return
-		if(user.incapacitated() || !(holder in user))
+		if (user.incapacitated() || !(holder in user))
 			to_chat(user, SPAN_WARNING("You can't reach \the [holder]."))
 			return
 		disguise(chameleon_choices[choice], user)

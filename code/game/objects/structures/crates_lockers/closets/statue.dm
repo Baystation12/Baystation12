@@ -14,11 +14,11 @@
 	var/timer = 240 //eventually the person will be freed
 
 /obj/structure/closet/statue/New(loc, mob/living/L)
-	if(L && (ishuman(L) || L.is_species(SPECIES_MONKEY) || iscorgi(L)))
-		if(L.buckled)
+	if (L && (ishuman(L) || L.is_species(SPECIES_MONKEY) || iscorgi(L)))
+		if (L.buckled)
 			L.buckled = 0
 			L.anchored = FALSE
-		if(L.client)
+		if (L.client)
 			L.client.perspective = EYE_PERSPECTIVE
 			L.client.eye = src
 		L.forceMove(src)
@@ -28,19 +28,19 @@
 		intialFire = L.getFireLoss()
 		intialBrute = L.getBruteLoss()
 		intialOxy = L.getOxyLoss()
-		if(ishuman(L))
+		if (ishuman(L))
 			name = "statue of [L.name]"
-			if(L.gender == "female")
+			if (L.gender == "female")
 				icon_state = "human_female"
-		else if(L.is_species(SPECIES_MONKEY))
+		else if (L.is_species(SPECIES_MONKEY))
 			name = "statue of a monkey"
 			icon_state = "monkey"
-		else if(iscorgi(L))
+		else if (iscorgi(L))
 			name = "statue of a corgi"
 			icon_state = "corgi"
 			desc = "If it takes forever, I will wait for you..."
 
-	if(!get_max_health()) //meaning if the statue didn't find a valid target
+	if (!get_max_health()) //meaning if the statue didn't find a valid target
 		qdel(src)
 		return
 
@@ -67,7 +67,7 @@
 		M.dropInto(loc)
 		M.unset_sdisability(MUTED)
 		M.take_overall_damage(M.health - get_damage_value(), 0) //any new damage the statue incurred is transfered to the mob
-		if(M.client)
+		if (M.client)
 			M.client.eye = M.client.mob
 			M.client.perspective = MOB_PERSPECTIVE
 

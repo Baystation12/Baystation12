@@ -37,11 +37,11 @@
 /obj/machinery/light_construct/New(atom/newloc, newdir, atom/fixture = null)
 	..(newloc)
 
-	if(newdir)
+	if (newdir)
 		set_dir(newdir)
 
-	if(istype(fixture))
-		if(istype(fixture, /obj/machinery/light))
+	if (istype(fixture))
+		if (istype(fixture, /obj/machinery/light))
 			fixture_type = fixture.type
 		fixture.transfer_fingerprints_to(src)
 
@@ -49,23 +49,23 @@
 
 /obj/machinery/light_construct/on_update_icon()
 	switch(stage)
-		if(LIGHT_STAGE_EMPTY) icon_state = "tube-construct-stage1"
-		if(LIGHT_STAGE_WIRED) icon_state = "tube-construct-stage2"
-		if(LIGHT_STAGE_COMPLETE) icon_state = "tube-empty"
+		if (LIGHT_STAGE_EMPTY) icon_state = "tube-construct-stage1"
+		if (LIGHT_STAGE_WIRED) icon_state = "tube-construct-stage2"
+		if (LIGHT_STAGE_COMPLETE) icon_state = "tube-empty"
 
 /obj/machinery/light_construct/examine(mob/user, distance)
 	. = ..()
-	if(distance > 2)
+	if (distance > 2)
 		return
 
 	switch(stage)
-		if(LIGHT_STAGE_EMPTY) to_chat(user, "It's an empty frame.")
-		if(LIGHT_STAGE_WIRED) to_chat(user, "It's wired.")
-		if(LIGHT_STAGE_COMPLETE) to_chat(user, "The casing is closed.")
+		if (LIGHT_STAGE_EMPTY) to_chat(user, "It's an empty frame.")
+		if (LIGHT_STAGE_WIRED) to_chat(user, "It's wired.")
+		if (LIGHT_STAGE_COMPLETE) to_chat(user, "The casing is closed.")
 
 /obj/machinery/light_construct/attackby(obj/item/W, mob/living/user)
 	add_fingerprint(user)
-	if(isWrench(W))
+	if (isWrench(W))
 
 		switch(stage)
 			if (LIGHT_STAGE_EMPTY)
@@ -91,7 +91,7 @@
 				to_chat(user, SPAN_WARNING("You have to unscrew the case first."))
 				return
 
-	if(isWirecutter(W))
+	if (isWirecutter(W))
 		if (stage != LIGHT_STAGE_WIRED)
 			return
 		stage = LIGHT_STAGE_EMPTY
@@ -105,7 +105,7 @@
 		playsound(loc, 'sound/items/Wirecutter.ogg', 50, TRUE)
 		return
 
-	if(istype(W, /obj/item/stack/cable_coil))
+	if (istype(W, /obj/item/stack/cable_coil))
 		if (stage != LIGHT_STAGE_EMPTY)
 			return
 		var/obj/item/stack/cable_coil/coil = W
@@ -119,7 +119,7 @@
 			playsound(loc, 'sound/items/Deconstruct.ogg', 50, TRUE)
 		return
 
-	if(isScrewdriver(W))
+	if (isScrewdriver(W))
 		if (stage == LIGHT_STAGE_WIRED)
 			stage = LIGHT_STAGE_COMPLETE
 			update_icon()
@@ -147,9 +147,9 @@
 
 /obj/machinery/light_construct/small/on_update_icon()
 	switch(stage)
-		if(LIGHT_STAGE_EMPTY) icon_state = "bulb-construct-stage1"
-		if(LIGHT_STAGE_WIRED) icon_state = "bulb-construct-stage2"
-		if(LIGHT_STAGE_COMPLETE) icon_state = "bulb-empty"
+		if (LIGHT_STAGE_EMPTY) icon_state = "bulb-construct-stage1"
+		if (LIGHT_STAGE_WIRED) icon_state = "bulb-construct-stage2"
+		if (LIGHT_STAGE_COMPLETE) icon_state = "bulb-empty"
 
 /obj/machinery/light_construct/spot
 	name = "large light fixture frame"
@@ -225,14 +225,14 @@
 
 	s.set_up(1, 1, src)
 
-	if(construct)
+	if (construct)
 		construct_type = construct.type
 		construct.transfer_fingerprints_to(src)
 		set_dir(construct.dir)
 	else
 		var/light_color = get_color_from_area()
 		lightbulb = new light_type(src, light_color)
-		if(prob(lightbulb.broken_chance))
+		if (prob(lightbulb.broken_chance))
 			broken(TRUE)
 
 	on = powered()
@@ -263,29 +263,29 @@
 	pixel_y = 0
 	pixel_x = 0
 	var/turf/T = get_step(get_turf(src), dir)
-	if(istype(T) && T.density)
-		if(dir == NORTH)
+	if (istype(T) && T.density)
+		if (dir == NORTH)
 			pixel_y = 21
-		else if(dir == EAST)
+		else if (dir == EAST)
 			pixel_x = 10
-		else if(dir == WEST)
+		else if (dir == WEST)
 			pixel_x = -10
 
 	var/_state
 	switch(get_status())		// set icon_states
-		if(LIGHT_OK)
+		if (LIGHT_OK)
 			_state = "[base_state][on]"
 			atom_flags |= ATOM_FLAG_CAN_BE_PAINTED
-		if(LIGHT_EMPTY)
+		if (LIGHT_EMPTY)
 			on = FALSE
-		if(LIGHT_BURNED)
+		if (LIGHT_BURNED)
 			_state = "[base_state]_burned"
 			on = FALSE
-		if(LIGHT_BROKEN)
+		if (LIGHT_BROKEN)
 			_state = "[base_state]_broken"
 			on = FALSE
 
-	if(istype(lightbulb, /obj/item/light))
+	if (istype(lightbulb, /obj/item/light))
 		var/image/I = image(icon, src, _state)
 		I.color = get_mode_color()
 		if (on)
@@ -293,17 +293,17 @@
 			I.layer = ABOVE_LIGHTING_LAYER
 		overlays += I
 
-	if(on)
+	if (on)
 
 		update_use_power(POWER_USE_ACTIVE)
 
 		var/changed = FALSE
-		if(current_mode && (current_mode in lightbulb.lighting_modes))
+		if (current_mode && (current_mode in lightbulb.lighting_modes))
 			changed = set_light(arglist(lightbulb.lighting_modes[current_mode]))
 		else
 			changed = set_light(lightbulb.b_max_bright, lightbulb.b_inner_range, lightbulb.b_outer_range, lightbulb.b_curve, lightbulb.b_colour)
 
-		if(trigger && changed && get_status() == LIGHT_OK)
+		if (trigger && changed && get_status() == LIGHT_OK)
 			switch_check()
 	else
 		update_use_power(POWER_USE_OFF)
@@ -312,7 +312,7 @@
 
 /// Returns `lightbulb.status`.
 /obj/machinery/light/proc/get_status()
-	if(!lightbulb)
+	if (!lightbulb)
 		return LIGHT_EMPTY
 	else
 		return lightbulb.status
@@ -320,18 +320,18 @@
 /// Calls `lightbulb.switch_on()` and updates the lighting and icon accordingly.
 /obj/machinery/light/proc/switch_check()
 	lightbulb.switch_on()
-	if(get_status() != LIGHT_OK)
+	if (get_status() != LIGHT_OK)
 		set_light(0)
 	update_icon()
 
 /obj/machinery/light/attack_generic(mob/user, damage)
-	if(!damage)
+	if (!damage)
 		return
 	var/status = get_status()
-	if(status == LIGHT_EMPTY || status == LIGHT_BROKEN)
+	if (status == LIGHT_EMPTY || status == LIGHT_BROKEN)
 		to_chat(user, SPAN_WARNING("You can't do anything with \the [src]."))
 		return
-	if(!(status == LIGHT_OK || status == LIGHT_BURNED))
+	if (!(status == LIGHT_OK || status == LIGHT_BURNED))
 		return
 	user.visible_message(
 		SPAN_WARNING("\The [user] smashes \the [src]!"),
@@ -342,7 +342,7 @@
 
 /// Set's the lights `current_mode`. `new_mode` should be one of `LIGHTMODE_*`.
 /obj/machinery/light/proc/set_mode(new_mode)
-	if(current_mode != new_mode)
+	if (current_mode != new_mode)
 		current_mode = new_mode
 		update_icon(FALSE)
 
@@ -357,15 +357,15 @@
 
 /// Toggles the light's emergency lighting mode (`LIGHTMODE_EMERGENCY`).
 /obj/machinery/light/proc/set_emergency_lighting(enable)
-	if(!lightbulb)
+	if (!lightbulb)
 		return
 
-	if(enable)
-		if(LIGHTMODE_EMERGENCY in lightbulb.lighting_modes)
+	if (enable)
+		if (LIGHTMODE_EMERGENCY in lightbulb.lighting_modes)
 			set_mode(LIGHTMODE_EMERGENCY)
 			update_power_channel(ENVIRON)
 	else
-		if(current_mode == LIGHTMODE_EMERGENCY)
+		if (current_mode == LIGHTMODE_EMERGENCY)
 			set_mode(null)
 			update_power_channel(initial(power_channel))
 
@@ -378,13 +378,13 @@
 	. = ..()
 	var/fitting = get_fitting_name()
 	switch(get_status())
-		if(LIGHT_OK)
+		if (LIGHT_OK)
 			to_chat(user, "It is turned [on? "on" : "off"].")
-		if(LIGHT_EMPTY)
+		if (LIGHT_EMPTY)
 			to_chat(user, "The [fitting] has been removed.")
-		if(LIGHT_BURNED)
+		if (LIGHT_BURNED)
 			to_chat(user, "The [fitting] is burnt out.")
-		if(LIGHT_BROKEN)
+		if (LIGHT_BROKEN)
 			to_chat(user, "The [fitting] has been smashed.")
 
 /// Fetches the name of `light_type`.
@@ -412,14 +412,14 @@
 /obj/machinery/light/attackby(obj/item/W, mob/user)
 
 	// attempt to insert light
-	if(istype(W, /obj/item/light))
-		if(lightbulb)
+	if (istype(W, /obj/item/light))
+		if (lightbulb)
 			to_chat(user, SPAN_WARNING("There is a [get_fitting_name()] already inserted."))
 			return
-		if(!istype(W, light_type))
+		if (!istype(W, light_type))
 			to_chat(user, SPAN_WARNING("This type of light requires a [get_fitting_name()]."))
 			return
-		if(!user.unEquip(W, src))
+		if (!user.unEquip(W, src))
 			return
 		user.visible_message(
 			SPAN_NOTICE("\The [user] inserts \a [W] into \the [src]."),
@@ -430,14 +430,14 @@
 		add_fingerprint(user)
 
 	// attempt to break the light
-	else if(lightbulb && (lightbulb.status != LIGHT_BROKEN) && user.a_intent != I_HELP)
-		if(prob(1 + W.force * 5))
+	else if (lightbulb && (lightbulb.status != LIGHT_BROKEN) && user.a_intent != I_HELP)
+		if (prob(1 + W.force * 5))
 			user.visible_message(
 				SPAN_WARNING("\The [user] smashes \the [src]!"),
 				SPAN_WARNING("You smash \the [src]!"),
 				SPAN_WARNING("You hear a small glass object shatter.")
 			)
-			if(on && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
+			if (on && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
 				if (prob(12))
 					electrocute_mob(user, get_area(src), src, 0.3)
 			broken()
@@ -452,8 +452,8 @@
 		attack_animation(user)
 
 	// attempt to stick weapon into light socket
-	else if(!lightbulb)
-		if(istype(W, /obj/item/screwdriver)) //If it's a screwdriver open it.
+	else if (!lightbulb)
+		if (istype(W, /obj/item/screwdriver)) //If it's a screwdriver open it.
 			playsound(loc, 'sound/items/Screwdriver.ogg', 50, TRUE)
 			user.visible_message(
 				SPAN_NOTICE("\The [user] opens \the [src]'s casing."),
@@ -470,7 +470,7 @@
 			SPAN_WARNING("\The [user] shoves \a [W] into \the [src]!"),
 			SPAN_DANGER("You stick \the [W] into \the [src]!")
 		)
-		if(powered() && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
+		if (powered() && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
@@ -486,12 +486,12 @@
 
 /// Causes the light to start flickering.
 /obj/machinery/light/proc/flicker(amount = rand(10, 20))
-	if(flickering) return
+	if (flickering) return
 	flickering = TRUE
 	spawn(0)
-		if(on && get_status() == LIGHT_OK)
+		if (on && get_status() == LIGHT_OK)
 			for(var/i = 0; i < amount; i++)
-				if(get_status() != LIGHT_OK) break
+				if (get_status() != LIGHT_OK) break
 				on = !on
 				update_icon(FALSE)
 				sleep(rand(5, 15))
@@ -508,13 +508,13 @@
 // attack with hand - remove tube/bulb
 // if hands aren't protected and the light is on, burn the player
 /obj/machinery/light/physical_attack_hand(mob/living/user)
-	if(!lightbulb)
+	if (!lightbulb)
 		to_chat(user, SPAN_WARNING("There is no [get_fitting_name()] in this light."))
 		return TRUE
 
-	if(istype(user,/mob/living/carbon/human))
+	if (istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		if(H.species.can_shred(H))
+		if (H.species.can_shred(H))
 			H.visible_message(
 				SPAN_WARNING("\The [user] shreds \the [src]!"),
 				SPAN_WARNING("You shred \the [src]!"),
@@ -523,26 +523,26 @@
 			return TRUE
 
 	// make it burn hands if not wearing fire-insulated gloves
-	if(on)
+	if (on)
 		var/prot = FALSE
 		var/mob/living/carbon/human/H = user
 
-		if(istype(H))
-			if(H.gloves)
+		if (istype(H))
+			if (H.gloves)
 				var/obj/item/clothing/gloves/G = H.gloves
-				if(G.max_heat_protection_temperature)
-					if(G.max_heat_protection_temperature > LIGHT_BULB_TEMPERATURE)
+				if (G.max_heat_protection_temperature)
+					if (G.max_heat_protection_temperature > LIGHT_BULB_TEMPERATURE)
 						prot = TRUE
 		else
 			prot = TRUE
 
-		if(prot || (MUTATION_COLD_RESISTANCE in user.mutations))
+		if (prot || (MUTATION_COLD_RESISTANCE in user.mutations))
 			to_chat(user, SPAN_NOTICE("You remove the [get_fitting_name()]."))
-		else if(istype(user) && user.psi && !user.psi.suppressed && user.psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_OPERANT)
+		else if (istype(user) && user.psi && !user.psi.suppressed && user.psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_OPERANT)
 			to_chat(user, SPAN_NOTICE("You telekinetically remove the [get_fitting_name()]."))
-		else if(user.a_intent != I_HELP)
+		else if (user.a_intent != I_HELP)
 			var/obj/item/organ/external/hand = H.organs_by_name[user.hand ? BP_L_HAND : BP_R_HAND]
-			if(hand && hand.is_usable() && !hand.can_feel_pain())
+			if (hand && hand.is_usable() && !hand.can_feel_pain())
 				user.apply_damage(3, DAMAGE_BURN, user.hand ? BP_L_HAND : BP_R_HAND, used_weapon = src)
 				user.visible_message(
 					SPAN_WARNING("\The [user]'s [hand] burns and sizzles as \he touches the hot [get_fitting_name()]."),
@@ -560,19 +560,19 @@
 
 // ghost attack - make lights flicker like an AI, but even spookier!
 /obj/machinery/light/attack_ghost(mob/user)
-	if(round_is_spooky())
+	if (round_is_spooky())
 		flicker(rand(2,5))
 	else return ..()
 
 /// Break the light and make sparks if it was on.
 /obj/machinery/light/proc/broken(skip_sound_and_sparks = FALSE)
-	if(!lightbulb)
+	if (!lightbulb)
 		return
 
-	if(!skip_sound_and_sparks)
-		if(lightbulb && !(lightbulb.status == LIGHT_BROKEN))
+	if (!skip_sound_and_sparks)
+		if (lightbulb && !(lightbulb.status == LIGHT_BROKEN))
 			playsound(loc, 'sound/effects/Glasshit.ogg', 50, TRUE)
-		if(on)
+		if (on)
 			s.set_up(3, 1, src)
 			s.start()
 	lightbulb.set_status(LIGHT_BROKEN)
@@ -580,7 +580,7 @@
 
 /// Fixes a broken light.
 /obj/machinery/light/proc/fix()
-	if(get_status() == LIGHT_OK || !lightbulb)
+	if (get_status() == LIGHT_OK || !lightbulb)
 		return
 	lightbulb.set_status(LIGHT_OK)
 	seton(TRUE)
@@ -589,13 +589,13 @@
 // destroy the whole light fixture or just shatter it
 /obj/machinery/light/ex_act(severity)
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			qdel(src)
 			return
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			if (prob(75))
 				broken()
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			if (prob(50))
 				broken()
 
@@ -603,7 +603,7 @@
 	seton(powered())
 
 /obj/machinery/light/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(prob(max(0, exposed_temperature - 673)))   //0% at <400C, 100% at >500C
+	if (prob(max(0, exposed_temperature - 673)))   //0% at <400C, 100% at >500C
 		broken()
 
 /obj/machinery/light/small/readylight
@@ -614,7 +614,7 @@
 /// Sets the lights `state` and updates the light mode accordingly.
 /obj/machinery/light/small/readylight/proc/set_state(new_state)
 	state = new_state
-	if(state)
+	if (state)
 		set_mode(LIGHTMODE_READY)
 	else
 		set_mode(null)
@@ -802,13 +802,13 @@
 	color = b_colour
 	var/broken
 	switch(status)
-		if(LIGHT_OK)
+		if (LIGHT_OK)
 			icon_state = base_state
 			desc = "A replacement [name]."
-		if(LIGHT_BURNED)
+		if (LIGHT_BURNED)
 			icon_state = "[base_state]_burned"
 			desc = "A burnt-out [name]."
-		if(LIGHT_BROKEN)
+		if (LIGHT_BROKEN)
 			icon_state = "[base_state]_broken"
 			desc = "A broken [name]."
 			broken = TRUE
@@ -822,10 +822,10 @@
 
 // if a syringe, can inject phoron to make it explode
 /obj/item/light/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/reagent_containers/syringe) && status == LIGHT_OK)
+	if (istype(I, /obj/item/reagent_containers/syringe) && status == LIGHT_OK)
 		var/obj/item/reagent_containers/syringe/S = I
 
-		if(S.reagents.total_volume)
+		if (S.reagents.total_volume)
 			if (!reagents)
 				create_reagents(5)
 				S.reagents.trans_to_obj(src, 5)
@@ -840,11 +840,11 @@
 // shatter light, unless it was an attempt to put it in a light socket
 // now only shatter if the intent was harm
 /obj/item/light/afterattack(atom/target, mob/user, proximity)
-	if(!proximity)
+	if (!proximity)
 		return
-	if(istype(target, /obj/machinery/light))
+	if (istype(target, /obj/machinery/light))
 		return
-	if(user.a_intent != I_HURT)
+	if (user.a_intent != I_HURT)
 		return
 
 	shatter()
@@ -862,7 +862,7 @@
 
 /// Handles shattering the light bulb under certain conditions, such as impacts or damage.
 /obj/item/light/proc/shatter()
-	if(status == LIGHT_OK || status == LIGHT_BURNED)
+	if (status == LIGHT_OK || status == LIGHT_BURNED)
 		visible_message(
 			SPAN_WARNING("\The [src] shatters!"),
 			SPAN_WARNING("You hear a small glass object shatter.")
@@ -873,7 +873,7 @@
 /// Handles switching the light bulb on.
 /obj/item/light/proc/switch_on()
 	switchcount++
-	if(reagents)
+	if (reagents)
 		if (reagents.get_reagent_amount(/datum/reagent/toxin/phoron) >= LIGHT_PHORON_EXPLODE_THRESHOLD)
 			visible_message(
 				SPAN_DANGER("\The [src] flares brilliantly!"),
@@ -888,14 +888,14 @@
 			set_status(LIGHT_BURNED)
 			if (sound_on)
 				playsound(src, sound_on, 100)
-	else if(prob(min(60, switchcount*switchcount*0.01)))
+	else if (prob(min(60, switchcount*switchcount*0.01)))
 		set_status(LIGHT_BURNED)
-	else if(sound_on)
+	else if (sound_on)
 		playsound(src, sound_on, 75)
 	return status
 
 /obj/machinery/light/do_simple_ranged_interaction(mob/user)
-	if(lightbulb)
+	if (lightbulb)
 		remove_bulb()
 	return TRUE
 

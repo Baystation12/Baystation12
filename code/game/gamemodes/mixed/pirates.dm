@@ -29,14 +29,14 @@
 	if (length(ready_players) < required_players)
 		return "Not enough players. [length(ready_players)] ready of the required [required_players]."
 	var/list/all_antag_types = GLOB.all_antag_types_
-	if(length(antag_tags))
+	if (length(antag_tags))
 		var/datum/antagonist/vox/antag_vox = all_antag_types[antag_tags[1]]
 		var/list/enemies_vox = antag_vox.pending_antagonists
-		if((length(enemies_vox) >= required_enemies))
+		if ((length(enemies_vox) >= required_enemies))
 			return FALSE
 		var/datum/antagonist/antag_raiders = all_antag_types[antag_tags[2]]
 		var/list/enemies_raiders = antag_raiders.pending_antagonists
-		if(length(enemies_raiders) >= required_enemies)
+		if (length(enemies_raiders) >= required_enemies)
 			return FALSE
 		return "Not enough antagonists, [required_enemies] required and [max(length(enemies_vox), length(enemies_raiders))] available."
 	else

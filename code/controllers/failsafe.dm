@@ -24,8 +24,8 @@ var/global/datum/controller/failsafe/Failsafe
 
 /datum/controller/failsafe/New()
 	// Highlander-style: there can only be one! Kill off the old and replace it with the new.
-	if(Failsafe != src)
-		if(istype(Failsafe))
+	if (Failsafe != src)
+		if (istype(Failsafe))
 			qdel(Failsafe)
 	Failsafe = src
 	Initialize()
@@ -33,7 +33,7 @@ var/global/datum/controller/failsafe/Failsafe
 /datum/controller/failsafe/Initialize()
 	set waitfor = 0
 	Failsafe.Loop()
-	if(!QDELETED(src))
+	if (!QDELETED(src))
 		qdel(src) //when Loop() returns, we delete ourselves and let the mc recreate us
 
 /datum/controller/failsafe/Destroy()
@@ -44,40 +44,40 @@ var/global/datum/controller/failsafe/Failsafe
 /datum/controller/failsafe/proc/Loop()
 	while(running)
 		lasttick = world.time
-		if(!Master)
+		if (!Master)
 			// Replace the missing Master! This should never, ever happen.
 			new /datum/controller/master()
 		// Only poke it if overrides are not in effect.
-		if(processing_interval > 0)
-			if(Master.processing && Master.iteration)
+		if (processing_interval > 0)
+			if (Master.processing && Master.iteration)
 				// Check if processing is done yet.
-				if(Master.iteration == master_iteration)
+				if (Master.iteration == master_iteration)
 					switch(defcon)
-						if(4,5)
+						if (4,5)
 							--defcon
-						if(3)
+						if (3)
 							to_chat(GLOB.admins, SPAN_CLASS("adminnotice", "Notice: DEFCON [defcon]. The Master Controller has not fired in the last [(5-defcon) * processing_interval] ticks."))
 							--defcon
-						if(2)
+						if (2)
 							to_chat(GLOB.admins, SPAN_CLASS("boldannounce", "Warning: DEFCON [defcon]. The Master Controller has not fired in the last [(5-defcon) * processing_interval] ticks. Automatic restart in [processing_interval] ticks."))
 							--defcon
-						if(1)
+						if (1)
 
 							to_chat(GLOB.admins, SPAN_CLASS("boldannounce", "Warning: DEFCON [defcon]. The Master Controller has still not fired within the last [(5-defcon) * processing_interval] ticks. Killing and restarting..."))
 							--defcon
 							var/rtn = Recreate_MC()
-							if(rtn > 0)
+							if (rtn > 0)
 								defcon = 4
 								master_iteration = 0
 								to_chat(GLOB.admins, SPAN_CLASS("adminnotice", "MC restarted successfully"))
-							else if(rtn < 0)
+							else if (rtn < 0)
 								log_game("FailSafe: Could not restart MC, runtime encountered. Entering defcon 0")
 								to_chat(GLOB.admins, SPAN_CLASS("boldannounce", "ERROR: DEFCON [defcon]. Could not restart MC, runtime encountered. I will silently keep retrying."))
 							//if the return number was 0, it just means the mc was restarted too recently, and it just needs some time before we try again
 							//no need to handle that specially when defcon 0 can handle it
-						if(0) //DEFCON 0! (mc failed to restart)
+						if (0) //DEFCON 0! (mc failed to restart)
 							var/rtn = Recreate_MC()
-							if(rtn > 0)
+							if (rtn > 0)
 								defcon = 4
 								master_iteration = 0
 								to_chat(GLOB.admins, SPAN_CLASS("adminnotice", "MC restarted successfully"))

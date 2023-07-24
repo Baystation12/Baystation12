@@ -159,11 +159,11 @@
 \tCtrl + Shift + Click = electrify doors
 \tCtrl + Alt + Click = point"})
 
-	if(isrobot(src.mob))
+	if (isrobot(src.mob))
 		to_chat(src, robot_hotkey_mode)
 		to_chat(src, robot_other)
 	else
 		to_chat(src, hotkey_mode)
 		to_chat(src, other)
-	if(holder)
+	if (holder)
 		to_chat(src, admin)

@@ -12,22 +12,22 @@
 	set desc = "Activates or deactivates self destruct sequence of your physical mainframe."
 	var/mob/living/silicon/ai/user = usr
 
-	if(!ability_prechecks(user, 0, 1))
+	if (!ability_prechecks(user, 0, 1))
 		return
 
-	if(!user.hardware || !istype(user.hardware, /datum/malf_hardware/core_bomb))
+	if (!user.hardware || !istype(user.hardware, /datum/malf_hardware/core_bomb))
 		return
 
-	if(user.bombing_core)
+	if (user.bombing_core)
 		to_chat(user, "***** CORE SELF-DESTRUCT SEQUENCE ABORTED *****")
 		user.bombing_core = 0
 		return
 
 	var/choice = alert("Really destroy core?", "Core self-destruct", "YES", "NO")
-	if(choice != "YES")
+	if (choice != "YES")
 		return
 
-	if(!ability_prechecks(user, 0, 1))
+	if (!ability_prechecks(user, 0, 1))
 		return
 
 	user.bombing_core = 1
@@ -38,7 +38,7 @@
 	while(timer)
 		sleep(10)
 		timer--
-		if(!user || !user.bombing_core)
+		if (!user || !user.bombing_core)
 			return
 		to_chat(user, "** [timer] **")
 	explosion(user.loc, 21)
@@ -51,13 +51,13 @@
 	set desc = "Activates or deactivates your APU generator, allowing you to operate even without power."
 	var/mob/living/silicon/ai/user = usr
 
-	if(!ability_prechecks(user, 0, 1))
+	if (!ability_prechecks(user, 0, 1))
 		return
 
-	if(!user.hardware || !istype(user.hardware, /datum/malf_hardware/apu_gen))
+	if (!user.hardware || !istype(user.hardware, /datum/malf_hardware/apu_gen))
 		return
 
-	if(user.APU_power)
+	if (user.APU_power)
 		user.stop_apu()
 	else
 		user.start_apu()
@@ -68,22 +68,22 @@
 	set desc = "Uses your special hardware piece to instantly advance all research by one level."
 	var/mob/living/silicon/ai/user = usr
 
-	if(!ability_prechecks(user, 0, 1))
+	if (!ability_prechecks(user, 0, 1))
 		return
 
-	if(!user.hardware || !istype(user.hardware, /datum/malf_hardware/instant_research))
+	if (!user.hardware || !istype(user.hardware, /datum/malf_hardware/instant_research))
 		return
 
 	var/datum/malf_hardware/instant_research/HW = user.hardware
-	if(HW.spent)
+	if (HW.spent)
 		to_chat(user, "You attempt to activate your hardware piece, but it does not work. It must be damaged.")
 		return
 
 	var/choice = alert("Really activate your hardware? It will advance your research by one tier, but may only be used once.", "Rapid System Upgrade", "YES", "NO")
-	if(choice != "YES")
+	if (choice != "YES")
 		return
 
-	if(HW.spent)
+	if (HW.spent)
 		return
 
 	HW.spent = 1
@@ -99,21 +99,21 @@
 	var/obj/item/device/radio/radio = new/obj/item/device/radio()
 
 
-	if(!ability_prechecks(user, 0, 0))
+	if (!ability_prechecks(user, 0, 0))
 		return
 
-	if(user.system_override != 2)
+	if (user.system_override != 2)
 		to_chat(user, "You do not have access to self-destruct system.")
 		return
 
-	if(user.bombing_station)
+	if (user.bombing_station)
 		user.bombing_station = 0
 		return
 
 	var/choice = alert("Really destroy installation?", "Installation self-destruct", "YES", "NO")
-	if(choice != "YES")
+	if (choice != "YES")
 		return
-	if(!ability_prechecks(user, 0, 0))
+	if (!ability_prechecks(user, 0, 0))
 		return
 	to_chat(user, "***** INSTALLATION SELF-DESTRUCT SEQUENCE INITIATED *****")
 	to_chat(user, "Self-destructing in 5 minutes. Use this command again to abort.")
@@ -126,14 +126,14 @@
 	var/timer = 300
 	while(timer)
 		sleep(10)
-		if(!user || !user.bombing_station || user.stat == DEAD)
+		if (!user || !user.bombing_station || user.stat == DEAD)
 			radio.autosay("Self destruct sequence has been cancelled.", "Self-Destruct Control")
 			to_chat(user, "** Self destruct sequence has been cancelled **")
 			return
-		if(timer in list(2, 3, 4, 5, 10, 30, 60, 90, 120, 180, 240)) // Announcement times. "1" is not intentionally included!
+		if (timer in list(2, 3, 4, 5, 10, 30, 60, 90, 120, 180, 240)) // Announcement times. "1" is not intentionally included!
 			radio.autosay("Self destruct in [timer] seconds.", "Self-Destruct Control")
 			to_chat(user, "** Self destructing in [timer] **")
-		if(timer == 1)
+		if (timer == 1)
 			radio.autosay("Self destructing now. Have a nice day.", "Self-Destruct Control")
 			to_chat(user, "** Self destructing now **")
 		timer--

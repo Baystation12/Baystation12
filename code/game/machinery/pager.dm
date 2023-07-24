@@ -12,7 +12,7 @@
 
 /obj/machinery/pager/Initialize()
 	. = ..()
-	if(!location)
+	if (!location)
 		var/area/A = get_area(src)
 		location = A.name
 
@@ -20,7 +20,7 @@
 	return attack_hand(user)
 
 /obj/machinery/pager/interface_interact(mob/living/user)
-	if(!CanInteract(user, GLOB.default_state))
+	if (!CanInteract(user, GLOB.default_state))
 		return FALSE
 	playsound(src, "button", 60)
 	flick("doorbellpressed",src)
@@ -28,33 +28,33 @@
 	return TRUE
 
 /obj/machinery/pager/proc/activate(mob/living/user)
-	if(!powered())
+	if (!powered())
 		return
 	var/obj/machinery/message_server/MS = get_message_server(z)
-	if(!MS)
+	if (!MS)
 		return
-	if(world.time < last_paged + 5 SECONDS)
+	if (world.time < last_paged + 5 SECONDS)
 		return
 	last_paged = world.time
 	var/paged = MS.send_to_department(department,"Department page to <b>[location]</b> received. <a href='?src=\ref[src];ack=1'>Take</a>", "*page*")
 	acknowledged = 0
-	if(paged)
+	if (paged)
 		playsound(src, 'sound/machines/ping.ogg', 60)
 		to_chat(user,SPAN_NOTICE("Page received by [paged] devices."))
 	else
 		to_chat(user,SPAN_WARNING("No valid destinations were found for the page."))
 
 /obj/machinery/pager/Topic(href, href_list)
-	if(..())
+	if (..())
 		return 1
-	if(!powered())
+	if (!powered())
 		return
-	if(!acknowledged && href_list["ack"])
+	if (!acknowledged && href_list["ack"])
 		playsound(src, 'sound/machines/ping.ogg', 60)
 		visible_message(SPAN_NOTICE("Page acknowledged."))
 		acknowledged = 1
 		var/obj/machinery/message_server/MS = get_message_server(z)
-		if(!MS)
+		if (!MS)
 			return
 		MS.send_to_department(department,"Page to <b>[location]</b> was acknowledged.", "*ack*")
 

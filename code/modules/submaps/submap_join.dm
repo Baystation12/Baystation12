@@ -6,71 +6,71 @@
 
 /datum/submap/Topic(href, href_list)
 	. = ..()
-	if(!.)
+	if (!.)
 		var/join_as = href_list["join_as"]
-		if(join_as && jobs[join_as])
+		if (join_as && jobs[join_as])
 			join_as(locate(href_list["joining"]), jobs[join_as])
 			return TRUE
 
 /datum/submap/proc/check_general_join_blockers(mob/new_player/joining, datum/job/submap/job)
 
-	if(!istype(job)) // This proc uses a specific type that check_latejoin_blockers() does not.
+	if (!istype(job)) // This proc uses a specific type that check_latejoin_blockers() does not.
 		log_debug("Job assignment error for [name] - job does not exist or is of the incorrect type.")
 		return FALSE
 
-	if(!SSjobs.check_latejoin_blockers(joining, job))
+	if (!SSjobs.check_latejoin_blockers(joining, job))
 		return FALSE
 
-	if(!available())
+	if (!available())
 		to_chat(joining, SPAN_WARNING("Unfortunately, that job is no longer available."))
 		return FALSE
 
-	if(jobban_isbanned(joining, "Offstation Roles"))
+	if (jobban_isbanned(joining, "Offstation Roles"))
 		to_chat(joining, SPAN_WARNING("You are banned from playing offstation roles."))
 		return FALSE
 
-	if(job.is_semi_antagonist && jobban_isbanned(joining, MODE_MISC_AGITATOR))
+	if (job.is_semi_antagonist && jobban_isbanned(joining, MODE_MISC_AGITATOR))
 		to_chat(joining, SPAN_WARNING("You are banned from playing semi-antagonist roles."))
 		return FALSE
 
-	if(job.is_restricted(joining.client.prefs, joining))
+	if (job.is_restricted(joining.client.prefs, joining))
 		return FALSE
 
 	return TRUE
 
 /datum/submap/proc/join_as(mob/new_player/joining, datum/job/submap/job)
 
-	if(!check_general_join_blockers(joining, job))
+	if (!check_general_join_blockers(joining, job))
 		return
 
-	if(!LAZYLEN(job.spawnpoints))
+	if (!LAZYLEN(job.spawnpoints))
 		to_chat(joining, SPAN_WARNING("There are no available spawn points for that job."))
 
 	var/turf/spawn_turf = get_turf(pick(job.spawnpoints))
-	if(!SSjobs.check_unsafe_spawn(joining, spawn_turf))
+	if (!SSjobs.check_unsafe_spawn(joining, spawn_turf))
 		return
 
 	// check_unsafe_spawn() has an input() call, check blockers again.
-	if(!check_general_join_blockers(joining, job))
+	if (!check_general_join_blockers(joining, job))
 		return
 
-	if(joining.mind)
+	if (joining.mind)
 		joining.mind.assigned_job = job
 		joining.mind.assigned_role = job.title
 	joining.faction = name
 	job.current_positions++
 
 	var/mob/living/character = joining.create_character(spawn_turf)
-	if(istype(character))
+	if (istype(character))
 
 		var/mob/living/other_mob = job.handle_variant_join(character, job.title)
-		if(istype(other_mob))
+		if (istype(other_mob))
 			character = other_mob
 
 		var/mob/living/carbon/human/user_human
-		if(ishuman(character))
+		if (ishuman(character))
 			user_human = character
-			if(job.branch && GLOB.mil_branches)
+			if (job.branch && GLOB.mil_branches)
 				user_human.char_branch = GLOB.mil_branches.get_branch(job.branch)
 				user_human.char_rank =   GLOB.mil_branches.get_rank(job.branch, job.rank)
 
@@ -79,23 +79,23 @@
 			job.equip(character, "")
 			job.apply_fingerprints(character)
 			var/list/spawn_in_storage = SSjobs.equip_custom_loadout(character, job)
-			if(spawn_in_storage)
+			if (spawn_in_storage)
 				for(var/datum/gear/G in spawn_in_storage)
 					G.spawn_in_storage_or_drop(user_human, user_human.client.prefs.Gear()[G.display_name])
 			SScustomitems.equip_custom_items(user_human)
 
 		character.job = job.title
 		character.faction = name
-		if(character.mind)
+		if (character.mind)
 			character.mind.assigned_job = job
 			character.mind.assigned_role = character.job
 
 		to_chat(character, "<B>You are [job.total_positions == 1 ? "the" : "a"] [job.title] of the [name].</B>")
 
-		if(job.supervisors)
+		if (job.supervisors)
 			to_chat(character, "<b>As a [job.title] you answer directly to [job.supervisors].</b>")
 		var/datum/job/submap/ojob = job
-		if(istype(ojob) && ojob.info)
+		if (istype(ojob) && ojob.info)
 			to_chat(character, ojob.info)
 
 		if (user_human?.disabilities & NEARSIGHTED) //Try to give glasses to the vision impaired
@@ -108,7 +108,7 @@
 		SSticker.mode.handle_offsite_latejoin(character)
 		GLOB.universe.OnPlayerLatejoin(character)
 		log_and_message_admins("has joined the round as offsite role [character.mind.assigned_role].", character)
-		if(character.cannot_stand()) equip_wheelchair(character)
+		if (character.cannot_stand()) equip_wheelchair(character)
 		job.post_equip_rank(character, job.title)
 		qdel(joining)
 

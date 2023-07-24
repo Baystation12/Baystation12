@@ -44,17 +44,17 @@
 	color_description = "transluscent ink"
 
 /obj/item/pen/attack(atom/A, mob/user, target_zone)
-	if(ismob(A))
+	if (ismob(A))
 		var/mob/M = A
-		if(ishuman(A) && user.a_intent == I_HELP && target_zone == BP_HEAD)
+		if (ishuman(A) && user.a_intent == I_HELP && target_zone == BP_HEAD)
 			var/mob/living/carbon/human/H = M
 			var/obj/item/organ/external/head/head = H.organs_by_name[BP_HEAD]
-			if(istype(head))
+			if (istype(head))
 				head.write_on(user, color_description)
 		else
 			to_chat(user, SPAN_WARNING("You stab [M] with \the [src]."))
 			admin_attack_log(user, M, "Stabbed using \a [src]", "Was stabbed with \a [src]", "used \a [src] to stab")
-	else if(istype(A, /obj/item/organ/external/head))
+	else if (istype(A, /obj/item/organ/external/head))
 		var/obj/item/organ/external/head/head = A
 		head.write_on(user, color_description)
 

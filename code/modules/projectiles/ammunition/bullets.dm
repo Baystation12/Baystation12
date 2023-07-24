@@ -116,7 +116,7 @@
 	matter = list(MATERIAL_STEEL = 160, MATERIAL_GLASS = 320)
 
 /obj/item/ammo_casing/shotgun/stunshell/emp_act(severity)
-	if(prob(100/severity)) BB = null
+	if (prob(100/severity)) BB = null
 	update_icon()
 	..()
 

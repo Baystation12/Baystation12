@@ -17,10 +17,10 @@
 
 /obj/item/paper_bundle/attackby(obj/item/W as obj, mob/user as mob)
 	..()
-	if(!istype(W))
+	if (!istype(W))
 		return
 	var/obj/item/paper/paper = W
-	if(istype(paper) && !paper.can_bundle())
+	if (istype(paper) && !paper.can_bundle())
 		return //non-paper or bundlable paper only
 	if (istype(W, /obj/item/paper/carbon))
 		var/obj/item/paper/carbon/C = W
@@ -29,15 +29,15 @@
 			add_fingerprint(user)
 			return
 	// adding sheets
-	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo))
+	if (istype(W, /obj/item/paper) || istype(W, /obj/item/photo))
 		insert_sheet_at(user, length(pages)+1, W)
 
 	// burning
-	else if(istype(W, /obj/item/flame))
+	else if (istype(W, /obj/item/flame))
 		burnpaper(W, user)
 
 	// merging bundles
-	else if(istype(W, /obj/item/paper_bundle))
+	else if (istype(W, /obj/item/paper_bundle))
 		for(var/obj/O in W)
 			O.forceMove(src)
 			O.add_fingerprint(user)
@@ -46,9 +46,9 @@
 		to_chat(user, SPAN_NOTICE("You add \the [W.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name]."))
 		qdel(W)
 	else
-		if(istype(W, /obj/item/tape_roll))
+		if (istype(W, /obj/item/tape_roll))
 			return 0
-		if(istype(W, /obj/item/pen))
+		if (istype(W, /obj/item/pen))
 			show_browser(user, "", "window=[name]") //Closes the dialog
 		var/obj/P = pages[page]
 		P.attackby(W, user)
@@ -68,25 +68,25 @@
 
 	to_chat(user, SPAN_NOTICE("You add [sheet_name] to [bundle_name]."))
 	pages.Insert(index, sheet)
-	if(index <= page)
+	if (index <= page)
 		page++
 
 /obj/item/paper_bundle/proc/burnpaper(obj/item/flame/P, mob/user)
 	var/class = "warning"
 
-	if(P.lit && !user.restrained())
-		if(istype(P, /obj/item/flame/lighter/zippo))
+	if (P.lit && !user.restrained())
+		if (istype(P, /obj/item/flame/lighter/zippo))
 			class = "rose>"
 
 		user.visible_message(SPAN_CLASS("[class]", "[user] holds \the [P] up to \the [src], it looks like \he's trying to burn it!"), \
 		SPAN_CLASS("[class]", "You hold \the [P] up to \the [src], burning it slowly."))
 
 		spawn(20)
-			if(get_dist(src, user) < 2 && user.get_active_hand() == P && P.lit)
+			if (get_dist(src, user) < 2 && user.get_active_hand() == P && P.lit)
 				user.visible_message(SPAN_CLASS("[class]", "[user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap."), \
 				SPAN_CLASS("[class]", "You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap."))
 
-				if(user.get_inactive_hand() == src)
+				if (user.get_inactive_hand() == src)
 					user.drop_from_inventory(src)
 
 				new /obj/effect/decal/cleanable/ash(src.loc)
@@ -97,7 +97,7 @@
 
 /obj/item/paper_bundle/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
+	if (distance <= 1)
 		src.show_content(user)
 	else
 		to_chat(user, SPAN_NOTICE("It is too far away."))
@@ -107,12 +107,12 @@
 	var/obj/item/W = pages[page]
 
 	// first
-	if(page == 1)
+	if (page == 1)
 		dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'><A href='?src=\ref[src];prev_page=1'>Front</A></DIV>"
 		dat+= "<DIV STYLE='float:left; text-align:center; width:33.33333%'><A href='?src=\ref[src];remove=1'>Remove [(istype(W, /obj/item/paper)) ? "paper" : "photo"]</A></DIV>"
 		dat+= "<DIV STYLE='float:left; text-align:right; width:33.33333%'><A href='?src=\ref[src];next_page=1'>Next Page</A></DIV><BR><HR>"
 	// last
-	else if(page == length(pages))
+	else if (page == length(pages))
 		dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'><A href='?src=\ref[src];prev_page=1'>Previous Page</A></DIV>"
 		dat+= "<DIV STYLE='float:left; text-align:center; width:33.33333%'><A href='?src=\ref[src];remove=1'>Remove [(istype(W, /obj/item/paper)) ? "paper" : "photo"]</A></DIV>"
 		dat+= "<DIV STYLE='float;left; text-align:right; with:33.33333%'><A href='?src=\ref[src];next_page=1'>Back</A></DIV><BR><HR>"
@@ -122,11 +122,11 @@
 		dat+= "<DIV STYLE='float:left; text-align:center; width:33.33333%'><A href='?src=\ref[src];remove=1'>Remove [(istype(W, /obj/item/paper)) ? "paper" : "photo"]</A></DIV>"
 		dat+= "<DIV STYLE='float:left; text-align:right; width:33.33333%'><A href='?src=\ref[src];next_page=1'>Next Page</A></DIV><BR><HR>"
 
-	if(istype(pages[page], /obj/item/paper))
+	if (istype(pages[page], /obj/item/paper))
 		var/obj/item/paper/P = W
 		dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.show_info(user)][P.stamps]</BODY></HTML>"
 		show_browser(user, dat, "window=[name]")
-	else if(istype(pages[page], /obj/item/photo))
+	else if (istype(pages[page], /obj/item/photo))
 		var/obj/item/photo/P = W
 		dat += "<html><head><title>[P.name]</title></head><body style='overflow:hidden'>"
 		dat += "<div> <img src='tmp_photo.png' width = '180'[P.scribble ? "<div> Written on the back:<br><i>[P.scribble]</i>" : null ]</body></html>"
@@ -140,31 +140,31 @@
 	return
 
 /obj/item/paper_bundle/Topic(href, href_list)
-	if(..())
+	if (..())
 		return 1
-	if((src in usr.contents) || (istype(src.loc, /obj/item/folder) && (src.loc in usr.contents)))
+	if ((src in usr.contents) || (istype(src.loc, /obj/item/folder) && (src.loc in usr.contents)))
 		usr.set_machine(src)
 		var/obj/item/in_hand = usr.get_active_hand()
-		if(href_list["next_page"])
-			if(in_hand && (istype(in_hand, /obj/item/paper) || istype(in_hand, /obj/item/photo)))
+		if (href_list["next_page"])
+			if (in_hand && (istype(in_hand, /obj/item/paper) || istype(in_hand, /obj/item/photo)))
 				insert_sheet_at(usr, page+1, in_hand)
-			else if(page != length(pages))
+			else if (page != length(pages))
 				page++
 				playsound(src.loc, "pageturn", 50, 1)
-		if(href_list["prev_page"])
-			if(in_hand && (istype(in_hand, /obj/item/paper) || istype(in_hand, /obj/item/photo)))
+		if (href_list["prev_page"])
+			if (in_hand && (istype(in_hand, /obj/item/paper) || istype(in_hand, /obj/item/photo)))
 				insert_sheet_at(usr, page, in_hand)
-			else if(page > 1)
+			else if (page > 1)
 				page--
 				playsound(src.loc, "pageturn", 50, 1)
-		if(href_list["remove"])
+		if (href_list["remove"])
 			var/obj/item/W = pages[page]
 			usr.put_in_hands(W)
 			pages.Remove(pages[page])
 
 			to_chat(usr, SPAN_NOTICE("You remove the [W.name] from the bundle."))
 
-			if(length(pages) <= 1)
+			if (length(pages) <= 1)
 				var/obj/item/paper/P = src[1]
 				usr.drop_from_inventory(src)
 				usr.put_in_hands(P)
@@ -172,7 +172,7 @@
 
 				return
 
-			if(page > length(pages))
+			if (page > length(pages))
 				page = length(pages)
 
 			update_icon()
@@ -188,7 +188,7 @@
 	set src in usr
 
 	var/n_name = sanitizeSafe(input(usr, "What would you like to label the bundle?", "Bundle Labelling", null)  as text, MAX_NAME_LEN)
-	if((loc == usr || loc.loc && loc.loc == usr) && usr.stat == 0)
+	if ((loc == usr || loc.loc && loc.loc == usr) && usr.stat == 0)
 		SetName("[(n_name ? text("[n_name]") : "paper")]")
 	add_fingerprint(usr)
 	return
@@ -216,7 +216,7 @@
 	var/photo
 	for(var/obj/O in src)
 		var/image/img = image('icons/obj/bureaucracy.dmi')
-		if(istype(O, /obj/item/paper))
+		if (istype(O, /obj/item/paper))
 			img.icon_state = O.icon_state
 			img.pixel_x -= min(1*i, 2)
 			img.pixel_y -= min(1*i, 2)
@@ -224,16 +224,16 @@
 			pixel_y = min(  1*i, 2)
 			underlays += img
 			i++
-		else if(istype(O, /obj/item/photo))
+		else if (istype(O, /obj/item/photo))
 			var/obj/item/photo/Ph = O
 			img = Ph.tiny
 			photo = 1
 			overlays += img
-	if(i>1)
+	if (i>1)
 		desc =  "[i] papers clipped to each other."
 	else
 		desc = "A single sheet of paper."
-	if(photo)
+	if (photo)
 		desc += "\nThere is a photo attached to it."
 	overlays += image('icons/obj/bureaucracy.dmi', "clip")
 	return

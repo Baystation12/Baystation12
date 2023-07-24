@@ -34,7 +34,7 @@
 
 /obj/machinery/smartfridge/New()
 	..()
-	if(is_secure)
+	if (is_secure)
 		wires = new/datum/wires/smartfridge/secure(src)
 	else
 		wires = new/datum/wires/smartfridge(src)
@@ -47,7 +47,7 @@
 	return ..()
 
 /obj/machinery/smartfridge/get_req_access()
-	if(!scan_id)
+	if (!scan_id)
 		return list()
 	return ..()
 
@@ -137,10 +137,10 @@
 	accepted_types = null
 
 /obj/machinery/smartfridge/drying_rack/accept_check(obj/item/O)
-	if(istype(O, /obj/item/reagent_containers/food/snacks))
+	if (istype(O, /obj/item/reagent_containers/food/snacks))
 		var/obj/item/reagent_containers/food/snacks/S = O
 		return S.dried_type ? TRUE : FALSE
-	else if(istype(O, /obj/item/stack/material))
+	else if (istype(O, /obj/item/stack/material))
 		var/obj/item/stack/material/mat = O
 		var/material/skin/skin_mat = mat.material
 		return istype(skin_mat)
@@ -148,35 +148,35 @@
 
 /obj/machinery/smartfridge/drying_rack/Process()
 	..()
-	if(inoperable())
+	if (inoperable())
 		return
-	if(length(contents))
+	if (length(contents))
 		dry()
 		update_icon()
 
 /obj/machinery/smartfridge/drying_rack/on_update_icon()
 	overlays.Cut()
-	if(inoperable())
-		if(length(contents))
+	if (inoperable())
+		if (length(contents))
 			icon_state = "drying_rack-plant-off"
 		else
 			icon_state = "drying_rack-off"
 	else
 		icon_state = "drying_rack"
-	if(length(contents))
+	if (length(contents))
 		icon_state = "drying_rack-plant"
-		if(operable())
+		if (operable())
 			icon_state = "drying_rack-close"
 
 /obj/machinery/smartfridge/drying_rack/proc/dry()
 	for(var/datum/stored_items/I in item_records)
 		for(var/thing in I.instances)
 			var/remove_thing = FALSE
-			if(istype(thing, /obj/item/reagent_containers/food/snacks))
+			if (istype(thing, /obj/item/reagent_containers/food/snacks))
 				var/obj/item/reagent_containers/food/snacks/S = thing
-				if(S.dry || !I.get_specific_product(get_turf(src), S))
+				if (S.dry || !I.get_specific_product(get_turf(src), S))
 					continue
-				if(S.dried_type == S.type)
+				if (S.dried_type == S.type)
 					S.dry = 1
 					S.SetName("dried [S.name]")
 					S.color = "#a38463"
@@ -188,18 +188,18 @@
 					new D(get_turf(src))
 					remove_thing = TRUE
 
-			else if(istype(thing, /obj/item/stack/material))
+			else if (istype(thing, /obj/item/stack/material))
 				var/obj/item/stack/material/skin = thing
-				if(!istype(skin.material, /material/skin))
+				if (!istype(skin.material, /material/skin))
 					continue
 				var/material/skin/skin_mat = skin.material
-				if(!skin_mat.tans_to)
+				if (!skin_mat.tans_to)
 					continue
 				var/material/leather_mat = SSmaterials.get_material_by_name(skin_mat.tans_to)
 				stock_item(new leather_mat.stack_type(get_turf(src), skin.amount, skin_mat.tans_to))
 				remove_thing = TRUE
 
-			if(remove_thing)
+			if (remove_thing)
 				I.instances -= thing
 				I.amount--
 				qdel(thing)
@@ -207,40 +207,40 @@
 
 
 /obj/machinery/smartfridge/Process()
-	if(inoperable())
+	if (inoperable())
 		return
-	if(src.seconds_electrified > 0)
+	if (src.seconds_electrified > 0)
 		src.seconds_electrified--
-	if(src.shoot_inventory && prob(2))
+	if (src.shoot_inventory && prob(2))
 		src.throw_item()
 
 /obj/machinery/smartfridge/on_update_icon()
 	overlays.Cut()
-	if(inoperable())
+	if (inoperable())
 		icon_state = "[icon_base]-off"
 	else
 		icon_state = icon_base
 
-	if(is_secure)
+	if (is_secure)
 		overlays += image(icon, "[icon_base]-sidepanel")
 
-	if(panel_open)
+	if (panel_open)
 		overlays += image(icon, "[icon_base]-panel")
 
 	var/image/I
 	var/is_off = ""
-	if(inoperable())
+	if (inoperable())
 		is_off = "-off"
 
 	// Fridge contents
 	switch(length(contents))
-		if(0)
+		if (0)
 			I = image(icon, "empty[is_off]")
-		if(1 to 2)
+		if (1 to 2)
 			I = image(icon, "[icon_contents]-1[is_off]")
-		if(3 to 5)
+		if (3 to 5)
 			I = image(icon, "[icon_contents]-2[is_off]")
-		if(6 to 8)
+		if (6 to 8)
 			I = image(icon, "[icon_contents]-3[is_off]")
 		else
 			I = image(icon, "[icon_contents]-4[is_off]")
@@ -257,41 +257,41 @@
 ********************/
 
 /obj/machinery/smartfridge/attackby(obj/item/O as obj, mob/user as mob)
-	if(isScrewdriver(O))
+	if (isScrewdriver(O))
 		panel_open = !panel_open
 		user.visible_message("[user] [panel_open ? "opens" : "closes"] the maintenance panel of \the [src].", "You [panel_open ? "open" : "close"] the maintenance panel of \the [src].")
 		update_icon()
 		SSnano.update_uis(src)
 		return
 
-	if(isMultitool(O) || isWirecutter(O))
-		if(panel_open)
+	if (isMultitool(O) || isWirecutter(O))
+		if (panel_open)
 			attack_hand(user)
 		return
 
-	if(!is_powered())
+	if (!is_powered())
 		to_chat(user, SPAN_NOTICE("\The [src] is unpowered and useless."))
 		return
 
-	if(accept_check(O))
-		if(!user.unEquip(O))
+	if (accept_check(O))
+		if (!user.unEquip(O))
 			return
 		stock_item(O)
 		user.visible_message(SPAN_NOTICE("\The [user] has added \the [O] to \the [src]."), SPAN_NOTICE("You add \the [O] to \the [src]."))
 		update_icon()
 
-	else if(istype(O, /obj/item/storage))
+	else if (istype(O, /obj/item/storage))
 		var/obj/item/storage/bag/P = O
 		var/plants_loaded = 0
 		for(var/obj/G in P.contents)
-			if(accept_check(G) && P.remove_from_storage(G, src, 1))
+			if (accept_check(G) && P.remove_from_storage(G, src, 1))
 				plants_loaded++
 				stock_item(G)
 		P.finish_bulk_removal()
 
-		if(plants_loaded)
+		if (plants_loaded)
 			user.visible_message(SPAN_NOTICE("\The [user] loads \the [src] with the contents of \the [P]."), SPAN_NOTICE("You load \the [src] with the contents of \the [P]."))
-			if(length(P.contents) > 0)
+			if (length(P.contents) > 0)
 				to_chat(user, SPAN_NOTICE("Some items were refused."))
 
 	else if ((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(O))
@@ -302,7 +302,7 @@
 	return 1
 
 /obj/machinery/smartfridge/secure/emag_act(remaining_charges, mob/user)
-	if(!emagged)
+	if (!emagged)
 		emagged = TRUE
 		locked = -1
 		req_access.Cut()
@@ -311,7 +311,7 @@
 
 /obj/machinery/smartfridge/proc/stock_item(obj/item/O)
 	for(var/datum/stored_items/I in item_records)
-		if(istype(O, I.item_path) && O.name == I.item_name)
+		if (istype(O, I.item_path) && O.name == I.item_name)
 			stock(I, O)
 			return
 
@@ -345,38 +345,38 @@
 	for (var/i=1 to length(item_records))
 		var/datum/stored_items/I = item_records[i]
 		var/count = I.get_amount()
-		if(count > 0)
+		if (count > 0)
 			items.Add(list(list("display_name" = html_encode(capitalize(I.item_name)), "vend" = i, "quantity" = count)))
 
-	if(length(items) > 0)
+	if (length(items) > 0)
 		data["contents"] = items
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		ui = new(user, src, ui_key, "smartfridge.tmpl", src.name, 400, 500)
 		ui.set_initial_data(data)
 		ui.open()
 
 /obj/machinery/smartfridge/Topic(href, href_list)
-	if(..()) return 0
+	if (..()) return 0
 
 	var/mob/user = usr
 	var/datum/nanoui/ui = SSnano.get_open_ui(user, src, "main")
 
-	if(href_list["close"])
+	if (href_list["close"])
 		user.unset_machine()
 		ui.close()
 		return 0
 
-	if(href_list["vend"])
+	if (href_list["vend"])
 		var/index = text2num(href_list["vend"])
 		var/amount = text2num(href_list["amount"])
 		var/datum/stored_items/I = item_records[index]
 		var/count = I.get_amount()
 
 		// Sanity check, there are probably ways to press the button when it shouldn't be possible.
-		if(count > 0)
-			if((count - amount) < 0)
+		if (count > 0)
+			if ((count - amount) < 0)
 				amount = count
 			for(var/i = 1 to amount)
 				I.get_product(get_turf(src))
@@ -388,7 +388,7 @@
 /obj/machinery/smartfridge/proc/throw_item()
 	var/obj/throw_item = null
 	var/mob/living/target = locate() in view(7,src)
-	if(!target)
+	if (!target)
 		return 0
 
 	for(var/datum/stored_items/I in src.item_records)
@@ -397,7 +397,7 @@
 			continue
 		break
 
-	if(!throw_item)
+	if (!throw_item)
 		return 0
 	spawn(0)
 		throw_item.throw_at(target,16,3)
@@ -410,7 +410,7 @@
 *************************/
 
 /obj/machinery/smartfridge/secure/CanUseTopic(mob/user, datum/topic_state/state, href_list)
-	if(!allowed(user) && !emagged && locked != -1 && href_list && href_list["vend"] && scan_id)
+	if (!allowed(user) && !emagged && locked != -1 && href_list && href_list["vend"] && scan_id)
 		to_chat(user, SPAN_WARNING("Access denied."))
 		return STATUS_CLOSE
 	return ..()

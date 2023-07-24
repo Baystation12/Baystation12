@@ -23,7 +23,7 @@
 	brainmob.dna = H.dna
 	brainmob.timeofhostdeath = H.timeofdeath
 	brainmob.set_stat(CONSCIOUS)
-	if(H.mind)
+	if (H.mind)
 		H.mind.transfer_to(brainmob)
 	return
 
@@ -105,9 +105,9 @@
 
 	//TODO: ORGAN REMOVAL UPDATE. Make the brain remain in the MMI so it doesn't lose organ data.
 /obj/item/device/mmi/attack_self(mob/user as mob)
-	if(!brainmob)
+	if (!brainmob)
 		to_chat(user, SPAN_WARNING("You upend the MMI, but there's nothing in it."))
-	else if(locked)
+	else if (locked)
 		to_chat(user, SPAN_WARNING("You upend the MMI, but the brain is clamped into place."))
 	else
 		to_chat(user, SPAN_NOTICE("You upend the MMI, spilling the brain onto the floor."))
@@ -140,14 +140,14 @@
 	return
 
 /obj/item/device/mmi/relaymove(mob/user, direction)
-	if(user.stat || user.stunned)
+	if (user.stat || user.stunned)
 		return
 	var/obj/item/rig/rig = src.get_rig()
-	if(rig)
+	if (rig)
 		rig.forced_move(direction, user)
 
 /obj/item/device/mmi/Destroy()
-	if(isrobot(loc))
+	if (isrobot(loc))
 		var/mob/living/silicon/robot/borg = loc
 		borg.mmi = null
 	QDEL_NULL(brainmob)
@@ -192,13 +192,13 @@
 
 
 /obj/item/device/mmi/emp_act(severity)
-	if(!brainmob)
+	if (!brainmob)
 		return
 	else
 		switch(severity)
-			if(EMP_ACT_HEAVY)
+			if (EMP_ACT_HEAVY)
 				brainmob.emp_damage += rand(20,30)
-			if(EMP_ACT_LIGHT)
+			if (EMP_ACT_LIGHT)
 				brainmob.emp_damage += rand(10,20)
 	..()
 

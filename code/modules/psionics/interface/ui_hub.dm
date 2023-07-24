@@ -19,11 +19,11 @@
 
 /obj/screen/psi/hub/on_update_icon()
 
-	if(!owner.psi)
+	if (!owner.psi)
 		return
 
 	icon_state = owner.psi.suppressed ? "psi_suppressed" : "psi_active"
-	if(world.time < owner.psi.next_power_use)
+	if (world.time < owner.psi.next_power_use)
 		overlays |= on_cooldown
 	else
 		overlays.Cut()
@@ -31,7 +31,7 @@
 	for(var/thing in components)
 		var/obj/screen/psi/component = thing
 		component.update_icon()
-		if(!component.invisibility) component.screen_loc = "EAST-[++offset]:28,CENTER-3:11"
+		if (!component.invisibility) component.screen_loc = "EAST-[++offset]:28,CENTER-3:11"
 
 /obj/screen/psi/hub/Destroy()
 	STOP_PROCESSING(SSprocessing, src)
@@ -42,27 +42,27 @@
 	. = ..()
 
 /obj/screen/psi/hub/Process()
-	if(!istype(owner))
+	if (!istype(owner))
 		qdel(src)
 		return
-	if(!owner.psi)
+	if (!owner.psi)
 		return
 	maptext = "[round((owner.psi.stamina/owner.psi.max_stamina)*100)]%"
 	update_icon()
 
 /obj/screen/psi/hub/Click(location, control, click_params)
 	var/list/params = params2list(click_params)
-	if(params["shift"])
+	if (params["shift"])
 		owner.show_psi_assay(owner)
 		return
 
-	if(owner.psi.suppressed && owner.psi.stun)
+	if (owner.psi.suppressed && owner.psi.stun)
 		to_chat(owner, SPAN_WARNING("You are dazed and reeling, and cannot muster enough focus to do that!"))
 		return
 
 	owner.psi.suppressed = !owner.psi.suppressed
 	to_chat(owner, SPAN_NOTICE("You are <b>[owner.psi.suppressed ? "now suppressing" : "no longer suppressing"]</b> your psi-power."))
-	if(owner.psi.suppressed)
+	if (owner.psi.suppressed)
 		owner.psi.cancel()
 		owner.psi.hide_auras()
 	else

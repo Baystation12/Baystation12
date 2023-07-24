@@ -18,7 +18,7 @@ GLOBAL_DATUM_INIT(actor, /datum/antagonist/actor, new)
 	required_language = LANGUAGE_HUMAN_EURO
 
 /datum/antagonist/actor/greet(datum/mind/player)
-	if(!..())
+	if (!..())
 		return
 
 	player.current.show_message("You work for [GLOB.using_map.company_name], tasked with the production and broadcasting of entertainment to all of its assets.")
@@ -40,15 +40,15 @@ GLOBAL_DATUM_INIT(actor, /datum/antagonist/actor, new)
 	set name = "Join as Actor"
 	set desc = "Join as an Actor to entertain the crew through television!"
 
-	if(!MayRespawn(1) || !GLOB.actor.can_become_antag(usr.mind, 1))
+	if (!MayRespawn(1) || !GLOB.actor.can_become_antag(usr.mind, 1))
 		return
 
 	var/choice = alert("Are you sure you'd like to join as an actor?", "Confirmation","Yes", "No")
-	if(choice != "Yes")
+	if (choice != "Yes")
 		return
 
-	if(isghostmind(usr.mind) || isnewplayer(usr))
-		if(length(GLOB.actor.current_antagonists) >= GLOB.actor.hard_cap)
+	if (isghostmind(usr.mind) || isnewplayer(usr))
+		if (length(GLOB.actor.current_antagonists) >= GLOB.actor.hard_cap)
 			to_chat(usr, "No more actors may spawn at the current time.")
 			return
 		GLOB.actor.create_default(usr)

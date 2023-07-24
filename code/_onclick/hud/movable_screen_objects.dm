@@ -23,7 +23,7 @@
 	var/list/PM = params2list(params)
 
 	//No screen-loc information? abort.
-	if(!PM || !PM["screen-loc"])
+	if (!PM || !PM["screen-loc"])
 		return
 
 	//Split screen-loc up into X+Pixel_X and Y+Pixel_Y
@@ -36,7 +36,7 @@
 	var/list/screen_loc_Y = splittext(screen_loc_params[2],":")
 	screen_loc_Y[1] = encode_screen_Y(text2num(screen_loc_Y[1]), usr)
 
-	if(snap2grid) //Discard Pixel Values
+	if (snap2grid) //Discard Pixel Values
 		screen_loc = "[screen_loc_X[1]],[screen_loc_Y[1]]"
 
 	else //Normalise Pixel Values (So the object drops at the center of the mouse, not 16 pixels off)
@@ -46,9 +46,9 @@
 
 /obj/screen/movable/proc/encode_screen_X(X, mob/viewer)
 	var/view = viewer.client ? viewer.client.view : world.view
-	if(X > view+1)
+	if (X > view+1)
 		. = "EAST-[view*2 + 1-X]"
-	else if(X < view+1)
+	else if (X < view+1)
 		. = "WEST+[X-1]"
 	else
 		. = "CENTER"
@@ -56,41 +56,41 @@
 /obj/screen/movable/proc/decode_screen_X(X, mob/viewer)
 	var/view = viewer.client ? viewer.client.view : world.view
 	//Find EAST/WEST implementations
-	if(findtext(X,"EAST-"))
+	if (findtext(X,"EAST-"))
 		var/num = text2num(copytext(X,6)) //Trim EAST-
-		if(!num)
+		if (!num)
 			num = 0
 		. = view*2 + 1 - num
-	else if(findtext(X,"WEST+"))
+	else if (findtext(X,"WEST+"))
 		var/num = text2num(copytext(X,6)) //Trim WEST+
-		if(!num)
+		if (!num)
 			num = 0
 		. = num+1
-	else if(findtext(X,"CENTER"))
+	else if (findtext(X,"CENTER"))
 		. = view+1
 
 /obj/screen/movable/proc/encode_screen_Y(Y, mob/viewer)
 	var/view = viewer.client ? viewer.client.view : world.view
-	if(Y > view+1)
+	if (Y > view+1)
 		. = "NORTH-[view*2 + 1-Y]"
-	else if(Y < viewer.client.view+1)
+	else if (Y < viewer.client.view+1)
 		. = "SOUTH+[Y-1]"
 	else
 		. = "CENTER"
 
 /obj/screen/movable/proc/decode_screen_Y(Y, mob/viewer)
 	var/view = viewer.client ? viewer.client.view : world.view
-	if(findtext(Y,"NORTH-"))
+	if (findtext(Y,"NORTH-"))
 		var/num = text2num(copytext(Y,7)) //Trim NORTH-
-		if(!num)
+		if (!num)
 			num = 0
 		. = view*2 + 1 - num
-	else if(findtext(Y,"SOUTH+"))
+	else if (findtext(Y,"SOUTH+"))
 		var/num = text2num(copytext(Y,7)) //Time SOUTH+
-		if(!num)
+		if (!num)
 			num = 0
 		. = num+1
-	else if(findtext(Y,"CENTER"))
+	else if (findtext(Y,"CENTER"))
 		. = view+1
 
 //Debug procs
@@ -105,7 +105,7 @@
 	M.maptext_width = 64
 
 	var/screen_l = input(usr,"Where on the screen? (Formatted as 'X,Y' e.g: '1,1' for bottom left)","Spawn Movable UI Object") as text
-	if(!screen_l)
+	if (!screen_l)
 		return
 
 	M.screen_loc = screen_l
@@ -124,7 +124,7 @@
 	S.maptext_width = 64
 
 	var/screen_l = input(usr,"Where on the screen? (Formatted as 'X,Y' e.g: '1,1' for bottom left)","Spawn Snap UI Object") as text
-	if(!screen_l)
+	if (!screen_l)
 		return
 
 	S.screen_loc = screen_l

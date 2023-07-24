@@ -19,9 +19,9 @@
 
 /proc/reagent_scan_results(obj/O, details = 0)
 	RETURN_TYPE(/list)
-	if(isnull(O.reagents))
+	if (isnull(O.reagents))
 		return list("No significant chemical agents found in [O].")
-	if(length(O.reagents.reagent_list) == 0)
+	if (length(O.reagents.reagent_list) == 0)
 		return list("No active chemical agents found in [O].")
 	. = list("Chemicals found in [O]:")
 	var/one_percent = O.reagents.total_volume / 100

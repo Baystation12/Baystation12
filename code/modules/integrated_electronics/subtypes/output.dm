@@ -20,7 +20,7 @@
 
 /obj/item/integrated_circuit/output/screen/any_examine(mob/user)
 	var/shown_label = ""
-	if(displayed_name && displayed_name != name)
+	if (displayed_name && displayed_name != name)
 		shown_label = " labeled '[displayed_name]'"
 
 	to_chat(user, "There is \a [src][shown_label], which displays [!isnull(stuff_to_display) ? "'[stuff_to_display]'" : "nothing"].")
@@ -30,9 +30,9 @@
 
 /obj/item/integrated_circuit/output/screen/do_work()
 	var/datum/integrated_io/I = inputs[1]
-	if(isweakref(I.data))
+	if (isweakref(I.data))
 		var/datum/d = I.data_as_type(/datum)
-		if(d)
+		if (d)
 			stuff_to_display = "[d]"
 	else
 		stuff_to_display = replacetext("[I.data]", eol , "<br>")
@@ -81,11 +81,11 @@
 	update_lighting()
 
 /obj/item/integrated_circuit/output/light/proc/update_lighting()
-	if(light_toggled)
-		if(assembly)
+	if (light_toggled)
+		if (assembly)
 			assembly.set_light(light_brightness, 1, 4, 2, light_rgb)
 	else
-		if(assembly)
+		if (assembly)
 			assembly.set_light(0)
 	power_draw_idle = light_toggled ? light_brightness * 2 : 0
 
@@ -112,7 +112,7 @@
 	var/new_color = get_pin_data(IC_INPUT, 1)
 	var/brightness = get_pin_data(IC_INPUT, 2)
 
-	if(new_color && isnum(brightness))
+	if (new_color && isnum(brightness))
 		brightness = clamp(brightness, 0, 1)
 		light_rgb = new_color
 		light_brightness = brightness
@@ -148,9 +148,9 @@
 	var/ID = get_pin_data(IC_INPUT, 1)
 	var/vol = get_pin_data(IC_INPUT, 2)
 	var/freq = get_pin_data(IC_INPUT, 3)
-	if(!isnull(ID) && !isnull(vol))
+	if (!isnull(ID) && !isnull(vol))
 		var/selected_sound = sounds[ID]
-		if(!selected_sound)
+		if (!selected_sound)
 			return
 		vol = clamp(vol ,0 , 100)
 		playsound(get_turf(src), selected_sound, vol, freq, -1)
@@ -232,7 +232,7 @@
 
 /obj/item/integrated_circuit/output/text_to_speech/do_work()
 	text = get_pin_data(IC_INPUT, 1)
-	if(!isnull(text))
+	if (!isnull(text))
 		var/atom/movable/A = get_object()
 		var/sanitized_text = sanitize(text)
 		A.audible_message("\The [A] states, \"[sanitized_text]\"")
@@ -274,28 +274,28 @@
 	return ..()
 
 /obj/item/integrated_circuit/output/video_camera/proc/set_camera_status(status)
-	if(camera)
+	if (camera)
 		camera.set_status(status)
 		power_draw_idle = camera.status ? 20 : 0
-		if(camera.status) // Ensure that there's actually power.
-			if(!draw_idle_power())
+		if (camera.status) // Ensure that there's actually power.
+			if (!draw_idle_power())
 				power_fail()
 
 /obj/item/integrated_circuit/output/video_camera/on_data_written()
-	if(camera)
+	if (camera)
 		var/cam_name = get_pin_data(IC_INPUT, 1)
 		var/cam_active = get_pin_data(IC_INPUT, 2)
 		var/cam_network = get_pin_data(IC_INPUT, 3)
-		if(!isnull(cam_name))
+		if (!isnull(cam_name))
 			camera.c_tag = cam_name
 			invalidateCameraCache()
-		if(!isnull(cam_network))
+		if (!isnull(cam_network))
 			camera.replace_networks(list(cam_network))
 			invalidateCameraCache()
 		set_camera_status(cam_active)
 
 /obj/item/integrated_circuit/output/video_camera/power_fail()
-	if(camera)
+	if (camera)
 		set_camera_status(0)
 		set_pin_data(IC_INPUT, 2, FALSE)
 
@@ -331,7 +331,7 @@
 /obj/item/integrated_circuit/output/led/external_examine(mob/user)
 	var/text_output = "There is "
 
-	if(name == displayed_name)
+	if (name == displayed_name)
 		text_output += "\an [name]"
 	else
 		text_output += "\an ["\improper[name]"] labeled '[displayed_name]'"

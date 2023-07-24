@@ -11,33 +11,33 @@
 	skill_needed = SKILL_EXPERIENCED
 
 /datum/terminal_command/check_access(mob/user, datum/terminal/terminal)
-	if(terminal.computer.emagged() && !istype(terminal, /datum/terminal/remote))
+	if (terminal.computer.emagged() && !istype(terminal, /datum/terminal/remote))
 		return TRUE // Helps let antags do hacker gimmicks without having to get universal network access first.
 	return ..()
 
 /datum/terminal_command/ssh/proper_input_entered(text, mob/user, datum/terminal/terminal)
-	if(istype(terminal, /datum/terminal/remote))
+	if (istype(terminal, /datum/terminal/remote))
 		return "[name]: Error; [name] is not supported on remote terminals."
 	var/list/arguments = get_arguments(text)
-	if(isnull(arguments) || length(arguments) != 1)
+	if (isnull(arguments) || length(arguments) != 1)
 		return syntax_error()
-	if(!terminal.computer.get_ntnet_status())
+	if (!terminal.computer.get_ntnet_status())
 		return network_error()
 	. = list()
-	if(terminal.computer.emagged())
+	if (terminal.computer.emagged())
 		. += "CRYPTOGRAPHIC ATTACK PROTOCOL ENABLED"
 	var/nid = text2num(arguments[1])
-	if(!nid)
+	if (!nid)
 		. += "[name]: Error; invalid network id."
 		return
 	var/datum/extension/interactive/ntos/T = ntnet_global.get_os_by_nid(nid)
-	if(!istype(T) || !T.get_ntnet_status_incoming()) // Target device only need a direct connection to NTNet
+	if (!istype(T) || !T.get_ntnet_status_incoming()) // Target device only need a direct connection to NTNet
 		. += "[name]: Error; cannot locate target device. Try ping for diagnostics."
 		return
-	if(T == terminal.computer)
+	if (T == terminal.computer)
 		. += "[name]: Error: cannot open remote terminal session on same device."
 		return
-	if(T.has_terminal(user))
+	if (T.has_terminal(user))
 		. += "[name]: Error; a remote terminal to this device is already active."
 		return
 	var/datum/terminal/remote/new_term = new (user, T, terminal.computer)

@@ -46,13 +46,13 @@
 	gas_contained = new
 	inturf = get_step(src, dir)
 	turbine = locate() in get_step(src, get_dir(inturf, src))
-	if(!turbine)
+	if (!turbine)
 		set_broken(TRUE)
 	else
 		turbine.compressor = src
 
 /obj/machinery/compressor/Destroy()
-	if(turbine)
+	if (turbine)
 		turbine.compressor = null
 		turbine.set_broken(TRUE)
 		turbine = null
@@ -63,10 +63,10 @@
 #define COMPSTARTERLOAD 2800
 
 /obj/machinery/compressor/Process()
-	if(!starter)
+	if (!starter)
 		return
 	overlays.Cut()
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		return
 	rpm = 0.9* rpm + 0.1 * rpmtarget
 	var/datum/gas_mixture/environment = inturf.return_air()
@@ -78,23 +78,23 @@
 	rpm = max(0, rpm - (rpm*rpm)/COMPFRICTION)
 
 
-	if(starter && is_powered())
+	if (starter && is_powered())
 		use_power_oneoff(2800)
-		if(rpm<1000)
+		if (rpm<1000)
 			rpmtarget = 1000
 	else
-		if(rpm<1000)
+		if (rpm<1000)
 			rpmtarget = 0
 
 
 
-	if(rpm>50000)
+	if (rpm>50000)
 		overlays += image('icons/obj/pipes.dmi', "comp-o4", FLY_LAYER)
-	else if(rpm>10000)
+	else if (rpm>10000)
 		overlays += image('icons/obj/pipes.dmi', "comp-o3", FLY_LAYER)
-	else if(rpm>2000)
+	else if (rpm>2000)
 		overlays += image('icons/obj/pipes.dmi', "comp-o2", FLY_LAYER)
-	else if(rpm>500)
+	else if (rpm>500)
 		overlays += image('icons/obj/pipes.dmi', "comp-o1", FLY_LAYER)
 	 //TODO: DEFERRED
 
@@ -105,11 +105,11 @@
 
 /obj/machinery/power/turbine/LateInitialize()
 	..()
-	if(!compressor) // It should have found us and subscribed.
+	if (!compressor) // It should have found us and subscribed.
 		set_broken(TRUE)
 
 /obj/machinery/power/turbine/Destroy()
-	if(compressor)
+	if (compressor)
 		compressor.turbine = null
 		compressor.set_broken(TRUE)
 		compressor = null
@@ -120,10 +120,10 @@
 #define TURBGENG 0.8
 
 /obj/machinery/power/turbine/Process()
-	if(!compressor.starter)
+	if (!compressor.starter)
 		return
 	overlays.Cut()
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		return
 	lastgen = ((compressor.rpm / TURBGENQ)**TURBGENG) *TURBGENQ
 
@@ -131,15 +131,15 @@
 	var/newrpm = ((compressor.gas_contained.temperature) * compressor.gas_contained.total_moles)/4
 	newrpm = max(0, newrpm)
 
-	if(!compressor.starter || newrpm > 1000)
+	if (!compressor.starter || newrpm > 1000)
 		compressor.rpmtarget = newrpm
 
-	if(compressor.gas_contained.total_moles>0)
+	if (compressor.gas_contained.total_moles>0)
 		var/oamount = min(compressor.gas_contained.total_moles, (compressor.rpm+100)/35000*compressor.capacity)
 		var/datum/gas_mixture/removed = compressor.gas_contained.remove(oamount)
 		outturf.assume_air(removed)
 
-	if(lastgen > 100)
+	if (lastgen > 100)
 		overlays += image('icons/obj/pipes.dmi', "turb-o", FLY_LAYER)
 
 
@@ -174,21 +174,21 @@
 	return
 
 /obj/machinery/power/turbine/CanUseTopic(mob/user, href_list)
-	if(!user.IsAdvancedToolUser())
+	if (!user.IsAdvancedToolUser())
 		to_chat(user, FEEDBACK_YOU_LACK_DEXTERITY)
 		return min(..(), STATUS_UPDATE)
 	return ..()
 
 /obj/machinery/power/turbine/OnTopic(user, href_list)
-	if(href_list["close"])
+	if (href_list["close"])
 		close_browser(usr, "window=turbine")
 		return TOPIC_HANDLED
 
-	if(href_list["str"])
+	if (href_list["str"])
 		compressor.starter = !compressor.starter
 		. = TOPIC_REFRESH
 
-	if(. == TOPIC_REFRESH)
+	if (. == TOPIC_REFRESH)
 		interact(user)
 
 
@@ -200,11 +200,11 @@
 /obj/machinery/computer/turbine_computer/Initialize()
 	. = ..()
 	for(var/obj/machinery/compressor/C in SSmachines.machinery)
-		if(id_tag == C.comp_id)
+		if (id_tag == C.comp_id)
 			compressor = C
 	doors = new /list()
 	for(var/obj/machinery/door/blast/P in SSmachines.machinery)
-		if(P.id_tag == id_tag)
+		if (P.id_tag == id_tag)
 			doors += P
 
 /obj/machinery/computer/turbine_computer/Destroy()
@@ -219,7 +219,7 @@
 /obj/machinery/computer/turbine_computer/interact(mob/user)
 	user.machine = src
 	var/dat
-	if(src.compressor)
+	if (src.compressor)
 		dat += {"<BR><B>Gas turbine remote control system</B><HR>
 		\nTurbine status: [ src.compressor.starter ? "<A href='?src=\ref[src];str=1'>Off</A> <B>On</B>" : "<B>Off</B> <A href='?src=\ref[src];str=1'>On</A>"]
 		\n<BR>
@@ -241,10 +241,10 @@
 
 
 /obj/machinery/computer/turbine_computer/OnTopic(user, href_list)
-	if( href_list["view"] )
+	if ( href_list["view"] )
 		usr.client.eye = src.compressor
 		. = TOPIC_HANDLED
-	else if( href_list["str"] )
+	else if ( href_list["str"] )
 		src.compressor.starter = !src.compressor.starter
 		. = TOPIC_REFRESH
 	else if (href_list["doors"])
@@ -258,9 +258,9 @@
 					D.close()
 					door_status = 0
 		. = TOPIC_REFRESH
-	else if( href_list["close"] )
+	else if ( href_list["close"] )
 		close_browser(user, "window=computer")
 		return TOPIC_HANDLED
 
-	if(. == TOPIC_REFRESH)
+	if (. == TOPIC_REFRESH)
 		interact(user)

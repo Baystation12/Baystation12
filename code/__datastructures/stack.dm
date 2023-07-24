@@ -5,7 +5,7 @@
 /datum/stack/New(list/elements, max)
 	..()
 	stack = elements ? elements.Copy() : list()
-	if(max)
+	if (max)
 		max_elements = max
 
 /datum/stack/Destroy()
@@ -13,18 +13,18 @@
 	. = ..()
 
 /datum/stack/proc/Pop()
-	if(is_empty())
+	if (is_empty())
 		return null
 	. = stack[length(stack)]
 	stack.Cut(length(stack),0)
 
 /datum/stack/proc/Push(element)
-	if(max_elements && (length(stack)+1 > max_elements))
+	if (max_elements && (length(stack)+1 > max_elements))
 		return null
 	stack += element
 
 /datum/stack/proc/Top()
-	if(is_empty())
+	if (is_empty())
 		return null
 	. = stack[length(stack)]
 
@@ -36,7 +36,7 @@
 
 //Rotate entire stack left with the leftmost looping around to the right
 /datum/stack/proc/RotateLeft()
-	if(is_empty())
+	if (is_empty())
 		return 0
 	. = stack[1]
 	stack.Cut(1,2)
@@ -44,7 +44,7 @@
 
 //Rotate entire stack to the right with the rightmost looping around to the left
 /datum/stack/proc/RotateRight()
-	if(is_empty())
+	if (is_empty())
 		return 0
 	. = stack[length(stack)]
 	stack.Cut(length(stack),0)

@@ -8,10 +8,10 @@
 		var/list/failures = list()
 		for(var/generic in sector.initial_generic_waypoints)
 			for(var/shuttle in sector.initial_restricted_waypoints)
-				if(generic == sector.initial_restricted_waypoints[shuttle])
+				if (generic == sector.initial_restricted_waypoints[shuttle])
 					failures += generic
 					break
-			if(length(failures))
+			if (length(failures))
 				log_bad("The sector [log_info_line(sector)] has the following generic landmarks also appearing on the restricted list: [english_list(failures)]")
 				fail = TRUE
 

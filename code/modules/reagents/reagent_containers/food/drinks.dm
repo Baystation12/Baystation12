@@ -21,7 +21,7 @@
 	return
 
 /obj/item/reagent_containers/food/drinks/attack_self(mob/user as mob)
-	if(!is_open_container())
+	if (!is_open_container())
 		open(user)
 
 /obj/item/reagent_containers/food/drinks/proc/open(mob/user)
@@ -30,44 +30,44 @@
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/reagent_containers/food/drinks/attack(mob/M as mob, mob/user as mob, def_zone)
-	if(force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
+	if (force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
 		return ..()
 
-	if(standard_feed_mob(user, M))
+	if (standard_feed_mob(user, M))
 		return
 
 	return 0
 
 /obj/item/reagent_containers/food/drinks/afterattack(obj/target, mob/user, proximity)
-	if(!proximity) return
+	if (!proximity) return
 
-	if(standard_dispenser_refill(user, target))
+	if (standard_dispenser_refill(user, target))
 		return
-	if(standard_pour_into(user, target))
+	if (standard_pour_into(user, target))
 		return
 	return ..()
 
 /obj/item/reagent_containers/food/drinks/standard_feed_mob(mob/user, mob/target)
-	if(!is_open_container())
+	if (!is_open_container())
 		to_chat(user, SPAN_NOTICE("You need to open \the [src]!"))
 		return 1
 	return ..()
 
 /obj/item/reagent_containers/food/drinks/standard_dispenser_refill(mob/user, obj/structure/reagent_dispensers/target)
-	if(!is_open_container())
+	if (!is_open_container())
 		to_chat(user, SPAN_NOTICE("You need to open \the [src]!"))
 		return 1
 	return ..()
 
 /obj/item/reagent_containers/food/drinks/standard_pour_into(mob/user, atom/target)
-	if(!is_open_container())
+	if (!is_open_container())
 		to_chat(user, SPAN_NOTICE("You need to open \the [src]!"))
 		return 1
 	return ..()
 
 /obj/item/reagent_containers/food/drinks/self_feed_message(mob/user)
 	to_chat(user, SPAN_NOTICE("You swallow a gulp from \the [src]."))
-	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
+	if (user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
 		for(var/datum/reagent/R in reagents.reagent_list)
 			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R.type)
 
@@ -76,9 +76,9 @@
 
 /obj/item/reagent_containers/food/drinks/examine(mob/user, distance)
 	. = ..()
-	if(distance > 1)
+	if (distance > 1)
 		return
-	if(!reagents || reagents.total_volume == 0)
+	if (!reagents || reagents.total_volume == 0)
 		to_chat(user, SPAN_NOTICE("\The [src] is empty!"))
 	else if (reagents.total_volume <= volume * 0.25)
 		to_chat(user, SPAN_NOTICE("\The [src] is almost empty!"))
@@ -92,17 +92,17 @@
 /obj/item/reagent_containers/food/drinks/proc/get_filling_state()
 	var/percent = round((reagents.total_volume / volume) * 100)
 	for(var/k in cached_number_list_decode(filling_states))
-		if(percent <= k)
+		if (percent <= k)
 			return k
 
 /obj/item/reagent_containers/food/drinks/on_update_icon()
 	overlays.Cut()
-	if(length(reagents.reagent_list) > 0)
-		if(base_name)
+	if (length(reagents.reagent_list) > 0)
+		if (base_name)
 			var/datum/reagent/R = reagents.get_master_reagent()
 			SetName("[base_name] of [R.glass_name ? R.glass_name : "something"]")
 			desc = R.glass_desc ? R.glass_desc : initial(desc)
-		if(filling_states)
+		if (filling_states)
 			var/image/filling = image(icon, src, "[base_icon][get_filling_state()]")
 			filling.color = reagents.get_color()
 			overlays += filling
@@ -248,7 +248,7 @@
 	center_of_mass = "x=16;y=12"
 
 /obj/item/reagent_containers/food/drinks/sillycup/on_reagent_change()
-	if(reagents.total_volume)
+	if (reagents.total_volume)
 		icon_state = "water_cup"
 	else
 		icon_state = "water_cup_e"

@@ -12,7 +12,7 @@
 		group_by(circuits_by_name, initial(A.name), circuit_path)
 
 	var/number_of_issues = number_of_issues(circuits_by_name, "Names")
-	if(number_of_issues)
+	if (number_of_issues)
 		fail("[number_of_issues] issue\s with circuit naming found.")
 	else
 		pass("All circuits have unique names.")
@@ -27,9 +27,9 @@
 	for(var/prefab_type in subtypesof(/singleton/prefab/ic_assembly))
 		var/singleton/prefab/ic_assembly/prefab = prefab_type
 		var/result = SScircuit.validate_electronic_assembly(initial(prefab.data))
-		if(istext(result)) //Returned some error
+		if (istext(result)) //Returned some error
 			failed_prefabs += "[prefab_type]: [result]"
-	if(length(failed_prefabs))
+	if (length(failed_prefabs))
 		fail("The following integrated prefab types are invalid: [english_list(failed_prefabs)]")
 	else
 		pass("All integrated circuit prefabs are within complexity and size limits.")
@@ -46,7 +46,7 @@
 
 		try
 			var/built_item = prefab.create(get_safe_turf())
-			if(built_item)
+			if (built_item)
 				qdel(built_item)
 			else
 				log_bad("[prefab_type] failed to create or return its item.")
@@ -55,7 +55,7 @@
 			log_bad("[prefab_type] caused an exception: [e] on [e.file]:[e.line]")
 			failed_prefabs |= prefab_type
 
-	if(length(failed_prefabs))
+	if (length(failed_prefabs))
 		fail("The following integrated prefab types failed to create their assemblies: [english_list(failed_prefabs)]")
 	else
 		pass("All integrated circuit prefabs are within complexity and size limits.")
@@ -76,7 +76,7 @@
 	var/obj/item/integrated_circuit/ic = new circuit_type()
 	var/failed = FALSE
 
-	if(length(all_inputs) != length(all_expected_outputs))
+	if (length(all_inputs) != length(all_expected_outputs))
 		fail("Given inputs do not match the expected outputs length.")
 		return 1
 
@@ -92,9 +92,9 @@
 		for(var/output_index = 1 to length(expected_outputs))
 			var/actual_output = ic.get_pin_data(IC_OUTPUT, output_index)
 			var/expected_output = expected_outputs[output_index]
-			if(expected_output == IC_TEST_ANY_OUTPUT)
+			if (expected_output == IC_TEST_ANY_OUTPUT)
 				continue
-			if(actual_output != expected_output)
+			if (actual_output != expected_output)
 				failed = TRUE
 				log_bad("[circuit_type] - Test [test_index] - Expected '[expected_output]', was '[actual_output]'")
 				for(var/datum/integrated_io/io in ic.inputs)
@@ -103,7 +103,7 @@
 					log_bad("Raw Output: [io.data]")
 
 	qdel(ic)
-	if(failed)
+	if (failed)
 		fail("The circuit [circuit_type] did not meet all expectations.")
 	else
 		pass("The circuit [circuit_type] met all expectations.")

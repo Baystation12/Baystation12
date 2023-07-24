@@ -10,11 +10,11 @@
 	var/rigged = 0
 
 /obj/structure/closet/crate/open()
-	if((atom_flags & ATOM_FLAG_OPEN_CONTAINER) && !opened && can_open())
+	if ((atom_flags & ATOM_FLAG_OPEN_CONTAINER) && !opened && can_open())
 		object_shaken()
 	. = ..()
-	if(.)
-		if(rigged)
+	if (.)
+		if (rigged)
 			visible_message(SPAN_DANGER("There are wires attached to the lid of [src]..."))
 			for(var/obj/item/device/assembly_holder/H in src)
 				H.process_activation(usr)
@@ -23,7 +23,7 @@
 
 /obj/structure/closet/crate/examine(mob/user)
 	. = ..()
-	if(rigged && opened)
+	if (rigged && opened)
 		var/list/devices = list()
 		for(var/obj/item/device/assembly_holder/H in src)
 			devices += H
@@ -161,12 +161,12 @@
 
 /obj/structure/closet/crate/freezer/return_air()
 	var/datum/gas_mixture/gas = (..())
-	if(!gas)	return null
+	if (!gas)	return null
 	var/datum/gas_mixture/newgas = new/datum/gas_mixture()
 	newgas.copy_from(gas)
-	if(newgas.temperature <= target_temp)	return
+	if (newgas.temperature <= target_temp)	return
 
-	if((newgas.temperature - cooling_power) > target_temp)
+	if ((newgas.temperature - cooling_power) > target_temp)
 		newgas.temperature -= cooling_power
 	else
 		newgas.temperature = target_temp
@@ -291,7 +291,7 @@
 
 /obj/structure/closet/crate/secure/biohazard/blanks/can_close()
 	for(var/obj/structure/closet/closet in get_turf(src))
-		if(closet != src && !(istype(closet, /obj/structure/closet/body_bag/cryobag)))
+		if (closet != src && !(istype(closet, /obj/structure/closet/body_bag/cryobag)))
 			return 0
 	return 1
 

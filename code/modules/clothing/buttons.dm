@@ -7,7 +7,7 @@
 	set name = "Toggle Buttons"
 	set category = "Object"
 	set src in usr
-	if(usr.incapacitated())
+	if (usr.incapacitated())
 		return
 	buttons_state = !buttons_state
 	icon_state = "[custom_icon_state ? custom_icon_state : initial(icon_state)][buttons_state ? buttons_suffix : ""]"

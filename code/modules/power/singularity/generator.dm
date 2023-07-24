@@ -11,15 +11,15 @@
 
 /obj/machinery/the_singularitygen/Process()
 	var/turf/T = get_turf(src)
-	if(src.energy >= 200)
+	if (src.energy >= 200)
 		new /obj/singularity/(T, 50)
-		if(src) qdel(src)
+		if (src) qdel(src)
 
 /obj/machinery/the_singularitygen/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/wrench))
+	if (istype(W, /obj/item/wrench))
 		anchored = !anchored
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-		if(anchored)
+		if (anchored)
 			user.visible_message("[user.name] secures [src.name] to the floor.", \
 				"You secure the [src.name] to the floor.", \
 				"You hear a ratchet")

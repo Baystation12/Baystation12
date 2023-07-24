@@ -16,20 +16,20 @@ var/global/list/fusion_reactions
 	return 0
 
 /proc/get_fusion_reaction(p_react, s_react, m_energy)
-	if(!fusion_reactions)
+	if (!fusion_reactions)
 		fusion_reactions = list()
 		for(var/rtype in typesof(/singleton/fusion_reaction) - /singleton/fusion_reaction)
 			var/singleton/fusion_reaction/cur_reaction = new rtype()
-			if(!fusion_reactions[cur_reaction.p_react])
+			if (!fusion_reactions[cur_reaction.p_react])
 				fusion_reactions[cur_reaction.p_react] = list()
 			fusion_reactions[cur_reaction.p_react][cur_reaction.s_react] = cur_reaction
-			if(!fusion_reactions[cur_reaction.s_react])
+			if (!fusion_reactions[cur_reaction.s_react])
 				fusion_reactions[cur_reaction.s_react] = list()
 			fusion_reactions[cur_reaction.s_react][cur_reaction.p_react] = cur_reaction
 
-	if(fusion_reactions.Find(p_react))
+	if (fusion_reactions.Find(p_react))
 		var/list/secondary_reactions = fusion_reactions[p_react]
-		if(secondary_reactions.Find(s_react))
+		if (secondary_reactions.Find(s_react))
 			return fusion_reactions[p_react][s_react]
 
 // Material fuels
@@ -138,16 +138,16 @@ var/global/list/fusion_reactions
 
 	for(var/mob/living/mob in GLOB.alive_mobs)
 		var/turf/T = get_turf(mob)
-		if(T && (holder.z == T.z))
-			if(istype(mob, /mob/living/carbon/human))
+		if (T && (holder.z == T.z))
+			if (istype(mob, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = mob
 				H.hallucination(rand(100,150), 51)
 
 	for(var/obj/machinery/fusion_fuel_injector/I in range(world.view, origin))
-		if(I.cur_assembly && I.cur_assembly.fuel_type == MATERIAL_SUPERMATTER)
+		if (I.cur_assembly && I.cur_assembly.fuel_type == MATERIAL_SUPERMATTER)
 			explosion(get_turf(I), 6)
 			spawn(5)
-				if(I && I.loc)
+				if (I && I.loc)
 					qdel(I)
 
 	sleep(5)

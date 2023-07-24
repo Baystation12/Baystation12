@@ -10,10 +10,10 @@ var/global/repository/admin_pm/admin_pm_repository = new()
 	irc_clients_by_name = list()
 
 /repository/admin_pm/proc/store_pm(client/sender, client/receiver, message)
-	if(receiver)
-		if(istype(receiver))
+	if (receiver)
+		if (istype(receiver))
 			receiver = client_repository.get_lite_client(receiver)
-		else if(text_starts_with(receiver, "IRC-"))
+		else if (text_starts_with(receiver, "IRC-"))
 			receiver = get_irc_client(receiver)
 		else
 			CRASH("Invalid receiver: [log_info_line(receiver)]")
@@ -23,7 +23,7 @@ var/global/repository/admin_pm/admin_pm_repository = new()
 
 /repository/admin_pm/proc/get_irc_client(key)
 	var/datum/client_lite/cl = irc_clients_by_name[key]
-	if(!cl)
+	if (!cl)
 		cl = new/datum/client_lite()
 		cl.name = "IRC"
 		cl.key = key

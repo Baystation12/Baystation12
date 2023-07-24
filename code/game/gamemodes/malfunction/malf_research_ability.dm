@@ -9,11 +9,11 @@
 
 /datum/malf_research_ability/proc/process(time = 0)
 	invested += time
-	if(invested >= price)
+	if (invested >= price)
 		unlocked = 1
 
 /datum/malf_research_ability/proc/research_finished(mob/living/silicon/ai/user)
-	if(!user)
+	if (!user)
 		return
-	if(ability)
+	if (ability)
 		user.verbs.Add(ability)

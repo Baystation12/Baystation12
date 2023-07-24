@@ -30,13 +30,13 @@
 
 /obj/machinery/atmospherics/binary/circulator/proc/return_transfer_air()
 	var/datum/gas_mixture/removed
-	if(anchored && !MACHINE_IS_BROKEN(src) && network1)
+	if (anchored && !MACHINE_IS_BROKEN(src) && network1)
 		var/input_starting_pressure = air1.return_pressure()
 		var/output_starting_pressure = air2.return_pressure()
 		last_pressure_delta = max(input_starting_pressure - output_starting_pressure - 5, 0)
 
 		//only circulate air if there is a pressure difference (plus 5kPa kinetic, 10kPa static friction)
-		if(air1.temperature > 0 && last_pressure_delta > 5)
+		if (air1.temperature > 0 && last_pressure_delta > 5)
 
 			//Calculate necessary moles to transfer using PV = nRT
 			recent_moles_transferred = (last_pressure_delta*network1.volume/(air1.temperature * R_IDEAL_GAS_EQUATION))/3 //uses the volume of the whole network, not just itself
@@ -47,7 +47,7 @@
 
 			//Actually transfer the gas
 			removed = air1.remove(recent_moles_transferred)
-			if(removed)
+			if (removed)
 				last_heat_capacity = removed.heat_capacity()
 				last_temperature = removed.temperature
 
@@ -69,7 +69,7 @@
 /obj/machinery/atmospherics/binary/circulator/Process()
 	..()
 
-	if(last_worldtime_transfer < world.time - 50)
+	if (last_worldtime_transfer < world.time - 50)
 		recent_moles_transferred = 0
 		update_icon()
 
@@ -91,18 +91,18 @@
 	return 1
 
 /obj/machinery/atmospherics/binary/circulator/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWrench(W))
+	if (isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		anchored = !anchored
 		user.visible_message("[user.name] [anchored ? "secures" : "unsecures"] the bolts holding [src.name] to the floor.", \
 					"You [anchored ? "secure" : "unsecure"] the bolts holding [src] to the floor.", \
 					"You hear a ratchet")
 
-		if(anchored)
+		if (anchored)
 			temperature_overlay = null
-			if(dir & (NORTH|SOUTH))
+			if (dir & (NORTH|SOUTH))
 				initialize_directions = NORTH|SOUTH
-			else if(dir & (EAST|WEST))
+			else if (dir & (EAST|WEST))
 				initialize_directions = EAST|WEST
 
 			atmos_init()
@@ -114,10 +114,10 @@
 				node2.atmos_init()
 				node2.build_network()
 		else
-			if(node1)
+			if (node1)
 				node1.disconnect(src)
 				qdel(network1)
-			if(node2)
+			if (node2)
 				node2.disconnect(src)
 				qdel(network2)
 

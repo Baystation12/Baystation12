@@ -2,12 +2,12 @@ GLOBAL_VAR(spawntypes)
 
 /proc/spawntypes()
 	RETURN_TYPE(/list)
-	if(!GLOB.spawntypes)
+	if (!GLOB.spawntypes)
 		GLOB.spawntypes = list()
 		for(var/type in typesof(/datum/spawnpoint)-/datum/spawnpoint)
 			var/datum/spawnpoint/S = type
 			var/display_name = initial(S.display_name)
-			if((display_name in GLOB.using_map.allowed_spawns) || initial(S.always_visible))
+			if ((display_name in GLOB.using_map.allowed_spawns) || initial(S.always_visible))
 				GLOB.spawntypes[display_name] = new S
 	return GLOB.spawntypes
 
@@ -20,10 +20,10 @@ GLOBAL_VAR(spawntypes)
 	var/list/disallow_job = null
 
 /datum/spawnpoint/proc/check_job_spawning(job)
-	if(restrict_job && !(job in restrict_job))
+	if (restrict_job && !(job in restrict_job))
 		return 0
 
-	if(disallow_job && (job in disallow_job))
+	if (disallow_job && (job in disallow_job))
 		return 0
 
 	return 1

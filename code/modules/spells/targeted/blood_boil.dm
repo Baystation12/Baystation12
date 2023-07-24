@@ -18,8 +18,8 @@
 /spell/targeted/blood_boil/cast(list/targets, mob/user)
 	var/mob/living/carbon/human/H = targets[1]
 	H.bodytemperature += 40
-	if(prob(10))
+	if (prob(10))
 		to_chat(H,SPAN_WARNING("\The [user] seems to radiate an uncomfortable amount of heat your direction."))
-	if(H.bodytemperature > H.getSpeciesOrSynthTemp(HEAT_LEVEL_3)) //Burst into flames
+	if (H.bodytemperature > H.getSpeciesOrSynthTemp(HEAT_LEVEL_3)) //Burst into flames
 		H.fire_stacks += 50
 		H.IgniteMob()

@@ -56,9 +56,9 @@
 ********************/
 
 /obj/machinery/microwave/attackby(obj/item/O as obj, mob/user as mob)
-	if(broken > 0)
+	if (broken > 0)
 		// Start repairs by using a screwdriver
-		if(broken == 2 && isScrewdriver(O))
+		if (broken == 2 && isScrewdriver(O))
 			user.visible_message( \
 				SPAN_NOTICE("\The [user] starts to fix part of the microwave."), \
 				SPAN_NOTICE("You start to fix part of the microwave.") \
@@ -71,7 +71,7 @@
 				broken = 1 // Fix it a bit
 
 		// Finish repairs using a wrench
-		else if(broken == 1 && isWrench(O))
+		else if (broken == 1 && isWrench(O))
 			user.visible_message( \
 				SPAN_NOTICE("\The [user] starts to fix part of the microwave."), \
 				SPAN_NOTICE("You start to fix part of the microwave.") \
@@ -91,11 +91,11 @@
 			to_chat(user, SPAN_WARNING("It's broken, and this isn't the right way to fix it!"))
 		return
 
-	else if((. = component_attackby(O, user)))
+	else if ((. = component_attackby(O, user)))
 		dispose()
 		return
 
-	else if(dirtiness == 100) // The microwave is all dirty, so it can't be used!
+	else if (dirtiness == 100) // The microwave is all dirty, so it can't be used!
 		var/has_rag = istype(O, /obj/item/reagent_containers/glass/rag)
 		var/has_cleaner = O.reagents != null && O.reagents.has_reagent(/datum/reagent/space_cleaner, 5)
 
@@ -128,14 +128,14 @@
 			to_chat(user, SPAN_WARNING("You need to clean [src] before you use it!"))
 			return
 
-	else if(is_type_in_list(O, GLOB.microwave_accepts_items))
+	else if (is_type_in_list(O, GLOB.microwave_accepts_items))
 
 		if (length(ingredients) >= GLOB.microwave_maximum_item_storage)
 			to_chat(user, SPAN_WARNING("This [src] is full of ingredients - you can't fit any more."))
 
-		else if(istype(O, /obj/item/stack)) // This is bad, but I can't think of how to change it
+		else if (istype(O, /obj/item/stack)) // This is bad, but I can't think of how to change it
 			var/obj/item/stack/S = O
-			if(S.use(1))
+			if (S.use(1))
 				var/stack_item = new O.type (src)
 				LAZYADD(ingredients, stack_item)
 				user.visible_message( \
@@ -154,7 +154,7 @@
 
 		return
 
-	else if(istype(O,/obj/item/reagent_containers/glass) || \
+	else if (istype(O,/obj/item/reagent_containers/glass) || \
 	        istype(O,/obj/item/reagent_containers/food/drinks) || \
 	        istype(O,/obj/item/reagent_containers/food/condiment) \
 		)
@@ -165,7 +165,7 @@
 				to_chat(user, SPAN_WARNING("Your [O] contains components unsuitable for cookery."))
 		return
 
-	else if(istype(O, /obj/item/storage))
+	else if (istype(O, /obj/item/storage))
 		if (length(ingredients) >= GLOB.microwave_maximum_item_storage)
 			to_chat(user, SPAN_WARNING("[src] is completely full!"))
 			return
@@ -173,7 +173,7 @@
 		var/obj/item/storage/bag/P = O
 		var/objects_loaded = 0
 		for(var/obj/G in P.contents)
-			if(length(ingredients) < GLOB.microwave_maximum_item_storage && is_type_in_list(G, GLOB.microwave_accepts_items) && P.remove_from_storage(G, src, 1))
+			if (length(ingredients) < GLOB.microwave_maximum_item_storage && is_type_in_list(G, GLOB.microwave_accepts_items) && P.remove_from_storage(G, src, 1))
 				objects_loaded++
 				LAZYADD(ingredients, G)
 		P.finish_bulk_removal()
@@ -192,12 +192,12 @@
 
 		return
 
-	else if(istype(O, /obj/item/grab))
+	else if (istype(O, /obj/item/grab))
 		var/obj/item/grab/G = O
 		to_chat(user, SPAN_WARNING("This is ridiculous. You can't fit \the [G.affecting] in \the [src]."))
 		return
 
-	else if(isWrench(O))
+	else if (isWrench(O))
 		user.visible_message( \
 			SPAN_NOTICE("\The [user] begins [anchored ? "unsecuring" : "securing"] the microwave."), \
 			SPAN_NOTICE("You attempt to [anchored ? "unsecure" : "secure"] the microwave.")
@@ -218,7 +218,7 @@
 	return (broken == 0) && ..()
 
 /obj/machinery/microwave/cannot_transition_to(state_path, mob/user)
-	if(broken)
+	if (broken)
 		return SPAN_NOTICE("\The [src] is too broken to do this!")
 	. = ..()
 
@@ -241,11 +241,11 @@
 /obj/machinery/microwave/interact(mob/user as mob) // The microwave Menu
 	user.set_machine(src)
 	var/dat = list()
-	if(broken > 0)
+	if (broken > 0)
 		dat += "<TT><b><i>This microwave is very broken. You'll need to fix it before you can use it again.</i></b></TT>"
-	else if(operating)
+	else if (operating)
 		dat += "<TT>Microwaving in progress!<BR>Please wait...!</TT>"
-	else if(dirtiness == 100)
+	else if (dirtiness == 100)
 		dat += "<TT><b><i>This microwave is covered in muck. You'll need to wipe it down or clean it out before you can use it again.</i></b></TT>"
 	else
 		playsound(loc, 'sound/machines/pda_click.ogg', 50, 1)
@@ -306,7 +306,7 @@
 ************************************/
 
 /obj/machinery/microwave/proc/cook()
-	if(inoperable())
+	if (inoperable())
 		return
 	start()
 	if (!reagents.total_volume && !length(ingredients)) //dry run
@@ -372,7 +372,7 @@
 		cooked = recipe.CreateResult(src)
 		LAZYCLEARLIST(ingredients)
 		stop()
-		if(cooked)
+		if (cooked)
 			cooked.dropInto(loc)
 		return
 
@@ -451,9 +451,9 @@
 	update_icon()
 
 /obj/machinery/microwave/on_update_icon()
-	if(dirtiness == 100)
+	if (dirtiness == 100)
 		icon_state = "mwbloody[operating]"
-	else if(broken)
+	else if (broken)
 		icon_state = "mwb"
 	else
 		icon_state = "mw[operating]"
@@ -483,11 +483,11 @@
 	return ffuu
 
 /obj/machinery/microwave/Topic(href, href_list)
-	if(..())
+	if (..())
 		return TRUE
 
 	usr.set_machine(src)
-	if(operating)
+	if (operating)
 		updateUsrDialog()
 		return
 

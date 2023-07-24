@@ -16,7 +16,7 @@
 	var/emagged
 
 /obj/item/stock_parts/circuitboard/modular_computer/emag_act(remaining_charges, mob/user)
-	if(emagged)
+	if (emagged)
 		return ..()
 	else
 		emagged = TRUE

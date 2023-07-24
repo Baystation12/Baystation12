@@ -15,7 +15,7 @@
 
 /spell/create_air/choose_targets()
 	var/air = holder.return_air()
-	if(air)
+	if (air)
 		return list(air)
 	return null
 

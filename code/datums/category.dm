@@ -12,7 +12,7 @@
 	categories_by_name = new()
 	for(var/category_type in typesof(category_group_type))
 		var/datum/category_group/category = category_type
-		if(initial(category.name))
+		if (initial(category.name))
 			category = new category(src)
 			categories += category
 			categories_by_name[category.name] = category
@@ -42,7 +42,7 @@
 
 	for(var/item_type in typesof(category_item_type))
 		var/datum/category_item/item = item_type
-		if(initial(item.name))
+		if (initial(item.name))
 			item = new item(src)
 			items += item
 			items_by_name[item.name] = item

@@ -18,23 +18,23 @@
 /obj/item/material/clipboard/New(newloc, material_key)
 	..()
 	update_icon()
-	if(material)
+	if (material)
 		desc = initial(desc)
 		desc += " It's made of [material.use_name]."
 
 /obj/item/material/clipboard/MouseDrop(obj/over_object as obj) //Quick clipboard fix. -Agouri
-	if(ishuman(usr))
+	if (ishuman(usr))
 		var/mob/M = usr
-		if(!(istype(over_object, /obj/screen) ))
+		if (!(istype(over_object, /obj/screen) ))
 			return ..()
 
-		if(!M.restrained() && !M.stat)
+		if (!M.restrained() && !M.stat)
 			switch(over_object.name)
-				if("r_hand")
-					if(M.unEquip(src))
+				if ("r_hand")
+					if (M.unEquip(src))
 						M.put_in_r_hand(src)
-				if("l_hand")
-					if(M.unEquip(src))
+				if ("l_hand")
+					if (M.unEquip(src))
 						M.put_in_l_hand(src)
 
 			add_fingerprint(usr)
@@ -42,25 +42,25 @@
 
 /obj/item/material/clipboard/on_update_icon()
 	..()
-	if(toppaper)
+	if (toppaper)
 		overlays += overlay_image(toppaper.icon, toppaper.icon_state, flags=RESET_COLOR)
 		overlays += toppaper.overlays
-	if(haspen)
+	if (haspen)
 		overlays += overlay_image(icon, "clipboard_pen", flags=RESET_COLOR)
 	overlays += overlay_image(icon, "clipboard_over", flags=RESET_COLOR)
 	return
 
 /obj/item/material/clipboard/attackby(obj/item/W as obj, mob/user as mob)
 
-	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo))
-		if(!user.unEquip(W, src))
+	if (istype(W, /obj/item/paper) || istype(W, /obj/item/photo))
+		if (!user.unEquip(W, src))
 			return
-		if(istype(W, /obj/item/paper))
+		if (istype(W, /obj/item/paper))
 			toppaper = W
 		to_chat(user, SPAN_NOTICE("You clip the [W] onto \the [src]."))
 		update_icon()
 
-	else if(istype(toppaper) && istype(W, /obj/item/pen))
+	else if (istype(toppaper) && istype(W, /obj/item/pen))
 		toppaper.attackby(W, usr)
 		update_icon()
 
@@ -68,18 +68,18 @@
 
 /obj/item/material/clipboard/attack_self(mob/user as mob)
 	var/dat = "<title>Clipboard</title>"
-	if(haspen)
+	if (haspen)
 		dat += "<A href='?src=\ref[src];pen=1'>Remove Pen</A><BR><HR>"
 	else
 		dat += "<A href='?src=\ref[src];addpen=1'>Add Pen</A><BR><HR>"
 
 	//The topmost paper. I don't think there's any way to organise contents in byond, so this is what we're stuck with.	-Pete
-	if(toppaper)
+	if (toppaper)
 		var/obj/item/paper/P = toppaper
 		dat += "<A href='?src=\ref[src];write=\ref[P]'>Write</A> <A href='?src=\ref[src];remove=\ref[P]'>Remove</A> <A href='?src=\ref[src];rename=\ref[P]'>Rename</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR><HR>"
 
 	for(var/obj/item/paper/P in src)
-		if(P==toppaper)
+		if (P==toppaper)
 			continue
 		dat += "<A href='?src=\ref[src];remove=\ref[P]'>Remove</A> <A href='?src=\ref[src];rename=\ref[P]'>Rename</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR>"
 	for(var/obj/item/photo/Ph in src)
@@ -92,81 +92,81 @@
 
 /obj/item/material/clipboard/Topic(href, href_list)
 	..()
-	if((usr.stat || usr.restrained()))
+	if ((usr.stat || usr.restrained()))
 		return
 
-	if(src.loc == usr)
+	if (src.loc == usr)
 
-		if(href_list["pen"])
-			if(istype(haspen) && (haspen.loc == src))
+		if (href_list["pen"])
+			if (istype(haspen) && (haspen.loc == src))
 				usr.put_in_hands(haspen)
 				haspen = null
 
-		else if(href_list["addpen"])
-			if(!haspen)
+		else if (href_list["addpen"])
+			if (!haspen)
 				var/obj/item/pen/W = usr.get_active_hand()
-				if(istype(W, /obj/item/pen))
-					if(!usr.unEquip(W, src))
+				if (istype(W, /obj/item/pen))
+					if (!usr.unEquip(W, src))
 						return
 					haspen = W
 					to_chat(usr, SPAN_NOTICE("You slot the pen into \the [src]."))
 
-		else if(href_list["write"])
+		else if (href_list["write"])
 			var/obj/item/P = locate(href_list["write"])
 
-			if(P && (P.loc == src) && istype(P, /obj/item/paper) && (P == toppaper) )
+			if (P && (P.loc == src) && istype(P, /obj/item/paper) && (P == toppaper) )
 
 				var/obj/item/I = usr.get_active_hand()
 
-				if(istype(I, /obj/item/pen))
+				if (istype(I, /obj/item/pen))
 
 					P.attackby(I, usr)
 
-		else if(href_list["remove"])
+		else if (href_list["remove"])
 			var/obj/item/P = locate(href_list["remove"])
 
-			if(P && (P.loc == src) && (istype(P, /obj/item/paper) || istype(P, /obj/item/photo)) )
+			if (P && (P.loc == src) && (istype(P, /obj/item/paper) || istype(P, /obj/item/photo)) )
 				usr.put_in_hands(P)
-				if(P == toppaper)
+				if (P == toppaper)
 					toppaper = null
 					var/obj/item/paper/newtop = locate(/obj/item/paper) in src
-					if(newtop && (newtop != P))
+					if (newtop && (newtop != P))
 						toppaper = newtop
 					else
 						toppaper = null
 
-		else if(href_list["rename"])
+		else if (href_list["rename"])
 			var/obj/item/O = locate(href_list["rename"])
 
-			if(O && (O.loc == src))
-				if(istype(O, /obj/item/paper))
+			if (O && (O.loc == src))
+				if (istype(O, /obj/item/paper))
 					var/obj/item/paper/to_rename = O
 					to_rename.rename()
 
-				else if(istype(O, /obj/item/photo))
+				else if (istype(O, /obj/item/photo))
 					var/obj/item/photo/to_rename = O
 					to_rename.rename()
 
-		else if(href_list["read"])
+		else if (href_list["read"])
 			var/obj/item/paper/P = locate(href_list["read"])
 
-			if(P && (P.loc == src) && istype(P, /obj/item/paper) )
+			if (P && (P.loc == src) && istype(P, /obj/item/paper) )
 
-				if(!(istype(usr, /mob/living/carbon/human) || isghost(usr) || istype(usr, /mob/living/silicon)))
+				if (!(istype(usr, /mob/living/carbon/human) || isghost(usr) || istype(usr, /mob/living/silicon)))
 					show_browser(usr, "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>", "window=[P.name]")
 					onclose(usr, "[P.name]")
 				else
 					show_browser(usr, "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>", "window=[P.name]")
 					onclose(usr, "[P.name]")
 
-		else if(href_list["look"])
+		else if (href_list["look"])
 			var/obj/item/photo/P = locate(href_list["look"])
-			if(P && (P.loc == src) && istype(P, /obj/item/photo) )
+			if (P && (P.loc == src) && istype(P, /obj/item/photo) )
 				P.show(usr)
 
-		else if(href_list["top"]) // currently unused
+		else if (href_list["top"]) // currently unused
 			var/obj/item/P = locate(href_list["top"])
-			if(P && (P.loc == src) && istype(P, /obj/item/paper) )
+			if (P && (P.loc == src) && istype(P, /obj/item/paper) )
 				toppaper = P
 				to_chat(usr, SPAN_NOTICE("You move [P.name] to the top."))
 

@@ -14,7 +14,7 @@
 		return FALSE
 
 	. = ..()
-	if(. && target.deflect_psionic_attack(user))
+	if (. && target.deflect_psionic_attack(user))
 		return FALSE
 
 /singleton/psionic_power/coercion/blindstrike
@@ -27,22 +27,22 @@
 	use_description = "Target the eyes or mouth on disarm intent and click anywhere to use a radial attack that blinds, deafens and disorients everyone near you."
 
 /singleton/psionic_power/coercion/blindstrike/invoke(mob/living/user, mob/living/target)
-	if(user.zone_sel.selecting != BP_MOUTH && user.zone_sel.selecting != BP_EYES)
+	if (user.zone_sel.selecting != BP_MOUTH && user.zone_sel.selecting != BP_EYES)
 		return FALSE
 	. = ..()
-	if(.)
+	if (.)
 		user.visible_message(SPAN_DANGER("\The [user] suddenly throws back their head, as though screaming silently!"))
 		to_chat(user, SPAN_DANGER("You strike at all around you with a deafening psionic scream!"))
 		for(var/mob/living/M in orange(user, user.psi.get_rank(PSI_COERCION)))
-			if(M == user)
+			if (M == user)
 				continue
 			var/blocked = 100 * M.get_blocked_ratio(null, DAMAGE_PSIONIC)
-			if(prob(blocked))
+			if (prob(blocked))
 				to_chat(M, SPAN_DANGER("A psionic onslaught strikes your mind, but you withstand it!"))
 				continue
-			if(prob(60) && iscarbon(M))
+			if (prob(60) && iscarbon(M))
 				var/mob/living/carbon/C = M
-				if(C.can_feel_pain())
+				if (C.can_feel_pain())
 					M.emote("scream")
 			to_chat(M, SPAN_DANGER("Your senses are blasted into oblivion by a psionic scream!"))
 			M.flash_eyes()
@@ -60,19 +60,19 @@
 	use_description = "Target the head on disarm intent at melee range to attempt to read a victim's surface thoughts."
 
 /singleton/psionic_power/coercion/mindread/invoke(mob/living/user, mob/living/target)
-	if(!isliving(target) || !istype(target) || user.zone_sel.selecting != BP_HEAD)
+	if (!isliving(target) || !istype(target) || user.zone_sel.selecting != BP_HEAD)
 		return FALSE
 	. = ..()
-	if(!.)
+	if (!.)
 		return
 
-	if(target.stat == DEAD || (target.status_flags & FAKEDEATH) || !target.client)
+	if (target.stat == DEAD || (target.status_flags & FAKEDEATH) || !target.client)
 		to_chat(user, SPAN_WARNING("\The [target] is in no state for a mind-ream."))
 		return TRUE
 
 	user.visible_message(SPAN_WARNING("\The [user] touches \the [target]'s temple..."))
 	var/question =  input(user, "Say something?", "Read Mind", "Penny for your thoughts?") as null|text
-	if(!question || user.incapacitated() || !do_after(user, 2 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT))
+	if (!question || user.incapacitated() || !do_after(user, 2 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT))
 		return TRUE
 
 	var/started_mindread = world.time
@@ -80,7 +80,7 @@
 	to_chat(target, SPAN_NOTICE("<b>Your mind is compelled to answer: <i>[question]</i></b>"))
 
 	var/answer =  input(target, question, "Read Mind") as null|text
-	if(!answer || world.time > started_mindread + 60 SECONDS || user.stat != CONSCIOUS || target.stat == DEAD)
+	if (!answer || world.time > started_mindread + 60 SECONDS || user.stat != CONSCIOUS || target.stat == DEAD)
 		to_chat(user, SPAN_NOTICE("<b>You receive nothing useful from \the [target].</b>"))
 	else
 		to_chat(user, SPAN_NOTICE("<b>You skim thoughts from the surface of \the [target]'s mind: <i>[answer]</i></b>"))
@@ -96,12 +96,12 @@
 	use_description = "Target the chest or groin on disarm intent to use a melee attack equivalent to a strike from a stun baton."
 
 /singleton/psionic_power/coercion/agony/invoke(mob/living/user, mob/living/target)
-	if(!istype(target))
+	if (!istype(target))
 		return FALSE
-	if(user.zone_sel.selecting != BP_CHEST && user.zone_sel.selecting != BP_GROIN)
+	if (user.zone_sel.selecting != BP_CHEST && user.zone_sel.selecting != BP_GROIN)
 		return FALSE
 	. = ..()
-	if(.)
+	if (.)
 		user.visible_message(SPAN_DANGER("\The [target] has been struck by \the [user]!"))
 		playsound(user.loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 		target.stun_effect_act(0, 60, user.zone_sel.selecting)
@@ -117,18 +117,18 @@
 	use_description = "Target the arms or hands on disarm intent to use a ranged attack that may rip the weapons away from the target."
 
 /singleton/psionic_power/coercion/spasm/invoke(mob/living/user, mob/living/carbon/human/target)
-	if(!istype(target))
+	if (!istype(target))
 		return FALSE
 
-	if(!(user.zone_sel.selecting in list(BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND)))
+	if (!(user.zone_sel.selecting in list(BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND)))
 		return FALSE
 
 	. = ..()
 
-	if(.)
+	if (.)
 		to_chat(user, SPAN_DANGER("You lash out, stabbing into \the [target] with a lance of psi-power."))
 		to_chat(target, SPAN_DANGER("The muscles in your arms cramp horrendously!"))
-		if(prob(75))
+		if (prob(75))
 			target.emote("scream")
 		for (var/obj/item/item as anything in target.GetAllHeld())
 			if (item.simulated && prob(75) && target.unEquip(item))
@@ -144,23 +144,23 @@
 	use_description = "Grab a victim, target the eyes, then use the grab on them while on disarm intent, in order to convert them into a loyal mind-slave. The process takes some time, and failure is punished harshly."
 
 /singleton/psionic_power/coercion/mindslave/invoke(mob/living/user, mob/living/target)
-	if(!istype(target) || user.zone_sel.selecting != BP_EYES)
+	if (!istype(target) || user.zone_sel.selecting != BP_EYES)
 		return FALSE
 	. = ..()
-	if(.)
-		if(target.stat == DEAD || (target.status_flags & FAKEDEATH))
+	if (.)
+		if (target.stat == DEAD || (target.status_flags & FAKEDEATH))
 			to_chat(user, SPAN_WARNING("\The [target] is dead!"))
 			return TRUE
-		if(!target.mind || !target.key)
+		if (!target.mind || !target.key)
 			to_chat(user, SPAN_WARNING("\The [target] is mindless!"))
 			return TRUE
-		if(GLOB.thralls.is_antagonist(target.mind))
+		if (GLOB.thralls.is_antagonist(target.mind))
 			to_chat(user, SPAN_WARNING("\The [target] is already in thrall to someone!"))
 			return TRUE
 		user.visible_message(SPAN_DANGER("<i>\The [user] seizes the head of \the [target] in both hands...</i>"))
 		to_chat(user, SPAN_WARNING("You plunge your mentality into that of \the [target]..."))
 		to_chat(target, SPAN_DANGER("Your mind is invaded by the presence of \the [user]! They are trying to make you a slave!"))
-		if(!do_after(user, (target.stat == CONSCIOUS ? 8 : 4) SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT))
+		if (!do_after(user, (target.stat == CONSCIOUS ? 8 : 4) SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT))
 			user.psi.backblast(rand(10,25))
 			return TRUE
 		to_chat(user, SPAN_DANGER("You sear through \the [target]'s neurons, reshaping as you see fit and leaving them subservient to your will!"))
@@ -177,14 +177,14 @@
 	use_description = "Grab a patient, target the head, then use the grab on them while on disarm intent, in order to perform a deep coercive-redactive probe of their psionic potential."
 
 /singleton/psionic_power/coercion/assay/invoke(mob/living/user, mob/living/target)
-	if(user.zone_sel.selecting != BP_HEAD)
+	if (user.zone_sel.selecting != BP_HEAD)
 		return FALSE
 	. = ..()
-	if(.)
+	if (.)
 		user.visible_message(SPAN_WARNING("\The [user] holds the head of \the [target] in both hands..."))
 		to_chat(user, SPAN_NOTICE("You insinuate your mentality into that of \the [target]..."))
 		to_chat(target, SPAN_WARNING("Your persona is being probed by the psychic lens of \the [user]."))
-		if(!do_after(user, (target.stat == CONSCIOUS ? 5 : 2.5) SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT))
+		if (!do_after(user, (target.stat == CONSCIOUS ? 5 : 2.5) SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT))
 			user.psi.backblast(rand(5,10))
 			return TRUE
 		to_chat(user, SPAN_NOTICE("You retreat from \the [target], holding your new knowledge close."))
@@ -201,24 +201,24 @@
 	use_description = "Grab a patient, target the mouth, then use the grab on them while on disarm intent, in order to cure ailments of the mind."
 
 /singleton/psionic_power/coercion/focus/invoke(mob/living/user, mob/living/target)
-	if(user.zone_sel.selecting != BP_MOUTH)
+	if (user.zone_sel.selecting != BP_MOUTH)
 		return FALSE
 	. = ..()
-	if(.)
+	if (.)
 		user.visible_message(SPAN_WARNING("\The [user] holds the head of \the [target] in both hands..."))
 		to_chat(user, SPAN_NOTICE("You probe \the [target]'s mind for various ailments.."))
 		to_chat(target, SPAN_WARNING("Your mind is being cleansed of ailments by \the [user]."))
-		if(!do_after(user, (target.stat == CONSCIOUS ? 5 : 2.5) SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT))
+		if (!do_after(user, (target.stat == CONSCIOUS ? 5 : 2.5) SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT))
 			user.psi.backblast(rand(5,10))
 			return TRUE
 		to_chat(user, SPAN_WARNING("You clear \the [target]'s mind of ailments."))
 		to_chat(target, SPAN_WARNING("Your mind is cleared of ailments."))
 
 		var/coercion_rank = user.psi.get_rank(PSI_COERCION)
-		if(coercion_rank >= PSI_RANK_GRANDMASTER)
+		if (coercion_rank >= PSI_RANK_GRANDMASTER)
 			target.AdjustParalysis(-1)
 		target.drowsyness = 0
-		if(istype(target, /mob/living/carbon))
+		if (istype(target, /mob/living/carbon))
 			var/mob/living/carbon/M = target
 			M.adjust_hallucination(-30)
 		return TRUE

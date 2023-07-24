@@ -14,7 +14,7 @@
 /datum/skillset/New(mob/mob)
 	owner = mob
 	for(var/datum/skill_verb/SV in GLOB.skill_verbs)
-		if(SV.should_have_verb(src))
+		if (SV.should_have_verb(src))
 			SV.give_to_skillset(src)
 	..()
 
@@ -32,7 +32,7 @@
 		. += SB.buffs[skill_path]
 
 /datum/skillset/proc/obtain_from_mob(mob/mob)
-	if(!istype(mob) || !skills_transferable || !mob.skillset?.skills_transferable)
+	if (!istype(mob) || !skills_transferable || !mob.skillset?.skills_transferable)
 		return
 	skill_list = mob.skillset.skill_list
 	default_value = mob.skillset.default_value
@@ -54,17 +54,17 @@
 	refresh_uis()
 
 /datum/skillset/proc/update_special_effects()
-	if(!owner)
+	if (!owner)
 		return
 	for(var/singleton/hierarchy/skill/skill in GLOB.skills)
 		skill.update_special_effects(owner, get_value(skill.type))
 
 /datum/skillset/proc/obtain_from_client(datum/job/job, client/given_client, override = 0)
-	if(!skills_transferable)
+	if (!skills_transferable)
 		return
-	if(!override && owner.mind && player_is_antag(owner.mind))		//Antags are dealt with at a different time. Note that this may be called before or after antag roles are assigned.
+	if (!override && owner.mind && player_is_antag(owner.mind))		//Antags are dealt with at a different time. Note that this may be called before or after antag roles are assigned.
 		return
-	if(!given_client)
+	if (!given_client)
 		return
 
 	var/allocation = given_client.prefs.skills_allocated[job] || list()
@@ -76,7 +76,7 @@
 	on_levels_change()
 
 /datum/skillset/proc/obtain_from_job(datum/job/job)
-	if(!job)
+	if (!job)
 		return
 
 	skill_list = list()
@@ -106,7 +106,7 @@
 /mob/proc/skill_check_multiple(skill_reqs)
 	for(var/skill in skill_reqs)
 		. = skill_check(skill, skill_reqs[skill])
-		if(!.)
+		if (!.)
 			return
 
 /mob/proc/get_skill_difference(skill_path, mob/opponent)
@@ -146,7 +146,7 @@
 // A generic way of modifying success probabilities via skill values. Higher factor means skills have more effect. fail_chance is the chance at SKILL_UNSKILLED.
 /mob/proc/skill_fail_chance(skill_path, fail_chance, no_more_fail = SKILL_MAX, factor = 1)
 	var/points = get_skill_value(skill_path)
-	if(points >= no_more_fail)
+	if (points >= no_more_fail)
 		return 0
 	else
 		return round(fail_chance * 2 ** (factor*(SKILL_MIN - points)))
@@ -164,9 +164,9 @@
 	skillset.open_ui()
 
 /datum/skillset/proc/open_ui()
-	if(!owner)
+	if (!owner)
 		return
-	if(!NM)
+	if (!NM)
 		NM = new nm_type(owner)
 	NM.ui_interact(owner)
 

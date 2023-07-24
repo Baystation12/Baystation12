@@ -26,7 +26,7 @@
 	for(var/jobtype in valid_jobs)
 		var/datum/job/job = jobtype
 		LAZYADD(job_titles, initial(job.title))
-	if(!LAZYLEN(job_titles))
+	if (!LAZYLEN(job_titles))
 		LAZYADD(job_titles, "none")
 	description = "You have been trained by Xynergy to [name]. This makes you suitable for the following roles: [english_list(job_titles)]."
 
@@ -36,7 +36,7 @@
 		LAZYADD(qualifications, "Safe for [role].")
 
 	// Add our hidden jobs since we're done building the desc.
-	if(LAZYLEN(hidden_valid_jobs))
+	if (LAZYLEN(hidden_valid_jobs))
 		LAZYADD(valid_jobs, hidden_valid_jobs)
 
 /singleton/cultural_info/culture/nabber/c

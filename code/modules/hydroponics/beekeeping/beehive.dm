@@ -21,32 +21,32 @@
 /obj/machinery/beehive/on_update_icon()
 	overlays.Cut()
 	icon_state = "beehive-[closed]"
-	if(closed)
+	if (closed)
 		overlays += "lid"
-	if(frames)
+	if (frames)
 		overlays += "empty[frames]"
-	if(honeycombs >= 100)
+	if (honeycombs >= 100)
 		overlays += "full[round(honeycombs / 100)]"
-	if(!smoked)
+	if (!smoked)
 		switch(bee_count)
-			if(1 to 20)
+			if (1 to 20)
 				overlays += "bees1"
-			if(21 to 40)
+			if (21 to 40)
 				overlays += "bees2"
-			if(41 to 60)
+			if (41 to 60)
 				overlays += "bees3"
-			if(61 to 80)
+			if (61 to 80)
 				overlays += "bees4"
-			if(81 to 100)
+			if (81 to 100)
 				overlays += "bees5"
 
 /obj/machinery/beehive/examine(mob/user)
 	. = ..()
-	if(!closed)
+	if (!closed)
 		to_chat(user, "The lid is open.")
 
 /obj/machinery/beehive/attackby(obj/item/I, mob/user)
-	if(isCrowbar(I))
+	if (isCrowbar(I))
 		closed = !closed
 		user.visible_message(
 			SPAN_NOTICE("\The [user] [closed ? "closes" : "opens"] \the [src]."),
@@ -54,30 +54,30 @@
 		)
 		update_icon()
 		return
-	else if(isWrench(I))
+	else if (isWrench(I))
 		anchored = !anchored
 		user.visible_message(
 			SPAN_NOTICE("\The [user] [anchored ? "wrenches" : "unwrenches"] \the [src]."),
 			SPAN_NOTICE("You [anchored ? "wrench" : "unwrench"] \the [src].")
 		)
 		return
-	else if(istype(I, /obj/item/bee_smoker))
-		if(closed)
+	else if (istype(I, /obj/item/bee_smoker))
+		if (closed)
 			to_chat(user, SPAN_NOTICE("You need to open \the [src] with a crowbar before smoking the bees."))
 			return
 		user.visible_message(SPAN_NOTICE("\The [user] smokes the bees in \the [src]."), SPAN_NOTICE("You smoke the bees in \the [src]."))
 		smoked = 30
 		update_icon()
 		return
-	else if(istype(I, /obj/item/honey_frame))
-		if(closed)
+	else if (istype(I, /obj/item/honey_frame))
+		if (closed)
 			to_chat(user, SPAN_NOTICE("You need to open \the [src] with a crowbar before inserting \the [I]."))
 			return
-		if(frames >= maxFrames)
+		if (frames >= maxFrames)
 			to_chat(user, SPAN_NOTICE("There is no place for an another frame."))
 			return
 		var/obj/item/honey_frame/H = I
-		if(H.honey)
+		if (H.honey)
 			to_chat(user, SPAN_NOTICE("\The [I] is full with beeswax and honey, empty it in the extractor first."))
 			return
 		++frames
@@ -85,21 +85,21 @@
 		update_icon()
 		qdel(I)
 		return
-	else if(istype(I, /obj/item/bee_pack))
+	else if (istype(I, /obj/item/bee_pack))
 		var/obj/item/bee_pack/B = I
-		if(B.full && bee_count)
+		if (B.full && bee_count)
 			to_chat(user, SPAN_NOTICE("\The [src] already has bees inside."))
 			return
-		if(!B.full && bee_count < 90)
+		if (!B.full && bee_count < 90)
 			to_chat(user, SPAN_NOTICE("\The [src] is not ready to split."))
 			return
-		if(!B.full && !smoked)
+		if (!B.full && !smoked)
 			to_chat(user, SPAN_NOTICE("Smoke \the [src] first!"))
 			return
-		if(closed)
+		if (closed)
 			to_chat(user, SPAN_NOTICE("You need to open \the [src] with a crowbar before moving the bees."))
 			return
-		if(B.full)
+		if (B.full)
 			user.visible_message(SPAN_NOTICE("\The [user] puts the queen and the bees from \the [I] into \the [src]."), SPAN_NOTICE("You put the queen and the bees from \the [I] into \the [src]."))
 			bee_count = 20
 			B.empty()
@@ -109,20 +109,20 @@
 			B.fill()
 		update_icon()
 		return
-	else if(istype(I, /obj/item/device/scanner/plant))
+	else if (istype(I, /obj/item/device/scanner/plant))
 		to_chat(user, SPAN_NOTICE("Scan result of \the [src]..."))
 		to_chat(user, "Beehive is [bee_count ? "[round(bee_count)]% full" : "empty"].[bee_count > 90 ? " Colony is ready to split." : ""]")
-		if(frames)
+		if (frames)
 			to_chat(user, "[frames] frames installed, [round(honeycombs / 100)] filled.")
-			if(honeycombs < frames * 100)
+			if (honeycombs < frames * 100)
 				to_chat(user, "Next frame is [round(honeycombs % 100)]% full.")
 		else
 			to_chat(user, "No frames installed.")
-		if(smoked)
+		if (smoked)
 			to_chat(user, "The hive is smoked.")
 		return 1
-	else if(isScrewdriver(I))
-		if(bee_count)
+	else if (isScrewdriver(I))
+		if (bee_count)
 			to_chat(user, SPAN_NOTICE("You can't dismantle \the [src] with these bees inside."))
 			return
 		to_chat(user, SPAN_NOTICE("You start dismantling \the [src]..."))
@@ -134,12 +134,12 @@
 		return
 
 /obj/machinery/beehive/physical_attack_hand(mob/user)
-	if(!closed)
+	if (!closed)
 		. = TRUE
-		if(honeycombs < 100)
+		if (honeycombs < 100)
 			to_chat(user, SPAN_NOTICE("There are no filled honeycombs."))
 			return
-		if(!smoked && bee_count)
+		if (!smoked && bee_count)
 			to_chat(user, SPAN_NOTICE("The bees won't let you take the honeycombs out like this, smoke them first."))
 			return
 		user.visible_message(SPAN_NOTICE("\The [user] starts taking the honeycombs out of \the [src]."), SPAN_NOTICE("You start taking the honeycombs out of \the [src]..."))
@@ -148,15 +148,15 @@
 			honeycombs -= 100
 			--frames
 		update_icon()
-		if(honeycombs < 100)
+		if (honeycombs < 100)
 			to_chat(user, SPAN_NOTICE("You take all filled honeycombs out."))
 
 /obj/machinery/beehive/Process()
-	if(closed && !smoked && bee_count)
+	if (closed && !smoked && bee_count)
 		pollinate_flowers()
 		update_icon()
 	smoked = max(0, smoked - 1)
-	if(!smoked && bee_count)
+	if (!smoked && bee_count)
 		bee_count = min(bee_count * 1.005, 100)
 		update_icon()
 
@@ -164,7 +164,7 @@
 	var/coef = bee_count / 100
 	var/trays = 0
 	for(var/obj/machinery/portable_atmospherics/hydroponics/H in view(7, src))
-		if(H.seed && !H.dead)
+		if (H.seed && !H.dead)
 			H.health += 0.05 * coef
 			++trays
 	honeycombs = min(honeycombs + 0.1 * coef * min(trays, 5), frames * 100)
@@ -190,19 +190,19 @@
 	return !processing && ..()
 
 /obj/machinery/honey_extractor/cannot_transition_to(state_path, mob/user)
-	if(processing)
+	if (processing)
 		return SPAN_NOTICE("You must wait for \the [src] to finish first!")
 	return ..()
 
 /obj/machinery/honey_extractor/attackby(obj/item/I, mob/user)
-	if(processing)
+	if (processing)
 		to_chat(user, SPAN_NOTICE("\The [src] is currently spinning, wait until it's finished."))
 		return
-	if((. = component_attackby(I, user)))
+	if ((. = component_attackby(I, user)))
 		return
-	if(istype(I, /obj/item/honey_frame))
+	if (istype(I, /obj/item/honey_frame))
 		var/obj/item/honey_frame/H = I
-		if(!H.honey)
+		if (!H.honey)
 			to_chat(user, SPAN_NOTICE("\The [H] is empty, put it into a beehive."))
 			return
 		user.visible_message(SPAN_NOTICE("\The [user] loads \the [H] into \the [src] and turns it on."), SPAN_NOTICE("You load \the [H] into \the [src] and turn it on."))
@@ -215,8 +215,8 @@
 			honey += processing
 			processing = 0
 			icon_state = "centrifuge"
-	else if(istype(I, /obj/item/reagent_containers/glass))
-		if(!honey)
+	else if (istype(I, /obj/item/reagent_containers/glass))
+		if (!honey)
 			to_chat(user, SPAN_NOTICE("There is no honey in \the [src]."))
 			return
 		var/obj/item/reagent_containers/glass/G = I

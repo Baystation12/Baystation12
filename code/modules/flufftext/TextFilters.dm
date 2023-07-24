@@ -5,7 +5,7 @@
 
 	var/list/unstuttered_words = split_phrase.Copy()
 	var/i = rand(1,3)
-	if(stunned) i = length(split_phrase)
+	if (stunned) i = length(split_phrase)
 	for(,i > 0,i--) //Pick a few words to stutter on.
 
 		if (!length(unstuttered_words))
@@ -17,17 +17,17 @@
 		//Search for dipthongs (two letters that make one sound.)
 		var/first_sound = copytext_char(word,1,3)
 		var/first_letter = copytext_char(word,1,2)
-		if(lowertext(first_sound) in list("ch","th","sh"))
+		if (lowertext(first_sound) in list("ch","th","sh"))
 			first_letter = first_sound
 
 		//Repeat the first letter to create a stutter.
 		var/rnum = rand(1,3)
 		switch(rnum)
-			if(1)
+			if (1)
 				word = "[first_letter]-[word]"
-			if(2)
+			if (2)
 				word = "[first_letter]-[first_letter]-[word]"
-			if(3)
+			if (3)
 				word = "[first_letter]-[word]"
 
 		split_phrase[index] = word
@@ -38,8 +38,8 @@
 	step(M, pick(d,turn(d,90),turn(d,-90)))
 
 /proc/Ellipsis(original_msg, chance = 50)
-	if(chance <= 0) return "..."
-	if(chance >= 100) return original_msg
+	if (chance <= 0) return "..."
+	if (chance >= 100) return original_msg
 
 	var/list/words = splittext(original_msg," ")
 	var/list/new_words = list()
@@ -47,7 +47,7 @@
 	var/new_msg = ""
 
 	for(var/w in words)
-		if(prob(chance))
+		if (prob(chance))
 			new_words += "..."
 		else
 			new_words += w
@@ -66,80 +66,80 @@ english_only - whether to use traditional english letters only (for use in NanoU
 */
 /proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_speed = 1, distortion = 1, english_only = 0)
 	var/datum/language/language
-	if(user)
+	if (user)
 		language = user.get_default_language()
 	message = html_decode(message)
 	var/new_message = ""
 	var/input_size = length(message)
 	var/lentext = 0
-	if(input_size < 20) // Short messages get distorted too. Bit hacksy.
+	if (input_size < 20) // Short messages get distorted too. Bit hacksy.
 		distortion += (20-input_size)/2
 	while(lentext <= input_size)
 		var/newletter=copytext_char(message, lentext, lentext+1)
-		if(!prob(distortion_chance))
+		if (!prob(distortion_chance))
 			new_message += newletter
 			lentext += 1
 			continue
-		if(newletter != " ")
-			if(prob(0.08 * distortion)) // Major cutout
+		if (newletter != " ")
+			if (prob(0.08 * distortion)) // Major cutout
 				newletter = "*zzzt*"
 				lentext += rand(1, (length(message) - lentext)) // Skip some characters
 				distortion += 1 * distortion_speed
-			else if(prob(0.8 * distortion)) // Minor cut out
-				if(prob(25))
+			else if (prob(0.8 * distortion)) // Minor cut out
+				if (prob(25))
 					newletter = ".."
-				else if(prob(25))
+				else if (prob(25))
 					newletter = " "
 				else
 					newletter = ""
 				distortion += 0.25 * distortion_speed
-			else if(prob(2 * distortion)) // Mishearing
-				if(language && language.syllables && prob(50))
+			else if (prob(2 * distortion)) // Mishearing
+				if (language && language.syllables && prob(50))
 					newletter = pick(language.syllables)
 				else
 					newletter =	pick("a","e","i","o","u")
 				distortion += 0.25 * distortion_speed
-			else if(prob(1.5 * distortion)) // Mishearing
-				if(language && prob(50))
-					if(language.syllables)
+			else if (prob(1.5 * distortion)) // Mishearing
+				if (language && prob(50))
+					if (language.syllables)
 						newletter = pick (language.syllables)
 					else
 						newletter = "*"
 				else
-					if(english_only)
+					if (english_only)
 						newletter += "*"
 					else
 						newletter = pick("ø", "ð", "%", "æ", "µ")
 				distortion += 0.5 * distortion_speed
-			else if(prob(0.75 * distortion)) // Incomprehensible
+			else if (prob(0.75 * distortion)) // Incomprehensible
 				newletter = pick("<", ">", "!", "$", "%", "^", "&", "*", "~", "#")
 				distortion += 0.75 * distortion_speed
-			else if(prob(0.05 * distortion)) // Total cut out
-				if(!english_only)
+			else if (prob(0.05 * distortion)) // Total cut out
+				if (!english_only)
 					newletter = "|w¡¼b»%> -BZZT-"
 				else
 					newletter = "srgt%$hjc< -BZZT-"
 				new_message += newletter
 				break
-			else if(prob(2.5 * distortion)) // Sound distortion. Still recognisable, mostly.
+			else if (prob(2.5 * distortion)) // Sound distortion. Still recognisable, mostly.
 				switch(lowertext(newletter))
-					if("s")
+					if ("s")
 						newletter = "$"
-					if("e")
+					if ("e")
 						newletter = "£"
-					if("w")
+					if ("w")
 						newletter = "ø"
-					if("y")
+					if ("y")
 						newletter = "¡"
-					if("x")
+					if ("x")
 						newletter = "æ"
-					if("u")
+					if ("u")
 						newletter = "µ"
 		else
-			if(prob(0.2 * distortion))
+			if (prob(0.2 * distortion))
 				newletter = " *crackle* "
 				distortion += 0.25 * distortion_speed
-		if(prob(20))
+		if (prob(20))
 			capitalize(newletter)
 		new_message += newletter
 		lentext += 1

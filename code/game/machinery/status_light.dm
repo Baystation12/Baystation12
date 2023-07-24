@@ -16,19 +16,19 @@
 
 
 /obj/machinery/status_light/on_update_icon()
-	if(inoperable())
+	if (inoperable())
 		icon_state = "doortimer-b"
 		return
 	icon_state = "doortimer[alert]"
 
 /obj/machinery/status_light/receive_signal(datum/signal/signal)
-	if(inoperable())
+	if (inoperable())
 		return
 
-	if(!signal.data["tag"] || (signal.data["tag"] != id_tag) || !signal.data["temperature"])
+	if (!signal.data["tag"] || (signal.data["tag"] != id_tag) || !signal.data["temperature"])
 		return 0
 
-	if(signal.data["temperature"] >= alert_temperature)
+	if (signal.data["temperature"] >= alert_temperature)
 		alert = 1
 	else
 		alert = 2

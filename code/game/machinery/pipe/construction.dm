@@ -22,9 +22,9 @@ Buildable meters
 
 /obj/item/pipe/Initialize(mapload, obj/machinery/atmospherics/P)
 	. = ..()
-	if(!P)
+	if (!P)
 		return
-	if(!P.dir)
+	if (!P.dir)
 		set_dir(SOUTH)
 	else
 		set_dir(P.dir)
@@ -41,8 +41,8 @@ Buildable meters
 
 //called when a turf is attacked with a pipe item
 /obj/item/pipe/afterattack(turf/simulated/floor/target, mob/user, proximity)
-	if(!proximity) return
-	if(istype(target))
+	if (!proximity) return
+	if (istype(target))
 		user.unEquip(src, target)
 	else
 		return ..()
@@ -58,12 +58,12 @@ Buildable meters
 
 /obj/item/pipe/proc/sanitize_dir()
 	switch(rotate_class)
-		if(PIPE_ROTATE_TWODIR)
-			if(dir==2)
+		if (PIPE_ROTATE_TWODIR)
+			if (dir==2)
 				set_dir(1)
-			else if(dir==8)
+			else if (dir==8)
 				set_dir(4)
-		if(PIPE_ROTATE_ONEDIR)
+		if (PIPE_ROTATE_ONEDIR)
 			set_dir(2)
 
 /obj/item/pipe/attack_self(mob/user as mob)
@@ -75,7 +75,7 @@ Buildable meters
 		to_chat(usr, pipefailtext)
 		return 1
 	P.build_network()
-	if(P.node)
+	if (P.node)
 		P.node.atmos_init()
 		P.node.build_network()
 	return 0
@@ -86,10 +86,10 @@ Buildable meters
 		to_chat(usr, pipefailtext)
 		return 1
 	P.build_network()
-	if(P.node1)
+	if (P.node1)
 		P.node1.atmos_init()
 		P.node1.build_network()
-	if(P.node2)
+	if (P.node2)
 		P.node2.atmos_init()
 		P.node2.build_network()
 	return 0
@@ -100,13 +100,13 @@ Buildable meters
 		to_chat(usr, pipefailtext)
 		return 1
 	P.build_network()
-	if(P.node1)
+	if (P.node1)
 		P.node1.atmos_init()
 		P.node1.build_network()
-	if(P.node2)
+	if (P.node2)
 		P.node2.atmos_init()
 		P.node2.build_network()
-	if(P.node3)
+	if (P.node3)
 		P.node3.atmos_init()
 		P.node3.build_network()
 	return 0
@@ -117,22 +117,22 @@ Buildable meters
 		to_chat(usr, pipefailtext)
 		return 1
 	P.build_network()
-	if(P.node1)
+	if (P.node1)
 		P.node1.atmos_init()
 		P.node1.build_network()
-	if(P.node2)
+	if (P.node2)
 		P.node2.atmos_init()
 		P.node2.build_network()
-	if(P.node3)
+	if (P.node3)
 		P.node3.atmos_init()
 		P.node3.build_network()
-	if(P.node4)
+	if (P.node4)
 		P.node4.atmos_init()
 		P.node4.build_network()
 	return 0
 
 /obj/item/pipe/attackby(obj/item/W as obj, mob/user as mob)
-	if(!isWrench(W))
+	if (!isWrench(W))
 		return ..()
 	if (!isturf(loc))
 		return 1
@@ -142,7 +142,7 @@ Buildable meters
 	var/pipe_dir = base_pipe_initialize_directions(dir, initial(fake_machine.connect_dir_type))
 
 	for(var/obj/machinery/atmospherics/M in loc)
-		if((M.initialize_directions & pipe_dir) && M.check_connect_types_construction(M,src))	// matches at least one direction on either type of pipe & same connection type
+		if ((M.initialize_directions & pipe_dir) && M.check_connect_types_construction(M,src))	// matches at least one direction on either type of pipe & same connection type
 			to_chat(user, SPAN_WARNING("There is already a pipe of the same type at this location."))
 			return 1
 	// no conflicts found
@@ -158,23 +158,23 @@ Buildable meters
 	P.set_dir(dir)
 	P.set_initial_level()
 
-	if(P.pipe_class == PIPE_CLASS_UNARY)
-		if(build_unary(P, pipefailtext))
+	if (P.pipe_class == PIPE_CLASS_UNARY)
+		if (build_unary(P, pipefailtext))
 			return 1
 
-	if(P.pipe_class == PIPE_CLASS_BINARY)
-		if(build_binary(P, pipefailtext))
+	if (P.pipe_class == PIPE_CLASS_BINARY)
+		if (build_binary(P, pipefailtext))
 			return 1
 
-	if(P.pipe_class == PIPE_CLASS_TRINARY)
-		if(build_trinary(P, pipefailtext))
+	if (P.pipe_class == PIPE_CLASS_TRINARY)
+		if (build_trinary(P, pipefailtext))
 			return 1
 
-	if(P.pipe_class == PIPE_CLASS_QUATERNARY)
-		if(build_quaternary(P, pipefailtext))
+	if (P.pipe_class == PIPE_CLASS_QUATERNARY)
+		if (build_quaternary(P, pipefailtext))
 			return 1
 
-	if(P.pipe_class == PIPE_CLASS_OMNI)
+	if (P.pipe_class == PIPE_CLASS_OMNI)
 		P.atmos_init()
 		P.build_network()
 
@@ -200,7 +200,7 @@ Buildable meters
 /obj/item/pipe/injector/New(loc, obj/machinery/atmospherics/P)
 	..(loc, null)
 	var/obj/machinery/atmospherics/unary/outlet_injector/I = P
-	if(!I)
+	if (!I)
 		return
 	frequency = I.frequency
 	id = I.id
@@ -213,12 +213,12 @@ Buildable meters
 	var/build_type
 
 /obj/item/machine_chassis/attackby(obj/item/W, mob/user)
-	if(!isWrench(W))
+	if (!isWrench(W))
 		return ..()
 	var/obj/machinery/machine = new build_type(get_turf(src), dir, FALSE)
 	machine.apply_component_presets()
 	machine.RefreshParts()
-	if(machine.construct_state)
+	if (machine.construct_state)
 		machine.construct_state.post_construct(machine)
 	playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 	to_chat(user, SPAN_NOTICE("You have fastened the [src]."))

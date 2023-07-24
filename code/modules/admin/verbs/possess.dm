@@ -4,7 +4,7 @@
 
 	log_and_message_admins("has possessed [O]")
 
-	if(!usr.control_object) //If you're not already possessing something...
+	if (!usr.control_object) //If you're not already possessing something...
 		usr.name_archive = usr.real_name
 
 	usr.forceMove(O)
@@ -19,11 +19,11 @@
 	set category = "Object"
 	//usr.loc = get_turf(usr)
 
-	if(usr.control_object && usr.name_archive) //if you have a name archived and if you are actually relassing an object
+	if (usr.control_object && usr.name_archive) //if you have a name archived and if you are actually relassing an object
 		usr.RemoveMovementHandler(/datum/movement_handler/mob/admin_possess)
 		usr.real_name = usr.name_archive
 		usr.SetName(usr.real_name)
-		if(ishuman(usr))
+		if (ishuman(usr))
 			var/mob/living/carbon/human/H = usr
 			H.SetName(H.get_visible_name())
 //		usr.regenerate_icons() //So the name is updated properly

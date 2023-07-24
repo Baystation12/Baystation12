@@ -24,39 +24,39 @@
 * Procs for handling sending communication messages
 */
 /singleton/communication_channel/proc/communicate(datum/communicator, message)
-	if(can_communicate(arglist(args)))
+	if (can_communicate(arglist(args)))
 		call(log_proc)("[(flags&COMMUNICATION_LOG_CHANNEL_NAME) ? "([name]) " : ""][communicator.communication_identifier()] : [message]")
 		return do_communicate(arglist(args))
 	return FALSE
 
 /singleton/communication_channel/proc/can_communicate(datum/communicator, message)
 
-	if(!message)
+	if (!message)
 		return FALSE
 
-	if(!istype(communicator, expected_communicator_type))
+	if (!istype(communicator, expected_communicator_type))
 		log_debug("[log_info_line(communicator)] attempted to communicate over the channel [src] but was of an unexpected type.")
 		return FALSE
 
-	if(config_setting && !config.vars[config_setting] && !check_rights(R_INVESTIGATE,0,communicator))
+	if (config_setting && !config.vars[config_setting] && !check_rights(R_INVESTIGATE,0,communicator))
 		to_chat(communicator, SPAN_DANGER("[name] is globally muted."))
 		return FALSE
 
 	var/client/C = communicator.get_client()
 
-	if(jobban_isbanned(C.mob, name))
+	if (jobban_isbanned(C.mob, name))
 		to_chat(communicator, SPAN_DANGER("You cannot use [name] (banned)."))
 		return FALSE
 
-	if(can_ignore(C))
+	if (can_ignore(C))
 		to_chat(communicator, SPAN_WARNING("Couldn't send message - you have [name] muted."))
 		return FALSE
 
-	if(C && mute_setting && (C.prefs.muted & mute_setting))
+	if (C && mute_setting && (C.prefs.muted & mute_setting))
 		to_chat(communicator, SPAN_DANGER("You cannot use [name] (muted)."))
 		return FALSE
 
-	if(C && (flags & COMMUNICATION_NO_GUESTS) && IsGuestKey(C.key))
+	if (C && (flags & COMMUNICATION_NO_GUESTS) && IsGuestKey(C.key))
 		to_chat(communicator, SPAN_DANGER("Guests may not use the [name] channel."))
 		return FALSE
 
@@ -79,23 +79,23 @@
 * Procs for handling the reception of communication messages
 */
 /singleton/communication_channel/proc/receive_communication(datum/communicator, datum/receiver, message)
-	if(can_receive_communication(receiver))
+	if (can_receive_communication(receiver))
 		var/has_follow_links = FALSE
-		if((flags & COMMUNICATION_ADMIN_FOLLOW))
+		if ((flags & COMMUNICATION_ADMIN_FOLLOW))
 			var/extra_links = receiver.get_admin_jump_link(communicator,"","\[","\]")
-			if(extra_links)
+			if (extra_links)
 				has_follow_links = TRUE
 				message = "[extra_links] [message]"
-		if(flags & COMMUNICATION_GHOST_FOLLOW && !has_follow_links)
+		if (flags & COMMUNICATION_GHOST_FOLLOW && !has_follow_links)
 			var/extra_links = receiver.get_ghost_follow_link(communicator,"","\[","\]")
-			if(extra_links)
+			if (extra_links)
 				message = "[extra_links] [message]"
 		do_receive_communication(arglist(args))
 
 /singleton/communication_channel/proc/can_receive_communication(datum/receiver)
-	if(show_preference_setting)
+	if (show_preference_setting)
 		var/client/C = receiver.get_client()
-		if(can_ignore(C))
+		if (can_ignore(C))
 			return FALSE
 	return TRUE
 

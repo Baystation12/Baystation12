@@ -6,14 +6,14 @@
 	result_length = 3
 
 /datum/vote/gamemode/can_run(mob/creator, automatic)
-	if(!automatic && (!config.allow_vote_mode || !isadmin(creator)))
+	if (!automatic && (!config.allow_vote_mode || !isadmin(creator)))
 		return FALSE // Admins and autovotes bypass the config setting.
-	if(GAME_STATE >= RUNLEVEL_GAME)
+	if (GAME_STATE >= RUNLEVEL_GAME)
 		return FALSE
 	return ..()
 
 /datum/vote/gamemode/Process()
-	if(GAME_STATE >= RUNLEVEL_GAME)
+	if (GAME_STATE >= RUNLEVEL_GAME)
 		to_world("<b>Voting aborted due to game start.</b>")
 		return VOTE_PROCESS_ABORT
 	return ..()
@@ -45,20 +45,20 @@
 
 /datum/vote/gamemode/handle_default_votes()
 	var/non_voters = ..()
-	if(SSticker.master_mode in choices)
+	if (SSticker.master_mode in choices)
 		choices[SSticker.master_mode] += non_voters
 
 
 /datum/vote/gamemode/report_result()
-	if(!SSticker.round_progressing) //Unpause any holds. If the vote failed, SSticker is responsible for fielding the result.
+	if (!SSticker.round_progressing) //Unpause any holds. If the vote failed, SSticker is responsible for fielding the result.
 		SSticker.round_progressing = 1
 		to_world(SPAN_COLOR("red", "<b>The round will start soon.</b>"))
-	if(..())
+	if (..())
 		SSticker.gamemode_vote_results = list() //This signals to SSticker that the vote is over but there were no winners.
 		return 1
-	if(SSticker.master_mode != result[1])
+	if (SSticker.master_mode != result[1])
 		world.save_mode(result[1])
-		if(SSticker.mode)
+		if (SSticker.mode)
 			SSvote.restart_world() //This is legacy behavior for votes after the mode is set, e.g. if an admin halts the ticker and holds another vote before gamestart.
 			return                 //Potenitally the new vote after restart can then be cancelled, to use this vote's result.
 		SSticker.master_mode = result[1]
@@ -68,5 +68,5 @@
 	return config.allow_vote_mode ? "Allowed" : "Disallowed"
 
 /datum/vote/gamemode/toggle(mob/user)
-	if(isadmin(user))
+	if (isadmin(user))
 		config.allow_vote_mode = !config.allow_vote_mode

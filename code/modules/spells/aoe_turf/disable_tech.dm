@@ -25,7 +25,7 @@
 	return
 
 /spell/aoe_turf/disable_tech/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 	emp_heavy += 2
 	emp_light += 2

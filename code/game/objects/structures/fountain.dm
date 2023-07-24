@@ -23,17 +23,17 @@
 
 
 /obj/structure/fountain/strange/attack_hand(mob/living/user)
-	if(user.incapacitated())
+	if (user.incapacitated())
 		return
-	if(!CanPhysicallyInteract(user))
+	if (!CanPhysicallyInteract(user))
 		return
-	if(used)
+	if (used)
 		to_chat(user, "\The [src] is still and lifeless...")
 		return
-	if(!ishuman(user) || user.isSynthetic())
+	if (!ishuman(user) || user.isSynthetic())
 		to_chat(user, "Try as you might to touch the fountain, some force prevents you from doing so.")
 		return
-	if(alert("As you reach out to touch the fountain, a feeling of doubt overcomes you. Steel yourself and proceed?",,"Yes", "No") == "Yes")
+	if (alert("As you reach out to touch the fountain, a feeling of doubt overcomes you. Steel yourself and proceed?",,"Yes", "No") == "Yes")
 		visible_message("\The [user] touches \the [src].")
 		time_dilation(user)
 	else
@@ -46,7 +46,7 @@
 		L.eye_blurry += 9
 	visible_message(SPAN_WARNING("\The [src] erupts in a bright flash of light!"))
 	playsound(src,'sound/items/time.ogg',100)
-	if(rand(1, 6) == 1 || user.age < 18)
+	if (rand(1, 6) == 1 || user.age < 18)
 		to_chat(user, SPAN_CLASS("cultannounce", "You touch the fountain. All the memories of your life seem to fade into the distant past as seconds drag like years. You feel the inexplicable sensation of your skin tightening and thinning across your entire body as your muscles degrade and your joints weaken. Time returns to its 'normal' pace. You can only just barely remember touching the fountain."))
 		user.change_hair_color(80, 80, 80)
 		user.changed_age = rand(15, 20)

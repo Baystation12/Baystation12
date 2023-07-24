@@ -41,7 +41,7 @@
 			owner.slurring = max(owner.slurring, 30)
 			owner.chem_effects[CE_PAINKILLER] = 0
 			owner.stamina = 0
-			if(MOVING_QUICKLY(owner))
+			if (MOVING_QUICKLY(owner))
 				owner.set_moving_slowly()
 
 /obj/item/organ/internal/augment/active/nerve_dampeners/hidden

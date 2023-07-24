@@ -41,7 +41,7 @@
 
 /obj/item/robot_module/miner/handle_emagged()
 	var/obj/item/pickaxe/D = locate(/obj/item/pickaxe/borgdrill) in equipment
-	if(D)
+	if (D)
 		equipment -= D
 		qdel(D)
 	D = new /obj/item/pickaxe/diamonddrill(src)

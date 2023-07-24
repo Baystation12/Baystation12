@@ -6,14 +6,14 @@
 	var/list/non_unique_descriptors = list()
 	for(var/archetype in SSmapping.submap_archetypes)
 		var/singleton/submap_archetype/arch = SSmapping.submap_archetypes[archetype]
-		if(!arch.descriptor)
+		if (!arch.descriptor)
 			non_unique_descriptors += "[arch.type] - no descriptor set"
-		else if(checked_submaps[arch.descriptor])
+		else if (checked_submaps[arch.descriptor])
 			non_unique_descriptors += "[arch.type] - [arch.descriptor]"
 			non_unique_descriptors |= "[checked_submaps[arch.descriptor]] - [arch.descriptor]"
 		else
 			checked_submaps[arch.descriptor] = arch.type
-	if(LAZYLEN(non_unique_descriptors))
+	if (LAZYLEN(non_unique_descriptors))
 		fail("Some submap archetypes do not have unique descriptors:\n[jointext(non_unique_descriptors, "\n")].")
 	else
 		pass("All submap archetypes had unique descriptors.")

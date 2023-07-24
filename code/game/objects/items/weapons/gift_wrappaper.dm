@@ -17,7 +17,7 @@
 
 /obj/item/a_gift/New()
 	..()
-	if(w_class > 0 && w_class < ITEM_SIZE_HUGE)
+	if (w_class > 0 && w_class < ITEM_SIZE_HUGE)
 		icon_state = "gift[w_class]"
 	else
 		icon_state = "gift[pick(1, 2, 3)]"
@@ -98,7 +98,7 @@
 		/obj/item/storage/box/large/foam_gun/burst,
 		/obj/item/storage/box/large/foam_gun/revolver)
 
-	if(!ispath(gift_type,/obj/item))	return
+	if (!ispath(gift_type,/obj/item))	return
 
 	var/obj/item/I = new gift_type(M)
 	M.put_in_hands(I)
@@ -122,22 +122,22 @@
 /obj/item/gift/New(newloc, obj/item/wrapped = null)
 	..(newloc)
 
-	if(istype(wrapped))
+	if (istype(wrapped))
 		gift = wrapped
 		w_class = gift.w_class
 		gift.forceMove(src)
 
 		//a good example of where we don't want to use the w_class defines
 		switch(gift.w_class)
-			if(1) icon_state = "gift1"
-			if(2) icon_state = "gift1"
-			if(3) icon_state = "gift2"
-			if(4) icon_state = "gift2"
-			if(5) icon_state = "gift3"
+			if (1) icon_state = "gift1"
+			if (2) icon_state = "gift1"
+			if (3) icon_state = "gift2"
+			if (4) icon_state = "gift2"
+			if (5) icon_state = "gift3"
 
 /obj/item/gift/attack_self(mob/user as mob)
 	user.drop_item()
-	if(src.gift)
+	if (src.gift)
 		user.put_in_active_hand(gift)
 		src.gift.add_fingerprint(user)
 	else
@@ -172,10 +172,10 @@
 				to_chat(user, SPAN_WARNING("You need more paper!"))
 				return
 			else
-				if(istype(W, /obj/item/smallDelivery) || istype(W, /obj/item/gift)) //No gift wrapping gifts!
+				if (istype(W, /obj/item/smallDelivery) || istype(W, /obj/item/gift)) //No gift wrapping gifts!
 					return
 
-				if(user.unEquip(W))
+				if (user.unEquip(W))
 					var/obj/item/gift/G = new /obj/item/gift( src.loc, W )
 					G.add_fingerprint(user)
 					W.add_fingerprint(user)
@@ -194,7 +194,7 @@
 
 /obj/item/wrapping_paper/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
+	if (distance <= 1)
 		to_chat(user, text("There is about [] square units of paper left!", src.amount))
 
 /obj/item/wrapping_paper/attack(mob/target as mob, mob/user as mob)

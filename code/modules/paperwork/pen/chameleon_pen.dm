@@ -10,7 +10,7 @@
 	personnel_list.Add("Anonymous")
 
 	var/new_signature = input("Enter new signature pattern.", "New Signature") as null|anything in personnel_list
-	if(new_signature)
+	if (new_signature)
 		signature = new_signature
 	*/
 	signature = sanitize(input("Enter new signature. Leave blank for 'Anonymous'", "New Signature", signature))
@@ -28,30 +28,30 @@
 	var/list/possible_colours = list ("Yellow", "Green", "Pink", "Blue", "Orange", "Cyan", "Red", "Invisible", "Black")
 	var/selected_type = input("Pick new colour.", "Pen Colour", null, null) as null|anything in possible_colours
 
-	if(selected_type)
+	if (selected_type)
 		switch(selected_type)
-			if("Yellow")
+			if ("Yellow")
 				colour = COLOR_YELLOW
 				color_description = "yellow ink"
-			if("Green")
+			if ("Green")
 				colour = COLOR_LIME
 				color_description = "green ink"
-			if("Pink")
+			if ("Pink")
 				colour = COLOR_PINK
 				color_description = "pink ink"
-			if("Blue")
+			if ("Blue")
 				colour = COLOR_BLUE
 				color_description = "blue ink"
-			if("Orange")
+			if ("Orange")
 				colour = COLOR_ORANGE
 				color_description = "orange ink"
-			if("Cyan")
+			if ("Cyan")
 				colour = COLOR_CYAN
 				color_description = "cyan ink"
-			if("Red")
+			if ("Red")
 				colour = COLOR_RED
 				color_description = "red ink"
-			if("Invisible")
+			if ("Invisible")
 				colour = COLOR_WHITE
 				color_description = "transluscent ink"
 			else

@@ -8,7 +8,7 @@
 	. = ..()
 
 /mob/fake_mob/get_client()
-	if(!fake_client)
+	if (!fake_client)
 		fake_client = new()
 	return fake_client
 

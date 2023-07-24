@@ -68,12 +68,12 @@
 	uid = "[random_id("guestpass_serial_number",100,999)]-G[rand(10,99)]"
 
 /obj/machinery/computer/guestpass/attackby(obj/O, mob/user)
-	if(istype(O, /obj/item/card/id))
-		if(!giver && user.unEquip(O))
+	if (istype(O, /obj/item/card/id))
+		if (!giver && user.unEquip(O))
 			O.forceMove(src)
 			giver = O
 			updateUsrDialog()
-		else if(giver)
+		else if (giver)
 			to_chat(user, SPAN_WARNING("There is already ID card inside."))
 		return
 	..()
@@ -90,7 +90,7 @@
 	data["reason"] = reason
 	data["duration"] = duration
 
-	if(giver)
+	if (giver)
 		data["giver"] = !!giver
 		data["giver_name"] = giver.rank || giver.assignment || SSjobs.get_by_path(giver.job_access_type).title
 		data["giv_name"] = giv_name
@@ -105,7 +105,7 @@
 		data["giver_access"] = giver_access
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		ui = new(user, src, ui_key, "guestpass.tmpl", "Guest Pass Terminal", 600, 800)
 		ui.set_initial_data(data)
 		ui.open()
@@ -123,7 +123,7 @@
 
 	else if (href_list["reason"])
 		var/reas = sanitize(input(user, "Reason why pass is issued", "Reason", reason) as text|null)
-		if(reas && CanUseTopic(user, state))
+		if (reas && CanUseTopic(user, state))
 			reason = reas
 			. = TOPIC_REFRESH
 
@@ -140,14 +140,14 @@
 		var/A = href_list["access"]
 		if (A in accesses)
 			accesses.Remove(A)
-		else if(giver && (A in giver.access))
+		else if (giver && (A in giver.access))
 			accesses.Add(A)
 		. = TOPIC_REFRESH
 
 	else if (href_list["id"])
 		if (giver)
 			giver.dropInto(user.loc)
-			if(ishuman(user))
+			if (ishuman(user))
 				user.put_in_hands(giver)
 			giver = null
 			accesses.Cut()
@@ -189,7 +189,7 @@
 			addtimer(new Callback(pass, /obj/item/card/id/guest/proc/expire), duration MINUTES, TIMER_UNIQUE)
 			playsound(src.loc, 'sound/machines/ping.ogg', 25, 0)
 			. = TOPIC_REFRESH
-		else if(!giver)
+		else if (!giver)
 			to_chat(user, SPAN_WARNING("Cannot issue pass without issuing ID."))
-		else if(!length(accesses))
+		else if (!length(accesses))
 			to_chat(user, SPAN_WARNING("Cannot issue pass without at least one granted access permission."))

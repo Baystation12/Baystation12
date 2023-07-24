@@ -20,9 +20,9 @@
 
 	// Increment map sanity counters.
 	for(var/value in map)
-		if(value < rare_val)
+		if (value < rare_val)
 			surface_count++
-		else if(value < deep_val)
+		else if (value < deep_val)
 			rare_count++
 		else
 			deep_count++
@@ -30,13 +30,13 @@
 	var/num_chunks = surface_count + rare_count + deep_count
 
 	// Sanity check.
-	if(surface_count < (min_surface_ratio * num_chunks))
+	if (surface_count < (min_surface_ratio * num_chunks))
 		admin_notice(SPAN_DANGER("Insufficient surface minerals. Rerolling..."), R_DEBUG)
 		return 0
-	else if(rare_count < (min_rare_ratio * num_chunks))
+	else if (rare_count < (min_rare_ratio * num_chunks))
 		admin_notice(SPAN_DANGER("Insufficient rare minerals. Rerolling..."), R_DEBUG)
 		return 0
-	else if(deep_count < (min_deep_ratio * num_chunks))
+	else if (deep_count < (min_deep_ratio * num_chunks))
 		admin_notice(SPAN_DANGER("Insufficient deep minerals. Rerolling..."), R_DEBUG)
 		return 0
 	else
@@ -50,9 +50,9 @@
 	for(var/i=0,i<chunk_size,i++)
 		for(var/j=0,j<chunk_size,j++)
 			var/turf/simulated/T = locate(tx+j, ty+i, origin_z)
-			if(!istype(T) || !T.has_resources)
+			if (!istype(T) || !T.has_resources)
 				continue
-			if(!priority_process)
+			if (!priority_process)
 				CHECK_TICK
 			T.resources = list()
 			T.resources[MATERIAL_SAND] = rand(3,5)
@@ -61,7 +61,7 @@
 			var/tmp_cell
 			TRANSLATE_AND_VERIFY_COORD(x, y)
 
-			if(tmp_cell < rare_val)      // Surface metals.
+			if (tmp_cell < rare_val)      // Surface metals.
 				T.resources[MATERIAL_IRON] =     rand(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX)
 				T.resources[MATERIAL_ALUMINIUM] =     rand(RESOURCE_MID_MIN, RESOURCE_MID_MAX)
 				T.resources[MATERIAL_GOLD] =     rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
@@ -72,7 +72,7 @@
 				T.resources[MATERIAL_PHORON] =   0
 				T.resources[MATERIAL_OSMIUM] =   0
 				T.resources[MATERIAL_HYDROGEN] = 0
-			else if(tmp_cell < deep_val) // Rare metals.
+			else if (tmp_cell < deep_val) // Rare metals.
 				T.resources[MATERIAL_GOLD] =     rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
 				T.resources[MATERIAL_SILVER] =   rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
 				T.resources[MATERIAL_URANIUM] =  rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
@@ -94,9 +94,9 @@
 				T.resources[MATERIAL_SILVER] =   0
 
 /datum/random_map/noise/ore/get_map_char(value)
-	if(value < rare_val)
+	if (value < rare_val)
 		return "S"
-	else if(value < deep_val)
+	else if (value < deep_val)
 		return "R"
 	else
 		return "D"

@@ -13,45 +13,45 @@
 	volume = 5
 
 /obj/item/reagent_containers/dropper/afterattack(obj/target, mob/user, proximity)
-	if(!target.reagents || !proximity) return
+	if (!target.reagents || !proximity) return
 
-	if(reagents.total_volume)
+	if (reagents.total_volume)
 
-		if(!target.reagents.get_free_space())
+		if (!target.reagents.get_free_space())
 			to_chat(user, SPAN_NOTICE("[target] is full."))
 			return
 
-		if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/reagent_containers/food) && !istype(target, /obj/item/clothing/mask/smokable/cigarette)) //You can inject humans and food but you can't remove the shit.
+		if (!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/reagent_containers/food) && !istype(target, /obj/item/clothing/mask/smokable/cigarette)) //You can inject humans and food but you can't remove the shit.
 			to_chat(user, SPAN_NOTICE("You cannot directly fill this object."))
 			return
 
 		var/trans = 0
 
-		if(ismob(target))
-			if(user.a_intent == I_HELP)
+		if (ismob(target))
+			if (user.a_intent == I_HELP)
 				return
 
 			var/time = 20 //2/3rds the time of a syringe
 			user.visible_message(SPAN_WARNING("[user] is trying to squirt something into [target]'s eyes!"))
 
-			if(!do_after(user, time, target, DO_MEDICAL))
+			if (!do_after(user, time, target, DO_MEDICAL))
 				return
 
-			if(istype(target, /mob/living/carbon/human))
+			if (istype(target, /mob/living/carbon/human))
 				var/mob/living/carbon/human/victim = target
 
 				var/obj/item/safe_thing = null
-				if(victim.wear_mask)
+				if (victim.wear_mask)
 					if (victim.wear_mask.body_parts_covered & EYES)
 						safe_thing = victim.wear_mask
-				if(victim.head)
+				if (victim.head)
 					if (victim.head.body_parts_covered & EYES)
 						safe_thing = victim.head
-				if(victim.glasses)
+				if (victim.glasses)
 					if (victim.glasses.body_parts_covered & EYES)
 						safe_thing = victim.glasses
 
-				if(safe_thing)
+				if (safe_thing)
 					trans = reagents.splash(safe_thing, amount_per_transfer_from_this, max_spill=30)
 					user.visible_message(SPAN_WARNING("[user] tries to squirt something into [target]'s eyes, but fails!"), SPAN_NOTICE("You transfer [trans] units of the solution."))
 					return
@@ -75,11 +75,11 @@
 
 	else // Taking from something
 
-		if(!target.is_open_container() && !istype(target,/obj/structure/reagent_dispensers))
+		if (!target.is_open_container() && !istype(target,/obj/structure/reagent_dispensers))
 			to_chat(user, SPAN_NOTICE("You cannot directly remove reagents from [target]."))
 			return
 
-		if(!target.reagents || !target.reagents.total_volume)
+		if (!target.reagents || !target.reagents.total_volume)
 			to_chat(user, SPAN_NOTICE("[target] is empty."))
 			return
 
@@ -93,7 +93,7 @@
 	update_icon()
 
 /obj/item/reagent_containers/dropper/on_update_icon()
-	if(reagents.total_volume)
+	if (reagents.total_volume)
 		icon_state = "dropper1"
 	else
 		icon_state = "dropper0"

@@ -18,12 +18,12 @@
 					var filter_text = document.getElementById('filter');
 					var filter = filter_text.value.toLowerCase();
 
-					if(complete_list != null && complete_list != ""){
+					if (complete_list != null && complete_list != ""){
 						var mtbl = document.getElementById("maintable_data_archive");
 						mtbl.innerHTML = complete_list;
 					}
 
-					if(filter.value == ""){
+					if (filter.value == ""){
 						return;
 					}else{
 
@@ -33,7 +33,7 @@
 						{
 							try{
 								var tr = ltr\[i\];
-								if(tr.getAttribute("id").indexOf("data") != 0){
+								if (tr.getAttribute("id").indexOf("data") != 0){
 									continue;
 								}
 								var ltd = tr.getElementsByTagName("td");
@@ -82,7 +82,7 @@
 					body += "<a href='?src=\ref[usr];priv_msg=\ref"+ref+"'>PM</a> - "
 					body += "<a href='?src=\ref[src];narrateto="+ref+"'>DN</a> - "
 					body += "<a href='?src=\ref[src];adminplayerobservefollow="+ref+"'>JMP</a><br>"
-					if(antagonist > 0)
+					if (antagonist > 0)
 						body += "<span style='font-size: 13px'><a href='?src=\ref[src];check_antagonist=1'><span style='color: red'><b>Antagonist</b></span></a></span>";
 
 					body += "</td></tr></table>";
@@ -98,19 +98,19 @@
 
 						var id = span.getAttribute("id");
 
-						if(!(id.indexOf("item")==0))
+						if (!(id.indexOf("item")==0))
 							continue;
 
 						var pass = 1;
 
 						for(var j = 0; j < locked_tabs.length; j++){
-							if(locked_tabs\[j\]==id){
+							if (locked_tabs\[j\]==id){
 								pass = 0;
 								break;
 							}
 						}
 
-						if(pass != 1)
+						if (pass != 1)
 							continue;
 
 
@@ -123,7 +123,7 @@
 				function addToLocked(id,link_id,notice_span_id){
 					var link = document.getElementById(link_id);
 					var decision = link.getAttribute("name");
-					if(decision == "1"){
+					if (decision == "1"){
 						link.setAttribute("name","2");
 					}else{
 						link.setAttribute("name","1");
@@ -133,12 +133,12 @@
 
 					var pass = 1;
 					for(var j = 0; j < locked_tabs.length; j++){
-						if(locked_tabs\[j\]==id){
+						if (locked_tabs\[j\]==id){
 							pass = 0;
 							break;
 						}
 					}
-					if(!pass)
+					if (!pass)
 						return;
 					locked_tabs.push(id);
 					var notice_span = document.getElementById(notice_span_id);
@@ -157,13 +157,13 @@
 					var index = 0;
 					var pass = 0;
 					for(var j = 0; j < locked_tabs.length; j++){
-						if(locked_tabs\[j\]==id){
+						if (locked_tabs\[j\]==id){
 							pass = 1;
 							index = j;
 							break;
 						}
 					}
-					if(!pass)
+					if (!pass)
 						return;
 					locked_tabs\[index\] = "";
 					var notice_span = document.getElementById(notice_span_id);
@@ -216,44 +216,44 @@
 	var/i = 1
 	for(var/entry in mobs)
 		var/mob/M = entry
-		if(!istype(M))
+		if (!istype(M))
 			continue
-		if(M.ckey)
+		if (M.ckey)
 
 			var/color = "#e6e6e6"
-			if(i%2 == 0)
+			if (i%2 == 0)
 				color = "#f2f2f2"
 			var/is_antagonist = is_special_character(M)
 
 			var/M_job = ""
 
-			if(isliving(M))
+			if (isliving(M))
 
-				if(iscarbon(M)) //Carbon stuff
-					if(ishuman(M))
+				if (iscarbon(M)) //Carbon stuff
+					if (ishuman(M))
 						var/mob/living/carbon/human/H = M
 						M_job = H.job
-					else if(isslime(M))
+					else if (isslime(M))
 						M_job = "slime"
-					else if(issmall(M))
+					else if (issmall(M))
 						M_job = "Monkey"
-					else if(isalien(M))
+					else if (isalien(M))
 						M_job = "Alien"
 					else
 						M_job = "Carbon-based"
 
-				else if(issilicon(M)) //silicon
-					if(isAI(M))
+				else if (issilicon(M)) //silicon
+					if (isAI(M))
 						M_job = "AI"
-					else if(ispAI(M))
+					else if (ispAI(M))
 						M_job = "pAI"
-					else if(isrobot(M))
+					else if (isrobot(M))
 						M_job = "Robot"
 					else
 						M_job = "Silicon-based"
 
-				else if(isanimal(M)) //simple animals
-					if(iscorgi(M))
+				else if (isanimal(M)) //simple animals
+					if (iscorgi(M))
 						M_job = "Corgi"
 					else
 						M_job = "Animal"
@@ -261,10 +261,10 @@
 				else
 					M_job = "Living"
 
-			else if(istype(M,/mob/new_player))
+			else if (istype(M,/mob/new_player))
 				M_job = "New player"
 
-			else if(isghost(M))
+			else if (isghost(M))
 				M_job = "Ghost"
 			else
 				M_job = "Unknown ([M.type])"

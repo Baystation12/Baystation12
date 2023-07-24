@@ -19,7 +19,7 @@
 	return TRUE
 
 /obj/item/implant/uplink/trigger(emote, mob/source as mob)
-	if(hidden_uplink && usr == source && !malfunction) // Let's not have another people activate our uplink
+	if (hidden_uplink && usr == source && !malfunction) // Let's not have another people activate our uplink
 		hidden_uplink.check_trigger(source, emote, activation_emote)
 
 /obj/item/implanter/uplink

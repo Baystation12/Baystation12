@@ -66,6 +66,6 @@ var/global/const/TTV_WIRE_DEVICECHANGE = FLAG(4)
 
 /datum/wires/transfer_valve/CanUse(mob/living/L)
 	var/obj/item/device/transfer_valve/T = holder
-	if(T.armed)
+	if (T.armed)
 		return TRUE
 	return FALSE

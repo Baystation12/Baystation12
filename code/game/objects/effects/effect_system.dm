@@ -21,7 +21,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	var/setup = 0
 
 /datum/effect/effect/system/proc/set_up(n = 3, c = 0, turf/loc)
-	if(n > 10)
+	if (n > 10)
 		n = 10
 	number = n
 	cardinals = c
@@ -60,7 +60,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 /datum/effect/effect/system/steam_spread
 
 /datum/effect/effect/system/steam_spread/set_up(n = 3, c = 0, turf/loc)
-	if(n > 10)
+	if (n > 10)
 		n = 10
 	number = n
 	cardinals = c
@@ -73,11 +73,11 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /datum/effect/effect/system/steam_spread/spread(i)
 	set waitfor = 0
-	if(holder)
+	if (holder)
 		src.location = get_turf(holder)
 	var/obj/effect/effect/steam/steam = new /obj/effect/effect/steam(location)
 	var/direction
-	if(src.cardinals)
+	if (src.cardinals)
 		direction = pick(GLOB.cardinal)
 	else
 		direction = pick(GLOB.alldirs)
@@ -127,11 +127,11 @@ would spawn and follow the beaker, even if it is carried or thrown.
 /datum/effect/effect/system/spark_spread
 
 /datum/effect/effect/system/spark_spread/set_up(n = 3, c = 0, loca)
-	if(n > 10)
+	if (n > 10)
 		n = 10
 	number = n
 	cardinals = c
-	if(isturf(loca))
+	if (isturf(loca))
 		location = loca
 	else
 		location = get_turf(loca)
@@ -143,11 +143,11 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /datum/effect/effect/system/spark_spread/spread(i)
 	set waitfor = 0
-	if(holder)
+	if (holder)
 		src.location = get_turf(holder)
 	var/obj/effect/sparks/sparks = new /obj/effect/sparks(location)
 	var/direction
-	if(src.cardinals)
+	if (src.cardinals)
 		direction = pick(GLOB.cardinal)
 	else
 		direction = pick(GLOB.alldirs)
@@ -190,7 +190,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /obj/effect/effect/smoke/Crossed(mob/living/carbon/M as mob )
 	..()
-	if(can_affect(M))
+	if (can_affect(M))
 		affect(M)
 
 /obj/effect/effect/smoke/Move()
@@ -217,11 +217,11 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	if (HAS_FLAGS(M.wear_mask?.item_flags, ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT))
 		return FALSE
 	if (M.internal != null)
-		if(M.wear_mask && (M.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
+		if (M.wear_mask && (M.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
 			return 0
-		if(istype(M,/mob/living/carbon/human))
+		if (istype(M,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
-			if(H.head && (H.head.item_flags & ITEM_FLAG_AIRTIGHT))
+			if (H.head && (H.head.item_flags & ITEM_FLAG_AIRTIGHT))
 				return 0
 		return 0
 	return 1
@@ -273,8 +273,8 @@ would spawn and follow the beaker, even if it is carried or thrown.
 		addtimer(new Callback(M, /mob/living/carbon/proc/clear_coughedtime), 2 SECONDS)
 
 /obj/effect/effect/smoke/bad/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
-	if(istype(mover, /obj/item/projectile/beam))
+	if (air_group || (height==0)) return 1
+	if (istype(mover, /obj/item/projectile/beam))
 		var/obj/item/projectile/beam/B = mover
 		B.damage = (B.damage/2)
 	return 1
@@ -327,38 +327,38 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	var/smoke_type = /obj/effect/effect/smoke
 
 /datum/effect/effect/system/smoke_spread/set_up(n = 5, c = 0, loca, direct)
-	if(n > 10)
+	if (n > 10)
 		n = 10
 	number = n
 	cardinals = c
-	if(isturf(loca))
+	if (isturf(loca))
 		location = loca
 	else
 		location = get_turf(loca)
-	if(direct)
+	if (direct)
 		direction = direct
 
 /datum/effect/effect/system/smoke_spread/start()
 	var/i = 0
 	for(i=0, i<src.number, i++)
-		if(src.total_smoke > 20)
+		if (src.total_smoke > 20)
 			return
 		addtimer(new Callback(src, /datum/effect/effect/system/proc/spread, i), 0)
 
 /datum/effect/effect/system/smoke_spread/spread(i)
-	if(holder)
+	if (holder)
 		src.location = get_turf(holder)
 	var/obj/effect/effect/smoke/smoke = new smoke_type(location)
 	src.total_smoke++
 	var/direction = src.direction
-	if(!direction)
-		if(src.cardinals)
+	if (!direction)
+		if (src.cardinals)
 			direction = pick(GLOB.cardinal)
 		else
 			direction = pick(GLOB.alldirs)
 	for(i=0, i<pick(0,1,1,1,2,2,2,3), i++)
 		sleep(1 SECOND)
-		if(QDELETED(smoke))
+		if (QDELETED(smoke))
 			total_smoke--
 			return
 		step(smoke,direction)
@@ -398,15 +398,15 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 
 /datum/effect/effect/system/trail/start()
-	if(!src.on)
+	if (!src.on)
 		src.on = 1
 		src.processing = 1
-	if(src.processing)
+	if (src.processing)
 		src.processing = 0
 		spawn(0)
 			var/turf/T = get_turf(src.holder)
-			if(T != src.oldposition)
-				if(is_type_in_list(T, specific_turfs) && (!max_number || number < max_number))
+			if (T != src.oldposition)
+				if (is_type_in_list(T, specific_turfs) && (!max_number || number < max_number))
 					var/obj/effect/effect/trail = new trail_type(oldposition)
 					src.oldposition = T
 					effect(trail)
@@ -415,12 +415,12 @@ would spawn and follow the beaker, even if it is carried or thrown.
 						number--
 						qdel(trail)
 				spawn(2)
-					if(src.on)
+					if (src.on)
 						src.processing = 1
 						src.start()
 			else
 				spawn(2)
-					if(src.on)
+					if (src.on)
 						src.processing = 1
 						src.start()
 
@@ -470,7 +470,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /datum/effect/effect/system/reagents_explosion/set_up (amt, loc, flash = 0, flash_fact = 0)
 	amount = amt
-	if(isturf(loc))
+	if (isturf(loc))
 		location = loc
 	else
 		location = get_turf(loc)

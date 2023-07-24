@@ -6,13 +6,13 @@
 
 /singleton/communication_channel/ooc/looc/can_communicate(client/C, message)
 	. = ..()
-	if(!.)
+	if (!.)
 		return
 	var/mob/M = C.mob ? C.mob.get_looc_mob() : null
-	if(!M)
+	if (!M)
 		to_chat(C, SPAN_DANGER("You cannot use [name] without a mob."))
 		return FALSE
-	if(!get_turf(M))
+	if (!get_turf(M))
 		to_chat(C, SPAN_DANGER("You cannot use [name] while in nullspace."))
 		return FALSE
 
@@ -26,14 +26,14 @@
 	for(var/listener in listening_hosts)
 		var/mob/listening_mob = listener
 		var/client/t = listening_mob.get_client()
-		if(!t)
+		if (!t)
 			continue
 		listening_clients |= t
 		var/received_message = t.receive_looc(C, key, message, listening_mob.looc_prefix())
 		receive_communication(C, t, received_message)
 
 	for(var/client/adm as anything in GLOB.admins)	//Now send to all admins that weren't in range.
-		if(!(adm in listening_clients) && adm.get_preference_value(/datum/client_preference/staff/show_rlooc) == GLOB.PREF_SHOW)
+		if (!(adm in listening_clients) && adm.get_preference_value(/datum/client_preference/staff/show_rlooc) == GLOB.PREF_SHOW)
 			var/received_message = adm.receive_looc(C, key, message, "R")
 			receive_communication(C, adm, received_message)
 
@@ -41,7 +41,7 @@
 	var/mob/M = C.mob
 	var/display_name = isghost(M) ? commkey : M.name
 	var/admin_stuff = holder ? "/([commkey])" : ""
-	if(prefix)
+	if (prefix)
 		prefix = "\[[prefix]\] "
 	return SPAN_CLASS("ooc", SPAN_CLASS("looc", "[create_text_tag("looc", "LOOC:", src)] [SPAN_CLASS("prefix", prefix)]<em>[display_name][admin_stuff]:</em> [SPAN_CLASS("message", message)]"))
 
@@ -55,6 +55,6 @@
 	return src
 
 /mob/living/silicon/ai/get_looc_mob()
-	if(!eyeobj)
+	if (!eyeobj)
 		return src
 	return eyeobj

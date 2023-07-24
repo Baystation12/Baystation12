@@ -29,33 +29,33 @@
 
 /obj/machinery/atmospherics/pipe/Initialize()
 	. = ..()
-	if(istype(get_turf(src), /turf/simulated/wall) || istype(get_turf(src), /turf/simulated/shuttle/wall) || istype(get_turf(src), /turf/unsimulated/wall))
+	if (istype(get_turf(src), /turf/simulated/wall) || istype(get_turf(src), /turf/simulated/shuttle/wall) || istype(get_turf(src), /turf/unsimulated/wall))
 		level = ATOM_LEVEL_UNDER_TILE
 
 /obj/machinery/atmospherics/pipe/hides_under_flooring()
 	return level != ATOM_LEVEL_OVER_TILE
 
 /obj/machinery/atmospherics/pipe/proc/set_leaking(new_leaking)
-	if(new_leaking && !leaking)
+	if (new_leaking && !leaking)
 		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 		leaking = TRUE
-		if(parent)
+		if (parent)
 			parent.leaks |= src
-			if(parent.network)
+			if (parent.network)
 				parent.network.leaks |= src
 	else if (!new_leaking && leaking)
 		update_sound(0)
 		STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 		leaking = FALSE
-		if(parent)
+		if (parent)
 			parent.leaks -= src
-			if(parent.network)
+			if (parent.network)
 				parent.network.leaks -= src
 
 /obj/machinery/atmospherics/pipe/proc/update_sound(playing)
-	if(playing && !sound_token)
+	if (playing && !sound_token)
 		sound_token = GLOB.sound_player.PlayLoopingSound(src, SOUND_ID, "sound/machines/pipeleak.ogg", volume = 8, range = 3, falloff = 1, prefer_mute = TRUE)
-	else if(!playing && sound_token)
+	else if (!playing && sound_token)
 		QDEL_NULL(sound_token)
 
 /obj/machinery/atmospherics/pipe/proc/pipeline_expansion()
@@ -68,25 +68,25 @@
 	return 1
 
 /obj/machinery/atmospherics/pipe/return_air()
-	if(!parent && !QDELING(src))
+	if (!parent && !QDELING(src))
 		parent = new /datum/pipeline()
 		parent.build_pipeline(src)
 	return parent?.air
 
 /obj/machinery/atmospherics/pipe/build_network()
-	if(!parent && !QDELING(src))
+	if (!parent && !QDELING(src))
 		parent = new /datum/pipeline()
 		parent.build_pipeline(src)
 	return parent?.return_network()
 
 /obj/machinery/atmospherics/pipe/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
-	if(!parent && !QDELING(src))
+	if (!parent && !QDELING(src))
 		parent = new /datum/pipeline()
 		parent.build_pipeline(src)
 	return parent?.network_expand(new_network, reference)
 
 /obj/machinery/atmospherics/pipe/return_network(obj/machinery/atmospherics/reference)
-	if(!parent && !QDELING(src))
+	if (!parent && !QDELING(src))
 		parent = new /datum/pipeline()
 		parent.build_pipeline(src)
 	return parent?.return_network(reference)
@@ -96,7 +96,7 @@
 	QDEL_NULL(sound_token)
 	if (clamp)
 		clamp.detach()
-	if(air_temporary)
+	if (air_temporary)
 		loc.assume_air(air_temporary)
 
 	. = ..()
@@ -107,7 +107,7 @@
 	if (istype(src, /obj/machinery/atmospherics/pipe/vent))
 		return ..()
 
-	if(isWrench(W))
+	if (isWrench(W))
 		var/turf/T = src.loc
 		if (level==ATOM_LEVEL_UNDER_TILE && isturf(T) && !T.is_plating())
 			to_chat(user, SPAN_WARNING("You must remove the plating first."))
@@ -150,15 +150,15 @@
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/color_cache_name(obj/machinery/atmospherics/node)
-	if(istype(src, /obj/machinery/atmospherics/unary/tank))
+	if (istype(src, /obj/machinery/atmospherics/unary/tank))
 		return ..()
 
-	if(istype(node, /obj/machinery/atmospherics/pipe/manifold) || istype(node, /obj/machinery/atmospherics/pipe/manifold4w))
-		if(pipe_color == node.pipe_color)
+	if (istype(node, /obj/machinery/atmospherics/pipe/manifold) || istype(node, /obj/machinery/atmospherics/pipe/manifold4w))
+		if (pipe_color == node.pipe_color)
 			return node.pipe_color
 		else
 			return null
-	else if(istype(node, /obj/machinery/atmospherics/pipe/simple))
+	else if (istype(node, /obj/machinery/atmospherics/pipe/simple))
 		return node.pipe_color
 	else
 		return pipe_color
@@ -191,19 +191,19 @@
 	alpha = 255
 
 /obj/machinery/atmospherics/pipe/simple/hide(i)
-	if(istype(loc, /turf/simulated))
+	if (istype(loc, /turf/simulated))
 		set_invisibility(i ? INVISIBILITY_ABSTRACT : 0)
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/simple/Process()
-	if(!parent) //This should cut back on the overhead calling build_network thousands of times per cycle
+	if (!parent) //This should cut back on the overhead calling build_network thousands of times per cycle
 		..()
-	else if(leaking)
+	else if (leaking)
 		parent.mingle_with_turf(loc, volume)
 		var/air = parent.air && parent.air.return_pressure()
-		if(!sound_token && air)
+		if (!sound_token && air)
 			update_sound(1)
-		else if(sound_token && !air)
+		else if (sound_token && !air)
 			update_sound(0)
 	else
 		. = PROCESS_KILL
@@ -217,12 +217,12 @@
 
 	var/pressure_difference = pressure - environment.return_pressure()
 
-	if(pressure_difference > maximum_pressure)
+	if (pressure_difference > maximum_pressure)
 		burst()
 
-	else if(pressure_difference > fatigue_pressure)
+	else if (pressure_difference > fatigue_pressure)
 		//TODO: leak to turf, doing pfshhhhh
-		if(prob(5))
+		if (prob(5))
 			burst()
 
 	else return 1
@@ -238,10 +238,10 @@
 	qdel(src)
 
 /obj/machinery/atmospherics/pipe/simple/Destroy()
-	if(node1)
+	if (node1)
 		node1.disconnect(src)
 		node1 = null
-	if(node2)
+	if (node2)
 		node2.disconnect(src)
 		node2 = null
 	. = ..()
@@ -252,29 +252,29 @@
 /obj/machinery/atmospherics/pipe/simple/set_color(new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
-	if(node1)
+	if (node1)
 		node1.update_underlays()
-	if(node2)
+	if (node2)
 		node2.update_underlays()
 
 /obj/machinery/atmospherics/pipe/simple/on_update_icon(safety = 0)
-	if(!atmos_initalized)
+	if (!atmos_initalized)
 		return
-	if(!check_icon_cache())
+	if (!check_icon_cache())
 		return
 
 	alpha = 255
 
 	overlays.Cut()
 
-	if(!node1 && !node2)
+	if (!node1 && !node2)
 		var/turf/T = get_turf(src)
 		new /obj/item/pipe(loc, src)
 		for (var/obj/machinery/meter/meter in T)
 			if (meter.target == src)
 				meter.dismantle()
 		qdel(src)
-	else if(node1 && node2)
+	else if (node1 && node2)
 		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]intact[icon_connect_type]")
 		set_leaking(FALSE)
 	else
@@ -290,39 +290,39 @@
 	var/node2_dir
 
 	for(var/direction in GLOB.cardinal)
-		if(direction&initialize_directions)
+		if (direction&initialize_directions)
 			if (!node1_dir)
 				node1_dir = direction
 			else if (!node2_dir)
 				node2_dir = direction
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
-		if(target.initialize_directions & get_dir(target,src))
+		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node1 = target
 				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
-		if(target.initialize_directions & get_dir(target,src))
+		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node2 = target
 				break
 
-	if(!node1 && !node2)
+	if (!node1 && !node2)
 		qdel(src)
 		return
 
 	var/turf/T = loc
-	if(level == ATOM_LEVEL_UNDER_TILE && !T.is_plating()) hide(1)
+	if (level == ATOM_LEVEL_UNDER_TILE && !T.is_plating()) hide(1)
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/simple/disconnect(obj/machinery/atmospherics/reference)
-	if(reference == node1)
-		if(istype(node1, /obj/machinery/atmospherics/pipe))
+	if (reference == node1)
+		if (istype(node1, /obj/machinery/atmospherics/pipe))
 			qdel(parent)
 		node1 = null
 
-	if(reference == node2)
-		if(istype(node2, /obj/machinery/atmospherics/pipe))
+	if (reference == node2)
+		if (istype(node2, /obj/machinery/atmospherics/pipe))
 			qdel(parent)
 		node2 = null
 
@@ -445,7 +445,7 @@
 	icon = null
 
 /obj/machinery/atmospherics/pipe/manifold/hide(i)
-	if(istype(loc, /turf/simulated))
+	if (istype(loc, /turf/simulated))
 		set_invisibility(i ? INVISIBILITY_ABSTRACT : 0)
 	update_icon()
 
@@ -453,37 +453,37 @@
 	return list(node1, node2, node3)
 
 /obj/machinery/atmospherics/pipe/manifold/Process()
-	if(!parent)
+	if (!parent)
 		..()
 	else
 		. = PROCESS_KILL
 
 /obj/machinery/atmospherics/pipe/manifold/Destroy()
-	if(node1)
+	if (node1)
 		node1.disconnect(src)
 		node1 = null
-	if(node2)
+	if (node2)
 		node2.disconnect(src)
 		node2 = null
-	if(node3)
+	if (node3)
 		node3.disconnect(src)
 		node3 = null
 
 	. = ..()
 
 /obj/machinery/atmospherics/pipe/manifold/disconnect(obj/machinery/atmospherics/reference)
-	if(reference == node1)
-		if(istype(node1, /obj/machinery/atmospherics/pipe))
+	if (reference == node1)
+		if (istype(node1, /obj/machinery/atmospherics/pipe))
 			qdel(parent)
 		node1 = null
 
-	if(reference == node2)
-		if(istype(node2, /obj/machinery/atmospherics/pipe))
+	if (reference == node2)
+		if (istype(node2, /obj/machinery/atmospherics/pipe))
 			qdel(parent)
 		node2 = null
 
-	if(reference == node3)
-		if(istype(node3, /obj/machinery/atmospherics/pipe))
+	if (reference == node3)
+		if (istype(node3, /obj/machinery/atmospherics/pipe))
 			qdel(parent)
 		node3 = null
 
@@ -494,23 +494,23 @@
 /obj/machinery/atmospherics/pipe/manifold/set_color(new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
-	if(node1)
+	if (node1)
 		node1.update_underlays()
-	if(node2)
+	if (node2)
 		node2.update_underlays()
-	if(node3)
+	if (node3)
 		node3.update_underlays()
 
 /obj/machinery/atmospherics/pipe/manifold/on_update_icon(safety = 0)
-	if(!atmos_initalized)
+	if (!atmos_initalized)
 		return
-	if(!check_icon_cache())
+	if (!check_icon_cache())
 		return
 
 	set_leaking(!(node1 && node2 && node3))
 	alpha = 255
 
-	if(!node1 && !node2 && !node3)
+	if (!node1 && !node2 && !node3)
 		var/turf/T = get_turf(src)
 		new /obj/item/pipe(loc, src)
 		for (var/obj/machinery/meter/meter in T)
@@ -548,9 +548,9 @@
 	var/connect_directions = (NORTH|SOUTH|EAST|WEST)&(~dir)
 
 	for(var/direction in GLOB.cardinal)
-		if(direction&connect_directions)
+		if (direction&connect_directions)
 			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
-				if(target.initialize_directions & get_dir(target,src))
+				if (target.initialize_directions & get_dir(target,src))
 					if (check_connect_types(target,src))
 						node1 = target
 						connect_directions &= ~direction
@@ -560,9 +560,9 @@
 
 
 	for(var/direction in GLOB.cardinal)
-		if(direction&connect_directions)
+		if (direction&connect_directions)
 			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
-				if(target.initialize_directions & get_dir(target,src))
+				if (target.initialize_directions & get_dir(target,src))
 					if (check_connect_types(target,src))
 						node2 = target
 						connect_directions &= ~direction
@@ -572,9 +572,9 @@
 
 
 	for(var/direction in GLOB.cardinal)
-		if(direction&connect_directions)
+		if (direction&connect_directions)
 			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
-				if(target.initialize_directions & get_dir(target,src))
+				if (target.initialize_directions & get_dir(target,src))
 					if (check_connect_types(target,src))
 						node3 = target
 						connect_directions &= ~direction
@@ -582,12 +582,12 @@
 			if (node3)
 				break
 
-	if(!node1 && !node2 && !node3)
+	if (!node1 && !node2 && !node3)
 		qdel(src)
 		return
 
 	var/turf/T = get_turf(src)
-	if(level == ATOM_LEVEL_UNDER_TILE && !T.is_plating()) hide(1)
+	if (level == ATOM_LEVEL_UNDER_TILE && !T.is_plating()) hide(1)
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/manifold/visible
@@ -704,45 +704,45 @@
 	return list(node1, node2, node3, node4)
 
 /obj/machinery/atmospherics/pipe/manifold4w/Process()
-	if(!parent)
+	if (!parent)
 		..()
 	else
 		. = PROCESS_KILL
 
 /obj/machinery/atmospherics/pipe/manifold4w/Destroy()
-	if(node1)
+	if (node1)
 		node1.disconnect(src)
 		node1 = null
-	if(node2)
+	if (node2)
 		node2.disconnect(src)
 		node2 = null
-	if(node3)
+	if (node3)
 		node3.disconnect(src)
 		node3 = null
-	if(node4)
+	if (node4)
 		node4.disconnect(src)
 		node4 = null
 
 	. = ..()
 
 /obj/machinery/atmospherics/pipe/manifold4w/disconnect(obj/machinery/atmospherics/reference)
-	if(reference == node1)
-		if(istype(node1, /obj/machinery/atmospherics/pipe))
+	if (reference == node1)
+		if (istype(node1, /obj/machinery/atmospherics/pipe))
 			qdel(parent)
 		node1 = null
 
-	if(reference == node2)
-		if(istype(node2, /obj/machinery/atmospherics/pipe))
+	if (reference == node2)
+		if (istype(node2, /obj/machinery/atmospherics/pipe))
 			qdel(parent)
 		node2 = null
 
-	if(reference == node3)
-		if(istype(node3, /obj/machinery/atmospherics/pipe))
+	if (reference == node3)
+		if (istype(node3, /obj/machinery/atmospherics/pipe))
 			qdel(parent)
 		node3 = null
 
-	if(reference == node4)
-		if(istype(node4, /obj/machinery/atmospherics/pipe))
+	if (reference == node4)
+		if (istype(node4, /obj/machinery/atmospherics/pipe))
 			qdel(parent)
 		node4 = null
 
@@ -753,25 +753,25 @@
 /obj/machinery/atmospherics/pipe/manifold4w/set_color(new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
-	if(node1)
+	if (node1)
 		node1.update_underlays()
-	if(node2)
+	if (node2)
 		node2.update_underlays()
-	if(node3)
+	if (node3)
 		node3.update_underlays()
-	if(node4)
+	if (node4)
 		node4.update_underlays()
 
 /obj/machinery/atmospherics/pipe/manifold4w/on_update_icon(safety = 0)
-	if(!atmos_initalized)
+	if (!atmos_initalized)
 		return
-	if(!check_icon_cache())
+	if (!check_icon_cache())
 		return
 
 	set_leaking(!(node1 && node2 && node3 && node4))
 	alpha = 255
 
-	if(!node1 && !node2 && !node3 && !node4)
+	if (!node1 && !node2 && !node3 && !node4)
 		var/turf/T = get_turf(src)
 		new /obj/item/pipe(loc, src)
 		for (var/obj/machinery/meter/meter in T)
@@ -820,42 +820,42 @@
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/manifold4w/hide(i)
-	if(istype(loc, /turf/simulated))
+	if (istype(loc, /turf/simulated))
 		set_invisibility(i ? INVISIBILITY_ABSTRACT : 0)
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/manifold4w/atmos_init()
 	..()
 	for(var/obj/machinery/atmospherics/target in get_step(src,1))
-		if(target.initialize_directions & 2)
+		if (target.initialize_directions & 2)
 			if (check_connect_types(target,src))
 				node1 = target
 				break
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,2))
-		if(target.initialize_directions & 1)
+		if (target.initialize_directions & 1)
 			if (check_connect_types(target,src))
 				node2 = target
 				break
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,4))
-		if(target.initialize_directions & 8)
+		if (target.initialize_directions & 8)
 			if (check_connect_types(target,src))
 				node3 = target
 				break
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,8))
-		if(target.initialize_directions & 4)
+		if (target.initialize_directions & 4)
 			if (check_connect_types(target,src))
 				node4 = target
 				break
 
-	if(!node1 && !node2 && !node3 && !node4)
+	if (!node1 && !node2 && !node3 && !node4)
 		qdel(src)
 		return
 
 	var/turf/T = get_turf(src)
-	if(level == ATOM_LEVEL_UNDER_TILE && !T.is_plating()) hide(1)
+	if (level == ATOM_LEVEL_UNDER_TILE && !T.is_plating()) hide(1)
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/manifold4w/visible
@@ -959,7 +959,7 @@
 	var/obj/machinery/atmospherics/node
 
 /obj/machinery/atmospherics/pipe/cap/hide(i)
-	if(istype(loc, /turf/simulated))
+	if (istype(loc, /turf/simulated))
 		set_invisibility(i ? INVISIBILITY_ABSTRACT : 0)
 	update_icon()
 
@@ -967,19 +967,19 @@
 	return list(node)
 
 /obj/machinery/atmospherics/pipe/cap/Process()
-	if(!parent)
+	if (!parent)
 		..()
 	else
 		. = PROCESS_KILL
 /obj/machinery/atmospherics/pipe/cap/Destroy()
-	if(node)
+	if (node)
 		node.disconnect(src)
 
 	. = ..()
 
 /obj/machinery/atmospherics/pipe/cap/disconnect(obj/machinery/atmospherics/reference)
-	if(reference == node)
-		if(istype(node, /obj/machinery/atmospherics/pipe))
+	if (reference == node)
+		if (istype(node, /obj/machinery/atmospherics/pipe))
 			qdel(parent)
 		node = null
 
@@ -990,11 +990,11 @@
 /obj/machinery/atmospherics/pipe/cap/set_color(new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
-	if(node)
+	if (node)
 		node.update_underlays()
 
 /obj/machinery/atmospherics/pipe/cap/on_update_icon(safety = 0)
-	if(!check_icon_cache())
+	if (!check_icon_cache())
 		return
 
 	alpha = 255
@@ -1005,13 +1005,13 @@
 /obj/machinery/atmospherics/pipe/cap/atmos_init()
 	..()
 	for(var/obj/machinery/atmospherics/target in get_step(src, dir))
-		if(target.initialize_directions & get_dir(target,src))
+		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node = target
 				break
 
 	var/turf/T = src.loc			// hide if turf is not intact
-	if(level == ATOM_LEVEL_UNDER_TILE && !T.is_plating()) hide(1)
+	if (level == ATOM_LEVEL_UNDER_TILE && !T.is_plating()) hide(1)
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/cap/visible
@@ -1088,8 +1088,8 @@
 	volume = 1000
 
 /obj/machinery/atmospherics/pipe/vent/Process()
-	if(!parent)
-		if(build_killswitch <= 0)
+	if (!parent)
+		if (build_killswitch <= 0)
 			. = PROCESS_KILL
 		else
 			build_killswitch--
@@ -1099,7 +1099,7 @@
 		parent.mingle_with_turf(loc, volume)
 
 /obj/machinery/atmospherics/pipe/vent/Destroy()
-	if(node1)
+	if (node1)
 		node1.disconnect(src)
 
 	. = ..()
@@ -1108,7 +1108,7 @@
 	return list(node1)
 
 /obj/machinery/atmospherics/pipe/vent/on_update_icon()
-	if(node1)
+	if (node1)
 		icon_state = "intact"
 
 		set_dir(get_dir(src, node1))
@@ -1121,7 +1121,7 @@
 	var/connect_direction = dir
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,connect_direction))
-		if(target.initialize_directions & get_dir(target,src))
+		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node1 = target
 				break
@@ -1129,8 +1129,8 @@
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/vent/disconnect(obj/machinery/atmospherics/reference)
-	if(reference == node1)
-		if(istype(node1, /obj/machinery/atmospherics/pipe))
+	if (reference == node1)
+		if (istype(node1, /obj/machinery/atmospherics/pipe))
 			qdel(parent)
 		node1 = null
 
@@ -1139,7 +1139,7 @@
 	return null
 
 /obj/machinery/atmospherics/pipe/vent/hide(i) //to make the little pipe section invisible, the icon changes.
-	if(node1)
+	if (node1)
 		icon_state = "[i == 1 && istype(loc, /turf/simulated) ? "h" : "" ]intact"
 		set_dir(get_dir(src, node1))
 	else
@@ -1154,7 +1154,7 @@
 	build_icon_state = "universal"
 
 /obj/machinery/atmospherics/pipe/simple/visible/universal/on_update_icon(safety = 0)
-	if(!check_icon_cache())
+	if (!check_icon_cache())
 		return
 
 	alpha = 255
@@ -1165,7 +1165,7 @@
 
 	if (node1)
 		universal_underlays(node1)
-		if(node2)
+		if (node2)
 			universal_underlays(node2)
 		else
 			var/node1_dir = get_dir(node1,src)
@@ -1189,7 +1189,7 @@
 	icon_state = "map_universal"
 
 /obj/machinery/atmospherics/pipe/simple/hidden/universal/on_update_icon(safety = 0)
-	if(!check_icon_cache())
+	if (!check_icon_cache())
 		return
 
 	alpha = 255
@@ -1200,7 +1200,7 @@
 
 	if (node1)
 		universal_underlays(node1)
-		if(node2)
+		if (node2)
 			universal_underlays(node2)
 		else
 			var/node2_dir = turn(get_dir(src,node1),-180)
@@ -1219,9 +1219,9 @@
 
 /obj/machinery/atmospherics/proc/universal_underlays(obj/machinery/atmospherics/node, direction)
 	var/turf/T = loc
-	if(node)
+	if (node)
 		var/node_dir = get_dir(src,node)
-		if(node.icon_connect_type == "-supply")
+		if (node.icon_connect_type == "-supply")
 			add_underlay_adapter(T, , node_dir, "")
 			add_underlay_adapter(T, node, node_dir, "-supply")
 			add_underlay_adapter(T, , node_dir, "-scrubbers")
@@ -1239,8 +1239,8 @@
 		add_underlay_adapter(T, , direction, "")
 
 /obj/machinery/atmospherics/proc/add_underlay_adapter(turf/T, obj/machinery/atmospherics/node, direction, icon_connect_type) //modified from add_underlay, does not make exposed underlays
-	if(node)
-		if(!T.is_plating() && node.level == ATOM_LEVEL_UNDER_TILE && istype(node, /obj/machinery/atmospherics/pipe))
+	if (node)
+		if (!T.is_plating() && node.level == ATOM_LEVEL_UNDER_TILE && istype(node, /obj/machinery/atmospherics/pipe))
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "down" + icon_connect_type)
 		else
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "intact" + icon_connect_type)

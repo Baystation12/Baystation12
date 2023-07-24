@@ -25,7 +25,7 @@
 //Used for preprocessing entered text
 //Added in an additional check to alert players if input is too long
 /proc/sanitize(input, max_length = MAX_MESSAGE_LEN, encode = 1, trim = 1, extra = 1)
-	if(!input)
+	if (!input)
 		return
 
 	if (max_length)
@@ -35,10 +35,10 @@
 			return
 		input = copytext_char(input, 1, max_length + 1)
 
-	if(extra)
+	if (extra)
 		input = replace_characters(input, list("\n"=" ","\t"=" "))
 
-	if(encode)
+	if (encode)
 		// The below \ escapes have a space inserted to attempt to enable unit testing of span class usage. Please do not remove the space.
 		//In addition to processing html, html_encode removes byond formatting codes like "\ red", "\ i" and other.
 		//It is important to avoid double-encode text, it can "break" quotes and some other characters.
@@ -49,7 +49,7 @@
 		//note: we can also remove here byond formatting codes: 0xFF + next byte
 		input = replace_characters(input, list("<"=" ", ">"=" "))
 
-	if(trim)
+	if (trim)
 		//Maybe, we need trim text twice? Here and before copytext?
 		input = trimtext(input)
 
@@ -64,7 +64,7 @@
 
 //Filters out undesirable characters from names
 /proc/sanitizeName(input, max_length = MAX_NAME_LEN, allow_numbers = 0, force_first_letter_uppercase = TRUE)
-	if(!input || length(input) > max_length)
+	if (!input || length(input) > max_length)
 		return //Rejects the input if it is null or if it is longer then the max length allowed
 
 	var/number_of_alphanumeric	= 0
@@ -75,14 +75,14 @@
 		var/ascii_char = text2ascii(input,i)
 		switch(ascii_char)
 			// A  .. Z
-			if(65 to 90)			//Uppercase Letters
+			if (65 to 90)			//Uppercase Letters
 				output += ascii2text(ascii_char)
 				number_of_alphanumeric++
 				last_char_group = 4
 
 			// a  .. z
-			if(97 to 122)			//Lowercase Letters
-				if(last_char_group<2 && force_first_letter_uppercase)
+			if (97 to 122)			//Lowercase Letters
+				if (last_char_group<2 && force_first_letter_uppercase)
 					output += ascii2text(ascii_char-32)	//Force uppercase first character
 				else
 					output += ascii2text(ascii_char)
@@ -90,82 +90,82 @@
 				last_char_group = 4
 
 			// 0  .. 9
-			if(48 to 57)			//Numbers
-				if(!last_char_group)		continue	//suppress at start of string
-				if(!allow_numbers)			continue
+			if (48 to 57)			//Numbers
+				if (!last_char_group)		continue	//suppress at start of string
+				if (!allow_numbers)			continue
 				output += ascii2text(ascii_char)
 				number_of_alphanumeric++
 				last_char_group = 3
 
 			// '  -  .
-			if(39,45,46)			//Common name punctuation
-				if(!last_char_group) continue
+			if (39,45,46)			//Common name punctuation
+				if (!last_char_group) continue
 				output += ascii2text(ascii_char)
 				last_char_group = 2
 
 			// ~   |   @  :  #  $  %  &  *  +
-			if(126,124,64,58,35,36,37,38,42,43)			//Other symbols that we'll allow (mainly for AI)
-				if(!last_char_group)		continue	//suppress at start of string
-				if(!allow_numbers)			continue
+			if (126,124,64,58,35,36,37,38,42,43)			//Other symbols that we'll allow (mainly for AI)
+				if (!last_char_group)		continue	//suppress at start of string
+				if (!allow_numbers)			continue
 				output += ascii2text(ascii_char)
 				last_char_group = 2
 
 			//Space
-			if(32)
-				if(last_char_group <= 1)	continue	//suppress double-spaces and spaces at start of string
+			if (32)
+				if (last_char_group <= 1)	continue	//suppress double-spaces and spaces at start of string
 				output += ascii2text(ascii_char)
 				last_char_group = 1
 			else
 				return
 
-	if(number_of_alphanumeric < 2)	return		//protects against tiny names like "A" and also names like "' ' ' ' ' ' ' '"
+	if (number_of_alphanumeric < 2)	return		//protects against tiny names like "A" and also names like "' ' ' ' ' ' ' '"
 
-	if(last_char_group == 1)
+	if (last_char_group == 1)
 		output = copytext(output,1,length(output))	//removes the last character (in this case a space)
 
 	for(var/bad_name in list("space","floor","wall","r-wall","monkey","unknown","inactive ai","plating"))	//prevents these common metagamey names
-		if(cmptext(output,bad_name))	return	//(not case sensitive)
+		if (cmptext(output,bad_name))	return	//(not case sensitive)
 
 	return output
 
 //Used to strip text of everything but letters and numbers, make letters lowercase, and turn spaces into .'s.
 //Make sure the text hasn't been encoded if using this.
 /proc/sanitize_for_email(text)
-	if(!text) return ""
+	if (!text) return ""
 	var/list/dat = list()
 	var/last_was_space = 1
 	for(var/i=1, i<=length(text), i++)
 		var/ascii_char = text2ascii(text,i)
 		switch(ascii_char)
-			if(65 to 90)	//A-Z, make them lowercase
+			if (65 to 90)	//A-Z, make them lowercase
 				dat += ascii2text(ascii_char + 32)
-			if(97 to 122)	//a-z
+			if (97 to 122)	//a-z
 				dat += ascii2text(ascii_char)
 				last_was_space = 0
-			if(48 to 57)	//0-9
+			if (48 to 57)	//0-9
 				dat += ascii2text(ascii_char)
 				last_was_space = 0
-			if(32, 46)	//space or .
-				if(last_was_space)
+			if (32, 46)	//space or .
+				if (last_was_space)
 					continue
 				dat += "."		//We turn these into ., but avoid repeats or . at start.
 				last_was_space = 1
-	if(dat[length(dat)] == ".")	//kill trailing .
+	if (dat[length(dat)] == ".")	//kill trailing .
 		dat.Cut(length(dat))
 	return jointext(dat, null)
 
 //Returns null if there is any bad text in the string
 /proc/reject_bad_text(text, max_length=512)
-	if(length(text) > max_length)	return			//message too long
+	if (length(text) > max_length)	return			//message too long
 	var/non_whitespace = 0
 	for(var/i=1, i<=length(text), i++)
 		switch(text2ascii(text,i))
-			if(62,60,92,47)	return			//rejects the text if it contains these bad characters: <, >, \ or /
-			if(127 to 255)	return			//rejects non-ASCII letters
-			if(0 to 31)		return			//more weird stuff
-			if(32)			continue		//whitespace
+			if (62,60,92,47)	return			//rejects the text if it contains these bad characters: <, >, \ or /
+			if (127 to 255)	return			//rejects non-ASCII letters
+			if (0 to 31)		return			//more weird stuff
+			if (32)			continue		//whitespace
 			else			non_whitespace = 1
-	if(non_whitespace)		return text		//only accepts the text if it has some non-spaces
+	if (non_whitespace)		return text		//only accepts the text if it has some non-spaces
 
 
 //Old variant. Haven't dared to replace in some places.
@@ -194,7 +194,7 @@
 //Returns the position of the substring or 0 if it was not found
 /proc/dd_hassuffix(text, suffix)
 	var/start = length(text) - length(suffix)
-	if(start)
+	if (start)
 		return findtext(text, suffix, start, null)
 	return
 
@@ -202,7 +202,7 @@
 //Returns the position of the substring or 0 if it was not found
 /proc/dd_hassuffix_case(text, suffix)
 	var/start = length(text) - length(suffix)
-	if(start)
+	if (start)
 		return findtextEx(text, suffix, start, null)
 
 /*
@@ -276,20 +276,20 @@
 //This proc strips html properly, remove < > and all text between
 //for complete text sanitizing should be used sanitize()
 /proc/strip_html_properly(input)
-	if(!input)
+	if (!input)
 		return
 	var/opentag = 1 //These store the position of < and > respectively.
 	var/closetag = 1
 	while(1)
 		opentag = findtext(input, "<")
 		closetag = findtext(input, ">")
-		if(closetag && opentag)
-			if(closetag < opentag)
+		if (closetag && opentag)
+			if (closetag < opentag)
 				input = copytext(input, (closetag + 1))
 			else
 				input = copytext(input, 1, opentag) + copytext(input, (closetag + 1))
-		else if(closetag || opentag)
-			if(opentag)
+		else if (closetag || opentag)
+			if (opentag)
 				input = copytext(input, 1, opentag)
 			else
 				input = copytext(input, (closetag + 1))
@@ -303,17 +303,17 @@
 //This is used for fingerprints
 /proc/stringmerge(text,compare,replace = "*")
 	var/newtext = text
-	if(length(text) != length(compare))
+	if (length(text) != length(compare))
 		return 0
 	for(var/i = 1, i < length(text), i++)
 		var/a = copytext(text,i,i+1)
 		var/b = copytext(compare,i,i+1)
 		//if it isn't both the same letter, or if they are both the replacement character
 		//(no way to know what it was supposed to be)
-		if(a != b)
-			if(a == replace) //if A is the replacement char
+		if (a != b)
+			if (a == replace) //if A is the replacement char
 				newtext = copytext(newtext,1,i) + b + copytext(newtext, i+1)
-			else if(b == replace) //if B is the replacement char
+			else if (b == replace) //if B is the replacement char
 				newtext = copytext(newtext,1,i) + a + copytext(newtext, i+1)
 			else //The lists disagree, Uh-oh!
 				return 0
@@ -322,12 +322,12 @@
 //This proc returns the number of chars of the string that is the character
 //This is used for detective work to determine fingerprint completion.
 /proc/stringpercent(text,character = "*")
-	if(!text || !character)
+	if (!text || !character)
 		return 0
 	var/count = 0
 	for(var/i = 1, i <= length(text), i++)
 		var/a = copytext(text,i,i+1)
-		if(a == character)
+		if (a == character)
 			count++
 	return count
 
@@ -339,8 +339,8 @@
 //Used in preferences' SetFlavorText and human's set_flavor verb
 //Previews a string of len or less length
 /proc/TextPreview(string,len=40)
-	if(length(string) <= len)
-		if(!length(string))
+	if (length(string) <= len)
+		if (!length(string))
 			return "\[...\]"
 		else
 			return string
@@ -352,7 +352,7 @@
 	return html_encode(copytext(html_decode(text), first, last))
 
 /proc/create_text_tag(tagname, tagdesc = tagname, client/C = null)
-	if(!(C && C.get_preference_value(/datum/client_preference/chat_tags) == GLOB.PREF_SHOW))
+	if (!(C && C.get_preference_value(/datum/client_preference/chat_tags) == GLOB.PREF_SHOW))
 		return tagdesc
 	return icon2html(icon('./icons/chattags.dmi', tagname), world, realsize=TRUE, class="text_tag")
 
@@ -361,14 +361,14 @@
 		var/ascii_char = text2ascii(input,i)
 		switch(ascii_char)
 			// A  .. Z
-			if(65 to 90)			//Uppercase Letters
+			if (65 to 90)			//Uppercase Letters
 				return 1
 			// a  .. z
-			if(97 to 122)			//Lowercase Letters
+			if (97 to 122)			//Lowercase Letters
 				return 1
 
 			// 0  .. 9
-			if(48 to 57)			//Numbers
+			if (48 to 57)			//Numbers
 				return 1
 	return 0
 
@@ -510,16 +510,16 @@
 //Used for applying byonds text macros to strings that are loaded at runtime
 /proc/apply_text_macros(string)
 	var/next_backslash = findtext(string, "\\")
-	if(!next_backslash)
+	if (!next_backslash)
 		return string
 
 	var/leng = length(string)
 
 	var/next_space = findtext(string, " ", next_backslash + 1)
-	if(!next_space)
+	if (!next_space)
 		next_space = leng - next_backslash
 
-	if(!next_space)	//trailing bs
+	if (!next_space)	//trailing bs
 		return string
 
 	var/base = next_backslash == 1 ? "" : copytext(string, 1, next_backslash)
@@ -529,38 +529,38 @@
 	//See http://www.byond.com/docs/ref/info.html#/DM/text/macros
 	switch(macro)
 		//prefixes/agnostic
-		if("the")
+		if ("the")
 			rest = text("\the []", rest)
-		if("a")
+		if ("a")
 			rest = text("\a []", rest)
-		if("an")
+		if ("an")
 			rest = text("\an []", rest)
-		if("proper")
+		if ("proper")
 			rest = text("\proper []", rest)
-		if("improper")
+		if ("improper")
 			rest = text("\improper []", rest)
-		if("roman")
+		if ("roman")
 			rest = text("\roman []", rest)
 		//postfixes
-		if("th")
+		if ("th")
 			base = text("[]\th", rest)
-		if("s")
+		if ("s")
 			base = text("[]\s", rest)
-		if("he")
+		if ("he")
 			base = text("[]\he", rest)
-		if("she")
+		if ("she")
 			base = text("[]\she", rest)
-		if("his")
+		if ("his")
 			base = text("[]\his", rest)
-		if("himself")
+		if ("himself")
 			base = text("[]\himself", rest)
-		if("herself")
+		if ("herself")
 			base = text("[]\herself", rest)
-		if("hers")
+		if ("hers")
 			base = text("[]\hers", rest)
 
 	. = base
-	if(rest)
+	if (rest)
 		. += .(rest)
 
 /proc/deep_string_equals(A, B)
@@ -635,37 +635,37 @@
 	var/degree = Get_Angle(A, B)
 /// % appears to round down floats, hence below values all being integers
 	switch(round(degree, 22.5) % 360)
-		if(0)
+		if (0)
 			return "North"
-		if(22)
+		if (22)
 			return "North-Northeast"
-		if(45)
+		if (45)
 			return "Northeast"
-		if(67)
+		if (67)
 			return "East-Northeast"
-		if(90)
+		if (90)
 			return "East"
-		if(112)
+		if (112)
 			return "East-Southeast"
-		if(135)
+		if (135)
 			return "Southeast"
-		if(157)
+		if (157)
 			return "South-Southeast"
-		if(180)
+		if (180)
 			return "South"
-		if(202)
+		if (202)
 			return "South-Southwest"
-		if(225)
+		if (225)
 			return "Southwest"
-		if(247)
+		if (247)
 			return "West-Southwest"
-		if(270)
+		if (270)
 			return "West"
-		if(292)
+		if (292)
 			return "West-Northwest"
-		if(315)
+		if (315)
 			return "Northwest"
-		if(337)
+		if (337)
 			return "North-Northwest"
 
 

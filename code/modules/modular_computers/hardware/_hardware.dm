@@ -26,27 +26,27 @@
 
 /obj/item/stock_parts/computer/attackby(obj/item/W as obj, mob/living/user as mob)
 	// Multitool. Runs diagnostics
-	if(isMultitool(W))
+	if (isMultitool(W))
 		to_chat(user, "***** DIAGNOSTICS REPORT *****")
 		to_chat(user, jointext(diagnostics(), "\n"))
 		to_chat(user, "******************************")
 		return TRUE
 	// Nanopaste. Repair all damage if present for a single unit.
 	var/obj/item/stack/S = W
-	if(istype(S, /obj/item/stack/nanopaste))
-		if(!health_damaged())
+	if (istype(S, /obj/item/stack/nanopaste))
+		if (!health_damaged())
 			to_chat(user, "\The [src] doesn't seem to require repairs.")
 			return TRUE
-		if(S.use(1))
+		if (S.use(1))
 			to_chat(user, "You apply a bit of \the [W] to \the [src]. It immediately repairs all damage.")
 			revive_health()
 		return TRUE
 	// Cable coil. Works as repair method, but will probably require multiple applications and more cable.
-	if(isCoil(S))
-		if(!health_damaged())
+	if (isCoil(S))
+		if (!health_damaged())
 			to_chat(user, "\The [src] doesn't seem to require repairs.")
 			return TRUE
-		if(S.use(1))
+		if (S.use(1))
 			to_chat(user, "You patch up \the [src] with a bit of \the [W].")
 			restore_health(10)
 		return TRUE
@@ -62,7 +62,7 @@
 	w_class = hardware_size
 
 /obj/item/stock_parts/computer/Destroy()
-	if(istype(loc, /obj/item/modular_computer))
+	if (istype(loc, /obj/item/modular_computer))
 		var/obj/item/modular_computer/C = loc
 		C.uninstall_component(null, src)
 	return ..()
@@ -70,13 +70,13 @@
 /// Handles damage checks
 /obj/item/stock_parts/computer/proc/check_functionality()
 	// Turned off
-	if(!enabled)
+	if (!enabled)
 		return FALSE
 	// Too damaged to work at all.
-	if(is_failing())
+	if (is_failing())
 		return FALSE
 	// Still working. Well, sometimes...
-	if(malfunction_check())
+	if (malfunction_check())
 		return FALSE
 	// Good to go.
 	return TRUE
@@ -129,5 +129,5 @@
 
 /obj/item/stock_parts/computer/proc/update_power_usage()
 	var/datum/extension/interactive/ntos/os = get_extension(loc, /datum/extension/interactive/ntos)
-	if(os)
+	if (os)
 		os.recalc_power_usage()

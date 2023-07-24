@@ -22,7 +22,7 @@
 	var/temp = ""				// temporary feedback messages
 
 /obj/machinery/computer/telecomms/monitor/attack_hand(mob/user as mob)
-	if(inoperable())
+	if (inoperable())
 		return
 	user.set_machine(src)
 	var/list/dat = list()
@@ -33,10 +33,10 @@
 
 		// --- Main Menu ---
 
-		if(0)
+		if (0)
 			dat += "<br>[temp]<br><br>"
 			dat += "<br>Current Network: <a href='?src=\ref[src];network=1'>[network]</a><br>"
-			if(length(machinelist))
+			if (length(machinelist))
 				dat += "<br>Detected Network Entities:<ul>"
 				for(var/obj/machinery/telecomms/T in machinelist)
 					dat += "<li><a href='?src=\ref[src];viewmachine=[T.id]'>\ref[T] [T.name]</a> ([T.id])</li>"
@@ -48,14 +48,14 @@
 
 		// --- Viewing Machine ---
 
-		if(1)
+		if (1)
 			dat += "<br>[temp]<br>"
 			dat += "<center><a href='?src=\ref[src];operation=mainmenu'>\[Main Menu\]</a></center>"
 			dat += "<br>Current Network: [network]<br>"
 			dat += "Selected Network Entity: [SelectedMachine.name] ([SelectedMachine.id])<br>"
 			dat += "Linked Entities: <ol>"
 			for(var/obj/machinery/telecomms/T in SelectedMachine.links)
-				if(!T.hide)
+				if (!T.hide)
 					dat += "<li><a href='?src=\ref[src];viewmachine=[T.id]'>\ref[T.id] [T.name]</a> ([T.id])</li>"
 			dat += "</ol>"
 
@@ -69,38 +69,38 @@
 
 
 /obj/machinery/computer/telecomms/monitor/Topic(href, href_list)
-	if(..())
+	if (..())
 		return
 
 	usr.set_machine(src)
 
-	if(href_list["viewmachine"])
+	if (href_list["viewmachine"])
 		screen = 1
 		for(var/obj/machinery/telecomms/T in machinelist)
-			if(T.id == href_list["viewmachine"])
+			if (T.id == href_list["viewmachine"])
 				SelectedMachine = T
 				break
 
-	if(href_list["operation"])
+	if (href_list["operation"])
 		switch(href_list["operation"])
 
-			if("release")
+			if ("release")
 				machinelist = list()
 				screen = 0
 
-			if("mainmenu")
+			if ("mainmenu")
 				screen = 0
 
-			if("probe")
-				if(length(machinelist) > 0)
+			if ("probe")
+				if (length(machinelist) > 0)
 					temp = SPAN_COLOR("#d70b00", "- FAILED: CANNOT PROBE WHEN BUFFER FULL -")
 
 				else
 					for(var/obj/machinery/telecomms/T in range(25, src))
-						if(T.network == network)
+						if (T.network == network)
 							machinelist.Add(T)
 
-					if(!length(machinelist))
+					if (!length(machinelist))
 						temp = SPAN_COLOR("#d70b00", "- FAILED: UNABLE TO LOCATE NETWORK ENTITIES IN \[[network]\] -")
 					else
 						temp = SPAN_COLOR("#336699", "- [length(machinelist)] ENTITIES LOCATED & BUFFERED -")
@@ -108,11 +108,11 @@
 					screen = 0
 
 
-	if(href_list["network"])
+	if (href_list["network"])
 
 		var/newnet = input(usr, "Which network do you want to view?", "Comm Monitor", network) as null|text
-		if(newnet && ((usr in range(1, src) || issilicon(usr))))
-			if(length(newnet) > 15)
+		if (newnet && ((usr in range(1, src) || issilicon(usr))))
+			if (length(newnet) > 15)
 				temp = SPAN_COLOR("#d70b00", "- FAILED: NETWORK TAG STRING TOO LENGHTLY -")
 
 			else
@@ -125,7 +125,7 @@
 	return
 
 /obj/machinery/computer/telecomms/monitor/emag_act(remaining_charges, mob/user)
-	if(!emagged)
+	if (!emagged)
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = TRUE
 		req_access.Cut()

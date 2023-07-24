@@ -24,11 +24,11 @@
 
 //Expected to be run immediately after creation; a false return means that the vote could not be run and the datum will be deleted.
 /datum/vote/proc/setup(mob/creator, automatic)
-	if(!can_run(creator, automatic))
+	if (!can_run(creator, automatic))
 		qdel(src)
 		return FALSE
 	setup_vote(creator, automatic)
-	if(!can_run(creator, automatic))
+	if (!can_run(creator, automatic))
 		qdel(src)
 		return FALSE
 	start_vote()
@@ -60,7 +60,7 @@
 
 //Modifies the vote totals based on non-voting mobs.
 /datum/vote/proc/handle_default_votes()
-	if(!config.vote_no_default)
+	if (!config.vote_no_default)
 		return length(GLOB.clients) - length(votes) //Number of non-voters (might not be active, though; should be revisited if the config option is used. This is legacy code.)
 
 /datum/vote/proc/tally_result()
@@ -72,12 +72,12 @@
 	while(length(result) < result_length)
 		remaining_choices = shuffle(remaining_choices)
 		sortTim(remaining_choices, /proc/cmp_numeric_dsc, TRUE)
-		if(!length(remaining_votes) || !length(remaining_choices))  // we ran out of options or votes, you get what we have
+		if (!length(remaining_votes) || !length(remaining_choices))  // we ran out of options or votes, you get what we have
 			result += remaining_choices.Copy(1, clamp(result_length - length(result) + 1, 0, length(remaining_choices) + 1))
 			break
 		else
 			// 50% majority or we don't have enough candidates to be picky, declare the winner and remove it from the possible candidates
-			if(remaining_choices[remaining_choices[1]] > length(remaining_votes) / 2 || length(remaining_choices) <= result_length - length(result))
+			if (remaining_choices[remaining_choices[1]] > length(remaining_votes) / 2 || length(remaining_choices) <= result_length - length(result))
 				var/winner = remaining_choices[1]
 				result[winner] = remaining_choices[remaining_choices[1]]
 				remove_candidate(remaining_choices, remaining_votes, winner)
@@ -90,17 +90,17 @@
 	var/candidate_index = choices.Find(candidate) // use choices instead of choice_list because we need the original indexing
 	choice_list -= candidate
 	for(var/ckey in vote_list)
-		if(length(votes[ckey]) && vote_list[ckey][1] == candidate_index && length(vote_list[ckey]) > 1)
+		if (length(votes[ckey]) && vote_list[ckey][1] == candidate_index && length(vote_list[ckey]) > 1)
 			var/new_first_choice = choices[vote_list[ckey][2]]
 			choice_list[new_first_choice] += 1
 		vote_list[ckey] -= candidate_index
 
-		if(!length(vote_list[ckey]))
+		if (!length(vote_list[ckey]))
 			vote_list -= ckey
 
 // Truthy return indicates that either no one votes or there was another error.
 /datum/vote/proc/report_result()
-	if(!length(result))
+	if (!length(result))
 		return 1
 
 	var/text = get_result_announcement()
@@ -112,16 +112,16 @@
 	for (var/client/C in GLOB.admins)
 		to_chat(C, SPAN_COLOR("purple", "[admin_text]"))
 
-	if(!(result[result[1]] > 0))
+	if (!(result[result[1]] > 0))
 		return 1
 
 /datum/vote/proc/get_result_announcement()
 	var/list/text = list()
-	if(!(result[result[1]] > 0)) // No one votes.
+	if (!(result[result[1]] > 0)) // No one votes.
 		text += "<b>Vote Result: Inconclusive - No Votes!</b>"
 	else
 		text += "<b>Vote Result: [display_choices[result[1]]]</b>"
-		if(result_length > 1)
+		if (result_length > 1)
 			text += "\nRunner ups: "
 			var/list/runner_ups = list()
 			for(var/runner_up in result.Copy(2))
@@ -153,27 +153,27 @@
 
 
 /datum/vote/proc/submit_vote(mob/voter, vote)
-	if(!mob_can_vote(voter))
+	if (!mob_can_vote(voter))
 		return
 
 	var/ckey = voter.ckey
-	if(!votes[ckey])
+	if (!votes[ckey])
 		votes[ckey] = list()
 
 	var/choice = choices[vote]
-	if(vote in votes[ckey])
-		if(votes[ckey][1] == vote)
+	if (vote in votes[ckey])
+		if (votes[ckey][1] == vote)
 			choices[choice] -= 1
-			if(length(votes[ckey]) > 1) // If the player has rescinded their first choice, their second choice is promoted to their first choice, if it exists.
+			if (length(votes[ckey]) > 1) // If the player has rescinded their first choice, their second choice is promoted to their first choice, if it exists.
 				var/new_choice = choices[votes[ckey][2]]
 				choices[new_choice] += 1  // Update the running tally to reflect that
 		votes[ckey] -= vote
 
-		if(!length(votes[ckey]))
+		if (!length(votes[ckey]))
 			votes -= ckey
 	else
 		votes[ckey] += vote
-		if(votes[ckey][1] == vote)
+		if (votes[ckey][1] == vote)
 			choices[choice] += 1
 
 
@@ -185,8 +185,8 @@
 
 //Will be run by the SS while the vote is running.
 /datum/vote/Process()
-	if(status == VOTE_STATUS_ACTIVE)
-		if(time_remaining > 0)
+	if (status == VOTE_STATUS_ACTIVE)
+		if (time_remaining > 0)
 			time_remaining = round((start_time + config.vote_period - world.time)/10)
 			return VOTE_PROCESS_ONGOING
 		else
@@ -196,10 +196,10 @@
 
 /datum/vote/proc/interface(mob/user)
 	. = list()
-	if(!mob_can_vote(user))
+	if (!mob_can_vote(user))
 		. += "<h2>You can't participate in this vote unless you're participating in the round.</h2><br>"
 		return
-	if(question)
+	if (question)
 		. += "<h2>Vote: '[question]'</h2>"
 	else
 		. += "<h2>Vote: [capitalize(name)]</h2>"
@@ -217,7 +217,7 @@
 		. += "</a></td>"
 
 		. += "<td style='text-align: center;'>"
-		if(voted_for)
+		if (voted_for)
 			var/list/vote = votes[user.ckey]
 			. += "[vote.Find(i)]"
 		. += "</td>"
@@ -229,14 +229,14 @@
 
 /datum/vote/Topic(href, href_list, hsrc)
 	var/mob/user = usr
-	if(!istype(user) || !user.client)
+	if (!istype(user) || !user.client)
 		return
 
-	if(!href_list["choice"])
+	if (!href_list["choice"])
 		return
 
 	var/choice = text2num(href_list["choice"])
-	if(!is_valid_index(choice, choices))
+	if (!is_valid_index(choice, choices))
 		return
 
 	submit_vote(user, choice)

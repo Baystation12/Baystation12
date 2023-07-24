@@ -81,7 +81,7 @@
 	// Sounds for mech_movement.dm and mech_interaction.dm are stored on legs.dm and arms.dm, respectively
 
 /mob/living/exosuit/MayZoom()
-	if(head?.vision_flags)
+	if (head?.vision_flags)
 		return FALSE
 	return TRUE
 
@@ -91,29 +91,29 @@
 /mob/living/exosuit/Initialize(mapload, obj/structure/heavy_vehicle_frame/source_frame)
 	. = ..()
 
-	if(!access_card) access_card = new (src)
+	if (!access_card) access_card = new (src)
 
 	pixel_x = default_pixel_x
 	pixel_y = default_pixel_y
 	sparks = new(src)
 
 	// Grab all the supplied components.
-	if(source_frame)
-		if(source_frame.set_name)
+	if (source_frame)
+		if (source_frame.set_name)
 			name = source_frame.set_name
-		if(source_frame.arms)
+		if (source_frame.arms)
 			source_frame.arms.forceMove(src)
 			arms = source_frame.arms
-		if(source_frame.legs)
+		if (source_frame.legs)
 			source_frame.legs.forceMove(src)
 			legs = source_frame.legs
-		if(source_frame.head)
+		if (source_frame.head)
 			source_frame.head.forceMove(src)
 			head = source_frame.head
-		if(source_frame.body)
+		if (source_frame.body)
 			source_frame.body.forceMove(src)
 			body = source_frame.body
-		if(source_frame.material)
+		if (source_frame.material)
 			material = source_frame.material
 
 	updatehealth()
@@ -121,16 +121,16 @@
 	// Generate hardpoint list.
 	var/list/component_descriptions
 	for(var/obj/item/mech_component/comp in list(arms, legs, head, body))
-		if(comp.exosuit_desc_string)
+		if (comp.exosuit_desc_string)
 			LAZYADD(component_descriptions, comp.exosuit_desc_string)
-		if(LAZYLEN(comp.has_hardpoints))
+		if (LAZYLEN(comp.has_hardpoints))
 			for(var/hardpoint in comp.has_hardpoints)
 				hardpoints[hardpoint] = null
 
-	if(head && head.radio)
+	if (head && head.radio)
 		radio = new(src)
 
-	if(LAZYLEN(component_descriptions))
+	if (LAZYLEN(component_descriptions))
 		desc = "[desc] It has been built with [english_list(component_descriptions)]."
 
 	// Create HUD.
@@ -180,11 +180,11 @@
 
 /mob/living/exosuit/examine(mob/user)
 	. = ..()
-	if(LAZYLEN(pilots) && (!hatch_closed || body.pilot_coverage < 100 || body.transparent_cabin))
+	if (LAZYLEN(pilots) && (!hatch_closed || body.pilot_coverage < 100 || body.transparent_cabin))
 		to_chat(user, "It is being piloted by [english_list(pilots, nothing_text = "nobody")].")
-	if(body && LAZYLEN(body.pilot_positions))
+	if (body && LAZYLEN(body.pilot_positions))
 		to_chat(user, "It can seat [length(body.pilot_positions)] pilot\s total.")
-	if(length(hardpoints))
+	if (length(hardpoints))
 		to_chat(user, "It has the following hardpoints:")
 		for(var/hardpoint in hardpoints)
 			var/obj/item/I = hardpoints[hardpoint]
@@ -193,7 +193,7 @@
 		to_chat(user, "It has no visible hardpoints.")
 
 	for(var/obj/item/mech_component/thing in list(arms, legs, head, body))
-		if(!thing)
+		if (!thing)
 			continue
 
 		var/damage_string = thing.get_damage_string()
@@ -209,20 +209,20 @@
 
 /mob/living/exosuit/set_dir()
 	. = ..()
-	if(.)
+	if (.)
 		update_pilots()
 
 /mob/living/exosuit/proc/toggle_power(mob/user)
-	if(power == MECH_POWER_TRANSITION)
+	if (power == MECH_POWER_TRANSITION)
 		to_chat(user, SPAN_NOTICE("Power transition in progress. Please wait."))
-	else if(power == MECH_POWER_ON) //Turning it off is instant
+	else if (power == MECH_POWER_ON) //Turning it off is instant
 		playsound(src, 'sound/mecha/mech-shutdown.ogg', 100, 0)
 		power = MECH_POWER_OFF
-	else if(get_cell(TRUE))
+	else if (get_cell(TRUE))
 		//Start power up sequence
 		power = MECH_POWER_TRANSITION
 		playsound(src, 'sound/mecha/powerup.ogg', 50, 0)
-		if(user.do_skilled(1.5 SECONDS, SKILL_MECH, src, 0.5, DO_DEFAULT | DO_USER_UNIQUE_ACT) && power == MECH_POWER_TRANSITION)
+		if (user.do_skilled(1.5 SECONDS, SKILL_MECH, src, 0.5, DO_DEFAULT | DO_USER_UNIQUE_ACT) && power == MECH_POWER_TRANSITION)
 			playsound(src, 'sound/mecha/nominal.ogg', 50, 0)
 			power = MECH_POWER_ON
 		else

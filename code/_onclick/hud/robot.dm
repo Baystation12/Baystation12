@@ -145,7 +145,7 @@ var/global/obj/screen/robot_inventory
 	mymob.client.screen += src.adding + src.other
 
 /datum/hud/proc/toggle_show_robot_modules()
-	if(!isrobot(mymob))
+	if (!isrobot(mymob))
 		return
 
 	var/mob/living/silicon/robot/r = mymob
@@ -155,26 +155,26 @@ var/global/obj/screen/robot_inventory
 
 
 /datum/hud/proc/update_robot_modules_display()
-	if(!mymob?.client || !isrobot(mymob))
+	if (!mymob?.client || !isrobot(mymob))
 		return
 
 	var/mob/living/silicon/robot/r = mymob
 
-	if(r.shown_robot_modules)
-		if(r.s_active)
+	if (r.shown_robot_modules)
+		if (r.s_active)
 			r.s_active.close(r) //Closes the inventory ui.
 		//Modules display is shown
 		//r.client.screen += robot_inventory	//"store" icon
 
-		if(!r.module)
+		if (!r.module)
 			to_chat(usr, SPAN_DANGER("No module selected"))
 			return
 
-		if(!r.module.equipment)
+		if (!r.module.equipment)
 			to_chat(usr, SPAN_DANGER("Selected module has no modules to select"))
 			return
 
-		if(!r.robot_modules_background)
+		if (!r.robot_modules_background)
 			return
 
 		var/display_rows = -round(-(length(r.module.equipment)) / 8)
@@ -187,25 +187,25 @@ var/global/obj/screen/robot_inventory
 		//Unfortunately adding the emag module to the list of modules has to be here. This is because a borg can
 		//be emagged before they actually select a module. - or some situation can cause them to get a new module
 		// - or some situation might cause them to get de-emagged or something.
-		if(r.emagged)
-			if(!(r.module.emag in r.module.equipment))
+		if (r.emagged)
+			if (!(r.module.emag in r.module.equipment))
 				r.module.equipment.Add(r.module.emag)
 		else
-			if(r.module.emag in r.module.equipment)
+			if (r.module.emag in r.module.equipment)
 				r.module.equipment.Remove(r.module.emag)
 
 		for(var/atom/movable/A in r.module.equipment)
 			if (!r.IsHolding(A))
 				//Module is not currently active
 				r.client.screen += A
-				if(x < 0)
+				if (x < 0)
 					A.screen_loc = "CENTER[x]:[WORLD_ICON_SIZE/2],SOUTH+[y]:7"
 				else
 					A.screen_loc = "CENTER+[x]:[WORLD_ICON_SIZE/2],SOUTH+[y]:7"
 				A.hud_layerise()
 
 				x++
-				if(x == 4)
+				if (x == 4)
 					x = -4
 					y++
 

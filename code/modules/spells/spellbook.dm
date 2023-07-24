@@ -38,7 +38,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 	set_spellbook(spellbook_type)
 
 /obj/item/spellbook/proc/set_spellbook(type)
-	if(spellbook)
+	if (spellbook)
 		qdel(spellbook)
 	spellbook = new type()
 	uses = spellbook.max_uses
@@ -46,7 +46,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 	desc = spellbook.desc
 
 /obj/item/spellbook/attack_self(mob/user as mob)
-	if(!user.mind)
+	if (!user.mind)
 		return
 	if (user.mind.special_role != ANTAG_WIZARD)
 		if (user.mind.special_role != ANTAG_APPRENTICE)
@@ -60,16 +60,16 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 	interact(user)
 
 /obj/item/spellbook/proc/make_sacrifice(obj/item/I as obj, mob/user as mob, reagent)
-	if(has_sacrificed)
+	if (has_sacrificed)
 		to_chat(user, SPAN_WARNING("\The [src] is already sated! Wait for a return on your investment before you sacrifice more to it."))
 		return
-	if(reagent)
+	if (reagent)
 		var/datum/reagents/R = I.reagents
 		R.remove_reagent(reagent,5)
 	else
-		if(istype(I,/obj/item/stack))
+		if (istype(I,/obj/item/stack))
 			var/obj/item/stack/S = I
-			if(S.amount < S.max_amount)
+			if (S.amount < S.max_amount)
 				to_chat(usr, SPAN_WARNING("You must sacrifice [S.max_amount] stacks of [S]!"))
 				return
 		qdel(I)
@@ -79,26 +79,26 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 
 
 /obj/item/spellbook/attackby(obj/item/I as obj, mob/user as mob)
-	if(investing_time)
+	if (investing_time)
 		var/list/objects = spellbook.sacrifice_objects
-		if(objects && length(objects))
+		if (objects && length(objects))
 			for(var/type in objects)
-				if(istype(I,type))
+				if (istype(I,type))
 					make_sacrifice(I,user)
 					return
-		if(I.reagents)
+		if (I.reagents)
 			var/datum/reagents/R = I.reagents
 			var/list/reagent_list = spellbook.sacrifice_reagents
-			if(reagent_list && length(reagent_list))
+			if (reagent_list && length(reagent_list))
 				for(var/id in reagent_list)
-					if(R.has_reagent(id,5))
+					if (R.has_reagent(id,5))
 						make_sacrifice(I,user, id)
 						return 1
 	..()
 
 /obj/item/spellbook/interact(mob/user as mob)
 	var/dat = null
-	if(temp)
+	if (temp)
 		dat = "[temp]<br><a href='byond://?src=\ref[src];temp=1'>Return</a>"
 	else
 		dat = "<center><h3>[spellbook.title]</h3><i>[spellbook.title_desc]</i><br>You have [uses] spell slot[uses > 1 ? "s" : ""] left.</center><br>"
@@ -108,106 +108,106 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 			var/name = "" //name of target
 			var/desc = "" //description of target
 			var/info = "" //additional information
-			if(ispath(spellbook.spells[i],/datum/spellbook))
+			if (ispath(spellbook.spells[i],/datum/spellbook))
 				var/datum/spellbook/S = spellbook.spells[i]
 				name = initial(S.name)
 				desc = initial(S.book_desc)
 				info = SPAN_COLOR("#ff33cc", "[initial(S.max_uses)] Spell Slots")
-			else if(ispath(spellbook.spells[i],/obj))
+			else if (ispath(spellbook.spells[i],/obj))
 				var/obj/O = spellbook.spells[i]
 				name = "Artefact: [capitalize(initial(O.name))]" //because 99.99% of objects don't have capitals in them and it makes it look weird.
 				desc = initial(O.desc)
-			else if(ispath(spellbook.spells[i],/spell))
+			else if (ispath(spellbook.spells[i],/spell))
 				var/spell/S = spellbook.spells[i]
 				name = initial(S.name)
 				desc = initial(S.desc)
 				var/testing = initial(S.spell_flags)
-				if(testing & NEEDSCLOTHES)
+				if (testing & NEEDSCLOTHES)
 					info = SPAN_COLOR("#ff33cc", "W")
 				var/type = ""
 				switch(initial(S.charge_type))
-					if(Sp_RECHARGE)
+					if (Sp_RECHARGE)
 						type = "R"
-					if(Sp_HOLDVAR)
+					if (Sp_HOLDVAR)
 						type = "S"
-					if(Sp_CHARGES)
+					if (Sp_CHARGES)
 						type = "C"
 				info += SPAN_COLOR("#33cc33", type)
 			dat += "<A href='byond://?src=\ref[src];path=\ref[spellbook.spells[i]]'>[name]</a>"
-			if(length(info))
+			if (length(info))
 				dat += " ([info])"
 			dat += " ([spellbook.spells[spellbook.spells[i]]] spell slot[spellbook.spells[spellbook.spells[i]] > 1 ? "s" : "" ])"
-			if(spellbook.book_flags & CAN_MAKE_CONTRACTS)
+			if (spellbook.book_flags & CAN_MAKE_CONTRACTS)
 				dat += " <A href='byond://?src=\ref[src];path=\ref[spellbook.spells[i]];contract=1;'>Make Contract</a>"
 			dat += "<br><i>[desc]</i><br><br>"
 		dat += "<br>"
 		dat += "<center><A href='byond://?src=\ref[src];reset=1'>Re-memorize your spellbook.</a></center>"
-		if(spellbook.book_flags & INVESTABLE)
-			if(investing_time)
+		if (spellbook.book_flags & INVESTABLE)
+			if (investing_time)
 				dat += "<center><b>Currently investing in a slot...</b></center>"
 			else
 				dat += "<center><A href='byond://?src=\ref[src];invest=1'>Invest a Spell Slot</a><br><i>Investing a spellpoint will return two spellpoints back in 15 minutes.<br>Some say a sacrifice could even shorten the time...</i></center>"
-		if(!(spellbook.book_flags & NOREVERT))
+		if (!(spellbook.book_flags & NOREVERT))
 			dat += "<center><A href='byond://?src=\ref[src];book=1'>Choose different spellbook.</a></center>"
-		if(!(spellbook.book_flags & NO_LOCKING))
+		if (!(spellbook.book_flags & NO_LOCKING))
 			dat += "<center><A href='byond://?src=\ref[src];lock=1'>[spellbook.book_flags & LOCKED ? "Unlock" : "Lock"] the spellbook.</a></center>"
 	show_browser(user, dat,"window=spellbook")
 
 /obj/item/spellbook/CanUseTopic(mob/living/carbon/human/H)
-	if(!istype(H))
+	if (!istype(H))
 		return STATUS_CLOSE
 
-	if(H.mind && (spellbook.book_flags & LOCKED) && H.mind.special_role == ANTAG_APPRENTICE) //make sure no scrubs get behind the lock
+	if (H.mind && (spellbook.book_flags & LOCKED) && H.mind.special_role == ANTAG_APPRENTICE) //make sure no scrubs get behind the lock
 		return STATUS_CLOSE
 
 	return ..()
 
 /obj/item/spellbook/OnTopic(mob/living/carbon/human/user, href_list)
-	if(href_list["lock"] && !(spellbook.book_flags & NO_LOCKING))
-		if(spellbook.book_flags & LOCKED)
+	if (href_list["lock"] && !(spellbook.book_flags & NO_LOCKING))
+		if (spellbook.book_flags & LOCKED)
 			spellbook.book_flags &= ~LOCKED
 		else
 			spellbook.book_flags |= LOCKED
 		. = TOPIC_REFRESH
 
-	else if(href_list["temp"])
+	else if (href_list["temp"])
 		temp = null
 		. = TOPIC_REFRESH
 
-	else if(href_list["book"])
-		if(initial(spellbook.max_uses) != spellbook.max_uses || uses != spellbook.max_uses)
+	else if (href_list["book"])
+		if (initial(spellbook.max_uses) != spellbook.max_uses || uses != spellbook.max_uses)
 			temp = "You've already purchased things using this spellbook!"
 		else
 			src.set_spellbook(/datum/spellbook)
 			temp = "You have reverted back to the Book of Tomes."
 		. = TOPIC_REFRESH
 
-	else if(href_list["invest"])
+	else if (href_list["invest"])
 		temp = invest()
 		. = TOPIC_REFRESH
 
-	else if(href_list["path"])
+	else if (href_list["path"])
 		var/path = locate(href_list["path"]) in spellbook.spells
-		if(!path)
+		if (!path)
 			return TOPIC_HANDLED
-		if(uses < spellbook.spells[path])
+		if (uses < spellbook.spells[path])
 			to_chat(user, SPAN_NOTICE("You do not have enough spell slots to purchase this."))
 			return TOPIC_HANDLED
-		if(ispath(path,/datum/spellbook))
+		if (ispath(path,/datum/spellbook))
 			src.set_spellbook(path)
 			temp = "You have chosen a new spellbook."
 		else
-			if(href_list["contract"])
-				if(!(spellbook.book_flags & CAN_MAKE_CONTRACTS))
+			if (href_list["contract"])
+				if (!(spellbook.book_flags & CAN_MAKE_CONTRACTS))
 					return //no
 				uses -= spellbook.spells[path]
 				spellbook.max_uses -= spellbook.spells[path] //no basksies
 				var/obj/O = new /obj/item/contract/boon(get_turf(user),path)
 				temp = "You have purchased \the [O]."
 			else
-				if(ispath(path,/spell))
+				if (ispath(path,/spell))
 					temp = src.add_spell(user,path)
-					if(temp)
+					if (temp)
 						uses -= spellbook.spells[path]
 				else
 					var/obj/O = new path(get_turf(user))
@@ -218,9 +218,9 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 					playsound(get_turf(user),'sound/effects/phasein.ogg',50,1)
 		. = TOPIC_REFRESH
 
-	else if(href_list["reset"] && !(spellbook.book_flags & NOREVERT))
+	else if (href_list["reset"] && !(spellbook.book_flags & NOREVERT))
 		var/area/map_template/wizard_station/A = get_area(user)
-		if(istype(A))
+		if (istype(A))
 			uses = spellbook.max_uses
 			investing_time = 0
 			has_sacrificed = 0
@@ -233,9 +233,9 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 	src.interact(user)
 
 /obj/item/spellbook/proc/invest()
-	if(uses < 1)
+	if (uses < 1)
 		return "You don't have enough slots to invest!"
-	if(investing_time)
+	if (investing_time)
 		return "You can only invest one spell slot at a time."
 	uses--
 	START_PROCESSING(SSobj, src)
@@ -243,10 +243,10 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 	return "You invest a spellslot and will receive two in return in 15 minutes."
 
 /obj/item/spellbook/Process()
-	if(investing_time && investing_time <= world.time)
+	if (investing_time && investing_time <= world.time)
 		src.visible_message("<b>\The [src]</b> emits a soft chime.")
 		uses += 2
-		if(uses > spellbook.max_uses)
+		if (uses > spellbook.max_uses)
 			spellbook.max_uses = uses
 		investing_time = 0
 		has_sacrificed = 0
@@ -260,20 +260,20 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 
 /obj/item/spellbook/proc/add_spell(mob/user, spell_path)
 	for(var/spell/S in user.mind.learned_spells)
-		if(istype(S,spell_path))
-			if(!S.can_improve())
+		if (istype(S,spell_path))
+			if (!S.can_improve())
 				return
-			if(S.can_improve(Sp_SPEED) && S.can_improve(Sp_POWER))
+			if (S.can_improve(Sp_SPEED) && S.can_improve(Sp_POWER))
 				switch(alert(user, "Do you want to upgrade this spell's speed or power?", "Spell upgrade", "Speed", "Power", "Cancel"))
-					if("Speed")
+					if ("Speed")
 						return S.quicken_spell()
-					if("Power")
+					if ("Power")
 						return S.empower_spell()
 					else
 						return
-			else if(S.can_improve(Sp_POWER))
+			else if (S.can_improve(Sp_POWER))
 				return S.empower_spell()
-			else if(S.can_improve(Sp_SPEED))
+			else if (S.can_improve(Sp_SPEED))
 				return S.quicken_spell()
 
 	var/spell/S = new spell_path()

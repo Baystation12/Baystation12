@@ -47,12 +47,12 @@ var/global/repository/follow/follow_repository = new()
 
 /repository/follow/proc/get_follow_type(atom/movable/AM)
 	for(var/follow_type in followed_subtypes)
-		if(istype(AM, follow_type))
+		if (istype(AM, follow_type))
 			return followed_subtypes[follow_type]
 
 /repository/follow/proc/get_follow_targets()
 	RETURN_TYPE(/list)
-	if(cache && cache.is_valid())
+	if (cache && cache.is_valid())
 		return cache.data
 	// The previous cache entry should have no further references and will thus be GCd eventually without qdel
 	// Cache invalidated periodically in case of name changes, etc.
@@ -61,14 +61,14 @@ var/global/repository/follow/follow_repository = new()
 	var/list/followed_by_name = list()
 	for(var/followed_object in followed_objects)
 		var/datum/follow_holder/fh = followed_object
-		if(fh.show_entry())
+		if (fh.show_entry())
 			group_by(followed_by_name, fh.get_name(TRUE), fh)
 
 	var/list/L = list()
 
 	for(var/followed_name in followed_by_name)
 		var/list/followed_things = followed_by_name[followed_name]
-		if(length(followed_things) == 1)
+		if (length(followed_things) == 1)
 			ADD_SORTED(L, followed_things[1], /proc/cmp_follow_holder)
 		else
 			for(var/i = 1 to length(followed_things))
@@ -82,7 +82,7 @@ var/global/repository/follow/follow_repository = new()
 
 /atom/movable/Initialize()
 	. = ..()
-	if(!is_type_in_list(src, follow_repository.excluded_subtypes) && is_type_in_list(src, follow_repository.followed_subtypes))
+	if (!is_type_in_list(src, follow_repository.excluded_subtypes) && is_type_in_list(src, follow_repository.followed_subtypes))
 		follow_repository.add_subject(src)
 
 /******************
@@ -107,7 +107,7 @@ var/global/repository/follow/follow_repository = new()
 	. = ..()
 
 /datum/follow_holder/proc/get_name(recalc = FALSE)
-	if(!name || recalc)
+	if (!name || recalc)
 		var/suffix = get_suffix(followed_instance)
 		name = "[followed_instance.follow_name()][instance ? " ([instance])" : ""][suffix ? " [suffix]" : ""]"
 	return name

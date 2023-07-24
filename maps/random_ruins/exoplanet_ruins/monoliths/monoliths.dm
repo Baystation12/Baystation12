@@ -21,17 +21,17 @@
 	. = ..()
 	icon_state = "jaggy[rand(1,4)]"
 	var/material/A = SSmaterials.get_material_by_name(MATERIAL_ALIENALLOY)
-	if(A)
+	if (A)
 		color = A.icon_colour
-	if(GLOB.using_map.use_overmap)
+	if (GLOB.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
-		if(istype(E))
+		if (istype(E))
 			desc += "\nThere are images on it: [E.get_engravings()]"
 	update_icon()
 
 /obj/structure/monolith/on_update_icon()
 	overlays.Cut()
-	if(active)
+	if (active)
 		var/image/I = image(icon,"[icon_state]decor")
 		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 		I.color = get_random_colour(0, 150, 255)
@@ -41,21 +41,21 @@
 		set_light(0.3, 0.1, 2, l_color = I.color)
 
 	var/turf/simulated/floor/exoplanet/T = get_turf(src)
-	if(istype(T))
+	if (istype(T))
 		var/image/I = overlay_image(icon, "dugin", T.dirt_color, RESET_COLOR)
 		overlays += I
 
 /obj/structure/monolith/attack_hand(mob/user)
 	visible_message("[user] touches \the [src].")
-	if(GLOB.using_map.use_overmap && istype(user,/mob/living/carbon/human))
+	if (GLOB.using_map.use_overmap && istype(user,/mob/living/carbon/human))
 		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
-		if(istype(E))
+		if (istype(E))
 			var/mob/living/carbon/human/H = user
-			if(!H.isSynthetic())
+			if (!H.isSynthetic())
 				playsound(src, 'sound/effects/zapbeep.ogg', 100, 1)
 				active = 1
 				update_icon()
-				if(prob(70))
+				if (prob(70))
 					to_chat(H, SPAN_NOTICE("As you touch \the [src], you suddenly get a vivid image - [E.get_engravings()]"))
 				else
 					to_chat(H, SPAN_WARNING("An overwhelming stream of information invades your mind!"))
@@ -76,5 +76,5 @@
 
 /turf/simulated/floor/fixed/alium/ruin/Initialize()
 	. = ..()
-	if(prob(10))
+	if (prob(10))
 		ChangeTurf(get_base_turf_by_area(src))

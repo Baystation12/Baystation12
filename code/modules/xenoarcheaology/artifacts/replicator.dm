@@ -81,19 +81,19 @@
 		[pick("front","side","top","bottom","rear","inside")].")
 
 /obj/machinery/replicator/Process()
-	if(length(spawning_types) && is_powered())
+	if (length(spawning_types) && is_powered())
 		spawn_progress_time += world.time - last_process_time
-		if(spawn_progress_time > max_spawn_time)
+		if (spawn_progress_time > max_spawn_time)
 			src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [src] pings!"))
 
 			var/obj/source_material = pop(stored_materials)
 			var/spawn_type = pop(spawning_types)
 			var/obj/spawned_obj = new spawn_type(src.loc)
-			if(source_material)
-				if(length(source_material.name) < MAX_MESSAGE_LEN)
+			if (source_material)
+				if (length(source_material.name) < MAX_MESSAGE_LEN)
 					spawned_obj.SetName("[source_material] " +  spawned_obj.name)
-				if(length(source_material.desc) < MAX_MESSAGE_LEN * 2)
-					if(spawned_obj.desc)
+				if (length(source_material.desc) < MAX_MESSAGE_LEN * 2)
+					if (spawned_obj.desc)
 						spawned_obj.desc += " It is made of [source_material]."
 					else
 						spawned_obj.desc = "It is made of [source_material]."
@@ -102,11 +102,11 @@
 			spawn_progress_time = 0
 			max_spawn_time = rand(30,100)
 
-			if(!length(spawning_types) || !length(stored_materials))
+			if (!length(spawning_types) || !length(stored_materials))
 				update_use_power(POWER_USE_IDLE)
 				icon_state = "borgcharger0(old)"
 
-		else if(prob(5))
+		else if (prob(5))
 			src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [src] [pick("clicks","whizzes","whirrs","whooshes","clanks","clongs","clonks","bangs")]."))
 
 	last_process_time = world.time
@@ -124,17 +124,17 @@
 	show_browser(user, dat, "window=alien_replicator")
 
 /obj/machinery/replicator/attackby(obj/item/W as obj, mob/living/user as mob)
-	if(!user.unEquip(W, src))
+	if (!user.unEquip(W, src))
 		return
 	stored_materials.Add(W)
 	src.visible_message(SPAN_NOTICE("\The [user] inserts \the [W] into \the [src]."))
 
 /obj/machinery/replicator/OnTopic(user, href_list)
-	if(href_list["activate"])
+	if (href_list["activate"])
 		var/index = text2num(href_list["activate"])
-		if(index > 0 && index <= length(construction))
-			if(length(stored_materials) > length(spawning_types))
-				if(length(spawning_types))
+		if (index > 0 && index <= length(construction))
+			if (length(stored_materials) > length(spawning_types))
+				if (length(spawning_types))
 					src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] a [pick("light","dial","display","meter","pad")] on [src]'s front [pick("blinks","flashes")] [pick("red","yellow","blue","orange","purple","green","white")]."))
 				else
 					src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [src]'s front compartment slides shut."))

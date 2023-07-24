@@ -15,16 +15,16 @@
 
 /obj/effect/decal/cleanable/Initialize()
 	. = ..()
-	if(isspace(loc))
+	if (isspace(loc))
 		return INITIALIZE_HINT_QDEL
 	hud_overlay = new /image/hud_overlay('icons/obj/hud_tile.dmi', src, "caution")
 	hud_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	set_cleanable_scent()
 
 /obj/effect/decal/cleanable/Initialize(ml, _age)
-	if(!isnull(_age))
+	if (!isnull(_age))
 		age = _age
-	if(random_icon_states && length(src.random_icon_states) > 0)
+	if (random_icon_states && length(src.random_icon_states) > 0)
 		src.icon_state = pick(src.random_icon_states)
 	SSpersistence.track_value(src, /datum/persistent/filth)
 	. = ..()
@@ -38,11 +38,11 @@
 	qdel(src)
 
 /obj/effect/decal/cleanable/clean_blood(ignore = 0)
-	if(!ignore)
+	if (!ignore)
 		qdel(src)
 		return
 	..()
 
 /obj/effect/decal/cleanable/proc/set_cleanable_scent()
-	if(cleanable_scent)
+	if (cleanable_scent)
 		set_extension(src, /datum/extension/scent/custom, cleanable_scent, scent_intensity, scent_descriptor, scent_range)

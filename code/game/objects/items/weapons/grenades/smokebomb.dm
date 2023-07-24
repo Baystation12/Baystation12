@@ -27,7 +27,7 @@
 	QDEL_IN(src, 8 SECONDS)
 
 /obj/item/grenade/smokebomb/Process()
-	if(!QDELETED(smoke) && (smoke_times > 0))
+	if (!QDELETED(smoke) && (smoke_times > 0))
 		smoke_times--
 		smoke.start()
 		return

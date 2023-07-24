@@ -60,23 +60,23 @@
 
 /datum/species/proc/get_environment_discomfort(mob/living/carbon/human/H, msg_type)
 
-	if(!prob(5))
+	if (!prob(5))
 		return
 
 	var/covered = 0 // Basic coverage can help.
 	for(var/obj/item/clothing/clothes in H)
 		if (H.IsHolding(clothes))
 			continue
-		if((clothes.body_parts_covered & UPPER_TORSO) && (clothes.body_parts_covered & LOWER_TORSO))
+		if ((clothes.body_parts_covered & UPPER_TORSO) && (clothes.body_parts_covered & LOWER_TORSO))
 			covered = 1
 			break
 
 	switch(msg_type)
-		if("cold")
-			if(!covered)
+		if ("cold")
+			if (!covered)
 				to_chat(H, SPAN_DANGER("[pick(cold_discomfort_strings)]"))
-		if("heat")
-			if(covered)
+		if ("heat")
+			if (covered)
 				to_chat(H, SPAN_DANGER("[pick(heat_discomfort_strings)]"))
 
 /datum/species/proc/get_vision_flags(mob/living/carbon/human/H)

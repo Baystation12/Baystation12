@@ -39,7 +39,7 @@
 	. = ..()
 	// If it's a generic arcade machine, pick a random arcade
 	// circuit board for it and make the new machine
-	if(random)
+	if (random)
 		var/obj/item/stock_parts/circuitboard/arcade/A = pick(subtypesof(/obj/item/stock_parts/circuitboard/arcade))
 		var/path = initial(A.build_path)
 		new path(loc)
@@ -54,7 +54,7 @@
 	new prizeselect(get_turf(src))
 
 /obj/machinery/computer/arcade/emp_act(severity)
-	if(inoperable())
+	if (inoperable())
 		..(severity)
 		return
 	var/empprize = null
@@ -131,7 +131,7 @@
 	return
 
 /obj/machinery/computer/arcade/battle/CanUseTopic(mob/user, datum/topic_state/state, href_list)
-	if((blocked || gameover) && href_list && (href_list["attack"] || href_list["heal"] || href_list["charge"]))
+	if ((blocked || gameover) && href_list && (href_list["attack"] || href_list["heal"] || href_list["charge"]))
 		return min(..(), STATUS_UPDATE)
 	return ..()
 
@@ -146,7 +146,7 @@
 		src.blocked = 1
 		var/attackamt = rand(2,6)
 		src.temp = "You attack for [attackamt] damage!"
-		if(turtle > 0)
+		if (turtle > 0)
 			turtle--
 		src.enemy_hp -= attackamt
 
@@ -174,7 +174,7 @@
 		var/chargeamt = rand(4,7)
 		src.temp = "You regain [chargeamt] points"
 		src.player_mp += chargeamt
-		if(turtle > 0)
+		if (turtle > 0)
 			turtle--
 
 		. = TOPIC_REFRESH
@@ -189,18 +189,18 @@
 		enemy_mp = 20
 		gameover = 0
 		turtle = 0
-		if(emagged)
+		if (emagged)
 			emagged = FALSE
 			SetupGame()
 		. = TOPIC_REFRESH
 
 /obj/machinery/computer/arcade/battle/proc/arcade_action(user)
 	if ((src.enemy_mp <= 0) || (src.enemy_hp <= 0))
-		if(!gameover)
+		if (!gameover)
 			src.gameover = 1
 			src.temp = "[src.enemy_name] has fallen! Rejoice!"
 
-			if(emagged)
+			if (emagged)
 				new /obj/effect/spawner/newbomb/timer/syndicate(src.loc)
 				new /obj/item/clothing/head/collectable/petehat(src.loc)
 				log_and_message_admins("has outbombed Cuban Pete and been awarded a bomb.")
@@ -224,7 +224,7 @@
 			src.gameover = 1
 			sleep(10)
 			src.temp = "You have been drained! GAME OVER"
-			if(emagged)
+			if (emagged)
 				explode()
 			else
 
@@ -241,7 +241,7 @@
 	if ((src.player_mp <= 0) || (src.player_hp <= 0))
 		src.gameover = 1
 		src.temp = "You have been crushed! GAME OVER"
-		if(emagged)
+		if (emagged)
 			explode()
 		else
 
@@ -252,7 +252,7 @@
 	qdel(src)
 
 /obj/machinery/computer/arcade/battle/emag_act(charges, mob/user)
-	if(!emagged)
+	if (!emagged)
 		temp = "If you die in the game, you die for real!"
 		player_hp = 30
 		player_mp = 10

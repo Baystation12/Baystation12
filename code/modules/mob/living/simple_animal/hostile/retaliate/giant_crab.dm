@@ -61,11 +61,11 @@
 
 	process_grab()
 
-	if(!.)
+	if (!.)
 		return FALSE
 
-	if((health > maxHealth / 1.5) && length(ai_holder.attackers) && prob(10))
-		if(victim)
+	if ((health > maxHealth / 1.5) && length(ai_holder.attackers) && prob(10))
+		if (victim)
 			release_grab()
 		ai_holder.attackers = list() //TODO: does this still work?
 		ai_holder.lose_target()
@@ -74,21 +74,21 @@
 /mob/living/simple_animal/hostile/retaliate/giant_crab/can_special_attack(mob/living/carbon/human/H)
 	. = ..()
 
-	if(!.)
+	if (!.)
 		return FALSE
-	if(!Adjacent(H))
+	if (!Adjacent(H))
 		return FALSE
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/proc/process_grab()
-	if(victim && !incapacitated())
-		if(victim.stat >= UNCONSCIOUS || !Adjacent(victim) || !victim.incapacitated())
+	if (victim && !incapacitated())
+		if (victim.stat >= UNCONSCIOUS || !Adjacent(victim) || !victim.incapacitated())
 			release_grab()
 			return
 		visible_message(SPAN_DANGER("\The [src] [pick(grab_desc)] \the [victim] in its pincer!"))
 		victim.apply_damage(grab_damage, DAMAGE_BRUTE, BP_CHEST, DAMAGE_FLAG_EDGE, used_weapon = "crab's pincer")
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/proc/release_grab()
-	if(victim)
+	if (victim)
 		visible_message(SPAN_NOTICE("\The [src] releases its grip on \the [victim]!"))
 		GLOB.destroyed_event.unregister(victim)
 		victim = null
@@ -98,19 +98,19 @@
 
 /datum/ai_holder/simple_animal/retaliate/crab/giant/engage_target()
 	var/mob/living/simple_animal/hostile/retaliate/giant_crab/C = holder
-	if(ishuman(target))
+	if (ishuman(target))
 		var/mob/living/carbon/human/H = target
-		if(C.victim == H)
-			if(!C.Adjacent(C.victim))
+		if (C.victim == H)
+			if (!C.Adjacent(C.victim))
 				C.release_grab()
-			else if(prob(C.continue_grab_prob))
+			else if (prob(C.continue_grab_prob))
 				H.Weaken(1)
 				H.Stun(1)
 				C.grab_damage++
 				C.visible_message(SPAN_MFAUNA("\The [src] tightens its grip on \the [C.victim]!"))
 				return
 
-		if(!C.victim && C.can_special_attack(H))
+		if (!C.victim && C.can_special_attack(H))
 			GLOB.destroyed_event.register(C.victim, C, /mob/living/simple_animal/hostile/retaliate/giant_crab/proc/release_grab)
 			C.victim = H
 			H.Weaken(C.grab_duration)

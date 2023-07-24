@@ -55,7 +55,7 @@
 				if (is_not_border_right && CELL_ALIVE(map[ilim_d + 1]))
 					++count
 
-			if(count >= cell_threshold)
+			if (count >= cell_threshold)
 				REVIVE_CELL(i, next_map)
 			else	// Nope. Can't be alive. Kill it.
 				KILL_CELL(i, next_map)

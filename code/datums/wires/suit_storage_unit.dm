@@ -13,11 +13,11 @@ var/global/const/SUIT_STORAGE_WIRE_LOCKED		= 4
 
 /datum/wires/suit_storage_unit/CanUse(mob/living/L)
 	var/obj/machinery/suit_cycler/S = holder
-	if(!istype(L, /mob/living/silicon))
-		if(S.electrified)
-			if(S.shock(L, 100))
+	if (!istype(L, /mob/living/silicon))
+		if (S.electrified)
+			if (S.shock(L, 100))
 				return 0
-	if(S.panel_open)
+	if (S.panel_open)
 		return 1
 	return 0
 
@@ -31,22 +31,22 @@ var/global/const/SUIT_STORAGE_WIRE_LOCKED		= 4
 /datum/wires/suit_storage_unit/UpdatePulsed(index)
 	var/obj/machinery/suit_cycler/S = holder
 	switch(index)
-		if(SUIT_STORAGE_WIRE_SAFETY)
+		if (SUIT_STORAGE_WIRE_SAFETY)
 			S.safeties = !S.safeties
-		if(SUIT_STORAGE_WIRE_ELECTRIFY)
+		if (SUIT_STORAGE_WIRE_ELECTRIFY)
 			S.electrified = 30
-		if(SUIT_STORAGE_WIRE_LOCKED)
+		if (SUIT_STORAGE_WIRE_LOCKED)
 			S.locked = !S.locked
 
 /datum/wires/suit_storage_unit/UpdateCut(index, mended)
 	var/obj/machinery/suit_cycler/S = holder
 	switch(index)
-		if(SUIT_STORAGE_WIRE_SAFETY)
+		if (SUIT_STORAGE_WIRE_SAFETY)
 			S.safeties = mended
-		if(SUIT_STORAGE_WIRE_LOCKED)
+		if (SUIT_STORAGE_WIRE_LOCKED)
 			S.locked = mended
-		if(SUIT_STORAGE_WIRE_ELECTRIFY)
-			if(mended)
+		if (SUIT_STORAGE_WIRE_ELECTRIFY)
+			if (mended)
 				S.electrified = 0
 			else
 				S.electrified = -1

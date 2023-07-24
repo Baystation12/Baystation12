@@ -19,7 +19,7 @@
 	disintegrate into bio-safe elements.<BR>
 	<b>Integrity:</b> Gradient creates slight risk of being overcharged and frying the
 	circuitry. As a result neurotoxins can cause massive damage.<HR>"}
-	if(!malfunction)
+	if (!malfunction)
 		.+= {"ID (1-100):<BR>
 		<A href='byond://?src=\ref[src];tracking_id=-10'>-</A>
 		<A href='byond://?src=\ref[src];tracking_id=-1'>-</A> [id]

@@ -72,7 +72,7 @@
 	queue_icon_update()
 
 /obj/item/storage/fancy/open(mob/user as mob)
-	if(sealed)
+	if (sealed)
 		to_chat(user, "You need to unseal \the [src] first!")
 		return
 	..()

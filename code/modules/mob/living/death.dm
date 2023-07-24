@@ -1,4 +1,4 @@
 /mob/living/death()
-	if(hiding)
+	if (hiding)
 		hiding = FALSE
 	. = ..()

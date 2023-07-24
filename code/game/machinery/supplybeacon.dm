@@ -13,9 +13,9 @@
 
 /obj/item/supply_beacon/attack_self(mob/user)
 	user.visible_message(SPAN_NOTICE("\The [user] begins setting up \the [src]."))
-	if(!do_after(user, deploy_time, src, DO_PUBLIC_UNIQUE))
+	if (!do_after(user, deploy_time, src, DO_PUBLIC_UNIQUE))
 		return
-	if(!user.unEquip(src))
+	if (!user.unEquip(src))
 		return
 	var/obj/S = new deploy_path(get_turf(user))
 	user.visible_message(SPAN_NOTICE("\The [user] deploys \the [S]."))
@@ -37,15 +37,15 @@
 
 /obj/machinery/power/supply_beacon/New()
 	..()
-	if(!drop_type) drop_type = pick(supply_drop_random_loot_types())
+	if (!drop_type) drop_type = pick(supply_drop_random_loot_types())
 
 /obj/machinery/power/supply_beacon/supermatter
 	name = "supermatter supply beacon"
 	drop_type = "supermatter"
 
 /obj/machinery/power/supply_beacon/attackby(obj/item/W, mob/user)
-	if(!use_power && isWrench(W))
-		if(!anchored && !connect_to_network())
+	if (!use_power && isWrench(W))
+		if (!anchored && !connect_to_network())
 			to_chat(user, SPAN_WARNING("This device must be placed over an exposed cable."))
 			return
 		anchored = !anchored
@@ -55,13 +55,13 @@
 	return ..()
 
 /obj/machinery/power/supply_beacon/physical_attack_hand(mob/user)
-	if(expended)
+	if (expended)
 		update_use_power(POWER_USE_OFF)
 		to_chat(user, SPAN_WARNING("\The [src] has used up its charge."))
 		return TRUE
 
-	if(anchored)
-		if(use_power)
+	if (anchored)
+		if (use_power)
 			deactivate(user)
 		else
 			activate(user)
@@ -71,19 +71,19 @@
 		return TRUE
 
 /obj/machinery/power/supply_beacon/proc/activate(mob/user)
-	if(expended)
+	if (expended)
 		return
-	if(surplus() < 500)
-		if(user) to_chat(user, SPAN_NOTICE("The connected wire doesn't have enough current."))
+	if (surplus() < 500)
+		if (user) to_chat(user, SPAN_NOTICE("The connected wire doesn't have enough current."))
 		return
 	set_light(1, 0.5, 2, 2, "#00ccaa")
 	icon_state = "beacon_active"
 	update_use_power(POWER_USE_IDLE)
 	admin_attacker_log(user, "has activated \a [src] at [get_area(src)]")
-	if(user) to_chat(user, SPAN_NOTICE("You activate the beacon. The supply drop will be dispatched soon."))
+	if (user) to_chat(user, SPAN_NOTICE("You activate the beacon. The supply drop will be dispatched soon."))
 
 /obj/machinery/power/supply_beacon/proc/deactivate(mob/user, permanent)
-	if(permanent)
+	if (permanent)
 		expended = 1
 		icon_state = "beacon_depleted"
 	else
@@ -91,24 +91,24 @@
 	set_light(0)
 	update_use_power(POWER_USE_OFF)
 	target_drop_time = null
-	if(user) to_chat(user, SPAN_NOTICE("You deactivate the beacon."))
+	if (user) to_chat(user, SPAN_NOTICE("You deactivate the beacon."))
 
 /obj/machinery/power/supply_beacon/Destroy()
-	if(use_power)
+	if (use_power)
 		deactivate()
 	..()
 
 /obj/machinery/power/supply_beacon/Process()
-	if(expended)
+	if (expended)
 		return PROCESS_KILL
-	if(!use_power)
+	if (!use_power)
 		return
-	if(draw_power(500) < 500)
+	if (draw_power(500) < 500)
 		deactivate()
 		return
-	if(!target_drop_time)
+	if (!target_drop_time)
 		target_drop_time = world.time + drop_delay
-	else if(world.time >= target_drop_time)
+	else if (world.time >= target_drop_time)
 		deactivate(permanent = 1)
 		var/drop_x = src.x-2
 		var/drop_y = src.y-2

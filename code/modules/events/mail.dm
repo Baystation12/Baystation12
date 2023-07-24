@@ -33,11 +33,11 @@
 
 /datum/event/mail/setup()
 	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
-		if(prob(25))
+		if (prob(25))
 			to_receive.Add(CR.get_name())
 
 	// Nobody got any mail :(
-	if(!length(to_receive))
+	if (!length(to_receive))
 		log_debug("Nobody got any mail. Aborting event.")
 		kill(TRUE)
 
@@ -48,13 +48,13 @@
 	var/datum/shuttle/autodock/ferry/supply/shuttle = SSsupply.shuttle
 
 	// No shuttle on the map
-	if(isnull(shuttle))
+	if (isnull(shuttle))
 		kill()
 		return
 
 	// Make sure the shuttle is idle at the away site
-	if(!shuttle.at_station() && shuttle.moving_status == SHUTTLE_IDLE)
-		if(spawn_mail())
+	if (!shuttle.at_station() && shuttle.moving_status == SHUTTLE_IDLE)
+		if (spawn_mail())
 			kill()
 
 /datum/event/mail/proc/spawn_mail()
@@ -71,7 +71,7 @@
 
 		var/gift_path = pick(possible_gifts)
 		// 15% chance to get a rare gift
-		if(prob(15))
+		if (prob(15))
 			gift_path = pick(rare_gifts)
 
 		var/obj/item/gift = new gift_path()
@@ -85,7 +85,7 @@
 		parcel.forceMove(gift_crate)
 
 	// Add the crate to the supply shuttle if possible
-	if(!SSsupply.addAtom(gift_crate))
+	if (!SSsupply.addAtom(gift_crate))
 		log_debug("Failed to add mail crate to the supply shuttle!")
 		qdel(gift_crate)
 		return FALSE

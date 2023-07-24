@@ -28,11 +28,11 @@ GLOBAL_LIST_INIT(terminal_commands, init_subtypes(/datum/terminal_command))
 
 /// null return: continue. "" return will break and show a blank line. Return list() to break and not show anything.
 /datum/terminal_command/proc/parse(text, mob/user, datum/terminal/terminal)
-	if(!findtext(text, regex))
+	if (!findtext(text, regex))
 		return
-	if(!user.skill_check(core_skill, skill_needed))
+	if (!user.skill_check(core_skill, skill_needed))
 		return skill_fail_message()
-	if(!check_access(user, terminal))
+	if (!check_access(user, terminal))
 		return "[name]: ACCESS DENIED"
 	return proper_input_entered(text, user, terminal)
 
@@ -52,10 +52,10 @@ GLOBAL_LIST_INIT(terminal_commands, init_subtypes(/datum/terminal_command))
 /// Returns list of arguments (if any), or null on syntax error
 /datum/terminal_command/proc/get_arguments(text)
 	var/list/arguments = splittext(text, " ")
-	if(!length(arguments) || arguments[1] != name)
+	if (!length(arguments) || arguments[1] != name)
 		return
 
-	if(length(arguments) == 1)
+	if (length(arguments) == 1)
 		return list()
 	arguments.Cut(1,2)
 	return arguments
@@ -103,18 +103,18 @@ GLOBAL_LIST_INIT(terminal_commands, init_subtypes(/datum/terminal_command))
 
 /datum/terminal_command/man/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/list/arguments = get_arguments(text)
-	if(isnull(arguments))
+	if (isnull(arguments))
 		return syntax_error()
-	if(!length(arguments))
+	if (!length(arguments))
 		. = list("The following commands are available.", "Some may require additional access.")
 		for(var/command in GLOB.terminal_commands)
 			var/datum/terminal_command/command_datum = command
-			if(user.skill_check(command_datum.core_skill, command_datum.skill_needed))
+			if (user.skill_check(command_datum.core_skill, command_datum.skill_needed))
 				. += command_datum.name
 		return
-	else if(length(arguments) == 1)
+	else if (length(arguments) == 1)
 		var/datum/terminal_command/command_datum = terminal.command_by_name(arguments[1])
-		if(!command_datum)
+		if (!command_datum)
 			return "[name]: Error; command '[arguments[1]]' not found."
 		return command_datum.man_entry
 	return syntax_error()

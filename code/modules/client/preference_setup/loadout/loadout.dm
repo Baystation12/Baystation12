@@ -21,15 +21,15 @@ var/global/list/gear_datums = list()
 	//create a list of gear datums to sort
 	for(var/geartype in typesof(/datum/gear)-/datum/gear)
 		var/datum/gear/G = geartype
-		if(initial(G.category) == geartype)
+		if (initial(G.category) == geartype)
 			continue
-		if(GLOB.using_map.loadout_blacklist && (geartype in GLOB.using_map.loadout_blacklist))
+		if (GLOB.using_map.loadout_blacklist && (geartype in GLOB.using_map.loadout_blacklist))
 			continue
 
 		var/use_name = initial(G.display_name)
 		var/use_category = initial(G.sort_category)
 
-		if(!loadout_categories[use_category])
+		if (!loadout_categories[use_category])
 			loadout_categories[use_category] = new /datum/loadout_category(use_category)
 		var/datum/loadout_category/LC = loadout_categories[use_category]
 		gear_datums[use_name] = new geartype
@@ -61,15 +61,15 @@ var/global/list/gear_datums = list()
 	for(var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
 		var/okay = 1
-		if(G.whitelisted && preference_mob)
+		if (G.whitelisted && preference_mob)
 			okay = 0
 			for(var/species in G.whitelisted)
-				if(is_species_whitelisted(preference_mob, species))
+				if (is_species_whitelisted(preference_mob, species))
 					okay = 1
 					break
-		if(!okay)
+		if (!okay)
 			continue
-		if(max_cost && G.cost > max_cost)
+		if (max_cost && G.cost > max_cost)
 			continue
 		. += gear_name
 
@@ -77,36 +77,36 @@ var/global/list/gear_datums = list()
 	for(var/datum/job/J in jobs)
 		. = TRUE
 		for(var/R in skills_required)
-			if(pref.get_total_skill_value(J, R) < skills_required[R])
+			if (pref.get_total_skill_value(J, R) < skills_required[R])
 				. = FALSE
 				break
-		if(.)
+		if (.)
 			return
 
 /datum/category_item/player_setup_item/loadout/sanitize_character()
 	pref.gear_slot = sanitize_integer(pref.gear_slot, 1, config.loadout_slots, initial(pref.gear_slot))
-	if(!islist(pref.gear_list)) pref.gear_list = list()
+	if (!islist(pref.gear_list)) pref.gear_list = list()
 
-	if(length(pref.gear_list) < config.loadout_slots)
+	if (length(pref.gear_list) < config.loadout_slots)
 		LIST_RESIZE(pref.gear_list, config.loadout_slots)
 
 	for(var/index = 1 to config.loadout_slots)
 		var/list/gears = pref.gear_list[index]
 
-		if(istype(gears))
+		if (istype(gears))
 			for(var/gear_name in gears)
-				if(!(gear_name in gear_datums))
+				if (!(gear_name in gear_datums))
 					gears -= gear_name
 
 			var/total_cost = 0
 			for(var/gear_name in gears)
-				if(!gear_datums[gear_name])
+				if (!gear_datums[gear_name])
 					gears -= gear_name
-				else if(!(gear_name in valid_gear_choices()))
+				else if (!(gear_name in valid_gear_choices()))
 					gears -= gear_name
 				else
 					var/datum/gear/G = gear_datums[gear_name]
-					if(total_cost + G.cost > config.max_gear_cost)
+					if (total_cost + G.cost > config.max_gear_cost)
 						gears -= gear_name
 					else
 						total_cost += G.cost
@@ -119,17 +119,17 @@ var/global/list/gear_datums = list()
 	var/list/gears = pref.gear_list[pref.gear_slot]
 	for(var/i = 1; i <= length(gears); i++)
 		var/datum/gear/G = gear_datums[gears[i]]
-		if(G)
+		if (G)
 			total_cost += G.cost
 
 	var/fcolor =  "#3366cc"
-	if(total_cost < config.max_gear_cost)
+	if (total_cost < config.max_gear_cost)
 		fcolor = "#e67300"
 	. += "<table align = 'center' width = 100%>"
 	. += "<tr><td colspan=3><center>"
 	. += "<a href='?src=\ref[src];prev_slot=1'>\<=</a><b>[SPAN_COLOR(fcolor, "\[[pref.gear_slot]\]")] </b><a href='?src=\ref[src];next_slot=1'>=\></a>"
 
-	if(config.max_gear_cost < INFINITY)
+	if (config.max_gear_cost < INFINITY)
 		. += "<b>[SPAN_COLOR(fcolor, "[total_cost]/[config.max_gear_cost]")] loadout points spent.</b>"
 
 	. += "<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a>"
@@ -139,7 +139,7 @@ var/global/list/gear_datums = list()
 	var/firstcat = 1
 	for(var/category in loadout_categories)
 
-		if(firstcat)
+		if (firstcat)
 			firstcat = 0
 		else
 			. += " |"
@@ -147,14 +147,14 @@ var/global/list/gear_datums = list()
 		var/datum/loadout_category/LC = loadout_categories[category]
 		var/category_cost = 0
 		for(var/gear in LC.gear)
-			if(gear in pref.gear_list[pref.gear_slot])
+			if (gear in pref.gear_list[pref.gear_slot])
 				var/datum/gear/G = LC.gear[gear]
 				category_cost += G.cost
 
-		if(category == current_tab)
+		if (category == current_tab)
 			. += " [SPAN_CLASS("linkOn", "[category] - [category_cost]")] "
 		else
-			if(category_cost)
+			if (category_cost)
 				. += " <a href='?src=\ref[src];select_category=[category]'>[SPAN_COLOR("#e67300", "[category] - [category_cost]")]</a> "
 			else
 				. += " <a href='?src=\ref[src];select_category=[category]'>[category] - 0</a> "
@@ -168,10 +168,10 @@ var/global/list/gear_datums = list()
 	var/jobs = list()
 	for(var/job_title in (pref.job_medium|pref.job_low|pref.job_high))
 		var/datum/job/J = SSjobs.get_by_title(job_title)
-		if(J)
+		if (J)
 			dd_insertObjectList(jobs, J)
 	for(var/gear_name in LC.gear)
-		if(!(gear_name in valid_gear_choices()))
+		if (!(gear_name in valid_gear_choices()))
 			continue
 		var/list/entry = list()
 		var/datum/gear/G = LC.gear[gear_name]
@@ -180,13 +180,13 @@ var/global/list/gear_datums = list()
 		entry += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		entry += "<td>[FONT_NORMAL(G.get_description(get_gear_metadata(G,1)))]"
 		var/allowed = 1
-		if(allowed && G.allowed_roles)
+		if (allowed && G.allowed_roles)
 			var/good_job = 0
 			var/bad_job = 0
 			entry += "<br><i>"
 			var/list/jobchecks = list()
 			for(var/datum/job/J in jobs)
-				if(J.type in G.allowed_roles)
+				if (J.type in G.allowed_roles)
 					jobchecks += SPAN_COLOR("#55cc55", J.title)
 					good_job = 1
 				else
@@ -195,18 +195,18 @@ var/global/list/gear_datums = list()
 			allowed = good_job || !bad_job
 			entry += "[english_list(jobchecks)]</i>"
 
-		if(allowed && G.allowed_branches)
+		if (allowed && G.allowed_branches)
 			var/list/branches = list()
 			for(var/datum/job/J in jobs)
-				if(pref.branches[J.title])
+				if (pref.branches[J.title])
 					branches |= pref.branches[J.title]
-			if(length(branches))
+			if (length(branches))
 				var/list/branch_checks = list()
 				var/good_branch = 0
 				entry += "<br><i>"
 				for(var/branch in branches)
 					var/datum/mil_branch/player_branch = GLOB.mil_branches.get_branch(branch)
-					if(player_branch.type in G.allowed_branches)
+					if (player_branch.type in G.allowed_branches)
 						branch_checks += SPAN_COLOR("#55cc55", player_branch.name)
 						good_branch = 1
 					else
@@ -215,7 +215,7 @@ var/global/list/gear_datums = list()
 
 				entry += "[english_list(branch_checks)]</i>"
 
-		if(allowed && G.allowed_skills)
+		if (allowed && G.allowed_skills)
 			var/list/skills_required = list()//make it into instances? instead of path
 			for(var/skill in G.allowed_skills)
 				var/singleton/hierarchy/skill/instance = GET_SINGLETON(skill)
@@ -229,7 +229,7 @@ var/global/list/gear_datums = list()
 				var/singleton/hierarchy/skill/S = R
 				var/skill_entry
 				skill_entry += "[S.levels[skills_required[R]]]"
-				if(allowed)
+				if (allowed)
 					skill_entry = SPAN_COLOR("#55cc55", "[skill_entry] [R]")
 				else
 					skill_entry = SPAN_COLOR("#cc5555", "[skill_entry] [R]")
@@ -238,14 +238,14 @@ var/global/list/gear_datums = list()
 			entry += "[english_list(skill_checks)]</i>"
 
 		entry += "</tr>"
-		if(ticked)
+		if (ticked)
 			entry += "<tr><td colspan=3>"
 			for(var/datum/gear_tweak/tweak in G.gear_tweaks)
 				var/contents = tweak.get_contents(get_tweak_metadata(G, tweak))
-				if(contents)
+				if (contents)
 					entry += " <a href='?src=\ref[src];gear=\ref[G];tweak=\ref[tweak]'>[contents]</a>"
 			entry += "</td></tr>"
-		if(!hide_unavailable_gear || allowed || ticked)
+		if (!hide_unavailable_gear || allowed || ticked)
 			. += entry
 	. += "</table>"
 	. = jointext(.,null)
@@ -253,15 +253,15 @@ var/global/list/gear_datums = list()
 /datum/category_item/player_setup_item/loadout/proc/get_gear_metadata(datum/gear/G, readonly)
 	var/list/gear = pref.gear_list[pref.gear_slot]
 	. = gear[G.display_name]
-	if(!.)
+	if (!.)
 		. = list()
-		if(!readonly)
+		if (!readonly)
 			gear[G.display_name] = .
 
 /datum/category_item/player_setup_item/loadout/proc/get_tweak_metadata(datum/gear/G, datum/gear_tweak/tweak)
 	var/list/metadata = get_gear_metadata(G)
 	. = metadata["[tweak]"]
-	if(!.)
+	if (!.)
 		. = tweak.get_default()
 		metadata["[tweak]"] = .
 
@@ -270,48 +270,48 @@ var/global/list/gear_datums = list()
 	metadata["[tweak]"] = new_metadata
 
 /datum/category_item/player_setup_item/loadout/OnTopic(href, href_list, user)
-	if(href_list["toggle_gear"])
+	if (href_list["toggle_gear"])
 		var/datum/gear/TG = locate(href_list["toggle_gear"])
-		if(!istype(TG) || gear_datums[TG.display_name] != TG)
+		if (!istype(TG) || gear_datums[TG.display_name] != TG)
 			return TOPIC_REFRESH
-		if(TG.display_name in pref.gear_list[pref.gear_slot])
+		if (TG.display_name in pref.gear_list[pref.gear_slot])
 			pref.gear_list[pref.gear_slot] -= TG.display_name
 		else
 			var/total_cost = 0
 			for(var/gear_name in pref.gear_list[pref.gear_slot])
 				var/datum/gear/G = gear_datums[gear_name]
-				if(istype(G)) total_cost += G.cost
-			if((total_cost+TG.cost) <= config.max_gear_cost)
+				if (istype(G)) total_cost += G.cost
+			if ((total_cost+TG.cost) <= config.max_gear_cost)
 				pref.gear_list[pref.gear_slot] += TG.display_name
 		return TOPIC_REFRESH_UPDATE_PREVIEW
-	if(href_list["gear"] && href_list["tweak"])
+	if (href_list["gear"] && href_list["tweak"])
 		var/datum/gear/gear = locate(href_list["gear"])
 		var/datum/gear_tweak/tweak = locate(href_list["tweak"])
-		if(!tweak || !istype(gear) || !(tweak in gear.gear_tweaks) || gear_datums[gear.display_name] != gear)
+		if (!tweak || !istype(gear) || !(tweak in gear.gear_tweaks) || gear_datums[gear.display_name] != gear)
 			return TOPIC_NOACTION
 		var/metadata = tweak.get_metadata(user, get_tweak_metadata(gear, tweak))
-		if(!metadata || !CanUseTopic(user))
+		if (!metadata || !CanUseTopic(user))
 			return TOPIC_NOACTION
 		set_tweak_metadata(gear, tweak, metadata)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
-	if(href_list["next_slot"])
+	if (href_list["next_slot"])
 		pref.gear_slot = pref.gear_slot+1
-		if(pref.gear_slot > config.loadout_slots)
+		if (pref.gear_slot > config.loadout_slots)
 			pref.gear_slot = 1
 		return TOPIC_REFRESH_UPDATE_PREVIEW
-	if(href_list["prev_slot"])
+	if (href_list["prev_slot"])
 		pref.gear_slot = pref.gear_slot-1
-		if(pref.gear_slot < 1)
+		if (pref.gear_slot < 1)
 			pref.gear_slot = config.loadout_slots
 		return TOPIC_REFRESH_UPDATE_PREVIEW
-	if(href_list["select_category"])
+	if (href_list["select_category"])
 		current_tab = href_list["select_category"]
 		return TOPIC_REFRESH
-	if(href_list["clear_loadout"])
+	if (href_list["clear_loadout"])
 		var/list/gear = pref.gear_list[pref.gear_slot]
 		gear.Cut()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
-	if(href_list["toggle_hiding"])
+	if (href_list["toggle_hiding"])
 		hide_unavailable_gear = !hide_unavailable_gear
 		return TOPIC_REFRESH
 	return ..()
@@ -333,21 +333,21 @@ var/global/list/gear_datums = list()
 	var/list/gear_tweaks = list() //List of datums which will alter the item after it has been spawned.
 
 /datum/gear/New()
-	if(HAS_FLAGS(flags, GEAR_HAS_TYPE_SELECTION|GEAR_HAS_SUBTYPE_SELECTION))
+	if (HAS_FLAGS(flags, GEAR_HAS_TYPE_SELECTION|GEAR_HAS_SUBTYPE_SELECTION))
 		CRASH("May not have both type and subtype selection tweaks")
-	if(!description)
+	if (!description)
 		var/obj/O = path
 		description = initial(O.desc)
-	if(flags & GEAR_HAS_COLOR_SELECTION)
+	if (flags & GEAR_HAS_COLOR_SELECTION)
 		gear_tweaks += gear_tweak_free_color_choice()
-	if(!(flags & GEAR_HAS_NO_CUSTOMIZATION))
+	if (!(flags & GEAR_HAS_NO_CUSTOMIZATION))
 		gear_tweaks += gear_tweak_free_name(display_name)
 		gear_tweaks += gear_tweak_free_desc(description)
-	if(flags & GEAR_HAS_TYPE_SELECTION)
+	if (flags & GEAR_HAS_TYPE_SELECTION)
 		gear_tweaks += new/datum/gear_tweak/path/type(path)
-	if(flags & GEAR_HAS_SUBTYPE_SELECTION)
+	if (flags & GEAR_HAS_SUBTYPE_SELECTION)
 		gear_tweaks += new/datum/gear_tweak/path/subtype(path)
-	if(custom_setup_proc)
+	if (custom_setup_proc)
 		gear_tweaks += new/datum/gear_tweak/custom_setup(custom_setup_proc)
 
 /datum/gear/proc/get_description(metadata)
@@ -374,7 +374,7 @@ var/global/list/gear_datums = list()
 
 /datum/gear/proc/spawn_on_mob(mob/living/carbon/human/H, metadata)
 	var/obj/item/item = spawn_item(H, H, metadata)
-	if(H.equip_to_slot_if_possible(item, slot, TRYEQUIP_REDRAW | TRYEQUIP_DESTROY | TRYEQUIP_FORCE))
+	if (H.equip_to_slot_if_possible(item, slot, TRYEQUIP_REDRAW | TRYEQUIP_DESTROY | TRYEQUIP_FORCE))
 		. = item
 
 

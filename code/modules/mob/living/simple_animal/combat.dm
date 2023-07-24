@@ -2,13 +2,13 @@
 /mob/living/simple_animal/proc/attack_target(atom/A)
 	set waitfor = FALSE // For attack animations. Don't want the AI processor to get held up.
 
-	if(!A.Adjacent(src))
+	if (!A.Adjacent(src))
 		return ATTACK_FAILED
 	var/turf/their_T = get_turf(A)
 
 	face_atom(A)
 
-	if(melee_attack_delay)
+	if (melee_attack_delay)
 		melee_pre_animation(A)
 		. = ATTACK_SUCCESSFUL //Shoving this in here as a 'best guess' since this proc is about to sleep and return and we won't be able to know the real value
 		handle_attack_delay(A, melee_attack_delay) // This will sleep this proc for a bit, which is why waitfor is false.
@@ -19,7 +19,7 @@
 	// Returns a value, but will be lost if
 	. = do_attack(A, their_T)
 
-	if(melee_attack_delay)
+	if (melee_attack_delay)
 		melee_post_animation(A)
 
 // This does the actual attack.
@@ -34,7 +34,7 @@
 	else if (!T.AdjacentQuick(src))
 		missed = TRUE
 
-	if(missed) // Most likely we have a slow attack and they dodged it or we somehow got moved.
+	if (missed) // Most likely we have a slow attack and they dodged it or we somehow got moved.
 		playsound(src, 'sound/weapons/punchmiss.ogg', 75, 1)
 		visible_message(SPAN_WARNING("\The [src] misses their attack."))
 		return FALSE
@@ -63,22 +63,22 @@
 
 	face_atom(A)
 
-	if(ranged_attack_delay)
+	if (ranged_attack_delay)
 		ranged_pre_animation(A)
 		handle_attack_delay(A, ranged_attack_delay) // This will sleep this proc for a bit, which is why waitfor is false.
 
-	if(needs_reload)
-		if(reload_count >= reload_max)
+	if (needs_reload)
+		if (reload_count >= reload_max)
 			try_reload()
 			return FALSE
 
 	visible_message(SPAN_DANGER("<b>\The [src]</b> fires at \the [A]!"))
 	shoot(A)
-	if(casingtype)
+	if (casingtype)
 		var/obj/item/ammo_casing/b = new casingtype(loc)
 		b.expend()
 
-	if(ranged_attack_delay)
+	if (ranged_attack_delay)
 		ranged_post_animation(A)
 
 	return TRUE
@@ -86,13 +86,13 @@
 
 // Shoot a bullet at something.
 /mob/living/simple_animal/proc/shoot(atom/A)
-	if(A == get_turf(src))
+	if (A == get_turf(src))
 		return
 
 	face_atom(A)
 
 	var/obj/item/projectile/P = new projectiletype(src.loc)
-	if(!P)
+	if (!P)
 		return
 
 	// If the projectile has its own sound, use it.
@@ -106,15 +106,15 @@
 
 	P.firer = src
 	P.launch(target = A)
-	if(needs_reload)
+	if (needs_reload)
 		reload_count++
 
 /mob/living/simple_animal/proc/try_reload()
 	set waitfor = FALSE
 	set_AI_busy(TRUE)
 
-	if(do_after(src, reload_time, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT))
-		if(reload_sound)
+	if (do_after(src, reload_time, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT))
+		if (reload_sound)
 			playsound(src, reload_sound, 70, 1)
 		reload_count = 0
 		. = TRUE
@@ -134,24 +134,24 @@
 // Can we currently do a special attack?
 /mob/living/simple_animal/proc/can_special_attack(atom/A)
 	// Validity check.
-	if(!istype(A))
+	if (!istype(A))
 		return FALSE
 
 	// Ability check.
-	if(isnull(special_attack_min_range) || isnull(special_attack_max_range))
+	if (isnull(special_attack_min_range) || isnull(special_attack_max_range))
 		return FALSE
 
 	// Distance check.
 	var/distance = get_dist(src, A)
-	if(distance < special_attack_min_range || distance > special_attack_max_range)
+	if (distance < special_attack_min_range || distance > special_attack_max_range)
 		return FALSE
 
 	// Cooldown check.
-	if(!isnull(special_attack_cooldown) && last_special_attack + special_attack_cooldown > world.time)
+	if (!isnull(special_attack_cooldown) && last_special_attack + special_attack_cooldown > world.time)
 		return FALSE
 
 	// Charge check.
-	if(!isnull(special_attack_charges) && special_attack_charges <= 0)
+	if (!isnull(special_attack_charges) && special_attack_charges <= 0)
 		return FALSE
 
 	return TRUE
@@ -166,19 +166,19 @@
 	set waitfor = FALSE
 	face_atom(A)
 
-	if(special_attack_delay)
+	if (special_attack_delay)
 		special_pre_animation(A)
 		handle_attack_delay(A, special_attack_delay) // This will sleep this proc for a bit, which is why waitfor is false.
 
 	last_special_attack = world.time
-	if(do_special_attack(A))
-		if(special_attack_charges)
+	if (do_special_attack(A))
+		if (special_attack_charges)
 			special_attack_charges -= 1
 		. = TRUE
 	else
 		. = FALSE
 
-	if(special_attack_delay)
+	if (special_attack_delay)
 		special_post_animation(A)
 
 // Override this for the actual special attack.
@@ -218,6 +218,6 @@
 /mob/living/simple_animal/proc/special_post_animation(atom/A)
 
 /mob/living/simple_animal/proc/get_natural_weapon()
-	if(ispath(natural_weapon))
+	if (ispath(natural_weapon))
 		natural_weapon = new natural_weapon(src)
 	return natural_weapon

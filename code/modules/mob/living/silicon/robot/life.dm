@@ -12,7 +12,7 @@
 	handle_regular_status_updates()
 	handle_actions()
 
-	if(client)
+	if (client)
 		handle_regular_hud_updates()
 		update_items()
 	if (src.stat != DEAD) //still using power
@@ -40,8 +40,8 @@
 		for (var/obj/item as anything in GetAllHeld())
 			cell_use_power(50) // 50W load for every enabled tool TODO: tool-specific loads
 
-		if(lights_on)
-			if(intenselight)
+		if (lights_on)
+			if (intenselight)
 				cell_use_power(100)	// Upgraded light. Double intensity, much larger power usage.
 			else
 				cell_use_power(30) 	// 30W light. Normal lights would use ~15W, but increased for balance reasons.
@@ -55,7 +55,7 @@
 		visible_message("[src] beeps stridently as it begins to run on emergency backup power!", SPAN_WARNING("You beep stridently as you begin to run on emergency backup power!"))
 		has_power = FALSE
 		set_stat(UNCONSCIOUS)
-	if(lights_on) // Light is on but there is no power!
+	if (lights_on) // Light is on but there is no power!
 		lights_on = FALSE
 		set_light(0)
 
@@ -63,14 +63,14 @@
 
 	updatehealth()
 
-	if(src.sleeping)
+	if (src.sleeping)
 		Paralyse(3)
 		src.sleeping--
 
 	if (resting) // Just in case. This breaks things so never allow robots to rest.
 		resting = FALSE
 
-	if(health < config.health_threshold_dead && src.stat != 2) //die only once
+	if (health < config.health_threshold_dead && src.stat != 2) //die only once
 		death()
 
 	if (src.stat != DEAD) //Alive.
@@ -125,13 +125,13 @@
 	if (src.stat != CONSCIOUS)
 		uneq_all()
 
-	if(silicon_radio)
-		if(!is_component_functioning("radio"))
+	if (silicon_radio)
+		if (!is_component_functioning("radio"))
 			silicon_radio.on = 0
 		else
 			silicon_radio.on = 1
 
-	if(isnull(components["camera"]) || is_component_functioning("camera"))
+	if (isnull(components["camera"]) || is_component_functioning("camera"))
 		src.blinded = 0
 	else
 		src.blinded = 1
@@ -174,14 +174,14 @@
 
 	if (src.syndicate && src.client)
 		for(var/datum/mind/tra in GLOB.traitors.current_antagonists)
-			if(tra.current)
+			if (tra.current)
 				// TODO: Update to new antagonist system.
 				var/I = image('icons/mob/mob.dmi', loc = tra.current, icon_state = "traitor")
 				src.client.images += I
 		src.disconnect_from_ai()
-		if(src.mind)
+		if (src.mind)
 			// TODO: Update to new antagonist system.
-			if(!src.mind.special_role)
+			if (!src.mind.special_role)
 				src.mind.special_role = "traitor"
 				GLOB.traitors.current_antagonists |= src.mind
 
@@ -192,39 +192,39 @@
 		else
 			src.cells.icon_state = "charge-empty"
 
-	if(bodytemp)
+	if (bodytemp)
 		switch(src.bodytemperature) //310.055 optimal body temp
-			if(335 to INFINITY)
+			if (335 to INFINITY)
 				src.bodytemp.icon_state = "temp2"
-			if(320 to 335)
+			if (320 to 335)
 				src.bodytemp.icon_state = "temp1"
-			if(300 to 320)
+			if (300 to 320)
 				src.bodytemp.icon_state = "temp0"
-			if(260 to 300)
+			if (260 to 300)
 				src.bodytemp.icon_state = "temp-1"
 			else
 				src.bodytemp.icon_state = "temp-2"
 
 	var/datum/gas_mixture/environment = loc?.return_air()
-	if(fire && environment)
+	if (fire && environment)
 		switch(environment.temperature)
-			if(-INFINITY to T100C)
+			if (-INFINITY to T100C)
 				src.fire.icon_state = "fire0"
 			else
 				src.fire.icon_state = "fire1"
-	if(oxygen && environment)
+	if (oxygen && environment)
 		var/datum/species/species = all_species[SPECIES_HUMAN]
-		if(environment.gas[species.breath_type] >= species.breath_pressure)
+		if (environment.gas[species.breath_type] >= species.breath_pressure)
 			src.oxygen.icon_state = "oxy0"
 			for(var/gas in species.poison_types)
-				if(environment.gas[gas])
+				if (environment.gas[gas])
 					src.oxygen.icon_state = "oxy1"
 					break
 		else
 			src.oxygen.icon_state = "oxy1"
 
-	if(stat != DEAD)
-		if(blinded)
+	if (stat != DEAD)
+		if (blinded)
 			overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 		else
 			clear_fullscreen("blind")
@@ -236,7 +236,7 @@
 			if (machine.check_eye(src) < 0)
 				reset_view(null)
 		else
-			if(client && !client.adminobs)
+			if (client && !client.adminobs)
 				reset_view(null)
 
 	return 1
@@ -274,23 +274,23 @@
 	if (src.client)
 		src.client.screen -= src.contents
 		for(var/obj/I in src.contents)
-			if(I && !(istype(I,/obj/item/cell) || istype(I,/obj/item/device/radio)  || istype(I,/obj/machinery/camera) || istype(I,/obj/item/device/mmi)))
+			if (I && !(istype(I,/obj/item/cell) || istype(I,/obj/item/device/radio)  || istype(I,/obj/machinery/camera) || istype(I,/obj/item/device/mmi)))
 				src.client.screen += I
-	if(src.module_state_1)
+	if (src.module_state_1)
 		src.module_state_1:screen_loc = ui_inv1
-	if(src.module_state_2)
+	if (src.module_state_2)
 		src.module_state_2:screen_loc = ui_inv2
-	if(src.module_state_3)
+	if (src.module_state_3)
 		src.module_state_3:screen_loc = ui_inv3
 	update_icon()
 
 /mob/living/silicon/robot/update_fire()
 	overlays -= image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
-	if(on_fire)
+	if (on_fire)
 		overlays += image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
 
 /mob/living/silicon/robot/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if (status_flags & GODMODE)
 		return
-	if(!on_fire) //Silicons don't gain stacks from hotspots, but hotspots can ignite them
+	if (!on_fire) //Silicons don't gain stacks from hotspots, but hotspots can ignite them
 		IgniteMob()

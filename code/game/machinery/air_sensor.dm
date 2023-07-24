@@ -22,7 +22,7 @@
 	base_type = /obj/machinery/air_sensor
 
 /obj/machinery/air_sensor/on_update_icon()
-	if(!powered())
+	if (!powered())
 		icon_state = "gsensor0"
 	else
 		icon_state = "gsensor[use_power]"
@@ -37,10 +37,10 @@
 
 /singleton/public_access/public_variable/gas/access_var(obj/machinery/sensor)
 	var/datum/gas_mixture/air_sample = sensor.return_air()
-	if(!air_sample)
+	if (!air_sample)
 		return
 	var/total_moles = air_sample.total_moles
-	if(total_moles <= 0)
+	if (total_moles <= 0)
 		return
 
 	. = list()

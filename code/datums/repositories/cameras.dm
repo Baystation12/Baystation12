@@ -20,7 +20,7 @@ var/global/repository/cameras/camera_repository = new()
 	return network_list
 
 /repository/cameras/proc/setup_cache()
-	if(!invalidated)
+	if (!invalidated)
 		return
 	invalidated = 0
 
@@ -28,7 +28,7 @@ var/global/repository/cameras/camera_repository = new()
 		var/obj/machinery/camera/C = sc
 		var/cam = C.nano_structure()
 		for(var/network in C.network)
-			if(!networks[network])
+			if (!networks[network])
 				ADD_SORTED(networks, network, /proc/cmp_text_asc)
 				networks[network] = list()
 			var/list/netlist = networks[network]

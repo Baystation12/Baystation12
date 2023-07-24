@@ -19,7 +19,7 @@
 	. = ..()
 
 /obj/effect/force_portal/Process()
-	if(boom_time && boom_time < world.time)
+	if (boom_time && boom_time < world.time)
 		boom()
 		boom_time = 0
 
@@ -31,7 +31,7 @@
 		possible_turfs -= target
 		var/atom/movable/picked = pick(contents)
 		picked.dropInto(loc)
-		if(istype(picked, /obj/item/projectile))
+		if (istype(picked, /obj/item/projectile))
 			var/obj/item/projectile/P = picked
 			P.launch(target)
 			playsound(src, P.fire_sound ? P.fire_sound : 'sound/effects/teleport.ogg', 60, 1)
@@ -44,9 +44,9 @@
 /obj/effect/force_portal/onDropInto(atom/movable/AM)
 	boom_time -= 1 SECOND
 	src.visible_message(SPAN_WARNING("\The [src] sucks in \the [AM]!"))
-	if(!ismob(AM))
+	if (!ismob(AM))
 		var/obj/O = AM
-		if(O.w_class <= ITEM_SIZE_SMALL)
+		if (O.w_class <= ITEM_SIZE_SMALL)
 			return //Dont spam for small stuff
 	playsound(src,'sound/effects/teleport.ogg',40,1)
 	return
@@ -56,7 +56,7 @@
 
 /obj/effect/force_portal/bullet_act(obj/item/projectile/P)
 	var/atom/movable/AM = new P.type()
-	if(istype(P, /obj/item/projectile/bullet/pellet))
+	if (istype(P, /obj/item/projectile/bullet/pellet))
 		var/obj/item/projectile/bullet/pellet/old_pellet = P
 		var/obj/item/projectile/bullet/pellet/new_pellet = AM
 		new_pellet.pellets = old_pellet.pellets

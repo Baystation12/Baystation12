@@ -26,14 +26,14 @@
 
 // Actually decay the turf.
 /datum/universal_state/proc/DecayTurf(turf/T)
-	if(istype(T,/turf/simulated/wall))
+	if (istype(T,/turf/simulated/wall))
 		var/turf/simulated/wall/W=T
 		W.melt()
 		return
-	if(istype(T,/turf/simulated/floor))
+	if (istype(T,/turf/simulated/floor))
 		var/turf/simulated/floor/F=T
 		// Burnt?
-		if(!F.burnt)
+		if (!F.burnt)
 			F.burn_tile()
 		else
 			F.ReplaceWithLattice()
@@ -45,7 +45,7 @@
 
 // Processed per tick
 /datum/universal_state/proc/OnTurfTick(turf/T)
-	if(decay_rate && prob(decay_rate))
+	if (decay_rate && prob(decay_rate))
 		DecayTurf(T)
 
 // Apply changes when exiting state
@@ -70,11 +70,11 @@
 	return TRUE //return FALSE to cancel map edge handling
 
 /proc/SetUniversalState(newstate,on_exit=1, on_enter=1, list/arguments=null)
-	if(on_exit)
+	if (on_exit)
 		GLOB.universe.OnExit()
-	if(arguments)
+	if (arguments)
 		GLOB.universe = new newstate(arglist(arguments))
 	else
 		GLOB.universe = new newstate
-	if(on_enter)
+	if (on_enter)
 		GLOB.universe.OnEnter()

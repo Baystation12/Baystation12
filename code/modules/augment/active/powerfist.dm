@@ -178,7 +178,7 @@
 						playsound(A, 'sound/machines/airlock_creaking.ogg', 100, 1)
 						if (A.density)
 							addtimer(new Callback(A, /obj/machinery/door/airlock/.proc/open, TRUE), 0)
-							if(!MACHINE_IS_BROKEN(A) && A.is_powered())
+							if (!MACHINE_IS_BROKEN(A) && A.is_powered())
 								A.set_broken(TRUE)
 							A.visible_message(SPAN_DANGER("\The [user] forces \the [A] open with \a [src]!"))
 						else

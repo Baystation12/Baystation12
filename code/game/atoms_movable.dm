@@ -42,13 +42,13 @@
 
 //call this proc to start space drifting
 /atom/movable/proc/space_drift(direction)//move this down
-	if(!loc || direction & (UP|DOWN) || Process_Spacemove(0))
+	if (!loc || direction & (UP|DOWN) || Process_Spacemove(0))
 		inertia_dir = 0
 		inertia_ignore = null
 		return 0
 
 	inertia_dir = direction
-	if(!direction)
+	if (!direction)
 		return 1
 	inertia_last_loc = loc
 	SSspacedrift.processing[src] = src
@@ -56,25 +56,25 @@
 
 //return 0 to space drift, 1 to stop, -1 for mobs to handle space slips
 /atom/movable/proc/Process_Spacemove(allow_movement)
-	if(!simulated)
+	if (!simulated)
 		return 1
 
-	if(has_gravity())
+	if (has_gravity())
 		return 1
 
-	if(pulledby)
+	if (pulledby)
 		return 1
 
-	if(throwing)
+	if (throwing)
 		return 1
 
-	if(anchored)
+	if (anchored)
 		return 1
 
-	if(!isturf(loc))
+	if (!isturf(loc))
 		return 1
 
-	if(locate(/obj/structure/lattice) in range(1, get_turf(src))) //Not realistic but makes pushing things in space easier
+	if (locate(/obj/structure/lattice) in range(1, get_turf(src))) //Not realistic but makes pushing things in space easier
 		return -1
 
 	return 0
@@ -86,37 +86,37 @@
 /atom/movable/proc/process_momentum(atom/movable/AM, datum/thrownthing/TT)//physic isn't an exact science
 	. = momentum_power(AM,TT)
 
-	if(.)
+	if (.)
 		momentum_do(.,TT,AM)
 
 /atom/movable/proc/momentum_power(atom/movable/AM, datum/thrownthing/TT)
-	if(anchored)
+	if (anchored)
 		return 0
 
 	. = (AM.get_mass()*TT.speed)/(get_mass()*min(AM.throw_speed,2))
-	if(has_gravity())
+	if (has_gravity())
 		. *= 0.5
 
 /atom/movable/proc/momentum_do(power, datum/thrownthing/TT)
 	var/direction = TT.init_dir
 	switch(power)
-		if(0.75 to INFINITY)		//blown backward, also calls being pinned to walls
+		if (0.75 to INFINITY)		//blown backward, also calls being pinned to walls
 			throw_at(get_edge_target_turf(src, direction), min((TT.maxrange - TT.dist_travelled) * power, 10), throw_speed * min(power, 1.5))
 
-		if(0.5 to 0.75)	//knocks them back and changes their direction
+		if (0.5 to 0.75)	//knocks them back and changes their direction
 			step(src, direction)
 
-		if(0.25 to 0.5)	//glancing change in direction
+		if (0.25 to 0.5)	//glancing change in direction
 			var/drift_dir
-			if(direction & (NORTH|SOUTH))
-				if(inertia_dir & (NORTH|SOUTH))
+			if (direction & (NORTH|SOUTH))
+				if (inertia_dir & (NORTH|SOUTH))
 					drift_dir |= (direction & (NORTH|SOUTH)) & (inertia_dir & (NORTH|SOUTH))
 				else
 					drift_dir |= direction & (NORTH|SOUTH)
 			else
 				drift_dir |= inertia_dir & (NORTH|SOUTH)
-			if(direction & (EAST|WEST))
-				if(inertia_dir & (EAST|WEST))
+			if (direction & (EAST|WEST))
+				if (inertia_dir & (EAST|WEST))
 					drift_dir |= (direction & (EAST|WEST)) & (inertia_dir & (EAST|WEST))
 				else
 					drift_dir |= direction & (EAST|WEST)
@@ -133,13 +133,13 @@
 		glide_size = config.glide_size
 	. = ..()
 	var/emissive_block = update_emissive_blocker()
-	if(emissive_block)
+	if (emissive_block)
 		overlays += emissive_block
 		// Since this overlay is managed by the update_overlays proc
 		LAZYADD(managed_overlays, emissive_block)
 
 /atom/movable/Destroy()
-	if(!(atom_flags & ATOM_FLAG_INITIALIZED))
+	if (!(atom_flags & ATOM_FLAG_INITIALIZED))
 		crash_with("\A [src] was deleted before initalization")
 	walk(src, 0)
 	for(var/A in src)
@@ -161,10 +161,10 @@
 	return ..()
 
 /atom/movable/Bump(atom/A, yes)
-	if(!QDELETED(throwing))
+	if (!QDELETED(throwing))
 		throwing.hit_atom(A)
 
-	if(inertia_dir)
+	if (inertia_dir)
 		inertia_dir = 0
 
 	if (A && yes)
@@ -173,9 +173,9 @@
 	..()
 
 /atom/movable/proc/forceMove(atom/destination)
-	if((gc_destroyed && gc_destroyed != GC_CURRENTLY_BEING_QDELETED) && !isnull(destination))
+	if ((gc_destroyed && gc_destroyed != GC_CURRENTLY_BEING_QDELETED) && !isnull(destination))
 		CRASH("Attempted to forceMove a QDELETED [src] out of nullspace!!!")
-	if(loc == destination)
+	if (loc == destination)
 		return 0
 	var/is_origin_turf = isturf(loc)
 	var/is_destination_turf = isturf(destination)
@@ -187,21 +187,21 @@
 	var/atom/origin = loc
 	loc = destination
 
-	if(origin)
+	if (origin)
 		origin.Exited(src, destination)
-		if(is_origin_turf)
+		if (is_origin_turf)
 			for(var/atom/movable/AM in origin)
 				AM.Uncrossed(src)
-			if(is_new_area && is_origin_turf)
+			if (is_new_area && is_origin_turf)
 				origin.loc.Exited(src, destination)
 
-	if(destination)
+	if (destination)
 		destination.Entered(src, origin)
-		if(is_destination_turf) // If we're entering a turf, cross all movable atoms
+		if (is_destination_turf) // If we're entering a turf, cross all movable atoms
 			for(var/atom/movable/AM in loc)
-				if(AM != src)
+				if (AM != src)
 					AM.Crossed(src)
-			if(is_new_area && is_destination_turf)
+			if (is_new_area && is_destination_turf)
 				destination.loc.Entered(src, origin)
 	return 1
 
@@ -210,11 +210,11 @@
 	. = ..()
 	if (.)
 		// observ
-		if(!loc)
+		if (!loc)
 			GLOB.moved_event.raise_event(src, old_loc, null)
 
 		// freelook
-		if(opacity)
+		if (opacity)
 			updateVisibility(src)
 
 		// lighting
@@ -226,11 +226,11 @@
 	var/old_loc = loc
 	. = ..()
 	if (.)
-		if(!loc)
+		if (!loc)
 			GLOB.moved_event.raise_event(src, old_loc, null)
 
 		// freelook
-		if(opacity)
+		if (opacity)
 			updateVisibility(src)
 
 		// lighting
@@ -240,17 +240,17 @@
 
 //called when src is thrown into hit_atom
 /atom/movable/proc/throw_impact(atom/hit_atom, datum/thrownthing/TT)
-	if(istype(hit_atom,/mob/living))
+	if (istype(hit_atom,/mob/living))
 		var/mob/living/M = hit_atom
 		M.hitby(src,TT)
 
-	else if(isobj(hit_atom))
+	else if (isobj(hit_atom))
 		var/obj/O = hit_atom
-		if(!O.anchored)
+		if (!O.anchored)
 			step(O, src.last_move)
 		O.hitby(src,TT)
 
-	else if(isturf(hit_atom))
+	else if (isturf(hit_atom))
 		var/turf/T = hit_atom
 		T.hitby(src,TT)
 
@@ -266,7 +266,7 @@
 	throwing = TT
 
 	pixel_z = 0
-	if(spin && does_spin)
+	if (spin && does_spin)
 		SpinAnimation(4,1)
 
 	SSthrowing.processing[src] = TT
@@ -302,14 +302,14 @@
 	simulated = FALSE
 
 /atom/movable/overlay/Initialize()
-	if(!loc)
+	if (!loc)
 		crash_with("[type] created in nullspace.")
 		return INITIALIZE_HINT_QDEL
 	master = loc
 	SetName(master.name)
 	set_dir(master.dir)
 
-	if(istype(master, /atom/movable))
+	if (istype(master, /atom/movable))
 		GLOB.moved_event.register(master, src, follow_proc)
 		SetInitLoc()
 
@@ -322,7 +322,7 @@
 	forceMove(master.loc)
 
 /atom/movable/overlay/Destroy()
-	if(istype(master, /atom/movable))
+	if (istype(master, /atom/movable))
 		GLOB.moved_event.unregister(master, src)
 	GLOB.destroyed_event.unregister(master, src)
 	GLOB.dir_set_event.unregister(master, src)
@@ -355,24 +355,24 @@
 		return master.attack_hand(user)
 
 /atom/movable/proc/touch_map_edge()
-	if(!simulated)
+	if (!simulated)
 		return
 
-	if(!z || (z in GLOB.using_map.sealed_levels))
+	if (!z || (z in GLOB.using_map.sealed_levels))
 		return
 
-	if(!GLOB.universe.OnTouchMapEdge(src))
+	if (!GLOB.universe.OnTouchMapEdge(src))
 		return
 
-	if(GLOB.using_map.use_overmap)
+	if (GLOB.using_map.use_overmap)
 		overmap_spacetravel(get_turf(src), src)
 		return
 
 	var/new_x
 	var/new_y
 	var/new_z = GLOB.using_map.get_transit_zlevel(z)
-	if(new_z)
-		if(x <= TRANSITIONEDGE)
+	if (new_z)
+		if (x <= TRANSITIONEDGE)
 			new_x = world.maxx - TRANSITIONEDGE - 2
 			new_y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
 
@@ -389,7 +389,7 @@
 			new_x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
 
 		var/turf/T = locate(new_x, new_y, new_z)
-		if(T)
+		if (T)
 			forceMove(T)
 
 /atom/movable/proc/get_bullet_impact_effect_type()

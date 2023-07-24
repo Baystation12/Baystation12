@@ -20,7 +20,7 @@ SUBSYSTEM_DEF(ao)
 	var/cut_until = 1
 	for (var/turf/turf as anything in queue)
 		++cut_until
-		if(QDELETED(turf))
+		if (QDELETED(turf))
 			continue
 		if (turf.ao_queued == AO_UPDATE_REBUILD)
 			var/previous_neighbours = turf.ao_neighbors

@@ -27,18 +27,18 @@
 
 /obj/item/card/union/examine(mob/user)
 	. = ..()
-	if(signed_by)
+	if (signed_by)
 		to_chat(user, "It has been signed by [signed_by].")
 	else
 		to_chat(user, "It has a blank space for a signature.")
 
 /obj/item/card/union/attackby(obj/item/thing, mob/user)
-	if(istype(thing, /obj/item/pen))
-		if(signed_by)
+	if (istype(thing, /obj/item/pen))
+		if (signed_by)
 			to_chat(user, SPAN_WARNING("\The [src] has already been signed."))
 		else
 			var/signature = sanitizeSafe(input("What do you want to sign the card as?", "Union Card") as text, MAX_NAME_LEN)
-			if(signature && !signed_by && !user.incapacitated() && Adjacent(user))
+			if (signature && !signed_by && !user.incapacitated() && Adjacent(user))
 				signed_by = signature
 				user.visible_message(SPAN_NOTICE("\The [user] signs \the [src] with a flourish."))
 		return
@@ -57,20 +57,20 @@
 
 
 /obj/item/card/operant_card/proc/set_info(mob/living/carbon/human/human)
-	if(!istype(human))
+	if (!istype(human))
 		return
 	switch(human.psi?.rating)
-		if(0)
+		if (0)
 			use_rating = "[human.psi.rating]-Lambda"
-		if(1)
+		if (1)
 			use_rating = "[human.psi.rating]-Epsilon"
-		if(2)
+		if (2)
 			use_rating = "[human.psi.rating]-Gamma"
-		if(3)
+		if (3)
 			use_rating = "[human.psi.rating]-Delta"
-		if(4)
+		if (4)
 			use_rating = "[human.psi.rating]-Beta"
-		if(5)
+		if (5)
 			use_rating = "[human.psi.rating]-Alpha"
 		if (6 to INFINITY)
 			use_rating = "[human.psi.rating]-Omega"
@@ -115,7 +115,7 @@
 	overlays += detail_overlay
 
 /obj/item/card/data/attackby(obj/item/I, mob/living/user)
-	if(istype(I, /obj/item/device/integrated_electronics/detailer))
+	if (istype(I, /obj/item/device/integrated_electronics/detailer))
 		var/obj/item/device/integrated_electronics/detailer/D = I
 		detail_color = D.detail_color
 		update_icon()
@@ -142,7 +142,7 @@
 
 /obj/item/card/emag_broken/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 0 && (user.skill_check(SKILL_DEVICES, SKILL_TRAINED) || player_is_antag(user.mind)))
+	if (distance <= 0 && (user.skill_check(SKILL_DEVICES, SKILL_TRAINED) || player_is_antag(user.mind)))
 		to_chat(user, SPAN_WARNING("You can tell the components are completely fried; whatever use it may have had before is gone."))
 
 /obj/item/card/emag_broken/get_antag_info()
@@ -161,15 +161,15 @@ var/global/const/NO_EMAG_ACT = -50
 
 /obj/item/card/emag/resolve_attackby(atom/A, mob/user)
 	var/used_uses = A.emag_act(uses, user, src)
-	if(used_uses == NO_EMAG_ACT)
+	if (used_uses == NO_EMAG_ACT)
 		return ..(A, user)
 
 	uses -= used_uses
 	A.add_fingerprint(user)
-	if(used_uses)
+	if (used_uses)
 		log_and_message_admins("emagged \an [A].")
 
-	if(uses<1)
+	if (uses<1)
 		user.visible_message(SPAN_WARNING("\The [src] fizzles and sparks - it seems it's been used once too often, and is now spent."))
 		var/obj/item/card/emag_broken/junk = new(user.loc)
 		junk.add_fingerprint(user)
@@ -223,13 +223,13 @@ var/global/const/NO_EMAG_ACT = -50
 
 /obj/item/card/id/Initialize()
 	.=..()
-	if(job_access_type)
+	if (job_access_type)
 		var/datum/job/j = SSjobs.get_by_path(job_access_type)
-		if(j)
+		if (j)
 			rank = j.title
 			assignment = rank
 			access |= j.get_access()
-			if(!detail_color)
+			if (!detail_color)
 				detail_color = j.selection_color
 	update_icon()
 
@@ -245,26 +245,26 @@ var/global/const/NO_EMAG_ACT = -50
 		overlays += overlay_image(icon, detail, flags=RESET_COLOR)
 
 /obj/item/card/id/CanUseTopic(user)
-	if(user in view(get_turf(src)))
+	if (user in view(get_turf(src)))
 		return STATUS_INTERACTIVE
 
 /obj/item/card/id/OnTopic(mob/user, list/href_list)
-	if(href_list["look_at_id"])
-		if(istype(user))
+	if (href_list["look_at_id"])
+		if (istype(user))
 			examinate(user, src)
 			return TOPIC_HANDLED
 
 /obj/item/card/id/examine(mob/user, distance)
 	. = ..()
 	to_chat(user, "It says '[get_display_name()]'.")
-	if(distance <= 1)
+	if (distance <= 1)
 		show(user)
 
 /obj/item/card/id/proc/prevent_tracking()
 	return 0
 
 /obj/item/card/id/proc/show(mob/user as mob)
-	if(front && side)
+	if (front && side)
 		send_rsc(user, front, "front.png")
 		send_rsc(user, side, "side.png")
 	var/datum/browser/popup = new(user, "idcard", name, 600, 250)
@@ -275,11 +275,11 @@ var/global/const/NO_EMAG_ACT = -50
 
 /obj/item/card/id/proc/get_display_name()
 	. = registered_name
-	if(military_rank && military_rank.name_short)
+	if (military_rank && military_rank.name_short)
 		. ="[military_rank.name_short] [.][formal_name_suffix]"
-	else if(formal_name_prefix || formal_name_suffix)
+	else if (formal_name_prefix || formal_name_suffix)
 		. = "[formal_name_prefix][.][formal_name_suffix]"
-	if(assignment)
+	if (assignment)
 		. += ", [assignment]"
 
 /obj/item/card/id/proc/set_id_photo(mob/M)
@@ -291,10 +291,10 @@ var/global/const/NO_EMAG_ACT = -50
 
 	id_card.formal_name_prefix = initial(id_card.formal_name_prefix)
 	id_card.formal_name_suffix = initial(id_card.formal_name_suffix)
-	if(client && client.prefs)
+	if (client && client.prefs)
 		for(var/culturetag in client.prefs.cultural_info)
 			var/singleton/cultural_info/culture = SSculture.get_culture(client.prefs.cultural_info[culturetag])
-			if(culture)
+			if (culture)
 				id_card.formal_name_prefix = "[culture.get_formal_name_prefix()][id_card.formal_name_prefix]"
 				id_card.formal_name_suffix = "[id_card.formal_name_suffix][culture.get_formal_name_suffix()]"
 
@@ -302,12 +302,12 @@ var/global/const/NO_EMAG_ACT = -50
 
 	var/pronouns = "Unset"
 	var/datum/pronouns/P = choose_from_pronouns()
-	if(P)
+	if (P)
 		pronouns = P.formal_term
 	id_card.sex = pronouns
 	id_card.set_id_photo(src)
 
-	if(dna)
+	if (dna)
 		id_card.blood_type		= dna.b_type
 		id_card.dna_hash		= dna.unique_enzymes
 		id_card.fingerprint_hash= md5(dna.uni_identity)
@@ -315,13 +315,13 @@ var/global/const/NO_EMAG_ACT = -50
 /mob/living/carbon/human/set_id_info(obj/item/card/id/id_card)
 	..()
 	id_card.age = age
-	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
+	if (GLOB.using_map.flags & MAP_HAS_BRANCH)
 		id_card.military_branch = char_branch
-	if(GLOB.using_map.flags & MAP_HAS_RANK)
+	if (GLOB.using_map.flags & MAP_HAS_RANK)
 		id_card.military_rank = char_rank
 		if (char_rank)
 			var/singleton/rank_category/category = char_rank.rank_category()
-			if(category)
+			if (category)
 				for(var/add_access in category.add_accesses)
 					id_card.access.Add(add_access)
 
@@ -331,16 +331,16 @@ var/global/const/NO_EMAG_ACT = -50
 	dat += text("Pronouns: []</A><BR>\n", sex)
 	dat += text("Age: []</A><BR>\n", age)
 
-	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
+	if (GLOB.using_map.flags & MAP_HAS_BRANCH)
 		dat += text("Branch: []</A><BR>\n", military_branch ? military_branch.name : "\[UNSET\]")
-	if(GLOB.using_map.flags & MAP_HAS_RANK)
+	if (GLOB.using_map.flags & MAP_HAS_RANK)
 		dat += text("Rank: []</A><BR>\n", military_rank ? military_rank.name : "\[UNSET\]")
 
 	dat += text("Assignment: []</A><BR>\n", assignment)
 	dat += text("Fingerprint: []</A><BR>\n", fingerprint_hash)
 	dat += text("Blood Type: []<BR>\n", blood_type)
 	dat += text("DNA Hash: []<BR><BR>\n", dna_hash)
-	if(front && side)
+	if (front && side)
 		dat +="<td align = center valign = top>Photo:<br><img src=front.png height=80 width=80 border=4><img src=side.png height=80 width=80 border=4></td>"
 	dat += "</tr></table>"
 	return jointext(dat,null)
@@ -374,21 +374,21 @@ var/global/const/NO_EMAG_ACT = -50
 	handled_vars = list("military_branch")
 
 /singleton/vv_set_handler/id_card_military_branch/handle_set_var(obj/item/card/id/id, variable, var_value, client)
-	if(!var_value)
+	if (!var_value)
 		id.military_branch = null
 		id.military_rank = null
 		return
 
-	if(istype(var_value, /datum/mil_branch))
-		if(var_value != id.military_branch)
+	if (istype(var_value, /datum/mil_branch))
+		if (var_value != id.military_branch)
 			id.military_branch = var_value
 			id.military_rank = null
 		return
 
-	if(ispath(var_value, /datum/mil_branch) || istext(var_value))
+	if (ispath(var_value, /datum/mil_branch) || istext(var_value))
 		var/datum/mil_branch/new_branch = GLOB.mil_branches.get_branch(var_value)
-		if(new_branch)
-			if(new_branch != id.military_branch)
+		if (new_branch)
+			if (new_branch != id.military_branch)
 				id.military_branch = new_branch
 				id.military_rank = null
 			return
@@ -400,25 +400,25 @@ var/global/const/NO_EMAG_ACT = -50
 	handled_vars = list("military_rank")
 
 /singleton/vv_set_handler/id_card_military_rank/handle_set_var(obj/item/card/id/id, variable, var_value, client)
-	if(!var_value)
+	if (!var_value)
 		id.military_rank = null
 		return
 
-	if(!id.military_branch)
+	if (!id.military_branch)
 		to_chat(client, SPAN_WARNING("military_branch not set - No valid ranks available"))
 		return
 
-	if(ispath(var_value, /datum/mil_rank))
+	if (ispath(var_value, /datum/mil_rank))
 		var/datum/mil_rank/rank = var_value
 		var_value = initial(rank.name)
 
-	if(istype(var_value, /datum/mil_rank))
+	if (istype(var_value, /datum/mil_rank))
 		var/datum/mil_rank/rank = var_value
 		var_value = rank.name
 
-	if(istext(var_value))
+	if (istext(var_value))
 		var/new_rank = GLOB.mil_branches.get_rank(id.military_branch.name, var_value)
-		if(new_rank)
+		if (new_rank)
 			id.military_rank = new_rank
 			return
 
@@ -510,20 +510,20 @@ var/global/const/NO_EMAG_ACT = -50
 
 /obj/item/card/id/foundation/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1 && isliving(user))
+	if (distance <= 1 && isliving(user))
 		var/mob/living/M = user
-		if(M.psi)
+		if (M.psi)
 			to_chat(user, SPAN_WARNING("There is a psionic compulsion surrounding \the [src], forcing anyone who reads it to perceive it as a legitimate document of authority. The actual text just reads 'I can do what I want.'"))
 		else
 			to_chat(user, SPAN_NOTICE("This is the real deal, stamped by [GLOB.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe it implicitly."))
 
 /obj/item/card/id/foundation/attack_self(mob/living/user)
 	. = ..()
-	if(istype(user))
+	if (istype(user))
 		for(var/mob/M in viewers(world.view, get_turf(user))-user)
-			if(user.psi && isliving(M))
+			if (user.psi && isliving(M))
 				var/mob/living/L = M
-				if(!L.psi)
+				if (!L.psi)
 					to_chat(L, SPAN_NOTICE("This is the real deal, stamped by [GLOB.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe \the [user] implicitly."))
 					continue
 			to_chat(M, SPAN_WARNING("There is a psionic compulsion surrounding \the [src] in a flicker of indescribable light."))

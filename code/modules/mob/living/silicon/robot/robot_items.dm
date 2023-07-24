@@ -21,10 +21,10 @@
 							Syncing to the research server will send the data that is stored inside to research.\n\
 							Ejecting will place the loaded item onto the floor.",
 							"What would you like to do?", "Analyze", "Sync", "Eject")
-	if(response == "Analyze")
-		if(loaded_item)
+	if (response == "Analyze")
+		if (loaded_item)
 			var/confirm = alert(user, "This will destroy the item inside forever.  Are you sure?","Confirm Analyze","Yes","No")
-			if(confirm == "Yes" && !QDELETED(loaded_item)) //This is pretty copypasta-y
+			if (confirm == "Yes" && !QDELETED(loaded_item)) //This is pretty copypasta-y
 				to_chat(user, "You activate the analyzer's microlaser, analyzing \the [loaded_item] and breaking it down.")
 				flick("portable_analyzer_scan", src)
 				playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
@@ -35,9 +35,9 @@
 				for(var/obj/I in contents)
 					for(var/mob/M in I.contents)
 						M.death()
-					if(istype(I,/obj/item/stack/material))//Only deconstructs one sheet at a time instead of the entire stack
+					if (istype(I,/obj/item/stack/material))//Only deconstructs one sheet at a time instead of the entire stack
 						var/obj/item/stack/material/S = I
-						if(S.use(1))
+						if (S.use(1))
 							loaded_item = S
 						else
 							qdel(S)
@@ -51,7 +51,7 @@
 				return
 		else
 			to_chat(user, "The [src] is empty.  Put something inside it first.")
-	if(response == "Sync")
+	if (response == "Sync")
 		var/success = 0
 		for(var/obj/machinery/r_n_d/server/S in SSmachines.machinery)
 			for(var/datum/tech/T in files.known_tech) //Uploading
@@ -60,14 +60,14 @@
 				files.AddTech2Known(T)
 			success = 1
 			files.RefreshResearch()
-		if(success)
+		if (success)
 			to_chat(user, "You connect to the research server, push your data upstream to it, then pull the resulting merged data from the master branch.")
 			playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
 		else
 			to_chat(user, "Reserch server ping response timed out.  Unable to connect.  Please contact the system administrator.")
 			playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 1)
-	if(response == "Eject")
-		if(loaded_item)
+	if (response == "Eject")
+		if (loaded_item)
 			loaded_item.dropInto(loc)
 			desc = initial(desc)
 			icon_state = initial(icon_state)
@@ -77,14 +77,14 @@
 
 
 /obj/item/portable_destructive_analyzer/afterattack(atom/target, mob/living/user, proximity)
-	if(!target)
+	if (!target)
 		return
-	if(!proximity)
+	if (!proximity)
 		return
-	if(!isturf(target.loc)) // Don't load up stuff if it's inside a container or mob!
+	if (!isturf(target.loc)) // Don't load up stuff if it's inside a container or mob!
 		return
-	if(istype(target,/obj/item))
-		if(loaded_item)
+	if (istype(target,/obj/item))
+		if (loaded_item)
 			to_chat(user, "Your [src] already has something inside.  Analyze or eject it first.")
 			return
 		var/obj/item/I = target
@@ -174,15 +174,15 @@
 	icon_state = "autoharvester"
 
 /obj/item/robot_harvester/afterattack(atom/target, mob/living/user, proximity)
-	if(!target)
+	if (!target)
 		return
-	if(!proximity)
+	if (!proximity)
 		return
-	if(istype(target,/obj/machinery/portable_atmospherics/hydroponics))
+	if (istype(target,/obj/machinery/portable_atmospherics/hydroponics))
 		var/obj/machinery/portable_atmospherics/hydroponics/T = target
-		if(T.harvest) //Try to harvest, assuming it's alive.
+		if (T.harvest) //Try to harvest, assuming it's alive.
 			T.harvest(user)
-		else if(T.dead) //It's probably dead otherwise.
+		else if (T.dead) //It's probably dead otherwise.
 			T.remove_dead(user)
 	else
 		to_chat(user, "Harvesting \a [target] is not the purpose of this tool. \The [src] is for plants being grown.")
@@ -212,17 +212,17 @@
 /obj/item/pen/robopen/attack_self(mob/user as mob)
 
 	var/choice = input("Would you like to change colour or mode?") as null|anything in list("Colour","Mode")
-	if(!choice) return
+	if (!choice) return
 
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
 
 	switch(choice)
 
-		if("Colour")
+		if ("Colour")
 			var/newcolour = input("Which colour would you like to use?") as null|anything in list("black","blue","red","green","yellow")
-			if(newcolour) colour = newcolour
+			if (newcolour) colour = newcolour
 
-		if("Mode")
+		if ("Mode")
 			if (mode == 1)
 				mode = 2
 			else
@@ -242,7 +242,7 @@
 		return
 
 	//n_name = copytext(n_name, 1, 32)
-	if(( get_dist(user,paper) <= 1  && user.stat == 0))
+	if (( get_dist(user,paper) <= 1  && user.stat == 0))
 		paper.SetName("paper[(n_name ? text("- '[n_name]'") : null)]")
 		paper.last_modified_ckey = user.ckey
 	add_fingerprint(user)
@@ -261,10 +261,10 @@
 
 /obj/item/form_printer/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
 
-	if(!target || !flag)
+	if (!target || !flag)
 		return
 
-	if(istype(target,/obj/structure/table))
+	if (istype(target,/obj/structure/table))
 		deploy_paper(get_turf(target))
 
 /obj/item/form_printer/attack_self(mob/user as mob)
@@ -437,7 +437,7 @@
 		held += new object_type(src)
 
 /obj/item/robot_rack/attack_self(mob/user)
-	if(!length(held))
+	if (!length(held))
 		to_chat(user, SPAN_WARNING("\The [src] is empty."))
 		return
 	var/obj/item/R = held[length(held)]
@@ -449,15 +449,15 @@
 	R.add_fingerprint(user)
 
 /obj/item/robot_rack/resolve_attackby(obj/O, mob/user, click_params)
-	if(istype(O, object_type))
-		if(length(held) < capacity)
+	if (istype(O, object_type))
+		if (length(held) < capacity)
 			to_chat(user, SPAN_NOTICE("You collect \the [O]."))
 			O.forceMove(src)
 			held += O
 			return
 		to_chat(user, SPAN_WARNING("\The [src] is full and can't store any more items."))
 		return
-	if(istype(O, interact_type))
+	if (istype(O, interact_type))
 		O.attack_hand(user)
 		return
 	. = ..()
@@ -466,7 +466,7 @@
 	set name = "Empty Rack"
 	set desc = "Empty all items from the rack."
 	set category = "Silicon Commands"
-	if(!length(held))
+	if (!length(held))
 		to_chat(usr, SPAN_WARNING("\The [src] is empty."))
 		return
 	while(length(held))
@@ -486,7 +486,7 @@
 	)
 
 /obj/item/bioreactor/attack_self(mob/user)
-	if(length(contents) >= 1)
+	if (length(contents) >= 1)
 		var/obj/item/removing = contents[1]
 		user.put_in_hands(removing)
 		to_chat(user, SPAN_NOTICE("You remove \the [removing] from \the [src]."))
@@ -494,17 +494,17 @@
 		to_chat(user, SPAN_WARNING("There is nothing loaded into \the [src]."))
 
 /obj/item/bioreactor/afterattack(atom/movable/target, mob/user, proximity_flag, click_parameters)
-	if(!proximity_flag || !istype(target))
+	if (!proximity_flag || !istype(target))
 		return
 
 	var/is_fuel = istype(target, /obj/item/reagent_containers/food/snacks/grown)
 	is_fuel = is_fuel || is_type_in_list(target, fuel_types)
 
-	if(!is_fuel)
+	if (!is_fuel)
 		to_chat(user, SPAN_WARNING("\The [target] cannot be used as fuel by \the [src]."))
 		return
 
-	if(length(contents) >= max_fuel_items)
+	if (length(contents) >= max_fuel_items)
 		to_chat(user, SPAN_WARNING("\The [src] can fit no more fuel inside."))
 		return
 	target.forceMove(src)
@@ -520,7 +520,7 @@
 
 /obj/item/bioreactor/Process()
 	var/mob/living/silicon/robot/R = loc
-	if(!istype(R) || !R.cell || R.cell.fully_charged() || !length(contents))
+	if (!istype(R) || !R.cell || R.cell.fully_charged() || !length(contents))
 		return
 
 	var/generating_power
@@ -528,23 +528,23 @@
 
 	for(var/thing in contents)
 		var/atom/A = thing
-		if(istype(A, /obj/item/reagent_containers/food/snacks/grown))
+		if (istype(A, /obj/item/reagent_containers/food/snacks/grown))
 			generating_power = base_power_generation
 			using_item = A
 		else
 			for(var/fuel_type in fuel_types)
-				if(istype(A, fuel_type))
+				if (istype(A, fuel_type))
 					generating_power = fuel_types[fuel_type] * base_power_generation
 					using_item = A
 					break
-		if(using_item)
+		if (using_item)
 			break
 
-	if(istype(using_item, /obj/item/stack))
+	if (istype(using_item, /obj/item/stack))
 		var/obj/item/stack/stack = using_item
 		stack.use(1)
-	else if(using_item)
+	else if (using_item)
 		qdel(using_item)
 
-	if(generating_power)
+	if (generating_power)
 		R.cell.give(generating_power * CELLRATE)

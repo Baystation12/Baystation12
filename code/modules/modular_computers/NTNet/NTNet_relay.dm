@@ -31,36 +31,36 @@
 
 // TODO: Implement more logic here. For now it's only a placeholder.
 /obj/machinery/ntnet_relay/operable()
-	if(!..(MACHINE_STAT_EMPED))
+	if (!..(MACHINE_STAT_EMPED))
 		return FALSE
-	if(dos_failure)
+	if (dos_failure)
 		return FALSE
-	if(!enabled)
+	if (!enabled)
 		return FALSE
 	return TRUE
 
 /obj/machinery/ntnet_relay/on_update_icon()
-	if(operable())
+	if (operable())
 		icon_state = "bus"
 	else
 		icon_state = "bus_off"
 
 /obj/machinery/ntnet_relay/Process()
-	if(operable())
+	if (operable())
 		update_use_power(POWER_USE_ACTIVE)
 	else
 		update_use_power(POWER_USE_IDLE)
 
-	if(dos_overload)
+	if (dos_overload)
 		dos_overload = max(0, dos_overload - dos_dissipate)
 
 	// If DoS traffic exceeded capacity, crash.
-	if((dos_overload > dos_capacity) && !dos_failure)
+	if ((dos_overload > dos_capacity) && !dos_failure)
 		dos_failure = TRUE
 		update_icon()
 		ntnet_global.add_log("Quantum relay ([uid]) switched from normal operation mode to overload recovery mode.")
 	// If the DoS buffer reaches 0 again, restart.
-	if((dos_overload == 0) && dos_failure)
+	if ((dos_overload == 0) && dos_failure)
 		dos_failure = FALSE
 		update_icon()
 		ntnet_global.add_log("Quantum relay ([uid]) switched from overload recovery mode to normal operation mode.")
@@ -85,37 +85,37 @@
 	return TRUE
 
 /obj/machinery/ntnet_relay/Topic(href, href_list)
-	if(..())
+	if (..())
 		return TOPIC_HANDLED
-	if(href_list["restart"])
+	if (href_list["restart"])
 		dos_overload = 0
 		dos_failure = FALSE
 		update_icon()
 		ntnet_global.add_log("Quantum relay ([uid]) manually restarted from overload recovery mode to normal operation mode.")
 		return TOPIC_HANDLED
-	else if(href_list["toggle"])
+	else if (href_list["toggle"])
 		enabled = !enabled
 		ntnet_global.add_log("Quantum relay ([uid]) manually [enabled ? "enabled" : "disabled"].")
 		update_icon()
 		return TOPIC_HANDLED
-	else if(href_list["purge"])
+	else if (href_list["purge"])
 		ntnet_global.banned_nids.Cut()
 		ntnet_global.add_log("Override: Network blacklist manually cleared from Quantum relay ([uid]).")
 		return TOPIC_HANDLED
-	else if(href_list["eject_drive"] && uninstall_component(/obj/item/stock_parts/computer/hard_drive/portable))
+	else if (href_list["eject_drive"] && uninstall_component(/obj/item/stock_parts/computer/hard_drive/portable))
 		visible_message("[icon2html(src, viewers(get_turf(src)))] [src] beeps and ejects its portable disk.")
 
 /obj/machinery/ntnet_relay/New()
 	uid = gl_uid
 	gl_uid++
-	if(ntnet_global)
+	if (ntnet_global)
 		ntnet_global.relays.Add(src)
 		NTNet = ntnet_global
 		ntnet_global.add_log("New Quantum Relay ([uid]) activated. Current amount of linked relays: [length(NTNet.relays)]")
 	..()
 
 /obj/machinery/ntnet_relay/Destroy()
-	if(ntnet_global)
+	if (ntnet_global)
 		ntnet_global.relays.Remove(src)
 		ntnet_global.add_log("Quantum Relay ([uid]) connection severed. Current amount of linked relays: [length(NTNet.relays)]")
 		NTNet = null

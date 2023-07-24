@@ -45,12 +45,12 @@
 
 	var/obj/item/gun/energy/stunrevolver/G = new /obj/item/gun/energy/stunrevolver(Tsec)
 	G.power_supply.charge = 0
-	if(prob(50))
+	if (prob(50))
 		new /obj/item/robot_parts/l_leg(Tsec)
-	if(prob(50))
+	if (prob(50))
 		new /obj/item/robot_parts/r_leg(Tsec)
-	if(prob(50))
-		if(prob(50))
+	if (prob(50))
+		if (prob(50))
 			new /obj/item/clothing/head/helmet(Tsec)
 		else
 			new /obj/item/clothing/suit/armor/vest(Tsec)
@@ -66,13 +66,13 @@
 	RangedAttack(target)
 
 /mob/living/bot/secbot/ed209/RangedAttack(atom/A, params)
-	if(last_shot + shot_delay > world.time)
+	if (last_shot + shot_delay > world.time)
 		to_chat(src, "You are not ready to fire yet!")
 		return TRUE
 
 	last_shot = world.time
 	var/projectile = /obj/item/projectile/beam/stun
-	if(emagged)
+	if (emagged)
 		projectile = /obj/item/projectile/beam
 
 	playsound(loc, emagged ? 'sound/weapons/Laser.ogg' : 'sound/weapons/Taser.ogg', 50, 1)

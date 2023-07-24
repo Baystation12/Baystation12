@@ -26,7 +26,7 @@
 
 	air_contents.volume = volume
 
-	if(filling)
+	if (filling)
 		air_contents.temperature = T20C
 
 		var/list/gases = list()
@@ -45,10 +45,10 @@
 	icon_state = "air"
 
 /obj/machinery/atmospherics/unary/tank/update_underlays()
-	if(..())
+	if (..())
 		underlays.Cut()
 		var/turf/T = get_turf(src)
-		if(!istype(T))
+		if (!istype(T))
 			return
 		add_underlay(T, node, dir)
 
@@ -59,7 +59,7 @@
 	return air_contents
 
 /obj/machinery/atmospherics/unary/tank/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWrench(W))
+	if (isWrench(W))
 		if (air_contents.return_pressure() > 2*ONE_ATMOSPHERE)
 			to_chat(user, SPAN_WARNING("You cannot unwrench \the [src], it is too exerted due to internal pressure."))
 			add_fingerprint(user)

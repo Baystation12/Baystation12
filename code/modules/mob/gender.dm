@@ -7,7 +7,7 @@ GLOBAL_LIST_EMPTY(pronouns_from_gender)
 	for(var/type in subtypesof(/datum/gender))
 		var/datum/gender/G = new type
 		GLOB.gender_datums[G.key] = G
-		if(!G.formal_term)
+		if (!G.formal_term)
 			G.formal_term = G.key
 
 		var/datum/pronouns/P = GLOB.pronouns.by_key[G.default_pronouns]

@@ -19,23 +19,23 @@
 	min_weight = min_event_weight
 	max_weight = max_event_weight
 	src.add_to_queue = add_to_queue
-	if(job_weights)
+	if (job_weights)
 		role_weights = job_weights
 
 /datum/event_meta/proc/get_weight(list/active_with_role)
-	if(!enabled)
+	if (!enabled)
 		return 0
 
 	var/job_weight = 0
 	for(var/role in role_weights)
-		if(role in active_with_role)
+		if (role in active_with_role)
 			job_weight += active_with_role[role] * role_weights[role]
 
 	var/total_weight = weight + job_weight
 
 	// Only min/max the weight if the values are non-zero
-	if(min_weight && total_weight < min_weight) total_weight = min_weight
-	if(max_weight && total_weight > max_weight) total_weight = max_weight
+	if (min_weight && total_weight < min_weight) total_weight = min_weight
+	if (max_weight && total_weight > max_weight) total_weight = max_weight
 
 	return total_weight
 
@@ -75,7 +75,7 @@
 //Allows you to start before announcing or vice versa.
 //Only called once.
 /datum/event/proc/start()
-	if(has_skybox_image)
+	if (has_skybox_image)
 		SSskybox.rebuild_skyboxes(affecting_z)
 	return
 
@@ -96,10 +96,10 @@
 //You can include code related to the event ending.
 //Do not place spawn() in here, instead use tick() to check for
 //the activeFor variable.
-//For example: if(activeFor == myOwnVariable + 30) doStuff()
+//For example: if (activeFor == myOwnVariable + 30) doStuff()
 //Only called once.
 /datum/event/proc/end()
-	if(has_skybox_image)
+	if (has_skybox_image)
 		SSskybox.rebuild_skyboxes(affecting_z)
 	return
 
@@ -110,22 +110,22 @@
 //Do not override this proc, instead use the appropiate procs.
 //This proc will handle the calls to the appropiate procs.
 /datum/event/proc/process()
-	if(activeFor > startWhen && activeFor < endWhen)
+	if (activeFor > startWhen && activeFor < endWhen)
 		tick()
 
-	if(activeFor == startWhen)
+	if (activeFor == startWhen)
 		isRunning = 1
 		start()
 
-	if(activeFor == announceWhen)
+	if (activeFor == announceWhen)
 		announce()
 
-	if(activeFor == endWhen)
+	if (activeFor == endWhen)
 		isRunning = 0
 		end()
 
 	// Everything is done, let's clean up.
-	if(activeFor >= lastProcessAt())
+	if (activeFor >= lastProcessAt())
 		kill()
 
 	activeFor++
@@ -133,7 +133,7 @@
 //Called when start(), announce() and end() has all been called.
 /datum/event/proc/kill(reroll = FALSE)
 	// If this event was forcefully killed run end() for individual cleanup
-	if(isRunning)
+	if (isRunning)
 		isRunning = 0
 		end()
 
@@ -149,19 +149,19 @@
 
 	event_meta = EM
 	severity = event_meta.severity
-	if(severity < EVENT_LEVEL_MUNDANE) severity = EVENT_LEVEL_MUNDANE
-	if(severity > EVENT_LEVEL_MAJOR) severity = EVENT_LEVEL_MAJOR
+	if (severity < EVENT_LEVEL_MUNDANE) severity = EVENT_LEVEL_MUNDANE
+	if (severity > EVENT_LEVEL_MAJOR) severity = EVENT_LEVEL_MAJOR
 
 	startedAt = world.time
 
-	if(!affecting_z)
+	if (!affecting_z)
 		affecting_z = GLOB.using_map.station_levels
 
 	setup()
 	..()
 
 /datum/event/proc/location_name()
-	if(!GLOB.using_map.use_overmap)
+	if (!GLOB.using_map.use_overmap)
 		return station_name()
 
 	var/obj/effect/overmap/visitable/O = map_sectors["[pick(affecting_z)]"]

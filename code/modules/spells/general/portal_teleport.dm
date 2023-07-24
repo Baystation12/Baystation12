@@ -26,13 +26,13 @@
 	var/area/thearea
 	var/message = alert("Would you like to show station areas?\nNote: it can take up to 5 minutes for the away sites to load in and show up.",, "Yes", "No")
 	switch(message)
-		if("Yes")
+		if ("Yes")
 			select_areas = stationlocs
-		if("No")
+		if ("No")
 			select_areas = (stationlocs) ^ (wizportallocs)
 
 	thearea = input("Area to teleport to", "Teleport") as null|anything in select_areas
-	if(!thearea) return
+	if (!thearea) return
 
 	return list(select_areas[thearea])
 
@@ -41,7 +41,7 @@
 	var/turf/start = get_turf(user)
 	var/turf/end = user.try_teleport(thearea)
 
-	if(!end)
+	if (!end)
 		to_chat(user, "The spell matrix was unable to locate a suitable teleport destination for an unknown reason. Sorry.")
 		return
 
@@ -54,7 +54,7 @@
 	return
 
 /spell/portal_teleport/invocation(mob/user, area/chosenarea)
-	if(!chosenarea || !istype(chosenarea))
+	if (!chosenarea || !istype(chosenarea))
 		..()
 	else
 		invocation += "[uppertext(chosenarea.name)]"

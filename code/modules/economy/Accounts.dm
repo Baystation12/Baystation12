@@ -52,7 +52,7 @@
 	//create an entry in the account transaction log for when it was created
 	//note that using the deposit proc on the account isn't really feasible because we need to change the transaction data before performing it
 	var/datum/transaction/singular/T = new(M, (source_db ? source_db.machine_id : "NTGalaxyNet Terminal #[rand(111,1111)]"), starting_funds, "Account creation")
-	if(!source_db)
+	if (!source_db)
 		//set a random date, time and location some time over the past few decades
 		T.date = "[num2text(rand(1, 31))] [pick("January","February","March","April","May","June","July","August","September","October","November","December")], [GLOB.using_map.game_year-rand(8, 18)]"
 		T.time = "[rand(0,24)]:[rand(11,59)]"
@@ -80,7 +80,7 @@
 		//stamp the paper
 		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
 		stampoverlay.icon_state = "paper_stamp-boss"
-		if(!R.stamped)
+		if (!R.stamped)
 			R.stamped = new
 		R.stamped += /obj/item/stamp
 		R.overlays += stampoverlay
@@ -96,11 +96,11 @@
 /proc/attempt_account_access(attempt_account_number, attempt_pin_number, security_level_passed = 0)
 	RETURN_TYPE(/datum/money_account)
 	var/datum/money_account/D = get_account(attempt_account_number)
-	if(D && D.security_level <= security_level_passed && (!D.security_level || D.remote_access_pin == attempt_pin_number) )
+	if (D && D.security_level <= security_level_passed && (!D.security_level || D.remote_access_pin == attempt_pin_number) )
 		return D
 
 /proc/get_account(account_number)
 	RETURN_TYPE(/datum/money_account)
 	for(var/datum/money_account/D in all_money_accounts)
-		if(D.account_number == account_number)
+		if (D.account_number == account_number)
 			return D

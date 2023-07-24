@@ -24,11 +24,11 @@
 	var/json_access = json_encode(access)
 	var/passkey = add_data_signature(json_access)
 
-	if(card) // An ID card.
+	if (card) // An ID card.
 		set_pin_data(IC_OUTPUT, 1, card.registered_name)
 		set_pin_data(IC_OUTPUT, 2, card.assignment)
 
-	else if(length(access))	// A non-card object that has access levels.
+	else if (length(access))	// A non-card object that has access levels.
 		set_pin_data(IC_OUTPUT, 1, null)
 		set_pin_data(IC_OUTPUT, 2, null)
 
@@ -56,17 +56,17 @@
 
 /obj/item/integrated_circuit/output/access_displayer/do_work()
 	var/list/signature_and_data = splittext(get_pin_data(IC_INPUT, 1), ":")
-	if(length(signature_and_data) < 2)
+	if (length(signature_and_data) < 2)
 		return
 
 	var/signature = signature_and_data[1]
 	var/result = signature_and_data[2]
 
 	// check if the signature is valid
-	if(!check_data_signature(signature, result))
+	if (!check_data_signature(signature, result))
 		return FALSE
 
-	if(length(result) > 1)
+	if (length(result) > 1)
 		result = json_decode(result)
 	else
 		result = list(result)

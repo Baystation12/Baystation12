@@ -78,7 +78,7 @@ SUBSYSTEM_DEF(atoms)
 		return TRUE
 	var/start_tick = world.time
 	var/result = A.Initialize(arglist(arguments))
-	if(start_tick != world.time)
+	if (start_tick != world.time)
 		BadInitializeCalls[atom_type] |= BAD_INIT_SLEPT
 	var/qdeleted = FALSE
 	if (result != INITIALIZE_HINT_NORMAL)

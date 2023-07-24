@@ -11,11 +11,11 @@
 	var/fingerprint
 
 /obj/item/passport/proc/set_info(mob/living/carbon/human/H)
-	if(!istype(H))
+	if (!istype(H))
 		return
 	var/singleton/cultural_info/culture = H.get_cultural_value(TAG_HOMEWORLD)
 	var/pob = culture ? culture.name : "Unset"
-	if(H.dna)
+	if (H.dna)
 		fingerprint = md5(H.dna.uni_identity)
 	else
 		fingerprint = "N/A"

@@ -10,7 +10,7 @@
 	for(var/i in 2 to size)
 		var/shifts = list(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)
 		shifts -= result[i - 1] //consecutive shifts should not be equal
-		if(i == size)
+		if (i == size)
 			shifts -= result[1] //because shift list is a ring buffer
 		result += pick(shifts)
 
@@ -22,7 +22,7 @@
 
 /turf/space/transit/north/Initialize()
 	. = ..()
-	if(!phase_shift_by_x)
+	if (!phase_shift_by_x)
 		phase_shift_by_x = get_cross_shift_list(15)
 
 	var/x_shift = phase_shift_by_x[src.x % (length(phase_shift_by_x) - 1) + 1]
@@ -36,7 +36,7 @@
 
 /turf/space/transit/east/New()
 	..()
-	if(!phase_shift_by_y)
+	if (!phase_shift_by_y)
 		phase_shift_by_y = get_cross_shift_list(15)
 
 	var/y_shift = phase_shift_by_y[src.y % (length(phase_shift_by_y) - 1) + 1]

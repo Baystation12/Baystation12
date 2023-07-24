@@ -39,7 +39,7 @@
 
 /obj/item/gun/projectile/pirate/on_update_icon()
 	..()
-	if(length(loaded))
+	if (length(loaded))
 		icon_state = initial(icon_state)
 	else
 		icon_state = "[initial(icon_state)]-empty"

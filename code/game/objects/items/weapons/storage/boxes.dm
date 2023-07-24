@@ -53,7 +53,7 @@
 
 // BubbleWrap - A box can be folded up to make card
 /obj/item/storage/box/attack_self(mob/user as mob)
-	if(..()) return
+	if (..()) return
 
 	//try to fold it.
 	if ( length(contents) )
@@ -72,7 +72,7 @@
 		return
 	// Now make the cardboard
 	to_chat(user, SPAN_NOTICE("You fold [src] flat."))
-	if(ispath(foldable, /obj/item/stack))
+	if (ispath(foldable, /obj/item/stack))
 		var/stack_amt = max(2**(w_class - 3), 1)
 		new src.foldable(get_turf(src), stack_amt)
 	else

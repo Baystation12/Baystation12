@@ -26,24 +26,24 @@
 
 /obj/item/mech_equipment/sleeper/attack_self(mob/user)
 	. = ..()
-	if(.)
+	if (.)
 		sleeper.ui_interact(user)
 
 /obj/item/mech_equipment/sleeper/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/reagent_containers/glass))
+	if (istype(I, /obj/item/reagent_containers/glass))
 		sleeper.attackby(I, user)
 	else return ..()
 
 /obj/item/mech_equipment/sleeper/afterattack(atom/target, mob/living/user, inrange, params)
 	. = ..()
-	if(.)
-		if(ishuman(target) && !sleeper.occupant)
+	if (.)
+		if (ishuman(target) && !sleeper.occupant)
 			owner.visible_message(SPAN_NOTICE("\The [src] is lowered down to load [target]"))
 			sleeper.go_in(target, user)
 		else to_chat(user, SPAN_WARNING("You cannot load that in!"))
 
 /obj/item/mech_equipment/sleeper/get_hardpoint_maptext()
-	if(sleeper && sleeper.occupant)
+	if (sleeper && sleeper.occupant)
 		return "[sleeper.occupant]"
 
 /obj/machinery/sleeper/mounted
@@ -63,29 +63,29 @@
 
 /obj/machinery/sleeper/mounted/nano_host()
 	var/obj/item/mech_equipment/sleeper/S = loc
-	if(istype(S))
+	if (istype(S))
 		return S.owner
 	return null
 
 /obj/machinery/sleeper/mounted/go_in()
 	..()
 	var/obj/item/mech_equipment/sleeper/S = loc
-	if(istype(S) && occupant)
+	if (istype(S) && occupant)
 		S.passive_power_use = 1.5 KILOWATTS
 
 /obj/machinery/sleeper/mounted/go_out()
 	..()
 	var/obj/item/mech_equipment/sleeper/S = loc
-	if(istype(S))
+	if (istype(S))
 		S.passive_power_use = 0 //No passive power drain when the sleeper is empty. Set to 1.5 KW when patient is inside.
 
 //You cannot modify these, it'd probably end with something in nullspace. In any case basic meds are plenty for an ambulance
 /obj/machinery/sleeper/mounted/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/reagent_containers/glass))
-		if(!user.unEquip(I, src))
+	if (istype(I, /obj/item/reagent_containers/glass))
+		if (!user.unEquip(I, src))
 			return
 
-		if(beaker)
+		if (beaker)
 			beaker.forceMove(get_turf(src))
 			user.visible_message(SPAN_NOTICE("\The [user] removes \the [beaker] from \the [src]."), SPAN_NOTICE("You remove \the [beaker] from \the [src]."))
 		beaker = I
@@ -107,7 +107,7 @@
 	var/obj/item/device/scanner/health/scanner = null
 
 /obj/item/mech_equipment/mender/attack_self(mob/user)
-	if(!.)
+	if (!.)
 		return
 	mode = mode == MEDIGEL_SALVE ? MEDIGEL_SCAN : MEDIGEL_SALVE
 	to_chat(user, SPAN_NOTICE("You set \the [src] to [mode == MEDIGEL_SALVE ? "dispense medigel" : "scan for injuries"]."))
@@ -122,10 +122,10 @@
 			var/mob/living/carbon/human/H = target
 			var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
-			if(affecting.is_bandaged() && affecting.is_disinfected() && affecting.is_salved())
+			if (affecting.is_bandaged() && affecting.is_disinfected() && affecting.is_salved())
 				to_chat(user, SPAN_WARNING("The wounds on \the [H]'s [affecting.name] have already been treated."))
 			else
-				if(!LAZYLEN(affecting.wounds))
+				if (!LAZYLEN(affecting.wounds))
 					return
 				owner.visible_message(SPAN_NOTICE("\The [owner] extends \the [src] towards \the [H]'s [affecting.name]."))
 				var/large_wound = FALSE
@@ -134,11 +134,11 @@
 						continue
 					var/delay = (W.damage / 4) * user.skill_delay_mult(SKILL_MEDICAL, 0.8)
 					owner.setClickCooldown(delay)
-					if(!do_after(user, delay, target))
+					if (!do_after(user, delay, target))
 						break
 
 					var/obj/item/cell/C = owner.get_cell()
-					if(istype(C))
+					if (istype(C))
 						C.use(0.01 KILOWATTS) //Does cost power, so not a freebie, specially with large amount of wounds
 					else
 						return //Early out, cell is gone
@@ -156,12 +156,12 @@
 					W.salve()
 					if (H.stat == UNCONSCIOUS && prob(25))
 						to_chat(H, SPAN_NOTICE(SPAN_BOLD("... [pick("feels better", "hurts less")] ...")))
-				if(large_wound)
+				if (large_wound)
 					owner.visible_message(SPAN_NOTICE("\The [src]'s UV matrix glows faintly as it cures the medigel."))
 					playsound(owner, 'sound/items/Welder2.ogg', 10)
 				affecting.update_damages()
 				H.update_bandages(TRUE)
-	else if(mode == MEDIGEL_SCAN)
+	else if (mode == MEDIGEL_SCAN)
 		if (istype(target, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = target
 			medical_scan_action(H, user, scanner)

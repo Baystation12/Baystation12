@@ -16,14 +16,14 @@ var/global/repository/images/image_repository = new()
 // Returns an image bound to the given atom and which is typically applied to client.images.
 /repository/images/proc/atom_image(atom/holder, icon, icon_state, plane = FLOAT_PLANE, layer = FLOAT_LAYER)
 	var/atom_cache_list = image_cache_for_atoms[holder]
-	if(!atom_cache_list)
+	if (!atom_cache_list)
 		atom_cache_list = list()
 		image_cache_for_atoms[holder] = atom_cache_list
 		GLOB.destroyed_event.register(holder, src, /repository/images/proc/atom_destroyed)
 
 	var/cache_key = "[icon]-[icon_state]-[plane]-[layer]"
 	. = atom_cache_list[cache_key]
-	if(!.)
+	if (!.)
 		var/image/I = image(icon, holder, icon_state)
 		I.plane = plane
 		I.layer = layer
@@ -43,17 +43,17 @@ var/global/repository/images/image_repository = new()
 /repository/images/proc/overlay_image(icon, icon_state, alpha, appearance_flags, color, dir, plane = FLOAT_PLANE, layer = FLOAT_LAYER)
 	var/cache_key = "[icon]-[icon_state]-[alpha]-[appearance_flags]-[color]-[dir]-[plane]-[layer]"
 	. = image_cache_for_overlays[cache_key]
-	if(!.)
+	if (!.)
 		var/image/I = image(icon = icon, icon_state = icon_state)
-		if(!isnull(dir))
+		if (!isnull(dir))
 			I.dir = dir
-		if(!isnull(alpha))
+		if (!isnull(alpha))
 			I.alpha = alpha
-		if(!isnull(appearance_flags))
+		if (!isnull(appearance_flags))
 			I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | appearance_flags
-		if(!isnull(plane))
+		if (!isnull(plane))
 			I.plane = plane
-		if(!isnull(layer))
+		if (!isnull(layer))
 			I.layer = layer
 		image_cache_for_overlays[cache_key] = I
 		return I

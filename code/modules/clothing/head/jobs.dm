@@ -98,9 +98,9 @@
 
 /obj/item/clothing/head/beret/equipped(mob/user, slot)
 	switch(slot)
-		if(slot_belt)
+		if (slot_belt)
 			sprite_sheets = list()
-		if(slot_head)
+		if (slot_head)
 			sprite_sheets = list(
 				SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi',
 				SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi',

@@ -11,10 +11,10 @@
 	skill_needed = SKILL_EXPERIENCED
 
 /datum/terminal_command/status/proper_input_entered(text, mob/user, datum/terminal/terminal)
-	if(!terminal.computer.get_ntnet_status())
+	if (!terminal.computer.get_ntnet_status())
 		return network_error()
 	. = list()
 	. += "NTnet status: [ntnet_global.check_function() ? "ENABLED" : "DISABLED"]"
 	. += "Alarm status: [ntnet_global.intrusion_detection_enabled ? "ENABLED" : "DISABLED"]"
-	if(ntnet_global.intrusion_detection_alarm)
+	if (ntnet_global.intrusion_detection_alarm)
 		. += "NETWORK INCURSION DETECTED"

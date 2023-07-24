@@ -101,7 +101,7 @@
 	var/depth = round(input("Input the desired depth.", "Set Depth", excavation_amount) as num | null)
 	if (isnull(depth))
 		return
-	if(depth>max_depth || depth<1)
+	if (depth>max_depth || depth<1)
 		to_chat(user, SPAN_WARNING("Invalid depth, input a number from 1 to [max_depth]."))
 		return
 	excavation_amount = depth
@@ -140,7 +140,7 @@
 
 /obj/item/pickaxe/xeno/drill/plasma/attack_self(mob/user)
 	var/depth = round(input("Input the desired depth.", "Set Depth", excavation_amount) as num | null)
-	if(depth>max_depth || depth<1)
+	if (depth>max_depth || depth<1)
 		to_chat(user, SPAN_WARNING("Invalid depth, input a number from 1 to [max_depth]."))
 		return
 	excavation_amount = depth
@@ -202,7 +202,7 @@
 		var/selected = 0
 		for(var/i = 1 to length(picksToSort))
 			var/obj/item/pickaxe/xeno/current = picksToSort[i]
-			if(current.excavation_amount <= min)
+			if (current.excavation_amount <= min)
 				selected = i
 				min = current.excavation_amount
 		var/obj/item/pickaxe/xeno/smallest = picksToSort[selected]

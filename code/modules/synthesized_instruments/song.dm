@@ -59,7 +59,7 @@
 
 
 /datum/synthesized_song/proc/play(what, duration, frequency, which, where, which_one)
-	if(available_channels <= 0) //Ignore requests for new channels if we go over limit
+	if (available_channels <= 0) //Ignore requests for new channels if we go over limit
 		return
 	available_channels -= 1
 	src.sound_id = "[type]_[sequential_id(type)]"
@@ -74,7 +74,7 @@
 	//Environment, anything other than -1 means override
 	var/use_env = 0
 
-	if(isnum(sound_copy.environment) && sound_copy.environment <= -1)
+	if (isnum(sound_copy.environment) && sound_copy.environment <= -1)
 		sound_copy.environment = 0 // set it to 0 and just not set use env
 	else
 		use_env = 1

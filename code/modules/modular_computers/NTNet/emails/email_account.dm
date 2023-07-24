@@ -26,11 +26,11 @@
 
 /datum/computer_file/data/email_account/New(_login, _fullname, _assignment)
 	password = GenerateKey()
-	if(_login)
+	if (_login)
 		login = _login
-	if(_fullname)
+	if (_fullname)
 		fullname = _fullname
-	if(_assignment)
+	if (_assignment)
 		assignment = _assignment
 	ADD_SORTED(ntnet_global.email_accounts, src, /proc/cmp_emails_asc)
 	..()
@@ -43,19 +43,19 @@
 	return (inbox | spam | deleted | outbox)
 
 /datum/computer_file/data/email_account/proc/send_mail(recipient_address, datum/computer_file/data/email_message/message, relayed = 0)
-	if(suspended)
+	if (suspended)
 		return FALSE
 
 	var/datum/computer_file/data/email_account/recipient
 	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
-		if(account.login == recipient_address)
+		if (account.login == recipient_address)
 			recipient = account
 			break
 
-	if(!istype(recipient))
+	if (!istype(recipient))
 		return FALSE
 
-	if(!recipient.receive_mail(message, relayed))
+	if (!recipient.receive_mail(message, relayed))
 		return FALSE
 
 	outbox.Add(message)
@@ -64,19 +64,19 @@
 
 /datum/computer_file/data/email_account/proc/receive_mail(datum/computer_file/data/email_message/received_message, relayed)
 	received_message.set_timestamp()
-	if(!ntnet_global.intrusion_detection_enabled)
+	if (!ntnet_global.intrusion_detection_enabled)
 		inbox.Add(received_message)
 		return TRUE
 	// Spam filters may occassionally let something through, or mark something as spam that isn't spam.
 	var/mark_spam = FALSE
-	if(received_message.spam)
-		if(prob(98))
+	if (received_message.spam)
+		if (prob(98))
 			mark_spam = TRUE
 	else
-		if(prob(1))
+		if (prob(1))
 			mark_spam = TRUE
 
-	if(mark_spam)
+	if (mark_spam)
 		spam.Add(received_message)
 	else
 		inbox.Add(received_message)
@@ -92,10 +92,10 @@
 	login = EMAIL_BROADCAST
 
 /datum/computer_file/data/email_account/service/broadcaster/receive_mail(datum/computer_file/data/email_message/received_message, relayed)
-	if(suspended || !istype(received_message) || relayed)
+	if (suspended || !istype(received_message) || relayed)
 		return FALSE
 	// Possibly exploitable for user spamming so keep admins informed.
-	if(!received_message.spam)
+	if (!received_message.spam)
 		log_and_message_admins("Broadcast email address used by [usr]. Message title: [received_message.title].")
 
 	spawn(0)

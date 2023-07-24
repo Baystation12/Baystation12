@@ -15,16 +15,16 @@
 	color_type - a typepath (subtyped from /datum/client_color)
 */
 /mob/proc/has_client_color(color_type)
-	if(!ispath(/datum/client_color) || !LAZYLEN(client_colors))
+	if (!ispath(/datum/client_color) || !LAZYLEN(client_colors))
 		return FALSE
 	for(var/thing in client_colors)
 		var/datum/client_color/col = thing
-		if(col.type == color_type)
+		if (col.type == color_type)
 			return TRUE
 	return FALSE
 
 /mob/proc/add_client_color(color_type)
-	if(!has_client_color(color_type))
+	if (!has_client_color(color_type))
 		var/datum/client_color/CC = new color_type()
 		client_colors |= CC
 		sortTim(client_colors, /proc/cmp_clientcolor_priority)
@@ -37,13 +37,13 @@
 	returns true if instance was found, false otherwise
 */
 /mob/proc/remove_client_color(color_type)
-	if(!ispath(/datum/client_color))
+	if (!ispath(/datum/client_color))
 		return FALSE
 
 	var/result = FALSE
 	for(var/cc in client_colors)
 		var/datum/client_color/CC = cc
-		if(CC.type == color_type)
+		if (CC.type == color_type)
 			result = TRUE
 			client_colors -= CC
 			qdel(CC)
@@ -57,10 +57,10 @@
 	client_color datum, if one exists
 */
 /mob/proc/update_client_color()
-	if(!client)
+	if (!client)
 		return
 	client.color = null
-	if(!length(client_colors))
+	if (!length(client_colors))
 		return
 	var/list/c = list(1,0,0, 0,1,0, 0,0,1) //Star at normal
 	for(var/datum/client_color/CC in client_colors)
@@ -75,7 +75,7 @@
 
 				c[(m-1)*3 + i] = sum
 
-		if(CC.override)
+		if (CC.override)
 			break
 
 	animate(client, color = c)

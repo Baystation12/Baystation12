@@ -95,7 +95,7 @@
 		P.last_flow_rate = (transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
 
 	var/datum/gas_mixture/removed = source.remove(transfer_moles)
-	if(!removed) //Just in case
+	if (!removed) //Just in case
 		return -1
 	sink.merge(removed)
 
@@ -427,13 +427,13 @@
 //If set, sink_volume_mod adjusts the effective output volume used in the calculation. This is useful when the output gas_mixture is
 //part of a pipenetwork, and so it's volume isn't representative of the actual volume since the gas will be shared across the pipenetwork when it processes.
 /proc/calculate_transfer_moles(datum/gas_mixture/source, datum/gas_mixture/sink, pressure_delta, sink_volume_mod=0)
-	if(source.temperature == 0 || source.total_moles == 0) return 0
+	if (source.temperature == 0 || source.total_moles == 0) return 0
 
 	var/output_volume = (sink.volume * sink.group_multiplier) + sink_volume_mod
 	var/source_total_moles = source.total_moles * source.group_multiplier
 
 	var/air_temperature = source.temperature
-	if(sink.total_moles > 0 && sink.temperature > 0)
+	if (sink.total_moles > 0 && sink.temperature > 0)
 		//estimate the final temperature of the sink after transfer
 		var/estimate_moles = pressure_delta*output_volume/(sink.temperature * R_IDEAL_GAS_EQUATION)
 		var/sink_heat_capacity = sink.heat_capacity()
@@ -445,7 +445,7 @@
 
 //Calculates the APPROXIMATE amount of moles that would need to be transferred to bring source and sink to the same pressure
 /proc/calculate_equalize_moles(datum/gas_mixture/source, datum/gas_mixture/sink)
-	if(source.temperature == 0) return 0
+	if (source.temperature == 0) return 0
 
 	//Make the approximation that the sink temperature is unchanged after transferring gas
 	var/source_volume = source.volume * source.group_multiplier
@@ -463,16 +463,16 @@
 // - Has no or only minimal phoron or N2O
 /proc/get_atmosphere_issues(datum/gas_mixture/atmosphere, returntext = 0)
 	var/list/status = list()
-	if(!atmosphere)
+	if (!atmosphere)
 		status.Add("No atmosphere present.")
 
 	// Temperature check
-	if((atmosphere.temperature > (T0C + 50)) || (atmosphere.temperature < (T0C - 10)))
+	if ((atmosphere.temperature > (T0C + 50)) || (atmosphere.temperature < (T0C - 10)))
 		status.Add("Temperature too [atmosphere.temperature > (T0C + 50) ? "high" : "low"].")
 
 	// Pressure check
 	var/pressure = atmosphere.return_pressure()
-	if((pressure > 120) || (pressure < 80))
+	if ((pressure > 120) || (pressure < 80))
 		status.Add("Pressure too [pressure > 120 ? "high" : "low"].")
 
 	// Gas concentration checks
@@ -481,31 +481,31 @@
 	var/carbondioxide = 0
 	var/nitrousoxide = 0
 	var/hydrogen = 0
-	if(atmosphere.total_moles) // Division by zero prevention
+	if (atmosphere.total_moles) // Division by zero prevention
 		oxygen = (atmosphere.gas[GAS_OXYGEN] / atmosphere.total_moles) * 100 // Percentage of the gas
 		phoron = (atmosphere.gas[GAS_PHORON] / atmosphere.total_moles) * 100
 		carbondioxide = (atmosphere.gas[GAS_CO2] / atmosphere.total_moles) * 100
 		nitrousoxide = (atmosphere.gas[GAS_N2O] / atmosphere.total_moles) * 100
 		hydrogen = (atmosphere.gas[GAS_HYDROGEN] / atmosphere.total_moles) * 100
 
-	if(!oxygen)
+	if (!oxygen)
 		status.Add("No oxygen.")
-	else if((oxygen > 30) || (oxygen < 17))
+	else if ((oxygen > 30) || (oxygen < 17))
 		status.Add("Oxygen too [oxygen > 30 ? "high" : "low"].")
 
 
 
-	if(phoron > 0.1)		// Toxic even in small amounts.
+	if (phoron > 0.1)		// Toxic even in small amounts.
 		status.Add("Phoron contamination.")
-	if(nitrousoxide > 0.1)	// Probably slightly less dangerous but still.
+	if (nitrousoxide > 0.1)	// Probably slightly less dangerous but still.
 		status.Add("N2O contamination.")
-	if(hydrogen > 2.5)	// Not too dangerous, but flammable.
+	if (hydrogen > 2.5)	// Not too dangerous, but flammable.
 		status.Add("Hydrogen contamination.")
-	if(carbondioxide > 5)	// Not as dangerous until very large amount is present.
+	if (carbondioxide > 5)	// Not as dangerous until very large amount is present.
 		status.Add("CO2 concentration high.")
 
 
-	if(returntext)
+	if (returntext)
 		return jointext(status, " ")
 	else
 		return length(status)

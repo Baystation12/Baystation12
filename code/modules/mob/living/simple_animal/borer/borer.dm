@@ -60,15 +60,15 @@
 
 /mob/living/simple_animal/borer/Login()
 	. = ..()
-	if(client)
+	if (client)
 		client.screen |= hud_elements
 		client.screen |= hud_intent_selector
-	if(mind && !neutered)
+	if (mind && !neutered)
 		GLOB.borers.add_antagonist(mind)
 
 /mob/living/simple_animal/borer/Logout()
 	. = ..()
-	if(client)
+	if (client)
 		client.screen -= hud_elements
 		client.screen -= hud_intent_selector
 
@@ -81,7 +81,7 @@
 		hud_inject_chemicals,
 		hud_leave_host
 	)
-	if(!neutered)
+	if (!neutered)
 		hud_toggle_control = new
 		hud_elements += hud_toggle_control
 
@@ -94,7 +94,7 @@
 	generation = gen
 	set_borer_name()
 
-	if(!roundstart)
+	if (!roundstart)
 		request_player()
 
 	aura_image = create_aura_image(src)
@@ -104,16 +104,16 @@
 	aura_image.SetTransform(scale = 0.33)
 
 /mob/living/simple_animal/borer/death(gibbed, deathmessage, show_dead_message)
-	if(aura_image)
+	if (aura_image)
 		destroy_aura_image(aura_image)
 		aura_image = null
 	. = ..()
 
 /mob/living/simple_animal/borer/Destroy()
-	if(aura_image)
+	if (aura_image)
 		destroy_aura_image(aura_image)
 		aura_image = null
-	if(client)
+	if (client)
 		client.screen -= hud_elements
 		client.screen -= hud_intent_selector
 	QDEL_NULL_LIST(hud_elements)
@@ -129,13 +129,13 @@
 /mob/living/simple_animal/borer/Life()
 
 	sdisabilities = 0
-	if(host)
+	if (host)
 		blinded = host.blinded
 		eye_blind = host.eye_blind
 		eye_blurry = host.eye_blurry
-		if(host.sdisabilities & BLINDED)
+		if (host.sdisabilities & BLINDED)
 			sdisabilities |= BLINDED
-		if(host.sdisabilities & DEAFENED)
+		if (host.sdisabilities & DEAFENED)
 			sdisabilities |= DEAFENED
 	else
 		blinded =    FALSE
@@ -143,56 +143,56 @@
 		eye_blurry = 0
 
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
 
-	if(host)
+	if (host)
 
-		if(!stat && !host.stat)
+		if (!stat && !host.stat)
 
-			if(host.reagents.has_reagent(/datum/reagent/sugar))
-				if(!docile)
-					if(controlling)
+			if (host.reagents.has_reagent(/datum/reagent/sugar))
+				if (!docile)
+					if (controlling)
 						to_chat(host, SPAN_NOTICE("You feel the soporific flow of sugar in your host's blood, lulling you into docility."))
 					else
 						to_chat(src, SPAN_NOTICE("You feel the soporific flow of sugar in your host's blood, lulling you into docility."))
 					docile = 1
 			else
-				if(docile)
-					if(controlling)
+				if (docile)
+					if (controlling)
 						to_chat(host, SPAN_NOTICE("You shake off your lethargy as the sugar leaves your host's blood."))
 					else
 						to_chat(src, SPAN_NOTICE("You shake off your lethargy as the sugar leaves your host's blood."))
 					docile = 0
 
-			if(chemicals < 250 && host.nutrition >= (neutered ? 200 : 50))
+			if (chemicals < 250 && host.nutrition >= (neutered ? 200 : 50))
 				host.nutrition--
 				chemicals++
 
-			if(controlling)
+			if (controlling)
 
-				if(neutered)
+				if (neutered)
 					host.release_control()
 					return
 
-				if(docile)
+				if (docile)
 					to_chat(host, SPAN_NOTICE("You are feeling far too docile to continue controlling your host..."))
 					host.release_control()
 					return
 
-				if(prob(5))
+				if (prob(5))
 					host.adjustBrainLoss(0.1)
 
-				if(prob(host.getBrainLoss()/20))
+				if (prob(host.getBrainLoss()/20))
 					host.say("*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_v","gasp"))]")
 
 /mob/living/simple_animal/borer/Stat()
 	. = ..()
 	statpanel("Status")
 
-	if(evacuation_controller)
+	if (evacuation_controller)
 		var/eta_status = evacuation_controller.get_status_panel_eta()
-		if(eta_status)
+		if (eta_status)
 			stat(null, eta_status)
 
 	if (client.statpanel == "Status")
@@ -200,9 +200,9 @@
 
 /mob/living/simple_animal/borer/proc/detatch()
 
-	if(!host || !controlling) return
+	if (!host || !controlling) return
 
-	if(istype(host,/mob/living/carbon/human))
+	if (istype(host,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = host
 		var/obj/item/organ/external/head = H.get_organ(BP_HEAD)
 		head.implants -= src
@@ -214,7 +214,7 @@
 	host.verbs -= /mob/living/carbon/proc/punish_host
 	host.verbs -= /mob/living/carbon/proc/spawn_larvae
 
-	if(host_brain)
+	if (host_brain)
 
 		// these are here so bans and multikey warnings are not triggered on the wrong people when ckey is changed.
 		// computer_id and IP are not updated magically on their own in offline mobs -walter0o
@@ -227,10 +227,10 @@
 
 		src.ckey = host.ckey
 
-		if(!src.computer_id)
+		if (!src.computer_id)
 			src.computer_id = h2s_id
 
-		if(!host_brain.lastKnownIP)
+		if (!host_brain.lastKnownIP)
 			src.lastKnownIP = h2s_ip
 
 		// brain -> host
@@ -241,10 +241,10 @@
 
 		host.ckey = host_brain.ckey
 
-		if(!host.computer_id)
+		if (!host.computer_id)
 			host.computer_id = b2h_id
 
-		if(!host.lastKnownIP)
+		if (!host.lastKnownIP)
 			host.lastKnownIP = b2h_ip
 
 	qdel(host_brain)
@@ -263,9 +263,9 @@
 		thing.alpha =        0
 		thing.invisibility = INVISIBILITY_MAXIMUM
 
-	if(!host) return
+	if (!host) return
 
-	if(host.mind)
+	if (host.mind)
 		GLOB.borers.remove_antagonist(host.mind)
 
 	dropInto(host.loc)

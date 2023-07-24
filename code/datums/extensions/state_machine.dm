@@ -2,32 +2,32 @@
 var/global/list/state_machines = list()
 
 /proc/get_state_machine(datum/holder, base_type)
-	if(istype(holder) && base_type)
+	if (istype(holder) && base_type)
 		var/list/machines = global.state_machines["\ref[holder]"]
 		return islist(machines) && machines[base_type]
 
 /proc/add_state_machine(datum/holder, base_type, fsm_type)
 	RETURN_TYPE(/datum/state_machine)
-	if(istype(holder) && base_type)
+	if (istype(holder) && base_type)
 		var/holder_ref = "\ref[holder]"
 		var/list/machines = global.state_machines[holder_ref]
-		if(!islist(machines))
+		if (!islist(machines))
 			machines = list()
 			global.state_machines[holder_ref] = machines
-		if(!machines[base_type])
-			if(!fsm_type)
+		if (!machines[base_type])
+			if (!fsm_type)
 				fsm_type = base_type
 			var/datum/state_machine/machine = new fsm_type(holder)
 			machines[base_type] = machine
 			return machine
 
 /proc/remove_state_machine(datum/holder, base_type)
-	if(istype(holder) && base_type)
+	if (istype(holder) && base_type)
 		var/holder_ref = "\ref[holder]"
 		var/list/machines = global.state_machines[holder_ref]
-		if(length(machines))
+		if (length(machines))
 			machines -= base_type
-			if(!length(machines))
+			if (!length(machines))
 				global.state_machines -= holder_ref
 			return TRUE
 	return FALSE
@@ -43,7 +43,7 @@ var/global/list/state_machines = list()
 
 /datum/state_machine/New(datum/_holder)
 	..()
-	if(!istype(_holder))
+	if (!istype(_holder))
 		stack_trace("Non-datum holder supplied to [type] New().")
 	else
 		holder_ref = weakref(_holder)
@@ -56,10 +56,10 @@ var/global/list/state_machines = list()
 /// Resets back to our initial state.
 /datum/state_machine/proc/reset()
 	var/datum/holder_instance = get_holder()
-	if(istype(current_state))
+	if (istype(current_state))
 		current_state.exited_state(holder_instance)
 	current_state = initial(current_state)
-	if(ispath(current_state, /singleton/state))
+	if (ispath(current_state, /singleton/state))
 		current_state = GET_SINGLETON(current_state)
 		current_state.entered_state(holder_instance)
 	else
@@ -69,7 +69,7 @@ var/global/list/state_machines = list()
 /// Retrieve and validate our holder instance from the cached weakref.
 /datum/state_machine/proc/get_holder()
 	var/datum/holder = holder_ref?.resolve()
-	if(istype(holder) && !QDELETED(holder))
+	if (istype(holder) && !QDELETED(holder))
 		return holder
 
 /// Makes the FSM enter a new state, if it can, based on it's current state, that state's transitions, and the holder's status.
@@ -77,7 +77,7 @@ var/global/list/state_machines = list()
 /datum/state_machine/proc/evaluate()
 	var/datum/holder_instance = get_holder()
 	var/list/options = current_state.get_open_transitions(holder_instance)
-	if(LAZYLEN(options))
+	if (LAZYLEN(options))
 		var/singleton/state_transition/choice = choose_transition(options)
 		current_state.exited_state(holder_instance)
 		current_state = choice.target
@@ -93,9 +93,9 @@ var/global/list/state_machines = list()
 /// Use responsibly.
 /datum/state_machine/proc/set_state(new_state_type)
 	var/datum/holder_instance = get_holder()
-	if(istype(current_state))
+	if (istype(current_state))
 		current_state.exited_state(holder_instance)
 	current_state = GET_SINGLETON(new_state_type)
-	if(istype(current_state))
+	if (istype(current_state))
 		current_state.entered_state(holder_instance)
 		return current_state

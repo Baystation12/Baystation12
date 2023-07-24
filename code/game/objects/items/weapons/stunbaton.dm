@@ -23,13 +23,13 @@
 	bcell = /obj/item/cell/device/high
 
 /obj/item/melee/baton/New()
-	if(ispath(bcell))
+	if (ispath(bcell))
 		bcell = new bcell(src)
 		update_icon()
 	..()
 
 /obj/item/melee/baton/Destroy()
-	if(bcell && !ispath(bcell))
+	if (bcell && !ispath(bcell))
 		qdel(bcell)
 		bcell = null
 	return ..()
@@ -38,13 +38,13 @@
 	return bcell
 
 /obj/item/melee/baton/proc/update_status()
-	if(bcell.charge < hitcost)
+	if (bcell.charge < hitcost)
 		status = 0
 		update_icon()
 
 /obj/item/melee/baton/proc/deductcharge(chrgdeductamt)
-	if(bcell)
-		if(bcell.checked_use(chrgdeductamt))
+	if (bcell)
+		if (bcell.checked_use(chrgdeductamt))
 			update_status()
 			return 1
 		else
@@ -54,41 +54,41 @@
 	return null
 
 /obj/item/melee/baton/on_update_icon()
-	if(status)
+	if (status)
 		icon_state = "[initial(name)]_active"
-	else if(!bcell)
+	else if (!bcell)
 		icon_state = "[initial(name)]_nocell"
 	else
 		icon_state = "[initial(name)]"
 
-	if(icon_state == "[initial(name)]_active")
+	if (icon_state == "[initial(name)]_active")
 		set_light(0.4, 0.1, 1, 2, "#ff6a00")
 	else
 		set_light(0)
 
 /obj/item/melee/baton/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
+	if (distance <= 1)
 		examine_cell(user)
 
 // Addition made by Techhead0, thanks for fullfilling the todo!
 /obj/item/melee/baton/proc/examine_cell(mob/user)
-	if(bcell)
+	if (bcell)
 		to_chat(user, SPAN_NOTICE("The baton is [round(bcell.percent())]% charged."))
-	if(!bcell)
+	if (!bcell)
 		to_chat(user, SPAN_WARNING("The baton does not have a power source installed."))
 
 /obj/item/melee/baton/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/cell/device))
-		if(!bcell && user.unEquip(W))
+	if (istype(W, /obj/item/cell/device))
+		if (!bcell && user.unEquip(W))
 			W.forceMove(src)
 			bcell = W
 			to_chat(user, SPAN_NOTICE("You install a cell into the [src]."))
 			update_icon()
 		else
 			to_chat(user, SPAN_NOTICE("[src] already has a cell."))
-	else if(isScrewdriver(W))
-		if(bcell)
+	else if (isScrewdriver(W))
+		if (bcell)
 			bcell.update_icon()
 			bcell.dropInto(loc)
 			bcell = null
@@ -103,20 +103,20 @@
 	add_fingerprint(user)
 
 /obj/item/melee/baton/throw_impact(atom/hit_atom, datum/thrownthing/TT)
-	if(istype(hit_atom,/mob/living))
+	if (istype(hit_atom,/mob/living))
 		apply_hit_effect(hit_atom, hit_zone = ran_zone(TT.target_zone, 30))//more likely to hit the zone you target!
 	else
 		..()
 
 /obj/item/melee/baton/proc/set_status(newstatus, mob/user)
-	if(bcell && bcell.charge >= hitcost)
-		if(status != newstatus)
+	if (bcell && bcell.charge >= hitcost)
+		if (status != newstatus)
 			change_status(newstatus)
 			to_chat(user, SPAN_NOTICE("[src] is now [status ? "on" : "off"]."))
 			playsound(loc, "sparks", 75, 1, -1)
 	else
 		change_status(0)
-		if(!bcell)
+		if (!bcell)
 			to_chat(user, SPAN_WARNING("[src] does not have a power source!"))
 		else
 			to_chat(user,  SPAN_WARNING("[src] is out of charge."))
@@ -130,7 +130,7 @@
 		update_icon()
 
 /obj/item/melee/baton/attack(mob/M, mob/user)
-	if(status && (MUTATION_CLUMSY in user.mutations) && prob(50))
+	if (status && (MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, SPAN_DANGER("You accidentally hit yourself with the [src]!"))
 		user.Weaken(30)
 		deductcharge(hitcost)
@@ -138,54 +138,54 @@
 	return ..()
 
 /obj/item/melee/baton/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
-	if(isrobot(target))
+	if (isrobot(target))
 		return ..()
 
 	var/agony = agonyforce
 	var/stun = stunforce
 	var/obj/item/organ/external/affecting = null
-	if(ishuman(target))
+	if (ishuman(target))
 		var/mob/living/carbon/human/H = target
 		affecting = H.get_organ(hit_zone)
 	var/abuser =  user ? "" : "by [user]"
-	if(user && user.a_intent == I_HURT)
+	if (user && user.a_intent == I_HURT)
 		. = ..()
-		if(.)
+		if (.)
 			return
 
 		//whacking someone causes a much poorer electrical contact than deliberately prodding them.
 		stun *= 0.5
-		if(status)		//Checks to see if the stunbaton is on.
+		if (status)		//Checks to see if the stunbaton is on.
 			agony *= 0.5	//whacking someone causes a much poorer contact than prodding them.
 		else
 			agony = 0	//Shouldn't really stun if it's off, should it?
 		//we can't really extract the actual hit zone from ..(), unfortunately. Just act like they attacked the area they intended to.
-	else if(!status)
-		if(affecting)
+	else if (!status)
+		if (affecting)
 			target.visible_message(SPAN_WARNING("[target] has been prodded in the [affecting.name] with [src][abuser]. Luckily it was off."))
 		else
 			target.visible_message(SPAN_WARNING("[target] has been prodded with [src][abuser]. Luckily it was off."))
 	else
-		if(affecting)
+		if (affecting)
 			target.visible_message(SPAN_DANGER("[target] has been prodded in the [affecting.name] with [src]!"))
 		else
 			target.visible_message(SPAN_DANGER("[target] has been prodded with [src][abuser]!"))
 		playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 
 	//stun effects
-	if(status)
+	if (status)
 		target.stun_effect_act(stun, agony, hit_zone, src)
 		msg_admin_attack("[key_name(user)] stunned [key_name(target)] with the [src].")
 		deductcharge(hitcost)
 
-		if(ishuman(target))
+		if (ishuman(target))
 			var/mob/living/carbon/human/H = target
 			H.forcesay(GLOB.hit_appends)
 
 	return 1
 
 /obj/item/melee/baton/emp_act(severity)
-	if(bcell)
+	if (bcell)
 		bcell.emp_act(severity)	//let's not duplicate code everywhere if we don't have to please.
 	..()
 
@@ -233,7 +233,7 @@
 	icon_state = "electrified_arm"
 
 /obj/item/melee/baton/robot/electrified_arm/on_update_icon()
-	if(status)
+	if (status)
 		icon_state = "electrified_arm_active"
 		set_light(0.4, 0.1, 1, 2, "#006aff")
 	else

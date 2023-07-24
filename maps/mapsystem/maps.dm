@@ -8,12 +8,12 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /hook/startup/proc/initialise_map_list()
 	for(var/type in subtypesof(/datum/map))
 		var/datum/map/M
-		if(type == GLOB.using_map.type)
+		if (type == GLOB.using_map.type)
 			M = GLOB.using_map
 			M.setup_map()
 		else
 			M = new type
-		if(!M.path)
+		if (!M.path)
 			log_error("Map '[M]' ([type]) does not have a defined path, not adding to map list!")
 		else
 			GLOB.all_maps[M.path] = M
@@ -224,15 +224,15 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/maint_all_access = FALSE
 
 /datum/map/New()
-	if(!map_levels)
+	if (!map_levels)
 		map_levels = station_levels.Copy()
-	if(!allowed_jobs)
+	if (!allowed_jobs)
 		allowed_jobs = list()
 		for(var/jtype in subtypesof(/datum/job))
 			var/datum/job/job = jtype
-			if(initial(job.available_by_default))
+			if (initial(job.available_by_default))
 				allowed_jobs += jtype
-	if(!LAZYLEN(planet_size))
+	if (!LAZYLEN(planet_size))
 		planet_size = list(world.maxx, world.maxy)
 	current_lobby_screen = pick(lobby_screens)
 	game_year = text2num(time2text(world.timeofday, "YYYY")) + DEFAULT_GAME_YEAR_OFFSET
@@ -402,7 +402,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 #endif
 
 /datum/map/proc/build_exoplanets()
-	if(!use_overmap)
+	if (!use_overmap)
 		return
 
 	for(var/i = 0, i < num_exoplanets, i++)
@@ -421,7 +421,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		M.update_icon()
 	for(var/thing in mining_floors["[zlevel]"])
 		var/turf/simulated/floor/asteroid/M = thing
-		if(istype(M))
+		if (istype(M))
 			M.updateMineralOverlays()
 
 /datum/map/proc/get_network_access(network)
@@ -432,12 +432,12 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/candidates = GLOB.using_map.accessible_z_levels.Copy()
 	candidates.Remove(num2text(current_z_level))
 
-	if(!length(candidates))
+	if (!length(candidates))
 		return current_z_level
 	return text2num(pickweight(candidates))
 
 /datum/map/proc/get_empty_zlevel()
-	if(empty_levels == null)
+	if (empty_levels == null)
 		INCREMENT_WORLD_Z_SIZE
 		empty_levels = list(world.maxz)
 	return pick(empty_levels)
@@ -452,13 +452,13 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		weighted_randomevent_locations[D] = length(D.viable_random_events)
 		weighted_mundaneevent_locations[D] = length(D.viable_mundane_events)
 
-	if(!station_account)
+	if (!station_account)
 		station_account = create_account("[station_name()] Primary Account", "[station_name()]", starting_money, ACCOUNT_TYPE_DEPARTMENT)
 
 	for(var/job in allowed_jobs)
 		var/datum/job/J = job
 		var/dept = initial(J.department)
-		if(dept)
+		if (dept)
 			station_departments |= dept
 
 	for(var/department in station_departments)
@@ -515,34 +515,34 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	show_browser(C, file('html/lobby_titlescreen.html'), "window=lobbybrowser")
 
 /datum/map/proc/hide_titlescreen(client/C)
-	if(C.mob) // Check if the client is still connected to something
+	if (C.mob) // Check if the client is still connected to something
 		// Hide title screen, allowing player to see the map
 		winset(C, "lobbybrowser", "is-disabled=true;is-visible=false")
 
 /datum/map/proc/roundend_player_status()
 	for(var/mob/Player in GLOB.player_list)
-		if(Player.mind && !isnewplayer(Player))
-			if(Player.stat != DEAD)
+		if (Player.mind && !isnewplayer(Player))
+			if (Player.stat != DEAD)
 				var/turf/playerTurf = get_turf(Player)
-				if(evacuation_controller.round_over() && evacuation_controller.emergency_evacuation)
-					if(isStationLevel(playerTurf.z))
+				if (evacuation_controller.round_over() && evacuation_controller.emergency_evacuation)
+					if (isStationLevel(playerTurf.z))
 						to_chat(Player, SPAN_INFO("<b>You managed to survive, but were left behind on [station_name()] as [Player.real_name]...</b>"))
 					else if (isEscapeLevel(playerTurf.z))
 						to_chat(Player, SPAN_COLOR("green", "<b>You managed to survive the events on [station_name()] as [Player.real_name].</b>"))
 					else
 						to_chat(Player, SPAN_INFO("<b>You managed to survive, but were lost far from [station_name()] as [Player.real_name]...</b>"))
-				else if(isAdminLevel(playerTurf.z))
+				else if (isAdminLevel(playerTurf.z))
 					to_chat(Player, SPAN_COLOR("green", "<b>You successfully underwent crew transfer after events on [station_name()] as [Player.real_name].</b>"))
-				else if(issilicon(Player))
+				else if (issilicon(Player))
 					to_chat(Player, SPAN_COLOR("green", "<b>You remain operational after the events on [station_name()] as [Player.real_name].</b>"))
 				else if (isNotStationLevel(playerTurf.z))
 					to_chat(Player, SPAN_INFO("<b>You managed to survive, but were lost far from [station_name()] as [Player.real_name]...</b>"))
 				else
 					to_chat(Player, SPAN_INFO("<b>You got through just another workday on [station_name()] as [Player.real_name].</b>"))
 			else
-				if(isghost(Player))
+				if (isghost(Player))
 					var/mob/observer/ghost/O = Player
-					if(!O.started_as_observer)
+					if (!O.started_as_observer)
 						to_chat(Player, SPAN_COLOR("red", "<b>You did not survive the events on [station_name()]...</b>"))
 				else
 					to_chat(Player, SPAN_COLOR("red", "<b>You did not survive the events on [station_name()]...</b>"))
@@ -559,17 +559,17 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	data["offship_players"] = 0
 
 	for(var/mob/M in GLOB.player_list)
-		if(M.client)
+		if (M.client)
 			data["clients"]++
-			if(M.stat != DEAD)
+			if (M.stat != DEAD)
 				if (get_crewmember_record(M.real_name || M.name))
 					data["surviving_total"]++
-					if(ishuman(M))
+					if (ishuman(M))
 						data["surviving_humans"]++
 					var/area/A = get_area(M)
-					if(A && (istype(A, /area/shuttle) && isEscapeLevel(A.z)))
+					if (A && (istype(A, /area/shuttle) && isEscapeLevel(A.z)))
 						data["escaped_total"]++
-						if(ishuman(M))
+						if (ishuman(M))
 							data["escaped_humans"]++
 					if (evacuation_controller.emergency_evacuation && !isEscapeLevel(A.z)) //left behind after evac
 						data["left_behind_total"]++
@@ -577,13 +577,13 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 						data["left_behind_total"]++
 				else
 					data["offship_players"]++
-			else if(isghost(M))
+			else if (isghost(M))
 				data["ghosts"]++
 	return data
 
 /datum/map/proc/roundend_summary(list/data)
 	var/desc
-	if(data["surviving_total"] > 0)
+	if (data["surviving_total"] > 0)
 		var/survivors = data["surviving_total"]
 		var/escaped_total = data["escaped_total"]
 		var/ghosts = data["ghosts"]

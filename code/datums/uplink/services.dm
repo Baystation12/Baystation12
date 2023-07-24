@@ -59,43 +59,43 @@
 	var/service_duration = 0 SECONDS
 
 /obj/item/device/uplink_service/Destroy()
-	if(state == CURRENTLY_ACTIVE)
+	if (state == CURRENTLY_ACTIVE)
 		deactivate()
 	. = ..()
 
 /obj/item/device/uplink_service/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
+	if (distance <= 1)
 		switch(state)
-			if(AWAITING_ACTIVATION)
+			if (AWAITING_ACTIVATION)
 				to_chat(user, "It is labeled '[service_label]' and appears to be awaiting activation.")
-			if(CURRENTLY_ACTIVE)
+			if (CURRENTLY_ACTIVE)
 				to_chat(user, "It is labeled '[service_label]' and appears to be active.")
-			if(HAS_BEEN_ACTIVATED)
+			if (HAS_BEEN_ACTIVATED)
 				to_chat(user, "It is labeled '[service_label]' and appears to be permanently disabled.")
 
 /obj/item/device/uplink_service/attack_self(mob/user)
-	if(state != AWAITING_ACTIVATION)
+	if (state != AWAITING_ACTIVATION)
 		to_chat(user, SPAN_WARNING("\The [src] won't activate again."))
 		return
 	var/obj/effect/overmap/visitable/O = map_sectors["[get_z(src)]"]
 	var/choice = alert(user, "This will only affect your current location[istype(O) ? " ([O])" : ""]. Proceed?","Confirmation", "Yes", "No")
-	if(choice != "Yes")
+	if (choice != "Yes")
 		return
-	if(!enable())
+	if (!enable())
 		return
 	state = CURRENTLY_ACTIVE
 	update_icon()
 	user.visible_message(SPAN_NOTICE("\The [user] activates \the [src]."), SPAN_NOTICE("You activate \the [src]."))
 	log_and_message_admins("has activated the service '[service_label]'", user)
 
-	if(service_duration)
+	if (service_duration)
 		addtimer(new Callback(src,/obj/item/device/uplink_service/proc/deactivate), service_duration)
 	else
 		deactivate()
 
 /obj/item/device/uplink_service/proc/deactivate()
-	if(state != CURRENTLY_ACTIVE)
+	if (state != CURRENTLY_ACTIVE)
 		return
 	disable()
 	state = HAS_BEEN_ACTIVATED
@@ -105,11 +105,11 @@
 
 /obj/item/device/uplink_service/on_update_icon()
 	switch(state)
-		if(AWAITING_ACTIVATION)
+		if (AWAITING_ACTIVATION)
 			icon_state = initial(icon_state)
-		if(CURRENTLY_ACTIVE)
+		if (CURRENTLY_ACTIVE)
 			icon_state = "sflash_on"
-		if(HAS_BEEN_ACTIVATED)
+		if (HAS_BEEN_ACTIVATED)
 			icon_state = "sflash_burnt"
 
 /obj/item/device/uplink_service/proc/enable(mob/user = usr)
@@ -176,7 +176,7 @@
 
 /obj/item/device/uplink_service/fake_command_report/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
+	if (distance <= 1)
 		to_chat(user, "The message title is set to '<b>[title]</b>'. The message will be [public_announce ? "broadcast to the public" : "sent only to command consoles"].")
 		to_chat(user, "The message contents are set to:<br />[SPAN_NOTICE(message)]")
 
@@ -265,13 +265,13 @@
 
 /obj/item/device/uplink_service/fake_update_announcement/enable(mob/user = usr)
 	var/title = sanitize(input(user, "Enter your announcement title.", "Announcement Title") as null|text)
-	if(!title)
+	if (!title)
 		return
 	var/message = sanitize(input(user, "Enter your announcement message.", "Announcement Title") as null|text)
-	if(!message)
+	if (!message)
 		return
 
-	if(CanUseTopic(user, GLOB.hands_state) != STATUS_INTERACTIVE)
+	if (CanUseTopic(user, GLOB.hands_state) != STATUS_INTERACTIVE)
 		return FALSE
 	command_announcement.Announce(message, title, msg_sanitized = 1, zlevels = GetConnectedZlevels(get_z(src)))
 	return TRUE
@@ -288,10 +288,10 @@
 
 	var/datum/computer_file/report/crew_record/random_record
 	var/obj/item/card/id/I = user.GetIdCard()
-	if(length(GLOB.all_crew_records))
+	if (length(GLOB.all_crew_records))
 		random_record = pick(GLOB.all_crew_records)
 	var/datum/computer_file/report/crew_record/new_record = CreateModularRecord(user)
-	if(I)
+	if (I)
 		new_record.set_name(I.registered_name)
 		new_record.set_formal_name("[I.formal_name_prefix][I.registered_name][I.formal_name_suffix]")
 		new_record.set_sex(I.sex)
@@ -300,12 +300,12 @@
 		new_record.set_fingerprint(I.fingerprint_hash)
 		new_record.set_bloodtype(I.blood_type)
 		new_record.set_dna(I.dna_hash)
-		if(I.military_branch)
+		if (I.military_branch)
 			new_record.set_branch(I.military_branch.name)
-			if(I.military_rank)
+			if (I.military_rank)
 				new_record.set_rank(I.military_rank.name)
 				new_record.set_formal_name("[I.registered_name][I.formal_name_suffix]") // Rank replaces formal name prefix in real manifest entries
-	if(random_record)
+	if (random_record)
 		COPY_VALUE(faction)
 		COPY_VALUE(religion)
 		COPY_VALUE(homeSystem)
@@ -313,17 +313,17 @@
 		COPY_VALUE(dna)
 		COPY_VALUE(bloodtype)
 	var/datum/job/job = SSjobs.get_by_title(new_record.get_job())
-	if(job)
+	if (job)
 		var/skills = list()
 		for(var/singleton/hierarchy/skill/S in GLOB.skills)
 			var/level = job.min_skill[S.type]
-			if(prob(10))
+			if (prob(10))
 				level = min(rand(1,3), job.max_skill[S.type])
-			if(level > SKILL_UNSKILLED)
+			if (level > SKILL_UNSKILLED)
 				skills += "[S.name], [S.levels[level]]"
 		new_record.set_skillset(jointext(skills,"\n"))
 
-	if(istype(job) && job.announced)
+	if (istype(job) && job.announced)
 		AnnounceArrivalSimple(new_record.get_name(), new_record.get_job(), "has completed cryogenic revival", get_announcement_frequency(job))
 	. = ..()
 

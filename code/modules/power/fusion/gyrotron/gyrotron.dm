@@ -26,7 +26,7 @@
 
 /obj/machinery/power/emitter/gyrotron/Initialize()
 	set_extension(src, /datum/extension/local_network_member)
-	if(initial_id_tag)
+	if (initial_id_tag)
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.set_tag(null, initial_id_tag)
 	change_power_consumption(mega_energy * GYRO_POWER, POWER_USE_ACTIVE)
@@ -54,7 +54,7 @@
 		icon_state = "emitter-off"
 
 /obj/machinery/power/emitter/gyrotron/attackby(obj/item/W, mob/user)
-	if(isMultitool(W))
+	if (isMultitool(W))
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.get_new_tag(user)
 		return

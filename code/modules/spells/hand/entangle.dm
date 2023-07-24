@@ -47,7 +47,7 @@
 	return ..()
 
 /spell/hand/charges/entangle/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 
 	max_casts++

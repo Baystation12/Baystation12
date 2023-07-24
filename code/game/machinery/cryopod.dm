@@ -48,7 +48,7 @@
 	dat += "<hr/><br/><b>[storage_name]</b><br/>"
 	dat += "<i>Welcome, [user.real_name].</i><br/><br/><hr/>"
 	dat += "<a href='?src=\ref[src];log=1'>View storage log</a>.<br>"
-	if(allow_items)
+	if (allow_items)
 		dat += "<a href='?src=\ref[src];view=1'>View objects</a>.<br>"
 		dat += "<a href='?src=\ref[src];item=1'>Recover object</a>.<br>"
 		dat += "<a href='?src=\ref[src];allitems=1'>Recover all objects</a>.<br>"
@@ -57,7 +57,7 @@
 	onclose(user, "cryopod_console")
 
 /obj/machinery/computer/cryopod/OnTopic(user, href_list, state)
-	if(href_list["log"])
+	if (href_list["log"])
 		var/dat = "<b>Recently stored [storage_type]</b><br/><hr/><br/>"
 		for(var/person in frozen_crew)
 			dat += "[person]<br/>"
@@ -65,8 +65,8 @@
 		show_browser(user, dat, "window=cryolog")
 		. = TOPIC_REFRESH
 
-	else if(href_list["view"])
-		if(!allow_items) return
+	else if (href_list["view"])
+		if (!allow_items) return
 
 		var/dat = "<b>Recently stored objects</b><br/><hr/><br/>"
 		for(var/obj/item/I in frozen_items)
@@ -76,18 +76,18 @@
 		show_browser(user, dat, "window=cryoitems")
 		. = TOPIC_HANDLED
 
-	else if(href_list["item"])
-		if(!allow_items) return
+	else if (href_list["item"])
+		if (!allow_items) return
 
-		if(length(frozen_items) == 0)
+		if (length(frozen_items) == 0)
 			to_chat(user, SPAN_NOTICE("There is nothing to recover from storage."))
 			return TOPIC_HANDLED
 
 		var/obj/item/I = input(user, "Please choose which object to retrieve.","Object recovery",null) as null|anything in frozen_items
-		if(!I || !CanUseTopic(user, state))
+		if (!I || !CanUseTopic(user, state))
 			return TOPIC_HANDLED
 
-		if(!(I in frozen_items))
+		if (!(I in frozen_items))
 			to_chat(user, SPAN_NOTICE("\The [I] is no longer in storage."))
 			return TOPIC_HANDLED
 
@@ -97,10 +97,10 @@
 		frozen_items -= I
 		. = TOPIC_REFRESH
 
-	else if(href_list["allitems"])
-		if(!allow_items) return TOPIC_HANDLED
+	else if (href_list["allitems"])
+		if (!allow_items) return TOPIC_HANDLED
 
-		if(length(frozen_items) == 0)
+		if (length(frozen_items) == 0)
 			to_chat(user, SPAN_NOTICE("There is nothing to recover from storage."))
 			return TOPIC_HANDLED
 
@@ -217,30 +217,30 @@
 	for(var/d in GLOB.cardinal)
 		var/turf/T = get_step(src,d)
 		var/obj/machinery/door/blast/B = locate() in T
-		if(B && B.density)
+		if (B && B.density)
 			B.force_open()
 			break
 
 	var/list/possible_locations = list()
-	if(GLOB.using_map.use_overmap)
+	if (GLOB.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/O = map_sectors["[z]"]
 		for(var/obj/effect/overmap/visitable/OO in range(O,2))
-			if(HAS_FLAGS(OO.sector_flags, OVERMAP_SECTOR_IN_SPACE) || istype(OO,/obj/effect/overmap/visitable/sector/exoplanet))
+			if (HAS_FLAGS(OO.sector_flags, OVERMAP_SECTOR_IN_SPACE) || istype(OO,/obj/effect/overmap/visitable/sector/exoplanet))
 				possible_locations |= text2num(level)
 
 	var/newz = GLOB.using_map.get_empty_zlevel()
-	if(length(possible_locations) && prob(10))
+	if (length(possible_locations) && prob(10))
 		newz = pick(possible_locations)
 	var/turf/nloc = locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE),newz)
-	if(!istype(nloc, /turf/space))
+	if (!istype(nloc, /turf/space))
 		explosion(nloc, 6)
 	playsound(loc,'sound/effects/rocket.ogg',100)
 	forceMove(nloc)
 
 //Don't use these for in-round leaving
 /obj/machinery/cryopod/lifepod/Process()
-	if(evacuation_controller && evacuation_controller.state >= EVAC_LAUNCHING)
-		if(occupant && !launched)
+	if (evacuation_controller && evacuation_controller.state >= EVAC_LAUNCHING)
+		if (occupant && !launched)
 			launch()
 		..()
 
@@ -249,7 +249,7 @@
 	..()
 
 /obj/machinery/cryopod/Destroy()
-	if(occupant)
+	if (occupant)
 		occupant.forceMove(loc)
 	. = ..()
 
@@ -265,7 +265,7 @@
 	// control_computer = locate(/obj/machinery/computer/cryopod) in src.loc.loc
 
 	// Don't send messages unless we *need* the computer, and less than five minutes have passed since last time we messaged
-	if(!control_computer && urgent && last_no_computer_message + 5*60*10 < world.time)
+	if (!control_computer && urgent && last_no_computer_message + 5*60*10 < world.time)
 		log_and_message_admins("Cryopod in [src.loc.loc] could not find control computer!")
 		last_no_computer_message = world.time
 
@@ -274,14 +274,14 @@
 /obj/machinery/cryopod/proc/check_occupant_allowed(mob/M)
 	var/correct_type = 0
 	for(var/type in allow_occupant_types)
-		if(istype(M, type))
+		if (istype(M, type))
 			correct_type = 1
 			break
 
-	if(!correct_type) return 0
+	if (!correct_type) return 0
 
 	for(var/type in disallow_occupant_types)
-		if(istype(M, type))
+		if (istype(M, type))
 			return 0
 
 	return 1
@@ -293,8 +293,8 @@
 
 //Lifted from Unity stasis.dm and refactored.
 /obj/machinery/cryopod/Process()
-	if(occupant)
-		if(applies_stasis && iscarbon(occupant) && (world.time > time_entered + 20 SECONDS))
+	if (occupant)
+		if (applies_stasis && iscarbon(occupant) && (world.time > time_entered + 20 SECONDS))
 			var/mob/living/carbon/C = occupant
 			C.SetStasis(2)
 
@@ -303,9 +303,9 @@
 		if ((world.time - time_entered < time_till_despawn) && (occupant.ckey))
 			return
 
-		if(!occupant.client && occupant.stat<2) //Occupant is living and has no client.
-			if(!control_computer)
-				if(!find_control_computer(urgent=1))
+		if (!occupant.client && occupant.stat<2) //Occupant is living and has no client.
+			if (!control_computer)
+				if (!find_control_computer(urgent=1))
 					return
 
 			despawn_occupant()
@@ -332,9 +332,9 @@
 		occupant.drop_from_inventory(W)
 		W.forceMove(src)
 
-		if(length(W.contents)) //Make sure we catch anything not handled by qdel() on the items.
+		if (length(W.contents)) //Make sure we catch anything not handled by qdel() on the items.
 			for(var/obj/item/O in W.contents)
-				if(istype(O,/obj/item/storage/internal)) //Stop eating pockets, you fuck!
+				if (istype(O,/obj/item/storage/internal)) //Stop eating pockets, you fuck!
 					continue
 				O.forceMove(src)
 
@@ -348,22 +348,22 @@
 
 		var/preserve = null
 		// Snowflaaaake.
-		if(istype(W, /obj/item/device/mmi))
+		if (istype(W, /obj/item/device/mmi))
 			var/obj/item/device/mmi/brain = W
-			if(brain.brainmob && brain.brainmob.client && brain.brainmob.key)
+			if (brain.brainmob && brain.brainmob.client && brain.brainmob.key)
 				preserve = 1
 			else
 				continue
 		else
 			for(var/T in preserve_items)
-				if(istype(W,T))
+				if (istype(W,T))
 					preserve = 1
 					break
 
-		if(!preserve)
+		if (!preserve)
 			qdel(W)
 		else
-			if(control_computer && control_computer.allow_items)
+			if (control_computer && control_computer.allow_items)
 				control_computer.frozen_items += W
 				W.forceMove(null)
 			else
@@ -373,17 +373,17 @@
 	for(var/datum/objective/O in all_objectives)
 		// We don't want revs to get objectives that aren't for heads of staff. Letting
 		// them win or lose based on cryo is silly so we remove the objective.
-		if(O.target == occupant.mind)
-			if(O.owner && O.owner.current)
+		if (O.target == occupant.mind)
+			if (O.owner && O.owner.current)
 				to_chat(O.owner.current, SPAN_WARNING("You get the feeling your target is no longer within your reach..."))
 			qdel(O)
 
 	//Handle job slot/tater cleanup.
-	if(occupant.mind)
-		if(occupant.mind.assigned_job)
+	if (occupant.mind)
+		if (occupant.mind.assigned_job)
 			occupant.mind.assigned_job.clear_slot()
 
-		if(LAZYLEN(occupant.mind.objectives))
+		if (LAZYLEN(occupant.mind.objectives))
 			occupant.mind.objectives = null
 			occupant.mind.special_role = null
 
@@ -398,12 +398,12 @@
 	//  and records should not be fetched by name as there is no guarantee names are unique
 	var/role_alt_title = occupant.mind ? occupant.mind.role_alt_title : "Unknown"
 
-	if(control_computer)
+	if (control_computer)
 		control_computer.frozen_crew += "[occupant.real_name], [role_alt_title] - [stationtime2text()]"
 		control_computer._admin_logs += "[key_name(occupant)] ([role_alt_title]) at [stationtime2text()]"
 	log_and_message_admins("[key_name(occupant)] ([role_alt_title]) entered cryostorage.")
 
-	if(announce_despawn)
+	if (announce_despawn)
 		invoke_async(announce, /obj/item/device/radio/proc/autosay, "[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
 
 	var/despawnmessage = replacetext(on_store_visible_message, "$occupant$", occupant.real_name)
@@ -492,15 +492,15 @@
 	set name = "Eject Pod"
 	set category = "Object"
 	set src in oview(1)
-	if(usr.stat != 0)
+	if (usr.stat != 0)
 		return
 
 	icon_state = base_icon_state
 
 	//Eject any items that aren't meant to be in the pod.
 	var/list/items = contents - component_parts
-	if(occupant) items -= occupant
-	if(announce) items -= announce
+	if (occupant) items -= occupant
+	if (announce) items -= announce
 
 	for(var/obj/item/W in items)
 		W.dropInto(loc)
@@ -516,26 +516,26 @@
 	set category = "Object"
 	set src in oview(1)
 
-	if(usr.stat != 0 || !check_occupant_allowed(usr))
+	if (usr.stat != 0 || !check_occupant_allowed(usr))
 		return
 
-	if(src.occupant)
+	if (src.occupant)
 		to_chat(usr, SPAN_NOTICE("<B>\The [src] is in use.</B>"))
 		return
 
 	for(var/mob/living/carbon/slime/M in range(1,usr))
-		if(M.Victim == usr)
+		if (M.Victim == usr)
 			to_chat(usr, "You're too busy getting your life sucked out of you.")
 			return
 
 	visible_message("\The [usr] starts climbing into \the [src].", range = 3)
 
-	if(do_after(usr, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
+	if (do_after(usr, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 
-		if(!usr || !usr.client)
+		if (!usr || !usr.client)
 			return
 
-		if(src.occupant)
+		if (src.occupant)
 			to_chat(usr, SPAN_NOTICE("<B>\The [src] is in use.</B>"))
 			return
 
@@ -547,10 +547,10 @@
 
 /obj/machinery/cryopod/proc/go_out()
 
-	if(!occupant)
+	if (!occupant)
 		return
 
-	if(occupant.client)
+	if (occupant.client)
 		occupant.client.eye = src.occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
 
@@ -563,13 +563,13 @@
 
 /obj/machinery/cryopod/proc/set_occupant(mob/living/carbon/occupant, silent)
 	src.occupant = occupant
-	if(!occupant)
+	if (!occupant)
 		SetName(initial(name))
 		return
 
 	occupant.stop_pulling()
-	if(occupant.client)
-		if(!silent)
+	if (occupant.client)
+		if (!silent)
 			to_chat(occupant, SPAN_NOTICE("[on_enter_occupant_message]"))
 			to_chat(occupant, SPAN_NOTICE("<b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b>"))
 		occupant.client.perspective = EYE_PERSPECTIVE

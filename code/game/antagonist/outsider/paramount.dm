@@ -18,7 +18,7 @@ GLOBAL_DATUM_INIT(paramounts, /datum/antagonist/paramount, new)
 
 /datum/antagonist/paramount/equip(mob/living/carbon/human/player)
 
-	if(!..())
+	if (!..())
 		return 0
 
 	player.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/psi_amp(player), slot_head)
@@ -40,35 +40,35 @@ GLOBAL_DATUM_INIT(paramounts, /datum/antagonist/paramount, new)
 
 /datum/antagonist/paramount/create_objectives(datum/mind/player)
 
-	if(!..())
+	if (!..())
 		return
 	// Copied from ninja for now.
 	var/objective_list = list(1,2,3)
 	for(var/i=rand(2,3),i>0,i--)
 		switch(pick(objective_list))
-			if(1)//Kill
+			if (1)//Kill
 				var/datum/objective/assassinate/objective = new
 				objective.owner = player
 				objective.target = objective.find_target()
-				if(objective.target != "Free Objective")
+				if (objective.target != "Free Objective")
 					player.objectives += objective
 				else
 					i++
 				objective_list -= 1 // No more than one kill objective
-			if(2)//Protect
+			if (2)//Protect
 				var/datum/objective/protect/objective = new
 				objective.owner = player
 				objective.target = objective.find_target()
-				if(objective.target != "Free Objective")
+				if (objective.target != "Free Objective")
 					player.objectives += objective
 				else
 					i++
 					objective_list -= 3
-			if(3)//Harm
+			if (3)//Harm
 				var/datum/objective/harm/objective = new
 				objective.owner = player
 				objective.target = objective.find_target()
-				if(objective.target != "Free Objective")
+				if (objective.target != "Free Objective")
 					player.objectives += objective
 				else
 					i++

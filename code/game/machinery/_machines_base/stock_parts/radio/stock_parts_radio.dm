@@ -8,15 +8,15 @@
 	var/multitool_extension
 
 /obj/item/stock_parts/radio/Initialize()
-	if(frequency)
+	if (frequency)
 		set_frequency(frequency, filter)
-	if(multitool_extension)
+	if (multitool_extension)
 		set_extension(src, multitool_extension)
 	. = ..()
 
 /obj/item/stock_parts/radio/on_install(obj/machinery/machine)
 	..()
-	if(!id_tag)
+	if (!id_tag)
 		id_tag = machine.id_tag
 
 /obj/item/stock_parts/radio/proc/set_frequency(new_frequency, new_filter)
@@ -31,7 +31,7 @@
 
 /obj/item/stock_parts/radio/proc/sanitize_events(obj/machinery/machine, list/events)
 	for(var/thing in events)
-		if(!is_valid_event(machine, events[thing]))
+		if (!is_valid_event(machine, events[thing]))
 			LAZYREMOVE(events, thing)
 
 /obj/item/stock_parts/radio/proc/is_valid_event(obj/machinery/machine, singleton/public_access/variable)

@@ -13,10 +13,10 @@
 	var/list/invalid_traits = list()
 	for(var/trait in GET_SINGLETON_SUBTYPE_LIST(/singleton/trait))
 		var/singleton/trait/T = trait
-		if(!T.name || !istext(T.name)) // Empty strings are valid texts
+		if (!T.name || !istext(T.name)) // Empty strings are valid texts
 			invalid_traits += T.type
 
-	if(length(invalid_traits))
+	if (length(invalid_traits))
 		fail("Following trait types have invalid names: " + english_list(invalid_traits))
 	else
 		pass("All traits have valid names")
@@ -57,7 +57,7 @@
 		group_by(trait_names, T.name, T.type)
 
 	var/number_of_issues = number_of_issues(trait_names, "Names")
-	if(number_of_issues)
+	if (number_of_issues)
 		fail("[number_of_issues] duplicate trait name\s found")
 	else
 		pass("All traits have unique names")
@@ -71,10 +71,10 @@
 	var/list/invalid_traits = list()
 	for(var/trait in GET_SINGLETON_SUBTYPE_LIST(/singleton/trait))
 		var/singleton/trait/T = trait
-		if(!length(T.levels) || (length(T.levels) > 1 && (TRAIT_LEVEL_EXISTS in T.levels)))
+		if (!length(T.levels) || (length(T.levels) > 1 && (TRAIT_LEVEL_EXISTS in T.levels)))
 			invalid_traits += T.type
 
-	if(length(invalid_traits))
+	if (length(invalid_traits))
 		fail("Following trait types have invalid ranges: " + english_list(invalid_traits))
 	else
 		pass("All traits have valid ranges")
@@ -92,11 +92,11 @@
 		for(var/trait_type in S.traits)
 			var/trait_level = S.traits[trait_type]
 			var/singleton/trait/T = GET_SINGLETON(trait_type)
-			if(!T.Validate(trait_level))
+			if (!T.Validate(trait_level))
 				invalid_species += S.type
 				break
 
-	if(length(invalid_species))
+	if (length(invalid_species))
 		fail("Following species have invalid ranges: " + english_list(invalid_species))
 	else
 		pass("All species have valid trait levels")

@@ -16,7 +16,7 @@
 /obj/effect/landmark/carnage_mark/LateInitialize()
 	var/area/A = get_area(src)
 	for(var/atom/movable/AM in A)
-		if(AM && !AM.anchored && AM.simulated && prob(movement_prob))
+		if (AM && !AM.anchored && AM.simulated && prob(movement_prob))
 			spawn()
 				AM.throw_at_random(FALSE, movement_range, 1)
 	qdel(src)
@@ -29,10 +29,10 @@
 
 /obj/effect/landmark/clear/Initialize()
 	var/turf/simulated/wall/W = get_turf(src)
-	if(istype(W))
+	if (istype(W))
 		W.dismantle_wall(TRUE, TRUE)
 	var/turf/simulated/mineral/M = W
-	if(istype(M))
+	if (istype(M))
 		M.GetDrilled()
 	. = ..()
 
@@ -44,7 +44,7 @@
 
 /obj/effect/landmark/scorcher/Initialize()
 	var/turf/simulated/T = get_turf(src)
-	if(istype(T))
+	if (istype(T))
 		T.fire_act(exposed_temperature = temp)
 	. = ..()
 
@@ -59,18 +59,18 @@
 	GLOB.shuttle_added.register_global(src, .proc/check_shuttle)
 
 /obj/effect/landmark/delete_on_shuttle/proc/check_shuttle(shuttle)
-	if(SSshuttle.shuttles[shuttle_name] == shuttle)
+	if (SSshuttle.shuttles[shuttle_name] == shuttle)
 		GLOB.shuttle_moved_event.register(shuttle, src, .proc/delete_everything)
 		shuttle_datum = shuttle
 
 /obj/effect/landmark/delete_on_shuttle/proc/delete_everything()
 	for(var/O in loc)
-		if(is_type_in_list(O,typetodelete))
+		if (is_type_in_list(O,typetodelete))
 			qdel(O)
 	qdel(src)
 
 /obj/effect/landmark/delete_on_shuttle/Destroy()
 	GLOB.shuttle_added.unregister_global(src, .proc/check_shuttle)
-	if(shuttle_datum)
+	if (shuttle_datum)
 		GLOB.shuttle_moved_event.unregister(shuttle_datum, src, .proc/delete_everything)
 	. = ..()

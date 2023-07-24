@@ -23,20 +23,20 @@
 	create_reagents(30)
 
 /obj/item/mop/afterattack(atom/A, mob/user, proximity)
-	if(!proximity)
+	if (!proximity)
 		return
 
 	var/moppable
-	if(istype(A, /turf))
+	if (istype(A, /turf))
 		var/turf/T = A
 		var/obj/effect/fluid/F = locate() in T
-		if(F && F.fluid_amount > 0)
-			if(F.fluid_amount > FLUID_SHALLOW)
+		if (F && F.fluid_amount > 0)
+			if (F.fluid_amount > FLUID_SHALLOW)
 				to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))
 			else
 				user.visible_message(SPAN_NOTICE("\The [user] begins to mop up \the [T]."))
-				if(do_after(user, mopspeed, T, do_flags = DO_DEFAULT | DO_PUBLIC_PROGRESS) && F && !QDELETED(F))
-					if(F.fluid_amount > FLUID_SHALLOW)
+				if (do_after(user, mopspeed, T, do_flags = DO_DEFAULT | DO_PUBLIC_PROGRESS) && F && !QDELETED(F))
+					if (F.fluid_amount > FLUID_SHALLOW)
 						to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))
 					else
 						qdel(F)
@@ -44,21 +44,21 @@
 			return
 		moppable = TRUE
 
-	else if(is_type_in_list(A,moppable_types))
+	else if (is_type_in_list(A,moppable_types))
 		moppable = TRUE
 
-	if(moppable)
-		if(reagents.total_volume < 1)
+	if (moppable)
+		if (reagents.total_volume < 1)
 			to_chat(user, SPAN_NOTICE("Your mop is dry!"))
 			return
 		var/turf/T = get_turf(A)
-		if(!T)
+		if (!T)
 			return
 
 		user.visible_message(SPAN_WARNING("\The [user] begins to clean \the [T]."))
 
-		if(do_after(user, mopspeed, T, do_flags = DO_DEFAULT | DO_PUBLIC_PROGRESS))
-			if(T)
+		if (do_after(user, mopspeed, T, do_flags = DO_DEFAULT | DO_PUBLIC_PROGRESS))
+			if (T)
 				T.clean(src, user)
 			to_chat(user, SPAN_NOTICE("You have finished mopping!"))
 
@@ -81,7 +81,7 @@
 
 /obj/item/mop/advanced/attack_self(mob/user)
 	refill_enabled = !refill_enabled
-	if(refill_enabled)
+	if (refill_enabled)
 		START_PROCESSING(SSobj, src)
 	else
 		STOP_PROCESSING(SSobj,src)
@@ -89,7 +89,7 @@
 	playsound(user, 'sound/machines/click.ogg', 30, 1)
 
 /obj/item/mop/advanced/Process()
-	if(reagents.total_volume < 30)
+	if (reagents.total_volume < 30)
 		reagents.add_reagent(refill_reagent, refill_rate)
 
 /obj/item/mop/advanced/examine(mob/user)
@@ -97,6 +97,6 @@
 	to_chat(user, SPAN_NOTICE("The condenser switch is set to <b>[refill_enabled ? "ON" : "OFF"]</b>."))
 
 /obj/item/mop/advanced/Destroy()
-	if(refill_enabled)
+	if (refill_enabled)
 		STOP_PROCESSING(SSobj, src)
 	return ..()

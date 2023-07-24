@@ -50,7 +50,7 @@ GLOBAL_LIST_INIT(mimic_protected, list(
 /datum/ai_holder/simple_animal/melee/mimic/find_target(list/possible_targets, has_targets_list)
 	. = ..()
 
-	if(.)
+	if (.)
 		var/mob/living/simple_animal/hostile/mimic/M = holder
 		M.audible_emote("growls at [.]")
 
@@ -58,62 +58,62 @@ GLOBAL_LIST_INIT(mimic_protected, list(
 	// Return a list of targets that isn't the creator
 	. = ..()
 	var/mob/living/simple_animal/hostile/mimic/M = holder
-	if(M.creator)
+	if (M.creator)
 		return . - M.creator.resolve()
 
 
 /mob/living/simple_animal/hostile/mimic/Initialize(mapload, obj/o, mob/living/creator)
 	. = ..()
-	if(o)
-		if(ispath(o))
+	if (o)
+		if (ispath(o))
 			o = new o(loc)
 		CopyObject(o,creator)
 
 
 /mob/living/simple_animal/hostile/mimic/proc/CopyObject(obj/O, mob/living/creator)
 
-	if((istype(O, /obj/item) || istype(O, /obj/structure)) && !is_type_in_list(O, GLOB.mimic_protected))
+	if ((istype(O, /obj/item) || istype(O, /obj/structure)) && !is_type_in_list(O, GLOB.mimic_protected))
 		O.forceMove(src)
 		copy_of = weakref(O)
 		appearance = O
 		icon_living = icon_state
 
 		var/obj/item/W = get_natural_weapon()
-		if(istype(O, /obj/structure))
+		if (istype(O, /obj/structure))
 			health = (anchored * 50) + 50
 			destroy_objects = 1
-			if(O.density && O.anchored)
+			if (O.density && O.anchored)
 				knockdown_people = 1
 				W.force = 2 * initial(W.force)
-		else if(istype(O, /obj/item))
+		else if (istype(O, /obj/item))
 			var/obj/item/I = O
 			health = 15 * I.w_class
 			W.force = 2 + initial(I.force)
 			move_to_delay = 2 * I.w_class
 
 		maxHealth = health
-		if(creator)
+		if (creator)
 			src.creator = weakref(creator)
 			faction = "\ref[creator]" // very unique
 		return 1
 	return
 
 /mob/living/simple_animal/hostile/mimic/death()
-	if(!copy_of)
+	if (!copy_of)
 		return
 	var/atom/movable/C = copy_of.resolve()
 	..(null, "dies!")
-	if(C)
+	if (C)
 		C.forceMove(src.loc)
 
-		if(istype(C,/obj/structure/closet))
+		if (istype(C,/obj/structure/closet))
 			for(var/atom/movable/M in src)
 				M.forceMove(C)
 
-		if(istype(C,/obj/item/storage))
+		if (istype(C,/obj/item/storage))
 			var/obj/item/storage/S = C
 			for(var/atom/movable/M in src)
-				if(S.can_be_inserted(M,null,1))
+				if (S.can_be_inserted(M,null,1))
 					S.handle_item_insertion(M)
 				else
 					M.forceMove(src.loc)
@@ -125,16 +125,16 @@ GLOBAL_LIST_INIT(mimic_protected, list(
 /datum/ai_holder/simple_animal/melee/mimic/destroy_surroundings(direction, violent)
 	. = ..()
 	var/mob/living/simple_animal/hostile/mimic/M = holder
-	if(M.destroy_objects)
+	if (M.destroy_objects)
 		..()
 
 /datum/ai_holder/simple_animal/melee/mimic/engage_target()
 	. = ..()
 	var/mob/living/simple_animal/hostile/mimic/M = holder
-	if(M.knockdown_people)
+	if (M.knockdown_people)
 		var/mob/living/L = .
-		if(istype(L))
-			if(prob(15))
+		if (istype(L))
+			if (prob(15))
 				L.Weaken(1)
 				L.visible_message(SPAN_DANGER("\the [src] knocks down \the [L]!"))
 
@@ -153,12 +153,12 @@ GLOBAL_LIST_INIT(mimic_protected, list(
 /datum/ai_holder/simple_animal/melee/mimic/sleeping/list_targets()
 	. = ..()
 	var/mob/living/simple_animal/hostile/mimic/sleeping/M = holder
-	if(!M.awake)
+	if (!M.awake)
 		return null
 	return ..()
 
 /mob/living/simple_animal/hostile/mimic/sleeping/proc/trigger()
-	if(!awake)
+	if (!awake)
 		src.visible_message("<b>\The [src]</b> starts to move!")
 		set_AI_busy(FALSE)
 		awake = 1
@@ -173,5 +173,5 @@ GLOBAL_LIST_INIT(mimic_protected, list(
 
 /datum/ai_holder/simple_animal/melee/mimic/sleeping/destroy_surroundings(direction, violent)
 	var/mob/living/simple_animal/hostile/mimic/sleeping/M = holder
-	if(M.awake)
+	if (M.awake)
 		..()

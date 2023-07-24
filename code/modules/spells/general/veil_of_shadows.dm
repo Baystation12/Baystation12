@@ -13,14 +13,14 @@
 	hud_state = "wiz_statue"
 
 /spell/veil_of_shadows/choose_targets()
-	if(!timer_id && istype(holder,/mob/living/carbon/human))
+	if (!timer_id && istype(holder,/mob/living/carbon/human))
 		return list(holder)
 	. = null
 
 /spell/veil_of_shadows/cast(list/targets, mob/user)
 	var/mob/living/carbon/human/H = user
 	H.AddMovementHandler(/datum/movement_handler/mob/incorporeal)
-	if(H.add_cloaking_source(src))
+	if (H.add_cloaking_source(src))
 		H.visible_message(SPAN_WARNING("\The [H] shrinks from view!"))
 	GLOB.moved_event.register(H,src,.proc/check_light)
 	timer_id = addtimer(new Callback(src,.proc/cancel_veil),duration, TIMER_STOPPABLE)
@@ -31,7 +31,7 @@
 	deltimer(timer_id)
 	timer_id = null
 	var/turf/T = get_turf(H)
-	if(T.get_lumcount() > 0.1) //If we're somewhere somewhat shadowy we can stay invis as long as we stand still
+	if (T.get_lumcount() > 0.1) //If we're somewhere somewhat shadowy we can stay invis as long as we stand still
 		drop_cloak()
 	else
 		GLOB.moved_event.unregister(H,src)
@@ -39,12 +39,12 @@
 
 /spell/veil_of_shadows/proc/drop_cloak()
 	var/mob/living/carbon/human/H = holder
-	if(H.remove_cloaking_source(src))
+	if (H.remove_cloaking_source(src))
 		H.visible_message(SPAN_NOTICE("\The [H] appears from nowhere!"))
 	GLOB.moved_event.unregister(H,src)
 
 /spell/veil_of_shadows/proc/check_light()
-	if(light_steps)
+	if (light_steps)
 		light_steps--
 		return
 	light_steps = initial(light_steps)

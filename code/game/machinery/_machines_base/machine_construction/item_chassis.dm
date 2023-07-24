@@ -5,9 +5,9 @@
 	down_state = /singleton/machine_construction/default/deconstructed
 
 /singleton/machine_construction/default/item_chassis/attackby(obj/item/I, mob/user, obj/machinery/machine)
-	if((. = ..()))
+	if ((. = ..()))
 		return
-	if(isWrench(I))
+	if (isWrench(I))
 		TRANSFER_STATE(down_state)
 		machine.dismantle()
 		return
@@ -17,7 +17,7 @@
 
 /singleton/machine_construction/default/item_chassis/validate_state(obj/machinery/machine)
 	. = ..()
-	if(!.)
+	if (!.)
 		try_change_state(machine, down_state)
 
 /singleton/machine_construction/default/panel_closed/mechanics_info()

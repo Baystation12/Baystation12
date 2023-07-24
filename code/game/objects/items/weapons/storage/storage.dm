@@ -42,11 +42,11 @@
 	. = ..()
 
 /obj/item/storage/MouseDrop(obj/over_object as obj)
-	if(!canremove)
+	if (!canremove)
 		return
 
 	if ((ishuman(usr) || isrobot(usr) || issmall(usr)) && !usr.incapacitated())
-		if(over_object == usr && Adjacent(usr)) // this must come before the screen objects only block
+		if (over_object == usr && Adjacent(usr)) // this must come before the screen objects only block
 			src.add_fingerprint(usr)
 			src.open(usr)
 			return TRUE
@@ -59,15 +59,15 @@
 			return
 
 		src.add_fingerprint(usr)
-		if(usr.unEquip(src))
+		if (usr.unEquip(src))
 			switch(over_object.name)
-				if(BP_R_HAND)
+				if (BP_R_HAND)
 					usr.put_in_r_hand(src)
-				if(BP_L_HAND)
+				if (BP_L_HAND)
 					usr.put_in_l_hand(src)
 
 /obj/item/storage/AltClick(mob/usr)
-	if(!canremove)
+	if (!canremove)
 		return FALSE
 
 	if ((ishuman(usr) || isrobot(usr) || issmall(usr)) && !usr.incapacitated() && Adjacent(usr))
@@ -91,17 +91,17 @@
 	return L
 
 /obj/item/storage/proc/show_to(mob/user as mob)
-	if(storage_ui)
+	if (storage_ui)
 		storage_ui.show_to(user)
 
 /obj/item/storage/proc/hide_from(mob/user as mob)
-	if(storage_ui)
+	if (storage_ui)
 		storage_ui.hide_from(user)
 
 /obj/item/storage/proc/open(mob/user as mob)
 	if (virtual)
 		return
-	if(!opened && src.open_sound)
+	if (!opened && src.open_sound)
 		playsound(src.loc, src.open_sound, 50, 0, -5)
 		open_sound_played = TRUE
 		to_chat(user, "You open \the [src]")
@@ -110,7 +110,7 @@
 		playsound(src.loc, src.use_sound, 50, 0, -5)
 	if (isrobot(user) && user.hud_used)
 		var/mob/living/silicon/robot/robot = user
-		if(robot.shown_robot_modules) //The robot's inventory is open, need to close it first.
+		if (robot.shown_robot_modules) //The robot's inventory is open, need to close it first.
 			robot.hud_used.toggle_show_robot_modules()
 	open_sound_played = FALSE
 	opened = TRUE //Regular boxes don't open and close; need opened set True to once. Fancy boxes do; code handled in _fancy.dm
@@ -123,11 +123,11 @@
 
 /obj/item/storage/proc/close(mob/user as mob)
 	hide_from(user)
-	if(storage_ui)
+	if (storage_ui)
 		storage_ui.after_close(user)
 
 /obj/item/storage/proc/close_all()
-	if(storage_ui)
+	if (storage_ui)
 		storage_ui.close_all()
 
 /obj/item/storage/proc/storage_space_used()
@@ -138,63 +138,63 @@
 //This proc return 1 if the item can be picked up and 0 if it can't.
 //Set the stop_messages to stop it from printing messages
 /obj/item/storage/proc/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
-	if(!istype(W)) return //Not an item
+	if (!istype(W)) return //Not an item
 
-	if(user && !user.canUnEquip(W))
+	if (user && !user.canUnEquip(W))
 		return 0
 
-	if(src.loc == W)
+	if (src.loc == W)
 		return 0 //Means the item is already in the storage item
-	if(storage_slots != null && length(contents) >= storage_slots)
-		if(!stop_messages)
+	if (storage_slots != null && length(contents) >= storage_slots)
+		if (!stop_messages)
 			to_chat(user, SPAN_NOTICE("\The [src] is full, make some space."))
 		return 0 //Storage item is full
 
-	if(W.anchored)
+	if (W.anchored)
 		return 0
 
-	if(length(can_hold))
-		if(!is_type_in_list(W, can_hold))
-			if(!stop_messages && ! istype(W, /obj/item/hand_labeler))
+	if (length(can_hold))
+		if (!is_type_in_list(W, can_hold))
+			if (!stop_messages && ! istype(W, /obj/item/hand_labeler))
 				to_chat(user, SPAN_NOTICE("\The [src] cannot hold \the [W]."))
 			return 0
 		var/max_instances = can_hold[W.type]
-		if(max_instances && instances_of_type_in_list(W, contents) >= max_instances)
-			if(!stop_messages && !istype(W, /obj/item/hand_labeler))
+		if (max_instances && instances_of_type_in_list(W, contents) >= max_instances)
+			if (!stop_messages && !istype(W, /obj/item/hand_labeler))
 				to_chat(user, SPAN_NOTICE("\The [src] has no more space specifically for \the [W]."))
 			return 0
 
 	//Bypassing storage procedures when not using help intent for labeler/forensic tools.
-	if((istype(W, /obj/item/hand_labeler) || istype(W, /obj/item/forensics)) && user.a_intent != I_HELP)
+	if ((istype(W, /obj/item/hand_labeler) || istype(W, /obj/item/forensics)) && user.a_intent != I_HELP)
 		return FALSE
 
 	// Don't allow insertion of unsafed compressed matter implants
 	// Since they are sucking something up now, their afterattack will delete the storage
-	if(istype(W, /obj/item/implanter/compressed))
+	if (istype(W, /obj/item/implanter/compressed))
 		var/obj/item/implanter/compressed/impr = W
-		if(!impr.safe)
+		if (!impr.safe)
 			stop_messages = 1
 			return 0
 
-	if(length(cant_hold) && is_type_in_list(W, cant_hold))
-		if(!stop_messages)
+	if (length(cant_hold) && is_type_in_list(W, cant_hold))
+		if (!stop_messages)
 			to_chat(user, SPAN_NOTICE("\The [src] cannot hold \the [W]."))
 		return 0
 
 	if (max_w_class != null && W.w_class > max_w_class)
-		if(!stop_messages)
+		if (!stop_messages)
 			to_chat(user, SPAN_NOTICE("\The [W] is too big for this [src.name]."))
 		return 0
 
 	var/total_storage_space = W.get_storage_cost()
-	if(total_storage_space == ITEM_SIZE_NO_CONTAINER)
-		if(!stop_messages)
+	if (total_storage_space == ITEM_SIZE_NO_CONTAINER)
+		if (!stop_messages)
 			to_chat(user, SPAN_NOTICE("\The [W] cannot be placed in [src]."))
 		return 0
 
 	total_storage_space += storage_space_used() //Adds up the combined w_classes which will be in the storage item if the item is added to it.
-	if(total_storage_space > max_storage_space)
-		if(!stop_messages)
+	if (total_storage_space > max_storage_space)
+		if (!stop_messages)
 			to_chat(user, SPAN_NOTICE("\The [src] is too full, make some space."))
 		return 0
 
@@ -204,18 +204,18 @@
 //The stop_warning parameter will stop the insertion message from being displayed. It is intended for cases where you are inserting multiple items at once,
 //such as when picking up all the items on a tile with one click.
 /obj/item/storage/proc/handle_item_insertion(obj/item/W, prevent_warning = 0, NoUpdate = 0)
-	if(!istype(W))
+	if (!istype(W))
 		return 0
-	if(istype(W.loc, /mob))
+	if (istype(W.loc, /mob))
 		var/mob/M = W.loc
-		if(!M.unEquip(W))
+		if (!M.unEquip(W))
 			return
 	W.forceMove(src)
 	W.on_enter_storage(src)
-	if(usr)
+	if (usr)
 		add_fingerprint(usr)
 
-		if(!prevent_warning)
+		if (!prevent_warning)
 			for(var/mob/M in viewers(usr, null))
 				if (M == usr)
 					to_chat(usr, SPAN_NOTICE("You put \the [W] into [src]."))
@@ -224,54 +224,54 @@
 				else if (W && W.w_class >= ITEM_SIZE_NORMAL) //Otherwise they can only see large or normal items from a distance...
 					M.show_message(SPAN_NOTICE("\The [usr] puts [W] into [src]."), VISIBLE_MESSAGE)
 
-		if(!NoUpdate)
+		if (!NoUpdate)
 			update_ui_after_item_insertion()
 	update_icon()
 	return 1
 
 /obj/item/storage/proc/update_ui_after_item_insertion()
 	prepare_ui()
-	if(storage_ui)
+	if (storage_ui)
 		storage_ui.on_insertion(usr)
 
 /obj/item/storage/proc/update_ui_after_item_removal()
 	prepare_ui()
-	if(storage_ui)
+	if (storage_ui)
 		storage_ui.on_post_remove(usr)
 
 //Call this proc to handle the removal of an item from the storage item. The item will be moved to the atom sent as new_target
 /obj/item/storage/proc/remove_from_storage(obj/item/W as obj, atom/new_location, NoUpdate = 0)
-	if(!istype(W)) return 0
+	if (!istype(W)) return 0
 	new_location = new_location || get_turf(src)
 
-	if(storage_ui)
+	if (storage_ui)
 		storage_ui.on_pre_remove(usr, W)
 
-	if(ismob(loc))
+	if (ismob(loc))
 		W.dropped(usr)
-	if(ismob(new_location))
+	if (ismob(new_location))
 		W.hud_layerise()
 	else
 		W.reset_plane_and_layer()
 	W.forceMove(new_location)
 
-	if(usr && !NoUpdate)
+	if (usr && !NoUpdate)
 		update_ui_after_item_removal()
-	if(W.maptext)
+	if (W.maptext)
 		W.maptext = ""
 	W.on_exit_storage(src)
-	if(!NoUpdate)
+	if (!NoUpdate)
 		update_icon()
 	return 1
 
 // Only do ui functions for now; the obj is responsible for anything else.
 /obj/item/storage/proc/on_item_pre_deletion(obj/item/W)
-	if(storage_ui)
+	if (storage_ui)
 		storage_ui.on_pre_remove(null, W) // Supposed to be able to handle null user.
 
 // Only do ui functions for now; the obj is responsible for anything else.
 /obj/item/storage/proc/on_item_post_deletion(obj/item/W)
-	if(storage_ui)
+	if (storage_ui)
 		update_ui_after_item_removal()
 	queue_icon_update()
 
@@ -286,23 +286,23 @@
 	if (.) //if the item was used as a crafting component, just return
 		return
 
-	if(isrobot(user) && (W == user.get_active_hand()))
+	if (isrobot(user) && (W == user.get_active_hand()))
 		return //Robots can't store their modules.
 
-	if(!can_be_inserted(W, user))
+	if (!can_be_inserted(W, user))
 		return
 
 	W.add_fingerprint(user)
 	return handle_item_insertion(W)
 
 /obj/item/storage/attack_hand(mob/user as mob)
-	if(ishuman(user))
+	if (ishuman(user))
 		var/mob/living/carbon/human/H = user
-		if(H.l_store == src && !H.get_active_hand())	//Prevents opening if it's in a pocket.
+		if (H.l_store == src && !H.get_active_hand())	//Prevents opening if it's in a pocket.
 			H.put_in_hands(src)
 			H.l_store = null
 			return
-		if(H.r_store == src && !H.get_active_hand())
+		if (H.r_store == src && !H.get_active_hand())
 			H.put_in_hands(src)
 			H.r_store = null
 			return
@@ -321,15 +321,15 @@
 	var/failure = 0
 
 	for(var/obj/item/I in T)
-		if(!can_be_inserted(I, user, 0))	// Note can_be_inserted still makes noise when the answer is no
+		if (!can_be_inserted(I, user, 0))	// Note can_be_inserted still makes noise when the answer is no
 			failure = 1
 			continue
 		success = 1
 		handle_item_insertion(I, 1, 1) // First 1 is no messages, second 1 is no ui updates
-	if(success && !failure)
+	if (success && !failure)
 		to_chat(user, SPAN_NOTICE("You put everything into \the [src]."))
 		update_ui_after_item_insertion()
-	else if(success)
+	else if (success)
 		to_chat(user, SPAN_NOTICE("You put some things into \the [src]."))
 		update_ui_after_item_insertion()
 	else
@@ -341,9 +341,9 @@
 
 	collection_mode = !collection_mode
 	switch (collection_mode)
-		if(1)
+		if (1)
 			to_chat(usr, "\The [src] now picks up all items in a tile at once.")
-		if(0)
+		if (0)
 			to_chat(usr, "\The [src] now picks up one item at a time.")
 
 
@@ -359,7 +359,7 @@
 /obj/item/storage/verb/quick_empty()
 	set name = "Empty Contents"
 	set category = "Object"
-	if((!ishuman(usr) && (src.loc != usr)) || usr.stat || usr.restrained())
+	if ((!ishuman(usr) && (src.loc != usr)) || usr.stat || usr.restrained())
 		return
 	hide_from(usr)
 	DoQuickEmpty()
@@ -392,12 +392,12 @@
 
 /obj/item/storage/Initialize()
 	. = ..()
-	if(allow_quick_empty)
+	if (allow_quick_empty)
 		verbs += /obj/item/storage/verb/quick_empty
 	else
 		verbs -= /obj/item/storage/verb/quick_empty
 
-	if(allow_quick_gather)
+	if (allow_quick_gather)
 		verbs += /obj/item/storage/verb/toggle_gathering_mode
 	else
 		verbs -= /obj/item/storage/verb/toggle_gathering_mode
@@ -407,16 +407,16 @@
 	else
 		verbs -= /obj/item/storage/verb/dump_contents
 
-	if(isnull(max_storage_space) && !isnull(storage_slots))
+	if (isnull(max_storage_space) && !isnull(storage_slots))
 		max_storage_space = storage_slots*BASE_STORAGE_COST(max_w_class)
 
 	storage_ui = new storage_ui(src)
 	prepare_ui()
 
-	if(startswith)
+	if (startswith)
 		for(var/item_path in startswith)
 			var/list/data = startswith[item_path]
-			if(islist(data))
+			if (islist(data))
 				var/qty = data[1]
 				var/list/argsl = data.Copy()
 				argsl[1] = src
@@ -442,15 +442,15 @@
 			</ol>"
 
 /obj/item/storage/emp_act(severity)
-	if(!istype(src.loc, /mob/living))
+	if (!istype(src.loc, /mob/living))
 		for(var/obj/O in contents)
 			O.emp_act(severity)
 	..()
 
 /obj/item/storage/attack_self(mob/user as mob)
 	//Clicking on itself will empty it, if it has the verb to do that.
-	if(user.get_active_hand() == src)
-		if(src.verbs.Find(/obj/item/storage/verb/quick_empty))
+	if (user.get_active_hand() == src)
+		if (src.verbs.Find(/obj/item/storage/verb/quick_empty))
 			src.quick_empty()
 			return 1
 

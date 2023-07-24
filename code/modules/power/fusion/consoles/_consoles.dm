@@ -9,7 +9,7 @@
 
 /obj/machinery/computer/fusion/Initialize()
 	set_extension(src, /datum/extension/local_network_member)
-	if(initial_id_tag)
+	if (initial_id_tag)
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.set_tag(null, initial_id_tag)
 	. = ..()
@@ -19,7 +19,7 @@
 	return fusion.get_local_network()
 
 /obj/machinery/computer/fusion/attackby(obj/item/thing, mob/user)
-	if(isMultitool(thing))
+	if (isMultitool(thing))
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.get_new_tag(user)
 		return
@@ -39,7 +39,7 @@
 	. = data
 
 /obj/machinery/computer/fusion/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	if(ui_template)
+	if (ui_template)
 		var/list/data = build_ui_data()
 		ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 		if (!ui)

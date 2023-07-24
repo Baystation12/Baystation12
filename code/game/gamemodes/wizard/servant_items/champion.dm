@@ -71,24 +71,24 @@
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "cleaved", "sundered")
 
 /obj/item/excalibur/pickup(mob/living/user as mob)
-	if(user.mind)
-		if(!GLOB.wizards.is_antagonist(user.mind) || user.mind.special_role != ANTAG_SERVANT)
+	if (user.mind)
+		if (!GLOB.wizards.is_antagonist(user.mind) || user.mind.special_role != ANTAG_SERVANT)
 			START_PROCESSING(SSobj, src)
 			to_chat(user,SPAN_DANGER("\The [src] heats up in your hands, burning you!"))
 
 /obj/item/excalibur/Process()
-	if(istype(loc, /mob/living))
-		if(istype(loc, /mob/living/carbon/human))
+	if (istype(loc, /mob/living))
+		if (istype(loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = loc
 			var/hand = BP_R_HAND
-			if(H.l_hand == src)
+			if (H.l_hand == src)
 				hand = BP_L_HAND
 			var/obj/item/organ/external/E = H.get_organ(hand)
 			E.take_external_damage(burn=2,used_weapon="stovetop")
 		else
 			var/mob/living/M = loc
 			M.adjustFireLoss(2)
-		if(prob(2))
+		if (prob(2))
 			to_chat(loc,SPAN_DANGER("\The [src] is burning you!"))
 	return 1
 

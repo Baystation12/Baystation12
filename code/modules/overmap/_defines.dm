@@ -24,26 +24,26 @@ var/global/list/map_sectors = list()
 	name = "[x]-[y]"
 	var/list/numbers = list()
 
-	if(x == 1 || x == GLOB.using_map.overmap_size)
+	if (x == 1 || x == GLOB.using_map.overmap_size)
 		numbers += list("[round(y/10)]","[round(y%10)]")
-		if(y == 1 || y == GLOB.using_map.overmap_size)
+		if (y == 1 || y == GLOB.using_map.overmap_size)
 			numbers += "-"
-	if(y == 1 || y == GLOB.using_map.overmap_size)
+	if (y == 1 || y == GLOB.using_map.overmap_size)
 		numbers += list("[round(x/10)]","[round(x%10)]")
 
 	for(var/i = 1 to length(numbers))
 		var/image/I = image('icons/effects/numbers.dmi',numbers[i])
 		I.pixel_x = 5*i - 2
 		I.pixel_y = world.icon_size/2 - 3
-		if(y == 1)
+		if (y == 1)
 			I.pixel_y = 3
 			I.pixel_x = 5*i + 4
-		if(y == GLOB.using_map.overmap_size)
+		if (y == GLOB.using_map.overmap_size)
 			I.pixel_y = world.icon_size - 9
 			I.pixel_x = 5*i + 4
-		if(x == 1)
+		if (x == 1)
 			I.pixel_x = 5*i - 2
-		if(x == GLOB.using_map.overmap_size)
+		if (x == GLOB.using_map.overmap_size)
 			I.pixel_x = 5*i + 2
 		overlays += I
 
@@ -53,15 +53,15 @@ var/global/list/moving_levels = list()
 //yes it looks ugly, but it should only fire when state actually change.
 //null direction stops movement
 /proc/toggle_move_stars(zlevel, direction)
-	if(!zlevel)
+	if (!zlevel)
 		return
 
 	var/gen_dir = null
-	if(direction & (NORTH|SOUTH))
+	if (direction & (NORTH|SOUTH))
 		gen_dir += "ns"
-	else if(direction & (EAST|WEST))
+	else if (direction & (EAST|WEST))
 		gen_dir += "ew"
-	if(!direction)
+	if (!direction)
 		gen_dir = null
 
 	if (moving_levels["[zlevel]"] != gen_dir)
@@ -69,7 +69,7 @@ var/global/list/moving_levels = list()
 
 		var/list/spaceturfs = block(locate(1, 1, zlevel), locate(world.maxx, world.maxy, zlevel))
 		for(var/turf/space/T in spaceturfs)
-			if(!gen_dir)
+			if (!gen_dir)
 				T.icon_state = "white"
 			else
 				T.icon_state = "speedspace_[gen_dir]_[rand(1,15)]"

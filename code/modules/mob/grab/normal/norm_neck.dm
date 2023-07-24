@@ -37,10 +37,10 @@
 	affecting.drop_l_hand()
 	affecting.drop_r_hand()
 
-	if(affecting.lying)
+	if (affecting.lying)
 		affecting.Weaken(4)
 
-	if(affecting.stat != CONSCIOUS)
+	if (affecting.stat != CONSCIOUS)
 		force_stand = FALSE
 		shield_assailant = FALSE
 

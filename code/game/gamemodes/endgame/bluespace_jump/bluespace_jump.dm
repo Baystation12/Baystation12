@@ -21,11 +21,11 @@
 
 	var/space_zlevel = GLOB.using_map.get_empty_zlevel() //get a place for stragglers
 	for(var/mob/living/M in SSmobs.mob_list)
-		if(M.z in affected_levels)
+		if (M.z in affected_levels)
 			var/area/A = get_area(M)
-			if(istype(A,/area/space)) //straggler
+			if (istype(A,/area/space)) //straggler
 				var/turf/T = locate(M.x, M.y, space_zlevel)
-				if(T)
+				if (T)
 					M.forceMove(T)
 			else
 				apply_bluespaced(M)
@@ -41,7 +41,7 @@
 
 /datum/universal_state/bluespace_jump/OnExit()
 	for(var/mob/M in bluespaced)
-		if(!QDELETED(M))
+		if (!QDELETED(M))
 			clear_bluespaced(M)
 
 	bluespaced.Cut()
@@ -50,13 +50,13 @@
 
 
 /datum/universal_state/bluespace_jump/OnPlayerLatejoin(mob/living/M)
-	if(M.z in affected_levels)
+	if (M.z in affected_levels)
 		apply_bluespaced(M)
 
 
 /datum/universal_state/bluespace_jump/OnTouchMapEdge(atom/A)
-	if((A.z in affected_levels) && (A in bluespaced))
-		if(ismob(A))
+	if ((A.z in affected_levels) && (A in bluespaced))
+		if (ismob(A))
 			to_chat(A,SPAN_WARNING("You drift away into the shifting expanse, never to be seen again."))
 		qdel(A) //lost in bluespace
 		return FALSE
@@ -65,7 +65,7 @@
 
 /datum/universal_state/bluespace_jump/proc/apply_bluespaced(mob/living/M)
 	bluespaced += M
-	if(M.client)
+	if (M.client)
 		to_chat(M,SPAN_NOTICE("You feel oddly light, and somewhat disoriented as everything around you shimmers and warps ever so slightly."))
 		M.overlay_fullscreen("bluespace", /obj/screen/fullscreen/bluespace_overlay)
 	M.confused = 20
@@ -73,7 +73,7 @@
 
 
 /datum/universal_state/bluespace_jump/proc/clear_bluespaced(mob/living/M)
-	if(M.client)
+	if (M.client)
 		to_chat(M,SPAN_NOTICE("You feel rooted in material world again."))
 		M.clear_fullscreen("bluespace")
 	M.confused = 0
@@ -97,7 +97,7 @@
 
 /obj/effect/bluegoast/New(nloc, ndaddy)
 	..(nloc)
-	if(!ndaddy)
+	if (!ndaddy)
 		qdel(src)
 		return
 	daddy = ndaddy
@@ -120,14 +120,14 @@
 	var/ndir = get_dir(new_loc,old_loc)
 	appearance = daddy.appearance
 	var/nloc = get_step(src, ndir)
-	if(nloc)
+	if (nloc)
 		forceMove(nloc)
-	if(nloc == new_loc)
+	if (nloc == new_loc)
 		reality++
-		if(reality > 5)
+		if (reality > 5)
 			to_chat(daddy, SPAN_NOTICE("Yep, it's certainly the other one. Your existance was a glitch, and it's finally being mended..."))
 			blueswitch()
-		else if(reality > 3)
+		else if (reality > 3)
 			to_chat(daddy, SPAN_DANGER("Something is definitely wrong. Why do you think YOU are the original?"))
 		else
 			to_chat(daddy, SPAN_WARNING("You feel a bit less real. Which one of you two was original again?.."))

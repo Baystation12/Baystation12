@@ -29,7 +29,7 @@
 	var/list/data = ui_data()
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		ui = new(user, src, ui_key, "airlock_electronics.tmpl", src.name, 1000, 500, null, null, state)
 		ui.set_initial_data(data)
 		ui.open()
@@ -59,15 +59,15 @@
 	return data
 
 /obj/item/airlock_electronics/OnTopic(mob/user, list/href_list, state)
-	if(lockable)
-		if(href_list["unlock"])
-			if(!req_access || istype(user, /mob/living/silicon))
+	if (lockable)
+		if (href_list["unlock"])
+			if (!req_access || istype(user, /mob/living/silicon))
 				locked = FALSE
 				last_configurator = user.name
 			else
 				var/obj/item/card/id/I = user.get_active_hand()
 				I = I ? I.GetIdCard() : null
-				if(!istype(I, /obj/item/card/id))
+				if (!istype(I, /obj/item/card/id))
 					to_chat(user, SPAN_WARNING("[\src] flashes a yellow LED near the ID scanner. Did you remember to scan your ID or PDA?"))
 					return TOPIC_HANDLED
 				if (check_access(I))
@@ -77,21 +77,21 @@
 					to_chat(user, SPAN_WARNING("[\src] flashes a red LED near the ID scanner, indicating your access has been denied."))
 					return TOPIC_HANDLED
 			return TOPIC_REFRESH
-		else if(href_list["lock"])
+		else if (href_list["lock"])
 			locked = TRUE
 			return TOPIC_REFRESH
 
-	if(href_list["clear"])
+	if (href_list["clear"])
 		conf_access = list()
 		one_access = FALSE
 		return TOPIC_REFRESH
-	if(href_list["one_access"])
+	if (href_list["one_access"])
 		one_access = !one_access
 		return TOPIC_REFRESH
-	if(href_list["autoset"])
+	if (href_list["autoset"])
 		autoset = !autoset
 		return TOPIC_REFRESH
-	if(href_list["access"])
+	if (href_list["access"])
 		var/access = href_list["access"]
 		if (!(access in conf_access))
 			conf_access += access
@@ -116,15 +116,15 @@
 	var/list/data = ui_data()
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		ui = new(user, src, ui_key, "airlock_electronics.tmpl", src.name, 1000, 500, null, null, state)
 		ui.set_initial_data(data)
 		ui.open()
 
 /obj/item/airlock_electronics/proc/set_access(obj/object)
-	if(!object.req_access)
+	if (!object.req_access)
 		object.check_access()
-	if(length(object.req_access))
+	if (length(object.req_access))
 		conf_access = list()
 		for(var/entry in object.req_access)
 			conf_access |= entry // This flattens the list, turning everything into AND

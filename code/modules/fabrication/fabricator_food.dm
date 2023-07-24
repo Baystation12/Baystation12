@@ -14,18 +14,18 @@
 	base_type = /obj/machinery/fabricator/replicator
 
 /obj/machinery/fabricator/replicator/hear_talk(mob/M, text, verb, datum/language/speaking)
-	if(speaking && !speaking.machine_understands)
+	if (speaking && !speaking.machine_understands)
 		return ..()
 	var/true_text = lowertext(html_decode(text))
-	if(findtext(true_text, "status"))
+	if (findtext(true_text, "status"))
 		addtimer(new Callback(src, /obj/machinery/fabricator/replicator/proc/state_status), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
-	else if(findtext(true_text, "menu"))
+	else if (findtext(true_text, "menu"))
 		addtimer(new Callback(src, /obj/machinery/fabricator/replicator/proc/state_menu), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
 	else
 		for(var/datum/fabricator_recipe/recipe in SSfabrication.get_recipes(fabricator_class))
-			if(recipe.hidden && !(fab_status_flags & FAB_HACKED))
+			if (recipe.hidden && !(fab_status_flags & FAB_HACKED))
 				continue
-			if(findtext(true_text, lowertext(recipe.name)))
+			if (findtext(true_text, lowertext(recipe.name)))
 				addtimer(new Callback(src, /obj/machinery/fabricator/proc/try_queue_build, recipe, 1), 2 SECONDS)
 				break
 	..()
@@ -37,10 +37,10 @@
 /obj/machinery/fabricator/replicator/proc/state_menu()
 	var/list/menu = list()
 	for(var/datum/fabricator_recipe/recipe in SSfabrication.get_recipes(fabricator_class))
-		if(recipe.hidden && !(fab_status_flags & FAB_HACKED))
+		if (recipe.hidden && !(fab_status_flags & FAB_HACKED))
 			continue
 		menu += recipe.name
-	if(length(menu))
+	if (length(menu))
 		audible_message("<b>\The [src]</b> states, \"Greetings! I serve the following dishes: [english_list(menu)]\"")
 	else
 		audible_message("<b>\The [src]</b> states, \"Apologies! I cannot serve any dishes at the moment.\"")

@@ -34,13 +34,13 @@
 
 /mob/living/simple_animal/passive/opossum/Life()
 	. = ..()
-	if(. && !ckey && stat != DEAD && prob(1))
+	if (. && !ckey && stat != DEAD && prob(1))
 		resting = (stat == UNCONSCIOUS)
-		if(!resting)
+		if (!resting)
 			set_wander(initial(ai_holder.wander))
 			ai_holder.speak_chance = initial(ai_holder.speak_chance)
 			set_stat(CONSCIOUS)
-			if(prob(10))
+			if (prob(10))
 				is_angry = TRUE
 		else
 			set_wander(FALSE)
@@ -51,12 +51,12 @@
 
 /mob/living/simple_animal/passive/opossum/adjustBruteLoss(damage)
 	. = ..()
-	if(damage >= 3)
+	if (damage >= 3)
 		respond_to_damage()
 
 /mob/living/simple_animal/passive/opossum/adjustFireLoss(damage)
 	. = ..()
-	if(damage >= 3)
+	if (damage >= 3)
 		respond_to_damage()
 
 /mob/living/simple_animal/passive/opossum/lay_down()
@@ -64,8 +64,8 @@
 	update_icon()
 
 /mob/living/simple_animal/passive/opossum/proc/respond_to_damage()
-	if(!resting && stat == CONSCIOUS)
-		if(!is_angry)
+	if (!resting && stat == CONSCIOUS)
+		if (!is_angry)
 			is_angry = TRUE
 			custom_emote(AUDIBLE_MESSAGE, "hisses!")
 		else
@@ -75,11 +75,11 @@
 
 /mob/living/simple_animal/passive/opossum/on_update_icon()
 
-	if(stat == DEAD || (resting && is_angry))
+	if (stat == DEAD || (resting && is_angry))
 		icon_state = icon_dead
-	else if(resting || stat == UNCONSCIOUS)
+	else if (resting || stat == UNCONSCIOUS)
 		icon_state = "[icon_living]_sleep"
-	else if(is_angry)
+	else if (is_angry)
 		icon_state = "[icon_living]_aaa"
 	else
 		icon_state = icon_living
@@ -108,10 +108,10 @@
 	addtimer(new Callback(src, .proc/check_keywords, message), rand(1 SECOND, 3 SECONDS))
 
 /mob/living/simple_animal/passive/opossum/poppy/proc/check_keywords(message)
-	if(!client && stat == CONSCIOUS)
+	if (!client && stat == CONSCIOUS)
 		message = lowertext(message)
 		for(var/aaa in aaa_words)
-			if(findtext(message, aaa))
+			if (findtext(message, aaa))
 				respond_to_damage()
 				return
 

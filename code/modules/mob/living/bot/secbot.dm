@@ -79,32 +79,32 @@
 /mob/living/bot/secbot/GetInteractMaintenance()
 	. = "Threat identifier status: "
 	switch(emagged)
-		if(0)
+		if (0)
 			. += "<a href='?src=\ref[src];command=emag'>Normal</a>"
-		if(1)
+		if (1)
 			. += "<a href='?src=\ref[src];command=emag'>Scrambled (DANGER)</a>"
-		if(2)
+		if (2)
 			. += "ERROROROROROR-----"
 
 /mob/living/bot/secbot/ProcessCommand(mob/user, command, href_list)
 	..()
-	if(CanAccessPanel(user))
+	if (CanAccessPanel(user))
 		switch(command)
-			if("idcheck")
+			if ("idcheck")
 				idcheck = !idcheck
-			if("ignorerec")
+			if ("ignorerec")
 				check_records = !check_records
-			if("ignorearr")
+			if ("ignorearr")
 				check_arrest = !check_arrest
-			if("patrol")
+			if ("patrol")
 				will_patrol = !will_patrol
-			if("declarearrests")
+			if ("declarearrests")
 				declare_arrests = !declare_arrests
 
-	if(CanAccessMaintenance(user))
+	if (CanAccessMaintenance(user))
 		switch(command)
-			if("emag")
-				if(emagged < 2)
+			if ("emag")
+				if (emagged < 2)
 					emagged = !emagged
 
 
@@ -140,8 +140,8 @@
 
 /mob/living/bot/secbot/emag_act(remaining_charges, mob/user)
 	. = ..()
-	if(!emagged)
-		if(user)
+	if (!emagged)
+		if (user)
 			to_chat(user, SPAN_NOTICE("You short out [src]'s threat identificator."))
 			ignore_list |= user
 		emagged = TRUE
@@ -154,12 +154,12 @@
 	var/mob/shooter = P.firer
 	. = ..()
 	//if we already have a target just ignore to avoid lots of checking
-	if(!target && health < curhealth && shooter && (shooter in view(world.view, src)))
+	if (!target && health < curhealth && shooter && (shooter in view(world.view, src)))
 		react_to_attack(shooter)
 
 /mob/living/bot/secbot/proc/begin_arrest(mob/target, threat)
 	var/suspect_name = target_name(target)
-	if(declare_arrests)
+	if (declare_arrests)
 		broadcast_security_hud_message("[src] is arresting a level [threat] suspect <b>[suspect_name]</b> in <b>[get_area(src)]</b>.", src)
 	say("Down on the floor, [suspect_name]! You have [SECBOT_WAIT_TIME] seconds to comply.")
 	if (length(preparing_arrest_sounds))
@@ -167,12 +167,12 @@
 	GLOB.moved_event.register(target, src, /mob/living/bot/secbot/proc/target_moved)
 
 /mob/living/bot/secbot/proc/target_moved(atom/movable/moving_instance, atom/old_loc, atom/new_loc)
-	if(get_dist(get_turf(src), get_turf(target)) >= 1)
+	if (get_dist(get_turf(src), get_turf(target)) >= 1)
 		awaiting_surrender = INFINITY
 		GLOB.moved_event.unregister(moving_instance, src)
 
 /mob/living/bot/secbot/proc/react_to_attack(mob/attacker)
-	if(!target)
+	if (!target)
 		playsound(src.loc, pick(threat_found_sounds), 50)
 		broadcast_security_hud_message("[src] was attacked by a hostile <b>[target_name(attacker)]</b> in <b>[get_area(src)]</b>.", src)
 	target = attacker
@@ -185,20 +185,20 @@
 	walk_to(src, 0)
 
 /mob/living/bot/secbot/startPatrol()
-	if(!locked) // Stop running away when we set you up
+	if (!locked) // Stop running away when we set you up
 		return
 	..()
 
 /mob/living/bot/secbot/confirmTarget(atom/A)
-	if(!..())
+	if (!..())
 		return 0
 	return (check_threat(A) >= SECBOT_THREAT_ARREST)
 
 /mob/living/bot/secbot/lookForTargets()
 	for(var/mob/living/M in view(src))
-		if(M.stat == DEAD)
+		if (M.stat == DEAD)
 			continue
-		if(confirmTarget(M))
+		if (confirmTarget(M))
 			var/threat = check_threat(M)
 			target = M
 			awaiting_surrender = -1
@@ -209,31 +209,31 @@
 /mob/living/bot/secbot/handleAdjacentTarget()
 	var/mob/living/carbon/human/H = target
 	var/threat = check_threat(target)
-	if(awaiting_surrender < SECBOT_WAIT_TIME && istype(H) && !H.lying && threat < SECBOT_THREAT_ATTACK)
-		if(awaiting_surrender == -1)
+	if (awaiting_surrender < SECBOT_WAIT_TIME && istype(H) && !H.lying && threat < SECBOT_THREAT_ATTACK)
+		if (awaiting_surrender == -1)
 			begin_arrest(target, threat)
 		++awaiting_surrender
 	else
 		UnarmedAttack(target)
 
 /mob/living/bot/secbot/proc/cuff_target(mob/living/carbon/C)
-	if(istype(C) && !C.handcuffed)
+	if (istype(C) && !C.handcuffed)
 		handcuffs.place_handcuffs(C, src)
 	resetTarget() //we're done, failed or not. Don't want to get stuck if C is not
 
 /mob/living/bot/secbot/UnarmedAttack(mob/M, proximity)
-	if(!..())
+	if (!..())
 		return
 
-	if(!istype(M))
+	if (!istype(M))
 		return
 
 	var/mob/living/carbon/human/H = M
-	if(istype(H) && H.lying)
+	if (istype(H) && H.lying)
 		cuff_target(H)
 		return
 
-	if(istype(M, /mob/living/simple_animal))
+	if (istype(M, /mob/living/simple_animal))
 		a_intent = I_HURT
 	else
 		a_intent = I_GRAB
@@ -246,7 +246,7 @@
 	var/turf/Tsec = get_turf(src)
 	new /obj/item/device/assembly/prox_sensor(Tsec)
 	new /obj/item/melee/baton(Tsec)
-	if(prob(50))
+	if (prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -257,16 +257,16 @@
 	qdel(src)
 
 /mob/living/bot/secbot/proc/target_name(mob/living/T)
-	if(ishuman(T))
+	if (ishuman(T))
 		var/mob/living/carbon/human/H = T
 		return H.get_id_name("unidentified person")
 	return "unidentified lifeform"
 
 /mob/living/bot/secbot/proc/check_threat(mob/living/M)
-	if(!M || !istype(M) || M.stat == DEAD || src == M)
+	if (!M || !istype(M) || M.stat == DEAD || src == M)
 		return 0
 
-	if(emagged && !M.incapacitated()) //check incapacitated so emagged secbots don't keep attacking the same target forever
+	if (emagged && !M.incapacitated()) //check incapacitated so emagged secbots don't keep attacking the same target forever
 		return 10
 
 	return M.assess_perp(access_scanner, 0, idcheck, check_records, check_arrest)

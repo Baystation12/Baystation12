@@ -19,29 +19,29 @@ SUBSYSTEM_DEF(vote)
 	vote_prototypes = list()
 	for(var/vote_type in subtypesof(/datum/vote))
 		var/datum/vote/fake_vote = vote_type
-		if(initial(fake_vote.manual_allowed))
+		if (initial(fake_vote.manual_allowed))
 			vote_prototypes[vote_type] = new vote_type
 
 
 /datum/controller/subsystem/vote/fire(resumed = 0)
-	if(!active_vote)
-		if(queued_auto_vote)
+	if (!active_vote)
+		if (queued_auto_vote)
 			initiate_vote(queued_auto_vote, automatic = 1)
 			queued_auto_vote = null
 		return
 
 	switch(active_vote.Process())
-		if(VOTE_PROCESS_ABORT)
+		if (VOTE_PROCESS_ABORT)
 			QDEL_NULL(active_vote)
 			reset()
 			return
-		if(VOTE_PROCESS_COMPLETE)
+		if (VOTE_PROCESS_COMPLETE)
 			active_vote.tally_result()      // Does math to figure out who won. Data is stored on the vote datum.
 			active_vote.report_result()     // Announces the result; possibly alerts other entities of the result.
 			LAZYADD(old_votes, active_vote) // Store the datum for future reference.
 			reset()
 			return
-		if(VOTE_PROCESS_ONGOING)
+		if (VOTE_PROCESS_ONGOING)
 			for(var/client/C in voting)
 				show_panel(C.mob)
 
@@ -64,18 +64,18 @@ SUBSYSTEM_DEF(vote)
 
 //A false return means that a vote couldn't be started.
 /datum/controller/subsystem/vote/proc/initiate_vote(vote_type, mob/creator, automatic = 0)
-	if(active_vote)
+	if (active_vote)
 		return FALSE
-	if(!automatic && (!istype(creator) || !creator.client))
+	if (!automatic && (!istype(creator) || !creator.client))
 		return FALSE
 
-	if(last_started_time != null && !(isadmin(creator) || automatic))
+	if (last_started_time != null && !(isadmin(creator) || automatic))
 		var/next_allowed_time = (last_started_time + config.vote_delay)
-		if(next_allowed_time > world.time)
+		if (next_allowed_time > world.time)
 			return FALSE
 
 	var/datum/vote/new_vote = new vote_type
-	if(!new_vote.setup(creator, automatic))
+	if (!new_vote.setup(creator, automatic))
 		return FALSE
 
 	active_vote = new_vote
@@ -83,29 +83,29 @@ SUBSYSTEM_DEF(vote)
 	return TRUE
 
 /datum/controller/subsystem/vote/proc/interface(client/C)
-	if(!C)
+	if (!C)
 		return
 	var/admin = isadmin(C)
 	voting |= C
 
 	. = list()
 	. += "<html><head><title>Voting Panel</title></head><body>"
-	if(active_vote)
+	if (active_vote)
 		. += active_vote.interface(C.mob)
-		if(admin)
+		if (admin)
 			. += "(<a href='?src=\ref[src];cancel=1'>Cancel Vote</a>) "
 	else
 		. += "<h2>Start a vote:</h2><hr><ul>"
 		for(var/vote_type in vote_prototypes)
 			var/datum/vote/vote_datum = vote_prototypes[vote_type]
 			. += "<li><a href='?src=\ref[src];vote=\ref[vote_datum.type]'>"
-			if(vote_datum.can_run(C.mob))
+			if (vote_datum.can_run(C.mob))
 				. += "[capitalize(vote_datum.name)]"
 			else
 				. += SPAN_COLOR("grey", "[capitalize(vote_datum.name)] (Disallowed)")
 			. += "</a>"
 			var/toggle = vote_datum.check_toggle()
-			if(admin && toggle)
+			if (admin && toggle)
 				. += "\t(<a href='?src=\ref[src];toggle=1;vote=\ref[vote_datum.type]'>toggle; currently [toggle]</a>)"
 			. += "</li>"
 		. += "</ul><hr>"
@@ -116,7 +116,7 @@ SUBSYSTEM_DEF(vote)
 /datum/controller/subsystem/vote/proc/show_panel(mob/user)
 	var/win_x = 450
 	var/win_y = 740
-	if(active_vote)
+	if (active_vote)
 		win_x = active_vote.win_x
 		win_y = active_vote.win_y
 	show_browser(user, interface(user.client),"window=vote;size=[win_x]x[win_y]")
@@ -124,38 +124,38 @@ SUBSYSTEM_DEF(vote)
 
 /datum/controller/subsystem/vote/proc/close_panel(mob/user)
 	show_browser(user, null, "window=vote")
-	if(user)
+	if (user)
 		voting -= user.client
 
 /datum/controller/subsystem/vote/proc/cancel_vote(mob/user)
-	if(!isadmin(user))
+	if (!isadmin(user))
 		return
 	active_vote.report_result() // Will not make announcement, but do any override failure reporting tasks.
 	QDEL_NULL(active_vote)
 	reset()
 
 /datum/controller/subsystem/vote/Topic(href,href_list[],hsrc)
-	if(!usr || !usr.client)
+	if (!usr || !usr.client)
 		return	//not necessary but meh...just in-case somebody does something stupid
 
-	if(href_list["vote_panel"])
+	if (href_list["vote_panel"])
 		show_panel(usr)
 		return
-	if(href_list["cancel"])
+	if (href_list["cancel"])
 		cancel_vote(usr)
 		return
-	if(href_list["close"])
+	if (href_list["close"])
 		close_panel(usr)
 		return
 
-	if(href_list["vote"])
+	if (href_list["vote"])
 		var/vote_path = locate(href_list["vote"])
-		if(!ispath(vote_path, /datum/vote))
+		if (!ispath(vote_path, /datum/vote))
 			return
 
-		if(href_list["toggle"])
+		if (href_list["toggle"])
 			var/datum/vote/vote_datum = vote_prototypes[vote_path]
-			if(!vote_datum)
+			if (!vote_datum)
 				return
 			vote_datum.toggle(usr)
 			show_panel(usr)
@@ -174,14 +174,14 @@ SUBSYSTEM_DEF(vote)
 
 // Helper proc for determining whether addantag vote can be called.
 /datum/controller/subsystem/vote/proc/is_addantag_allowed(mob/creator, automatic)
-	if(!config.allow_extra_antags)
+	if (!config.allow_extra_antags)
 		return 0
 	// Gamemode has to be determined before we can add antagonists, so we can respect gamemode's add antag vote settings.
-	if((GAME_STATE <= RUNLEVEL_SETUP) || !SSticker.mode)
+	if ((GAME_STATE <= RUNLEVEL_SETUP) || !SSticker.mode)
 		return 0
-	if(automatic)
+	if (automatic)
 		return (SSticker.mode.addantag_allowed & ADDANTAG_AUTO) && !antag_added
-	if(isadmin(creator))
+	if (isadmin(creator))
 		return SSticker.mode.addantag_allowed & (ADDANTAG_ADMIN|ADDANTAG_PLAYER)
 	else
 		return (SSticker.mode.addantag_allowed & ADDANTAG_PLAYER) && !antag_added
@@ -190,7 +190,7 @@ SUBSYSTEM_DEF(vote)
 	set category = "OOC"
 	set name = "Vote"
 
-	if(GAME_STATE < RUNLEVEL_LOBBY)
+	if (GAME_STATE < RUNLEVEL_LOBBY)
 		to_chat(src, "It's too soon to do any voting!")
 		return
 	SSvote.show_panel(src)

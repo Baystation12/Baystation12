@@ -8,10 +8,10 @@
 
 /datum/artifact_trigger/energy/on_hit(obj/O, mob/user)
 	. = ..()
-	if(istype(O, /obj/item/projectile))
+	if (istype(O, /obj/item/projectile))
 		var/obj/item/projectile/P = O
 		. = (P.damage_type == DAMAGE_BURN) || (P.damage_type == DAMAGE_SHOCK)
-	if(istype(O,/obj/item/melee/baton))
+	if (istype(O,/obj/item/melee/baton))
 		var/obj/item/melee/baton/B = O
 		. = B.status
 	else if (istype(O,/obj/item/melee/energy))

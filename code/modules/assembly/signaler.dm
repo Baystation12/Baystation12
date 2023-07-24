@@ -26,7 +26,7 @@
 
 
 /obj/item/device/assembly/signaler/activate()
-	if(cooldown > 0)	return 0
+	if (cooldown > 0)	return 0
 	cooldown = 2
 	spawn(10)
 		process_cooldown()
@@ -35,7 +35,7 @@
 	return 1
 
 /obj/item/device/assembly/signaler/on_update_icon()
-	if(holder)
+	if (holder)
 		holder.update_icon()
 	return
 
@@ -67,35 +67,35 @@
 
 
 /obj/item/device/assembly/signaler/Topic(href, href_list, state = GLOB.physical_state)
-	if((. = ..()))
+	if ((. = ..()))
 		close_browser(usr, "window=radio")
 		onclose(usr, "radio")
 		return
 
 	if (href_list["freq"])
 		var/new_frequency = (frequency + text2num(href_list["freq"]))
-		if(new_frequency < RADIO_LOW_FREQ || new_frequency > RADIO_HIGH_FREQ)
+		if (new_frequency < RADIO_LOW_FREQ || new_frequency > RADIO_HIGH_FREQ)
 			new_frequency = sanitize_frequency(new_frequency, RADIO_LOW_FREQ, RADIO_HIGH_FREQ)
 		set_frequency(new_frequency)
 
-	if(href_list["code"])
+	if (href_list["code"])
 		src.code += text2num(href_list["code"])
 		src.code = round(src.code)
 		src.code = min(100, src.code)
 		src.code = max(1, src.code)
 
-	if(href_list["send"])
+	if (href_list["send"])
 		spawn( 0 )
 			signal()
 
-	if(usr)
+	if (usr)
 		attack_self(usr)
 
 	return
 
 
 /obj/item/device/assembly/signaler/proc/signal()
-	if(!radio_connection) return
+	if (!radio_connection) return
 
 	var/datum/signal/signal = new
 	signal.source = src
@@ -105,20 +105,20 @@
 	return
 /*
 	for(var/obj/item/device/assembly/signaler/S in world)
-		if(!S)	continue
-		if(S == src)	continue
-		if((S.frequency == src.frequency) && (S.code == src.code))
+		if (!S)	continue
+		if (S == src)	continue
+		if ((S.frequency == src.frequency) && (S.code == src.code))
 			spawn(0)
-				if(S)	S.pulse(0)
+				if (S)	S.pulse(0)
 	return 0*/
 
 
 /obj/item/device/assembly/signaler/pulse(radio = 0)
-	if(src.connected && src.wires)
+	if (src.connected && src.wires)
 		connected.Pulse(src)
-	else if(holder)
+	else if (holder)
 		holder.process_activation(src, 1, 0)
-	else if(mholder)
+	else if (mholder)
 		mholder.process_activation()
 	else
 		..(radio)
@@ -126,12 +126,12 @@
 
 
 /obj/item/device/assembly/signaler/receive_signal(datum/signal/signal)
-	if(!signal)	return 0
-	if(signal.encryption != code)	return 0
-	if(!(src.wires & WIRE_RADIO_RECEIVE))	return 0
+	if (!signal)	return 0
+	if (signal.encryption != code)	return 0
+	if (!(src.wires & WIRE_RADIO_RECEIVE))	return 0
 	pulse(1)
 
-	if(!holder)
+	if (!holder)
 		for(var/mob/O in hearers(1, src.loc))
 			O.show_message(text("[icon2html(src, O)] *beep* *beep*"), 3, "*beep* *beep*", 2)
 	return
@@ -139,11 +139,11 @@
 
 /obj/item/device/assembly/signaler/proc/set_frequency(new_frequency)
 	set waitfor = 0
-	if(!frequency)
+	if (!frequency)
 		return
-	if(!radio_controller)
+	if (!radio_controller)
 		sleep(20)
-	if(!radio_controller)
+	if (!radio_controller)
 		return
 	radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
@@ -151,15 +151,15 @@
 	return
 
 /obj/item/device/assembly/signaler/Process()
-	if(!deadman)
+	if (!deadman)
 		STOP_PROCESSING(SSobj, src)
 	var/mob/M = src.loc
-	if(!M || !ismob(M))
-		if(prob(5))
+	if (!M || !ismob(M))
+		if (prob(5))
 			signal()
 		deadman = 0
 		STOP_PROCESSING(SSobj, src)
-	else if(prob(5))
+	else if (prob(5))
 		M.visible_message("[M]'s finger twitches a bit over [src]'s signal button!")
 	return
 
@@ -168,7 +168,7 @@
 	set name = "Threaten to push the button!"
 	set desc = "BOOOOM!"
 
-	if(!deadman)
+	if (!deadman)
 		deadman = 1
 		START_PROCESSING(SSobj, src)
 		log_and_message_admins("is threatening to trigger a signaler deadman's switch")
@@ -181,7 +181,7 @@
 
 
 /obj/item/device/assembly/signaler/Destroy()
-	if(radio_controller)
+	if (radio_controller)
 		radio_controller.remove_object(src,frequency)
 	frequency = 0
 	. = ..()

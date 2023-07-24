@@ -13,10 +13,10 @@
 /datum/unit_test/vision_glasses/start_test()
 	spawn(0)
 		var/list/test = create_test_mob_with_mind(null, /mob/living/carbon/human)
-		if(isnull(test))
+		if (isnull(test))
 			fail("Check Runtimed in Mob creation")
 
-		if(test["result"] == FAILURE)
+		if (test["result"] == FAILURE)
 			fail(test["msg"])
 			async = 0
 			return
@@ -31,15 +31,15 @@
 
 /datum/unit_test/vision_glasses/check_result()
 
-	if(isnull(H) || H.life_tick < 2)
+	if (isnull(H) || H.life_tick < 2)
 		return 0
 
-	if(isnull(H.glasses))
+	if (isnull(H.glasses))
 		fail("Mob doesn't have glasses on")
 
 	H.handle_vision()	// Because Life has a client check that bypasses updating vision
 
-	if(H.see_invisible == expectation)
+	if (H.see_invisible == expectation)
 		pass("Mob See invisible is [H.see_invisible]")
 	else
 		fail("Mob See invisible is [H.see_invisible] / expected [expectation]")
@@ -73,7 +73,7 @@
 		var/bad_msg = "[ascii_red]--------------- [S.name] \[[S.type]\]"
 		bad_tests += test_storage_capacity(S, bad_msg)
 
-	if(bad_tests)
+	if (bad_tests)
 		fail("\[[bad_tests]\] Some storage item types were not able to hold their default initial contents.")
 	else
 		pass("All storage item types were able to hold their default initial contents.")
@@ -83,21 +83,21 @@
 /proc/test_storage_capacity(obj/item/storage/S, bad_msg)
 	var/bad_tests = 0
 
-	if(!isnull(S.storage_slots) && length(S.contents) > S.storage_slots)
+	if (!isnull(S.storage_slots) && length(S.contents) > S.storage_slots)
 		log_unit_test("[bad_msg] Contains more items than it has slots for ([length(S.contents)] / [S.storage_slots]). [ascii_reset]")
 		bad_tests++
 
 	var/total_storage_space = 0
 	for(var/obj/item/I in S.contents)
-		if(I.w_class > S.max_w_class)
+		if (I.w_class > S.max_w_class)
 			log_unit_test("[bad_msg] Contains an item \[[I.type]\] that is too big to be held ([I.w_class] / [S.max_w_class]). [ascii_reset]")
 			bad_tests++
-		if(istype(I, /obj/item/storage) && I.w_class >= S.w_class)
+		if (istype(I, /obj/item/storage) && I.w_class >= S.w_class)
 			log_unit_test("[bad_msg] Contains a storage item \[[I.type]\] the same size or larger than its container ([I.w_class] / [S.w_class]). [ascii_reset]")
 			bad_tests++
 		total_storage_space += I.get_storage_cost()
 
-	if(total_storage_space > S.max_storage_space)
+	if (total_storage_space > S.max_storage_space)
 		log_unit_test("[bad_msg] Contains more items than it has storage space for ([total_storage_space] / [S.max_storage_space]). [ascii_reset]")
 		bad_tests++
 

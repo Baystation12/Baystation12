@@ -2,7 +2,7 @@
 	return list()
 
 /atom/movable/extra_ghost_link(atom/ghost, prefix, sufix, short_links)
-	if(src == ghost)
+	if (src == ghost)
 		return list()
 	return list(create_ghost_link(ghost, src, short_links ? "F" : "Follow", prefix, sufix))
 
@@ -11,12 +11,12 @@
 
 /mob/extra_ghost_link(atom/ghost, prefix, sufix, short_links)
 	. = ..()
-	if(client && eyeobj)
+	if (client && eyeobj)
 		. += create_ghost_link(ghost, eyeobj, short_links ? "E" : "Eye", prefix, sufix)
 
 /mob/observer/ghost/extra_ghost_link(atom/ghost, prefix, sufix, short_links)
 	. = ..()
-	if(mind && (mind.current && !isghost(mind.current)))
+	if (mind && (mind.current && !isghost(mind.current)))
 		. += create_ghost_link(ghost, mind.current, short_links ? "B" : "Body", prefix, sufix)
 
 /proc/create_ghost_link(ghost, target, text, prefix, sufix)
@@ -33,5 +33,5 @@
 	return ghost_follow_link(target, src, delimiter, prefix, sufix, short_links)
 
 /proc/ghost_follow_link(atom/target, atom/ghost, delimiter = "|", prefix = "", sufix = "", short_links = TRUE)
-	if((!target) || (!ghost)) return
+	if ((!target) || (!ghost)) return
 	return jointext(target.extra_ghost_link(ghost, prefix, sufix, short_links),delimiter)

@@ -16,14 +16,14 @@
 /datum/computer_file/program/alarm_monitor/process_tick()
 	..()
 	var/datum/nano_module/alarm_monitor/NMA = NM
-	if(istype(NMA) && NMA.has_major_alarms())
-		if(!has_alert)
+	if (istype(NMA) && NMA.has_major_alarms())
+		if (!has_alert)
 			program_icon_state = "alert-red"
 			ui_header = "alarm_red.gif"
 			update_computer_icon()
 			has_alert = 1
 	else
-		if(has_alert)
+		if (has_alert)
 			program_icon_state = "alert-green"
 			ui_header = "alarm_green.gif"
 			update_computer_icon()
@@ -80,7 +80,7 @@
 // Modified version of above proc that uses slightly less resources, returns 1 if there is a major alarm, 0 otherwise.
 /datum/nano_module/alarm_monitor/proc/has_major_alarms()
 	for(var/datum/alarm_handler/AH in alarm_handlers)
-		if(AH.has_major_alarms(get_host_z()))
+		if (AH.has_major_alarms(get_host_z()))
 			return 1
 
 	return 0
@@ -93,11 +93,11 @@
 	return all_alarms
 
 /datum/nano_module/alarm_monitor/Topic(ref, href_list)
-	if(..())
+	if (..())
 		return 1
-	if(href_list["switchTo"])
+	if (href_list["switchTo"])
 		var/obj/machinery/camera/C = locate(href_list["switchTo"]) in cameranet.cameras
-		if(!C)
+		if (!C)
 			return
 
 		usr.switch_to_camera(C)
@@ -114,11 +114,11 @@
 			var/cameras[0]
 			var/lost_sources[0]
 
-			if(isAI(user))
+			if (isAI(user))
 				for(var/obj/machinery/camera/C in A.cameras())
 					cameras[LIST_PRE_INC(cameras)] = C.nano_structure()
 			for(var/datum/alarm_source/AS in A.sources)
-				if(!AS.source)
+				if (!AS.source)
 					lost_sources[LIST_PRE_INC(lost_sources)] = AS.source_name
 
 			categories[length(categories)]["alarms"] += list(list(
@@ -132,7 +132,7 @@
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "alarm_monitor.tmpl", "Alarm Monitoring Console", 800, 800, state = state)
-		if(host.update_layout()) // This is necessary to ensure the status bar remains updated along with rest of the UI.
+		if (host.update_layout()) // This is necessary to ensure the status bar remains updated along with rest of the UI.
 			ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()

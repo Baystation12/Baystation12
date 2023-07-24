@@ -1,14 +1,14 @@
 
 /obj/structure/table/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
-	if(istype(mover,/obj/item/projectile))
+	if (air_group || (height==0)) return 1
+	if (istype(mover,/obj/item/projectile))
 		return (check_cover(mover,target))
 	if (flipped == 1)
 		if (get_dir(loc, target) == dir)
 			return !density
 		else
 			return 1
-	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
+	if (istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
 		return 1
 	var/obj/structure/table/T = (locate() in get_turf(mover))
 	return (T && !T.flipped) 	//If we are moving from a table, check if it is flipped.
@@ -18,27 +18,27 @@
 //checks if projectile 'P' from turf 'from' can hit whatever is behind the table. Returns 1 if it can, 0 if bullet stops.
 /obj/structure/table/proc/check_cover(obj/item/projectile/P, turf/from)
 	var/turf/cover
-	if(flipped)
+	if (flipped)
 		cover = get_turf(src)
 	else
 		cover = get_step(loc, get_dir(from, loc))
-	if(!cover)
+	if (!cover)
 		return 1
 	if (get_dist(P.starting, loc) <= 1) //Tables won't help you if people are THIS close
 		return 1
 
 	var/chance = 20
-	if(ismob(P.original) && get_turf(P.original) == cover)
+	if (ismob(P.original) && get_turf(P.original) == cover)
 		var/mob/M = P.original
 		if (M.lying)
 			chance += 20				//Lying down lets you catch less bullets
-	if(flipped)
-		if(get_dir(loc, from) == dir)	//Flipped tables catch mroe bullets
+	if (flipped)
+		if (get_dir(loc, from) == dir)	//Flipped tables catch mroe bullets
 			chance += 30
 		else
 			return 1					//But only from one side
 
-	if(prob(chance))
+	if (prob(chance))
 		return 0 //blocked
 	return 1
 
@@ -48,7 +48,7 @@
 		return PROJECTILE_CONTINUE
 
 /obj/structure/table/CheckExit(atom/movable/O as mob|obj, target as turf)
-	if(istype(O) && O.checkpass(PASS_FLAG_TABLE))
+	if (istype(O) && O.checkpass(PASS_FLAG_TABLE))
 		return 1
 	if (flipped==1)
 		if (get_dir(loc, target) == dir)
@@ -103,7 +103,7 @@ Note: This proc can be overwritten to allow for different types of auto-alignmen
 	W.pixel_z = 0
 
 /obj/structure/table/rack/auto_align(obj/item/W, click_params)
-	if(W && !W.center_of_mass)
+	if (W && !W.center_of_mass)
 		..(W)
 
 	var/i = -1

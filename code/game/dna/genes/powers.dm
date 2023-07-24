@@ -123,7 +123,7 @@
 
 
 /datum/dna/gene/basic/midget/can_activate(mob/M,flags)
-	if(MUTATION_HULK in M.mutations)
+	if (MUTATION_HULK in M.mutations)
 		return FALSE
 	return ..(M,flags)
 
@@ -159,7 +159,7 @@
 
 
 /datum/dna/gene/basic/hulk/OnMobLife(mob/living/carbon/human/M)
-	if(!istype(M))
+	if (!istype(M))
 		return
 	if (M.health > 25)
 		return

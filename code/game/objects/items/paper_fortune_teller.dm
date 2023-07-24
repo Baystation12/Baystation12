@@ -35,34 +35,34 @@
 /obj/item/paper_fortune_teller/on_update_icon()
 	. = ..()
 	var/datum/state_machine/fsm = get_state_machine(src, /datum/state_machine/paper_fortune)
-	if(fsm && istype(fsm.current_state, /singleton/state/paper_fortune))
+	if (fsm && istype(fsm.current_state, /singleton/state/paper_fortune))
 		var/singleton/state/paper_fortune/fsm_state = fsm.current_state
 		icon_state = "[initial(icon_state)]-[fsm_state.icon_state]"
 
 /obj/item/paper_fortune_teller/attack_self(mob/user)
 	var/datum/state_machine/fsm = get_state_machine(src, /datum/state_machine/paper_fortune)
-	if(!fsm || !istype(fsm.current_state, /singleton/state/paper_fortune))
+	if (!fsm || !istype(fsm.current_state, /singleton/state/paper_fortune))
 		to_chat(user, SPAN_WARNING("You can't seem to work out how \the [src] works."))
 		return TRUE
 
 	var/singleton/state/paper_fortune/fsm_state = fsm.current_state
 	var/current_fsm = get_state_machine(src, /datum/state_machine/paper_fortune)
-	if(current_fsm != fsm || fsm_state != fsm.current_state || QDELETED(src) || QDELETED(user) || loc != user)
+	if (current_fsm != fsm || fsm_state != fsm.current_state || QDELETED(src) || QDELETED(user) || loc != user)
 		return TRUE
 
 	var/option = input(user, "Select an option.", "Fortune Teller") as null|anything in fsm_state.fortune_choices
 	current_fsm = get_state_machine(src, /datum/state_machine/paper_fortune)
-	if(!option || current_fsm != fsm || fsm_state != fsm.current_state || QDELETED(src) || QDELETED(user) || loc != user)
+	if (!option || current_fsm != fsm || fsm_state != fsm.current_state || QDELETED(src) || QDELETED(user) || loc != user)
 		return TRUE
 
 	choice_counter++
-	if(choice_counter >= 3)
+	if (choice_counter >= 3)
 		to_chat(user, SPAN_NOTICE("The fortune under fold [option] reads: \"[fortunes[option] || "???"]\""))
 		fsm.evaluate()
-	else if(istext(option))
+	else if (istext(option))
 		to_chat(user, SPAN_NOTICE("You pick '[option]'."))
 		alternate_by_color(option, user)
-	else if(isnum(option))
+	else if (isnum(option))
 		to_chat(user, SPAN_NOTICE("You pick '[option]'."))
 		alternate_by_number(option, user)
 	else
@@ -73,10 +73,10 @@
 	busy = TRUE
 	for(var/i = 1 to amount)
 		advance()
-		if(user)
+		if (user)
 			user.visible_message(SPAN_NOTICE("\The [user] opens and closes \the [src]."))
 		sleep(0.5 SECONDS)
-		if(QDELETED(src))
+		if (QDELETED(src))
 			break
 	busy = FALSE
 
@@ -90,5 +90,5 @@
 
 /obj/item/paper_fortune_teller/proc/advance()
 	var/datum/state_machine/fsm = get_state_machine(src, /datum/state_machine/paper_fortune)
-	if(fsm)
+	if (fsm)
 		fsm.evaluate()

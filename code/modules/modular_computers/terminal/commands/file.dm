@@ -14,52 +14,52 @@
 
 /datum/terminal_command/file/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/list/arguments = get_arguments(text)
-	if(isnull(arguments))
+	if (isnull(arguments))
 		return syntax_error()
 	var/list/drives = list(
 		"C" = terminal.computer.get_component(PART_HDD),
 		"R" = terminal.computer.get_component(PART_DRIVE)
 	)
-	if(!istype(drives["C"], /obj/item/stock_parts/computer/hard_drive))
+	if (!istype(drives["C"], /obj/item/stock_parts/computer/hard_drive))
 		return "[name]: Error; hard drive not found."
 	. = syntax_error()
 	// File list
-	if(!length(arguments))
+	if (!length(arguments))
 		. = list()
 		. += "[name]: Listing data storage content..."
 		. += output_file_list(drives, terminal.history_max_length - 5)
 	// Run command with one filename
-	else if(length(arguments) == 2)
+	else if (length(arguments) == 2)
 		var/list/source = get_file_location(drives, arguments[2])
-		if(!source)
+		if (!source)
 			return "[name]: Error; unable to resolve filename."
-		if(arguments[1] == "-h")
+		if (arguments[1] == "-h")
 			var/datum/computer_file/F = terminal.computer.get_file(source["name"], source["drive"])
-			if(!istype(F))
+			if (!istype(F))
 				return "[name]: Error; could not find file '[source["name"]]'."
 			var/obj/item/stock_parts/computer/hard_drive/D = source["drive"]
-			if(D.read_only)
+			if (D.read_only)
 				return "[name]: Error; could not modify attribute for file '[source["name"]]'."
 			F.hidden = F.hidden ? FALSE : TRUE
 			return "[name]: File '[source["name"]]' set to be [(F.hidden ? "in" : "")]visible.";
-		else if(arguments[1] == "-r")
-			if(!terminal.computer.delete_file(source["name"], source["drive"]))
+		else if (arguments[1] == "-r")
+			if (!terminal.computer.delete_file(source["name"], source["drive"]))
 				return "[name]: Error; could not delete file '[source["name"]]'."
 			return "[name]: File deleted."
 	// Run command with two filenames
-	else if(length(arguments) == 3)
+	else if (length(arguments) == 3)
 		var/list/source = get_file_location(drives, arguments[2])
-		if(!source)
+		if (!source)
 			return "[name]: Error; unable to resolve filename."
 		var/list/destination = get_file_location(drives, arguments[3])
-		if(!destination)
+		if (!destination)
 			return "[name]: Error; unable to resolve filename2."
-		if(arguments[1] == "-m")
-			if(!terminal.computer.move_file(source["name"], destination["name"], source["drive"], destination["drive"]))
+		if (arguments[1] == "-m")
+			if (!terminal.computer.move_file(source["name"], destination["name"], source["drive"], destination["drive"]))
 				return "[name]: Error; could not move the file '[source["name"]]'."
 			return "[name]: File moved."
-		else if(arguments[1] == "-c")
-			if(!terminal.computer.move_file(source["name"], destination["name"], source["drive"], destination["drive"], TRUE))
+		else if (arguments[1] == "-c")
+			if (!terminal.computer.move_file(source["name"], destination["name"], source["drive"], destination["drive"], TRUE))
 				return "[name]: Error; could not copy the file '[source["name"]]'."
 			return "[name]: File copied."
 
@@ -67,19 +67,19 @@
 	var/list/O = list()
 	for(var/did in drives)
 		var/obj/item/stock_parts/computer/hard_drive/D = drives[did]
-		if(!istype(D))
+		if (!istype(D))
 			continue
 		O += ""
 		O += "** Files on storage device [did]: ([D.used_capacity]GQ used out of [D.max_capacity]GQ) **"
 		O += "Flags Type Size Name"
 		// It's thematically appropriate for the command to bypass the abstraction
 		// of NTOS and access the hardware directly instead.
-		if(!length(D.stored_files))
+		if (!length(D.stored_files))
 			O += "No files found on device."
 		else
 			var/i = 0
 			for(var/datum/computer_file/F in D.stored_files)
-				if(length(O) >= max_lines) // There's a line limit in the terminal, so if we approach it, break off and just list number of files on the drives.
+				if (length(O) >= max_lines) // There's a line limit in the terminal, so if we approach it, break off and just list number of files on the drives.
 					O += ".. [(length(D.stored_files) - i)] additional files."
 					break
 				var/flags = "+[(F.hidden ? "h" : "")][(F.read_only ? "r" : "rw")]"
@@ -89,17 +89,17 @@
 
 /datum/terminal_command/file/proc/get_file_location(list/drives, text)
 	var/list/pieces = splittext(text, ":")
-	if(!length(pieces))
+	if (!length(pieces))
 		return
 	var/obj/item/stock_parts/computer/hard_drive/D
 	var/name
-	if(length(pieces) == 1)
+	if (length(pieces) == 1)
 		D = drives["C"]
 		name = pieces[1]
-	else if(length(pieces) == 2)
+	else if (length(pieces) == 2)
 		D = drives[pieces[1]]
 		name = pieces[2]
 	else
 		return
-	if(name && istype(D))
+	if (name && istype(D))
 		return list("name" = name, "drive" = D)

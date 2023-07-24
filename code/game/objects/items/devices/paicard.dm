@@ -11,10 +11,10 @@
 	var/mob/living/silicon/pai/pai
 
 /obj/item/device/paicard/relaymove(mob/user, direction)
-	if(user.stat || user.stunned)
+	if (user.stat || user.stunned)
 		return
 	var/obj/item/rig/rig = src.get_rig()
-	if(istype(rig))
+	if (istype(rig))
 		rig.forced_move(direction, user)
 
 /obj/item/device/paicard/New()
@@ -23,7 +23,7 @@
 
 /obj/item/device/paicard/Destroy()
 	//Will stop people throwing friend pAIs into the singularity so they can respawn
-	if(!isnull(pai))
+	if (!isnull(pai))
 		pai.death(0)
 	QDEL_NULL(radio)
 	return ..()
@@ -128,7 +128,7 @@
 			<body>
 	"}
 
-	if(pai)
+	if (pai)
 		dat += {"
 			<b><span style='font-size: 3px'>Personal AI Device</span></b><br><br>
 			<table class="request">
@@ -154,7 +154,7 @@
 				</td>
 			</table>
 		"}
-		if(pai && (!pai.master_dna || !pai.master))
+		if (pai && (!pai.master_dna || !pai.master))
 			dat += {"
 				<table>
 					<td class="button">
@@ -163,7 +163,7 @@
 				</table>
 			"}
 		dat += "<br>"
-		if(radio)
+		if (radio)
 			dat += "<b>Radio Uplink</b>"
 			dat += {"
 				<table class="request">
@@ -193,7 +193,7 @@
 			</table>
 		"}
 	else
-		if(looking_for_personality)
+		if (looking_for_personality)
 			dat += {"
 				<b><span style='font-size: 3px'>pAI Request Module</span></b><br><br>
 				<p>Requesting AI personalities from central database... If there are no entries, or if a suitable entry is not listed, check again later as more personalities may be added.</p>
@@ -227,18 +227,18 @@
 /obj/item/device/paicard/CanUseTopic(mob/user, datum/topic_state/state, href_list)
 	. = ..()
 	// possible NRE in Topic
-	if(href_list && (href_list["setdna"] || href_list["setlaws"] || href_list["wires"]) && !istype(pai))
+	if (href_list && (href_list["setdna"] || href_list["setlaws"] || href_list["wires"]) && !istype(pai))
 		return FALSE
 
 /obj/item/device/paicard/Topic(href, href_list)
 	if ((. = ..()))
 		return
 
-	if(href_list["setdna"])
-		if(pai.master_dna)
+	if (href_list["setdna"])
+		if (pai.master_dna)
 			return
 		var/mob/M = usr
-		if(!istype(M, /mob/living/carbon))
+		if (!istype(M, /mob/living/carbon))
 			to_chat(usr, SPAN_NOTICE("You don't have any DNA, or your DNA is incompatible with this device."))
 		else
 			var/datum/dna/dna = usr.dna
@@ -246,12 +246,12 @@
 			pai.master_dna = dna.unique_enzymes
 			pai.faction = M.faction
 			to_chat(pai, SPAN_WARNING("You have been bound to a new master."))
-	if(href_list["request"])
+	if (href_list["request"])
 		src.looking_for_personality = 1
 		paiController.findPAI(src, usr)
-	if(href_list["wipe"])
+	if (href_list["wipe"])
 		var/confirm = input("Are you CERTAIN you wish to delete the current personality? This action cannot be undone.", "Personality Wipe") in list("Yes", "No")
-		if(confirm == "Yes")
+		if (confirm == "Yes")
 			for(var/mob/M in src)
 				to_chat(M, "<h2 style='font-color: #ff0000'>You feel yourself slipping away from reality.</h2>")
 				to_chat(M, "<h3 style='font-color: #ff4d4d'>Byte by byte you lose your sense of self.</h3>")
@@ -259,16 +259,16 @@
 				to_chat(M, "<h5 style='font-color: #ffc4c4'>oblivion... </h5>")
 				M.death(0)
 			removePersonality()
-	if(href_list["wires"])
+	if (href_list["wires"])
 		var/t1 = text2num(href_list["wires"])
 		switch(t1)
-			if(4)
+			if (4)
 				radio.ToggleBroadcast()
-			if(2)
+			if (2)
 				radio.ToggleReception()
-	if(href_list["setlaws"])
+	if (href_list["setlaws"])
 		var/newlaws = sanitize(input("Enter any additional directives you would like your pAI personality to follow. Note that these directives will not override the personality's allegiance to its imprinted master. Conflicting directives will be ignored.", "pAI Directive Configuration", pai.pai_laws) as message)
-		if(newlaws)
+		if (newlaws)
 			pai.pai_laws = newlaws
 			to_chat(pai, "Your supplemental directives have been updated. Your new directives are:")
 			to_chat(pai, "Prime Directive: <br>[pai.pai_law0]")
@@ -291,24 +291,24 @@
 /obj/item/device/paicard
 	var/current_emotion = 1
 /obj/item/device/paicard/proc/setEmotion(emotion)
-	if(pai)
+	if (pai)
 		src.overlays.Cut()
 		switch(emotion)
-			if(1) src.overlays += "pai-happy"
-			if(2) src.overlays += "pai-cat"
-			if(3) src.overlays += "pai-extremely-happy"
-			if(4) src.overlays += "pai-face"
-			if(5) src.overlays += "pai-laugh"
-			if(6) src.overlays += "pai-off"
-			if(7) src.overlays += "pai-sad"
-			if(8) src.overlays += "pai-angry"
-			if(9) src.overlays += "pai-what"
-			if(10) src.overlays += "pai-neutral"
-			if(11) src.overlays += "pai-silly"
-			if(12) src.overlays += "pai-nose"
-			if(13) src.overlays += "pai-smirk"
-			if(14) src.overlays += "pai-exclamation"
-			if(15) src.overlays += "pai-question"
+			if (1) src.overlays += "pai-happy"
+			if (2) src.overlays += "pai-cat"
+			if (3) src.overlays += "pai-extremely-happy"
+			if (4) src.overlays += "pai-face"
+			if (5) src.overlays += "pai-laugh"
+			if (6) src.overlays += "pai-off"
+			if (7) src.overlays += "pai-sad"
+			if (8) src.overlays += "pai-angry"
+			if (9) src.overlays += "pai-what"
+			if (10) src.overlays += "pai-neutral"
+			if (11) src.overlays += "pai-silly"
+			if (12) src.overlays += "pai-nose"
+			if (13) src.overlays += "pai-smirk"
+			if (14) src.overlays += "pai-exclamation"
+			if (15) src.overlays += "pai-question"
 		current_emotion = emotion
 
 /obj/item/device/paicard/proc/alertUpdate()
@@ -321,19 +321,19 @@
 		M.emp_act(severity)
 
 /obj/item/device/paicard/ex_act(severity)
-	if(pai)
+	if (pai)
 		pai.ex_act(severity)
 	else
 		qdel(src)
 
 /obj/item/device/paicard/see_emote(mob/living/M, text)
-	if(pai && pai.client && pai.stat == CONSCIOUS)
+	if (pai && pai.client && pai.stat == CONSCIOUS)
 		var/rendered = SPAN_CLASS("message", "[text]")
 		pai.show_message(rendered, 2)
 	..()
 
 /obj/item/device/paicard/show_message(msg, type, alt, alt_type)
-	if(pai && pai.client)
+	if (pai && pai.client)
 		var/rendered = SPAN_CLASS("message", "[msg]")
 		pai.show_message(rendered, type)
 	..()

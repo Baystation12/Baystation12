@@ -2,12 +2,12 @@
 	name = "Jump a Shuttle"
 
 /datum/admin_secret_item/admin_secret/jump_shuttle/can_execute(mob/user)
-	if(!SSshuttle) return 0
+	if (!SSshuttle) return 0
 	return ..()
 
 /datum/admin_secret_item/admin_secret/jump_shuttle/execute(mob/user)
 	. = ..()
-	if(!.)
+	if (!.)
 		return
 	var/shuttle_tag = input(user, "Which shuttle do you want to jump?") as null|anything in SSshuttle.shuttles
 	if (!shuttle_tag) return

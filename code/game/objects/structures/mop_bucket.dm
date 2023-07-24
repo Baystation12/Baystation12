@@ -15,7 +15,7 @@
 
 /obj/structure/mopbucket/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
+	if (distance <= 1)
 		to_chat(user, "[src] [icon2html(src, user)] contains [reagents.total_volume] unit\s of water!")
 
 

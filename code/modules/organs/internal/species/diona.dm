@@ -5,13 +5,13 @@
 	organ_tag = "special" // Turns into a nymph instantly, no transplanting possible.
 
 /obj/item/organ/internal/diona/removed(mob/living/user, skip_nymph)
-	if(BP_IS_ROBOTIC(src))
+	if (BP_IS_ROBOTIC(src))
 		return ..()
 	var/mob/living/carbon/human/H = owner
 	..()
-	if(istype(H) && !LAZYLEN(H.organs))
+	if (istype(H) && !LAZYLEN(H.organs))
 		H.death()
-	if(prob(25) && !skip_nymph)
+	if (prob(25) && !skip_nymph)
 		spawn_diona_nymph(get_turf(src))
 		qdel(src)
 
@@ -68,10 +68,10 @@
 
 /obj/item/organ/internal/diona/node/Process()
 	..()
-	if(is_broken() || !owner)
+	if (is_broken() || !owner)
 		return
 	var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
-	if(isturf(owner.loc)) //else, there's considered to be no light
+	if (isturf(owner.loc)) //else, there's considered to be no light
 		var/turf/T = owner.loc
 		light_amount = T.get_lumcount() * 10
 	owner.set_nutrition(clamp(owner.nutrition + light_amount, 0, 550))

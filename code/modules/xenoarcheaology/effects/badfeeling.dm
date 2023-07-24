@@ -26,45 +26,45 @@
 		"HELP ME!")
 
 /datum/artifact_effect/badfeeling/DoEffectTouch(mob/user)
-	if(user)
+	if (user)
 		if (istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user
-			if(prob(50))
-				if(prob(75))
+			if (prob(50))
+				if (prob(75))
 					to_chat(H, SPAN_DANGER("[pick(drastic_messages)]"))
 				else
 					to_chat(H, SPAN_WARNING("[pick(messages)]"))
 
-			if(prob(50))
+			if (prob(50))
 				H.dizziness += rand(3,5)
 
 /datum/artifact_effect/badfeeling/DoEffectAura()
-	if(holder)
+	if (holder)
 		var/turf/T = get_turf(holder)
 		for (var/mob/living/carbon/human/H in range(src.effectrange,T))
-			if(prob(5))
-				if(prob(75))
+			if (prob(5))
+				if (prob(75))
 					to_chat(H, SPAN_WARNING("[pick(messages)]"))
 				else
 					to_chat(H, SPAN_DANGER("[pick(drastic_messages)]"))
 
-			if(prob(10))
+			if (prob(10))
 				H.dizziness += rand(3,5)
 		return 1
 
 /datum/artifact_effect/badfeeling/DoEffectPulse()
-	if(holder)
+	if (holder)
 		var/turf/T = get_turf(holder)
 		for (var/mob/living/carbon/human/H in range(src.effectrange,T))
-			if(prob(50))
-				if(prob(95))
+			if (prob(50))
+				if (prob(95))
 					to_chat(H, SPAN_DANGER("[pick(drastic_messages)]"))
 				else
 					to_chat(H, SPAN_WARNING("[pick(messages)]"))
 
-			if(prob(50))
+			if (prob(50))
 				H.dizziness += rand(3,5)
-			else if(prob(25))
+			else if (prob(25))
 				H.dizziness += rand(5,15)
 		return 1
 

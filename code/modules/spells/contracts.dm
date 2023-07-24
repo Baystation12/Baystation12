@@ -8,24 +8,24 @@
 	var/list/contract_spells = list(/spell/contract/reward,/spell/contract/punish,/spell/contract/return_master)
 
 /obj/item/contract/attack_self(mob/user as mob)
-	if(contract_master == null)
+	if (contract_master == null)
 		to_chat(user, SPAN_NOTICE("You bind the contract to your soul, making you the recipient of whatever poor fool's soul that decides to contract with you."))
 		contract_master = user
 		return
 
-	if(contract_master == user)
+	if (contract_master == user)
 		to_chat(user, "You can't contract with yourself!")
 		return
 
 	var/ans = alert(user,"The contract clearly states that signing this contract will bind your soul to \the [contract_master]. Are you sure you want to continue?","[src]","Yes","No")
 
-	if(ans == "Yes")
+	if (ans == "Yes")
 		user.visible_message("\The [user] signs the contract, their body glowing a deep yellow.")
-		if(!src.contract_effect(user))
+		if (!src.contract_effect(user))
 			user.visible_message("\The [src] visibly rejects \the [user], erasing their signature from the line.")
 			return
 		user.visible_message("\The [src] disappears with a flash of light.")
-		if(length(contract_spells) && istype(contract_master,/mob/living)) //if it aint text its probably a mob or another user
+		if (length(contract_spells) && istype(contract_master,/mob/living)) //if it aint text its probably a mob or another user
 			var/mob/living/M = contract_master
 			for(var/spell_type in contract_spells)
 				M.add_spell(new spell_type(user), "const_spell_ready")
@@ -42,13 +42,13 @@
 	color = "#993300"
 
 /obj/item/contract/apprentice/contract_effect(mob/user as mob)
-	if(user.mind.special_role == ANTAG_APPRENTICE)
+	if (user.mind.special_role == ANTAG_APPRENTICE)
 		to_chat(user, SPAN_WARNING("You are already a wizarding apprentice!"))
 		return 0
-	if(user.mind.special_role == ANTAG_SERVANT)
+	if (user.mind.special_role == ANTAG_SERVANT)
 		to_chat(user, SPAN_NOTICE("You are a servant. You have no need of apprenticeship."))
 		return 0
-	if(GLOB.wizards.add_antagonist_mind(user.mind,1,ANTAG_APPRENTICE,"<b>You are an apprentice! Your job is to learn the wizarding arts!</b>"))
+	if (GLOB.wizards.add_antagonist_mind(user.mind,1,ANTAG_APPRENTICE,"<b>You are an apprentice! Your job is to learn the wizarding arts!</b>"))
 		to_chat(user, SPAN_NOTICE("With the signing of this paper you agree to become \the [contract_master]'s apprentice in the art of wizardry."))
 		return 1
 	return 0
@@ -97,26 +97,26 @@
 
 /obj/item/contract/boon/New(newloc, new_path)
 	..(newloc)
-	if(new_path)
+	if (new_path)
 		path = new_path
 	var/item_name = ""
-	if(ispath(path,/obj))
+	if (ispath(path,/obj))
 		var/obj/O = path
 		item_name = initial(O.name)
-	else if(ispath(path,/spell))
+	else if (ispath(path,/spell))
 		var/spell/S = path
 		item_name = initial(S.name)
 	name = "[item_name] contract"
 
 /obj/item/contract/boon/contract_effect(mob/user as mob)
 	..()
-	if(user.mind.special_role == ANTAG_SERVANT)
+	if (user.mind.special_role == ANTAG_SERVANT)
 		to_chat(user, SPAN_WARNING("As a servant you find yourself unable to use this contract."))
 		return 0
-	if(ispath(path,/spell))
+	if (ispath(path,/spell))
 		user.add_spell(new path)
 		return 1
-	else if(ispath(path,/obj))
+	else if (ispath(path,/obj))
 		new path(get_turf(user.loc))
 		playsound(get_turf(usr),'sound/magic/charge.ogg',50,1)
 		return 1

@@ -3,12 +3,12 @@
 	return
 
 /mob/living/trigger_aiming(trigger_type)
-	if(!length(aimed))
+	if (!length(aimed))
 		return
 	for(var/obj/aiming_overlay/AO in aimed)
-		if(AO.aiming_at == src)
+		if (AO.aiming_at == src)
 			AO.update_aiming()
-			if(AO.aiming_at == src)
+			if (AO.aiming_at == src)
 				AO.trigger(trigger_type)
 				AO.update_aiming_deferred()
 

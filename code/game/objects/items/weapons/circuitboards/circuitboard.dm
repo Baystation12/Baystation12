@@ -71,14 +71,14 @@
 
 /obj/item/stock_parts/circuitboard/Initialize()
 	. = ..()
-	if(buildtype_select)
-		if(get_extension(src, /datum/extension/interactive/multitool))
+	if (buildtype_select)
+		if (get_extension(src, /datum/extension/interactive/multitool))
 			CRASH("A circuitboard of type [type] has conflicting multitool extensions")
 		set_extension(src, /datum/extension/interactive/multitool/circuitboards/buildtype_select)
 
 /obj/item/stock_parts/circuitboard/on_uninstall(obj/machinery/machine)
 	. = ..()
-	if(buildtype_select && machine)
+	if (buildtype_select && machine)
 		build_path = machine.base_type || machine.type
 		var/obj/machinery/thing = build_path
 		SetName("circuit board ([initial(thing.name)])")

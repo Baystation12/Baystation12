@@ -158,9 +158,9 @@
 /datum/controller/subsystem/proc/pause()
 	. = 1
 	switch(state)
-		if(SS_RUNNING)
+		if (SS_RUNNING)
 			state = SS_PAUSED
-		if(SS_SLEEPING)
+		if (SS_SLEEPING)
 			state = SS_PAUSING
 
 
@@ -235,7 +235,7 @@
 //could be used to postpone a costly subsystem for (default one) var/cycles, cycles
 //for instance, during cpu intensive operations like explosions
 /datum/controller/subsystem/proc/postpone(cycles = 1)
-	if(next_fire - world.time < wait)
+	if (next_fire - world.time < wait)
 		next_fire += (wait*cycles)
 
 //usually called via datum/controller/subsystem/New() when replacing a subsystem (i.e. due to a recurring crash)

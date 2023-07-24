@@ -13,7 +13,7 @@
 	var/mob_step_result = TestStep(/mob)
 	var/obj_step_result = TestStep(/obj)
 
-	if(mob_step_result && obj_step_result)
+	if (mob_step_result && obj_step_result)
 		pass("step() returned true.")
 	else
 		fail("step() did not return true: Mob result: [mob_step_result] - Obj result: [obj_step_result].")

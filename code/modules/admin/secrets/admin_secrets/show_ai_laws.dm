@@ -3,5 +3,5 @@
 
 /datum/admin_secret_item/admin_secret/show_ai_laws/execute(mob/user)
 	. = ..()
-	if(.)
+	if (.)
 		user.client.holder.output_ai_laws()

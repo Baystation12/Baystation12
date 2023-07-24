@@ -8,13 +8,13 @@ var/global/const/WIRE_EXPLODE = 1
 
 /datum/wires/explosive/UpdatePulsed(index)
 	switch(index)
-		if(WIRE_EXPLODE)
+		if (WIRE_EXPLODE)
 			explode()
 
 /datum/wires/explosive/UpdateCut(index, mended)
 	switch(index)
-		if(WIRE_EXPLODE)
-			if(!mended)
+		if (WIRE_EXPLODE)
+			if (!mended)
 				explode()
 
 /datum/wires/explosive/c4
@@ -22,7 +22,7 @@ var/global/const/WIRE_EXPLODE = 1
 
 /datum/wires/explosive/c4/CanUse(mob/living/L)
 	var/obj/item/plastique/P = holder
-	if(P.open_panel)
+	if (P.open_panel)
 		return 1
 	return 0
 

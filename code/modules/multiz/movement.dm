@@ -16,46 +16,46 @@
 /mob/living/carbon/human/move_up()
 	var/turf/old_loc = loc
 	..()
-	if(loc != old_loc)
+	if (loc != old_loc)
 		return
 
 	var/turf/simulated/open/O = GetAbove(src)
 	var/atom/climb_target
-	if(istype(O))
+	if (istype(O))
 		for(var/turf/T in trange(1,O))
-			if(!isopenspace(T) && T.is_floor())
+			if (!isopenspace(T) && T.is_floor())
 				climb_target = T
 			else
 				for(var/obj/I in T)
-					if(I.obj_flags & OBJ_FLAG_NOFALL)
+					if (I.obj_flags & OBJ_FLAG_NOFALL)
 						climb_target = I
 						break
-			if(climb_target)
+			if (climb_target)
 				break
 
-	if(climb_target)
+	if (climb_target)
 		climb_up(climb_target)
 
 /mob/proc/zPull(direction)
 	//checks and handles pulled items across z levels
-	if(!pulling)
+	if (!pulling)
 		return 0
 
 	var/turf/start = pulling.loc
 	var/turf/destination = (direction == UP) ? GetAbove(pulling) : GetBelow(pulling)
 
-	if(!start.CanZPass(pulling, direction))
+	if (!start.CanZPass(pulling, direction))
 		to_chat(src, SPAN_WARNING("\The [start] blocked your pulled object!"))
 		stop_pulling()
 		return 0
 
-	if(!destination.CanZPass(pulling, direction))
+	if (!destination.CanZPass(pulling, direction))
 		to_chat(src, SPAN_WARNING("The [pulling] you were pulling bumps up against \the [destination]."))
 		stop_pulling()
 		return 0
 
 	for(var/atom/A in destination)
-		if(!A.CanMoveOnto(pulling, start, 1.5, direction))
+		if (!A.CanMoveOnto(pulling, start, 1.5, direction))
 			to_chat(src, SPAN_WARNING("\The [A] blocks the [pulling] you were pulling."))
 			stop_pulling()
 			return 0
@@ -84,16 +84,16 @@
 
 /mob/living/carbon/human/can_overcome_gravity()
 	//First do species check
-	if(species && species.can_overcome_gravity(src))
+	if (species && species.can_overcome_gravity(src))
 		return 1
 	else
 		if (isturf(loc))
 			var/turf/T = loc
-			if(((T.height + T.get_fluid_depth()) >= FLUID_DEEP) || T.get_fluid_depth() >= FLUID_MAX_DEPTH)
+			if (((T.height + T.get_fluid_depth()) >= FLUID_DEEP) || T.get_fluid_depth() >= FLUID_MAX_DEPTH)
 				return can_float()
 
 			for(var/atom/a in src.loc)
-				if(a.atom_flags & ATOM_FLAG_CLIMBABLE)
+				if (a.atom_flags & ATOM_FLAG_CLIMBABLE)
 					return 1
 
 		//Last check, list of items that could plausibly be used to climb but aren't climbable themselves
@@ -102,7 +102,7 @@
 				/obj/structure/bed,
 			)
 		for(var/type in objects_to_stand_on)
-			if(locate(type) in src.loc)
+			if (locate(type) in src.loc)
 				return 1
 	return 0
 
@@ -110,45 +110,45 @@
 	return 0
 
 /mob/living/carbon/human/can_ztravel()
-	if(Process_Spacemove())
+	if (Process_Spacemove())
 		return 1
 
-	if(Check_Shoegrip())	//scaling hull with magboots
+	if (Check_Shoegrip())	//scaling hull with magboots
 		for(var/turf/simulated/T in trange(1,src))
-			if(T.density)
+			if (T.density)
 				return 1
 
 /mob/living/silicon/robot/can_ztravel()
-	if(Process_Spacemove()) //Checks for active jetpack
+	if (Process_Spacemove()) //Checks for active jetpack
 		return 1
 
 	for(var/turf/simulated/T in trange(1,src)) //Robots get "magboots"
-		if(T.density)
+		if (T.density)
 			return 1
 
 //FALLING STUFF
 
 //Holds fall checks that should not be overriden by children
 /atom/movable/proc/fall(lastloc)
-	if(!isturf(loc))
+	if (!isturf(loc))
 		return
 
 	var/turf/below = GetBelow(src)
-	if(!below)
+	if (!below)
 		return
 
 	var/turf/T = loc
-	if(!T.CanZPass(src, DOWN) || !below.CanZPass(src, DOWN))
+	if (!T.CanZPass(src, DOWN) || !below.CanZPass(src, DOWN))
 		return
 
 	// No gravity in space, apparently.
-	if(!has_gravity())
+	if (!has_gravity())
 		return
 
-	if(throwing)
+	if (throwing)
 		return
 
-	if(can_fall())
+	if (can_fall())
 		begin_falling(lastloc, below)
 
 // We timer(0) here to let the current move operation complete before we start falling. fall() is normally called from
@@ -162,32 +162,32 @@
 /atom/movable/proc/fall_callback(turf/below)
 	var/mob/M = src
 	var/is_client_moving = (ismob(M) && M.moving)
-	if(is_client_moving) M.moving = 1
+	if (is_client_moving) M.moving = 1
 	handle_fall(below)
-	if(is_client_moving) M.moving = 0
+	if (is_client_moving) M.moving = 0
 
 //For children to override
 /atom/movable/proc/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
-	if(!simulated)
+	if (!simulated)
 		return FALSE
 
-	if(anchored && !anchor_bypass)
+	if (anchored && !anchor_bypass)
 		return FALSE
 
 	//Override will make checks from different location used for prediction
-	if(location_override)
+	if (location_override)
 		for(var/obj/O in location_override)
-			if(O.obj_flags & OBJ_FLAG_NOFALL)
+			if (O.obj_flags & OBJ_FLAG_NOFALL)
 				return FALSE
 
 		var/turf/below = GetBelow(location_override)
 		for(var/atom/A in below)
-			if(!A.CanPass(src, location_override))
+			if (!A.CanPass(src, location_override))
 				return FALSE
 
-		if(location_override.get_fluid_depth() >= FLUID_DEEP)
-			if(below == loc) //We are checking above,
-				if(!(below.get_fluid_depth() >= 0.95 * FLUID_MAX_DEPTH)) //No salmon skipping up a stream of falling water
+		if (location_override.get_fluid_depth() >= FLUID_DEEP)
+			if (below == loc) //We are checking above,
+				if (!(below.get_fluid_depth() >= 0.95 * FLUID_MAX_DEPTH)) //No salmon skipping up a stream of falling water
 					return TRUE
 			return !can_float()
 
@@ -208,21 +208,21 @@
 
 	. = ..()
 
-	if(anchored)
+	if (anchored)
 		return FALSE
 
-	if((locate(/obj/structure/disposalpipe/up) in below) || locate(/obj/machinery/atmospherics/pipe/zpipe/up) in below)
+	if ((locate(/obj/structure/disposalpipe/up) in below) || locate(/obj/machinery/atmospherics/pipe/zpipe/up) in below)
 		return FALSE
 
 /mob/living/carbon/human/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
-	if(..())
+	if (..())
 		return species.can_fall(src)
 
 /atom/movable/proc/handle_fall(turf/landing)
 	forceMove(landing)
-	if(locate(/obj/structure/stairs) in landing)
+	if (locate(/obj/structure/stairs) in landing)
 		return 1
-	else if(landing.get_fluid_depth() >= FLUID_DEEP)
+	else if (landing.get_fluid_depth() >= FLUID_DEEP)
 		visible_message(SPAN_NOTICE("\The [src] falls into the water!"), SPAN_NOTICE("What a splash!"))
 		playsound(src,  'sound/effects/watersplash.ogg', 30, TRUE)
 		return 1
@@ -230,13 +230,13 @@
 		handle_fall_effect(landing)
 
 /atom/movable/proc/handle_fall_effect(turf/landing)
-	if(istype(landing, /turf/simulated/open))
+	if (istype(landing, /turf/simulated/open))
 		visible_message("\The [src] falls through \the [landing]!", "You hear a whoosh of displaced air.")
 	else
 		visible_message("\The [src] slams into \the [landing]!", "You hear something slam into the deck.")
-		if(fall_damage())
+		if (fall_damage())
 			for(var/mob/living/M in landing.contents)
-				if(M == src)
+				if (M == src)
 					continue
 				visible_message("\The [src] hits \the [M.name]!")
 				M.take_overall_damage(fall_damage())
@@ -245,14 +245,14 @@
 	return 0
 
 /obj/fall_damage()
-	if(w_class == ITEM_SIZE_TINY)
+	if (w_class == ITEM_SIZE_TINY)
 		return 0
-	if(w_class == ITEM_SIZE_NO_CONTAINER)
+	if (w_class == ITEM_SIZE_NO_CONTAINER)
 		return 150
 	return BASE_STORAGE_COST(w_class)
 
 /mob/living/carbon/human/handle_fall_effect(turf/landing)
-	if(species && species.handle_fall_special(src, landing))
+	if (species && species.handle_fall_special(src, landing))
 		return
 
 	..()
@@ -268,13 +268,13 @@
 	apply_damage(rand(min_damage, max_damage), DAMAGE_BRUTE, BP_L_ARM, armor_pen = 75)
 	apply_damage(rand(min_damage, max_damage), DAMAGE_BRUTE, BP_R_ARM, armor_pen = 75)
 	weakened = max(weakened, 3)
-	if(prob(skill_fail_chance(SKILL_HAULING, 40, SKILL_EXPERIENCED, 2)))
+	if (prob(skill_fail_chance(SKILL_HAULING, 40, SKILL_EXPERIENCED, 2)))
 		var/list/victims = list()
 		for(var/tag in list(BP_L_FOOT, BP_R_FOOT, BP_L_ARM, BP_R_ARM))
 			var/obj/item/organ/external/E = get_organ(tag)
-			if(E && !E.is_stump() && !E.dislocated && !BP_IS_ROBOTIC(E))
+			if (E && !E.is_stump() && !E.dislocated && !BP_IS_ROBOTIC(E))
 				victims += E
-		if(length(victims))
+		if (length(victims))
 			var/obj/item/organ/external/victim = pick(victims)
 			victim.dislocate()
 			to_chat(src, SPAN_WARNING("You feel a sickening pop as your [victim.joint] is wrenched out of the socket."))
@@ -282,17 +282,17 @@
 
 
 /mob/living/carbon/human/proc/climb_up(atom/A)
-	if(!isturf(loc) || !bound_overlay || bound_overlay.destruction_timer || is_physically_disabled())	// This destruction_timer check ideally wouldn't be required, but I'm not awake enough to refactor this to not need it.
+	if (!isturf(loc) || !bound_overlay || bound_overlay.destruction_timer || is_physically_disabled())	// This destruction_timer check ideally wouldn't be required, but I'm not awake enough to refactor this to not need it.
 		return FALSE
 
 	var/turf/T = get_turf(A)
 	var/turf/above = GetAbove(src)
-	if(above && T.Adjacent(bound_overlay) && above.CanZPass(src, UP)) //Certain structures will block passage from below, others not
-		if(loc.has_gravity() && !can_overcome_gravity())
+	if (above && T.Adjacent(bound_overlay) && above.CanZPass(src, UP)) //Certain structures will block passage from below, others not
+		if (loc.has_gravity() && !can_overcome_gravity())
 			return FALSE
 
 		visible_message(SPAN_NOTICE("[src] starts climbing onto \the [A]!"), SPAN_NOTICE("You start climbing onto \the [A]!"))
-		if(do_after(src, 5 SECONDS, A, DO_PUBLIC_UNIQUE))
+		if (do_after(src, 5 SECONDS, A, DO_PUBLIC_UNIQUE))
 			visible_message(SPAN_NOTICE("[src] climbs onto \the [A]!"), SPAN_NOTICE("You climb onto \the [A]!"))
 			src.Move(T)
 		else
@@ -334,9 +334,9 @@
 
 /atom/movable/z_observer/z_up/follow()
 	forceMove(get_step(owner, UP))
-	if(isturf(src.loc))
+	if (isturf(src.loc))
 		var/turf/T = src.loc
-		if(T.z_flags & ZM_MIMIC_BELOW)
+		if (T.z_flags & ZM_MIMIC_BELOW)
 			return
 	owner.reset_view(null)
 	owner.z_eye = null
@@ -345,7 +345,7 @@
 /atom/movable/z_observer/z_down/follow()
 	forceMove(get_step(owner, DOWN))
 	var/turf/T = get_turf(owner)
-	if(T && (T.z_flags & ZM_MIMIC_BELOW))
+	if (T && (T.z_flags & ZM_MIMIC_BELOW))
 		return
 	owner.reset_view(null)
 	owner.z_eye = null

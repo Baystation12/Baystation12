@@ -31,15 +31,15 @@
 /datum/ai_holder/simple_animal/melee/tree/find_target(list/possible_targets, has_targets_list)
 	. = ..()
 
-	if(.)
+	if (.)
 		holder.audible_emote("growls at [.]")
 
 /datum/ai_holder/simple_animal/melee/tree/engage_target()
 	. = ..()
 
 	var/mob/living/L = .
-	if(istype(L))
-		if(prob(15))
+	if (istype(L))
+		if (prob(15))
 			L.Weaken(3)
 			L.visible_message(SPAN_DANGER("\the [src] knocks down \the [L]!"))
 

@@ -23,9 +23,9 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 	ghost_image.layer = layer
 	ghost_image.appearance = src
 	ghost_image.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_ALPHA
-	if(ghost_image_flag & GHOST_IMAGE_DARKNESS)
+	if (ghost_image_flag & GHOST_IMAGE_DARKNESS)
 		ghost_darkness_images |= ghost_image //so ghosts can see the eye when they disable darkness
-	if(ghost_image_flag & GHOST_IMAGE_SIGHTLESS)
+	if (ghost_image_flag & GHOST_IMAGE_SIGHTLESS)
 		ghost_sightless_images |= ghost_image //so ghosts can see the eye when they disable ghost sight
 	SSghost_images.queue_global_image_update()
 
@@ -60,13 +60,13 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 	stat = DEAD // They are also always dead
 
 /mob/observer/touch_map_edge()
-	if(z in GLOB.using_map.sealed_levels)
+	if (z in GLOB.using_map.sealed_levels)
 		return
 
 	var/new_x = x
 	var/new_y = y
 
-	if(x <= TRANSITIONEDGE)
+	if (x <= TRANSITIONEDGE)
 		new_x = TRANSITIONEDGE + 1
 	else if (x >= (world.maxx - TRANSITIONEDGE + 1))
 		new_x = world.maxx - TRANSITIONEDGE
@@ -76,7 +76,7 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 		new_y = world.maxy - TRANSITIONEDGE
 
 	var/turf/T = locate(new_x, new_y, z)
-	if(T)
+	if (T)
 		forceMove(T)
 		throwing = null
 		to_chat(src, SPAN_NOTICE("You cannot move further in this direction."))

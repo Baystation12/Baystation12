@@ -66,13 +66,13 @@
 	. = ..()
 	if (!.)
 		return
-	if(disabled > 0)
+	if (disabled > 0)
 		set_stat(UNCONSCIOUS)
 		icon_state = "[initial(icon_state)]_dead"
 		disabled--
 		set_wander (FALSE)
 		ai_holder.speak_chance = 0
-		if(disabled <= 0)
+		if (disabled <= 0)
 			set_stat(CONSCIOUS)
 			icon_state = "[initial(icon_state)]0"
 			set_wander (TRUE)

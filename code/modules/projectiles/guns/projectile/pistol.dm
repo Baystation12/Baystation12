@@ -10,15 +10,15 @@
 
 /obj/item/gun/projectile/pistol/on_update_icon()
 	..()
-	if(empty_icon)
-		if(ammo_magazine && length(ammo_magazine.stored_ammo))
+	if (empty_icon)
+		if (ammo_magazine && length(ammo_magazine.stored_ammo))
 			icon_state = initial(icon_state)
 		else
 			icon_state = "[initial(icon_state)]-e"
-	if(ammo_indicator)
-		if(!ammo_magazine || !LAZYLEN(ammo_magazine.stored_ammo))
+	if (ammo_indicator)
+		if (!ammo_magazine || !LAZYLEN(ammo_magazine.stored_ammo))
 			overlays += image(icon, "[initial(icon_state)]-ammo0")
-		else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
+		else if (LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
 			overlays += image(icon, "[initial(icon_state)]-ammo1")
 		else
 			overlays += image(icon, "[initial(icon_state)]-ammo2")
@@ -80,7 +80,7 @@
 
 /obj/item/gun/projectile/pistol/throwback/on_update_icon()
 	..()
-	if(ammo_magazine && length(ammo_magazine.stored_ammo))
+	if (ammo_magazine && length(ammo_magazine.stored_ammo))
 		icon_state = base_icon
 	else
 		icon_state = "[base_icon]-e"
@@ -105,7 +105,7 @@
 
 /obj/item/gun/projectile/pistol/gyropistol/on_update_icon()
 	..()
-	if(ammo_magazine)
+	if (ammo_magazine)
 		icon_state = "gyropistolloaded"
 	else
 		icon_state = "gyropistol"
@@ -125,8 +125,8 @@
 	var/obj/item/silencer/silencer
 
 /obj/item/gun/projectile/pistol/holdout/attack_hand(mob/user)
-	if(user.get_inactive_hand() == src)
-		if(silenced)
+	if (user.get_inactive_hand() == src)
+		if (silenced)
 			if (!user.IsHolding(src))
 				..()
 				return
@@ -169,11 +169,11 @@
 
 /obj/item/gun/projectile/pistol/holdout/on_update_icon()
 	..()
-	if(silenced)
+	if (silenced)
 		icon_state = "pistol-silencer"
 	else
 		icon_state = "pistol"
-	if(!(ammo_magazine && length(ammo_magazine.stored_ammo)))
+	if (!(ammo_magazine && length(ammo_magazine.stored_ammo)))
 		icon_state = "[icon_state]-e"
 
 /obj/item/silencer

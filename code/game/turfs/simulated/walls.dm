@@ -32,10 +32,10 @@
 /turf/simulated/wall/New(newloc, materialtype, rmaterialtype)
 	..(newloc)
 	icon_state = "blank"
-	if(!materialtype)
+	if (!materialtype)
 		materialtype = DEFAULT_WALL_MATERIAL
 	material = SSmaterials.get_material_by_name(materialtype)
-	if(!isnull(rmaterialtype))
+	if (!isnull(rmaterialtype))
 		reinf_material = SSmaterials.get_material_by_name(rmaterialtype)
 	update_material()
 	hitsound = material.hitsound
@@ -60,9 +60,9 @@
 
 /turf/simulated/wall/Process(wait, times_fired)
 	var/how_often = max(round(2 SECONDS/wait), 1)
-	if(times_fired % how_often)
+	if (times_fired % how_often)
 		return //We only work about every 2 seconds
-	if(!radiate())
+	if (!radiate())
 		return PROCESS_KILL
 
 /turf/simulated/wall/proc/get_material()
@@ -96,12 +96,12 @@
 	set_damage_resistance(DAMAGE_BURN, burn_armor)
 
 /turf/simulated/wall/bullet_act(obj/item/projectile/Proj)
-	if(istype(Proj,/obj/item/projectile/beam))
+	if (istype(Proj,/obj/item/projectile/beam))
 		burn(2500)
-	else if(istype(Proj,/obj/item/projectile/ion))
+	else if (istype(Proj,/obj/item/projectile/ion))
 		burn(500)
 
-	if(Proj.ricochet_sounds && prob(15))
+	if (Proj.ricochet_sounds && prob(15))
 		playsound(src, pick(Proj.ricochet_sounds), 100, 1)
 		new /obj/effect/sparks(get_turf(Proj))
 
@@ -112,7 +112,7 @@
 	for(var/obj/effect/overlay/wallrot/WR in src)
 		qdel(WR)
 	for(var/obj/effect/vine/plant in range(src, 1))
-		if(!plant.floor) //shrooms drop to the floor
+		if (!plant.floor) //shrooms drop to the floor
 			plant.floor = 1
 			plant.update_icon()
 			plant.pixel_x = 0
@@ -133,22 +133,22 @@
 /turf/simulated/wall/examine(mob/user)
 	. = ..()
 
-	if(paint_color)
+	if (paint_color)
 		to_chat(user, SPAN_NOTICE("It has a coat of paint applied."))
-	if(locate(/obj/effect/overlay/wallrot) in src)
+	if (locate(/obj/effect/overlay/wallrot) in src)
 		to_chat(user, SPAN_WARNING("There is fungus growing on [src]."))
 
 //Damage
 
 /turf/simulated/wall/melt()
 
-	if(!can_melt())
+	if (!can_melt())
 		return
 
 	src.ChangeTurf(/turf/simulated/floor/plating)
 
 	var/turf/simulated/floor/F = src
-	if(!F)
+	if (!F)
 		return
 	F.burn_tile()
 	F.icon_state = "wall_thermite"
@@ -189,15 +189,15 @@
 /turf/simulated/wall/proc/dismantle_wall(devastated, no_product)
 
 	playsound(src, 'sound/items/Welder.ogg', 100, 1)
-	if(!no_product)
-		if(reinf_material)
+	if (!no_product)
+		if (reinf_material)
 			reinf_material.place_dismantled_girder(src, reinf_material)
 		else
 			material.place_dismantled_girder(src)
 		material.place_dismantled_product(src,devastated)
 
 	for(var/obj/O in src.contents) //Eject contents!
-		if(istype(O,/obj/structure/sign/poster))
+		if (istype(O,/obj/structure/sign/poster))
 			var/obj/structure/sign/poster/P = O
 			P.roll_and_drop(src)
 		else
@@ -213,19 +213,19 @@
 
 // Wall-rot effect, a nasty fungus that destroys walls.
 /turf/simulated/wall/proc/rot()
-	if(locate(/obj/effect/overlay/wallrot) in src)
+	if (locate(/obj/effect/overlay/wallrot) in src)
 		return
 	var/number_rots = rand(2,3)
 	for(var/i=0, i<number_rots, i++)
 		new/obj/effect/overlay/wallrot(src)
 
 /turf/simulated/wall/proc/can_melt()
-	if(material.flags & MATERIAL_UNMELTABLE)
+	if (material.flags & MATERIAL_UNMELTABLE)
 		return 0
 	return 1
 
 /turf/simulated/wall/proc/thermitemelt(mob/user as mob)
-	if(!can_melt())
+	if (!can_melt())
 		return
 	var/obj/effect/overlay/O = new/obj/effect/overlay( src )
 	O.SetName("Thermite")
@@ -245,21 +245,21 @@
 	to_chat(user, SPAN_WARNING("The thermite starts melting through the wall."))
 
 	spawn(100)
-		if(O)
+		if (O)
 			qdel(O)
 //	F.sd_LumReset()		//TODO: ~Carn
 	return
 
 /turf/simulated/wall/proc/radiate()
 	var/total_radiation = material.radioactivity + (reinf_material ? reinf_material.radioactivity / 2 : 0)
-	if(!total_radiation)
+	if (!total_radiation)
 		return
 
 	SSradiation.radiate(src, total_radiation)
 	return total_radiation
 
 /turf/simulated/wall/proc/burn(temperature)
-	if(material.combustion_effect(src, temperature, 0.7))
+	if (material.combustion_effect(src, temperature, 0.7))
 		addtimer(new Callback(src, .proc/burn_adjacent, temperature), 2, TIMER_UNIQUE)
 
 /turf/simulated/wall/proc/burn_adjacent(temperature)

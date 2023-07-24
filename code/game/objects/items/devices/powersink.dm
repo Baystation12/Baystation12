@@ -33,24 +33,24 @@
 	icon_state = "powersink[mode == OPERATING]"
 
 /obj/item/device/powersink/proc/set_mode(value)
-	if(value == mode)
+	if (value == mode)
 		return
 	switch(value)
-		if(DISCONNECTED)
+		if (DISCONNECTED)
 			attached = null
-			if(mode == OPERATING)
+			if (mode == OPERATING)
 				STOP_PROCESSING_POWER_OBJECT(src)
 			anchored = FALSE
 
-		if(CLAMPED_OFF)
-			if(!attached)
+		if (CLAMPED_OFF)
+			if (!attached)
 				return
-			if(mode == OPERATING)
+			if (mode == OPERATING)
 				STOP_PROCESSING_POWER_OBJECT(src)
 			anchored = TRUE
 
-		if(OPERATING)
-			if(!attached)
+		if (OPERATING)
+			if (!attached)
 				return
 			START_PROCESSING_POWER_OBJECT(src)
 			anchored = TRUE
@@ -60,7 +60,7 @@
 	set_light(0)
 
 /obj/item/device/powersink/Destroy()
-	if(mode == 2)
+	if (mode == 2)
 		STOP_PROCESSING_POWER_OBJECT(src)
 	. = ..()
 
@@ -101,13 +101,13 @@
 
 /obj/item/device/powersink/attack_hand(mob/user)
 	. = ..()
-	if(.)
+	if (.)
 		return
 	switch(mode)
-		if(DISCONNECTED)
+		if (DISCONNECTED)
 			..()
 
-		if(CLAMPED_OFF)
+		if (CLAMPED_OFF)
 			user.visible_message( \
 				"[user] activates \the [src]!", \
 				SPAN_NOTICE("You activate \the [src]."),
@@ -116,7 +116,7 @@
 			log_game("Power sink activated by [key_name(user)] at [get_area_name(src)]")
 			set_mode(OPERATING)
 
-		if(OPERATING)
+		if (OPERATING)
 			user.visible_message( \
 				"[user] deactivates \the [src]!", \
 				SPAN_NOTICE("You deactivate \the [src]."),
@@ -124,32 +124,32 @@
 			set_mode(CLAMPED_OFF)
 
 /obj/item/device/powersink/pwr_drain()
-	if(!attached)
+	if (!attached)
 		set_mode(DISCONNECTED)
 		return
 
 	var/datum/powernet/PN = attached.powernet
 	var/drained = 0
-	if(PN)
+	if (PN)
 		set_light(0.5, 0.1, 12)
 		PN.trigger_warning()
 		// found a powernet, so drain up to max power from it
 		drained = PN.draw_power(drain_rate)
 		// if tried to drain more than available on powernet
 		// now look for APCs and drain their cells
-		if(drained < drain_rate)
+		if (drained < drain_rate)
 			for(var/obj/machinery/power/terminal/T in PN.nodes)
 				// Enough power drained this tick, no need to torture more APCs
-				if(drained >= drain_rate)
+				if (drained >= drain_rate)
 					break
 				var/obj/machinery/power/apc/A = T.master_machine()
-				if(istype(A))
+				if (istype(A))
 					drained += A.drain_power(amount = drain_rate)
 		power_drained += drained
 
-	if(power_drained > max_power * 0.95)
+	if (power_drained > max_power * 0.95)
 		playsound(src, 'sound/effects/screech.ogg', 100, 1, 1)
-	if(power_drained >= max_power)
+	if (power_drained >= max_power)
 		STOP_PROCESSING_POWER_OBJECT(src)
 		explosion(src.loc, 18)
 		qdel(src)

@@ -22,21 +22,21 @@
 
 	for(var/i = 0; i < attempts; i++)
 		var/datum/uplink_random_item/RI = pick(items)
-		if(!prob(RI.keep_probability))
+		if (!prob(RI.keep_probability))
 			continue
 		var/datum/uplink_item/I = uplink.items_assoc[RI.uplink_item]
-		if(I.cost(telecrystals, U) > telecrystals)
+		if (I.cost(telecrystals, U) > telecrystals)
 			continue
-		if(bought_items && (I in bought_items) && !prob(RI.reselect_probability))
+		if (bought_items && (I in bought_items) && !prob(RI.reselect_probability))
 			continue
-		if(U && !I.can_buy(U))
+		if (U && !I.can_buy(U))
 			continue
 		return I
 	return uplink.items_assoc[/datum/uplink_item/item/stealthy_weapons/soap]
 
 var/global/list/uplink_random_selections_
 /proc/get_uplink_random_selection_by_type(uplist_selection_type)
-	if(!uplink_random_selections_)
+	if (!uplink_random_selections_)
 		uplink_random_selections_ = init_subtypes(/datum/uplink_random_selection)
 		for(var/datum/entry in uplink_random_selections_)
 			uplink_random_selections_[entry.type] = entry
@@ -108,9 +108,9 @@ var/global/list/uplink_random_selections_
 	..()
 	for(var/uplink_item_type in subtypesof(/datum/uplink_item/item))
 		var/datum/uplink_item/item/ui = uplink_item_type
-		if(!initial(ui.name))
+		if (!initial(ui.name))
 			continue
-		if(is_path_in_list(uplink_item_type, blacklist))
+		if (is_path_in_list(uplink_item_type, blacklist))
 			continue
 		var/new_thing = new/datum/uplink_random_item(uplink_item_type)
 		items += new_thing
@@ -119,12 +119,12 @@ var/global/list/uplink_random_selections_
 	var/const/attempts = 50
 	for(var/i = 0; i < attempts; i++)
 		var/datum/uplink_random_item/RI = pick(items)
-		if(!prob(RI.keep_probability))
+		if (!prob(RI.keep_probability))
 			continue
 		var/datum/uplink_item/I = uplink.items_assoc[RI.uplink_item]
-		if(I.cost(telecrystals, U) > telecrystals)
+		if (I.cost(telecrystals, U) > telecrystals)
 			continue
-		if(bought_items && (I in bought_items) && !prob(RI.reselect_probability))
+		if (bought_items && (I in bought_items) && !prob(RI.reselect_probability))
 			continue
 		return I
 	return uplink.items_assoc[/datum/uplink_item/item/stealthy_weapons/soap]

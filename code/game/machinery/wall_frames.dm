@@ -10,21 +10,21 @@
 	var/reverse = 0 //if resulting object faces opposite its dir (like light fixtures)
 
 /obj/item/frame/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWrench(W))
+	if (isWrench(W))
 		new refund_type( get_turf(src.loc), refund_amt)
 		qdel(src)
 		return
 	..()
 
 /obj/item/frame/proc/try_build(turf/on_wall)
-	if(!build_machine_type)
+	if (!build_machine_type)
 		return
 
 	if (get_dist(on_wall,usr)>1)
 		return
 
 	var/ndir
-	if(reverse)
+	if (reverse)
 		ndir = get_dir(usr,on_wall)
 	else
 		ndir = get_dir(on_wall,usr)
@@ -41,7 +41,7 @@
 		to_chat(usr, SPAN_DANGER("\The [src] cannot be placed in this area."))
 		return
 
-	if(gotwallitem(loc, ndir))
+	if (gotwallitem(loc, ndir))
 		to_chat(usr, SPAN_DANGER("There's already an item on this wall!"))
 		return
 

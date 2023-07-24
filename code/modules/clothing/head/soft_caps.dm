@@ -19,7 +19,7 @@
 
 /obj/item/clothing/head/soft/on_update_icon()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
-	if(flipped)
+	if (flipped)
 		icon_state = "[bis.base_icon_state]_flipped"
 	else
 		icon_state = bis.base_icon_state
@@ -31,7 +31,7 @@
 
 /obj/item/clothing/head/soft/attack_self(mob/user)
 	src.flipped = !src.flipped
-	if(src.flipped)
+	if (src.flipped)
 		to_chat(user, "You flip the hat backwards.")
 	else
 		to_chat(user, "You flip the hat back in normal position.")

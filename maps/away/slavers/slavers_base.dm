@@ -160,9 +160,9 @@
 
 /mob/living/simple_animal/hostile/abolition_extremist/death(gibbed, deathmessage, show_dead_message)
 	. = ..(gibbed, deathmessage, show_dead_message)
-	if(corpse)
+	if (corpse)
 		new corpse(loc)
-	if(weapon)
+	if (weapon)
 		new weapon(loc)
 	qdel(src)
 

@@ -31,7 +31,7 @@
 
 /datum/reagent/blood/initialize_data(newdata)
 	..()
-	if(data && data["blood_colour"])
+	if (data && data["blood_colour"])
 		color = data["blood_colour"]
 	return
 
@@ -44,31 +44,31 @@
 	return t
 
 /datum/reagent/blood/touch_turf(turf/simulated/T)
-	if(!istype(T) || volume < 3)
+	if (!istype(T) || volume < 3)
 		return
 	var/weakref/W = data["donor"]
 	if (!W)
 		blood_splatter(T, src, 1)
 		return
 	W = W.resolve()
-	if(ishuman(W))
+	if (ishuman(W))
 		blood_splatter(T, src, 1)
-	else if(isalien(W))
+	else if (isalien(W))
 		var/obj/effect/decal/cleanable/blood/B = blood_splatter(T, src, 1)
-		if(B)
+		if (B)
 			B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
 
 /datum/reagent/blood/affect_ingest(mob/living/carbon/M, removed)
 
-	if(M.chem_doses[type] > 5)
+	if (M.chem_doses[type] > 5)
 		M.adjustToxLoss(removed)
-	if(M.chem_doses[type] > 15)
+	if (M.chem_doses[type] > 15)
 		M.adjustToxLoss(removed)
 
 /datum/reagent/blood/affect_touch(mob/living/carbon/M, removed)
-	if(ishuman(M))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(H.isSynthetic())
+		if (H.isSynthetic())
 			return
 
 /datum/reagent/blood/affect_blood(mob/living/carbon/M, removed)
@@ -107,14 +107,14 @@
 	M.adjust_hydration(removed * 10)
 
 /datum/reagent/water/touch_turf(turf/simulated/T)
-	if(!istype(T))
+	if (!istype(T))
 		return
 
 	var/datum/gas_mixture/environment = T.return_air()
 	var/min_temperature = T20C + rand(0, 20) // Room temperature + some variance. An actual diminishing return would be better, but this is *like* that. In a way. . This has the potential for weird behavior, but I says fuck it. Water grenades for everyone.
 
 	var/hotspot = (locate(/obj/hotspot) in T)
-	if(hotspot && !istype(T, /turf/space))
+	if (hotspot && !istype(T, /turf/space))
 		var/datum/gas_mixture/lowertemp = T.remove_air(T:air:total_moles)
 		if (lowertemp)
 			lowertemp.temperature = max(min(lowertemp.temperature-2000, lowertemp.temperature / 2), 0)
@@ -128,33 +128,33 @@
 		if (prob(5) && environment && environment.temperature > T100C)
 			T.visible_message(SPAN_WARNING("The water sizzles as it lands on \the [T]!"))
 
-	else if(volume >= 10)
+	else if (volume >= 10)
 		var/turf/simulated/S = T
 		S.wet_floor(8, TRUE)
 
 /datum/reagent/water/touch_obj(obj/O)
-	if(istype(O, /obj/item/reagent_containers/food/snacks/monkeycube))
+	if (istype(O, /obj/item/reagent_containers/food/snacks/monkeycube))
 		var/obj/item/reagent_containers/food/snacks/monkeycube/cube = O
-		if(!cube.wrapped)
+		if (!cube.wrapped)
 			cube.Expand()
-	if(istype(O, /obj/effect/turf_fire))
+	if (istype(O, /obj/effect/turf_fire))
 		var/obj/effect/turf_fire/TF = O
 		TF.AddPower(-volume)
-		if(TF.fire_power <= 0)
+		if (TF.fire_power <= 0)
 			qdel(TF)
 
 /datum/reagent/water/touch_mob(mob/living/L, amount)
 	var/mob/living/carbon/human/H = L
-	if(istype(H))
+	if (istype(H))
 		var/obj/item/clothing/mask/smokable/S = H.wear_mask
 		if (istype(S) && S.lit)
 			var/obj/item/clothing/C = H.head
 			if (!istype(C) || !(C.body_parts_covered & FACE))
 				S.extinguish()
 
-	if(istype(L))
+	if (istype(L))
 		var/needed = L.fire_stacks * 10
-		if(amount > needed)
+		if (amount > needed)
 			L.fire_stacks = 0
 			L.ExtinguishMob()
 			remove_self(needed)
@@ -169,12 +169,12 @@
 
 	M.adjustToxLoss(trait_level * 5 * removed)
 	var/mob/living/carbon/slime/S = M
-	if(!S.client && istype(S))
-		if(S.Target) // Like cats
+	if (!S.client && istype(S))
+		if (S.Target) // Like cats
 			S.Target = null
-		if(S.Victim)
+		if (S.Victim)
 			S.Feedstop()
-	if(M.chem_doses[type] == removed)
+	if (M.chem_doses[type] == removed)
 		M.visible_message(SPAN_WARNING("[S]'s flesh sizzles where the water touches it!"), SPAN_DANGER("Your flesh burns in the water!"))
 		M.confused = max(M.confused, 2)
 
@@ -228,22 +228,22 @@
 	M.adjustToxLoss(2 * removed)
 
 /datum/reagent/fuel/touch_mob(mob/living/L, amount)
-	if(istype(L))
+	if (istype(L))
 		L.adjust_fire_stacks(amount / 10) // Splashing people with welding fuel to make them easy to ignite!
 
 /datum/reagent/fuel/ex_act(obj/item/reagent_containers/holder, severity)
-	if(volume <= 50)
+	if (volume <= 50)
 		return
 	var/turf/T = get_turf(holder)
 	var/datum/gas_mixture/products = new(_temperature = 5 * PHORON_FLASHPOINT)
 	var/gas_moles = 3 * volume
 	products.adjust_multi(GAS_NO, 0.1 * gas_moles, GAS_NO2, 0.1 * gas_moles, GAS_NITROGEN, 0.6 * gas_moles, GAS_HYDROGEN, 0.02 * gas_moles)
 	T.assume_air(products)
-	if(volume > 500)
+	if (volume > 500)
 		explosion(T, 7)
-	else if(volume > 100)
+	else if (volume > 100)
 		explosion(T, 4, EX_ACT_HEAVY)
-	else if(volume > 50)
+	else if (volume > 50)
 		explosion(T, 3, EX_ACT_HEAVY)
 	remove_self(volume)
 

@@ -28,15 +28,15 @@
 	. = ..()
 	paint_color = color
 	color = null //color is just for mapping
-	if(prob(40))
+	if (prob(40))
 		var/spacefacing = FALSE
 		for(var/direction in GLOB.cardinal)
 			var/turf/T = get_step(src, direction)
 			var/area/A = get_area(T)
-			if(A && (A.area_flags & AREA_FLAG_EXTERNAL))
+			if (A && (A.area_flags & AREA_FLAG_EXTERNAL))
 				spacefacing = TRUE
 				break
-		if(spacefacing)
+		if (spacefacing)
 			var/bleach_factor = rand(10,50)
 			paint_color = adjust_brightness(paint_color, bleach_factor)
 	update_icon()
@@ -176,8 +176,8 @@
 	..()
 
 /turf/simulated/wall/cult/can_join_with(turf/simulated/wall/W)
-	if(material && W.material && material.wall_icon_base == W.material.wall_icon_base)
+	if (material && W.material && material.wall_icon_base == W.material.wall_icon_base)
 		return 1
-	else if(istype(W, /turf/simulated/wall))
+	else if (istype(W, /turf/simulated/wall))
 		return 1
 	return 0

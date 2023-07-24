@@ -120,7 +120,7 @@
 
 
 /obj/machinery/reagentgrinder/attackby(obj/item/I, mob/user)
-	if((. = component_attackby(I, user)))
+	if ((. = component_attackby(I, user)))
 		detach()
 		eject()
 
@@ -230,21 +230,21 @@
 
 
 /obj/machinery/reagentgrinder/AltClick(mob/user)
-	if(CanDefaultInteract(user))
+	if (CanDefaultInteract(user))
 		detach(user)
 		return TRUE
 	return ..()
 
 
 /obj/machinery/reagentgrinder/CtrlClick(mob/user)
-	if(anchored && CanDefaultInteract(user))
+	if (anchored && CanDefaultInteract(user))
 		grind(user)
 		return TRUE
 	return ..()
 
 
 /obj/machinery/reagentgrinder/CtrlAltClick(mob/user)
-	if(CanDefaultInteract(user))
+	if (CanDefaultInteract(user))
 		eject(user)
 		return TRUE
 	return ..()

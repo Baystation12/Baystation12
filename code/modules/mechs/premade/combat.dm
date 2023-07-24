@@ -3,16 +3,16 @@
 	desc = "A sleek, modern combat exosuit."
 
 /mob/living/exosuit/premade/combat/Initialize()
-	if(!arms)
+	if (!arms)
 		arms = new /obj/item/mech_component/manipulators/combat(src)
 		arms.color = COLOR_GUNMETAL
-	if(!legs)
+	if (!legs)
 		legs = new /obj/item/mech_component/propulsion/combat(src)
 		legs.color = COLOR_GUNMETAL
-	if(!head)
+	if (!head)
 		head = new /obj/item/mech_component/sensors/combat(src)
 		head.color = COLOR_GUNMETAL
-	if(!body)
+	if (!body)
 		body = new /obj/item/mech_component/chassis/combat(src)
 		body.color = COLOR_GUNMETAL
 
@@ -35,4 +35,3 @@
 	. = ..()
 	for(var/obj/thing in list(arms,legs,head,body))
 		thing.color = COLOR_WHITE
-

@@ -4,7 +4,7 @@
 	start_grab_name = NAB_PASSIVE
 
 /obj/item/grab/nab/init()
-	if(!(. = ..()))
+	if (!(. = ..()))
 		return
 	assailant.unEquip(assailant.get_inactive_hand())
 	visible_message(SPAN_WARNING("[assailant] has nabbed [affecting] passively!"))
@@ -34,7 +34,7 @@
 
 	affecting.visible_message(SPAN_DANGER("[assailant] begins crushing [affecting]!"))
 	G.attacking = 1
-	if(do_after(assailant, action_cooldown - 1, affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+	if (do_after(assailant, action_cooldown - 1, affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		G.attacking = 0
 		G.action_used()
 		crush(G, crush_damage)
@@ -53,7 +53,7 @@
 	affecting.visible_message(SPAN_DANGER("[assailant] begins chewing on [affecting]!"))
 	G.attacking = 1
 
-	if(do_after(assailant, action_cooldown - 1, affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+	if (do_after(assailant, action_cooldown - 1, affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		G.attacking = 0
 		G.action_used()
 		masticate(G, masticate_damage)
@@ -70,7 +70,7 @@
 	var/hit_zone = G.target_zone
 	G.affecting.visible_message(SPAN_DANGER("[G.assailant] crushes [G.affecting]'s [damaging.name]!"))
 
-	if(prob(30))
+	if (prob(30))
 		var/hit_damage = max(attack_damage + 10, 15)
 		G.affecting.apply_damage(hit_damage, DAMAGE_BRUTE, hit_zone, DAMAGE_FLAG_SHARP, used_weapon = "organic punctures")
 		var/armor = 100 * G.affecting.get_blocked_ratio(hit_zone, DAMAGE_BRUTE, damage = hit_damage)

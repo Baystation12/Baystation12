@@ -5,14 +5,14 @@
 /singleton/webhook/roundend/get_message(list/data)
 	. = ..()
 	var/desc = "A round of **[SSticker.mode ? SSticker.mode.name : "Unknown"]** has ended.\n"
-	if(data)
+	if (data)
 
-		if(data["surviving_total"] > 0)
+		if (data["surviving_total"] > 0)
 
 			var/s_was =      "was"
 			var/s_survivor = "survivor"
 
-			if(data["surviving_total"] != 1)
+			if (data["surviving_total"] != 1)
 				s_was = "were"
 				s_survivor = "survivors"
 

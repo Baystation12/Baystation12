@@ -27,7 +27,7 @@ var/global/list/empty_playable_ai_cores = list()
 	var/authorized
 
 /obj/structure/AIcore/emag_act(remaining_charges, mob/user, emag_source)
-	if(!authorized)
+	if (!authorized)
 		to_chat(user, SPAN_WARNING("You swipe [emag_source] at [src] and jury rig it into the systems of [GLOB.using_map.full_name]!"))
 		authorized = 1
 		return 1
@@ -426,7 +426,7 @@ var/global/list/empty_playable_ai_cores = list()
 
 /obj/structure/AIcore/deactivated/proc/load_ai(mob/living/silicon/ai/transfer, obj/item/aicard/card, mob/user)
 
-	if(!istype(transfer) || locate(/mob/living/silicon/ai) in src)
+	if (!istype(transfer) || locate(/mob/living/silicon/ai) in src)
 		return
 
 	transfer.aiRestorePowerRoutine = 0
@@ -438,13 +438,13 @@ var/global/list/empty_playable_ai_cores = list()
 	to_chat(user, "[SPAN_NOTICE("Transfer successful:")] [transfer.name] ([rand(1000,9999)].exe) downloaded to host terminal. Local copy wiped.")
 	to_chat(transfer, "You have been uploaded to a stationary terminal. Remote device connection restored.")
 
-	if(card)
+	if (card)
 		card.clear()
 
 	qdel(src)
 
 /obj/structure/AIcore/deactivated/proc/check_malf(mob/living/silicon/ai/ai)
-	if(!ai) return
+	if (!ai) return
 	for (var/datum/mind/malfai in GLOB.malf.current_antagonists)
 		if (ai.mind == malfai)
 			return 1
@@ -472,12 +472,12 @@ var/global/list/empty_playable_ai_cores = list()
 		cores["[D] ([D.loc.loc])"] = D
 
 	var/id = input("Which core?", "Toggle AI Core Latejoin", null) as null|anything in cores
-	if(!id) return
+	if (!id) return
 
 	var/obj/structure/AIcore/deactivated/D = cores[id]
-	if(!D) return
+	if (!D) return
 
-	if(D in empty_playable_ai_cores)
+	if (D in empty_playable_ai_cores)
 		empty_playable_ai_cores -= D
 		to_chat(src, "\The [id] is now [SPAN_COLOR("#ff0000", "not available")] for latejoining AIs.")
 	else

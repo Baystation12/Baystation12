@@ -42,7 +42,7 @@
 
 /crew_sensor_modifier/general/jamming/random/process_crew_data(mob/living/carbon/human/H, obj/item/clothing/under/C, turf/pos, list/crew_data)
 	. = ..()
-	if(prob(random_sensor_type_prob))
+	if (prob(random_sensor_type_prob))
 		crew_data["sensor_type"] = pick(SUIT_SENSOR_OFF, SUIT_SENSOR_BINARY, SUIT_SENSOR_VITAL, SUIT_SENSOR_TRACKING)
-	if(prob(random_assignment_prob))
+	if (prob(random_assignment_prob))
 		crew_data["assignment"] = pick("Agent", "Infiltrator", "Passenger", "Crewman", "Unknown")

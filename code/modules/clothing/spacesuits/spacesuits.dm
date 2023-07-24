@@ -39,15 +39,15 @@
 	var/tinted = null	//Set to non-null for toggleable tint helmets
 
 /obj/item/clothing/head/helmet/space/Destroy()
-	if(camera && !ispath(camera))
+	if (camera && !ispath(camera))
 		QDEL_NULL(camera)
 	. = ..()
 
 /obj/item/clothing/head/helmet/space/Initialize()
 	. = ..()
-	if(camera)
+	if (camera)
 		verbs += /obj/item/clothing/head/helmet/space/proc/toggle_camera
-	if(!isnull(tinted))
+	if (!isnull(tinted))
 		verbs += /obj/item/clothing/head/helmet/space/proc/toggle_tint
 		update_tint()
 
@@ -56,15 +56,15 @@
 	set category = "Object"
 	set src in usr
 
-	if(ispath(camera))
+	if (ispath(camera))
 		camera = new camera(src)
 		camera.set_stat_immunity(MACHINE_STAT_NOPOWER)
 		camera.set_status(0)
 		camera.is_helmet_cam = TRUE
 
-	if(camera)
+	if (camera)
 		camera.set_status(!camera.status)
-		if(camera.status)
+		if (camera.status)
 			camera.c_tag = FindNameFromID(usr)
 			to_chat(usr, SPAN_NOTICE("User scanned as [camera.c_tag]. Camera activated."))
 		else
@@ -72,11 +72,11 @@
 
 /obj/item/clothing/head/helmet/space/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1 && camera)
+	if (distance <= 1 && camera)
 		to_chat(user, "This helmet has a built-in camera. Its [!ispath(camera) && camera.status ? "" : "in"]active.")
 
 /obj/item/clothing/head/helmet/space/proc/update_tint()
-	if(tinted)
+	if (tinted)
 		icon_state = "[initial(icon_state)]_dark"
 		item_state = "[initial(item_state)]_dark"
 		flash_protection = FLASH_PROTECTION_MAJOR
@@ -97,7 +97,7 @@
 	set src in usr
 
 	var/mob/user = usr
-	if(istype(user) && user.incapacitated())
+	if (istype(user) && user.incapacitated())
 		return
 
 	tinted = !tinted

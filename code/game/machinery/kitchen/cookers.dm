@@ -67,7 +67,7 @@
 
 
 /obj/machinery/cooker/cannot_transition_to(state_path, mob/user)
-	if(is_processing)
+	if (is_processing)
 		return SPAN_WARNING("Turn off \the [src] first.")
 	return ..()
 

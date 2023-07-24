@@ -13,30 +13,30 @@
 	var/power_usage_occupied = 2 KILOWATTS
 
 /obj/item/stock_parts/computer/ai_slot/update_power_usage()
-	if(!stored_card || !stored_card.carded_ai)
+	if (!stored_card || !stored_card.carded_ai)
 		power_usage = power_usage_idle
 	else
 		power_usage = power_usage_occupied
 	..()
 
 /obj/item/stock_parts/computer/ai_slot/attackby(obj/item/W, mob/user)
-	if(..())
+	if (..())
 		return TRUE
-	if(istype(W, /obj/item/aicard))
-		if(stored_card)
+	if (istype(W, /obj/item/aicard))
+		if (stored_card)
 			to_chat(user, "\The [src] is already occupied.")
 			return
-		if(!user.unEquip(W, src))
+		if (!user.unEquip(W, src))
 			return
 		do_insert_ai(user, W)
 		return TRUE
-	if(isScrewdriver(W) && stored_card)
+	if (isScrewdriver(W) && stored_card)
 		to_chat(user, "You manually remove \the [stored_card] from \the [src].")
 		do_eject_ai(user)
 		return TRUE
 
 /obj/item/stock_parts/computer/ai_slot/Destroy()
-	if(stored_card)
+	if (stored_card)
 		do_eject_ai()
 	return ..()
 
@@ -45,10 +45,10 @@
 	set category = "Object"
 	set src in view(1)
 
-	if(!user)
+	if (!user)
 		user = usr
 
-	if(!CanPhysicallyInteract(user))
+	if (!CanPhysicallyInteract(user))
 		to_chat(user, SPAN_WARNING("You can't reach it."))
 		return
 
@@ -56,7 +56,7 @@
 	if (!istype(device))
 		device = locate() in src
 
-	if(!device.stored_card)
+	if (!device.stored_card)
 		to_chat(user, "There is no intellicard connected to \the [src].")
 		return
 
@@ -76,7 +76,7 @@
 		do_eject_ai(user)
 	stored_card = card
 
-	if(isobj(loc))
+	if (isobj(loc))
 		loc.verbs += /obj/item/stock_parts/computer/ai_slot/verb/eject_ai
 
 	update_power_usage()

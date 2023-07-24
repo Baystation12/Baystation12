@@ -6,19 +6,19 @@
 		remove_system(hardpoint, force = 1)
 	hardpoints.Cut()
 
-	if(arms)
+	if (arms)
 		frame.arms = arms
 		arms.forceMove(frame)
 		arms = null
-	if(legs)
+	if (legs)
 		frame.legs = legs
 		legs.forceMove(frame)
 		legs = null
-	if(body)
+	if (body)
 		frame.body = body
 		body.forceMove(frame)
 		body = null
-	if(head)
+	if (head)
 		frame.head = head
 		head.forceMove(frame)
 		head = null
@@ -36,13 +36,13 @@
 	//Realistically a module disappearing without being uninstalled is wrong and a bug or adminbus
 	var/target = null
 	for(var/hardpoint in hardpoints)
-		if(hardpoints[hardpoint]== module_to_forget)
+		if (hardpoints[hardpoint]== module_to_forget)
 			target = hardpoint
 			break
 
 	hardpoints[target] = null
 
-	if(target == selected_hardpoint)
+	if (target == selected_hardpoint)
 		clear_selected_hardpoint()
 
 	GLOB.destroyed_event.unregister(module_to_forget, src, .proc/forget_module)
@@ -56,44 +56,44 @@
 
 	for(var/thing in pilots)
 		var/mob/pilot = thing
-		if(pilot && pilot.client)
+		if (pilot && pilot.client)
 			pilot.client.screen -= module_to_forget
 
 /mob/living/exosuit/proc/install_system(obj/item/system, system_hardpoint, mob/user)
-	if(hardpoints_locked || hardpoints[system_hardpoint])
+	if (hardpoints_locked || hardpoints[system_hardpoint])
 		return FALSE
 
 	var/obj/item/mech_equipment/ME = system
-	if(istype(ME))
-		if(ME.restricted_hardpoints && !(system_hardpoint in ME.restricted_hardpoints))
+	if (istype(ME))
+		if (ME.restricted_hardpoints && !(system_hardpoint in ME.restricted_hardpoints))
 			return FALSE
-		if(ME.restricted_software)
-			if(!head || !head.software)
+		if (ME.restricted_software)
+			if (!head || !head.software)
 				return FALSE
 			var/found
 			for(var/software in ME.restricted_software)
-				if(software in head.software.installed_software)
+				if (software in head.software.installed_software)
 					found = TRUE
 					break
-			if(!found)
+			if (!found)
 				return FALSE
 	else
 		return FALSE
 
-	if(user)
+	if (user)
 		var/delay = 3 SECONDS * user.skill_delay_mult(SKILL_DEVICES)
-		if(delay > 0)
+		if (delay > 0)
 			user.visible_message(
 				SPAN_NOTICE("\The [user] begins trying to install \the [system] into \the [src]."),
 				SPAN_NOTICE("You begin trying to install \the [system] into \the [src].")
 			)
-			if(!do_after(user, delay, src, DO_PUBLIC_UNIQUE) || user.get_active_hand() != system || !user.use_sanity_check(src, system, SANITY_CHECK_DEFAULT | SANITY_CHECK_TOOL_UNEQUIP))
+			if (!do_after(user, delay, src, DO_PUBLIC_UNIQUE) || user.get_active_hand() != system || !user.use_sanity_check(src, system, SANITY_CHECK_DEFAULT | SANITY_CHECK_TOOL_UNEQUIP))
 				return FALSE
 
-			if(hardpoints_locked || hardpoints[system_hardpoint])
+			if (hardpoints_locked || hardpoints[system_hardpoint])
 				return FALSE
 
-			if(user.unEquip(system))
+			if (user.unEquip(system))
 				user.visible_message(
 					SPAN_NOTICE("\The [user] installs \the [system] into \the [src]'s [system_hardpoint]."),
 					SPAN_NOTICE("You install \the [system] in \the [src]'s [system_hardpoint].")
@@ -121,24 +121,24 @@
 
 /mob/living/exosuit/proc/remove_system(system_hardpoint, mob/user, force)
 
-	if((hardpoints_locked && !force) || !hardpoints[system_hardpoint])
+	if ((hardpoints_locked && !force) || !hardpoints[system_hardpoint])
 		return 0
 
 	var/obj/item/system = hardpoints[system_hardpoint]
-	if(user)
+	if (user)
 		var/delay = 3 SECONDS * user.skill_delay_mult(SKILL_DEVICES)
-		if(delay > 0)
+		if (delay > 0)
 			user.visible_message(SPAN_NOTICE("\The [user] begins trying to remove \the [system] from \the [src]."))
-			if(!do_after(user, delay, src, DO_PUBLIC_UNIQUE) || hardpoints[system_hardpoint] != system)
+			if (!do_after(user, delay, src, DO_PUBLIC_UNIQUE) || hardpoints[system_hardpoint] != system)
 				return FALSE
 
 	hardpoints[system_hardpoint] = null
 
-	if(system_hardpoint == selected_hardpoint)
+	if (system_hardpoint == selected_hardpoint)
 		clear_selected_hardpoint()
 
 	var/obj/item/mech_equipment/ME = system
-	if(istype(ME))
+	if (istype(ME))
 		ME.uninstalled()
 	system.forceMove(get_turf(src))
 	system.screen_loc = null
@@ -150,14 +150,14 @@
 
 	for(var/thing in pilots)
 		var/mob/pilot = thing
-		if(pilot && pilot.client)
+		if (pilot && pilot.client)
 			pilot.client.screen -= system
 
 	hud_elements -= system
 	refresh_hud()
 	queue_icon_update()
 
-	if(user)
+	if (user)
 		system.forceMove(get_turf(user))
 		user.put_in_hands(system)
 		to_chat(user, SPAN_NOTICE("You remove \the [system] from \the [src]'s [system_hardpoint]."))

@@ -19,7 +19,7 @@
 	bulk = 3
 
 /obj/item/gun/projectile/revolver/AltClick()
-	if(CanPhysicallyInteract(usr))
+	if (CanPhysicallyInteract(usr))
 		spin_cylinder()
 		return TRUE
 	return ..()
@@ -34,11 +34,11 @@
 	SPAN_NOTICE("You hear something metallic spin and click."))
 	playsound(src.loc, 'sound/weapons/revolver_spin.ogg', 100, 1)
 	loaded = shuffle(loaded)
-	if(rand(1,max_shells) > length(loaded))
+	if (rand(1,max_shells) > length(loaded))
 		chamber_offset = rand(0,max_shells - length(loaded))
 
 /obj/item/gun/projectile/revolver/consume_next_projectile()
-	if(chamber_offset)
+	if (chamber_offset)
 		chamber_offset--
 		return
 	return ..()

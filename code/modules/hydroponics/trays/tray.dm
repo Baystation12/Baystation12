@@ -135,31 +135,31 @@
 		/datum/reagent/toxin/fertilizer/left4zed = 30)
 
 /obj/machinery/portable_atmospherics/hydroponics/AltClick()
-	if(mechanical && !usr.incapacitated() && Adjacent(usr))
+	if (mechanical && !usr.incapacitated() && Adjacent(usr))
 		close_lid(usr)
 		return TRUE
 	return ..()
 
 /obj/machinery/portable_atmospherics/hydroponics/attack_ghost(mob/observer/ghost/user)
-	if(!(harvest && seed && seed.product_type))
+	if (!(harvest && seed && seed.product_type))
 		return
 
-	if(!user.can_admin_interact())
+	if (!user.can_admin_interact())
 		return
 
 	var/response = alert(user, "Are you sure you want to harvest this [seed.display_name]?", "Living plant request", "Yes", "No")
-	if(response == "Yes")
+	if (response == "Yes")
 		harvest()
 
 /obj/machinery/portable_atmospherics/hydroponics/Initialize()
-	if(!mechanical)
+	if (!mechanical)
 		construct_state = null
 	. = ..()
 	temp_chem_holder = new()
 	temp_chem_holder.create_reagents(10)
 	temp_chem_holder.atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 	create_reagents(200)
-	if(mechanical)
+	if (mechanical)
 		connect()
 	update_icon()
 	SSplants.active_plants += src
@@ -171,43 +171,43 @@
 
 /obj/machinery/portable_atmospherics/hydroponics/LateInitialize()
 	..()
-	if(locate(/obj/item/seeds) in get_turf(src))
+	if (locate(/obj/item/seeds) in get_turf(src))
 		plant()
 
 /obj/machinery/portable_atmospherics/hydroponics/bullet_act(obj/item/projectile/Proj)
 
 	//Don't act on seeds like dionaea that shouldn't change.
-	if(seed && seed.get_trait(TRAIT_IMMUTABLE) > 0)
+	if (seed && seed.get_trait(TRAIT_IMMUTABLE) > 0)
 		return
 
 	//Override for somatoray projectiles.
-	if(istype(Proj ,/obj/item/projectile/energy/floramut)&& prob(20))
-		if(istype(Proj, /obj/item/projectile/energy/floramut/gene))
+	if (istype(Proj ,/obj/item/projectile/energy/floramut)&& prob(20))
+		if (istype(Proj, /obj/item/projectile/energy/floramut/gene))
 			var/obj/item/projectile/energy/floramut/gene/G = Proj
-			if(seed)
+			if (seed)
 				seed = seed.diverge_mutate_gene(G.gene, get_turf(loc))	//get_turf just in case it's not in a turf.
 		else
 			mutate(prob(75) ? 1 : 2)
 			return
-	else if(istype(Proj ,/obj/item/projectile/energy/florayield) && prob(20))
+	else if (istype(Proj ,/obj/item/projectile/energy/florayield) && prob(20))
 		yield_mod = min(10,yield_mod+rand(1,2))
 		return
 
 	..()
 
 /obj/machinery/portable_atmospherics/hydroponics/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
+	if (air_group || (height==0)) return 1
 
-	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
+	if (istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
 		return 1
 	else
 		return !density
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/check_health(icon_update = 1)
-	if(seed && !dead && health <= 0)
+	if (seed && !dead && health <= 0)
 		die()
 	check_level_sanity()
-	if(icon_update)
+	if (icon_update)
 		update_icon()
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/die()
@@ -220,9 +220,9 @@
 //Process reagents being input into the tray.
 /obj/machinery/portable_atmospherics/hydroponics/proc/process_reagents()
 
-	if(!reagents) return
+	if (!reagents) return
 
-	if(reagents.total_volume <= 0)
+	if (reagents.total_volume <= 0)
 		return
 
 	reagents.trans_to_obj(temp_chem_holder, min(reagents.total_volume,rand(1,3)))
@@ -231,38 +231,38 @@
 
 		var/reagent_total = temp_chem_holder.reagents.get_reagent_amount(R.type)
 
-		if(seed && !dead)
+		if (seed && !dead)
 			//Handle some general level adjustments.
-			if(toxic_reagents[R.type])
+			if (toxic_reagents[R.type])
 				toxins += toxic_reagents[R.type]         * reagent_total
-			if(weedkiller_reagents[R.type])
+			if (weedkiller_reagents[R.type])
 				weedlevel += weedkiller_reagents[R.type] * reagent_total
-			if(pestkiller_reagents[R.type])
+			if (pestkiller_reagents[R.type])
 				pestlevel += pestkiller_reagents[R.type] * reagent_total
 
 			// Beneficial reagents have a few impacts along with health buffs.
-			if(beneficial_reagents[R.type])
+			if (beneficial_reagents[R.type])
 				health += beneficial_reagents[R.type][1]       * reagent_total
 				yield_mod += beneficial_reagents[R.type][2]    * reagent_total
 				mutation_mod += beneficial_reagents[R.type][3] * reagent_total
 
 			// Mutagen is distinct from the previous types and mostly has a chance of proccing a mutation.
-			if(mutagenic_reagents[R.type])
+			if (mutagenic_reagents[R.type])
 				mutation_level += reagent_total*mutagenic_reagents[R.type]+mutation_mod
 
 		// Handle nutrient refilling.
-		if(nutrient_reagents[R.type])
+		if (nutrient_reagents[R.type])
 			nutrilevel += nutrient_reagents[R.type]  * reagent_total
 
 		// Handle water and water refilling.
 		var/water_added = 0
-		if(water_reagents[R.type])
+		if (water_reagents[R.type])
 			var/water_input = water_reagents[R.type] * reagent_total
 			water_added += water_input
 			waterlevel += water_input
 
 		// Water dilutes toxin level.
-		if(water_added > 0)
+		if (water_added > 0)
 			toxins -= round(water_added/4)
 
 	temp_chem_holder.reagents.clear_reagents()
@@ -272,14 +272,14 @@
 /obj/machinery/portable_atmospherics/hydroponics/proc/harvest(mob/user)
 
 	//Harvest the product of the plant,
-	if(!seed || !harvest)
+	if (!seed || !harvest)
 		return
 
-	if(closed_system)
-		if(user) to_chat(user, "You can't harvest from the plant while the lid is shut.")
+	if (closed_system)
+		if (user) to_chat(user, "You can't harvest from the plant while the lid is shut.")
 		return
 
-	if(user)
+	if (user)
 		. = seed.harvest(user,yield_mod)
 	else
 		. = seed.harvest(get_turf(src),yield_mod)
@@ -287,7 +287,7 @@
 	harvest = 0
 	lastproduce = age
 
-	if(!seed.get_trait(TRAIT_HARVEST_REPEAT))
+	if (!seed.get_trait(TRAIT_HARVEST_REPEAT))
 		yield_mod = 0
 		seed = null
 		dead = 0
@@ -299,11 +299,11 @@
 
 //Clears out a dead plant.
 /obj/machinery/portable_atmospherics/hydroponics/proc/remove_dead(mob/user, silent)
-	if(!dead)
+	if (!dead)
 		return
 
-	if(closed_system)
-		if(user)
+	if (closed_system)
+		if (user)
 			to_chat(user, "You can't remove the dead plant while the lid is shut.")
 		return FALSE
 
@@ -314,7 +314,7 @@
 	yield_mod = 0
 	mutation_mod = 0
 
-	if(!silent && user)
+	if (!silent && user)
 		to_chat(user, "You remove the dead plant.")
 	lastproduce = 0
 	check_health()
@@ -324,9 +324,9 @@
 /obj/machinery/portable_atmospherics/hydroponics/proc/weed_invasion()
 
 	//Remove the seed if something is already planted.
-	if(seed) seed = null
+	if (seed) seed = null
 	seed = SSplants.seeds[pick(list("reishi", "nettles", "amanita", "mushrooms", "plumphelmet", "towercap", "harebells", "weeds", "diona"))]
-	if(!seed) return //Weed does not exist, someone fucked up.
+	if (!seed) return //Weed does not exist, someone fucked up.
 
 	dead = 0
 	age = 0
@@ -344,18 +344,18 @@
 /obj/machinery/portable_atmospherics/hydroponics/proc/mutate(severity)
 
 	// No seed, no mutations.
-	if(!seed)
+	if (!seed)
 		return
 
 	// Check if we should even bother working on the current seed datum.
-	if(seed.mutants && length(seed.mutants) && severity > 1)
+	if (seed.mutants && length(seed.mutants) && severity > 1)
 		mutate_species()
 		return
 
 	// We need to make sure we're not modifying one of the global seed datums.
 	// If it's not in the global list, then no products of the line have been
 	// harvested yet and it's safe to assume it's restricted to this tray.
-	if(!isnull(SSplants.seeds[seed.name]))
+	if (!isnull(SSplants.seeds[seed.name]))
 		seed = seed.diverge()
 	seed.mutate(severity,get_turf(src))
 
@@ -366,18 +366,18 @@
 	set category = "Object"
 	set src in view(1)
 
-	if(usr.incapacitated())
+	if (usr.incapacitated())
 		return
-	if(ishuman(usr) || istype(usr, /mob/living/silicon/robot))
+	if (ishuman(usr) || istype(usr, /mob/living/silicon/robot))
 		var/new_light = input("Specify a light level.") as null|anything in list(0,1,2,3,4,5,6,7,8,9,10)
-		if(new_light)
+		if (new_light)
 			tray_light = new_light
 			to_chat(usr, "You set the tray to a light level of [tray_light] lumens.")
 	return
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/check_level_sanity()
 	//Make sure various values are sane.
-	if(seed)
+	if (seed)
 		health =     max(0,min(seed.get_trait(TRAIT_ENDURANCE),health))
 	else
 		health = 0
@@ -394,7 +394,7 @@
 
 	var/previous_plant = seed.display_name
 	var/newseed = seed.get_mutant_variant()
-	if(newseed in SSplants.seeds)
+	if (newseed in SSplants.seeds)
 		seed = SSplants.seeds[newseed]
 	else
 		return
@@ -417,29 +417,29 @@
 	if (O.is_open_container())
 		return 0
 
-	if(O.edge && O.w_class < ITEM_SIZE_NORMAL && user.a_intent != I_HURT)
+	if (O.edge && O.w_class < ITEM_SIZE_NORMAL && user.a_intent != I_HURT)
 
-		if(!seed)
+		if (!seed)
 			to_chat(user, SPAN_WARNING("There is nothing to take a sample from in \the [src]."))
 			return
 
-		if(sampled)
+		if (sampled)
 			to_chat(user, SPAN_WARNING("There's no bits that can be used for a sampling left."))
 			return
 
-		if(dead)
+		if (dead)
 			to_chat(user, SPAN_WARNING("The plant is dead."))
 			return
 
 		var/needed_skill = seed.mysterious ? SKILL_TRAINED : SKILL_BASIC
-		if(prob(user.skill_fail_chance(SKILL_BOTANY, 90, needed_skill)))
+		if (prob(user.skill_fail_chance(SKILL_BOTANY, 90, needed_skill)))
 			to_chat(user, SPAN_WARNING("You failed to get a usable sample."))
 		else
 			// Create a sample.
 			seed.harvest(user,yield_mod,1)
 		health -= (rand(3,5)*10)
 
-		if(prob(30))
+		if (prob(30))
 			sampled = 1
 
 		// Bookkeeping.
@@ -449,18 +449,18 @@
 
 		return
 
-	else if(istype(O, /obj/item/reagent_containers/syringe))
+	else if (istype(O, /obj/item/reagent_containers/syringe))
 
 		var/obj/item/reagent_containers/syringe/S = O
 
 		if (S.mode == 1)
-			if(seed)
+			if (seed)
 				return ..()
 			else
 				to_chat(user, "There's no plant to inject.")
 				return 1
 		else
-			if(seed)
+			if (seed)
 				//Leaving this in in case we want to extract from plants later.
 				to_chat(user, "You can't get any extract out of this plant.")
 			else
@@ -473,12 +473,12 @@
 
 	else if (istype(O, /obj/item/material/minihoe))  // The minihoe
 
-		if(weedlevel > 0)
+		if (weedlevel > 0)
 			user.visible_message(SPAN_NOTICE("[user] starts uprooting the weeds."), SPAN_NOTICE("You remove the weeds from the [src]."))
 			weedlevel = 0
-			if(seed)
+			if (seed)
 				var/needed_skill = seed.mysterious ? SKILL_TRAINED : SKILL_BASIC
-				if(!user.skill_check(SKILL_BOTANY, needed_skill))
+				if (!user.skill_check(SKILL_BOTANY, needed_skill))
 					health -= rand(40,60)
 					check_health(1)
 		else
@@ -490,11 +490,11 @@
 
 		var/obj/item/storage/plants/S = O
 		for (var/obj/item/reagent_containers/food/snacks/grown/G in locate(user.x,user.y,user.z))
-			if(!S.can_be_inserted(G, user))
+			if (!S.can_be_inserted(G, user))
 				return
 			S.handle_item_insertion(G, 1)
 		for (var/obj/item/shellfish/G in locate(user.x,user.y,user.z))
-			if(!S.can_be_inserted(G, user))
+			if (!S.can_be_inserted(G, user))
 				return
 			S.handle_item_insertion(G, 1)
 
@@ -509,33 +509,33 @@
 		qdel(O)
 		check_health()
 
-	else if(mechanical && isWrench(O))
+	else if (mechanical && isWrench(O))
 
 		//If there's a connector here, the portable_atmospherics setup can handle it.
-		if(locate(/obj/machinery/atmospherics/portables_connector) in loc)
+		if (locate(/obj/machinery/atmospherics/portables_connector) in loc)
 			return ..()
 
 		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 		anchored = !anchored
 		to_chat(user, "You [anchored ? "wrench" : "unwrench"] \the [src].")
 
-	else if(O.force && seed)
+	else if (O.force && seed)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.visible_message(SPAN_DANGER("\The [seed.display_name] has been attacked by [user] with \the [O]!"))
 		playsound(get_turf(src), O.hitsound, 100, 1)
-		if(!dead)
+		if (!dead)
 			health -= O.force
 			check_health()
-	else if(mechanical)
+	else if (mechanical)
 		return component_attackby(O, user)
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/plant_seed(mob/user, obj/item/seeds/S)
 
-	if(seed)
+	if (seed)
 		to_chat(user, SPAN_WARNING("\The [src] already has seeds in it!"))
 		return
 
-	if(!S.seed)
+	if (!S.seed)
 		to_chat(user, "The packet seems to be empty. You throw it away.")
 		qdel(S)
 		return
@@ -551,7 +551,7 @@
 	lastcycle = world.time
 
 	var/needed_skill = seed.mysterious ? SKILL_TRAINED : SKILL_BASIC
-	if(prob(user.skill_fail_chance(SKILL_BOTANY, 40, needed_skill)))
+	if (prob(user.skill_fail_chance(SKILL_BOTANY, 40, needed_skill)))
 		dead = 1
 		health = 0
 
@@ -562,48 +562,48 @@
 	return FALSE // no hands
 
 /obj/machinery/portable_atmospherics/hydroponics/physical_attack_hand(mob/user)
-	if(harvest)
+	if (harvest)
 		harvest(user)
 		return TRUE
-	if(dead)
+	if (dead)
 		remove_dead(user)
 		return TRUE
 
 /obj/machinery/portable_atmospherics/hydroponics/examine(mob/user)
 	. = ..(user)
-	if(!seed)
+	if (!seed)
 		to_chat(user, "\The [src] is empty.")
 		return
 
 	to_chat(user, SPAN_NOTICE("\An [seed.display_name] is growing here."))
 
-	if(user.skill_check(SKILL_BOTANY, SKILL_BASIC))
-		if(weedlevel >= 5)
+	if (user.skill_check(SKILL_BOTANY, SKILL_BASIC))
+		if (weedlevel >= 5)
 			to_chat(user, "\The [src] is [SPAN_DANGER("infested with weeds")]!")
-		if(pestlevel >= 5)
+		if (pestlevel >= 5)
 			to_chat(user, "\The [src] is [SPAN_DANGER("infested with tiny worms")]!")
 
-		if(dead)
+		if (dead)
 			to_chat(user, SPAN_DANGER("The [seed.display_name] is dead."))
-		else if(health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
+		else if (health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
 			to_chat(user, "The [seed.display_name] looks [SPAN_DANGER("unhealthy")].")
 
-	if(mechanical && Adjacent(user))
+	if (mechanical && Adjacent(user))
 		var/turf/T = loc
 		var/datum/gas_mixture/environment
 
-		if(closed_system && (connected_port || holding))
+		if (closed_system && (connected_port || holding))
 			environment = air_contents
 
-		if(!environment)
-			if(istype(T))
+		if (!environment)
+			if (istype(T))
 				environment = T.return_air()
 
-		if(!environment) //We're in a crate or nullspace, bail out.
+		if (!environment) //We're in a crate or nullspace, bail out.
 			return
 
 		var/light_string
-		if(closed_system && mechanical)
+		if (closed_system && mechanical)
 			light_string = "that the internal lights are set to [tray_light] lumens"
 		else
 			var/light_available = T.get_lumcount() * 5
@@ -617,10 +617,10 @@
 	set name = "Toggle Tray Lid"
 	set category = "Object"
 	set src in view(1)
-	if(usr.incapacitated())
+	if (usr.incapacitated())
 		return
 
-	if(ishuman(usr) || istype(usr, /mob/living/silicon/robot))
+	if (ishuman(usr) || istype(usr, /mob/living/silicon/robot))
 		close_lid(usr)
 	return
 
@@ -642,8 +642,8 @@
 	check_health()
 
 /obj/machinery/portable_atmospherics/hydroponics/do_simple_ranged_interaction(mob/user)
-	if(dead)
+	if (dead)
 		remove_dead()
-	else if(harvest)
+	else if (harvest)
 		harvest()
 	return TRUE

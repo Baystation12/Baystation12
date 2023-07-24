@@ -62,10 +62,10 @@
 
 	var/input_stamp = input(user, "Choose a stamp to disguise as.", "Choose a stamp.") in show_stamps
 
-	if(user && (src in user.contents))
+	if (user && (src in user.contents))
 
 		var/obj/item/stamp/chosen_stamp = stamps[capitalize(input_stamp)]
 
-		if(chosen_stamp)
+		if (chosen_stamp)
 			SetName(chosen_stamp.name)
 			icon_state = chosen_stamp.icon_state

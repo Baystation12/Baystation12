@@ -254,7 +254,7 @@
 
 /obj/item/reagent_containers/food/drinks/glass2/coffeecup/custom/inherit_custom_item_data(datum/custom_item/citem)
 	. = ..()
-	if(citem.additional_data["base_name"])
+	if (citem.additional_data["base_name"])
 		base_name = citem.additional_data["base_name"] || base_name
 	custom_name = citem.item_name
 	custom_desc = citem.item_desc

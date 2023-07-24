@@ -29,20 +29,20 @@
 	return attack_hand(user)
 
 /obj/machinery/button/interface_interact(user)
-	if(!CanInteract(user, DefaultTopicState()))
+	if (!CanInteract(user, DefaultTopicState()))
 		return FALSE
-	if(istype(user, /mob/living/carbon))
+	if (istype(user, /mob/living/carbon))
 		playsound(src, "button", 60)
 	activate(user)
 	return TRUE
 
 /obj/machinery/button/emag_act()
-	if(req_access)
+	if (req_access)
 		req_access.Cut()
 
 /obj/machinery/button/proc/activate(mob/living/user)
 	set waitfor = FALSE
-	if(operating)
+	if (operating)
 		return
 
 	operating = TRUE
@@ -56,7 +56,7 @@
 	update_icon()
 
 /obj/machinery/button/on_update_icon()
-	if(operating)
+	if (operating)
 		icon_state = "launcheract"
 	else
 		icon_state = "launcherbtt"
@@ -73,7 +73,7 @@
 
 /singleton/public_access/public_variable/button_active/write_var(obj/machinery/button/button, new_val)
 	. = ..()
-	if(.)
+	if (.)
 		button.active = new_val
 
 /singleton/stock_part_preset/radio/basic_transmitter/button
@@ -94,14 +94,14 @@
 	icon_state = "doorctrl"
 
 /obj/machinery/button/alternate/on_update_icon()
-	if(operating)
+	if (operating)
 		icon_state = "doorctrl"
 	else
 		icon_state = "doorctrl2"
 
 //Toggle button determines icon state from active, not operating
 /obj/machinery/button/toggle/on_update_icon()
-	if(active)
+	if (active)
 		icon_state = "launcheract"
 	else
 		icon_state = "launcherbtt"
@@ -122,7 +122,7 @@
 	icon_state = "doorctrl"
 
 /obj/machinery/button/toggle/alternate/on_update_icon()
-	if(active)
+	if (active)
 		icon_state = "doorctrl"
 	else
 		icon_state = "doorctrl2"
@@ -144,7 +144,7 @@
 	stock_part_presets = list(/singleton/stock_part_preset/radio/basic_transmitter/button/door)
 
 /obj/machinery/button/alternate/door/on_update_icon()
-	if(operating)
+	if (operating)
 		icon_state = "[initial(icon_state)]1"
 	else
 		icon_state = "[initial(icon_state)]"
@@ -167,7 +167,7 @@
 	stock_part_presets = list(/singleton/stock_part_preset/radio/basic_transmitter/button/atmosia)
 
 /obj/machinery/button/toggle/valve/on_update_icon()
-	if(!active)
+	if (!active)
 		icon_state = "launcherbtt"
 	else
 		icon_state = "launcheract"

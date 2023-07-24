@@ -15,7 +15,7 @@
 	return
 
 /obj/item/assembly/shock_kit/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWrench(W) && !status)
+	if (isWrench(W) && !status)
 		part1.dropInto(loc)
 		part2.dropInto(loc)
 		part1.master = null
@@ -24,7 +24,7 @@
 		part2 = null
 		qdel(src)
 		return
-	if(isScrewdriver(W))
+	if (isScrewdriver(W))
 		status = !status
 		to_chat(user, SPAN_NOTICE("[src] is now [status ? "secured" : "unsecured"]!"))
 	add_fingerprint(user)
@@ -37,7 +37,7 @@
 	return
 
 /obj/item/assembly/shock_kit/receive_signal()
-	if(istype(loc, /obj/structure/bed/chair/e_chair))
+	if (istype(loc, /obj/structure/bed/chair/e_chair))
 		var/obj/structure/bed/chair/e_chair/C = loc
 		C.shock()
 	return

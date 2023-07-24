@@ -12,13 +12,13 @@
 // Predicates for the pick_area and pick_area_turf proc
 /proc/area_has_disposals_pipe(area/A)
 	for(var/turf/T in A)
-		if(has_disposals_pipe(T))
+		if (has_disposals_pipe(T))
 			return TRUE
 	return FALSE
 
 /proc/has_disposals_pipe(turf/T)
 	for(var/atom/A in T)
-		if(istype(A, /obj/structure/disposalpipe/segment))
+		if (istype(A, /obj/structure/disposalpipe/segment))
 			return TRUE
 	return FALSE
 
@@ -34,19 +34,19 @@
 	area_predicates += /proc/area_has_disposals_pipe
 
 	var/turf/containing_turf = pick_area_and_turf(area_predicates, list(/proc/has_disposals_pipe))
-	if(isnull(containing_turf))
+	if (isnull(containing_turf))
 		log_debug("Couldn't find a turf containing a disposals pipe. Aborting.")
 		kill()
 		return
 
 	for(var/atom/A in containing_turf)
-		if(istype(A, /obj/structure/disposalpipe/segment))
+		if (istype(A, /obj/structure/disposalpipe/segment))
 			bursting_pipe = A
 			// Subscribe to pipe destruction facts
 			GLOB.destroyed_event.register(A, src, .proc/pipe_destroyed)
 			break
 
-	if(isnull(bursting_pipe))
+	if (isnull(bursting_pipe))
 		log_debug("Couldn't find a pipe to blow up. Aborting.")
 		kill()
 		return
@@ -58,21 +58,21 @@
 	command_announcement.Announce("Pressure readings indicate an imminent explosion in \the [get_area(bursting_pipe)] disposal systems. Piping sections may be damaged.", "[location_name()] Atmospheric Monitoring System", zlevels = affecting_z)
 
 /datum/event/disposals_explosion/tick()
-	if(isnull(bursting_pipe))
+	if (isnull(bursting_pipe))
 		kill()
 		return
 
 	// Make some noise as a clue
-	if(prob(40) && bursting_pipe.get_current_health() < 5)
+	if (prob(40) && bursting_pipe.get_current_health() < 5)
 		playsound(bursting_pipe, 'sound/machines/hiss.ogg', 40, 0, 0)
 
 /datum/event/disposals_explosion/end()
-	if(isnull(bursting_pipe))
+	if (isnull(bursting_pipe))
 		return
 
 	GLOB.destroyed_event.unregister(bursting_pipe, src, .proc/pipe_destroyed)
 
-	if(bursting_pipe.get_current_health() < 5)
+	if (bursting_pipe.get_current_health() < 5)
 		// Make a disposals holder for the trash
 		var/obj/structure/disposalholder/trash_holder = new()
 

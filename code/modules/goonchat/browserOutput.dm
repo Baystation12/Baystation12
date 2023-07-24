@@ -71,7 +71,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 
 /datum/chatOutput/proc/load()
 	set waitfor = FALSE
-	if(!owner)
+	if (!owner)
 		return
 	var/datum/asset/stuff = get_asset_datum(/datum/asset/group/goonchat)
 	stuff.send(owner)
@@ -79,11 +79,11 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 
 
 /datum/chatOutput/Topic(href, list/href_list)
-	if(usr.client != owner)
+	if (usr.client != owner)
 		return TRUE
 	var/list/params = list() // Build proc parameters from the form "param[paramname]=thing"
 	for(var/key in href_list)
-		if(length(key) > 7 && findtext(key, "param")) // 7 is the amount of characters in the basic param key template.
+		if (length(key) > 7 && findtext(key, "param")) // 7 is the amount of characters in the basic param key template.
 			params[copytext(key, 7, -1)] = href_list[key]
 	var/data // Data to be sent back to the chat.
 	switch(href_list["proc"])
@@ -102,13 +102,13 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 		if ("reload")
 			loaded = FALSE
 			start()
-	if(data)
+	if (data)
 		ehjax_send(data = data)
 
 
 //Called on chat output done-loading by JS.
 /datum/chatOutput/proc/doneLoading()
-	if(loaded)
+	if (loaded)
 		return
 	loaded = TRUE
 	showChat()
@@ -148,7 +148,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 
 
 /datum/chatOutput/proc/ehjax_send(client/C = owner, window = "browseroutput", data)
-	if(islist(data))
+	if (islist(data))
 		data = json_encode(data)
 	send_output(C, "[data]", "[window]:ehjaxCallback")
 
@@ -165,27 +165,27 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 
 //Called by client, sent data to investigate (cookie history so far)
 /datum/chatOutput/proc/analyzeClientData(cookie = "")
-	if(world.time  >  next_time_to_clear)
+	if (world.time  >  next_time_to_clear)
 		next_time_to_clear = world.time + (3 SECONDS)
 		total_checks = 0
 	total_checks += 1
-	if(total_checks > SPAM_TRIGGER_AUTOMUTE)
+	if (total_checks > SPAM_TRIGGER_AUTOMUTE)
 		message_admins("[key_name(owner)] kicked for goonchat topic spam")
 		qdel(owner)
 		return
-	if(!cookie)
+	if (!cookie)
 		return
-	if(cookie != "none")
+	if (cookie != "none")
 		var/list/connData = json_decode(cookie)
 		if (connData && islist(connData) && length(connData) > 0 && connData["connData"])
 			connectionHistory = connData["connData"]
 			var/list/found = new()
-			if(length(connectionHistory) > MAX_COOKIE_LENGTH)
+			if (length(connectionHistory) > MAX_COOKIE_LENGTH)
 				message_admins("[key_name(src.owner)] was kicked for an invalid ban cookie)")
 				qdel(owner)
 				return
 			for(var/i in length(connectionHistory) to 1 step -1)
-				if(QDELETED(owner))
+				if (QDELETED(owner))
 					return
 				var/list/row = src.connectionHistory[i]
 				if (!row || length(row) < 3 || (!row["ckey"] || !row["compid"] || !row["ip"]))
@@ -213,12 +213,12 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 
 //Global chat procs
 /proc/to_chat_immediate(target, message, handle_whitespace = TRUE, trailing_newline = TRUE)
-	if(!target || !message)
+	if (!target || !message)
 		return
-	if(target == world)
+	if (target == world)
 		target = GLOB.clients
 	var/original_message = message
-	if(handle_whitespace)
+	if (handle_whitespace)
 		message = replacetext(message, "\n", "<br>")
 		message = replacetext(message, "\t", "[FOURSPACES][FOURSPACES]")
 	//Replace expanded \icon macro with icon2html
@@ -228,10 +228,10 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 	while(i.Find_char(message))
 		message = copytext(message,1,i.index)+icon2html(locate(i.group[1]), target, icon_state=i.group[2])+copytext(message,i.next)
 
-	if(trailing_newline)
+	if (trailing_newline)
 		message += "<br>"
 
-	if(islist(target))
+	if (islist(target))
 		// Do the double-encoding outside the loop to save nanoseconds
 		var/twiceEncoded = url_encode(url_encode(message))
 		for(var/I in target)
@@ -245,10 +245,10 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 
 			if (C.get_preference_value(/datum/client_preference/goonchat) != GLOB.PREF_YES)
 				continue
-			if(!C.chatOutput || C.chatOutput.broken) // A player who hasn't updated his skin file.
+			if (!C.chatOutput || C.chatOutput.broken) // A player who hasn't updated his skin file.
 				continue
 
-			if(!C.chatOutput.loaded)
+			if (!C.chatOutput.loaded)
 				//Client still loading, put their messages in a queue
 				C.chatOutput.messageQueue += message
 				continue
@@ -261,9 +261,9 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 		legacy_chat(C, original_message) //Send it to the old style output window.
 		if (C.get_preference_value(/datum/client_preference/goonchat) != GLOB.PREF_YES)
 			return
-		if(!C.chatOutput || C.chatOutput.broken) // A player who hasn't updated his skin file.
+		if (!C.chatOutput || C.chatOutput.broken) // A player who hasn't updated his skin file.
 			return
-		if(!C.chatOutput.loaded)
+		if (!C.chatOutput.loaded)
 			C.chatOutput.messageQueue += message //Client still loading, put their messages in a queue
 			return
 		// url_encode it TWICE, this way any UTF-8 characters are able to be decoded by the Javascript.
@@ -274,7 +274,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 	set waitfor = FALSE
 	if (!target)
 		return
-	if(Master.current_runlevel == RUNLEVEL_INIT || !SSchat?.initialized)
+	if (Master.current_runlevel == RUNLEVEL_INIT || !SSchat?.initialized)
 		to_chat_immediate(target, message, handle_whitespace, trailing_newline)
 		return
 	SSchat.queue(target, message, handle_whitespace, trailing_newline)

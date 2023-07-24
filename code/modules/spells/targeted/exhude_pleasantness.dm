@@ -13,7 +13,7 @@
 /spell/targeted/exhude_pleasantness/cast(list/targets, mob/user)
 	for(var/m in targets)
 		var/mob/living/L = m
-		if(L.mind && L.mind.special_role == ANTAG_SERVANT)
+		if (L.mind && L.mind.special_role == ANTAG_SERVANT)
 			to_chat(m, SPAN_NOTICE("\The [user] seems relatively harmless."))
 		else
 			to_chat(m, FONT_LARGE(SPAN_NOTICE("\The [user] [pick(possible_messages)]")))

@@ -10,7 +10,7 @@
 
 /obj/item/bodybag/cryobag/attack_self(mob/user)
 	var/obj/structure/closet/body_bag/cryobag/R = new /obj/structure/closet/body_bag/cryobag(user.loc)
-	if(stasis_power)
+	if (stasis_power)
 		R.stasis_power = stasis_power
 	R.update_icon()
 	R.add_fingerprint(user)
@@ -43,12 +43,12 @@
 	return ..()
 
 /obj/structure/closet/body_bag/cryobag/Entered(atom/movable/AM)
-	if(ishuman(AM))
+	if (ishuman(AM))
 		START_PROCESSING(SSobj, src)
 	..()
 
 /obj/structure/closet/body_bag/cryobag/Exited(atom/movable/AM)
-	if(ishuman(AM))
+	if (ishuman(AM))
 		STOP_PROCESSING(SSobj, src)
 	. = ..()
 
@@ -58,9 +58,9 @@
 	var/image/I = image(icon, "indicator[opened]")
 	I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 	var/maxstasis = initial(stasis_power)
-	if(stasis_power > 0.5 * maxstasis)
+	if (stasis_power > 0.5 * maxstasis)
 		I.color = COLOR_LIME
-	else if(stasis_power)
+	else if (stasis_power)
 		I.color = COLOR_YELLOW
 	else
 		I.color = COLOR_RED
@@ -71,35 +71,35 @@
 
 /obj/structure/closet/body_bag/cryobag/fold(user)
 	var/obj/item/bodybag/cryobag/folded = ..()
-	if(istype(folded))
+	if (istype(folded))
 		folded.stasis_power = stasis_power
 		folded.color = color_saturation(get_saturation())
 
 /obj/structure/closet/body_bag/cryobag/Process()
-	if(stasis_power < 2)
+	if (stasis_power < 2)
 		return PROCESS_KILL
 	var/mob/living/carbon/human/H = locate() in src
-	if(!H)
+	if (!H)
 		return PROCESS_KILL
 	degradation_time--
-	if(degradation_time < 0)
+	if (degradation_time < 0)
 		degradation_time = initial(degradation_time)
 		stasis_power = round(0.75 * stasis_power)
 		animate(src, color = color_saturation(get_saturation()), time = 10)
 		update_icon()
 
-	if(H.stasis_sources[STASIS_CRYOBAG] != stasis_power)
+	if (H.stasis_sources[STASIS_CRYOBAG] != stasis_power)
 		H.SetStasis(stasis_power, STASIS_CRYOBAG)
 
 /obj/structure/closet/body_bag/cryobag/return_air() //Used to make stasis bags protect from vacuum.
-	if(airtank)
+	if (airtank)
 		return airtank
 	..()
 
 /obj/structure/closet/body_bag/cryobag/examine(mob/user)
 	. = ..()
 	to_chat(user,"The stasis meter shows '[stasis_power]x'.")
-	if(Adjacent(user)) //The bag's rather thick and opaque from a distance.
+	if (Adjacent(user)) //The bag's rather thick and opaque from a distance.
 		to_chat(user, SPAN_INFO("You peer into \the [src]."))
 		for(var/mob/living/L in contents)
 			L.examine(arglist(args))

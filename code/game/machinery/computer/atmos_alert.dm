@@ -40,15 +40,15 @@ var/global/list/minor_air_alarms = list()
 	data["minor_alarms"] = minor_alarms
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		ui = new(user, src, ui_key, "atmos_alert.tmpl", src.name, 500, 500)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
 
 /obj/machinery/computer/atmos_alert/on_update_icon()
-	if(operable())
-		if(GLOB.atmosphere_alarm.has_major_alarms(get_z(src)))
+	if (operable())
+		if (GLOB.atmosphere_alarm.has_major_alarms(get_z(src)))
 			icon_screen = "alert:2"
 		else if (GLOB.atmosphere_alarm.has_minor_alarms(get_z(src)))
 			icon_screen = "alert:1"
@@ -57,12 +57,12 @@ var/global/list/minor_air_alarms = list()
 	..()
 
 /obj/machinery/computer/atmos_alert/OnTopic(user, href_list)
-	if(href_list["clear_alarm"])
+	if (href_list["clear_alarm"])
 		var/datum/alarm/alarm = locate(href_list["clear_alarm"]) in GLOB.atmosphere_alarm.alarms
-		if(alarm)
+		if (alarm)
 			for(var/datum/alarm_source/alarm_source in alarm.sources)
 				var/obj/machinery/alarm/air_alarm = alarm_source.source
-				if(istype(air_alarm))
+				if (istype(air_alarm))
 					var/list/new_ref = list("atmos_reset" = 1)
 					air_alarm.Topic(air_alarm, new_ref, state = air_alarm_topic)
 		return TOPIC_REFRESH

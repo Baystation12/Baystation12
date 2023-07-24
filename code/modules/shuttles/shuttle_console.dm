@@ -20,26 +20,26 @@
 /obj/machinery/computer/shuttle_control/proc/get_ui_data(datum/shuttle/autodock/shuttle)
 	var/shuttle_state
 	switch(shuttle.moving_status)
-		if(SHUTTLE_IDLE) shuttle_state = "idle"
-		if(SHUTTLE_WARMUP) shuttle_state = "warmup"
-		if(SHUTTLE_INTRANSIT) shuttle_state = "in_transit"
+		if (SHUTTLE_IDLE) shuttle_state = "idle"
+		if (SHUTTLE_WARMUP) shuttle_state = "warmup"
+		if (SHUTTLE_INTRANSIT) shuttle_state = "in_transit"
 
 	var/shuttle_status
 	switch (shuttle.process_state)
-		if(IDLE_STATE)
+		if (IDLE_STATE)
 			var/cannot_depart = shuttle.current_location.cannot_depart(shuttle)
 			if (shuttle.in_use)
 				shuttle_status = "Busy."
-			else if(cannot_depart)
+			else if (cannot_depart)
 				shuttle_status = cannot_depart
 			else
 				shuttle_status = "Standing-by at \the [shuttle.get_location_name()]."
 
-		if(WAIT_LAUNCH, FORCE_LAUNCH)
+		if (WAIT_LAUNCH, FORCE_LAUNCH)
 			shuttle_status = "Shuttle has received command and will depart shortly."
-		if(WAIT_ARRIVE)
+		if (WAIT_ARRIVE)
 			shuttle_status = "Proceeding to \the [shuttle.get_destination_name()]."
-		if(WAIT_FINISH)
+		if (WAIT_FINISH)
 			shuttle_status = "Arriving at destination now."
 
 	return list(
@@ -58,35 +58,35 @@
 // This is a subset of the actual checks; contains those that give messages to the user.
 /obj/machinery/computer/shuttle_control/proc/can_move(datum/shuttle/autodock/shuttle, user)
 	var/cannot_depart = shuttle.current_location.cannot_depart(shuttle)
-	if(cannot_depart)
+	if (cannot_depart)
 		to_chat(user, SPAN_WARNING(cannot_depart))
 		return FALSE
-	if(!shuttle.next_location.is_valid(shuttle))
+	if (!shuttle.next_location.is_valid(shuttle))
 		to_chat(user, SPAN_WARNING("Destination zone is invalid or obstructed."))
 		return FALSE
 	return TRUE
 
 /obj/machinery/computer/shuttle_control/proc/handle_topic_href(datum/shuttle/autodock/shuttle, list/href_list, user)
-	if(!istype(shuttle))
+	if (!istype(shuttle))
 		return TOPIC_NOACTION
 
-	if(href_list["move"])
-		if(can_move(shuttle, user))
+	if (href_list["move"])
+		if (can_move(shuttle, user))
 			shuttle.launch(src)
 			return TOPIC_REFRESH
 		return TOPIC_HANDLED
 
-	if(href_list["force"])
-		if(can_move(shuttle, user))
+	if (href_list["force"])
+		if (can_move(shuttle, user))
 			shuttle.force_launch(src)
 			return TOPIC_REFRESH
 		return TOPIC_HANDLED
 
-	if(href_list["cancel"])
+	if (href_list["cancel"])
 		shuttle.cancel_launch(src)
 		return TOPIC_REFRESH
 
-	if(href_list["set_codes"])
+	if (href_list["set_codes"])
 		var/newcode = input("Input new docking codes", "Docking codes", shuttle.docking_codes) as text|null
 		if (newcode && CanInteract(usr, GLOB.default_state))
 			shuttle.set_docking_codes(uppertext(newcode))
@@ -101,7 +101,7 @@
 	var/list/data = get_ui_data(shuttle)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		ui = new(user, src, ui_key, ui_template, "[shuttle_tag] Shuttle Control", 470, 450)
 		ui.set_initial_data(data)
 		ui.open()

@@ -48,7 +48,7 @@
 	var/hardware_color
 
 /obj/item/pickaxe/Initialize()
-	if(build_from_parts)
+	if (build_from_parts)
 		icon_state = "pick_hardware"
 		color = hardware_color
 		overlays += overlay_image(icon, "pick_handle", flags=RESET_COLOR)
@@ -192,13 +192,13 @@
 	update_icon()
 
 /obj/item/stack/flag/attackby(obj/item/W, mob/user)
-	if(upright)
+	if (upright)
 		attack_hand(user)
 		return
 	return ..()
 
 /obj/item/stack/flag/attack_hand(mob/user)
-	if(upright)
+	if (upright)
 		knock_down()
 		user.visible_message("\The [user] knocks down \the [singular_name].")
 		return
@@ -207,19 +207,19 @@
 /obj/item/stack/flag/attack_self(mob/user)
 	var/turf/T = get_turf(src)
 
-	if(istype(T, /turf/space) || istype(T, /turf/simulated/open))
+	if (istype(T, /turf/space) || istype(T, /turf/simulated/open))
 		to_chat(user, SPAN_WARNING("There's no solid surface to plant \the [singular_name] on."))
 		return
 
 	for(var/obj/item/stack/flag/F in T)
-		if(F.upright)
+		if (F.upright)
 			to_chat(user, SPAN_WARNING("\The [F] is already planted here."))
 			return
 
-	if(use(1)) // Don't skip use() checks even if you only need one! Stacks with the amount of 0 are possible, e.g. on synthetics!
+	if (use(1)) // Don't skip use() checks even if you only need one! Stacks with the amount of 0 are possible, e.g. on synthetics!
 		var/obj/item/stack/flag/newflag = new src.type(T, 1)
 		newflag.set_up()
-		if(istype(T, /turf/simulated/floor/asteroid) || istype(T, /turf/simulated/floor/exoplanet))
+		if (istype(T, /turf/simulated/floor/asteroid) || istype(T, /turf/simulated/floor/exoplanet))
 			user.visible_message("\The [user] plants \the [newflag.singular_name] firmly in the ground.")
 		else
 			user.visible_message("\The [user] attaches \the [newflag.singular_name] firmly to the ground.")
@@ -231,7 +231,7 @@
 
 /obj/item/stack/flag/on_update_icon()
 	overlays.Cut()
-	if(upright)
+	if (upright)
 		pixel_x = 0
 		pixel_y = 0
 		icon_state = "base"

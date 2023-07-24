@@ -71,7 +71,7 @@
  */
 /singleton/crafting_stage/proc/get_next_stage(obj/item/trigger)
 	for(var/singleton/crafting_stage/next_stage in next_stages)
-		if(next_stage.is_appropriate_tool(trigger))
+		if (next_stage.is_appropriate_tool(trigger))
 			return next_stage
 
 
@@ -89,7 +89,7 @@
  */
 /singleton/crafting_stage/proc/progress_to(obj/item/thing, mob/user, obj/item/target)
 	. = is_appropriate_tool(thing, user) && consume(user, thing, target)
-	if(.)
+	if (.)
 		on_progress(user)
 
 
@@ -120,9 +120,9 @@
  */
 /singleton/crafting_stage/proc/consume(mob/user, obj/item/thing, obj/item/target)
 	. = !consume_completion_trigger || (user.unEquip(thing) && thing.forceMove(target))
-	if(. && stack_consume_amount > 0)
+	if (. && stack_consume_amount > 0)
 		var/obj/item/stack/stack = thing
-		if(!istype(stack) || stack.amount < stack_consume_amount)
+		if (!istype(stack) || stack.amount < stack_consume_amount)
 			on_insufficient_material(user)
 			return FALSE
 		stack.use(stack_consume_amount)
@@ -138,7 +138,7 @@
  * Has no return value.
  */
 /singleton/crafting_stage/proc/on_insufficient_material(mob/user, obj/item/stack/thing)
-	if(istype(thing))
+	if (istype(thing))
 		USE_FEEDBACK_STACK_NOT_ENOUGH(thing, stack_consume_amount, "to complete this task.")
 
 
@@ -153,7 +153,7 @@
  * Has no return value.
  */
 /singleton/crafting_stage/proc/on_progress(mob/user)
-	if(progress_message)
+	if (progress_message)
 		to_chat(user, SPAN_NOTICE(progress_message))
 
 
@@ -251,6 +251,6 @@
 
 /singleton/crafting_stage/empty_storage/can_begin_with(obj/item/thing)
 	. = ..()
-	if(. && istype(thing, /obj/item/storage))
+	if (. && istype(thing, /obj/item/storage))
 		var/obj/item/storage/box = thing
 		. = (length(box.contents) == 0)

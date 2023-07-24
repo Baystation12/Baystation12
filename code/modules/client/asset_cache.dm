@@ -26,10 +26,10 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 //This proc sends the asset to the client, but only if it needs it.
 //This proc blocks(sleeps) unless verify is set to false
 /proc/send_asset(client/client, asset_name, verify = TRUE, check_cache = TRUE)
-	if(!istype(client))
-		if(ismob(client))
+	if (!istype(client))
+		if (ismob(client))
 			var/mob/M = client
-			if(M.client)
+			if (M.client)
 				client = M.client
 
 			else
@@ -38,12 +38,12 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		else
 			return 0
 
-	if(check_cache && (client.cache.Find(asset_name) || client.sending.Find(asset_name)))
+	if (check_cache && (client.cache.Find(asset_name) || client.sending.Find(asset_name)))
 		return 0
 
 	var/singleton/asset_cache/asset_cache = GET_SINGLETON(/singleton/asset_cache)
 	send_rsc(client, asset_cache.cache[asset_name], asset_name)
-	if(!verify || !winexists(client, "asset_cache_browser")) // Can't access the asset cache browser, rip.
+	if (!verify || !winexists(client, "asset_cache_browser")) // Can't access the asset cache browser, rip.
 		if (client)
 			client.cache += asset_name
 		return 1
@@ -61,7 +61,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		sleep(1) // Lock up the caller until this is received.
 		t++
 
-	if(client)
+	if (client)
 		client.sending -= asset_name
 		client.cache |= asset_name
 		client.completed_asset_jobs -= job
@@ -70,10 +70,10 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 //This proc blocks(sleeps) unless verify is set to false
 /proc/send_asset_list(client/client, list/asset_list, verify = TRUE)
-	if(!istype(client))
-		if(ismob(client))
+	if (!istype(client))
+		if (ismob(client))
 			var/mob/M = client
-			if(M.client)
+			if (M.client)
 				client = M.client
 
 			else
@@ -83,7 +83,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 			return 0
 
 	var/list/unreceived = asset_list - (client.cache + client.sending)
-	if(!unreceived || !length(unreceived))
+	if (!unreceived || !length(unreceived))
 		return 0
 	if (length(unreceived) >= ASSET_CACHE_TELL_CLIENT_AMOUNT)
 		to_chat(client, "Sending Resources...")
@@ -92,7 +92,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		if (asset in asset_cache.cache)
 			send_rsc(client, asset_cache.cache[asset], asset)
 
-	if(!verify || !winexists(client, "asset_cache_browser")) // Can't access the asset cache browser, rip.
+	if (!verify || !winexists(client, "asset_cache_browser")) // Can't access the asset cache browser, rip.
 		if (client)
 			client.cache += unreceived
 		return 1
@@ -109,7 +109,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		sleep(1) // Lock up the caller until this is received.
 		t++
 
-	if(client)
+	if (client)
 		client.sending -= unreceived
 		client.cache |= unreceived
 		client.completed_asset_jobs -= job
@@ -205,15 +205,15 @@ var/global/list/asset_datums = list()
 	for (var/path in common_dirs)
 		var/list/filenames = flist(path)
 		for(var/filename in filenames)
-			if(copytext(filename, -1) != "/") // Ignore directories.
-				if(fexists(path + filename))
+			if (copytext(filename, -1) != "/") // Ignore directories.
+				if (fexists(path + filename))
 					common[filename] = fcopy_rsc(path + filename)
 					register_asset(filename, common[filename])
 	for (var/path in uncommon_dirs)
 		var/list/filenames = flist(path)
 		for(var/filename in filenames)
-			if(copytext(filename, -1) != "/") // Ignore directories.
-				if(fexists(path + filename))
+			if (copytext(filename, -1) != "/") // Ignore directories.
+				if (fexists(path + filename))
 					register_asset(filename, fcopy_rsc(path + filename))
 
 	var/list/mapnames = list()
@@ -222,14 +222,14 @@ var/global/list/asset_datums = list()
 
 	var/list/filenames = flist(MAP_IMAGE_PATH)
 	for(var/filename in filenames)
-		if(copytext(filename, -1) != "/") // Ignore directories.
+		if (copytext(filename, -1) != "/") // Ignore directories.
 			var/file_path = MAP_IMAGE_PATH + filename
-			if((filename in mapnames) && fexists(file_path))
+			if ((filename in mapnames) && fexists(file_path))
 				common[filename] = fcopy_rsc(file_path)
 				register_asset(filename, common[filename])
 
 /datum/asset/nanoui/send(client, uncommon)
-	if(!islist(uncommon))
+	if (!islist(uncommon))
 		uncommon = list(uncommon)
 
 	send_asset_list(client, uncommon, FALSE)

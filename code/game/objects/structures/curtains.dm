@@ -16,7 +16,7 @@
 	opacity = 0
 
 /obj/structure/curtain/bullet_act(obj/item/projectile/P, def_zone)
-	if(!P.nodamage)
+	if (!P.nodamage)
 		visible_message(SPAN_WARNING("[P] tears [src] down!"))
 		qdel(src)
 	else
@@ -29,7 +29,7 @@
 
 /obj/structure/curtain/proc/toggle()
 	set_opacity(!opacity)
-	if(opacity)
+	if (opacity)
 		icon_state = "closed"
 		layer = ABOVE_HUMAN_LAYER
 	else

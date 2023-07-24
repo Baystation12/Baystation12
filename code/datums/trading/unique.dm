@@ -8,17 +8,17 @@
 	wanted_items = list()
 	for(var/type in possible_wanted_items)
 		var/status = possible_wanted_items[type]
-		if(status & TRADER_THIS_TYPE)
+		if (status & TRADER_THIS_TYPE)
 			wanted_items += type
-		if(status & TRADER_SUBTYPES_ONLY)
+		if (status & TRADER_SUBTYPES_ONLY)
 			wanted_items += subtypesof(type)
-		if(status & TRADER_BLACKLIST)
+		if (status & TRADER_BLACKLIST)
 			wanted_items -= type
-		if(status & TRADER_BLACKLIST_SUB)
+		if (status & TRADER_BLACKLIST_SUB)
 			wanted_items -= subtypesof(type)
 
 /datum/trader/ship/unique/tick()
-	if(prob(-disposition) || refuse_comms)
+	if (prob(-disposition) || refuse_comms)
 		duration_of_stay--
 	return --duration_of_stay > 0
 

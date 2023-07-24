@@ -10,9 +10,9 @@
 		to_chat(src, SPAN_WARNING("Your mobtype cannot use aiming overlays. If you feel this is in error, contact a dev."))
 		return
 
-	if(isliving(src)) //Needs to be a mob verb to prevent error messages when using hotkeys
+	if (isliving(src)) //Needs to be a mob verb to prevent error messages when using hotkeys
 		var/mob/living/M = src
-		if(!M.aiming)
+		if (!M.aiming)
 			M.aiming = new(src)
 		M.aiming.toggle_active()
 	else
@@ -20,20 +20,20 @@
 	return
 
 /mob/living/proc/stop_aiming(obj/item/thing, no_message = 0)
-	if(!aiming)
+	if (!aiming)
 		aiming = new(src)
-	if(thing && aiming.aiming_with != thing)
+	if (thing && aiming.aiming_with != thing)
 		return
 	aiming.cancel_aiming(no_message)
 
 /mob/living/death(gibbed, deathmessage="seizes up and falls limp...", show_dead_message)
 	. = ..(gibbed, deathmessage, show_dead_message)
-	if(.)
+	if (.)
 		stop_aiming(no_message=1)
 
 /mob/living/UpdateLyingBuckledAndVerbStatus()
 	..()
-	if(lying)
+	if (lying)
 		stop_aiming(no_message=1)
 
 /mob/living/Weaken(amount)
@@ -41,7 +41,7 @@
 	..()
 
 /mob/living/Destroy()
-	if(aiming)
+	if (aiming)
 		qdel(aiming)
 		aiming = null
 	aimed.Cut()

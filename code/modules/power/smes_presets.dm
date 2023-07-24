@@ -14,13 +14,13 @@
 
 /obj/machinery/power/smes/buildable/preset/Initialize()
 	. = ..()
-	if(_input_maxed)
+	if (_input_maxed)
 		input_level = input_level_max
-	if(_output_maxed)
+	if (_output_maxed)
 		output_level = output_level_max
 	input_attempt = _input_on
 	output_attempt = _output_on
-	if(_fully_charged)
+	if (_fully_charged)
 		charge = capacity
 
 /obj/machinery/power/smes/buildable/preset/admin
@@ -32,4 +32,3 @@
 	_input_on = TRUE
 	_output_on = TRUE
 	_fully_charged = TRUE
-	

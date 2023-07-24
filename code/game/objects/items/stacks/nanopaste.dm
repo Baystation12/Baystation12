@@ -28,18 +28,18 @@
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/S = H.get_organ(user.zone_sel.selecting)
 
-		if(!S)
+		if (!S)
 			to_chat(user, SPAN_WARNING("\The [M] is missing that body part."))
 			return
 
-		if(BP_IS_BRITTLE(S))
+		if (BP_IS_BRITTLE(S))
 			to_chat(user, SPAN_WARNING("\The [M]'s [S.name] is hard and brittle - \the [src] cannot repair it."))
 			return
 
-		if(S && BP_IS_ROBOTIC(S) && S.hatch_state == HATCH_OPENED)
-			if(!S.get_damage())
+		if (S && BP_IS_ROBOTIC(S) && S.hatch_state == HATCH_OPENED)
+			if (!S.get_damage())
 				to_chat(user, SPAN_NOTICE("Nothing to fix here."))
-			else if(can_use(1))
+			else if (can_use(1))
 				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 				S.heal_damage(15, 15, robo_repair = 1)
 				H.updatehealth()

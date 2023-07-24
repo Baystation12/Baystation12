@@ -31,18 +31,18 @@ SUBSYSTEM_DEF(processing)
 	while(length(current_run))
 		var/datum/thing = current_run[length(current_run)]
 		LIST_DEC(current_run)
-		if(QDELETED(thing) || (call(thing, process_proc)(wait, times_fired, src) == PROCESS_KILL))
-			if(thing)
+		if (QDELETED(thing) || (call(thing, process_proc)(wait, times_fired, src) == PROCESS_KILL))
+			if (thing)
 				thing.is_processing = null
 			processing -= thing
 		if (MC_TICK_CHECK)
 			return
 
 /datum/controller/subsystem/processing/proc/toggle_debug()
-	if(!check_rights(R_DEBUG))
+	if (!check_rights(R_DEBUG))
 		return
 
-	if(debug_original_process_proc)
+	if (debug_original_process_proc)
 		process_proc = debug_original_process_proc
 		debug_original_process_proc = null
 	else
@@ -65,7 +65,7 @@ SUBSYSTEM_DEF(processing)
 
 	var/tick_time = world.time - start_tick
 	var/tick_use_limit = world.tick_usage - start_tick_usage - 100 // Current tick use - starting tick use - 100% (a full tick excess)
-	if(tick_time > 0)
+	if (tick_time > 0)
 		crash_with("[log_info_line(subsystem.debug_last_thing)] slept during processing. Spent [tick_time] tick\s.")
-	if(tick_use_limit > 0)
+	if (tick_use_limit > 0)
 		crash_with("[log_info_line(subsystem.debug_last_thing)] took longer than a tick to process. Exceeded with [tick_use_limit]%")

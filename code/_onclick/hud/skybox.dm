@@ -10,14 +10,14 @@
 	var/obj/skybox/skybox
 
 /client/proc/update_skybox(rebuild)
-	if(!skybox)
+	if (!skybox)
 		skybox = new()
 		screen += skybox
 		rebuild = 1
 
 	var/turf/T = get_turf(eye)
-	if(T)
-		if(rebuild)
+	if (T)
+		if (rebuild)
 			skybox.overlays.Cut()
 			skybox.overlays += SSskybox.get_skybox(T.z)
 			screen |= skybox
@@ -30,11 +30,11 @@
 /mob/Move()
 	var/old_z = get_z(src)
 	. = ..()
-	if(. && client)
+	if (. && client)
 		client.update_skybox(old_z != get_z(src))
 
 /mob/forceMove()
 	var/old_z = get_z(src)
 	. = ..()
-	if(. && client)
+	if (. && client)
 		client.update_skybox(old_z != get_z(src))

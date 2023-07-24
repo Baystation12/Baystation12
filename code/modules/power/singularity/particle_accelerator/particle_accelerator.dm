@@ -77,7 +77,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 
 /obj/structure/particle_accelerator/Destroy()
 	construction_state = 0
-	if(master)
+	if (master)
 		master.part_scan()
 	. = ..()
 
@@ -94,14 +94,14 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 /obj/structure/particle_accelerator/examine(mob/user)
 	. = ..()
 	switch(construction_state)
-		if(0)
+		if (0)
 			to_chat(user, "Looks like it's not attached to the flooring")
-		if(1)
+		if (1)
 			to_chat(user, "It is missing some cables")
-		if(2)
+		if (2)
 			to_chat(user, "The panel is open")
-		if(3)
-			if(powered)
+		if (3)
+			if (powered)
 				to_chat(user, desc_holder)
 			else
 				to_chat(user, "\The [src] is assembled")
@@ -183,20 +183,20 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 
 /obj/structure/particle_accelerator/Move()
 	..()
-	if(master && master.active)
+	if (master && master.active)
 		master.toggle_power()
 		investigate_log("was moved whilst active; it [SPAN_COLOR("red", "powered down")].","singulo")
 
 /obj/structure/particle_accelerator/ex_act(severity)
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			qdel(src)
 			return
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
 				return
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			if (prob(25))
 				qdel(src)
 				return
@@ -205,39 +205,39 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 
 /obj/structure/particle_accelerator/on_update_icon()
 	switch(construction_state)
-		if(0,1)
+		if (0,1)
 			icon_state="[reference]"
-		if(2)
+		if (2)
 			icon_state="[reference]w"
-		if(3)
-			if(powered)
+		if (3)
+			if (powered)
 				icon_state="[reference]p[strength]"
 			else
 				icon_state="[reference]c"
 	return
 
 /obj/structure/particle_accelerator/proc/update_state()
-	if(master)
+	if (master)
 		master.update_state()
 		return 0
 
 
 /obj/structure/particle_accelerator/proc/report_ready(obj/O)
-	if(O && (O == master))
-		if(construction_state >= 3)
+	if (O && (O == master))
+		if (construction_state >= 3)
 			return 1
 	return 0
 
 
 /obj/structure/particle_accelerator/proc/report_master()
-	if(master)
+	if (master)
 		return master
 	return 0
 
 
 /obj/structure/particle_accelerator/proc/connect_master(obj/O)
-	if(O && istype(O,/obj/machinery/particle_accelerator/control_box))
-		if(O.dir == src.dir)
+	if (O && istype(O,/obj/machinery/particle_accelerator/control_box))
+		if (O.dir == src.dir)
 			master = O
 			return 1
 	return 0
@@ -266,14 +266,14 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 /obj/machinery/particle_accelerator/examine(mob/user)
 	. = ..()
 	switch(construction_state)
-		if(0)
+		if (0)
 			to_chat(user, "Looks like it's not attached to the flooring")
-		if(1)
+		if (1)
 			to_chat(user, "It is missing some cables")
-		if(2)
+		if (2)
 			to_chat(user, "The panel is open")
-		if(3)
-			if(powered)
+		if (3)
+			if (powered)
 				to_chat(user, desc_holder)
 			else
 				to_chat(user, "\The [src] is assembled")
@@ -288,14 +288,14 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 
 /obj/machinery/particle_accelerator/ex_act(severity)
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			qdel(src)
 			return
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
 				return
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			if (prob(25))
 				qdel(src)
 				return
@@ -308,55 +308,55 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 
 
 /obj/machinery/particle_accelerator/proc/process_tool_hit(obj/O, mob/user)
-	if(!(O) || !(user))
+	if (!(O) || !(user))
 		return 0
-	if(!ismob(user) || !isobj(O))
+	if (!ismob(user) || !isobj(O))
 		return 0
 	var/temp_state = src.construction_state
 	switch(src.construction_state)//TODO:Might be more interesting to have it need several parts rather than a single list of steps
-		if(0)
-			if(isWrench(O))
+		if (0)
+			if (isWrench(O))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 				src.anchored = TRUE
 				user.visible_message("[user.name] secures the [src.name] to the floor.", \
 					"You secure the external bolts.")
 				temp_state++
-		if(1)
-			if(isWrench(O))
+		if (1)
+			if (isWrench(O))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 				src.anchored = FALSE
 				user.visible_message("[user.name] detaches the [src.name] from the floor.", \
 					"You remove the external bolts.")
 				temp_state--
-			else if(isCoil(O))
-				if(O:use(1))
+			else if (isCoil(O))
+				if (O:use(1))
 					user.visible_message("[user.name] adds wires to the [src.name].", \
 						"You add some wires.")
 					temp_state++
-		if(2)
-			if(isWirecutter(O))//TODO:Shock user if its on?
+		if (2)
+			if (isWirecutter(O))//TODO:Shock user if its on?
 				user.visible_message("[user.name] removes some wires from the [src.name].", \
 					"You remove some wires.")
 				temp_state--
-			else if(isScrewdriver(O))
+			else if (isScrewdriver(O))
 				user.visible_message("[user.name] closes the [src.name]'s access panel.", \
 					"You close the access panel.")
 				temp_state++
-		if(3)
-			if(isScrewdriver(O))
+		if (3)
+			if (isScrewdriver(O))
 				user.visible_message("[user.name] opens the [src.name]'s access panel.", \
 					"You open the access panel.")
 				temp_state--
 				active = 0
-	if(temp_state == src.construction_state)//Nothing changed
+	if (temp_state == src.construction_state)//Nothing changed
 		return 0
 	else
-		if(src.construction_state < 3)//Was taken apart, update state
+		if (src.construction_state < 3)//Was taken apart, update state
 			update_state()
-			if(use_power)
+			if (use_power)
 				update_use_power(POWER_USE_OFF)
 		src.construction_state = temp_state
-		if(src.construction_state >= 3)
+		if (src.construction_state >= 3)
 			update_use_power(POWER_USE_IDLE)
 		update_icon()
 		return 1

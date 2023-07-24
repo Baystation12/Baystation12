@@ -18,5 +18,5 @@ GLOBAL_DATUM_INIT(life_event, /singleton/observ/life, new)
 
 /mob/add_to_living_mob_list()
 	. = ..()
-	if(.)
+	if (.)
 		GLOB.life_event.raise_event(src)

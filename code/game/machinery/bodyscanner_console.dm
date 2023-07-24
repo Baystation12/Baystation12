@@ -23,7 +23,7 @@
 	FindScanner()
 
 /obj/machinery/body_scanconsole/on_update_icon()
-	if(inoperable())
+	if (inoperable())
 		icon_state = "body_scannerconsole-p"
 	else
 		icon_state = initial(icon_state)
@@ -31,16 +31,16 @@
 /obj/machinery/body_scanconsole/ex_act(severity)
 
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			qdel(src)
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
 
 /obj/machinery/body_scanconsole/proc/FindScanner()
 	for(var/D in GLOB.cardinal)
 		connected = locate(/obj/machinery/bodyscanner, get_step(src, D))
-		if(connected)
+		if (connected)
 			break
 		GLOB.destroyed_event.register(connected, src, .proc/unlink_scanner)
 
@@ -56,7 +56,7 @@
 	return !!length(connected_displays)
 
 /obj/machinery/body_scanconsole/attack_hand(mob/user)
-	if(!connected || connected.inoperable())
+	if (!connected || connected.inoperable())
 		to_chat(user, SPAN_WARNING("This console is not connected to a functioning body scanner."))
 		return TRUE
 	return ..()
@@ -66,21 +66,21 @@
 	return TRUE
 
 /obj/machinery/body_scanconsole/CanUseTopic(mob/user)
-	if(!connected)
+	if (!connected)
 		return STATUS_CLOSE
 	return ..()
 
 /obj/machinery/body_scanconsole/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	if(connected && connected.occupant)
+	if (connected && connected.occupant)
 		data["scanEnabled"] = TRUE
-		if(ishuman(connected.occupant))
+		if (ishuman(connected.occupant))
 			data["isCompatible"] = TRUE
 		else
 			data["isCompatible"] = FALSE
 	else
 		data["scanEnabled"] = FALSE
 
-	if(!data["scan"])
+	if (!data["scan"])
 		data["html_scan_header"] = "<center>No scan loaded.</center>"
 		data["html_scan_health"] = "&nbsp;"
 		data["html_scan_body"] = "&nbsp;"
@@ -90,13 +90,13 @@
 		data["html_scan_body"] = display_medical_data_body(data["scan"], user.get_skill_value(SKILL_MEDICAL))
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		ui = new(user, src, ui_key, "body_scanner.tmpl", "Body Scanner", 600, 800)
 		ui.set_initial_data(data)
 		ui.open()
 
 /obj/machinery/body_scanconsole/OnTopic(mob/user, href_list)
-	if(href_list["scan"])
+	if (href_list["scan"])
 		if (!connected.occupant)
 			to_chat(user, SPAN_WARNING("[icon2html(src, user)]The body scanner is empty."))
 			return TOPIC_REFRESH
@@ -128,8 +128,8 @@
 		new /obj/item/paper/bodyscan(loc, "Printout error.", "Body scan report - [stored_scan_subject]", scan.Copy())
 		return TOPIC_REFRESH
 
-	if(href_list["push"])
-		if(!length(connected_displays) && !FindDisplays())
+	if (href_list["push"])
+		if (!length(connected_displays) && !FindDisplays())
 			to_chat(user, SPAN_WARNING("[icon2html(src, user)]Error: No configured displays detected."))
 			return TOPIC_REFRESH
 		for(var/obj/machinery/body_scan_display/D in connected_displays)
@@ -141,7 +141,7 @@
 		)
 		return TOPIC_REFRESH
 
-	if(href_list["erase"])
+	if (href_list["erase"])
 		data["scan"] = null
 		data["html_scan"] = null
 		stored_scan_subject = null
@@ -152,7 +152,7 @@
 
 /obj/machinery/body_scanconsole/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()
-	if(istype(new_state))
+	if (istype(new_state))
 		updateUsrDialog()
 
 /obj/machinery/body_scanconsole/proc/remove_display(obj/machinery/body_scan_display/display)

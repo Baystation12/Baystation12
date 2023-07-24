@@ -6,16 +6,16 @@
 	var/obj/structure/cable/input
 
 /obj/machinery/logic/indicator/process()
-	if(input)
+	if (input)
 		return 1
 
 
-	if(!input)
+	if (!input)
 		var/turf/T = get_step(src, dir)
-		if(T)
+		if (T)
 			var/inv_dir = turn(dir, 180)
 			for(var/obj/structure/cable/C in T)
-				if(C.d1 == inv_dir || C.d2 == inv_dir)
+				if (C.d1 == inv_dir || C.d2 == inv_dir)
 					input = C
 					return 1
 
@@ -26,14 +26,14 @@
 	icon_state = "bulb0"
 
 /obj/machinery/logic/indicator/bulb/process()
-	if(!..())	//Parent proc checks if input1 exists.
+	if (!..())	//Parent proc checks if input1 exists.
 		return
 
 	var/datum/powernet/pn_input = input.powernet
-	if(!pn_input)
+	if (!pn_input)
 		return
 
-	if(pn_input.avail >= LOGIC_HIGH)
+	if (pn_input.avail >= LOGIC_HIGH)
 		icon_state = "bulb1"
 	else
 		icon_state = "bulb0"
@@ -47,15 +47,15 @@
 	var/obj/structure/cable/output
 
 /obj/machinery/logic/sensor/process()
-	if(output)
+	if (output)
 		return 1
 
-	if(!output)
+	if (!output)
 		var/turf/T = get_step(src, dir)
-		if(T)
+		if (T)
 			var/inv_dir = turn(dir, 180)
 			for(var/obj/structure/cable/C in T)
-				if(C.d1 == inv_dir || C.d2 == inv_dir)
+				if (C.d1 == inv_dir || C.d2 == inv_dir)
 					output = C
 					return 1
 
@@ -67,11 +67,11 @@
 	icon_state = "off"
 
 /obj/machinery/logic/sensor/constant_high/process()
-	if(!..())	//Parent proc checks if input1 exists.
+	if (!..())	//Parent proc checks if input1 exists.
 		return
 
 	var/datum/powernet/pn_output = output.powernet
-	if(!pn_output)
+	if (!pn_output)
 		return
 
 	pn_output.newavail = max(pn_output.avail, LOGIC_HIGH)
@@ -89,45 +89,45 @@
 	icon_state = "intact"
 
 /obj/machinery/logic/oneinput/process()
-	if(input && output)
+	if (input && output)
 		return 1
 
-	if(!dir_input || !dir_output)
+	if (!dir_input || !dir_output)
 		return 0
 
-	if(!input)
+	if (!input)
 		var/turf/T = get_step(src, dir_input)
-		if(T)
+		if (T)
 			var/inv_dir = turn(dir_input, 180)
 			for(var/obj/structure/cable/C in T)
-				if(C.d1 == inv_dir || C.d2 == inv_dir)
+				if (C.d1 == inv_dir || C.d2 == inv_dir)
 					input = C
 
-	if(!output)
+	if (!output)
 		var/turf/T = get_step(src, dir_output)
-		if(T)
+		if (T)
 			var/inv_dir = turn(dir_output, 180)
 			for(var/obj/structure/cable/C in T)
-				if(C.d1 == inv_dir || C.d2 == inv_dir)
+				if (C.d1 == inv_dir || C.d2 == inv_dir)
 					output = C
 
 	return 0	//On the process() call, where everything is still being searched for, it returns 0. It will return 1 on the next process() call.
 
 //NOT GATE
 /obj/machinery/logic/oneinput/not/process()
-	if(!..())	//Parent proc checks if input1, input2 and output exist.
+	if (!..())	//Parent proc checks if input1, input2 and output exist.
 		return
 
 	var/datum/powernet/pn_input = input.powernet
 
-	if(!pn_input)
+	if (!pn_input)
 		return
 
 	var/datum/powernet/pn_output = output.powernet
-	if(!pn_output)
+	if (!pn_output)
 		return
 
-	if( !(pn_input.avail >= LOGIC_HIGH))
+	if ( !(pn_input.avail >= LOGIC_HIGH))
 		pn_output.newavail = max(pn_output.avail, LOGIC_HIGH)	//Set the output avilable power to 5 or whatever it was before.
 	else
 		pn_output.draw_power(LOGIC_HIGH)		//Otherwise increase the load to 5
@@ -152,114 +152,114 @@
 	icon_state = "intact_off"
 
 /obj/machinery/logic/twoinput/process()
-	if(input1 && input2 && output)
+	if (input1 && input2 && output)
 		return 1
 
-	if(!dir_input1 || !dir_input2 || !dir_output)
+	if (!dir_input1 || !dir_input2 || !dir_output)
 		return 0
 
-	if(!input1)
+	if (!input1)
 		var/turf/T = get_step(src, dir_input1)
-		if(T)
+		if (T)
 			var/inv_dir = turn(dir_input1, 180)
 			for(var/obj/structure/cable/C in T)
-				if(C.d1 == inv_dir || C.d2 == inv_dir)
+				if (C.d1 == inv_dir || C.d2 == inv_dir)
 					input1 = C
 
-	if(!input2)
+	if (!input2)
 		var/turf/T = get_step(src, dir_input2)
-		if(T)
+		if (T)
 			var/inv_dir = turn(dir_input2, 180)
 			for(var/obj/structure/cable/C in T)
-				if(C.d1 == inv_dir || C.d2 == inv_dir)
+				if (C.d1 == inv_dir || C.d2 == inv_dir)
 					input2 = C
 
-	if(!output)
+	if (!output)
 		var/turf/T = get_step(src, dir_output)
-		if(T)
+		if (T)
 			var/inv_dir = turn(dir_output, 180)
 			for(var/obj/structure/cable/C in T)
-				if(C.d1 == inv_dir || C.d2 == inv_dir)
+				if (C.d1 == inv_dir || C.d2 == inv_dir)
 					output = C
 
 	return 0	//On the process() call, where everything is still being searched for, it returns 0. It will return 1 on the next process() call.
 
 //AND GATE
 /obj/machinery/logic/twoinput/and/process()
-	if(!..())	//Parent proc checks if input1, input2 and output exist.
+	if (!..())	//Parent proc checks if input1, input2 and output exist.
 		return
 
 	var/datum/powernet/pn_input1 = input1.powernet
 	var/datum/powernet/pn_input2 = input2.powernet
 
-	if(!pn_input1 || !pn_input2)
+	if (!pn_input1 || !pn_input2)
 		return
 
 	var/datum/powernet/pn_output = output.powernet
-	if(!pn_output)
+	if (!pn_output)
 		return
 
-	if( (pn_input1.avail >= LOGIC_HIGH) && (pn_input2.avail >= LOGIC_HIGH) )
+	if ( (pn_input1.avail >= LOGIC_HIGH) && (pn_input2.avail >= LOGIC_HIGH) )
 		pn_output.newavail = max(pn_output.avail, LOGIC_HIGH)	//Set the output avilable power to 5 or whatever it was before.
 	else
 		pn_output.draw_power(LOGIC_HIGH)		//Otherwise increase the load to 5
 
 //OR GATE
 /obj/machinery/logic/twoinput/or/process()
-	if(!..())	//Parent proc checks if input1, input2 and output exist.
+	if (!..())	//Parent proc checks if input1, input2 and output exist.
 		return
 
 	var/datum/powernet/pn_input1 = input1.powernet
 	var/datum/powernet/pn_input2 = input2.powernet
 
-	if(!pn_input1 || !pn_input2)
+	if (!pn_input1 || !pn_input2)
 		return
 
 	var/datum/powernet/pn_output = output.powernet
-	if(!pn_output)
+	if (!pn_output)
 		return
 
-	if( (pn_input1.avail >= LOGIC_HIGH) || (pn_input2.avail >= LOGIC_HIGH) )
+	if ( (pn_input1.avail >= LOGIC_HIGH) || (pn_input2.avail >= LOGIC_HIGH) )
 		pn_output.newavail = max(pn_output.avail, LOGIC_HIGH)	//Set the output avilable power to 5 or whatever it was before.
 	else
 		pn_output.draw_power(LOGIC_HIGH)		//Otherwise increase the load to 5
 
 //XOR GATE
 /obj/machinery/logic/twoinput/xor/process()
-	if(!..())	//Parent proc checks if input1, input2 and output exist.
+	if (!..())	//Parent proc checks if input1, input2 and output exist.
 		return
 
 	var/datum/powernet/pn_input1 = input1.powernet
 	var/datum/powernet/pn_input2 = input2.powernet
 
-	if(!pn_input1 || !pn_input2)
+	if (!pn_input1 || !pn_input2)
 		return
 
 	var/datum/powernet/pn_output = output.powernet
-	if(!pn_output)
+	if (!pn_output)
 		return
 
-	if( (pn_input1.avail >= LOGIC_HIGH) != (pn_input2.avail >= LOGIC_HIGH) )
+	if ( (pn_input1.avail >= LOGIC_HIGH) != (pn_input2.avail >= LOGIC_HIGH) )
 		pn_output.newavail = max(pn_output.avail, LOGIC_HIGH)	//Set the output avilable power to 5 or whatever it was before.
 	else
 		pn_output.draw_power(LOGIC_HIGH)		//Otherwise increase the load to 5
 
 //XNOR GATE (EQUIVALENCE)
 /obj/machinery/logic/twoinput/xnor/process()
-	if(!..())	//Parent proc checks if input1, input2 and output exist.
+	if (!..())	//Parent proc checks if input1, input2 and output exist.
 		return
 
 	var/datum/powernet/pn_input1 = input1.powernet
 	var/datum/powernet/pn_input2 = input2.powernet
 
-	if(!pn_input1 || !pn_input2)
+	if (!pn_input1 || !pn_input2)
 		return
 
 	var/datum/powernet/pn_output = output.powernet
-	if(!pn_output)
+	if (!pn_output)
 		return
 
-	if( (pn_input1.avail >= LOGIC_HIGH) == (pn_input2.avail >= LOGIC_HIGH) )
+	if ( (pn_input1.avail >= LOGIC_HIGH) == (pn_input2.avail >= LOGIC_HIGH) )
 		pn_output.newavail = max(pn_output.avail, LOGIC_HIGH)	//Set the output avilable power to 5 or whatever it was before.
 	else
 		pn_output.draw_power(LOGIC_HIGH)		//Otherwise increase the load to 5
@@ -268,22 +268,22 @@
 
 //RELAY - input1 governs the flow from input2 to output
 /obj/machinery/logic/twoinput/relay/process()
-	if(!..())	//Parent proc checks if input1, input2 and output exist.
+	if (!..())	//Parent proc checks if input1, input2 and output exist.
 		return
 
 	var/datum/powernet/pn_input1 = input1.powernet
 
-	if(!pn_input1)
+	if (!pn_input1)
 		return
 
-	if( pn_input1.avail >= LOGIC_HIGH )
+	if ( pn_input1.avail >= LOGIC_HIGH )
 		var/datum/powernet/pn_input2 = input2.powernet
 		var/datum/powernet/pn_output = output.powernet
 
-		if(!pn_output)
+		if (!pn_output)
 			return
 
-		if(pn_input2.avail >= RELAY_POWER_TRANSFER)
+		if (pn_input2.avail >= RELAY_POWER_TRANSFER)
 			pn_input2.draw_power(RELAY_POWER_TRANSFER)
 			pn_output.newavail += RELAY_POWER_TRANSFER
 

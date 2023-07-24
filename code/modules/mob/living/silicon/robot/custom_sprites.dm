@@ -12,7 +12,7 @@ var/global/list/robot_custom_icons
 	for(var/line in lines)
 		//split entry into ckey and real_name
 		var/split_idx = findtext(line, "-") //this works if ckey cannot contain dashes, and findtext starts from the beginning
-		if(!split_idx || split_idx == length(line))
+		if (!split_idx || split_idx == length(line))
 			continue //bad entry
 
 		var/ckey = copytext(line, 1, split_idx)
@@ -23,12 +23,12 @@ var/global/list/robot_custom_icons
 
 /mob/living/silicon/robot/proc/set_custom_sprite()
 	var/rname = robot_custom_icons[ckey]
-	if(rname && rname == real_name)
+	if (rname && rname == real_name)
 		custom_sprite = TRUE
 		icon = CUSTOM_ITEM_SYNTH
 		var/list/valid_states = icon_states(icon)
-		if(icon_state == "robot")
-			if("[ckey]-Standard" in valid_states)
+		if (icon_state == "robot")
+			if ("[ckey]-Standard" in valid_states)
 				icon_state = "[ckey]-Standard"
 			else
 				to_chat(src, SPAN_WARNING("Could not locate [ckey]-Standard sprite."))

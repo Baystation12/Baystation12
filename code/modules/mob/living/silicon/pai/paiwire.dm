@@ -7,8 +7,8 @@
 	var/obj/machinery/machine
 
 /obj/item/pai_cable/proc/plugin(obj/machinery/M as obj, mob/user as mob)
-	if(istype(M, /obj/machinery/door) || istype(M, /obj/machinery/camera))
-		if(!user.unEquip(src, M))
+	if (istype(M, /obj/machinery/door) || istype(M, /obj/machinery/camera))
+		if (!user.unEquip(src, M))
 			return
 		user.visible_message("[user] inserts [src] into a data port on [M].", "You insert [src] into a data port on [M].", "You hear the satisfying click of a wire jack fastening into place.")
 		src.machine = M

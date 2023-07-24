@@ -13,7 +13,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/New(text)
 	all_objectives |= src
-	if(text)
+	if (text)
 		explanation_text = text
 	..()
 
@@ -24,15 +24,15 @@ var/global/list/all_objectives = list()
 /datum/objective/proc/find_target()
 	var/list/possible_targets = list()
 	for(var/datum/mind/possible_target in SSticker.minds)
-		if(possible_target != owner && ishuman(possible_target.current) && (possible_target.current.stat != DEAD))
+		if (possible_target != owner && ishuman(possible_target.current) && (possible_target.current.stat != DEAD))
 			possible_targets += possible_target
-	if(length(possible_targets) > 0)
+	if (length(possible_targets) > 0)
 		target = pick(possible_targets)
 
 
 /datum/objective/proc/find_target_by_role(role, role_type = 0)//Option sets either to check assigned role or special role. Default to assigned.
 	for(var/datum/mind/possible_target in SSticker.minds)
-		if((possible_target != owner) && ishuman(possible_target.current) && ((role_type ? possible_target.special_role : possible_target.assigned_role) == role) )
+		if ((possible_target != owner) && ishuman(possible_target.current) && ((role_type ? possible_target.special_role : possible_target.assigned_role) == role) )
 			target = possible_target
 			break
 
@@ -41,7 +41,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/assassinate/find_target()
 	..()
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "Assassinate [target.current.real_name], the [target.assigned_role]."
 	else
 		explanation_text = "Free Objective"
@@ -49,7 +49,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/assassinate/find_target_by_role(role, role_type = 0)
 	..(role, role_type)
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "Assassinate [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
 	else
 		explanation_text = "Free Objective"
@@ -59,7 +59,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/anti_revolution/execute/find_target()
 	..()
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "[target.current.real_name], the [target.assigned_role] has extracted confidential information above their clearance. Execute \him[target.current]."
 	else
 		explanation_text = "Free Objective"
@@ -67,7 +67,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/anti_revolution/execute/find_target_by_role(role, role_type = 0)
 	..(role, role_type)
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "[target.current.real_name], the [!role_type ? target.assigned_role : target.special_role] has extracted confidential information above their clearance. Execute \him[target.current]."
 	else
 		explanation_text = "Free Objective"
@@ -80,7 +80,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/anti_revolution/brig/find_target()
 	..()
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "Brig [target.current.real_name], the [target.assigned_role] for 20 minutes to set an example."
 	else
 		explanation_text = "Free Objective"
@@ -88,7 +88,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/anti_revolution/brig/find_target_by_role(role, role_type = 0)
 	..(role, role_type)
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "Brig [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role] for 20 minutes to set an example."
 	else
 		explanation_text = "Free Objective"
@@ -98,7 +98,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/anti_revolution/demote/find_target()
 	..()
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "[target.current.real_name], the [target.assigned_role]  has been classified as harmful to [GLOB.using_map.company_name]'s goals. Demote \him[target.current] to assistant."
 	else
 		explanation_text = "Free Objective"
@@ -106,7 +106,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/anti_revolution/demote/find_target_by_role(role, role_type = 0)
 	..(role, role_type)
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "[target.current.real_name], the [!role_type ? target.assigned_role : target.special_role] has been classified as harmful to [GLOB.using_map.company_name]'s goals. Demote \him[target.current] to assistant."
 	else
 		explanation_text = "Free Objective"
@@ -116,7 +116,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/debrain/find_target()
 	..()
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "Steal the brain of [target.current.real_name]."
 	else
 		explanation_text = "Free Objective"
@@ -124,7 +124,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/debrain/find_target_by_role(role, role_type = 0)
 	..(role, role_type)
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "Steal the brain of [target.current.real_name] the [!role_type ? target.assigned_role : target.special_role]."
 	else
 		explanation_text = "Free Objective"
@@ -134,7 +134,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/protect/find_target()
 	..()
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "Protect [target.current.real_name], the [target.assigned_role]."
 	else
 		explanation_text = "Free Objective"
@@ -143,7 +143,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/protect/find_target_by_role(role, role_type = 0)
 	..(role, role_type)
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "Protect [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
 	else
 		explanation_text = "Free Objective"
@@ -171,7 +171,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/brig/find_target()
 	..()
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "Have [target.current.real_name], the [target.assigned_role] brigged for 10 minutes."
 	else
 		explanation_text = "Free Objective"
@@ -179,7 +179,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/brig/find_target_by_role(role, role_type = 0)
 	..(role, role_type)
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "Have [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role] brigged for 10 minutes."
 	else
 		explanation_text = "Free Objective"
@@ -192,7 +192,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/harm/find_target()
 	..()
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "Make an example of [target.current.real_name], the [target.assigned_role]. Break one of their bones, detach one of their limbs or disfigure their face. Make sure they're alive when you do it."
 	else
 		explanation_text = "Free Objective"
@@ -200,7 +200,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/harm/find_target_by_role(role, role_type = 0)
 	..(role, role_type)
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "Make an example of [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]. Break one of their bones, detach one of their limbs or disfigure their face. Make sure they're alive when you do it."
 	else
 		explanation_text = "Free Objective"
@@ -307,11 +307,11 @@ var/global/list/all_objectives = list()
 	var/n_p = 1 //autowin
 	if (GAME_STATE == RUNLEVEL_SETUP)
 		for(var/mob/new_player/P in GLOB.player_list)
-			if(P.client && P.ready && P.mind!=owner)
+			if (P.client && P.ready && P.mind!=owner)
 				n_p ++
 	else if (GAME_STATE == RUNLEVEL_GAME)
 		for(var/mob/living/carbon/human/P in GLOB.player_list)
-			if(P.client && !(P.mind.changeling) && P.mind!=owner)
+			if (P.client && !(P.mind.changeling) && P.mind!=owner)
 				n_p ++
 	target_amount = min(target_amount, n_p)
 
@@ -330,20 +330,20 @@ var/global/list/all_objectives = list()
 	var/list/priority_targets = list()
 
 	for(var/datum/mind/possible_target in SSticker.minds)
-		if(possible_target != owner && ishuman(possible_target.current) && (possible_target.current.stat != DEAD) && (!possible_target.special_role))
+		if (possible_target != owner && ishuman(possible_target.current) && (possible_target.current.stat != DEAD) && (!possible_target.special_role))
 			possible_targets += possible_target
 			for (var/path in roles)
 				var/datum/job/role = SSjobs.get_by_path(path)
-				if(possible_target.assigned_role == role.title)
+				if (possible_target.assigned_role == role.title)
 					priority_targets += possible_target
 					continue
 
-	if(length(priority_targets) > 0)
+	if (length(priority_targets) > 0)
 		target = pick(priority_targets)
-	else if(length(possible_targets) > 0)
+	else if (length(possible_targets) > 0)
 		target = pick(possible_targets)
 
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "We can get a good price for [target.current.real_name], the [target.assigned_role]. Take them alive."
 	else
 		explanation_text = "Free Objective"
@@ -352,35 +352,35 @@ var/global/list/all_objectives = list()
 /datum/objective/heist/loot/choose_target()
 	var/loot = "an object"
 	switch(rand(1,8))
-		if(1)
+		if (1)
 			target = /obj/structure/particle_accelerator
 			target_amount = 6
 			loot = "a complete particle accelerator"
-		if(2)
+		if (2)
 			target = /obj/machinery/the_singularitygen
 			target_amount = 1
 			loot = "a gravitational generator"
-		if(3)
+		if (3)
 			target = /obj/machinery/power/emitter
 			target_amount = 4
 			loot = "four emitters"
-		if(4)
+		if (4)
 			target = /obj/machinery/nuclearbomb
 			target_amount = 1
 			loot = "a nuclear bomb"
-		if(5)
+		if (5)
 			target = /obj/item/gun
 			target_amount = 6
 			loot = "six guns"
-		if(6)
+		if (6)
 			target = /obj/item/gun/energy
 			target_amount = 4
 			loot = "four energy guns"
-		if(7)
+		if (7)
 			target = /obj/item/gun/energy/laser
 			target_amount = 2
 			loot = "two laser guns"
-		if(8)
+		if (8)
 			target = /obj/item/gun/energy/ionrifle
 			target_amount = 1
 			loot = "an ion gun"
@@ -389,28 +389,28 @@ var/global/list/all_objectives = list()
 
 /datum/objective/heist/salvage/choose_target()
 	switch(rand(1,8))
-		if(1)
+		if (1)
 			target = MATERIAL_STEEL
 			target_amount = 300
-		if(2)
+		if (2)
 			target = MATERIAL_GLASS
 			target_amount = 200
-		if(3)
+		if (3)
 			target = MATERIAL_PLASTEEL
 			target_amount = 100
-		if(4)
+		if (4)
 			target = MATERIAL_PHORON
 			target_amount = 100
-		if(5)
+		if (5)
 			target = MATERIAL_SILVER
 			target_amount = 50
-		if(6)
+		if (6)
 			target = MATERIAL_GOLD
 			target_amount = 20
-		if(7)
+		if (7)
 			target = MATERIAL_URANIUM
 			target_amount = 20
-		if(8)
+		if (8)
 			target = MATERIAL_DIAMOND
 			target_amount = 20
 
@@ -445,17 +445,17 @@ var/global/list/all_objectives = list()
 
 /datum/objective/cult/sacrifice/find_target()
 	var/list/possible_targets = list()
-	if(!length(possible_targets))
+	if (!length(possible_targets))
 		for(var/mob/living/carbon/human/player in GLOB.player_list)
-			if(player.mind && !(player.mind in GLOB.cult.current_antagonists))
+			if (player.mind && !(player.mind in GLOB.cult.current_antagonists))
 				possible_targets += player.mind
-	if(length(possible_targets) > 0)
+	if (length(possible_targets) > 0)
 		target = pick(possible_targets)
-	if(target) explanation_text = "Sacrifice [target.name], the [target.assigned_role]. You will need the sacrifice rune (Hell blood join) and three acolytes to do so."
+	if (target) explanation_text = "Sacrifice [target.name], the [target.assigned_role]. You will need the sacrifice rune (Hell blood join) and three acolytes to do so."
 
 /datum/objective/rev/find_target()
 	..()
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "Assassinate, capture or convert [target.current.real_name], the [target.assigned_role]."
 	else
 		explanation_text = "Free Objective"
@@ -463,7 +463,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/rev/find_target_by_role(role, role_type=0)
 	..(role, role_type)
-	if(target && target.current)
+	if (target && target.current)
 		explanation_text = "Assassinate, capture or convert [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
 	else
 		explanation_text = "Free Objective"

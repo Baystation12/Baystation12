@@ -34,7 +34,7 @@ var/global/list/cached_space = list()
 /obj/effect/overmap/visitable/sector/temporary/proc/can_die(mob/observer)
 	testing("Checking if sector at [map_z[1]] can die.")
 	for(var/mob/M in GLOB.player_list)
-		if(M != observer && (M.z in map_z))
+		if (M != observer && (M.z in map_z))
 			testing("There are people on it.")
 			return 0
 	return 1
@@ -46,9 +46,9 @@ var/global/list/cached_space = list()
 	for(var/obj/effect/overmap/visitable/sector/temporary/O in map)
 		res = O
 		break
-	if(istype(res))
+	if (istype(res))
 		return res
-	else if(length(cached_space))
+	else if (length(cached_space))
 		res = cached_space[length(cached_space)]
 		cached_space -= res
 		res.register(x, y)
@@ -58,7 +58,7 @@ var/global/list/cached_space = list()
 
 /atom/movable/proc/lost_in_space()
 	for(var/atom/movable/AM in contents)
-		if(!AM.lost_in_space())
+		if (!AM.lost_in_space())
 			return FALSE
 	return TRUE
 
@@ -76,8 +76,8 @@ var/global/list/cached_space = list()
 	if (!M)
 		return
 
-	if(A.lost_in_space())
-		if(!QDELETED(A))
+	if (A.lost_in_space())
+		if (!QDELETED(A))
 			qdel(A)
 		return
 
@@ -85,7 +85,7 @@ var/global/list/cached_space = list()
 	var/ny = 1
 	var/nz = 1
 
-	if(T.x <= TRANSITIONEDGE)
+	if (T.x <= TRANSITIONEDGE)
 		nx = world.maxx - TRANSITIONEDGE - 2
 		ny = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
 
@@ -106,22 +106,22 @@ var/global/list/cached_space = list()
 	var/turf/map = locate(M.x,M.y,GLOB.using_map.overmap_z)
 	var/obj/effect/overmap/visitable/TM
 	for(var/obj/effect/overmap/visitable/O in map)
-		if(O != M && HAS_FLAGS(O.sector_flags, OVERMAP_SECTOR_IN_SPACE) && prob(50))
+		if (O != M && HAS_FLAGS(O.sector_flags, OVERMAP_SECTOR_IN_SPACE) && prob(50))
 			TM = O
 			break
-	if(!TM)
+	if (!TM)
 		TM = get_deepspace(M.x,M.y)
 	nz = pick(TM.map_z)
 
 	var/turf/dest = locate(nx,ny,nz)
-	if(dest)
+	if (dest)
 		A.forceMove(dest)
-		if(ismob(A))
+		if (ismob(A))
 			var/mob/D = A
-			if(D.pulling)
+			if (D.pulling)
 				D.pulling.forceMove(dest)
 
-	if(istype(M, /obj/effect/overmap/visitable/sector/temporary))
+	if (istype(M, /obj/effect/overmap/visitable/sector/temporary))
 		var/obj/effect/overmap/visitable/sector/temporary/source = M
 		if (source != TM && source.can_die())
 			source.unregister()

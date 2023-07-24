@@ -47,11 +47,11 @@
 
 	bleed_timer += damage
 
-	if(istype(organ))
+	if (istype(organ))
 		parent_organ = organ
 
 /datum/wound/Destroy()
-	if(parent_organ)
+	if (parent_organ)
 		LAZYREMOVE(parent_organ.wounds, src)
 		parent_organ = null
 	LAZYCLEARLIST(embedded_objects)
@@ -72,13 +72,13 @@
 	return src.damage / src.amount
 
 /datum/wound/proc/can_autoheal()
-	if(LAZYLEN(embedded_objects))
+	if (LAZYLEN(embedded_objects))
 		return 0
 	return (wound_damage() <= autoheal_cutoff) ? 1 : is_treated()
 
 // checks whether the wound has been appropriately treated
 /datum/wound/proc/is_treated()
-	if(!LAZYLEN(embedded_objects))
+	if (!LAZYLEN(embedded_objects))
 		switch(damage_type)
 			if (INJURY_TYPE_BRUISE, INJURY_TYPE_CUT, INJURY_TYPE_PIERCE)
 				return bandaged
@@ -100,7 +100,7 @@
 	return 1
 
 /datum/wound/proc/merge_wound(datum/wound/other)
-	if(LAZYLEN(other.embedded_objects))
+	if (LAZYLEN(other.embedded_objects))
 		LAZYDISTINCTADD(src.embedded_objects, other.embedded_objects)
 	src.damage += other.damage
 	src.amount += other.amount
@@ -146,12 +146,12 @@
 // heal the given amount of damage, and if the given amount of damage was more
 // than what needed to be healed, return how much heal was left
 /datum/wound/proc/heal_damage(amount)
-	if(LAZYLEN(embedded_objects))
+	if (LAZYLEN(embedded_objects))
 		return amount // heal nothing
-	if(parent_organ)
+	if (parent_organ)
 		if (damage_type == INJURY_TYPE_BURN && !(parent_organ.burn_ratio < 100 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
 			return amount	//We don't want to heal wounds on irreparable organs.
-		else if(!(parent_organ.brute_ratio < 100 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
+		else if (!(parent_organ.brute_ratio < 100 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
 			return amount
 
 	var/healed_damage = min(src.damage, amount)
@@ -196,9 +196,9 @@
 
 /datum/wound/proc/bleeding()
 	for(var/obj/item/thing in embedded_objects)
-		if(thing.w_class > ITEM_SIZE_SMALL)
+		if (thing.w_class > ITEM_SIZE_SMALL)
 			return FALSE
-	if(bandaged || clamped)
+	if (bandaged || clamped)
 		return FALSE
 	return ((bleed_timer > 0 || wound_damage() > bleed_threshold) && current_stage <= max_bleeding_stage)
 

@@ -17,7 +17,7 @@
 	. = ..()
 
 /obj/structure/hygiene/proc/clog(severity)
-	if(clogged) //We can only clog if our state is zero, aka completely unclogged and cloggable
+	if (clogged) //We can only clog if our state is zero, aka completely unclogged and cloggable
 		return FALSE
 	clogged = severity
 	return TRUE
@@ -63,43 +63,43 @@
 
 /obj/structure/hygiene/examine(mob/user)
 	. = ..()
-	if(clogged > 0)
+	if (clogged > 0)
 		to_chat(user, SPAN_WARNING("It seems to be badly clogged."))
 
 /obj/structure/hygiene/Process()
-	if(clogged <= 0)
+	if (clogged <= 0)
 		drain()
 	var/flood_amt
 	switch(clogged)
-		if(1)
+		if (1)
 			flood_amt = FLUID_SHALLOW
-		if(2)
+		if (2)
 			flood_amt = FLUID_OVER_MOB_HEAD
-		if(3)
+		if (3)
 			flood_amt = FLUID_DEEP
-	if(flood_amt)
+	if (flood_amt)
 		var/turf/T = loc
-		if(istype(T))
+		if (istype(T))
 			var/obj/effect/fluid/F = locate() in T
-			if(!F) F = new(loc)
+			if (!F) F = new(loc)
 			T.show_bubbles()
-			if(world.time > next_gurgle)
+			if (world.time > next_gurgle)
 				visible_message("\The [src] gurgles and overflows!")
 				next_gurgle = world.time + 80
 				playsound(T, pick(SSfluids.gurgles), 50, 1)
 			SET_FLUID_DEPTH(F, min(F.fluid_amount + (rand(30,50)*clogged), flood_amt))
 
 /obj/structure/hygiene/proc/drain()
-	if(!can_drain) return
+	if (!can_drain) return
 	var/turf/T = get_turf(src)
-	if(!istype(T)) return
+	if (!istype(T)) return
 	var/fluid_here = T.get_fluid_depth()
-	if(fluid_here <= 0)
+	if (fluid_here <= 0)
 		return
 
 	T.remove_fluid(ceil(fluid_here*drainage))
 	T.show_bubbles()
-	if(world.time > last_gurgle + 80)
+	if (world.time > last_gurgle + 80)
 		last_gurgle = world.time
 		playsound(T, pick(SSfluids.gurgles), 50, 1)
 
@@ -121,18 +121,18 @@
 	update_icon()
 
 /obj/structure/hygiene/toilet/attack_hand(mob/living/user)
-	if(swirlie)
+	if (swirlie)
 		usr.visible_message(SPAN_DANGER("[user] slams the toilet seat onto [swirlie.name]'s head!"), SPAN_NOTICE("You slam the toilet seat onto [swirlie.name]'s head!"), "You hear reverberating porcelain.")
 		swirlie.adjustBruteLoss(8)
 		return
 
-	if(cistern && !open)
-		if(!length(contents))
+	if (cistern && !open)
+		if (!length(contents))
 			to_chat(user, SPAN_NOTICE("The cistern is empty."))
 			return
 		else
 			var/obj/item/I = pick(contents)
-			if(ishuman(user))
+			if (ishuman(user))
 				user.put_in_hands(I)
 			else
 				I.dropInto(loc)
@@ -297,16 +297,16 @@
 	create_reagents(50)
 
 /obj/structure/hygiene/shower/proc/update_sound()
-	if(!working_sound)
+	if (!working_sound)
 		return
-	if(!sound_id)
+	if (!sound_id)
 		sound_id = "[type]_[sequential_id(/obj/structure/hygiene/shower)]"
-	if(on)
+	if (on)
 		var/volume = 20
-		if(!sound_token)
+		if (!sound_token)
 			sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, working_sound, volume = volume, range = 10)
 		sound_token.SetVolume(volume)
-	else if(sound_token)
+	else if (sound_token)
 		QDEL_NULL(sound_token)
 //add heat controls? when emagged, you can freeze to death in it?
 
@@ -322,7 +322,7 @@
 	on = !on
 	update_icon()
 	update_sound()
-	if(on)
+	if (on)
 		if (M.loc == loc)
 			wash(M)
 			process_heat(M)
@@ -364,58 +364,58 @@
 
 /obj/structure/hygiene/shower/on_update_icon()	//this is terribly unreadable, but basically it makes the shower mist up
 	overlays.Cut()					//once it's been on for a while, in addition to handling the water overlay.
-	if(mymist)
+	if (mymist)
 		qdel(mymist)
 		mymist = null
 
-	if(on)
+	if (on)
 		overlays += image('icons/obj/watercloset.dmi', src, "water", MOB_LAYER + 1, dir)
-		if(temperature_settings[watertemp] < T20C)
+		if (temperature_settings[watertemp] < T20C)
 			return //no mist for cold water
-		if(!ismist)
+		if (!ismist)
 			spawn(50)
-				if(src && on)
+				if (src && on)
 					ismist = 1
 					mymist = new /obj/effect/mist(loc)
 		else
 			ismist = 1
 			mymist = new /obj/effect/mist(loc)
-	else if(ismist)
+	else if (ismist)
 		ismist = 1
 		mymist = new /obj/effect/mist(loc)
 		spawn(250)
-			if(src && !on)
+			if (src && !on)
 				qdel(mymist)
 				mymist = null
 				ismist = 0
 
 //Yes, showers are super powerful as far as washing goes.
 /obj/structure/hygiene/shower/proc/wash(atom/movable/washing)
-	if(on)
+	if (on)
 		wash_mob(washing)
-		if(isturf(loc))
+		if (isturf(loc))
 			var/turf/tile = loc
 			for(var/obj/effect/E in tile)
-				if(istype(E,/obj/effect/decal/cleanable) || istype(E,/obj/effect/overlay))
+				if (istype(E,/obj/effect/decal/cleanable) || istype(E,/obj/effect/overlay))
 					qdel(E)
 		reagents.splash(washing, 10)
 
 /obj/structure/hygiene/shower/Process()
 	..()
-	if(!on) return
+	if (!on) return
 
 	for(var/thing in loc)
 		var/atom/movable/AM = thing
 		var/mob/living/L = thing
-		if(istype(AM) && AM.simulated)
+		if (istype(AM) && AM.simulated)
 			wash(AM)
-			if(istype(L))
+			if (istype(L))
 				process_heat(L)
 	wash_floor()
 	reagents.add_reagent(/datum/reagent/water, reagents.get_free_space())
 
 /obj/structure/hygiene/shower/proc/wash_floor()
-	if(!ismist && is_washing)
+	if (!ismist && is_washing)
 		return
 	is_washing = 1
 	var/turf/T = get_turf(src)
@@ -425,17 +425,17 @@
 		is_washing = 0
 
 /obj/structure/hygiene/shower/proc/process_heat(mob/living/M)
-	if(!on || !istype(M)) return
+	if (!on || !istype(M)) return
 
 	var/water_temperature = temperature_settings[watertemp]
 	var/temp_adj = clamp(water_temperature - M.bodytemperature, BODYTEMP_COOLING_MAX, BODYTEMP_HEATING_MAX)
 	M.bodytemperature += temp_adj
 
-	if(ishuman(M))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(water_temperature >= H.species.heat_level_1)
+		if (water_temperature >= H.species.heat_level_1)
 			to_chat(H, SPAN_DANGER("The water is searing hot!"))
-		else if(water_temperature <= H.species.cold_level_1)
+		else if (water_temperature <= H.species.cold_level_1)
 			to_chat(H, SPAN_WARNING("The water is freezing cold!"))
 
 /obj/item/bikehorn/rubberducky
@@ -455,11 +455,11 @@
 
 /obj/structure/hygiene/sink/MouseDrop_T(obj/item/thing, mob/user)
 	..()
-	if(!istype(thing) || !thing.is_open_container())
+	if (!istype(thing) || !thing.is_open_container())
 		return ..()
-	if(!usr.Adjacent(src))
+	if (!usr.Adjacent(src))
 		return ..()
-	if(!thing.reagents || thing.reagents.total_volume == 0)
+	if (!thing.reagents || thing.reagents.total_volume == 0)
 		to_chat(usr, SPAN_WARNING("\The [thing] is empty."))
 		return
 	// Clear the vessel.
@@ -473,17 +473,17 @@
 		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
 		if (user.hand)
 			temp = H.organs_by_name[BP_L_HAND]
-		if(temp && !temp.is_usable())
+		if (temp && !temp.is_usable())
 			to_chat(user,SPAN_NOTICE("You try to move your [temp.name], but cannot!"))
 			return
 
-	if(isrobot(user) || isAI(user))
+	if (isrobot(user) || isAI(user))
 		return
 
-	if(!Adjacent(user))
+	if (!Adjacent(user))
 		return
 
-	if(busy)
+	if (busy)
 		to_chat(user, SPAN_WARNING("Someone's already washing here."))
 		return
 
@@ -491,7 +491,7 @@
 	playsound(loc, 'sound/effects/sink_long.ogg', 75, 1)
 
 	busy = 1
-	if(!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
+	if (!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 		busy = 0
 		return TRUE
 	busy = 0
@@ -625,12 +625,12 @@
 
 /obj/item/taperoll/bog/equipped(mob/user, slot)
 	switch(slot)
-		if(slot_wear_suit)
+		if (slot_wear_suit)
 			sprite_sheets = list(
 				SPECIES_VOX = 'icons/mob/species/vox/onmob_suit_vox.dmi',
 				SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi'
 				)
-		if(slot_head)
+		if (slot_head)
 			sprite_sheets = list(
 				SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi',
 				SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi'
@@ -652,7 +652,7 @@
 	set desc = "Tear a sheet of toilet paper."
 	if (usr.incapacitated())
 		return
-	if(sheets > 0)
+	if (sheets > 0)
 		visible_message("\The [usr] tears a sheet from \the [src].", "You tear a sheet from \the [src].")
 		var/obj/item/paper/crumpled/bog/C =  new(loc)
 		usr.put_in_hands(C)
@@ -698,7 +698,7 @@
 /obj/structure/hygiene/faucet/attack_hand(mob/user)
 	. = ..()
 	open = !open
-	if(open)
+	if (open)
 		playsound(loc, 'sound/effects/closet_open.ogg', 20, 1)
 	else
 		playsound(loc, 'sound/effects/closet_close.ogg', 20, 1)
@@ -722,7 +722,7 @@
 	var/constructed_type = /obj/structure/hygiene/faucet
 
 /obj/item/faucet/attackby(obj/item/thing, mob/user)
-	if(isWrench(thing))
+	if (isWrench(thing))
 		var/turf/simulated/floor/F = loc
 		if (istype(F) && istype(F.flooring, /singleton/flooring/pool))
 			var/obj/O = new constructed_type (loc)
@@ -739,16 +739,16 @@
 	return ..()
 
 /obj/structure/hygiene/faucet/proc/water_flow()
-	if(!isturf(src.loc))
+	if (!isturf(src.loc))
 		return
 
 	// Check for depth first, and pass if the water's too high. I know players will find a way to just submerge entire ship if I do not.
 	var/turf/T = get_turf(src)
 
-	if(!T || T.get_fluid_depth() > fill_level)
+	if (!T || T.get_fluid_depth() > fill_level)
 		return
 
-	if(world.time > next_gurgle)
+	if (world.time > next_gurgle)
 		next_gurgle = world.time + 80
 		playsound(T, pick(SSfluids.gurgles), 50, 1)
 
@@ -756,7 +756,7 @@
 
 /obj/structure/hygiene/faucet/Process()
 	..()
-	if(open)
+	if (open)
 		water_flow()
 
 /obj/structure/hygiene/faucet/examine(mob/user)

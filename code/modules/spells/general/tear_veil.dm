@@ -25,7 +25,7 @@
 	return list(hole)
 
 /spell/tear_veil/cast(list/targets, mob/holder, channel_count)
-	if(channel_count == 1)
+	if (channel_count == 1)
 		return
 	var/type = pick(possible_spawns)
 	var/mob/living/L = new type(get_turf(targets[1]))

@@ -27,10 +27,10 @@
 
 	var/obj/item/rig/rig = holder
 	switch(index)
-		if(RIG_SECURITY)
-			if(mended)
+		if (RIG_SECURITY)
+			if (mended)
 				rig.req_access = initial(rig.req_access)
-		if(RIG_INTERFACE_SHOCK)
+		if (RIG_INTERFACE_SHOCK)
 			rig.electrified = mended ? 0 : -1
 			rig.shock(usr,100)
 
@@ -38,29 +38,29 @@
 
 	var/obj/item/rig/rig = holder
 	switch(index)
-		if(RIG_SECURITY)
+		if (RIG_SECURITY)
 			rig.security_check_enabled = !rig.security_check_enabled
 			rig.visible_message("\The [rig] twitches as several suit locks [rig.security_check_enabled?"close":"open"].")
-		if(RIG_AI_OVERRIDE)
+		if (RIG_AI_OVERRIDE)
 			rig.ai_override_enabled = !rig.ai_override_enabled
 			rig.visible_message("A small red light on [rig] [rig.ai_override_enabled?"goes dead":"flickers on"].")
-		if(RIG_SYSTEM_CONTROL)
+		if (RIG_SYSTEM_CONTROL)
 			if (rig.offline)
 				rig.visible_message("\The [rig] sparks, damaging its delicate control systems.")
 			rig.malfunctioning += 10
-			if(rig.malfunction_delay <= 0)
+			if (rig.malfunction_delay <= 0)
 				rig.malfunction_delay = 20
 			rig.shock(usr,100)
-		if(RIG_INTERFACE_LOCK)
+		if (RIG_INTERFACE_LOCK)
 			rig.interface_locked = !rig.interface_locked
 			rig.visible_message("\The [rig] clicks audibly as the software interface [rig.interface_locked?"darkens":"brightens"].")
-		if(RIG_INTERFACE_SHOCK)
-			if(rig.electrified != -1)
+		if (RIG_INTERFACE_SHOCK)
+			if (rig.electrified != -1)
 				rig.electrified = 30
 			rig.shock(usr,100)
 
 /datum/wires/rig/CanUse(mob/living/L)
 	var/obj/item/rig/rig = holder
-	if(rig.p_open)
+	if (rig.p_open)
 		return 1
 	return 0

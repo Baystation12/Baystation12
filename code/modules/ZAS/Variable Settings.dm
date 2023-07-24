@@ -88,7 +88,7 @@ var/global/vs_control/vsc = new
 		settings -= V
 
 	for(var/V in settings)
-		if(findtextEx(V,"_RANDOM") || findtextEx(V,"_DESC") || findtextEx(V,"_METHOD"))
+		if (findtextEx(V,"_RANDOM") || findtextEx(V,"_DESC") || findtextEx(V,"_METHOD"))
 			settings -= V
 
 	settings -= "settings"
@@ -99,78 +99,78 @@ var/global/vs_control/vsc = new
 	//var/which = input(user,"Choose a setting:") in L
 	var/dat = ""
 	for(var/ch in L)
-		if(findtextEx(ch,"_RANDOM") || findtextEx(ch,"_DESC") || findtextEx(ch,"_METHOD") || findtextEx(ch,"_NAME")) continue
+		if (findtextEx(ch,"_RANDOM") || findtextEx(ch,"_DESC") || findtextEx(ch,"_METHOD") || findtextEx(ch,"_NAME")) continue
 		var/vw
 		var/vw_desc = "No Description."
 		var/vw_name = ch
-		if(ch in plc.settings)
+		if (ch in plc.settings)
 			vw = plc.vars[ch]
-			if("[ch]_DESC" in plc.vars) vw_desc = plc.vars["[ch]_DESC"]
-			if("[ch]_NAME" in plc.vars) vw_name = plc.vars["[ch]_NAME"]
+			if ("[ch]_DESC" in plc.vars) vw_desc = plc.vars["[ch]_DESC"]
+			if ("[ch]_NAME" in plc.vars) vw_name = plc.vars["[ch]_NAME"]
 		else
 			vw = vars[ch]
-			if("[ch]_DESC" in vars) vw_desc = vars["[ch]_DESC"]
-			if("[ch]_NAME" in vars) vw_name = vars["[ch]_NAME"]
+			if ("[ch]_DESC" in vars) vw_desc = vars["[ch]_DESC"]
+			if ("[ch]_NAME" in vars) vw_name = vars["[ch]_NAME"]
 		dat += "<b>[vw_name] = [vw]</b> <A href='?src=\ref[src];changevar=[ch]'>\[Change\]</A><br>"
 		dat += "<i>[vw_desc]</i><br><br>"
 	show_browser(user, dat,"window=settings")
 
 /vs_control/Topic(href,href_list)
-	if("changevar" in href_list)
+	if ("changevar" in href_list)
 		ChangeSetting(usr,href_list["changevar"])
 
 /vs_control/proc/ChangeSetting(mob/user,ch)
 	var/vw
 	var/how = "Text"
 	var/display_description = ch
-	if(ch in plc.settings)
+	if (ch in plc.settings)
 		vw = plc.vars[ch]
-		if("[ch]_NAME" in plc.vars)
+		if ("[ch]_NAME" in plc.vars)
 			display_description = plc.vars["[ch]_NAME"]
-		if("[ch]_METHOD" in plc.vars)
+		if ("[ch]_METHOD" in plc.vars)
 			how = plc.vars["[ch]_METHOD"]
 		else
-			if(isnum(vw))
+			if (isnum(vw))
 				how = "Numeric"
 			else
 				how = "Text"
 	else
 		vw = vars[ch]
-		if("[ch]_NAME" in vars)
+		if ("[ch]_NAME" in vars)
 			display_description = vars["[ch]_NAME"]
-		if("[ch]_METHOD" in vars)
+		if ("[ch]_METHOD" in vars)
 			how = vars["[ch]_METHOD"]
 		else
-			if(isnum(vw))
+			if (isnum(vw))
 				how = "Numeric"
 			else
 				how = "Text"
 	var/newvar = vw
 	switch(how)
-		if("Numeric")
+		if ("Numeric")
 			newvar = input(user,"Enter a number:","Settings",newvar) as num
-		if("Bit Flag")
+		if ("Bit Flag")
 			var/flag = input(user,"Toggle which bit?","Settings") in bitflags
 			flag = text2num(flag)
-			if(newvar & flag)
+			if (newvar & flag)
 				newvar &= ~flag
 			else
 				newvar |= flag
-		if("Toggle")
+		if ("Toggle")
 			newvar = !newvar
-		if("Text")
+		if ("Text")
 			newvar = input(user,"Enter a string:","Settings",newvar) as text
-		if("Long Text")
+		if ("Long Text")
 			newvar = input(user,"Enter text:","Settings",newvar) as message
 	vw = newvar
-	if(ch in plc.settings)
+	if (ch in plc.settings)
 		plc.vars[ch] = vw
 	else
 		vars[ch] = vw
-	if(how == "Toggle")
+	if (how == "Toggle")
 		newvar = (newvar?"ON":"OFF")
 	to_world(SPAN_NOTICE("<b>[key_name(user)] changed the setting [display_description] to [newvar].</b>"))
-	if(ch in plc.settings)
+	if (ch in plc.settings)
 		ChangeSettingsDialog(user,plc.settings)
 	else
 		ChangeSettingsDialog(user,settings)
@@ -178,10 +178,10 @@ var/global/vs_control/vsc = new
 /vs_control/proc/RandomizeWithProbability()
 	for(var/V in settings)
 		var/newvalue
-		if("[V]_RANDOM" in vars)
-			if(isnum(vars["[V]_RANDOM"]))
+		if ("[V]_RANDOM" in vars)
+			if (isnum(vars["[V]_RANDOM"]))
 				newvalue = prob(vars["[V]_RANDOM"])
-			else if(istext(vars["[V]_RANDOM"]))
+			else if (istext(vars["[V]_RANDOM"]))
 				newvalue = roll(vars["[V]_RANDOM"])
 			else
 				newvalue = vars[V]
@@ -195,10 +195,10 @@ var/global/vs_control/vsc = new
 	var/list/setting_choices = list("Phoron - Standard", "Phoron - Low Hazard", "Phoron - High Hazard", "Phoron - Oh Shit!",\
 	"ZAS - Normal", "ZAS - Forgiving", "ZAS - Dangerous", "ZAS - Hellish", "ZAS/Phoron - Initial")
 	var/def = input(user, "Which of these presets should be used?") as null|anything in setting_choices
-	if(!def)
+	if (!def)
 		return
 	switch(def)
-		if("Phoron - Standard")
+		if ("Phoron - Standard")
 			plc.CLOTH_CONTAMINATION = 1 //If this is on, phoron does damage by getting into cloth.
 			plc.PHORONGUARD_ONLY = 0
 			plc.GENETIC_CORRUPTION = 0 //Chance of genetic corruption as well as toxic damage, X in 1000.
@@ -207,7 +207,7 @@ var/global/vs_control/vsc = new
 			plc.PHORON_HALLUCINATION = 0
 			plc.CONTAMINATION_LOSS = 0.02
 
-		if("Phoron - Low Hazard")
+		if ("Phoron - Low Hazard")
 			plc.CLOTH_CONTAMINATION = 0 //If this is on, phoron does damage by getting into cloth.
 			plc.PHORONGUARD_ONLY = 0
 			plc.GENETIC_CORRUPTION = 0 //Chance of genetic corruption as well as toxic damage, X in 1000
@@ -216,7 +216,7 @@ var/global/vs_control/vsc = new
 			plc.PHORON_HALLUCINATION = 0
 			plc.CONTAMINATION_LOSS = 0.01
 
-		if("Phoron - High Hazard")
+		if ("Phoron - High Hazard")
 			plc.CLOTH_CONTAMINATION = 1 //If this is on, phoron does damage by getting into cloth.
 			plc.PHORONGUARD_ONLY = 0
 			plc.GENETIC_CORRUPTION = 0 //Chance of genetic corruption as well as toxic damage, X in 1000.
@@ -225,7 +225,7 @@ var/global/vs_control/vsc = new
 			plc.PHORON_HALLUCINATION = 1
 			plc.CONTAMINATION_LOSS = 0.05
 
-		if("Phoron - Oh Shit!")
+		if ("Phoron - Oh Shit!")
 			plc.CLOTH_CONTAMINATION = 1 //If this is on, phoron does damage by getting into cloth.
 			plc.PHORONGUARD_ONLY = 1
 			plc.GENETIC_CORRUPTION = 5 //Chance of genetic corruption as well as toxic damage, X in 1000.
@@ -234,7 +234,7 @@ var/global/vs_control/vsc = new
 			plc.PHORON_HALLUCINATION = 1
 			plc.CONTAMINATION_LOSS = 0.075
 
-		if("ZAS - Normal")
+		if ("ZAS - Normal")
 			airflow_lightest_pressure = 20
 			airflow_light_pressure = 35
 			airflow_medium_pressure = 50
@@ -248,7 +248,7 @@ var/global/vs_control/vsc = new
 			airflow_delay = 30
 			airflow_mob_slowdown = 1
 
-		if("ZAS - Forgiving")
+		if ("ZAS - Forgiving")
 			airflow_lightest_pressure = 45
 			airflow_light_pressure = 60
 			airflow_medium_pressure = 120
@@ -262,7 +262,7 @@ var/global/vs_control/vsc = new
 			airflow_delay = 50
 			airflow_mob_slowdown = 0
 
-		if("ZAS - Dangerous")
+		if ("ZAS - Dangerous")
 			airflow_lightest_pressure = 15
 			airflow_light_pressure = 30
 			airflow_medium_pressure = 45
@@ -276,7 +276,7 @@ var/global/vs_control/vsc = new
 			airflow_delay = 25
 			airflow_mob_slowdown = 2
 
-		if("ZAS - Hellish")
+		if ("ZAS - Hellish")
 			airflow_lightest_pressure = 20
 			airflow_light_pressure = 30
 			airflow_medium_pressure = 40
@@ -291,7 +291,7 @@ var/global/vs_control/vsc = new
 			airflow_mob_slowdown = 3
 			connection_insulation = 0
 
-		if("ZAS/Phoron - Initial")
+		if ("ZAS/Phoron - Initial")
 			fire_consuption_rate 			= initial(fire_consuption_rate)
 			fire_firelevel_multiplier 		= initial(fire_firelevel_multiplier)
 			fire_fuel_energy_release 		= initial(fire_fuel_energy_release)
@@ -335,28 +335,28 @@ var/global/vs_control/vsc = new
 		settings -= V
 
 	for(var/V in settings)
-		if(findtextEx(V,"_RANDOM") || findtextEx(V,"_DESC"))
+		if (findtextEx(V,"_RANDOM") || findtextEx(V,"_DESC"))
 			settings -= V
 
 	settings -= "settings"
 
 /pl_control/proc/Randomize(V)
 	var/newvalue
-	if("[V]_RANDOM" in vars)
-		if(isnum(vars["[V]_RANDOM"]))
+	if ("[V]_RANDOM" in vars)
+		if (isnum(vars["[V]_RANDOM"]))
 			newvalue = prob(vars["[V]_RANDOM"])
-		else if(istext(vars["[V]_RANDOM"]))
+		else if (istext(vars["[V]_RANDOM"]))
 			var/txt = vars["[V]_RANDOM"]
-			if(findtextEx(txt,"PROB"))
+			if (findtextEx(txt,"PROB"))
 				txt = splittext(txt,"/")
 				txt[1] = replacetext(txt[1],"PROB","")
 				var/p = text2num(txt[1])
 				var/r = txt[2]
-				if(prob(p))
+				if (prob(p))
 					newvalue = roll(r)
 				else
 					newvalue = vars[V]
-			else if(findtextEx(txt,"PICK"))
+			else if (findtextEx(txt,"PICK"))
 				txt = replacetext(txt,"PICK","")
 				txt = splittext(txt,",")
 				newvalue = pick(txt)

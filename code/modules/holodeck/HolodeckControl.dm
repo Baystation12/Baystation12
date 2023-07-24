@@ -43,7 +43,7 @@
 	var/dat
 
 	dat += "<B>Holodeck Control System</B><BR>"
-	if(!islocked)
+	if (!islocked)
 		dat += "Holodeck is <A href='?src=\ref[src];togglehololock=1'>[SPAN_COLOR("green", "(UNLOCKED)")]</A><BR>"
 	else
 		dat += "Holodeck is <A href='?src=\ref[src];togglehololock=1'>[SPAN_COLOR("red", "(LOCKED)")]</A><BR>"
@@ -53,13 +53,13 @@
 
 	dat += "<HR>Current Loaded Programs:<BR>"
 
-	if(!linkedholodeck)
+	if (!linkedholodeck)
 		dat += SPAN_DANGER("Warning: Unable to locate holodeck.<br>")
 		show_browser(user, dat, "window=computer;size=400x500")
 		onclose(user, "computer")
 		return
 
-	if(!length(supported_programs))
+	if (!length(supported_programs))
 		dat += SPAN_DANGER("Warning: No supported holo-programs loaded.<br>")
 		show_browser(user, dat, "window=computer;size=400x500")
 		onclose(user, "computer")
@@ -74,9 +74,9 @@
 	dat += "<BR>"
 	dat += "Please ensure that only holographic weapons are used in the holodeck if a combat simulation has been loaded.<BR>"
 
-	if(issilicon(user))
+	if (issilicon(user))
 		dat += "<BR>"
-		if(safety_disabled)
+		if (safety_disabled)
 			if (emagged)
 				dat += "[SPAN_COLOR("red", "<b>ERROR</b>: Cannot re-enable Safety Protocols.")]<BR>"
 			else
@@ -86,7 +86,7 @@
 
 	dat += "<BR>"
 
-	if(safety_disabled)
+	if (safety_disabled)
 		for(var/prog in restricted_programs)
 			dat += "<A href='?src=\ref[src];program=[restricted_programs[prog]]'>([SPAN_COLOR("red", "Begin [prog]")])</A><BR>"
 			dat += "Ensure the holodeck is empty before testing.<BR>"
@@ -95,7 +95,7 @@
 	else
 		dat += "Safety Protocols are [SPAN_COLOR("green", " ENABLED ")]<BR>"
 
-	if(linkedholodeck.has_gravity)
+	if (linkedholodeck.has_gravity)
 		dat += "Gravity is <A href='?src=\ref[src];gravity=1'>[SPAN_COLOR("green", "(ON)")]</A><BR>"
 	else
 		dat += "Gravity is <A href='?src=\ref[src];gravity=1'>[SPAN_COLOR("blue", "(OFF)")]</A><BR>"
@@ -104,34 +104,34 @@
 	return
 
 /obj/machinery/computer/HolodeckControl/Topic(href, href_list)
-	if(..())
+	if (..())
 		return 1
-	if((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
+	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)
 
-		if(href_list["program"])
+		if (href_list["program"])
 			var/prog = href_list["program"]
-			if(prog in GLOB.using_map.holodeck_programs)
+			if (prog in GLOB.using_map.holodeck_programs)
 				loadProgram(GLOB.using_map.holodeck_programs[prog])
 
-		else if(href_list["AIoverride"])
-			if(!issilicon(usr))
+		else if (href_list["AIoverride"])
+			if (!issilicon(usr))
 				return
 
-			if(safety_disabled && emagged)
+			if (safety_disabled && emagged)
 				return //if a traitor has gone through the trouble to emag the thing, let them keep it.
 
 			safety_disabled = !safety_disabled
 			update_projections()
-			if(safety_disabled)
+			if (safety_disabled)
 				log_and_message_admins("overrode the holodeck's safeties")
 			else
 				log_and_message_admins("restored the holodeck's safeties")
 
-		else if(href_list["gravity"])
+		else if (href_list["gravity"])
 			toggleGravity(linkedholodeck)
 
-		else if(href_list["togglehololock"])
+		else if (href_list["togglehololock"])
 			togglelock(usr)
 
 		src.add_fingerprint(usr)
@@ -184,7 +184,7 @@
 
 /obj/machinery/computer/HolodeckControl/Process()
 	for(var/item in holographic_objs) // do this first, to make sure people don't take items out when power is down.
-		if(!(get_turf(item) in linkedholodeck))
+		if (!(get_turf(item) in linkedholodeck))
 			derez(item, 0)
 
 	if (!safety_disabled)
@@ -193,12 +193,12 @@
 				holographic_mobs -= C
 				C.death()
 
-	if(!..())
+	if (!..())
 		return
-	if(active)
+	if (active)
 		use_power_oneoff(item_power_usage * (length(holographic_objs) + length(holographic_mobs)))
 
-		if(!checkInteg(linkedholodeck))
+		if (!checkInteg(linkedholodeck))
 			damaged = 1
 			loadProgram(GLOB.using_map.holodeck_programs["turnoff"], 0)
 			active = 0
@@ -208,7 +208,7 @@
 
 
 			for(var/turf/T in linkedholodeck)
-				if(prob(30))
+				if (prob(30))
 					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 					s.set_up(2, 1, T)
 					s.start()
@@ -218,29 +218,29 @@
 /obj/machinery/computer/HolodeckControl/proc/derez(obj/obj , silent = 1)
 	holographic_objs.Remove(obj)
 
-	if(obj == null)
+	if (obj == null)
 		return
 
-	if(!silent)
+	if (!silent)
 		var/obj/oldobj = obj
 		visible_message("The [oldobj.name] fades away!")
 	qdel(obj)
 
 /obj/machinery/computer/HolodeckControl/proc/checkInteg(area/A)
 	for(var/turf/T in A)
-		if(istype(T, /turf/space))
+		if (istype(T, /turf/space))
 			return 0
 
 	return 1
 
 //Why is it called toggle if it doesn't toggle?
 /obj/machinery/computer/HolodeckControl/proc/togglePower(toggleOn = 0)
-	if(toggleOn)
+	if (toggleOn)
 		loadProgram(GLOB.using_map.holodeck_programs["emptycourt"], 0)
 	else
 		loadProgram(GLOB.using_map.holodeck_programs["turnoff"], 0)
 
-		if(!linkedholodeck.has_gravity)
+		if (!linkedholodeck.has_gravity)
 			linkedholodeck.gravitychange(1)
 
 		active = 0
@@ -248,15 +248,15 @@
 
 
 /obj/machinery/computer/HolodeckControl/proc/loadProgram(datum/holodeck_program/HP, check_delay = 1)
-	if(!HP)
+	if (!HP)
 		return
 	var/area/A = locate(HP.target)
-	if(!A)
+	if (!A)
 		return
 
-	if(check_delay)
-		if(world.time < (last_change + 25))
-			if(world.time < (last_change + 15))//To prevent super-spam clicking, reduced process size and annoyance -Sieve
+	if (check_delay)
+		if (world.time < (last_change + 25))
+			if (world.time < (last_change + 15))//To prevent super-spam clicking, reduced process size and annoyance -Sieve
 				return
 			for(var/mob/M in range(3,src))
 				M.show_message(SPAN_WARNING("ERROR. Recalibrating projection apparatus."))
@@ -281,37 +281,37 @@
 	for(var/obj/holo_obj in holographic_objs)
 		holo_obj.alpha *= 0.8 //give holodeck objs a slight transparency
 		holo_obj.holographic = TRUE
-		if(istype(holo_obj,/obj/item/storage))
+		if (istype(holo_obj,/obj/item/storage))
 			set_extension(holo_obj,/datum/extension/chameleon/backpack)
-		if(istype(holo_obj,/obj/item/clothing))
+		if (istype(holo_obj,/obj/item/clothing))
 			set_extension(holo_obj,/datum/extension/chameleon/clothing)
 
-	if(HP.ambience)
+	if (HP.ambience)
 		linkedholodeck.forced_ambience = HP.ambience.Copy()
 	else
 		LAZYCLEARLIST(linkedholodeck.forced_ambience)
 
 	for(var/mob/living/M in mobs_in_area(linkedholodeck))
-		if(M.mind)
+		if (M.mind)
 			linkedholodeck.play_ambience(M)
 
 	linkedholodeck.sound_env = A.sound_env
 
 	spawn(30)
 		for(var/obj/effect/landmark/L in linkedholodeck)
-			if(L.name=="Atmospheric Test Start")
+			if (L.name=="Atmospheric Test Start")
 				spawn(20)
 					var/turf/T = get_turf(L)
 					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 					s.set_up(2, 1, T)
 					s.start()
-					if(T)
+					if (T)
 						T.temperature = 5000
 						T.hotspot_expose(50000,50000,1)
-			if(L.name=="Holocarp Spawn")
+			if (L.name=="Holocarp Spawn")
 				holographic_mobs += new /mob/living/simple_animal/hostile/carp/holodeck(L.loc)
 
-			if(L.name=="Holocarp Spawn Random")
+			if (L.name=="Holocarp Spawn Random")
 				if (prob(4)) //With 4 spawn points, carp should only appear 15% of the time.
 					holographic_mobs += new /mob/living/simple_animal/hostile/carp/holodeck(L.loc)
 
@@ -319,8 +319,8 @@
 
 
 /obj/machinery/computer/HolodeckControl/proc/toggleGravity(area/A)
-	if(world.time < (last_gravity_change + 25))
-		if(world.time < (last_gravity_change + 15))//To prevent super-spam clicking
+	if (world.time < (last_gravity_change + 25))
+		if (world.time < (last_gravity_change + 15))//To prevent super-spam clicking
 			return
 		for(var/mob/M in range(3,src))
 			M.show_message(SPAN_WARNING("ERROR. Recalibrating gravity field."))
@@ -331,7 +331,7 @@
 	active = 1
 	update_use_power(POWER_USE_IDLE)
 
-	if(A.has_gravity)
+	if (A.has_gravity)
 		A.gravitychange(0,A)
 	else
 		A.gravitychange(1,A)
@@ -340,7 +340,7 @@
 	//Turn it back to the regular non-holographic room
 	loadProgram(GLOB.using_map.holodeck_programs["turnoff"], 0)
 
-	if(!linkedholodeck.has_gravity)
+	if (!linkedholodeck.has_gravity)
 		linkedholodeck.gravitychange(1,linkedholodeck)
 
 	active = 0
@@ -349,7 +349,7 @@
 // Locking system
 
 /obj/machinery/computer/HolodeckControl/proc/togglelock(mob/user)
-	if(cantogglelock(user))
+	if (cantogglelock(user))
 		islocked = !islocked
 		audible_message(SPAN_NOTICE("\The [src] emits a series of beeps to announce it has been [islocked ? null : "un"]locked."), hearing_distance = 3)
 		return 0

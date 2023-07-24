@@ -27,26 +27,26 @@
 
 /obj/aura/regenerating/human/aura_check_life()
 	var/mob/living/carbon/human/H = user
-	if(!istype(H))
+	if (!istype(H))
 		CRASH("Someone gave [user.type] a [src.type] aura. This is invalid.")
-	if(!innate_heal || H.InStasis() || H.stat == DEAD)
+	if (!innate_heal || H.InStasis() || H.stat == DEAD)
 		return EMPTY_BITFIELD
-	if(H.nutrition < nutrition_damage_mult)
+	if (H.nutrition < nutrition_damage_mult)
 		low_nut_warning()
 		return EMPTY_BITFIELD
 
-	if(brute_mult && H.getBruteLoss())
+	if (brute_mult && H.getBruteLoss())
 		H.adjustBruteLoss(-brute_mult * config.organ_regeneration_multiplier)
 		H.adjust_nutrition(-nutrition_damage_mult)
-	if(fire_mult && H.getFireLoss())
+	if (fire_mult && H.getFireLoss())
 		H.adjustFireLoss(-fire_mult * config.organ_regeneration_multiplier)
 		H.adjust_nutrition(-nutrition_damage_mult)
-	if(tox_mult && H.getToxLoss())
+	if (tox_mult && H.getToxLoss())
 		H.adjustToxLoss(-tox_mult * config.organ_regeneration_multiplier)
 		H.adjust_nutrition(-nutrition_damage_mult)
 
-	if(organ_mult)
-		if(prob(10) && H.nutrition >= 150 && !H.getBruteLoss() && !H.getFireLoss())
+	if (organ_mult)
+		if (prob(10) && H.nutrition >= 150 && !H.getBruteLoss() && !H.getFireLoss())
 			var/obj/item/organ/external/head/D = H.organs_by_name["head"]
 			if (D.status & ORGAN_DISFIGURED)
 				if (H.nutrition >= 20)
@@ -57,29 +57,29 @@
 
 		for(var/bpart in shuffle(H.internal_organs_by_name - BP_BRAIN))
 			var/obj/item/organ/internal/regen_organ = H.internal_organs_by_name[bpart]
-			if(BP_IS_ROBOTIC(regen_organ))
+			if (BP_IS_ROBOTIC(regen_organ))
 				continue
-			if(istype(regen_organ))
-				if(regen_organ.damage > 0 && !(regen_organ.status & ORGAN_DEAD))
+			if (istype(regen_organ))
+				if (regen_organ.damage > 0 && !(regen_organ.status & ORGAN_DEAD))
 					if (H.nutrition >= organ_mult)
 						regen_organ.damage = max(regen_organ.damage - organ_mult, 0)
 						H.adjust_nutrition(-organ_mult)
-						if(prob(5))
+						if (prob(5))
 							to_chat(H, replacetext(regen_message,"ORGAN", regen_organ.name))
 					else
 						low_nut_warning(regen_organ.name)
 
-	if(prob(grow_chance))
+	if (prob(grow_chance))
 		for(var/limb_type in H.species.has_limbs)
 			var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-			if(E && E.organ_tag != BP_HEAD && !E.vital && (E.is_stump() || E.status & ORGAN_DEAD))	//Skips heads and vital bits...
+			if (E && E.organ_tag != BP_HEAD && !E.vital && (E.is_stump() || E.status & ORGAN_DEAD))	//Skips heads and vital bits...
 				if (H.nutrition > grow_threshold)
 					E.removed()			//...because no one wants their head to explode to make way for a new one.
 					qdel(E)
 					E= null
 				else
 					low_nut_warning(E.name)
-			if(!E)
+			if (!E)
 				var/list/organ_data = H.species.has_limbs[limb_type]
 				var/limb_path = organ_data["path"]
 				var/obj/item/organ/external/O = new limb_path(H)
@@ -89,7 +89,7 @@
 				return
 			else if (H.nutrition > grow_threshold) //We don't subtract any nut here, but let's still only heal wounds when we have nut.
 				for(var/datum/wound/W in E.wounds)
-					if(W.wound_damage() == 0 && prob(50))
+					if (W.wound_damage() == 0 && prob(50))
 						qdel(W)
 	return AURA_CANCEL
 

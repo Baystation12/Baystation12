@@ -7,10 +7,10 @@
 
 /obj/item/clothing/ring/material/New(newloc, new_material)
 	..(newloc)
-	if(!new_material)
+	if (!new_material)
 		new_material = MATERIAL_STEEL
 	material = SSmaterials.get_material_by_name(new_material)
-	if(!istype(material))
+	if (!istype(material))
 		qdel(src)
 		return
 	name = "[material.display_name] ring"
@@ -18,21 +18,21 @@
 	color = material.icon_colour
 
 /obj/item/clothing/ring/material/attackby(obj/item/S, mob/user)
-	if(S.sharp)
+	if (S.sharp)
 		var/inscription = sanitize(input("Enter an inscription to engrave.", "Inscription") as null|text)
 
-		if(!user.stat && !user.incapacitated() && user.Adjacent(src) && S.loc == user)
-			if(!inscription)
+		if (!user.stat && !user.incapacitated() && user.Adjacent(src) && S.loc == user)
+			if (!inscription)
 				return
 			desc = "A ring made from [material.display_name]."
 			to_chat(user, SPAN_WARNING("You carve \"[inscription]\" into \the [src]."))
 			desc += "<br>Written on \the [src] is the inscription \"[inscription]\""
 
 /obj/item/clothing/ring/material/OnTopic(mob/user, list/href_list)
-	if(href_list["examine"])
-		if(istype(user))
+	if (href_list["examine"])
+		if (istype(user))
 			var/mob/living/carbon/human/H = get_holder_of_type(src, /mob/living/carbon/human)
-			if(H.Adjacent(user))
+			if (H.Adjacent(user))
 				examinate(user, src)
 				return TOPIC_HANDLED
 

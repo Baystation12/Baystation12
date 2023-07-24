@@ -30,13 +30,13 @@
 
 /mob/living/simple_animal/passive/cat/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
 	//MICE!
-	if((src.loc) && isturf(src.loc))
-		if(!resting && !buckled)
+	if ((src.loc) && isturf(src.loc))
+		if (!resting && !buckled)
 			for(var/mob/living/simple_animal/passive/mouse/M in loc)
-				if(!M.stat)
+				if (!M.stat)
 					M.death()
 					visible_emote(pick("bites \the [M]!","toys with \the [M].","chomps on \the [M]!"))
 					movement_target = null
@@ -46,7 +46,7 @@
 
 
 	for(var/mob/living/simple_animal/passive/mouse/snack in oview(src,5))
-		if(snack.stat < DEAD && prob(15))
+		if (snack.stat < DEAD && prob(15))
 			audible_emote(pick("hisses and spits!","mrowls fiercely!","eyes [snack] hungrily."))
 		break
 
@@ -60,33 +60,33 @@
 		if (!ai_holder.stance == STANCE_FLEE)
 			handle_movement_target()
 
-	if(prob(2)) //spooky
+	if (prob(2)) //spooky
 		var/mob/observer/ghost/spook = locate() in range(src,5)
-		if(spook)
+		if (spook)
 			var/turf/T = spook.loc
 			var/list/visible = list()
 			for(var/obj/O in T.contents)
-				if(!O.invisibility && O.name)
+				if (!O.invisibility && O.name)
 					visible += O
-			if(length(visible))
+			if (length(visible))
 				var/atom/A = pick(visible)
 				visible_emote("suddenly stops and stares at something unseen[istype(A) ? " near [A]":""].")
 
 /mob/living/simple_animal/passive/cat/proc/handle_movement_target()
 	//if our target is neither inside a turf or inside a human(???), stop
-	if((movement_target) && !(isturf(movement_target.loc) || ishuman(movement_target.loc) ))
+	if ((movement_target) && !(isturf(movement_target.loc) || ishuman(movement_target.loc) ))
 		movement_target = null
 		set_AI_busy(FALSE)
 	//if we have no target or our current one is out of sight/too far away
-	if( !movement_target || !(movement_target.loc in oview(src, 4)) )
+	if ( !movement_target || !(movement_target.loc in oview(src, 4)) )
 		movement_target = null
 		set_AI_busy(FALSE)
 		for(var/mob/living/simple_animal/passive/mouse/snack in oview(src)) //search for a new target
-			if(isturf(snack.loc) && !snack.stat)
+			if (isturf(snack.loc) && !snack.stat)
 				movement_target = snack
 				break
 
-	if(movement_target)
+	if (movement_target)
 		set_AI_busy(TRUE)
 		walk_to(src,movement_target,0,3)
 
@@ -130,7 +130,7 @@
 
 /mob/living/simple_animal/passive/cat/fluff/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
 	if (stat || !friend)
 		return
@@ -155,15 +155,15 @@
 	set category = "IC"
 	set src in view(1)
 
-	if(!friend)
+	if (!friend)
 		var/mob/living/carbon/human/H = usr
-		if(istype(H) && (!befriend_job || H.job == befriend_job))
+		if (istype(H) && (!befriend_job || H.job == befriend_job))
 			friend = usr
 			. = 1
-	else if(usr == friend)
+	else if (usr == friend)
 		. = 1 //already friends, but show success anyways
 
-	if(.)
+	if (.)
 		set_dir(get_dir(src, friend))
 		visible_emote(pick("nuzzles [friend].",
 						   "brushes against [friend].",

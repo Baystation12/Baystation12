@@ -272,17 +272,17 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 /area/beach/Entered(atom/movable/Obj,atom/OldLoc)
 	. = ..()
-	if(ismob(Obj))
+	if (ismob(Obj))
 		var/mob/M = Obj
-		if(M.client)
+		if (M.client)
 			mysound.status = SOUND_UPDATE
 			sound_to(M, mysound)
 
 /area/beach/Exited(atom/movable/Obj)
 	. = ..()
-	if(ismob(Obj))
+	if (ismob(Obj))
 		var/mob/M = Obj
-		if(M.client)
+		if (M.client)
 			mysound.status = SOUND_PAUSED | SOUND_UPDATE
 			sound_to(M, mysound)
 
@@ -291,14 +291,14 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 	var/sound/S = null
 	var/sound_delay = 0
-	if(prob(25))
+	if (prob(25))
 		S = sound(file=pick('sound/ambience/seag1.ogg','sound/ambience/seag2.ogg','sound/ambience/seag3.ogg'), volume=100)
 		sound_delay = rand(0, 50)
 
 	for(var/mob/living/carbon/human/H in src)
-		if(H.client)
+		if (H.client)
 			mysound.status = SOUND_UPDATE
-			if(S)
+			if (S)
 				spawn(sound_delay)
 					sound_to(H, S)
 

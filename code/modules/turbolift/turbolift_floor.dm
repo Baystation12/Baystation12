@@ -11,7 +11,7 @@
 
 /datum/turbolift_floor/proc/set_area_ref(ref)
 	var/area/turbolift/A = locate(ref)
-	if(!istype(A))
+	if (!istype(A))
 		log_debug("Turbolift floor area was of the wrong type: ref=[ref]")
 		return
 
@@ -23,11 +23,11 @@
 
 //called when a lift has queued this floor as a destination
 /datum/turbolift_floor/proc/pending_move(datum/turbolift/lift)
-	if(ext_panel)
+	if (ext_panel)
 		ext_panel.light_up()
 
 //called when a lift arrives at this floor
 /datum/turbolift_floor/proc/arrived(datum/turbolift/lift)
 	lift.open_doors(src)
-	if(ext_panel)
+	if (ext_panel)
 		ext_panel.reset()

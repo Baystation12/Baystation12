@@ -20,23 +20,23 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 
 /datum/antagonist/rogue_ai/can_become_antag(datum/mind/player, ignore_role)
 	. = ..(player, ignore_role)
-	if(jobban_isbanned(player.current, "AI"))
+	if (jobban_isbanned(player.current, "AI"))
 		return 0
 	return .
 
 /datum/antagonist/rogue_ai/build_candidate_list()
 	..()
 	for(var/datum/mind/player in candidates)
-		if(player.assigned_role && player.assigned_role != "AI")
+		if (player.assigned_role && player.assigned_role != "AI")
 			candidates -= player
 	return candidates
 
 
 // Ensures proper reset of all malfunction related things.
 /datum/antagonist/rogue_ai/remove_antagonist(datum/mind/player, show_message, implanted)
-	if(..(player,show_message,implanted))
+	if (..(player,show_message,implanted))
 		var/mob/living/silicon/ai/p = player.current
-		if(istype(p))
+		if (istype(p))
 			p.stop_malf()
 		return 1
 	return 0
@@ -46,11 +46,11 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 
 	// Initializes the AI's malfunction stuff.
 	spawn(0)
-		if(!..())
+		if (!..())
 			return
 
 		var/mob/living/silicon/ai/A = player.current
-		if(!istype(A))
+		if (!istype(A))
 			error("Non-AI mob designated malf AI! Report this.")
 			to_world("##ERROR: Non-AI mob designated malf AI! Report this.")
 
@@ -84,20 +84,20 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 /datum/antagonist/rogue_ai/update_antag_mob(datum/mind/player, preserve_appearance)
 
 	// Get the mob.
-	if((flags & ANTAG_OVERRIDE_MOB) && (!player.current || (mob_path && !istype(player.current, mob_path))))
+	if ((flags & ANTAG_OVERRIDE_MOB) && (!player.current || (mob_path && !istype(player.current, mob_path))))
 		var/mob/holder = player.current
 		player.current = new mob_path(get_turf(player.current), null, null, 1)
 		player.transfer_to(player.current)
-		if(holder) qdel(holder)
+		if (holder) qdel(holder)
 	player.original = player.current
 	return player.current
 
 /datum/antagonist/rogue_ai/set_antag_name(mob/living/silicon/player)
-	if(!istype(player))
+	if (!istype(player))
 		testing("rogue_ai set_antag_name called on non-silicon mob [player]!")
 		return
 	// Choose a name, if any.
 	var/newname = sanitize(input(player, "You are a [role_text]. Would you like to change your name to something else?", "Name change") as null|text, MAX_NAME_LEN)
 	if (newname)
 		player.fully_replace_character_name(newname)
-	if(player.mind) player.mind.name = player.name
+	if (player.mind) player.mind.name = player.name

@@ -14,31 +14,31 @@
 	sanitize_events(machine, receive_and_call)
 
 /obj/item/stock_parts/radio/receiver/is_valid_event(obj/machinery/machine, singleton/public_access/variable)
-	if(istype(variable, /singleton/public_access/public_method))
+	if (istype(variable, /singleton/public_access/public_method))
 		return LAZYACCESS(machine.public_methods, variable.type)
-	if(..())
+	if (..())
 		var/singleton/public_access/public_variable/thing = variable
 		return thing.can_write
 
 /obj/item/stock_parts/radio/receiver/receive_signal(datum/signal/signal, receive_method, receive_param)
-	if(!id_tag)
+	if (!id_tag)
 		return
-	if(!(status & PART_STAT_INSTALLED))
+	if (!(status & PART_STAT_INSTALLED))
 		return
-	if(signal.encryption && (signal.encryption != encryption))
+	if (signal.encryption && (signal.encryption != encryption))
 		return
-	if(signal.data["tag"] != id_tag)
+	if (signal.data["tag"] != id_tag)
 		return
 
 	var/obj/machinery/machine = loc
-	if(!istype(machine))
+	if (!istype(machine))
 		return
 	for(var/thing in receive_and_write)
-		if(!isnull(signal.data[thing]))
+		if (!isnull(signal.data[thing]))
 			var/singleton/public_access/public_variable/variable = receive_and_write[thing]
 			variable.write_var_protected(machine, signal.data[thing])
 	for(var/thing in receive_and_call)
-		if(!isnull(signal.data[thing]))
+		if (!isnull(signal.data[thing]))
 			var/singleton/public_access/public_method/method = receive_and_call[thing]
 			method.perform(machine, signal.data[thing])
 

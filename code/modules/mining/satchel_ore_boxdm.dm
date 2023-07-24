@@ -47,7 +47,7 @@
 
 	for(var/obj/item/ore/O in contents)
 
-		if(stored_ore[O.name])
+		if (stored_ore[O.name])
 			stored_ore[O.name]++
 		else
 			stored_ore[O.name] = 1
@@ -56,19 +56,19 @@
 	. = ..()
 
 	// Borgs can now check contents too.
-	if((!istype(user, /mob/living/carbon/human)) && (!istype(user, /mob/living/silicon/robot)))
+	if ((!istype(user, /mob/living/carbon/human)) && (!istype(user, /mob/living/silicon/robot)))
 		return
 
-	if(!Adjacent(user)) //Can only check the contents of ore boxes if you can physically reach them.
+	if (!Adjacent(user)) //Can only check the contents of ore boxes if you can physically reach them.
 		return
 
 	add_fingerprint(user)
 
-	if(!length(contents))
+	if (!length(contents))
 		to_chat(user, "It is empty.")
 		return
 
-	if(world.time > last_update + 10)
+	if (world.time > last_update + 10)
 		update_ore_count()
 		last_update = world.time
 
@@ -83,20 +83,20 @@
 	set category = "Object"
 	set src in view(1)
 
-	if(!istype(usr, /mob/living/carbon/human)) //Only living, intelligent creatures with hands can empty ore boxes.
+	if (!istype(usr, /mob/living/carbon/human)) //Only living, intelligent creatures with hands can empty ore boxes.
 		to_chat(usr, SPAN_WARNING("You are physically incapable of emptying the ore box."))
 		return
 
-	if( usr.stat || usr.restrained() )
+	if ( usr.stat || usr.restrained() )
 		return
 
-	if(!Adjacent(usr)) //You can only empty the box if you can physically reach it
+	if (!Adjacent(usr)) //You can only empty the box if you can physically reach it
 		to_chat(usr, "You cannot reach the ore box.")
 		return
 
 	add_fingerprint(usr)
 
-	if(length(contents) < 1)
+	if (length(contents) < 1)
 		to_chat(usr, SPAN_WARNING("The ore box is empty"))
 		return
 
@@ -105,7 +105,7 @@
 	to_chat(usr, SPAN_NOTICE("You empty the ore box"))
 
 /obj/structure/ore_box/ex_act(severity)
-	if(severity == EX_ACT_DEVASTATING || (severity < EX_ACT_LIGHT && prob(50)))
+	if (severity == EX_ACT_DEVASTATING || (severity < EX_ACT_LIGHT && prob(50)))
 		for (var/obj/item/ore/O in contents)
 			O.dropInto(loc)
 			O.ex_act(severity++)

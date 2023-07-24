@@ -59,21 +59,21 @@ SUBSYSTEM_DEF(chemistry)
 
 
 /datum/controller/subsystem/chemistry/proc/get_prototype(given_type, temperature)
-	if(!ispath(given_type, /datum/reagent/random))
+	if (!ispath(given_type, /datum/reagent/random))
 		return
 	var/datum/reagent/random/prototype = random_chem_prototypes[given_type]
-	if(!prototype)
+	if (!prototype)
 		prototype = new given_type(null, TRUE)
 		prototype.randomize_data(temperature)
 		random_chem_prototypes[given_type] = prototype
-	if(temperature && !prototype.stable_at_temperature(temperature))
+	if (temperature && !prototype.stable_at_temperature(temperature))
 		return
 	return prototype
 
 
 /datum/controller/subsystem/chemistry/proc/get_random_chem(only_if_unique, temperature = T20C)
 	for(var/type in typesof(/datum/reagent/random))
-		if(only_if_unique && random_chem_prototypes[type])
+		if (only_if_unique && random_chem_prototypes[type])
 			continue
-		if(get_prototype(type, temperature)) //returns truthy if it's valid for the given temperature
+		if (get_prototype(type, temperature)) //returns truthy if it's valid for the given temperature
 			return type

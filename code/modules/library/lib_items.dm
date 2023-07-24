@@ -21,7 +21,7 @@
 
 /obj/structure/bookcase/Initialize()
 	for(var/obj/item/I in loc)
-		if(istype(I, /obj/item/book))
+		if (istype(I, /obj/item/book))
 			I.forceMove(src)
 	update_icon()
 	. = ..()
@@ -74,13 +74,13 @@
 
 
 /obj/structure/bookcase/attack_hand(mob/user as mob)
-	if(length(contents))
+	if (length(contents))
 		var/obj/item/book/choice = input("Which book would you like to remove from the shelf?") as null|obj in contents
-		if(choice)
-			if(!CanPhysicallyInteract(user))
+		if (choice)
+			if (!CanPhysicallyInteract(user))
 				return
-			if(ishuman(user))
-				if(!user.get_active_hand())
+			if (ishuman(user))
+				if (!user.get_active_hand())
 					user.put_in_hands(choice)
 			else
 				choice.dropInto(loc)
@@ -88,18 +88,18 @@
 
 /obj/structure/bookcase/ex_act(severity)
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			for(var/obj/item/book/b in contents)
 				qdel(b)
 			qdel(src)
 			return
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			for(var/obj/item/book/b in contents)
 				if (prob(50)) b.dropInto(loc)
 				else qdel(b)
 			qdel(src)
 			return
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			if (prob(50))
 				for(var/obj/item/book/b in contents)
 					b.dropInto(loc)
@@ -109,7 +109,7 @@
 	return
 
 /obj/structure/bookcase/on_update_icon()
-	if(length(contents) < 5)
+	if (length(contents) < 5)
 		icon_state = "book-[length(contents)]"
 	else
 		icon_state = "book-5"
@@ -172,8 +172,8 @@
 	var/obj/item/store	//What's in the book?
 
 /obj/item/book/attack_self(mob/user as mob)
-	if(carved)
-		if(store)
+	if (carved)
+		if (store)
 			to_chat(user, SPAN_NOTICE("[store] falls out of [title]!"))
 			store.dropInto(loc)
 			store = null
@@ -181,7 +181,7 @@
 		else
 			to_chat(user, SPAN_NOTICE("The pages of [title] have been cut out!"))
 			return
-	if(src.dat)
+	if (src.dat)
 		show_browser(user, dat, "window=book;size=1000x550")
 		user.visible_message("[user] opens a book titled \"[src.title]\" and begins reading intently.")
 		onclose(user, "book")
@@ -189,10 +189,10 @@
 		to_chat(user, "This book is completely blank!")
 
 /obj/item/book/attackby(obj/item/W as obj, mob/user as mob)
-	if(carved == 1)
-		if(!store)
-			if(W.w_class < ITEM_SIZE_NORMAL)
-				if(!user.unEquip(W, src))
+	if (carved == 1)
+		if (!store)
+			if (W.w_class < ITEM_SIZE_NORMAL)
+				if (!user.unEquip(W, src))
 					return
 				store = W
 				to_chat(user, SPAN_NOTICE("You put [W] in [title]."))
@@ -203,40 +203,40 @@
 		else
 			to_chat(user, SPAN_NOTICE("There's already something in [title]!"))
 			return
-	if(istype(W, /obj/item/pen))
-		if(unique)
+	if (istype(W, /obj/item/pen))
+		if (unique)
 			to_chat(user, "These pages don't seem to take the ink well. Looks like you can't modify it.")
 			return
 		var/choice = input("What would you like to change?") in list("Title", "Contents", "Author", "Cancel")
 		switch(choice)
-			if("Title")
+			if ("Title")
 				var/newtitle = reject_bad_text(sanitizeSafe(input("Write a new title:")))
-				if(!newtitle)
+				if (!newtitle)
 					to_chat(usr, "The title is invalid.")
 					return
 				else
 					src.SetName(newtitle)
 					src.title = newtitle
-			if("Contents")
+			if ("Contents")
 				var/content = sanitize(input("Write your book's contents (HTML NOT allowed):") as message|null, MAX_BOOK_MESSAGE_LEN)
-				if(!content)
+				if (!content)
 					to_chat(usr, "The content is invalid.")
 					return
 				else
 					src.dat += content
-			if("Author")
+			if ("Author")
 				var/newauthor = sanitize(input(usr, "Write the author's name:"))
-				if(!newauthor)
+				if (!newauthor)
 					to_chat(usr, "The name is invalid.")
 					return
 				else
 					src.author = newauthor
 			else
 				return
-	else if(istype(W, /obj/item/material/knife) || isWirecutter(W))
-		if(carved)	return
+	else if (istype(W, /obj/item/material/knife) || isWirecutter(W))
+		if (carved)	return
 		to_chat(user, SPAN_NOTICE("You begin to carve out [title]."))
-		if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if (do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, SPAN_NOTICE("You carve out the pages from [title]! You didn't want to read it anyway."))
 			carved = 1
 			return
@@ -244,7 +244,7 @@
 		..()
 
 /obj/item/book/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(user.zone_sel.selecting == BP_EYES)
+	if (user.zone_sel.selecting == BP_EYES)
 		user.visible_message(SPAN_NOTICE("You open up the book and show it to [M]. "), \
 			SPAN_NOTICE(" [user] opens up a book and shows it to [M]. "))
 		show_browser(M, "<i>Author: [author].</i><br><br>" + "[dat]", "window=book;size=1000x550")
@@ -260,12 +260,12 @@
 
 /obj/item/book/manual/New()
 	..()
-	if(url)		// URL provided for this manual
+	if (url)		// URL provided for this manual
 		// If we haven't wikiurl or it included in url - just use url
-		if(config.wiki_url && !findtextEx(url, config.wiki_url, 1, length(config.wiki_url)+1))
+		if (config.wiki_url && !findtextEx(url, config.wiki_url, 1, length(config.wiki_url)+1))
 			// If we have wikiurl, but it hasn't "index.php" then add it and making full link in url
-			if(config.wiki_url && !findtextEx(config.wiki_url, "/index.php", -10))
-				if(findtextEx(config.wiki_url, "/", -1))
+			if (config.wiki_url && !findtextEx(config.wiki_url, "/index.php", -10))
+				if (findtextEx(config.wiki_url, "/", -1))
 					url = config.wiki_url + "index.php?title=" + url
 				else
 					url = config.wiki_url + "/index.php?title=" + url

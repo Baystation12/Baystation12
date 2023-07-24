@@ -17,30 +17,30 @@ var/global/list/plant_seed_sprites = list()
 
 //Grabs the appropriate seed datum from the global list.
 /obj/item/seeds/proc/update_seed()
-	if(!seed && seed_type && !isnull(SSplants.seeds) && SSplants.seeds[seed_type])
+	if (!seed && seed_type && !isnull(SSplants.seeds) && SSplants.seeds[seed_type])
 		seed = SSplants.seeds[seed_type]
 	update_appearance()
 
 //Updates strings and icon appropriately based on seed datum.
 /obj/item/seeds/proc/update_appearance()
-	if(!seed) return
+	if (!seed) return
 
 	// Update icon.
 	overlays.Cut()
 	var/is_seeds = ((seed.seed_noun in list(SEED_NOUN_SEEDS, SEED_NOUN_PITS, SEED_NOUN_NODES)) ? 1 : 0)
 	var/image/seed_mask
 	var/seed_base_key = "base-[is_seeds ? seed.get_trait(TRAIT_PLANT_COLOUR) : "spores"]"
-	if(plant_seed_sprites[seed_base_key])
+	if (plant_seed_sprites[seed_base_key])
 		seed_mask = plant_seed_sprites[seed_base_key]
 	else
 		seed_mask = image('icons/obj/seeds.dmi',"[is_seeds ? "seed" : "spore"]-mask")
-		if(is_seeds) // Spore glass bits aren't coloured.
+		if (is_seeds) // Spore glass bits aren't coloured.
 			seed_mask.color = seed.get_trait(TRAIT_PLANT_COLOUR)
 		plant_seed_sprites[seed_base_key] = seed_mask
 
 	var/image/seed_overlay
 	var/seed_overlay_key = "[seed.get_trait(TRAIT_PRODUCT_ICON)]-[seed.get_trait(TRAIT_PRODUCT_COLOUR)]"
-	if(plant_seed_sprites[seed_overlay_key])
+	if (plant_seed_sprites[seed_overlay_key])
 		seed_overlay = plant_seed_sprites[seed_overlay_key]
 	else
 		seed_overlay = image('icons/obj/seeds.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]")
@@ -50,7 +50,7 @@ var/global/list/plant_seed_sprites = list()
 	overlays |= seed_mask
 	overlays |= seed_overlay
 
-	if(is_seeds)
+	if (is_seeds)
 		src.SetName("packet of [seed.seed_name] [seed.seed_noun]")
 		src.desc = "It has a picture of \a [seed.display_name] on the front."
 	else
@@ -59,7 +59,7 @@ var/global/list/plant_seed_sprites = list()
 
 /obj/item/seeds/examine(mob/user)
 	. = ..()
-	if(seed && !seed.roundstart)
+	if (seed && !seed.roundstart)
 		to_chat(user, "It's tagged as variety #[seed.uid].")
 
 /obj/item/seeds/cutting

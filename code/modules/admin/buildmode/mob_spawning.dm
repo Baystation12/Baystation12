@@ -82,7 +82,7 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		ui = new(user, src, ui_key, "mob_mode.tmpl", src.name, 425, 600, master_ui = master_ui, state = state)
 		ui.set_initial_data(data)
 		ui.open()
@@ -238,11 +238,11 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 	current_area = get_area(object)
 	current_turf = get_turf(object)
 
-	if(!current_area)
+	if (!current_area)
 		to_chat(user, SPAN_WARNING("Selected atom is not in an area, a spawner cannot be put here!"))
 		return
 
-	if(!current_turf)
+	if (!current_turf)
 		to_chat(user, SPAN_WARNING("That atom does not have a turf!"))
 		return
 

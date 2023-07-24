@@ -10,14 +10,14 @@ GLOBAL_DATUM_INIT(cinematic, /datum/cinematic, new)
 /datum/cinematic/proc/station_explosion_cinematic(station_missed=0, datum/game_mode/override)
 	set waitfor = FALSE
 
-	if(cinematic_screen)
+	if (cinematic_screen)
 		return	//already a cinematic in progress!
 
-	if(!override)
+	if (!override)
 		override = SSticker.mode
-	if(!override)
+	if (!override)
 		override = SSticker.mode_cache["extended"]
-	if(!override)
+	if (!override)
 		return
 
 	//initialise our cinematic screen object
@@ -32,7 +32,7 @@ GLOBAL_DATUM_INIT(cinematic, /datum/cinematic, new)
 	//Let's not discuss how this worked previously.
 	var/list/viewers = list()
 	for(var/mob/living/M in GLOB.alive_mobs)
-		if(M.client)
+		if (M.client)
 			M.client.screen += cinematic_screen //show every client the cinematic
 			viewers[M.client] = M.stunned
 			M.stunned = 8000
@@ -43,7 +43,7 @@ GLOBAL_DATUM_INIT(cinematic, /datum/cinematic, new)
 	sleep(30 SECONDS)
 
 	for(var/client/C in viewers)
-		if(C.mob)
+		if (C.mob)
 			C.mob.stunned = viewers[C]
 		C.screen -= cinematic_screen
 	QDEL_NULL(cinematic_screen)

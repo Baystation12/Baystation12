@@ -37,7 +37,7 @@
 	return loc
 
 /obj/item/device/uplink/New(atom/location, datum/mind/owner, telecrystals = DEFAULT_TELECRYSTAL_AMOUNT)
-	if(!istype(location, /atom))
+	if (!istype(location, /atom))
 		CRASH("Invalid spawn location. Expected /atom, was [location ? location.type : "NULL"]")
 
 	..()
@@ -56,7 +56,7 @@
 	return ..()
 
 /obj/item/device/uplink/Process()
-	if(world.time > next_offer_time)
+	if (world.time > next_offer_time)
 		next_offer_time = world.time + offer_time
 		discount_amount = pick(90;0.9, 80;0.8, 70;0.7, 60;0.6, 50;0.5, 40;0.4, 30;0.3, 20;0.2, 10;0.1)
 
@@ -66,7 +66,7 @@
 			new_discount_item = uplink_selection.get_random_item(INFINITY, src)
 		// Ensures we only only get items for which we get an actual discount and that this particular uplink can actually view (can buy would risk near-infinite loops).
 		while(is_improper_item(new_discount_item, discount_amount))
-		if(!new_discount_item)
+		if (!new_discount_item)
 			return
 
 		discount_item = new_discount_item
@@ -74,17 +74,17 @@
 		SSnano.update_uis(src)
 
 /obj/item/device/uplink/proc/is_improper_item(datum/uplink_item/new_discount_item, discount_amount)
-	if(!new_discount_item)
+	if (!new_discount_item)
 		return FALSE
 
-	if(istype(new_discount_item, /datum/uplink_item/item/stealthy_weapons/soap))
+	if (istype(new_discount_item, /datum/uplink_item/item/stealthy_weapons/soap))
 		return FALSE
 
 	var/discount_price = round(new_discount_item.cost(uses) * discount_amount)
-	if(!discount_price || new_discount_item.cost(uses) == discount_price)
+	if (!discount_price || new_discount_item.cost(uses) == discount_price)
 		return TRUE
 
-	if(!new_discount_item.can_view(src))
+	if (!new_discount_item.can_view(src))
 		return TRUE
 
 	return FALSE
@@ -98,7 +98,7 @@
 
 // Directly trigger the uplink. Turn on if it isn't already.
 /obj/item/device/uplink/proc/trigger(mob/user as mob)
-	if(!active)
+	if (!active)
 		toggle()
 	interact(user)
 
@@ -106,7 +106,7 @@
 // If true, it accesses trigger() and returns 1. If it fails, it returns false. Use this to see if you need to close the
 // current item's menu.
 /obj/item/device/uplink/proc/check_trigger(mob/user as mob, value, target)
-	if(value == target)
+	if (value == target)
 		trigger(user)
 		return 1
 	return 0
@@ -141,62 +141,62 @@
 	ui_interact(user)
 
 /obj/item/device/uplink/CanUseTopic()
-	if(!active)
+	if (!active)
 		return STATUS_CLOSE
 	return ..()
 
 // The purchasing code.
 /obj/item/device/uplink/OnTopic(user, href_list)
-	if(href_list["buy_item"])
+	if (href_list["buy_item"])
 		var/datum/uplink_item/UI = (locate(href_list["buy_item"]) in uplink.items)
 		UI.buy(src, usr)
 		. = TOPIC_REFRESH
-	else if(href_list["lock"])
+	else if (href_list["lock"])
 		toggle()
 		SSnano.close_user_uis(user, src, "main")
 		if (program)
 			program.authenticated = FALSE
 			program.computer.kill_program(program)
 		. = TOPIC_HANDLED
-	else if(href_list["return"])
+	else if (href_list["return"])
 		nanoui_menu = round(nanoui_menu/10)
 		. = TOPIC_REFRESH
-	else if(href_list["menu"])
+	else if (href_list["menu"])
 		nanoui_menu = text2num(href_list["menu"])
-		if(href_list["id"])
+		if (href_list["id"])
 			exploit_id = text2num(href_list["id"])
-		if(href_list["category"])
+		if (href_list["category"])
 			category = locate(href_list["category"]) in uplink.categories
 		. = TOPIC_REFRESH
 
-	if(. == TOPIC_REFRESH)
+	if (. == TOPIC_REFRESH)
 		update_nano_data()
 
 /obj/item/device/uplink/proc/update_nano_data()
-	if(nanoui_menu == 0)
+	if (nanoui_menu == 0)
 		var/categories[0]
 		for(var/datum/uplink_category/category in uplink.categories)
-			if(category.can_view(src))
+			if (category.can_view(src))
 				categories[LIST_PRE_INC(categories)] = list("name" = category.name, "ref" = "\ref[category]")
 		nanoui_data["categories"] = categories
-	else if(nanoui_menu == 1)
+	else if (nanoui_menu == 1)
 		var/items[0]
 		for(var/datum/uplink_item/item in category.items)
-			if(item.can_view(src))
+			if (item.can_view(src))
 				var/cost = item.cost(uses, src)
-				if(!cost) cost = "???"
+				if (!cost) cost = "???"
 				items[LIST_PRE_INC(items)] = list("name" = item.name(), "description" = replacetext(item.description(), "\n", "<br>"), "can_buy" = item.can_buy(src), "cost" = cost, "ref" = "\ref[item]")
 		nanoui_data["items"] = items
-	else if(nanoui_menu == 2)
+	else if (nanoui_menu == 2)
 		var/permanentData[0]
 		for(var/datum/computer_file/report/crew_record/L in GLOB.all_crew_records)
 			permanentData[LIST_PRE_INC(permanentData)] = list(Name = L.get_name(),"id" = L.uid, "exploit" = length(L.get_antagRecord()))
 		nanoui_data["exploit_records"] = permanentData
-	else if(nanoui_menu == 21)
+	else if (nanoui_menu == 21)
 		nanoui_data["exploit_exists"] = 0
 
 		for(var/datum/computer_file/report/crew_record/L in GLOB.all_crew_records)
-			if(L.uid == exploit_id)
+			if (L.uid == exploit_id)
 				nanoui_data["exploit"] = L.generate_nano_data()
 				nanoui_data["exploit_exists"] = 1
 				break
@@ -207,8 +207,8 @@
 // If it returns true, I recommend closing the item's normal menu with "close_browser(user, "window=name")"
 /obj/item/proc/active_uplink_check(mob/user as mob)
 	// Activates the uplink if it's active
-	if(src.hidden_uplink)
-		if(src.hidden_uplink.active)
+	if (src.hidden_uplink)
+		if (src.hidden_uplink.active)
 			src.hidden_uplink.trigger(user)
 			return 1
 	return 0
@@ -224,7 +224,7 @@
 	hidden_uplink = new(src, owner, amount)
 
 /obj/item/device/radio/uplink/attack_self(mob/user as mob)
-	if(hidden_uplink)
+	if (hidden_uplink)
 		hidden_uplink.trigger(user)
 
 /obj/item/device/multitool/uplink/New(loc, owner)
@@ -232,7 +232,7 @@
 	hidden_uplink = new(src, owner)
 
 /obj/item/device/multitool/uplink/attack_self(mob/user as mob)
-	if(hidden_uplink)
+	if (hidden_uplink)
 		hidden_uplink.trigger(user)
 
 /obj/item/device/radio/headset/uplink

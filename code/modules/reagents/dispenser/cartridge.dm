@@ -22,7 +22,7 @@
 
 /obj/item/reagent_containers/chem_disp_cartridge/New()
 	. = ..()
-	if(spawn_reagent)
+	if (spawn_reagent)
 		reagents.add_reagent(spawn_reagent, volume)
 		var/datum/reagent/R = spawn_reagent
 		setLabel(initial(R.name))
@@ -30,11 +30,11 @@
 /obj/item/reagent_containers/chem_disp_cartridge/examine(mob/user)
 	. = ..()
 	to_chat(user, "It has a capacity of [volume] units.")
-	if(reagents.total_volume <= 0)
+	if (reagents.total_volume <= 0)
 		to_chat(user, "It is empty.")
 	else
 		to_chat(user, "It contains [reagents.total_volume] units of liquid.")
-	if(!is_open_container())
+	if (!is_open_container())
 		to_chat(user, "The cap is sealed.")
 
 /obj/item/reagent_containers/chem_disp_cartridge/verb/verb_set_label(L as text)
@@ -45,14 +45,14 @@
 	setLabel(L, usr)
 
 /obj/item/reagent_containers/chem_disp_cartridge/proc/setLabel(L, mob/user = null)
-	if(L)
-		if(user)
+	if (L)
+		if (user)
 			to_chat(user, SPAN_NOTICE("You set the label on \the [src] to '[L]'."))
 
 		label = L
 		SetName("[initial(name)] - '[L]'")
 	else
-		if(user)
+		if (user)
 			to_chat(user, SPAN_NOTICE("You clear the label on \the [src]."))
 		label = ""
 		SetName(initial(name))
@@ -70,27 +70,27 @@
 	if (!is_open_container() || !flag)
 		return
 
-	else if(istype(target, /obj/structure/reagent_dispensers)) //A dispenser. Transfer FROM it TO us.
+	else if (istype(target, /obj/structure/reagent_dispensers)) //A dispenser. Transfer FROM it TO us.
 		target.add_fingerprint(user)
 
-		if(!target.reagents.total_volume && target.reagents)
+		if (!target.reagents.total_volume && target.reagents)
 			to_chat(user, SPAN_WARNING("\The [target] is empty."))
 			return
 
-		if(reagents.total_volume >= reagents.maximum_volume)
+		if (reagents.total_volume >= reagents.maximum_volume)
 			to_chat(user, SPAN_WARNING("\The [src] is full."))
 			return
 
 		var/trans = target.reagents.trans_to(src, target:amount_per_transfer_from_this)
 		to_chat(user, SPAN_NOTICE("You fill \the [src] with [trans] units of the contents of \the [target]."))
 
-	else if(target.is_open_container() && target.reagents) //Something like a glass. Player probably wants to transfer TO it.
+	else if (target.is_open_container() && target.reagents) //Something like a glass. Player probably wants to transfer TO it.
 
-		if(!reagents.total_volume)
+		if (!reagents.total_volume)
 			to_chat(user, SPAN_WARNING("\The [src] is empty."))
 			return
 
-		if(target.reagents.total_volume >= target.reagents.maximum_volume)
+		if (target.reagents.total_volume >= target.reagents.maximum_volume)
 			to_chat(user, SPAN_WARNING("\The [target] is full."))
 			return
 

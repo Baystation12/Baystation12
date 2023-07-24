@@ -26,7 +26,7 @@
 	)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		ui = new(user, src, ui_key, "tin_can.tmpl", name, 470, 290, state = state)
 		ui.set_initial_data(data)
 		ui.open()
@@ -38,35 +38,35 @@
 	state = STATE_FILL
 
 /datum/computer/file/embedded_program/airlock/tin_can/receive_signal(datum/signal/signal, receive_method, receive_param)
-	if(signal.data["tag"] == id_tag) // Does things we don't want to our state.
+	if (signal.data["tag"] == id_tag) // Does things we don't want to our state.
 		return
 	..()
 
 /datum/computer/file/embedded_program/airlock/tin_can/receive_user_command(command)
 	. = TRUE
 	switch(command)
-		if("toggle_door_safety")
+		if ("toggle_door_safety")
 			door_safety = !door_safety
-			if(!door_safety)
+			if (!door_safety)
 				signalDoor(tag_exterior_door, "unlock")
-		if("evacuate_atmos")
-			if(state == STATE_EVACUATE)
+		if ("evacuate_atmos")
+			if (state == STATE_EVACUATE)
 				return
 			state = STATE_EVACUATE
 			toggleDoor(memory["exterior_status"], tag_exterior_door, door_safety, "close")
 			signalPump(tag_pump_out_internal, 1, 0, 0) // Interior pump, target is a vaccum
-			signalPump(tag_pump_out_external, 1, 1, 10000) // Exterior pump, target is infinite 
+			signalPump(tag_pump_out_external, 1, 1, 10000) // Exterior pump, target is infinite
 			signalPump(tag_pump_out_scrubber, 1) // Get the pump to assist us in scrubbing the air out
-		if("fill_atmos")
-			if(state == STATE_FILL)
+		if ("fill_atmos")
+			if (state == STATE_FILL)
 				return
 			state = STATE_FILL
 			toggleDoor(memory["exterior_status"], tag_exterior_door, door_safety, "close")
 			signalPump(tag_pump_out_internal, 1, 1, memory["external_sensor_pressure"]) // Interior pump, target is exterior pressure
 			signalPump(tag_pump_out_external, 1, 0, 0) // Exterior pump, target is zero, to intake
 			signalPump(tag_pump_out_scrubber, 0) // make sure the scrubber isn't fighting us
-		if("seal")
-			if(state == STATE_SEALED)
+		if ("seal")
+			if (state == STATE_SEALED)
 				return
 			state = STATE_SEALED
 			toggleDoor(memory["exterior_status"], tag_exterior_door, door_safety, "close")
@@ -77,16 +77,16 @@
 			. = FALSE
 
 /datum/computer/file/embedded_program/airlock/tin_can/process()
-	if(door_safety)
+	if (door_safety)
 		var/safe_to_open = safe_to_open()
-		if(safe_to_open && memory["exterior_status"]["lock"] == "locked")
+		if (safe_to_open && memory["exterior_status"]["lock"] == "locked")
 			signalDoor(tag_exterior_door, "unlock")
-		else if(!safe_to_open && memory["exterior_status"]["lock"] == "unlocked")
+		else if (!safe_to_open && memory["exterior_status"]["lock"] == "unlocked")
 			signalDoor(tag_exterior_door, "secure_close") // close and lock
 
 /datum/computer/file/embedded_program/airlock/tin_can/proc/safe_to_open()
 	. = TRUE
-	if(abs(memory["external_sensor_pressure"] - memory["internal_sensor_pressure"]) > 1)
+	if (abs(memory["external_sensor_pressure"] - memory["internal_sensor_pressure"]) > 1)
 		return FALSE
 
 #undef STATE_FILL

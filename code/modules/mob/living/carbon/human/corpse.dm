@@ -64,60 +64,60 @@
 
 #define HEX_COLOR_TO_RGB_ARGS(X) arglist(GetHexColors(X))
 /obj/effect/landmark/corpse/proc/randomize_appearance(mob/living/carbon/human/M, species_choice)
-	if((spawn_flags & CORPSE_SPAWNER_RANDOM_GENDER))
-		if(species_choice in genders_per_species)
+	if ((spawn_flags & CORPSE_SPAWNER_RANDOM_GENDER))
+		if (species_choice in genders_per_species)
 			var/choice = pick(genders_per_species[species_choice])
 			M.change_gender(choice)
 		else
 			M.randomize_gender()
 
-	if((spawn_flags & CORPSE_SPAWNER_RANDOM_PRONOUNS))
-		if(species_choice in pronouns_per_species)
+	if ((spawn_flags & CORPSE_SPAWNER_RANDOM_PRONOUNS))
+		if (species_choice in pronouns_per_species)
 			var/choice = pick(pronouns_per_species[species_choice])
 			M.change_pronouns(choice)
 		else
 			M.randomize_pronouns()
 
-	if((spawn_flags & CORPSE_SPAWNER_RANDOM_SKIN_TONE))
-		if(species_choice in skin_tones_per_species)
+	if ((spawn_flags & CORPSE_SPAWNER_RANDOM_SKIN_TONE))
+		if (species_choice in skin_tones_per_species)
 			M.change_skin_tone(pick(skin_tones_per_species[species_choice]))
 		else
 			M.randomize_skin_tone()
 
-	if((spawn_flags & CORPSE_SPAWNER_RANDOM_SKIN_COLOR))
-		if(species_choice in skin_colors_per_species)
+	if ((spawn_flags & CORPSE_SPAWNER_RANDOM_SKIN_COLOR))
+		if (species_choice in skin_colors_per_species)
 			M.change_skin_color(HEX_COLOR_TO_RGB_ARGS(pick(skin_colors_per_species[species_choice])))
 		else
 			M.skin_tone = random_skin_tone(M.species)
 
-	if((spawn_flags & CORPSE_SPAWNER_RANDOM_HAIR_COLOR))
-		if(species_choice in hair_colors_per_species)
+	if ((spawn_flags & CORPSE_SPAWNER_RANDOM_HAIR_COLOR))
+		if (species_choice in hair_colors_per_species)
 			M.change_hair_color(HEX_COLOR_TO_RGB_ARGS(pick(hair_colors_per_species[species_choice])))
 		else
 			M.randomize_hair_color()
 		var/list/rgb = rgb2num(M.head_hair_color)
 		M.change_facial_hair_color(rgb[1], rgb[2], rgb[3])
 
-	if((spawn_flags & CORPSE_SPAWNER_RANDOM_HAIR_STYLE))
-		if(species_choice in hair_styles_per_species)
+	if ((spawn_flags & CORPSE_SPAWNER_RANDOM_HAIR_STYLE))
+		if (species_choice in hair_styles_per_species)
 			M.change_hair(pick(hair_styles_per_species[species_choice]))
 		else
 			M.randomize_hair_style()
 
-	if((spawn_flags & CORPSE_SPAWNER_RANDOM_FACIAL_STYLE))
-		if(species_choice in facial_styles_per_species)
+	if ((spawn_flags & CORPSE_SPAWNER_RANDOM_FACIAL_STYLE))
+		if (species_choice in facial_styles_per_species)
 			M.change_facial_hair(pick(facial_styles_per_species[species_choice]))
 		else
 			M.randomize_facial_hair_style()
 
-	if((spawn_flags & CORPSE_SPAWNER_RANDOM_EYE_COLOR))
-		if(species_choice in eye_colors_per_species)
+	if ((spawn_flags & CORPSE_SPAWNER_RANDOM_EYE_COLOR))
+		if (species_choice in eye_colors_per_species)
 			M.change_eye_color(HEX_COLOR_TO_RGB_ARGS(pick(eye_colors_per_species[species_choice])))
 		else
 			M.randomize_eye_color()
 
 	var/singleton/cultural_info/culture = M.get_cultural_value(TAG_CULTURE)
-	if(culture && CORPSE_SPAWNER_RANDOM_NAME & spawn_flags)
+	if (culture && CORPSE_SPAWNER_RANDOM_NAME & spawn_flags)
 		M.SetName(culture.get_random_name(M.gender))
 	else
 		M.SetName(name)

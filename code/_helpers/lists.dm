@@ -12,9 +12,9 @@
 //Returns a list in plain english as a string
 /proc/english_list(list/input, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "," )
 	switch(length(input))
-		if(0) return nothing_text
-		if(1) return "[input[1]]"
-		if(2) return "[input[1]][and_text][input[2]]"
+		if (0) return nothing_text
+		if (1) return "[input[1]]"
+		if (2) return "[input[1]][and_text][input[2]]"
 		else  return "[jointext(input, comma_text, 1, -1)][final_comma_text][and_text][input[length(input)]]"
 
 /**
@@ -89,27 +89,27 @@
 //Checks for specific types in a list
 /proc/is_type_in_list(atom/A, list/L)
 	for(var/type in L)
-		if(istype(A, type))
+		if (istype(A, type))
 			return 1
 	return 0
 
 //Checks for specific paths in a list
 /proc/is_path_in_list(path, list/L)
 	for(var/type in L)
-		if(ispath(path, type))
+		if (ispath(path, type))
 			return 1
 	return 0
 
 /proc/instances_of_type_in_list(atom/A, list/L)
 	var/instances = 0
 	for(var/type in L)
-		if(istype(A, type))
+		if (istype(A, type))
 			instances++
 	return instances
 
 //Removes any null entries from the list
 /proc/listclearnulls(list/list)
-	if(istype(list))
+	if (istype(list))
 		while(null in list)
 			list -= null
 	return
@@ -121,12 +121,12 @@
  */
 /proc/difflist(list/first, list/second, skiprep=0)
 	RETURN_TYPE(/list)
-	if(!islist(first) || !islist(second))
+	if (!islist(first) || !islist(second))
 		return
 	var/list/result = new
-	if(skiprep)
+	if (skiprep)
 		for(var/e in first)
-			if(!(e in result) && !(e in second))
+			if (!(e in result) && !(e in second))
 				result += e
 	else
 		result = first - second
@@ -137,22 +137,22 @@ Two lists may be different (A!=B) even if they have the same elements.
 This actually tests if they have the same entries and values.
 */
 /proc/same_entries(list/first, list/second)
-	if(!islist(first) || !islist(second))
+	if (!islist(first) || !islist(second))
 		return 0
-	if(length(first) != length(second))
+	if (length(first) != length(second))
 		return 0
 	for(var/entry in first)
-		if(!(entry in second) || (first[entry] != second[entry]))
+		if (!(entry in second) || (first[entry] != second[entry]))
 			return 0
 	return 1
 /*
 Checks if a list has the same entries and values as an element of big.
 */
 /proc/in_as_list(list/little, list/big)
-	if(!islist(big))
+	if (!islist(big))
 		return 0
 	for(var/element in big)
-		if(same_entries(little, element))
+		if (same_entries(little, element))
 			return 1
 	return 0
 /*
@@ -162,10 +162,10 @@ Checks if a list has the same entries and values as an element of big.
  */
 /proc/uniquemergelist(list/first, list/second, skiprep=0)
 	RETURN_TYPE(/list)
-	if(!islist(first) || !islist(second))
+	if (!islist(first) || !islist(second))
 		return
 	var/list/result = new
-	if(skiprep)
+	if (skiprep)
 		result = difflist(first, second, skiprep)+difflist(second, first, skiprep)
 	else
 		result = first ^ second
@@ -186,7 +186,7 @@ Checks if a list has the same entries and values as an element of big.
 	for(var/key in b)
 		var/b_value = b[key]
 		b_value = isnull(b_value) ? default_if_null_value : b_value
-		if(!(key in .))
+		if (!(key in .))
 			.[key] = b_value
 		else
 			.[key] = call(merge_method)(.[key], b_value)
@@ -262,7 +262,7 @@ Checks if a list has the same entries and values as an element of big.
 //Returns the next element in parameter list after first appearance of parameter element. If it is the last element of the list or not present in list, returns first element.
 /proc/next_in_list(element, list/L)
 	for(var/i=1, i<length(L), i++)
-		if(L[i] == element)
+		if (L[i] == element)
 			return L[i+1]
 	return L[1]
 
@@ -274,7 +274,7 @@ Checks if a list has the same entries and values as an element of big.
 /proc/reverselist(list/L)
 	RETURN_TYPE(/list)
 	var/list/output = list()
-	if(L)
+	if (L)
 		for(var/i = length(L); i >= 1; i--)
 			output += L[i]
 	return output
@@ -282,7 +282,7 @@ Checks if a list has the same entries and values as an element of big.
 //Randomize: Return the list in a random order
 /proc/shuffle(list/L)
 	RETURN_TYPE(/list)
-	if(!L)
+	if (!L)
 		return
 
 	L = L.Copy()
@@ -308,7 +308,7 @@ Checks if a list has the same entries and values as an element of big.
 //Mergesort: divides up the list into halves to begin the sort
 /proc/sortKey(list/client/L, order = 1)
 	RETURN_TYPE(/list)
-	if(isnull(L) || length(L) < 2)
+	if (isnull(L) || length(L) < 2)
 		return L
 	var/middle = length(L) / 2 + 1
 	return mergeKey(sortKey(L.Copy(0,middle)), sortKey(L.Copy(middle)), order)
@@ -322,21 +322,21 @@ Checks if a list has the same entries and values as an element of big.
 	while(Li <= length(L) && Ri <= length(R))
 		var/client/rL = L[Li]
 		var/client/rR = R[Ri]
-		if(sorttext(rL.ckey, rR.ckey) == order)
+		if (sorttext(rL.ckey, rR.ckey) == order)
 			result += L[Li++]
 		else
 			result += R[Ri++]
 
-	if(Li <= length(L))
+	if (Li <= length(L))
 		return (result + L.Copy(Li, 0))
 	return (result + R.Copy(Ri, 0))
 
 //Mergesort: divides up the list into halves to begin the sort
 /proc/sortAtom(list/atom/L, order = 1)
 	RETURN_TYPE(/list)
-	if(isnull(L) || length(L) < 2)
+	if (isnull(L) || length(L) < 2)
 		return L
-	if(null in L)	// Cannot sort lists containing null entries.
+	if (null in L)	// Cannot sort lists containing null entries.
 		return L
 	var/middle = length(L) / 2 + 1
 	return mergeAtoms(sortAtom(L.Copy(0,middle)), sortAtom(L.Copy(middle)), order)
@@ -351,19 +351,19 @@ Checks if a list has the same entries and values as an element of big.
 	while(Li <= length(L) && Ri <= length(R))
 		var/atom/rL = L[Li]
 		var/atom/rR = R[Ri]
-		if(sorttext(rL.name, rR.name) == order)
+		if (sorttext(rL.name, rR.name) == order)
 			result += L[Li++]
 		else
 			result += R[Ri++]
 
-	if(Li <= length(L))
+	if (Li <= length(L))
 		return (result + L.Copy(Li, 0))
 	return (result + R.Copy(Ri, 0))
 
 //Mergesort: any value in a list
 /proc/sortList(list/L)
 	RETURN_TYPE(/list)
-	if(length(L) < 2)
+	if (length(L) < 2)
 		return L
 	var/middle = length(L) / 2 + 1 // Copy is first,second-1
 	return mergeLists(sortList(L.Copy(0,middle)), sortList(L.Copy(middle))) //second parameter null = to end of list
@@ -382,12 +382,12 @@ Checks if a list has the same entries and values as an element of big.
 	var/Ri=1
 	var/list/result = new()
 	while(Li <= length(L) && Ri <= length(R))
-		if(sorttext(L[Li], R[Ri]) < 1)
+		if (sorttext(L[Li], R[Ri]) < 1)
 			result += R[Ri++]
 		else
 			result += L[Li++]
 
-	if(Li <= length(L))
+	if (Li <= length(L))
 		return (result + L.Copy(Li, 0))
 	return (result + R.Copy(Ri, 0))
 
@@ -395,7 +395,7 @@ Checks if a list has the same entries and values as an element of big.
 // List of lists, sorts by element[key] - for things like crew monitoring computer sorting records by name.
 /proc/sortByKey(list/L, key)
 	RETURN_TYPE(/list)
-	if(length(L) < 2)
+	if (length(L) < 2)
 		return L
 	var/middle = length(L) / 2 + 1
 	return mergeKeyedLists(sortByKey(L.Copy(0, middle), key), sortByKey(L.Copy(middle), key), key)
@@ -406,7 +406,7 @@ Checks if a list has the same entries and values as an element of big.
 	var/Ri=1
 	var/list/result = new()
 	while(Li <= length(L) && Ri <= length(R))
-		if(sorttext(L[Li][key], R[Ri][key]) < 1)
+		if (sorttext(L[Li][key], R[Ri][key]) < 1)
 			// Works around list += list2 merging lists; it's not pretty but it works
 			result += "temp item"
 			result[length(result)] = R[Ri++]
@@ -414,7 +414,7 @@ Checks if a list has the same entries and values as an element of big.
 			result += "temp item"
 			result[length(result)] = L[Li++]
 
-	if(Li <= length(L))
+	if (Li <= length(L))
 		return (result + L.Copy(Li, 0))
 	return (result + R.Copy(Ri, 0))
 
@@ -422,7 +422,7 @@ Checks if a list has the same entries and values as an element of big.
 //Mergesort: any value in a list, preserves key=value structure
 /proc/sortAssoc(list/L)
 	RETURN_TYPE(/list)
-	if(length(L) < 2)
+	if (length(L) < 2)
 		return L
 	var/middle = length(L) / 2 + 1 // Copy is first,second-1
 	return mergeAssoc(sortAssoc(L.Copy(0,middle)), sortAssoc(L.Copy(middle))) //second parameter null = to end of list
@@ -433,12 +433,12 @@ Checks if a list has the same entries and values as an element of big.
 	var/Ri=1
 	var/list/result = new()
 	while(Li <= length(L) && Ri <= length(R))
-		if(sorttext(L[Li], R[Ri]) < 1)
+		if (sorttext(L[Li], R[Ri]) < 1)
 			result += R&R[Ri++]
 		else
 			result += L&L[Li++]
 
-	if(Li <= length(L))
+	if (Li <= length(L))
 		return (result + L.Copy(Li, 0))
 	return (result + R.Copy(Ri, 0))
 
@@ -446,16 +446,16 @@ Checks if a list has the same entries and values as an element of big.
 /proc/bitfield2list(bitfield = 0, list/wordlist)
 	RETURN_TYPE(/list)
 	var/list/r = list()
-	if(istype(wordlist,/list))
+	if (istype(wordlist,/list))
 		var/max = min(length(wordlist),16)
 		var/bit = 1
 		for(var/i=1, i<=max, i++)
-			if(bitfield & bit)
+			if (bitfield & bit)
 				r += wordlist[i]
 			bit = SHIFTL(bit, 1)
 	else
 		for(var/bit=1, bit<=65535, bit = SHIFTL(bit, 1))
-			if(bitfield & bit)
+			if (bitfield & bit)
 				r += bit
 
 	return r
@@ -464,7 +464,7 @@ Checks if a list has the same entries and values as an element of big.
 /proc/get_key_by_index(list/L, index)
 	var/i = 1
 	for(var/key in L)
-		if(index == i)
+		if (index == i)
 			return key
 		i++
 	return null
@@ -472,13 +472,13 @@ Checks if a list has the same entries and values as an element of big.
 // Returns the key based on the index
 /proc/get_key_by_value(list/L, value)
 	for(var/key in L)
-		if(L[key] == value)
+		if (L[key] == value)
 			return key
 
 /proc/count_by_type(list/L, type)
 	var/i = 0
 	for(var/T in L)
-		if(istype(T, type))
+		if (istype(T, type))
 			i++
 	return i
 
@@ -488,14 +488,14 @@ Checks if a list has the same entries and values as an element of big.
 	//to_world_log("ascending len input: [length(L)]")
 	var/list/out = list(pop(L))
 	for(var/entry in L)
-		if(isnum(entry))
+		if (isnum(entry))
 			var/success = 0
 			for(var/i=1, i<=length(out), i++)
-				if(entry <= out[i])
+				if (entry <= out[i])
 					success = 1
 					out.Insert(i, entry)
 					break
-			if(!success)
+			if (!success)
 				out.Add(entry)
 
 	//to_world_log("output: [length(out)]")
@@ -521,12 +521,12 @@ Checks if a list has the same entries and values as an element of big.
 	while(i < j)
 		mid = round((i+j)/2)
 
-		if(call(cmp)(L[mid],A) < 0)
+		if (call(cmp)(L[mid],A) < 0)
 			i = mid + 1
 		else
 			j = mid
 
-	if(i == 1 || i ==  length(L)) // Edge cases
+	if (i == 1 || i ==  length(L)) // Edge cases
 		return (call(cmp)(L[i],A) > 0) ? i : i+1
 	else
 		return i
@@ -534,7 +534,7 @@ Checks if a list has the same entries and values as an element of big.
 
 /proc/dd_sortedObjectList(list/L, cache=list())
 	RETURN_TYPE(/list)
-	if(length(L) < 2)
+	if (length(L) < 2)
 		return L
 	var/middle = length(L) / 2 + 1 // Copy is first,second-1
 	return dd_mergeObjectList(dd_sortedObjectList(L.Copy(0,middle), cache), dd_sortedObjectList(L.Copy(middle), cache), cache) //second parameter null = to end of list
@@ -549,18 +549,18 @@ Checks if a list has the same entries and values as an element of big.
 		var/RRi = R[Ri]
 		var/LLiV = cache[LLi]
 		var/RRiV = cache[RRi]
-		if(!LLiV)
+		if (!LLiV)
 			LLiV = LLi:dd_SortValue()
 			cache[LLi] = LLiV
-		if(!RRiV)
+		if (!RRiV)
 			RRiV = RRi:dd_SortValue()
 			cache[RRi] = RRiV
-		if(LLiV < RRiV)
+		if (LLiV < RRiV)
 			result += L[Li++]
 		else
 			result += R[Ri++]
 
-	if(Li <= length(L))
+	if (Li <= length(L))
 		return (result + L.Copy(Li, 0))
 	return (result + R.Copy(Ri, 0))
 
@@ -574,16 +574,16 @@ Checks if a list has the same entries and values as an element of big.
 	while(1)
 		var/mid = min+round((max-min)/2)
 
-		if(mid == max)
+		if (mid == max)
 			L.Insert(mid, O)
 			return
 
 		var/Lmid = L[mid]
 		var/midval = Lmid:dd_SortValue()
-		if(Oval == midval)
+		if (Oval == midval)
 			L.Insert(mid, O)
 			return
-		else if(Oval < midval)
+		else if (Oval < midval)
 			max = mid
 		else
 			min = mid+1
@@ -670,7 +670,7 @@ Checks if a list has the same entries and values as an element of big.
 //if no list/L is provided, one is created.
 /proc/init_subtypes(prototype, list/L)
 	RETURN_TYPE(/list)
-	if(!istype(L))	L = list()
+	if (!istype(L))	L = list()
 	for(var/path in subtypesof(prototype))
 		L += new path()
 	return L
@@ -679,7 +679,7 @@ Checks if a list has the same entries and values as an element of big.
 //if no list/L is provided, one is created.
 /proc/init_subtypes_assoc(prototype, list/L)
 	RETURN_TYPE(/list)
-	if(!istype(L))	L = list()
+	if (!istype(L))	L = list()
 	for(var/path in subtypesof(prototype))
 		L[path] = new path()
 	return L
@@ -690,12 +690,12 @@ Checks if a list has the same entries and values as an element of big.
 	RETURN_TYPE(/list)
 	. = list()
 	for(var/entry in L)
-		if(istype(entry, type))
+		if (istype(entry, type))
 			. += entry
 
 /proc/group_by(list/group_list, key, value)
 	var/values = group_list[key]
-	if(!values)
+	if (!values)
 		values = list()
 		group_list[key] = values
 
@@ -706,7 +706,7 @@ Checks if a list has the same entries and values as an element of big.
 	. = list()
 	var/list/checked = list()
 	for(var/value in L)
-		if(value in checked)
+		if (value in checked)
 			. |= value
 		else
 			checked += value
@@ -723,9 +723,9 @@ Checks if a list has the same entries and values as an element of big.
 //fromIndex and toIndex must be in the range [1,length(L)+1]
 //This will preserve associations ~Carnie
 /proc/moveElement(list/L, fromIndex, toIndex)
-	if(fromIndex == toIndex || fromIndex+1 == toIndex)	//no need to move
+	if (fromIndex == toIndex || fromIndex+1 == toIndex)	//no need to move
 		return
-	if(fromIndex > toIndex)
+	if (fromIndex > toIndex)
 		++fromIndex	//since a null will be inserted before fromIndex, the index needs to be nudged right by one
 
 	L.Insert(toIndex, null)
@@ -737,8 +737,8 @@ Checks if a list has the same entries and values as an element of big.
 //This will preserve associations ~Carnie
 /proc/moveRange(list/L, fromIndex, toIndex, len=1)
 	var/distance = abs(toIndex - fromIndex)
-	if(len >= distance)	//there are more elements to be moved than the distance to be moved. Therefore the same result can be achieved (with fewer operations) by moving elements between where we are and where we are going. The result being, our range we are moving is shifted left or right by dist elements
-		if(fromIndex <= toIndex)
+	if (len >= distance)	//there are more elements to be moved than the distance to be moved. Therefore the same result can be achieved (with fewer operations) by moving elements between where we are and where we are going. The result being, our range we are moving is shifted left or right by dist elements
+		if (fromIndex <= toIndex)
 			return	//no need to move
 		fromIndex += len	//we want to shift left instead of right
 
@@ -747,7 +747,7 @@ Checks if a list has the same entries and values as an element of big.
 			L.Swap(fromIndex, toIndex)
 			L.Cut(toIndex, toIndex+1)
 	else
-		if(fromIndex > toIndex)
+		if (fromIndex > toIndex)
 			fromIndex += len
 
 		for(var/i=0, i<len, ++i)
@@ -758,12 +758,12 @@ Checks if a list has the same entries and values as an element of big.
 //replaces reverseList ~Carnie
 /proc/reverseRange(list/L, start=1, end=0)
 	RETURN_TYPE(/list)
-	if(length(L))
+	if (length(L))
 		start = start % length(L)
 		end = end % (length(L)+1)
-		if(start <= 0)
+		if (start <= 0)
 			start += length(L)
-		if(end <= 0)
+		if (end <= 0)
 			end += length(L) + 1
 
 		--end
@@ -776,11 +776,11 @@ Checks if a list has the same entries and values as an element of big.
 //Does not copy any other reference type
 /proc/deepCopyList(list/l)
 	RETURN_TYPE(/list)
-	if(!islist(l))
+	if (!islist(l))
 		return l
 	. = l.Copy()
 	for(var/i = 1 to length(l))
-		if(islist(.[i]))
+		if (islist(.[i]))
 			.[i] = .(.[i])
 
 #define IS_VALID_INDEX(list, index) (length(list) && index > 0 && index <= length(list))
@@ -788,7 +788,7 @@ Checks if a list has the same entries and values as an element of big.
 // Returns the first key where T fulfills ispath
 /proc/get_ispath_key(list/L, T)
 	for(var/key in L)
-		if(ispath(T, key))
+		if (ispath(T, key))
 			return key
 
 // Gets the first instance that is of the given type (strictly)
@@ -796,7 +796,7 @@ Checks if a list has the same entries and values as an element of big.
 	RETURN_TYPE(/atom)
 	for(var/key in L)
 		var/atom/A = key
-		if(A.type == T)
+		if (A.type == T)
 			return A
 
 /**
@@ -808,7 +808,7 @@ Checks if a list has the same entries and values as an element of big.
 	. = list()
 	for(var/thing in atoms)
 		var/atom/A = thing
-		if(typecache[A.type])
+		if (typecache[A.type])
 			. += A
 
 /**
@@ -816,9 +816,9 @@ Checks if a list has the same entries and values as an element of big.
  */
 /proc/typecacheof(path, ignore_root_path, only_root_path = FALSE)
 	RETURN_TYPE(/list)
-	if(ispath(path))
+	if (ispath(path))
 		var/list/types = list()
-		if(only_root_path)
+		if (only_root_path)
 			types = list(path)
 		else
 			types = ignore_root_path ? subtypesof(path) : typesof(path)
@@ -826,16 +826,16 @@ Checks if a list has the same entries and values as an element of big.
 		for(var/T in types)
 			L[T] = TRUE
 		return L
-	else if(islist(path))
+	else if (islist(path))
 		var/list/pathlist = path
 		var/list/L = list()
-		if(ignore_root_path)
+		if (ignore_root_path)
 			for(var/P in pathlist)
 				for(var/T in subtypesof(P))
 					L[T] = TRUE
 		else
 			for(var/P in pathlist)
-				if(only_root_path)
+				if (only_root_path)
 					L[P] = TRUE
 				else
 					for(var/T in typesof(P))

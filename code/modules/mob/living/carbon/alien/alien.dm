@@ -20,7 +20,7 @@
 	real_name = name
 	regenerate_icons()
 
-	if(language)
+	if (language)
 		add_language(language)
 
 	gender = NEUTER

@@ -23,7 +23,7 @@
 
 /datum/compass_waypoint/proc/recalculate_heading(cx, cy, translate_val)
 	var/matrix/M = matrix()
-	if(name)
+	if (name)
 		translate_val -= 4
 	M.Translate(0, translate_val)
 	M.Turn(Atan2(cy-y, cx-x)+180)

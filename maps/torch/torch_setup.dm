@@ -27,9 +27,9 @@
 
 		for(var/zlevel in map_sectors)
 			var/obj/effect/overmap/visitable/O = map_sectors[zlevel]
-			if(O.name == torch.name)
+			if (O.name == torch.name)
 				continue
-			if(istype(O, /obj/effect/overmap/visitable/ship/landable)) //Don't show shuttles
+			if (istype(O, /obj/effect/overmap/visitable/ship/landable)) //Don't show shuttles
 				continue
 			if (O.hide_from_reports)
 				continue
@@ -37,7 +37,7 @@
 
 		for(var/obj/effect/overmap/visitable/O in space_things)
 			var/location_desc = " at present co-ordinates."
-			if(O.loc != torch.loc)
+			if (O.loc != torch.loc)
 				var/bearing = get_bearing(torch, O)
 				location_desc = ", bearing [bearing]."
 			welcome_text += "<li>\A <b>[O.name]</b>[location_desc]</li>"

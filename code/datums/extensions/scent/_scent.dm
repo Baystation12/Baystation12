@@ -16,9 +16,9 @@ Scent intensity
 	return TRUE
 
 /singleton/scent_intensity/proc/PrintMessage(mob/living/carbon/human/user, descriptor, scent)
-	if(!can_smell(user))
+	if (!can_smell(user))
 		return
-	if(!user.isSynthetic())
+	if (!user.isSynthetic())
 		to_chat(user, SPAN_SUBTLE("The subtle [descriptor] of [scent] tickles your nose..."))
 	else
 		to_chat(user, SPAN_NOTICE("Your sensors detect trace amounts of [scent] in the air."))
@@ -29,9 +29,9 @@ Scent intensity
 	intensity = 2
 
 /singleton/scent_intensity/normal/PrintMessage(mob/living/carbon/human/user, descriptor, scent)
-	if(!can_smell(user))
+	if (!can_smell(user))
 		return
-	if(!user.isSynthetic())
+	if (!user.isSynthetic())
 		to_chat(user, SPAN_NOTICE("The [descriptor] of [scent] fills the air."))
 	else
 		to_chat(user, SPAN_NOTICE("Your sensors pick up the presence of [scent] in the air."))
@@ -41,9 +41,9 @@ Scent intensity
 	intensity = 3
 
 /singleton/scent_intensity/strong/PrintMessage(mob/living/carbon/human/user, descriptor, scent)
-	if(!can_smell(user))
+	if (!can_smell(user))
 		return
-	if(!user.isSynthetic())
+	if (!user.isSynthetic())
 		to_chat(user, SPAN_WARNING("The unmistakable [descriptor] of [scent] bombards your nostrils."))
 	else
 		to_chat(user, SPAN_WARNING("Your sensors pick up an intense concentration of [scent]."))
@@ -53,9 +53,9 @@ Scent intensity
 	intensity = 4
 
 /singleton/scent_intensity/overpowering/PrintMessage(mob/living/carbon/human/user, descriptor, scent)
-	if(!can_smell(user))
+	if (!can_smell(user))
 		return
-	if(!user.isSynthetic())
+	if (!user.isSynthetic())
 		to_chat(user, SPAN_WARNING("The overwhelming [descriptor] of [scent] assaults your senses. You stifle a gag."))
 	else
 		to_chat(user, SPAN_WARNING("ALERT! Your sensors pick up an overwhelming concentration of [scent]."))
@@ -81,7 +81,7 @@ Scent intensity
 
 /datum/extension/scent/New()
 	..()
-	if(ispath(intensity))
+	if (ispath(intensity))
 		intensity = GET_SINGLETON(intensity)
 	START_PROCESSING(SSprocessing, src)
 
@@ -90,7 +90,7 @@ Scent intensity
 	. = ..()
 
 /datum/extension/scent/Process()
-	if(!holder)
+	if (!holder)
 		crash_with("Scent extension with scent '[scent]', intensity '[intensity]', descriptor '[descriptor]' and range of '[range]' attempted to emit_scent() without a holder.")
 		qdel(src)
 		return PROCESS_KILL
@@ -99,11 +99,11 @@ Scent intensity
 /datum/extension/scent/proc/emit_scent()
 	for(var/mob/living/carbon/human/H in all_hearers(holder, range))
 		var/turf/T = get_turf(H.loc)
-		if(!T)
+		if (!T)
 			continue
-		if(H.stat != CONSCIOUS || H.failed_last_breath || H.wear_mask || H.head && H.head.permeability_coefficient < 1 || !T.return_air())
+		if (H.stat != CONSCIOUS || H.failed_last_breath || H.wear_mask || H.head && H.head.permeability_coefficient < 1 || !T.return_air())
 			continue
-		if(H.last_smelt < world.time)
+		if (H.last_smelt < world.time)
 			intensity.PrintMessage(H, descriptor, scent)
 			H.last_smelt = world.time + intensity.cooldown
 
@@ -114,9 +114,9 @@ This will let you set an extension without needing to define it beforehand. Note
 *****/
 /datum/extension/scent/custom/New(datum/holder, provided_scent, provided_intensity, provided_descriptor, provided_range)
 	..()
-	if(provided_scent && provided_intensity && provided_descriptor && provided_range)
+	if (provided_scent && provided_intensity && provided_descriptor && provided_range)
 		scent = provided_scent
-		if(ispath(provided_intensity))
+		if (ispath(provided_intensity))
 			intensity = GET_SINGLETON(provided_intensity)
 		descriptor = provided_descriptor
 		range = provided_range
@@ -135,16 +135,16 @@ To add a scent extension to an atom using a reagent's info, where R. is the reag
 /proc/set_scent_by_reagents(atom/smelly_atom)
 	var/datum/reagent/smelliest
 	var/datum/reagent/scent_intensity
-	if(!smelly_atom.reagents || !smelly_atom.reagents.total_volume)
+	if (!smelly_atom.reagents || !smelly_atom.reagents.total_volume)
 		return
 	for(var/datum/reagent/reagent_to_compare in smelly_atom.reagents.reagent_list)
 		var/datum/reagent/R = reagent_to_compare
-		if(!R.scent)
+		if (!R.scent)
 			continue
 		var/singleton/scent_intensity/SI = GET_SINGLETON(R.scent_intensity)
 		var/r_scent_intensity = R.volume * SI.intensity
-		if(r_scent_intensity > scent_intensity)
+		if (r_scent_intensity > scent_intensity)
 			smelliest = R
 			scent_intensity = r_scent_intensity
-	if(smelliest)
+	if (smelliest)
 		set_extension(smelly_atom, /datum/extension/scent/custom, smelliest.scent, smelliest.scent_intensity, smelliest.scent_descriptor, smelliest.scent_range)

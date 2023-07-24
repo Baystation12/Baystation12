@@ -19,24 +19,24 @@ var/global/list/doppler_arrays = list()
 	..()
 
 /obj/machinery/doppler_array/proc/sense_explosion(x0,y0,z0,devastation_range,heavy_impact_range,light_impact_range,took)
-	if(!is_powered())	return
-	if(z != z0)			return
+	if (!is_powered())	return
+	if (z != z0)			return
 
 	var/dx = abs(x0-x)
 	var/dy = abs(y0-y)
 	var/distance
 
-	if(dx > dy)
+	if (dx > dy)
 		distance = dx
-		if(x0 > x)	direct = EAST
+		if (x0 > x)	direct = EAST
 		else		direct = WEST
 	else
 		distance = dy
-		if(y0 > y)	direct = NORTH
+		if (y0 > y)	direct = NORTH
 		else		direct = SOUTH
 
-	if(distance > 100)		return
-	if(!(direct & dir))	return
+	if (distance > 100)		return
+	if (!(direct & dir))	return
 
 	var/message = "Explosive disturbance detected - Epicenter at: grid ([x0],[y0]). Epicenter radius: [devastation_range]. Outer radius: [heavy_impact_range]. Shockwave radius: [light_impact_range]. Temporal displacement of tachyons: [took] seconds."
 
@@ -44,17 +44,17 @@ var/global/list/doppler_arrays = list()
 
 /obj/machinery/doppler_array/on_update_icon()
 	overlays.Cut()
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		icon_state = "[initial(icon_state)]-broken"
-	if(panel_open)
+	if (panel_open)
 		overlays += "[initial(icon_state)]-open"
-	if(inoperable())
+	if (inoperable())
 		icon_state = "[initial(icon_state)]-off"
 
 /obj/machinery/doppler_array/attackby(obj/item/W, mob/user)
-	if(component_attackby(W, user))
+	if (component_attackby(W, user))
 		return TRUE
-	else if(isWrench(W))
+	else if (isWrench(W))
 		anchored = !anchored
 		to_chat(user, SPAN_NOTICE("You wrench the stabilising bolts [anchored ? "into place" : "loose"]."))
 		playsound(loc, 'sound/items/Ratchet.ogg', 40)
@@ -62,11 +62,11 @@ var/global/list/doppler_arrays = list()
 
 /obj/machinery/doppler_array/proc/getcurrentdirection()
 	switch(direct)
-		if(EAST)
+		if (EAST)
 			currentlyfacing = "east"
-		if(WEST)
+		if (WEST)
 			currentlyfacing = "west"
-		if(NORTH)
+		if (NORTH)
 			currentlyfacing = "north"
 		else
 			currentlyfacing = "south"

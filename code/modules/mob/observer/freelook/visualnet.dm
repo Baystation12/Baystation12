@@ -12,7 +12,7 @@
 /datum/visualnet/New()
 	..()
 	visual_nets += src
-	if(!valid_source_types)
+	if (!valid_source_types)
 		valid_source_types = list()
 
 /datum/visualnet/Destroy()
@@ -39,7 +39,7 @@
 	x &= ~0xf
 	y &= ~0xf
 	var/key = "[x],[y],[z]"
-	if(!chunks[key])
+	if (!chunks[key])
 		chunks[key] = new chunk_type(src, x, y, z)
 
 	return chunks[key]
@@ -49,7 +49,7 @@
 /datum/visualnet/proc/update_eye_chunks(mob/observer/eye/eye, full_update = FALSE)
 	. = list()
 	var/turf/T = get_turf(eye)
-	if(T)
+	if (T)
 		// 0xf = 15
 		var/x1 = max(0, T.x - 16) & ~0xf
 		var/y1 = max(0, T.y - 16) & ~0xf
@@ -60,7 +60,7 @@
 			for(var/y = y1; y <= y2; y += 16)
 				. += get_chunk(x, y, T.z)
 
-	if(full_update)
+	if (full_update)
 		eye.visibleChunks.Cut()
 
 	var/list/remove = eye.visibleChunks - .
@@ -82,7 +82,7 @@
 // Updates the chunks that the turf is located in. Use this when obstacles are destroyed or	when doors open.
 
 /datum/visualnet/proc/update_visibility(atom/A, opacity_check = TRUE)
-	if((GAME_STATE < RUNLEVEL_GAME) || (opacity_check && !A.opacity))
+	if ((GAME_STATE < RUNLEVEL_GAME) || (opacity_check && !A.opacity))
 		return
 	major_chunk_change(A)
 
@@ -96,13 +96,13 @@
 	return position && is_turf_visible(position)
 
 /datum/visualnet/proc/is_turf_visible(turf/position)
-	if(!position)
+	if (!position)
 		return FALSE
 	var/datum/chunk/chunk = get_chunk(position.x, position.y, position.z)
-	if(chunk)
-		if(chunk.dirty)
+	if (chunk)
+		if (chunk.dirty)
 			chunk.update(TRUE) // Update now, no matter if it's visible or not.
-		if(position in chunk.visibleTurfs)
+		if (position in chunk.visibleTurfs)
 			return TRUE
 	return FALSE
 
@@ -112,27 +112,27 @@
 	for_all_chunks_in_range(source, /datum/chunk/proc/visibility_changed, list())
 
 /datum/visualnet/proc/add_source(atom/source, update_visibility = TRUE, opacity_check = FALSE)
-	if(!(source && is_type_in_list(source, valid_source_types)))
+	if (!(source && is_type_in_list(source, valid_source_types)))
 		log_visualnet("Was given an unhandled source", source)
 		return FALSE
-	if(source in sources)
+	if (source in sources)
 		return FALSE
 	sources += source
 	GLOB.moved_event.register(source, src, /datum/visualnet/proc/source_moved)
 	GLOB.destroyed_event.register(source, src, /datum/visualnet/proc/remove_source)
 	for_all_chunks_in_range(source, /datum/chunk/proc/add_source, list(source))
-	if(update_visibility)
+	if (update_visibility)
 		update_visibility(source, opacity_check)
 	return TRUE
 
 /datum/visualnet/proc/remove_source(atom/source, update_visibility = TRUE, opacity_check = FALSE)
-	if(!sources.Remove(source))
+	if (!sources.Remove(source))
 		return FALSE
 
 	GLOB.moved_event.unregister(source, src, /datum/visualnet/proc/source_moved)
 	GLOB.destroyed_event.unregister(source, src, /datum/visualnet/proc/remove_source)
 	for_all_chunks_in_range(source, /datum/chunk/proc/remove_source, list(source))
-	if(update_visibility)
+	if (update_visibility)
 		update_visibility(source, opacity_check)
 	return TRUE
 
@@ -140,19 +140,19 @@
 	var/turf/old_turf = get_turf(old_loc)
 	var/turf/new_turf = get_turf(new_loc)
 
-	if(old_turf == new_turf)
+	if (old_turf == new_turf)
 		return
 
 	// A more proper way would be to figure out which chunks have gone out of range, and which have come into range
 	//  and only remove/add to those.
-	if(old_turf)
+	if (old_turf)
 		for_all_chunks_in_range(source, /datum/chunk/proc/remove_source, list(source), old_turf)
-	if(new_turf)
+	if (new_turf)
 		for_all_chunks_in_range(source, /datum/chunk/proc/add_source, list(source), new_turf)
 
 /datum/visualnet/proc/for_all_chunks_in_range(atom/source, proc_call, list/proc_args, turf/T)
 	T = T ? T : get_turf(source)
-	if(!T)
+	if (!T)
 		return
 
 	var/x1 = max(0, T.x - 8) & ~0xf
@@ -162,7 +162,7 @@
 
 	for(var/x = x1; x <= x2; x += 16)
 		for(var/y = y1; y <= y2; y += 16)
-			if(is_chunk_generated(x, y, T.z))
+			if (is_chunk_generated(x, y, T.z))
 				var/datum/chunk/c = get_chunk(x, y, T.z)
 				call(c, proc_call)(arglist(proc_args))
 
@@ -172,7 +172,7 @@
 	set category = "Debug"
 	set src in world
 
-	if(cameranet.is_chunk_generated(x, y, z))
+	if (cameranet.is_chunk_generated(x, y, z))
 		var/datum/chunk/chunk = cameranet.get_chunk(x, y, z)
 		usr.client.debug_variables(chunk)
 
@@ -181,6 +181,6 @@
 	set category = "Debug"
 	set src in world
 
-	if(cameranet.is_chunk_generated(x, y, z))
+	if (cameranet.is_chunk_generated(x, y, z))
 		var/datum/chunk/chunk = cameranet.get_chunk(x, y, z)
 		chunk.visibility_changed(TRUE)

@@ -4,11 +4,11 @@
 	var/window_y = 470
 
 /datum/extension/interactive/multitool/proc/interact(obj/item/device/multitool/M, mob/user)
-	if(extension_status(user) != STATUS_INTERACTIVE)
+	if (extension_status(user) != STATUS_INTERACTIVE)
 		return
 
 	var/html = get_interact_window(M, user)
-	if(html)
+	if (html)
 		var/datum/browser/popup = new(usr, "multitool", "Multitool Menu", window_x, window_y)
 		popup.set_content(html)
 		popup.set_title_image(user.browse_rsc_icon(M.icon, M.icon_state))
@@ -25,35 +25,35 @@
 /datum/extension/interactive/multitool/proc/buffer(obj/item/device/multitool/multitool)
 	. += "<b>Buffer Memory:</b><br>"
 	var/buffer_name = multitool.get_buffer_name()
-	if(buffer_name)
+	if (buffer_name)
 		. += "[buffer_name] <a href='?src=\ref[src];send=\ref[multitool.buffer_object]'>Send</a> <a href='?src=\ref[src];purge=1'>Purge</a><br>"
 	else
 		. += "No connection stored in the buffer."
 
 /datum/extension/interactive/multitool/extension_status(mob/user)
-	if(!user.get_multitool())
+	if (!user.get_multitool())
 		return STATUS_CLOSE
 	. = ..()
 
 /datum/extension/interactive/multitool/extension_act(href, href_list, mob/user)
-	if(..())
+	if (..())
 		close_window(usr)
 		return TRUE
 
 	var/obj/item/device/multitool/M = user.get_multitool()
-	if(href_list["send"])
+	if (href_list["send"])
 		var/atom/buffer = locate(href_list["send"])
 		. = send_buffer(M, buffer, user)
-	else if(href_list["purge"])
+	else if (href_list["purge"])
 		M.set_buffer(null)
 		. = MT_REFRESH
 	else
 		. = on_topic(href, href_list, user)
 
 	switch(.)
-		if(MT_REFRESH)
+		if (MT_REFRESH)
 			interact(M, user)
-		if(MT_CLOSE)
+		if (MT_CLOSE)
 			close_window(user)
 	return MT_NOACTION ? FALSE : TRUE
 
@@ -61,9 +61,9 @@
 	return MT_NOACTION
 
 /datum/extension/interactive/multitool/proc/send_buffer(obj/item/device/multitool/M, atom/buffer, mob/user)
-	if(M.get_buffer() == buffer && buffer)
+	if (M.get_buffer() == buffer && buffer)
 		receive_buffer(M, buffer, user)
-	else if(!buffer)
+	else if (!buffer)
 		to_chat(user, SPAN_WARNING("Unable to acquire data from the buffered object. Purging from memory."))
 	return MT_REFRESH
 

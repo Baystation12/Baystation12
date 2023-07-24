@@ -42,9 +42,9 @@
 /datum/ai_holder/simple_animal/goat/king/engage_target()
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/goat/king/G = holder
-	if(isliving(G.target_mob))
+	if (isliving(G.target_mob))
 		var/mob/living/L = G.target_mob
-		if(prob(G.stun_chance))
+		if (prob(G.stun_chance))
 			L.Weaken(0.5)
 			L.confused += 1
 			G.visible_message(SPAN_WARNING("\The [L] is bowled over by the impact of [G]'s attack!"))
@@ -52,7 +52,7 @@
 /datum/ai_holder/simple_animal/goat/king/react_to_attack(atom/movable/attacker)
 	. = ..()
 
-	if(holder.stat == CONSCIOUS && prob(5))
+	if (holder.stat == CONSCIOUS && prob(5))
 		holder.visible_message(SPAN_WARNING("The [holder] bellows indignantly, with a judgemental gleam in his eye."))
 
 /datum/ai_holder/simple_animal/goat/king/phase2/engage_target()
@@ -65,42 +65,42 @@
 /datum/ai_holder/simple_animal/goat/king/phase2/react_to_attack(atom/movable/attacker)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/G = holder
-	if(G.spellscast < 5)
-		if(prob(5) && G.move_to_delay != 1) //speed buff
+	if (G.spellscast < 5)
+		if (prob(5) && G.move_to_delay != 1) //speed buff
 			G.spellscast++
 			G.visible_message(SPAN_MFAUNA("\The [G] shimmers and seems to phase in and out of reality itself!"))
 			G.move_to_delay = 1
 
-		else if(prob(5)) //stun move
+		else if (prob(5)) //stun move
 			G.spellscast++
 			G.visible_message(SPAN_MFAUNA("\The [G]' fleece flashes with blinding light!"))
 			new /obj/item/grenade/flashbang/instant(G.loc)
 
-		else if(prob(5)) //spawn adds
+		else if (prob(5)) //spawn adds
 			G.spellscast++
 			G.visible_message(SPAN_MFAUNA("\The [G] summons the imperial guard to his aid, and they appear in a flash!"))
 			new /mob/living/simple_animal/hostile/retaliate/goat/guard/master(get_step(G,pick(GLOB.cardinal)))
 			new /mob/living/simple_animal/hostile/retaliate/goat/guard(get_step(G,pick(GLOB.cardinal)))
 			new /mob/living/simple_animal/hostile/retaliate/goat/guard(get_step(G,pick(GLOB.cardinal)))
 
-		else if(prob(5)) //EMP blast
+		else if (prob(5)) //EMP blast
 			G.spellscast++
 			G.visible_message(SPAN_MFAUNA("\The [G] disrupts nearby electrical equipment!"))
 			empulse(get_turf(G), 5, 2, 0)
 
 		else if (prob(5) && G.current_damtype == DAMAGE_BRUTE && !G.special_attacks) //elemental attacks
 			G.spellscast++
-			if(prob(50))
+			if (prob(50))
 				G.visible_message(SPAN_MFAUNA("\The [G]' horns flicker with holy white flame!"))
 				G.current_damtype = DAMAGE_BURN
 			else
 				G.visible_message(SPAN_MFAUNA("\The [G]' horns glimmer, electricity arcing between them!"))
 				G.current_damtype = DAMAGE_SHOCK
 
-		else if(prob(5)) //earthquake spell
+		else if (prob(5)) //earthquake spell
 			G.visible_message(SPAN_CLASS("cultannounce", "\The [G]' eyes begin to glow ominously as dust and debris in the area is kicked up in a light breeze."))
 			set_busy(TRUE)
-			if(do_after(G, 6 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT))
+			if (do_after(G, 6 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT))
 				var/health_holder = G.health
 				G.visible_message(SPAN_MFAUNA("\The [G] raises its fore-hooves and stomps them into the ground with incredible force!"))
 				explosion(get_step(G,pick(GLOB.cardinal)), 4, EX_ACT_HEAVY)
@@ -108,7 +108,7 @@
 				explosion(get_step(G,pick(GLOB.cardinal)), 7, EX_ACT_HEAVY)
 				set_busy(FALSE)
 				G.spellscast += 2
-				if(!G.health < health_holder)
+				if (!G.health < health_holder)
 					G.health = health_holder //our own magicks cannot harm us
 			else
 				G.visible_message(SPAN_NOTICE("The [G] loses concentration and huffs haughtily."))
@@ -118,9 +118,9 @@
 
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/get_natural_weapon()
-	if(!(current_damtype in elemental_weapons))
+	if (!(current_damtype in elemental_weapons))
 		return ..()
-	if(ispath(elemental_weapons[current_damtype]))
+	if (ispath(elemental_weapons[current_damtype]))
 		var/T = elemental_weapons[current_damtype]
 		elemental_weapons[current_damtype] = new T(src)
 	return elemental_weapons[current_damtype]
@@ -226,13 +226,13 @@
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
-	if(special_attacks >= 6 && current_damtype != DAMAGE_BRUTE)
+	if (special_attacks >= 6 && current_damtype != DAMAGE_BRUTE)
 		visible_message(SPAN_MFAUNA("The energy surrounding \the [src]'s horns dissipates."))
 		current_damtype = DAMAGE_BRUTE
 
-	if(health <= 150 && !phase3 && spellscast == 5) //begin phase 3, reset spell limit and heal
+	if (health <= 150 && !phase3 && spellscast == 5) //begin phase 3, reset spell limit and heal
 		phase3_transition()
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/proc/OnDeath()
@@ -242,7 +242,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/OnDeath()
 	QDEL_NULL(boss_theme)
-	if(phase3)
+	if (phase3)
 		visible_message(SPAN_MFAUNA("\The [src] shrieks as the seal on his power breaks and his wool sheds off!"))
 		new /obj/item/towel/fleece(src.loc)
 

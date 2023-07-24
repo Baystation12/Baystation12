@@ -71,16 +71,16 @@ Thus, the two variables affect pump operation are set in New():
 
 
 /obj/machinery/atmospherics/binary/pump/on_update_icon()
-	if(!powered())
+	if (!powered())
 		icon_state = "off"
 	else
 		icon_state = "[use_power ? "on" : "off"]"
 
 /obj/machinery/atmospherics/binary/pump/update_underlays()
-	if(..())
+	if (..())
 		underlays.Cut()
 		var/turf/T = get_turf(src)
-		if(!istype(T))
+		if (!istype(T))
 			return
 		add_underlay(T, node1, turn(dir, -180))
 		add_underlay(T, node2, dir)
@@ -92,13 +92,13 @@ Thus, the two variables affect pump operation are set in New():
 	last_power_draw = 0
 	last_flow_rate = 0
 
-	if((inoperable()) || !use_power)
+	if ((inoperable()) || !use_power)
 		return
 
 	var/power_draw = -1
 	var/pressure_delta = target_pressure - air2.return_pressure()
 
-	if(pressure_delta > 0.01 && air1.temperature > 0)
+	if (pressure_delta > 0.01 && air1.temperature > 0)
 		//Figure out how much gas to transfer to meet the target pressure.
 		var/transfer_moles = calculate_transfer_moles(air1, air2, pressure_delta, (network2)? network2.volume : 0)
 		power_draw = pump_gas(src, air1, air2, transfer_moles, power_rating)
@@ -107,22 +107,22 @@ Thus, the two variables affect pump operation are set in New():
 		last_power_draw = power_draw
 		use_power_oneoff(power_draw)
 
-		if(network1)
+		if (network1)
 			network1.update = 1
 
-		if(network2)
+		if (network2)
 			network2.update = 1
 
 	return 1
 
 /obj/machinery/atmospherics/binary/pump/return_air()
-	if(air1.return_pressure() > air2.return_pressure())
+	if (air1.return_pressure() > air2.return_pressure())
 		return air1
 	else
 		return air2
 
 /obj/machinery/atmospherics/binary/pump/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	if(inoperable())
+	if (inoperable())
 		return
 
 	// this is the data which will be sent to the ui
@@ -152,9 +152,9 @@ Thus, the two variables affect pump operation are set in New():
 	return TRUE
 
 /obj/machinery/atmospherics/binary/pump/Topic(href,href_list)
-	if((. = ..())) return
+	if ((. = ..())) return
 
-	if(href_list["power"])
+	if (href_list["power"])
 		update_use_power(!use_power)
 		. = 1
 
@@ -170,11 +170,11 @@ Thus, the two variables affect pump operation are set in New():
 			src.target_pressure = clamp(new_pressure, 0, max_pressure_setting)
 			. = 1
 
-	if(.)
+	if (.)
 		src.update_icon()
 
 /obj/machinery/atmospherics/binary/pump/cannot_transition_to(state_path, mob/user)
-	if(state_path == /singleton/machine_construction/default/deconstructed)
+	if (state_path == /singleton/machine_construction/default/deconstructed)
 		if (is_powered() && use_power)
 			return SPAN_WARNING("You cannot take this [src] apart, turn it off first.")
 		var/datum/gas_mixture/int_air = return_air()
@@ -197,7 +197,7 @@ Thus, the two variables affect pump operation are set in New():
 /singleton/public_access/public_variable/pump_target_output/write_var(obj/machinery/atmospherics/binary/pump/machine, new_value)
 	new_value = clamp(new_value, 0, machine.max_pressure_setting)
 	. = ..()
-	if(.)
+	if (.)
 		machine.target_pressure = new_value
 
 /singleton/stock_part_preset/radio/event_transmitter/pump

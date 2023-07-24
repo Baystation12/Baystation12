@@ -43,9 +43,9 @@
 		initial_gas = null
 		temperature = TCMB
 	..(newloc)
-	if(!floortype && initial_flooring)
+	if (!floortype && initial_flooring)
 		floortype = initial_flooring
-	if(floortype)
+	if (floortype)
 		set_flooring(GET_SINGLETON(floortype))
 
 /turf/simulated/floor/proc/set_flooring(singleton/flooring/newflooring)
@@ -70,9 +70,9 @@
 	color = base_color
 	layer = PLATING_LAYER
 
-	if(flooring)
+	if (flooring)
 		flooring.on_remove()
-		if(flooring.build_type && place_product)
+		if (flooring.build_type && place_product)
 			new flooring.build_type(src)
 		flooring = null
 
@@ -82,14 +82,14 @@
 	flooring_override = null
 	levelupdate()
 
-	if(!defer_icon_update)
+	if (!defer_icon_update)
 		update_icon(1)
 
 /turf/simulated/floor/levelupdate()
 	for(var/obj/O in src)
 		O.hide(O.hides_under_flooring() && src.flooring)
 
-	if(flooring)
+	if (flooring)
 		layer = TURF_LAYER
 		height = flooring.height
 	else
@@ -112,7 +112,7 @@
 	return TRUE
 
 /turf/simulated/IgniteTurf(power, fire_colour)
-	if(turf_fire)
+	if (turf_fire)
 		turf_fire.AddPower(power)
 		return
 	new /obj/effect/turf_fire(src, power, fire_colour)

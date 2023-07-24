@@ -56,7 +56,7 @@
 	. = ..()
 
 /obj/effect/blob/CanPass(atom/movable/mover, turf/target, height = 0, air_group = 0)
-	if(air_group || height == 0)
+	if (air_group || height == 0)
 		return 1
 	return 0
 
@@ -69,7 +69,7 @@
 
 /obj/effect/blob/Process(wait, times_fired)
 	regen()
-	if(times_fired % attack_freq)
+	if (times_fired % attack_freq)
 		return
 	attempt_attack(GLOB.alldirs)
 
@@ -143,15 +143,15 @@
 	var/pushDir = pick(dirs)
 	var/turf/T = get_step(src, pushDir)
 	var/obj/effect/blob/B = (locate() in T)
-	if(!B)
-		if(prob(get_current_health()))
+	if (!B)
+		if (prob(get_current_health()))
 			expand(T)
 		return
-	if(forceLeft)
+	if (forceLeft)
 		B.pulse(forceLeft - 1, dirs)
 
 /obj/effect/blob/proc/attack_living(mob/living/L)
-	if(!L)
+	if (!L)
 		return
 	var/blob_damage = pick(DAMAGE_BRUTE, DAMAGE_BURN)
 	L.visible_message(SPAN_DANGER("A tendril flies out from \the [src] and smashes into \the [L]!"), SPAN_DANGER("A tendril flies out from \the [src] and smashes into you!"))
@@ -162,12 +162,12 @@
 	var/attackDir = pick(dirs)
 	var/turf/T = get_step(src, attackDir)
 	for(var/mob/living/victim in T)
-		if(victim.stat == DEAD)
+		if (victim.stat == DEAD)
 			continue
 		attack_living(victim)
 
 /obj/effect/blob/bullet_act(obj/item/projectile/Proj)
-	if(!Proj)
+	if (!Proj)
 		return
 	var/damage = Proj.damage
 	if (Proj.damage_type == DAMAGE_BURN)
@@ -259,7 +259,7 @@ regen() will cover update_icon() for this proc
 			attack_freq = 5
 			regen_rate = 2
 			times_to_pulse = 4
-			if(reported_low_damage)
+			if (reported_low_damage)
 				report_shield_status("high")
 		if (25 to 49)
 			if (core_health_state == 3)
@@ -293,30 +293,30 @@ regen() will cover update_icon() for this proc
 			set_damage_resistance(DAMAGE_FIRE, 6.67)
 			regen_rate = 5
 			times_to_pulse = 1
-			if(!reported_low_damage)
+			if (!reported_low_damage)
 				report_shield_status("low")
 
 /obj/effect/blob/core/proc/report_shield_status(status)
-	if(status == "low")
+	if (status == "low")
 		visible_message(SPAN_DANGER("The [src]'s tendril shield fails, leaving the nucleus vulnerable!"), 3)
 		reported_low_damage = TRUE
-	if(status == "high")
+	if (status == "high")
 		visible_message(SPAN_NOTICE("The [src]'s tendril shield seems to have fully reformed."), 3)
 		reported_low_damage = FALSE
 
 // Rough icon state changes that reflect the core's health
 /obj/effect/blob/core/on_update_icon()
 	switch (get_damage_percentage())
-		if(0 to 32)
+		if (0 to 32)
 			icon_state = "blob_core"
-		if(33 to 65)
+		if (33 to 65)
 			icon_state = "blob_node"
 		else
 			icon_state = "blob_factory"
 
 /obj/effect/blob/core/Process()
 	set waitfor = 0
-	if(!blob_may_process)
+	if (!blob_may_process)
 		return
 	blob_may_process = 0
 	sleep(0)
@@ -409,16 +409,16 @@ regen() will cover update_icon() for this proc
 
 /obj/item/blob_tendril/Initialize()
 	. = ..()
-	if(is_tendril)
+	if (is_tendril)
 		var/tendril_type
 		tendril_type = pick(types_of_tendril)
 		switch(tendril_type)
-			if("solid")
+			if ("solid")
 				desc = "An incredibly dense, yet flexible, tendril, removed from an asteroclast."
 				force = 10
 				color = COLOR_BRONZE
 				origin_tech = list(TECH_MATERIAL = 2)
-			if("fire")
+			if ("fire")
 				desc = "A tendril removed from an asteroclast. It's hot to the touch."
 				damtype = DAMAGE_BURN
 				force = 15
@@ -426,11 +426,11 @@ regen() will cover update_icon() for this proc
 				origin_tech = list(TECH_POWER = 2)
 
 /obj/item/blob_tendril/afterattack(obj/O, mob/user, proximity)
-	if(!proximity)
+	if (!proximity)
 		return
-	if(is_tendril && prob(50))
+	if (is_tendril && prob(50))
 		force--
-		if(force <= 0)
+		if (force <= 0)
 			visible_message(SPAN_NOTICE("\The [src] crumbles apart!"))
 			user.drop_from_inventory(src)
 			new /obj/effect/decal/cleanable/ash(src.loc)

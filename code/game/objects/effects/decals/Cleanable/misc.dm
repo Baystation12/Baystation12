@@ -87,7 +87,7 @@
 	..()
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 	create_reagents(30, src)
-	if(prob(75))
+	if (prob(75))
 		SetTransform(rotation = pick(90, 180, 270))
 
 /obj/effect/decal/cleanable/vomit/on_update_icon()

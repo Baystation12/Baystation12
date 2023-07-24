@@ -155,13 +155,13 @@
 
 /mob/living/simple_animal/Initialize()
 	. = ..()
-	if(LAZYLEN(natural_armor))
+	if (LAZYLEN(natural_armor))
 		set_extension(src, armor_type, natural_armor)
-	if(!icon_living)
+	if (!icon_living)
 		icon_living = initial(icon_state)
 
 /mob/living/simple_animal/Destroy()
-	if(istype(natural_weapon))
+	if (istype(natural_weapon))
 		QDEL_NULL(natural_weapon)
 
 	. = ..()
@@ -169,7 +169,7 @@
 /mob/living/simple_animal/Stat()
 	. = ..()
 
-	if(statpanel("Status") && show_stat_health)
+	if (statpanel("Status") && show_stat_health)
 		stat(null, "Health: [round((health / maxHealth) * 100)]%")
 
 /mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message)
@@ -183,7 +183,7 @@
 /mob/living/simple_animal/ex_act(severity)
 	if (status_flags & GODMODE)
 		return
-	if(!blinded)
+	if (!blinded)
 		flash_eyes()
 
 	var/damage
@@ -194,7 +194,7 @@
 		if (EX_ACT_HEAVY)
 			damage = 120
 
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			damage = 30
 
 	apply_damage(damage, DAMAGE_BRUTE, damage_flags = DAMAGE_FLAG_EXPLODE)
@@ -217,7 +217,7 @@
 
 /mob/living/simple_animal/say(message)
 	var/verb = "says"
-	if(length(speak_emote))
+	if (length(speak_emote))
 		verb = pick(speak_emote)
 
 	message = sanitize(message)
@@ -235,11 +235,11 @@
 /mob/living/simple_animal/proc/harvest(mob/user, skill_level)
 	var/actual_meat_amount = round(max(1,(meat_amount / 2) + skill_level / 2))
 	user.visible_message(SPAN_DANGER("\The [user] chops up \the [src]!"))
-	if(meat_type && actual_meat_amount > 0 && (stat == DEAD))
+	if (meat_type && actual_meat_amount > 0 && (stat == DEAD))
 		for(var/i=0;i<actual_meat_amount;i++)
 			var/obj/item/meat = new meat_type(get_turf(src))
 			meat.SetName("[src.name] [meat.name]")
-			if(can_bleed)
+			if (can_bleed)
 				var/obj/effect/decal/cleanable/blood/splatter/splat = new(get_turf(src))
 				splat.basecolor = bleed_colour
 				splat.update_icon()
@@ -247,13 +247,13 @@
 
 /mob/living/simple_animal/proc/subtract_meat(mob/user)
 	meat_amount--
-	if(meat_amount <= 0)
+	if (meat_amount <= 0)
 		to_chat(user, SPAN_NOTICE("\The [src] carcass is ruined beyond use."))
 
 /mob/living/simple_animal/bullet_impact_visuals(obj/item/projectile/P, def_zone)
 	..()
 	switch(get_bullet_impact_effect_type(def_zone))
-		if(BULLET_IMPACT_MEAT)
+		if (BULLET_IMPACT_MEAT)
 			if (P.damtype == DAMAGE_BRUTE)
 				var/hit_dir = get_dir(P.starting, src)
 				var/obj/effect/decal/cleanable/blood/B = blood_splatter(get_step(src, hit_dir), src, 1, hit_dir)
@@ -273,7 +273,7 @@
 
 	burn_temperature -= maxbodytemp
 
-	if(burn_temperature < 1)
+	if (burn_temperature < 1)
 		return
 
 	adjustBruteLoss(log(10, (burn_temperature + 10)))
@@ -281,17 +281,17 @@
 /mob/living/simple_animal/update_fire()
 	. = ..()
 	overlays -= image("icon"='icons/mob/OnFire.dmi', "icon_state"="Generic_mob_burning")
-	if(on_fire)
+	if (on_fire)
 		overlays += image("icon"='icons/mob/OnFire.dmi', "icon_state"="Generic_mob_burning")
 
 /mob/living/simple_animal/is_burnable()
 	return heat_damage_per_tick
 
 /mob/living/simple_animal/proc/adjustBleedTicks(amount)
-	if(!can_bleed)
+	if (!can_bleed)
 		return
 
-	if(amount > 0)
+	if (amount > 0)
 		bleed_ticks = max(bleed_ticks, amount)
 	else
 		bleed_ticks = max(bleed_ticks + amount, 0)
@@ -311,11 +311,11 @@
 
 /mob/living/simple_animal/eyecheck()
 	switch(flash_vulnerability)
-		if(2 to INFINITY)
+		if (2 to INFINITY)
 			return FLASH_PROTECTION_REDUCED
-		if(1)
+		if (1)
 			return FLASH_PROTECTION_NONE
-		if(0)
+		if (0)
 			return FLASH_PROTECTION_MAJOR
 		else
 			return FLASH_PROTECTION_MAJOR
@@ -324,12 +324,12 @@
 	var/turf/old_turf = get_turf(src)
 	var/old_dir = dir
 	. = ..()
-	if(. && movement_shake_radius)
+	if (. && movement_shake_radius)
 		for(var/mob/living/L in range(movement_shake_radius, src))
 			shake_camera(L, 1, 1)
-	if(turn_sound && dir != old_dir)
+	if (turn_sound && dir != old_dir)
 		playsound(src, turn_sound, 50, 1)
-	else if(movement_sound && old_turf != get_turf(src)) // Playing both sounds at the same time generally sounds bad.
+	else if (movement_sound && old_turf != get_turf(src)) // Playing both sounds at the same time generally sounds bad.
 		playsound(src, movement_sound, 50, 1)
 
 /mob/living/simple_animal/movement_delay()
@@ -337,15 +337,15 @@
 
 	// Turf related slowdown
 	var/turf/T = get_turf(src)
-	if(T && T.movement_delay && !is_floating) // Flying mobs ignore turf-based slowdown. Aquatic mobs ignore water slowdown, and can gain bonus speed in it.
+	if (T && T.movement_delay && !is_floating) // Flying mobs ignore turf-based slowdown. Aquatic mobs ignore water slowdown, and can gain bonus speed in it.
 		. += T.movement_delay
 
-	if(purge)//Purged creatures will move more slowly. The more time before their purge stops, the slower they'll move.
-		if(. <= 0)
+	if (purge)//Purged creatures will move more slowly. The more time before their purge stops, the slower they'll move.
+		if (. <= 0)
 			. = 1
 		. *= purge
 
-	if(a_intent == "walk")
+	if (a_intent == "walk")
 		. *= 1.5
 
 	 . += ..()
@@ -357,7 +357,7 @@
 	set waitfor = FALSE
 	visible_message(SPAN_WARNING("\The [user] begins [pry_desc] at \the [pesky_door]!"))
 	set_AI_busy(TRUE)
-	if(do_after(user, delay, pesky_door, DO_DEFAULT | DO_PUBLIC_PROGRESS))
+	if (do_after(user, delay, pesky_door, DO_DEFAULT | DO_PUBLIC_PROGRESS))
 		pesky_door.open(1)
 		ai_holder.prying = FALSE
 		set_AI_busy(FALSE)

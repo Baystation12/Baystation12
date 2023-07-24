@@ -36,25 +36,25 @@ var/global/list/_client_preferences_by_type
 
 /proc/get_client_preferences()
 	RETURN_TYPE(/list)
-	if(!_client_preferences)
+	if (!_client_preferences)
 		_client_preferences = list()
 		for(var/ct in subtypesof(/datum/client_preference))
 			var/datum/client_preference/client_type = ct
-			if(initial(client_type.description))
+			if (initial(client_type.description))
 				_client_preferences += new client_type()
 	return _client_preferences
 
 /proc/get_client_preference(datum/client_preference/preference)
 	RETURN_TYPE(/datum/client_preference)
-	if(istype(preference))
+	if (istype(preference))
 		return preference
-	if(ispath(preference))
+	if (ispath(preference))
 		return get_client_preference_by_type(preference)
 	return get_client_preference_by_key(preference)
 
 /proc/get_client_preference_by_key(preference)
 	RETURN_TYPE(/datum/client_preference)
-	if(!_client_preferences_by_key)
+	if (!_client_preferences_by_key)
 		_client_preferences_by_key = list()
 		for(var/ct in get_client_preferences())
 			var/datum/client_preference/client_pref = ct
@@ -63,7 +63,7 @@ var/global/list/_client_preferences_by_type
 
 /proc/get_client_preference_by_type(preference)
 	RETURN_TYPE(/datum/client_preference)
-	if(!_client_preferences_by_type)
+	if (!_client_preferences_by_type)
 		_client_preferences_by_type = list()
 		for(var/ct in get_client_preferences())
 			var/datum/client_preference/client_pref = ct
@@ -79,7 +79,7 @@ var/global/list/_client_preferences_by_type
 /datum/client_preference/New()
 	. = ..()
 
-	if(!default_value)
+	if (!default_value)
 		default_value = options[1]
 
 /datum/client_preference/proc/may_set(client/given_client)
@@ -101,8 +101,8 @@ var/global/list/_client_preferences_by_type
 	key = "SOUND_LOBBY"
 
 /datum/client_preference/play_lobby_music/changed(mob/preference_mob, new_value)
-	if(new_value == GLOB.PREF_YES)
-		if(isnewplayer(preference_mob))
+	if (new_value == GLOB.PREF_YES)
+		if (isnewplayer(preference_mob))
 			sound_to(preference_mob, GLOB.using_map.lobby_track.get_sound())
 			to_chat(preference_mob, GLOB.using_map.lobby_track.get_info())
 	else
@@ -113,7 +113,7 @@ var/global/list/_client_preferences_by_type
 	key = "SOUND_AMBIENCE"
 
 /datum/client_preference/play_ambiance/changed(mob/preference_mob, new_value)
-	if(new_value == GLOB.PREF_NO)
+	if (new_value == GLOB.PREF_NO)
 		sound_to(preference_mob, sound(null, channel = GLOB.ambience_channel_vents))
 		sound_to(preference_mob, sound(null, channel = GLOB.ambience_channel_forced))
 		sound_to(preference_mob, sound(null, channel = GLOB.ambience_channel_common))
@@ -267,7 +267,7 @@ var/global/list/_client_preferences_by_type
 	default_value = GLOB.PREF_HIGH
 
 /datum/client_preference/graphics_quality/changed(mob/preference_mob, new_value)
-	if(preference_mob?.client)
+	if (preference_mob?.client)
 		for(var/atom/movable/renderer/R as anything in preference_mob.renderers)
 			R.GraphicsUpdate()
 
@@ -276,9 +276,9 @@ var/global/list/_client_preferences_by_type
 	key = "USE_GOONCHAT"
 
 /datum/client_preference/goonchat/changed(mob/preference_mob, new_value)
-	if(preference_mob && preference_mob.client)
+	if (preference_mob && preference_mob.client)
 		var/client/C = preference_mob.client
-		if(new_value == GLOB.PREF_YES)
+		if (new_value == GLOB.PREF_YES)
 			C.chatOutput.loaded = FALSE
 			C.chatOutput.start()
 		else
@@ -308,12 +308,12 @@ var/global/list/_client_preferences_by_type
 	var/flags
 
 /datum/client_preference/staff/may_set(client/given_client)
-	if(ismob(given_client))
+	if (ismob(given_client))
 		var/mob/M = given_client
 		given_client = M.client
-	if(!given_client)
+	if (!given_client)
 		return FALSE
-	if(flags)
+	if (flags)
 		return check_rights(flags, 0, given_client)
 	else
 		return given_client && given_client.holder

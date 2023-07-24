@@ -28,16 +28,16 @@
 	icon_state = "map_valve1"
 
 /obj/machinery/atmospherics/valve/on_update_icon(animation)
-	if(animation)
+	if (animation)
 		flick("valve[src.open][!src.open]",src)
 	else
 		icon_state = "valve[open]"
 
 /obj/machinery/atmospherics/valve/update_underlays()
-	if(..())
+	if (..())
 		underlays.Cut()
 		var/turf/T = get_turf(src)
-		if(!istype(T))
+		if (!istype(T))
 			return
 		add_underlay(T, node1, get_dir(src, node1), node1 ? node1.icon_connect_type : "")
 		add_underlay(T, node2, get_dir(src, node2), node2 ? node2.icon_connect_type : "")
@@ -46,35 +46,35 @@
 	update_underlays()
 
 /obj/machinery/atmospherics/valve/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
-	if(reference == node1)
+	if (reference == node1)
 		network_node1 = new_network
-		if(open)
+		if (open)
 			network_node2 = new_network
-	else if(reference == node2)
+	else if (reference == node2)
 		network_node2 = new_network
-		if(open)
+		if (open)
 			network_node1 = new_network
 
-	if(new_network.normal_members.Find(src))
+	if (new_network.normal_members.Find(src))
 		return 0
 
 	new_network.normal_members += src
 
-	if(open)
-		if(reference == node1)
-			if(node2)
+	if (open)
+		if (reference == node1)
+			if (node2)
 				return node2.network_expand(new_network, src)
-		else if(reference == node2)
-			if(node1)
+		else if (reference == node2)
+			if (node1)
 				return node1.network_expand(new_network, src)
 
 	return null
 
 /obj/machinery/atmospherics/valve/Destroy()
-	if(node1)
+	if (node1)
 		node1.disconnect(src)
 		qdel(network_node1)
-	if(node2)
+	if (node2)
 		node2.disconnect(src)
 		qdel(network_node2)
 
@@ -84,18 +84,18 @@
 	. = ..()
 
 /obj/machinery/atmospherics/valve/proc/open()
-	if(open) return 0
+	if (open) return 0
 
 	open = 1
 	update_icon()
 
-	if(network_node1&&network_node2)
+	if (network_node1&&network_node2)
 		network_node1.merge(network_node2)
 		network_node2 = network_node1
 
-	if(network_node1)
+	if (network_node1)
 		network_node1.update = 1
-	else if(network_node2)
+	else if (network_node2)
 		network_node2.update = 1
 
 	if (usr)
@@ -104,15 +104,15 @@
 	return 1
 
 /obj/machinery/atmospherics/valve/proc/close()
-	if(!open)
+	if (!open)
 		return 0
 
 	open = 0
 	update_icon()
 
-	if(network_node1)
+	if (network_node1)
 		qdel(network_node1)
-	if(network_node2)
+	if (network_node2)
 		qdel(network_node2)
 
 	build_network()
@@ -144,19 +144,19 @@
 	var/node2_dir
 
 	for(var/direction in GLOB.cardinal)
-		if(direction&initialize_directions)
+		if (direction&initialize_directions)
 			if (!node1_dir)
 				node1_dir = direction
 			else if (!node2_dir)
 				node2_dir = direction
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
-		if(target.initialize_directions & get_dir(target,src))
+		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node1 = target
 				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
-		if(target.initialize_directions & get_dir(target,src))
+		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node2 = target
 				break
@@ -164,18 +164,18 @@
 	update_icon()
 	update_underlays()
 
-	if(openDuringInit)
+	if (openDuringInit)
 		close()
 		open()
 		openDuringInit = 0
 
 /obj/machinery/atmospherics/valve/build_network()
-	if(!network_node1 && node1)
+	if (!network_node1 && node1)
 		network_node1 = new /datum/pipe_network()
 		network_node1.normal_members += src
 		network_node1.build_network(node1, src)
 
-	if(!network_node2 && node2)
+	if (!network_node2 && node2)
 		network_node2 = new /datum/pipe_network()
 		network_node2.normal_members += src
 		network_node2.build_network(node2, src)
@@ -183,18 +183,18 @@
 /obj/machinery/atmospherics/valve/return_network(obj/machinery/atmospherics/reference)
 	build_network()
 
-	if(reference==node1)
+	if (reference==node1)
 		return network_node1
 
-	if(reference==node2)
+	if (reference==node2)
 		return network_node2
 
 	return null
 
 /obj/machinery/atmospherics/valve/reassign_network(datum/pipe_network/old_network, datum/pipe_network/new_network)
-	if(network_node1 == old_network)
+	if (network_node1 == old_network)
 		network_node1 = new_network
-	if(network_node2 == old_network)
+	if (network_node2 == old_network)
 		network_node2 = new_network
 
 	return 1
@@ -203,11 +203,11 @@
 	return null
 
 /obj/machinery/atmospherics/valve/disconnect(obj/machinery/atmospherics/reference)
-	if(reference==node1)
+	if (reference==node1)
 		qdel(network_node1)
 		node1 = null
 
-	else if(reference==node2)
+	else if (reference==node2)
 		qdel(network_node2)
 		node2 = null
 
@@ -282,7 +282,7 @@
 	build_icon_state = "dvalve"
 
 /obj/machinery/atmospherics/valve/digital/interface_interact(mob/user)
-	if(!CanInteract(user, DefaultTopicState()))
+	if (!CanInteract(user, DefaultTopicState()))
 		return FALSE
 	user_toggle()
 	return TRUE
@@ -296,7 +296,7 @@
 
 /obj/machinery/atmospherics/valve/digital/on_update_icon()
 	..()
-	if(!powered())
+	if (!powered())
 		icon_state = "valve[open]nopower"
 
 /singleton/stock_part_preset/radio/receiver/valve

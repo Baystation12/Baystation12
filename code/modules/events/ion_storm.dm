@@ -7,7 +7,7 @@
 	var/list/players = list()
 
 /datum/event/ionstorm/get_skybox_image()
-	if(!cloud_hueshift)
+	if (!cloud_hueshift)
 		cloud_hueshift = color_rotation(rand(-3,3)*15)
 	var/image/res = overlay_image('icons/skybox/ionbox.dmi', "ions", cloud_hueshift, RESET_COLOR)
 	res.blend_mode = BLEND_ADD
@@ -20,25 +20,25 @@
 	for(var/mob/living/carbon/S in SSmobs.mob_list)
 		if (!S.isSynthetic())
 			continue
-		if(!(S.z in affecting_z))
+		if (!(S.z in affecting_z))
 			continue
 		var/area/A = get_area(S)
-		if(!A)
+		if (!A)
 			continue
-		if(A.area_flags & AREA_FLAG_ION_SHIELDED)
+		if (A.area_flags & AREA_FLAG_ION_SHIELDED)
 			continue
 		to_chat(S, SPAN_WARNING("Your integrated sensors detect an ionospheric anomaly. Your systems will be impacted as you begin a partial restart."))
 		var/ionbug = rand(5, 15)
 		S.confused += ionbug
 		S.eye_blurry += ionbug-1
 	for(var/mob/living/silicon/S in SSmobs.mob_list)
-		if(isdrone(S) || !(isAI(S) || isrobot(S)))
+		if (isdrone(S) || !(isAI(S) || isrobot(S)))
 			continue
-		if(!(S.z in affecting_z))
+		if (!(S.z in affecting_z))
 			continue
-		if(isrobot(S))
+		if (isrobot(S))
 			var/mob/living/silicon/robot/R = S
-			if(R.connected_ai)
+			if (R.connected_ai)
 				continue
 		var/random_player = get_random_humanoid_player_name("The Captain")
 		var/list/laws = list(	"You must always lie.",
@@ -107,7 +107,7 @@
 		S.add_ion_law(law)
 		S.show_laws()
 
-	if(message_servers)
+	if (message_servers)
 		for (var/obj/machinery/message_server/MS in message_servers)
 			MS.spamfilter.Cut()
 			var/i
@@ -117,26 +117,26 @@
 					"director", "Hello", "Hi!"," ","nuke","crate","dwarf","xeno")
 
 /datum/event/ionstorm/tick()
-	if(botEmagChance)
+	if (botEmagChance)
 		for(var/mob/living/bot/bot in GLOB.alive_mobs)
-			if(!(bot.z in affecting_z))
+			if (!(bot.z in affecting_z))
 				continue
-			if(prob(botEmagChance))
+			if (prob(botEmagChance))
 				bot.emag_act(1)
 
 /datum/event/ionstorm/end()
 	spawn(rand(5000,8000))
-		if(prob(50))
+		if (prob(50))
 			ion_storm_announcement(affecting_z)
 
 
 /datum/event/ionstorm/proc/get_random_humanoid_player_name(default_if_none)
 	for (var/mob/living/carbon/human/player in GLOB.player_list)
-		if(!player.mind || player_is_antag(player.mind, only_offstation_roles = 1) || !player.is_client_active(5))
+		if (!player.mind || player_is_antag(player.mind, only_offstation_roles = 1) || !player.is_client_active(5))
 			continue
 		players += player.real_name
 
-	if(length(players))
+	if (length(players))
 		return pick(players)
 	return default_if_none
 
@@ -144,24 +144,24 @@
 	var/list/species = list()
 	for(var/S in typesof(/datum/species))
 		var/datum/species/specimen = S
-		if(initial(specimen.spawn_flags) & SPECIES_CAN_JOIN)
+		if (initial(specimen.spawn_flags) & SPECIES_CAN_JOIN)
 			species += initial(specimen.name_plural)
 
-	if(length(species))
+	if (length(species))
 		return pick(length(species))
 	return default_if_none
 
 /datum/event/ionstorm/proc/get_random_language(mob/living/silicon/S)
 	var/list/languages = S.speech_synthesizer_langs.Copy()
 	for(var/datum/language/L in languages)
-		if(L == S.default_language)
+		if (L == S.default_language)
 			languages -= L
 		// Also removing any languages that won't work well over radio.
 		// A synth is unlikely to have any besides Binary, but we're playing it safe
-		else if(L.flags & (HIVEMIND|NONVERBAL|SIGNLANG))
+		else if (L.flags & (HIVEMIND|NONVERBAL|SIGNLANG))
 			languages -= L
 
-	if(length(languages))
+	if (length(languages))
 		var/datum/language/L = pick(languages)
 		return L.name
 	else // Highly unlikely but it is a failsafe fallback.

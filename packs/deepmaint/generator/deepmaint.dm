@@ -9,7 +9,7 @@ GLOBAL_LIST_EMPTY(small_deepmaint_room_templates)
 GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 
 /proc/populateDeepMaintMapLists()
-	if(length(GLOB.big_deepmaint_room_templates) || length(GLOB.small_deepmaint_room_templates))
+	if (length(GLOB.big_deepmaint_room_templates) || length(GLOB.small_deepmaint_room_templates))
 		return
 	for(var/item in subtypesof(/datum/map_template/deepmaint_template/room))
 		var/datum/map_template/deepmaint_template/temp = item
@@ -59,7 +59,7 @@ GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 			T = get_step(T, direction)
 			if (T.is_wall())
 				walls += T
-				if(length(walls) == length(line))
+				if (length(walls) == length(line))
 					return walls
 			else
 				walls = list()
@@ -71,16 +71,16 @@ GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 
 /obj/procedural/jp_DungeonGenerator/deepmaint/proc/makeLadders()
 	var/ladders_to_place = 3
-	if(numRooms < ladders_to_place)
+	if (numRooms < ladders_to_place)
 		return
 	var/list/obj/procedural/jp_dungeonroom/done_rooms = list()
 	while(ladders_to_place > 0)
-		if(numRooms > 1)
-			if(length(done_rooms) == length(out_rooms))
+		if (numRooms > 1)
+			if (length(done_rooms) == length(out_rooms))
 				testing("Deepmaint generator went through all rooms, but couldn't place all ladders! Ladders left - [ladders_to_place]")
 				break
 		var/obj/procedural/jp_dungeonroom/picked_room = pick(out_rooms)
-		if(picked_room in done_rooms)
+		if (picked_room in done_rooms)
 			continue
 		var/list/turf/viable_turfs = list()
 		for (var/turf/simulated/floor/F in range(roomMinSize + 1, picked_room.centre))
@@ -103,7 +103,7 @@ GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 					viable_turfs[F] = T //We put this floor and its wall into the possible turfs list
 					break
 
-		if(length(viable_turfs) == 0)
+		if (length(viable_turfs) == 0)
 			done_rooms += picked_room
 			continue
 
@@ -114,7 +114,7 @@ GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 
 /obj/procedural/jp_DungeonGenerator/deepmaint/proc/populateCorridors()
 	for(var/turf/T in path_turfs)
-		if(prob(30))
+		if (prob(30))
 			new /obj/effect/decal/cleanable/dirt(T)
 
 /obj/procedural/dungenerator/deepmaint
@@ -124,7 +124,7 @@ GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 	..()
 	spawn()
 		while(1)
-			if(Master.current_runlevel)
+			if (Master.current_runlevel)
 				populateDeepMaintMapLists()
 				break
 			else

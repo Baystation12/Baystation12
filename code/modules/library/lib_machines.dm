@@ -17,8 +17,8 @@
 	var/obj/item/book/cache		// Last scanned book
 
 /obj/machinery/libraryscanner/attackby(obj/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/book))
-		if(!user.unEquip(O, src))
+	if (istype(O, /obj/item/book))
+		if (!user.unEquip(O, src))
 			return
 
 /obj/machinery/libraryscanner/interface_interact(mob/user)
@@ -28,12 +28,12 @@
 /obj/machinery/libraryscanner/interact(mob/user)
 	usr.set_machine(src)
 	var/dat = "<HEAD><TITLE>Scanner Control Interface</TITLE></HEAD><BODY>\n" // <META HTTP-EQUIV='Refresh' CONTENT='10'>
-	if(cache)
+	if (cache)
 		dat += "[SPAN_COLOR("#005500", "Data stored in memory.")]<BR>"
 	else
 		dat += "No data stored in memory.<BR>"
 	dat += "<A href='?src=\ref[src];scan=1'>\[Scan\]</A>"
-	if(cache)
+	if (cache)
 		dat += "       <A href='?src=\ref[src];clear=1'>\[Clear Memory\]</A><BR><BR><A href='?src=\ref[src];eject=1'>\[Remove Book\]</A>"
 	else
 		dat += "<BR>"
@@ -41,18 +41,18 @@
 	onclose(user, "scanner")
 
 /obj/machinery/libraryscanner/Topic(href, href_list)
-	if(..())
+	if (..())
 		close_browser(usr, "window=scanner")
 		onclose(usr, "scanner")
 		return
 
-	if(href_list["scan"])
+	if (href_list["scan"])
 		for(var/obj/item/book/B in contents)
 			cache = B
 			break
-	if(href_list["clear"])
+	if (href_list["clear"])
 		cache = null
-	if(href_list["eject"])
+	if (href_list["eject"])
 		for(var/obj/item/book/B in contents)
 			B.dropInto(loc)
 	src.add_fingerprint(usr)
@@ -69,8 +69,8 @@
 	density = TRUE
 
 /obj/machinery/bookbinder/attackby(obj/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/paper))
-		if(!user.unEquip(O, src))
+	if (istype(O, /obj/item/paper))
+		if (!user.unEquip(O, src))
 			return
 		user.visible_message("[user] loads some paper into [src].", "You load some paper into [src].")
 		src.visible_message("[src] begins to hum as it warms up its printing drums.")

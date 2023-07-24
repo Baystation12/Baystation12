@@ -15,7 +15,7 @@
 /spell/targeted/glimpse_of_eternity/cast(list/targets, mob/user)
 	for(var/t in targets)
 		var/mob/living/L = t
-		if(L.faction != user.faction) //Worse for non-allies
+		if (L.faction != user.faction) //Worse for non-allies
 			L.eye_blind += 5
 			L.Stun(5)
 			new /obj/effect/temporary(get_turf(L), 5, 'icons/effects/effects.dmi', "electricity_constant")

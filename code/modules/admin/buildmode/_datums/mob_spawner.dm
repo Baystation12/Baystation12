@@ -32,7 +32,7 @@
 	return contents
 
 /datum/mob_spawner/proc/paste(list/contents)
-	if(length(contents) == 0)
+	if (length(contents) == 0)
 		return
 
 	var/list/mob_list = contents["mobs"]
@@ -81,7 +81,7 @@
 		if (faction)
 			M.faction = faction
 
-		if(atmos_immune)
+		if (atmos_immune)
 			M.min_gas = null
 			M.max_gas = null
 			M.minbodytemp = 0

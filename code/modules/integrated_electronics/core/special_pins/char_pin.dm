@@ -5,20 +5,20 @@
 /datum/integrated_io/char/ask_for_pin_data(mob/user)
 	var/new_data = input(user, "Please type in one character.", "[src] char writing]") as text
 	new_data = sanitize(new_data, 1, trim=0)
-	if(holder.check_interactivity(user) )
+	if (holder.check_interactivity(user) )
 		to_chat(user, SPAN_NOTICE("You input [new_data ? "new_data" : "NULL"] into the pin."))
 		write_data_to_pin(new_data)
 
 /datum/integrated_io/char/write_data_to_pin(new_data)
-	if(isnull(new_data) || istext(new_data))
-		if(length(new_data) > 1)
+	if (isnull(new_data) || istext(new_data))
+		if (length(new_data) > 1)
 			return
 		data = new_data
 		holder.on_data_written()
 
 // This makes the text go from "A" to "%".
 /datum/integrated_io/char/scramble()
-	if(!is_valid())
+	if (!is_valid())
 		return
 	var/list/options = list("!","@","#","$","%","^","&","*","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z")
 	data = pick(options)

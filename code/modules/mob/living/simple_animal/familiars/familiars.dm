@@ -128,11 +128,11 @@
 
 /mob/living/simple_animal/familiar/pet/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
-	if(!icon_rest)
+	if (!icon_rest)
 		return
-	if(stat == UNCONSCIOUS || resting)
+	if (stat == UNCONSCIOUS || resting)
 		icon_state = icon_rest
 
 /mob/living/simple_animal/familiar/pet/mouse

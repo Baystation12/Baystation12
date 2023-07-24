@@ -11,10 +11,10 @@
 	return FALSE
 
 /turf/simulated/floor/exoplanet/New()
-	if(GLOB.using_map.use_overmap)
+	if (GLOB.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
-		if(istype(E))
-			if(E.atmosphere)
+		if (istype(E))
+			if (E.atmosphere)
 				initial_gas = E.atmosphere.gas.Copy()
 				temperature = E.atmosphere.temperature
 			else
@@ -22,22 +22,22 @@
 				temperature = T0C
 			//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
 			set_light(E.lightlevel, 0.1, 2)
-			if(E.planetary_area && istype(loc, world.area))
+			if (E.planetary_area && istype(loc, world.area))
 				ChangeArea(src, E.planetary_area)
 	..()
 
 /turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)
-	if(diggable && istype(C,/obj/item/shovel))
+	if (diggable && istype(C,/obj/item/shovel))
 		visible_message(SPAN_NOTICE("\The [user] starts digging \the [src]"))
-		if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if (do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
 			to_chat(user,SPAN_NOTICE("You dig a deep pit."))
 			new /obj/structure/pit(src)
 			diggable = 0
 		else
 			to_chat(user,SPAN_NOTICE("You stop shoveling."))
-	else if(istype(C, /obj/item/stack/tile))
+	else if (istype(C, /obj/item/stack/tile))
 		var/obj/item/stack/tile/T = C
-		if(T.use(1))
+		if (T.use(1))
 			playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
 			ChangeTurf(/turf/simulated/floor, FALSE, FALSE, TRUE)
 	else if (isCrowbar(C) || isWelder(C) || istype(C, /obj/item/gun/energy/plasmacutter))
@@ -47,10 +47,10 @@
 
 /turf/simulated/floor/exoplanet/ex_act(severity)
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			ChangeTurf(get_base_turf_by_area(src))
-		if(EX_ACT_HEAVY)
-			if(prob(40))
+		if (EX_ACT_HEAVY)
+			if (prob(40))
 				ChangeTurf(get_base_turf_by_area(src))
 
 /turf/simulated/floor/exoplanet/Initialize()
@@ -59,24 +59,24 @@
 
 /turf/simulated/floor/exoplanet/on_update_icon(update_neighbors)
 	overlays.Cut()
-	if(LAZYLEN(decals))
+	if (LAZYLEN(decals))
 		overlays += decals
 	for(var/direction in GLOB.cardinal)
 		var/turf/turf_to_check = get_step(src,direction)
-		if(!istype(turf_to_check, type))
+		if (!istype(turf_to_check, type))
 			var/image/rock_side = image(icon, "edge[pick(0,1,2)]", dir = turn(direction, 180))
 			rock_side.plating_decal_layerise()
 			switch(direction)
-				if(NORTH)
+				if (NORTH)
 					rock_side.pixel_y += world.icon_size
-				if(SOUTH)
+				if (SOUTH)
 					rock_side.pixel_y -= world.icon_size
-				if(EAST)
+				if (EAST)
 					rock_side.pixel_x += world.icon_size
-				if(WEST)
+				if (WEST)
 					rock_side.pixel_x -= world.icon_size
 			overlays += rock_side
-		else if(update_neighbors)
+		else if (update_neighbors)
 			turf_to_check.update_icon()
 
 //WAter
@@ -144,21 +144,21 @@
 
 /turf/simulated/floor/exoplanet/grass/Initialize()
 	. = ..()
-	if(GLOB.using_map.use_overmap)
+	if (GLOB.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
-		if(istype(E) && E.grass_color)
+		if (istype(E) && E.grass_color)
 			color = E.grass_color
-	if(!resources)
+	if (!resources)
 		resources = list()
-	if(prob(70))
+	if (prob(70))
 		resources[MATERIAL_GRAPHITE] = rand(3,5)
-	if(prob(5))
+	if (prob(5))
 		resources[MATERIAL_URANIUM] = rand(1,3)
-	if(prob(2))
+	if (prob(2))
 		resources[MATERIAL_DIAMOND] = 1
 
 /turf/simulated/floor/exoplanet/grass/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if((temperature > T0C + 200 && prob(5)) || temperature > T0C + 1000)
+	if ((temperature > T0C + 200 && prob(5)) || temperature > T0C + 1000)
 		melt()
 
 /turf/simulated/floor/exoplanet/grass/melt()
@@ -179,7 +179,7 @@
 	icon_state = "desert[rand(0,5)]"
 
 /turf/simulated/floor/exoplanet/desert/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if((temperature > T0C + 1700 && prob(5)) || temperature > T0C + 3000)
+	if ((temperature > T0C + 1700 && prob(5)) || temperature > T0C + 3000)
 		melt()
 
 /turf/simulated/floor/exoplanet/desert/melt()
@@ -197,9 +197,9 @@
 
 /turf/simulated/floor/exoplanet/concrete/on_update_icon()
 	overlays.Cut()
-	if(burnt)
+	if (burnt)
 		overlays |= get_damage_overlay("burned[(x + y) % 3]", BLEND_MULTIPLY)
-	if(broken)
+	if (broken)
 		overlays |= get_damage_overlay("broken[(x + y) % 5]", BLEND_MULTIPLY)
 
 /turf/simulated/floor/exoplanet/concrete/melt()
@@ -220,7 +220,7 @@
 /turf/simulated/planet_edge/Initialize()
 	. = ..()
 	var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
-	if(!istype(E))
+	if (!istype(E))
 		return
 	var/nx = x
 	if (x <= TRANSITIONEDGE)
@@ -229,13 +229,13 @@
 		nx = x - (E.maxx  - 2*TRANSITIONEDGE) + 1
 
 	var/ny = y
-	if(y <= TRANSITIONEDGE)
+	if (y <= TRANSITIONEDGE)
 		ny = y + (E.maxy - 2*TRANSITIONEDGE) - 1
 	else if (y >= (E.maxy - TRANSITIONEDGE))
 		ny = y - (E.maxy - 2*TRANSITIONEDGE) + 1
 
 	var/turf/NT = locate(nx, ny, z)
-	if(NT)
+	if (NT)
 		vis_contents = list(NT)
 
 	//Need to put a mouse-opaque overlay there to prevent people turning/shooting towards ACTUAL location of vis_content things
@@ -247,13 +247,13 @@
 /turf/simulated/planet_edge/Bumped(atom/movable/A)
 	. = ..()
 	var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
-	if(!istype(E))
+	if (!istype(E))
 		return
-	if(E.planetary_area && istype(loc, world.area))
+	if (E.planetary_area && istype(loc, world.area))
 		ChangeArea(src, E.planetary_area)
 	var/new_x = A.x
 	var/new_y = A.y
-	if(x <= TRANSITIONEDGE)
+	if (x <= TRANSITIONEDGE)
 		new_x = E.maxx - TRANSITIONEDGE - 1
 	else if (x >= (E.maxx - TRANSITIONEDGE))
 		new_x = TRANSITIONEDGE + 1
@@ -263,10 +263,10 @@
 		new_y = TRANSITIONEDGE + 1
 
 	var/turf/T = locate(new_x, new_y, A.z)
-	if(T && !T.density)
+	if (T && !T.density)
 		A.forceMove(T)
-		if(isliving(A))
+		if (isliving(A))
 			var/mob/living/L = A
-			if(L.pulling)
+			if (L.pulling)
 				var/atom/movable/AM = L.pulling
 				AM.forceMove(T)

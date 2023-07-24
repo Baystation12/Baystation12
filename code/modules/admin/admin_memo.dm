@@ -6,26 +6,26 @@
 	set name = "Memo"
 	set category = "Server"
 #if ENABLE_MEMOS == 1
-	if(!check_rights(0))	return
+	if (!check_rights(0))	return
 	switch(task)
-		if("write")		admin_memo_write()
-		if("show")		admin_memo_show()
-		if("delete")	admin_memo_delete()
+		if ("write")		admin_memo_write()
+		if ("show")		admin_memo_show()
+		if ("delete")	admin_memo_delete()
 #endif
 
 //write a message
 /client/proc/admin_memo_write()
 	var/savefile/F = new(MEMOFILE)
-	if(F)
+	if (F)
 		var/memo = sanitize(input(src,"Type your memo\n(Leaving it blank will delete your current memo):","Write Memo",null) as null|message, extra = 0)
 		switch(memo)
-			if(null)
+			if (null)
 				return
-			if("")
+			if ("")
 				F.dir.Remove(ckey)
 				to_chat(src, "<b>Memo removed</b>")
 				return
-		if( findtext(memo,"<script",1,0) )
+		if ( findtext(memo,"<script",1,0) )
 			return
 		to_save(F[ckey], "[key] on [time2text(world.realtime,"(DDD) DD MMM hh:mm")]<br>[memo]")
 		message_admins("[key] set an admin memo:<br>[memo]")
@@ -34,7 +34,7 @@
 /client/proc/admin_memo_show()
 #if ENABLE_MEMOS == 1
 	var/savefile/F = new(MEMOFILE)
-	if(F)
+	if (F)
 		for(var/ckey in F.dir)
 			to_chat(src, "<center>[SPAN_CLASS("motd", "<b>Admin Memo</b><i> by [F[ckey]]</i>")]</center>")
 #endif
@@ -42,13 +42,13 @@
 //delete your own or somebody else's memo
 /client/proc/admin_memo_delete()
 	var/savefile/F = new(MEMOFILE)
-	if(F)
+	if (F)
 		var/ckey
-		if(check_rights(R_SERVER,0))	//high ranking admins can delete other admin's memos
+		if (check_rights(R_SERVER,0))	//high ranking admins can delete other admin's memos
 			ckey = input(src,"Whose memo shall we remove?","Remove Memo",null) as null|anything in F.dir
 		else
 			ckey = src.ckey
-		if(ckey)
+		if (ckey)
 			F.dir.Remove(ckey)
 			to_chat(src, "<b>Removed Memo created by [ckey].</b>")
 

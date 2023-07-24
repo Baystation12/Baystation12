@@ -20,9 +20,9 @@
 	var/result = null
 	pull_data()
 	var/incoming = get_pin_data(IC_INPUT, 1)
-	if(!isnull(incoming))
+	if (!isnull(incoming))
 		result = num2text(incoming)
-	else if(!incoming)
+	else if (!incoming)
 		result = "0"
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -41,7 +41,7 @@
 	var/result = null
 	pull_data()
 	var/incoming = get_pin_data(IC_INPUT, 1)
-	if(!isnull(incoming))
+	if (!isnull(incoming))
 		result = text2num(incoming)
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -60,7 +60,7 @@
 	var/result = null
 	pull_data()
 	var/atom/A = get_pin_data(IC_INPUT, 1)
-	if(A && istype(A))
+	if (A && istype(A))
 		result = A.name
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -79,7 +79,7 @@
 	var/result = null
 	pull_data()
 	var/atom/A = get_pin_data(IC_INPUT, 1)
-	if(A && istype(A))
+	if (A && istype(A))
 		result = add_data_signature("\ref[A]")
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -101,7 +101,7 @@
 	var/signature = signature_and_data[1]
 	var/dec = signature_and_data[2]
 
-	if(!check_data_signature(signature, dec))
+	if (!check_data_signature(signature, dec))
 		return FALSE
 
 	set_pin_data(IC_OUTPUT, 1, weakref(locate(dec)))
@@ -120,7 +120,7 @@
 	var/result = null
 	pull_data()
 	var/incoming = get_pin_data(IC_INPUT, 1)
-	if(!isnull(incoming))
+	if (!isnull(incoming))
 		result = lowertext(incoming)
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -139,7 +139,7 @@
 	var/result = null
 	pull_data()
 	var/incoming = get_pin_data(IC_INPUT, 1)
-	if(!isnull(incoming))
+	if (!isnull(incoming))
 		result = uppertext(incoming)
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -165,7 +165,7 @@
 	var/result = null
 	for(var/k in 1 to length(inputs))
 		var/I = get_pin_data(IC_INPUT, k)
-		if(!isnull(I))
+		if (!isnull(I))
 			result = result + I
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -237,7 +237,7 @@
 /obj/item/integrated_circuit/converter/indexer/do_work()
 	var/strin = get_pin_data(IC_INPUT, 1)
 	var/ind = get_pin_data(IC_INPUT, 2)
-	if(ind > 0 && ind <= length(strin))
+	if (ind > 0 && ind <= length(strin))
 		set_pin_data(IC_OUTPUT, 1, strin[ind])
 	else
 		set_pin_data(IC_OUTPUT, 1, "")
@@ -270,7 +270,7 @@
 	push_data()
 
 	activate_pin(2)
-	if(position)
+	if (position)
 		activate_pin(3)
 	else
 		activate_pin(4)
@@ -315,7 +315,7 @@
 /obj/item/integrated_circuit/converter/exploders/do_work()
 	var/strin = get_pin_data(IC_INPUT, 1)
 	var/delimiter = get_pin_data(IC_INPUT, 2)
-	if(delimiter == null)
+	if (delimiter == null)
 		set_pin_data(IC_OUTPUT, 1, splittext(strin,null))
 	else
 		set_pin_data(IC_OUTPUT, 1, splittext(strin, delimiter))
@@ -334,7 +334,7 @@
 	var/result = null
 	pull_data()
 	var/incoming = get_pin_data(IC_INPUT, 1)
-	if(!isnull(incoming))
+	if (!isnull(incoming))
 		result = RAD_TO_DEG * incoming
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -352,7 +352,7 @@
 	var/result = null
 	pull_data()
 	var/incoming = get_pin_data(IC_INPUT, 1)
-	if(!isnull(incoming))
+	if (!isnull(incoming))
 		result = DEG_TO_RAD * incoming
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -384,7 +384,7 @@
 	var/x2 = get_pin_data(IC_INPUT, 3)
 	var/y2 = get_pin_data(IC_INPUT, 4)
 
-	if(!isnull(x1) && !isnull(y1) && !isnull(x2) && !isnull(y2))
+	if (!isnull(x1) && !isnull(y1) && !isnull(x2) && !isnull(y2))
 		set_pin_data(IC_OUTPUT, 1, x1 - x2)
 		set_pin_data(IC_OUTPUT, 2, y1 - y2)
 
@@ -410,7 +410,7 @@
 	var/hue = get_pin_data(IC_INPUT, 1)
 	var/saturation = get_pin_data(IC_INPUT, 2)
 	var/value = get_pin_data(IC_INPUT, 3)
-	if(isnum(hue)&&isnum(saturation)&&isnum(value))
+	if (isnum(hue)&&isnum(saturation)&&isnum(value))
 		result = HSVtoRGB(hsv(AngleToHue(hue),saturation,value))
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -436,7 +436,7 @@
 	var/red = get_pin_data(IC_INPUT, 1)
 	var/green = get_pin_data(IC_INPUT, 2)
 	var/blue = get_pin_data(IC_INPUT, 3)
-	if(isnum(red)&&isnum(green)&&isnum(blue))
+	if (isnum(red)&&isnum(green)&&isnum(blue))
 		result = rgb(red,green,blue)
 
 	set_pin_data(IC_OUTPUT, 1, result)

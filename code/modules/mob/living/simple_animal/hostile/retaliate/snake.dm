@@ -43,7 +43,7 @@
 	if (isSynthetic())
 		return
 
-	if(venomous)
+	if (venomous)
 		L.reagents.add_reagent(/datum/reagent/toxin/venom, 2)
 
 /mob/living/simple_animal/hostile/retaliate/snake/venom //Identical to the one without toxins.

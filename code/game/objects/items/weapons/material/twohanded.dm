@@ -31,7 +31,7 @@
 
 /obj/item/material/twohanded/update_twohanding()
 	var/mob/living/M = loc
-	if(istype(M) && M.can_wield_item(src) && is_held_twohanded(M))
+	if (istype(M) && M.can_wield_item(src) && is_held_twohanded(M))
 		wielded = 1
 		force = force_wielded
 	else
@@ -54,7 +54,7 @@
 
 /obj/item/material/twohanded/get_parry_chance(mob/user)
 	. = ..()
-	if(wielded)
+	if (wielded)
 		. += wielded_parry_bonus
 
 /obj/item/material/twohanded/on_update_icon()
@@ -86,15 +86,15 @@
 	base_parry_chance = 15
 
 /obj/item/material/twohanded/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
-	if(!proximity) return
+	if (!proximity) return
 	..()
-	if(A && wielded)
-		if(istype(A,/obj/structure/window))
+	if (A && wielded)
+		if (istype(A,/obj/structure/window))
 			var/obj/structure/window/W = A
 			W.shatter()
-		else if(istype(A,/obj/structure/grille))
+		else if (istype(A,/obj/structure/grille))
 			qdel(A)
-		else if(istype(A,/obj/effect/vine))
+		else if (istype(A,/obj/effect/vine))
 			var/obj/effect/vine/P = A
 			P.kill_health()
 
@@ -123,7 +123,7 @@
 	base_parry_chance = 30
 
 /obj/item/material/twohanded/spear/shatter(consumed)
-	if(!consumed)
+	if (!consumed)
 		new /obj/item/stack/material/rods(get_turf(src), 1)
 		new /obj/item/stack/cable_coil(get_turf(src), 3)
 	..()
@@ -154,16 +154,16 @@
 	var/atom/movable/AM = damage_source
 	var/datum/thrownthing/TT = SSthrowing.processing[damage_source]
 
-	if(istype(AM) && TT && (!attacker || (attacker && get_dist(user, attacker) > 1)) && !user.incapacitated() && is_held_twohanded(user))
+	if (istype(AM) && TT && (!attacker || (attacker && get_dist(user, attacker) > 1)) && !user.incapacitated() && is_held_twohanded(user))
 
 		var/bad_arc = reverse_direction(user.dir) //arc of directions from which we cannot block
-		if(check_shield_arc(user, bad_arc, damage_source, attacker))
-			if(!prob(user.skill_fail_chance(SKILL_HAULING, 50, SKILL_EXPERIENCED)))
+		if (check_shield_arc(user, bad_arc, damage_source, attacker))
+			if (!prob(user.skill_fail_chance(SKILL_HAULING, 50, SKILL_EXPERIENCED)))
 				. = TRUE
 				//You hit it!
 				playsound(src, pick('sound/items/baseball/baseball_hit_01.wav', 'sound/items/baseball/baseball_hit_02.wav'), 75, 1)
 				var/home_run = prob(25)
-				if(home_run)
+				if (home_run)
 					playsound(src, 'sound/items/baseball/play_ball.wav', 75)
 					visible_message(SPAN_NOTICE("\The [user] strikes the incoming [AM] with full force! It's a home run!"))
 				else
@@ -187,9 +187,9 @@
 /obj/item/material/twohanded/baseballbat/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	. = ..()
 	var/obj/O = target
-	if(istype(O))
-		if(is_held_twohanded(user) && !O.anchored && proximity_flag && isturf(O.loc) && O.w_class <= ITEM_SIZE_SMALL)
-			if(!prob(user.skill_fail_chance(SKILL_HAULING, 20, SKILL_EXPERIENCED)))
+	if (istype(O))
+		if (is_held_twohanded(user) && !O.anchored && proximity_flag && isturf(O.loc) && O.w_class <= ITEM_SIZE_SMALL)
+			if (!prob(user.skill_fail_chance(SKILL_HAULING, 20, SKILL_EXPERIENCED)))
 				var/skill = 0.25 + (user.get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)
 				var/dist = O.throw_range * skill
 				O.throw_at(get_ranged_target_turf(user, user.dir, dist), dist, O.throw_speed * skill, user, TRUE)

@@ -53,7 +53,7 @@
 
 /obj/item/device/lightreplacer/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 2)
+	if (distance <= 2)
 		to_chat(user, "It has [uses] light\s remaining.")
 		switch (lighting_tone)
 			if (LIGHT_REPLACE_AREA)
@@ -68,26 +68,26 @@
 /obj/item/device/lightreplacer/resolve_attackby(atom/A, mob/user)
 
 	//Check for lights in a container, refilling our charges.
-	if(istype(A, /obj/item/storage))
+	if (istype(A, /obj/item/storage))
 		var/obj/item/storage/S = A
 		var/amt_inserted = 0
 		var/turf/T = get_turf(user)
 		for(var/obj/item/light/L in S.contents)
-			if(!user.stat && src.uses < src.max_uses && L.status == LIGHT_OK)
+			if (!user.stat && src.uses < src.max_uses && L.status == LIGHT_OK)
 				src.AddUses(1)
 				amt_inserted++
 				S.remove_from_storage(L, T, 1)
 				qdel(L)
 		S.finish_bulk_removal()
-		if(amt_inserted)
+		if (amt_inserted)
 			to_chat(user, "You insert [amt_inserted] light\s into \The [src]. It has [uses] light\s remaining.")
 			add_fingerprint(user)
 			return
 
 	//Actually replace the light.
-	if(istype(A, /obj/machinery/light))
+	if (istype(A, /obj/machinery/light))
 		var/obj/machinery/light/L = A
-		if(isliving(user))
+		if (isliving(user))
 			var/mob/living/U = user
 			ReplaceLight(L, U)
 			add_fingerprint(user)
@@ -140,9 +140,9 @@
 
 /obj/item/device/lightreplacer/attack_self(mob/user)
 	/* // This would probably be a bit OP. If you want it though, uncomment the code.
-	if(isrobot(user))
+	if (isrobot(user))
 		var/mob/living/silicon/robot/R = user
-		if(R.emagged)
+		if (R.emagged)
 			src.Emag()
 			to_chat(usr, "You shortcircuit the [src].")
 			return
@@ -196,17 +196,17 @@
 
 /obj/item/device/lightreplacer/proc/Charge(mob/user, amount = 1)
 	charge += amount
-	if(charge > 6)
+	if (charge > 6)
 		AddUses(1)
 		charge = 0
 
 /obj/item/device/lightreplacer/proc/ReplaceLight(obj/machinery/light/target, mob/living/U)
 
-	if(target.get_status() == LIGHT_OK)
+	if (target.get_status() == LIGHT_OK)
 		to_chat(U, "There is a working [target.get_fitting_name()] already inserted.")
-	else if(!CanUse(U))
+	else if (!CanUse(U))
 		to_chat(U, "\The [src]'s refill light blinks red.")
-	else if(Use(U))
+	else if (Use(U))
 		to_chat(U, SPAN_NOTICE("You replace the [target.get_fitting_name()] with the [src]."))
 
 		var/bulb_color = null
@@ -221,7 +221,7 @@
 		if (!bulb_color)
 			bulb_color = pick(LIGHT_STANDARD_COLORS)
 
-		if(target.lightbulb)
+		if (target.lightbulb)
 			var/obj/item/bulb = target.lightbulb
 			target.remove_bulb()
 			if (isrobot(U))
@@ -246,7 +246,7 @@
 /obj/item/device/lightreplacer/proc/CanUse(mob/living/user)
 	src.add_fingerprint(user)
 	//Not sure what else to check for. Maybe if clumsy?
-	if(uses > 0)
+	if (uses > 0)
 		return 1
 	else
 		return 0

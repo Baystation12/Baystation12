@@ -40,14 +40,14 @@
 		if (AM == src)
 			continue
 		AM.forceMove(src)
-		if(istype(AM, /obj/structure/bigDelivery) && !hasmob)
+		if (istype(AM, /obj/structure/bigDelivery) && !hasmob)
 			var/obj/structure/bigDelivery/T = AM
 			src.destinationTag = T.sortTag
-		if(istype(AM, /obj/item/smallDelivery) && !hasmob)
+		if (istype(AM, /obj/item/smallDelivery) && !hasmob)
 			var/obj/item/smallDelivery/T = AM
 			src.destinationTag = T.sortTag
 		//Drones can mail themselves through maint.
-		if(isdrone(AM))
+		if (isdrone(AM))
 			var/mob/living/silicon/robot/drone/drone = AM
 			src.destinationTag = drone.mail_destination
 
@@ -55,7 +55,7 @@
 	// start the movement process
 	// argument is the disposal unit the holder started in
 /obj/structure/disposalholder/proc/start(obj/machinery/disposal/D)
-	if(!D.trunk)
+	if (!D.trunk)
 		D.expel(src)	// no trunk connected, so expel immediately
 		return
 
@@ -67,29 +67,29 @@
 	// movement process, persists while holder is moving through pipes
 /obj/structure/disposalholder/Process()
 	for (var/i in 1 to speed)
-		if(!(count--))
+		if (!(count--))
 			active = 0
-		if(!active || QDELETED(src))
+		if (!active || QDELETED(src))
 			return PROCESS_KILL
 
 		var/obj/structure/disposalpipe/last
 
-		if(hasmob && prob(10))
+		if (hasmob && prob(10))
 			for(var/mob/living/H in check_mob(src))
 				H.apply_damage(30, DAMAGE_BRUTE, null, DAMAGE_FLAG_DISPERSED, "Blunt Trauma", ARMOR_MELEE_MAJOR)//horribly maim any living creature jumping down disposals.  c'est la vie
 
 		var/obj/structure/disposalpipe/curr = loc
-		if(!istype(curr))
+		if (!istype(curr))
 			qdel(src)
 			return PROCESS_KILL
 
 		last = curr
 		curr = curr.transfer(src)
 
-		if(QDELETED(src))
+		if (QDELETED(src))
 			return PROCESS_KILL
 
-		if(!curr)
+		if (!curr)
 			last.expel(src, loc, dir)
 
 	// find the turf which should contain the next pipe
@@ -98,12 +98,12 @@
 
 // find a matching pipe on a turf
 /obj/structure/disposalholder/proc/findpipe(turf/T)
-	if(!T)
+	if (!T)
 		return null
 
 	var/fdir = turn(dir, 180)	// flip the movement direction
 	for(var/obj/structure/disposalpipe/P in T)
-		if(fdir & P.dpdir)		// find pipe direction mask that matches flipped dir
+		if (fdir & P.dpdir)		// find pipe direction mask that matches flipped dir
 			return P
 	// if no matching pipe, return null
 	return null
@@ -111,14 +111,14 @@
 // merge two holder objects
 // used when a a holder meets a stuck holder
 /obj/structure/disposalholder/proc/merge(obj/structure/disposalholder/other)
-	if(other.reagents?.total_volume)
+	if (other.reagents?.total_volume)
 		src.create_reagents()
 		other.reagents.trans_to_holder(src.reagents, other.reagents.total_volume)
 	for(var/atom/movable/AM in other)
 		AM.forceMove(src)		// move everything in other holder to this one
-		if(ismob(AM))
+		if (ismob(AM))
 			var/mob/M = AM
-			if(M.client)	// if a client mob, update eye to follow this holder
+			if (M.client)	// if a client mob, update eye to follow this holder
 				M.client.eye = src
 	qdel(other)
 
@@ -126,7 +126,7 @@
 	destinationTag = new_tag
 
 /obj/structure/disposalholder/proc/setpartialtag(new_tag)
-	if(partialTag == new_tag)
+	if (partialTag == new_tag)
 		destinationTag = new_tag
 		partialTag = ""
 	else
@@ -134,7 +134,7 @@
 
 // called when player tries to move while in a pipe
 /obj/structure/disposalholder/relaymove(mob/user as mob)
-	if(!istype(user,/mob/living))
+	if (!istype(user,/mob/living))
 		return
 
 	var/mob/living/U = user
@@ -152,7 +152,7 @@
 
 // called to vent all gas in holder to a location
 /obj/structure/disposalholder/proc/vent_gas(atom/location)
-	if(location)
+	if (location)
 		location.assume_air(gas)  // vent all gas to turf
 
 /obj/structure/disposalholder/Destroy()

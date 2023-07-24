@@ -5,7 +5,7 @@
 /singleton/webhook/roundstart/get_message(list/data)
 	. = ..()
 	var/desc = "A new round is starting"
-	if(data && data["url"])
+	if (data && data["url"])
 		desc += " on [data["url"]]"
 	desc += "."
 

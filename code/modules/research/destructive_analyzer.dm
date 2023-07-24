@@ -28,16 +28,16 @@ Note: Must be placed within 3 tiles of the R&D Console
 	..()
 
 /obj/machinery/r_n_d/destructive_analyzer/on_update_icon()
-	if(panel_open)
+	if (panel_open)
 		icon_state = "d_analyzer_t"
-	else if(loaded_item)
+	else if (loaded_item)
 		icon_state = "d_analyzer_l"
 	else
 		icon_state = "d_analyzer"
 
 /obj/machinery/r_n_d/destructive_analyzer/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()
-	if(istype(new_state) && linked_console)
+	if (istype(new_state) && linked_console)
 		linked_console.linked_destroy = null
 		linked_console = null
 
@@ -45,37 +45,37 @@ Note: Must be placed within 3 tiles of the R&D Console
 	return !busy && ..()
 
 /obj/machinery/r_n_d/destructive_analyzer/cannot_transition_to(state_path)
-	if(busy)
+	if (busy)
 		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
-	if(loaded_item)
+	if (loaded_item)
 		return SPAN_NOTICE("There is something already loaded into \the [src]. You must remove it first.")
 	return ..()
 
 /obj/machinery/r_n_d/destructive_analyzer/attackby(obj/item/O as obj, mob/user as mob)
-	if(busy)
+	if (busy)
 		to_chat(user, SPAN_NOTICE("\The [src] is busy right now."))
 		return
-	if(component_attackby(O, user))
+	if (component_attackby(O, user))
 		return TRUE
-	if(loaded_item)
+	if (loaded_item)
 		to_chat(user, SPAN_NOTICE("There is something already loaded into \the [src]."))
 		return 1
-	if(panel_open)
+	if (panel_open)
 		to_chat(user, SPAN_NOTICE("You can't load \the [src] while it's opened."))
 		return 1
-	if(!linked_console)
+	if (!linked_console)
 		to_chat(user, SPAN_NOTICE("\The [src] must be linked to an R&D console first."))
 		return
-	if(!loaded_item)
-		if(isrobot(user)) //Don't put your module items in there!
+	if (!loaded_item)
+		if (isrobot(user)) //Don't put your module items in there!
 			return
-		if(!O.origin_tech)
+		if (!O.origin_tech)
 			to_chat(user, SPAN_NOTICE("This doesn't seem to have a tech origin."))
 			return
-		if(length(O.origin_tech) == 0 || O.holographic)
+		if (length(O.origin_tech) == 0 || O.holographic)
 			to_chat(user, SPAN_NOTICE("You cannot deconstruct this item."))
 			return
-		if(!user.unEquip(O, src))
+		if (!user.unEquip(O, src))
 			return
 		busy = 1
 		loaded_item = O

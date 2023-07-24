@@ -155,14 +155,14 @@
 	action_button_name = "Toggle the magclaws"
 
 /obj/item/clothing/shoes/magboots/vox/attack_self(mob/user)
-	if(src.magpulse)
+	if (src.magpulse)
 		item_flags &= ~ITEM_FLAG_NOSLIP
 		magpulse = 0
 		canremove = 1
 		to_chat(user, "You relax your deathgrip on the flooring.")
 	else
 		//make sure these can only be used when equipped.
-		if(!ishuman(user))
+		if (!ishuman(user))
 			return
 		var/mob/living/carbon/human/H = user
 		if (H.shoes != src)
@@ -179,7 +179,7 @@
 //In case they somehow come off while enabled.
 /obj/item/clothing/shoes/magboots/vox/dropped(mob/user as mob)
 	..()
-	if(src.magpulse)
+	if (src.magpulse)
 		user.visible_message("The [src] go limp as they are removed from [usr]'s feet.", "The [src] go limp as they are removed from your feet.")
 		item_flags &= ~ITEM_FLAG_NOSLIP
 		magpulse = 0

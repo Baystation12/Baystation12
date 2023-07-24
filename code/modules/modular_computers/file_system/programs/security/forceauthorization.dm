@@ -22,14 +22,14 @@
 	data["registered_guns"] = list()
 	data["unregistered_guns"] = list()
 	var/atom/movable/AM = nano_host()
-	if(!istype(AM))
+	if (!istype(AM))
 		return
 	var/list/zlevels = GetConnectedZlevels(AM.z)
 	for(var/obj/item/gun/G in GLOB.secure_weapons)
 		var/out_of_range = FALSE
 		var/area_name = "OUT OF RANGE"
 		var/turf/T = get_turf(G)
-		if(!T || !(T.z in zlevels))
+		if (!T || !(T.z in zlevels))
 			out_of_range = TRUE
 		else
 			var/area/A = get_area(T)
@@ -37,12 +37,12 @@
 
 		var/list/modes = list()
 		for(var/i = 1 to length(G.firemodes))
-			if(G.authorized_modes[i] == ALWAYS_AUTHORIZED)
+			if (G.authorized_modes[i] == ALWAYS_AUTHORIZED)
 				continue
 			var/datum/firemode/firemode = G.firemodes[i]
 			modes += list(list("index" = i, "mode_name" = firemode.name, "authorized" = G.authorized_modes[i]))
 
-		if(!isnull(G.registered_owner))
+		if (!isnull(G.registered_owner))
 			data["registered_guns"] += list(list("name" = "[G]", "ref" = "\ref[G]", "owner" = G.registered_owner, "modes" = modes, "area" = area_name, "out_of_range" = out_of_range))
 		else
 			data["unregistered_guns"] += list(list("name" = "[G]", "ref" = "\ref[G]", "modes" = modes, "area" = area_name, "out_of_range" = out_of_range))
@@ -55,10 +55,10 @@
 		ui.open()
 
 /datum/nano_module/forceauthorization/Topic(href, href_list)
-	if(..())
+	if (..())
 		return TRUE
 
-	if(href_list["gun"] && ("authorize" in href_list) && href_list["mode"])
+	if (href_list["gun"] && ("authorize" in href_list) && href_list["mode"])
 		var/obj/item/gun/G = locate(href_list["gun"]) in GLOB.secure_weapons
 		var/do_authorize = text2num(href_list["authorize"])
 		var/mode = text2num(href_list["mode"])

@@ -7,7 +7,7 @@
 
 	for(var/design_type in subtypesof(/datum/design))
 		var/datum/design/design = design_type
-		if(initial(design.id) == "id")
+		if (initial(design.id) == "id")
 			continue
 
 		group_by(ids, initial(design.id), design)
@@ -16,7 +16,7 @@
 	var/number_of_issues = number_of_issues(ids, "IDs")
 	number_of_issues += number_of_issues(build_paths, "Build Paths")
 
-	if(number_of_issues)
+	if (number_of_issues)
 		fail("[number_of_issues] issues with research designs found.")
 	else
 		pass("All research designs are unique.")
@@ -34,7 +34,7 @@
 		group_by(preference_keys, client_pref.key, client_pref)
 
 	var/number_of_issues = number_of_issues(preference_keys, "Keys")
-	if(number_of_issues)
+	if (number_of_issues)
 		fail("[number_of_issues] issues with player preferences found.")
 	else
 		pass("All player preferences have unique keys.")
@@ -54,7 +54,7 @@
 
 	var/number_of_issues = number_of_issues(access_ids, "Ids")
 	number_of_issues += number_of_issues(access_descs, "Descriptions")
-	if(number_of_issues)
+	if (number_of_issues)
 		fail("[number_of_issues] issue\s with access datums found.")
 	else
 		pass("All access datums are unique.")
@@ -71,7 +71,7 @@
 		group_by(outfits_by_name, outfit.name, outfit.type)
 
 	var/number_of_issues = number_of_issues(outfits_by_name, "Names")
-	if(number_of_issues)
+	if (number_of_issues)
 		fail("[number_of_issues] issue\s with outfit datums found.")
 	else
 		pass("All outfit datums have unique names.")
@@ -88,7 +88,7 @@
 		group_by(languages_by_name, initial(l.name), lt)
 
 	var/number_of_issues = number_of_issues(languages_by_name, "Language Names")
-	if(number_of_issues)
+	if (number_of_issues)
 		fail("[number_of_issues] issue\s with language datums found.")
 	else
 		pass("All languages datums have unique names.")
@@ -103,13 +103,13 @@
 	for(var/lt in subtypesof(/datum/language))
 		var/datum/language/l = lt
 		var/language_key = initial(l.key)
-		if(!language_key)
+		if (!language_key)
 			continue
 
 		group_by(languages_by_key, language_key, lt)
 
 	var/number_of_issues = number_of_issues(languages_by_key, "Language Keys")
-	if(number_of_issues)
+	if (number_of_issues)
 		fail("[number_of_issues] issue\s with language datums found.")
 	else
 		pass("All languages datums have unique keys.")
@@ -127,7 +127,7 @@
 		group_by(backpacks_by_name, backpack_outfit.name, backpack_outfit)
 
 	var/number_of_issues = number_of_issues(backpacks_by_name, "Outfit Backpack Names")
-	if(number_of_issues)
+	if (number_of_issues)
 		fail("[number_of_issues] duplicate outfit backpacks\s found.")
 	else
 		pass("All outfit backpacks have unique names.")
@@ -145,7 +145,7 @@
 		group_by(space_suit_modifiers_by_name, space_suit_modifier.name, space_suit_modifier)
 
 	var/number_of_issues = number_of_issues(space_suit_modifiers_by_name, "Space Suit Modifier Names")
-	if(number_of_issues)
+	if (number_of_issues)
 		fail("[number_of_issues] duplicate space suit modifier\s found.")
 	else
 		pass("All space suit modifiers have unique names.")
@@ -155,7 +155,7 @@
 	var/issues = 0
 	for(var/key in entries)
 		var/list/values = entries[key]
-		if(length(values) > 1)
+		if (length(values) > 1)
 			var/singleton/noi_feedback/noif = GET_SINGLETON(feedback)
 			noif.print(src, type, key, values)
 			issues++

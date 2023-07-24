@@ -20,7 +20,7 @@ var/global/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 
 /datum/job/captain/equip(mob/living/carbon/human/H)
 	. = ..()
-	if(.)
+	if (.)
 		H.implant_loyalty(src)
 
 /datum/job/captain/get_access()

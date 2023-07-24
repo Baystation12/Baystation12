@@ -14,40 +14,40 @@
 /mob/living/carbon/proc/handle_hallucinations()
 	//Tick down the duration
 	hallucination_duration = max(0, hallucination_duration - 1)
-	if(chem_effects[CE_MIND] > 0)
+	if (chem_effects[CE_MIND] > 0)
 		hallucination_duration = max(0, hallucination_duration - 1)
 
 	//Adjust power if we have some chems that affect it
-	if(chem_effects[CE_MIND] < 0)
+	if (chem_effects[CE_MIND] < 0)
 		hallucination_power = min(hallucination_power++, 50)
-	if(chem_effects[CE_MIND] < -1)
+	if (chem_effects[CE_MIND] < -1)
 		hallucination_power = hallucination_power++
-	if(chem_effects[CE_MIND] > 0)
+	if (chem_effects[CE_MIND] > 0)
 		hallucination_power = max(hallucination_power - chem_effects[CE_MIND], 0)
 
 	//See if hallucination is gone
-	if(!hallucination_power)
+	if (!hallucination_power)
 		hallucination_duration = 0
 		return
-	if(!hallucination_duration)
+	if (!hallucination_duration)
 		hallucination_power = 0
 		return
 
-	if(!client || stat || world.time < next_hallucination)
+	if (!client || stat || world.time < next_hallucination)
 		return
-	if(chem_effects[CE_MIND] > 0 && prob(chem_effects[CE_MIND]*40)) //antipsychotics help
+	if (chem_effects[CE_MIND] > 0 && prob(chem_effects[CE_MIND]*40)) //antipsychotics help
 		return
 	var/hall_delay = rand(10,20) SECONDS
 
-	if(hallucination_power < 50)
+	if (hallucination_power < 50)
 		hall_delay *= 2
 	next_hallucination = world.time + hall_delay
 	var/list/candidates = list()
 	for(var/T in subtypesof(/datum/hallucination))
 		var/datum/hallucination/H = new T
-		if(H.can_affect(src))
+		if (H.can_affect(src))
 			candidates += H
-	if(length(candidates))
+	if (length(candidates))
 		var/datum/hallucination/H = pick(candidates)
 		H.holder = src
 		H.activate()
@@ -68,13 +68,13 @@
 /datum/hallucination/proc/end()
 
 /datum/hallucination/proc/can_affect(mob/living/carbon/C)
-	if(!C.client)
+	if (!C.client)
 		return 0
-	if(min_power > C.hallucination_power)
+	if (min_power > C.hallucination_power)
 		return 0
-	if(max_power < C.hallucination_power)
+	if (max_power < C.hallucination_power)
 		return 0
-	if(!allow_duplicates && (locate(type) in C.hallucinations))
+	if (!allow_duplicates && (locate(type) in C.hallucinations))
 		return 0
 	return 1
 
@@ -83,12 +83,12 @@
 	holder = null
 
 /datum/hallucination/proc/activate()
-	if(!holder || !holder.client)
+	if (!holder || !holder.client)
 		return
 	holder.hallucinations += src
 	start()
 	spawn(duration)
-		if(holder)
+		if (holder)
 			end()
 			holder.hallucinations -= src
 		qdel(src)
@@ -134,7 +134,7 @@
 
 //Hearing someone talking to/about you.
 /datum/hallucination/talking/can_affect(mob/living/carbon/C)
-	if(!..())
+	if (!..())
 		return 0
 	for(var/mob/living/M in oview(C))
 		return TRUE
@@ -142,21 +142,21 @@
 /datum/hallucination/talking/start()
 	var/sanity = 5 //even insanity needs some sanity
 	for(var/mob/living/talker in oview(holder))
-		if(talker.stat)
+		if (talker.stat)
 			continue
 		var/message
 		var/display_name = talker.fake_name ? talker.fake_name : talker.real_name
-		if(prob(80))
+		if (prob(80))
 			var/list/names = list()
 			var/lastname = copytext(holder.real_name, findtext(holder.real_name, " ")+1)
 			var/firstname = copytext(holder.real_name, 1, findtext(holder.real_name, " "))
-			if(lastname) names += lastname
-			if(firstname) names += firstname
-			if(!length(names))
+			if (lastname) names += lastname
+			if (firstname) names += firstname
+			if (!length(names))
 				names += holder.real_name
 			var/add = prob(20) ? ", [pick(names)]" : ""
 			var/list/phrases = list("[prob(50) ? "Hey, " : ""][pick(names)]!","[prob(50) ? "Hey, " : ""][pick(names)]?","Get out[add]!","Go away[add].","What are you doing[add]?","Where's your ID[add]?")
-			if(holder.hallucination_power > 50)
+			if (holder.hallucination_power > 50)
 				phrases += list("What did you come here for[add]?","Don't touch me[add].","You're not getting out of here[add].", "You are a failure, [pick(names)].","Just kill yourself already, [pick(names)]")
 			message = pick(phrases)
 			to_chat(holder,"[SPAN_CLASS("game say", "[SPAN_CLASS("name", display_name)] [holder.say_quote(message)], [SPAN_CLASS("message", "[SPAN_CLASS("body", "\"[message]\"")]")]")]")
@@ -167,7 +167,7 @@
 		spawn(30) qdel(speech_bubble)
 		image_to(holder,speech_bubble)
 		sanity-- //don't spam them in very populated rooms.
-		if(!sanity)
+		if (!sanity)
 			return
 
 //Spiderling skitters
@@ -179,7 +179,7 @@
 	min_power = 40
 
 /datum/hallucination/spiderbabies/start()
-	if(istype(holder,/mob/living/carbon/human))
+	if (istype(holder,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = holder
 		var/obj/O = pick(H.organs)
 		to_chat(H,SPAN_WARNING("You feel something [pick("moving","squirming","skittering")] inside of your [O.name]!"))
@@ -203,7 +203,7 @@
 	var/list/possible_points = list()
 	for(var/turf/simulated/floor/F in view(holder, world.view+1))
 		possible_points += F
-	if(length(possible_points))
+	if (length(possible_points))
 		for(var/i = 1 to number)
 			var/image/thing = generate_mirage()
 			things += thing
@@ -211,7 +211,7 @@
 		holder.client.images += things
 
 /datum/hallucination/mirage/end()
-	if(holder.client)
+	if (holder.client)
 		holder.client.images -= things
 
 //LOADSEMONEY
@@ -229,7 +229,7 @@
 	number = 10
 
 /datum/hallucination/mirage/carnage/generate_mirage()
-	if(prob(50))
+	if (prob(50))
 		var/image/I = image('icons/effects/blood.dmi', pick("mfloor1", "mfloor2", "mfloor3", "mfloor4", "mfloor5", "mfloor6", "mfloor7"), layer = BELOW_TABLE_LAYER)
 		I.color = COLOR_BLOOD_HUMAN
 		return I
@@ -246,7 +246,7 @@
 	min_power = 30
 
 /datum/hallucination/fakeattack/can_affect(mob/living/carbon/C)
-	if(!..())
+	if (!..())
 		return 0
 	for(var/mob/living/M in oview(C,1))
 		return TRUE

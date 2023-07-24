@@ -42,20 +42,20 @@
 	radiation_mod = round(radiation_mod * Frand(0, 2), 0.1)
 	flash_mod = round(flash_mod * Frand(0.5, 1.5), 0.1)
 
-	if(brute_mod < 1 && prob(40))
+	if (brute_mod < 1 && prob(40))
 		species_flags |= SPECIES_FLAG_NO_MINOR_CUT
-	if(brute_mod < 0.9 && prob(40))
+	if (brute_mod < 0.9 && prob(40))
 		species_flags |= SPECIES_FLAG_NO_EMBED
-	if(toxins_mod < 0.1)
+	if (toxins_mod < 0.1)
 		species_flags |= SPECIES_FLAG_NO_POISON
 
 	//Gastronomic traits
 	taste_sensitivity = pick(TASTE_HYPERSENSITIVE, TASTE_SENSITIVE, TASTE_DULL, TASTE_NUMB)
 	gluttonous = pick(0, GLUT_TINY, GLUT_SMALLER, GLUT_ANYTHING)
 	stomach_capacity = 5 * stomach_capacity
-	if(prob(20))
+	if (prob(20))
 		gluttonous |= pick(GLUT_ITEM_TINY, GLUT_ITEM_NORMAL, GLUT_ITEM_ANYTHING, GLUT_PROJECTILE_VOMIT)
-		if(gluttonous & GLUT_ITEM_ANYTHING)
+		if (gluttonous & GLUT_ITEM_ANYTHING)
 			stomach_capacity += ITEM_SIZE_HUGE
 
 	//Environment
@@ -82,15 +82,15 @@
 	//Misc traits
 	darksight_range = rand(1,8)
 	darksight_tint = pick(DARKTINT_NONE,DARKTINT_MODERATE,DARKTINT_GOOD)
-	if(prob(40))
+	if (prob(40))
 		genders = list(PLURAL)
-	if(prob(10))
+	if (prob(10))
 		slowdown += pick(-1,1)
-	if(prob(10))
+	if (prob(10))
 		species_flags |= SPECIES_FLAG_NO_SLIP
-	if(prob(10))
+	if (prob(10))
 		species_flags |= SPECIES_FLAG_NO_TANGLE
-	if(prob(5))
+	if (prob(5))
 		species_flags |= SPECIES_FLAG_NO_PAIN
 
 	..()
@@ -127,11 +127,11 @@
 	var/list/newgases = gas_data.gases.Copy()
 	newgases ^= atmosphere.gas
 	for(var/gas in newgases)
-		if(gas_data.flags[gas] & (XGM_GAS_OXIDIZER|XGM_GAS_FUEL))
+		if (gas_data.flags[gas] & (XGM_GAS_OXIDIZER|XGM_GAS_FUEL))
 			newgases -= gas
-	if(length(newgases))
+	if (length(newgases))
 		poison_types = list(pick_n_take(newgases))
-	if(length(newgases))
+	if (length(newgases))
 		exhale_type = pick_n_take(newgases)
 
 /obj/structure/aliumizer
@@ -142,16 +142,16 @@
 	anchored = TRUE
 
 /obj/structure/aliumizer/attack_hand(mob/living/carbon/human/user)
-	if(!istype(user))
+	if (!istype(user))
 		to_chat(user, "You got no business touching this.")
 		return
-	if(user.species.name == SPECIES_ALIEN)
+	if (user.species.name == SPECIES_ALIEN)
 		to_chat(user, "You're already a [SPECIES_ALIEN].")
 		return
-	if(alert("Are you sure you want to be an alien?", "Mom Look I'm An Alien!", "Yes", "No") == "No")
+	if (alert("Are you sure you want to be an alien?", "Mom Look I'm An Alien!", "Yes", "No") == "No")
 		to_chat(user, "Okie dokie.")
 		return
-	if(user && user.species.name == SPECIES_ALIEN) //no spamming it to get free implants
+	if (user && user.species.name == SPECIES_ALIEN) //no spamming it to get free implants
 		return
 	to_chat(user, "You're now an alien humanoid of some undiscovered species. Make up what lore you want, no one knows a thing about your species! You can check info about your traits with Check Species Info verb in IC tab.")
 	to_chat(user, "You can't speak GalCom or any other languages by default. You can use translator implant that spawns on top of this monolith - it will give you knowledge of any language if you hear it enough times.")

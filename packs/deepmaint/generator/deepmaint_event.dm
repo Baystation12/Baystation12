@@ -16,7 +16,7 @@
 
 	while(--attempts > 0)
 
-	if(length(spawned_ladders) == 0)
+	if (length(spawned_ladders) == 0)
 		log_debug("Failed to spawn any ladders for deepmaint event. Aborting.")
 		kill(TRUE)
 
@@ -36,13 +36,13 @@
 
 /datum/event/deepmaint/proc/create_deepmaint_ladder_connection()
 	var/area/location = pick_area(list(/proc/is_not_space_area, /proc/is_station_area, /proc/is_maint_area))
-	if(!location)
+	if (!location)
 		log_debug("Could not find suitable location(s) to spawn ladders to deepmaint. Aborting.")
 		kill()
 		return FALSE
 
 	var/list/ladder_turfs = get_area_turfs(location, list(/proc/not_turf_contains_dense_objects, /proc/IsTurfAtmosSafe))
-	if(!length(ladder_turfs))
+	if (!length(ladder_turfs))
 		log_debug("Failed to find viable turfs to spawn ladders in \the [location].")
 		return FALSE
 

@@ -13,10 +13,10 @@
 
 /datum/event/brand_intelligence/start()
 	for(var/obj/machinery/vending/V in SSmachines.machinery)
-		if(V.z in affecting_z)
+		if (V.z in affecting_z)
 			vendingMachines += weakref(V)
 
-	if(!length(vendingMachines))
+	if (!length(vendingMachines))
 		kill()
 		return
 	var/weakref/W = pick_n_take(vendingMachines)
@@ -26,20 +26,20 @@
 	originMachine.shooting_chance = 15
 
 /datum/event/brand_intelligence/tick()
-	if(!length(vendingMachines) || QDELETED(originMachine) || originMachine.shut_up || !originMachine.shoot_inventory)	//if every machine is infected, or if the original vending machine is missing or has it's voice switch flipped or fixed
+	if (!length(vendingMachines) || QDELETED(originMachine) || originMachine.shut_up || !originMachine.shoot_inventory)	//if every machine is infected, or if the original vending machine is missing or has it's voice switch flipped or fixed
 		kill()
 		return
 
-	if(IsMultiple(activeFor, 5) && prob(15))
+	if (IsMultiple(activeFor, 5) && prob(15))
 		var/weakref/W = pick(vendingMachines)
 		vendingMachines -= W
 		var/obj/machinery/vending/infectedMachine = W.resolve()
-		if(infectedMachine)
+		if (infectedMachine)
 			infectedVendingMachines += W
 			infectedMachine.shut_up = 0
 			infectedMachine.shoot_inventory = 1
 
-	if(IsMultiple(activeFor, 12))
+	if (IsMultiple(activeFor, 12))
 		originMachine.speak(pick("Try our aggressive new marketing strategies!", \
 								 "You should buy products to feed your lifestyle obsession!", \
 								 "Consume!", \
@@ -53,7 +53,7 @@
 	originMachine.shooting_chance = initial(originMachine.shooting_chance)
 	for(var/weakref/W in infectedVendingMachines)
 		var/obj/machinery/vending/infectedMachine = W.resolve()
-		if(!infectedMachine)
+		if (!infectedMachine)
 			continue
 		infectedMachine.shut_up = 1
 		infectedMachine.shoot_inventory = 0

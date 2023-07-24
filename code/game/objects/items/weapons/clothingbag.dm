@@ -8,7 +8,7 @@
 	var/opened = 0
 
 /obj/item/clothingbag/attack_self(mob/user as mob)
-	if(!opened)
+	if (!opened)
 		user.visible_message(SPAN_NOTICE("\The [user] tears open \the [src.name]!"), SPAN_NOTICE("You tear open \the [src.name]!"))
 		opened = 1
 		icon_state = icon_used
@@ -24,13 +24,13 @@
 /obj/item/clothingbag/rubbersuit/New()
 	..()
 	switch(rand(1,3))
-		if(1)
+		if (1)
 			new/obj/item/clothing/suit/rubber(src)
 			new/obj/item/clothing/mask/rubber/species(src)
-		if(2)
+		if (2)
 			new/obj/item/clothing/suit/rubber/skrell(src)
 			new/obj/item/clothing/mask/rubber/species/skrell(src)
-		if(3)
+		if (3)
 			new/obj/item/clothing/suit/rubber/unathi(src)
 			new/obj/item/clothing/mask/rubber/species/unathi(src)
 

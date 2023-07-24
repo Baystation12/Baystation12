@@ -33,7 +33,7 @@
 /obj/item/rcd/Initialize()
 	. = ..()
 
-	if(!work_modes)
+	if (!work_modes)
 		var/singleton/hierarchy/h = GET_SINGLETON(/singleton/hierarchy/rcd_mode)
 		work_modes = h.children
 	work_mode = work_modes[1]
@@ -46,7 +46,7 @@
 
 /obj/item/rcd/examine(mob/user)
 	. = ..()
-	if(src.type == /obj/item/rcd && loc == user)
+	if (src.type == /obj/item/rcd && loc == user)
 		to_chat(user, "The current mode is '[work_mode]'")
 		to_chat(user, "It currently holds [stored_matter]/[max_stored_matter] matter-units.")
 
@@ -64,15 +64,15 @@
 
 /obj/item/rcd/attackby(obj/item/W, mob/user)
 
-	if(istype(W, /obj/item/rcd_ammo))
+	if (istype(W, /obj/item/rcd_ammo))
 		var/obj/item/rcd_ammo/cartridge = W
-		if(stored_matter >= max_stored_matter)
+		if (stored_matter >= max_stored_matter)
 			to_chat(user, SPAN_NOTICE("The RCD is at maximum capacity."))
 			return
 		var/matter_exchange = min(cartridge.remaining,max_stored_matter - stored_matter)
 		stored_matter += matter_exchange
 		cartridge.remaining -= matter_exchange
-		if(cartridge.remaining <= 0)
+		if (cartridge.remaining <= 0)
 			qdel(W)
 		cartridge.matter = list(MATERIAL_STEEL = 500 * cartridge.remaining,MATERIAL_GLASS = 250 * cartridge.remaining)
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
@@ -80,9 +80,9 @@
 		update_icon()
 		return
 
-	if(isScrewdriver(W))
+	if (isScrewdriver(W))
 		crafting = !crafting
-		if(!crafting)
+		if (!crafting)
 			to_chat(user, SPAN_NOTICE("You reassemble the RCD"))
 		else
 			to_chat(user, SPAN_NOTICE("The RCD can now be modified."))
@@ -123,19 +123,19 @@
 
 	to_chat(user, SPAN_NOTICE("Changed mode to '[work_mode]'"))
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
-	if(prob(20)) src.spark_system.start()
+	if (prob(20)) src.spark_system.start()
 
 /obj/item/rcd/afterattack(atom/A, mob/user, proximity)
-	if(!proximity) return
-	if(disabled && !isrobot(user))
+	if (!proximity) return
+	if (disabled && !isrobot(user))
 		return 0
-	if(istype(get_area(A),/area/shuttle)||istype(get_area(A),/turf/space/transit))
+	if (istype(get_area(A),/area/shuttle)||istype(get_area(A),/turf/space/transit))
 		return 0
 	work_id++
 	work_mode.do_work(src, A, user)
 
 /obj/item/rcd/proc/useResource(amount, mob/user)
-	if(stored_matter < amount)
+	if (stored_matter < amount)
 		return 0
 	stored_matter -= amount
 	queue_icon_update()	//Updates the ammo counter if ammo is succesfully used
@@ -165,7 +165,7 @@
 
 /obj/item/rcd_ammo/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
+	if (distance <= 1)
 		to_chat(user, SPAN_NOTICE("It has [remaining] unit\s of matter left."))
 
 /obj/item/rcd_ammo/large
@@ -181,11 +181,11 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_TOOLS
 
 /obj/item/rcd/borg/useResource(amount, mob/user)
-	if(isrobot(user))
+	if (isrobot(user))
 		var/mob/living/silicon/robot/R = user
-		if(R.cell)
+		if (R.cell)
 			var/cost = amount*30
-			if(R.cell.charge >= cost)
+			if (R.cell.charge >= cost)
 				R.cell.use(cost)
 				return 1
 	return 0
@@ -200,12 +200,12 @@
 /obj/item/rcd/mounted/useResource(amount, mob/user)
 	var/cost = amount*20 // About 5 deconstructions of walls on a standard cell (1k), less if it involves airlocks.
 	var/obj/item/cell/cell
-	if(istype(loc,/obj/item/rig_module))
+	if (istype(loc,/obj/item/rig_module))
 		var/obj/item/rig_module/module = loc
-		if(module.holder && module.holder.cell)
+		if (module.holder && module.holder.cell)
 			cell = module.holder.cell
-	else if(loc) cell = loc.get_cell()
-	if(cell && cell.charge >= cost)
+	else if (loc) cell = loc.get_cell()
+	if (cell && cell.charge >= cost)
 		cell.use(cost)
 		return 1
 	return 0
@@ -224,18 +224,18 @@
 /singleton/hierarchy/rcd_mode/proc/do_work(obj/item/rcd/rcd, atom/target, user)
 	for(var/child in children)
 		var/singleton/hierarchy/rcd_mode/rcdm = child
-		if(!rcdm.can_handle_work(rcd, target))
+		if (!rcdm.can_handle_work(rcd, target))
 			continue
-		if(!rcd.useResource(rcdm.cost, user))
+		if (!rcd.useResource(rcdm.cost, user))
 			rcd.lowAmmo(user)
 			return FALSE
 
 		playsound(get_turf(user), 'sound/machines/click.ogg', 50, 1)
 		rcdm.work_message(target, user, rcd)
 
-		if(rcdm.delay)
+		if (rcdm.delay)
 			var/work_id = rcd.work_id
-			if(!(do_after(user, rcdm.delay, target, DO_PUBLIC_UNIQUE) && work_id == rcd.work_id && rcd.can_use(user, target) && rcdm.can_handle_work(rcd, target)))
+			if (!(do_after(user, rcdm.delay, target, DO_PUBLIC_UNIQUE) && work_id == rcd.work_id && rcd.can_use(user, target) && rcdm.can_handle_work(rcd, target)))
 				return FALSE
 
 		rcdm.do_handle_work(target)
@@ -250,10 +250,10 @@
 
 /singleton/hierarchy/rcd_mode/proc/do_handle_work(atom/target)
 	var/result = get_work_result(target)
-	if(ispath(result,/turf))
+	if (ispath(result,/turf))
 		var/turf/T = target
 		T.ChangeTurf(result, keep_air = TRUE)
-	else if(result)
+	else if (result)
 		new result(target)
 	else
 		qdel(target)
@@ -263,7 +263,7 @@
 
 /singleton/hierarchy/rcd_mode/proc/work_message(atom/target, mob/user, rcd)
 	var/message
-	if(work_type)
+	if (work_type)
 		var/atom/work = work_type
 		message = SPAN_NOTICE("You begin constructing \a [initial(work.name)].")
 	else

@@ -1,29 +1,29 @@
 /mob/living/simple_animal/borer/proc/can_use_borer_ability(silent = FALSE, requires_host_value = TRUE, usable_while_docile = FALSE, check_last_special = TRUE)
 
-	if(controlling)
+	if (controlling)
 		return FALSE
 
-	if(requires_host_value)
-		if(!host)
-			if(!silent)
+	if (requires_host_value)
+		if (!host)
+			if (!silent)
 				to_chat(src, SPAN_WARNING("You must be within a host body to use this action."))
 			return FALSE
 	else
-		if(host)
-			if(!silent)
+		if (host)
+			if (!silent)
 				to_chat(src, SPAN_WARNING("You cannot be within a host body when using this action."))
 			return FALSE
 
-	if(stat)
-		if(!silent)
+	if (stat)
+		if (!silent)
 			to_chat(src, SPAN_WARNING("You cannot perform this action in your current state."))
 		return FALSE
-	if(docile && !usable_while_docile)
-		if(!silent)
+	if (docile && !usable_while_docile)
+		if (!silent)
 			to_chat(src, SPAN_NOTICE("You are feeling far too docile to perform this action."))
 		return FALSE
-	if(check_last_special && world.time < last_special)
-		if(!silent)
+	if (check_last_special && world.time < last_special)
+		if (!silent)
 			to_chat(src, SPAN_NOTICE("You cannot perform this action so soon after the last."))
 		return FALSE
 	return TRUE
@@ -33,7 +33,7 @@
 
 	var/mob/living/carbon/human/H = host
 
-	if(!istype(host))
+	if (!istype(host))
 		to_chat(src, SPAN_WARNING("This host does not have a suitable brain."))
 		return
 
@@ -41,24 +41,24 @@
 
 	H.add_language(LANGUAGE_BORER_GLOBAL)
 
-	if(host.stat == DEAD)
+	if (host.stat == DEAD)
 		H.verbs |= /mob/living/carbon/human/proc/jumpstart
 
 	H.verbs |= /mob/living/carbon/human/proc/psychic_whisper
-	if(!neutered)
+	if (!neutered)
 		H.verbs |= /mob/living/carbon/proc/spawn_larvae
 
-	if(H.client)
+	if (H.client)
 		H.ghostize(0)
 
-	if(src.mind)
+	if (src.mind)
 		src.mind.special_role = "Borer Husk"
 		src.mind.transfer_to(host)
 
 	H.ChangeToHusk()
 
 	var/obj/item/organ/internal/borer/B = new(H)
-	if(islist(chemical_types))
+	if (islist(chemical_types))
 		B.chemical_types = chemical_types.Copy()
 	H.internal_organs_by_name[BP_BRAIN] = B
 	H.internal_organs |= B
@@ -70,9 +70,9 @@
 	var/s2h_ip= src.lastKnownIP
 	src.computer_id = null
 	src.lastKnownIP = null
-	if(!H.computer_id)
+	if (!H.computer_id)
 		H.computer_id = s2h_id
-	if(!H.lastKnownIP)
+	if (!H.lastKnownIP)
 		H.lastKnownIP = s2h_ip
 
 /mob/living/carbon/human/proc/jumpstart()
@@ -80,7 +80,7 @@
 	set name = "Revive Host"
 	set desc = "Send a jolt of electricity through your host, reviving them."
 
-	if(stat != 2)
+	if (stat != 2)
 		to_chat(usr, SPAN_WARNING("Your host is already alive."))
 		return
 

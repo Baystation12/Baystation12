@@ -8,18 +8,18 @@
 
 /obj/item/sample/New(newloc, atom/supplied)
 	..(newloc)
-	if(supplied)
+	if (supplied)
 		copy_evidence(supplied)
 		name = "[initial(name)] (\the [supplied])"
 		object = "[supplied], [get_area(supplied)]"
 
 /obj/item/sample/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1 && object)
+	if (distance <= 1 && object)
 		to_chat(user, "The label says: '[object]'")
 
 /obj/item/sample/print/on_update_icon()
-	if(evidence && length(evidence))
+	if (evidence && length(evidence))
 		icon_state = "fingerprint1"
 
 /obj/item/sample/print/New(newloc, atom/supplied)
@@ -27,12 +27,12 @@
 	update_icon()
 
 /obj/item/sample/proc/copy_evidence(atom/supplied)
-	if(supplied.suit_fibers && length(supplied.suit_fibers))
+	if (supplied.suit_fibers && length(supplied.suit_fibers))
 		evidence = supplied.suit_fibers.Copy()
 		supplied.suit_fibers.Cut()
 
 /obj/item/sample/proc/merge_evidence(obj/item/sample/supplied, mob/user)
-	if(!supplied.evidence || !length(supplied.evidence))
+	if (!supplied.evidence || !length(supplied.evidence))
 		return 0
 	evidence |= supplied.evidence
 	SetName("[initial(name)] (combined)")
@@ -41,10 +41,10 @@
 	return 1
 
 /obj/item/sample/print/merge_evidence(obj/item/sample/supplied, mob/user)
-	if(!supplied.evidence || !length(supplied.evidence))
+	if (!supplied.evidence || !length(supplied.evidence))
 		return 0
 	for(var/print in supplied.evidence)
-		if(evidence[print])
+		if (evidence[print])
 			evidence[print] = stringmerge(evidence[print],supplied.evidence[print])
 		else
 			evidence[print] = supplied.evidence[print]
@@ -59,8 +59,8 @@
 	return A.attackby(src, user, click_params)
 
 /obj/item/sample/attackby(obj/O, mob/user)
-	if(O.type == src.type)
-		if(user.unEquip(O) && merge_evidence(O, user))
+	if (O.type == src.type)
+		if (user.unEquip(O) && merge_evidence(O, user))
 			qdel(O)
 		return 1
 	return ..()
@@ -78,12 +78,12 @@
 	item_state = "paper"
 
 /obj/item/sample/print/attack_self(mob/user)
-	if(evidence && length(evidence))
+	if (evidence && length(evidence))
 		return
-	if(!ishuman(user))
+	if (!ishuman(user))
 		return
 	var/mob/living/carbon/human/H = user
-	if(H.gloves)
+	if (H.gloves)
 		to_chat(user, SPAN_WARNING("Take \the [H.gloves] off first."))
 		return
 
@@ -95,32 +95,32 @@
 
 /obj/item/sample/print/attack(mob/living/M, mob/user)
 
-	if(!ishuman(M))
+	if (!ishuman(M))
 		return ..()
 
-	if(evidence && length(evidence))
+	if (evidence && length(evidence))
 		return 0
 
 	var/mob/living/carbon/human/H = M
 
-	if(H.gloves)
+	if (H.gloves)
 		to_chat(user, SPAN_WARNING("\The [H] is wearing gloves."))
 		return 1
 
-	if(user != H && H.a_intent != I_HELP && !H.lying)
+	if (user != H && H.a_intent != I_HELP && !H.lying)
 		user.visible_message(SPAN_DANGER("\The [user] tries to take prints from \the [H], but they move away."))
 		return 1
 
-	if(user.zone_sel.selecting == BP_R_HAND || user.zone_sel.selecting == BP_L_HAND)
+	if (user.zone_sel.selecting == BP_R_HAND || user.zone_sel.selecting == BP_L_HAND)
 		var/has_hand
 		var/obj/item/organ/external/O = H.organs_by_name[BP_R_HAND]
-		if(istype(O) && !O.is_stump())
+		if (istype(O) && !O.is_stump())
 			has_hand = 1
 		else
 			O = H.organs_by_name[BP_L_HAND]
-			if(istype(O) && !O.is_stump())
+			if (istype(O) && !O.is_stump())
 				has_hand = 1
-		if(!has_hand)
+		if (!has_hand)
 			to_chat(user, SPAN_WARNING("They don't have any hands."))
 			return 1
 		user.visible_message("[user] takes a copy of \the [H]'s fingerprints.")
@@ -133,7 +133,7 @@
 	return 0
 
 /obj/item/sample/print/copy_evidence(atom/supplied)
-	if(supplied.fingerprints && length(supplied.fingerprints))
+	if (supplied.fingerprints && length(supplied.fingerprints))
 		for(var/print in supplied.fingerprints)
 			evidence[print] = supplied.fingerprints[print]
 		supplied.fingerprints.Cut()
@@ -163,9 +163,9 @@
 	. = ..()
 
 /obj/item/forensics/sample_kit/afterattack(atom/A, mob/user, proximity)
-	if(!proximity)
+	if (!proximity)
 		return
-	if(user.skill_check(SKILL_FORENSICS, SKILL_TRAINED) && can_take_sample(user, A))
+	if (user.skill_check(SKILL_FORENSICS, SKILL_TRAINED) && can_take_sample(user, A))
 		take_sample(user,A)
 		. = 1
 	else
@@ -173,7 +173,7 @@
 		. = ..()
 
 /obj/item/forensics/sample_kit/MouseDrop(atom/over)
-	if(ismob(src.loc) && CanMouseDrop(over))
+	if (ismob(src.loc) && CanMouseDrop(over))
 		afterattack(over, usr, TRUE)
 
 /obj/item/forensics/sample_kit/powder

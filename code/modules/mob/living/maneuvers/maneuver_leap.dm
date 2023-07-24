@@ -5,12 +5,12 @@
 
 /singleton/maneuver/leap/perform(mob/living/user, atom/target, strength, reflexively = FALSE)
 	. = ..()
-	if(.)
+	if (.)
 		var/old_pass_flags = user.pass_flags
 		user.pass_flags |= PASS_FLAG_TABLE
 		user.visible_message(SPAN_DANGER("\The [user] takes a flying leap!"))
 		strength = max(2, strength * user.get_jump_distance())
-		if(reflexively)
+		if (reflexively)
 			strength *= reflexive_modifier
 		user.jump_layer_shift()
 		animate(user, pixel_z = 16, time = 3, easing = SINE_EASING | EASE_IN)
@@ -27,7 +27,7 @@
 
 /singleton/maneuver/leap/can_be_used_by(mob/living/user, atom/target, silent = FALSE)
 	. = ..()
-	if(.)
+	if (.)
 		var/can_leap_distance = user.get_jump_distance() * user.get_acrobatics_multiplier()
 		if (can_leap_distance <= 0)
 			if (!silent)
@@ -58,7 +58,7 @@
 
 /singleton/maneuver/leap/grab/end_leap(mob/living/user, atom/target)
 	. = ..()
-	if(ishuman(user) && !user.lying && ismob(target) && user.Adjacent(target))
+	if (ishuman(user) && !user.lying && ismob(target) && user.Adjacent(target))
 		var/mob/living/carbon/human/H = user
 		H.species.attempt_grab(H, target)
 
@@ -74,7 +74,7 @@
 	strength = 1
 	if (.)
 		user.visible_message(SPAN_DANGER("\The [user] pulls off a quick leap!"))
-		if(reflexively)
+		if (reflexively)
 			strength *= reflexive_modifier
 		user.jump_layer_shift()
 		animate(user, pixel_z = 16, time = 3, easing = SINE_EASING | EASE_IN)

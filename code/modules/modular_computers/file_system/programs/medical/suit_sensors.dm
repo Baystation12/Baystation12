@@ -19,11 +19,11 @@
 	..()
 
 	var/datum/nano_module/crew_monitor/NMC = NM
-	if(istype(NMC) && (NMC.has_alerts() != has_alert))
-		if(!has_alert)
+	if (istype(NMC) && (NMC.has_alerts() != has_alert))
+		if (!has_alert)
 			program_icon_state = "crew-red"
 			ui_header = "crew_red.gif"
-			if(!beeping)
+			if (!beeping)
 				computer.visible_notification(SPAN_WARNING("Warning: vital signs beyond acceptable parameters."))
 				computer.audible_notification("sound/machines/twobeep.ogg")
 				beeping = TRUE //For medical sanity purposes, it'll only beep once per emergency.
@@ -46,13 +46,13 @@
 	return FALSE
 
 /datum/nano_module/crew_monitor/Topic(href, href_list)
-	if(..()) return 1
+	if (..()) return 1
 
-	if(href_list["track"])
-		if(isAI(usr))
+	if (href_list["track"])
+		if (isAI(usr))
 			var/mob/living/silicon/ai/AI = usr
 			var/mob/living/carbon/human/H = locate(href_list["track"]) in SSmobs.mob_list
-			if(hassensorlevel(H, SUIT_SENSOR_TRACKING))
+			if (hassensorlevel(H, SUIT_SENSOR_TRACKING))
 				AI.ai_actual_track(H)
 		return 1
 
@@ -64,7 +64,7 @@
 	data["crewmembers"] = crew_repository.health_data(Z)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		ui = new(user, src, ui_key, "crew_monitor.tmpl", "Crew Monitoring Computer", 1050, 800, state = state)
 
 		// adding a template with the key "mapContent" enables the map ui functionality

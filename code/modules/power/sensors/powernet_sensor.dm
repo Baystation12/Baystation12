@@ -37,8 +37,8 @@
 // Description: Checks connected powernet for warnings. If warning is found returns 1
 /obj/machinery/power/sensor/proc/check_grid_warning()
 	connect_to_network()
-	if(powernet)
-		if(powernet.problem)
+	if (powernet)
+		if (powernet.problem)
 			return 1
 	return 0
 
@@ -48,10 +48,10 @@
 /obj/machinery/power/sensor/proc/reading_to_text(amount = 0)
 	var/units = ""
 	// 10kW and less - Watts
-	if(amount < 10000)
+	if (amount < 10000)
 		units = "W"
 	// 10MW and less - KiloWatts
-	else if(amount < 10000000)
+	else if (amount < 10000000)
 		units = "kW"
 		amount = (round(amount/100) / 10)
 	// More than 10MW - MegaWatts
@@ -67,13 +67,13 @@
 // Parameters: None
 // Description: Searches powernet for APCs and returns them in a list.
 /obj/machinery/power/sensor/proc/find_apcs()
-	if(!powernet)
+	if (!powernet)
 		return
 
 	var/list/L = list()
 	for(var/obj/machinery/power/terminal/term in powernet.nodes)
 		var/obj/machinery/power/apc/A = term.master_machine()
-		if(istype(A))
+		if (istype(A))
 			L += A
 
 	return L
@@ -84,17 +84,17 @@
 // Description: Generates string which contains HTML table with reading data.
 /obj/machinery/power/sensor/proc/return_reading_text()
 	// No powernet. Try to connect to one first.
-	if(!powernet)
+	if (!powernet)
 		connect_to_network()
 	var/out = ""
-	if(!powernet) // No powernet.
+	if (!powernet) // No powernet.
 		out = "# SYSTEM ERROR - NO POWERNET #"
 		return out
 
 
 	var/list/L = find_apcs()
 	var/total_apc_load = 0
-	if(length(L) <= 0) 	// No APCs found.
+	if (length(L) <= 0) 	// No APCs found.
 		out = "<b>No APCs located in connected powernet!</b>"
 	else			// APCs found. Create very ugly (but working!) HTML table.
 
@@ -109,7 +109,7 @@
 			out += "<tr><td>\The [A.area]" 															// Add area name
 			out += "<td>[S[A.equipment+1]]<td>[S[A.lighting+1]]<td>[S[A.environ+1]]" 				// Show status of channels
 			var/obj/item/cell/cell = A.get_cell()
-			if(cell)
+			if (cell)
 				out += "<td>[round(cell.percent())]% - [chg[A.charging+1]]"
 			else
 				out += "<td>NO CELL"
@@ -123,7 +123,7 @@
 	out += "<br><b>OTHER LOAD: [reading_to_text(max(powernet.load - total_apc_load, 0))]</b>"
 	out += "<br><b>TOTAL GRID LOAD: [reading_to_text(powernet.viewload)] ([round((powernet.load / powernet.avail) * 100)]%)</b>"
 
-	if(powernet.problem)
+	if (powernet.problem)
 		out += "<br><b>WARNING: Abnormal grid activity detected!</b>"
 	return out
 
@@ -132,11 +132,11 @@
 // Description: Generates list containing all powernet data. Optimised for usage with NanoUI
 /obj/machinery/power/sensor/proc/return_reading_data()
 	// No powernet. Try to connect to one first.
-	if(!powernet)
+	if (!powernet)
 		connect_to_network()
 	var/list/data = list()
 	data["name"] = name_tag
-	if(!powernet)
+	if (!powernet)
 		data["error"] = "# SYSTEM ERROR - NO POWERNET #"
 		data["alarm"] = 0 // Runtime Prevention
 		return data
@@ -144,7 +144,7 @@
 	var/list/L = find_apcs()
 	var/total_apc_load = 0
 	var/list/APC_data = list()
-	if(length(L) > 0)
+	if (length(L) > 0)
 		// These lists are used as replacement for number based APC settings
 		var/list/S = list("M-OFF", "DC-OFF","A-OFF","M-ON", "A-ON")
 		var/list/chg = list("N","C","F")
@@ -172,7 +172,7 @@
 	data["total_used_other"] = reading_to_text(max(powernet.viewload - total_apc_load, 0))
 	data["total_used_all"] = reading_to_text(max(powernet.viewload, 0))
 	// Prevents runtimes when avail is 0 (division by zero)
-	if(powernet.avail)
+	if (powernet.avail)
 		data["load_percentage"] = round((powernet.viewload / powernet.avail) * 100)
 	else
 		data["load_percentage"] = 100

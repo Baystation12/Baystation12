@@ -8,7 +8,7 @@
 
 /datum/extension/interactive/ntos/proc/find_hardware_by_name(partname)
 	for(var/obj/item/stock_parts/P in holder)
-		if(findtext(P.name, partname))
+		if (findtext(P.name, partname))
 			return P
 
 /datum/extension/interactive/ntos/proc/has_component(part_type)
@@ -16,21 +16,21 @@
 
 /datum/extension/interactive/ntos/proc/print_paper(content, title)
 	var/obj/item/stock_parts/computer/nano_printer/printer = get_component(PART_PRINTER)
-	if(printer)
+	if (printer)
 		return printer.print_text(content, title)
 
 /// Returns the network tag that other computers trying to reach it would see.
 /datum/extension/interactive/ntos/proc/get_network_tag_incoming()
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
-	if(network_card)
+	if (network_card)
 		return network_card.get_network_tag_direct()
 	return "N/A"
 
 /// Returns the network tag visible for the outgoing connections this computer makes. Value is cached until computer next runs Process() or is shut down.
 /datum/extension/interactive/ntos/proc/get_network_tag()
-	if(isnull(network_tag))
+	if (isnull(network_tag))
 		var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
-		if(network_card)
+		if (network_card)
 			network_tag = network_card.get_network_tag()
 		else
 			network_tag = "N/A"
@@ -38,24 +38,24 @@
 
 /// Returns the connection quality to NTNet for this computer for others trying to reach it.
 /datum/extension/interactive/ntos/proc/get_ntnet_status_incoming()
-	if(!on) // No signal if the computer isn't on.
+	if (!on) // No signal if the computer isn't on.
 		return 0
 	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
-	if(network_card)
+	if (network_card)
 		return network_card.get_signal_direct()
 	return 0
 
 /// Returns the connection quality to NTNet for this computer when making outgoing connections. Value is cached until computer next runs Process() or is shut down.
 /datum/extension/interactive/ntos/proc/get_ntnet_status()
-	if(!on) // No signal if the computer isn't on.
+	if (!on) // No signal if the computer isn't on.
 		return 0
 
 	if (isAdminLevel(get_z(holder)))
 		return 3
 
-	if(isnull(ntnet_status))
+	if (isnull(ntnet_status))
 		var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
-		if(network_card)
+		if (network_card)
 			ntnet_status = network_card.get_signal()
 		else
 			ntnet_status = 0
@@ -63,7 +63,7 @@
 
 /// Returns TRUE if the connection supports a specific capability, otherwise FALSE
 /datum/extension/interactive/ntos/proc/get_ntnet_capability(specific_action)
-	if(ntnet_global)
+	if (ntnet_global)
 		return TRUE
 	return FALSE
 
@@ -71,25 +71,25 @@
 /datum/extension/interactive/ntos/proc/get_ntnet_speed(status)
 	. = 0
 	switch(status)
-		if(1)
+		if (1)
 			. = NTNETSPEED_LOWSIGNAL
-		if(2)
+		if (2)
 			. = NTNETSPEED_HIGHSIGNAL
-		if(3)
+		if (3)
 			. = NTNETSPEED_ETHERNET
 
 /datum/extension/interactive/ntos/proc/get_inserted_id()
 	var/obj/item/stock_parts/computer/card_slot/card_slot = get_component(PART_CARD)
-	if(card_slot)
+	if (card_slot)
 		return card_slot.stored_card
 
 /datum/extension/interactive/ntos/proc/max_disk_capacity(obj/item/stock_parts/computer/hard_drive/disk = get_component(PART_HDD))
-	if(istype(disk))
+	if (istype(disk))
 		return disk.max_capacity
 	return 0
 
 /datum/extension/interactive/ntos/proc/used_disk_capacity(obj/item/stock_parts/computer/hard_drive/disk = get_component(PART_HDD))
-	if(istype(disk))
+	if (istype(disk))
 		return disk.used_capacity
 	return 0
 
@@ -104,19 +104,19 @@
 
 /datum/extension/interactive/ntos/proc/voltage_overload()
 	var/atom/A = holder
-	if(istype(A))
+	if (istype(A))
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(10, 1, A.loc)
 		s.start()
 
 	var/obj/item/stock_parts/computer/hard_drive = get_component(PART_HDD)
-	if(hard_drive)
+	if (hard_drive)
 		qdel(hard_drive)
 
 	var/obj/item/stock_parts/computer/battery_module = get_component(PART_BATTERY)
-	if(battery_module && prob(25))
+	if (battery_module && prob(25))
 		qdel(battery_module)
 
 	var/obj/item/stock_parts/computer/tesla_link = get_component(PART_TESLA)
-	if(tesla_link && prob(50))
+	if (tesla_link && prob(50))
 		qdel(tesla_link)

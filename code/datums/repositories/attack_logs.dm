@@ -26,9 +26,9 @@ var/global/repository/attack_logs/attack_log_repository = new()
 	attacker = mob_repository.get_lite_mob(mob_attacker)
 	victim = mob_repository.get_lite_mob(mob_victim)
 
-	if(mob_attacker && mob_victim)
+	if (mob_attacker && mob_victim)
 		message = "[attacker.name] [action_message] [victim.name]"
-	else if(mob_attacker)
+	else if (mob_attacker)
 		message = "[attacker.name] [action_message]"
 	else
 		message = "[victim.name] [action_message]"
@@ -36,7 +36,7 @@ var/global/repository/attack_logs/attack_log_repository = new()
 	intent = mob_attacker ? uppertext(mob_attacker.a_intent) : "N/A"
 	zone_sel = mob_attacker?.zone_sel?.selecting ? uppertext(mob_attacker.zone_sel.selecting) : "N/A"
 
-	if(mob_attacker)
+	if (mob_attacker)
 		location = get_turf(mob_attacker)
-	if(!location && mob_victim)
+	if (!location && mob_victim)
 		location = get_turf(mob_victim)

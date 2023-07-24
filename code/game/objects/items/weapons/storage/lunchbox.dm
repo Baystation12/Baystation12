@@ -12,7 +12,7 @@
 
 /obj/item/storage/lunchbox/New()
 	..()
-	if(filled)
+	if (filled)
 		var/list/lunches = lunchables_lunches()
 		var/lunch = lunches[pick(lunches)]
 		new lunch(src)

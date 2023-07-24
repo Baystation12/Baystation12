@@ -73,7 +73,7 @@
 	return
 
 /obj/item/storage/backpack/holding/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/storage/backpack/holding) || istype(W, /obj/item/storage/bag/trash/bluespace))
+	if (istype(W, /obj/item/storage/backpack/holding) || istype(W, /obj/item/storage/bag/trash/bluespace))
 		to_chat(user, SPAN_WARNING("The Bluespace interfaces of the two devices conflict and malfunction."))
 		qdel(W)
 		return 1
@@ -81,7 +81,7 @@
 
 	//Please don't clutter the parent storage item with stupid hacks.
 /obj/item/storage/backpack/holding/can_be_inserted(obj/item/W as obj, stop_messages = 0)
-	if(istype(W, /obj/item/storage/backpack/holding))
+	if (istype(W, /obj/item/storage/backpack/holding))
 		return 1
 	return ..()
 
@@ -466,7 +466,7 @@
 
 /obj/item/storage/backpack/satchel/flat/MouseDrop(obj/over_object)
 	var/turf/T = get_turf(src)
-	if(hides_under_flooring() && isturf(T) && !T.is_plating())
+	if (hides_under_flooring() && isturf(T) && !T.is_plating())
 		return
 	..()
 
@@ -477,7 +477,7 @@
 
 /obj/item/storage/backpack/satchel/flat/attackby(obj/item/W, mob/user)
 	var/turf/T = get_turf(src)
-	if(hides_under_flooring() && isturf(T) && !T.is_plating())
+	if (hides_under_flooring() && isturf(T) && !T.is_plating())
 		to_chat(user, SPAN_WARNING("You must remove the plating first."))
 		return 1
 	return ..()

@@ -44,14 +44,14 @@ other types of metals and chemistry for reagents).
 	return
 
 /datum/design/proc/AssembleDesignName()
-	if(!name && build_path)					//Get name from build path if posible
+	if (!name && build_path)					//Get name from build path if posible
 		var/atom/movable/A = build_path
 		name = initial(A.name)
 		item_name = name
 	return
 
 /datum/design/proc/AssembleDesignDesc()
-	if(!desc)								//Try to make up a nice description if we don't have one
+	if (!desc)								//Try to make up a nice description if we don't have one
 		desc = "Allows for the construction of \a [item_name]."
 	return
 
@@ -71,5 +71,5 @@ GLOBAL_LIST_INIT(build_path_to_design_datum_path, populate_design_datum_index())
 	. = list()
 	for(var/path in typesof(/datum/design))
 		var/datum/design/fake_design = path
-		if(initial(fake_design.build_path))
+		if (initial(fake_design.build_path))
 			.[initial(fake_design.build_path)] = path

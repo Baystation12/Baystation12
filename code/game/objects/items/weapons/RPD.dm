@@ -96,7 +96,7 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 /obj/item/rpd/proc/get_console_data(list/pipe_categories, color_options = FALSE)
 	. = list()
 	. += "<table>"
-	if(color_options)
+	if (color_options)
 		. += "<tr><td>Color</td><td><a href='?src=\ref[src];color=\ref[src]'>[SPAN_COLOR(pipe_color, pipe_color)]</a></td></tr>"
 	for(var/category in pipe_categories)
 		var/datum/pipe/cat = category
@@ -112,15 +112,15 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 	popup.open()
 
 /obj/item/rpd/OnTopic(user, list/href_list)
-	if(href_list["select"])
+	if (href_list["select"])
 		P = locate(href_list["select"])
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		interact(user)
-		if(prob(10)) src.spark_system.start()
+		if (prob(10)) src.spark_system.start()
 		return TOPIC_HANDLED
-	if(href_list["color"])
+	if (href_list["color"])
 		var/choice = input(user, "What color do you want pipes to have?") as null|anything in pipe_colors
-		if(!choice || !CanPhysicallyInteract(user))
+		if (!choice || !CanPhysicallyInteract(user))
 			return TOPIC_HANDLED
 		pipe_color = choice
 		interact(user)
@@ -128,34 +128,34 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 
 /obj/item/rpd/dropped(mob/user)
 	..()
-	if(popup)
+	if (popup)
 		popup.close()
 
 /obj/item/rpd/afterattack(atom/A, mob/user, proximity)
-	if(!proximity) return
-	if(istype(A, /obj/item/pipe))
+	if (!proximity) return
+	if (istype(A, /obj/item/pipe))
 		recycle(A,user)
 	else
-		if(user.skill_fail_prob(SKILL_ATMOS, 80, SKILL_TRAINED))
+		if (user.skill_fail_prob(SKILL_ATMOS, 80, SKILL_TRAINED))
 			var/C = pick(GLOB.rpd_pipe_selection)
 			P = pick(GLOB.rpd_pipe_selection[C])
 			user.visible_message(SPAN_WARNING("[user] cluelessly fumbles with \the [src]."))
 		var/turf/T = get_turf(A)
-		if(!T.Adjacent(src.loc)) return		//checks so it can't pipe through window and such
+		if (!T.Adjacent(src.loc)) return		//checks so it can't pipe through window and such
 
 		playsound(get_turf(user), 'sound/machines/click.ogg', 50, 1)
-		if(T.is_wall())	//pipe through walls!
-			if(!do_after(user, 3 SECONDS, T, DO_PUBLIC_UNIQUE))
+		if (T.is_wall())	//pipe through walls!
+			if (!do_after(user, 3 SECONDS, T, DO_PUBLIC_UNIQUE))
 				return
 			playsound(get_turf(user), 'sound/items/Deconstruct.ogg', 50, 1)
 
 		P.Build(P, T, pipe_colors[pipe_color])
-		if(prob(20)) src.spark_system.start()
+		if (prob(20)) src.spark_system.start()
 
 /obj/item/rpd/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
-		if(user.skill_check(SKILL_ATMOS,SKILL_BASIC))
+	if (distance <= 1)
+		if (user.skill_check(SKILL_ATMOS,SKILL_BASIC))
 			to_chat(user, "[SPAN_NOTICE("Current selection reads:")] [P]")
 		else
 			to_chat(user, SPAN_WARNING("The readout is flashing some atmospheric jargon, you can't understand."))
@@ -165,15 +165,15 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 	add_fingerprint(user)
 
 /obj/item/rpd/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/pipe))
-		if(!user.unEquip(W))
+	if (istype(W, /obj/item/pipe))
+		if (!user.unEquip(W))
 			return
 		recycle(W,user)
 		return
 	..()
 
 /obj/item/rpd/proc/recycle(obj/item/W,mob/user)
-	if(!user.skill_check(SKILL_ATMOS,SKILL_BASIC))
+	if (!user.skill_check(SKILL_ATMOS,SKILL_BASIC))
 		user.visible_message("[user] struggles with \the [src], as they futilely jam \the [W] against it")
 		return
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 1)

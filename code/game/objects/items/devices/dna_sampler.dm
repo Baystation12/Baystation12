@@ -17,13 +17,13 @@
 
 /obj/item/device/dna_sampler/examine(mob/user)
 	. = ..()
-	if(loaded == TRUE)
+	if (loaded == TRUE)
 		to_chat(user, SPAN_WARNING("\The [src] is currently loaded with a DNA sample of [src_name]"))
 	else
 		to_chat(user, SPAN_WARNING("\The [src] is currently empty"))
 
 /obj/item/device/dna_sampler/attack_self(mob/user)
-	if(loaded == TRUE && alert("Are you sure you wish to flush the current DNA sequence?",,"Yes","No") == "Yes")
+	if (loaded == TRUE && alert("Are you sure you wish to flush the current DNA sequence?",,"Yes","No") == "Yes")
 		loaded = FALSE
 		icon_state = "dnainjector0"
 		to_chat(user, "You flush \the [src]'s currently loaded DNA sequence")
@@ -36,7 +36,7 @@
 
 /obj/item/device/dna_sampler/attack(mob/living/carbon/human/L, mob/user)
 	var/allow = L.can_inject(user, check_zone(user.zone_sel.selecting))
-	if(!allow)
+	if (!allow)
 		return
 	if (loaded == TRUE)
 		user.visible_message("\The [src]'s DNA buffer is already full, please flush the existing DNA buffer first")

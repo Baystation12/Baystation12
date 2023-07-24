@@ -48,30 +48,30 @@
 
 /mob/living/simple_animal/hostile/retaliate/space_whale/Initialize()
 	. = ..()
-	if(prob(1))
+	if (prob(1))
 		name = "Moby Dick"
 		return
-	if(prob(2))
+	if (prob(2))
 		color = pick(species_colors)
 
 /mob/living/simple_animal/hostile/retaliate/space_whale/set_dir()
 	..()
 	switch(dir)
-		if(NORTH, SOUTH)
+		if (NORTH, SOUTH)
 			bound_height = 128
 			bound_width = 64
-		if(EAST, WEST)
+		if (EAST, WEST)
 			bound_height = 64
 			bound_width = 128
 
 // /mob/living/simple_animal/hostile/retaliate/space_whale/Retaliate() //So they dont become hostile when spawned and thrown in migration event.
-// 	if(!(health < (maxHealth - 5)))
+// 	if (!(health < (maxHealth - 5)))
 // 		return
 // 	..()
 
 // /mob/living/simple_animal/hostile/retaliate/space_whale/ValidTarget(var/mob/M)
 // 	. = ..()
-// 	if(istype(M, /mob/living/simple_animal/passive/juvenile_space_whale))
+// 	if (istype(M, /mob/living/simple_animal/passive/juvenile_space_whale))
 // 		return FALSE
 
 /mob/living/simple_animal/hostile/retaliate/space_whale/Process_Spacemove()

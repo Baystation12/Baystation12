@@ -18,15 +18,15 @@
 
 	appearance = SSskybox.space_appearance_cache[(((x + y) ^ ~(x * y) + z) % 25) + 1]
 
-	if(!HasBelow(z))
+	if (!HasBelow(z))
 		return
 	var/turf/below = GetBelow(src)
 
-	if(istype(below, /turf/space))
+	if (istype(below, /turf/space))
 		return
 	var/area/A = below.loc
 
-	if(!below.density && (A.area_flags & AREA_FLAG_EXTERNAL))
+	if (!below.density && (A.area_flags & AREA_FLAG_EXTERNAL))
 		return
 
 	return INITIALIZE_HINT_LATELOAD // oh no! we need to switch to being a different kind of turf!
@@ -40,7 +40,7 @@
 	return ..()
 
 /turf/space/LateInitialize()
-	if(GLOB.using_map.base_floor_area)
+	if (GLOB.using_map.base_floor_area)
 		var/area/new_area = locate(GLOB.using_map.base_floor_area) || new GLOB.using_map.base_floor_area
 		ChangeArea(src, new_area)
 	ChangeTurf(GLOB.using_map.base_floor_type)
@@ -54,9 +54,9 @@
 	return locate(/obj/structure/lattice, src) || locate(/obj/structure/catwalk, src) //counts as solid structure if it has a lattice or catwalk
 
 /turf/space/proc/update_starlight()
-	if(!config.starlight)
+	if (!config.starlight)
 		return
-	if(locate(/turf/simulated) in orange(src,1)) //Let's make sure not to break everything if people use a crazy setting.
+	if (locate(/turf/simulated) in orange(src,1)) //Let's make sure not to break everything if people use a crazy setting.
 		set_light(min(0.1*config.starlight, 1), 1, 3, l_color = SSskybox.background_color)
 	else
 		set_light(0)
@@ -65,7 +65,7 @@
 
 	if (istype(C, /obj/item/stack/material/rods))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-		if(L)
+		if (L)
 			return L.attackby(C, user)
 		var/obj/item/stack/material/rods/R = C
 		if (R.use(1))
@@ -76,7 +76,7 @@
 
 	if (istype(C, /obj/item/stack/tile))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-		if(L)
+		if (L)
 			var/obj/item/stack/tile/floor/S = C
 			if (!S.use(1))
 				return
@@ -88,10 +88,10 @@
 			to_chat(user, SPAN_WARNING("The plating is going to need some support."))
 
 	//Checking if the user attacked with a cable coil
-	if(isCoil(C))
+	if (isCoil(C))
 		var/obj/item/stack/cable_coil/coil = C
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-		if(L)
+		if (L)
 			coil.PlaceCableOnTurf(src, user)
 			return
 		else
@@ -105,7 +105,7 @@
 
 /turf/space/Entered(atom/movable/A as mob|obj)
 	..()
-	if(A && A.loc == src)
+	if (A && A.loc == src)
 		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE + 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE + 1))
 			A.touch_map_edge()
 

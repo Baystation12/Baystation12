@@ -38,7 +38,7 @@ Single Use Emergency Pouches
 
 /obj/item/storage/med_pouch/on_update_icon()
 	overlays.Cut()
-	if(!cross_overlay)
+	if (!cross_overlay)
 		cross_overlay = image(icon, "cross")
 		cross_overlay.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 	overlays += cross_overlay
@@ -52,7 +52,7 @@ Single Use Emergency Pouches
 	return STATUS_INTERACTIVE
 
 /obj/item/storage/med_pouch/OnTopic(user, list/href_list)
-	if(href_list["show_info"])
+	if (href_list["show_info"])
 		to_chat(user, instructions)
 		return TOPIC_HANDLED
 
@@ -60,7 +60,7 @@ Single Use Emergency Pouches
 	open(user)
 
 /obj/item/storage/med_pouch/open(mob/user)
-	if(!opened)
+	if (!opened)
 		user.visible_message(SPAN_NOTICE("\The [user] tears open [src], breaking the vacuum seal!"), SPAN_NOTICE("You tear open [src], breaking the vacuum seal!"))
 	. = ..()
 

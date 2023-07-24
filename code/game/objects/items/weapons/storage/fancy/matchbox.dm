@@ -27,7 +27,7 @@
 
 
 /obj/item/storage/fancy/matches/attackby(obj/item/flame/match/W as obj, mob/user as mob)
-	if(istype(W) && !W.lit && !W.burnt)
+	if (istype(W) && !W.lit && !W.burnt)
 		W.lit = TRUE
 		W.damtype = INJURY_TYPE_BURN
 		W.icon_state = "match_lit"
@@ -42,13 +42,13 @@
 /obj/item/storage/fancy/matches/matchbox/UpdateTypeCounts()
 	. = ..()
 	switch(key_type_count)
-		if(0)
+		if (0)
 			sprite_key_type_count = 0
-		if(1 to 3)
+		if (1 to 3)
 			sprite_key_type_count = 1
-		if(4 to 7)
+		if (4 to 7)
 			sprite_key_type_count = 2
-		if(8 to 10)
+		if (8 to 10)
 			sprite_key_type_count = 3
 
 /obj/item/storage/fancy/matches/matchbox/on_update_icon()

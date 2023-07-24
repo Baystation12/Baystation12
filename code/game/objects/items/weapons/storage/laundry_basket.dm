@@ -22,16 +22,16 @@
 
 
 /obj/item/storage/laundry_basket/attack_hand(mob/user as mob)
-	if(ishuman(user))
+	if (ishuman(user))
 		var/mob/living/carbon/human/H = user
 		var/obj/item/organ/external/temp = H.get_organ(BP_R_HAND)
 		if (user.hand)
 			temp = H.get_organ(BP_L_HAND)
-		if(!temp)
+		if (!temp)
 			to_chat(user, SPAN_WARNING("You need two hands to pick this up!"))
 			return
 
-	if(user.get_inactive_hand())
+	if (user.get_inactive_hand())
 		to_chat(user, SPAN_WARNING("You need your other hand to be empty"))
 		return
 	return ..()
@@ -51,7 +51,7 @@
 	return
 
 /obj/item/storage/laundry_basket/on_update_icon()
-	if(length(contents))
+	if (length(contents))
 		icon_state = "laundry-full"
 	else
 		icon_state = "laundry-empty"
@@ -59,7 +59,7 @@
 
 
 /obj/item/storage/laundry_basket/MouseDrop(obj/over_object as obj)
-	if(over_object == usr)
+	if (over_object == usr)
 		return
 	else
 		return ..()

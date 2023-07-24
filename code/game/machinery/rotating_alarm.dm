@@ -69,13 +69,13 @@
 
 /obj/machinery/rotating_alarm/set_dir(ndir) //Due to effect, offsets cannot be part of sprite, so need to set it for each dir
 	. = ..()
-	if(dir == NORTH)
+	if (dir == NORTH)
 		pixel_y = -13
-	if(dir == SOUTH)
+	if (dir == SOUTH)
 		pixel_y = 28
-	if(dir == WEST)
+	if (dir == WEST)
 		pixel_x = 20
-	if(dir == EAST)
+	if (dir == EAST)
 		pixel_x = -20
 
 

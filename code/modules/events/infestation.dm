@@ -25,11 +25,11 @@
 	var/attempts = 3
 	do
 		vermin_turfs = set_location_get_infestation_turfs()
-		if(!location)
+		if (!location)
 			return
 	while(!vermin_turfs && --attempts > 0)
 
-	if(!vermin_turfs)
+	if (!vermin_turfs)
 		log_debug("Vermin infestation failed to find a viable spawn after 3 attempts. Aborting.")
 		kill(TRUE)
 
@@ -37,15 +37,15 @@
 	var/max_number
 	vermin = rand(0,2)
 	switch(vermin)
-		if(VERM_MICE)
+		if (VERM_MICE)
 			spawn_types = list(/mob/living/simple_animal/passive/mouse) // The base mouse type selects a random color for us
 			max_number = 12
 			vermstring = "mice"
-		if(VERM_LIZARDS)
+		if (VERM_LIZARDS)
 			spawn_types = list(/mob/living/simple_animal/passive/lizard)
 			max_number = 6
 			vermstring = "lizards"
-		if(VERM_SPIDERS)
+		if (VERM_SPIDERS)
 			spawn_types = list(/obj/effect/spider/spiderling)
 			max_number = 3
 			vermstring = "spiders"
@@ -62,7 +62,7 @@
 
 			var/spawn_type = pick(spawn_types)
 			var/obj/effect/spider/spiderling/S = new spawn_type(T)
-			if(istype(S))
+			if (istype(S))
 				S.amount_grown = -1
 
 /datum/event/infestation/announce()
@@ -70,13 +70,13 @@
 
 /datum/event/infestation/proc/set_location_get_infestation_turfs()
 	location = pick_area(list(/proc/is_not_space_area, /proc/is_station_area))
-	if(!location)
+	if (!location)
 		log_debug("Vermin infestation failed to find a viable area. Aborting.")
 		kill(TRUE)
 		return
 
 	var/list/vermin_turfs = get_area_turfs(location, list(/proc/not_turf_contains_dense_objects, /proc/IsTurfAtmosSafe))
-	if(!length(vermin_turfs))
+	if (!length(vermin_turfs))
 		log_debug("Vermin infestation failed to find viable turfs in \the [location].")
 		return
 	return vermin_turfs

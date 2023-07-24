@@ -19,7 +19,7 @@
 
 /datum/job/hos/equip(mob/living/carbon/human/H)
 	. = ..()
-	if(.)
+	if (.)
 		H.implant_loyalty(H)
 
 /datum/job/warden

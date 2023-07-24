@@ -6,17 +6,17 @@
 
 /obj/item/organ/external/head/insectoid/nabber/get_eye_overlay()
 	var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[owner.species.vision_organ ? owner.species.vision_organ : BP_EYES]
-	if(eyes)
+	if (eyes)
 		return eyes.get_special_overlay()
 
 /obj/item/organ/external/head/insectoid/nabber/refresh_action_button()
 	. = ..()
-	if(.)
+	if (.)
 		action.button_icon_state = "nabber-stance-[owner && owner.pulling_punches ? 1 : 0]"
-		if(action.button) action.button.UpdateIcon()
+		if (action.button) action.button.UpdateIcon()
 
 /obj/item/organ/external/head/insectoid/nabber/attack_self(mob/user)
 	. = ..()
-	if(.)
+	if (.)
 		owner.pull_punches()
 		refresh_action_button()

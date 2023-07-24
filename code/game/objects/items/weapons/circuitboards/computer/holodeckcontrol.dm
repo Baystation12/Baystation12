@@ -11,9 +11,9 @@
 	if (..(HC))
 		HC.supported_programs	= supported_programs.Copy()
 		HC.restricted_programs	= restricted_programs.Copy()
-		if(linkedholodeck_area)
+		if (linkedholodeck_area)
 			HC.linkedholodeck	= locate(linkedholodeck_area)
-		if(last_to_emag)
+		if (last_to_emag)
 			HC.last_to_emag		= last_to_emag
 			HC.emagged = TRUE
 			HC.safety_disabled	= 1

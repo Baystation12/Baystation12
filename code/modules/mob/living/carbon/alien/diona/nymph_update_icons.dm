@@ -1,16 +1,16 @@
 /mob/living/carbon/alien/diona/update_icons()
 	var/list/adding = list()
-	if(stat == DEAD)
+	if (stat == DEAD)
 		icon_state = "[initial(icon_state)]_dead"
-	else if(lying || resting || stunned)
+	else if (lying || resting || stunned)
 		icon_state = "[initial(icon_state)]_sleep"
 	else
 		z_flags |= ZMM_MANGLE_PLANES
 		icon_state = "[initial(icon_state)]"
-		if(eyes)
+		if (eyes)
 			adding += eyes
-		if(flower)
+		if (flower)
 			adding += flower
-		if(hat)
+		if (hat)
 			adding += get_hat_icon(hat, 0, -8)
 	overlays = adding

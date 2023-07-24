@@ -24,7 +24,7 @@ GLOBAL_DATUM_INIT(opacity_set_event, /singleton/observ/opacity_set, new)
  * - `new_opacity` boolean - The new opacity value.
  */
 /atom/proc/set_opacity(new_opacity)
-	if(new_opacity != opacity)
+	if (new_opacity != opacity)
 		var/old_opacity = opacity
 		opacity = new_opacity
 		GLOB.opacity_set_event.raise_event(src, old_opacity, new_opacity)

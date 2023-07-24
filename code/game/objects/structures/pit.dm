@@ -65,9 +65,9 @@
 
 /obj/structure/pit/on_update_icon()
 	icon_state = "pit[open]"
-	if(istype(loc,/turf/simulated/floor/exoplanet))
+	if (istype(loc,/turf/simulated/floor/exoplanet))
 		var/turf/simulated/floor/exoplanet/E = loc
-		if(E.dirt_color)
+		if (E.dirt_color)
 			color = E.dirt_color
 
 /obj/structure/pit/proc/open()
@@ -83,12 +83,12 @@
 	desc = "Some things are better left buried."
 	open = 0
 	for(var/atom/movable/A in src.loc)
-		if(!A.anchored && A != user)
+		if (!A.anchored && A != user)
 			A.forceMove(src)
 	update_icon()
 
 /obj/structure/pit/return_air()
-	if(open && loc)
+	if (open && loc)
 		return loc.return_air()
 	else
 		return null
@@ -96,10 +96,10 @@
 /obj/structure/pit/proc/digout(mob/escapee)
 	var/breakout_time = 1 //2 minutes by default
 
-	if(open)
+	if (open)
 		return
 
-	if(escapee.stat || escapee.restrained())
+	if (escapee.stat || escapee.restrained())
 		return
 
 	escapee.setClickCooldown(100)
@@ -109,13 +109,13 @@
 	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
 		playsound(src.loc, 'sound/weapons/bite.ogg', 100, 1)
 
-		if(!do_after(escapee, 5 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+		if (!do_after(escapee, 5 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 			to_chat(escapee, SPAN_WARNING("You have stopped digging."))
 			return
-		if(open)
+		if (open)
 			return
 
-		if(i == 6*breakout_time)
+		if (i == 6*breakout_time)
 			to_chat(escapee, SPAN_WARNING("Halfway there..."))
 
 	to_chat(escapee, SPAN_WARNING("You successfuly dig yourself out!"))

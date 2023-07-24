@@ -21,7 +21,7 @@
 
 /datum/wires/apc/CanUse(mob/living/L)
 	var/obj/machinery/power/apc/A = holder
-	if(A.wiresexposed && !MACHINE_IS_BROKEN(A))
+	if (A.wiresexposed && !MACHINE_IS_BROKEN(A))
 		return 1
 	return 0
 
@@ -31,19 +31,19 @@
 
 	switch(index)
 
-		if(APC_WIRE_IDSCAN)
+		if (APC_WIRE_IDSCAN)
 			A.locked = 0
 
 			spawn(300)
-				if(A)
+				if (A)
 					A.locked = 1
 
 		if (APC_WIRE_MAIN_POWER1, APC_WIRE_MAIN_POWER2)
-			if(A.shorted == 0)
+			if (A.shorted == 0)
 				A.shorted = 1
 
 				spawn(1200)
-					if(A && !IsIndexCut(APC_WIRE_MAIN_POWER1) && !IsIndexCut(APC_WIRE_MAIN_POWER2))
+					if (A && !IsIndexCut(APC_WIRE_MAIN_POWER1) && !IsIndexCut(APC_WIRE_MAIN_POWER2))
 						A.shorted = 0
 
 		if (APC_WIRE_AI_CONTROL)
@@ -51,28 +51,28 @@
 				A.aidisabled = 1
 
 				spawn(10)
-					if(A && !IsIndexCut(APC_WIRE_AI_CONTROL))
+					if (A && !IsIndexCut(APC_WIRE_AI_CONTROL))
 						A.aidisabled = 0
 
 /datum/wires/apc/UpdateCut(index, mended)
 	var/obj/machinery/power/apc/A = holder
 
 	switch(index)
-		if(APC_WIRE_MAIN_POWER1, APC_WIRE_MAIN_POWER2)
+		if (APC_WIRE_MAIN_POWER1, APC_WIRE_MAIN_POWER2)
 
-			if(!mended)
+			if (!mended)
 				if (usr)
 					A.shock(usr, 50)
 				A.shorted = 1
 
-			else if(!IsIndexCut(APC_WIRE_MAIN_POWER1) && !IsIndexCut(APC_WIRE_MAIN_POWER2))
+			else if (!IsIndexCut(APC_WIRE_MAIN_POWER1) && !IsIndexCut(APC_WIRE_MAIN_POWER2))
 				A.shorted = 0
 				if (usr)
 					A.shock(usr, 50)
 
-		if(APC_WIRE_AI_CONTROL)
+		if (APC_WIRE_AI_CONTROL)
 
-			if(!mended)
+			if (!mended)
 				if (A.aidisabled == 0)
 					A.aidisabled = 1
 			else

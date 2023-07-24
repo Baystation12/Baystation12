@@ -50,12 +50,12 @@
 
 /obj/machinery/fabricator/examine(mob/user)
 	. = ..()
-	if(length(storage_capacity))
+	if (length(storage_capacity))
 		var/list/material_names = list()
 		for(var/thing in storage_capacity)
 			material_names += "[storage_capacity[thing]] [stored_substances_to_names[thing]]"
 		to_chat(user, SPAN_NOTICE("It can store [english_list(material_names)]."))
-	if(has_recycler)
+	if (has_recycler)
 		to_chat(user, SPAN_NOTICE("It has a built-in shredder that can recycle most items, although any materials it cannot use will be wasted."))
 
 /obj/machinery/fabricator/Initialize()
@@ -67,26 +67,26 @@
 		stored_material[mat] = 0
 
 		// Update global type to string cache.
-		if(!stored_substances_to_names[mat])
-			if(ispath(mat, /material))
+		if (!stored_substances_to_names[mat])
+			if (ispath(mat, /material))
 				var/material/mat_instance = mat
 				mat_instance = SSmaterials.get_material_by_name(initial(mat_instance.name))
-				if(istype(mat_instance))
+				if (istype(mat_instance))
 					stored_substances_to_names[mat] = mat_instance.display_name
-			else if(ispath(mat, /datum/reagent))
+			else if (ispath(mat, /datum/reagent))
 				var/datum/reagent/reg = mat
 				stored_substances_to_names[mat] = initial(reg.name)
 
 /obj/machinery/fabricator/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()
-	if(istype(new_state))
+	if (istype(new_state))
 		updateUsrDialog()
 
 /obj/machinery/fabricator/components_are_accessible(path)
 	return !(fab_status_flags & FAB_BUSY) && ..()
 
 /obj/machinery/fabricator/cannot_transition_to(state_path)
-	if(fab_status_flags & FAB_BUSY)
+	if (fab_status_flags & FAB_BUSY)
 		return SPAN_NOTICE("You must wait for \the [src] to finish first.")
 	return ..()
 
@@ -95,20 +95,20 @@
 
 /obj/machinery/fabricator/Process(wait)
 	..()
-	if(use_power == POWER_USE_ACTIVE && (fab_status_flags & FAB_BUSY))
+	if (use_power == POWER_USE_ACTIVE && (fab_status_flags & FAB_BUSY))
 		update_current_build(wait)
 
 /obj/machinery/fabricator/on_update_icon()
 	overlays.Cut()
-	if(!is_powered())
+	if (!is_powered())
 		icon_state = "[base_icon_state]_d"
-	else if(currently_building)
+	else if (currently_building)
 		icon_state = "[base_icon_state]_p"
 	else
 		icon_state = base_icon_state
 
 	var/list/new_overlays = material_overlays.Copy()
-	if(panel_open)
+	if (panel_open)
 		new_overlays += panel_image
 	overlays = new_overlays
 
@@ -129,10 +129,10 @@
 
 /obj/machinery/fabricator/dismantle()
 	for(var/mat in stored_material)
-		if(ispath(mat, /material))
+		if (ispath(mat, /material))
 			var/mat_name = stored_substances_to_names[mat]
 			var/material/M = SSmaterials.get_material_by_name(mat_name)
-			if(stored_material[mat] > M.units_per_sheet)
+			if (stored_material[mat] > M.units_per_sheet)
 				M.place_sheet(get_turf(src), round(stored_material[mat] / M.units_per_sheet), M.name)
 	..()
 	return TRUE

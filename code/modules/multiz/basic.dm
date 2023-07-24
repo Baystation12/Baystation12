@@ -4,9 +4,9 @@ var/global/list/z_levels = list()// Each bit re... haha just kidding this is a l
 // If the height is more than 1, we mark all contained levels as connected.
 /obj/effect/landmark/map_data/New(turf/loc, _height)
 	..()
-	if(!istype(loc)) // Using loc.z is safer when using the maploader and New.
+	if (!istype(loc)) // Using loc.z is safer when using the maploader and New.
 		return
-	if(_height)
+	if (_height)
 		height = _height
 	for(var/i = (loc.z - height + 1) to (loc.z-1))
 		if (length(z_levels) <i)
@@ -18,12 +18,12 @@ var/global/list/z_levels = list()// Each bit re... haha just kidding this is a l
 	return INITIALIZE_HINT_QDEL
 
 /proc/HasAbove(z)
-	if(z >= world.maxz || z < 1 || z > length(z_levels))
+	if (z >= world.maxz || z < 1 || z > length(z_levels))
 		return 0
 	return z_levels[z]
 
 /proc/HasBelow(z)
-	if(z > world.maxz || z < 2 || (z-1) > length(z_levels))
+	if (z > world.maxz || z < 2 || (z-1) > length(z_levels))
 		return 0
 	return z_levels[z-1]
 
@@ -31,14 +31,14 @@ var/global/list/z_levels = list()// Each bit re... haha just kidding this is a l
 /proc/GetAbove(atom/atom)
 	RETURN_TYPE(/turf)
 	var/turf/turf = get_turf(atom)
-	if(!turf)
+	if (!turf)
 		return null
 	return HasAbove(turf.z) ? get_step(turf, UP) : null
 
 /proc/GetBelow(atom/atom)
 	RETURN_TYPE(/turf)
 	var/turf/turf = get_turf(atom)
-	if(!turf)
+	if (!turf)
 		return null
 	return HasBelow(turf.z) ? get_step(turf, DOWN) : null
 
@@ -55,7 +55,7 @@ var/global/list/z_levels = list()// Each bit re... haha just kidding this is a l
 
 /proc/get_zstep(ref, dir)
 	RETURN_TYPE(/turf)
-	if(dir == UP)
+	if (dir == UP)
 		. = GetAbove(ref)
 	else if (dir == DOWN)
 		. = GetBelow(ref)

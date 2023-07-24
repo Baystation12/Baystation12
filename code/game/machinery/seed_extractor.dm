@@ -15,17 +15,17 @@
 	machine_desc = "Extracts a number of growable seed packets from a provided plant sample. The sample is destroyed in the process."
 
 /obj/machinery/seed_extractor/attackby(obj/item/O, mob/user)
-	if((. = component_attackby(O, user)))
+	if ((. = component_attackby(O, user)))
 		return
 	// Fruits and vegetables.
-	if(istype(O, /obj/item/reagent_containers/food/snacks/grown))
-		if(!user.unEquip(O))
+	if (istype(O, /obj/item/reagent_containers/food/snacks/grown))
+		if (!user.unEquip(O))
 			return
 
 		var/obj/item/reagent_containers/food/snacks/grown/F = O
 		var/datum/seed/new_seed_type = SSplants.seeds[F.plantname]
 
-		if(new_seed_type)
+		if (new_seed_type)
 			to_chat(user, SPAN_NOTICE("You extract some seeds from [O]."))
 			var/produce = rand(1,4)
 			for(var/i = 0;i<=produce;i++)
@@ -38,13 +38,13 @@
 		qdel(O)
 
 	//Grass.
-	else if(istype(O, /obj/item/stack/tile/grass))
+	else if (istype(O, /obj/item/stack/tile/grass))
 		var/obj/item/stack/tile/grass/S = O
 		if (S.use(1))
 			to_chat(user, SPAN_NOTICE("You extract some seeds from the grass tile."))
 			new /obj/item/seeds/grassseed(loc)
 
-	else if(istype(O, /obj/item/fossil/plant)) // Fossils
+	else if (istype(O, /obj/item/fossil/plant)) // Fossils
 		var/obj/item/seeds/random/R = new(get_turf(src))
 		to_chat(user, "\The [src] scans \the [O] and spits out \a [R].")
 		qdel(O)

@@ -94,6 +94,6 @@
 
 /obj/item/robot_module/flying/repair/respawn_consumable(mob/living/silicon/robot/R, amount)
 	var/obj/item/device/lightreplacer/LR = locate() in equipment
-	if(LR)
+	if (LR)
 		LR.Charge(R, amount)
 	..()

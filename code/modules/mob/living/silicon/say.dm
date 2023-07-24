@@ -6,34 +6,34 @@
 
 /mob/living/silicon/robot/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
 	..()
-	if(message_mode)
-		if(!is_component_functioning("radio"))
+	if (message_mode)
+		if (!is_component_functioning("radio"))
 			to_chat(src, "[SPAN_WARNING("Your radio isn't functional at this time.")]")
 			return 0
-		if(message_mode == "general")
+		if (message_mode == "general")
 			message_mode = null
 		return silicon_radio.talk_into(src,message,message_mode,verb,speaking)
 
 /mob/living/silicon/ai/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
 	..()
-	if(message_mode == "department")
+	if (message_mode == "department")
 		return holopad_talk(message, verb, speaking)
-	else if(message_mode)
+	else if (message_mode)
 		if (ai_radio.disabledAi || !has_power() || stat)
 			to_chat(src, "[SPAN_CLASS("danger", "System Error - Transceiver Disabled.")]")
 			return 0
-		if(message_mode == "general")
+		if (message_mode == "general")
 			message_mode = null
 		return ai_radio.talk_into(src,message,message_mode,verb,speaking)
 
 /mob/living/silicon/pai/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
 	..()
-	if(message_mode)
-		if(message_mode == "general")
+	if (message_mode)
+		if (message_mode == "general")
 			message_mode = null
-		if(message_mode == "intercom")
+		if (message_mode == "intercom")
 			for(var/obj/item/device/radio/I in view(1))
-				if(I.intercom_handling)
+				if (I.intercom_handling)
 					I.talk_into(src, message, null, verb, speaking)
 					used_radios += I
 		return silicon_radio.talk_into(src,message,message_mode,verb,speaking)
@@ -72,10 +72,10 @@
 		return
 
 	var/obj/machinery/hologram/holopad/H = src.holo
-	if(H && H.masters[src])//If there is a hologram and its master is the user.
+	if (H && H.masters[src])//If there is a hologram and its master is the user.
 
 		// AI can hear their own message, this formats it for them.
-		if(speaking)
+		if (speaking)
 			to_chat(src, "<i>[SPAN_CLASS("game say", "Holopad transmitted, [SPAN_CLASS("name", real_name)] [speaking.format_message(message, verb)]")]</i>")
 		else
 			to_chat(src, "<i>[SPAN_CLASS("game say", "Holopad transmitted, [SPAN_CLASS("name", real_name)] [verb], [SPAN_CLASS("message", "[SPAN_CLASS("body", "\"[message]\"")]")]")]</i>")
@@ -86,28 +86,28 @@
 		var/list/listening_obj = list()
 		var/turf/T = get_turf(H)
 
-		if(T)
+		if (T)
 			var/list/hear = hear(7, T)
 			var/list/hearturfs = list()
 
 			for(var/I in hear)
-				if(ismob(I))
+				if (ismob(I))
 					var/mob/M = I
 					listening += M
 					hearturfs += M.locs[1]
 					for(var/obj/O in M.contents)
 						listening_obj |= O
-				else if(isobj(I))
+				else if (isobj(I))
 					var/obj/O = I
 					hearturfs += O.locs[1]
 					listening_obj |= O
 
 
 			for(var/mob/M in GLOB.player_list)
-				if(M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == GLOB.PREF_ALL_SPEECH)
+				if (M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == GLOB.PREF_ALL_SPEECH)
 					M.hear_say(message,verb,speaking,null,null, src)
 					continue
-				if(M.loc && (M.locs[1] in hearturfs))
+				if (M.loc && (M.locs[1] in hearturfs))
 					M.hear_say(message,verb,speaking,null,null, src)
 
 
@@ -126,7 +126,7 @@
 		return
 
 	var/obj/machinery/hologram/holopad/T = src.holo
-	if(T && T.masters[src])
+	if (T && T.masters[src])
 		var/rendered = "[SPAN_CLASS("game say", "[SPAN_CLASS("name", name)] [SPAN_CLASS("message", message)]")]"
 		to_chat(src, "<i>[SPAN_CLASS("game say", "Holopad action relayed, [SPAN_CLASS("name", real_name)] [SPAN_CLASS("message", message)]")]</i>")
 

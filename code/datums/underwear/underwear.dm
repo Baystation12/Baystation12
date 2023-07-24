@@ -49,11 +49,11 @@
 	var/underwear_type               // The kind of underwear item this datum will create.
 
 /datum/category_item/underwear/New()
-	if(has_color)
+	if (has_color)
 		tweaks += gear_tweak_free_color_choice()
 
 /datum/category_item/underwear/dd_SortValue()
-	if(always_last)
+	if (always_last)
 		return "~"+name
 	return name
 
@@ -61,7 +61,7 @@
 	return is_default
 
 /datum/category_item/underwear/proc/create_underwear(mob/user, list/metadata)
-	if(!underwear_type)
+	if (!underwear_type)
 		return
 
 	var/obj/item/underwear/UW = new underwear_type()

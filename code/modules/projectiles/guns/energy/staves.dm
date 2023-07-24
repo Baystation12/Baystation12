@@ -17,9 +17,9 @@
 	var/required_antag_type = MODE_WIZARD
 
 /obj/item/gun/energy/staff/special_check(mob/user)
-	if(required_antag_type)
+	if (required_antag_type)
 		var/datum/antagonist/antag = get_antag_data(required_antag_type)
-		if(user.mind && !antag.is_antagonist(user.mind))
+		if (user.mind && !antag.is_antagonist(user.mind))
 			to_chat(usr, SPAN_WARNING("You focus your mind on \the [src], but nothing happens!"))
 			return 0
 

@@ -16,32 +16,32 @@
 
 /singleton/psionic_power/proc/invoke(mob/living/user, atom/target)
 
-	if(!user.psi)
+	if (!user.psi)
 		return FALSE
 
-	if(faculty && min_rank)
+	if (faculty && min_rank)
 		var/user_rank = user.psi.get_rank(faculty)
-		if(user_rank < min_rank)
+		if (user_rank < min_rank)
 			return FALSE
 
-	if(cost && !user.psi.spend_power(cost))
+	if (cost && !user.psi.spend_power(cost))
 		return FALSE
 
 	var/user_psi_leech = user.do_psionics_check(cost, user)
-	if(user_psi_leech)
+	if (user_psi_leech)
 		to_chat(user, SPAN_WARNING("Your power is leeched away by \the [user_psi_leech] as fast as you can focus it..."))
 		return FALSE
 
-	if(target.do_psionics_check(cost, user))
+	if (target.do_psionics_check(cost, user))
 		to_chat(user, SPAN_WARNING("Your power skates across \the [target], but cannot get a grip..."))
 		return FALSE
 
 	return TRUE
 
 /singleton/psionic_power/proc/handle_post_power(mob/living/user, atom/target)
-	if(cooldown)
+	if (cooldown)
 		user.psi.set_cooldown(cooldown)
-	if(admin_log && ismob(user) && ismob(target))
+	if (admin_log && ismob(user) && ismob(target))
 		admin_attack_log(user, target, "Used psipower ([name])", "Was subjected to a psipower ([name])", "used a psipower ([name]) on")
-	if(use_sound)
+	if (use_sound)
 		playsound(user.loc, use_sound, 75)

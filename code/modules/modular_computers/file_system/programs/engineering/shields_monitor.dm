@@ -24,11 +24,11 @@
 	var/list/shields = list()
 	var/connected_z_levels = GetConnectedZlevels(get_host_z())
 	for(var/obj/machinery/power/shield_generator/S in SSmachines.machinery)
-		if(!(S.z in connected_z_levels))
+		if (!(S.z in connected_z_levels))
 			continue
 		shields.Add(S)
 
-	if(!(active in shields))
+	if (!(active in shields))
 		deselect_shield()
 	return shields
 
@@ -47,7 +47,7 @@
 		data["field_integrity"] = active.field_integrity()
 		data["max_energy"] = round(active.max_energy / 1000000, 0.1)
 		data["current_energy"] = round(active.current_energy / 1000000, 0.1)
-		if(data["max_energy"] > 0)
+		if (data["max_energy"] > 0)
 			data["percentage_energy"] = round(data["current_energy"] / data["max_energy"] * 100)
 		else
 			data["percentage_energy"] = "ERR"
@@ -78,34 +78,34 @@
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "shields_monitor.tmpl", "Shield Generators Monitoring", 400, 500, state = state)
-		if(host.update_layout())
+		if (host.update_layout())
 			ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
 
 /datum/nano_module/shields_monitor/Topic(href, href_list)
-	if(..())
+	if (..())
 		return 1
-	if( href_list["refresh"] )
+	if ( href_list["refresh"] )
 		get_shields()
 		return 1
-	if( href_list["return"] )
+	if ( href_list["return"] )
 		deselect_shield()
 		return 1
-	if( href_list["ref"] )
+	if ( href_list["ref"] )
 		var/list/shields = get_shields()
 		var/obj/machinery/power/shield_generator/S = locate(href_list["ref"]) in shields
-		if(S)
+		if (S)
 			deselect_shield()
 			GLOB.destroyed_event.register(S, src, /datum/nano_module/shields_monitor/proc/deselect_shield)
 			active = S
 		return 1
 
 /datum/nano_module/shields_monitor/proc/deselect_shield(source)
-	if(!active)
+	if (!active)
 		return
 	GLOB.destroyed_event.unregister(active, src)
 	active = null
-	if(source) // source is only set if called by the shield destroyed event, which is the only time we want to update the UI
+	if (source) // source is only set if called by the shield destroyed event, which is the only time we want to update the UI
 		SSnano.update_uis(src)

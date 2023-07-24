@@ -23,9 +23,9 @@ FLOOR SAFES
 
 /obj/structure/safe/Initialize()
 	for(var/obj/item/I in loc)
-		if(space >= maxspace)
+		if (space >= maxspace)
 			return
-		if(I.w_class + space <= maxspace) //todo replace with internal storage or something
+		if (I.w_class + space <= maxspace) //todo replace with internal storage or something
 			space += I.w_class
 			I.forceMove(src)
 	. = ..()
@@ -36,33 +36,33 @@ FLOOR SAFES
 	tumbler_2_open = rand(0, 72)
 
 /obj/structure/safe/proc/check_unlocked(mob/user as mob, canhear)
-	if(user && canhear)
-		if(tumbler_1_pos == tumbler_1_open)
+	if (user && canhear)
+		if (tumbler_1_pos == tumbler_1_open)
 			to_chat(user, SPAN_NOTICE("You hear a [pick("tonk", "krunk", "plunk")] from [src]."))
-		if(tumbler_2_pos == tumbler_2_open)
+		if (tumbler_2_pos == tumbler_2_open)
 			to_chat(user, SPAN_NOTICE("You hear a [pick("tink", "krink", "plink")] from [src]."))
-	if(tumbler_1_pos == tumbler_1_open && tumbler_2_pos == tumbler_2_open)
-		if(user) visible_message("<b>[pick("Spring", "Sprang", "Sproing", "Clunk", "Krunk")]!</b>")
+	if (tumbler_1_pos == tumbler_1_open && tumbler_2_pos == tumbler_2_open)
+		if (user) visible_message("<b>[pick("Spring", "Sprang", "Sproing", "Clunk", "Krunk")]!</b>")
 		return 1
 	return 0
 
 
 /obj/structure/safe/proc/decrement(num)
 	num -= 1
-	if(num < 0)
+	if (num < 0)
 		num = 71
 	return num
 
 
 /obj/structure/safe/proc/increment(num)
 	num += 1
-	if(num > 71)
+	if (num > 71)
 		num = 0
 	return num
 
 
 /obj/structure/safe/on_update_icon()
-	if(open)
+	if (open)
 		icon_state = "[initial(icon_state)]-open"
 	else
 		icon_state = initial(icon_state)
@@ -72,7 +72,7 @@ FLOOR SAFES
 	user.set_machine(src)
 	var/dat = "<center>"
 	dat += "<a href='?src=\ref[src];open=1'>[open ? "Close" : "Open"] [src]</a> | <a href='?src=\ref[src];decrement=1'>-</a> [dial * 5] <a href='?src=\ref[src];increment=1'>+</a>"
-	if(open)
+	if (open)
 		dat += "<table>"
 		for(var/i = length(contents), i>=1, i--)
 			var/obj/item/P = contents[i]
@@ -82,15 +82,15 @@ FLOOR SAFES
 
 
 /obj/structure/safe/Topic(href, href_list)
-	if(!ishuman(usr))	return
+	if (!ishuman(usr))	return
 	var/mob/living/carbon/human/user = usr
 
 	var/canhear = 0
 	if (user.IsHolding(/obj/item/clothing/accessory/stethoscope))
 		canhear = 1
 
-	if(href_list["open"])
-		if(check_unlocked())
+	if (href_list["open"])
+		if (check_unlocked())
 			to_chat(user, SPAN_NOTICE("You [open ? "close" : "open"] [src]."))
 			open = !open
 			update_icon()
@@ -100,40 +100,40 @@ FLOOR SAFES
 			to_chat(user, SPAN_NOTICE("You can't [open ? "close" : "open"] [src], the lock is engaged!"))
 			return
 
-	if(href_list["decrement"])
+	if (href_list["decrement"])
 		dial = decrement(dial)
-		if(dial == tumbler_1_pos + 1 || dial == tumbler_1_pos - 71)
+		if (dial == tumbler_1_pos + 1 || dial == tumbler_1_pos - 71)
 			tumbler_1_pos = decrement(tumbler_1_pos)
-			if(canhear)
+			if (canhear)
 				to_chat(user, SPAN_NOTICE("You hear a [pick("clack", "scrape", "clank")] from [src]."))
-			if(tumbler_1_pos == tumbler_2_pos + 37 || tumbler_1_pos == tumbler_2_pos - 35)
+			if (tumbler_1_pos == tumbler_2_pos + 37 || tumbler_1_pos == tumbler_2_pos - 35)
 				tumbler_2_pos = decrement(tumbler_2_pos)
-				if(canhear)
+				if (canhear)
 					to_chat(user, SPAN_NOTICE("You hear a [pick("click", "chink", "clink")] from [src]."))
 			check_unlocked(user, canhear)
 		updateUsrDialog()
 		return
 
-	if(href_list["increment"])
+	if (href_list["increment"])
 		dial = increment(dial)
-		if(dial == tumbler_1_pos - 1 || dial == tumbler_1_pos + 71)
+		if (dial == tumbler_1_pos - 1 || dial == tumbler_1_pos + 71)
 			tumbler_1_pos = increment(tumbler_1_pos)
-			if(canhear)
+			if (canhear)
 				to_chat(user, SPAN_NOTICE("You hear a [pick("clack", "scrape", "clank")] from [src]."))
-			if(tumbler_1_pos == tumbler_2_pos - 37 || tumbler_1_pos == tumbler_2_pos + 35)
+			if (tumbler_1_pos == tumbler_2_pos - 37 || tumbler_1_pos == tumbler_2_pos + 35)
 				tumbler_2_pos = increment(tumbler_2_pos)
-				if(canhear)
+				if (canhear)
 					to_chat(user, SPAN_NOTICE("You hear a [pick("click", "chink", "clink")] from [src]."))
 			check_unlocked(user, canhear)
 		updateUsrDialog()
 		return
 
-	if(href_list["retrieve"])
+	if (href_list["retrieve"])
 		show_browser(user, "", "window=safe") // Close the menu
 
 		var/obj/item/P = locate(href_list["retrieve"]) in src
-		if(open)
-			if(P && in_range(src, user))
+		if (open)
+			if (P && in_range(src, user))
 				user.put_in_hands(P)
 				updateUsrDialog()
 
@@ -178,7 +178,7 @@ FLOOR SAFES
 /obj/structure/safe/floor/Initialize()
 	. = ..()
 	var/turf/T = loc
-	if(istype(T) && !T.is_plating())
+	if (istype(T) && !T.is_plating())
 		hide(1)
 	update_icon()
 

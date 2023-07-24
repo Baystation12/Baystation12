@@ -12,18 +12,18 @@
 	component_params["type"] = init_name
 
 	// Save the modified name.
-	if(init_name != displayed_name)
+	if (init_name != displayed_name)
 		component_params["name"] = displayed_name
 
 	// Saving input values
-	if(length(inputs))
+	if (length(inputs))
 		var/list/saved_inputs = list()
 
 		for(var/index in 1 to length(inputs))
 			var/datum/integrated_io/input = inputs[index]
 
 			// Don't waste space saving the default values
-			if(input.data == initial(input.data))
+			if (input.data == initial(input.data))
 				continue
 
 			var/list/input_value = list(index, FALSE, input.data)
@@ -31,14 +31,14 @@
 			// FALSE is default type used for num/text/list/null
 			// TODO: support for special input types, such as internal refs and maybe typepaths
 
-			if(islist(input.data) || isnum(input.data) || istext(input.data) || isnull(input.data))
+			if (islist(input.data) || isnum(input.data) || istext(input.data) || isnull(input.data))
 				saved_inputs.Add(list(input_value))
 
-		if(length(saved_inputs))
+		if (length(saved_inputs))
 			component_params["inputs"] = saved_inputs
 
 	var/special = save_special()
-	if(!isnull(special))
+	if (!isnull(special))
 		component_params["special"] = special
 
 	return component_params
@@ -51,22 +51,22 @@
 /obj/item/integrated_circuit/proc/verify_save(list/component_params)
 	var/init_name = initial(name)
 	// Validate name
-	if(component_params["name"])
+	if (component_params["name"])
 		sanitizeName(component_params["name"],allow_numbers=TRUE)
 	// Validate input values
-	if(component_params["inputs"])
+	if (component_params["inputs"])
 		var/list/loaded_inputs = component_params["inputs"]
-		if(!islist(loaded_inputs))
+		if (!islist(loaded_inputs))
 			return "Malformed input values list at [init_name]."
 
 		var/inputs_amt = length(inputs)
 
 		// Too many inputs? Inputs for input-less component? This is not good.
-		if(!inputs_amt || inputs_amt < length(loaded_inputs))
+		if (!inputs_amt || inputs_amt < length(loaded_inputs))
 			return "Input values list out of bounds at [init_name]."
 
 		for(var/list/input in loaded_inputs)
-			if(length(input) != 3)
+			if (length(input) != 3)
 				return "Malformed input data at [init_name]."
 
 			var/input_id = input[1]
@@ -74,12 +74,12 @@
 			//var/input_value = input[3]
 
 			// No special type support yet.
-			if(input_type)
+			if (input_type)
 				return "Unidentified input type at [init_name]!"
 			// TODO: support for special input types, such as typepaths and internal refs
 
 			// Input ID is a list index, make sure it's sane.
-			if(!isnum(input_id) || input_id % 1 || input_id > inputs_amt || input_id < 1)
+			if (!isnum(input_id) || input_id % 1 || input_id > inputs_amt || input_id < 1)
 				return "Invalid input index at [init_name]."
 
 
@@ -87,11 +87,11 @@
 // Doesn't verify any of the parameters it loads, this is the job of verify_save()
 /obj/item/integrated_circuit/proc/load(list/component_params)
 	// Load name
-	if(component_params["name"])
+	if (component_params["name"])
 		displayed_name = component_params["name"]
 
 	// Load input values
-	if(component_params["inputs"])
+	if (component_params["inputs"])
 		var/list/loaded_inputs = component_params["inputs"]
 
 		for(var/list/input in loaded_inputs)
@@ -104,7 +104,7 @@
 			pin.write_data_to_pin(input_value)
 			// TODO: support for special input types, such as internal refs and maybe typepaths
 
-	if(!isnull(component_params["special"]))
+	if (!isnull(component_params["special"]))
 		load_special(component_params["special"])
 
 /obj/item/integrated_circuit/proc/load_special(special_data)
@@ -119,15 +119,15 @@
 	assembly_params["type"] = initial(name)
 
 	// Save modified name
-	if(initial(name) != name)
+	if (initial(name) != name)
 		assembly_params["name"] = name
 
 	// Save modified description
-	if(initial(desc) != desc)
+	if (initial(desc) != desc)
 		assembly_params["desc"] = desc
 
 	// Save modified color
-	if(initial(detail_color) != detail_color)
+	if (initial(detail_color) != detail_color)
 		assembly_params["detail_color"] = detail_color
 
 	return assembly_params
@@ -137,27 +137,27 @@
 // Returns null on success, error name on failure
 /obj/item/device/electronic_assembly/proc/verify_save(list/assembly_params)
 	// Validate name and color
-	if(assembly_params["name"])
-		if(sanitizeName(assembly_params["name"], allow_numbers = TRUE) != assembly_params["name"])
+	if (assembly_params["name"])
+		if (sanitizeName(assembly_params["name"], allow_numbers = TRUE) != assembly_params["name"])
 			return "Bad assembly name."
-	if(assembly_params["desc"])
-		if(sanitize(assembly_params["desc"]) != assembly_params["desc"])
+	if (assembly_params["desc"])
+		if (sanitize(assembly_params["desc"]) != assembly_params["desc"])
 			return "Bad assembly description."
-	if(assembly_params["detail_color"] && !(assembly_params["detail_color"] in color_whitelist))
+	if (assembly_params["detail_color"] && !(assembly_params["detail_color"] in color_whitelist))
 		return "Bad assembly color."
 
 // Loads assembly parameters from a list
 // Doesn't verify any of the parameters it loads, this is the job of verify_save()
 /obj/item/device/electronic_assembly/proc/load(list/assembly_params)
 	// Load modified name, if any.
-	if(assembly_params["name"])
+	if (assembly_params["name"])
 		name = assembly_params["name"]
 
 	// Load modified description, if any.
-	if(assembly_params["desc"])
+	if (assembly_params["desc"])
 		desc = assembly_params["desc"]
 
-	if(assembly_params["detail_color"])
+	if (assembly_params["detail_color"])
 		detail_color = assembly_params["detail_color"]
 
 	update_icon()
@@ -168,7 +168,7 @@
 // Returns null if assembly is not complete enough to be saved.
 /datum/controller/subsystem/processing/circuit/proc/save_electronic_assembly(obj/item/device/electronic_assembly/assembly)
 	// No components? Don't even try to save it.
-	if(!length(assembly.assembly_components))
+	if (!length(assembly.assembly_components))
 		return
 
 
@@ -195,7 +195,7 @@
 		var/obj/item/integrated_circuit/component = c
 		var/list/all_pins = list()
 		for(var/l in list(component.inputs, component.outputs, component.activators))
-			if(l) //If it isn't null
+			if (l) //If it isn't null
 				all_pins += l
 
 		for(var/p in all_pins)
@@ -210,14 +210,14 @@
 
 				// Check if we already saved an opposite version of this wire
 				// (do not save the same wire twice)
-				if((text_params2 + "=" + text_params) in saved_wires)
+				if ((text_params2 + "=" + text_params) in saved_wires)
 					continue
 
 				// If not, add a wire "hash" for future checks and save it
 				saved_wires.Add(text_params + "=" + text_params2)
 				wires.Add(list(list(params, params2)))
 
-	if(length(wires))
+	if (length(wires))
 		blocks["wires"] = wires
 
 	return json_encode(blocks)
@@ -231,7 +231,7 @@
 // "requires_upgrades", "unsupported_circuit", "cost", "complexity", "max_complexity", "used_space", "max_space"
 /datum/controller/subsystem/processing/circuit/proc/validate_electronic_assembly(program)
 	var/list/blocks = json_decode(program)
-	if(!blocks)
+	if (!blocks)
 		return
 
 	var/error
@@ -240,18 +240,18 @@
 	// Block 1. Assembly.
 	var/list/assembly_params = blocks["assembly"]
 
-	if(!islist(assembly_params) || !length(assembly_params))
+	if (!islist(assembly_params) || !length(assembly_params))
 		return "Invalid assembly data."	// No assembly, damaged assembly or empty assembly
 
 	// Validate type, get a temporary component
 	var/assembly_path = all_assemblies[assembly_params["type"]]
 	var/obj/item/device/electronic_assembly/assembly = cached_assemblies[assembly_path]
-	if(!assembly)
+	if (!assembly)
 		return "Invalid assembly type."
 
 	// Check assembly save data for errors
 	error = assembly.verify_save(assembly_params)
-	if(error)
+	if (error)
 		return error
 
 
@@ -266,20 +266,20 @@
 
 
 	// Block 2. Components.
-	if(!islist(blocks["components"]) || !length(blocks["components"]))
+	if (!islist(blocks["components"]) || !length(blocks["components"]))
 		return "Invalid components list."	// No components or damaged components list
 
 	var/list/assembly_components = list()
 	for(var/C in blocks["components"])
 		var/list/component_params = C
 
-		if(!islist(component_params) || !length(component_params))
+		if (!islist(component_params) || !length(component_params))
 			return "Invalid component data."
 
 		// Validate type, get a temporary component
 		var/component_path = all_components[component_params["type"]]
 		var/obj/item/integrated_circuit/component = cached_components[component_path]
-		if(!component)
+		if (!component)
 			return "Invalid component type."
 
 		// Add temporary component to assembly_components list, to be used later when verifying the wires
@@ -287,7 +287,7 @@
 
 		// Check component save data for errors
 		error = component.verify_save(component_params)
-		if(error)
+		if (error)
 			return error
 
 		// Update estimated assembly complexity, taken space and material cost
@@ -297,38 +297,38 @@
 			blocks["cost"][material] += component.matter[material]
 
 		// Check if the assembly requires printer upgrades
-		if(!(component.spawn_flags & IC_SPAWN_DEFAULT))
+		if (!(component.spawn_flags & IC_SPAWN_DEFAULT))
 			blocks["requires_upgrades"] = TRUE
 
 		// Check if the assembly supports the circucit
-		if((component.action_flags & assembly.allowed_circuit_action_flags) != component.action_flags)
+		if ((component.action_flags & assembly.allowed_circuit_action_flags) != component.action_flags)
 			blocks["unsupported_circuit"] = TRUE
 
 
 	// Check complexity and space limitations
-	if(blocks["used_space"] > blocks["max_space"])
+	if (blocks["used_space"] > blocks["max_space"])
 		return "Used space overflow."
-	if(blocks["complexity"] > blocks["max_complexity"])
+	if (blocks["complexity"] > blocks["max_complexity"])
 		return "Complexity overflow."
 
 
 	// Block 3. Wires.
-	if(blocks["wires"])
-		if(!islist(blocks["wires"]))
+	if (blocks["wires"])
+		if (!islist(blocks["wires"]))
 			return "Invalid wiring list."	// Damaged wires list
 
 		for(var/w in blocks["wires"])
 			var/list/wire = w
 
-			if(!islist(wire) || length(wire) != 2)
+			if (!islist(wire) || length(wire) != 2)
 				return "Invalid wire data."
 
 			var/datum/integrated_io/IO = assembly.get_pin_ref_list(wire[1], assembly_components)
 			var/datum/integrated_io/IO2 = assembly.get_pin_ref_list(wire[2], assembly_components)
-			if(!IO || !IO2)
+			if (!IO || !IO2)
 				return "Invalid wire data."
 
-			if(initial(IO.io_type) != initial(IO2.io_type))
+			if (initial(IO.io_type) != initial(IO2.io_type))
 				return "Wire type mismatch."
 
 	return blocks
@@ -355,7 +355,7 @@
 
 
 	// Block 3. Wires.
-	if(blocks["wires"])
+	if (blocks["wires"])
 		for(var/w in blocks["wires"])
 			var/list/wire = w
 			var/datum/integrated_io/IO = assembly.get_pin_ref_list(wire[1])

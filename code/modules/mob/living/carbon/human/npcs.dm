@@ -11,14 +11,14 @@
 /mob/living/carbon/human/monkey/punpun/LateInitialize(mapload)
 	..()
 	var/obj/item/clothing/C
-	if(prob(50))
+	if (prob(50))
 		C = new /obj/item/clothing/under/punpun(src)
 		equip_to_appropriate_slot(C)
 	else
 		C = new /obj/item/clothing/under/punpants(src)
 		C.attach_accessory(null, new/obj/item/clothing/accessory/toggleable/hawaii/random(src))
 		equip_to_appropriate_slot(C)
-		if(prob(10))
+		if (prob(10))
 			C = new/obj/item/clothing/head/collectable/petehat(src)
 			equip_to_appropriate_slot(C)
 
@@ -34,7 +34,7 @@
 /singleton/hierarchy/outfit/blank_subject/post_equip(mob/living/carbon/human/H)
 	..()
 	var/obj/item/clothing/under/color/white/C = locate() in H
-	if(C)
+	if (C)
 		C.has_sensor  = SUIT_LOCKED_SENSORS
 		C.sensor_mode = SUIT_SENSOR_OFF
 

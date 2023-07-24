@@ -11,7 +11,7 @@
 	skill_needed = SKILL_MASTER
 
 /datum/terminal_command/purge/proper_input_entered(text, mob/user, datum/terminal/terminal)
-	if(!ntnet_global || !terminal.computer.get_ntnet_status())
+	if (!ntnet_global || !terminal.computer.get_ntnet_status())
 		return network_error()
 	terminal.computer.add_log("Network packet sent to NTNet Statistics & Configuration")
 	ntnet_global.resetIDS()

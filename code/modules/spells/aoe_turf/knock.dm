@@ -18,7 +18,7 @@
 	for(var/turf/T in targets)
 		for(var/obj/machinery/door/door in T.contents)
 			spawn(1)
-				if(istype(door,/obj/machinery/door/airlock))
+				if (istype(door,/obj/machinery/door/airlock))
 					var/obj/machinery/door/airlock/AL = door //casting is important
 					AL.locked = FALSE
 				door.open()
@@ -26,7 +26,7 @@
 
 
 /spell/aoe_turf/knock/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 	range *= 2
 

@@ -22,11 +22,11 @@
 
 /obj/item/projectile/energy/flash/on_impact(atom/A)
 	var/turf/T = flash_range? src.loc : get_turf(A)
-	if(!istype(T)) return
+	if (!istype(T)) return
 
 	//blind and confuse adjacent people
 	for (var/mob/living/carbon/M in viewers(T, flash_range))
-		if(M.eyecheck() < FLASH_PROTECTION_MAJOR)
+		if (M.eyecheck() < FLASH_PROTECTION_MAJOR)
 			M.flash_eyes()
 			M.eye_blurry += (brightness / 2)
 			M.confused += (brightness / 2)
@@ -52,9 +52,9 @@
 
 /obj/item/projectile/energy/flash/flare/on_hit(atom/target, blocked = 0, def_zone = null)
 	. = ..()
-	if(.)
+	if (.)
 		var/mob/living/M = target
-		if(istype(M) && prob(33))
+		if (istype(M) && prob(33))
 			M.fire_stacks = max(2, M.fire_stacks)
 			M.IgniteMob()
 
@@ -68,11 +68,11 @@
 
 	var/turf/TO = get_turf(src)
 	var/area/AO = TO.loc
-	if(AO && (AO.area_flags & AREA_FLAG_EXTERNAL))
+	if (AO && (AO.area_flags & AREA_FLAG_EXTERNAL))
 		//Everyone saw that!
 		for(var/mob/living/mob in GLOB.alive_mobs)
 			var/turf/T = get_turf(mob)
-			if(T && (T != TO) && (TO.z == T.z) && !mob.blinded)
+			if (T && (T != TO) && (TO.z == T.z) && !mob.blinded)
 				to_chat(mob, SPAN_DANGER("You see a bright light to \the [dir2text(get_dir(T,TO))]!"))
 			CHECK_TICK
 
@@ -157,37 +157,37 @@
 
 /obj/item/projectile/energy/plasmastun/proc/bang(mob/living/carbon/M)
 
-	if(!istype(M))
+	if (!istype(M))
 		return
 
 	to_chat(M, SPAN_DANGER("You hear a loud roar!"))
 
 	var/ear_safety = 0
-	if(M.get_sound_volume_multiplier() < 0.2)
+	if (M.get_sound_volume_multiplier() < 0.2)
 		ear_safety += 2
-	if(MUTATION_HULK in M.mutations)
+	if (MUTATION_HULK in M.mutations)
 		ear_safety += 1
-	if(ishuman(M))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(istype(H.head, /obj/item/clothing/head/helmet))
+		if (istype(H.head, /obj/item/clothing/head/helmet))
 			ear_safety += 1
 
-	if(!ear_safety)
+	if (!ear_safety)
 		M.make_dizzy(max_dizziness_amt)
 		M.ear_damage += rand(1, 10)
 		M.ear_deaf = max(M.ear_deaf,15)
-	else if(ear_safety > 1)
+	else if (ear_safety > 1)
 		M.make_dizzy(min_dizziness_amt)
 	else
 		M.make_dizzy(med_dizziness_amt)
 
-	if(M.ear_damage >= 15)
+	if (M.ear_damage >= 15)
 		to_chat(M, SPAN_DANGER("Your ears start to ring badly!"))
-		if(prob(M.ear_damage - 5))
+		if (prob(M.ear_damage - 5))
 			to_chat(M, SPAN_DANGER("You can't hear anything!"))
 			M.set_sdisability(DEAFENED)
 	else
-		if(M.ear_damage >= 5)
+		if (M.ear_damage >= 5)
 			to_chat(M, SPAN_DANGER("Your ears start to ring!"))
 
 /obj/item/projectile/energy/plasmastun/on_hit(atom/target)
@@ -210,7 +210,7 @@
 
 /obj/item/projectile/energy/plasmastun/sonic/bang(mob/living/carbon/M)
 	..()
-	if(istype(M, /atom/movable) && M.simulated && !M.anchored)
+	if (istype(M, /atom/movable) && M.simulated && !M.anchored)
 		M.throw_at(get_edge_target_turf(M, get_dir(src, M)), rand(1,5), 6)
 
 /obj/item/projectile/energy/plasmastun/sonic/weak

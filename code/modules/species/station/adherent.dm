@@ -123,9 +123,9 @@
 
 /datum/species/adherent/can_overcome_gravity(mob/living/carbon/human/H)
 	. = FALSE
-	if(H && H.stat == CONSCIOUS)
+	if (H && H.stat == CONSCIOUS)
 		for(var/obj/item/organ/internal/powered/float/float in H.internal_organs)
-			if(float.active && float.is_usable())
+			if (float.active && float.is_usable())
 				. = TRUE
 				break
 
@@ -140,13 +140,13 @@
 
 /datum/species/adherent/handle_fall_special(mob/living/carbon/human/H, turf/landing)
 	var/float_is_usable = FALSE
-	if(H && H.stat == CONSCIOUS)
+	if (H && H.stat == CONSCIOUS)
 		for(var/obj/item/organ/internal/powered/float/float in H.internal_organs)
-			if(float.is_usable())
+			if (float.is_usable())
 				float_is_usable = TRUE
 				break
-	if(float_is_usable)
-		if(istype(landing, /turf/simulated/open))
+	if (float_is_usable)
+		if (istype(landing, /turf/simulated/open))
 			H.visible_message("\The [H] descends from \the [landing].", "You descend regally.")
 		else
 			H.visible_message("\The [H] floats gracefully down from \the [landing].", "You land gently on \the [landing].")
@@ -158,13 +158,13 @@
 
 /datum/species/adherent/skills_from_age(age)
 	switch(age)
-		if(0 to 1000)    . = -4
-		if(1000 to 2000) . =  0
-		if(2000 to 8000) . =  4
+		if (0 to 1000)    . = -4
+		if (1000 to 2000) . =  0
+		if (2000 to 8000) . =  4
 		else             . =  8
 
 /datum/species/adherent/get_additional_examine_text(mob/living/carbon/human/H)
-	if(can_overcome_gravity(H)) return "\nThey are floating on a cloud of shimmering distortion."
+	if (can_overcome_gravity(H)) return "\nThey are floating on a cloud of shimmering distortion."
 
 /datum/hud_data/adherent
 	has_internals = FALSE

@@ -22,7 +22,7 @@
 
 //removes and returns the first element in the queue
 /PriorityQueue/proc/Dequeue()
-	if(!length(L))
+	if (!length(L))
 		return 0
 	. = L[1]
 
@@ -42,7 +42,7 @@
 
 //return the element at the i_th position
 /PriorityQueue/proc/Get(i)
-	if(i > length(L) || i < 1)
+	if (i > length(L) || i < 1)
 		return 0
 	return L[i]
 
@@ -53,7 +53,7 @@
 //replace the passed element at it's right position using the cmp proc
 /PriorityQueue/proc/ReSort(atom/A)
 	var/i = Seek(A)
-	if(i == 0)
+	if (i == 0)
 		return
 	while(i < length(L) && call(cmp)(L[i],L[i+1]) > 0)
 		L.Swap(i,i+1)

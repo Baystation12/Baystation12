@@ -11,7 +11,7 @@
 	buckle_movable = TRUE
 
 /obj/structure/bed/chair/do_simple_ranged_interaction(mob/user)
-	if(!buckled_mob && user)
+	if (!buckled_mob && user)
 		rotate(user)
 	return TRUE
 
@@ -54,46 +54,46 @@
 	..()
 
 	var/cache_key = "[base_icon]-[material.name]-over"
-	if(isnull(stool_cache[cache_key]))
+	if (isnull(stool_cache[cache_key]))
 		var/image/I = image('icons/obj/furniture.dmi', "[base_icon]_over")
-		if(material_alteration & MATERIAL_ALTERATION_COLOR)
+		if (material_alteration & MATERIAL_ALTERATION_COLOR)
 			I.color = material.icon_colour
 		I.layer = ABOVE_HUMAN_LAYER
 		stool_cache[cache_key] = I
 	overlays |= stool_cache[cache_key]
 	// Padding overlay.
-	if(padding_material)
+	if (padding_material)
 		var/padding_cache_key = "[base_icon]-padding-[padding_material.name]-over"
-		if(isnull(stool_cache[padding_cache_key]))
+		if (isnull(stool_cache[padding_cache_key]))
 			var/image/I =  image(icon, "[base_icon]_padding_over")
-			if(material_alteration & MATERIAL_ALTERATION_COLOR)
+			if (material_alteration & MATERIAL_ALTERATION_COLOR)
 				I.color = padding_material.icon_colour
 			I.layer = ABOVE_HUMAN_LAYER
 			stool_cache[padding_cache_key] = I
 		overlays |= stool_cache[padding_cache_key]
 
-	if(buckled_mob)
-		if(padding_material)
+	if (buckled_mob)
+		if (padding_material)
 			cache_key = "[base_icon]-armrest-[padding_material.name]"
-		if(isnull(stool_cache[cache_key]))
+		if (isnull(stool_cache[cache_key]))
 			var/image/I = image(icon, "[base_icon]_armrest")
 			I.layer = ABOVE_HUMAN_LAYER
-			if(material_alteration & MATERIAL_ALTERATION_COLOR)
+			if (material_alteration & MATERIAL_ALTERATION_COLOR)
 				I.color = material.icon_colour
 			stool_cache[cache_key] = I
 		overlays |= stool_cache[cache_key]
-		if(padding_material)
+		if (padding_material)
 			cache_key = "[base_icon]-padding-armrest-[padding_material.name]"
-			if(isnull(stool_cache[cache_key]))
+			if (isnull(stool_cache[cache_key]))
 				var/image/I = image(icon, "[base_icon]_padding_armrest")
 				I.layer = ABOVE_HUMAN_LAYER
-				if(material_alteration & MATERIAL_ALTERATION_COLOR)
+				if (material_alteration & MATERIAL_ALTERATION_COLOR)
 					I.color = padding_material.icon_colour
 				stool_cache[cache_key] = I
 			overlays |= stool_cache[cache_key]
 
 /obj/structure/bed/chair/rotate(mob/user)
-	if(!CanPhysicallyInteract(user))
+	if (!CanPhysicallyInteract(user))
 		to_chat(user, SPAN_NOTICE("You can't interact with \the [src] right now!"))
 		return
 
@@ -102,7 +102,7 @@
 
 /obj/structure/bed/chair/set_dir()
 	..()
-	if(buckled_mob)
+	if (buckled_mob)
 		buckled_mob.set_dir(dir)
 
 /obj/structure/bed/chair/padded/red/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
@@ -232,7 +232,7 @@
 
 /obj/structure/bed/chair/office/Move()
 	. = ..()
-	if(buckled_mob)
+	if (buckled_mob)
 		var/mob/living/occupant = buckled_mob
 		if (occupant && (src.loc != occupant.loc))
 			if (propelled)
@@ -244,9 +244,9 @@
 
 /obj/structure/bed/chair/office/Bump(atom/A)
 	..()
-	if(!buckled_mob)	return
+	if (!buckled_mob)	return
 
-	if(propelled)
+	if (propelled)
 		var/mob/living/occupant = unbuckle_mob()
 
 		var/def_zone = ran_zone()
@@ -257,7 +257,7 @@
 		occupant.apply_effect(6, EFFECT_STUTTER, blocked)
 		occupant.apply_damage(10, DAMAGE_BRUTE, def_zone)
 		playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
-		if(istype(A, /mob/living))
+		if (istype(A, /mob/living))
 			var/mob/living/victim = A
 			def_zone = ran_zone()
 			blocked = 100 * victim.get_blocked_ratio(def_zone, DAMAGE_BRUTE, damage = 10)
@@ -318,7 +318,7 @@
 	buckle_movable = FALSE
 
 /obj/structure/bed/chair/shuttle/post_buckle_mob()
-	if(buckled_mob)
+	if (buckled_mob)
 		base_icon = "shuttle_chair-b"
 	else
 		base_icon = "shuttle_chair"
@@ -326,10 +326,10 @@
 
 /obj/structure/bed/chair/shuttle/on_update_icon()
 	..()
-	if(!buckled_mob)
+	if (!buckled_mob)
 		var/image/I = image(icon, "[base_icon]_special")
 		I.layer = ABOVE_HUMAN_LAYER
-		if(material_alteration & MATERIAL_ALTERATION_COLOR)
+		if (material_alteration & MATERIAL_ALTERATION_COLOR)
 			I.color = material.icon_colour
 		overlays |= I
 

@@ -42,11 +42,11 @@
 
 /obj/item/reagent_containers/syringe/attack_self(mob/user as mob)
 	switch(mode)
-		if(SYRINGE_DRAW)
+		if (SYRINGE_DRAW)
 			mode = SYRINGE_INJECT
-		if(SYRINGE_INJECT)
+		if (SYRINGE_INJECT)
 			mode = SYRINGE_DRAW
-		if(SYRINGE_BROKEN)
+		if (SYRINGE_BROKEN)
 			return
 	update_icon()
 
@@ -55,21 +55,21 @@
 	update_icon()
 
 /obj/item/reagent_containers/syringe/afterattack(obj/target, mob/user, proximity)
-	if(!proximity)
+	if (!proximity)
 		return
 
-	if(mode == SYRINGE_BROKEN)
+	if (mode == SYRINGE_BROKEN)
 		to_chat(user, SPAN_WARNING("This syringe is broken."))
 		return
 
-	if(istype(target, /obj/structure/closet/body_bag))
+	if (istype(target, /obj/structure/closet/body_bag))
 		handleBodyBag(target, user)
 		return
 
-	if(!target.reagents)
+	if (!target.reagents)
 		return
 
-	if((user.a_intent == I_HURT) && ismob(target))
+	if ((user.a_intent == I_HURT) && ismob(target))
 		syringestab(target, user)
 		return
 
@@ -79,14 +79,14 @@
 	overlays.Cut()
 	underlays.Cut()
 
-	if(mode == SYRINGE_BROKEN)
+	if (mode == SYRINGE_BROKEN)
 		icon_state = "broken"
 		return
 
 	var/rounded_vol = clamp(round((reagents.total_volume / volume * 15),5), 5, 15)
 	if (reagents.total_volume == 0)
 		rounded_vol = 0
-	if(ismob(loc))
+	if (ismob(loc))
 		var/injoverlay
 		switch(mode)
 			if (SYRINGE_DRAW)
@@ -97,7 +97,7 @@
 	icon_state = "[initial(icon_state)][rounded_vol]"
 	item_state = "syringe_[rounded_vol]"
 
-	if(reagents.total_volume)
+	if (reagents.total_volume)
 		filling = image('icons/obj/reagentfillings.dmi', src, "syringe10")
 
 		filling.icon_state = "syringe[rounded_vol]"
@@ -107,56 +107,56 @@
 
 /obj/item/reagent_containers/syringe/proc/handleTarget(atom/target, mob/user)
 	switch(mode)
-		if(SYRINGE_DRAW)
+		if (SYRINGE_DRAW)
 			drawReagents(target, user)
 
-		if(SYRINGE_INJECT)
+		if (SYRINGE_INJECT)
 			injectReagents(target, user)
 
 /obj/item/reagent_containers/syringe/proc/drawReagents(atom/target, mob/user)
-	if(!reagents.get_free_space())
+	if (!reagents.get_free_space())
 		to_chat(user, SPAN_WARNING("The syringe is full."))
 		mode = SYRINGE_INJECT
 		return
 
-	if(ismob(target))//Blood!
-		if(reagents.has_reagent(/datum/reagent/blood))
+	if (ismob(target))//Blood!
+		if (reagents.has_reagent(/datum/reagent/blood))
 			to_chat(user, SPAN_NOTICE("There is already a blood sample in this syringe."))
 			return
-		if(istype(target, /mob/living/carbon))
-			if(istype(target, /mob/living/carbon/slime))
+		if (istype(target, /mob/living/carbon))
+			if (istype(target, /mob/living/carbon/slime))
 				to_chat(user, SPAN_WARNING("You are unable to locate any blood."))
 				return
 			var/amount = min(reagents.get_free_space(), amount_per_transfer_from_this)
 			var/mob/living/carbon/T = target
-			if(!T.dna)
+			if (!T.dna)
 				to_chat(user, SPAN_WARNING("You are unable to locate any blood."))
-				if(istype(target, /mob/living/carbon/human))
+				if (istype(target, /mob/living/carbon/human))
 					CRASH("[T] \[[T.type]\] was missing their dna datum!")
 				return
 
 
 			var/allow = T.can_inject(user, check_zone(user.zone_sel.selecting))
-			if(!allow)
+			if (!allow)
 				return
 
-			if(allow == INJECTION_PORT) // Taking a blood sample through a hardsuit takes longer due to needing to find a port first.
-				if(target != user)
+			if (allow == INJECTION_PORT) // Taking a blood sample through a hardsuit takes longer due to needing to find a port first.
+				if (target != user)
 					user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [target]'s suit!"))
 				else
 					to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
-				if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, target, do_flags = DO_MEDICAL))
+				if (!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, target, do_flags = DO_MEDICAL))
 					return
 
 				if (!reagents)
 					return
 
-			if(target != user)
+			if (target != user)
 				user.visible_message(SPAN_WARNING("\The [user] is trying to take a blood sample from \the [target]."))
 			else
 				to_chat(user, SPAN_NOTICE("You start trying to take a blood sample from yourself."))
 
-			if(prob(user.skill_fail_chance(SKILL_MEDICAL, 60, SKILL_BASIC)))
+			if (prob(user.skill_fail_chance(SKILL_MEDICAL, 60, SKILL_BASIC)))
 				to_chat(user, SPAN_WARNING("You miss the vein!"))
 				var/target_zone = check_zone(user.zone_sel.selecting)
 				T.apply_damage(3, DAMAGE_BRUTE, target_zone, damage_flags=DAMAGE_FLAG_SHARP)
@@ -165,7 +165,7 @@
 			user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 			user.do_attack_animation(target)
 
-			if(!user.do_skilled(time, SKILL_MEDICAL, target, do_flags = DO_MEDICAL))
+			if (!user.do_skilled(time, SKILL_MEDICAL, target, do_flags = DO_MEDICAL))
 				return
 
 			if (!reagents)
@@ -176,16 +176,16 @@
 			for(var/mob/O in viewers(4, user))
 				O.show_message(SPAN_NOTICE("[user] takes a blood sample from [target]."), 1)
 
-			if(ishuman(target))
+			if (ishuman(target))
 				var/mob/living/carbon/human/H = target
 				H.custom_pain(SPAN_WARNING("The needle stings a bit."), 2, TRUE, H.get_organ(user.zone_sel.selecting))
 
 	else //if not mob
-		if(!target.reagents.total_volume)
+		if (!target.reagents.total_volume)
 			to_chat(user, SPAN_NOTICE("[target] is empty."))
 			return
 
-		if(!target.is_open_container() && !istype(target, /obj/structure/reagent_dispensers) && !istype(target, /obj/item/slime_extract))
+		if (!target.is_open_container() && !istype(target, /obj/structure/reagent_dispensers) && !istype(target, /obj/item/slime_extract))
 			to_chat(user, SPAN_NOTICE("You cannot directly remove reagents from this object."))
 			return
 
@@ -193,63 +193,63 @@
 		to_chat(user, SPAN_NOTICE("You fill the syringe with [trans] units of the solution."))
 		update_icon()
 
-	if(!reagents.get_free_space())
+	if (!reagents.get_free_space())
 		mode = SYRINGE_INJECT
 		update_icon()
 
 /obj/item/reagent_containers/syringe/proc/injectReagents(atom/target, mob/user)
-	if(ismob(target) && !user.skill_check(SKILL_MEDICAL, SKILL_BASIC))
+	if (ismob(target) && !user.skill_check(SKILL_MEDICAL, SKILL_BASIC))
 		syringestab(target, user)
 
-	if(!reagents?.total_volume)
+	if (!reagents?.total_volume)
 		to_chat(user, SPAN_NOTICE("The syringe is empty."))
 		mode = SYRINGE_DRAW
 		return
-	if(istype(target, /obj/item/implantcase/chem))
+	if (istype(target, /obj/item/implantcase/chem))
 		return
 
-	if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/reagent_containers/food) && !istype(target, /obj/item/slime_extract) && !istype(target, /obj/item/clothing/mask/smokable/cigarette) && !istype(target, /obj/item/storage/fancy/smokable))
+	if (!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/reagent_containers/food) && !istype(target, /obj/item/slime_extract) && !istype(target, /obj/item/clothing/mask/smokable/cigarette) && !istype(target, /obj/item/storage/fancy/smokable))
 		to_chat(user, SPAN_NOTICE("You cannot directly fill this object."))
 		return
-	if(!target.reagents.get_free_space())
+	if (!target.reagents.get_free_space())
 		to_chat(user, SPAN_NOTICE("[target] is full."))
 		return
 
-	if(isliving(target))
+	if (isliving(target))
 		injectMob(target, user)
 		return
 
 	var/trans = reagents.trans_to(target, amount_per_transfer_from_this)
 	to_chat(user, SPAN_NOTICE("You inject \the [target] with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units."))
-	if(reagents.total_volume <= 0 && mode == SYRINGE_INJECT)
+	if (reagents.total_volume <= 0 && mode == SYRINGE_INJECT)
 		mode = SYRINGE_DRAW
 		update_icon()
 
 /obj/item/reagent_containers/syringe/proc/handleBodyBag(obj/structure/closet/body_bag/bag, mob/living/carbon/user)
-	if(bag.opened || !bag.contains_body)
+	if (bag.opened || !bag.contains_body)
 		return
 
 	var/mob/living/L = locate() in bag
-	if(L)
+	if (L)
 		injectMob(L, user, bag)
 
 /obj/item/reagent_containers/syringe/proc/injectMob(mob/living/carbon/target, mob/living/carbon/user, atom/trackTarget)
-	if(!trackTarget)
+	if (!trackTarget)
 		trackTarget = target
 
 	var/allow = target.can_inject(user, check_zone(user.zone_sel.selecting))
-	if(!allow)
+	if (!allow)
 		return
 
-	if(allow == INJECTION_PORT) // Injecting through a hardsuit takes longer due to needing to find a port first.
-		if(target != user)
+	if (allow == INJECTION_PORT) // Injecting through a hardsuit takes longer due to needing to find a port first.
+		if (target != user)
 			user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [target]'s suit!"))
 		else
 			to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
-		if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, trackTarget, do_flags = DO_MEDICAL))
+		if (!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, trackTarget, do_flags = DO_MEDICAL))
 			return
 
-	if(target != user)
+	if (target != user)
 		user.visible_message(SPAN_WARNING("\The [user] is trying to inject \the [target] with [visible_name]!"))
 	else
 		to_chat(user, SPAN_NOTICE("You begin injecting yourself with [visible_name]."))
@@ -257,31 +257,31 @@
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	user.do_attack_animation(trackTarget)
 
-	if(!user.do_skilled(time, SKILL_MEDICAL, trackTarget, do_flags = DO_MEDICAL))
+	if (!user.do_skilled(time, SKILL_MEDICAL, trackTarget, do_flags = DO_MEDICAL))
 		return
 
-	if(target != user && target != trackTarget && target.loc != trackTarget)
+	if (target != user && target != trackTarget && target.loc != trackTarget)
 		return
 	if (reagents.should_admin_log())
 		admin_inject_log(user, target, src, reagents.get_reagents(), amount_per_transfer_from_this)
 	var/trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
 
-	if(target != user)
+	if (target != user)
 		user.visible_message(SPAN_WARNING("\the [user] injects \the [target] with [visible_name]!"), SPAN_NOTICE("You inject \the [target] with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units."))
 	else
 		to_chat(user, SPAN_NOTICE("You inject yourself with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units."))
 
-	if(ishuman(target))
+	if (ishuman(target))
 		var/mob/living/carbon/human/T = target
 		T.custom_pain(SPAN_WARNING("The needle stings a bit."), 2, TRUE, T.get_organ(user.zone_sel.selecting))
 
-	if(reagents.total_volume <= 0 && mode == SYRINGE_INJECT)
+	if (reagents.total_volume <= 0 && mode == SYRINGE_INJECT)
 		mode = SYRINGE_DRAW
 		update_icon()
 
 /obj/item/reagent_containers/syringe/proc/syringestab(mob/living/carbon/target, mob/living/carbon/user)
 	var/should_admin_log = reagents.should_admin_log()
-	if(istype(target, /mob/living/carbon/human))
+	if (istype(target, /mob/living/carbon/human))
 
 		var/mob/living/carbon/human/H = target
 
@@ -294,7 +294,7 @@
 
 		var/hit_area = affecting.name
 
-		if((user != target) && H.check_shields(7, src, user, "\the [src]"))
+		if ((user != target) && H.check_shields(7, src, user, "\the [src]"))
 			return
 
 		if (target != user && H.get_blocked_ratio(target_zone, DAMAGE_BRUTE, damage_flags=DAMAGE_FLAG_SHARP) > 0.1 && prob(50))
@@ -314,7 +314,7 @@
 
 	var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
 	var/trans = reagents.trans_to_mob(target, syringestab_amount_transferred, CHEM_BLOOD)
-	if(isnull(trans)) trans = 0
+	if (isnull(trans)) trans = 0
 	if (should_admin_log)
 		var/contained_reagents = reagents.get_reagents()
 		admin_inject_log(user, target, src, contained_reagents, trans, violent=1)
@@ -323,9 +323,9 @@
 /obj/item/reagent_containers/syringe/proc/break_syringe(mob/living/carbon/target, mob/living/carbon/user)
 	desc += " It is broken."
 	mode = SYRINGE_BROKEN
-	if(target)
+	if (target)
 		add_blood(target)
-	if(user)
+	if (user)
 		add_fingerprint(user)
 	update_icon()
 
@@ -342,7 +342,7 @@
 	return // No instant injecting
 
 /obj/item/reagent_containers/syringe/ld50_syringe/drawReagents(target, mob/user)
-	if(ismob(target)) // No drawing 60 units of blood at once
+	if (ismob(target)) // No drawing 60 units of blood at once
 		to_chat(user, SPAN_NOTICE("This needle isn't designed for drawing blood."))
 		return
 	..()

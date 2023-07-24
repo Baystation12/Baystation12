@@ -43,7 +43,7 @@
 
 /obj/item/clothing/attack_hand(mob/user)
 	//only forward to the attached accessory if the clothing is equipped (not in a storage)
-	if(length(accessories) && src.loc == user)
+	if (length(accessories) && src.loc == user)
 		for(var/obj/item/clothing/accessory/A in accessories)
 			A.attack_hand(user)
 		return
@@ -61,10 +61,10 @@
 		return
 
 	switch(over_object.name)
-		if("r_hand")
+		if ("r_hand")
 			if (usr.unEquip(src))
 				usr.put_in_r_hand(src)
-		if("l_hand")
+		if ("l_hand")
 			if (usr.unEquip(src))
 				usr.put_in_l_hand(src)
 	src.add_fingerprint(usr)
@@ -75,14 +75,14 @@
 		if (!(A.accessory_flags & ACCESSORY_HIDDEN))
 			to_chat(user, "[icon2html(A, user)] \A [A] is attached to it.")
 	switch(ironed_state)
-		if(WRINKLES_WRINKLY)
+		if (WRINKLES_WRINKLY)
 			to_chat(user, SPAN_BAD("It's wrinkly."))
-		if(WRINKLES_NONE)
+		if (WRINKLES_NONE)
 			to_chat(user, SPAN_NOTICE("It's completely wrinkle-free!"))
 	switch(smell_state)
-		if(SMELL_CLEAN)
+		if (SMELL_CLEAN)
 			to_chat(user, SPAN_NOTICE("It smells clean!"))
-		if(SMELL_STINKY)
+		if (SMELL_STINKY)
 			to_chat(user, SPAN_BAD("It's quite stinky!"))
 
 
@@ -111,7 +111,7 @@
 	remove_accessory(null, A)
 
 /obj/item/clothing/proc/remove_accessory(mob/user, obj/item/clothing/accessory/A)
-	if(!A || !(A in accessories))
+	if (!A || !(A in accessories))
 		return
 
 	A.on_removed(user)
@@ -169,22 +169,22 @@
 	set name = "Remove Accessory"
 	set category = "Object"
 	set src in usr
-	if(!istype(usr, /mob/living)) return
-	if(usr.stat) return
-	if(!length(accessories)) return
+	if (!istype(usr, /mob/living)) return
+	if (usr.stat) return
+	if (!length(accessories)) return
 	var/obj/item/clothing/accessory/A
 	var/list/removables = list()
 	for(var/obj/item/clothing/accessory/ass in accessories)
 		if (ass.accessory_flags & ACCESSORY_REMOVABLE)
 			removables |= ass
 
-	if(length(removables) > 1)
+	if (length(removables) > 1)
 		A = show_radial_menu(usr, usr, make_item_radial_menu_choices(removables), radius = 42, tooltips = TRUE)
 	else
 		A = accessories[1]
 	src.remove_accessory(usr,A)
 	removables -= A
-	if(!length(removables))
+	if (!length(removables))
 		src.verbs -= /obj/item/clothing/proc/removetie_verb
 		src.verbs -= /obj/item/clothing/proc/remove_all_accessories
 
@@ -192,12 +192,12 @@
 	set name = "Remove All Accessories"
 	set category = "Object"
 	set src in usr
-	if(!istype(usr, /mob/living)) return
-	if(usr.stat) return
-	if(!length(accessories)) return
+	if (!istype(usr, /mob/living)) return
+	if (usr.stat) return
+	if (!length(accessories)) return
 
 	var/choice = alert("Are you sure you want to remove all accessories from \the [src]?", "Confirmation", "Yes", "No")
-	if(choice == "Yes")
+	if (choice == "Yes")
 		for(var/obj/item/clothing/accessory/ac in accessories)
 			if (ac.accessory_flags & ACCESSORY_REMOVABLE)
 				src.remove_accessory(usr,ac)
@@ -206,7 +206,7 @@
 		src.verbs -= /obj/item/clothing/proc/remove_all_accessories
 
 /obj/item/clothing/emp_act(severity)
-	if(length(accessories))
+	if (length(accessories))
 		for(var/obj/item/clothing/accessory/A in accessories)
 			A.emp_act(severity)
 	..()

@@ -161,5 +161,5 @@
 		ai_holder.wander_when_pulled = value
 
 /mob/living/proc/set_wander(value)
-	if(ai_holder)
+	if (ai_holder)
 		ai_holder.wander = value

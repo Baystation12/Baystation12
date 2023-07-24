@@ -27,11 +27,11 @@
 	. = ..()
 	internal_channels.Cut()
 	for(var/T in encryption_keys)
-		if(ispath(T))
+		if (ispath(T))
 			encryption_keys = new T(src)
-	if(ks1type)
+	if (ks1type)
 		encryption_keys += new ks1type(src)
-	if(ks2type)
+	if (ks2type)
 		encryption_keys += new ks2type(src)
 	recalculateChannels(1)
 
@@ -44,7 +44,7 @@
 
 /obj/item/device/radio/headset/examine(mob/user, distance)
 	. = ..()
-	if(distance > 1 || !radio_desc)
+	if (distance > 1 || !radio_desc)
 		return
 
 	to_chat(user, "The following channels are available:")
@@ -62,9 +62,9 @@
 /obj/item/device/radio/headset/receive_range(freq, level, aiOverride = 0)
 	if (aiOverride)
 		return ..(freq, level)
-	if(ishuman(src.loc))
+	if (ishuman(src.loc))
 		var/mob/living/carbon/human/H = src.loc
-		if(H.l_ear == src || H.r_ear == src)
+		if (H.l_ear == src || H.r_ear == src)
 			return ..(freq, level)
 	return -1
 
@@ -377,7 +377,7 @@
 
 /obj/item/device/radio/headset/MouseDrop(obj/over_object)
 	var/mob/M = usr
-	if((!istype(over_object, /obj/screen)) && (src in M) && CanUseTopic(M))
+	if ((!istype(over_object, /obj/screen)) && (src in M) && CanUseTopic(M))
 		return attack_self(M)
 	return
 
@@ -388,24 +388,24 @@
 	for(var/obj/ekey in encryption_keys)
 		import_key_data(ekey)
 	for (var/ch_name in channels)
-		if(!radio_controller)
+		if (!radio_controller)
 			src.SetName("broken radio headset")
 			return
 		secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
 
-	if(setDescription)
+	if (setDescription)
 		setupRadioDescription()
 
 /obj/item/device/radio/headset/proc/import_key_data(obj/item/device/encryptionkey/key)
-	if(!key)
+	if (!key)
 		return
 	for(var/ch_name in key.channels)
-		if(ch_name in src.channels)
+		if (ch_name in src.channels)
 			continue
 		src.channels[ch_name] = key.channels[ch_name]
-	if(key.translate_binary)
+	if (key.translate_binary)
 		src.translate_binary = 1
-	if(key.syndie)
+	if (key.syndie)
 		src.syndie = 1
 
 /obj/item/device/radio/headset/proc/setupRadioDescription()
@@ -414,7 +414,7 @@
 		var/channel = channels[i]
 		var/key = get_radio_key_from_channel(channel)
 		radio_text += "[key] - [channel]"
-		if(i != length(channels))
+		if (i != length(channels))
 			radio_text += ", "
 
 	radio_desc = radio_text

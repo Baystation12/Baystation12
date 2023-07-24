@@ -35,7 +35,7 @@
 	icon = beam_icon
 	icon_state = beam_icon_state
 	beam_type = btype
-	if(time < INFINITY)
+	if (time < INFINITY)
 		QDEL_IN(src, time)
 
 /**
@@ -47,9 +47,9 @@
 	visuals.icon_state = icon_state
 	Draw()
 	//Register for movement events
-	if(istype(origin, /atom/movable))
+	if (istype(origin, /atom/movable))
 		GLOB.moved_event.register(origin, src, .proc/redrawing)
-	if(istype(target, /atom/movable))
+	if (istype(target, /atom/movable))
 		GLOB.moved_event.register(target, src, .proc/redrawing)
 	GLOB.destroyed_event.register(origin, src, .proc/redrawing)
 	GLOB.destroyed_event.register(target, src, .proc/redrawing)
@@ -63,7 +63,7 @@
  * - direction: in what direction mover moved from.
  */
 /datum/beam/proc/redrawing(atom/movable/mover, atom/oldloc, new_loc)
-	if(!QDELETED(origin) && !QDELETED(target) && get_dist(origin,target)<max_distance && origin.z == target.z)
+	if (!QDELETED(origin) && !QDELETED(target) && get_dist(origin,target)<max_distance && origin.z == target.z)
 		QDEL_NULL_LIST(elements)
 		invoke_async(src, .proc/Draw)
 	else
@@ -94,7 +94,7 @@
 	var/length = round(sqrt((DX)**2+(DY)**2)) //hypotenuse of the triangle formed by target and origin's displacement
 
 	for(N in 0 to length-1 step 32)//-1 as we want < not <=, but we want the speed of X in Y to Z and step X
-		if(QDELETED(src))
+		if (QDELETED(src))
 			break
 		var/obj/effect/ebeam/X = new beam_type(origin_turf)
 		X.owner = src
@@ -102,7 +102,7 @@
 
 		//Assign our single visual ebeam to each ebeam's vis_contents
 		//ends are cropped by a transparent box icon of length-N pixel size laid over the visuals obj
-		if(N+32>length) //went past the target, we draw a box of space to cut away from the beam sprite so the icon actually ends at the center of the target sprite
+		if (N+32>length) //went past the target, we draw a box of space to cut away from the beam sprite so the icon actually ends at the center of the target sprite
 			var/icon/II = new(icon, icon_state)//this means we exclude the overshooting object from the visual contents which does mean those visuals don't show up for the final bit of the beam...
 			II.DrawBox(null,1,(length-N),32,32)//in the future if you want to improve this, remove the drawbox and instead use a 513 filter to cut away at the final object's icon
 			X.icon = II
@@ -113,22 +113,22 @@
 		//Calculate pixel offsets (If necessary)
 		var/Pixel_x
 		var/Pixel_y
-		if(DX == 0)
+		if (DX == 0)
 			Pixel_x = 0
 		else
 			Pixel_x = round(sin(Angle)+32*sin(Angle)*(N+16)/32)
-		if(DY == 0)
+		if (DY == 0)
 			Pixel_y = 0
 		else
 			Pixel_y = round(cos(Angle)+32*cos(Angle)*(N+16)/32)
 
 		//Position the effect so the beam is one continuous line
 		var/a
-		if(abs(Pixel_x)>32)
+		if (abs(Pixel_x)>32)
 			a = Pixel_x > 0 ? round(Pixel_x/32) : Ceilm(Pixel_x/32, 1)
 			X.x += a
 			Pixel_x %= 32
-		if(abs(Pixel_y)>32)
+		if (abs(Pixel_y)>32)
 			a = Pixel_y > 0 ? round(Pixel_y/32) : Ceilm(Pixel_y/32, 1)
 			X.y += a
 			Pixel_y %= 32

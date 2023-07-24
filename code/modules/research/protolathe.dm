@@ -26,26 +26,26 @@
 
 /obj/machinery/r_n_d/protolathe/Process()
 	..()
-	if(inoperable())
+	if (inoperable())
 		update_icon()
 		return
-	if(length(queue) == 0)
+	if (length(queue) == 0)
 		busy = 0
 		update_icon()
 		return
 	var/datum/design/D = queue[1]
-	if(canBuild(D))
+	if (canBuild(D))
 		busy = 1
 		progress += speed
-		if(progress >= D.time)
+		if (progress >= D.time)
 			build(D)
 			progress = 0
 			removeFromQueue(1)
-			if(linked_console)
+			if (linked_console)
 				linked_console.updateUsrDialog()
 		update_icon()
 	else
-		if(busy)
+		if (busy)
 			visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [src] flashes: insufficient materials: [getLackingMaterials(D)]."))
 			busy = 0
 			update_icon()
@@ -53,10 +53,10 @@
 /obj/machinery/r_n_d/protolathe/RefreshParts()
 	var/T = 0
 	var/obj/item/stock_parts/building_material/mat = get_component_of_type(/obj/item/stock_parts/building_material)
-	if(mat)
+	if (mat)
 		for(var/obj/item/reagent_containers/glass/G in mat.materials)
 			T += G.volume
-		if(!reagents)
+		if (!reagents)
 			create_reagents(T)
 		else
 			reagents.maximum_volume = T
@@ -70,16 +70,16 @@
 
 
 /obj/machinery/r_n_d/protolathe/on_update_icon()
-	if(panel_open)
+	if (panel_open)
 		icon_state = "protolathe_t"
-	else if(busy)
+	else if (busy)
 		icon_state = "protolathe_n"
 	else
 		icon_state = "protolathe"
 
 /obj/machinery/r_n_d/protolathe/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()
-	if(istype(new_state) && linked_console)
+	if (istype(new_state) && linked_console)
 		linked_console.linked_lathe = null
 		linked_console = null
 
@@ -87,33 +87,33 @@
 	return !busy && ..()
 
 /obj/machinery/r_n_d/protolathe/cannot_transition_to(state_path)
-	if(busy)
+	if (busy)
 		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
 	return ..()
 
 /obj/machinery/r_n_d/protolathe/attackby(obj/item/O as obj, mob/user as mob)
-	if(busy)
+	if (busy)
 		to_chat(user, SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation."))
 		return 1
-	if(component_attackby(O, user))
+	if (component_attackby(O, user))
 		return TRUE
-	if(O.is_open_container())
+	if (O.is_open_container())
 		return 1
-	if(panel_open)
+	if (panel_open)
 		to_chat(user, SPAN_NOTICE("You can't load \the [src] while it's opened."))
 		return 1
-	if(!linked_console)
+	if (!linked_console)
 		to_chat(user, SPAN_NOTICE("\The [src] must be linked to an R&D console first!"))
 		return 1
-	if(is_robot_module(O))
+	if (is_robot_module(O))
 		return 0
-	if(!istype(O, /obj/item/stack/material))
+	if (!istype(O, /obj/item/stack/material))
 		to_chat(user, SPAN_NOTICE("You cannot insert this item into \the [src]!"))
 		return 0
-	if(inoperable())
+	if (inoperable())
 		return 1
 
-	if(TotalMaterials() + SHEET_MATERIAL_AMOUNT > max_material_storage)
+	if (TotalMaterials() + SHEET_MATERIAL_AMOUNT > max_material_storage)
 		to_chat(user, SPAN_NOTICE("\The [src]'s material bin is full. Please remove material before adding more."))
 		return 1
 
@@ -129,8 +129,8 @@
 
 	busy = 1
 	use_power_oneoff(max(1000, (SHEET_MATERIAL_AMOUNT * amount / 10)))
-	if(do_after(user, 1.6 SECONDS, src, DO_PUBLIC_UNIQUE))
-		if(stack.use(amount))
+	if (do_after(user, 1.6 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if (stack.use(amount))
 			to_chat(user, SPAN_NOTICE("You add [amount] sheet\s to \the [src]."))
 			materials[stack.material.name] += amount * SHEET_MATERIAL_AMOUNT
 	busy = 0
@@ -141,16 +141,16 @@
 	return
 
 /obj/machinery/r_n_d/protolathe/proc/removeFromQueue(index)
-	if(!is_valid_index(index, queue))
+	if (!is_valid_index(index, queue))
 		return
 	queue.Cut(index, index + 1)
 
 /obj/machinery/r_n_d/protolathe/proc/canBuild(datum/design/D)
 	for(var/M in D.materials)
-		if(materials[M] < D.materials[M] * mat_efficiency)
+		if (materials[M] < D.materials[M] * mat_efficiency)
 			return 0
 	for(var/C in D.chemicals)
-		if(!reagents.has_reagent(C, D.chemicals[C] * mat_efficiency))
+		if (!reagents.has_reagent(C, D.chemicals[C] * mat_efficiency))
 			return 0
 	return 1
 
@@ -165,9 +165,9 @@
 	for(var/C in D.chemicals)
 		reagents.remove_reagent(C, D.chemicals[C] * mat_efficiency)
 
-	if(D.build_path)
+	if (D.build_path)
 		var/obj/new_item = D.Fabricate(loc, src)
-		if(mat_efficiency != 1) // No matter out of nowhere
-			if(new_item.matter && length(new_item.matter) > 0)
+		if (mat_efficiency != 1) // No matter out of nowhere
+			if (new_item.matter && length(new_item.matter) > 0)
 				for(var/i in new_item.matter)
 					new_item.matter[i] = new_item.matter[i] * mat_efficiency

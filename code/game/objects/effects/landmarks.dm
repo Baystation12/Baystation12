@@ -14,51 +14,51 @@
 
 	//TODO clean up this mess
 	switch(name)			//some of these are probably obsolete
-		if("monkey")
+		if ("monkey")
 			GLOB.monkeystart += loc
 			delete_me = 1
 			return
-		if("start")
+		if ("start")
 			GLOB.newplayer_start += loc
 			delete_me = 1
 			return
-		if("JoinLate")
+		if ("JoinLate")
 			GLOB.latejoin += loc
 			delete_me = 1
 			return
-		if("JoinLateGateway")
+		if ("JoinLateGateway")
 			GLOB.latejoin_gateway += loc
 			delete_me = 1
 			return
-		if("JoinLateCryo")
+		if ("JoinLateCryo")
 			GLOB.latejoin_cryo += loc
 			delete_me = 1
 			return
-		if("JoinLateCyborg")
+		if ("JoinLateCyborg")
 			GLOB.latejoin_cyborg += loc
 			delete_me = 1
 			return
-		if("prisonwarp")
+		if ("prisonwarp")
 			GLOB.prisonwarp += loc
 			delete_me = 1
 			return
-		if("tdome1")
+		if ("tdome1")
 			GLOB.tdome1 += loc
-		if("tdome2")
+		if ("tdome2")
 			GLOB.tdome2 += loc
-		if("tdomeadmin")
+		if ("tdomeadmin")
 			GLOB.tdomeadmin += loc
-		if("tdomeobserve")
+		if ("tdomeobserve")
 			GLOB.tdomeobserve += loc
-		if("prisonsecuritywarp")
+		if ("prisonsecuritywarp")
 			GLOB.prisonsecuritywarp += loc
 			delete_me = 1
 			return
-		if("endgame_exit")
+		if ("endgame_exit")
 			endgame_safespawns += loc
 			delete_me = 1
 			return
-		if("bluespacerift")
+		if ("bluespacerift")
 			endgame_exits += loc
 			delete_me = 1
 			return
@@ -71,7 +71,7 @@
 
 /obj/effect/landmark/Initialize()
 	. = ..()
-	if(delete_me)
+	if (delete_me)
 		return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/Destroy()

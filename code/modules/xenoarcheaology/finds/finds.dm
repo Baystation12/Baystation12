@@ -24,14 +24,14 @@
 /obj/item/ore/strangerock/New(loc, inside_item_type = 0)
 	..(loc)
 
-	if(inside_item_type)
+	if (inside_item_type)
 		var/T = get_archeological_find_by_findtype(inside_item_type)
 		new T(src)
 
 /obj/item/ore/strangerock/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/pickaxe/xeno/brush))
+	if (istype(I, /obj/item/pickaxe/xeno/brush))
 		var/obj/item/inside = locate() in src
-		if(inside)
+		if (inside)
 			inside.dropInto(loc)
 			visible_message(SPAN_INFO("\The [src] is brushed away, revealing \the [inside]."))
 		else
@@ -39,12 +39,12 @@
 		qdel(src)
 		return
 
-	if(isWelder(I))
+	if (isWelder(I))
 		var/obj/item/weldingtool/W = I
-		if(W.isOn())
-			if(W.get_fuel() >= 2)
+		if (W.isOn())
+			if (W.get_fuel() >= 2)
 				var/obj/item/inside = locate() in src
-				if(inside)
+				if (inside)
 					inside.dropInto(loc)
 					visible_message(SPAN_INFO("\The [src] burns away revealing \the [inside]."))
 				else
@@ -56,13 +56,13 @@
 				W.remove_fuel(1)
 			return
 
-	else if(istype(I, /obj/item/device/core_sampler))
+	else if (istype(I, /obj/item/device/core_sampler))
 		var/obj/item/device/core_sampler/S = I
 		S.sample_item(src, user)
 		return
 
 	..()
 
-	if(prob(33))
+	if (prob(33))
 		src.visible_message(SPAN_WARNING("[src] crumbles away, leaving some dust and gravel behind."))
 		qdel(src)

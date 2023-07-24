@@ -36,22 +36,22 @@
 	return
 
 /obj/machinery/power/port_gen/proc/update_sound()
-	if(!working_sound)
+	if (!working_sound)
 		return
-	if(!sound_id)
+	if (!sound_id)
 		sound_id = "[type]_[sequential_id(/obj/machinery/power/port_gen)]"
-	if(active && HasFuel() && !IsBroken())
+	if (active && HasFuel() && !IsBroken())
 		var/volume = 10 + 15*power_output
-		if(!sound_token)
+		if (!sound_token)
 			sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, working_sound, volume = volume)
 		sound_token.SetVolume(volume)
-	else if(sound_token)
+	else if (sound_token)
 		QDEL_NULL(sound_token)
 
 
 /obj/machinery/power/port_gen/Process()
 	..()
-	if(active && HasFuel() && !IsBroken() && anchored && powernet)
+	if (active && HasFuel() && !IsBroken() && anchored && powernet)
 		add_avail(power_gen * power_output)
 		UseFuel()
 		src.updateDialog()
@@ -62,41 +62,41 @@
 	update_sound()
 
 /obj/machinery/power/port_gen/on_update_icon()
-	if(!active)
+	if (!active)
 		icon_state = initial(icon_state)
 		return 1
 	else
 		icon_state = "[initial(icon_state)]on"
 
 /obj/machinery/power/port_gen/CanUseTopic(mob/user)
-	if(!anchored)
+	if (!anchored)
 		to_chat(user, SPAN_WARNING("The generator needs to be secured first."))
 		return STATUS_CLOSE
 	return ..()
 
 /obj/machinery/power/port_gen/examine(mob/user, distance)
 	. = ..()
-	if(distance > 1)
+	if (distance > 1)
 		return
-	if(active)
+	if (active)
 		to_chat(usr, SPAN_NOTICE("The generator is on."))
 	else
 		to_chat(usr, SPAN_NOTICE("The generator is off."))
 /obj/machinery/power/port_gen/emp_act(severity)
-	if(!active)
+	if (!active)
 		return
 	var/duration
 	switch(severity)
-		if(EMP_ACT_HEAVY)
+		if (EMP_ACT_HEAVY)
 			set_broken(TRUE)
-			if(prob(75)) explode()
+			if (prob(75)) explode()
 			else duration = 10 MINUTES
-		if(EMP_ACT_LIGHT)
-			if(prob(25)) set_broken(TRUE)
-			if(prob(10)) explode()
+		if (EMP_ACT_LIGHT)
+			if (prob(25)) set_broken(TRUE)
+			if (prob(10)) explode()
 			else duration = 30 SECONDS
 
-	if(duration)
+	if (duration)
 		set_stat(MACHINE_STAT_EMPED, TRUE)
 		addtimer(new Callback(src, .proc/resolve_emp_timer), duration)
 
@@ -147,7 +147,7 @@
 
 /obj/machinery/power/port_gen/pacman/Initialize()
 	. = ..()
-	if(anchored)
+	if (anchored)
 		connect_to_network()
 
 /obj/machinery/power/port_gen/pacman/Destroy()
@@ -167,23 +167,23 @@
 	. = ..(user)
 	to_chat(user, "\The [src] appears to be producing [power_gen*power_output] W.")
 	to_chat(user, "There [sheets == 1 ? "is" : "are"] [sheets] sheet\s left in the hopper.")
-	if(IsBroken()) to_chat(user, SPAN_WARNING("\The [src] seems to have broken down."))
-	if(overheating) to_chat(user, SPAN_DANGER("\The [src] is overheating!"))
+	if (IsBroken()) to_chat(user, SPAN_WARNING("\The [src] seems to have broken down."))
+	if (overheating) to_chat(user, SPAN_DANGER("\The [src] is overheating!"))
 
 /obj/machinery/power/port_gen/pacman/proc/process_exhaust()
 	var/datum/gas_mixture/environment = loc?.return_air()
-	if(environment)
+	if (environment)
 		environment.adjust_gas(GAS_CO, 0.05*power_output)
 
 /obj/machinery/power/port_gen/pacman/HasFuel()
 	var/needed_sheets = power_output / time_per_sheet
-	if(sheets >= needed_sheets - sheet_left)
+	if (sheets >= needed_sheets - sheet_left)
 		return 1
 	return 0
 
 //Removes one stack's worth of material from the generator.
 /obj/machinery/power/port_gen/pacman/DropFuel()
-	if(sheets)
+	if (sheets)
 		var/obj/item/stack/material/S = new sheet_path(loc)
 		var/amount = min(sheets, S.max_amount)
 		S.amount = amount
@@ -215,9 +215,9 @@
 	var/datum/gas_mixture/environment = loc.return_air()
 	if (environment)
 		var/outer_temp = 0.1 * operating_temperature + T0C
-		if(outer_temp > environment.temperature) //sharing the heat
+		if (outer_temp > environment.temperature) //sharing the heat
 			var/heat_transfer = environment.get_thermal_energy_change(outer_temp)
-			if(heat_transfer > 1)
+			if (heat_transfer > 1)
 				var/heating_power = 0.1 * power_gen * power_output
 				heat_transfer = min(heat_transfer, heating_power)
 				environment.add_thermal_energy(heat_transfer)
@@ -253,7 +253,7 @@
 		operating_temperature = max(operating_temperature - temp_loss, cooling_temperature)
 		src.updateDialog()
 
-	if(overheating)
+	if (overheating)
 		overheating--
 
 /obj/machinery/power/port_gen/pacman/proc/overheat()
@@ -286,15 +286,15 @@
 	return !active && ..()
 
 /obj/machinery/power/port_gen/pacman/cannot_transition_to(state_path, mob/user)
-	if(active)
+	if (active)
 		return SPAN_WARNING("You cannot do this while \the [src] is running!")
 	return ..()
 
 /obj/machinery/power/port_gen/pacman/attackby(obj/item/O as obj, mob/user as mob)
-	if(istype(O, sheet_path))
+	if (istype(O, sheet_path))
 		var/obj/item/stack/addstack = O
 		var/amount = min((max_sheets - sheets), addstack.amount)
-		if(amount < 1)
+		if (amount < 1)
 			to_chat(user, SPAN_NOTICE("The [src.name] is full!"))
 			return
 		to_chat(user, SPAN_NOTICE("You add [amount] sheet\s to the [src.name]."))
@@ -302,8 +302,8 @@
 		addstack.use(amount)
 		updateUsrDialog()
 		return
-	if(isWrench(O) && !active)
-		if(!anchored)
+	if (isWrench(O) && !active)
+		if (!anchored)
 			connect_to_network()
 			to_chat(user, SPAN_NOTICE("You secure the generator to the floor."))
 		else
@@ -324,14 +324,14 @@
 	return TRUE
 
 /obj/machinery/power/port_gen/pacman/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	if(IsBroken())
+	if (IsBroken())
 		return
 
 	var/data[0]
 	data["active"] = active
-	if(istype(user, /mob/living/silicon/ai))
+	if (istype(user, /mob/living/silicon/ai))
 		data["is_ai"] = 1
-	else if(istype(user, /mob/living/silicon/robot) && !Adjacent(user))
+	else if (istype(user, /mob/living/silicon/robot) && !Adjacent(user))
 		data["is_ai"] = 1
 	else
 		data["is_ai"] = 0
@@ -341,7 +341,7 @@
 	data["output_watts"] = power_output * power_gen
 	data["temperature_current"] = src.operating_temperature
 	data["temperature_max"] = src.max_temperature
-	if(overheating)
+	if (overheating)
 		data["temperature_overheat"] = ((overheating / max_overheat) * 100)		// Overheat percentage. Generator explodes at 100%
 	else
 		data["temperature_overheat"] = 0
@@ -393,23 +393,23 @@
 */
 
 /obj/machinery/power/port_gen/pacman/Topic(href, href_list)
-	if(..())
+	if (..())
 		return
 
 	src.add_fingerprint(usr)
-	if(href_list["action"])
-		if(href_list["action"] == "enable")
-			if(!active && HasFuel() && !IsBroken())
+	if (href_list["action"])
+		if (href_list["action"] == "enable")
+			if (!active && HasFuel() && !IsBroken())
 				active = 1
 				update_icon()
-		if(href_list["action"] == "disable")
+		if (href_list["action"] == "disable")
 			if (active)
 				active = 0
 				update_icon()
-		if(href_list["action"] == "eject")
-			if(!active)
+		if (href_list["action"] == "eject")
+			if (!active)
 				DropFuel()
-		if(href_list["action"] == "lower_power")
+		if (href_list["action"] == "lower_power")
 			if (power_output > 1)
 				power_output--
 		if (href_list["action"] == "higher_power")
@@ -438,11 +438,11 @@
 	..()
 
 /obj/machinery/power/port_gen/pacman/super/on_update_icon()
-	if(..())
+	if (..())
 		set_light(0)
 		return 1
 	overlays.Cut()
-	if(power_output >= max_safe_output)
+	if (power_output >= max_safe_output)
 		var/image/I = image(icon,"[initial(icon_state)]rad")
 		I.blend_mode = BLEND_ADD
 		I.alpha = round(255*power_output/max_power_output)
@@ -488,11 +488,11 @@
 	to_chat(user, "Auxilary tank shows [reagents.total_volume]u of liquid in it.")
 
 /obj/machinery/power/port_gen/pacman/super/potato/UseFuel()
-	if(reagents.has_reagent(coolant_reagent))
+	if (reagents.has_reagent(coolant_reagent))
 		rad_power = 4
 		temperature_gain = 60
 		reagents.remove_any(coolant_use)
-		if(prob(2))
+		if (prob(2))
 			audible_message(SPAN_NOTICE("[src] churns happily"))
 	else
 		rad_power = initial(rad_power)
@@ -500,16 +500,16 @@
 	..()
 
 /obj/machinery/power/port_gen/pacman/super/potato/on_update_icon()
-	if(..())
+	if (..())
 		return 1
-	if(power_output > max_safe_output)
+	if (power_output > max_safe_output)
 		icon_state = "potatodanger"
 
 /obj/machinery/power/port_gen/pacman/super/potato/attackby(obj/item/O, mob/user)
-	if(istype(O, /obj/item/reagent_containers))
+	if (istype(O, /obj/item/reagent_containers))
 		var/obj/item/reagent_containers/R = O
-		if(R.standard_pour_into(src,user))
-			if(reagents.has_reagent("vodka"))
+		if (R.standard_pour_into(src,user))
+			if (reagents.has_reagent("vodka"))
 				audible_message(SPAN_NOTICE("[src] blips happily"))
 				playsound(get_turf(src),'sound/machines/synth_yes.ogg', 50, 0)
 			else

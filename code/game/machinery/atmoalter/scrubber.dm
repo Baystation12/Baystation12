@@ -23,19 +23,19 @@
 
 /obj/machinery/portable_atmospherics/powered/scrubber/Initialize()
 	. = ..()
-	if(!scrubbing_gas)
+	if (!scrubbing_gas)
 		scrubbing_gas = list()
 		for(var/g in gas_data.gases)
-			if(g != GAS_OXYGEN && g != GAS_NITROGEN)
+			if (g != GAS_OXYGEN && g != GAS_NITROGEN)
 				scrubbing_gas += g
 
 
 /obj/machinery/portable_atmospherics/powered/scrubber/emp_act(severity)
-	if(inoperable())
+	if (inoperable())
 		..(severity)
 		return
 
-	if(prob(50/severity))
+	if (prob(50/severity))
 		update_use_power(use_power == POWER_USE_ACTIVE ? POWER_USE_IDLE : POWER_USE_ACTIVE)
 
 	..(severity)
@@ -43,15 +43,15 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/on_update_icon()
 	overlays.Cut()
 
-	if((use_power == POWER_USE_ACTIVE) && operable())
+	if ((use_power == POWER_USE_ACTIVE) && operable())
 		icon_state = "pscrubber:1"
 	else
 		icon_state = "pscrubber:0"
 
-	if(holding)
+	if (holding)
 		overlays += "scrubber-open"
 
-	if(connected_port)
+	if (connected_port)
 		overlays += "scrubber-connector"
 
 /obj/machinery/portable_atmospherics/powered/scrubber/Process()
@@ -62,9 +62,9 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/proc/process_scrubber()
 	var/power_draw = -1
 
-	if((use_power == POWER_USE_ACTIVE) && is_powered())
+	if ((use_power == POWER_USE_ACTIVE) && is_powered())
 		var/datum/gas_mixture/environment
-		if(holding)
+		if (holding)
 			environment = holding.air_contents
 		else
 			environment = loc.return_air()
@@ -78,13 +78,13 @@
 		last_power_draw = 0
 	else
 		power_draw = max(power_draw, power_losses)
-		if(abs(power_draw - last_power_draw) > 0.1 * last_power_draw)
+		if (abs(power_draw - last_power_draw) > 0.1 * last_power_draw)
 			change_power_consumption(power_draw, POWER_USE_ACTIVE)
 			last_power_draw = power_draw
 
 		update_connected_network()
 
-		if(holding)
+		if (holding)
 			holding.queue_icon_update()
 
 	//src.update_icon()
@@ -120,11 +120,11 @@
 
 
 /obj/machinery/portable_atmospherics/powered/scrubber/OnTopic(user, href_list)
-	if(href_list["power"])
+	if (href_list["power"])
 		update_use_power(use_power == POWER_USE_ACTIVE ? POWER_USE_IDLE : POWER_USE_ACTIVE)
 		. = TOPIC_REFRESH
 	if (href_list["remove_tank"])
-		if(holding)
+		if (holding)
 			holding.dropInto(loc)
 			holding = null
 		. = TOPIC_REFRESH
@@ -133,7 +133,7 @@
 		volume_rate = clamp(volume_rate+diff, minrate, maxrate)
 		. = TOPIC_REFRESH
 
-	if(.)
+	if (.)
 		update_icon()
 
 
@@ -145,7 +145,7 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/broken/Initialize()
 	. = ..()
 	var/part = uninstall_component(/obj/item/stock_parts/power/battery/buildable/stock)
-	if(part)
+	if (part)
 		qdel(part)
 
 //Huge scrubber
@@ -177,7 +177,7 @@
 	name = "[name] (ID [id])"
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/attack_hand(mob/user)
-	if((. = ..()))
+	if ((. = ..()))
 		return
 	to_chat(user, SPAN_NOTICE("You can't directly interact with this machine. Use the scrubber control console."))
 	return TRUE
@@ -185,14 +185,14 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/on_update_icon()
 	overlays.Cut()
 
-	if((use_power == POWER_USE_ACTIVE) && operable())
+	if ((use_power == POWER_USE_ACTIVE) && operable())
 		icon_state = "scrubber:1"
 	else
 		icon_state = "scrubber:0"
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/attackby(obj/item/I as obj, mob/user as mob)
-	if(isWrench(I))
-		if(use_power == POWER_USE_ACTIVE)
+	if (isWrench(I))
+		if (use_power == POWER_USE_ACTIVE)
 			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
 			return
 
@@ -202,7 +202,7 @@
 
 		return
 	//doesn't hold tanks
-	if(istype(I, /obj/item/tank))
+	if (istype(I, /obj/item/tank))
 		return
 
 	return ..()
@@ -215,7 +215,7 @@
 	machine_desc = "This is simply a large portable scrubber that can't be moved once it's bolted into place, and is otherwise identical."
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(obj/item/I as obj, mob/user as mob)
-	if(isWrench(I))
+	if (isWrench(I))
 		to_chat(user, SPAN_WARNING("The bolts are too tight for you to unscrew!"))
 		return
 

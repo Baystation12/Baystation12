@@ -34,7 +34,7 @@
 ************/
 /obj/item/stock_parts/circuitboard/air_management/construct(obj/machinery/computer/air_control/C)
 	if (..(C))
-		if(console_name)
+		if (console_name)
 			C.SetName(console_name)
 		C.set_frequency(frequency)
 		C.sensor_tag = sensor_tag
@@ -43,7 +43,7 @@
 		return 1
 
 /obj/item/stock_parts/circuitboard/air_management/supermatter_core/construct(obj/machinery/computer/air_control/supermatter_core/SC)
-	if(..(SC))
+	if (..(SC))
 		SC.input_tag = input_tag
 		SC.output_tag = output_tag
 
@@ -55,7 +55,7 @@
 		return 1
 
 /obj/item/stock_parts/circuitboard/air_management/injector_control/construct(obj/machinery/computer/air_control/fuel_injection/FI)
-	if(..(FI))
+	if (..(FI))
 		FI.device_tag = device_tag
 		FI.device_info = device_info.Copy()
 		FI.automation = automation
@@ -76,7 +76,7 @@
 		return 1
 
 /obj/item/stock_parts/circuitboard/air_management/supermatter_core/deconstruct(obj/machinery/computer/air_control/supermatter_core/SC)
-	if(..(SC))
+	if (..(SC))
 		input_tag = SC.input_tag
 		output_tag = SC.output_tag
 
@@ -88,7 +88,7 @@
 		return 1
 
 /obj/item/stock_parts/circuitboard/air_management/injector_control/deconstruct(obj/machinery/computer/air_control/fuel_injection/FI)
-	if(..(FI))
+	if (..(FI))
 		device_tag = FI.device_tag
 		device_info = FI.device_info.Copy()
 		automation = FI.automation

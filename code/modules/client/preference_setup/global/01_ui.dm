@@ -44,9 +44,9 @@
 	. += "-Color: <a href='?src=\ref[src];select_color=1'><b>[pref.UI_style_color]</b></a> <table style='display:inline;' bgcolor='[pref.UI_style_color]'><tr><td>__</td></tr></table> <a href='?src=\ref[src];reset=ui'>reset</a><br>"
 	. += "-Alpha(transparency): <a href='?src=\ref[src];select_alpha=1'><b>[pref.UI_style_alpha]</b></a> <a href='?src=\ref[src];reset=alpha'>reset</a><br>"
 	. += "<b>Tooltip Style:</b> <a href='?src=\ref[src];select_tooltip_style=1'><b>[pref.tooltip_style]</b></a><br>"
-	if(can_select_ooc_color(user))
+	if (can_select_ooc_color(user))
 		. += "<b>OOC Color:</b> "
-		if(pref.ooccolor == initial(pref.ooccolor))
+		if (pref.ooccolor == initial(pref.ooccolor))
 			. += "<a href='?src=\ref[src];select_ooc_color=1'><b>Using Default</b></a><br>"
 		else
 			. += "<a href='?src=\ref[src];select_ooc_color=1'><b>[pref.ooccolor]</b></a> <table style='display:inline;' bgcolor='[pref.ooccolor]'><tr><td>__</td></tr></table> <a href='?src=\ref[src];reset=ooc'>reset</a><br>"
@@ -54,31 +54,31 @@
 
 
 /datum/category_item/player_setup_item/player_global/ui/OnTopic(href,list/href_list, mob/user)
-	if(href_list["select_style"])
+	if (href_list["select_style"])
 		var/UI_style_new = input(user, "Choose UI style.", CHARACTER_PREFERENCE_INPUT_TITLE, pref.UI_style) as null|anything in all_ui_styles
-		if(!UI_style_new || !CanUseTopic(user)) return TOPIC_NOACTION
+		if (!UI_style_new || !CanUseTopic(user)) return TOPIC_NOACTION
 		pref.UI_style = UI_style_new
 		return TOPIC_REFRESH
 
-	else if(href_list["select_color"])
+	else if (href_list["select_color"])
 		var/UI_style_color_new = input(user, "Choose UI color, dark colors are not recommended!", "Global Preference", pref.UI_style_color) as color|null
-		if(isnull(UI_style_color_new) || !CanUseTopic(user)) return TOPIC_NOACTION
+		if (isnull(UI_style_color_new) || !CanUseTopic(user)) return TOPIC_NOACTION
 		pref.UI_style_color = UI_style_color_new
 		return TOPIC_REFRESH
 
-	else if(href_list["select_alpha"])
+	else if (href_list["select_alpha"])
 		var/UI_style_alpha_new = input(user, "Select UI alpha (transparency) level, between 50 and 255.", "Global Preference", pref.UI_style_alpha) as num|null
-		if(isnull(UI_style_alpha_new) || (UI_style_alpha_new < 50 || UI_style_alpha_new > 255) || !CanUseTopic(user)) return TOPIC_NOACTION
+		if (isnull(UI_style_alpha_new) || (UI_style_alpha_new < 50 || UI_style_alpha_new > 255) || !CanUseTopic(user)) return TOPIC_NOACTION
 		pref.UI_style_alpha = UI_style_alpha_new
 		return TOPIC_REFRESH
 
-	else if(href_list["select_ooc_color"])
+	else if (href_list["select_ooc_color"])
 		var/new_ooccolor = input(user, "Choose OOC color:", "Global Preference") as color|null
-		if(new_ooccolor && can_select_ooc_color(user) && CanUseTopic(user))
+		if (new_ooccolor && can_select_ooc_color(user) && CanUseTopic(user))
 			pref.ooccolor = new_ooccolor
 			return TOPIC_REFRESH
 
-	else if(href_list["select_fps"])
+	else if (href_list["select_fps"])
 		var/response = input(user, "[CLIENT_MIN_FPS] - [CLIENT_MAX_FPS] (default [CLIENT_DEFAULT_FPS])", "Select Target FPS") as null | num
 		if (isnum(response) && CanUseTopic(user))
 			pref.clientfps = response
@@ -88,20 +88,20 @@
 				target_mob.client.fps = pref.clientfps
 			return TOPIC_REFRESH
 
-	else if(href_list["select_tooltip_style"])
+	else if (href_list["select_tooltip_style"])
 		var/tooltip_style_new = input(user, "Choose tooltip style.", "Global Preference", pref.tooltip_style) as null|anything in all_tooltip_styles
-		if(!tooltip_style_new || !CanUseTopic(user))
+		if (!tooltip_style_new || !CanUseTopic(user))
 			return TOPIC_NOACTION
 		pref.tooltip_style = tooltip_style_new
 		return TOPIC_REFRESH
 
-	else if(href_list["reset"])
+	else if (href_list["reset"])
 		switch(href_list["reset"])
-			if("ui")
+			if ("ui")
 				pref.UI_style_color = initial(pref.UI_style_color)
-			if("alpha")
+			if ("alpha")
 				pref.UI_style_alpha = initial(pref.UI_style_alpha)
-			if("ooc")
+			if ("ooc")
 				pref.ooccolor = initial(pref.ooccolor)
 		return TOPIC_REFRESH
 

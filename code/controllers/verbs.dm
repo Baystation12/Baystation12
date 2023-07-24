@@ -10,7 +10,7 @@
 		return
 
 	var/datum/antagonist/antag = GLOB.all_antag_types_[antag_type]
-	if(antag)
+	if (antag)
 		usr.client.debug_variables(antag)
 		message_admins("Admin [key_name_admin(usr)] is debugging the [antag.role_text] template.")
 
@@ -19,27 +19,27 @@
 	set name = "Debug Controller"
 	set desc = "Debug the various periodic loop controllers for the game (be careful!)"
 
-	if(!holder || !controller)
+	if (!holder || !controller)
 		return
 
 	switch(controller)
-		if("Radio")
+		if ("Radio")
 			debug_variables(radio_controller)
-		if("Evacuation")
+		if ("Evacuation")
 			debug_variables(evacuation_controller)
-		if("Configuration")
+		if ("Configuration")
 			debug_variables(config)
-		if("pAI")
+		if ("pAI")
 			debug_variables(paiController)
-		if("Cameras")
+		if ("Cameras")
 			debug_variables(cameranet)
-		if("Transfer Controller")
+		if ("Transfer Controller")
 			debug_variables(transfer_controller)
-		if("Gas Data")
+		if ("Gas Data")
 			debug_variables(gas_data)
-		if("Alt Appearance Manager")
+		if ("Alt Appearance Manager")
 			debug_variables(appearance_manager)
-		if("Military Branches")
+		if ("Military Branches")
 			debug_variables(GLOB.mil_branches)
 	message_admins("Admin [key_name_admin(usr)] is debugging the [controller] controller.")
 	return

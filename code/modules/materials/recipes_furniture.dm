@@ -294,9 +294,9 @@ ARMCHAIR(yellow)
 
 /datum/stack_recipe/furniture/fullwindow/can_make(mob/user)
 	. = ..()
-	if(.)
+	if (.)
 		for(var/obj/structure/window/check_window in user.loc)
-			if(check_window.is_fulltile())
+			if (check_window.is_fulltile())
 				to_chat(user, SPAN_WARNING("There is already a full-tile window here!"))
 				return FALSE
 
@@ -312,9 +312,9 @@ ARMCHAIR(yellow)
 
 /datum/stack_recipe/furniture/borderwindow/can_make(mob/user)
 	. = ..()
-	if(.)
+	if (.)
 		for(var/obj/structure/window/check_window in user.loc)
-			if(check_window.dir == user.dir)
+			if (check_window.dir == user.dir)
 				to_chat(user, SPAN_WARNING("There is already a window facing that direction here!"))
 				return FALSE
 
@@ -330,8 +330,8 @@ ARMCHAIR(yellow)
 
 /datum/stack_recipe/furniture/windoor/can_make(mob/user)
 	. = ..()
-	if(.)
-		if(locate(/obj/machinery/door/window) in user.loc)
+	if (.)
+		if (locate(/obj/machinery/door/window) in user.loc)
 			to_chat(user, SPAN_WARNING("There is already a windoor here!"))
 			return FALSE
 

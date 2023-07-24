@@ -31,7 +31,7 @@
 	return projectile_type != /obj/item/projectile/beam/practice
 
 /obj/item/gun/energy/laser/practice/emag_act(remaining_charges, mob/user, emag_source)
-	if(hacked())
+	if (hacked())
 		return NO_EMAG_ACT
 	to_chat(user, SPAN_WARNING("You disable the safeties on [src] and crank the output to the lethal levels."))
 	desc += " Its safeties are disabled and output is set to dangerous levels."
@@ -42,9 +42,9 @@
 
 /obj/item/gun/energy/laser/practice/handle_post_fire(mob/user, atom/target, pointblank=0, reflex=0)
 	..()
-	if(hacked())
+	if (hacked())
 		max_shots--
-		if(!max_shots) //uh hoh gig is up
+		if (!max_shots) //uh hoh gig is up
 			to_chat(user, SPAN_DANGER("\The [src] sizzles in your hands, acrid smoke rising from the firing end!"))
 			desc += " The optical pathway is melted and useless."
 			projectile_type = null
@@ -168,8 +168,8 @@
 	var/required_vest
 
 /obj/item/gun/energy/lasertag/special_check(mob/living/carbon/human/M)
-	if(ishuman(M))
-		if(!istype(M.wear_suit, required_vest))
+	if (ishuman(M))
+		if (!istype(M.wear_suit, required_vest))
 			to_chat(M, SPAN_WARNING("You need to be wearing your laser tag vest!"))
 			return 0
 	return ..()

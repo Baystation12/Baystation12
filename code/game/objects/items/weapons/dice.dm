@@ -54,9 +54,9 @@
 /obj/item/dice/d20/roll_die()
 	var/result = rand(1, sides)
 	var/comment = ""
-	if(result == 20)
+	if (result == 20)
 		comment = "Nat 20!"
-	else if(result == 1)
+	else if (result == 1)
 		comment = "Ouch, bad luck."
 	return list(result, comment)
 

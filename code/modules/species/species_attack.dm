@@ -26,9 +26,9 @@
 	var/blocked_by_gloves = TRUE
 
 /datum/unarmed_attack/claws/is_usable(mob/living/carbon/human/user, mob/living/carbon/human/target, zone)
-	if(user.gloves && blocked_by_gloves)
+	if (user.gloves && blocked_by_gloves)
 		var/obj/item/clothing/gloves/gloves = user.gloves
-		if(istype(gloves) && !gloves.clipped)
+		if (istype(gloves) && !gloves.clipped)
 			return 0
 		else
 			return 1
@@ -44,21 +44,21 @@
 
 	attack_damage = clamp(attack_damage, 1, 5)
 
-	if(target == user)
+	if (target == user)
 		user.visible_message(SPAN_DANGER("[user] [pick(attack_verb)] \himself in the [affecting.name]!"))
 		return 0
 
 	switch(zone)
-		if(BP_HEAD, BP_MOUTH, BP_EYES)
+		if (BP_HEAD, BP_MOUTH, BP_EYES)
 			// ----- HEAD ----- //
 			switch(attack_damage)
-				if(1 to 2) user.visible_message(SPAN_DANGER("[user] scratched [target] across \his cheek!"))
-				if(3 to 4)
+				if (1 to 2) user.visible_message(SPAN_DANGER("[user] scratched [target] across \his cheek!"))
+				if (3 to 4)
 					user.visible_message(pick(
 						80; user.visible_message(SPAN_CLASS("danger", "[user] [pick(attack_verb)] [target]'s [pick("face", "neck", affecting.name)]!")),
 						20; user.visible_message(SPAN_CLASS("danger", "[user] [pick(attack_verb)] [pick("[target] in the [affecting.name]", "[target] across \his [pick("face", "neck", affecting.name)]")]!")),
 						))
-				if(5)
+				if (5)
 					user.visible_message(pick(
 						SPAN_CLASS("danger", "[user] rakes \his [pick(attack_noun)] across [target]'s [pick("face", "neck", affecting.name)]!"),
 						SPAN_CLASS("danger", "[user] tears \his [pick(attack_noun)] into [target]'s [pick("face", "neck", affecting.name)]!"),
@@ -66,13 +66,13 @@
 		else
 			// ----- BODY ----- //
 			switch(attack_damage)
-				if(1 to 2)	user.visible_message(SPAN_CLASS("danger", "[user] [pick("scratched", "grazed")] [target]'s [affecting.name]!"))
-				if(3 to 4)
+				if (1 to 2)	user.visible_message(SPAN_CLASS("danger", "[user] [pick("scratched", "grazed")] [target]'s [affecting.name]!"))
+				if (3 to 4)
 					user.visible_message(pick(
 						80; user.visible_message(SPAN_DANGER("[user] [pick(attack_verb)] [target]'s [affecting.name]!")),
 						20; user.visible_message(SPAN_CLASS("danger", "[user] [pick(attack_verb)] [pick("[target] in the [affecting.name]", "[target] across \his [affecting.name]")]!")),
 						))
-				if(5)		user.visible_message(SPAN_CLASS("danger", "[user] tears \his [pick(attack_noun)] [pick("deep into", "into", "across")] [target]'s [affecting.name]!"))
+				if (5)		user.visible_message(SPAN_CLASS("danger", "[user] tears \his [pick(attack_noun)] [pick("deep into", "into", "across")] [target]'s [affecting.name]!"))
 
 /datum/unarmed_attack/claws/strong
 	attack_verb = list("slashed")
@@ -118,20 +118,20 @@
 
 /datum/unarmed_attack/tail/is_usable(mob/living/carbon/human/user, mob/living/carbon/human/target, zone) //ensures that you can't tail someone in the skull
 
-	if(!(zone in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT, BP_GROIN)))
+	if (!(zone in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT, BP_GROIN)))
 
 		return 0
 
 	var/obj/item/organ/external/E = user.organs_by_name[BP_L_FOOT]
 
-	if(E && !E.is_stump())
+	if (E && !E.is_stump())
 
 		return 1
 
 
 	E = user.organs_by_name[BP_R_FOOT]
 
-	if(E && !E.is_stump())
+	if (E && !E.is_stump())
 
 		return 1
 
@@ -146,11 +146,11 @@
 	attack_damage = 3 + attack_damage - rand(1, 5)
 	switch(attack_damage)
 
-		if(1 to 5)	user.visible_message(SPAN_DANGER("[user] glanced [target] with their [pick(attack_noun)] in the [organ]!"))
+		if (1 to 5)	user.visible_message(SPAN_DANGER("[user] glanced [target] with their [pick(attack_noun)] in the [organ]!"))
 
-		if(6 to 7)	user.visible_message(SPAN_DANGER("[user] [pick(attack_verb)] [target] in \his [organ] with their [pick(attack_noun)]!"))
+		if (6 to 7)	user.visible_message(SPAN_DANGER("[user] [pick(attack_verb)] [target] in \his [organ] with their [pick(attack_noun)]!"))
 
-		if(8)		user.visible_message(SPAN_DANGER("[user] landed a heavy blow with their [pick(attack_noun)] against [target]'s [organ]!"))
+		if (8)		user.visible_message(SPAN_DANGER("[user] landed a heavy blow with their [pick(attack_noun)] against [target]'s [organ]!"))
 
 /datum/unarmed_attack/nabber
 	attack_verb = list("mauled", "slashed", "struck", "pierced")

@@ -16,13 +16,13 @@
 	cast_sound = 'sound/magic/blink.ogg'
 
 /spell/aoe_turf/blink/cast(list/targets, mob/user)
-	if(!length(targets))
+	if (!length(targets))
 		return
 
 	var/turf/T = pick(targets)
 	var/turf/starting = get_turf(user)
-	if(T)
-		if(user.buckled)
+	if (T)
+		if (user.buckled)
 			user.buckled = null
 		user.forceMove(T)
 
@@ -37,7 +37,7 @@
 	return
 
 /spell/aoe_turf/blink/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 	inner_radius += 1
 

@@ -46,7 +46,7 @@
 
 /obj/item/gun/energy/get_hardpoint_status_value()
 	var/obj/item/cell/C = get_cell()
-	if(istype(C))
+	if (istype(C))
 		return C.charge/C.maxcharge
 	return null
 
@@ -73,7 +73,7 @@
 
 /obj/item/mech_equipment/shields/attack_self(mob/user)
 	. = ..()
-	if(.)
+	if (.)
 		toggle()
 
 /obj/item/mech_equipment/shields/proc/stop_damage(damage)
@@ -82,7 +82,7 @@
 
 	last_recharge = world.time
 
-	if(difference > 0)
+	if (difference > 0)
 		for(var/mob/pilot in owner.pilots)
 			to_chat(pilot, SPAN_DANGER("Warning: Deflector shield failure detect, shutting down"))
 		toggle()
@@ -91,12 +91,12 @@
 	else return 0
 
 /obj/item/mech_equipment/shields/proc/toggle()
-	if(!aura)
+	if (!aura)
 		return
 	aura.toggle()
 	playsound(owner,'sound/weapons/flash.ogg',35,1)
 	update_icon()
-	if(aura.active)
+	if (aura.active)
 		START_PROCESSING(SSobj, src)
 	else
 		STOP_PROCESSING(SSobj, src)
@@ -105,29 +105,29 @@
 	owner.update_icon()
 
 /obj/item/mech_equipment/shields/deactivate()
-	if(active)
+	if (active)
 		toggle()
 	..()
 
 /obj/item/mech_equipment/shields/on_update_icon()
 	. = ..()
-	if(!aura)
+	if (!aura)
 		return
-	if(aura.active)
+	if (aura.active)
 		icon_state = "shield_droid_a"
 	else
 		icon_state = "shield_droid"
 
 /obj/item/mech_equipment/shields/Process()
-	if(charge >= max_charge)
+	if (charge >= max_charge)
 		return
-	if((world.time - last_recharge) < cooldown)
+	if ((world.time - last_recharge) < cooldown)
 		return
 	var/obj/item/cell/cell = owner.get_cell()
 
 	var/actual_required_power = clamp(max_charge - charge, 0, charging_rate)
 
-	if(cell)
+	if (cell)
 		charge += cell.use(actual_required_power)
 
 /obj/item/mech_equipment/shields/get_hardpoint_status_value()
@@ -163,12 +163,12 @@
 
 /obj/aura/mechshield/set_dir(new_dir)
 	. = ..()
-	if(dir == NORTH)
+	if (dir == NORTH)
 		layer = north_layer
 	else layer = initial(layer)
 
 /obj/aura/mechshield/Destroy()
-	if(user)
+	if (user)
 		GLOB.dir_set_event.unregister(user, src, /obj/aura/mechshield/proc/update_dir)
 		user.vis_contents -= src
 	shields = null
@@ -179,7 +179,7 @@
 
 	update_icon()
 
-	if(active)
+	if (active)
 		flick("shield_raise", src)
 	else
 		flick("shield_drop", src)
@@ -187,7 +187,7 @@
 
 /obj/aura/mechshield/on_update_icon()
 	. = ..()
-	if(active)
+	if (active)
 		icon_state = "shield"
 	else
 		icon_state = "shield_null"
@@ -456,29 +456,29 @@
 	C.use(active_power_use * CELLRATE)
 
 	for (var/mob/living/O in oviewers(flash_range, owner))
-		if(istype(O))
+		if (istype(O))
 			var/protection = O.eyecheck()
-			if(protection >= FLASH_PROTECTION_MODERATE)
+			if (protection >= FLASH_PROTECTION_MODERATE)
 				return
 
-			if(protection >= FLASH_PROTECTION_MINOR)
+			if (protection >= FLASH_PROTECTION_MINOR)
 				flash_time /= 2
 
-			if(ishuman(O))
+			if (ishuman(O))
 				var/mob/living/carbon/human/H = O
 				flash_time = round(H.getFlashMod() * flash_time)
-				if(flash_time <= 0)
+				if (flash_time <= 0)
 					return
 
-			if(!O.blinded)
+			if (!O.blinded)
 				O.flash_eyes(FLASH_PROTECTION_MODERATE - protection)
 				O.eye_blurry += flash_time
 				O.confused += (flash_time + 2)
 
 /obj/item/mech_equipment/flash/attack_self(mob/user)
 	. = ..()
-	if(.)
-		if(world.time < next_use)
+	if (.)
+		if (world.time < next_use)
 			to_chat(user, SPAN_WARNING("\The [src] is recharging!"))
 			return
 		next_use = world.time + 20
@@ -487,15 +487,15 @@
 
 /obj/item/mech_equipment/flash/afterattack(atom/target, mob/living/user, inrange, params)
 	. = ..()
-	if(.)
-		if(world.time < next_use)
+	if (.)
+		if (world.time < next_use)
 			to_chat(user, SPAN_WARNING("\The [src] is recharging!"))
 			return
 		var/mob/living/O = target
 		owner.setClickCooldown(5)
 		next_use = world.time + 15
 
-		if(istype(O))
+		if (istype(O))
 
 			playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)
 			var/flash_time = (rand(flash_min,flash_max))
@@ -504,32 +504,32 @@
 			C.use(active_power_use * CELLRATE)
 
 			var/protection = O.eyecheck()
-			if(protection >= FLASH_PROTECTION_MAJOR)
+			if (protection >= FLASH_PROTECTION_MAJOR)
 				return
 
-			if(protection >= FLASH_PROTECTION_MODERATE)
+			if (protection >= FLASH_PROTECTION_MODERATE)
 				flash_time /= 2
 
-			if(ishuman(O))
+			if (ishuman(O))
 				var/mob/living/carbon/human/H = O
 				flash_time = round(H.getFlashMod() * flash_time)
-				if(flash_time <= 0)
+				if (flash_time <= 0)
 					return
 
-			if(!O.blinded)
+			if (!O.blinded)
 				O.flash_eyes(FLASH_PROTECTION_MAJOR - protection)
 				O.eye_blurry += flash_time
 				O.confused += (flash_time + 2)
 
-				if(isanimal(O)) //Hit animals a bit harder
+				if (isanimal(O)) //Hit animals a bit harder
 					O.Stun(flash_time)
 				else
 					O.Stun(flash_time / 2)
 
-				if(flash_time > 3)
+				if (flash_time > 3)
 					O.drop_l_hand()
 					O.drop_r_hand()
-				if(flash_time > 5)
+				if (flash_time > 5)
 					O.Weaken(3)
 
 /obj/item/flamethrower/full/mech
@@ -555,26 +555,26 @@
 
 /obj/item/mech_equipment/mounted_system/flamethrower/attack_self(mob/user)
 	. = ..()
-	if(owner && holding)
+	if (owner && holding)
 		update_icon()
 
 /obj/item/mech_equipment/mounted_system/flamethrower/attackby(obj/item/W as obj, mob/user as mob)
-	if(!CanPhysicallyInteract(user))	return
+	if (!CanPhysicallyInteract(user))	return
 
 	var/obj/item/flamethrower/full/mech/FM = holding
-	if(istype(FM))
-		if(isCrowbar(W) && FM.beaker)
-			if(FM.beaker)
+	if (istype(FM))
+		if (isCrowbar(W) && FM.beaker)
+			if (FM.beaker)
 				user.visible_message(SPAN_NOTICE("\The [user] pries out \the [FM.beaker] using \the [W]."))
 				FM.beaker.dropInto(get_turf(user))
 				FM.beaker = null
 			return
 
 		if (istype(W, /obj/item/reagent_containers) && W.is_open_container() && (W.w_class <= FM.max_beaker))
-			if(FM.beaker)
+			if (FM.beaker)
 				to_chat(user, SPAN_NOTICE("There is already a tank inserted!"))
 				return
-			if(user.unEquip(W, FM))
+			if (user.unEquip(W, FM))
 				user.visible_message(SPAN_NOTICE("\The [user] inserts \the [W] inside \the [src]."))
 				FM.beaker = W
 			return
@@ -582,12 +582,12 @@
 
 /obj/item/mech_equipment/mounted_system/flamethrower/on_update_icon()
 	. = ..()
-	if(owner && holding)
+	if (owner && holding)
 		var/obj/item/flamethrower/full/mech/FM = holding
-		if(istype(FM))
-			if(FM.lit)
+		if (istype(FM))
+			if (FM.lit)
 				icon_state = "mech_flamer_lit"
 			else icon_state = "mech_flamer"
 
-			if(owner)
+			if (owner)
 				owner.update_icon()

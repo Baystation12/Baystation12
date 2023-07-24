@@ -59,11 +59,11 @@
 
 /datum/job/New()
 
-	if(prob(100-availablity_chance))	//Close positions, blah blah.
+	if (prob(100-availablity_chance))	//Close positions, blah blah.
 		total_positions = 0
 		spawn_positions = 0
 
-	if(!hud_icon)
+	if (!hud_icon)
 		hud_icon = "hud[ckey(title)]"
 
 	..()
@@ -81,43 +81,43 @@
 		H.add_language(LANGUAGE_SPACER)
 		H.set_default_language(all_languages[LANGUAGE_SPACER])
 
-	if(psi_latency_chance && prob(psi_latency_chance))
+	if (psi_latency_chance && prob(psi_latency_chance))
 		H.set_psi_rank(pick(PSI_COERCION, PSI_REDACTION, PSI_ENERGISTICS, PSI_PSYCHOKINESIS), 1, defer_update = TRUE)
-	if(islist(psi_faculties))
+	if (islist(psi_faculties))
 		for(var/psi in psi_faculties)
 			H.set_psi_rank(psi, psi_faculties[psi], take_larger = TRUE, defer_update = TRUE)
-	if(H.psi)
+	if (H.psi)
 		H.psi.update()
-		if(give_psionic_implant_on_join)
+		if (give_psionic_implant_on_join)
 			var/obj/item/implant/psi_control/imp = new
 			imp.implanted(H)
 			imp.forceMove(H)
 			imp.imp_in = H
 			imp.implanted = TRUE
 			var/obj/item/organ/external/affected = H.get_organ(BP_HEAD)
-			if(affected)
+			if (affected)
 				affected.implants += imp
 				imp.part = affected
 			to_chat(H, SPAN_DANGER("As a registered psionic, you are fitted with a psi-dampening control implant. Using psi-power while the implant is active will result in neural shocks and your violation being reported."))
 
 	var/singleton/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
-	if(outfit) . = outfit.equip(H, title, alt_title)
-	if(faction)
+	if (outfit) . = outfit.equip(H, title, alt_title)
+	if (faction)
 		H.faction = faction
 		H.last_faction = faction
 
 /datum/job/proc/get_outfit(mob/living/carbon/human/H, alt_title, datum/mil_branch/branch, datum/mil_rank/grade)
-	if(alt_title && alt_titles)
+	if (alt_title && alt_titles)
 		. = alt_titles[alt_title]
-	if(allowed_branches && branch)
+	if (allowed_branches && branch)
 		. = allowed_branches[branch.type] || .
-	if(allowed_ranks && grade)
+	if (allowed_ranks && grade)
 		. = allowed_ranks[grade.type] || .
 	. = . || outfit_type
 	. = outfit_by_type(.)
 
 /datum/job/proc/setup_account(mob/living/carbon/human/H)
-	if(!account_allowed || (H.mind && H.mind.initial_account))
+	if (!account_allowed || (H.mind && H.mind.initial_account))
 		return
 
 	// Calculate our pay and apply all relevant modifiers.
@@ -128,10 +128,10 @@
 	var/culture_count = 0
 	for(var/token in H.cultural_info)
 		var/singleton/cultural_info/culture = H.get_cultural_value(token)
-		if(culture && !isnull(culture.economic_power))
+		if (culture && !isnull(culture.economic_power))
 			culture_count++
 			culture_mod += culture.economic_power
-	if(culture_count)
+	if (culture_count)
 		culture_mod /= culture_count
 	money_amount *= culture_mod
 
@@ -140,18 +140,18 @@
 	money_amount *= 1 + 2 * H.get_skill_value(SKILL_FINANCE)/(SKILL_MAX - SKILL_MIN)
 	money_amount = round(money_amount)
 
-	if(money_amount <= 0)
+	if (money_amount <= 0)
 		return // You are too poor for an account.
 
 	//give them an account in the station database
 	var/datum/money_account/M = create_account("[H.real_name]'s account", H.real_name, money_amount)
-	if(H.mind)
+	if (H.mind)
 		var/remembered_info = ""
 		remembered_info += "<b>Your account number is:</b> #[M.account_number]<br>"
 		remembered_info += "<b>Your account pin is:</b> [M.remote_access_pin]<br>"
 		remembered_info += "<b>Your account funds are:</b> [GLOB.using_map.local_currency_name_short][M.money]<br>"
 
-		if(length(M.transaction_log))
+		if (length(M.transaction_log))
 			var/datum/transaction/T = M.transaction_log[1]
 			remembered_info += "<b>Your account was created:</b> [T.time], [T.date] at [T.get_source_name()]<br>"
 		H.StoreMemory(remembered_info, /singleton/memory_options/system)
@@ -160,7 +160,7 @@
 // overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/qdel()
 /datum/job/proc/equip_preview(mob/living/carbon/human/H, alt_title, datum/mil_branch/branch, datum/mil_rank/grade, additional_skips)
 	var/singleton/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
-	if(!outfit)
+	if (!outfit)
 		return FALSE
 	. = outfit.equip(H, title, alt_title, OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP|OUTFIT_ADJUSTMENT_SKIP_ID_PDA|additional_skips)
 
@@ -172,12 +172,12 @@
 	return (available_in_days(C) == 0) //Available in 0 days = available right now = player is old enough to play.
 
 /datum/job/proc/available_in_days(client/C)
-	if(C && config.use_age_restriction_for_jobs && isnull(C.holder) && isnum(C.player_age) && isnum(minimal_player_age))
+	if (C && config.use_age_restriction_for_jobs && isnull(C.holder) && isnum(C.player_age) && isnum(minimal_player_age))
 		return max(0, minimal_player_age - C.player_age)
 	return 0
 
 /datum/job/proc/apply_fingerprints(mob/living/carbon/human/target)
-	if(!istype(target))
+	if (!istype(target))
 		return 0
 	for(var/obj/item/item in target.contents)
 		apply_fingerprints_to_item(target, item)
@@ -185,7 +185,7 @@
 
 /datum/job/proc/apply_fingerprints_to_item(mob/living/carbon/human/holder, obj/item/item)
 	item.add_fingerprint(holder,1)
-	if(length(item.contents))
+	if (length(item.contents))
 		for(var/obj/item/sub_item in item.contents)
 			apply_fingerprints_to_item(holder, sub_item)
 
@@ -203,33 +203,33 @@
 		to_chat(feedback, SPAN_CLASS("boldannounce", "\An [S] species whitelist is required for [title]."))
 		return TRUE
 
-	if(!isnull(allowed_branches) && (!prefs.branches[title] || !is_branch_allowed(prefs.branches[title])))
+	if (!isnull(allowed_branches) && (!prefs.branches[title] || !is_branch_allowed(prefs.branches[title])))
 		to_chat(feedback, SPAN_CLASS("boldannounce", "Wrong branch of service for [title]. Valid branches are: [get_branches()]."))
 		return TRUE
 
-	if(!isnull(allowed_ranks) && (!prefs.ranks[title] || !is_rank_allowed(prefs.branches[title], prefs.ranks[title])))
+	if (!isnull(allowed_ranks) && (!prefs.ranks[title] || !is_rank_allowed(prefs.branches[title], prefs.ranks[title])))
 		to_chat(feedback, SPAN_CLASS("boldannounce", "Wrong rank for [title]. Valid ranks in [prefs.branches[title]] are: [get_ranks(prefs.branches[title])]."))
 		return TRUE
 
 	S = all_species[prefs.species]
-	if(!is_species_allowed(S))
+	if (!is_species_allowed(S))
 		to_chat(feedback, SPAN_CLASS("boldannounce", "Restricted species, [S], for [title]."))
 		return TRUE
 
-	if(LAZYACCESS(minimum_character_age, S.get_bodytype()) && (prefs.age < minimum_character_age[S.get_bodytype()]))
+	if (LAZYACCESS(minimum_character_age, S.get_bodytype()) && (prefs.age < minimum_character_age[S.get_bodytype()]))
 		to_chat(feedback, SPAN_CLASS("boldannounce", "Not old enough. Minimum character age is [minimum_character_age[S.get_bodytype()]]."))
 		return TRUE
 
-	if(!S.check_background(src, prefs))
+	if (!S.check_background(src, prefs))
 		to_chat(feedback, SPAN_CLASS("boldannounce", "Incompatible background for [title]."))
 		return TRUE
 
 	return FALSE
 
 /datum/job/proc/get_join_link(client/caller, href_string, show_invalid_jobs)
-	if(is_available(caller))
-		if(is_restricted(caller.prefs))
-			if(show_invalid_jobs)
+	if (is_available(caller))
+		if (is_restricted(caller.prefs))
+			if (show_invalid_jobs)
 				return "<tr><td><a style='text-decoration: line-through' href='[href_string]'>[title]</a></td><td>[current_positions]</td><td>(Active: [get_active_count()])</td></tr>"
 		else
 			return "<tr><td><a href='[href_string]'>[title]</a></td><td>[current_positions]</td><td>(Active: [get_active_count()])</td></tr>"
@@ -242,15 +242,15 @@
 /datum/job/proc/get_active_count()
 	var/active = 0
 	for(var/mob/M in GLOB.player_list)
-		if(check_is_active(M))
+		if (check_is_active(M))
 			active++
 	return active
 
 /datum/job/proc/is_species_allowed(datum/species/S)
-	if(GLOB.using_map.is_species_job_restricted(S, src))
+	if (GLOB.using_map.is_species_job_restricted(S, src))
 		return FALSE
 	// We also make sure that there is at least one valid branch-rank combo for the species.
-	if(!allowed_branches || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_BRANCH))
+	if (!allowed_branches || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_BRANCH))
 		return TRUE
 	return LAZYLEN(get_branch_rank(S))
 
@@ -265,7 +265,7 @@
 // Don't use if the map doesn't use branches but jobs do.
 /datum/job/proc/get_branch_rank(datum/species/S)
 	. = species_branch_rank_cache_[S]
-	if(.)
+	if (.)
 		return
 
 	species_branch_rank_cache_[S] = list()
@@ -274,14 +274,14 @@
 	var/spawn_branches = GLOB.mil_branches.spawn_branches(S)
 	for(var/branch_type in allowed_branches)
 		var/datum/mil_branch/branch = GLOB.mil_branches.get_branch_by_type(branch_type)
-		if(branch.name in spawn_branches)
-			if(!allowed_ranks || !(GLOB.using_map.flags & MAP_HAS_RANK))
+		if (branch.name in spawn_branches)
+			if (!allowed_ranks || !(GLOB.using_map.flags & MAP_HAS_RANK))
 				LAZYADD(., branch.name)
 				continue // Screw this rank stuff, we're good.
 			var/spawn_ranks = branch.spawn_ranks(S)
 			for(var/rank_type in allowed_ranks)
 				var/datum/mil_rank/rank = rank_type
-				if(initial(rank.name) in spawn_ranks)
+				if (initial(rank.name) in spawn_ranks)
 					LAZYADD(.[branch.name], initial(rank.name))
 
 /**
@@ -292,18 +292,18 @@
  *  branch_name - String key for the branch to check
  */
 /datum/job/proc/is_branch_allowed(branch_name)
-	if(!allowed_branches || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_BRANCH))
+	if (!allowed_branches || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_BRANCH))
 		return 1
-	if(branch_name == "None")
+	if (branch_name == "None")
 		return 0
 
 	var/datum/mil_branch/branch = GLOB.mil_branches.get_branch(branch_name)
 
-	if(!branch)
+	if (!branch)
 		crash_with("unknown branch \"[branch_name]\" passed to is_branch_allowed()")
 		return 0
 
-	if(is_type_in_list(branch, allowed_branches))
+	if (is_type_in_list(branch, allowed_branches))
 		return 1
 	else
 		return 0
@@ -317,18 +317,18 @@
  *  rank_name - String key for the rank itself
  */
 /datum/job/proc/is_rank_allowed(branch_name, rank_name)
-	if(!allowed_ranks || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_RANK))
+	if (!allowed_ranks || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_RANK))
 		return 1
-	if(branch_name == "None" || rank_name == "None")
+	if (branch_name == "None" || rank_name == "None")
 		return 0
 
 	var/datum/mil_rank/rank = GLOB.mil_branches.get_rank(branch_name, rank_name)
 
-	if(!rank)
+	if (!rank)
 		crash_with("unknown rank \"[rank_name]\" in branch \"[branch_name]\" passed to is_rank_allowed()")
 		return 0
 
-	if(is_type_in_list(rank, allowed_ranks))
+	if (is_type_in_list(rank, allowed_ranks))
 		return 1
 	else
 		return 0
@@ -347,7 +347,7 @@
 	var/datum/mil_branch/B = GLOB.mil_branches.get_branch(branch)
 	for(var/T in allowed_ranks)
 		var/datum/mil_rank/R = T
-		if(B && !(initial(R.name) in B.ranks))
+		if (B && !(initial(R.name) in B.ranks))
 			continue
 		res |= initial(R.name)
 	return english_list(res)
@@ -356,7 +356,7 @@
 	return ""
 
 /datum/job/proc/get_job_icon()
-	if(!SSjobs.job_icons[title])
+	if (!SSjobs.job_icons[title])
 		var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin("#job_icon")
 		dress_mannequin(mannequin)
 		mannequin.dir = SOUTH
@@ -367,27 +367,27 @@
 
 /datum/job/proc/get_unavailable_reasons(client/caller)
 	var/list/reasons = list()
-	if(jobban_isbanned(caller, title))
+	if (jobban_isbanned(caller, title))
 		reasons["You are jobbanned."] = TRUE
-	if(is_semi_antagonist && jobban_isbanned(caller, MODE_MISC_AGITATOR))
+	if (is_semi_antagonist && jobban_isbanned(caller, MODE_MISC_AGITATOR))
 		reasons["You are semi-antagonist banned."] = TRUE
-	if(!player_old_enough(caller))
+	if (!player_old_enough(caller))
 		reasons["Your player age is too low."] = TRUE
-	if(!is_position_available())
+	if (!is_position_available())
 		reasons["There are no positions left."] = TRUE
-	if(!isnull(allowed_branches) && (!caller.prefs.branches[title] || !is_branch_allowed(caller.prefs.branches[title])))
+	if (!isnull(allowed_branches) && (!caller.prefs.branches[title] || !is_branch_allowed(caller.prefs.branches[title])))
 		reasons["Your branch of service does not allow it."] = TRUE
-	else if(!isnull(allowed_ranks) && (!caller.prefs.ranks[title] || !is_rank_allowed(caller.prefs.branches[title], caller.prefs.ranks[title])))
+	else if (!isnull(allowed_ranks) && (!caller.prefs.ranks[title] || !is_rank_allowed(caller.prefs.branches[title], caller.prefs.ranks[title])))
 		reasons["Your rank choice does not allow it."] = TRUE
 	if (!is_species_whitelist_allowed(caller))
 		reasons["You do not have the required [use_species_whitelist] species whitelist."] = TRUE
 	var/datum/species/S = all_species[caller.prefs.species]
-	if(S)
-		if(!is_species_allowed(S))
+	if (S)
+		if (!is_species_allowed(S))
 			reasons["Your species choice does not allow it."] = TRUE
-		if(!S.check_background(src, caller.prefs))
+		if (!S.check_background(src, caller.prefs))
 			reasons["Your background choices do not allow it."] = TRUE
-	if(LAZYLEN(reasons))
+	if (LAZYLEN(reasons))
 		. = reasons
 
 /datum/job/proc/dress_mannequin(mob/living/carbon/human/dummy/mannequin/mannequin)
@@ -395,13 +395,13 @@
 	equip_preview(mannequin, additional_skips = OUTFIT_ADJUSTMENT_SKIP_BACKPACK)
 
 /datum/job/proc/is_available(client/caller)
-	if(!is_position_available())
+	if (!is_position_available())
 		return FALSE
-	if(jobban_isbanned(caller, title))
+	if (jobban_isbanned(caller, title))
 		return FALSE
-	if(is_semi_antagonist && jobban_isbanned(caller, MODE_MISC_AGITATOR))
+	if (is_semi_antagonist && jobban_isbanned(caller, MODE_MISC_AGITATOR))
 		return FALSE
-	if(!player_old_enough(caller))
+	if (!player_old_enough(caller))
 		return FALSE
 	return TRUE
 
@@ -414,10 +414,10 @@
 /datum/job/proc/get_roundstart_spawnpoint()
 	var/list/loc_list = list()
 	for(var/obj/effect/landmark/start/sloc in landmarks_list)
-		if(sloc.name != title)	continue
-		if(locate(/mob/living) in sloc.loc)	continue
+		if (sloc.name != title)	continue
+		if (locate(/mob/living) in sloc.loc)	continue
 		loc_list += sloc
-	if(length(loc_list))
+	if (length(loc_list))
 		return pick(loc_list)
 	else
 		return locate("start*[title]") // use old stype
@@ -431,38 +431,38 @@
  */
 /datum/job/proc/get_spawnpoint(client/C)
 
-	if(!C)
+	if (!C)
 		CRASH("Null client passed to get_spawnpoint_for() proc!")
 
 	var/mob/H = C.mob
 	var/spawnpoint = C.prefs.spawnpoint
 	var/datum/spawnpoint/spawnpos
 
-	if(spawnpoint == DEFAULT_SPAWNPOINT_ID)
+	if (spawnpoint == DEFAULT_SPAWNPOINT_ID)
 		spawnpoint = GLOB.using_map.default_spawn
 
-	if(spawnpoint)
-		if(!(spawnpoint in GLOB.using_map.allowed_spawns))
-			if(H)
+	if (spawnpoint)
+		if (!(spawnpoint in GLOB.using_map.allowed_spawns))
+			if (H)
 				to_chat(H, SPAN_WARNING("Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead. To resolve this error head to your character's setup and choose a different spawn point."))
 			spawnpos = null
 		else
 			spawnpos = spawntypes()[spawnpoint]
 
-	if(spawnpos && !spawnpos.check_job_spawning(title))
-		if(H)
+	if (spawnpos && !spawnpos.check_job_spawning(title))
+		if (H)
 			to_chat(H, SPAN_WARNING("Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job ([title]). Spawning you at another spawn point instead."))
 		spawnpos = null
 
-	if(!spawnpos)
+	if (!spawnpos)
 		// Step through all spawnpoints and pick first appropriate for job
 		for(var/spawntype in GLOB.using_map.allowed_spawns)
 			var/datum/spawnpoint/candidate = spawntypes()[spawntype]
-			if(candidate.check_job_spawning(title))
+			if (candidate.check_job_spawning(title))
 				spawnpos = candidate
 				break
 
-	if(!spawnpos)
+	if (!spawnpos)
 		// Pick at random from all the (wrong) spawnpoints, just so we have one
 		warning("Could not find an appropriate spawnpoint for job [title].")
 		spawnpos = spawntypes()[pick(GLOB.using_map.allowed_spawns)]
@@ -470,14 +470,14 @@
 	return spawnpos
 
 /datum/job/proc/post_equip_rank(mob/person, alt_title)
-	if(is_semi_antagonist && person.mind)
+	if (is_semi_antagonist && person.mind)
 		GLOB.provocateurs.add_antagonist(person.mind)
 
 /datum/job/proc/get_alt_title_for(client/C)
 	return C.prefs.GetPlayerAltTitle(src)
 
 /datum/job/proc/clear_slot()
-	if(current_positions > 0)
+	if (current_positions > 0)
 		current_positions -= 1
 		return TRUE
 	return FALSE
@@ -486,7 +486,7 @@
 	return
 
 /datum/job/proc/get_min_skill(singleton/hierarchy/skill/S)
-	if(min_skill)
+	if (min_skill)
 		. = min_skill[S.type]
-	if(!.)
+	if (!.)
 		. = SKILL_MIN

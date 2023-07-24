@@ -9,7 +9,7 @@
 
 /obj/machinery/acting/wardrobe/attack_hand(mob/user as mob)
 	user.show_message("You push a button and watch patiently as the machine begins to hum.")
-	if(active)
+	if (active)
 		active = 0
 		spawn(30)
 			new /obj/item/storage/backpack/chameleon/sydie_kit(src.loc)
@@ -25,15 +25,15 @@
 	density = TRUE
 
 /obj/machinery/acting/changer/attack_hand(mob/user as mob)
-	if(ishuman(user))
+	if (ishuman(user))
 		var/mob/living/carbon/human/H = user
 		H.change_appearance(APPEARANCE_COMMON, state = GLOB.z_state)
 		var/getName = sanitize(input(H, "Would you like to change your name to something else?", "Name change") as null|text, MAX_NAME_LEN)
-		if(getName)
+		if (getName)
 			H.real_name = getName
 			H.SetName(getName)
 			H.dna.real_name = getName
-			if(H.mind)
+			if (H.mind)
 				H.mind.name = H.name
 
 /obj/machinery/acting/changer/mirror

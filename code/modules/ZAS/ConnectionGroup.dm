@@ -71,7 +71,7 @@ Class Procs:
 
 /connection_edge/proc/add_connection(connection/c)
 	coefficient++
-	if(c.direct()) direct++
+	if (c.direct()) direct++
 //	log_debug("Connection added: [type] Coefficient: [coefficient]")
 
 
@@ -79,9 +79,9 @@ Class Procs:
 //	log_debug("Connection removed: [type] Coefficient: [coefficient-1]")
 
 	coefficient--
-	if(coefficient <= 0)
+	if (coefficient <= 0)
 		erase()
-	if(c.direct()) direct--
+	if (c.direct()) direct--
 
 /connection_edge/proc/contains_zone(zone/Z)
 
@@ -99,25 +99,25 @@ Class Procs:
 		var/atom/movable/M = movable[i]
 
 		//If they're already being tossed, don't do it again.
-		if(M.last_airflow > world.time - vsc.airflow_delay) continue
-		if(M.airflow_speed) continue
+		if (M.last_airflow > world.time - vsc.airflow_delay) continue
+		if (M.airflow_speed) continue
 
 		//Check for knocking people over
-		if(ismob(M) && differential > vsc.airflow_stun_pressure)
-			if(M:status_flags & GODMODE) continue
+		if (ismob(M) && differential > vsc.airflow_stun_pressure)
+			if (M:status_flags & GODMODE) continue
 			M:airflow_stun()
 
-		if(M.check_airflow_movable(differential))
+		if (M.check_airflow_movable(differential))
 			//Check for things that are in range of the midpoint turfs.
 			var/list/close_turfs = list()
 			for(var/turf/U in connecting_turfs)
-				if(get_dist(M,U) < world.view) close_turfs += U
-			if(!length(close_turfs)) continue
+				if (get_dist(M,U) < world.view) close_turfs += U
+			if (!length(close_turfs)) continue
 
 			M.airflow_dest = pick(close_turfs) //Pick a random midpoint to fly towards.
 
-			if(repelled) spawn if(M) M.RepelAirflowDest(differential/5)
-			else spawn if(M) M.GotoAirflowDest(differential/10)
+			if (repelled) spawn if (M) M.RepelAirflowDest(differential/5)
+			else spawn if (M) M.GotoAirflowDest(differential/10)
 
 
 
@@ -151,17 +151,17 @@ Class Procs:
 	. = ..()
 
 /connection_edge/zone/tick()
-	if(A.invalid || B.invalid)
+	if (A.invalid || B.invalid)
 		erase()
 		return
 
 	var/equiv = A.air.share_ratio(B.air, coefficient)
 
 	var/differential = A.air.return_pressure() - B.air.return_pressure()
-	if(abs(differential) >= vsc.airflow_lightest_pressure)
+	if (abs(differential) >= vsc.airflow_lightest_pressure)
 		var/list/attracted
 		var/list/repelled
-		if(differential > 0)
+		if (differential > 0)
 			attracted = A.movables()
 			repelled = B.movables()
 		else
@@ -171,8 +171,8 @@ Class Procs:
 		flow(attracted, abs(differential), 0)
 		flow(repelled, abs(differential), 1)
 
-	if(equiv)
-		if(direct)
+	if (equiv)
+		if (direct)
 			erase()
 			SSair.merge(A, B)
 			return
@@ -184,13 +184,13 @@ Class Procs:
 	SSair.mark_zone_update(B)
 
 /connection_edge/zone/recheck()
-	if(!A.air.compare(B.air, vacuum_exception = 1))
+	if (!A.air.compare(B.air, vacuum_exception = 1))
 	// Edges with only one side being vacuum need processing no matter how close.
 		SSair.mark_edge_active(src)
 
 //Helper proc to get connections for a zone.
 /connection_edge/zone/proc/get_connected_zone(zone/from)
-	if(A == from) return B
+	if (A == from) return B
 	else return A
 
 /connection_edge/unsimulated/var/turf/B
@@ -223,18 +223,18 @@ Class Procs:
 	return A == Z
 
 /connection_edge/unsimulated/tick()
-	if(A.invalid)
+	if (A.invalid)
 		erase()
 		return
 
 	var/equiv = A.air.share_space(air)
 
 	var/differential = A.air.return_pressure() - air.return_pressure()
-	if(abs(differential) >= vsc.airflow_lightest_pressure)
+	if (abs(differential) >= vsc.airflow_lightest_pressure)
 		var/list/attracted = A.movables()
 		flow(attracted, abs(differential), differential < 0)
 
-	if(equiv)
+	if (equiv)
 		A.air.copy_from(air)
 		SSair.mark_edge_sleeping(src)
 
@@ -244,15 +244,15 @@ Class Procs:
 	// Edges with only one side being vacuum need processing no matter how close.
 	// Note: This handles the glaring flaw of a room holding pressure while exposed to space, but
 	// does not specially handle the less common case of a simulated room exposed to an unsimulated pressurized turf.
-	if(!A.air.compare(air, vacuum_exception = 1))
+	if (!A.air.compare(air, vacuum_exception = 1))
 		SSair.mark_edge_active(src)
 
 /proc/ShareHeat(datum/gas_mixture/A, datum/gas_mixture/B, connecting_tiles)
 	//This implements a simplistic version of the Stefan-Boltzmann law.
 	var/energy_delta = ((A.temperature - B.temperature) ** 4) * STEFAN_BOLTZMANN_CONSTANT * connecting_tiles * 2.5
 	var/maximum_energy_delta = max(0, min(A.temperature * A.heat_capacity() * A.group_multiplier, B.temperature * B.heat_capacity() * B.group_multiplier))
-	if(maximum_energy_delta > abs(energy_delta))
-		if(energy_delta < 0)
+	if (maximum_energy_delta > abs(energy_delta))
+		if (energy_delta < 0)
 			maximum_energy_delta *= -1
 		energy_delta = maximum_energy_delta
 

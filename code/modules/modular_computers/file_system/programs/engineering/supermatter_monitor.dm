@@ -22,7 +22,7 @@
 	..()
 	var/datum/nano_module/supermatter_monitor/NMS = NM
 	var/new_status = istype(NMS) ? NMS.get_status() : 0
-	if(last_status != new_status)
+	if (last_status != new_status)
 		last_status = new_status
 		ui_header = "smmon_[last_status].gif"
 		program_icon_state = "smmon_[last_status]"
@@ -49,11 +49,11 @@
 	var/valid_z_levels = GetConnectedZlevels(get_host_z())
 	for(var/obj/machinery/power/supermatter/S in SSmachines.machinery)
 		// Delaminating, not within coverage, not on a tile.
-		if(S.grav_pulling || S.exploded || !(S.z in valid_z_levels) || !isturf(S.loc))
+		if (S.grav_pulling || S.exploded || !(S.z in valid_z_levels) || !isturf(S.loc))
 			continue
 		supermatters.Add(S)
 
-	if(!(active in supermatters))
+	if (!(active in supermatters))
 		active = null
 		screen = initial(screen)
 
@@ -64,9 +64,9 @@
 
 /datum/nano_module/supermatter_monitor/proc/process_data_output(skill, value)
 	switch(skill)
-		if(SKILL_UNSKILLED)
+		if (SKILL_UNSKILLED)
 			return (0.6 + 0.8 * rand()) * value
-		if(SKILL_BASIC)
+		if (SKILL_BASIC)
 			return (0.8 + 0.4 * rand()) * value
 		else
 			return value
@@ -95,14 +95,14 @@
 	var/list/data = host.initial_data()
 	var/engine_skill = user.get_skill_value(SKILL_ENGINES)
 
-	if(istype(active))
+	if (istype(active))
 		var/turf/T = get_turf(active)
-		if(!T)
+		if (!T)
 			active = null
 			screen = initial(screen)
 			return
 		var/datum/gas_mixture/air = T.return_air()
-		if(!istype(air))
+		if (!istype(air))
 			active = null
 			screen = initial(screen)
 			return
@@ -122,7 +122,7 @@
 		data["SM_ambientpressure_label"] = get_threshhold_color(SUPERMATTER_DATA_PRESSURE, ambient_pressure)
 		data["SM_EPR"] = process_data_output(engine_skill, epr)
 		data["SM_EPR_label"] = get_threshhold_color(SUPERMATTER_DATA_EPR, epr)
-		if(air.total_moles)
+		if (air.total_moles)
 			data["SM_gas_O2"] = round(100*air.gas[GAS_OXYGEN]/air.total_moles,0.01)
 			data["SM_gas_CO2"] = round(100*air.gas[GAS_CO2]/air.total_moles,0.01)
 			data["SM_gas_N2"] = round(100*air.gas[GAS_NITROGEN]/air.total_moles,0.01)
@@ -140,7 +140,7 @@
 		var/list/SMS = list()
 		for(var/obj/machinery/power/supermatter/S in supermatters)
 			var/area/A = get_area(S)
-			if(!A)
+			if (!A)
 				continue
 
 			SMS.Add(list(list(
@@ -155,20 +155,20 @@
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "supermatter_monitor.tmpl", "Supermatter Monitoring", 600, 400, state = state)
-		if(host.update_layout())
+		if (host.update_layout())
 			ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
 
 /datum/nano_module/supermatter_monitor/Topic(href, href_list)
-	if(..())
+	if (..())
 		return 1
-	if( href_list["clear"] )
+	if ( href_list["clear"] )
 		active = null
 		screen = initial(screen)
 		return 1
-	if( href_list["refresh"] )
+	if ( href_list["refresh"] )
 		refresh()
 		return 1
 	if (href_list["screen_threshholds"])
@@ -182,9 +182,9 @@
 		if (new_value != null)
 			set_threshhold_value(href_list["threshhold"], href_list["category"], new_value)
 		return 1
-	if( href_list["set"] )
+	if ( href_list["set"] )
 		var/newuid = text2num(href_list["set"])
 		for(var/obj/machinery/power/supermatter/S in supermatters)
-			if(S.uid == newuid)
+			if (S.uid == newuid)
 				active = S
 		return 1

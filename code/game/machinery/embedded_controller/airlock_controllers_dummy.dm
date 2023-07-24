@@ -9,27 +9,27 @@
 	var/obj/machinery/embedded_controller/radio/airlock/master_controller
 
 /obj/machinery/dummy_airlock_controller/Process()
-	if(master_controller)
+	if (master_controller)
 		appearance = master_controller
 	. = ..()
 
 /obj/machinery/dummy_airlock_controller/Initialize()
 	. = ..()
-	if(id_tag)
+	if (id_tag)
 		for(var/obj/machinery/embedded_controller/radio/airlock/_master in SSmachines.machinery)
-			if(_master.id_tag == id_tag)
+			if (_master.id_tag == id_tag)
 				master_controller = _master
 				master_controller.dummy_terminals += src
 				break
-	if(!master_controller)
+	if (!master_controller)
 		qdel(src)
 	else
 		remote_state = new /datum/topic_state/remote(src, master_controller)
 
 /obj/machinery/dummy_airlock_controller/Destroy()
-	if(master_controller)
+	if (master_controller)
 		master_controller.dummy_terminals -= src
-	if(remote_state)
+	if (remote_state)
 		qdel(remote_state)
 		remote_state = null
 	return ..()
@@ -39,12 +39,12 @@
 	return TRUE
 
 /obj/machinery/dummy_airlock_controller/proc/open_remote_ui(mob/user)
-	if(master_controller)
+	if (master_controller)
 		appearance = master_controller
 		return master_controller.ui_interact(user, state = remote_state)
 
 /obj/machinery/dummy_airlock_controller/powered(chan = -1, area/check_area = null)
-	if(master_controller)
+	if (master_controller)
 		var/area/A = get_area(master_controller)
 		return master_controller.powered(chan, A)
 	return ..()

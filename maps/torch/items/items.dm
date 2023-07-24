@@ -95,7 +95,7 @@ Unique items
 	desc = "A slightly bulky pen with a golden case. Twisting the top allows you to switch the nib for different colors."
 
 /obj/item/pen/multi/cmd/attack_self(mob/user)
-	if(++selectedColor > 3)
+	if (++selectedColor > 3)
 		selectedColor = 1
 	colour = colors[selectedColor]
 	to_chat(user, SPAN_NOTICE("Changed color to '[colour].'"))

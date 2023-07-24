@@ -7,7 +7,7 @@
 	SHOULD_NOT_OVERRIDE(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
 	var/traits = GetTraits()
-	if(!traits)
+	if (!traits)
 		return null
 	return traits[trait_type]
 
@@ -17,14 +17,14 @@
 	return traits
 
 /mob/living/carbon/human/GetTraits()
-	if(traits)
+	if (traits)
 		return traits
 	return species.traits
 
 /mob/living/proc/SetTrait(trait_type, trait_level)
 	SHOULD_NOT_SLEEP(TRUE)
 	var/singleton/trait/T = GET_SINGLETON(trait_type)
-	if(!T.Validate(trait_level))
+	if (!T.Validate(trait_level))
 		return FALSE
 
 	if (!LAZYISIN(traits, trait_type))
@@ -38,12 +38,12 @@
 
 /mob/living/carbon/human/SetTrait(trait_type, trait_level)
 	var/singleton/trait/T = GET_SINGLETON(trait_type)
-	if(!T.Validate(trait_level))
+	if (!T.Validate(trait_level))
 		return FALSE
 
-	if(!traits) // If traits haven't been setup before, check if we need to do so now
+	if (!traits) // If traits haven't been setup before, check if we need to do so now
 		var/species_level = species.traits[trait_type]
-		if(species_level == trait_level) // Matched the default species trait level, ignore
+		if (species_level == trait_level) // Matched the default species trait level, ignore
 			return TRUE
 		traits = species.traits.Copy() // The setup is to simply copy the species list of traits
 
@@ -54,7 +54,7 @@
 
 /mob/living/carbon/human/RemoveTrait(trait_type)
 	// If traits haven't been setup, but we're trying to remove a trait that exists on the species then setup traits
-	if(!traits && (trait_type in species.traits))
+	if (!traits && (trait_type in species.traits))
 		traits = species.traits.Copy()
 
 	..(trait_type) // Could go through the trouble of nulling the traits list if it's again equal to the species list but eh
@@ -70,7 +70,7 @@
 	abstract_type = /singleton/trait
 
 /singleton/trait/New()
-	if(type == abstract_type)
+	if (type == abstract_type)
 		CRASH("Invalid initialization")
 
 /singleton/trait/proc/Validate(level)

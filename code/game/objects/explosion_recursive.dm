@@ -10,13 +10,13 @@ var/global/explosion_in_progress = 0
 /proc/explosion_rec(turf/epicenter, power, shaped)
 	var/loopbreak = 0
 	while(explosion_in_progress)
-		if(loopbreak >= 15) return
+		if (loopbreak >= 15) return
 		sleep(10)
 		loopbreak++
 
-	if(power <= 0) return
+	if (power <= 0) return
 	epicenter = get_turf(epicenter)
-	if(!epicenter) return
+	if (!epicenter) return
 
 	explosion_in_progress = 1
 	explosion_turfs = list()
@@ -27,7 +27,7 @@ var/global/explosion_in_progress = 0
 	for(var/direction in GLOB.cardinal)
 		var/turf/T = get_step(epicenter, direction)
 		var/adj_power = power - epicenter.get_explosion_resistance()
-		if(shaped)
+		if (shaped)
 			if (shaped == direction)
 				adj_power *= 3
 			else if (shaped == reverse_direction(direction))
@@ -41,8 +41,8 @@ var/global/explosion_in_progress = 0
 	//This step applies the ex_act effects for the explosion, as planned in the previous step.
 	for(var/spot in explosion_turfs)
 		var/turf/T = spot
-		if(explosion_turfs[T] <= 0) continue
-		if(!T) continue
+		if (explosion_turfs[T] <= 0) continue
+		if (!T) continue
 
 		//Wow severity looks confusing to calculate... Fret not, I didn't leave you with any additional instructions or help. (just kidding, see the line under the calculation)
 		var/severity = explosion_turfs[T] // effective power on tile
@@ -55,15 +55,15 @@ var/global/explosion_in_progress = 0
 		var/y = T.y
 		var/z = T.z
 		T.ex_act(severity)
-		if(!T)
+		if (!T)
 			T = locate(x,y,z)
 
 		var/throw_target = get_edge_target_turf(T, get_dir(epicenter,T))
 		for(var/atom_movable in T.contents)
 			var/atom/movable/AM = atom_movable
-			if(AM && AM.simulated && !T.protects_atom(AM))
+			if (AM && AM.simulated && !T.protects_atom(AM))
 				AM.ex_act(severity)
-				if(!QDELETED(AM) && !AM.anchored)
+				if (!QDELETED(AM) && !AM.anchored)
 					addtimer(new Callback(AM, /atom/movable/.proc/throw_at, throw_target, 9/severity, 9/severity), 0)
 
 	explosion_turfs.Cut()
@@ -74,7 +74,7 @@ var/global/explosion_in_progress = 0
 //direction is the direction that the spread took to come to this tile. So it is pointing in the main blast direction - meaning where this tile should spread most of it's force.
 /turf/proc/explosion_spread(power, direction)
 
-	if(explosion_turfs[src] >= power)
+	if (explosion_turfs[src] >= power)
 		return //The turf already sustained and spread a power greated than what we are dealing with. No point spreading again.
 	explosion_turfs[src] = power
 /*
@@ -83,9 +83,9 @@ var/global/explosion_in_progress = 0
 	if (!M)
 		M = new(src, power, direction)
 	M.maptext = "[power] vs [src.get_explosion_resistance()]"
-	if(power > 10)
+	if (power > 10)
 		M.color = "#cccc00"
-	if(power > 20)
+	if (power > 20)
 		M.color = "#ffcc00"
 */
 	var/spread_power = power - src.get_explosion_resistance() //This is the amount of power that will be spread to the tile in the direction of the blast
@@ -93,13 +93,13 @@ var/global/explosion_in_progress = 0
 		return
 
 	var/turf/T = get_step(src, direction)
-	if(T)
+	if (T)
 		T.explosion_spread(spread_power, direction)
 	T = get_step(src, turn(direction,90))
-	if(T)
+	if (T)
 		T.explosion_spread(spread_power, turn(direction,90))
 	T = get_step(src, turn(direction,-90))
-	if(T)
+	if (T)
 		T.explosion_spread(spread_power, turn(direction,90))
 
 /turf/unsimulated/explosion_spread(power)
@@ -112,7 +112,7 @@ var/global/explosion_in_progress = 0
  * Retrieves the atom's explosion resistance. Generally, this is `explosion_resistance` for simulated atoms.
  */
 /atom/proc/get_explosion_resistance()
-	if(simulated)
+	if (simulated)
 		return explosion_resistance
 
 /turf/get_explosion_resistance()
@@ -124,7 +124,7 @@ var/global/explosion_in_progress = 0
 
 /turf/simulated/floor/get_explosion_resistance()
 	. = ..()
-	if(is_below_sound_pressure(src))
+	if (is_below_sound_pressure(src))
 		. *= 3
 
 /turf/simulated/wall/get_explosion_resistance()
@@ -139,7 +139,7 @@ var/global/explosion_in_progress = 0
 /turf/simulated/wall/explosion_resistance = 10
 
 /obj/machinery/door/get_explosion_resistance()
-	if(!density)
+	if (!density)
 		return 0
 	else
 		return ..()

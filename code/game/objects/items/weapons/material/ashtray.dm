@@ -11,11 +11,11 @@
 
 /obj/item/material/ashtray/examine(mob/user)
 	. = ..()
-	if(material)
+	if (material)
 		to_chat(user, "It's made of [material.display_name].")
-	if(length(contents) >= max_butts)
+	if (length(contents) >= max_butts)
 		to_chat(user, "It's full.")
-	else if(length(contents))
+	else if (length(contents))
 		to_chat(user, "It has [length(contents)] cig butts in it.")
 
 /obj/item/material/ashtray/on_update_icon()
@@ -47,7 +47,7 @@
 			else if (cig.lit == 0)
 				to_chat(user, "You place [cig] in [src] without even smoking it. Why would you do that?")
 
-		if(user.unEquip(W, src))
+		if (user.unEquip(W, src))
 			visible_message("[user] places [W] in [src].")
 			set_extension(src, /datum/extension/scent/ashtray)
 			update_icon()

@@ -26,11 +26,11 @@
 
 /mob/living/simple_animal/hostile/giant_spider/guard/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
-	if(berserking)
+	if (berserking)
 		return FALSE
-	if(!paired_nurse)
+	if (!paired_nurse)
 		find_nurse()
 
 /mob/living/simple_animal/hostile/giant_spider/guard/death()
@@ -42,14 +42,14 @@
 	divorce()
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/divorce()
-	if(paired_nurse)
-		if(paired_nurse.paired_guard)
+	if (paired_nurse)
+		if (paired_nurse.paired_guard)
 			paired_nurse.paired_guard = null
 		paired_nurse = null
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/find_nurse()
 	for(var/mob/living/simple_animal/hostile/giant_spider/nurse/N in hearers(src, 10))
-		if(N.stat || N.paired_guard)
+		if (N.stat || N.paired_guard)
 			continue
 		paired_nurse = N
 		paired_nurse.paired_guard = src
@@ -59,7 +59,7 @@
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/go_berserk()
 	audible_message(SPAN_DANGER("\The [src] chitters wildly!"))
 	var/obj/item/W = get_natural_weapon()
-	if(W)
+	if (W)
 		W.force = initial(W.force) + 5
 	move_to_delay--
 	break_stuff_probability = 45
@@ -69,7 +69,7 @@
 	berserking = FALSE
 	visible_message(SPAN_NOTICE("\The [src] calms down and surveys the area."))
 	var/obj/item/W = get_natural_weapon()
-	if(W)
+	if (W)
 		W.force = initial(W.force)
 	move_to_delay++
 	break_stuff_probability = 10

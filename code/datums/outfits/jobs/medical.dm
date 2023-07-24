@@ -52,8 +52,8 @@
 
 /singleton/hierarchy/outfit/job/medical/doctor/nurse/pre_equip(mob/living/carbon/human/H)
 	..()
-	if(H.gender == FEMALE)
-		if(prob(50))
+	if (H.gender == FEMALE)
+		if (prob(50))
 			uniform = /obj/item/clothing/under/rank/nursesuit
 		else
 			uniform = /obj/item/clothing/under/rank/nurse

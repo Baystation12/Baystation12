@@ -21,7 +21,7 @@
 
 /obj/effect/overmap/visitable/sector/exoplanet/volcanic/generate_atmosphere()
 	..()
-	if(atmosphere)
+	if (atmosphere)
 		atmosphere.temperature = T20C + rand(220, 800)
 		atmosphere.update_values()
 
@@ -51,16 +51,16 @@
 	for(var/x = 1, x <= limit_x, x++)
 		for(var/y = 1, y <= limit_y, y++)
 			var/current_cell = get_map_cell(x,y)
-			if(noise2value(map[current_cell]) < water_level)
+			if (noise2value(map[current_cell]) < water_level)
 				continue
 			var/frendos
 			for(var/dx in list(-1,0,1))
 				for(var/dy in list(-1,0,1))
 					var/tmp_cell = get_map_cell(x+dx,y+dy)
-					if(tmp_cell && tmp_cell != current_cell && noise2value(map[tmp_cell]) >= water_level)
+					if (tmp_cell && tmp_cell != current_cell && noise2value(map[tmp_cell]) >= water_level)
 						frendos = 1
 						break
-			if(!frendos)
+			if (!frendos)
 				map[current_cell] = 1
 
 /area/exoplanet/volcanic
@@ -82,7 +82,7 @@
 
 /datum/random_map/automata/cave_system/mountains/volcanic/get_additional_spawns(value, turf/simulated/mineral/T)
 	..()
-	if(use_area && istype(T))
+	if (use_area && istype(T))
 		T.mined_turf = prob(90) ? use_area.base_turf : /turf/simulated/floor/exoplanet/lava
 
 /turf/simulated/floor/exoplanet/lava
@@ -107,12 +107,12 @@
 
 /turf/simulated/floor/exoplanet/lava/Entered(atom/movable/AM)
 	..()
-	if(locate(/obj/structure/catwalk) in src)
+	if (locate(/obj/structure/catwalk) in src)
 		return
 	var/mob/living/L = AM
 	if (istype(L) && L.can_overcome_gravity())
 		return
-	if(AM.is_burnable())
+	if (AM.is_burnable())
 		LAZYADD(victims, weakref(AM))
 		START_PROCESSING(SSobj, src)
 
@@ -121,7 +121,7 @@
 	LAZYREMOVE(victims, weakref(AM))
 
 /turf/simulated/floor/exoplanet/lava/Process()
-	if(locate(/obj/structure/catwalk) in src)
+	if (locate(/obj/structure/catwalk) in src)
 		victims = null
 		return PROCESS_KILL
 	for(var/weakref/W in victims)
@@ -132,9 +132,9 @@
 		var/datum/gas_mixture/environment = return_air()
 		var/pressure = environment.return_pressure()
 		var/destroyed = AM.lava_act(environment, 5000 + environment.temperature, pressure)
-		if(destroyed == TRUE)
+		if (destroyed == TRUE)
 			victims -= W
-	if(!LAZYLEN(victims))
+	if (!LAZYLEN(victims))
 		return PROCESS_KILL
 
 /turf/simulated/floor/exoplanet/lava/get_footstep_sound(mob/caller)

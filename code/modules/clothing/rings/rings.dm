@@ -38,14 +38,14 @@
 
 /obj/item/clothing/ring/magic/equipped(mob/living/carbon/human/H, slot)
 	..()
-	if(istype(H) && slot == SLOT_GLOVES)
+	if (istype(H) && slot == SLOT_GLOVES)
 		H.add_cloaking_source(src)
 
 /obj/item/clothing/ring/magic/dropped(mob/living/carbon/human/H)
-	if(!..())
+	if (!..())
 		return 0
 
-	if(istype(H))
+	if (istype(H))
 		H.remove_cloaking_source(src)
 
 /////////////////////////////////////////
@@ -61,11 +61,11 @@
 
 /obj/item/clothing/ring/reagent/equipped(mob/living/carbon/human/H)
 	..()
-	if(istype(H) && H.gloves==src)
+	if (istype(H) && H.gloves==src)
 		to_chat(H, SPAN_INFO("<b>You feel a prick as you slip on the ring.</b>"))
 
-		if(reagents.total_volume)
-			if(H.reagents)
+		if (reagents.total_volume)
+			if (H.reagents)
 				var/should_admin_log = reagents.should_admin_log()
 				var/contained_reagents = reagents.get_reagents()
 				var/trans = reagents.trans_to_mob(H, 15, CHEM_BLOOD)
@@ -107,7 +107,7 @@
 	var/nameset = 0
 
 /obj/item/clothing/ring/seal/signet/attack_self(mob/user)
-	if(nameset)
+	if (nameset)
 		to_chat(user, SPAN_NOTICE("The [src] has already been claimed!"))
 		return
 

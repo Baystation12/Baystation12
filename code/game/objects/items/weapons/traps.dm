@@ -17,20 +17,20 @@
 	return (user.IsAdvancedToolUser() && !issilicon(user) && !user.stat && !user.restrained())
 
 /obj/item/beartrap/user_unbuckle_mob(mob/user as mob)
-	if(buckled_mob && can_use(user) && can_unbuckle(user))
+	if (buckled_mob && can_use(user) && can_unbuckle(user))
 		user.visible_message(
 			SPAN_NOTICE("\The [user] begins freeing \the [buckled_mob] from \the [src]."),
 			SPAN_NOTICE("You carefully begin to free \the [buckled_mob] from \the [src]."),
 			SPAN_NOTICE("You hear metal creaking.")
 			)
-		if(do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE) && can_unbuckle(user))
+		if (do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE) && can_unbuckle(user))
 			user.visible_message(SPAN_NOTICE("\The [buckled_mob] has been freed from \the [src] by \the [user]."))
 			unbuckle_mob()
 			anchored = FALSE
 
 /obj/item/beartrap/attack_self(mob/user as mob)
 	..()
-	if(!deployed && can_use(user))
+	if (!deployed && can_use(user))
 		user.visible_message(
 			SPAN_DANGER("[user] starts to deploy \the [src]."),
 			SPAN_DANGER("You begin deploying \the [src]!"),
@@ -49,15 +49,15 @@
 			anchored = TRUE
 
 /obj/item/beartrap/attack_hand(mob/user as mob)
-	if(buckled_mob)
+	if (buckled_mob)
 		user_unbuckle_mob(user)
-	else if(deployed && can_use(user))
+	else if (deployed && can_use(user))
 		user.visible_message(
 			SPAN_DANGER("[user] starts to disarm \the [src]."),
 			SPAN_NOTICE("You begin disarming \the [src]!"),
 			"You hear a latch click followed by the slow creaking of a spring."
 			)
-		if(do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if (do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE))
 			user.visible_message(
 				SPAN_DANGER("[user] has disarmed \the [src]."),
 				SPAN_NOTICE("You have disarmed \the [src]!")
@@ -71,12 +71,12 @@
 /obj/item/beartrap/proc/attack_mob(mob/living/L)
 
 	var/target_zone
-	if(L.lying)
+	if (L.lying)
 		target_zone = ran_zone()
 	else
 		target_zone = pick(BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG)
 
-	if(!L.apply_damage(30, DAMAGE_BRUTE, target_zone, used_weapon=src))
+	if (!L.apply_damage(30, DAMAGE_BRUTE, target_zone, used_weapon=src))
 		return 0
 
 	//trap the victim in place
@@ -89,16 +89,16 @@
 	deployed = 0
 
 /obj/item/beartrap/Crossed(AM as mob|obj)
-	if(deployed && isliving(AM))
+	if (deployed && isliving(AM))
 		var/mob/living/L = AM
-		if(!MOVING_DELIBERATELY(L))
+		if (!MOVING_DELIBERATELY(L))
 			L.visible_message(
 				SPAN_DANGER("[L] steps on \the [src]."),
 				SPAN_DANGER("You step on \the [src]!"),
 				"<b>You hear a loud metallic snap!</b>"
 				)
 			attack_mob(L)
-			if(!buckled_mob)
+			if (!buckled_mob)
 				anchored = FALSE
 			deployed = 0
 			update_icon()
@@ -107,7 +107,7 @@
 /obj/item/beartrap/on_update_icon()
 	..()
 
-	if(!deployed)
+	if (!deployed)
 		icon_state = "beartrap0"
 	else
 		icon_state = "beartrap1"

@@ -26,20 +26,20 @@
 /obj/item/device/scanner/mining/scan(turf/simulated/T, mob/user)
 	scan_title = "Mineral scan data"
 	var/list/scan_results = mineral_scan_results(T)
-	if(!scan_data)
+	if (!scan_data)
 		scan_data = scan_results[1]
 	else
 		scan_data += "<hr>[scan_results[1]]"
 	to_chat(user, "[icon2html(src, user)] [SPAN_NOTICE("\The [src] displays a readout.")]")
 	to_chat(user, scan_results[1])
 
-	if(scan_results[2])
+	if (scan_results[2])
 		survey_data += scan_results[2]
 		playsound(loc, 'sound/machines/ping.ogg', 40, 1)
 		to_chat(user,SPAN_NOTICE("New survey data stored - [scan_results[2]] GEP."))
 
 /obj/item/device/scanner/mining/proc/put_disk_in_hand(mob/M)
-	if(!survey_data)
+	if (!survey_data)
 		to_chat(M,SPAN_WARNING("There is no survey data stored on the [src]."))
 		return 0
 	visible_message(SPAN_NOTICE("The [src] spits out a disk containing [survey_data] GEP."))
@@ -55,9 +55,9 @@
 	set src in usr
 
 	var/mob/M = usr
-	if(!istype(M))
+	if (!istype(M))
 		return
-	if(M.incapacitated())
+	if (M.incapacitated())
 		return
 	put_disk_in_hand(M)
 
@@ -72,9 +72,9 @@
 	to_chat(user,"A tiny indicator on the [src] shows it holds [data] good explorer points.")
 
 /obj/item/disk/survey/Value()
-	if(data < 10000)
+	if (data < 10000)
 		return 0.07*data
-	if(data < 30000)
+	if (data < 30000)
 		return 0.1*data
 	return 0.15*data
 
@@ -91,7 +91,7 @@
 
 	for(var/turf/simulated/T in range(2, target))
 
-		if(!T.has_resources)
+		if (!T.has_resources)
 			continue
 
 		for(var/metal in T.resources)
@@ -99,21 +99,21 @@
 			var/data_value = 1
 
 			switch(metal)
-				if(MATERIAL_SAND, MATERIAL_GRAPHITE, MATERIAL_IRON)
+				if (MATERIAL_SAND, MATERIAL_GRAPHITE, MATERIAL_IRON)
 					ore_type = ORE_SURFACE
-				if(MATERIAL_GOLD, MATERIAL_SILVER, MATERIAL_DIAMOND, MATERIAL_RUTILE)
+				if (MATERIAL_GOLD, MATERIAL_SILVER, MATERIAL_DIAMOND, MATERIAL_RUTILE)
 					ore_type = ORE_PRECIOUS
 					data_value = 2
-				if(MATERIAL_URANIUM)
+				if (MATERIAL_URANIUM)
 					ore_type = ORE_NUCLEAR
 					data_value = 3
-				if(MATERIAL_PHORON, MATERIAL_OSMIUM, MATERIAL_HYDROGEN)
+				if (MATERIAL_PHORON, MATERIAL_OSMIUM, MATERIAL_HYDROGEN)
 					ore_type = ORE_EXOTIC
 					data_value = 4
 
-			if(ore_type) metals[ore_type] += T.resources[metal]
+			if (ore_type) metals[ore_type] += T.resources[metal]
 
-			if(!T.surveyed)
+			if (!T.surveyed)
 				new_data += data_value * T.resources[metal]
 
 		T.surveyed = 1
@@ -123,9 +123,9 @@
 		var/result = "no sign"
 
 		switch(metals[ore_type])
-			if(1 to 25) result = "trace amounts"
-			if(26 to 75) result = "significant amounts"
-			if(76 to INFINITY) result = "huge quantities"
+			if (1 to 25) result = "trace amounts"
+			if (26 to 75) result = "significant amounts"
+			if (76 to INFINITY) result = "huge quantities"
 
 		scandata += "- [result] of [ore_type]."
 

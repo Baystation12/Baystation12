@@ -39,7 +39,7 @@ SUBSYSTEM_DEF(ghost_images)
 
 
 /datum/controller/subsystem/ghost_images/proc/queue_image_update(mob/observer/ghost/ghost)
-	if(!queue_all)
+	if (!queue_all)
 		queue |= ghost
 
 

@@ -29,7 +29,7 @@
 	SetBounds()
 
 /obj/machinery/door/airlock/multi_tile/proc/SetBounds()
-	if(dir in list(NORTH, SOUTH))
+	if (dir in list(NORTH, SOUTH))
 		bound_width = width * world.icon_size
 		bound_height = world.icon_size
 	else
@@ -39,8 +39,8 @@
 
 /obj/machinery/door/airlock/multi_tile/on_update_icon(state=0, override=0)
 	..()
-	if(connections in list(NORTH, SOUTH, NORTH|SOUTH))
-		if(connections in list(WEST, EAST, EAST|WEST))
+	if (connections in list(NORTH, SOUTH, NORTH|SOUTH))
+		if (connections in list(WEST, EAST, EAST|WEST))
 			set_dir(SOUTH)
 		else
 			set_dir(WEST)
@@ -54,30 +54,30 @@
 		var/turf/T = get_step(src, direction)
 		var/success = 0
 
-		if(direction in list(NORTH, EAST))
+		if (direction in list(NORTH, EAST))
 			T = get_step(T, direction)
 
-		if( istype(T, /turf/simulated/wall))
+		if ( istype(T, /turf/simulated/wall))
 			success = 1
-			if(propagate)
+			if (propagate)
 				var/turf/simulated/wall/W = T
 				W.update_connections()
 				W.update_icon()
 
-		else if( istype(T, /turf/simulated/shuttle/wall))
+		else if ( istype(T, /turf/simulated/shuttle/wall))
 			success = 1
 		else
 			for(var/obj/O in T)
 				for(var/b_type in blend_objects)
-					if( istype(O, b_type))
+					if ( istype(O, b_type))
 						success = 1
 
-					if(success)
+					if (success)
 						break
-				if(success)
+				if (success)
 					break
 
-		if(success)
+		if (success)
 			dirs |= direction
 	connections = dirs
 

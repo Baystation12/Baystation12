@@ -58,7 +58,7 @@
 	crayon_reagent = /datum/reagent/crayon_dust/grey
 
 /obj/item/pen/crayon/mime/attack_self(mob/living/user as mob) //inversion
-	if(colour != "#ffffff" && shadeColour != "#000000")
+	if (colour != "#ffffff" && shadeColour != "#000000")
 		colour = "#ffffff"
 		shadeColour = "#000000"
 		to_chat(user, "You will now draw in white and black with this crayon.")
@@ -83,41 +83,41 @@
 	return
 
 /obj/item/pen/crayon/afterattack(atom/target, mob/user as mob, proximity)
-	if(!proximity) return
-	if(istype(target,/turf/simulated/floor))
+	if (!proximity) return
+	if (istype(target,/turf/simulated/floor))
 		var/drawtype = input("Choose what you'd like to draw.", "Crayon scribbles") in list("graffiti","rune","letter","arrow", "defector graffiti")
 		switch(drawtype)
-			if("letter")
+			if ("letter")
 				drawtype = input("Choose the letter.", "Crayon scribbles") in list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
 				to_chat(user, "You start drawing a letter on the [target.name].")
-			if("graffiti", "Fleet defector graffiti")
+			if ("graffiti", "Fleet defector graffiti")
 				to_chat(user, "You start drawing graffiti on the [target.name].")
-			if("rune")
+			if ("rune")
 				to_chat(user, "You start drawing a rune on the [target.name].")
-			if("arrow")
+			if ("arrow")
 				drawtype = input("Choose the arrow.", "Crayon scribbles") in list("left", "right", "up", "down")
 				to_chat(user, "You start drawing an arrow on the [target.name].")
-			if("defector graffiti")
+			if ("defector graffiti")
 				to_chat(user, "You start drawing defector graffiti on the [target.name].")
-		if(instant || do_after(user, 5 SECONDS, target, DO_PUBLIC_UNIQUE))
+		if (instant || do_after(user, 5 SECONDS, target, DO_PUBLIC_UNIQUE))
 			new /obj/effect/decal/cleanable/crayon(target,colour,shadeColour,drawtype)
 			to_chat(user, "You finish drawing.")
 			target.add_fingerprint(user)		// Adds their fingerprints to the floor the crayon is drawn on.
-			if(uses)
+			if (uses)
 				uses--
-				if(!uses)
+				if (!uses)
 					to_chat(user, SPAN_WARNING("You used up your crayon!"))
 					qdel(src)
 	return
 
 /obj/item/pen/crayon/attack(mob/living/carbon/M as mob, mob/user as mob)
-	if(istype(M) && M == user)
+	if (istype(M) && M == user)
 		to_chat(M, "You take a bite of the crayon and swallow it.")
 		M.adjust_nutrition(1)
 		M.reagents.add_reagent(/datum/reagent/crayon_dust,min(5,uses)/3)
-		if(uses)
+		if (uses)
 			uses -= 5
-			if(uses <= 0)
+			if (uses <= 0)
 				to_chat(M, SPAN_WARNING("You ate your crayon!"))
 				qdel(src)
 	else

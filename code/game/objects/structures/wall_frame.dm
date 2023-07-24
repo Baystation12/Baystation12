@@ -49,7 +49,7 @@
 /obj/structure/wall_frame/examine(mob/user)
 	. = ..()
 
-	if(paint_color)
+	if (paint_color)
 		to_chat(user, SPAN_NOTICE("It has a smooth coat of paint applied."))
 
 
@@ -127,10 +127,10 @@
 
 
 /obj/structure/wall_frame/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
-	if(istype(mover,/obj/item/projectile))
+	if (air_group || (height==0)) return 1
+	if (istype(mover,/obj/item/projectile))
 		return 1
-	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
+	if (istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
 		return 1
 
 // icon related
@@ -143,15 +143,15 @@
 	color = new_color
 
 	for(var/i = 1 to 4)
-		if(other_connections[i] != "0")
+		if (other_connections[i] != "0")
 			I = image('icons/obj/wall_frame.dmi', "frame_other[connections[i]]", dir = SHIFTL(1, i - 1))
 		else
 			I = image('icons/obj/wall_frame.dmi', "frame[connections[i]]", dir = SHIFTL(1, i - 1))
 		overlays += I
 
-	if(stripe_color)
+	if (stripe_color)
 		for(var/i = 1 to 4)
-			if(other_connections[i] != "0")
+			if (other_connections[i] != "0")
 				I = image('icons/obj/wall_frame.dmi', "stripe_other[connections[i]]", dir = SHIFTL(1, i - 1))
 			else
 				I = image('icons/obj/wall_frame.dmi', "stripe[connections[i]]", dir = SHIFTL(1, i - 1))
@@ -160,15 +160,15 @@
 
 /obj/structure/wall_frame/hull/Initialize()
 	. = ..()
-	if(prob(40))
+	if (prob(40))
 		var/spacefacing = FALSE
 		for(var/direction in GLOB.cardinal)
 			var/turf/T = get_step(src, direction)
 			var/area/A = get_area(T)
-			if(A && (A.area_flags & AREA_FLAG_EXTERNAL))
+			if (A && (A.area_flags & AREA_FLAG_EXTERNAL))
 				spacefacing = TRUE
 				break
-		if(spacefacing)
+		if (spacefacing)
 			var/bleach_factor = rand(10,50)
 			paint_color = adjust_brightness(paint_color, bleach_factor)
 		update_icon()

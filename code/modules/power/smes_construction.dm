@@ -109,12 +109,12 @@
 // Description: Uses parent process, but if grounding wire is cut causes sparks to fly around.
 // This also causes the SMES to quickly discharge, and has small chance of damaging output APCs.
 /obj/machinery/power/smes/buildable/Process()
-	if(!grounding && (Percentage() > 5))
+	if (!grounding && (Percentage() > 5))
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(5, 1, src)
 		s.start()
 		charge -= (output_level_max * CELLRATE)
-		if(powernet && prob(1)) // Small chance of overload occuring since grounding is disabled.
+		if (powernet && prob(1)) // Small chance of overload occuring since grounding is disabled.
 			powernet.apcs_overload(5,10,20)
 
 	..()
@@ -123,7 +123,7 @@
 // Parameters: None
 // Description: AI requires the RCON wire to be intact to operate the SMES.
 /obj/machinery/power/smes/buildable/attack_ai(mob/user)
-	if(RCon)
+	if (RCon)
 		..()
 	else // RCON wire cut
 		to_chat(user, SPAN_WARNING("Connection error: Destination Unreachable."))
@@ -140,7 +140,7 @@
 		capacity += C.ChargeCapacity
 		input_level_max += C.IOCapacity
 		output_level_max += C.IOCapacity
-	if(malf_upgraded)
+	if (malf_upgraded)
 		capacity *= 1.2
 		input_level_max *= 2
 		output_level_max *= 2
@@ -174,9 +174,9 @@
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	// Check if user has protected gloves.
 	var/user_protected = 0
-	if(h_user.gloves)
+	if (h_user.gloves)
 		var/obj/item/clothing/gloves/G = h_user.gloves
-		if(G.siemens_coefficient == 0)
+		if (G.siemens_coefficient == 0)
 			user_protected = 1
 	log_and_message_admins("SMES FAILURE: <b>[src.x]X [src.y]Y [src.z]Z</b> User: [usr.ckey], Intensity: [intensity]/100 - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>")
 
@@ -187,7 +187,7 @@
 			// Sparks, Weak shock
 			s.set_up(2, 1, src)
 			s.start()
-			if(user_protected && prob(80))
+			if (user_protected && prob(80))
 				to_chat(h_user, SPAN_WARNING("Small electrical arc almost burns your hand. Luckily you had your gloves on!"))
 			else
 				to_chat(h_user, SPAN_DANGER("Small electrical arc sparks and burns your hand as you touch the [src]!"))
@@ -206,7 +206,7 @@
 				h_user.electrocute_act(rand(15,35), src, def_zone = h_user.hand ? BP_L_HAND : BP_R_HAND)
 			spawn(0)
 				empulse(src.loc, 2, 4)
-			if(powernet)
+			if (powernet)
 				powernet.apcs_overload(0, 5, 10)
 			charge = 0
 
@@ -226,7 +226,7 @@
 			spawn(0)
 				empulse(src.loc, 8, 16)
 			charge = 0
-			if(powernet)
+			if (powernet)
 				powernet.apcs_overload(1, 10, 20)
 			energy_fail(10)
 			src.ping("Caution. Output regulators malfunction. Uncontrolled discharge detected.")
@@ -243,7 +243,7 @@
 			spawn(0)
 				empulse(src.loc, 32, 64)
 			charge = 0
-			if(powernet)
+			if (powernet)
 				powernet.apcs_overload(5, 25, 100)
 			energy_fail(30)
 			src.ping("Caution. Output regulators malfunction. Significant uncontrolled discharge detected.")
@@ -255,7 +255,7 @@
 				failing = 1
 				// 30 - 60 seconds and then BAM!
 				spawn(rand(300,600))
-					if(!failing) // Admin can manually set this var back to 0 to stop overload, for use when griffed.
+					if (!failing) // Admin can manually set this var back to 0 to stop overload, for use when griffed.
 						update_icon()
 						src.ping("Magnetic containment stabilised.")
 						return
@@ -287,46 +287,46 @@
 		..()
 
 /obj/machinery/power/smes/buildable/cannot_transition_to(state_path, mob/user)
-	if(failing)
+	if (failing)
 		return SPAN_WARNING("\The [src]'s screen is flashing with alerts. It seems to be overloaded! Touching it now is probably not a good idea.")
 
-	if(state_path == /singleton/machine_construction/default/deconstructed)
-		if(charge > (capacity/100) && safeties_enabled)
+	if (state_path == /singleton/machine_construction/default/deconstructed)
+		if (charge > (capacity/100) && safeties_enabled)
 			return SPAN_WARNING("\The [src]'s safety circuit is preventing modifications while it's charged!")
-		if(output_attempt || input_attempt)
+		if (output_attempt || input_attempt)
 			return SPAN_WARNING("Turn \the [src] off first!")
-		if(!MACHINE_IS_BROKEN(src))
+		if (!MACHINE_IS_BROKEN(src))
 			return SPAN_WARNING("You have to disassemble the terminal[num_terminals > 1 ? "s" : ""] first!")
-		if(user)
-			if(!do_after(user, 5 SECONDS * number_of_components(/obj/item/stock_parts/smes_coil), src, DO_REPAIR_CONSTRUCT) && isCrowbar(user.get_active_hand()))
+		if (user)
+			if (!do_after(user, 5 SECONDS * number_of_components(/obj/item/stock_parts/smes_coil), src, DO_REPAIR_CONSTRUCT) && isCrowbar(user.get_active_hand()))
 				return MCS_BLOCK
-			if(check_total_system_failure(user))
+			if (check_total_system_failure(user))
 				return MCS_BLOCK
 	return ..()
 
 /obj/machinery/power/smes/buildable/can_add_component(obj/item/stock_parts/component, mob/user)
-	if(charge > (capacity/100) && safeties_enabled)
+	if (charge > (capacity/100) && safeties_enabled)
 		to_chat(user,  SPAN_WARNING("\The [src]'s safety circuit is preventing modifications while it's charged!"))
 		return FALSE
 	. = ..()
-	if(!.)
+	if (!.)
 		return
-	if(istype(component,/obj/item/stock_parts/smes_coil))
-		if(output_attempt || input_attempt)
+	if (istype(component,/obj/item/stock_parts/smes_coil))
+		if (output_attempt || input_attempt)
 			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
 			return FALSE
-		if(!do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT) || check_total_system_failure(user))
+		if (!do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT) || check_total_system_failure(user))
 			return FALSE
 
 /obj/machinery/power/smes/buildable/remove_part_and_give_to_user(path, mob/user)
-	if(charge > (capacity/100) && safeties_enabled)
+	if (charge > (capacity/100) && safeties_enabled)
 		to_chat(user,  SPAN_WARNING("\The [src]'s safety circuit is preventing modifications while it's charged!"))
 		return
-	if(ispath(path,/obj/item/stock_parts/smes_coil))
-		if(output_attempt || input_attempt)
+	if (ispath(path,/obj/item/stock_parts/smes_coil))
+		if (output_attempt || input_attempt)
 			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
 			return
-		if(!do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT) || check_total_system_failure(user))
+		if (!do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT) || check_total_system_failure(user))
 			return
 	..()
 
@@ -342,9 +342,9 @@
 	if (!..())
 
 		// Multitool - change RCON tag
-		if(isMultitool(W))
+		if (isMultitool(W))
 			var/newtag = input(user, "Enter new RCON tag. Use \"NO_TAG\" to disable RCON or leave empty to cancel.", "SMES RCON system") as text
-			if(newtag)
+			if (newtag)
 				RCon_tag = newtag
 				to_chat(user, SPAN_NOTICE("You changed the RCON tag to: [newtag]"))
 
@@ -377,6 +377,6 @@
 	update_icon()
 
 /obj/machinery/power/smes/buildable/emp_act(severity)
-	if(emp_proof)
+	if (emp_proof)
 		return
 	..(severity)

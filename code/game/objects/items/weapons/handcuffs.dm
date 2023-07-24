@@ -19,15 +19,15 @@
 	var/cuff_type = "handcuffs"
 
 /obj/item/handcuffs/get_icon_state(mob/user_mob, slot)
-	if(slot == slot_handcuffed_str)
+	if (slot == slot_handcuffed_str)
 		return "handcuff1"
-	if(slot == slot_legcuffed_str)
+	if (slot == slot_legcuffed_str)
 		return "legcuff1"
 	return ..()
 
 /obj/item/handcuffs/attack(mob/living/carbon/C, mob/living/user)
 
-	if(!user.IsAdvancedToolUser())
+	if (!user.IsAdvancedToolUser())
 		return
 
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
@@ -36,14 +36,14 @@
 		return
 
 	// only carbons can be handcuffed
-	if(istype(C))
-		if(!C.handcuffed)
+	if (istype(C))
+		if (!C.handcuffed)
 			if (C == user)
 				place_handcuffs(user, user)
 				return
 
 			//check for an aggressive grab (or robutts)
-			if(C.has_danger_grab(user))
+			if (C.has_danger_grab(user))
 				place_handcuffs(C, user)
 			else
 				to_chat(user, SPAN_DANGER("You need to have a firm grip on [C] before you can put \the [src] on!"))
@@ -53,7 +53,7 @@
 		..()
 
 /obj/item/handcuffs/proc/can_place(mob/target, mob/user)
-	if(user == target || istype(user, /mob/living/silicon/robot) || istype(user, /mob/living/bot))
+	if (user == target || istype(user, /mob/living/silicon/robot) || istype(user, /mob/living/bot))
 		return 1
 	else
 		for (var/obj/item/grab/G in target.grabbed_by)
@@ -65,29 +65,29 @@
 	playsound(src.loc, cuff_sound, 30, 1, -2)
 
 	var/mob/living/carbon/human/H = target
-	if(!istype(H))
+	if (!istype(H))
 		return 0
 
 	if (!H.has_organ_for_slot(slot_handcuffed))
 		to_chat(user, SPAN_DANGER("\The [H] needs at least two wrists before you can cuff them together!"))
 		return 0
 
-	if((H.gloves && H.gloves.item_flags & ITEM_FLAG_NOCUFFS) && !elastic)
+	if ((H.gloves && H.gloves.item_flags & ITEM_FLAG_NOCUFFS) && !elastic)
 		to_chat(user, SPAN_DANGER("\The [src] won't fit around \the [H.gloves]!"))
 		return 0
 
 	user.visible_message(SPAN_DANGER("\The [user] is attempting to put [cuff_type] on \the [H]!"))
 
-	if(!do_after(user, 3 SECONDS, target, DO_EQUIP | DO_TARGET_UNIQUE_ACT))
+	if (!do_after(user, 3 SECONDS, target, DO_EQUIP | DO_TARGET_UNIQUE_ACT))
 		return 0
 
-	if(!target.has_danger_grab(user)) // victim may have resisted out of the grab in the meantime
+	if (!target.has_danger_grab(user)) // victim may have resisted out of the grab in the meantime
 		return 0
 
 	var/obj/item/handcuffs/cuffs = src
-	if(dispenser)
+	if (dispenser)
 		cuffs = new(get_turf(user))
-	else if(!user.unEquip(cuffs))
+	else if (!user.unEquip(cuffs))
 		return 0
 
 	admin_attack_log(user, H, "Attempted to handcuff the victim", "Was target of an attempted handcuff", "attempted to handcuff")

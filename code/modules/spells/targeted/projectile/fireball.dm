@@ -33,10 +33,10 @@
 	explosion(get_turf(spell_holder), explosion_radius, explosion_max_power)
 
 /spell/targeted/projectile/dumbfire/fireball/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 
-	if(spell_levels[Sp_POWER]%2 == 1)
+	if (spell_levels[Sp_POWER]%2 == 1)
 		explosion_radius += 1
 		explosion_max_power = max(explosion_max_power - 1, EX_ACT_DEVASTATING) // Increase max power
 	explosion_radius += 2

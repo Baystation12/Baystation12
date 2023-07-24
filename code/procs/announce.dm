@@ -30,26 +30,26 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	announcement_type = "[GLOB.using_map.boss_name] Update"
 
 /datum/announcement/proc/Announce(message as text, new_title = "", new_sound = null, do_newscast = newscast, msg_sanitized = 0, zlevels = GLOB.using_map.contact_levels)
-	if(!message)
+	if (!message)
 		return
 	var/message_title = new_title ? new_title : title
 	var/message_sound = new_sound ? new_sound : sound
 
-	if(!msg_sanitized)
+	if (!msg_sanitized)
 		message = sanitize(message, extra = 0)
 	message_title = sanitizeSafe(message_title)
 
 	var/msg = FormMessage(message, message_title)
 	for(var/mob/M in GLOB.player_list)
-		if(M.client && (get_z(M) in (zlevels | GLOB.using_map.admin_levels)) && !istype(M,/mob/new_player) && !isdeaf(M))
+		if (M.client && (get_z(M) in (zlevels | GLOB.using_map.admin_levels)) && !istype(M,/mob/new_player) && !isdeaf(M))
 			to_chat(M, msg)
-			if(message_sound && M.client.get_preference_value(/datum/client_preference/play_announcement_sfx) == GLOB.PREF_YES)
+			if (message_sound && M.client.get_preference_value(/datum/client_preference/play_announcement_sfx) == GLOB.PREF_YES)
 				sound_to(M, message_sound)
 
-	if(do_newscast)
+	if (do_newscast)
 		NewsCast(message, zlevels)
 
-	if(log)
+	if (log)
 		log_say("[key_name(usr)] has made \a [announcement_type]: [message_title] - [message] - [announcer]")
 		message_admins("[key_name_admin(usr)] has made \a [announcement_type].", 1)
 
@@ -65,7 +65,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 /datum/announcement/priority/FormMessage(message as text, message_title as text)
 	. = "<h1 class='alert'>[message_title]</h1>"
 	. += "<br>[SPAN_CLASS("alert", "[message]")]"
-	if(announcer)
+	if (announcer)
 		. += "<br>[SPAN_CLASS("alert", " -[html_encode(announcer)]")]"
 	. += "<br>"
 
@@ -122,12 +122,12 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	command_announcement.Announce("It has come to our attention that the [station_name()] passed through an ion storm.  Please monitor all electronic equipment for malfunctions.", "Anomaly Alert", zlevels = affecting_z)
 
 /proc/AnnounceArrival(mob/living/carbon/human/character, datum/job/job, join_message)
-	if(!istype(job) || !job.announced)
+	if (!istype(job) || !job.announced)
 		return
 	if (GAME_STATE != RUNLEVEL_GAME)
 		return
 	var/rank = job.title
-	if(character.mind.role_alt_title)
+	if (character.mind.role_alt_title)
 		rank = character.mind.role_alt_title
 
 	AnnounceArrivalSimple(character.real_name, rank, join_message, get_announcement_frequency(job))
@@ -141,22 +141,22 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 	if (security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
 		return "Common"
 
-	if(job.department_flag & (COM | CIV | MSC))
+	if (job.department_flag & (COM | CIV | MSC))
 		return "Common"
-	if(job.department_flag & SUP)
+	if (job.department_flag & SUP)
 		return "Supply"
-	if(job.department_flag & SPT)
+	if (job.department_flag & SPT)
 		return "Command"
-	if(job.department_flag & SEC)
+	if (job.department_flag & SEC)
 		return "Security"
-	if(job.department_flag & ENG)
+	if (job.department_flag & ENG)
 		return "Engineering"
-	if(job.department_flag & MED)
+	if (job.department_flag & MED)
 		return "Medical"
-	if(job.department_flag & SCI)
+	if (job.department_flag & SCI)
 		return "Science"
-	if(job.department_flag & SRV)
+	if (job.department_flag & SRV)
 		return "Service"
-	if(job.department_flag & EXP)
+	if (job.department_flag & EXP)
 		return "Exploration"
 	return "Common"

@@ -74,10 +74,10 @@
 	popup.open()
 
 /obj/item/blueprints/proc/get_area_type(area/A = get_area(src))
-	if(istype(A, /area/space))
+	if (istype(A, /area/space))
 		return AREA_SPACE
 
-	if(A.z in GLOB.using_map.station_levels)
+	if (A.z in GLOB.using_map.station_levels)
 		return AREA_STATION
 
 	return AREA_SPECIAL
@@ -86,12 +86,12 @@
 //	log_debug("create_area")
 
 	var/res = detect_room(get_turf(usr))
-	if(!istype(res,/list))
+	if (!istype(res,/list))
 		switch(res)
-			if(ROOM_ERR_SPACE)
+			if (ROOM_ERR_SPACE)
 				to_chat(usr, SPAN_WARNING("The new area must be completely airtight!"))
 				return
-			if(ROOM_ERR_TOOLARGE)
+			if (ROOM_ERR_TOOLARGE)
 				to_chat(usr, SPAN_WARNING("The new area too large!"))
 				return
 			else
@@ -99,9 +99,9 @@
 				return
 	var/list/turf/turfs = res
 	var/str = sanitizeSafe(input("New area name:","Blueprint Editing", ""), MAX_NAME_LEN)
-	if(!str || !length(str)) //cancel
+	if (!str || !length(str)) //cancel
 		return
-	if(length(str) > 50)
+	if (length(str) > 50)
 		to_chat(usr, SPAN_WARNING("Name too long."))
 		return
 	var/area/A = new
@@ -120,9 +120,9 @@
 
 	var/prevname = A.name
 	var/str = sanitizeSafe(input("New area name:","Blueprint Editing", prevname), MAX_NAME_LEN)
-	if(!str || !length(str) || str==prevname) //cancel
+	if (!str || !length(str) || str==prevname) //cancel
 		return
-	if(length(str) > 50)
+	if (length(str) > 50)
 		to_chat(usr, SPAN_WARNING("Text too long."))
 		return
 	set_area_machinery_title(A,str,prevname)
@@ -169,12 +169,12 @@
 		return BORDER_BETWEEN
 
 	for (var/obj/structure/window/W in T2)
-		if(turn(dir,180) == W.dir)
+		if (turn(dir,180) == W.dir)
 			return BORDER_BETWEEN
 		if (W.dir in list(NORTHEAST,SOUTHEAST,NORTHWEST,SOUTHWEST))
 			return BORDER_2NDTILE
 	for(var/obj/machinery/door/window/D in T2)
-		if(turn(dir,180) == D.dir)
+		if (turn(dir,180) == D.dir)
 			return BORDER_BETWEEN
 	if (locate(/obj/machinery/door) in T2)
 		return BORDER_2NDTILE
@@ -192,11 +192,11 @@
 		for (var/dir in GLOB.cardinal)
 			var/skip = 0
 			for (var/obj/structure/window/W in T)
-				if(dir == W.dir || (W.dir in list(NORTHEAST,SOUTHEAST,NORTHWEST,SOUTHWEST)))
+				if (dir == W.dir || (W.dir in list(NORTHEAST,SOUTHEAST,NORTHWEST,SOUTHWEST)))
 					skip = 1; break
 			if (skip) continue
 			for(var/obj/machinery/door/window/D in T)
-				if(dir == D.dir)
+				if (dir == D.dir)
 					skip = 1; break
 			if (skip) continue
 
@@ -205,13 +205,13 @@
 				continue
 
 			switch(check_tile_is_border(NT,dir))
-				if(BORDER_NONE)
+				if (BORDER_NONE)
 					pending+=NT
-				if(BORDER_BETWEEN)
+				if (BORDER_BETWEEN)
 					//do nothing, may be later i'll add 'rejected' list as optimization
-				if(BORDER_2NDTILE)
+				if (BORDER_2NDTILE)
 					found+=NT //tile included to new area, but we dont seek more
-				if(BORDER_SPACE)
+				if (BORDER_SPACE)
 					return ROOM_ERR_SPACE
 		found+=T
 	return found
@@ -234,9 +234,9 @@
 	. = ..()
 
 /obj/item/blueprints/outpost/get_area_type(area/A = get_area(src))
-	if(istype(A, /area/exoplanet))
+	if (istype(A, /area/exoplanet))
 		return AREA_SPACE
 	var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
-	if(istype(E))
+	if (istype(E))
 		return AREA_STATION
 	return AREA_SPECIAL

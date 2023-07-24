@@ -60,46 +60,46 @@
 	return SPECIES_HUMAN
 
 /datum/species/human/handle_npc(mob/living/carbon/human/H)
-	if(H.stat != CONSCIOUS)
+	if (H.stat != CONSCIOUS)
 		return
 
-	if(H.get_shock() && H.shock_stage < 40 && prob(3))
+	if (H.get_shock() && H.shock_stage < 40 && prob(3))
 		H.emote(pick("moan","groan"))
 
-	if(H.shock_stage > 10 && prob(3))
+	if (H.shock_stage > 10 && prob(3))
 		H.emote(pick("cry","whimper"))
 
-	if(H.shock_stage >= 40 && prob(3))
+	if (H.shock_stage >= 40 && prob(3))
 		H.emote("scream")
 
-	if(!H.restrained() && H.lying && H.shock_stage >= 60 && prob(3))
+	if (!H.restrained() && H.lying && H.shock_stage >= 60 && prob(3))
 		H.custom_emote("thrashes in agony")
 
-	if(!H.restrained() && H.shock_stage < 40 && prob(3))
+	if (!H.restrained() && H.shock_stage < 40 && prob(3))
 		var/maxdam = 0
 		var/obj/item/organ/external/damaged_organ = null
 		for(var/obj/item/organ/external/E in H.organs)
-			if(!E.can_feel_pain()) continue
+			if (!E.can_feel_pain()) continue
 			var/dam = E.get_damage()
 			// make the choice of the organ depend on damage,
 			// but also sometimes use one of the less damaged ones
-			if(dam > maxdam && (maxdam == 0 || prob(50)) )
+			if (dam > maxdam && (maxdam == 0 || prob(50)) )
 				damaged_organ = E
 				maxdam = dam
 		var/datum/pronouns/P = H.choose_from_pronouns()
-		if(damaged_organ)
-			if(damaged_organ.status & ORGAN_BLEEDING)
+		if (damaged_organ)
+			if (damaged_organ.status & ORGAN_BLEEDING)
 				H.custom_emote("clutches [P.his] [damaged_organ.name], trying to stop the blood.")
-			else if(damaged_organ.status & ORGAN_BROKEN)
+			else if (damaged_organ.status & ORGAN_BROKEN)
 				H.custom_emote("holds [P.his] [damaged_organ.name] carefully.")
-			else if(damaged_organ.burn_dam > damaged_organ.brute_dam && damaged_organ.organ_tag != BP_HEAD)
+			else if (damaged_organ.burn_dam > damaged_organ.brute_dam && damaged_organ.organ_tag != BP_HEAD)
 				H.custom_emote("blows on [P.his] [damaged_organ.name] carefully.")
 			else
 				H.custom_emote("rubs [P.his] [damaged_organ.name] carefully.")
 
 		for(var/obj/item/organ/I in H.internal_organs)
-			if((I.status & ORGAN_DEAD) || BP_IS_ROBOTIC(I)) continue
-			if(I.damage > 2) if(prob(2))
+			if ((I.status & ORGAN_DEAD) || BP_IS_ROBOTIC(I)) continue
+			if (I.damage > 2) if (prob(2))
 				var/obj/item/organ/external/parent = H.get_organ(I.parent_organ)
 				H.custom_emote("clutches [P.his] [parent.name]!")
 
@@ -107,7 +107,7 @@
 	if (H.ai_holder)
 		return
 
-	if(H.stat == CONSCIOUS)
+	if (H.stat == CONSCIOUS)
 		return "staring blankly, not reacting to your presence"
 	return ..()
 
@@ -267,8 +267,8 @@
 	return TRUE
 
 /datum/species/skrell/can_float(mob/living/carbon/human/H)
-	if(!H.is_physically_disabled())
-		if(H.encumbrance() < 2)
+	if (!H.is_physically_disabled())
+		if (H.encumbrance() < 2)
 			return TRUE
 	return FALSE
 
@@ -391,31 +391,31 @@
 #define DIONA_LIMB_DEATH_COUNT 9
 /datum/species/diona/handle_death_check(mob/living/carbon/human/H)
 	var/lost_limb_count = length(has_limbs) - length(H.organs)
-	if(lost_limb_count >= DIONA_LIMB_DEATH_COUNT)
+	if (lost_limb_count >= DIONA_LIMB_DEATH_COUNT)
 		return TRUE
 	for(var/thing in H.bad_external_organs)
 		var/obj/item/organ/external/E = thing
-		if(E && E.is_stump())
+		if (E && E.is_stump())
 			lost_limb_count++
 	return (lost_limb_count >= DIONA_LIMB_DEATH_COUNT)
 #undef DIONA_LIMB_DEATH_COUNT
 
 /datum/species/diona/can_understand(mob/other)
 	var/mob/living/carbon/alien/diona/D = other
-	if(istype(D))
+	if (istype(D))
 		return 1
 	return 0
 
 /datum/species/diona/equip_survival_gear(mob/living/carbon/human/H)
-	if(istype(H.get_equipped_item(slot_back), /obj/item/storage/backpack))
+	if (istype(H.get_equipped_item(slot_back), /obj/item/storage/backpack))
 		H.equip_to_slot_or_del(new /obj/item/device/flashlight/flare(H.back), slot_in_backpack)
 	else
 		H.equip_to_slot_or_del(new /obj/item/device/flashlight/flare(H), slot_r_hand)
 
 /datum/species/diona/skills_from_age(age)
 	switch(age)
-		if(101 to 200)	. = 12 // age bracket before this is 46 to 100 . = 8 making this +4
-		if(201 to 300)	. = 16 // + 8
+		if (101 to 200)	. = 12 // age bracket before this is 46 to 100 . = 8 making this +4
+		if (201 to 300)	. = 16 // + 8
 		else			. = ..()
 
 // Dionaea spawned by hand or by joining will not have any
@@ -427,12 +427,12 @@
 
 /datum/species/diona/proc/fill_with_nymphs(mob/living/carbon/human/H)
 
-	if(!H || H.species.name != name) return
+	if (!H || H.species.name != name) return
 
 	var/nymph_count = 0
 	for(var/mob/living/carbon/alien/diona/nymph in H)
 		nymph_count++
-		if(nymph_count >= 3) return
+		if (nymph_count >= 3) return
 
 	while(nymph_count < 3)
 		new /mob/living/carbon/alien/diona/sterile(H)
@@ -440,10 +440,10 @@
 
 /datum/species/diona/handle_death(mob/living/carbon/human/H)
 
-	if(H.isSynthetic())
+	if (H.isSynthetic())
 		var/mob/living/carbon/alien/diona/S = new(get_turf(H))
 
-		if(H.mind)
+		if (H.mind)
 			H.mind.transfer_to(S)
 		H.visible_message(SPAN_DANGER("\The [H] collapses into parts, revealing a solitary diona nymph at the core."))
 		return
@@ -454,20 +454,20 @@
 	return "sap"
 
 /datum/species/diona/handle_environment_special(mob/living/carbon/human/H)
-	if(H.InStasis() || H.stat == DEAD)
+	if (H.InStasis() || H.stat == DEAD)
 		return
 
-	if(H.nutrition < 10)
+	if (H.nutrition < 10)
 		H.take_overall_damage(2,0)
 
-	if(H.hydration < 550 && H.loc)
+	if (H.hydration < 550 && H.loc)
 		var/is_in_water = FALSE
-		if(H.loc.is_flooded(lying_mob = TRUE))
+		if (H.loc.is_flooded(lying_mob = TRUE))
 			is_in_water = TRUE
 		else
 			for(var/obj/structure/hygiene/shower/shower in H.loc)
-				if(shower.on)
+				if (shower.on)
 					is_in_water = TRUE
 					break
-		if(is_in_water)
+		if (is_in_water)
 			H.adjust_hydration(100)

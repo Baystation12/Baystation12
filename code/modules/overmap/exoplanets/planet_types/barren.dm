@@ -18,7 +18,7 @@
 	atmosphere.remove_ratio(0.9)
 
 /obj/effect/overmap/visitable/sector/exoplanet/barren/generate_flora()
-	if(prob(10))
+	if (prob(10))
 		flora_diversity = 1
 	..()
 
@@ -37,7 +37,7 @@
 
 /turf/simulated/floor/exoplanet/barren/on_update_icon()
 	overlays.Cut()
-	if(prob(20))
+	if (prob(20))
 		overlays += image('icons/turf/flooring/decals.dmi', "asteroid[rand(0,9)]")
 
 /turf/simulated/floor/exoplanet/barren/Initialize()

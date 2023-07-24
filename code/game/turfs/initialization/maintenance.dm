@@ -15,10 +15,10 @@
 	web_probability = 0
 
 /singleton/turf_initializer/maintenance/InitializeTurf(turf/simulated/T)
-	if(T.density)
+	if (T.density)
 		return
 	// Quick and dirty check to avoid placing things inside windows
-	if(locate(/obj/structure/grille, T))
+	if (locate(/obj/structure/grille, T))
 		return
 
 	var/cardinal_turfs = T.CardinalTurfs()
@@ -30,43 +30,43 @@
 		T.dirt += rand(0,5)
 	T.update_dirt()
 
-	if(prob(oil_probability))
+	if (prob(oil_probability))
 		new /obj/effect/decal/cleanable/blood/oil(T)
 
-	if(prob(clutter_probability))
+	if (prob(clutter_probability))
 		var/new_junk = get_random_junk_type()
 		new new_junk(T)
 
-	if(prob(vermin_probability))
-		if(prob(80))
+	if (prob(vermin_probability))
+		if (prob(80))
 			new /mob/living/simple_animal/passive/mouse(T)
 		else
 			new /mob/living/simple_animal/passive/lizard(T)
 
-	if(prob(web_probability))	// Keep in mind that only "corners" get any sort of web
+	if (prob(web_probability))	// Keep in mind that only "corners" get any sort of web
 		attempt_web(T, cardinal_turfs)
 
 /singleton/turf_initializer/maintenance/proc/dirty_neighbors(list/cardinal_turfs)
 	var/how_dirty = 0
 	for(var/turf/simulated/T in cardinal_turfs)
 		// Considered dirty if more than halfway to visible dirt
-		if(T.dirt > 25)
+		if (T.dirt > 25)
 			how_dirty++
 	return how_dirty
 
 /singleton/turf_initializer/maintenance/proc/attempt_web(turf/simulated/T)
 	var/turf/north_turf = get_step(T, NORTH)
-	if(!north_turf || !north_turf.density)
+	if (!north_turf || !north_turf.density)
 		return
 
 	for(var/dir in list(WEST, EAST))	// For the sake of efficiency, west wins over east in the case of 1-tile valid spots, rather than doing pick()
 		var/turf/neighbour = get_step(T, dir)
-		if(neighbour && neighbour.density)
-			if(dir == WEST)
+		if (neighbour && neighbour.density)
+			if (dir == WEST)
 				new /obj/effect/decal/cleanable/cobweb(T)
-			if(dir == EAST)
+			if (dir == EAST)
 				new /obj/effect/decal/cleanable/cobweb2(T)
-			if(prob(web_probability))
+			if (prob(web_probability))
 				var/obj/effect/spider/spiderling/spiderling = new /obj/effect/spider/spiderling/mundane/dormant(T)
 				spiderling.pixel_y = spiderling.shift_range
 				spiderling.pixel_x = dir == WEST ? -spiderling.shift_range : spiderling.shift_range

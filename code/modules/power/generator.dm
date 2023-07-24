@@ -35,27 +35,27 @@
 //and a circulator to the WEST of the generator connects first to the NORTH, then to the SOUTH
 //note that the circulator's outlet dir is it's always facing dir, and it's inlet is always the reverse
 /obj/machinery/power/generator/proc/reconnect()
-	if(circ1)
+	if (circ1)
 		circ1.temperature_overlay = null
-	if(circ2)
+	if (circ2)
 		circ2.temperature_overlay = null
 	circ1 = null
 	circ2 = null
-	if(src.loc && anchored)
-		if(src.dir & (EAST|WEST))
+	if (src.loc && anchored)
+		if (src.dir & (EAST|WEST))
 			circ1 = locate(/obj/machinery/atmospherics/binary/circulator) in get_step(src,WEST)
 			circ2 = locate(/obj/machinery/atmospherics/binary/circulator) in get_step(src,EAST)
 
-			if(circ1 && circ2)
-				if(circ1.dir != NORTH || circ2.dir != SOUTH)
+			if (circ1 && circ2)
+				if (circ1.dir != NORTH || circ2.dir != SOUTH)
 					circ1 = null
 					circ2 = null
 
-		else if(src.dir & (NORTH|SOUTH))
+		else if (src.dir & (NORTH|SOUTH))
 			circ1 = locate(/obj/machinery/atmospherics/binary/circulator) in get_step(src,NORTH)
 			circ2 = locate(/obj/machinery/atmospherics/binary/circulator) in get_step(src,SOUTH)
 
-			if(circ1 && circ2 && (circ1.dir != EAST || circ2.dir != WEST))
+			if (circ1 && circ2 && (circ1.dir != EAST || circ2.dir != WEST))
 				circ1 = null
 				circ2 = null
 	update_icon()
@@ -83,7 +83,7 @@
 		return 1
 
 /obj/machinery/power/generator/Process()
-	if(!circ1 || !circ2 || !anchored || inoperable())
+	if (!circ1 || !circ2 || !anchored || inoperable())
 		stored_energy = 0
 		return
 
@@ -98,17 +98,17 @@
 	last_circ1_gen = 0
 	last_circ2_gen = 0
 
-	if(air1 && air2)
+	if (air1 && air2)
 		var/air1_heat_capacity = air1.heat_capacity()
 		var/air2_heat_capacity = air2.heat_capacity()
 		var/delta_temperature = abs(air2.temperature - air1.temperature)
 
-		if(delta_temperature > 0 && air1_heat_capacity > 0 && air2_heat_capacity > 0)
+		if (delta_temperature > 0 && air1_heat_capacity > 0 && air2_heat_capacity > 0)
 			var/energy_transfer = delta_temperature*air2_heat_capacity*air1_heat_capacity/(air2_heat_capacity+air1_heat_capacity)
 			var/heat = energy_transfer*(1-thermal_efficiency)
 			last_thermal_gen = energy_transfer*thermal_efficiency
 
-			if(air2.temperature > air1.temperature)
+			if (air2.temperature > air1.temperature)
 				air2.temperature = air2.temperature - energy_transfer/air2_heat_capacity
 				air1.temperature = air1.temperature + heat/air1_heat_capacity
 			else
@@ -123,13 +123,13 @@
 		circ2.air2.merge(air2)
 
 	//Update the gas networks
-	if(circ1.network2)
+	if (circ1.network2)
 		circ1.network2.update = 1
-	if(circ2.network2)
+	if (circ2.network2)
 		circ2.network2.update = 1
 
 	//Exceeding maximum power leads to some power loss
-	if(effective_gen > max_power && prob(5))
+	if (effective_gen > max_power && prob(5))
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(3, 1, src)
 		s.start()
@@ -147,22 +147,22 @@
 
 	// update icon overlays and power usage only when necessary
 	var/genlev = max(0, min( round(11*effective_gen / max_power), 11))
-	if(effective_gen > 100 && genlev == 0)
+	if (effective_gen > 100 && genlev == 0)
 		genlev = 1
-	if(genlev != lastgenlev)
+	if (genlev != lastgenlev)
 		lastgenlev = genlev
 		update_icon()
 	add_avail(effective_gen)
 
 /obj/machinery/power/generator/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWrench(W))
+	if (isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		anchored = !anchored
 		user.visible_message("[user.name] [anchored ? "secures" : "unsecures"] the bolts holding [src.name] to the floor.", \
 					"You [anchored ? "secure" : "unsecure"] the bolts holding [src] to the floor.", \
 					"You hear a ratchet")
 		update_use_power(anchored)
-		if(anchored) // Powernet connection stuff.
+		if (anchored) // Powernet connection stuff.
 			connect_to_network()
 		else
 			disconnect_from_network()
@@ -171,12 +171,12 @@
 		..()
 
 /obj/machinery/power/generator/CanUseTopic(mob/user)
-	if(!anchored)
+	if (!anchored)
 		return STATUS_CLOSE
 	return ..()
 
 /obj/machinery/power/generator/interface_interact(mob/user)
-	if(!circ1 || !circ2) //Just incase the middle part of the TEG was not wrenched last.
+	if (!circ1 || !circ2) //Just incase the middle part of the TEG was not wrenched last.
 		reconnect()
 	ui_interact(user)
 	return TRUE
@@ -193,7 +193,7 @@
 	data["thermalOutput"] = last_thermal_gen/1000
 	data["circConnected"] = 0
 
-	if(circ1)
+	if (circ1)
 		//The one on the left (or top)
 		data["primaryDir"] = vertical ? "top" : "left"
 		data["primaryOutput"] = last_circ1_gen/1000
@@ -203,7 +203,7 @@
 		data["primaryOutletPressure"] = circ1.air2.return_pressure()
 		data["primaryOutletTemperature"] = circ1.air2.temperature
 
-	if(circ2)
+	if (circ2)
 		//Now for the one on the right (or bottom)
 		data["secondaryDir"] = vertical ? "bottom" : "right"
 		data["secondaryOutput"] = last_circ2_gen/1000
@@ -213,7 +213,7 @@
 		data["secondaryOutletPressure"] = circ2.air2.return_pressure()
 		data["secondaryOutletTemperature"] = circ2.air2.temperature
 
-	if(circ1 && circ2)
+	if (circ1 && circ2)
 		data["circConnected"] = 1
 	else
 		data["circConnected"] = 0
@@ -221,7 +221,7 @@
 
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		// the ui does not exist, so we'll create a new() one
 		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "generator.tmpl", "Thermoelectric Generator", 450, 500)

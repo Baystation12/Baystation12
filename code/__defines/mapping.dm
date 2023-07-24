@@ -11,19 +11,19 @@
 #define DELETE_IF_DUPLICATE_OF(X) \
 	var/other_init = FALSE; \
 	for(var/existing in get_turf(src)) { \
-		if(existing == src) { \
+		if (existing == src) { \
 			continue; \
 		} \
-		if(!istype(existing, X)) { \
+		if (!istype(existing, X)) { \
 			continue; \
 		} \
 		var/atom/A = existing; \
-		if(A.atom_flags & ATOM_FLAG_INITIALIZED) {\
+		if (A.atom_flags & ATOM_FLAG_INITIALIZED) {\
 			other_init = TRUE; \
 			break; \
 		} \
 	} \
-	if(other_init) { \
+	if (other_init) { \
 		crash_with("Deleting duplicate of [log_info_line(src)]"); \
 		return INITIALIZE_HINT_QDEL; \
 	}

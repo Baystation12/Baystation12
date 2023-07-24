@@ -7,7 +7,7 @@
 	data["category"] =   show_category
 	data["functional"] = is_functioning()
 
-	if(is_functioning())	
+	if (is_functioning())
 
 		var/current_storage =  list()
 		data["material_storage"] =  current_storage
@@ -23,7 +23,7 @@
 
 		var/list/current_build = list()
 		data["current_build"] = current_build
-		if(currently_building)
+		if (currently_building)
 			current_build["name"] =       currently_building.target_recipe.name
 			current_build["multiplier"] = currently_building.multiplier
 			current_build["progress"] =   "[100-round((currently_building.remaining_time/currently_building.target_recipe.build_time)*100)]%"
@@ -33,7 +33,7 @@
 			current_build["progress"] =   "-"
 
 		data["build_queue"] = list()
-		if(length(queued_orders))
+		if (length(queued_orders))
 			for(var/datum/fabricator_build_order/order in queued_orders)
 				var/list/order_data = list()
 				order_data["name"] = order.target_recipe.name
@@ -48,14 +48,14 @@
 
 		data["build_options"] = list()
 		for(var/datum/fabricator_recipe/R in SSfabrication.get_recipes(fabricator_class))
-			if(R.hidden && !(fab_status_flags & FAB_HACKED) || (show_category != "All" && show_category != R.category))
+			if (R.hidden && !(fab_status_flags & FAB_HACKED) || (show_category != "All" && show_category != R.category))
 				continue
 			var/list/build_option = list()
 			var/max_sheets = 0
 			build_option["name"] =      R.name
 			build_option["reference"] = "\ref[R]"
 			build_option["illegal"] =   R.hidden
-			if(!length(R.resources))
+			if (!length(R.resources))
 				build_option["cost"] = "No resources required."
 				max_sheets = 100
 			else
@@ -63,13 +63,13 @@
 				var/list/material_components = list()
 				for(var/material in R.resources)
 					var/sheets = round(stored_material[material]/round(R.resources[material]*mat_efficiency))
-					if(isnull(max_sheets) || max_sheets > sheets)
+					if (isnull(max_sheets) || max_sheets > sheets)
 						max_sheets = sheets
-					if(stored_material[material] < round(R.resources[material]*mat_efficiency))
+					if (stored_material[material] < round(R.resources[material]*mat_efficiency))
 						build_option["unavailable"] = 1
 					material_components += "[round(R.resources[material] * mat_efficiency)] [stored_substances_to_names[material]]"
 				build_option["cost"] = "[capitalize(jointext(material_components, ", "))]."
-			if(ispath(R.path, /obj/item/stack) && max_sheets >= PRINT_MULTIPLIER_DIVISOR)
+			if (ispath(R.path, /obj/item/stack) && max_sheets >= PRINT_MULTIPLIER_DIVISOR)
 				var/obj/item/stack/R_stack = R.path
 				build_option["multipliers"] = list()
 				for(var/i = 1 to floor(min(R_stack.max_amount, max_sheets)/PRINT_MULTIPLIER_DIVISOR))

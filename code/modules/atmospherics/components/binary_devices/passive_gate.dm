@@ -41,10 +41,10 @@
 	icon_state = (unlocked && flowing)? "on" : "off"
 
 /obj/machinery/atmospherics/binary/passive_gate/update_underlays()
-	if(..())
+	if (..())
 		underlays.Cut()
 		var/turf/T = get_turf(src)
-		if(!istype(T))
+		if (!istype(T))
 			return
 		add_underlay(T, node1, turn(dir, 180))
 		add_underlay(T, node2, dir)
@@ -57,7 +57,7 @@
 
 	last_flow_rate = 0
 
-	if(!unlocked)
+	if (!unlocked)
 		return 0
 
 	var/output_starting_pressure = air2.return_pressure()
@@ -72,7 +72,7 @@
 
 	//-1 if pump_gas() did not move any gas, >= 0 otherwise
 	var/returnval = -1
-	if((regulate_mode == REGULATE_NONE || pressure_delta > 0.01) && (air1.temperature > 0 || air2.temperature > 0))	//since it's basically a valve, it makes sense to check both temperatures
+	if ((regulate_mode == REGULATE_NONE || pressure_delta > 0.01) && (air1.temperature > 0 || air2.temperature > 0))	//since it's basically a valve, it makes sense to check both temperatures
 		flowing = 1
 
 		//flow rate limit
@@ -89,10 +89,10 @@
 		returnval = pump_gas_passive(src, air1, air2, transfer_moles)
 
 	if (returnval >= 0)
-		if(network1)
+		if (network1)
 			network1.update = 1
 
-		if(network2)
+		if (network2)
 			network2.update = 1
 
 	if (last_flow_rate)
@@ -106,11 +106,11 @@
 /obj/machinery/atmospherics/binary/passive_gate/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
-	if(frequency)
+	if (frequency)
 		radio_connection = radio_controller.add_object(src, frequency, object_filter = RADIO_ATMOSIA)
 
 /obj/machinery/atmospherics/binary/passive_gate/proc/broadcast_status()
-	if(!radio_connection)
+	if (!radio_connection)
 		return 0
 
 	var/datum/signal/signal = new
@@ -133,7 +133,7 @@
 
 /obj/machinery/atmospherics/binary/passive_gate/Initialize()
 	. = ..()
-	if(frequency)
+	if (frequency)
 		set_frequency(frequency)
 
 /obj/machinery/atmospherics/binary/passive_gate/Destroy()
@@ -141,26 +141,26 @@
 	. = ..()
 
 /obj/machinery/atmospherics/binary/passive_gate/receive_signal(datum/signal/signal)
-	if(!signal.data["tag"] || (signal.data["tag"] != id) || (signal.data["sigtype"]!="command"))
+	if (!signal.data["tag"] || (signal.data["tag"] != id) || (signal.data["sigtype"]!="command"))
 		return 0
 
-	if("set_power" in signal.data)
+	if ("set_power" in signal.data)
 		unlocked = text2num(signal.data["set_power"])
 
-	if("power_toggle" in signal.data)
+	if ("power_toggle" in signal.data)
 		unlocked = !unlocked
 
-	if("set_target_pressure" in signal.data)
+	if ("set_target_pressure" in signal.data)
 		target_pressure = text2num(signal.data["set_target_pressure"])
 		target_pressure = clamp(target_pressure, 0, max_pressure_setting)
 
-	if("set_regulate_mode" in signal.data)
+	if ("set_regulate_mode" in signal.data)
 		regulate_mode = text2num(signal.data["set_regulate_mode"])
 
-	if("set_flow_rate" in signal.data)
+	if ("set_flow_rate" in signal.data)
 		regulate_mode = text2num(signal.data["set_flow_rate"])
 
-	if("status" in signal.data)
+	if ("status" in signal.data)
 		spawn(2)
 			broadcast_status()
 		return //do not update_icon
@@ -201,12 +201,12 @@
 
 
 /obj/machinery/atmospherics/binary/passive_gate/Topic(href,href_list)
-	if(..()) return 1
+	if (..()) return 1
 
-	if(href_list["toggle_valve"])
+	if (href_list["toggle_valve"])
 		unlocked = !unlocked
 
-	if(href_list["regulate_mode"])
+	if (href_list["regulate_mode"])
 		switch(href_list["regulate_mode"])
 			if ("off") regulate_mode = REGULATE_NONE
 			if ("input") regulate_mode = REGULATE_INPUT
@@ -236,7 +236,7 @@
 	return
 
 /obj/machinery/atmospherics/binary/passive_gate/attackby(obj/item/W as obj, mob/user as mob)
-	if(!isWrench(W))
+	if (!isWrench(W))
 		return ..()
 	if (unlocked)
 		to_chat(user, SPAN_WARNING("You cannot unwrench \the [src], turn it off first."))

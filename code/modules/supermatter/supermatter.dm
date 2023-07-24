@@ -121,7 +121,7 @@
 	. = ..()
 
 /obj/machinery/power/supermatter/proc/handle_admin_warnings()
-	if(disable_adminwarn)
+	if (disable_adminwarn)
 		return
 
 	// Generic checks, similar to checks done by supermatter monitor program.
@@ -133,8 +133,8 @@
 
 	// EPR check. Only runs when supermatter is energised. Triggers when there is very low amount of coolant in the core (less than one standard canister).
 	// This usually means a core breach or deliberate venting.
-	if(get_status() && (get_epr() < 0.5))
-		if(!aw_EPR)
+	if (get_status() && (get_epr() < 0.5))
+		if (!aw_EPR)
 			var/area/A = get_area(src)
 			log_and_message_admins("WARN: Supermatter EPR value low. Possible core breach detected in [A.name]", null, src)
 		aw_EPR = TRUE
@@ -143,11 +143,11 @@
 
 /obj/machinery/power/supermatter/proc/status_adminwarn_check(min_status, current_state, message, send_to_irc = FALSE)
 	var/status = get_status()
-	if(status >= min_status)
-		if(!current_state)
+	if (status >= min_status)
+		if (!current_state)
 			var/area/A = get_area(src)
 			log_and_message_admins(message + " in [A.name]", null, src)
-			if(send_to_irc)
+			if (send_to_irc)
 				send_to_admin_discord(message + " in [A.name]")
 		return TRUE
 	else
@@ -155,34 +155,34 @@
 
 /obj/machinery/power/supermatter/proc/get_epr()
 	var/turf/T = get_turf(src)
-	if(!istype(T))
+	if (!istype(T))
 		return
 	var/datum/gas_mixture/air = T.return_air()
-	if(!air)
+	if (!air)
 		return 0
 	return round((air.total_moles / air.group_multiplier) / 23.1, 0.01)
 
 /obj/machinery/power/supermatter/proc/get_status()
 	var/turf/T = get_turf(src)
-	if(!T)
+	if (!T)
 		return SUPERMATTER_ERROR
 	var/datum/gas_mixture/air = T.return_air()
-	if(!air)
+	if (!air)
 		return SUPERMATTER_ERROR
 
-	if(grav_pulling || exploded)
+	if (grav_pulling || exploded)
 		return SUPERMATTER_DELAMINATING
 
-	if(get_integrity() < 25)
+	if (get_integrity() < 25)
 		return SUPERMATTER_EMERGENCY
 
-	if(get_integrity() < 50)
+	if (get_integrity() < 50)
 		return SUPERMATTER_DANGER
 
-	if((get_integrity() < 100) || (air.temperature > critical_temperature))
+	if ((get_integrity() < 100) || (air.temperature > critical_temperature))
 		return SUPERMATTER_WARNING
 
-	if(power > 5)
+	if (power > 5)
 		return SUPERMATTER_NORMAL
 	return SUPERMATTER_INACTIVE
 
@@ -190,7 +190,7 @@
 /obj/machinery/power/supermatter/proc/explode()
 	set waitfor = 0
 
-	if(exploded)
+	if (exploded)
 		return
 
 	log_and_message_admins("Supermatter delaminating at [x] [y] [z]")
@@ -199,7 +199,7 @@
 	exploded = 1
 	sleep(pull_time)
 	var/turf/TS = get_turf(src)		// The turf supermatter is on. SM being in a locker, exosuit, or other container shouldn't block it's effects that way.
-	if(!istype(TS))
+	if (!istype(TS))
 		return
 
 	var/list/affected_z = GetConnectedZlevels(TS.z)
@@ -210,9 +210,9 @@
 
 	for(var/mob/living/mob in GLOB.alive_mobs)
 		var/turf/TM = get_turf(mob)
-		if(!TM)
+		if (!TM)
 			continue
-		if(!(TM.z in affected_z))
+		if (!(TM.z in affected_z))
 			continue
 
 		mob.Weaken(DETONATION_MOB_CONCUSSION)
@@ -220,21 +220,21 @@
 
 	// Effect 2: Z-level wide electrical pulse
 	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
-		if(!(A.z in affected_z))
+		if (!(A.z in affected_z))
 			continue
 
 		// Overloads lights
-		if(prob(DETONATION_APC_OVERLOAD_PROB))
+		if (prob(DETONATION_APC_OVERLOAD_PROB))
 			A.overload_lighting()
 		// Causes the APCs to go into system failure mode.
 		var/random_change = rand(100 - DETONATION_SHUTDOWN_RNG_FACTOR, 100 + DETONATION_SHUTDOWN_RNG_FACTOR) / 100
-		if(A.is_critical)
+		if (A.is_critical)
 			A.energy_fail(round(DETONATION_SHUTDOWN_CRITAPC * random_change))
 		else
 			A.energy_fail(round(DETONATION_SHUTDOWN_APC * random_change))
 
 	for(var/obj/machinery/power/smes/buildable/S in SSmachines.machinery)
-		if(!(S.z in affected_z))
+		if (!(S.z in affected_z))
 			continue
 		// Causes SMESes to shut down for a bit
 		var/random_change = rand(100 - DETONATION_SHUTDOWN_RNG_FACTOR, 100 + DETONATION_SHUTDOWN_RNG_FACTOR) / 100
@@ -243,9 +243,9 @@
 	// Effect 3: Break solar arrays
 
 	for(var/obj/machinery/power/solar/S in SSmachines.machinery)
-		if(!(S.z in affected_z))
+		if (!(S.z in affected_z))
 			continue
-		if(prob(DETONATION_SOLAR_BREAK_CHANCE))
+		if (prob(DETONATION_SOLAR_BREAK_CHANCE))
 			S.set_broken(TRUE)
 
 
@@ -257,17 +257,17 @@
 
 /obj/machinery/power/supermatter/examine(mob/user)
 	. = ..()
-	if(user.skill_check(SKILL_ENGINES, SKILL_EXPERIENCED))
+	if (user.skill_check(SKILL_ENGINES, SKILL_EXPERIENCED))
 		var/integrity_message
 		switch(get_integrity())
-			if(0 to 30)
+			if (0 to 30)
 				integrity_message = SPAN_DANGER("It looks highly unstable!")
-			if(31 to 70)
+			if (31 to 70)
 				integrity_message = "It appears to be losing cohesion!"
 			else
 				integrity_message = "At a glance, it seems to be in sound shape."
 		to_chat(user, integrity_message)
-		if(user.skill_check(SKILL_ENGINES, SKILL_MASTER))
+		if (user.skill_check(SKILL_ENGINES, SKILL_MASTER))
 			var/display_power = power
 			display_power *= (0.85 + 0.3 * rand())
 			display_power = round(display_power, 20)
@@ -275,7 +275,7 @@
 
 //Changes color and luminosity of the light to these values if they were not already set
 /obj/machinery/power/supermatter/proc/shift_light(lum, clr)
-	if(lum != light_outer_range || clr != light_color)
+	if (lum != light_outer_range || clr != light_color)
 		set_light(1, 0.1, lum, l_color = clr)
 
 /obj/machinery/power/supermatter/proc/get_integrity()
@@ -289,57 +289,57 @@
 	var/integrity = get_integrity()
 	var/alert_msg = " Integrity at [integrity]%"
 
-	if(damage > emergency_point)
+	if (damage > emergency_point)
 		alert_msg = emergency_alert + alert_msg
 		lastwarning = world.timeofday - WARNING_DELAY * 4
-	else if(damage >= damage_archived) // The damage is still going up
+	else if (damage >= damage_archived) // The damage is still going up
 		safe_warned = 0
 		alert_msg = warning_alert + alert_msg
 		lastwarning = world.timeofday
-	else if(!safe_warned)
+	else if (!safe_warned)
 		safe_warned = 1 // We are safe, warn only once
 		alert_msg = safe_alert
 		lastwarning = world.timeofday
 	else
 		alert_msg = null
-	if(alert_msg)
+	if (alert_msg)
 		GLOB.global_announcer.autosay(alert_msg, "Supermatter Monitor", "Engineering")
 		//Public alerts
-		if((damage > emergency_point) && !public_alert)
+		if ((damage > emergency_point) && !public_alert)
 			GLOB.global_announcer.autosay("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT! SAFEROOMS UNBOLTED.", "Supermatter Monitor")
 			public_alert = 1
 			GLOB.using_map.unbolt_saferooms() // torch
 			for(var/mob/M in GLOB.player_list)
 				var/turf/T = get_turf(M)
-				if(T && (T.z in GLOB.using_map.station_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
+				if (T && (T.z in GLOB.using_map.station_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
 					sound_to(M, 'sound/ambience/matteralarm.ogg')
-		else if(safe_warned && public_alert)
+		else if (safe_warned && public_alert)
 			GLOB.global_announcer.autosay(alert_msg, "Supermatter Monitor")
 			public_alert = 0
 
 /obj/machinery/power/supermatter/Process()
 	var/turf/L = loc
 
-	if(isnull(L))		// We have a null turf...something is wrong, stop processing this entity.
+	if (isnull(L))		// We have a null turf...something is wrong, stop processing this entity.
 		return PROCESS_KILL
 
-	if(!istype(L)) 	//We are in a crate or somewhere that isn't turf, if we return to turf resume processing but for now.
+	if (!istype(L)) 	//We are in a crate or somewhere that isn't turf, if we return to turf resume processing but for now.
 		return  //Yeah just stop.
 
-	if(damage > explosion_point)
-		if(!exploded)
-			if(!istype(L, /turf/space) && (L.z in GLOB.using_map.station_levels))
+	if (damage > explosion_point)
+		if (!exploded)
+			if (!istype(L, /turf/space) && (L.z in GLOB.using_map.station_levels))
 				announce_warning()
 			explode()
-	else if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
+	else if (damage > warning_point) // while the core is still damaged and it's still worth noting its status
 		shift_light(5, warning_color)
-		if(damage > emergency_point)
+		if (damage > emergency_point)
 			shift_light(7, emergency_color)
-		if(!istype(L, /turf/space) && ((world.timeofday - lastwarning) >= WARNING_DELAY * 10) && (L.z in GLOB.using_map.station_levels))
+		if (!istype(L, /turf/space) && ((world.timeofday - lastwarning) >= WARNING_DELAY * 10) && (L.z in GLOB.using_map.station_levels))
 			announce_warning()
 	else
 		shift_light(4,base_color)
-	if(grav_pulling)
+	if (grav_pulling)
 		supermatter_pull(src)
 
 	//Send state changed events
@@ -358,11 +358,11 @@
 	//We want the cap to scale linearly with power (and explosion_point). Let's aim for a cap of 5 at power = 300 (based on testing, equals roughly 5% per SM alert announcement).
 	var/damage_inc_limit = (power/300)*(explosion_point/1000)*damage_rate_limit
 
-	if(!istype(L, /turf/space))
+	if (!istype(L, /turf/space))
 		env = L.return_air()
 		removed = env.remove(gasefficency * env.total_moles)	//Remove gas from surrounding area
 
-	if(!env || !removed || !removed.total_moles)
+	if (!env || !removed || !removed.total_moles)
 		damage_archived = damage
 		damage += max((power - 15*power_factor)/10, 0)
 	else if (grav_pulling) //If supermatter is detonating, remove all air from the zone
@@ -415,7 +415,7 @@
 			continue
 		if (BP_IS_ROBOTIC(eyes))
 			continue
-		if(subject.has_meson_effect())
+		if (subject.has_meson_effect())
 			continue
 		var/effect = max(0, min(200, power * config_hallucination_power * sqrt( 1 / max(1,get_dist(subject, src)))) )
 		subject.adjust_hallucination(effect, 0.25 * effect)
@@ -423,8 +423,8 @@
 	var/level = Interpolate(0, 50, clamp( (damage - emergency_point) / (explosion_point - emergency_point),0,1))
 	var/list/new_color = color_contrast(level )
 	//Apply visual effects based on damage
-	if(rotation_angle != 0)
-		if(level != 0)
+	if (rotation_angle != 0)
+		if (level != 0)
 			new_color = multiply_matrices(new_color, color_rotation(rotation_angle), 4, 3,3)
 		else
 			new_color = color_rotation(rotation_angle)
@@ -450,20 +450,20 @@
 
 /obj/machinery/power/supermatter/bullet_act(obj/item/projectile/Proj)
 	var/turf/L = loc
-	if(!istype(L))		// We don't run process() when we are in space
+	if (!istype(L))		// We don't run process() when we are in space
 		return 0	// This stops people from being able to really power up the supermatter
 				// Then bring it inside to explode instantly upon landing on a valid turf.
 
 
 	var/proj_damage = Proj.get_structure_damage()
-	if(istype(Proj, /obj/item/projectile/beam))
+	if (istype(Proj, /obj/item/projectile/beam))
 		power += proj_damage * config_bullet_energy	* charging_factor / power_factor
 	else
 		damage += proj_damage * config_bullet_energy
 	return 0
 
 /obj/machinery/power/supermatter/attack_robot(mob/user as mob)
-	if(Adjacent(user))
+	if (Adjacent(user))
 		return attack_hand(user)
 	else
 		ui_interact(user)
@@ -491,10 +491,10 @@
 	var/datum/gas_mixture/env = null
 	var/turf/T = get_turf(src)
 
-	if(istype(T))
+	if (istype(T))
 		env = T.return_air()
 
-	if(!env)
+	if (!env)
 		data["ambient_temp"] = 0
 		data["ambient_pressure"] = 0
 	else
@@ -512,7 +512,7 @@
 
 
 /obj/machinery/power/supermatter/attackby(obj/item/W as obj, mob/living/user as mob)
-	if(istype(W, /obj/item/tape_roll))
+	if (istype(W, /obj/item/tape_roll))
 		to_chat(user, SPAN_NOTICE("You repair some of the damage to \the [src] with \the [W]."))
 		damage = max(damage - 10, 0)
 		playsound(src, 'sound/effects/tape.ogg', 25)
@@ -530,15 +530,15 @@
 
 
 /obj/machinery/power/supermatter/Bumped(atom/AM as mob|obj)
-	if(istype(AM, /obj/effect))
+	if (istype(AM, /obj/effect))
 		return
-	if(istype(AM, /mob/living))
+	if (istype(AM, /mob/living))
 		AM.visible_message(
 			SPAN_WARNING("\The [AM] slams into \the [src], inducing a resonance. For a brief instant, \his body glows brilliantly, then flashes into ash."),
 			SPAN_DANGER(FONT_LARGE("You slam into \the [src], and your mind fills with unearthly shrieking. Your vision floods with light as your body instantly dissolves into dust.")),
 			SPAN_WARNING("You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.")
 		)
-	else if(!grav_pulling) //To prevent spam, detonating supermatter does not indicate non-mobs being destroyed
+	else if (!grav_pulling) //To prevent spam, detonating supermatter does not indicate non-mobs being destroyed
 		AM.visible_message(
 			SPAN_WARNING("\The [AM] smacks into \the [src] and rapidly flashes to ash."),
 			SPAN_WARNING("You hear a loud crack as you are washed with a wave of heat.")
@@ -548,7 +548,7 @@
 
 
 /obj/machinery/power/supermatter/proc/Consume(mob/living/user)
-	if(istype(user))
+	if (istype(user))
 		user.dust()
 		power += 200
 	else
@@ -558,7 +558,7 @@
 
 	//Some poor sod got eaten, go ahead and irradiate people nearby.
 	for(var/mob/living/l in range(10))
-		if(l in view())
+		if (l in view())
 			to_chat(l, SPAN_WARNING("As \the [src] slowly stops resonating, you feel an intense wave of heat wash over you."))
 		else
 			to_chat(l, SPAN_WARNING("You hear a muffled, shrill ringing as an intense wave of heat washes over you."))
@@ -579,11 +579,11 @@
 /obj/machinery/power/supermatter/ex_act(severity)
 	..()
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			power *= 4
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			power *= 3
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			power *= 2
 	log_and_message_admins("WARN: Explosion near the Supermatter! New EER: [power].")
 

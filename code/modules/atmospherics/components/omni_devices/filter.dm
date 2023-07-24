@@ -68,33 +68,33 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 
 /obj/machinery/atmospherics/omni/filter/sort_ports()
 	for(var/datum/omni_port/P in ports)
-		if(P.update)
-			if(output == P)
+		if (P.update)
+			if (output == P)
 				output = null
-			if(input == P)
+			if (input == P)
 				input = null
-			if(P in gas_filters)
+			if (P in gas_filters)
 				gas_filters -= P
 
 			P.air.volume = ATMOS_DEFAULT_VOLUME_FILTER
 			switch(P.mode)
-				if(ATM_INPUT)
+				if (ATM_INPUT)
 					input = P
-				if(ATM_OUTPUT)
+				if (ATM_OUTPUT)
 					output = P
-				if(ATM_GAS_MIN to ATM_GAS_MAX)
+				if (ATM_GAS_MIN to ATM_GAS_MAX)
 					gas_filters += P
 
 /obj/machinery/atmospherics/omni/filter/error_check()
-	if(!input || !output || !gas_filters)
+	if (!input || !output || !gas_filters)
 		return 1
-	if(length(gas_filters) < 1) //requires at least 1 filter ~otherwise why are you using a filter?
+	if (length(gas_filters) < 1) //requires at least 1 filter ~otherwise why are you using a filter?
 		return 1
 
 	return 0
 
 /obj/machinery/atmospherics/omni/filter/Process()
-	if(!..())
+	if (!..())
 		return 0
 
 	var/datum/gas_mixture/output_air = output.air	//BYOND doesn't like referencing "output.air.return_pressure()" so we need to make a direct reference
@@ -117,18 +117,18 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 		last_power_draw = power_draw
 		use_power_oneoff(power_draw)
 
-		if(input.network)
+		if (input.network)
 			input.network.update = 1
-		if(output.network)
+		if (output.network)
 			output.network.update = 1
 		for(var/datum/omni_port/P in gas_filters)
-			if(P.network)
+			if (P.network)
 				P.network.update = 1
 
 	return 1
 
 /obj/machinery/atmospherics/omni/filter/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	if(!user)
+	if (!user)
 		if (ui)
 			ui.close()
 		return
@@ -155,7 +155,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 
 	var/portData[0]
 	for(var/datum/omni_port/P in ports)
-		if(!configuring && P.mode == 0)
+		if (!configuring && P.mode == 0)
 			continue
 
 		var/input = 0
@@ -163,13 +163,13 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 		var/is_filter = 1
 		var/f_type = null
 		switch(P.mode)
-			if(ATM_INPUT)
+			if (ATM_INPUT)
 				input = 1
 				is_filter = 0
-			if(ATM_OUTPUT)
+			if (ATM_OUTPUT)
 				output = 1
 				is_filter = 0
-			if(ATM_GAS_MIN to ATM_GAS_MAX)
+			if (ATM_GAS_MIN to ATM_GAS_MAX)
 				f_type = mode_send_switch(P.mode)
 
 		portData[LIST_PRE_INC(portData)] = list("dir" = dir_name(P.dir, capitalize = 1), \
@@ -178,9 +178,9 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 										"filter" = is_filter, \
 										"f_type" = f_type)
 
-	if(length(portData))
+	if (length(portData))
 		data["ports"] = portData
-	if(output)
+	if (output)
 		data["set_flow_rate"] = round(set_flow_rate*10)		//because nanoui can't handle rounded decimals.
 		data["last_flow_rate"] = round(last_flow_rate*10)
 
@@ -190,27 +190,27 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 	return GLOB.filter_mode_to_gas["[mode]"]
 
 /obj/machinery/atmospherics/omni/filter/Topic(href, href_list)
-	if(..()) return 1
+	if (..()) return 1
 	switch(href_list["command"])
-		if("power")
-			if(!configuring)
+		if ("power")
+			if (!configuring)
 				update_use_power(!use_power)
 			else
 				update_use_power(POWER_USE_OFF)
-		if("configure")
+		if ("configure")
 			configuring = !configuring
-			if(configuring)
+			if (configuring)
 				update_use_power(POWER_USE_OFF)
 
 	//only allows config changes when in configuring mode ~otherwise you'll get weird pressure stuff going on
-	if(configuring && !use_power)
+	if (configuring && !use_power)
 		switch(href_list["command"])
-			if("set_flow_rate")
+			if ("set_flow_rate")
 				var/new_flow_rate = input(usr,"Enter new flow rate limit (0-[max_flow_rate]L/s)","Flow Rate Control",set_flow_rate) as num
 				set_flow_rate = clamp(new_flow_rate, 0, max_flow_rate)
-			if("switch_mode")
+			if ("switch_mode")
 				switch_mode(dir_flag(href_list["dir"]), mode_return_switch(href_list["mode"]))
-			if("switch_filter")
+			if ("switch_filter")
 				var/new_filter = input(usr,"Select filter mode:","Change filter",href_list["mode"]) in GLOB.filter_gas_to_mode
 				switch_filter(dir_flag(href_list["dir"]), mode_return_switch(new_filter))
 
@@ -220,39 +220,39 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 
 /obj/machinery/atmospherics/omni/filter/proc/mode_return_switch(mode)
 	. = GLOB.filter_gas_to_mode[mode]
-	if(!.)
+	if (!.)
 		switch(mode)
-			if("in")
+			if ("in")
 				return ATM_INPUT
-			if("out")
+			if ("out")
 				return ATM_OUTPUT
 
 /obj/machinery/atmospherics/omni/filter/proc/switch_filter(dir, mode)
 	//check they aren't trying to disable the input or output ~this can only happen if they hack the cached tmpl file
 	for(var/datum/omni_port/P in ports)
-		if(P.dir == dir)
-			if(P.mode == ATM_INPUT || P.mode == ATM_OUTPUT)
+		if (P.dir == dir)
+			if (P.mode == ATM_INPUT || P.mode == ATM_OUTPUT)
 				return
 
 	switch_mode(dir, mode)
 
 /obj/machinery/atmospherics/omni/filter/proc/switch_mode(port, mode)
-	if(mode == null || !port)
+	if (mode == null || !port)
 		return
 	var/datum/omni_port/target_port = null
 	var/list/other_ports = new()
 
 	for(var/datum/omni_port/P in ports)
-		if(P.dir == port)
+		if (P.dir == port)
 			target_port = P
 		else
 			other_ports += P
 
 	var/previous_mode = null
-	if(target_port)
+	if (target_port)
 		previous_mode = target_port.mode
 		target_port.mode = mode
-		if(target_port.mode != previous_mode)
+		if (target_port.mode != previous_mode)
 			handle_port_change(target_port)
 			rebuild_filtering_list()
 		else
@@ -261,10 +261,10 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 		return
 
 	for(var/datum/omni_port/P in other_ports)
-		if(P.mode == mode)
+		if (P.mode == mode)
 			var/old_mode = P.mode
 			P.mode = previous_mode
-			if(P.mode != old_mode)
+			if (P.mode != old_mode)
 				handle_port_change(P)
 
 	update_ports()
@@ -273,12 +273,12 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 	filtering_outputs.Cut()
 	for(var/datum/omni_port/P in ports)
 		var/gasid = GLOB.filter_mode_to_gas_id["[P.mode]"]
-		if(gasid)
+		if (gasid)
 			filtering_outputs[gasid] = P.air
 
 /obj/machinery/atmospherics/omni/filter/proc/handle_port_change(datum/omni_port/P)
 	switch(P.mode)
-		if(ATM_NONE)
+		if (ATM_NONE)
 			initialize_directions &= ~P.dir
 			P.disconnect()
 		else

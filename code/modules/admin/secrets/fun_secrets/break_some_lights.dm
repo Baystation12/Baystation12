@@ -3,5 +3,5 @@
 
 /datum/admin_secret_item/fun_secret/break_some_lights/execute(mob/user)
 	. = ..()
-	if(.)
+	if (.)
 		lightsout(1,2)

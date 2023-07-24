@@ -27,23 +27,23 @@ How they spawn stuff is decided by behaviour vars, which are explained below
 /spell/aoe_turf/conjure/cast(list/targets, mob/user)
 
 	for(var/i=1,i <= summon_amt,i++)
-		if(!length(targets))
+		if (!length(targets))
 			break
 		var/summoned_object_type
-		if(summon_exclusive)
-			if(!length(summon_type))
+		if (summon_exclusive)
+			if (!length(summon_type))
 				break
 			summoned_object_type = summon_type[1]
 			summon_type -= summoned_object_type
 		else
 			summoned_object_type = pick(summon_type)
 		var/turf/spawn_place = pick(targets)
-		if(spell_flags & IGNOREPREV)
+		if (spell_flags & IGNOREPREV)
 			targets -= spawn_place
 
 		var/atom/summoned_object
-		if(ispath(summoned_object_type,/turf))
-			if(istype(get_turf(user),/turf/simulated/shuttle) || istype(spawn_place, /turf/simulated/shuttle))
+		if (ispath(summoned_object_type,/turf))
+			if (istype(get_turf(user),/turf/simulated/shuttle) || istype(spawn_place, /turf/simulated/shuttle))
 				to_chat(user, SPAN_WARNING("You can't build things on shuttles!"))
 				continue
 			spawn_place.ChangeTurf(summoned_object_type)
@@ -56,16 +56,16 @@ How they spawn stuff is decided by behaviour vars, which are explained below
 		animation.anchored = TRUE
 		animation.icon = 'icons/effects/effects.dmi'
 		animation.layer = BASE_HUMAN_LAYER
-		if(istype(summoned_object,/mob)) //we want them to NOT attack us.
+		if (istype(summoned_object,/mob)) //we want them to NOT attack us.
 			var/mob/M = summoned_object
 			M.faction = user.faction
 		for(var/varName in newVars)
-			if(varName in summoned_object.vars)
+			if (varName in summoned_object.vars)
 				summoned_object.vars[varName] = newVars[varName]
 
-		if(duration)
+		if (duration)
 			spawn(duration)
-				if(summoned_object && !istype(summoned_object, /turf))
+				if (summoned_object && !istype(summoned_object, /turf))
 					qdel(summoned_object)
 		conjure_animation(animation, spawn_place)
 	return

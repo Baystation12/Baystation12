@@ -17,7 +17,7 @@
 	STOP_PROCESSING(SSprocessing, src)
 	QDEL_NULL(network)
 
-	if(air && air.volume)
+	if (air && air.volume)
 		temporarily_store_air()
 		QDEL_NULL(air)
 	for(var/obj/machinery/atmospherics/pipe/P in members)
@@ -30,9 +30,9 @@
 /datum/pipeline/Process()//This use to be called called from the pipe networks
 	//Check to see if pressure is within acceptable limits
 	var/pressure = air.return_pressure()
-	if(pressure > maximum_pressure)
+	if (pressure > maximum_pressure)
 		for(var/obj/machinery/atmospherics/pipe/member in members)
-			if(!member.check_pressure(pressure))
+			if (!member.check_pressure(pressure))
 				members.Remove(member)
 				break //Only delete 1 pipe per process
 
@@ -54,13 +54,13 @@
 	base.parent = src
 	maximum_pressure = base.maximum_pressure
 
-	if(base.air_temporary)
+	if (base.air_temporary)
 		air = base.air_temporary
 		base.air_temporary = null
 	else
 		air = new
 
-	if(base.leaking)
+	if (base.leaking)
 		leaks |= base
 
 	while(length(possible_expansions)>0)
@@ -69,11 +69,11 @@
 			var/list/result = borderline.pipeline_expansion()
 			var/edge_check = length(result)
 
-			if(length(result)>0)
+			if (length(result)>0)
 				for(var/obj/machinery/atmospherics/pipe/item in result)
-					if(item.in_stasis)
+					if (item.in_stasis)
 						continue
-					if(!members.Find(item))
+					if (!members.Find(item))
 						members += item
 						possible_expansions += item
 
@@ -82,15 +82,15 @@
 
 						maximum_pressure = min(maximum_pressure, item.maximum_pressure)
 
-						if(item.air_temporary)
+						if (item.air_temporary)
 							air.merge(item.air_temporary)
 
-						if(item.leaking)
+						if (item.leaking)
 							leaks |= item
 
 					edge_check--
 
-			if(edge_check>0)
+			if (edge_check>0)
 				edges += borderline
 
 			possible_expansions -= borderline
@@ -99,7 +99,7 @@
 
 /datum/pipeline/proc/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 
-	if(new_network.line_members.Find(src))
+	if (new_network.line_members.Find(src))
 		return 0
 
 	new_network.line_members += src
@@ -109,14 +109,14 @@
 
 	for(var/obj/machinery/atmospherics/pipe/edge in edges)
 		for(var/obj/machinery/atmospherics/result in edge.pipeline_expansion())
-			if(!istype(result,/obj/machinery/atmospherics/pipe) && (result!=reference))
+			if (!istype(result,/obj/machinery/atmospherics/pipe) && (result!=reference))
 				result.network_expand(new_network, edge)
 
 
 	return 1
 
 /datum/pipeline/proc/return_network(obj/machinery/atmospherics/reference)
-	if(!network)
+	if (!network)
 		network = new /datum/pipe_network()
 		network.build_network(src, null)
 			//technically passing these parameters should not be allowed
@@ -129,7 +129,7 @@
 	var/datum/gas_mixture/air_sample = air.remove_ratio(mingle_volume/air.volume)
 	air_sample.volume = mingle_volume
 
-	if(istype(target) && target.zone)
+	if (istype(target) && target.zone)
 		//Have to consider preservation of group statuses
 		var/datum/gas_mixture/turf_copy = new
 
@@ -150,19 +150,19 @@
 		air.merge(air_sample)
 		//turf_air already modified by equalize_gases()
 
-	if(network)
+	if (network)
 		network.update = 1
 
 /datum/pipeline/proc/temperature_interact(turf/target, share_volume, thermal_conductivity)
 	var/total_heat_capacity = air.heat_capacity()
 	var/partial_heat_capacity = total_heat_capacity*(share_volume/air.volume)
 
-	if(istype(target, /turf/simulated))
+	if (istype(target, /turf/simulated))
 		var/turf/simulated/modeled_location = target
 
-		if(modeled_location.blocks_air)
+		if (modeled_location.blocks_air)
 
-			if((modeled_location.heat_capacity>0) && (partial_heat_capacity>0))
+			if ((modeled_location.heat_capacity>0) && (partial_heat_capacity>0))
 				var/delta_temperature = air.temperature - modeled_location.temperature
 
 				var/heat = thermal_conductivity*delta_temperature* \
@@ -175,7 +175,7 @@
 			var/delta_temperature = 0
 			var/sharer_heat_capacity = 0
 
-			if(modeled_location.zone)
+			if (modeled_location.zone)
 				delta_temperature = (air.temperature - modeled_location.zone.air.temperature)
 				sharer_heat_capacity = modeled_location.zone.air.heat_capacity()
 			else
@@ -185,7 +185,7 @@
 			var/self_temperature_delta = 0
 			var/sharer_temperature_delta = 0
 
-			if((sharer_heat_capacity>0) && (partial_heat_capacity>0))
+			if ((sharer_heat_capacity>0) && (partial_heat_capacity>0))
 				var/heat = thermal_conductivity*delta_temperature* \
 					(partial_heat_capacity*sharer_heat_capacity/(partial_heat_capacity+sharer_heat_capacity))
 
@@ -196,21 +196,21 @@
 
 			air.temperature += self_temperature_delta
 
-			if(modeled_location.zone)
+			if (modeled_location.zone)
 				modeled_location.zone.air.temperature += sharer_temperature_delta/modeled_location.zone.air.group_multiplier
 			else
 				modeled_location.air.temperature += sharer_temperature_delta
 
 
 	else
-		if((target.heat_capacity>0) && (partial_heat_capacity>0))
+		if ((target.heat_capacity>0) && (partial_heat_capacity>0))
 			var/delta_temperature = air.temperature - target.temperature
 
 			var/heat = thermal_conductivity*delta_temperature* \
 				(partial_heat_capacity*target.heat_capacity/(partial_heat_capacity+target.heat_capacity))
 
 			air.temperature -= heat/total_heat_capacity
-	if(network)
+	if (network)
 		network.update = 1
 
 //surface must be the surface area in m^2
@@ -221,7 +221,7 @@
 	var/heat_gain = get_thermal_radiation(air.temperature, surface, RADIATOR_EXPOSED_SURFACE_AREA_RATIO, thermal_conductivity)
 
 	air.add_thermal_energy(heat_gain)
-	if(network)
+	if (network)
 		network.update = 1
 
 //Returns the amount of heat gained while in space due to thermal radiation (usually a negative value)

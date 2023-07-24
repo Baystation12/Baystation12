@@ -17,30 +17,30 @@
 
 /obj/item/device/personal_shield/Initialize()
 	. = ..()
-	if(ispath(power_cell))
+	if (ispath(power_cell))
 		power_cell = new power_cell(src)
 		currently_stored_power = power_cell.use(max_stored_power)
 
 /obj/item/device/personal_shield/Destroy()
 	QDEL_NULL(shield)
-	if(!ispath(power_cell))
+	if (!ispath(power_cell))
 		QDEL_NULL(power_cell)
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/item/device/personal_shield/Process(wait)
-	if(!power_cell?.charge || currently_stored_power >= max_stored_power)
+	if (!power_cell?.charge || currently_stored_power >= max_stored_power)
 		return PROCESS_KILL
 	var/amount_to_restore = min(restored_power_per_tick * wait, max_stored_power - currently_stored_power)
 	currently_stored_power += power_cell.use(amount_to_restore)
 
-	if(enable_when_powered && currently_stored_power >= shield_power_cost)
+	if (enable_when_powered && currently_stored_power >= shield_power_cost)
 		turn_on(get_holder_of_type(src, /mob))
 
 /obj/item/device/personal_shield/examine(mob/user, distance)
 	. = ..()
-	if(open)
-		if(power_cell)
+	if (open)
+		if (power_cell)
 			to_chat(user, "There is \a [power_cell] in \the [src].")
 		else
 			to_chat(user, "There is no cell in \the [src].")
@@ -92,8 +92,8 @@
 		toggle(user)
 
 /obj/item/device/personal_shield/attack_hand(mob/living/user)
-	if(open && (loc == user))
-		if(power_cell)
+	if (open && (loc == user))
+		if (power_cell)
 			user.visible_message("\The [user] removes \the [power_cell] from \the [src].", SPAN_NOTICE("You remove \the [power_cell] from \the [src]."))
 			turn_off()
 			user.put_in_active_hand(power_cell)
@@ -113,14 +113,14 @@
 	. = ..()
 
 /obj/item/device/personal_shield/equipped(mob/user, slot)
-	if(slot != slot_belt && slot != slot_l_hand && slot != slot_r_hand)
+	if (slot != slot_belt && slot != slot_l_hand && slot != slot_r_hand)
 		turn_off()
 	. = ..()
 
 /obj/item/device/personal_shield/emp_act(severity)
-	if(power_cell)
+	if (power_cell)
 		power_cell.emp_act(severity)
-		if(shield)
+		if (shield)
 			visible_message(SPAN_DANGER("\The [src] explodes!"))
 			explosion(src, 1, EX_ACT_LIGHT)
 			qdel(src)
@@ -129,12 +129,12 @@
 
 /obj/item/device/personal_shield/proc/turn_on(mob/user)
 	enable_when_powered = FALSE
-	if(shield || open || !user)
+	if (shield || open || !user)
 		return
-	if(!power_cell)
+	if (!power_cell)
 		to_chat(user, SPAN_WARNING("\The [src] doesn't have a power supply."))
 		return
-	if(currently_stored_power < shield_power_cost)
+	if (currently_stored_power < shield_power_cost)
 		to_chat(user, SPAN_WARNING("\The [src]'s internal capacitor does not have enough charge."))
 		return
 	shield = new shield_type(user, src)
@@ -142,14 +142,14 @@
 	update_icon()
 
 /obj/item/device/personal_shield/proc/turn_off(mob/user)
-	if(!shield)
+	if (!shield)
 		return
 	QDEL_NULL(shield)
 	update_name()
 	update_icon()
 
 /obj/item/device/personal_shield/proc/toggle(mob/user)
-	if(shield)
+	if (shield)
 		turn_off(user)
 	else
 		turn_on(user)
@@ -161,37 +161,37 @@
 	return ..()
 
 /obj/item/device/personal_shield/proc/take_charge()
-	if(!actual_take_charge())
+	if (!actual_take_charge())
 		turn_off()
 		return FALSE
 	return TRUE
 
 /obj/item/device/personal_shield/proc/actual_take_charge()
-	if(!power_cell)
+	if (!power_cell)
 		return FALSE
-	if(currently_stored_power < shield_power_cost)
+	if (currently_stored_power < shield_power_cost)
 		return FALSE
 
 	currently_stored_power -= shield_power_cost
 	START_PROCESSING(SSobj, src)
 
-	if(currently_stored_power < shield_power_cost)
+	if (currently_stored_power < shield_power_cost)
 		enable_when_powered = TRUE
 		return FALSE
 	return TRUE
 
 /obj/item/device/personal_shield/on_update_icon()
 	..()
-	if(shield)
+	if (shield)
 		icon_state = "batterer"
 	else
-		if(open)
+		if (open)
 			icon_state = "battereropen[power_cell ? "full" : "empty"]"
 		else
 			icon_state = "battereroff"
 
 /obj/item/device/personal_shield/proc/update_name()
-	if(shield)
+	if (shield)
 		SetName("activated [initial(name)]")
 	else
 		SetName(initial(name))

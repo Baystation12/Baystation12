@@ -33,12 +33,12 @@
 
 	//if we take too much damage, drop out - the generator will bring us back up if we have enough power
 	ticks_recovering = min(ticks_recovering + 2, 10)
-	if(strength < 1)
+	if (strength < 1)
 		set_invisibility(INVISIBILITY_ABSTRACT)
 		set_density(0)
 		ticks_recovering = 10
 		strength = 0
-	else if(strength >= 1)
+	else if (strength >= 1)
 		set_invisibility(0)
 		set_density(1)
 
@@ -49,10 +49,10 @@
 
 	//if we take too much damage, drop out - the generator will bring us back up if we have enough power
 	var/old_density = density
-	if(strength >= 1)
+	if (strength >= 1)
 		set_invisibility(0)
 		set_density(1)
-	else if(strength < 1)
+	else if (strength < 1)
 		set_invisibility(INVISIBILITY_ABSTRACT)
 		set_density(0)
 

@@ -79,7 +79,7 @@
 	return ..()
 
 /obj/item/stock_parts/computer/battery_module/proc/charge_to_full()
-	if(battery)
+	if (battery)
 		battery.charge = battery.maxcharge
 
 /obj/item/stock_parts/computer/battery_module/get_cell()

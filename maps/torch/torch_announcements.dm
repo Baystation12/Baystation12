@@ -34,7 +34,7 @@
 
 /datum/map/torch/level_x_biohazard_sound(bio_level)
 	switch(bio_level)
-		if(7)
+		if (7)
 			return sound('sound/AI/torch/outbreak7.ogg', volume = 45)
 		else
 			return sound('sound/AI/torch/outbreak5.ogg', volume = 45)

@@ -13,7 +13,7 @@
 	hitsound = 'sound/magic/forcewall.ogg'
 
 /obj/item/scrying/attack_self(mob/user as mob)
-	if((user.mind && !GLOB.wizards.is_antagonist(user.mind)))
+	if ((user.mind && !GLOB.wizards.is_antagonist(user.mind)))
 		to_chat(user, SPAN_WARNING("You stare into the orb and see nothing but your own reflection."))
 		return
 
@@ -32,7 +32,7 @@
 
 /obj/item/dice/d20/cursed/attack_self(mob/living/user)
 	..()
-	if(icon_state == "[name][sides]")
+	if (icon_state == "[name][sides]")
 		user.adjustBruteLoss(-30)
-	else if(icon_state == "[name]1")
+	else if (icon_state == "[name]1")
 		user.adjustBruteLoss(30)

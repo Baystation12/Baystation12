@@ -18,14 +18,14 @@
 	update_icon()
 
 /obj/item/glass_jar/afterattack(atom/A, mob/user, proximity)
-	if(!proximity || contains)
+	if (!proximity || contains)
 		return
-	if(istype(A, /mob))
+	if (istype(A, /mob))
 		var/accept = 0
 		for(var/D in accept_mobs)
-			if(istype(A, D))
+			if (istype(A, D))
 				accept = 1
-		if(!accept)
+		if (!accept)
 			to_chat(user, "[A] doesn't fit into \the [src].")
 			return
 		var/mob/L = A
@@ -34,7 +34,7 @@
 		contains = 2
 		update_icon()
 		return
-	else if(istype(A, /obj/effect/spider/spiderling))
+	else if (istype(A, /obj/effect/spider/spiderling))
 		var/obj/effect/spider/spiderling/S = A
 		user.visible_message(SPAN_NOTICE("[user] scoops [S] into \the [src]."), SPAN_NOTICE("You scoop [S] into \the [src]."))
 		S.forceMove(src)
@@ -45,21 +45,21 @@
 
 /obj/item/glass_jar/attack_self(mob/user)
 	switch(contains)
-		if(1)
+		if (1)
 			for(var/obj/O in src)
 				O.dropInto(user.loc)
 			to_chat(user, SPAN_NOTICE("You take money out of \the [src]."))
 			contains = 0
 			update_icon()
 			return
-		if(2)
+		if (2)
 			for(var/mob/M in src)
 				M.dropInto(user.loc)
 				user.visible_message(SPAN_NOTICE("[user] releases [M] from \the [src]."), SPAN_NOTICE("You release [M] from \the [src]."))
 			contains = 0
 			update_icon()
 			return
-		if(3)
+		if (3)
 			for(var/obj/effect/spider/spiderling/S in src)
 				S.dropInto(user.loc)
 				user.visible_message(SPAN_NOTICE("[user] releases [S] from \the [src]."), SPAN_NOTICE("You release [S] from \the [src]."))
@@ -69,12 +69,12 @@
 			return
 
 /obj/item/glass_jar/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/spacecash))
-		if(contains == 0)
+	if (istype(W, /obj/item/spacecash))
+		if (contains == 0)
 			contains = 1
-		if(contains != 1)
+		if (contains != 1)
 			return
-		if(!user.unEquip(W, src))
+		if (!user.unEquip(W, src))
 			return
 		var/obj/item/spacecash/S = W
 		user.visible_message(SPAN_NOTICE("[user] puts [S.worth] [S.worth > 1 ? GLOB.using_map.local_currency_name : GLOB.using_map.local_currency_name_singular] into \the [src]."))
@@ -84,10 +84,10 @@
 	underlays.Cut()
 	overlays.Cut()
 	switch(contains)
-		if(0)
+		if (0)
 			SetName(initial(name))
 			desc = initial(desc)
-		if(1)
+		if (1)
 			SetName("tip jar")
 			desc = "A small jar with money inside."
 			for(var/obj/item/spacecash/S in src)
@@ -98,14 +98,14 @@
 					money.pixel_y = rand(-6, 6)
 					money.SetTransform(scale = 0.6)
 					underlays += money
-		if(2)
+		if (2)
 			for(var/mob/M in src)
 				var/image/victim = image(M.icon, M.icon_state)
 				victim.pixel_y = 6
 				underlays += victim
 				SetName("glass jar with [M]")
 				desc = "A small jar with [M] inside."
-		if(3)
+		if (3)
 			for(var/obj/effect/spider/spiderling/S in src)
 				var/image/victim = image(S.icon, S.icon_state)
 				underlays += victim

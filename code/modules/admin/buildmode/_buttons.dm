@@ -27,13 +27,13 @@
 
 /obj/effect/bmode/dir/OnClick(list/parameters)
 	switch(dir)
-		if(SOUTH)
+		if (SOUTH)
 			set_dir(WEST)
-		if(WEST)
+		if (WEST)
 			set_dir(NORTH)
-		if(NORTH)
+		if (NORTH)
 			set_dir(EAST)
-		if(EAST)
+		if (EAST)
 			set_dir(NORTHWEST)
 		else
 			set_dir(SOUTH)
@@ -54,15 +54,15 @@
 	icon_state = host.current_build_mode.icon_state
 
 /obj/effect/bmode/mode/OnClick(list/parameters)
-	if(parameters["left"])
+	if (parameters["left"])
 		var/datum/build_mode/build_mode = input("Select build mode", "Select build mode", host.current_build_mode) as null|anything in host.build_modes
-		if(build_mode && host && (build_mode in host.build_modes))
+		if (build_mode && host && (build_mode in host.build_modes))
 			host.current_build_mode.Unselected()
 			build_mode.Selected()
 			host.current_build_mode = build_mode
 			icon_state = build_mode.icon_state
 			to_chat(usr, SPAN_NOTICE("Build mode '[host.current_build_mode]' selected."))
-	else if(parameters["right"])
+	else if (parameters["right"])
 		host.current_build_mode.Configurate()
 
 /obj/effect/bmode/quit

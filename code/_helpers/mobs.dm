@@ -5,7 +5,7 @@
 	return src
 
 /mob/living/bot/mulebot/get_mob()
-	if(load && istype(load, /mob/living))
+	if (load && istype(load, /mob/living))
 		return list(src, load)
 	return src
 
@@ -17,7 +17,7 @@
 	var/list/mobs = list()
 	for(var/atom/movable/AM in view(range, source))
 		var/M = AM.get_mob()
-		if(M)
+		if (M)
 			mobs += M
 
 	return mobs
@@ -27,7 +27,7 @@
 
 	var/datum/species/mob_species = all_species[species]
 	var/list/valid_hairstyles = mob_species.get_hair_styles()
-	if(length(valid_hairstyles))
+	if (length(valid_hairstyles))
 		h_style = pick(valid_hairstyles)
 
 	return h_style
@@ -36,7 +36,7 @@
 	var/f_style = "Shaved"
 	var/datum/species/mob_species = all_species[species]
 	var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(gender)
-	if(length(valid_facialhairstyles))
+	if (length(valid_facialhairstyles))
 		f_style = pick(valid_facialhairstyles)
 		return f_style
 
@@ -48,54 +48,54 @@
 /proc/random_skin_tone(datum/species/current_species)
 	var/species_tone = current_species ? 35 - current_species.max_skin_tone() : -185
 	switch(pick(60;"caucasian", 15;"afroamerican", 10;"african", 10;"latino", 5;"albino"))
-		if("caucasian")		. = -10
-		if("afroamerican")	. = -115
-		if("african")		. = -165
-		if("latino")		. = -55
-		if("albino")		. = 34
+		if ("caucasian")		. = -10
+		if ("afroamerican")	. = -115
+		if ("african")		. = -165
+		if ("latino")		. = -55
+		if ("albino")		. = 34
 		else				. = rand(species_tone,34)
 
 	return min(max(. + rand(-25, 25), species_tone), 34)
 
 /proc/skintone2racedescription(tone)
 	switch (tone)
-		if(30 to INFINITY)		return "albino"
-		if(20 to 30)			return "pale"
-		if(5 to 15)				return "light skinned"
-		if(-10 to 5)			return "white"
-		if(-25 to -10)			return "tan"
-		if(-45 to -25)			return "darker skinned"
-		if(-65 to -45)			return "brown"
-		if(-INFINITY to -65)	return "black"
+		if (30 to INFINITY)		return "albino"
+		if (20 to 30)			return "pale"
+		if (5 to 15)				return "light skinned"
+		if (-10 to 5)			return "white"
+		if (-25 to -10)			return "tan"
+		if (-45 to -25)			return "darker skinned"
+		if (-65 to -45)			return "brown"
+		if (-INFINITY to -65)	return "black"
 		else					return "unknown"
 
 /proc/age2agedescription(age)
 	switch(age)
-		if(0 to 1)			return "infant"
-		if(1 to 3)			return "toddler"
-		if(3 to 13)			return "child"
-		if(13 to 19)		return "teenager"
-		if(19 to 30)		return "young adult"
-		if(30 to 45)		return "adult"
-		if(45 to 60)		return "middle-aged"
-		if(60 to 70)		return "aging"
-		if(70 to INFINITY)	return "elderly"
+		if (0 to 1)			return "infant"
+		if (1 to 3)			return "toddler"
+		if (3 to 13)			return "child"
+		if (13 to 19)		return "teenager"
+		if (19 to 30)		return "young adult"
+		if (30 to 45)		return "adult"
+		if (45 to 60)		return "middle-aged"
+		if (60 to 70)		return "aging"
+		if (70 to INFINITY)	return "elderly"
 		else				return "unknown"
 
 /proc/RoundHealth(health)
 	var/list/icon_states = icon_states('icons/mob/hud_med.dmi')
 	for(var/icon_state in icon_states)
-		if(health >= text2num(icon_state))
+		if (health >= text2num(icon_state))
 			return icon_state
 	return icon_states[length(icon_states)] // If we had no match, return the last element
 
 //checks whether this item is a module of the robot it is located in.
 /proc/is_robot_module(obj/item/thing)
-	if(!thing)
+	if (!thing)
 		return FALSE
-	if(istype(thing.loc, /mob/living/exosuit))
+	if (istype(thing.loc, /mob/living/exosuit))
 		return FALSE
-	if(!istype(thing.loc, /mob/living/silicon/robot))
+	if (!istype(thing.loc, /mob/living/silicon/robot))
 		return FALSE
 	var/mob/living/silicon/robot/R = thing.loc
 	return (thing in R.module.equipment)
@@ -236,7 +236,7 @@
 	RETURN_TYPE(/list)
 	var/list/mobs = list()
 	for(var/mob/living/M in oview(origin)) // Only living mobs are considered able.
-		if(!M.is_physically_disabled())
+		if (!M.is_physically_disabled())
 			mobs += M
 	return mobs
 
@@ -254,7 +254,7 @@
 /mob/proc/add_to_living_mob_list()
 	return FALSE
 /mob/living/add_to_living_mob_list()
-	if((src in GLOB.alive_mobs) || (src in GLOB.dead_mobs))
+	if ((src in GLOB.alive_mobs) || (src in GLOB.dead_mobs))
 		return FALSE
 	GLOB.alive_mobs += src
 	return TRUE
@@ -267,7 +267,7 @@
 /mob/proc/add_to_dead_mob_list()
 	return FALSE
 /mob/living/add_to_dead_mob_list()
-	if((src in GLOB.alive_mobs) || (src in GLOB.dead_mobs))
+	if ((src in GLOB.alive_mobs) || (src in GLOB.dead_mobs))
 		return FALSE
 	GLOB.dead_mobs += src
 	return TRUE
@@ -279,47 +279,47 @@
 //Find a dead mob with a brain and client.
 /proc/find_dead_player(find_key, include_observers = 0)
 	RETURN_TYPE(/mob)
-	if(isnull(find_key))
+	if (isnull(find_key))
 		return
 
 	var/mob/selected = null
 
-	if(include_observers)
+	if (include_observers)
 		for(var/mob/M in GLOB.player_list)
-			if((M.stat != DEAD) || (!M.client))
+			if ((M.stat != DEAD) || (!M.client))
 				continue
-			if(M.ckey == find_key)
+			if (M.ckey == find_key)
 				selected = M
 				break
 	else
 		for(var/mob/living/M in GLOB.player_list)
 			//Dead people only thanks!
-			if((M.stat != DEAD) || (!M.client))
+			if ((M.stat != DEAD) || (!M.client))
 				continue
 			//They need a brain!
-			if(istype(M, /mob/living/carbon/human))
+			if (istype(M, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
-				if(H.should_have_organ(BP_BRAIN) && !H.has_brain())
+				if (H.should_have_organ(BP_BRAIN) && !H.has_brain())
 					continue
-			if(M.ckey == find_key)
+			if (M.ckey == find_key)
 				selected = M
 				break
 	return selected
 
 /proc/damflags_to_strings(damflags)
 	var/list/res = list()
-	if(damflags & DAMAGE_FLAG_SHARP)
+	if (damflags & DAMAGE_FLAG_SHARP)
 		res += "sharp"
-	if(damflags & DAMAGE_FLAG_EDGE)
+	if (damflags & DAMAGE_FLAG_EDGE)
 		res += "edge"
-	if(damflags & DAMAGE_FLAG_LASER)
+	if (damflags & DAMAGE_FLAG_LASER)
 		res += "laser"
-	if(damflags & DAMAGE_FLAG_BULLET)
+	if (damflags & DAMAGE_FLAG_BULLET)
 		res += "bullet"
-	if(damflags & DAMAGE_FLAG_EXPLODE)
+	if (damflags & DAMAGE_FLAG_EXPLODE)
 		res += "explode"
-	if(damflags & DAMAGE_FLAG_DISPERSED)
+	if (damflags & DAMAGE_FLAG_DISPERSED)
 		res += "dispersed"
-	if(damflags & DAMAGE_FLAG_BIO)
+	if (damflags & DAMAGE_FLAG_BIO)
 		res += "bio"
 	return english_list(res)

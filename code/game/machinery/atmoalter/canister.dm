@@ -166,9 +166,9 @@
 
 	..()
 
-	if(valve_open)
+	if (valve_open)
 		var/datum/gas_mixture/environment
-		if(holding)
+		if (holding)
 			environment = holding.air_contents
 		else
 			environment = loc.return_air()
@@ -176,17 +176,17 @@
 		var/env_pressure = environment.return_pressure()
 		var/pressure_delta = release_pressure - env_pressure
 
-		if((air_contents.temperature > 0) && (pressure_delta > 0))
+		if ((air_contents.temperature > 0) && (pressure_delta > 0))
 			var/transfer_moles = calculate_transfer_moles(air_contents, environment, pressure_delta)
 			transfer_moles = min(transfer_moles, (release_flow_rate/air_contents.volume)*air_contents.total_moles) //flow rate limit
 
 			var/returnval = pump_gas_passive(src, air_contents, environment, transfer_moles)
-			if(returnval >= 0)
+			if (returnval >= 0)
 				src.update_icon()
-				if(holding)
+				if (holding)
 					holding.queue_icon_update()
 
-	if(air_contents.return_pressure() < 1)
+	if (air_contents.return_pressure() < 1)
 		can_label = 1
 	else
 		can_label = 0
@@ -195,24 +195,24 @@
 
 /obj/machinery/portable_atmospherics/canister/proc/return_temperature()
 	var/datum/gas_mixture/GM = src.return_air()
-	if(GM && GM.volume>0)
+	if (GM && GM.volume>0)
 		return GM.temperature
 	return 0
 
 /obj/machinery/portable_atmospherics/canister/proc/return_pressure()
 	var/datum/gas_mixture/GM = src.return_air()
-	if(GM && GM.volume>0)
+	if (GM && GM.volume>0)
 		return GM.return_pressure()
 	return 0
 
 /obj/machinery/portable_atmospherics/canister/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(user, /mob/living/silicon/robot) && istype(W, /obj/item/tank/jetpack))
+	if (istype(user, /mob/living/silicon/robot) && istype(W, /obj/item/tank/jetpack))
 		var/datum/gas_mixture/thejetpack = W:air_contents
 		var/env_pressure = thejetpack.return_pressure()
 		var/pressure_delta = min(10*ONE_ATMOSPHERE - env_pressure, (air_contents.return_pressure() - env_pressure)/2)
 		//Can not have a pressure delta that would cause environment pressure > tank pressure
 		var/transfer_moles = 0
-		if((air_contents.temperature > 0) && (pressure_delta > 0))
+		if ((air_contents.temperature > 0) && (pressure_delta > 0))
 			transfer_moles = pressure_delta*thejetpack.volume/(air_contents.temperature * R_IDEAL_GAS_EQUATION)//Actually transfer the gas
 			var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
 			thejetpack.merge(removed)
@@ -251,19 +251,19 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/portable_atmospherics/canister/OnTopic(mob/user, href_list, state)
-	if(href_list["toggle"])
+	if (href_list["toggle"])
 		if (!valve_open)
-			if(!holding)
+			if (!holding)
 				log_open()
 		valve_open = !valve_open
 		. = TOPIC_REFRESH
 
 	else if (href_list["remove_tank"])
-		if(!holding)
+		if (!holding)
 			return TOPIC_HANDLED
 		if (valve_open)
 			valve_open = 0
-		if(istype(holding, /obj/item/tank))
+		if (istype(holding, /obj/item/tank))
 			holding.manipulated_by = user.real_name
 		holding.dropInto(loc)
 		holding = null
@@ -272,7 +272,7 @@
 
 	else if (href_list["pressure_adj"])
 		var/diff = text2num(href_list["pressure_adj"])
-		if(diff > 0)
+		if (diff > 0)
 			release_pressure = min(10*ONE_ATMOSPHERE, release_pressure+diff)
 		else
 			release_pressure = max(ONE_ATMOSPHERE/10, release_pressure+diff)
@@ -300,7 +300,7 @@
 		. = TOPIC_REFRESH
 
 /obj/machinery/portable_atmospherics/canister/CanUseTopic()
-	if(destroyed)
+	if (destroyed)
 		return STATUS_CLOSE
 	return ..()
 

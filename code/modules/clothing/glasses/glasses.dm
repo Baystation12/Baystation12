@@ -21,9 +21,9 @@
 
 /obj/item/clothing/glasses/Initialize()
 	. = ..()
-	if(toggleable)
+	if (toggleable)
 		set_extension(src, /datum/extension/base_icon_state, icon_state)
-	if(ispath(hud))
+	if (ispath(hud))
 		hud = new hud(src)
 
 /obj/item/clothing/glasses/Destroy()
@@ -35,16 +35,16 @@
 	return ..() || overlay || vision_flags || see_invisible || darkness_view
 
 /obj/item/clothing/glasses/proc/activate(mob/user)
-	if(toggleable && !active)
+	if (toggleable && !active)
 		active = TRUE
 		flash_protection = initial(flash_protection)
 		tint = initial(tint)
-		if(user)
+		if (user)
 			user.update_inv_glasses()
 			user.update_action_buttons()
-			if(activation_sound)
+			if (activation_sound)
 				sound_to(user, activation_sound)
-			if(toggle_on_message)
+			if (toggle_on_message)
 				to_chat(user, toggle_on_message)
 			else
 				to_chat(user, "You activate the optical matrix on \the [src].")
@@ -54,15 +54,15 @@
 		update_vision()
 
 /obj/item/clothing/glasses/proc/deactivate(mob/user, manual = TRUE)
-	if(toggleable && active)
+	if (toggleable && active)
 		active = FALSE
-		if(user)
-			if(manual)
-				if(toggle_off_message)
+		if (user)
+			if (manual)
+				if (toggle_off_message)
 					to_chat(user, toggle_off_message)
 				else
 					to_chat(user, "You deactivate the optical matrix on \the [src].")
-				if(deactivation_sound)
+				if (deactivation_sound)
 					sound_to(user, deactivation_sound)
 			user.update_inv_glasses()
 			user.update_action_buttons()
@@ -74,37 +74,37 @@
 		update_vision()
 
 /obj/item/clothing/glasses/emp_act(severity)
-	if(electric && active)
-		if(istype(src.loc, /mob/living/carbon/human))
+	if (electric && active)
+		if (istype(src.loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/M = src.loc
-			if(M.glasses != src)
+			if (M.glasses != src)
 				to_chat(M, SPAN_DANGER("\The [name] malfunction[gender != PLURAL ? "s":""], releasing a small spark."))
 			else
 				M.eye_blind = 2
 				M.eye_blurry = 4
 				to_chat(M, SPAN_DANGER("\The [name] malfunction[gender != PLURAL ? "s":""], blinding you!"))
 				// Don't cure being nearsighted
-				if(!(M.disabilities & NEARSIGHTED))
+				if (!(M.disabilities & NEARSIGHTED))
 					M.disabilities |= NEARSIGHTED
 					spawn(100)
 						M.disabilities &= ~NEARSIGHTED
-			if(toggleable)
+			if (toggleable)
 				deactivate(M, FALSE)
 	..()
 
 /obj/item/clothing/glasses/attack_self(mob/user)
-	if(toggleable && !user.incapacitated())
-		if(active)
+	if (toggleable && !user.incapacitated())
+		if (active)
 			deactivate(user)
 		else
 			activate(user)
 
 /obj/item/clothing/glasses/inherit_custom_item_data(datum/custom_item/citem)
 	. = ..()
-	if(toggleable)
-		if(citem.additional_data["icon_on"])
+	if (toggleable)
+		if (citem.additional_data["icon_on"])
 			set_icon_state(citem.additional_data["icon_on"])
-		if(citem.additional_data["icon_off"])
+		if (citem.additional_data["icon_off"])
 			off_state = citem.additional_data["icon_off"]
 
 /obj/item/clothing/glasses/meson
@@ -231,8 +231,8 @@
 	set name = "Adjust welding goggles"
 	set src in usr
 
-	if(!usr.incapacitated())
-		if(src.up)
+	if (!usr.incapacitated())
+		if (src.up)
 			src.up = !src.up
 			flags_inv |= HIDEEYES
 			body_parts_covered |= EYES
@@ -280,7 +280,7 @@
 	unacidable = TRUE
 
 /obj/item/clothing/glasses/augment_binoculars/attack_self(mob/user)
-	if(zoom)
+	if (zoom)
 		unzoom(user)
 	else
 		zoom(user)

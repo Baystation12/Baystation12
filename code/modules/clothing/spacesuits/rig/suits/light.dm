@@ -141,11 +141,11 @@
 	set desc = "Rename your black voidsuit."
 	set category = "Object"
 	var/mob/M = usr
-	if(!M.mind) return 0
-	if(M.incapacitated()) return 0
+	if (!M.mind) return 0
+	if (M.incapacitated()) return 0
 	var/input = sanitizeSafe(input("What do you want to name your suit?", "Rename suit"), MAX_NAME_LEN)
-	if(src && input && !M.incapacitated() && in_range(M,src))
-		if(!findtext(input, "the", 1, 4))
+	if (src && input && !M.incapacitated() && in_range(M,src))
+		if (!findtext(input, "the", 1, 4))
 			input = "\improper [input]"
 		SetName(input)
 		to_chat(M, "Suit naming successful!")
@@ -158,10 +158,10 @@
 	set desc = "Give your voidsuit a custom description."
 	set category = "Object"
 	var/mob/M = usr
-	if(!M.mind) return 0
-	if(M.incapacitated()) return 0
+	if (!M.mind) return 0
+	if (M.incapacitated()) return 0
 	var/input = sanitizeSafe(input("Please describe your voidsuit in 128 letters or less.", "write description"), MAX_DESC_LEN)
-	if(src && input && !M.incapacitated() && in_range(M,src))
+	if (src && input && !M.incapacitated() && in_range(M,src))
 		desc = input
 		to_chat(M, "Suit description successful!")
 		verbs -= /obj/item/rig/light/ninja/verb/rename_suit

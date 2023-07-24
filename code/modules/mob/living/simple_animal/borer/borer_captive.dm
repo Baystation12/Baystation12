@@ -13,11 +13,11 @@
 /mob/living/captive_brain/say(message)
 
 	if (src.client)
-		if(client.prefs.muted & MUTE_IC)
+		if (client.prefs.muted & MUTE_IC)
 			to_chat(src, SPAN_WARNING("You cannot speak in IC (muted)."))
 			return
 
-	if(istype(src.loc,/mob/living/simple_animal/borer))
+	if (istype(src.loc,/mob/living/simple_animal/borer))
 
 		message = sanitize(message)
 		if (!message)
@@ -33,12 +33,12 @@
 		for (var/mob/M in GLOB.player_list)
 			if (istype(M, /mob/new_player))
 				continue
-			else if(M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == GLOB.PREF_ALL_SPEECH)
+			else if (M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == GLOB.PREF_ALL_SPEECH)
 				to_chat(M, "The captive mind of [src] whispers, \"[message]\"")
 
 /mob/living/captive_brain/process_resist()
 	//Resisting control by an alien mind.
-	if(istype(src.loc,/mob/living/simple_animal/borer))
+	if (istype(src.loc,/mob/living/simple_animal/borer))
 		var/mob/living/simple_animal/borer/B = src.loc
 		var/mob/living/captive_brain/H = src
 
@@ -46,7 +46,7 @@
 		to_chat(B.host, SPAN_DANGER("You feel the captive mind of [src] begin to resist your control."))
 
 		spawn(rand(200,250)+B.host.getBrainLoss())
-			if(!B || !B.controlling) return
+			if (!B || !B.controlling) return
 
 			B.host.adjustBrainLoss(rand(0.1,0.5))
 			to_chat(H, SPAN_DANGER("With an immense exertion of will, you regain control of your body!"))

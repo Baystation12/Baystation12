@@ -1,27 +1,27 @@
 /turf/proc/CanZPass(atom/A, direction)
-	if(z == A.z) //moving FROM this turf
+	if (z == A.z) //moving FROM this turf
 		return direction == UP //can't go below
 	else
-		if(direction == UP) //on a turf below, trying to enter
+		if (direction == UP) //on a turf below, trying to enter
 			return 0
-		if(direction == DOWN) //on a turf above, trying to enter
+		if (direction == DOWN) //on a turf above, trying to enter
 			return !density
 
 /turf/simulated/open/CanZPass(atom/A, direction)
-	if(locate(/obj/structure/catwalk, src))
-		if(z == A.z)
-			if(direction == DOWN)
+	if (locate(/obj/structure/catwalk, src))
+		if (z == A.z)
+			if (direction == DOWN)
 				return 0
-		else if(direction == UP)
+		else if (direction == UP)
 			return 0
 	return 1
 
 /turf/space/CanZPass(atom/A, direction)
-	if(locate(/obj/structure/catwalk, src))
-		if(z == A.z)
-			if(direction == DOWN)
+	if (locate(/obj/structure/catwalk, src))
+		if (z == A.z)
+			if (direction == DOWN)
 				return 0
-		else if(direction == UP)
+		else if (direction == UP)
 			return 0
 	return 1
 
@@ -54,7 +54,7 @@
 
 /turf/simulated/open/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(distance <= 2)
+	if (distance <= 2)
 		var/depth = 1
 		for(var/T = GetBelow(src); isopenspace(T); T = GetBelow(T))
 			depth += 1
@@ -66,7 +66,7 @@
 /turf/simulated/open/attackby(obj/item/C, mob/user)
 	if (istype(C, /obj/item/stack/material/rods))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-		if(L)
+		if (L)
 			return L.attackby(C, user)
 		var/obj/item/stack/material/rods/R = C
 		if (R.use(1))
@@ -77,7 +77,7 @@
 
 	if (istype(C, /obj/item/stack/tile))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-		if(L)
+		if (L)
 			var/obj/item/stack/tile/floor/S = C
 			if (!S.use(1))
 				return
@@ -89,18 +89,18 @@
 			to_chat(user, SPAN_WARNING("The plating is going to need some support."))
 
 	//To lay cable.
-	if(isCoil(C))
+	if (isCoil(C))
 		var/obj/item/stack/cable_coil/coil = C
 		coil.PlaceCableOnTurf(src, user)
 		return
 
 	for(var/atom/movable/M in below)
-		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
+		if (M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
 			return M.attackby(C, user)
 
 /turf/simulated/open/attack_hand(mob/user)
 	for(var/atom/movable/M in below)
-		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
+		if (M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
 			return M.attack_hand(user)
 
 //Most things use is_plating to test if there is a cover tile on top (like regular floors)

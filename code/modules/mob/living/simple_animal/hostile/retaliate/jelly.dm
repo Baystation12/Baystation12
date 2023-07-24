@@ -23,7 +23,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/jelly/Initialize()
 	. = ..()
-	if(gets_random_color)
+	if (gets_random_color)
 		color = color_rotation(round(rand(0,360),20))
 
 /mob/living/simple_animal/hostile/retaliate/jelly/alt
@@ -48,14 +48,14 @@
 	. = ..()
 	SetTransform(scale = jelly_scale)
 	var/obj/item/W = get_natural_weapon()
-	if(W)
+	if (W)
 		W.force *= jelly_scale
-	if(!megajelly_color)
+	if (!megajelly_color)
 		megajelly_color = color_rotation(round(rand(0,360),20))
 	color = megajelly_color
 
 /mob/living/simple_animal/hostile/retaliate/jelly/mega/death()
-	if(split_type)
+	if (split_type)
 		jelly_split()
 	else
 		..()

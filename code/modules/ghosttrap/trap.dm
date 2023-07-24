@@ -5,13 +5,13 @@ var/global/list/ghost_traps
 
 /proc/get_ghost_trap(trap_key)
 	RETURN_TYPE(/datum/ghosttrap)
-	if(!ghost_traps)
+	if (!ghost_traps)
 		populate_ghost_traps()
 	return ghost_traps[trap_key]
 
 /proc/get_ghost_traps()
 	RETURN_TYPE(/list)
-	if(!ghost_traps)
+	if (!ghost_traps)
 		populate_ghost_traps()
 	return ghost_traps
 
@@ -38,23 +38,23 @@ var/global/list/ghost_traps
 
 // Check for bans, proper atom types, etc.
 /datum/ghosttrap/proc/assess_candidate(mob/observer/ghost/candidate, mob/target, feedback = TRUE)
-	if(!candidate.MayRespawn(feedback, minutes_since_death))
+	if (!candidate.MayRespawn(feedback, minutes_since_death))
 		return FALSE
 
-	if(request_timeouts[target] && world.time > request_timeouts[target])
+	if (request_timeouts[target] && world.time > request_timeouts[target])
 		if (feedback)
 			to_chat(candidate, "This occupation request is no longer valid.")
 		return FALSE
 
-	if(target.key)
+	if (target.key)
 		if (feedback)
 			to_chat(candidate, "The target is already occupied.")
 		return FALSE
 
-	if(islist(ban_checks))
+	if (islist(ban_checks))
 		for(var/bantype in ban_checks)
-			if(jobban_isbanned(candidate, "[bantype]"))
-				if(feedback)
+			if (jobban_isbanned(candidate, "[bantype]"))
+				if (feedback)
 					to_chat(candidate, "You are banned from one or more required roles and hence cannot enter play as \a [object].")
 				return FALSE
 
@@ -75,7 +75,7 @@ var/global/list/ghost_traps
 
 // Print a message to all ghosts with the right prefs/lack of bans.
 /datum/ghosttrap/proc/request_player(mob/target, request_string, request_timeout)
-	if(request_timeout)
+	if (request_timeout)
 		request_timeouts[target] = world.time + request_timeout
 		GLOB.destroyed_event.register(target, src, /datum/ghosttrap/proc/unregister_target)
 	else
@@ -84,9 +84,9 @@ var/global/list/ghost_traps
 	for(var/mob/observer/ghost/O in GLOB.player_list)
 		if (O.client.get_preference_value(/datum/client_preference/notify_ghost_trap) == GLOB.PREF_NO)
 			return
-		if(!assess_candidate(O, target, FALSE))
+		if (!assess_candidate(O, target, FALSE))
 			continue
-		if(O.client)
+		if (O.client)
 			to_chat(O, SPAN_BOLD(FONT_LARGE("[request_string] <a href='?src=\ref[src];candidate=\ref[O];target=\ref[target]'>(Occupy)</a> ([ghost_follow_link(target, O)])")))
 			sound_to(O, 'sound/effects/ding2.ogg')
 
@@ -96,29 +96,29 @@ var/global/list/ghost_traps
 
 // Handles a response to request_player().
 /datum/ghosttrap/Topic(href, href_list)
-	if(..())
+	if (..())
 		return TRUE
-	if(href_list["candidate"] && href_list["target"])
+	if (href_list["candidate"] && href_list["target"])
 		var/mob/observer/ghost/candidate = locate(href_list["candidate"]) // BYOND magic.
 		var/mob/target = locate(href_list["target"])                     // So much BYOND magic.
-		if(!target || !candidate)
+		if (!target || !candidate)
 			return
-		if(candidate != usr)
+		if (candidate != usr)
 			return
-		if(!assess_candidate(candidate, target))
+		if (!assess_candidate(candidate, target))
 			return
 		// Modal yes/no alert to guard misclicks
-		if(alert("Would you like to occupy \a [object]?", "Occupy", "Yes", "No") != "Yes")
+		if (alert("Would you like to occupy \a [object]?", "Occupy", "Yes", "No") != "Yes")
 			return
 		transfer_personality(candidate,target)
 		return TRUE
 
 // Shunts the ckey/mind into the target mob.
 /datum/ghosttrap/proc/transfer_personality(mob/candidate, mob/target)
-	if(!assess_candidate(candidate, target))
+	if (!assess_candidate(candidate, target))
 		return FALSE
 	target.ckey = candidate.ckey
-	if(target.mind)
+	if (target.mind)
 		target.mind.reset()
 		target.mind.assigned_role = "[ghost_trap_role]"
 	announce_ghost_joinleave(candidate, 0, "[ghost_trap_message]")
@@ -181,7 +181,7 @@ var/global/list/ghost_traps
 /datum/ghosttrap/plant/welcome_candidate(mob/target)
 	to_chat(target, SPAN_CLASS("alium", "<B>You awaken slowly, stirring into sluggish motion as the air caresses you.</B>"))
 	// This is a hack, replace with some kind of species blurb proc.
-	if(istype(target,/mob/living/carbon/alien/diona))
+	if (istype(target,/mob/living/carbon/alien/diona))
 		to_chat(target, "<B>You are \a [target], one of a race of drifting interstellar plantlike creatures that sometimes share their seeds with human traders.</B>")
 		to_chat(target, "<B>Too much darkness will send you into shock and starve you, but light will help you heal.</B>")
 /*****************
@@ -214,11 +214,11 @@ var/global/list/ghost_traps
 
 /datum/ghosttrap/drone/assess_candidate(mob/observer/ghost/candidate, mob/target)
 	. = ..()
-	if(. && !target.can_be_possessed_by(candidate))
+	if (. && !target.can_be_possessed_by(candidate))
 		return FALSE
 
 /datum/ghosttrap/drone/transfer_personality(mob/candidate, mob/living/silicon/robot/drone/drone)
-	if(!assess_candidate(candidate))
+	if (!assess_candidate(candidate))
 		return FALSE
 	drone.transfer_personality(candidate.client)
 
@@ -257,7 +257,7 @@ var/global/list/ghost_traps
 
 /datum/ghosttrap/cult/welcome_candidate(mob/target)
 	var/obj/item/device/soulstone/S = target.loc
-	if(istype(S))
+	if (istype(S))
 		switch (S.owner_flag)
 			if (SOULSTONE_OWNER_CULT)
 				GLOB.cult.add_antagonist(target.mind)

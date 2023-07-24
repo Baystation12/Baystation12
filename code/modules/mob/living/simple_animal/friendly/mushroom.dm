@@ -42,15 +42,15 @@
 	set desc = "Spread your spores!"
 	set src = usr
 
-	if(stat == 2)
+	if (stat == 2)
 		to_chat(usr, SPAN_DANGER("You are dead; it is too late for that."))
 		return
 
-	if(!seed)
+	if (!seed)
 		to_chat(usr, SPAN_DANGER("You are sterile!"))
 		return
 
-	if(world.time < harvest_time + min_explode_time)
+	if (world.time < harvest_time + min_explode_time)
 		to_chat(usr, SPAN_DANGER("You are not mature enough for that."))
 		return
 
@@ -58,22 +58,22 @@
 
 /mob/living/simple_animal/passive/mushroom/death(gibbed, deathmessage, show_dead_message)
 	. = ..(gibbed, deathmessage, show_dead_message)
-	if(.)
+	if (.)
 		total_mushrooms--
-		if(total_mushrooms < config.maximum_mushrooms && prob(30))
+		if (total_mushrooms < config.maximum_mushrooms && prob(30))
 			spore_explode()
 
 /mob/living/simple_animal/passive/mushroom/proc/spore_explode()
-	if(!seed)
+	if (!seed)
 		return
-	if(world.time < harvest_time + min_explode_time)
+	if (world.time < harvest_time + min_explode_time)
 		return
 	for(var/turf/simulated/target_turf in orange(1,src))
-		if(prob(60) && !target_turf.density && src.Adjacent(target_turf))
+		if (prob(60) && !target_turf.density && src.Adjacent(target_turf))
 			new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(target_turf,seed)
 	death(0)
 	seed.thrown_at(src,get_turf(src),1)
-	if(src)
+	if (src)
 		qdel(src)
 
 /datum/ai_holder/simple_animal/passive/mushroom

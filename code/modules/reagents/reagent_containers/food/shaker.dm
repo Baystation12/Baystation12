@@ -9,24 +9,24 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
 
 /obj/item/reagent_containers/food/drinks/shaker/attack_self(mob/user as mob)
-	if(user.skill_check(SKILL_COOKING, SKILL_MASTER))
+	if (user.skill_check(SKILL_COOKING, SKILL_MASTER))
 		user.visible_message(SPAN_CLASS("rose", "\The [user] shakes \the [src] briskly in one hand, with supreme confidence and competence."), SPAN_CLASS("rose", "You shake \the [src] briskly with one hand."))
 		mix()
 		return
-	if(user.skill_check(SKILL_COOKING, SKILL_TRAINED))
+	if (user.skill_check(SKILL_COOKING, SKILL_TRAINED))
 		user.visible_message(SPAN_NOTICE("\The [user] shakes \the [src] briskly, with some skill."), SPAN_NOTICE("You shake \the [src] briskly, with some skill."))
 		mix()
 		return
 	else
 		user.visible_message(SPAN_NOTICE("\The [user] shakes \the [src] gingerly."), SPAN_NOTICE("You shake \the [src] gingerly."))
-		if(prob(15) && (reagents && reagents.total_volume))
+		if (prob(15) && (reagents && reagents.total_volume))
 			user.visible_message(SPAN_WARNING("\The [user] spills the contents of \the [src] over themselves!"), SPAN_WARNING("You spill the contents of \the [src] over yourself!"))
 			reagents.splash(user, reagents.total_volume)
 		else
 			mix()
 
 /obj/item/reagent_containers/food/drinks/shaker/proc/mix()
-	if(reagents && reagents.total_volume)
+	if (reagents && reagents.total_volume)
 		atom_flags &= ~ATOM_FLAG_NO_REACT
 		HANDLE_REACTIONS(reagents)
 		addtimer(new Callback(src, .proc/stop_react), SSchemistry.wait)

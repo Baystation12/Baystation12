@@ -16,12 +16,12 @@
 		var/turf/T1 = locate(truex,truey,zorigin)
 		var/turf/T2 = locate(truex + (direction ? width - 3 : 0), truey + (direction ? 0 : height - 3), zorigin)
 		var/turf/check = locate(truex + (direction ? -1 : 0), truey + (direction ? 0 : -1), zorigin)
-		if(check.density && !T1.density && !length(T1.contents))
+		if (check.density && !T1.density && !length(T1.contents))
 			var/obj/structure/closet/coffin/C1 = new(T1)
-			if(prob(chance_of_corpse))
+			if (prob(chance_of_corpse))
 				var/type = pickweight(corpses)
 				var/mob/M
-				if(istext(type))
+				if (istext(type))
 					M = new /mob/living/carbon/human()
 					var/mob/living/carbon/human/H = M
 					H.set_species(type)
@@ -32,12 +32,12 @@
 				M.forceMove(C1)
 				item_spawns += M
 		check = locate(truex + (direction ? width - 2 : 0), truey + (direction ? 0 : height - 2), zorigin)
-		if(check.density && !T2.density && !length(T2.contents))
+		if (check.density && !T2.density && !length(T2.contents))
 			var/obj/structure/closet/coffin/C2 = new(T2)
-			if(prob(chance_of_corpse))
+			if (prob(chance_of_corpse))
 				var/type = pickweight(corpses)
 				var/mob/M
-				if(istext(type))
+				if (istext(type))
 					M = new /mob/living/carbon/human()
 					var/mob/living/carbon/human/H = M
 					H.set_species(type)

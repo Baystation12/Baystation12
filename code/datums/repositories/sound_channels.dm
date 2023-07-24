@@ -21,19 +21,19 @@ GLOBAL_VAR_INIT(ambience_channel_common, GLOB.sound_channels.RequestChannel("AMB
 	return LAZYLEN(.) && .[1]
 
 /repository/sound_channels/proc/RequestChannels(key, amount)
-	if(!key)
+	if (!key)
 		CRASH("Invalid key given.")
 	. = list()
 
 	for(var/i = 1 to amount)
 		var/channel = available_channels.Pop() // Check if someone else has released their channel.
-		if(!channel)
-			if(channel_ceiling <= 0) // This basically means we ran out of channels
+		if (!channel)
+			if (channel_ceiling <= 0) // This basically means we ran out of channels
 				break
 			channel = channel_ceiling--
 		. += channel
 
-	if(length(.) != amount)
+	if (length(.) != amount)
 		ReleaseChannels(.)
 		CRASH("Unable to supply the requested amount of channels: [key] - Expected [amount], was [length(.)]")
 

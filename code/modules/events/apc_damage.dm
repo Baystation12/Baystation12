@@ -6,15 +6,15 @@
 
 	var/severity_range = 0
 	switch(severity)
-		if(EVENT_LEVEL_MUNDANE)
+		if (EVENT_LEVEL_MUNDANE)
 			severity_range = 0
-		if(EVENT_LEVEL_MODERATE)
+		if (EVENT_LEVEL_MODERATE)
 			severity_range = 7
-		if(EVENT_LEVEL_MAJOR)
+		if (EVENT_LEVEL_MAJOR)
 			severity_range = 15
 
 	for(var/obj/machinery/power/apc/apc in range(severity_range,A))
-		if(is_valid_apc(apc))
+		if (is_valid_apc(apc))
 			apc.emagged = TRUE
 			apc.update_icon()
 
@@ -23,23 +23,23 @@
 	var/list/apcs = list()
 
 	for(var/obj/effect/landmark/newEpicentre in landmarks_list)
-		if(newEpicentre.name == "lightsout")
+		if (newEpicentre.name == "lightsout")
 			possibleEpicentres += newEpicentre
 
-	if(!length(possibleEpicentres))
+	if (!length(possibleEpicentres))
 		return
 
 	var/epicentre = pick(possibleEpicentres)
 	for(var/obj/machinery/power/apc/apc in range(epicentre,apcSelectionRange))
-		if(is_valid_apc(apc))
+		if (is_valid_apc(apc))
 			apcs += apc
 			// Greatly increase the chance for APCs in maintenance areas to be selected
 			var/area/A = get_area(apc)
-			if(istype(A,/area/maintenance))
+			if (istype(A,/area/maintenance))
 				apcs += apc
 				apcs += apc
 
-	if(!length(apcs))
+	if (!length(apcs))
 		return
 
 	return pick(apcs)

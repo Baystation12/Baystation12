@@ -7,16 +7,16 @@
 	var/buffer
 
 /obj/item/stock_parts/radio/transmitter/proc/queue_transmit(list/data)
-	if(!length(data))
+	if (!length(data))
 		return
-	if(!buffer)
+	if (!buffer)
 		buffer = data
 		addtimer(new Callback(src, .proc/transmit), latency)
 	else
 		buffer |= data
 
 /obj/item/stock_parts/radio/transmitter/proc/transmit()
-	if(!LAZYLEN(buffer))
+	if (!LAZYLEN(buffer))
 		return
 	var/datum/signal/signal = new()
 	signal.source = src
@@ -36,7 +36,7 @@
 /obj/item/stock_parts/radio/transmitter/basic/proc/var_changed(singleton/public_access/public_variable/variable, obj/machinery/machine, old_value, new_value)
 	var/list/L = list()
 	for(var/thing in transmit_on_change)
-		if(transmit_on_change[thing] == variable)
+		if (transmit_on_change[thing] == variable)
 			L[thing] = new_value
 	queue_transmit(L)
 
@@ -44,7 +44,7 @@
 	..()
 	sanitize_events(machine, transmit_on_change)
 	sanitize_events(machine, transmit_on_tick)
-	if(LAZYLEN(transmit_on_tick))
+	if (LAZYLEN(transmit_on_tick))
 		start_processing(machine)
 	for(var/thing in transmit_on_change)
 		var/singleton/public_access/public_variable/variable = transmit_on_change[thing]
@@ -57,7 +57,7 @@
 	..()
 
 /obj/item/stock_parts/radio/transmitter/basic/Destroy()
-	if(istype(loc, /obj/machinery))
+	if (istype(loc, /obj/machinery))
 		for(var/thing in transmit_on_change)
 			var/singleton/public_access/public_variable/variable = transmit_on_change[thing]
 			variable.unregister_listener(src, loc)
@@ -78,25 +78,25 @@
 	var/list/transmit_on_event
 
 /obj/item/stock_parts/radio/transmitter/on_event/is_valid_event(obj/machinery/machine, singleton/public_access/variable)
-	if(istype(variable, /singleton/public_access/public_method))
+	if (istype(variable, /singleton/public_access/public_method))
 		return LAZYACCESS(machine.public_methods, variable.type)
 	return ..()
 
 /obj/item/stock_parts/radio/transmitter/on_event/on_install(obj/machinery/machine)
 	..()
 	sanitize_events(machine, transmit_on_event)
-	if(!is_valid_event(machine, event))
+	if (!is_valid_event(machine, event))
 		event = null
-	if(event)
+	if (event)
 		event.register_listener(src, machine, .proc/trigger_event)
 
 /obj/item/stock_parts/radio/transmitter/on_event/on_uninstall(obj/machinery/machine)
-	if(event)
+	if (event)
 		event.unregister_listener(src, machine)
 	..()
 
 /obj/item/stock_parts/radio/transmitter/on_event/Destroy()
-	if(event && istype(loc, /obj/machinery))
+	if (event && istype(loc, /obj/machinery))
 		event.unregister_listener(src, loc)
 	. = ..()
 

@@ -26,19 +26,19 @@
 	create_reagents(50)
 
 /obj/item/implant/chem/activate(amount)
-	if(malfunction || (!iscarbon(imp_in)))	return 0
-	if(!amount)
+	if (malfunction || (!iscarbon(imp_in)))	return 0
+	if (!amount)
 		amount = rand(1,25)
 	var/mob/living/carbon/R = imp_in
 	reagents.trans_to_mob(R, amount, CHEM_BLOOD)
 	to_chat(R, SPAN_NOTICE("You hear a faint *beep*."))
 
 /obj/item/implant/chem/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/reagent_containers/syringe))
-		if(reagents.total_volume >= reagents.maximum_volume)
+	if (istype(I, /obj/item/reagent_containers/syringe))
+		if (reagents.total_volume >= reagents.maximum_volume)
 			to_chat(user, SPAN_WARNING("\The [src] is full."))
 		else
-			if(do_after(user, 0.5 SECONDS, src, DO_MEDICAL))
+			if (do_after(user, 0.5 SECONDS, src, DO_MEDICAL))
 				I.reagents.trans_to_obj(src, 5)
 				to_chat(user, SPAN_NOTICE("You inject 5 units of the solution. The syringe now contains [I.reagents.total_volume] units."))
 	else

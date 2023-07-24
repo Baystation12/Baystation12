@@ -22,26 +22,26 @@
 
 /obj/item/gun/projectile/shotgun/on_update_icon()
 	..()
-	if(length(loaded))
+	if (length(loaded))
 		icon_state = initial(icon_state)
 	else
 		icon_state = "[initial(icon_state)]-empty"
 
 /obj/item/gun/projectile/shotgun/pump/on_update_icon()
 	..()
-	if(chambered)
+	if (chambered)
 		icon_state = initial(icon_state)
 	else
 		icon_state = "[initial(icon_state)]-empty"
 
 /obj/item/gun/projectile/shotgun/pump/consume_next_projectile()
-	if(chambered)
+	if (chambered)
 		return chambered.BB
 	return null
 
 /obj/item/gun/projectile/shotgun/pump/attack_self(mob/living/user as mob)
-	if(world.time >= recentpump + 10)
-		if(!is_held_twohanded(user))
+	if (world.time >= recentpump + 10)
+		if (!is_held_twohanded(user))
 			var/fail_chance = user.skill_fail_chance(SKILL_WEAPONS, 90, SKILL_EXPERIENCED, 0.25)
 			var/drop_chance = user.skill_fail_chance(SKILL_WEAPONS, 50, SKILL_EXPERIENCED, 0.5)
 
@@ -77,13 +77,13 @@
 /obj/item/gun/projectile/shotgun/pump/proc/pump(mob/M as mob)
 	playsound(M, 'sound/weapons/shotgunpump.ogg', 60, 1)
 
-	if(chambered)//We have a shell in the chamber
+	if (chambered)//We have a shell in the chamber
 		chambered.dropInto(loc)//Eject casing
-		if(LAZYLEN(chambered.fall_sounds))
+		if (LAZYLEN(chambered.fall_sounds))
 			playsound(loc, pick(chambered.fall_sounds), 50, 1)
 		chambered = null
 
-	if(length(loaded))
+	if (length(loaded))
 		var/obj/item/ammo_casing/AC = loaded[1] //load next casing.
 		loaded -= AC //Remove casing from loaded list.
 		chambered = AC
@@ -153,8 +153,8 @@
 	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
 
 /obj/item/gun/projectile/shotgun/pump/sawn/attack_self(mob/living/user)
-	if(world.time >= recentpump + 10)
-		if(!is_held_twohanded(user))
+	if (world.time >= recentpump + 10)
+		if (!is_held_twohanded(user))
 			var/fail_chance = user.skill_fail_chance(SKILL_WEAPONS, 90, SKILL_EXPERIENCED, 0.25)
 			var/drop_chance = user.skill_fail_chance(SKILL_WEAPONS, 50, SKILL_EXPERIENCED, 0.5)
 
@@ -189,13 +189,13 @@
 /obj/item/gun/projectile/shotgun/pump/sawn/proc/pumpr(mob/living/user)
 	playsound(user, 'sound/weapons/shotgunpump.ogg', 60, 1)
 
-	if(chambered)//We have a shell in the chamber
+	if (chambered)//We have a shell in the chamber
 		chambered.dropInto(loc)//Eject casing
-		if(length(chambered.fall_sounds))
+		if (length(chambered.fall_sounds))
 			playsound(loc, pick(chambered.fall_sounds), 50, 1)
 		chambered = null
 
-	if(length(loaded))
+	if (length(loaded))
 		var/obj/item/ammo_casing/AC = loaded[1] //load next casing.
 		loaded -= AC //Remove casing from loaded list.
 		chambered = AC
@@ -216,7 +216,7 @@
 
 /obj/item/gun/projectile/shotgun/pump/combat/on_update_icon()
 	..()
-	if(length(loaded) > 3)
+	if (length(loaded) > 3)
 		for(var/i = 0 to length(loaded) - 4)
 			var/image/I = image(icon, "shell")
 			I.pixel_x = i * 2
@@ -371,15 +371,15 @@
 /obj/item/gun/projectile/shotgun/magshot/on_update_icon()
 	..()
 
-	if(ammo_magazine)
+	if (ammo_magazine)
 		icon_state = initial(icon_state)
 		wielded_item_state = initial(wielded_item_state)
 
-		if(LAZYLEN(ammo_magazine.stored_ammo) == ammo_magazine.max_ammo)
+		if (LAZYLEN(ammo_magazine.stored_ammo) == ammo_magazine.max_ammo)
 			overlays += image(icon, "ammo100")
-		else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.75 * ammo_magazine.max_ammo)
+		else if (LAZYLEN(ammo_magazine.stored_ammo) <= 0.75 * ammo_magazine.max_ammo)
 			overlays += image(icon, "ammo75")
-		else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
+		else if (LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
 			overlays += image(icon, "ammo50")
 		else
 			overlays += image(icon, "ammo25")

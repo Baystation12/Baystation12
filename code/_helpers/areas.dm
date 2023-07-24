@@ -4,34 +4,34 @@
 /proc/get_filtered_areas(list/predicates = list(/proc/is_area_with_turf))
 	RETURN_TYPE(/list)
 	. = list()
-	if(!predicates)
+	if (!predicates)
 		return
-	if(!islist(predicates))
+	if (!islist(predicates))
 		predicates = list(predicates)
 	for(var/area/A)
-		if(all_predicates_true(list(A), predicates))
+		if (all_predicates_true(list(A), predicates))
 			. += A
 
 /proc/get_area_turfs(area/A, list/predicates)
 	RETURN_TYPE(/list)
 	. = new/list()
 	A = istype(A) ? A : locate(A)
-	if(!A)
+	if (!A)
 		return
 	for(var/turf/T in A.contents)
-		if(!predicates || all_predicates_true(list(T), predicates))
+		if (!predicates || all_predicates_true(list(T), predicates))
 			. += T
 
 /proc/get_subarea_turfs(area/A, list/predicates)
 	RETURN_TYPE(/list)
 	. = new/list()
 	A = istype(A) ? A.type : A
-	if(!ispath(A))
+	if (!ispath(A))
 		return
 	for(var/sub_area_type in typesof(A))
 		var/area/sub_area = locate(sub_area_type)
 		for(var/turf/T in sub_area.contents)
-			if(!predicates || all_predicates_true(list(T), predicates))
+			if (!predicates || all_predicates_true(list(T), predicates))
 				. += T
 
 /proc/group_areas_by_name(list/predicates)
@@ -52,19 +52,19 @@
 /proc/pick_subarea_turf(areatype, list/predicates)
 	RETURN_TYPE(/turf)
 	var/list/turfs = get_subarea_turfs(areatype, predicates)
-	if(LAZYLEN(turfs))
+	if (LAZYLEN(turfs))
 		return pick(turfs)
 
 /proc/pick_area_turf(areatype, list/predicates)
 	RETURN_TYPE(/turf)
 	var/list/turfs = get_area_turfs(areatype, predicates)
-	if(turfs && length(turfs))
+	if (turfs && length(turfs))
 		return pick(turfs)
 
 /proc/pick_area(list/predicates)
 	RETURN_TYPE(/area)
 	var/list/areas = get_filtered_areas(predicates)
-	if(LAZYLEN(areas))
+	if (LAZYLEN(areas))
 		. = pick(areas)
 
 /proc/pick_area_and_turf(list/area_predicates, list/turf_predicates)

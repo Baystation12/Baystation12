@@ -27,34 +27,34 @@
 
 /obj/structure/adherent_bath/proc/enter_bath(mob/living/patient, mob/user)
 
-	if(!istype(patient))
+	if (!istype(patient))
 		return FALSE
 
 	var/self_drop = (user == patient)
 
-	if(!user.Adjacent(src) || !(self_drop || user.Adjacent(patient)))
+	if (!user.Adjacent(src) || !(self_drop || user.Adjacent(patient)))
 		return FALSE
 
-	if(occupant)
+	if (occupant)
 		to_chat(user, SPAN_WARNING("\The [src] is occupied."))
 		return FALSE
 
-	if(self_drop)
+	if (self_drop)
 		user.visible_message(SPAN_NOTICE("\The [user] begins climbing into \the [src]."))
 	else
 		user.visible_message(SPAN_NOTICE("\The [user] begins pushing \the [patient] into \the [src]."))
 
-	if(!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
+	if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 		return FALSE
 
-	if(!user.Adjacent(src) || !(self_drop || user.Adjacent(patient)))
+	if (!user.Adjacent(src) || !(self_drop || user.Adjacent(patient)))
 		return FALSE
 
-	if(occupant)
+	if (occupant)
 		to_chat(user, SPAN_WARNING("\The [src] is occupied."))
 		return FALSE
 
-	if(self_drop)
+	if (self_drop)
 		user.visible_message(SPAN_NOTICE("\The [user] climbs into \the [src]."))
 	else
 		user.visible_message(SPAN_NOTICE("\The [user] pushes \the [patient] into \the [src]."))
@@ -77,11 +77,11 @@
 	eject_occupant()
 
 /obj/structure/adherent_bath/proc/eject_occupant()
-	if(occupant)
+	if (occupant)
 		occupant.dropInto(loc)
 		playsound(loc, 'sound/effects/slosh.ogg', 50, 1)
-		if(occupant.loc != src)
-			if(occupant.client)
+		if (occupant.loc != src)
+			if (occupant.client)
 				occupant.client.eye = occupant.client.mob
 				occupant.client.perspective = MOB_PERSPECTIVE
 			occupant.regenerate_icons()
@@ -97,29 +97,29 @@
 
 /obj/structure/adherent_bath/Process()
 
-	if(!occupant)
+	if (!occupant)
 		STOP_PROCESSING(SSobj, src)
 		return
 
-	if(occupant.loc != src)
+	if (occupant.loc != src)
 		occupant = null
 		STOP_PROCESSING(SSobj, src)
 		return
 
-	if(ishuman(occupant))
+	if (ishuman(occupant))
 
 		var/mob/living/carbon/human/H = occupant
 		var/repaired_organ
 
 		// Replace limbs for crystalline species.
-		if((H.species.name == SPECIES_ADHERENT || H.species.name == SPECIES_GOLEM) && prob(10))
+		if ((H.species.name == SPECIES_ADHERENT || H.species.name == SPECIES_GOLEM) && prob(10))
 			for(var/limb_type in H.species.has_limbs)
 				var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-				if(E && !E.is_usable() && !(E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))
+				if (E && !E.is_usable() && !(E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))
 					E.removed()
 					qdel(E)
 					E = null
-				if(!E)
+				if (!E)
 					var/list/organ_data = H.species.has_limbs[limb_type]
 					var/limb_path = organ_data["path"]
 					var/obj/item/organ/O = new limb_path(H)
@@ -131,29 +131,29 @@
 					break
 
 		// Repair crystalline internal organs.
-		if(prob(10))
+		if (prob(10))
 			for(var/thing in H.internal_organs)
 				var/obj/item/organ/internal/I = thing
-				if(BP_IS_CRYSTAL(I) && I.damage)
+				if (BP_IS_CRYSTAL(I) && I.damage)
 					I.heal_damage(rand(3,5))
-					if(prob(25))
+					if (prob(25))
 						to_chat(H, SPAN_NOTICE("The mineral-rich bath mends your [I.name]."))
 
 		// Repair robotic external organs.
-		if(!repaired_organ && prob(25))
+		if (!repaired_organ && prob(25))
 			for(var/thing in H.organs)
 				var/obj/item/organ/external/E = thing
-				if(BP_IS_ROBOTIC(E))
+				if (BP_IS_ROBOTIC(E))
 					for(var/obj/implanted_object in E.implants)
-						if(!istype(implanted_object,/obj/item/implant) && !istype(implanted_object,/obj/item/organ/internal/augment) && prob(25))	// We don't want to remove REAL implants. Just shrapnel etc.
+						if (!istype(implanted_object,/obj/item/implant) && !istype(implanted_object,/obj/item/organ/internal/augment) && prob(25))	// We don't want to remove REAL implants. Just shrapnel etc.
 							E.implants -= implanted_object
 							to_chat(H, SPAN_NOTICE("The mineral-rich bath dissolves the [implanted_object.name]."))
 							qdel(implanted_object)
-					if(E.brute_dam || E.burn_dam)
+					if (E.brute_dam || E.burn_dam)
 						E.heal_damage(rand(3,5), rand(3,5), robo_repair = 1)
-						if(prob(25))
+						if (prob(25))
 							to_chat(H, SPAN_NOTICE("The mineral-rich bath mends your [E.name]."))
-						if(!BP_IS_CRYSTAL(E) && !BP_IS_BRITTLE(E))
+						if (!BP_IS_CRYSTAL(E) && !BP_IS_BRITTLE(E))
 							E.status |= ORGAN_BRITTLE
 							to_chat(H, SPAN_WARNING("It feels a bit brittle, though..."))
 						break

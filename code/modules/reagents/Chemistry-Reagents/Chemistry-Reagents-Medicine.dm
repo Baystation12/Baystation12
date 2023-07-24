@@ -19,9 +19,9 @@
 
 /datum/reagent/inaprovaline/overdose(mob/living/carbon/M)
 	M.add_chemical_effect(CE_SLOWDOWN, 1)
-	if(prob(5))
+	if (prob(5))
 		M.slurring = max(M.slurring, 10)
-	if(prob(2))
+	if (prob(2))
 		M.drowsyness = max(M.drowsyness, 5)
 
 /datum/reagent/bicaridine
@@ -43,11 +43,11 @@
 
 /datum/reagent/bicaridine/overdose(mob/living/carbon/M)
 	..()
-	if(ishuman(M))
+	if (ishuman(M))
 		M.add_chemical_effect(CE_BLOCKAGE, (15 + volume - overdose)/100)
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/external/E in H.organs)
-			if(E.status & ORGAN_ARTERY_CUT && prob(2))
+			if (E.status & ORGAN_ARTERY_CUT && prob(2))
 				E.status &= ~ORGAN_ARTERY_CUT
 
 /datum/reagent/kelotane
@@ -99,7 +99,7 @@
 	if (IS_METABOLICALLY_INERT(M))
 		return
 
-	if(remove_generic)
+	if (remove_generic)
 		M.drowsyness = max(0, M.drowsyness - 6 * removed)
 		M.adjust_hallucination(-9 * removed)
 		M.add_up_to_chemical_effect(CE_ANTITOX, 1)
@@ -107,11 +107,11 @@
 	var/removing = (4 * removed)
 	var/datum/reagents/ingested = M.get_ingested_reagents()
 	for(var/datum/reagent/R in ingested.reagent_list)
-		if((remove_generic && istype(R, /datum/reagent/toxin)) || (R.type in remove_toxins))
+		if ((remove_generic && istype(R, /datum/reagent/toxin)) || (R.type in remove_toxins))
 			ingested.remove_reagent(R.type, removing)
 			return
 	for(var/datum/reagent/R in M.reagents.reagent_list)
-		if((remove_generic && istype(R, /datum/reagent/toxin)) || (R.type in remove_toxins))
+		if ((remove_generic && istype(R, /datum/reagent/toxin)) || (R.type in remove_toxins))
 			M.reagents.remove_reagent(R.type, removing)
 			return
 
@@ -178,15 +178,15 @@
 
 /datum/reagent/cryoxadone/affect_blood(mob/living/carbon/M, removed)
 	M.add_chemical_effect(CE_CRYO, 1)
-	if(M.bodytemperature < 170)
+	if (M.bodytemperature < 170)
 		M.adjustCloneLoss(-100 * removed)
 		M.add_chemical_effect(CE_OXYGENATED, 1)
 		M.heal_organ_damage(30 * removed, 30 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
-		if(ishuman(M))
+		if (ishuman(M))
 			var/mob/living/carbon/human/H = M
 			for(var/obj/item/organ/internal/I in H.internal_organs)
-				if(!BP_IS_ROBOTIC(I))
+				if (!BP_IS_ROBOTIC(I))
 					I.heal_damage(20*removed)
 
 
@@ -206,15 +206,15 @@
 
 /datum/reagent/clonexadone/affect_blood(mob/living/carbon/M, removed)
 	M.add_chemical_effect(CE_CRYO, 1)
-	if(M.bodytemperature < 170)
+	if (M.bodytemperature < 170)
 		M.adjustCloneLoss(-300 * removed)
 		M.add_chemical_effect(CE_OXYGENATED, 2)
 		M.heal_organ_damage(50 * removed, 50 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
-		if(ishuman(M))
+		if (ishuman(M))
 			var/mob/living/carbon/human/H = M
 			for(var/obj/item/organ/internal/I in H.internal_organs)
-				if(!BP_IS_ROBOTIC(I))
+				if (!BP_IS_ROBOTIC(I))
 					I.heal_damage(30*removed)
 
 /datum/reagent/nanitefluid
@@ -228,12 +228,12 @@
 
 /datum/reagent/nanitefluid/affect_blood(mob/living/carbon/M, removed)
 	M.add_chemical_effect(CE_CRYO, 1)
-	if(M.bodytemperature < 170)
+	if (M.bodytemperature < 170)
 		M.heal_organ_damage(30 * removed, 30 * removed, affect_robo = 1)
-		if(ishuman(M))
+		if (ishuman(M))
 			var/mob/living/carbon/human/H = M
 			for(var/obj/item/organ/internal/I in H.internal_organs)
-				if(BP_IS_ROBOTIC(I))
+				if (BP_IS_ROBOTIC(I))
 					I.heal_damage(20*removed)
 
 /* Painkillers */
@@ -276,27 +276,27 @@
 
 /datum/reagent/tramadol/affect_blood(mob/living/carbon/M, removed)
 	var/effectiveness = 1
-	if(M.chem_doses[type] < effective_dose) //some ease-in ease-out for the effect
+	if (M.chem_doses[type] < effective_dose) //some ease-in ease-out for the effect
 		effectiveness = M.chem_doses[type]/effective_dose
-	else if(volume < effective_dose)
+	else if (volume < effective_dose)
 		effectiveness = volume/effective_dose
 	M.add_chemical_effect(CE_PAINKILLER, pain_power * effectiveness)
-	if(M.chem_doses[type] > 0.5 * overdose)
+	if (M.chem_doses[type] > 0.5 * overdose)
 		M.add_chemical_effect(CE_SLOWDOWN, 1)
-		if(prob(1))
+		if (prob(1))
 			M.slurring = max(M.slurring, 10)
-	if(M.chem_doses[type] > 0.75 * overdose)
+	if (M.chem_doses[type] > 0.75 * overdose)
 		M.add_chemical_effect(CE_SLOWDOWN, 1)
-		if(prob(5))
+		if (prob(5))
 			M.slurring = max(M.slurring, 20)
-	if(M.chem_doses[type] > overdose)
+	if (M.chem_doses[type] > overdose)
 		M.add_chemical_effect(CE_SLOWDOWN, 1)
 		M.slurring = max(M.slurring, 30)
-		if(prob(1))
+		if (prob(1))
 			M.Weaken(2)
 			M.drowsyness = max(M.drowsyness, 5)
 	var/boozed = isboozed(M)
-	if(boozed)
+	if (boozed)
 		M.add_chemical_effect(CE_ALCOHOL_TOXIC, 1)
 		M.add_chemical_effect(CE_BREATHLOSS, 0.1 * boozed) //drinking and opiating makes breathing kinda hard
 
@@ -306,19 +306,19 @@
 	M.druggy = max(M.druggy, 10)
 	M.add_chemical_effect(CE_PAINKILLER, pain_power*0.5) //extra painkilling for extra trouble
 	M.add_chemical_effect(CE_BREATHLOSS, 0.6) //Have trouble breathing, need more air
-	if(isboozed(M))
+	if (isboozed(M))
 		M.add_chemical_effect(CE_BREATHLOSS, 0.2) //Don't drink and OD on opiates folks
 
 /datum/reagent/tramadol/proc/isboozed(mob/living/carbon/M)
 	. = 0
 	var/datum/reagents/ingested = M.get_ingested_reagents()
-	if(ingested)
+	if (ingested)
 		var/list/pool = M.reagents.reagent_list | ingested.reagent_list
 		for(var/datum/reagent/ethanol/booze in pool)
-			if(M.chem_doses[booze.type] < 2) //let them experience false security at first
+			if (M.chem_doses[booze.type] < 2) //let them experience false security at first
 				continue
 			. = 1
-			if(booze.strength < 40) //liquor stuff hits harder
+			if (booze.strength < 40) //liquor stuff hits harder
 				return 2
 
 /datum/reagent/tramadol/oxycodone
@@ -346,9 +346,9 @@
 	H.add_chemical_effect(CE_PAINKILLER, 80)
 	H.add_chemical_effect(CE_SLOWDOWN, 1)
 	H.make_dizzy(2)
-	if(prob(75))
+	if (prob(75))
 		H.drowsyness++
-	if(prob(25))
+	if (prob(25))
 		H.confused++
 
 /datum/reagent/deletrathol/overdose(mob/living/carbon/M)
@@ -413,7 +413,7 @@
 		return
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 	M.add_chemical_effect(CE_BRAIN_REGEN, 1)
-	if(ishuman(M))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		H.confused++
 		H.drowsyness++
@@ -432,11 +432,11 @@
 /datum/reagent/imidazoline/affect_blood(mob/living/carbon/M, removed)
 	M.eye_blurry = max(M.eye_blurry - 5, 0)
 	M.eye_blind = max(M.eye_blind - 5, 0)
-	if(ishuman(M))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name[BP_EYES]
-		if(E && istype(E))
-			if(E.damage > 0)
+		if (E && istype(E))
+			if (E.damage > 0)
 				E.damage = max(E.damage - 5 * removed, 0)
 
 /datum/reagent/peridaxon
@@ -452,16 +452,16 @@
 	value = 6
 
 /datum/reagent/peridaxon/affect_blood(mob/living/carbon/M, removed)
-	if(ishuman(M))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/internal/I in H.internal_organs)
-			if(!BP_IS_ROBOTIC(I))
-				if(I.organ_tag == BP_BRAIN)
+			if (!BP_IS_ROBOTIC(I))
+				if (I.organ_tag == BP_BRAIN)
 					// if we have located an organic brain, apply side effects
 					H.confused++
 					H.drowsyness++
 					// peridaxon only heals minor brain damage
-					if(I.damage >= I.min_bruised_damage)
+					if (I.damage >= I.min_bruised_damage)
 						continue
 				I.heal_damage(3 * removed)
 
@@ -481,7 +481,7 @@
 	M.disabilities = 0
 	M.sdisabilities = 0
 
-	if(needs_update && ishuman(M))
+	if (needs_update && ishuman(M))
 		M.dna.ResetUI()
 		M.dna.ResetSE()
 		domutcheck(M, null, MUTCHK_FORCED)
@@ -499,7 +499,7 @@
 /datum/reagent/hyperzine/affect_blood(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
 		return
-	if(prob(5))
+	if (prob(5))
 		M.emote(pick("twitch", "blink_r", "shiver"))
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
 	M.add_chemical_effect(CE_PULSE, 3)
@@ -522,9 +522,9 @@
 	M.stuttering = 0
 	M.confused = 0
 	var/datum/reagents/ingested = M.get_ingested_reagents()
-	if(ingested)
+	if (ingested)
 		for(var/datum/reagent/R in ingested.reagent_list)
-			if(istype(R, /datum/reagent/ethanol))
+			if (istype(R, /datum/reagent/ethanol))
 				M.chem_doses[R.type] = max(M.chem_doses[R.type] - removed * 5, 0)
 
 /datum/reagent/hyronalin
@@ -555,7 +555,7 @@
 
 /datum/reagent/arithrazine/affect_blood(mob/living/carbon/M, removed)
 	M.radiation = max(M.radiation - 70 * removed, 0)
-	if(prob(60))
+	if (prob(60))
 		M.take_organ_damage(4 * removed, 0, ORGAN_DAMAGE_FLESH_ONLY)
 
 /datum/reagent/spaceacillin
@@ -573,17 +573,17 @@
 	M.immunity = max(M.immunity - 0.1, 0)
 	M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_COMMON)
 	M.add_chemical_effect(CE_ANTIBIOTIC, 1)
-	if(volume > 10)
+	if (volume > 10)
 		M.immunity = max(M.immunity - 0.3, 0)
 		M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_ENGINEERED)
-	if(M.chem_doses[type] > 15)
+	if (M.chem_doses[type] > 15)
 		M.immunity = max(M.immunity - 0.25, 0)
 
 /datum/reagent/spaceacillin/overdose(mob/living/carbon/M)
 	..()
 	M.immunity = max(M.immunity - 0.25, 0)
 	M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_EXOTIC)
-	if(prob(2))
+	if (prob(2))
 		M.immunity_norm = max(M.immunity_norm - 1, 0)
 
 /datum/reagent/sterilizine
@@ -596,7 +596,7 @@
 	value = 2.2
 
 /datum/reagent/sterilizine/affect_touch(mob/living/carbon/M, removed)
-	if(M.germ_level < INFECTION_LEVEL_TWO) // rest and antibiotics is required to cure serious infections
+	if (M.germ_level < INFECTION_LEVEL_TWO) // rest and antibiotics is required to cure serious infections
 		M.germ_level -= min(removed*20, M.germ_level)
 	for(var/obj/item/I in M.contents)
 		I.was_bloodied = null
@@ -630,9 +630,9 @@
 	value = 2
 
 /datum/reagent/leporazine/affect_blood(mob/living/carbon/M, removed)
-	if(M.bodytemperature > 310)
+	if (M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
-	else if(M.bodytemperature < 311)
+	else if (M.bodytemperature < 311)
 		M.bodytemperature = min(310, M.bodytemperature + (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 /datum/reagent/leporazine/hot
@@ -646,7 +646,7 @@
 	scannable = 1
 
 /datum/reagent/leporazine/hot/affect_blood(mob/living/carbon/M, removed)
-	if(M.bodytemperature < 330)
+	if (M.bodytemperature < 330)
 		M.bodytemperature = min(330, M.bodytemperature + (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 /datum/reagent/leporazine/cold
@@ -660,7 +660,7 @@
 	scannable = 1
 
 /datum/reagent/leporazine/cold/affect_blood(mob/living/carbon/M, removed)
-	if(M.bodytemperature > 290)
+	if (M.bodytemperature > 290)
 		M.bodytemperature = max(290, M.bodytemperature - (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 /* Antidepressants */
@@ -681,11 +681,11 @@
 /datum/reagent/methylphenidate/affect_blood(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
 		return
-	if(volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+	if (volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 		data = world.time
 		to_chat(M, SPAN_WARNING("You lose focus..."))
 	else
-		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+		if (world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 			data = world.time
 			to_chat(M, SPAN_NOTICE("Your mind feels focused and undivided."))
 
@@ -703,12 +703,12 @@
 /datum/reagent/citalopram/affect_blood(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
 		return
-	if(volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+	if (volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 		data = world.time
 		to_chat(M, SPAN_WARNING("Your mind feels a little less stable..."))
 	else
 		M.add_chemical_effect(CE_MIND, 1)
-		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+		if (world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 			data = world.time
 			to_chat(M, SPAN_NOTICE("Your mind feels stable... a little stable."))
 
@@ -725,14 +725,14 @@
 /datum/reagent/paroxetine/affect_blood(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
 		return
-	if(volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+	if (volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 		data = world.time
 		to_chat(M, SPAN_WARNING("Your mind feels much less stable..."))
 	else
 		M.add_chemical_effect(CE_MIND, 2)
-		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+		if (world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 			data = world.time
-			if(prob(90))
+			if (prob(90))
 				to_chat(M, SPAN_NOTICE("Your mind feels much more stable."))
 			else
 				to_chat(M, SPAN_WARNING("Your mind breaks apart..."))
@@ -753,13 +753,13 @@
 /datum/reagent/nicotine/affect_blood(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
 		return
-	if(prob(volume*20))
+	if (prob(volume*20))
 		M.add_chemical_effect(CE_PULSE, 1)
-	if(volume <= 0.02 && M.chem_doses[type] >= 0.05 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
+	if (volume <= 0.02 && M.chem_doses[type] >= 0.05 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
 		data = world.time
 		to_chat(M, SPAN_WARNING("You feel antsy, your concentration wavers..."))
 	else
-		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
+		if (world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
 			data = world.time
 			to_chat(M, SPAN_NOTICE("You feel invigorated and calm."))
 
@@ -826,7 +826,7 @@
 /datum/reagent/menthol/affect_blood(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
 		return
-	if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.35)
+	if (world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.35)
 		data = world.time
 		to_chat(M, SPAN_NOTICE("You feel faintly sore in the throat."))
 
@@ -846,11 +846,11 @@
 	M.adjustOxyLoss(-2 * removed)
 	M.heal_organ_damage(20 * removed, 20 * removed)
 	M.adjustToxLoss(-20 * removed)
-	if(M.chem_doses[type] > 3 && ishuman(M))
+	if (M.chem_doses[type] > 3 && ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/external/E in H.organs)
 			E.status |= ORGAN_DISFIGURED //currently only matters for the head, but might as well disfigure them all.
-	if(M.chem_doses[type] > 10)
+	if (M.chem_doses[type] > 10)
 		M.make_dizzy(5)
 		M.make_jittery(5)
 
@@ -906,18 +906,18 @@
 	if (IS_METABOLICALLY_INERT(M))
 		return
 
-	if(M.chem_doses[type] < 0.2)	//not that effective after initial rush
+	if (M.chem_doses[type] < 0.2)	//not that effective after initial rush
 		M.add_chemical_effect(CE_PAINKILLER, min(30*volume, 80))
 		M.add_chemical_effect(CE_PULSE, 1)
-	else if(M.chem_doses[type] < 1)
+	else if (M.chem_doses[type] < 1)
 		M.add_chemical_effect(CE_PAINKILLER, min(10*volume, 20))
 	M.add_chemical_effect(CE_PULSE, 2)
 	M.add_chemical_effect(CE_STIMULANT, 2)
-	if(M.chem_doses[type] > 10)
+	if (M.chem_doses[type] > 10)
 		M.make_jittery(5)
-	if(volume >= 4 && M.is_asystole())
+	if (volume >= 4 && M.is_asystole())
 		remove_self(4)
-		if(M.resuscitate())
+		if (M.resuscitate())
 			var/obj/item/organ/internal/heart = M.internal_organs_by_name[BP_HEART]
 			heart.take_internal_damage(heart.max_damage * 0.075)
 
@@ -937,10 +937,10 @@
 
 	M.add_chemical_effect(CE_PULSE, 1)
 	M.add_chemical_effect(CE_BREATHLOSS, 0.02 * volume)
-	if(volume >= 5)
+	if (volume >= 5)
 		M.add_chemical_effect(CE_PULSE, 1)
 		M.add_chemical_effect(CE_SLOWDOWN, (volume/5) ** 2)
-	else if(M.chem_doses[type] > 20) //after prolonged exertion
+	else if (M.chem_doses[type] > 20) //after prolonged exertion
 		M.make_jittery(10)
 
 /datum/reagent/nanoblood
@@ -954,11 +954,11 @@
 	metabolism = 1
 
 /datum/reagent/nanoblood/affect_blood(mob/living/carbon/human/M, removed)
-	if(!M.should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
+	if (!M.should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
 		return
-	if(M.regenerate_blood(4 * removed))
+	if (M.regenerate_blood(4 * removed))
 		M.immunity = max(M.immunity - 0.75, 0)
-		if(M.chem_doses[type] > M.species.blood_volume/8) //half of blood was replaced with us, rip white bodies
+		if (M.chem_doses[type] > M.species.blood_volume/8) //half of blood was replaced with us, rip white bodies
 			M.immunity = max(M.immunity - 3, 0)
 
 // Sleeping agent, produced by breathing N2O.
@@ -982,15 +982,15 @@
 	if (IS_METABOLICALLY_INERT(M))
 		return
 	var/dosage = M.chem_doses[type]
-	if(dosage >= 1)
-		if(prob(5)) M.Sleeping(3)
+	if (dosage >= 1)
+		if (prob(5)) M.Sleeping(3)
 		M.dizziness =  max(M.dizziness, 3)
 		M.confused =   max(M.confused, 3)
-	if(dosage >= 0.3)
-		if(prob(5)) M.Paralyse(1)
+	if (dosage >= 0.3)
+		if (prob(5)) M.Paralyse(1)
 		M.drowsyness = max(M.drowsyness, 3)
 		M.slurring =   max(M.slurring, 3)
-	if(do_giggle && prob(20))
+	if (do_giggle && prob(20))
 		M.emote(pick("giggle", "laugh"))
 	M.add_chemical_effect(CE_PULSE, -1)
 
@@ -1010,9 +1010,9 @@
 /datum/reagent/immunobooster/affect_blood(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
 		return
-	if(volume < REAGENTS_OVERDOSE && !M.chem_effects[CE_ANTIVIRAL])
+	if (volume < REAGENTS_OVERDOSE && !M.chem_effects[CE_ANTIVIRAL])
 		M.immunity = min(M.immunity_norm * 0.5, removed + M.immunity) // Rapidly brings someone up to half immunity.
-	if(M.chem_effects[CE_ANTIVIRAL]) //don't take with 'cillin
+	if (M.chem_effects[CE_ANTIVIRAL]) //don't take with 'cillin
 		M.add_chemical_effect(CE_TOXIN, 4) // as strong as taking vanilla 'toxin'
 
 
@@ -1033,12 +1033,12 @@
 /datum/reagent/coagulant/affect_blood(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
 		return
-	if(ishuman(M))
+	if (ishuman(M))
 		for(var/obj/item/organ/external/E in M.organs)
-			if(E.status & ORGAN_ARTERY_CUT && prob(10))
+			if (E.status & ORGAN_ARTERY_CUT && prob(10))
 				E.status &= ~ORGAN_ARTERY_CUT
 			for(var/datum/wound/W in E.wounds)
-				if(W.bleeding() && prob(20))
+				if (W.bleeding() && prob(20))
 					W.bleed_timer = 0
 					W.clamped = TRUE
 					E.status &= ~ORGAN_BLEEDING

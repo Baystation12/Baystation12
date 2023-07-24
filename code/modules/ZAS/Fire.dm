@@ -20,20 +20,20 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 
 /turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
-	if(fire_protection > world.time-300)
+	if (fire_protection > world.time-300)
 		return 0
-	if(locate(/obj/hotspot) in src)
+	if (locate(/obj/hotspot) in src)
 		return 1
 	var/datum/gas_mixture/air_contents = return_air()
-	if(!air_contents || exposed_temperature < PHORON_MINIMUM_BURN_TEMPERATURE)
+	if (!air_contents || exposed_temperature < PHORON_MINIMUM_BURN_TEMPERATURE)
 		return 0
 
 	var/igniting = 0
 	var/obj/effect/decal/cleanable/liquid_fuel/liquid = locate() in src
-	if(liquid && air_contents.check_combustability(liquid))
+	if (liquid && air_contents.check_combustability(liquid))
 		IgniteTurf(liquid.amount * 10)
 		QDEL_NULL(liquid)
-	if(air_contents.check_combustability())
+	if (air_contents.check_combustability())
 		igniting = 1
 		create_fire(exposed_temperature)
 	return igniting
@@ -45,19 +45,19 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	air.merge(burn_gas)
 
-	if(firelevel)
+	if (firelevel)
 		for(var/turf/T in fire_tiles)
-			if(T.hotspot)
+			if (T.hotspot)
 				T.hotspot.firelevel = firelevel
 			else
 				fire_tiles -= T
 	else
 		for(var/turf/simulated/T in fire_tiles)
-			if(istype(T.hotspot))
+			if (istype(T.hotspot))
 				qdel(T.hotspot)
 		fire_tiles.Cut()
 
-	if(!length(fire_tiles))
+	if (!length(fire_tiles))
 		SSair.active_fire_zones.Remove(src)
 
 /turf/proc/create_fire(fl)
@@ -65,14 +65,14 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 /turf/simulated/create_fire(fl)
 
-	if(submerged())
+	if (submerged())
 		return 1
 
-	if(hotspot)
+	if (hotspot)
 		hotspot.firelevel = max(fl, hotspot.firelevel)
 		return 1
 
-	if(!zone)
+	if (!zone)
 		return 1
 
 	hotspot = new(src, fl)
@@ -102,18 +102,18 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	. = 1
 
 	var/turf/simulated/my_tile = loc
-	if(!istype(my_tile) || !my_tile.zone || my_tile.submerged())
-		if(my_tile && my_tile.hotspot == src)
+	if (!istype(my_tile) || !my_tile.zone || my_tile.submerged())
+		if (my_tile && my_tile.hotspot == src)
 			my_tile.hotspot = null
 		qdel(src)
 		return PROCESS_KILL
 
 	var/datum/gas_mixture/air_contents = my_tile.return_air()
 
-	if(firelevel > 6)
+	if (firelevel > 6)
 		icon_state = "3"
 		set_light(1, 2, 7)
-	else if(firelevel > 2.5)
+	else if (firelevel > 2.5)
 		icon_state = "2"
 		set_light(0.7, 2, 5)
 	else
@@ -131,24 +131,24 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	for(var/direction in GLOB.cardinal)
 		var/turf/simulated/enemy_tile = get_step(my_tile, direction)
 
-		if(istype(enemy_tile))
-			if(my_tile.open_directions & direction) //Grab all valid bordering tiles
-				if(!enemy_tile.zone || enemy_tile.hotspot)
+		if (istype(enemy_tile))
+			if (my_tile.open_directions & direction) //Grab all valid bordering tiles
+				if (!enemy_tile.zone || enemy_tile.hotspot)
 					continue
 
-				//if(!length(enemy_tile.zone.fire_tiles)) TODO - optimize
+				//if (!length(enemy_tile.zone.fire_tiles)) TODO - optimize
 				var/datum/gas_mixture/acs = enemy_tile.return_air()
-				if(!acs || !acs.check_combustability())
+				if (!acs || !acs.check_combustability())
 					continue
 
 				//If extinguisher mist passed over the turf it's trying to spread to, don't spread and
 				//reduce firelevel.
-				if(enemy_tile.fire_protection > world.time-30)
+				if (enemy_tile.fire_protection > world.time-30)
 					firelevel -= 1.5
 					continue
 
 				//Spread the fire.
-				if(prob( 50 + 50 * (firelevel/vsc.fire_firelevel_multiplier) ) && my_tile.CanPass(null, enemy_tile, 0,0) && enemy_tile.CanPass(null, my_tile, 0,0))
+				if (prob( 50 + 50 * (firelevel/vsc.fire_firelevel_multiplier) ) && my_tile.CanPass(null, enemy_tile, 0,0) && enemy_tile.CanPass(null, my_tile, 0,0))
 					enemy_tile.create_fire(firelevel)
 
 			else
@@ -160,7 +160,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 /obj/hotspot/New(newLoc,fl)
 	..()
 
-	if(!istype(loc, /turf))
+	if (!istype(loc, /turf))
 		qdel(src)
 		return
 
@@ -175,8 +175,8 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	//If this is a turf and it can burn maybe it should be ignited too - Lingering fire effect of sorts
 	var/turf/simulated/floor/F = loc
-	if(istype(F) && F.flooring && F.flooring.flags & TURF_CAN_BURN)
-		if(prob(30))
+	if (istype(F) && F.flooring && F.flooring.flags & TURF_CAN_BURN)
+		if (prob(30))
 			F.IgniteTurf(rand(8,22))
 
 /obj/hotspot/proc/fire_color(env_temperature)
@@ -199,7 +199,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 //Returns the firelevel
 /datum/gas_mixture/proc/react(zone/zone, force_burn, no_check = 0)
 	. = 0
-	if((temperature > PHORON_MINIMUM_BURN_TEMPERATURE || force_burn) && (no_check || check_combustability()))
+	if ((temperature > PHORON_MINIMUM_BURN_TEMPERATURE || force_burn) && (no_check || check_combustability()))
 
 		#ifdef FIREDBG
 		log_debug("***************** FIREDBG *****************")
@@ -212,15 +212,15 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 		//*** Get the fuel and oxidizer amounts
 		for(var/g in gas)
-			if(gas_data.flags[g] & XGM_GAS_FUEL)
+			if (gas_data.flags[g] & XGM_GAS_FUEL)
 				gas_fuel += gas[g]
-			if(gas_data.flags[g] & XGM_GAS_OXIDIZER)
+			if (gas_data.flags[g] & XGM_GAS_OXIDIZER)
 				total_oxidizers += gas[g]
 		gas_fuel *= group_multiplier
 		total_oxidizers *= group_multiplier
 
 		total_fuel = gas_fuel
-		if(total_fuel <= 0.005)
+		if (total_fuel <= 0.005)
 			return 0
 
 		//*** Determine how fast the fire burns
@@ -253,8 +253,8 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 		#endif
 
 		//if the reaction is progressing too slow then it isn't self-sustaining anymore and burns out
-		if(zone) //be less restrictive with canister and tank reactions
-			if((!gas_fuel || used_fuel <= FIRE_GAS_MIN_BURNRATE*length(zone.contents)))
+		if (zone) //be less restrictive with canister and tank reactions
+			if ((!gas_fuel || used_fuel <= FIRE_GAS_MIN_BURNRATE*length(zone.contents)))
 				return 0
 
 
@@ -287,38 +287,38 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 /datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 	. = 0
 	for(var/g in gas)
-		if(gas_data.flags[g] & XGM_GAS_OXIDIZER && gas[g] >= 0.1)
+		if (gas_data.flags[g] & XGM_GAS_OXIDIZER && gas[g] >= 0.1)
 			. = 1
 			break
 
-	if(!.)
+	if (!.)
 		return 0
 
-	if(fuel_objs && length(fuel_objs))
+	if (fuel_objs && length(fuel_objs))
 		return 1
 
 	. = 0
 	for(var/g in gas)
-		if(gas_data.flags[g] & XGM_GAS_FUEL && gas[g] >= 0.1)
+		if (gas_data.flags[g] & XGM_GAS_FUEL && gas[g] >= 0.1)
 			. = 1
 			break
 
 /datum/gas_mixture/proc/check_combustability(obj/effect/decal/cleanable/liquid_fuel/liquid=null)
 	. = 0
 	for(var/g in gas)
-		if(gas_data.flags[g] & XGM_GAS_OXIDIZER && QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.1)
+		if (gas_data.flags[g] & XGM_GAS_OXIDIZER && QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.1)
 			. = 1
 			break
 
-	if(!.)
+	if (!.)
 		return 0
 
-	if(liquid)
+	if (liquid)
 		return 1
 
 	. = 0
 	for(var/g in gas)
-		if(gas_data.flags[g] & XGM_GAS_FUEL && QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.1)
+		if (gas_data.flags[g] & XGM_GAS_FUEL && QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.1)
 			. = 1
 			break
 
@@ -330,7 +330,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	var/total_combustables = (total_fuel + total_oxidizers)
 	var/active_combustables = (FIRE_REACTION_OXIDIZER_AMOUNT/FIRE_REACTION_FUEL_AMOUNT + 1)*reaction_limit
 
-	if(total_moles && total_combustables > 0)
+	if (total_moles && total_combustables > 0)
 		//slows down the burning when the concentration of the reactants is low
 		var/damping_multiplier = min(1, active_combustables / (total_moles/group_multiplier))
 
@@ -374,16 +374,16 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 		if (IsHolding(C))
 			continue
 
-		if( C.max_heat_protection_temperature >= last_temperature )
-			if(C.body_parts_covered & HEAD)
+		if ( C.max_heat_protection_temperature >= last_temperature )
+			if (C.body_parts_covered & HEAD)
 				head_exposure = 0
-			if(C.body_parts_covered & UPPER_TORSO)
+			if (C.body_parts_covered & UPPER_TORSO)
 				chest_exposure = 0
-			if(C.body_parts_covered & LOWER_TORSO)
+			if (C.body_parts_covered & LOWER_TORSO)
 				groin_exposure = 0
-			if(C.body_parts_covered & LEGS)
+			if (C.body_parts_covered & LEGS)
 				legs_exposure = 0
-			if(C.body_parts_covered & ARMS)
+			if (C.body_parts_covered & ARMS)
 				arms_exposure = 0
 	//minimize this for low-pressure environments
 	var/mx = 5 * firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)

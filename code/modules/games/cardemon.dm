@@ -10,9 +10,9 @@
 		var/element = pick("ire","spaghetti","meat","metal","money","brain")
 		var/stats = list("HP"=rand(1,15),"DP"=rand(1,15),"SP"=rand(1,15))
 		var/rarity
-		if(prob(10))
-			if(prob(5))
-				if(prob(5))
+		if (prob(10))
+			if (prob(5))
+				if (prob(5))
 					rarity = "Plasteel"
 				else
 					rarity = "Platinum"
@@ -25,7 +25,7 @@
 		P = new()
 		P.name = "[nam] [nam2] [stats["HP"]]/[stats["DP"]]/[stats["SP"]]"
 		P.card_icon = "card_cardemon"
-		if(rarity)
+		if (rarity)
 			P.name = "[rarity] [P.name]"
 			P.card_icon += "_[rarity]"
 		P.back_icon = "card_back_cardemon"

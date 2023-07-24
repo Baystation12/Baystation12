@@ -27,22 +27,22 @@
 //returns a list.
 /datum/nano_module/proc/get_access(mob/user)
 	. = using_access
-	if(istype(user))
+	if (istype(user))
 		var/obj/item/card/id/I = user.GetIdCard()
-		if(I)
+		if (I)
 			. |= I.access
 
 /datum/nano_module/proc/check_access(mob/user, access)
-	if(!access)
+	if (!access)
 		return 1
-	if(!islist(access))
+	if (!islist(access))
 		access = list(access) //listify a single access code.
-	if(has_access(access, using_access))
+	if (has_access(access, using_access))
 		return 1 //This is faster, and often enough.
 	return has_access(access, get_access(user)) //Also checks the mob's ID.
 
 /datum/nano_module/Topic(href, href_list)
-	if(topic_manager && topic_manager.Topic(href, href_list))
+	if (topic_manager && topic_manager.Topic(href, href_list))
 		return TRUE
 	. = ..()
 
@@ -51,7 +51,7 @@
 
 /datum/nano_module/proc/print_text(text, mob/user)
 	var/datum/extension/interactive/ntos/os = get_extension(nano_host(), /datum/extension/interactive/ntos)
-	if(os)
+	if (os)
 		os.print_paper(text)
 	else
 		to_chat(user, "Error: Unable to detect compatible printer interface. Are you running NTOSv2 compatible system?")

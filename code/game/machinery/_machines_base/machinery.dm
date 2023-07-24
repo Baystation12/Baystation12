@@ -79,19 +79,19 @@
 
 /obj/machinery/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
-	if(d)
+	if (d)
 		set_dir(d)
 	if (init_flags & INIT_MACHINERY_START_PROCESSING)
 		START_PROCESSING_MACHINE(src, INIT_MACHINERY_START_PROCESSING)
 	SSmachines.machinery += src // All machines should remain in this list, always.
-	if(ispath(wires))
+	if (ispath(wires))
 		wires = new wires(src)
 	populate_parts(populate_parts)
 	RefreshParts()
 	power_change()
 
 /obj/machinery/Destroy()
-	if(istype(wires))
+	if (istype(wires))
 		QDEL_NULL(wires)
 	SSmachines.machinery -= src
 	QDEL_NULL_LIST(component_parts) // Further handling is done via destroyed events.
@@ -112,7 +112,7 @@
 	return PROCESS_KILL // Only process if you need to.
 
 /obj/machinery/emp_act(severity)
-	if(use_power && operable())
+	if (use_power && operable())
 		use_power_oneoff(7500/severity)
 
 		var/obj/effect/overlay/pulse2 = new /obj/effect/overlay(loc)
@@ -141,23 +141,23 @@
 	if (get_max_health())
 		return
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			qdel(src)
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			if (prob(25))
 				qdel(src)
 
 /obj/machinery/CanUseTopic(mob/user)
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		return STATUS_CLOSE
 
-	if(!interact_offline && (!is_powered()))
+	if (!interact_offline && (!is_powered()))
 		return STATUS_CLOSE
 
-	if(user.direct_machine_interface(src))
+	if (user.direct_machine_interface(src))
 		var/mob/living/silicon/silicon = user
 		if (silicon_restriction && ismachinerestricted(silicon))
 			if (silicon_restriction == STATUS_CLOSE)
@@ -166,10 +166,10 @@
 
 		return ..()
 
-	if(GET_FLAGS(stat, MACHINE_STAT_NOSCREEN))
+	if (GET_FLAGS(stat, MACHINE_STAT_NOSCREEN))
 		return STATUS_CLOSE
 
-	if(GET_FLAGS(stat, MACHINE_STAT_NOINPUT))
+	if (GET_FLAGS(stat, MACHINE_STAT_NOINPUT))
 		return min(..(), STATUS_UPDATE)
 	return ..()
 
@@ -184,7 +184,7 @@
 	return TRUE
 
 /obj/machinery/CanUseTopicPhysical(mob/user)
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		return STATUS_CLOSE
 
 	return GLOB.physical_state.can_use_topic(nano_host(), user)
@@ -197,26 +197,26 @@
 	user.unset_machine()
 
 /obj/machinery/Topic(href, href_list, datum/topic_state/state)
-	if(href_list["mechanics_text"] && construct_state) // This is an OOC examine thing handled via Topic; specifically bypass all checks, but do nothing other than message to chat.
+	if (href_list["mechanics_text"] && construct_state) // This is an OOC examine thing handled via Topic; specifically bypass all checks, but do nothing other than message to chat.
 		var/list/info = construct_state.mechanics_info()
-		if(info)
+		if (info)
 			to_chat(usr, jointext(info, "<br>"))
 			return TOPIC_HANDLED
 
 	. = ..()
-	if(. == TOPIC_REFRESH)
+	if (. == TOPIC_REFRESH)
 		updateUsrDialog() // Update legacy UIs to the extent possible.
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 /obj/machinery/attack_ai(mob/user)
-	if(CanUseTopic(user, DefaultTopicState()) > STATUS_CLOSE)
+	if (CanUseTopic(user, DefaultTopicState()) > STATUS_CLOSE)
 		return interface_interact(user)
 
 /obj/machinery/attack_robot(mob/user)
-	if((. = attack_hand(user))) // This will make a physical proximity check, and allow them to deal with components and such.
+	if ((. = attack_hand(user))) // This will make a physical proximity check, and allow them to deal with components and such.
 		return
-	if(CanUseTopic(user, DefaultTopicState()) > STATUS_CLOSE)
+	if (CanUseTopic(user, DefaultTopicState()) > STATUS_CLOSE)
 		return interface_interact(user) // This may still work even if the physical checks fail.
 
 // After a recent rework this should mostly be safe.
@@ -226,32 +226,32 @@
 // If you don't call parent in this proc, you must make all appropriate checks yourself.
 // If you do, you must respect the return value.
 /obj/machinery/attack_hand(mob/user)
-	if((. = ..())) // Buckling, climbers; unlikely to return true.
+	if ((. = ..())) // Buckling, climbers; unlikely to return true.
 		return
-	if(MUTATION_FERAL in user.mutations)
+	if (MUTATION_FERAL in user.mutations)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2)
 		attack_generic(user, 10, "smashes")
 		return TRUE
-	if(!CanPhysicallyInteract(user))
+	if (!CanPhysicallyInteract(user))
 		return FALSE // The interactions below all assume physical access to the machine. If this is not the case, we let the machine take further action.
-	if(!user.IsAdvancedToolUser())
+	if (!user.IsAdvancedToolUser())
 		to_chat(user, SPAN_WARNING("You don't have the dexterity to do this!"))
 		return TRUE
-	if(ishuman(user))
+	if (ishuman(user))
 		var/mob/living/carbon/human/H = user
-		if(H.getBrainLoss() >= 55)
+		if (H.getBrainLoss() >= 55)
 			visible_message(SPAN_WARNING("\The [H] stares cluelessly at \the [src]."))
 			return TRUE
-		else if(prob(H.getBrainLoss()))
+		else if (prob(H.getBrainLoss()))
 			to_chat(user, SPAN_WARNING("You momentarily forget how to use \the [src]."))
 			return TRUE
-	if((. = component_attack_hand(user)))
+	if ((. = component_attack_hand(user)))
 		return
-	if(wires && (. = wires.Interact(user)))
+	if (wires && (. = wires.Interact(user)))
 		return
-	if((. = physical_attack_hand(user)))
+	if ((. = physical_attack_hand(user)))
 		return
-	if(CanUseTopic(user, DefaultTopicState()) > STATUS_CLOSE)
+	if (CanUseTopic(user, DefaultTopicState()) > STATUS_CLOSE)
 		return interface_interact(user)
 
 
@@ -303,22 +303,22 @@
 /obj/machinery/proc/shock(mob/user, prb)
 	if (!user)
 		return FALSE
-	if(inoperable())
+	if (inoperable())
 		return FALSE
-	if(!prob(prb))
+	if (!prob(prb))
 		return FALSE
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(5, 1, src)
 	s.start()
-	if(electrocute_mob(user, get_area(src), src, 0.7))
+	if (electrocute_mob(user, get_area(src), src, 0.7))
 		var/area/temp_area = get_area(src)
-		if(temp_area)
+		if (temp_area)
 			var/obj/machinery/power/apc/temp_apc = temp_area.get_apc()
 			var/obj/machinery/power/terminal/terminal = temp_apc && temp_apc.terminal()
 
-			if(terminal && terminal.powernet)
+			if (terminal && terminal.powernet)
 				terminal.powernet.trigger_warning()
-		if(user.stunned)
+		if (user.stunned)
 			return TRUE
 	return FALSE
 
@@ -326,9 +326,9 @@
 /obj/machinery/proc/dismantle()
 	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 	var/obj/item/stock_parts/circuitboard/circuit = get_component_of_type(/obj/item/stock_parts/circuitboard)
-	if(circuit)
+	if (circuit)
 		circuit.deconstruct(src)
-	if(ispath(frame_type, /obj/item/pipe))
+	if (ispath(frame_type, /obj/item/pipe))
 		new frame_type(get_turf(src), src)
 	else
 		new frame_type(get_turf(src), dir)
@@ -360,7 +360,7 @@
 
 /obj/machinery/CouldUseTopic(mob/user)
 	..()
-	if(clicksound && world.time > next_clicksound && istype(user, /mob/living/carbon))
+	if (clicksound && world.time > next_clicksound && istype(user, /mob/living/carbon))
 		next_clicksound = world.time + CLICKSOUND_INTERVAL
 		playsound(src, clicksound, clickvol)
 
@@ -377,18 +377,18 @@
 	. = ..()
 	if (panel_open)
 		to_chat(user, SPAN_NOTICE("The service panel is open."))
-	if(component_parts && hasHUD(user, HUD_SCIENCE))
+	if (component_parts && hasHUD(user, HUD_SCIENCE))
 		display_parts(user)
-	if(GET_FLAGS(stat, MACHINE_STAT_NOSCREEN))
+	if (GET_FLAGS(stat, MACHINE_STAT_NOSCREEN))
 		to_chat(user, SPAN_WARNING("It is missing a screen, making it hard to interact with."))
-	else if(GET_FLAGS(stat, MACHINE_STAT_NOINPUT))
+	else if (GET_FLAGS(stat, MACHINE_STAT_NOINPUT))
 		to_chat(user, SPAN_WARNING("It is missing any input device."))
-	else if((!is_powered()) && !interact_offline)
+	else if ((!is_powered()) && !interact_offline)
 		to_chat(user, SPAN_WARNING("It is not receiving power."))
-	if(construct_state && construct_state.mechanics_info())
+	if (construct_state && construct_state.mechanics_info())
 		to_chat(user, SPAN_NOTICE("It can be <a href='?src=\ref[src];mechanics_text=1'>manipulated</a> using tools."))
 	var/list/missing = missing_parts()
-	if(missing)
+	if (missing)
 		var/list/parts = list()
 		for(var/type in missing)
 			var/obj/item/fake_thing = type
@@ -458,17 +458,17 @@
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/water_act(depth)
 	..()
-	if(operable() && !waterproof && (depth > FLUID_DEEP))
+	if (operable() && !waterproof && (depth > FLUID_DEEP))
 		ex_act(EX_ACT_LIGHT)
 
 /obj/machinery/Move()
 	. = ..()
-	if(. && !CanFluidPass())
+	if (. && !CanFluidPass())
 		fluid_update()
 
 /obj/machinery/get_cell()
 	var/obj/item/stock_parts/power/battery/battery = get_component_of_type(/obj/item/stock_parts/power/battery)
-	if(battery)
+	if (battery)
 		return battery.get_cell()
 
 /// Called by `/mob/Login()` if the mob has an associated `machine`.

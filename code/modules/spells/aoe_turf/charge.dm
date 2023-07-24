@@ -19,16 +19,16 @@
 
 /spell/aoe_turf/charge/proc/depth_cast(list/targets)
 	for(var/atom/A in targets)
-		if(length(A.contents))
+		if (length(A.contents))
 			depth_cast(A.contents)
 		cast_charge(A)
 
 /spell/aoe_turf/charge/proc/mob_charge(mob/living/M)
-	if(!M.mind)
+	if (!M.mind)
 		return
-	if(length(M.mind.learned_spells) != 0)
+	if (length(M.mind.learned_spells) != 0)
 		for(var/spell/S in M.mind.learned_spells)
-			if(!istype(S, /spell/aoe_turf/charge))
+			if (!istype(S, /spell/aoe_turf/charge))
 				S.charge_counter = S.charge_max
 		to_chat(M, SPAN_NOTICE("You feel raw magic flowing through you, it feels good!"))
 	else
@@ -38,25 +38,25 @@
 /spell/aoe_turf/charge/proc/cast_charge(atom/target)
 	var/atom/charged_item
 
-	if(istype(target, /mob/living))
+	if (istype(target, /mob/living))
 		charged_item = mob_charge(target)
 
-	if(istype(target, /obj/item/grab))
+	if (istype(target, /obj/item/grab))
 		var/obj/item/grab/G = target
-		if(G.affecting)
+		if (G.affecting)
 			var/mob/M = G.affecting
 			charged_item = mob_charge(M)
 
-	if(istype(target, /obj/item/cell))
+	if (istype(target, /obj/item/cell))
 		var/obj/item/cell/C = target
-		if(prob(80) && C.maxcharge)
+		if (prob(80) && C.maxcharge)
 			C.maxcharge -= 200
-			if(C.maxcharge <= 0) //maxcharge of 0! Madness!
+			if (C.maxcharge <= 0) //maxcharge of 0! Madness!
 				C.maxcharge = 0
 			C.charge = C.maxcharge
 			charged_item = C
 
-	if(!charged_item)
+	if (!charged_item)
 		return 0
 	else
 		charged_item.visible_message(SPAN_NOTICE("[charged_item] suddenly sparks with energy!"))

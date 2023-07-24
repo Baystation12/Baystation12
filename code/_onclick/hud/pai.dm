@@ -30,9 +30,9 @@
 	icon = 'icons/mob/screen/pai.dmi'
 
 /obj/screen/pai/Click()
-	if(!isobserver(usr) && (!usr.incapacitated() || usr.resting))
+	if (!isobserver(usr) && (!usr.incapacitated() || usr.resting))
 		OnClick()
-	
+
 /obj/screen/pai/proc/OnClick()
 
 /obj/screen/pai/software
@@ -51,7 +51,7 @@
 
 /obj/screen/pai/shell/OnClick()
 	var/mob/living/silicon/pai/pAI = usr
-	if(pAI.is_in_card)
+	if (pAI.is_in_card)
 		pAI.unfold()
 	else
 		pAI.fold()
@@ -100,5 +100,5 @@
 		return
 
 	var/stat_silicon_subsystem/SSS = pAI.silicon_subsystems_by_name[ss_name]
-	if(istype(SSS))
+	if (istype(SSS))
 		SSS.Click()

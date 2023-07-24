@@ -19,28 +19,28 @@
 	var/mark = null
 
 /spell/mark_recall/choose_targets()
-	if(!mark)
+	if (!mark)
 		return list("magical fairy dust") //because why not
 	else
 		return list(mark)
 
 /spell/mark_recall/cast(list/targets,mob/user)
-	if(!length(targets))
+	if (!length(targets))
 		return 0
 	var/target = targets[1]
-	if(istext(target))
+	if (istext(target))
 		mark = new /obj/effect/cleanable/wizard_mark(get_turf(user),src)
 		return 1
-	if(!istype(target,/obj)) //something went wrong
+	if (!istype(target,/obj)) //something went wrong
 		return 0
 	var/turf/T = get_turf(target)
-	if(!T)
+	if (!T)
 		return 0
 	user.forceMove(T)
 	..()
 
 /spell/mark_recall/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 
 	spell_flags = NO_SOMATIC
@@ -69,7 +69,7 @@
 	..()
 
 /obj/effect/cleanable/wizard_mark/attack_hand(mob/user)
-	if(user == spell.holder)
+	if (user == spell.holder)
 		user.visible_message("\The [user] mutters an incantation and \the [src] disappears!")
 		qdel(src)
 	..()

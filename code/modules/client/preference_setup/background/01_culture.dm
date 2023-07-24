@@ -1,8 +1,8 @@
 #define GET_ALLOWED_VALUES(write_to, check_key) \
 	var/datum/species/S = all_species[pref.species]; \
-	if(!S) { \
+	if (!S) { \
 		write_to = list(); \
-	} else if(S.force_cultural_info[check_key]) { \
+	} else if (S.force_cultural_info[check_key]) { \
 		write_to = list(S.force_cultural_info[check_key] = TRUE); \
 	} else { \
 		write_to = list(); \
@@ -30,16 +30,16 @@
 	..()
 
 /datum/category_item/player_setup_item/background/culture/sanitize_character()
-	if(!islist(pref.cultural_info))
+	if (!islist(pref.cultural_info))
 		pref.cultural_info = list()
 	for(var/token in tokens)
 		var/list/_cultures
 		GET_ALLOWED_VALUES(_cultures, token)
-		if(!LAZYLEN(_cultures))
+		if (!LAZYLEN(_cultures))
 			pref.cultural_info[token] = GLOB.using_map.default_cultural_info[token]
 		else
 			var/current_value = pref.cultural_info[token]
-			if(!current_value|| !_cultures[current_value])
+			if (!current_value|| !_cultures[current_value])
 				pref.cultural_info[token] = _cultures[1]
 
 /datum/category_item/player_setup_item/background/culture/load_character(datum/pref_record_reader/R)
@@ -83,11 +83,11 @@
 
 	for(var/token in tokens)
 
-		if(href_list["toggle_verbose_[token]"])
+		if (href_list["toggle_verbose_[token]"])
 			hidden[token] = !hidden[token]
 			return TOPIC_REFRESH
 
-		if(href_list["expand_options_[token]"])
+		if (href_list["expand_options_[token]"])
 			expanded[token] = !expanded[token]
 			return TOPIC_REFRESH
 

@@ -58,7 +58,7 @@
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "rcon.tmpl", "RCON Console", 600, 400, state = state)
-		if(host.update_layout()) // This is necessary to ensure the status bar remains updated along with rest of the UI.
+		if (host.update_layout()) // This is necessary to ensure the status bar remains updated along with rest of the UI.
 			ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
@@ -68,43 +68,43 @@
 // Parameters: 2 (href, href_list - allows us to process UI clicks)
 // Description: Allows us to process UI clicks, which are relayed in form of hrefs.
 /datum/nano_module/rcon/Topic(href, href_list)
-	if(..())
+	if (..())
 		return
 
-	if(href_list["smes_in_toggle"])
+	if (href_list["smes_in_toggle"])
 		var/obj/machinery/power/smes/buildable/SMES = GetSMESByTag(href_list["smes_in_toggle"])
-		if(SMES)
+		if (SMES)
 			SMES.toggle_input()
-	if(href_list["smes_out_toggle"])
+	if (href_list["smes_out_toggle"])
 		var/obj/machinery/power/smes/buildable/SMES = GetSMESByTag(href_list["smes_out_toggle"])
-		if(SMES)
+		if (SMES)
 			SMES.toggle_output()
-	if(href_list["smes_in_set"])
+	if (href_list["smes_in_set"])
 		var/obj/machinery/power/smes/buildable/SMES = GetSMESByTag(href_list["smes_in_set"])
-		if(SMES)
+		if (SMES)
 			var/inputset = (input(usr, "Enter new input level (0-[SMES.input_level_max/1000] kW)", "SMES Input Power Control", SMES.input_level/1000) as num) * 1000
 			SMES.set_input(inputset)
-	if(href_list["smes_out_set"])
+	if (href_list["smes_out_set"])
 		var/obj/machinery/power/smes/buildable/SMES = GetSMESByTag(href_list["smes_out_set"])
-		if(SMES)
+		if (SMES)
 			var/outputset = (input(usr, "Enter new output level (0-[SMES.output_level_max/1000] kW)", "SMES Input Power Control", SMES.output_level/1000) as num) * 1000
 			SMES.set_output(outputset)
 
-	if(href_list["toggle_breaker"])
+	if (href_list["toggle_breaker"])
 		var/obj/machinery/power/breakerbox/toggle = null
 		for(var/obj/machinery/power/breakerbox/breaker in known_breakers)
-			if(breaker.RCon_tag == href_list["toggle_breaker"])
+			if (breaker.RCon_tag == href_list["toggle_breaker"])
 				toggle = breaker
-		if(toggle)
-			if(toggle.update_locked)
+		if (toggle)
+			if (toggle.update_locked)
 				to_chat(usr, "The breaker box was recently toggled. Please wait before toggling it again.")
 			else
 				toggle.auto_toggle()
-	if(href_list["hide_smes"])
+	if (href_list["hide_smes"])
 		hide_SMES = !hide_SMES
-	if(href_list["hide_smes_details"])
+	if (href_list["hide_smes_details"])
 		hide_SMES_details = !hide_SMES_details
-	if(href_list["hide_breakers"])
+	if (href_list["hide_breakers"])
 		hide_breakers = !hide_breakers
 
 
@@ -112,11 +112,11 @@
 // Parameters: 1 (tag - RCON tag of SMES we want to look up)
 // Description: Looks up and returns SMES which has matching RCON tag
 /datum/nano_module/rcon/proc/GetSMESByTag(tag)
-	if(!tag)
+	if (!tag)
 		return
 
 	for(var/obj/machinery/power/smes/buildable/S in known_SMESs)
-		if(S.RCon_tag == tag)
+		if (S.RCon_tag == tag)
 			return S
 
 // Proc: FindDevices()
@@ -125,10 +125,10 @@
 /datum/nano_module/rcon/proc/FindDevices()
 	known_SMESs = new /list()
 	for(var/obj/machinery/power/smes/buildable/SMES in SSmachines.machinery)
-		if(AreConnectedZLevels(get_host_z(), get_z(SMES)) && SMES.RCon_tag && (SMES.RCon_tag != "NO_TAG") && SMES.RCon)
+		if (AreConnectedZLevels(get_host_z(), get_z(SMES)) && SMES.RCon_tag && (SMES.RCon_tag != "NO_TAG") && SMES.RCon)
 			known_SMESs.Add(SMES)
 
 	known_breakers = new /list()
 	for(var/obj/machinery/power/breakerbox/breaker in SSmachines.machinery)
-		if(AreConnectedZLevels(get_host_z(), get_z(breaker)) && breaker.RCon_tag != "NO_TAG")
+		if (AreConnectedZLevels(get_host_z(), get_z(breaker)) && breaker.RCon_tag != "NO_TAG")
 			known_breakers.Add(breaker)

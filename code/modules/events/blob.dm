@@ -8,7 +8,7 @@
 
 /datum/event/blob/start()
 	var/turf/T = pick_subarea_turf(/area/maintenance, list(/proc/is_station_turf, /proc/not_turf_contains_dense_objects))
-	if(!T)
+	if (!T)
 		log_and_message_admins("Blob failed to find a viable turf.")
 		kill()
 		return
@@ -19,9 +19,9 @@
 		Blob.Process()
 
 /datum/event/blob/tick()
-	if(!Blob || !Blob.loc)
+	if (!Blob || !Blob.loc)
 		Blob = null
 		kill()
 		return
-	if(IsMultiple(activeFor, 3))
+	if (IsMultiple(activeFor, 3))
 		Blob.Process()

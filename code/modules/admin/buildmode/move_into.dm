@@ -15,12 +15,12 @@
 	to_chat(user, SPAN_NOTICE("***********************************************************"))
 
 /datum/build_mode/move_into/OnClick(atom/movable/A, list/parameters)
-	if(parameters["left"])
+	if (parameters["left"])
 		SetDestination(A)
-	if(parameters["right"])
-		if(!destination)
+	if (parameters["right"])
+		if (!destination)
 			to_chat(user, SPAN_WARNING("No target destination."))
-		else if(!ismovable(A))
+		else if (!ismovable(A))
 			to_chat(user, SPAN_WARNING("\The [A] must be of type /atom/movable."))
 		else
 			to_chat(user, SPAN_NOTICE("Moved \the [A] into \the [destination]."))
@@ -28,7 +28,7 @@
 			A.forceMove(destination)
 
 /datum/build_mode/move_into/proc/SetDestination(atom/A)
-	if(A == destination)
+	if (A == destination)
 		return
 	ClearDestination()
 
@@ -37,10 +37,10 @@
 	to_chat(user, SPAN_NOTICE("Will now move targets into \the [destination]."))
 
 /datum/build_mode/move_into/proc/ClearDestination(feedback)
-	if(!destination)
+	if (!destination)
 		return
 
 	GLOB.destroyed_event.unregister(destination, src, /datum/build_mode/move_into/proc/ClearDestination)
 	destination = null
-	if(feedback)
+	if (feedback)
 		Warn("The selected destination was deleted.")

@@ -8,12 +8,12 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 
 /obj/aura/New(mob/living/target)
 	..()
-	if(target)
+	if (target)
 		added_to(target)
 		user.add_aura(src)
 
 /obj/aura/Destroy()
-	if(user)
+	if (user)
 		user.remove_aura(src)
 		removed()
 	return ..()

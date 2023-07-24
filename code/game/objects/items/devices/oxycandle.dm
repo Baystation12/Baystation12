@@ -21,12 +21,12 @@
 	update_icon()
 
 /obj/item/device/oxycandle/afterattack(obj/O, mob/user, proximity)
-	if(proximity && istype(O) && on)
+	if (proximity && istype(O) && on)
 		O.HandleObjectHeating(src, user, 500)
 	..()
 
 /obj/item/device/oxycandle/attack_self(mob/user)
-	if(!on)
+	if (!on)
 		to_chat(user, SPAN_NOTICE("You pull the cord and [src] ignites."))
 		on = 1
 		update_icon()
@@ -40,10 +40,10 @@
 
 // Process of Oxygen candles releasing air. Makes 200 volume of oxygen
 /obj/item/device/oxycandle/Process()
-	if(!loc)
+	if (!loc)
 		return
 	var/turf/pos = get_turf(src)
-	if(volume <= 0 || !pos || (pos.turf_flags & TURF_IS_WET)) //Now uses turf flags instead of whatever aurora did
+	if (volume <= 0 || !pos || (pos.turf_flags & TURF_IS_WET)) //Now uses turf flags instead of whatever aurora did
 		STOP_PROCESSING(SSprocessing, src)
 		on = 2
 		update_icon()
@@ -51,7 +51,7 @@
 		SetName("burnt oxygen candle")
 		desc += "This tube has exhausted its chemicals."
 		return
-	if(pos)
+	if (pos)
 		pos.hotspot_expose(1500, 5)
 	var/datum/gas_mixture/environment = loc.return_air()
 	var/pressure_delta = target_pressure - environment.return_pressure()
@@ -67,11 +67,11 @@
 	air_contents.adjust_multi(GAS_OXYGEN, air_mix[GAS_OXYGEN])
 
 /obj/item/device/oxycandle/on_update_icon()
-	if(on == 1)
+	if (on == 1)
 		icon_state = "oxycandle_on"
 		item_state = icon_state
 		set_light(brightness_on)
-	else if(on == 2)
+	else if (on == 2)
 		icon_state = "oxycandle_burnt"
 		item_state = icon_state
 		set_light(0)

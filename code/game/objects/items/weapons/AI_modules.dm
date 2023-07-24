@@ -22,28 +22,28 @@ AI MODULES
 	var/datum/ai_laws/laws = null
 
 /obj/item/aiModule/proc/install(obj/machinery/computer/upload/comp, mob/user)
-	if(!istype(comp))
+	if (!istype(comp))
 		return
 
-	if(MACHINE_IS_BROKEN(comp))
+	if (MACHINE_IS_BROKEN(comp))
 		to_chat(user, "\The [comp] is broken!")
 		return
-	if(!comp.is_powered())
+	if (!comp.is_powered())
 		to_chat(user, "\The [comp] has no power!")
 		return
-	if(!comp.current)
+	if (!comp.current)
 		to_chat(user, "You haven't selected an intelligence to transmit laws to!")
 		return
 
-	if(comp.current.stat == DEAD)
+	if (comp.current.stat == DEAD)
 		to_chat(user, "Upload failed. No signal is being detected from the intelligence.")
 		return
-	if(istype(comp.current, /mob/living/silicon/ai))
+	if (istype(comp.current, /mob/living/silicon/ai))
 		var/mob/living/silicon/ai/ai = comp.current
-		if(ai.control_disabled)
+		if (ai.control_disabled)
 			to_chat(user, "Upload failed. No signal is being detected from the intelligence.")
 			return
-		else if(!ai.see_in_dark)
+		else if (!ai.see_in_dark)
 			to_chat(user, "Upload failed. Only a faint signal is being detected from the intelligence, and it is not responding to our requests. It may be low on power.")
 			return
 
@@ -54,7 +54,7 @@ AI MODULES
 /obj/item/aiModule/proc/transmitInstructions(mob/living/silicon/target, mob/sender)
 	log_law_changes(target, sender)
 
-	if(laws)
+	if (laws)
 		laws.sync(target, 0)
 	addAdditionalLaws(target, sender)
 
@@ -62,7 +62,7 @@ AI MODULES
 	target.show_laws()
 
 	var/mob/living/silicon/ai/ai = target
-	if(!istype(ai))
+	if (!istype(ai))
 		return //We don't have slaves if we are not an AI
 
 	for(var/mob/living/silicon/robot/R in ai.connected_robots)
@@ -94,7 +94,7 @@ AI MODULES
 	desc = text("A 'safeguard' AI module: 'Safeguard []. Anyone threatening or attempting to harm [] is no longer to be considered a crew member, and is a threat which must be neutralized.'.", targetName, targetName)
 
 /obj/item/aiModule/safeguard/install(obj/machinery/computer/C, mob/user)
-	if(!targetName)
+	if (!targetName)
 		to_chat(user, "No name detected on module, please enter one.")
 		return 0
 	..()
@@ -120,7 +120,7 @@ AI MODULES
 	desc = text("A 'one crew member' AI module: 'Only [] is a crew member.'.", targetName)
 
 /obj/item/aiModule/oneHuman/install(obj/machinery/computer/C, mob/user)
-	if(!targetName)
+	if (!targetName)
 		to_chat(user, "No name detected on module, please enter one.")
 		return 0
 	return ..()
@@ -201,7 +201,7 @@ AI MODULES
 /obj/item/aiModule/freeform/attack_self(mob/user)
 	..()
 	var/new_lawpos = input("Please enter the priority for your new law. Can only write to law sectors 15 and above.", "Law Priority (15+)", lawpos) as num
-	if(new_lawpos < MIN_SUPPLIED_LAW_NUMBER)	return
+	if (new_lawpos < MIN_SUPPLIED_LAW_NUMBER)	return
 	lawpos = min(new_lawpos, MAX_SUPPLIED_LAW_NUMBER)
 	var/newlaw = ""
 	var/targName = sanitize(input(user, "Please enter a new law for the AI.", "Freeform Law Entry", newlaw))
@@ -210,13 +210,13 @@ AI MODULES
 
 /obj/item/aiModule/freeform/addAdditionalLaws(mob/living/silicon/ai/target, mob/sender)
 	var/law = "[newFreeFormLaw]"
-	if(!lawpos || lawpos < MIN_SUPPLIED_LAW_NUMBER)
+	if (!lawpos || lawpos < MIN_SUPPLIED_LAW_NUMBER)
 		lawpos = MIN_SUPPLIED_LAW_NUMBER
 	target.add_supplied_law(lawpos, law)
 	GLOB.lawchanges.Add("The law was '[newFreeFormLaw]'")
 
 /obj/item/aiModule/freeform/install(obj/machinery/computer/C, mob/user)
-	if(!newFreeFormLaw)
+	if (!newFreeFormLaw)
 		to_chat(user, "No law detected on module, please create one.")
 		return 0
 	..()
@@ -343,7 +343,7 @@ AI MODULES
 	GLOB.lawchanges.Add("The law is '[newFreeFormLaw]'")
 
 /obj/item/aiModule/freeformcore/install(obj/machinery/computer/C, mob/user)
-	if(!newFreeFormLaw)
+	if (!newFreeFormLaw)
 		to_chat(user, "No law detected on module, please create one.")
 		return 0
 	..()
@@ -372,7 +372,7 @@ AI MODULES
 	target.show_laws()
 
 /obj/item/aiModule/syndicate/install(obj/machinery/computer/C, mob/user)
-	if(!newFreeFormLaw)
+	if (!newFreeFormLaw)
 		to_chat(user, "No law detected on module, please create one.")
 		return 0
 	..()

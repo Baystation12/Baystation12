@@ -26,24 +26,24 @@
 
 /obj/machinery/atmospherics/omni/mixer/Initialize()
 	. = ..()
-	if(mapper_set())
+	if (mapper_set())
 		var/con = 0
 		for(var/datum/omni_port/P in ports)
 			switch(P.dir)
-				if(NORTH)
-					if(tag_north_con && tag_north == 1)
+				if (NORTH)
+					if (tag_north_con && tag_north == 1)
 						P.concentration = tag_north_con
 						con += max(0, tag_north_con)
-				if(SOUTH)
-					if(tag_south_con && tag_south == 1)
+				if (SOUTH)
+					if (tag_south_con && tag_south == 1)
 						P.concentration = tag_south_con
 						con += max(0, tag_south_con)
-				if(EAST)
-					if(tag_east_con && tag_east == 1)
+				if (EAST)
+					if (tag_east_con && tag_east == 1)
 						P.concentration = tag_east_con
 						con += max(0, tag_east_con)
-				if(WEST)
-					if(tag_west_con && tag_west == 1)
+				if (WEST)
+					if (tag_west_con && tag_west == 1)
 						P.concentration = tag_west_con
 						con += max(0, tag_west_con)
 
@@ -57,23 +57,23 @@
 
 /obj/machinery/atmospherics/omni/mixer/sort_ports()
 	for(var/datum/omni_port/P in ports)
-		if(P.update)
-			if(output == P)
+		if (P.update)
+			if (output == P)
 				output = null
-			if(inputs.Find(P))
+			if (inputs.Find(P))
 				inputs -= P
 
 			switch(P.mode)
-				if(ATM_INPUT)
+				if (ATM_INPUT)
 					inputs += P
-				if(ATM_OUTPUT)
+				if (ATM_OUTPUT)
 					output = P
 
-	if(!mapper_set())
+	if (!mapper_set())
 		for(var/datum/omni_port/P in inputs)
 			P.concentration = 1 / max(1, length(inputs))
 
-	if(output)
+	if (output)
 		output.air.volume = ATMOS_DEFAULT_VOLUME_MIXER * 0.75 * length(inputs)
 		output.concentration = 1
 
@@ -83,9 +83,9 @@
 	return (tag_north_con || tag_south_con || tag_east_con || tag_west_con)
 
 /obj/machinery/atmospherics/omni/mixer/error_check()
-	if(!output || !inputs)
+	if (!output || !inputs)
 		return 1
-	if(length(inputs) < 2) //requires at least 2 inputs ~otherwise why are you using a mixer?
+	if (length(inputs) < 2) //requires at least 2 inputs ~otherwise why are you using a mixer?
 		return 1
 
 	//concentration must add to 1
@@ -99,7 +99,7 @@
 	return 0
 
 /obj/machinery/atmospherics/omni/mixer/Process()
-	if(!..())
+	if (!..())
 		return 0
 
 	//Figure out the amount of moles to transfer
@@ -122,10 +122,10 @@
 		use_power_oneoff(power_draw)
 
 		for(var/datum/omni_port/P in inputs)
-			if(P.concentration && P.network)
+			if (P.concentration && P.network)
 				P.network.update = 1
 
-		if(output.network)
+		if (output.network)
 			output.network.update = 1
 
 	return 1
@@ -153,15 +153,15 @@
 
 	var/portData[0]
 	for(var/datum/omni_port/P in ports)
-		if(!configuring && P.mode == 0)
+		if (!configuring && P.mode == 0)
 			continue
 
 		var/input = 0
 		var/output = 0
 		switch(P.mode)
-			if(ATM_INPUT)
+			if (ATM_INPUT)
 				input = 1
-			if(ATM_OUTPUT)
+			if (ATM_OUTPUT)
 				output = 1
 
 		portData[LIST_PRE_INC(portData)] = list("dir" = dir_name(P.dir, capitalize = 1), \
@@ -170,39 +170,39 @@
 										"output" = output, \
 										"con_lock" = P.con_lock)
 
-	if(length(portData))
+	if (length(portData))
 		data["ports"] = portData
-	if(output)
+	if (output)
 		data["set_flow_rate"] = round(set_flow_rate*10)		//because nanoui can't handle rounded decimals.
 		data["last_flow_rate"] = round(last_flow_rate*10)
 
 	return data
 
 /obj/machinery/atmospherics/omni/mixer/Topic(href, href_list)
-	if(..()) return 1
+	if (..()) return 1
 
 	switch(href_list["command"])
-		if("power")
-			if(!configuring)
+		if ("power")
+			if (!configuring)
 				update_use_power(!use_power)
 			else
 				update_use_power(POWER_USE_OFF)
-		if("configure")
+		if ("configure")
 			configuring = !configuring
-			if(configuring)
+			if (configuring)
 				update_use_power(POWER_USE_OFF)
 
 	//only allows config changes when in configuring mode ~otherwise you'll get weird pressure stuff going on
-	if(configuring && !use_power)
+	if (configuring && !use_power)
 		switch(href_list["command"])
-			if("set_flow_rate")
+			if ("set_flow_rate")
 				var/new_flow_rate = input(usr,"Enter new flow rate limit (0-[max_flow_rate]L/s)","Flow Rate Control",set_flow_rate) as num
 				set_flow_rate = clamp(new_flow_rate, 0, max_flow_rate)
-			if("switch_mode")
+			if ("switch_mode")
 				switch_mode(dir_flag(href_list["dir"]), href_list["mode"])
-			if("switch_con")
+			if ("switch_con")
 				change_concentration(dir_flag(href_list["dir"]))
-			if("switch_conlock")
+			if ("switch_conlock")
 				con_lock(dir_flag(href_list["dir"]))
 
 	update_icon()
@@ -210,35 +210,35 @@
 	return
 
 /obj/machinery/atmospherics/omni/mixer/proc/switch_mode(port = NORTH, mode = ATM_NONE)
-	if(mode != ATM_INPUT && mode != ATM_OUTPUT)
+	if (mode != ATM_INPUT && mode != ATM_OUTPUT)
 		switch(mode)
-			if("in")
+			if ("in")
 				mode = ATM_INPUT
-			if("out")
+			if ("out")
 				mode = ATM_OUTPUT
 			else
 				mode = ATM_NONE
 
 	for(var/datum/omni_port/P in ports)
 		var/old_mode = P.mode
-		if(P.dir == port)
+		if (P.dir == port)
 			switch(mode)
-				if(ATM_INPUT)
-					if(P.mode == ATM_OUTPUT)
+				if (ATM_INPUT)
+					if (P.mode == ATM_OUTPUT)
 						return
 					P.mode = mode
-				if(ATM_OUTPUT)
+				if (ATM_OUTPUT)
 					P.mode = mode
-				if(ATM_NONE)
-					if(P.mode == ATM_OUTPUT)
+				if (ATM_NONE)
+					if (P.mode == ATM_OUTPUT)
 						return
-					if(P.mode == ATM_INPUT && length(inputs) > 2)
+					if (P.mode == ATM_INPUT && length(inputs) > 2)
 						P.mode = mode
-		else if(P.mode == ATM_OUTPUT && mode == ATM_OUTPUT)
+		else if (P.mode == ATM_OUTPUT && mode == ATM_OUTPUT)
 			P.mode = ATM_INPUT
-		if(P.mode != old_mode)
+		if (P.mode != old_mode)
 			switch(P.mode)
-				if(ATM_NONE)
+				if (ATM_NONE)
 					initialize_directions &= ~P.dir
 					P.disconnect()
 				else
@@ -260,15 +260,15 @@
 	var/remain_con = 1
 
 	for(var/datum/omni_port/P in inputs)
-		if(P.dir == port)
+		if (P.dir == port)
 			old_con = P.concentration
-		else if(!P.con_lock)
+		else if (!P.con_lock)
 			non_locked++
 		else
 			remain_con -= P.concentration
 
 	//return if no adjustable ports
-	if(non_locked < 1)
+	if (non_locked < 1)
 		return
 
 	var/new_con = (input(usr,"Enter a new concentration (0-[round(remain_con * 100, 0.5)])%","Concentration control", min(remain_con, old_con)*100) as num) / 100
@@ -285,9 +285,9 @@
 	remain_con /= max(1, non_locked)
 
 	for(var/datum/omni_port/P in inputs)
-		if(P.dir == port)
+		if (P.dir == port)
 			P.concentration = new_con
-		else if(!P.con_lock)
+		else if (!P.con_lock)
 			P.concentration = remain_con
 
 	rebuild_mixing_inputs()
@@ -299,5 +299,5 @@
 
 /obj/machinery/atmospherics/omni/mixer/proc/con_lock(port = NORTH)
 	for(var/datum/omni_port/P in inputs)
-		if(P.dir == port)
+		if (P.dir == port)
 			P.con_lock = !P.con_lock

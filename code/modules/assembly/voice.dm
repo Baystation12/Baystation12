@@ -16,25 +16,25 @@
 	return ..()
 
 /obj/item/device/assembly/voice/hear_talk(mob/living/M as mob, msg)
-	if(listening)
+	if (listening)
 		recorded = msg
 		listening = 0
 		var/turf/T = get_turf(src)	//otherwise it won't work in hand
 		T.visible_message("[icon2html(src, viewers(get_turf(src)))] beeps, \"Activation message is '[recorded]'.\"")
 	else
-		if(findtext(msg, recorded))
+		if (findtext(msg, recorded))
 			pulse(0)
 
 /obj/item/device/assembly/voice/activate()
-	if(secured)
-		if(!holder)
+	if (secured)
+		if (!holder)
 			listening = !listening
 			var/turf/T = get_turf(src)
 			T.visible_message("[icon2html(src, viewers(get_turf(src)))] beeps, \"[listening ? "Now" : "No longer"] recording input.\"")
 
 
 /obj/item/device/assembly/voice/attack_self(mob/user)
-	if(!user)	return 0
+	if (!user)	return 0
 	activate()
 	return 1
 

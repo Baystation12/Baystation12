@@ -154,7 +154,7 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 
 
 /obj/item/stack/cable_coil/proc/CreateCable(turf/target, mob/living/user, from_dir, to_dir)
-	if(!isturf(target))
+	if (!isturf(target))
 		return
 	var/obj/structure/cable/cable = new (target, color)
 	cable.d1 = from_dir
@@ -166,9 +166,9 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 	cable.mergeConnectedNetworks(cable.d1)
 	cable.mergeConnectedNetworks(cable.d2)
 	cable.mergeConnectedNetworksOnTurf()
-	if(cable.d1 & (cable.d1 - 1))
+	if (cable.d1 & (cable.d1 - 1))
 		cable.mergeDiagonalsNetworks(cable.d1)
-	if(cable.d2 & (cable.d2 - 1))
+	if (cable.d2 & (cable.d2 - 1))
 		cable.mergeDiagonalsNetworks(cable.d2)
 	use(1)
 	if (!cable.shock(user, 50))
@@ -245,7 +245,7 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 	else if (cable.d1 == 0)
 		var/new_from_dir = cable.d2
 		var/new_to_dir = from_dir
-		if(new_from_dir > new_to_dir)
+		if (new_from_dir > new_to_dir)
 			new_from_dir = from_dir
 			new_to_dir = cable.d2
 		for (var/obj/structure/cable/other_cable in cable_turf)

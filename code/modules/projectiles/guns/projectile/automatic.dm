@@ -48,13 +48,13 @@
 /obj/item/gun/projectile/automatic/machine_pistol/on_update_icon()
 	..()
 	icon_state = "mpistolen"
-	if(ammo_magazine)
+	if (ammo_magazine)
 		overlays += image(icon, "mag")
 
-	if(!ammo_magazine || !LAZYLEN(ammo_magazine.stored_ammo))
+	if (!ammo_magazine || !LAZYLEN(ammo_magazine.stored_ammo))
 		icon_state = "mpistolen-empty"
 		overlays += image(icon, "[initial(icon_state)]-ammo0")
-	else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
+	else if (LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
 		overlays += image(icon, "[initial(icon_state)]-ammo1")
 	else
 		overlays += image(icon, "[initial(icon_state)]-ammo2")
@@ -89,7 +89,7 @@
 
 /obj/item/gun/projectile/automatic/merc_smg/on_update_icon()
 	..()
-	if(ammo_magazine)
+	if (ammo_magazine)
 		icon_state = "c20r-[round(length(ammo_magazine.stored_ammo),4)]"
 	else
 		icon_state = "c20r"
@@ -125,7 +125,7 @@
 
 /obj/item/gun/projectile/automatic/assault_rifle/on_update_icon()
 	..()
-	if(ammo_magazine)
+	if (ammo_magazine)
 		icon_state = "arifle"
 		wielded_item_state = "arifle-wielded"
 	else
@@ -159,9 +159,9 @@
 
 /obj/item/gun/projectile/automatic/sec_smg/on_update_icon()
 	..()
-	if(ammo_magazine)
+	if (ammo_magazine)
 		overlays += image(icon, "mag-[round(length(ammo_magazine.stored_ammo),5)]")
-	if(ammo_magazine && LAZYLEN(ammo_magazine.stored_ammo))
+	if (ammo_magazine && LAZYLEN(ammo_magazine.stored_ammo))
 		overlays += image(icon, "ammo-ok")
 	else
 		overlays += image(icon, "ammo-bad")
@@ -217,23 +217,23 @@
 
 
 /obj/item/gun/projectile/automatic/bullpup_rifle/attack_hand(mob/user)
-	if(user.get_inactive_hand() == src && use_launcher)
+	if (user.get_inactive_hand() == src && use_launcher)
 		launcher.unload(user)
 	else
 		..()
 
 /obj/item/gun/projectile/automatic/bullpup_rifle/Fire(atom/target, mob/living/user, params, pointblank=0, reflex=0)
-	if(use_launcher)
+	if (use_launcher)
 		launcher.Fire(target, user, params, pointblank, reflex)
-		if(!launcher.chambered)
+		if (!launcher.chambered)
 			switch_firemodes() //switch back automatically
 	else
 		..()
 
 /obj/item/gun/projectile/automatic/bullpup_rifle/on_update_icon()
 	..()
-	if(ammo_magazine)
-		if(length(ammo_magazine.stored_ammo))
+	if (ammo_magazine)
+		if (length(ammo_magazine.stored_ammo))
 			icon_state = "carbine-loaded"
 		else
 			icon_state = "carbine-empty"
@@ -242,7 +242,7 @@
 
 /obj/item/gun/projectile/automatic/bullpup_rifle/examine(mob/user)
 	. = ..()
-	if(launcher.chambered)
+	if (launcher.chambered)
 		to_chat(user, "\The [launcher] has \a [launcher.chambered] loaded.")
 	else
 		to_chat(user, "\The [launcher] is empty.")
@@ -301,7 +301,7 @@
 	magazine_type = /obj/item/ammo_magazine/rifle
 
 /obj/item/gun/projectile/automatic/l6_saw/special_check(mob/user)
-	if(cover_open)
+	if (cover_open)
 		to_chat(user, SPAN_WARNING("[src]'s cover is open! Close it before firing!"))
 		return 0
 	return ..()
@@ -314,7 +314,7 @@
 	user.update_inv_r_hand()
 
 /obj/item/gun/projectile/automatic/l6_saw/attack_self(mob/user as mob)
-	if(cover_open)
+	if (cover_open)
 		toggle_cover(user) //close the cover
 		update_icon()
 		user.update_inv_l_hand()
@@ -324,7 +324,7 @@
 		return ..() //once closed, behave like normal
 
 /obj/item/gun/projectile/automatic/l6_saw/attack_hand(mob/user as mob)
-	if(!cover_open && user.get_inactive_hand() == src)
+	if (!cover_open && user.get_inactive_hand() == src)
 		toggle_cover(user) //open the cover
 		update_icon()
 		user.update_inv_l_hand()
@@ -335,11 +335,11 @@
 
 /obj/item/gun/projectile/automatic/l6_saw/on_update_icon()
 	..()
-	if(istype(ammo_magazine, /obj/item/ammo_magazine/box))
+	if (istype(ammo_magazine, /obj/item/ammo_magazine/box))
 		icon_state = "l6[cover_open ? "open" : "closed"][round(length(ammo_magazine.stored_ammo), 10)]"
 		item_state = "l6[cover_open ? "open" : "closed"]"
 		wielded_item_state = "l6[cover_open ? "open" : "closed"]-wielded"
-	else if(ammo_magazine)
+	else if (ammo_magazine)
 		icon_state = "l6[cover_open ? "open" : "closed"]mag"
 		item_state = "l6[cover_open ? "open" : "closed"]mag"
 		wielded_item_state = "l6[cover_open ? "open" : "closed"]mag-wielded"
@@ -349,13 +349,13 @@
 		wielded_item_state = "l6[cover_open ? "open" : "closed"]-empty-wielded"
 
 /obj/item/gun/projectile/automatic/l6_saw/load_ammo(obj/item/A, mob/user)
-	if(!cover_open)
+	if (!cover_open)
 		to_chat(user, SPAN_WARNING("You need to open the cover to load that into [src]."))
 		return
 	..()
 
 /obj/item/gun/projectile/automatic/l6_saw/unload_ammo(mob/user, allow_dump=1)
-	if(!cover_open)
+	if (!cover_open)
 		to_chat(user, SPAN_WARNING("You need to open the cover to unload [src]."))
 		return
 	..()
@@ -390,7 +390,7 @@
 
 /obj/item/gun/projectile/automatic/battlerifle/on_update_icon()
 	..()
-	if(ammo_magazine)
+	if (ammo_magazine)
 		icon_state = "battlerifle"
 		wielded_item_state = "battlerifle-wielded"
 	else

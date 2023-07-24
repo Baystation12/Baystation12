@@ -26,11 +26,11 @@
 
 /datum/transaction/proc/valid()
 	// None of the involved accounts can be suspended
-	if(target.suspended || source.suspended)
+	if (target.suspended || source.suspended)
 		return FALSE
 
 	// The payer must be able to afford the transaction
-	if(!source_can_afford())
+	if (!source_can_afford())
 		return FALSE
 
 	return TRUE
@@ -47,7 +47,7 @@
 
 // Performs the transaction on both the source and target accounts
 /datum/transaction/proc/perform()
-	if(!valid())
+	if (!valid())
 		return FALSE
 
 	target.add_transaction(src)
@@ -79,7 +79,7 @@
 	return (is_deposit() ? target : source.account_name)
 
 /datum/transaction/singular/perform()
-	if(!valid())
+	if (!valid())
 		return FALSE
 
 	source.add_transaction(src)
@@ -106,7 +106,7 @@
 	return machine_id
 
 /datum/transaction/log/perform()
-	if(!valid())
+	if (!valid())
 		return FALSE
 
 	target.add_transaction(src)

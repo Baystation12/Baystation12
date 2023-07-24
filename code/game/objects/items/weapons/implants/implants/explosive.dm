@@ -23,7 +23,7 @@
 	<b>Function:</b> Contains a compact, electrically detonated explosive that detonates upon receiving a specially encoded signal or upon host death.<BR>
 	<b>Special Features:</b> Explodes<BR>
 	<b>Integrity:</b> Implant will occasionally be degraded by the body's immune system and thus will occasionally malfunction."}
-	if(!malfunction)
+	if (!malfunction)
 		. += {"
 		<HR><B>Explosion yield mode:</B><BR>
 		<A href='byond://?src=\ref[src];mode=1'>[elevel ? elevel : "NONE SET"]</A><BR>
@@ -60,7 +60,7 @@
 		interact(usr)
 	if (href_list["code"])
 		var/adj = text2num(href_list["code"])
-		if(!adj)
+		if (!adj)
 			code = input("Set radio activation code","Radio activation") as num
 		else
 			code += adj
@@ -68,22 +68,22 @@
 		interact(usr)
 	if (href_list["mode"])
 		var/mod = input("Set explosion mode", "Explosion mode") as null|anything in list("Localized Limb", "Destroy Body", "Full Explosion")
-		if(mod)
+		if (mod)
 			elevel = mod
 		interact(usr)
 	if (href_list["msg"])
 		var/msg = input("Set tampering message, or leave blank for no broadcasting.", "Anti-tampering", warning_message) as text|null
-		if(msg)
+		if (msg)
 			warning_message = msg
 		interact(usr)
 	if (href_list["phrase"])
 		var/talk = input("Set activation phrase", "Audio activation", phrase) as text|null
-		if(talk)
+		if (talk)
 			phrase = sanitize_phrase(talk)
 		interact(usr)
 
 /obj/item/implant/explosive/receive_signal(datum/signal/signal)
-	if(signal && signal.encryption == code)
+	if (signal && signal.encryption == code)
 		activate()
 
 /obj/item/implant/explosive/proc/set_frequency(new_frequency)
@@ -95,14 +95,14 @@
 	hear(msg)
 
 /obj/item/implant/explosive/hear(msg)
-	if(!phrase)
+	if (!phrase)
 		return
-	if(findtext(sanitize_phrase(msg),phrase))
+	if (findtext(sanitize_phrase(msg),phrase))
 		activate()
 		qdel(src)
 
 /obj/item/implant/explosive/exposed()
-	if(warning_message)
+	if (warning_message)
 		GLOB.global_headset.autosay(warning_message, "Anti Tampering System")
 
 /obj/item/implant/explosive/proc/sanitize_phrase(phrase)
@@ -114,18 +114,18 @@
 		return
 
 	var/turf/T = get_turf(src)
-	if(T)
+	if (T)
 		T.hotspot_expose(3500,125)
 
 	playsound(loc, 'sound/items/countdown.ogg', 75, 1, -3)
-	if(ismob(imp_in))
+	if (ismob(imp_in))
 		imp_in.audible_message(SPAN_WARNING("Something beeps inside [imp_in][part ? "'s [part.name]" : ""]!"))
 		log_and_message_admins("Explosive implant triggered in [imp_in] ([imp_in.key]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[imp_in.x];Y=[imp_in.y];Z=[imp_in.z]'>JMP</a>) ")
 	else
 		audible_message(SPAN_WARNING("[src] beeps omniously!"))
 		log_and_message_admins("Explosive implant triggered in [T.loc]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>) ")
 
-	if(!elevel)
+	if (!elevel)
 		elevel = "Full Explosion"
 	switch(elevel)
 		if ("Localized Limb")
@@ -138,20 +138,20 @@
 			explosion(T, 2, EX_ACT_LIGHT)
 		if ("Destroy Body")
 			explosion(T, 1, EX_ACT_LIGHT)
-			if(ismob(imp_in))
+			if (ismob(imp_in))
 				imp_in.gib()
 		if ("Full Explosion")
 			explosion(T, 4, EX_ACT_HEAVY)
-			if(ismob(imp_in))
+			if (ismob(imp_in))
 				imp_in.gib()
 	qdel(src)
 
 /obj/item/implant/explosive/implanted(mob/target)
-	if(!elevel)
+	if (!elevel)
 		elevel = alert("What sort of explosion would you prefer?", "Implant Intent", "Localized Limb", "Destroy Body", "Full Explosion")
-	if(!phrase)
+	if (!phrase)
 		phrase = sanitize_phrase(input("Choose activation phrase:") as text)
-	if(!phrase)
+	if (!phrase)
 		return
 
 	var/memo = "Explosive implant in [target] can be activated by saying something containing the phrase ''[phrase]'', <B>say [phrase]</B> to attempt to activate. It can also be triggered with a radio signal on frequency <b>[format_frequency(src.frequency)]</b> with code <b>[code]</b>."

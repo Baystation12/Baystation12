@@ -3,15 +3,15 @@
 	var/list/type_setups
 
 /singleton/item_modifier/proc/RefitItem(obj/item/I)
-	if(!istype(I))
+	if (!istype(I))
 		return FALSE
 
 	var/item_type = get_ispath_key(type_setups, I.type)
-	if(!item_type)
+	if (!item_type)
 		return FALSE
 
 	var/type_setup = type_setups[item_type]
-	if(!type_setup)
+	if (!type_setup)
 		return FALSE
 
 	I.SetName(type_setup[SETUP_NAME])

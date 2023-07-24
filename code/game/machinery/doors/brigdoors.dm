@@ -41,14 +41,14 @@
 			targets += M
 
 	for(var/obj/machinery/flasher/F in SSmachines.machinery)
-		if(F.id_tag == src.id)
+		if (F.id_tag == src.id)
 			targets += F
 
 	for(var/obj/structure/closet/secure_closet/brig/C in world)
-		if(C.id == src.id)
+		if (C.id == src.id)
 			targets += C
 
-	if(length(targets)==0)
+	if (length(targets)==0)
 		set_broken(TRUE)
 	queue_icon_update()
 
@@ -56,17 +56,17 @@
 // if it's less than 0, open door, reset timer
 // update the door_timer window and the icon
 /obj/machinery/door_timer/Process()
-	if(inoperable())	return
-	if(src.timing)
+	if (inoperable())	return
+	if (src.timing)
 
 		// poorly done midnight rollover
 		// (no seriously there's gotta be a better way to do this)
 		var/timeleft = timeleft()
-		if(timeleft > 1e5)
+		if (timeleft > 1e5)
 			src.releasetime = 0
 
 
-		if(world.timeofday > src.releasetime)
+		if (world.timeofday > src.releasetime)
 			src.timer_end(TRUE) // open doors, reset timer, clear status screen, broadcast to sec HUDs
 			src.timing = 0
 
@@ -83,7 +83,7 @@
 
 // Closes and locks doors, power check
 /obj/machinery/door_timer/proc/timer_start()
-	if(inoperable())	return 0
+	if (inoperable())	return 0
 
 	// Set releasetime
 	releasetime = world.timeofday + timetoset
@@ -93,13 +93,13 @@
 	timing = 1
 
 	for(var/obj/machinery/door/window/brigdoor/door in targets)
-		if(door.density)	continue
+		if (door.density)	continue
 		spawn(0)
 			door.close()
 
 	for(var/obj/structure/closet/secure_closet/brig/C in targets)
-		if(C.broken)	continue
-		if(C.opened && !C.close())	continue
+		if (C.broken)	continue
+		if (C.opened && !C.close())	continue
 		C.locked = TRUE
 		C.queue_icon_update()
 	return 1
@@ -107,7 +107,7 @@
 
 // Opens and unlocks doors, power check
 /obj/machinery/door_timer/proc/timer_end(broadcast_to_huds = 0)
-	if(inoperable())	return 0
+	if (inoperable())	return 0
 
 	// Reset releasetime
 	releasetime = 0
@@ -119,13 +119,13 @@
 		broadcast_security_hud_message("The timer for [id] has expired.", src)
 
 	for(var/obj/machinery/door/window/brigdoor/door in targets)
-		if(!door.density)	continue
+		if (!door.density)	continue
 		spawn(0)
 			door.open()
 
 	for(var/obj/structure/closet/secure_closet/brig/C in targets)
-		if(C.broken)	continue
-		if(C.opened)	continue
+		if (C.broken)	continue
+		if (C.opened)	continue
 		C.locked = 0
 		C.queue_icon_update()
 
@@ -135,14 +135,14 @@
 // Check for releasetime timeleft
 /obj/machinery/door_timer/proc/timeleft()
 	. = round((releasetime - world.timeofday)/10)
-	if(. < 0)
+	if (. < 0)
 		. = 0
 
 // Set timetoset
 /obj/machinery/door_timer/proc/timeset(seconds)
 	timetoset = seconds * 10
 
-	if(timetoset <= 0)
+	if (timetoset <= 0)
 		timetoset = 0
 
 	return
@@ -163,7 +163,7 @@
 
 	for(var/obj/machinery/flasher/flash  in targets)
 		var/list/flashdata = list()
-		if(flash.last_flash && (flash.last_flash + 150) > world.time)
+		if (flash.last_flash && (flash.last_flash + 150) > world.time)
 			flashdata["status"] = 0
 		else
 			flashdata["status"] = 1
@@ -179,17 +179,17 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/door_timer/CanUseTopic(user, state)
-	if(!allowed(user))
+	if (!allowed(user))
 		return STATUS_UPDATE
 	return ..()
 
 /obj/machinery/door_timer/OnTopic(mob/user, list/href_list, state)
 	if (href_list["toggle"])
-		if(timing)
+		if (timing)
 			timer_end()
 		else
 			timer_start()
-			if(timetoset > 18000)
+			if (timetoset > 18000)
 				log_and_message_admins("has started a brig timer over 30 minutes in length!")
 		. =  TOPIC_REFRESH
 
@@ -211,21 +211,21 @@
 // if MACHINE_STAT_BROKEN, display blue screen of death icon AI uses
 // if timing=true, run update display function
 /obj/machinery/door_timer/on_update_icon()
-	if(!is_powered())
+	if (!is_powered())
 		icon_state = "frame"
 		return
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		set_picture("ai_bsod")
 		return
-	if(src.timing)
+	if (src.timing)
 		var/disp1 = id
 		var/timeleft = timeleft()
 		var/disp2 = "[pad_left(num2text((timeleft / 60) % 60), 2, "0")]~[pad_left(num2text(timeleft % 60), 2, "0")]"
-		if(length(disp2) > CHARS_PER_LINE)
+		if (length(disp2) > CHARS_PER_LINE)
 			disp2 = "Error"
 		update_display(disp1, disp2)
 	else
-		if(maptext)
+		if (maptext)
 			maptext = ""
 		update_display("Set","Time") // would be nice to have some default printed text
 	return
@@ -242,7 +242,7 @@
 // Stolen from status_display
 /obj/machinery/door_timer/proc/update_display(line1, line2)
 	var/new_text = {"<div style="font-size:[FONT_SIZE];color:[FONT_COLOR];font:'[FONT_STYLE]';text-align:center;" valign="top">[line1]<br>[line2]</div>"}
-	if(maptext != new_text)
+	if (maptext != new_text)
 		maptext = new_text
 
 
@@ -254,7 +254,7 @@
 
 	for(var/d = 1 to len)
 		var/char = copytext(tn, len-d+1, len-d+2)
-		if(char == " ")
+		if (char == " ")
 			continue
 		var/image/ID = image('icons/obj/status_display.dmi', icon_state=char)
 		ID.pixel_x = -(d-1)*5 + px

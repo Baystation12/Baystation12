@@ -29,14 +29,14 @@ The answer was five and a half years -ZeroBits
 /datum/nano_module/library/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 
-	if(error_message)
+	if (error_message)
 		data["error"] = error_message
-	else if(current_book)
+	else if (current_book)
 		data["current_book"] = current_book
 	else
 		var/list/all_entries[0]
 		establish_old_db_connection()
-		if(!dbcon_old.IsConnected())
+		if (!dbcon_old.IsConnected())
 			error_message = "Unable to contact External Archive. Please contact your system administrator for assistance."
 		else
 			var/DBQuery/query = dbcon_old.NewQuery("SELECT id, author, title, category FROM library ORDER BY "+sanitizeSQL(sort_by))
@@ -60,56 +60,56 @@ The answer was five and a half years -ZeroBits
 		ui.open()
 
 /datum/nano_module/library/Topic(href, href_list)
-	if(..())
+	if (..())
 		return 1
-	if(href_list["viewbook"])
+	if (href_list["viewbook"])
 		view_book(href_list["viewbook"])
 		return 1
-	if(href_list["viewid"])
+	if (href_list["viewid"])
 		view_book(sanitizeSQL(input("Enter USBN:") as num|null))
 		return 1
-	if(href_list["closebook"])
+	if (href_list["closebook"])
 		current_book = null
 		return 1
-	if(href_list["connectscanner"])
-		if(!nano_host())
+	if (href_list["connectscanner"])
+		if (!nano_host())
 			return 1
 		for(var/d in GLOB.cardinal)
 			var/obj/machinery/libraryscanner/scn = locate(/obj/machinery/libraryscanner, get_step(nano_host(), d))
-			if(scn && scn.anchored)
+			if (scn && scn.anchored)
 				scanner = scn
 				return 1
-	if(href_list["uploadbook"])
-		if(!scanner || !scanner.anchored)
+	if (href_list["uploadbook"])
+		if (!scanner || !scanner.anchored)
 			scanner = null
 			error_message = "Hardware Error: No scanner detected. Unable to access cache."
 			return 1
-		if(!scanner.cache)
+		if (!scanner.cache)
 			error_message = "Interface Error: Scanner cache does not contain any data. Please scan a book."
 			return 1
 
 		var/obj/item/book/B = scanner.cache
 
-		if(B.unique)
+		if (B.unique)
 			error_message = "Interface Error: Cached book is copy-protected."
 			return 1
 
 		B.SetName(input(usr, "Enter Book Title", "Title", B.name) as text|null)
 		B.author = input(usr, "Enter Author Name", "Author", B.author) as text|null
 
-		if(!B.author)
+		if (!B.author)
 			B.author = "Anonymous"
-		else if(lowertext(B.author) == "edgar allen poe" || lowertext(B.author) == "edgar allan poe")
+		else if (lowertext(B.author) == "edgar allen poe" || lowertext(B.author) == "edgar allan poe")
 			error_message = "User Error: Upload something original."
 			return 1
 
-		if(!B.title)
+		if (!B.title)
 			B.title = "Untitled"
 
 		var/choice = input(usr, "Upload [B.name] by [B.author] to the External Archive?") in list("Yes", "No")
-		if(choice == "Yes")
+		if (choice == "Yes")
 			establish_old_db_connection()
-			if(!dbcon_old.IsConnected())
+			if (!dbcon_old.IsConnected())
 				error_message = "Network Error: Connection to the Archive has been severed."
 				return 1
 
@@ -120,7 +120,7 @@ The answer was five and a half years -ZeroBits
 			var/sqlcontent = sanitizeSQL(B.dat)
 			var/sqlcategory = sanitizeSQL(upload_category)
 			var/DBQuery/query = dbcon_old.NewQuery("INSERT INTO library (author, title, content, category) VALUES ('[sqlauthor]', '[sqltitle]', '[sqlcontent]', '[sqlcategory]')")
-			if(!query.Execute())
+			if (!query.Execute())
 				to_chat(usr, query.ErrorMsg())
 				error_message = "Network Error: Unable to upload to the Archive. Contact your system Administrator for assistance."
 				return 1
@@ -132,17 +132,17 @@ The answer was five and a half years -ZeroBits
 
 		return 0
 
-	if(href_list["printbook"])
-		if(!current_book)
+	if (href_list["printbook"])
+		if (!current_book)
 			error_message = "Software Error: Unable to print; book not found."
 			return 1
 
 		//PRINT TO BINDER
-		if(!nano_host())
+		if (!nano_host())
 			return 1
 		for(var/d in GLOB.cardinal)
 			var/obj/machinery/bookbinder/bndr = locate(/obj/machinery/bookbinder, get_step(nano_host(), d))
-			if(bndr && bndr.anchored)
+			if (bndr && bndr.anchored)
 				var/obj/item/book/B = new(bndr.loc)
 				B.SetName(current_book["title"])
 				B.title = current_book["title"]
@@ -156,11 +156,11 @@ The answer was five and a half years -ZeroBits
 		//Regular printing
 		print_text("<i>Author: [current_book["author"]]<br>USBN: [current_book["id"]]</i><br><h3>[current_book["title"]]</h3><br>[current_book["content"]]", usr)
 		return 1
-	if(href_list["sortby"])
+	if (href_list["sortby"])
 		sort_by = href_list["sortby"]
 		return 1
-	if(href_list["reseterror"])
-		if(error_message)
+	if (href_list["reseterror"])
+		if (error_message)
 			current_book = null
 			scanner = null
 			sort_by = "id"
@@ -168,12 +168,12 @@ The answer was five and a half years -ZeroBits
 		return 1
 
 /datum/nano_module/library/proc/view_book(id)
-	if(current_book || !id)
+	if (current_book || !id)
 		return 0
 
 	var/sqlid = sanitizeSQL(id)
 	establish_old_db_connection()
-	if(!dbcon_old.IsConnected())
+	if (!dbcon_old.IsConnected())
 		error_message = "Network Error: Connection to the Archive has been severed."
 		return 1
 

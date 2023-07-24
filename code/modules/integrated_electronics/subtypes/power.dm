@@ -38,24 +38,24 @@
 /obj/item/integrated_circuit/power/transmitter/do_work()
 
 	var/obj/O = get_pin_data_as_type(IC_INPUT, 1, /obj)
-	if(!O)
+	if (!O)
 		return FALSE
-	if(istype(O, /obj/item/gun/energy))
+	if (istype(O, /obj/item/gun/energy))
 		return FALSE
-	if(!assembly)
+	if (!assembly)
 		return FALSE // Pointless to do everything else if there's no battery to draw from.
 	var/obj/item/cell/cell = O.get_cell()
-	if(cell)
+	if (cell)
 		var/transfer_amount = amount_to_move
 		var/turf/A = get_turf(src)
 		var/turf/B = get_turf(O)
-		if(A.Adjacent(B))
-			if(O.loc != assembly)
+		if (A.Adjacent(B))
+			if (O.loc != assembly)
 				transfer_amount *= 0.8 // Losses due to distance.
 			var/transmitter_count = 0
 			for(var/obj/item/integrated_circuit/power/transmitter in A.GetAllContents())
 				transmitter_count++
-			if(!transmitter_count)
+			if (!transmitter_count)
 				return FALSE
 			transfer_amount /= transmitter_count
 			set_pin_data(IC_OUTPUT, 1, cell.charge)
@@ -63,11 +63,11 @@
 			set_pin_data(IC_OUTPUT, 3, cell.percent())
 			activate_pin(2)
 			push_data()
-			if(cell.charge == cell.maxcharge)
+			if (cell.charge == cell.maxcharge)
 				return FALSE
-			if(transfer_amount && assembly.draw_power(amount_to_move)) // CELLRATE is already handled in draw_power()
+			if (transfer_amount && assembly.draw_power(amount_to_move)) // CELLRATE is already handled in draw_power()
 				cell.give(transfer_amount * CELLRATE)
-				if(istype(O, /obj/item))
+				if (istype(O, /obj/item))
 					var/obj/item/I = O
 					I.update_icon()
 				return TRUE
@@ -80,9 +80,9 @@
 		return FALSE
 
 /obj/item/integrated_circuit/power/transmitter/large/do_work()
-	if(..()) // If the above code succeeds, do this below.
+	if (..()) // If the above code succeeds, do this below.
 		var/atom/movable/acting_object = get_object()
-		if(prob(20))
+		if (prob(20))
 			var/datum/effect/effect/system/spark_spread/s = new()
 			s.set_up(12, 1, src)
 			s.start()

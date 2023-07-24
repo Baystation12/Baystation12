@@ -12,51 +12,51 @@
 	init()
 
 /datum/talking_atom/proc/init()
-	if(holder_atom)
+	if (holder_atom)
 		START_PROCESSING(SSprocessing, src)
 
 /datum/talking_atom/Process()
-	if(!holder_atom)
+	if (!holder_atom)
 		STOP_PROCESSING(SSprocessing, src)
 
-	else if(length(heard_words) >= 1 && world.time > last_talk_time + talk_interval && prob(talk_chance))
+	else if (length(heard_words) >= 1 && world.time > last_talk_time + talk_interval && prob(talk_chance))
 		SaySomething()
 
 /datum/talking_atom/proc/catchMessage(msg, mob/source)
-	if(!holder_atom)
+	if (!holder_atom)
 		return
 
 	var/list/seperate = list()
-	if(findtext(msg,"(("))
+	if (findtext(msg,"(("))
 		return
-	else if(findtext(msg,"))"))
+	else if (findtext(msg,"))"))
 		return
-	else if(findtext(msg," ")==0)
+	else if (findtext(msg," ")==0)
 		return
 	else
 		/*var/l = length(msg)
-		if(findtext(msg," ",l,l+1)==0)
+		if (findtext(msg," ",l,l+1)==0)
 			msg+=" "*/
 		seperate = splittext(msg, " ")
 
 	for(var/Xa = 1,Xa<length(seperate),Xa++)
 		var/next = Xa + 1
-		if(length(heard_words) > 20 + rand(10,20))
+		if (length(heard_words) > 20 + rand(10,20))
 			heard_words.Remove(heard_words[1])
-		if(!heard_words["[lowertext(seperate[Xa])]"])
+		if (!heard_words["[lowertext(seperate[Xa])]"])
 			heard_words["[lowertext(seperate[Xa])]"] = list()
 		var/list/w = heard_words["[lowertext(seperate[Xa])]"]
-		if(w)
+		if (w)
 			w.Add("[lowertext(seperate[next])]")
 //		log_debug("Adding [lowertext(seperate[next])] to [lowertext(seperate[Xa])]")
 
-	if(prob(30))
+	if (prob(30))
 		var/list/options = list("[holder_atom] seems to be listening intently to [source]...",\
 			"[holder_atom] seems to be focusing on [source]...",\
 			"[holder_atom] seems to turn it's attention to [source]...")
 		holder_atom.loc.visible_message(SPAN_NOTICE("[icon2html(holder_atom, viewers(get_turf(holder_atom)))] [pick(options)]"))
 
-	if(prob(20))
+	if (prob(20))
 		spawn(2)
 			SaySomething(pick(seperate))
 
@@ -69,17 +69,17 @@
 			log_debug("[X]") */
 
 /datum/talking_atom/proc/SaySomething(word = null)
-	if(!holder_atom)
+	if (!holder_atom)
 		return
 
 	var/msg
 	var/limit = rand(max(5,length(heard_words)/2))+3
 	var/text
-	if(!word)
+	if (!word)
 		text = "[pick(heard_words)]"
 	else
 		text = pick(splittext(word, " "))
-	if(length(text)==1)
+	if (length(text)==1)
 		text=uppertext(text)
 	else
 		var/cap = copytext(text,1,2)
@@ -88,22 +88,22 @@
 		text=cap
 	var/q = 0
 	msg+=text
-	if(msg=="What" | msg == "Who" | msg == "How" | msg == "Why" | msg == "Are")
+	if (msg=="What" | msg == "Who" | msg == "How" | msg == "Why" | msg == "Are")
 		q=1
 
 	text=lowertext(text)
 	for(var/ya,ya <= limit,ya++)
 
-		if(heard_words.Find("[text]"))
+		if (heard_words.Find("[text]"))
 			var/list/w = heard_words["[text]"]
 			text=pick(w)
 		else
 			text = "[pick(heard_words)]"
 		msg+=" [text]"
-	if(q)
+	if (q)
 		msg+="?"
 	else
-		if(rand(0,10))
+		if (rand(0,10))
 			msg+="."
 		else
 			msg+="!"

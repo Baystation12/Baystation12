@@ -11,7 +11,7 @@
 	var/installed = 0
 
 /obj/item/borg/upgrade/proc/action(mob/living/silicon/robot/R)
-	if(R.stat == DEAD)
+	if (R.stat == DEAD)
 		to_chat(usr, SPAN_WARNING("The [src] will not function on a deceased robot."))
 		return 1
 	return 0
@@ -24,7 +24,7 @@
 	require_module = 1
 
 /obj/item/borg/upgrade/reset/action(mob/living/silicon/robot/R)
-	if((. = ..())) return 0
+	if ((. = ..())) return 0
 
 	R.reset_module()
 	return 1
@@ -37,8 +37,8 @@
 	var/new_module = null
 
 /obj/item/borg/upgrade/uncertified/action(mob/living/silicon/robot/R)
-	if((. = ..())) return 0
-	if(!new_module)
+	if ((. = ..())) return 0
+	if (!new_module)
 		to_chat(usr, SPAN_WARNING("[R]'s error lights strobe repeatedly - something seems to be wrong with the chip."))
 		return 0
 
@@ -67,7 +67,7 @@
 	heldname = sanitizeSafe(input(user, "Enter new robot name", "Robot Reclassification", heldname), MAX_NAME_LEN)
 
 /obj/item/borg/upgrade/rename/action(mob/living/silicon/robot/R)
-	if(..()) return 0
+	if (..()) return 0
 	R.notify_ai(ROBOT_NOTIFICATION_NEW_NAME, R.name, heldname)
 	R.SetName(heldname)
 	R.custom_name = heldname
@@ -81,9 +81,9 @@
 	icon_state = "cyborg_upgrade1"
 
 /obj/item/borg/upgrade/floodlight/action(mob/living/silicon/robot/R)
-	if(..()) return 0
+	if (..()) return 0
 
-	if(R.intenselight)
+	if (R.intenselight)
 		to_chat(usr, "This cyborg's light was already upgraded")
 		return 0
 	else
@@ -99,13 +99,13 @@
 
 
 /obj/item/borg/upgrade/restart/action(mob/living/silicon/robot/R)
-	if(R.health < 0)
+	if (R.health < 0)
 		to_chat(usr, "You have to repair the robot before using this module!")
 		return 0
 
-	if(!R.key)
+	if (!R.key)
 		for(var/mob/observer/ghost/ghost in GLOB.player_list)
-			if(ghost.mind && ghost.mind.current == R)
+			if (ghost.mind && ghost.mind.current == R)
 				R.key = ghost.key
 
 	R.set_stat(CONSCIOUS)
@@ -121,9 +121,9 @@
 	require_module = 1
 
 /obj/item/borg/upgrade/vtec/action(mob/living/silicon/robot/R)
-	if(..()) return FALSE
+	if (..()) return FALSE
 
-	if(R.vtec)
+	if (R.vtec)
 		return FALSE
 
 	R.vtec = TRUE
@@ -138,21 +138,21 @@
 
 
 /obj/item/borg/upgrade/weaponcooler/action(mob/living/silicon/robot/R)
-	if(..()) return 0
+	if (..()) return 0
 
-	if(!R.module || !(type in R.module.supported_upgrades))
+	if (!R.module || !(type in R.module.supported_upgrades))
 		to_chat(R, "Upgrade mounting error!  No suitable hardpoint detected!")
 		to_chat(usr, "There's no mounting point for the module!")
 		return 0
 
 	var/obj/item/gun/energy/gun/secure/mounted/T = locate() in R.module
-	if(!T)
+	if (!T)
 		T = locate() in R.module.equipment
-	if(!T)
+	if (!T)
 		to_chat(usr, "This robot has had its energy gun removed!")
 		return 0
 
-	if(T.recharge_time <= 2)
+	if (T.recharge_time <= 2)
 		to_chat(R, "Maximum cooling achieved for this hardpoint!")
 		to_chat(usr, "There's no room for another cooling unit!")
 		return 0
@@ -169,9 +169,9 @@
 	require_module = 1
 
 /obj/item/borg/upgrade/jetpack/action(mob/living/silicon/robot/R)
-	if(..()) return 0
+	if (..()) return 0
 
-	if(!R.module || !(type in R.module.supported_upgrades))
+	if (!R.module || !(type in R.module.supported_upgrades))
 		to_chat(R, "Upgrade mounting error!  No suitable hardpoint detected!")
 		to_chat(usr, "There's no mounting point for the module!")
 		return 0
@@ -189,9 +189,9 @@
 	require_module = 1
 
 /obj/item/borg/upgrade/rcd/action(mob/living/silicon/robot/R)
-	if(..()) return 0
+	if (..()) return 0
 
-	if(!R.module || !(type in R.module.supported_upgrades))
+	if (!R.module || !(type in R.module.supported_upgrades))
 		to_chat(R, "Upgrade mounting error!  No suitable hardpoint detected!")
 		to_chat(usr, "There's no mounting point for the module!")
 		return 0
@@ -206,9 +206,9 @@
 	require_module = 1
 
 /obj/item/borg/upgrade/syndicate/action(mob/living/silicon/robot/R)
-	if(..()) return 0
+	if (..()) return 0
 
-	if(R.emagged)
+	if (R.emagged)
 		return 0
 
 	R.emagged = TRUE

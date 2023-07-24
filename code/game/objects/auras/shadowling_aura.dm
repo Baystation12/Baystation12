@@ -4,12 +4,12 @@
 
 /obj/aura/shadowling_aura/added_to(mob/living/L)
 	..()
-	if(!(MUTATION_SPACERES in L.mutations))
+	if (!(MUTATION_SPACERES in L.mutations))
 		L.mutations += MUTATION_SPACERES
 		added_mutation = TRUE
 
 /obj/aura/shadowling_aura/removed()
-	if(added_mutation)
+	if (added_mutation)
 		added_mutation = FALSE
 		user.mutations -= MUTATION_SPACERES
 	..()

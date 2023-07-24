@@ -1,5 +1,5 @@
 /mob/living/simple_animal/bullet_act(obj/item/projectile/Proj)
-	if(!Proj || Proj.nodamage)
+	if (!Proj || Proj.nodamage)
 		return
 	if (status_flags & GODMODE)
 		return PROJECTILE_FORCE_MISS
@@ -11,9 +11,9 @@
 		damage = Proj.damage / 2
 	if (Proj.damtype == DAMAGE_BURN)
 		damage = Proj.damage / 1.5
-	if(Proj.agony)
+	if (Proj.agony)
 		damage += Proj.agony / 6
-		if(health < Proj.agony * 3)
+		if (health < Proj.agony * 3)
 			Paralyse(Proj.agony / 20)
 			visible_message(SPAN_WARNING("[src] is stunned momentarily!"))
 
@@ -31,23 +31,23 @@
 
 	switch(M.a_intent)
 
-		if(I_HELP)
+		if (I_HELP)
 			if (health > 0)
 				M.visible_message(SPAN_NOTICE("[M] [response_help] \the [src]."))
 				M.update_personal_goal(/datum/goal/achievement/specific_object/pet, type)
 
-		if(I_DISARM)
+		if (I_DISARM)
 			M.visible_message(SPAN_NOTICE("[M] [response_disarm] \the [src]."))
 			M.do_attack_animation(src)
 
-		if(I_HURT)
+		if (I_HURT)
 			var/dealt_damage = harm_intent_damage
 			var/harm_verb = response_harm
-			if(ishuman(M) && M.species)
+			if (ishuman(M) && M.species)
 				var/datum/unarmed_attack/attack = M.get_unarmed_attack(src)
 				dealt_damage = attack.damage <= dealt_damage ? dealt_damage : attack.damage
 				harm_verb = pick(attack.attack_verb)
-				if(attack.sharp || attack.edge)
+				if (attack.sharp || attack.edge)
 					adjustBleedTicks(dealt_damage)
 
 			adjustBruteLoss(dealt_damage)
@@ -137,7 +137,7 @@
 
 	visible_message(SPAN_DANGER("\The [src] has been attacked with \the [O] by [user]!"))
 
-	if(O.force <= resistance)
+	if (O.force <= resistance)
 		to_chat(user, SPAN_DANGER("This weapon is ineffective; it does no damage."))
 		return FALSE
 
@@ -146,11 +146,11 @@
 		damage = 0
 	if (O.damtype == DAMAGE_STUN)
 		damage = (O.force / 8)
-	if(supernatural && istype(O,/obj/item/nullrod))
+	if (supernatural && istype(O,/obj/item/nullrod))
 		damage *= 2
 		purge = 3
 	adjustBruteLoss(damage)
-	if(O.edge || O.sharp)
+	if (O.edge || O.sharp)
 		adjustBleedTicks(damage)
 
 	if (ai_holder)
@@ -159,12 +159,12 @@
 	return TRUE
 
 /mob/living/simple_animal/proc/reflect_unarmed_damage(mob/living/carbon/human/attacker, damage_type, description)
-	if(attacker.a_intent == I_HURT)
+	if (attacker.a_intent == I_HURT)
 		var/hand_hurtie
-		if(attacker.hand)
+		if (attacker.hand)
 			hand_hurtie = BP_L_HAND
 		else
 			hand_hurtie = BP_R_HAND
 		attacker.apply_damage(rand(return_damage_min, return_damage_max), damage_type, hand_hurtie, used_weapon = description)
-		if(rand(25))
+		if (rand(25))
 			to_chat(attacker, SPAN_WARNING("Your attack has no obvious effect on \the [src]'s [description]!"))

@@ -76,7 +76,7 @@ SUBSYSTEM_DEF(skybox)
 			overmap.appearance_flags |= RESET_COLOR
 			res.overlays += overmap
 	for (var/datum/event/event as anything in SSevent.active_events)
-		if(event.has_skybox_image && event.isRunning && (z in event.affecting_z))
+		if (event.has_skybox_image && event.isRunning && (z in event.affecting_z))
 			res.overlays += event.get_skybox_image()
 	return res
 

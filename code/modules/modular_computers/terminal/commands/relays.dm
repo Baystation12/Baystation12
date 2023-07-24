@@ -14,8 +14,8 @@
 	. = list("[name]: Number of relays found: [length(ntnet_global.relays)]")
 	for(var/obj/machinery/ntnet_relay/R in ntnet_global.relays)
 		. += "Quantum relay ([R.uid]) status: [(R.operable() ? "Reachable" : "Unreachable")]"
-		if(R.operable())
-			if(!!R.get_component_of_type(/obj/item/stock_parts/computer/hard_drive/portable))
+		if (R.operable())
+			if (!!R.get_component_of_type(/obj/item/stock_parts/computer/hard_drive/portable))
 				. += "LOG BACKUP STORAGE DEVICE PRESENT"
 			var/area/A = get_area(R)
 			. += "Triangulating signal... estimated location: [(A ? sanitize(A.name) : "Unknown")]"

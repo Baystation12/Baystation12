@@ -28,11 +28,11 @@
 
 /turf/simulated/ocean/Initialize()
 	. = ..()
-	if(isnull(detail_decal) && add_decal())
+	if (isnull(detail_decal) && add_decal())
 		detail_decal = "asteroid[rand(0,9)]"
 		update_icon()
 
 /turf/simulated/ocean/on_update_icon(update_neighbors)
 	..(update_neighbors)
-	if(detail_decal)
+	if (detail_decal)
 		overlays += image(icon = 'icons/turf/mining_decals.dmi', icon_state = detail_decal)

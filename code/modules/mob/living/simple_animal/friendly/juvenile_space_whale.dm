@@ -40,7 +40,7 @@
 /mob/living/simple_animal/passive/juvenile_space_whale/Initialize(mapload)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/space_whale/W = locate() in viewers(src, 7)
-	if(W && !parent && !W.baby)
+	if (W && !parent && !W.baby)
 		W.baby = src
 		parent = W
 		color = parent.color
@@ -48,26 +48,26 @@
 
 /mob/living/simple_animal/passive/juvenile_space_whale/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
-	if(parent && parent.stat != DEAD)
-		if(parent.stance == STANCE_IDLE && (pulledby || length(grabbed_by)))
+	if (parent && parent.stat != DEAD)
+		if (parent.stance == STANCE_IDLE && (pulledby || length(grabbed_by)))
 			var/enemies = pulledby ? list(pulledby) : grabbed_by
 			parent.ai_holder.attackers += enemies
-		if(health < (maxHealth - 5))
+		if (health < (maxHealth - 5))
 			walk_to(src, parent, 1, 1 SECONDS)
-			if(parent.stance == STANCE_IDLE && length(ai_holder.attackers))
+			if (parent.stance == STANCE_IDLE && length(ai_holder.attackers))
 				parent.ai_holder.react_to_attack(pick(ai_holder.attackers))
-		else if(get_dist(src.loc, parent.loc) > 5)
+		else if (get_dist(src.loc, parent.loc) > 5)
 			walk_to(src, parent, 4, 3 SECONDS)
 
 /mob/living/simple_animal/passive/juvenile_space_whale/set_dir()
 	..()
 	switch(dir)
-		if(NORTH, SOUTH)
+		if (NORTH, SOUTH)
 			bound_height = 64
 			bound_width = 32
-		if(EAST, WEST)
+		if (EAST, WEST)
 			bound_height = 32
 			bound_width = 64
 

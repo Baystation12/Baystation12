@@ -48,7 +48,7 @@
 	return
 
 /obj/item/toy/water_balloon/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
-	if(!proximity) return
+	if (!proximity) return
 	if (istype(A, /obj/structure/reagent_dispensers/watertank) && get_dist(src,A) <= 1)
 		A.reagents.trans_to_obj(src, 10)
 		to_chat(user, SPAN_NOTICE("You fill the balloon with the contents of [A]."))
@@ -57,12 +57,12 @@
 	return
 
 /obj/item/toy/water_balloon/attackby(obj/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/reagent_containers/glass))
-		if(O.reagents)
-			if(O.reagents.total_volume < 1)
+	if (istype(O, /obj/item/reagent_containers/glass))
+		if (O.reagents)
+			if (O.reagents.total_volume < 1)
 				to_chat(user, "The [O] is empty.")
-			else if(O.reagents.total_volume >= 1)
-				if(O.reagents.has_reagent(/datum/reagent/acid/polyacid, 1))
+			else if (O.reagents.total_volume >= 1)
+				if (O.reagents.has_reagent(/datum/reagent/acid/polyacid, 1))
 					to_chat(user, "The acid chews through the balloon!")
 					O.reagents.splash(user, reagents.total_volume)
 					qdel(src)
@@ -74,19 +74,19 @@
 	return
 
 /obj/item/toy/water_balloon/throw_impact(atom/hit_atom)
-	if(reagents && reagents.total_volume >= 1)
+	if (reagents && reagents.total_volume >= 1)
 		src.visible_message(SPAN_WARNING("\The [src] bursts!"),"You hear a pop and a splash.")
 		src.reagents.touch_turf(get_turf(hit_atom))
 		for(var/atom/A in get_turf(hit_atom))
 			src.reagents.touch(A)
 		src.icon_state = "burst"
 		spawn(5)
-			if(src)
+			if (src)
 				qdel(src)
 	return
 
 /obj/item/toy/water_balloon/on_update_icon()
-	if(src.reagents.total_volume >= 1)
+	if (src.reagents.total_volume >= 1)
 		icon_state = "waterballoon"
 		item_state = "balloon"
 	else
@@ -153,9 +153,9 @@
 	var/bullets = 5
 
 /obj/item/toy/crossbow/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/toy/ammo/crossbow))
-		if(bullets <= 4)
-			if(!user.unEquip(I))
+	if (istype(I, /obj/item/toy/ammo/crossbow))
+		if (bullets <= 4)
+			if (!user.unEquip(I))
 				return
 			qdel(I)
 			bullets++
@@ -165,8 +165,8 @@
 
 
 /obj/item/toy/crossbow/afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
-	if(!isturf(target.loc) || target == user) return
-	if(flag) return
+	if (!isturf(target.loc) || target == user) return
+	if (flag) return
 
 	if (locate (/obj/structure/table, src.loc))
 		return
@@ -180,12 +180,12 @@
 
 		for(var/i=0, i<6, i++)
 			if (D)
-				if(D.loc == trg) break
+				if (D.loc == trg) break
 				step_towards(D,trg)
 
 				for(var/mob/living/M in D.loc)
-					if(!istype(M,/mob/living)) continue
-					if(M == user) continue
+					if (!istype(M,/mob/living)) continue
+					if (M == user) continue
 					for(var/mob/O in viewers(world.view, D))
 						O.show_message(SPAN_WARNING("\The [M] was hit by the foam dart!"), 1)
 					new /obj/item/toy/ammo/crossbow(M.loc)
@@ -193,15 +193,15 @@
 					return
 
 				for(var/atom/A in D.loc)
-					if(A == user) continue
-					if(A.density)
+					if (A == user) continue
+					if (A.density)
 						new /obj/item/toy/ammo/crossbow(A.loc)
 						qdel(D)
 
 			sleep(1)
 
 		spawn(10)
-			if(D)
+			if (D)
 				new /obj/item/toy/ammo/crossbow(D.loc)
 				qdel(D)
 
@@ -235,7 +235,7 @@
 
 /obj/item/toy/crossbow/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 2 && bullets)
+	if (distance <= 2 && bullets)
 		to_chat(user, SPAN_NOTICE("It is loaded with [bullets] foam darts!"))
 
 /obj/item/toy/ammo/crossbow
@@ -322,9 +322,9 @@
 	qdel(src)
 
 /obj/item/toy/snappop/Crossed(H as mob|obj)
-	if((ishuman(H))) //i guess carp and shit shouldn't set them off
+	if ((ishuman(H))) //i guess carp and shit shouldn't set them off
 		var/mob/living/carbon/M = H
-		if(!MOVING_DELIBERATELY(M))
+		if (!MOVING_DELIBERATELY(M))
 			to_chat(M, SPAN_WARNING("You step on the snap pop!"))
 
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -349,7 +349,7 @@
 	slot_flags = SLOT_EARS
 
 /obj/item/toy/bosunwhistle/attack_self(mob/user as mob)
-	if(cooldown < world.time - 35)
+	if (cooldown < world.time - 35)
 		to_chat(user, SPAN_NOTICE("You blow on [src], creating an ear-splitting noise!"))
 		playsound(user, 'sound/misc/boatswain.ogg', 20, 1)
 		cooldown = world.time
@@ -365,14 +365,14 @@
 
 //all credit to skasi for toy mech fun ideas
 /obj/item/toy/prize/attack_self(mob/user as mob)
-	if(cooldown < world.time - 8)
+	if (cooldown < world.time - 8)
 		to_chat(user, SPAN_NOTICE("You play with [src]."))
 		playsound(user, 'sound/mecha/mechstep01.ogg', 20, 1)
 		cooldown = world.time
 
 /obj/item/toy/prize/attack_hand(mob/user as mob)
-	if(loc == user)
-		if(cooldown < world.time - 8)
+	if (loc == user)
+		if (cooldown < world.time - 8)
 			to_chat(user, SPAN_NOTICE("You play with [src]."))
 			playsound(user, 'sound/mecha/mechmove01.ogg', 20, 1)
 			cooldown = world.time
@@ -949,14 +949,14 @@
 	var/activation_sound = 'sound/effects/flashlight.ogg'
 
 /obj/item/toy/desk/on_update_icon()
-	if(on)
+	if (on)
 		icon_state = "[initial(icon_state)]-on"
 	else
 		icon_state = "[initial(icon_state)]"
 
 /obj/item/toy/desk/attack_self(mob/user)
 	on = !on
-	if(on && activation_sound)
+	if (on && activation_sound)
 		playsound(src.loc, activation_sound, 75, 1)
 	update_icon()
 	return 1

@@ -104,14 +104,14 @@ Shift + Right Click - Select point B
 		to_chat(user, "Created area [new_area.name]")
 
 /datum/build_mode/areas/proc/SelectArea(area/A)
-	if(!A || A == selected_area)
+	if (!A || A == selected_area)
 		return
 	UnselectArea()
 	selected_area = A
 	GLOB.destroyed_event.register(selected_area, src, .proc/UnselectArea)
 
 /datum/build_mode/areas/proc/UnselectArea()
-	if(!selected_area)
+	if (!selected_area)
 		return
 	GLOB.destroyed_event.unregister(selected_area, src, .proc/UnselectArea)
 
@@ -119,7 +119,7 @@ Shift + Right Click - Select point B
 	for(var/turf/T in selected_area)
 		has_turf = TRUE
 		break
-	if(!has_turf)
+	if (!has_turf)
 		qdel(selected_area)
 	selected_area = null
 

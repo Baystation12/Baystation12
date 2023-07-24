@@ -31,7 +31,7 @@ var/global/list/navbeacons = list()
 /obj/machinery/navbeacon/on_update_icon()
 	var/state="navbeacon[open]"
 
-	if(invisibility)
+	if (invisibility)
 		icon_state = "[state]-f"	// if invisible, set icon to faded version
 									// in case revealed by T-scanner
 	else
@@ -39,18 +39,18 @@ var/global/list/navbeacons = list()
 
 /obj/machinery/navbeacon/attackby(obj/item/I, mob/user)
 	var/turf/T = loc
-	if(!T.is_plating())
+	if (!T.is_plating())
 		return		// prevent intraction when T-scanner revealed
 
-	if(isScrewdriver(I))
+	if (isScrewdriver(I))
 		open = !open
 
 		user.visible_message("\The [user] [open ? "opens" : "closes"] cover of \the [src].", "You [open ? "open" : "close"] cover of \the [src].")
 
 		update_icon()
 
-	else if(I.GetIdCard())
-		if(open)
+	else if (I.GetIdCard())
+		if (open)
 			if (src.allowed(user))
 				src.locked = !src.locked
 				to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
@@ -68,16 +68,16 @@ var/global/list/navbeacons = list()
 /obj/machinery/navbeacon/interact(mob/user)
 	var/ai = isAI(user)
 	var/turf/T = loc
-	if(!T.is_plating())
+	if (!T.is_plating())
 		return		// prevent intraction when T-scanner revealed
 
-	if(!open && !ai)	// can't alter controls if not open, unless you're an AI
+	if (!open && !ai)	// can't alter controls if not open, unless you're an AI
 		to_chat(user, "The beacon's control cover is closed.")
 		return
 
 	var/t
 
-	if(locked && !ai)
+	if (locked && !ai)
 		t = {"<TT><B>Navigation Beacon</B><HR><BR>
 <i>(swipe card to unlock controls)</i><BR><HR>
 Location: [location ? location : "(none)"]</A><BR>
@@ -110,25 +110,25 @@ Transponder Codes:<UL>"}
 	if (usr.stat)
 		return
 	if ((in_range(src, usr) && istype(src.loc, /turf)) || (istype(usr, /mob/living/silicon)))
-		if(open && !locked)
+		if (open && !locked)
 			usr.set_machine(src)
 
-			if(href_list["locedit"])
+			if (href_list["locedit"])
 				var/newloc = sanitize(input("Enter New Location", "Navigation Beacon", location) as text|null)
-				if(newloc)
+				if (newloc)
 					location = newloc
 					updateDialog()
 
-			else if(href_list["edit"])
+			else if (href_list["edit"])
 				var/codekey = href_list["code"]
 
 				var/newkey = input("Enter Transponder Code Key", "Navigation Beacon", codekey) as text|null
-				if(!newkey)
+				if (!newkey)
 					return
 
 				var/codeval = codes[codekey]
 				var/newval = input("Enter Transponder Code Value", "Navigation Beacon", codeval) as text|null
-				if(!newval)
+				if (!newval)
 					newval = codekey
 					return
 
@@ -137,23 +137,23 @@ Transponder Codes:<UL>"}
 
 				updateDialog()
 
-			else if(href_list["delete"])
+			else if (href_list["delete"])
 				var/codekey = href_list["code"]
 				codes.Remove(codekey)
 				updateDialog()
 
-			else if(href_list["add"])
+			else if (href_list["add"])
 
 				var/newkey = input("Enter New Transponder Code Key", "Navigation Beacon") as text|null
-				if(!newkey)
+				if (!newkey)
 					return
 
 				var/newval = input("Enter New Transponder Code Value", "Navigation Beacon") as text|null
-				if(!newval)
+				if (!newval)
 					newval = "1"
 					return
 
-				if(!codes)
+				if (!codes)
 					codes = new()
 
 				codes[newkey] = newval

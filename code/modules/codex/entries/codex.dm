@@ -31,16 +31,16 @@
 		var/datum/codex_category/C = type
 		var/key = "[initial(C.name)] (category)"
 		var/datum/codex_entry/entry = SScodex.get_codex_entry(key)
-		if(entry)
+		if (entry)
 			categories += "<li><span codexlink='[key]'>[initial(C.name)]</span> - [initial(C.desc)]"
 	dat += jointext(categories, " ")
 	return SPAN_COLOR(CODEX_COLOR_MECHANICS, jointext(dat, null))
 
 /client/proc/codex_topic(href, href_list)
-	if(href_list["codex_search"]) //nano throwing errors
+	if (href_list["codex_search"]) //nano throwing errors
 		search_codex()
 		return TRUE
 
-	if(href_list["codex_index"]) //nano throwing errors
+	if (href_list["codex_index"]) //nano throwing errors
 		list_codex_entries()
 		return TRUE

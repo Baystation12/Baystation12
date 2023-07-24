@@ -7,8 +7,8 @@
 // Procs are arranged by "in range/hearers/viewers()" usage, as opposed to virtual mob hear/see abilities.
 // Most of these procs can technically take any movable atom but unless they have a virtual mob the returned objects may not be the expected ones
 
-#define ACQUIRE_VIRTUAL_OR_TURF(A) A = (isvirtualmob(A) ? A : (((istype(A) && A.virtual_mob) ? A.virtual_mob : get_turf(A)))) ; if(!A) return
-#define ACQUIRE_VIRTUAL_OR_RETURN(A) A = (isvirtualmob(A) ? A : (((istype(A) && A.virtual_mob) ? A.virtual_mob : null))) ; if(!A) return
+#define ACQUIRE_VIRTUAL_OR_TURF(A) A = (isvirtualmob(A) ? A : (((istype(A) && A.virtual_mob) ? A.virtual_mob : get_turf(A)))) ; if (!A) return
+#define ACQUIRE_VIRTUAL_OR_RETURN(A) A = (isvirtualmob(A) ? A : (((istype(A) && A.virtual_mob) ? A.virtual_mob : null))) ; if (!A) return
 
 /****************
 * Range Helpers *
@@ -20,7 +20,7 @@
 	ACQUIRE_VIRTUAL_OR_TURF(center_vmob)
 	for(var/mob/observer/virtual/v_mob in range(world.view, center_vmob))
 		var/client/C = v_mob.get_client()
-		if(C)
+		if (C)
 			. |= C
 
 /proc/hearers_in_range(atom/movable/center_vmob, hearing_range = world.view)
@@ -29,7 +29,7 @@
 
 	ACQUIRE_VIRTUAL_OR_TURF(center_vmob)
 	for(var/mob/observer/virtual/v_mob in range(hearing_range, center_vmob))
-		if(v_mob.abilities & VIRTUAL_ABILITY_HEAR)
+		if (v_mob.abilities & VIRTUAL_ABILITY_HEAR)
 			. |= v_mob.host
 
 /proc/viewers_in_range(atom/movable/center_vmob)
@@ -38,7 +38,7 @@
 
 	ACQUIRE_VIRTUAL_OR_TURF(center_vmob)
 	for(var/mob/observer/virtual/v_mob in range(world.view, center_vmob))
-		if(v_mob.abilities & VIRTUAL_ABILITY_SEE)
+		if (v_mob.abilities & VIRTUAL_ABILITY_SEE)
 			. |= v_mob.host
 
 /***************
@@ -55,7 +55,7 @@
 
 	ACQUIRE_VIRTUAL_OR_TURF(heard_vmob)
 	for(var/mob/observer/virtual/v_mob in hearers(range, heard_vmob))
-		if(v_mob.abilities & VIRTUAL_ABILITY_HEAR)
+		if (v_mob.abilities & VIRTUAL_ABILITY_HEAR)
 			. |= v_mob.host
 
 /***************
@@ -76,14 +76,14 @@
 
 	viewed_atom = istype(viewed_atom) ? viewed_atom.host : viewed_atom
 	var/turf/T = get_turf(viewed_atom)
-	if(!T)
+	if (!T)
 		return
 
 	for(var/mob/observer/virtual/seeing_v_mob in viewers(world.view, viewed_atom))
-		if(!(seeing_v_mob.abilities & VIRTUAL_ABILITY_SEE))
+		if (!(seeing_v_mob.abilities & VIRTUAL_ABILITY_SEE))
 			continue
 		var/atom/movable/host = seeing_v_mob.host
-		if(host.virtual_can_see_turf(T))
+		if (host.virtual_can_see_turf(T))
 			. |= host
 
 // This proc returns all hosts of virtual mobs in the given atom's view range (using its turf), ignoring invisibility, VIRUAL_ABILITY_SEE, and most other restrictions.

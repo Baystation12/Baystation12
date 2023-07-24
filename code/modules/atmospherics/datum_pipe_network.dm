@@ -22,7 +22,7 @@
 
 /datum/pipe_network/Process()
 	//Equalize gases amongst pipe if called for
-	if(update)
+	if (update)
 		update = 0
 		reconcile_air() //equalize_gases(gases)
 
@@ -34,20 +34,20 @@
 	//Purpose: Generate membership roster
 	//Notes: Assuming that members will add themselves to appropriate roster in network_expand()
 
-	if(!start_normal)
+	if (!start_normal)
 		qdel(src)
 		return
 	start_normal.network_expand(src, reference)
 
 	update_network_gases()
 
-	if((length(normal_members)>0)||(length(line_members)>0))
+	if ((length(normal_members)>0)||(length(line_members)>0))
 		START_PROCESSING_PIPENET(src)
 		return 1
 	qdel(src)
 
 /datum/pipe_network/proc/merge(datum/pipe_network/giver)
-	if(giver==src) return 0
+	if (giver==src) return 0
 
 	normal_members |= giver.normal_members
 
@@ -72,7 +72,7 @@
 
 	for(var/obj/machinery/atmospherics/normal_member in normal_members)
 		var/result = normal_member.return_network_air(src)
-		if(result) gases += result
+		if (result) gases += result
 
 	for(var/datum/pipeline/line_member in line_members)
 		gases += line_member.air

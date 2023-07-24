@@ -46,5 +46,5 @@
 /singleton/hierarchy/outfit/tournament_gear/janitor/post_equip(mob/living/carbon/human/H)
 	..()
 	var/obj/item/reagent_containers/glass/bucket/bucket = locate(/obj/item/reagent_containers/glass/bucket) in H
-	if(bucket)
+	if (bucket)
 		bucket.reagents.add_reagent(/datum/reagent/water, 70)

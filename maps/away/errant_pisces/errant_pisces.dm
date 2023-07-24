@@ -133,7 +133,7 @@
 	amount = 30
 
 /obj/item/stack/net/on_update_icon()
-	if(amount == 1)
+	if (amount == 1)
 		icon_state = "net"
 	else
 		icon_state = "net_roll"

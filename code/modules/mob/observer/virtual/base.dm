@@ -20,7 +20,7 @@ var/global/list/all_virtual_listeners = list()
 /mob/observer/virtual/Initialize(mapload, atom/movable/host)
 	. = ..()
 
-	if(!istype(host, host_type))
+	if (!istype(host, host_type))
 		CRASH("Received an unexpected host type. Expected [host_type], was [log_info_line(host)].")
 	src.host = host
 	GLOB.moved_event.register(host, src, /atom/movable/proc/move_to_turf_or_null)
@@ -38,15 +38,15 @@ var/global/list/all_virtual_listeners = list()
 	return ..()
 
 /mob/observer/virtual/on_update_icon()
-	if(!overlay_icons)
+	if (!overlay_icons)
 		overlay_icons = list()
 		for(var/i_state in icon_states(icon))
 			overlay_icons[i_state] = image(icon = icon, icon_state = i_state)
 	overlays.Cut()
 
-	if(abilities & VIRTUAL_ABILITY_HEAR)
+	if (abilities & VIRTUAL_ABILITY_HEAR)
 		overlays += overlay_icons["hear"]
-	if(abilities & VIRTUAL_ABILITY_SEE)
+	if (abilities & VIRTUAL_ABILITY_SEE)
 		overlays += overlay_icons["see"]
 
 /***********************
@@ -57,7 +57,7 @@ var/global/list/all_virtual_listeners = list()
 
 /atom/movable/Initialize()
 	. = ..()
-	if(shall_have_virtual_mob())
+	if (shall_have_virtual_mob())
 		virtual_mob = new virtual_mob(get_turf(src), src)
 
 /atom/movable/proc/shall_have_virtual_mob()

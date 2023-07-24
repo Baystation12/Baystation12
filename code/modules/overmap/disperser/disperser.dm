@@ -9,12 +9,12 @@
 
 /obj/machinery/disperser/examine(mob/user)
 	. = ..()
-	if(panel_open)
+	if (panel_open)
 		to_chat(user, "The maintenance panel is open.")
 
 /obj/machinery/disperser/attackby(obj/item/I, mob/user)
-	if(isWrench(I))
-		if(panel_open)
+	if (isWrench(I))
+		if (panel_open)
 			user.visible_message(SPAN_NOTICE("\The [user] rotates \the [src] with \the [I]."), SPAN_NOTICE("You rotate \the [src] with \the [I]."))
 			set_dir(turn(dir, 90))
 			playsound(src, 'sound/items/jaws_pry.ogg', 50, 1)

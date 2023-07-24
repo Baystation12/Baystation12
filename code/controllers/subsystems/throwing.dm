@@ -146,7 +146,7 @@ SUBSYSTEM_DEF(throwing)
 
 /datum/thrownthing/proc/finalize(hit = FALSE, t_target = null)
 	set waitfor = FALSE
-	if(QDELETED(thrownthing))
+	if (QDELETED(thrownthing))
 		return
 	thrownthing.throwing = null
 	if (!hit)
@@ -159,7 +159,7 @@ SUBSYSTEM_DEF(throwing)
 			thrownthing.throw_impact(get_turf(thrownthing), src)
 			thrownthing.space_drift(init_dir)
 
-	if(t_target && !QDELETED(thrownthing))
+	if (t_target && !QDELETED(thrownthing))
 		thrownthing.throw_impact(t_target, src)
 	if (callback)
 		invoke(callback)

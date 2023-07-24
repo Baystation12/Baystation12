@@ -22,7 +22,7 @@
 
 /obj/aura/personal_shield/device/aura_check_bullet(obj/item/projectile/proj, def_zone)
 	. = ..()
-	if(shield)
+	if (shield)
 		shield.take_charge()
 
 /obj/aura/personal_shield/device/New(mob/living/user, user_shield)

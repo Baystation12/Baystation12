@@ -129,7 +129,7 @@ SUBSYSTEM_DEF(plants)
 	seed.name = "[seed.uid]"
 	seeds[seed.name] = seed
 
-	if(station_environment)
+	if (station_environment)
 		if (seed.consume_gasses)
 			seed.consume_gasses[GAS_PHORON] = null
 			seed.consume_gasses[GAS_CO2] = null

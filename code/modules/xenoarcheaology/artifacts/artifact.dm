@@ -27,27 +27,27 @@
 	var/effecttype = pick(typesof(/datum/artifact_effect) - /datum/artifact_effect)
 	my_effect = new effecttype(src)
 
-	if(prob(75))
+	if (prob(75))
 		effecttype = pick(typesof(/datum/artifact_effect) - /datum/artifact_effect)
 		secondary_effect = new effecttype(src)
-		if(prob(75))
+		if (prob(75))
 			secondary_effect.ToggleActivate(0)
 
 	icon_num = rand(0, 11)
 	icon_state = "ano[icon_num]0"
-	if(icon_num == 7 || icon_num == 8)
+	if (icon_num == 7 || icon_num == 8)
 		name = "large crystal"
 		desc = pick("It shines faintly as it catches the light.",
 		"It appears to have a faint inner glow.",
 		"It seems to draw you inward as you look it at.",
 		"Something twinkles faintly as you look at it.",
 		"It's mesmerizing to behold.")
-	else if(icon_num == 9)
+	else if (icon_num == 9)
 		name = "alien computer"
 		desc = "It is covered in strange markings."
-	else if(icon_num == 10)
+	else if (icon_num == 10)
 		desc = "A large alien device, there appear to be some kind of vents in the side."
-	else if(icon_num == 11)
+	else if (icon_num == 11)
 		name = "sealed alien pod"
 		desc = "A strange alien device."
 
@@ -65,10 +65,10 @@
 			return
 
 		var/triggered = call(effect.trigger, trigger_proc)(arglist(args.Copy(2)))
-		if(effect.trigger.toggle && triggered)
+		if (effect.trigger.toggle && triggered)
 			effect.ToggleActivate(1)
 			. = TRUE
-		else if(effect.activated != triggered)
+		else if (effect.activated != triggered)
 			effect.ToggleActivate(1)
 			. = TRUE
 
@@ -87,18 +87,18 @@
 			return
 	// We're on a turf or inside a broken or invalid anomaly container
 
-	if(pulledby)
+	if (pulledby)
 		check_triggers(/datum/artifact_trigger/proc/on_touch, pulledby)
 
 	var/datum/gas_mixture/enivonment = loc.return_air()
-	if(enivonment.return_pressure() >= SOUND_MINIMUM_PRESSURE)
+	if (enivonment.return_pressure() >= SOUND_MINIMUM_PRESSURE)
 		check_triggers(/datum/artifact_trigger/proc/on_gas_exposure, enivonment)
 
 	for(var/datum/artifact_effect/effect in list(my_effect, secondary_effect))
 		effect.process()
 
 /obj/machinery/artifact/attack_robot(mob/living/user)
-	if(!CanPhysicallyInteract(user))
+	if (!CanPhysicallyInteract(user))
 		return
 	check_triggers(/datum/artifact_trigger/proc/on_touch, user)
 
@@ -119,20 +119,20 @@
 	check_triggers(/datum/artifact_trigger/proc/on_hit, P)
 
 /obj/machinery/artifact/ex_act(severity)
-	if(check_triggers(/datum/artifact_trigger/proc/on_explosion, severity))
+	if (check_triggers(/datum/artifact_trigger/proc/on_explosion, severity))
 		return
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			qdel(src)
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
 
 /obj/machinery/artifact/Move()
 	..()
-	if(my_effect)
+	if (my_effect)
 		my_effect.UpdateMove()
-	if(secondary_effect)
+	if (secondary_effect)
 		secondary_effect.UpdateMove()
 
 /obj/machinery/artifact/water_act(depth)

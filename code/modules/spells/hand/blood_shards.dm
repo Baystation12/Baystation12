@@ -28,8 +28,8 @@
 	damage_flags = 0
 
 /obj/item/projectile/blood_shard/on_hit(atom/movable/target, blocked = 0)
-	if(..())
-		if(istype(target, /mob/living/carbon/human))
+	if (..())
+		if (istype(target, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = target
 			H.vessel.remove_reagent(/datum/reagent/blood, 30)
 			H.visible_message(SPAN_DANGER("Tiny red shards burst from \the [H]'s skin!"))

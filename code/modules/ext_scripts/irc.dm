@@ -2,7 +2,7 @@
 	export2irc(list(type="msg", mesg=msg, chan=channel, pwd=config.comms_password))
 
 /proc/export2irc(params)
-	if(config.use_irc_bot && config.irc_bot_host)
+	if (config.use_irc_bot && config.irc_bot_host)
 		spawn(-1) // spawn here prevents hanging in the case that the bot isn't reachable
 			world.Export("http://[config.irc_bot_host]:45678?[list2params(params)]")
 
@@ -10,17 +10,17 @@
 	export2irc(list(pwd=config.comms_password, type="runtime", runtimes=runtimes, revision=revision))
 
 /proc/send2mainirc(msg)
-	if(config.main_irc)
+	if (config.main_irc)
 		send2irc(config.main_irc, msg)
 	return
 
 /proc/send2adminirc(msg)
-	if(config.admin_irc)
+	if (config.admin_irc)
 		send2irc(config.admin_irc, msg)
 	return
 
 /proc/adminmsg2adminirc(client/source, client/target, msg)
-	if(config.admin_irc)
+	if (config.admin_irc)
 		var/list/params[0]
 
 		params["pwd"] = config.comms_password
@@ -28,9 +28,9 @@
 		params["msg"] = msg
 		params["src_key"] = source.key
 		params["src_char"] = source.mob.real_name || source.mob.name
-		if(!target)
+		if (!target)
 			params["type"] = "adminhelp"
-		else if(istext(target))
+		else if (istext(target))
 			params["type"] = "ircpm"
 			params["target"] = target
 			params["rank"] = source.holder ? source.holder.rank : "Player"
@@ -46,15 +46,15 @@
 
 /proc/get_world_url()
 	. = "byond://"
-	if(config.serverurl)
+	if (config.serverurl)
 		. += config.serverurl
-	else if(config.server)
+	else if (config.server)
 		. += config.server
 	else
 		. += "[world.address]:[world.port]"
 
 /proc/send_to_admin_discord(type, message)
-	if(config.admin_discord && config.excom_address)
+	if (config.admin_discord && config.excom_address)
 		var/list/params[0]
 
 		params["pwd"] = config.comms_password

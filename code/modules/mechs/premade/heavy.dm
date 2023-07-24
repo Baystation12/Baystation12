@@ -3,16 +3,16 @@
 	desc = "A heavily armored combat exosuit."
 
 /mob/living/exosuit/premade/heavy/Initialize()
-	if(!arms)
+	if (!arms)
 		arms = new /obj/item/mech_component/manipulators/heavy(src)
 		arms.color = COLOR_TITANIUM
-	if(!legs)
+	if (!legs)
 		legs = new /obj/item/mech_component/propulsion/heavy(src)
 		legs.color = COLOR_TITANIUM
-	if(!head)
+	if (!head)
 		head = new /obj/item/mech_component/sensors/heavy(src)
 		head.color = COLOR_TITANIUM
-	if(!body)
+	if (!body)
 		body = new /obj/item/mech_component/chassis/heavy(src)
 		body.color = COLOR_TITANIUM
 
@@ -26,13 +26,13 @@
 
 /mob/living/exosuit/premade/heavy/merc/Initialize()
 	. = ..()
-	if(arms)
+	if (arms)
 		arms.color = COLOR_RED
-	if(legs)
+	if (legs)
 		legs.color = COLOR_RED
-	if(head)
+	if (head)
 		head.color = COLOR_RED
-	if(body)
+	if (body)
 		body.color = COLOR_DARK_GUNMETAL
 
 /mob/living/exosuit/premade/heavy/merc/spawn_mech_equipment()

@@ -13,7 +13,7 @@
 	return ..()
 
 /obj/random/date_based/proc/check_date()
-	if(date_check.IsValid())
+	if (date_check.IsValid())
 		return spawn_item()
 
 
@@ -25,14 +25,14 @@
 
 /datum/is_date/proc/ValidateMonthAndDay(month, day)
 	. = FALSE
-	if(!month || month < 1 || month > 12)
+	if (!month || month < 1 || month > 12)
 		CRASH("Invalid month: [month]")
 
 	var/days_in_month = GLOB.days_per_month[month]
-	if(month == 2) // Always allow 29th of February, in case someone wants to do have leap-year things
+	if (month == 2) // Always allow 29th of February, in case someone wants to do have leap-year things
 		days_in_month = 29
 
-	if(!day || day < 1 || day > days_in_month)
+	if (!day || day < 1 || day > days_in_month)
 		CRASH("Invalid day: [day]")
 	return TRUE
 
@@ -41,7 +41,7 @@
 	var/day
 
 /datum/is_date/day/New(month, day)
-	if(ValidateMonthAndDay(month, day))
+	if (ValidateMonthAndDay(month, day))
 		src.month = month
 		src.day = day
 
@@ -58,7 +58,7 @@
 	var/end_day
 
 /datum/is_date/range/New(start_month, start_day, end_month, end_day)
-	if(ValidateMonthAndDay(start_month, start_day) && ValidateMonthAndDay(end_month, end_day))
+	if (ValidateMonthAndDay(start_month, start_day) && ValidateMonthAndDay(end_month, end_day))
 		src.start_month = start_month
 		src.start_day = start_day
 		src.end_month = end_month
@@ -68,29 +68,29 @@
 	var/month_and_day = CurrentMonthAndDay()
 
 	var/end_date_before_start_date = FALSE
-	if(end_month < start_month)
+	if (end_month < start_month)
 		end_date_before_start_date = TRUE
-	if(end_month == start_month && end_day < start_day)
+	if (end_month == start_month && end_day < start_day)
 		end_date_before_start_date = TRUE
 
-	if(end_date_before_start_date)
-		if(month_and_day[1] < end_month)
+	if (end_date_before_start_date)
+		if (month_and_day[1] < end_month)
 			return TRUE
-		if(month_and_day[1] == end_month && month_and_day[2] <= end_day)
+		if (month_and_day[1] == end_month && month_and_day[2] <= end_day)
 			return TRUE
-		if(month_and_day[1] > start_month)
+		if (month_and_day[1] > start_month)
 			return TRUE
-		if(month_and_day[1] == start_month && month_and_day[2] >= start_day)
+		if (month_and_day[1] == start_month && month_and_day[2] >= start_day)
 			return TRUE
 		return FALSE
 
-	if(month_and_day[1] < start_month)
+	if (month_and_day[1] < start_month)
 		return FALSE
-	if(month_and_day[1] == start_month && month_and_day[2] < start_day)
+	if (month_and_day[1] == start_month && month_and_day[2] < start_day)
 		return FALSE
-	if(month_and_day[1] > end_month)
+	if (month_and_day[1] > end_month)
 		return FALSE
-	if(month_and_day[1] == end_month && month_and_day[2] > end_day)
+	if (month_and_day[1] == end_month && month_and_day[2] > end_day)
 		return FALSE
 	return TRUE
 
@@ -115,7 +115,7 @@
 	name = "Christmas Tree (Fountain Replacement)"
 
 /obj/random/date_based/christmas/tree/fountain/check_date()
-	if(date_check.IsValid())
+	if (date_check.IsValid())
 		return spawn_item()
 	else
 		return new /obj/structure/fountain(loc)

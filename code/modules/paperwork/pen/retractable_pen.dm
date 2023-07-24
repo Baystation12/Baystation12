@@ -27,13 +27,13 @@
 	desc = "It's a retractable [color_description] pen."
 
 /obj/item/pen/retractable/on_update_icon()
-	if(active)
+	if (active)
 		icon_state = "[base_state]-a"
 	else
 		icon_state = "[base_state]"
 
 /obj/item/pen/retractable/attack(atom/A, mob/user, target_zone)
-	if(!active)
+	if (!active)
 		toggle()
 	..()
 

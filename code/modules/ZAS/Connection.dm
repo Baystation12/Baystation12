@@ -66,7 +66,7 @@ Class Procs:
 	src.A = A
 	src.B = B
 	zoneA = A.zone
-	if(!istype(B))
+	if (!istype(B))
 		mark_space()
 		edge = SSair.get_edge(A.zone,B)
 		edge.add_connection(src)
@@ -76,13 +76,13 @@ Class Procs:
 		edge.add_connection(src)
 
 /connection/proc/mark_direct()
-	if(!direct())
+	if (!direct())
 		state |= CONNECTION_DIRECT
 		edge.direct++
 //	log_debug("Marked direct.")
 
 /connection/proc/mark_indirect()
-	if(direct())
+	if (direct())
 		state &= ~CONNECTION_DIRECT
 		edge.direct--
 //	log_debug("Marked indirect.")
@@ -103,31 +103,31 @@ Class Procs:
 
 /connection/proc/update()
 //	log_debug("Updated, \...")
-	if(!istype(A,/turf/simulated))
+	if (!istype(A,/turf/simulated))
 //		log_debug("Invalid A.")
 		erase()
 		return
 
 	var/block_status = SSair.air_blocked(A,B)
-	if(block_status & AIR_BLOCKED)
+	if (block_status & AIR_BLOCKED)
 //		log_debug("Blocked connection.")
 		erase()
 		return
-	else if(block_status & ZONE_BLOCKED)
+	else if (block_status & ZONE_BLOCKED)
 		mark_indirect()
 	else
 		mark_direct()
 
 	var/b_is_space = !istype(B,/turf/simulated)
 
-	if(state & CONNECTION_SPACE)
-		if(!b_is_space)
+	if (state & CONNECTION_SPACE)
+		if (!b_is_space)
 //			log_debug("Invalid B.")
 			erase()
 			return
-		if(A.zone != zoneA)
+		if (A.zone != zoneA)
 //			log_debug("Zone changed, \...")
-			if(!A.zone)
+			if (!A.zone)
 				erase()
 //				log_debug("erased.")
 				return
@@ -140,20 +140,20 @@ Class Procs:
 //		log_debug("valid.")
 		return
 
-	else if(b_is_space)
+	else if (b_is_space)
 //		log_debug("Invalid B.")
 		erase()
 		return
 
-	if(A.zone == B.zone)
+	if (A.zone == B.zone)
 //		log_debug("A == B")
 		erase()
 		return
 
-	if(A.zone != zoneA || (zoneB && (B.zone != zoneB)))
+	if (A.zone != zoneA || (zoneB && (B.zone != zoneB)))
 
 //		log_debug("Zones changed, \...")
-		if(A.zone && B.zone)
+		if (A.zone && B.zone)
 			edge.remove_connection(src)
 			edge = SSair.get_edge(A.zone, B.zone)
 			edge.add_connection(src)

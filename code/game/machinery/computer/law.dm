@@ -5,7 +5,7 @@
 	var/mob/living/silicon/current
 
 /obj/machinery/computer/upload/attackby(obj/item/O, mob/user)
-	if(istype(O, /obj/item/aiModule))
+	if (istype(O, /obj/item/aiModule))
 		var/obj/item/aiModule/M = O
 		M.install(src, user)
 	else
@@ -18,7 +18,7 @@
 	machine_desc = "Maintains a one-way link to ship-bound AI units, allowing remote modification of their laws."
 
 /obj/machinery/computer/upload/ai/interface_interact(mob/user)
-	if(!CanInteract(user, DefaultTopicState()))
+	if (!CanInteract(user, DefaultTopicState()))
 		return FALSE
 	current = select_active_ai(user, get_z(src))
 	if (!current)
@@ -34,7 +34,7 @@
 	machine_desc = "Maintains a one-way link to ship-bound synthetics such as cyborgs and robots, allowing remote modification of their laws."
 
 /obj/machinery/computer/upload/robot/interface_interact(mob/user)
-	if(!CanInteract(user, DefaultTopicState()))
+	if (!CanInteract(user, DefaultTopicState()))
 		return FALSE
 	current = freeborg(get_z(src))
 	if (!current)

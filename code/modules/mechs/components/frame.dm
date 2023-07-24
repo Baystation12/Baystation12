@@ -28,9 +28,9 @@
 /obj/structure/heavy_vehicle_frame/set_color(new_colour)
 	var/painted_component = FALSE
 	for(var/obj/item/mech_component/comp in list(body, arms, legs, head))
-		if(comp.set_color(new_colour))
+		if (comp.set_color(new_colour))
 			painted_component = TRUE
-	if(painted_component)
+	if (painted_component)
 		queue_icon_update()
 
 /obj/structure/heavy_vehicle_frame/Destroy()
@@ -42,36 +42,36 @@
 
 /obj/structure/heavy_vehicle_frame/examine(mob/user)
 	. = ..()
-	if(!arms)
+	if (!arms)
 		to_chat(user, SPAN_WARNING("It is missing manipulators."))
-	if(!legs)
+	if (!legs)
 		to_chat(user, SPAN_WARNING("It is missing propulsion."))
-	if(!head)
+	if (!head)
 		to_chat(user, SPAN_WARNING("It is missing sensors."))
-	if(!body)
+	if (!body)
 		to_chat(user, SPAN_WARNING("It is missing a chassis."))
-	if(is_wired == FRAME_WIRED)
+	if (is_wired == FRAME_WIRED)
 		to_chat(user, SPAN_WARNING("It has not had its wiring adjusted."))
-	else if(!is_wired)
+	else if (!is_wired)
 		to_chat(user, SPAN_WARNING("It has not yet been wired."))
-	if(is_reinforced == FRAME_REINFORCED)
+	if (is_reinforced == FRAME_REINFORCED)
 		to_chat(user, SPAN_WARNING("It has not had its internal reinforcement secured."))
-	else if(is_reinforced == FRAME_REINFORCED_SECURE)
+	else if (is_reinforced == FRAME_REINFORCED_SECURE)
 		to_chat(user, SPAN_WARNING("It has not had its internal reinforcement welded in."))
-	else if(!is_reinforced)
+	else if (!is_reinforced)
 		to_chat(user, SPAN_WARNING("It does not have any internal reinforcement."))
 
 /obj/structure/heavy_vehicle_frame/on_update_icon()
 	var/list/new_overlays = get_mech_images(list(legs, head, body, arms), layer)
-	if(body)
+	if (body)
 		set_density(TRUE)
 		overlays += get_mech_image(null, "[body.icon_state]_cockpit", body.icon, body.color)
-		if(body.pilot_coverage < 100 || body.transparent_cabin)
+		if (body.pilot_coverage < 100 || body.transparent_cabin)
 			new_overlays += get_mech_image(null, "[body.icon_state]_open_overlay", body.icon, body.color)
 	else
 		set_density(FALSE)
 	overlays = new_overlays
-	if(density != opacity)
+	if (density != opacity)
 		set_opacity(density)
 
 /obj/structure/heavy_vehicle_frame/set_dir()
@@ -402,14 +402,14 @@
 
 /obj/structure/heavy_vehicle_frame/proc/install_component(obj/item/thing, mob/user)
 	var/obj/item/mech_component/MC = thing
-	if(istype(MC) && !MC.ready_to_install())
+	if (istype(MC) && !MC.ready_to_install())
 		to_chat(user, SPAN_WARNING("\The [MC] [MC.gender == PLURAL ? "are" : "is"] not ready to install."))
 		return 0
-	if(user)
+	if (user)
 		visible_message(SPAN_NOTICE("\The [user] begins installing \the [thing] into \the [src]."))
-		if(!user.canUnEquip(thing) || !do_after(user, 3 SECONDS * user.skill_delay_mult(SKILL_DEVICES), src, DO_PUBLIC_UNIQUE) || user.get_active_hand() != thing)
+		if (!user.canUnEquip(thing) || !do_after(user, 3 SECONDS * user.skill_delay_mult(SKILL_DEVICES), src, DO_PUBLIC_UNIQUE) || user.get_active_hand() != thing)
 			return
-		if(!user.unEquip(thing))
+		if (!user.unEquip(thing))
 			return
 	thing.forceMove(src)
 	visible_message(SPAN_NOTICE("\The [user] installs \the [thing] into \the [src]."))
@@ -417,9 +417,9 @@
 	return 1
 
 /obj/structure/heavy_vehicle_frame/proc/uninstall_component(obj/item/component, mob/user)
-	if(!istype(component) || (component.loc != src) || !istype(user))
+	if (!istype(component) || (component.loc != src) || !istype(user))
 		return FALSE
-	if(!do_after(user, 4 SECONDS * user.skill_delay_mult(SKILL_DEVICES), src, DO_PUBLIC_UNIQUE) || component.loc != src)
+	if (!do_after(user, 4 SECONDS * user.skill_delay_mult(SKILL_DEVICES), src, DO_PUBLIC_UNIQUE) || component.loc != src)
 		return FALSE
 	user.visible_message(SPAN_NOTICE("\The [user] crowbars \the [component] off \the [src]."))
 	component.forceMove(get_turf(src))

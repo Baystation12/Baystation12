@@ -36,29 +36,29 @@ var/global/datum/repository/crew/crew_repository = new()
 
 /datum/repository/crew/proc/health_data(z_level)
 	var/list/crewmembers = list()
-	if(!z_level)
+	if (!z_level)
 		return crewmembers
 
 	var/datum/cache_entry/cache_entry = cache_data[num2text(z_level)]
-	if(!cache_entry)
+	if (!cache_entry)
 		cache_entry = new/datum/cache_entry
 		cache_data[num2text(z_level)] = cache_entry
 
-	if(world.time < cache_entry.timestamp)
+	if (world.time < cache_entry.timestamp)
 		return cache_entry.data
 
 	cache_data_alert[num2text(z_level)] = FALSE
 	var/tracked = scan()
 	for(var/obj/item/clothing/under/C in tracked)
 		var/turf/pos = get_turf(C)
-		if(C.has_sensor && C.sensor_mode != SUIT_SENSOR_OFF && pos && AreConnectedZLevels(pos.z, z_level))
-			if(istype(C.loc, /mob/living/carbon/human))
+		if (C.has_sensor && C.sensor_mode != SUIT_SENSOR_OFF && pos && AreConnectedZLevels(pos.z, z_level))
+			if (istype(C.loc, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = C.loc
-				if(H.w_uniform != C)
+				if (H.w_uniform != C)
 					continue
 
 				var/list/crewmemberData = list("sensor_type"=C.sensor_mode, "stat"=H.stat, "area"="", "x"=-1, "y"=-1, "z"=-1, "ref"="\ref[H]")
-				if(!(run_queues(H, C, pos, crewmemberData) & MOD_SUIT_SENSORS_REJECTED))
+				if (!(run_queues(H, C, pos, crewmemberData) & MOD_SUIT_SENSORS_REJECTED))
 					crewmembers[LIST_PRE_INC(crewmembers)] = crewmemberData
 					if (crewmemberData["alert"])
 						cache_data_alert[num2text(z_level)] = TRUE
@@ -73,7 +73,7 @@ var/global/datum/repository/crew/crew_repository = new()
 
 /datum/repository/crew/proc/has_health_alert(z_level)
 	. = FALSE
-	if(!z_level)
+	if (!z_level)
 		return
 	health_data(z_level) // Make sure cache doesn't get stale
 	. = cache_data_alert[num2text(z_level)]
@@ -81,7 +81,7 @@ var/global/datum/repository/crew/crew_repository = new()
 /datum/repository/crew/proc/scan()
 	var/list/tracked = list()
 	for(var/mob/living/carbon/human/H in SSmobs.mob_list)
-		if(istype(H.w_uniform, /obj/item/clothing/under))
+		if (istype(H.w_uniform, /obj/item/clothing/under))
 			var/obj/item/clothing/under/C = H.w_uniform
 			if (C.has_sensor)
 				tracked |= C
@@ -90,9 +90,9 @@ var/global/datum/repository/crew/crew_repository = new()
 
 /datum/repository/crew/proc/run_queues(H, C, pos, crewmemberData)
 	for(var/modifier_queue in modifier_queues)
-		if(crewmemberData["sensor_type"] >= modifier_queues[modifier_queue])
+		if (crewmemberData["sensor_type"] >= modifier_queues[modifier_queue])
 			. = process_crew_data(modifier_queue, H, C, pos, crewmemberData)
-			if(. & MOD_SUIT_SENSORS_REJECTED)
+			if (. & MOD_SUIT_SENSORS_REJECTED)
 				return
 
 /datum/repository/crew/proc/process_crew_data(PriorityQueue/modifiers, mob/living/carbon/human/H, obj/item/clothing/under/C, turf/pos, list/crew_data)
@@ -100,9 +100,9 @@ var/global/datum/repository/crew/crew_repository = new()
 	var/list/modifiers_of_this_priority = list()
 
 	for(var/crew_sensor_modifier/csm in modifiers.L)
-		if(csm.priority < current_priority)
+		if (csm.priority < current_priority)
 			. = check_queue(modifiers_of_this_priority, H, C, pos, crew_data)
-			if(. != MOD_SUIT_SENSORS_NONE)
+			if (. != MOD_SUIT_SENSORS_NONE)
 				return
 		current_priority = csm.priority
 		modifiers_of_this_priority += csm
@@ -112,27 +112,27 @@ var/global/datum/repository/crew/crew_repository = new()
 	while(length(modifiers_of_this_priority))
 		var/crew_sensor_modifier/pcsm = pick(modifiers_of_this_priority)
 		modifiers_of_this_priority -= pcsm
-		if(pcsm.may_process_crew_data(H, C, pos))
+		if (pcsm.may_process_crew_data(H, C, pos))
 			. = pcsm.process_crew_data(H, C, pos, crew_data)
-			if(. != MOD_SUIT_SENSORS_NONE)
+			if (. != MOD_SUIT_SENSORS_NONE)
 				return
 	return MOD_SUIT_SENSORS_NONE
 
 /datum/repository/crew/proc/add_modifier(base_type, crew_sensor_modifier/csm)
-	if(!istype(csm, base_type))
+	if (!istype(csm, base_type))
 		CRASH("The given crew sensor modifier was not of the given base type.")
 	var/PriorityQueue/pq = modifier_queues_by_type[base_type]
-	if(!pq)
+	if (!pq)
 		CRASH("The given base type was not a valid base type.")
-	if(csm in pq.L)
+	if (csm in pq.L)
 		CRASH("This crew sensor modifier has already been supplied.")
 	pq.Enqueue(csm)
 	return TRUE
 
 /datum/repository/crew/proc/remove_modifier(base_type, crew_sensor_modifier/csm)
-	if(!istype(csm, base_type))
+	if (!istype(csm, base_type))
 		CRASH("The given crew sensor modifier was not of the given base type.")
 	var/PriorityQueue/pq = modifier_queues_by_type[base_type]
-	if(!pq)
+	if (!pq)
 		CRASH("The given base type was not a valid base type.")
 	return pq.Remove(csm)

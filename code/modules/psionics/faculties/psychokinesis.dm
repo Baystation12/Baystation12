@@ -19,16 +19,16 @@
 	admin_log = FALSE
 
 /singleton/psionic_power/psychokinesis/psiblade/invoke(mob/living/user, mob/living/target)
-	if((target && user != target) || user.a_intent != I_HURT)
+	if ((target && user != target) || user.a_intent != I_HURT)
 		return FALSE
 	. = ..()
-	if(.)
+	if (.)
 		switch(user.psi.get_rank(faculty))
-			if(PSI_RANK_PARAMOUNT)
+			if (PSI_RANK_PARAMOUNT)
 				return new /obj/item/psychic_power/psiblade/master/grand/paramount(user, user)
-			if(PSI_RANK_GRANDMASTER)
+			if (PSI_RANK_GRANDMASTER)
 				return new /obj/item/psychic_power/psiblade/master/grand(user, user)
-			if(PSI_RANK_MASTER)
+			if (PSI_RANK_MASTER)
 				return new /obj/item/psychic_power/psiblade/master(user, user)
 			else
 				return new /obj/item/psychic_power/psiblade(user, user)
@@ -42,10 +42,10 @@
 	admin_log = FALSE
 
 /singleton/psionic_power/psychokinesis/tinker/invoke(mob/living/user, mob/living/target)
-	if((target && user != target) || user.a_intent != I_HELP)
+	if ((target && user != target) || user.a_intent != I_HELP)
 		return FALSE
 	. = ..()
-	if(.)
+	if (.)
 		return new /obj/item/psychic_power/tinker(user)
 
 /singleton/psionic_power/psychokinesis/telekinesis
@@ -63,30 +63,30 @@
 	)
 
 /singleton/psionic_power/psychokinesis/telekinesis/invoke(mob/living/user, mob/living/target)
-	if(user.a_intent != I_GRAB)
+	if (user.a_intent != I_GRAB)
 		return FALSE
 	. = ..()
-	if(.)
+	if (.)
 
 		var/distance = get_dist(user, target)
-		if(distance > user.psi.get_rank(PSI_PSYCHOKINESIS))
+		if (distance > user.psi.get_rank(PSI_PSYCHOKINESIS))
 			to_chat(user, SPAN_WARNING("Your telekinetic power won't reach that far."))
 			return FALSE
 
-		if(istype(target, /mob) || istype(target, /obj))
+		if (istype(target, /mob) || istype(target, /obj))
 			var/obj/item/psychic_power/telekinesis/tk = new(user)
-			if(tk.set_focus(target))
+			if (tk.set_focus(target))
 				tk.sparkle()
 				user.visible_message(SPAN_NOTICE("\The [user] reaches out."))
 				return tk
-		else if(istype(target, /obj/structure))
+		else if (istype(target, /obj/structure))
 			user.visible_message(SPAN_NOTICE("\The [user] makes a strange gesture."))
 			var/obj/O = target
 			O.attack_hand(user)
 			return TRUE
-		else if(istype(target, /obj/machinery))
+		else if (istype(target, /obj/machinery))
 			for(var/mtype in valid_machine_types)
-				if(istype(target, mtype))
+				if (istype(target, mtype))
 					var/obj/machinery/machine = target
 					machine.attack_hand(user)
 					return TRUE

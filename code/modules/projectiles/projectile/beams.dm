@@ -140,7 +140,7 @@
 	)
 
 /obj/item/projectile/beam/pulse/destroy/on_hit(atom/target, blocked = 0)
-	if(isturf(target))
+	if (isturf(target))
 		target.ex_act(EX_ACT_HEAVY)
 	..()
 
@@ -180,9 +180,9 @@
 	impact_type = /obj/effect/projectile/laser/blue/impact
 
 /obj/item/projectile/beam/lastertag/blue/on_hit(atom/target, blocked = 0)
-	if(istype(target, /mob/living/carbon/human))
+	if (istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/M = target
-		if(istype(M.wear_suit, /obj/item/clothing/suit/redtag))
+		if (istype(M.wear_suit, /obj/item/clothing/suit/redtag))
 			M.Weaken(5)
 	return 1
 
@@ -195,9 +195,9 @@
 	damage_type = DAMAGE_BURN
 
 /obj/item/projectile/beam/lastertag/red/on_hit(atom/target, blocked = 0)
-	if(istype(target, /mob/living/carbon/human))
+	if (istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/M = target
-		if(istype(M.wear_suit, /obj/item/clothing/suit/bluetag))
+		if (istype(M.wear_suit, /obj/item/clothing/suit/bluetag))
 			M.Weaken(5)
 	return 1
 
@@ -213,9 +213,9 @@
 	impact_type = /obj/effect/projectile/laser/omni/impact
 
 /obj/item/projectile/beam/lastertag/omni/on_hit(atom/target, blocked = 0)
-	if(istype(target, /mob/living/carbon/human))
+	if (istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/M = target
-		if((istype(M.wear_suit, /obj/item/clothing/suit/bluetag))||(istype(M.wear_suit, /obj/item/clothing/suit/redtag)))
+		if ((istype(M.wear_suit, /obj/item/clothing/suit/bluetag))||(istype(M.wear_suit, /obj/item/clothing/suit/redtag)))
 			M.Weaken(5)
 	return 1
 
@@ -324,7 +324,7 @@
 	impact_type = /obj/effect/projectile/trilaser/impact
 
 /obj/item/projectile/beam/plasmacutter/on_impact(atom/A)
-	if(istype(A, /turf/simulated/mineral))
+	if (istype(A, /turf/simulated/mineral))
 		var/turf/simulated/mineral/M = A
 		M.GetDrilled(1)
 	. = ..()
@@ -349,12 +349,12 @@
 	impact_type = /obj/effect/projectile/confuseray/impact
 
 /obj/item/projectile/beam/confuseray/on_hit(atom/target, blocked = 0)
-	if(istype(target, /mob/living))
+	if (istype(target, /mob/living))
 		var/mob/living/L = target
 		var/potency = rand(potency_min, potency_max)
 		L.confused += potency
 		L.eye_blurry += potency
-		if(L.confused >= 10)
+		if (L.confused >= 10)
 			L.Stun(1)
 			L.drop_l_hand()
 			L.drop_r_hand()
@@ -431,10 +431,10 @@
 
 /obj/item/projectile/beam/incendiary_laser/on_hit(atom/target, blocked = 0)
 	..()
-	if(isliving(target))
+	if (isliving(target))
 		var/mob/living/L = target
 		L.adjust_fire_stacks(rand(2,4))
-		if(L.fire_stacks >= 3)
+		if (L.fire_stacks >= 3)
 			L.IgniteMob()
 
 /obj/item/projectile/beam/blue

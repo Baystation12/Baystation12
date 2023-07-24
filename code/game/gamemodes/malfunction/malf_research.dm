@@ -29,13 +29,13 @@
 // Parameters: 	None
 // Description: Finishes currently focused research.
 /datum/malf_research/proc/finish_research()
-	if(!focus)
+	if (!focus)
 		return
 	to_chat(owner, "<b>Research Completed</b>: [focus.name]")
-	if(focus.ability)
+	if (focus.ability)
 		owner.verbs.Add(focus.ability)
 	focus.research_finished(owner)
-	if(focus.next)
+	if (focus.next)
 		available_abilities += focus.next
 	unlocked_abilities += focus
 	available_abilities -= focus
@@ -45,23 +45,23 @@
 // Parameters: 	None
 // Description: Processes CPU gain and research progress based on "realtime" calculation.
 /datum/malf_research/proc/process(idle = 0)
-	if(idle)		// No power or running on APU. Do nothing.
+	if (idle)		// No power or running on APU. Do nothing.
 		last_tick = world.time
 		return
 	var/time_diff = (world.time - last_tick)
 	last_tick = world.time
 	var/cpu_gained = time_diff * cpu_increase_per_tick
-	if(cpu_gained < 0)
+	if (cpu_gained < 0)
 		return // This shouldn't happen, but just in case..
-	if(max_cpu > stored_cpu)
+	if (max_cpu > stored_cpu)
 		var/given = min((max_cpu - stored_cpu), cpu_gained)
 		stored_cpu += given
 		cpu_gained -= given
 
 	cpu_gained = max(0, cpu_gained)
-	if(focus && (cpu_gained > 0))
+	if (focus && (cpu_gained > 0))
 		focus.process(cpu_gained)
-		if(focus.unlocked)
+		if (focus.unlocked)
 			finish_research()
 
 /datum/malf_research/proc/advance_all()

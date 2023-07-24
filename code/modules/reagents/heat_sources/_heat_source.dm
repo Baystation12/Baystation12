@@ -36,7 +36,7 @@
 	. = ..()
 
 /obj/machinery/reagent_temperature/Destroy()
-	if(container)
+	if (container)
 		container.dropInto(loc)
 		container = null
 	. = ..()
@@ -45,20 +45,20 @@
 	heating_power = initial(heating_power) * clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0, 10)
 
 	var/comp = 0.25 KILOWATTS * total_component_rating_of_type(/obj/item/stock_parts/micro_laser)
-	if(comp)
+	if (comp)
 		change_power_consumption(max(0.5 KILOWATTS, initial(active_power_usage) - comp), POWER_USE_ACTIVE)
 	..()
 
 /obj/machinery/reagent_temperature/Process()
 	..()
-	if(temperature != last_temperature)
+	if (temperature != last_temperature)
 		queue_icon_update()
-	if(((inoperable()) || !anchored) && use_power >= POWER_USE_ACTIVE)
+	if (((inoperable()) || !anchored) && use_power >= POWER_USE_ACTIVE)
 		update_use_power(POWER_USE_IDLE)
 		queue_icon_update()
 
 /obj/machinery/reagent_temperature/proc/eject_beaker(mob/user)
-	if(!container)
+	if (!container)
 		return
 	var/obj/item/reagent_containers/B = container
 	user.put_in_hands(B)
@@ -66,7 +66,7 @@
 	update_icon()
 
 /obj/machinery/reagent_temperature/AltClick(mob/user)
-	if(CanDefaultInteract(user))
+	if (CanDefaultInteract(user))
 		eject_beaker(user)
 		return TRUE
 	return ..()
@@ -76,22 +76,22 @@
 	return TRUE
 
 /obj/machinery/reagent_temperature/ProcessAtomTemperature()
-	if(use_power >= POWER_USE_ACTIVE)
+	if (use_power >= POWER_USE_ACTIVE)
 		var/last_temperature = temperature
-		if(heating && temperature < target_temperature)
+		if (heating && temperature < target_temperature)
 			temperature = min(target_temperature, temperature + heating_power)
-		else if(!heating && temperature > target_temperature)
+		else if (!heating && temperature > target_temperature)
 			temperature = max(target_temperature, temperature - heating_power)
-		if(temperature != last_temperature)
-			if(container)
+		if (temperature != last_temperature)
+			if (container)
 				QUEUE_TEMPERATURE_ATOMS(container)
 			queue_icon_update()
 		return TRUE // Don't kill this processing loop unless we're not powered.
 	. = ..()
 
 /obj/machinery/reagent_temperature/attackby(obj/item/thing, mob/user)
-	if(isWrench(thing))
-		if(use_power == POWER_USE_ACTIVE)
+	if (isWrench(thing))
+		if (use_power == POWER_USE_ACTIVE)
 			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
 		else
 			anchored = !anchored
@@ -99,12 +99,12 @@
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		return TRUE
 
-	if(thing.reagents)
+	if (thing.reagents)
 		for(var/checktype in permitted_types)
-			if(istype(thing, checktype))
-				if(container)
+			if (istype(thing, checktype))
+				if (container)
 					to_chat(user, SPAN_WARNING("\The [src] is already holding \the [container]."))
-				else if(user.unEquip(thing))
+				else if (user.unEquip(thing))
 					thing.forceMove(src)
 					container = thing
 					visible_message(SPAN_NOTICE("\The [user] places \the [container] on \the [src]."))
@@ -117,12 +117,12 @@
 
 	var/list/adding_overlays
 
-	if(use_power >= POWER_USE_ACTIVE)
-		if(!on_icon)
+	if (use_power >= POWER_USE_ACTIVE)
+		if (!on_icon)
 			on_icon = image(icon, "[icon_state]-on")
 		LAZYADD(adding_overlays, on_icon)
-		if(temperature > MINIMUM_GLOW_TEMPERATURE) // 50C
-			if(!glow_icon)
+		if (temperature > MINIMUM_GLOW_TEMPERATURE) // 50C
+			if (!glow_icon)
 				glow_icon = image(icon, "[icon_state]-glow")
 			glow_icon.alpha = clamp(temperature - MINIMUM_GLOW_TEMPERATURE, MINIMUM_GLOW_VALUE, MAXIMUM_GLOW_VALUE)
 			LAZYADD(adding_overlays, glow_icon)
@@ -132,13 +132,13 @@
 	else
 		set_light(0)
 
-	if(heating)
+	if (heating)
 		icon_state = "hotplate"
 	else
 		icon_state = "coldplate"
 
-	if(container)
-		if(!beaker_icon)
+	if (container)
+		if (!beaker_icon)
 			beaker_icon = image(icon, "[icon_state]-beaker")
 		LAZYADD(adding_overlays, beaker_icon)
 
@@ -153,12 +153,12 @@
 
 	dat += "<tr><td>Target temperature:</td><td>"
 
-	if(target_temperature > min_temperature)
+	if (target_temperature > min_temperature)
 		dat += "<a href='?src=\ref[src];adjust_temperature=-[heating_power]'>-</a> "
 
 	dat += "[target_temperature - T0C]C"
 
-	if(target_temperature < max_temperature)
+	if (target_temperature < max_temperature)
 		dat += " <a href='?src=\ref[src];adjust_temperature=[heating_power]'>+</a>"
 
 	dat += "</td></tr>"
@@ -176,16 +176,16 @@
 	popup.open()
 
 /obj/machinery/reagent_temperature/CanUseTopic(mob/user, state, href_list)
-	if(href_list && href_list["remove_container"])
+	if (href_list && href_list["remove_container"])
 		. = ..(user, GLOB.physical_state, href_list)
-		if(. == STATUS_CLOSE)
+		if (. == STATUS_CLOSE)
 			to_chat(user, SPAN_WARNING("You are too far away."))
 		return
 	return ..()
 
 /obj/machinery/reagent_temperature/proc/ToggleUsePower()
 
-	if(inoperable())
+	if (inoperable())
 		return TOPIC_HANDLED
 
 	update_use_power(use_power <= POWER_USE_IDLE ? POWER_USE_ACTIVE : POWER_USE_IDLE)
@@ -202,24 +202,24 @@
 
 /obj/machinery/reagent_temperature/OnTopic(mob/user, href_list)
 
-	if(href_list["adjust_temperature"])
+	if (href_list["adjust_temperature"])
 		target_temperature = clamp(target_temperature + text2num(href_list["adjust_temperature"]), min_temperature, max_temperature)
 		. = TOPIC_REFRESH
 
-	if(href_list["toggle_power"])
+	if (href_list["toggle_power"])
 		. = ToggleUsePower()
-		if(. != TOPIC_REFRESH)
+		if (. != TOPIC_REFRESH)
 			to_chat(user, SPAN_WARNING("The button clicks, but nothing happens."))
 
-	if(href_list["remove_container"])
+	if (href_list["remove_container"])
 		eject_beaker(user)
 		. = TOPIC_REFRESH
 
-	if(href_list["switch_mode"])
+	if (href_list["switch_mode"])
 		ToggleMode()
 		. = TOPIC_REFRESH
 
-	if(. == TOPIC_REFRESH)
+	if (. == TOPIC_REFRESH)
 		interact(user)
 
 #undef MINIMUM_GLOW_TEMPERATURE

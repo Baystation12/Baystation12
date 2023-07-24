@@ -29,38 +29,38 @@
 
 
 /obj/machinery/power/powered()
-	if(use_power)
+	if (use_power)
 		return ..()
 	return 1 //doesn't require an external power source
 
 // common helper procs for all power machines
 /obj/machinery/power/drain_power(drain_check, surge, amount = 0)
-	if(drain_check)
+	if (drain_check)
 		return 1
 
-	if(powernet && powernet.avail)
+	if (powernet && powernet.avail)
 		powernet.trigger_warning()
 		return powernet.draw_power(amount)
 
 /obj/machinery/power/proc/add_avail(amount)
-	if(powernet)
+	if (powernet)
 		powernet.newavail += amount
 		return 1
 	return 0
 
 /obj/machinery/power/proc/draw_power(amount)
-	if(powernet)
+	if (powernet)
 		return powernet.draw_power(amount)
 	return 0
 
 /obj/machinery/power/proc/surplus()
-	if(powernet)
+	if (powernet)
 		return powernet.avail-powernet.load
 	else
 		return 0
 
 /obj/machinery/power/proc/avail()
-	if(powernet)
+	if (powernet)
 		return powernet.avail
 	else
 		return 0
@@ -68,11 +68,11 @@
 // connect the machine to a powernet if a node cable is present on the turf
 /obj/machinery/power/proc/connect_to_network()
 	var/turf/T = src.loc
-	if(!T || !istype(T))
+	if (!T || !istype(T))
 		return 0
 
 	var/obj/structure/cable/C = T.get_cable_node() //check if we have a node cable on the machine turf, the first found is picked
-	if(!C || !C.powernet)
+	if (!C || !C.powernet)
 		return 0
 
 	C.powernet.add_machine(src)
@@ -80,7 +80,7 @@
 
 // remove and disconnect the machine from its current powernet
 /obj/machinery/power/proc/disconnect_from_network()
-	if(!powernet)
+	if (!powernet)
 		return 0
 	powernet.remove_machine(src)
 	return 1
@@ -88,19 +88,19 @@
 // attach a wire to a power machine - leads from the turf you are standing on
 //almost never called, overwritten by all power machines but terminal and generator
 /obj/machinery/power/attackby(obj/item/W, mob/user)
-	if((. = ..()))
+	if ((. = ..()))
 		return
 
-	if(isCoil(W))
+	if (isCoil(W))
 
 		var/obj/item/stack/cable_coil/coil = W
 
 		var/turf/T = user.loc
 
-		if(!T.is_plating() || !istype(T, /turf/simulated/floor))
+		if (!T.is_plating() || !istype(T, /turf/simulated/floor))
 			return
 
-		if(get_dist(src, user) > 1)
+		if (get_dist(src, user) > 1)
 			return
 
 		coil.PlaceCableOnTurf(T, user)
@@ -124,8 +124,8 @@
 		cdir = get_dir(T,loc)
 
 		for(var/obj/structure/cable/C in T)
-			if(C.powernet)	continue
-			if(C.d1 == cdir || C.d2 == cdir)
+			if (C.powernet)	continue
+			if (C.d1 == cdir || C.d2 == cdir)
 				. += C
 	return .
 
@@ -143,7 +143,7 @@
 		cdir = get_dir(T,loc)
 
 		for(var/obj/structure/cable/C in T)
-			if(C.d1 == cdir || C.d2 == cdir)
+			if (C.d1 == cdir || C.d2 == cdir)
 				. += C
 	return .
 
@@ -151,8 +151,8 @@
 /obj/machinery/power/proc/get_indirect_connections()
 	. = list()
 	for(var/obj/structure/cable/C in loc)
-		if(C.powernet)	continue
-		if(C.d1 == 0) // the cable is a node cable
+		if (C.powernet)	continue
+		if (C.d1 == 0) // the cable is a node cable
 			. += C
 	return .
 
@@ -170,21 +170,21 @@
 
 	var/reverse = d ? GLOB.reverse_dir[d] : 0
 	for(var/AM in T)
-		if(AM == source)	continue			//we don't want to return source
+		if (AM == source)	continue			//we don't want to return source
 
-		if(!cable_only && istype(AM,/obj/machinery/power))
+		if (!cable_only && istype(AM,/obj/machinery/power))
 			var/obj/machinery/power/P = AM
-			if(P.powernet == 0)	continue		// exclude APCs which have powernet=0
+			if (P.powernet == 0)	continue		// exclude APCs which have powernet=0
 
-			if(!unmarked || !P.powernet)		//if unmarked=1 we only return things with no powernet
-				if(d == 0)
+			if (!unmarked || !P.powernet)		//if unmarked=1 we only return things with no powernet
+				if (d == 0)
 					. += P
 
-		else if(istype(AM,/obj/structure/cable))
+		else if (istype(AM,/obj/structure/cable))
 			var/obj/structure/cable/C = AM
 
-			if(!unmarked || !C.powernet)
-				if(C.d1 == d || C.d2 == d || C.d1 == reverse || C.d2 == reverse )
+			if (!unmarked || !C.powernet)
+				if (C.d1 == d || C.d2 == d || C.d1 == reverse || C.d2 == reverse )
 					. += C
 	return .
 
@@ -202,13 +202,13 @@
 		P = worklist[index] //get the next power object found
 		index++
 
-		if( istype(P,/obj/structure/cable))
+		if ( istype(P,/obj/structure/cable))
 			var/obj/structure/cable/C = P
-			if(C.powernet != PN) //add it to the powernet, if it isn't already there
+			if (C.powernet != PN) //add it to the powernet, if it isn't already there
 				PN.add_cable(C)
 			worklist |= C.get_connections() //get adjacents power objects, with or without a powernet
 
-		else if(P.anchored && istype(P,/obj/machinery/power))
+		else if (P.anchored && istype(P,/obj/machinery/power))
 			var/obj/machinery/power/M = P
 			found_machines |= M //we wait until the powernet is fully propagates to connect the machines
 
@@ -217,21 +217,21 @@
 
 	//now that the powernet is set, connect found machines to it
 	for(var/obj/machinery/power/PM in found_machines)
-		if(!PM.connect_to_network()) //couldn't find a node on its turf...
+		if (!PM.connect_to_network()) //couldn't find a node on its turf...
 			PM.disconnect_from_network() //... so disconnect if already on a powernet
 
 
 //Merge two powernets, the bigger (in cable length term) absorbing the other
 /proc/merge_powernets(datum/powernet/net1, datum/powernet/net2)
 	RETURN_TYPE(/datum/powernet)
-	if(!net1 || !net2) //if one of the powernet doesn't exist, return
+	if (!net1 || !net2) //if one of the powernet doesn't exist, return
 		return
 
-	if(net1 == net2) //don't merge same powernets
+	if (net1 == net2) //don't merge same powernets
 		return
 
 	//We assume net1 is larger. If net2 is in fact larger we are just going to make them switch places to reduce on code.
-	if(length(net1.cables) < length(net2.cables))	//net2 is larger than net1. Let's switch them around
+	if (length(net1.cables) < length(net2.cables))	//net2 is larger than net1. Let's switch them around
 		var/temp = net1
 		net1 = net2
 		net2 = temp
@@ -240,10 +240,10 @@
 	for(var/obj/structure/cable/Cable in net2.cables) //merge cables
 		net1.add_cable(Cable)
 
-	if(!net2) return net1
+	if (!net2) return net1
 
 	for(var/obj/machinery/power/Node in net2.nodes) //merge power machines
-		if(!Node.connect_to_network())
+		if (!Node.connect_to_network())
 			Node.disconnect_from_network() //if somehow we can't connect the machine to the new powernet, disconnect it from the old nonetheless
 
 	return net1
@@ -255,21 +255,21 @@
 //No animations will be performed by this proc.
 /proc/electrocute_mob(mob/living/carbon/M as mob, power_source, obj/source, siemens_coeff = 1.0)
 	var/area/source_area
-	if(istype(power_source,/area))
+	if (istype(power_source,/area))
 		source_area = power_source
 		power_source = source_area.get_apc()
-	if(istype(power_source,/obj/structure/cable))
+	if (istype(power_source,/obj/structure/cable))
 		var/obj/structure/cable/Cable = power_source
 		power_source = Cable.powernet
 
 	var/datum/powernet/PN
 	var/obj/item/cell/cell
 
-	if(istype(power_source,/datum/powernet))
+	if (istype(power_source,/datum/powernet))
 		PN = power_source
-	else if(istype(power_source,/obj/item/cell))
+	else if (istype(power_source,/obj/item/cell))
 		cell = power_source
-	else if(istype(power_source,/obj/machinery/power/apc))
+	else if (istype(power_source,/obj/machinery/power/apc))
 		var/obj/machinery/power/apc/apc = power_source
 		cell = apc.get_cell()
 		var/obj/machinery/power/terminal/term = apc.terminal()
@@ -282,19 +282,19 @@
 		return 0
 	//Triggers powernet warning, but only for 5 ticks (if applicable)
 	//If following checks determine user is protected we won't alarm for long.
-	if(PN)
+	if (PN)
 		PN.trigger_warning(5)
-	if(istype(M,/mob/living/carbon/human))
+	if (istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		if(H.species.siemens_coefficient <= 0)
+		if (H.species.siemens_coefficient <= 0)
 			return
-		if(H.gloves)
+		if (H.gloves)
 			var/obj/item/clothing/gloves/G = H.gloves
-			if(G.siemens_coefficient == 0)	return 0		//to avoid spamming with insulated glvoes on
+			if (G.siemens_coefficient == 0)	return 0		//to avoid spamming with insulated glvoes on
 
 	//Checks again. If we are still here subject will be shocked, trigger standard 20 tick warning
 	//Since this one is longer it will override the original one.
-	if(PN)
+	if (PN)
 		PN.trigger_warning()
 
 	if (!cell && !PN)

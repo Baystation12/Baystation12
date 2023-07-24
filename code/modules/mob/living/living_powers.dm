@@ -6,11 +6,11 @@
 	set desc = "Allows to hide beneath tables or certain items. Toggled on or off."
 	set category = "Abilities"
 
-	if(incapacitated())
+	if (incapacitated())
 		return
 
 	hiding = !hiding
-	if(hiding)
+	if (hiding)
 		to_chat(src, SPAN_NOTICE("You are now hiding."))
 	else
 		to_chat(src, SPAN_NOTICE("You have stopped hiding."))

@@ -70,13 +70,13 @@
 	var/fire_colour = null //In case this reagent would burn a cool different colour
 
 /datum/reagent/New(datum/reagents/holder)
-	if(!istype(holder))
+	if (!istype(holder))
 		CRASH("Invalid reagents holder: [log_info_line(holder)]")
 	src.holder = holder
 	..()
 
 /datum/reagent/proc/remove_self(amount) // Shortcut
-	if(QDELETED(src)) // In case we remove multiple times without being careful.
+	if (QDELETED(src)) // In case we remove multiple times without being careful.
 		return
 	holder.remove_reagent(type, amount)
 
@@ -94,42 +94,42 @@
 	return
 
 /datum/reagent/proc/on_mob_life(mob/living/carbon/M, location) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
-	if(QDELETED(src))
+	if (QDELETED(src))
 		return // Something else removed us.
-	if(!istype(M))
+	if (!istype(M))
 		return
-	if(!(flags & AFFECTS_DEAD) && M.stat == DEAD && (world.time - M.timeofdeath > 150))
+	if (!(flags & AFFECTS_DEAD) && M.stat == DEAD && (world.time - M.timeofdeath > 150))
 		return
-	if(overdose && (location != CHEM_TOUCH))
+	if (overdose && (location != CHEM_TOUCH))
 		var/overdose_threshold = overdose * (flags & IGNORE_MOB_SIZE? 1 : MOB_MEDIUM/M.mob_size)
-		if(volume > overdose_threshold)
+		if (volume > overdose_threshold)
 			overdose(M)
 
 	//determine the metabolism rate
 	var/removed = metabolism
-	if(ingest_met && (location == CHEM_INGEST))
+	if (ingest_met && (location == CHEM_INGEST))
 		removed = ingest_met
-	if(touch_met && (location == CHEM_TOUCH))
+	if (touch_met && (location == CHEM_TOUCH))
 		removed = touch_met
 	removed = M.get_adjusted_metabolism(removed)
 	removed = min(removed, volume)
 
 	//adjust effective amounts - removed, dose, and max_dose - for mob size
 	var/effective = removed
-	if(!(flags & IGNORE_MOB_SIZE) && location != CHEM_TOUCH)
+	if (!(flags & IGNORE_MOB_SIZE) && location != CHEM_TOUCH)
 		effective *= (MOB_MEDIUM/M.mob_size)
 
 	M.chem_doses[type] = M.chem_doses[type] + effective
-	if(effective >= (metabolism * 0.1) || effective >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
+	if (effective >= (metabolism * 0.1) || effective >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
 		switch(location)
-			if(CHEM_BLOOD)
+			if (CHEM_BLOOD)
 				affect_blood(M, effective)
-			if(CHEM_INGEST)
+			if (CHEM_INGEST)
 				affect_ingest(M, effective)
-			if(CHEM_TOUCH)
+			if (CHEM_TOUCH)
 				affect_touch(M, effective)
 
-	if(volume)
+	if (volume)
 		remove_self(removed)
 
 /datum/reagent/proc/affect_blood(mob/living/carbon/M, removed)
@@ -154,7 +154,7 @@
 	return
 
 /datum/reagent/proc/initialize_data(newdata) // Called when the reagent is created.
-	if(!isnull(newdata))
+	if (!isnull(newdata))
 		data = newdata
 	return
 
@@ -162,9 +162,9 @@
 	return
 
 /datum/reagent/proc/get_data() // Just in case you have a reagent that handles data differently.
-	if(data && istype(data, /list))
+	if (data && istype(data, /list))
 		return data.Copy()
-	else if(data)
+	else if (data)
 		return data
 	return null
 

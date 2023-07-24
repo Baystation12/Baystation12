@@ -13,32 +13,32 @@
 	var/paper_type = /obj/item/paper/sticky
 
 /obj/item/sticky_pad/on_update_icon()
-	if(papers <= 15)
+	if (papers <= 15)
 		icon_state = "pad_empty"
-	else if(papers <= 50)
+	else if (papers <= 50)
 		icon_state = "pad_used"
 	else
 		icon_state = "pad_full"
-	if(written_text)
+	if (written_text)
 		icon_state = "[icon_state]_writing"
 
 /obj/item/sticky_pad/attackby(obj/item/thing, mob/user)
-	if(istype(thing, /obj/item/pen))
+	if (istype(thing, /obj/item/pen))
 
-		if(jobban_isbanned(user, "Graffiti"))
+		if (jobban_isbanned(user, "Graffiti"))
 			to_chat(user, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
 			return
 
 		var/writing_space = MAX_MESSAGE_LEN - length(written_text)
-		if(writing_space <= 0)
+		if (writing_space <= 0)
 			to_chat(user, SPAN_WARNING("There is no room left on \the [src]."))
 			return
 		var/text = sanitizeSafe(input("What would you like to write?") as text, writing_space)
-		if(!text || thing.loc != user || (!Adjacent(user) && loc != user) || user.incapacitated())
+		if (!text || thing.loc != user || (!Adjacent(user) && loc != user) || user.incapacitated())
 			return
 		user.visible_message(SPAN_NOTICE("\The [user] jots a note down on \the [src]."))
 		written_by = user.ckey
-		if(written_text)
+		if (written_text)
 			written_text = "[written_text] [text]"
 		else
 			written_text = text
@@ -52,7 +52,7 @@
 	to_chat(user, SPAN_NOTICE("You can click it on grab intent to pick it up."))
 
 /obj/item/sticky_pad/attack_hand(mob/user)
-	if(user.a_intent == I_GRAB)
+	if (user.a_intent == I_GRAB)
 		..()
 	else
 		var/obj/item/paper/paper = new paper_type(get_turf(src))
@@ -63,7 +63,7 @@
 		user.put_in_hands(paper)
 		to_chat(user, SPAN_NOTICE("You pull \the [paper] off \the [src]."))
 		papers--
-		if(papers <= 0)
+		if (papers <= 0)
 			qdel(src)
 		else
 			update_icon()
@@ -94,13 +94,13 @@
 	. = ..()
 
 /obj/item/paper/sticky/on_update_icon()
-	if(icon_state != "scrap")
+	if (icon_state != "scrap")
 		icon_state = info ? "paper_words" : "paper"
 
 // Copied from duct tape.
 /obj/item/paper/sticky/attack_hand()
 	. = ..()
-	if(!istype(loc, /turf))
+	if (!istype(loc, /turf))
 		reset_persistence_tracking()
 
 /obj/item/paper/sticky/can_bundle()
@@ -108,32 +108,32 @@
 
 /obj/item/paper/sticky/afterattack(A, mob/user, flag, params)
 
-	if(!in_range(user, A) || istype(A, /obj/machinery/door) || istype(A, /obj/item/storage) || icon_state == "scrap")
+	if (!in_range(user, A) || istype(A, /obj/machinery/door) || istype(A, /obj/item/storage) || icon_state == "scrap")
 		return
 
 	var/turf/target_turf = get_turf(A)
 	var/turf/source_turf = get_turf(user)
 
 	var/dir_offset = 0
-	if(target_turf != source_turf)
+	if (target_turf != source_turf)
 		dir_offset = get_dir(source_turf, target_turf)
-		if(!(dir_offset in GLOB.cardinal))
+		if (!(dir_offset in GLOB.cardinal))
 			to_chat(user, SPAN_WARNING("You cannot reach that from here."))
 			return
 
-	if(user.unEquip(src, source_turf))
+	if (user.unEquip(src, source_turf))
 		SSpersistence.track_value(src, /datum/persistent/paper/sticky)
-		if(params)
+		if (params)
 			var/list/mouse_control = params2list(params)
-			if(mouse_control["icon-x"])
+			if (mouse_control["icon-x"])
 				pixel_x = text2num(mouse_control["icon-x"]) - 16
-				if(dir_offset & EAST)
+				if (dir_offset & EAST)
 					pixel_x += 32
-				else if(dir_offset & WEST)
+				else if (dir_offset & WEST)
 					pixel_x -= 32
-			if(mouse_control["icon-y"])
+			if (mouse_control["icon-y"])
 				pixel_y = text2num(mouse_control["icon-y"]) - 16
-				if(dir_offset & NORTH)
+				if (dir_offset & NORTH)
 					pixel_y += 32
-				else if(dir_offset & SOUTH)
+				else if (dir_offset & SOUTH)
 					pixel_y -= 32

@@ -47,21 +47,21 @@
 	if (!node)
 		update_use_power(POWER_USE_OFF)
 
-	if(!is_powered())
+	if (!is_powered())
 		icon_state = "off"
 	else
 		icon_state = "[use_power ? "on" : "off"]"
 
 /obj/machinery/atmospherics/unary/outlet_injector/update_underlays()
-	if(..())
+	if (..())
 		underlays.Cut()
 		var/turf/T = get_turf(src)
-		if(!istype(T))
+		if (!istype(T))
 			return
-		if(!T.is_plating() && node && node.level == ATOM_LEVEL_UNDER_TILE && istype(node, /obj/machinery/atmospherics/pipe))
+		if (!T.is_plating() && node && node.level == ATOM_LEVEL_UNDER_TILE && istype(node, /obj/machinery/atmospherics/pipe))
 			return
 		else
-			if(node)
+			if (node)
 				add_underlay(T, node, dir, node.icon_connect_type)
 			else
 				add_underlay(T,, dir)
@@ -72,7 +72,7 @@
 	. += "<tr><td><b>Name:</b></td><td>[name]</td>"
 	. += "<tr><td><b>Power:</b></td><td>[use_power ? SPAN_COLOR("green", "Injecting") : SPAN_COLOR("red", "Offline")]</td><td><a href='?src=\ref[src];toggle_power=\ref[src]'>Toggle</a></td></tr>"
 	. += "<tr><td><b>ID Tag:</b></td><td>[id]</td><td><a href='?src=\ref[src];settag=\ref[id]'>Set ID Tag</a></td></td></tr>"
-	if(frequency%10)
+	if (frequency%10)
 		. += "<tr><td><b>Frequency:</b></td><td>[frequency/10]</td><td><a href='?src=\ref[src];setfreq=\ref[frequency]'>Set Frequency</a></td></td></tr>"
 	else
 		. += "<tr><td><b>Frequency:</b></td><td>[frequency/10].0</td><td><a href='?src=\ref[src];setfreq=\ref[frequency]'>Set Frequency</a></td></td></tr>"
@@ -80,23 +80,23 @@
 	. = JOINTEXT(.)
 
 /obj/machinery/atmospherics/unary/outlet_injector/OnTopic(mob/user, href_list, datum/topic_state/state)
-	if((. = ..()))
+	if ((. = ..()))
 		return
-	if(href_list["toggle_power"])
+	if (href_list["toggle_power"])
 		update_use_power(!use_power)
 		queue_icon_update()
 		to_chat(user, SPAN_NOTICE("The multitool emits a short beep confirming the change."))
 		return TOPIC_REFRESH
-	if(href_list["settag"])
+	if (href_list["settag"])
 		var/t = sanitizeSafe(input(user, "Enter the ID tag for [src.name]", src.name, id), MAX_NAME_LEN)
-		if(t && CanInteract(user, state))
+		if (t && CanInteract(user, state))
 			id = t
 			to_chat(user, SPAN_NOTICE("The multitool emits a short beep confirming the change."))
 			return TOPIC_REFRESH
 		return TOPIC_HANDLED
-	if(href_list["setfreq"])
+	if (href_list["setfreq"])
 		var/freq = input(user, "Enter the Frequency for [src.name]. Decimal will automatically be inserted", src.name, frequency) as num|null
-		if(CanInteract(user, state))
+		if (CanInteract(user, state))
 			set_frequency(freq)
 			to_chat(user, SPAN_NOTICE("The multitool emits a short beep confirming the change."))
 			return TOPIC_REFRESH
@@ -108,13 +108,13 @@
 	last_power_draw = 0
 	last_flow_rate = 0
 
-	if((inoperable()) || !use_power)
+	if ((inoperable()) || !use_power)
 		return
 
 	var/power_draw = -1
 	var/datum/gas_mixture/environment = loc.return_air()
 
-	if(environment && air_contents.temperature > 0)
+	if (environment && air_contents.temperature > 0)
 		var/transfer_moles = (volume_rate/air_contents.volume)*air_contents.total_moles //apply flow rate limit
 		power_draw = pump_gas(src, air_contents, environment, transfer_moles, power_rating)
 
@@ -122,7 +122,7 @@
 		last_power_draw = power_draw
 		use_power_oneoff(power_draw)
 
-		if(network)
+		if (network)
 			network.update = 1
 
 	return 1
@@ -130,7 +130,7 @@
 /obj/machinery/atmospherics/unary/outlet_injector/proc/inject()
 	set waitfor = 0
 
-	if(injecting || (!is_powered()))
+	if (injecting || (!is_powered()))
 		return 0
 
 	var/datum/gas_mixture/environment = loc.return_air()
@@ -139,11 +139,11 @@
 
 	injecting = 1
 
-	if(air_contents.temperature > 0)
+	if (air_contents.temperature > 0)
 		var/power_used = pump_gas(src, air_contents, environment, air_contents.total_moles, power_rating)
 		use_power_oneoff(power_used)
 
-		if(network)
+		if (network)
 			network.update = 1
 
 	flick("inject", src)
@@ -151,11 +151,11 @@
 /obj/machinery/atmospherics/unary/outlet_injector/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
-	if(frequency)
+	if (frequency)
 		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
 /obj/machinery/atmospherics/unary/outlet_injector/proc/broadcast_status()
-	if(!radio_connection)
+	if (!radio_connection)
 		return 0
 
 	var/datum/signal/signal = new
@@ -175,26 +175,26 @@
 	return 1
 
 /obj/machinery/atmospherics/unary/outlet_injector/receive_signal(datum/signal/signal)
-	if(!signal.data["tag"] || signal.data["tag"] != id || signal.data["sigtype"]!="command")
+	if (!signal.data["tag"] || signal.data["tag"] != id || signal.data["sigtype"]!="command")
 		return 0
 
-	if(signal.data["power"])
+	if (signal.data["power"])
 		update_use_power(sanitize_integer(text2num(signal.data["power"]), POWER_USE_OFF, POWER_USE_ACTIVE, use_power))
 		queue_icon_update()
 
-	if(signal.data["power_toggle"] || signal.data["command"] == "valve_toggle") // some atmos buttons use "valve_toggle" as a command
+	if (signal.data["power_toggle"] || signal.data["command"] == "valve_toggle") // some atmos buttons use "valve_toggle" as a command
 		update_use_power(!use_power)
 		queue_icon_update()
 
-	if(signal.data["inject"])
+	if (signal.data["inject"])
 		inject()
 		return
 
-	if(signal.data["set_volume_rate"])
+	if (signal.data["set_volume_rate"])
 		var/number = text2num(signal.data["set_volume_rate"])
 		volume_rate = clamp(number, 0, air_contents.volume)
 
-	if(signal.data["status"])
+	if (signal.data["status"])
 		addtimer(new Callback(src, .proc/broadcast_status), 2, TIMER_UNIQUE)
 		return
 
@@ -204,13 +204,13 @@
 	update_underlays()
 
 /obj/machinery/atmospherics/unary/outlet_injector/attackby(obj/item/O as obj, mob/user as mob)
-	if(isMultitool(O))
+	if (isMultitool(O))
 		var/datum/browser/popup = new (user, "Vent Configuration Utility", "[src] Configuration Panel", 600, 200)
 		popup.set_content(jointext(get_console_data(),"<br>"))
 		popup.open()
 		return
 
-	if(isWrench(O))
+	if (isWrench(O))
 		new /obj/item/pipe(loc, src)
 		qdel(src)
 		return

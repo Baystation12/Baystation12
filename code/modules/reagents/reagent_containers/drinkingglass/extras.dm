@@ -1,23 +1,23 @@
 /obj/item/reagent_containers/food/drinks/glass2/attackby(obj/item/I as obj, mob/user as mob)
-	if(length(extras) >= 2) return ..() // max 2 extras, one on each side of the drink
+	if (length(extras) >= 2) return ..() // max 2 extras, one on each side of the drink
 
-	if(istype(I, /obj/item/glass_extra))
+	if (istype(I, /obj/item/glass_extra))
 		var/obj/item/glass_extra/GE = I
-		if(can_add_extra(GE))
+		if (can_add_extra(GE))
 			extras += GE
-			if(!user.unEquip(GE, src))
+			if (!user.unEquip(GE, src))
 				return
 			to_chat(user, SPAN_NOTICE("You add \the [GE] to \the [src]."))
 			update_icon()
 		else
 			to_chat(user, SPAN_WARNING("There's no space to put \the [GE] on \the [src]!"))
-	else if(istype(I, /obj/item/reagent_containers/food/snacks/fruit_slice))
-		if(!rim_pos)
+	else if (istype(I, /obj/item/reagent_containers/food/snacks/fruit_slice))
+		if (!rim_pos)
 			to_chat(user, SPAN_WARNING("There's no space to put \the [I] on \the [src]!"))
 			return
 		var/obj/item/reagent_containers/food/snacks/fruit_slice/FS = I
 		extras += FS
-		if(!user.unEquip(FS, src))
+		if (!user.unEquip(FS, src))
 			return
 		FS.pixel_x = 0 // Reset its pixel offsets so the icons work!
 		FS.pixel_y = 0
@@ -27,18 +27,18 @@
 		return ..()
 
 /obj/item/reagent_containers/food/drinks/glass2/attack_hand(mob/user as mob)
-	if(src != user.get_inactive_hand())
+	if (src != user.get_inactive_hand())
 		return ..()
 
-	if(!length(extras))
+	if (!length(extras))
 		to_chat(user, SPAN_WARNING("There's nothing on the glass to remove!"))
 		return
 
 	var/choice = input(user, "What would you like to remove from the glass?") as null|anything in extras
-	if(!choice || !(choice in extras))
+	if (!choice || !(choice in extras))
 		return
 
-	if(user.put_in_active_hand(choice))
+	if (user.put_in_active_hand(choice))
 		to_chat(user, SPAN_NOTICE("You remove \the [choice] from \the [src]."))
 		extras -= choice
 	else
@@ -64,7 +64,7 @@
 
 /obj/item/glass_extra/stick/Initialize()
 	. = ..()
-	if(prob(50))
+	if (prob(50))
 		color = get_random_colour(0,50,150)
 
 /obj/item/glass_extra/straw

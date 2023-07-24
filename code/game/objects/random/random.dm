@@ -15,16 +15,16 @@
 
 // creates the random item
 /obj/random/proc/spawn_item()
-	if(prob(spawn_nothing_percentage))
+	if (prob(spawn_nothing_percentage))
 		return
 
-	if(isnull(loc))
+	if (isnull(loc))
 		return
 
 	var/build_path = pickweight(spawn_choices())
 
 	var/atom/A = new build_path(src.loc)
-	if(pixel_x || pixel_y)
+	if (pixel_x || pixel_y)
 		A.pixel_x = pixel_x
 		A.pixel_y = pixel_y
 
@@ -496,7 +496,7 @@
 				)
 /obj/random/closet/spawn_item()
 	. = ..()
-	if(. && length(locker_vermin) && prob(vermin_chance))
+	if (. && length(locker_vermin) && prob(vermin_chance))
 		var/vermin_type = pickweight(locker_vermin)
 		new vermin_type(.)
 
@@ -1172,10 +1172,10 @@ var/global/list/multi_point_spawns
 	. = ..()
 	weight = max(1, round(weight))
 
-	if(!multi_point_spawns)
+	if (!multi_point_spawns)
 		multi_point_spawns = list()
 	var/list/spawnpoints = multi_point_spawns[id]
-	if(!spawnpoints)
+	if (!spawnpoints)
 		spawnpoints = list()
 		multi_point_spawns[id] = spawnpoints
 	spawnpoints[src] = weight
@@ -1183,7 +1183,7 @@ var/global/list/multi_point_spawns
 /obj/random_multi/Destroy()
 	var/list/spawnpoints = multi_point_spawns[id]
 	spawnpoints -= src
-	if(!length(spawnpoints))
+	if (!length(spawnpoints))
 		multi_point_spawns -= id
 	. = ..()
 

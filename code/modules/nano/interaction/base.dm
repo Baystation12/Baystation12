@@ -9,7 +9,7 @@
 	return state.can_use_topic(src_object, user)
 
 /mob/CanUseTopic(mob/user, datum/topic_state/state, href_list)
-	if(href_list && href_list["flavor_more"])
+	if (href_list && href_list["flavor_more"])
 		return STATUS_INTERACTIVE
 	return ..()
 
@@ -33,7 +33,7 @@
 	return STATUS_INTERACTIVE
 
 /mob/living/silicon/ai/shared_nano_interaction()
-	if(!has_power())
+	if (!has_power())
 		return STATUS_CLOSE
 	if (check_unable(1, 0))
 		return STATUS_CLOSE
@@ -41,8 +41,8 @@
 
 /mob/living/silicon/robot/shared_nano_interaction()
 	. = STATUS_INTERACTIVE
-	if(!cell || cell.charge <= 0)
+	if (!cell || cell.charge <= 0)
 		return STATUS_CLOSE
-	if(lockcharge)
+	if (lockcharge)
 		. = STATUS_DISABLED
 	return min(., ..())

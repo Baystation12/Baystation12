@@ -10,34 +10,34 @@
 
 // The white, and blacklist are type specific, any subtypes (of both species and jobs) have to be added explicitly
 /datum/map/proc/is_species_branch_restricted(datum/species/S, datum/mil_branch/MB)
-	if(!istype(S) || !istype(MB))
+	if (!istype(S) || !istype(MB))
 		return TRUE
 
 	var/list/whitelist = species_to_branch_whitelist[S.type]
-	if(MB.type in whitelist)
+	if (MB.type in whitelist)
 		return FALSE
 
 	var/list/blacklist = species_to_branch_blacklist[S.type]
-	if(blacklist)
+	if (blacklist)
 		return (MB.type in blacklist)
 
 	return whitelist // not in the whitelist, no blacklist = bad, no whitelist or blacklist = fine
 
 /datum/map/proc/is_species_rank_restricted(datum/species/S, datum/mil_branch/MB, datum/mil_rank/MR)
-	if(!istype(S) || !istype(MB) || !istype(MR))
+	if (!istype(S) || !istype(MB) || !istype(MR))
 		return TRUE
 
 	var/list/whitelist_by_branch = species_to_rank_whitelist[S.type]
 	var/list/whitelist
-	if(whitelist_by_branch)
+	if (whitelist_by_branch)
 		whitelist = whitelist_by_branch[MB.type]
-		if(MR.type in whitelist)
+		if (MR.type in whitelist)
 			return FALSE
 
 	var/list/blacklist_by_branch = species_to_rank_blacklist[S.type]
-	if(blacklist_by_branch)
+	if (blacklist_by_branch)
 		var/list/blacklist = blacklist_by_branch[MB.type]
-		if(blacklist)
+		if (blacklist)
 			return MR.type in blacklist
 
 	return whitelist

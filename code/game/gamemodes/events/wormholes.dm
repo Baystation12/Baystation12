@@ -10,7 +10,7 @@
 			for(var/turf/simulated/floor/T in turfs)
 				pick_turfs += T
 
-		if(length(pick_turfs))
+		if (length(pick_turfs))
 			//All ready. Announce that bad juju is afoot.
 			GLOB.using_map.space_time_anomaly_detected_annoncement()
 			var/number_of_selections = (length(pick_turfs) / 15) + 1	//+1 to avoid division by zero!

@@ -9,7 +9,7 @@
 	)
 
 /singleton/submap_archetype/Destroy()
-	if(SSmapping.submap_archetypes[descriptor] == src)
+	if (SSmapping.submap_archetypes[descriptor] == src)
 		SSmapping.submap_archetypes -= descriptor
 	. = ..()
 

@@ -35,30 +35,30 @@
 
 /obj/item/clothing/head/helmet/space/psi_amp/attack_self(mob/user)
 
-	if(operating)
+	if (operating)
 		return
 
-	if(!canremove)
+	if (!canremove)
 		deintegrate()
 		return
 
 	var/mob/living/carbon/human/H = loc
-	if(istype(H) && H.head == src)
+	if (istype(H) && H.head == src)
 		integrate()
 		return
 
 	var/choice = input("Select a brainboard to install or remove.","Psionic Amplifier") as null|anything in SSpsi.faculties_by_name
-	if(!choice)
+	if (!choice)
 		return
 
 	var/removed
 	var/slots_left = max_boosted_faculties - LAZYLEN(boosted_faculties)
 	var/singleton/psionic_faculty/faculty = SSpsi.get_faculty(choice)
-	if(faculty.id in boosted_faculties)
+	if (faculty.id in boosted_faculties)
 		LAZYREMOVE(boosted_faculties, faculty.id)
 		removed = TRUE
 	else
-		if(slots_left <= 0)
+		if (slots_left <= 0)
 			to_chat(user, SPAN_WARNING("There are no slots left to install brainboards into."))
 			return
 		LAZYADD(boosted_faculties, faculty.id)
@@ -74,14 +74,14 @@
 	set category = "Abilities"
 	set src in usr
 
-	if(operating)
+	if (operating)
 		return
 
-	if(canremove)
+	if (canremove)
 		return
 
 	var/mob/living/carbon/human/H = loc
-	if(!istype(H) || H.head != src)
+	if (!istype(H) || H.head != src)
 		canremove = TRUE
 		return
 
@@ -91,7 +91,7 @@
 
 	sleep(80)
 
-	if(H.psi)
+	if (H.psi)
 		H.psi.reset()
 
 	to_chat(H, SPAN_NOTICE("\The [src] chimes quietly as it finishes removing the slave-minds from your brain."))
@@ -110,12 +110,12 @@
 /obj/item/clothing/head/helmet/space/psi_amp/Move()
 	var/lastloc = loc
 	. = ..()
-	if(.)
+	if (.)
 		var/mob/living/carbon/human/H = lastloc
-		if(istype(H) && H.psi)
+		if (istype(H) && H.psi)
 			H.psi.reset()
 		H = loc
-		if(!istype(H) || H.head != src)
+		if (!istype(H) || H.head != src)
 			canremove = TRUE
 
 /obj/item/clothing/head/helmet/space/psi_amp/proc/integrate()
@@ -125,18 +125,18 @@
 	set category = "Abilities"
 	set src in usr
 
-	if(operating)
+	if (operating)
 		return
 
-	if(!canremove)
+	if (!canremove)
 		return
 
-	if(LAZYLEN(boosted_faculties) < max_boosted_faculties)
+	if (LAZYLEN(boosted_faculties) < max_boosted_faculties)
 		to_chat(usr, SPAN_NOTICE("You still have [max_boosted_faculties - LAZYLEN(boosted_faculties)] facult[LAZYLEN(boosted_faculties) == 1 ? "y" : "ies"] to select. Use \the [src] in-hand to select them."))
 		return
 
 	var/mob/living/carbon/human/H = loc
-	if(!istype(H) || H.head != src)
+	if (!istype(H) || H.head != src)
 		to_chat(usr, SPAN_WARNING("\The [src] must be worn on your head in order to be activated."))
 		return
 
@@ -148,11 +148,11 @@
 	sleep(80)
 
 	for(var/faculty in list(PSI_COERCION, PSI_PSYCHOKINESIS, PSI_REDACTION, PSI_ENERGISTICS))
-		if(faculty in boosted_faculties)
+		if (faculty in boosted_faculties)
 			H.set_psi_rank(faculty, boosted_rank, take_larger = TRUE, temporary = TRUE)
 		else
 			H.set_psi_rank(faculty, unboosted_rank, take_larger = TRUE, temporary = TRUE)
-	if(H.psi)
+	if (H.psi)
 		H.psi.max_stamina = boosted_psipower
 		H.psi.stamina = H.psi.max_stamina
 		H.psi.update(force = TRUE)

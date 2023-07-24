@@ -24,7 +24,7 @@
 
 /spell/targeted/projectile/dumbfire/stuncuff/prox_cast(list/targets, spell_holder)
 	for(var/mob/living/M in targets)
-		if(istype(M,/mob/living/carbon/human))
+		if (istype(M,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
 			var/obj/item/handcuffs/wizard/cuffs = new()
 			cuffs.forceMove(H)

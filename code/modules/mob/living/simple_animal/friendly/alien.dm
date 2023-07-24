@@ -48,7 +48,7 @@
 
 /mob/living/simple_animal/passive/meatbeast/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
-	if((num_meat < 5) && prob(5))
+	if ((num_meat < 5) && prob(5))
 		++num_meat

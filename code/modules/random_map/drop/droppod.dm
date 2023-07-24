@@ -23,17 +23,17 @@
 
 /datum/random_map/droppod/New(seed, tx, ty, tz, tlx, tly, do_not_apply, do_not_announce, supplied_drop, list/supplied_drops, automated)
 
-	if(supplied_drop)
+	if (supplied_drop)
 		drop_type = supplied_drop
-	else if(islist(supplied_drops) && length(supplied_drops))
+	else if (islist(supplied_drops) && length(supplied_drops))
 		supplied_drop_types = supplied_drops
 		drop_type = "custom"
-	if(automated)
+	if (automated)
 		auto_open_doors = 1
 
 	//Make sure there is a clear midpoint.
-	if(limit_x % 2 == 0) limit_x++
-	if(limit_y % 2 == 0) limit_y++
+	if (limit_x % 2 == 0) limit_x++
+	if (limit_y % 2 == 0) limit_y++
 	..()
 
 /datum/random_map/droppod/generate_map()
@@ -46,25 +46,25 @@
 	for(var/x = 1, x <= limit_x, x++)
 		for(var/y = 1, y <= limit_y, y++)
 			var/current_cell = get_map_cell(x,y)
-			if(!current_cell)
+			if (!current_cell)
 				continue
 
 			var/on_x_bound = (x == 1 || x == limit_x)
 			var/on_y_bound = (y == 1 || y == limit_x)
 			var/draw_corners = (limit_x < 5 && limit_y < 5)
-			if(on_x_bound || on_y_bound)
+			if (on_x_bound || on_y_bound)
 				// Draw access points in midpoint of each wall.
-				if(x == x_midpoint || y == y_midpoint)
+				if (x == x_midpoint || y == y_midpoint)
 					map[current_cell] = SD_DOOR_TILE
 				// Draw the actual walls.
-				else if(draw_corners || (!on_x_bound || !on_y_bound))
+				else if (draw_corners || (!on_x_bound || !on_y_bound))
 					map[current_cell] = SD_WALL_TILE
 				//Don't draw the far corners on large pods.
 				else
 					map[current_cell] = SD_EMPTY_TILE
 			else
 				// Fill in the corners.
-				if((x == 2 || x == (limit_x-1)) && (y == 2 || y == (limit_y-1)))
+				if ((x == 2 || x == (limit_x-1)) && (y == 2 || y == (limit_y-1)))
 					map[current_cell] = SD_WALL_TILE
 				// Fill in EVERYTHING ELSE.
 				else
@@ -72,24 +72,24 @@
 
 	// Draw the drop contents.
 	var/current_cell = get_map_cell(x_midpoint,y_midpoint)
-	if(current_cell)
+	if (current_cell)
 		map[current_cell] = SD_SUPPLY_TILE
 	return 1
 
 /datum/random_map/droppod/apply_to_map()
 	if (explosion_radius)
 		var/turf/T = locate((origin_x + ceil(limit_x / 2)-1), (origin_y + ceil(limit_y / 2)-1), origin_z)
-		if(istype(T))
+		if (istype(T))
 			explosion(T, explosion_radius, explosion_max_power)
 			sleep(15) // Let the explosion finish proccing before we ChangeTurf(), otherwise it might destroy our spawned objects.
 	return ..()
 
 /datum/random_map/droppod/get_appropriate_path(value)
-	if(value == SD_FLOOR_TILE || value == SD_SUPPLY_TILE)
+	if (value == SD_FLOOR_TILE || value == SD_SUPPLY_TILE)
 		return floor_type
-	else if(value == SD_WALL_TILE)
+	else if (value == SD_WALL_TILE)
 		return wall_type
-	else if(value == SD_DOOR_TILE )
+	else if (value == SD_DOOR_TILE )
 		return wall_type
 	return null
 
@@ -97,28 +97,28 @@
 /datum/random_map/droppod/get_spawn_dir(x, y)
 	var/x_midpoint = ceil(limit_x / 2)
 	var/y_midpoint = ceil(limit_y / 2)
-	if(x == x_midpoint && y == y_midpoint)
+	if (x == x_midpoint && y == y_midpoint)
 		return null
 	var/turf/target = locate(origin_x+x-1, origin_y+y-1, origin_z)
 	var/turf/middle = locate(origin_x+x_midpoint-1, origin_y+y_midpoint-1, origin_z)
-	if(!istype(target) || !istype(middle))
+	if (!istype(target) || !istype(middle))
 		return null
 	return get_dir(middle, target)
 
 /datum/random_map/droppod/get_additional_spawns(value, turf/T, spawn_dir)
 
 	// Splatter anything under us that survived the explosion.
-	if(value != SD_EMPTY_TILE && length(T.contents))
+	if (value != SD_EMPTY_TILE && length(T.contents))
 		for(var/atom/movable/AM in T)
-			if(AM.simulated && !isobserver(AM))
+			if (AM.simulated && !isobserver(AM))
 				qdel(AM)
 
 	// Also spawn doors and loot.
-	if(value == SD_DOOR_TILE)
+	if (value == SD_DOOR_TILE)
 		var/obj/structure/S = new door_type(T, auto_open_doors)
 		S.set_dir(spawn_dir)
 
-	else if(value == SD_SUPPLY_TILE)
+	else if (value == SD_SUPPLY_TILE)
 		get_spawned_drop(T)
 
 /datum/random_map/droppod/proc/get_spawned_drop(turf/T)
@@ -129,19 +129,19 @@
 	// Use the supply pod if you don't want to drop mobs.
 	// Mobs will not double up; if you want multiple mobs, you
 	// will need multiple drop tiles.
-	if(islist(supplied_drop_types) && length(supplied_drop_types))
+	if (islist(supplied_drop_types) && length(supplied_drop_types))
 		while(length(supplied_drop_types))
 			drop = pick(supplied_drop_types)
 			supplied_drop_types -= drop
-			if(istype(drop))
+			if (istype(drop))
 				drop.tag = null
-				if(drop.buckled)
+				if (drop.buckled)
 					drop.buckled = null
 				drop.forceMove(T)
-	else if(ispath(drop_type))
+	else if (ispath(drop_type))
 		drop = new drop_type(T)
-		if(istype(drop))
-			if(drop.buckled)
+		if (istype(drop))
+			if (drop.buckled)
 				drop.buckled = null
 			drop.forceMove(T)
 
@@ -150,19 +150,19 @@
 	set desc = "Call an immediate drop pod on your location."
 	set name = "Call Drop Pod"
 
-	if(!check_rights(R_FUN)) return
+	if (!check_rights(R_FUN)) return
 
 	var/client/selected_player
 	var/mob/living/spawned_mob
 	var/list/spawned_mobs = list()
 
 	var/spawn_path = input("Select a mob type.", "Drop Pod Selection", null) as null|anything in typesof(/mob/living)-/mob/living
-	if(!spawn_path)
+	if (!spawn_path)
 		return
 
-	if(alert("Do you wish the mob to have a player?",,"No","Yes") == "No")
+	if (alert("Do you wish the mob to have a player?",,"No","Yes") == "No")
 		var/spawn_count = input("How many mobs do you wish the pod to contain?", "Drop Pod Selection", null) as num
-		if(spawn_count <= 0)
+		if (spawn_count <= 0)
 			return
 		for(var/i=0;i<spawn_count;i++)
 			var/mob/living/M = new spawn_path()
@@ -171,16 +171,16 @@
 	else
 		var/list/candidates = list()
 		for(var/client/player in GLOB.clients)
-			if(player.mob && isghost(player.mob))
+			if (player.mob && isghost(player.mob))
 				candidates |= player
 
-		if(!length(candidates))
+		if (!length(candidates))
 			to_chat(usr, "There are no candidates for a drop pod launch.")
 			return
 
 		// Get a player and a mob type.
 		selected_player = input("Select a player.", "Drop Pod Selection", null) as null|anything in candidates
-		if(!selected_player)
+		if (!selected_player)
 			return
 
 		// Spawn the mob in nullspace for now.
@@ -188,16 +188,16 @@
 		spawned_mob.tag = "awaiting drop"
 
 		// Equip them, if they are human and it is desirable.
-		if(istype(spawned_mob, /mob/living/carbon/human))
+		if (istype(spawned_mob, /mob/living/carbon/human))
 			var/antag_type = input("Select an equipment template to use or cancel for nude.", null) as null|anything in GLOB.all_antag_types_
-			if(antag_type)
+			if (antag_type)
 				var/datum/antagonist/A = GLOB.all_antag_types_[antag_type]
 				A.equip(spawned_mob)
 
-	if(alert("Are you SURE you wish to deploy this drop pod? It will cause a sizable explosion and gib anyone underneath it.",,"No","Yes") == "No")
-		if(spawned_mob)
+	if (alert("Are you SURE you wish to deploy this drop pod? It will cause a sizable explosion and gib anyone underneath it.",,"No","Yes") == "No")
+		if (spawned_mob)
 			qdel(spawned_mob)
-		if(length(spawned_mobs))
+		if (length(spawned_mobs))
 			for(var/mob/living/M in spawned_mobs)
 				spawned_mobs -= M
 				M.tag = null
@@ -207,14 +207,14 @@
 
 	// Chuck them into the pod.
 	var/automatic_pod
-	if(spawned_mob && selected_player)
-		if(selected_player.mob.mind)
+	if (spawned_mob && selected_player)
+		if (selected_player.mob.mind)
 			selected_player.mob.mind.transfer_to(spawned_mob)
 		else
 			spawned_mob.ckey = selected_player.mob.ckey
 		spawned_mobs = list(spawned_mob)
 		log_and_message_admins("dropped a pod containing \the [spawned_mob] ([spawned_mob.key]) at ([usr.x],[usr.y],[usr.z])")
-	else if(length(spawned_mobs))
+	else if (length(spawned_mobs))
 		automatic_pod = 1
 		log_and_message_admins("dropped a pod containing [length(spawned_mobs)] [spawned_mobs[1]] at ([usr.x],[usr.y],[usr.z])")
 	else

@@ -6,7 +6,7 @@
 
 #define START_PROCESSING_IN_LIST(Datum, List) \
 if (Datum.is_processing) {\
-	if(Datum.is_processing != "SSmachines.[#List]")\
+	if (Datum.is_processing != "SSmachines.[#List]")\
 	{\
 		crash_with("Failed to start processing. [log_info_line(Datum)] is already being processed by [Datum.is_processing] but queue attempt occured on SSmachines.[#List]."); \
 	}\
@@ -16,8 +16,8 @@ if (Datum.is_processing) {\
 }
 
 #define STOP_PROCESSING_IN_LIST(Datum, List) \
-if(Datum.is_processing) {\
-	if(SSmachines.List.Remove(Datum)) {\
+if (Datum.is_processing) {\
+	if (SSmachines.List.Remove(Datum)) {\
 		Datum.is_processing = null;\
 	} else {\
 		crash_with("Failed to stop processing. [log_info_line(Datum)] is being processed by [is_processing] and not found in SSmachines.[#List]"); \
@@ -80,7 +80,7 @@ SUBSYSTEM_DEF(machines)
 		timer = world.tick_usage
 		process_machinery(resumed, no_mc_tick)
 		cost_machinery = MC_AVERAGE(cost_machinery, (world.tick_usage - timer) * world.tick_lag)
-		if(state != SS_RUNNING)
+		if (state != SS_RUNNING)
 			return
 		current_step = SSMACHINES_POWERNETS
 		resumed = FALSE
@@ -88,7 +88,7 @@ SUBSYSTEM_DEF(machines)
 		timer = world.tick_usage
 		process_powernets(resumed, no_mc_tick)
 		cost_powernets = MC_AVERAGE(cost_powernets, (world.tick_usage - timer) * world.tick_lag)
-		if(state != SS_RUNNING)
+		if (state != SS_RUNNING)
 			return
 		current_step = SSMACHINES_POWER_OBJECTS
 		resumed = FALSE
@@ -182,13 +182,13 @@ SUBSYSTEM_DEF(machines)
 			processing -= machine
 			continue
 
-		if(machine.processing_flags & MACHINERY_PROCESS_COMPONENTS)
+		if (machine.processing_flags & MACHINERY_PROCESS_COMPONENTS)
 			for(var/thing in machine.processing_parts)
 				var/obj/item/stock_parts/part = thing
-				if(part.machine_process(machine) == PROCESS_KILL)
+				if (part.machine_process(machine) == PROCESS_KILL)
 					part.stop_processing()
 
-		if((machine.processing_flags & MACHINERY_PROCESS_SELF) && machine.Process(wait) == PROCESS_KILL)
+		if ((machine.processing_flags & MACHINERY_PROCESS_SELF) && machine.Process(wait) == PROCESS_KILL)
 			STOP_PROCESSING_MACHINE(machine, MACHINERY_PROCESS_SELF)
 
 		if (no_mc_tick)

@@ -2,7 +2,7 @@
 	var/list/memories
 
 /mob/proc/StoreMemory(memory, options)
-	if(!mind)
+	if (!mind)
 		return "There is no mind to store a memory in."
 	. = mind.StoreMemory(memory, options)
 
@@ -11,7 +11,7 @@
 	return MO.Create(src, memory)
 
 /datum/mind/proc/RemoveMemory(datum/memory/memory, mob/remover)
-	if(!memory)
+	if (!memory)
 		return
 
 	LAZYREMOVE(memories, memory)
@@ -24,11 +24,11 @@
 		var/datum/memory/M = mem
 		// If no tags were supplied OR if there is any union between the given tags and memory tags
 		//  then remove the memory
-		if(!length(tags) || length(tags & M.tags))
+		if (!length(tags) || length(tags & M.tags))
 			LAZYREMOVE(memories, M)
 
 /datum/mind/proc/CopyMemories(datum/mind/target)
-	if(!istype(target))
+	if (!istype(target))
 		return
 
 	for(var/mem in memories)
@@ -40,11 +40,11 @@
 	var/list/all_antag_types = GLOB.all_antag_types_
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
-		if(antag.is_antagonist(src))
+		if (antag.is_antagonist(src))
 			. += antag_type
 
 /datum/mind/proc/ShowMemory(mob/recipient)
-	if(!istype(recipient))
+	if (!istype(recipient))
 		return
 
 	var/list/output = list()
@@ -53,12 +53,12 @@
 	for(var/mem in memories)
 		var/datum/memory/M = mem
 		var/owner_name = M.OwnerName()
-		if(owner_name != last_owner_name && current)
+		if (owner_name != last_owner_name && current)
 			output += "<B>[current.real_name]'s Memories</B><HR>"
 			last_owner_name = owner_name
 		output += "[M.memory] <a href='?src=\ref[src];remove_memory=\ref[M]'>\[Remove\]</a>"
 
-	if(length(objectives) > 0)
+	if (length(objectives) > 0)
 		output += "<HR><B>Objectives:</B>"
 
 		var/obj_count = 1
@@ -66,7 +66,7 @@
 			output += "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
 			obj_count++
 
-	if(SSgoals.ambitions[src])
+	if (SSgoals.ambitions[src])
 		var/datum/goal/ambition/ambition = SSgoals.ambitions[src]
 		output += "<HR><B>Ambitions:</B> [ambition.summarize()]"
 
@@ -96,9 +96,9 @@
 	return ..()
 
 /datum/memory/proc/OwnerName()
-	if(owner)
+	if (owner)
 		var/mob/owner_mob = owner.resolve()
-		if(owner_mob)
+		if (owner_mob)
 			_owner_ckey = _owner_ckey || owner_mob.ckey // Re-use _owner_ckey if set
 			_owner_name = owner_mob.real_name
 		else
@@ -126,7 +126,7 @@
 	var/memory_type = /datum/memory
 
 /singleton/memory_options/proc/Validate(datum/mind/target)
-	if(!target.current)
+	if (!target.current)
 		return "Mind is detached from mob."
 
 /singleton/memory_options/proc/MemoryTags(datum/mind/target)
@@ -137,7 +137,7 @@
 
 /singleton/memory_options/proc/Create(datum/mind/target, memory)
 	var/error = Validate(target)
-	if(error)
+	if (error)
 		return error
 
 	var/owner = weakref(target.current)
@@ -155,16 +155,16 @@
 	return target.MemoryTags()
 
 /singleton/memory_options/default/Validate(datum/mind/target)
-	if((. = ..()))
+	if ((. = ..()))
 		return
 
 	var/relevant_memories = 0
 	for(var/mem in target.memories)
 		var/datum/memory/M = mem
-		if(M.type == memory_type)
+		if (M.type == memory_type)
 			relevant_memories++
 
-	if(relevant_memories > memory_limit)
+	if (relevant_memories > memory_limit)
 		return "Memory limit reached. A maximum of [memory_limit] user added memories allowed."
 
 // System memory handling
@@ -181,7 +181,7 @@
 /mob/verb/ShowMemories()
 	set name = "Notes"
 	set category = "IC"
-	if(mind)
+	if (mind)
 		mind.ShowMemory(src)
 	else
 		to_chat(src, SPAN_WARNING("There is no mind to retrieve stored memories from."))
@@ -191,9 +191,9 @@
 	set category = "IC"
 
 	msg = sanitize(msg,extra = FALSE)
-	if(msg)
+	if (msg)
 		var/error = StoreMemory(msg)
-		if(error)
+		if (error)
 			to_chat(src, SPAN_WARNING(error))
 		else
 			to_chat(src, SPAN_NOTICE("Note added - View it with the 'Notes' verb"))

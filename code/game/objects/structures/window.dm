@@ -47,17 +47,17 @@
 
 /obj/structure/window/Initialize(mapload, start_dir=null, constructed=0, new_material, new_reinf_material)
 	. = ..()
-	if(!new_material)
+	if (!new_material)
 		new_material = init_material
-		if(!new_material)
+		if (!new_material)
 			new_material = MATERIAL_GLASS
-	if(!new_reinf_material)
+	if (!new_reinf_material)
 		new_reinf_material = init_reinf_material
 	material = SSmaterials.get_material_by_name(new_material)
-	if(!istype(material))
+	if (!istype(material))
 		return INITIALIZE_HINT_QDEL
 
-	if(new_reinf_material)
+	if (new_reinf_material)
 		reinf_material = SSmaterials.get_material_by_name(new_reinf_material)
 
 	name = "[reinf_material ? "[reinf_material.display_name]-reinforced " : ""][material.display_name] window"
@@ -67,11 +67,11 @@
 		set_dir(start_dir)
 
 	var/new_max_health = material.integrity
-	if(reinf_material)
+	if (reinf_material)
 		new_max_health += 0.5 * reinf_material.integrity
 	set_max_health(new_max_health)
 
-	if(is_fulltile())
+	if (is_fulltile())
 		layer = FULL_WINDOW_LAYER
 		CLEAR_FLAGS(obj_flags, OBJ_FLAG_ROTATABLE)
 
@@ -102,7 +102,7 @@
 /obj/structure/window/examine(mob/user)
 	. = ..(user)
 	to_chat(user, SPAN_NOTICE("It is fitted with \a [material.display_name] pane."))
-	if(reinf_material)
+	if (reinf_material)
 		to_chat(user, SPAN_NOTICE("It is reinforced with \a [reinf_material.display_name] lattice."))
 
 	if (reinf_material)
@@ -183,13 +183,13 @@
 
 /obj/structure/window/proc/shatter(display_message = 1)
 	playsound(src, "shatter", 70, 1)
-	if(display_message)
+	if (display_message)
 		visible_message(SPAN_WARNING("\The [src] shatters!"))
 
 	var/debris_count = round(get_glass_cost() / rand(1, 4))
 	for(var/i = 1 to debris_count)
 		material.place_shard(loc)
-		if(reinf_material)
+		if (reinf_material)
 			debris_count = rand(0, 1)
 			new /obj/item/stack/material/rods(loc, debris_count, reinf_material.name)
 	qdel(src)
@@ -201,30 +201,30 @@
 	..()
 
 /obj/structure/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
+	if (istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return 1
-	if(is_fulltile())
+	if (is_fulltile())
 		return 0	//full tile window, you can't move into it!
-	if(get_dir(loc, target) & dir)
+	if (get_dir(loc, target) & dir)
 		return !density
 	else
 		return 1
 
 /obj/structure/window/CheckExit(atom/movable/O as mob|obj, target as turf)
-	if(istype(O) && O.checkpass(PASS_FLAG_GLASS))
+	if (istype(O) && O.checkpass(PASS_FLAG_GLASS))
 		return 1
-	if(get_dir(O.loc, target) == dir)
+	if (get_dir(O.loc, target) == dir)
 		return 0
 	return 1
 
 /obj/structure/window/attack_hand(mob/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(MUTATION_HULK in user.mutations)
+	if (MUTATION_HULK in user.mutations)
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
 		user.visible_message(SPAN_DANGER("[user] smashes through [src]!"))
 		user.do_attack_animation(src)
 		shatter()
-	else if(MUTATION_FERAL in user.mutations)
+	else if (MUTATION_FERAL in user.mutations)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2) //Additional cooldown
 		attack_generic(user, 10, "smashes")
 
@@ -232,7 +232,7 @@
 
 		if (istype(user,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user
-			if(H.species.can_shred(H))
+			if (H.species.can_shred(H))
 				attack_generic(H,25)
 				return
 
@@ -476,7 +476,7 @@
 
 /obj/structure/window/proc/dismantle()
 	var/obj/item/stack/material/S = material.place_sheet(loc, is_fulltile() ? 4 : 1)
-	if(S && reinf_material)
+	if (S && reinf_material)
 		S.reinf_material = reinf_material
 		S.update_strings()
 		S.update_icon()
@@ -537,7 +537,7 @@
 		step(src, get_dir(impact_origin, src))
 
 /obj/structure/window/rotate(mob/user)
-	if(!CanPhysicallyInteract(user))
+	if (!CanPhysicallyInteract(user))
 		to_chat(user, SPAN_NOTICE("You can't interact with \the [src] right now!"))
 		return
 
@@ -546,9 +546,9 @@
 		return
 
 	var/newdir=turn(dir, 90)
-	if(!is_fulltile())
+	if (!is_fulltile())
 		for(var/obj/structure/window/W in loc)
-			if(W.dir == newdir)
+			if (W.dir == newdir)
 				to_chat(user, SPAN_NOTICE("There's already a window facing that direction here!"))
 				return
 
@@ -565,12 +565,12 @@
 
 //checks if this window is full-tile one
 /obj/structure/window/proc/is_fulltile()
-	if(dir & (dir - 1))
+	if (dir & (dir - 1))
 		return 1
 	return 0
 
 /obj/structure/window/proc/set_anchored(new_anchored)
-	if(anchored == new_anchored)
+	if (anchored == new_anchored)
 		return
 	anchored = new_anchored
 	update_connections(1)
@@ -593,7 +593,7 @@
 /obj/structure/window/on_update_icon()
 	//A little cludge here, since I don't know how it will work with slim windows. Most likely VERY wrong.
 	//this way it will only update full-tile ones
-	if(reinf_material)
+	if (reinf_material)
 		basestate = reinf_basestate
 	else
 		basestate = initial(basestate)
@@ -605,7 +605,7 @@
 		color = material.icon_colour
 	else
 		color = GLASS_COLOR
-	if(!is_fulltile())
+	if (!is_fulltile())
 		layer = SIDE_WINDOW_LAYER
 		icon_state = basestate
 		return
@@ -617,17 +617,17 @@
 		damage_alpha = 256 * round(get_damage_percentage() / 100, 0.25) - 1
 
 	var/img_dir
-	if(is_on_frame())
+	if (is_on_frame())
 		for(var/i = 1 to 4)
 			img_dir = SHIFTL(1, i - 1)
-			if(other_connections[i] != "0")
+			if (other_connections[i] != "0")
 				process_icon(basestate, "_other_onframe", "_onframe", connections[i], img_dir, damage_alpha)
 			else
 				process_icon(basestate, "_onframe", "_onframe", connections[i], img_dir, damage_alpha)
 	else
 		for(var/i = 1 to 4)
 			img_dir = SHIFTL(1, i - 1)
-			if(other_connections[i] != "0")
+			if (other_connections[i] != "0")
 				process_icon(basestate, "_other", "", connections[i], img_dir, damage_alpha)
 			else
 				process_icon(basestate, "", "", connections[i], img_dir, damage_alpha)
@@ -723,9 +723,9 @@
 	icon_state = "rwindow_full"
 
 /obj/structure/window/proc/toggle()
-	if(!polarized)
+	if (!polarized)
 		return
-	if(opacity)
+	if (opacity)
 		animate(src, color=get_color(), time=5)
 		set_opacity(FALSE)
 	else
@@ -733,14 +733,14 @@
 		set_opacity(TRUE)
 
 /obj/structure/window/proc/is_on_frame()
-	if(locate(/obj/structure/wall_frame) in loc)
+	if (locate(/obj/structure/wall_frame) in loc)
 		return TRUE
 
 /obj/structure/window/proc/can_install_here(mob/user)
 	//only care about full tile. Border can be installed anywhere
-	if(!anchored && is_fulltile())
+	if (!anchored && is_fulltile())
 		for(var/obj/O in loc)
-			if((O != src) && O.density && !(O.atom_flags & ATOM_FLAG_CHECKS_BORDER) \
+			if ((O != src) && O.density && !(O.atom_flags & ATOM_FLAG_CHECKS_BORDER) \
 			&& !(istype(O, /obj/structure/wall_frame) || istype(O, /obj/structure/grille)))
 				to_chat(user, SPAN_NOTICE("There isn't enough space to install \the [src]."))
 				return FALSE
@@ -759,9 +759,9 @@
 	)
 
 /obj/machinery/button/windowtint/attackby(obj/item/device/W as obj, mob/user as mob)
-	if(isMultitool(W))
+	if (isMultitool(W))
 		var/t = sanitizeSafe(input(user, "Enter the ID for the button.", src.name, id), MAX_NAME_LEN)
-		if(user.incapacitated() && !user.Adjacent(src))
+		if (user.incapacitated() && !user.Adjacent(src))
 			return
 		if (user.get_active_hand() != W)
 			return
@@ -772,21 +772,21 @@
 			src.id = t
 			to_chat(user, SPAN_NOTICE("The new ID of the button is [id]"))
 		return
-	if(istype(W, /obj/item/screwdriver))
+	if (istype(W, /obj/item/screwdriver))
 		new /obj/item/frame/light_switch/windowtint(user.loc, 1)
 		qdel(src)
 
 /obj/machinery/button/windowtint/activate()
-	if(operating)
+	if (operating)
 		return
 	for(var/obj/structure/window/W in range(src,range))
-		if(W.polarized && (W.id == src.id || !W.id))
+		if (W.polarized && (W.id == src.id || !W.id))
 			W.toggle()
 	..()
 
 /obj/machinery/button/windowtint/power_change()
 	. = ..()
-	if(active && (!is_powered()))
+	if (active && (!is_powered()))
 		activate()
 
 /obj/machinery/button/windowtint/on_update_icon()
@@ -821,11 +821,11 @@
 		if ("Full Size")
 			dir_to_set = 5
 		if ("Directional")
-			if(loc == user.loc)
+			if (loc == user.loc)
 				dir_to_set = user.dir
 			else
 				dir_to_set = get_dir(loc, user)
-				if(dir_to_set & (dir_to_set - 1)) //Only works for cardinal direcitons, diagonals aren't supposed to work like this.
+				if (dir_to_set & (dir_to_set - 1)) //Only works for cardinal direcitons, diagonals aren't supposed to work like this.
 					to_chat(user, SPAN_WARNING("You can't reach from this angle."))
 					return
 
@@ -834,19 +834,19 @@
 		to_chat(user, SPAN_NOTICE("You do not have enough sheets."))
 		return
 	for(var/obj/structure/window/WINDOW in loc)
-		if(WINDOW.dir == dir_to_set)
+		if (WINDOW.dir == dir_to_set)
 			to_chat(user, SPAN_NOTICE("There is already a window facing this way there."))
 			return
-		if(WINDOW.is_fulltile() && (dir_to_set & (dir_to_set - 1))) //two fulltile windows
+		if (WINDOW.is_fulltile() && (dir_to_set & (dir_to_set - 1))) //two fulltile windows
 			to_chat(user, SPAN_NOTICE("There is already a window there."))
 			return
 	to_chat(user, SPAN_NOTICE("You start placing the window."))
-	if(do_after(user, 2 SECONDS, loc, DO_REPAIR_CONSTRUCT))
+	if (do_after(user, 2 SECONDS, loc, DO_REPAIR_CONSTRUCT))
 		for(var/obj/structure/window/WINDOW in loc)
-			if(WINDOW.dir == dir_to_set)//checking this for a 2nd time to check if a window was made while we were waiting.
+			if (WINDOW.dir == dir_to_set)//checking this for a 2nd time to check if a window was made while we were waiting.
 				to_chat(user, SPAN_NOTICE("There is already a window facing this way there."))
 				return
-			if(WINDOW.is_fulltile() && (dir_to_set & (dir_to_set - 1)))
+			if (WINDOW.is_fulltile() && (dir_to_set & (dir_to_set - 1)))
 				to_chat(user, SPAN_NOTICE("There is already a window there."))
 				return
 

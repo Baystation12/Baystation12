@@ -8,7 +8,7 @@
 
 /singleton/crafting_stage/material/ed209_start/can_begin_with(obj/item/thing)
 	. = ..()
-	if(.)
+	if (.)
 		var/obj/item/robot_parts/robot_suit/suit = thing
 		. = !length(suit.parts)
 

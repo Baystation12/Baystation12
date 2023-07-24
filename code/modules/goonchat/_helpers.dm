@@ -69,7 +69,7 @@ GLOBAL_DATUM_INIT(is_http_protocol, /regex, regex("^https?://"))
 	for (var/thing2 in targets)
 		send_asset(thing2, key, FALSE)
 
-	if(realsize)
+	if (realsize)
 		return "<img class='icon icon-[icon_state] [class]' style='width:[I.Width()]px;height:[I.Height()]px;min-height:[I.Height()]px' src=\"[url_encode(key)]\">"
 
 

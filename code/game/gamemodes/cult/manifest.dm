@@ -12,7 +12,7 @@
 
 /datum/species/human/cult/handle_death(mob/living/carbon/human/H)
 	spawn(1)
-		if(H)
+		if (H)
 			H.dust()
 
 /datum/species/human/cult/handle_post_spawn(mob/living/carbon/human/H)

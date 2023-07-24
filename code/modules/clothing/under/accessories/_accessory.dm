@@ -40,13 +40,13 @@
 
 
 /obj/item/clothing/accessory/proc/get_inv_overlay()
-	if(!inv_overlay)
+	if (!inv_overlay)
 		var/tmp_icon_state = overlay_state
 		if (!tmp_icon_state)
 			tmp_icon_state = icon_state
-		if(icon_override && ("[tmp_icon_state]_tie" in icon_states(icon_override)))
+		if (icon_override && ("[tmp_icon_state]_tie" in icon_states(icon_override)))
 			inv_overlay = image(icon = icon_override, icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
-		else if("[tmp_icon_state]_tie" in icon_states(GLOB.default_onmob_icons[slot_tie_str]))
+		else if ("[tmp_icon_state]_tie" in icon_states(GLOB.default_onmob_icons[slot_tie_str]))
 			inv_overlay = image(icon = GLOB.default_onmob_icons[slot_tie_str], icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
 		else
 			inv_overlay = image(icon = GLOB.default_onmob_icons[slot_tie_str], icon_state = tmp_icon_state, dir = SOUTH)
@@ -55,17 +55,17 @@
 
 
 /obj/item/clothing/accessory/get_mob_overlay(mob/user_mob, slot)
-	if(!istype(loc,/obj/item/clothing))	//don't need special handling if it's worn as normal item.
+	if (!istype(loc,/obj/item/clothing))	//don't need special handling if it's worn as normal item.
 		return ..()
 	var/bodytype = "Default"
-	if(ishuman(user_mob))
+	if (ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob
-		if(user_human.species.get_bodytype(user_human) in sprite_sheets)
+		if (user_human.species.get_bodytype(user_human) in sprite_sheets)
 			bodytype = user_human.species.get_bodytype(user_human)
 
 		var/tmp_icon_state = overlay_state? overlay_state : icon_state
 
-		if(istype(loc,/obj/item/clothing/under))
+		if (istype(loc,/obj/item/clothing/under))
 			var/obj/item/clothing/under/C = loc
 			if (on_rolled_down && C.rolled_down > 0)
 				tmp_icon_state = on_rolled_down
@@ -73,10 +73,10 @@
 				tmp_icon_state = on_rolled_sleeves
 
 		var/use_sprite_sheet = accessory_icons[slot]
-		if(sprite_sheets[bodytype])
+		if (sprite_sheets[bodytype])
 			use_sprite_sheet = sprite_sheets[bodytype]
 
-		if(icon_override && ("[tmp_icon_state]_mob" in icon_states(icon_override)))
+		if (icon_override && ("[tmp_icon_state]_mob" in icon_states(icon_override)))
 			return overlay_image(icon_override, "[tmp_icon_state]_mob", color, RESET_COLOR)
 		else
 			return overlay_image(use_sprite_sheet, tmp_icon_state, color, RESET_COLOR)
@@ -84,23 +84,23 @@
 
 //when user attached an accessory to S
 /obj/item/clothing/accessory/proc/on_attached(obj/item/clothing/S, mob/user)
-	if(!istype(S))
+	if (!istype(S))
 		return
 	parent = S
 	forceMove(parent)
 	parent.overlays += get_inv_overlay()
 
-	if(user)
+	if (user)
 		to_chat(user, SPAN_NOTICE("You attach \the [src] to \the [parent]."))
 		src.add_fingerprint(user)
 
 
 /obj/item/clothing/accessory/proc/on_removed(mob/user)
-	if(!parent)
+	if (!parent)
 		return
 	parent.overlays -= get_inv_overlay()
 	parent = null
-	if(user)
+	if (user)
 		usr.put_in_hands(src)
 		src.add_fingerprint(user)
 	else
@@ -114,13 +114,13 @@
 
 //default attack_hand behaviour
 /obj/item/clothing/accessory/attack_hand(mob/user as mob)
-	if(parent)
+	if (parent)
 		return	//we aren't an object on the ground so don't call parent
 	..()
 
 
 /obj/item/clothing/accessory/get_pressure_weakness(pressure,zone)
-	if(body_parts_covered & zone)
+	if (body_parts_covered & zone)
 		return ..()
 	return 1
 
@@ -139,7 +139,7 @@
 	parent.verbs += /obj/item/clothing/accessory/toggleable/verb/toggle
 
 /obj/item/clothing/accessory/toggleable/on_removed(mob/user as mob)
-	if(parent)
+	if (parent)
 		parent.verbs -= /obj/item/clothing/accessory/toggleable/verb/toggle
 	..()
 
@@ -148,20 +148,20 @@
 	set name = "Toggle Buttons"
 	set category = "Object"
 	set src in usr
-	if(usr.incapacitated())
+	if (usr.incapacitated())
 		return 0
 	var/obj/item/clothing/accessory/toggleable/H = null
 	if (istype(src, /obj/item/clothing/accessory/toggleable))
 		H = src
 	else
 		H = locate() in src
-	if(H)
+	if (H)
 		H.do_toggle(usr)
 	update_clothing_icon()
 
 
 /obj/item/clothing/accessory/toggleable/proc/do_toggle(user)
-	if(icon_state == icon_closed)
+	if (icon_state == icon_closed)
 		icon_state = "[icon_closed]_open"
 		to_chat(user, "You unbutton [src].")
 	else

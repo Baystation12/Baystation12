@@ -10,7 +10,7 @@
 	var/turf/T = locate(truex + round(width/2), truey+round(height/2), zorigin)
 	var/obj/structure/closet/C = new mimic_type(T)
 	item_spawns += C
-	if(prob(chance_of_mimic) && mimic_type)
+	if (prob(chance_of_mimic) && mimic_type)
 		new /mob/living/simple_animal/hostile/mimic/sleeping(get_turf(C),C)
 
 //BASICALLY:

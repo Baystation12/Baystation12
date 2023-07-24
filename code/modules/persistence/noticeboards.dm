@@ -19,54 +19,54 @@
 	for(var/obj/item/paper/note in get_turf(src))
 		note.forceMove(src)
 		LAZYADD(notices, note)
-		if(LAZYLEN(notices) >= max_notices)
+		if (LAZYLEN(notices) >= max_notices)
 			break
 
 	// Automatically place noticeboards that aren't mapped to specific positions.
-	if(pixel_x == 0 && pixel_y == 0)
+	if (pixel_x == 0 && pixel_y == 0)
 
 		var/turf/here = get_turf(src)
 		var/placing = 0
 		for(var/checkdir in GLOB.cardinal)
 			var/turf/T = get_step(here, checkdir)
-			if(T.density)
+			if (T.density)
 				placing = checkdir
 				break
 			for(var/thing in T)
 				var/atom/A = thing
-				if(A.simulated && !A.CanPass(src, T))
+				if (A.simulated && !A.CanPass(src, T))
 					placing = checkdir
 					break
 
 		switch(placing)
-			if(NORTH)
+			if (NORTH)
 				pixel_x = 0
 				pixel_y = 32
-			if(SOUTH)
+			if (SOUTH)
 				pixel_x = 0
 				pixel_y = -32
-			if(EAST)
+			if (EAST)
 				pixel_x = 32
 				pixel_y = 0
-			if(WEST)
+			if (WEST)
 				pixel_x = -32
 				pixel_y = 0
 
 	update_icon()
 
 /obj/structure/noticeboard/proc/add_paper(atom/movable/paper, skip_icon_update)
-	if(istype(paper))
+	if (istype(paper))
 		LAZYDISTINCTADD(notices, paper)
 		paper.forceMove(src)
-		if(!skip_icon_update)
+		if (!skip_icon_update)
 			update_icon()
 
 /obj/structure/noticeboard/proc/remove_paper(atom/movable/paper, skip_icon_update)
-	if(istype(paper) && paper.loc == src)
+	if (istype(paper) && paper.loc == src)
 		paper.dropInto(loc)
 		LAZYREMOVE(notices, paper)
 		SSpersistence.forget_value(paper, /datum/persistent/paper)
-		if(!skip_icon_update)
+		if (!skip_icon_update)
 			update_icon()
 
 /obj/structure/noticeboard/proc/dismantle()
@@ -113,16 +113,16 @@
 			return TRUE
 		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
 		switch(choice)
-			if("North")
+			if ("North")
 				pixel_x = 0
 				pixel_y = 32
-			if("South")
+			if ("South")
 				pixel_x = 0
 				pixel_y = -32
-			if("East")
+			if ("East")
 				pixel_x = 32
 				pixel_y = 0
-			if("West")
+			if ("West")
 				pixel_x = -32
 				pixel_y = 0
 		user.visible_message(
@@ -162,9 +162,9 @@
 	var/list/dat = list("<table>")
 	for(var/thing in notices)
 		LAZYADD(dat, "<tr><td>[thing]</td><td>")
-		if(istype(thing, /obj/item/paper))
+		if (istype(thing, /obj/item/paper))
 			LAZYADD(dat, "<a href='?src=\ref[src];read=\ref[thing]'>Read</a><a href='?src=\ref[src];write=\ref[thing]'>Write</a>")
-		else if(istype(thing, /obj/item/photo))
+		else if (istype(thing, /obj/item/photo))
 			LAZYADD(dat, "<a href='?src=\ref[src];look=\ref[thing]'>Look</a>")
 		LAZYADD(dat, "<a href='?src=\ref[src];remove=\ref[thing]'>Remove</a></td></tr>")
 	var/datum/browser/popup = new(user, "noticeboard-\ref[src]", "Noticeboard")
@@ -173,36 +173,36 @@
 
 /obj/structure/noticeboard/OnTopic(mob/user, list/href_list)
 
-	if(href_list["read"])
+	if (href_list["read"])
 		var/obj/item/paper/P = locate(href_list["read"])
-		if(P && P.loc == src)
+		if (P && P.loc == src)
 			P.show_content(user)
 		. = TOPIC_HANDLED
 
-	if(href_list["look"])
+	if (href_list["look"])
 		var/obj/item/photo/P = locate(href_list["look"])
-		if(P && P.loc == src)
+		if (P && P.loc == src)
 			P.show(user)
 		. = TOPIC_HANDLED
 
-	if(href_list["remove"])
+	if (href_list["remove"])
 		remove_paper(locate(href_list["remove"]))
 		add_fingerprint(user)
 		. = TOPIC_REFRESH
 
-	if(href_list["write"])
+	if (href_list["write"])
 		var/obj/item/P = locate(href_list["write"])
-		if(!P)
+		if (!P)
 			return
 		var/obj/item/pen/pen = user.IsHolding(/obj/item/pen)
-		if(istype(pen))
+		if (istype(pen))
 			add_fingerprint(user)
 			P.attackby(pen, user)
 		else
 			to_chat(user, SPAN_WARNING("You need a pen to write on \the [P]."))
 		. = TOPIC_REFRESH
 
-	if(. == TOPIC_REFRESH)
+	if (. == TOPIC_REFRESH)
 		interact(user)
 
 /obj/structure/noticeboard/anomaly

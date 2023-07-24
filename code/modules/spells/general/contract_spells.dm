@@ -22,11 +22,11 @@
 	return list(subject)
 
 /spell/contract/cast(mob/target,mob/user)
-	if(!subject)
+	if (!subject)
 		to_chat(usr, "This spell was not properly given a target. Contact a coder.")
 		return null
 
-	if(istype(target,/list))
+	if (istype(target,/list))
 		target = target[1]
 	return target
 
@@ -42,7 +42,7 @@
 
 /spell/contract/reward/cast(mob/living/target,mob/user)
 	target = ..(target,user)
-	if(!target)
+	if (!target)
 		return
 
 	to_chat(target, SPAN_INFO("You feel great!"))
@@ -59,7 +59,7 @@
 
 /spell/contract/punish/cast(mob/living/target,mob/user)
 	target = ..(target,user)
-	if(!target)
+	if (!target)
 		return
 
 	to_chat(target, SPAN_DANGER("You feel punished!"))

@@ -18,7 +18,7 @@
 	toggle_off_message = "\The [src] powers down with a beep."
 
 /obj/item/clothing/glasses/proc/process_hud(mob/M)
-	if(hud)
+	if (hud)
 		hud.process_hud(M)
 
 /obj/item/clothing/glasses/hud/process_hud(mob/M)

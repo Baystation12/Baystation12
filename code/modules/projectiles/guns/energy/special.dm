@@ -65,13 +65,13 @@
 		)
 
 /obj/item/gun/energy/floragun/resolve_attackby(atom/A)
-	if(istype(A,/obj/machinery/portable_atmospherics/hydroponics))
+	if (istype(A,/obj/machinery/portable_atmospherics/hydroponics))
 		return FALSE // do afterattack, i.e. fire, at pointblank at trays.
 	return ..()
 
 /obj/item/gun/energy/floragun/afterattack(obj/target, mob/user, adjacent_flag)
 	//allow shooting into adjacent hydrotrays regardless of intent
-	if(adjacent_flag && istype(target,/obj/machinery/portable_atmospherics/hydroponics))
+	if (adjacent_flag && istype(target,/obj/machinery/portable_atmospherics/hydroponics))
 		user.visible_message(SPAN_DANGER("\The [user] fires \the [src] into \the [target]!"))
 		Fire(target,user)
 		return
@@ -84,7 +84,7 @@
 
 	var/genemask = input("Choose a gene to modify.") as null|anything in SSplants.plant_gene_datums
 
-	if(!genemask)
+	if (!genemask)
 		return
 
 	gene = SSplants.plant_gene_datums[genemask]
@@ -96,7 +96,7 @@
 /obj/item/gun/energy/floragun/consume_next_projectile()
 	. = ..()
 	var/obj/item/projectile/energy/floramut/gene/G = .
-	if(istype(G))
+	if (istype(G))
 		G.gene = gene
 
 /obj/item/gun/energy/meteorgun
@@ -179,10 +179,10 @@
 	return ..()
 
 /obj/item/gun/energy/plasmacutter/proc/slice(mob/M = null)
-	if(!safety())
-		if(M)
+	if (!safety())
+		if (M)
 			M.welding_eyecheck()//Welding tool eye check
-			if(check_accidents(M, "[M] loses grip on \the [src] from its sudden recoil!",gun_skill, 60, safety_skill))
+			if (check_accidents(M, "[M] loses grip on \the [src] from its sudden recoil!",gun_skill, 60, safety_skill))
 				return 0
 		spark_system.start()
 		return 1

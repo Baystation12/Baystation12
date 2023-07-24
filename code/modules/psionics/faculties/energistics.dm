@@ -17,12 +17,12 @@
 	use_description = "Target the head, eyes or mouth while on harm intent to use a melee attack that causes a localized electromagnetic pulse."
 
 /singleton/psionic_power/energistics/disrupt/invoke(mob/living/user, mob/living/target)
-	if(user.zone_sel.selecting != BP_HEAD && user.zone_sel.selecting != BP_EYES && user.zone_sel.selecting != BP_MOUTH)
+	if (user.zone_sel.selecting != BP_HEAD && user.zone_sel.selecting != BP_EYES && user.zone_sel.selecting != BP_MOUTH)
 		return FALSE
-	if(istype(target, /turf))
+	if (istype(target, /turf))
 		return FALSE
 	. = ..()
-	if(.)
+	if (.)
 		user.visible_message(SPAN_DANGER("\The [user] releases a gout of crackling static and arcing lightning over \the [target]!"))
 		empulse(target, 0, 1)
 		return TRUE
@@ -36,19 +36,19 @@
 	use_description = "Target the chest or groin while on harm intent to use a melee attack that electrocutes a victim."
 
 /singleton/psionic_power/energistics/electrocute/invoke(mob/living/user, mob/living/target)
-	if(user.zone_sel.selecting != BP_CHEST && user.zone_sel.selecting != BP_GROIN)
+	if (user.zone_sel.selecting != BP_CHEST && user.zone_sel.selecting != BP_GROIN)
 		return FALSE
-	if(istype(target, /turf))
+	if (istype(target, /turf))
 		return FALSE
 	. = ..()
-	if(.)
+	if (.)
 		user.visible_message(SPAN_DANGER("\The [user] sends a jolt of electricity arcing into \the [target]!"))
-		if(istype(target))
+		if (istype(target))
 			target.electrocute_act(rand(15,45), user, 1, user.zone_sel.selecting)
 			return TRUE
-		else if(isatom(target))
+		else if (isatom(target))
 			var/obj/item/cell/charging_cell = target.get_cell()
-			if(istype(charging_cell))
+			if (istype(charging_cell))
 				charging_cell.give(rand(15,45))
 			return TRUE
 
@@ -62,7 +62,7 @@
 
 /singleton/psionic_power/energistics/zorch/invoke(mob/living/user, mob/living/target)
 	. = ..()
-	if(.)
+	if (.)
 		user.visible_message(SPAN_DANGER("\The [user]'s eyes flare with light!"))
 
 		var/user_rank = user.psi.get_rank(faculty)
@@ -70,20 +70,20 @@
 		var/pew_sound
 
 		switch(user_rank)
-			if(PSI_RANK_PARAMOUNT)
+			if (PSI_RANK_PARAMOUNT)
 				pew = new /obj/item/projectile/beam/heavylaser(get_turf(user))
 				pew.name = "gigawatt mental laser"
 				pew_sound = 'sound/weapons/lasercannonfire.ogg'
-			if(PSI_RANK_GRANDMASTER)
+			if (PSI_RANK_GRANDMASTER)
 				pew = new /obj/item/projectile/beam/midlaser(get_turf(user))
 				pew.name = "megawatt mental laser"
 				pew_sound = 'sound/weapons/Laser.ogg'
-			if(PSI_RANK_MASTER)
+			if (PSI_RANK_MASTER)
 				pew = new /obj/item/projectile/beam/stun(get_turf(user))
 				pew.name = "mental laser"
 				pew_sound = 'sound/weapons/Taser.ogg'
 
-		if(istype(pew))
+		if (istype(pew))
 			playsound(pew.loc, pew_sound, 25, 1)
 			pew.original = target
 			pew.current = target
@@ -101,10 +101,10 @@
 	use_description = "Target a non-living target in melee range on harm intent to cause some sparks to appear. This can light fires."
 
 /singleton/psionic_power/energistics/spark/invoke(mob/living/user, mob/living/target)
-	if(isnull(target) || istype(target)) return FALSE
+	if (isnull(target) || istype(target)) return FALSE
 	. = ..()
-	if(.)
-		if(istype(target,/obj/item/clothing/mask/smokable/cigarette))
+	if (.)
+		if (istype(target,/obj/item/clothing/mask/smokable/cigarette))
 			var/obj/item/clothing/mask/smokable/cigarette/S = target
 			S.light("[user] snaps \his fingers and \the [S.name] lights up.")
 			playsound(S.loc, "sparks", 50, 1)

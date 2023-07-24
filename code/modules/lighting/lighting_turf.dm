@@ -13,7 +13,7 @@
 
 /turf/set_opacity(new_opacity)
 	. = ..()
-	if(opacity == new_opacity)
+	if (opacity == new_opacity)
 		return FALSE
 
 	opacity = new_opacity
@@ -28,7 +28,7 @@
 		opaque_counter += A.opacity
 
 	// If the counter changed and was or became 0 then lift event/reconsider lights
-	if(opaque_counter != old_opaque_counter && (!opaque_counter || !old_opaque_counter))
+	if (opaque_counter != old_opaque_counter && (!opaque_counter || !old_opaque_counter))
 		GLOB.opacity_set_event.raise_event(src, !opaque_counter, !!opaque_counter)
 		reconsider_lights()
 		return TRUE
@@ -40,7 +40,7 @@
 		L.vis_update()
 
 /turf/proc/lighting_clear_overlay()
-	if(lighting_overlay)
+	if (lighting_overlay)
 		qdel(lighting_overlay)
 
 	for(var/datum/lighting_corner/C in corners)
@@ -48,18 +48,18 @@
 
 // Builds a lighting overlay for us, but only if our area is dynamic.
 /turf/proc/lighting_build_overlay()
-	if(lighting_overlay)
+	if (lighting_overlay)
 		return
 
 	var/area/A = loc
-	if(A.dynamic_lighting && dynamic_lighting)
-		if(!lighting_corners_initialised)
+	if (A.dynamic_lighting && dynamic_lighting)
+		if (!lighting_corners_initialised)
 			generate_missing_corners()
 
 		new /atom/movable/lighting_overlay(src)
 
 		for(var/datum/lighting_corner/C in corners)
-			if(!C.active) // We would activate the corner, calculate the lighting for it.
+			if (!C.active) // We would activate the corner, calculate the lighting for it.
 				for(var/L in C.affecting)
 					var/datum/light_source/S = L
 					S.recalc_corner(C)
@@ -68,9 +68,9 @@
 
 // Used to get a scaled lumcount.
 /turf/proc/get_lumcount(minlum = 0, maxlum = 1)
-	if(!lighting_overlay)
+	if (!lighting_overlay)
 		var/area/A = loc
-		if(A.dynamic_lighting && dynamic_lighting)
+		if (A.dynamic_lighting && dynamic_lighting)
 			var/atom/movable/lighting_overlay/O = new /atom/movable/lighting_overlay(src)
 			lighting_overlay = O
 
@@ -87,27 +87,27 @@
 // If an opaque movable atom moves around we need to potentially update visibility.
 /turf/Entered(atom/movable/AM, atom/OldLoc)
 	. = ..()
-	if(AM?.opacity)
+	if (AM?.opacity)
 		RecalculateOpacity()
 
 /turf/Exited(atom/movable/AM, atom/newloc)
 	. = ..()
-	if(AM?.opacity)
+	if (AM?.opacity)
 		RecalculateOpacity()
 
 /turf/proc/get_corners()
-	if(opaque_counter)
+	if (opaque_counter)
 		return null // Since this proc gets used in a for loop, null won't be looped though.
 
 	return corners
 
 /turf/proc/generate_missing_corners()
 	lighting_corners_initialised = TRUE
-	if(!corners)
+	if (!corners)
 		corners = list(null, null, null, null)
 
 	for(var/i = 1 to 4)
-		if(corners[i]) // Already have a corner on this direction.
+		if (corners[i]) // Already have a corner on this direction.
 			continue
 
 		corners[i] = new /datum/lighting_corner(src, LIGHTING_CORNER_DIAGONAL[i])

@@ -30,9 +30,9 @@
 	..()
 
 	var/turf/O = get_turf(src)
-	if(!O) return
+	if (!O) return
 
-	if(explosion_size)
+	if (explosion_size)
 		on_explosion(O)
 
 	src.fragmentate(O, num_fragments, spread_range, fragment_types)
@@ -71,13 +71,13 @@
 		for(var/mob/living/M in T)
 			//lying on a frag grenade while the grenade is on the ground causes you to absorb most of the shrapnel.
 			//you will most likely be dead, but others nearby will be spared the fragments that hit you instead.
-			if(M.lying && isturf(src.loc))
+			if (M.lying && isturf(src.loc))
 				P.attack_mob(M, 0, 5)
 			else
 				P.attack_mob(M, 0, 50)
 
 /obj/item/grenade/frag/proc/on_explosion(turf/O)
-	if(explosion_size)
+	if (explosion_size)
 		explosion(O, explosion_size, EX_ACT_LIGHT, 0)
 
 /obj/item/grenade/frag/shell
@@ -101,7 +101,7 @@
 	explosion_size = 3
 
 /obj/item/grenade/frag/high_yield/on_explosion(turf/O)
-	if(explosion_size)
+	if (explosion_size)
 		explosion(O, round(explosion_size * 1.5), EX_ACT_HEAVY, 0) //has a chance to blow a hole in the floor
 
 /obj/item/grenade/frag/makeshift
@@ -132,11 +132,11 @@
 	. = ..()
 
 /obj/item/grenade/frag/makeshift/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W)) //overrides the act to screwdrive a grenade to set its fuse.
+	if (isScrewdriver(W)) //overrides the act to screwdrive a grenade to set its fuse.
 		to_chat(user, SPAN_WARNING("You can't adjust the timer on \the [src]!"))
 		return TRUE
 	if (is_type_in_list(W, possible_reinforcements))
-		if(shrapnel_reinforced<10) //you can only add 10 items inside the can
+		if (shrapnel_reinforced<10) //you can only add 10 items inside the can
 			user.visible_message(
 				SPAN_WARNING("\The [user] pries \the [src] open and drops \a [W] inside."),
 				SPAN_DANGER("You open \the [src], carefully adding \a [W] before sealing the lid again."),

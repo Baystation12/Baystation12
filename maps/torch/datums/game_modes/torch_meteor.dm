@@ -26,27 +26,27 @@
 /datum/game_mode/meteor/declare_completion()
 	var/eng_status = 0
 	for(var/obj/machinery/atmospherics/unary/engine/E in SSmachines.machinery)
-		if((get_z(E) in GLOB.using_map.station_levels) && !MACHINE_IS_BROKEN(E))
+		if ((get_z(E) in GLOB.using_map.station_levels) && !MACHINE_IS_BROKEN(E))
 			eng_status++
 	var/nav_status = FALSE
 	for(var/obj/machinery/computer/ship/helm/H in SSmachines.machinery)
-		if((get_z(H) in GLOB.using_map.station_levels) && !MACHINE_IS_BROKEN(H))
+		if ((get_z(H) in GLOB.using_map.station_levels) && !MACHINE_IS_BROKEN(H))
 			nav_status = TRUE
 	var/bsd_status = FALSE
 	var/area/A = locate(/area/engineering/bluespace) in world
-	if(A && A.powered(EQUIP)) //There's no actual machines to check
+	if (A && A.powered(EQUIP)) //There's no actual machines to check
 		bsd_status = TRUE
 
 	to_world("<h3>Damage report</h3>")
-	if(eng_status)
+	if (eng_status)
 		to_world(SPAN_GOOD("At least [eng_status] thrusters remained operational."))
 	else
 		to_world(SPAN_BAD("All propulsion was lost, leaving \the [GLOB.using_map.full_name] drifting."))
-	if(nav_status)
+	if (nav_status)
 		to_world(SPAN_GOOD("Navigation and helm remained operational."))
 	else
 		to_world(SPAN_BAD("The navigation systems were lost on [GLOB.using_map.full_name]."))
-	if(bsd_status)
+	if (bsd_status)
 		to_world(SPAN_GOOD("Bluespace drive stayed powered."))
 	else
 		to_world(SPAN_BAD("Bluespace drive lost power during the jump, causing dangerous anomalies in the local time-space."))

@@ -10,5 +10,5 @@
 /datum/extension/armor/psionic/on_blocking(damage, damage_type, damage_flags, armor_pen, blocked)
 	var/datum/psi_complexus/psi = holder
 	var/blocked_damage = damage * blocked
-	if(blocked_damage)
+	if (blocked_damage)
 		psi.spend_power_armor(blocked_damage)

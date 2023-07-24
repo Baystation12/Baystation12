@@ -18,7 +18,7 @@
 	icon_state = "map_on"
 
 /obj/machinery/atmospherics/binary/pump/high_power/on_update_icon()
-	if(!powered())
+	if (!powered())
 		icon_state = "off"
 	else
 		icon_state = "[use_power ? "on" : "off"]"

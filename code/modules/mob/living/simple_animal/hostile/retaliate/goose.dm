@@ -36,7 +36,7 @@
 /datum/ai_holder/simple_animal/retaliate/goose/react_to_attack(atom/movable/attacker)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/goose/G = holder
-	if(G.stat == CONSCIOUS)
+	if (G.stat == CONSCIOUS)
 		G.enrage(G.enrage_potency)
 
 /obj/item/natural_weapon/goosefeet
@@ -48,9 +48,9 @@
 	canremove = FALSE
 
 /mob/living/simple_animal/hostile/retaliate/goose/on_update_icon()
-	if(stat == DEAD)
+	if (stat == DEAD)
 		icon_state = icon_dead
-	else if(loose)
+	else if (loose)
 		icon_state = "goose_loose"
 		icon_living = "goose_loose"
 
@@ -60,9 +60,9 @@
 
 /mob/living/simple_animal/hostile/retaliate/goose/proc/enrage(potency)
 	var/obj/item/W = get_natural_weapon()
-	if(W)
+	if (W)
 		W.force = min((W.force + potency), max_damage)
-	if(!loose && prob(25) && (W && W.force >= loose_threshold)) //second wind
+	if (!loose && prob(25) && (W && W.force >= loose_threshold)) //second wind
 		loose = TRUE
 		health = (initial(health) * 1.5)
 		maxHealth = (initial(maxHealth) * 1.5)

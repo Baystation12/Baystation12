@@ -8,15 +8,15 @@
 
 /obj/machinery/computer/shuttle_control/explore/get_ui_data(datum/shuttle/autodock/overmap/shuttle)
 	. = ..()
-	if(istype(shuttle))
+	if (istype(shuttle))
 		var/total_gas = 0
 		for(var/obj/structure/fuel_port/FP in shuttle.fuel_ports) //loop through fuel ports
 			var/obj/item/tank/fuel_tank = locate() in FP
-			if(fuel_tank)
+			if (fuel_tank)
 				total_gas += fuel_tank.air_contents.total_moles
 
 		var/fuel_span = "good"
-		if(total_gas < shuttle.fuel_consumption * 2)
+		if (total_gas < shuttle.fuel_consumption * 2)
 			fuel_span = "bad"
 
 		. += list(
@@ -32,21 +32,21 @@
 		crash_with("Shuttle controller tried to handle topic with no shuttle provided.")
 		to_chat(usr, SPAN_DEBUG("Shuttle controller tried to handle topic with no shuttle provided. This is a bug and should be reported immediately, something's probably horribly broken."))
 		return TOPIC_HANDLED
-	if(ismob(usr))
+	if (ismob(usr))
 		var/mob/user = usr
 		shuttle.operator_skill = user.get_skill_value(SKILL_PILOT)
 
-	if((. = ..()) != null)
+	if ((. = ..()) != null)
 		return
 
-	if(href_list["pick"])
+	if (href_list["pick"])
 		var/list/possible_d = shuttle.get_possible_destinations()
 		var/D
-		if(length(possible_d))
+		if (length(possible_d))
 			D = input("Choose shuttle destination", "Shuttle Destination") as null|anything in possible_d
 		else
 			to_chat(usr,SPAN_WARNING("No valid landing sites in range."))
 		possible_d = shuttle.get_possible_destinations()
-		if(CanInteract(usr, GLOB.default_state) && (D in possible_d))
+		if (CanInteract(usr, GLOB.default_state) && (D in possible_d))
 			shuttle.set_destination(possible_d[D])
 		return TOPIC_REFRESH

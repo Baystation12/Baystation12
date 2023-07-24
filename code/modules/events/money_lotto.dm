@@ -5,8 +5,8 @@
 
 /datum/event/money_lotto/start()
 	winner_sum = pick(5000, 10000, 50000, 100000, 500000, 1000000, 1500000)
-	if(prob(50))
-		if(length(all_money_accounts))
+	if (prob(50))
+		if (length(all_money_accounts))
 			var/datum/money_account/D = pick(all_money_accounts)
 			winner_name = D.owner_name
 
@@ -20,7 +20,7 @@
 	var/channel = "Nyx Daily"
 
 	var/body = "Nyx Daily wishes to congratulate <b>[winner_name]</b> for recieving the Nyx Stellar Slam Lottery, and receiving the out of this world sum of [winner_sum] [GLOB.using_map.local_currency_name]!"
-	if(!deposit_success)
+	if (!deposit_success)
 		body += "<br>Unfortunately, we were unable to verify the account details provided, so we were unable to transfer the money. In order to have your winnings re-sent, send a cheque containing a processing fee of 5000 [GLOB.using_map.local_currency_name] to the ND 'Stellar Slam' office on the Nyx gateway with your updated details."
 
 	var/datum/feed_network/torch_network = news_network[1]

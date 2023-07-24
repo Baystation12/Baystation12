@@ -31,7 +31,7 @@
 	return TRUE
 
 /obj/machinery/computer/atmoscontrol/emag_act(remaining_carges, mob/user)
-	if(!emagged)
+	if (!emagged)
 		user.visible_message(SPAN_WARNING("\The [user] does something \the [src], causing the screen to flash!"),\
 			SPAN_WARNING("You cause the screen to flash as you gain full control."),\
 			"You hear an electronic warble.")
@@ -39,6 +39,6 @@
 		return 1
 
 /obj/machinery/computer/atmoscontrol/ui_interact(mob/user)
-	if(!atmos_control)
+	if (!atmos_control)
 		atmos_control = new(src, req_access, monitored_alarm_ids)
 	atmos_control.ui_interact(user)

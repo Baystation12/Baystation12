@@ -5,26 +5,26 @@
 /proc/check_shield_arc(mob/user, bad_arc, atom/damage_source = null, mob/attacker = null)
 	//check attack direction
 	var/attack_dir = 0 //direction from the user to the source of the attack
-	if(istype(damage_source, /obj/item/projectile))
+	if (istype(damage_source, /obj/item/projectile))
 		var/obj/item/projectile/P = damage_source
 		attack_dir = get_dir(get_turf(user), P.starting)
-	else if(attacker)
+	else if (attacker)
 		attack_dir = get_dir(get_turf(user), get_turf(attacker))
-	else if(damage_source)
+	else if (damage_source)
 		attack_dir = get_dir(get_turf(user), get_turf(damage_source))
 
-	if(!(attack_dir && (attack_dir & bad_arc)))
+	if (!(attack_dir && (attack_dir & bad_arc)))
 		return 1
 	return 0
 
 /proc/default_parry_check(mob/user, mob/attacker, atom/damage_source)
 	//parry only melee attacks
-	if(istype(damage_source, /obj/item/projectile) || (attacker && get_dist(user, attacker) > 1) || user.incapacitated())
+	if (istype(damage_source, /obj/item/projectile) || (attacker && get_dist(user, attacker) > 1) || user.incapacitated())
 		return 0
 
 	//block as long as they are not directly behind us
 	var/bad_arc = reverse_direction(user.dir) //arc of directions from which we cannot block
-	if(!check_shield_arc(user, bad_arc, damage_source, attacker))
+	if (!check_shield_arc(user, bad_arc, damage_source, attacker))
 		return 0
 
 	return 1
@@ -35,13 +35,13 @@
 	var/max_block = 0
 
 /obj/item/shield/handle_shield(mob/user, damage, atom/damage_source = null, mob/attacker = null, def_zone = null, attack_text = "the attack")
-	if(user.incapacitated())
+	if (user.incapacitated())
 		return 0
 
 	//block as long as they are not directly behind us
 	var/bad_arc = reverse_direction(user.dir) //arc of directions from which we cannot block
-	if(check_shield_arc(user, bad_arc, damage_source, attacker))
-		if(prob(get_block_chance(user, damage, damage_source, attacker)))
+	if (check_shield_arc(user, bad_arc, damage_source, attacker))
+		if (prob(get_block_chance(user, damage, damage_source, attacker)))
 			user.visible_message(SPAN_DANGER("\The [user] blocks [attack_text] with \the [src]!"))
 			return 1
 	return 0
@@ -70,21 +70,21 @@
 
 /obj/item/shield/riot/handle_shield(mob/user)
 	. = ..()
-	if(.) playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
+	if (.) playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
 
 /obj/item/shield/riot/get_block_chance(mob/user, damage, atom/damage_source = null, mob/attacker = null)
-	if(istype(damage_source, /obj/item/projectile))
+	if (istype(damage_source, /obj/item/projectile))
 		var/obj/item/projectile/P = damage_source
 		//plastic shields do not stop bullets or lasers, even in space. Will block beanbags, rubber bullets, and stunshots just fine though.
-		if(is_sharp(P) && damage >= max_block)
+		if (is_sharp(P) && damage >= max_block)
 			return 0
-		if(istype(P, /obj/item/projectile/beam) && (!can_block_lasers || (P.armor_penetration >= max_block)))
+		if (istype(P, /obj/item/projectile/beam) && (!can_block_lasers || (P.armor_penetration >= max_block)))
 			return 0
 	return base_block_chance
 
 /obj/item/shield/riot/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/melee/baton))
-		if(cooldown < world.time - 25)
+	if (istype(W, /obj/item/melee/baton))
+		if (cooldown < world.time - 25)
 			user.visible_message(SPAN_WARNING("[user] bashes [src] with [W]!"))
 			playsound(user.loc, 'sound/effects/shieldbash.ogg', 50, 1)
 			cooldown = world.time
@@ -127,7 +127,7 @@
 
 /obj/item/shield/buckler/handle_shield(mob/user)
 	. = ..()
-	if(.) playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
+	if (.) playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
 
 /obj/item/shield/buckler/get_block_chance(mob/user, damage, atom/damage_source = null, mob/attacker = null)
 	if (istype(damage_source, /obj/item/projectile))

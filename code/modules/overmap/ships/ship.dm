@@ -4,7 +4,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 #define SANITIZE_SPEED(speed) SIGN(speed) * clamp(abs(speed), 0, max_speed)
 #define CHANGE_SPEED_BY(speed_var, v_diff) \
 	v_diff = SANITIZE_SPEED(v_diff);\
-	if(!MOVING(speed_var + v_diff)) \
+	if (!MOVING(speed_var + v_diff)) \
 		{speed_var = 0};\
 	else \
 		{speed_var = SANITIZE_SPEED((speed_var + v_diff)/(1 + speed_var*v_diff/(max_speed ** 2)))}
@@ -55,9 +55,9 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 /obj/effect/overmap/visitable/ship/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	SSshuttle.ships -= src
-	if(length(consoles))
+	if (length(consoles))
 		for(var/obj/machinery/computer/ship/machine in consoles)
-			if(machine.linked == src)
+			if (machine.linked == src)
 				machine.linked = null
 		consoles = null
 	if (length(sensors))
@@ -88,9 +88,9 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 /obj/effect/overmap/visitable/ship/get_scan_data(mob/user)
 	. = ..()
 	var/list/extra_data = list("Mass: [vessel_mass] tons.")
-	if(!is_still())
+	if (!is_still())
 		extra_data += "Heading: [get_heading_angle()], speed [get_speed() * 1000]"
-	if(instant_contact)
+	if (instant_contact)
 		extra_data += "<b>It is broadcasting a distress signal.</b>"
 	. += jointext(extra_data, "<br>")
 
@@ -113,13 +113,13 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 /obj/effect/overmap/visitable/ship/proc/get_heading()
 	var/res = 0
-	if(MOVING(speed[1]))
-		if(speed[1] > 0)
+	if (MOVING(speed[1]))
+		if (speed[1] > 0)
 			res |= EAST
 		else
 			res |= WEST
-	if(MOVING(speed[2]))
-		if(speed[2] > 0)
+	if (MOVING(speed[2]))
+		if (speed[2] > 0)
 			res |= NORTH
 		else
 			res |= SOUTH
@@ -135,20 +135,20 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	CHANGE_SPEED_BY(speed[1], n_x)
 	CHANGE_SPEED_BY(speed[2], n_y)
 	for(var/zz in map_z)
-		if(is_still())
+		if (is_still())
 			toggle_move_stars(zz)
 		else
 			toggle_move_stars(zz, fore_dir)
 	update_icon()
 
 /obj/effect/overmap/visitable/ship/proc/get_brake_path()
-	if(!get_acceleration())
+	if (!get_acceleration())
 		return INFINITY
-	if(is_still())
+	if (is_still())
 		return 0
-	if(!burn_delay)
+	if (!burn_delay)
 		return 0
-	if(!get_speed())
+	if (!get_speed())
 		return 0
 	var/num_burns = get_speed()/get_acceleration() + 2 //some padding in case acceleration drops form fuel usage
 	var/burns_per_grid = 1/ (burn_delay * get_speed())
@@ -178,22 +178,22 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	adjust_speed(delta * dx, delta * dy)
 
 /obj/effect/overmap/visitable/ship/Process()
-	if(!halted && !is_still())
+	if (!halted && !is_still())
 		var/list/deltas = list(0,0)
 		for(var/i = 1 to 2)
-			if(MOVING(speed[i]))
+			if (MOVING(speed[i]))
 				position[i] += speed[i] * OVERMAP_SPEED_CONSTANT
-				if(position[i] < 0)
+				if (position[i] < 0)
 					deltas[i] = ceil(position[i])
-				else if(position[i] > 0)
+				else if (position[i] > 0)
 					deltas[i] = floor(position[i])
-				if(deltas[i] != 0)
+				if (deltas[i] != 0)
 					position[i] -= deltas[i]
 					position[i] += (deltas[i] > 0) ? -1 : 1
 
 		update_icon()
 		var/turf/newloc = locate(x + deltas[1], y + deltas[2], z)
-		if(newloc && loc != newloc)
+		if (newloc && loc != newloc)
 			Move(newloc)
 			handle_wraparound()
 	sensor_visibility = min(round(base_sensor_visibility + get_speed_sensor_increase(), 1), 100)
@@ -201,16 +201,16 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 /obj/effect/overmap/visitable/ship/on_update_icon()
 	pixel_x = position[1] * (world.icon_size/2)
 	pixel_y = position[2] * (world.icon_size/2)
-	if(!is_still())
+	if (!is_still())
 		icon_state = moving_state
 		dir = get_heading()
 	else
 		icon_state = initial(icon_state)
 	for(var/obj/machinery/computer/ship/machine in consoles)
-		if(machine.z in map_z)
+		if (machine.z in map_z)
 			for(var/weakref/W in machine.viewers)
 				var/mob/M = W.resolve()
-				if(istype(M) && M.client)
+				if (istype(M) && M.client)
 					M.client.pixel_x = pixel_x
 					M.client.pixel_y = pixel_y
 	..()
@@ -224,7 +224,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 		. += E.get_thrust()
 
 /obj/effect/overmap/visitable/ship/proc/can_burn()
-	if(halted)
+	if (halted)
 		return 0
 	if (world.time < last_burn + burn_delay)
 		return 0
@@ -235,7 +235,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 /obj/effect/overmap/visitable/ship/proc/ETA()
 	. = INFINITY
 	for(var/i = 1 to 2)
-		if(MOVING(speed[i]))
+		if (MOVING(speed[i]))
 			. = min(., ((speed[i] > 0 ? 1 : -1) - position[i]) / speed[i])
 	. = max(ceil(.),0)
 
@@ -245,19 +245,19 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	var/low_edge = 1
 	var/high_edge = GLOB.using_map.overmap_size - 1
 
-	if((dir & WEST) && x == low_edge)
+	if ((dir & WEST) && x == low_edge)
 		nx = high_edge
-	else if((dir & EAST) && x == high_edge)
+	else if ((dir & EAST) && x == high_edge)
 		nx = low_edge
-	if((dir & SOUTH)  && y == low_edge)
+	if ((dir & SOUTH)  && y == low_edge)
 		ny = high_edge
-	else if((dir & NORTH) && y == high_edge)
+	else if ((dir & NORTH) && y == high_edge)
 		ny = low_edge
-	if((x == nx) && (y == ny))
+	if ((x == nx) && (y == ny))
 		return //we're not flying off anywhere
 
 	var/turf/T = locate(nx,ny,z)
-	if(T)
+	if (T)
 		forceMove(T)
 
 /obj/effect/overmap/visitable/ship/proc/halt()
@@ -265,11 +265,11 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	halted = 1
 
 /obj/effect/overmap/visitable/ship/proc/unhalt()
-	if(!SSshuttle.overmap_halted)
+	if (!SSshuttle.overmap_halted)
 		halted = 0
 
 /obj/effect/overmap/visitable/ship/Bump(atom/A)
-	if(istype(A,/turf/unsimulated/map/edge))
+	if (istype(A,/turf/unsimulated/map/edge))
 		handle_wraparound()
 	..()
 
@@ -281,7 +281,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 	for(var/obj/machinery/computer/ship/S in SSmachines.machinery)
 		S.attempt_hook_up(src)
 	for(var/datum/ship_engine/E in ship_engines)
-		if(check_ownership(E.holder))
+		if (check_ownership(E.holder))
 			engines |= E
 
 /obj/effect/overmap/visitable/ship/proc/get_landed_info()

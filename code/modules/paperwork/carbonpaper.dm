@@ -7,18 +7,18 @@
 
 
 /obj/item/paper/carbon/on_update_icon()
-	if(iscopy)
-		if(info)
+	if (iscopy)
+		if (info)
 			icon_state = "cpaper_words"
 			return
 		icon_state = "cpaper"
 	else if (copied)
-		if(info)
+		if (info)
 			icon_state = "paper_words"
 			return
 		icon_state = "paper"
 	else
-		if(info)
+		if (info)
 			icon_state = "paper_stack_words"
 			return
 		icon_state = "paper_stack"
@@ -35,7 +35,7 @@
 		var/copycontents = c.info
 		var/obj/item/paper/carbon/copy = new /obj/item/paper/carbon (usr.loc)
 		copy.language = language
-		if(info)
+		if (info)
 			copycontents = replacetext(copycontents, "<span style='font-family: [c.deffont]; color:", "<span style='font-family: [c.deffont]; nocolor:")	//state of the art techniques in action
 			copycontents = replacetext(copycontents, "<span style='font-family: [c.crayonfont]; color:", "<span style='font-family: [c.crayonfont]; nocolor:")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
 			copy.info += copycontents

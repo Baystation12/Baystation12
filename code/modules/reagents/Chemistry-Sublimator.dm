@@ -1,15 +1,15 @@
 /proc/create_gas_data_for_reagent(datum/reagent/reagent)
 
 	var/kill_later
-	if(ispath(reagent))
+	if (ispath(reagent))
 		kill_later = TRUE
 		reagent = new reagent
 
-	if(!istype(reagent))
+	if (!istype(reagent))
 		return
 
 	var/gas_id = lowertext(reagent.name)
-	if(gas_id in gas_data.gases)
+	if (gas_id in gas_data.gases)
 		return
 
 	gas_data.gases +=                   gas_id
@@ -21,14 +21,14 @@
 	gas_data.burn_product[gas_id] =     reagent.gas_burn_product
 	gas_data.breathed_product[gas_id] = reagent.type
 
-	if(reagent.gas_overlay)
+	if (reagent.gas_overlay)
 		var/obj/effect/gas_overlay/I = new()
 		I.icon_state = reagent.gas_overlay
 		I.color = initial(reagent.color)
 		gas_data.tile_overlay[gas_id] = I
 		gas_data.tile_overlay_color[gas_id] = reagent.color
 
-	if(kill_later)
+	if (kill_later)
 		qdel(reagent)
 
 /obj/machinery/portable_atmospherics/reagent_sublimator
@@ -49,8 +49,8 @@
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/New()
 	. = ..()
-	if(holding)   verbs |= /obj/machinery/portable_atmospherics/reagent_sublimator/proc/remove_tank
-	if(container) verbs |= /obj/machinery/portable_atmospherics/reagent_sublimator/proc/remove_container
+	if (holding)   verbs |= /obj/machinery/portable_atmospherics/reagent_sublimator/proc/remove_tank
+	if (container) verbs |= /obj/machinery/portable_atmospherics/reagent_sublimator/proc/remove_container
 	update_icon()
 
 // Coded this before realizing base type didn't support tank mixing, leaving it in just in case someone decides to add it.
@@ -61,10 +61,10 @@
 	set src in view(1)
 
 	var/mob/living/user = usr
-	if(!istype(user))
+	if (!istype(user))
 		return
 
-	if(holding)
+	if (holding)
 		user.put_in_hands(holding)
 		user.visible_message(SPAN_NOTICE("\The [user] removes \the [holding] from \the [src]."))
 		holding = null
@@ -80,15 +80,15 @@
 	set src in view(1)
 
 	var/mob/living/user = usr
-	if(!istype(user))
+	if (!istype(user))
 		return
 
-	if(container)
+	if (container)
 		user.put_in_hands(container)
 		user.visible_message(SPAN_NOTICE("\The [user] removes \the [container] from \the [src]."))
 		container = null
 		verbs -= /obj/machinery/portable_atmospherics/reagent_sublimator/proc/remove_container
-		if(use_power >= POWER_USE_ACTIVE)
+		if (use_power >= POWER_USE_ACTIVE)
 			update_use_power(POWER_USE_IDLE)
 		update_icon()
 	else
@@ -101,12 +101,12 @@
 	return TRUE
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/attackby(obj/item/thing, mob/user)
-	if(istype(thing, /obj/item/tank))
+	if (istype(thing, /obj/item/tank))
 		to_chat(user, SPAN_WARNING("\The [src] has no socket for a gas tank."))
-	else if(istype(thing, /obj/item/reagent_containers))
-		if(container)
+	else if (istype(thing, /obj/item/reagent_containers))
+		if (container)
 			to_chat(user, SPAN_WARNING("\The [src] is already loaded with \the [container]."))
-		else if(user.unEquip(thing, src))
+		else if (user.unEquip(thing, src))
 			container = thing
 			user.visible_message(SPAN_NOTICE("\The [user] loads \the [thing] into \the [src]."))
 			verbs |= /obj/machinery/portable_atmospherics/reagent_sublimator/proc/remove_container
@@ -118,19 +118,19 @@
 
 	. = ..()
 
-	if(. == PROCESS_KILL)
+	if (. == PROCESS_KILL)
 		return
 
-	if(inoperable())
-		if(use_power)
+	if (inoperable())
+		if (use_power)
 			update_use_power(POWER_USE_OFF)
 			update_icon()
 		return
 
-	if(use_power >= POWER_USE_ACTIVE && container && container.reagents)
-		if(reagent_whitelist && length(reagent_whitelist))
+	if (use_power >= POWER_USE_ACTIVE && container && container.reagents)
+		if (reagent_whitelist && length(reagent_whitelist))
 			for(var/datum/reagent/R in container.reagents.reagent_list)
-				if(!is_type_in_list(R, reagent_whitelist))
+				if (!is_type_in_list(R, reagent_whitelist))
 					audible_message(SPAN_NOTICE("\The [src] pings rapidly and powers down, refusing to process the contents of \the [container]."))
 					update_use_power(POWER_USE_OFF)
 					update_icon()
@@ -140,15 +140,15 @@
 		var/added_gas = FALSE
 		for(var/datum/reagent/R in container.reagents.reagent_list)
 			var/gas_id = lowertext(R.name)
-			if(!(gas_id in gas_data.gases))
+			if (!(gas_id in gas_data.gases))
 				create_gas_data_for_reagent(R)
 			var/sublimate_this_tick = min(sublimated_units_per_tick, R.volume)
 			container.reagents.remove_reagent(R.type, sublimate_this_tick)
 			produced.adjust_gas(gas_id, sublimate_this_tick / REAGENT_GAS_EXCHANGE_FACTOR)
 			added_gas = TRUE
-			if(produced.total_moles >= sublimated_units_per_tick)
+			if (produced.total_moles >= sublimated_units_per_tick)
 				break
-		if(added_gas)
+		if (added_gas)
 			produced.temperature = output_temperature
 			air_contents.merge(produced)
 		else
@@ -161,18 +161,18 @@
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/examine(mob/user)
 	. = ..()
-	if(container)
-		if(container.reagents && container.reagents.total_volume)
+	if (container)
+		if (container.reagents && container.reagents.total_volume)
 			to_chat(user, "\The [src] has \a [container] loaded. It contains [container.reagents.total_volume]u of reagents.")
 		else
 			to_chat(user, "\The [src] has \a [container] loaded. It is empty.")
-	if(holding)
+	if (holding)
 		to_chat(user, "\The [src] has \a [holding] connected.")
-	if(reagent_whitelist)
+	if (reagent_whitelist)
 		to_chat(user, "\The [src]'s safety light is on.")
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/emag_act(remaining_charges, mob/user)
-	if(!emagged && length(reagent_whitelist))
+	if (!emagged && length(reagent_whitelist))
 		emagged = TRUE
 		reagent_whitelist.Cut()
 		to_chat(user, "\The [src]'s safety light turns off.")

@@ -23,7 +23,7 @@
 
 /singleton/surgery_step/fix_tendon/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && (affected.status & ORGAN_TENDON_CUT))
+	if (affected && (affected.status & ORGAN_TENDON_CUT))
 		return affected
 
 /singleton/surgery_step/fix_tendon/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -67,7 +67,7 @@
 
 /singleton/surgery_step/fix_vein/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && (affected.status & ORGAN_ARTERY_CUT))
+	if (affected && (affected.status & ORGAN_ARTERY_CUT))
 		return affected
 
 /singleton/surgery_step/fix_vein/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -116,11 +116,11 @@
 	return list(SKILL_EVA = SKILL_BASIC)
 
 /singleton/surgery_step/hardsuit/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(!istype(target))
+	if (!istype(target))
 		return FALSE
-	if(isWelder(tool))
+	if (isWelder(tool))
 		var/obj/item/weldingtool/welder = tool
-		if(!welder.isOn() || !welder.remove_fuel(1,user))
+		if (!welder.isOn() || !welder.remove_fuel(1,user))
 			return FALSE
 	return (target_zone == BP_CHEST) && istype(target.back, /obj/item/rig) && !(target.back.canremove)
 
@@ -132,7 +132,7 @@
 /singleton/surgery_step/hardsuit/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
 	var/obj/item/rig/rig = target.back
-	if(!istype(rig))
+	if (!istype(rig))
 		return
 	rig.reset()
 	user.visible_message(SPAN_NOTICE("[user] has cut through the support systems of [target]'s [rig] with \the [tool]."), \
@@ -165,7 +165,7 @@
 
 /singleton/surgery_step/sterilize/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && !affected.is_disinfected() && check_chemicals(tool))
+	if (affected && !affected.is_disinfected() && check_chemicals(tool))
 		return affected
 
 /singleton/surgery_step/sterilize/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
@@ -214,12 +214,12 @@
 	affected.disinfect()
 
 /singleton/surgery_step/sterilize/proc/check_chemicals(obj/item/reagent_containers/container)
-	if(istype(container) && container.is_open_container())
-		if(container.reagents.has_reagent(/datum/reagent/sterilizine))
+	if (istype(container) && container.is_open_container())
+		if (container.reagents.has_reagent(/datum/reagent/sterilizine))
 			return TRUE
 		else
 			var/datum/reagent/ethanol/booze = locate() in container.reagents.reagent_list
-			if(istype(booze))
-				if(booze.strength <= 40)
+			if (istype(booze))
+				if (booze.strength <= 40)
 					return TRUE
 	return FALSE

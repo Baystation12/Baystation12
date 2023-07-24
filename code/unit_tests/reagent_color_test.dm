@@ -7,10 +7,10 @@
 
 	for(var/T in typesof(/datum/reagent))
 		var/datum/reagent/R = T
-		if(length(initial(R.color)) != 7)
+		if (length(initial(R.color)) != 7)
 			bad_reagents += "[T] ([initial(R.color)])"
 
-	if(length(bad_reagents))
+	if (length(bad_reagents))
 		fail("Reagents with invalid colors found: [english_list(bad_reagents)]")
 	else
 		pass("All reagents have valid colors.")

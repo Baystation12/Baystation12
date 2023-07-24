@@ -10,15 +10,15 @@
 	hud_state = "invisibility"
 
 /spell/invisibility/choose_targets()
-	if(istype(holder, /mob/living/carbon/human))
+	if (istype(holder, /mob/living/carbon/human))
 		return holder
 
 /spell/invisibility/cast(mob/living/carbon/human/H, mob/user)
 	on = !on
-	if(on)
-		if(H.add_cloaking_source(src))
+	if (on)
+		if (H.add_cloaking_source(src))
 			playsound(get_turf(H), 'sound/effects/teleport.ogg', 90, 1)
 			H.mutations |= MUTATION_CLUMSY
-	else if(H.remove_cloaking_source(src))
+	else if (H.remove_cloaking_source(src))
 		playsound(get_turf(H), 'sound/effects/stealthoff.ogg', 90, 1)
 		H.mutations -= MUTATION_CLUMSY

@@ -29,7 +29,7 @@
 	var/valid_colors = list(COLOR_DARK_GRAY, COLOR_RED_GRAY, COLOR_BLUE_GRAY, COLOR_DARK_BLUE_GRAY, COLOR_GREEN_GRAY, COLOR_DARK_GREEN_GRAY)
 
 /obj/item/material/knife/folding/Initialize()
-	if(takes_colour)
+	if (takes_colour)
 		color = pick(valid_colors)
 	icon_state = handle_icon
 	update_icon()
@@ -39,7 +39,7 @@
 	open = !open
 	update_force()
 	update_icon()
-	if(open)
+	if (open)
 		user.visible_message(SPAN_WARNING("\The [user] opens \the [src]."))
 		playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
 	else
@@ -47,7 +47,7 @@
 	add_fingerprint(user)
 
 /obj/item/material/knife/folding/update_force()
-	if(open)
+	if (open)
 		edge = TRUE
 		sharp = TRUE
 		hitsound = 'sound/weapons/bladeslice.ogg'
@@ -67,7 +67,7 @@
 		base_parry_chance = initial(base_parry_chance)
 
 /obj/item/material/knife/folding/on_update_icon()
-	if(open)
+	if (open)
 		overlays.Cut()
 		overlays += overlay_image(icon, hardware_open, flags=RESET_COLOR)
 		item_state = "knife"
@@ -75,7 +75,7 @@
 		overlays.Cut()
 		overlays += overlay_image(icon, hardware_closed, flags=RESET_COLOR)
 		item_state = initial(item_state)
-	if(blood_overlay)
+	if (blood_overlay)
 		overlays += blood_overlay
 
 //Subtypes

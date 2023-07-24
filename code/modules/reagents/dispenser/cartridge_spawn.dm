@@ -4,9 +4,9 @@
 
 	var/obj/item/reagent_containers/chem_disp_cartridge/C
 	switch(size)
-		if("small") C = new /obj/item/reagent_containers/chem_disp_cartridge/small(usr.loc)
-		if("medium") C = new /obj/item/reagent_containers/chem_disp_cartridge/medium(usr.loc)
-		if("large") C = new /obj/item/reagent_containers/chem_disp_cartridge(usr.loc)
+		if ("small") C = new /obj/item/reagent_containers/chem_disp_cartridge/small(usr.loc)
+		if ("medium") C = new /obj/item/reagent_containers/chem_disp_cartridge/medium(usr.loc)
+		if ("large") C = new /obj/item/reagent_containers/chem_disp_cartridge(usr.loc)
 	C.reagents.add_reagent(reagent, C.volume)
 	var/datum/reagent/R = reagent
 	C.setLabel(initial(R.name))

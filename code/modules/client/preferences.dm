@@ -38,32 +38,32 @@
 	var/datum/browser/panel
 
 /datum/preferences/New(client/C)
-	if(istype(C))
+	if (istype(C))
 		client = C
 		client_ckey = C.ckey
 		SScharacter_setup.preferences_datums[C.ckey] = src
-		if(SScharacter_setup.initialized)
+		if (SScharacter_setup.initialized)
 			setup()
 		else
 			SScharacter_setup.prefs_awaiting_setup += src
 	..()
 
 /datum/preferences/proc/setup()
-	if(!length(GLOB.skills))
+	if (!length(GLOB.skills))
 		GET_SINGLETON(/singleton/hierarchy/skill)
 	player_setup = new(src)
 	gender = pick(MALE, FEMALE)
 	real_name = random_name(gender,species)
 	b_type = RANDOM_BLOOD_TYPE
 
-	if(client)
-		if(IsGuestKey(client.key))
+	if (client)
+		if (IsGuestKey(client.key))
 			is_guest = TRUE
 		else
 			load_data()
 
 	sanitize_preferences()
-	if(client && istype(client.mob, /mob/new_player))
+	if (client && istype(client.mob, /mob/new_player))
 		var/mob/new_player/np = client.mob
 		np.new_player_panel(TRUE)
 
@@ -72,10 +72,10 @@
 	var/stage = "pre"
 	try
 		var/pref_path = get_path(client_ckey, "preferences")
-		if(!fexists(pref_path))
+		if (!fexists(pref_path))
 			stage = "migrate"
 			// Try to migrate legacy savefile-based preferences
-			if(!migrate_legacy_preferences())
+			if (!migrate_legacy_preferences())
 				// If there's no old save, there'll be nothing to load.
 				return
 
@@ -93,11 +93,11 @@
 	// - a maximum of 40 slots were used
 
 	var/legacy_pref_path = get_path(client.ckey, "preferences", "sav")
-	if(!fexists(legacy_pref_path))
+	if (!fexists(legacy_pref_path))
 		return 0
 
 	var/savefile/S = new(legacy_pref_path)
-	if(S["version"] != 17)
+	if (S["version"] != 17)
 		return 0
 
 	// Legacy version 17 ~= new version 1
@@ -108,7 +108,7 @@
 
 	S.cd = "/torch"
 	for(var/slot = 1 to 40)
-		if(!S.dir.Find("character[slot]"))
+		if (!S.dir.Find("character[slot]"))
 			continue
 		S.cd = "/torch/character[slot]"
 		default_slot = slot
@@ -123,16 +123,16 @@
 	return 1
 
 /datum/preferences/proc/get_content(mob/user)
-	if(!SScharacter_setup.initialized)
+	if (!SScharacter_setup.initialized)
 		return
-	if(!user || !user.client)
+	if (!user || !user.client)
 		return
 
 	var/dat = "<center>"
 
-	if(is_guest)
+	if (is_guest)
 		dat += "Please create an account to save your preferences. If you have an account and are seeing this, please adminhelp for assistance."
-	else if(load_failed)
+	else if (load_failed)
 		dat += "Loading your savefile failed. Please adminhelp for assistance."
 	else
 		dat += "Slot - "
@@ -167,11 +167,11 @@
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
 
-	if(!user)	return
-	if(isliving(user)) return
+	if (!user)	return
+	if (isliving(user)) return
 
-	if(href_list["preference"] == "open_whitelist_forum")
-		if(config.forum_url)
+	if (href_list["preference"] == "open_whitelist_forum")
+		if (config.forum_url)
 			send_link(user, config.forum_url)
 		else
 			to_chat(user, SPAN_DANGER("The forum URL is not set in the server configuration."))
@@ -180,24 +180,24 @@
 	return 1
 
 /datum/preferences/Topic(href, list/href_list)
-	if(..())
+	if (..())
 		return 1
 
 	if (href_list["close"])
 		popup = null
 
-	if(href_list["save"])
+	if (href_list["save"])
 		save_preferences()
 		save_character()
-	else if(href_list["reload"])
+	else if (href_list["reload"])
 		load_preferences()
 		load_character()
 		sanitize_preferences()
-	else if(href_list["load"])
-		if(!IsGuestKey(usr.key))
+	else if (href_list["load"])
+		if (!IsGuestKey(usr.key))
 			open_load_dialog(usr, href_list["details"])
 			return 1
-	else if(href_list["changeslot"])
+	else if (href_list["changeslot"])
 		load_character(text2num(href_list["changeslot"]))
 		sanitize_preferences()
 		close_load_dialog(usr)
@@ -211,8 +211,8 @@
 
 		if (href_list["details"])
 			return 1
-	else if(href_list["resetslot"])
-		if(real_name != input("This will reset the current slot. Enter the character's full name to confirm."))
+	else if (href_list["resetslot"])
+		if (real_name != input("This will reset the current slot. Enter the character's full name to confirm."))
 			return 0
 		load_character(SAVE_RESET)
 		sanitize_preferences()
@@ -250,9 +250,9 @@
 	// Replace any missing limbs.
 	for(var/name in BP_ALL_LIMBS)
 		var/obj/item/organ/external/O = character.organs_by_name[name]
-		if(!O && organ_data[name] != "amputated")
+		if (!O && organ_data[name] != "amputated")
 			var/list/organ_data = character.species.has_limbs[name]
-			if(!islist(organ_data)) continue
+			if (!islist(organ_data)) continue
 			var/limb_path = organ_data["path"]
 			O = new limb_path(character)
 
@@ -260,21 +260,21 @@
 	for(var/name in BP_BY_DEPTH)
 		var/status = organ_data[name]
 		var/obj/item/organ/external/O = character.organs_by_name[name]
-		if(!O)
+		if (!O)
 			continue
 		O.status = 0
 		O.model = null
-		if(status == "amputated")
+		if (status == "amputated")
 			character.organs_by_name[O.organ_tag] = null
 			character.organs -= O
-			if(O.children) // This might need to become recursive.
+			if (O.children) // This might need to become recursive.
 				for(var/obj/item/organ/external/child in O.children)
 					character.organs_by_name[child.organ_tag] = null
 					character.organs -= child
 					qdel(child)
 			qdel(O)
-		else if(status == "cyborg")
-			if(rlimb_data[name])
+		else if (status == "cyborg")
+			if (rlimb_data[name])
 				O.robotize(rlimb_data[name])
 			else
 				O.robotize()
@@ -285,16 +285,16 @@
 
 	//For species that don't care about your silly prefs
 	character.species.handle_limbs_setup(character)
-	if(!is_preview_copy)
+	if (!is_preview_copy)
 		for(var/name in list(BP_HEART,BP_EYES,BP_BRAIN,BP_LUNGS,BP_LIVER,BP_KIDNEYS,BP_STOMACH))
 			var/status = organ_data[name]
-			if(!status)
+			if (!status)
 				continue
 			var/obj/item/organ/I = character.internal_organs_by_name[name]
-			if(I)
-				if(status == "assisted")
+			if (I)
+				if (status == "assisted")
 					I.mechassist()
-				else if(status == "mechanical")
+				else if (status == "mechanical")
 					I.robotize()
 
 	QDEL_NULL_LIST(character.worn_underwear)
@@ -302,12 +302,12 @@
 
 	for(var/underwear_category_name in all_underwear)
 		var/datum/category_group/underwear/underwear_category = GLOB.underwear.categories_by_name[underwear_category_name]
-		if(underwear_category)
+		if (underwear_category)
 			var/underwear_item_name = all_underwear[underwear_category_name]
 			var/datum/category_item/underwear/UWD = underwear_category.items_by_name[underwear_item_name]
 			var/metadata = all_underwear_metadata[underwear_category_name]
 			var/obj/item/underwear/UW = UWD.create_underwear(character, metadata)
-			if(UW)
+			if (UW)
 				UW.ForceEquipUnderwear(character, FALSE)
 		else
 			all_underwear -= underwear_category_name
@@ -334,7 +334,7 @@
 	character.update_hair(0)
 	character.update_icons()
 
-	if(is_preview_copy)
+	if (is_preview_copy)
 		return
 
 	for(var/token in cultural_info)
@@ -359,11 +359,11 @@
 	character.gen_record = gen_record
 	character.exploit_record = exploit_record
 
-	if(LAZYLEN(character.descriptors))
+	if (LAZYLEN(character.descriptors))
 		for(var/entry in body_descriptors)
 			character.descriptors[entry] = body_descriptors[entry]
 
-	if(!character.isSynthetic())
+	if (!character.isSynthetic())
 		character.set_nutrition(rand(140,360))
 		character.set_hydration(rand(140,360))
 
@@ -375,7 +375,7 @@
 	dat += "<b>Select a character slot to load</b><hr>"
 	for(var/i=1, i<= config.character_slots, i++)
 		var/name = (slot_names && slot_names[get_slot_key(i)]) || "Character[i]"
-		if(i==default_slot)
+		if (i==default_slot)
 			name = "<b>[name]</b>"
 		dat += "<a href='?src=\ref[src];changeslot=[i];[details?"details=1":""]'>[name]</a><br>"
 
@@ -386,7 +386,7 @@
 	panel.open()
 
 /datum/preferences/proc/close_load_dialog(mob/user)
-	if(panel)
+	if (panel)
 		panel.close()
 		panel = null
 	close_browser(user, "window=saves")

@@ -57,7 +57,7 @@
 
 	switch(dir)
 
-		if(NORTH)
+		if (NORTH)
 
 			int_panel_x = ux + floor(lift_size_x/2)
 			int_panel_y = uy + 1
@@ -74,7 +74,7 @@
 			light_x2 = ux + lift_size_x - 1
 			light_y2 = uy + 1
 
-		if(SOUTH)
+		if (SOUTH)
 
 			int_panel_x = ux + floor(lift_size_x/2)
 			int_panel_y = ey - 1
@@ -91,7 +91,7 @@
 			light_x2 = ux + lift_size_x - 1
 			light_y2 = uy + lift_size_y - 1
 
-		if(EAST)
+		if (EAST)
 
 			int_panel_x = ux+1
 			int_panel_y = uy + floor(lift_size_y/2)
@@ -108,7 +108,7 @@
 			light_x2 = ux + 1
 			light_y2 = uy + lift_size_x - 1
 
-		if(WEST)
+		if (WEST)
 
 			int_panel_x = ex-1
 			int_panel_y = uy + floor(lift_size_y/2)
@@ -138,30 +138,30 @@
 
 				var/turf/checking = locate(tx,ty,cz)
 
-				if(!istype(checking))
+				if (!istype(checking))
 					log_debug("[name] cannot find a component turf at [tx],[ty] on floor [cz]. Aborting.")
 					qdel(src)
 					return
 
 				// Update path appropriately if needed.
 				var/swap_to = /turf/simulated/open
-				if(cz == uz)                                                                       // Elevator.
-					if((tx == ux || ty == uy || tx == ex || ty == ey) && !(tx >= door_x1 && tx <= door_x2 && ty >= door_y1 && ty <= door_y2))
+				if (cz == uz)                                                                       // Elevator.
+					if ((tx == ux || ty == uy || tx == ex || ty == ey) && !(tx >= door_x1 && tx <= door_x2 && ty >= door_y1 && ty <= door_y2))
 						swap_to = wall_type
 					else
 						swap_to = floor_type
 
-				if(checking.type != swap_to)
+				if (checking.type != swap_to)
 					checking.ChangeTurf(swap_to)
 					// Let's make absolutely sure that we have the right turf.
 					checking = locate(tx,ty,cz)
 
 				// Clear out contents.
 				for(var/atom/movable/thing in checking.contents)
-					if(thing.simulated)
+					if (thing.simulated)
 						qdel(thing)
 
-				if(tx >= ux && tx <= ex && ty >= uy && ty <= ey)
+				if (tx >= ux && tx <= ex && ty >= uy && ty <= ey)
 					floor_turfs += checking
 
 		var/area_path = areas_to_use[az]
@@ -175,17 +175,17 @@
 			for(var/ty = door_y1 to door_y2)
 				var/turf/checking = locate(tx,ty,cz)
 				var/internal = 1
-				if(!(checking in floor_turfs))
+				if (!(checking in floor_turfs))
 					internal = 0
-					if(checking.type != floor_type)
+					if (checking.type != floor_type)
 						checking.ChangeTurf(floor_type)
 						checking = locate(tx,ty,cz)
 					for(var/atom/movable/thing in checking.contents)
-						if(thing.simulated)
+						if (thing.simulated)
 							qdel(thing)
-				if(checking.type == floor_type) // Don't build over empty space on lower levels.
+				if (checking.type == floor_type) // Don't build over empty space on lower levels.
 					var/obj/machinery/door/airlock/lift/newdoor = new door_type(checking)
-					if(internal)
+					if (internal)
 						lift.doors += newdoor
 						newdoor.lift = cfloor
 					else
@@ -206,7 +206,7 @@
 		var/turf/placing2 = locate(light_x2, light_y2, cz)
 		var/obj/machinery/light/light1 = new(placing1, light)
 		var/obj/machinery/light/light2 = new(placing2, light)
-		if(udir == NORTH || udir == SOUTH)
+		if (udir == NORTH || udir == SOUTH)
 			light1.set_dir(WEST)
 			light2.set_dir(EAST)
 		else
@@ -214,7 +214,7 @@
 			light2.set_dir(NORTH)
 
 		// Update area.
-		if(az > length(areas_to_use))
+		if (az > length(areas_to_use))
 			log_debug("Insufficient defined areas in turbolift datum, aborting.")
 			qdel(src)
 			return

@@ -14,7 +14,7 @@
 	var/obj/item/clothing/glasses/glasses
 
 /datum/rig_vision/New()
-	if(ispath(glasses))
+	if (ispath(glasses))
 		glasses = new glasses
 
 /datum/rig_vision/nvg
@@ -160,17 +160,17 @@
 
 	var/starting_up = !active
 
-	if(!..() || !vision_modes)
+	if (!..() || !vision_modes)
 		return 0
 
 	// Don't cycle if this engage() is being called by activate().
-	if(starting_up)
+	if (starting_up)
 		to_chat(holder.wearer, SPAN_INFO("You activate your visual sensors."))
 		return 1
 
-	if(length(vision_modes) > 1)
+	if (length(vision_modes) > 1)
 		vision_index++
-		if(vision_index > length(vision_modes))
+		if (vision_index > length(vision_modes))
 			vision_index = 1
 		vision = vision_modes[vision_index]
 
@@ -182,7 +182,7 @@
 /obj/item/rig_module/vision/Initialize()
 	. = ..()
 
-	if(!vision_modes)
+	if (!vision_modes)
 		return
 
 	vision_index = 1
@@ -190,7 +190,7 @@
 
 	for(var/vision_mode in vision_modes)
 		var/datum/rig_vision/vision_datum = new vision_mode
-		if(!vision) vision = vision_datum
+		if (!vision) vision = vision_datum
 		processed_vision += vision_datum
 
 	vision_modes = processed_vision

@@ -48,40 +48,40 @@
 
 /obj/machinery/chem_master/ex_act(severity)
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			qdel(src)
 			return
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
 				return
 
 /obj/machinery/chem_master/attackby(obj/item/B as obj, mob/user as mob)
 
-	if(istype(B, /obj/item/reagent_containers/glass) || istype(B, /obj/item/reagent_containers/ivbag))
+	if (istype(B, /obj/item/reagent_containers/glass) || istype(B, /obj/item/reagent_containers/ivbag))
 
-		if(beaker)
+		if (beaker)
 			to_chat(user, "A container is already loaded into the machine.")
 			return
-		if(!user.unEquip(B, src))
+		if (!user.unEquip(B, src))
 			return
 		beaker = B
 		to_chat(user, "You add the container to the machine!")
 		icon_state = "mixer1"
 		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
-	else if(istype(B, /obj/item/storage/pill_bottle))
+	else if (istype(B, /obj/item/storage/pill_bottle))
 
-		if(loaded_pill_bottle)
+		if (loaded_pill_bottle)
 			to_chat(user, "A pill bottle is already loaded into the machine.")
 			return
-		if(!user.unEquip(B, src))
+		if (!user.unEquip(B, src))
 			return
 		loaded_pill_bottle = B
 		to_chat(user, "You add the pill bottle into the dispenser slot!")
 
 /obj/machinery/chem_master/proc/eject_beaker(mob/user)
-	if(!beaker)
+	if (!beaker)
 		return
 	var/obj/item/reagent_containers/B = beaker
 	user.put_in_hands(B)
@@ -94,22 +94,22 @@
 	return clamp(reagent_limit - reagents.total_volume, 0, reagent_limit)
 
 /obj/machinery/chem_master/AltClick(mob/user)
-	if(CanDefaultInteract(user))
+	if (CanDefaultInteract(user))
 		eject_beaker(user)
 		return TRUE
 	return ..()
 
 /obj/machinery/chem_master/Topic(href, href_list, state)
-	if(..())
+	if (..())
 		return TRUE
 	var/mob/user = usr
 
 	if (href_list["ejectp"])
-		if(loaded_pill_bottle)
+		if (loaded_pill_bottle)
 			loaded_pill_bottle.dropInto(loc)
 			loaded_pill_bottle = null
 
-	if(beaker)
+	if (beaker)
 		var/datum/reagents/R = beaker.reagents
 		if (href_list["analyze"])
 			var/datum/reagent/reagent = locate(href_list["analyze"]) in R.reagent_list
@@ -119,12 +119,12 @@
 				analyzed_reagent = reagent
 
 		else if (href_list["add"])
-			if(href_list["amount"])
+			if (href_list["amount"])
 				var/datum/reagent/their_reagent = locate(href_list["add"]) in R.reagent_list
-				if(their_reagent)
+				if (their_reagent)
 					var/mult = 1
 					var/amount = clamp((text2num(href_list["amount"])), 0, get_remaining_volume())
-					if(sloppy)
+					if (sloppy)
 						var/contaminants = fetch_contaminants(user, R, their_reagent)
 						for(var/datum/reagent/reagent in contaminants)
 							R.trans_type_to(src, reagent.type, round(rand()*amount/5, 0.1))
@@ -134,19 +134,19 @@
 
 		else if (href_list["addcustom"])
 			var/datum/reagent/their_reagent = locate(href_list["addcustom"]) in R.reagent_list
-			if(their_reagent)
+			if (their_reagent)
 				useramount = input("Select the amount of reagents to transfer.", 30, useramount) as null|num
-				if(useramount)
+				if (useramount)
 					useramount = clamp(useramount, 0, 200)
 					Topic(href, list("amount" = "[useramount]", "add" = href_list["addcustom"]), state)
 
 		else if (href_list["remove"])
-			if(href_list["amount"] && beaker)
+			if (href_list["amount"] && beaker)
 				var/datum/reagent/my_reagents = locate(href_list["remove"]) in reagents.reagent_list
-				if(my_reagents)
+				if (my_reagents)
 					var/amount = clamp((text2num(href_list["amount"])), 0, 200)
 					var/contaminants = fetch_contaminants(user, reagents, my_reagents)
-					if(to_beaker)
+					if (to_beaker)
 						reagents.trans_type_to(beaker, my_reagents.type, amount)
 						for(var/datum/reagent/reagent in contaminants)
 							reagents.trans_type_to(beaker, reagent.type, round(rand()*amount, 0.1))
@@ -157,9 +157,9 @@
 
 		else if (href_list["removecustom"])
 			var/datum/reagent/my_reagents = locate(href_list["removecustom"]) in reagents.reagent_list
-			if(my_reagents)
+			if (my_reagents)
 				useramount = input("Select the amount to transfer.", 30, useramount) as null|num
-				if(useramount)
+				if (useramount)
 					useramount = clamp(useramount, 0, 200)
 					Topic(href, list("amount" = "[useramount]", "remove" = href_list["removecustom"]), state)
 
@@ -200,7 +200,7 @@
 				return
 			var/count = 1
 
-			if(reagents.total_volume/count < 1) //Sanity checking.
+			if (reagents.total_volume/count < 1) //Sanity checking.
 				return
 
 			if (href_list["createpill_multiple"])
@@ -209,7 +209,7 @@
 					return
 				count = clamp(count, 1, max_pill_count)
 
-			if(reagents.total_volume/count < 1) //Sanity checking.
+			if (reagents.total_volume/count < 1) //Sanity checking.
 				return
 
 			var/amount_per_pill = reagents.total_volume / count
@@ -220,30 +220,30 @@
 			if (!name)
 				return
 
-			if(reagents.total_volume/count < 1) //Sanity checking.
+			if (reagents.total_volume/count < 1) //Sanity checking.
 				return
 
 			while (count-- && count >= 0)
 				var/obj/item/reagent_containers/pill/P = new/obj/item/reagent_containers/pill(loc)
-				if(!name) name = reagents.get_master_reagent_name()
+				if (!name) name = reagents.get_master_reagent_name()
 				P.SetName("[name] pill")
 				P.icon_state = "pill"+pillsprite
-				if(P.icon_state in list("pill1", "pill2", "pill3", "pill4", "pill5")) // if using greyscale, take colour from reagent
+				if (P.icon_state in list("pill1", "pill2", "pill3", "pill4", "pill5")) // if using greyscale, take colour from reagent
 					P.color = reagents.get_color()
 				reagents.trans_to_obj(P,amount_per_pill)
-				if(loaded_pill_bottle)
-					if(length(loaded_pill_bottle.contents) < loaded_pill_bottle.max_storage_space)
+				if (loaded_pill_bottle)
+					if (length(loaded_pill_bottle.contents) < loaded_pill_bottle.max_storage_space)
 						P.forceMove(loaded_pill_bottle)
 
 		else if (href_list["createbottle"])
 			create_bottle(user)
-		else if(href_list["change_pill"])
+		else if (href_list["change_pill"])
 			switching_sprite = CHEMMASTER_SWITCH_SPRITE_PILL
-		else if(href_list["change_bottle"])
+		else if (href_list["change_bottle"])
 			switching_sprite = CHEMMASTER_SWITCH_SPRITE_BOTTLE
-		else if(href_list["pill_sprite"])
+		else if (href_list["pill_sprite"])
 			pillsprite = href_list["pill_sprite"]
-		else if(href_list["bottle_sprite"])
+		else if (href_list["bottle_sprite"])
 			bottlesprite = href_list["bottle_sprite"]
 
 	return TOPIC_REFRESH
@@ -251,18 +251,18 @@
 /obj/machinery/chem_master/proc/fetch_contaminants(mob/user, datum/reagents/reagents, datum/reagent/main_reagent)
 	. = list()
 	for(var/datum/reagent/reagent in reagents.reagent_list)
-		if(reagent == main_reagent)
+		if (reagent == main_reagent)
 			continue
-		if(prob(user.skill_fail_chance(core_skill, 100)))
+		if (prob(user.skill_fail_chance(core_skill, 100)))
 			. += reagent
 
 /obj/machinery/chem_master/proc/get_chem_info(datum/reagent/reagent, heading = "Chemical Analysis", detailed_blood = 1)
-	if(!beaker || !reagent)
+	if (!beaker || !reagent)
 		return
 	. = list()
 	. += "<TITLE>[name]</TITLE>"
 	. += "<h2>[heading] - [reagent.name]</h2>"
-	if(detailed_blood && istype(reagent, /datum/reagent/blood))
+	if (detailed_blood && istype(reagent, /datum/reagent/blood))
 		var/datum/reagent/blood/B = reagent
 		. += "<br><b>Species of Origin:</b> [B.data["species"]]<br><b>Blood Type:</b> [B.data["blood_type"]]<br><b>DNA Hash:</b> [B.data["blood_DNA"]]"
 	else
@@ -285,7 +285,7 @@
 	return TRUE
 
 /obj/machinery/chem_master/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = TRUE)
-	if(!(user.client in has_sprites))
+	if (!(user.client in has_sprites))
 		spawn()
 			has_sprites += user.client
 			for(var/i = 1 to MAX_PILL_SPRITE)
@@ -351,7 +351,7 @@
 			data["bottleSprites"] += list(bottle_sprite)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		ui = new(user, src, ui_key, "chemmaster.tmpl", name, 575, 600)
 		ui.set_initial_data(data)
 		ui.open()

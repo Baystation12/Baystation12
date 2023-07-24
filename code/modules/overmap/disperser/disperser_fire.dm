@@ -16,12 +16,12 @@
  */
 /obj/machinery/computer/ship/disperser/proc/fire(mob/user)
 	log_and_message_admins("attempted to launch a disperser beam.")
-	if(!link_parts())
+	if (!link_parts())
 		return FALSE
-	if(!front.powered() || !middle.powered() || !back.powered())
+	if (!front.powered() || !middle.powered() || !back.powered())
 		return FALSE
 	var/chargetype = get_charge_type()
-	if(chargetype <= 0)
+	if (chargetype <= 0)
 		return FALSE
 
 	var/atom/movable/atomcharge = get_charge()
@@ -32,44 +32,44 @@
 	var/distance = 0
 	for(var/turf/T in getline(get_step(front,front.dir),get_target_turf(start, direction)))
 		distance++
-		if(T.density)
-			if(distance < 7)
+		if (T.density)
+			if (distance < 7)
 				explosion(T, 6)
 				continue
 			else
 				T.ex_act(EX_ACT_DEVASTATING)
 		for(var/atom/A in T)
-			if(A.density)
-				if(distance < 7)
+			if (A.density)
+				if (distance < 7)
 					explosion(A, 6)
 					break
 				else
 					A.ex_act(EX_ACT_DEVASTATING)
 
 	for(var/mob/M in GLOB.player_list)
-		if(!AreConnectedZLevels(get_z(M), get_z(start)))
+		if (!AreConnectedZLevels(get_z(M), get_z(start)))
 			continue
 		shake_camera(M, 25)
-		if(!isdeaf(M))
+		if (!isdeaf(M))
 			sound_to(M, sound('sound/effects/explosionfar.ogg', volume=10))
 
-		if(M.can_be_floored())
+		if (M.can_be_floored())
 			var/shouldstumble = FALSE
 			var/sincelastmove = world.time - M.l_move_time
 
-			if(sincelastmove > QUICK_TO_STANDING SECONDS)
+			if (sincelastmove > QUICK_TO_STANDING SECONDS)
 				shouldstumble = prob(STANDING_FALL_PROB)
-			else if(sincelastmove > DELIBERATE_TO_STANDING)
+			else if (sincelastmove > DELIBERATE_TO_STANDING)
 				shouldstumble = MOVING_QUICKLY(M) ? prob(RUNNING_FALL_PROB) : prob(STANDING_FALL_PROB)
 			else
 				shouldstumble = MOVING_QUICKLY(M) ? prob(RUNNING_FALL_PROB) : prob(WALKING_FALL_PROB)
 
-			if(shouldstumble)
+			if (shouldstumble)
 				to_chat(M, SPAN_DANGER("You stumble onto the floor from the shaking!"))
 				M.AdjustStunned(2)
 				M.AdjustWeakened(2)
 
-	if(front)
+	if (front)
 		front.layer = ABOVE_OBJ_LAYER
 	playsound(start, 'sound/machines/disperser_fire.ogg', 100, 1)
 	handle_beam(start, direction)
@@ -78,12 +78,12 @@
 	if (chargetype != OVERMAP_WEAKNESS_DROPPOD)
 		qdel(atomcharge)
 
-	if(prob(cool_failchance()))
+	if (prob(cool_failchance()))
 		explosion(middle, rand(6, 9))
 	next_shot = coolinterval + world.time
 
-	if(prob(100 - accuracy))
-		if(chargetype == OVERMAP_WEAKNESS_DROPPOD)
+	if (prob(100 - accuracy))
+		if (chargetype == OVERMAP_WEAKNESS_DROPPOD)
 			// Remove it in case it's a droppod.
 			atomcharge.forceMove(locate(rand(1,world.maxx),rand(1,world.maxy), GLOB.using_map.get_empty_zlevel()))
 		return TRUE
@@ -97,30 +97,30 @@
 	for(var/obj/effect/overmap/event/O in overmaptarget)
 		candidates += O
 	// Next we see if there are any ships around. Logically they are between us and the sector if one exists.
-	if(!length(candidates))
+	if (!length(candidates))
 		for(var/obj/effect/overmap/visitable/ship/S in overmaptarget)
-			if(S == linked)
+			if (S == linked)
 				/// Why are you shooting yourself?
 				continue
 			candidates += S
 
 	// No events, no ships, the last thing to check is a sector.
-	if(!length(candidates))
+	if (!length(candidates))
 		for(var/obj/effect/overmap/O in overmaptarget)
-			if(O == linked)
+			if (O == linked)
 				// Why are you shooting yourself?
 				continue
 			candidates += O
 
 	// Way to waste a charge
-	if(!length(candidates))
+	if (!length(candidates))
 		return TRUE
 
 	var/obj/effect/overmap/finaltarget = pick(candidates)
 	log_and_message_admins("A type [chargetype] disperser beam was launched at [finaltarget].", location=finaltarget)
 
 	// Deletion of the overmap effect and the actual event trigger. Bye bye pesky meteors.
-	if(istype(finaltarget, /obj/effect/overmap/event))
+	if (istype(finaltarget, /obj/effect/overmap/event))
 		fire_at_event(finaltarget, chargetype)
 		qdel(atomcharge)
 	// After this point ships act basically as sectors so we stop taking care of differences
@@ -133,7 +133,7 @@
  * If the shot type and the event type's weakness match, it kills it.
  */
 /obj/machinery/computer/ship/disperser/proc/fire_at_event(obj/effect/overmap/event/finaltarget, chargetype)
-	if(chargetype & finaltarget.weaknesses)
+	if (chargetype & finaltarget.weaknesses)
 		var/turf/T = finaltarget.loc
 		qdel(finaltarget)
 		overmap_event_handler.update_hazards(T)
@@ -161,31 +161,31 @@
 		targetturf = areaturf
 
 	log_and_message_admins("Disperser beam hit sector at [targetturf.loc.name].", location=targetturf)
-	if(chargetype == OVERMAP_WEAKNESS_DROPPOD)
-		if(targetturf.density)
+	if (chargetype == OVERMAP_WEAKNESS_DROPPOD)
+		if (targetturf.density)
 			targetturf.ex_act(EX_ACT_DEVASTATING)
 		for(var/atom/A in targetturf)
 			A.ex_act(EX_ACT_LIGHT)
 
 		for(var/mob/M in GLOB.player_list)
-			if(!AreConnectedZLevels(get_z(M), get_z(targetturf)))
+			if (!AreConnectedZLevels(get_z(M), get_z(targetturf)))
 				continue
 			shake_camera(M, 25)
-			if(!isdeaf(M))
+			if (!isdeaf(M))
 				sound_to(M, sound('sound/effects/explosionfar.ogg', volume=10))
 
-			if(M.can_be_floored())
+			if (M.can_be_floored())
 				var/shouldstumble = FALSE
 				var/sincelastmove = world.time - M.l_move_time
 
-				if(sincelastmove > QUICK_TO_STANDING SECONDS)
+				if (sincelastmove > QUICK_TO_STANDING SECONDS)
 					shouldstumble = prob(STANDING_FALL_PROB)
-				else if(sincelastmove > DELIBERATE_TO_STANDING)
+				else if (sincelastmove > DELIBERATE_TO_STANDING)
 					shouldstumble = MOVING_QUICKLY(M) ? prob(RUNNING_FALL_PROB) : prob(STANDING_FALL_PROB)
 				else
 					shouldstumble = MOVING_QUICKLY(M) ? prob(RUNNING_FALL_PROB) : prob(WALKING_FALL_PROB)
 
-				if(shouldstumble)
+				if (shouldstumble)
 					to_chat(M, SPAN_DANGER("You stumble onto the floor from the shaking!"))
 					M.AdjustStunned(2)
 					M.AdjustWeakened(2)
@@ -203,7 +203,7 @@
 /obj/machinery/computer/ship/disperser/proc/handle_beam(turf/start, direction)
 	set waitfor = FALSE
 	start.Beam(get_target_turf(start, direction), "disperser_beam", time = 50, maxdistance = world.maxx)
-	if(front)
+	if (front)
 		front.layer = initial(front.layer)
 
 /obj/machinery/computer/ship/disperser/proc/handle_overbeam()
@@ -212,13 +212,13 @@
 
 /obj/machinery/computer/ship/disperser/proc/get_target_turf(turf/start, direction)
 	switch(direction)
-		if(NORTH)
+		if (NORTH)
 			return locate(start.x,world.maxy,start.z)
-		if(SOUTH)
+		if (SOUTH)
 			return locate(start.x,1,start.z)
-		if(WEST)
+		if (WEST)
 			return locate(1,start.y,start.z)
-		if(EAST)
+		if (EAST)
 			return locate(world.maxx,start.y,start.z)
 
 #undef QUICK_TO_STANDING

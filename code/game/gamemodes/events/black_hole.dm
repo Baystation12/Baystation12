@@ -16,7 +16,7 @@
 /obj/effect/bhole/proc/controller()
 	while(src)
 
-		if(!isturf(loc))
+		if (!isturf(loc))
 			qdel(src)
 			return
 
@@ -27,7 +27,7 @@
 			qdel(O)
 		var/base_turf = get_base_turf_by_area(src)
 		for(var/turf/simulated/ST in orange(1,src))
-			if(ST.type == base_turf)
+			if (ST.type == base_turf)
 				continue
 			ST.ChangeTurf(base_turf)
 
@@ -54,13 +54,13 @@
 
 
 		//MOVEMENT
-		if( prob(50) )
+		if ( prob(50) )
 			src.anchored = FALSE
 			step(src,pick(GLOB.alldirs))
 			src.anchored = TRUE
 
 /obj/effect/bhole/proc/grav(r, ex_act_force, pull_chance, turf_removal_chance)
-	if(!isturf(loc))	//blackhole cannot be contained inside anything. Weird stuff might happen
+	if (!isturf(loc))	//blackhole cannot be contained inside anything. Weird stuff might happen
 		qdel(src)
 		return
 	for(var/t = -r, t < r, t++)
@@ -73,12 +73,12 @@
 /obj/effect/bhole/proc/affect_coord(x, y, ex_act_force, pull_chance, turf_removal_chance)
 	//Get turf at coordinate
 	var/turf/T = locate(x, y, z)
-	if(isnull(T))	return
+	if (isnull(T))	return
 
 	//Pulling and/or ex_act-ing movable atoms in that turf
-	if( prob(pull_chance) )
+	if ( prob(pull_chance) )
 		for(var/obj/O in T.contents)
-			if(O.anchored)
+			if (O.anchored)
 				O.ex_act(ex_act_force)
 			else
 				step_towards(O,src)
@@ -86,8 +86,8 @@
 			step_towards(M,src)
 
 	//Destroying the turf
-	if( T && istype(T,/turf/simulated) && prob(turf_removal_chance) )
+	if ( T && istype(T,/turf/simulated) && prob(turf_removal_chance) )
 		var/turf/simulated/ST = T
 		var/base_turf = get_base_turf_by_area(src)
-		if(ST.type != base_turf)
+		if (ST.type != base_turf)
 			ST.ChangeTurf(base_turf)

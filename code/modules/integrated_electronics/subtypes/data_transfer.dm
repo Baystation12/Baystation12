@@ -26,11 +26,11 @@
 	extended_desc += " This multiplexer has a range from 1 to [length(inputs) - 1]."
 
 /obj/item/integrated_circuit/transfer/multiplexer/do_work(ord)
-	if(ord != 1)
+	if (ord != 1)
 		return
 	var/input_index = get_pin_data(IC_INPUT, 1)
 
-	if(!isnull(input_index) && (input_index >= 1 && input_index < length(inputs)))
+	if (!isnull(input_index) && (input_index >= 1 && input_index < length(inputs)))
 		set_pin_data(IC_OUTPUT, 1,get_pin_data(IC_INPUT, input_index + 1))
 		push_data()
 	activate_pin(2)
@@ -76,10 +76,10 @@
 	extended_desc += " This demultiplexer has a range from 1 to [length(outputs)]."
 
 /obj/item/integrated_circuit/transfer/demultiplexer/do_work(ord)
-	if(ord != 1)
+	if (ord != 1)
 		return
 	var/output_index = get_pin_data(IC_INPUT, 1)
-	if(!isnull(output_index) && (output_index >= 1 && output_index <= length(outputs)))
+	if (!isnull(output_index) && (output_index >= 1 && output_index <= length(outputs)))
 		for(var/i in 1 to LAZYLEN(outputs)) //Clear everything out
 			set_pin_data(IC_OUTPUT,i,null)
 		var/datum/integrated_io/O = outputs[output_index]
@@ -131,7 +131,7 @@
 /obj/item/integrated_circuit/transfer/pulsedemultiplexer/do_work()
 	var/output_index = get_pin_data(IC_INPUT, 1)
 
-	if(output_index == clamp(output_index, 1, number_of_pins))
+	if (output_index == clamp(output_index, 1, number_of_pins))
 		activate_pin(round(output_index + 1 ,1))
 
 /obj/item/integrated_circuit/transfer/pulsedemultiplexer/medium

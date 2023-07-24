@@ -19,10 +19,10 @@ If the spell_projectile is seeking, it will update its target every process and 
 	for(var/atom/target in targets)
 		var/obj/item/projectile/projectile = new proj_type(user.loc, user.dir)
 
-		if(!projectile)
+		if (!projectile)
 			return
 
-		if(istype(projectile, /obj/item/projectile/spell_projectile))
+		if (istype(projectile, /obj/item/projectile/spell_projectile))
 			var/obj/item/projectile/spell_projectile/SP = projectile
 			SP.carried = src //casting is magical
 		projectile.original = target
@@ -40,7 +40,7 @@ If the spell_projectile is seeking, it will update its target every process and 
 /spell/targeted/projectile/proc/choose_prox_targets(mob/user = usr, atom/movable/spell_holder)
 	var/list/targets = list()
 	for(var/mob/living/M in range(spell_holder, cast_prox_range))
-		if(M == user && !(spell_flags & INCLUDEUSER))
+		if (M == user && !(spell_flags & INCLUDEUSER))
 			continue
 		targets += M
 	return targets

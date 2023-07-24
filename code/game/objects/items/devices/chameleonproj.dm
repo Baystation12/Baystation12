@@ -29,9 +29,9 @@
 	toggle()
 
 /obj/item/device/chameleon/afterattack(atom/target, mob/user , proximity)
-	if(!proximity) return
-	if(!active_dummy)
-		if(istype(target,/obj/item) && !istype(target, /obj/item/disk/nuclear))
+	if (!proximity) return
+	if (!active_dummy)
+		if (istype(target,/obj/item) && !istype(target, /obj/item/disk/nuclear))
 			playsound(get_turf(src), 'sound/weapons/flash.ogg', 100, 1, -6)
 			to_chat(user, SPAN_NOTICE("Scanned [target]."))
 			saved_item = target.type
@@ -40,8 +40,8 @@
 			saved_overlays = target.overlays
 
 /obj/item/device/chameleon/proc/toggle()
-	if(!can_use || !saved_item) return
-	if(active_dummy)
+	if (!can_use || !saved_item) return
+	if (active_dummy)
 		eject_all()
 		playsound(get_turf(src), 'sound/effects/pop.ogg', 100, 1, -6)
 		qdel(active_dummy)
@@ -54,7 +54,7 @@
 	else
 		playsound(get_turf(src), 'sound/effects/pop.ogg', 100, 1, -6)
 		var/obj/O = new saved_item(src)
-		if(!O) return
+		if (!O) return
 		var/obj/effect/dummy/chameleon/C = new /obj/effect/dummy/chameleon(usr.loc)
 		C.activate(O, usr, saved_icon, saved_icon_state, saved_overlays, src)
 		qdel(O)
@@ -65,13 +65,13 @@
 		QDEL_IN(T, 8)
 
 /obj/item/device/chameleon/proc/disrupt(delete_dummy = 1)
-	if(active_dummy)
+	if (active_dummy)
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread
 		spark_system.set_up(5, 0, src)
 		spark_system.attach(src)
 		spark_system.start()
 		eject_all()
-		if(delete_dummy)
+		if (delete_dummy)
 			qdel(active_dummy)
 		active_dummy = null
 		can_use = 0
@@ -80,7 +80,7 @@
 /obj/item/device/chameleon/proc/eject_all()
 	for(var/atom/movable/A in active_dummy)
 		A.forceMove(active_dummy.loc)
-		if(ismob(A))
+		if (ismob(A))
 			var/mob/M = A
 			M.reset_view(null)
 
@@ -147,23 +147,23 @@
 	master.disrupt()
 
 /obj/effect/dummy/chameleon/relaymove(mob/user, direction)
-	if(!has_gravity())
+	if (!has_gravity())
 		return //No magical space movement!
 
-	if(can_move)
+	if (can_move)
 		can_move = 0
 		switch(user.bodytemperature)
-			if(300 to INFINITY)
+			if (300 to INFINITY)
 				spawn(10) can_move = 1
-			if(295 to 300)
+			if (295 to 300)
 				spawn(13) can_move = 1
-			if(280 to 295)
+			if (280 to 295)
 				spawn(16) can_move = 1
-			if(260 to 280)
+			if (260 to 280)
 				spawn(20) can_move = 1
 			else
 				spawn(25) can_move = 1
-		if(isturf(loc))
+		if (isturf(loc))
 			step(src, direction)
 	return
 

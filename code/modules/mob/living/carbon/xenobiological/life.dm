@@ -7,24 +7,24 @@
 
 	..()
 
-	if(stat != DEAD)
+	if (stat != DEAD)
 		handle_nutrition()
 
-		if(!client)
+		if (!client)
 			handle_regular_AI()
 
 /mob/living/carbon/slime/handle_environment(datum/gas_mixture/environment)
-	if(!environment)
+	if (!environment)
 		adjustToxLoss(rand(10,20))
 		return
 
 	//var/environment_heat_capacity = environment.heat_capacity()
 	var/loc_temp = T0C
-	if(istype(get_turf(src), /turf/space))
+	if (istype(get_turf(src), /turf/space))
 		//environment_heat_capacity = loc:heat_capacity
 		var/turf/heat_turf = get_turf(src)
 		loc_temp = heat_turf.temperature
-	else if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
+	else if (istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
 		var/obj/machinery/atmospherics/unary/cryo_cell/cryo
 		loc_temp = cryo.air_contents.temperature
 	else
@@ -32,9 +32,9 @@
 
 	bodytemperature += adjust_body_temperature(bodytemperature, loc_temp, 1)
 
-	if(bodytemperature < (T0C + 5)) // start calculating temperature damage etc
-		if(bodytemperature <= hurt_temperature)
-			if(bodytemperature <= die_temperature)
+	if (bodytemperature < (T0C + 5)) // start calculating temperature damage etc
+		if (bodytemperature <= hurt_temperature)
+			if (bodytemperature <= die_temperature)
 				adjustToxLoss(200)
 			else
 				// could be more fancy, but doesn't worth the complexity: when the slimes goes into a cold area
@@ -49,15 +49,15 @@
 	var/btemperature = current
 	var/difference = abs(current-loc_temp)	//get difference
 	var/increments// = difference/10			//find how many increments apart they are
-	if(difference > 50)
+	if (difference > 50)
 		increments = difference/5
 	else
 		increments = difference/10
 	var/change = increments*boost	// Get the amount to change by (x per increment)
 	var/temp_change
-	if(current < loc_temp)
+	if (current < loc_temp)
 		btemperature = min(loc_temp, btemperature+change)
-	else if(current > loc_temp)
+	else if (current > loc_temp)
 		btemperature = max(loc_temp, btemperature-change)
 	temp_change = (btemperature - current)
 	return temp_change
@@ -65,10 +65,10 @@
 /mob/living/carbon/slime/handle_chemicals_in_body()
 	chem_effects.Cut()
 
-	if(touching) touching.metabolize()
+	if (touching) touching.metabolize()
 	var/datum/reagents/metabolism/ingested = get_ingested_reagents()
-	if(istype(ingested)) ingested.metabolize()
-	if(bloodstr) bloodstr.metabolize()
+	if (istype(ingested)) ingested.metabolize()
+	if (bloodstr) bloodstr.metabolize()
 
 	src.updatehealth()
 
@@ -80,14 +80,14 @@
 
 	health = maxHealth - (getOxyLoss() + getToxLoss() + getFireLoss() + getBruteLoss() + getCloneLoss())
 
-	if(health < 0 && stat != DEAD)
+	if (health < 0 && stat != DEAD)
 		death()
 		return
 
-	if(getHalLoss())
+	if (getHalLoss())
 		setHalLoss(0)
 
-	if(prob(30))
+	if (prob(30))
 		adjustOxyLoss(-1)
 		adjustToxLoss(-1)
 		adjustFireLoss(-1)
@@ -142,7 +142,7 @@
 
 	adjust_nutrition(-(0.1 + 0.05 * is_adult))
 
-	if(nutrition <= 0)
+	if (nutrition <= 0)
 		adjustToxLoss(2)
 		if (client && prob(5))
 			to_chat(src, SPAN_DANGER("You are starving!"))

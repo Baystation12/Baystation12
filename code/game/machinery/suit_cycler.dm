@@ -56,7 +56,7 @@
 
 /obj/machinery/suit_cycler/Initialize()
 	. = ..()
-	if(!length(available_modifications) || !length(species))
+	if (!length(available_modifications) || !length(species))
 		crash_with("Invalid setup: [log_info_line(src)]")
 		return INITIALIZE_HINT_QDEL
 
@@ -73,34 +73,34 @@
 
 /obj/machinery/suit_cycler/attackby(obj/item/I as obj, mob/user as mob)
 
-	if(electrified != 0)
-		if(shock(user, 100))
+	if (electrified != 0)
+		if (shock(user, 100))
 			return
 
 	//Hacking init.
-	if(isMultitool(I) || isWirecutter(I))
-		if(panel_open)
+	if (isMultitool(I) || isWirecutter(I))
+		if (panel_open)
 			attack_hand(user)
 		return
 	//Other interface stuff.
-	if(istype(I, /obj/item/grab))
+	if (istype(I, /obj/item/grab))
 		var/obj/item/grab/G = I
 
-		if(!(ismob(G.affecting)))
+		if (!(ismob(G.affecting)))
 			return
 
-		if(locked)
+		if (locked)
 			to_chat(user, SPAN_DANGER("The suit cycler is locked."))
 			return
 
-		if(length(contents) > 0)
+		if (length(contents) > 0)
 			to_chat(user, SPAN_DANGER("There is no room inside the cycler for [G.affecting.name]."))
 			return
 
 		visible_message(SPAN_NOTICE("[user] starts putting [G.affecting.name] into the suit cycler."), range = 3)
 
-		if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
-			if(!G || !G.affecting) return
+		if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
+			if (!G || !G.affecting) return
 			var/mob/M = G.affecting
 			if (M.client)
 				M.client.perspective = EYE_PERSPECTIVE
@@ -114,27 +114,27 @@
 			updateUsrDialog()
 
 			return
-	else if(isScrewdriver(I))
+	else if (isScrewdriver(I))
 
 		panel_open = !panel_open
 		to_chat(user, "You [panel_open ?  "open" : "close"] the maintenance panel.")
 		updateUsrDialog()
 		return
 
-	else if(istype(I,/obj/item/clothing/head/helmet/space) && !istype(I, /obj/item/clothing/head/helmet/space/rig))
+	else if (istype(I,/obj/item/clothing/head/helmet/space) && !istype(I, /obj/item/clothing/head/helmet/space/rig))
 
-		if(locked)
+		if (locked)
 			to_chat(user, SPAN_DANGER("The suit cycler is locked."))
 			return
 
-		if(helmet)
+		if (helmet)
 			to_chat(user, SPAN_DANGER("The cycler already contains a helmet."))
 			return
 
-		if(I.icon_override == CUSTOM_ITEM_MOB)
+		if (I.icon_override == CUSTOM_ITEM_MOB)
 			to_chat(user, "You cannot refit a customised voidsuit.")
 			return
-		if(!user.unEquip(I, src))
+		if (!user.unEquip(I, src))
 			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		helmet = I
@@ -142,20 +142,20 @@
 		updateUsrDialog()
 		return
 
-	else if(istype(I,/obj/item/clothing/suit/space/void))
+	else if (istype(I,/obj/item/clothing/suit/space/void))
 
-		if(locked)
+		if (locked)
 			to_chat(user, SPAN_DANGER("The suit cycler is locked."))
 			return
 
-		if(suit)
+		if (suit)
 			to_chat(user, SPAN_DANGER("The cycler already contains a voidsuit."))
 			return
 
-		if(I.icon_override == CUSTOM_ITEM_MOB)
+		if (I.icon_override == CUSTOM_ITEM_MOB)
 			to_chat(user, "You cannot refit a customised voidsuit.")
 			return
-		if(!user.unEquip(I, src))
+		if (!user.unEquip(I, src))
 			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		suit = I
@@ -166,7 +166,7 @@
 	..()
 
 /obj/machinery/suit_cycler/emag_act(remaining_charges, mob/user)
-	if(emagged)
+	if (emagged)
 		to_chat(user, SPAN_DANGER("The cycler has already been subverted."))
 		return
 
@@ -183,8 +183,8 @@
 	return 1
 
 /obj/machinery/suit_cycler/physical_attack_hand(mob/user)
-	if(electrified != 0)
-		if(shock(user, 100))
+	if (electrified != 0)
+		if (shock(user, 100))
 			return TRUE
 
 /obj/machinery/suit_cycler/interface_interact(mob/user)
@@ -197,12 +197,12 @@
 	var/dat = list()
 	dat += "<HEAD><TITLE>Suit Cycler Interface</TITLE></HEAD>"
 
-	if(active)
+	if (active)
 		dat+= "<br>[SPAN_COLOR("red", "<b>The [model_text ? "[model_text] " : ""]suit cycler is currently in use. Please wait...</b>")]"
 
-	else if(locked)
+	else if (locked)
 		dat += "<br>[SPAN_COLOR("red", "<b>The [model_text ? "[model_text] " : ""]suit cycler is currently locked. Please contact your system administrator.</b>")]"
-		if(allowed(user))
+		if (allowed(user))
 			dat += "<br><a href='?src=\ref[src];toggle_lock=1'>\[unlock unit\]</a>"
 	else
 		dat += "<h1>Suit cycler</h1>"
@@ -212,7 +212,7 @@
 		dat += "<b>Helmet: </b> [helmet ? "\the [helmet]" : "no helmet stored" ]. <A href='?src=\ref[src];eject_helmet=1'>\[eject\]</a><br/>"
 		dat += "<b>Suit: </b> [suit ? "\the [suit]" : "no suit stored" ]. <A href='?src=\ref[src];eject_suit=1'>\[eject\]</a>"
 
-		if(can_repair && suit && istype(suit))
+		if (can_repair && suit && istype(suit))
 			dat += "[(suit.damage ? " <A href='?src=\ref[src];repair_suit=1'>\[repair\]</a>" : "")]"
 
 		dat += "<br/><b>UV decontamination systems:</b> [emagged ? SPAN_COLOR("red", "SYSTEM ERROR") : SPAN_COLOR("green", "READY")]<br>"
@@ -228,60 +228,60 @@
 	return
 
 /obj/machinery/suit_cycler/Topic(href, href_list)
-	if((. = ..()))
+	if ((. = ..()))
 		return
 
-	if(href_list["eject_suit"])
-		if(!suit) return
+	if (href_list["eject_suit"])
+		if (!suit) return
 		suit.dropInto(loc)
 		suit = null
-	else if(href_list["eject_helmet"])
-		if(!helmet) return
+	else if (href_list["eject_helmet"])
+		if (!helmet) return
 		helmet.dropInto(loc)
 		helmet = null
-	else if(href_list["select_department"])
+	else if (href_list["select_department"])
 		var/choice = input("Please select the target department paintjob.", "Suit cycler", target_modification) as null|anything in available_modifications
-		if(choice && CanPhysicallyInteract(usr))
+		if (choice && CanPhysicallyInteract(usr))
 			target_modification = choice
-	else if(href_list["select_species"])
+	else if (href_list["select_species"])
 		var/choice = input("Please select the target species configuration.","Suit cycler",null) as null|anything in species
-		if(choice && CanPhysicallyInteract(usr))
+		if (choice && CanPhysicallyInteract(usr))
 			target_species = choice
-	else if(href_list["select_rad_level"])
+	else if (href_list["select_rad_level"])
 		var/choices = list(1,2,3)
-		if(emagged)
+		if (emagged)
 			choices = list(1,2,3,4,5)
 		radiation_level = input("Please select the desired radiation level.","Suit cycler",null) as null|anything in choices
-	else if(href_list["repair_suit"])
+	else if (href_list["repair_suit"])
 
-		if(!suit || !can_repair) return
+		if (!suit || !can_repair) return
 		active = 1
 		spawn(100)
 			repair_suit()
 			finished_job()
 
-	else if(href_list["apply_paintjob"])
+	else if (href_list["apply_paintjob"])
 
-		if(!suit && !helmet) return
+		if (!suit && !helmet) return
 		active = 1
 		spawn(100)
 			apply_paintjob()
 			finished_job()
 
-	else if(href_list["toggle_safties"])
+	else if (href_list["toggle_safties"])
 		safeties = !safeties
 
-	else if(href_list["toggle_lock"])
+	else if (href_list["toggle_lock"])
 
-		if(allowed(usr))
+		if (allowed(usr))
 			locked = !locked
 			to_chat(usr, "You [locked ? "lock" : "unlock"] [src].")
 		else
 			FEEDBACK_ACCESS_DENIED(usr, src)
 
-	else if(href_list["begin_decontamination"])
+	else if (href_list["begin_decontamination"])
 
-		if(safeties && occupant)
+		if (safeties && occupant)
 			to_chat(usr, SPAN_DANGER("The cycler has detected an occupant. Please remove the occupant before commencing the decontamination cycle."))
 			return
 
@@ -291,45 +291,45 @@
 
 		sleep(10)
 
-		if(helmet)
-			if(radiation_level > 2)
+		if (helmet)
+			if (radiation_level > 2)
 				helmet.decontaminate()
-			if(radiation_level > 1)
+			if (radiation_level > 1)
 				helmet.clean_blood()
 
-		if(suit)
-			if(radiation_level > 2)
+		if (suit)
+			if (radiation_level > 2)
 				suit.decontaminate()
-			if(radiation_level > 1)
+			if (radiation_level > 1)
 				suit.clean_blood()
 
 	updateUsrDialog()
 
 /obj/machinery/suit_cycler/Process()
-	if(electrified > 0)
+	if (electrified > 0)
 		electrified--
 
-	if(!active)
+	if (!active)
 		return
 
-	if(active && inoperable())
+	if (active && inoperable())
 		active = 0
 		irradiating = 0
 		electrified = 0
 		return
 
-	if(irradiating == 1)
+	if (irradiating == 1)
 		finished_job()
 		irradiating = 0
 		return
 
 	irradiating--
 
-	if(occupant)
-		if(prob(radiation_level*2)) occupant.emote("scream")
-		if(radiation_level > 2)
+	if (occupant)
+		if (prob(radiation_level*2)) occupant.emote("scream")
+		if (radiation_level > 2)
 			occupant.take_organ_damage(0,radiation_level*2 + rand(1,3))
-		if(radiation_level > 1)
+		if (radiation_level > 1)
 			occupant.take_organ_damage(0,radiation_level + rand(1,3))
 		occupant.apply_damage(radiation_level*10, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 
@@ -340,7 +340,7 @@
 	updateUsrDialog()
 
 /obj/machinery/suit_cycler/proc/repair_suit()
-	if(!suit || !suit.damage || !suit.can_breach)
+	if (!suit || !suit.damage || !suit.can_breach)
 		return
 
 	suit.breaches = list()
@@ -358,7 +358,7 @@
 
 /obj/machinery/suit_cycler/proc/eject_occupant(mob/user as mob)
 
-	if(locked || active)
+	if (locked || active)
 		to_chat(user, SPAN_WARNING("The cycler is locked."))
 		return
 
@@ -375,14 +375,14 @@
 	return
 
 /obj/machinery/suit_cycler/proc/apply_paintjob()
-	if(!target_species || !target_modification)
+	if (!target_species || !target_modification)
 		return
 
 	target_modification.RefitItem(helmet)
 	target_modification.RefitItem(suit)
 
-	if(helmet) helmet.refit_for_species(target_species)
-	if(suit) suit.refit_for_species(target_species)
+	if (helmet) helmet.refit_for_species(target_species)
+	if (suit) suit.refit_for_species(target_species)
 
-	if(helmet) helmet.SetName("refitted [helmet.name]")
-	if(suit) suit.SetName("refitted [suit.name]")
+	if (helmet) helmet.SetName("refitted [helmet.name]")
+	if (suit) suit.SetName("refitted [suit.name]")

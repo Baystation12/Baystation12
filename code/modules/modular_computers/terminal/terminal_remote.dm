@@ -8,18 +8,18 @@
 	..(user, computer)
 
 /datum/terminal/remote/Destroy()
-	if(origin_computer && origin_computer.terminals)
+	if (origin_computer && origin_computer.terminals)
 		origin_computer.terminals -= src
 	origin_computer = null
 	return ..()
 
 /datum/terminal/remote/can_use(mob/user)
-	if(!user)
+	if (!user)
 		return FALSE
 
-	if(!computer || !computer.get_ntnet_status_incoming() || !origin_computer.get_ntnet_status())
+	if (!computer || !computer.get_ntnet_status_incoming() || !origin_computer.get_ntnet_status())
 		return FALSE
-	if(!CanInteractWith(user, origin_computer, GLOB.default_state))
+	if (!CanInteractWith(user, origin_computer, GLOB.default_state))
 		return FALSE
 
 	return TRUE

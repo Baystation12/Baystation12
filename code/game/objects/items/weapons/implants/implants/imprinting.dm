@@ -26,13 +26,13 @@
 	..()
 	if (href_list["add"])
 		var/mod = sanitize(input("Add an instruction", "Instructions") as text|null)
-		if(mod)
+		if (mod)
 			instructions += mod
 		interact(usr)
 	if (href_list["edit"])
 		var/idx = text2num(href_list["edit"])
 		var/mod = sanitize(input("Edit the instruction", "Instruction Editing", instructions[idx]) as text|null)
-		if(mod)
+		if (mod)
 			instructions[idx] = mod
 			interact(usr)
 	if (href_list["del"])
@@ -41,22 +41,22 @@
 
 /obj/item/implant/imprinting/implanted(mob/M)
 	var/mob/living/carbon/human/H = M
-	if(!istype(H))
+	if (!istype(H))
 		return FALSE
-	if(H.reagents.has_reagent(/datum/reagent/drugs/mindbreaker))
+	if (H.reagents.has_reagent(/datum/reagent/drugs/mindbreaker))
 		brainwashing = 1
 	var/msg = get_instructions()
 	to_chat(M, msg)
-	if(M.mind)
+	if (M.mind)
 		M.StoreMemory(msg, /singleton/memory_options/system)
-	if(brainwashing)
+	if (brainwashing)
 		log_and_message_admins("was implanted with a brainwashing implant holding following laws: [jointext(instructions, ";")].", M)
 	addtimer(new Callback(src,.proc/activate),3000,(TIMER_UNIQUE|TIMER_OVERRIDE))
 	return TRUE
 
 /obj/item/implant/imprinting/proc/get_instructions()
 	. = list()
-	if(brainwashing)
+	if (brainwashing)
 		. += "[SPAN_DANGER("The fog in your head clears, and you remember some important things. You hold following things as deep convictions, almost like synthetics' laws:")]<br>"
 	else
 		. += "[SPAN_NOTICE("You hear an annoying voice in the back of your head. The things it keeps reminding you of:")]<br>"
@@ -66,19 +66,19 @@
 
 /obj/item/implant/imprinting/disable(time)
 	. = ..()
-	if(. && brainwashing)//add deactivate and reactivate messages?
+	if (. && brainwashing)//add deactivate and reactivate messages?
 		to_chat(imp_in, "[SPAN_WARNING("A wave of nausea comes over you.")]<br>[SPAN_CLASS("good", "You are no longer so sure of those beliefs you've had...")]")
 
 /obj/item/implant/imprinting/restore()
 	. = ..()
-	if(. && brainwashing)
+	if (. && brainwashing)
 		to_chat(imp_in, get_instructions())
 		activate()
 
 /obj/item/implant/imprinting/activate()
-	if(malfunction || !implanted || imp_in) return
+	if (malfunction || !implanted || imp_in) return
 	var/instruction = pick(instructions)
-	if(brainwashing)
+	if (brainwashing)
 		instruction = SPAN_WARNING("You recall one of your beliefs: \"[instruction]\"")
 	else
 		instruction = SPAN_NOTICE("You remember suddenly: \"[instruction]\"")
@@ -86,23 +86,23 @@
 	addtimer(new Callback(src,.proc/activate),3000,(TIMER_UNIQUE|TIMER_OVERRIDE))
 
 /obj/item/implant/imprinting/removed()
-	if(brainwashing && !malfunction)
+	if (brainwashing && !malfunction)
 		to_chat(imp_in, "[SPAN_WARNING("A wave of nausea comes over you.")]<br>[SPAN_CLASS("good", "You are no longer so sure of those beliefs you've had...")]")
 	..()
 
 /obj/item/implant/imprinting/meltdown()
-	if(brainwashing && !malfunction)//if it's already broken don't send the message again
+	if (brainwashing && !malfunction)//if it's already broken don't send the message again
 		to_chat(imp_in, "[SPAN_WARNING("A wave of nausea comes over you.")]<br>[SPAN_CLASS("good", "You are no longer so sure of those beliefs you've had...")]")
 	. = ..()
 
 /obj/item/implant/imprinting/can_implant(mob/M, mob/user, target_zone)
 	var/mob/living/carbon/human/H = M
-	if(istype(H))
+	if (istype(H))
 		var/obj/item/organ/internal/B = H.internal_organs_by_name[BP_BRAIN]
-		if(!B || H.isSynthetic())
+		if (!B || H.isSynthetic())
 			to_chat(user, SPAN_WARNING("\The [M] cannot be imprinted."))
 			return FALSE
-		if(!(B.parent_organ == check_zone(target_zone)))
+		if (!(B.parent_organ == check_zone(target_zone)))
 			to_chat(user, SPAN_WARNING("\The [src] must be implanted in [H.get_organ(B.parent_organ)]."))
 			return FALSE
 	return TRUE

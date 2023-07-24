@@ -30,7 +30,7 @@
 	return W
 
 /spell/targeted/equip_item/dyrnwyn/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 
 	material = MATERIAL_SILVER

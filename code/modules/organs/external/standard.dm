@@ -28,16 +28,16 @@
 	return
 
 /obj/item/organ/external/chest/robotize()
-	if(..())
+	if (..())
 		// Give them a new cell.
 		var/obj/item/organ/internal/cell/C = owner.internal_organs_by_name[BP_CELL]
-		if(!istype(C))
+		if (!istype(C))
 			owner.internal_organs_by_name[BP_CELL] = new /obj/item/organ/internal/cell(owner,1)
 
 /obj/item/organ/external/get_scan_results()
 	. = ..()
 	var/obj/item/organ/internal/lungs/L = locate() in src
-	if( L && L.is_bruised())
+	if ( L && L.is_bruised())
 		. += "Lung ruptured"
 
 /obj/item/organ/external/groin

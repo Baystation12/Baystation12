@@ -95,7 +95,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	new_dna.base_skin = base_skin
 	for(var/b=1;b<=DNA_SE_LENGTH;b++)
 		new_dna.SE[b]=SE[b]
-		if(b<=DNA_UI_LENGTH)
+		if (b<=DNA_UI_LENGTH)
 			new_dna.UI[b]=UI[b]
 	new_dna.UpdateUI()
 	new_dna.UpdateSE()
@@ -108,11 +108,11 @@ var/global/list/datum/dna/gene/dna_genes[0]
 /datum/dna/proc/ResetUI(defer=0)
 	for(var/i=1,i<=DNA_UI_LENGTH,i++)
 		switch(i)
-			if(DNA_UI_SKIN_TONE)
+			if (DNA_UI_SKIN_TONE)
 				SetUIValueRange(DNA_UI_SKIN_TONE,rand(1,220),220,1) // Otherwise, it gets fucked
 			else
 				UI[i]=rand(0,4095)
-	if(!defer)
+	if (!defer)
 		UpdateUI()
 
 /datum/dna/proc/ResetUIFrom(mob/living/carbon/human/character)
@@ -120,12 +120,12 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	ResetUI(1)
 	// Hair
 	// FIXME:  Species-specific defaults pls
-	if(!character.head_hair_style)
+	if (!character.head_hair_style)
 		character.head_hair_style = "Bald"
 	var/hair = GLOB.hair_styles_list.Find(character.head_hair_style)
 
 	// Facial Hair
-	if(!character.facial_hair_style)
+	if (!character.facial_hair_style)
 		character.facial_hair_style = "Shaved"
 	var/beard	= GLOB.facial_hair_styles_list.Find(character.facial_hair_style)
 
@@ -163,7 +163,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	base_skin = character.base_skin
 	for(var/obj/item/organ/external/E in character.organs)
 		E.base_skin = base_skin
-		if(length(E.markings))
+		if (length(E.markings))
 			body_markings[E.organ_tag] = E.markings.Copy()
 
 	UpdateUI()
@@ -175,7 +175,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	ASSERT(value<=4095)
 	UI[block]=value
 	dirtyUI=1
-	if(!defer)
+	if (!defer)
 		UpdateUI()
 
 // Get a DNA UI block's raw value.
@@ -190,7 +190,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	if (value==0) value = 1   // FIXME: hair/beard/eye RGB values if they are 0 are not set, this is a work around we'll encode it in the DNA to be 1 instead.
 	ASSERT(maxvalue<=4095)
 	var/range = (4095 / maxvalue)
-	if(value)
+	if (value)
 		SetUIValue(block,round(value * range),defer)
 
 // Getter version of above.
@@ -210,7 +210,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 /datum/dna/proc/SetUIState(block,on,defer=0)
 	if (block<=0) return
 	var/val
-	if(on)
+	if (on)
 		val=rand(2050,4095)
 	else
 		val=rand(1,2049)
@@ -239,7 +239,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	var/oldBlock=GetUIBlock(block)
 	var/newBlock=""
 	for(var/i=1, i<=length(oldBlock), i++)
-		if(i==subBlock)
+		if (i==subBlock)
 			newBlock+=newSubBlock
 		else
 			newBlock+=copytext(oldBlock,i,i+1)
@@ -262,7 +262,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	ASSERT(value<=4095)
 	SE[block]=value
 	dirtySE=1
-	if(!defer)
+	if (!defer)
 		UpdateSE()
 
 // Get a DNA SE block's raw value.
@@ -276,7 +276,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	if (block<=0) return
 	ASSERT(maxvalue<=4095)
 	var/range = round(4095 / maxvalue)
-	if(value)
+	if (value)
 		SetSEValue(block, value * range - rand(1,range-1))
 
 // Getter version of above.
@@ -297,7 +297,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	if (block<=0) return
 	var/list/BOUNDS=GetDNABounds(block)
 	var/val
-	if(on)
+	if (on)
 		val=rand(BOUNDS[DNA_ON_LOWERBOUND],BOUNDS[DNA_ON_UPPERBOUND])
 	else
 		val=rand(1,BOUNDS[DNA_OFF_UPPERBOUND])
@@ -327,7 +327,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	var/oldBlock=GetSEBlock(block)
 	var/newBlock=""
 	for(var/i=1, i<=length(oldBlock), i++)
-		if(i==subBlock)
+		if (i==subBlock)
 			newBlock+=newSubBlock
 		else
 			newBlock+=copytext(oldBlock,i,i+1)
@@ -358,19 +358,19 @@ var/global/list/datum/dna/gene/dna_genes[0]
 // BACK-COMPAT!
 //  Just checks our character has all the crap it needs.
 /datum/dna/proc/check_integrity(mob/living/carbon/human/character)
-	if(character)
-		if(length(UI) != DNA_UI_LENGTH)
+	if (character)
+		if (length(UI) != DNA_UI_LENGTH)
 			ResetUIFrom(character)
 
-		if(length(struc_enzymes)!= 3*DNA_SE_LENGTH)
+		if (length(struc_enzymes)!= 3*DNA_SE_LENGTH)
 			ResetSE()
 
-		if(length(unique_enzymes) != 32)
+		if (length(unique_enzymes) != 32)
 			unique_enzymes = md5(character.real_name)
 	else
-		if(length(uni_identity) != 3*DNA_UI_LENGTH)
+		if (length(uni_identity) != 3*DNA_UI_LENGTH)
 			uni_identity = "00600200A00E0110148FC01300B0095BD7FD3F4"
-		if(length(struc_enzymes)!= 3*DNA_SE_LENGTH)
+		if (length(struc_enzymes)!= 3*DNA_SE_LENGTH)
 			struc_enzymes = "43359156756131E13763334D1C369012032164D4FE4CD61544B6C03F251B6C60A42821D26BA3B0FD6"
 
 // BACK-COMPAT!

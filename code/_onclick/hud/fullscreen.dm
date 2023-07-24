@@ -8,40 +8,40 @@
 /mob/proc/overlay_fullscreen(category, type, severity)
 	var/obj/screen/fullscreen/screen = screens[category]
 
-	if(screen)
-		if(screen.type != type)
+	if (screen)
+		if (screen.type != type)
 			clear_fullscreen(category, FALSE)
 			screen = null
-		else if(!severity || severity == screen.severity)
+		else if (!severity || severity == screen.severity)
 			return null
 
-	if(!screen)
+	if (!screen)
 		screen = new type()
 
 	screen.icon_state = "[initial(screen.icon_state)][severity]"
 	screen.severity = severity
 
 	screens[category] = screen
-	if(client && (stat != DEAD || screen.allstate))
+	if (client && (stat != DEAD || screen.allstate))
 		client.screen += screen
 	return screen
 
 /mob/proc/clear_fullscreen(category, animated = 10)
 	var/obj/screen/fullscreen/screen = screens[category]
-	if(!screen)
+	if (!screen)
 		return
 
 	screens -= category
 
-	if(animated)
+	if (animated)
 		spawn(0)
 			animate(screen, alpha = 0, time = animated)
 			sleep(animated)
-			if(client)
+			if (client)
 				client.screen -= screen
 			qdel(screen)
 	else
-		if(client)
+		if (client)
 			client.screen -= screen
 		qdel(screen)
 
@@ -50,12 +50,12 @@
 		clear_fullscreen(category)
 
 /mob/proc/hide_fullscreens()
-	if(client)
+	if (client)
 		for(var/category in screens)
 			client.screen -= screens[category]
 
 /mob/proc/reload_fullscreen()
-	if(client)
+	if (client)
 		for(var/category in screens)
 			client.screen |= screens[category]
 

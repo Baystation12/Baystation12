@@ -49,18 +49,18 @@
 	_db_con = _dm_db_new_con()
 
 /DBConnection/proc/Connect(dbi_handler=src.dbi,user_handler=src.user,password_handler=src.password,cursor_handler)
-	if(!sqlenabled)
+	if (!sqlenabled)
 		return FALSE
-	if(!src)
+	if (!src)
 		return FALSE
 	cursor_handler = src.default_cursor
-	if(!cursor_handler) cursor_handler = Default_Cursor
+	if (!cursor_handler) cursor_handler = Default_Cursor
 	return _dm_db_connect(_db_con,dbi_handler,user_handler,password_handler,cursor_handler,null)
 
 /DBConnection/proc/Disconnect() return _dm_db_close(_db_con)
 
 /DBConnection/proc/IsConnected()
-	if(!sqlenabled)
+	if (!sqlenabled)
 		return FALSE
 	var/success = _dm_db_is_connected(_db_con)
 	return success
@@ -69,16 +69,16 @@
 
 /DBConnection/proc/ErrorMsg() return _dm_db_error_msg(_db_con)
 /DBConnection/proc/SelectDB(database_name,dbi)
-	if(IsConnected()) Disconnect()
+	if (IsConnected()) Disconnect()
 	//return Connect("[dbi?"[dbi]":"dbi:mysql:[database_name]:[DB_SERVER]:[DB_PORT]"]",user,password)
 	return Connect("[dbi?"[dbi]":"dbi:mysql:[database_name]:[sqladdress]:[sqlport]"]",user,password)
 /DBConnection/proc/NewQuery(sql_query,cursor_handler=src.default_cursor) return new/DBQuery(sql_query,src,cursor_handler)
 
 
 /DBQuery/New(sql_query,DBConnection/connection_handler,cursor_handler)
-	if(sql_query) src.sql = sql_query
-	if(connection_handler) src.db_connection = connection_handler
-	if(cursor_handler) src.default_cursor = cursor_handler
+	if (sql_query) src.sql = sql_query
+	if (connection_handler) src.db_connection = connection_handler
+	if (cursor_handler) src.default_cursor = cursor_handler
 	_db_query = _dm_db_new_query()
 	return ..()
 
@@ -108,14 +108,14 @@
 /DBQuery/proc/ErrorMsg() return _dm_db_error_msg(_db_query)
 
 /DBQuery/proc/Columns()
-	if(!columns)
+	if (!columns)
 		columns = _dm_db_columns(_db_query,/DBColumn)
 	return columns
 
 /DBQuery/proc/GetRowData()
 	var/list/columns = Columns()
 	var/list/results
-	if(length(columns))
+	if (length(columns))
 		results = list()
 		for(var/C in columns)
 			results+=C
@@ -133,11 +133,11 @@
 	return db_connection.Quote(str)
 
 /DBQuery/proc/SetConversion(column,conversion)
-	if(istext(column))
+	if (istext(column))
 		column = columns.Find(column)
-	if(!conversions)
+	if (!conversions)
 		conversions = new (column)
-	else if(length(conversions) < column)
+	else if (length(conversions) < column)
 		LIST_RESIZE(conversions, column)
 	conversions[column] = conversion
 
@@ -164,19 +164,19 @@
 
 /DBColumn/proc/SqlTypeName(type_handler=src.sql_type)
 	switch(type_handler)
-		if(TINYINT) return "TINYINT"
-		if(SMALLINT) return "SMALLINT"
-		if(MEDIUMINT) return "MEDIUMINT"
-		if(INTEGER) return "INTEGER"
-		if(BIGINT) return "BIGINT"
-		if(FLOAT) return "FLOAT"
-		if(DOUBLE) return "DOUBLE"
-		if(DATE) return "DATE"
-		if(DATETIME) return "DATETIME"
-		if(TIMESTAMP) return "TIMESTAMP"
-		if(TIME) return "TIME"
-		if(STRING) return "STRING"
-		if(BLOB) return "BLOB"
+		if (TINYINT) return "TINYINT"
+		if (SMALLINT) return "SMALLINT"
+		if (MEDIUMINT) return "MEDIUMINT"
+		if (INTEGER) return "INTEGER"
+		if (BIGINT) return "BIGINT"
+		if (FLOAT) return "FLOAT"
+		if (DOUBLE) return "DOUBLE"
+		if (DATE) return "DATE"
+		if (DATETIME) return "DATETIME"
+		if (TIMESTAMP) return "TIMESTAMP"
+		if (TIME) return "TIME"
+		if (STRING) return "STRING"
+		if (BLOB) return "BLOB"
 
 
 #undef Default_Cursor

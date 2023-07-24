@@ -20,12 +20,12 @@
 
 /obj/structure/decorative/ed209/examine(mob/user)
 	. = ..()
-	if(anchored)
+	if (anchored)
 		to_chat(user, "Magnetic chains hold it in place. Somebody isn't taking any risks with this one.")
 
 /obj/structure/decorative/ed209/on_update_icon()
 	. = ..()
-	if(anchored)
+	if (anchored)
 		pixel_z = 8
 	else pixel_z = 0
 
@@ -80,7 +80,7 @@
 
 /obj/structure/decorative/md_slug/Move()
 	. = ..()
-	if(.)
+	if (.)
 		var/turf/T = get_turf(src)
-		if(!isspace(T) && !istype(T, /turf/simulated/floor/carpet))
+		if (!isspace(T) && !istype(T, /turf/simulated/floor/carpet))
 			playsound(T, pick(move_sounds), 75, 1)

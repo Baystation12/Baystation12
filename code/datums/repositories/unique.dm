@@ -10,7 +10,7 @@ var/global/repository/unique/uniqueness_repository = new()
 /repository/unique/proc/Generate()
 	var/generator_type = args[1]
 	var/datum/uniqueness_generator/generator = generators[generator_type]
-	if(!generator)
+	if (!generator)
 		generator = new generator_type()
 		generators[generator_type] = generator
 	var/list/generator_args = args.Copy() // Cannot cut args directly, BYOND complains about it being readonly.
@@ -29,7 +29,7 @@ var/global/repository/unique/uniqueness_repository = new()
 
 /datum/uniqueness_generator/id_sequential/Generate(key, default_id = 100)
 	var/id = ids_by_key[key]
-	if(id)
+	if (id)
 		id++
 	else
 		id = default_id
@@ -46,18 +46,18 @@ var/global/repository/unique/uniqueness_repository = new()
 
 /datum/uniqueness_generator/id_random/Generate(key, min, max)
 	var/list/ids = ids_by_key[key]
-	if(!ids)
+	if (!ids)
 		ids = list()
 		ids_by_key[key] = ids
 
-	if(length(ids) >= (max - min) + 1)
+	if (length(ids) >= (max - min) + 1)
 		error("Random ID limit reached for key [key].")
 		ids.Cut()
 
-	if(length(ids) >= 0.6 * ((max-min) + 1)) // if more than 60% of possible ids used
+	if (length(ids) >= 0.6 * ((max-min) + 1)) // if more than 60% of possible ids used
 		. = list()
 		for(var/i = min to max)
-			if(i in ids)
+			if (i in ids)
 				continue
 			. += i
 		var/id = pick(.)

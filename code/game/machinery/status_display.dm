@@ -50,25 +50,25 @@
 	var/status_display_show_alert_border = FALSE
 
 /obj/machinery/status_display/Destroy()
-	if(radio_controller)
+	if (radio_controller)
 		radio_controller.remove_object(src,frequency)
 	return ..()
 
 // register for radio system
 /obj/machinery/status_display/Initialize()
 	. = ..()
-	if(radio_controller)
+	if (radio_controller)
 		radio_controller.add_object(src, frequency)
 
 // timed process
 /obj/machinery/status_display/Process()
-	if(!is_powered())
+	if (!is_powered())
 		remove_display()
 		return
 	update()
 
 /obj/machinery/status_display/emp_act(severity)
-	if(inoperable())
+	if (inoperable())
 		..(severity)
 		return
 	set_picture("ai_bsod")
@@ -77,95 +77,95 @@
 // set what is displayed
 /obj/machinery/status_display/proc/update()
 	remove_display()
-	if(friendc && !ignore_friendc)
+	if (friendc && !ignore_friendc)
 		set_picture("ai_friend")
-		if(status_display_show_alert_border)
+		if (status_display_show_alert_border)
 			add_alert_border_to_display()
 		return 1
 
 	switch(mode)
-		if(STATUS_DISPLAY_BLANK)	//blank
-			if(status_display_show_alert_border)
+		if (STATUS_DISPLAY_BLANK)	//blank
+			if (status_display_show_alert_border)
 				add_alert_border_to_display()
 			return 1
-		if(STATUS_DISPLAY_TRANSFER_SHUTTLE_TIME)				//emergency shuttle timer
-			if(evacuation_controller.is_prepared())
+		if (STATUS_DISPLAY_TRANSFER_SHUTTLE_TIME)				//emergency shuttle timer
+			if (evacuation_controller.is_prepared())
 				message1 = "-ETD-"
 				if (evacuation_controller.waiting_to_leave())
 					message2 = "Launch"
 				else
 					message2 = get_shuttle_timer()
-					if(length(message2) > CHARS_PER_LINE)
+					if (length(message2) > CHARS_PER_LINE)
 						message2 = "Error"
 				update_display(message1, message2)
-			else if(evacuation_controller.has_eta())
+			else if (evacuation_controller.has_eta())
 				message1 = "-ETA-"
 				message2 = get_shuttle_timer()
-				if(length(message2) > CHARS_PER_LINE)
+				if (length(message2) > CHARS_PER_LINE)
 					message2 = "Error"
 				update_display(message1, message2)
-			if(status_display_show_alert_border)
+			if (status_display_show_alert_border)
 				add_alert_border_to_display()
 			return 1
-		if(STATUS_DISPLAY_MESSAGE)	//custom messages
+		if (STATUS_DISPLAY_MESSAGE)	//custom messages
 			var/line1
 			var/line2
 
-			if(!index1)
+			if (!index1)
 				line1 = message1
 			else
 				line1 = copytext(message1+"|"+message1, index1, index1+CHARS_PER_LINE)
 				var/message1_len = length(message1)
 				index1 += SCROLL_SPEED
-				if(index1 > message1_len)
+				if (index1 > message1_len)
 					index1 -= message1_len
 
-			if(!index2)
+			if (!index2)
 				line2 = message2
 			else
 				line2 = copytext(message2+"|"+message2, index2, index2+CHARS_PER_LINE)
 				var/message2_len = length(message2)
 				index2 += SCROLL_SPEED
-				if(index2 > message2_len)
+				if (index2 > message2_len)
 					index2 -= message2_len
 			update_display(line1, line2)
-			if(status_display_show_alert_border)
+			if (status_display_show_alert_border)
 				add_alert_border_to_display()
 			return 1
-		if(STATUS_DISPLAY_ALERT)
+		if (STATUS_DISPLAY_ALERT)
 			display_alert()
 			return 1
-		if(STATUS_DISPLAY_TIME)
+		if (STATUS_DISPLAY_TIME)
 			message1 = "TIME"
 			message2 = stationtime2text()
 			update_display(message1, message2)
-			if(status_display_show_alert_border)
+			if (status_display_show_alert_border)
 				add_alert_border_to_display()
 			return 1
-		if(STATUS_DISPLAY_IMAGE)
+		if (STATUS_DISPLAY_IMAGE)
 			set_picture(picture_state)
-			if(status_display_show_alert_border)
+			if (status_display_show_alert_border)
 				add_alert_border_to_display()
 			return 1
 	return 0
 
 /obj/machinery/status_display/examine(mob/user)
 	. = ..()
-	if(mode != STATUS_DISPLAY_BLANK && mode != STATUS_DISPLAY_ALERT)
+	if (mode != STATUS_DISPLAY_BLANK && mode != STATUS_DISPLAY_ALERT)
 		to_chat(user, "The display says:<br>\t[sanitize(message1)]<br>\t[sanitize(message2)]")
-	if(mode == STATUS_DISPLAY_ALERT || status_display_show_alert_border)
+	if (mode == STATUS_DISPLAY_ALERT || status_display_show_alert_border)
 		var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
 /obj/machinery/status_display/proc/set_message(m1, m2)
-	if(m1)
+	if (m1)
 		index1 = (length(m1) > CHARS_PER_LINE)
 		message1 = m1
 	else
 		message1 = ""
 		index1 = 0
 
-	if(m2)
+	if (m2)
 		index2 = (length(m2) > CHARS_PER_LINE)
 		message2 = m2
 	else
@@ -196,7 +196,7 @@
 
 /obj/machinery/status_display/proc/set_picture(state)
 	remove_display()
-	if(!picture || picture_state != state)
+	if (!picture || picture_state != state)
 		picture_state = state
 		picture = image('icons/obj/status_display.dmi', icon_state=picture_state)
 	overlays |= picture
@@ -204,13 +204,13 @@
 
 /obj/machinery/status_display/proc/update_display(line1, line2)
 	var/new_text = {"<div style="font-size:[FONT_SIZE];color:[FONT_COLOR];font:'[FONT_STYLE]';text-align:center;" valign="top">[line1]<br>[line2]</div>"}
-	if(maptext != new_text)
+	if (maptext != new_text)
 		maptext = new_text
 	set_light(0.5, 0.1, 1, 2, COLOR_WHITE)
 
 /obj/machinery/status_display/proc/get_shuttle_timer()
 	var/timeleft = evacuation_controller.get_eta()
-	if(timeleft < 0)
+	if (timeleft < 0)
 		return ""
 	return "[pad_left(num2text((timeleft / 60) % 60), 2, "0")]:[pad_left(num2text(timeleft % 60), 2, "0")]"
 
@@ -219,42 +219,42 @@
 	if (!shuttle)
 		return "Error"
 
-	if(shuttle.has_arrive_time())
+	if (shuttle.has_arrive_time())
 		var/timeleft = round((shuttle.arrive_time - world.time) / 10,1)
-		if(timeleft < 0)
+		if (timeleft < 0)
 			return "Late"
 		return "[pad_left(num2text((timeleft / 60) % 60), 2, "0")]:[pad_left(num2text(timeleft % 60), 2, "0")]"
 	return ""
 
 /obj/machinery/status_display/proc/remove_display()
-	if(length(overlays))
+	if (length(overlays))
 		overlays.Cut()
-	if(maptext)
+	if (maptext)
 		maptext = ""
 	set_light(0)
 
 /obj/machinery/status_display/receive_signal(datum/signal/signal)
 	switch(signal.data["command"])
-		if("blank")
+		if ("blank")
 			mode = STATUS_DISPLAY_BLANK
 
-		if("shuttle")
+		if ("shuttle")
 			mode = STATUS_DISPLAY_TRANSFER_SHUTTLE_TIME
 
-		if("message")
+		if ("message")
 			mode = STATUS_DISPLAY_MESSAGE
 			set_message(signal.data["msg1"], signal.data["msg2"])
 
-		if("alert")
+		if ("alert")
 			mode = STATUS_DISPLAY_ALERT
 
-		if("time")
+		if ("time")
 			mode = STATUS_DISPLAY_TIME
 
-		if("image")
+		if ("image")
 			mode = STATUS_DISPLAY_IMAGE
 			set_picture(signal.data["picture_state"])
-		if("toggle_alert_border")
+		if ("toggle_alert_border")
 			toggle_alert_border()
 	update()
 

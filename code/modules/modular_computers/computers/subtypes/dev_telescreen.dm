@@ -22,8 +22,8 @@
 	name = "telescreen"
 
 /obj/item/modular_computer/telescreen/attackby(obj/item/W as obj, mob/user as mob)
-	if(isCrowbar(W))
-		if(anchored)
+	if (isCrowbar(W))
+		if (anchored)
 			shutdown_computer()
 			anchored = FALSE
 			screen_on = FALSE
@@ -34,22 +34,22 @@
 			var/choice = input(user, "Where do you want to place \the [src]?", "Offset selection") in list("North", "South", "West", "East", "This tile", "Cancel")
 			var/valid = FALSE
 			switch(choice)
-				if("North")
+				if ("North")
 					valid = TRUE
 					pixel_y = 32
-				if("South")
+				if ("South")
 					valid = TRUE
 					pixel_y = -32
-				if("West")
+				if ("West")
 					valid = TRUE
 					pixel_x = -32
-				if("East")
+				if ("East")
 					valid = TRUE
 					pixel_x = 32
-				if("This tile")
+				if ("This tile")
 					valid = TRUE
 
-			if(valid)
+			if (valid)
 				anchored = TRUE
 				screen_on = TRUE
 				to_chat(user, "You secure \the [src].")

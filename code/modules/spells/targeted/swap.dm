@@ -33,7 +33,7 @@
 		apply_spell_damage(T)
 
 /spell/targeted/swap/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 
 	amt_eye_blind += 2

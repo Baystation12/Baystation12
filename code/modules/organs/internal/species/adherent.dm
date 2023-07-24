@@ -11,33 +11,33 @@
 
 /obj/item/organ/internal/brain/adherent/refresh_action_button()
 	. = ..()
-	if(.)
+	if (.)
 		action.button_icon_state = "adherent-brain"
-		if(action.button) action.button.UpdateIcon()
+		if (action.button) action.button.UpdateIcon()
 
 /obj/item/organ/internal/brain/adherent/attack_self(mob/user)
 	. = ..()
-	if(.)
+	if (.)
 
 		var/regex/name_regex = regex("\[A-Z\]{2}-\[A-Z\]{1} \[0-9\]{4}")
 		name_regex.Find_char(owner.real_name)
 
-		if(world.time < next_rename)
+		if (world.time < next_rename)
 			to_chat(owner, SPAN_WARNING("[PROTOCOL_ARTICLE] forbids changing your ident again so soon."))
 			return
 
 		var/res = name_regex.match
-		if(isnull(res))
+		if (isnull(res))
 			to_chat(user, SPAN_WARNING("Nonstandard names are not subject to real-time modification under [PROTOCOL_ARTICLE]."))
 			return
 
 		var/newname = sanitizeSafe(input(user, "Enter a new ident.", "Reset Ident") as text, MAX_NAME_LEN)
-		if(newname)
+		if (newname)
 			var/confirm = input(user, "Are you sure you wish your name to become [newname] [res]?","Reset Ident") as anything in list("No", "Yes")
-			if(confirm == "Yes" && owner && user == owner && !owner.incapacitated() && world.time >= next_rename)
+			if (confirm == "Yes" && owner && user == owner && !owner.incapacitated() && world.time >= next_rename)
 				next_rename = world.time + rename_delay
 				owner.real_name = "[newname] [res]"
-				if(owner.mind)
+				if (owner.mind)
 					owner.mind.name = owner.real_name
 				owner.SetName(owner.real_name)
 				to_chat(user, SPAN_NOTICE("You are now designated <b>[owner.real_name]</b>."))
@@ -51,24 +51,24 @@
 
 /obj/item/organ/internal/powered/Process()
 	. = ..()
-	if(owner)
+	if (owner)
 		var/obj/item/organ/internal/cell/cell = locate() in owner.internal_organs
-		if(active && !(cell && cell.use(maintenance_cost)))
+		if (active && !(cell && cell.use(maintenance_cost)))
 			active = FALSE
 			to_chat(owner, SPAN_CLASS("danger", "Your [name] [gender == PLURAL ? "are" : "is"] out of power!"))
 			refresh_action_button()
 
 /obj/item/organ/internal/powered/refresh_action_button()
 	. = ..()
-	if(.)
+	if (.)
 		action.button_icon_state = "[base_action_state]-[active ? "on" : "off"]"
-		if(action.button) action.button.UpdateIcon()
+		if (action.button) action.button.UpdateIcon()
 
 /obj/item/organ/internal/powered/attack_self(mob/user)
 	. = ..()
-	if(.)
+	if (.)
 		sound_to(user, sound('sound/effects/ding2.ogg'))
-		if(is_broken())
+		if (is_broken())
 			to_chat(owner, SPAN_WARNING("\The [src] [gender == PLURAL ? "are" : "is"] too damaged to function."))
 			active = FALSE
 		else
@@ -100,10 +100,10 @@
 
 /obj/item/organ/internal/powered/float/Process()
 	. = ..()
-	if(owner)
-		if(active)
+	if (owner)
+		if (active)
 			owner.pass_flags |= PASS_FLAG_TABLE
-			if(owner.floatiness <= 5)
+			if (owner.floatiness <= 5)
 				owner.make_floating(5)
 		else
 			owner.pass_flags &= ~PASS_FLAG_TABLE
@@ -142,12 +142,12 @@
 	var/target_temp = T20C
 
 /obj/item/organ/internal/powered/cooling_fins/Process()
-	if(owner)
+	if (owner)
 		var/temp_diff = min(owner.bodytemperature - target_temp, max_cooling)
-		if(temp_diff >= 1)
+		if (temp_diff >= 1)
 			maintenance_cost = max(temp_diff, 1)
 			. = ..()
-			if(active)
+			if (active)
 				owner.bodytemperature -= temp_diff
 		else
 			maintenance_cost = 0

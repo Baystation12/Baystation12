@@ -33,7 +33,7 @@
 	user.set_machine(src)
 	var/dat = "<HEAD><TITLE>Operating Computer</TITLE><META HTTP-EQUIV='Refresh' CONTENT='10'></HEAD><BODY>\n"
 	dat += "<A HREF='?src=\ref[user];mach_close=op'>Close</A><br><br>" //| <A HREF='?src=\ref[user];update=1'>Update</A>"
-	if(src.table && (src.table.check_victim()))
+	if (src.table && (src.table.check_victim()))
 		src.victim = src.table.victim
 		dat += {"
 <B>Patient Information:</B><BR>
@@ -51,5 +51,5 @@
 	onclose(user, "op")
 
 /obj/machinery/computer/operating/Process()
-	if(operable())
+	if (operable())
 		updateDialog()

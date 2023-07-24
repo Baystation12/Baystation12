@@ -3,5 +3,5 @@
 
 /datum/admin_secret_item/admin_secret/traitors_and_objectives/execute(mob/user)
 	. = ..()
-	if(.)
+	if (.)
 		user.client.holder.check_antagonists()

@@ -18,9 +18,9 @@
 
 
 /obj/item/ammo_casing/Initialize()
-	if(ispath(projectile_type))
+	if (ispath(projectile_type))
 		BB = new projectile_type(src)
-	if(randpixel)
+	if (randpixel)
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel, randpixel)
 	. = ..()
@@ -33,7 +33,7 @@
 	set_dir(pick(GLOB.alldirs)) //spin spent casings
 
 	// Aurora forensics port, gunpowder residue.
-	if(leaves_residue)
+	if (leaves_residue)
 		leave_residue()
 
 	update_icon()
@@ -43,37 +43,37 @@
 	var/mob/living/carbon/human/H = get_holder_of_type(src, /mob/living/carbon/human)
 	var/obj/item/gun/G = get_holder_of_type(src, /obj/item/gun)
 	put_residue_on(G)
-	if(H)
+	if (H)
 		var/zone
-		if(H.l_hand == G)
+		if (H.l_hand == G)
 			zone = BP_L_HAND
-		else if(H.r_hand == G)
+		else if (H.r_hand == G)
 			zone = BP_R_HAND
-		if(zone)
+		if (zone)
 			var/target = H.get_covering_equipped_item_by_zone(zone)
-			if(!target)
+			if (!target)
 				target = H.get_organ(zone)
 			put_residue_on(target)
-	if(prob(30))
+	if (prob(30))
 		put_residue_on(get_turf(src))
 
 
 /obj/item/ammo_casing/proc/put_residue_on(atom/A)
-	if(A)
+	if (A)
 		LAZYDISTINCTADD(A.gunshot_residue, caliber)
 
 
 /obj/item/ammo_casing/attackby(obj/item/W as obj, mob/user as mob)
-	if(isScrewdriver(W))
-		if(!BB)
+	if (isScrewdriver(W))
+		if (!BB)
 			to_chat(user, SPAN_NOTICE("There is no bullet in the casing to inscribe anything into."))
 			return
 
 		var/tmp_label = ""
 		var/label_text = sanitizeSafe(input(user, "Inscribe some text into \the [initial(BB.name)]","Inscription",tmp_label), MAX_NAME_LEN)
-		if(length(label_text) > 20)
+		if (length(label_text) > 20)
 			to_chat(user, SPAN_WARNING("The inscription can be at most 20 characters long."))
-		else if(!label_text)
+		else if (!label_text)
 			to_chat(user, SPAN_NOTICE("You scratch the inscription off of [initial(BB)]."))
 			BB.SetName(initial(BB.name))
 		else
@@ -83,13 +83,13 @@
 
 
 /obj/item/ammo_casing/on_update_icon()
-	if(spent_icon && !BB)
+	if (spent_icon && !BB)
 		icon_state = spent_icon
 
 
 /obj/item/ammo_casing/examine(mob/user)
 	. = ..()
-	if(caliber)
+	if (caliber)
 		to_chat(user, "Its caliber is [caliber].")
 	if (!BB)
 		to_chat(user, "This one is spent.")
@@ -131,32 +131,32 @@
 
 /obj/item/ammo_magazine/Initialize()
 	. = ..()
-	if(multiple_sprites)
+	if (multiple_sprites)
 		initialize_magazine_icondata(src)
 
-	if(isnull(initial_ammo))
+	if (isnull(initial_ammo))
 		initial_ammo = max_ammo
 
-	if(initial_ammo)
+	if (initial_ammo)
 		for(var/i in 1 to initial_ammo)
 			stored_ammo += new ammo_type(src)
-	if(caliber)
+	if (caliber)
 		LAZYINSERT(labels, caliber, 1)
-	if(LAZYLEN(labels))
+	if (LAZYLEN(labels))
 		SetName("[name] ([english_list(labels, and_text = ", ")])")
 	update_icon()
 
 
 /obj/item/ammo_magazine/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/ammo_casing))
+	if (istype(W, /obj/item/ammo_casing))
 		var/obj/item/ammo_casing/C = W
-		if(C.caliber != caliber)
+		if (C.caliber != caliber)
 			to_chat(user, SPAN_WARNING("[C] does not fit into [src]."))
 			return
-		if(length(stored_ammo) >= max_ammo)
+		if (length(stored_ammo) >= max_ammo)
 			to_chat(user, SPAN_WARNING("[src] is full!"))
 			return
-		if(!user.unEquip(C, src))
+		if (!user.unEquip(C, src))
 			return
 		stored_ammo.Add(C)
 		update_icon()
@@ -164,7 +164,7 @@
 
 
 /obj/item/ammo_magazine/attack_self(mob/user)
-	if(!length(stored_ammo))
+	if (!length(stored_ammo))
 		to_chat(user, SPAN_NOTICE("[src] is already empty!"))
 		return
 	to_chat(user, SPAN_NOTICE("You empty [src]."))
@@ -176,8 +176,8 @@
 
 
 /obj/item/ammo_magazine/attack_hand(mob/user)
-	if(user.get_inactive_hand() == src)
-		if(!length(stored_ammo))
+	if (user.get_inactive_hand() == src)
+		if (!length(stored_ammo))
 			to_chat(user, SPAN_NOTICE("[src] is already empty!"))
 		else
 			var/obj/item/ammo_casing/C = stored_ammo[length(stored_ammo)]
@@ -209,7 +209,7 @@
 	else
 		icon_state = initial(icon_state)
 
-	if(multiple_sprites)
+	if (multiple_sprites)
 		//find the lowest key greater than or equal to length(stored_ammo)
 		var/new_state = null
 		for(var/idx in 1 to length(icon_keys))
@@ -232,7 +232,7 @@ var/global/list/magazine_icondata_states = list()
 
 /proc/initialize_magazine_icondata(obj/item/ammo_magazine/M)
 	var/typestr = "[M.type]"
-	if(!(typestr in magazine_icondata_keys) || !(typestr in magazine_icondata_states))
+	if (!(typestr in magazine_icondata_keys) || !(typestr in magazine_icondata_states))
 		magazine_icondata_cache_add(M)
 
 	M.icon_keys = magazine_icondata_keys[typestr]
@@ -245,7 +245,7 @@ var/global/list/magazine_icondata_states = list()
 	var/list/states = icon_states(M.icon)
 	for(var/i = 0, i <= M.max_ammo, i++)
 		var/ammo_state = "[M.icon_state]-[i]"
-		if(ammo_state in states)
+		if (ammo_state in states)
 			icon_keys += i
 			ammo_states += ammo_state
 

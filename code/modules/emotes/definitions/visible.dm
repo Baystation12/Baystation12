@@ -54,7 +54,7 @@
 	emote_message_3p = "USER collapses!"
 
 /singleton/emote/visible/collapse/do_extra(mob/user)
-	if(istype(user))
+	if (istype(user))
 		user.Paralyse(2)
 
 /singleton/emote/visible/flash
@@ -114,7 +114,7 @@
 	emote_message_3p = "USER faints."
 
 /singleton/emote/visible/faint/do_extra(mob/user)
-	if(istype(user) && user.sleeping <= 0)
+	if (istype(user) && user.sleeping <= 0)
 		user.sleeping += 10
 
 /singleton/emote/visible/frown
@@ -225,7 +225,7 @@
 	check_range = 1
 
 /singleton/emote/visible/handshake/get_emote_message_3p(atom/user, atom/target, extra_params)
-	if(target && !user.Adjacent(target))
+	if (target && !user.Adjacent(target))
 		return "USER holds out USER_THEIR hand out to TARGET."
 	return ..()
 
@@ -241,7 +241,7 @@
 /singleton/emote/visible/signal/get_emote_message_3p(mob/user, atom/target, extra_params)
 	if (istype(user) && user.HasFreeHand())
 		var/t1 = round(text2num(extra_params))
-		if(isnum(t1) && t1 <= 5)
+		if (isnum(t1) && t1 <= 5)
 			return "USER raises [t1] finger\s."
 	return .. ()
 

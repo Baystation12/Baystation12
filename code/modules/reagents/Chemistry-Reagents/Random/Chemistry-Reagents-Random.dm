@@ -27,13 +27,13 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 	var/max_effect_number = 8
 
 /datum/reagent/random/New(datum/reagents/holder, override = FALSE)
-	if(override)
+	if (override)
 		return // This is used for random prototypes, so we bypass further init
 	return ..(holder)
 
 /datum/reagent/random/initialize_data(list/newdata)
 	var/datum/reagent/random/other = SSchemistry.get_prototype(type)
-	if(istype(newdata))
+	if (istype(newdata))
 		data = newdata.Copy()
 	else
 		data = other.data.Copy()
@@ -44,7 +44,7 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 /datum/reagent/random/proc/randomize_data(temperature)
 	data = list()
 	var/list/effects_to_get = subtypesof(/singleton/random_chem_effect/random_properties)
-	if(length(effects_to_get) > max_effect_number)
+	if (length(effects_to_get) > max_effect_number)
 		shuffle(effects_to_get)
 		effects_to_get.Cut(max_effect_number + 1)
 	effects_to_get += subtypesof(/singleton/random_chem_effect/general_properties)
@@ -69,11 +69,11 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 		effect.set_caches(src, whitelist)
 
 /datum/reagent/random/proc/stable_at_temperature(temperature)
-	if(temperature > chilling_point && temperature < heating_point)
+	if (temperature > chilling_point && temperature < heating_point)
 		return TRUE
 
 /datum/reagent/random/mix_data(list/other_data, amount)
-	if(volume <= 0)
+	if (volume <= 0)
 		return // ?? but we're about to divide by 0 if this happens, so let's avoid.
 	var/old_amount = max(volume - amount, 0) // how much we had prior to the addition
 	var/ratio = old_amount/volume
@@ -85,19 +85,19 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 		effect.on_property_recompute(src, data[effect.type])
 
 /datum/reagent/random/custom_temperature_effects(temperature, datum/reagents/reagents)
-	if(temperature in (heating_point - 20) to heating_point)
+	if (temperature in (heating_point - 20) to heating_point)
 		FOR_ALL_EFFECTS
 			var/result = effect.distillation_act(src, reagents, data[effect.type])
-			if(!isnull(result))
+			if (!isnull(result))
 				data[effect.type] = result
 				. = TRUE
-	else if(temperature in chilling_point to (chilling_point + 20))
+	else if (temperature in chilling_point to (chilling_point + 20))
 		FOR_ALL_EFFECTS
 			var/result = effect.cooling_act(src, reagents, data[effect.type])
-			if(!isnull(result))
+			if (!isnull(result))
 				data[effect.type] = result
 				. = TRUE
-	if(.)
+	if (.)
 		reagents.my_atom.visible_message("The chemicals in \the [reagents.my_atom] bubble slightly!")
 
 /datum/reagent/random/affect_blood(mob/living/carbon/M, removed)
@@ -110,9 +110,9 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 /datum/reagent/random/proc/get_scan_data(mob/user)
 	var/list/dat = list()
 	var/chem_skill = user.get_skill_value(SKILL_CHEMISTRY)
-	if(chem_skill < SKILL_BASIC)
+	if (chem_skill < SKILL_BASIC)
 		dat += "You analyze the strange liquid. The readings are confusing; could it maybe be juice?"
-	else if(chem_skill < SKILL_TRAINED)
+	else if (chem_skill < SKILL_TRAINED)
 		dat += "You analyze the strange liquid. Based on the readings, you are skeptical that this is safe to drink."
 	else
 		dat += "The readings are very unsual and intriguing. You suspect it may be of alien origin."
@@ -122,23 +122,23 @@ GLOBAL_LIST_INIT(random_chem_interaction_blacklist, list(
 		var/list/effect_descs = list()
 		var/list/interactions = list()
 		FOR_ALL_EFFECTS
-			if(effect.beneficial > 0)
+			if (effect.beneficial > 0)
 				beneficial = 1
-			if(effect.beneficial < 0)
+			if (effect.beneficial < 0)
 				harmful = 1
-			if(effect.desc)
+			if (effect.desc)
 				effect_descs += effect.desc
 			var/interaction = effect.get_interactions(src, sci_skill, chem_skill)
-			if(interaction)
+			if (interaction)
 				interactions += interaction
-		if(sci_skill <= SKILL_TRAINED)
-			if(beneficial)
+		if (sci_skill <= SKILL_TRAINED)
+			if (beneficial)
 				dat += "The scan suggests that the chemical has some potentially beneficial effects!"
-			if(harmful)
+			if (harmful)
 				dat += "The readings confirm that the chemical is not safe for human use."
 		else
 			dat += "A close analysis of the scan suggests that the chemical has some of the following effects: [english_list(effect_descs)]."
-		if(chem_skill == SKILL_TRAINED)
+		if (chem_skill == SKILL_TRAINED)
 			dat += "You aren't sure how this chemical will react with other reagents, but it does seem to be sensitive to changes in temperature."
 		else
 			dat += "Here are the chemicals you suspect this one will interact with, probably when heated or cooled:"

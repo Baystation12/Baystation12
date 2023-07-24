@@ -13,5 +13,5 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/item/beach_ball/afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
-	if(user.unequip_item())
+	if (user.unequip_item())
 		src.throw_at(target, throw_range, throw_speed, user)

@@ -5,17 +5,17 @@
 
 /obj/item/gun/projectile/pistol/sec/detective/Initialize()
 	. = ..()
-	if(!gun_options)
+	if (!gun_options)
 		gun_options = init_subtypes(/datum/detective_gun_skin)
 
 /obj/item/gun/projectile/pistol/sec/detective/on_update_icon()
-	if(ammo_magazine && length(ammo_magazine.stored_ammo))
-		if(unique_reskin)
+	if (ammo_magazine && length(ammo_magazine.stored_ammo))
+		if (unique_reskin)
 			icon_state = unique_reskin.icon_state
 		else
 			icon_state = initial(icon_state)
 	else
-		if(unique_reskin)
+		if (unique_reskin)
 			icon_state = "[unique_reskin.icon_state]-e"
 		else
 			icon_state = "[initial(icon_state)]-e"
@@ -26,16 +26,16 @@
 	set desc = "Rename your gun. If you're the detective."
 
 	var/mob/M = usr
-	if(!M.mind)	return 0
-	if(M.incapacitated()) return 0
-	if(!M.mind.assigned_role == "Detective")
+	if (!M.mind)	return 0
+	if (M.incapacitated()) return 0
+	if (!M.mind.assigned_role == "Detective")
 		to_chat(M, SPAN_NOTICE("You don't feel cool enough to name this gun, chump."))
 		return 0
 
 	var/input = sanitizeSafe(input("What do you want to name the gun?","Rename gun"), MAX_NAME_LEN)
 
-	if(src && input && !M.incapacitated() && in_range(M,src))
-		if(!findtext(input, "the", 1, 4))
+	if (src && input && !M.incapacitated() && in_range(M,src))
+		if (!findtext(input, "the", 1, 4))
 			input = "\improper [input]"
 		name = input
 		unique_name = input
@@ -48,14 +48,14 @@
 	set desc = "Click to reskin your gun."
 
 	var/mob/M = usr
-	if(M.incapacitated())
+	if (M.incapacitated())
 		return
 
 	var/datum/detective_gun_skin/choice = input(M,"What do you want to skin the gun to?","Reskin Gun", unique_reskin) as null|anything in gun_options
-	if(src && choice && !M.incapacitated() && in_range(M,src))
+	if (src && choice && !M.incapacitated() && in_range(M,src))
 		icon_state = choice.icon_state
 		unique_reskin = choice
-		if(!unique_name)
+		if (!unique_name)
 			SetName(choice.name)
 		to_chat(M, "Your gun is now skinned as \a [choice]. Say hello to your new friend.")
 		return 1
@@ -63,7 +63,7 @@
 
 //apart of reskins that have two sprites, touching may result in frustration and breaks
 /obj/item/gun/projectile/pistol/sec/detective/attack_hand(mob/living/user)
-	if(!unique_reskin && loc == user)
+	if (!unique_reskin && loc == user)
 		reskin_gun(user)
 		return
 	..()

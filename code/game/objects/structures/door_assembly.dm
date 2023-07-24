@@ -80,7 +80,7 @@
 
 /obj/structure/door_assembly/multi_tile/Initialize()
 	. = ..()
-	if(dir in list(EAST, WEST))
+	if (dir in list(EAST, WEST))
 		bound_width = width * world.icon_size
 		bound_height = world.icon_size
 	else
@@ -91,7 +91,7 @@
 
 /obj/structure/door_assembly/multi_tile/Move()
 	. = ..()
-	if(dir in list(EAST, WEST))
+	if (dir in list(EAST, WEST))
 		bound_width = width * world.icon_size
 		bound_height = world.icon_size
 	else
@@ -307,7 +307,7 @@
 			USE_FEEDBACK_FAILURE("\The [src] needs a circuit before you can finish it.")
 			return TRUE
 		var/path
-		if(istext(glass))
+		if (istext(glass))
 			path = text2path("/obj/machinery/door/airlock/[glass]")
 		else if (glass == 1)
 			path = glass_type
@@ -431,18 +431,18 @@
 	var/image/filling_overlay
 	var/image/panel_overlay
 	var/final_name = ""
-	if(glass == 1)
+	if (glass == 1)
 		filling_overlay = image(glass_icon, "construction")
 	else
 		filling_overlay = image(fill_icon, "construction")
 	switch (state)
-		if(0)
+		if (0)
 			if (anchored)
 				final_name = "Secured "
-		if(1)
+		if (1)
 			final_name = "Wired "
 			panel_overlay = image(panel_icon, "construction0")
-		if(2)
+		if (2)
 			final_name = "Near Finished "
 			panel_overlay = image(panel_icon, "construction1")
 	final_name += "[glass == 1 ? "Window " : ""][istext(glass) ? "[glass] Airlock" : base_name] Assembly"

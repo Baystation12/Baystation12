@@ -5,16 +5,16 @@
 //returns 1 if this mob has sufficient access to use this object
 /atom/movable/proc/allowed(mob/M)
 	//check if it doesn't require any access at all
-	if(src.check_access(null))
+	if (src.check_access(null))
 		return TRUE
-	if(!istype(M))
+	if (!istype(M))
 		return FALSE
 	return check_access_list(M.GetAccess())
 
 /atom/movable/proc/GetAccess()
 	. = list()
 	var/obj/item/card/id/id = GetIdCard()
-	if(id)
+	if (id)
 		. += id.GetAccess()
 
 /atom/movable/proc/GetIdCard()
@@ -26,12 +26,12 @@
 /atom/movable/proc/check_access_list(list/L)
 	var/list/R = get_req_access()
 
-	if(!R)
+	if (!R)
 		R = list()
-	if(!istype(L, /list))
+	if (!istype(L, /list))
 		return FALSE
 
-	if(GLOB.using_map?.maint_all_access)
+	if (GLOB.using_map?.maint_all_access)
 		L = L.Copy()
 		L |= access_maint_tunnels
 
@@ -39,24 +39,24 @@
 
 /proc/has_access(list/req_access, list/accesses)
 	for(var/req in req_access)
-		if(islist(req))
+		if (islist(req))
 			var/found = FALSE
 			for(var/req_one in req)
-				if(req_one in accesses)
+				if (req_one in accesses)
 					found = TRUE
 					break
-			if(!found)
+			if (!found)
 				return FALSE
-		else if(!(req in accesses)) //doesn't have this access
+		else if (!(req in accesses)) //doesn't have this access
 			return FALSE
 	return TRUE
 
 //Checks if the access (constant or list) is contained in one of the entries of access_patterns, a list of lists.
 /proc/has_access_pattern(list/access_patterns, access)
-	if(!islist(access))
+	if (!islist(access))
 		access = list(access)
 	for(var/access_pattern in access_patterns)
-		if(has_access(access_pattern, access))
+		if (has_access(access_pattern, access))
 			return 1
 
 // Used for retrieving required access information, if available
@@ -68,29 +68,29 @@
 
 /proc/get_centcom_access(job)
 	switch(job)
-		if("VIP Guest")
+		if ("VIP Guest")
 			return list(access_cent_general)
-		if("Custodian")
+		if ("Custodian")
 			return list(access_cent_general, access_cent_living, access_cent_storage)
-		if("Thunderdome Overseer")
+		if ("Thunderdome Overseer")
 			return list(access_cent_general, access_cent_thunder)
-		if("Intel Officer")
+		if ("Intel Officer")
 			return list(access_cent_general, access_cent_living)
-		if("Medical Officer")
+		if ("Medical Officer")
 			return list(access_cent_general, access_cent_living, access_cent_medical)
-		if("Death Commando")
+		if ("Death Commando")
 			return list(access_cent_general, access_cent_specops, access_cent_living, access_cent_storage)
-		if("Research Officer")
+		if ("Research Officer")
 			return list(access_cent_general, access_cent_specops, access_cent_medical, access_cent_teleporter, access_cent_storage)
-		if("BlackOps Commander")
+		if ("BlackOps Commander")
 			return list(access_cent_general, access_cent_thunder, access_cent_specops, access_cent_living, access_cent_storage, access_cent_creed)
-		if("Supreme Commander")
+		if ("Supreme Commander")
 			return get_all_centcom_access()
 
 var/global/list/datum/access/priv_all_access_datums
 /proc/get_all_access_datums()
 	RETURN_TYPE(/list)
-	if(!priv_all_access_datums)
+	if (!priv_all_access_datums)
 		priv_all_access_datums = init_subtypes(/datum/access)
 		priv_all_access_datums = dd_sortedObjectList(priv_all_access_datums)
 
@@ -99,7 +99,7 @@ var/global/list/datum/access/priv_all_access_datums
 var/global/list/datum/access/priv_all_access_datums_id
 /proc/get_all_access_datums_by_id()
 	RETURN_TYPE(/list)
-	if(!priv_all_access_datums_id)
+	if (!priv_all_access_datums_id)
 		priv_all_access_datums_id = list()
 		for(var/datum/access/A in get_all_access_datums())
 			priv_all_access_datums_id["[A.id]"] = A
@@ -109,10 +109,10 @@ var/global/list/datum/access/priv_all_access_datums_id
 var/global/list/datum/access/priv_all_access_datums_region
 /proc/get_all_access_datums_by_region()
 	RETURN_TYPE(/list)
-	if(!priv_all_access_datums_region)
+	if (!priv_all_access_datums_region)
 		priv_all_access_datums_region = list()
 		for(var/datum/access/A in get_all_access_datums())
-			if(!priv_all_access_datums_region[A.region])
+			if (!priv_all_access_datums_region[A.region])
 				priv_all_access_datums_region[A.region] = list()
 			priv_all_access_datums_region[A.region] += A
 
@@ -122,14 +122,14 @@ var/global/list/datum/access/priv_all_access_datums_region
 	RETURN_TYPE(/list)
 	var/list/L = new()
 	for(var/datum/access/A in get_all_access_datums())
-		if(A.access_type & access_types)
+		if (A.access_type & access_types)
 			L += A.id
 	return L
 
 var/global/list/priv_all_access
 /proc/get_all_accesses()
 	RETURN_TYPE(/list)
-	if(!priv_all_access)
+	if (!priv_all_access)
 		priv_all_access = get_access_ids()
 
 	return priv_all_access.Copy()
@@ -137,7 +137,7 @@ var/global/list/priv_all_access
 var/global/list/priv_station_access
 /proc/get_all_station_access()
 	RETURN_TYPE(/list)
-	if(!priv_station_access)
+	if (!priv_station_access)
 		priv_station_access = get_access_ids(ACCESS_TYPE_STATION)
 
 	return priv_station_access.Copy()
@@ -145,7 +145,7 @@ var/global/list/priv_station_access
 var/global/list/priv_centcom_access
 /proc/get_all_centcom_access()
 	RETURN_TYPE(/list)
-	if(!priv_centcom_access)
+	if (!priv_centcom_access)
 		priv_centcom_access = get_access_ids(ACCESS_TYPE_CENTCOM)
 
 	return priv_centcom_access.Copy()
@@ -153,7 +153,7 @@ var/global/list/priv_centcom_access
 var/global/list/priv_syndicate_access
 /proc/get_all_syndicate_access()
 	RETURN_TYPE(/list)
-	if(!priv_syndicate_access)
+	if (!priv_syndicate_access)
 		priv_syndicate_access = get_access_ids(ACCESS_TYPE_SYNDICATE)
 
 	return priv_syndicate_access.Copy()
@@ -161,13 +161,13 @@ var/global/list/priv_syndicate_access
 var/global/list/priv_region_access
 /proc/get_region_accesses(code)
 	RETURN_TYPE(/list)
-	if(code == ACCESS_REGION_ALL)
+	if (code == ACCESS_REGION_ALL)
 		return get_all_station_access()
 
-	if(!priv_region_access)
+	if (!priv_region_access)
 		priv_region_access = list()
 		for(var/datum/access/A in get_all_access_datums())
-			if(!priv_region_access["[A.region]"])
+			if (!priv_region_access["[A.region]"])
 				priv_region_access["[A.region]"] = list()
 			priv_region_access["[A.region]"] += A.id
 
@@ -176,23 +176,23 @@ var/global/list/priv_region_access
 
 /proc/get_region_accesses_name(code)
 	switch(code)
-		if(ACCESS_REGION_ALL)
+		if (ACCESS_REGION_ALL)
 			return "All"
-		if(ACCESS_REGION_SECURITY) //security
+		if (ACCESS_REGION_SECURITY) //security
 			return "Security"
-		if(ACCESS_REGION_MEDBAY) //medbay
+		if (ACCESS_REGION_MEDBAY) //medbay
 			return "Medical"
-		if(ACCESS_REGION_RESEARCH) //research
+		if (ACCESS_REGION_RESEARCH) //research
 			return "Research"
-		if(ACCESS_REGION_ENGINEERING) //engineering and maintenance
+		if (ACCESS_REGION_ENGINEERING) //engineering and maintenance
 			return "Engineering"
-		if(ACCESS_REGION_COMMAND) //command
+		if (ACCESS_REGION_COMMAND) //command
 			return "Command"
-		if(ACCESS_REGION_GENERAL) //station general
+		if (ACCESS_REGION_GENERAL) //station general
 			return "General"
-		if(ACCESS_REGION_SUPPLY) //supply
+		if (ACCESS_REGION_SUPPLY) //supply
 			return "Supply"
-		if(ACCESS_REGION_SERVICE) //nt
+		if (ACCESS_REGION_SERVICE) //nt
 			return "Service"
 
 /proc/get_access_desc(id)
@@ -226,10 +226,10 @@ var/global/list/priv_region_access
 	var/static/obj/item/card/id/all_access/ghost_all_access
 
 /mob/observer/ghost/GetIdCard()
-	if(!isadmin(src))
+	if (!isadmin(src))
 		return
 
-	if(!ghost_all_access)
+	if (!ghost_all_access)
 		ghost_all_access = new()
 	return ghost_all_access
 
@@ -241,25 +241,25 @@ var/global/list/priv_region_access
 	for(var/item_slot in HUMAN_ID_CARDS)
 		var/obj/item/I = item_slot
 		var/obj/item/card/id = I ? I.GetIdCard() : null
-		if(id)
+		if (id)
 			return id
 
 /mob/living/carbon/human/GetAccess()
 	. = list()
 	for(var/item_slot in HUMAN_ID_CARDS)
 		var/obj/item/I = item_slot
-		if(I)
+		if (I)
 			. |= I.GetAccess()
 #undef HUMAN_ID_CARDS
 
 /mob/living/silicon/GetIdCard()
-	if(stat || (ckey && !client))
+	if (stat || (ckey && !client))
 		return // Unconscious, dead or once possessed but now client-less silicons are not considered to have id access.
 	return idcard
 
 /proc/FindNameFromID(mob/M, missing_id_name = "Unknown")
 	var/obj/item/card/id/C = M.GetIdCard()
-	if(C)
+	if (C)
 		return C.registered_name
 	return missing_id_name
 
@@ -270,17 +270,17 @@ var/global/list/priv_region_access
 /obj/proc/GetJobName() //Used in secHUD icon generation
 	var/obj/item/card/id/I = GetIdCard()
 
-	if(I)
+	if (I)
 		var/job_icons = get_all_job_icons()
-		if(I.assignment	in job_icons) //Check if the job has a hud icon
+		if (I.assignment	in job_icons) //Check if the job has a hud icon
 			return I.assignment
-		if(I.rank in job_icons)
+		if (I.rank in job_icons)
 			return I.rank
 
 		var/centcom = get_all_centcom_jobs()
-		if(I.assignment	in centcom) //Return with the NT logo if it is a Centcom job
+		if (I.assignment	in centcom) //Return with the NT logo if it is a Centcom job
 			return "Centcom"
-		if(I.rank in centcom)
+		if (I.rank in centcom)
 			return "Centcom"
 	else
 		return

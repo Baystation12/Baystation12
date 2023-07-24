@@ -19,15 +19,15 @@ SUBSYSTEM_DEF(culture)
 
 	for(var/ftype in subtypesof(/singleton/cultural_info))
 		var/singleton/cultural_info/culture = ftype
-		if(!initial(culture.name))
+		if (!initial(culture.name))
 			continue
 		culture = new culture
-		if(cultural_info_by_name[culture.name])
+		if (cultural_info_by_name[culture.name])
 			crash_with("Duplicate cultural datum ID - [culture.name] - [ftype]")
 		cultural_info_by_name[culture.name] = culture
 		cultural_info_by_path[ftype] = culture
-		if(culture.category && !culture.hidden)
-			if(!tagged_info[culture.category])
+		if (culture.category && !culture.hidden)
+			if (!tagged_info[culture.category])
 				tagged_info[culture.category] = list()
 			var/list/tag_list = tagged_info[culture.category]
 			tag_list[culture.name] = culture

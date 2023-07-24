@@ -4,14 +4,14 @@
 	health_resistances = DAMAGE_RESIST_PHYSICAL
 
 /obj/machinery/door/unpowered/Bumped(atom/AM)
-	if(src.locked)
+	if (src.locked)
 		return
 	..()
 	return
 
 /obj/machinery/door/unpowered/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/melee/energy/blade))	return
-	if(src.locked)	return
+	if (istype(I, /obj/item/melee/energy/blade))	return
+	if (src.locked)	return
 	..()
 	return
 

@@ -19,7 +19,7 @@
 /atom/Click(location, control, params) // This is their reaction to being clicked on (standard proc)
 	var/list/L = params2list(params)
 	var/dragged = L["drag"]
-	if(dragged && !L[dragged])
+	if (dragged && !L[dragged])
 		return
 
 	var/datum/click_handler/click_handler = usr.GetClickHandler()
@@ -61,7 +61,7 @@
 */
 /mob/proc/ClickOn(atom/A, params)
 
-	if(world.time <= next_click) // Hard check, before anything else, to avoid crashing
+	if (world.time <= next_click) // Hard check, before anything else, to avoid crashing
 		return
 
 	next_click = world.time + 1
@@ -92,23 +92,23 @@
 		if (CtrlClickOn(A))
 			return TRUE
 
-	if(stat || paralysis || stunned || weakened || sleeping)
+	if (stat || paralysis || stunned || weakened || sleeping)
 		return
 
 	// Do not allow player facing change in fixed chairs
-	if(!istype(buckled) || buckled.buckle_movable)
+	if (!istype(buckled) || buckled.buckle_movable)
 		face_atom(A) // change direction to face what you clicked on
 
-	if(!canClick()) // in the year 2000...
+	if (!canClick()) // in the year 2000...
 		return
 
-	if(restrained())
+	if (restrained())
 		setClickCooldown(10)
 		RestrainedClickOn(A)
 		return 1
 
-	if(in_throw_mode)
-		if(isturf(A) || isturf(A.loc))
+	if (in_throw_mode)
+		if (isturf(A) || isturf(A.loc))
 			throw_item(A)
 			trigger_aiming(TARGET_CAN_CLICK)
 			return 1
@@ -116,10 +116,10 @@
 
 	var/obj/item/W = get_active_hand()
 
-	if(W == A) // Handle attack_self
+	if (W == A) // Handle attack_self
 		W.attack_self(src)
 		trigger_aiming(TARGET_CAN_CLICK)
-		if(hand)
+		if (hand)
 			update_inv_l_hand(0)
 		else
 			update_inv_r_hand(0)
@@ -128,41 +128,41 @@
 	//Atoms on your person
 	// A is your location but is not a turf; or is on you (backpack); or is on something on you (box in backpack); sdepth is needed here because contents depth does not equate inventory storage depth.
 	var/sdepth = A.storage_depth(src)
-	if((!isturf(A) && A == loc) || (sdepth != -1 && sdepth <= 1))
-		if(W)
+	if ((!isturf(A) && A == loc) || (sdepth != -1 && sdepth <= 1))
+		if (W)
 			var/resolved = W.resolve_attackby(A, src, modifiers)
-			if(!resolved && A && W)
+			if (!resolved && A && W)
 				W.afterattack(A, src, 1, modifiers) // 1 indicates adjacency
 		else
-			if(ismob(A)) // No instant mob attacking
+			if (ismob(A)) // No instant mob attacking
 				setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			UnarmedAttack(A, 1)
 
 		trigger_aiming(TARGET_CAN_CLICK)
 		return 1
 
-	if(!loc.allow_click_through(A, modifiers, src)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
+	if (!loc.allow_click_through(A, modifiers, src)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
 		return
 
 	//Atoms on turfs (not on your person)
 	// A is a turf or is on a turf, or in something on a turf (pen in a box); but not something in something on a turf (pen in a box in a backpack)
 	sdepth = A.storage_depth_turf()
-	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
-		if(A.Adjacent(src)) // see adjacent.dm
-			if(W)
+	if (isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
+		if (A.Adjacent(src)) // see adjacent.dm
+			if (W)
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
 				var/resolved = W.resolve_attackby(A,src, modifiers)
-				if(!resolved && A && W)
+				if (!resolved && A && W)
 					W.afterattack(A, src, 1, modifiers) // 1: clicking something Adjacent
 			else
-				if(ismob(A)) // No instant mob attacking
+				if (ismob(A)) // No instant mob attacking
 					setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 				UnarmedAttack(A, 1)
 
 			trigger_aiming(TARGET_CAN_CLICK)
 			return
 		else // non-adjacent click
-			if(W)
+			if (W)
 				W.afterattack(A, src, 0, modifiers) // 0: not Adjacent
 			else
 				RangedAttack(A, modifiers)
@@ -174,7 +174,7 @@
 	next_move = max(world.time + timeout, next_move)
 
 /mob/proc/canClick()
-	if(config.no_click_cooldown || next_move <= world.time)
+	if (config.no_click_cooldown || next_move <= world.time)
 		return 1
 	return 0
 
@@ -198,11 +198,11 @@
 
 /mob/living/UnarmedAttack(atom/A, proximity_flag)
 
-	if(GAME_STATE < RUNLEVEL_GAME)
+	if (GAME_STATE < RUNLEVEL_GAME)
 		to_chat(src, "You cannot attack people before the game has started.")
 		return 0
 
-	if(stat)
+	if (stat)
 		return 0
 
 	return 1
@@ -227,10 +227,10 @@
  * Returns boolean - Whether or not the mob was able to perform the interaction.
  */
 /mob/proc/RangedAttack(atom/A, params)
-	if(!length(mutations))
+	if (!length(mutations))
 		return FALSE
 
-	if((MUTATION_LASER in mutations) && a_intent == I_HURT)
+	if ((MUTATION_LASER in mutations) && a_intent == I_HURT)
 		LaserEyes(A) // moved into a proc below
 		return TRUE
 
@@ -309,7 +309,7 @@
 	return FALSE
 
 /atom/movable/CtrlClick(mob/user)
-	if(Adjacent(user))
+	if (Adjacent(user))
 		user.start_pulling(src)
 		return TRUE
 	return ..()
@@ -336,8 +336,8 @@
  */
 /atom/proc/AltClick(mob/user)
 	var/turf/T = get_turf(src)
-	if(T && user.TurfAdjacent(T))
-		if(user.listed_turf == T)
+	if (T && user.TurfAdjacent(T))
+		if (user.listed_turf == T)
 			user.listed_turf = null
 		else
 			user.listed_turf = T
@@ -349,7 +349,7 @@
 	return T.AdjacentQuick(src)
 
 /mob/observer/ghost/TurfAdjacent(turf/T)
-	if(!isturf(loc) || !client)
+	if (!isturf(loc) || !client)
 		return FALSE
 	return z == T.z && (get_dist(loc, T) <= client.view)
 
@@ -465,7 +465,7 @@
 	playsound(usr.loc, 'sound/weapons/taser2.ogg', 75, 1)
 	LE.launch(A)
 /mob/living/carbon/human/LaserEyes()
-	if(nutrition>0)
+	if (nutrition>0)
 		..()
 		adjust_nutrition(-(rand(1,5)))
 		handle_regular_hud_updates()
@@ -474,19 +474,19 @@
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
 /mob/proc/face_atom(atom/A)
-	if(!A || !x || !y || !A.x || !A.y) return
+	if (!A || !x || !y || !A.x || !A.y) return
 	var/dx = A.x - x
 	var/dy = A.y - y
-	if(!dx && !dy) return
+	if (!dx && !dy) return
 
 	var/direction
-	if(abs(dx) < abs(dy))
-		if(dy > 0)	direction = NORTH
+	if (abs(dx) < abs(dy))
+		if (dy > 0)	direction = NORTH
 		else		direction = SOUTH
 	else
-		if(dx > 0)	direction = EAST
+		if (dx > 0)	direction = EAST
 		else		direction = WEST
-	if(direction != dir)
+	if (direction != dir)
 		facedir(direction)
 
 GLOBAL_LIST_INIT(click_catchers, create_click_catcher())
@@ -513,18 +513,18 @@ GLOBAL_LIST_INIT(click_catchers, create_click_catcher())
 
 /obj/screen/click_catcher/Click(location, control, params)
 	var/list/modifiers = params2list(params)
-	if(modifiers["middle"] && istype(usr, /mob/living/carbon))
+	if (modifiers["middle"] && istype(usr, /mob/living/carbon))
 		var/mob/living/carbon/C = usr
 		C.swap_hand()
 	else
 		var/turf/T = screen_loc2turf(screen_loc, get_turf(usr))
-		if(T)
+		if (T)
 			T.Click(location, control, params)
 	. = 1
 
 /client/MouseDown(object, location, control, params)
 	var/delay = mob.CanMobAutoclick(object, location, params)
-	if(delay)
+	if (delay)
 		selected_target[1] = object
 		selected_target[2] = params
 		while(selected_target[1])
@@ -535,7 +535,7 @@ GLOBAL_LIST_INIT(click_catchers, create_click_catcher())
 	selected_target[1] = null
 
 /client/MouseDrag(src_object,atom/over_object,src_location,over_location,src_control,over_control,params)
-	if(selected_target[1] && over_object.IsAutoclickable())
+	if (selected_target[1] && over_object.IsAutoclickable())
 		selected_target[1] = over_object
 		selected_target[2] = params
 
@@ -543,10 +543,10 @@ GLOBAL_LIST_INIT(click_catchers, create_click_catcher())
 	return
 
 /mob/living/carbon/CanMobAutoclick(atom/object, location, params)
-	if(!object.IsAutoclickable())
+	if (!object.IsAutoclickable())
 		return
 	var/obj/item/h = get_active_hand()
-	if(h)
+	if (h)
 		. = h.CanItemAutoclick(object, location, params)
 
 /obj/item/proc/CanItemAutoclick(object, location, params)

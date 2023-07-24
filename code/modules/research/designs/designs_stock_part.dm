@@ -6,7 +6,7 @@
 	name = "Component design ([item_name])"
 
 /datum/design/item/stock_part/AssembleDesignDesc()
-	if(!desc)
+	if (!desc)
 		desc = "A stock part used in the construction of various devices."
 
 /datum/design/item/stock_part/basic_capacitor

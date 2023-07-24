@@ -18,7 +18,7 @@ RSF
 
 /obj/item/rsf/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 0)
+	if (distance <= 0)
 		to_chat(user, "It currently holds [stored_matter]/30 fabrication-units.")
 
 /obj/item/rsf/attackby(obj/item/W as obj, mob/user as mob)
@@ -61,17 +61,17 @@ RSF
 
 /obj/item/rsf/afterattack(atom/A, mob/user as mob, proximity)
 
-	if(!proximity) return
+	if (!proximity) return
 
-	if(istype(user,/mob/living/silicon/robot))
+	if (istype(user,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = user
-		if(R.stat || !R.cell || R.cell.charge <= 0)
+		if (R.stat || !R.cell || R.cell.charge <= 0)
 			return
 	else
-		if(stored_matter <= 0)
+		if (stored_matter <= 0)
 			return
 
-	if(!istype(A, /obj/structure/table) && !istype(A, /turf/simulated/floor))
+	if (!istype(A, /obj/structure/table) && !istype(A, /turf/simulated/floor))
 		return
 
 	playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
@@ -79,28 +79,28 @@ RSF
 	var/obj/product
 
 	switch(mode)
-		if(1)
+		if (1)
 			product = new /obj/item/clothing/mask/smokable/cigarette()
 			used_energy = 10
-		if(2)
+		if (2)
 			product = new /obj/item/reagent_containers/food/drinks/glass2()
 			used_energy = 50
-		if(3)
+		if (3)
 			product = new /obj/item/paper()
 			used_energy = 10
-		if(4)
+		if (4)
 			product = new /obj/item/pen()
 			used_energy = 50
-		if(5)
+		if (5)
 			product = new /obj/item/storage/pill_bottle/dice()
 			used_energy = 200
 
 	to_chat(user, "Dispensing [product ? product : "product"]...")
 	product.dropInto(A.loc)
 
-	if(isrobot(user))
+	if (isrobot(user))
 		var/mob/living/silicon/robot/R = user
-		if(R.cell)
+		if (R.cell)
 			R.cell.use(used_energy)
 	else
 		stored_matter--

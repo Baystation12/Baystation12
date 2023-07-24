@@ -5,7 +5,7 @@ var/global/const/MOVEMENT_PROCEED = FLAG(2)
 var/global/const/MOVEMENT_STOP    = FLAG(3)
 
 #define INIT_MOVEMENT_HANDLERS \
-if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
+if (LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 	var/new_handlers = list(); \
 	for(var/path in movement_handlers){ \
 		var/arguments = movement_handlers[path];   \
@@ -22,14 +22,14 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 
 // We don't want to check for subtypes, hence why we don't call is_path_in_list(), etc.
 /atom/movable/proc/HasMovementHandler(handler_path)
-	if(!LAZYLEN(movement_handlers))
+	if (!LAZYLEN(movement_handlers))
 		return FALSE
-	if(ispath(movement_handlers[1]))
+	if (ispath(movement_handlers[1]))
 		return (handler_path in movement_handlers)
 	else
 		for(var/mh in movement_handlers)
 			var/datum/MH = mh
-			if(MH.type == handler_path)
+			if (MH.type == handler_path)
 				return TRUE
 	return FALSE
 
@@ -39,12 +39,12 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 	. = new handler_path(src)
 
 	// If a handler_path_to_add_before was given, attempt to find it and insert our handler just before it
-	if(handler_path_to_add_before && LAZYLEN(movement_handlers))
+	if (handler_path_to_add_before && LAZYLEN(movement_handlers))
 		var/index = 0
 		for(var/handler in movement_handlers)
 			index++
 			var/datum/H = handler
-			if(H.type == handler_path_to_add_before)
+			if (H.type == handler_path_to_add_before)
 				LAZYINSERT(movement_handlers, ., index)
 				return
 
@@ -54,10 +54,10 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 /atom/movable/proc/RemoveMovementHandler(handler_path)
 	INIT_MOVEMENT_HANDLERS
 
-	if(ispath(handler_path))
+	if (ispath(handler_path))
 		for(var/handler in movement_handlers)
 			var/datum/H = handler
-			if(H.type == handler_path)
+			if (H.type == handler_path)
 				REMOVE_AND_QDEL(H)
 				break
 	else if (handler_path in movement_handlers)
@@ -72,7 +72,7 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 
 	for(var/handler in movement_handlers)
 		var/datum/H = handler
-		if(H.type == handler_path)
+		if (H.type == handler_path)
 			return H
 
 // If is_external is explicitly set then use that, otherwise if the mover isn't the host assume it's external
@@ -86,13 +86,13 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 
 	for(var/mh in movement_handlers)
 		var/datum/movement_handler/movement_handler = mh
-		if(movement_handler.MayMove(mover, is_external) & MOVEMENT_STOP)
+		if (movement_handler.MayMove(mover, is_external) & MOVEMENT_STOP)
 			return MOVEMENT_HANDLED
 
 		. = movement_handler.DoMove(direction, mover, is_external)
-		if(. & MOVEMENT_REMOVE)
+		if (. & MOVEMENT_REMOVE)
 			REMOVE_AND_QDEL(movement_handler)
-		if(. & MOVEMENT_HANDLED)
+		if (. & MOVEMENT_HANDLED)
 			return
 
 // is_external means that something else (not inside us) is asking if we may move
@@ -105,9 +105,9 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 	for(var/mh in movement_handlers)
 		var/datum/movement_handler/movement_handler = mh
 		var/may_move = movement_handler.MayMove(mover, is_external)
-		if(may_move & MOVEMENT_STOP)
+		if (may_move & MOVEMENT_STOP)
 			return FALSE
-		if((may_move & (MOVEMENT_PROCEED|MOVEMENT_HANDLED)) == (MOVEMENT_PROCEED|MOVEMENT_HANDLED))
+		if ((may_move & (MOVEMENT_PROCEED|MOVEMENT_HANDLED)) == (MOVEMENT_PROCEED|MOVEMENT_HANDLED))
 			return TRUE
 	return TRUE
 
@@ -121,7 +121,7 @@ if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 	VAR_PROTECTED/atom/movable/host
 
 /datum/movement_handler/New(atom/movable/host)
-	if(!istype(host, expected_host_type))
+	if (!istype(host, expected_host_type))
 		CRASH("Invalid host type. Expected [expected_host_type], was [host ? host.type : "*null*"]")
 	src.host = host
 

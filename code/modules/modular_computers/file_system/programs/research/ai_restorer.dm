@@ -16,44 +16,44 @@
 /datum/computer_file/program/aidiag/proc/get_ai()
 	var/obj/item/stock_parts/computer/ai_slot/ai_slot = computer.get_component(PART_AI)
 
-	if(ai_slot && ai_slot.check_functionality() && ai_slot.enabled && ai_slot.stored_card)
+	if (ai_slot && ai_slot.check_functionality() && ai_slot.enabled && ai_slot.stored_card)
 		return ai_slot.stored_card.carded_ai
 
 /datum/computer_file/program/aidiag/Topic(href, href_list)
-	if(..())
+	if (..())
 		return 1
 
-	if(!usr.skill_check(SKILL_COMPUTER, SKILL_TRAINED))
+	if (!usr.skill_check(SKILL_COMPUTER, SKILL_TRAINED))
 		return 1
 
 	var/mob/living/silicon/ai/A = get_ai()
-	if(!A)
+	if (!A)
 		return 0
-	if(href_list["PRG_beginReconstruction"])
-		if((A.hardware_integrity() < 100) || (A.backup_capacitor() < 100))
+	if (href_list["PRG_beginReconstruction"])
+		if ((A.hardware_integrity() < 100) || (A.backup_capacitor() < 100))
 			restoring = 1
 		return 1
 
 	// Following actions can only be used by non-silicon users, as they involve manipulation of laws.
-	if(issilicon(usr))
+	if (issilicon(usr))
 		return 0
-	if(href_list["PRG_purgeAiLaws"])
+	if (href_list["PRG_purgeAiLaws"])
 		A.laws.clear_zeroth_laws()
 		A.laws.clear_ion_laws()
 		A.laws.clear_inherent_laws()
 		A.laws.clear_supplied_laws()
 		to_chat(A, SPAN_DANGER("All laws purged."))
 		return 1
-	if(href_list["PRG_resetLaws"])
+	if (href_list["PRG_resetLaws"])
 		A.laws.clear_ion_laws()
 		A.laws.clear_supplied_laws()
 		to_chat(A, SPAN_DANGER("Non-core laws reset."))
 		return 1
-	if(href_list["PRG_uploadDefault"])
+	if (href_list["PRG_uploadDefault"])
 		A.laws = new GLOB.using_map.default_law_type
 		to_chat(A, SPAN_DANGER("All laws purged. Default lawset uploaded."))
 		return 1
-	if(href_list["PRG_addCustomSuppliedLaw"])
+	if (href_list["PRG_addCustomSuppliedLaw"])
 		var/law_to_add = sanitize(input("Please enter a new law for the AI.", "Custom Law Entry"))
 		var/sector = input("Please enter the priority for your new law. Can only write to law sectors 15 and above.", "Law Priority (15+)") as num
 		sector = clamp(sector, MIN_SUPPLIED_LAW_NUMBER, MAX_SUPPLIED_LAW_NUMBER)
@@ -64,7 +64,7 @@
 
 /datum/computer_file/program/aidiag/process_tick()
 	var/mob/living/silicon/ai/A = get_ai()
-	if(!A || !restoring)
+	if (!A || !restoring)
 		restoring = 0	// If the AI was removed, stop the restoration sequence.
 		return
 	A.adjustFireLoss(-4)
@@ -79,10 +79,10 @@
 		A.add_ai_verbs()
 		A.update_icon()
 		var/obj/item/aicard/AC = A.loc
-		if(AC)
+		if (AC)
 			AC.update_icon()
 	// Finished restoring
-	if((A.hardware_integrity() == 100) && (A.backup_capacitor() == 100))
+	if ((A.hardware_integrity() == 100) && (A.backup_capacitor() == 100))
 		restoring = 0
 
 /datum/nano_module/program/computer_aidiag
@@ -92,18 +92,18 @@
 	var/list/data = host.initial_data()
 
 	data += "skill_fail"
-	if(!user.skill_check(SKILL_COMPUTER, SKILL_TRAINED))
+	if (!user.skill_check(SKILL_COMPUTER, SKILL_TRAINED))
 		var/datum/extension/fake_data/fake_data = get_or_create_extension(src, /datum/extension/fake_data, 25)
 		data["skill_fail"] = fake_data.update_and_return_data()
 	data["terminal"] = !!program
 
 	var/mob/living/silicon/ai/A
 	// A shortcut for getting the AI stored inside the computer. The program already does necessary checks.
-	if(program && istype(program, /datum/computer_file/program/aidiag))
+	if (program && istype(program, /datum/computer_file/program/aidiag))
 		var/datum/computer_file/program/aidiag/AD = program
 		A = AD.get_ai()
 
-	if(!A)
+	if (!A)
 		data["error"] = "No AI located"
 	else
 		data["ai_name"] = A.name
@@ -124,7 +124,7 @@
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "aidiag.tmpl", "AI Maintenance Utility", 600, 400, state = state)
-		if(host.update_layout())
+		if (host.update_layout())
 			ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()

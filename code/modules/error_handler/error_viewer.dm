@@ -25,13 +25,13 @@ GLOBAL_DATUM(error_cache, /datum/error_viewer/error_cache)
 	var/name = ""
 
 /datum/error_viewer/Topic(href, href_list)
-	if(href_list["viewruntime"])
+	if (href_list["viewruntime"])
 		var/datum/error_viewer/error_viewer = locate(href_list["viewruntime"])
-		if(!istype(error_viewer))
+		if (!istype(error_viewer))
 			to_chat(usr, SPAN_WARNING("That runtime viewer no longer exists."))
 			return
 
-		if(href_list["viewruntime_backto"])
+		if (href_list["viewruntime_backto"])
 			error_viewer.show_to(usr.client, locate(href_list["viewruntime_backto"]), href_list["viewruntime_linear"])
 		else
 			error_viewer.show_to(usr.client, null, href_list["viewruntime_linear"])
@@ -130,7 +130,7 @@ GLOBAL_DATUM(error_cache, /datum/error_viewer/error_cache)
 		var/const/viewtext = "\[view]" // Nesting these in other brackets went poorly
 		log_runtime("Runtime in <b>[actual_file]</b>, line <b>[actual_line]</b>: <b>[html_encode(e.name)]</b> [error_entry.make_link(viewtext)]")
 		var/err_msg_delay
-		if(config)
+		if (config)
 			err_msg_delay = config.error_msg_delay
 		else
 			err_msg_delay = initial(config.error_msg_delay)
@@ -173,7 +173,7 @@ GLOBAL_DATUM(error_cache, /datum/error_viewer/error_cache)
 		name = "<b>\[[time_stamp()]]</b> Uncaught exception: <b>[html_encode(e.name)]</b>"
 		return
 
-	if(skip_count)
+	if (skip_count)
 		name = "\[[time_stamp()]] Skipped [skip_count] runtimes in [e.file],[e.line]."
 		is_skip_count = TRUE
 		return

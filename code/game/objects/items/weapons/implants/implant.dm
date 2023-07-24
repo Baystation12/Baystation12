@@ -25,7 +25,7 @@
 	return
 
 /obj/item/implant/proc/disable(time = 100)
-	if(malfunction)
+	if (malfunction)
 		return 0
 
 	malfunction = MALFUNCTION_TEMPORARY
@@ -33,7 +33,7 @@
 	return 1
 
 /obj/item/implant/proc/restore()
-	if(malfunction == MALFUNCTION_PERMANENT || !malfunction)
+	if (malfunction == MALFUNCTION_PERMANENT || !malfunction)
 		return 0
 
 	malfunction = 0
@@ -47,7 +47,7 @@
 
 /obj/item/implant/proc/can_implant(mob/M, mob/user, target_zone)
 	var/mob/living/carbon/human/H = M
-	if(istype(H) && !H.get_organ(target_zone))
+	if (istype(H) && !H.get_organ(target_zone))
 		to_chat(user, SPAN_WARNING("\The [M] is missing that body part."))
 		return FALSE
 	return TRUE
@@ -56,7 +56,7 @@
 	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/affected = H.get_organ(target_zone)
-		if(affected)
+		if (affected)
 			affected.implants += src
 			part = affected
 
@@ -71,7 +71,7 @@
 
 /obj/item/implant/proc/removed()
 	imp_in = null
-	if(part)
+	if (part)
 		part.implants -= src
 		part = null
 	implanted = 0
@@ -86,7 +86,7 @@
 /obj/item/implant/interact(user)
 	var/datum/browser/popup = new(user, capitalize(name), capitalize(name), 300, 700, src)
 	var/dat = get_data()
-	if(malfunction)
+	if (malfunction)
 		popup.title = "??? implant"
 		dat = stars(dat,10)
 	popup.set_content(dat)
@@ -96,7 +96,7 @@
 	return FALSE
 
 /obj/item/implant/proc/meltdown()	//breaks it down, making implant unrecongizible
-	if(malfunction == MALFUNCTION_PERMANENT) return
+	if (malfunction == MALFUNCTION_PERMANENT) return
 	to_chat(imp_in, SPAN_DANGER("You feel something melting inside [part ? "your [part.name]" : "you"]!"))
 	if (part)
 		part.take_external_damage(burn = 15, used_weapon = "Electronics meltdown")
@@ -110,15 +110,15 @@
 
 /obj/item/implant/emp_act(severity)
 	var/power = 4 - severity
-	if(prob(power * 15))
+	if (prob(power * 15))
 		meltdown()
-	else if(prob(power * 33))
+	else if (prob(power * 33))
 		disable(rand(power*100,power*1000))
-	else if(prob(power * 25))
+	else if (prob(power * 25))
 		activate()
 	..()
 
 /obj/item/implant/Destroy()
-	if(part)
+	if (part)
 		part.implants.Remove(src)
 	return ..()

@@ -21,43 +21,43 @@
 	var/datum/job/previewJob
 	if (preview_job || preview_gear)
 		// Determine what job is marked as 'High' priority, and dress them up as such.
-		if(GLOB.using_map.default_assistant_title in job_low)
+		if (GLOB.using_map.default_assistant_title in job_low)
 			previewJob = SSjobs.get_by_title(GLOB.using_map.default_assistant_title)
 		else
 			previewJob = SSjobs.get_by_title(job_high)
 	else
 		return
-	if(preview_job && previewJob)
+	if (preview_job && previewJob)
 		mannequin.job = previewJob.title
 		var/datum/mil_branch/branch = GLOB.mil_branches.get_branch(branches[previewJob.title])
 		var/datum/mil_rank/rank = GLOB.mil_branches.get_rank(branches[previewJob.title], ranks[previewJob.title])
 		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title], branch, rank)
 		update_icon = TRUE
-	if(!(mannequin.species.appearance_flags && mannequin.species.appearance_flags & SPECIES_APPEARANCE_HAS_UNDERWEAR))
-		if(all_underwear)
+	if (!(mannequin.species.appearance_flags && mannequin.species.appearance_flags & SPECIES_APPEARANCE_HAS_UNDERWEAR))
+		if (all_underwear)
 			all_underwear.Cut()
-	if(preview_gear && !(previewJob && preview_job && (previewJob.type == /datum/job/ai || previewJob.type == /datum/job/cyborg)))
+	if (preview_gear && !(previewJob && preview_job && (previewJob.type == /datum/job/ai || previewJob.type == /datum/job/cyborg)))
 		// Equip custom gear loadout, replacing any job items
 		var/list/loadout_taken_slots = list()
 		for(var/thing in Gear())
 			var/datum/gear/G = gear_datums[thing]
-			if(G)
+			if (G)
 				var/permitted = 0
-				if(G.allowed_roles && length(G.allowed_roles))
-					if(previewJob)
+				if (G.allowed_roles && length(G.allowed_roles))
+					if (previewJob)
 						for(var/job_type in G.allowed_roles)
-							if(previewJob.type == job_type)
+							if (previewJob.type == job_type)
 								permitted = 1
 				else
 					permitted = 1
-				if(G.whitelisted && !(mannequin.species.name in G.whitelisted))
+				if (G.whitelisted && !(mannequin.species.name in G.whitelisted))
 					permitted = 0
-				if(!permitted)
+				if (!permitted)
 					continue
-				if(G.slot && G.slot != slot_tie && !(G.slot in loadout_taken_slots) && G.spawn_on_mob(mannequin, gear_list[gear_slot][G.display_name]))
+				if (G.slot && G.slot != slot_tie && !(G.slot in loadout_taken_slots) && G.spawn_on_mob(mannequin, gear_list[gear_slot][G.display_name]))
 					loadout_taken_slots.Add(G.slot)
 					update_icon = TRUE
-	if(update_icon)
+	if (update_icon)
 		mannequin.update_icons()
 
 
@@ -102,7 +102,7 @@
 
 
 /datum/category_item/player_setup_item/physical/preview/sanitize_character()
-	if(!pref.bgstate || !(pref.bgstate in pref.background_states))
+	if (!pref.bgstate || !(pref.bgstate in pref.background_states))
 		pref.bgstate = pref.background_states[1]
 
 
@@ -131,7 +131,7 @@
 
 
 /datum/category_item/player_setup_item/physical/preview/content(mob/user)
-	if(!pref.preview_icon)
+	if (!pref.preview_icon)
 		pref.update_preview_icon()
 	send_rsc(user, pref.preview_icon, "previewicon.png")
 	var/width = pref.preview_icon.Width()

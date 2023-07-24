@@ -67,19 +67,19 @@
  * Returns boolean.
  */
 /atom/proc/submerged(depth)
-	if(isnull(depth))
+	if (isnull(depth))
 		var/turf/T = get_turf(src)
-		if(!istype(T))
+		if (!istype(T))
 			return FALSE
 		depth = T.get_fluid_depth()
-	if(istype(loc, /mob))
+	if (istype(loc, /mob))
 		return depth >= FLUID_SHALLOW
-	if(istype(loc, /turf))
+	if (istype(loc, /turf))
 		return depth >= 3
 	return depth >= FLUID_OVER_MOB_HEAD
 
 /turf/submerged(depth)
-	if(isnull(depth))
+	if (isnull(depth))
 		depth = get_fluid_depth()
 	return depth >= FLUID_OVER_MOB_HEAD
 
@@ -88,5 +88,5 @@
  */
 /atom/proc/fluid_update()
 	var/turf/T = get_turf(src)
-	if(istype(T))
+	if (istype(T))
 		T.fluid_update()

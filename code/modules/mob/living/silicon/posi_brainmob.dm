@@ -23,21 +23,21 @@
 
 /mob/living/silicon/sil_brainmob/Initialize(mapload)
 	reagents = new/datum/reagents(1000, src)
-	if(istype(loc, /obj/item/organ/internal/posibrain))
+	if (istype(loc, /obj/item/organ/internal/posibrain))
 		container = loc
 	add_language(LANGUAGE_ROBOT_GLOBAL)
 	. = ..()
 
 
 /mob/living/silicon/sil_brainmob/Destroy()
-	if(key)				//If there is a mob connected to this thing. Have to check key twice to avoid false death reporting.
-		if(stat!=DEAD)	//If not dead.
+	if (key)				//If there is a mob connected to this thing. Have to check key twice to avoid false death reporting.
+		if (stat!=DEAD)	//If not dead.
 			death(1)	//Brains can die again. AND THEY SHOULD AHA HA HA HA HA HA
 		ghostize()		//Ghostize checks for key so nothing else is necessary.
 	return ..()
 
 /mob/living/silicon/sil_brainmob/UpdateLyingBuckledAndVerbStatus()
-	if(container && istype(container, /obj/item/organ/internal/posibrain) && istype(container.loc, /turf))
+	if (container && istype(container, /obj/item/organ/internal/posibrain) && istype(container.loc, /turf))
 		use_me = 1
 
 /mob/living/silicon/sil_brainmob/isSynthetic()
@@ -50,7 +50,7 @@
 	return 0
 
 /mob/living/silicon/sil_brainmob/show_laws(mob/M)
-	if(M)
+	if (M)
 		to_chat(M, "<b>Obey these laws [M]:</b>")
 		src.laws_sanity_check()
 		src.laws.show_laws(M)
@@ -61,17 +61,17 @@
 
 /mob/living/silicon/sil_brainmob/proc/update_owner_channels()
 	var/mob/living/carbon/human/owner = container.owner
-	if(!owner)	return
+	if (!owner)	return
 
 	owner_channels.Cut()
 
 	var/obj/item/device/radio/headset/R
-	if(owner.l_ear && istype(owner.l_ear,/obj/item/device/radio))
+	if (owner.l_ear && istype(owner.l_ear,/obj/item/device/radio))
 		R = owner.l_ear
-	else if(owner.r_ear && istype(owner.r_ear,/obj/item/device/radio))
+	else if (owner.r_ear && istype(owner.r_ear,/obj/item/device/radio))
 		R = owner.r_ear
 
-	if(!R)	return 0
+	if (!R)	return 0
 
 	var/list/new_channels = list()
 	new_channels["Common"] = ";"
@@ -83,7 +83,7 @@
 	return 1
 
 /mob/living/silicon/sil_brainmob/statelaw(law, mob/living/L = src)
-	if(container && container.owner)
+	if (container && container.owner)
 		L = container.owner
 	return ..(law, L)
 
@@ -99,7 +99,7 @@
 
 /mob/living/silicon/sil_brainmob/statelaws(datum/ai_laws/laws)
 	update_law_channels()
-	if(isnull(law_channels[lawchannel]))
+	if (isnull(law_channels[lawchannel]))
 		to_chat(src, SPAN_DANGER("[lawchannel]: Unable to state laws. Communication method unavailable."))
 		return 0
 

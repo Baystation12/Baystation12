@@ -32,7 +32,7 @@
 	return I
 
 /spell/targeted/equip_item/shield/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 
 	item_color = "#6600ff"

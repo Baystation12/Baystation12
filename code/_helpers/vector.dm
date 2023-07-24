@@ -50,12 +50,12 @@ return_location()
 	source = S
 	target = T
 
-	if(!istype(source))
+	if (!istype(source))
 		source = get_turf(source)
-	if(!istype(target))
+	if (!istype(target))
 		target = get_turf(target)
 
-	if(!istype(source) || !istype(target))
+	if (!istype(source) || !istype(target))
 		return
 
 	// convert coordinates to pixel space (default is 32px/turf, 8160px across for a size 255 map)
@@ -68,31 +68,31 @@ return_location()
 	var/dy = target.y - source.y
 
 	// if we aren't moving anywhere; quit now
-	if(dx == 0 && dy == 0)
+	if (dx == 0 && dy == 0)
 		return
 
 	// calculate the angle
 	angle = Atan2(dx, dy) + angle_offset
 
 	// and some rounding to stop the increments jumping whole turfs - because byond favours certain angles
-	if(angle > -135 && angle < 45)
+	if (angle > -135 && angle < 45)
 		angle = ceil(angle)
 	else
 		angle = floor(angle)
 
 	// calculate the offset per increment step
-	if(abs(angle) in list(0, 45, 90, 135, 180))		// check if the angle is a cardinal
-		if(abs(angle) in list(0, 45, 135, 180))		// if so we can skip the trigonometry and set these to absolutes as
+	if (abs(angle) in list(0, 45, 90, 135, 180))		// check if the angle is a cardinal
+		if (abs(angle) in list(0, 45, 135, 180))		// if so we can skip the trigonometry and set these to absolutes as
 			offset_x = sign(dx)						// they will always be a full step in one or more directions
-		if(abs(angle) in list(45, 90, 135))
+		if (abs(angle) in list(45, 90, 135))
 			offset_y = sign(dy)
-	else if(abs(dy) > abs(dx))
+	else if (abs(dy) > abs(dx))
 		offset_x = Cot(abs(angle))					// otherwise set the offsets
 		offset_y = sign(dy)
 	else
 		offset_x = sign(dx)
 		offset_y = tan(angle)
-		if(dx < 0)
+		if (dx < 0)
 			offset_y = -offset_y
 
 	// multiply the offset by the turf pixel size
@@ -111,10 +111,10 @@ return_location()
 
 /datum/plot_vector/proc/return_location(datum/vector_loc/data)
 	RETURN_TYPE(/datum/vector_loc)
-	if(!data)
+	if (!data)
 		data = new()
 	data.loc = locate(round(loc_x / world.icon_size, 1), round(loc_y / world.icon_size, 1), loc_z)
-	if(!data.loc)
+	if (!data.loc)
 		return
 	data.pixel_x = loc_x - (data.loc.x * world.icon_size)
 	data.pixel_y = loc_y - (data.loc.y * world.icon_size)

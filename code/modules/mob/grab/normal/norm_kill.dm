@@ -34,7 +34,7 @@
 	affecting.drop_l_hand()
 	affecting.drop_r_hand()
 
-	if(affecting.lying)
+	if (affecting.lying)
 		affecting.Weaken(4)
 
 	affecting.adjustOxyLoss(1)

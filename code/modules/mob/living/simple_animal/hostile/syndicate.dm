@@ -26,11 +26,11 @@
 
 /mob/living/simple_animal/hostile/human/syndicate/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
-	if(corpse)
+	if (corpse)
 		new corpse (src.loc)
-	if(weapon1)
+	if (weapon1)
 		new weapon1 (src.loc)
-	if(weapon2)
+	if (weapon2)
 		new weapon2 (src.loc)
 	qdel(src)
 	return
@@ -82,10 +82,10 @@
 
 
 /mob/living/simple_animal/hostile/human/syndicate/melee/bullet_act(obj/item/projectile/Proj)
-	if(!Proj)	return
+	if (!Proj)	return
 	if (status_flags & GODMODE)
 		return PROJECTILE_FORCE_MISS
-	if(prob(65))
+	if (prob(65))
 		src.health -= Proj.damage
 	else
 		visible_message(SPAN_DANGER("\The [src] blocks \the [Proj] with its shield!"))

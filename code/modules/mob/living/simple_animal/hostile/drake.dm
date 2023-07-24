@@ -41,14 +41,14 @@
 
 /mob/living/simple_animal/hostile/drake/do_special_attack(atom/A)
 	. = ..()
-	if(empowered_attack)
+	if (empowered_attack)
 		depower()
 		return
 	empower()
 
 /mob/living/simple_animal/hostile/drake/get_natural_weapon()
-	if(empowered_attack)
-		if(!tailwhip)
+	if (empowered_attack)
+		if (!tailwhip)
 			tailwhip = new(src)
 		return tailwhip
 	. = ..()
@@ -56,7 +56,7 @@
 /mob/living/simple_animal/hostile/drake/proc/empower()
 	visible_message(SPAN_MFAUNA("\The [src] thrashes its tail about!"))
 	empowered_attack = TRUE
-	if(prob(25) && !gas_spent)
+	if (prob(25) && !gas_spent)
 		vent_gas()
 
 /mob/living/simple_animal/hostile/drake/proc/vent_gas()

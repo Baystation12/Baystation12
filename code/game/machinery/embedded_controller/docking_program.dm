@@ -64,8 +64,8 @@
 
 /datum/computer/file/embedded_program/docking/New(obj/machinery/embedded_controller/M)
 	..()
-	if(id_tag)
-		if(SSshuttle.docking_registry[id_tag])
+	if (id_tag)
+		if (SSshuttle.docking_registry[id_tag])
 			crash_with("Docking controller tag [id_tag] had multiple associated programs.")
 		SSshuttle.docking_registry[id_tag] = src
 
@@ -74,9 +74,9 @@
 	return ..()
 
 /datum/computer/file/embedded_program/docking/receive_user_command(command)
-	if(command == "dock" || command == "undock")
+	if (command == "dock" || command == "undock")
 
-		if(!tag_target)			//Prevents from self destructing if no docking buddy
+		if (!tag_target)			//Prevents from self destructing if no docking buddy
 			return FALSE
 
 		var/datum/signal/signal = new()
@@ -116,9 +116,9 @@
 			if (control_mode == MODE_NONE && dock_state == STATE_UNDOCKED)
 				tag_target = receive_tag
 
-				if(docking_codes)
+				if (docking_codes)
 					var/code = signal.data["code"]
-					if(code != docking_codes)
+					if (code != docking_codes)
 						return
 
 				control_mode = MODE_SERVER

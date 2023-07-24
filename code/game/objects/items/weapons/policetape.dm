@@ -15,18 +15,18 @@ GLOBAL_LIST(hazard_overlays)
 
 /obj/item/taperoll/Initialize()
 	. = ..()
-	if(!GLOB.hazard_overlays)
+	if (!GLOB.hazard_overlays)
 		GLOB.hazard_overlays = list()
 		GLOB.hazard_overlays["[NORTH]"]	= new/image('icons/effects/warning_stripes.dmi', icon_state = "N")
 		GLOB.hazard_overlays["[EAST]"]	= new/image('icons/effects/warning_stripes.dmi', icon_state = "E")
 		GLOB.hazard_overlays["[SOUTH]"]	= new/image('icons/effects/warning_stripes.dmi', icon_state = "S")
 		GLOB.hazard_overlays["[WEST]"]	= new/image('icons/effects/warning_stripes.dmi', icon_state = "W")
-	if(apply_tape)
+	if (apply_tape)
 		var/turf/T = get_turf(src)
-		if(!T)
+		if (!T)
 			return
 		var/obj/machinery/door/airlock/airlock = locate(/obj/machinery/door/airlock) in T
-		if(airlock)
+		if (airlock)
 			afterattack(airlock, null, TRUE)
 		return INITIALIZE_HINT_QDEL
 
@@ -51,17 +51,17 @@ var/global/list/tape_roll_applications = list()
 	overlays.Cut()
 	var/new_state
 	switch (tape_dir)
-		if(0)  // AIRLOCK
+		if (0)  // AIRLOCK
 			new_state = "[icon_base]_door"
-		if(3)  // VERTICAL
+		if (3)  // VERTICAL
 			new_state = "[icon_base]_v"
-		if(12) // HORIZONTAL
+		if (12) // HORIZONTAL
 			new_state = "[icon_base]_h"
 		else   // END POINT (1|2|4|8)
 			new_state = "[icon_base]_dir"
 			dir = tape_dir
 	icon_state = "[new_state]_[crumpled]"
-	if(detail_overlay)
+	if (detail_overlay)
 		var/image/I = overlay_image(icon, "[new_state]_[detail_overlay]", flags=RESET_COLOR)
 		I.color = detail_color
 		overlays |= I
@@ -152,8 +152,8 @@ var/global/list/tape_roll_applications = list()
 	overlays.Cut()
 	var/image/overlay = image(icon = src.icon)
 	overlay.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
-	if(ismob(loc))
-		if(!start)
+	if (ismob(loc))
+		if (!start)
 			overlay.icon_state = "start"
 		else
 			overlay.icon_state = "stop"
@@ -172,43 +172,43 @@ var/global/list/tape_roll_applications = list()
 	return ..()
 
 /obj/item/taperoll/attack_self(mob/user as mob)
-	if(!start)
+	if (!start)
 		start = get_turf(src)
 		to_chat(usr, SPAN_NOTICE("You place the first end of \the [src]."))
 		update_icon()
 	else
 		end = get_turf(src)
-		if(start.y != end.y && start.x != end.x || start.z != end.z)
+		if (start.y != end.y && start.x != end.x || start.z != end.z)
 			start = null
 			update_icon()
 			to_chat(usr, SPAN_NOTICE("\The [src] can only be laid horizontally or vertically."))
 			return
 
-		if(start == end)
+		if (start == end)
 			// spread tape in all directions, provided there is a wall/window
 			var/turf/T
 			var/possible_dirs = 0
 			for(var/dir in GLOB.cardinal)
 				T = get_step(start, dir)
-				if(T && T.density)
+				if (T && T.density)
 					possible_dirs += dir
 				else
 					for(var/obj/structure/window/W in T)
-						if(W.is_fulltile() || W.dir == GLOB.reverse_dir[dir])
+						if (W.is_fulltile() || W.dir == GLOB.reverse_dir[dir])
 							possible_dirs += dir
-			if(!possible_dirs)
+			if (!possible_dirs)
 				start = null
 				update_icon()
 				to_chat(usr, SPAN_NOTICE("You can't place \the [src] here."))
 				return
-			if(possible_dirs & (NORTH|SOUTH))
+			if (possible_dirs & (NORTH|SOUTH))
 				var/obj/item/tape/TP = new tape_type(start)
 				for(var/dir in list(NORTH, SOUTH))
 					if (possible_dirs & dir)
 						TP.tape_dir += dir
 				TP.add_fingerprint(user)
 				TP.update_icon()
-			if(possible_dirs & (EAST|WEST))
+			if (possible_dirs & (EAST|WEST))
 				var/obj/item/tape/TP = new tape_type(start)
 				for(var/dir in list(EAST, WEST))
 					if (possible_dirs & dir)
@@ -224,21 +224,21 @@ var/global/list/tape_roll_applications = list()
 		var/orientation = get_dir(start, end)
 		var/dir = 0
 		switch(orientation)
-			if(NORTH, SOUTH)	dir = NORTH|SOUTH	// North-South taping
-			if(EAST,   WEST)	dir =  EAST|WEST	// East-West taping
+			if (NORTH, SOUTH)	dir = NORTH|SOUTH	// North-South taping
+			if (EAST,   WEST)	dir =  EAST|WEST	// East-West taping
 
 		var/can_place = 1
 		while (can_place)
-			if(cur.density)
+			if (cur.density)
 				can_place = 0
 			else if (istype(cur, /turf/space))
 				can_place = 0
 			else
 				for(var/obj/O in cur)
-					if(O.density)
+					if (O.density)
 						can_place = 0
 						break
-			if(cur == end)
+			if (cur == end)
 				break
 			cur = get_step_towards(cur,end)
 		if (!can_place)
@@ -253,32 +253,32 @@ var/global/list/tape_roll_applications = list()
 		while (1)
 			tapetest = 0
 			tape_dir = dir
-			if(cur == start)
+			if (cur == start)
 				var/turf/T = get_step(start, GLOB.reverse_dir[orientation])
-				if(T && !T.density)
+				if (T && !T.density)
 					tape_dir = orientation
 					for(var/obj/structure/window/W in T)
-						if(W.is_fulltile() || W.dir == orientation)
+						if (W.is_fulltile() || W.dir == orientation)
 							tape_dir = dir
-			else if(cur == end)
+			else if (cur == end)
 				var/turf/T = get_step(end, orientation)
-				if(T && !T.density)
+				if (T && !T.density)
 					tape_dir = GLOB.reverse_dir[orientation]
 					for(var/obj/structure/window/W in T)
-						if(W.is_fulltile() || W.dir == GLOB.reverse_dir[orientation])
+						if (W.is_fulltile() || W.dir == GLOB.reverse_dir[orientation])
 							tape_dir = dir
 			for(var/obj/item/tape/T in cur)
-				if((T.tape_dir == tape_dir) && (T.icon_base == icon_base))
+				if ((T.tape_dir == tape_dir) && (T.icon_base == icon_base))
 					tapetest = 1
 					break
-			if(!tapetest)
+			if (!tapetest)
 				var/obj/item/tape/T = new tape_type(cur)
 				T.add_fingerprint(user)
 				T.tape_dir = tape_dir
 				T.update_icon()
-				if(tape_dir & SOUTH)
+				if (tape_dir & SOUTH)
 					T.layer += 0.1 // Must always show above other tapes
-			if(cur == end)
+			if (cur == end)
 				break
 			cur = get_step_towards(cur,end)
 		start = null
@@ -287,7 +287,7 @@ var/global/list/tape_roll_applications = list()
 		return
 
 /obj/item/taperoll/afterattack(atom/A, mob/user as mob, proximity)
-	if(!proximity)
+	if (!proximity)
 		return
 
 	if (istype(A, /obj/machinery/door/airlock))
@@ -302,10 +302,10 @@ var/global/list/tape_roll_applications = list()
 		var/turf/F = A
 		var/direction = user.loc == F ? user.dir : turn(user.dir, 180)
 		var/hazard_overlay = GLOB.hazard_overlays["[direction]"]
-		if(tape_roll_applications[F] == null)
+		if (tape_roll_applications[F] == null)
 			tape_roll_applications[F] = 0
 
-		if(tape_roll_applications[F] & direction) // hazard_overlay in F.overlays wouldn't work.
+		if (tape_roll_applications[F] & direction) // hazard_overlay in F.overlays wouldn't work.
 			user.visible_message("\The [user] uses the adhesive of \the [src] to remove area markings from \the [F].", "You use the adhesive of \the [src] to remove area markings from \the [F].")
 			F.overlays -= hazard_overlay
 			tape_roll_applications[F] &= ~direction
@@ -316,18 +316,18 @@ var/global/list/tape_roll_applications = list()
 		return
 
 /obj/item/tape/proc/crumple()
-	if(!crumpled)
+	if (!crumpled)
 		crumpled = 1
 		update_icon()
 		SetName("crumpled [name]")
 
 /obj/item/tape/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(!lifted && ismob(mover))
+	if (!lifted && ismob(mover))
 		var/mob/M = mover
 		add_fingerprint(M)
 		if (!allowed(M))	//only select few learn art of not crumpling the tape
 			to_chat(M, SPAN_WARNING("You are not supposed to go past [src]..."))
-			if(M.a_intent == I_HELP)
+			if (M.a_intent == I_HELP)
 				return 0
 			crumple()
 	return ..(mover)
@@ -353,13 +353,13 @@ var/global/list/tape_roll_applications = list()
 // Returns a list of all tape objects connected to src, including itself.
 /obj/item/tape/proc/gettapeline()
 	var/list/dirs = list()
-	if(tape_dir & NORTH)
+	if (tape_dir & NORTH)
 		dirs += NORTH
-	if(tape_dir & SOUTH)
+	if (tape_dir & SOUTH)
 		dirs += SOUTH
-	if(tape_dir & WEST)
+	if (tape_dir & WEST)
 		dirs += WEST
-	if(tape_dir & EAST)
+	if (tape_dir & EAST)
 		dirs += EAST
 
 	var/list/obj/item/tape/tapeline = list()
@@ -380,15 +380,15 @@ var/global/list/tape_roll_applications = list()
 
 
 /obj/item/tape/proc/breaktape(mob/user)
-	if(user.a_intent == I_HELP)
+	if (user.a_intent == I_HELP)
 		to_chat(user, SPAN_WARNING("You refrain from breaking \the [src]."))
 		return
 	user.visible_message(SPAN_NOTICE("\The [user] breaks \the [src]!"),SPAN_NOTICE("You break \the [src]."))
 
 	for (var/obj/item/tape/T in gettapeline())
-		if(T == src)
+		if (T == src)
 			continue
-		if(T.tape_dir & get_dir(T, src))
+		if (T.tape_dir & get_dir(T, src))
 			qdel(T)
 
 	qdel(src) //TODO: Dropping a trash item holding fibers/fingerprints of all broken tape parts

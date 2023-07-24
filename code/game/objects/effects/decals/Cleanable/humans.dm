@@ -29,7 +29,7 @@ var/global/list/image/splatter_cache=list()
 	var/blood_size = BLOOD_SIZE_MEDIUM // A relative size; larger-sized blood will not override smaller-sized blood, except maybe at mapload.
 
 /obj/effect/decal/cleanable/blood/reveal_blood()
-	if(!fluorescent || invisibility == 100)
+	if (!fluorescent || invisibility == 100)
 		set_invisibility(0)
 		fluorescent = ATOM_FLOURESCENCE_INACTIVE
 		basecolor = COLOR_LUMINOL
@@ -37,7 +37,7 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/clean_blood()
 	fluorescent = ATOM_FLOURESCENCE_NONE
-	if(invisibility != 100)
+	if (invisibility != 100)
 		set_invisibility(100)
 		amount = 0
 		STOP_PROCESSING(SSobj, src)
@@ -53,27 +53,27 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/Initialize(mapload)
 	. = ..()
-	if(merge_with_blood(!mapload))
+	if (merge_with_blood(!mapload))
 		return INITIALIZE_HINT_QDEL
 	start_drying()
 
 // Returns true if overriden and needs deletion. If the argument is false, we will merge into any existing blood.
 /obj/effect/decal/cleanable/blood/proc/merge_with_blood(override = TRUE)
 	. = FALSE
-	if(blood_size == BLOOD_SIZE_NO_MERGE)
+	if (blood_size == BLOOD_SIZE_NO_MERGE)
 		return
-	if(isturf(loc))
+	if (isturf(loc))
 		for(var/obj/effect/decal/cleanable/blood/B in loc)
-			if(B == src)
+			if (B == src)
 				continue
-			if(B.blood_size == BLOOD_SIZE_NO_MERGE)
+			if (B.blood_size == BLOOD_SIZE_NO_MERGE)
 				continue
-			if(override && blood_size >= B.blood_size)
+			if (override && blood_size >= B.blood_size)
 				if (B.blood_DNA)
 					blood_DNA |= B.blood_DNA.Copy()
 				qdel(B)
 				continue
-			if(B.blood_DNA)
+			if (B.blood_DNA)
 				B.blood_DNA |= blood_DNA.Copy()
 			. = TRUE
 
@@ -83,13 +83,13 @@ var/global/list/image/splatter_cache=list()
 	START_PROCESSING(SSobj, src)
 
 /obj/effect/decal/cleanable/blood/Process()
-	if(world.time > drytime)
+	if (world.time > drytime)
 		dry()
 
 /obj/effect/decal/cleanable/blood/on_update_icon()
-	if(basecolor == "rainbow") basecolor = get_random_colour(1)
+	if (basecolor == "rainbow") basecolor = get_random_colour(1)
 	color = basecolor
-	if(basecolor == SYNTH_BLOOD_COLOUR)
+	if (basecolor == SYNTH_BLOOD_COLOUR)
 		SetName("oil")
 		desc = "It's black and greasy."
 	else
@@ -99,26 +99,26 @@ var/global/list/image/splatter_cache=list()
 /obj/effect/decal/cleanable/blood/Crossed(mob/living/carbon/human/perp)
 	if (!istype(perp))
 		return
-	if(amount < 1)
+	if (amount < 1)
 		return
 
 	var/obj/item/organ/external/l_foot = perp.get_organ(BP_L_FOOT)
 	var/obj/item/organ/external/r_foot = perp.get_organ(BP_R_FOOT)
 	var/hasfeet = 1
-	if((!l_foot || l_foot.is_stump()) && (!r_foot || r_foot.is_stump()))
+	if ((!l_foot || l_foot.is_stump()) && (!r_foot || r_foot.is_stump()))
 		hasfeet = 0
-	if(perp.shoes && !perp.buckled)//Adding blood to shoes
+	if (perp.shoes && !perp.buckled)//Adding blood to shoes
 		var/obj/item/clothing/shoes/S = perp.shoes
-		if(istype(S))
+		if (istype(S))
 			S.blood_color = basecolor
 			S.track_blood = max(amount,S.track_blood)
-			if(!S.blood_overlay)
+			if (!S.blood_overlay)
 				S.generate_blood_overlay()
-			if(!S.blood_DNA)
+			if (!S.blood_DNA)
 				S.blood_DNA = list()
 				S.blood_overlay.color = basecolor
 				S.overlays += S.blood_overlay
-			if(S.blood_overlay && S.blood_overlay.color != basecolor)
+			if (S.blood_overlay && S.blood_overlay.color != basecolor)
 				S.blood_overlay.color = basecolor
 				S.overlays.Cut()
 				S.overlays += S.blood_overlay
@@ -127,7 +127,7 @@ var/global/list/image/splatter_cache=list()
 	else if (hasfeet)//Or feet
 		perp.feet_blood_color = basecolor
 		perp.track_blood = max(amount,perp.track_blood)
-		if(!perp.feet_blood_DNA)
+		if (!perp.feet_blood_DNA)
 			perp.feet_blood_DNA = list()
 		perp.feet_blood_DNA |= blood_DNA.Copy()
 	else if (perp.buckled && istype(perp.buckled, /obj/structure/bed/chair/wheelchair))
@@ -200,7 +200,7 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/writing/New()
 	..()
-	if(LAZYLEN(random_icon_states))
+	if (LAZYLEN(random_icon_states))
 		for(var/obj/effect/decal/cleanable/blood/writing/W in loc)
 			random_icon_states.Remove(W.icon_state)
 		icon_state = pick(random_icon_states)
@@ -227,12 +227,12 @@ var/global/list/image/splatter_cache=list()
 /obj/effect/decal/cleanable/blood/gibs/on_update_icon()
 
 	var/image/giblets = new(base_icon, "[icon_state]_flesh", dir)
-	if(!fleshcolor || fleshcolor == "rainbow")
+	if (!fleshcolor || fleshcolor == "rainbow")
 		fleshcolor = get_random_colour(1)
 	giblets.color = fleshcolor
 
 	var/icon/blood = new(base_icon,"[icon_state]",dir)
-	if(basecolor == "rainbow") basecolor = get_random_colour(1)
+	if (basecolor == "rainbow") basecolor = get_random_colour(1)
 	blood.Blend(basecolor,ICON_MULTIPLY)
 
 	icon = blood

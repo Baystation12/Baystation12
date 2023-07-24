@@ -13,12 +13,12 @@
 	Northwest = [NORTHWEST],\n\
 	Southeast = [SOUTHEAST],\n\
 	Southwest = [SOUTHWEST]","[src] dir writing") as null|num
-	if(isnum(new_data) && holder.check_interactivity(user) )
+	if (isnum(new_data) && holder.check_interactivity(user) )
 		to_chat(user, SPAN_NOTICE("You input [new_data] into the pin."))
 		write_data_to_pin(new_data)
 
 /datum/integrated_io/dir/write_data_to_pin(new_data)
-	if(isnull(new_data) || (new_data in list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST))/* + list(UP, DOWN)*/)
+	if (isnull(new_data) || (new_data in list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST))/* + list(UP, DOWN)*/)
 		data = new_data
 		holder.on_data_written()
 
@@ -26,6 +26,6 @@
 	return IC_FORMAT_DIR
 
 /datum/integrated_io/dir/display_data(input)
-	if(!isnull(data))
+	if (!isnull(data))
 		return "([dir2text(data)])"
 	return ..()

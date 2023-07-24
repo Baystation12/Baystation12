@@ -7,7 +7,7 @@
 */
 
 /mob/living/silicon/robot/ClickOn(atom/A, params)
-	if(world.time <= next_click)
+	if (world.time <= next_click)
 		return
 	next_click = world.time + 1
 
@@ -37,17 +37,17 @@
 		if (A.BorgCtrlClick(src) || A.AICtrlClick(src) || CtrlClickOn(A))
 			return TRUE
 
-	if(incapacitated())
+	if (incapacitated())
 		return
 
-	if(!canClick())
+	if (!canClick())
 		return
 
 	face_atom(A) // change direction to face what you clicked on
 
-	if(silicon_camera.in_camera_mode)
+	if (silicon_camera.in_camera_mode)
 		silicon_camera.camera_mode_off()
-		if(is_component_functioning("camera"))
+		if (is_component_functioning("camera"))
 			silicon_camera.captureimage(A, usr)
 		else
 			to_chat(src, SPAN_CLASS("userdanger", "Your camera isn't functional."))
@@ -55,7 +55,7 @@
 
 	/*
 	cyborg restrained() currently does nothing
-	if(restrained())
+	if (restrained())
 		RestrainedClickOn(A)
 		return
 	*/
@@ -63,38 +63,38 @@
 	var/obj/item/W = get_active_hand()
 
 	// Cyborgs have no range-checking unless there is item use
-	if(!W)
+	if (!W)
 		A.add_hiddenprint(src)
 		A.attack_robot(src)
 		return
 
 	// buckled cannot prevent machine interlinking but stops arm movement
-	if( buckled )
+	if ( buckled )
 		return
 
-	if(W == A)
+	if (W == A)
 
 		W.attack_self(src)
 		return
 
 	// cyborgs are prohibited from using storage items so we can I think safely remove (A.loc in contents)
-	if(A == loc || (A in loc) || (A in contents))
+	if (A == loc || (A in loc) || (A in contents))
 		// No adjacency checks
 
 		var/resolved = W.resolve_attackby(A, src, params)
-		if(!resolved && A && W)
+		if (!resolved && A && W)
 			W.afterattack(A, src, 1, params) // 1 indicates adjacency
 		return
 
-	if(!isturf(loc))
+	if (!isturf(loc))
 		return
 
 	var/sdepth = A.storage_depth_turf()
-	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
-		if(A.Adjacent(src)) // see adjacent.dm
+	if (isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
+		if (A.Adjacent(src)) // see adjacent.dm
 
 			var/resolved = W.resolve_attackby(A, src, params)
-			if(!resolved && A && W)
+			if (!resolved && A && W)
 				W.afterattack(A, src, 1, params) // 1 indicates adjacency
 			return
 		else

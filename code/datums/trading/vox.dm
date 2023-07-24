@@ -65,22 +65,22 @@
 	visited_vox_speech[TRADER_HAIL_START + SPECIES_VOX] = "SKREEEE! May the Shoal make this trade good, MOB!"
 
 /datum/trader/ship/vox/hail(mob/user)
-	if(istype(user, /mob/living/carbon/human))
+	if (istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		if(H.species)
+		if (H.species)
 			switch(H.species.name)
-				if(SPECIES_VOX)
+				if (SPECIES_VOX)
 					disposition = 1000
 					hailed_vox = TRUE
 					speech = visited_vox_speech
 	. = ..()
 
 /datum/trader/ship/vox/can_hail()
-	if(hailed_vox >= 0)
+	if (hailed_vox >= 0)
 		return ..()
 	return FALSE
 
 /datum/trader/ship/vox/get_item_value(trading_num)
 	. = ..()
-	if(!hailed_vox)
+	if (!hailed_vox)
 		. *= 2

@@ -9,14 +9,14 @@
 /obj/item/gun/get_antag_info()
 	var/list/entries = SScodex.retrieve_entries_for_string(general_codex_key)
 	var/datum/codex_entry/general_entry = LAZYACCESS(entries, 1)
-	if(general_entry && general_entry.antag_text)
+	if (general_entry && general_entry.antag_text)
 		return general_entry.antag_text
 
 /obj/item/gun/get_lore_info()
 	var/list/entries = SScodex.retrieve_entries_for_string(general_codex_key)
 	var/datum/codex_entry/general_entry = LAZYACCESS(entries, 1)
 	. = "[desc]<br>"
-	if(general_entry && general_entry.lore_text)
+	if (general_entry && general_entry.lore_text)
 		. += general_entry.lore_text
 
 /obj/item/gun/get_mechanics_info()
@@ -24,22 +24,22 @@
 
 	var/list/entries = SScodex.retrieve_entries_for_string(general_codex_key)
 	var/datum/codex_entry/general_entry = LAZYACCESS(entries, 1)
-	if(general_entry && general_entry.mechanics_text)
+	if (general_entry && general_entry.mechanics_text)
 		traits += general_entry.mechanics_text
 
-	if(one_hand_penalty)
+	if (one_hand_penalty)
 		traits += "It's best fired with two-handed grip."
 
-	if(has_safety)
+	if (has_safety)
 		traits += "It has a safety switch. Control-Click it to toggle safety."
 
-	if(is_secure_gun())
+	if (is_secure_gun())
 		traits += "It's fitted with secure registration chip. Swipe ID on it to register."
 
-	if(scope_zoom)
+	if (scope_zoom)
 		traits += "It has a magnifying optical scope. It can be toggled with Use Scope verb."
 
-	if(LAZYLEN(firemodes) > 1)
+	if (LAZYLEN(firemodes) > 1)
 		traits += "It has multiple firemodes. Click it in hand to cycle them."
 
 	return jointext(traits, "<br>")
@@ -51,18 +51,18 @@
 	traits += "<br>Caliber: [caliber]"
 
 	var/list/loading_ways = list()
-	if(load_method & SINGLE_CASING)
+	if (load_method & SINGLE_CASING)
 		loading_ways += "loose [caliber] rounds"
-	if(load_method & SPEEDLOADER)
+	if (load_method & SPEEDLOADER)
 		loading_ways += "speedloaders"
-	if(load_method & MAGAZINE)
+	if (load_method & MAGAZINE)
 		loading_ways += "magazines"
 	traits += "Can be loaded using [english_list(loading_ways)]"
 
-	if(load_method & (SINGLE_CASING|SPEEDLOADER))
+	if (load_method & (SINGLE_CASING|SPEEDLOADER))
 		traits += "It can hold [max_shells] rounds."
 
-	if(jam_chance)
+	if (jam_chance)
 		traits += "It's prone to jamming."
 
 	. += jointext(traits, "<br>")
@@ -73,7 +73,7 @@
 
 	traits += "<br>Its maximum capacity is [max_shots] shots worth of power."
 
-	if(self_recharge)
+	if (self_recharge)
 		traits += "It recharges itself over time."
 
 	. += jointext(traits, "<br>")

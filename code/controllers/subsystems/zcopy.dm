@@ -173,7 +173,7 @@ SUBSYSTEM_DEF(zcopy)
 		// If this is ever true, that turf should always pass this condition, so don't bother cleaning up beyond the Destroy() hook.
 		if (!T.below)	// Z-turf on the bottom-most level, just fake-copy space.
 			flush_z_state(T)
-			if(T.z_flags & ZM_MIMIC_BASETURF)
+			if (T.z_flags & ZM_MIMIC_BASETURF)
 				simple_appearance_copy(T, get_base_turf_by_area(T), OPENTURF_MAX_PLANE)
 			else
 				simple_appearance_copy(T, SSskybox.space_appearance_cache[(((T.x + T.y) ^ ~(T.x * T.y) + T.z) % 25) + 1])
@@ -450,7 +450,7 @@ SUBSYSTEM_DEF(zcopy)
 /datum/controller/subsystem/zcopy/proc/fixup_appearance_planes(appearance, depth = 0)
 
 	// Adding this to guard against a reported runtime - supposed to be impossible, so cause is unclear.
-	if(!appearance)
+	if (!appearance)
 		return null
 
 	if (fixup_known_good[appearance])

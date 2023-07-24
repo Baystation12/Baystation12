@@ -14,9 +14,9 @@
 	..()
 
 /obj/item/projectile/bullet/chemdart/on_hit(atom/target, blocked = 0, def_zone = null)
-	if(blocked < 100 && isliving(target))
+	if (blocked < 100 && isliving(target))
 		var/mob/living/L = target
-		if(L.can_inject(null, def_zone) == CAN_INJECT)
+		if (L.can_inject(null, def_zone) == CAN_INJECT)
 			reagents.trans_to_mob(L, reagent_amount, CHEM_BLOOD)
 
 /obj/item/ammo_casing/chemdart
@@ -68,7 +68,7 @@
 	var/list/starting_chems = null
 
 /obj/item/gun/projectile/dartgun/Initialize()
-	if(starting_chems)
+	if (starting_chems)
 		for(var/chem in starting_chems)
 			var/obj/B = new container_type(src)
 			B.reagents.add_reagent(chem, 60)
@@ -77,13 +77,13 @@
 	update_icon()
 
 /obj/item/gun/projectile/dartgun/on_update_icon()
-	if(!ammo_magazine)
+	if (!ammo_magazine)
 		icon_state = "dartgun-empty"
 		return 1
 
-	if(!ammo_magazine.stored_ammo || length(ammo_magazine.stored_ammo))
+	if (!ammo_magazine.stored_ammo || length(ammo_magazine.stored_ammo))
 		icon_state = "dartgun-0"
-	else if(length(ammo_magazine.stored_ammo) > 5)
+	else if (length(ammo_magazine.stored_ammo) > 5)
 		icon_state = "dartgun-5"
 	else
 		icon_state = "dartgun-[length(ammo_magazine.stored_ammo)]"
@@ -92,7 +92,7 @@
 /obj/item/gun/projectile/dartgun/consume_next_projectile()
 	. = ..()
 	var/obj/item/projectile/bullet/chemdart/dart = .
-	if(istype(dart))
+	if (istype(dart))
 		fill_dart(dart)
 
 /obj/item/gun/projectile/dartgun/examine(mob/user)
@@ -100,7 +100,7 @@
 	if (length(beakers))
 		to_chat(user, SPAN_NOTICE("\The [src] contains:"))
 		for(var/obj/item/reagent_containers/glass/beaker/B in beakers)
-			if(B.reagents && length(B.reagents.reagent_list))
+			if (B.reagents && length(B.reagents.reagent_list))
 				for(var/datum/reagent/R in B.reagents.reagent_list)
 					to_chat(user, SPAN_NOTICE("[R.volume] units of [R.name]"))
 
@@ -115,13 +115,13 @@
 
 
 /obj/item/gun/projectile/dartgun/proc/add_beaker(obj/item/reagent_containers/glass/B, mob/user)
-	if(!istype(B, container_type))
+	if (!istype(B, container_type))
 		to_chat(user, SPAN_WARNING("[B] doesn't seem to fit into [src]."))
 		return
-	if(length(beakers) >= max_beakers)
+	if (length(beakers) >= max_beakers)
 		to_chat(user, SPAN_WARNING("[src] already has [max_beakers] beakers in it - another one isn't going to fit!"))
 		return
-	if(!user.unEquip(B, src))
+	if (!user.unEquip(B, src))
 		return
 	beakers |= B
 	user.visible_message("\The [user] inserts \a [B] into [src].", SPAN_NOTICE("You slot [B] into [src]."))
@@ -134,7 +134,7 @@
 
 //fills the given dart with reagents
 /obj/item/gun/projectile/dartgun/proc/fill_dart(obj/item/projectile/bullet/chemdart/dart)
-	if(length(mixing))
+	if (length(mixing))
 		var/mix_amount = dart.reagent_amount/length(mixing)
 		for(var/obj/item/reagent_containers/glass/beaker/B in mixing)
 			B.reagents.trans_to_obj(dart, mix_amount)
@@ -151,13 +151,13 @@
 	else
 		for(var/i in 1 to length(beakers))
 			var/obj/item/reagent_containers/glass/beaker/B = beakers[i]
-			if(!istype(B)) continue
+			if (!istype(B)) continue
 
 			dat += "Beaker [i] contains: "
-			if(B.reagents && length(B.reagents.reagent_list))
+			if (B.reagents && length(B.reagents.reagent_list))
 				for(var/datum/reagent/R in B.reagents.reagent_list)
 					dat += "<br>    [R.volume] units of [R.name], "
-				if(B in mixing)
+				if (B in mixing)
 					dat += "<A href='?src=\ref[src];stop_mix=[i]'>[SPAN_COLOR("green", "Mixing")]</A> "
 				else
 					dat += "<A href='?src=\ref[src];mix=[i]'>[SPAN_COLOR("red", "Not mixing")]</A> "
@@ -165,8 +165,8 @@
 				dat += "nothing."
 			dat += " \[<A href='?src=\ref[src];eject=[i]'>Eject</A>\]<br>"
 
-	if(ammo_magazine)
-		if(ammo_magazine.stored_ammo && length(ammo_magazine.stored_ammo))
+	if (ammo_magazine)
+		if (ammo_magazine.stored_ammo && length(ammo_magazine.stored_ammo))
 			dat += "The dart cartridge has [length(ammo_magazine.stored_ammo)] shots remaining."
 		else
 			dat += SPAN_COLOR("red", "The dart cartridge is empty!")
@@ -179,7 +179,7 @@
 	popup.open()
 
 /obj/item/gun/projectile/dartgun/OnTopic(user, href_list)
-	if(href_list["stop_mix"])
+	if (href_list["stop_mix"])
 		var/index = text2num(href_list["stop_mix"])
 		mixing -= beakers[index]
 		. = TOPIC_REFRESH
@@ -189,7 +189,7 @@
 		. = TOPIC_REFRESH
 	else if (href_list["eject"])
 		var/index = text2num(href_list["eject"])
-		if(beakers[index])
+		if (beakers[index])
 			remove_beaker(beakers[index], usr)
 		. = TOPIC_REFRESH
 	else if (href_list["eject_cart"])

@@ -21,20 +21,20 @@
 	modify_servant(equip_servant(H), H)
 	set_antag(H.mind, master)
 	var/name_choice = sanitize(input(H, "Choose a name. If you leave this blank, it will be defaulted to your current characters.", "Name change") as null|text, MAX_NAME_LEN)
-	if(name_choice)
+	if (name_choice)
 		H.SetName(name_choice)
 		H.real_name = name_choice
 
 /datum/spellbound_type/proc/equip_servant(mob/living/carbon/human/H)
 	for(var/stype in spells)
 		var/spell/S = new stype()
-		if(S.spell_flags & NEEDSCLOTHES)
+		if (S.spell_flags & NEEDSCLOTHES)
 			S.spell_flags &= ~NEEDSCLOTHES
 		H.add_spell(S)
 	. = list()
 	for(var/etype in equipment)
 		var/obj/item/I = new etype(get_turf(H))
-		if(istype(I, /obj/item/clothing))
+		if (istype(I, /obj/item/clothing))
 			I.canremove = 0
 		H.equip_to_slot_if_possible(I,equipment[etype], TRYEQUIP_REDRAW | TRYEQUIP_SILENT | TRYEQUIP_FORCE)
 		. += I
@@ -98,22 +98,22 @@
 /datum/spellbound_type/servant/familiar/modify_servant(list/equipment, mob/living/carbon/human/H)
 	var/familiar_type
 	switch(input(H,"Choose your desired animal form:", "Form") as anything in list("Space Pike", "Mouse", "Cat", "Bear"))
-		if("Space Pike")
+		if ("Space Pike")
 			H.mutations |= mNobreath
 			H.mutations |= MUTATION_SPACERES
 			familiar_type = /mob/living/simple_animal/hostile/carp/pike
-		if("Mouse")
+		if ("Mouse")
 			H.verbs |= /mob/living/proc/ventcrawl
 			familiar_type = /mob/living/simple_animal/passive/mouse
-		if("Cat")
+		if ("Cat")
 			H.mutations |= mRun
 			familiar_type = /mob/living/simple_animal/passive/cat
-		if("Bear")
+		if ("Bear")
 			var/obj/item/clothing/under/under = locate() in equipment
 			var/obj/item/clothing/head/head = locate() in equipment
 
 			var/datum/extension/armor/A = get_extension(under, /datum/extension/armor)
-			if(A)
+			if (A)
 				A.armor_values = list(
 					melee = ARMOR_MELEE_VERY_HIGH,
 					bullet = ARMOR_BALLISTIC_PISTOL,
@@ -121,7 +121,7 @@
 					energy = ARMOR_ENERGY_SMALL
 					) //More armor
 			A = get_extension(head, /datum/extension/armor)
-			if(A)
+			if (A)
 				A.armor_values = list(
 					melee = ARMOR_MELEE_RESISTANT,
 					bullet = ARMOR_BALLISTIC_MINOR,
@@ -145,7 +145,7 @@
 				)
 
 /datum/spellbound_type/servant/fiend/equip_servant(mob/living/carbon/human/H)
-	if(H.gender == MALE)
+	if (H.gender == MALE)
 		equipment = list(/obj/item/clothing/under/lawyer/fiendsuit = slot_w_uniform,
 						/obj/item/clothing/shoes/dress/devilshoes = slot_shoes)
 		spells += /spell/toggle_armor/fiend
@@ -164,7 +164,7 @@
 				/spell/targeted/genetic/blind/hysteria)
 
 /datum/spellbound_type/servant/infiltrator/equip_servant(mob/living/carbon/human/H)
-	if(H.gender == MALE)
+	if (H.gender == MALE)
 		equipment = list(/obj/item/clothing/under/lawyer/infil = slot_w_uniform,
 						/obj/item/clothing/shoes/dress/infilshoes = slot_shoes)
 		spells += /spell/toggle_armor/infiltrator
@@ -204,21 +204,21 @@
 	return ..(loc)
 
 /obj/effect/cleanable/spellbound/attack_hand(mob/user)
-	if(last_called > world.time )
+	if (last_called > world.time )
 		return
 	last_called = world.time + 30 SECONDS
 	var/datum/ghosttrap/G = get_ghost_trap("wizard familiar")
 	for(var/mob/observer/ghost/ghost in GLOB.player_list)
-		if(G.assess_candidate(ghost,null,FALSE))
+		if (G.assess_candidate(ghost,null,FALSE))
 			to_chat(ghost,"[SPAN_NOTICE("<b>A wizard is requesting a Spell-Bound Servant!</b>")] (<a href='?src=\ref[src];master=\ref[user]'>Join</a>)")
 
 /obj/effect/cleanable/spellbound/CanUseTopic(mob)
-	if(isliving(mob))
+	if (isliving(mob))
 		return STATUS_CLOSE
 	return STATUS_INTERACTIVE
 
 /obj/effect/cleanable/spellbound/OnTopic(mob/user, href_list, state)
-	if(href_list["master"])
+	if (href_list["master"])
 		var/mob/master = locate(href_list["master"])
 		stype.spawn_servant(get_turf(src),master,user)
 		qdel(src)
@@ -239,7 +239,7 @@
 	w_class = ITEM_SIZE_TINY
 
 /obj/item/summoning_stone/attack_self(mob/user)
-	if(user.z in GLOB.using_map.admin_levels)
+	if (user.z in GLOB.using_map.admin_levels)
 		to_chat(user, SPAN_WARNING("You cannot use \the [src] here."))
 		return
 	user.set_machine(src)
@@ -247,7 +247,7 @@
 
 /obj/item/summoning_stone/interact(mob/user)
 	var/list/types = subtypesof(/datum/spellbound_type) - /datum/spellbound_type/servant
-	if(user.mind && !GLOB.wizards.is_antagonist(user.mind))
+	if (user.mind && !GLOB.wizards.is_antagonist(user.mind))
 		use_type(pick(types),user)
 		return
 	var/dat = "<center><b><h3>Summoning Stone</h3></b><i>Choose a companion to help you.</i><br><br></center>"
@@ -259,7 +259,7 @@
 
 /obj/item/summoning_stone/proc/use_type(type, mob/user)
 	new /obj/effect/cleanable/spellbound(get_turf(src),type)
-	if(prob(20))
+	if (prob(20))
 		var/list/base_areas = maintlocs //Have to do it this way as its a macro
 		var/list/pareas = base_areas.Copy()
 		while(length(pareas))
@@ -269,15 +269,15 @@
 			var/list/turfs = get_area_turfs(picked_area)
 			for(var/t in turfs)
 				var/turf/T = t
-				if(T.density)
+				if (T.density)
 					turfs -= T
-			if(length(turfs))
+			if (length(turfs))
 				src.visible_message(SPAN_NOTICE("\The [src] vanishes!"))
 				src.forceMove(pick(turfs))
 	show_browser(user, null, "window=summoning")
 	qdel(src)
 
 /obj/item/summoning_stone/OnTopic(user, href_list, state)
-	if(href_list["type"])
+	if (href_list["type"])
 		use_type(href_list["type"],user)
 	return TOPIC_HANDLED

@@ -28,11 +28,11 @@
 
 /mob/living/simple_animal/hostile/giant_spider/spitter/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
-	if(venom_charge <= 0)
+	if (venom_charge <= 0)
 		ranged = FALSE
-		if(prob(25))
+		if (prob(25))
 			venom_charge++
-			if(venom_charge >= 8)
+			if (venom_charge >= 8)
 				ranged = TRUE

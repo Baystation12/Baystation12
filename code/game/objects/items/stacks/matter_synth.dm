@@ -7,7 +7,7 @@
 	var/energy
 
 /datum/matter_synth/New(store = 0)
-	if(store)
+	if (store)
 		max_energy = store
 	energy = max_energy_multiplied
 	set_multiplier(1)

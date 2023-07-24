@@ -3,5 +3,5 @@
 
 /datum/admin_secret_item/fun_secret/power_all_smes/execute(mob/user)
 	. = ..()
-	if(.)
+	if (.)
 		power_restore_quick()

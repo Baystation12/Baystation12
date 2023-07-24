@@ -40,7 +40,7 @@
 	var/i = 0
 	for(var/obj/item/reagent_containers/food/snacks/donut/D in contents)
 		var/image/I = image('icons/obj/food.dmi', "[i][D.overlay_state]")
-		if(D.overlay_state == "box-donut1")
+		if (D.overlay_state == "box-donut1")
 			I.color = D.filling_color
 		overlays += I
 		i++
@@ -179,7 +179,7 @@
 
 /obj/item/storage/medical_lolli_jar/on_update_icon()
 	. = ..()
-	if(length(contents))
+	if (length(contents))
 		icon_state = "lollijar"
 	else
 		icon_state = "lollijar_empty"

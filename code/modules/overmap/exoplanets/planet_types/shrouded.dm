@@ -20,7 +20,7 @@
 
 /obj/effect/overmap/visitable/sector/exoplanet/shrouded/generate_atmosphere()
 	..()
-	if(atmosphere)
+	if (atmosphere)
 		atmosphere.temperature = T20C - rand(10, 20)
 		atmosphere.update_values()
 
@@ -41,7 +41,7 @@
 /datum/random_map/noise/exoplanet/shrouded/get_additional_spawns(value, turf/T)
 	..()
 
-	if(prob(0.1))
+	if (prob(0.1))
 		new/obj/structure/leech_spawner(T)
 
 /area/exoplanet/shrouded

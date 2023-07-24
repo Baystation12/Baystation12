@@ -26,29 +26,29 @@
 	UpdateTurf(container)
 
 /datum/geosample/proc/UpdateTurf(turf/simulated/mineral/container)
-	if(!istype(container))
+	if (!istype(container))
 		return
 
 	age = rand(1, 999)
 
-	if(container.mineral)
-		if(islist(container.mineral.xarch_ages))
+	if (container.mineral)
+		if (islist(container.mineral.xarch_ages))
 			var/list/ages = container.mineral.xarch_ages
-			if(ages["thousand"])
+			if (ages["thousand"])
 				age_thousand = rand(1, ages["thousand"])
-			if(ages["million"])
+			if (ages["million"])
 				age_million = rand(1, ages["million"])
-			if(ages["billion"])
-				if(ages["billion_lower"])
+			if (ages["billion"])
+				if (ages["billion_lower"])
 					age_billion = rand(ages["billion_lower"], ages["billion"])
 				else
 					age_billion = rand(1, ages["billion"])
-		if(container.mineral.xarch_source_mineral)
+		if (container.mineral.xarch_source_mineral)
 			source_mineral = container.mineral.xarch_source_mineral
 
-	if(prob(75))
+	if (prob(75))
 		find_presence[/datum/reagent/phosphorus] = rand(1, 500) / 100
-	if(prob(25))
+	if (prob(25))
 		find_presence[/datum/reagent/mercury] = rand(1, 500) / 100
 	find_presence["chlorine"] = rand(500, 2500) / 100
 
@@ -63,17 +63,17 @@
 		find_presence[carrier] = find_presence[carrier] / total_presence
 
 /datum/geosample/proc/UpdateNearbyArtifactInfo(turf/simulated/mineral/container)
-	if(!container || !istype(container))
+	if (!container || !istype(container))
 		return
 
-	if(container.artifact_find)
+	if (container.artifact_find)
 		artifact_distance = rand()
 		artifact_id = container.artifact_find.artifact_id
 	else
 		for (var/turf/simulated/mineral/T as anything in GLOB.xeno_artifact_turfs)
-			if(T.artifact_find)
+			if (T.artifact_find)
 				var/cur_dist = get_dist(container, T) * 2
-				if( (artifact_distance < 0 || cur_dist < artifact_distance))
+				if ( (artifact_distance < 0 || cur_dist < artifact_distance))
 					artifact_distance = cur_dist + rand() * 2 - 1
 					artifact_id = T.artifact_find.artifact_id
 			else
@@ -93,7 +93,7 @@
 
 /obj/item/device/core_sampler/examine(mob/user, distance)
 	. = ..(user)
-	if(distance <= 2)
+	if (distance <= 2)
 		to_chat(user, SPAN_NOTICE("Used to extract geological core samples - this one is [sampled_turf ? "full" : "empty"], and has [num_stored_bags] bag[num_stored_bags != 1 ? "s" : ""] remaining."))
 
 
@@ -123,18 +123,18 @@
 /obj/item/device/core_sampler/proc/sample_item(item_to_sample, mob/user)
 	var/datum/geosample/geo_data
 
-	if(istype(item_to_sample, /turf/simulated/mineral))
+	if (istype(item_to_sample, /turf/simulated/mineral))
 		var/turf/simulated/mineral/T = item_to_sample
 		T.geologic_data.UpdateNearbyArtifactInfo(T)
 		geo_data = T.geologic_data
-	else if(istype(item_to_sample, /obj/item/ore))
+	else if (istype(item_to_sample, /obj/item/ore))
 		var/obj/item/ore/O = item_to_sample
 		geo_data = O.geologic_data
 
-	if(geo_data)
-		if(filled_bag)
+	if (geo_data)
+		if (filled_bag)
 			to_chat(user, SPAN_WARNING("The core sampler is full."))
-		else if(num_stored_bags < 1)
+		else if (num_stored_bags < 1)
 			to_chat(user, SPAN_WARNING("The core sampler is out of sample bags."))
 		else
 			//create a new sample bag which we'll fill with rock samples
@@ -162,13 +162,13 @@
 		to_chat(user, SPAN_WARNING("You are unable to take a sample of [item_to_sample]."))
 
 /obj/item/device/core_sampler/attack_self(mob/living/user)
-	if(filled_bag)
+	if (filled_bag)
 		to_chat(user, SPAN_NOTICE("You eject the full sample bag."))
 		var/success = 0
-		if(istype(src.loc, /mob))
+		if (istype(src.loc, /mob))
 			var/mob/M = src.loc
 			success = M.put_in_inactive_hand(filled_bag)
-		if(!success)
+		if (!success)
 			filled_bag.dropInto(loc)
 		filled_bag = null
 		icon_state = "sampler0"

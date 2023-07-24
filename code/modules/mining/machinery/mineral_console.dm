@@ -19,28 +19,28 @@
 	popup.open()
 
 /obj/machinery/computer/mining/CanUseTopic(mob/user)
-	if(!connected)
+	if (!connected)
 		to_chat(user, SPAN_WARNING("\The [src] is not connected to a processing machine. <a href='?src=\ref[src];scan_for_machine=1'>Scan</a>"))
 		return STATUS_CLOSE
 	. = ..()
 
 /obj/machinery/computer/mining/Topic(href, href_list)
-	if((. = ..()))
+	if ((. = ..()))
 		return
-	if(href_list["scan_for_machine"])
+	if (href_list["scan_for_machine"])
 		for(var/c in GLOB.alldirs)
 			var/turf/T = get_step(loc, c)
-			if(T)
+			if (T)
 				var/obj/machinery/mineral/M = locate(/obj/machinery/mineral) in T
-				if(M && ispath(M.console) && istype(src, M.console))
+				if (M && ispath(M.console) && istype(src, M.console))
 					M.console = src
 					connected = M
 					break
 		return TRUE
 
 /obj/machinery/computer/mining/Destroy()
-	if(connected)
-		if(connected.console == src)
+	if (connected)
+		if (connected.console == src)
 			connected.console = initial(connected.console)
 		connected = null
 	. = ..()

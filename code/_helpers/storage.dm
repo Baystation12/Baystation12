@@ -1,15 +1,15 @@
 /proc/create_objects_in_loc(atom/loc, atom_paths)
-	if(!istype(loc))
+	if (!istype(loc))
 		CRASH("Inappropriate loction given.")
 
-	if(istype(atom_paths, /datum/atom_creator))
+	if (istype(atom_paths, /datum/atom_creator))
 		var/datum/atom_creator/atom_creator = atom_paths
 		atom_creator.create(loc)
-	else if(islist(atom_paths))
+	else if (islist(atom_paths))
 		for(var/atom_path in atom_paths)
 			for(var/i = 1 to max(1, atom_paths[atom_path]))
 				create_objects_in_loc(loc, atom_path)
-	else if(ispath(atom_paths))
+	else if (ispath(atom_paths))
 		new atom_paths(loc)
 	else
 		CRASH("Unhandled input: [log_info_line(atom_paths)]")
@@ -23,15 +23,15 @@
 	var/prob_method = /proc/prob_call
 
 /datum/atom_creator/simple/New(path, probability)
-	if(length(args) != 2)
+	if (length(args) != 2)
 		CRASH("Invalid number of arguments. Expected 2, was [length(args)]")
-	if(!isnum(probability) || probability < 1 || probability > 99)
+	if (!isnum(probability) || probability < 1 || probability > 99)
 		CRASH("Invalid probability. Expected a number between 1 and 99, was [log_info_line(probability)]") // A probability of 0 or 100 is pretty meaningless.
 	src.probability = probability
 	src.path = path
 
 /datum/atom_creator/simple/create(loc)
-	if(call(prob_method)(probability))
+	if (call(prob_method)(probability))
 		create_objects_in_loc(loc, path)
 
 /datum/atom_creator/weighted
@@ -39,13 +39,13 @@
 	var/selection_method = /proc/pickweight
 
 /datum/atom_creator/weighted/New(list/paths)
-	if(length(args) != 1)
+	if (length(args) != 1)
 		CRASH("Invalid number of arguments. Expected 1, was [length(args)]")
-	if(!istype(paths))
+	if (!istype(paths))
 		CRASH("Invalid argument type. Expected /list, was [log_info_line(paths)]")
 	for(var/path in paths)
 		var/probability = paths[path]
-		if(!(isnull(probability) || (isnum(probability) && probability > 0)))
+		if (!(isnull(probability) || (isnum(probability) && probability > 0)))
 			CRASH("Invalid probability. Expected null or a number greater than 0, was [log_info_line(probability)]")
 	src.paths = paths
 

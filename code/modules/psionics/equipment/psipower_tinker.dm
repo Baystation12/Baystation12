@@ -18,17 +18,17 @@
 
 /obj/item/psychic_power/tinker/attack_self()
 
-	if(!owner || loc != owner)
+	if (!owner || loc != owner)
 		return
 
 	var/choice = input("Select a tool to emulate.","Power") as null|anything in list("Crowbar","Wrench","Screwdriver","Wirecutters","Dismiss")
-	if(!choice)
+	if (!choice)
 		return
 
-	if(!owner || loc != owner)
+	if (!owner || loc != owner)
 		return
 
-	if(choice == "Dismiss")
+	if (choice == "Dismiss")
 		sound_to(owner, 'sound/effects/psi/power_fail.ogg')
 		owner.drop_from_inventory(src)
 		return

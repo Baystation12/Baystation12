@@ -98,11 +98,11 @@ GLOBAL_VAR_INIT(SPIDER_COUNT, 0)
 
 
 /mob/living/simple_animal/hostile/giant_spider/apply_melee_effects(atom/A)
-	if(isliving(A))
+	if (isliving(A))
 		var/mob/living/L = A
-		if(L.reagents)
+		if (L.reagents)
 			var/target_zone = pick(BP_CHEST,BP_CHEST,BP_CHEST,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_HEAD)
-			if(L.can_inject(src, null, target_zone))
+			if (L.can_inject(src, null, target_zone))
 				inject_poison(L, target_zone)
 
 // Does actual poison injection, after all checks passed.
@@ -110,6 +110,6 @@ GLOBAL_VAR_INIT(SPIDER_COUNT, 0)
 	if (isSynthetic())
 		return
 
-	if(prob(poison_chance))
+	if (prob(poison_chance))
 		to_chat(L, SPAN_WARNING("You feel a tiny prick."))
 		L.reagents.add_reagent(poison_type, poison_per_bite)

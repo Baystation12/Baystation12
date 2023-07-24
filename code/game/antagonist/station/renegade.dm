@@ -48,7 +48,7 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 
 /datum/antagonist/renegade/create_objectives(datum/mind/player)
 
-	if(!..())
+	if (!..())
 		return
 
 	var/datum/objective/survive/survive = new
@@ -57,20 +57,20 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 
 /datum/antagonist/renegade/equip(mob/living/carbon/human/player)
 
-	if(!..())
+	if (!..())
 		return
 
 	var/gun_type = pick(spawn_guns)
-	if(islist(gun_type))
+	if (islist(gun_type))
 		gun_type = pick(gun_type)
 	var/obj/item/gun = new gun_type(get_turf(player))
 
 	// Attempt to put into a container.
-	if(player.equip_to_storage(gun))
+	if (player.equip_to_storage(gun))
 		return
 
 	// If that failed, attempt to put into any valid non-handslot
-	if(player.equip_to_appropriate_slot(gun))
+	if (player.equip_to_appropriate_slot(gun))
 		return
 
 	// If that failed, then finally attempt to at least let the player carry the weapon
@@ -81,6 +81,6 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 	to_chat(usr, "<B>You summoned guns!</B>")
 	message_admins("[key_name_admin(usr, 1)] summoned guns!")
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
-		if(H.stat == 2 || !(H.client)) continue
-		if(is_special_character(H)) continue
+		if (H.stat == 2 || !(H.client)) continue
+		if (is_special_character(H)) continue
 		GLOB.renegades.add_antagonist(H.mind)

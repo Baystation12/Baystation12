@@ -16,13 +16,13 @@
 
 /obj/structure/sign/ex_act(severity)
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			qdel(src)
 			return
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			qdel(src)
 			return
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			qdel(src)
 			return
 		else
@@ -56,18 +56,18 @@
 	var/sign_state = ""
 
 /obj/item/sign/attackby(obj/item/tool as obj, mob/user as mob)	//construction
-	if(istype(tool, /obj/item/screwdriver) && isturf(user.loc))
+	if (istype(tool, /obj/item/screwdriver) && isturf(user.loc))
 		var/direction = input("In which direction?", "Select direction.") in list("North", "East", "South", "West", "Cancel")
-		if(direction == "Cancel") return
+		if (direction == "Cancel") return
 		var/obj/structure/sign/S = new(user.loc)
 		switch(direction)
-			if("North")
+			if ("North")
 				S.pixel_y = 32
-			if("East")
+			if ("East")
 				S.pixel_x = 32
-			if("South")
+			if ("South")
 				S.pixel_y = -32
-			if("West")
+			if ("West")
 				S.pixel_x = -32
 			else return
 		S.SetName(name)
@@ -464,14 +464,14 @@
 	var/claimant
 
 /obj/item/sign/medipolma/attack_self(mob/user)
-	if(!claimant)
+	if (!claimant)
 		to_chat(user, SPAN_NOTICE("You fill in your name in the blanks with a permanent marker."))
 		claimant = user.real_name
 	..()
 
 /obj/item/sign/medipolma/examine(mob/user)
 	. = ..()
-	if(claimant)
+	if (claimant)
 		to_chat(user,"This one belongs to Dr.[claimant], MD.")
 	else
 		to_chat(user,"The name is left blank for some reason.")

@@ -128,7 +128,7 @@ var/global/datum/controller/master/Master = new
 	var/msg = "## DEBUG: [time2text(world.timeofday)] MC restarted. Reports:\n"
 	for (var/varname in Master.vars)
 		switch (varname)
-			if("name", "tag", "bestF", "type", "parent_type", "vars", "stat_line") // Built-in junk.
+			if ("name", "tag", "bestF", "type", "parent_type", "vars", "stat_line") // Built-in junk.
 				continue
 			else
 				var/varval = Master.vars[varname]
@@ -141,22 +141,22 @@ var/global/datum/controller/master/Master = new
 
 	var/datum/controller/subsystem/BadBoy = Master.last_type_processed
 	var/FireHim = FALSE
-	if(istype(BadBoy))
+	if (istype(BadBoy))
 		msg = null
 		LAZYINITLIST(BadBoy.failure_strikes)
 		switch(++BadBoy.failure_strikes[BadBoy.type])
-			if(2)
+			if (2)
 				msg = "The [BadBoy.name] subsystem was the last to fire for 2 controller restarts. It will be recovered now and disabled if it happens again."
 				FireHim = TRUE
-			if(3)
+			if (3)
 				msg = "The [BadBoy.name] subsystem seems to be destabilizing the MC and will be offlined."
 				BadBoy.flags |= SS_NO_FIRE
-		if(msg)
+		if (msg)
 			to_chat(GLOB.admins, SPAN_CLASS("boldannounce", "[msg]"))
 			log_world(msg)
 
 	if (istype(Master.subsystems))
-		if(FireHim)
+		if (FireHim)
 			Master.subsystems += new BadBoy.type	//NEW_SS_GLOBAL will remove the old one
 		subsystems = Master.subsystems
 		current_runlevel = Master.current_runlevel
@@ -173,10 +173,10 @@ var/global/datum/controller/master/Master = new
 	set waitfor = FALSE
 	var/start_uptime = Uptime()
 
-	if(delay)
+	if (delay)
 		sleep(delay)
 
-	if(init_sss)
+	if (init_sss)
 		init_subtypes(/datum/controller/subsystem, subsystems)
 
 	report_progress("Initializing subsystems...")
@@ -215,18 +215,18 @@ var/global/datum/controller/master/Master = new
 
 /datum/controller/master/proc/SetRunLevel(new_runlevel)
 	var/old_runlevel = current_runlevel
-	if(isnull(old_runlevel))
+	if (isnull(old_runlevel))
 		old_runlevel = "NULL"
 
 	current_runlevel = log(2, new_runlevel) + 1
 	report_progress("MC: Runlevel changed from [old_runlevel] to [current_runlevel]")
-	if(current_runlevel < 1)
+	if (current_runlevel < 1)
 		CRASH("Attempted to set invalid runlevel: [new_runlevel]")
 
 // Starts the mc, and sticks around to restart it if the loop ever ends.
 /datum/controller/master/proc/StartProcessing(delay)
 	set waitfor = 0
-	if(delay)
+	if (delay)
 		sleep(delay)
 	report_progress("Master starting processing")
 	var/rtn = Loop()
@@ -268,12 +268,12 @@ var/global/datum/controller/master/Master = new
 		var/ss_runlevels = SS.runlevels
 		var/added_to_any = FALSE
 		for(var/I in 1 to length(GLOB.bitflags))
-			if(ss_runlevels & GLOB.bitflags[I])
+			if (ss_runlevels & GLOB.bitflags[I])
 				while(length(runlevel_sorted_subsystems) < I)
 					runlevel_sorted_subsystems += list(list())
 				runlevel_sorted_subsystems[I] += SS
 				added_to_any = TRUE
-		if(!added_to_any)
+		if (!added_to_any)
 			WARNING("[SS.name] subsystem is not SS_NO_FIRE but also does not have any runlevels set!")
 
 	queue_head = null
@@ -334,14 +334,14 @@ var/global/datum/controller/master/Master = new
 		//now do the actual stuff
 		if (!queue_head || !(iteration % 3))
 			var/checking_runlevel = current_runlevel
-			if(cached_runlevel != checking_runlevel)
+			if (cached_runlevel != checking_runlevel)
 				//resechedule subsystems
 				cached_runlevel = checking_runlevel
 				current_runlevel_subsystems = runlevel_sorted_subsystems[cached_runlevel]
 				var/stagger = world.time
 				for(var/I in current_runlevel_subsystems)
 					var/datum/controller/subsystem/SS = I
-					if(SS.next_fire <= world.time)
+					if (SS.next_fire <= world.time)
 						stagger += world.tick_lag * rand(1, 5)
 						SS.next_fire = stagger
 
@@ -405,7 +405,7 @@ var/global/datum/controller/master/Master = new
 			continue
 		if (SS.next_fire > world.time)
 			continue
-		if(SS.suspended)
+		if (SS.suspended)
 			continue
 		SS_flags = SS.flags
 		if (SS_flags & SS_NO_FIRE)

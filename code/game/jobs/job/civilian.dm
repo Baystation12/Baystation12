@@ -93,5 +93,5 @@
 
 /datum/job/lawyer/equip(mob/living/carbon/human/H)
 	. = ..()
-	if(.)
+	if (.)
 		H.implant_loyalty(H)

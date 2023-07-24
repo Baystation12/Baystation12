@@ -16,7 +16,7 @@
 
 /obj/item/device/suit_sensor_jammer/New()
 	..()
-	if(ispath(bcell))
+	if (ispath(bcell))
 		bcell = new bcell(src)
 	suit_sensor_jammer_methods = list()
 	suit_sensor_jammer_methods_by_type = list()
@@ -80,37 +80,37 @@
 
 /obj/item/device/suit_sensor_jammer/on_update_icon()
 	overlays.Cut()
-	if(bcell)
+	if (bcell)
 		var/percent = bcell.percent()
 		switch(percent)
-			if(0 to 25)
+			if (0 to 25)
 				overlays += "forth_quarter"
-			if(25 to 50)
+			if (25 to 50)
 				overlays += "one_quarter"
 				overlays += "third_quarter"
-			if(50 to 75)
+			if (50 to 75)
 				overlays += "two_quarters"
 				overlays += "second_quarter"
-			if(75 to 99)
+			if (75 to 99)
 				overlays += "three_quarters"
 				overlays += "first_quarter"
 			else
 				overlays += "four_quarters"
 
-		if(active)
+		if (active)
 			overlays += "active"
 
 /obj/item/device/suit_sensor_jammer/emp_act(severity)
 	..()
-	if(bcell)
+	if (bcell)
 		bcell.emp_act(severity)
 
-	if(prob(70/severity))
+	if (prob(70/severity))
 		enable()
 	else
 		disable()
 
-	if(prob(90/severity))
+	if (prob(90/severity))
 		set_method(suit_sensor_jammer_methods_by_type[/suit_sensor_jammer_method/random])
 	else
 		set_method(pick(suit_sensor_jammer_methods))
@@ -120,17 +120,17 @@
 
 /obj/item/device/suit_sensor_jammer/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 3)
+	if (distance <= 3)
 		var/list/message = list()
 		message += "This device appears to be [active ? "" : "in"]active and "
-		if(bcell)
+		if (bcell)
 			message += "displays a charge level of [bcell.percent()]%."
 		else
 			message += "is lacking a cell."
 		to_chat(user, jointext(message,.))
 
 /obj/item/device/suit_sensor_jammer/CanUseTopic(user, state)
-	if(!bcell || bcell.charge <= 0)
+	if (!bcell || bcell.charge <= 0)
 		return STATUS_CLOSE
 	return ..()
 
@@ -175,23 +175,23 @@
 
 	if (href_list["select_method"])
 		var/method = locate(href_list["select_method"]) in suit_sensor_jammer_methods
-		if(method)
+		if (method)
 			set_method(method)
 			return TOPIC_REFRESH
 
 /obj/item/device/suit_sensor_jammer/Process(wait)
-	if(bcell)
+	if (bcell)
 		// With a range of 2 and jammer cost of 3 the default (high capacity) cell will last for almost 14 minutes, give or take
 		// 10000 / (2^2 * 3 / 10) ~= 8333 ticks ~= 13.8 minutes
 		var/deduction = JAMMER_POWER_CONSUMPTION(wait)
-		if(!bcell.use(deduction))
+		if (!bcell.use(deduction))
 			disable()
 	else
 		disable()
 	update_icon()
 
 /obj/item/device/suit_sensor_jammer/proc/enable()
-	if(active)
+	if (active)
 		return FALSE
 	active = TRUE
 	START_PROCESSING(SSobj, src)
@@ -200,7 +200,7 @@
 	return TRUE
 
 /obj/item/device/suit_sensor_jammer/proc/disable()
-	if(!active)
+	if (!active)
 		return FALSE
 	active = FALSE
 	jammer_method.disable()
@@ -213,15 +213,15 @@
 	return range != new_range
 
 /obj/item/device/suit_sensor_jammer/proc/set_method(suit_sensor_jammer_method/sjm)
-	if(sjm == jammer_method)
+	if (sjm == jammer_method)
 		return
-	if(active)
+	if (active)
 		jammer_method.disable()
 		sjm.enable()
 	jammer_method = sjm
 
 /obj/item/device/suit_sensor_jammer/proc/may_process_crew_data(mob/living/carbon/human/H, obj/item/clothing/under/C, turf/pos)
-	if(!pos)
+	if (!pos)
 		return FALSE
 	var/turf/T = get_turf(src)
 	return T && T.z == pos.z && get_dist(T, pos) <= range

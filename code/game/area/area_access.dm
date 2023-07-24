@@ -6,9 +6,9 @@
 // Given two areas, find the minimal req_access needed such that (return value) + (area access) >= (other area access) and vice versa
 /proc/req_access_diff(area/first, area/second)
 	RETURN_TYPE(/list)
-	if(!length(first.req_access))
+	if (!length(first.req_access))
 		return second.req_access.Copy()
-	if(!length(second.req_access))
+	if (!length(second.req_access))
 		return first.req_access.Copy()
 	. = list()
 	for(var/requirement in first.req_access)
@@ -19,9 +19,9 @@
 // Given two areas, find the minimal req_access needed such that req_access >= (area access) + (other area access)
 /proc/req_access_union(area/first, area/second)
 	RETURN_TYPE(/list)
-	if(!length(first.req_access))
+	if (!length(first.req_access))
 		return second.req_access.Copy()
-	if(!length(second.req_access))
+	if (!length(second.req_access))
 		return first.req_access.Copy()
 	. = first.req_access.Copy()
 	for(var/requirement in second.req_access)
@@ -31,25 +31,25 @@
 // Second argument is a number access code or list thereof (like an entry in req_access); the typecasting is false.
 /proc/get_minimal_requirement(list/req_access, list/requirement)
 	RETURN_TYPE(/list)
-	if(!requirement)
+	if (!requirement)
 		return
-	if(!islist(requirement))
+	if (!islist(requirement))
 		return (requirement in req_access) ? null : requirement
 	for(var/req in req_access)
-		if(req in requirement)
+		if (req in requirement)
 			return // have one of the requirements, and these use OR, so we're good
-		if(islist(req))
+		if (islist(req))
 			var/fully_contained = TRUE // In this case we check if we are already requiring something more stringent than the new thing.
 			for(var/one_req in req)
-				if(!(one_req in requirement))
+				if (!(one_req in requirement))
 					fully_contained = FALSE
 					break
-			if(fully_contained)
+			if (fully_contained)
 				return
 	return requirement.Copy()
 
 // Modifies req_access in place. Ensures that the list remains miminal.
 /proc/add_access_requirement(list/req_access, requirement)
 	var/minimal = get_minimal_requirement(req_access, requirement)
-	if(minimal)
+	if (minimal)
 		req_access[LIST_PRE_INC(req_access)] = minimal

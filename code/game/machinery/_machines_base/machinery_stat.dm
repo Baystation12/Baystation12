@@ -20,7 +20,7 @@
  * Returns boolean - Whether or not the state was changed.
  */
 /obj/machinery/proc/set_broken(new_state, cause = MACHINE_BROKEN_GENERIC)
-	if(!new_state == !(reason_broken & cause))
+	if (!new_state == !(reason_broken & cause))
 		return FALSE
 	reason_broken ^= cause
 	return TRUE

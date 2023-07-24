@@ -13,30 +13,30 @@
 /obj/machinery/computer/modular/Destroy()
 	QDEL_NULL(portable_drive)
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
+	if (os)
 		os.system_shutdown()
 	. = ..()
 
 /obj/machinery/computer/modular/Process()
-	if(!is_powered())
+	if (!is_powered())
 		return
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
+	if (os)
 		os.Process()
 
 /obj/machinery/computer/modular/power_change()
 	. = ..()
-	if(. && (!is_powered()))
+	if (. && (!is_powered()))
 		var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-		if(os)
+		if (os)
 			os.event_powerfailure()
 			os.system_shutdown()
 
 /obj/machinery/computer/modular/interface_interact(mob/user)
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
-		if(!os.on)
-			if(!CanInteract(user, DefaultTopicState()))
+	if (os)
+		if (!os.on)
+			if (!CanInteract(user, DefaultTopicState()))
 				return FALSE // Do full interactivity check before state change.
 			os.system_boot()
 
@@ -46,20 +46,20 @@
 /obj/machinery/computer/modular/on_update_icon()
 	. = ..()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
-		if(os.on)
+	if (os)
+		if (os.on)
 			set_light(light_max_bright_on, light_inner_range_on, light_outer_range_on, 2, light_color)
 		else
 			set_light(0)
 
 /obj/machinery/computer/modular/get_screen_overlay()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
+	if (os)
 		return os.get_screen_overlay()
 
 /obj/machinery/computer/modular/get_keyboard_overlay()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
+	if (os)
 		icon_keyboard = os.get_keyboard_state()
 		return os.get_keyboard_overlay()
 
@@ -69,19 +69,19 @@
 
 /obj/machinery/computer/modular/components_are_accessible(path)
 	. = ..()
-	if(.)
+	if (.)
 		return
-	if(!ispath(path, /obj/item/stock_parts/computer))
+	if (!ispath(path, /obj/item/stock_parts/computer))
 		return FALSE
 	var/obj/item/stock_parts/computer/P = path
 	return initial(P.external_slot)
 
 /obj/machinery/computer/modular/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/stock_parts/computer/hard_drive/portable))
-		if(portable_drive)
+	if (istype(I, /obj/item/stock_parts/computer/hard_drive/portable))
+		if (portable_drive)
 			to_chat(user, SPAN_WARNING("There's already \a [portable_drive] plugged in."))
 			return TRUE
-		else if(user.unEquip(I, src))
+		else if (user.unEquip(I, src))
 			portable_drive = I
 			verbs += /obj/machinery/computer/modular/proc/eject_usb
 			visible_message(SPAN_NOTICE("[user] plugs \the [I] into \the [src]."))
@@ -93,11 +93,11 @@
 	set category = "Object"
 	set src in view(1)
 
-	if(!CanPhysicallyInteract(usr))
+	if (!CanPhysicallyInteract(usr))
 		to_chat(usr, SPAN_WARNING("You can't reach it."))
 		return
 
-	if(ismob(usr))
+	if (ismob(usr))
 		var/mob/user = usr
 		visible_message(SPAN_NOTICE("[user] ejects \the [portable_drive] from \the [src]."))
 		user.put_in_hands(portable_drive)
@@ -108,22 +108,22 @@
 
 /obj/machinery/computer/modular/CouldUseTopic(mob/user)
 	..()
-	if(LAZYLEN(interact_sounds) && CanPhysicallyInteract(user))
+	if (LAZYLEN(interact_sounds) && CanPhysicallyInteract(user))
 		playsound(src, pick(interact_sounds), 40)
 
 /obj/machinery/computer/modular/RefreshParts()
 	..()
 	var/extra_power = 0
 	for(var/obj/item/stock_parts/computer/part in component_parts)
-		if(part.enabled)
+		if (part.enabled)
 			extra_power += part.power_usage
 	change_power_consumption(initial(active_power_usage) + extra_power, POWER_USE_ACTIVE)
 
 /obj/machinery/computer/modular/CtrlAltClick(mob/user)
-	if(!CanPhysicallyInteract(user))
+	if (!CanPhysicallyInteract(user))
 		return FALSE
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
+	if (os)
 		os.open_terminal(user)
 		return TRUE
 	return FALSE
@@ -133,10 +133,10 @@
 	set category = "Object"
 	set src in view(1)
 
-	if(!CanPhysicallyInteract(usr))
+	if (!CanPhysicallyInteract(usr))
 		return
 
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os && os.on)
+	if (os && os.on)
 		to_chat(usr, "You press a hard-reset button on \the [src].")
 		os.system_shutdown()

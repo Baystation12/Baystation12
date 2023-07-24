@@ -9,7 +9,7 @@
 /obj/structure/largecrate/Initialize()
 	. = ..()
 	for(var/obj/I in src.loc)
-		if(I.density || I.anchored || I == src || !I.simulated)
+		if (I.density || I.anchored || I == src || !I.simulated)
 			continue
 		I.forceMove(src)
 
@@ -46,7 +46,7 @@
 
 /obj/structure/largecrate/animal/New()
 	..()
-	if(held_type)
+	if (held_type)
 		for(var/i = 1;i<=held_count;i++)
 			new held_type(src)
 

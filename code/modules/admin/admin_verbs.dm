@@ -309,24 +309,24 @@ var/global/list/admin_verbs_mod = list(
 )
 
 /client/proc/add_admin_verbs()
-	if(holder)
+	if (holder)
 		verbs += admin_verbs_default
-		if(holder.rights & R_BUILDMODE)		verbs += /client/proc/togglebuildmodeself
-		if(holder.rights & R_ADMIN)			verbs += admin_verbs_admin
-		if(holder.rights & R_BAN)			verbs += admin_verbs_ban
-		if(holder.rights & R_FUN)			verbs += admin_verbs_fun
-		if(holder.rights & R_SERVER)		verbs += admin_verbs_server
-		if(holder.rights & R_DEBUG)
+		if (holder.rights & R_BUILDMODE)		verbs += /client/proc/togglebuildmodeself
+		if (holder.rights & R_ADMIN)			verbs += admin_verbs_admin
+		if (holder.rights & R_BAN)			verbs += admin_verbs_ban
+		if (holder.rights & R_FUN)			verbs += admin_verbs_fun
+		if (holder.rights & R_SERVER)		verbs += admin_verbs_server
+		if (holder.rights & R_DEBUG)
 			verbs += admin_verbs_debug
-			if(config.debugparanoid && !(holder.rights & R_ADMIN))
+			if (config.debugparanoid && !(holder.rights & R_ADMIN))
 				verbs.Remove(admin_verbs_paranoid_debug)			//Right now it's just callproc but we can easily add others later on.
-		if(holder.rights & R_POSSESS)		verbs += admin_verbs_possess
-		if(holder.rights & R_PERMISSIONS)	verbs += admin_verbs_permissions
-		if(holder.rights & R_STEALTH)		verbs += /client/proc/stealth
-		if(holder.rights & R_REJUVINATE)	verbs += admin_verbs_rejuv
-		if(holder.rights & R_SOUNDS)		verbs += admin_verbs_sounds
-		if(holder.rights & R_SPAWN)			verbs += admin_verbs_spawn
-		if(holder.rights & R_MOD)			verbs += admin_verbs_mod
+		if (holder.rights & R_POSSESS)		verbs += admin_verbs_possess
+		if (holder.rights & R_PERMISSIONS)	verbs += admin_verbs_permissions
+		if (holder.rights & R_STEALTH)		verbs += /client/proc/stealth
+		if (holder.rights & R_REJUVINATE)	verbs += admin_verbs_rejuv
+		if (holder.rights & R_SOUNDS)		verbs += admin_verbs_sounds
+		if (holder.rights & R_SPAWN)			verbs += admin_verbs_spawn
+		if (holder.rights & R_MOD)			verbs += admin_verbs_mod
 
 /client/proc/remove_admin_verbs()
 	verbs.Remove(
@@ -382,13 +382,13 @@ var/global/list/admin_verbs_mod = list(
 /client/proc/admin_ghost()
 	set category = "Admin"
 	set name = "Aghost"
-	if(!holder)	return
-	if(isghost(mob))
+	if (!holder)	return
+	if (isghost(mob))
 		var/mob/observer/ghost/ghost = mob
 		sound_to(usr, sound(null))
 		ghost.reenter_corpse()
 
-	else if(istype(mob,/mob/new_player))
+	else if (istype(mob,/mob/new_player))
 		to_chat(src, SPAN_COLOR("red", "Error: Aghost: Can't admin-ghost whilst in the lobby. Join or Observe first."))
 	else
 		//ghostize
@@ -400,9 +400,9 @@ var/global/list/admin_verbs_mod = list(
 			to_chat(src, SPAN_COLOR("red", "You are already admin-ghosted."))
 			return
 		ghost.admin_ghosted = 1
-		if(body)
+		if (body)
 			body.teleop = ghost
-			if(!body.key)
+			if (!body.key)
 				body.key = "@[key]"	//Haaaaaaaack. But the people have spoken. If it breaks; blame adminbus
 
 
@@ -410,8 +410,8 @@ var/global/list/admin_verbs_mod = list(
 	set name = "Invisimin"
 	set category = "Admin"
 	set desc = "Toggles ghost-like invisibility (Don't abuse this)"
-	if(holder && mob)
-		if(mob.invisibility == INVISIBILITY_OBSERVER)
+	if (holder && mob)
+		if (mob.invisibility == INVISIBILITY_OBSERVER)
 			mob.set_invisibility(initial(mob.invisibility))
 			to_chat(mob, SPAN_DANGER("Invisimin off. Invisibility reset."))
 			mob.alpha = max(mob.alpha + 100, 255)
@@ -424,14 +424,14 @@ var/global/list/admin_verbs_mod = list(
 /client/proc/player_panel()
 	set name = "Player Panel"
 	set category = "Admin"
-	if(holder)
+	if (holder)
 		holder.player_panel()
 	return
 
 /client/proc/check_antagonists()
 	set name = "Check Antagonists"
 	set category = "Admin"
-	if(holder)
+	if (holder)
 		holder.check_antagonists()
 		log_admin("[key_name(usr)] checked antagonists.")	//for tsar~
 	return
@@ -439,8 +439,8 @@ var/global/list/admin_verbs_mod = list(
 /client/proc/jobbans()
 	set name = "Display Job bans"
 	set category = "Admin"
-	if(holder)
-		if(config.ban_legacy_system)
+	if (holder)
+		if (config.ban_legacy_system)
 			holder.Jobbans()
 		else
 			holder.DB_ban_panel()
@@ -449,8 +449,8 @@ var/global/list/admin_verbs_mod = list(
 /client/proc/unban_panel()
 	set name = "Unban Panel"
 	set category = "Admin"
-	if(holder)
-		if(config.ban_legacy_system)
+	if (holder)
+		if (config.ban_legacy_system)
 			holder.unbanpanel()
 		else
 			holder.DB_ban_panel()
@@ -459,7 +459,7 @@ var/global/list/admin_verbs_mod = list(
 /client/proc/game_panel()
 	set name = "Game Panel"
 	set category = "Admin"
-	if(holder)
+	if (holder)
 		holder.Game()
 	return
 
@@ -473,38 +473,38 @@ var/global/list/admin_verbs_mod = list(
 /client/proc/colorooc()
 	set category = "Fun"
 	set name = "OOC Text Color"
-	if(!holder)	return
+	if (!holder)	return
 	var/response = alert(src, "Please choose a distinct color that is easy to read and doesn't mix with all the other chat and radio frequency colors.", "Change own OOC color", "Pick new color", "Reset to default", "Cancel")
-	if(response == "Pick new color")
+	if (response == "Pick new color")
 		prefs.ooccolor = input(src, "Please select your OOC colour.", "OOC colour") as color
-	else if(response == "Reset to default")
+	else if (response == "Reset to default")
 		prefs.ooccolor = initial(prefs.ooccolor)
 	SScharacter_setup.queue_preferences_save(prefs)
 	return
 
 
 /client/proc/warn(warned_ckey)
-	if(!check_rights(R_ADMIN))
+	if (!check_rights(R_ADMIN))
 		return
-	if(!warned_ckey || !istext(warned_ckey))
+	if (!warned_ckey || !istext(warned_ckey))
 		return
-	if(warned_ckey in admin_datums)
+	if (warned_ckey in admin_datums)
 		to_chat(usr, SPAN_COLOR("red", "Error: warn(): You can't warn admins."))
 		return
 	var/datum/preferences/D
 	var/client/C = GLOB.ckey_directory[warned_ckey]
-	if(C)
+	if (C)
 		D = C.prefs
 	else
 		D = SScharacter_setup.preferences_datums[warned_ckey]
-	if(!D)
+	if (!D)
 		to_chat(src, SPAN_COLOR("red", "Error: warn(): No such ckey found."))
 		return
 	++D.warns
 	if (config.warn_autoban_threshold && D.warns >= config.warn_autoban_threshold)
 		var/mins_readable = time_to_readable(config.warn_autoban_duration MINUTES)
 		ban_unban_log_save("[ckey] warned [warned_ckey], resulting in a [mins_readable] autoban.")
-		if(C)
+		if (C)
 			message_admins("[key_name_admin(src)] has warned [key_name_admin(C)] resulting in a [mins_readable] ban.")
 			to_chat(C, SPAN_COLOR("red", "<BIG><B>You have been autobanned due to a warning by [ckey].</B></BIG><br>This is a temporary ban, it will be removed in [mins_readable]."))
 			qdel(C)
@@ -512,7 +512,7 @@ var/global/list/admin_verbs_mod = list(
 			message_admins("[key_name_admin(src)] has warned [warned_ckey] resulting in a [mins_readable] ban.")
 		AddBan(warned_ckey, D.last_id, "Autobanning due to too many formal warnings", ckey, 1, config.warn_autoban_duration)
 	else
-		if(C)
+		if (C)
 			to_chat(C, SPAN_COLOR("red", "<BIG><B>You have been formally warned by an administrator.</B></BIG><br>Further warnings will result in an autoban."))
 			message_admins("[key_name_admin(src)] has warned [key_name_admin(C)]. They have [config.warn_autoban_threshold - D.warns] strikes remaining.")
 		else
@@ -530,13 +530,13 @@ var/global/list/admin_verbs_mod = list(
 	switch(choice)
 		if (null)
 			return
-		if("Small Bomb")
+		if ("Small Bomb")
 			explosion(epicenter, 6)
-		if("Medium Bomb")
+		if ("Medium Bomb")
 			explosion(epicenter, 9)
-		if("Big Bomb")
+		if ("Big Bomb")
 			explosion(epicenter, 15)
-		if("Custom Bomb")
+		if ("Custom Bomb")
 			var/range = input("Explosion radius (in tiles):") as num|null
 			if (isnull(range) || range <= 0)
 				return
@@ -558,18 +558,18 @@ var/global/list/admin_verbs_mod = list(
 	set name = "Toggle Build Mode Self"
 	set category = "Special Verbs"
 
-	if(!check_rights(R_ADMIN))
+	if (!check_rights(R_ADMIN))
 		return
 
-	if(!usr.RemoveClickHandler(/datum/click_handler/build_mode))
+	if (!usr.RemoveClickHandler(/datum/click_handler/build_mode))
 		usr.PushClickHandler(/datum/click_handler/build_mode)
 
 /client/proc/object_talk(msg as text) // -- TLE
 	set category = "Special Verbs"
 	set name = "oSay"
 	set desc = "Display a message to everyone who can hear the target"
-	if(mob.control_object)
-		if(!msg)
+	if (mob.control_object)
+		if (!msg)
 			return
 		for (var/mob/V in hearers(mob.control_object))
 			V.show_message("<b>[mob.control_object.name]</b> says: \"" + msg + "\"", 2)
@@ -578,7 +578,7 @@ var/global/list/admin_verbs_mod = list(
 	set name = "Re-Admin self"
 	set category = "Admin"
 
-	if(deadmin_holder)
+	if (deadmin_holder)
 		deadmin_holder.reassociate()
 		log_admin("[src] re-admined themself.")
 		message_admins("[src] re-admined themself.", 1)
@@ -589,8 +589,8 @@ var/global/list/admin_verbs_mod = list(
 	set name = "De-admin self"
 	set category = "Admin"
 
-	if(holder)
-		if(alert("Confirm self-deadmin for the round? You can re-admin yourself at any time.",,"Yes","No") == "Yes")
+	if (holder)
+		if (alert("Confirm self-deadmin for the round? You can re-admin yourself at any time.",,"Yes","No") == "Yes")
 			log_admin("[src] deadmined themself.")
 			message_admins("[src] deadmined themself.", 1)
 			deadmin()
@@ -600,9 +600,9 @@ var/global/list/admin_verbs_mod = list(
 /client/proc/toggle_log_hrefs()
 	set name = "Toggle href logging"
 	set category = "Server"
-	if(!holder)	return
-	if(config)
-		if(config.log_hrefs)
+	if (!holder)	return
+	if (config)
+		if (config.log_hrefs)
 			config.log_hrefs = 0
 			to_chat(src, "<b>Stopped logging hrefs</b>")
 		else
@@ -612,20 +612,20 @@ var/global/list/admin_verbs_mod = list(
 /client/proc/check_ai_laws()
 	set name = "Check AI Laws"
 	set category = "Admin"
-	if(holder)
+	if (holder)
 		src.holder.output_ai_laws()
 
 /client/proc/rename_silicon()
 	set name = "Rename Silicon"
 	set category = "Admin"
 
-	if(!check_rights(R_ADMIN)) return
+	if (!check_rights(R_ADMIN)) return
 
 	var/mob/living/silicon/S = input("Select silicon.", "Rename Silicon.") as null|anything in GLOB.silicon_mobs
-	if(!S) return
+	if (!S) return
 
 	var/new_name = sanitizeSafe(input(src, "Enter new name. Leave blank or as is to cancel.", "[S.real_name] - Enter new silicon name", S.real_name))
-	if(new_name && new_name != S.real_name)
+	if (new_name && new_name != S.real_name)
 		log_and_message_admins("has renamed the silicon '[S.real_name]' to '[new_name]'")
 		S.fully_replace_character_name(new_name)
 
@@ -633,10 +633,10 @@ var/global/list/admin_verbs_mod = list(
 	set name = "Manage Silicon Laws"
 	set category = "Admin"
 
-	if(!check_rights(R_ADMIN)) return
+	if (!check_rights(R_ADMIN)) return
 
 	var/mob/living/silicon/S = input("Select silicon.", "Manage Silicon Laws") as null|anything in GLOB.silicon_mobs
-	if(!S) return
+	if (!S) return
 
 	var/datum/nano_module/law_manager/L = new(S)
 	L.ui_interact(usr, state = GLOB.admin_state)
@@ -647,10 +647,10 @@ var/global/list/admin_verbs_mod = list(
 	set desc = "Allows you to change the mob appearance"
 	set category = "Admin"
 
-	if(!check_rights(R_FUN)) return
+	if (!check_rights(R_FUN)) return
 
 	var/mob/living/carbon/human/H = input("Select mob.", "Change Mob Appearance - Admin") as null|anything in GLOB.human_mobs
-	if(!H) return
+	if (!H) return
 
 	log_and_message_admins("is altering the appearance of [H].")
 	H.change_appearance(APPEARANCE_ALL, usr, state = GLOB.admin_state)
@@ -660,20 +660,20 @@ var/global/list/admin_verbs_mod = list(
 	set desc = "Allows the mob to change its appearance"
 	set category = "Admin"
 
-	if(!check_rights(R_FUN)) return
+	if (!check_rights(R_FUN)) return
 
 	var/mob/living/carbon/human/H = input("Select mob.", "Change Mob Appearance - Self") as null|anything in GLOB.human_mobs
-	if(!H) return
+	if (!H) return
 
-	if(!H.client)
+	if (!H.client)
 		to_chat(usr, "Only mobs with clients can alter their own appearance.")
 		return
 
 	switch(alert("Do you wish for [H] to be allowed to select non-whitelisted races?","Alter Mob Appearance","Yes","No","Cancel"))
-		if("Yes")
+		if ("Yes")
 			log_and_message_admins("has allowed [H] to change \his appearance, ignoring allow lists.")
 			H.change_appearance(APPEARANCE_COMMON | APPEARANCE_SKIP_ALLOW_LIST_CHECK)
-		if("No")
+		if ("No")
 			log_and_message_admins("has allowed [H] to change \his appearance, respecting allow lists.")
 			H.change_appearance(APPEARANCE_COMMON)
 
@@ -682,15 +682,15 @@ var/global/list/admin_verbs_mod = list(
 	set desc = "Sets the security level"
 	set category = "Admin"
 
-	if(!check_rights(R_ADMIN))	return
+	if (!check_rights(R_ADMIN))	return
 
 	var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 
 	var/singleton/security_level/new_security_level = input(usr, "It's currently [security_state.current_security_level.name].", "Select Security Level")  as null|anything in (security_state.all_security_levels - security_state.current_security_level)
-	if(!new_security_level)
+	if (!new_security_level)
 		return
 
-	if(alert("Switch from [security_state.current_security_level.name] to [new_security_level.name]?","Change security level?","Yes","No") == "Yes")
+	if (alert("Switch from [security_state.current_security_level.name] to [new_security_level.name]?","Change security level?","Yes","No") == "Yes")
 		security_state.set_security_level(new_security_level, TRUE)
 
 
@@ -701,31 +701,31 @@ var/global/list/admin_verbs_mod = list(
 	set name = "Edit Appearance"
 	set category = "Fun"
 
-	if(!check_rights(R_FUN))	return
+	if (!check_rights(R_FUN))	return
 
 	var/mob/living/carbon/human/M = input("Select mob.", "Edit Appearance") as null|anything in GLOB.human_mobs
 
-	if(!istype(M, /mob/living/carbon/human))
+	if (!istype(M, /mob/living/carbon/human))
 		to_chat(usr, SPAN_WARNING("You can only do this to humans!"))
 		return
 	switch(alert("Are you sure you wish to edit this mob's appearance? Skrell, Unathi and Vox can result in unintended consequences.",,"Yes","No"))
-		if("No")
+		if ("No")
 			return
 	var/new_facial = input("Please select facial hair color.", "Character Generation") as color
-	if(new_facial)
+	if (new_facial)
 		M.facial_hair_color = new_facial
 
 	var/new_hair = input("Please select hair color.", "Character Generation") as color
-	if(new_hair)
+	if (new_hair)
 		M.head_hair_color = new_hair
 
 	var/new_eyes = input("Please select eye color.", "Character Generation") as color
-	if(new_eyes)
+	if (new_eyes)
 		M.eye_color = new_eyes
 		M.update_eyes()
 
 	var/new_skin = input("Please select body color. This is for Unathi, and Skrell only!", "Character Generation") as color
-	if(new_skin)
+	if (new_skin)
 		M.skin_color = new_skin
 
 	var/new_tone = input("Please select skin tone level: 1-220 (1=albino, 35=caucasian, 150=black, 220='very' black)", "Character Generation")  as text
@@ -736,17 +736,17 @@ var/global/list/admin_verbs_mod = list(
 
 	// hair
 	var/new_hstyle = input(usr, "Select a hair style", "Grooming")  as null|anything in GLOB.hair_styles_list
-	if(new_hstyle)
+	if (new_hstyle)
 		M.head_hair_style = new_hstyle
 
 	// facial hair
 	var/new_fstyle = input(usr, "Select a facial hair style", "Grooming")  as null|anything in GLOB.facial_hair_styles_list
-	if(new_fstyle)
+	if (new_fstyle)
 		M.facial_hair_style = new_fstyle
 
 	var/new_gender = input(usr, "Please select a bodytype", "Character Generation") as null|anything in all_genders_text_list
 	switch(new_gender)
-		if("Male")
+		if ("Male")
 			M.gender = MALE
 		if ("Female")
 			M.gender = FEMALE
@@ -762,68 +762,68 @@ var/global/list/admin_verbs_mod = list(
 /client/proc/playernotes()
 	set name = "Show Player Info"
 	set category = "Admin"
-	if(holder)
+	if (holder)
 		holder.PlayerNotes()
 	return
 
 /client/proc/free_slot_submap()
 	set name = "Free Job Slot (Submap)"
 	set category = "Admin"
-	if(!holder) return
+	if (!holder) return
 
 	var/list/jobs = list()
 	for(var/thing in SSmapping.submaps)
 		var/datum/submap/submap = thing
 		for(var/otherthing in submap.jobs)
 			var/datum/job/submap/job = submap.jobs[otherthing]
-			if(!job.is_position_available())
+			if (!job.is_position_available())
 				jobs["[job.title] - [submap.name]"] = job
 
-	if(!LAZYLEN(jobs))
+	if (!LAZYLEN(jobs))
 		to_chat(usr, "There are no fully staffed offsite jobs.")
 		return
 
 	var/job_name = input("Please select job slot to free", "Free job slot")  as null|anything in jobs
-	if(job_name)
+	if (job_name)
 		var/datum/job/submap/job = jobs[job_name]
-		if(istype(job) && !job.is_position_available())
+		if (istype(job) && !job.is_position_available())
 			job.make_position_available()
 			message_admins("An offsite job slot for [job_name] has been opened by [key_name_admin(usr)]")
 
 /client/proc/close_slot_submap()
 	set name = "Close Job Slot (Submap)"
 	set category = "Admin"
-	if(!holder) return
+	if (!holder) return
 
 	var/list/jobs = list()
 	for(var/thing in SSmapping.submaps)
 		var/datum/submap/submap = thing
 		for(var/otherthing in submap.jobs)
 			var/datum/job/submap/job = submap.jobs[otherthing]
-			if(job.is_position_available())
+			if (job.is_position_available())
 				jobs["[job.title] - [submap.name]"] = job
 
 	var/job_name = input("Please select job slot to close", "Close job slot")  as null|anything in jobs
-	if(job_name)
+	if (job_name)
 		var/datum/job/submap/job = jobs[job_name]
-		if(istype(job) && job.is_position_available())
+		if (istype(job) && job.is_position_available())
 			job.make_position_unavailable()
 			log_and_message_admins("has closed an offsite job slot for [job_name]")
 
 /client/proc/free_slot_crew()
 	set name = "Free Job Slot (Crew)"
 	set category = "Admin"
-	if(holder)
+	if (holder)
 		var/list/jobs = list()
 		for (var/datum/job/J in SSjobs.primary_job_datums)
-			if(!J.is_position_available())
+			if (!J.is_position_available())
 				jobs[J.title] = J
 		if (!length(jobs))
 			to_chat(usr, "There are no fully staffed jobs.")
 			return
 		var/job_title = input("Please select job slot to free", "Free job slot")  as null|anything in jobs
 		var/datum/job/job = jobs[job_title]
-		if(job && !job.is_position_available())
+		if (job && !job.is_position_available())
 			job.make_position_available()
 			message_admins("A job slot for [job_title] has been opened by [key_name_admin(usr)]")
 			return
@@ -831,14 +831,14 @@ var/global/list/admin_verbs_mod = list(
 /client/proc/close_slot_crew()
 	set name = "Close Job Slot (Crew)"
 	set category = "Admin"
-	if(holder)
+	if (holder)
 		var/list/jobs = list()
 		for (var/datum/job/J in SSjobs.primary_job_datums)
-			if(J.is_position_available())
+			if (J.is_position_available())
 				jobs[J.title] = J
 		var/job_title = input("Please select job slot to close", "Close job slot")  as null|anything in jobs
 		var/datum/job/job = jobs[job_title]
-		if(job && job.is_position_available())
+		if (job && job.is_position_available())
 			job.make_position_unavailable()
 			log_and_message_admins("has closed a job slot for [job_title]")
 			return
@@ -846,9 +846,9 @@ var/global/list/admin_verbs_mod = list(
 /client/proc/toggleghostwriters()
 	set name = "Toggle ghost writers"
 	set category = "Server"
-	if(!holder)	return
-	if(config)
-		if(config.cult_ghostwriter)
+	if (!holder)	return
+	if (config)
+		if (config.cult_ghostwriter)
 			config.cult_ghostwriter = 0
 			to_chat(src, "<b>Disallowed ghost writers.</b>")
 			message_admins("Admin [key_name_admin(usr)] has disabled ghost writers.", 1)
@@ -860,9 +860,9 @@ var/global/list/admin_verbs_mod = list(
 /client/proc/toggledrones()
 	set name = "Toggle maintenance drones"
 	set category = "Server"
-	if(!holder)	return
-	if(config)
-		if(config.allow_drone_spawn)
+	if (!holder)	return
+	if (config)
+		if (config.allow_drone_spawn)
 			config.allow_drone_spawn = 0
 			to_chat(src, "<b>Disallowed maint drones.</b>")
 			message_admins("Admin [key_name_admin(usr)] has disabled maint drones.", 1)
@@ -898,6 +898,6 @@ var/global/list/admin_verbs_mod = list(
 	set name = "Give Spell"
 	set desc = "Gives a spell to a mob."
 	var/spell/S = input("Choose the spell to give to that guy", "ABRAKADABRA") as null|anything in spells
-	if(!S) return
+	if (!S) return
 	T.add_spell(new S)
 	log_and_message_admins("gave [key_name(T)] the spell [S].")

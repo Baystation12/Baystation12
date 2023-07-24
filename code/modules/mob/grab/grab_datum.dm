@@ -62,10 +62,10 @@
 */
 
 /datum/grab/proc/refresh_updown()
-	if(upgrab_name)
+	if (upgrab_name)
 		upgrab = all_grabstates[upgrab_name]
 
-	if(downgrab_name)
+	if (downgrab_name)
 		downgrab = all_grabstates[downgrab_name]
 
 // This is for the strings defined as datum variables. It takes them and swaps out keywords for relevent ones from the grab
@@ -73,12 +73,12 @@
 /datum/grab/proc/string_process(obj/item/grab/G, to_write, obj/item/used_item)
 	to_write = replacetext(to_write, "rep_affecting", G.affecting)
 	to_write = replacetext(to_write, "rep_assailant", G.assailant)
-	if(used_item)
+	if (used_item)
 		to_write = replacetext(to_write, "rep_item", used_item)
 	return to_write
 
 /datum/grab/proc/upgrade(obj/item/grab/G)
-	if(!upgrab)
+	if (!upgrab)
 		return
 
 	if (can_upgrade(G))
@@ -91,7 +91,7 @@
 
 /datum/grab/proc/downgrade(obj/item/grab/G)
 	// Starts the process of letting go if there's no downgrade grab
-	if(can_downgrade())
+	if (can_downgrade())
 		downgrade_effect(G)
 		return downgrab
 	else
@@ -105,7 +105,7 @@
 
 /datum/grab/proc/on_target_change(obj/item/grab/G, old_zone, new_zone)
 	G.special_target_functional = check_special_target(G)
-	if(G.special_target_functional)
+	if (G.special_target_functional)
 		special_target_change(G, old_zone, new_zone)
 		special_target_effect(G)
 
@@ -114,12 +114,12 @@
 	process_effect(G)
 
 /datum/grab/proc/throw_held(obj/item/grab/G)
-	if(G.assailant == G.affecting)
+	if (G.assailant == G.affecting)
 		return
 
 	var/mob/living/carbon/human/affecting = G.affecting
 
-	if(can_throw)
+	if (can_throw)
 		. = affecting
 		var/mob/thrower = G.loc
 
@@ -128,35 +128,35 @@
 
 		// check if we're grabbing with our inactive hand
 		G = thrower.get_inactive_hand()
-		if(!istype(G))	return
+		if (!istype(G))	return
 		qdel(G)
 		return
 
 /datum/grab/proc/hit_with_grab(obj/item/grab/G)
-	if(downgrade_on_action)
+	if (downgrade_on_action)
 		G.downgrade()
 
-	if(G.check_action_cooldown() && !G.attacking)
+	if (G.check_action_cooldown() && !G.attacking)
 		var/intent = G.assailant.a_intent
 		switch(intent)
 
-			if(I_HELP)
-				if(on_hit_help(G))
+			if (I_HELP)
+				if (on_hit_help(G))
 					G.action_used()
 					make_log(G, help_action)
 
-			if(I_DISARM)
-				if(on_hit_disarm(G))
+			if (I_DISARM)
+				if (on_hit_disarm(G))
 					G.action_used()
 					make_log(G, disarm_action)
 
-			if(I_GRAB)
-				if(on_hit_grab(G))
+			if (I_GRAB)
+				if (on_hit_grab(G))
 					G.action_used()
 					make_log(G, grab_action)
 
-			if(I_HURT)
-				if(on_hit_harm(G))
+			if (I_HURT)
+				if (on_hit_harm(G))
 					G.action_used()
 					make_log(G, harm_action)
 
@@ -172,22 +172,22 @@
 	var/mob/living/carbon/human/assailant = G.assailant
 	var/adir = get_dir(assailant, affecting)
 
-	if(same_tile)
+	if (same_tile)
 		affecting.forceMove(assailant.loc)
 		adir = assailant.dir
 		affecting.set_dir(assailant.dir)
 
 	switch(adir)
-		if(NORTH)
+		if (NORTH)
 			animate(affecting, pixel_x = 0, pixel_y =-shift, 5, 1, LINEAR_EASING)
 			G.draw_affecting_under()
-		if(SOUTH)
+		if (SOUTH)
 			animate(affecting, pixel_x = 0, pixel_y = shift, 5, 1, LINEAR_EASING)
 			G.draw_affecting_over()
-		if(WEST)
+		if (WEST)
 			animate(affecting, pixel_x = shift, pixel_y = 0, 5, 1, LINEAR_EASING)
 			G.draw_affecting_under()
-		if(EAST)
+		if (EAST)
 			animate(affecting, pixel_x =-shift, pixel_y = 0, 5, 1, LINEAR_EASING)
 			G.draw_affecting_under()
 
@@ -196,7 +196,7 @@
 /datum/grab/proc/reset_position(obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
 
-	if(!affecting.buckled)
+	if (!affecting.buckled)
 		animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
 	affecting.reset_plane_and_layer()
 
@@ -204,7 +204,7 @@
 /datum/grab/proc/assailant_moved(obj/item/grab/G)
 	adjust_position(G)
 	moved_effect(G)
-	if(downgrade_on_move)
+	if (downgrade_on_move)
 		G.downgrade()
 
 /*
@@ -277,42 +277,42 @@
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
 
-	if(affecting.incapacitated(INCAPACITATION_KNOCKOUT | INCAPACITATION_STUNNED))
+	if (affecting.incapacitated(INCAPACITATION_KNOCKOUT | INCAPACITATION_STUNNED))
 		to_chat(G.affecting, SPAN_WARNING("You can't resist in your current state!"))
 	var/skill_mod = clamp(affecting.get_skill_difference(SKILL_COMBAT, assailant), -1, 1)
 	var/break_strength = breakability + size_difference(affecting, assailant) + skill_mod
 	var/shock = affecting.get_shock()
 	var/ashock = assailant.get_shock()
 
-	if(affecting.incapacitated(INCAPACITATION_ALL))
+	if (affecting.incapacitated(INCAPACITATION_ALL))
 		break_strength--
-	if(affecting.confused)
+	if (affecting.confused)
 		break_strength--
-	if(affecting.eye_blind)
+	if (affecting.eye_blind)
 		break_strength--
-	if(affecting.eye_blurry)
+	if (affecting.eye_blurry)
 		break_strength--
-	if(shock >= 10)
+	if (shock >= 10)
 		break_strength--
-	if(shock >= 30)
+	if (shock >= 30)
 		break_strength--
-	if(shock >= 50)
+	if (shock >= 50)
 		break_strength--
 
-	if(assailant.confused)
+	if (assailant.confused)
 		break_strength++
-	if(assailant.eye_blind)
+	if (assailant.eye_blind)
 		break_strength++
-	if(assailant.eye_blurry)
+	if (assailant.eye_blurry)
 		break_strength++
-	if(ashock >= 10)
+	if (ashock >= 10)
 		break_strength++
-	if(ashock >= 30)
+	if (ashock >= 30)
 		break_strength++
-	if(ashock >= 50)
+	if (ashock >= 50)
 		break_strength++
 
-	if(break_strength < 1)
+	if (break_strength < 1)
 		to_chat(G.affecting, SPAN_WARNING("You try to break free but feel that unless something changes, you'll never escape!"))
 		return
 
@@ -321,8 +321,8 @@
 	if (assailant.incapacitated(INCAPACITATION_ALL))
 		let_go(G)
 
-	if(prob(break_chance))
-		if(can_downgrade_on_resist && !prob((break_chance+100)/2))
+	if (prob(break_chance))
+		if (can_downgrade_on_resist && !prob((break_chance+100)/2))
 			affecting.visible_message(SPAN_WARNING("[affecting] has loosened [assailant]'s grip!"))
 			G.downgrade()
 			return

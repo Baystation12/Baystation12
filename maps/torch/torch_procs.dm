@@ -1,22 +1,22 @@
 /datum/map/bolt_saferooms()
 	for(var/atype in typesof(/area/crew_quarters/safe_room))
 		var/area/A = locate(atype)
-		if(istype(A))
+		if (istype(A))
 			for(var/obj/machinery/door/airlock/vault/bolted/V in A.contents)
-				if(!V.locked)
+				if (!V.locked)
 					V.lock()
 
 /datum/map/unbolt_saferooms()
 	for(var/atype in typesof(/area/crew_quarters/safe_room))
 		var/area/A = locate(atype)
-		if(istype(A))
+		if (istype(A))
 			for(var/obj/machinery/door/airlock/vault/bolted/V in A.contents)
-				if(V.locked)
+				if (V.locked)
 					V.unlock()
 
 /datum/map/make_maint_all_access(radstorm = 0)
 	maint_all_access = TRUE
-	if(radstorm)
+	if (radstorm)
 		priority_announcement.Announce("The maintenance access requirement has been revoked on all maintenance airlocks, and saferooms have been unbolted.", "Attention!")
 		GLOB.using_map.unbolt_saferooms()
 	else
@@ -24,7 +24,7 @@
 
 /datum/map/revoke_maint_all_access(radstorm = 0)
 	maint_all_access = FALSE
-	if(radstorm)
+	if (radstorm)
 		priority_announcement.Announce("The maintenance access requirement has been readded on all maintenance airlocks, and saferooms have been bolted.", "Attention!")
 		GLOB.using_map.bolt_saferooms()
 	else
@@ -32,26 +32,26 @@
 
 /datum/map/torch/roundend_player_status()
 	for(var/mob/Player in GLOB.player_list)
-		if(Player.mind && !isnewplayer(Player))
-			if(Player.stat != DEAD)
+		if (Player.mind && !isnewplayer(Player))
+			if (Player.stat != DEAD)
 				var/turf/playerTurf = get_turf(Player)
-				if(evacuation_controller.round_over() && evacuation_controller.emergency_evacuation)
-					if(isStationLevel(playerTurf.z))
+				if (evacuation_controller.round_over() && evacuation_controller.emergency_evacuation)
+					if (isStationLevel(playerTurf.z))
 						to_chat(Player, SPAN_INFO("<b>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</b>"))
 					else if (isEscapeLevel(playerTurf.z))
 						to_chat(Player, SPAN_COLOR("green", "<b>You managed to survive the events on [station_name()] as [Player.real_name].</b>"))
 					else
 						to_chat(Player, SPAN_INFO("<b>You managed to survive, but were marooned in the sector as [Player.real_name]...</b>"))
-				else if(issilicon(Player))
+				else if (issilicon(Player))
 					to_chat(Player, SPAN_COLOR("green", "<b>You remain operational after the events on [station_name()] as [Player.real_name].</b>"))
 				else if (isNotStationLevel(playerTurf.z))
 					to_chat(Player, SPAN_INFO("<b>You managed to survive, but were marooned in the sector as [Player.real_name]...</b>"))
 				else
 					to_chat(Player, SPAN_INFO("<b>You got through just another workday on [station_name()] as [Player.real_name].</b>"))
 			else
-				if(isghost(Player))
+				if (isghost(Player))
 					var/mob/observer/ghost/O = Player
-					if(!O.started_as_observer)
+					if (!O.started_as_observer)
 						to_chat(Player, SPAN_COLOR("red", "<b>You did not survive the events on [station_name()]...</b>"))
 				else
 					to_chat(Player, SPAN_COLOR("red", "<b>You did not survive the events on [station_name()]...</b>"))
@@ -73,7 +73,7 @@
 	var/ghosts = data["ghosts"]
 	var/offship_players = data["offship_players"]
 
-	if(survivors > 0)
+	if (survivors > 0)
 		desc += "There [survivors > 1 ? "were <b>[survivors] survivors</b>" : "was <b>one survivor</b>"]"
 		desc += " (<b>[escaped_total > 0 ? escaped_total : "none"] escaped, [marooned_total] marooned</b>),"
 		data += " [offship_players > 1 ? "<b>[offship_players] off-ship players</b>" : "<b>one off-ship player</b>"]"

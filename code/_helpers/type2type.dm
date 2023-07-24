@@ -117,24 +117,24 @@
 
 /proc/heat2color_r(temp)
 	temp /= 100
-	if(temp <= 66)
+	if (temp <= 66)
 		. = 255
 	else
 		. = max(0, min(255, 329.698727446 * (temp - 60) ** -0.1332047592))
 
 /proc/heat2color_g(temp)
 	temp /= 100
-	if(temp <= 66)
+	if (temp <= 66)
 		. = max(0, min(255, 99.4708025861 * log(temp) - 161.1195681661))
 	else
 		. = max(0, min(255, 288.1221695283 * ((temp - 60) ** -0.0755148492)))
 
 /proc/heat2color_b(temp)
 	temp /= 100
-	if(temp >= 66)
+	if (temp >= 66)
 		. = 255
 	else
-		if(temp <= 16)
+		if (temp <= 16)
 			. = 0
 		else
 			. = max(0, min(255, 138.5177312231 * log(temp - 10) - 305.0447927307))
@@ -142,7 +142,7 @@
 // Very ugly, BYOND doesn't support unix time and rounding errors make it really hard to convert it to BYOND time.
 // returns "YYYY-MM-DD" by default
 /proc/unix2date(timestamp, seperator = "-")
-	if(timestamp < 0)
+	if (timestamp < 0)
 		return 0 //Do not accept negative values
 
 	var/const/dayInSeconds = 86400 //60secs*60mins*24hours
@@ -157,12 +157,12 @@
 
 	while(tmpDays > daysInYear) //Start adding years to 1970
 		year++
-		if(isLeap(year))
+		if (isLeap(year))
 			tmpDays -= daysInLYear
 		else
 			tmpDays -= daysInYear
 
-	if(isLeap(year)) //The year is a leap year
+	if (isLeap(year)) //The year is a leap year
 		monthsInDays = list(-1,30,59,90,120,151,181,212,243,273,304,334)
 	else
 		monthsInDays = list(0,31,59,90,120,151,181,212,243,273,304,334)
@@ -172,7 +172,7 @@
 
 	for(var/m in monthsInDays)
 		monthIndex++
-		if(tmpDays > m)
+		if (tmpDays > m)
 			mDays = m
 			month = monthIndex
 

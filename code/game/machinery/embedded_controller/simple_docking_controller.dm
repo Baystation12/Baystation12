@@ -43,9 +43,9 @@
 /datum/computer/file/embedded_program/docking/simple/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]
 
-	if(!receive_tag) return
+	if (!receive_tag) return
 
-	if(receive_tag==tag_door)
+	if (receive_tag==tag_door)
 		memory["door_status"]["state"] = signal.data["door_status"]
 		memory["door_status"]["lock"] = signal.data["lock_status"]
 
@@ -54,13 +54,13 @@
 /datum/computer/file/embedded_program/docking/simple/receive_user_command(command)
 	. = TRUE
 	switch(command)
-		if("force_door")
+		if ("force_door")
 			if (override_enabled)
-				if(memory["door_status"]["state"] == "open")
+				if (memory["door_status"]["state"] == "open")
 					close_door()
 				else
 					open_door()
-		if("toggle_override")
+		if ("toggle_override")
 			if (override_enabled)
 				disable_override()
 			else
@@ -79,17 +79,17 @@
 //	return
 
 /datum/computer/file/embedded_program/docking/simple/proc/open_door()
-	if(memory["door_status"]["state"] == "closed")
+	if (memory["door_status"]["state"] == "closed")
 		//signal_mech_sensor("enable")
 		signal_door("secure_open")
-	else if(memory["door_status"]["lock"] == "unlocked")
+	else if (memory["door_status"]["lock"] == "unlocked")
 		signal_door("lock")
 
 /datum/computer/file/embedded_program/docking/simple/proc/close_door()
-	if(memory["door_status"]["state"] == "open")
+	if (memory["door_status"]["state"] == "open")
 		signal_door("secure_close")
 		//signal_mech_sensor("disable")
-	else if(memory["door_status"]["lock"] == "unlocked")
+	else if (memory["door_status"]["lock"] == "unlocked")
 		signal_door("lock")
 
 //tell the docking port to start getting ready for docking - e.g. pressurize

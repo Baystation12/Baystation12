@@ -10,12 +10,12 @@
 
 /datum/trader/ship/tick()
 	..()
-	if(prob(-disposition) || refuse_comms)
+	if (prob(-disposition) || refuse_comms)
 		duration_of_stay -= 5
 	return --duration_of_stay > 0
 
 /datum/trader/ship/bribe_to_stay_longer(amt)
-	if(prob(-disposition))
+	if (prob(-disposition))
 		return ..()
 
 	var/length = round(amt/100)

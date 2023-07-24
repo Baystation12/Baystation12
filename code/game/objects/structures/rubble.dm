@@ -15,7 +15,7 @@
 	var/is_rummaging = 0
 
 /obj/structure/rubble/New()
-	if(prob(emptyprob))
+	if (prob(emptyprob))
 		lootleft = 0
 	..()
 
@@ -28,13 +28,13 @@
 	var/list/parts = list()
 	for(var/i = 1 to 7)
 		var/image/I = image(icon,"rubble[rand(1,15)]")
-		if(prob(10))
+		if (prob(10))
 			var/atom/A = pick(loot)
-			if(initial(A.icon) && initial(A.icon_state))
+			if (initial(A.icon) && initial(A.icon_state))
 				I.icon = initial(A.icon)
 				I.icon_state = initial(A.icon_state)
 				I.color = initial(A.color)
-			if(!lootleft)
+			if (!lootleft)
 				I.color = "#54362e"
 		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
 		I.pixel_x = rand(-16,16)
@@ -42,17 +42,17 @@
 		I.SetTransform(rotation = rand(0,360))
 		parts += I
 	overlays = parts
-	if(lootleft)
+	if (lootleft)
 		overlays += image(icon,"twinkle[rand(1,3)]")
 
 /obj/structure/rubble/attack_hand(mob/user)
-	if(!is_rummaging)
-		if(!lootleft)
+	if (!is_rummaging)
+		if (!lootleft)
 			to_chat(user, SPAN_WARNING("There's nothing left in this one but unusable garbage..."))
 			return
 		visible_message("[user] starts rummaging through \the [src].")
 		is_rummaging = 1
-		if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if (do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			var/obj/item/booty = pickweight(loot)
 			booty = new booty(loc)
 			lootleft--

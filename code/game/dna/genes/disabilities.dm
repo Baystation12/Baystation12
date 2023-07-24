@@ -28,25 +28,25 @@
 	return 1 // Always set!
 
 /datum/dna/gene/disability/activate(mob/M, connected, flags)
-	if(mutation && !(mutation in M.mutations))
+	if (mutation && !(mutation in M.mutations))
 		M.mutations.Add(mutation)
-	if(disability)
+	if (disability)
 		M.disabilities|=disability
-	if(sdisability)
+	if (sdisability)
 		M.set_sdisability(sdisability)
-	if(activation_message)
+	if (activation_message)
 		to_chat(M, SPAN_WARNING("[activation_message]"))
 	else
 		testing("[name] has no activation message.")
 
 /datum/dna/gene/disability/deactivate(mob/M, connected, flags)
-	if(mutation && (mutation in M.mutations))
+	if (mutation && (mutation in M.mutations))
 		M.mutations.Remove(mutation)
-	if(disability)
+	if (disability)
 		M.disabilities &= (~disability)
-	if(sdisability)
+	if (sdisability)
 		M.unset_sdisability(sdisability)
-	if(deactivation_message)
+	if (deactivation_message)
 		to_chat(M, SPAN_WARNING("[deactivation_message]"))
 	else
 		testing("[name] has no deactivation message.")

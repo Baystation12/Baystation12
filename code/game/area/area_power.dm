@@ -6,18 +6,18 @@
 
 /// Returns boolean. Whether or not the area is considered to have power for the given power channel. See `requires_power` and `always_unpowered` for some area-level overrides.
 /area/proc/powered(chan)
-	if(!requires_power)
+	if (!requires_power)
 		return 1
-	if(always_unpowered)
+	if (always_unpowered)
 		return 0
 	switch(chan)
-		if(EQUIP)
+		if (EQUIP)
 			return power_equip
-		if(LIGHT)
+		if (LIGHT)
 			return power_light
-		if(ENVIRON)
+		if (ENVIRON)
 			return power_environ
-		if(LOCAL)
+		if (LOCAL)
 			return FALSE // if you're running on local power, don't come begging for help here.
 
 	return 0
@@ -32,13 +32,13 @@
 /// Returns Integer. The total amount of power usage queued for the area from both `used_*` and `oneoff_*` for the given power channel, or all channels if `TOTAL` is passed instead.
 /area/proc/usage(chan)
 	switch(chan)
-		if(LIGHT)
+		if (LIGHT)
 			return used_light + oneoff_light
-		if(EQUIP)
+		if (EQUIP)
 			return used_equip + oneoff_equip
-		if(ENVIRON)
+		if (ENVIRON)
 			return used_environ + oneoff_environ
-		if(TOTAL)
+		if (TOTAL)
 			return .(LIGHT) + .(EQUIP) + .(ENVIRON)
 
 /// Sets all `oneoff_*` vars to `0`. Helper for APCs. Called every machinery process tick.
@@ -58,11 +58,11 @@
  */
 /area/proc/use_power(amount, chan)
 	switch(chan)
-		if(EQUIP)
+		if (EQUIP)
 			used_equip += amount
-		if(LIGHT)
+		if (LIGHT)
 			used_light += amount
-		if(ENVIRON)
+		if (ENVIRON)
 			used_environ += amount
 
 /**
@@ -89,11 +89,11 @@
  */
 /area/proc/use_power_oneoff(amount, chan)
 	switch(chan)
-		if(EQUIP)
+		if (EQUIP)
 			oneoff_equip += amount
-		if(LIGHT)
+		if (LIGHT)
 			oneoff_light += amount
-		if(ENVIRON)
+		if (ENVIRON)
 			oneoff_environ += amount
 
 /// Recomputes the continued power usage; can be used for testing or error recovery, but is not called under normal conditions.
@@ -103,9 +103,9 @@
 	used_environ = 0
 	for(var/obj/machinery/M in src)
 		switch(M.power_channel)
-			if(EQUIP)
+			if (EQUIP)
 				used_equip += M.get_power_usage()
-			if(LIGHT)
+			if (LIGHT)
 				used_light += M.get_power_usage()
-			if(ENVIRON)
+			if (ENVIRON)
 				used_environ += M.get_power_usage()

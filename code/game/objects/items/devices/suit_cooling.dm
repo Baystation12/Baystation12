@@ -59,35 +59,35 @@
 	cell.use(charge_usage * CELLRATE)
 	update_icon()
 
-	if(cell.charge <= 0)
+	if (cell.charge <= 0)
 		turn_off(1)
 
 // Checks whether the cooling unit is being worn on the back/suit slot.
 // That way you can't carry it in your hands while it's running to cool yourself down.
 /obj/item/device/suit_cooling_unit/proc/is_in_slot()
 	var/mob/living/carbon/human/H = loc
-	if(!istype(H))
+	if (!istype(H))
 		return 0
 
 	return (H.back == src) || (H.s_store == src)
 
 /obj/item/device/suit_cooling_unit/proc/turn_on()
-	if(!cell)
+	if (!cell)
 		return
-	if(cell.charge <= 0)
+	if (cell.charge <= 0)
 		return
 
 	on = 1
 	update_icon()
 
 /obj/item/device/suit_cooling_unit/proc/turn_off(failed)
-	if(failed) visible_message("\The [src] clicks and whines as it powers down.")
+	if (failed) visible_message("\The [src] clicks and whines as it powers down.")
 	on = 0
 	update_icon()
 
 /obj/item/device/suit_cooling_unit/attack_self(mob/user)
-	if(cover_open && cell)
-		if(ishuman(user))
+	if (cover_open && cell)
+		if (ishuman(user))
 			user.put_in_hands(cell)
 		else
 			cell.dropInto(loc)
@@ -103,7 +103,7 @@
 	toggle(user)
 
 /obj/item/device/suit_cooling_unit/proc/toggle(mob/user)
-	if(on)
+	if (on)
 		turn_off()
 	else
 		turn_on()
@@ -154,27 +154,27 @@
 
 	icon_state = "suitcooler0"
 
-	if(!cell || !on)
+	if (!cell || !on)
 		return
 
 	switch(round(cell.percent()))
-		if(86 to INFINITY)
+		if (86 to INFINITY)
 			overlays.Add("battery-0")
-		if(69 to 85)
+		if (69 to 85)
 			overlays.Add("battery-1")
-		if(52 to 68)
+		if (52 to 68)
 			overlays.Add("battery-2")
-		if(35 to 51)
+		if (35 to 51)
 			overlays.Add("battery-3")
-		if(18 to 34)
+		if (18 to 34)
 			overlays.Add("battery-4")
-		if(-INFINITY to 17)
+		if (-INFINITY to 17)
 			overlays.Add("battery-5")
 
 
 /obj/item/device/suit_cooling_unit/examine(mob/user, distance)
 	. = ..()
-	if(distance >= 1)
+	if (distance >= 1)
 		return
 
 	if (on)

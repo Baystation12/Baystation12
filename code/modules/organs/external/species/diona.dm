@@ -107,13 +107,13 @@
 
 //DIONA ORGANS.
 /obj/item/organ/external/diona/removed()
-	if(BP_IS_ROBOTIC(src))
+	if (BP_IS_ROBOTIC(src))
 		return ..()
 	var/mob/living/carbon/human/H = owner
 	..()
-	if(!istype(H) || !length(H.organs))
+	if (!istype(H) || !length(H.organs))
 		H.death()
-	if(prob(25))
+	if (prob(25))
 		spawn_diona_nymph(get_turf(src))
 		qdel(src)
 
@@ -128,7 +128,7 @@
 
 /obj/item/organ/external/head/diona/get_eye_overlay()
 	var/icon/I = get_eyes()
-	if(glowing_eyes)
+	if (glowing_eyes)
 		var/image/eye_glow = image(I)
 		eye_glow.overlays += emissive_appearance(eye_icon_location, "")
 		eye_glow.layer = FLOAT_LAYER
@@ -139,12 +139,12 @@
 	return icon(icon = eye_icon_location, icon_state = "")
 
 /obj/item/organ/external/head/diona/removed()
-	if(BP_IS_ROBOTIC(src))
+	if (BP_IS_ROBOTIC(src))
 		return ..()
 	var/mob/living/carbon/human/H = owner
 	..()
-	if(!istype(H) || !length(H.organs))
+	if (!istype(H) || !length(H.organs))
 		H.death()
-	if(prob(25))
+	if (prob(25))
 		spawn_diona_nymph(get_turf(src))
 		qdel(src)

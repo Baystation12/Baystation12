@@ -100,7 +100,7 @@
 	var/wtime = world.time
 	var/wusage = world.tick_usage * 0.01
 
-	if(last_time < wtime && last_usage > 1)
+	if (last_time < wtime && last_usage > 1)
 		time_offset += last_usage - 1
 
 	last_time = wtime
@@ -122,10 +122,10 @@ var/global/next_station_date_change = 1 DAY
 
 /proc/stationdate2text()
 	var/update_time = FALSE
-	if(station_time_in_ticks > next_station_date_change)
+	if (station_time_in_ticks > next_station_date_change)
 		next_station_date_change += 1 DAY
 		update_time = TRUE
-	if(!station_date || update_time)
+	if (!station_date || update_time)
 		var/extra_days = round(station_time_in_ticks / (1 DAY)) DAYS
 		var/timeofday = world.timeofday + extra_days
 		station_date = "[GLOB.using_map.game_year]-[time2text(timeofday, "MM-DD")]"
@@ -136,10 +136,10 @@ var/global/next_station_date_change = 1 DAY
 
 /* Returns 1 if it is the selected month and day */
 /proc/isDay(month, day)
-	if(isnum(month) && isnum(day))
+	if (isnum(month) && isnum(day))
 		var/MM = text2num(time2text(world.timeofday, "MM")) // get the current month
 		var/DD = text2num(time2text(world.timeofday, "DD")) // get the current day
-		if(month == MM && day == DD)
+		if (month == MM && day == DD)
 			return 1
 
 		// Uncomment this out when debugging!
@@ -155,9 +155,9 @@ var/global/round_start_time = 0
 	return 1
 
 /proc/roundduration2text()
-	if(!round_start_time)
+	if (!round_start_time)
 		return "00:00"
-	if(last_round_duration && world.time < next_duration_update)
+	if (last_round_duration && world.time < next_duration_update)
 		return last_round_duration
 
 	var/mills = round_duration_in_ticks // 1/10 of a second, not real milliseconds but whatever
@@ -195,7 +195,7 @@ var/global/round_start_time = 0
 
 /proc/acquire_days_per_month()
 	. = list(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
-	if(isLeap(text2num(time2text(world.realtime, "YYYY"))))
+	if (isLeap(text2num(time2text(world.realtime, "YYYY"))))
 		.[2] = 29
 
 /proc/get_weekday_index()

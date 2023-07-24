@@ -13,14 +13,14 @@
 
 /singleton/communication_channel/aooc/can_communicate(client/C, message)
 	. = ..()
-	if(!.)
+	if (!.)
 		return
 
-	if(!C.holder)
-		if(isghost(C.mob))
+	if (!C.holder)
+		if (isghost(C.mob))
 			to_chat(src, SPAN_WARNING("You cannot use [name] while ghosting/observing!"))
 			return FALSE
-		if(!(C.mob?.mind?.special_role))
+		if (!(C.mob?.mind?.special_role))
 			to_chat(C, SPAN_DANGER("You must be an antag to use [name]."))
 			return FALSE
 
@@ -29,9 +29,9 @@
 	var/datum/admins/holder = C.holder
 
 	for(var/client/target in GLOB.clients)
-		if(check_rights(R_INVESTIGATE, FALSE, target))
+		if (check_rights(R_INVESTIGATE, FALSE, target))
 			receive_communication(C, target, SPAN_AOOC("<EM>[get_options_bar(C, 0, 1, 1)]:</EM> [SPAN_CLASS("message linkify", "[message]")]"))
-		else if(target.mob?.mind?.special_role)
+		else if (target.mob?.mind?.special_role)
 			var/display_name = C.key
 			var/player_display = holder ? "[display_name]([usr.client.holder.rank])" : display_name
 			receive_communication(C, target, SPAN_AOOC("<EM>[player_display]:</EM> [SPAN_CLASS("message linkify", "[message]")]"))

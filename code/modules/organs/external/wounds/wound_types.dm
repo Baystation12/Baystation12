@@ -7,55 +7,55 @@
 	switch(type)
 		if (INJURY_TYPE_CUT)
 			switch(damage)
-				if(70 to INFINITY)
+				if (70 to INFINITY)
 					return /datum/wound/cut/massive
-				if(60 to 70)
+				if (60 to 70)
 					return /datum/wound/cut/gaping_big
-				if(50 to 60)
+				if (50 to 60)
 					return /datum/wound/cut/gaping
-				if(25 to 50)
+				if (25 to 50)
 					return /datum/wound/cut/flesh
-				if(15 to 25)
+				if (15 to 25)
 					return /datum/wound/cut/deep
-				if(0 to 15)
+				if (0 to 15)
 					return /datum/wound/cut/small
 		if (INJURY_TYPE_PIERCE)
 			switch(damage)
-				if(60 to INFINITY)
+				if (60 to INFINITY)
 					return /datum/wound/puncture/massive
-				if(50 to 60)
+				if (50 to 60)
 					return /datum/wound/puncture/gaping_big
-				if(30 to 50)
+				if (30 to 50)
 					return /datum/wound/puncture/gaping
-				if(15 to 30)
+				if (15 to 30)
 					return /datum/wound/puncture/flesh
-				if(0 to 15)
+				if (0 to 15)
 					return /datum/wound/puncture/small
 		if (INJURY_TYPE_BRUISE)
 			return /datum/wound/bruise
 		if (INJURY_TYPE_BURN, INJURY_TYPE_LASER)
 			switch(damage)
-				if(50 to INFINITY)
+				if (50 to INFINITY)
 					return /datum/wound/burn/carbonised
-				if(40 to 50)
+				if (40 to 50)
 					return /datum/wound/burn/deep
-				if(30 to 40)
+				if (30 to 40)
 					return /datum/wound/burn/severe
-				if(15 to 30)
+				if (15 to 30)
 					return /datum/wound/burn/large
-				if(0 to 15)
+				if (0 to 15)
 					return /datum/wound/burn/moderate
 		if (INJURY_TYPE_SHATTER)
 			switch(damage)
-				if(50 to INFINITY)
+				if (50 to INFINITY)
 					return /datum/wound/shatter/smashed
-				if(40 to 50)
+				if (40 to 50)
 					return /datum/wound/shatter/wide
-				if(30 to 40)
+				if (30 to 40)
 					return /datum/wound/shatter/narrow
-				if(15 to 30)
+				if (15 to 30)
 					return /datum/wound/shatter/cracked
-				if(0 to 15)
+				if (0 to 15)
 					return /datum/wound/shatter/chipped
 
 	return null //no wound
@@ -70,7 +70,7 @@
 
 /datum/wound/cut/bandage()
 	..()
-	if(!autoheal_cutoff)
+	if (!autoheal_cutoff)
 		autoheal_cutoff = initial(autoheal_cutoff)
 
 /datum/wound/cut/is_surgical()
@@ -80,7 +80,7 @@
 	current_stage = max_bleeding_stage + 1
 	desc = desc_list[current_stage]
 	min_damage = damage_list[current_stage]
-	if(damage > min_damage)
+	if (damage > min_damage)
 		heal_damage(damage-min_damage)
 
 /datum/wound/cut/small
@@ -271,16 +271,16 @@
 
 /datum/wound/lost_limb/New(obj/item/organ/external/lost_limb, losstype, clean)
 	var/damage_amt = lost_limb.max_damage
-	if(clean) damage_amt /= 2
+	if (clean) damage_amt /= 2
 
 	switch(losstype)
-		if(DROPLIMB_EDGE, DROPLIMB_BLUNT)
+		if (DROPLIMB_EDGE, DROPLIMB_BLUNT)
 			damage_type = INJURY_TYPE_CUT
-			if(BP_IS_ROBOTIC(lost_limb))
+			if (BP_IS_ROBOTIC(lost_limb))
 				max_bleeding_stage = -1
 				bleed_threshold = INFINITY
 				stages = list("mangled robotic socket" = 0)
-			else if(BP_IS_CRYSTAL(lost_limb))
+			else if (BP_IS_CRYSTAL(lost_limb))
 				max_bleeding_stage = -1
 				bleed_threshold = INFINITY
 				stages = list("shattered stump" = 0)
@@ -292,7 +292,7 @@
 					"clotted stump" = damage_amt*0.5,
 					"scarred stump" = 0
 				)
-		if(DROPLIMB_BURN)
+		if (DROPLIMB_BURN)
 			damage_type = INJURY_TYPE_BURN
 			stages = list(
 				"mangled charred stump" = damage_amt*1.3,

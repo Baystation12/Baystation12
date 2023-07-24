@@ -15,9 +15,9 @@
 
 	mover.forceMove(target)
 
-	if(!crossed.crossers)
+	if (!crossed.crossers)
 		fail("The target object was never crossed.")
-	else if(length(crossed.crossers) != 1)
+	else if (length(crossed.crossers) != 1)
 		fail("The target object was crossed [length(crossed.crossers)] times, expected 1.")
 	else
 		pass("The target was crossed 1 time.")
@@ -36,9 +36,9 @@
 
 	mover.forceMove(target)
 
-	if(!target.enterers)
+	if (!target.enterers)
 		fail("The target object was never entered.")
-	else if(length(target.enterers) != 1)
+	else if (length(target.enterers) != 1)
 		fail("The target object was entered [length(target.enterers)] times, expected 1.")
 	else
 		pass("The target was entered 1 time.")
@@ -51,7 +51,7 @@
 	var/list/crossers
 
 /obj/test/crossed_obj/Crossed(crosser)
-	if(!crossers)
+	if (!crossers)
 		crossers = list()
 	crossers += crosser
 
@@ -59,6 +59,6 @@
 	var/list/enterers
 
 /obj/test/entered_obj/Entered(enterer)
-	if(!enterers)
+	if (!enterers)
 		enterers = list()
 	enterers += enterer

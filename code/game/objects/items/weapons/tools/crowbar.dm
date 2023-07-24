@@ -59,16 +59,16 @@
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked", "attacked", "slashed", "torn", "ripped", "cut")
 
 /obj/item/crowbar/emergency_forcing_tool/resolve_attackby(atom/A)//extra dmg against glass, it's an emergency forcing tool, it's gotta be good at something
-	if(istype(A, /obj/structure/window))
+	if (istype(A, /obj/structure/window))
 		force = initial(force) * 2
 	else
 		force = initial(force)
 	. = ..()
 
 /obj/item/crowbar/emergency_forcing_tool/IsCrowbar()
-	if(ismob(loc))
+	if (ismob(loc))
 		var/mob/M = loc
-		if(M.a_intent && M.a_intent == I_HURT)
+		if (M.a_intent && M.a_intent == I_HURT)
 			return FALSE
 
 	return TRUE

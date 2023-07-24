@@ -5,7 +5,7 @@
 
 /obj/item/flame/afterattack(obj/O, mob/user, proximity)
 	..()
-	if(proximity && lit && istype(O))
+	if (proximity && lit && istype(O))
 		O.HandleObjectHeating(src, user, 700)
 
 /obj/item/flame/proc/extinguish(mob/user, no_message)
@@ -15,8 +15,8 @@
 
 /obj/item/flame/water_act(depth)
 	..()
-	if(!waterproof && lit)
-		if(submerged(depth))
+	if (!waterproof && lit)
+		if (submerged(depth))
 			extinguish(no_message = TRUE)
 
 
@@ -41,23 +41,23 @@
 	attack_verb = list("burnt", "singed")
 
 /obj/item/flame/match/Process()
-	if(isliving(loc))
+	if (isliving(loc))
 		var/mob/living/M = loc
 		M.IgniteMob()
 	var/turf/location = get_turf(src)
 	smoketime--
-	if(submerged() || smoketime < 1)
+	if (submerged() || smoketime < 1)
 		extinguish()
 		return
-	if(location)
+	if (location)
 		location.hotspot_expose(700, 5)
 
 /obj/item/flame/match/dropped(mob/user)
 	//If dropped, put ourselves out
 	//not before lighting up the turf we land on, though.
-	if(lit)
+	if (lit)
 		var/turf/location = src.loc
-		if(istype(location))
+		if (istype(location))
 			location.hotspot_expose(700, 5)
 		extinguish()
 	return ..()
@@ -71,6 +71,6 @@
 
 /obj/item/flame/match/on_update_icon()
 	..()
-	if(burnt)
+	if (burnt)
 		icon_state = "match_burnt"
 		item_state = "cigoff"

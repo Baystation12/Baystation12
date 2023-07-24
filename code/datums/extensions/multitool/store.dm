@@ -1,8 +1,8 @@
 /datum/extension/interactive/multitool/store/interact(obj/item/device/multitool/M, mob/user)
-	if(extension_status(user) != STATUS_INTERACTIVE)
+	if (extension_status(user) != STATUS_INTERACTIVE)
 		return
 
-	if(M.get_buffer() == holder)
+	if (M.get_buffer() == holder)
 		M.set_buffer(null)
 		to_chat(user, SPAN_WARNING("You purge the connection data of \the [holder] from \the [M]."))
 	else

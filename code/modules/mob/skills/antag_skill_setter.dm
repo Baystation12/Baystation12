@@ -9,7 +9,7 @@
 	skillset.skill_list = base_skill_list.Copy()
 	skillset.default_value = default_value
 	QDEL_NULL_LIST(skillset.skill_buffs)
-	if(nm_type)
+	if (nm_type)
 		skillset.nm_type = nm_type
 		QDEL_NULL(skillset.NM)
 	skillset.on_antag_initialize()
@@ -29,9 +29,9 @@
 
 /datum/antag_skill_setter/station/initialize_skills(datum/skillset/skillset)
 	..()
-	if(skillset.owner)
+	if (skillset.owner)
 		var/client/my_client = skillset.owner.client
-		if(my_client && skillset.owner.mind)
+		if (my_client && skillset.owner.mind)
 			var/datum/job/job = SSjobs.get_by_title(skillset.owner.mind.assigned_role)
 			skillset.obtain_from_client(job, my_client, 1)
 	skillset.open_ui()

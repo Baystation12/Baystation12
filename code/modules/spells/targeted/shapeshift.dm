@@ -24,18 +24,18 @@
 /spell/targeted/shapeshift/cast(list/targets, mob/user)
 	for(var/m in targets)
 		var/mob/living/M = m
-		if(M.stat == DEAD)
+		if (M.stat == DEAD)
 			to_chat(user, "[name] can only transform living targets.")
 			continue
-		if(M.buckled)
+		if (M.buckled)
 			M.buckled.unbuckle_mob()
-		if(toggle && length(transformed_dudes) && stop_transformation(M))
+		if (toggle && length(transformed_dudes) && stop_transformation(M))
 			continue
 		var/new_mob = pick(possible_transformations)
 
 		var/mob/living/trans = new new_mob(get_turf(M))
 		for(var/varName in newVars) //stolen shamelessly from Conjure
-			if(varName in trans.vars)
+			if (varName in trans.vars)
 				trans.vars[varName] = newVars[varName]
 		//Give them our languages
 		for(var/l in M.languages)
@@ -43,10 +43,10 @@
 			trans.add_language(L.name)
 
 		trans.SetName("[trans.name] ([M])")
-		if(istype(M,/mob/living/carbon/human) && drop_items)
+		if (istype(M,/mob/living/carbon/human) && drop_items)
 			for(var/obj/item/I in M.contents)
 				M.drop_from_inventory(I)
-		if(M.mind)
+		if (M.mind)
 			M.mind.transfer_to(trans)
 		else
 			trans.key = M.key
@@ -58,7 +58,7 @@
 		GLOB.death_event.register(trans,src,/spell/targeted/shapeshift/proc/stop_transformation)
 		GLOB.destroyed_event.register(trans,src,/spell/targeted/shapeshift/proc/stop_transformation)
 		GLOB.destroyed_event.register(M, src, /spell/targeted/shapeshift/proc/destroyed_transformer)
-		if(duration)
+		if (duration)
 			spawn(duration)
 				stop_transformation(trans)
 
@@ -69,15 +69,15 @@
 
 /spell/targeted/shapeshift/proc/stop_transformation(mob/living/target)
 	var/mob/living/transformer = transformed_dudes[target]
-	if(!transformer)
+	if (!transformer)
 		return FALSE
 	transformer.status_flags &= ~GODMODE
-	if(share_damage)
+	if (share_damage)
 		var/ratio = target.health/target.maxHealth
 		var/damage = transformer.maxHealth - round(transformer.maxHealth*(ratio))
 		for(var/i in 1 to ceil(damage/10))
 			transformer.adjustBruteLoss(10)
-	if(target.mind)
+	if (target.mind)
 		target.mind.transfer_to(transformer)
 	else
 		transformer.key = target.key
@@ -117,7 +117,7 @@
 
 
 /spell/targeted/shapeshift/baleful_polymorph/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 
 	duration += 50
@@ -166,14 +166,14 @@
 	cast_sound = 'sound/magic/disintegrate.ogg'
 
 /spell/targeted/shapeshift/corrupt_form/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 
 	switch(spell_levels[Sp_POWER])
-		if(1)
+		if (1)
 			duration *= 2
 			return "You will now stay corrupted for [duration/10] seconds."
-		if(2)
+		if (2)
 			newVars = list("name" = "\proper corruption incarnate",
 						"melee_damage_upper" = 25,
 						"resistance" = 6,

@@ -8,7 +8,7 @@
 
 /obj/machinery/Value()
 	. = ..()
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		. *= 0.5
 	. = round(.)
 
@@ -22,13 +22,13 @@
 	return base * Uses
 
 /obj/item/ammo_casing/Value()
-	if(!BB)
+	if (!BB)
 		return 1
 	return ..()
 
 /obj/item/reagent_containers/Value()
 	. = ..()
-	if(reagents)
+	if (reagents)
 		for(var/a in reagents.reagent_list)
 			var/datum/reagent/reg = a
 			. += reg.Value() * reg.volume
@@ -41,7 +41,7 @@
 	return base * amount
 
 /obj/item/stack/material/Value()
-	if(!material)
+	if (!material)
 		return ..()
 	return material.value * amount
 
@@ -56,5 +56,5 @@
 
 /mob/living/carbon/human/Value(base)
 	. = ..()
-	if(species)
+	if (species)
 		. *= species.rarity_value

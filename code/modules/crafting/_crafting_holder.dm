@@ -10,7 +10,7 @@
 
 	// Handle various holders
 	// Mob - Drop from inventory and put the crafting holder in place.
-	if(ismob(target.loc))
+	if (ismob(target.loc))
 		var/mob/M = target.loc
 		M.drop_from_inventory(target, src)
 		M.put_in_hands(src)
@@ -35,16 +35,16 @@
 
 /obj/item/crafting_holder/attackby(obj/item/W, mob/user)
 
-	if(istype(W, /obj/item/pen))
+	if (istype(W, /obj/item/pen))
 		var/new_label = sanitizeSafe(input(user, "What do you wish to label this assembly?", "Assembly Labelling", label_name), MAX_NAME_LEN)
-		if(new_label && !user.incapacitated() && W.loc == user && user.Adjacent(src) && !QDELETED(src))
+		if (new_label && !user.incapacitated() && W.loc == user && user.Adjacent(src) && !QDELETED(src))
 			to_chat(user, SPAN_NOTICE("You label \the [src] with '[new_label]'."))
 			label_name = new_label
 		return
 
-	if(current_crafting_stage)
+	if (current_crafting_stage)
 		var/singleton/crafting_stage/next_stage = current_crafting_stage.get_next_stage(W)
-		if(next_stage && next_stage.progress_to(W, user, src))
+		if (next_stage && next_stage.progress_to(W, user, src))
 			advance_to(next_stage, user, W)
 			return
 
@@ -64,8 +64,8 @@
  */
 /obj/item/crafting_holder/proc/advance_to(singleton/crafting_stage/next_stage, mob/user, obj/item/tool)
 	var/obj/item/product = next_stage && next_stage.get_product(src)
-	if(product)
-		if(ismob(product) && label_name)
+	if (product)
+		if (ismob(product) && label_name)
 			var/mob/M = product
 			M.SetName(label_name)
 
@@ -74,7 +74,7 @@
 		if (ismob(loc))
 			var/mob/M = loc
 			M.drop_from_inventory(src)
-			if(isitem(product))
+			if (isitem(product))
 				M.put_in_hands(product)
 		// Storage - Remove from storage and insert the product, if possible
 		else if (istype(loc, /obj/item/storage))
@@ -99,5 +99,5 @@
  * Has no parameters or return value.
  */
 /obj/item/crafting_holder/proc/update_strings()
-	if(current_crafting_stage.item_desc)
+	if (current_crafting_stage.item_desc)
 		desc = current_crafting_stage.item_desc

@@ -8,7 +8,7 @@
 
 //if the fabricator is a exosuit fab pass the manufacturer info over to the robot part constructor
 /datum/design/item/mechfab/robot/Fabricate(newloc, fabricator)
-	if(istype(fabricator, /obj/machinery/robotics_fabricator))
+	if (istype(fabricator, /obj/machinery/robotics_fabricator))
 		var/obj/machinery/robotics_fabricator/mechfab = fabricator
 		return new build_path(newloc, mechfab.manufacturer)
 	return ..()
@@ -374,7 +374,7 @@
 	materials = list(MATERIAL_STEEL = 10000)
 
 /datum/design/item/exosuit/AssembleDesignDesc()
-	if(!desc)
+	if (!desc)
 		desc = "Allows for the construction of \a [item_name] for installation in an exosuit hardpoint."
 
 /datum/design/item/exosuit/hydraulic_clamp

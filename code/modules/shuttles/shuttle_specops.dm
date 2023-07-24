@@ -23,7 +23,7 @@
 	announcer.config(list("Response Team" = 0))
 
 /datum/shuttle/autodock/ferry/specops/proc/radio_announce(message)
-	if(announcer)
+	if (announcer)
 		announcer.autosay(message, "A.L.I.C.E.", "Response Team")
 
 
@@ -34,7 +34,7 @@
 	if (istype(user, /obj/machinery/computer))
 		var/obj/machinery/computer/C = user
 
-		if(world.time <= reset_time)
+		if (world.time <= reset_time)
 			C.visible_message(SPAN_NOTICE("[GLOB.using_map.boss_name] will not allow the Special Operations shuttle to launch yet."))
 			if (((world.time - reset_time)/10) > 60)
 				C.visible_message(SPAN_NOTICE("[-((world.time - reset_time)/10)/60] minutes remain!"))
@@ -53,7 +53,7 @@
 
 	if (location)
 		var/obj/machinery/light/small/readylight/light = locate() in shuttle_area
-		if(light) light.set_state(0)
+		if (light) light.set_state(0)
 
 	//launch
 	radio_announce("ALERT: INITIATING LAUNCH SEQUENCE")
@@ -74,7 +74,7 @@
 				to_chat(M, SPAN_DANGER("You have arrived at [GLOB.using_map.station_name]. Commence operation!"))
 
 				var/obj/machinery/light/small/readylight/light = locate() in T
-				if(light) light.set_state(1)
+				if (light) light.set_state(1)
 
 /datum/shuttle/autodock/ferry/specops/cancel_launch()
 	if (!can_cancel())
@@ -90,7 +90,7 @@
 
 
 /datum/shuttle/autodock/ferry/specops/can_launch()
-	if(launch_prep)
+	if (launch_prep)
 		return 0
 	return ..()
 
@@ -99,7 +99,7 @@
 //	return 0
 
 /datum/shuttle/autodock/ferry/specops/can_cancel()
-	if(launch_prep)
+	if (launch_prep)
 		return 1
 	return ..()
 
@@ -114,13 +114,13 @@
 	while(!cancel_countdown && (launch_time - world.time) > 0)
 		var/ticksleft = launch_time - world.time
 
-		//if(ticksleft > 1e5)
+		//if (ticksleft > 1e5)
 		//	launch_time = world.timeofday + 10	// midnight rollover
 		time_until_launch = (ticksleft / 10)
 
 		//All this does is announce the time before launch.
 		var/rounded_time_left = round(time_until_launch)//Round time so that it will report only once, not in fractions.
-		if(rounded_time_left in message_tracker)//If that time is in the list for message announce.
+		if (rounded_time_left in message_tracker)//If that time is in the list for message announce.
 			radio_announce("ALERT: [rounded_time_left] SECOND[(rounded_time_left!=1)?"S":""] REMAIN")
 			message_tracker -= rounded_time_left//Remove the number from the list so it won't be called again next cycle.
 			//Should call all the numbers but lag could mean some issues. Oh well. Not much I can do about that.
@@ -136,16 +136,16 @@
 	spawn(0)//So it parallel processes it.
 		for(var/obj/machinery/door/blast/M in special_ops)
 			switch(M.id_tag)
-				if("ASSAULT0")
+				if ("ASSAULT0")
 					spawn(10)//1 second delay between each.
 						M.open()
-				if("ASSAULT1")
+				if ("ASSAULT1")
 					spawn(20)
 						M.open()
-				if("ASSAULT2")
+				if ("ASSAULT2")
 					spawn(30)
 						M.open()
-				if("ASSAULT3")
+				if ("ASSAULT3")
 					spawn(40)
 						M.open()
 
@@ -153,10 +153,10 @@
 
 		var/spawn_marauder[] = new()
 		for(var/obj/effect/landmark/L in world)
-			if(L.name == "Marauder Entry")
+			if (L.name == "Marauder Entry")
 				spawn_marauder.Add(L)
 		for(var/obj/effect/landmark/L in world)
-			if(L.name == "Marauder Exit")
+			if (L.name == "Marauder Exit")
 				var/obj/effect/portal/P = new(L.loc)
 				P.set_invisibility(INVISIBILITY_ABSTRACT)//So it is not seen by anyone.
 				P.failchance = 0//So it has no fail chance when teleporting.
@@ -167,16 +167,16 @@
 
 		for(var/obj/machinery/mass_driver/M in special_ops)
 			switch(M.id_tag)
-				if("ASSAULT0")
+				if ("ASSAULT0")
 					spawn(10)
 						M.drive()
-				if("ASSAULT1")
+				if ("ASSAULT1")
 					spawn(20)
 						M.drive()
-				if("ASSAULT2")
+				if ("ASSAULT2")
 					spawn(30)
 						M.drive()
-				if("ASSAULT3")
+				if ("ASSAULT3")
 					spawn(40)
 						M.drive()
 
@@ -184,16 +184,16 @@
 
 		for(var/obj/machinery/door/blast/M in special_ops)
 			switch(M.id_tag)//Doors close at the same time.
-				if("ASSAULT0")
+				if ("ASSAULT0")
 					spawn(0)
 						M.close()
-				if("ASSAULT1")
+				if ("ASSAULT1")
 					spawn(0)
 						M.close()
-				if("ASSAULT2")
+				if ("ASSAULT2")
 					spawn(0)
 						M.close()
-				if("ASSAULT3")
+				if ("ASSAULT3")
 					spawn(0)
 						M.close()
 		special_ops.readyreset()//Reset firealarm after the team launched.

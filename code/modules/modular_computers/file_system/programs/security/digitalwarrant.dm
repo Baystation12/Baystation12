@@ -23,7 +23,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 /datum/nano_module/program/digitalwarrant/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 
-	if(activewarrant)
+	if (activewarrant)
 		data["warrantname"] = activewarrant.fields["namewarrant"]
 		data["warrantjob"] = activewarrant.fields["jobwarrant"]
 		data["warrantcharges"] = activewarrant.fields["charges"]
@@ -36,7 +36,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		var/list/archivedwarrants = list()
 		for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
 			var/charges = W.fields["charges"]
-			if(length(charges) > 50)
+			if (length(charges) > 50)
 				charges = copytext(charges, 1, 50) + "..."
 			var/warrant = list(
 			"warrantname" = W.fields["namewarrant"],
@@ -47,7 +47,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 			"archived" = W.archived)
 			if (warrant["archived"])
 				archivedwarrants.Add(list(warrant))
-			else if(warrant["arrestsearch"] == "arrest")
+			else if (warrant["arrestsearch"] == "arrest")
 				arrestwarrants.Add(list(warrant))
 			else
 				searchwarrants.Add(list(warrant))
@@ -63,16 +63,16 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		ui.open()
 
 /datum/nano_module/program/digitalwarrant/Topic(href, href_list)
-	if(..())
+	if (..())
 		return TRUE
 
-	if(href_list["sw_menu"])
+	if (href_list["sw_menu"])
 		activewarrant = null
 
-	if(href_list["editwarrant"])
+	if (href_list["editwarrant"])
 		. = TRUE
 		for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
-			if(W.uid == text2num(href_list["editwarrant"]))
+			if (W.uid == text2num(href_list["editwarrant"]))
 				activewarrant = W
 				break
 
@@ -81,86 +81,86 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 	// to someone who is to be arrested, which allows them to change the stuff there.
 
 	var/mob/user = usr
-	if(!istype(user))
+	if (!istype(user))
 		return
 	var/obj/item/card/id/I = user.GetIdCard()
-	if(!istype(I) || !I.registered_name || !(access_security in I.access))
+	if (!istype(I) || !I.registered_name || !(access_security in I.access))
 		to_chat(user, "Authentication error: Unable to locate ID with apropriate access to allow this operation.")
 		return
 
-	if(href_list["sendtoarchive"])
+	if (href_list["sendtoarchive"])
 		. = TRUE
 		for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
-			if(W.uid == text2num(href_list["sendtoarchive"]))
+			if (W.uid == text2num(href_list["sendtoarchive"]))
 				W.archived = TRUE
 				break
 
-	if(href_list["restore"])
+	if (href_list["restore"])
 		. = TRUE
 		for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
-			if(W.uid == text2num(href_list["restore"]))
+			if (W.uid == text2num(href_list["restore"]))
 				W.archived = FALSE
 				break
 
-	if(href_list["addwarrant"])
+	if (href_list["addwarrant"])
 		. = TRUE
 		var/datum/computer_file/data/warrant/W = new()
-		if(CanInteract(user, GLOB.default_state))
+		if (CanInteract(user, GLOB.default_state))
 			W.fields["namewarrant"] = "Unknown"
 			W.fields["jobwarrant"] = "N/A"
 			W.fields["auth"] = "Unauthorized"
 			W.fields["idauth"] = "Unauthorized"
 			W.fields["access"] = list()
-			if(href_list["addwarrant"] == "arrest")
+			if (href_list["addwarrant"] == "arrest")
 				W.fields["charges"] = "No charges present"
 				W.fields["arrestsearch"] = "arrest"
-			if(href_list["addwarrant"] == "search")
+			if (href_list["addwarrant"] == "search")
 				W.fields["charges"] = "No reason given"
 				W.fields["arrestsearch"] = "search"
 			activewarrant = W
 
-	if(href_list["savewarrant"])
+	if (href_list["savewarrant"])
 		. = TRUE
-		if(!activewarrant)
+		if (!activewarrant)
 			return
 		broadcast_security_hud_message("\A [activewarrant.fields["arrestsearch"]] warrant for <b>[activewarrant.fields["namewarrant"]]</b> has been [(activewarrant in GLOB.all_warrants) ? "edited" : "uploaded"].", nano_host())
 		GLOB.all_warrants |= activewarrant
 		activewarrant = null
 
-	if(href_list["deletewarrant"])
+	if (href_list["deletewarrant"])
 		. = TRUE
-		if(!activewarrant)
+		if (!activewarrant)
 			for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
-				if(W.uid == text2num(href_list["deletewarrant"]))
+				if (W.uid == text2num(href_list["deletewarrant"]))
 					activewarrant = W
 					break
 		GLOB.all_warrants -= activewarrant
 		activewarrant = null
 
-	if(href_list["printwarrant"])
+	if (href_list["printwarrant"])
 		. = TRUE
-		if(!program.computer.has_component(PART_PRINTER))
+		if (!program.computer.has_component(PART_PRINTER))
 			to_chat(src, SPAN_WARNING("Hardware Error: Printer not found."))
 			return
-		if(!activewarrant)
+		if (!activewarrant)
 			var/puid = text2num(href_list["printwarrant"])
 			for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
-				if(W.uid == puid)
+				if (W.uid == puid)
 					activewarrant = W
 					break
-		if(activewarrant)
+		if (activewarrant)
 			program.computer.print_paper(warranttotext(activewarrant), capitalize(activewarrant.fields["arrestsearch"]) + " Warrant - " + activewarrant.fields["namewarrant"])
 		else
 			to_chat(src, SPAN_WARNING("Internal error: Warrant not found."))
 
 
-	if(href_list["editwarrantname"])
+	if (href_list["editwarrantname"])
 		. = TRUE
 		var/namelist = list()
 		for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
 			namelist += "[CR.get_name()] \[[CR.get_job()]\]"
 		var/new_person = sanitize(input(usr, "Please input name") as null|anything in namelist)
-		if(CanInteract(user, GLOB.default_state))
+		if (CanInteract(user, GLOB.default_state))
 			if (!new_person || !activewarrant)
 				return
 			// string trickery to extract name & job
@@ -170,52 +170,52 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 			activewarrant.fields["namewarrant"] = name
 			activewarrant.fields["jobwarrant"] = job
 
-	if(href_list["editwarrantnamecustom"])
+	if (href_list["editwarrantnamecustom"])
 		. = TRUE
 		var/new_name = sanitize(input("Please input name") as null|text)
 		var/new_job = sanitize(input("Please input job") as null|text)
-		if(CanInteract(user, GLOB.default_state))
+		if (CanInteract(user, GLOB.default_state))
 			if (!new_name || !new_job || !activewarrant)
 				return
 			activewarrant.fields["namewarrant"] = new_name
 			activewarrant.fields["jobwarrant"] = new_job
 
-	if(href_list["editwarrantcharges"])
+	if (href_list["editwarrantcharges"])
 		. = TRUE
 		var/new_charges = sanitize(input("Please input charges", "Charges", activewarrant.fields["charges"]) as null|text)
-		if(CanInteract(user, GLOB.default_state))
+		if (CanInteract(user, GLOB.default_state))
 			if (!new_charges || !activewarrant)
 				return
 			activewarrant.fields["charges"] = new_charges
 
-	if(href_list["editwarrantauth"])
+	if (href_list["editwarrantauth"])
 		. = TRUE
-		if(!activewarrant)
+		if (!activewarrant)
 			return
 		activewarrant.fields["auth"] = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
 
-	if(href_list["editwarrantidauth"])
+	if (href_list["editwarrantidauth"])
 		. = TRUE
-		if(!activewarrant)
+		if (!activewarrant)
 			return
 		// access-granting is only available for arrest warrants
-		if(activewarrant.fields["arrestsearch"] == "search")
+		if (activewarrant.fields["arrestsearch"] == "search")
 			return
-		if(!(access_change_ids in I.access))
+		if (!(access_change_ids in I.access))
 			to_chat(user, "Authentication error: Unable to locate ID with appropriate access to allow this operation.")
 			return
 
 		// only works if they are in the crew records with a valid job
 		var/datum/computer_file/report/crew_record/warrant_subject
 		var/datum/job/J = SSjobs.get_by_title(activewarrant.fields["jobwarrant"])
-		if(!J)
+		if (!J)
 			to_chat(user, "Lookup error: Unable to locate specified job in access database.")
 			return
 		for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
-			if(CR.get_name() == activewarrant.fields["namewarrant"] && CR.get_job() == J.title)
+			if (CR.get_name() == activewarrant.fields["namewarrant"] && CR.get_job() == J.title)
 				warrant_subject = CR
 
-		if(!warrant_subject)
+		if (!warrant_subject)
 			to_chat(user, "Lookup error: Unable to locate specified personnel in crew records.")
 			return
 
@@ -226,7 +226,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		activewarrant.fields["idauth"] = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
 		activewarrant.fields["access"] = warrant_access
 
-	if(href_list["back"])
+	if (href_list["back"])
 		. = TRUE
 		activewarrant = null
 

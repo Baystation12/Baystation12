@@ -18,7 +18,7 @@
 	poison_type = /datum/reagent/toxin/pyrotoxin
 
 /mob/living/simple_animal/hostile/giant_spider/thermic/apply_melee_effects(atom/A)
-	if(istype(A, /mob/living/exosuit))
+	if (istype(A, /mob/living/exosuit))
 		if (prob(poison_chance))
 			var/mob/living/exosuit/E = A
 			visible_message(SPAN_DANGER("\The [src] melts some of \the [E]'s components with its pyrotoxin!"))

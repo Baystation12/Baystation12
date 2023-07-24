@@ -3,17 +3,17 @@
 	desc = "A reagent scanner module. It can scan and analyze various reagents."
 
 /obj/item/stock_parts/computer/scanner/reagent/can_use_scanner(mob/user, obj/target, proximity = TRUE)
-	if(!..(user, target, proximity))
+	if (!..(user, target, proximity))
 		return 0
-	if(!istype(target))
+	if (!istype(target))
 		return 0
 	return 1
 
 /obj/item/stock_parts/computer/scanner/reagent/do_on_afterattack(mob/user, obj/target, proximity)
-	if(!can_use_scanner(user, target, proximity))
+	if (!can_use_scanner(user, target, proximity))
 		return
 	var/dat = reagent_scan_results(target)
-	if(driver && driver.using_scanner)
+	if (driver && driver.using_scanner)
 		driver.data_buffer = jointext(dat, "\[br\]")
 		SSnano.update_uis(driver.NM)
 	to_chat(user, SPAN_NOTICE("[jointext(dat, "<br>")]"))

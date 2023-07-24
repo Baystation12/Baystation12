@@ -55,7 +55,7 @@
 /datum/ai_holder/simple_animal/melee/defender/lose_target()
 	. = ..()
 	var/mob/living/simple_animal/hostile/hive_alien/defender/D = holder
-	if(D.attack_mode && !find_target()) //If we don't immediately find another target, switch to movement mode
+	if (D.attack_mode && !find_target()) //If we don't immediately find another target, switch to movement mode
 		D.mode_movement()
 
 	return ..()
@@ -63,7 +63,7 @@
 /datum/ai_holder/simple_animal/melee/defender/lose_target()
 	. = ..()
 	var/mob/living/simple_animal/hostile/hive_alien/defender/D = holder
-	if(D.attack_mode && !find_target()) //If we don't immediately find another target, switch to movement mode
+	if (D.attack_mode && !find_target()) //If we don't immediately find another target, switch to movement mode
 		D.mode_movement()
 
 	return ..()
@@ -71,7 +71,7 @@
 /datum/ai_holder/simple_animal/melee/defender/engage_target()
 	. = ..()
 	var/mob/living/simple_animal/hostile/hive_alien/defender/D = holder
-	if(!D.attack_mode)
+	if (!D.attack_mode)
 		return D.mode_attack()
 
 	flick("hive_executioner_attacking", src)
@@ -156,7 +156,7 @@
 /turf/unsimulated/wall/away/blueriver/livingwall/Initialize()
 	.=..()
 
-	if(prob(80))
+	if (prob(80))
 		icon_state = "evilwall_[rand(1,8)]"
 
 /turf/unsimulated/wall/supermatter/no_spread

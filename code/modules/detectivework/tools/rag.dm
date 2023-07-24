@@ -39,7 +39,7 @@
 	. = ..()
 
 /obj/item/reagent_containers/glass/rag/attack_self(mob/user as mob)
-	if(on_fire && user.unEquip(src))
+	if (on_fire && user.unEquip(src))
 		user.visible_message(SPAN_WARNING("\The [user] stamps out [src]."), SPAN_WARNING("You stamp out [src]."))
 		extinguish()
 	else
@@ -48,7 +48,7 @@
 /obj/item/reagent_containers/glass/rag/attackby(obj/item/W, mob/user)
 	if (!on_fire && W.IsFlameSource())
 		ignite()
-		if(on_fire)
+		if (on_fire)
 			user.visible_message(
 				SPAN_WARNING("\The [user] lights \the [src] with \the [W]!"),
 				SPAN_DANGER("You light \the [src]!")
@@ -60,28 +60,28 @@
 	update_name()
 
 /obj/item/reagent_containers/glass/rag/proc/update_name()
-	if(on_fire)
+	if (on_fire)
 		SetName("burning [initial(name)]")
-	else if(reagents.total_volume)
+	else if (reagents.total_volume)
 		SetName("damp [initial(name)]")
 	else
 		SetName("dry [initial(name)]")
 
 /obj/item/reagent_containers/glass/rag/on_update_icon()
-	if(on_fire)
+	if (on_fire)
 		icon_state = "raglit"
 	else
 		icon_state = "rag"
 
 	var/obj/item/reagent_containers/food/drinks/bottle/B = loc
-	if(istype(B))
+	if (istype(B))
 		B.update_icon()
 
 /obj/item/reagent_containers/glass/rag/proc/remove_contents(mob/user, atom/trans_dest = null)
-	if(!trans_dest && !user.loc)
+	if (!trans_dest && !user.loc)
 		return
 
-	if(reagents.total_volume)
+	if (reagents.total_volume)
 		var/atom/target = trans_dest ? trans_dest : user.loc
 		user.visible_message(
 			SPAN_DANGER("\The [user] begins to wring out \the [src] over \the [target]."),
@@ -89,7 +89,7 @@
 		)
 
 		if (do_after(user, reagents.total_volume * 5, target, DO_PUBLIC_UNIQUE)) //50 for a fully soaked rag
-			if(trans_dest)
+			if (trans_dest)
 				reagents.trans_to(trans_dest, reagents.total_volume)
 			else
 				reagents.splash(user.loc, reagents.total_volume)
@@ -100,7 +100,7 @@
 			update_name()
 
 /obj/item/reagent_containers/glass/rag/proc/wipe_down(atom/A, mob/user)
-	if(!reagents.total_volume)
+	if (!reagents.total_volume)
 		to_chat(user, SPAN_WARNING("The [initial(name)] is dry!"))
 	else
 		user.visible_message("\The [user] starts to wipe down [A] with [src]!")
@@ -108,16 +108,16 @@
 		update_name()
 		if (do_after(user, 3 SECONDS, A, DO_PUBLIC_UNIQUE))
 			user.visible_message("\The [user] finishes wiping off the [A]!")
-			if(isturf(A))
+			if (isturf(A))
 				var/turf/T = A
 				T.clean(src, user)
 			else
 				A.clean_blood()
 
 /obj/item/reagent_containers/glass/rag/attack(atom/target as obj|turf|area, mob/user as mob , flag)
-	if(isliving(target))
+	if (isliving(target))
 		var/mob/living/M = target
-		if(on_fire)
+		if (on_fire)
 			if (user.a_intent == I_HELP)
 				return FALSE
 			user.visible_message(
@@ -146,7 +146,7 @@
 						to_chat(user, SPAN_WARNING("You need to wet the rag with [wash_amount] units of [initial(R.name)] to get the ink off!"))
 					return
 
-			if(user.zone_sel.selecting == BP_MOUTH)
+			if (user.zone_sel.selecting == BP_MOUTH)
 				if (!M.has_danger_grab(user))
 					to_chat(user, SPAN_WARNING("You need to have a firm grip on \the [target] before you can use \the [src] on them!"))
 					return
@@ -183,30 +183,30 @@
 	return ..()
 
 /obj/item/reagent_containers/glass/rag/afterattack(atom/A as obj|turf|area, mob/user as mob, proximity)
-	if(!proximity)
+	if (!proximity)
 		return
 
-	if(istype(A, /obj/structure/reagent_dispensers))
-		if(!reagents.get_free_space())
+	if (istype(A, /obj/structure/reagent_dispensers))
+		if (!reagents.get_free_space())
 			to_chat(user, SPAN_WARNING("\The [src] is already soaked."))
 			return
 
-		if(A.reagents && A.reagents.trans_to_obj(src, reagents.maximum_volume))
+		if (A.reagents && A.reagents.trans_to_obj(src, reagents.maximum_volume))
 			user.visible_message(SPAN_NOTICE("\The [user] soaks [src] using [A]."), SPAN_NOTICE("You soak [src] using [A]."))
 			update_name()
 		return
 
-	if(!on_fire && istype(A) && (src in user))
-		if(A.is_open_container() && !(A in user))
+	if (!on_fire && istype(A) && (src in user))
+		if (A.is_open_container() && !(A in user))
 			remove_contents(user, A)
-		else if(!ismob(A)) //mobs are handled in attack() - this prevents us from wiping down people while smothering them.
+		else if (!ismob(A)) //mobs are handled in attack() - this prevents us from wiping down people while smothering them.
 			wipe_down(A, user)
 		return
 
 /obj/item/reagent_containers/glass/rag/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature >= 50 + T0C)
+	if (exposed_temperature >= 50 + T0C)
 		ignite()
-	if(exposed_temperature >= 900 + T0C)
+	if (exposed_temperature >= 900 + T0C)
 		new /obj/effect/decal/cleanable/ash(get_turf(src))
 		qdel(src)
 
@@ -221,13 +221,13 @@
 
 
 /obj/item/reagent_containers/glass/rag/proc/ignite()
-	if(on_fire)
+	if (on_fire)
 		return
-	if(!can_ignite())
+	if (!can_ignite())
 		return
 
 	//also copied from matches
-	if(reagents.get_reagent_amount(/datum/reagent/toxin/phoron)) // the phoron explodes when exposed to fire
+	if (reagents.get_reagent_amount(/datum/reagent/toxin/phoron)) // the phoron explodes when exposed to fire
 		visible_message(SPAN_DANGER("\The [src] conflagrates violently!"))
 		var/datum/effect/effect/system/reagents_explosion/e = new()
 		e.set_up(round(reagents.get_reagent_amount(/datum/reagent/toxin/phoron) / 2.5, 1), get_turf(src), 0, 0)
@@ -248,7 +248,7 @@
 
 	//rags sitting around with 1 second of burn time left is dumb.
 	//ensures players always have a few seconds of burn time left when they light their rag
-	if(burn_time <= 5)
+	if (burn_time <= 5)
 		visible_message(SPAN_WARNING("\The [src] falls apart!"))
 		new /obj/effect/decal/cleanable/ash(get_turf(src))
 		qdel(src)
@@ -256,19 +256,19 @@
 	update_icon()
 
 /obj/item/reagent_containers/glass/rag/Process()
-	if(!can_ignite())
+	if (!can_ignite())
 		visible_message(SPAN_WARNING("\The [src] burns out."))
 		extinguish()
 
 	//copied from matches
-	if(isliving(loc))
+	if (isliving(loc))
 		var/mob/living/M = loc
 		M.IgniteMob()
 	var/turf/location = get_turf(src)
-	if(location)
+	if (location)
 		location.hotspot_expose(700, 5)
 
-	if(burn_time <= 0)
+	if (burn_time <= 0)
 		STOP_PROCESSING(SSobj, src)
 		new /obj/effect/decal/cleanable/ash(location)
 		qdel(src)

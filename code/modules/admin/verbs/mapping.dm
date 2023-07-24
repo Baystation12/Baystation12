@@ -46,7 +46,7 @@ var/global/intercom_range_display_status = 0
 	set category = "Mapping"
 	set name = "Camera Range Display"
 
-	if(camera_range_display_status)
+	if (camera_range_display_status)
 		camera_range_display_status = 0
 	else
 		camera_range_display_status = 1
@@ -56,7 +56,7 @@ var/global/intercom_range_display_status = 0
 	for(var/obj/effect/debugging/camera_range/C in world)
 		qdel(C)
 
-	if(camera_range_display_status)
+	if (camera_range_display_status)
 		for(var/obj/machinery/camera/C in cameranet.cameras)
 			new/obj/effect/debugging/camera_range(C.loc)
 
@@ -76,22 +76,22 @@ var/global/intercom_range_display_status = 0
 
 	for(var/obj/machinery/camera/C1 in CL)
 		for(var/obj/machinery/camera/C2 in CL)
-			if(C1 != C2)
-				if(C1.c_tag == C2.c_tag)
+			if (C1 != C2)
+				if (C1.c_tag == C2.c_tag)
 					output += "<li>[SPAN_COLOR("red", "c_tag match for sec. cameras at \[[C1.x], [C1.y], [C1.z]\] ([C1.loc.loc]) and \[[C2.x], [C2.y], [C2.z]\] ([C2.loc.loc]) - c_tag is [C1.c_tag]")]</li>"
-				if(C1.loc == C2.loc && C1.dir == C2.dir && C1.pixel_x == C2.pixel_x && C1.pixel_y == C2.pixel_y)
+				if (C1.loc == C2.loc && C1.dir == C2.dir && C1.pixel_x == C2.pixel_x && C1.pixel_y == C2.pixel_y)
 					output += "<li>[SPAN_COLOR("red", "FULLY overlapping sec. cameras at \[[C1.x], [C1.y], [C1.z]\] ([C1.loc.loc]) Networks: [C1.network] and [C2.network]")]</li>"
-				if(C1.loc == C2.loc)
+				if (C1.loc == C2.loc)
 					output += "<li>[SPAN_COLOR("red", "overlapping sec. cameras at \[[C1.x], [C1.y], [C1.z]\] ([C1.loc.loc]) Networks: [C1.network] and [C2.network]")]</li>"
 		var/turf/T = get_step(C1,turn(C1.dir,180))
-		if(!T || !isturf(T) || !T.density )
-			if(!(locate(/obj/structure/grille,T)))
+		if (!T || !isturf(T) || !T.density )
+			if (!(locate(/obj/structure/grille,T)))
 				var/window_check = 0
 				for(var/obj/structure/window/W in T)
 					if (W.dir == turn(C1.dir,180) || (W.dir in list(NORTHEAST,SOUTHEAST,SOUTHWEST,NORTHWEST)) )
 						window_check = 1
 						break
-				if(!window_check)
+				if (!window_check)
 					output += "<li>[SPAN_COLOR("red", "Camera not connected to wall at \[[C1.x], [C1.y], [C1.z]\] ([C1.loc.loc]) Network: [C1.network]")]</li>"
 
 	output += "</ul>"
@@ -101,7 +101,7 @@ var/global/intercom_range_display_status = 0
 	set category = "Mapping"
 	set name = "Intercom Range Display"
 
-	if(intercom_range_display_status)
+	if (intercom_range_display_status)
 		intercom_range_display_status = 0
 	else
 		intercom_range_display_status = 1
@@ -109,7 +109,7 @@ var/global/intercom_range_display_status = 0
 	for(var/obj/effect/debugging/marker/M in world)
 		qdel(M)
 
-	if(intercom_range_display_status)
+	if (intercom_range_display_status)
 		for(var/obj/item/device/radio/intercom/I in world)
 			for(var/turf/T in orange(7,I))
 				var/obj/effect/debugging/marker/F = new/obj/effect/debugging/marker(T)
@@ -153,7 +153,7 @@ var/global/list/debug_verbs = list (
 	set category = "Debug"
 	set name = "Debug verbs"
 
-	if(!check_rights(R_DEBUG)) return
+	if (!check_rights(R_DEBUG)) return
 
 	verbs += debug_verbs
 
@@ -161,7 +161,7 @@ var/global/list/debug_verbs = list (
 	set category = "Debug"
 	set name = "Hide Debug verbs"
 
-	if(!check_rights(R_DEBUG)) return
+	if (!check_rights(R_DEBUG)) return
 
 	verbs -= debug_verbs
 
@@ -173,7 +173,7 @@ var/global/list/debug_verbs = list (
 
 /client/proc/recurse_zone(zone/Z, recurse_level =1)
 	testZAScolors_zones += Z
-	if(recurse_level > 10)
+	if (recurse_level > 10)
 		return
 
 	for(var/turf/T in Z.contents)
@@ -181,7 +181,7 @@ var/global/list/debug_verbs = list (
 		testZAScolors_turfs += T
 	for(var/connection_edge/zone/edge in Z.edges)
 		var/zone/connected = edge.get_connected_zone(Z)
-		if(connected in testZAScolors_zones)
+		if (connected in testZAScolors_zones)
 			continue
 		recurse_zone(connected,recurse_level+1)
 
@@ -190,16 +190,16 @@ var/global/list/debug_verbs = list (
 	set category = "ZAS"
 	set name = "Check ZAS connections"
 
-	if(!check_rights(R_DEBUG)) return
+	if (!check_rights(R_DEBUG)) return
 	testZAScolors_remove()
 
 	var/turf/simulated/location = get_turf(usr)
 
-	if(!istype(location, /turf/simulated))
+	if (!istype(location, /turf/simulated))
 		to_chat(src, SPAN_WARNING("This debug tool can only be used while on a simulated turf."))
 		return
 
-	if(!usedZAScolors)
+	if (!usedZAScolors)
 		to_chat(src, "ZAS Test Colors")
 		to_chat(src, "Green = Zone you are standing in")
 		to_chat(src, "Blue = Connected zone to the zone you are standing in")
@@ -219,14 +219,14 @@ var/global/list/debug_verbs = list (
 			testZAScolors_turfs += T
 		for(var/connection_edge/zone/z_edge in Z.edges)
 			var/zone/connected = z_edge.get_connected_zone(Z)
-			if(connected in testZAScolors_zones)
+			if (connected in testZAScolors_zones)
 				continue
 			recurse_zone(connected,1)
 
 	for(var/turf/T in range(25,location))
-		if(!istype(T))
+		if (!istype(T))
 			continue
-		if(T in testZAScolors_turfs)
+		if (T in testZAScolors_turfs)
 			continue
 		images += get_zas_image(T, "red")
 		testZAScolors_turfs += T
@@ -239,14 +239,14 @@ var/global/list/debug_verbs = list (
 	testZAScolors_zones.Cut()
 
 	for(var/image/i in images)
-		if(i.icon == 'icons/misc/debug_group.dmi')
+		if (i.icon == 'icons/misc/debug_group.dmi')
 			images.Remove(i)
 
 /client/proc/rebootAirMaster()
 	set category = "ZAS"
 	set name = "Reboot ZAS"
 
-	if(alert("This will destroy and remake all zone geometry on the whole map.","Reboot ZAS","Reboot ZAS","Nevermind") == "Reboot ZAS")
+	if (alert("This will destroy and remake all zone geometry on the whole map.","Reboot ZAS","Reboot ZAS","Nevermind") == "Reboot ZAS")
 		SSair.reboot()
 
 
@@ -254,30 +254,30 @@ var/global/list/debug_verbs = list (
 	set category = "Mapping"
 	set name = "Count Objects On Level"
 	var/level = input("Which z-level?","Level?") as text
-	if(!level) return
+	if (!level) return
 	var/num_level = text2num(level)
-	if(!num_level) return
-	if(!isnum(num_level)) return
+	if (!num_level) return
+	if (!isnum(num_level)) return
 
 	var/type_text = input("Which type path?","Path?") as text
-	if(!type_text) return
+	if (!type_text) return
 	var/type_path = text2path(type_text)
-	if(!type_path) return
+	if (!type_path) return
 
 	var/count = 1
 
 	var/list/atom/atom_list = list()
 
 	for(var/atom/A in world)
-		if(istype(A,type_path))
+		if (istype(A,type_path))
 			var/atom/B = A
 			while(!(isturf(B.loc)))
-				if(B && B.loc)
+				if (B && B.loc)
 					B = B.loc
 				else
 					break
-			if(B)
-				if(B.z == num_level)
+			if (B)
+				if (B.z == num_level)
 					count++
 					atom_list += A
 	/*
@@ -285,7 +285,7 @@ var/global/list/debug_verbs = list (
 	for(var/i = 0; i <= (length(atom_list)/10); i++)
 		var/line = ""
 		for(var/j = 1; j <= 10; j++)
-			if(i*10+j <= length(atom_list))
+			if (i*10+j <= length(atom_list))
 				temp_atom = atom_list[i*10+j]
 				line += " no.[i+10+j]@\[[temp_atom.x], [temp_atom.y], [temp_atom.z]\]; "
 		log_debug(line) */
@@ -297,21 +297,21 @@ var/global/list/debug_verbs = list (
 	set name = "Count Objects All"
 
 	var/type_text = input("Which type path?","") as text
-	if(!type_text) return
+	if (!type_text) return
 	var/type_path = text2path(type_text)
-	if(!type_path) return
+	if (!type_path) return
 
 	var/count = 0
 
 	for(var/atom/A in world)
-		if(istype(A,type_path))
+		if (istype(A,type_path))
 			count++
 	/*
 	var/atom/temp_atom
 	for(var/i = 0; i <= (length(atom_list)/10); i++)
 		var/line = ""
 		for(var/j = 1; j <= 10; j++)
-			if(i*10+j <= length(atom_list))
+			if (i*10+j <= length(atom_list))
 				temp_atom = atom_list[i*10+j]
 				line += " no.[i+10+j]@\[[temp_atom.x], [temp_atom.y], [temp_atom.z]\]; "
 		log_debug(line) */
@@ -329,7 +329,7 @@ var/global/list/debug_verbs = list (
 
 	var/list/baddies = list("LEAKY PIPES")
 	for(var/obj/machinery/atmospherics/pipe/P in SSmachines.machinery)
-		if(P.leaking)
+		if (P.leaking)
 			baddies += "[P] ([P.x],[P.y],[P.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[P.x];Y=[P.y];Z=[P.z]'>JMP</a>)"
 
 	to_chat(usr,jointext(baddies, "<br>"))

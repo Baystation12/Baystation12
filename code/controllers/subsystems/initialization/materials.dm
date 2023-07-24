@@ -20,7 +20,7 @@ SUBSYSTEM_DEF(materials)
 
 /datum/controller/subsystem/materials/proc/build_material_lists()
 
-	if(LAZYLEN(materials))
+	if (LAZYLEN(materials))
 		return
 
 	materials =         list()
@@ -31,12 +31,12 @@ SUBSYSTEM_DEF(materials)
 
 	for(var/type in subtypesof(/material))
 		var/material/new_mineral = new type
-		if(new_mineral.name)
+		if (new_mineral.name)
 			materials += new_mineral
 			materials_by_name[lowertext(new_mineral.name)] = new_mineral
-			if(new_mineral.ore_smelts_to || new_mineral.ore_compresses_to)
+			if (new_mineral.ore_smelts_to || new_mineral.ore_compresses_to)
 				processable_ores[new_mineral.name] = TRUE
-			if(new_mineral.alloy_product && LAZYLEN(new_mineral.alloy_materials))
+			if (new_mineral.alloy_product && LAZYLEN(new_mineral.alloy_materials))
 				alloy_products[new_mineral] = TRUE
 				for(var/component in new_mineral.alloy_materials)
 					processable_ores[component] = TRUE
@@ -44,15 +44,15 @@ SUBSYSTEM_DEF(materials)
 
 
 /datum/controller/subsystem/materials/proc/get_material_by_name(name)
-	if(!materials_by_name)
+	if (!materials_by_name)
 		build_material_lists()
 	. = materials_by_name[name]
-	if(!.)
+	if (!.)
 		log_error("Unable to acquire material by name '[name]'")
 
 /proc/material_display_name(name)
 	RETURN_TYPE(/material)
 	var/material/material = SSmaterials.get_material_by_name(name)
-	if(material)
+	if (material)
 		return material.display_name
 	return null

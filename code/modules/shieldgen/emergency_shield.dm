@@ -32,7 +32,7 @@
 	..()
 
 /obj/machinery/shield/CanPass(atom/movable/mover, turf/target, height, air_group)
-	if(!height || air_group) return 0
+	if (!height || air_group) return 0
 	else return ..()
 
 /obj/machinery/shield/post_health_change(health_mod, prior_health, damage_type)
@@ -72,7 +72,7 @@
 	..()
 
 /obj/machinery/shieldgen/proc/shields_up()
-	if(active) return 0 //If it's already turned on, how did this get called?
+	if (active) return 0 //If it's already turned on, how did this get called?
 
 	src.active = 1
 	update_icon()
@@ -86,7 +86,7 @@
 	update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/shieldgen/proc/shields_down()
-	if(!active) return 0 //If it's already off, how did this get called?
+	if (!active) return 0 //If it's already off, how did this get called?
 
 	src.active = 0
 	update_icon()
@@ -116,7 +116,7 @@
 
 /obj/machinery/shieldgen/power_change()
 	. = ..()
-	if(!. || !active) return
+	if (!. || !active) return
 	if (!is_powered())
 		collapse_shields()
 	else
@@ -126,8 +126,8 @@
 	if (!active || (!is_powered()))
 		return
 
-	if(malfunction)
-		if(length(deployed_shields) && prob(5))
+	if (malfunction)
+		if (length(deployed_shields) && prob(5))
 			qdel(pick(deployed_shields))
 	else
 		if (check_delay <= 0)
@@ -156,21 +156,21 @@
 
 /obj/machinery/shieldgen/emp_act(severity)
 	switch(severity)
-		if(EMP_ACT_HEAVY)
+		if (EMP_ACT_HEAVY)
 			malfunction = 1
 			locked = pick(0,1)
-		if(EMP_ACT_LIGHT)
-			if(prob(50))
+		if (EMP_ACT_LIGHT)
+			if (prob(50))
 				malfunction = 1
 	..()
 
 /obj/machinery/shieldgen/interface_interact(mob/user as mob)
-	if(!CanInteract(user, DefaultTopicState()))
+	if (!CanInteract(user, DefaultTopicState()))
 		return FALSE
-	if(locked)
+	if (locked)
 		to_chat(user, "The machine is locked, you are unable to use it.")
 		return TRUE
-	if(is_open)
+	if (is_open)
 		to_chat(user, "The panel must be closed before operating this machine.")
 		return TRUE
 
@@ -180,7 +180,7 @@
 			"You hear heavy droning fade out.")
 		src.shields_down()
 	else
-		if(anchored)
+		if (anchored)
 			user.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [user] activated the shield generator."), \
 				SPAN_NOTICE("[icon2html(src, user)] You activate the shield generator."), \
 				"You hear heavy droning.")
@@ -190,15 +190,15 @@
 	return TRUE
 
 /obj/machinery/shieldgen/emag_act(remaining_charges, mob/user)
-	if(!malfunction)
+	if (!malfunction)
 		malfunction = 1
 		update_icon()
 		return 1
 
 /obj/machinery/shieldgen/attackby(obj/item/W as obj, mob/user as mob)
-	if(isScrewdriver(W))
+	if (isScrewdriver(W))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-		if(is_open)
+		if (is_open)
 			to_chat(user, SPAN_NOTICE("You close the panel."))
 			is_open = 0
 		else
@@ -206,37 +206,37 @@
 			is_open = 1
 		return TRUE
 
-	else if(isCoil(W) && malfunction && is_open)
+	else if (isCoil(W) && malfunction && is_open)
 		var/obj/item/stack/cable_coil/coil = W
 		to_chat(user, SPAN_NOTICE("You begin to replace the wires."))
-		//if(do_after(user, min(60, round( ((maxhealth/health)*10)+(malfunction*10) ))) //Take longer to repair heavier damage
-		if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
+		//if (do_after(user, min(60, round( ((maxhealth/health)*10)+(malfunction*10) ))) //Take longer to repair heavier damage
+		if (do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if (coil.use(1))
 				revive_health()
 				malfunction = 0
 				to_chat(user, SPAN_NOTICE("You repair the [src]!"))
 		return TRUE
 
-	else if(istype(W, /obj/item/wrench))
-		if(locked)
+	else if (istype(W, /obj/item/wrench))
+		if (locked)
 			to_chat(user, "The bolts are covered, unlocking this would retract the covers.")
 			return TRUE
-		if(anchored)
+		if (anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 			to_chat(user, SPAN_NOTICE("'You unsecure the [src] from the floor!"))
-			if(active)
+			if (active)
 				to_chat(user, SPAN_NOTICE("The [src] shuts off!"))
 				src.shields_down()
 			anchored = FALSE
 		else
-			if(istype(get_turf(src), /turf/space)) return //No wrenching these in space!
+			if (istype(get_turf(src), /turf/space)) return //No wrenching these in space!
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 			to_chat(user, SPAN_NOTICE("You secure the [src] to the floor!"))
 			anchored = TRUE
 		return TRUE
 
-	else if(istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer/pda))
-		if(src.allowed(user))
+	else if (istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer/pda))
+		if (src.allowed(user))
 			src.locked = !src.locked
 			to_chat(user, "The controls are now [src.locked ? "locked." : "unlocked."]")
 		else
@@ -247,7 +247,7 @@
 
 
 /obj/machinery/shieldgen/on_update_icon()
-	if(active && is_powered())
+	if (active && is_powered())
 		src.icon_state = malfunction ? "shieldonbr":"shieldon"
 	else
 		src.icon_state = malfunction ? "shieldoffbr":"shieldoff"

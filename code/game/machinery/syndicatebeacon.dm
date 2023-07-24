@@ -26,31 +26,31 @@
 /obj/machinery/syndicate_beacon/interact(mob/user)
 	user.set_machine(src)
 	var/dat = SPAN_COLOR("#005500", "<i>Scanning [pick("retina pattern", "voice print", "fingerprints", "dna sequence")]...<br>Identity confirmed,<br></i>")
-	if(istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon/ai))
-		if(is_special_character(user))
+	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon/ai))
+		if (is_special_character(user))
 			dat += "[SPAN_COLOR("#007700", "<i>Operative record found. Greetings, Agent [user.name].</i>")]<br>"
-		else if(charges < 1)
+		else if (charges < 1)
 			dat += "<TT>Connection severed.</TT><BR>"
 		else
 			var/honorific = "Mr."
-			if(user.gender == FEMALE)
+			if (user.gender == FEMALE)
 				honorific = "Ms."
 			dat += "[SPAN_COLOR("red", "<i>Identity not found in operative database. What can the Syndicate do for you today, [honorific] [user.name]?</i>")]<br>"
-			if(!selfdestructing)
+			if (!selfdestructing)
 				dat += "<br><br><A href='?src=\ref[src];betraitor=1;traitormob=\ref[user]'>\"[pick("I want to switch teams.", "I want to work for you.", "Let me join you.", "I can be of use to you.", "You want me working for you, and here's why...", "Give me an objective.", "How's the 401k over at the Syndicate?")]\"</A><BR>"
 	dat += temptext
 	show_browser(user, dat, "window=syndbeacon")
 	onclose(user, "syndbeacon")
 
 /obj/machinery/syndicate_beacon/Topic(href, href_list)
-	if(..())
+	if (..())
 		return
-	if(href_list["betraitor"])
-		if(charges < 1)
+	if (href_list["betraitor"])
+		if (charges < 1)
 			src.updateUsrDialog()
 			return
 		var/mob/M = locate(href_list["traitormob"])
-		if(M.mind.special_role || jobban_isbanned(M, MODE_TRAITOR))
+		if (M.mind.special_role || jobban_isbanned(M, MODE_TRAITOR))
 			temptext = "<i>We have no need for you at this time. Have a pleasant day.</i><br>"
 			src.updateUsrDialog()
 			return
@@ -60,7 +60,7 @@
 			src.updateUsrDialog()
 			spawn(rand(50,200)) selfdestruct()
 			return
-		if(istype(M, /mob/living/carbon/human))
+		if (istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/N = M
 			to_chat(M, "<B>You have joined the ranks of the Syndicate and become a traitor to the station!</B>")
 			GLOB.traitors.add_antagonist(N.mind)
@@ -94,34 +94,34 @@
 	var/icontype = "beacon"
 
 /obj/machinery/power/singularity_beacon/proc/Activate(mob/user = null)
-	if(surplus() < 1500)
-		if(user) to_chat(user, SPAN_NOTICE("The connected wire doesn't have enough current."))
+	if (surplus() < 1500)
+		if (user) to_chat(user, SPAN_NOTICE("The connected wire doesn't have enough current."))
 		return
 	for(var/obj/singularity/singulo in world)
-		if(singulo.z == z)
+		if (singulo.z == z)
 			singulo.target = src
 	icon_state = "[icontype]1"
 	active = 1
 
 	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
-	if(user)
+	if (user)
 		to_chat(user, SPAN_NOTICE("You activate the beacon."))
 
 
 /obj/machinery/power/singularity_beacon/proc/Deactivate(mob/user = null)
 	for(var/obj/singularity/singulo in world)
-		if(singulo.target == src)
+		if (singulo.target == src)
 			singulo.target = null
 	icon_state = "[icontype]0"
 	active = 0
-	if(user)
+	if (user)
 		to_chat(user, SPAN_NOTICE("You deactivate the beacon."))
 
 
 /obj/machinery/power/singularity_beacon/physical_attack_hand(mob/user)
 	. = TRUE
-	if(anchored)
-		if(active)
+	if (anchored)
+		if (active)
 			Deactivate(user)
 		else
 			Activate(user)
@@ -129,18 +129,18 @@
 		to_chat(user, SPAN_DANGER("You need to screw the beacon to the floor first!"))
 
 /obj/machinery/power/singularity_beacon/attackby(obj/item/W as obj, mob/user as mob)
-	if(isScrewdriver(W))
-		if(active)
+	if (isScrewdriver(W))
+		if (active)
 			to_chat(user, SPAN_DANGER("You need to deactivate the beacon first!"))
 			return
 
-		if(anchored)
+		if (anchored)
 			anchored = FALSE
 			to_chat(user, SPAN_NOTICE("You unscrew the beacon from the floor."))
 			disconnect_from_network()
 			return
 		else
-			if(!connect_to_network())
+			if (!connect_to_network())
 				to_chat(user, "This device must be placed over an exposed cable.")
 				return
 			anchored = TRUE
@@ -151,15 +151,15 @@
 
 
 /obj/machinery/power/singularity_beacon/Destroy()
-	if(active)
+	if (active)
 		Deactivate()
 	..()
 
 //stealth direct power usage
 /obj/machinery/power/singularity_beacon/Process()
-	if(!active)
+	if (!active)
 		return PROCESS_KILL
-	if(draw_power(1500) < 1500)
+	if (draw_power(1500) < 1500)
 		Deactivate()
 
 /obj/machinery/power/singularity_beacon/syndicate

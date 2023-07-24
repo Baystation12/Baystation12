@@ -28,9 +28,9 @@
 
 
 /obj/item/organ/internal/augment/active/nanounit/activate()
-	if(!aura || !can_activate())
+	if (!aura || !can_activate())
 		return
-	if(aura.active)
+	if (aura.active)
 		aura.active = FALSE
 		to_chat(owner, SPAN_NOTICE("Nanites entering sleep mode."))
 	else

@@ -211,38 +211,38 @@ var/global/list/DEPT_FREQS = list(AI_FREQ, COMM_FREQ, ENG_FREQ, MED_FREQ, SEC_FR
 	if (frequency in ANTAG_FREQS)
 		return "syndradio"
 	// centcomm channels (deathsquid and ert)
-	if(frequency in CENT_FREQS)
+	if (frequency in CENT_FREQS)
 		return "centradio"
 	// command channel
-	if(frequency == COMM_FREQ)
+	if (frequency == COMM_FREQ)
 		return "comradio"
 	// AI private channel
-	if(frequency == AI_FREQ)
+	if (frequency == AI_FREQ)
 		return "airadio"
 	// department radio formatting (poorly optimized, ugh)
-	if(frequency == SEC_FREQ)
+	if (frequency == SEC_FREQ)
 		return "secradio"
 	if (frequency == ENG_FREQ)
 		return "engradio"
-	if(frequency == SCI_FREQ)
+	if (frequency == SCI_FREQ)
 		return "sciradio"
-	if(frequency == MED_FREQ)
+	if (frequency == MED_FREQ)
 		return "medradio"
-	if(frequency == EXP_FREQ) // exploration
+	if (frequency == EXP_FREQ) // exploration
 		return "EXPradio"
-	if(frequency == SUP_FREQ) // cargo
+	if (frequency == SUP_FREQ) // cargo
 		return "supradio"
-	if(frequency == SRV_FREQ) // service
+	if (frequency == SRV_FREQ) // service
 		return "srvradio"
-	if(frequency == ENT_FREQ) //entertainment
+	if (frequency == ENT_FREQ) //entertainment
 		return "entradio"
-	if(frequency == MED_I_FREQ) // Medical intercom
+	if (frequency == MED_I_FREQ) // Medical intercom
 		return "mediradio"
-	if(frequency == SEC_I_FREQ) // Security intercom
+	if (frequency == SEC_I_FREQ) // Security intercom
 		return "seciradio"
 	if (frequency == HAIL_FREQ) // Hailing frequency
 		return "hailradio"
-	if(frequency in DEPT_FREQS)
+	if (frequency in DEPT_FREQS)
 		return "deptradio"
 
 	// Away site channels
@@ -317,7 +317,7 @@ var/global/datum/controller/radio/radio_controller
 	var/f_text = num2text(new_frequency)
 	var/datum/radio_frequency/frequency = frequencies[f_text]
 
-	if(!frequency)
+	if (!frequency)
 		frequency = new
 		frequency.frequency = new_frequency
 		frequencies[f_text] = frequency
@@ -329,10 +329,10 @@ var/global/datum/controller/radio/radio_controller
 	var/f_text = num2text(old_frequency)
 	var/datum/radio_frequency/frequency = frequencies[f_text]
 
-	if(frequency)
+	if (frequency)
 		frequency.remove_listener(device)
 
-		if(length(frequency.devices) == 0)
+		if (length(frequency.devices) == 0)
 			qdel(frequency)
 			frequencies -= f_text
 
@@ -342,7 +342,7 @@ var/global/datum/controller/radio/radio_controller
 	var/f_text = num2text(new_frequency)
 	var/datum/radio_frequency/frequency = frequencies[f_text]
 
-	if(!frequency)
+	if (!frequency)
 		frequency = new
 		frequency.frequency = new_frequency
 		frequencies[f_text] = frequency
@@ -355,9 +355,9 @@ var/global/datum/controller/radio/radio_controller
 
 /datum/radio_frequency/proc/post_signal(obj/source as obj|null, datum/signal/signal, radio_filter = null as text|null, range = null as num|null)
 	var/turf/start_point
-	if(range)
+	if (range)
 		start_point = get_turf(source)
-		if(!start_point)
+		if (!start_point)
 			qdel(signal)
 			return 0
 	if (radio_filter)
@@ -371,18 +371,18 @@ var/global/datum/controller/radio/radio_controller
 //Sends a signal to all machines belonging to a given filter. Should be called by post_signal()
 /datum/radio_frequency/proc/send_to_filter(obj/source, datum/signal/signal, radio_filter, turf/start_point = null, range = null)
 	var/list/z_levels
-	if(start_point)
+	if (start_point)
 		z_levels = GetConnectedZlevels(start_point.z)
 
 	for(var/obj/device in devices[radio_filter])
-		if(device == source)
+		if (device == source)
 			continue
 		var/turf/end_point = get_turf(device)
-		if(!end_point)
+		if (!end_point)
 			continue
-		if(z_levels && !(end_point.z in z_levels))
+		if (z_levels && !(end_point.z in z_levels))
 			continue
-		if(range && get_dist(start_point, end_point) > range)
+		if (range && get_dist(start_point, end_point) > range)
 			continue
 
 		device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
@@ -432,7 +432,7 @@ var/global/datum/controller/radio/radio_controller
 		. = "signal = {source = '[source]' ()\n"
 	for (var/i in data)
 		. += "data\[\"[i]\"\] = \"[data[i]]\"\n"
-		if(islist(data[i]))
+		if (islist(data[i]))
 			var/list/L = data[i]
 			for(var/t in L)
 				. += "data\[\"[i]\"\] list has: [t]"

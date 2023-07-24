@@ -15,7 +15,7 @@
 		var/datum/gas_mixture/gas_mix = new (CELL_VOLUME, mix_data["temperature"])
 
 		var/list/initial_gas = mix_data["initial_gas"]
-		if(length(initial_gas))
+		if (length(initial_gas))
 			var/list/gas_args = list()
 			for(var/gasid in initial_gas)
 				gas_args += gasid
@@ -54,11 +54,11 @@
 			var/datum/gas_mixture/G = after_gas_mixes[gasmix]
 			after += G.get_gas(gasid)
 
-		if(abs(before - after) > ATMOS_PRECISION)
+		if (abs(before - after) > ATMOS_PRECISION)
 			fail("[case_name]: expected [before] moles of [gasid], found [after] moles.")
 			failed |= TRUE
 
-	if(!failed)
+	if (!failed)
 		pass("[case_name]: conserved moles of each gas ID.")
 
 /datum/unit_test/atmos_machinery/conserve_moles
@@ -276,13 +276,13 @@
 	var/list/bad_pipelines = list()
 	for(var/datum/pipeline/P)
 		for(var/obj/machinery/atmospherics/pipe/pipe in P.members)
-			if(!checked_pipes[pipe])
+			if (!checked_pipes[pipe])
 				checked_pipes[pipe] = P
 				continue
 			LAZYDISTINCTADD(bad_pipelines[P], pipe)
 			LAZYDISTINCTADD(bad_pipelines[checked_pipes[pipe]], pipe) // Missed it the first time; thought it was good.
 
-	if(length(bad_pipelines))
+	if (length(bad_pipelines))
 		for(var/datum/pipeline/badboy in bad_pipelines)
 			var/info = list()
 			for(var/bad_pipe in bad_pipelines[badboy])
@@ -300,15 +300,15 @@
 	var/fail = FALSE
 	for(var/obj/machinery/atmospherics/machine in SSmachines.machinery)
 		for(var/obj/machinery/atmospherics/M in machine.loc)
-			if(M == machine)
+			if (M == machine)
 				continue
-			if(!machine.check_connect_types(M, machine))
+			if (!machine.check_connect_types(M, machine))
 				continue
-			if(M.initialize_directions & machine.initialize_directions)
+			if (M.initialize_directions & machine.initialize_directions)
 				log_bad("[log_info_line(machine)] has conflicting connections.")
 				fail = TRUE
 
-	if(fail)
+	if (fail)
 		fail("Some pipes had conflicting connections.")
 	else
 		pass("All pipes were mapped properly.")

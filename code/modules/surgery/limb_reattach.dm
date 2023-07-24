@@ -14,7 +14,7 @@
 
 /singleton/surgery_step/limb/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(affected)
+	if (affected)
 		return affected
 	else
 		var/list/organ_data = target.species.has_limbs["[target_zone]"]
@@ -38,31 +38,31 @@
 	if ((E.status & ORGAN_CONFIGURE) && E.surgery_configure(user, target, P, tool, src))
 		return
 
-	if(!P || P.is_stump())
+	if (!P || P.is_stump())
 		to_chat(user, SPAN_WARNING("The [E.amputation_point] is missing!"))
-	else if(T && T.is_stump())
+	else if (T && T.is_stump())
 		to_chat(user, SPAN_WARNING("You cannot attach \a [E] when there is a stump!"))
-	else if(T)
+	else if (T)
 		to_chat(user, SPAN_WARNING("There is already \a [E]!"))
-	else if(BP_IS_ROBOTIC(P) && !BP_IS_ROBOTIC(E))
+	else if (BP_IS_ROBOTIC(P) && !BP_IS_ROBOTIC(E))
 		to_chat(user, SPAN_WARNING("You cannot attach a flesh part to a robotic body."))
-	else if(BP_IS_CRYSTAL(P) && !BP_IS_CRYSTAL(E))
+	else if (BP_IS_CRYSTAL(P) && !BP_IS_CRYSTAL(E))
 		to_chat(user, SPAN_WARNING("You cannot attach a flesh part to a crystalline body."))
-	else if(!BP_IS_CRYSTAL(P) && BP_IS_CRYSTAL(E))
+	else if (!BP_IS_CRYSTAL(P) && BP_IS_CRYSTAL(E))
 		to_chat(user, SPAN_WARNING("You cannot attach a crystalline part to a flesh body."))
 	else
 		. = TRUE
 
 /singleton/surgery_step/limb/attach/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/organ/external/tool)
-	if(istype(tool) && BP_IS_ROBOTIC(tool))
-		if(target.isSynthetic())
+	if (istype(tool) && BP_IS_ROBOTIC(tool))
+		if (target.isSynthetic())
 			return SURGERY_SKILLS_ROBOTIC
 		else
 			return SURGERY_SKILLS_ROBOTIC_ON_MEAT
 	return ..()
 
 /singleton/surgery_step/limb/attach/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(..())
+	if (..())
 		var/obj/item/organ/external/E = tool
 		var/obj/item/organ/external/P = target.organs_by_name[E.parent_organ]
 		. = (P && !P.is_stump() && !(BP_IS_ROBOTIC(P) && !BP_IS_ROBOTIC(E)))
@@ -73,7 +73,7 @@
 	"You start attaching [E.name] to [target]'s [E.amputation_point].")
 
 /singleton/surgery_step/limb/attach/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(!user.unEquip(tool))
+	if (!user.unEquip(tool))
 		return
 	var/obj/item/organ/external/E = tool
 	user.visible_message(SPAN_NOTICE("[user] has attached [target]'s [E.name] to the [E.amputation_point]."),	\
@@ -105,15 +105,15 @@
 
 /singleton/surgery_step/limb/connect/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool, target_zone)
 	var/obj/item/organ/external/E = target && target.get_organ(target_zone)
-	if(istype(E) && BP_IS_ROBOTIC(E))
-		if(target.isSynthetic())
+	if (istype(E) && BP_IS_ROBOTIC(E))
+		if (target.isSynthetic())
 			return SURGERY_SKILLS_ROBOTIC
 		else
 			return SURGERY_SKILLS_ROBOTIC_ON_MEAT
 	return ..()
 
 /singleton/surgery_step/limb/connect/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(..())
+	if (..())
 		var/obj/item/organ/external/E = target.get_organ(target_zone)
 		return E && !E.is_stump() && (E.status & ORGAN_CUT_AWAY)
 
@@ -127,7 +127,7 @@
 	user.visible_message(SPAN_NOTICE("[user] has connected tendons and muscles in [target]'s [E.amputation_point] with [tool]."),	\
 	SPAN_NOTICE("You have connected tendons and muscles in [target]'s [E.amputation_point] with [tool]."))
 	E.status &= ~ORGAN_CUT_AWAY
-	if(E.children)
+	if (E.children)
 		for(var/obj/item/organ/external/C in E.children)
 			C.status &= ~ORGAN_CUT_AWAY
 	target.update_body()
@@ -151,13 +151,13 @@
 	max_duration = 100
 
 /singleton/surgery_step/limb/mechanize/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
-	if(target.isSynthetic())
+	if (target.isSynthetic())
 		return SURGERY_SKILLS_ROBOTIC
 	else
 		return SURGERY_SKILLS_ROBOTIC_ON_MEAT
 
 /singleton/surgery_step/limb/mechanize/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(..())
+	if (..())
 		var/obj/item/robot_parts/p = tool
 		if (p.part)
 			if (!(target_zone in p.part))
@@ -173,17 +173,17 @@
 	user.visible_message(SPAN_NOTICE("[user] has attached \the [tool] to [target]."),	\
 	SPAN_NOTICE("You have attached \the [tool] to [target]."))
 
-	if(L.part)
+	if (L.part)
 		for(var/part_name in L.part)
-			if(!isnull(target.get_organ(part_name)))
+			if (!isnull(target.get_organ(part_name)))
 				continue
 			var/list/organ_data = target.species.has_limbs["[part_name]"]
-			if(!organ_data)
+			if (!organ_data)
 				continue
 			var/new_limb_type = organ_data["path"]
 			var/obj/item/organ/external/new_limb = new new_limb_type(target)
 			new_limb.robotize(L.model_info)
-			if(L.sabotaged)
+			if (L.sabotaged)
 				new_limb.status |= ORGAN_SABOTAGED
 
 	target.update_body()

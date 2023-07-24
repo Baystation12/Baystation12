@@ -22,7 +22,7 @@
 
 /obj/structure/closet/secure_closet/guncabinet/on_update_icon()
 	overlays.Cut()
-	if(opened)
+	if (opened)
 		overlays += icon(icon,"door_open")
 	else
 		var/lazors = 0
@@ -33,7 +33,7 @@
 			if (istype(G, /obj/item/gun/projectile))
 				shottas++
 		for (var/i = 0 to 2)
-			if(lazors || shottas) // only make icons if we have one of the two types.
+			if (lazors || shottas) // only make icons if we have one of the two types.
 				var/image/gun = image(icon(src.icon))
 				if (lazors > shottas)
 					lazors--
@@ -46,12 +46,11 @@
 
 		overlays += icon(src.icon, "door")
 
-		if(welded)
+		if (welded)
 			overlays += icon(src.icon,"welded")
 
-		if(!broken)
-			if(locked)
+		if (!broken)
+			if (locked)
 				overlays += icon(src.icon,"locked")
 			else
 				overlays += icon(src.icon,"open")
-

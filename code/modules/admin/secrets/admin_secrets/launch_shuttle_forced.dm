@@ -2,12 +2,12 @@
 	name = "Launch a Shuttle (Forced)"
 
 /datum/admin_secret_item/admin_secret/launch_shuttle_forced/can_execute(mob/user)
-	if(!SSshuttle) return 0
+	if (!SSshuttle) return 0
 	return ..()
 
 /datum/admin_secret_item/admin_secret/launch_shuttle_forced/execute(mob/user)
 	. = ..()
-	if(!.)
+	if (!.)
 		return
 	var/list/valid_shuttles = list()
 	for (var/shuttle_tag in SSshuttle.shuttles)

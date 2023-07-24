@@ -9,7 +9,7 @@
 							//One breaks the egg on hit,
 
 /obj/item/slugegg/throw_impact(atom/hit_atom)
-	if(break_on_impact)
+	if (break_on_impact)
 		squish()
 	else
 		movable_flags |= MOVABLE_FLAG_PROXMOVE //Dont want it active during the throw... loooots of unneeded checking.
@@ -19,14 +19,14 @@
 	squish()
 
 /obj/item/slugegg/HasProximity(atom/movable/AM)
-	if(isliving(AM))
-		if(istype(AM,/mob/living/carbon/human))
+	if (isliving(AM))
+		if (istype(AM,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = AM
-			if(H.species && H.species.get_bodytype() == SPECIES_VOX)
+			if (H.species && H.species.get_bodytype() == SPECIES_VOX)
 				return
 		else
 			var/mob/living/L = AM
-			if(L.faction == SPECIES_VOX)
+			if (L.faction == SPECIES_VOX)
 				return
 		squish()
 
@@ -56,7 +56,7 @@
 
 /obj/item/gun/launcher/alien/slugsling/consume_next_projectile()
 	var/obj/item/slugegg/S = ..()
-	if(S)
+	if (S)
 		S.break_on_impact = (mode == "Impact")
 	return S
 

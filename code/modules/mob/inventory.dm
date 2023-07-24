@@ -88,21 +88,21 @@
 
 /mob/proc/equip_to_storage(obj/item/newitem)
 	// Try put it in their backpack
-	if(istype(src.back,/obj/item/storage))
+	if (istype(src.back,/obj/item/storage))
 		var/obj/item/storage/backpack = src.back
-		if(backpack.can_be_inserted(newitem, src, 1))
+		if (backpack.can_be_inserted(newitem, src, 1))
 			newitem.forceMove(src.back)
 			return backpack
 
 	// Try to place it in any item that can store stuff, on the mob.
 	for(var/obj/item/storage/S in src.contents)
-		if(S.can_be_inserted(newitem, src, 1))
+		if (S.can_be_inserted(newitem, src, 1))
 			newitem.forceMove(S)
 			return S
 
 /mob/proc/equip_to_storage_or_drop(obj/item/newitem)
 	var/stored = equip_to_storage(newitem)
-	if(!stored && newitem)
+	if (!stored && newitem)
 		newitem.dropInto(loc)
 	return stored
 
@@ -112,23 +112,23 @@
 //Returns the thing in our active hand
 /mob/proc/get_active_hand()
 	RETURN_TYPE(/obj/item)
-	if(hand)	return l_hand
+	if (hand)	return l_hand
 	else		return r_hand
 
 //Returns the thing in our inactive hand
 /mob/proc/get_inactive_hand()
-	if(hand)	return r_hand
+	if (hand)	return r_hand
 	else		return l_hand
 
 //Puts the item into your l_hand if possible and calls all necessary triggers/updates. returns 1 on success.
 /mob/proc/put_in_l_hand(obj/item/W)
-	if(lying || !istype(W))
+	if (lying || !istype(W))
 		return 0
 	return 1
 
 //Puts the item into your r_hand if possible and calls all necessary triggers/updates. returns 1 on success.
 /mob/proc/put_in_r_hand(obj/item/W)
-	if(lying || !istype(W))
+	if (lying || !istype(W))
 		return 0
 	return 1
 
@@ -144,7 +144,7 @@
 //If both fail it drops it on the floor and returns 0.
 //This is probably the main one you need to know :)
 /mob/proc/put_in_hands(obj/item/W)
-	if(!W)
+	if (!W)
 		return 0
 	drop_from_inventory(W)
 	return 0
@@ -223,22 +223,22 @@
 // Removes an item from inventory and places it in the target atom.
 // If canremove or other conditions need to be checked then use unEquip instead.
 /mob/proc/drop_from_inventory(obj/item/W, atom/target = null)
-	if(W)
+	if (W)
 		remove_from_mob(W, target)
-		if(!(W && W.loc)) return 1 // self destroying objects (tk, grabs)
+		if (!(W && W.loc)) return 1 // self destroying objects (tk, grabs)
 		update_icons()
 		return 1
 	return 0
 
 //Drops the item in our left hand
 /mob/proc/drop_l_hand(atom/Target, force)
-	if(force)
+	if (force)
 		return drop_from_inventory(l_hand, Target)
 	return unEquip(l_hand, Target)
 
 //Drops the item in our right hand
 /mob/proc/drop_r_hand(atom/Target, force)
-	if(force)
+	if (force)
 		return drop_from_inventory(r_hand, Target)
 	return unEquip(r_hand, Target)
 
@@ -248,7 +248,7 @@
  * Else use unequip_item
  */
 /mob/proc/drop_item(atom/Target)
-	if(hand)	return drop_l_hand(Target, TRUE)
+	if (hand)	return drop_l_hand(Target, TRUE)
 	else		return drop_r_hand(Target, TRUE)
 
 /*
@@ -290,46 +290,46 @@
 
 
 /mob/proc/canUnEquip(obj/item/I)
-	if(!I) //If there's nothing to drop, the drop is automatically successful.
+	if (!I) //If there's nothing to drop, the drop is automatically successful.
 		return 1
 	var/slot = get_inventory_slot(I)
-	if(!slot && !istype(I.loc, /obj/item/rig_module))
+	if (!slot && !istype(I.loc, /obj/item/rig_module))
 		return 1 //already unequipped, so success
 	return I.mob_can_unequip(src, slot)
 
 /mob/proc/get_inventory_slot(obj/item/I)
 	var/slot = 0
 	for(var/s in slot_first to slot_last) //kind of worries me
-		if(get_equipped_item(s) == I)
+		if (get_equipped_item(s) == I)
 			slot = s
 			break
 	return slot
 
 //This differs from remove_from_mob() in that it checks if the item can be unequipped first. Use drop_from_inventory if you don't want to check.
 /mob/proc/unEquip(obj/item/I, atom/target)
-	if(!canUnEquip(I))
+	if (!canUnEquip(I))
 		return
 	drop_from_inventory(I, target)
 	return 1
 
 /mob/proc/unequip_item(atom/target)
-	if(!canUnEquip(get_active_hand()))
+	if (!canUnEquip(get_active_hand()))
 		return
 	drop_item(target)
 	return 1
 
 //Attemps to remove an object on a mob.
 /mob/proc/remove_from_mob(obj/O, atom/target)
-	if(!O) // Nothing to remove, so we succeed.
+	if (!O) // Nothing to remove, so we succeed.
 		return 1
 	src.u_equip(O)
 	if (src.client)
 		src.client.screen -= O
 	O.reset_plane_and_layer()
 	O.screen_loc = null
-	if(istype(O, /obj/item))
+	if (istype(O, /obj/item))
 		var/obj/item/I = O
-		if(target)
+		if (target)
 			I.forceMove(target)
 		else
 			I.dropInto(loc)
@@ -340,20 +340,20 @@
 //Returns the item equipped to the specified slot, if any.
 /mob/proc/get_equipped_item(slot)
 	switch(slot)
-		if(slot_l_hand) return l_hand
-		if(slot_r_hand) return r_hand
-		if(slot_back) return back
-		if(slot_wear_mask) return wear_mask
+		if (slot_l_hand) return l_hand
+		if (slot_r_hand) return r_hand
+		if (slot_back) return back
+		if (slot_wear_mask) return wear_mask
 	return null
 
 /mob/proc/get_equipped_items(include_carried = 0)
 	. = list()
-	if(back)      . += back
-	if(wear_mask) . += wear_mask
+	if (back)      . += back
+	if (wear_mask) . += wear_mask
 
-	if(include_carried)
-		if(l_hand) . += l_hand
-		if(r_hand) . += r_hand
+	if (include_carried)
+		if (l_hand) . += l_hand
+		if (r_hand) . += r_hand
 
 /mob/proc/delete_inventory(include_carried = FALSE)
 	for(var/entry in get_equipped_items(include_carried))
@@ -371,7 +371,7 @@
 /mob/proc/get_covering_equipped_item(body_parts)
 	for(var/entry in get_equipped_items())
 		var/obj/item/I = entry
-		if(I.body_parts_covered & body_parts)
+		if (I.body_parts_covered & body_parts)
 			return I
 
 // Returns all items which covers any given body part
@@ -379,5 +379,5 @@
 	. = list()
 	for(var/entry in get_equipped_items())
 		var/obj/item/I = entry
-		if(I.body_parts_covered & body_parts)
+		if (I.body_parts_covered & body_parts)
 			. += I

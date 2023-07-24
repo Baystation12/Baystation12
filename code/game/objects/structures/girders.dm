@@ -25,7 +25,7 @@
 
 /obj/structure/girder/bullet_act(obj/item/projectile/Proj)
 	//Girders only provide partial cover. There's a chance that the projectiles will just pass through. (unless you are trying to shoot the girder)
-	if(Proj.original != src && !prob(cover))
+	if (Proj.original != src && !prob(cover))
 		return PROJECTILE_CONTINUE //pass through
 	. = ..()
 
@@ -42,7 +42,7 @@
 	state = GIRDER_STATE_NORMAL
 	icon_state = initial(icon_state)
 	reinforcing = 0
-	if(reinf_material)
+	if (reinf_material)
 		reinforce_girder()
 
 
@@ -237,27 +237,27 @@
 
 
 /obj/structure/girder/proc/construct_wall(obj/item/stack/material/S, mob/user)
-	if(S.get_amount() < 2)
+	if (S.get_amount() < 2)
 		to_chat(user, SPAN_NOTICE("There isn't enough material here to construct a wall."))
 		return 0
 
 	var/material/M = SSmaterials.get_material_by_name(S.default_type)
-	if(!istype(M))
+	if (!istype(M))
 		return 0
 
 	var/wall_fake
 	add_hiddenprint(usr)
 
-	if(M.integrity < 50)
+	if (M.integrity < 50)
 		to_chat(user, SPAN_NOTICE("This material is too soft for use in wall construction."))
 		return 0
 
 	to_chat(user, SPAN_NOTICE("You begin adding the plating..."))
 
-	if(!do_after(user,4 SECONDS, src, DO_REPAIR_CONSTRUCT) || !S.use(2))
+	if (!do_after(user,4 SECONDS, src, DO_REPAIR_CONSTRUCT) || !S.use(2))
 		return 1 //once we've gotten this far don't call parent attackby()
 
-	if(anchored)
+	if (anchored)
 		to_chat(user, SPAN_NOTICE("You added the plating!"))
 	else
 		to_chat(user, SPAN_NOTICE("You create a false wall! Push on it to open or close the passage."))
@@ -267,23 +267,23 @@
 	Tsrc.ChangeTurf(/turf/simulated/wall)
 	var/turf/simulated/wall/T = get_turf(src)
 	T.set_material(M, reinf_material)
-	if(wall_fake)
+	if (wall_fake)
 		T.can_open = 1
 	T.add_hiddenprint(usr)
 	qdel(src)
 	return 1
 
 /obj/structure/girder/proc/reinforce_with_material(obj/item/stack/material/S, mob/user) //if the verb is removed this can be renamed.
-	if(reinf_material)
+	if (reinf_material)
 		to_chat(user, SPAN_NOTICE("\The [src] is already reinforced."))
 		return 0
 
-	if(S.get_amount() < 2)
+	if (S.get_amount() < 2)
 		to_chat(user, SPAN_NOTICE("There isn't enough material here to reinforce the girder."))
 		return 0
 
 	var/material/M = S.material
-	if(!istype(M) || M.integrity < 50)
+	if (!istype(M) || M.integrity < 50)
 		to_chat(user, "You cannot reinforce \the [src] with that; it is too soft.")
 		return 0
 

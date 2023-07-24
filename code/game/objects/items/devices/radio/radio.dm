@@ -51,13 +51,13 @@
 /obj/item/device/radio/Initialize()
 	. = ..()
 	wires = new(src)
-	if(ispath(cell))
+	if (ispath(cell))
 		cell = new cell(src)
 		on = FALSE // start powered off
 	internal_channels = GLOB.using_map.default_internal_channels()
 	GLOB.listening_objects += src
 
-	if(frequency < RADIO_LOW_FREQ || frequency > RADIO_HIGH_FREQ)
+	if (frequency < RADIO_LOW_FREQ || frequency > RADIO_HIGH_FREQ)
 		frequency = sanitize_frequency(frequency, RADIO_LOW_FREQ, RADIO_HIGH_FREQ)
 	set_frequency(frequency)
 	if (!default_frequency)
@@ -67,13 +67,13 @@
 		secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
 
 /obj/item/device/radio/Process()
-	if(power_usage && on) //radio will use power and is on
+	if (power_usage && on) //radio will use power and is on
 		var/obj/item/cell/has_cell = get_cell()
-		if(!has_cell) // No cell
+		if (!has_cell) // No cell
 			on = FALSE
 			STOP_PROCESSING(SSobj, src)
 			return FALSE
-		if(!has_cell.checked_use(power_usage * CELLRATE)) // Use power and display if we run out.
+		if (!has_cell.checked_use(power_usage * CELLRATE)) // Use power and display if we run out.
 			on = FALSE
 			STOP_PROCESSING(SSobj, src)
 			visible_message(SPAN_WARNING("[icon2html(src, viewers(src))] [src] lets out a quiet click as it powers down."), SPAN_WARNING("You hear \a [src] let out a quiet click."))
@@ -84,11 +84,11 @@
 /obj/item/device/radio/Destroy()
 	QDEL_NULL(wires)
 	GLOB.listening_objects -= src
-	if(radio_controller)
+	if (radio_controller)
 		radio_controller.remove_object(src, frequency)
 		for (var/ch_name in channels)
 			radio_controller.remove_object(src, radiochannels[ch_name])
-	if(get_cell())
+	if (get_cell())
 		STOP_PROCESSING(SSobj, src)
 	return ..()
 
@@ -97,10 +97,10 @@
 	interact(user)
 
 /obj/item/device/radio/interact(mob/user)
-	if(!user)
+	if (!user)
 		return 0
 
-	if(b_stat)
+	if (b_stat)
 		wires.Interact(user)
 
 	else
@@ -116,22 +116,22 @@
 	data["default_freq"] = format_frequency(default_frequency)
 	data["rawfreq"] = num2text(frequency)
 	var/obj/item/cell/has_cell = get_cell()
-	if(has_cell)
+	if (has_cell)
 		var/charge = round(has_cell.percent())
 		data["charge"] = charge ? "[charge]%" : "NONE"
 	data["mic_cut"] = (wires.IsIndexCut(WIRE_TRANSMIT) || wires.IsIndexCut(WIRE_SIGNAL))
 	data["spk_cut"] = (wires.IsIndexCut(WIRE_RECEIVE) || wires.IsIndexCut(WIRE_SIGNAL))
 
 	var/list/chanlist = list_channels(user)
-	if(islist(chanlist) && length(chanlist))
+	if (islist(chanlist) && length(chanlist))
 		data["chan_list"] = chanlist
 		data["chan_list_len"] = length(chanlist)
 
-	if(syndie)
+	if (syndie)
 		data["useSyndMode"] = 1
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		ui = new(user, src, ui_key, "radio_basic.tmpl", "[name]", 400, 430, state = state)
 		ui.set_initial_data(data)
 		ui.open()
@@ -153,16 +153,16 @@
 /obj/item/device/radio/proc/list_internal_channels(mob/user)
 	var/dat[0]
 	for(var/internal_chan in internal_channels)
-		if(has_channel_access(user, internal_chan))
+		if (has_channel_access(user, internal_chan))
 			dat.Add(list(list("chan" = internal_chan, "display_name" = get_frequency_default_name(text2num(internal_chan)), "chan_span" = frequency_span_class(text2num(internal_chan)))))
 
 	return dat
 
 /obj/item/device/radio/proc/has_channel_access(mob/user, freq)
-	if(!user)
+	if (!user)
 		return 0
 
-	if(!(freq in internal_channels))
+	if (!(freq in internal_channels))
 		return 0
 
 	return user.has_internal_radio_channel_access(internal_channels[freq])
@@ -198,35 +198,35 @@
 	listening = !listening && !(wires.IsIndexCut(WIRE_RECEIVE) || wires.IsIndexCut(WIRE_SIGNAL))
 
 /obj/item/device/radio/proc/TogglePower()
-	if(!power_usage)
+	if (!power_usage)
 		return FALSE //Can't toggle power if there's no power to use
 	var/obj/item/cell/has_cell = get_cell()
-	if(!has_cell || !has_cell.check_charge(power_usage * CELLRATE)) // No cell or not enough power to turn on
+	if (!has_cell || !has_cell.check_charge(power_usage * CELLRATE)) // No cell or not enough power to turn on
 		return FALSE
 
 	//We're good to toggle state
 	on = !on
-	if(on)
-		if(ismob(src.loc))
+	if (on)
+		if (ismob(src.loc))
 			playsound(src.loc, 'sound/effects/walkieon.ogg', 40, 0, -1)
 		START_PROCESSING(SSobj, src)
 	else
 		STOP_PROCESSING(SSobj, src)
 
 /obj/item/device/radio/CanUseTopic()
-	if(!on && !get_cell()) // We need to still be able to use the topic if we use power
+	if (!on && !get_cell()) // We need to still be able to use the topic if we use power
 		return STATUS_CLOSE
 	return ..()
 
 /obj/item/device/radio/Topic(href, href_list)
-	if(..())
+	if (..())
 		return TRUE
 
 	usr.set_machine(src)
 	if (href_list["track"])
 		var/mob/target = locate(href_list["track"])
 		var/mob/living/silicon/ai/A = locate(href_list["track2"])
-		if(A && target)
+		if (A && target)
 			A.ai_actual_track(target)
 		. = TRUE
 
@@ -235,14 +235,14 @@
 		if ((new_frequency < PUBLIC_LOW_FREQ || new_frequency > PUBLIC_HIGH_FREQ))
 			new_frequency = sanitize_frequency(new_frequency)
 		set_frequency(new_frequency)
-		if(hidden_uplink)
-			if(hidden_uplink.check_trigger(usr, frequency, traitor_frequency))
+		if (hidden_uplink)
+			if (hidden_uplink.check_trigger(usr, frequency, traitor_frequency))
 				close_browser(usr, "window=radio")
 		. = TRUE
 	else if (href_list["default_freq"])
 		reset_frequency()
-		if(hidden_uplink)
-			if(hidden_uplink.check_trigger(usr, frequency, traitor_frequency))
+		if (hidden_uplink)
+			if (hidden_uplink.check_trigger(usr, frequency, traitor_frequency))
 				close_browser(usr, "window=radio")
 		. = TRUE
 	else if (href_list["power"])
@@ -261,28 +261,28 @@
 			else
 				channels[chan_name] |= FREQ_LISTENING
 		. = TRUE
-	else if(href_list["spec_freq"])
+	else if (href_list["spec_freq"])
 		var freq = href_list["spec_freq"]
-		if(has_channel_access(usr, freq))
+		if (has_channel_access(usr, freq))
 			set_frequency(text2num(freq))
 		. = TRUE
-	if(href_list["nowindow"]) // here for pAIs, maybe others will want it, idk
+	if (href_list["nowindow"]) // here for pAIs, maybe others will want it, idk
 		return TRUE
 
-	if(href_list["remove_cell"])
-		if(cell && b_stat)
+	if (href_list["remove_cell"])
+		if (cell && b_stat)
 			var/mob/user = usr
 			user.put_in_hands(cell)
 			to_chat(user, SPAN_NOTICE("You remove [cell] from \the [src]."))
 			cell = null
 		return TRUE
 
-	if(.)
+	if (.)
 		SSnano.update_uis(src)
 
 /obj/item/device/radio/proc/autosay(message, from, channel) //BS12 EDIT
 	var/datum/radio_frequency/connection = null
-	if(channel && channels && length(channels) > 0)
+	if (channel && channels && length(channels) > 0)
 		if (channel == "department")
 			channel = channels[1]
 		connection = secure_radio_connections[channel]
@@ -299,11 +299,11 @@
 // Interprets the message mode when talking into a radio, possibly returning a connection datum
 /obj/item/device/radio/proc/handle_message_mode(mob/living/M as mob, message, message_mode)
 	// If a channel isn't specified, send to common.
-	if(!message_mode || message_mode == "headset")
+	if (!message_mode || message_mode == "headset")
 		return radio_connection
 
 	// Otherwise, if a channel is specified, look for it.
-	if(channels && length(channels) > 0)
+	if (channels && length(channels) > 0)
 		if (message_mode == "department") // Department radio shortcut
 			message_mode = channels[1]
 
@@ -314,11 +314,11 @@
 	return null
 
 /obj/item/device/radio/talk_into(mob/living/M, message, channel, verb = "says", datum/language/speaking = null)
-	if(!on) return 0 // the device has to be on
+	if (!on) return 0 // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
-	if(!M || !message) return 0
+	if (!M || !message) return 0
 
-	if(speaking && (speaking.flags & (NONVERBAL|SIGNLANG))) return 0
+	if (speaking && (speaking.flags & (NONVERBAL|SIGNLANG))) return 0
 
 	if (!broadcasting)
 		// Sedation chemical effect should prevent radio use (Chloral and Soporific)
@@ -327,21 +327,21 @@
 			to_chat(M, SPAN_WARNING("You're unable to reach \the [src]."))
 			return 0
 
-		if((istype(C)) && C.radio_interrupt_cooldown > world.time)
+		if ((istype(C)) && C.radio_interrupt_cooldown > world.time)
 			to_chat(M, SPAN_WARNING("You're disrupted as you reach for \the [src]."))
 			return 0
 
-		if(istype(M)) M.trigger_aiming(TARGET_CAN_RADIO)
+		if (istype(M)) M.trigger_aiming(TARGET_CAN_RADIO)
 
 	//  Uncommenting this. To the above comment:
 	// 	The permacell radios aren't suppose to be able to transmit, this isn't a bug and this "fix" is just making radio wires useless. -Giacom
-	if(wires.IsIndexCut(WIRE_TRANSMIT)) // The device has to have all its wires and shit intact
+	if (wires.IsIndexCut(WIRE_TRANSMIT)) // The device has to have all its wires and shit intact
 		return 0
 
-	if(!radio_connection)
+	if (!radio_connection)
 		set_frequency(frequency)
 
-	if(loc == M)
+	if (loc == M)
 		playsound(loc, 'sound/effects/walkietalkie.ogg', 20, 0, -1)
 
 
@@ -370,7 +370,7 @@
 	var/real_name = M.real_name // mob's real name
 	var/mobkey = "none" // player key associated with mob
 	var/voicemask = 0 // the speaker is wearing a voice mask
-	if(M.client)
+	if (M.client)
 		mobkey = M.key // assign the mob's key
 
 
@@ -413,7 +413,7 @@
 
 
   /* ###### Radio headsets can only broadcast through subspace ###### */
-	if(subspace_transmission)
+	if (subspace_transmission)
 		// First, we want to generate a new radio signal
 		var/datum/signal/signal = new
 		signal.transmission_method = 2 // 2 would be a subspace transmission.
@@ -463,12 +463,12 @@
 			R.receive_signal(signal)
 
 		// Receiving code can be located in Telecommunications.dm
-		if(signal.data["done"] && (position.z in signal.data["level"]))
+		if (signal.data["done"] && (position.z in signal.data["level"]))
 			return TRUE //Huzzah, sent via subspace
 
 		else //Less huzzah, we have to fallback
 			for(var/obj/item/device/radio/R in loc)
-				if(!R.subspace_transmission)
+				if (!R.subspace_transmission)
 					return R.talk_into(M, message, channel, verb, speaking)
 			return FALSE
 
@@ -477,7 +477,7 @@
 	var/filter_type = 2
 
 	/* --- Intercoms can only broadcast to other intercoms, but bounced radios can broadcast to bounced radios and intercoms --- */
-	if(istype(src, /obj/item/device/radio/intercom))
+	if (istype(src, /obj/item/device/radio/intercom))
 		filter_type = 1
 
 
@@ -516,14 +516,14 @@
 	)
 	signal.frequency = connection.frequency // Quick frequency set
 	var/obj/item/cell/has_cell = get_cell()
-	if(has_cell && has_cell.percent() < 20)
+	if (has_cell && has_cell.percent() < 20)
 		signal.data["compression"] = max(0, 80 - has_cell.percent()*3)
 	for(var/obj/machinery/telecomms/receiver/R in telecomms_list)
 		R.receive_signal(signal)
 
 	sleep(rand(10,25)) // wait a little...
 
-	if(signal.data["done"] && (position.z in signal.data["level"]))
+	if (signal.data["done"] && (position.z in signal.data["level"]))
 		// we're done here.
 		return 1
 
@@ -531,7 +531,7 @@
 	// Send a mundane broadcast with limited targets:
 
 	//THIS IS TEMPORARY. YEAH RIGHT
-	if(!connection)	return 0	//~Carn
+	if (!connection)	return 0	//~Carn
 	return Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 					  src, message, displayname, jobname, real_name, M.voice_name,
 					  filter_type, signal.data["compression"], GetConnectedZlevels(position.z), connection.frequency, verb, speaking,
@@ -541,7 +541,7 @@
 /obj/item/device/radio/hear_talk(mob/M as mob, msg, verb = "says", datum/language/speaking = null)
 
 	if (broadcasting)
-		if(get_dist(src, M) <= canhear_range)
+		if (get_dist(src, M) <= canhear_range)
 			talk_into(M, msg,null,verb,speaking)
 
 
@@ -553,14 +553,14 @@
 		return -1
 	if (wires.IsIndexCut(WIRE_RECEIVE))
 		return -1
-	if(!listening)
+	if (!listening)
 		return -1
-	if(!(0 in level))
+	if (!(0 in level))
 		var/turf/position = get_turf(src)
-		if(!position || !(position.z in level))
+		if (!position || !(position.z in level))
 			return -1
-	if(freq in ANTAG_FREQS)
-		if(!(src.syndie))//Checks to see if it's allowed on that frequency, based on the encryption keys
+	if (freq in ANTAG_FREQS)
+		if (!(src.syndie))//Checks to see if it's allowed on that frequency, based on the encryption keys
 			return -1
 	if (!on)
 		return -1
@@ -582,7 +582,7 @@
 /obj/item/device/radio/proc/send_hear(freq, level)
 
 	var/range = receive_range(freq, level)
-	if(range > -1)
+	if (range > -1)
 		return get_mobs_or_objects_in_view(canhear_range, src)
 
 
@@ -633,7 +633,7 @@
 	listening = prob(50)
 	for (var/ch_name in channels)
 		channels[ch_name] = prob(50)
-	if(cell)
+	if (cell)
 		cell.emp_act(severity)
 	..()
 
@@ -663,10 +663,10 @@
 	keyslot = /obj/item/device/encryptionkey/syndicate
 
 /obj/item/device/radio/borg/New(mob/living/silicon/robot/loc)
-	if(!istype(loc))
+	if (!istype(loc))
 		CRASH("Invalid spawn location: [log_info_line(loc)]")
 	..()
-	if(keyslot)
+	if (keyslot)
 		keyslot = new keyslot(src)
 	myborg = loc
 
@@ -738,51 +738,51 @@
 	src.syndie = 0
 
 	var/mob/living/silicon/robot/D = src.loc
-	if(istype(D.module))
+	if (istype(D.module))
 		for(var/ch_name in D.module.channels)
-			if(ch_name in src.channels)
+			if (ch_name in src.channels)
 				continue
 			src.channels += ch_name
 			src.channels[ch_name] += D.module.channels[ch_name]
-	if(keyslot)
+	if (keyslot)
 		for(var/ch_name in keyslot.channels)
-			if(ch_name in src.channels)
+			if (ch_name in src.channels)
 				continue
 			src.channels += ch_name
 			src.channels[ch_name] += keyslot.channels[ch_name]
 
-		if(keyslot.syndie)
+		if (keyslot.syndie)
 			src.syndie = 1
 
 	for (var/ch_name in src.channels)
-		if(!radio_controller)
+		if (!radio_controller)
 			src.SetName("broken radio")
 			return
 
 		secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
 
 /obj/item/device/radio/borg/Topic(href, href_list)
-	if(..())
+	if (..())
 		return 1
 	if (href_list["mode"])
 		var/enable_subspace_transmission = text2num(href_list["mode"])
-		if(enable_subspace_transmission != subspace_transmission)
+		if (enable_subspace_transmission != subspace_transmission)
 			subspace_transmission = !subspace_transmission
-			if(subspace_transmission)
+			if (subspace_transmission)
 				to_chat(usr, SPAN_NOTICE("Subspace Transmission is enabled"))
 			else
 				to_chat(usr, SPAN_NOTICE("Subspace Transmission is disabled"))
 
-			if(subspace_transmission == 0)//Simple as fuck, clears the channel list to prevent talking/listening over them if subspace transmission is disabled
+			if (subspace_transmission == 0)//Simple as fuck, clears the channel list to prevent talking/listening over them if subspace transmission is disabled
 				channels = list()
 			else
 				recalculateChannels()
 		. = 1
 	if (href_list["shutup"]) // Toggle loudspeaker mode, AKA everyone around you hearing your radio.
 		var/do_shut_up = text2num(href_list["shutup"])
-		if(do_shut_up != shut_up)
+		if (do_shut_up != shut_up)
 			shut_up = !shut_up
-			if(shut_up)
+			if (shut_up)
 				canhear_range = 0
 				to_chat(usr, SPAN_NOTICE("Loadspeaker disabled."))
 			else
@@ -790,11 +790,11 @@
 				to_chat(usr, SPAN_NOTICE("Loadspeaker enabled."))
 		. = 1
 
-	if(.)
+	if (.)
 		SSnano.update_uis(src)
 
 /obj/item/device/radio/borg/interact(mob/user as mob)
-	if(!on)
+	if (!on)
 		return
 
 	. = ..()
@@ -808,11 +808,11 @@
 	data["rawfreq"] = num2text(frequency)
 
 	var/list/chanlist = list_channels(user)
-	if(islist(chanlist) && length(chanlist))
+	if (islist(chanlist) && length(chanlist))
 		data["chan_list"] = chanlist
 		data["chan_list_len"] = length(chanlist)
 
-	if(syndie)
+	if (syndie)
 		data["useSyndMode"] = 1
 
 	data["has_loudspeaker"] = 1
@@ -821,18 +821,18 @@
 	data["subspace"] = subspace_transmission
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		ui = new(user, src, ui_key, "radio_basic.tmpl", "[name]", 400, 430)
 		ui.set_initial_data(data)
 		ui.open()
 
 /obj/item/device/radio/proc/config(op)
-	if(radio_controller)
+	if (radio_controller)
 		for (var/ch_name in channels)
 			radio_controller.remove_object(src, radiochannels[ch_name])
 	secure_radio_connections = new
 	channels = op
-	if(radio_controller)
+	if (radio_controller)
 		for (var/ch_name in op)
 			secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
 	return
@@ -906,7 +906,7 @@
 
 /obj/item/device/radio/CouldUseTopic(mob/user)
 	..()
-	if(istype(user, /mob/living/carbon))
+	if (istype(user, /mob/living/carbon))
 		playsound(src, "button", 10)
 
 /obj/item/device/radio/intercept
@@ -926,20 +926,20 @@
 
 /obj/item/device/radio/exosuit/get_cell()
 	. = ..()
-	if(!.)
+	if (!.)
 		var/mob/living/exosuit/E = loc
-		if(istype(E))
+		if (istype(E))
 			return E.get_cell()
 
 /obj/item/device/radio/exosuit/nano_host()
 	var/mob/living/exosuit/E = loc
-	if(istype(E))
+	if (istype(E))
 		return E
 	return null
 
 /obj/item/device/radio/exosuit/attack_self(mob/user)
 	var/mob/living/exosuit/exosuit = loc
-	if(istype(exosuit) && exosuit.head && exosuit.head.radio && exosuit.head.radio.is_functional())
+	if (istype(exosuit) && exosuit.head && exosuit.head.radio && exosuit.head.radio.is_functional())
 		user.set_machine(src)
 		interact(user)
 	else
@@ -947,9 +947,9 @@
 
 /obj/item/device/radio/exosuit/CanUseTopic()
 	. = ..()
-	if(.)
+	if (.)
 		var/mob/living/exosuit/exosuit = loc
-		if(istype(exosuit) && exosuit.head && exosuit.head.radio && exosuit.head.radio.is_functional())
+		if (istype(exosuit) && exosuit.head && exosuit.head.radio && exosuit.head.radio.is_functional())
 			return ..()
 
 /obj/item/device/radio/exosuit/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/nanoui/master_ui = null, datum/topic_state/state = GLOB.mech_state)

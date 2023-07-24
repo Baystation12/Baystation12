@@ -8,13 +8,13 @@
 		try_teleport(user, get_turf(holder))
 
 /datum/artifact_effect/teleport/DoEffectAura()
-	if(holder)
+	if (holder)
 		var/turf/T = get_turf(holder)
 		for (var/mob/living/M in range(src.effectrange,T))
 			try_teleport(M, T)
 
 /datum/artifact_effect/teleport/DoEffectPulse()
-	if(holder)
+	if (holder)
 		var/turf/T = get_turf(holder)
 		for (var/mob/living/M in range(src.effectrange, T))
 			try_teleport(M, T)
@@ -24,7 +24,7 @@
 		return
 
 	var/weakness = GetAnomalySusceptibility(M)
-	if(prob(100 * weakness))
+	if (prob(100 * weakness))
 		to_chat(M, SPAN_WARNING("You feel strange and tingly as some sort of force gathers around you!"))
 		teleporting += M
 		spawn(rand(50, 100))

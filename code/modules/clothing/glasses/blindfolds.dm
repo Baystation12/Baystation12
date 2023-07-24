@@ -19,9 +19,9 @@
 
 /obj/item/clothing/glasses/blindfold/attack_self()
 	. =..()
-	if(!.)
+	if (!.)
 		return
-	if(active)
+	if (active)
 		flags_inv &= ~HIDEEYES
 		body_parts_covered &= ~EYES
 	else

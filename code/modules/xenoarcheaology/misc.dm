@@ -18,11 +18,11 @@
 
 /obj/structure/closet/secure_closet/xenoarchaeologist/New()
 	..()
-	if(prob(50))
+	if (prob(50))
 		new /obj/item/storage/backpack/corpsci(src)
 	else
 		new /obj/item/storage/backpack/satchel/corpsci(src)
-	if(prob(50))
+	if (prob(50))
 		new /obj/item/storage/backpack/dufflebag(src)
 	new /obj/item/clothing/under/rank/scientist(src)
 	new /obj/item/clothing/suit/storage/toggle/labcoat(src)

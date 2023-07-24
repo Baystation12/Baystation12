@@ -17,7 +17,7 @@
 /obj/item/aicard/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.inventory_state)
 	var/data[0]
 	data["has_ai"] = carded_ai != null
-	if(carded_ai)
+	if (carded_ai)
 		data["name"] = carded_ai.name
 		data["hardware_integrity"] = carded_ai.hardware_integrity()
 		data["backup_capacitor"] = carded_ai.backup_capacitor()
@@ -40,16 +40,16 @@
 		ui.set_auto_update(1)
 
 /obj/item/aicard/Topic(href, href_list, state)
-	if(..())
+	if (..())
 		return 1
 
-	if(!carded_ai)
+	if (!carded_ai)
 		return 1
 
 	var/user = usr
 	if (href_list["wipe"])
 		var/confirm = alert("Are you sure you want to wipe this card's memory? This cannot be undone once started.", "Confirm Wipe", "Yes", "No")
-		if(confirm == "Yes" && (CanUseTopic(user, state) == STATUS_INTERACTIVE))
+		if (confirm == "Yes" && (CanUseTopic(user, state) == STATUS_INTERACTIVE))
 			admin_attack_log(user, carded_ai, "Wiped using \the [src.name]", "Was wiped with \the [src.name]", "used \the [src.name] to wipe")
 			flush = 1
 			to_chat(carded_ai, "Your core files are being wiped!")
@@ -71,10 +71,10 @@
 
 /obj/item/aicard/on_update_icon()
 	overlays.Cut()
-	if(carded_ai)
+	if (carded_ai)
 		if (!carded_ai.control_disabled)
 			overlays += image('icons/obj/pda.dmi', "aicard-on")
-		if(carded_ai.stat)
+		if (carded_ai.stat)
 			icon_state = "aicard-404"
 		else
 			icon_state = "aicard-full"
@@ -82,19 +82,19 @@
 		icon_state = "aicard"
 
 /obj/item/aicard/proc/grab_ai(mob/living/silicon/ai/ai, mob/living/user)
-	if(!ai.client)
+	if (!ai.client)
 		to_chat(user, "[SPAN_DANGER("ERROR:")] AI [ai.name] is offline. Unable to download.")
 		return 0
 
-	if(carded_ai)
+	if (carded_ai)
 		to_chat(user, "[SPAN_DANGER("Transfer failed:")] Existing AI found on remote terminal. Remove existing AI to install a new one.")
 		return 0
 
-	if(ai.malfunctioning && ai.uncardable)
+	if (ai.malfunctioning && ai.uncardable)
 		to_chat(user, "[SPAN_DANGER("ERROR:")] Remote transfer interface disabled.")
 		return 0
 
-	if(isturf(ai.loc))
+	if (isturf(ai.loc))
 		new /obj/structure/AIcore/deactivated(get_turf(ai))
 
 	ai.carded = 1
@@ -109,16 +109,16 @@
 	ai.calculate_power_usage()
 	carded_ai = ai
 
-	if(ai.client)
+	if (ai.client)
 		to_chat(ai, "You have been downloaded to a mobile storage device. Remote access lost.")
-	if(user.client)
+	if (user.client)
 		to_chat(user, "[SPAN_NOTICE("<b>Transfer successful:</b>")] [ai.name] ([rand(1000,9999)].exe) removed from host terminal and stored within local memory.")
 
 	update_icon()
 	return 1
 
 /obj/item/aicard/proc/clear()
-	if(carded_ai && istype(carded_ai.loc, /turf))
+	if (carded_ai && istype(carded_ai.loc, /turf))
 		carded_ai.carded = 0
 	SetName(initial(name))
 	carded_ai.calculate_power_usage()
@@ -126,20 +126,20 @@
 	update_icon()
 
 /obj/item/aicard/see_emote(mob/living/M, text)
-	if(carded_ai && carded_ai.client)
+	if (carded_ai && carded_ai.client)
 		var/rendered = SPAN_CLASS("message", "[text]")
 		carded_ai.show_message(rendered, 2)
 	..()
 
 /obj/item/aicard/show_message(msg, type, alt, alt_type)
-	if(carded_ai && carded_ai.client)
+	if (carded_ai && carded_ai.client)
 		var/rendered = SPAN_CLASS("message", "[msg]")
 		carded_ai.show_message(rendered, type)
 	..()
 
 /obj/item/aicard/relaymove(mob/user, direction)
-	if(user.stat || user.stunned)
+	if (user.stat || user.stunned)
 		return
 	var/obj/item/rig/rig = src.get_rig()
-	if(istype(rig))
+	if (istype(rig))
 		rig.forced_move(direction, user)

@@ -7,7 +7,7 @@ var/global/datum/robolimb/basic_robolimb
 	for(var/limb_type in typesof(/datum/robolimb))
 		var/datum/robolimb/R = new limb_type()
 		all_robolimbs[R.company] = R
-		if(!R.unavailable_at_chargen)
+		if (!R.unavailable_at_chargen)
 			chargen_robolimbs[R.company] = R
 
 

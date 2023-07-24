@@ -1,14 +1,14 @@
 /turf/proc/ReplaceWithLattice(material)
 	var base_turf = get_base_turf_by_area(src, TRUE)
-	if(type != base_turf)
+	if (type != base_turf)
 		src.ChangeTurf(get_base_turf_by_area(src, TRUE))
-	if(!locate(/obj/structure/lattice) in src)
+	if (!locate(/obj/structure/lattice) in src)
 		new /obj/structure/lattice(src, material)
 
 // Removes all signs of lattice on the pos of the turf -Donkieyo
 /turf/proc/RemoveLattice()
 	var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-	if(L)
+	if (L)
 		qdel(L)
 // Called after turf replaces old one
 /turf/proc/post_change()
@@ -21,13 +21,13 @@
 	if (!N)
 		return
 
-	if(isturf(N) && !N.flooded && N.flood_object)
+	if (isturf(N) && !N.flooded && N.flood_object)
 		QDEL_NULL(flood_object)
 
 	// This makes sure that turfs are not changed to space when one side is part of a zone
-	if(N == /turf/space)
+	if (N == /turf/space)
 		var/turf/below = GetBelow(src)
-		if(istype(below) && !istype(below,/turf/space))
+		if (istype(below) && !istype(below,/turf/space))
 			N = /turf/simulated/open
 
 	var/old_density = density
@@ -43,7 +43,7 @@
 	var/old_above = above
 	var/old_permit_ao = permit_ao
 
-	if(isspaceturf(N) || isopenspace(N))
+	if (isspaceturf(N) || isopenspace(N))
 		QDEL_NULL(turf_fire)
 	else
 		old_turf_fire = turf_fire
@@ -52,16 +52,16 @@
 
 	changing_turf = TRUE
 
-	if(connections) connections.erase_all()
+	if (connections) connections.erase_all()
 
 	overlays.Cut()
 	underlays.Cut()
-	if(istype(src,/turf/simulated))
+	if (istype(src,/turf/simulated))
 		//Yeah, we're just going to rebuild the whole thing.
 		//Despite this being called a bunch during explosions,
 		//the zone will only really do heavy lifting once.
 		var/turf/simulated/S = src
-		if(S.zone) S.zone.rebuild()
+		if (S.zone) S.zone.rebuild()
 
 	// Run the Destroy() chain.
 	qdel(src)
@@ -78,16 +78,16 @@
 	if (keep_air)
 		W.air = old_air
 
-	if(ispath(N, /turf/simulated))
-		if(old_hotspot)
+	if (ispath(N, /turf/simulated))
+		if (old_hotspot)
 			hotspot = old_hotspot
 		if (istype(W,/turf/simulated/floor))
 			W.RemoveLattice()
-	else if(hotspot)
+	else if (hotspot)
 		qdel(hotspot)
 
 
-	if(tell_universe)
+	if (tell_universe)
 		GLOB.universe.OnTurfChange(W)
 
 	SSair.mark_for_update(src) //handle the addition of the new turf.
@@ -101,14 +101,14 @@
 	. = W
 
 	W.ao_neighbors = old_ao_neighbors
-	if(lighting_overlays_initialised)
+	if (lighting_overlays_initialised)
 		lighting_overlay = old_lighting_overlay
 		affecting_lights = old_affecting_lights
 		corners = old_corners
-		if((old_opacity != opacity) || (dynamic_lighting != old_dynamic_lighting))
+		if ((old_opacity != opacity) || (dynamic_lighting != old_dynamic_lighting))
 			reconsider_lights()
-		if(dynamic_lighting != old_dynamic_lighting)
-			if(dynamic_lighting)
+		if (dynamic_lighting != old_dynamic_lighting)
+			if (dynamic_lighting)
 				lighting_build_overlay()
 			else
 				lighting_clear_overlay()
@@ -116,47 +116,47 @@
 	for(var/turf/T in RANGE_TURFS(src, 1))
 		T.update_icon()
 
-	if(density != old_density)
+	if (density != old_density)
 		GLOB.density_set_event.raise_event(src, old_density, density)
 
-	if(!density)
+	if (!density)
 		turf_fire = old_turf_fire
-	else if(old_turf_fire)
+	else if (old_turf_fire)
 		QDEL_NULL(old_turf_fire)
 
-	if(density != old_density || permit_ao != old_permit_ao)
+	if (density != old_density || permit_ao != old_permit_ao)
 		regenerate_ao()
 
 	GLOB.turf_changed_event.raise_event(src, old_density, density, old_opacity, opacity)
 	updateVisibility(src, FALSE)
 
 /turf/proc/transport_properties_from(turf/other)
-	if(!istype(other, src.type))
+	if (!istype(other, src.type))
 		return 0
 	src.set_dir(other.dir)
 	src.icon_state = other.icon_state
 	src.icon = other.icon
 	src.overlays = other.overlays.Copy()
 	src.underlays = other.underlays.Copy()
-	if(other.decals)
+	if (other.decals)
 		src.decals = other.decals.Copy()
 		src.update_icon()
 	return 1
 
 //I would name this copy_from() but we remove the other turf from their air zone for some reason
 /turf/simulated/transport_properties_from(turf/simulated/other)
-	if(!..())
+	if (!..())
 		return 0
 
-	if(other.zone)
-		if(!src.air)
+	if (other.zone)
+		if (!src.air)
 			src.make_air()
 		src.air.copy_from(other.zone.air)
 		other.zone.remove(other)
 	return 1
 
 /turf/simulated/wall/transport_properties_from(turf/simulated/wall/other)
-	if(!..())
+	if (!..())
 		return 0
 	paint_color = other.paint_color
 	return 1

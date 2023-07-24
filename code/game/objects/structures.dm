@@ -27,14 +27,14 @@
 /obj/structure/Destroy()
 	reset_mobs_offset()
 	var/turf/T = get_turf(src)
-	if(T && parts)
+	if (T && parts)
 		new parts(T)
 	. = ..()
-	if(istype(T))
+	if (istype(T))
 		T.fluid_update()
 
 /obj/structure/Crossed(mob/living/M)
-	if(istype(M))
+	if (istype(M))
 		M.on_structure_offset(mob_offset)
 	..()
 
@@ -44,12 +44,12 @@
 
 /obj/structure/Initialize()
 	. = ..()
-	if(!CanFluidPass())
+	if (!CanFluidPass())
 		fluid_update()
 
 /obj/structure/Move()
 	. = ..()
-	if(. && !CanFluidPass())
+	if (. && !CanFluidPass())
 		fluid_update()
 
 
@@ -64,18 +64,18 @@
 
 /obj/structure/attack_hand(mob/user)
 	..()
-	if(MUTATION_FERAL in user.mutations)
+	if (MUTATION_FERAL in user.mutations)
 		attack_generic(user,10,"smashes")
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2)
 		attack_animation(user)
 		playsound(loc, 'sound/weapons/tablehit1.ogg', 40, 1)
-	if(breakable)
-		if(MUTATION_HULK in user.mutations)
+	if (breakable)
+		if (MUTATION_HULK in user.mutations)
 			user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 			attack_generic(user,1,"smashes")
-		else if(istype(user,/mob/living/carbon/human))
+		else if (istype(user,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user
-			if(H.species.can_shred(user))
+			if (H.species.can_shred(user))
 				attack_generic(user,1,"slices")
 	return ..()
 
@@ -152,14 +152,14 @@
 	var/list/other_dirs = list()
 
 	for(var/obj/structure/S in orange(src, 1))
-		if(can_visually_connect_to(S))
-			if(S.can_visually_connect())
-				if(propagate)
+		if (can_visually_connect_to(S))
+			if (S.can_visually_connect())
+				if (propagate)
 					S.update_connections()
 					S.update_icon()
 				dirs += get_dir(src, S)
 
-	if(!can_visually_connect())
+	if (!can_visually_connect())
 		connections = list("0", "0", "0", "0")
 		other_connections = list("0", "0", "0", "0")
 		return FALSE
@@ -168,34 +168,34 @@
 		var/turf/T = get_step(src, direction)
 		var/success = 0
 		for(var/b_type in blend_objects)
-			if(istype(T, b_type))
+			if (istype(T, b_type))
 				success = 1
-				if(propagate)
+				if (propagate)
 					var/turf/simulated/wall/W = T
-					if(istype(W))
+					if (istype(W))
 						W.update_connections(1)
-				if(success)
+				if (success)
 					break
-			if(success)
+			if (success)
 				break
-		if(!success)
+		if (!success)
 			for(var/obj/O in T)
 				for(var/b_type in blend_objects)
-					if(istype(O, b_type))
+					if (istype(O, b_type))
 						success = 1
 						for(var/obj/structure/S in T)
-							if(can_visually_connect_to(S))
+							if (can_visually_connect_to(S))
 								success = 0
 						for(var/nb_type in noblend_objects)
-							if(istype(O, nb_type))
+							if (istype(O, nb_type))
 								success = 0
 
-					if(success)
+					if (success)
 						break
-				if(success)
+				if (success)
 					break
 
-		if(success)
+		if (success)
 			dirs += get_dir(src, T)
 			other_dirs += get_dir(src, T)
 

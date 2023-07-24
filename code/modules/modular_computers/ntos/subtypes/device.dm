@@ -16,7 +16,7 @@
 /datum/extension/interactive/ntos/device/recalc_power_usage()
 	var/obj/item/modular_computer/C = holder
 	C.handle_power()
-	
+
 /datum/extension/interactive/ntos/device/emagged()
 	var/obj/item/modular_computer/C = holder
 	return C.computer_emagged
@@ -34,7 +34,7 @@
 /datum/extension/interactive/ntos/device/extension_act(href, href_list, user)
 	. = ..()
 	var/obj/item/modular_computer/C = holder
-	if(istype(C) && LAZYLEN(C.interact_sounds) && CanPhysicallyInteractWith(user, C))
+	if (istype(C) && LAZYLEN(C.interact_sounds) && CanPhysicallyInteractWith(user, C))
 		playsound(C, pick(C.interact_sounds), 40)
 
 // Hack to make status bar work
@@ -42,12 +42,12 @@
 /obj/item/modular_computer/initial_data()
 	. = ..()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
+	if (os)
 		. += os.get_header_data()
 
 /obj/item/modular_computer/check_eye()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
+	if (os)
 		return os.check_eye()
-	else 
+	else
 		return ..()

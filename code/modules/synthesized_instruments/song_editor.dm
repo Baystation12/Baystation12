@@ -58,34 +58,34 @@
 		return 0
 
 	switch (target)
-		if("newline")
+		if ("newline")
 			var/newline = html_encode(input(usr, "Enter your line: ") as text|null)
-			if(!newline)
+			if (!newline)
 				return
-			if(length(src.song.lines) > GLOB.musical_config.max_lines)
+			if (length(src.song.lines) > GLOB.musical_config.max_lines)
 				return
-			if(length(newline) > GLOB.musical_config.max_line_length)
+			if (length(newline) > GLOB.musical_config.max_line_length)
 				newline = copytext(newline, 1, GLOB.musical_config.max_line_length)
 			src.song.lines.Add(newline)
 
-		if("deleteline")
+		if ("deleteline")
 			// This could kill the server if the synthesizer was playing, props to BeTePb
 			// Impossible to do now. Dumbing down this section.
 			var/num = round(value)
-			if(num > length(src.song.lines) || num < 1)
+			if (num > length(src.song.lines) || num < 1)
 				return
 			src.song.lines.Cut(num, num+1)
 
-		if("modifyline")
+		if ("modifyline")
 			var/num = round(value)
-			if(num > length(src.song.lines) || num < 1)
+			if (num > length(src.song.lines) || num < 1)
 				return
 			var/content = html_encode(input(usr, "Enter your line: ", "Edit line", src.song.lines[num]) as text|null)
-			if(num > length(src.song.lines) || num < 1)
+			if (num > length(src.song.lines) || num < 1)
 				return
-			if(!content)
+			if (!content)
 				return
-			if(length(content) > GLOB.musical_config.max_line_length)
+			if (length(content) > GLOB.musical_config.max_line_length)
 				content = copytext(content, 1, GLOB.musical_config.max_line_length)
 			src.song.lines[num] = content
 

@@ -96,7 +96,7 @@
 
 
 /obj/item/device/transfer_valve/HasProximity(atom/movable/AM as mob|obj)
-	if(!attached_device)
+	if (!attached_device)
 		return
 	attached_device.HasProximity(AM)
 	return
@@ -138,13 +138,13 @@
 	if (src.loc != usr)
 		return FALSE
 	if (!armed)
-		if(tank_one && href_list["tankone"])
+		if (tank_one && href_list["tankone"])
 			remove_tank(tank_one)
-		else if(tank_two && href_list["tanktwo"])
+		else if (tank_two && href_list["tanktwo"])
 			remove_tank(tank_two)
-		else if(href_list["open"])
+		else if (href_list["open"])
 			toggle_valve()
-		else if(attached_device)
+		else if (attached_device)
 			if (href_list["rem_device"])
 				attached_device.dropInto(loc)
 				attached_device:holder = null
@@ -154,14 +154,14 @@
 				attached_device.attack_self(usr)
 			if (href_list["arm"])
 				toggle_armed()
-	if(armed && href_list["activate"])
+	if (armed && href_list["activate"])
 		attached_device.activate()
 		visible_message(SPAN_WARNING("The [attached_device] blips!"), range = 3)
 		message_admins("[key_name_admin(usr)] triggered \the [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.loc.x];Y=[src.loc.y];Z=[src.loc.z]'>JMP</a>)")
 	return TRUE // Returning 1 sends an update to attached UIs
 
 /obj/item/device/transfer_valve/process_activation(obj/item/device/D)
-	if(toggle)
+	if (toggle)
 		toggle = FALSE
 		toggle_valve()
 		spawn(50) // To stop a signal being spammed from a proxy sensor constantly going off or whatever
@@ -171,36 +171,36 @@
 	overlays.Cut()
 	underlays.Cut()
 
-	if(!tank_one && !tank_two && !attached_device)
+	if (!tank_one && !tank_two && !attached_device)
 		icon_state = "valve_1"
 		return
 	icon_state = "valve"
 
-	if(tank_one)
+	if (tank_one)
 		overlays += "[tank_one.icon_state]"
-	if(tank_two)
+	if (tank_two)
 		var/icon/J = new(icon, icon_state = "[tank_two.icon_state]")
 		J.Shift(WEST, 13)
 		underlays += J
-	if(attached_device)
+	if (attached_device)
 		overlays += "device"
 
 /obj/item/device/transfer_valve/proc/remove_tank(obj/item/tank/T)
-	if(tank_one == T)
+	if (tank_one == T)
 		split_gases()
 		tank_one = null
-	else if(tank_two == T)
+	else if (tank_two == T)
 		split_gases()
 		tank_two = null
 	else
 		return
 
-	if(!tank_one && !tank_two) src.w_class = initial(src.w_class) //returns it to just the transfer valve size
+	if (!tank_one && !tank_two) src.w_class = initial(src.w_class) //returns it to just the transfer valve size
 	T.dropInto(loc)
 	update_icon()
 
 /obj/item/device/transfer_valve/proc/merge_gases()
-	if(valve_open)
+	if (valve_open)
 		return
 	tank_two.air_contents.volume += tank_one.air_contents.volume
 	var/datum/gas_mixture/temp = tank_one.remove_air_ratio(1)
@@ -208,12 +208,12 @@
 	valve_open = TRUE
 
 /obj/item/device/transfer_valve/proc/split_gases()
-	if(!valve_open)
+	if (!valve_open)
 		return
 
 	valve_open = FALSE
 
-	if(QDELETED(tank_one) || QDELETED(tank_two))
+	if (QDELETED(tank_one) || QDELETED(tank_two))
 		return
 
 	var/ratio1 = tank_one.air_contents.volume/tank_two.air_contents.volume
@@ -243,12 +243,12 @@
 /obj/item/device/transfer_valve/proc/toggle_valve()
 	if (!armed)
 		return
-	if(!valve_open && (tank_one && tank_two))
+	if (!valve_open && (tank_one && tank_two))
 		var/turf/bombturf = get_turf(src)
 		var/area/A = get_area(bombturf)
 
 		var/attacher_name = ""
-		if(!attacher)
+		if (!attacher)
 			attacher_name = "Unknown"
 		else
 			attacher_name = "[attacher.name]([attacher.ckey])"
@@ -256,12 +256,12 @@
 		var/log_str = "Bomb valve opened in <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[bombturf.x];Y=[bombturf.y];Z=[bombturf.z]'>[A.name]</a> "
 		log_str += "with [attached_device ? attached_device : "no device"] attacher: [attacher_name]"
 
-		if(attacher)
+		if (attacher)
 			log_str += "(<A HREF='?_src_=holder;adminmoreinfo=\ref[attacher]'>?</A>)"
 
 		var/mob/mob = get_mob_by_key(src.fingerprintslast)
 		var/last_touch_info = ""
-		if(mob)
+		if (mob)
 			last_touch_info = "(<A HREF='?_src_=holder;adminmoreinfo=\ref[mob]'>?</A>)"
 
 		log_str += " Last touched by: [src.fingerprintslast][last_touch_info]"
@@ -270,7 +270,7 @@
 		log_game(log_str)
 		merge_gases()
 
-	else if(valve_open==1 && (tank_one && tank_two))
+	else if (valve_open==1 && (tank_one && tank_two))
 		split_gases()
 
 	src.update_icon()

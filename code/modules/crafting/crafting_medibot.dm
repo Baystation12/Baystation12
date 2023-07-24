@@ -16,9 +16,9 @@
 
 /singleton/crafting_stage/proximity/medibot/get_product(obj/item/work)
 	. = ..()
-	if(istype(., /mob/living/bot/medbot))
+	if (istype(., /mob/living/bot/medbot))
 		var/mob/living/bot/medbot/bot = .
 		var/obj/item/storage/firstaid/kit = locate() in work
-		if(bot && kit)
+		if (bot && kit)
 			bot.skin = kit.icon_state
 			bot.update_icon()

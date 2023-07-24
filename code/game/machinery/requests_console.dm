@@ -54,11 +54,11 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 	var/datum/announcement/announcement = new
 
 /obj/machinery/requests_console/on_update_icon()
-	if(!is_powered())
-		if(icon_state != "req_comp_off")
+	if (!is_powered())
+		if (icon_state != "req_comp_off")
 			icon_state = "req_comp_off"
 	else
-		if(icon_state == "req_comp_off")
+		if (icon_state == "req_comp_off")
 			icon_state = "req_comp[newmessagepriority]"
 
 /obj/machinery/requests_console/New()
@@ -85,7 +85,7 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 		if (Console.department == department)
 			lastDeptRC = 0
 			break
-	if(lastDeptRC)
+	if (lastDeptRC)
 		if (departmentType & RC_ASSIST)
 			req_console_assistance -= department
 		if (departmentType & RC_SUPPLY)
@@ -126,41 +126,41 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 		ui.open()
 
 /obj/machinery/requests_console/OnTopic(href, href_list)
-	if(reject_bad_text(href_list["write"]))
+	if (reject_bad_text(href_list["write"]))
 		recipient = href_list["write"] //write contains the string of the receiving department's name
 
 		var/new_message = sanitize(input("Write your message:", "Awaiting Input", ""))
-		if(new_message)
+		if (new_message)
 			message = new_message
 			screen = RCS_MESSAUTH
 			switch(href_list["priority"])
-				if("1") priority = 1
-				if("2")	priority = 2
+				if ("1") priority = 1
+				if ("2")	priority = 2
 				else	priority = 0
 		else
 			reset_message(1)
 		return TOPIC_REFRESH
 
-	if(href_list["writeAnnouncement"])
+	if (href_list["writeAnnouncement"])
 		var/new_message = sanitize(input("Write your message:", "Awaiting Input", ""))
-		if(new_message)
+		if (new_message)
 			message = new_message
 		else
 			reset_message(1)
 		return TOPIC_REFRESH
 
-	if(href_list["sendAnnouncement"])
-		if(!announcementConsole)	return
+	if (href_list["sendAnnouncement"])
+		if (!announcementConsole)	return
 		announcement.Announce(message, msg_sanitized = 1)
 		reset_message(1)
 		return TOPIC_REFRESH
 
-	if( href_list["department"] && message )
+	if ( href_list["department"] && message )
 		var/log_msg = message
 		screen = RCS_SENTFAIL
 		var/obj/machinery/message_server/MS = get_message_server(get_z(src))
-		if(MS)
-			if(MS.send_rc_message(ckey(href_list["department"]),department,log_msg,msgStamped,msgVerified,priority))
+		if (MS)
+			if (MS.send_rc_message(ckey(href_list["department"]),department,log_msg,msgStamped,msgVerified,priority))
 				screen = RCS_SENTPASS
 				message_log += "<B>Message sent to [recipient]</B><BR>[message]"
 		else
@@ -168,23 +168,23 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 		return TOPIC_REFRESH
 
 	//Handle screen switching
-	if(href_list["setScreen"])
+	if (href_list["setScreen"])
 		var/tempScreen = text2num(href_list["setScreen"])
-		if(tempScreen == RCS_ANNOUNCE && !announcementConsole)
+		if (tempScreen == RCS_ANNOUNCE && !announcementConsole)
 			return
-		if(tempScreen == RCS_VIEWMSGS)
+		if (tempScreen == RCS_VIEWMSGS)
 			for (var/obj/machinery/requests_console/Console in allConsoles)
 				if (Console.department == department)
 					Console.newmessagepriority = 0
 					Console.icon_state = "req_comp0"
 					Console.set_light(1)
-		if(tempScreen == RCS_MAINMENU)
+		if (tempScreen == RCS_MAINMENU)
 			reset_message()
 		screen = tempScreen
 		return TOPIC_REFRESH
 
 	//Handle silencing the console
-	if(href_list["toggleSilent"])
+	if (href_list["toggleSilent"])
 		silent = !silent
 		return TOPIC_REFRESH
 
@@ -192,32 +192,32 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 /obj/machinery/requests_console/attackby(obj/item/O as obj, mob/user as mob)
 	/*
 	if (istype(O, /obj/item/crowbar))
-		if(open)
+		if (open)
 			open = 0
 			icon_state="req_comp0"
 		else
 			open = 1
-			if(hackState == 0)
+			if (hackState == 0)
 				icon_state="req_comp_open"
-			else if(hackState == 1)
+			else if (hackState == 1)
 				icon_state="req_comp_rewired"
 	if (istype(O, /obj/item/screwdriver))
-		if(open)
-			if(hackState == 0)
+		if (open)
+			if (hackState == 0)
 				hackState = 1
 				icon_state="req_comp_rewired"
-			else if(hackState == 1)
+			else if (hackState == 1)
 				hackState = 0
 				icon_state="req_comp_open"
 		else
 			to_chat(user, "You can't do much with that.") */
 	if (istype(O, /obj/item/card/id))
-		if(inoperable() || GET_FLAGS(stat, MACHINE_STAT_MAINT)) return
-		if(screen == RCS_MESSAUTH)
+		if (inoperable() || GET_FLAGS(stat, MACHINE_STAT_MAINT)) return
+		if (screen == RCS_MESSAUTH)
 			var/obj/item/card/id/T = O
 			msgVerified = text(SPAN_COLOR("green", "<b>Verified by [T.registered_name] ([T.assignment])</b>"))
 			SSnano.update_uis(src)
-		if(screen == RCS_ANNOUNCE)
+		if (screen == RCS_ANNOUNCE)
 			var/obj/item/card/id/ID = O
 			if (access_RC_announce in ID.GetAccess())
 				announceAuth = 1
@@ -227,8 +227,8 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 				to_chat(user, SPAN_WARNING("You are not authorized to send announcements."))
 			SSnano.update_uis(src)
 	if (istype(O, /obj/item/stamp))
-		if(inoperable() || GET_FLAGS(stat, MACHINE_STAT_MAINT)) return
-		if(screen == RCS_MESSAUTH)
+		if (inoperable() || GET_FLAGS(stat, MACHINE_STAT_MAINT)) return
+		if (screen == RCS_MESSAUTH)
 			var/obj/item/stamp/T = O
 			msgStamped = text(SPAN_COLOR("blue", "<b>Stamped with the [T.name]</b>"))
 			SSnano.update_uis(src)
@@ -242,5 +242,5 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 	msgStamped = ""
 	announceAuth = 0
 	announcement.announcer = ""
-	if(mainmenu)
+	if (mainmenu)
 		screen = RCS_MAINMENU

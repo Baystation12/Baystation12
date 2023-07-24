@@ -173,18 +173,18 @@
 /datum/species/nabber/can_overcome_gravity(mob/living/carbon/human/H)
 	var/datum/gas_mixture/mixture = H.loc.return_air()
 
-	if(mixture)
+	if (mixture)
 		var/pressure = mixture.return_pressure()
-		if(pressure > 50)
+		if (pressure > 50)
 			var/turf/below = GetBelow(H)
 			var/turf/T = H.loc
-			if(!T.CanZPass(H, DOWN) || !below.CanZPass(H, DOWN))
+			if (!T.CanZPass(H, DOWN) || !below.CanZPass(H, DOWN))
 				return TRUE
 
 	return FALSE
 
 /datum/species/nabber/handle_environment_special(mob/living/carbon/human/H)
-	if(!H.on_fire && H.fire_stacks < 2)
+	if (!H.on_fire && H.fire_stacks < 2)
 		H.fire_stacks += 0.2
 	return
 
@@ -195,11 +195,11 @@
 	//nabbers should not be trying to break their fall on stairs.
 	var/turf/T = GetBelow(H.loc)
 	for(var/obj/O in T)
-		if(istype(O, /obj/structure/stairs))
+		if (istype(O, /obj/structure/stairs))
 			return TRUE
-	if(mixture)
+	if (mixture)
 		var/pressure = mixture.return_pressure()
-		if(pressure > 80)
+		if (pressure > 80)
 			return FALSE
 
 	return TRUE
@@ -213,13 +213,13 @@
 
 	//Nabbers should not be trying to break their fall on stairs.
 	for(var/obj/O in T)
-		if(istype(O, /obj/structure/stairs))
+		if (istype(O, /obj/structure/stairs))
 			return FALSE
 
-	if(mixture)
+	if (mixture)
 		var/pressure = mixture.return_pressure()
-		if(pressure > 50)
-			if(istype(landing, /turf/simulated/open))
+		if (pressure > 50)
+			if (istype(landing, /turf/simulated/open))
 				H.visible_message("\The [H] descends from the deck above through \the [landing]!", "Your wings slow your descent.")
 			else
 				H.visible_message("\The [H] buzzes down from \the [landing], wings slowing their descent!", "You land on \the [landing], folding your wings.")
@@ -230,7 +230,7 @@
 
 
 /datum/species/nabber/can_shred(mob/living/carbon/human/H, ignore_intent, ignore_antag)
-	if(!H.handcuffed || H.buckled)
+	if (!H.handcuffed || H.buckled)
 		return ..(H, ignore_intent, TRUE)
 	else
 		return 0
@@ -241,7 +241,7 @@
 	H.remove_cloaking_source(src)
 
 	var/obj/item/organ/internal/B = H.internal_organs_by_name[BP_BRAIN]
-	if(istype(B,/obj/item/organ/internal/brain/insectoid/nabber))
+	if (istype(B,/obj/item/organ/internal/brain/insectoid/nabber))
 		var/obj/item/organ/internal/brain/insectoid/nabber/N = B
 
 		tally += N.lowblood_tally * 2
@@ -252,7 +252,7 @@
 	start_grab_name = NAB_AGGRESSIVE
 
 /obj/item/grab/nab/special/init()
-	if(!(. = ..()))
+	if (!(. = ..()))
 		return
 	affecting.apply_damage(15, DAMAGE_BRUTE, BP_CHEST, DAMAGE_FLAG_SHARP, "organic punctures")
 	affecting.visible_message(SPAN_DANGER("[assailant]'s spikes dig in painfully!"))
@@ -260,33 +260,33 @@
 
 /datum/species/nabber/update_skin(mob/living/carbon/human/H)
 
-	if(H.stat)
+	if (H.stat)
 		H.skin_state = SKIN_NORMAL
 
 	switch(H.skin_state)
-		if(SKIN_NORMAL)
+		if (SKIN_NORMAL)
 			return
-		if(SKIN_THREAT)
+		if (SKIN_THREAT)
 
 			var/image_key = "[H.species.get_race_key(src)]"
 
 			for(var/organ_tag in H.species.has_limbs)
 				var/obj/item/organ/external/part = H.organs_by_name[organ_tag]
-				if(isnull(part) || part.is_stump())
+				if (isnull(part) || part.is_stump())
 					image_key += "0"
 					continue
-				if(part)
+				if (part)
 					image_key += "[part.species.get_race_key(part.owner)]"
 					image_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"
-				if(BP_IS_ROBOTIC(part))
+				if (BP_IS_ROBOTIC(part))
 					image_key += "2[part.model ? "-[part.model]": ""]"
-				else if(part.status & ORGAN_DEAD)
+				else if (part.status & ORGAN_DEAD)
 					image_key += "3"
 				else
 					image_key += "1"
 
 			var/image/threat_image = skin_overlays[image_key]
-			if(!threat_image)
+			if (!threat_image)
 				var/icon/base_icon = icon(H.stand_icon)
 				var/icon/I = new('icons/mob/human_races/species/nabber/threat.dmi', "threat")
 				base_icon.Blend(COLOR_BLACK, ICON_MULTIPLY)
@@ -298,25 +298,25 @@
 	return
 
 /datum/species/nabber/disarm_attackhand(mob/living/carbon/human/attacker, mob/living/carbon/human/target)
-	if(attacker.pulling_punches || target.lying || attacker == target)
+	if (attacker.pulling_punches || target.lying || attacker == target)
 		return ..(attacker, target)
-	if(world.time < attacker.last_attack + 20)
+	if (world.time < attacker.last_attack + 20)
 		to_chat(attacker, SPAN_NOTICE("You can't attack again so soon."))
 		return 0
 	attacker.last_attack = world.time
 	var/turf/T = get_step(get_turf(target), get_dir(get_turf(attacker), get_turf(target)))
 	playsound(target.loc, 'sound/weapons/pushhiss.ogg', 50, 1, -1)
-	if(!T.density)
+	if (!T.density)
 		step(target, get_dir(get_turf(attacker), get_turf(target)))
 		target.visible_message(SPAN_CLASS("danger", "[pick("[target] was sent flying backward!", "[target] staggers back from the impact!")]"))
 	else
 		target.turf_collision(T, target.throw_speed / 2)
-	if(prob(50))
+	if (prob(50))
 		target.set_dir(GLOB.reverse_dir[target.dir])
 
 /datum/species/nabber/get_additional_examine_text(mob/living/carbon/human/H)
 	var/datum/pronouns/P = H.choose_from_pronouns()
-	if(H.pulling_punches)
+	if (H.pulling_punches)
 		return "\n[P.His] manipulation arms are out and [P.he] looks ready to use complex items."
 	else
 		return "\n[SPAN_WARNING("[P.His] deadly upper arms are raised and [P.he] looks ready to attack!")]"
@@ -329,9 +329,9 @@
 	return (..() && (H && H.pulling_punches))
 
 /datum/species/nabber/attempt_grab(mob/living/carbon/human/grabber, mob/living/target)
-	if(grabber.pulling_punches)
+	if (grabber.pulling_punches)
 		return ..()
-	if(grabber == target)
+	if (grabber == target)
 		return ..()
 
 	for (var/obj/item/item as anything in grabber.GetAllHeld())
@@ -339,17 +339,17 @@
 	to_chat(grabber, SPAN_WARNING("You drop everything as you spring out to nab \the [target]!."))
 	playsound(grabber.loc, 'sound/weapons/pierce.ogg', 25, 1, -1)
 
-	if(!grabber.is_cloaked())
+	if (!grabber.is_cloaked())
 		return ..(grabber, target, GRAB_NAB)
 
-	if(grabber.last_special > world.time)
+	if (grabber.last_special > world.time)
 		to_chat(grabber, SPAN_WARNING("It is too soon to make another nab attempt."))
 		return
 
 	grabber.last_special = world.time + 50
 
 	grabber.remove_cloaking_source(src)
-	if(prob(90) && grabber.make_grab(grabber, target, GRAB_NAB_SPECIAL))
+	if (prob(90) && grabber.make_grab(grabber, target, GRAB_NAB_SPECIAL))
 		target.Weaken(rand(1,3))
 		target.LAssailant = grabber
 		grabber.visible_message(SPAN_DANGER("\The [grabber] suddenly lunges out and grabs \the [target]!"))
@@ -360,15 +360,15 @@
 		grabber.visible_message(SPAN_DANGER("\The [grabber] suddenly lunges out, almost grabbing \the [target]!"))
 
 /datum/species/nabber/toggle_stance(mob/living/carbon/human/H)
-	if(H.incapacitated())
+	if (H.incapacitated())
 		return FALSE
 	var/datum/pronouns/P = H.choose_from_pronouns()
 	to_chat(H, SPAN_NOTICE("You begin to adjust the fluids in your arms, dropping everything and getting ready to swap which set you're using."))
 	var/hidden = H.is_cloaked()
-	if(!hidden) H.visible_message(SPAN_WARNING("\The [H] shifts [P.his] arms."))
+	if (!hidden) H.visible_message(SPAN_WARNING("\The [H] shifts [P.his] arms."))
 	for (var/obj/item/item as anything in H.GetAllHeld())
 		H.unEquip(item)
-	if(do_after(H, 3 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT))
+	if (do_after(H, 3 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT))
 		arm_swap(H)
 	else
 		to_chat(H, SPAN_NOTICE("You stop adjusting your arms and don't switch between them."))
@@ -380,22 +380,22 @@
 	var/hidden = H.is_cloaked()
 	var/datum/pronouns/P = H.choose_from_pronouns()
 	H.pulling_punches = !H.pulling_punches
-	if(H.pulling_punches)
+	if (H.pulling_punches)
 		H.current_grab_type = all_grabobjects[GRAB_NORMAL]
-		if(forced)
+		if (forced)
 			to_chat(H, SPAN_NOTICE("You can't keep your hunting arms prepared and they drop, forcing you to use your manipulation arms."))
-			if(!hidden)
+			if (!hidden)
 				H.visible_message(SPAN_NOTICE("[H] falters, [P.his] hunting arms failing."))
 		else
 			to_chat(H, SPAN_NOTICE("You relax your hunting arms, lowering the pressure and folding them tight to your thorax. \
 			You reach out with your manipulation arms, ready to use complex items."))
-			if(!hidden)
+			if (!hidden)
 				H.visible_message(SPAN_NOTICE("[H] seems to relax as [P.he] folds [P.his] massive curved arms to [P.his] thorax and reaches out \
 				with [P.his] small handlike limbs."))
 	else
 		H.current_grab_type = all_grabobjects[GRAB_NAB]
 		to_chat(H, SPAN_NOTICE("You pull in your manipulation arms, dropping any items and unfolding your massive hunting arms in preparation of grabbing prey."))
-		if(!hidden)
+		if (!hidden)
 			H.visible_message(SPAN_WARNING("[H] tenses as [P.he] brings [P.his] smaller arms in close to [P.his] body. [P.His] two massive spiked arms reach \
 			out. [P.He] looks ready to attack."))
 
@@ -405,7 +405,7 @@
 
 /datum/species/nabber/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
 	switch(age)
-		if(0 to 18) 	. = 8
-		if(19 to 27) 	. = 2
-		if(28 to 40)	. = -2
+		if (0 to 18) 	. = 8
+		if (19 to 27) 	. = 2
+		if (28 to 40)	. = -2
 		else			. = -4

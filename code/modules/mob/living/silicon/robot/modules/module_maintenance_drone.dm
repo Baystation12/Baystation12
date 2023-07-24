@@ -56,7 +56,7 @@
 
 /obj/item/robot_module/drone/finalize_equipment(mob/living/silicon/robot/R)
 	. = ..()
-	if(istype(R))
+	if (istype(R))
 		R.internals = locate(/obj/item/tank/jetpack/carbondioxide) in equipment
 
 /obj/item/robot_module/drone/finalize_emag()

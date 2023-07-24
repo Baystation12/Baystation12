@@ -20,7 +20,7 @@ var/global/list/ticket_panels = list()
 	addtimer(new Callback(src, .proc/timeoutcheck), 5 MINUTES, TIMER_STOPPABLE)
 
 /datum/ticket/proc/timeoutcheck()
-	if(status == TICKET_OPEN)
+	if (status == TICKET_OPEN)
 		message_staff(SPAN_DANGER("[owner.key_name(0)] has not received a reply to their initial ahelp after 5 minutes!"))
 		addtimer(new Callback(src, .proc/timeoutchecklast), 5 MINUTES, TIMER_STOPPABLE)
 
@@ -41,20 +41,20 @@ var/global/list/ticket_panels = list()
 		close(assigned_admins[1])
 
 /datum/ticket/proc/close(datum/client_lite/closed_by)
-	if(status == TICKET_CLOSED)
+	if (status == TICKET_CLOSED)
 		return
 
-	if(status == TICKET_ASSIGNED && !((closed_by.ckey in assigned_admin_ckeys()) || owner.ckey == closed_by.ckey) && alert(client_by_ckey(closed_by.ckey), "You are not assigned to this ticket. Are you sure you want to close it?",  "Close ticket?" , "Yes" , "No") != "Yes")
+	if (status == TICKET_ASSIGNED && !((closed_by.ckey in assigned_admin_ckeys()) || owner.ckey == closed_by.ckey) && alert(client_by_ckey(closed_by.ckey), "You are not assigned to this ticket. Are you sure you want to close it?",  "Close ticket?" , "Yes" , "No") != "Yes")
 		return
 
-	if(timeout == FALSE)
+	if (timeout == FALSE)
 		var/client/real_client = client_by_ckey(closed_by.ckey)
-		if(status == TICKET_ASSIGNED && (!real_client || !real_client.holder)) // non-admins can only close a ticket if no admin has taken it
+		if (status == TICKET_ASSIGNED && (!real_client || !real_client.holder)) // non-admins can only close a ticket if no admin has taken it
 			return
 
 	src.status = TICKET_CLOSED
 
-	if(timeout == TRUE)
+	if (timeout == TRUE)
 		to_chat(client_by_ckey(src.owner.ckey), SPAN_NOTICE("<b>Your ticket has timed out. Please adminhelp again if your issue is not resolved.</b>"))
 	else
 		src.closed_by = closed_by
@@ -67,13 +67,13 @@ var/global/list/ticket_panels = list()
 	return 1
 
 /datum/ticket/proc/take(datum/client_lite/assigned_admin)
-	if(status == TICKET_CLOSED)
+	if (status == TICKET_CLOSED)
 		return
 
-	if(assigned_admin.ckey == owner.ckey)
+	if (assigned_admin.ckey == owner.ckey)
 		return
 
-	if(status == TICKET_ASSIGNED && ((assigned_admin.ckey in assigned_admin_ckeys()) || alert(client_by_ckey(assigned_admin.ckey), "This ticket is already assigned. Do you want to add yourself to the ticket?",  "Join ticket?" , "Yes" , "No") != "Yes"))
+	if (status == TICKET_ASSIGNED && ((assigned_admin.ckey in assigned_admin_ckeys()) || alert(client_by_ckey(assigned_admin.ckey), "This ticket is already assigned. Do you want to add yourself to the ticket?",  "Join ticket?" , "Yes" , "No") != "Yes"))
 		return
 
 	assigned_admins |= assigned_admin
@@ -103,19 +103,19 @@ var/global/list/ticket_panels = list()
 /proc/get_open_ticket_by_client(datum/client_lite/owner)
 	RETURN_TYPE(/datum/ticket)
 	for(var/datum/ticket/ticket in tickets)
-		if(ticket.owner.ckey == owner.ckey && (ticket.status == TICKET_OPEN || ticket.status == TICKET_ASSIGNED))
+		if (ticket.owner.ckey == owner.ckey && (ticket.status == TICKET_OPEN || ticket.status == TICKET_ASSIGNED))
 			return ticket // there should only be one open ticket by a client at a time, so no need to keep looking
 
 /datum/ticket/proc/is_active()
-	if(status != TICKET_ASSIGNED)
+	if (status != TICKET_ASSIGNED)
 		return 0
 
-	if(world.time - last_message_time > 30 MINUTES)
+	if (world.time - last_message_time > 30 MINUTES)
 		return FALSE
 
 	for(var/datum/client_lite/admin in assigned_admins)
 		var/client/admin_client = client_by_ckey(admin.ckey)
-		if(admin_client && !admin_client.is_afk())
+		if (admin_client && !admin_client.is_afk())
 			return 1
 
 
@@ -139,7 +139,7 @@ var/global/list/ticket_panels = list()
 
 /datum/ticket_panel/proc/get_dat()
 	var/client/C = ticket_panel_window.user.client
-	if(!C)
+	if (!C)
 		return
 
 	var/list/dat = list()
@@ -147,48 +147,48 @@ var/global/list/ticket_panels = list()
 	var/list/ticket_dat = list()
 	for(var/id = length(tickets), id >= 1, id--)
 		var/datum/ticket/ticket = tickets[id]
-		if(C.holder || ticket.owner.ckey == C.ckey)
+		if (C.holder || ticket.owner.ckey == C.ckey)
 			var/client/owner_client = client_by_ckey(ticket.owner.ckey)
 			var/open = 0
 			var/status = "Unknown status"
 			var/color = "#6aa84f"
 			switch(ticket.status)
-				if(TICKET_OPEN)
+				if (TICKET_OPEN)
 					open = 1
 					status = "Opened [round((world.time - ticket.opened_time) / (1 MINUTE))] minute\s ago, unassigned"
-				if(TICKET_ASSIGNED)
+				if (TICKET_ASSIGNED)
 					open = 2
 					status = "Assigned to [english_list(ticket.assigned_admin_keys(), "no one")]"
 					color = "#ffffff"
-				if(TICKET_CLOSED)
-					if(ticket.timeout == FALSE)
+				if (TICKET_CLOSED)
+					if (ticket.timeout == FALSE)
 						status = "Closed by [ticket.closed_by.key]"
 					else
 						status = "Closed by timeout"
 					color = "#cc2222"
 			ticket_dat += "<li style='padding-bottom:10px;color:[color]'>"
-			if(open_ticket && open_ticket == ticket)
+			if (open_ticket && open_ticket == ticket)
 				ticket_dat += "<i>"
 			ticket_dat += "Ticket #[id] - [ticket.owner.key_name(0)] [owner_client ? "" : "(DC)"]<br />[status]<br /><a href='byond://?src=\ref[src];action=view;ticket=\ref[ticket]'>VIEW</a>"
-			if(open)
+			if (open)
 				ticket_dat += " - <a href='byond://?src=\ref[src];action=pm;ticket=\ref[ticket]'>PM</a>"
-				if(C.holder)
+				if (C.holder)
 					ticket_dat += " - <a href='byond://?src=\ref[src];action=take;ticket=\ref[ticket]'>[(open == 1) ? "TAKE" : "JOIN"]</a>"
-				if(ticket.status != TICKET_CLOSED && (C.holder || ticket.status == TICKET_OPEN))
+				if (ticket.status != TICKET_CLOSED && (C.holder || ticket.status == TICKET_OPEN))
 					ticket_dat += " - <a href='byond://?src=\ref[src];action=close;ticket=\ref[ticket]'>CLOSE</a>"
-			if(C.holder)
+			if (C.holder)
 				var/ref_mob = ""
-				if(owner_client)
+				if (owner_client)
 					ref_mob = "\ref[owner_client.mob]"
 				ticket_dat += " - <A HREF='?_src_=holder;adminmoreinfo=[ref_mob]'>?</A> - <A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A> - <A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A> - <A HREF='?_src_=holder;narrateto=[ref_mob]'>DN</A>[owner_client ? "- [admin_jump_link(owner_client, src)]" : ""]"
-			if(open_ticket && open_ticket == ticket)
+			if (open_ticket && open_ticket == ticket)
 				ticket_dat += "</i>"
 			ticket_dat += "</li>"
 
-	if(length(ticket_dat))
+	if (length(ticket_dat))
 		dat += "<br /><div style='width:50%;float:left;'><p><b>Available tickets:</b></p><ul>[jointext(ticket_dat, null)]</ul></div>"
 
-		if(open_ticket)
+		if (open_ticket)
 			dat += "<div style='width:50%;float:left;'><p><b>\[<a href='byond://?src=\ref[src];action=unview;'>X</a>\] Messages for ticket #[open_ticket.id]:</b></p>"
 
 			var/list/msg_dat = list()
@@ -196,7 +196,7 @@ var/global/list/ticket_panels = list()
 				var/msg_to = msg.msg_to ? msg.msg_to : "Adminhelp"
 				msg_dat += "<li>\[[msg.time_stamp]\] [msg.msg_from] -> [msg_to]: [C.holder ? generate_ahelp_key_words(C.mob, msg.msg) : msg.msg]</li>"
 
-			if(length(msg_dat))
+			if (length(msg_dat))
 				dat += "<ul>[jointext(msg_dat, null)]</ul></div>"
 			else
 				dat += "<p>No messages to display.</p></div>"
@@ -207,8 +207,8 @@ var/global/list/ticket_panels = list()
 	return jointext(dat, null)
 
 /datum/ticket_panel/Topic(href, href_list)
-	if(usr && usr.client && usr != ticket_panel_window.user)
-		if(href_list["close"]) // catch the case where a user switches mobs, then closes the window that was linked to the old mob
+	if (usr && usr.client && usr != ticket_panel_window.user)
+		if (href_list["close"]) // catch the case where a user switches mobs, then closes the window that was linked to the old mob
 			ticket_panels -= usr.client
 		else
 			usr.client.view_tickets()
@@ -219,42 +219,42 @@ var/global/list/ticket_panels = list()
 
 	..()
 
-	if(href_list["close"])
+	if (href_list["close"])
 		ticket_panels -= usr.client
 
 	switch(href_list["action"])
-		if("unview")
+		if ("unview")
 			open_ticket = null
 			ticket_panel_window.set_content(get_dat())
 			ticket_panel_window.update()
 
 	var/datum/ticket/ticket = locate(href_list["ticket"])
-	if(!ticket)
+	if (!ticket)
 		return
 
 	switch(href_list["action"])
-		if("view")
+		if ("view")
 			open_ticket = ticket
 			ticket_panel_window.set_content(get_dat())
 			ticket_panel_window.update()
-		if("take")
+		if ("take")
 			ticket.take(client_repository.get_lite_client(usr.client))
-		if("close")
+		if ("close")
 			ticket.close(client_repository.get_lite_client(usr.client))
-		if("pm")
+		if ("pm")
 			ticket.take(client_repository.get_lite_client(usr.client))
-			if(usr.client.holder && ticket.owner.ckey != usr.ckey)
+			if (usr.client.holder && ticket.owner.ckey != usr.ckey)
 				usr.client.cmd_admin_pm(client_by_ckey(ticket.owner.ckey), ticket = ticket)
-			else if(ticket.status == TICKET_ASSIGNED)
+			else if (ticket.status == TICKET_ASSIGNED)
 				// manually check that the target client exists here as to not spam the usr for each logged out admin on the ticket
 				var/admin_found = 0
 				for(var/datum/client_lite/admin in ticket.assigned_admins)
 					var/client/admin_client = client_by_ckey(admin.ckey)
-					if(admin_client)
+					if (admin_client)
 						admin_found = 1
 						usr.client.cmd_admin_pm(admin_client, ticket = ticket)
 						break
-				if(!admin_found)
+				if (!admin_found)
 					to_chat(usr, SPAN_WARNING("Error: Private-Message: Client not found. They may have lost connection, so please be patient!"))
 			else
 				usr.client.adminhelp(input(usr,"", "adminhelp \"text\"") as text)
@@ -273,7 +273,7 @@ var/global/list/ticket_panels = list()
 /proc/update_ticket_panels()
 	for(var/client/C in ticket_panels)
 		var/datum/ticket_panel/ticket_panel = ticket_panels[C]
-		if(C.mob != ticket_panel.ticket_panel_window.user)
+		if (C.mob != ticket_panel.ticket_panel_window.user)
 			C.view_tickets()
 		else
 			ticket_panel.ticket_panel_window.set_content(ticket_panel.get_dat())

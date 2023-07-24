@@ -17,12 +17,12 @@
 	icon_state = ""
 	uid = ++global_uid
 
-	if(!requires_power)
+	if (!requires_power)
 		power_light = 0
 		power_equip = 0
 		power_environ = 0
 
-	if(dynamic_lighting)
+	if (dynamic_lighting)
 		luminosity = 0
 	else
 		luminosity = 1
@@ -31,7 +31,7 @@
 
 /area/Initialize()
 	. = ..()
-	if(!requires_power || !apc)
+	if (!requires_power || !apc)
 		power_light = 0
 		power_equip = 0
 		power_environ = 0
@@ -47,13 +47,13 @@
 // Changes the area of T to A. Do not do this manually.
 // Area is expected to be a non-null instance.
 /proc/ChangeArea(turf/T, area/A)
-	if(!istype(A))
+	if (!istype(A))
 		CRASH("Area change attempt failed: invalid area supplied.")
 	var/area/old_area = get_area(T)
-	if(old_area == A)
+	if (old_area == A)
 		return
 	A.contents.Add(T)
-	if(old_area)
+	if (old_area)
 		old_area.Exited(T, A)
 		for(var/atom/movable/AM in T)
 			old_area.Exited(AM, A)  // Note: this _will_ raise exited events.
@@ -91,7 +91,7 @@
 		if (AA.operable() && !AA.shorted && AA.report_danger_level)
 			danger_level = max(danger_level, AA.danger_level)
 
-	if(danger_level != atmosalm)
+	if (danger_level != atmosalm)
 		if (danger_level < 1 && atmosalm >= 1)
 			//closing the doors on red and opening on green provides a bit of hysteresis that will hopefully prevent fire doors from opening and closing repeatedly due to noise
 			air_doors_open()
@@ -107,48 +107,48 @@
 
 /// Sets `air_doors_activated` and sets all firedoors in `all_doors` to the closed state. Does nothing if `air_doors_activated` is already set.
 /area/proc/air_doors_close()
-	if(!air_doors_activated)
+	if (!air_doors_activated)
 		air_doors_activated = 1
-		if(!all_doors)
+		if (!all_doors)
 			return
 		for(var/obj/machinery/door/firedoor/E in all_doors)
-			if(!E.blocked)
-				if(E.operating)
+			if (!E.blocked)
+				if (E.operating)
 					E.nextstate = FIREDOOR_CLOSED
-				else if(!E.density)
+				else if (!E.density)
 					spawn(0)
 						E.close()
 
 /// Clears `air_doors_activated` and sets all firedoors in `all_doors` to the open state. Does nothing if `air_doors_activated` is already cleared.
 /area/proc/air_doors_open()
-	if(air_doors_activated)
+	if (air_doors_activated)
 		air_doors_activated = 0
-		if(!all_doors)
+		if (!all_doors)
 			return
 		for(var/obj/machinery/door/firedoor/E in all_doors)
 			E.locked = FALSE
-			if(!E.blocked)
-				if(E.operating)
+			if (!E.blocked)
+				if (E.operating)
 					E.nextstate = FIREDOOR_OPEN
-				else if(E.density)
+				else if (E.density)
 					spawn(0)
-						if(E.can_safely_open())
+						if (E.can_safely_open())
 							E.open()
 
 
 /// Sets a fire alarm in the area, if one is not already active.
 /area/proc/fire_alert()
-	if(!fire)
+	if (!fire)
 		fire = TRUE	//used for firedoor checks
 		update_icon()
 		mouse_opacity = 0
-		if(!all_doors)
+		if (!all_doors)
 			return
 		for(var/obj/machinery/door/firedoor/D in all_doors)
-			if(!D.blocked)
-				if(D.operating)
+			if (!D.blocked)
+				if (D.operating)
 					D.nextstate = FIREDOOR_CLOSED
-				else if(!D.density)
+				else if (!D.density)
 					spawn()
 						D.close()
 
@@ -158,27 +158,27 @@
 		fire = FALSE	//used for firedoor checks
 		update_icon()
 		mouse_opacity = 0
-		if(!all_doors)
+		if (!all_doors)
 			return
 		for(var/obj/machinery/door/firedoor/D in all_doors)
 			D.locked = FALSE
-			if(!D.blocked)
-				if(D.operating)
+			if (!D.blocked)
+				if (D.operating)
 					D.nextstate = FIREDOOR_OPEN
-				else if(D.density)
+				else if (D.density)
 					spawn(0)
 					D.open()
 
 /// Sets an active evacuation alarm in the area, if one is not already active.
 /area/proc/readyalert()
-	if(!eject)
+	if (!eject)
 		eject = 1
 		update_icon()
 	return
 
 /// Clears an active evacuation alarm from the area.
 /area/proc/readyreset()
-	if(eject)
+	if (eject)
 		eject = 0
 		update_icon()
 	return
@@ -198,23 +198,23 @@
 		mouse_opacity = 0
 		update_icon()
 		for(var/obj/machinery/door/firedoor/D in src)
-			if(!D.blocked)
-				if(D.operating)
+			if (!D.blocked)
+				if (D.operating)
 					D.nextstate = FIREDOOR_OPEN
-				else if(D.density)
+				else if (D.density)
 					spawn(0)
 					D.open()
 	return
 
 /area/on_update_icon()
 	if ((fire || eject || party) && (!requires_power||power_environ))//If it doesn't require power, can still activate this proc.
-		if(fire && !eject && !party)
+		if (fire && !eject && !party)
 			icon_state = "blue"
-		/*else if(atmosalm && !fire && !eject && !party)
+		/*else if (atmosalm && !fire && !eject && !party)
 			icon_state = "bluenew"*/
-		else if(!fire && eject && !party)
+		else if (!fire && eject && !party)
 			icon_state = "red"
-		else if(party && !fire && !eject)
+		else if (party && !fire && !eject)
 			icon_state = "party"
 		else
 			icon_state = "blue-red"
@@ -224,7 +224,7 @@
 
 /// Sets the area's light switch state to on or off, in turn turning all lights in the area on or off.
 /area/proc/set_lightswitch(new_switch)
-	if(lightswitch != new_switch)
+	if (lightswitch != new_switch)
 		lightswitch = new_switch
 		for(var/obj/machinery/light_switch/L in src)
 			L.sync_state()
@@ -239,17 +239,17 @@
 
 /area/Entered(A)
 	..()
-	if(!istype(A,/mob/living))	return
+	if (!istype(A,/mob/living))	return
 
 	var/mob/living/L = A
-	if(!L.ckey)	return
+	if (!L.ckey)	return
 
-	if(!L.lastarea)
+	if (!L.lastarea)
 		L.lastarea = get_area(L.loc)
 	var/area/newarea = get_area(L.loc)
 	var/area/oldarea = L.lastarea
-	if(oldarea.has_gravity != newarea.has_gravity)
-		if(newarea.has_gravity == 1 && MOVING_QUICKLY(L)) // Being not hasty when you change areas allows you to avoid falling.
+	if (oldarea.has_gravity != newarea.has_gravity)
+		if (newarea.has_gravity == 1 && MOVING_QUICKLY(L)) // Being not hasty when you change areas allows you to avoid falling.
 			thunk(L)
 		L.update_floating()
 
@@ -307,22 +307,22 @@
 	has_gravity = gravitystate
 
 	for(var/mob/M in src)
-		if(has_gravity)
+		if (has_gravity)
 			thunk(M)
 		M.update_floating()
 
 /// Causes the provided mob to 'slam' down to the floor if certain conditions are not met. Primarily used for gravity changes.
 /area/proc/thunk(mob/mob)
-	if(istype(get_turf(mob), /turf/space)) // Can't fall onto nothing.
+	if (istype(get_turf(mob), /turf/space)) // Can't fall onto nothing.
 		return
 
-	if(mob.Check_Shoegrip())
+	if (mob.Check_Shoegrip())
 		return
 
-	if(istype(mob,/mob/living/carbon/human))
+	if (istype(mob,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = mob
-		if(!H.buckled && prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_MASTER)))
-			if(!MOVING_DELIBERATELY(H))
+		if (!H.buckled && prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_MASTER)))
+			if (!MOVING_DELIBERATELY(H))
 				H.AdjustStunned(3)
 				H.AdjustWeakened(3)
 			else
@@ -333,7 +333,7 @@
 /// Trigger for the prison break event. Causes lighting to overload and dooes to open. Has no effect if the area lacks an APC or the APC is turned off.
 /area/proc/prison_break()
 	var/obj/machinery/power/apc/theAPC = get_apc()
-	if(theAPC && theAPC.operating)
+	if (theAPC && theAPC.operating)
 		for(var/obj/machinery/power/apc/temp_apc in src)
 			temp_apc.overload_lighting(70)
 		for(var/obj/machinery/door/airlock/temp_airlock in src)
@@ -350,20 +350,20 @@
 
 /atom/proc/has_gravity()
 	var/area/A = get_area(src)
-	if(A && A.has_gravity())
+	if (A && A.has_gravity())
 		return 1
 	return 0
 
 /mob/has_gravity()
-	if(!lastarea)
+	if (!lastarea)
 		lastarea = get_area(src)
-	if(!lastarea || !lastarea.has_gravity())
+	if (!lastarea || !lastarea.has_gravity())
 		return 0
 	return 1
 
 /turf/has_gravity()
 	var/area/A = loc
-	if(A && A.has_gravity())
+	if (A && A.has_gravity())
 		return 1
 	return 0
 

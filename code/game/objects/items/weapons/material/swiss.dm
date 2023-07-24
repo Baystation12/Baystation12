@@ -26,27 +26,27 @@
 
 /obj/item/material/knife/folding/swiss/attack_self(mob/user)
 	var/choice
-	if(user.a_intent != I_HELP && ((SWISSKNF_LBLADE in tools) || (SWISSKNF_SBLADE in tools)) && active_tool == SWISSKNF_CLOSED)
+	if (user.a_intent != I_HELP && ((SWISSKNF_LBLADE in tools) || (SWISSKNF_SBLADE in tools)) && active_tool == SWISSKNF_CLOSED)
 		open = TRUE
-		if(SWISSKNF_LBLADE in tools)
+		if (SWISSKNF_LBLADE in tools)
 			choice = SWISSKNF_LBLADE
 		else
 			choice = SWISSKNF_SBLADE
 	else
-		if(active_tool == SWISSKNF_CLOSED)
+		if (active_tool == SWISSKNF_CLOSED)
 			choice = input("Select a tool to open.","Knife") as null|anything in tools|SWISSKNF_CLOSED
 		else
 			choice = SWISSKNF_CLOSED
 			open = FALSE
 
-	if(!choice || !CanPhysicallyInteract(user))
+	if (!choice || !CanPhysicallyInteract(user))
 		return
-	if(choice == SWISSKNF_CLOSED)
+	if (choice == SWISSKNF_CLOSED)
 		open = FALSE
 		user.visible_message(SPAN_NOTICE("\The [user] closes the [name]."))
 	else
 		open = TRUE
-		if(choice == SWISSKNF_LBLADE || choice == SWISSKNF_SBLADE)
+		if (choice == SWISSKNF_LBLADE || choice == SWISSKNF_SBLADE)
 			user.visible_message(SPAN_WARNING("\The [user] opens the [lowertext(choice)]."))
 			playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
 		else
@@ -62,9 +62,9 @@
 	to_chat(user, active_tool == SWISSKNF_CLOSED ? "It is closed." : "Its [lowertext(active_tool)] is folded out.")
 
 /obj/item/material/knife/folding/swiss/update_force()
-	if(active_tool in sharp_tools)
+	if (active_tool in sharp_tools)
 		..()
-		if(active_tool == SWISSKNF_GBLADE)
+		if (active_tool == SWISSKNF_GBLADE)
 			siemens_coefficient = 0
 		else
 			siemens_coefficient = initial(siemens_coefficient)
@@ -75,19 +75,19 @@
 		hitsound = initial(hitsound)
 		attack_verb = closed_attack_verbs
 		siemens_coefficient = initial(siemens_coefficient)
-	if(active_tool == SWISSKNF_CLOSED)
+	if (active_tool == SWISSKNF_CLOSED)
 		w_class = initial(w_class)
 	else
 		w_class = ITEM_SIZE_NORMAL
 
 /obj/item/material/knife/folding/swiss/on_update_icon()
-	if(active_tool != null)
+	if (active_tool != null)
 		overlays.Cut()
 		overlays += overlay_image(icon, active_tool, flags=RESET_COLOR)
 		item_state = initial(item_state)
-		if(active_tool == SWISSKNF_LBLADE || active_tool == SWISSKNF_SBLADE)
+		if (active_tool == SWISSKNF_LBLADE || active_tool == SWISSKNF_SBLADE)
 			item_state = "knife"
-		if(blood_overlay)
+		if (blood_overlay)
 			overlays += blood_overlay
 
 /obj/item/material/knife/folding/swiss/IsCrowbar()
@@ -103,13 +103,13 @@
 	return active_tool == SWISSKNF_WBLADE
 
 /obj/item/material/knife/folding/swiss/resolve_attackby(obj/target, mob/user)
-	if((istype(target, /obj/structure/window) || istype(target, /obj/structure/grille)) && active_tool == SWISSKNF_GBLADE)
+	if ((istype(target, /obj/structure/window) || istype(target, /obj/structure/grille)) && active_tool == SWISSKNF_GBLADE)
 		force = force * 8
 		. = ..()
 		update_force()
 		return
-	if(istype(target, /obj/item))
-		if(target.w_class <= ITEM_SIZE_HUGE)
+	if (istype(target, /obj/item))
+		if (target.w_class <= ITEM_SIZE_HUGE)
 			can_use_tools = TRUE
 			. = ..()
 			can_use_tools = FALSE

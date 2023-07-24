@@ -86,13 +86,13 @@
 
 /obj/item/organ/internal/stomach/vox/Process()
 	. = ..()
-	if(is_usable())
+	if (is_usable())
 
 		// Handle some post-metabolism reagent processing for generally inedible foods.
-		if(ingested.total_volume > 0)
+		if (ingested.total_volume > 0)
 			for(var/datum/reagent/R in ingested.reagent_list)
 				var/inedible_nutriment_amount = gains_nutriment_from_inedible_reagents[R.type]
-				if(inedible_nutriment_amount > 0)
+				if (inedible_nutriment_amount > 0)
 					owner.adjust_nutrition(inedible_nutriment_amount)
 
 		// Do we have any objects to digest?
@@ -100,40 +100,40 @@
 		var/updated_stacks
 		for(var/obj/item/food in contents)
 			for(var/mat in food.matter)
-				if(!can_digest_matter[mat] && !can_process_matter[mat])
+				if (!can_digest_matter[mat] && !can_process_matter[mat])
 					continue
 
 				// Grab a chunk out of the object.
 				var/digested = min(food.matter[mat], rand(200,500))
 				food.matter[mat] -= digested
 				digested *= 0.75
-				if(food.matter[mat] <= 0)
+				if (food.matter[mat] <= 0)
 					food.matter -= mat
-				if(!length(food.matter))
+				if (!length(food.matter))
 					qdel(food)
 
 				// Process it.
-				if(can_digest_matter[mat])
+				if (can_digest_matter[mat])
 					owner.adjust_nutrition(max(1, floor(digested/100)))
 					updated_stacks = TRUE
-				else if(can_process_matter[mat])
+				else if (can_process_matter[mat])
 					LAZYDISTINCTADD(check_materials, mat)
 					stored_matter[mat] += digested
 
 		// Convert stored matter into sheets.
 		for(var/mat in check_materials)
 			var/material/M = SSmaterials.get_material_by_name(mat)
-			if(M && M.stack_type && stored_matter[mat] >= M.units_per_sheet)
+			if (M && M.stack_type && stored_matter[mat] >= M.units_per_sheet)
 
 				// Remove as many sheets as possible from the gizzard.
 				var/sheets = floor(stored_matter[mat]/M.units_per_sheet)
 				stored_matter[mat] -= M.units_per_sheet * sheets
-				if(stored_matter[mat] <= 0)
+				if (stored_matter[mat] <= 0)
 					stored_matter -= mat
 
 				// Merge them into other stacks.
 				for(var/obj/item/stack/material/mat_stack in contents)
-					if(mat_stack.material == M && mat_stack.amount < mat_stack.max_amount)
+					if (mat_stack.material == M && mat_stack.amount < mat_stack.max_amount)
 						var/taking_sheets = min(sheets, mat_stack.max_amount - mat_stack.amount)
 						mat_stack.set_amount(mat_stack.amount + taking_sheets)
 						sheets -= taking_sheets
@@ -147,7 +147,7 @@
 					sheets -= taking_sheets
 					updated_stacks = TRUE
 
-		if(updated_stacks && prob(5))
+		if (updated_stacks && prob(5))
 			to_chat(owner, SPAN_NOTICE("Your [name] churns as it digests some material into a usable form."))
 
 /obj/item/organ/internal/hindtongue
@@ -199,26 +199,26 @@
 	return 0
 
 /obj/item/organ/internal/voxstack/proc/do_backup()
-	if(owner && owner.stat != DEAD && !is_broken() && owner.mind)
+	if (owner && owner.stat != DEAD && !is_broken() && owner.mind)
 		languages = owner.languages.Copy()
 		backup = owner.mind
 		default_language = owner.default_language
-		if(owner.ckey)
+		if (owner.ckey)
 			ownerckey = owner.ckey
 
 /obj/item/organ/internal/voxstack/proc/backup_inviable()
 	return 	(!istype(backup) || backup == owner.mind || (backup.current && backup.current.stat != DEAD))
 
 /obj/item/organ/internal/voxstack/replaced()
-	if(!..()) return 0
-	if(prompting) // Don't spam the player with twenty dialogs because someone doesn't know what they're doing or panicking.
+	if (!..()) return 0
+	if (prompting) // Don't spam the player with twenty dialogs because someone doesn't know what they're doing or panicking.
 		return 0
-	if(owner && !backup_inviable())
+	if (owner && !backup_inviable())
 		var/current_owner = owner
 		prompting = TRUE
 		var/response = alert(find_dead_player(ownerckey, 1), "Your neural backup has been placed into a new body. Do you wish to return to life as the mind of [backup.name]?", "Resleeving", "Yes", "No")
 		prompting = FALSE
-		if(src && response == "Yes" && owner == current_owner)
+		if (src && response == "Yes" && owner == current_owner)
 			overwrite()
 	sleep(-1)
 	do_backup()
@@ -235,8 +235,8 @@
 	..()
 
 /obj/item/organ/internal/voxstack/proc/overwrite()
-	if(owner.mind && owner.ckey) //Someone is already in this body!
-		if(owner.mind == backup) // Oh, it's the same mind in the backup. Someone must've spammed the 'Start Procedure' button in a panic.
+	if (owner.mind && owner.ckey) //Someone is already in this body!
+		if (owner.mind == backup) // Oh, it's the same mind in the backup. Someone must've spammed the 'Start Procedure' button in a panic.
 			return
 		owner.visible_message(SPAN_DANGER("\The [owner] spasms violently!"))
 		owner.ghostize()

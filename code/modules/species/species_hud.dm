@@ -39,15 +39,15 @@
 	for(var/slot in gear)
 		equip_slots |= gear[slot]["slot"]
 
-	if(has_hands)
+	if (has_hands)
 		equip_slots |= slot_l_hand
 		equip_slots |= slot_r_hand
 		equip_slots |= slot_handcuffed
 
-	if(slot_back in equip_slots)
+	if (slot_back in equip_slots)
 		equip_slots |= slot_in_backpack
 
-	if(slot_w_uniform in equip_slots)
+	if (slot_w_uniform in equip_slots)
 		equip_slots |= slot_tie
 
 	equip_slots |= slot_legcuffed

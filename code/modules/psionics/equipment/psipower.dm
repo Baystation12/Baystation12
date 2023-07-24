@@ -8,14 +8,14 @@
 
 /obj/item/psychic_power/New(mob/living/_owner)
 	owner = _owner
-	if(!istype(owner))
+	if (!istype(owner))
 		qdel(src)
 		return
 	START_PROCESSING(SSprocessing, src)
 	..()
 
 /obj/item/psychic_power/Destroy()
-	if(istype(owner) && owner.psi)
+	if (istype(owner) && owner.psi)
 		LAZYREMOVE(owner.psi.manifested_items, src)
 		UNSETEMPTY(owner.psi.manifested_items)
 	STOP_PROCESSING(SSprocessing, src)
@@ -29,13 +29,13 @@
 	user.drop_from_inventory(src)
 
 /obj/item/psychic_power/attack(mob/living/M, mob/living/user, target_zone)
-	if(M.do_psionics_check(max(force, maintain_cost), user))
+	if (M.do_psionics_check(max(force, maintain_cost), user))
 		to_chat(user, SPAN_DANGER("\The [src] flickers violently out of phase!"))
 		return 1
 	. = ..()
 
 /obj/item/psychic_power/afterattack(atom/target, mob/living/user, proximity)
-	if(target.do_psionics_check(max(force, maintain_cost), user))
+	if (target.do_psionics_check(max(force, maintain_cost), user))
 		to_chat(user, SPAN_DANGER("\The [src] flickers violently out of phase!"))
 		return
 	. = ..(target, user, proximity)
@@ -45,15 +45,15 @@
 	qdel(src)
 
 /obj/item/psychic_power/Process()
-	if(istype(owner))
+	if (istype(owner))
 		owner.psi.spend_power(maintain_cost)
-	if(!owner || owner.do_psionics_check(maintain_cost, owner) || !owner.IsHolding(src))
-		if(istype(loc,/mob/living))
+	if (!owner || owner.do_psionics_check(maintain_cost, owner) || !owner.IsHolding(src))
+		if (istype(loc,/mob/living))
 			var/mob/living/carbon/human/host = loc
-			if(istype(host))
+			if (istype(host))
 				for(var/obj/item/organ/external/organ in host.organs)
 					for(var/obj/item/O in organ.implants)
-						if(O == src)
+						if (O == src)
 							organ.implants -= src
 			host.pinned -= src
 			host.embedded -= src

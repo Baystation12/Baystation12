@@ -26,7 +26,7 @@
 
 /obj/item/tank/jetpack/examine(mob/living/user)
 	. = ..()
-	if(air_contents.total_moles < 5)
+	if (air_contents.total_moles < 5)
 		to_chat(user, SPAN_DANGER("The meter on \the [src] indicates you are almost out of gas!"))
 		playsound(src.loc, 'sound/effects/caution.ogg', 50, 1, -6)
 
@@ -41,7 +41,7 @@
 	set category = "Object"
 
 	on = !on
-	if(on)
+	if (on)
 		icon_state = "[icon_state]-on"
 		ion_trail.start()
 	else
@@ -57,15 +57,15 @@
 	playsound(src.loc, 'sound/effects/turret/open.wav', 50, 1, -6)
 
 /obj/item/tank/jetpack/proc/allow_thrust(num, mob/living/user)
-	if(!(src.on))
+	if (!(src.on))
 		return 0
-	if((num < 0.005 || src.air_contents.total_moles < num))
+	if ((num < 0.005 || src.air_contents.total_moles < num))
 		src.ion_trail.stop()
 		return 0
 
 	var/datum/gas_mixture/G = remove_air(num)
 
-	if(G.total_moles >= 0.005)
+	if (G.total_moles >= 0.005)
 		return 1
 
 	qdel(G)
@@ -102,20 +102,20 @@
 
 /obj/item/tank/jetpack/rig/allow_thrust(num, mob/living/user as mob)
 
-	if(!(src.on))
+	if (!(src.on))
 		return 0
 
-	if(!istype(holder) || !holder.air_supply)
+	if (!istype(holder) || !holder.air_supply)
 		return 0
 
 	var/obj/item/tank/pressure_vessel = holder.air_supply
 
-	if((num < 0.005 || pressure_vessel.air_contents.total_moles < num))
+	if ((num < 0.005 || pressure_vessel.air_contents.total_moles < num))
 		src.ion_trail.stop()
 		return 0
 
 	var/datum/gas_mixture/G = pressure_vessel.remove_air(num)
 
-	if(G.total_moles >= 0.005)
+	if (G.total_moles >= 0.005)
 		return 1
 	qdel(G)

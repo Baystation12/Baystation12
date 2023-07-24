@@ -7,7 +7,7 @@
 
 /datum/unit_test/time/shall_validate_sixth_of_june/start_test()
 	var/datum/is_date/day/D = new(6, 6)
-	if(D.IsValid())
+	if (D.IsValid())
 		pass("Validation succeeded")
 	else
 		fail("Validation failed")
@@ -19,7 +19,7 @@
 
 /datum/unit_test/time/shall_not_validate_not_sixth_of_june/start_test()
 	var/datum/is_date/day/D = new(1, 1)
-	if(D.IsValid())
+	if (D.IsValid())
 		fail("Unexpected validation")
 	else
 		pass("Did not validate")
@@ -31,7 +31,7 @@
 
 /datum/unit_test/time/shall_validate_range_that_include_sixt_of_june_start_before_end/start_test()
 	var/datum/is_date/range/R = new(5, 5, 7, 7)
-	if(R.IsValid())
+	if (R.IsValid())
 		pass("Validation succeeded")
 	else
 		fail("Validation failed")
@@ -43,7 +43,7 @@
 
 /datum/unit_test/time/shall_validate_range_that_include_sixt_of_june_start_after_end/start_test()
 	var/datum/is_date/range/R = new(8, 8, 7, 7)
-	if(R.IsValid())
+	if (R.IsValid())
 		pass("Validation succeeded")
 	else
 		fail("Validation failed")
@@ -55,7 +55,7 @@
 
 /datum/unit_test/time/shall_not_validate_range_that_exlude_sixt_of_june_start_before_end/start_test()
 	var/datum/is_date/range/R = new(7, 7, 8, 8)
-	if(R.IsValid())
+	if (R.IsValid())
 		fail("Unexpected validation")
 	else
 		pass("Did not validate")
@@ -67,7 +67,7 @@
 
 /datum/unit_test/time/shall_not_validate_range_that_exclude_sixt_of_june_start_after_end/start_test()
 	var/datum/is_date/range/R = new(7, 7, 5, 5)
-	if(R.IsValid())
+	if (R.IsValid())
 		fail("Unexpected validation")
 	else
 		pass("Did not validate")

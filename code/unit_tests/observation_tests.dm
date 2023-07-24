@@ -12,7 +12,7 @@
 	var/list/stored_event_listen_count
 
 /datum/unit_test/observation/start_test()
-	if(!received_moves)
+	if (!received_moves)
 		received_moves = list()
 	received_moves.Cut()
 
@@ -30,26 +30,26 @@
 /datum/unit_test/observation/proc/sanity_check_events(phase)
 	for(var/entry in GLOB.all_observable_events)
 		var/singleton/observ/event = entry
-		if(null in event.global_listeners)
+		if (null in event.global_listeners)
 			fail("[phase]: [event] - The global listeners list contains a null entry.")
 
 		for(var/event_source in event.event_sources)
 			for(var/list/list_of_listeners in event.event_sources[event_source])
-				if(isnull(list_of_listeners))
+				if (isnull(list_of_listeners))
 					fail("[phase]: [event] - The event source list contains a null entry.")
-				else if(!istype(list_of_listeners))
+				else if (!istype(list_of_listeners))
 					fail("[phase]: [event] - The list of listeners was not of the expected type. Was [list_of_listeners.type].")
 				else
 					for(var/listener in list_of_listeners)
-						if(isnull(listener))
+						if (isnull(listener))
 							fail("[phase]: [event] - The event source listener list contains a null entry.")
 						else
 							var/proc_calls = list_of_listeners[listener]
-							if(isnull(proc_calls))
+							if (isnull(proc_calls))
 								fail("[phase]: [event] - [listener] - The proc call list was null.")
 							else
 								for(var/proc_call in proc_calls)
-									if(isnull(proc_call))
+									if (isnull(proc_call))
 										fail("[phase]: [event] - [listener]- The proc call list contains a null entry.")
 
 	for(var/entry in (GLOB.global_listen_count - stored_global_listen_count))
@@ -81,13 +81,13 @@
 	GLOB.moved_event.register_global(src, /datum/unit_test/observation/proc/receive_move)
 	O.forceMove(target)
 
-	if(length(received_moves) != 1)
+	if (length(received_moves) != 1)
 		fail("Expected 1 raised moved event, were [length(received_moves)].")
 		dump_received_moves()
 		return 1
 
 	var/list/event = received_moves[1]
-	if(event[1] != O || event[2] != start || event[3] != target)
+	if (event[1] != O || event[2] != start || event[3] != target)
 		fail("Unepected move event received. Expected [O], was [event[1]]. Expected [start], was [event[2]]. Expected [target], was [event[3]]")
 	else
 		pass("Received the expected move event.")
@@ -105,7 +105,7 @@
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
 
 	O.start_following(H)
-	if(is_listening_to_movement(H, O))
+	if (is_listening_to_movement(H, O))
 		pass("The observer is now following the mob.")
 	else
 		fail("The observer is not following the mob.")
@@ -124,7 +124,7 @@
 
 	O.start_following(H)
 	O.stop_following()
-	if(!is_listening_to_movement(H, O))
+	if (!is_listening_to_movement(H, O))
 		pass("The observer is no longer following the mob.")
 	else
 		fail("The observer is still following the mob.")
@@ -145,7 +145,7 @@
 	var/obj/structure/closet/C = get_named_instance(/obj/structure/closet, T, "Closet")
 
 	H.forceMove(C)
-	if(!is_listening_to_movement(C, H))
+	if (!is_listening_to_movement(C, H))
 		pass("The mob did not register to the closet's moved event.")
 	else
 		fail("The mob has registered to the closet's moved event.")
@@ -167,7 +167,7 @@
 	O.start_following(H)
 	var/listening_to_closet = is_listening_to_movement(C, H)
 	var/listening_to_human = is_listening_to_movement(H, O)
-	if(listening_to_closet && listening_to_human)
+	if (listening_to_closet && listening_to_human)
 		pass("Recursive moved registration succesful.")
 	else
 		fail("Recursive moved registration failed. Human listening to closet: [listening_to_closet] - Observer listening to human: [listening_to_human]")
@@ -190,7 +190,7 @@
 	H.forceMove(C)
 	var/listening_to_closet = is_listening_to_movement(C, H)
 	var/listening_to_human = is_listening_to_movement(H, O)
-	if(listening_to_closet && listening_to_human)
+	if (listening_to_closet && listening_to_human)
 		pass("Recursive moved registration succesful.")
 	else
 		fail("Recursive moved registration failed. Human listening to closet: [listening_to_closet] - Observer listening to human: [listening_to_human]")
@@ -223,15 +223,15 @@
 	GLOB.moved_event.register(held_item, src, /datum/unit_test/observation/proc/receive_move)
 	holding_mob.drop_from_inventory(held_item)
 
-	if(length(received_moves) != 1)
+	if (length(received_moves) != 1)
 		fail("Expected 1 raised moved event, were [length(received_moves)].")
 		dump_received_moves()
 		return 1
 
 	var/list/event = received_moves[1]
-	if(event[1] != held_item || event[2] != held_mob || event[3] != exosuit)
+	if (event[1] != held_item || event[2] != held_mob || event[3] != exosuit)
 		fail("Unexpected move event received. Expected [held_item], was [event[1]]. Expected [held_mob], was [event[2]]. Expected [exosuit], was [event[3]]")
-	else if(!(held_item in exosuit.dropped_items))
+	else if (!(held_item in exosuit.dropped_items))
 		fail("Expected \the [held_item] to be in the mechs' dropped item list")
 	else
 		pass("One one moved event with expected arguments raised.")
@@ -258,7 +258,7 @@
 	three.start_following(two)
 
 	two.stop_following()
-	if(is_listening_to_movement(two, three))
+	if (is_listening_to_movement(two, three))
 		pass("Observer three is still following observer two.")
 	else
 		fail("Observer three is no longer following observer two.")
@@ -282,7 +282,7 @@
 	three.start_following(two)
 
 	three.stop_following()
-	if(is_listening_to_movement(one, two))
+	if (is_listening_to_movement(one, two))
 		pass("Observer two is still following observer one.")
 	else
 		fail("Observer two is no longer following observer one.")
@@ -303,7 +303,7 @@
 	GLOB.moved_event.register_global(O, /atom/movable/proc/move_to_turf)
 	qdel(O)
 
-	if(null in GLOB.moved_event.global_listeners)
+	if (null in GLOB.moved_event.global_listeners)
 		fail("The global listener list contains a null entry.")
 	else
 		pass("The global listener list does not contain a null entry.")
@@ -321,7 +321,7 @@
 	GLOB.moved_event.register(event_source, listener, /atom/movable/proc/recursive_move)
 	qdel(event_source)
 
-	if(null in GLOB.moved_event.event_sources)
+	if (null in GLOB.moved_event.event_sources)
 		fail("The event source list contains a null entry.")
 	else
 		pass("The event source list does not contain a null entry.")
@@ -341,7 +341,7 @@
 	qdel(listener)
 
 	var/listeners = GLOB.moved_event.event_sources[event_source]
-	if(listeners && (null in listeners))
+	if (listeners && (null in listeners))
 		fail("The event source listener list contains a null entry.")
 	else
 		pass("The event source listener list does not contain a null entry.")

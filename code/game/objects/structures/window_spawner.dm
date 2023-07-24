@@ -28,7 +28,7 @@
 
 /obj/effect/wingrille_spawn/Initialize(mapload)
 	. = ..()
-	if(!win_path)
+	if (!win_path)
 		return
 
 	// sometimes it's useful to plonk these down and activate them all manually,
@@ -37,39 +37,39 @@
 	// see https://github.com/Baystation12/Baystation12/pull/9907#issuecomment-114896669
 	var/auto_activate = mapload || (GAME_STATE < RUNLEVEL_GAME)
 
-	if(auto_activate)
+	if (auto_activate)
 		activate()
 		return INITIALIZE_HINT_QDEL
 
 /obj/effect/wingrille_spawn/proc/activate()
-	if(activated) return
+	if (activated) return
 
-	if(locate(/obj/structure/window) in loc)
+	if (locate(/obj/structure/window) in loc)
 		warning("Window Spawner: A window structure already exists at [loc.x]-[loc.y]-[loc.z]")
 
 	var/list/neighbours = list()
-	if(fulltile)
+	if (fulltile)
 		var/obj/structure/window/new_win = new win_path(loc)
 		handle_window_spawn(new_win)
 	else
 		for (var/dir in GLOB.cardinal)
 			var/turf/T = get_step(src, dir)
 			var/obj/effect/wingrille_spawn/other = locate(type) in T
-			if(!other)
+			if (!other)
 				var/found_connection
-				if(locate(/obj/structure/grille) in T)
+				if (locate(/obj/structure/grille) in T)
 					for(var/obj/structure/window/W in T)
-						if(W.type == win_path && W.dir == get_dir(T,src))
+						if (W.type == win_path && W.dir == get_dir(T,src))
 							found_connection = 1
 							qdel(W)
-				if(!found_connection)
+				if (!found_connection)
 					var/obj/structure/window/new_win = new win_path(loc)
 					new_win.set_dir(dir)
 					handle_window_spawn(new_win)
 			else
 				neighbours |= other
 
-	if(locate(/obj/structure/grille) in loc)
+	if (locate(/obj/structure/grille) in loc)
 		warning("Window Spawner: A grille already exists at [loc.x]-[loc.y]-[loc.z]")
 	else
 		var/obj/structure/grille/G = new /obj/structure/grille(loc)
@@ -77,7 +77,7 @@
 
 	activated = 1
 	for(var/obj/effect/wingrille_spawn/other in neighbours)
-		if(!other.activated) other.activate()
+		if (!other.activated) other.activate()
 
 /obj/effect/wingrille_spawn/proc/handle_window_spawn(obj/structure/window/W)
 	return
@@ -128,5 +128,5 @@
 	win_path = /obj/structure/window/reinforced/polarized/full
 
 /obj/effect/wingrille_spawn/reinforced/polarized/handle_window_spawn(obj/structure/window/reinforced/polarized/P)
-	if(id)
+	if (id)
 		P.id = id

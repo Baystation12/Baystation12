@@ -29,44 +29,44 @@
 	var/single_use = TRUE // autoinjectors are not refillable (overriden for hypospray)
 
 /obj/item/reagent_containers/hypospray/attack(mob/living/M, mob/user)
-	if(!reagents.total_volume)
+	if (!reagents.total_volume)
 		to_chat(user, SPAN_WARNING("[src] is empty."))
 		return
 	if (!istype(M))
 		return
 
 	var/allow = M.can_inject(user, check_zone(user.zone_sel.selecting))
-	if(!allow)
+	if (!allow)
 		return
 
 	if (allow == INJECTION_PORT)
-		if(M != user)
+		if (M != user)
 			user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [M]'s suit!"))
 		else
 			to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
-		if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
+		if (!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
 			return
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	user.do_attack_animation(M)
 
-	if(user != M && !M.incapacitated() && time) // you're injecting someone else who is concious, so apply the device's intrisic delay
+	if (user != M && !M.incapacitated() && time) // you're injecting someone else who is concious, so apply the device's intrisic delay
 		to_chat(user, SPAN_WARNING("\The [user] is trying to inject \the [M] with \the [name]."))
-		if(!user.do_skilled(time, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
+		if (!user.do_skilled(time, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
 			return
 
-	if(single_use && reagents.total_volume <= 0) // currently only applies to autoinjectors
+	if (single_use && reagents.total_volume <= 0) // currently only applies to autoinjectors
 		atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER // Prevents autoinjectors to be refilled.
 
 	to_chat(user, SPAN_NOTICE("You inject [M] with [src]."))
-	if(ishuman(M))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		H.custom_pain(SPAN_WARNING("You feel a tiny prick!"), 1, TRUE, H.get_organ(user.zone_sel.selecting))
 
 	playsound(src, 'sound/effects/hypospray.ogg',25)
 	user.visible_message(SPAN_WARNING("[user] injects [M] with [src]."))
 
-	if(M.reagents)
+	if (M.reagents)
 		var/should_admin_log = reagents.should_admin_log()
 		var/contained = reagentlist()
 		var/trans = reagents.trans_to_mob(M, amount_per_transfer_from_this, CHEM_BLOOD)
@@ -94,7 +94,7 @@
 	reagents.maximum_volume = loaded_vial.reagents.maximum_volume
 
 /obj/item/reagent_containers/hypospray/vial/proc/remove_vial(mob/user, swap_mode)
-	if(!loaded_vial)
+	if (!loaded_vial)
 		return
 	reagents.trans_to_holder(loaded_vial.reagents,volume)
 	reagents.maximum_volume = 0
@@ -105,8 +105,8 @@
 		to_chat(user, "You remove the vial from the [src].")
 
 /obj/item/reagent_containers/hypospray/vial/attack_hand(mob/user)
-	if(user.get_inactive_hand() == src)
-		if(!loaded_vial)
+	if (user.get_inactive_hand() == src)
+		if (!loaded_vial)
 			to_chat(user, SPAN_NOTICE("There is no vial loaded in the [src]."))
 			return
 		remove_vial(user)
@@ -117,17 +117,17 @@
 
 /obj/item/reagent_containers/hypospray/vial/attackby(obj/item/W, mob/user)
 	var/usermessage = ""
-	if(istype(W, /obj/item/reagent_containers/glass/beaker/vial))
-		if(!do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE) || !(W in user))
+	if (istype(W, /obj/item/reagent_containers/glass/beaker/vial))
+		if (!do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE) || !(W in user))
 			return 0
-		if(!user.unEquip(W, src))
+		if (!user.unEquip(W, src))
 			return
-		if(loaded_vial)
+		if (loaded_vial)
 			remove_vial(user, "swap")
 			usermessage = "You load \the [W] into \the [src] as you remove the old one."
 		else
 			usermessage = "You load \the [W] into \the [src]."
-		if(W.is_open_container())
+		if (W.is_open_container())
 			W.atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
 			W.update_icon()
 		loaded_vial = W
@@ -140,7 +140,7 @@
 	..()
 
 /obj/item/reagent_containers/hypospray/vial/afterattack(obj/target, mob/user, proximity) // hyposprays can be dumped into, why not out? uses standard_pour_into helper checks.
-	if(!proximity)
+	if (!proximity)
 		return
 	if (!reagents.total_volume && istype(target, /obj/item/reagent_containers/glass))
 		var/good_target = is_type_in_list(target, list(
@@ -191,7 +191,7 @@
 
 /obj/item/reagent_containers/hypospray/autoinjector/on_update_icon()
 	overlays.Cut()
-	if(reagents.total_volume > 0)
+	if (reagents.total_volume > 0)
 		icon_state = "[initial(icon_state)]1"
 	else
 		icon_state = "[initial(icon_state)]0"
@@ -205,7 +205,7 @@
 
 /obj/item/reagent_containers/hypospray/autoinjector/examine(mob/user)
 	. = ..(user)
-	if(reagents && length(reagents.reagent_list))
+	if (reagents && length(reagents.reagent_list))
 		to_chat(user, SPAN_NOTICE("It is currently loaded."))
 	else
 		to_chat(user, SPAN_NOTICE("It is spent."))

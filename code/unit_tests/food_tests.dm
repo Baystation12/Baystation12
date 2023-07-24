@@ -13,12 +13,12 @@
 
 	for (var/subtype in subtypesof(/obj/item/reagent_containers/food/snacks/slice))
 		var/obj/item/reagent_containers/food/snacks/slice/slice = subtype
-		if(!initial(slice.whole_path))
+		if (!initial(slice.whole_path))
 			log_bad("[slice] does not define a whole_path.")
 			any_failed = TRUE
 			continue
 
-		if(!ispath(initial(slice.whole_path), /obj/item/reagent_containers/food/snacks/sliceable))
+		if (!ispath(initial(slice.whole_path), /obj/item/reagent_containers/food/snacks/sliceable))
 			log_bad("[slice]/whole_path is not a subtype of sliceable.")
 			any_failed = TRUE
 			continue
@@ -26,15 +26,14 @@
 		var/obj/item/reagent_containers/food/snacks/sliceable/whole = initial(slice.whole_path)
 
 		// note that the slice can be a subtype of the one defined in slice_path
-		if(!ispath(slice, initial(whole.slice_path)))
+		if (!ispath(slice, initial(whole.slice_path)))
 			log_bad("[whole] does not define slice_path as [slice].")
 			any_failed = TRUE
 			continue
 
-	if(any_failed)
+	if (any_failed)
 		fail("Some slice types were incorrectly defined.")
 	else
 		pass("All slice types defined correctly.")
 
 	return 1
-

@@ -14,7 +14,7 @@
 /obj/structure/window/Move()
 	var/oldloc = loc
 	. = ..()
-	if(loc != oldloc)
+	if (loc != oldloc)
 		for(var/obj/structure/table/T in view(oldloc, 1) | view(loc, 1))
 			T.update_connections()
 			T.update_icon()

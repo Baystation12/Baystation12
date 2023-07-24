@@ -24,19 +24,19 @@
 
 /datum/event/meteor_wave/announce()
 	switch(severity)
-		if(EVENT_LEVEL_MAJOR)
+		if (EVENT_LEVEL_MAJOR)
 			command_announcement.Announce(replacetext(GLOB.using_map.meteor_detected_message, "%STATION_NAME%", location_name()), "[location_name()] Sensor Array", new_sound = GLOB.using_map.meteor_detected_sound, zlevels = affecting_z)
 		else
 			command_announcement.Announce("The [location_name()] is now in a meteor shower.", "[location_name()] Sensor Array", zlevels = affecting_z)
 
 /datum/event/meteor_wave/tick()
 	// Begin sending the alarm signals to shield diffusers so the field is already regenerated (if it exists) by the time actual meteors start flying around.
-	if(alarmWhen < activeFor)
+	if (alarmWhen < activeFor)
 		for(var/obj/machinery/shield_diffuser/SD in SSmachines.machinery)
-			if(isStationLevel(SD.z))
+			if (isStationLevel(SD.z))
 				SD.meteor_alarm(10)
 
-	if(waves && activeFor >= next_meteor)
+	if (waves && activeFor >= next_meteor)
 		send_wave()
 
 /datum/event/meteor_wave/proc/worst_case_end()
@@ -54,16 +54,16 @@
 
 /datum/event/meteor_wave/end()
 	switch(severity)
-		if(EVENT_LEVEL_MAJOR)
+		if (EVENT_LEVEL_MAJOR)
 			command_announcement.Announce("The [location_name()] has cleared the meteor storm.", "[location_name()] Sensor Array", zlevels = affecting_z)
 		else
 			command_announcement.Announce("The [location_name()] has cleared the meteor shower", "[location_name()] Sensor Array", zlevels = affecting_z)
 
 /datum/event/meteor_wave/proc/get_meteors()
 	switch(severity)
-		if(EVENT_LEVEL_MAJOR)
+		if (EVENT_LEVEL_MAJOR)
 			return meteors_major
-		if(EVENT_LEVEL_MODERATE)
+		if (EVENT_LEVEL_MODERATE)
 			return meteors_moderate
 		else
 			return meteors_minor
@@ -112,7 +112,7 @@ var/global/list/meteors_major = list(
 	. = ..()
 
 /datum/event/meteor_wave/overmap/tick()
-	if(!victim)
+	if (!victim)
 		return
 	if (victim.is_still() || victim.get_helm_skill() >= SKILL_TRAINED) //Unless you're standing or good at your job..
 		start_side = pick(GLOB.cardinal)
@@ -127,9 +127,9 @@ var/global/list/meteors_major = list(
 	var/skill = victim.get_helm_skill()
 	var/speed = victim.get_speed()
 	if (skill < SKILL_EXPERIENCED)
-		if(victim.is_still() || speed < SHIP_SPEED_SLOW) //Standing still or being slow means less shit flies your way
+		if (victim.is_still() || speed < SHIP_SPEED_SLOW) //Standing still or being slow means less shit flies your way
 			. = round(. * 0.7)
-		if(speed > SHIP_SPEED_FAST) //Sanic stahp
+		if (speed > SHIP_SPEED_FAST) //Sanic stahp
 			. *= 2
 	if (skill == SKILL_EXPERIENCED)
 		if (victim.is_still())
@@ -149,11 +149,11 @@ var/global/list/meteors_major = list(
 			. = round(. * 0.5)
 
 	//Smol ship evasion
-	if(victim.vessel_size < SHIP_SIZE_LARGE && speed < SHIP_SPEED_FAST)
+	if (victim.vessel_size < SHIP_SIZE_LARGE && speed < SHIP_SPEED_FAST)
 		var/skill_needed = SKILL_MASTER
-		if(speed < SHIP_SPEED_SLOW)
+		if (speed < SHIP_SPEED_SLOW)
 			skill_needed = SKILL_TRAINED
-		if(victim.vessel_size < SHIP_SIZE_SMALL)
+		if (victim.vessel_size < SHIP_SIZE_SMALL)
 			skill_needed = skill_needed - 1
-		if(skill >= max(skill_needed, victim.skill_needed))
+		if (skill >= max(skill_needed, victim.skill_needed))
 			return 0

@@ -12,7 +12,7 @@
 
 
 #define MC_SPLIT_TICK \
-	if(split_tick_phases > 1){\
+	if (split_tick_phases > 1){\
 		Master.current_ticklimit = ((original_tick_limit - world.tick_usage) / split_tick_phases) + world.tick_usage;\
 		--split_tick_phases;\
 	} else {\
@@ -37,7 +37,7 @@
 ****/
 
 /// Attempt to ensure that the subsystem is a singleton. Do not use directly.
-#define NEW_SS_GLOBAL(varname) if(varname != src){if(istype(varname)){Recover(varname);qdel(varname);}varname = src;}
+#define NEW_SS_GLOBAL(varname) if (varname != src){if (istype(varname)){Recover(varname);qdel(varname);}varname = src;}
 
 /// Boilerplate for a new global subsystem object and its associated type.
 #define SUBSYSTEM_DEF(X) var/global/datum/controller/subsystem/##X/SS##X;\
@@ -62,7 +62,7 @@
 	PreInit();\
 }\
 /datum/controller/subsystem/processing/##X/Recover() {\
-	if(istype(SS##X.processing)) {\
+	if (istype(SS##X.processing)) {\
 		processing = SS##X.processing; \
 	}\
 }\
@@ -71,7 +71,7 @@
 /// Register a datum to be processed with a processing subsystem.
 #define START_PROCESSING(Processor, Datum) \
 if (Datum.is_processing) {\
-	if(Datum.is_processing != #Processor)\
+	if (Datum.is_processing != #Processor)\
 	{\
 		crash_with("Failed to start processing. [log_info_line(Datum)] is already being processed by [Datum.is_processing] but queue attempt occured on [#Processor]."); \
 	}\
@@ -82,8 +82,8 @@ if (Datum.is_processing) {\
 
 /// Unregister a datum with a processing subsystem.
 #define STOP_PROCESSING(Processor, Datum) \
-if(Datum.is_processing) {\
-	if(Processor.processing.Remove(Datum)) {\
+if (Datum.is_processing) {\
+	if (Processor.processing.Remove(Datum)) {\
 		Datum.is_processing = null;\
 	} else {\
 		crash_with("Failed to stop processing. [log_info_line(Datum)] is being processed by [Datum.is_processing] but de-queue attempt occured on [#Processor]."); \
@@ -92,14 +92,14 @@ if(Datum.is_processing) {\
 
 /// START specific to SSmachines
 #define START_PROCESSING_MACHINE(machine, flag)\
-	if(!istype(machine, /obj/machinery)) CRASH("A non-machine [log_info_line(machine)] was queued to process on the machinery subsystem.");\
+	if (!istype(machine, /obj/machinery)) CRASH("A non-machine [log_info_line(machine)] was queued to process on the machinery subsystem.");\
 	machine.processing_flags |= flag;\
 	START_PROCESSING(SSmachines, machine)
 
 /// STOP specific to SSmachines
 #define STOP_PROCESSING_MACHINE(machine, flag)\
 	machine.processing_flags &= ~flag;\
-	if(machine.processing_flags == 0) STOP_PROCESSING(SSmachines, machine)
+	if (machine.processing_flags == 0) STOP_PROCESSING(SSmachines, machine)
 
 
 /****

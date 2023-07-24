@@ -4,7 +4,7 @@
 	screen_loc = DIONA_SCREEN_LOC_INTENT
 
 /obj/screen/intent/diona_nymph/on_update_icon()
-	if(intent == I_HURT || intent == I_GRAB)
+	if (intent == I_HURT || intent == I_GRAB)
 		intent = I_GRAB
 		icon_state = "intent_expel"
 	else
@@ -21,7 +21,7 @@
 
 /obj/screen/diona/hat/Click()
 	var/mob/living/carbon/alien/diona/chirp = usr
-	if(istype(chirp) && chirp.hat)
+	if (istype(chirp) && chirp.hat)
 		chirp.unEquip(chirp.hat)
 
 /obj/screen/diona/held
@@ -31,7 +31,7 @@
 
 /obj/screen/diona/held/Click()
 	var/mob/living/carbon/alien/diona/chirp = usr
-	if(istype(chirp) && chirp.holding_item) chirp.unEquip(chirp.holding_item)
+	if (istype(chirp) && chirp.holding_item) chirp.unEquip(chirp.holding_item)
 
 /datum/hud/diona_nymph
 	var/obj/screen/diona/hat/hat

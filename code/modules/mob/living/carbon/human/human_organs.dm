@@ -1,19 +1,19 @@
 /mob/living/carbon/human/proc/update_eyes()
 	var/obj/item/organ/internal/eyes/eyes = internal_organs_by_name[species.vision_organ ? species.vision_organ : BP_EYES]
-	if(eyes)
+	if (eyes)
 		eyes.update_colour()
 		regenerate_icons()
 
 /mob/living/carbon/human/proc/get_bodypart_name(zone)
 	var/obj/item/organ/external/E = get_organ(zone)
-	if(E) . = E.name
+	if (E) . = E.name
 
 /mob/living/carbon/human/proc/recheck_bad_external_organs()
 	var/damage_this_tick = getToxLoss()
 	for(var/obj/item/organ/external/O in organs)
 		damage_this_tick += O.burn_dam + O.brute_dam
 
-	if(damage_this_tick > last_dam)
+	if (damage_this_tick > last_dam)
 		. = TRUE
 	last_dam = damage_this_tick
 
@@ -22,7 +22,7 @@
 
 	var/force_process = recheck_bad_external_organs()
 
-	if(force_process)
+	if (force_process)
 		bad_external_organs.Cut()
 		for(var/obj/item/organ/external/Ex in organs)
 			bad_external_organs |= Ex
@@ -34,13 +34,13 @@
 	handle_stance()
 	handle_grasp()
 
-	if(!force_process && !length(bad_external_organs))
+	if (!force_process && !length(bad_external_organs))
 		return
 
 	for(var/obj/item/organ/external/E in bad_external_organs)
-		if(!E)
+		if (!E)
 			continue
-		if(!E.need_process())
+		if (!E.need_process())
 			bad_external_organs -= E
 			continue
 		else
@@ -60,11 +60,11 @@
 
 /mob/living/carbon/human/proc/Check_Proppable_Object()
 	for(var/turf/simulated/T in trange(1,src)) //we only care for non-space turfs
-		if(T.density)	//walls work
+		if (T.density)	//walls work
 			return 1
 
 	for(var/obj/O in orange(1, src))
-		if(O && O.density && O.anchored)
+		if (O && O.density && O.anchored)
 			return 1
 
 	return 0
@@ -82,18 +82,18 @@
 		return
 
 	// Can't fall if nothing pulls you down
-	if(!has_gravity())
+	if (!has_gravity())
 		return
 
 	var/limb_pain
 	for(var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 		var/obj/item/organ/external/E = organs_by_name[limb_tag]
-		if(!E || !E.is_usable())
+		if (!E || !E.is_usable())
 			stance_damage += 2 // let it fail even if just foot&leg
 		else if (E.is_malfunctioning())
 			//malfunctioning only happens intermittently so treat it as a missing limb when it procs
 			stance_damage += 2
-			if(prob(10))
+			if (prob(10))
 				visible_message("\The [src]'s [E.name] [pick("twitches", "shudders")] and sparks!")
 				var/datum/effect/effect/system/spark_spread/spark_system = new ()
 				spark_system.set_up(5, 0, src)
@@ -106,7 +106,7 @@
 		else if (E.is_dislocated())
 			stance_damage += 0.5
 
-		if(E) limb_pain = E.can_feel_pain()
+		if (E) limb_pain = E.can_feel_pain()
 
 	// Canes and crutches help you stand (if the latter is ever added)
 	// One cane mitigates a broken leg+foot, or a missing foot.
@@ -116,19 +116,19 @@
 	if (r_hand && istype(r_hand, /obj/item/cane))
 		stance_damage -= 2
 
-	if(MOVING_DELIBERATELY(src)) //you don't suffer as much if you aren't trying to run
+	if (MOVING_DELIBERATELY(src)) //you don't suffer as much if you aren't trying to run
 		var/working_pair = 2
-		if(!organs_by_name[BP_L_LEG] || !organs_by_name[BP_L_FOOT]) //are we down a limb?
+		if (!organs_by_name[BP_L_LEG] || !organs_by_name[BP_L_FOOT]) //are we down a limb?
 			working_pair -= 1
-		else if((!organs_by_name[BP_L_LEG].is_usable()) || (!organs_by_name[BP_L_FOOT].is_usable())) //if not, is it usable?
+		else if ((!organs_by_name[BP_L_LEG].is_usable()) || (!organs_by_name[BP_L_FOOT].is_usable())) //if not, is it usable?
 			working_pair -= 1
-		if(!organs_by_name[BP_R_LEG] || !organs_by_name[BP_R_FOOT])
+		if (!organs_by_name[BP_R_LEG] || !organs_by_name[BP_R_FOOT])
 			working_pair -= 1
-		else if((!organs_by_name[BP_R_LEG].is_usable()) || (!organs_by_name[BP_R_FOOT].is_usable()))
+		else if ((!organs_by_name[BP_R_LEG].is_usable()) || (!organs_by_name[BP_R_FOOT].is_usable()))
 			working_pair -= 1
-		if(working_pair >= 1)
+		if (working_pair >= 1)
 			stance_damage -= 1
-			if(Check_Proppable_Object()) //it helps to lean on something if you've got another leg to stand on
+			if (Check_Proppable_Object()) //it helps to lean on something if you've got another leg to stand on
 				stance_damage -= 1
 
 	var/list/objects_to_sit_on = list(
@@ -137,13 +137,13 @@
 		)
 
 	for(var/type in objects_to_sit_on) //things that can't be climbed but can be propped-up-on
-		if(locate(type) in src.loc)
+		if (locate(type) in src.loc)
 			return
 
 	// standing is poor
-	if(stance_damage >= 4 || (stance_damage >= 2 && prob(2)) || (stance_damage >= 3 && prob(8)))
-		if(!(lying || resting))
-			if(limb_pain)
+	if (stance_damage >= 4 || (stance_damage >= 2 && prob(2)) || (stance_damage >= 3 && prob(8)))
+		if (!(lying || resting))
+			if (limb_pain)
 				emote("scream")
 			custom_emote(VISIBLE_MESSAGE, "collapses!")
 		Weaken(3) //can't emote while weakened, apparently.
@@ -153,18 +153,18 @@
 		return
 
 	// You should not be able to pick anything up, but stranger things have happened.
-	if(l_hand)
+	if (l_hand)
 		for(var/limb_tag in list(BP_L_HAND, BP_L_ARM))
 			var/obj/item/organ/external/E = get_organ(limb_tag)
-			if(!E)
+			if (!E)
 				visible_message(SPAN_DANGER("Lacking a functioning left hand, \the [src] drops \the [l_hand]."))
 				drop_from_inventory(l_hand)
 				break
 
-	if(r_hand)
+	if (r_hand)
 		for(var/limb_tag in list(BP_R_HAND, BP_R_ARM))
 			var/obj/item/organ/external/E = get_organ(limb_tag)
-			if(!E)
+			if (!E)
 				visible_message(SPAN_DANGER("Lacking a functioning right hand, \the [src] drops \the [r_hand]."))
 				drop_from_inventory(r_hand)
 				break
@@ -174,22 +174,22 @@
 		return
 
 	for (var/obj/item/organ/external/E in organs)
-		if(!E || !(E.limb_flags & ORGAN_FLAG_CAN_GRASP))
+		if (!E || !(E.limb_flags & ORGAN_FLAG_CAN_GRASP))
 			continue
-		if(((E.is_broken() || E.is_dislocated()) && !E.splinted))
+		if (((E.is_broken() || E.is_dislocated()) && !E.splinted))
 			grasp_damage_disarm(E)
 
 /mob/living/carbon/human/proc/stance_damage_prone(obj/item/organ/external/affected)
 
-	if(affected)
+	if (affected)
 		switch(affected.body_part)
-			if(FOOT_LEFT, FOOT_RIGHT)
-				if(!BP_IS_ROBOTIC(affected))
+			if (FOOT_LEFT, FOOT_RIGHT)
+				if (!BP_IS_ROBOTIC(affected))
 					to_chat(src, SPAN_WARNING("You lose your footing as your [affected.name] spasms!"))
 				else
 					to_chat(src, SPAN_WARNING("You lose your footing as your [affected.name] [pick("twitches", "shudders")]!"))
-			if(LEG_LEFT, LEG_RIGHT)
-				if(!BP_IS_ROBOTIC(affected))
+			if (LEG_LEFT, LEG_RIGHT)
+				if (!BP_IS_ROBOTIC(affected))
 					to_chat(src, SPAN_WARNING("Your [affected.name] buckles from the shock!"))
 				else
 					to_chat(src, SPAN_WARNING("You lose your balance as [affected.name] [pick("malfunctions", "freezes","shudders")]!"))
@@ -200,23 +200,23 @@
 /mob/living/carbon/human/proc/grasp_damage_disarm(obj/item/organ/external/affected)
 	var/disarm_slot
 	switch(affected.body_part)
-		if(HAND_LEFT, ARM_LEFT)
+		if (HAND_LEFT, ARM_LEFT)
 			disarm_slot = slot_l_hand
-		if(HAND_RIGHT, ARM_RIGHT)
+		if (HAND_RIGHT, ARM_RIGHT)
 			disarm_slot = slot_r_hand
 
-	if(!disarm_slot)
+	if (!disarm_slot)
 		return
 
 	var/obj/item/thing = get_equipped_item(disarm_slot)
 
-	if(!thing)
+	if (!thing)
 		return
 
-	if(!unEquip(thing))
+	if (!unEquip(thing))
 		return
 
-	if(BP_IS_ROBOTIC(affected))
+	if (BP_IS_ROBOTIC(affected))
 		visible_message("<B>\The [src]</B> drops what they were holding, \his [affected.name] malfunctioning!")
 
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
@@ -228,11 +228,11 @@
 
 	else
 		var/grasp_name = affected.name
-		if((affected.body_part in list(ARM_LEFT, ARM_RIGHT)) && length(affected.children))
+		if ((affected.body_part in list(ARM_LEFT, ARM_RIGHT)) && length(affected.children))
 			var/obj/item/organ/external/hand = pick(affected.children)
 			grasp_name = hand.name
 
-		if(affected.can_feel_pain())
+		if (affected.can_feel_pain())
 			var/emote_scream = pick("screams in pain", "lets out a sharp cry", "cries out")
 			var/emote_scream_alt = pick("scream in pain", "let out a sharp cry", "cry out")
 			visible_message(
@@ -253,13 +253,13 @@
 	return FALSE
 
 /mob/living/carbon/human/is_asystole()
-	if(isSynthetic())
+	if (isSynthetic())
 		var/obj/item/organ/internal/cell/C = internal_organs_by_name[BP_CELL]
-		if(istype(C))
-			if(!C.is_usable() || !C.percent())
+		if (istype(C))
+			if (!C.is_usable() || !C.percent())
 				return TRUE
-	else if(should_have_organ(BP_HEART))
+	else if (should_have_organ(BP_HEART))
 		var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
-		if(!istype(heart) || !heart.is_working())
+		if (!istype(heart) || !heart.is_working())
 			return TRUE
 	return FALSE

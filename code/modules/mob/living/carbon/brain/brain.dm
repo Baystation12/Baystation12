@@ -16,25 +16,25 @@
 
 
 /mob/living/carbon/brain/Destroy()
-	if(key)				//If there is a mob connected to this thing. Have to check key twice to avoid false death reporting.
-		if(stat!=DEAD)	//If not dead.
+	if (key)				//If there is a mob connected to this thing. Have to check key twice to avoid false death reporting.
+		if (stat!=DEAD)	//If not dead.
 			death(1)	//Brains can die again. AND THEY SHOULD AHA HA HA HA HA HA
 		ghostize()		//Ghostize checks for key so nothing else is necessary.
 	. = ..()
 
 /mob/living/carbon/brain/say_understands(other)//Goddamn is this hackish, but this say code is so odd
 	if (istype(other, /mob/living/silicon/ai))
-		if(!(container && istype(container, /obj/item/device/mmi)))
+		if (!(container && istype(container, /obj/item/device/mmi)))
 			return 0
 		else
 			return 1
 	if (istype(other, /mob/living/silicon/pai))
-		if(!(container && istype(container, /obj/item/device/mmi)))
+		if (!(container && istype(container, /obj/item/device/mmi)))
 			return 0
 		else
 			return 1
 	if (istype(other, /mob/living/silicon/robot))
-		if(!(container && istype(container, /obj/item/device/mmi)))
+		if (!(container && istype(container, /obj/item/device/mmi)))
 			return 0
 		else
 			return 1
@@ -45,7 +45,7 @@
 	return ..()
 
 /mob/living/carbon/brain/UpdateLyingBuckledAndVerbStatus()
-	if(istype(loc, /obj/item/device/mmi))
+	if (istype(loc, /obj/item/device/mmi))
 		use_me = 1
 
 /mob/living/carbon/brain/isSynthetic()

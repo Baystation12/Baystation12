@@ -4,7 +4,7 @@
 GLOBAL_DATUM_INIT(self_state, /datum/topic_state/self_state, new)
 
 /datum/topic_state/self_state/can_use_topic(src_object, mob/user)
-	if(src_object != user)
+	if (src_object != user)
 		return STATUS_CLOSE
 	return user.self_can_use_topic(src_object)
 

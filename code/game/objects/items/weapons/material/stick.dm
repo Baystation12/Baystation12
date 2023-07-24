@@ -18,7 +18,7 @@
 
 
 /obj/item/material/stick/attackby(obj/item/W as obj, mob/user as mob)
-	if(W.sharp && W.edge && !sharp)
+	if (W.sharp && W.edge && !sharp)
 		user.visible_message(SPAN_WARNING("[user] sharpens [src] with [W]."), SPAN_WARNING("You sharpen [src] using [W]."))
 		sharp = TRUE
 		SetName("sharpened " + name)
@@ -27,7 +27,7 @@
 
 
 /obj/item/material/stick/attack(mob/M, mob/user)
-	if(user != M && user.a_intent == I_HELP)
+	if (user != M && user.a_intent == I_HELP)
 		//Playful poking is its own thing
 		user.visible_message(SPAN_NOTICE("[user] pokes [M] with [src]."), SPAN_NOTICE("You poke [M] with [src]."))
 		//Consider adding a check to see if target is dead

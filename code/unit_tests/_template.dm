@@ -16,7 +16,7 @@
 	// If your test requires any kind of delay use async so we can finish tests faster.
 	// Be sure and have a pass/fail procs in here if it's not using async.
 
-	if(0)
+	if (0)
 		fail("Zero is somehow True, that sucks")
 	else
 		pass("Zero is false, yay")

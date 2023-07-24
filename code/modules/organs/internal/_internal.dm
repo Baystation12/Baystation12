@@ -9,67 +9,67 @@
 	var/damage_reduction = 0.5     //modifier for internal organ injury
 
 /obj/item/organ/internal/New(mob/living/carbon/holder)
-	if(max_damage)
+	if (max_damage)
 		min_bruised_damage = floor(max_damage / 4)
 	..()
-	if(istype(holder))
+	if (istype(holder))
 		holder.internal_organs |= src
 
 		var/mob/living/carbon/human/H = holder
-		if(istype(H))
+		if (istype(H))
 			var/obj/item/organ/external/E = H.get_organ(parent_organ)
-			if(!E)
+			if (!E)
 				CRASH("[src] spawned in [holder] without a parent organ: [parent_organ].")
 			E.internal_organs |= src
 
 /obj/item/organ/internal/Destroy()
-	if(owner)
+	if (owner)
 		owner.internal_organs.Remove(src)
 		owner.internal_organs_by_name[organ_tag] = null
 		owner.internal_organs_by_name -= organ_tag
 		while(null in owner.internal_organs)
 			owner.internal_organs -= null
 		var/obj/item/organ/external/E = owner.organs_by_name[parent_organ]
-		if(istype(E)) E.internal_organs -= src
+		if (istype(E)) E.internal_organs -= src
 	return ..()
 
 /obj/item/organ/internal/set_dna(datum/dna/new_dna)
 	..()
-	if(species && species.organs_icon)
+	if (species && species.organs_icon)
 		icon = species.organs_icon
 
 //disconnected the organ from it's owner but does not remove it, instead it becomes an implant that can be removed with implant surgery
 //TODO move this to organ/internal once the FPB port comes through
 /obj/item/organ/proc/cut_away(mob/living/user)
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-	if(istype(parent)) //TODO ensure that we don't have to check this.
+	if (istype(parent)) //TODO ensure that we don't have to check this.
 		removed(user, 0)
 		parent.implants += src
 
 /obj/item/organ/internal/removed(mob/living/user, drop_organ=1, detach=1)
-	if(owner)
+	if (owner)
 		owner.internal_organs_by_name[organ_tag] = null
 		owner.internal_organs_by_name -= organ_tag
 		owner.internal_organs_by_name -= null
 		owner.internal_organs -= src
 
-		if(detach)
+		if (detach)
 			var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
-			if(affected)
+			if (affected)
 				affected.internal_organs -= src
 				status |= ORGAN_CUT_AWAY
 	..()
 
 /obj/item/organ/internal/replaced(mob/living/carbon/human/target, obj/item/organ/external/affected)
 
-	if(!istype(target))
+	if (!istype(target))
 		return 0
 
-	if(status & ORGAN_CUT_AWAY)
+	if (status & ORGAN_CUT_AWAY)
 		return 0 //organs don't work very well in the body when they aren't properly attached
 
 	// robotic organs emulate behavior of the equivalent flesh organ of the species
-	if(BP_IS_ROBOTIC(src) || !species)
+	if (BP_IS_ROBOTIC(src) || !species)
 		species = target.species
 
 	..()
@@ -82,18 +82,18 @@
 
 /obj/item/organ/internal/die()
 	..()
-	if((status & ORGAN_DEAD) && dead_icon)
+	if ((status & ORGAN_DEAD) && dead_icon)
 		icon_state = dead_icon
 
 /obj/item/organ/internal/remove_rejuv()
-	if(owner)
+	if (owner)
 		owner.internal_organs -= src
 		owner.internal_organs_by_name[organ_tag] = null
 		owner.internal_organs_by_name -= organ_tag
 		while(null in owner.internal_organs)
 			owner.internal_organs -= null
 		var/obj/item/organ/external/E = owner.organs_by_name[parent_organ]
-		if(istype(E)) E.internal_organs -= src
+		if (istype(E)) E.internal_organs -= src
 	..()
 
 /obj/item/organ/internal/is_usable()
@@ -105,7 +105,7 @@
 	min_broken_damage += 10
 
 /obj/item/organ/internal/proc/getToxLoss()
-	if(BP_IS_ROBOTIC(src))
+	if (BP_IS_ROBOTIC(src))
 		return damage * 0.5
 	return damage
 
@@ -127,33 +127,33 @@
 	take_internal_damage(amount, silent)
 
 /obj/item/organ/internal/proc/take_internal_damage(amount, silent=0)
-	if(BP_IS_ROBOTIC(src))
+	if (BP_IS_ROBOTIC(src))
 		damage = clamp(damage + (amount * 0.8), 0, max_damage)
 	else
 		damage = clamp(damage + amount, 0, max_damage)
 
 		//only show this if the organ is not robotic
-		if(owner && can_feel_pain() && parent_organ && (amount > 5 || prob(10)))
+		if (owner && can_feel_pain() && parent_organ && (amount > 5 || prob(10)))
 			var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-			if(parent && !silent)
+			if (parent && !silent)
 				var/degree = ""
-				if(is_bruised())
+				if (is_bruised())
 					degree = " a lot"
-				if(damage < 5)
+				if (damage < 5)
 					degree = " a bit"
 				owner.custom_pain("Something inside your [parent.name] hurts[degree].", amount, affecting = parent)
 
 /obj/item/organ/internal/proc/get_visible_state()
-	if(damage > max_damage)
+	if (damage > max_damage)
 		. = "bits and pieces of a destroyed "
-	else if(is_broken())
+	else if (is_broken())
 		. = "broken "
-	else if(is_bruised())
+	else if (is_bruised())
 		. = "badly damaged "
-	else if(damage > 5)
+	else if (damage > 5)
 		. = "damaged "
-	if(status & ORGAN_DEAD)
-		if(can_recover())
+	if (status & ORGAN_DEAD)
+		if (can_recover())
 			. = "decaying [.]"
 		else
 			. = "necrotic [.]"
@@ -164,17 +164,17 @@
 	handle_regeneration()
 
 /obj/item/organ/internal/proc/handle_regeneration()
-	if(!damage || BP_IS_ROBOTIC(src) || !owner || owner.chem_effects[CE_TOXIN] || owner.is_asystole())
+	if (!damage || BP_IS_ROBOTIC(src) || !owner || owner.chem_effects[CE_TOXIN] || owner.is_asystole())
 		return
-	if(damage < 0.1*max_damage)
+	if (damage < 0.1*max_damage)
 		heal_damage(0.1)
 
 /obj/item/organ/internal/proc/surgical_fix(mob/user)
-	if(damage > min_broken_damage)
+	if (damage > min_broken_damage)
 		var/scarring = damage/max_damage
 		scarring = 1 - 0.3 * scarring ** 2 // Between ~15 and 30 percent loss
 		var/new_max_dam = floor(scarring * max_damage)
-		if(new_max_dam < max_damage)
+		if (new_max_dam < max_damage)
 			to_chat(user, SPAN_WARNING("Not every part of [src] could be saved, some dead tissue had to be removed, making it more suspectable to damage in the future."))
 			set_max_damage(new_max_dam)
 	heal_damage(damage)
@@ -185,11 +185,11 @@
 /obj/item/organ/internal/get_scan_results(tag = FALSE)
 	. = ..()
 	var/scar_level = get_scarring_level()
-	if(scar_level > 0.01)
+	if (scar_level > 0.01)
 		. += tag ? "<span style='font-weight: bold; color: [COLOR_MEDICAL_SCARRING]'>[get_wound_severity(get_scarring_level())] scarring</span>" : "[get_wound_severity(get_scarring_level())] scarring"
 
 /obj/item/organ/internal/emp_act(severity)
-	if(!BP_IS_ROBOTIC(src))
+	if (!BP_IS_ROBOTIC(src))
 		return
 	switch (severity)
 		if (EMP_ACT_HEAVY)

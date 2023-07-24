@@ -21,7 +21,7 @@
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, SPAN_WARNING("You club yourself over the head."))
 		user.Weaken(3 * force)
-		if(ishuman(user))
+		if (ishuman(user))
 			var/mob/living/carbon/human/H = user
 			H.apply_damage(2*force, DAMAGE_BRUTE, BP_HEAD)
 		else
@@ -45,7 +45,7 @@
 
 /obj/item/melee/telebaton/attack_self(mob/user as mob)
 	on = !on
-	if(on)
+	if (on)
 		user.visible_message(SPAN_WARNING("With a flick of their wrist, [user] extends their telescopic baton."),\
 		SPAN_WARNING("You extend the baton."),\
 		"You hear an ominous click.")
@@ -66,29 +66,29 @@
 	update_held_icon()
 
 /obj/item/melee/telebaton/on_update_icon()
-	if(on)
+	if (on)
 		icon_state = "telebaton_1"
 		item_state = "telebaton_1"
 	else
 		icon_state = "telebaton_0"
 		item_state = "telebaton_0"
-	if(length(blood_DNA))
+	if (length(blood_DNA))
 		generate_blood_overlay(TRUE) // Force recheck.
 		overlays.Cut()
 		overlays += blood_overlay
 
 /obj/item/melee/telebaton/attack(mob/target as mob, mob/living/user as mob)
-	if(on)
+	if (on)
 		if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 			to_chat(user, SPAN_WARNING("You club yourself over the head."))
 			user.Weaken(3 * force)
-			if(ishuman(user))
+			if (ishuman(user))
 				var/mob/living/carbon/human/H = user
 				H.apply_damage(2*force, DAMAGE_BRUTE, BP_HEAD)
 			else
 				user.take_organ_damage(2*force, 0)
 			return
-		if(..())
+		if (..())
 			//playsound(src.loc, "swing_hit", 50, 1, -1)
 			return
 	else

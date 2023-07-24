@@ -21,9 +21,9 @@ var/global/list/stool_cache = list() //haha stool
 /obj/item/stool/New(newloc, new_material = DEFAULT_FURNITURE_MATERIAL, new_padding_material)
 	..(newloc)
 	material = SSmaterials.get_material_by_name(new_material)
-	if(new_padding_material)
+	if (new_padding_material)
 		padding_material = SSmaterials.get_material_by_name(new_padding_material)
-	if(!istype(material))
+	if (!istype(material))
 		qdel(src)
 		return
 	force = round(material.get_blunt_damage()*0.4)
@@ -50,22 +50,22 @@ var/global/list/stool_cache = list() //haha stool
 	// Base icon.
 	var/list/noverlays = list()
 	var/cache_key = "[base_icon]-[material.name]"
-	if(isnull(stool_cache[cache_key]))
+	if (isnull(stool_cache[cache_key]))
 		var/image/I = image(icon, "[base_icon]_base")
 		I.color = material.icon_colour
 		stool_cache[cache_key] = I
 	noverlays |= stool_cache[cache_key]
 	// Padding overlay.
-	if(padding_material)
+	if (padding_material)
 		var/padding_cache_key = "[base_icon]-padding-[padding_material.name]"
-		if(isnull(stool_cache[padding_cache_key]))
+		if (isnull(stool_cache[padding_cache_key]))
 			var/image/I =  image(icon, "[base_icon]_padding")
 			I.color = padding_material.icon_colour
 			stool_cache[padding_cache_key] = I
 		noverlays |= stool_cache[padding_cache_key]
 	overlays = noverlays
 	// Strings.
-	if(padding_material)
+	if (padding_material)
 		SetName("[padding_material.display_name] [initial(name)]") //this is not perfect but it will do for now.
 		desc = "A padded stool. Apply butt. It's made of [material.use_name] and covered with [padding_material.use_name]."
 	else
@@ -77,7 +77,7 @@ var/global/list/stool_cache = list() //haha stool
 	update_icon()
 
 /obj/item/stool/proc/remove_padding()
-	if(padding_material)
+	if (padding_material)
 		padding_material.place_sheet(get_turf(src))
 		padding_material = null
 	update_icon()
@@ -98,57 +98,57 @@ var/global/list/stool_cache = list() //haha stool
 
 /obj/item/stool/ex_act(severity)
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			qdel(src)
 			return
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			if (prob(50))
 				qdel(src)
 				return
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			if (prob(5))
 				qdel(src)
 				return
 
 /obj/item/stool/proc/dismantle()
-	if(material)
+	if (material)
 		material.place_sheet(get_turf(src))
-	if(padding_material)
+	if (padding_material)
 		padding_material.place_sheet(get_turf(src))
 	qdel(src)
 
 /obj/item/stool/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWrench(W))
+	if (isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		dismantle()
 		qdel(src)
-	else if(istype(W,/obj/item/stack))
-		if(padding_material)
+	else if (istype(W,/obj/item/stack))
+		if (padding_material)
 			to_chat(user, "\The [src] is already padded.")
 			return
 		var/obj/item/stack/C = W
-		if(C.get_amount() < 1) // How??
+		if (C.get_amount() < 1) // How??
 			qdel(C)
 			return
 		var/padding_type //This is awful but it needs to be like this until tiles are given a material var.
-		if(istype(W,/obj/item/stack/tile/carpet))
+		if (istype(W,/obj/item/stack/tile/carpet))
 			padding_type = MATERIAL_CARPET
-		else if(istype(W,/obj/item/stack/material))
+		else if (istype(W,/obj/item/stack/material))
 			var/obj/item/stack/material/M = W
-			if(M.material && (M.material.flags & MATERIAL_PADDING))
+			if (M.material && (M.material.flags & MATERIAL_PADDING))
 				padding_type = "[M.material.name]"
-		if(!padding_type)
+		if (!padding_type)
 			to_chat(user, "You cannot pad \the [src] with that.")
 			return
 		C.use(1)
-		if(!istype(src.loc, /turf))
+		if (!istype(src.loc, /turf))
 			user.drop_from_inventory(src)
 			src.dropInto(loc)
 		to_chat(user, "You add padding to \the [src].")
 		add_padding(padding_type)
 		return
-	else if(isWirecutter(W))
-		if(!padding_material)
+	else if (isWirecutter(W))
+		if (!padding_material)
 			to_chat(user, "\The [src] has no padding to remove.")
 			return
 		to_chat(user, "You remove the padding from \the [src].")

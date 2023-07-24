@@ -11,10 +11,10 @@
 	GLOB.unit_test_last_obj_random_creation = null
 	var/obj/random/unit_test/R = new()
 
-	if(GLOB.unit_test_last_obj_random_creation && GLOB.unit_test_last_obj_random_creation.type == /obj/unit_test_heavy)
+	if (GLOB.unit_test_last_obj_random_creation && GLOB.unit_test_last_obj_random_creation.type == /obj/unit_test_heavy)
 		pass("[log_info_line(R)] created an object of the expected type.")
 	else
-		if(GLOB.unit_test_last_obj_random_creation)
+		if (GLOB.unit_test_last_obj_random_creation)
 			fail("[log_info_line(R)] did not create an object of the expected type. Expected /obj/unit_test_heavy, was [GLOB.unit_test_last_obj_random_creation.type]")
 		else
 			fail("[log_info_line(R)] did not create an object")
@@ -31,7 +31,7 @@
 	var/safe_turf = get_safe_turf()
 	S.create(safe_turf)
 	var/created_object = locate(/obj/unit_test_light) in safe_turf
-	if(created_object)
+	if (created_object)
 		pass("[log_info_line(S)] successfully created its object.")
 		qdel(created_object)
 	else
@@ -48,7 +48,7 @@
 	var/safe_turf = get_safe_turf()
 	W.create(safe_turf)
 	var/created_object = locate(/obj/unit_test_heavy) in safe_turf
-	if(created_object)
+	if (created_object)
 		pass("[log_info_line(W)] successfully created the heaviest object.")
 		qdel(created_object)
 	else
@@ -70,7 +70,7 @@
 	var/safe_turf = get_safe_turf()
 	W.create(safe_turf)
 	var/created_object = locate(/obj/unit_test_heavy) in safe_turf
-	if(created_object)
+	if (created_object)
 		pass("[log_info_line(W)] successfully created the heaviest object.")
 		qdel(created_object)
 	else

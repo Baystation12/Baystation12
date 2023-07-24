@@ -22,15 +22,15 @@
 
 
 /mob/living/bot/cleanbot/handleIdle()
-	if(!screwloose && !oddbutton && prob(5))
+	if (!screwloose && !oddbutton && prob(5))
 		visible_message("\The [src] makes an excited beeping booping sound!")
 
-	if(screwloose && prob(5)) // Make a mess
-		if(istype(loc, /turf/simulated))
+	if (screwloose && prob(5)) // Make a mess
+		if (istype(loc, /turf/simulated))
 			var/turf/simulated/T = loc
 			T.wet_floor()
 
-	if(oddbutton && prob(5)) // Make a big mess
+	if (oddbutton && prob(5)) // Make a big mess
 		visible_message("Something flies out of [src]. He seems to be acting oddly.")
 		var/obj/effect/decal/cleanable/blood/gibs/gib = new /obj/effect/decal/cleanable/blood/gibs(loc)
 		var/weakref/g = weakref(gib)
@@ -40,45 +40,45 @@
 
 /mob/living/bot/cleanbot/lookForTargets()
 	for(var/obj/effect/decal/cleanable/D in view(world.view + 1, src))
-		if(confirmTarget(D))
+		if (confirmTarget(D))
 			target = D
 			playsound(src, 'sound/machines/boop1.ogg', 30)
 			return
 
 /mob/living/bot/cleanbot/confirmTarget(obj/effect/decal/cleanable/D)
-	if(!..())
+	if (!..())
 		return 0
 	for(var/T in target_types)
-		if(istype(D, T))
+		if (istype(D, T))
 			return 1
 	return 0
 
 /mob/living/bot/cleanbot/handleAdjacentTarget()
-	if(get_turf(target) == src.loc)
+	if (get_turf(target) == src.loc)
 		UnarmedAttack(target)
 
 /mob/living/bot/cleanbot/UnarmedAttack(obj/effect/decal/cleanable/D, proximity)
-	if(!..())
+	if (!..())
 		return
 
-	if(!istype(D))
+	if (!istype(D))
 		return
 
-	if(D.loc != loc)
+	if (D.loc != loc)
 		return
 
 	busy = 1
 	visible_message("\The [src] begins to clean up \the [D]")
 	update_icons()
 	var/cleantime = (istype(D, /obj/effect/decal/cleanable/dirt) ? 1 : 5) SECONDS
-	if(do_after(src, cleantime, D, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
-		if(istype(loc, /turf/simulated))
+	if (do_after(src, cleantime, D, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+		if (istype(loc, /turf/simulated))
 			var/turf/simulated/f = loc
 			f.dirt = 0
-		if(!D)
+		if (!D)
 			return
 		qdel(D)
-		if(D == target)
+		if (D == target)
 			target = null
 	playsound(src, 'sound/machines/boop2.ogg', 30)
 	busy = 0
@@ -91,7 +91,7 @@
 
 	new /obj/item/reagent_containers/glass/bucket(Tsec)
 	new /obj/item/device/assembly/prox_sensor(Tsec)
-	if(prob(50))
+	if (prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -101,7 +101,7 @@
 	return
 
 /mob/living/bot/cleanbot/update_icons()
-	if(busy)
+	if (busy)
 		icon_state = "cleanbot-c"
 	else
 		icon_state = "cleanbot[on]"
@@ -120,26 +120,26 @@
 
 /mob/living/bot/cleanbot/ProcessCommand(mob/user, command, href_list)
 	..()
-	if(CanAccessPanel(user))
+	if (CanAccessPanel(user))
 		switch(command)
-			if("blood")
+			if ("blood")
 				blood = !blood
 				get_targets()
-			if("patrol")
+			if ("patrol")
 				will_patrol = !will_patrol
 				patrol_path = null
 
-	if(CanAccessMaintenance(user))
+	if (CanAccessMaintenance(user))
 		switch(command)
-			if("screw")
+			if ("screw")
 				screwloose = !screwloose
-			if("oddbutton")
+			if ("oddbutton")
 				oddbutton = !oddbutton
 
 /mob/living/bot/cleanbot/emag_act(remaining_uses, mob/user)
 	. = ..()
-	if(!screwloose || !oddbutton)
-		if(user)
+	if (!screwloose || !oddbutton)
+		if (user)
 			to_chat(user, SPAN_NOTICE("The [src] buzzes and beeps."))
 		oddbutton = 1
 		screwloose = 1
@@ -170,5 +170,5 @@
 	target_types += /obj/effect/decal/cleanable/filth
 	target_types += /obj/effect/decal/cleanable/spiderling_remains
 
-	if(blood)
+	if (blood)
 		target_types += /obj/effect/decal/cleanable/blood

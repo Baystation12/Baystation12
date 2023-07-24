@@ -23,36 +23,36 @@
 		shake_camera(L, 3, 2)
 
 /obj/item/projectile/bullet/attack_mob(mob/living/target_mob, distance, miss_modifier)
-	if(penetrating > 0 && damage > 20 && prob(damage))
+	if (penetrating > 0 && damage > 20 && prob(damage))
 		mob_passthrough_check = 1
 	else
 		mob_passthrough_check = 0
 	. = ..()
 
-	if(. == 1 && iscarbon(target_mob) && !is_pellet)
+	if (. == 1 && iscarbon(target_mob) && !is_pellet)
 		damage *= 0.7 //squishy mobs absorb KE
 
 /obj/item/projectile/bullet/can_embed()
 	//prevent embedding if the projectile is passing through the mob
-	if(mob_passthrough_check)
+	if (mob_passthrough_check)
 		return 0
 	return ..()
 
 /obj/item/projectile/bullet/check_penetrate(atom/A)
-	if(QDELETED(A) || !A.density) return 1 //if whatever it was got destroyed when we hit it, then I guess we can just keep going
+	if (QDELETED(A) || !A.density) return 1 //if whatever it was got destroyed when we hit it, then I guess we can just keep going
 
-	if(ismob(A))
-		if(!mob_passthrough_check)
+	if (ismob(A))
+		if (!mob_passthrough_check)
 			return 0
 		return 1
 
 	var/chance = damage
-	if(has_extension(A, /datum/extension/penetration))
+	if (has_extension(A, /datum/extension/penetration))
 		var/datum/extension/penetration/P = get_extension(A, /datum/extension/penetration)
 		chance = P.PenetrationProbability(chance, damage, damage_type)
 
-	if(prob(chance))
-		if(A.opacity)
+	if (prob(chance))
+		if (A.opacity)
 			//display a message so that people on the other side aren't so confused
 			A.visible_message(SPAN_WARNING("\The [src] pierces through \the [A]!"))
 		return 1
@@ -87,12 +87,12 @@
 
 	//shrapnel explosions miss prone mobs with a chance that increases with distance
 	var/prone_chance = 0
-	if(!base_spread)
+	if (!base_spread)
 		prone_chance = max(spread_step*(distance - 2), 0)
 
 	var/hits = 0
 	for (var/i in 1 to total_pellets)
-		if(target_mob.lying && target_mob != original && prob(prone_chance))
+		if (target_mob.lying && target_mob != original && prob(prone_chance))
 			continue
 
 		//pellet hits spread out across different zones, but 'aim at' the targeted zone with higher probability
@@ -116,10 +116,10 @@
 	. = ..()
 
 	//If this is a shrapnel explosion, allow mobs that are prone to get hit, too
-	if(. && !base_spread && isturf(loc))
+	if (. && !base_spread && isturf(loc))
 		for(var/mob/living/M in loc)
-			if(M.lying || !M.CanPass(src, loc, 0.5, 0)) //Bump if lying or if we would normally Bump.
-				if(Bump(M)) //Bump will make sure we don't hit a mob multiple times
+			if (M.lying || !M.CanPass(src, loc, 0.5, 0)) //Bump if lying or if we would normally Bump.
+				if (Bump(M)) //Bump will make sure we don't hit a mob multiple times
 					return
 
 /* short-casing projectiles, like the kind used in pistols or SMGs */
@@ -241,7 +241,7 @@
 	var/explosion_max_power = EX_ACT_LIGHT
 
 /obj/item/projectile/bullet/gyro/on_hit(atom/target, blocked = 0)
-	if(isturf(target))
+	if (isturf(target))
 		explosion(target, explosion_radius, explosion_max_power)
 	..()
 

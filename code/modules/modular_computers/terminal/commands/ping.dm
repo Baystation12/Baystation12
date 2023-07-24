@@ -10,33 +10,33 @@
 
 /datum/terminal_command/ping/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/list/arguments = get_arguments(text)
-	if(isnull(arguments) || length(arguments) > 1)
+	if (isnull(arguments) || length(arguments) > 1)
 		return syntax_error()
 	var/obj/item/stock_parts/computer/network_card/origin_nc = terminal.computer.get_component(PART_NETWORK)
-	if(!origin_nc || !origin_nc.check_functionality())
+	if (!origin_nc || !origin_nc.check_functionality())
 		return "[name]: Could not find valid network interface."
 	var/nid
-	if(length(arguments) == 1)
+	if (length(arguments) == 1)
 		nid = text2num(arguments[1])
-		if(!nid)
+		if (!nid)
 			return "[name]: Error; invalid network id."
 
 	. = list("[name]: Establishing route to [(nid ? "NID [nid]" : "NTNet service provider")]")
 	var/list/route = origin_nc.get_route()
 	for(var/i = 1; i <= length(route); i++)
 		var/obj/item/stock_parts/computer/network_card/C = route[i]
-		if(!istype(C))
+		if (!istype(C))
 			. += "Error; connection aborted"
 			return
 		var/result = "proxy NID [C.proxy_id]... success."
-		if(i == length(route))
-			if(C.proxy_id)
+		if (i == length(route))
+			if (C.proxy_id)
 				result = "proxy NID [C.proxy_id]... failed. Target device not responding."
 			else
-				if(nid)
+				if (nid)
 					result = "target NID [nid]... failed. Target device not responding."
 					var/datum/extension/interactive/ntos/comp = ntnet_global.get_os_by_nid(nid)
-					if(comp && comp.get_ntnet_status_incoming())
+					if (comp && comp.get_ntnet_status_incoming())
 						result = "target NID [nid]... success."
 				else
 					result = "NTNet service provider... success"

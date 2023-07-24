@@ -53,7 +53,7 @@
 //Failsafe in case something breaks horribly
 /datum/spawn_sync/proc/safety_check()
 	failsafe--
-	if(failsafe < 1)
+	if (failsafe < 1)
 		count = 0
 
 //Set failsafe check count in case you need more time for the workers to return

@@ -37,17 +37,17 @@
 
 
 /obj/structure/extinguisher_cabinet/attack_hand(mob/user)
-	if(isrobot(user))
+	if (isrobot(user))
 		return
 	if (ishuman(user))
 		var/mob/living/carbon/human/H = user
 		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
 		if (user.hand)
 			temp = H.organs_by_name[BP_L_HAND]
-		if(temp && !temp.is_usable())
+		if (temp && !temp.is_usable())
 			to_chat(user, SPAN_NOTICE("You try to move your [temp.name], but cannot!"))
 			return
-	if(has_extinguisher)
+	if (has_extinguisher)
 		user.put_in_hands(has_extinguisher)
 		to_chat(user, SPAN_NOTICE("You take [has_extinguisher] from [src]."))
 		playsound(src.loc, 'sound/effects/extout.ogg', 50, 0)
@@ -58,11 +58,11 @@
 	update_icon()
 
 /obj/structure/extinguisher_cabinet/on_update_icon()
-	if(!opened)
+	if (!opened)
 		icon_state = "extinguisher_closed"
 		return
-	if(has_extinguisher)
-		if(istype(has_extinguisher, /obj/item/extinguisher/mini))
+	if (has_extinguisher)
+		if (istype(has_extinguisher, /obj/item/extinguisher/mini))
 			icon_state = "extinguisher_mini"
 		else
 			icon_state = "extinguisher_full"
@@ -70,14 +70,14 @@
 		icon_state = "extinguisher_empty"
 
 /obj/structure/extinguisher_cabinet/AltClick(mob/user)
-	if(CanPhysicallyInteract(user))
+	if (CanPhysicallyInteract(user))
 		opened = !opened
 		update_icon()
 		return TRUE
 	return FALSE
 
 /obj/structure/extinguisher_cabinet/do_simple_ranged_interaction(mob/user)
-	if(has_extinguisher)
+	if (has_extinguisher)
 		has_extinguisher.dropInto(loc)
 		has_extinguisher = null
 		opened = 1

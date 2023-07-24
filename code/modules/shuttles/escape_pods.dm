@@ -7,7 +7,7 @@ var/global/list/escape_pods_by_name = list()
 	move_time = 100
 
 /datum/shuttle/autodock/ferry/escape_pod/New()
-	if(name in escape_pods_by_name)
+	if (name in escape_pods_by_name)
 		CRASH("An escape pod with the name '[name]' has already been defined.")
 	move_time = evacuation_controller.evac_transit_delay + rand(-30, 60)
 	escape_pods_by_name[name] = src
@@ -19,21 +19,21 @@ var/global/list/escape_pods_by_name = list()
 	//find the arming controller (berth)
 	var/arming_controller_tag = arming_controller
 	arming_controller = SSshuttle.docking_registry[arming_controller_tag]
-	if(!istype(arming_controller))
+	if (!istype(arming_controller))
 		CRASH("Could not find arming controller for escape pod \"[name]\", tag was '[arming_controller_tag]'.")
 
 	//find the pod's own controller
 	var/datum/computer/file/embedded_program/docking/simple/prog = SSshuttle.docking_registry[dock_target]
 	var/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/controller_master = prog.master
-	if(!istype(controller_master))
+	if (!istype(controller_master))
 		CRASH("Escape pod \"[name]\" could not find it's controller master!")
 
 	controller_master.pod = src
 
 /datum/shuttle/autodock/ferry/escape_pod/can_launch()
-	if(arming_controller && !arming_controller.armed)	//must be armed
+	if (arming_controller && !arming_controller.armed)	//must be armed
 		return 0
-	if(location)
+	if (location)
 		return 0	//it's a one-way trip.
 	return ..()
 
@@ -75,11 +75,11 @@ var/global/list/escape_pods_by_name = list()
 		ui.set_auto_update(1)
 
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/OnTopic(user, href_list)
-	if(href_list["manual_arm"])
+	if (href_list["manual_arm"])
 		pod.arming_controller.arm()
 		return TOPIC_REFRESH
 
-	if(href_list["force_launch"])
+	if (href_list["force_launch"])
 		if (pod.can_force())
 			pod.force_launch(src)
 		else if (evacuation_controller.has_evacuated() && pod.can_launch())	//allow players to manually launch ahead of time if the shuttle leaves
@@ -132,7 +132,7 @@ var/global/list/escape_pods_by_name = list()
 	var/closing = 0
 
 /datum/computer/file/embedded_program/docking/simple/escape_pod_berth/proc/arm()
-	if(!armed)
+	if (!armed)
 		armed = 1
 		open_door()
 

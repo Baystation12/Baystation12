@@ -19,7 +19,7 @@
 		if (!has_power())
 			if (src.getOxyLoss() > 175)
 				damage_msg += "<B>It seems to be running on backup power. Its display is blinking a \"BACKUP POWER CRITICAL\" warning.</B>\n"
-			else if(src.getOxyLoss() > 100)
+			else if (src.getOxyLoss() > 100)
 				damage_msg += "<B>It seems to be running on backup power. Its display is blinking a \"BACKUP POWER LOW\" warning.</B>\n"
 			else
 				damage_msg += "It seems to be running on backup power.\n"
@@ -29,7 +29,7 @@
 		if (damage_msg)
 			msg += SPAN_WARNING(damage_msg)
 	msg += "*---------*"
-	if(hardware && (hardware.owner == src))
+	if (hardware && (hardware.owner == src))
 		msg += "<br>"
 		msg += hardware.get_examine_desc()
 	to_chat(user, msg)
@@ -40,5 +40,5 @@
 	return
 
 /mob/observer/ghost/showLaws(mob/living/silicon/S)
-	if(antagHUD || isadmin(src))
+	if (antagHUD || isadmin(src))
 		S.laws.show_laws(src)

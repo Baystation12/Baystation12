@@ -11,7 +11,7 @@
 	return b.priority - a.priority
 
 /proc/cmp_follow_holder(datum/follow_holder/a, datum/follow_holder/b)
-	if(a.sort_order == b.sort_order)
+	if (a.sort_order == b.sort_order)
 		return sorttext(b.get_name(), a.get_name())
 
 	return a.sort_order - b.sort_order

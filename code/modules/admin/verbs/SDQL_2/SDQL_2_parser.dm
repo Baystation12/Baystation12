@@ -73,20 +73,20 @@
 	tree = list()
 	query(1, tree)
 
-	if(error)
+	if (error)
 		return list()
 	else
 		return tree
 
 /datum/SDQL_parser/proc/token(i)
-	if(i <= length(query))
+	if (i <= length(query))
 		return query[i]
 
 	else
 		return null
 
 /datum/SDQL_parser/proc/tokens(i, num)
-	if(i + num <= length(query))
+	if (i + num <= length(query))
 		return query.Copy(i, i + num)
 
 	else
@@ -100,19 +100,19 @@
 	query_type = tokenl(i)
 
 	switch(query_type)
-		if("select")
+		if ("select")
 			select_query(i, node)
 
-		if("delete")
+		if ("delete")
 			delete_query(i, node)
 
-		if("update")
+		if ("update")
 			update_query(i, node)
 
-		if("call")
+		if ("call")
 			call_query(i, node)
 
-		if("explain")
+		if ("explain")
 			node += "explain"
 			node["explain"] = list()
 			query(i + 1, node["explain"])
@@ -152,7 +152,7 @@
 	node += "update"
 	node["update"] = select
 
-	if(tokenl(i) != "set")
+	if (tokenl(i) != "set")
 		i = parse_error("UPDATE has misplaced SET")
 
 	var/list/set_assignments = list()
@@ -174,7 +174,7 @@
 	node += "call"
 	node["call"] = func
 
-	if(tokenl(i) != "on")
+	if (tokenl(i) != "on")
 		return i
 
 	var/list/select = list()
@@ -191,7 +191,7 @@
 /datum/SDQL_parser/proc/select_list(i, list/node)
 	i = select_item(i, node)
 
-	if(token(i) == ",")
+	if (token(i) == ",")
 		i = select_list(i + 1, node)
 
 	return i
@@ -200,7 +200,7 @@
 /datum/SDQL_parser/proc/assignments(i, list/node)
 	i = assignment(i, node)
 
-	if(token(i) == ",")
+	if (token(i) == ",")
 		i = assignments(i + 1, node)
 
 	return i
@@ -209,11 +209,11 @@
 //select_item:	'*' | select_function | object_type
 /datum/SDQL_parser/proc/select_item(i, list/node)
 
-	if(token(i) == "*")
+	if (token(i) == "*")
 		node += "*"
 		i++
 
-	else if(tokenl(i) in select_functions)
+	else if (tokenl(i) in select_functions)
 		i = select_function(i, node)
 
 	else
@@ -249,7 +249,7 @@
 
 //from_item:	'world' | object_type
 /datum/SDQL_parser/proc/from_item(i, list/node)
-	if(token(i) == "world")
+	if (token(i) == "world")
 		node += "world"
 		i++
 
@@ -267,7 +267,7 @@
 
 	node[LIST_PRE_INC(node)] = bool
 
-	if(tokenl(i) in boolean_operators)
+	if (tokenl(i) in boolean_operators)
 		i = bool_operator(i, node)
 		i = bool_expression(i, node)
 
@@ -278,10 +278,10 @@
 /datum/SDQL_parser/proc/assignment(i, list/node, list/assignment_list = list())
 	assignment_list += token(i)
 
-	if(token(i + 1) == ".")
+	if (token(i + 1) == ".")
 		i = assignment(i + 2, node, assignment_list)
 
-	else if(token(i + 1) == "=")
+	else if (token(i + 1) == "=")
 		var/exp_list = list()
 		node[assignment_list] = exp_list
 
@@ -298,14 +298,14 @@
 	var/list/L = list(token(i))
 	node[LIST_PRE_INC(node)] = L
 
-	if(token(i) == "{")
+	if (token(i) == "{")
 		L += token(i + 1)
 		i += 2
 
-		if(token(i) != "}")
+		if (token(i) != "}")
 			parse_error("Missing } at end of pointer.")
 
-	if(token(i + 1) == ".")
+	if (token(i + 1) == ".")
 		L += "."
 		i = variable(i + 2, L)
 
@@ -334,7 +334,7 @@
 //object_type:	<type path> | string
 /datum/SDQL_parser/proc/object_type(i, list/node)
 
-	if(copytext(token(i), 1, 2) == "/")
+	if (copytext(token(i), 1, 2) == "/")
 		node += token(i)
 
 	else
@@ -346,7 +346,7 @@
 //comparitor:	'=' | '==' | '!=' | '<>' | '<' | '<=' | '>' | '>='
 /datum/SDQL_parser/proc/comparitor(i, list/node)
 
-	if(token(i) in list("=", "==", "!=", "<>", "<", "<=", ">", ">="))
+	if (token(i) in list("=", "==", "!=", "<>", "<", "<=", ">", ">="))
 		node += token(i)
 
 	else
@@ -358,7 +358,7 @@
 //bool_operator:	'AND' | '&&' | 'OR' | '||'
 /datum/SDQL_parser/proc/bool_operator(i, list/node)
 
-	if(tokenl(i) in list("and", "or", "&&", "||"))
+	if (tokenl(i) in list("and", "or", "&&", "||"))
 		node += token(i)
 
 	else
@@ -370,7 +370,7 @@
 //string:	''' <some text> ''' | '"' <some text > '"'
 /datum/SDQL_parser/proc/string(i, list/node)
 
-	if(copytext(token(i), 1, 2) in list("'", "\""))
+	if (copytext(token(i), 1, 2) in list("'", "\""))
 		node += token(i)
 
 	else
@@ -381,7 +381,7 @@
 //array:	'[' expression, expression, ... ']'
 /datum/SDQL_parser/proc/array(i, list/node)
 	// Arrays get turned into this: list("[", list(exp_1a = exp_1b, ...), ...), "[" is to mark the next node as an array.
-	if(copytext(token(i), 1, 2) != "\[")
+	if (copytext(token(i), 1, 2) != "\[")
 		parse_error("Expected an array but found '[token(i)]'")
 		return i + 1
 
@@ -390,7 +390,7 @@
 	var/list/expression_list = list()
 
 	i++
-	if(token(i) != "]")
+	if (token(i) != "]")
 		var/list/temp_expression_list = list()
 		var/tok
 		do
@@ -433,20 +433,20 @@
 
 //call_function:	<function name> ['(' [arguments] ')']
 /datum/SDQL_parser/proc/call_function(i, list/node, list/arguments)
-	if(length(tokenl(i)))
+	if (length(tokenl(i)))
 		var/procname = ""
-		if(tokenl(i) == "global" && token(i + 1) == ".") // Global proc.
+		if (tokenl(i) == "global" && token(i + 1) == ".") // Global proc.
 			i += 2
 			procname = "global."
 		node += procname + token(i++)
-		if(token(i) != "(")
+		if (token(i) != "(")
 			parse_error("Expected ( but found '[token(i)]'")
 
-		else if(token(i + 1) != ")")
+		else if (token(i + 1) != ")")
 			var/list/temp_expression_list = list()
 			do
 				i = expression(i + 1, temp_expression_list)
-				if(token(i) == ",")
+				if (token(i) == ",")
 					arguments[LIST_PRE_INC(arguments)] = temp_expression_list
 					temp_expression_list = list()
 					continue
@@ -472,15 +472,15 @@
 //expression:	( unary_expression | '(' expression ')' | value ) [binary_operator expression]
 /datum/SDQL_parser/proc/expression(i, list/node)
 
-	if(token(i) in unary_operators)
+	if (token(i) in unary_operators)
 		i = unary_expression(i, node)
 
-	else if(token(i) == "(")
+	else if (token(i) == "(")
 		var/list/expr = list()
 
 		i = expression(i + 1, expr)
 
-		if(token(i) != ")")
+		if (token(i) != ")")
 			parse_error("Missing ) at end of expression.")
 
 		else
@@ -491,11 +491,11 @@
 	else
 		i = value(i, node)
 
-	if(token(i) in binary_operators)
+	if (token(i) in binary_operators)
 		i = binary_operator(i, node)
 		i = expression(i, node)
 
-	else if(token(i) in comparitors)
+	else if (token(i) in comparitors)
 		i = binary_operator(i, node)
 
 		var/list/rhs = list()
@@ -510,21 +510,21 @@
 //unary_expression:	unary_operator ( unary_expression | value | '(' expression ')' )
 /datum/SDQL_parser/proc/unary_expression(i, list/node)
 
-	if(token(i) in unary_operators)
+	if (token(i) in unary_operators)
 		var/list/unary_exp = list()
 
 		unary_exp += token(i)
 		i++
 
-		if(token(i) in unary_operators)
+		if (token(i) in unary_operators)
 			i = unary_expression(i, unary_exp)
 
-		else if(token(i) == "(")
+		else if (token(i) == "(")
 			var/list/expr = list()
 
 			i = expression(i + 1, expr)
 
-			if(token(i) != ")")
+			if (token(i) != ")")
 				parse_error("Missing ) at end of expression.")
 
 			else
@@ -547,7 +547,7 @@
 //binary_operator:	comparitor | '+' | '-' | '/' | '*' | '&' | '|' | '^'
 /datum/SDQL_parser/proc/binary_operator(i, list/node)
 
-	if(token(i) in (binary_operators + comparitors))
+	if (token(i) in (binary_operators + comparitors))
 		node += token(i)
 
 	else
@@ -558,22 +558,22 @@
 
 //value:	variable | string | number | 'null'
 /datum/SDQL_parser/proc/value(i, list/node)
-	if(token(i) == "null")
+	if (token(i) == "null")
 		node += "null"
 		i++
 
-	else if(lowertext(copytext(token(i), 1, 3)) == "0x" && isnum(hex2num(copytext(token(i), 3))))
+	else if (lowertext(copytext(token(i), 1, 3)) == "0x" && isnum(hex2num(copytext(token(i), 3))))
 		node += hex2num(copytext(token(i), 3))
 		i++
 
-	else if(isnum(text2num(token(i))))
+	else if (isnum(text2num(token(i))))
 		node += text2num(token(i))
 		i++
 
-	else if(copytext(token(i), 1, 2) in list("'", "\""))
+	else if (copytext(token(i), 1, 2) in list("'", "\""))
 		i = string(i, node)
 
-	else if(copytext(token(i), 1, 2) == "\[") // Start a list.
+	else if (copytext(token(i), 1, 2) == "\[") // Start a list.
 		i = array(i, node)
 	else
 		i = variable(i, node)

@@ -11,7 +11,7 @@
 	reagents.add_reagent(/datum/reagent/coolant, 10000)
 
 /obj/structure/reagent_dispensers/coolanttank/bullet_act(obj/item/projectile/Proj)
-	if(Proj.get_structure_damage())
+	if (Proj.get_structure_damage())
 		explode()
 
 /obj/structure/reagent_dispensers/coolanttank/ex_act()
@@ -26,9 +26,9 @@
 		S.start()
 
 	var/datum/gas_mixture/env = src.loc.return_air()
-	if(env)
+	if (env)
 		env.add_thermal_energy(reagents.total_volume * -10000)
 
 	sleep(10)
-	if(src)
+	if (src)
 		qdel(src)

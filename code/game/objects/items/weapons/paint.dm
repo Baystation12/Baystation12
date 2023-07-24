@@ -19,8 +19,8 @@ var/global/list/cached_icons = list()
 	var/paint_hex = "#fe191a"
 
 /obj/item/reagent_containers/glass/paint/afterattack(turf/simulated/target, mob/user, proximity)
-	if(!proximity) return
-	if(istype(target) && reagents.total_volume > 5)
+	if (!proximity) return
+	if (istype(target) && reagents.total_volume > 5)
 		if (reagents.should_admin_log())
 			var/contained = reagentlist()
 			if (istype(target, /mob))
@@ -34,13 +34,13 @@ var/global/list/cached_icons = list()
 
 /obj/item/reagent_containers/glass/paint/Initialize()
 	. = ..()
-	if(paint_hex && length(paint_hex) > 0)
+	if (paint_hex && length(paint_hex) > 0)
 		reagents.add_reagent(/datum/reagent/paint, volume, paint_hex)
 		update_icon()
 
 /obj/item/reagent_containers/glass/paint/on_update_icon()
 	overlays.Cut()
-	if(reagents.total_volume)
+	if (reagents.total_volume)
 		var/image/filling = image('icons/obj/reagentfillings.dmi', src, "paintbucket")
 		filling.color = reagents.get_color()
 		overlays += filling

@@ -40,9 +40,9 @@
 
 /obj/item/device/integrated_electronics/detailer/attack_self(mob/user)
 	var/color_choice = input(user, "Select color.", "Assembly Detailer") as null|anything in color_list
-	if(!color_list[color_choice])
+	if (!color_list[color_choice])
 		return
-	if(!in_range(src, user))
+	if (!in_range(src, user))
 		return
 	detail_color = color_list[color_choice]
 	update_icon()

@@ -32,7 +32,7 @@
 	if (flashlight_flags & FLASHLIGHT_ALWAYS_ON)
 		return // Prevent update_icon shennanigans with objects that won't have on/off variant sprites
 
-	if(on)
+	if (on)
 		icon_state = "[initial(icon_state)]-on"
 	else
 		icon_state = "[initial(icon_state)]"
@@ -42,7 +42,7 @@
 		to_chat(user, "You cannot toggle the [name].")
 		return 0
 
-	if(!isturf(user.loc))
+	if (!isturf(user.loc))
 		to_chat(user, "You cannot turn the [name] on while in this [user.loc].")//To prevent some lighting anomalities.
 		return 0
 
@@ -51,7 +51,7 @@
 		return 0
 
 	on = !on
-	if(on && activation_sound)
+	if (on && activation_sound)
 		playsound(get_turf(src), activation_sound, 75, 1)
 	set_flashlight()
 	update_icon()
@@ -66,25 +66,25 @@
 
 /obj/item/device/flashlight/attack(mob/living/M as mob, mob/living/user as mob)
 	add_fingerprint(user)
-	if(on && user.zone_sel.selecting == BP_EYES)
+	if (on && user.zone_sel.selecting == BP_EYES)
 
-		if((MUTATION_CLUMSY in user.mutations) && prob(50))	//too dumb to use flashlight properly
+		if ((MUTATION_CLUMSY in user.mutations) && prob(50))	//too dumb to use flashlight properly
 			return ..()	//just hit them in the head
 
 		var/mob/living/carbon/human/H = M	//mob has protective eyewear
-		if(istype(H))
+		if (istype(H))
 			for(var/obj/item/clothing/C in list(H.head,H.wear_mask,H.glasses))
-				if(istype(C) && (C.body_parts_covered & EYES))
+				if (istype(C) && (C.body_parts_covered & EYES))
 					to_chat(user, SPAN_WARNING("You're going to need to remove [C] first."))
 					return
 
 			var/obj/item/organ/vision
-			if(!H.species.vision_organ || !H.should_have_organ(H.species.vision_organ))
+			if (!H.species.vision_organ || !H.should_have_organ(H.species.vision_organ))
 				to_chat(user, SPAN_WARNING("You can't find anything on [H] to direct [src] into!"))
 				return
 
 			vision = H.internal_organs_by_name[H.species.vision_organ]
-			if(!vision)
+			if (!vision)
 				vision = H.species.has_organ[H.species.vision_organ]
 				to_chat(user, SPAN_WARNING("\The [H] is missing \his [initial(vision.name)]!"))
 				return
@@ -103,29 +103,29 @@
 /obj/item/device/flashlight/proc/inspect_vision(obj/item/organ/vision, mob/living/user)
 	var/mob/living/carbon/human/H = vision.owner
 
-	if(H == user)	//can't look into your own eyes buster
+	if (H == user)	//can't look into your own eyes buster
 		return
 
-	if(!BP_IS_ROBOTIC(vision))
+	if (!BP_IS_ROBOTIC(vision))
 
-		if(vision.owner.stat == DEAD || H.blinded)	//mob is dead or fully blind
+		if (vision.owner.stat == DEAD || H.blinded)	//mob is dead or fully blind
 			to_chat(user, SPAN_WARNING("\The [H]'s pupils do not react to the light!"))
 			return
-		if(MUTATION_XRAY in H.mutations)
+		if (MUTATION_XRAY in H.mutations)
 			to_chat(user, SPAN_NOTICE("\The [H]'s pupils give an eerie glow!"))
-		if(vision.damage)
+		if (vision.damage)
 			to_chat(user, SPAN_WARNING("There's visible damage to [H]'s [vision.name]!"))
-		else if(H.eye_blurry)
+		else if (H.eye_blurry)
 			to_chat(user, SPAN_NOTICE("\The [H]'s pupils react slower than normally."))
-		if(H.getBrainLoss() > 15)
+		if (H.getBrainLoss() > 15)
 			to_chat(user, SPAN_NOTICE("There's visible lag between left and right pupils' reactions."))
 
 		var/list/pinpoint = list(/datum/reagent/tramadol/oxycodone=1,/datum/reagent/tramadol=5)
 		var/list/dilating = list(/datum/reagent/drugs/hextro=5,/datum/reagent/drugs/mindbreaker=1,/datum/reagent/adrenaline=1)
 		var/datum/reagents/ingested = H.get_ingested_reagents()
-		if(H.reagents.has_any_reagent(pinpoint) || ingested.has_any_reagent(pinpoint))
+		if (H.reagents.has_any_reagent(pinpoint) || ingested.has_any_reagent(pinpoint))
 			to_chat(user, SPAN_NOTICE("\The [H]'s pupils are already pinpoint and cannot narrow any more."))
-		else if(H.shock_stage >= 30 || H.reagents.has_any_reagent(dilating) || ingested.has_any_reagent(dilating))
+		else if (H.shock_stage >= 30 || H.reagents.has_any_reagent(dilating) || ingested.has_any_reagent(dilating))
 			to_chat(user, SPAN_NOTICE("\The [H]'s pupils narrow slightly, but are still very dilated."))
 		else
 			to_chat(user, SPAN_NOTICE("\The [H]'s pupils narrow."))
@@ -193,7 +193,7 @@
 
 /obj/item/device/flashlight/lantern/on_update_icon()
 	..()
-	if(on)
+	if (on)
 		item_state = "lantern-on"
 	else
 		item_state = "lantern"
@@ -239,7 +239,7 @@
 	set category = "Object"
 	set src in oview(1)
 
-	if(!usr.stat)
+	if (!usr.stat)
 		attack_self(usr)
 
 // FLARES
@@ -272,27 +272,27 @@
 	STOP_PROCESSING(SSobj, src)
 
 /obj/item/device/flashlight/flare/Process()
-	if(produce_heat)
+	if (produce_heat)
 		var/turf/T = get_turf(src)
-		if(T)
+		if (T)
 			T.hotspot_expose(produce_heat, 5)
 	fuel = max(fuel - 1, 0)
 	if (fuel <= 0)
 		on = FALSE
-	if(!on)
+	if (!on)
 		update_damage()
 		set_flashlight()
 		update_icon()
 		STOP_PROCESSING(SSobj, src)
 
 /obj/item/device/flashlight/flare/attack_self(mob/user)
-	if(fuel <= 0)
+	if (fuel <= 0)
 		to_chat(user,SPAN_NOTICE("\The [src] is spent."))
 		return 0
 
 	. = ..()
 
-	if(.)
+	if (.)
 		activate(user)
 		update_damage()
 		set_flashlight()
@@ -300,16 +300,16 @@
 		START_PROCESSING(SSobj, src)
 
 /obj/item/device/flashlight/flare/afterattack(obj/O, mob/user, proximity)
-	if(proximity && istype(O) && on)
+	if (proximity && istype(O) && on)
 		O.HandleObjectHeating(src, user, 500)
 	..()
 
 /obj/item/device/flashlight/flare/proc/activate(mob/user)
-	if(istype(user))
+	if (istype(user))
 		user.visible_message(SPAN_NOTICE("[user] pulls the cord on \the [src], activating it."), SPAN_NOTICE("You pull the cord on \the [src], activating it!"))
 
 /obj/item/device/flashlight/flare/proc/update_damage()
-	if(on)
+	if (on)
 		force = on_damage
 		damtype = DAMAGE_BURN
 	else
@@ -318,7 +318,7 @@
 
 /obj/item/device/flashlight/flare/on_update_icon()
 	..()
-	if(!on && fuel <= 0)
+	if (!on && fuel <= 0)
 		icon_state = "[initial(icon_state)]-empty"
 
 //Glowsticks
@@ -347,7 +347,7 @@
 /obj/item/device/flashlight/flare/glowstick/on_update_icon()
 	item_state = "glowstick"
 	overlays.Cut()
-	if(fuel <= 0)
+	if (fuel <= 0)
 		icon_state = "glowstick-empty"
 		on = FALSE
 	else if (on)
@@ -358,14 +358,14 @@
 	else
 		icon_state = "glowstick"
 	var/mob/M = loc
-	if(istype(M))
-		if(M.l_hand == src)
+	if (istype(M))
+		if (M.l_hand == src)
 			M.update_inv_l_hand()
-		if(M.r_hand == src)
+		if (M.r_hand == src)
 			M.update_inv_r_hand()
 
 /obj/item/device/flashlight/flare/glowstick/activate(mob/user)
-	if(istype(user))
+	if (istype(user))
 		user.visible_message(SPAN_NOTICE("[user] cracks and shakes \the [src]."), SPAN_NOTICE("You crack and shake \the [src], turning it on!"))
 
 /obj/item/device/flashlight/flare/glowstick/red

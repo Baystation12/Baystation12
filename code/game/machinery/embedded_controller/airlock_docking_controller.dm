@@ -7,15 +7,15 @@
 
 /obj/machinery/embedded_controller/radio/airlock/docking_port/Initialize()
 	. = ..()
-	if(display_name)
+	if (display_name)
 		var/datum/computer/file/embedded_program/docking/airlock/docking_program = program
 		docking_program.display_name = display_name
 
 /obj/machinery/embedded_controller/radio/airlock/docking_port/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/device/multitool)) //give them part of code, would take few tries to get full
+	if (istype(W,/obj/item/device/multitool)) //give them part of code, would take few tries to get full
 		var/datum/computer/file/embedded_program/docking/airlock/docking_program = program
 		var/code = docking_program.docking_codes
-		if(!code)
+		if (!code)
 			code = "N/A"
 		else
 			code = stars(code)
@@ -111,7 +111,7 @@
 	var/datum/computer/file/embedded_program/docking/airlock/master_prog
 
 /datum/computer/file/embedded_program/airlock/docking/Destroy()
-	if(master_prog)
+	if (master_prog)
 		master_prog.airlock_program = null
 		master_prog = null
 	return ..()

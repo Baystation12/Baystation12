@@ -23,28 +23,28 @@
 	user.set_machine(src)
 
 	var/dat = "Photocopier<BR><BR>"
-	if(copyitem)
+	if (copyitem)
 		dat += "<a href='byond://?src=\ref[src];remove=1'>Remove Item</a><BR>"
-		if(toner)
+		if (toner)
 			dat += "<a href='byond://?src=\ref[src];copy=1'>Copy</a><BR>"
 			dat += "Printing: [copies] copies."
 			dat += "<a href='byond://?src=\ref[src];min=1'>-</a> "
 			dat += "<a href='byond://?src=\ref[src];add=1'>+</a><BR><BR>"
-	else if(toner)
+	else if (toner)
 		dat += "Please insert something to copy.<BR><BR>"
-	if(istype(user,/mob/living/silicon))
+	if (istype(user,/mob/living/silicon))
 		dat += "<a href='byond://?src=\ref[src];aipic=1'>Print photo from database</a><BR><BR>"
 	dat += "Current toner level: [toner]"
-	if(!toner)
+	if (!toner)
 		dat +="<BR>Please insert a new toner cartridge!"
 	show_browser(user, dat, "window=copier")
 	onclose(user, "copier")
 	return
 
 /obj/machinery/photocopier/OnTopic(user, href_list, state)
-	if(href_list["copy"])
+	if (href_list["copy"])
 		for(var/i = 0, i < copies, i++)
-			if(toner <= 0)
+			if (toner <= 0)
 				break
 			if (istype(copyitem, /obj/item/paper))
 				copy(copyitem, 1)
@@ -65,28 +65,28 @@
 			use_power_oneoff(active_power_usage)
 		return TOPIC_REFRESH
 
-	if(href_list["remove"])
+	if (href_list["remove"])
 		OnRemove(user)
 		return TOPIC_REFRESH
 
-	if(href_list["min"])
-		if(copies > 1)
+	if (href_list["min"])
+		if (copies > 1)
 			copies--
 		return TOPIC_REFRESH
 
-	else if(href_list["add"])
-		if(copies < maxcopies)
+	else if (href_list["add"])
+		if (copies < maxcopies)
 			copies++
 		return TOPIC_REFRESH
 
-	if(href_list["aipic"])
-		if(!istype(user,/mob/living/silicon)) return
+	if (href_list["aipic"])
+		if (!istype(user,/mob/living/silicon)) return
 
-		if(toner >= 5)
+		if (toner >= 5)
 			var/mob/living/silicon/tempAI = user
 			var/obj/item/device/camera/siliconcam/camera = tempAI.silicon_camera
 
-			if(!camera)
+			if (!camera)
 				return
 			var/obj/item/photo/selection = camera.selectpicture()
 			if (!selection)
@@ -102,15 +102,15 @@
 		return TOPIC_REFRESH
 
 /obj/machinery/photocopier/proc/OnRemove(mob/user)
-	if(copyitem)
+	if (copyitem)
 		user.put_in_hands(copyitem)
 		to_chat(user, SPAN_NOTICE("You take \the [copyitem] out of \the [src]."))
 		copyitem = null
 
 /obj/machinery/photocopier/attackby(obj/item/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/paper) || istype(O, /obj/item/photo) || istype(O, /obj/item/paper_bundle) || istype(O, /obj/item/sample/print))
-		if(!copyitem)
-			if(!user.unEquip(O, src))
+	if (istype(O, /obj/item/paper) || istype(O, /obj/item/photo) || istype(O, /obj/item/paper_bundle) || istype(O, /obj/item/sample/print))
+		if (!copyitem)
+			if (!user.unEquip(O, src))
 				return
 			copyitem = O
 			to_chat(user, SPAN_NOTICE("You insert \the [O] into \the [src]."))
@@ -118,9 +118,9 @@
 			updateUsrDialog()
 		else
 			to_chat(user, SPAN_NOTICE("There is already something in \the [src]."))
-	else if(istype(O, /obj/item/device/toner))
-		if(toner <= 10) //allow replacing when low toner is affecting the print darkness
-			if(!user.unEquip(O, src))
+	else if (istype(O, /obj/item/device/toner))
+		if (toner <= 10) //allow replacing when low toner is affecting the print darkness
+			if (!user.unEquip(O, src))
 				return
 			to_chat(user, SPAN_NOTICE("You insert the toner cartridge into \the [src]."))
 			var/obj/item/device/toner/T = O
@@ -133,18 +133,18 @@
 
 /obj/machinery/photocopier/ex_act(severity)
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			qdel(src)
-		if(EX_ACT_HEAVY)
-			if(prob(50))
+		if (EX_ACT_HEAVY)
+			if (prob(50))
 				qdel(src)
 			else
-				if(toner > 0)
+				if (toner > 0)
 					new /obj/effect/decal/cleanable/blood/oil(get_turf(src))
 					toner = 0
 		else
-			if(prob(50))
-				if(toner > 0)
+			if (prob(50))
+				if (toner > 0)
 					new /obj/effect/decal/cleanable/blood/oil(get_turf(src))
 					toner = 0
 	return
@@ -185,9 +185,9 @@
 		img.pixel_y = copy.offset_y[j]
 		c.overlays += img
 	c.updateinfolinks()
-	if(need_toner)
+	if (need_toner)
 		toner--
-	if(toner == 0)
+	if (toner == 0)
 		visible_message(SPAN_NOTICE("A red light on \the [src] flashes, indicating that it is out of toner."))
 	c.update_icon()
 	return c
@@ -196,15 +196,15 @@
 	var/obj/item/photo/p = photocopy.copy()
 	p.dropInto(loc)
 
-	if(toner > 10)	//plenty of toner, go straight greyscale
+	if (toner > 10)	//plenty of toner, go straight greyscale
 		p.img.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))//I'm not sure how expensive this is, but given the many limitations of photocopying, it shouldn't be an issue.
 		p.update_icon()
 	else			//not much toner left, lighten the photo
 		p.img.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(100,100,100))
 		p.update_icon()
-	if(need_toner)
+	if (need_toner)
 		toner -= 5	//photos use a lot of ink!
-	if(toner < 0)
+	if (toner < 0)
 		toner = 0
 		visible_message(SPAN_NOTICE("A red light on \the [src] flashes, indicating that it is out of toner."))
 
@@ -214,14 +214,14 @@
 /obj/machinery/photocopier/proc/bundlecopy(obj/item/paper_bundle/bundle, need_toner=1)
 	var/obj/item/paper_bundle/p = new /obj/item/paper_bundle (src)
 	for(var/obj/item/W in bundle.pages)
-		if(toner <= 0 && need_toner)
+		if (toner <= 0 && need_toner)
 			toner = 0
 			visible_message(SPAN_NOTICE("A red light on \the [src] flashes, indicating that it is out of toner."))
 			break
 
-		if(istype(W, /obj/item/paper))
+		if (istype(W, /obj/item/paper))
 			W = copy(W)
-		else if(istype(W, /obj/item/photo))
+		else if (istype(W, /obj/item/photo))
 			W = photocopy(W)
 		W.forceMove(p)
 		p.pages += W
@@ -238,9 +238,9 @@
 	p.SetName(fpcard.name)
 	p.evidence = fpcard.evidence
 	p.object = fpcard.object
-	if(need_toner)
+	if (need_toner)
 		toner--
-	if(toner < 1)
+	if (toner < 1)
 		visible_message(SPAN_NOTICE("A red light on \the [src] flashes, indicating that it is out of toner."))
 	p.update_icon()
 	return p

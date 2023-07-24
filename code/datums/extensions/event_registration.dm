@@ -39,10 +39,10 @@
 	GLOB.shuttle_added.register_global(src, .proc/shuttle_added)
 
 /datum/extension/event_registration/shuttle_stationary/proc/register_shuttles()
-	if(given_area in SSshuttle.shuttle_areas)
+	if (given_area in SSshuttle.shuttle_areas)
 		for(var/shuttle_name in SSshuttle.shuttles)
 			var/datum/shuttle/shuttle_datum = SSshuttle.shuttles[shuttle_name]
-			if(given_area in shuttle_datum.shuttle_area)
+			if (given_area in shuttle_datum.shuttle_area)
 				GLOB.shuttle_moved_event.register(shuttle_datum, src, .proc/shuttle_moved)
 				GLOB.shuttle_pre_move_event.register(shuttle_datum, src, .proc/shuttle_pre_move)
 				LAZYADD(shuttles_registered, shuttle_datum)
@@ -54,7 +54,7 @@
 	shuttles_registered = null
 
 /datum/extension/event_registration/shuttle_stationary/proc/shuttle_added(datum/shuttle/shuttle)
-	if(given_area in shuttle.shuttle_area)
+	if (given_area in shuttle.shuttle_area)
 		GLOB.shuttle_moved_event.register(shuttle, src, .proc/shuttle_moved)
 		GLOB.shuttle_pre_move_event.register(shuttle, src, .proc/shuttle_pre_move)
 		LAZYADD(shuttles_registered, shuttle)
@@ -73,5 +73,5 @@
 	shuttle_moving = TRUE
 
 /datum/extension/event_registration/shuttle_stationary/trigger()
-	if(!shuttle_moving)
+	if (!shuttle_moving)
 		..()

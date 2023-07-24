@@ -112,7 +112,7 @@
 	if (LAZYLEN(starting_seeds))
 		for(var/typepath in starting_seeds)
 			var/amount = starting_seeds[typepath]
-			if(isnull(amount))
+			if (isnull(amount))
 				amount = 1
 			for (var/i = 1 to amount)
 				var/O = new typepath
@@ -173,14 +173,14 @@
 		dat += "<td>Notes</td><td>Amount</td><td></td></tr>"
 		for (var/datum/seed_pile/S in piles)
 			var/datum/seed/seed = S.seed_type
-			if(!seed)
+			if (!seed)
 				continue
 			dat += "<tr>"
 			dat += "<td>[seed.seed_name]</td>"
 			dat += "<td>#[seed.uid]</td>"
 			if ("stats" in scanner)
 				dat += "<td>[seed.get_trait(TRAIT_ENDURANCE)]</td><td>[seed.get_trait(TRAIT_YIELD)]</td><td>[seed.get_trait(TRAIT_MATURATION)]</td><td>[seed.get_trait(TRAIT_PRODUCTION)]</td><td>[seed.get_trait(TRAIT_POTENCY)]</td>"
-				if(seed.get_trait(TRAIT_HARVEST_REPEAT))
+				if (seed.get_trait(TRAIT_HARVEST_REPEAT))
 					dat += "<td>Multiple</td>"
 				else
 					dat += "<td>Single</td>"
@@ -189,19 +189,19 @@
 			if ("light" in scanner)
 				dat += "<td>[seed.get_trait(TRAIT_IDEAL_LIGHT)] L</td>"
 			if ("soil" in scanner)
-				if(seed.get_trait(TRAIT_REQUIRES_NUTRIENTS))
-					if(seed.get_trait(TRAIT_NUTRIENT_CONSUMPTION) < 0.05)
+				if (seed.get_trait(TRAIT_REQUIRES_NUTRIENTS))
+					if (seed.get_trait(TRAIT_NUTRIENT_CONSUMPTION) < 0.05)
 						dat += "<td>Low</td>"
-					else if(seed.get_trait(TRAIT_NUTRIENT_CONSUMPTION) > 0.2)
+					else if (seed.get_trait(TRAIT_NUTRIENT_CONSUMPTION) > 0.2)
 						dat += "<td>High</td>"
 					else
 						dat += "<td>Norm</td>"
 				else
 					dat += "<td>No</td>"
-				if(seed.get_trait(TRAIT_REQUIRES_WATER))
-					if(seed.get_trait(TRAIT_WATER_CONSUMPTION) < 1)
+				if (seed.get_trait(TRAIT_REQUIRES_WATER))
+					if (seed.get_trait(TRAIT_WATER_CONSUMPTION) < 1)
 						dat += "<td>Low</td>"
-					else if(seed.get_trait(TRAIT_WATER_CONSUMPTION) > 5)
+					else if (seed.get_trait(TRAIT_WATER_CONSUMPTION) > 5)
 						dat += "<td>High</td>"
 					else
 						dat += "<td>Norm</td>"
@@ -210,50 +210,50 @@
 
 			dat += "<td>"
 			switch(seed.get_trait(TRAIT_CARNIVOROUS))
-				if(1)
+				if (1)
 					dat += "CARN "
-				if(2)
+				if (2)
 					dat	+= SPAN_COLOR("red", "CARN ")
 			switch(seed.get_trait(TRAIT_SPREAD))
-				if(1)
+				if (1)
 					dat += "VINE "
-				if(2)
+				if (2)
 					dat	+= SPAN_COLOR("red", "VINE ")
 			if ("pressure" in scanner)
-				if(seed.get_trait(TRAIT_LOWKPA_TOLERANCE) < 20)
+				if (seed.get_trait(TRAIT_LOWKPA_TOLERANCE) < 20)
 					dat += "LP "
-				if(seed.get_trait(TRAIT_HIGHKPA_TOLERANCE) > 220)
+				if (seed.get_trait(TRAIT_HIGHKPA_TOLERANCE) > 220)
 					dat += "HP "
 			if ("temperature" in scanner)
-				if(seed.get_trait(TRAIT_HEAT_TOLERANCE) > 30)
+				if (seed.get_trait(TRAIT_HEAT_TOLERANCE) > 30)
 					dat += "TEMRES "
-				else if(seed.get_trait(TRAIT_HEAT_TOLERANCE) < 10)
+				else if (seed.get_trait(TRAIT_HEAT_TOLERANCE) < 10)
 					dat += "TEMSEN "
 			if ("light" in scanner)
-				if(seed.get_trait(TRAIT_LIGHT_TOLERANCE) > 10)
+				if (seed.get_trait(TRAIT_LIGHT_TOLERANCE) > 10)
 					dat += "LIGRES "
-				else if(seed.get_trait(TRAIT_LIGHT_TOLERANCE) < 3)
+				else if (seed.get_trait(TRAIT_LIGHT_TOLERANCE) < 3)
 					dat += "LIGSEN "
-			if(seed.get_trait(TRAIT_TOXINS_TOLERANCE) < 3)
+			if (seed.get_trait(TRAIT_TOXINS_TOLERANCE) < 3)
 				dat += "TOXSEN "
-			else if(seed.get_trait(TRAIT_TOXINS_TOLERANCE) > 6)
+			else if (seed.get_trait(TRAIT_TOXINS_TOLERANCE) > 6)
 				dat += "TOXRES "
-			if(seed.get_trait(TRAIT_PEST_TOLERANCE) < 3)
+			if (seed.get_trait(TRAIT_PEST_TOLERANCE) < 3)
 				dat += "PESTSEN "
-			else if(seed.get_trait(TRAIT_PEST_TOLERANCE) > 6)
+			else if (seed.get_trait(TRAIT_PEST_TOLERANCE) > 6)
 				dat += "PESTRES "
-			if(seed.get_trait(TRAIT_WEED_TOLERANCE) < 3)
+			if (seed.get_trait(TRAIT_WEED_TOLERANCE) < 3)
 				dat += "WEEDSEN "
-			else if(seed.get_trait(TRAIT_WEED_TOLERANCE) > 6)
+			else if (seed.get_trait(TRAIT_WEED_TOLERANCE) > 6)
 				dat += "WEEDRES "
-			if(seed.get_trait(TRAIT_PARASITE))
+			if (seed.get_trait(TRAIT_PARASITE))
 				dat += "PAR "
 			if ("temperature" in scanner)
-				if(seed.get_trait(TRAIT_ALTER_TEMP) > 0)
+				if (seed.get_trait(TRAIT_ALTER_TEMP) > 0)
 					dat += "TEMP+ "
-				if(seed.get_trait(TRAIT_ALTER_TEMP) < 0)
+				if (seed.get_trait(TRAIT_ALTER_TEMP) < 0)
 					dat += "TEMP- "
-			if(seed.get_trait(TRAIT_BIOLUM))
+			if (seed.get_trait(TRAIT_BIOLUM))
 				dat += "LUM "
 			dat += "</td>"
 			dat += "<td>[S.amount]</td>"
@@ -313,18 +313,18 @@
 		else
 			to_chat(user, SPAN_NOTICE("There are no seeds in \the [O.name]."))
 		return
-	else if(isWrench(O))
+	else if (isWrench(O))
 		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 		anchored = !anchored
 		to_chat(user, "You [anchored ? "wrench" : "unwrench"] \the [src].")
 
 /obj/machinery/seed_storage/proc/add(obj/item/seeds/O, bypass_removal = 0)
-	if(!bypass_removal)
+	if (!bypass_removal)
 		if (istype(O.loc, /mob))
 			var/mob/user = O.loc
-			if(!user.unEquip(O, src))
+			if (!user.unEquip(O, src))
 				return
-		else if(istype(O.loc,/obj/item/storage))
+		else if (istype(O.loc,/obj/item/storage))
 			var/obj/item/storage/S = O.loc
 			S.remove_from_storage(O, src)
 
@@ -336,7 +336,7 @@
 			++N.amount
 			N.seeds += (O)
 			return
-		else if(N.ID >= newID)
+		else if (N.ID >= newID)
 			newID = N.ID + 1
 
 	piles += new /datum/seed_pile(O, newID)

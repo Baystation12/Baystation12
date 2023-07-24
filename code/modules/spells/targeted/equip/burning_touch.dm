@@ -32,28 +32,28 @@
 
 
 /obj/item/flame/hands/Process()
-	if(world.time < burn_timer)
+	if (world.time < burn_timer)
 		return
 	burn_timer = world.time + 5 SECONDS
 	burn_power++
 	force += 2
-	if(!istype(src.loc, /mob/living/carbon/human))
+	if (!istype(src.loc, /mob/living/carbon/human))
 		qdel(src)
 		return
 	var/mob/living/carbon/human/user = src.loc
 	var/obj/item/organ/external/hand
-	if(src == user.l_hand)
+	if (src == user.l_hand)
 		hand = user.get_organ(BP_L_HAND)
 	else
 		hand = user.get_organ(BP_R_HAND)
 	hand.take_external_damage(burn=2 * burn_power)
-	if(burn_power > 5)
+	if (burn_power > 5)
 		user.fire_stacks += 15
 		user.IgniteMob()
 		user.visible_message(SPAN_DANGER("\The [user] bursts into flames!"))
 		user.drop_from_inventory(src)
 	else
-		if(burn_power == 5)
+		if (burn_power == 5)
 			to_chat(user, SPAN_DANGER("You begin to lose control of \the [src]'s flames as they rapidly move up your arm..."))
 		else
 			to_chat(user, SPAN_WARNING("You feel \the [src] grow hotter and hotter!"))

@@ -32,7 +32,7 @@
 
 /obj/item/reagent_containers/glass/beaker/vial/random/New()
 	..()
-	if(is_open_container())
+	if (is_open_container())
 		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
 
 	var/list/picked_reagents = pickweight(random_reagent_list)
@@ -61,7 +61,7 @@
 
 /obj/item/reagent_containers/powder/examine(mob/user)
 	. = ..()
-	if(reagents)
+	if (reagents)
 		to_chat(user, SPAN_NOTICE("There's about [reagents.total_volume] unit\s here."))
 
 /obj/item/reagent_containers/powder/Initialize()
@@ -76,8 +76,8 @@
 // Proc to shove them up your nose
 
 /obj/item/reagent_containers/powder/attackby(obj/item/W, mob/living/user)
-	if(istype(W, /obj/item/glass_extra/straw) || istype(W, /obj/item/paper/cig) || istype(W, /obj/item/spacecash))
-		if(!user.check_has_mouth()) // We dont want dionae or adherents doing lines of cocaine. Probably.
+	if (istype(W, /obj/item/glass_extra/straw) || istype(W, /obj/item/paper/cig) || istype(W, /obj/item/spacecash))
+		if (!user.check_has_mouth()) // We dont want dionae or adherents doing lines of cocaine. Probably.
 			to_chat(SPAN_WARNING("Without a nose, you seem unable to snort from \the [src]."))
 			return TRUE
 
@@ -95,10 +95,10 @@
 		)
 		playsound(loc, 'sound/effects/snort.ogg', 50, 1)
 
-		if(reagents)
+		if (reagents)
 			reagents.trans_to_mob(user, amount_per_transfer_from_this, CHEM_BLOOD)
 
-		if(!reagents.total_volume)
+		if (!reagents.total_volume)
 			qdel(src)
 		return TRUE
 	return ..()

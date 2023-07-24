@@ -27,20 +27,20 @@
 	build_icon_state = "map_tvalve0"
 
 /obj/machinery/atmospherics/tvalve/on_update_icon(animation)
-	if(animation)
+	if (animation)
 		flick("tvalve[src.state][!src.state]",src)
 	else
 		icon_state = "tvalve[state]"
 
 /obj/machinery/atmospherics/tvalve/update_underlays()
-	if(..())
+	if (..())
 		underlays.Cut()
 		var/turf/T = get_turf(src)
-		if(!istype(T))
+		if (!istype(T))
 			return
 		add_underlay(T, node1, turn(dir, -180))
 
-		if(istype(src, /obj/machinery/atmospherics/tvalve/mirrored))
+		if (istype(src, /obj/machinery/atmospherics/tvalve/mirrored))
 			add_underlay(T, node2, turn(dir, 90))
 		else
 			add_underlay(T, node2, turn(dir, -90))
@@ -51,51 +51,51 @@
 	update_underlays()
 
 /obj/machinery/atmospherics/tvalve/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
-	if(reference == node1)
+	if (reference == node1)
 		network_node1 = new_network
-		if(state)
+		if (state)
 			network_node2 = new_network
 		else
 			network_node3 = new_network
-	else if(reference == node2)
+	else if (reference == node2)
 		network_node2 = new_network
-		if(state)
+		if (state)
 			network_node1 = new_network
-	else if(reference == node3)
+	else if (reference == node3)
 		network_node3 = new_network
-		if(!state)
+		if (!state)
 			network_node1 = new_network
 
-	if(new_network.normal_members.Find(src))
+	if (new_network.normal_members.Find(src))
 		return 0
 
 	new_network.normal_members += src
 
-	if(state)
-		if(reference == node1)
-			if(node2)
+	if (state)
+		if (reference == node1)
+			if (node2)
 				return node2.network_expand(new_network, src)
-		else if(reference == node2)
-			if(node1)
+		else if (reference == node2)
+			if (node1)
 				return node1.network_expand(new_network, src)
 	else
-		if(reference == node1)
-			if(node3)
+		if (reference == node1)
+			if (node3)
 				return node3.network_expand(new_network, src)
-		else if(reference == node3)
-			if(node1)
+		else if (reference == node3)
+			if (node1)
 				return node1.network_expand(new_network, src)
 
 	return null
 
 /obj/machinery/atmospherics/tvalve/Destroy()
-	if(node1)
+	if (node1)
 		node1.disconnect(src)
 		qdel(network_node1)
-	if(node2)
+	if (node2)
 		node2.disconnect(src)
 		qdel(network_node2)
-	if(node3)
+	if (node3)
 		node3.disconnect(src)
 		qdel(network_node3)
 
@@ -107,49 +107,49 @@
 
 /obj/machinery/atmospherics/tvalve/proc/go_to_side()
 
-	if(state) return 0
+	if (state) return 0
 
 	state = 1
 	update_icon()
 
-	if(network_node1)
+	if (network_node1)
 		qdel(network_node1)
-	if(network_node3)
+	if (network_node3)
 		qdel(network_node3)
 	build_network()
 
-	if(network_node1&&network_node2)
+	if (network_node1&&network_node2)
 		network_node1.merge(network_node2)
 		network_node2 = network_node1
 
-	if(network_node1)
+	if (network_node1)
 		network_node1.update = 1
-	else if(network_node2)
+	else if (network_node2)
 		network_node2.update = 1
 
 	return 1
 
 /obj/machinery/atmospherics/tvalve/proc/go_straight()
 
-	if(!state)
+	if (!state)
 		return 0
 
 	state = 0
 	update_icon()
 
-	if(network_node1)
+	if (network_node1)
 		qdel(network_node1)
-	if(network_node2)
+	if (network_node2)
 		qdel(network_node2)
 	build_network()
 
-	if(network_node1&&network_node3)
+	if (network_node1&&network_node3)
 		network_node1.merge(network_node3)
 		network_node3 = network_node1
 
-	if(network_node1)
+	if (network_node1)
 		network_node1.update = 1
-	else if(network_node3)
+	else if (network_node3)
 		network_node3.update = 1
 
 	return 1
@@ -185,17 +185,17 @@
 
 /obj/machinery/atmospherics/tvalve/proc/init_nodes(node1_dir, node2_dir, node3_dir)
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
-		if(target.initialize_directions & get_dir(target,src))
+		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node1 = target
 				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
-		if(target.initialize_directions & get_dir(target,src))
+		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node2 = target
 				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node3_dir))
-		if(target.initialize_directions & get_dir(target,src))
+		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node3 = target
 				break
@@ -204,17 +204,17 @@
 	update_underlays()
 
 /obj/machinery/atmospherics/tvalve/build_network()
-	if(!network_node1 && node1)
+	if (!network_node1 && node1)
 		network_node1 = new /datum/pipe_network()
 		network_node1.normal_members += src
 		network_node1.build_network(node1, src)
 
-	if(!network_node2 && node2)
+	if (!network_node2 && node2)
 		network_node2 = new /datum/pipe_network()
 		network_node2.normal_members += src
 		network_node2.build_network(node2, src)
 
-	if(!network_node3 && node3)
+	if (!network_node3 && node3)
 		network_node3 = new /datum/pipe_network()
 		network_node3.normal_members += src
 		network_node3.build_network(node3, src)
@@ -223,23 +223,23 @@
 /obj/machinery/atmospherics/tvalve/return_network(obj/machinery/atmospherics/reference)
 	build_network()
 
-	if(reference==node1)
+	if (reference==node1)
 		return network_node1
 
-	if(reference==node2)
+	if (reference==node2)
 		return network_node2
 
-	if(reference==node3)
+	if (reference==node3)
 		return network_node3
 
 	return null
 
 /obj/machinery/atmospherics/tvalve/reassign_network(datum/pipe_network/old_network, datum/pipe_network/new_network)
-	if(network_node1 == old_network)
+	if (network_node1 == old_network)
 		network_node1 = new_network
-	if(network_node2 == old_network)
+	if (network_node2 == old_network)
 		network_node2 = new_network
-	if(network_node3 == old_network)
+	if (network_node3 == old_network)
 		network_node3 = new_network
 
 	return 1
@@ -248,15 +248,15 @@
 	return null
 
 /obj/machinery/atmospherics/tvalve/disconnect(obj/machinery/atmospherics/reference)
-	if(reference==node1)
+	if (reference==node1)
 		qdel(network_node1)
 		node1 = null
 
-	else if(reference==node2)
+	else if (reference==node2)
 		qdel(network_node2)
 		node2 = null
 
-	else if(reference==node3)
+	else if (reference==node3)
 		qdel(network_node3)
 		node2 = null
 
@@ -265,7 +265,7 @@
 	return null
 
 /obj/machinery/atmospherics/tvalve/attackby(obj/item/W as obj, mob/user as mob)
-	if(!isWrench(W))
+	if (!isWrench(W))
 		return ..()
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
@@ -339,7 +339,7 @@
 
 
 /obj/machinery/atmospherics/tvalve/mirrored/on_update_icon(animation)
-	if(animation)
+	if (animation)
 		flick("tvalvem[src.state][!src.state]",src)
 	else
 		icon_state = "tvalvem[state]"
@@ -367,11 +367,11 @@
 
 /obj/machinery/atmospherics/tvalve/digital/on_update_icon()
 	..()
-	if(!powered())
+	if (!powered())
 		icon_state = "tvalvenopower"
 
 /obj/machinery/atmospherics/tvalve/digital/interface_interact(mob/user)
-	if(!CanInteract(user, DefaultTopicState()))
+	if (!CanInteract(user, DefaultTopicState()))
 		return FALSE
 	user_toggle()
 	return TRUE
@@ -402,11 +402,11 @@
 
 /obj/machinery/atmospherics/tvalve/mirrored/digital/on_update_icon()
 	..()
-	if(!powered())
+	if (!powered())
 		icon_state = "tvalvemnopower"
 
 /obj/machinery/atmospherics/tvalve/mirrored/digital/interface_interact(mob/user)
-	if(!CanInteract(user, DefaultTopicState()))
+	if (!CanInteract(user, DefaultTopicState()))
 		return FALSE
 	user_toggle()
 	return TRUE

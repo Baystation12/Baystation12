@@ -44,7 +44,7 @@
 
 	var/turf/T = get_turf(loc)
 	var/obj/machinery/navbeacon/N = locate() in T
-	if(N)
+	if (N)
 		home = T
 		homeName = N.location
 	else
@@ -60,10 +60,10 @@
 
 
 /mob/living/bot/mulebot/MouseDrop_T(atom/movable/C, mob/user)
-	if(user.stat)
+	if (user.stat)
 		return
 
-	if(!istype(C) || C.anchored || get_dist(user, src) > 1 || get_dist(src, C) > 1 )
+	if (!istype(C) || C.anchored || get_dist(user, src) > 1 || get_dist(src, C) > 1 )
 		return
 
 	load(C)
@@ -86,7 +86,7 @@
 	. += "<br><a href='?src=\ref[src];command=autoret'>Toggle auto return home</a> ([auto_return ? "On" : "Off"])"
 	. += "<br><a href='?src=\ref[src];command=cargotypes'>Toggle non-standard cargo</a> ([crates_only ? "Off" : "On"])"
 
-	if(load)
+	if (load)
 		. += "<br><a href='?src=\ref[src];command=unload'>Unload now</a>"
 
 /mob/living/bot/mulebot/GetInteractMaintenance()
@@ -94,58 +94,58 @@
 
 /mob/living/bot/mulebot/ProcessCommand(mob/user, command, href_list)
 	..()
-	if(CanAccessPanel(user))
+	if (CanAccessPanel(user))
 		switch(command)
-			if("stop")
+			if ("stop")
 				obeyCommand("Stop")
-			if("go")
+			if ("go")
 				obeyCommand("GoTD")
-			if("home")
+			if ("home")
 				obeyCommand("Home")
-			if("destination")
+			if ("destination")
 				obeyCommand("SetD")
-			if("sethome")
+			if ("sethome")
 				var/new_dest
 				var/list/beaconlist = GetBeaconList()
-				if(length(beaconlist))
+				if (length(beaconlist))
 					new_dest = input("Select new home tag", "Mulebot [suffix ? "([suffix])" : ""]", null) in null|beaconlist
 				else
 					alert("No destination beacons available.")
-				if(new_dest)
+				if (new_dest)
 					home = get_turf(beaconlist[new_dest])
 					homeName = new_dest
-			if("unload")
+			if ("unload")
 				unload()
-			if("autoret")
+			if ("autoret")
 				auto_return = !auto_return
-			if("cargotypes")
+			if ("cargotypes")
 				crates_only = !crates_only
 
-	if(CanAccessMaintenance(user))
+	if (CanAccessMaintenance(user))
 		switch(command)
-			if("safety")
+			if ("safety")
 				safety = !safety
 
 /mob/living/bot/mulebot/proc/obeyCommand(command)
 	switch(command)
-		if("Home")
+		if ("Home")
 			resetTarget()
 			target = home
 			targetName = "Home"
-		if("SetD")
+		if ("SetD")
 			var/new_dest
 			var/list/beaconlist = GetBeaconList()
-			if(length(beaconlist))
+			if (length(beaconlist))
 				new_dest = input("Select new destination tag", "Mulebot [suffix ? "([suffix])" : ""]") in null|beaconlist
 			else
 				alert("No destination beacons available.")
-			if(new_dest)
+			if (new_dest)
 				resetTarget()
 				target = get_turf(beaconlist[new_dest])
 				targetName = new_dest
-		if("GoTD")
+		if ("GoTD")
 			paused = 0
-		if("Stop")
+		if ("Stop")
 			paused = 1
 
 /mob/living/bot/mulebot/emag_act(remaining_charges, user)
@@ -156,16 +156,16 @@
 	return 1
 
 /mob/living/bot/mulebot/on_update_icon()
-	if(open)
+	if (open)
 		icon_state = "mulebot-hatch"
 		return
-	if(length(target_path) && !paused)
+	if (length(target_path) && !paused)
 		icon_state = "mulebot1"
 		return
 	icon_state = "mulebot0"
 
 /mob/living/bot/mulebot/handleRegular()
-	if(!safety && prob(1))
+	if (!safety && prob(1))
 		flick("mulebot-emagged", src)
 	update_icon()
 
@@ -175,12 +175,12 @@
 	..()
 
 /mob/living/bot/mulebot/handleAdjacentTarget()
-	if(target == src.loc)
+	if (target == src.loc)
 		custom_emote(2, "makes a chiming sound.")
 		playsound(loc, 'sound/machines/chime.ogg', 50, 0)
 		UnarmedAttack(target)
 		resetTarget()
-		if(auto_return && home && (loc != home))
+		if (auto_return && home && (loc != home))
 			target = home
 			targetName = "Home"
 
@@ -189,29 +189,29 @@
 
 /mob/living/bot/mulebot/calcTargetPath()
 	..()
-	if(!length(target_path) && target != home) // I presume that target is not null
+	if (!length(target_path) && target != home) // I presume that target is not null
 		resetTarget()
 		target = home
 		targetName = "Home"
 
 /mob/living/bot/mulebot/stepToTarget()
-	if(paused)
+	if (paused)
 		return
 	..()
 
 /mob/living/bot/mulebot/UnarmedAttack(turf/T)
-	if(T == src.loc)
+	if (T == src.loc)
 		unload(dir)
 
 /mob/living/bot/mulebot/Bump(mob/living/carbon/human/M)
-	if(!safety && istype(M))
+	if (!safety && istype(M))
 		visible_message(SPAN_WARNING("[src] knocks over [M]!"))
 		M.Stun(8)
 		M.Weaken(5)
 	..()
 
 /mob/living/bot/mulebot/proc/runOver(mob/living/carbon/human/H)
-	if(istype(H)) // No safety checks - WILL run over lying humans. Stop ERPing in the maint!
+	if (istype(H)) // No safety checks - WILL run over lying humans. Stop ERPing in the maint!
 		visible_message(SPAN_WARNING("[src] drives over [H]!"))
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
@@ -226,7 +226,7 @@
 		blood_splatter(src, H, 1)
 
 /mob/living/bot/mulebot/relaymove(mob/user, direction)
-	if(load == user)
+	if (load == user)
 		unload(direction)
 
 /mob/living/bot/mulebot/explode()
@@ -250,54 +250,54 @@
 /mob/living/bot/mulebot/proc/GetBeaconList()
 	var/list/beaconlist = list()
 	for(var/obj/machinery/navbeacon/N in navbeacons)
-		if(!N.codes["delivery"])
+		if (!N.codes["delivery"])
 			continue
 		beaconlist.Add(N.location)
 		beaconlist[N.location] = N
 	return beaconlist
 
 /mob/living/bot/mulebot/proc/load(atom/movable/C)
-	if(busy || load || get_dist(C, src) > 1 || !isturf(C.loc))
+	if (busy || load || get_dist(C, src) > 1 || !isturf(C.loc))
 		return
 
 	for(var/obj/structure/plasticflaps/P in src.loc)//Takes flaps into account
-		if(!CanPass(C,P))
+		if (!CanPass(C,P))
 			return
 
-	if(crates_only && !istype(C,/obj/structure/closet/crate))
+	if (crates_only && !istype(C,/obj/structure/closet/crate))
 		custom_emote(2, "makes a sighing buzz.")
 		playsound(loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
 		return
 
 	var/obj/structure/closet/crate/crate = C
-	if(istype(crate))
+	if (istype(crate))
 		crate.close()
 
 	busy = 1
 
 	C.forceMove(loc)
 	sleep(2)
-	if(C.loc != loc) //To prevent you from going onto more than one bot.
+	if (C.loc != loc) //To prevent you from going onto more than one bot.
 		return
 	C.forceMove(src)
 	load = C
 
 	C.pixel_y += 9
-	if(C.layer < layer)
+	if (C.layer < layer)
 		C.layer = layer + 0.1
 	C.plane = plane
 	overlays += C
 
-	if(ismob(C))
+	if (ismob(C))
 		var/mob/M = C
-		if(M.client)
+		if (M.client)
 			M.client.perspective = EYE_PERSPECTIVE
 			M.client.eye = src
 
 	busy = 0
 
 /mob/living/bot/mulebot/proc/unload(dirn = 0)
-	if(!load || busy)
+	if (!load || busy)
 		return
 
 	busy = 1
@@ -306,26 +306,26 @@
 	load.forceMove(loc)
 	load.pixel_y -= 9
 	load.reset_plane_and_layer()
-	if(ismob(load))
+	if (ismob(load))
 		var/mob/M = load
-		if(M.client)
+		if (M.client)
 			M.client.perspective = MOB_PERSPECTIVE
 			M.client.eye = src
 
-	if(dirn)
+	if (dirn)
 		step(load, dirn)
 
 	load = null
 
 	for(var/atom/movable/AM in src)
-		if(AM == botcard || AM == access_scanner) continue
+		if (AM == botcard || AM == access_scanner) continue
 
 		AM.forceMove(loc)
 		AM.reset_plane_and_layer()
 		AM.pixel_y = initial(AM.pixel_y)
-		if(ismob(AM))
+		if (ismob(AM))
 			var/mob/M = AM
-			if(M.client)
+			if (M.client)
 				M.client.perspective = MOB_PERSPECTIVE
 				M.client.eye = src
 	busy = 0

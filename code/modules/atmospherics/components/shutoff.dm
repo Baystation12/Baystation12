@@ -39,7 +39,7 @@
 	hide(hides_under_flooring() && !T.is_plating())
 
 /obj/machinery/atmospherics/valve/shutoff/interface_interact(mob/user)
-	if(CanInteract(user, DefaultTopicState()))
+	if (CanInteract(user, DefaultTopicState()))
 		close_on_leaks = !close_on_leaks
 		update_icon()
 		to_chat(user, SPAN_NOTICE("You [close_on_leaks ? "enable" : "disable"] the automatic shutoff circuit."))
@@ -50,7 +50,7 @@
 	return FALSE
 
 /obj/machinery/atmospherics/valve/shutoff/hide(do_hide)
-	if(istype(loc, /turf/simulated))
+	if (istype(loc, /turf/simulated))
 		set_invisibility(do_hide ? INVISIBILITY_ABSTRACT : 0)
 	update_underlays()
 

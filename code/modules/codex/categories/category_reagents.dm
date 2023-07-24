@@ -6,7 +6,7 @@
 
 	for(var/thing in subtypesof(/datum/reagent))
 		var/datum/reagent/reagent = thing
-		if(initial(reagent.hidden_from_codex))
+		if (initial(reagent.hidden_from_codex))
 			continue
 		var/chem_name = lowertext(initial(reagent.name))
 		var/datum/codex_entry/entry = new( \
@@ -19,7 +19,7 @@
 
 			var/datum/chemical_reaction/reaction = react
 
-			if(reaction.hidden_from_codex)
+			if (reaction.hidden_from_codex)
 				continue
 
 			var/list/reactant_values = list()
@@ -27,7 +27,7 @@
 				var/datum/reagent/reactant = reactant_id
 				reactant_values += "[reaction.required_reagents[reactant_id]]u [lowertext(initial(reactant.name))]"
 
-			if(!length(reactant_values))
+			if (!length(reactant_values))
 				continue
 
 			var/list/catalysts = list()
@@ -36,7 +36,7 @@
 				catalysts += "[reaction.catalysts[catalyst_id]]u [lowertext(initial(catalyst.name))]"
 
 			var/datum/reagent/result = reaction.result
-			if(length(catalysts))
+			if (length(catalysts))
 				production_strings += "- [jointext(reactant_values, " + ")] (catalysts: [jointext(catalysts, ", ")]): [reaction.result_amount]u [lowertext(initial(result.name))]"
 			else
 				production_strings += "- [jointext(reactant_values, " + ")]: [reaction.result_amount]u [lowertext(initial(result.name))]"
@@ -46,8 +46,8 @@
 			if (reaction.minimum_temperature > 0)
 				production_strings += "- Minimum temperature: [KELVIN_TO_CELSIUS(reaction.minimum_temperature)]C ([reaction.minimum_temperature]K)"
 
-		if(length(production_strings))
-			if(!entry.mechanics_text)
+		if (length(production_strings))
+			if (!entry.mechanics_text)
 				entry.mechanics_text = "It can be produced as follows:<br>"
 			else
 				entry.mechanics_text += "<br><br>It can be produced as follows:<br>"

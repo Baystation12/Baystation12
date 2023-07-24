@@ -71,7 +71,7 @@ SUBSYSTEM_DEF(lighting)
 		processed_corners = 0
 		processed_overlays = 0
 
-		if(next_stats_update <= world.time)
+		if (next_stats_update <= world.time)
 			next_stats_update = world.time + update_stats_every
 			for(var/stat_name in stats_queues)
 				var/stat_sum = 0
@@ -82,7 +82,7 @@ SUBSYSTEM_DEF(lighting)
 
 				var/list/stats_list = stats_lists[stat_name]
 				stats_list.Insert(1, stat_sum)
-				if(length(stats_list) > stat_updates_to_keep)
+				if (length(stats_list) > stat_updates_to_keep)
 					stats_list.Cut(length(stats_list))
 
 	MC_SPLIT_TICK_INIT(3)
@@ -94,12 +94,12 @@ SUBSYSTEM_DEF(lighting)
 		var/datum/light_source/L = light_queue[lq_idex]
 		lq_idex += 1
 
-		if(L.check() || L.destroyed || L.force_update)
+		if (L.check() || L.destroyed || L.force_update)
 			L.remove_lum()
-			if(!L.destroyed)
+			if (!L.destroyed)
 				L.apply_lum()
 
-		else if(L.vis_update)	//We smartly update only tiles that became (in) visible to use.
+		else if (L.vis_update)	//We smartly update only tiles that became (in) visible to use.
 			L.smart_vis_update()
 
 		L.vis_update   = FALSE

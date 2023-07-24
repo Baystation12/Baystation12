@@ -48,11 +48,11 @@
 
 /mob/living/carbon/alien/diona/Login()
 	. = ..()
-	if(client)
-		if(holding_item)
+	if (client)
+		if (holding_item)
 			holding_item.screen_loc = DIONA_SCREEN_LOC_HELD
 			client.screen |= holding_item
-		if(hat)
+		if (hat)
 			hat.screen_loc = DIONA_SCREEN_LOC_HAT
 			client.screen |= hat
 
@@ -74,7 +74,7 @@
 	eyes.layer = EYE_GLOW_LAYER
 	eyes.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 
-	if(prob(flower_chance))
+	if (prob(flower_chance))
 		flower = image(icon = icon, icon_state = "flower_back")
 		var/image/I = image(icon = icon, icon_state = "flower_fore")
 		I.color = get_random_colour(1)
@@ -86,25 +86,25 @@
 
 /mob/living/carbon/alien/diona/examine(mob/user)
 	. = ..()
-	if(holding_item)
+	if (holding_item)
 		to_chat(user, SPAN_NOTICE("It is holding [icon2html(holding_item, user)] \a [holding_item]."))
-	if(hat)
+	if (hat)
 		to_chat(user, SPAN_NOTICE("It is wearing [icon2html(hat, user)] \a [hat]."))
 
 /mob/living/carbon/alien/diona/IsAdvancedToolUser()
 	return FALSE
 
 /mob/living/carbon/alien/diona/proc/handle_npc(mob/living/carbon/alien/diona/D)
-	if(D.stat != CONSCIOUS)
+	if (D.stat != CONSCIOUS)
 		return
-	if(prob(wander_prob) && isturf(D.loc) && !D.pulledby) //won't move if being pulled
+	if (prob(wander_prob) && isturf(D.loc) && !D.pulledby) //won't move if being pulled
 		SelfMove(pick(GLOB.cardinal))
-	if(prob(emote_prob))
+	if (prob(emote_prob))
 		D.emote(pick("scratch","jump","chirp","tail"))
 
 /proc/split_into_nymphs(mob/living/carbon/human/donor, dying)
 
-	if(!donor || donor.species.name != SPECIES_DIONA)
+	if (!donor || donor.species.name != SPECIES_DIONA)
 		return
 
 	// Run through our nymphs and spit them out
@@ -114,31 +114,31 @@
 		transfer_languages(donor, nymph, (WHITELISTED|RESTRICTED))
 		nymph.set_dir(pick(NORTH, SOUTH, EAST, WEST))
 		// Collect any available nymphs
-		if(!nymph.client && nymph.stat != DEAD)
+		if (!nymph.client && nymph.stat != DEAD)
 			available_nymphs += nymph
 
 	// Make sure there's a home for the player
-	if(!length(available_nymphs))
+	if (!length(available_nymphs))
 		available_nymphs += new /mob/living/carbon/alien/diona/sterile(donor.loc)
 
 	// Link availalbe nymphs together
 	var/mob/living/carbon/alien/diona/first_nymph
 	var/mob/living/carbon/alien/diona/last_nymph
 	for(var/mob/living/carbon/alien/diona/nymph in available_nymphs)
-		if(!first_nymph)
+		if (!first_nymph)
 			first_nymph = nymph
 		else
 			nymph.set_previous_nymph(last_nymph)
 			last_nymph.set_next_nymph(nymph)
 		last_nymph = nymph
-	if(length(available_nymphs) > 1)
+	if (length(available_nymphs) > 1)
 		first_nymph.set_previous_nymph(last_nymph)
 		last_nymph.set_next_nymph(first_nymph)
 
 	// Transfer player over
 	first_nymph.set_dir(donor.dir)
 	transfer_languages(donor, first_nymph)
-	if(donor.mind)
+	if (donor.mind)
 		donor.mind.transfer_to(first_nymph)
 	else
 		first_nymph.key = donor.key

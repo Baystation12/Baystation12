@@ -27,8 +27,8 @@ var/global/const/BORG_WIRE_AI_CONTROL = 8
 
 	var/mob/living/silicon/robot/R = holder
 	switch(index)
-		if(BORG_WIRE_LAWCHECK) //Cut the law wire, and the borg will no longer receive law updates from its AI
-			if(!mended)
+		if (BORG_WIRE_LAWCHECK) //Cut the law wire, and the borg will no longer receive law updates from its AI
+			if (!mended)
 				if (R.lawupdate)
 					to_chat(R, "LawSync protocol engaged.")
 					R.show_laws()
@@ -37,10 +37,10 @@ var/global/const/BORG_WIRE_AI_CONTROL = 8
 					R.lawupdate = TRUE
 
 		if (BORG_WIRE_AI_CONTROL) //Cut the AI wire to reset AI control
-			if(!mended)
+			if (!mended)
 				R.disconnect_from_ai()
 
-		if(BORG_WIRE_LOCKED_DOWN)
+		if (BORG_WIRE_LOCKED_DOWN)
 			R.SetLockdown(!mended)
 
 
@@ -48,16 +48,16 @@ var/global/const/BORG_WIRE_AI_CONTROL = 8
 	var/mob/living/silicon/robot/R = holder
 	switch(index)
 		if (BORG_WIRE_AI_CONTROL) //pulse the AI wire to make the borg reselect an AI
-			if(!R.emagged)
+			if (!R.emagged)
 				var/mob/living/silicon/ai/new_ai = select_active_ai(R, get_z(R))
 				R.connect_to_ai(new_ai)
 
-		if(BORG_WIRE_LOCKED_DOWN)
+		if (BORG_WIRE_LOCKED_DOWN)
 			R.SetLockdown(!R.lockcharge) // Toggle
 
 /datum/wires/robot/CanUse(mob/living/L)
 	var/mob/living/silicon/robot/R = holder
-	if(R.wiresexposed)
+	if (R.wiresexposed)
 		return 1
 	return 0
 

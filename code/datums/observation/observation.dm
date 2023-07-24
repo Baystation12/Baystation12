@@ -122,7 +122,7 @@
 		listeners[listener] = callbacks
 
 	// If the proc_call is already registered skip
-	if(proc_call in callbacks)
+	if (proc_call in callbacks)
 		return FALSE
 
 	// Add the callback, and return true.
@@ -141,7 +141,7 @@
 
 	// Remove all callbacks if no specific one is given.
 	if (!proc_call)
-		if(listeners.Remove(listener))
+		if (listeners.Remove(listener))
 			// Perform some cleanup and return true.
 			if (!length(listeners))
 				event_sources -= event_source
@@ -154,7 +154,7 @@
 		return FALSE
 
 	// See if the callback exists.
-	if(!callbacks.Remove(proc_call))
+	if (!callbacks.Remove(proc_call))
 		return FALSE
 
 	if (!length(callbacks))
@@ -194,7 +194,7 @@
 		return FALSE
 
 	// See if the callback exists.
-	if(!callbacks.Remove(proc_call))
+	if (!callbacks.Remove(proc_call))
 		return FALSE
 
 	if (!length(callbacks))

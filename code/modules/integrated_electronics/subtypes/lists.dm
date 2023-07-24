@@ -33,7 +33,7 @@
 
 /obj/item/integrated_circuit/lists/pick/do_work()
 	var/list/input_list = get_pin_data(IC_INPUT, 1) // List pins guarantee that there is a list inside, even if just an empty one.
-	if(length(input_list))
+	if (length(input_list))
 		set_pin_data(IC_OUTPUT, 1, pick(input_list))
 		push_data()
 		activate_pin(2)
@@ -95,7 +95,7 @@
 	set_pin_data(IC_OUTPUT, 1, output)
 	push_data()
 
-	if(output)
+	if (output)
 		activate_pin(2)
 	else
 		activate_pin(3)
@@ -132,29 +132,29 @@
 	var/list/output = list()
 
 	for(var/input_item in input_list)
-		if(sample_list)
+		if (sample_list)
 			for(var/sample_item in sample_list)
-				if(!isnull(sample_item))
-					if(istext(input_item) && istext(sample_item) && findtext(input_item, sample_item))
+				if (!isnull(sample_item))
+					if (istext(input_item) && istext(sample_item) && findtext(input_item, sample_item))
 						output += input_item
-					if(istype(input_item, /atom) && istext(sample_item))
+					if (istype(input_item, /atom) && istext(sample_item))
 						var/atom/input_item_atom = input_item
-						if(istext(sample_item) && findtext(input_item_atom.name, sample_item))
+						if (istext(sample_item) && findtext(input_item_atom.name, sample_item))
 							output += input_item
-				if(!istext(input_item))
-					if(input_item == sample_item)
+				if (!istext(input_item))
+					if (input_item == sample_item)
 						output += input_item
 		else
-			if(!isnull(sample))
-				if(istext(input_item) && istext(sample) && findtext(input_item, sample))
+			if (!isnull(sample))
+				if (istext(input_item) && istext(sample) && findtext(input_item, sample))
 					output += input_item
 					continue
-				if(istype(input_item, /atom) && istext(sample))
+				if (istype(input_item, /atom) && istext(sample))
 					var/atom/input_itema = input_item
-					if(findtext(input_itema.name, sample))
+					if (findtext(input_itema.name, sample))
 						output += input_item
-			if(!istext(input_item))
-				if(input_item == sample)
+			if (!istext(input_item))
+				if (input_item == sample)
 					output += input_item
 
 	output_list1.Remove(output)
@@ -182,7 +182,7 @@
 	var/list/input_list = get_pin_data(IC_INPUT, 1)
 	var/list/output_list = list()
 	for(var/e in input_list)
-		if(e in output_list)
+		if (e in output_list)
 			continue
 		output_list.Add(e)
 
@@ -215,7 +215,7 @@
 	var/index = get_pin_data(IC_INPUT, 2)
 
 	// Check if index is valid
-	if(index > length(input_list))
+	if (index > length(input_list))
 		set_pin_data(IC_OUTPUT, 1, null)
 		push_data()
 		activate_pin(3)
@@ -245,10 +245,10 @@
 	var/list/red_list = list()
 	var/index = get_pin_data(IC_INPUT, 2)
 
-	if(length(input_list))
+	if (length(input_list))
 		for(var/j in 1 to length(input_list))
 			var/I = input_list[j]
-			if(j != index)
+			if (j != index)
 				red_list.Add(I)
 	set_pin_data(IC_OUTPUT, 1, red_list)
 	push_data()
@@ -281,13 +281,13 @@
 	var/item = get_pin_data(IC_INPUT, 3)
 
 	// Check if index is valid
-	if(!is_valid_index(index, input_list))
+	if (!is_valid_index(index, input_list))
 		set_pin_data(IC_OUTPUT, 1, input_list)
 		push_data()
 		activate_pin(3)
 		return
 
-	if(!islist(item))
+	if (!islist(item))
 		var/list/red_list = input_list.Copy()			//crash proof
 		red_list[index] = item
 		set_pin_data(IC_OUTPUT, 1, red_list)
@@ -344,7 +344,7 @@
 
 	var/result = null
 
-	if(length(input_list) && delimiter && !isnull(start) && !isnull(end))
+	if (length(input_list) && delimiter && !isnull(start) && !isnull(end))
 		result = jointext(input_list, delimiter, start, end)
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -375,7 +375,7 @@
 		var/data = get_pin_data(IC_INPUT, i)
 
 		// No nested lists
-		if(!islist(data))
+		if (!islist(data))
 			output_list += data
 		else
 			output_list += null
@@ -421,7 +421,7 @@
 
 	for(var/i = 1 to number_of_pins)
 		var/list_index = i + start_index - 1
-		if(list_index > length(input_list))
+		if (list_index > length(input_list))
 			set_pin_data(IC_OUTPUT, i, null)
 		else
 			set_pin_data(IC_OUTPUT, i, input_list[list_index])

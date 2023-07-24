@@ -65,7 +65,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	return
 
 /obj/item/integrated_circuit/proc/check_interactivity(mob/user)
-	if(assembly)
+	if (assembly)
 		return assembly.check_interactivity(user)
 	else
 		return CanUseTopic(user)
@@ -77,7 +77,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	setup_io(outputs, /datum/integrated_io, outputs_default, IC_OUTPUT)
 	outputs_default = null
 	setup_io(activators, /datum/integrated_io/activate, null, IC_ACTIVATOR)
-	if(!matter[MATERIAL_STEEL])
+	if (!matter[MATERIAL_STEEL])
 		matter[MATERIAL_STEEL] = w_class * SScircuit.cost_multiplier // Default cost.
 	. = ..()
 
@@ -110,24 +110,24 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	set desc = "Rename your circuit, useful to stay organized."
 
 	var/mob/M = usr
-	if(!check_interactivity(M))
+	if (!check_interactivity(M))
 		return
 
 	var/input = sanitizeName(input(M, "What do you want to name this?", "Rename", name) as null|text, allow_numbers = TRUE)
-	if(check_interactivity(M))
-		if(!input)
+	if (check_interactivity(M))
+		if (!input)
 			input = name
 		to_chat(M, SPAN_NOTICE("The circuit '[name]' is now labeled '[input]'."))
 		displayed_name = input
 
 /obj/item/integrated_circuit/nano_host()
-	if(istype(src.loc, /obj/item/device/electronic_assembly))
+	if (istype(src.loc, /obj/item/device/electronic_assembly))
 		return loc
 	return ..()
 
 /obj/item/integrated_circuit/interact(mob/user)
 	. = ..()
-	if(!check_interactivity(user))
+	if (!check_interactivity(user))
 		return
 
 	var/window_height = 350
@@ -140,13 +140,13 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	HTML += "<div align='center'>"
 	HTML += "<table border='1' style='undefined;table-layout: fixed; width: 80%'>"
 
-	if(assembly)
+	if (assembly)
 		HTML += "<a href='?src=\ref[src];return=1'>\[Return to Assembly\]</a><br>"
 
 	HTML += "<a href='?src=\ref[src];refresh=1'>\[Refresh\]</a>  |  "
 	HTML += "<a href='?src=\ref[src];rename=1'>\[Rename\]</a>  |  "
 	HTML += "<a href='?src=\ref[src];scan=1'>\[Copy Ref\]</a>"
-	if(assembly && removable)
+	if (assembly && removable)
 		HTML += "  |  <a href='?src=\ref[assembly];component=\ref[src];remove=1'>\[Remove\]</a>"
 	HTML += "<br>"
 
@@ -166,37 +166,37 @@ a creative player the means to solve many problems.  Circuits are held inside an
 			var/words = list()
 			var/height = 1
 			switch(j)
-				if(1)
+				if (1)
 					io = get_pin_ref(IC_INPUT, i)
-					if(io)
+					if (io)
 						words += "<b><a href='?src=\ref[src];act=wire;pin=\ref[io]'>[io.display_pin_type()] [io.name]</a> \
 						<a href='?src=\ref[src];act=data;pin=\ref[io]'>[io.display_data(io.data)]</a></b><br>"
-						if(length(io.linked))
+						if (length(io.linked))
 							for(var/k in 1 to length(io.linked))
 								var/datum/integrated_io/linked = io.linked[k]
 								words += "<a href='?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'>[linked]</a> \
 								@ <a href='?src=\ref[linked.holder]'>[linked.holder.displayed_name]</a><br>"
 
-						if(LAZYLEN(outputs) > LAZYLEN(inputs))
+						if (LAZYLEN(outputs) > LAZYLEN(inputs))
 							height = 1
-				if(2)
-					if(i == 1)
+				if (2)
+					if (i == 1)
 						words += "[src.displayed_name]<br>[src.name != src.displayed_name ? "([src.name])":""]<hr>[src.desc]"
 						height = row_height
 					else
 						continue
-				if(3)
+				if (3)
 					io = get_pin_ref(IC_OUTPUT, i)
-					if(io)
+					if (io)
 						words += "<b><a href='?src=\ref[src];act=wire;pin=\ref[io]'>[io.display_pin_type()] [io.name]</a> \
 						<a href='?src=\ref[src];act=data;pin=\ref[io]'>[io.display_data(io.data)]</a></b><br>"
-						if(length(io.linked))
+						if (length(io.linked))
 							for(var/k in 1 to length(io.linked))
 								var/datum/integrated_io/linked = io.linked[k]
 								words += "<a href='?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'>[linked]</a> \
 								@ <a href='?src=\ref[linked.holder]'>[linked.holder.displayed_name]</a><br>"
 
-						if(LAZYLEN(inputs) > LAZYLEN(outputs))
+						if (LAZYLEN(inputs) > LAZYLEN(outputs))
 							height = 1
 			HTML += "<td align='center' rowspan='[height]'>[jointext(words, null)]</td>"
 		HTML += "</tr>"
@@ -207,7 +207,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 
 		words += "<b><a href='?src=\ref[src];act=wire;pin=\ref[io]'>[SPAN_COLOR("#ff0000", io)]</a> "
 		words += "<a href='?src=\ref[src];act=data;pin=\ref[io]'>[SPAN_COLOR("#ff0000", io.data ? "\<PULSE OUT\>" : "\<PULSE IN\>")]</a></b><br>"
-		if(length(io.linked))
+		if (length(io.linked))
 			for(var/k in 1 to length(io.linked))
 				var/datum/integrated_io/linked = io.linked[k]
 				words += "<a href='?src=\ref[src];act=unwire;pin=\ref[io];link=\ref[linked]'>[SPAN_COLOR("#ff0000", linked)]</a> \
@@ -222,17 +222,17 @@ a creative player the means to solve many problems.  Circuits are held inside an
 
 	HTML += "<br>[SPAN_COLOR("#0000aa", "Complexity: [complexity]")]"
 	HTML += "<br>[SPAN_COLOR("#0000aa", "Cooldown per use: [cooldown_per_use/10] sec")]"
-	if(ext_cooldown)
+	if (ext_cooldown)
 		HTML += "<br>[SPAN_COLOR("#0000aa", "External manipulation cooldown: [ext_cooldown/10] sec")]"
-	if(power_draw_idle)
+	if (power_draw_idle)
 		HTML += "<br>[SPAN_COLOR("#0000aa", "Power Draw: [power_draw_idle] W (Idle)")]"
-	if(power_draw_per_use)
+	if (power_draw_per_use)
 		HTML += "<br>[SPAN_COLOR("#0000aa", "Power Draw: [power_draw_per_use] W (Active)")]" // Borgcode says that powercells' checked_use() takes joules as input.
 	HTML += "<br>[SPAN_COLOR("#0000aa", extended_desc)]"
 
 	HTML += "</body></html>"
 	var/HTML_merged = jointext(HTML, null)
-	if(assembly)
+	if (assembly)
 		show_browser(user, HTML_merged, "window=assembly-\ref[assembly];size=[window_width]x[window_height];border=1;can_resize=1;can_close=1;can_minimize=1")
 	else
 		show_browser(user, HTML_merged, "window=circuit-\ref[src];size=[window_width]x[window_height];border=1;can_resize=1;can_close=1;can_minimize=1")
@@ -240,32 +240,32 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	onclose(user, "assembly-\ref[src.assembly]")
 
 /obj/item/integrated_circuit/Topic(href, href_list, state = GLOB.physical_state)
-	if(..())
+	if (..())
 		return 1
 
 	. = IC_TOPIC_HANDLED
 	var/obj/held_item = usr.get_active_hand()
-	if(href_list["pin"] && assembly)
+	if (href_list["pin"] && assembly)
 		var/datum/integrated_io/pin = locate(href_list["pin"]) in inputs + outputs + activators
-		if(pin)
+		if (pin)
 			var/datum/integrated_io/linked
 			var/success = TRUE
-			if(href_list["link"])
+			if (href_list["link"])
 				linked = locate(href_list["link"]) in pin.linked
 
-			if(istype(held_item, /obj/item/device/integrated_electronics))
+			if (istype(held_item, /obj/item/device/integrated_electronics))
 				pin.handle_wire(linked, held_item, href_list["act"], usr)
 				. = IC_TOPIC_REFRESH
 			else
 				to_chat(usr, SPAN_WARNING("You can't do a whole lot without the proper tools."))
 				success = FALSE
-			if(success && assembly)
+			if (success && assembly)
 				assembly.add_allowed_scanner(usr.ckey)
 
-	else if(href_list["scan"])
-		if(istype(held_item, /obj/item/device/integrated_electronics/debugger))
+	else if (href_list["scan"])
+		if (istype(held_item, /obj/item/device/integrated_electronics/debugger))
 			var/obj/item/device/integrated_electronics/debugger/D = held_item
-			if(D.accepting_refs)
+			if (D.accepting_refs)
 				D.afterattack(src, usr, TRUE)
 				. = IC_TOPIC_REFRESH
 			else
@@ -273,19 +273,19 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		else
 			to_chat(usr, SPAN_WARNING("You need a debugger set to 'ref' mode to do that."))
 
-	else if(href_list["refresh"])
+	else if (href_list["refresh"])
 		internal_examine(usr)
-	else if(href_list["return"] && assembly)
+	else if (href_list["return"] && assembly)
 		assembly.interact(usr)
-	else if(href_list["examine"] && assembly)
+	else if (href_list["examine"] && assembly)
 		internal_examine(usr)
 
-	else if(href_list["rename"])
+	else if (href_list["rename"])
 		rename_component(usr)
 		. = IC_TOPIC_REFRESH
 
-	else if(href_list["remove"] && assembly)
-		if(istype(held_item, /obj/item/screwdriver))
+	else if (href_list["remove"] && assembly)
+		if (istype(held_item, /obj/item/screwdriver))
 			disconnect_all()
 			dropInto(loc)
 			playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
@@ -298,13 +298,13 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	else
 		. = OnICTopic(href_list, usr)
 
-	if(. == IC_TOPIC_REFRESH)
+	if (. == IC_TOPIC_REFRESH)
 		interact_with_assembly(usr)
 
 /obj/item/integrated_circuit/proc/interact_with_assembly(mob/user)
-	if(assembly)
+	if (assembly)
 		assembly.interact(user)
-		if(assembly.opened)
+		if (assembly.opened)
 			interact(user)
 
 /obj/item/integrated_circuit/proc/push_data()
@@ -318,7 +318,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		I.push_data()
 
 /obj/item/integrated_circuit/proc/draw_idle_power()
-	if(assembly)
+	if (assembly)
 		return assembly.draw_power(power_draw_idle)
 
 // Override this for special behaviour when there's no power left.
@@ -327,23 +327,23 @@ a creative player the means to solve many problems.  Circuits are held inside an
 
 // Returns true if there's enough power to work().
 /obj/item/integrated_circuit/proc/check_power()
-	if(!assembly)
+	if (!assembly)
 		return FALSE // Not in an assembly, therefore no power.
-	if(assembly.draw_power(power_draw_per_use))
+	if (assembly.draw_power(power_draw_per_use))
 		return TRUE // Battery has enough.
 	return FALSE // Not enough power.
 
 /obj/item/integrated_circuit/proc/check_then_do_work(ord,ignore_power = FALSE)
-	if(world.time < next_use) 	// All intergrated circuits have an internal cooldown, to protect from spam.
+	if (world.time < next_use) 	// All intergrated circuits have an internal cooldown, to protect from spam.
 		return FALSE
-	if(assembly && ext_cooldown && (world.time < assembly.ext_next_use)) 	// Some circuits have external cooldown, to protect from spam.
+	if (assembly && ext_cooldown && (world.time < assembly.ext_next_use)) 	// Some circuits have external cooldown, to protect from spam.
 		return FALSE
-	if(power_draw_per_use && !ignore_power)
-		if(!check_power())
+	if (power_draw_per_use && !ignore_power)
+		if (!check_power())
 			power_fail()
 			return FALSE
 	next_use = world.time + cooldown_per_use
-	if(assembly)
+	if (assembly)
 		assembly.ext_next_use = world.time + ext_cooldown
 	do_work(ord)
 	return TRUE
@@ -368,7 +368,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 
 /obj/item/integrated_circuit/proc/get_object()
 	// If the component is located in an assembly, let assembly determine it.
-	if(assembly)
+	if (assembly)
 		return assembly.get_object()
 	else
 		return src	// If not, the component is acting on its own.
@@ -376,28 +376,28 @@ a creative player the means to solve many problems.  Circuits are held inside an
 
 // Checks if the target object is reachable. Useful for various manipulators and manipulator-like objects.
 /obj/item/integrated_circuit/proc/check_target(atom/target, exclude_contents = FALSE, exclude_components = FALSE, exclude_self = FALSE)
-	if(!target)
+	if (!target)
 		return FALSE
 
 	var/atom/movable/acting_object = get_object()
 
-	if(exclude_self && target == acting_object)
+	if (exclude_self && target == acting_object)
 		return FALSE
 
-	if(exclude_components && assembly)
-		if(target in assembly.assembly_components)
+	if (exclude_components && assembly)
+		if (target in assembly.assembly_components)
 			return FALSE
 
-		if(target == assembly.battery)
+		if (target == assembly.battery)
 			return FALSE
 
-	if(target.Adjacent(acting_object) && isturf(target.loc))
+	if (target.Adjacent(acting_object) && isturf(target.loc))
 		return TRUE
 
-	if(!exclude_contents && (target in acting_object.GetAllContents()))
+	if (!exclude_contents && (target in acting_object.GetAllContents()))
 		return TRUE
 
-	if(target in acting_object.loc)
+	if (target in acting_object.loc)
 		return TRUE
 
 	return FALSE

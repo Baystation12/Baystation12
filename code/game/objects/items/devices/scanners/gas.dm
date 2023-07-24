@@ -14,7 +14,7 @@
 
 /obj/item/device/scanner/gas/scan(atom/A, mob/user)
 	var/air_contents = A.return_air()
-	if(!air_contents)
+	if (!air_contents)
 		to_chat(user, SPAN_WARNING("Your [name] flashes a red light as it fails to analyze \the [A]."))
 		return
 	scan_data = atmosanalyzer_scan(A, air_contents)
@@ -44,7 +44,7 @@
 			text_details += "<h2>Gas Details:</h2><dl>"
 			for(var/mix in mixture.gas)
 				var/percentage = round(mixture.gas[mix]/total_moles * 100, 0.01)
-				if(!percentage)
+				if (!percentage)
 					continue
 				summary_gasses += "[percentage]% [gas_data.name[mix]]"
 				text_details += "<dt>[gas_data.name[mix]]</dt><dd><ul>"
@@ -53,13 +53,13 @@
 				text_details += "<li>Specific Heat: [gas_data.specific_heat[mix]] J/(mol*K)</li>"
 				text_details += "<li>Molar Mass: [gas_data.molar_mass[mix]] kg/mol</li>"
 				var/list/traits = list()
-				if(gas_data.flags[mix] & XGM_GAS_FUEL)
+				if (gas_data.flags[mix] & XGM_GAS_FUEL)
 					traits += "can be used as combustion fuel"
-				if(gas_data.flags[mix] & XGM_GAS_OXIDIZER)
+				if (gas_data.flags[mix] & XGM_GAS_OXIDIZER)
 					traits += "can be used as oxidizer"
-				if(gas_data.flags[mix] & XGM_GAS_CONTAMINANT)
+				if (gas_data.flags[mix] & XGM_GAS_CONTAMINANT)
 					traits += "contaminates clothing with toxic residue"
-				if(gas_data.flags[mix] & XGM_GAS_FUSION_FUEL)
+				if (gas_data.flags[mix] & XGM_GAS_FUSION_FUEL)
 					traits += "can be used to fuel fusion reaction"
 				if (length(traits))
 					text_details += "<li>This gas [english_list(traits)]</li>"

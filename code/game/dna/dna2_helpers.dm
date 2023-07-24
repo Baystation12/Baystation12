@@ -7,16 +7,16 @@
 // Returns a list object with 4 numbers.
 /proc/GetDNABounds(block)
 	var/list/BOUNDS=dna_activity_bounds[block]
-	if(!istype(BOUNDS))
+	if (!istype(BOUNDS))
 		return DNA_DEFAULT_BOUNDS
 	return BOUNDS
 
 // Give Random Bad Mutation to M
 /proc/randmutb(mob/living/M)
-	if(!M) return
-	if(ishuman(M))
+	if (!M) return
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(!H.should_have_organ(BP_HEART))
+		if (!H.should_have_organ(BP_HEART))
 			return
 	M.dna.check_integrity()
 	var/block = pick(GLOB.GLASSESBLOCK,GLOB.COUGHBLOCK,GLOB.FAKEBLOCK,GLOB.NERVOUSBLOCK,GLOB.CLUMSYBLOCK,GLOB.TWITCHBLOCK,GLOB.HEADACHEBLOCK,GLOB.BLINDBLOCK,GLOB.DEAFBLOCK,GLOB.HALLUCINATIONBLOCK)
@@ -24,10 +24,10 @@
 
 // Give Random Good Mutation to M
 /proc/randmutg(mob/living/M)
-	if(!M) return
-	if(ishuman(M))
+	if (!M) return
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(!H.should_have_organ(BP_HEART))
+		if (!H.should_have_organ(BP_HEART))
 			return
 	M.dna.check_integrity()
 	var/block = pick(GLOB.HULKBLOCK,GLOB.XRAYBLOCK,GLOB.FIREBLOCK,GLOB.TELEBLOCK,GLOB.NOBREATHBLOCK,GLOB.REMOTEVIEWBLOCK,GLOB.REGENERATEBLOCK,GLOB.INCREASERUNBLOCK,GLOB.REMOTETALKBLOCK,GLOB.MORPHBLOCK,GLOB.BLENDBLOCK,GLOB.NOPRINTSBLOCK,GLOB.SHOCKIMMUNITYBLOCK,GLOB.SMALLSIZEBLOCK)
@@ -35,24 +35,24 @@
 
 // Random Appearance Mutation
 /proc/randmuti(mob/living/M)
-	if(!M) return
+	if (!M) return
 	M.dna.check_integrity()
 	M.dna.SetUIValue(rand(1,DNA_UI_LENGTH),rand(1,4095))
 
 // Scramble UI or SE.
 /proc/scramble(UI, mob/M, prob)
-	if(!M)	return
+	if (!M)	return
 	M.dna.check_integrity()
-	if(UI)
+	if (UI)
 		for(var/i = 1, i <= DNA_UI_LENGTH-1, i++)
-			if(prob(prob))
+			if (prob(prob))
 				M.dna.SetUIValue(i,rand(1,4095),1)
 		M.dna.UpdateUI()
 		M.UpdateAppearance()
 
 	else
 		for(var/i = 1, i <= DNA_SE_LENGTH-1, i++)
-			if(prob(prob))
+			if (prob(prob))
 				M.dna.SetSEValue(i,rand(1,4095),1)
 		M.dna.UpdateSE()
 		domutcheck(M, null)
@@ -81,40 +81,40 @@
 /proc/miniscrambletarget(input,rs,rd)
 	var/output = null
 	switch(input)
-		if("0")
+		if ("0")
 			output = pick(prob((rs*10)+(rd));"0",prob((rs*10)+(rd));"1",prob((rs*10));"2",prob((rs*10)-(rd));"3")
-		if("1")
+		if ("1")
 			output = pick(prob((rs*10)+(rd));"0",prob((rs*10)+(rd));"1",prob((rs*10)+(rd));"2",prob((rs*10));"3",prob((rs*10)-(rd));"4")
-		if("2")
+		if ("2")
 			output = pick(prob((rs*10));"0",prob((rs*10)+(rd));"1",prob((rs*10)+(rd));"2",prob((rs*10)+(rd));"3",prob((rs*10));"4",prob((rs*10)-(rd));"5")
-		if("3")
+		if ("3")
 			output = pick(prob((rs*10)-(rd));"0",prob((rs*10));"1",prob((rs*10)+(rd));"2",prob((rs*10)+(rd));"3",prob((rs*10)+(rd));"4",prob((rs*10));"5",prob((rs*10)-(rd));"6")
-		if("4")
+		if ("4")
 			output = pick(prob((rs*10)-(rd));"1",prob((rs*10));"2",prob((rs*10)+(rd));"3",prob((rs*10)+(rd));"4",prob((rs*10)+(rd));"5",prob((rs*10));"6",prob((rs*10)-(rd));"7")
-		if("5")
+		if ("5")
 			output = pick(prob((rs*10)-(rd));"2",prob((rs*10));"3",prob((rs*10)+(rd));"4",prob((rs*10)+(rd));"5",prob((rs*10)+(rd));"6",prob((rs*10));"7",prob((rs*10)-(rd));"8")
-		if("6")
+		if ("6")
 			output = pick(prob((rs*10)-(rd));"3",prob((rs*10));"4",prob((rs*10)+(rd));"5",prob((rs*10)+(rd));"6",prob((rs*10)+(rd));"7",prob((rs*10));"8",prob((rs*10)-(rd));"9")
-		if("7")
+		if ("7")
 			output = pick(prob((rs*10)-(rd));"4",prob((rs*10));"5",prob((rs*10)+(rd));"6",prob((rs*10)+(rd));"7",prob((rs*10)+(rd));"8",prob((rs*10));"9",prob((rs*10)-(rd));"A")
-		if("8")
+		if ("8")
 			output = pick(prob((rs*10)-(rd));"5",prob((rs*10));"6",prob((rs*10)+(rd));"7",prob((rs*10)+(rd));"8",prob((rs*10)+(rd));"9",prob((rs*10));"A",prob((rs*10)-(rd));"B")
-		if("9")
+		if ("9")
 			output = pick(prob((rs*10)-(rd));"6",prob((rs*10));"7",prob((rs*10)+(rd));"8",prob((rs*10)+(rd));"9",prob((rs*10)+(rd));"A",prob((rs*10));"B",prob((rs*10)-(rd));"C")
-		if("10")//A
+		if ("10")//A
 			output = pick(prob((rs*10)-(rd));"7",prob((rs*10));"8",prob((rs*10)+(rd));"9",prob((rs*10)+(rd));"A",prob((rs*10)+(rd));"B",prob((rs*10));"C",prob((rs*10)-(rd));"D")
-		if("11")//B
+		if ("11")//B
 			output = pick(prob((rs*10)-(rd));"8",prob((rs*10));"9",prob((rs*10)+(rd));"A",prob((rs*10)+(rd));"B",prob((rs*10)+(rd));"C",prob((rs*10));"D",prob((rs*10)-(rd));"E")
-		if("12")//C
+		if ("12")//C
 			output = pick(prob((rs*10)-(rd));"9",prob((rs*10));"A",prob((rs*10)+(rd));"B",prob((rs*10)+(rd));"C",prob((rs*10)+(rd));"D",prob((rs*10));"E",prob((rs*10)-(rd));"F")
-		if("13")//D
+		if ("13")//D
 			output = pick(prob((rs*10)-(rd));"A",prob((rs*10));"B",prob((rs*10)+(rd));"C",prob((rs*10)+(rd));"D",prob((rs*10)+(rd));"E",prob((rs*10));"F")
-		if("14")//E
+		if ("14")//E
 			output = pick(prob((rs*10)-(rd));"B",prob((rs*10));"C",prob((rs*10)+(rd));"D",prob((rs*10)+(rd));"E",prob((rs*10)+(rd));"F")
-		if("15")//F
+		if ("15")//F
 			output = pick(prob((rs*10)-(rd));"C",prob((rs*10));"D",prob((rs*10)+(rd));"E",prob((rs*10)+(rd));"F")
 
-	if(!input || !output) //How did this happen?
+	if (!input || !output) //How did this happen?
 		output = "8"
 
 	return output
@@ -124,8 +124,8 @@
 
 // Simpler. Don't specify UI in order for the mob to use its own.
 /mob/proc/UpdateAppearance(list/UI=null)
-	if(istype(src, /mob/living/carbon/human))
-		if(UI!=null)
+	if (istype(src, /mob/living/carbon/human))
+		if (UI!=null)
 			src.dna.UI=UI
 			src.dna.UpdateUI()
 		dna.check_integrity()
@@ -159,7 +159,7 @@
 
 		H.skin_tone   = 35 - dna.GetUIValueRange(DNA_UI_SKIN_TONE, 220) // Value can be negative.
 
-		if(H.gender != NEUTER)
+		if (H.gender != NEUTER)
 			if (dna.GetUIState(DNA_UI_GENDER))
 				H.gender = FEMALE
 			else
@@ -168,7 +168,7 @@
 		//Body markings
 		for(var/tag in dna.body_markings)
 			var/obj/item/organ/external/E = H.organs_by_name[tag]
-			if(E)
+			if (E)
 				var/list/marklist = dna.body_markings[tag]
 				E.markings = marklist.Copy()
 
@@ -178,12 +178,12 @@
 
 		//Hair
 		var/hair = dna.GetUIValueRange(DNA_UI_HAIR_STYLE,length(GLOB.hair_styles_list))
-		if((0 < hair) && (hair <= length(GLOB.hair_styles_list)))
+		if ((0 < hair) && (hair <= length(GLOB.hair_styles_list)))
 			H.head_hair_style = GLOB.hair_styles_list[hair]
 
 		//Facial Hair
 		var/beard = dna.GetUIValueRange(DNA_UI_BEARD_STYLE,length(GLOB.facial_hair_styles_list))
-		if((0 < beard) && (beard <= length(GLOB.facial_hair_styles_list)))
+		if ((0 < beard) && (beard <= length(GLOB.facial_hair_styles_list)))
 			H.facial_hair_style = GLOB.facial_hair_styles_list[beard]
 
 		H.force_update_limbs()

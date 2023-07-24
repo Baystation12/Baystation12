@@ -3,8 +3,8 @@
 	name = "Weapon prototype ([item_name])"
 
 /datum/design/item/weapon/AssembleDesignDesc()
-	if(!desc)
-		if(build_path)
+	if (!desc)
+		if (build_path)
 			var/obj/item/I = build_path
 			desc = initial(I.desc)
 		..()

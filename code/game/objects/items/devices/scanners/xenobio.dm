@@ -15,9 +15,9 @@
 	)
 
 /obj/item/device/scanner/xenobio/is_valid_scan_target(atom/O)
-	if(is_type_in_list(O, valid_targets))
+	if (is_type_in_list(O, valid_targets))
 		return TRUE
-	if(istype(O, /obj/machinery/stasis_cage))
+	if (istype(O, /obj/machinery/stasis_cage))
 		var/obj/machinery/stasis_cage/cagie = O
 		return !!cagie.contained
 	return FALSE
@@ -36,42 +36,42 @@
 
 /proc/xenobio_scan_results(mob/target)
 	. = list()
-	if(istype(target, /obj/machinery/stasis_cage))
+	if (istype(target, /obj/machinery/stasis_cage))
 		var/obj/machinery/stasis_cage/cagie = target
 		target = cagie.contained
-	if(istype(target, /mob/living/carbon/human))
+	if (istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = target
 		. += "Data for [H]:"
 		. += "Species:\t[H.species]"
-		if(H.species.breath_type)
+		if (H.species.breath_type)
 			. += "Breathes:\t[gas_data.name[H.species.breath_type]]"
-		if(H.species.exhale_type)
+		if (H.species.exhale_type)
 			. += "Exhales:\t[gas_data.name[H.species.exhale_type]]"
 		. += "Known toxins:\t[english_list(H.species.poison_types)]"
 		. += "Temperature comfort zone:\t[H.species.cold_discomfort_level] K to [H.species.heat_discomfort_level] K"
 		. += "Pressure comfort zone:\t[H.species.warning_low_pressure] kPa to [H.species.warning_high_pressure] kPa"
-	else if(istype(target, /mob/living/simple_animal))
+	else if (istype(target, /mob/living/simple_animal))
 		var/mob/living/simple_animal/A = target
 		. += "Data for [A]:"
 		. += "Species:\t[initial(A.name)]"
-		if(A.min_gas)
+		if (A.min_gas)
 			. += "Breathes:\t[list_gases(A.min_gas)]"
-		if(A.max_gas)
+		if (A.max_gas)
 			. += "Known toxins:\t[list_gases(A.max_gas)]"
-		if(A.minbodytemp && A.maxbodytemp)
+		if (A.minbodytemp && A.maxbodytemp)
 			. += "Temperature comfort zone:\t[A.minbodytemp] K to [A.maxbodytemp] K"
 		var/area/map = locate(/area/overmap)
 		for(var/obj/effect/overmap/visitable/sector/exoplanet/P in map)
-			if((A in P.animals) || is_type_in_list(A, P.repopulate_types))
+			if ((A in P.animals) || is_type_in_list(A, P.repopulate_types))
 				GLOB.stat_fauna_scanned |= "[P.name]-[A.type]"
 				. += "New xenofauna species discovered!"
 				break
-	else if(istype(target, /mob/living/carbon/slime))
+	else if (istype(target, /mob/living/carbon/slime))
 		var/mob/living/carbon/slime/T = target
 		. += "Slime scan result for \the [T]:"
 		. += "[T.colour] [T.is_adult ? "adult" : "baby"] slime"
 		. += "Nutrition:\t[T.nutrition]/[T.get_max_nutrition()]"
-		if(T.nutrition < T.get_starve_nutrition())
+		if (T.nutrition < T.get_starve_nutrition())
 			. += SPAN_CLASS("alert", "Warning:\tthe slime is starving!")
 		else if (T.nutrition < T.get_hunger_nutrition())
 			. += SPAN_WARNING("Warning:\tthe slime is hungry.")
@@ -80,14 +80,14 @@
 
 		var/list/mutations = T.GetMutations()
 
-		if(!length(mutations))
+		if (!length(mutations))
 			. += "This slime will never mutate."
 		else
 			var/list/mutationChances = list()
 			for(var/i in mutations)
-				if(i == T.colour)
+				if (i == T.colour)
 					continue
-				if(mutationChances[i])
+				if (mutationChances[i])
 					mutationChances[i] += T.mutation_chance / length(mutations)
 				else
 					mutationChances[i] = T.mutation_chance / length(mutations)

@@ -35,12 +35,12 @@
 	var/image/_aura_image             // Client image
 
 /datum/psi_complexus/proc/get_aura_image()
-	if(_aura_image && !istype(_aura_image))
+	if (_aura_image && !istype(_aura_image))
 		var/atom/A = _aura_image
 		log_debug("Non-image found in psi complexus: \ref[A] - \the [A] - [istype(A) ? A.type : "non-atom"]")
 		destroy_aura_image(_aura_image)
 		_aura_image = null
-	if(!_aura_image)
+	if (!_aura_image)
 		_aura_image = create_aura_image(owner)
 	return _aura_image
 
@@ -57,7 +57,7 @@
 	aura_image.appearance_flags = DEFAULT_APPEARANCE_FLAGS
 	for(var/thing in SSpsi.processing)
 		var/datum/psi_complexus/psychic = thing
-		if(psychic.owner.client && !psychic.suppressed)
+		if (psychic.owner.client && !psychic.suppressed)
 			psychic.owner.client.images += aura_image
 	SSpsi.all_aura_images[aura_image] = TRUE
 	return aura_image
@@ -65,7 +65,7 @@
 /proc/destroy_aura_image(image/aura_image)
 	for(var/thing in SSpsi.processing)
 		var/datum/psi_complexus/psychic = thing
-		if(psychic.owner.client)
+		if (psychic.owner.client)
 			psychic.owner.client.images -= aura_image
 	SSpsi.all_aura_images -= aura_image
 
@@ -77,9 +77,9 @@
 /datum/psi_complexus/Destroy()
 	destroy_aura_image(_aura_image)
 	STOP_PROCESSING(SSpsi, src)
-	if(owner)
+	if (owner)
 		cancel()
-		if(owner.client)
+		if (owner.client)
 			owner.client.screen -= list(ui, ui?.components)
 			for(var/thing in SSpsi.all_aura_images)
 				owner.client.images -= thing
@@ -87,7 +87,7 @@
 		owner.psi = null
 		owner = null
 
-	if(manifested_items)
+	if (manifested_items)
 		for(var/thing in manifested_items)
 			qdel(thing)
 		manifested_items.Cut()

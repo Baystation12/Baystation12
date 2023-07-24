@@ -21,7 +21,7 @@
 
 /datum/turbolift/proc/doors_are_open(datum/turbolift_floor/use_floor = current_floor)
 	for(var/obj/machinery/door/airlock/door in (use_floor ? (doors + use_floor.doors) : doors))
-		if(!door.density)
+		if (!door.density)
 			return 1
 	return 0
 
@@ -40,22 +40,22 @@
 #define LIFT_WAITING_B 3
 
 /datum/turbolift/Process()
-	if(world.time < next_process)
+	if (world.time < next_process)
 		return
 	switch(busy_state)
-		if(LIFT_MOVING)
-			if(!do_move())
+		if (LIFT_MOVING)
+			if (!do_move())
 				queued_floors.Cut()
 				return PROCESS_KILL
-			else if(!next_process)
+			else if (!next_process)
 				next_process = world.time + move_delay
-		if(LIFT_WAITING_A)
+		if (LIFT_WAITING_A)
 			var/area/turbolift/origin = locate(current_floor.area_ref)
 			control_panel_interior.visible_message("<b>The elevator</b> announces, \"[origin.lift_announce_str]\"")
 			next_process = world.time + floor_wait_delay
 			busy_state = LIFT_WAITING_B
-		if(LIFT_WAITING_B)
-			if(length(queued_floors))
+		if (LIFT_WAITING_B)
+			if (length(queued_floors))
 				busy_state = LIFT_MOVING
 			else
 				busy_state = null
@@ -66,18 +66,18 @@
 
 	var/current_floor_index = floors.Find(current_floor)
 
-	if(!target_floor)
-		if(!queued_floors || !length(queued_floors))
+	if (!target_floor)
+		if (!queued_floors || !length(queued_floors))
 			return 0
 		target_floor = queued_floors[1]
 		queued_floors -= target_floor
-		if(current_floor_index < floors.Find(target_floor))
+		if (current_floor_index < floors.Find(target_floor))
 			moving_upwards = 1
 		else
 			moving_upwards = 0
 
-	if(doors_are_open())
-		if(!doors_closing)
+	if (doors_are_open())
+		if (!doors_closing)
 			close_doors()
 			doors_closing = 1
 			return 1
@@ -92,7 +92,7 @@
 
 	var/area/turbolift/origin = locate(current_floor.area_ref)
 
-	if(target_floor == current_floor)
+	if (target_floor == current_floor)
 
 		playsound(control_panel_interior.loc, origin.arrival_sound, 50, 1)
 		target_floor.arrived(src)
@@ -104,27 +104,27 @@
 
 	// Work out where we're headed.
 	var/datum/turbolift_floor/next_floor
-	if(moving_upwards)
+	if (moving_upwards)
 		next_floor = floors[current_floor_index+1]
 	else
 		next_floor = floors[current_floor_index-1]
 
 	var/area/turbolift/destination = locate(next_floor.area_ref)
 
-	if(!istype(origin) || !istype(destination) || (origin == destination))
+	if (!istype(origin) || !istype(destination) || (origin == destination))
 		return 0
 
 	for(var/turf/T in destination)
 		for(var/atom/movable/AM in T)
-			if(istype(AM, /mob/living))
+			if (istype(AM, /mob/living))
 				var/mob/living/M = AM
 				M.gib()
-			else if(AM.simulated)
+			else if (AM.simulated)
 				qdel(AM)
 
 	origin.move_contents_to(destination)
 
-	if((locate(/obj/machinery/power) in destination) || (locate(/obj/structure/cable) in destination))
+	if ((locate(/obj/machinery/power) in destination) || (locate(/obj/structure/cable) in destination))
 		SSmachines.makepowernets()
 
 	current_floor = next_floor
@@ -133,7 +133,7 @@
 	return 1
 
 /datum/turbolift/proc/queue_move_to(datum/turbolift_floor/floor)
-	if(!floor || !(floor in floors) || (floor in queued_floors))
+	if (!floor || !(floor in floors) || (floor in queued_floors))
 		return // STOP PRESSING THE BUTTON.
 	floor.pending_move(src)
 	queued_floors |= floor

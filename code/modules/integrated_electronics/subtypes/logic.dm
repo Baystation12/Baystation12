@@ -20,7 +20,7 @@
 	var/datum/integrated_io/O = outputs[1]
 	O.data = do_compare(A, B) ? TRUE : FALSE
 
-	if(get_pin_data(IC_OUTPUT, 1))
+	if (get_pin_data(IC_OUTPUT, 1))
 		activate_pin(2)
 	else
 		activate_pin(3)
@@ -70,17 +70,17 @@
 	var/datum/integrated_io/B = inputs[2]
 	var/datum/integrated_io/O = outputs[1]
 	var/datum/integrated_io/Q = outputs[2]
-	if(A.data)
-		if(B.data)
+	if (A.data)
+		if (B.data)
 			lstate=!lstate
 		else
 			lstate = TRUE
 	else
-		if(B.data)
+		if (B.data)
 			lstate=FALSE
 	O.data = lstate ? TRUE : FALSE
 	Q.data = !lstate ? TRUE : FALSE
-	if(get_pin_data(IC_OUTPUT, 1))
+	if (get_pin_data(IC_OUTPUT, 1))
 		activate_pin(2)
 	else
 		activate_pin(3)
@@ -101,15 +101,15 @@
 	var/datum/integrated_io/B = inputs[2]
 	var/datum/integrated_io/O = outputs[1]
 	var/datum/integrated_io/Q = outputs[2]
-	if(A.data)
-		if(!B.data)
+	if (A.data)
+		if (!B.data)
 			lstate=TRUE
 	else
-		if(B.data)
+		if (B.data)
 			lstate=FALSE
 	O.data = lstate ? TRUE : FALSE
 	Q.data = !lstate ? TRUE : FALSE
-	if(get_pin_data(IC_OUTPUT, 1))
+	if (get_pin_data(IC_OUTPUT, 1))
 		activate_pin(2)
 	else
 		activate_pin(3)
@@ -130,15 +130,15 @@
 	var/datum/integrated_io/B = inputs[2]
 	var/datum/integrated_io/O = outputs[1]
 	var/datum/integrated_io/Q = outputs[2]
-	if(B.data)
-		if(A.data)
+	if (B.data)
+		if (A.data)
 			lstate=TRUE
 		else
 			lstate=FALSE
 
 	O.data = lstate ? TRUE : FALSE
 	Q.data = !lstate ? TRUE : FALSE
-	if(get_pin_data(IC_OUTPUT, 1))
+	if (get_pin_data(IC_OUTPUT, 1))
 		activate_pin(2)
 	else
 		activate_pin(3)
@@ -196,7 +196,7 @@
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 
 /obj/item/integrated_circuit/logic/binary/less_than/do_compare(datum/integrated_io/A, datum/integrated_io/B)
-	if(comparable(A, B))
+	if (comparable(A, B))
 		return A.data < B.data
 
 /obj/item/integrated_circuit/logic/binary/less_than_or_equal
@@ -206,7 +206,7 @@
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 
 /obj/item/integrated_circuit/logic/binary/less_than_or_equal/do_compare(datum/integrated_io/A, datum/integrated_io/B)
-	if(comparable(A, B))
+	if (comparable(A, B))
 		return A.data <= B.data
 
 /obj/item/integrated_circuit/logic/binary/greater_than
@@ -216,7 +216,7 @@
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 
 /obj/item/integrated_circuit/logic/binary/greater_than/do_compare(datum/integrated_io/A, datum/integrated_io/B)
-	if(comparable(A, B))
+	if (comparable(A, B))
 		return A.data > B.data
 
 /obj/item/integrated_circuit/logic/binary/greater_than_or_equal
@@ -226,7 +226,7 @@
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 
 /obj/item/integrated_circuit/logic/binary/greater_than_or_equal/do_compare(datum/integrated_io/A, datum/integrated_io/B)
-	if(comparable(A, B))
+	if (comparable(A, B))
 		return A.data >= B.data
 
 /obj/item/integrated_circuit/logic/unary/not

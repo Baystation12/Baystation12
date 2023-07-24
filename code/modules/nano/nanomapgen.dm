@@ -23,7 +23,7 @@
 	if (alert("Do you wish to generate a Z Level?", "Generate NanoUI Map", "Yes", "No") != "Yes")
 		return
 
-	if(holder)
+	if (holder)
 		nanomapgen_DumpTile(1, 1, text2num(input(usr,"Enter the Z level to generate")))
 
 /client/proc/nanomapgen_DumpTile(startX = 1, startY = 1, currentZ = 1, endX = -1, endY = -1)

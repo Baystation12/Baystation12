@@ -85,30 +85,30 @@
 /obj/item/proc/is_used_on(obj/O, mob/user)
 
 /obj/assume_air(datum/gas_mixture/giver)
-	if(loc)
+	if (loc)
 		return loc.assume_air(giver)
 	else
 		return null
 
 /obj/remove_air(amount)
-	if(loc)
+	if (loc)
 		return loc.remove_air(amount)
 	else
 		return null
 
 /obj/return_air()
-	if(loc)
+	if (loc)
 		return loc.return_air()
 	else
 		return null
 
 /obj/proc/updateUsrDialog()
-	if(in_use)
+	if (in_use)
 		var/is_in_use = 0
 		var/list/nearby = viewers(1, src) | usr
 		for(var/mob/M in nearby)
 			if ((M.client && M.machine == src))
-				if(CanUseTopic(M, DefaultTopicState()) > STATUS_CLOSE)
+				if (CanUseTopic(M, DefaultTopicState()) > STATUS_CLOSE)
 					is_in_use = 1
 					interact(M)
 				else
@@ -117,19 +117,19 @@
 
 /obj/proc/updateDialog()
 	// Check that people are actually using the machine. If not, don't update anymore.
-	if(in_use)
+	if (in_use)
 		var/list/nearby = viewers(1, src)
 		var/is_in_use = 0
 		for(var/mob/M in nearby)
 			if ((M.client && M.machine == src))
-				if(CanUseTopic(M, DefaultTopicState()) > STATUS_CLOSE)
+				if (CanUseTopic(M, DefaultTopicState()) > STATUS_CLOSE)
 					is_in_use = 1
 					interact(M)
 				else
 					M.unset_machine()
 		var/ai_in_use = AutoUpdateAI(src)
 
-		if(!ai_in_use && !is_in_use)
+		if (!ai_in_use && !is_in_use)
 			in_use = 0
 
 /obj/attack_ghost(mob/user)
@@ -143,15 +143,15 @@
 	src.machine = null
 
 /mob/proc/set_machine(obj/O)
-	if(src.machine)
+	if (src.machine)
 		unset_machine()
 	src.machine = O
-	if(istype(O))
+	if (istype(O))
 		O.in_use = 1
 
 /obj/item/proc/updateSelfDialog()
 	var/mob/M = src.loc
-	if(istype(M) && M.client && M.machine == src)
+	if (istype(M) && M.client && M.machine == src)
 		src.attack_self(M)
 
 /obj/proc/hide(hide)
@@ -161,11 +161,11 @@
 	return level == ATOM_LEVEL_UNDER_TILE
 
 /obj/proc/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
-	if(talking_atom)
+	if (talking_atom)
 		talking_atom.catchMessage(text, M)
 /*
 	var/mob/mo = locate(/mob) in src
-	if(mo)
+	if (mo)
 		var/rendered = SPAN_CLASS("game say", "[SPAN_CLASS("name", "[M.name]: ")] [SPAN_CLASS("message", text))]"
 		mo.show_message(rendered, 2)
 		*/
@@ -179,9 +179,9 @@
 
 /obj/proc/damage_flags()
 	. = 0
-	if(has_edge(src))
+	if (has_edge(src))
 		. |= DAMAGE_FLAG_EDGE
-	if(is_sharp(src))
+	if (is_sharp(src))
 		. |= DAMAGE_FLAG_SHARP
 		if (damtype == DAMAGE_BURN)
 			. |= DAMAGE_FLAG_LASER
@@ -240,7 +240,7 @@
 
 
 /obj/attack_hand(mob/living/user)
-	if(Adjacent(user))
+	if (Adjacent(user))
 		add_fingerprint(user)
 	..()
 
@@ -251,22 +251,22 @@
 	return is_sharp(src)
 
 /obj/AltClick(mob/user)
-	if(obj_flags & OBJ_FLAG_ROTATABLE)
+	if (obj_flags & OBJ_FLAG_ROTATABLE)
 		rotate(user)
 		return TRUE
 	return ..()
 
 /obj/examine(mob/user)
 	. = ..()
-	if((obj_flags & OBJ_FLAG_ROTATABLE))
+	if ((obj_flags & OBJ_FLAG_ROTATABLE))
 		to_chat(user, SPAN_SUBTLE("Can be rotated with alt-click."))
 
 /obj/proc/rotate(mob/user)
-	if(!CanPhysicallyInteract(user))
+	if (!CanPhysicallyInteract(user))
 		to_chat(user, SPAN_NOTICE("You can't interact with \the [src] right now!"))
 		return
 
-	if(anchored)
+	if (anchored)
 		to_chat(user, SPAN_NOTICE("\The [src] is secured to the floor!"))
 		return
 

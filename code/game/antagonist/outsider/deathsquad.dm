@@ -21,11 +21,11 @@ GLOBAL_DATUM_INIT(deathsquad, /datum/antagonist/deathsquad, new)
 	var/deployed = 0
 
 /datum/antagonist/deathsquad/attempt_spawn()
-	if(..())
+	if (..())
 		deployed = 1
 
 /datum/antagonist/deathsquad/equip(mob/living/carbon/human/player)
-	if(!..())
+	if (!..())
 		return
 
 	if (player.mind == leader)
@@ -48,7 +48,7 @@ GLOBAL_DATUM_INIT(deathsquad, /datum/antagonist/deathsquad, new)
 	player.implant_loyalty(player)
 
 	var/obj/item/card/id/id = create_id("Asset Protection", player)
-	if(id)
+	if (id)
 		id.access |= get_all_station_access()
 		id.icon_state = "centcom"
 	create_radio(DTH_FREQ, player)
@@ -58,7 +58,7 @@ GLOBAL_DATUM_INIT(deathsquad, /datum/antagonist/deathsquad, new)
 	..()
 
 	var/syndicate_commando_rank
-	if(leader && player == leader)
+	if (leader && player == leader)
 		syndicate_commando_rank = pick("Corporal", "Sergeant", "Staff Sergeant", "Sergeant 1st Class", "Master Sergeant", "Sergeant Major")
 	else
 		syndicate_commando_rank = pick("Lieutenant", "Captain", "Major")
@@ -73,7 +73,7 @@ GLOBAL_DATUM_INIT(deathsquad, /datum/antagonist/deathsquad, new)
 	player.current.SetName(player.current.name)
 
 	var/mob/living/carbon/human/H = player.current
-	if(istype(H))
+	if (istype(H))
 		H.gender = pick(MALE, FEMALE)
 		H.age = rand(25,45)
 		H.dna.ready_dna(H)
@@ -81,5 +81,5 @@ GLOBAL_DATUM_INIT(deathsquad, /datum/antagonist/deathsquad, new)
 	return
 
 /datum/antagonist/deathsquad/create_antagonist()
-	if(..() && !deployed)
+	if (..() && !deployed)
 		deployed = 1

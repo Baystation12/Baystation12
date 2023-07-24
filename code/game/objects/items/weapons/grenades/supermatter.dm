@@ -7,7 +7,7 @@
 	var/implode_at
 
 /obj/item/grenade/supermatter/Destroy()
-	if(implode_at)
+	if (implode_at)
 		STOP_PROCESSING(SSobj, src)
 	. = ..()
 
@@ -20,17 +20,17 @@
 
 /obj/item/grenade/supermatter/on_update_icon()
 	overlays.Cut()
-	if(implode_at)
+	if (implode_at)
 		overlays += image(icon = 'icons/obj/machines/power/fusion.dmi', icon_state = "emfield_s1")
 
 /obj/item/grenade/supermatter/Process()
-	if(!isturf(loc))
-		if(ismob(loc))
+	if (!isturf(loc))
+		if (ismob(loc))
 			var/mob/M = loc
 			M.drop_from_inventory(src)
 		forceMove(get_turf(src))
 	playsound(src, 'sound/effects/supermatter.ogg', 100)
 	supermatter_pull(src, world.view, STAGE_THREE)
-	if(world.time > implode_at)
+	if (world.time > implode_at)
 		explosion(loc, 4, EX_ACT_HEAVY)
 		qdel(src)

@@ -11,22 +11,22 @@
 	var/prepared
 
 /obj/structure/mech_wreckage/New(newloc, mob/living/exosuit/exosuit, gibbed)
-	if(exosuit)
+	if (exosuit)
 		name = "wreckage of \the [exosuit.name]"
-		if(!gibbed)
+		if (!gibbed)
 			for(var/obj/item/thing in list(exosuit.arms, exosuit.legs, exosuit.head, exosuit.body))
-				if(thing && prob(40))
+				if (thing && prob(40))
 					thing.forceMove(src)
 			for(var/hardpoint in exosuit.hardpoints)
-				if(exosuit.hardpoints[hardpoint])
-					if(prob(40))
+				if (exosuit.hardpoints[hardpoint])
+					if (prob(40))
 						var/obj/item/thing = exosuit.hardpoints[hardpoint]
-						if(exosuit.remove_system(hardpoint))
+						if (exosuit.remove_system(hardpoint))
 							thing.forceMove(src)
 					else
 						//This has been destroyed, some modules may need to perform bespoke logic
 						var/obj/item/mech_equipment/E = exosuit.hardpoints[hardpoint]
-						if(istype(E))
+						if (istype(E))
 							E.wreck()
 
 	..()
@@ -35,9 +35,9 @@
 	..(newloc, new /mob/living/exosuit/premade/powerloader(newloc), FALSE)
 
 /obj/structure/mech_wreckage/attack_hand(mob/user)
-	if(length(contents))
+	if (length(contents))
 		var/obj/item/thing = pick(contents)
-		if(istype(thing))
+		if (istype(thing))
 			thing.forceMove(get_turf(user))
 			user.put_in_hands(thing)
 			to_chat(user, "You retrieve \the [thing] from \the [src].")
@@ -91,7 +91,7 @@
 
 /obj/structure/mech_wreckage/Destroy()
 	for(var/obj/thing in contents)
-		if(prob(65))
+		if (prob(65))
 			thing.forceMove(get_turf(src))
 		else
 			qdel(thing)

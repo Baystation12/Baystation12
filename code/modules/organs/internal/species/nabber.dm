@@ -20,16 +20,16 @@
 
 /obj/item/organ/internal/eyes/insectoid/nabber/get_special_overlay()
 	var/icon/I = get_onhead_icon()
-	if(I)
+	if (I)
 		var/image/eye_overlay = image(I)
-		if(owner && owner.is_cloaked())
+		if (owner && owner.is_cloaked())
 			eye_overlay.alpha = 100
-		if(eyes_shielded)
+		if (eyes_shielded)
 			eye_overlay.color = "#aaaaaa"
 		return eye_overlay
 
 /obj/item/organ/internal/eyes/insectoid/nabber/additional_flash_effects(intensity)
-	if(!eyes_shielded)
+	if (!eyes_shielded)
 		take_internal_damage(max(0, 4 * (intensity)))
 		return 1
 	else
@@ -37,15 +37,15 @@
 
 /obj/item/organ/internal/eyes/insectoid/nabber/refresh_action_button()
 	. = ..()
-	if(.)
+	if (.)
 		action.button_icon_state = "nabber-shield-[eyes_shielded ? 1 : 0]"
-		if(action.button) action.button.UpdateIcon()
+		if (action.button) action.button.UpdateIcon()
 
 /obj/item/organ/internal/eyes/insectoid/nabber/attack_self(mob/user)
 	. = ..()
-	if(.)
+	if (.)
 		eyes_shielded = !eyes_shielded
-		if(eyes_shielded)
+		if (eyes_shielded)
 			to_chat(owner, SPAN_NOTICE("Nearly opaque lenses slide down to shield your eyes."))
 			innate_flash_protection = FLASH_PROTECTION_MAJOR
 			owner.overlay_fullscreen("eyeshield", /obj/screen/fullscreen/blind)
@@ -62,7 +62,7 @@
 
 /obj/item/organ/internal/eyes/nabber/New(mob/living/carbon/holder)
 	. = ..()
-	if(dna)
+	if (dna)
 		color = rgb(dna.GetUIValue(DNA_UI_EYES_R), dna.GetUIValue(DNA_UI_EYES_G), dna.GetUIValue(DNA_UI_EYES_B))
 
 /obj/item/organ/internal/eyes/insectoid/nabber/set_dna(datum/dna/new_dna)
@@ -81,16 +81,16 @@
 	var/raw_amount = 0.1
 
 /obj/item/organ/internal/phoron/Process()
-	if(owner)
+	if (owner)
 		var/amount = raw_amount
-		if(is_broken())
+		if (is_broken())
 			amount *= 0.5
-		else if(is_bruised())
+		else if (is_bruised())
 			amount *= 0.8
 
 		var/phoron_volume_raw = owner.reagents.get_reagent_amount(/datum/reagent/toxin/phoron)
 
-		if(phoron_volume_raw < phoron_level || !phoron_volume_raw)
+		if (phoron_volume_raw < phoron_level || !phoron_volume_raw)
 			owner.reagents.add_reagent(/datum/reagent/toxin/phoron, amount)
 	..()
 
@@ -115,27 +115,27 @@
 
 /obj/item/organ/internal/acetone/Process()
 	..()
-	if(!owner)
+	if (!owner)
 		return
 
 	var/blood_level = owner.get_blood_circulation()
 	var/amount = raw_amount * (blood_level / 100)
-	if(is_broken())
+	if (is_broken())
 		amount *= 0.5
-	else if(is_bruised())
+	else if (is_bruised())
 		amount *= 0.8
 
 	// If there's barely any blood, can't properly make dexalin
-	if(blood_level < BLOOD_VOLUME_SURVIVE && prob(50))
+	if (blood_level < BLOOD_VOLUME_SURVIVE && prob(50))
 		return
 
 	var/dexalin_volume_raw = owner.reagents.get_reagent_amount(/datum/reagent/dexalin)
 	var/acetone_volume_raw = owner.reagents.get_reagent_amount(/datum/reagent/acetone)
 	var/breath_fail_ratio = 1
 	var/obj/item/organ/internal/lungs/insectoid/nabber/totally_not_lungs_I_swear = owner.internal_organs_by_name[BP_TRACH]
-	if(totally_not_lungs_I_swear)
+	if (totally_not_lungs_I_swear)
 		breath_fail_ratio = totally_not_lungs_I_swear.breath_fail_ratio
-	if((dexalin_volume_raw < dexalin_level * (blood_level / 100) || !dexalin_volume_raw) && (acetone_volume_raw < acetone_level || !acetone_volume_raw) && breath_fail_ratio < 0.25)
+	if ((dexalin_volume_raw < dexalin_level * (blood_level / 100) || !dexalin_volume_raw) && (acetone_volume_raw < acetone_level || !acetone_volume_raw) && breath_fail_ratio < 0.25)
 		owner.reagents.add_reagent(/datum/reagent/acetone, amount)
 
 // These are not actually lungs and shouldn't be thought of as such despite the claims of the parent.
@@ -155,11 +155,11 @@
 
 	H.adjustOxyLoss(-(HUMAN_MAX_OXYLOSS * owner.chem_effects[CE_OXYGENATED]))
 
-	if(breath_fail_ratio < 0.25 && owner.chem_effects[CE_OXYGENATED])
+	if (breath_fail_ratio < 0.25 && owner.chem_effects[CE_OXYGENATED])
 		H.oxygen_alert = 0
-	if(breath_fail_ratio >= 0.25 && (damage || world.time > last_successful_breath + 2 MINUTES))
+	if (breath_fail_ratio >= 0.25 && (damage || world.time > last_successful_breath + 2 MINUTES))
 		H.adjustOxyLoss(HUMAN_MAX_OXYLOSS * breath_fail_ratio)
-		if(owner.chem_effects[CE_OXYGENATED])
+		if (owner.chem_effects[CE_OXYGENATED])
 			H.oxygen_alert = 1
 		else
 			H.oxygen_alert = 2
@@ -170,7 +170,7 @@
 	parent_organ = BP_CHEST
 
 /obj/item/organ/internal/brain/insectoid/nabber/Process()
-	if(!owner || !owner.should_have_organ(BP_HEART))
+	if (!owner || !owner.should_have_organ(BP_HEART))
 		return
 
 	var/blood_volume = owner.get_blood_circulation()
@@ -179,27 +179,27 @@
 	switch(blood_volume)
 		if (BLOOD_VOLUME_FULL)
 			lowblood_tally = 0
-		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+		if (BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 			lowblood_tally = 2
-			if(prob(1))
+			if (prob(1))
 				to_chat(owner, SPAN_WARNING("You're finding it difficult to move."))
-		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+		if (BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
 			lowblood_tally = 4
-			if(prob(1))
+			if (prob(1))
 				to_chat(owner, SPAN_WARNING("Moving has become very difficult."))
-		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+		if (BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
 			lowblood_tally = 6
-			if(prob(15))
+			if (prob(15))
 				to_chat(owner, SPAN_WARNING("You're almost unable to move!"))
-				if(!owner.pulling_punches)
+				if (!owner.pulling_punches)
 					var/datum/species/nabber/nab = species
 					nab.arm_swap(owner, TRUE)
-		if(-(INFINITY) to BLOOD_VOLUME_SURVIVE)
+		if (-(INFINITY) to BLOOD_VOLUME_SURVIVE)
 			lowblood_tally = 10
-			if(prob(30) && !owner.pulling_punches)
+			if (prob(30) && !owner.pulling_punches)
 				var/datum/species/nabber/nab = species
 				nab.arm_swap(owner, TRUE)
-			if(prob(10))
+			if (prob(10))
 				to_chat(owner, SPAN_WARNING("Your body is barely functioning and is starting to shut down."))
 				owner.Paralyse(1)
 				var/obj/item/organ/internal/I = pick(owner.internal_organs)

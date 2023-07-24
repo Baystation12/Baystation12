@@ -7,10 +7,10 @@
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling
 
 /datum/shuttle/autodock/ferry/supply/short_jump(area/destination)
-	if(moving_status != SHUTTLE_IDLE)
+	if (moving_status != SHUTTLE_IDLE)
 		return
 
-	if(isnull(location))
+	if (isnull(location))
 		return
 
 	//it would be cool to play a sound here
@@ -58,7 +58,7 @@
 		return 0	//if badmins want to send forbidden atoms on the supply shuttle from centcom we don't care
 
 	for(var/area/A in shuttle_area)
-		if(SSsupply.forbidden_atoms_check(A))
+		if (SSsupply.forbidden_atoms_check(A))
 			return 1
 
 /datum/shuttle/autodock/ferry/supply/proc/at_station()

@@ -41,7 +41,7 @@
 		to_chat(usr, "You dial the pressure valve to [pressure_setting]%.")
 
 /obj/item/gun/launcher/pneumatic/proc/eject_tank(mob/user) //Remove the tank.
-	if(!tank)
+	if (!tank)
 		to_chat(user, "There's no tank in [src].")
 		return
 
@@ -51,7 +51,7 @@
 	update_icon()
 
 /obj/item/gun/launcher/pneumatic/proc/unload_hopper(mob/user)
-	if(length(item_storage.contents) > 0)
+	if (length(item_storage.contents) > 0)
 		var/obj/item/removing = item_storage.contents[length(item_storage.contents)]
 		item_storage.remove_from_storage(removing, src.loc)
 		user.put_in_hands(removing)
@@ -60,7 +60,7 @@
 		to_chat(user, "There is nothing to remove in \the [src].")
 
 /obj/item/gun/launcher/pneumatic/attack_hand(mob/user as mob)
-	if(user.get_inactive_hand() == src)
+	if (user.get_inactive_hand() == src)
 		unload_hopper(user)
 	else
 		return ..()
@@ -96,7 +96,7 @@
 	eject_tank(user)
 
 /obj/item/gun/launcher/pneumatic/consume_next_projectile(mob/user=null)
-	if(!length(item_storage.contents))
+	if (!length(item_storage.contents))
 		return null
 	if (!tank)
 		to_chat(user, "There is no gas tank in [src]!")
@@ -104,13 +104,13 @@
 
 	var/environment_pressure = 10
 	var/turf/T = get_turf(src)
-	if(T)
+	if (T)
 		var/datum/gas_mixture/environment = T.return_air()
-		if(environment)
+		if (environment)
 			environment_pressure = environment.return_pressure()
 
 	fire_pressure = (tank.air_contents.return_pressure() - environment_pressure)*pressure_setting/100
-	if(fire_pressure < 10)
+	if (fire_pressure < 10)
 		to_chat(user, "There isn't enough gas in the tank to fire [src].")
 		return null
 
@@ -120,32 +120,32 @@
 
 /obj/item/gun/launcher/pneumatic/examine(mob/user, distance)
 	. = ..()
-	if(distance > 2)
+	if (distance > 2)
 		return
 	to_chat(user, "The valve is dialed to [pressure_setting]%.")
-	if(tank)
+	if (tank)
 		to_chat(user, "The tank dial reads [tank.air_contents.return_pressure()] kPa.")
 	else
 		to_chat(user, "Nothing is attached to the tank valve!")
 
 /obj/item/gun/launcher/pneumatic/update_release_force(obj/item/projectile)
-	if(tank)
+	if (tank)
 		release_force = ((fire_pressure*tank.volume)/projectile.w_class)/force_divisor //projectile speed.
-		if(release_force > 80) release_force = 80 //damage cap.
+		if (release_force > 80) release_force = 80 //damage cap.
 	else
 		release_force = 0
 
 /obj/item/gun/launcher/pneumatic/handle_post_fire()
-	if(tank)
+	if (tank)
 		var/lost_gas_amount = tank.air_contents.total_moles*(pressure_setting/100)
 		var/datum/gas_mixture/removed = tank.remove_air(lost_gas_amount)
 
 		var/turf/T = get_turf(src.loc)
-		if(T) T.assume_air(removed)
+		if (T) T.assume_air(removed)
 	..()
 
 /obj/item/gun/launcher/pneumatic/on_update_icon()
-	if(tank)
+	if (tank)
 		icon_state = "pneumatic-tank"
 		item_state = "pneumatic-tank"
 	else

@@ -26,7 +26,7 @@
 
 /datum/stack_recipe/tile/spawn_result(user, location, amount)
 	var/obj/item/stack/S = ..()
-	if(istype(S))
+	if (istype(S))
 		S.amount = amount
 		S.add_to_stacks(user, 1)
 	return S

@@ -16,7 +16,7 @@
 
 
 /obj/item/grenade/proc/clown_check(mob/living/user)
-	if((MUTATION_CLUMSY in user.mutations) && prob(50))
+	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, SPAN_WARNING("Huh? How does this thing work?"))
 		det_time = fail_det_time
 		activate(user)
@@ -27,22 +27,22 @@
 
 /obj/item/grenade/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 0)
-		if(det_time > 1)
+	if (distance <= 0)
+		if (det_time > 1)
 			to_chat(user, "The timer is set to [det_time/10] seconds.")
 			return
-		if(det_time == null)
+		if (det_time == null)
 			return
 		to_chat(user, "\The [src] is set for instant detonation.")
 
 
 /obj/item/grenade/attack_self(mob/living/user)
-	if(!active)
-		if(clown_check(user))
+	if (!active)
+		if (clown_check(user))
 			to_chat(user, SPAN_WARNING("You prime \the [name]! [det_time/10] seconds!"))
 			activate(user)
 			add_fingerprint(user)
-			if(iscarbon(user))
+			if (iscarbon(user))
 				var/mob/living/carbon/C = user
 				C.throw_mode_on()
 
@@ -60,11 +60,11 @@
 
 /obj/item/grenade/proc/detonate(mob/living/user)
 	var/turf/T = get_turf(src)
-	if(T)
+	if (T)
 		T.hotspot_expose(700,125)
 
 /obj/item/grenade/attackby(obj/item/W as obj, mob/user as mob)
-	if(isScrewdriver(W))
+	if (isScrewdriver(W))
 		switch(det_time)
 			if (1)
 				det_time = 10

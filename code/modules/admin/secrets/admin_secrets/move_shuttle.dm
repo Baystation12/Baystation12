@@ -2,12 +2,12 @@
 	name = "Move a Shuttle"
 
 /datum/admin_secret_item/admin_secret/move_shuttle/can_execute(mob/user)
-	if(!SSshuttle) return 0
+	if (!SSshuttle) return 0
 	return ..()
 
 /datum/admin_secret_item/admin_secret/move_shuttle/execute(mob/user)
 	. = ..()
-	if(!.)
+	if (!.)
 		return
 	var/confirm = alert(user, "This command directly moves a shuttle from one area to another. DO NOT USE THIS UNLESS YOU ARE DEBUGGING A SHUTTLE AND YOU KNOW WHAT YOU ARE DOING.", "Are you sure?", "Ok", "Cancel")
 	if (confirm == "Cancel")

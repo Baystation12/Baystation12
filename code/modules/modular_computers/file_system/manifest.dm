@@ -17,9 +17,9 @@
 	var/list/misc //Special departments for easier access
 	var/list/bot
 	for(var/list/department in dept_data)
-		if(department["flag"] == MSC)
+		if (department["flag"] == MSC)
 			misc = department["names"]
-		if(isnull(department["flag"]))
+		if (isnull(department["flag"]))
 			bot = department["names"]
 
 	var/list/isactive = new()
@@ -42,18 +42,18 @@
 		var/rank = CR.get_job()
 		mil_ranks[name] = ""
 
-		if(GLOB.using_map.flags & MAP_HAS_RANK)
+		if (GLOB.using_map.flags & MAP_HAS_RANK)
 			var/datum/mil_branch/branch_obj = GLOB.mil_branches.get_branch(CR.get_branch())
 			var/datum/mil_rank/rank_obj = GLOB.mil_branches.get_rank(CR.get_branch(), CR.get_rank())
 
-			if(branch_obj && rank_obj)
+			if (branch_obj && rank_obj)
 				mil_ranks[name] = "<abbr title=\"[rank_obj.name], [branch_obj.name]\">[rank_obj.name_short]</abbr> "
 
-		if(OOC)
+		if (OOC)
 			var/active = 0
 			for(var/mob/M in GLOB.player_list)
 				var/mob_real_name = M.real_name
-				if(sanitize(mob_real_name) == CR.get_name() && M.client && M.client.inactivity <= 10 MINUTES)
+				if (sanitize(mob_real_name) == CR.get_name() && M.client && M.client.inactivity <= 10 MINUTES)
 					active = 1
 					break
 			isactive[name] = active ? "Active" : "Inactive"
@@ -62,13 +62,13 @@
 
 		var/datum/job/job = SSjobs.get_by_title(rank)
 		var/found_place = 0
-		if(job)
+		if (job)
 			for(var/list/department in dept_data)
 				var/list/names = department["names"]
-				if(job.department_flag & department["flag"])
+				if (job.department_flag & department["flag"])
 					names[name] = rank
 					found_place = 1
-		if(!found_place)
+		if (!found_place)
 			misc[name] = rank
 
 	// Synthetics don't have actual records, so we will pull them from here.
@@ -77,14 +77,14 @@
 
 	for(var/mob/living/silicon/robot/robot in SSmobs.mob_list)
 		// No combat/syndicate cyborgs, no drones.
-		if(robot.module && robot.module.hide_on_manifest)
+		if (robot.module && robot.module.hide_on_manifest)
 			continue
 
 		bot[robot.name] = "[robot.modtype] [robot.braintype]"
 
 	for(var/list/department in dept_data)
 		var/list/names = department["names"]
-		if(length(names) > 0)
+		if (length(names) > 0)
 			dat += "<tr><th colspan=3 style=background-color:[department["color"]]>[department["header"]]</th></tr>"
 			for(var/name in names)
 				dat += "<tr class='candystripe'><td>[mil_ranks[name]][name]</td><td>[names[name]]</td><td>[isactive[name]]</td></tr>"
@@ -104,7 +104,7 @@
 			"status" = ""
 		)))
 	for(var/mob/living/silicon/robot/robot in SSmobs.mob_list)
-		if(robot.module && robot.module.hide_on_manifest)
+		if (robot.module && robot.module.hide_on_manifest)
 			continue
 		filtered_entries.Add(list(list(
 			"name" = robot.name,

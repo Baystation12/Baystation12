@@ -66,7 +66,7 @@
 
 /obj/item/boombox/attackby(obj/item/item, mob/user)
 	set waitfor = FALSE
-	if(isScrewdriver(item))
+	if (isScrewdriver(item))
 		var/item_loc = item.loc
 		if (GET_FLAGS(boombox_flags, BOOMBOX_PANEL))
 			user.visible_message(

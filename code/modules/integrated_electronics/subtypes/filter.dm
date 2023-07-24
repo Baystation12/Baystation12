@@ -20,7 +20,7 @@
 	outputs = list("result" = IC_PINTYPE_BOOLEAN)
 
 /obj/item/integrated_circuit/filter/ref/may_pass(weakref/data)
-	if(!(filter_type && isweakref(data)))
+	if (!(filter_type && isweakref(data)))
 		return FALSE
 	var/weakref/wref = data
 	return istype(wref.resolve(), filter_type)
@@ -30,7 +30,7 @@
 	var/datum/integrated_io/O = outputs[1]
 	O.data = may_pass(A.data) ? TRUE : FALSE
 
-	if(get_pin_data(IC_OUTPUT, 1))
+	if (get_pin_data(IC_OUTPUT, 1))
 		activate_pin(2)
 	else
 		activate_pin(3)
@@ -79,7 +79,7 @@
 	inputs = list( "input" = IC_PINTYPE_REF, "expected type" = IC_PINTYPE_REF )
 
 /obj/item/integrated_circuit/filter/ref/custom/may_pass(weakref/data, weakref/typedata)
-	if(!isweakref(data) || !isweakref(typedata))
+	if (!isweakref(data) || !isweakref(typedata))
 		return FALSE
 	var/weakref/wref = data
 	var/weakref/wref2 = typedata
@@ -93,7 +93,7 @@
 	var/datum/integrated_io/O = outputs[1]
 	O.data = may_pass(A.data, T.data) ? TRUE : FALSE
 
-	if(get_pin_data(IC_OUTPUT, 1))
+	if (get_pin_data(IC_OUTPUT, 1))
 		activate_pin(2)
 	else
 		activate_pin(3)
@@ -120,7 +120,7 @@
 	var/datum/integrated_io/O = outputs[1]
 	O.data = may_pass(A, B) ? TRUE : FALSE
 
-	if(get_pin_data(IC_OUTPUT, 1))
+	if (get_pin_data(IC_OUTPUT, 1))
 		activate_pin(2)
 	else
 		activate_pin(3)

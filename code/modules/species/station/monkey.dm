@@ -70,47 +70,47 @@
 	..()
 
 /datum/species/monkey/handle_npc(mob/living/carbon/human/H)
-	if(H.stat != CONSCIOUS)
+	if (H.stat != CONSCIOUS)
 		return
-	if(prob(33) && isturf(H.loc) && !H.pulledby) //won't move if being pulled
+	if (prob(33) && isturf(H.loc) && !H.pulledby) //won't move if being pulled
 		var/dir = pick(GLOB.cardinal)
 		var/turf/T = get_step(get_turf(H), dir)
-		if(T && (T.pathweight < INFINITY))
+		if (T && (T.pathweight < INFINITY))
 			H.SelfMove(dir)
 
 	var/obj/held = H.get_active_hand()
-	if(held && prob(1))
+	if (held && prob(1))
 		var/turf/T = get_random_turf_in_range(H, 7, 2)
-		if(T)
-			if(istype(held, /obj/item/gun) && prob(80))
+		if (T)
+			if (istype(held, /obj/item/gun) && prob(80))
 				var/obj/item/gun/G = held
 				G.Fire(T, H)
 			else
 				H.throw_item(T)
 		else
 			H.unequip_item()
-	if(!held && !H.restrained() && prob(5))
+	if (!held && !H.restrained() && prob(5))
 		var/list/touchables = list()
 		for(var/obj/O in range(1,get_turf(H)))
-			if(O.simulated && O.Adjacent(H) && !is_type_in_list(O, no_touchie))
+			if (O.simulated && O.Adjacent(H) && !is_type_in_list(O, no_touchie))
 				touchables += O
-		if(length(touchables))
+		if (length(touchables))
 			var/obj/touchy = pick(touchables)
 			touchy.attack_hand(H)
 
-	if(prob(1))
+	if (prob(1))
 		H.emote(pick("scratch","jump","roll","tail"))
 
-	if(H.get_shock() && H.shock_stage < 40 && prob(3))
+	if (H.get_shock() && H.shock_stage < 40 && prob(3))
 		H.custom_emote("chimpers pitifully")
 
-	if(H.shock_stage > 10 && prob(3))
+	if (H.shock_stage > 10 && prob(3))
 		H.emote(pick("cry","whimper"))
 
-	if(H.shock_stage >= 40 && prob(3))
+	if (H.shock_stage >= 40 && prob(3))
 		H.emote("scream")
 
-	if(!H.restrained() && H.lying && H.shock_stage >= 60 && prob(3))
+	if (!H.restrained() && H.lying && H.shock_stage >= 60 && prob(3))
 		H.custom_emote("thrashes in agony")
 
 /datum/species/monkey/handle_post_spawn(mob/living/carbon/human/H)

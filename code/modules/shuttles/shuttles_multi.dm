@@ -5,7 +5,7 @@
 	category = /datum/shuttle/autodock/multi
 
 /datum/shuttle/autodock/multi/proc/set_destination(destination_key, mob/user)
-	if(moving_status != SHUTTLE_IDLE)
+	if (moving_status != SHUTTLE_IDLE)
 		return
 	next_location = destinations_cache[destination_key]
 
@@ -37,24 +37,24 @@
 
 /datum/shuttle/autodock/multi/antag/New()
 	..()
-	if(home_waypoint)
+	if (home_waypoint)
 		home_waypoint = SSshuttle.get_landmark(home_waypoint)
 	else
 		home_waypoint = current_location
 
 /datum/shuttle/autodock/multi/antag/shuttle_moved()
-	if(current_location == home_waypoint)
+	if (current_location == home_waypoint)
 		announce_arrival()
-	else if(next_location == home_waypoint)
+	else if (next_location == home_waypoint)
 		announce_departure()
 	..()
 
 /datum/shuttle/autodock/multi/antag/proc/announce_departure()
-	if(cloaked || isnull(departure_message))
+	if (cloaked || isnull(departure_message))
 		return
 	command_announcement.Announce(departure_message, announcer || "[GLOB.using_map.boss_name]")
 
 /datum/shuttle/autodock/multi/antag/proc/announce_arrival()
-	if(cloaked || isnull(arrival_message))
+	if (cloaked || isnull(arrival_message))
 		return
 	command_announcement.Announce(arrival_message, announcer || "[GLOB.using_map.boss_name]")

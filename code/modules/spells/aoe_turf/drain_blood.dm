@@ -17,10 +17,10 @@
 /spell/aoe_turf/drain_blood/cast(list/targets, mob/user)
 	for(var/t in targets)
 		for(var/mob/living/L in t)
-			if(L.stat == DEAD || L == user)
+			if (L.stat == DEAD || L == user)
 				continue
 			//Hurt target
-			if(istype(L, /mob/living/carbon/human))
+			if (istype(L, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = L
 				H.vessel.remove_reagent(/datum/reagent/blood, 10)
 			else
@@ -34,10 +34,10 @@
 			effect.launch(L, "chest")
 
 			//Heal self
-			if(istype(user, /mob/living/carbon/human))
+			if (istype(user, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = user
 				var/amount = min(10, H.species.blood_volume - H.vessel.total_volume)
-				if(amount > 0)
+				if (amount > 0)
 					H.vessel.add_reagent(/datum/reagent/blood, amount)
 					continue
 			L.adjustBruteLoss(-5)
@@ -55,7 +55,7 @@
 	impact_type = /obj/effect/projectile/blood
 
 /obj/item/projectile/beam/blood_effect/Bump(atom/a, forced=0)
-	if(a == original)
+	if (a == original)
 		on_impact(a)
 		qdel(src)
 		return 1

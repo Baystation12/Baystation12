@@ -25,13 +25,13 @@ GLOBAL_DATUM_INIT(changelings, /datum/antagonist/changeling, new)
 
 /datum/antagonist/changeling/remove_antagonist(datum/mind/player, show_message, implanted)
 	. = ..()
-	if(. && player && player.current)
+	if (. && player && player.current)
 		player.current.remove_changeling_powers()
 		player.current.verbs -= /datum/changeling/proc/EvolutionMenu
 		QDEL_NULL(player.changeling)
 
 /datum/antagonist/changeling/create_objectives(datum/mind/changeling)
-	if(!..())
+	if (!..())
 		return
 
 	//OBJECTIVES - Always absorb 5 genomes, plus random traitor objectives.
@@ -55,7 +55,7 @@ GLOBAL_DATUM_INIT(changelings, /datum/antagonist/changeling, new)
 	changeling.objectives += steal_objective
 
 	switch(rand(1,100))
-		if(1 to 80)
+		if (1 to 80)
 			if (!(locate(/datum/objective/escape) in changeling.objectives))
 				var/datum/objective/escape/escape_objective = new
 				escape_objective.owner = changeling
@@ -68,21 +68,21 @@ GLOBAL_DATUM_INIT(changelings, /datum/antagonist/changeling, new)
 	return
 
 /datum/antagonist/changeling/can_become_antag(datum/mind/player, ignore_role)
-	if(..())
-		if(player.current)
-			if(ishuman(player.current))
+	if (..())
+		if (player.current)
+			if (ishuman(player.current))
 				var/mob/living/carbon/human/H = player.current
-				if(H.isSynthetic() || H.isFBP())
+				if (H.isSynthetic() || H.isFBP())
 					return 0
-				if(H.species.species_flags & SPECIES_FLAG_NO_SCAN)
+				if (H.species.species_flags & SPECIES_FLAG_NO_SCAN)
 					return 0
 				return 1
-			else if(isnewplayer(player.current))
-				if(player.current.client && player.current.client.prefs)
+			else if (isnewplayer(player.current))
+				if (player.current.client && player.current.client.prefs)
 					var/datum/species/S = all_species[player.current.client.prefs.species]
-					if(S && (S.species_flags & SPECIES_FLAG_NO_SCAN))
+					if (S && (S.species_flags & SPECIES_FLAG_NO_SCAN))
 						return 0
-					if(player.current.client.prefs.organ_data[BP_CHEST] == "cyborg") // Full synthetic.
+					if (player.current.client.prefs.organ_data[BP_CHEST] == "cyborg") // Full synthetic.
 						return 0
 					return 1
  	return 0

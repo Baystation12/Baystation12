@@ -12,14 +12,14 @@ Aoe turf spells have two useful flags: IGNOREDENSE and IGNORESPACE. These are ex
 	var/list/targets = list()
 
 	for(var/turf/target in view_or_range(range, holder, selection_type))
-		if(!(target in view_or_range(inner_radius, holder, selection_type)))
-			if(target.density && (spell_flags & IGNOREDENSE))
+		if (!(target in view_or_range(inner_radius, holder, selection_type)))
+			if (target.density && (spell_flags & IGNOREDENSE))
 				continue
-			if(istype(target, /turf/space) && (spell_flags & IGNORESPACE))
+			if (istype(target, /turf/space) && (spell_flags & IGNORESPACE))
 				continue
 			targets += target
 
-	if(!length(targets)) //doesn't waste the spell
+	if (!length(targets)) //doesn't waste the spell
 		return
 
 	return targets

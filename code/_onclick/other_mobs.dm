@@ -47,14 +47,14 @@
 */
 /mob/living/carbon/human/UnarmedAttack(atom/A, proximity)
 
-	if(!..())
+	if (!..())
 		return
 
 	// Special glove functions:
 	// If the gloves do anything, have them return 1 to stop
 	// normal attack_hand() here.
 	var/obj/item/clothing/gloves/G = gloves // not typecast specifically enough in defines
-	if(istype(G) && G.Touch(A,1))
+	if (istype(G) && G.Touch(A,1))
 		return
 
 	A.attack_hand(src)
@@ -85,17 +85,17 @@
 
 /mob/living/CtrlClickOn(atom/A)
 	. = ..()
-	if(!. && a_intent == I_GRAB && length(available_maneuvers))
+	if (!. && a_intent == I_GRAB && length(available_maneuvers))
 		. = perform_maneuver(prepared_maneuver || available_maneuvers[1], A)
 
 /mob/living/carbon/human/RangedAttack(atom/A, params)
 	//Climbing up open spaces
-	if((istype(A, /turf/simulated/floor) || istype(A, /turf/unsimulated/floor) || istype(A, /obj/structure/lattice) || istype(A, /obj/structure/catwalk)) && isturf(loc) && bound_overlay && !is_physically_disabled()) //Climbing through openspace
+	if ((istype(A, /turf/simulated/floor) || istype(A, /turf/unsimulated/floor) || istype(A, /obj/structure/lattice) || istype(A, /obj/structure/catwalk)) && isturf(loc) && bound_overlay && !is_physically_disabled()) //Climbing through openspace
 		return climb_up(A)
 
-	if(gloves)
+	if (gloves)
 		var/obj/item/clothing/gloves/G = gloves
-		if(istype(G) && G.Touch(A,0)) // for magic gloves
+		if (istype(G) && G.Touch(A,0)) // for magic gloves
 			return TRUE
 
 	. = ..()
@@ -112,7 +112,7 @@
 
 /mob/living/carbon/alien/UnarmedAttack(atom/A, proximity)
 
-	if(!..())
+	if (!..())
 		return 0
 
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -128,11 +128,11 @@
 
 /mob/living/carbon/slime/UnarmedAttack(atom/A, proximity)
 
-	if(!..())
+	if (!..())
 		return
 
 	// Eating
-	if(Victim)
+	if (Victim)
 		if (Victim == A)
 			Feedstop()
 		return
@@ -140,7 +140,7 @@
 	//should have already been set if we are attacking a mob, but it doesn't hurt and will cover attacking non-mobs too
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	var/mob/living/M = A
-	if(!istype(M))
+	if (!istype(M))
 		A.attack_generic(src, (is_adult ? rand(20,40) : rand(5,25)), "glomped") // Basic attack.
 	else
 		var/power = max(0, min(10, (powerlevel + rand(0, 3))))
@@ -153,18 +153,18 @@
 
 				if (powerlevel > 0 && !istype(A, /mob/living/carbon/slime))
 					switch(power * 10)
-						if(0) stunprob *= 10
-						if(1 to 2) stunprob *= 20
-						if(3 to 4) stunprob *= 30
-						if(5 to 6) stunprob *= 40
-						if(7 to 8) stunprob *= 60
-						if(9) 	   stunprob *= 70
-						if(10) 	   stunprob *= 95
+						if (0) stunprob *= 10
+						if (1 to 2) stunprob *= 20
+						if (3 to 4) stunprob *= 30
+						if (5 to 6) stunprob *= 40
+						if (7 to 8) stunprob *= 60
+						if (9) 	   stunprob *= 70
+						if (10) 	   stunprob *= 95
 
-				if(prob(stunprob))
+				if (prob(stunprob))
 					var/shock_damage = max(0, powerlevel-3) * rand(6,10)
 					M.electrocute_act(shock_damage, src, 1.0, ran_zone())
-				else if(prob(40))
+				else if (prob(40))
 					M.visible_message(SPAN_DANGER("[src] has pounced at [M]!"), SPAN_DANGER("[src] has pounced at you!"))
 					M.Weaken(power)
 				else
@@ -173,7 +173,7 @@
 			if (I_GRAB) // We feed
 				Wrap(M)
 			if (I_HURT) // Attacking
-				if(iscarbon(M) && prob(15))
+				if (iscarbon(M) && prob(15))
 					M.visible_message(SPAN_DANGER("[src] has pounced at [M]!"), SPAN_DANGER("[src] has pounced at you!"))
 					M.Weaken(power)
 				else
@@ -191,16 +191,16 @@
 */
 /mob/living/simple_animal/UnarmedAttack(atom/A, proximity)
 
-	if(!..())
+	if (!..())
 		return
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(istype(A,/mob/living))
-		if(!get_natural_weapon() || a_intent == I_HELP)
+	if (istype(A,/mob/living))
+		if (!get_natural_weapon() || a_intent == I_HELP)
 			custom_emote(1,"[friendly] [A]!")
 			return
-		if(ckey)
+		if (ckey)
 			admin_attack_log(src, A, "Has attacked its victim.", "Has been attacked by its attacker.")
-	if(a_intent == I_HELP)
+	if (a_intent == I_HELP)
 		A.attack_animal(src)
 	else if (get_natural_weapon())
 		A.attackby(get_natural_weapon(), src)

@@ -11,9 +11,9 @@
 
 /obj/effect/step_trigger/Crossed(H as mob|obj)
 	..()
-	if(!H)
+	if (!H)
 		return
-	if(isobserver(H) && !(isghost(H) && affect_ghosts))
+	if (isobserver(H) && !(isghost(H) && affect_ghosts))
 		return
 	Trigger(H)
 
@@ -33,25 +33,25 @@
 	var/list/affecting = list()
 
 /obj/effect/step_trigger/thrower/Trigger(atom/movable/AM)
-	if(!AM || !istype(AM) || !AM.simulated)
+	if (!AM || !istype(AM) || !AM.simulated)
 		return
 	var/curtiles = 0
 	var/stopthrow = 0
 	for(var/obj/effect/step_trigger/thrower/T in orange(2, src))
-		if(AM in T.affecting)
+		if (AM in T.affecting)
 			return
 
-	if(ismob(AM))
+	if (ismob(AM))
 		var/mob/M = AM
-		if(immobilize)
+		if (immobilize)
 			M.AddMovementHandler(/datum/movement_handler/no_move/toss)
 
 	affecting.Add(AM)
 	while(AM && !stopthrow)
-		if(tiles)
-			if(curtiles >= tiles)
+		if (tiles)
+			if (curtiles >= tiles)
 				break
-		if(AM.z != src.z)
+		if (AM.z != src.z)
 			break
 
 		curtiles++
@@ -59,28 +59,28 @@
 		sleep(speed)
 
 		// Calculate if we should stop the process
-		if(!nostop)
+		if (!nostop)
 			for(var/obj/effect/step_trigger/T in get_step(AM, direction))
-				if(T.stopper && T != src)
+				if (T.stopper && T != src)
 					stopthrow = 1
 		else
 			for(var/obj/effect/step_trigger/teleporter/T in get_step(AM, direction))
-				if(T.stopper)
+				if (T.stopper)
 					stopthrow = 1
 
-		if(AM)
+		if (AM)
 			var/predir = AM.dir
 			step(AM, direction)
-			if(!facedir)
+			if (!facedir)
 				AM.set_dir(predir)
 
 
 
 	affecting.Remove(AM)
 
-	if(ismob(AM))
+	if (ismob(AM))
 		var/mob/M = AM
-		if(immobilize)
+		if (immobilize)
 			M.RemoveMovementHandler(/datum/movement_handler/no_move/toss)
 
 /* Stops things thrown by a thrower, doesn't do anything */
@@ -95,7 +95,7 @@
 	var/teleport_z = 0
 
 /obj/effect/step_trigger/teleporter/Trigger(atom/movable/A)
-	if(teleport_x && teleport_y && teleport_z)
+	if (teleport_x && teleport_y && teleport_z)
 
 		A.x = teleport_x
 		A.y = teleport_y
@@ -111,5 +111,5 @@
 
 /obj/effect/step_trigger/teleporter/random/Trigger(atom/movable/A)
 	var/turf/T = locate(rand(teleport_x, teleport_x_offset), rand(teleport_y, teleport_y_offset), rand(teleport_z, teleport_z_offset))
-	if(T)
+	if (T)
 		A.forceMove(T)

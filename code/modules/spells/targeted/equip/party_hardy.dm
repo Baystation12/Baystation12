@@ -20,14 +20,14 @@
 	equipped_summons = list("active hand" = /obj/item/reagent_containers/food/drinks/bottle/small/beer)
 
 /spell/targeted/equip_item/party_hardy/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 	switch(spell_levels[Sp_POWER])
-		if(1)
+		if (1)
 			equipped_summons = list("active hand" = /obj/item/reagent_containers/food/drinks/bottle/small/beer,
 								"off hand" = /obj/item/reagent_containers/food/snacks/poppypretzel)
 			return "The spell will now give everybody a preztel as well."
-		if(2)
+		if (2)
 			equipped_summons = list("active hand" = /obj/item/reagent_containers/food/drinks/bottle/absinthe,
 								"off hand" = /obj/item/reagent_containers/food/snacks/poppypretzel,
 								"[slot_head]" = /obj/item/clothing/head/collectable/wizard)

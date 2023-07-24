@@ -118,7 +118,7 @@
 		onclose(user, window_id, ref)
 
 /datum/browser/proc/update(force_open = 0, use_onclose = 1)
-	if(force_open)
+	if (force_open)
 		open(use_onclose)
 	else
 		send_output(user, get_content(), "[window_id].browser")
@@ -159,13 +159,13 @@
 // Otherwise, the user mob's machine var will be reset directly.
 //
 /proc/onclose(mob/user, windowid, atom/ref=null)
-	if(!user || !user.client) return
+	if (!user || !user.client) return
 	var/param = "null"
-	if(ref)
+	if (ref)
 		param = "\ref[ref]"
 
 	spawn(2)
-		if(!user.client) return
+		if (!user.client) return
 		winset(user, windowid, "on-close=\".windowclose [param]\"")
 
 //	log_debug("OnClose [user]: [windowid] : ["on-close=\".windowclose [param]\""]")
@@ -183,9 +183,9 @@
 
 //	log_debug("windowclose: [atomref]")
 
-	if(atomref!="null")				// if passed a real atomref
+	if (atomref!="null")				// if passed a real atomref
 		var/hsrc = locate(atomref)	// find the reffed atom
-		if(hsrc)
+		if (hsrc)
 //			log_debug("[src] Topic [href] [hsrc]")
 
 			usr = src.mob
@@ -194,7 +194,7 @@
 
 	// no atomref specified (or not found)
 	// so just reset the user mob's machine var
-	if(src && src.mob)
+	if (src && src.mob)
 //		log_debug("[src] was [src.mob.machine], setting to null")
 
 		src.mob.unset_machine()

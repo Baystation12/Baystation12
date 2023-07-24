@@ -3,7 +3,7 @@
 
 /datum/admin_secret_item/admin_secret/bombing_list/execute(mob/user)
 	. = ..()
-	if(!.)
+	if (!.)
 		return
 
 	var/dat = "<B>Bombing List</B>"

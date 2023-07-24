@@ -11,26 +11,26 @@
 	var/base_type              // Type representing parent of category for replacer usage.
 
 /obj/item/stock_parts/attack_hand(mob/user)
-	if(istype(loc, /obj/machinery))
+	if (istype(loc, /obj/machinery))
 		return FALSE // Can potentially add uninstall code here, but not currently supported.
 	return ..()
 
 /obj/item/stock_parts/proc/set_status(obj/machinery/machine, flag)
 	var/old_stat = status
 	status |= flag
-	if(old_stat != status)
-		if(!machine)
+	if (old_stat != status)
+		if (!machine)
 			machine = loc
-		if(istype(machine))
+		if (istype(machine))
 			machine.component_stat_change(src, old_stat, flag)
 
 /obj/item/stock_parts/proc/unset_status(obj/machinery/machine, flag)
 	var/old_stat = status
 	status &= ~flag
-	if(old_stat != status)
-		if(!machine)
+	if (old_stat != status)
+		if (!machine)
 			machine = loc
-		if(istype(machine))
+		if (istype(machine))
 			machine.component_stat_change(src, old_stat, flag)
 
 /obj/item/stock_parts/proc/on_install(obj/machinery/machine)
@@ -39,7 +39,7 @@
 /obj/item/stock_parts/proc/on_uninstall(obj/machinery/machine, temporary = FALSE)
 	unset_status(machine, PART_STAT_INSTALLED)
 	stop_processing(machine)
-	if(!temporary && (part_flags & PART_FLAG_QDEL))
+	if (!temporary && (part_flags & PART_FLAG_QDEL))
 		qdel(src)
 
 // Use to process on the machine it's installed on.
@@ -51,7 +51,7 @@
 
 /obj/item/stock_parts/proc/stop_processing(obj/machinery/machine)
 	LAZYREMOVE(machine.processing_parts, src)
-	if(!LAZYLEN(machine.processing_parts))
+	if (!LAZYLEN(machine.processing_parts))
 		STOP_PROCESSING_MACHINE(machine, MACHINERY_PROCESS_COMPONENTS)
 	unset_status(machine, PART_STAT_PROCESSING)
 

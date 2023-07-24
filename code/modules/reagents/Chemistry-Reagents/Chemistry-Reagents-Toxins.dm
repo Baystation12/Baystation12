@@ -18,22 +18,22 @@
 	var/strength = 4 // How much damage it deals per unit
 
 /datum/reagent/toxin/affect_blood(mob/living/carbon/M, removed)
-	if(strength && !IS_METABOLICALLY_INERT(M))
+	if (strength && !IS_METABOLICALLY_INERT(M))
 		M.add_chemical_effect(CE_TOXIN, strength)
 		var/dam = (strength * removed)
-		if(target_organ && ishuman(M))
+		if (target_organ && ishuman(M))
 			var/mob/living/carbon/human/H = M
 			var/obj/item/organ/internal/I = H.internal_organs_by_name[target_organ]
-			if(I)
+			if (I)
 				var/can_damage = I.max_damage - I.damage
-				if(can_damage > 0)
-					if(dam > can_damage)
+				if (can_damage > 0)
+					if (dam > can_damage)
 						I.take_internal_damage(can_damage, silent=TRUE)
 						dam -= can_damage
 					else
 						I.take_internal_damage(dam, silent=TRUE)
 						dam = 0
-		if(dam)
+		if (dam)
 			M.adjustToxLoss(target_organ ? (dam * 0.75) : dam)
 
 /datum/reagent/toxin/denatured
@@ -86,7 +86,7 @@
 	if (IS_METABOLICALLY_INERT(M))
 		return
 
-	if(M.chem_doses[/datum/reagent/toxin/amatoxin] > 0)
+	if (M.chem_doses[/datum/reagent/toxin/amatoxin] > 0)
 		M.reagents.add_reagent(/datum/reagent/toxin/amaspores, metabolism) // The spores lay dormant for as long as any traces of amatoxin remain
 		if (prob(5))
 			to_chat(M, SPAN_DANGER("Everything itches, how uncomfortable!"))
@@ -126,9 +126,9 @@
 	var/effectiveness = 1
 	var/effective_dose = 2
 
-	if(M.chem_doses[type] < effective_dose)
+	if (M.chem_doses[type] < effective_dose)
 		effectiveness = M.chem_doses[type]/effective_dose
-	else if(volume < effective_dose)
+	else if (volume < effective_dose)
 		effectiveness = volume/effective_dose
 	M.add_chemical_effect(CE_BLOCKAGE, (80 * effectiveness)/100)
 
@@ -141,7 +141,7 @@
 	strength = 5
 
 /datum/reagent/toxin/venom/affect_blood(mob/living/carbon/M, removed)
-	if(prob(volume*2))
+	if (prob(volume*2))
 		M.confused = max(M.confused, 3)
 	..()
 
@@ -218,8 +218,8 @@
 /datum/reagent/toxin/serotrotium/affect_blood(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
 		return
-	if(prob(30))
-		if(prob(25))
+	if (prob(30))
+		if (prob(25))
 			M.emote(pick("shiver", "blink_r"))
 		M.adjustBrainLoss(0.2 * removed)
 	return ..()
@@ -278,7 +278,7 @@
 	heating_products = null
 
 /datum/reagent/toxin/phoron/touch_mob(mob/living/L, amount)
-	if(istype(L))
+	if (istype(L))
 		L.adjust_fire_stacks(amount / fire_mult)
 
 /datum/reagent/toxin/phoron/affect_blood(mob/living/carbon/M, removed)
@@ -288,11 +288,11 @@
 
 /datum/reagent/toxin/phoron/affect_touch(mob/living/carbon/M, removed)
 	M.take_organ_damage(0, removed * 0.1) //being splashed directly with phoron causes minor chemical burns
-	if(prob(10 * fire_mult))
+	if (prob(10 * fire_mult))
 		M.pl_effects()
 
 /datum/reagent/toxin/phoron/touch_turf(turf/simulated/T)
-	if(!istype(T))
+	if (!istype(T))
 		return
 	T.assume_gas(GAS_PHORON, volume, T20C)
 	remove_self(volume)
@@ -305,7 +305,7 @@
 	fire_mult = 15
 
 /datum/reagent/toxin/phoron/oxygen/touch_turf(turf/simulated/T)
-	if(!istype(T))
+	if (!istype(T))
 		return
 	T.assume_gas(GAS_OXYGEN, ceil(volume/2), T20C)
 	T.assume_gas(GAS_PHORON, ceil(volume/2), T20C)
@@ -345,9 +345,9 @@
 
 /datum/reagent/toxin/taxine/overdose(mob/living/carbon/M)
 	..()
-	if(ishuman(M))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(H.stat != UNCONSCIOUS)
+		if (H.stat != UNCONSCIOUS)
 			H.Weaken(8)
 		M.add_chemical_effect(CE_NOPULSE, 1)
 
@@ -364,10 +364,10 @@
 
 /datum/reagent/toxin/potassium_chloride/overdose(mob/living/carbon/M)
 	..()
-	if(ishuman(M))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(H.stat != 1)
-			if(H.losebreath >= 10)
+		if (H.stat != 1)
+			if (H.losebreath >= 10)
 				H.losebreath = max(10, H.losebreath - 10)
 			H.adjustOxyLoss(2)
 			H.Weaken(10)
@@ -387,10 +387,10 @@
 
 /datum/reagent/toxin/potassium_chlorophoride/affect_blood(mob/living/carbon/M, removed)
 	..()
-	if(ishuman(M))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(H.stat != UNCONSCIOUS)
-			if(H.losebreath >= 10)
+		if (H.stat != UNCONSCIOUS)
+			if (H.losebreath >= 10)
 				H.losebreath = max(10, M.losebreath-10)
 			H.adjustOxyLoss(2)
 			H.Weaken(10)
@@ -416,12 +416,12 @@
 	M.adjustOxyLoss(-5 * removed)
 	M.Weaken(10)
 	M.silent = max(M.silent, 10)
-	if(M.chem_doses[type] <= removed) //half-assed attempt to make timeofdeath update only at the onset
+	if (M.chem_doses[type] <= removed) //half-assed attempt to make timeofdeath update only at the onset
 		M.timeofdeath = world.time
 	M.add_chemical_effect(CE_NOPULSE, 1)
 
 /datum/reagent/toxin/zombiepowder/Destroy()
-	if(holder && holder.my_atom && ismob(holder.my_atom))
+	if (holder && holder.my_atom && ismob(holder.my_atom))
 		var/mob/M = holder.my_atom
 		M.status_flags &= ~FAKEDEATH
 		M.reagents.add_reagent(/datum/reagent/adrenaline, 5)
@@ -457,15 +457,15 @@
 	heating_products = list(/datum/reagent/toxin, /datum/reagent/water)
 
 /datum/reagent/toxin/plantbgone/touch_turf(turf/T)
-	if(istype(T, /turf/simulated/wall))
+	if (istype(T, /turf/simulated/wall))
 		var/turf/simulated/wall/W = T
-		if(locate(/obj/effect/overlay/wallrot) in W)
+		if (locate(/obj/effect/overlay/wallrot) in W)
 			for(var/obj/effect/overlay/wallrot/E in W)
 				qdel(E)
 			W.visible_message(SPAN_NOTICE("The fungi are completely dissolved by the solution!"))
 
 /datum/reagent/toxin/plantbgone/touch_obj(obj/O, volume)
-	if(istype(O, /obj/effect/vine))
+	if (istype(O, /obj/effect/vine))
 		qdel(O)
 
 /datum/reagent/toxin/plantbgone/affect_blood(mob/living/carbon/M, removed)
@@ -515,7 +515,7 @@
 			SPAN_WARNING("\The [M]'s skin fizzles and flakes away!"),
 			SPAN_DANGER("Your skin fizzles and flakes away!")
 		)
-	if(M.losebreath < (30 + (15 * permeability)))
+	if (M.losebreath < (30 + (15 * permeability)))
 		M.losebreath++
 	M.adjustOxyLoss(15 * removed)
 
@@ -544,26 +544,26 @@
 	value = 3.1
 
 /datum/reagent/mutagen/affect_touch(mob/living/carbon/M, removed)
-	if(prob(33))
+	if (prob(33))
 		affect_blood(M, removed)
 
 /datum/reagent/mutagen/affect_ingest(mob/living/carbon/M, removed)
-	if(prob(67))
+	if (prob(67))
 		affect_blood(M, removed)
 
 /datum/reagent/mutagen/affect_blood(mob/living/carbon/M, removed)
 
-	if(M.isSynthetic())
+	if (M.isSynthetic())
 		return
 
 	var/mob/living/carbon/human/H = M
-	if(istype(H) && (H.species.species_flags & SPECIES_FLAG_NO_SCAN))
+	if (istype(H) && (H.species.species_flags & SPECIES_FLAG_NO_SCAN))
 		return
 
-	if(M.dna)
-		if(prob(removed * 0.1)) // Approx. one mutation per 10 injected/20 ingested/30 touching units
+	if (M.dna)
+		if (prob(removed * 0.1)) // Approx. one mutation per 10 injected/20 ingested/30 touching units
 			randmuti(M)
-			if(prob(98))
+			if (prob(98))
 				randmutb(M)
 			else
 				randmutg(M)
@@ -584,10 +584,10 @@
 /datum/reagent/slimejelly/affect_blood(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
 		return
-	if(prob(10))
+	if (prob(10))
 		to_chat(M, SPAN_DANGER("Your insides are burning!"))
 		M.adjustToxLoss(rand(100, 300) * removed)
-	else if(prob(40))
+	else if (prob(40))
 		M.heal_organ_damage(25 * removed, 0)
 
 /datum/reagent/soporific
@@ -608,13 +608,13 @@
 
 	var/threshold = 1 + (0.2 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
 
-	if(M.chem_doses[type] < 1 * threshold)
-		if(M.chem_doses[type] == metabolism * 2 || prob(5))
+	if (M.chem_doses[type] < 1 * threshold)
+		if (M.chem_doses[type] == metabolism * 2 || prob(5))
 			M.emote("yawn")
-	else if(M.chem_doses[type] < 1.5 * threshold)
+	else if (M.chem_doses[type] < 1.5 * threshold)
 		M.eye_blurry = max(M.eye_blurry, 10)
-	else if(M.chem_doses[type] < 5 * threshold)
-		if(prob(50))
+	else if (M.chem_doses[type] < 5 * threshold)
+		if (prob(50))
 			M.Weaken(2)
 			M.add_chemical_effect(CE_SEDATE, 1)
 		M.drowsyness = max(M.drowsyness, 20)
@@ -642,17 +642,17 @@
 	var/threshold = 1 + (0.2 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
 	M.add_chemical_effect(CE_SEDATE, 1)
 
-	if(M.chem_doses[type] <= metabolism * threshold)
+	if (M.chem_doses[type] <= metabolism * threshold)
 		M.confused += 2
 		M.drowsyness += 2
 
-	if(M.chem_doses[type] < 2 * threshold)
+	if (M.chem_doses[type] < 2 * threshold)
 		M.Weaken(30)
 		M.eye_blurry = max(M.eye_blurry, 10)
 	else
 		M.sleeping = max(M.sleeping, 30)
 
-	if(M.chem_doses[type] > 1 * threshold)
+	if (M.chem_doses[type] > 1 * threshold)
 		M.adjustToxLoss(removed)
 
 /datum/reagent/chloralhydrate/beer2 //disguised as normal beer for use by emagged brobots
@@ -682,19 +682,19 @@
 
 	var/threshold = 2 + (0.4 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
 
-	if(M.chem_doses[type] >= metabolism * threshold * 0.5)
+	if (M.chem_doses[type] >= metabolism * threshold * 0.5)
 		M.confused = max(M.confused, 2)
 		M.add_chemical_effect(CE_VOICELOSS, 1)
-	if(M.chem_doses[type] > threshold * 0.5)
+	if (M.chem_doses[type] > threshold * 0.5)
 		M.make_dizzy(3)
 		M.Weaken(2)
-	if(M.chem_doses[type] == round(threshold * 0.5, metabolism))
+	if (M.chem_doses[type] == round(threshold * 0.5, metabolism))
 		to_chat(M, SPAN_WARNING("Your muscles slacken and cease to obey you."))
-	if(M.chem_doses[type] >= threshold)
+	if (M.chem_doses[type] >= threshold)
 		M.add_chemical_effect(CE_SEDATE, 1)
 		M.eye_blurry = max(M.eye_blurry, 10)
 
-	if(M.chem_doses[type] > 1 * threshold)
+	if (M.chem_doses[type] > 1 * threshold)
 		M.adjustToxLoss(removed)
 
 /datum/reagent/impedrezene // Impairs mental function correctly, takes an overwhelming dose to kill.
@@ -713,11 +713,11 @@
 	M.jitteriness = max(M.jitteriness - 5, 0)
 	M.add_chemical_effect(M.add_chemical_effect(CE_SLOWDOWN, 1))
 
-	if(prob(80))
+	if (prob(80))
 		M.confused = max(M.confused, 10)
-	if(prob(50))
+	if (prob(50))
 		M.drowsyness = max(M.drowsyness, 3)
-	if(prob(10))
+	if (prob(10))
 		M.emote("drool")
 		M.apply_effect(EFFECT_STUTTER, 3)
 
@@ -750,16 +750,16 @@
 	if (IS_METABOLICALLY_INERT(M))
 		return
 
-	if(high_messages == TRUE)
-		if(world.time > last_message_time + 30 SECONDS && volume > 0.5) /// Spam prevention.
+	if (high_messages == TRUE)
+		if (world.time > last_message_time + 30 SECONDS && volume > 0.5) /// Spam prevention.
 			last_message_time = world.time
 			var/msg = pick(high_message_list)
 			to_chat(M, SPAN_DANGER("[msg]"))
-		else if(volume <= 0.2 && data != -1)
+		else if (volume <= 0.2 && data != -1)
 			data = -1
 			var/msg = pick(sober_message_list)
 			to_chat(M, SPAN_DANGER("[msg]"))
-	if(prob(5) && prob_proc == FALSE) /// Enables procs to activate, remains true until THAT PROC sets it to false again.
+	if (prob(5) && prob_proc == FALSE) /// Enables procs to activate, remains true until THAT PROC sets it to false again.
 		prob_proc = TRUE
 
 
@@ -796,11 +796,11 @@
 	if (IS_METABOLICALLY_INERT(M))
 		return
 
-	if(prob(5) && prob_proc == TRUE)
+	if (prob(5) && prob_proc == TRUE)
 		M.apply_effect(3, EFFECT_STUTTER)
 		M.emote("giggle")
 		prob_proc = FALSE
-	if(prob(10) && prob_proc == TRUE)
+	if (prob(10) && prob_proc == TRUE)
 		M.adjust_nutrition(-10)
 		prob_proc = FALSE
 
@@ -822,7 +822,7 @@
 /datum/reagent/drugs/serotrotium/affect_blood(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
 		return FALSE
-	if(prob(7))
+	if (prob(7))
 		M.emote(pick("giggle", "laugh", "smile"))
 	return ..()
 
@@ -903,14 +903,14 @@
 	var/threshold = 1 + (0.2 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
 	M.druggy = max(M.druggy, 30)
 
-	if(M.chem_doses[type] < 1 * threshold)
+	if (M.chem_doses[type] < 1 * threshold)
 		M.make_dizzy(5)
-	else if(M.chem_doses[type] < 2 * threshold)
+	else if (M.chem_doses[type] < 2 * threshold)
 		M.apply_effect(3, EFFECT_STUTTER)
 		M.make_jittery(5)
 		M.make_dizzy(5)
 		M.druggy = max(M.druggy, 35)
-		if(prob(10))
+		if (prob(10))
 			M.emote("giggle")
 	else
 		M.add_chemical_effect(CE_MIND, -1)
@@ -918,7 +918,7 @@
 		M.make_jittery(10)
 		M.make_dizzy(10)
 		M.druggy = max(M.druggy, 40)
-		if(prob(15))
+		if (prob(15))
 			M.emote(pick("twitch", "giggle"))
 	..()
 
@@ -975,7 +975,7 @@
 	M.hallucination(50, 50)
 	M.make_jittery(3)
 	M.make_dizzy(3)
-	if(prob(0.1) && ishuman(M))
+	if (prob(0.1) && ishuman(M))
 		var/mob/living/carbon/human/H = M
 		H.seizure()
 		H.adjustBrainLoss(rand(8, 12))
@@ -987,12 +987,12 @@
 /datum/reagent/drugs/three_eye/overdose(mob/living/carbon/M)
 	..()
 	M.adjustBrainLoss(rand(1, 5))
-	if(ishuman(M) && prob(10))
+	if (ishuman(M) && prob(10))
 		var/mob/living/carbon/human/H = M
 		H.seizure()
-	if(prob(10))
+	if (prob(10))
 		to_chat(M, SPAN_DANGER(SPAN_SIZE(rand(2,4), pick(overdose_messages))))
-	if(M.psi)
+	if (M.psi)
 		M.psi.check_latency_trigger(30, "a Three Eye overdose")
 
 /* Transformations */
@@ -1007,21 +1007,21 @@
 	should_admin_log = TRUE
 
 /datum/reagent/slimetoxin/affect_blood(mob/living/carbon/human/H, removed)
-	if(!istype(H))
+	if (!istype(H))
 		return
-	if(H.species.name == SPECIES_PROMETHEAN)
+	if (H.species.name == SPECIES_PROMETHEAN)
 		return
 	H.adjustToxLoss(40 * removed)
-	if(H.chem_doses[type] < 1 || prob(30))
+	if (H.chem_doses[type] < 1 || prob(30))
 		return
 	H.chem_doses[type] = 0
 	var/list/meatchunks = list()
 	for(var/limb_tag in list(BP_R_ARM, BP_L_ARM, BP_R_LEG,BP_L_LEG))
 		var/obj/item/organ/external/E = H.get_organ(limb_tag)
-		if(E && !E.is_stump() && !BP_IS_ROBOTIC(E) && E.species.name != SPECIES_PROMETHEAN)
+		if (E && !E.is_stump() && !BP_IS_ROBOTIC(E) && E.species.name != SPECIES_PROMETHEAN)
 			meatchunks += E
-	if(!length(meatchunks))
-		if(prob(10))
+	if (!length(meatchunks))
+		if (prob(10))
 			to_chat(H, SPAN_DANGER("Your flesh rapidly mutates!"))
 			H.set_species(SPECIES_PROMETHEAN)
 			H.shapeshifter_set_colour("#05ff9b")
@@ -1029,7 +1029,7 @@
 		return
 	var/obj/item/organ/external/O = pick(meatchunks)
 	to_chat(H, SPAN_DANGER("Your [O.name]'s flesh mutates rapidly!"))
-	if(!wrapped_species_by_ref["\ref[H]"])
+	if (!wrapped_species_by_ref["\ref[H]"])
 		wrapped_species_by_ref["\ref[H]"] = H.species.name
 	meatchunks = list(O) | O.children
 	for(var/obj/item/organ/external/E in meatchunks)
@@ -1044,7 +1044,7 @@
 		E.max_damage = 5
 		E.update_icon(1)
 	O.max_damage = 15
-	if(prob(10))
+	if (prob(10))
 		to_chat(H, SPAN_DANGER("Your slimy [O.name] plops off!"))
 		O.droplimb()
 	H.update_body()
@@ -1057,7 +1057,7 @@
 	color = "#13bc5e"
 
 /datum/reagent/aslimetoxin/affect_blood(mob/living/carbon/M, removed) // TODO: check if there's similar code anywhere else
-	if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(M))
+	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(M))
 		return
 	to_chat(M, SPAN_DANGER("Your flesh rapidly mutates!"))
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(M)
@@ -1065,14 +1065,14 @@
 	M.overlays.Cut()
 	M.set_invisibility(INVISIBILITY_ABSTRACT)
 	for(var/obj/item/W in M)
-		if(istype(W, /obj/item/implant)) //TODO: Carn. give implants a dropped() or something
+		if (istype(W, /obj/item/implant)) //TODO: Carn. give implants a dropped() or something
 			qdel(W)
 			continue
 		M.drop_from_inventory(W)
 	var/mob/living/carbon/slime/new_mob = new /mob/living/carbon/slime(M.loc)
 	new_mob.a_intent = "hurt"
 	new_mob.universal_speak = TRUE
-	if(M.mind)
+	if (M.mind)
 		M.mind.transfer_to(new_mob)
 	else
 		new_mob.key = M.key
@@ -1144,18 +1144,18 @@
 		return ..()
 
 /datum/reagent/toxin/methyl_bromide/touch_turf(turf/simulated/T)
-	if(istype(T))
+	if (istype(T))
 		T.assume_gas(GAS_METHYL_BROMIDE, volume, T20C)
 		remove_self(volume)
 
 /datum/reagent/toxin/methyl_bromide/affect_blood(mob/living/carbon/M, removed)
 	if (!HAS_TRAIT(M, /singleton/trait/general/serpentid_adapted))
 		. = ..()
-	if(istype(M))
+	if (istype(M))
 		for(var/obj/item/organ/external/E in M.organs)
-			if(LAZYLEN(E.implants))
+			if (LAZYLEN(E.implants))
 				for(var/obj/effect/spider/spider in E.implants)
-					if(prob(25))
+					if (prob(25))
 						E.implants -= spider
 						M.visible_message(SPAN_NOTICE("The dying form of \a [spider] emerges from inside \the [M]'s [E.name]."))
 						qdel(spider)

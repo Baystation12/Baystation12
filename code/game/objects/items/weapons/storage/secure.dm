@@ -107,7 +107,7 @@
 
 /obj/item/storage/secure/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
+	if (distance <= 1)
 		to_chat(user, text("The service panel is [src.open ? "open" : "closed"]."))
 
 

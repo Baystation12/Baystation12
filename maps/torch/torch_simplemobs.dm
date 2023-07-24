@@ -60,11 +60,11 @@
 
 /mob/living/simple_animal/hostile/human/fleet/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
-	if(corpse)
+	if (corpse)
 		new corpse (loc)
-	if(weapon1)
+	if (weapon1)
 		new weapon1 (loc)
-	if(weapon2)
+	if (weapon2)
 		new weapon2 (loc)
 	qdel(src)
 	return
@@ -196,8 +196,8 @@
 
 /mob/living/simple_animal/hostile/human/fleet/space/ranged/on_update_icon()
 	..()
-	if(stat != DEAD)
-		if(deactivated)
+	if (stat != DEAD)
+		if (deactivated)
 			overlays += image(icon, "disabled")
 			return
 
@@ -239,18 +239,18 @@
 
 /mob/living/simple_animal/hostile/human/fleet/space/ranged/heavy/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return
 
-	if(time_last_used_ability < world.time)
+	if (time_last_used_ability < world.time)
 		switch_mode(ATTACK_MODE_LAS)
 
 /mob/living/simple_animal/hostile/human/fleet/space/ranged/heavy/proc/switch_mode(new_mode)
-	if(!new_mode || new_mode == attack_mode)
+	if (!new_mode || new_mode == attack_mode)
 		return
 
 	switch(new_mode)
-		if(ATTACK_MODE_LAS)
+		if (ATTACK_MODE_LAS)
 			attack_mode = ATTACK_MODE_LAS
 			ranged = TRUE
 			projectilesound = 'sound/weapons/Laser.ogg'
@@ -259,7 +259,7 @@
 			fire_desc = "fires a laser"
 			time_last_used_ability = special_attack_cooldown + world.time
 			visible_message(SPAN_MFAUNA("\The [src]'s rig-mounted laser cannon shines brightly!"))
-		if(ATTACK_MODE_SAW)
+		if (ATTACK_MODE_SAW)
 			attack_mode = ATTACK_MODE_SAW
 			ranged = TRUE
 			projectiletype = /obj/item/projectile/bullet/rifle
@@ -271,8 +271,8 @@
 	update_icon()
 
 /mob/living/simple_animal/hostile/human/fleet/space/ranged/heavy/shoot_target(target_mob)
-	if(num_shots <= 0)
-		if(attack_mode == ATTACK_MODE_LAS)
+	if (num_shots <= 0)
+		if (attack_mode == ATTACK_MODE_LAS)
 			switch_mode(ATTACK_MODE_SAW)
 		else
 			switch_mode(ATTACK_MODE_LAS)
@@ -285,14 +285,14 @@
 
 /mob/living/simple_animal/hostile/human/fleet/space/ranged/heavy/on_update_icon()
 	..()
-	if(stat != DEAD)
-		if(deactivated)
+	if (stat != DEAD)
+		if (deactivated)
 			overlays += image(icon, "disabled")
 			return
 
 		overlays.Cut()
 		switch(attack_mode)
-			if(ATTACK_MODE_LAS)
+			if (ATTACK_MODE_LAS)
 				overlays += image(icon, "laser")
 
 /mob/living/simple_animal/hostile/human/fleet/space/ranged/heavy/neutral

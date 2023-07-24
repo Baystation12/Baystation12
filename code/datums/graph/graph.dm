@@ -8,13 +8,13 @@
 	var/processing
 
 /datum/graph/New(list/nodes, list/edges, previous_owner = null)
-	if(!length(nodes))
+	if (!length(nodes))
 		CRASH("Invalid list of nodes: [log_info_line(nodes)]")
-	if(length(nodes) > 1 && !istype(edges))
+	if (length(nodes) > 1 && !istype(edges))
 		CRASH("Invalid list of edges: [log_info_line(edges)]")
 	for(var/n in nodes)
 		var/datum/node/node = n
-		if(node.graph && node.graph != previous_owner)
+		if (node.graph && node.graph != previous_owner)
 			CRASH("Attempted to add a node already belonging to a network")
 
 	// TODO: Check that all edges refer to nodes in the graph and that the graph is coherent
@@ -28,47 +28,47 @@
 		node.graph = src
 
 /datum/graph/Destroy()
-	if(length(nodes) || LAZYLEN(pending_connections) || LAZYLEN(pending_disconnections))
+	if (length(nodes) || LAZYLEN(pending_connections) || LAZYLEN(pending_disconnections))
 		crash_with("Prevented attempt to delete a network that still has nodes: [length(nodes)] - [LAZYLEN(pending_connections)] - [LAZYLEN(pending_disconnections)]")
 		return QDEL_HINT_LETMELIVE
 	. = ..()
 
 /datum/graph/proc/Connect(datum/node/node, list/neighbours, queue = TRUE)
-	if(!istype(neighbours))
+	if (!istype(neighbours))
 		neighbours = list(neighbours)
-	if(!length(neighbours))
+	if (!length(neighbours))
 		CRASH("Attempted to connect a node without declaring neighbours")
-	if(length(nodes & neighbours) != length(neighbours))
+	if (length(nodes & neighbours) != length(neighbours))
 		CRASH("Attempted to connect a node to neighbours not in the graph")
-	if(LAZYISIN(pending_connections, node))
+	if (LAZYISIN(pending_connections, node))
 		CRASH("Attempted to connect a node already pending to be connected")
-	if(LAZYISIN(pending_disconnections, node))
+	if (LAZYISIN(pending_disconnections, node))
 		CRASH("Attempted to connect a node already pending to be disconnected")
 
 	LAZYSET(pending_connections, node, neighbours)
-	if(queue)
+	if (queue)
 		SSgraphs.Queue(src)
 	return TRUE
 
 /datum/graph/proc/Disconnect(datum/node/node, list/neighbours_to_disconnect, queue = TRUE)
-	if(neighbours_to_disconnect && !istype(neighbours_to_disconnect))
+	if (neighbours_to_disconnect && !istype(neighbours_to_disconnect))
 		neighbours_to_disconnect = list(neighbours_to_disconnect)
-	if(length(neighbours_to_disconnect) && length(nodes & neighbours_to_disconnect) != length(neighbours_to_disconnect))
+	if (length(neighbours_to_disconnect) && length(nodes & neighbours_to_disconnect) != length(neighbours_to_disconnect))
 		CRASH("Attempted keep a node connected to neighbours not in the graph: [json_encode(nodes)], [json_encode(neighbours_to_disconnect)]")
-	if(LAZYISIN(pending_connections, node))
+	if (LAZYISIN(pending_connections, node))
 		CRASH("Attempted to disconnect a node already pending to be connected")
-	if(LAZYISIN(pending_disconnections, node))
+	if (LAZYISIN(pending_disconnections, node))
 		CRASH("Attempted to disconnect a node already pending to be disconnected")
-	if(!(node in nodes))
+	if (!(node in nodes))
 		CRASH("Attempted disconnect a node that is not in the graph")
 
 	LAZYSET(pending_disconnections, node, neighbours_to_disconnect)
-	if(queue)
+	if (queue)
 		SSgraphs.Queue(src)
 	return TRUE
 
 /datum/graph/proc/Merge(datum/graph/other)
-	if(!other)
+	if (!other)
 		return
 
 	OnMerge(other)
@@ -99,9 +99,9 @@
 /datum/graph/proc/Split(list/subgraphs)
 	var/list/new_subgraphs = list()
 	for(var/subgraph in subgraphs)
-		if(length(subgraph) == 1)
+		if (length(subgraph) == 1)
 			var/datum/node/N = subgraph[1] // Doing QDELETED(subgraph[1]) will result in multiple list index calls
-			if(QDELETED(N))
+			if (QDELETED(N))
 				continue
 		new_subgraphs += new type(subgraph, edges & subgraph, src)
 
@@ -122,34 +122,34 @@
 		var/list/new_neighbours = pending_connections[N]
 		LIST_DEC(pending_connections)
 
-		if(N.graph != src)
+		if (N.graph != src)
 			Merge(N.graph)
 		nodes |= N
 
-		if(N in edges)
+		if (N in edges)
 			edges[N] |= new_neighbours
 		else
 			edges[N] = new_neighbours
 
 		for(var/new_neighbour in new_neighbours)
 			var/neighbour_edges = edges[new_neighbour]
-			if(!neighbour_edges)
+			if (!neighbour_edges)
 				neighbour_edges = list()
 				edges[new_neighbour] = neighbour_edges
 			neighbour_edges |= N
 
-	if(!LAZYLEN(pending_disconnections))
+	if (!LAZYLEN(pending_disconnections))
 		return
 
 	for(var/pending_node_disconnect in pending_disconnections)
 		var/pending_edge_disconnects = pending_disconnections[pending_node_disconnect] || edges[pending_node_disconnect]
 		for(var/connected_node in pending_edge_disconnects)
 			edges[connected_node] -= pending_node_disconnect
-			if(!length(edges[connected_node]))
+			if (!length(edges[connected_node]))
 				edges -= connected_node
 
 		edges[pending_node_disconnect] -= pending_edge_disconnects
-		if(!length(edges[pending_node_disconnect]))
+		if (!length(edges[pending_node_disconnect]))
 			edges -= pending_node_disconnect
 	LAZYCLEARLIST(pending_disconnections)
 
@@ -168,7 +168,7 @@
 		all_nodes -= checked_nodes
 		subgraphs[LIST_PRE_INC(subgraphs)] = checked_nodes
 
-	if(length(subgraphs) == 1)
+	if (length(subgraphs) == 1)
 		return
 	Split(subgraphs)
 

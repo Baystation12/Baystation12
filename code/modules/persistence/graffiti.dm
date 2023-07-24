@@ -15,17 +15,17 @@
 
 /obj/effect/decal/writing/New(newloc, _age, _message, _author)
 	..(newloc)
-	if(!isnull(_age))
+	if (!isnull(_age))
 		graffiti_age = _age
 	message = _message
-	if(!isnull(author))
+	if (!isnull(author))
 		author = _author
 
 /obj/effect/decal/writing/Initialize()
 	var/list/random_icon_states = icon_states(icon)
 	for(var/obj/effect/decal/writing/W in loc)
 		random_icon_states.Remove(W.icon_state)
-	if(length(random_icon_states))
+	if (length(random_icon_states))
 		icon_state = pick(random_icon_states)
 	SSpersistence.track_value(src, /datum/persistent/graffiti)
 	. = ..()

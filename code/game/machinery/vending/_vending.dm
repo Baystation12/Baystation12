@@ -135,7 +135,7 @@
 			icon_state = "[initial(icon_state)]-off"
 	if (panel_open)
 		overlays += image(icon, "[initial(icon_state)]-panel")
-	if(!vend_ready)
+	if (!vend_ready)
 		overlays += image(icon, "[initial(icon_state)]-shelf[rand(max_overlays)]")
 
 
@@ -312,7 +312,7 @@
 
 
 /obj/machinery/vending/get_req_access()
-	if(!scan_id)
+	if (!scan_id)
 		return list()
 	return ..()
 
@@ -408,11 +408,11 @@
 	SSnano.update_uis(src)
 	update_icon()
 	if (product.category & VENDOR_CATEGORY_COIN)
-		if(!coin)
+		if (!coin)
 			to_chat(user, SPAN_NOTICE("You need to insert a coin to get this item."))
 			return
-		if(!isnull(coin.string_color))
-			if(prob(50))
+		if (!isnull(coin.string_color))
+			if (prob(50))
 				to_chat(user, SPAN_NOTICE("You successfully pull the coin out before \the [src] could swallow it."))
 			else
 				to_chat(user, SPAN_NOTICE("You weren't able to pull the coin out fast enough, the machine ate it, string and all."))

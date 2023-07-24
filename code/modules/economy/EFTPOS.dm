@@ -49,7 +49,7 @@
 		//stamp the paper
 		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
 		stampoverlay.icon_state = "paper_stamp-boss"
-		if(!R.stamped)
+		if (!R.stamped)
 			R.stamped = new
 		R.offset_x += 0
 		R.offset_y += 0
@@ -72,7 +72,7 @@
 	//stamp the paper
 	var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
 	stampoverlay.icon_state = "paper_stamp-boss"
-	if(!R.stamped)
+	if (!R.stamped)
 		R.stamped = new
 	R.stamped += /obj/item/stamp
 	R.overlays += stampoverlay
@@ -83,16 +83,16 @@
 	D.SetName("small parcel - 'EFTPOS access code'")
 
 /obj/item/device/eftpos/attack_self(mob/user as mob)
-	if(get_dist(src,user) <= 1)
+	if (get_dist(src,user) <= 1)
 		var/dat = "<b>[eftpos_name]</b><br>"
 		dat += "<i>This terminal is</i> [machine_id]. <i>Report this code when contacting IT Support</i><br>"
-		if(transaction_locked)
+		if (transaction_locked)
 			dat += "<a href='?src=\ref[src];choice=toggle_lock'>Back[transaction_paid ? "" : " (authentication required)"]</a><br><br>"
 
 			dat += "Transaction purpose: <b>[transaction_purpose]</b><br>"
 			dat += "Value: <b>[GLOB.using_map.local_currency_name_short][transaction_amount]</b><br>"
 			dat += "Linked account: <b>[linked_account ? linked_account.owner_name : "None"]</b><hr>"
-			if(transaction_paid)
+			if (transaction_paid)
 				dat += "<i>This transaction has been processed successfully.</i><hr>"
 			else
 				dat += "<i>Swipe your card below the line to finish this transaction.</i><hr>"
@@ -172,72 +172,72 @@
 
 
 /obj/item/device/eftpos/Topic(href, href_list)
-	if(href_list["choice"])
+	if (href_list["choice"])
 		switch(href_list["choice"])
-			if("change_code")
+			if ("change_code")
 				var/attempt_code = input("Re-enter the current EFTPOS access code", "Confirm old EFTPOS code") as num
-				if(attempt_code == access_code)
+				if (attempt_code == access_code)
 					var/trycode = input("Enter a new access code for this device (4-6 digits, numbers only)", "Enter new EFTPOS code") as num
-					if(trycode >= 1000 && trycode <= 999999)
+					if (trycode >= 1000 && trycode <= 999999)
 						access_code = trycode
 					else
 						alert("That is not a valid code!")
 					print_reference()
 				else
 					to_chat(usr, "[icon2html(src, usr)][SPAN_WARNING("Incorrect code entered.")]")
-			if("change_id")
+			if ("change_id")
 				var/attempt_code = text2num(input("Re-enter the current EFTPOS access code", "Confirm EFTPOS code"))
-				if(attempt_code == access_code)
+				if (attempt_code == access_code)
 					eftpos_name = sanitize(input("Enter a new terminal ID for this device", "Enter new EFTPOS ID"), MAX_NAME_LEN) + " EFTPOS scanner"
 					print_reference()
 				else
 					to_chat(usr, "[icon2html(src, usr)][SPAN_WARNING("Incorrect code entered.")]")
-			if("link_account")
+			if ("link_account")
 				var/attempt_account_num = input("Enter account number to pay EFTPOS charges into", "New account number") as num
 				var/attempt_pin = input("Enter pin code", "Account pin") as num
 				linked_account = attempt_account_access(attempt_account_num, attempt_pin, 1)
-				if(linked_account)
-					if(linked_account.suspended)
+				if (linked_account)
+					if (linked_account.suspended)
 						linked_account = null
 						to_chat(usr, "[icon2html(src, usr)][SPAN_WARNING("Account has been suspended.")]")
 				else
 					to_chat(usr, "[icon2html(src, usr)][SPAN_WARNING("Account not found.")]")
-			if("trans_purpose")
+			if ("trans_purpose")
 				var/choice = sanitize(input("Enter reason for EFTPOS transaction", "Transaction purpose"))
-				if(choice) transaction_purpose = choice
-			if("trans_value")
+				if (choice) transaction_purpose = choice
+			if ("trans_value")
 				var/try_num = input("Enter amount for EFTPOS transaction", "Transaction amount") as num
-				if(try_num < 0)
+				if (try_num < 0)
 					alert("That is not a valid amount!")
 				else
 					transaction_amount = try_num
-			if("toggle_lock")
-				if(transaction_locked)
+			if ("toggle_lock")
+				if (transaction_locked)
 					if (transaction_paid)
 						transaction_locked = 0
 						transaction_paid = 0
 					else
 						var/attempt_code = input("Enter EFTPOS access code", "Reset Transaction") as num
-						if(attempt_code == access_code)
+						if (attempt_code == access_code)
 							transaction_locked = 0
 							transaction_paid = 0
-				else if(linked_account)
+				else if (linked_account)
 					transaction_locked = 1
 				else
 					to_chat(usr, "[icon2html(src, usr)][SPAN_WARNING("No account connected to send transactions to.")]")
-			if("scan_card")
-				if(linked_account)
+			if ("scan_card")
+				if (linked_account)
 					var/obj/item/I = usr.get_active_hand()
 					if (istype(I, /obj/item/card))
 						scan_card(I)
 				else
 					to_chat(usr, "[icon2html(src, usr)][SPAN_WARNING("Unable to link accounts.")]")
-			if("reset")
+			if ("reset")
 				//reset the access code - requires HoP/captain access
 				var/obj/item/I = usr.get_active_hand()
 				if (istype(I, /obj/item/card))
 					var/obj/item/card/id/C = I
-					if((access_cent_captain in C.access) || (access_hop in C.access) || (access_captain in C.access))
+					if ((access_cent_captain in C.access) || (access_hop in C.access) || (access_captain in C.access))
 						access_code = 0
 						to_chat(usr, "[icon2html(src, usr)][SPAN_INFO("Access code reset to 0.")]")
 				else if (istype(I, /obj/item/card/emag))
@@ -249,22 +249,22 @@
 /obj/item/device/eftpos/proc/scan_card(obj/item/card/I, obj/item/ID_container)
 	if (istype(I, /obj/item/card/id))
 		var/obj/item/card/id/C = I
-		if(I==ID_container || ID_container == null)
+		if (I==ID_container || ID_container == null)
 			usr.visible_message(SPAN_INFO("\The [usr] swipes a card through \the [src]."))
 		else
 			usr.visible_message(SPAN_INFO("\The [usr] swipes \the [ID_container] through \the [src]."))
-		if(transaction_locked && !transaction_paid)
-			if(linked_account)
-				if(!linked_account.suspended)
+		if (transaction_locked && !transaction_paid)
+			if (linked_account)
+				if (!linked_account.suspended)
 					var/attempt_pin = ""
 					var/datum/money_account/D = get_account(C.associated_account_number)
-					if(D && D.security_level)
+					if (D && D.security_level)
 						attempt_pin = input("Enter pin code", "EFTPOS transaction") as num
 						D = null
 					D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
-					if(D)
+					if (D)
 						//transfer the money
-						if(D.transfer(linked_account, transaction_amount, "[transaction_purpose] (via [eftpos_name]/[machine_id])"))
+						if (D.transfer(linked_account, transaction_amount, "[transaction_purpose] (via [eftpos_name]/[machine_id])"))
 							playsound(src, 'sound/machines/chime.ogg', 50, 1)
 							src.visible_message("[icon2html(src, viewers(get_turf(src)))] \The [src] chimes.")
 							transaction_paid = 1
@@ -277,8 +277,8 @@
 			else
 				to_chat(usr, "[icon2html(src, usr)][SPAN_WARNING("EFTPOS is not connected to an account.")]")
 	else if (istype(I, /obj/item/card/emag))
-		if(transaction_locked)
-			if(transaction_paid)
+		if (transaction_locked)
+			if (transaction_paid)
 				to_chat(usr, "[icon2html(src, usr)][SPAN_INFO("You stealthily swipe \the [I] through \the [src].")]")
 				transaction_locked = 0
 				transaction_paid = 0

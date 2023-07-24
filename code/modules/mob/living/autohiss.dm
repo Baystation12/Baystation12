@@ -5,7 +5,7 @@
 	return message // no autohiss at this level
 
 /mob/living/carbon/human/handle_autohiss(message, datum/language/L)
-	if(!client || get_preference_value(/datum/client_preference/autohiss) == GLOB.PREF_OFF) // no need to process if there's no client or they have autohiss off
+	if (!client || get_preference_value(/datum/client_preference/autohiss) == GLOB.PREF_OFF) // no need to process if there's no client or they have autohiss off
 		return message
 	return species.handle_autohiss(message, L, get_preference_value(/datum/client_preference/autohiss))
 
@@ -27,15 +27,15 @@
 	)
 
 /datum/species/proc/handle_autohiss(message, datum/language/lang, mode)
-	if(!autohiss_basic_map)
+	if (!autohiss_basic_map)
 		return message
-	if(lang.flags & NO_STUTTER)	// Currently prevents EAL, Sign language, and emotes from autohissing
+	if (lang.flags & NO_STUTTER)	// Currently prevents EAL, Sign language, and emotes from autohissing
 		return message
-	if(autohiss_exempt && (lang.name in autohiss_exempt))
+	if (autohiss_exempt && (lang.name in autohiss_exempt))
 		return message
 
 	var/map = autohiss_basic_map.Copy()
-	if(mode == GLOB.PREF_FULL && autohiss_extra_map)
+	if (mode == GLOB.PREF_FULL && autohiss_extra_map)
 		map |= autohiss_extra_map
 
 	. = list()
@@ -45,18 +45,18 @@
 		var/min_char = null
 		for(var/char in map)
 			var/i = findtext_char(message, char)
-			if(!i) // no more of this character anywhere in the string, don't even bother searching next time
+			if (!i) // no more of this character anywhere in the string, don't even bother searching next time
 				map -= char
-			else if(i < min_index)
+			else if (i < min_index)
 				min_index = i
 				min_char = char
-		if(!min_char) // we didn't find any of the mapping characters
+		if (!min_char) // we didn't find any of the mapping characters
 			. += message
 			break
 		. += copytext_char(message, 1, min_index)
-		if(copytext_char(message, min_index, min_index+1) == uppertext(min_char))
+		if (copytext_char(message, min_index, min_index+1) == uppertext(min_char))
 			switch(text2ascii(message, min_index+1))
-				if(65 to 90) // A-Z, uppercase; uppercase R/S followed by another uppercase letter, uppercase the entire replacement string
+				if (65 to 90) // A-Z, uppercase; uppercase R/S followed by another uppercase letter, uppercase the entire replacement string
 					. += uppertext(pick(map[min_char]))
 				else
 					. += capitalize(pick(map[min_char]))

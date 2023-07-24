@@ -35,7 +35,7 @@
 	playsound(src, 'sound/magic/lightningshock.ogg', 50)
 
 /spell/targeted/projectile/dumbfire/passage/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 
 	amt_stunned += 3

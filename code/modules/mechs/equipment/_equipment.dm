@@ -21,14 +21,14 @@
 	return 0
 
 /obj/item/mech_equipment/afterattack(atom/target, mob/living/user, inrange, params)
-	if(require_adjacent)
-		if(!inrange)
+	if (require_adjacent)
+		if (!inrange)
 			return 0
 	if (owner && loc == owner && ((user in owner.pilots) || user == owner))
-		if(target in owner.contents)
+		if (target in owner.contents)
 			return 0
 
-		if(!(owner.get_cell()?.check_charge(active_power_use * CELLRATE)))
+		if (!(owner.get_cell()?.check_charge(active_power_use * CELLRATE)))
 			to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to use \the [src]"))
 			return 0
 		return 1
@@ -37,7 +37,7 @@
 
 /obj/item/mech_equipment/attack_self(mob/user)
 	if (owner && loc == owner && ((user in owner.pilots) || user == owner))
-		if(!(owner.get_cell()?.check_charge(active_power_use * CELLRATE)))
+		if (!(owner.get_cell()?.check_charge(active_power_use * CELLRATE)))
 			to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to use \the [src]"))
 			return 0
 		return 1
@@ -46,10 +46,10 @@
 
 /obj/item/mech_equipment/examine(mob/user, distance)
 	. = ..()
-	if(user.skill_check(SKILL_DEVICES, SKILL_BASIC))
-		if(length(restricted_software))
+	if (user.skill_check(SKILL_DEVICES, SKILL_BASIC))
+		if (length(restricted_software))
 			to_chat(user, SPAN_SUBTLE("It seems it would require [english_list(restricted_software)] to be used."))
-		if(length(restricted_hardpoints))
+		if (length(restricted_hardpoints))
 			to_chat(user, SPAN_SUBTLE("You figure it could be mounted in the [english_list(restricted_hardpoints)]."))
 
 /obj/item/mech_equipment/proc/deactivate()
@@ -62,7 +62,7 @@
 	canremove = FALSE
 
 /obj/item/mech_equipment/proc/uninstalled()
-	if(active)
+	if (active)
 		deactivate()
 	owner = null
 	canremove = TRUE
@@ -79,16 +79,16 @@
 
 /obj/item/mech_equipment/proc/MouseDragInteraction(src_object, over_object, src_location, over_location, src_control, over_control, params, mob/user)
 	//Get intent updated
-	if(user != owner)
+	if (user != owner)
 		owner.a_intent = user.a_intent
-	if(user.zone_sel)
+	if (user.zone_sel)
 		owner.zone_sel.set_selected_zone(user.zone_sel.selecting)
 	else
 		owner.zone_sel.set_selected_zone(BP_CHEST)
 
 /obj/item/mech_equipment/mob_can_unequip(mob/M, slot, disable_warning)
 	. = ..()
-	if(. && owner)
+	if (. && owner)
 		//Installed equipment shall not be unequiped.
 		return FALSE
 
@@ -98,22 +98,22 @@
 
 /obj/item/mech_equipment/mounted_system/attack_self(mob/user)
 	. = ..()
-	if(. && holding)
+	if (. && holding)
 		return holding.attack_self(user)
 
 /obj/item/mech_equipment/mounted_system/proc/forget_holding()
-	if(holding) //It'd be strange for this to be called with this var unset
+	if (holding) //It'd be strange for this to be called with this var unset
 		GLOB.destroyed_event.unregister(holding, src, .proc/forget_holding)
 		holding = null
 		qdel(src)
 
 /obj/item/mech_equipment/mounted_system/Initialize()
 	. = ..()
-	if(holding_type)
+	if (holding_type)
 		holding = new holding_type(src)
 		GLOB.destroyed_event.register(holding, src, .proc/forget_holding)
-	if(holding)
-		if(!icon_state)
+	if (holding)
+		if (!icon_state)
 			icon = holding.icon
 			icon_state = holding.icon_state
 		SetName(holding.name)
@@ -122,7 +122,7 @@
 
 /obj/item/mech_equipment/mounted_system/Destroy()
 	GLOB.destroyed_event.unregister(holding, src, .proc/forget_holding)
-	if(holding)
+	if (holding)
 		QDEL_NULL(holding)
 	. = ..()
 
@@ -143,6 +143,6 @@
 	return null
 
 /obj/item/mech_equipment/mounted_system/get_cell()
-	if(owner && loc == owner)
+	if (owner && loc == owner)
 		return owner.get_cell()
 	return null

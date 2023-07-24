@@ -15,13 +15,13 @@
 	..()
 
 /datum/persistent/proc/SetFilename()
-	if(name)
+	if (name)
 		filename = "data/persistent/[lowertext(GLOB.using_map.name)]-[lowertext(name)].json"
-	if(!isnull(entries_decay_at) && !isnull(entries_expire_at))
+	if (!isnull(entries_decay_at) && !isnull(entries_expire_at))
 		entries_decay_at = floor(entries_expire_at * entries_decay_at)
 
 /datum/persistent/proc/GetValidTurf(turf/T, list/tokens)
-	if(T && CheckTurfContents(T, tokens))
+	if (T && CheckTurfContents(T, tokens))
 		return T
 
 /datum/persistent/proc/CheckTurfContents(turf/T, list/tokens)
@@ -42,40 +42,40 @@
 /datum/persistent/proc/ProcessAndApplyTokens(list/tokens)
 
 	// If it's old enough we start to trim down any textual information and scramble strings.
-	if(tokens["message"] && !isnull(entries_decay_at) && !isnull(entry_decay_weight))
+	if (tokens["message"] && !isnull(entries_decay_at) && !isnull(entry_decay_weight))
 		var/_n =       tokens["age"]
 		var/_message = tokens["message"]
-		if(_n >= entries_decay_at)
+		if (_n >= entries_decay_at)
 			var/decayed_message = ""
 			for(var/i = 1 to length(_message))
 				var/char = copytext(_message, i, i + 1)
-				if(prob(round(_n * entry_decay_weight)))
-					if(prob(99))
+				if (prob(round(_n * entry_decay_weight)))
+					if (prob(99))
 						decayed_message += pick(".",",","-","'","\\","/","\"",":",";")
 				else
 					decayed_message += char
 			_message = decayed_message
-		if(length(_message))
+		if (length(_message))
 			tokens["message"] = _message
 		else
 			return
 
 	var/_z = tokens["z"]
-	if(_z in GLOB.using_map.station_levels)
+	if (_z in GLOB.using_map.station_levels)
 		. = GetValidTurf(locate(tokens["x"], tokens["y"], _z), tokens)
-		if(.)
+		if (.)
 			CreateEntryInstance(., tokens)
 
 /datum/persistent/proc/IsValidEntry(atom/entry)
-	if(!istype(entry))
+	if (!istype(entry))
 		return FALSE
-	if(GetEntryAge(entry) >= entries_expire_at)
+	if (GetEntryAge(entry) >= entries_expire_at)
 		return FALSE
 	var/turf/T = get_turf(entry)
-	if(!T || !(T.z in GLOB.using_map.station_levels) )
+	if (!T || !(T.z in GLOB.using_map.station_levels) )
 		return FALSE
 	var/area/A = get_area(T)
-	if(!A || (A.area_flags & AREA_FLAG_IS_NOT_PERSISTENT))
+	if (!A || (A.area_flags & AREA_FLAG_IS_NOT_PERSISTENT))
 		return FALSE
 	return TRUE
 
@@ -94,19 +94,19 @@
 	. = tokens
 
 /datum/persistent/proc/Initialize()
-	if(fexists(filename))
+	if (fexists(filename))
 		var/list/token_sets = json_decode(file2text(filename))
 		for(var/tokens in token_sets)
 			tokens = FinalizeTokens(tokens)
-			if(CheckTokenSanity(tokens))
+			if (CheckTokenSanity(tokens))
 				ProcessAndApplyTokens(tokens)
 
 /datum/persistent/proc/Shutdown()
 	var/list/entries = list()
 	for(var/thing in SSpersistence.tracking_values[type])
-		if(IsValidEntry(thing))
+		if (IsValidEntry(thing))
 			entries += list(CompileEntry(thing))
-	if(fexists(filename))
+	if (fexists(filename))
 		fdel(filename)
 	to_file(file(filename), json_encode(entries))
 
@@ -121,20 +121,20 @@
 	. += "<tr><td colspan = 4><hr></td></tr>"
 
 /datum/persistent/proc/GetAdminDataStringFor(thing, can_modify, mob/user)
-	if(can_modify)
+	if (can_modify)
 		. = "<td colspan = 3>[thing]</td><td><a href='byond://?src=\ref[src];caller=\ref[user];remove_entry=\ref[thing]'>Destroy</a></td>"
 	else
 		. = "<td colspan = 4>[thing]</td>"
 
 /datum/persistent/Topic(href, href_list)
 	. = ..()
-	if(!.)
-		if(href_list["remove_entry"])
+	if (!.)
+		if (href_list["remove_entry"])
 			var/datum/value = locate(href_list["remove_entry"])
-			if(istype(value))
+			if (istype(value))
 				RemoveValue(value)
 				. = TRUE
-		if(.)
+		if (.)
 			var/mob/user = locate(href_list["caller"])
-			if(user)
+			if (user)
 				SSpersistence.show_info(user)

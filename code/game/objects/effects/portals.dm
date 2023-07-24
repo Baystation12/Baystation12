@@ -31,15 +31,15 @@
 
 /obj/effect/portal/New(start, end, delete_after = 300, failure_rate)
 	..()
-	if(failure_rate)
+	if (failure_rate)
 		failchance = failure_rate
-		if(prob(failchance))
+		if (prob(failchance))
 			icon_state = "portal1"
 			dangerous = 1
 	playsound(src, 'sound/effects/phasein.ogg', 25, 1)
 	target = end
 
-	if(delete_after)
+	if (delete_after)
 		spawn(delete_after)
 			qdel(src)
 
@@ -48,7 +48,7 @@
 	. = ..()
 
 /obj/effect/portal/proc/teleport(atom/movable/M as mob|obj)
-	if(istype(M, /obj/effect)) //sparks don't teleport
+	if (istype(M, /obj/effect)) //sparks don't teleport
 		return
 	if (icon_state == "portal1")
 		return
@@ -56,7 +56,7 @@
 		qdel(src)
 		return
 	if (istype(M, /atom/movable))
-		if(dangerous && prob(failchance)) //oh dear a problem, put em in deep space
+		if (dangerous && prob(failchance)) //oh dear a problem, put em in deep space
 			var/destination_z = GLOB.using_map.get_transit_zlevel(z)
 			do_teleport(M, locate(rand(TRANSITIONEDGE, world.maxx - TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy -TRANSITIONEDGE), destination_z), 0)
 		else

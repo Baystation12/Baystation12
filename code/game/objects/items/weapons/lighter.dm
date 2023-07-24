@@ -18,12 +18,12 @@
 	create_reagents(max_fuel)
 	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
-	if(random_colour)
+	if (random_colour)
 		color = pick(available_colors)
 	update_icon()
 
 /obj/item/flame/lighter/proc/light(mob/user)
-	if(submerged())
+	if (submerged())
 		to_chat(user, SPAN_WARNING("You cannot light \the [src] underwater."))
 		return
 	lit = 1
@@ -33,7 +33,7 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/item/flame/lighter/proc/light_effects(mob/living/carbon/user)
-	if(prob(95))
+	if (prob(95))
 		user.visible_message(SPAN_NOTICE("After a few attempts, [user] manages to light \the [src]."))
 	else
 		to_chat(user, SPAN_WARNING("You burn yourself while lighting the lighter."))
@@ -47,9 +47,9 @@
 /obj/item/flame/lighter/extinguish(mob/user, no_message)
 	..()
 	update_icon()
-	if(user)
+	if (user)
 		shutoff_effects(user)
-	else if(!no_message)
+	else if (!no_message)
 		visible_message(SPAN_NOTICE("[src] goes out."))
 	set_light(0)
 
@@ -57,8 +57,8 @@
 	user.visible_message(SPAN_NOTICE("[user] quietly shuts off the [src]."))
 
 /obj/item/flame/lighter/attack_self(mob/living/user)
-	if(!lit)
-		if(reagents.has_reagent(/datum/reagent/fuel))
+	if (!lit)
+		if (reagents.has_reagent(/datum/reagent/fuel))
 			light(user)
 		else
 			to_chat(user, SPAN_WARNING("\The [src] won't ignite - it must be out of fuel."))
@@ -69,21 +69,21 @@
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 
 	overlays.Cut()
-	if(lit)
+	if (lit)
 		overlays += overlay_image(icon, "[bis.base_icon_state]_flame", flags=RESET_COLOR)
 	else
 		overlays += overlay_image(icon, "[bis.base_icon_state]_striker", flags=RESET_COLOR)
 
 /obj/item/flame/lighter/attack(mob/living/M, mob/living/carbon/user)
-	if(!istype(M, /mob))
+	if (!istype(M, /mob))
 		return
 
-	if(lit)
+	if (lit)
 		M.IgniteMob()
 
-		if(istype(M.wear_mask, /obj/item/clothing/mask/smokable/cigarette) && user.zone_sel.selecting == BP_MOUTH)
+		if (istype(M.wear_mask, /obj/item/clothing/mask/smokable/cigarette) && user.zone_sel.selecting == BP_MOUTH)
 			var/obj/item/clothing/mask/smokable/cigarette/cig = M.wear_mask
-			if(M == user)
+			if (M == user)
 				cig.attackby(src, user)
 			else
 				cig.light(SPAN_NOTICE("[user] holds the [name] out for [M], and lights the [cig.name]."))
@@ -91,8 +91,8 @@
 	..()
 
 /obj/item/flame/lighter/Process()
-	if(!submerged() && reagents.has_reagent(/datum/reagent/fuel))
-		if(ismob(loc) && prob(10) && reagents.get_reagent_amount(/datum/reagent/fuel) < 1)
+	if (!submerged() && reagents.has_reagent(/datum/reagent/fuel))
+		if (ismob(loc) && prob(10) && reagents.get_reagent_amount(/datum/reagent/fuel) < 1)
 			to_chat(loc, SPAN_WARNING("\The [src]'s flame flickers."))
 			set_light(0)
 			addtimer(new Callback(src, .atom/proc/set_light, 0.6, 0.5, 2), 4)
@@ -102,7 +102,7 @@
 		return
 
 	var/turf/location = get_turf(src)
-	if(location)
+	if (location)
 		location.hotspot_expose(700, 5)
 
 
@@ -148,7 +148,7 @@
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 
 	overlays.Cut()
-	if(lit)
+	if (lit)
 		icon_state = "[bis.base_icon_state]_open"
 		item_state = "[bis.base_icon_state]_open"
 		overlays += overlay_image(icon, "[bis.base_icon_state]_flame", flags=RESET_COLOR)
@@ -165,7 +165,7 @@
 	playsound(src.loc, 'sound/items/zippo_close.ogg', 100, 1, -4)
 
 /obj/item/flame/lighter/zippo/afterattack(obj/O, mob/user, proximity)
-	if(!proximity) return
+	if (!proximity) return
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && !lit)
 		O.reagents.trans_to_obj(src, max_fuel)
 		to_chat(user, SPAN_NOTICE("You refuel [src] from \the [O]"))
@@ -203,7 +203,7 @@
 /obj/item/flame/lighter/zippo/custom/on_update_icon()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 
-	if(lit)
+	if (lit)
 		icon_state = "[bis.base_icon_state]_on"
 		item_state = "[bis.base_icon_state]_on"
 	else

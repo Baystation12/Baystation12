@@ -55,7 +55,7 @@
 //TODO: Need a version that only affects one color (ie shift red to blue but leave greens and blues alone)
 /proc/color_rotation(angle)
 	RETURN_TYPE(/list)
-	if(angle == 0)
+	if (angle == 0)
 		return color_identity()
 	angle = clamp(angle, -180, 180)
 	var/cos = cos(angle)
@@ -95,7 +95,7 @@ var/global/list/delta_index = list(
 /proc/color_contrast(value)
 	RETURN_TYPE(/list)
 	value = round(clamp(value, -100, 100))
-	if(value == 0)
+	if (value == 0)
 		return color_identity()
 
 	var/x = 0
@@ -103,7 +103,7 @@ var/global/list/delta_index = list(
 		x = 127 + value / 100 * 127;
 	else
 		x = value % 1
-		if(x == 0)
+		if (x == 0)
 			x = delta_index[value]
 		else
 			x = delta_index[value] * (1-x) + delta_index[value+1] * x//use linear interpolation for more granularity.
@@ -116,10 +116,10 @@ var/global/list/delta_index = list(
 //Exxagerates or removes colors
 /proc/color_saturation(value as num)
 	RETURN_TYPE(/list)
-	if(value == 0)
+	if (value == 0)
 		return color_identity()
 	value = clamp(value, -100, 100)
-	if(value > 0)
+	if (value > 0)
 		value *= 3
 	var/x = 1 + value / 100
 	var/inv = 1 - x
@@ -140,7 +140,7 @@ var/global/list/delta_index = list(
 	RETURN_TYPE(/list)
 	var/list/result = new (m * p)
 
-	if(length(A) == m*n && length(B) == n*p)
+	if (length(A) == m*n && length(B) == n*p)
 		for(var/row = 1; row <= m; row += 1) //For each row on left matrix
 			for(var/col = 1; col <= p; col += 1) //go over each column of the second matrix
 				var/sum = 0

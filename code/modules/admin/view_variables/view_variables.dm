@@ -8,20 +8,20 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 	set category = "Debug"
 	set name = "View Variables"
 
-	if(!istype(D, /datum))
+	if (!istype(D, /datum))
 		to_chat(usr, SPAN_WARNING("Not a viewable datum."))
 		return
 
-	if(!check_rights())
+	if (!check_rights())
 		return
 
 	var/static/cookieoffset = rand(1, 9999) //to force cookies to reset after the round.
 
 	var/icon/sprite
 	var/atom/A
-	if(istype(D, /atom))
+	if (istype(D, /atom))
 		A = D
-		if(A.icon && A.icon_state)
+		if (A.icon && A.icon_state)
 			sprite = icon(A.icon, A.icon_state)
 			send_rsc(usr, sprite, "view_vars_sprite.png")
 
@@ -124,7 +124,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 /datum/browser/watched_variables/set_content()
 	var/list/dat = list()
 
-	if(!user || !user.client)
+	if (!user || !user.client)
 		return
 
 	dat += "<style>div.var { padding: 5px; } div.var:nth-child(even) { background-color: #555; }</style>"
@@ -161,31 +161,31 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 /proc/make_view_variables_value(value, varname = "*")
 	var/vtext = ""
 	var/extra = list()
-	if(isnull(value))
+	if (isnull(value))
 		vtext = "null"
-	else if(istext(value))
+	else if (istext(value))
 		vtext = "\"[value]\""
-	else if(isicon(value))
+	else if (isicon(value))
 		vtext = "[value]"
-	else if(isfile(value))
+	else if (isfile(value))
 		vtext = "'[value]'"
-	else if(istype(value, /datum))
+	else if (istype(value, /datum))
 		var/datum/DA = value
-		if("[DA]" == "[DA.type]" || !"[DA]")
+		if ("[DA]" == "[DA.type]" || !"[DA]")
 			vtext = "<a href='?_src_=vars;Vars=\ref[DA]'>\ref[DA]</a> - [DA.type]"
 		else
 			vtext = "<a href='?_src_=vars;Vars=\ref[DA]'>\ref[DA]</a> - [DA] ([DA.type])"
-	else if(istype(value, /client))
+	else if (istype(value, /client))
 		var/client/C = value
 		vtext = "<a href='?_src_=vars;Vars=\ref[C]'>\ref[C]</a> - [C] ([C.type])"
-	else if(islist(value))
+	else if (islist(value))
 		var/list/L = value
 		vtext = "/list ([length(L)])"
-		if(!(varname in view_variables_dont_expand) && length(L) > 0 && length(L) < 100)
+		if (!(varname in view_variables_dont_expand) && length(L) > 0 && length(L) < 100)
 			extra += "<ul>"
 			for (var/index = 1 to length(L))
 				var/entry = L[index]
-				if(!isnum(entry) && !isnull(entry) && !(varname in view_variables_no_assoc))
+				if (!isnum(entry) && !isnull(entry) && !(varname in view_variables_no_assoc))
 					extra += "<li>[index]: [make_view_variables_value(entry)] -> [make_view_variables_value(L[entry])]</li>"
 				else
 					extra += "<li>[index]: [make_view_variables_value(entry)]</li>"
@@ -198,7 +198,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 /proc/make_view_variables_var_entry(datum/D, varname, value, level=0)
 	var/ecm = null
 
-	if(D)
+	if (D)
 		ecm = D.make_view_variables_variable_entry(varname, value)
 
 	var/valuestr = make_view_variables_value(value, varname)

@@ -13,7 +13,7 @@
 
 /obj/item/bodybag/rescue/Initialize()
 	. = ..()
-	if(ispath(airtank))
+	if (ispath(airtank))
 		airtank = new airtank(src)
 	update_icon()
 
@@ -24,22 +24,22 @@
 /obj/item/bodybag/rescue/attack_self(mob/user)
 	var/obj/structure/closet/body_bag/rescue/R = new /obj/structure/closet/body_bag/rescue(user.loc)
 	R.add_fingerprint(user)
-	if(airtank)
+	if (airtank)
 		R.set_tank(airtank)
 		airtank = null
 	qdel(src)
 
 /obj/item/bodybag/rescue/attackby(obj/item/W, mob/user, click_params)
-	if(istype(W,/obj/item/tank))
-		if(airtank)
+	if (istype(W,/obj/item/tank))
+		if (airtank)
 			to_chat(user, "\The [src] already has an air tank installed.")
 			return 1
-		else if(user.unEquip(W))
+		else if (user.unEquip(W))
 			W.forceMove(src)
 			airtank = W
 			to_chat(user, "You install \the [W] in \the [src].")
 			return 1
-	else if(airtank && isScrewdriver(W))
+	else if (airtank && isScrewdriver(W))
 		to_chat(user, "You remove \the [airtank] from \the [src].")
 		airtank.dropInto(loc)
 		airtank = null
@@ -48,7 +48,7 @@
 
 /obj/item/bodybag/rescue/examine(mob/user)
 	. = ..()
-	if(airtank)
+	if (airtank)
 		to_chat(user,"The pressure meter on \the [airtank] shows '[airtank.air_contents.return_pressure()] kPa'.")
 		to_chat(user,"The distribution valve on \the [airtank] is set to '[airtank.distribute_pressure] kPa'.")
 	else
@@ -76,14 +76,14 @@
 
 /obj/structure/closet/body_bag/rescue/proc/set_tank(obj/item/tank/newtank)
 	airtank = newtank
-	if(airtank)
+	if (airtank)
 		airtank.forceMove(null)
 	update_icon()
 
 /obj/structure/closet/body_bag/rescue/on_update_icon()
 	..()
 	overlays.Cut()
-	if(airtank)
+	if (airtank)
 		overlays += image(icon, "tank")
 
 
@@ -133,11 +133,11 @@
 		airtank = my_tank
 
 /obj/structure/closet/body_bag/rescue/Process()
-	if(!airtank)
+	if (!airtank)
 		return
 	var/env_pressure = atmo.return_pressure()
 	var/pressure_delta = max(airtank.distribute_pressure, 51) - env_pressure
-	if(airtank.air_contents.temperature > 0 && pressure_delta > 0)
+	if (airtank.air_contents.temperature > 0 && pressure_delta > 0)
 		var/transfer_moles = calculate_transfer_moles(airtank.air_contents, atmo, pressure_delta)
 		pump_gas_passive(airtank, airtank.air_contents, atmo, transfer_moles)
 
@@ -146,13 +146,13 @@
 
 /obj/structure/closet/body_bag/rescue/examine(mob/user)
 	. = ..()
-	if(airtank)
+	if (airtank)
 		to_chat(user,"The pressure meter on \the [airtank] shows '[airtank.air_contents.return_pressure()] kPa'.")
 		to_chat(user,"The distribution valve on \the [airtank] is set to '[airtank.distribute_pressure] kPa'.")
 	else
 		to_chat(user, SPAN_WARNING("The air tank is missing."))
 	to_chat(user,"The pressure meter on [src] shows '[atmo.return_pressure()] kPa'.")
-	if(Adjacent(user)) //The bag's rather thick and opaque from a distance.
+	if (Adjacent(user)) //The bag's rather thick and opaque from a distance.
 		to_chat(user, SPAN_INFO("You peer into \the [src]."))
 		for(var/mob/living/L in contents)
 			L.examine(arglist(args))

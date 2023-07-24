@@ -16,14 +16,14 @@
 /obj/machinery/floorlayer/Move(new_turf,M_Dir)
 	..()
 
-	if(on)
-		if(mode["dismantle"])
+	if (on)
+		if (mode["dismantle"])
 			dismantleFloor(old_turf)
 
-		if(mode["laying"])
+		if (mode["laying"])
 			layFloor(old_turf)
 
-		if(mode["collect"])
+		if (mode["collect"])
 			CollectTiles(old_turf)
 
 
@@ -39,7 +39,7 @@
 
 /obj/machinery/floorlayer/attackby(obj/item/W as obj, mob/user as mob)
 
-	if(isWrench(W))
+	if (isWrench(W))
 		var/m = input("Choose work mode", "Mode") as null|anything in mode
 		mode[m] = !mode[m]
 		var/O = mode[m]
@@ -49,25 +49,25 @@
 		)
 		return
 
-	if(istype(W, /obj/item/stack/tile))
-		if(!user.unEquip(W, T))
+	if (istype(W, /obj/item/stack/tile))
+		if (!user.unEquip(W, T))
 			return
 		to_chat(user, SPAN_NOTICE("\The [W] successfully loaded."))
 		TakeTile(T)
 		return
 
-	if(isCrowbar(W))
-		if(!length(contents))
+	if (isCrowbar(W))
+		if (!length(contents))
 			to_chat(user, SPAN_NOTICE("\The [src] is empty."))
 		else
 			var/obj/item/stack/tile/E = input("Choose remove tile type.", "Tiles") as null|anything in contents
-			if(E)
+			if (E)
 				to_chat(user, SPAN_NOTICE("You remove the [E] from /the [src]."))
 				E.dropInto(loc)
 				T = null
 		return
 
-	if(isScrewdriver(W))
+	if (isScrewdriver(W))
 		T = input("Choose tile type.", "Tiles") as null|anything in contents
 		return
 	..()
@@ -84,9 +84,9 @@
 	on = 0
 
 /obj/machinery/floorlayer/proc/dismantleFloor(turf/new_turf)
-	if(istype(new_turf, /turf/simulated/floor))
+	if (istype(new_turf, /turf/simulated/floor))
 		var/turf/simulated/floor/T = new_turf
-		if(!T.is_plating())
+		if (!T.is_plating())
 			T.make_plating(!(T.broken || T.burnt))
 	return new_turf.is_plating()
 
@@ -102,14 +102,14 @@
 			tile2.transfer_to(tile1)
 
 /obj/machinery/floorlayer/proc/layFloor(turf/w_turf)
-	if(!T)
-		if(!TakeNewStack())
+	if (!T)
+		if (!TakeNewStack())
 			return 0
 	w_turf.attackby(T , src)
 	return 1
 
 /obj/machinery/floorlayer/proc/TakeTile(obj/item/stack/tile/tile)
-	if(!T)	T = tile
+	if (!T)	T = tile
 	tile.forceMove(src)
 
 	SortStacks()

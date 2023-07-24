@@ -12,7 +12,7 @@
 	silicon_subsystems.Cut()
 	for(var/subtype in subtypesof(/datum/nano_module))
 		var/datum/nano_module/NM = subtype
-		if(initial(NM.available_to_ai))
+		if (initial(NM.available_to_ai))
 			silicon_subsystems += NM
 	. = ..()
 
@@ -35,7 +35,7 @@
 
 /mob/living/silicon/proc/init_subsystem(subsystem_type)
 	var/existing_entry = silicon_subsystems[subsystem_type]
-	if(existing_entry && !ispath(existing_entry))
+	if (existing_entry && !ispath(existing_entry))
 		return FALSE
 
 	var/ui_state = subsystem_type == /datum/nano_module/law_manager ? GLOB.conscious_state : GLOB.self_state
@@ -46,7 +46,7 @@
 
 /mob/living/silicon/proc/remove_subsystem(subsystem_type)
 	var/stat_silicon_subsystem/SSS = silicon_subsystems[subsystem_type]
-	if(!istype(SSS))
+	if (!istype(SSS))
 		return FALSE
 
 	silicon_subsystems_by_name -= SSS.name
@@ -56,7 +56,7 @@
 
 /mob/living/silicon/proc/open_subsystem(subsystem_type, mob/given = src)
 	var/stat_silicon_subsystem/SSS = silicon_subsystems[subsystem_type]
-	if(!istype(SSS))
+	if (!istype(SSS))
 		return FALSE
 	SSS.Click(given)
 	return TRUE
@@ -67,16 +67,16 @@
 	set category = "Silicon Commands"
 
 	var/stat_silicon_subsystem/SSS = silicon_subsystems_by_name[silicon_subsystem_name]
-	if(istype(SSS))
+	if (istype(SSS))
 		SSS.Click()
 
 /mob/living/silicon/Stat()
 	. = ..()
-	if(!.)
+	if (!.)
 		return
-	if(!length(silicon_subsystems))
+	if (!length(silicon_subsystems))
 		return
-	if(!statpanel("Subsystems"))
+	if (!statpanel("Subsystems"))
 		return
 	for(var/subsystem_type in silicon_subsystems)
 		var/stat_silicon_subsystem/SSS = silicon_subsystems[subsystem_type]
@@ -84,9 +84,9 @@
 
 /mob/living/silicon/proc/get_subsystem_from_path(subsystem_type)
 	var/stat_silicon_subsystem/SSS = silicon_subsystems[subsystem_type]
-	if(!istype(SSS))
+	if (!istype(SSS))
 		return 0
-	if(!istype(SSS.subsystem, subsystem_type))
+	if (!istype(SSS.subsystem, subsystem_type))
 		return 0
 	return SSS.subsystem
 
@@ -97,7 +97,7 @@
 	var/datum/nano_module/subsystem
 
 /stat_silicon_subsystem/New(mob/living/silicon/loc, subsystem_type, ui_state)
-	if(!istype(loc))
+	if (!istype(loc))
 		CRASH("Unexpected location. Expected /mob/living/silicon, was [loc.type].")
 	src.ui_state = ui_state
 	subsystem = new subsystem_type(loc)

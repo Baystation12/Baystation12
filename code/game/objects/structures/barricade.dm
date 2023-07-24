@@ -11,10 +11,10 @@
 
 /obj/structure/barricade/Initialize(mapload, material_name)
 	. = ..(mapload)
-	if(!material_name)
+	if (!material_name)
 		material_name = MATERIAL_WOOD
 	material = SSmaterials.get_material_by_name("[material_name]")
-	if(!material)
+	if (!material)
 		return INITIALIZE_HINT_QDEL
 	SetName("[material.display_name] barricade")
 	desc = "A heavy, solid barrier made of [material.display_name]."
@@ -100,9 +100,9 @@
 	qdel(src)
 
 /obj/structure/barricade/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)//So bullets will fly over and stuff.
-	if(air_group || (height==0))
+	if (air_group || (height==0))
 		return 1
-	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
+	if (istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
 		return 1
 	else
 		return 0
@@ -121,7 +121,7 @@
 
 /obj/structure/barricade/spike/Initialize(mapload, material_name, rod_material_name)
 	. = ..(mapload, material_name)
-	if(!rod_material_name)
+	if (!rod_material_name)
 		rod_material_name = MATERIAL_WOOD
 	rod_material = SSmaterials.get_material_by_name("[rod_material_name]")
 	SetName("spiked barricade")
@@ -131,18 +131,18 @@
 
 /obj/structure/barricade/spike/Bumped(mob/living/victim)
 	. = ..()
-	if(!isliving(victim))
+	if (!isliving(victim))
 		return
-	if(world.time - victim.last_bumped <= 15) //spam guard
+	if (world.time - victim.last_bumped <= 15) //spam guard
 		return FALSE
 	victim.last_bumped = world.time
 	var/damage_holder = damage
 	var/target_zone = pick(BP_CHEST, BP_GROIN, BP_L_LEG, BP_R_LEG)
 
-	if(MOVING_DELIBERATELY(victim)) //creeping into this is less hurty than walking
+	if (MOVING_DELIBERATELY(victim)) //creeping into this is less hurty than walking
 		damage_holder = (damage / 4)
 
-	if(isanimal(victim)) //simple animals have simple health, reduce our damage
+	if (isanimal(victim)) //simple animals have simple health, reduce our damage
 		damage_holder = (damage / 4)
 
 	victim.apply_damage(damage_holder, DAMAGE_BRUTE, target_zone, damage_flags = DAMAGE_FLAG_SHARP, used_weapon = src)

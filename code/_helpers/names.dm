@@ -8,7 +8,7 @@
 	return pick("terrestial planet", "ice planet", "dwarf planet", "desert planet", "ocean planet", "lava planet", "gas giant", "forest planet")
 
 /proc/station_name()
-	if(!GLOB.using_map)
+	if (!GLOB.using_map)
 		return config.server_name
 	if (GLOB.using_map.station_name)
 		return GLOB.using_map.station_name
@@ -23,7 +23,7 @@
 
 	// Prefix
 	name = pick(GLOB.station_names)
-	if(name)
+	if (name)
 		GLOB.using_map.station_name += name + " "
 
 	// Suffix
@@ -32,17 +32,17 @@
 
 	// ID Number
 	switch(random)
-		if(1)
+		if (1)
 			GLOB.using_map.station_name += "[rand(1, 99)]"
-		if(2)
+		if (2)
 			GLOB.using_map.station_name += pick(GLOB.greek_letters)
-		if(3)
+		if (3)
 			GLOB.using_map.station_name += "\Roman[rand(1,99)]"
-		if(4)
+		if (4)
 			GLOB.using_map.station_name += pick(GLOB.phonetic_alphabet)
-		if(5)
+		if (5)
 			GLOB.using_map.station_name += pick(GLOB.numbers_as_words)
-		if(13)
+		if (13)
 			GLOB.using_map.station_name += pick("13","XIII","Thirteen")
 
 
@@ -87,40 +87,40 @@
 
 	for(words,words>0,words--)//Randomly picks from one of the choices below.
 
-		if(words==1&&(1 in safety)&&(2 in safety))//If there is only one word remaining and choice 1 or 2 have not been selected.
+		if (words==1&&(1 in safety)&&(2 in safety))//If there is only one word remaining and choice 1 or 2 have not been selected.
 			safety = list(pick(1,2))//Select choice 1 or 2.
-		else if(words==1&&maxwords==2)//Else if there is only one word remaining (and there were two originally), and 1 or 2 were chosen,
+		else if (words==1&&maxwords==2)//Else if there is only one word remaining (and there were two originally), and 1 or 2 were chosen,
 			safety = list(3)//Default to list 3
 
 		switch(pick(safety))//Chance based on the safety list.
-			if(1)//1 and 2 can only be selected once each to prevent more than two specific names/places/etc.
+			if (1)//1 and 2 can only be selected once each to prevent more than two specific names/places/etc.
 				switch(rand(1,2))//Mainly to add more options later.
-					if(1)
-						if(length(names)&&prob(70))
+					if (1)
+						if (length(names)&&prob(70))
 							code_phrase += pick(names)
 						else
 							code_phrase += pick(pick(GLOB.first_names_male,GLOB.first_names_female))
 							code_phrase += " "
 							code_phrase += pick(GLOB.last_names)
-					if(2)
+					if (2)
 						code_phrase += pick(SSjobs.titles_to_datums) //Returns a job.
 				safety -= 1
-			if(2)
+			if (2)
 				switch(rand(1,2))//Places or things.
-					if(1)
+					if (1)
 						code_phrase += pick(drinks)
-					if(2)
+					if (2)
 						code_phrase += pick(locations)
 				safety -= 2
-			if(3)
+			if (3)
 				switch(rand(1,3))//Nouns, adjectives, verbs. Can be selected more than once.
-					if(1)
+					if (1)
 						code_phrase += pick(nouns)
-					if(2)
+					if (2)
 						code_phrase += pick(GLOB.adjectives)
-					if(3)
+					if (3)
 						code_phrase += pick(GLOB.verbs)
-		if(words==1)
+		if (words==1)
 			code_phrase += "."
 		else
 			code_phrase += ", "

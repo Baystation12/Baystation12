@@ -16,9 +16,9 @@
 
 /obj/effect/overmap/visitable/sector/exoplanet/snow/generate_atmosphere()
 	..()
-	if(atmosphere)
+	if (atmosphere)
 		var/limit = 0
-		if(habitability_class <= HABITABILITY_OKAY)
+		if (habitability_class <= HABITABILITY_OKAY)
 			var/datum/species/human/H = /datum/species/human
 			limit = initial(H.cold_level_1) + rand(1,10)
 		atmosphere.temperature = max(T0C - rand(10, 100), limit)

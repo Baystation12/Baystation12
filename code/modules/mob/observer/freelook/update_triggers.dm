@@ -3,7 +3,7 @@
 // TURFS
 
 /proc/updateVisibility(atom/A, opacity_check = 1)
-	if(GAME_STATE >= RUNLEVEL_GAME)
+	if (GAME_STATE >= RUNLEVEL_GAME)
 		for(var/datum/visualnet/VN in visual_nets)
 			VN.update_visibility(A, opacity_check)
 
@@ -11,7 +11,7 @@
 	return -1
 
 /atom/Destroy()
-	if(opacity)
+	if (opacity)
 		updateVisibility(src)
 	. = ..()
 
@@ -22,5 +22,5 @@
 	. = ..(need_rebuild)
 	// Glass door glass = 1
 	// don't check then?
-	if(!glass)
+	if (!glass)
 		updateVisibility(src, FALSE)

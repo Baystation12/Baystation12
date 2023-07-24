@@ -29,15 +29,15 @@
 
 	//random charge time and distance
 	switch(pick(100;1, 50;2, 25;3))
-		if(1)
+		if (1)
 			//short range, short charge time
 			chargelevelmax = rand(3, 20)
 			effectrange = rand(1, 3)
-		if(2)
+		if (2)
 			//medium range, medium charge time
 			chargelevelmax = rand(15, 40)
 			effectrange = rand(5, 15)
-		if(3)
+		if (3)
 			//large range, long charge time
 			chargelevelmax = rand(20, 120)
 			effectrange = rand(20, 200)
@@ -53,19 +53,19 @@
 	if (toggled && activated)
 		return
 
-	if(activated)
+	if (activated)
 		activated = FALSE
 	else
 		addtimer(new Callback(src, /datum/artifact_effect/proc/toggle_off), on_time)
 		activated = TRUE
 		toggled = TRUE
-	if(reveal_toggle && holder)
-		if(istype(holder, /obj/machinery/artifact))
+	if (reveal_toggle && holder)
+		if (istype(holder, /obj/machinery/artifact))
 			var/obj/machinery/artifact/A = holder
 			A.icon_state = "ano[A.icon_num][activated]"
 
 		var/display_msg
-		if(activated)
+		if (activated)
 			display_msg = pick("momentarily glows brightly!","distorts slightly for a moment!","flickers slightly!","vibrates!","shimmers slightly for a moment!")
 		else
 			display_msg = pick("grows dull!","fades in intensity!","suddenly becomes very still!","suddenly becomes very quiet!")
@@ -82,13 +82,13 @@
 /datum/artifact_effect/proc/UpdateMove()
 
 /datum/artifact_effect/proc/process()
-	if(chargelevel < chargelevelmax)
+	if (chargelevel < chargelevelmax)
 		chargelevel++
 
-	if(activated)
-		if(effect == EFFECT_AURA)
+	if (activated)
+		if (effect == EFFECT_AURA)
 			DoEffectAura()
-		else if(effect == EFFECT_PULSE && chargelevel >= chargelevelmax)
+		else if (effect == EFFECT_PULSE && chargelevel >= chargelevelmax)
 			chargelevel = 0
 			DoEffectPulse()
 
@@ -96,19 +96,19 @@
 /datum/artifact_effect/proc/getDescription()
 	. = "<b>"
 	switch(effect_type)
-		if(EFFECT_ENERGY)
+		if (EFFECT_ENERGY)
 			. += "Concentrated energy emissions"
-		if(EFFECT_PSIONIC)
+		if (EFFECT_PSIONIC)
 			. += "Intermittent psionic wavefront"
-		if(EFFECT_ELECTRO)
+		if (EFFECT_ELECTRO)
 			. += "Electromagnetic energy"
-		if(EFFECT_PARTICLE)
+		if (EFFECT_PARTICLE)
 			. += "High frequency particles"
-		if(EFFECT_ORGANIC)
+		if (EFFECT_ORGANIC)
 			. += "Organically reactive exotic particles"
-		if(EFFECT_BLUESPACE)
+		if (EFFECT_BLUESPACE)
 			. += "Interdimensional/bluespace? phasing"
-		if(EFFECT_SYNTH)
+		if (EFFECT_SYNTH)
 			. += "Atomic synthesis"
 		else
 			. += "Low level energy emissions"
@@ -116,11 +116,11 @@
 	. += "</b> have been detected <b>"
 
 	switch(effect)
-		if(EFFECT_TOUCH)
+		if (EFFECT_TOUCH)
 			. += "interspersed throughout substructure and shell."
-		if(EFFECT_AURA)
+		if (EFFECT_AURA)
 			. += "emitting in an ambient energy field."
-		if(EFFECT_PULSE)
+		if (EFFECT_PULSE)
 			. += "emitting in periodic bursts."
 		else
 			. += "emitting in an unknown way."

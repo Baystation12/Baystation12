@@ -16,7 +16,7 @@
 		activate()
 
 /obj/item/implant/compressed/activate()
-	if(malfunction) return
+	if (malfunction) return
 	var/turf/T = get_turf(src)
 	if (imp_in)
 		imp_in.put_in_hands(scanned)
@@ -41,7 +41,7 @@
 /obj/item/implanter/compressed/on_update_icon()
 	if (imp)
 		var/obj/item/implant/compressed/c = imp
-		if(!c.scanned)
+		if (!c.scanned)
 			icon_state = "cimplanter1"
 		else
 			icon_state = "cimplanter2"
@@ -58,23 +58,23 @@
 	..()
 
 /obj/item/implanter/compressed/afterattack(obj/item/A, mob/user as mob, proximity)
-	if(!proximity)
+	if (!proximity)
 		return
-	if(istype(A) && imp)
+	if (istype(A) && imp)
 		var/obj/item/implant/compressed/c = imp
 		if (c.scanned)
 			if (!istype(A,/obj/item/storage))
 				to_chat(user, SPAN_WARNING("Something is already compressed inside the implant!"))
 			return
-		else if(safe)
+		else if (safe)
 			if (!istype(A,/obj/item/storage))
 				to_chat(user, SPAN_WARNING("The matter compressor safeties prevent you from doing that."))
 			return
-		if(istype(A.loc,/mob/living/carbon/human))
+		if (istype(A.loc,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = A.loc
-			if(!H.unEquip(A))
+			if (!H.unEquip(A))
 				return
-		else if(istype(A.loc,/obj/item/storage))
+		else if (istype(A.loc,/obj/item/storage))
 			var/obj/item/storage/S = A.loc
 			S.remove_from_storage(A)
 		c.scanned = A
@@ -84,7 +84,7 @@
 		update_icon()
 
 /obj/item/implanter/compressed/attack_self(mob/user)
-	if(!imp || safe == 2)
+	if (!imp || safe == 2)
 		return ..()
 
 	safe = !safe

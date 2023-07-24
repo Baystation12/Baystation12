@@ -2,7 +2,7 @@
 var/global/list/chemical_reaction_logs = list()
 
 /proc/log_chemical_reaction(atom/A, datum/chemical_reaction/R, multiplier)
-	if(!A || !R)
+	if (!A || !R)
 		return
 
 	var/turf/T = get_turf(A)
@@ -10,7 +10,7 @@ var/global/list/chemical_reaction_logs = list()
 
 	chemical_reaction_logs += "\[[time_stamp()]\] [logstr]"
 
-	if(R.log_is_important)
+	if (R.log_is_important)
 		message_admins(logstr)
 	log_admin(logstr)
 
@@ -18,7 +18,7 @@ var/global/list/chemical_reaction_logs = list()
 	set name = "Show Chemical Reactions"
 	set category = "Admin"
 
-	if(!check_rights(R_ADMIN))
+	if (!check_rights(R_ADMIN))
 		return
 
 	var/html = ""

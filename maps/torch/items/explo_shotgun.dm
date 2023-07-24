@@ -23,7 +23,7 @@
 
 /obj/item/gun/projectile/shotgun/pump/exploration/on_update_icon()
 	..()
-	if(!reinforced)
+	if (!reinforced)
 		icon_state = "expshotgun[!!chambered]"
 	else
 		icon_state = "ghettexpshotgun[!!chambered]"
@@ -34,7 +34,7 @@
 
 /obj/item/gun/projectile/shotgun/pump/exploration/free_fire()
 	var/my_z = get_z(src)
-	if(!GLOB.using_map.station_levels.Find(my_z))
+	if (!GLOB.using_map.station_levels.Find(my_z))
 		return TRUE
 	return ..()
 
@@ -80,17 +80,17 @@
 
 
 /obj/item/gun/projectile/shotgun/pump/exploration/special_check()
-	if(chambered && chambered.BB && prob(explosion_chance))
+	if (chambered && chambered.BB && prob(explosion_chance))
 		var/damage = chambered.BB.get_structure_damage()
-		if(istype(chambered.BB, /obj/item/projectile/bullet/pellet))
+		if (istype(chambered.BB, /obj/item/projectile/bullet/pellet))
 			var/obj/item/projectile/bullet/pellet/PP = chambered.BB
 			damage = PP.damage*PP.pellets
-		if(damage > 30)
+		if (damage > 30)
 			var/mob/living/carbon/C = loc
-			if(istype(loc))
+			if (istype(loc))
 				C.visible_message(SPAN_DANGER("[src] explodes in [C]'s hands!"), SPAN_DANGER("[src] explodes in your face!"))
 				C.drop_from_inventory(src)
-				if(reinforced)
+				if (reinforced)
 					reinforced.dropInto(loc)
 					reinforced.throw_at(C, 2, 10)
 					reinforced = null

@@ -23,7 +23,7 @@
 			fuel_ports += fuel_port_in_area
 
 /datum/shuttle/autodock/overmap/fuel_check()
-	if(!src.try_consume_fuel()) //insufficient fuel
+	if (!src.try_consume_fuel()) //insufficient fuel
 		for(var/area/A in shuttle_area)
 			for(var/mob/living/M in A)
 				M.show_message("<spawn class='warning'>You hear the shuttle engines sputter... perhaps it doesn't have enough fuel?", AUDIBLE_MESSAGE,
@@ -32,9 +32,9 @@
 	return 1 //success, continue with launch
 
 /datum/shuttle/autodock/overmap/proc/can_go()
-	if(!next_location)
+	if (!next_location)
 		return FALSE
-	if(moving_status == SHUTTLE_INTRANSIT)
+	if (moving_status == SHUTTLE_INTRANSIT)
 		return FALSE //already going somewhere, current_location may be an intransit location instead of in a sector
 	return get_dist(waypoint_sector(current_location), waypoint_sector(next_location)) <= range
 
@@ -50,14 +50,14 @@
 	return move_time * (1 + distance_mod + skill_mod)
 
 /datum/shuttle/autodock/overmap/process_launch()
-	if(prob(10*max(0, skill_needed - operator_skill)))
+	if (prob(10*max(0, skill_needed - operator_skill)))
 		var/places = get_possible_destinations()
 		var/place = pick(places)
 		set_destination(places[place])
 	..()
 
 /datum/shuttle/autodock/overmap/proc/set_destination(obj/effect/shuttle_landmark/A)
-	if(A != current_location)
+	if (A != current_location)
 		next_location = A
 
 /datum/shuttle/autodock/overmap/proc/get_possible_destinations()
@@ -65,44 +65,44 @@
 	for (var/obj/effect/overmap/visitable/S in range(get_turf(waypoint_sector(current_location)), range))
 		var/list/waypoints = S.get_waypoints(name)
 		for(var/obj/effect/shuttle_landmark/LZ in waypoints)
-			if(LZ.is_valid(src))
+			if (LZ.is_valid(src))
 				res["[waypoints[LZ]] - [LZ.name]"] = LZ
 	return res
 
 /datum/shuttle/autodock/overmap/get_location_name()
-	if(moving_status == SHUTTLE_INTRANSIT)
+	if (moving_status == SHUTTLE_INTRANSIT)
 		return "In transit"
 	return "[waypoint_sector(current_location)] - [current_location]"
 
 /datum/shuttle/autodock/overmap/get_destination_name()
-	if(!next_location)
+	if (!next_location)
 		return "None"
 	return "[waypoint_sector(next_location)] - [next_location]"
 
 /datum/shuttle/autodock/overmap/proc/try_consume_fuel() //returns 1 if successful, returns 0 if error (like insufficient fuel)
-	if(!fuel_consumption)
+	if (!fuel_consumption)
 		return 1 //shuttles with zero fuel consumption are magic and can always launch
-	if(!length(fuel_ports))
+	if (!length(fuel_ports))
 		return 0 //Nowhere to get fuel from
 	var/list/obj/item/tank/fuel_tanks = list()
 	for(var/obj/structure/FP in fuel_ports) //loop through fuel ports and assemble list of all fuel tanks
 		var/obj/item/tank/FT = locate() in FP
-		if(FT)
+		if (FT)
 			fuel_tanks += FT
-	if(!length(fuel_tanks))
+	if (!length(fuel_tanks))
 		return 0 //can't launch if you have no fuel TANKS in the ports
 	var/total_flammable_gas_moles = 0
 	for(var/obj/item/tank/FT in fuel_tanks)
 		total_flammable_gas_moles += FT.air_contents.get_by_flag(XGM_GAS_FUEL)
-	if(total_flammable_gas_moles < fuel_consumption) //not enough fuel
+	if (total_flammable_gas_moles < fuel_consumption) //not enough fuel
 		return 0
 	// We are going to succeed if we got to here, so start consuming that fuel
 	var/fuel_to_consume = fuel_consumption
 	for(var/obj/item/tank/FT in fuel_tanks) //loop through tanks, consume their fuel one by one
 		var/fuel_available = FT.air_contents.get_by_flag(XGM_GAS_FUEL)
-		if(!fuel_available) // Didn't even have fuel.
+		if (!fuel_available) // Didn't even have fuel.
 			continue
-		if(fuel_available >= fuel_to_consume)
+		if (fuel_available >= fuel_to_consume)
 			FT.remove_air_by_flag(XGM_GAS_FUEL, fuel_to_consume)
 			return 1 //ALL REQUIRED FUEL HAS BEEN CONSUMED, GO FOR LAUNCH!
 		else //this tank doesn't have enough to launch shuttle by itself, so remove all its fuel, then continue loop
@@ -127,16 +127,16 @@
 	new /obj/item/tank/hydrogen(src)
 
 /obj/structure/fuel_port/attack_hand(mob/user as mob)
-	if(!opened)
+	if (!opened)
 		to_chat(user, "<spawn class='notice'>The door is secured tightly. You'll need a crowbar to open it.")
 		return
-	else if(length(contents) > 0)
+	else if (length(contents) > 0)
 		user.put_in_hands(contents[1])
 	update_icon()
 
 /obj/structure/fuel_port/on_update_icon()
-	if(opened)
-		if(length(contents) > 0)
+	if (opened)
+		if (length(contents) > 0)
 			icon_state = icon_full
 		else
 			icon_state = icon_empty

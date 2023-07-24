@@ -37,8 +37,8 @@
 	name = "close"
 
 /obj/screen/close/Click()
-	if(master)
-		if(istype(master, /obj/item/storage))
+	if (master)
+		if (istype(master, /obj/item/storage))
 			var/obj/item/storage/S = master
 			S.close(usr)
 	return 1
@@ -52,15 +52,15 @@
 	owner = null
 
 /obj/screen/item_action/Click()
-	if(!usr || !owner)
+	if (!usr || !owner)
 		return 1
-	if(!usr.canClick())
+	if (!usr.canClick())
 		return
 
-	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
+	if (usr.stat || usr.restrained() || usr.stunned || usr.lying)
 		return 1
 
-	if(!(owner in usr))
+	if (!(owner in usr))
 		return 1
 
 	owner.ui_action_click(owner)
@@ -70,13 +70,13 @@
 	name = "storage"
 
 /obj/screen/storage/Click()
-	if(!usr.canClick())
+	if (!usr.canClick())
 		return 1
-	if(usr.stat || usr.paralysis || usr.stunned || usr.weakened)
+	if (usr.stat || usr.paralysis || usr.stunned || usr.weakened)
 		return 1
-	if(master)
+	if (master)
 		var/obj/item/I = usr.get_active_hand()
-		if(I)
+		if (I)
 			usr.ClickOn(master)
 	return 1
 
@@ -93,54 +93,54 @@
 	var/new_selecting
 
 	switch(icon_y)
-		if(1 to 3) //Feet
+		if (1 to 3) //Feet
 			switch(icon_x)
-				if(10 to 15)
+				if (10 to 15)
 					new_selecting = BP_R_FOOT
-				if(17 to 22)
+				if (17 to 22)
 					new_selecting = BP_L_FOOT
 				else
 					return 1
-		if(4 to 9) //Legs
+		if (4 to 9) //Legs
 			switch(icon_x)
-				if(10 to 15)
+				if (10 to 15)
 					new_selecting = BP_R_LEG
-				if(17 to 22)
+				if (17 to 22)
 					new_selecting = BP_L_LEG
 				else
 					return 1
-		if(10 to 13) //Hands and groin
+		if (10 to 13) //Hands and groin
 			switch(icon_x)
-				if(8 to 11)
+				if (8 to 11)
 					new_selecting = BP_R_HAND
-				if(12 to 20)
+				if (12 to 20)
 					new_selecting = BP_GROIN
-				if(21 to 24)
+				if (21 to 24)
 					new_selecting = BP_L_HAND
 				else
 					return 1
-		if(14 to 22) //Chest and arms to shoulders
+		if (14 to 22) //Chest and arms to shoulders
 			switch(icon_x)
-				if(8 to 11)
+				if (8 to 11)
 					new_selecting = BP_R_ARM
-				if(12 to 20)
+				if (12 to 20)
 					new_selecting = BP_CHEST
-				if(21 to 24)
+				if (21 to 24)
 					new_selecting = BP_L_ARM
 				else
 					return 1
-		if(23 to 30) //Head, but we need to check for eye or mouth
-			if(icon_x in 12 to 20)
+		if (23 to 30) //Head, but we need to check for eye or mouth
+			if (icon_x in 12 to 20)
 				new_selecting = BP_HEAD
 				switch(icon_y)
-					if(23 to 24)
-						if(icon_x in 15 to 17)
+					if (23 to 24)
+						if (icon_x in 15 to 17)
 							new_selecting = BP_MOUTH
-					if(26) //Eyeline, eyes are on 15 and 17
-						if(icon_x in 14 to 18)
+					if (26) //Eyeline, eyes are on 15 and 17
+						if (icon_x in 14 to 18)
 							new_selecting = BP_EYES
-					if(25 to 27)
-						if(icon_x in 15 to 17)
+					if (25 to 27)
+						if (icon_x in 15 to 17)
 							new_selecting = BP_EYES
 
 	set_selected_zone(new_selecting)
@@ -173,12 +173,12 @@
 	var/icon_x = text2num(P["icon-x"])
 	var/icon_y = text2num(P["icon-y"])
 	intent = I_DISARM
-	if(icon_x <= world.icon_size/2)
-		if(icon_y <= world.icon_size/2)
+	if (icon_x <= world.icon_size/2)
+		if (icon_y <= world.icon_size/2)
 			intent = I_HURT
 		else
 			intent = I_HELP
-	else if(icon_y <= world.icon_size/2)
+	else if (icon_y <= world.icon_size/2)
 		intent = I_GRAB
 	update_icon()
 	usr.a_intent = intent
@@ -187,10 +187,10 @@
 	icon_state = "intent_[intent]"
 
 /obj/screen/Click(location, control, params)
-	if(!usr)	return 1
+	if (!usr)	return 1
 	switch(name)
-		if("toggle")
-			if(usr.hud_used.inventory_shown)
+		if ("toggle")
+			if (usr.hud_used.inventory_shown)
 				usr.hud_used.inventory_shown = 0
 				usr.client.screen -= usr.hud_used.other
 			else
@@ -199,33 +199,33 @@
 
 			usr.hud_used.hidden_inventory_update()
 
-		if("equip")
-			if(ishuman(usr))
+		if ("equip")
+			if (ishuman(usr))
 				var/mob/living/carbon/human/H = usr
 				H.quick_equip()
 
-		if("resist")
-			if(isliving(usr))
+		if ("resist")
+			if (isliving(usr))
 				var/mob/living/L = usr
 				L.resist()
 
-		if("Reset Machine")
+		if ("Reset Machine")
 			usr.unset_machine()
-		if("internal")
-			if(iscarbon(usr))
+		if ("internal")
+			if (iscarbon(usr))
 				var/mob/living/carbon/C = usr
-				if(!C.stat && !C.stunned && !C.paralysis && !C.restrained())
-					if(C.internal)
+				if (!C.stat && !C.stunned && !C.paralysis && !C.restrained())
+					if (C.internal)
 						C.set_internals(null)
 					else
 
 						var/no_mask
-						if(!(C.wear_mask && C.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
+						if (!(C.wear_mask && C.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
 							var/mob/living/carbon/human/H = C
-							if(!(H.head && H.head.item_flags & ITEM_FLAG_AIRTIGHT))
+							if (!(H.head && H.head.item_flags & ITEM_FLAG_AIRTIGHT))
 								no_mask = 1
 
-						if(no_mask)
+						if (no_mask)
 							to_chat(C, SPAN_NOTICE("You are not wearing a suitable mask or helmet."))
 							return 1
 						else
@@ -235,7 +235,7 @@
 							var/list/contents = list()
 							var/from = "on"
 
-							if(ishuman(C))
+							if (ishuman(C))
 								var/mob/living/carbon/human/H = C
 								breathes = H.species.breath_type
 								nicename = list ("suit", "back", "belt", "right hand", "left hand", "left pocket", "right pocket")
@@ -245,20 +245,20 @@
 								tankcheck = list(C.r_hand, C.l_hand, C.back)
 
 							// Rigs are a fucking pain since they keep an air tank in nullspace.
-							if(istype(C.back,/obj/item/rig))
+							if (istype(C.back,/obj/item/rig))
 								var/obj/item/rig/rig = C.back
-								if(rig.air_supply)
+								if (rig.air_supply)
 									from = "in"
 									nicename |= "hardsuit"
 									tankcheck |= rig.air_supply
 
 							for(var/i=1, i<length(tankcheck)+1, ++i)
-								if(istype(tankcheck[i], /obj/item/tank))
+								if (istype(tankcheck[i], /obj/item/tank))
 									var/obj/item/tank/t = tankcheck[i]
 									if (!isnull(t.manipulated_by) && t.manipulated_by != C.real_name && findtext(t.desc,breathes))
 										contents.Add(t.air_contents.total_moles)	//Someone messed with the tank and put unknown gasses
 										continue					//in it, so we're going to believe the tank is what it says it is
-									if(t.air_contents.gas[breathes] && !t.air_contents.gas[GAS_PHORON])
+									if (t.air_contents.gas[breathes] && !t.air_contents.gas[GAS_PHORON])
 										contents.Add(t.air_contents.gas[breathes])
 									else
 										contents.Add(0)
@@ -271,80 +271,80 @@
 							var/best = 0
 							var/bestcontents = 0
 							for(var/i=1, i <  length(contents) + 1 , ++i)
-								if(!contents[i])
+								if (!contents[i])
 									continue
-								if(contents[i] > bestcontents)
+								if (contents[i] > bestcontents)
 									best = i
 									bestcontents = contents[i]
 
 
 							//We've determined the best container now we set it as our internals
 
-							if(best)
+							if (best)
 								C.set_internals(tankcheck[best], "\the [tankcheck[best]] [from] your [nicename[best]]")
 
-							if(!C.internal)
+							if (!C.internal)
 								// Finally, check for an internal air system.
 								// We use this as an absolute last resort, so we don't include it in the above logic
 								// There's no need to check that the gas contents are safe, because its internal logic always make sure it is
 								var/obj/item/organ/internal/augment/active/internal_air_system/IAS = locate() in C.internal_organs
 								if (!IAS?.activate())
 									to_chat(C, SPAN_WARNING("You don't have \a [breathes] tank."))
-		if("act_intent")
+		if ("act_intent")
 			usr.a_intent_change("right")
 
-		if("pull")
+		if ("pull")
 			usr.stop_pulling()
-		if("throw")
-			if(!usr.stat && isturf(usr.loc) && !usr.restrained())
+		if ("throw")
+			if (!usr.stat && isturf(usr.loc) && !usr.restrained())
 				usr:toggle_throw_mode()
-		if("drop")
-			if(usr.client)
+		if ("drop")
+			if (usr.client)
 				usr.client.drop_item()
 
-		if("module")
-			if(isrobot(usr))
+		if ("module")
+			if (isrobot(usr))
 				var/mob/living/silicon/robot/R = usr
-//				if(R.module)
+//				if (R.module)
 //					R.hud_used.toggle_show_robot_modules()
 //					return 1
 				R.pick_module()
 
-		if("inventory")
-			if(isrobot(usr))
+		if ("inventory")
+			if (isrobot(usr))
 				var/mob/living/silicon/robot/R = usr
-				if(R.module)
+				if (R.module)
 					R.hud_used.toggle_show_robot_modules()
 					return 1
 				else
 					to_chat(R, "You haven't selected a module yet.")
 
-		if("radio")
-			if(issilicon(usr))
+		if ("radio")
+			if (issilicon(usr))
 				usr:radio_menu()
-		if("panel")
-			if(issilicon(usr))
+		if ("panel")
+			if (issilicon(usr))
 				usr:installed_modules()
 
-		if("store")
-			if(isrobot(usr))
+		if ("store")
+			if (isrobot(usr))
 				var/mob/living/silicon/robot/R = usr
-				if(R.module)
+				if (R.module)
 					R.uneq_active()
 					R.hud_used.update_robot_modules_display()
 				else
 					to_chat(R, "You haven't selected a module yet.")
 
-		if("module1")
-			if(istype(usr, /mob/living/silicon/robot))
+		if ("module1")
+			if (istype(usr, /mob/living/silicon/robot))
 				usr:toggle_module(1)
 
-		if("module2")
-			if(istype(usr, /mob/living/silicon/robot))
+		if ("module2")
+			if (istype(usr, /mob/living/silicon/robot))
 				usr:toggle_module(2)
 
-		if("module3")
-			if(istype(usr, /mob/living/silicon/robot))
+		if ("module3")
+			if (istype(usr, /mob/living/silicon/robot))
 				usr:toggle_module(3)
 		else
 			return 0
@@ -353,31 +353,31 @@
 /obj/screen/inventory/Click()
 	// At this point in client Click() code we have passed the 1/10 sec check and little else
 	// We don't even know if it's a middle click
-	if(!usr.canClick())
+	if (!usr.canClick())
 		return 1
-	if(usr.incapacitated())
+	if (usr.incapacitated())
 		return 1
 	switch(name)
-		if("r_hand")
-			if(iscarbon(usr))
+		if ("r_hand")
+			if (iscarbon(usr))
 				var/mob/living/carbon/C = usr
-				if(C.hand)
+				if (C.hand)
 					C.activate_hand("r")
 				else
 					C.attack_empty_hand(BP_R_HAND)
-		if("l_hand")
-			if(iscarbon(usr))
+		if ("l_hand")
+			if (iscarbon(usr))
 				var/mob/living/carbon/C = usr
-				if(!C.hand)
+				if (!C.hand)
 					C.activate_hand("l")
 				else
 					C.attack_empty_hand(BP_L_HAND)
-		if("swap")
+		if ("swap")
 			usr:swap_hand()
-		if("hand")
+		if ("hand")
 			usr:swap_hand()
 		else
-			if(usr.attack_ui(slot_id))
+			if (usr.attack_ui(slot_id))
 				usr.update_inv_l_hand(0)
 				usr.update_inv_r_hand(0)
 	return 1

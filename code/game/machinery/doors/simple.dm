@@ -13,30 +13,30 @@
 
 /obj/machinery/door/unpowered/simple/New(newloc, material_name, locked)
 	..()
-	if(!material_name)
+	if (!material_name)
 		material_name = MATERIAL_STEEL
 	material = SSmaterials.get_material_by_name(material_name)
-	if(!material)
+	if (!material)
 		return INITIALIZE_HINT_QDEL
 	set_max_health(max(100, material.integrity * 2))
-	if(!icon_base)
+	if (!icon_base)
 		icon_base = material.door_icon_base
 	damage_hitsound = material.hitsound
 	name = "[material.display_name] door"
 	color = material.icon_colour
-	if(initial_lock_value)
+	if (initial_lock_value)
 		locked = initial_lock_value
-	if(locked)
+	if (locked)
 		lock = new(src,locked)
-	if(material.luminescence)
+	if (material.luminescence)
 		set_light(0.5, 1, material.luminescence, l_color = material.icon_colour)
 
-	if(material.opacity < 0.5)
+	if (material.opacity < 0.5)
 		glass = TRUE
 		alpha = 180
 		set_opacity(0)
 
-	if(!density)
+	if (!density)
 		set_opacity(0)
 	update_icon()
 
@@ -54,7 +54,7 @@
 
 /obj/machinery/door/unpowered/simple/on_update_icon()
 	update_dir()
-	if(density)
+	if (density)
 		icon_state = "[icon_base]"
 	else
 		icon_state = "[icon_base]open"
@@ -62,9 +62,9 @@
 
 /obj/machinery/door/unpowered/simple/do_animate(animation)
 	switch(animation)
-		if("opening")
+		if ("opening")
 			flick("[icon_base]opening", src)
-		if("closing")
+		if ("closing")
 			flick("[icon_base]closing", src)
 	return
 
@@ -72,7 +72,7 @@
 	return !!reason_broken
 
 /obj/machinery/door/unpowered/simple/close(forced = 0)
-	if(!can_close(forced))
+	if (!can_close(forced))
 		return
 
 	// If the door is blocked, don't close
@@ -86,14 +86,14 @@
 	..()
 
 /obj/machinery/door/unpowered/simple/open(forced = 0)
-	if(!can_open(forced))
+	if (!can_open(forced))
 		return
 	playsound(src.loc, material.dooropen_noise, 100, 1)
 	..()
 
 /obj/machinery/door/unpowered/simple/set_broken(new_state, cause = MACHINE_BROKEN_GENERIC)
 	..()
-	if(new_state)
+	if (new_state)
 		deconstruct(null)
 
 /obj/machinery/door/unpowered/simple/deconstruct(mob/user, moved = FALSE)
@@ -101,10 +101,10 @@
 	qdel(src)
 
 /obj/machinery/door/unpowered/simple/attack_ai(mob/user as mob) //those aren't machinery, they're just big fucking slabs of a mineral
-	if(isAI(user)) //so the AI can't open it
+	if (isAI(user)) //so the AI can't open it
 		return
-	else if(isrobot(user)) //but cyborgs can
-		if(Adjacent(user)) //not remotely though
+	else if (isrobot(user)) //but cyborgs can
+		if (Adjacent(user)) //not remotely though
 			return attack_hand(user)
 
 
@@ -113,30 +113,30 @@
 	if (user.a_intent == I_HURT)
 		return ..()
 
-	if(istype(I, /obj/item/key) && lock)
+	if (istype(I, /obj/item/key) && lock)
 		var/obj/item/key/K = I
-		if(!lock.toggle(I))
+		if (!lock.toggle(I))
 			to_chat(user, SPAN_WARNING("\The [K] does not fit in the lock!"))
 		return
-	if(lock && lock.pick_lock(I,user))
+	if (lock && lock.pick_lock(I,user))
 		return
 
-	if(istype(I,/obj/item/material/lock_construct))
-		if(lock)
+	if (istype(I,/obj/item/material/lock_construct))
+		if (lock)
 			to_chat(user, SPAN_WARNING("\The [src] already has a lock."))
 		else
 			var/obj/item/material/lock_construct/L = I
 			lock = L.create_lock(src,user)
 		return
 
-	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
-		if(MACHINE_IS_BROKEN(src))
+	if (istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
+		if (MACHINE_IS_BROKEN(src))
 			to_chat(user, SPAN_NOTICE("It looks like \the [src] is pretty busted. It's going to need more than just patching up now."))
 			return
 		if (!get_damage_value())
 			to_chat(user, SPAN_NOTICE("Nothing to fix!"))
 			return
-		if(!density)
+		if (!density)
 			to_chat(user, SPAN_WARNING("\The [src] must be closed before you can repair it."))
 			return
 
@@ -150,13 +150,13 @@
 			restore_health(used * DOOR_REPAIR_AMOUNT)
 		return
 
-	if(src.operating) return
+	if (src.operating) return
 
-	if(lock && lock.isLocked())
+	if (lock && lock.isLocked())
 		to_chat(user, "\The [src] is locked!")
 
-	if(operable())
-		if(src.density)
+	if (operable())
+		if (src.density)
 			open()
 		else
 			close()
@@ -166,11 +166,11 @@
 
 /obj/machinery/door/unpowered/simple/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1 && lock)
+	if (distance <= 1 && lock)
 		to_chat(user, SPAN_NOTICE("It appears to have a lock."))
 
 /obj/machinery/door/unpowered/simple/can_open()
-	if(!..() || (lock && lock.isLocked()))
+	if (!..() || (lock && lock.isLocked()))
 		return 0
 	return 1
 

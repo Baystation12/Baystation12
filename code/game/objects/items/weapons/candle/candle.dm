@@ -18,23 +18,23 @@
 
 /obj/item/flame/candle/Initialize()
 	wax = rand(27 MINUTES, 33 MINUTES) / SSobj.wait // Enough for 27-33 minutes. 30 minutes on average, adjusted for subsystem tickrate.
-	if(available_colours)
+	if (available_colours)
 		color = pick(available_colours)
 	. = ..()
 
 /obj/item/flame/candle/on_update_icon()
 	switch(wax)
-		if(1500 to INFINITY)
+		if (1500 to INFINITY)
 			icon_state = "[icon_set]1"
-		if(800 to 1500)
+		if (800 to 1500)
 			icon_state = "[icon_set]2"
 		else
 			icon_state = "[icon_set]3"
 
-	if(lit != last_lit)
+	if (lit != last_lit)
 		last_lit = lit
 		overlays.Cut()
-		if(lit)
+		if (lit)
 			overlays += overlay_image(icon, "[icon_state]_lit", flags=RESET_COLOR)
 
 /obj/item/flame/candle/attackby(obj/item/W as obj, mob/user as mob)
@@ -49,28 +49,28 @@
 		other_candle.light()
 
 /obj/item/flame/candle/proc/light(mob/user)
-	if(!lit)
+	if (!lit)
 		lit = 1
 		visible_message(SPAN_NOTICE("\The [user] lights the [name]."))
 		set_light(candle_max_bright, candle_inner_range, candle_outer_range, candle_falloff)
 		START_PROCESSING(SSobj, src)
 
 /obj/item/flame/candle/Process()
-	if(!lit)
+	if (!lit)
 		return
 	wax--
-	if(!wax)
+	if (!wax)
 		var/obj/item/trash/candle/C = new(loc)
 		C.color = color
 		qdel(src)
 		return
 	update_icon()
-	if(istype(loc, /turf)) //start a fire if possible
+	if (istype(loc, /turf)) //start a fire if possible
 		var/turf/T = loc
 		T.hotspot_expose(700, 5)
 
 /obj/item/flame/candle/attack_self(mob/user as mob)
-	if(lit)
+	if (lit)
 		lit = 0
 		update_icon()
 		set_light(0)

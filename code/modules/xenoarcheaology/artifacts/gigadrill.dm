@@ -10,7 +10,7 @@
 	layer = ABOVE_OBJ_LAYER		//to go over ores
 
 /obj/machinery/giga_drill/physical_attack_hand(mob/user)
-	if(active)
+	if (active)
 		active = 0
 		icon_state = "gigadrill"
 		to_chat(user, SPAN_NOTICE("You press a button and \the [src] slowly spins down."))
@@ -21,14 +21,14 @@
 	return TRUE
 
 /obj/machinery/giga_drill/Bump(atom/A)
-	if(active && !drilling_turf)
-		if(istype(A,/turf/simulated/mineral))
+	if (active && !drilling_turf)
+		if (istype(A,/turf/simulated/mineral))
 			var/turf/simulated/mineral/M = A
 			drilling_turf = get_turf(src)
 			src.visible_message(SPAN_NOTICE("\The [src] begins to drill into \the [M]."))
 			anchored = TRUE
 			spawn(drill_time)
-				if(get_turf(src) == drilling_turf && active)
+				if (get_turf(src) == drilling_turf && active)
 					M.GetDrilled()
 					forceMove(M)
 				drilling_turf = null

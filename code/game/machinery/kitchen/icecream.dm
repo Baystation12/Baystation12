@@ -24,38 +24,38 @@
 
 /obj/machinery/icecream_vat/proc/get_ingredient_list(type)
 	switch(type)
-		if(ICECREAM_CHOCOLATE)
+		if (ICECREAM_CHOCOLATE)
 			return list(/datum/reagent/drink/milk, /datum/reagent/drink/ice, /datum/reagent/nutriment/coco)
-		if(ICECREAM_STRAWBERRY)
+		if (ICECREAM_STRAWBERRY)
 			return list(/datum/reagent/drink/milk, /datum/reagent/drink/ice, /datum/reagent/drink/juice/berry)
-		if(ICECREAM_BLUE)
+		if (ICECREAM_BLUE)
 			return list(/datum/reagent/drink/milk, /datum/reagent/drink/ice, /datum/reagent/ethanol/singulo)
-		if(ICECREAM_CHERRY)
+		if (ICECREAM_CHERRY)
 			return list(/datum/reagent/drink/milk, /datum/reagent/drink/ice, /datum/reagent/nutriment/cherryjelly)
-		if(ICECREAM_BANANA)
+		if (ICECREAM_BANANA)
 			return list(/datum/reagent/drink/milk, /datum/reagent/drink/ice, /datum/reagent/drink/juice/banana)
-		if(CONE_WAFFLE)
+		if (CONE_WAFFLE)
 			return list(/datum/reagent/nutriment/flour, /datum/reagent/sugar)
-		if(CONE_CHOC)
+		if (CONE_CHOC)
 			return list(/datum/reagent/nutriment/flour, /datum/reagent/sugar, /datum/reagent/nutriment/coco)
 		else
 			return list(/datum/reagent/drink/milk, /datum/reagent/drink/ice)
 
 /obj/machinery/icecream_vat/proc/get_flavour_name(flavour_type)
 	switch(flavour_type)
-		if(ICECREAM_CHOCOLATE)
+		if (ICECREAM_CHOCOLATE)
 			return "chocolate"
-		if(ICECREAM_STRAWBERRY)
+		if (ICECREAM_STRAWBERRY)
 			return "strawberry"
-		if(ICECREAM_BLUE)
+		if (ICECREAM_BLUE)
 			return "blue"
-		if(ICECREAM_CHERRY)
+		if (ICECREAM_CHERRY)
 			return "cherry"
-		if(ICECREAM_BANANA)
+		if (ICECREAM_BANANA)
 			return "banana"
-		if(CONE_WAFFLE)
+		if (CONE_WAFFLE)
 			return "waffle"
-		if(CONE_CHOC)
+		if (CONE_CHOC)
 			return "chocolate"
 		else
 			return "vanilla"
@@ -100,39 +100,39 @@
 	popup.open()
 
 /obj/machinery/icecream_vat/attackby(obj/item/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/reagent_containers/food/snacks/icecream))
+	if (istype(O, /obj/item/reagent_containers/food/snacks/icecream))
 		var/obj/item/reagent_containers/food/snacks/icecream/I = O
-		if(!I.ice_creamed)
-			if(product_types[dispense_flavour] > 0)
+		if (!I.ice_creamed)
+			if (product_types[dispense_flavour] > 0)
 				src.visible_message("[icon2html(src, viewers(get_turf(src)))] [SPAN_INFO("[user] scoops delicious [flavour_name] icecream into [I].")]")
 				product_types[dispense_flavour] -= 1
 				I.add_ice_cream(flavour_name)
-			//	if(beaker)
+			//	if (beaker)
 			//		beaker.reagents.trans_to(I, 10)
-				if(I.reagents.total_volume < 10)
+				if (I.reagents.total_volume < 10)
 					I.reagents.add_reagent(/datum/reagent/sugar, 10 - I.reagents.total_volume)
 			else
 				to_chat(user, SPAN_WARNING("There is not enough icecream left!"))
 		else
 			to_chat(user, SPAN_NOTICE("[O] already has icecream in it."))
 		return 1
-	else if(O.is_open_container())
+	else if (O.is_open_container())
 		return
 	else
 		..()
 
 /obj/machinery/icecream_vat/proc/make(mob/user, make_type, amount)
 	for(var/R in get_ingredient_list(make_type))
-		if(reagents.has_reagent(R, amount))
+		if (reagents.has_reagent(R, amount))
 			continue
 		amount = 0
 		break
-	if(amount)
+	if (amount)
 		for(var/R in get_ingredient_list(make_type))
 			reagents.remove_reagent(R, amount)
 		product_types[make_type] += amount
 		var/flavour = get_flavour_name(make_type)
-		if(make_type > 6)
+		if (make_type > 6)
 			src.visible_message(SPAN_INFO("[user] cooks up some [flavour] cones."))
 		else
 			src.visible_message(SPAN_INFO("[user] whips up some [flavour] icecream."))
@@ -140,20 +140,20 @@
 		to_chat(user, SPAN_WARNING("You don't have the ingredients to make this."))
 
 /obj/machinery/icecream_vat/OnTopic(user, href_list)
-	if(href_list["close"])
+	if (href_list["close"])
 		close_browser(usr,"window=icecreamvat")
 		return TOPIC_HANDLED
 
-	if(href_list["select"])
+	if (href_list["select"])
 		dispense_flavour = text2num(href_list["select"])
 		flavour_name = get_flavour_name(dispense_flavour)
 		src.visible_message(SPAN_NOTICE("[user] sets [src] to dispense [flavour_name] flavoured icecream."))
 		. = TOPIC_HANDLED
 
-	else if(href_list["cone"])
+	else if (href_list["cone"])
 		var/dispense_cone = text2num(href_list["cone"])
 		var/cone_name = get_flavour_name(dispense_cone)
-		if(product_types[dispense_cone] >= 1)
+		if (product_types[dispense_cone] >= 1)
 			product_types[dispense_cone] -= 1
 			var/obj/item/reagent_containers/food/snacks/icecream/I = new(src.loc)
 			I.cone_type = cone_name
@@ -164,19 +164,19 @@
 			to_chat(user, SPAN_WARNING("There are no [cone_name] cones left!"))
 		. = TOPIC_REFRESH
 
-	else if(href_list["make"])
+	else if (href_list["make"])
 		var/amount = (text2num(href_list["amount"]))
 		var/C = text2num(href_list["make"])
 		make(user, C, amount)
 		. = TOPIC_REFRESH
 
-	else if(href_list["disposeI"])
+	else if (href_list["disposeI"])
 		var/datum/reagent/R = locate(href_list["disposeI"]) in reagents.reagent_list
-		if(R)
+		if (R)
 			reagents.del_reagent(R.type)
 		. = TOPIC_REFRESH
 
-	if(href_list["refresh"])
+	if (href_list["refresh"])
 		. = TOPIC_REFRESH
 
 /obj/item/reagent_containers/food/snacks/icecream

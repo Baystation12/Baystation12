@@ -27,24 +27,24 @@ var/global/list/nuke_disks = list()
 //checks if L has a nuke disk on their person
 /datum/game_mode/nuclear/proc/check_mob(mob/living/L)
 	for(var/obj/item/disk/nuclear/N in nuke_disks)
-		if(N.storage_depth(L) >= 0)
+		if (N.storage_depth(L) >= 0)
 			return TRUE
 	return FALSE
 
 /datum/game_mode/nuclear/declare_completion()
 	var/datum/antagonist/merc = GLOB.all_antag_types_[MODE_MERCENARY]
-	if(config.objectives_disabled == CONFIG_OBJECTIVE_NONE || (merc && !length(merc.global_objectives)))
+	if (config.objectives_disabled == CONFIG_OBJECTIVE_NONE || (merc && !length(merc.global_objectives)))
 		..()
 		return
 	var/disk_rescued = TRUE
 	for(var/obj/item/disk/nuclear/D in world)
 		var/disk_area = get_area(D)
-		if(!is_type_in_list(disk_area, GLOB.using_map.post_round_safe_areas))
+		if (!is_type_in_list(disk_area, GLOB.using_map.post_round_safe_areas))
 			disk_rescued = FALSE
 			break
 	var/crew_evacuated = (evacuation_controller.has_evacuated())
 
-	if(!disk_rescued &&  station_was_nuked && !syndies_didnt_escape)
+	if (!disk_rescued &&  station_was_nuked && !syndies_didnt_escape)
 		to_world(FONT_LARGE("<B>Mercenary Major Victory!</B>"))
 		to_world("<B>Mercenary operatives have destroyed [station_name()]!</B>")
 

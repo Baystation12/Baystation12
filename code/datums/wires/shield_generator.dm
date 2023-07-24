@@ -16,29 +16,29 @@ var/global/const/SHIELDGEN_WIRE_NOTHING = 16		// A blank wire that doesn't have 
 
 /datum/wires/shield_generator/CanUse()
 	var/obj/machinery/power/shield_generator/S = holder
-	if(S.panel_open)
+	if (S.panel_open)
 		return 1
 	return 0
 
 /datum/wires/shield_generator/UpdateCut(index, mended)
 	var/obj/machinery/power/shield_generator/S = holder
 	switch(index)
-		if(SHIELDGEN_WIRE_POWER)
+		if (SHIELDGEN_WIRE_POWER)
 			S.input_cut = !mended
-		if(SHIELDGEN_WIRE_HACK)
-			if(!mended)
+		if (SHIELDGEN_WIRE_HACK)
+			if (!mended)
 				S.hacked = 0
-				if(S.check_flag(MODEFLAG_BYPASS))
+				if (S.check_flag(MODEFLAG_BYPASS))
 					S.toggle_flag(MODEFLAG_BYPASS)
-				if(S.check_flag(MODEFLAG_OVERCHARGE))
+				if (S.check_flag(MODEFLAG_OVERCHARGE))
 					S.toggle_flag(MODEFLAG_OVERCHARGE)
-		if(SHIELDGEN_WIRE_CONTROL)
+		if (SHIELDGEN_WIRE_CONTROL)
 			S.mode_changes_locked = !mended
-		if(SHIELDGEN_WIRE_AICONTROL)
+		if (SHIELDGEN_WIRE_AICONTROL)
 			S.ai_control_disabled = !mended
 
 /datum/wires/shield_generator/UpdatePulsed(index)
 	var/obj/machinery/power/shield_generator/S = holder
 	switch(index)
-		if(SHIELDGEN_WIRE_HACK)
+		if (SHIELDGEN_WIRE_HACK)
 			S.hacked = 1

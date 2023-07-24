@@ -30,10 +30,10 @@
 
 /spell/targeted/ethereal_jaunt/cast(list/targets) //magnets, so mostly hardcoded
 	for(var/mob/living/target in targets)
-		if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(target))
+		if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(target))
 			continue
 
-		if(target.buckled)
+		if (target.buckled)
 			target.buckled.unbuckle_mob()
 		spawn(0)
 			var/mobloc = get_turf(target.loc)
@@ -45,7 +45,7 @@
 			animation.icon = 'icons/mob/mob.dmi'
 			animation.layer = FLY_LAYER
 			target.ExtinguishMob()
-			if(target.buckled)
+			if (target.buckled)
 				target.buckled = null
 			jaunt_disappear(animation, target)
 			jaunt_steam(mobloc)
@@ -61,17 +61,17 @@
 	addtimer(new Callback(src, .proc/reappear, mob_loc, user), reappear_duration)
 
 /spell/targeted/ethereal_jaunt/proc/reappear(mob_loc, mob/living/user)
-	if(!user.forceMove(mob_loc))
+	if (!user.forceMove(mob_loc))
 		for(var/direction in list(1,2,4,8,5,6,9,10))
 			var/turf/T = get_step(mob_loc, direction)
-			if(T && user.forceMove(T))
+			if (T && user.forceMove(T))
 				break
 	user.client.eye = user
 	QDEL_NULL(animation)
 	QDEL_NULL(jaunt_holder)
 
 /spell/targeted/ethereal_jaunt/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 	duration += 2 SECONDS
 
@@ -119,7 +119,7 @@
 	else if (!(newLoc.turf_flags & TURF_FLAG_NOJAUNT))
 		forceMove(newLoc)
 		var/turf/T = get_turf(loc)
-		if(!T.contains_dense_objects())
+		if (!T.contains_dense_objects())
 			last_valid_turf = T
 	else
 		to_chat(user, SPAN_WARNING("Some strange aura is blocking the way!"))

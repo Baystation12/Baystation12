@@ -20,7 +20,7 @@
 
 /obj/item/gun/launcher/rocket/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 2)
+	if (distance <= 2)
 		to_chat(user, SPAN_NOTICE("[length(rockets)] / [max_rockets] rockets."))
 
 
@@ -46,7 +46,7 @@
 
 
 /obj/item/gun/launcher/rocket/consume_next_projectile()
-	if(length(rockets))
+	if (length(rockets))
 		var/obj/item/ammo_casing/rocket/I = rockets[1]
 		var/obj/item/missile/M = new (src)
 		M.primed = 1

@@ -11,7 +11,7 @@
 	origin_tech = list(TECH_BLUESPACE = 4)
 
 /obj/item/teleportation_scroll/attack_self(mob/user as mob)
-	if((user.mind && !GLOB.wizards.is_antagonist(user.mind)))
+	if ((user.mind && !GLOB.wizards.is_antagonist(user.mind)))
 		to_chat(usr, SPAN_WARNING("You stare at the scroll but cannot make sense of the markings!"))
 		return
 
@@ -27,7 +27,7 @@
 	return
 
 /obj/item/teleportation_scroll/Topic(href, href_list)
-	if(..())
+	if (..())
 		return 1
 	var/mob/living/carbon/human/H = usr
 	if (!( istype(H, /mob/living/carbon/human)))
@@ -53,7 +53,7 @@
 	smoke.start()
 	var/turf/end = user.try_teleport(thearea)
 
-	if(!end)
+	if (!end)
 		to_chat(user, "The spell matrix was unable to locate a suitable teleport destination for an unknown reason. Sorry.")
 		return
 	smoke.start()

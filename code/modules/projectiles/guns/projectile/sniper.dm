@@ -26,20 +26,20 @@
 
 /obj/item/gun/projectile/heavysniper/on_update_icon()
 	..()
-	if(bolt_open)
+	if (bolt_open)
 		icon_state = "[initial(icon_state)]-open"
 	else
 		icon_state = "[initial(icon_state)]"
 
 /obj/item/gun/projectile/heavysniper/handle_post_fire(mob/user, atom/target, pointblank=0, reflex=0)
 	..()
-	if(user && user.skill_check(SKILL_WEAPONS, SKILL_MASTER))
+	if (user && user.skill_check(SKILL_WEAPONS, SKILL_MASTER))
 		to_chat(user, SPAN_NOTICE("You work the bolt open with a reflexive motion, ejecting [chambered]!"))
 		unload_shell()
 
 /obj/item/gun/projectile/heavysniper/proc/unload_shell()
-	if(chambered)
-		if(!bolt_open)
+	if (chambered)
+		if (!bolt_open)
 			playsound(src.loc, 'sound/weapons/guns/interaction/rifle_boltback.ogg', 50, 1)
 			bolt_open = 1
 		chambered.dropInto(src.loc)
@@ -48,8 +48,8 @@
 
 /obj/item/gun/projectile/heavysniper/attack_self(mob/user as mob)
 	bolt_open = !bolt_open
-	if(bolt_open)
-		if(chambered)
+	if (bolt_open)
+		if (chambered)
 			to_chat(user, SPAN_NOTICE("You work the bolt open, ejecting [chambered]!"))
 			unload_shell()
 		else
@@ -62,18 +62,18 @@
 	update_icon()
 
 /obj/item/gun/projectile/heavysniper/special_check(mob/user)
-	if(bolt_open)
+	if (bolt_open)
 		to_chat(user, SPAN_WARNING("You can't fire [src] while the bolt is open!"))
 		return 0
 	return ..()
 
 /obj/item/gun/projectile/heavysniper/load_ammo(obj/item/A, mob/user)
-	if(!bolt_open)
+	if (!bolt_open)
 		return
 	..()
 
 /obj/item/gun/projectile/heavysniper/unload_ammo(mob/user, allow_dump=1)
-	if(!bolt_open)
+	if (!bolt_open)
 		return
 	..()
 
@@ -122,7 +122,7 @@
 	mag_remove_sound = 'sound/weapons/guns/interaction/ltrifle_magout.ogg'
 
 /obj/item/gun/projectile/sniper/panther/on_update_icon()
-	if(ammo_magazine)
+	if (ammo_magazine)
 		icon_state = "dmr"
 	else
 		icon_state = "dmr-empty"
@@ -153,7 +153,7 @@
 	mag_remove_sound = 'sound/weapons/guns/interaction/garand_magout.ogg'
 
 /obj/item/gun/projectile/sniper/garand/on_update_icon()
-	if(ammo_magazine && length(ammo_magazine.stored_ammo))
+	if (ammo_magazine && length(ammo_magazine.stored_ammo))
 		icon_state = initial(icon_state)
 		wielded_item_state = initial(wielded_item_state)
 	else
@@ -181,7 +181,7 @@
 	wielded_item_state = "semistrip-wielded"
 
 /obj/item/gun/projectile/sniper/semistrip/on_update_icon()
-	if(ammo_magazine && length(ammo_magazine.stored_ammo))
+	if (ammo_magazine && length(ammo_magazine.stored_ammo))
 		icon_state = initial(icon_state)
 		wielded_item_state = initial(wielded_item_state)
 	else

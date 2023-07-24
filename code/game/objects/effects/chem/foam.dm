@@ -27,7 +27,7 @@
 
 /obj/effect/effect/foam/proc/remove_foam()
 	STOP_PROCESSING(SSobj, src)
-	if(metal)
+	if (metal)
 		var/obj/structure/foamedmetal/M = new(src.loc)
 		M.metal = metal
 		M.update_icon()
@@ -35,47 +35,47 @@
 	QDEL_IN(src, 5)
 
 /obj/effect/effect/foam/proc/checkReagents() // transfer any reagents to the floor
-	if(!metal && reagents)
+	if (!metal && reagents)
 		var/turf/T = get_turf(src)
 		reagents.touch_turf(T)
 		for(var/obj/O in T)
 			reagents.touch_obj(O)
 
 /obj/effect/effect/foam/Process()
-	if(--amount < 0)
+	if (--amount < 0)
 		return
 
 	for(var/direction in GLOB.cardinal)
 		var/turf/T = get_step(src, direction)
-		if(!T)
+		if (!T)
 			continue
 
-		if(!T.Enter(src))
+		if (!T.Enter(src))
 			continue
 
 		var/obj/effect/effect/foam/F = locate() in T
-		if(F)
+		if (F)
 			continue
 
 		F = new(T, metal)
 		F.amount = amount
-		if(!metal)
+		if (!metal)
 			F.create_reagents(10)
-			if(reagents)
+			if (reagents)
 				for(var/datum/reagent/R in reagents.reagent_list)
 					F.reagents.add_reagent(R.type, 1, safety = 1) //added safety check since reagents in the foam have already had a chance to react
 
 /obj/effect/effect/foam/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume) // foam disolves when heated, except metal foams
-	if(!metal && prob(max(0, exposed_temperature - 475)))
+	if (!metal && prob(max(0, exposed_temperature - 475)))
 		flick("[icon_state]-disolve", src)
 
 		spawn(5)
 			qdel(src)
 
 /obj/effect/effect/foam/Crossed(atom/movable/AM)
-	if(metal)
+	if (metal)
 		return
-	if(istype(AM, /mob/living))
+	if (istype(AM, /mob/living))
 		var/mob/living/M = AM
 		M.slip("the foam", 6)
 
@@ -86,7 +86,7 @@
 
 /datum/effect/effect/system/foam_spread/set_up(amt=5, loca, datum/reagents/carry = null, metalfoam = 0)
 	amount = round(sqrt(amt / 3), 1)
-	if(isturf(loca))
+	if (isturf(loca))
 		location = loca
 	else
 		location = get_turf(loca)
@@ -96,24 +96,24 @@
 
 	// bit of a hack here. Foam carries along any reagent also present in the glass it is mixed with (defaults to water if none is present). Rather than actually transfer the reagents, this makes a list of the reagent ids and spawns 1 unit of that reagent when the foam disolves.
 
-	if(carry && !metal)
+	if (carry && !metal)
 		for(var/datum/reagent/R in carry.reagent_list)
 			carried_reagents += R.type
 
 /datum/effect/effect/system/foam_spread/start()
 	spawn(0)
 		var/obj/effect/effect/foam/F = locate() in location
-		if(F)
+		if (F)
 			F.amount += amount
 			return
 
 		F = new /obj/effect/effect/foam(location, metal)
 		F.amount = amount
 
-		if(!metal) // don't carry other chemicals if a metal foam
+		if (!metal) // don't carry other chemicals if a metal foam
 			F.create_reagents(10)
 
-			if(carried_reagents)
+			if (carried_reagents)
 				for(var/id in carried_reagents)
 					F.reagents.add_reagent(id, 1, safety = 1) //makes a safety call because all reagents should have already reacted anyway
 			else
@@ -141,7 +141,7 @@
 	..()
 
 /obj/structure/foamedmetal/on_update_icon()
-	if(metal == 1)
+	if (metal == 1)
 		icon_state = "metalfoam"
 	else
 		icon_state = "ironfoam"
@@ -150,7 +150,7 @@
 	qdel(src)
 
 /obj/structure/foamedmetal/bullet_act()
-	if(metal == 1 || prob(50))
+	if (metal == 1 || prob(50))
 		qdel(src)
 
 /obj/structure/foamedmetal/attack_hand(mob/user)
@@ -209,6 +209,6 @@
 
 
 /obj/structure/foamedmetal/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
-	if(air_group)
+	if (air_group)
 		return 0
 	return !density

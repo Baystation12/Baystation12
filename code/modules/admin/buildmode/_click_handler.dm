@@ -15,7 +15,7 @@
 	for(var/mode_type in subtypesof(/datum/build_mode))
 		var/datum/build_mode/build_mode = new mode_type(src)
 		build_modes += build_mode
-		if(build_mode.the_default)
+		if (build_mode.the_default)
 			current_build_mode = build_mode
 
 	build_buttons = list()
@@ -62,7 +62,7 @@
 
 /datum/click_handler/build_mode/OnClick(atom/A, params)
 	params = params2list(params)
-	if(A in build_buttons)
+	if (A in build_buttons)
 		var/obj/effect/bmode/build_button = A
 		build_button.OnClick(params)
 	else

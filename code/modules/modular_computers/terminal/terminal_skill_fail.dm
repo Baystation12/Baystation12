@@ -54,7 +54,7 @@ GLOBAL_LIST_INIT(terminal_fails, init_subtypes(/datum/terminal_skill_fail))
 	message = "Accessing network operator resources!"
 
 /datum/terminal_skill_fail/antag/can_run(mob/user, datum/terminal/terminal)
-	if(!has_access(list(list(access_network, access_network_admin)), user.GetAccess()))
+	if (!has_access(list(list(access_network, access_network_admin)), user.GetAccess()))
 		return
 	return ..()
 
@@ -91,13 +91,13 @@ GLOBAL_LIST_INIT(terminal_fails, init_subtypes(/datum/terminal_skill_fail))
 
 /datum/terminal_skill_fail/antag/email_logs/execute(datum/terminal/terminal)
 	var/datum/computer_file/data/email_account/S = ntnet_global.find_email_by_name(EMAIL_SYSADMIN)
-	if(!istype(S))
+	if (!istype(S))
 		return list()
 	var/datum/computer_file/data/email_message/M = new()
 	M.title = "!SENSITIVE! - NTNet System log backup"
 	M.stored_data = jointext(ntnet_global.logs, "<br>")
 	M.source = S.login
-	if(!S.send_mail(EMAIL_BROADCAST, M))
+	if (!S.send_mail(EMAIL_BROADCAST, M))
 		return list()
 	terminal.computer.add_log("Network log sent to: all")
 	return ..()
@@ -108,7 +108,7 @@ GLOBAL_LIST_INIT(terminal_fails, init_subtypes(/datum/terminal_skill_fail))
 	message = "Updating admin privileges!"
 
 /datum/terminal_skill_fail/admin/can_run(mob/user, datum/terminal/terminal)
-	if(!has_access(list(access_network_admin), user.GetAccess()))
+	if (!has_access(list(access_network_admin), user.GetAccess()))
 		return
 	return ..()
 
@@ -127,7 +127,7 @@ GLOBAL_LIST_INIT(terminal_fails, init_subtypes(/datum/terminal_skill_fail))
 
 /datum/terminal_skill_fail/admin/random_unban/execute(datum/terminal/terminal)
 	var/id = pick_n_take(ntnet_global.banned_nids)
-	if(!id)
+	if (!id)
 		return "Unable to locate network id to unban."
 	return ..()
 

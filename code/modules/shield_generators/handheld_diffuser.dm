@@ -8,7 +8,7 @@
 	var/enabled = 0
 
 /obj/item/shield_diffuser/on_update_icon()
-	if(enabled)
+	if (enabled)
 		icon_state = "hdiffuser_on"
 	else
 		icon_state = "hdiffuser_off"
@@ -19,7 +19,7 @@
 
 /obj/item/shield_diffuser/Destroy()
 	QDEL_NULL(cell)
-	if(enabled)
+	if (enabled)
 		STOP_PROCESSING(SSobj, src)
 	. = ..()
 
@@ -27,20 +27,20 @@
 	return cell
 
 /obj/item/shield_diffuser/Process()
-	if(!enabled)
+	if (!enabled)
 		return
 
 	for(var/direction in GLOB.cardinal)
 		var/turf/simulated/shielded_tile = get_step(get_turf(src), direction)
 		for(var/obj/effect/shield/S in shielded_tile)
 			// 10kJ per pulse, but gap in the shield lasts for longer than regular diffusers.
-			if(istype(S) && !S.diffused_for && !S.disabled_for && cell.checked_use(10 KILOWATTS * CELLRATE))
+			if (istype(S) && !S.diffused_for && !S.disabled_for && cell.checked_use(10 KILOWATTS * CELLRATE))
 				S.diffuse(20)
 
 /obj/item/shield_diffuser/attack_self()
 	enabled = !enabled
 	update_icon()
-	if(enabled)
+	if (enabled)
 		START_PROCESSING(SSobj, src)
 	else
 		STOP_PROCESSING(SSobj, src)

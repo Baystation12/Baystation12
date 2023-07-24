@@ -2,17 +2,17 @@
 	var/static/list/appearances
 
 /singleton/appearance_handler/cardborg/proc/item_equipped(obj/item/item, mob/user, slot)
-	if(!(slot == slot_head || slot == slot_wear_suit|| slot == slot_back))
+	if (!(slot == slot_head || slot == slot_wear_suit|| slot == slot_back))
 		return
-	if(!ishuman(user))
+	if (!ishuman(user))
 		return
-	if(!(istype(item, /obj/item/clothing/suit/cardborg) || istype(item, /obj/item/clothing/head/cardborg) || istype(item, /obj/item/storage/backpack)))
+	if (!(istype(item, /obj/item/clothing/suit/cardborg) || istype(item, /obj/item/clothing/head/cardborg) || istype(item, /obj/item/storage/backpack)))
 		return
-	if(user in appearance_sources)
+	if (user in appearance_sources)
 		return
 
 	var/mob/living/carbon/human/H = user
-	if(!(istype(H.wear_suit, /obj/item/clothing/suit/cardborg) && istype(H.head, /obj/item/clothing/head/cardborg) && istype(H.back, /obj/item/storage/backpack)))
+	if (!(istype(H.wear_suit, /obj/item/clothing/suit/cardborg) && istype(H.head, /obj/item/clothing/head/cardborg) && istype(H.back, /obj/item/storage/backpack)))
 		return
 
 	var/image/I = get_image_from_backpack(H)
@@ -20,19 +20,19 @@
 	GLOB.logged_in_event.register_global(src, /singleton/appearance_handler/cardborg/proc/mob_joined)	// Duplicate registration request are handled for us
 
 /singleton/appearance_handler/cardborg/proc/item_removed(obj/item/item, mob/user)
-	if((istype(item, /obj/item/clothing/suit/cardborg) || istype(item, /obj/item/clothing/head/cardborg)) || istype(item, /obj/item/storage/backpack))
+	if ((istype(item, /obj/item/clothing/suit/cardborg) || istype(item, /obj/item/clothing/head/cardborg)) || istype(item, /obj/item/storage/backpack))
 		RemoveAltAppearance(user)
-		if(!length(appearance_sources))
+		if (!length(appearance_sources))
 			GLOB.logged_in_event.unregister_global(src)	// Only listen to the logged in event for as long as it's relevant
 
 /singleton/appearance_handler/cardborg/proc/mob_joined(mob/user)
-	if(issilicon(user))
+	if (issilicon(user))
 		DisplayAllAltAppearancesTo(user)
 
 /singleton/appearance_handler/cardborg/proc/get_image_from_backpack(mob/living/carbon/human/H)
 	init_appearances()
 	var/singleton/cardborg_appearance/ca = appearances[H.back.type]
-	if(!ca) ca = appearances[/obj/item/storage/backpack]
+	if (!ca) ca = appearances[/obj/item/storage/backpack]
 
 	var/image/I = image(icon = 'icons/mob/robots.dmi', icon_state = ca.icon_state, loc = H)
 	I.override = 1
@@ -40,7 +40,7 @@
 	return I
 
 /singleton/appearance_handler/cardborg/proc/init_appearances()
-	if(!appearances)
+	if (!appearances)
 		appearances = list()
 		for(var/singleton/cardborg_appearance/ca in init_subtypes(/singleton/cardborg_appearance))
 			appearances[ca.backpack_type] = ca

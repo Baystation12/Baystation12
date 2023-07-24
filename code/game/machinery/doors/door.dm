@@ -61,15 +61,15 @@
 
 /obj/machinery/door/New()
 	. = ..()
-	if(density)
+	if (density)
 		layer = closed_layer
 		update_heat_protection(get_turf(src))
 	else
 		layer = open_layer
 
 
-	if(width > 1)
-		if(dir in list(EAST, WEST))
+	if (width > 1)
+		if (dir in list(EAST, WEST))
 			bound_width = width * world.icon_size
 			bound_height = world.icon_size
 		else
@@ -88,16 +88,16 @@
 
 	update_nearby_tiles(need_rebuild=1)
 
-	if(autoset_access)
+	if (autoset_access)
 #ifdef UNIT_TEST
-		if(length(req_access))
+		if (length(req_access))
 			crash_with("A door with mapped access restrictions was set to autoinitialize access.")
 #endif
 		return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/door/LateInitialize()
 	..()
-	if(autoset_access) // Delayed because apparently the dir is not set by mapping and we need to wait for nearby walls to init and turn us.
+	if (autoset_access) // Delayed because apparently the dir is not set by mapping and we need to wait for nearby walls to init and turn us.
 		inherit_access_from_area()
 
 /obj/machinery/door/Destroy()
@@ -106,45 +106,45 @@
 	. = ..()
 
 /obj/machinery/door/Process()
-	if(close_door_at && world.time >= close_door_at)
-		if(autoclose)
+	if (close_door_at && world.time >= close_door_at)
+		if (autoclose)
 			close_door_at = next_close_time()
 			close()
 		else
 			close_door_at = 0
 
 /obj/machinery/door/proc/can_open()
-	if(!density || operating)
+	if (!density || operating)
 		return 0
 	return 1
 
 /obj/machinery/door/proc/can_close()
-	if(density || operating)
+	if (density || operating)
 		return 0
 	return 1
 
 /obj/machinery/door/Bumped(atom/AM)
 	if (p_open || operating)
 		return
-	if(ismob(AM))
+	if (ismob(AM))
 		var/mob/M = AM
-		if(world.time - M.last_bumped <= 10) return	//Can bump-open one airlock per second. This is to prevent shock spam.
+		if (world.time - M.last_bumped <= 10) return	//Can bump-open one airlock per second. This is to prevent shock spam.
 		M.last_bumped = world.time
-		if(!M.restrained() && (!issmall(M) || ishuman(M) || issilicon(M)))
+		if (!M.restrained() && (!issmall(M) || ishuman(M) || issilicon(M)))
 			bumpopen(M)
 		return
 
-	if(istype(AM, /mob/living/bot))
+	if (istype(AM, /mob/living/bot))
 		var/mob/living/bot/bot = AM
-		if(src.check_access(bot.botcard))
-			if(density)
+		if (src.check_access(bot.botcard))
+			if (density)
 				open()
 		return
 
-	if(istype(AM, /obj/structure/bed/chair/wheelchair))
+	if (istype(AM, /obj/structure/bed/chair/wheelchair))
 		var/obj/structure/bed/chair/wheelchair/wheel = AM
-		if(density)
-			if(wheel.pulling && (src.allowed(wheel.pulling)))
+		if (density)
+			if (wheel.pulling && (src.allowed(wheel.pulling)))
 				open()
 			else
 				do_animate("deny")
@@ -153,19 +153,19 @@
 
 
 /obj/machinery/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group) return !block_air_zones
-	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
+	if (air_group) return !block_air_zones
+	if (istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return !opacity
 	return !density
 
 
 /obj/machinery/door/proc/bumpopen(mob/user as mob)
-	if(operating)	return
-	if(user.last_airflow > world.time - vsc.airflow_delay) //Fakkit
+	if (operating)	return
+	if (user.last_airflow > world.time - vsc.airflow_delay) //Fakkit
 		return
 	src.add_fingerprint(user)
-	if(density)
-		if(allowed(user))
+	if (density)
+		if (allowed(user))
 			open()
 		else
 			do_animate("deny")
@@ -185,14 +185,14 @@
 	if (user.a_intent == I_HURT)
 		return ..()
 
-	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
-		if(MACHINE_IS_BROKEN(src))
+	if (istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
+		if (MACHINE_IS_BROKEN(src))
 			to_chat(user, SPAN_NOTICE("It looks like \the [src] is pretty busted. It's going to need more than just patching up now."))
 			return
 		if (!get_damage_value())
 			to_chat(user, SPAN_NOTICE("Nothing to fix!"))
 			return
-		if(!density)
+		if (!density)
 			to_chat(user, SPAN_WARNING("\The [src] must be closed before you can repair it."))
 			return
 
@@ -217,16 +217,16 @@
 
 		return
 
-	if(repairing && isWelder(I))
-		if(!density)
+	if (repairing && isWelder(I))
+		if (!density)
 			to_chat(user, SPAN_WARNING("\The [src] must be closed before you can repair it."))
 			return
 
 		var/obj/item/weldingtool/welder = I
-		if(welder.remove_fuel(0,user))
+		if (welder.remove_fuel(0,user))
 			to_chat(user, SPAN_NOTICE("You start to fix dents and weld \the [repairing] into place."))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, (0.5 * repairing.amount) SECONDS, src, DO_REPAIR_CONSTRUCT) && welder && welder.isOn())
+			if (do_after(user, (0.5 * repairing.amount) SECONDS, src, DO_REPAIR_CONSTRUCT) && welder && welder.isOn())
 				if (!repairing)
 					return //the materials in the door have been removed before welding was finished.
 
@@ -237,29 +237,29 @@
 				repairing = null
 		return
 
-	if(repairing && isCrowbar(I))
+	if (repairing && isCrowbar(I))
 		to_chat(user, SPAN_NOTICE("You remove \the [repairing]."))
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		repairing.dropInto(user.loc)
 		repairing = null
 		return
 
-	if(src.operating) return
+	if (src.operating) return
 
-	if(src.allowed(user) && operable())
-		if(src.density)
+	if (src.allowed(user) && operable())
+		if (src.density)
 			open()
 		else
 			close()
 		return
 
-	if(src.density)
+	if (src.density)
 		do_animate("deny")
 	update_icon()
 	return
 
 /obj/machinery/door/emag_act(remaining_charges)
-	if(density && operable())
+	if (density && operable())
 		do_animate("emag")
 		sleep(6)
 		open()
@@ -294,13 +294,13 @@
 
 /obj/machinery/door/set_broken(new_state)
 	. = ..()
-	if(. && new_state)
+	if (. && new_state)
 		visible_message(SPAN_WARNING("\The [src.name] breaks!"))
 
 
 /obj/machinery/door/on_update_icon()
 	update_dir()
-	if(density)
+	if (density)
 		icon_state = "door1"
 	else
 		icon_state = "door0"
@@ -308,8 +308,8 @@
 	return
 
 /obj/machinery/door/proc/update_dir()
-	if(connections in list(NORTH, SOUTH, NORTH|SOUTH))
-		if(connections in list(WEST, EAST, EAST|WEST))
+	if (connections in list(NORTH, SOUTH, NORTH|SOUTH))
+		if (connections in list(WEST, EAST, EAST|WEST))
 			set_dir(SOUTH)
 		else
 			set_dir(EAST)
@@ -318,21 +318,21 @@
 
 /obj/machinery/door/proc/do_animate(animation)
 	switch(animation)
-		if("opening")
+		if ("opening")
 			if (p_open)
 				flick("o_doorc0", src)
 			else
 				flick("doorc0", src)
-		if("closing")
+		if ("closing")
 			if (p_open)
 				flick("o_doorc1", src)
 			else
 				flick("doorc1", src)
-		if("spark")
-			if(density)
+		if ("spark")
+			if (density)
 				flick("door_spark", src)
-		if("deny")
-			if(density && operable())
+		if ("deny")
+			if (density && operable())
 				flick("door_deny", src)
 				if (world.time > next_clicksound)
 					next_clicksound = world.time + CLICKSOUND_INTERVAL
@@ -342,7 +342,7 @@
 
 /obj/machinery/door/proc/open(forced = 0)
 	set waitfor = FALSE
-	if(!can_open(forced))
+	if (!can_open(forced))
 		return
 	operating = DOOR_OPERATING_YES
 
@@ -358,7 +358,7 @@
 	set_opacity(0)
 	operating = DOOR_OPERATING_NO
 
-	if(autoclose)
+	if (autoclose)
 		close_door_at = next_close_time()
 
 	return 1
@@ -368,7 +368,7 @@
 
 /obj/machinery/door/proc/close(forced = 0)
 	set waitfor = FALSE
-	if(!can_close(forced))
+	if (!can_close(forced))
 		return
 	operating = DOOR_OPERATING_YES
 
@@ -386,12 +386,12 @@
 
 	//I shall not add a check every x ticks if a door has closed over some fire.
 	var/obj/hotspot/fire = locate() in loc
-	if(fire)
+	if (fire)
 		qdel(fire)
 	return
 
 /obj/machinery/door/proc/toggle(forced = 0)
-	if(density)
+	if (density)
 		open(forced)
 	else
 		close(forced)
@@ -400,7 +400,7 @@
 	return 1
 
 /obj/machinery/door/allowed(mob/M)
-	if(!requiresID())
+	if (!requiresID())
 		return ..(null) //don't care who they are or what they have, act as if they're NOTHING
 	return ..(M)
 
@@ -412,8 +412,8 @@
 	return 1
 
 /obj/machinery/door/proc/update_heat_protection(turf/simulated/source)
-	if(istype(source))
-		if(src.density && (src.opacity || src.heat_proof))
+	if (istype(source))
+		if (src.density && (src.opacity || src.heat_proof))
 			source.thermal_conductivity = DOOR_HEAT_TRANSFER_COEFFICIENT
 		else
 			source.thermal_conductivity = initial(source.thermal_conductivity)
@@ -422,20 +422,20 @@
 	update_nearby_tiles()
 
 	. = ..()
-	if(width > 1)
-		if(dir in list(EAST, WEST))
+	if (width > 1)
+		if (dir in list(EAST, WEST))
 			bound_width = width * world.icon_size
 			bound_height = world.icon_size
 		else
 			bound_width = world.icon_size
 			bound_height = width * world.icon_size
 
-	if(.)
+	if (.)
 		deconstruct(null, TRUE)
 
 /obj/machinery/door/proc/CheckPenetration(base_chance, damage)
 	. = get_damage_percentage() * 0.18
-	if(glass)
+	if (glass)
 		. *= 2
 	. = round(.)
 
@@ -452,27 +452,27 @@
 		var/turf/T = get_step(src, direction)
 		var/success = 0
 
-		if( istype(T, /turf/simulated/wall))
+		if ( istype(T, /turf/simulated/wall))
 			success = 1
-			if(propagate)
+			if (propagate)
 				var/turf/simulated/wall/W = T
 				W.update_connections(1)
 				W.update_icon()
 
-		else if( istype(T, /turf/simulated/shuttle/wall) ||	istype(T, /turf/unsimulated/wall))
+		else if ( istype(T, /turf/simulated/shuttle/wall) ||	istype(T, /turf/unsimulated/wall))
 			success = 1
 		else
 			for(var/obj/O in T)
 				for(var/b_type in blend_objects)
-					if( istype(O, b_type))
+					if ( istype(O, b_type))
 						success = 1
 
-					if(success)
+					if (success)
 						break
-				if(success)
+				if (success)
 					break
 
-		if(success)
+		if (success)
 			dirs |= direction
 	connections = dirs
 
@@ -507,7 +507,7 @@
 		req_access = req_access_diff(fore, aft)
 
 /obj/machinery/door/do_simple_ranged_interaction(mob/user)
-	if(!requiresID() || allowed(null))
+	if (!requiresID() || allowed(null))
 		toggle()
 	return TRUE
 

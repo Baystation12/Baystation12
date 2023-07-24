@@ -47,7 +47,7 @@ var/global/list/angle_step_to_dir = list(
 		var/image/compass_marker/I = new
 		I.loc = src
 
-		if(i % compass_interval == 0)
+		if (i % compass_interval == 0)
 			I.maptext = STYLE_SMALLFONTS_OUTLINE("<center>[get_string_from_angle(i * effective_compass_period)]</center>", 7, bearing_colour, bearing_outline_colour)
 		else
 			I.maptext = STYLE_SMALLFONTS("<center>〡</center>", 7, interval_colour)
@@ -78,7 +78,7 @@ var/global/list/angle_step_to_dir = list(
 	// Bit of a strange loop - grab the highest atom in our stack that isn't a turf.
 	while(istype(A) && A.loc && !isturf(A.loc))
 		A = A.loc
-	if(istype(A) && !isturf(A))
+	if (istype(A) && !isturf(A))
 		. = dir2angle(A.dir)
 	else
 		. = 0
@@ -92,14 +92,14 @@ var/global/list/angle_step_to_dir = list(
 
 /obj/compass_holder/proc/set_waypoint(id, label, heading_x, heading_y, heading_z, label_color)
 	var/datum/compass_waypoint/wp = LAZYACCESS(compass_waypoints, id)
-	if(!wp)
+	if (!wp)
 		wp = new /datum/compass_waypoint()
 	wp.set_values(label, heading_x, heading_y, heading_z, label_color)
 	LAZYSET(compass_waypoints, id, wp)
 	rebuild_overlay_lists(TRUE)
 
 /obj/compass_holder/proc/recalculate_heading(rebuild_icon = TRUE)
-	if(rebuild_icon)
+	if (rebuild_icon)
 		update_icon()
 
 /obj/compass_holder/proc/show_waypoint(id)
@@ -113,7 +113,7 @@ var/global/list/angle_step_to_dir = list(
 /obj/compass_holder/proc/hide_waypoints(rebuild_overlays = FALSE)
 	for(var/id in compass_waypoints)
 		hide_waypoint(id)
-	if(rebuild_overlays)
+	if (rebuild_overlays)
 		rebuild_overlay_lists(TRUE)
 
 /obj/compass_holder/proc/get_compass_origin()
@@ -122,14 +122,14 @@ var/global/list/angle_step_to_dir = list(
 /obj/compass_holder/proc/rebuild_overlay_lists(update_icon = FALSE)
 	compass_waypoint_markers = null
 	var/turf/T = get_compass_origin()
-	if(istype(T))
+	if (istype(T))
 		var/translate_val = get_label_offset()
 		for(var/id in compass_waypoints)
 			var/datum/compass_waypoint/wp = compass_waypoints[id]
-			if(should_show(wp))
+			if (should_show(wp))
 				wp.recalculate_heading(T.x, T.y, translate_val)
 				LAZYADD(compass_waypoint_markers, wp.compass_overlay)
-	if(update_icon)
+	if (update_icon)
 		update_icon()
 
 /obj/compass_holder/proc/should_show(datum/compass_waypoint/wp)

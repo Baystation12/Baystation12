@@ -7,7 +7,7 @@
 /// Called by one or more state singletons acting as nodes in a directed graph.
 /singleton/state_transition/Initialize()
 	. = ..()
-	if(ispath(target))
+	if (ispath(target))
 		target = GET_SINGLETON(target)
 
 /// Tells the FSM if it should or should not be allowed to transfer to the target state.

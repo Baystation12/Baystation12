@@ -40,14 +40,14 @@ Pipelines + Other Objects -> Pipe network
 	var/rotate_class = PIPE_ROTATE_STANDARD
 
 /obj/machinery/atmospherics/Initialize()
-	if(!icon_manager)
+	if (!icon_manager)
 		icon_manager = new()
 
-	if(!pipe_color)
+	if (!pipe_color)
 		pipe_color = color
 	color = null
 
-	if(!pipe_color_check(pipe_color))
+	if (!pipe_color_check(pipe_color))
 		pipe_color = null
 
 	set_dir(dir) // Does full dir init.
@@ -57,19 +57,19 @@ Pipelines + Other Objects -> Pipe network
 	atmos_initalized = TRUE
 
 /obj/machinery/atmospherics/hide(do_hide)
-	if(do_hide && level == ATOM_LEVEL_UNDER_TILE)
+	if (do_hide && level == ATOM_LEVEL_UNDER_TILE)
 		layer = PIPE_LAYER
 	else
 		reset_plane_and_layer()
 
 /obj/machinery/atmospherics/attackby(atom/A, mob/user as mob)
-	if(istype(A, /obj/item/device/scanner/gas))
+	if (istype(A, /obj/item/device/scanner/gas))
 		return
 	..()
 
 /obj/machinery/atmospherics/proc/add_underlay(turf/T, obj/machinery/atmospherics/node, direction, icon_connect_type)
-	if(node)
-		if(!T.is_plating() && node.level == ATOM_LEVEL_UNDER_TILE && istype(node, /obj/machinery/atmospherics/pipe))
+	if (node)
+		if (!T.is_plating() && node.level == ATOM_LEVEL_UNDER_TILE && istype(node, /obj/machinery/atmospherics/pipe))
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "down" + icon_connect_type)
 		else
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "intact" + icon_connect_type)
@@ -77,7 +77,7 @@ Pipelines + Other Objects -> Pipe network
 		underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "exposed" + icon_connect_type)
 
 /obj/machinery/atmospherics/proc/update_underlays()
-	if(check_icon_cache())
+	if (check_icon_cache())
 		return 1
 	else
 		return 0
@@ -89,8 +89,8 @@ Pipelines + Other Objects -> Pipe network
 	return (atmos1.connect_types & pipe2.connect_types)
 
 /obj/machinery/atmospherics/proc/check_icon_cache(safety = 0)
-	if(!istype(icon_manager))
-		if(!safety) //to prevent infinite loops
+	if (!istype(icon_manager))
+		if (!safety) //to prevent infinite loops
 			icon_manager = new()
 			check_icon_cache(1)
 		return 0
@@ -99,7 +99,7 @@ Pipelines + Other Objects -> Pipe network
 
 /obj/machinery/atmospherics/proc/color_cache_name(obj/machinery/atmospherics/node)
 	//Don't use this for standard pipes
-	if(!istype(node))
+	if (!istype(node))
 		return null
 
 	return node.pipe_color
@@ -146,19 +146,19 @@ Pipelines + Other Objects -> Pipe network
 	return base_pipe_initialize_directions(dir, connect_dir_type)
 
 /proc/base_pipe_initialize_directions(dir, connect_dir_type)
-	if(!dir)
+	if (!dir)
 		return 0
-	if(!(dir in GLOB.cardinal))
+	if (!(dir in GLOB.cardinal))
 		return dir // You're on your own. Used for bent pipes.
 	. = 0
 
-	if(connect_dir_type & SOUTH)
+	if (connect_dir_type & SOUTH)
 		. |= dir
-	if(connect_dir_type & NORTH)
+	if (connect_dir_type & NORTH)
 		. |= turn(dir, 180)
-	if(connect_dir_type & WEST)
+	if (connect_dir_type & WEST)
 		. |= turn(dir, -90)
-	if(connect_dir_type & EAST)
+	if (connect_dir_type & EAST)
 		. |= turn(dir, 90)
 
 /obj/machinery/atmospherics/set_dir(new_dir)
@@ -168,5 +168,5 @@ Pipelines + Other Objects -> Pipe network
 /// Used by constructors. Shouldn't generally be called from elsewhere.
 /obj/machinery/proc/set_initial_level()
 	var/turf/T = get_turf(src)
-	if(T)
+	if (T)
 		level = (!T.is_plating() ? ATOM_LEVEL_OVER_TILE : ATOM_LEVEL_UNDER_TILE)

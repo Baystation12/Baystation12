@@ -16,18 +16,18 @@
 
 /obj/effect/spider/stickyweb/Initialize()
 	. = ..()
-	if(prob(50))
+	if (prob(50))
 		icon_state = "stickyweb2"
 
 /obj/effect/spider/stickyweb/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
-	if(istype(mover, /mob/living/simple_animal/hostile/giant_spider))
+	if (air_group || (height==0)) return 1
+	if (istype(mover, /mob/living/simple_animal/hostile/giant_spider))
 		return 1
-	else if(istype(mover, /mob/living))
-		if(prob(50))
+	else if (istype(mover, /mob/living))
+		if (prob(50))
 			to_chat(mover, SPAN_WARNING("You get stuck in \the [src] for a moment."))
 			return 0
-	else if(istype(mover, /obj/item/projectile))
+	else if (istype(mover, /obj/item/projectile))
 		return prob(30)
 	return 1
 
@@ -49,7 +49,7 @@
 
 /obj/effect/spider/eggcluster/Destroy()
 	STOP_PROCESSING(SSobj, src)
-	if(istype(loc, /obj/item/organ/external))
+	if (istype(loc, /obj/item/organ/external))
 		var/obj/item/organ/external/O = loc
 		O.implants -= src
 	. = ..()
@@ -62,17 +62,17 @@
 	. = ..()
 
 /obj/effect/spider/eggcluster/Process()
-	if(prob(70))
+	if (prob(70))
 		amount_grown += rand(0,2)
-	if(amount_grown >= 100)
+	if (amount_grown >= 100)
 		var/num = rand(spiders_min, spiders_max)
 		var/obj/item/organ/external/O = null
-		if(istype(loc, /obj/item/organ/external))
+		if (istype(loc, /obj/item/organ/external))
 			O = loc
 
 		for(var/i=0, i<num, i++)
 			var/spiderling = new spider_type(src.loc, src)
-			if(O)
+			if (O)
 				O.implants += spiderling
 		qdel(src)
 
@@ -124,11 +124,11 @@
 	pixel_x = rand(-shift_range, shift_range)
 	pixel_y = rand(-shift_range, shift_range)
 
-	if(prob(growth_chance))
+	if (prob(growth_chance))
 		amount_grown = 1
 		dormant = FALSE
 
-	if(dormant)
+	if (dormant)
 		GLOB.moved_event.register(src, src, /obj/effect/spider/spiderling/proc/disturbed)
 	else
 		START_PROCESSING(SSobj, src)
@@ -146,7 +146,7 @@
 	growth_chance = 100
 
 /obj/effect/spider/spiderling/Destroy()
-	if(dormant)
+	if (dormant)
 		GLOB.moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
@@ -159,11 +159,11 @@
 
 
 /obj/effect/spider/spiderling/Crossed(mob/living/L)
-	if(dormant && istype(L) && L.mob_size > MOB_TINY)
+	if (dormant && istype(L) && L.mob_size > MOB_TINY)
 		disturbed()
 
 /obj/effect/spider/spiderling/proc/disturbed()
-	if(!dormant)
+	if (!dormant)
 		return
 	dormant = FALSE
 
@@ -171,7 +171,7 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/effect/spider/spiderling/Bump(atom/user)
-	if(istype(user, /obj/structure/table))
+	if (istype(user, /obj/structure/table))
 		forceMove(user.loc)
 	else
 		..()
@@ -182,21 +182,21 @@
 	qdel(src)
 
 /obj/effect/spider/spiderling/proc/check_vent(obj/machinery/atmospherics/unary/vent_pump/exit_vent)
-	if(QDELETED(exit_vent) || exit_vent.welded) // If it's qdeleted we probably were too, but in that case we won't be making this call due to timer cleanup.
+	if (QDELETED(exit_vent) || exit_vent.welded) // If it's qdeleted we probably were too, but in that case we won't be making this call due to timer cleanup.
 		forceMove(get_turf(entry_vent))
 		entry_vent = null
 		return TRUE
 
 /obj/effect/spider/spiderling/proc/start_vent_moving(obj/machinery/atmospherics/unary/vent_pump/exit_vent, travel_time)
-	if(check_vent(exit_vent))
+	if (check_vent(exit_vent))
 		return
-	if(prob(50))
+	if (prob(50))
 		audible_message(SPAN_NOTICE("You hear something squeezing through the ventilation ducts."))
 	forceMove(exit_vent)
 	addtimer(new Callback(src, .proc/end_vent_moving, exit_vent), travel_time)
 
 /obj/effect/spider/spiderling/proc/end_vent_moving(obj/machinery/atmospherics/unary/vent_pump/exit_vent)
-	if(check_vent(exit_vent))
+	if (check_vent(exit_vent))
 		return
 	forceMove(get_turf(exit_vent))
 	travelling_in_vent = FALSE
@@ -204,23 +204,23 @@
 
 /obj/effect/spider/spiderling/Process()
 
-	if(loc)
+	if (loc)
 		var/datum/gas_mixture/environment = loc.return_air()
-		if(environment && environment.gas[GAS_METHYL_BROMIDE] > 0)
+		if (environment && environment.gas[GAS_METHYL_BROMIDE] > 0)
 			kill_health()
 			return
 
-	if(travelling_in_vent)
-		if(istype(src.loc, /turf))
+	if (travelling_in_vent)
+		if (istype(src.loc, /turf))
 			travelling_in_vent = 0
 			entry_vent = null
-	else if(entry_vent)
-		if(get_dist(src, entry_vent) <= 1)
-			if(entry_vent.network && length(entry_vent.network.normal_members))
+	else if (entry_vent)
+		if (get_dist(src, entry_vent) <= 1)
+			if (entry_vent.network && length(entry_vent.network.normal_members))
 				var/list/vents = list()
 				for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in entry_vent.network.normal_members)
 					vents.Add(temp_vent)
-				if(!length(vents))
+				if (!length(vents))
 					entry_vent = null
 					return
 				var/obj/machinery/atmospherics/unary/vent_pump/exit_vent = pick(vents)
@@ -234,13 +234,13 @@
 				entry_vent = null
 	//=================
 
-	if(isturf(loc))
-		if(prob(25))
+	if (isturf(loc))
+		if (prob(25))
 			var/list/nearby = trange(5, src) - loc
-			if(length(nearby))
+			if (length(nearby))
 				var/target_atom = pick(nearby)
 				walk_to(src, target_atom, 5)
-				if(prob(10))
+				if (prob(10))
 					src.visible_message(SPAN_NOTICE("\The [src] skitters[pick(" away"," around","")]."))
 					// Reduces the risk of spiderlings hanging out at the extreme ranges of the shift range.
 					var/min_x = pixel_x <= -shift_range ? 0 : -2
@@ -250,37 +250,37 @@
 
 					pixel_x = clamp(pixel_x + rand(min_x, max_x), -shift_range, shift_range)
 					pixel_y = clamp(pixel_y + rand(min_y, max_y), -shift_range, shift_range)
-		else if(prob(5))
+		else if (prob(5))
 			//vent crawl!
 			for(var/obj/machinery/atmospherics/unary/vent_pump/v in view(7,src))
-				if(!v.welded)
+				if (!v.welded)
 					entry_vent = v
 					walk_to(src, entry_vent, 5)
 					break
 
-		if(amount_grown >= 100)
+		if (amount_grown >= 100)
 			if (GLOB.SPIDER_COUNT >= GLOB.MAX_SPIDER_COUNT)
 				amount_grown = 1
 				return
 			new greater_form(src.loc, src)
 			qdel(src)
-	else if(isorgan(loc))
-		if(!amount_grown) amount_grown = 1
+	else if (isorgan(loc))
+		if (!amount_grown) amount_grown = 1
 		var/obj/item/organ/external/O = loc
-		if(!O.owner || O.owner.stat == DEAD || amount_grown > 80)
+		if (!O.owner || O.owner.stat == DEAD || amount_grown > 80)
 			amount_grown = 20 //reset amount_grown so that people have some time to react to spiderlings before they grow big
 			O.implants -= src
 			forceMove(O.owner ? O.owner.loc : O.loc)
 			src.visible_message(SPAN_WARNING("\A [src] emerges from inside [O.owner ? "[O.owner]'s [O.name]" : "\the [O]"]!"))
-			if(O.owner)
+			if (O.owner)
 				O.owner.apply_damage(5, DAMAGE_BRUTE, O.organ_tag)
 				O.owner.apply_damage(3, DAMAGE_TOXIN, O.organ_tag)
-		else if(prob(1))
+		else if (prob(1))
 			O.owner.apply_damage(1, DAMAGE_TOXIN, O.organ_tag)
-			if(world.time > last_itch + 30 SECONDS)
+			if (world.time > last_itch + 30 SECONDS)
 				last_itch = world.time
 				to_chat(O.owner, SPAN_NOTICE("Your [O.name] itches..."))
-	else if(prob(1))
+	else if (prob(1))
 		src.visible_message(SPAN_NOTICE("\The [src] skitters."))
 
 	if (istype(loc, /turf) && amount_grown > 0)
@@ -306,7 +306,7 @@
 
 
 	for(var/atom/movable/O in loc)
-		if(!O.anchored)
+		if (!O.anchored)
 			O.forceMove(src)
 
 			if (istype(O, /mob/living))

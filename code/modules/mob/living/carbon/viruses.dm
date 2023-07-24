@@ -3,9 +3,9 @@
 	var/immunity_norm 	= 100		//it will regenerate to this value
 
 /mob/living/carbon/proc/handle_viruses()
-	if(status_flags & GODMODE)	return 0	//godmode
+	if (status_flags & GODMODE)	return 0	//godmode
 
-	if(immunity > 0.2 * immunity_norm && immunity < immunity_norm)
+	if (immunity > 0.2 * immunity_norm && immunity < immunity_norm)
 		immunity = min(immunity + 0.25, immunity_norm)
 
 /mob/living/carbon/proc/virus_immunity()

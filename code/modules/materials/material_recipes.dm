@@ -1,6 +1,6 @@
 /material/proc/get_recipes(reinf_mat)
 	var/key = reinf_mat ? reinf_mat : "base"
-	if(!LAZYACCESS(recipes,key))
+	if (!LAZYACCESS(recipes,key))
 		LAZYSET(recipes,key,generate_recipes(reinf_mat))
 	return recipes[key]
 
@@ -12,13 +12,13 @@
 /material/proc/generate_recipes(reinforce_material)
 	. = list()
 
-	if(opacity < 0.6)
+	if (opacity < 0.6)
 		. += new/datum/stack_recipe/furniture/borderwindow(src, reinforce_material)
 		. += new/datum/stack_recipe/furniture/fullwindow(src, reinforce_material)
-		if(integrity > 75 || reinforce_material)
+		if (integrity > 75 || reinforce_material)
 			. += new/datum/stack_recipe/furniture/windoor(src, reinforce_material)
 
-	if(reinforce_material)	//recipes below don't support composite materials
+	if (reinforce_material)	//recipes below don't support composite materials
 		return
 
 	// If is_brittle() returns true, these are only good for a single strike.
@@ -27,14 +27,14 @@
 	. += new/datum/stack_recipe/clipboard(src)
 	. += new/datum/stack_recipe/cross(src)
 
-	if(hardness >= MATERIAL_FLEXIBLE)
+	if (hardness >= MATERIAL_FLEXIBLE)
 		. += new/datum/stack_recipe/baseball_bat(src)
 		. += new/datum/stack_recipe/urn(src)
 		. += new/datum/stack_recipe/spoon(src)
 		. += new/datum/stack_recipe/coin(src)
 		. += new/datum/stack_recipe/furniture/door(src)
 
-	if(integrity >= 50 && hardness >= MATERIAL_FLEXIBLE + 10)
+	if (integrity >= 50 && hardness >= MATERIAL_FLEXIBLE + 10)
 		. += new/datum/stack_recipe/furniture/barricade(src)
 		. += new/datum/stack_recipe/furniture/stool(src)
 		. += new/datum/stack_recipe/furniture/bar_stool(src)
@@ -49,7 +49,7 @@
 		. += new/datum/stack_recipe/furniture/wall_frame(src)
 		. += new/datum/stack_recipe/furniture/table_frame(src)
 
-	if(hardness > MATERIAL_RIGID + 10)
+	if (hardness > MATERIAL_RIGID + 10)
 		. += new/datum/stack_recipe/fork(src)
 		. += new/datum/stack_recipe/knife(src)
 		. += new/datum/stack_recipe/bell(src)
@@ -60,7 +60,7 @@
 
 /material/steel/generate_recipes(reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
+	if (reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe_list("office chairs",list(
 		new/datum/stack_recipe/furniture/chair/office/dark(src),
@@ -98,7 +98,7 @@
 
 /material/plasteel/generate_recipes(reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
+	if (reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/ai_core(src)
 	. += new/datum/stack_recipe/furniture/crate(src)
@@ -106,13 +106,13 @@
 
 /material/stone/generate_recipes(reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
+	if (reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/furniture/planting_bed(src)
 
 /material/plastic/generate_recipes(reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
+	if (reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/furniture/crate/plastic(src)
 	. += new/datum/stack_recipe/bag(src)
@@ -124,7 +124,7 @@
 
 /material/wood/generate_recipes(reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
+	if (reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/sandal(src)
 	. += new/datum/stack_recipe/tile/wood(src)
@@ -143,31 +143,31 @@
 
 /material/wood/mahogany/generate_recipes(reinforce_material)
 	. = ..()
-	if(reinforce_material)
+	if (reinforce_material)
 		return
 	. += new/datum/stack_recipe/tile/mahogany(src)
 
 /material/wood/maple/generate_recipes(reinforce_material)
 	. = ..()
-	if(reinforce_material)
+	if (reinforce_material)
 		return
 	. += new/datum/stack_recipe/tile/maple(src)
 
 /material/wood/ebony/generate_recipes(reinforce_material)
 	. = ..()
-	if(reinforce_material)
+	if (reinforce_material)
 		return
 	. += new/datum/stack_recipe/tile/ebony(src)
 
 /material/wood/walnut/generate_recipes(reinforce_material)
 	. = ..()
-	if(reinforce_material)
+	if (reinforce_material)
 		return
 	. += new/datum/stack_recipe/tile/walnut(src)
 
 /material/cardboard/generate_recipes(reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
+	if (reinforce_material)	//recipes below don't support composite materials
 		return
 	. += create_recipe_list(/datum/stack_recipe/box)
 	. += new/datum/stack_recipe/cardborg_suit(src)
@@ -176,13 +176,13 @@
 
 /material/aluminium/generate_recipes(reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
+	if (reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/grenade(src)
 
 /material/leather/generate_recipes(reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipes below don't support composite materials
+	if (reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/toolbelt(src)
 	. += new/datum/stack_recipe/pockets(src)

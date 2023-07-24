@@ -25,7 +25,7 @@
 	message = "<span class='notice'><b>You feel a pleasant rush of heat move through your body.</b></span>"
 
 /spell/targeted/heal_target/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 	amt_dam_brute -= 15
 	amt_dam_fire -= 15
@@ -68,7 +68,7 @@
 	message = "<span class='notice'><b>Your body feels like a warm, cozy fire.</b></span>"
 
 /spell/targeted/heal_target/major/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 	amt_blood  = 28
 	amt_organ = 5
@@ -103,7 +103,7 @@
 	amt_dam_fire = -25
 
 /spell/targeted/heal_target/area/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 	amt_dam_brute -= 15
 	amt_dam_fire -= 15
@@ -141,7 +141,7 @@
 	cast_sound = 'sound/magic/disintegrate.ogg'
 
 /spell/targeted/heal_target/sacrifice/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 
 	amt_organ = 25
@@ -185,7 +185,7 @@
 	return ..()
 
 /spell/targeted/heal_target/trance/proc/cancel_rift()
-	if(effect)
+	if (effect)
 		var/mob/living/L = locate() in effect
 		L.status_flags &= ~GODMODE
 		L.forceMove(get_turf(L))
@@ -223,15 +223,15 @@
 	hud_state = "heal_revoke"
 
 /spell/targeted/revoke/cast(list/targets, mob/living/user)
-	if(alert(user, "Are you sure?", "Alert", "Yes", "No") == "Yes" && alert(user, "Are you ABSOLUTELY SURE?", "Alert", "Absolutely!", "No") == "Absolutely!")
+	if (alert(user, "Are you sure?", "Alert", "Yes", "No") == "Yes" && alert(user, "Are you ABSOLUTELY SURE?", "Alert", "Absolutely!", "No") == "Absolutely!")
 		var/should_wait = 1
 		for(var/t in targets)
 			var/mob/living/M = t
 			M.rejuvenate()
-			if(M.client) //We've got a dude
+			if (M.client) //We've got a dude
 				should_wait = 0
 				break //Don't need to check anymore.
-		if(should_wait)
+		if (should_wait)
 			addtimer(new Callback(src,.proc/check_for_revoke,targets), 30 SECONDS)
 		else
 			revoke_spells()
@@ -240,19 +240,19 @@
 /spell/targeted/revoke/proc/check_for_revoke(list/targets)
 	for(var/t in targets)
 		var/mob/M = t
-		if(M.client)
+		if (M.client)
 			revoke_spells()
 			return
 	charge_counter = charge_max
 	to_chat(holder,SPAN_NOTICE("\The [src] refreshes as it seems it could not bring back the souls of those you healed."))
 
 /spell/targeted/revoke/proc/revoke_spells()
-	if(!istype(holder, /mob/living))
+	if (!istype(holder, /mob/living))
 		return
 	var/mob/living/M = holder
-	if(M.mind)
+	if (M.mind)
 		for(var/s in M.mind.learned_spells)
-			if(istype(s, /spell/toggle_armor)) //Can keep the armor n junk.
+			if (istype(s, /spell/toggle_armor)) //Can keep the armor n junk.
 				continue
 			M.remove_spell(s)
 	for(var/a in M.auras)

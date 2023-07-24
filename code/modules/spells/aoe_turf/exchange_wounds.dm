@@ -25,19 +25,19 @@
 	new /obj/effect/temporary(get_turf(user),10,'icons/effects/effects.dmi',"purple_electricity_constant")
 	for(var/t in targets)
 		for(var/mob/living/L in t)
-			if(L.faction != user.faction)
+			if (L.faction != user.faction)
 				continue
 			new /obj/effect/temporary(get_turf(L),10,'icons/effects/effects.dmi',"green_sparkles")
-			if(L.getBruteLoss() > 5)
+			if (L.getBruteLoss() > 5)
 				L.adjustBruteLoss(-5)
 				user.adjustBruteLoss(2)
 				amt_healed += 5
-			if(L.getFireLoss() > 5)
+			if (L.getFireLoss() > 5)
 				L.adjustFireLoss(-5)
 				user.adjustFireLoss(2)
 				amt_healed += 5
 
 /spell/aoe_turf/exchange_wounds/check_valid_targets()
-	if(amt_healed > heal_max)
+	if (amt_healed > heal_max)
 		return FALSE
 	return ..()

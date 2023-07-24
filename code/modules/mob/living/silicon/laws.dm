@@ -5,9 +5,9 @@
 
 /mob/living/silicon/Initialize(mapload)
 	. = ..()
-	if(!laws)
+	if (!laws)
 		laws = GLOB.using_map.default_law_type
-	if(ispath(laws))
+	if (ispath(laws))
 		laws = new laws()
 	laws_sanity_check()
 
@@ -26,7 +26,7 @@
 
 /mob/living/silicon/robot/set_zeroth_law(law, law_borg)
 	..()
-	if(tracking_entities)
+	if (tracking_entities)
 		to_chat(src, SPAN_WARNING("Internal camera is currently being accessed."))
 
 /mob/living/silicon/proc/add_ion_law(law)
@@ -54,28 +54,28 @@
 /mob/living/silicon/proc/clear_inherent_laws(silent = 0)
 	laws_sanity_check()
 	laws.clear_inherent_laws()
-	if(!silent)
+	if (!silent)
 		log_law("cleared the inherent laws of [src]")
 
 /mob/living/silicon/proc/clear_ion_laws(silent = 0)
 	laws_sanity_check()
 	laws.clear_ion_laws()
-	if(!silent)
+	if (!silent)
 		log_law("cleared the ion laws of [src]")
 
 /mob/living/silicon/proc/clear_supplied_laws(silent = 0)
 	laws_sanity_check()
 	laws.clear_supplied_laws()
-	if(!silent)
+	if (!silent)
 		log_law("cleared the supplied laws of [src]")
 
 /mob/living/silicon/proc/statelaws(datum/ai_laws/laws)
 	var/prefix = ""
-	if(MAIN_CHANNEL == lawchannel)
+	if (MAIN_CHANNEL == lawchannel)
 		prefix = ";"
-	else if(lawchannel == "Binary")
+	else if (lawchannel == "Binary")
 		prefix = "[get_language_prefix()]b"
-	else if((lawchannel in additional_law_channels))
+	else if ((lawchannel in additional_law_channels))
 		prefix = additional_law_channels[lawchannel]
 	else
 		prefix = get_radio_key_from_channel(lawchannel)
@@ -83,7 +83,7 @@
 	dostatelaws(lawchannel, prefix, laws)
 
 /mob/living/silicon/proc/dostatelaws(method, prefix, datum/ai_laws/laws)
-	if(stating_laws[prefix])
+	if (stating_laws[prefix])
 		to_chat(src, SPAN_NOTICE("[method]: Already stating laws using this communication method."))
 		return
 
@@ -93,15 +93,15 @@
 
 	for(var/datum/ai_law/law in laws.laws_to_state())
 		can_state = statelaw("[prefix][law.get_index()]. [law.law]")
-		if(!can_state)
+		if (!can_state)
 			break
 
-	if(!can_state)
+	if (!can_state)
 		to_chat(src, SPAN_DANGER("[method]: Unable to state laws. Communication method unavailable."))
 	stating_laws[prefix] = 0
 
 /mob/living/silicon/proc/statelaw(law, mob/living/L = src)
-	if(L.say(law))
+	if (L.say(law))
 		sleep(10)
 		return 1
 

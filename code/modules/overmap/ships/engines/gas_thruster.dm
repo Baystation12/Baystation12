@@ -27,24 +27,24 @@
 	return nozzle.thrust_limit
 
 /datum/ship_engine/gas_thruster/is_on()
-	if(nozzle.use_power && nozzle.operable())
-		if(nozzle.next_on > world.time)
+	if (nozzle.use_power && nozzle.operable())
+		if (nozzle.next_on > world.time)
 			return -1
 		else
 			return 1
 	return 0
 
 /datum/ship_engine/gas_thruster/toggle()
-	if(nozzle.use_power)
+	if (nozzle.use_power)
 		nozzle.update_use_power(POWER_USE_OFF)
 	else
-		if(nozzle.blockage)
-			if(nozzle.check_blockage())
+		if (nozzle.blockage)
+			if (nozzle.check_blockage())
 				return
 		nozzle.update_use_power(POWER_USE_IDLE)
-		if(!nozzle.is_powered())//try again
+		if (!nozzle.is_powered())//try again
 			nozzle.power_change()
-		if(nozzle.is_on())//if everything is in working order, start booting!
+		if (nozzle.is_on())//if everything is in working order, start booting!
 			nozzle.next_on = world.time + nozzle.boot_time
 
 /datum/ship_engine/gas_thruster/can_burn()
@@ -91,9 +91,9 @@
 
 	for(var/ship in SSshuttle.ships)
 		var/obj/effect/overmap/visitable/ship/S = ship
-		if(S.check_ownership(src))
+		if (S.check_ownership(src))
 			S.engines |= controller
-			if(dir != S.fore_dir)
+			if (dir != S.fore_dir)
 				set_broken(TRUE)
 			break
 
@@ -104,19 +104,19 @@
 
 /obj/machinery/atmospherics/unary/engine/on_update_icon()
 	overlays.Cut()
-	if(is_on())
+	if (is_on())
 		overlays += image_repository.overlay_image(icon, "nozzle_idle", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 
 /obj/machinery/atmospherics/unary/engine/proc/get_status()
 	. = list()
 	.+= "Location: [get_area(src)]."
-	if(!is_powered())
+	if (!is_powered())
 		.+= SPAN_CLASS("average", "Insufficient power to operate.")
-	if(!check_fuel())
+	if (!check_fuel())
 		.+= SPAN_CLASS("average", "Insufficient fuel for a burn.")
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		.+= SPAN_CLASS("average", "Inoperable engine configuration.")
-	if(blockage)
+	if (blockage)
 		.+= SPAN_CLASS("average", "Obstruction of airflow detected.")
 
 	.+= "Propellant total mass: [round(air_contents.get_mass(),0.01)] kg."
@@ -126,7 +126,7 @@
 
 /obj/machinery/atmospherics/unary/engine/power_change()
 	. = ..()
-	if(!is_powered())
+	if (!is_powered())
 		update_use_power(POWER_USE_OFF)
 
 /obj/machinery/atmospherics/unary/engine/update_use_power()
@@ -140,7 +140,7 @@
 	return air_contents.total_moles > moles_per_burn * thrust_limit
 
 /obj/machinery/atmospherics/unary/engine/proc/get_thrust()
-	if(!is_on() || !check_fuel())
+	if (!is_on() || !check_fuel())
 		return 0
 	var/used_part = moles_per_burn/air_contents.get_total_moles() * thrust_limit
 	. = calculate_thrust(air_contents, used_part)
@@ -152,7 +152,7 @@
 	var/turf/A = get_step(src, exhaust_dir)
 	var/turf/B = A
 	while(isturf(A) && !(isspace(A) || isopenspace(A)))
-		if((B.c_airblock(A)) & AIR_BLOCKED)
+		if ((B.c_airblock(A)) & AIR_BLOCKED)
 			blockage = TRUE
 			break
 		B = A
@@ -160,24 +160,24 @@
 	return blockage
 
 /obj/machinery/atmospherics/unary/engine/proc/burn()
-	if(!is_on())
+	if (!is_on())
 		return 0
-	if(!check_fuel() || (0 < use_power_oneoff(charge_per_burn)) || check_blockage())
+	if (!check_fuel() || (0 < use_power_oneoff(charge_per_burn)) || check_blockage())
 		audible_message(SPAN_WARNING("[src] coughs once and goes silent!"))
 		update_use_power(POWER_USE_OFF)
 		return 0
 
 	var/datum/gas_mixture/removed = air_contents.remove(moles_per_burn * thrust_limit)
-	if(!removed)
+	if (!removed)
 		return 0
 	. = calculate_thrust(removed)
 	playsound(loc, 'sound/machines/thruster.ogg', 100 * thrust_limit, 0, world.view * 4, 0.1)
-	if(network)
+	if (network)
 		network.update = 1
 
 	var/exhaust_dir = reverse_direction(dir)
 	var/turf/T = get_step(src,exhaust_dir)
-	if(T)
+	if (T)
 		T.assume_air(removed)
 		new/obj/effect/engine_exhaust(T, dir)
 

@@ -18,11 +18,11 @@
 	var/static/denominations = list(1000,500,200,100,50,20,10,1)
 
 /obj/item/spacecash/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/spacecash))
-		if(istype(W, /obj/item/spacecash/ewallet)) return 0
+	if (istype(W, /obj/item/spacecash))
+		if (istype(W, /obj/item/spacecash/ewallet)) return 0
 
 		var/obj/item/spacecash/bundle/bundle
-		if(!istype(W, /obj/item/spacecash/bundle))
+		if (!istype(W, /obj/item/spacecash/bundle))
 			var/obj/item/spacecash/cash = W
 			bundle = new (src.loc)
 			bundle.worth += cash.worth
@@ -31,19 +31,19 @@
 			bundle = W
 		bundle.worth += src.worth
 		bundle.update_icon()
-		if(istype(user, /mob/living/carbon/human))
+		if (istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/h_user = user
 			h_user.drop_from_inventory(bundle)
 			h_user.put_in_hands(bundle)
 		to_chat(user, SPAN_NOTICE("You add [src.worth] [GLOB.using_map.local_currency_name] worth of money to the bundles.<br>It holds [bundle.worth] [GLOB.using_map.local_currency_name] now."))
 		qdel(src)
 
-	else if(istype(W, /obj/item/gun/launcher/money))
+	else if (istype(W, /obj/item/gun/launcher/money))
 		var/obj/item/gun/launcher/money/L = W
 		L.absorb_cash(src, user)
 
 /obj/item/spacecash/proc/getMoneyImages()
-	if(icon_state)
+	if (icon_state)
 		return list(icon_state)
 
 /obj/item/spacecash/bundle
@@ -57,7 +57,7 @@
 	update_icon()
 
 /obj/item/spacecash/bundle/getMoneyImages()
-	if(icon_state)
+	if (icon_state)
 		return list(icon_state)
 	. = list()
 	var/sum = src.worth
@@ -67,7 +67,7 @@
 			sum -= i
 			num++
 			. += "spacecash[i]"
-	if(num == 0) // Less than one thaler, let's just make it look like 1 for ease
+	if (num == 0) // Less than one thaler, let's just make it look like 1 for ease
 		. += "spacecash1"
 
 /obj/item/spacecash/bundle/on_update_icon()
@@ -84,7 +84,7 @@
 		src.overlays += banknote
 
 	src.desc = "They are worth [worth] [GLOB.using_map.local_currency_name]."
-	if(worth in denominations)
+	if (worth in denominations)
 		src.SetName("[worth] [GLOB.using_map.local_currency_name]")
 	else
 		src.SetName("pile of [worth] [GLOB.using_map.local_currency_name]")
@@ -160,10 +160,10 @@
 	worth = 1000
 
 /proc/spawn_money(sum, spawnloc, mob/living/carbon/human/human_user as mob)
-	if(sum in list(1000,500,200,100,50,20,10,1))
+	if (sum in list(1000,500,200,100,50,20,10,1))
 		var/cash_type = text2path("/obj/item/spacecash/bundle/c[sum]")
 		var/obj/cash = new cash_type (spawnloc)
-		if(ishuman(human_user) && !human_user.get_active_hand())
+		if (ishuman(human_user) && !human_user.get_active_hand())
 			human_user.put_in_hands(cash)
 	else
 		var/obj/item/spacecash/bundle/bundle = new (spawnloc)

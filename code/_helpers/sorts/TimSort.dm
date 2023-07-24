@@ -1,12 +1,12 @@
 //TimSort interface
 /proc/sortTim(list/L, cmp=/proc/cmp_numeric_asc, associative, fromIndex=1, toIndex=0)
 	RETURN_TYPE(/list)
-	if(L && length(L) >= 2)
+	if (L && length(L) >= 2)
 		fromIndex = fromIndex % length(L)
 		toIndex = toIndex % (length(L)+1)
-		if(fromIndex <= 0)
+		if (fromIndex <= 0)
 			fromIndex += length(L)
-		if(toIndex <= 0)
+		if (toIndex <= 0)
 			toIndex += length(L) + 1
 
 		sortInstance.L = L

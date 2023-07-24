@@ -13,9 +13,9 @@
 	gender = pick(MALE, FEMALE)
 
 /obj/structure/skele_stand/proc/rattle_bones(mob/user, atom/thingy)
-	if((world.time - cooldown) <= 1 SECOND)
+	if ((world.time - cooldown) <= 1 SECOND)
 		return //reduces spam.
-	if(user)
+	if (user)
 		visible_message("\The [user] pushes on [src][thingy?" with \the [thingy]":""], giving the bones a good rattle.")
 	else
 		visible_message("\The [src] rattles on \his stand upon hitting [thingy?"\the [thingy]":"something"].")
@@ -23,9 +23,9 @@
 	playsound(loc, 'sound/effects/bonerattle.ogg', 40)
 
 /obj/structure/skele_stand/attack_hand(mob/user)
-	if(length(swag))
+	if (length(swag))
 		var/obj/item/clothing/C = input("What piece of clothing do you want to remove?", "Skeleton undressing") as null|anything in list_values(swag)
-		if(C)
+		if (C)
 			swag -= get_key_by_value(swag, C)
 			user.put_in_hands(C)
 			to_chat(user,SPAN_NOTICE("You take \the [C] off \the [src]"))
@@ -38,7 +38,7 @@
 
 /obj/structure/skele_stand/examine(mob/user)
 	. = ..()
-	if(length(swag))
+	if (length(swag))
 		var/list/swagnames = list()
 		for(var/slot in swag)
 			var/obj/item/clothing/C = swag[slot]

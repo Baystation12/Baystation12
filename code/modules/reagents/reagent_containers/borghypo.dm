@@ -43,24 +43,24 @@
 	. = ..()
 
 /obj/item/reagent_containers/borghypo/Process() //Every [recharge_time] seconds, recharge some reagents for the cyborg+
-	if(++charge_tick < recharge_time)
+	if (++charge_tick < recharge_time)
 		return 0
 	charge_tick = 0
 
-	if(isrobot(loc))
+	if (isrobot(loc))
 		var/mob/living/silicon/robot/R = loc
-		if(R && R.cell)
+		if (R && R.cell)
 			for(var/T in reagent_ids)
-				if(reagent_volumes[T] < volume)
+				if (reagent_volumes[T] < volume)
 					R.cell.use(charge_cost)
 					reagent_volumes[T] = min(reagent_volumes[T] + 5, volume)
 	return 1
 
 /obj/item/reagent_containers/borghypo/attack(mob/living/M, mob/user, target_zone)
-	if(!istype(M))
+	if (!istype(M))
 		return
 
-	if(mode && !reagent_volumes[reagent_ids[mode]])
+	if (mode && !reagent_volumes[reagent_ids[mode]])
 		to_chat(user, SPAN_WARNING("\The [src] is empty."))
 		return
 	var/obj/item/reagent_containers/container = null
@@ -76,14 +76,14 @@
 	if (allow)
 		if (allow == INJECTION_PORT)
 			user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [M]'s suit!"))
-			if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
+			if (!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
 				return
 		to_chat(user, SPAN_NOTICE("You inject [M] with the injector."))
-		if(ishuman(M))
+		if (ishuman(M))
 			var/mob/living/carbon/human/H = M
 			H.custom_pain(SPAN_WARNING("You feel a tiny prick!"), 1, TRUE, H.get_organ(user.zone_sel.selecting))
 
-		if(M.reagents)
+		if (M.reagents)
 			if (mode)
 				var/datum/reagent/R = reagent_ids[mode]
 				var/should_admin_log = initial(R.should_admin_log)
@@ -108,7 +108,7 @@
 
 /obj/item/reagent_containers/borghypo/examine(mob/user, distance)
 	. = ..()
-	if(distance > 2)
+	if (distance > 2)
 		return
 
 	if (mode)
@@ -159,7 +159,7 @@
 		))
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if(!ui)
+	if (!ui)
 		var/nbottles = length(bottles)
 		var/width = max(330, nbottles * 165)
 		var/height = min(600, 240 + 10 * length(reagent_ids))
@@ -249,19 +249,19 @@
 	return
 
 /obj/item/reagent_containers/borghypo/service/afterattack(obj/target, mob/user, proximity)
-	if(!proximity)
+	if (!proximity)
 		return
 
-	if(!target.is_open_container() || !target.reagents)
+	if (!target.is_open_container() || !target.reagents)
 		return
 
-	if(!target.reagents.get_free_space())
+	if (!target.reagents.get_free_space())
 		to_chat(user, SPAN_WARNING("[target] is full."))
 		return
 
 	if (mode)
 		var/datum/reagent/R = reagent_ids[mode]
-		if(!reagent_volumes[R])
+		if (!reagent_volumes[R])
 			to_chat(user, SPAN_WARNING("[src] is out of this reagent, give it some time to refill."))
 			return
 		var/transferred = min(amount_per_transfer_from_this, reagent_volumes[R])

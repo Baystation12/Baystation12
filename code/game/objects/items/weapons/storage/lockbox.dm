@@ -106,7 +106,7 @@
 	src.overlays.Cut()
 	if (!broken)
 		overlays += image(icon, src, "led[locked]")
-		if(locked)
+		if (locked)
 			overlays += image(icon, src, "cover")
 	else
 		overlays += image(icon, src, "ledb")

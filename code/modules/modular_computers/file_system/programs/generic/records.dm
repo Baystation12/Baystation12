@@ -21,7 +21,7 @@
 	var/list/user_access = get_record_access(user)
 
 	data["message"] = message
-	if(active_record)
+	if (active_record)
 		send_rsc(user, active_record.photo_front, "front_[active_record.uid].png")
 		send_rsc(user, active_record.photo_side, "side_[active_record.uid].png")
 		data["pic_edit"] = check_access(user, access_bridge) || check_access(user, access_security)
@@ -54,7 +54,7 @@
 
 	var/obj/PC = nano_host()
 	var/datum/extension/interactive/ntos/os = get_extension(PC, /datum/extension/interactive/ntos)
-	if(os && os.emagged())
+	if (os && os.emagged())
 		user_access = user_access.Copy()
 		user_access |= access_syndicate
 
@@ -62,79 +62,79 @@
 
 /datum/nano_module/records/proc/edit_field(mob/user, field_ID)
 	var/datum/computer_file/report/crew_record/R = active_record
-	if(!R)
+	if (!R)
 		return
 	var/datum/report_field/F = R.field_from_ID(field_ID)
-	if(!F)
+	if (!F)
 		return
-	if(!F.verify_access_edit(get_record_access(user)))
+	if (!F.verify_access_edit(get_record_access(user)))
 		to_chat(user, SPAN_NOTICE("\The [nano_host()] flashes an \"Access Denied\" warning."))
 		return
 	F.ask_value(user)
 
 /datum/nano_module/records/Topic(href, href_list)
-	if(..())
+	if (..())
 		return 1
-	if(href_list["clear_active"])
+	if (href_list["clear_active"])
 		active_record = null
 		return 1
-	if(href_list["clear_message"])
+	if (href_list["clear_message"])
 		message = null
 		return 1
-	if(href_list["set_active"])
+	if (href_list["set_active"])
 		var/ID = text2num(href_list["set_active"])
 		for(var/datum/computer_file/report/crew_record/R in GLOB.all_crew_records)
-			if(R.uid == ID)
+			if (R.uid == ID)
 				active_record = R
 				break
 		return 1
-	if(href_list["new_record"])
-		if(!check_access(usr, access_bridge))
+	if (href_list["new_record"])
+		if (!check_access(usr, access_bridge))
 			to_chat(usr, "Access Denied.")
 			return
 		active_record = new/datum/computer_file/report/crew_record()
 		GLOB.all_crew_records.Add(active_record)
 		return 1
-	if(href_list["print_active"])
-		if(!active_record)
+	if (href_list["print_active"])
+		if (!active_record)
 			return
 		print_text(record_to_html(active_record, get_record_access(usr)), usr)
 		return 1
-	if(href_list["search"])
+	if (href_list["search"])
 		var/field_name = href_list["search"]
 		var/search = sanitize(input("Enter the value for search for.") as null|text)
-		if(!search)
+		if (!search)
 			return
 		for(var/datum/computer_file/report/crew_record/R in GLOB.all_crew_records)
 			var/datum/report_field/field = R.field_from_name(field_name)
-			if(findtext(lowertext(field.get_value()), lowertext(search)))
+			if (findtext(lowertext(field.get_value()), lowertext(search)))
 				active_record = R
 				return 1
 		message = "Unable to find record containing '[search]'"
 		return 1
 
 	var/datum/computer_file/report/crew_record/R = active_record
-	if(!istype(R))
+	if (!istype(R))
 		return 1
-	if(href_list["edit_photo_front"])
+	if (href_list["edit_photo_front"])
 		var/photo = get_photo(usr)
-		if(photo && active_record)
+		if (photo && active_record)
 			active_record.photo_front = photo
 		return 1
-	if(href_list["edit_photo_side"])
+	if (href_list["edit_photo_side"])
 		var/photo = get_photo(usr)
-		if(photo && active_record)
+		if (photo && active_record)
 			active_record.photo_side = photo
 		return 1
-	if(href_list["edit_field"])
+	if (href_list["edit_field"])
 		edit_field(usr, text2num(href_list["edit_field"]))
 		return 1
 
 /datum/nano_module/records/proc/get_photo(mob/user)
-	if(istype(user.get_active_hand(), /obj/item/photo))
+	if (istype(user.get_active_hand(), /obj/item/photo))
 		var/obj/item/photo/photo = user.get_active_hand()
 		return photo.img
-	if(istype(user, /mob/living/silicon))
+	if (istype(user, /mob/living/silicon))
 		var/mob/living/silicon/tempAI = usr
 		var/obj/item/photo/selection = tempAI.GetPicture()
 		if (selection)

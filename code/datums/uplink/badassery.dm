@@ -69,7 +69,7 @@
 	for(var/datum/uplink_item/UI in get_random_uplink_items(U, U.uses, loc))
 		UI.purchase_log(U)
 		var/obj/item/I = UI.get_goods(U, loc)
-		if(istype(I))
+		if (istype(I))
 			bought_items += I
 
 	return bought_items
@@ -101,7 +101,7 @@
 	return C
 
 /datum/uplink_item/item/badassery/surplus/log_icon()
-	if(!icon)
+	if (!icon)
 		var/obj/structure/largecrate/C = /obj/structure/largecrate
 		icon = image(initial(C.icon), initial(C.icon_state))
 

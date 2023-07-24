@@ -50,7 +50,7 @@
 
 /datum/evacuation_controller/starship/finish_evacuation()
 	..()
-	if(!emergency_evacuation) //bluespace jump
+	if (!emergency_evacuation) //bluespace jump
 		SetUniversalState(/datum/universal_state) //clear jump state
 
 /datum/evacuation_controller/starship/available_evac_options()

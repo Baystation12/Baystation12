@@ -312,38 +312,38 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 /datum/species/New()
 
-	if(!codex_description)
+	if (!codex_description)
 		codex_description = description
 
 	for(var/token in ALL_CULTURAL_TAGS)
 
 		var/force_val = force_cultural_info[token]
-		if(force_val)
+		if (force_val)
 			default_cultural_info[token] = force_val
 			available_cultural_info[token] = list(force_val)
 
-		else if(additional_available_cultural_info[token])
-			if(!available_cultural_info[token])
+		else if (additional_available_cultural_info[token])
+			if (!available_cultural_info[token])
 				available_cultural_info[token] = list()
 			available_cultural_info[token] |= additional_available_cultural_info[token]
 
-		else if(!LAZYLEN(available_cultural_info[token]))
+		else if (!LAZYLEN(available_cultural_info[token]))
 			var/list/map_systems = GLOB.using_map.available_cultural_info[token]
 			available_cultural_info[token] = map_systems.Copy()
 
-		if(LAZYLEN(available_cultural_info[token]) && !default_cultural_info[token])
+		if (LAZYLEN(available_cultural_info[token]) && !default_cultural_info[token])
 			var/list/avail_systems = available_cultural_info[token]
 			default_cultural_info[token] = avail_systems[1]
 
-		if(!default_cultural_info[token])
+		if (!default_cultural_info[token])
 			default_cultural_info[token] = GLOB.using_map.default_cultural_info[token]
 
-	if(hud_type)
+	if (hud_type)
 		hud = new hud_type()
 	else
 		hud = new()
 
-	if(LAZYLEN(descriptors))
+	if (LAZYLEN(descriptors))
 		var/list/descriptor_datums = list()
 		for(var/desctype in descriptors)
 			var/datum/mob_descriptor/descriptor = new desctype
@@ -352,10 +352,10 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		descriptors = descriptor_datums
 
 	//If the species has eyes, they are the default vision organ
-	if(!vision_organ && has_organ[BP_EYES])
+	if (!vision_organ && has_organ[BP_EYES])
 		vision_organ = BP_EYES
 	//If the species has lungs, they are the default breathing organ
-	if(!breathing_organ && has_organ[BP_LUNGS])
+	if (!breathing_organ && has_organ[BP_LUNGS])
 		breathing_organ = BP_LUNGS
 
 	unarmed_attacks = list()
@@ -363,11 +363,11 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		unarmed_attacks += new u_type()
 
 	// Modify organ lists if necessary.
-	if(islist(override_organ_types))
+	if (islist(override_organ_types))
 		for(var/ltag in override_organ_types)
 			has_organ[ltag] = override_organ_types[ltag]
 
-	if(islist(override_limb_types))
+	if (islist(override_limb_types))
 		for(var/ltag in override_limb_types)
 			has_limbs[ltag] = list("path" = override_limb_types[ltag])
 
@@ -378,7 +378,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		organ_data["descriptor"] = initial(limb_path.name)
 
 /datum/species/proc/equip_survival_gear(mob/living/carbon/human/H,extendedtank = 1)
-	if(istype(H.get_equipped_item(slot_back), /obj/item/storage/backpack))
+	if (istype(H.get_equipped_item(slot_back), /obj/item/storage/backpack))
 		if (extendedtank)	H.equip_to_slot_or_del(new /obj/item/storage/box/engineer(H.back), slot_in_backpack)
 		else	H.equip_to_slot_or_del(new /obj/item/storage/box/survival(H.back), slot_in_backpack)
 	else
@@ -389,13 +389,13 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 	H.mob_size = mob_size
 	for(var/obj/item/organ/organ in H.contents)
-		if((organ in H.organs) || (organ in H.internal_organs))
+		if ((organ in H.organs) || (organ in H.internal_organs))
 			qdel(organ)
 
-	if(H.organs)                  H.organs.Cut()
-	if(H.internal_organs)         H.internal_organs.Cut()
-	if(H.organs_by_name)          H.organs_by_name.Cut()
-	if(H.internal_organs_by_name) H.internal_organs_by_name.Cut()
+	if (H.organs)                  H.organs.Cut()
+	if (H.internal_organs)         H.internal_organs.Cut()
+	if (H.organs_by_name)          H.organs_by_name.Cut()
+	if (H.internal_organs_by_name) H.internal_organs_by_name.Cut()
 
 	H.organs = list()
 	H.internal_organs = list()
@@ -410,7 +410,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	for(var/organ_tag in has_organ)
 		var/organ_type = has_organ[organ_tag]
 		var/obj/item/organ/O = new organ_type(H)
-		if(organ_tag != O.organ_tag)
+		if (organ_tag != O.organ_tag)
 			warning("[O.type] has a default organ tag \"[O.organ_tag]\" that differs from the species' organ tag \"[organ_tag]\". Updating organ_tag to match.")
 			O.organ_tag = organ_tag
 		H.internal_organs_by_name[organ_tag] = O
@@ -431,41 +431,41 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 	var/t_him = "them"
 	switch(target.gender)
-		if(MALE)
+		if (MALE)
 			t_him = "him"
-		if(FEMALE)
+		if (FEMALE)
 			t_him = "her"
 
 	H.visible_message(SPAN_NOTICE("[H] hugs [target] to make [t_him] feel better!"), \
 					SPAN_NOTICE("You hug [target] to make [t_him] feel better!"))
 
-	if(H != target)
+	if (H != target)
 		H.update_personal_goal(/datum/goal/achievement/givehug, TRUE)
 		target.update_personal_goal(/datum/goal/achievement/gethug, TRUE)
 
 /datum/species/proc/add_base_auras(mob/living/carbon/human/H)
-	if(base_auras)
+	if (base_auras)
 		for(var/type in base_auras)
 			H.add_aura(new type(H))
 
 /datum/species/proc/remove_base_auras(mob/living/carbon/human/H)
-	if(base_auras)
+	if (base_auras)
 		var/list/bcopy = base_auras.Copy()
 		for(var/a in H.auras)
 			var/obj/aura/A = a
-			if(is_type_in_list(a, bcopy))
+			if (is_type_in_list(a, bcopy))
 				bcopy -= A.type
 				H.remove_aura(A)
 				qdel(A)
 
 /datum/species/proc/remove_inherent_verbs(mob/living/carbon/human/H)
-	if(inherent_verbs)
+	if (inherent_verbs)
 		for(var/verb_path in inherent_verbs)
 			H.verbs -= verb_path
 	return
 
 /datum/species/proc/add_inherent_verbs(mob/living/carbon/human/H)
-	if(inherent_verbs)
+	if (inherent_verbs)
 		for(var/verb_path in inherent_verbs)
 			H.verbs |= verb_path
 	return
@@ -491,8 +491,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	return
 
 /datum/species/proc/handle_sleeping(mob/living/carbon/human/H)
-	if(prob(2) && !H.failed_last_breath && !H.isSynthetic())
-		if(!H.paralysis)
+	if (prob(2) && !H.failed_last_breath && !H.isSynthetic())
+		if (!H.paralysis)
 			H.emote("snore")
 		else
 			H.emote("groan")
@@ -529,9 +529,9 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 //Used for swimming
 /datum/species/proc/can_float(mob/living/carbon/human/H)
-	if(!H.is_physically_disabled())
-		if(H.skill_check(SKILL_HAULING, SKILL_BASIC))
-			if(H.encumbrance() < 1)
+	if (!H.is_physically_disabled())
+		if (H.skill_check(SKILL_HAULING, SKILL_BASIC))
+			if (H.encumbrance() < 1)
 				return TRUE //Is not possible to swim while pulling big things
 	return FALSE
 
@@ -542,16 +542,16 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 // Called when using the shredding behavior.
 /datum/species/proc/can_shred(mob/living/carbon/human/H, ignore_intent, ignore_antag)
 
-	if((!ignore_intent && H.a_intent != I_HURT) || H.pulling_punches)
+	if ((!ignore_intent && H.a_intent != I_HURT) || H.pulling_punches)
 		return 0
 
-	if(!ignore_antag && H.mind && !player_is_antag(H.mind))
+	if (!ignore_antag && H.mind && !player_is_antag(H.mind))
 		return 0
 
 	for(var/datum/unarmed_attack/attack in unarmed_attacks)
-		if(!attack.is_usable(H))
+		if (!attack.is_usable(H))
 			continue
-		if(attack.shredding)
+		if (attack.shredding)
 			return 1
 
 	return 0
@@ -566,24 +566,24 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	H.set_sight(H.sight|get_vision_flags(H)|H.equipment_vision_flags|vision[1])
 	H.change_light_colour(H.getDarkvisionTint())
 
-	if(H.stat == DEAD)
+	if (H.stat == DEAD)
 		return 1
 
-	if(!H.druggy)
+	if (!H.druggy)
 		H.set_see_in_dark((H.sight == (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? 8 : min(H.getDarkvisionRange() + H.equipment_darkness_modifier, 8))
-		if(H.equipment_see_invis)
+		if (H.equipment_see_invis)
 			H.set_see_invisible(max(min(H.see_invisible, H.equipment_see_invis), vision[2]))
 
-	if(H.equipment_tint_total >= TINT_BLIND)
+	if (H.equipment_tint_total >= TINT_BLIND)
 		H.eye_blind = max(H.eye_blind, 1)
 
-	if(!H.client)//no client, no screen to update
+	if (!H.client)//no client, no screen to update
 		return 1
 
 	H.set_fullscreen(H.eye_blind && !H.equipment_prescription, "blind", /obj/screen/fullscreen/blind)
 	H.set_fullscreen(H.stat == UNCONSCIOUS, "blackout", /obj/screen/fullscreen/blackout)
 
-	if(config.welder_vision)
+	if (config.welder_vision)
 		H.set_fullscreen(H.equipment_tint_total, "welder", /obj/screen/fullscreen/impaired, H.equipment_tint_total)
 	var/how_nearsighted = get_how_nearsighted(H)
 	H.set_fullscreen(how_nearsighted, "nearsighted", /obj/screen/fullscreen/oxy, how_nearsighted)
@@ -597,25 +597,25 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 /datum/species/proc/get_how_nearsighted(mob/living/carbon/human/H)
 	var/prescriptions = short_sighted
-	if(H.disabilities & NEARSIGHTED)
+	if (H.disabilities & NEARSIGHTED)
 		prescriptions += 7
-	if(H.equipment_prescription)
+	if (H.equipment_prescription)
 		prescriptions -= H.equipment_prescription
 
 	var/light = light_sensitive
-	if(light)
-		if(H.eyecheck() > FLASH_PROTECTION_NONE)
+	if (light)
+		if (H.eyecheck() > FLASH_PROTECTION_NONE)
 			light = 0
 		else
 			var/turf_brightness = 1
 			var/turf/T = get_turf(H)
-			if(T && T.lighting_overlay)
+			if (T && T.lighting_overlay)
 				turf_brightness = min(1, T.get_lumcount())
-			if(turf_brightness < 0.33)
+			if (turf_brightness < 0.33)
 				light = 0
 			else
 				light = round(light * turf_brightness)
-				if(H.equipment_light_protection)
+				if (H.equipment_light_protection)
 					light -= H.equipment_light_protection
 	return clamp(max(prescriptions, light), 0, 7)
 
@@ -637,11 +637,11 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 // Impliments different trails for species depending on if they're wearing shoes.
 /datum/species/proc/get_move_trail(mob/living/carbon/human/H)
-	if(H.lying)
+	if (H.lying)
 		return /obj/effect/decal/cleanable/blood/tracks/body
-	if(H.shoes || (H.wear_suit && (H.wear_suit.body_parts_covered & FEET)))
+	if (H.shoes || (H.wear_suit && (H.wear_suit.body_parts_covered & FEET)))
 		var/obj/item/clothing/shoes = (H.wear_suit && (H.wear_suit.body_parts_covered & FEET)) ? H.wear_suit : H.shoes // suits take priority over shoes
-		if(footwear_trail_overrides)
+		if (footwear_trail_overrides)
 			for (var/key in footwear_trail_overrides)
 				if (istype(shoes, key))
 					return footwear_trail_overrides[key]
@@ -655,7 +655,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 /datum/species/proc/disarm_attackhand(mob/living/carbon/human/attacker, mob/living/carbon/human/target)
 	attacker.do_attack_animation(target)
 
-	if(target.w_uniform)
+	if (target.w_uniform)
 		target.w_uniform.add_fingerprint(attacker)
 	var/obj/item/organ/external/affecting = target.get_organ(ran_zone(attacker.zone_sel.selecting))
 
@@ -667,34 +667,34 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	var/push_threshold = 12 + (skill_mod - stim_mod)
 	var/disarm_threshold = 24 + ((skill_mod - stim_mod) * 2)
 
-	if(target.a_intent == I_HELP)
+	if (target.a_intent == I_HELP)
 		state_mod -= 30
 	//Handle unintended consequences
 	for(var/obj/item/I in holding)
 		var/hurt_prob = max(holding[I] - 3*skill_mod, 0)
-		if(prob(hurt_prob) && I.on_disarm_attempt(target, attacker))
+		if (prob(hurt_prob) && I.on_disarm_attempt(target, attacker))
 			return
 
 	var/randn = rand(1, 100) + state_mod
-	if(!(check_no_slip(target)) && randn <= push_threshold)
+	if (!(check_no_slip(target)) && randn <= push_threshold)
 		var/armor_check = 100 * target.get_blocked_ratio(affecting, DAMAGE_BRUTE, damage = 20)
 		target.apply_effect(2, EFFECT_WEAKEN, armor_check)
 		playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-		if(armor_check < 100)
+		if (armor_check < 100)
 			target.visible_message(SPAN_DANGER("[attacker] has pushed [target]!"))
 		else
 			target.visible_message(SPAN_WARNING("[attacker] attempted to push [target]!"))
 		return
 
-	if(randn <= disarm_threshold)
+	if (randn <= disarm_threshold)
 		//See about breaking grips or pulls
-		if(target.break_all_grabs(attacker))
+		if (target.break_all_grabs(attacker))
 			playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			return
 
 		//Actually disarm them
 		for(var/obj/item/I in holding)
-			if(I && target.unEquip(I))
+			if (I && target.unEquip(I))
 				target.visible_message(SPAN_DANGER("[attacker] has disarmed [target]!"))
 				playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				return
@@ -707,24 +707,24 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	return "[SPAN_DANGER("[P.His] face is horribly mangled!")]\n"
 
 /datum/species/proc/max_skin_tone()
-	if(appearance_flags & SPECIES_APPEARANCE_HAS_SKIN_TONE_GRAV)
+	if (appearance_flags & SPECIES_APPEARANCE_HAS_SKIN_TONE_GRAV)
 		return 100
-	if(appearance_flags & SPECIES_APPEARANCE_HAS_SKIN_TONE_SPCR)
+	if (appearance_flags & SPECIES_APPEARANCE_HAS_SKIN_TONE_SPCR)
 		return 165
-	if(appearance_flags & SPECIES_APPEARANCE_HAS_SKIN_TONE_TRITON)
+	if (appearance_flags & SPECIES_APPEARANCE_HAS_SKIN_TONE_TRITON)
 		return 80
 	return 220
 
 /datum/species/proc/get_hair_styles()
 	var/list/L = LAZYACCESS(hair_styles, type)
-	if(!L)
+	if (!L)
 		L = list()
 		LAZYSET(hair_styles, type, L)
 		for(var/hairstyle in GLOB.hair_styles_list)
 			var/datum/sprite_accessory/S = GLOB.hair_styles_list[hairstyle]
-			if(S.species_allowed && !(get_bodytype() in S.species_allowed))
+			if (S.species_allowed && !(get_bodytype() in S.species_allowed))
 				continue
-			if(S.subspecies_allowed && !(name in S.subspecies_allowed))
+			if (S.subspecies_allowed && !(name in S.subspecies_allowed))
 				continue
 			ADD_SORTED(L, hairstyle, /proc/cmp_text_asc)
 			L[hairstyle] = S
@@ -732,24 +732,24 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 /datum/species/proc/get_facial_hair_styles(gender)
 	var/list/facial_hair_styles_by_species = LAZYACCESS(facial_hair_styles, type)
-	if(!facial_hair_styles_by_species)
+	if (!facial_hair_styles_by_species)
 		facial_hair_styles_by_species = list()
 		LAZYSET(facial_hair_styles, type, facial_hair_styles_by_species)
 
 	var/list/facial_hair_style_by_gender = facial_hair_styles_by_species[gender]
-	if(!facial_hair_style_by_gender)
+	if (!facial_hair_style_by_gender)
 		facial_hair_style_by_gender = list()
 		LAZYSET(facial_hair_styles_by_species, gender, facial_hair_style_by_gender)
 
 		for(var/facialhairstyle in GLOB.facial_hair_styles_list)
 			var/datum/sprite_accessory/S = GLOB.facial_hair_styles_list[facialhairstyle]
-			if(gender == MALE && S.gender == FEMALE)
+			if (gender == MALE && S.gender == FEMALE)
 				continue
-			if(gender == FEMALE && S.gender == MALE)
+			if (gender == FEMALE && S.gender == MALE)
 				continue
-			if(S.species_allowed && !(get_bodytype() in S.species_allowed))
+			if (S.species_allowed && !(get_bodytype() in S.species_allowed))
 				continue
-			if(S.subspecies_allowed && !(name in S.subspecies_allowed))
+			if (S.subspecies_allowed && !(name in S.subspecies_allowed))
 				continue
 			ADD_SORTED(facial_hair_style_by_gender, facialhairstyle, /proc/cmp_text_asc)
 			facial_hair_style_by_gender[facialhairstyle] = S
@@ -763,64 +763,64 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		"lack of air" = oxy_mod,
 		"poison" = toxins_mod
 	)
-	if(!header)
+	if (!header)
 		header = "<center><h2>[name]</h2></center><hr/>"
 	var/dat = list()
 	dat += "[header]"
 	dat += "<table padding='8px'>"
 	dat += "<tr>"
 	dat += "<td width = 400>"
-	if(verbose || length(description) <= MAX_DESC_LEN)
+	if (verbose || length(description) <= MAX_DESC_LEN)
 		dat += "[description]"
 	else
 		dat += "[copytext(description, 1, MAX_DESC_LEN)] \[...\]"
-	if(append)
+	if (append)
 		dat += "<br>[append]"
 	dat += "</td>"
-	if((!skip_photo && preview_icon) || !skip_detail)
+	if ((!skip_photo && preview_icon) || !skip_detail)
 		dat += "<td width = 200 align='center'>"
-		if(!skip_photo && preview_icon)
+		if (!skip_photo && preview_icon)
 			send_rsc(usr, icon(icon = preview_icon, icon_state = ""), "species_preview_[name].png")
 			dat += "<img src='species_preview_[name].png' width='64px' height='64px'><br/><br/>"
-		if(!skip_detail)
+		if (!skip_detail)
 			dat += "<small>"
-			if(spawn_flags & SPECIES_CAN_JOIN)
+			if (spawn_flags & SPECIES_CAN_JOIN)
 				dat += "</br><b>Often present among humans.</b>"
-			if(spawn_flags & SPECIES_IS_WHITELISTED)
+			if (spawn_flags & SPECIES_IS_WHITELISTED)
 				dat += "</br><b>Whitelist restricted.</b>"
-			if(!has_organ[BP_HEART])
+			if (!has_organ[BP_HEART])
 				dat += "</br><b>Does not have blood.</b>"
-			if(!has_organ[breathing_organ])
+			if (!has_organ[breathing_organ])
 				dat += "</br><b>Does not breathe.</b>"
-			if(species_flags & SPECIES_FLAG_NO_SCAN)
+			if (species_flags & SPECIES_FLAG_NO_SCAN)
 				dat += "</br><b>Does not have DNA.</b>"
-			if(species_flags & SPECIES_FLAG_NO_PAIN)
+			if (species_flags & SPECIES_FLAG_NO_PAIN)
 				dat += "</br><b>Does not feel pain.</b>"
-			if(species_flags & SPECIES_FLAG_NO_MINOR_CUT)
+			if (species_flags & SPECIES_FLAG_NO_MINOR_CUT)
 				dat += "</br><b>Has thick skin/scales.</b>"
-			if(species_flags & SPECIES_FLAG_NO_SLIP)
+			if (species_flags & SPECIES_FLAG_NO_SLIP)
 				dat += "</br><b>Has excellent traction.</b>"
-			if(species_flags & SPECIES_FLAG_NO_POISON)
+			if (species_flags & SPECIES_FLAG_NO_POISON)
 				dat += "</br><b>Immune to most poisons.</b>"
-			if(appearance_flags & SPECIES_APPEARANCE_HAS_A_SKIN_TONE)
+			if (appearance_flags & SPECIES_APPEARANCE_HAS_A_SKIN_TONE)
 				dat += "</br><b>Has a variety of skin tones.</b>"
-			if(appearance_flags & SPECIES_APPEARANCE_HAS_SKIN_COLOR)
+			if (appearance_flags & SPECIES_APPEARANCE_HAS_SKIN_COLOR)
 				dat += "</br><b>Has a variety of skin colours.</b>"
-			if(appearance_flags & SPECIES_APPEARANCE_HAS_EYE_COLOR)
+			if (appearance_flags & SPECIES_APPEARANCE_HAS_EYE_COLOR)
 				dat += "</br><b>Has a variety of eye colours.</b>"
-			if(species_flags & SPECIES_FLAG_IS_PLANT)
+			if (species_flags & SPECIES_FLAG_IS_PLANT)
 				dat += "</br><b>Has a plantlike physiology.</b>"
-			if(slowdown)
+			if (slowdown)
 				dat += "</br><b>Moves [slowdown > 0 ? "slower" : "faster"] than most.</b>"
 			for(var/kind in damage_types)
-				if(damage_types[kind] > 1)
+				if (damage_types[kind] > 1)
 					dat += "</br><b>Vulnerable to [kind].</b>"
-				else if(damage_types[kind] < 1)
+				else if (damage_types[kind] < 1)
 					dat += "</br><b>Resistant to [kind].</b>"
-			if(has_organ[breathing_organ])
+			if (has_organ[breathing_organ])
 				dat += "</br><b>They breathe [gas_data.name[breath_type]].</b>"
 				dat += "</br><b>They exhale [gas_data.name[exhale_type]].</b>"
-			if(LAZYLEN(poison_types))
+			if (LAZYLEN(poison_types))
 				dat += "</br><b>[capitalize(english_list(poison_types))] [LAZYLEN(poison_types) == 1 ? "is" : "are"] poisonous to them.</b>"
 			dat += "</small>"
 		dat += "</td>"
@@ -837,25 +837,25 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 /datum/species/proc/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
 	switch(age)
-		if(0 to 22) 	. = 0
-		if(23 to 30) 	. = 3
-		if(31 to 45)	. = 6
+		if (0 to 22) 	. = 0
+		if (23 to 30) 	. = 3
+		if (31 to 45)	. = 6
 		else			. = 8
 
 /datum/species/proc/post_organ_rejuvenate(obj/item/organ/org, mob/living/carbon/human/H)
 	return
 
 /datum/species/proc/check_no_slip(mob/living/carbon/human/H)
-	if(can_overcome_gravity(H))
+	if (can_overcome_gravity(H))
 		return TRUE
 	return (species_flags & SPECIES_FLAG_NO_SLIP)
 
 /datum/species/proc/get_pain_emote(mob/living/carbon/human/H, pain_power)
-	if(!(species_flags & SPECIES_FLAG_NO_PAIN))
+	if (!(species_flags & SPECIES_FLAG_NO_PAIN))
 		return
 	for(var/pain_emotes in pain_emotes_with_pain_level)
 		var/pain_level = pain_emotes_with_pain_level[pain_emotes]
-		if(pain_level >= pain_power)
+		if (pain_level >= pain_power)
 			// This assumes that if a pain-level has been defined it also has a list of emotes to go with it
 			var/singleton/emote/E = GET_SINGLETON(pick(pain_emotes))
 			return E.key

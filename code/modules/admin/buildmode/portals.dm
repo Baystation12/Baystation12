@@ -41,7 +41,7 @@ Right Click + Ctrl  - Delete all portals
 				return
 
 			var/name = input("Give the portal object a name (optional):", "Name") as text | null
-			if(!name)
+			if (!name)
 				name = "wormhole"
 
 			var/ttl = input("How long should the portal exist for?" , "Time To Live", 0) as num | null

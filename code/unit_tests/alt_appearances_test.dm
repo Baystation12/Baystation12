@@ -5,7 +5,7 @@
 	for(var/ca_type in subtypesof(/singleton/cardborg_appearance))
 		var/singleton/cardborg_appearance/ca = ca_type
 		var/obj/item/storage/backpack/backpack_type = initial(ca.backpack_type)
-		if(backpack_type == /obj/item/storage/backpack)
+		if (backpack_type == /obj/item/storage/backpack)
 			pass("Found a cardborg appearance using the base /obj/item/storage/backpack backpack.")
 			return 1
 
@@ -22,11 +22,11 @@
 	for(var/ca_type in subtypesof(/singleton/cardborg_appearance))
 		var/singleton/cardborg_appearance/ca = ca_type
 		var/icon_state = initial(ca.icon_state)
-		if(!(icon_state in existing_icon_states))
+		if (!(icon_state in existing_icon_states))
 			log_unit_test("Icon state [icon_state] is missing.")
 			failed = TRUE
 
-	if(failed)
+	if (failed)
 		fail("One or more icon states are missing.")
 	else
 		pass("All references to icon states exists.")
@@ -42,7 +42,7 @@
 		group_by(backpack_types, initial(ca.backpack_type), ca)
 
 	var/number_of_issues = number_of_issues(backpack_types, "Backpack Types")
-	if(number_of_issues)
+	if (number_of_issues)
 		fail("[number_of_issues] duplicate backpack type\s exist.")
 	else
 		pass("All backpack types are unique.")

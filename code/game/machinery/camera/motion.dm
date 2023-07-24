@@ -8,7 +8,7 @@
 	// motion camera event loop
 	if (GET_FLAGS(stat, MACHINE_STAT_EMPED) || !is_powered())
 		return
-	if(!isMotion())
+	if (!isMotion())
 		. = PROCESS_KILL
 		return
 	if (detectTime > 0)
@@ -20,7 +20,7 @@
 			if (target.stat == DEAD)
 				lostTarget(target)
 			// See if the camera is still in range
-			if(!in_range(src, target))
+			if (!in_range(src, target))
 				// If they aren't in range, lose the target.
 				lostTarget(target)
 
@@ -55,5 +55,5 @@
 	return 1
 
 /obj/machinery/camera/HasProximity(atom/movable/AM as mob|obj)
-	if(isliving(AM))
+	if (isliving(AM))
 		newTarget(AM)

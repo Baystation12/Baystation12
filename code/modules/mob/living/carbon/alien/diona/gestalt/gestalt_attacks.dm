@@ -1,8 +1,8 @@
 /obj/structure/diona_gestalt/attack_generic(mob/user, damage, attack_message)
-	if(user.loc == src)
+	if (user.loc == src)
 		return
 
-	if(istype(user, /mob/living/carbon/alien/diona) && user.a_intent != I_HURT)
+	if (istype(user, /mob/living/carbon/alien/diona) && user.a_intent != I_HURT)
 		can_roll_up_atom(user)
 		return
 

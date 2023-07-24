@@ -18,12 +18,12 @@
 	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 
 /obj/item/material/knife/attack(mob/living/carbon/M, mob/living/carbon/user, target_zone)
-	if(!istype(M))
+	if (!istype(M))
 		return ..()
 
-	if(user.a_intent != I_HELP)
-		if(target_zone == BP_EYES)
-			if((MUTATION_CLUMSY in user.mutations) && prob(50))
+	if (user.a_intent != I_HELP)
+		if (target_zone == BP_EYES)
+			if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 				M = user
 			return eyestab(M, user)
 

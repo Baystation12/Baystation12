@@ -15,18 +15,18 @@
 
 /singleton/surgery_step/robotics/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && !(affected.status & ORGAN_CUT_AWAY))
+	if (affected && !(affected.status & ORGAN_CUT_AWAY))
 		return affected
 
 /singleton/surgery_step/robotics/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	. = ..()
-	if(!user.skill_check(SKILL_DEVICES, SKILL_TRAINED))
+	if (!user.skill_check(SKILL_DEVICES, SKILL_TRAINED))
 		. -= 30
-	if(!user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED))
+	if (!user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED))
 		. -= 20
-	if(user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED))
+	if (user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED))
 		. += 35
-	if(user.skill_check(SKILL_DEVICES, SKILL_MASTER))
+	if (user.skill_check(SKILL_DEVICES, SKILL_MASTER))
 		. += 30
 
 //////////////////////////////////////////////////////////////////
@@ -45,7 +45,7 @@
 
 /singleton/surgery_step/robotics/unscrew_hatch/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && affected.hatch_state == HATCH_CLOSED)
+	if (affected && affected.hatch_state == HATCH_CLOSED)
 		return affected
 
 /singleton/surgery_step/robotics/unscrew_hatch/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -81,7 +81,7 @@
 
 /singleton/surgery_step/robotics/screw_hatch/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && affected.hatch_state == HATCH_UNSCREWED)
+	if (affected && affected.hatch_state == HATCH_UNSCREWED)
 		return affected
 
 /singleton/surgery_step/robotics/screw_hatch/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -118,7 +118,7 @@
 
 /singleton/surgery_step/robotics/open_hatch/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && affected.hatch_state == HATCH_UNSCREWED)
+	if (affected && affected.hatch_state == HATCH_UNSCREWED)
 		return affected
 
 /singleton/surgery_step/robotics/open_hatch/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -155,7 +155,7 @@
 
 /singleton/surgery_step/robotics/close_hatch/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && affected.hatch_state == HATCH_OPENED)
+	if (affected && affected.hatch_state == HATCH_OPENED)
 		return affected
 
 /singleton/surgery_step/robotics/close_hatch/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -193,36 +193,36 @@
 
 /singleton/surgery_step/robotics/repair_brute/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	. = ..()
-	if(user.skill_check(SKILL_CONSTRUCTION, SKILL_BASIC))
+	if (user.skill_check(SKILL_CONSTRUCTION, SKILL_BASIC))
 		. += 5
-	if(user.skill_check(SKILL_CONSTRUCTION, SKILL_TRAINED))
+	if (user.skill_check(SKILL_CONSTRUCTION, SKILL_TRAINED))
 		. += 10
-	if(!user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED))
+	if (!user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED))
 		. -= 10
 
 /singleton/surgery_step/robotics/repair_brute/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(affected)
-		if(!affected.brute_dam)
+	if (affected)
+		if (!affected.brute_dam)
 			to_chat(user, SPAN_WARNING("There is no damage to repair."))
 			return FALSE
-		if(BP_IS_BRITTLE(affected))
+		if (BP_IS_BRITTLE(affected))
 			to_chat(user, SPAN_WARNING("\The [target]'s [affected.name] is too brittle to be repaired normally."))
 			return FALSE
-		if(isWelder(tool))
+		if (isWelder(tool))
 			var/obj/item/weldingtool/welder = tool
-			if(!welder.isOn() || !welder.remove_fuel(1,user))
+			if (!welder.isOn() || !welder.remove_fuel(1,user))
 				return FALSE
-		if(istype(tool, /obj/item/gun/energy/plasmacutter))
+		if (istype(tool, /obj/item/gun/energy/plasmacutter))
 			var/obj/item/gun/energy/plasmacutter/cutter = tool
-			if(!cutter.slice(user))
+			if (!cutter.slice(user))
 				return FALSE
 		return TRUE
 	return FALSE
 
 /singleton/surgery_step/robotics/repair_brute/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && affected.hatch_state == HATCH_OPENED && ((affected.status & ORGAN_DISFIGURED) || affected.brute_dam > 0))
+	if (affected && affected.hatch_state == HATCH_OPENED && ((affected.status & ORGAN_DISFIGURED) || affected.brute_dam > 0))
 		return affected
 
 /singleton/surgery_step/robotics/repair_brute/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -255,16 +255,16 @@
 
 /singleton/surgery_step/robotics/repair_brittle/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	. = ..()
-	if(user.skill_check(SKILL_ELECTRICAL, SKILL_TRAINED))
+	if (user.skill_check(SKILL_ELECTRICAL, SKILL_TRAINED))
 		. += 10
-	if(user.skill_check(SKILL_CONSTRUCTION, SKILL_TRAINED))
+	if (user.skill_check(SKILL_CONSTRUCTION, SKILL_TRAINED))
 		. += 10
-	if(!user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED))
+	if (!user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED))
 		. -= 15
 
 /singleton/surgery_step/robotics/repair_brittle/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && BP_IS_BRITTLE(affected) && affected.hatch_state == HATCH_OPENED)
+	if (affected && BP_IS_BRITTLE(affected) && affected.hatch_state == HATCH_OPENED)
 		return affected
 
 /singleton/surgery_step/robotics/repair_brittle/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -299,25 +299,25 @@
 /singleton/surgery_step/robotics/repair_burn/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	. = ..()
 
-	if(user.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
+	if (user.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
 		. += 5
-	if(user.skill_check(SKILL_ELECTRICAL, SKILL_TRAINED))
+	if (user.skill_check(SKILL_ELECTRICAL, SKILL_TRAINED))
 		. += 10
-	if(!user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED))
+	if (!user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED))
 		. -= 10
 
 /singleton/surgery_step/robotics/repair_burn/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(affected)
-		if(!affected.burn_dam)
+	if (affected)
+		if (!affected.burn_dam)
 			to_chat(user, SPAN_WARNING("There is no damage to repair."))
 			return FALSE
-		if(BP_IS_BRITTLE(affected))
+		if (BP_IS_BRITTLE(affected))
 			to_chat(user, SPAN_WARNING("\The [target]'s [affected.name] is too brittle for this kind of repair."))
 		else
 			var/obj/item/stack/cable_coil/C = tool
-			if(istype(C))
-				if(!C.use(3))
+			if (istype(C))
+				if (!C.use(3))
 					to_chat(user, SPAN_WARNING("You need three or more cable pieces to repair this damage."))
 				else
 					return TRUE
@@ -325,7 +325,7 @@
 
 /singleton/surgery_step/robotics/repair_burn/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && affected.hatch_state == HATCH_OPENED && ((affected.status & ORGAN_DISFIGURED) || affected.burn_dam > 0))
+	if (affected && affected.hatch_state == HATCH_OPENED && ((affected.status & ORGAN_DISFIGURED) || affected.burn_dam > 0))
 		return affected
 
 /singleton/surgery_step/robotics/repair_burn/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -363,26 +363,26 @@
 	surgery_candidate_flags = SURGERY_NO_STUMP
 
 /singleton/surgery_step/robotics/fix_organ_robotic/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
-	if(target.isSynthetic())
+	if (target.isSynthetic())
 		return SURGERY_SKILLS_ROBOTIC
 	else
 		return SURGERY_SKILLS_ROBOTIC_ON_MEAT
 
 /singleton/surgery_step/robotics/fix_organ_robotic/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected)
+	if (affected)
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
-			if(BP_IS_ROBOTIC(I) && !BP_IS_CRYSTAL(I) && I.damage > 0)
-				if(I.surface_accessible)
+			if (BP_IS_ROBOTIC(I) && !BP_IS_CRYSTAL(I) && I.damage > 0)
+				if (I.surface_accessible)
 					return affected
-				if(affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED) || affected.hatch_state == HATCH_OPENED)
+				if (affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED) || affected.hatch_state == HATCH_OPENED)
 					return affected
 
 /singleton/surgery_step/robotics/fix_organ_robotic/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	for(var/obj/item/organ/I in affected.internal_organs)
-		if(I && I.damage > 0)
-			if(BP_IS_ROBOTIC(I))
+		if (I && I.damage > 0)
+			if (BP_IS_ROBOTIC(I))
 				user.visible_message("[user] starts mending the damage to [target]'s [I.name]'s mechanisms.", \
 				"You start mending the damage to [target]'s [I.name]'s mechanisms." )
 	..()
@@ -390,8 +390,8 @@
 /singleton/surgery_step/robotics/fix_organ_robotic/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	for(var/obj/item/organ/I in affected.internal_organs)
-		if(I && I.damage > 0)
-			if(BP_IS_ROBOTIC(I))
+		if (I && I.damage > 0)
+			if (BP_IS_ROBOTIC(I))
 				user.visible_message(SPAN_NOTICE("[user] repairs [target]'s [I.name] with [tool]."), \
 				SPAN_NOTICE("You repair [target]'s [I.name] with [tool].") )
 				I.damage = 0
@@ -404,7 +404,7 @@
 	affected.createwound(INJURY_TYPE_CUT, 5)
 	for(var/internal in affected.internal_organs)
 		var/obj/item/organ/internal/I = internal
-		if(I)
+		if (I)
 			I.take_internal_damage(rand(3,5))
 
 //////////////////////////////////////////////////////////////////
@@ -423,11 +423,11 @@
 	var/list/attached_organs
 	for(var/organ in target.internal_organs_by_name)
 		var/obj/item/organ/I = target.internal_organs_by_name[organ]
-		if(I && !(I.status & ORGAN_CUT_AWAY) && !BP_IS_CRYSTAL(I) && I.parent_organ == target_zone)
+		if (I && !(I.status & ORGAN_CUT_AWAY) && !BP_IS_CRYSTAL(I) && I.parent_organ == target_zone)
 			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
 			radial_button.name = "Detach \the [I.name]"
 			LAZYSET(attached_organs, I.organ_tag, radial_button)
-	if(!LAZYLEN(attached_organs))
+	if (!LAZYLEN(attached_organs))
 		to_chat(user, SPAN_WARNING("There are no appropriate internal components to decouple."))
 		return FALSE
 	if (length(attached_organs) == 1 && user.get_preference_value(/datum/client_preference/surgery_skip_radial))
@@ -447,7 +447,7 @@
 	SPAN_NOTICE("You have decoupled [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool]."))
 
 	var/obj/item/organ/internal/I = target.internal_organs_by_name[LAZYACCESS(target.surgeries_in_progress, target_zone)]
-	if(I && istype(I))
+	if (I && istype(I))
 		I.cut_away(user)
 
 /singleton/surgery_step/robotics/detatch_organ_robotic/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -534,16 +534,16 @@
 /singleton/surgery_step/robotics/install_mmi/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/device/mmi/M = tool
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(affected && istype(M))
-		if(!M.brainmob || !M.brainmob.client || !M.brainmob.ckey || M.brainmob.stat >= DEAD)
+	if (affected && istype(M))
+		if (!M.brainmob || !M.brainmob.client || !M.brainmob.ckey || M.brainmob.stat >= DEAD)
 			to_chat(user, SPAN_WARNING("That brain is not usable."))
-		else if(BP_IS_CRYSTAL(affected))
+		else if (BP_IS_CRYSTAL(affected))
 			to_chat(user, SPAN_WARNING("The crystalline interior of \the [affected] is incompatible with \the [M]."))
-		else if(!target.isSynthetic())
+		else if (!target.isSynthetic())
 			to_chat(user, SPAN_WARNING("You cannot install a computer brain into a meat body."))
-		else if(!target.should_have_organ(BP_BRAIN))
+		else if (!target.should_have_organ(BP_BRAIN))
 			to_chat(user, SPAN_WARNING("You're pretty sure [target.species.name_plural] don't normally have a brain."))
-		else if(target.internal_organs[BP_BRAIN])
+		else if (target.internal_organs[BP_BRAIN])
 			to_chat(user, SPAN_WARNING("Your subject already has a brain."))
 		else
 			return TRUE
@@ -551,7 +551,7 @@
 
 /singleton/surgery_step/robotics/install_mmi/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && target_zone == BP_HEAD)
+	if (affected && target_zone == BP_HEAD)
 		return affected
 
 /singleton/surgery_step/robotics/install_mmi/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -561,7 +561,7 @@
 	..()
 
 /singleton/surgery_step/robotics/install_mmi/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(!user.unEquip(tool))
+	if (!user.unEquip(tool))
 		return
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message(SPAN_NOTICE("[user] has installed \the [tool] into [target]'s [affected.name]."), \
@@ -574,7 +574,7 @@
 	holder.stored_mmi = tool
 	holder.update_from_mmi()
 
-	if(M.brainmob && M.brainmob.mind)
+	if (M.brainmob && M.brainmob.mind)
 		M.brainmob.mind.transfer_to(target)
 
 /singleton/surgery_step/robotics/install_mmi/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -609,7 +609,7 @@
 
 /singleton/surgery_step/remove_mmi/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && (locate(/obj/item/device/mmi) in affected.implants))
+	if (affected && (locate(/obj/item/device/mmi) in affected.implants))
 		return affected
 
 /singleton/surgery_step/remove_mmi/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -622,9 +622,9 @@
 
 /singleton/surgery_step/remove_mmi/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(affected)
+	if (affected)
 		var/obj/item/device/mmi/mmi = locate() in affected.implants
-		if(affected && mmi)
+		if (affected && mmi)
 			user.visible_message( \
 			SPAN_NOTICE("\The [user] removes \the [mmi] from \the [target]'s [affected.name] with \the [tool]."), \
 			SPAN_NOTICE("You  remove \the [mmi] from \the [target]'s [affected.name] with \the [tool]."))
@@ -651,11 +651,11 @@
 
 /singleton/surgery_step/robone/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && (affected.status & ORGAN_BROKEN) && affected.stage == required_stage)
+	if (affected && (affected.status & ORGAN_BROKEN) && affected.stage == required_stage)
 		return affected
 
 /singleton/surgery_step/robone/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
-	if(target.isSynthetic())
+	if (target.isSynthetic())
 		return SURGERY_SKILLS_ROBOTIC
 	else
 		return SURGERY_SKILLS_ROBOTIC_ON_MEAT
@@ -690,7 +690,7 @@
 		SPAN_INFO("\The [user] finishes mending \the [prosthetic] with \the [tool.name]"),
 		SPAN_INFO("You finish mending \the [prosthetic] with \the [tool.name].")
 	)
-	if(affected.stage == 0)
+	if (affected.stage == 0)
 		affected.stage = 1
 	affected.status &= ~ORGAN_BRITTLE
 
@@ -721,7 +721,7 @@
 /singleton/surgery_step/robone/realign_support/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	var/prosthetic = affected.encased ? "\the [target]'s [affected.encased]" : "structural support in \the [target]'s [affected.name]"
-	if(affected.encased == "skull")
+	if (affected.encased == "skull")
 		user.visible_message(
 			SPAN_NOTICE("\The [user] begins to piece \the [prosthetic] back together with \the [tool]."),
 			SPAN_NOTICE("You begin to piece \the [prosthetic] back together with \the [tool].")
@@ -737,7 +737,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	var/prosthetic = affected.encased ? "\the [target]'s [affected.encased]" : "structural support in \the [target]'s [affected.name]"
 	if (affected.status & ORGAN_BROKEN)
-		if(affected.encased == "skull")
+		if (affected.encased == "skull")
 			user.visible_message(
 				SPAN_INFO("\The [user] pieces \the [prosthetic] back together with \the [tool]."),
 				SPAN_INFO("You piece \the [prosthetic] back together with \the [tool].")

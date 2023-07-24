@@ -9,13 +9,13 @@ var/global/const/NETWORK_FIFTH_DECK  = "Fifth Deck"
 
 /datum/map/torch/get_network_access(network)
 	switch(network)
-		if(NETWORK_AQUILA)
+		if (NETWORK_AQUILA)
 			return access_aquila
-		if(NETWORK_BRIDGE)
+		if (NETWORK_BRIDGE)
 			return access_heads
-		if(NETWORK_CHARON)
+		if (NETWORK_CHARON)
 			return access_expedition_shuttle
-		if(NETWORK_HELMETS)
+		if (NETWORK_HELMETS)
 			return access_solgov_crew
 	return get_shared_network_access(network) || ..()
 
@@ -156,9 +156,9 @@ var/global/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
 
 /datum/map/proc/get_shared_network_access(network)
 	switch(network)
-		if(NETWORK_COMMAND)
+		if (NETWORK_COMMAND)
 			return access_heads
-		if(NETWORK_ENGINE, NETWORK_ENGINEERING_OUTPOST)
+		if (NETWORK_ENGINE, NETWORK_ENGINEERING_OUTPOST)
 			return access_engine
 
 /datum/map/torch/default_internal_channels()

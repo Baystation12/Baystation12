@@ -23,7 +23,7 @@
 	icon_state = (use_power == POWER_USE_ACTIVE) ? "cracker_on" : "cracker"
 
 /obj/machinery/portable_atmospherics/cracker/interface_interact(mob/user)
-	if(use_power == POWER_USE_IDLE)
+	if (use_power == POWER_USE_IDLE)
 		update_use_power(POWER_USE_ACTIVE)
 	else
 		update_use_power(POWER_USE_IDLE)
@@ -33,8 +33,8 @@
 
 /obj/machinery/portable_atmospherics/cracker/attackby(obj/item/thing, mob/user)
 	// remove deuterium as a reagent
-	if(thing.is_open_container() && thing.reagents)
-		if(!reagent_buffer[MATERIAL_DEUTERIUM] || reagent_buffer[MATERIAL_DEUTERIUM] <= 0)
+	if (thing.is_open_container() && thing.reagents)
+		if (!reagent_buffer[MATERIAL_DEUTERIUM] || reagent_buffer[MATERIAL_DEUTERIUM] <= 0)
 			to_chat(user, SPAN_WARNING("There is no deuterium stored in \the [src]."))
 			return
 		var/transfer_amt = min(thing.reagents.maximum_volume, reagent_buffer[MATERIAL_DEUTERIUM])
@@ -47,26 +47,26 @@
 
 /obj/machinery/portable_atmospherics/cracker/power_change()
 	. = ..()
-	if(. && !is_powered())
+	if (. && !is_powered())
 		update_use_power(POWER_USE_IDLE)
 		update_icon()
 
 /obj/machinery/portable_atmospherics/cracker/set_broken(new_state)
 	. = ..()
-	if(. && MACHINE_IS_BROKEN(src))
+	if (. && MACHINE_IS_BROKEN(src))
 		update_use_power(POWER_USE_IDLE)
 		update_icon()
 
 /obj/machinery/portable_atmospherics/cracker/Process()
 	..()
-	if(use_power == POWER_USE_IDLE)
+	if (use_power == POWER_USE_IDLE)
 		return
 
 	// Produce materials.
 	var/turf/T = get_turf(src)
-	if(istype(T))
+	if (istype(T))
 		var/obj/effect/fluid/F = T.return_fluid()
-		if(istype(F))
+		if (istype(F))
 
 			// Drink more water!
 			var/consuming = min(F.fluid_amount, fluid_consumption_per_tick)
@@ -82,7 +82,7 @@
 			air_contents.merge(produced)
 
 			// Deuterium extraction.
-			if(prob(deuterium_generation_chance) && (!reagent_buffer[MATERIAL_DEUTERIUM] || reagent_buffer[MATERIAL_DEUTERIUM] <= max_reagents))
-				if(!reagent_buffer[MATERIAL_DEUTERIUM])
+			if (prob(deuterium_generation_chance) && (!reagent_buffer[MATERIAL_DEUTERIUM] || reagent_buffer[MATERIAL_DEUTERIUM] <= max_reagents))
+				if (!reagent_buffer[MATERIAL_DEUTERIUM])
 					reagent_buffer[MATERIAL_DEUTERIUM] = 0
 				reagent_buffer[MATERIAL_DEUTERIUM] += deuterium_generation_amount

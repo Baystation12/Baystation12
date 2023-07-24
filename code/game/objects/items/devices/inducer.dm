@@ -17,7 +17,7 @@
 
 /obj/item/inducer/Initialize()
 	. = ..()
-	if(ispath(cell))
+	if (ispath(cell))
 		cell = new cell(src)
 	update_icon()
 
@@ -35,7 +35,7 @@
 
 /obj/item/inducer/emp_act(severity)
 	..()
-	if(cell)
+	if (cell)
 		cell.emp_act(severity)
 
 /obj/item/inducer/afterattack(obj/O, mob/living/carbon/user, proximity)
@@ -44,27 +44,27 @@
 
 /obj/item/inducer/proc/CannotUse(mob/user)
 	var/obj/item/cell/my_cell = get_cell()
-	if(!istype(my_cell))
+	if (!istype(my_cell))
 		to_chat(user, SPAN_WARNING("\The [src] doesn't have a power cell installed!"))
 		return TRUE
-	if(my_cell.percent() <= 0)
+	if (my_cell.percent() <= 0)
 		to_chat(user, SPAN_WARNING("\The [src]'s battery is dead!"))
 		return TRUE
 	return FALSE
 
 
 /obj/item/inducer/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
+	if (isScrewdriver(W))
 		opened = !opened
 		to_chat(user, SPAN_NOTICE("You [opened ? "open" : "close"] the battery compartment."))
 		update_icon()
-	if(istype(W, /obj/item/cell))
+	if (istype(W, /obj/item/cell))
 		if (istype(W, /obj/item/cell/device))
 			to_chat(user, SPAN_WARNING("\The [src] only takes full-size power cells."))
 			return
-		if(opened)
-			if(!cell)
-				if(!user.unEquip(W, src))
+		if (opened)
+			if (!cell)
+				if (!user.unEquip(W, src))
 					return
 				to_chat(user, SPAN_NOTICE("You insert \the [W] into \the [src]."))
 				cell = W
@@ -73,28 +73,28 @@
 			else
 				to_chat(user, SPAN_NOTICE("\The [src] already has \a [cell] installed!"))
 				return
-	if(CannotUse(user) || recharge(W, user))
+	if (CannotUse(user) || recharge(W, user))
 		return
 	return ..()
 
 /obj/item/inducer/proc/recharge(atom/A, mob/user)
-	if(!isturf(A) && user.loc == A)
+	if (!isturf(A) && user.loc == A)
 		return FALSE
-	if(recharging)
+	if (recharging)
 		return TRUE
 	else
 		recharging = TRUE
 	var/obj/item/cell/MyC = get_cell()
 	var/obj/item/cell/C = A.get_cell()
 	var/obj/O
-	if(istype(A, /obj))
+	if (istype(A, /obj))
 		O = A
-	if(C)
+	if (C)
 		var/length = 10
 		var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
 		sparks.set_up(1, 1, user.loc)
 		sparks.start()
-		if(C.charge >= C.maxcharge)
+		if (C.charge >= C.maxcharge)
 			to_chat(user, SPAN_WARNING("\The [A] is already fully charged!"))
 			recharging = FALSE
 			return TRUE
@@ -108,10 +108,10 @@
 				length += rand(1, 3) SECONDS
 		if (user.get_skill_value(SKILL_ELECTRICAL) < SKILL_TRAINED)
 			length += rand(4, 6) SECONDS
-		if(MyC.charge > max(0, MyC.charge*failsafe) && do_after(user, length, A, DO_PUBLIC_UNIQUE))
-			if(CannotUse(user))
+		if (MyC.charge > max(0, MyC.charge*failsafe) && do_after(user, length, A, DO_PUBLIC_UNIQUE))
+			if (CannotUse(user))
 				return TRUE
-			if(QDELETED(C))
+			if (QDELETED(C))
 				return TRUE
 			sparks.start()
 			induce(C)
@@ -119,7 +119,7 @@
 				SPAN_NOTICE("\The [user] recharges \the [A] with \the [src]."),
 				SPAN_NOTICE("You recharge \the [A] with \the [src].")
 			)
-			if(O)
+			if (O)
 				O.update_icon()
 		else
 			qdel(sparks)
@@ -141,7 +141,7 @@
 
 
 /obj/item/inducer/attack_self(mob/user)
-	if(opened && cell)
+	if (opened && cell)
 		user.visible_message("\The [user] removes \the [cell] from \the [src]!",SPAN_NOTICE("You remove \the [cell]."))
 		cell.update_icon()
 		user.put_in_hands(cell)
@@ -152,24 +152,24 @@
 /obj/item/inducer/examine(mob/living/M)
 	. = ..()
 	var/obj/item/cell/MyC = get_cell()
-	if(MyC)
+	if (MyC)
 		to_chat(M, SPAN_NOTICE("Its display shows: [MyC.percent()]%."))
 	else
 		to_chat(M,SPAN_NOTICE("Its display is dark."))
-	if(opened)
+	if (opened)
 		to_chat(M,SPAN_NOTICE("Its battery compartment is open."))
 
 /obj/item/inducer/on_update_icon()
 	overlays.Cut()
-	if(opened)
-		if(!get_cell())
+	if (opened)
+		if (!get_cell())
 			overlays += image(icon, "inducer-nobat")
 		else
 			overlays += image(icon,"inducer-bat")
 
 /obj/item/inducer/Destroy()
 	. = ..()
-	if(!ispath(cell))
+	if (!ispath(cell))
 		QDEL_NULL(cell)
 
 // module version
@@ -181,7 +181,7 @@
 	cell = null
 
 /obj/item/inducer/borg/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
+	if (isScrewdriver(W))
 		return
 	. = ..()
 
@@ -198,7 +198,7 @@
 	else
 		failsafe = 0.2
 	update_icon()
-	if(user)
+	if (user)
 		to_chat(user, SPAN_NOTICE("You switch your battery output failsafe [safety() ? "on" : "off"	]."))
 
 /obj/item/inducer/borg/get_cell()

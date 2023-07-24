@@ -5,7 +5,7 @@
 /datum/codex_category/skills/Initialize()
 	for(var/singleton/hierarchy/skill/skill in GLOB.skills)
 		var/list/skill_info = list()
-		if(skill.prerequisites)
+		if (skill.prerequisites)
 			var/list/reqs = list()
 			for(var/req in skill.prerequisites)
 				var/singleton/hierarchy/skill/skill_req = GET_SINGLETON(req)

@@ -297,9 +297,9 @@
 
 //Controls phoron and phoron based objects reaction to being in a turf over 200c -- Phoron's flashpoint.
 /material/phoron/combustion_effect(turf/T, temperature, effect_multiplier)
-	if(isnull(ignition_point))
+	if (isnull(ignition_point))
 		return 0
-	if(temperature < ignition_point)
+	if (temperature < ignition_point)
 		return 0
 	var/totalPhoron = 0
 	for(var/turf/simulated/floor/target_tile in range(2,T))

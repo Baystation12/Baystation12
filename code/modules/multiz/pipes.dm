@@ -19,12 +19,12 @@
 	level = ATOM_LEVEL_UNDER_TILE
 
 /obj/machinery/atmospherics/pipe/zpipe/hide(i)
-	if(istype(loc, /turf/simulated))
+	if (istype(loc, /turf/simulated))
 		set_invisibility(i ? INVISIBILITY_ABSTRACT : 0)
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/zpipe/Process()
-	if(!parent) //This should cut back on the overhead calling build_network thousands of times per cycle
+	if (!parent) //This should cut back on the overhead calling build_network thousands of times per cycle
 		..()
 	else
 		. = PROCESS_KILL
@@ -34,12 +34,12 @@
 
 	var/pressure_difference = pressure - environment.return_pressure()
 
-	if(pressure_difference > maximum_pressure)
+	if (pressure_difference > maximum_pressure)
 		burst()
 
-	else if(pressure_difference > fatigue_pressure)
+	else if (pressure_difference > fatigue_pressure)
 		//TODO: leak to turf, doing pfshhhhh
-		if(prob(5))
+		if (prob(5))
 			burst()
 
 	else return 1
@@ -53,9 +53,9 @@
 	qdel(src) // NOT qdel.
 
 /obj/machinery/atmospherics/pipe/zpipe/Destroy()
-	if(node1)
+	if (node1)
 		node1.disconnect(src)
-	if(node2)
+	if (node2)
 		node2.disconnect(src)
 	. = ..()
 
@@ -66,13 +66,13 @@
 	return
 
 /obj/machinery/atmospherics/pipe/zpipe/disconnect(obj/machinery/atmospherics/reference)
-	if(reference == node1)
-		if(istype(node1, /obj/machinery/atmospherics/pipe))
+	if (reference == node1)
+		if (istype(node1, /obj/machinery/atmospherics/pipe))
 			qdel(parent)
 		node1 = null
 
-	if(reference == node2)
-		if(istype(node2, /obj/machinery/atmospherics/pipe))
+	if (reference == node2)
+		if (istype(node2, /obj/machinery/atmospherics/pipe))
 			qdel(parent)
 		node2 = null
 
@@ -92,20 +92,20 @@
 	var/node1_dir
 
 	for(var/direction in GLOB.cardinal)
-		if(direction&initialize_directions)
+		if (direction&initialize_directions)
 			if (!node1_dir)
 				node1_dir = direction
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
-		if(target.initialize_directions & get_dir(target,src))
+		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node1 = target
 				break
 
 	var/turf/above = GetAbove(src)
-	if(above)
+	if (above)
 		for(var/obj/machinery/atmospherics/target in above)
-			if(target.initialize_directions && istype(target, /obj/machinery/atmospherics/pipe/zpipe/down))
+			if (target.initialize_directions && istype(target, /obj/machinery/atmospherics/pipe/zpipe/down))
 				if (check_connect_types(target,src))
 					node2 = target
 					break
@@ -130,20 +130,20 @@
 	var/node1_dir
 
 	for(var/direction in GLOB.cardinal)
-		if(direction&initialize_directions)
+		if (direction&initialize_directions)
 			if (!node1_dir)
 				node1_dir = direction
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
-		if(target.initialize_directions & get_dir(target,src))
+		if (target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node1 = target
 				break
 
 	var/turf/below = GetBelow(src)
-	if(below)
+	if (below)
 		for(var/obj/machinery/atmospherics/target in below)
-			if(target.initialize_directions && istype(target, /obj/machinery/atmospherics/pipe/zpipe/up))
+			if (target.initialize_directions && istype(target, /obj/machinery/atmospherics/pipe/zpipe/up))
 				if (check_connect_types(target,src))
 					node2 = target
 					break

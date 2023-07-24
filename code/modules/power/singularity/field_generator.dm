@@ -39,17 +39,17 @@ field_generator power level display
 
 /obj/machinery/field_generator/on_update_icon()
 	overlays.Cut()
-	if(!active)
-		if(warming_up)
+	if (!active)
+		if (warming_up)
 			overlays += "+a[warming_up]"
-	if(length(fields))
+	if (length(fields))
 		overlays += "+on"
 	// Power level indicator
 	// Scale % power to % num_power_levels and truncate value
 	var/level = round(num_power_levels * power / field_generator_max_power)
 	// Clamp between 0 and num_power_levels for out of range power values
 	level = clamp(level, 0, num_power_levels)
-	if(level)
+	if (level)
 		overlays += "+p[level]"
 
 	return
@@ -61,8 +61,8 @@ field_generator power level display
 	connected_gens = list()
 
 /obj/machinery/field_generator/Process()
-	if(Varedit_start == 1)
-		if(active == 0)
+	if (Varedit_start == 1)
+		if (active == 0)
 			active = 1
 			state = 2
 			power = field_generator_max_power
@@ -72,15 +72,15 @@ field_generator power level display
 			update_icon()
 		Varedit_start = 0
 
-	if(src.active == 2)
+	if (src.active == 2)
 		calc_power()
 		update_icon()
 
 
 /obj/machinery/field_generator/physical_attack_hand(mob/user)
-	if(state == 2)
-		if(get_dist(src, user) <= 1)//Need to actually touch the thing to turn it on
-			if(src.active >= 1)
+	if (state == 2)
+		if (get_dist(src, user) <= 1)//Need to actually touch the thing to turn it on
+			if (src.active >= 1)
 				to_chat(user, "You are unable to turn off the [src.name] once it is online.")
 				return TRUE
 			else
@@ -97,54 +97,54 @@ field_generator power level display
 		return TRUE
 
 /obj/machinery/field_generator/attackby(obj/item/W, mob/user)
-	if(active)
+	if (active)
 		to_chat(user, "The [src] needs to be off.")
 		return
-	else if(isWrench(W))
+	else if (isWrench(W))
 		switch(state)
-			if(0)
+			if (0)
 				state = 1
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 				user.visible_message("[user.name] secures [src.name] to the floor.", \
 					"You secure the external reinforcing bolts to the floor.", \
 					"You hear ratchet")
 				src.anchored = TRUE
-			if(1)
+			if (1)
 				state = 0
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 				user.visible_message("[user.name] unsecures [src.name] reinforcing bolts from the floor.", \
 					"You undo the external reinforcing bolts.", \
 					"You hear ratchet")
 				src.anchored = FALSE
-			if(2)
+			if (2)
 				to_chat(user, SPAN_WARNING(" The [src.name] needs to be unwelded from the floor."))
 				return
-	else if(isWelder(W))
+	else if (isWelder(W))
 		var/obj/item/weldingtool/WT = W
 		switch(state)
-			if(0)
+			if (0)
 				to_chat(user, SPAN_WARNING("The [src.name] needs to be wrenched to the floor."))
 				return
-			if(1)
+			if (1)
 				if (WT.remove_fuel(0,user))
 					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 					user.visible_message("[user.name] starts to weld the [src.name] to the floor.", \
 						"You start to weld the [src] to the floor.", \
 						"You hear welding")
 					if (do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
-						if(!src || !WT.isOn()) return
+						if (!src || !WT.isOn()) return
 						state = 2
 						to_chat(user, "You weld the field generator to the floor.")
 				else
 					return
-			if(2)
+			if (2)
 				if (WT.remove_fuel(0,user))
 					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 					user.visible_message("[user.name] starts to cut the [src.name] free from the floor.", \
 						"You start to cut the [src] free from the floor.", \
 						"You hear welding")
 					if (do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
-						if(!src || !WT.isOn()) return
+						if (!src || !WT.isOn()) return
 						state = 1
 						to_chat(user, "You cut the [src] free from the floor.")
 				else
@@ -158,7 +158,7 @@ field_generator power level display
 	return
 
 /obj/machinery/field_generator/bullet_act(obj/item/projectile/Proj)
-	if(istype(Proj, /obj/item/projectile/beam))
+	if (istype(Proj, /obj/item/projectile/beam))
 		power += Proj.damage * EMITTER_DAMAGE_POWER_TRANSFER
 		update_icon()
 	return 0
@@ -184,17 +184,17 @@ field_generator power level display
 			sleep(50)
 			warming_up++
 			update_icon()
-			if(warming_up >= 3)
+			if (warming_up >= 3)
 				start_fields()
 	update_icon()
 
 
 /obj/machinery/field_generator/proc/calc_power()
-	if(Varpower)
+	if (Varpower)
 		return 1
 
 	update_icon()
-	if(src.power > field_generator_max_power)
+	if (src.power > field_generator_max_power)
 		src.power = field_generator_max_power
 
 	var/power_draw = gen_power_draw
@@ -205,7 +205,7 @@ field_generator power level display
 		if (!isnull(F))
 			power_draw += field_power_draw
 	power_draw /= 2	//because this will be mirrored for both generators
-	if(draw_power(round(power_draw)) >= power_draw)
+	if (draw_power(round(power_draw)) >= power_draw)
 		return 1
 	else
 		for(var/mob/M in viewers(src))
@@ -219,7 +219,7 @@ field_generator power level display
 /obj/machinery/field_generator/proc/draw_power(draw = 0, list/flood_list = list())
 	flood_list += src
 
-	if(src.power >= draw)//We have enough power
+	if (src.power >= draw)//We have enough power
 		src.power -= draw
 		return draw
 
@@ -237,7 +237,7 @@ field_generator power level display
 	return actual_draw
 
 /obj/machinery/field_generator/proc/start_fields()
-	if(!src.state == 2 || !anchored)
+	if (!src.state == 2 || !anchored)
 		turn_off()
 		return
 	spawn(1)
@@ -255,32 +255,32 @@ field_generator power level display
 	var/turf/T = src.loc
 	var/obj/machinery/field_generator/G
 	var/steps = 0
-	if(!NSEW)//Make sure its ran right
+	if (!NSEW)//Make sure its ran right
 		return
 	for(var/dist = 0, dist <= 9, dist += 1) // checks out to 8 tiles away for another generator
 		T = get_step(T, NSEW)
-		if(T.density)//We can't shoot a field though this
+		if (T.density)//We can't shoot a field though this
 			return 0
 		for(var/atom/A in T.contents)
-			if(ismob(A))
+			if (ismob(A))
 				continue
-			if(!istype(A,/obj/machinery/field_generator))
-				if((istype(A,/obj/machinery/door)||istype(A,/obj/machinery/the_singularitygen))&&(A.density))
+			if (!istype(A,/obj/machinery/field_generator))
+				if ((istype(A,/obj/machinery/door)||istype(A,/obj/machinery/the_singularitygen))&&(A.density))
 					return 0
 		steps += 1
 		G = locate(/obj/machinery/field_generator) in T
-		if(!isnull(G))
+		if (!isnull(G))
 			steps -= 1
-			if(!G.active)
+			if (!G.active)
 				return 0
 			break
-	if(isnull(G))
+	if (isnull(G))
 		return
 	T = get_turf(src)
 	for(var/dist = 0, dist < steps, dist += 1) // creates each field tile
 		var/field_dir = get_dir(T,get_step(G.loc, NSEW))
 		T = get_step(T, NSEW)
-		if(!locate(/obj/machinery/containment_field) in T)
+		if (!locate(/obj/machinery/containment_field) in T)
 			var/obj/machinery/containment_field/CF = new/obj/machinery/containment_field()
 			CF.set_master(src,G)
 			fields += CF
@@ -291,19 +291,19 @@ field_generator power level display
 	for(var/obj/machinery/field_generator/FG in connected_gens)
 		if (isnull(FG))
 			continue
-		if(FG == G)
+		if (FG == G)
 			listcheck = 1
 			break
-	if(!listcheck)
+	if (!listcheck)
 		connected_gens.Add(G)
 	listcheck = 0
 	for(var/obj/machinery/field_generator/FG2 in G.connected_gens)
 		if (isnull(FG2))
 			continue
-		if(FG2 == src)
+		if (FG2 == src)
 			listcheck = 1
 			break
-	if(!listcheck)
+	if (!listcheck)
 		G.connected_gens.Add(src)
 
 
@@ -318,7 +318,7 @@ field_generator power level display
 		if (QDELETED(FG))
 			continue
 		FG.connected_gens.Remove(src)
-		if(!FG.clean_up)//Makes the other gens clean up as well
+		if (!FG.clean_up)//Makes the other gens clean up as well
 			FG.cleanup()
 		connected_gens.Remove(FG)
 	connected_gens = list()
@@ -331,8 +331,8 @@ field_generator power level display
 	spawn(1)
 		var/temp = 1 //stops spam
 		for(var/obj/singularity/O in SSmachines.machinery)
-			if(O.last_warning && temp)
-				if((world.time - O.last_warning) > 50) //to stop message-spam
+			if (O.last_warning && temp)
+				if ((world.time - O.last_warning) > 50) //to stop message-spam
 					temp = 0
 					message_admins("A singulo exists and a containment field has failed.",1)
 					investigate_log("has [SPAN_COLOR("red", "failed")] whilst a singulo exists.","singulo")

@@ -25,14 +25,14 @@
 
 /obj/machinery/organ_printer/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()
-	if(istype(new_state))
+	if (istype(new_state))
 		updateUsrDialog()
 
 /obj/machinery/organ_printer/on_update_icon()
 	overlays.Cut()
-	if(panel_open)
+	if (panel_open)
 		overlays += "[icon_state]_panel_open"
-	if(printing)
+	if (printing)
 		overlays += "[icon_state]_working"
 
 /obj/machinery/organ_printer/examine(mob/user)
@@ -52,21 +52,21 @@
 	return !printing && ..()
 
 /obj/machinery/organ_printer/cannot_transition_to(path)
-	if(printing)
+	if (printing)
 		return SPAN_NOTICE("You must wait for \the [src] to finish printing first!")
 	return ..()
 
 /obj/machinery/organ_printer/physical_attack_hand(mob/user, choice = null)
-	if(printing)
+	if (printing)
 		return
 
-	if(!choice)
+	if (!choice)
 		choice = input("What would you like to print?") as null|anything in products
 
-	if(!choice || printing || !CanPhysicallyInteract(user))
+	if (!choice || printing || !CanPhysicallyInteract(user))
 		return TRUE
 
-	if(!can_print(choice))
+	if (!can_print(choice))
 		return TRUE
 
 	stored_matter -= products[choice][2]
@@ -81,13 +81,13 @@
 	printing = 0
 	update_icon()
 
-	if(!choice || !src || inoperable())
+	if (!choice || !src || inoperable())
 		return TRUE
 
 	print_organ(choice)
 
 /obj/machinery/organ_printer/proc/can_print(choice)
-	if(stored_matter < products[choice][2])
+	if (stored_matter < products[choice][2])
 		visible_message(SPAN_NOTICE("\The [src] displays a warning: 'Not enough matter. [stored_matter] stored and [products[choice][2]] needed.'"))
 		return 0
 	return 1
@@ -135,7 +135,7 @@
 	stored_matter = max_stored_matter
 
 /obj/machinery/organ_printer/robot/dismantle()
-	if(stored_matter >= matter_amount_per_sheet)
+	if (stored_matter >= matter_amount_per_sheet)
 		new /obj/item/stack/material/steel(get_turf(src), floor(stored_matter/matter_amount_per_sheet))
 	return ..()
 
@@ -151,28 +151,28 @@
 	var/add_matter = 0
 	var/object_name = "[W]"
 
-	if(istype(W, /obj/item/stack/material) && W.get_material_name() == matter_type)
-		if((max_stored_matter-stored_matter) >= matter_amount_per_sheet)
+	if (istype(W, /obj/item/stack/material) && W.get_material_name() == matter_type)
+		if ((max_stored_matter-stored_matter) >= matter_amount_per_sheet)
 			var/obj/item/stack/S = W
 			var/space_left = max_stored_matter - stored_matter
 			var/sheets_to_take = min(S.amount, floor(space_left/matter_amount_per_sheet))
-			if(sheets_to_take > 0)
+			if (sheets_to_take > 0)
 				add_matter = min(max_stored_matter - stored_matter, sheets_to_take*matter_amount_per_sheet)
 				S.use(sheets_to_take)
 		else
 			to_chat(user, SPAN_WARNING("\The [src] is too full."))
 
-	else if(istype(W,/obj/item/organ))
+	else if (istype(W,/obj/item/organ))
 		var/obj/item/organ/O = W
-		if((O.organ_tag in products) && istype(O, products[O.organ_tag][1]))
-			if(!BP_IS_ROBOTIC(O))
+		if ((O.organ_tag in products) && istype(O, products[O.organ_tag][1]))
+			if (!BP_IS_ROBOTIC(O))
 				to_chat(user, SPAN_WARNING("\The [src] only accepts robotic organs."))
 				return
-			if(max_stored_matter == stored_matter)
+			if (max_stored_matter == stored_matter)
 				to_chat(user, SPAN_WARNING("\The [src] is too full."))
 			else
 				var/recycle_worth = floor(products[O.organ_tag][2] * 0.5)
-				if((max_stored_matter-stored_matter) >= recycle_worth)
+				if ((max_stored_matter-stored_matter) >= recycle_worth)
 					add_matter = recycle_worth
 					qdel(O)
 		else
@@ -181,7 +181,7 @@
 
 	stored_matter += add_matter
 
-	if(add_matter)
+	if (add_matter)
 		to_chat(user, SPAN_INFO("\The [src] processes \the [object_name]. Levels of stored matter now: [stored_matter]"))
 		return
 	return ..()
@@ -211,7 +211,7 @@
 
 /obj/machinery/organ_printer/flesh/dismantle()
 	var/turf/T = get_turf(src)
-	if(T)
+	if (T)
 		while(stored_matter >= amount_list[/obj/item/reagent_containers/food/snacks/meat])
 			stored_matter -= amount_list[/obj/item/reagent_containers/food/snacks/meat]
 			new /obj/item/reagent_containers/food/snacks/meat(T)
@@ -220,11 +220,11 @@
 /obj/machinery/organ_printer/flesh/print_organ(choice)
 	var/obj/item/organ/O
 	var/new_organ
-	if(loaded_species.has_organ[choice])
+	if (loaded_species.has_organ[choice])
 		new_organ = loaded_species.has_organ[choice]
-	else if(loaded_species.has_limbs[choice])
+	else if (loaded_species.has_limbs[choice])
 		new_organ = loaded_species.has_limbs[choice]["path"]
-	if(new_organ)
+	if (new_organ)
 		O = new new_organ(get_turf(src), loaded_dna_datum)
 		O.status |= ORGAN_CUT_AWAY
 	else
@@ -234,13 +234,13 @@
 	return O
 
 /obj/machinery/organ_printer/flesh/physical_attack_hand(mob/user)
-	if(!loaded_dna_datum || !loaded_species)
+	if (!loaded_dna_datum || !loaded_species)
 		visible_message(SPAN_INFO("\The [src] displays a warning: 'No DNA saved. Insert a blood sample.'"))
 		return
 
 	var/choice = input("What [loaded_species.name] organ would you like to print?") as null|anything in products
 
-	if(!choice)
+	if (!choice)
 		return
 
 	..(user, choice)
@@ -248,11 +248,11 @@
 /obj/machinery/organ_printer/flesh/attackby(obj/item/W, mob/user)
 	// Load with matter for printing.
 	for(var/path in amount_list)
-		if(istype(W, path))
-			if(max_stored_matter == stored_matter)
+		if (istype(W, path))
+			if (max_stored_matter == stored_matter)
 				to_chat(user, SPAN_WARNING("\The [src] is too full."))
 				return
-			if(!user.unEquip(W))
+			if (!user.unEquip(W))
 				return
 			var/add_matter = amount_list[path] ? amount_list[path] : 0.5*get_organ_cost(W)
 			stored_matter += min(add_matter, max_stored_matter - stored_matter)
@@ -260,14 +260,14 @@
 			qdel(W)
 
 	// DNA sample from syringe.
-	if(istype(W,/obj/item/reagent_containers/syringe))
+	if (istype(W,/obj/item/reagent_containers/syringe))
 		var/obj/item/reagent_containers/syringe/S = W
 		var/datum/reagent/blood/injected = locate() in S.reagents.reagent_list //Grab some blood
-		if(injected && LAZYLEN(injected.data))
+		if (injected && LAZYLEN(injected.data))
 			var/loaded_dna = injected.data
 			var/weakref/R = loaded_dna["donor"]
 			var/mob/living/carbon/human/H = R.resolve()
-			if(H && istype(H) && H.species && H.dna)
+			if (H && istype(H) && H.species && H.dna)
 				loaded_species = H.species
 				loaded_dna_datum = H.dna && H.dna.Clone()
 				products = get_possible_products()
@@ -278,7 +278,7 @@
 
 /obj/machinery/organ_printer/flesh/proc/get_possible_products()
 	. = list()
-	if(!loaded_species)
+	if (!loaded_species)
 		return
 	var/list/organs = list()
 	for(var/organ in loaded_species.has_organ)
@@ -288,25 +288,25 @@
 			organs += loaded_species.has_limbs[organ]["path"]
 	for(var/organ in organs)
 		var/obj/item/organ/O = organ
-		if(check_printable(organ))
+		if (check_printable(organ))
 			.[initial(O.organ_tag)] = list(O, get_organ_cost(O))
 
 /obj/machinery/organ_printer/flesh/proc/get_organ_cost(obj/item/organ/O)
 	. = initial(O.print_cost)
-	if(!.)
+	if (!.)
 		. = round(0.75 * initial(O.max_damage))
 
 /obj/machinery/organ_printer/flesh/proc/check_printable(organtype)
 	var/obj/item/organ/O = organtype
-	if(!initial(O.can_be_printed))
+	if (!initial(O.can_be_printed))
 		return FALSE
-	if(initial(O.vital))
+	if (initial(O.vital))
 		return FALSE
-	if(initial(O.status) & ORGAN_ROBOTIC)
+	if (initial(O.status) & ORGAN_ROBOTIC)
 		return FALSE
-	if(ispath(organtype, /obj/item/organ/external))
+	if (ispath(organtype, /obj/item/organ/external))
 		var/obj/item/organ/external/E = organtype
-		if(initial(E.limb_flags) & ORGAN_FLAG_HEALS_OVERKILL)
+		if (initial(E.limb_flags) & ORGAN_FLAG_HEALS_OVERKILL)
 			return FALSE
 	return TRUE
 

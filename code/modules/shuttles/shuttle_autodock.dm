@@ -24,16 +24,16 @@
 	//Initial dock
 	active_docking_controller = current_location.docking_controller
 	update_docking_target(current_location)
-	if(active_docking_controller)
+	if (active_docking_controller)
 		set_docking_codes(active_docking_controller.docking_codes)
-	else if(GLOB.using_map.use_overmap)
+	else if (GLOB.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/location = map_sectors["[current_location.z]"]
-		if(location && location.docking_codes)
+		if (location && location.docking_codes)
 			set_docking_codes(location.docking_codes)
 	dock()
 
 	//Optional transition area
-	if(landmark_transition)
+	if (landmark_transition)
 		landmark_transition = SSshuttle.get_landmark(landmark_transition)
 
 /datum/shuttle/autodock/Destroy()
@@ -45,7 +45,7 @@
 
 /datum/shuttle/autodock/proc/set_docking_codes(code)
 	docking_codes = code
-	if(shuttle_docking_controller)
+	if (shuttle_docking_controller)
 		shuttle_docking_controller.docking_codes = code
 
 /datum/shuttle/autodock/shuttle_moved()
@@ -53,7 +53,7 @@
 	..()
 
 /datum/shuttle/autodock/proc/update_docking_target(obj/effect/shuttle_landmark/location)
-	if(location && location.special_dock_targets && location.special_dock_targets[name])
+	if (location && location.special_dock_targets && location.special_dock_targets[name])
 		current_dock_target = location.special_dock_targets[name]
 	else
 		current_dock_target = dock_target
@@ -62,25 +62,25 @@
 	Docking stuff
 */
 /datum/shuttle/autodock/proc/dock()
-	if(active_docking_controller && shuttle_docking_controller)
+	if (active_docking_controller && shuttle_docking_controller)
 		shuttle_docking_controller.initiate_docking(active_docking_controller.id_tag)
 		last_dock_attempt_time = world.time
 
 /datum/shuttle/autodock/proc/undock()
-	if(shuttle_docking_controller)
+	if (shuttle_docking_controller)
 		shuttle_docking_controller.initiate_undocking()
 
 /datum/shuttle/autodock/proc/force_undock()
-	if(shuttle_docking_controller)
+	if (shuttle_docking_controller)
 		shuttle_docking_controller.force_undock()
 
 /datum/shuttle/autodock/proc/check_docked()
-	if(shuttle_docking_controller)
+	if (shuttle_docking_controller)
 		return shuttle_docking_controller.docked()
 	return TRUE
 
 /datum/shuttle/autodock/proc/check_undocked()
-	if(shuttle_docking_controller)
+	if (shuttle_docking_controller)
 		return shuttle_docking_controller.can_launch()
 	return TRUE
 
@@ -91,7 +91,7 @@
 /datum/shuttle/autodock/Process()
 	switch(process_state)
 		if (WAIT_LAUNCH)
-			if(check_undocked())
+			if (check_undocked())
 				//*** ready to go
 				process_launch()
 
@@ -123,7 +123,7 @@
 	return move_time
 
 /datum/shuttle/autodock/proc/process_launch()
-	if(!next_location.is_valid(src) || current_location.cannot_depart(src))
+	if (!next_location.is_valid(src) || current_location.cannot_depart(src))
 		process_state = IDLE_STATE
 		in_use = null
 		return

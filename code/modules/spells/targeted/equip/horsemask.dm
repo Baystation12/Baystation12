@@ -33,14 +33,14 @@
 /spell/targeted/equip_item/horsemask/summon_item(new_type)
 	var/obj/item/new_item = new new_type
 	new_item.canremove = 0		//curses!
-	if(istype(new_item, /obj/item/clothing/mask/horsehead))
+	if (istype(new_item, /obj/item/clothing/mask/horsehead))
 		var/obj/item/clothing/mask/horsehead/magichead = new_item
 		magichead.flags_inv = null	//so you can still see their face
 		magichead.voicechange = 1	//NEEEEIIGHH
 	return new_item
 
 /spell/targeted/equip_item/horsemask/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 
 	spell_flags = SELECTABLE

@@ -1,12 +1,12 @@
 // The following procs are used to grab players for mobs produced by a seed (mostly for dionaea).
 /datum/seed/proc/handle_living_product(mob/living/host)
-	if(!host || !istype(host)) return
+	if (!host || !istype(host)) return
 
 	var/datum/ghosttrap/plant/P = get_ghost_trap("living plant")
 	P.request_player(host, "Someone is harvesting \a [display_name].", 15 SECONDS)
 
 	spawn(15 SECONDS)
-		if(!host.ckey && !host.client)
+		if (!host.ckey && !host.client)
 			host.death()  // This seems redundant, but a lot of mobs don't
 			host.set_stat(DEAD) // handle death() properly. Better safe than etc.
 			host.visible_message(SPAN_DANGER("\The [host] is malformed and unable to survive. It expires pitifully, leaving behind some seeds."))

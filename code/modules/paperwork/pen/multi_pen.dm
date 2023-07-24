@@ -6,13 +6,13 @@
 	var/color_descriptions = list("black ink", "blue ink", "red ink", "green ink")
 
 /obj/item/pen/multi/attack_self(mob/user)
-	if(++selectedColor > length(colors))
+	if (++selectedColor > length(colors))
 		selectedColor = 1
 
 	colour = colors[selectedColor]
 	color_description = color_descriptions[selectedColor]
 
-	if(colour == "black")
+	if (colour == "black")
 		icon_state = "pen"
 	else
 		icon_state = "pen_[colour]"

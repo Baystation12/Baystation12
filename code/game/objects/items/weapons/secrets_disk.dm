@@ -30,7 +30,7 @@
 
 /obj/item/disk/secret_project/examine(mob/user)
 	. = ..()
-	if(!locked)
+	if (!locked)
 		to_chat(user, "With the disk's classified contents unlocked, \
 		you peer into its preview screen and see [SPAN_NOTICE("[subject]")].")
 	else
@@ -42,9 +42,9 @@
 	return 0
 
 /obj/item/disk/secret_project/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/card/id))
+	if (istype(W,/obj/item/card/id))
 		var/obj/item/card/id/ID = W
-		if(check_access(ID))
+		if (check_access(ID))
 			locked = !locked
 			to_chat(user, SPAN_NOTICE("You swipe your card and [locked ? "lock":"unlock"] the disk."))
 		else
@@ -57,9 +57,9 @@
 	set category = "Object"
 	set src in view(0)
 
-	if(!locked)
+	if (!locked)
 		var/input = sanitize(input(usr, "What would you like to change the project codename to?", "Classified Project Data Disk"))
-		if(!input || input == "")
+		if (!input || input == "")
 			return
 		SetName("'[input]' project data disk")
 	else

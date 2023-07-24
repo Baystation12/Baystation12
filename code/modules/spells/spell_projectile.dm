@@ -25,7 +25,7 @@
 	return
 
 /obj/item/projectile/spell_projectile/before_move()
-	if(proj_trail && src && src.loc) //pretty trails
+	if (proj_trail && src && src.loc) //pretty trails
 		var/obj/effect/overlay/trail = new /obj/effect/overlay(loc)
 		trails += trail
 		trail.icon = proj_trail_icon
@@ -36,18 +36,18 @@
 			qdel(trail)
 
 /obj/item/projectile/spell_projectile/proc/prox_cast(list/targets)
-	if(loc)
+	if (loc)
 		carried.prox_cast(targets, src)
 		qdel(src)
 	return
 
 /obj/item/projectile/spell_projectile/Bump(atom/A, forced=0)
-	if(loc && carried)
+	if (loc && carried)
 		prox_cast(carried.choose_prox_targets(user = carried.holder, spell_holder = src))
 	return 1
 
 /obj/item/projectile/spell_projectile/on_impact()
-	if(loc && carried)
+	if (loc && carried)
 		prox_cast(carried.choose_prox_targets(user = carried.holder, spell_holder = src))
 	return 1
 

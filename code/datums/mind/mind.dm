@@ -77,16 +77,16 @@
 	. = ..()
 
 /datum/mind/proc/transfer_to(mob/living/new_character)
-	if(!istype(new_character))
+	if (!istype(new_character))
 		to_world_log("## DEBUG: transfer_to(): Some idiot has tried to transfer_to() a non mob/living mob. Please inform Carn.")
-	if(current)					//remove ourself from our old body's mind variable
-		if(changeling)
+	if (current)					//remove ourself from our old body's mind variable
+		if (changeling)
 			current.remove_changeling_powers()
 			current.verbs -= /datum/changeling/proc/EvolutionMenu
 		current.mind = null
 
 		SSnano.user_transferred(current, new_character) // transfer active NanoUI instances to new user
-	if(new_character.mind)		//remove any mind currently in our new body's mind variable
+	if (new_character.mind)		//remove any mind currently in our new body's mind variable
 		new_character.mind.current = null
 
 	new_character.skillset.obtain_from_mob(current)	//handles moving skills over.
@@ -94,17 +94,17 @@
 	current = new_character		//link ourself to our new body
 	new_character.mind = src	//and link our new body to ourself
 
-	if(learned_spells && length(learned_spells))
+	if (learned_spells && length(learned_spells))
 		restore_spells(new_character)
 
-	if(changeling)
+	if (changeling)
 		new_character.make_changeling()
 
-	if(active)
+	if (active)
 		new_character.key = key		//now transfer the key to link the client to our new body
 
 /datum/mind/proc/edit_memory()
-	if(GAME_STATE <= RUNLEVEL_SETUP)
+	if (GAME_STATE <= RUNLEVEL_SETUP)
 		alert("Not before round-start!", "Alert")
 		return
 
@@ -120,7 +120,7 @@
 	out += "</table><hr>"
 	out += "<b>Objectives</b></br>"
 
-	if(objectives && length(objectives))
+	if (objectives && length(objectives))
 		var/num = 1
 		for(var/datum/objective/O in objectives)
 			out += "<b>Objective #[num]:</b> [O.explanation_text] "
@@ -143,35 +143,35 @@
 	is_admin = check_rights(R_ADMIN, FALSE)
 	can_modify = is_admin
 
-	if(href_list["add_goal"])
+	if (href_list["add_goal"])
 
 		var/mob/caller = locate(href_list["add_goal_caller"])
-		if(!isghost(usr) && caller && caller == current) can_modify = TRUE
+		if (!isghost(usr) && caller && caller == current) can_modify = TRUE
 
-		if(can_modify)
+		if (can_modify)
 			var/did_generate_goal = generate_goals(assigned_job, TRUE, 1, bypass_goal_checks = is_admin)
-			if(did_generate_goal && goals)
+			if (did_generate_goal && goals)
 				var/datum/goal/goal = goals[LAZYLEN(goals)]
 				to_chat(current, SPAN_NOTICE("<b>You have received a new goal:</b> '[goal.summarize(FALSE, FALSE)]'."))
-				if(usr != current)
+				if (usr != current)
 					to_chat(usr, SPAN_NOTICE("<b>You have added a new goal to \the [current]:</b> '[goal.summarize(FALSE, FALSE)]'."))
 					log_admin("[key_name_admin(usr)] added a random goal to [key_name(current)].")
 		return TRUE // To avoid 'you are not an admin' spam.
 
-	if(href_list["remove_memory"])
+	if (href_list["remove_memory"])
 		var/memory = locate(href_list["remove_memory"]) in memories
 		RemoveMemory(memory, usr)
 		return TRUE
 
-	if(href_list["abandon_goal"])
+	if (href_list["abandon_goal"])
 		var/datum/goal/goal = locate(href_list["abandon_goal"])
 
 		var/mob/caller = locate(href_list["abandon_goal_caller"])
-		if(!isghost(usr) && caller && caller == current) can_modify = TRUE
+		if (!isghost(usr) && caller && caller == current) can_modify = TRUE
 
-		if(can_modify && goal && (goal in goals))
-			if(delete_goal(assigned_job, goal, is_admin))
-				if(usr == current)
+		if (can_modify && goal && (goal in goals))
+			if (delete_goal(assigned_job, goal, is_admin))
+				if (usr == current)
 					to_chat(current, SPAN_NOTICE("<b>You have abandoned your goal:</b> '[goal.summarize(FALSE, FALSE)]'."))
 				else
 					to_chat(usr, SPAN_NOTICE("<b>You have removed a goal from \the [current]:</b> '[goal.summarize(FALSE, FALSE)]'."))
@@ -179,18 +179,18 @@
 					log_admin("[key_name_admin(usr)] removed a goal from [key_name(current)].")
 		return TRUE
 
-	if(href_list["reroll_goal"])
+	if (href_list["reroll_goal"])
 		var/datum/goal/goal = locate(href_list["reroll_goal"])
 
 		var/mob/caller = locate(href_list["reroll_goal_caller"])
-		if(!isghost(usr) && caller && caller == current) can_modify = TRUE
+		if (!isghost(usr) && caller && caller == current) can_modify = TRUE
 
-		if(can_modify && goal && (goal in goals))
-			if(generate_goals(assigned_job, TRUE, 1, bypass_goal_checks = TRUE))
+		if (can_modify && goal && (goal in goals))
+			if (generate_goals(assigned_job, TRUE, 1, bypass_goal_checks = TRUE))
 				delete_goal(assigned_job, goal, TRUE)
-				if(goals)
+				if (goals)
 					goal = goals[LAZYLEN(goals)]
-					if(usr == current)
+					if (usr == current)
 						to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
 					else
 						to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal for \the [current]. Their new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
@@ -198,74 +198,74 @@
 						log_admin("[key_name_admin(usr)] rerolled a goal for [key_name(current)].")
 		return TRUE
 
-	if(!is_admin) return
+	if (!is_admin) return
 
-	if(current && isliving(current))
-		if(href_list["set_psi_faculty"] && href_list["set_psi_faculty_rank"])
+	if (current && isliving(current))
+		if (href_list["set_psi_faculty"] && href_list["set_psi_faculty_rank"])
 			current.set_psi_rank(href_list["set_psi_faculty"], text2num(href_list["set_psi_faculty_rank"]))
 			log_and_message_admins("set [key_name(current)]'s [href_list["set_psi_faculty"]] faculty to [text2num(href_list["set_psi_faculty_rank"])].")
 			var/datum/admins/admin = GLOB.admins[usr.key]
-			if(istype(admin)) admin.show_player_panel(current)
+			if (istype(admin)) admin.show_player_panel(current)
 			return TRUE
 
-	if(href_list["add_antagonist"])
+	if (href_list["add_antagonist"])
 		var/datum/antagonist/antag = GLOB.all_antag_types_[href_list["add_antagonist"]]
-		if(antag)
-			if(!current)
+		if (antag)
+			if (!current)
 				to_chat(usr, SPAN_WARNING("\The [src] could not be made into a [antag.role_text]! They do not have a mob."))
 				return
-			if(src in antag.current_antagonists)
+			if (src in antag.current_antagonists)
 				to_chat(usr, SPAN_WARNING("\The [src] is already a [antag.role_text]!"))
 				return
 			var/result = antag.can_become_antag_detailed(src, TRUE)
-			if(result)
+			if (result)
 				to_chat(usr, SPAN_WARNING("\The [src] could not be made into a [antag.role_text]! [result]."))
 				return
-			if(antag.add_antagonist(src, 1, 1, 0, 1, 1)) // Ignore equipment and role type for this.
+			if (antag.add_antagonist(src, 1, 1, 0, 1, 1)) // Ignore equipment and role type for this.
 				log_admin("[key_name_admin(usr)] made [key_name(src)] into a [antag.role_text].")
 			else
 				to_chat(usr, SPAN_WARNING("\The [src] could not be made into a [antag.role_text]!"))
 
-	else if(href_list["remove_antagonist"])
+	else if (href_list["remove_antagonist"])
 		var/datum/antagonist/antag = GLOB.all_antag_types_[href_list["remove_antagonist"]]
-		if(antag) antag.remove_antagonist(src)
+		if (antag) antag.remove_antagonist(src)
 
-	else if(href_list["equip_antagonist"])
+	else if (href_list["equip_antagonist"])
 		var/datum/antagonist/antag = GLOB.all_antag_types_[href_list["equip_antagonist"]]
-		if(antag) antag.equip(src.current)
+		if (antag) antag.equip(src.current)
 
-	else if(href_list["unequip_antagonist"])
+	else if (href_list["unequip_antagonist"])
 		var/datum/antagonist/antag = GLOB.all_antag_types_[href_list["unequip_antagonist"]]
-		if(antag) antag.unequip(src.current)
+		if (antag) antag.unequip(src.current)
 
-	else if(href_list["move_antag_to_spawn"])
+	else if (href_list["move_antag_to_spawn"])
 		var/datum/antagonist/antag = GLOB.all_antag_types_[href_list["move_antag_to_spawn"]]
-		if(antag) antag.place_mob(src.current)
+		if (antag) antag.place_mob(src.current)
 
 	else if (href_list["role_edit"])
 		var/new_role = input("Select new role", "Assigned role", assigned_role) as null|anything in SSjobs.titles_to_datums
 		if (!new_role) return
 		var/datum/job/job = SSjobs.get_by_title(new_role)
-		if(job)
+		if (job)
 			assigned_job = job
 			assigned_role = job.title
 			role_alt_title = new_role
-			if(current)
+			if (current)
 				current.skillset.obtain_from_client(job, current.client)
 
 	else if (href_list["amb_edit"])
 		var/datum/mind/mind = locate(href_list["amb_edit"])
-		if(!mind)
+		if (!mind)
 			return
 
 		var/datum/goal/ambition/ambition = SSgoals.ambitions[src]
 		var/new_ambition = input("Enter a new ambition", "Memory", ambition ? html_decode(ambition.description) : "") as null|message
-		if(isnull(new_ambition))
+		if (isnull(new_ambition))
 			return
 		new_ambition = sanitize(new_ambition)
-		if(mind)
-			if(new_ambition)
-				if(!ambition)
+		if (mind)
+			if (new_ambition)
+				if (!ambition)
 					ambition = new /datum/goal/ambition(mind)
 				ambition.description = new_ambition
 				to_chat(mind.current, SPAN_WARNING("Your ambitions have been changed by higher powers, they are now: [ambition.description]"))
@@ -273,7 +273,7 @@
 			else
 				to_chat(mind.current, SPAN_WARNING("Your ambitions have been unmade by higher powers."))
 				log_and_message_admins("has cleared [key_name(mind.current)]'s ambitions.")
-				if(ambition)
+				if (ambition)
 					qdel(ambition)
 		else
 			to_chat(usr, SPAN_WARNING("The mind has ceased to be."))
@@ -291,7 +291,7 @@
 			//Text strings are easy to manipulate. Revised for simplicity.
 			var/temp_obj_type = "[objective.type]"//Convert path into a text string.
 			def_value = copytext(temp_obj_type, 19)//Convert last part of path into an objective keyword.
-			if(!def_value)//If it's a custom objective, it will be an empty string.
+			if (!def_value)//If it's a custom objective, it will be an empty string.
 				def_value = "custom"
 
 		var/new_obj_type = input("Select objective type:", "Objective type", def_value) as null|anything in list("assassinate", "debrain", "protect", "prevent", "harm", "brig", "hijack", "escape", "survive", "steal", "download", "mercenary", "capture", "absorb", "custom")
@@ -358,9 +358,9 @@
 				if (!steal.select_target())
 					return
 
-			if("download","capture","absorb")
+			if ("download","capture","absorb")
 				var/def_num
-				if(objective&&objective.type==text2path("/datum/objective/[new_obj_type]"))
+				if (objective&&objective.type==text2path("/datum/objective/[new_obj_type]"))
 					def_num = objective.target_amount
 
 				var/target_number = input("Input target number:", "Objective", def_num) as num|null
@@ -368,13 +368,13 @@
 					return
 
 				switch(new_obj_type)
-					if("download")
+					if ("download")
 						new_objective = new /datum/objective/download
 						new_objective.explanation_text = "Download [target_number] research levels."
-					if("capture")
+					if ("capture")
 						new_objective = new /datum/objective/capture
 						new_objective.explanation_text = "Accumulate [target_number] capture points."
-					if("absorb")
+					if ("absorb")
 						new_objective = new /datum/objective/absorb
 						new_objective.explanation_text = "Absorb [target_number] compatible genomes."
 				new_objective.owner = src
@@ -397,24 +397,24 @@
 
 	else if (href_list["obj_delete"])
 		var/datum/objective/objective = locate(href_list["obj_delete"])
-		if(!istype(objective))	return
+		if (!istype(objective))	return
 		objectives -= objective
 
-	else if(href_list["implant"])
+	else if (href_list["implant"])
 		var/mob/living/carbon/human/H = current
 
 		SET_BIT(H.hud_updateflag, IMPLOYAL_HUD)   // updates that players HUD images so secHUD's pick up they are implanted or not.
 
 		switch(href_list["implant"])
-			if("remove")
+			if ("remove")
 				for(var/obj/item/implant/loyalty/I in H.contents)
 					for(var/obj/item/organ/external/organs in H.organs)
-						if(I in organs.implants)
+						if (I in organs.implants)
 							qdel(I)
 							break
 				to_chat(H, SPAN_NOTICE(FONT_LARGE("<B>Your loyalty implant has been deactivated.</B>")))
 				log_admin("[key_name_admin(usr)] has de-loyalty implanted [current].")
-			if("add")
+			if ("add")
 				to_chat(H, SPAN_DANGER(FONT_LARGE("You somehow have become the recepient of a loyalty transplant, and it just activated!")))
 				H.implant_loyalty(H, override = TRUE)
 				log_admin("[key_name_admin(usr)] has loyalty implanted [current].")
@@ -422,24 +422,24 @@
 		SET_BIT(current.hud_updateflag, SPECIALROLE_HUD)
 		switch(href_list["silicon"])
 
-			if("unemag")
+			if ("unemag")
 				var/mob/living/silicon/robot/R = current
 				if (istype(R))
 					R.emagged = FALSE
 					if (R.IsHolding(R.module.emag))
 						R.module_active = null
-					if(R.module_state_1 == R.module.emag)
+					if (R.module_state_1 == R.module.emag)
 						R.module_state_1 = null
 						R.module.emag.forceMove(null)
-					else if(R.module_state_2 == R.module.emag)
+					else if (R.module_state_2 == R.module.emag)
 						R.module_state_2 = null
 						R.module.emag.forceMove(null)
-					else if(R.module_state_3 == R.module.emag)
+					else if (R.module_state_3 == R.module.emag)
 						R.module_state_3 = null
 						R.module.emag.forceMove(null)
 					log_admin("[key_name_admin(usr)] has unemag'ed [R].")
 
-			if("unemagcyborgs")
+			if ("unemagcyborgs")
 				if (istype(current, /mob/living/silicon/ai))
 					var/mob/living/silicon/ai/ai = current
 					for (var/mob/living/silicon/robot/R in ai.connected_robots)
@@ -447,28 +447,28 @@
 						if (R.module)
 							if (R.IsHolding(R.module.emag))
 								R.module_active = null
-							if(R.module_state_1 == R.module.emag)
+							if (R.module_state_1 == R.module.emag)
 								R.module_state_1 = null
 								R.module.emag.forceMove(null)
-							else if(R.module_state_2 == R.module.emag)
+							else if (R.module_state_2 == R.module.emag)
 								R.module_state_2 = null
 								R.module.emag.forceMove(null)
-							else if(R.module_state_3 == R.module.emag)
+							else if (R.module_state_3 == R.module.emag)
 								R.module_state_3 = null
 								R.module.emag.forceMove(null)
 					log_admin("[key_name_admin(usr)] has unemag'ed [ai]'s Cyborgs.")
 
 	else if (href_list["common"])
 		switch(href_list["common"])
-			if("undress")
+			if ("undress")
 				for(var/obj/item/W in current)
 					current.drop_from_inventory(W)
-			if("takeuplink")
+			if ("takeuplink")
 				take_uplink()
-			if("crystals")
+			if ("crystals")
 				if (usr.client.holder.rights & R_FUN)
 					var/obj/item/device/uplink/suplink = find_syndicate_uplink()
-					if(!suplink)
+					if (!suplink)
 						to_chat(usr, SPAN_WARNING("Failed to find an uplink."))
 						return
 					var/crystals = suplink.uses
@@ -493,7 +493,7 @@
 
 /datum/mind/proc/take_uplink()
 	var/obj/item/device/uplink/H = find_syndicate_uplink()
-	if(H)
+	if (H)
 		qdel(H)
 
 
@@ -501,20 +501,20 @@
 // have to call this periodically for the duration to work properly
 /datum/mind/proc/is_brigged(duration)
 	var/turf/T = current.loc
-	if(!istype(T))
+	if (!istype(T))
 		brigged_since = -1
 		return 0
 	var/is_currently_brigged = 0
-	if(istype(T.loc,/area/security/brig))
+	if (istype(T.loc,/area/security/brig))
 		is_currently_brigged = 1
-		if(current.GetIdCard())
+		if (current.GetIdCard())
 			is_currently_brigged = 0
 
-	if(!is_currently_brigged)
+	if (!is_currently_brigged)
 		brigged_since = -1
 		return 0
 
-	if(brigged_since == -1)
+	if (brigged_since == -1)
 		brigged_since = world.time
 
 	return (duration <= world.time - brigged_since)
@@ -534,13 +534,13 @@
 	brigged_since =   -1
 
 /datum/mind/proc/add_known_mob(mob/M)
-	if(ismob(M))
+	if (ismob(M))
 		known_mobs += M
 
 //Antagonist role check
 /mob/living/proc/check_special_role(role)
-	if(mind)
-		if(!role)
+	if (mind)
+		if (!role)
 			return mind.special_role
 		else
 			return (mind.special_role == role) ? 1 : 0
@@ -549,21 +549,21 @@
 
 //Initialisation procs
 /mob/living/proc/mind_initialize()
-	if(mind)
+	if (mind)
 		mind.key = key
 	else
 		mind = new /datum/mind(key)
 		mind.original = src
 		SSticker.minds += mind
-	if(!mind.name)	mind.name = real_name
+	if (!mind.name)	mind.name = real_name
 	mind.current = src
-	if(player_is_antag(mind))
+	if (player_is_antag(mind))
 		src.client.verbs += /client/proc/aooc
 
 //HUMAN
 /mob/living/carbon/human/mind_initialize()
 	..()
-	if(!mind.assigned_role)
+	if (!mind.assigned_role)
 		mind.assigned_role = GLOB.using_map.default_assistant_title
 
 //slime

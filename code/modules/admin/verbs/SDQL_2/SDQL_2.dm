@@ -25,12 +25,12 @@
 /client/proc/SDQL2_query(query_text as message)
 	set category = "Debug"
 
-	if(!check_rights(R_DEBUG))  // Shouldn't happen... but just to be safe.
+	if (!check_rights(R_DEBUG))  // Shouldn't happen... but just to be safe.
 		message_admins(SPAN_WARNING("ERROR: Non-admin [usr.key] attempted to execute the following SDQL query: [query_text]"))
 		log_admin("Non-admin [usr.key] attempted to execute the following SDQL query: [query_text]!")
 		return
 
-	if(!query_text || length(query_text) < 1)
+	if (!query_text || length(query_text) < 1)
 		return
 
 	var/query_log = "[key_name(src)] executed SDQL query: \"[query_text]\"."
@@ -40,12 +40,12 @@
 
 	var/list/query_list = SDQL2_tokenize(query_text)
 
-	if(!query_list || length(query_list) < 1)
+	if (!query_list || length(query_list) < 1)
 		return
 
 	var/list/querys = SDQL_parse(query_list)
 
-	if(!querys || length(querys) < 1)
+	if (!querys || length(querys) < 1)
 		return
 
 	try
@@ -54,17 +54,17 @@
 			var/list/select_types = list()
 
 			switch(query_tree[1])
-				if("explain")
+				if ("explain")
 					SDQL_testout(query_tree["explain"])
 					return
 
-				if("call")
-					if("on" in query_tree)
+				if ("call")
+					if ("on" in query_tree)
 						select_types = query_tree["on"]
 					else
 						return
 
-				if("select", "delete", "update")
+				if ("select", "delete", "update")
 					select_types = query_tree[query_tree[1]]
 
 
@@ -77,21 +77,21 @@
 				objs += SDQL_get_all(type, from_objs)
 				CHECK_TICK
 
-			if("where" in query_tree)
+			if ("where" in query_tree)
 				var/objs_temp = objs
 				objs = list()
 				for(var/datum/d in objs_temp)
-					if(SDQL_expression(d, query_tree["where"]))
+					if (SDQL_expression(d, query_tree["where"]))
 						objs += d
 					CHECK_TICK
 
 			switch(query_tree[1])
-				if("call")
+				if ("call")
 					for(var/datum/d in objs)
 						SDQL_var(d, query_tree["call"][1], source = d)
 						CHECK_TICK
 
-				if("delete")
+				if ("delete")
 					for(var/datum/d in objs)
 						if (isturf(d))
 							// turfs are special snowflakes that explode if qdeleted
@@ -101,17 +101,17 @@
 							qdel(d)
 						CHECK_TICK
 
-				if("select")
+				if ("select")
 					var/text = ""
 					for(var/datum/t in objs)
 						text += "<A HREF='?_src_=vars;Vars=\ref[t]'>\ref[t]</A>"
-						if(istype(t, /atom))
+						if (istype(t, /atom))
 							var/atom/a = t
 
-							if(a.x)
+							if (a.x)
 								text += ": [t] at <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[a.x];Y=[a.y];Z=[a.z]'>([a.x], [a.y], [a.z])</a><br>"
 
-							else if(a.loc && a.loc.x)
+							else if (a.loc && a.loc.x)
 								text += ": [t] in <A HREF='?_src_=vars;Vars=\ref[a.loc]'>[a.loc]</A> at <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[a.loc.x];Y=[a.loc.y];Z=[a.loc.z]'>([a.loc.x], [a.loc.y], [a.loc.z])</a><br>"
 
 							else
@@ -120,26 +120,26 @@
 						else
 							text += ": [t]<br>"
 						CHECK_TICK
-					if(!text)
+					if (!text)
 						text = "No results found."
 					show_browser(usr, text, "window=SDQL-result")
 
-				if("update")
-					if("set" in query_tree)
+				if ("update")
+					if ("set" in query_tree)
 						var/list/set_list = query_tree["set"]
 						for(var/datum/d in objs)
 							for(var/list/sets in set_list)
 								var/datum/temp = d
 								var/i = 0
 								for(var/v in sets)
-									if(++i == length(sets))
-										if(istype(temp, /turf) && (v == "x" || v == "y" || v == "z"))
+									if (++i == length(sets))
+										if (istype(temp, /turf) && (v == "x" || v == "y" || v == "z"))
 											break
 
 										temp.SDQL_update(v, SDQL_expression(d, set_list[sets]))
 										break
 
-									if(temp.vars.Find(v) && (istype(temp.vars[v], /datum) || istype(temp.vars[v], /client)))
+									if (temp.vars.Find(v) && (istype(temp.vars[v], /datum) || istype(temp.vars[v], /client)))
 										temp = temp.vars[v]
 
 									else
@@ -162,16 +162,16 @@
 	var/querys_pos = 1
 	var/do_parse = 0
 	for(var/val in query_list)
-		if(val == ";")
+		if (val == ";")
 			do_parse = 1
-		else if(pos >= length(query_list))
+		else if (pos >= length(query_list))
 			query_tree += val
 			do_parse = 1
-		if(do_parse)
+		if (do_parse)
 			parser.query = query_tree
 			var/list/parsed_tree
 			parsed_tree = parser.parse()
-			if(length(parsed_tree) > 0)
+			if (length(parsed_tree) > 0)
 				LIST_RESIZE(querys, querys_pos)
 				querys[querys_pos] = parsed_tree
 				querys_pos++
@@ -196,7 +196,7 @@
 		spaces += "&nbsp;&nbsp;&nbsp;&nbsp;"
 
 	for(var/item in query_tree)
-		if(istype(item, /list))
+		if (istype(item, /list))
 			to_chat(usr, "[spaces](")
 			SDQL_testout(item, indent + 1)
 			to_chat(usr, "[spaces])")
@@ -204,9 +204,9 @@
 		else
 			to_chat(usr, "[spaces][item]")
 
-		if(!isnum(item) && query_tree[item])
+		if (!isnum(item) && query_tree[item])
 
-			if(istype(query_tree[item], /list))
+			if (istype(query_tree[item], /list))
 				to_chat(usr, "[spaces]&nbsp;&nbsp;&nbsp;&nbsp;(")
 				SDQL_testout(query_tree[item], indent + 2)
 				to_chat(usr, "[spaces]&nbsp;&nbsp;&nbsp;&nbsp;)")
@@ -215,7 +215,7 @@
 				to_chat(usr, "[spaces]&nbsp;&nbsp;&nbsp;&nbsp;[query_tree[item]]")
 
 /proc/SDQL_from_objs(list/tree)
-	if("world" in tree)
+	if ("world" in tree)
 		return world
 
 	return SDQL_expression(world, tree)
@@ -230,34 +230,34 @@
 
 	type = text2path(type)
 
-	if(ispath(type, /mob))
+	if (ispath(type, /mob))
 		for(var/mob/d in location)
-			if(istype(d, type))
+			if (istype(d, type))
 				out += d
 
-	else if(ispath(type, /turf))
+	else if (ispath(type, /turf))
 		for(var/turf/d in location)
-			if(istype(d, type))
+			if (istype(d, type))
 				out += d
 
-	else if(ispath(type, /obj))
+	else if (ispath(type, /obj))
 		for(var/obj/d in location)
-			if(istype(d, type))
+			if (istype(d, type))
 				out += d
 
-	else if(ispath(type, /area))
+	else if (ispath(type, /area))
 		for(var/area/d in location)
-			if(istype(d, type))
+			if (istype(d, type))
 				out += d
 
-	else if(ispath(type, /atom))
+	else if (ispath(type, /atom))
 		for(var/atom/d in location)
-			if(istype(d, type))
+			if (istype(d, type))
 				out += d
 
 	else
 		for(var/datum/d in location)
-			if(istype(d, type))
+			if (istype(d, type))
 				out += d
 
 	return out
@@ -270,7 +270,7 @@
 	for(var/i = start, i <= length(expression), i++)
 		var/op = ""
 
-		if(i > start)
+		if (i > start)
 			op = expression[i]
 			i++
 
@@ -278,37 +278,37 @@
 		val = ret["val"]
 		i = ret["i"]
 
-		if(op != "")
+		if (op != "")
 			switch(op)
-				if("+")
+				if ("+")
 					result += val
-				if("-")
+				if ("-")
 					result -= val
-				if("*")
+				if ("*")
 					result *= val
-				if("/")
+				if ("/")
 					result /= val
-				if("&")
+				if ("&")
 					result &= val
-				if("|")
+				if ("|")
 					result |= val
-				if("^")
+				if ("^")
 					result ^= val
-				if("=", "==")
+				if ("=", "==")
 					result = (result == val)
-				if("!=", "<>")
+				if ("!=", "<>")
 					result = (result != val)
-				if("<")
+				if ("<")
 					result = (result < val)
-				if("<=")
+				if ("<=")
 					result = (result <= val)
-				if(">")
+				if (">")
 					result = (result > val)
-				if(">=")
+				if (">=")
 					result = (result >= val)
-				if("and", "&&")
+				if ("and", "&&")
 					result = (result && val)
-				if("or", "||")
+				if ("or", "||")
 					result = (result || val)
 				else
 					to_chat(usr, SPAN_WARNING("SDQL2: Unknown op [op]"))
@@ -322,37 +322,37 @@
 	var/i = start
 	var/val = null
 
-	if(i > length(expression))
+	if (i > length(expression))
 		return list("val" = null, "i" = i)
 
-	if(istype(expression[i], /list))
+	if (istype(expression[i], /list))
 		val = SDQL_expression(object, expression[i])
 
-	else if(expression[i] == "!")
+	else if (expression[i] == "!")
 		var/list/ret = SDQL_value(object, expression, i + 1)
 		val = !ret["val"]
 		i = ret["i"]
 
-	else if(expression[i] == "~")
+	else if (expression[i] == "~")
 		var/list/ret = SDQL_value(object, expression, i + 1)
 		val = ~ret["val"]
 		i = ret["i"]
 
-	else if(expression[i] == "-")
+	else if (expression[i] == "-")
 		var/list/ret = SDQL_value(object, expression, i + 1)
 		val = -ret["val"]
 		i = ret["i"]
 
-	else if(expression[i] == "null")
+	else if (expression[i] == "null")
 		val = null
 
-	else if(isnum(expression[i]))
+	else if (isnum(expression[i]))
 		val = expression[i]
 
-	else if(copytext(expression[i], 1, 2) in list("'", "\""))
+	else if (copytext(expression[i], 1, 2) in list("'", "\""))
 		val = copytext(expression[i], 2, length(expression[i]))
 
-	else if(expression[i] == "\[")
+	else if (expression[i] == "\[")
 		var/list/expressions_list = expression[++i]
 		val = list()
 		for(var/list/expression_list in expressions_list)
@@ -402,16 +402,16 @@
 
 	else if (!long || expression[start + 1] == ".")
 		switch(expression[start])
-			if("usr")
+			if ("usr")
 				v = usr
-			if("src")
+			if ("src")
 				v = source
-			if("marked")
-				if(usr.client && usr.client.holder && usr.client.holder.marked_datum())
+			if ("marked")
+				if (usr.client && usr.client.holder && usr.client.holder.marked_datum())
 					v = usr.client.holder.marked_datum()
 				else
 					return null
-			if("global")
+			if ("global")
 				v = world // World is mostly a token, really.
 			else
 				return null
@@ -419,7 +419,7 @@
 	else if (object == world) // Shitty ass hack kill me.
 		v = expression[start]
 
-	if(long)
+	if (long)
 		if (expression[start + 1] == ".")
 			return SDQL_var(v, expression[start + 2], source = source)
 
@@ -470,34 +470,34 @@
 	for(var/i = 1, i <= len, i++)
 		var/char = copytext(query_text, i, i + 1)
 
-		if(char in whitespace)
-			if(word != "")
+		if (char in whitespace)
+			if (word != "")
 				query_list += word
 				word = ""
 
-		else if(char in single)
-			if(word != "")
+		else if (char in single)
+			if (word != "")
 				query_list += word
 				word = ""
 
 			query_list += char
 
-		else if(char in multi)
-			if(word != "")
+		else if (char in multi)
+			if (word != "")
 				query_list += word
 				word = ""
 
 			var/char2 = copytext(query_text, i + 1, i + 2)
 
-			if(char2 in multi[char])
+			if (char2 in multi[char])
 				query_list += "[char][char2]"
 				i++
 
 			else
 				query_list += char
 
-		else if(char == "'")
-			if(word != "")
+		else if (char == "'")
+			if (word != "")
 				to_chat(usr, SPAN_WARNING("SDQL2: You have an error in your SDQL syntax, unexpected ' in query: \"[SPAN_COLOR("gray", query_text)]\" following \"[SPAN_COLOR("gray", word)]\". Please check your syntax, and try again."))
 				return null
 
@@ -506,8 +506,8 @@
 			for(i++, i <= len, i++)
 				char = copytext(query_text, i, i + 1)
 
-				if(char == "'")
-					if(copytext(query_text, i + 1, i + 2) == "'")
+				if (char == "'")
+					if (copytext(query_text, i + 1, i + 2) == "'")
 						word += "'"
 						i++
 
@@ -517,15 +517,15 @@
 				else
 					word += char
 
-			if(i > len)
+			if (i > len)
 				to_chat(usr, SPAN_WARNING("SDQL2: You have an error in your SDQL syntax, unmatched ' in query: \"[SPAN_COLOR("gray", "[query_text]")]\". Please check your syntax, and try again."))
 				return null
 
 			query_list += "[word]'"
 			word = ""
 
-		else if(char == "\"")
-			if(word != "")
+		else if (char == "\"")
+			if (word != "")
 				to_chat(usr, SPAN_WARNING("SDQL2: You have an error in your SDQL syntax, unexpected \" in query: \"[SPAN_COLOR("gray", query_text)]\" following \"[SPAN_COLOR("gray", word)]\". Please check your syntax, and try again."))
 				return null
 
@@ -534,8 +534,8 @@
 			for(i++, i <= len, i++)
 				char = copytext(query_text, i, i + 1)
 
-				if(char == "\"")
-					if(copytext(query_text, i + 1, i + 2) == "'")
+				if (char == "\"")
+					if (copytext(query_text, i + 1, i + 2) == "'")
 						word += "\""
 						i++
 
@@ -545,7 +545,7 @@
 				else
 					word += char
 
-			if(i > len)
+			if (i > len)
 				to_chat(usr, SPAN_WARNING("SDQL2: You have an error in your SDQL syntax, unmatched \" in query: \"[SPAN_COLOR("gray", "[query_text]")]\". Please check your syntax, and try again."))
 				return null
 
@@ -555,6 +555,6 @@
 		else
 			word += char
 
-	if(word != "")
+	if (word != "")
 		query_list += word
 	return query_list

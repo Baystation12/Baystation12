@@ -40,7 +40,7 @@
 	dest = D
 
 /obj/effect/step_trigger/mobius_rift/seamless_portal/Trigger(atom/movable/AM)
-	if(!istype(AM))
+	if (!istype(AM))
 		return
 	//moving player one tile past portal to avoid portal spamming
 	var/turf/T = locate(dest.x + x_shift, dest.y + y_shift, dest.z)

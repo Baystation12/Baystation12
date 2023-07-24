@@ -69,7 +69,7 @@ Class Procs:
 	add_tile_air(turf_air)
 	T.zone = src
 	contents.Add(T)
-	if(T.hotspot)
+	if (T.hotspot)
 		fire_tiles.Add(T)
 		SSair.active_fire_zones |= src
 	T.update_graphic(air.graphic)
@@ -85,7 +85,7 @@ Class Procs:
 	fire_tiles.Remove(T)
 	T.zone = null
 	T.update_graphic(graphic_remove = air.graphic)
-	if(length(contents))
+	if (length(contents))
 		air.group_multiplier = length(contents)
 	else
 		c_invalidate()
@@ -107,7 +107,7 @@ Class Procs:
 
 	//rebuild the old zone's edges so that they will be possessed by the new zone
 	for(var/connection_edge/E in edges)
-		if(E.contains_zone(into))
+		if (E.contains_zone(into))
 			continue //don't need to rebuild this edge
 		for(var/turf/T in E.connecting_turfs)
 			SSair.mark_for_update(T)
@@ -121,7 +121,7 @@ Class Procs:
 	#endif
 
 /zone/proc/rebuild()
-	if(invalid) return //Short circuit for explosions where rebuild is called many times over.
+	if (invalid) return //Short circuit for explosions where rebuild is called many times over.
 	c_invalidate()
 	for(var/turf/simulated/T in contents)
 		T.update_graphic(graphic_remove = air.graphic) //we need to remove the overlays so they're not doubled when the zone is rebuilt
@@ -140,13 +140,13 @@ Class Procs:
 /zone/proc/tick()
 
 	// Update fires.
-	if(air.temperature >= PHORON_FLASHPOINT && !(src in SSair.active_fire_zones) && air.check_combustability() && length(contents))
+	if (air.temperature >= PHORON_FLASHPOINT && !(src in SSair.active_fire_zones) && air.check_combustability() && length(contents))
 		var/turf/T = pick(contents)
-		if(istype(T))
+		if (istype(T))
 			T.create_fire(vsc.fire_firelevel_multiplier)
 
 	// Update gas overlays.
-	if(air.check_tile_graphic(graphic_add, graphic_remove))
+	if (air.check_tile_graphic(graphic_add, graphic_remove))
 		for(var/turf/simulated/T in contents)
 			T.update_graphic(graphic_add, graphic_remove)
 		graphic_add.Cut()
@@ -154,30 +154,30 @@ Class Procs:
 
 	// Update connected edges.
 	for(var/connection_edge/E in edges)
-		if(E.sleeping)
+		if (E.sleeping)
 			E.recheck()
 
 	// Handle condensation from the air.
 	for(var/g in air.gas)
 		var/product = gas_data.condensation_products[g]
-		if(product && air.temperature <= gas_data.condensation_points[g])
+		if (product && air.temperature <= gas_data.condensation_points[g])
 			var/condensation_area = air.group_multiplier
 			while(condensation_area > 0)
 				condensation_area--
 				var/turf/flooding = pick(contents)
 				var/condense_amt = min(air.gas[g], rand(3,5))
-				if(condense_amt < 1)
+				if (condense_amt < 1)
 					break
 				air.adjust_gas(g, -condense_amt)
 				flooding.add_fluid(condense_amt, product)
 
 	// Update atom temperature.
-	if(abs(air.temperature - last_air_temperature) >= ATOM_TEMPERATURE_EQUILIBRIUM_THRESHOLD)
+	if (abs(air.temperature - last_air_temperature) >= ATOM_TEMPERATURE_EQUILIBRIUM_THRESHOLD)
 		last_air_temperature = air.temperature
 		for(var/turf/simulated/T in contents)
 			for(var/check_atom in T.contents)
 				var/atom/checking = check_atom
-				if(checking.simulated)
+				if (checking.simulated)
 					QUEUE_TEMPERATURE_ATOMS(checking)
 			CHECK_TICK
 
@@ -190,12 +190,12 @@ Class Procs:
 	to_chat(M, "Simulated: [length(contents)] ([air.group_multiplier])")
 //	to_chat(M, "Unsimulated: [length(unsimulated_contents)]")
 //	to_chat(M, "Edges: [length(edges)]")
-	if(invalid) to_chat(M, "Invalid!")
+	if (invalid) to_chat(M, "Invalid!")
 	var/zone_edges = 0
 	var/space_edges = 0
 	var/space_coefficient = 0
 	for(var/connection_edge/E in edges)
-		if(E.type == /connection_edge/zone) zone_edges++
+		if (E.type == /connection_edge/zone) zone_edges++
 		else
 			space_edges++
 			space_coefficient += E.coefficient

@@ -29,9 +29,9 @@
 
 // Multiplies damage if the victim is stunned in some form, including a successful leap.
 /mob/living/simple_animal/hostile/giant_spider/hunter/apply_bonus_melee_damage(atom/A, damage_amount)
-	if(isliving(A))
+	if (isliving(A))
 		var/mob/living/L = A
-		if(L.incapacitated(INCAPACITATION_DISABLED))
+		if (L.incapacitated(INCAPACITATION_DISABLED))
 			return damage_amount * 1.5
 	return ..()
 
@@ -53,7 +53,7 @@
 
 	sleep(5) // For the throw to complete. It won't hold up the AI ticker due to waitfor being false.
 
-	if(status_flags & LEAPING)
+	if (status_flags & LEAPING)
 		status_flags &= ~LEAPING // Revert special passage ability.
 
 	var/turf/T = get_turf(src) // Where we landed. This might be different than A's turf.
@@ -63,18 +63,18 @@
 	// Now for the stun.
 	var/mob/living/victim = null
 	for(var/mob/living/L in T) // So player-controlled spiders only need to click the tile to stun them.
-		if(L == src)
+		if (L == src)
 			continue
 
-		if(ishuman(L))
+		if (ishuman(L))
 			var/mob/living/carbon/human/H = L
-			if(H.check_shields(damage = 0, damage_source = src, attacker = src, def_zone = null, attack_text = "the leap"))
+			if (H.check_shields(damage = 0, damage_source = src, attacker = src, def_zone = null, attack_text = "the leap"))
 				continue // We were blocked.
 
 		victim = L
 		break
 
-	if(victim)
+	if (victim)
 		victim.Weaken(2)
 		victim.visible_message(SPAN_DANGER("\The [src] knocks down \the [victim]!"))
 		to_chat(victim, SPAN_CLASS("critical", "\The [src] jumps on you!"))

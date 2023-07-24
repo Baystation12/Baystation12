@@ -59,17 +59,17 @@ var/global/photo_count = 0
 	tiny.pixel_y = -32*(photo_size-1)/2 + 3
 
 /obj/item/photo/attackby(obj/item/P as obj, mob/user as mob)
-	if(istype(P, /obj/item/pen))
+	if (istype(P, /obj/item/pen))
 		var/txt = sanitize(input(user, "What would you like to write on the back?", "Photo Writing", null)  as text, 128)
-		if(loc == user && user.stat == 0)
+		if (loc == user && user.stat == 0)
 			scribble = txt
 	..()
 
 /obj/item/photo/examine(mob/user, distance)
 	. = TRUE
-	if(!img)
+	if (!img)
 		return
-	if(distance <= 1)
+	if (distance <= 1)
 		show(user)
 		to_chat(user, desc)
 	else
@@ -93,7 +93,7 @@ var/global/photo_count = 0
 
 	var/n_name = sanitizeSafe(input(usr, "What would you like to label the photo?", "Photo Labelling", null)  as text, MAX_NAME_LEN)
 	//loc.loc check is for making possible renaming photos in clipboards
-	if(!n_name || !CanInteract(usr, GLOB.deep_inventory_state))
+	if (!n_name || !CanInteract(usr, GLOB.deep_inventory_state))
 		return
 	SetName("[(n_name ? text("[n_name]") : "photo")]")
 	add_fingerprint(usr)
@@ -114,23 +114,23 @@ var/global/photo_count = 0
 
 /obj/item/storage/photo_album/MouseDrop(obj/over_object as obj)
 
-	if((istype(usr, /mob/living/carbon/human)))
+	if ((istype(usr, /mob/living/carbon/human)))
 		var/mob/M = usr
-		if(!( istype(over_object, /obj/screen) ))
+		if (!( istype(over_object, /obj/screen) ))
 			return ..()
 		playsound(loc, "rustle", 50, 1, -5)
-		if((!( M.restrained() ) && !( M.stat ) && M.back == src))
+		if ((!( M.restrained() ) && !( M.stat ) && M.back == src))
 			switch(over_object.name)
-				if("r_hand")
-					if(M.unEquip(src))
+				if ("r_hand")
+					if (M.unEquip(src))
 						M.put_in_r_hand(src)
-				if("l_hand")
-					if(M.unEquip(src))
+				if ("l_hand")
+					if (M.unEquip(src))
 						M.put_in_l_hand(src)
 			add_fingerprint(usr)
 			return
-		if(over_object == usr && in_range(src, usr) || usr.contents.Find(src))
-			if(usr.s_active)
+		if (over_object == usr && in_range(src, usr) || usr.contents.Find(src))
+			if (usr.s_active)
 				usr.s_active.close(usr)
 			show_to(usr)
 			return
@@ -157,7 +157,7 @@ var/global/photo_count = 0
 	var/size = 3
 /obj/item/device/camera/on_update_icon()
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
-	if(on)
+	if (on)
 		icon_state = "[bis.base_icon_state]"
 	else
 		icon_state = "[bis.base_icon_state]_off"
@@ -170,7 +170,7 @@ var/global/photo_count = 0
 	set name = "Set Photo Focus"
 	set category = "Object"
 	var/nsize = input("Photo Size","Pick a size of resulting photo.") as null|anything in list(1,3,5,7)
-	if(nsize)
+	if (nsize)
 		size = nsize
 		to_chat(usr, SPAN_NOTICE("Camera will now take [size]x[size] photos."))
 
@@ -205,20 +205,20 @@ var/global/photo_count = 0
 /obj/item/device/camera/proc/get_mobs(turf/the_turf as turf)
 	var/mob_detail
 	for(var/mob/living/carbon/A in the_turf)
-		if(A.invisibility) continue
+		if (A.invisibility) continue
 		var/holding = null
 		var/list/held_items = A.GetAllHeld()
 		if (length(held_items))
 			holding = "They are holding [english_list(A.GetAllHeld())]"
 
-		if(!mob_detail)
+		if (!mob_detail)
 			mob_detail = "You can see [A] on the photo[(A.health / A.maxHealth) < 0.75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]. "
 		else
 			mob_detail += "You can also see [A] on the photo[(A.health / A.maxHealth)< 0.75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]."
 	return mob_detail
 
 /obj/item/device/camera/afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
-	if(!on || !pictures_left || ismob(target.loc)) return
+	if (!on || !pictures_left || ismob(target.loc)) return
 	captureimage(target, user, flag)
 
 	playsound(loc, pick('sound/items/polaroid1.ogg', 'sound/items/polaroid2.ogg'), 75, 1, -3)
@@ -236,7 +236,7 @@ var/global/photo_count = 0
 //Proc for capturing check
 /mob/living/proc/can_capture_turf(turf/T)
 	var/viewer = src
-	if(src.client)		//To make shooting through security cameras possible
+	if (src.client)		//To make shooting through security cameras possible
 		viewer = src.client.eye
 	var/can_see = (T in view(viewer))
 	return can_see
@@ -249,7 +249,7 @@ var/global/photo_count = 0
 	for(var/i = 1 to size)
 		for(var/j = 1 to size)
 			var/turf/T = locate(x_c, y_c, z_c)
-			if(user.can_capture_turf(T))
+			if (user.can_capture_turf(T))
 				mobs += get_mobs(T)
 			x_c++
 		y_c--
@@ -273,7 +273,7 @@ var/global/photo_count = 0
 	return p
 
 /obj/item/device/camera/proc/printpicture(mob/user, obj/item/photo/p)
-	if(!user.put_in_inactive_hand(p))
+	if (!user.put_in_inactive_hand(p))
 		p.dropInto(loc)
 
 /obj/item/photo/proc/copy(copy_id = 0)
@@ -289,7 +289,7 @@ var/global/photo_count = 0
 	p.photo_size = photo_size
 	p.scribble = scribble
 
-	if(copy_id)
+	if (copy_id)
 		p.id = id
 
 	return p

@@ -26,6 +26,6 @@ GLOBAL_DATUM_INIT(invisibility_set_event, /singleton/observ/invisibility_set, ne
  */
 /atom/proc/set_invisibility(new_invisibility = 0)
 	var/old_invisibility = invisibility
-	if(old_invisibility != new_invisibility)
+	if (old_invisibility != new_invisibility)
 		invisibility = new_invisibility
 		GLOB.invisibility_set_event.raise_event(src, old_invisibility, new_invisibility)

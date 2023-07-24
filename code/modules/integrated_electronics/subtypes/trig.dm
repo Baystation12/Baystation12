@@ -30,7 +30,7 @@
 	pull_data()
 	var/result = null
 	var/A = get_pin_data(IC_INPUT, 1)
-	if(!isnull(A))
+	if (!isnull(A))
 		result = sin(A)
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -50,7 +50,7 @@
 	pull_data()
 	var/result = null
 	var/A = get_pin_data(IC_INPUT, 1)
-	if(!isnull(A))
+	if (!isnull(A))
 		result = cos(A)
 
 	set_pin_data(IC_OUTPUT, 1, result)
@@ -70,7 +70,7 @@
 	pull_data()
 	var/result = null
 	var/A = get_pin_data(IC_INPUT, 1)
-	if(!isnull(A))
+	if (!isnull(A))
 		var/denominator = cos(A)
 		result = denominator ? sin(A) / denominator : null
 
@@ -91,7 +91,7 @@
 	pull_data()
 	var/result = null
 	var/A = get_pin_data(IC_INPUT, 1)
-	if(!isnull(A))
+	if (!isnull(A))
 		var/denominator = sin(A)
 		result = denominator ? 1 / denominator : null
 
@@ -112,7 +112,7 @@
 	pull_data()
 	var/result = null
 	var/A = get_pin_data(IC_INPUT, 1)
-	if(!isnull(A))
+	if (!isnull(A))
 		var/denominator = cos(A)
 		result = denominator ? 1 / denominator : null
 
@@ -133,7 +133,7 @@
 	pull_data()
 	var/result = null
 	var/A = get_pin_data(IC_INPUT, 1)
-	if(!isnull(A))
+	if (!isnull(A))
 		var/denominator = sin(A)
 		result = denominator ? cos(A) / denominator : null
 

@@ -20,7 +20,7 @@
 	var/airtight = FALSE
 
 /obj/structure/plasticflaps/CanPass(atom/A, turf/T)
-	if(istype(A) && A.checkpass(PASS_FLAG_GLASS))
+	if (istype(A) && A.checkpass(PASS_FLAG_GLASS))
 		return prob(60)
 
 	var/obj/structure/bed/B = A
@@ -28,11 +28,11 @@
 		return 0
 
 	var/mob/living/M = A
-	if(istype(M))
-		if(M.lying)
+	if (istype(M))
+		if (M.lying)
 			return ..()
 		for(var/mob_type in mobs_can_pass)
-			if(istype(A, mob_type))
+			if (istype(A, mob_type))
 				return ..()
 		return issmall(M)
 

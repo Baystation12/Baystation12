@@ -6,20 +6,20 @@
 
 /mob/living/simple_animal/hostile/retaliate/beast/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
 	hunger++
-	if(hunger < 100) //stop hunting when satiated
+	if (hunger < 100) //stop hunting when satiated
 		ai_holder.hostile = FALSE
 	else
 		for(var/mob/living/simple_animal/S in range(src,1))
-			if(S.stat == DEAD && S != src)
+			if (S.stat == DEAD && S != src)
 				visible_message("[src] consumes \the body of [S]!")
 				var/turf/T = get_turf(S)
 				var/obj/item/remains/xeno/X = new(T)
 				X.desc += "These look like they belong to \a [S.name]."
 				hunger = max(0, hunger - 5*S.maxHealth)
-				if(prob(5))
+				if (prob(5))
 					S.gib()
 				else
 					qdel(S)
@@ -32,18 +32,18 @@
 	set category = "IC"
 	set src in view()
 
-	if(!GLOB.using_map.use_overmap)
+	if (!GLOB.using_map.use_overmap)
 		return
-	if(!CanInteract(usr, GLOB.conscious_state))
+	if (!CanInteract(usr, GLOB.conscious_state))
 		return
 	if (isghost(usr))
 		return
 
 	for(var/obj/effect/overmap/visitable/sector/exoplanet/E)
-		if(src in E.animals)
+		if (src in E.animals)
 			newname = sanitizeName(newname, allow_numbers = TRUE, force_first_letter_uppercase = FALSE)
-			if(newname && CanInteract(usr, GLOB.conscious_state))
-				if(E.rename_species(type, newname))
+			if (newname && CanInteract(usr, GLOB.conscious_state))
+				if (E.rename_species(type, newname))
 					to_chat(usr,SPAN_NOTICE("This species will be known from now on as '[newname]'."))
 				else
 					to_chat(usr,SPAN_WARNING("This species has already been named!"))
@@ -199,9 +199,9 @@
 /datum/ai_holder/simple_animal/melee/charbaby/engage_target()
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/beast/charbaby/C = holder
-	if(isliving(C.target_mob) && prob(25))
+	if (isliving(C.target_mob) && prob(25))
 		var/mob/living/L = C.target_mob
-		if(prob(10))
+		if (prob(10))
 			L.adjust_fire_stacks(1)
 			L.IgniteMob()
 /obj/item/natural_weapon/charbaby
@@ -230,7 +230,7 @@
 
 /datum/ai_holder/simple_animal/diyaab/post_melee_attack(atom/A)
 	. = ..()
-	if(holder.Adjacent(A))
+	if (holder.Adjacent(A))
 		holder.IMove(get_step(holder, pick(GLOB.alldirs)))
 		holder.face_atom(A)
 

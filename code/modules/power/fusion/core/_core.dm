@@ -28,26 +28,26 @@
 	. = ..()
 	connect_to_network()
 	set_extension(src, /datum/extension/local_network_member)
-	if(initial_id_tag)
+	if (initial_id_tag)
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.set_tag(null, initial_id_tag)
 
 /obj/machinery/power/fusion_core/Process()
-	if(MACHINE_IS_BROKEN(src) || !powernet || !owned_field)
+	if (MACHINE_IS_BROKEN(src) || !powernet || !owned_field)
 		Shutdown()
 
 /obj/machinery/power/fusion_core/Topic(href, href_list)
-	if(..())
+	if (..())
 		return 1
-	if(href_list["str"])
+	if (href_list["str"])
 		var/dif = text2num(href_list["str"])
 		field_strength = min(max(field_strength + dif, MIN_FIELD_STR), MAX_FIELD_STR)
 		change_power_consumption(500 * field_strength, POWER_USE_ACTIVE)
-		if(owned_field)
+		if (owned_field)
 			owned_field.ChangeFieldStrength(field_strength)
 
 /obj/machinery/power/fusion_core/proc/Startup()
-	if(owned_field)
+	if (owned_field)
 		return
 	owned_field = new(loc, src)
 	owned_field.ChangeFieldStrength(field_strength)
@@ -56,9 +56,9 @@
 	. = 1
 
 /obj/machinery/power/fusion_core/proc/Shutdown(force_rupture)
-	if(owned_field)
+	if (owned_field)
 		icon_state = "core0"
-		if(force_rupture || owned_field.plasma_temperature > 1000)
+		if (force_rupture || owned_field.plasma_temperature > 1000)
 			owned_field.Rupture()
 		else
 			owned_field.RadiateAll()
@@ -67,42 +67,42 @@
 	update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/power/fusion_core/proc/AddParticles(name, quantity = 1)
-	if(owned_field)
+	if (owned_field)
 		owned_field.AddParticles(name, quantity)
 		. = 1
 
 /obj/machinery/power/fusion_core/bullet_act(obj/item/projectile/Proj)
-	if(owned_field)
+	if (owned_field)
 		. = owned_field.bullet_act(Proj)
 
 /obj/machinery/power/fusion_core/proc/set_strength(value)
 	value = clamp(value, MIN_FIELD_STR, MAX_FIELD_STR)
 	field_strength = value
 	change_power_consumption(5 * value, POWER_USE_ACTIVE)
-	if(owned_field)
+	if (owned_field)
 		owned_field.ChangeFieldStrength(value)
 
 /obj/machinery/power/fusion_core/physical_attack_hand(mob/user)
 	visible_message(SPAN_NOTICE("\The [user] hugs \the [src] to make it feel better!"))
-	if(owned_field)
+	if (owned_field)
 		Shutdown()
 	return TRUE
 
 /obj/machinery/power/fusion_core/attackby(obj/item/W, mob/user)
 
-	if(owned_field)
+	if (owned_field)
 		to_chat(user,SPAN_WARNING("Shut \the [src] off first!"))
 		return
 
-	if(isMultitool(W))
+	if (isMultitool(W))
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.get_new_tag(user)
 		return
 
-	else if(isWrench(W))
+	else if (isWrench(W))
 		anchored = !anchored
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-		if(anchored)
+		if (anchored)
 			user.visible_message("[user.name] secures [src.name] to the floor.", \
 				"You secure the [src.name] to the floor.", \
 				"You hear a ratchet")
@@ -117,14 +117,14 @@
 /obj/machinery/power/fusion_core/proc/jumpstart(field_temperature)
 	field_strength = 501 // Generally a good size.
 	Startup()
-	if(!owned_field)
+	if (!owned_field)
 		return FALSE
 	owned_field.plasma_temperature = field_temperature
 	return TRUE
 
 /obj/machinery/power/fusion_core/proc/check_core_status()
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		return FALSE
-	if(idle_power_usage > avail())
+	if (idle_power_usage > avail())
 		return FALSE
 	. = TRUE

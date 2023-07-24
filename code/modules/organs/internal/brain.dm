@@ -35,7 +35,7 @@
 /obj/item/organ/internal/brain/proc/replace_self_with(replace_path)
 	var/mob/living/carbon/human/tmp_owner = owner
 	qdel(src)
-	if(tmp_owner)
+	if (tmp_owner)
 		tmp_owner.internal_organs_by_name[organ_tag] = new replace_path(tmp_owner, 1)
 		tmp_owner = null
 
@@ -45,13 +45,13 @@
 
 /obj/item/organ/internal/brain/New(mob/living/carbon/holder)
 	..()
-	if(species)
+	if (species)
 		set_max_damage(species.total_health)
 	else
 		set_max_damage(200)
 
 	spawn(5)
-		if(brainmob && brainmob.client)
+		if (brainmob && brainmob.client)
 			LAZYCLEARLIST(brainmob.client.screen)
 
 /obj/item/organ/internal/brain/set_max_damage(ndamage)
@@ -64,14 +64,14 @@
 
 /obj/item/organ/internal/brain/proc/transfer_identity(mob/living/carbon/H)
 
-	if(!brainmob)
+	if (!brainmob)
 		brainmob = new(src)
 		brainmob.SetName(H.real_name)
 		brainmob.real_name = H.real_name
 		brainmob.dna = H.dna.Clone()
 		brainmob.timeofhostdeath = H.timeofdeath
 
-	if(H.mind)
+	if (H.mind)
 		H.mind.transfer_to(brainmob)
 
 	to_chat(brainmob, SPAN_NOTICE("You feel slightly disoriented. That's normal when you're just \a [initial(src.name)]."))
@@ -79,21 +79,21 @@
 
 /obj/item/organ/internal/brain/examine(mob/user)
 	. = ..()
-	if(brainmob && brainmob.client)//if thar be a brain inside... the brain.
+	if (brainmob && brainmob.client)//if thar be a brain inside... the brain.
 		to_chat(user, "You can feel the small spark of life still left in this one.")
 	else
 		to_chat(user, "This one seems particularly lifeless. Perhaps it will regain some of its luster later..")
 
 /obj/item/organ/internal/brain/removed(mob/living/user)
-	if(!istype(owner))
+	if (!istype(owner))
 		return ..()
 
-	if(name == initial(name))
+	if (name == initial(name))
 		name = "\the [owner.real_name]'s [initial(name)]"
 
 	var/mob/living/simple_animal/borer/borer = owner.has_brain_worms()
 
-	if(borer)
+	if (borer)
 		borer.detatch() //Should remove borer if the brain is removed - RR
 
 	transfer_identity(owner)
@@ -102,13 +102,13 @@
 
 /obj/item/organ/internal/brain/replaced(mob/living/target)
 
-	if(!..()) return 0
+	if (!..()) return 0
 
-	if(target.key)
+	if (target.key)
 		target.ghostize()
 
-	if(brainmob)
-		if(brainmob.mind)
+	if (brainmob)
+		if (brainmob.mind)
 			brainmob.mind.transfer_to(target)
 		else
 			target.key = brainmob.key
@@ -141,71 +141,71 @@
 		owner.psi.check_latency_trigger(20, "physical trauma")
 
 /obj/item/organ/internal/brain/Process()
-	if(owner)
-		if(damage > max_damage / 2 && healed_threshold)
+	if (owner)
+		if (damage > max_damage / 2 && healed_threshold)
 			handle_severe_brain_damage()
 
-		if(damage < (max_damage / 4))
+		if (damage < (max_damage / 4))
 			healed_threshold = 1
 
 		handle_disabilities()
 		handle_damage_effects()
 
 		// Brain damage from low oxygenation or lack of blood.
-		if(owner.should_have_organ(BP_HEART))
+		if (owner.should_have_organ(BP_HEART))
 
 			// No heart? You are going to have a very bad time. Not 100% lethal because heart transplants should be a thing.
 			var/blood_volume = owner.get_blood_oxygenation()
-			if(blood_volume < BLOOD_VOLUME_SURVIVE)
-				if(!owner.chem_effects[CE_STABLE] || prob(60))
+			if (blood_volume < BLOOD_VOLUME_SURVIVE)
+				if (!owner.chem_effects[CE_STABLE] || prob(60))
 					oxygen_reserve = max(0, oxygen_reserve-1)
 			else
 				oxygen_reserve = min(initial(oxygen_reserve), oxygen_reserve+1)
-			if(!oxygen_reserve) //(hardcrit)
+			if (!oxygen_reserve) //(hardcrit)
 				owner.Paralyse(3)
 			var/can_heal = damage && damage < max_damage && (damage % damage_threshold_value || owner.chem_effects[CE_BRAIN_REGEN] || (!past_damage_threshold(3) && owner.chem_effects[CE_STABLE]))
 			var/damprob
 			//Effects of bloodloss
 			switch(blood_volume)
 
-				if(BLOOD_VOLUME_SAFE to INFINITY)
-					if(can_heal)
+				if (BLOOD_VOLUME_SAFE to INFINITY)
+					if (can_heal)
 						damage = max(damage-1, 0)
-				if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-					if(prob(1))
+				if (BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+					if (prob(1))
 						to_chat(owner, SPAN_WARNING("You feel [pick("dizzy","woozy","faint")]..."))
 					damprob = owner.chem_effects[CE_STABLE] ? 30 : 60
-					if(!past_damage_threshold(2) && prob(damprob))
+					if (!past_damage_threshold(2) && prob(damprob))
 						take_internal_damage(1)
-				if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+				if (BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
 					owner.eye_blurry = max(owner.eye_blurry,6)
 					damprob = owner.chem_effects[CE_STABLE] ? 40 : 80
-					if(!past_damage_threshold(4) && prob(damprob))
+					if (!past_damage_threshold(4) && prob(damprob))
 						take_internal_damage(1)
-					if(!owner.paralysis && prob(10))
+					if (!owner.paralysis && prob(10))
 						owner.Paralyse(rand(1,3))
 						to_chat(owner, SPAN_WARNING("You feel extremely [pick("dizzy","woozy","faint")]..."))
-				if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+				if (BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
 					owner.eye_blurry = max(owner.eye_blurry,6)
 					damprob = owner.chem_effects[CE_STABLE] ? 60 : 100
-					if(!past_damage_threshold(6) && prob(damprob))
+					if (!past_damage_threshold(6) && prob(damprob))
 						take_internal_damage(1)
-					if(!owner.paralysis && prob(15))
+					if (!owner.paralysis && prob(15))
 						owner.Paralyse(3,5)
 						to_chat(owner, SPAN_WARNING("You feel extremely [pick("dizzy","woozy","faint")]..."))
-				if(-(INFINITY) to BLOOD_VOLUME_SURVIVE) // Also see heart.dm, being below this point puts you into cardiac arrest.
+				if (-(INFINITY) to BLOOD_VOLUME_SURVIVE) // Also see heart.dm, being below this point puts you into cardiac arrest.
 					owner.eye_blurry = max(owner.eye_blurry,6)
 					damprob = owner.chem_effects[CE_STABLE] ? 80 : 100
-					if(prob(damprob))
+					if (prob(damprob))
 						take_internal_damage(1)
-					if(prob(damprob))
+					if (prob(damprob))
 						take_internal_damage(1)
 	..()
 
 /obj/item/organ/internal/brain/take_internal_damage(damageTaken, silent)
 	set waitfor = 0
 	..()
-	if(damageTaken >= 20 && damage >= (max_damage * 0.5)) //This probably won't be triggered by oxyloss or mercury. Probably.
+	if (damageTaken >= 20 && damage >= (max_damage * 0.5)) //This probably won't be triggered by oxyloss or mercury. Probably.
 		var/damage_secondary = damageTaken * 0.20
 		if (owner)
 			owner.flash_eyes()
@@ -224,34 +224,34 @@
 	owner.confused += damage
 
 /obj/item/organ/internal/brain/proc/handle_disabilities()
-	if(owner.stat)
+	if (owner.stat)
 		return
-	if((owner.disabilities & EPILEPSY) && prob(1))
+	if ((owner.disabilities & EPILEPSY) && prob(1))
 		owner.seizure()
-	else if((owner.disabilities & NERVOUS) && prob(10))
+	else if ((owner.disabilities & NERVOUS) && prob(10))
 		owner.stuttering = max(10, owner.stuttering)
 
 /obj/item/organ/internal/brain/proc/handle_damage_effects()
-	if(owner.stat)
+	if (owner.stat)
 		return
-	if(damage > 0 && prob(1))
+	if (damage > 0 && prob(1))
 		owner.custom_pain("Your head feels numb and painful.",10)
-	if(is_bruised() && prob(1) && owner.eye_blurry <= 0)
+	if (is_bruised() && prob(1) && owner.eye_blurry <= 0)
 		to_chat(owner, SPAN_WARNING("It becomes hard to see for some reason."))
 		owner.eye_blurry = 10
-	if(damage >= 0.5*max_damage && prob(1) && owner.get_active_hand())
+	if (damage >= 0.5*max_damage && prob(1) && owner.get_active_hand())
 		to_chat(owner, SPAN_DANGER("Your hand won't respond properly, and you drop what you are holding!"))
 		owner.unequip_item()
-	if(damage >= 0.6*max_damage)
+	if (damage >= 0.6*max_damage)
 		owner.slurring = max(owner.slurring, 2)
-	if(is_broken())
-		if(!owner.lying)
+	if (is_broken())
+		if (!owner.lying)
 			to_chat(owner, SPAN_DANGER("You black out!"))
 		owner.Paralyse(10)
 
 /obj/item/organ/internal/brain/surgical_fix(mob/user)
 	var/blood_volume = owner.get_blood_oxygenation()
-	if(blood_volume < BLOOD_VOLUME_BAD)
+	if (blood_volume < BLOOD_VOLUME_BAD)
 		to_chat(user, SPAN_DANGER("Parts of [src] didn't survive the procedure due to lack of air supply!"))
 		set_max_damage(floor(max_damage - 0.25*damage))
 	heal_damage(damage)

@@ -21,19 +21,19 @@
 		slowdown_per_slot[slot_shoes] += online_slowdown
 
 /obj/item/clothing/shoes/magboots/attack_self(mob/user)
-	if(magpulse)
+	if (magpulse)
 		item_flags &= ~ITEM_FLAG_NOSLIP
 		magpulse = 0
 		set_slowdown()
 		force = 3
-		if(icon_base) icon_state = "[icon_base]0"
+		if (icon_base) icon_state = "[icon_base]0"
 		to_chat(user, "You disable the mag-pulse traction system.")
 	else
 		item_flags |= ITEM_FLAG_NOSLIP
 		magpulse = 1
 		set_slowdown()
 		force = 5
-		if(icon_base) icon_state = "[icon_base]1"
+		if (icon_base) icon_state = "[icon_base]1"
 		playsound(get_turf(src), 'sound/effects/magnetclamp.ogg', 20)
 		to_chat(user, "You enable the mag-pulse traction system.")
 	user.update_inv_shoes()	//so our mob-overlays update
@@ -43,19 +43,19 @@
 /obj/item/clothing/shoes/magboots/mob_can_equip(mob/user)
 	var/mob/living/carbon/human/H = user
 
-	if(H.shoes)
+	if (H.shoes)
 		shoes = H.shoes
-		if(shoes.overshoes)
+		if (shoes.overshoes)
 			to_chat(user, "You are unable to wear \the [src] as \the [H.shoes] are in the way.")
 			shoes = null
 			return 0
-		if(!H.unEquip(shoes, src))//Remove the old shoes so you can put on the magboots.
+		if (!H.unEquip(shoes, src))//Remove the old shoes so you can put on the magboots.
 			shoes = null
 			return 0
 
-	if(!..())
-		if(shoes) 	//Put the old shoes back on if the check fails.
-			if(H.equip_to_slot_if_possible(shoes, slot_shoes))
+	if (!..())
+		if (shoes) 	//Put the old shoes back on if the check fails.
+			if (H.equip_to_slot_if_possible(shoes, slot_shoes))
 				src.shoes = null
 		return 0
 
@@ -68,17 +68,17 @@
 /obj/item/clothing/shoes/magboots/equipped()
 	..()
 	var/mob/M = src.loc
-	if(istype(M))
+	if (istype(M))
 		M.update_floating()
 
 /obj/item/clothing/shoes/magboots/dropped()
 	..()
-	if(!wearer)
+	if (!wearer)
 		return
 
 	var/mob/living/carbon/human/H = wearer
-	if(shoes && istype(H))
-		if(!H.equip_to_slot_if_possible(shoes, slot_shoes))
+	if (shoes && istype(H))
+		if (!H.equip_to_slot_if_possible(shoes, slot_shoes))
 			shoes.dropInto(loc)
 		src.shoes = null
 	wearer.update_floating()
@@ -87,6 +87,6 @@
 /obj/item/clothing/shoes/magboots/examine(mob/user)
 	. = ..()
 	var/state = "disabled"
-	if(item_flags & ITEM_FLAG_NOSLIP)
+	if (item_flags & ITEM_FLAG_NOSLIP)
 		state = "enabled"
 	to_chat(user, "Its mag-pulse traction system appears to be [state].")

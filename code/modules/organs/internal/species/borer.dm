@@ -14,19 +14,19 @@
 	// Borer husks regenerate health, feel no pain, and are resistant to stuns and brainloss.
 	for(var/chem_name in chemical_types)
 		var/chem = chemical_types[chem_name]
-		if(owner.reagents.get_reagent_amount(chem) < 3)
+		if (owner.reagents.get_reagent_amount(chem) < 3)
 			owner.reagents.add_reagent(chem, 5)
 
 	// They're also super gross and ooze ichor.
-	if(prob(5))
+	if (prob(5))
 		var/mob/living/carbon/human/H = owner
-		if(!istype(H))
+		if (!istype(H))
 			return
 
 		var/datum/reagent/blood/B = locate(/datum/reagent/blood) in H.vessel.reagent_list
 		blood_splatter(H,B,1)
 		var/obj/effect/decal/cleanable/blood/splatter/goo = locate() in get_turf(owner)
-		if(goo)
+		if (goo)
 			goo.SetName("husk ichor")
 			goo.desc = "A thick goo that reeks of decay."
 			goo.basecolor = "#412464"
@@ -37,7 +37,7 @@
 	..()
 
 	var/mob/living/simple_animal/borer/B = owner.has_brain_worms()
-	if(B)
+	if (B)
 		B.leave_host()
 		B.ckey = owner.ckey
 

@@ -20,7 +20,7 @@
 
 /spell/aoe_turf/conjure/grove/New()
 	..()
-	if(seed_type)
+	if (seed_type)
 		seed = new seed_type()
 	else
 		seed = SSplants.create_random_seed(1)
@@ -47,7 +47,7 @@
 
 	hud_state = "wiz_grove"
 /spell/aoe_turf/conjure/grove/sanctuary/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 
 	seed.set_trait(TRAIT_SPREAD,2) //make it grow.

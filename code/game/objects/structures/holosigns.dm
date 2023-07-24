@@ -7,20 +7,20 @@
 	icon_state = "holosign"
 
 /obj/structure/holosign/Initialize(maploading, source_projector)
-	if(source_projector)
+	if (source_projector)
 		projector = source_projector
 		projector.signs += src
 	. =..()
 
 /obj/structure/holosign/Destroy()
-	if(projector)
+	if (projector)
 		projector.signs -= src
 		projector = null
 	return ..()
 
 /obj/structure/holosign/attack_hand(mob/living/user)
 	. =  ..()
-	if(.)
+	if (.)
 		return
 	visible_message(SPAN_NOTICE("\The [user] waves through \the [src], causing it to dissipate."))
 	deactivate(user)

@@ -29,7 +29,7 @@
 /datum/ai_holder/simple_animal/retaliate/goat/react_to_attack(atom/movable/attacker)
 	. = ..()
 
-	if(holder.stat == CONSCIOUS && prob(50))
+	if (holder.stat == CONSCIOUS && prob(50))
 		holder.visible_message(SPAN_WARNING("\The [holder] gets an evil-looking gleam in their eye."))
 
 
@@ -44,39 +44,39 @@
 
 /mob/living/simple_animal/hostile/retaliate/goat/Life()
 	. = ..()
-	if(.)
+	if (.)
 		//chance to go crazy and start wacking stuff
 		if (ai_holder)
-			if(!length(ai_holder.attackers) && prob(1))
+			if (!length(ai_holder.attackers) && prob(1))
 				var/list/nearby_stuff = hearers(src, ai_holder.vision_range)
 				if (length(nearby_stuff))
 					ai_holder.react_to_attack(pick(nearby_stuff))
 
-			if(length(ai_holder.attackers) && prob(10))
+			if (length(ai_holder.attackers) && prob(10))
 				ai_holder.attackers = list()
 				ai_holder.lose_target()
 				src.visible_message(SPAN_NOTICE("\The [src] calms down."))
 
-		if(stat == CONSCIOUS)
-			if(udder && prob(5))
+		if (stat == CONSCIOUS)
+			if (udder && prob(5))
 				udder.add_reagent(/datum/reagent/drink/milk, rand(5, 10))
 
-		if(locate(/obj/effect/vine) in loc)
+		if (locate(/obj/effect/vine) in loc)
 			var/obj/effect/vine/SV = locate() in loc
-			if(prob(60))
+			if (prob(60))
 				src.visible_message(SPAN_NOTICE("\The [src] eats the plants."))
 				SV.kill_health(1)
-				if(locate(/obj/machinery/portable_atmospherics/hydroponics/soil/invisible) in loc)
+				if (locate(/obj/machinery/portable_atmospherics/hydroponics/soil/invisible) in loc)
 					var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/SP = locate() in loc
 					qdel(SP)
-			else if(prob(20))
+			else if (prob(20))
 				src.visible_message(SPAN_NOTICE("\The [src] chews on the plants."))
 			return
 
-		if(!pulledby)
+		if (!pulledby)
 			var/obj/effect/vine/food
 			food = locate(/obj/effect/vine) in oview(5,loc)
-			if(food)
+			if (food)
 				var/step = get_step_to(src, food, 0)
 				Move(step)
 
@@ -181,18 +181,18 @@
 
 /mob/living/simple_animal/passive/cow/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
-	if(udder && prob(5))
+	if (udder && prob(5))
 		udder.add_reagent(/datum/reagent/drink/milk, rand(5, 10))
 
 /mob/living/simple_animal/passive/cow/attack_hand(mob/living/carbon/M as mob)
-	if(!stat && M.a_intent == I_DISARM && icon_state != icon_dead)
+	if (!stat && M.a_intent == I_DISARM && icon_state != icon_dead)
 		M.visible_message(SPAN_WARNING("[M] tips over [src]."),SPAN_NOTICE("You tip over [src]."))
 		Weaken(30)
 		icon_state = icon_dead
 		spawn(rand(20,50))
-			if(!stat && M)
+			if (!stat && M)
 				icon_state = icon_living
 				var/list/responses = list(	"[src] looks at you imploringly.",
 											"[src] looks at you pleadingly",
@@ -240,10 +240,10 @@
 
 /mob/living/simple_animal/passive/chick/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
 	amount_grown += rand(1,2)
-	if(amount_grown >= 100)
+	if (amount_grown >= 100)
 		new /mob/living/simple_animal/passive/chicken(src.loc)
 		qdel(src)
 
@@ -281,7 +281,7 @@ var/global/chicken_count = 0
 
 /mob/living/simple_animal/passive/chicken/Initialize(mapload)
 	. = ..()
-	if(!body_color)
+	if (!body_color)
 		body_color = pick( list("brown","black","white") )
 	icon_state = "chicken_[body_color]"
 	icon_living = "chicken_[body_color]"
@@ -332,15 +332,15 @@ var/global/chicken_count = 0
 
 /mob/living/simple_animal/passive/chicken/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
-	if(prob(3) && eggsleft > 0)
+	if (prob(3) && eggsleft > 0)
 		visible_message("[src] [pick("lays an egg.","squats down and croons.","begins making a huge racket.","begins clucking raucously.")]")
 		eggsleft--
 		var/obj/item/reagent_containers/food/snacks/egg/E = new(get_turf(src))
 		E.pixel_x = rand(-6,6)
 		E.pixel_y = rand(-6,6)
-		if(chicken_count < MAX_CHICKENS && prob(10))
+		if (chicken_count < MAX_CHICKENS && prob(10))
 			E.amount_grown = 1
 			START_PROCESSING(SSobj, E)
 
@@ -348,14 +348,14 @@ var/global/chicken_count = 0
 	var/amount_grown = 0
 
 /obj/item/reagent_containers/food/snacks/egg/Destroy()
-	if(amount_grown)
+	if (amount_grown)
 		STOP_PROCESSING(SSobj, src)
 	. = ..()
 
 /obj/item/reagent_containers/food/snacks/egg/Process()
-	if(isturf(loc))
+	if (isturf(loc))
 		amount_grown += rand(1,2)
-		if(amount_grown >= 100)
+		if (amount_grown >= 100)
 			visible_message("[src] hatches with a quiet cracking sound.")
 			new /mob/living/simple_animal/passive/chick(get_turf(src))
 			STOP_PROCESSING(SSobj, src)
@@ -463,13 +463,13 @@ var/global/chicken_count = 0
 
 /mob/living/simple_animal/passive/thoom/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
-	if(udder && prob(5))
+	if (udder && prob(5))
 		udder.add_reagent(/datum/reagent/toxin/fertilizer/eznutrient, rand(5, 10))
 
 /mob/living/simple_animal/passive/thoom/attack_hand(mob/living/carbon/M)
-	if(!stat && M.a_intent == I_DISARM && icon_state != icon_dead)
+	if (!stat && M.a_intent == I_DISARM && icon_state != icon_dead)
 		M.visible_message(
 			SPAN_WARNING("\The [M] tips over \the [src]."),
 			SPAN_NOTICE("You tip over \the [src].")
@@ -477,7 +477,7 @@ var/global/chicken_count = 0
 		Weaken(30)
 		icon_state = icon_dead
 		spawn(rand(20,50))
-			if(!stat && M)
+			if (!stat && M)
 				icon_state = icon_living
 				var/list/responses = list(
 					"looks at you imploringly.",

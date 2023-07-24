@@ -3,7 +3,7 @@
 	A.add_fingerprint(user)
 
 	var/air_contents = A.return_air()
-	if(!air_contents)
+	if (!air_contents)
 		to_chat(user, SPAN_WARNING("Your [src] flashes a red light as it fails to analyze \the [A]."))
 		return 0
 

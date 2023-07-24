@@ -28,7 +28,7 @@
 
 /datum/evacuation_controller/shuttle/launch_evacuation()
 
-	if(waiting_to_leave())
+	if (waiting_to_leave())
 		return
 
 	for (var/datum/shuttle/autodock/ferry/escape_pod/pod in escape_pods)
@@ -36,7 +36,7 @@
 			pod.move_time = evac_transit_delay
 			pod.launch(src)
 
-	if(autopilot && shuttle.moving_status == SHUTTLE_IDLE)
+	if (autopilot && shuttle.moving_status == SHUTTLE_IDLE)
 		evac_arrival_time = world.time + (shuttle.move_time*10) + (shuttle.warmup_time*10)
 		shuttle.launch(src)
 	// Announcements, state changes and such are handled by the shuttle itself to prevent desync.
@@ -53,7 +53,7 @@
 				pod.arming_controller.arm()
 
 /datum/evacuation_controller/shuttle/call_evacuation(mob/user, _emergency_evac, forced, skip_announce, autotransfer)
-	if(..())
+	if (..())
 		autopilot = 1
 		shuttle_launch_time = evac_no_return
 		evac_ready_time += shuttle.warmup_time*10
@@ -61,7 +61,7 @@
 	return 0
 
 /datum/evacuation_controller/shuttle/cancel_evacuation()
-	if(..() && shuttle.moving_status != SHUTTLE_INTRANSIT)
+	if (..() && shuttle.moving_status != SHUTTLE_INTRANSIT)
 		shuttle_launch_time = null
 		shuttle.cancel_launch(src)
 		return 1
@@ -73,18 +73,18 @@
 	return ..()
 
 /datum/evacuation_controller/shuttle/get_status_panel_eta()
-	if(has_eta() && waiting_to_leave())
+	if (has_eta() && waiting_to_leave())
 		return "Launching..."
 	return ..()
 
 // This is largely handled by the emergency shuttle datum.
 /datum/evacuation_controller/shuttle/process()
-	if(state == EVAC_PREPPING)
-		if(!isnull(shuttle_launch_time) && world.time > shuttle_launch_time && shuttle.moving_status == SHUTTLE_IDLE)
+	if (state == EVAC_PREPPING)
+		if (!isnull(shuttle_launch_time) && world.time > shuttle_launch_time && shuttle.moving_status == SHUTTLE_IDLE)
 			shuttle.launch()
 			shuttle_launch_time = null
 		return
-	else if(state == EVAC_IN_TRANSIT)
+	else if (state == EVAC_IN_TRANSIT)
 		return
 	return ..()
 

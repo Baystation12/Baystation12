@@ -79,7 +79,7 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 	return selected
 
 /proc/load_ruin(turf/central_turf, datum/map_template/template)
-	if(!template)
+	if (!template)
 		return FALSE
 	for(var/i in template.get_affected_turfs(central_turf, 1))
 		var/turf/T = i
@@ -87,6 +87,6 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 			qdel(monster)
 	template.load(central_turf,centered = TRUE)
 	var/datum/map_template/ruin = template
-	if(istype(ruin))
+	if (istype(ruin))
 		new /obj/effect/landmark/ruin(central_turf, ruin)
 	return TRUE

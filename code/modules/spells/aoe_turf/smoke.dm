@@ -19,7 +19,7 @@
 	cast_sound = 'sound/magic/smoke.ogg'
 
 /spell/aoe_turf/smoke/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 	smoke_amt += 2
 

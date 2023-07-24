@@ -8,5 +8,5 @@ SUBSYSTEM_DEF(turf_fire)
 /datum/controller/subsystem/turf_fire/fire()
 	for(var/obj/effect/turf_fire/fire as anything in fires)
 		fire.Process()
-		if(MC_TICK_CHECK)
+		if (MC_TICK_CHECK)
 			return

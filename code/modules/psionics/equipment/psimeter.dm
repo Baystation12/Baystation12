@@ -12,7 +12,7 @@
 	var/mob/living/last_assayed
 
 /obj/machinery/psi_meter/on_update_icon()
-	if(use_power && operable())
+	if (use_power && operable())
 		icon_state = "meter_on"
 	else
 		icon_state = "meter_off"
@@ -23,10 +23,10 @@
 
 /obj/machinery/psi_meter/interact(mob/user)
 
-	if(!use_power) return
+	if (!use_power) return
 
 	var/list/dat = list()
-	if(LAZYLEN(last_assay))
+	if (LAZYLEN(last_assay))
 		dat = last_assay
 	else
 		dat += "<h2>TELESTO Mark I Psi-Meter</h2><hr><table border = 1 width = 100%><tr><td colspan = 2><b>Candidates</b></td></tr>"
@@ -34,7 +34,7 @@
 		for(var/mob/living/H in range(1, src))
 			found = TRUE
 			dat += "<tr><td>[H.name]</td><td><a href='?src=\ref[src];assay=\ref[H]'>Conduct Assay</a>"
-		if(!found)
+		if (!found)
 			dat += "<tr><td colspan = 2>No candidates found.</td></tr>"
 		dat += "<table>"
 
@@ -44,28 +44,28 @@
 
 /obj/machinery/psi_meter/Topic(href, href_list)
 	. = ..()
-	if(!.)
+	if (!.)
 
-		if(!issilicon(usr) && !Adjacent(usr))
+		if (!issilicon(usr) && !Adjacent(usr))
 			return FALSE
 
 		var/refresh
-		if(href_list["print"])
-			if(last_assay)
+		if (href_list["print"])
+			if (last_assay)
 				var/obj/item/paper/P = new(loc)
 				P.name = "paper - Psi-Assay ([last_assayed.name])"
 				P.info = jointext(last_assay - last_assay[length(last_assay)],null) // Last line is 'print | clear' link line.
 				return TRUE
 
-		if(href_list["clear"])
+		if (href_list["clear"])
 			last_assay = null
 			refresh = TRUE
-		else if(href_list["assay"])
+		else if (href_list["assay"])
 			last_assayed = locate(href_list["assay"])
-			if(istype(last_assayed))
+			if (istype(last_assayed))
 				last_assayed.show_psi_assay(usr, src)
 				refresh = TRUE
 
-		if(refresh)
+		if (refresh)
 			interact(usr)
 			return TRUE

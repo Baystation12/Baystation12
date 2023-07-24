@@ -20,16 +20,16 @@
 		handle_protein(M, src)
 	if (sugar_amount)
 		handle_sugar(M, src)
-	if(nutrition)
+	if (nutrition)
 		M.adjust_nutrition(nutrition * removed)
-	if(hydration)
+	if (hydration)
 		M.adjust_hydration(hydration * removed)
 	M.dizziness = max(0, M.dizziness + adj_dizzy)
 	M.drowsyness = max(0, M.drowsyness + adj_drowsy)
 	M.sleeping = max(0, M.sleeping + adj_sleepy)
-	if(adj_temp > 0 && M.bodytemperature < 310) // 310 is the normal bodytemp. 310.055
+	if (adj_temp > 0 && M.bodytemperature < 310) // 310 is the normal bodytemp. 310.055
 		M.bodytemperature = min(310, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
-	if(adj_temp < 0 && M.bodytemperature > 310)
+	if (adj_temp < 0 && M.bodytemperature > 310)
 		M.bodytemperature = min(310, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 // Juices
@@ -132,7 +132,7 @@
 	glass_desc = "A glass of deadly juice."
 
 /datum/reagent/toxin/poisonberryjuice/affect_blood(mob/living/carbon/M, removed)
-	if(M.HasTrait(/singleton/trait/boon/filtered_blood))
+	if (M.HasTrait(/singleton/trait/boon/filtered_blood))
 		return
 	return ..()
 
@@ -329,16 +329,16 @@
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
 
 /datum/reagent/drink/coffee/affect_ingest(mob/living/carbon/M, removed)
-	if(adj_temp > 0)
+	if (adj_temp > 0)
 		holder.remove_reagent(/datum/reagent/frostoil, 10 * removed)
 
 	if (METABOLIC_INERTNESS(M) > TRAIT_LEVEL_MINOR)
 		return
 	..()
 
-	if(volume > 15)
+	if (volume > 15)
 		M.add_chemical_effect(CE_PULSE, 1)
-	if(volume > 45)
+	if (volume > 45)
 		M.add_chemical_effect(CE_PULSE, 1)
 
 /datum/reagent/nutriment/coffee/affect_blood(mob/living/carbon/M, removed)
@@ -764,9 +764,9 @@
 	M.adjustOxyLoss(-4 * removed)
 	M.heal_organ_damage(2 * removed, 2 * removed)
 	M.adjustToxLoss(-2 * removed)
-	if(M.dizziness)
+	if (M.dizziness)
 		M.dizziness = max(0, M.dizziness - 15)
-	if(M.confused)
+	if (M.confused)
 		M.confused = max(0, M.confused - 5)
 
 /datum/reagent/drink/dry_ramen

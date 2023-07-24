@@ -36,25 +36,25 @@
 	SHOULD_CALL_PARENT(TRUE) // Ensures atoms don't unintentionally skip initialization by not calling parent in New()
 
 	//atom creation method that preloads variables at creation
-	if(GLOB.use_preloader && (src.type == GLOB._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
+	if (GLOB.use_preloader && (src.type == GLOB._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
 		GLOB._preloader.load(src)
 
 	var/do_initialize = SSatoms.atom_init_stage
 	var/list/created = SSatoms.created_atoms
-	if(do_initialize > INITIALIZATION_INSSATOMS_LATE)
+	if (do_initialize > INITIALIZATION_INSSATOMS_LATE)
 		args[1] = do_initialize == INITIALIZATION_INNEW_MAPLOAD
-		if(SSatoms.InitAtom(src, args))
+		if (SSatoms.InitAtom(src, args))
 			//we were deleted
 			return
-	else if(created)
+	else if (created)
 
 		var/list/argument_list
-		if(length(args) > 1)
+		if (length(args) > 1)
 			argument_list = args.Copy(2)
-		if(argument_list || do_initialize == INITIALIZATION_INSSATOMS_LATE)
+		if (argument_list || do_initialize == INITIALIZATION_INSSATOMS_LATE)
 			created[src] = argument_list
 
-	if(atom_flags & ATOM_FLAG_CLIMBABLE)
+	if (atom_flags & ATOM_FLAG_CLIMBABLE)
 		verbs += /atom/proc/climb_on
 
 	..()
@@ -76,7 +76,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
 
-	if(atom_flags & ATOM_FLAG_INITIALIZED)
+	if (atom_flags & ATOM_FLAG_INITIALIZED)
 		crash_with("Warning: [src]([type]) initialized multiple times!")
 	atom_flags |= ATOM_FLAG_INITIALIZED
 
@@ -84,13 +84,13 @@
 		log_debug("Abstract atom [type] created!")
 		return INITIALIZE_HINT_QDEL
 
-	if(light_max_bright && light_outer_range)
+	if (light_max_bright && light_outer_range)
 		update_light()
 
-	if(opacity)
+	if (opacity)
 		updateVisibility(src)
 		var/turf/T = loc
-		if(istype(T))
+		if (istype(T))
 			T.RecalculateOpacity()
 
 	if (health_max)
@@ -156,7 +156,7 @@
  * Returns instance of `/datum/gas_mixture`.
  */
 /atom/proc/return_air()
-	if(loc)
+	if (loc)
 		return loc.return_air()
 	else
 		return null
@@ -265,7 +265,7 @@
  */
 /atom/proc/set_density(new_density)
 	var/changed = density != new_density
-	if(changed)
+	if (changed)
 		density = !density
 		if (isturf(loc))
 			var/turf/T = loc
@@ -309,10 +309,10 @@
  * Returns boolean.
  */
 /atom/proc/in_contents_of(container)//can take class or object instance as argument
-	if(ispath(container))
-		if(istype(src.loc, container))
+	if (ispath(container))
+		if (istype(src.loc, container))
 			return 1
-	else if(src in container)
+	else if (src in container)
 		return 1
 	return
 
@@ -328,15 +328,15 @@
 /atom/proc/search_contents_for(path,list/filter_path=null)
 	var/list/found = list()
 	for(var/atom/A in src)
-		if(istype(A, path))
+		if (istype(A, path))
 			found += A
-		if(filter_path)
+		if (filter_path)
 			var/pass = 0
 			for(var/type in filter_path)
 				pass |= istype(A, type)
-			if(!pass)
+			if (!pass)
 				continue
-		if(length(A.contents))
+		if (length(A.contents))
 			found += A.search_contents_for(path,filter_path)
 	return found
 
@@ -372,8 +372,8 @@
 /atom/proc/examine(mob/user, distance, infix = "", suffix = "")
 	//This reformat names to get a/an properly working on item descriptions when they are bloody
 	var/f_name = "\a [src][infix]."
-	if(blood_color && !istype(src, /obj/effect/decal))
-		if(gender == PLURAL)
+	if (blood_color && !istype(src, /obj/effect/decal))
+		if (gender == PLURAL)
 			f_name = "some "
 		else
 			f_name = "a "
@@ -415,7 +415,7 @@
  */
 /atom/proc/set_dir(new_dir)
 	var/old_dir = dir
-	if(new_dir == old_dir)
+	if (new_dir == old_dir)
 		return FALSE
 	dir = new_dir
 	GLOB.dir_set_event.raise_event(src, old_dir, dir)
@@ -429,7 +429,7 @@
  * - `new_icon_state` icon state.
  */
 /atom/proc/set_icon_state(new_icon_state)
-	if(has_extension(src, /datum/extension/base_icon_state))
+	if (has_extension(src, /datum/extension/base_icon_state))
 		var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 		bis.base_icon_state = new_icon_state
 		update_icon()
@@ -557,7 +557,7 @@
  * - `TT` - The thrownthing datum associated with the impact.
  */
 /atom/proc/hitby(atom/movable/AM, datum/thrownthing/TT)//already handled by throw impact
-	if(isliving(AM) && !isturf(src)) // See `/turf/hitby()` for turf handling of mob impacts
+	if (isliving(AM) && !isturf(src)) // See `/turf/hitby()` for turf handling of mob impacts
 		var/mob/living/M = AM
 		M.apply_damage(TT.speed * 5, DAMAGE_BRUTE)
 
@@ -594,15 +594,15 @@
  * Returns boolean - `TRUE` if the atom was bloodied, `FALSE` otherwise.
  */
 /atom/proc/add_blood(mob/living/carbon/human/M as mob)
-	if(atom_flags & ATOM_FLAG_NO_BLOOD)
+	if (atom_flags & ATOM_FLAG_NO_BLOOD)
 		return 0
 
-	if(!blood_DNA || !istype(blood_DNA, /list))	//if our list of DNA doesn't exist yet (or isn't a list) initialise it.
+	if (!blood_DNA || !istype(blood_DNA, /list))	//if our list of DNA doesn't exist yet (or isn't a list) initialise it.
 		blood_DNA = list()
 
 	was_bloodied = 1
 	blood_color = COLOR_BLOOD_HUMAN
-	if(istype(M))
+	if (istype(M))
 		if (!istype(M.dna, /datum/dna))
 			M.dna = new /datum/dna(null)
 			M.dna.real_name = M.real_name
@@ -620,13 +620,13 @@
  * Returns boolean. If `TRUE`, blood DNA was present and removed.
  */
 /atom/proc/clean_blood()
-	if(!simulated)
+	if (!simulated)
 		return
 	fluorescent = ATOM_FLOURESCENCE_NONE
 	germ_level = 0
 	blood_color = null
 	gunshot_residue = null
-	if(istype(blood_DNA, /list))
+	if (istype(blood_DNA, /list))
 		blood_DNA = null
 		return 1
 
@@ -647,11 +647,11 @@
 	for(cur_x = 1 to length(GLOB.global_map))
 		y_arr = GLOB.global_map[cur_x]
 		cur_y = y_arr.Find(src.z)
-		if(cur_y)
+		if (cur_y)
 			break
 //	log_debug("X = [cur_x]; Y = [cur_y]")
 
-	if(cur_x && cur_y)
+	if (cur_x && cur_y)
 		return list("x"=cur_x,"y"=cur_y)
 	else
 		return 0
@@ -675,7 +675,7 @@
  * Returns boolean.
  */
 /atom/proc/isinspace()
-	if(istype(get_turf(src), /turf/space))
+	if (istype(get_turf(src), /turf/space))
 		return 1
 	else
 		return 0
@@ -717,9 +717,9 @@
 		if (length(exclude_mobs) && (M in exclude_mobs))
 			exclude_mobs -= M
 			continue
-		if(M.see_invisible >= invisibility)
+		if (M.see_invisible >= invisibility)
 			M.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
-		else if(blind_message)
+		else if (blind_message)
 			M.show_message(blind_message, AUDIBLE_MESSAGE)
 
 
@@ -759,7 +759,7 @@
 /atom/movable/proc/dropInto(atom/destination)
 	while(istype(destination))
 		var/atom/drop_destination = destination.onDropInto(src)
-		if(!istype(drop_destination) || drop_destination == destination)
+		if (!istype(drop_destination) || drop_destination == destination)
 			return forceMove(destination)
 		destination = drop_destination
 	return forceMove(null)
@@ -788,7 +788,7 @@
 
 /atom/attack_hand(mob/user)
 	..()
-	if(LAZYLEN(climbers) && !(user in climbers))
+	if (LAZYLEN(climbers) && !(user in climbers))
 		user.visible_message(SPAN_WARNING("[user.name] shakes \the [src]."), \
 					SPAN_NOTICE("You shake \the [src]."))
 		object_shaken()
@@ -827,25 +827,25 @@
 
 	var/obj/occupied = turf_is_crowded(user)
 	//because Adjacent() has exceptions for windows, those must be handled here
-	if(!occupied && istype(src, /obj/structure/wall_frame))
+	if (!occupied && istype(src, /obj/structure/wall_frame))
 		var/original_dir = get_dir(src, user.loc)
 		var/progress_dir = original_dir
 		for(var/atom/A in loc.contents)
-			if(A.atom_flags & ATOM_FLAG_CHECKS_BORDER)
+			if (A.atom_flags & ATOM_FLAG_CHECKS_BORDER)
 				var/obj/structure/window/W = A
-				if(istype(W))
+				if (istype(W))
 					//progressively check if a window matches the X or Y component of the dir, if collision, set the dir bit off
-					if(W.is_fulltile() || (progress_dir &= ~W.dir) == 0) //if dir components are 0, fully blocked on diagonal
+					if (W.is_fulltile() || (progress_dir &= ~W.dir) == 0) //if dir components are 0, fully blocked on diagonal
 						occupied = A
 						break
 		//if true, means one dir was blocked and bit set off, so check the unblocked
-		if(progress_dir != original_dir && progress_dir != 0)
+		if (progress_dir != original_dir && progress_dir != 0)
 			var/turf/here = get_turf(src)
-			if(!here.Adjacent_free_dir(user, progress_dir))
+			if (!here.Adjacent_free_dir(user, progress_dir))
 				to_chat(user, SPAN_DANGER("You can't climb there, the way is blocked."))
 				return FALSE
 
-	if(occupied)
+	if (occupied)
 		to_chat(user, SPAN_DANGER("There's \a [occupied] in the way."))
 		return 0
 	return 1
@@ -864,7 +864,7 @@
 /atom/proc/can_touch(mob/user, check_silicon=TRUE)
 	if (!user)
 		return 0
-	if(!Adjacent(user))
+	if (!Adjacent(user))
 		return 0
 	if (user.restrained() || user.buckled)
 		to_chat(user, SPAN_NOTICE("You need your hands and legs free for this."))
@@ -886,14 +886,14 @@
  */
 /atom/proc/turf_is_crowded(atom/ignore)
 	var/turf/T = get_turf(src)
-	if(!istype(T))
+	if (!istype(T))
 		return 0
 	for(var/atom/A in T.contents)
-		if(ignore && ignore == A)
+		if (ignore && ignore == A)
 			continue
-		if(A.atom_flags & ATOM_FLAG_CLIMBABLE)
+		if (A.atom_flags & ATOM_FLAG_CLIMBABLE)
 			continue
-		if(A.density && !(A.atom_flags & ATOM_FLAG_CHECKS_BORDER)) //ON_BORDER structures are handled by the Adjacent() check.
+		if (A.density && !(A.atom_flags & ATOM_FLAG_CHECKS_BORDER)) //ON_BORDER structures are handled by the Adjacent() check.
 			return A
 	return 0
 
@@ -915,18 +915,18 @@
 	user.visible_message(SPAN_WARNING("\The [user] starts climbing onto \the [src]!"))
 	LAZYDISTINCTADD(climbers,user)
 
-	if(!do_after(user,(issmall(user) ? MOB_CLIMB_TIME_SMALL : MOB_CLIMB_TIME_MEDIUM) * climb_speed_mult, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_BAR_OVER_USER))
+	if (!do_after(user,(issmall(user) ? MOB_CLIMB_TIME_SMALL : MOB_CLIMB_TIME_MEDIUM) * climb_speed_mult, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_BAR_OVER_USER))
 		LAZYREMOVE(climbers,user)
 		return 0
 
-	if(!can_climb(user, post_climb_check=1, check_silicon=check_silicon))
+	if (!can_climb(user, post_climb_check=1, check_silicon=check_silicon))
 		LAZYREMOVE(climbers,user)
 		return 0
 
 	var/target_turf = get_turf(src)
 
 	//climbing over border objects like railings
-	if((atom_flags & ATOM_FLAG_CHECKS_BORDER) && get_turf(user) == target_turf)
+	if ((atom_flags & ATOM_FLAG_CHECKS_BORDER) && get_turf(user) == target_turf)
 		target_turf = get_step(src, dir)
 
 	user.forceMove(target_turf)
@@ -946,29 +946,29 @@
 		climbers.Cut(1,2)
 
 	for(var/mob/living/M in get_turf(src))
-		if(M.lying) return //No spamming this on people.
+		if (M.lying) return //No spamming this on people.
 
 		M.Weaken(3)
 		to_chat(M, SPAN_DANGER("You topple as \the [src] moves under you!"))
 
-		if(prob(25))
+		if (prob(25))
 
 			var/damage = rand(15,30)
 			var/mob/living/carbon/human/H = M
-			if(!istype(H))
+			if (!istype(H))
 				to_chat(H, SPAN_DANGER("You land heavily!"))
 				M.adjustBruteLoss(damage)
 				return
 
 			var/obj/item/organ/external/affecting
 			var/list/limbs = BP_ALL_LIMBS //sanity check, can otherwise be shortened to affecting = pick(BP_ALL_LIMBS)
-			if(length(limbs))
+			if (length(limbs))
 				affecting = H.get_organ(pick(limbs))
 
-			if(affecting)
+			if (affecting)
 				to_chat(M, SPAN_DANGER("You land heavily on your [affecting.name]!"))
 				affecting.take_external_damage(damage, 0)
-				if(affecting.parent)
+				if (affecting.parent)
 					affecting.parent.add_autopsy_data("Misadventure", damage)
 			else
 				to_chat(H, SPAN_DANGER("You land heavily!"))
@@ -980,7 +980,7 @@
 
 /atom/MouseDrop_T(mob/target, mob/user)
 	var/mob/living/H = user
-	if(istype(H) && can_climb(H) && target == user)
+	if (istype(H) && can_climb(H) && target == user)
 		do_climb(target)
 		return TRUE
 	else
@@ -1030,7 +1030,7 @@
 	bullet_mark.pixel_x--
 	bullet_mark.pixel_y--
 
-	if(Proj.damage >= 50)
+	if (Proj.damage >= 50)
 		bullet_mark.icon_state = "scorch"
 		bullet_mark.set_dir(pick(NORTH,SOUTH,EAST,WEST)) // random scorch design
 	else

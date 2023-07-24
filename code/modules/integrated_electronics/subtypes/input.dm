@@ -5,7 +5,7 @@
 /obj/item/integrated_circuit/input/external_examine(mob/user)
 	var/initial_name = initial(name)
 	var/message
-	if(initial_name == name)
+	if (initial_name == name)
 		message = "There is \a [src]."
 	else
 		message = "There is \a ["\improper[initial_name]"] labeled '[name]'."
@@ -26,7 +26,7 @@
 	return list("Press" = "press=1")
 
 /obj/item/integrated_circuit/input/button/OnICTopic(href_list, user)
-	if(href_list["press"])
+	if (href_list["press"])
 		to_chat(user, SPAN_NOTICE("You press the button labeled '[src.displayed_name]'."))
 		activate_pin(1)
 		return IC_TOPIC_REFRESH
@@ -48,7 +48,7 @@
 	return list("Toggle [get_pin_data(IC_OUTPUT, 1) ? "Off" : "On"]" = "toggle=1")
 
 /obj/item/integrated_circuit/input/toggle_button/OnICTopic(href_list, user)
-	if(href_list["toggle"])
+	if (href_list["toggle"])
 		set_pin_data(IC_OUTPUT, 1, !get_pin_data(IC_OUTPUT, 1))
 		push_data()
 		activate_pin(1)
@@ -70,9 +70,9 @@
 	return list("Enter Number" = "enter_number=1")
 
 /obj/item/integrated_circuit/input/numberpad/OnICTopic(href_list, user)
-	if(href_list["enter_number"])
+	if (href_list["enter_number"])
 		var/new_input = input(user, "Enter a number, please.","Number pad") as null|num
-		if(isnum(new_input) && CanInteract(user, GLOB.physical_state))
+		if (isnum(new_input) && CanInteract(user, GLOB.physical_state))
 			set_pin_data(IC_OUTPUT, 1, new_input)
 			push_data()
 			activate_pin(1)
@@ -93,9 +93,9 @@
 	return list("Enter Words" = "enter_words=1")
 
 /obj/item/integrated_circuit/input/textpad/OnICTopic(href_list, user)
-	if(href_list["enter_words"])
+	if (href_list["enter_words"])
 		var/new_input = input(user, "Enter some words, please.","Number pad") as null|text
-		if(istext(new_input) && CanInteract(user, GLOB.physical_state))
+		if (istext(new_input) && CanInteract(user, GLOB.physical_state))
 			set_pin_data(IC_OUTPUT, 1, new_input)
 			push_data()
 			activate_pin(1)
@@ -116,9 +116,9 @@
 	return list("Enter Color" = "enter_color=1")
 
 /obj/item/integrated_circuit/input/colorpad/OnICTopic(href_list, user)
-	if(href_list["enter_color"])
+	if (href_list["enter_color"])
 		var/new_color = input(user, "Enter a color, please.", "Color", "#ffffff") as color|null
-		if(new_color)
+		if (new_color)
 			set_pin_data(IC_OUTPUT, 1, new_color)
 			push_data()
 			activate_pin(1)
@@ -141,9 +141,9 @@
 
 /obj/item/integrated_circuit/input/med_scanner/do_work()
 	var/mob/living/carbon/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
-	if(!istype(H)) //Invalid input
+	if (!istype(H)) //Invalid input
 		return
-	if(H.Adjacent(get_turf(src))) // Like normal analysers, it can't be used at range.
+	if (H.Adjacent(get_turf(src))) // Like normal analysers, it can't be used at range.
 		var/obj/item/organ/internal/brain/brain = H.internal_organs_by_name[BP_BRAIN]
 		set_pin_data(IC_OUTPUT, 1, (brain && H.stat != DEAD))
 		set_pin_data(IC_OUTPUT, 2, H.get_pulse_as_number())
@@ -178,24 +178,24 @@
 	power_draw_per_use = 80
 
 /obj/item/integrated_circuit/input/adv_med_scanner/proc/damage_to_severity(value)
-	if(value < 1)
+	if (value < 1)
 		return 0
-	if(value < 25)
+	if (value < 25)
 		return 1
-	if(value < 50)
+	if (value < 50)
 		return 2
-	if(value < 75)
+	if (value < 75)
 		return 3
-	if(value < 100)
+	if (value < 100)
 		return 4
 	return 5
 
 
 /obj/item/integrated_circuit/input/adv_med_scanner/do_work()
 	var/mob/living/carbon/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living)
-	if(!istype(H)) //Invalid input
+	if (!istype(H)) //Invalid input
 		return
-	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
+	if (H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
 
 
 		var/obj/item/organ/internal/brain/brain = H.internal_organs_by_name[BP_BRAIN]
@@ -242,9 +242,9 @@
 
 /obj/item/integrated_circuit/input/slime_scanner/do_work()
 	var/mob/living/carbon/slime/T = get_pin_data_as_type(IC_INPUT, 1, /mob/living/carbon/slime)
-	if(!isslime(T)) //Invalid input
+	if (!isslime(T)) //Invalid input
 		return
-	if(T in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
+	if (T in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
 
 		set_pin_data(IC_OUTPUT, 1, T.colour)
 		set_pin_data(IC_OUTPUT, 2, T.is_adult)
@@ -293,12 +293,12 @@
 
 /obj/item/integrated_circuit/input/plant_scanner/do_work()
 	var/obj/machinery/portable_atmospherics/hydroponics/H = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/portable_atmospherics/hydroponics)
-	if(!istype(H)) //Invalid input
+	if (!istype(H)) //Invalid input
 		return
 	for(var/i=1, i<=length(outputs), i++)
 		set_pin_data(IC_OUTPUT, i, null)
-	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
-		if(H.seed)
+	if (H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
+		if (H.seed)
 			set_pin_data(IC_OUTPUT, 1, H.seed.seed_name)
 			set_pin_data(IC_OUTPUT, 2, H.age)
 			set_pin_data(IC_OUTPUT, 3, H.seed.get_trait(TRAIT_POTENCY))
@@ -336,12 +336,12 @@
 /obj/item/integrated_circuit/input/gene_scanner/do_work()
 	var/list/greagents = list()
 	var/obj/machinery/portable_atmospherics/hydroponics/H = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/portable_atmospherics/hydroponics)
-	if(!istype(H)) //Invalid input
+	if (!istype(H)) //Invalid input
 		return
 	for(var/i=1, i<=length(outputs), i++)
 		set_pin_data(IC_OUTPUT, i, null)
-	if(H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
-		if(H.seed)
+	if (H in view(get_turf(src))) // Like medbot's analyzer it can be used in range..
+		if (H.seed)
 			for(var/chem_path in H.seed.chems)
 				var/datum/reagent/R = chem_path
 				greagents.Add(initial(R.name))
@@ -384,7 +384,7 @@
 	var/atom/H = get_pin_data_as_type(IC_INPUT, 1, /atom)
 	var/turf/T = get_turf(src)
 
-	if(!istype(H) || !(H in view(T)))
+	if (!istype(H) || !(H in view(T)))
 		activate_pin(3)
 	else
 		set_pin_data(IC_OUTPUT, 1, H.name)
@@ -394,7 +394,7 @@
 		set_pin_data(IC_OUTPUT, 5, sqrt((H.x-T.x)*(H.x-T.x)+ (H.y-T.y)*(H.y-T.y)))
 		var/mr = 0
 		var/tr = 0
-		if(H.reagents)
+		if (H.reagents)
 			mr = H.reagents.maximum_volume
 			tr = H.reagents.total_volume
 		set_pin_data(IC_OUTPUT, 6, mr)
@@ -419,7 +419,7 @@
 	power_draw_per_use = 40
 
 /obj/item/integrated_circuit/input/turfpoint/do_work()
-	if(!assembly)
+	if (!assembly)
 		activate_pin(3)
 		return
 	var/turf/T = get_turf(assembly)
@@ -427,7 +427,7 @@
 	var/target_y = clamp(get_pin_data(IC_INPUT, 2), 0, world.maxy)
 	var/turf/A = locate(target_x, target_y, T.z)
 	set_pin_data(IC_OUTPUT, 1, null)
-	if(!A || !(A in view(T)))
+	if (!A || !(A in view(T)))
 		activate_pin(3)
 		return
 	else
@@ -461,11 +461,11 @@
 	var/turf/scanned_turf = get_pin_data_as_type(IC_INPUT, 1, /turf)
 	var/turf/circuit_turf = get_turf(src)
 	var/area_name = get_area_name(scanned_turf)
-	if(!istype(scanned_turf)) //Invalid input
+	if (!istype(scanned_turf)) //Invalid input
 		activate_pin(3)
 		return
 
-	if(scanned_turf in view(circuit_turf)) // This is a camera. It can't examine things that it can't see.
+	if (scanned_turf in view(circuit_turf)) // This is a camera. It can't examine things that it can't see.
 		var/list/turf_contents = new()
 		for(var/obj/U in scanned_turf)
 			turf_contents += weakref(U)
@@ -476,7 +476,7 @@
 		var/list/St = new()
 		for(var/obj/effect/decal/cleanable/crayon/I in scanned_turf)
 			St.Add(I.icon_state)
-		if(length(St))
+		if (length(St))
 			set_pin_data(IC_OUTPUT, 2, jointext(St, ",", 1, 0))
 		push_data()
 		activate_pin(2)
@@ -500,7 +500,7 @@
 /obj/item/integrated_circuit/input/local_locator/do_work()
 	var/datum/integrated_io/O = outputs[1]
 	O.data = null
-	if(assembly)
+	if (assembly)
 		O.data = weakref(assembly.loc)
 	set_pin_data(IC_OUTPUT, 2, isturf(assembly.loc))
 	set_pin_data(IC_OUTPUT, 3, ismob(assembly.loc))
@@ -526,20 +526,20 @@
 	var/datum/integrated_io/O = outputs[1]
 	O.data = null
 
-	if(!isweakref(I.data))
+	if (!isweakref(I.data))
 		return
 	var/atom/A = I.data.resolve()
-	if(!A)
+	if (!A)
 		return
 	var/desired_type = A.type
 
 	var/list/nearby_things = range(1, get_turf(src))
 	var/list/valid_things = list()
 	for(var/atom/thing in nearby_things)
-		if(thing.type != desired_type)
+		if (thing.type != desired_type)
 			continue
 		valid_things.Add(thing)
-	if(length(valid_things))
+	if (length(valid_things))
 		O.data = weakref(pick(valid_things))
 		activate_pin(2)
 	else
@@ -565,7 +565,7 @@
 /obj/item/integrated_circuit/input/advanced_locator_list/on_data_written()
 	var/rad = get_pin_data(IC_INPUT, 2)
 
-	if(isnum(rad))
+	if (isnum(rad))
 		rad = clamp(rad, 0, 8)
 		radius = rad
 
@@ -575,30 +575,30 @@
 	O.data = null
 	var/list/input_list = list()
 	input_list = I.data
-	if(length(input_list))	//if there is no input don't do anything.
+	if (length(input_list))	//if there is no input don't do anything.
 		var/turf/T = get_turf(src)
 		var/list/nearby_things = view(radius,T)
 		var/list/valid_things = list()
 		for(var/item in input_list)
-			if(!isnull(item) && !isnum(item))
-				if(istext(item))
+			if (!isnull(item) && !isnum(item))
+				if (istext(item))
 					for(var/i in nearby_things)
 						var/atom/thing = i
-						if(ismob(thing) && !isliving(thing))
+						if (ismob(thing) && !isliving(thing))
 							continue
-						if(findtext(addtext(thing.name," ",thing.desc), item, 1, 0) )
+						if (findtext(addtext(thing.name," ",thing.desc), item, 1, 0) )
 							valid_things.Add(weakref(thing))
 				else
 					var/atom/A = item
 					var/desired_type = A.type
 					for(var/i in nearby_things)
 						var/atom/thing = i
-						if(thing.type != desired_type)
+						if (thing.type != desired_type)
 							continue
-						if(ismob(thing) && !isliving(thing))
+						if (ismob(thing) && !isliving(thing))
 							continue
 						valid_things.Add(weakref(thing))
-		if(length(valid_things))
+		if (length(valid_things))
 			O.data = valid_things
 			O.push_data()
 			activate_pin(2)
@@ -627,7 +627,7 @@
 
 /obj/item/integrated_circuit/input/advanced_locator/on_data_written()
 	var/rad = get_pin_data(IC_INPUT, 2)
-	if(isnum(rad))
+	if (isnum(rad))
 		rad = clamp(rad, 0, 8)
 		radius = rad
 
@@ -638,25 +638,25 @@
 	var/turf/T = get_turf(src)
 	var/list/nearby_things =  view(radius,T)
 	var/list/valid_things = list()
-	if(isweakref(I.data))
+	if (isweakref(I.data))
 		var/atom/A = I.data.resolve()
 		if (A)
 			var/desired_type = A.type
 			for(var/i in nearby_things)
 				var/atom/thing = i
-				if(ismob(thing) && !isliving(thing))
+				if (ismob(thing) && !isliving(thing))
 					continue
-				if(thing.type == desired_type)
+				if (thing.type == desired_type)
 					valid_things.Add(thing)
-	else if(istext(I.data))
+	else if (istext(I.data))
 		var/DT = I.data
 		for(var/i in nearby_things)
 			var/atom/thing = i
-			if(ismob(thing) && !isliving(thing))
+			if (ismob(thing) && !isliving(thing))
 				continue
-			if(findtext(addtext(thing.name," ",thing.desc), DT, 1, 0) )
+			if (findtext(addtext(thing.name," ",thing.desc), DT, 1, 0) )
 				valid_things.Add(thing)
-	if(length(valid_things))
+	if (length(valid_things))
 		O.data = weakref(pick(valid_things))
 		O.push_data()
 		activate_pin(2)
@@ -701,29 +701,29 @@
 /obj/item/integrated_circuit/input/signaler/on_data_written()
 	var/new_freq = get_pin_data(IC_INPUT, 1)
 	var/new_code = get_pin_data(IC_INPUT, 2)
-	if(isnum(new_freq) && new_freq > 0)
+	if (isnum(new_freq) && new_freq > 0)
 		set_frequency(new_freq)
 	code = new_code
 
 
 /obj/item/integrated_circuit/input/signaler/do_work(ord) // Sends a signal.
-	if(!radio_connection || ord != 1)
+	if (!radio_connection || ord != 1)
 		return
 
 	radio_connection.post_signal(src, create_signal())
 	activate_pin(2)
 
 /obj/item/integrated_circuit/input/signaler/proc/signal_good(datum/signal/signal)
-	if(!signal || signal.source == src)
+	if (!signal || signal.source == src)
 		return FALSE
-	if(code)
+	if (code)
 		var/real_code = 0
-		if(isnum(code))
+		if (isnum(code))
 			real_code = code
 		var/rec = 0
-		if(signal.encryption)
+		if (signal.encryption)
 			rec = signal.encryption
-		if(real_code != rec)
+		if (real_code != rec)
 			return FALSE
 	return TRUE
 
@@ -731,20 +731,20 @@
 	var/datum/signal/signal = new()
 	signal.transmission_method = 1
 	signal.source = src
-	if(isnum(code))
+	if (isnum(code))
 		signal.encryption = code
 	signal.data["message"] = "ACTIVATE"
 	return signal
 
 /obj/item/integrated_circuit/input/signaler/proc/set_frequency(new_frequency)
-	if(!frequency)
+	if (!frequency)
 		return
 	radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
 
 /obj/item/integrated_circuit/input/signaler/receive_signal(datum/signal/signal)
-	if(!signal_good(signal))
+	if (!signal_good(signal))
 		return 0
 	treat_signal(signal)
 	return 1
@@ -771,7 +771,7 @@
 	command = get_pin_data(IC_INPUT,3)
 
 /obj/item/integrated_circuit/input/signaler/advanced/signal_good(datum/signal/signal)
-	if(!..() || signal.data["tag"] != code)
+	if (!..() || signal.data["tag"] != code)
 		return FALSE
 	return TRUE
 
@@ -812,7 +812,7 @@
 	.["None (Dangerous)"] = "tport=random"
 
 /obj/item/integrated_circuit/input/teleporter_locator/OnICTopic(href_list, user)
-	if(href_list["tport"])
+	if (href_list["tport"])
 		var/output = href_list["tport"] == "random" ? null : locate(href_list["tport"])
 		set_pin_data(IC_OUTPUT, 1, output && weakref(output))
 		push_data()
@@ -838,7 +838,7 @@
 	set_pin_data(IC_OUTPUT, 1, null)
 	set_pin_data(IC_OUTPUT, 2, null)
 	set_pin_data(IC_OUTPUT, 3, null)
-	if(!T)
+	if (!T)
 		return
 
 	set_pin_data(IC_OUTPUT, 1, T.x)
@@ -880,9 +880,9 @@
 
 /obj/item/integrated_circuit/input/microphone/hear_talk(mob/living/M as mob, text, verb, datum/language/speaking)
 	var/translated = FALSE
-	if(M && text && speaking)
-		if(!(speaking.flags & invalid_flags))
-			if(speaking.name in languages_understood)
+	if (M && text && speaking)
+		if (!(speaking.flags & invalid_flags))
+			if (speaking.name in languages_understood)
 				translated = TRUE
 			else
 				text = speaking.scramble(text)
@@ -892,7 +892,7 @@
 
 			push_data()
 			activate_pin(1)
-			if(translated && !(speaking.name == language_preferred))
+			if (translated && !(speaking.name == language_preferred))
 				activate_pin(2)
 
 
@@ -930,12 +930,12 @@
 	power_draw_per_use = 120
 
 /obj/item/integrated_circuit/input/sensor/sense(atom/A, mob/user, prox)
-	if(!prox || !A || (ismob(A) && !isliving(A)))
+	if (!prox || !A || (ismob(A) && !isliving(A)))
 		return FALSE
-	if(!check_then_do_work())
+	if (!check_then_do_work())
 		return FALSE
 	var/ignore_bags = get_pin_data(IC_INPUT, 1)
-	if(ignore_bags && istype(A, /obj/item/storage))
+	if (ignore_bags && istype(A, /obj/item/storage))
 		return FALSE
 	set_pin_data(IC_OUTPUT, 1, weakref(A))
 	push_data()
@@ -956,18 +956,18 @@
 	power_draw_per_use = 120
 
 /obj/item/integrated_circuit/input/sensor/ranged/sense(atom/A, mob/user)
-	if(!user || !A || (ismob(A) && !isliving(A)))
+	if (!user || !A || (ismob(A) && !isliving(A)))
 		return FALSE
-	if(user.client)
-		if(!(A in view(user.client)))
+	if (user.client)
+		if (!(A in view(user.client)))
 			return FALSE
 	else
-		if(!(A in view(user)))
+		if (!(A in view(user)))
 			return FALSE
-	if(!check_then_do_work())
+	if (!check_then_do_work())
 		return FALSE
 	var/ignore_bags = get_pin_data(IC_INPUT, 1)
-	if(ignore_bags && istype(A, /obj/item/storage))
+	if (ignore_bags && istype(A, /obj/item/storage))
 		return FALSE
 	set_pin_data(IC_OUTPUT, 1, weakref(A))
 	push_data()
@@ -989,12 +989,12 @@
 	power_draw_per_use = 20
 
 /obj/item/integrated_circuit/input/obj_scanner/attackby_react(atom/A,mob/user,intent)
-	if(intent!=I_HELP)
+	if (intent!=I_HELP)
 		return FALSE
-	if(!check_then_do_work())
+	if (!check_then_do_work())
 		return FALSE
 	var/pu = get_pin_data(IC_INPUT, 1)
-	if(pu && !user.unEquip(A,get_turf(src)))
+	if (pu && !user.unEquip(A,get_turf(src)))
 		return FALSE
 	set_pin_data(IC_OUTPUT, 1, weakref(A))
 	push_data()
@@ -1027,9 +1027,9 @@
 	set_pin_data(IC_OUTPUT, 3, null)
 	set_pin_data(IC_OUTPUT, 4, null)
 	set_pin_data(IC_OUTPUT, 5, null)
-	if(assembly)
+	if (assembly)
 		set_pin_data(IC_OUTPUT, 4, weakref(assembly))
-		if(assembly.battery)
+		if (assembly.battery)
 			set_pin_data(IC_OUTPUT, 1, assembly.battery.charge)
 			set_pin_data(IC_OUTPUT, 2, assembly.battery.maxcharge)
 			set_pin_data(IC_OUTPUT, 3, 100*assembly.battery.charge/assembly.battery.maxcharge)
@@ -1060,11 +1060,11 @@
 	set_pin_data(IC_OUTPUT, 1, null)
 	set_pin_data(IC_OUTPUT, 2, null)
 	set_pin_data(IC_OUTPUT, 3, null)
-	if(O)
+	if (O)
 		var/obj/item/cell/C = O.get_cell()
-		if(C)
+		if (C)
 			var/turf/A = get_turf(src)
-			if(get_turf(O) in view(A))
+			if (get_turf(O) in view(A))
 				set_pin_data(IC_OUTPUT, 1, C.charge)
 				set_pin_data(IC_OUTPUT, 2, C.maxcharge)
 				set_pin_data(IC_OUTPUT, 3, C.percent())
@@ -1105,13 +1105,13 @@
 
 /obj/item/integrated_circuit/input/matscan/do_work()
 	var/obj/O = get_pin_data_as_type(IC_INPUT, 1, /obj)
-	if(!O || !O.matter) //Invalid input
+	if (!O || !O.matter) //Invalid input
 		return
 	var/turf/T = get_turf(src)
-	if(O in view(T)) // This is a camera. It can't examine thngs,that it can't see.
+	if (O in view(T)) // This is a camera. It can't examine thngs,that it can't see.
 		for(var/I in 1 to length(mtypes))
 			var/amount = O.matter[mtypes[I]]
-			if(amount)
+			if (amount)
 				set_pin_data(IC_OUTPUT, I, amount)
 			else
 				set_pin_data(IC_OUTPUT, I, null)
@@ -1152,14 +1152,14 @@
 		set_pin_data(IC_OUTPUT, i, null)
 	var/atom/target = get_pin_data_as_type(IC_INPUT, 1, /atom)
 	var/atom/movable/acting_object = get_object()
-	if(!target)
+	if (!target)
 		target = acting_object.loc
-	if(!target.Adjacent(acting_object))
+	if (!target.Adjacent(acting_object))
 		activate_pin(3)
 		return
 
 	var/datum/gas_mixture/air_contents = target.return_air()
-	if(!air_contents)
+	if (!air_contents)
 		activate_pin(3)
 		return
 
@@ -1207,8 +1207,8 @@
 /obj/item/integrated_circuit/input/data_card_reader/attackby_react(obj/item/I, mob/living/user, intent)
 	var/obj/item/card/data/card = I
 	var/write_mode = get_pin_data(IC_INPUT, 3)
-	if(istype(card))
-		if(write_mode == TRUE)
+	if (istype(card))
+		if (write_mode == TRUE)
 			card.function = get_pin_data(IC_INPUT, 1)
 			card.data = get_pin_data(IC_INPUT, 2)
 			push_data()

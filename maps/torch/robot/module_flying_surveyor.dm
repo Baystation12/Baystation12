@@ -54,17 +54,17 @@
 
 /obj/item/robot_module/flying/surveyor/respawn_consumable(mob/living/silicon/robot/R, amount)
 	var/obj/item/gun/launcher/net/borg/gun = locate() in equipment
-	if(!gun)
+	if (!gun)
 		gun = new(src)
 		equipment += gun
-	if(LAZYLEN(gun.shells) < gun.max_shells)
+	if (LAZYLEN(gun.shells) < gun.max_shells)
 		gun.load(new /obj/item/net_shell)
 
 	for(var/flagtype in flag_types)
 		var/obj/item/stack/flag/flag = locate(flagtype) in equipment
-		if(!flag)
+		if (!flag)
 			flag = new flagtype
 			equipment += flag
-		if(flag.amount < flag.max_amount)
+		if (flag.amount < flag.max_amount)
 			flag.add(1)
 	..()

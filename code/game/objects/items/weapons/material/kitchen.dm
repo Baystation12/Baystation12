@@ -26,20 +26,20 @@
 	return
 
 /obj/item/material/kitchen/utensil/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(!istype(M))
+	if (!istype(M))
 		return ..()
 
-	if(user.a_intent != I_HELP)
-		if(user.zone_sel.selecting == BP_HEAD || user.zone_sel.selecting == BP_EYES)
-			if((MUTATION_CLUMSY in user.mutations) && prob(50))
+	if (user.a_intent != I_HELP)
+		if (user.zone_sel.selecting == BP_HEAD || user.zone_sel.selecting == BP_EYES)
+			if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 				M = user
 			return eyestab(M,user)
 		else
 			return ..()
 
 	if (reagents.total_volume > 0)
-		if(M == user)
-			if(!M.can_eat(loaded))
+		if (M == user)
+			if (!M.can_eat(loaded))
 				return
 			switch(M.get_fullness())
 				if (0 to 50)
@@ -56,7 +56,7 @@
 
 		else
 			user.visible_message(SPAN_WARNING("\The [user] begins to feed \the [M]!"))
-			if(!M.can_force_feed(user, loaded) || !do_after(user, 5 SECONDS, M, DO_PUBLIC_UNIQUE))
+			if (!M.can_force_feed(user, loaded) || !do_after(user, 5 SECONDS, M, DO_PUBLIC_UNIQUE))
 				return
 
 			if (user.get_active_hand() != src)

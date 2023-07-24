@@ -4,22 +4,22 @@
 	var/list/handled_vars
 
 /singleton/vv_set_handler/proc/can_handle_set_var(datum/O, variable, var_value, client)
-	if(!istype(O, handled_type))
+	if (!istype(O, handled_type))
 		return FALSE
-	if(!(variable in handled_vars))
+	if (!(variable in handled_vars))
 		return FALSE
-	if(istype(O) && !(variable in O.vars))
+	if (istype(O) && !(variable in O.vars))
 		log_error("Did not find the variable '[variable]' for the instance [log_info_line(O)].")
 		return FALSE
-	if(predicates)
+	if (predicates)
 		for(var/predicate in predicates)
-			if(!call(predicate)(var_value, client))
+			if (!call(predicate)(var_value, client))
 				return FALSE
 	return TRUE
 
 /singleton/vv_set_handler/proc/handle_set_var(datum/O, variable, var_value, client)
 	var/proc_to_call = handled_vars[variable]
-	if(proc_to_call)
+	if (proc_to_call)
 		call(O, proc_to_call)(var_value)
 	else
 		O.vars[variable] = var_value
@@ -29,15 +29,15 @@
 	handled_vars = list("loc","x","y","z")
 
 /singleton/vv_set_handler/location_handler/handle_set_var(atom/movable/AM, variable, var_value, client)
-	if(variable == "loc")
-		if(istype(var_value, /atom) || isnull(var_value) || var_value == "")	// Proper null or empty string is fine, 0 is not
+	if (variable == "loc")
+		if (istype(var_value, /atom) || isnull(var_value) || var_value == "")	// Proper null or empty string is fine, 0 is not
 			AM.forceMove(var_value)
 		else
 			to_chat(client, SPAN_WARNING("May only assign null or /atom types to loc."))
-	else if(variable == "x" || variable == "y" || variable == "z")
-		if(istext(var_value))
+	else if (variable == "x" || variable == "y" || variable == "z")
+		if (istext(var_value))
 			var_value = text2num(var_value)
-		if(!is_num_predicate(var_value, client))
+		if (!is_num_predicate(var_value, client))
 			return
 
 		// We set the default to 1,1,1 when at 0,0,0 (i.e. any non-turf location) to mimic the standard BYOND behaviour when adjusting x,y,z directly
@@ -45,15 +45,15 @@
 		var/y = AM.y || 1
 		var/z = AM.z || 1
 		switch(variable)
-			if("x")
+			if ("x")
 				x = var_value
-			if("y")
+			if ("y")
 				y = var_value
-			if("z")
+			if ("z")
 				z = var_value
 
 		var/turf/T = locate(x,y,z)
-		if(T)
+		if (T)
 			AM.forceMove(T)
 		else
 			to_chat(client, SPAN_WARNING("Unable to locate a turf at [x]-[y]-[z]."))
@@ -122,7 +122,7 @@
 
 /singleton/vv_set_handler/light_handler/handle_set_var(atom/A, variable, var_value, client)
 	var_value = text2num(var_value)
-	if(!is_num_predicate(var_value, client))
+	if (!is_num_predicate(var_value, client))
 		return
 	// More sanity checks
 

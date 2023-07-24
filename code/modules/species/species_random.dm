@@ -1,7 +1,7 @@
 #define SETUP_RANDOM_COLOR_GETTER(X, Y, Z, W)  \
 /datum/species/var/list/random_##Y = W;\
 /datum/species/proc/get_random_##X(){\
-	if(!(appearance_flags & Z) || !length(random_##Y)){\
+	if (!(appearance_flags & Z) || !length(random_##Y)){\
 		return;\
 	}\
 	var/selection = pickweight(random_##Y);\
@@ -11,11 +11,11 @@
 
 #define SETUP_RANDOM_COLOR_SETTER(X, Y)\
 /mob/living/carbon/human/proc/randomize_##X(){\
-	if(!species){\
+	if (!species){\
 		return;\
 	}\
 	var/colors = species.get_random_##X();\
-	if(colors){\
+	if (colors){\
 		Y(colors[1], colors[2], colors[3]);\
 	}\
 }
@@ -62,10 +62,10 @@ SETUP_RANDOM_COLOR_SETTER(facial_hair_color, change_facial_hair_color)
 	return random_skin_tone(src)
 
 /mob/living/carbon/human/proc/randomize_skin_tone()
-	if(!species)
+	if (!species)
 		return
 	var/new_tone = species.get_random_skin_tone()
-	if(!isnull(new_tone))
+	if (!isnull(new_tone))
 		change_skin_tone(new_tone)
 
 /mob/living/carbon/human/proc/randomize_hair_style()

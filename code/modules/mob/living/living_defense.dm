@@ -16,9 +16,9 @@
 /mob/living/proc/get_armors_by_zone(def_zone, damage_type, damage_flags)
 	. = list()
 	var/natural_armor = get_extension(src, /datum/extension/armor)
-	if(natural_armor)
+	if (natural_armor)
 		. += natural_armor
-	if(psi)
+	if (psi)
 		. += get_extension(psi, /datum/extension/armor)
 
 /mob/living/bullet_act(obj/item/projectile/P, def_zone)
@@ -27,7 +27,7 @@
 
 	//Being hit while using a deadman switch
 	var/obj/item/device/assembly/signaler/signaler = get_active_hand()
-	if(istype(signaler) && signaler.deadman)
+	if (istype(signaler) && signaler.deadman)
 		log_and_message_admins("has triggered a signaler deadman's switch")
 		visible_message(SPAN_WARNING("[src] triggers their deadman's switch"))
 		signaler.signal()
@@ -36,20 +36,20 @@
 	var/damage = P.damage
 	var/flags = P.damage_flags()
 	var/damaged
-	if(!P.nodamage)
+	if (!P.nodamage)
 		damaged = apply_damage(damage, P.damage_type, def_zone, flags, P, P.armor_penetration)
 		bullet_impact_visuals(P, def_zone, damaged)
-	if(damaged || P.nodamage) // Run the block computation if we did damage or if we only use armor for effects (nodamage)
+	if (damaged || P.nodamage) // Run the block computation if we did damage or if we only use armor for effects (nodamage)
 		. = get_blocked_ratio(def_zone, P.damage_type, flags, P.armor_penetration, P.damage)
 	P.on_hit(src, ., def_zone)
 
-	if(ai_holder && P.firer)
+	if (ai_holder && P.firer)
 		ai_holder.react_to_attack(P.firer)
 
 // For visuals and blood splatters etc
 /mob/living/proc/bullet_impact_visuals(obj/item/projectile/P, def_zone, damage)
 	var/list/impact_sounds = LAZYACCESS(P.impact_sounds, get_bullet_impact_effect_type(def_zone))
-	if(length(impact_sounds))
+	if (length(impact_sounds))
 		playsound(src, pick(impact_sounds), 75)
 
 /mob/living/get_bullet_impact_effect_type(def_zone)
@@ -80,7 +80,7 @@
  * Generally, a `FALSE` return value means the aura blocks further interaction.
  */
 /mob/living/proc/aura_check(type)
-	if(!auras)
+	if (!auras)
 		return TRUE
 	. = TRUE
 	var/list/newargs = args - args[1]
@@ -88,17 +88,17 @@
 		var/obj/aura/aura = a
 		var/result = EMPTY_BITFIELD
 		switch(type)
-			if(AURA_TYPE_WEAPON)
+			if (AURA_TYPE_WEAPON)
 				result = aura.aura_check_weapon(arglist(newargs))
-			if(AURA_TYPE_BULLET)
+			if (AURA_TYPE_BULLET)
 				result = aura.aura_check_bullet(arglist(newargs))
-			if(AURA_TYPE_THROWN)
+			if (AURA_TYPE_THROWN)
 				result = aura.aura_check_thrown(arglist(newargs))
-			if(AURA_TYPE_LIFE)
+			if (AURA_TYPE_LIFE)
 				result = aura.aura_check_life()
-		if(result & AURA_FALSE)
+		if (result & AURA_FALSE)
 			. = FALSE
-		if(result & AURA_CANCEL)
+		if (result & AURA_CANCEL)
 			break
 
 
@@ -134,7 +134,7 @@
 //Called when the mob is hit with an item in combat. Returns the blocked result
 /mob/living/proc/hit_with_weapon(obj/item/I, mob/living/user, effective_force, hit_zone)
 	var/weapon_mention
-	if(I.attack_message_name())
+	if (I.attack_message_name())
 		weapon_mention = " with [I.attack_message_name()]"
 	visible_message(SPAN_DANGER("\The [src] has been [length(I.attack_verb)? pick(I.attack_verb) : "attacked"][weapon_mention] by \the [user]!"))
 
@@ -142,14 +142,14 @@
 
 	if (I.damtype == DAMAGE_BRUTE && prob(33)) // Added blood for whacking non-humans too
 		var/turf/simulated/location = get_turf(src)
-		if(istype(location)) location.add_blood_floor(src)
+		if (istype(location)) location.add_blood_floor(src)
 
 	if (ai_holder)
 		ai_holder.react_to_attack(user)
 
 ///returns false if the effects failed to apply for some reason, true otherwise.
 /mob/living/proc/standard_weapon_hit_effects(obj/item/I, mob/living/user, effective_force, hit_zone)
-	if(!effective_force)
+	if (!effective_force)
 		return FALSE
 
 	//Apply weapon damage
@@ -160,19 +160,19 @@
 //this proc handles being hit by a thrown atom
 /mob/living/hitby(atom/movable/AM, datum/thrownthing/TT)
 
-	if(isliving(AM))
+	if (isliving(AM))
 		var/mob/living/M = AM
 		playsound(loc, 'sound/weapons/pierce.ogg', 25, 1, -1)
-		if(skill_fail_prob(SKILL_COMBAT, 75))
+		if (skill_fail_prob(SKILL_COMBAT, 75))
 			Weaken(rand(3,5))
-		if(M.skill_fail_prob(SKILL_HAULING, 100))
+		if (M.skill_fail_prob(SKILL_HAULING, 100))
 			M.Weaken(rand(4,8))
 		M.visible_message(SPAN_DANGER("\The [M] collides with \the [src]!"))
 
 	if (!aura_check(AURA_TYPE_THROWN, AM, TT))
 		return
 
-	if(isobj(AM))
+	if (isobj(AM))
 		var/obj/O = AM
 		var/dtype = O.damtype
 		var/throw_damage = O.throwforce*(TT.speed/THROWFORCE_SPEED_DIVISOR)
@@ -186,29 +186,29 @@
 		visible_message(SPAN_WARNING("\The [src] has been hit by \the [O]."))
 		apply_damage(throw_damage, dtype, null, O.damage_flags(), O)
 
-		if(TT.thrower)
+		if (TT.thrower)
 			var/client/assailant = TT.thrower.client
-			if(assailant)
+			if (assailant)
 				admin_attack_log(TT.thrower, src, "Threw \an [O] at the victim.", "Had \an [O] thrown at them.", "threw \an [O] at")
 
 			if (ai_holder)
 				ai_holder.react_to_attack(TT.thrower)
 
-		if(O.can_embed() && (throw_damage > 5*O.w_class)) //Handles embedding for non-humans and simple_animals.
+		if (O.can_embed() && (throw_damage > 5*O.w_class)) //Handles embedding for non-humans and simple_animals.
 			embed(O)
 
 	process_momentum(AM, TT)
 
 /mob/living/momentum_power(atom/movable/AM, datum/thrownthing/TT)
-	if(anchored || buckled)
+	if (anchored || buckled)
 		return 0
 
 	. = (AM.get_mass()*TT.speed)/(get_mass()*min(AM.throw_speed,2))
-	if(has_gravity() || check_space_footing())
+	if (has_gravity() || check_space_footing())
 		. *= 0.5
 
 /mob/living/momentum_do(power, datum/thrownthing/TT, atom/movable/AM)
-	if(power >= 0.75)		//snowflake to enable being pinned to walls
+	if (power >= 0.75)		//snowflake to enable being pinned to walls
 		var/direction = TT.init_dir
 		throw_at(get_edge_target_turf(src, direction), min((TT.maxrange - TT.dist_travelled) * power, 10), throw_speed * min(power, 1.5), callback = new Callback(src,/mob/living/proc/pin_to_wall,AM,direction))
 		visible_message(SPAN_DANGER("\The [src] staggers under the impact!"),SPAN_DANGER("You stagger under the impact!"))
@@ -217,12 +217,12 @@
 	. = ..()
 
 /mob/living/proc/pin_to_wall(obj/O, direction)
-	if(!istype(O) || O.loc != src || !O.can_embed())//Projectile is suitable for pinning.
+	if (!istype(O) || O.loc != src || !O.can_embed())//Projectile is suitable for pinning.
 		return
 
 	var/turf/T = near_wall(direction,2)
 
-	if(T)
+	if (T)
 		forceMove(T)
 		visible_message(SPAN_DANGER("[src] is pinned to the wall by [O]!"),SPAN_DANGER("You are pinned to the wall by [O]!"))
 		src.anchored = TRUE
@@ -245,7 +245,7 @@
 	var/i = 1
 
 	while(i>0 && i<=distance)
-		if(!T || T.density) //Turf is a wall or map edge.
+		if (!T || T.density) //Turf is a wall or map edge.
 			return last_turf
 		i++
 		last_turf = T
@@ -257,7 +257,7 @@
 
 /mob/living/attack_generic(mob/user, damage, attack_message)
 
-	if(!damage || !istype(user))
+	if (!damage || !istype(user))
 		return
 
 	adjustBruteLoss(damage)
@@ -271,13 +271,13 @@
 		ai_holder.react_to_attack(user)
 
 /mob/living/proc/IgniteMob()
-	if(fire_stacks > 0 && !on_fire)
+	if (fire_stacks > 0 && !on_fire)
 		on_fire = 1
 		set_light(0.6, 0.1, 4, l_color = COLOR_ORANGE)
 		update_fire()
 
 /mob/living/proc/ExtinguishMob()
-	if(on_fire)
+	if (on_fire)
 		on_fire = 0
 		fire_stacks = 0
 		set_light(0)
@@ -290,19 +290,19 @@
 	fire_stacks = clamp(fire_stacks + add_fire_stacks, FIRE_MIN_STACKS, FIRE_MAX_STACKS)
 
 /mob/living/proc/handle_fire()
-	if(fire_stacks < 0)
+	if (fire_stacks < 0)
 		fire_stacks = min(0, ++fire_stacks) //If we've doused ourselves in water to avoid fire, dry off slowly
 
-	if(!on_fire)
+	if (!on_fire)
 		return TRUE
-	else if(fire_stacks <= 0)
+	else if (fire_stacks <= 0)
 		ExtinguishMob() //Fire's been put out.
 		return TRUE
 
 	fire_stacks = max(0, fire_stacks - 0.2) //I guess the fire runs out of fuel eventually
 
 	var/datum/gas_mixture/G = loc.return_air() // Check if we're standing in an oxygenless environment
-	if(G.get_by_flag(XGM_GAS_OXIDIZER) < 1)
+	if (G.get_by_flag(XGM_GAS_OXIDIZER) < 1)
 		ExtinguishMob() //If there's no oxygen in the tile we're on, put out the fire
 		return TRUE
 
@@ -314,7 +314,7 @@
 		return
 	//once our fire_burn_temperature has reached the temperature of the fire that's giving fire_stacks, stop adding them.
 	//allow fire_stacks to go up to 4 for fires cooler than 700 K, since are being immersed in flame after all.
-	if(fire_stacks <= 4 || fire_burn_temperature() < exposed_temperature)
+	if (fire_stacks <= 4 || fire_burn_temperature() < exposed_temperature)
 		adjust_fire_stacks(2)
 	IgniteMob()
 
@@ -339,11 +339,11 @@
 /mob/living/proc/handle_actions()
 	//Pretty bad, i'd use picked/dropped instead but the parent calls in these are nonexistent
 	for(var/datum/action/A in actions)
-		if(A.CheckRemoval(src))
+		if (A.CheckRemoval(src))
 			A.Remove(src)
 	for(var/obj/item/I in src)
-		if(I.action_button_name)
-			if(!I.action)
+		if (I.action_button_name)
+			if (!I.action)
 				I.action = new I.default_action_type
 			I.action.name = I.action_button_name
 			I.action.SetTarget(I)
@@ -351,23 +351,23 @@
 	return
 
 /mob/living/update_action_buttons()
-	if(!hud_used) return
-	if(!client) return
+	if (!hud_used) return
+	if (!client) return
 
-	if(hud_used.hud_shown != 1)	//Hud toggled to minimal
+	if (hud_used.hud_shown != 1)	//Hud toggled to minimal
 		return
 
 	client.screen -= hud_used.hide_actions_toggle
 	for(var/datum/action/A in actions)
-		if(A.button)
+		if (A.button)
 			client.screen -= A.button
 
-	if(hud_used.action_buttons_hidden)
-		if(!hud_used.hide_actions_toggle)
+	if (hud_used.action_buttons_hidden)
+		if (!hud_used.hide_actions_toggle)
 			hud_used.hide_actions_toggle = new(hud_used)
 			hud_used.hide_actions_toggle.UpdateIcon()
 
-		if(!hud_used.hide_actions_toggle.moved)
+		if (!hud_used.hide_actions_toggle.moved)
 			hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(1)
 			//hud_used.SetButtonCoords(hud_used.hide_actions_toggle,1)
 
@@ -377,7 +377,7 @@
 	var/button_number = 0
 	for(var/datum/action/A in actions)
 		button_number++
-		if(A.button == null)
+		if (A.button == null)
 			var/obj/screen/movable/action_button/N = new(hud_used, A)
 			A.button = N
 
@@ -389,15 +389,15 @@
 
 		client.screen += B
 
-		if(!B.moved)
+		if (!B.moved)
 			B.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number)
 			//hud_used.SetButtonCoords(B,button_number)
 
-	if(button_number > 0)
-		if(!hud_used.hide_actions_toggle)
+	if (button_number > 0)
+		if (!hud_used.hide_actions_toggle)
 			hud_used.hide_actions_toggle = new(hud_used)
 			hud_used.hide_actions_toggle.InitialiseIcon(src)
-		if(!hud_used.hide_actions_toggle.moved)
+		if (!hud_used.hide_actions_toggle.moved)
 			hud_used.hide_actions_toggle.screen_loc = hud_used.ButtonNumberToScreenCoords(button_number+1)
 			//hud_used.SetButtonCoords(hud_used.hide_actions_toggle,button_number+1)
 		client.screen += hud_used.hide_actions_toggle
@@ -412,13 +412,13 @@
 // Applies direct "cold" damage while checking protection against the cold.
 /mob/living/proc/inflict_cold_damage(amount)
 	amount *= 1 - get_cold_protection(50) // Within spacesuit protection.
-	if(amount > 0)
+	if (amount > 0)
 		adjustFireLoss(amount)
 
 // Ditto, but for "heat".
 /mob/living/proc/inflict_heat_damage(amount)
 	amount *= 1 - get_heat_protection(10000) // Within firesuit protection.
-	if(amount > 0)
+	if (amount > 0)
 		adjustFireLoss(amount)
 
 // and one for electricity because why not
@@ -428,13 +428,13 @@
 // also one for water (most things resist it entirely, except for slimes)
 /mob/living/proc/inflict_water_damage(amount)
 	amount *= 1
-	if(amount > 0)
+	if (amount > 0)
 		adjustToxLoss(amount)
 
 // one for abstracted away ""poison"" (mostly because simplemobs shouldn't handle reagents)
 /mob/living/proc/inflict_poison_damage(amount)
-	if(isSynthetic())
+	if (isSynthetic())
 		return
 	amount *= 1
-	if(amount > 0)
+	if (amount > 0)
 		adjustToxLoss(amount)

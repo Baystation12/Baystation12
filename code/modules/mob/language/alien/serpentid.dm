@@ -8,7 +8,7 @@
 	shorthand = "SD"
 
 /datum/language/nabber/get_random_name(gender)
-	if(gender == FEMALE)
+	if (gender == FEMALE)
 		return capitalize(pick(GLOB.first_names_female))
 	else
 		return capitalize(pick(GLOB.first_names_male))

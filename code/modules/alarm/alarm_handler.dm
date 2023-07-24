@@ -16,14 +16,14 @@
 /datum/alarm_handler/proc/triggerAlarm(atom/origin, atom/source, duration = 0, severity = 1)
 	var/new_alarm
 	//Proper origin and source mandatory
-	if(!(origin && source))
+	if (!(origin && source))
 		return
 	origin = origin.get_alarm_origin()
 
 	new_alarm = 0
 	//see if there is already an alarm of this origin
 	var/datum/alarm/existing = alarms_assoc[origin]
-	if(existing)
+	if (existing)
 		existing.set_source_data(source, duration, severity)
 	else
 		existing = new/datum/alarm(origin, source, duration, severity)
@@ -32,7 +32,7 @@
 	alarms |= existing
 	alarms_assoc[origin] = existing
 	LAZYDISTINCTADD(alarms_by_z["[existing.alarm_z()]"], existing)
-	if(new_alarm)
+	if (new_alarm)
 		alarms = dd_sortedObjectList(alarms)
 		on_alarm_change(existing, ALARM_RAISED)
 
@@ -40,18 +40,18 @@
 
 /datum/alarm_handler/proc/clearAlarm(atom/origin, source)
 	//Proper origin and source mandatory
-	if(!(origin && source))
+	if (!(origin && source))
 		return
 	origin = origin.get_alarm_origin()
 
 	var/datum/alarm/existing = alarms_assoc[origin]
-	if(existing)
+	if (existing)
 		existing.clear(source)
 		return check_alarm_cleared(existing)
 
 // Returns alarms in connected z levels to z_level. If none is given, returns all.
 /datum/alarm_handler/proc/alarms(z_level)
-	if(z_level)
+	if (z_level)
 		. = list()
 		for(var/z in GetConnectedZlevels(z_level))
 			. += SANITIZE_LIST(alarms_by_z["[z]"])
@@ -83,19 +83,19 @@
 
 /datum/alarm_handler/proc/on_alarm_change(datum/alarm/alarm, was_raised)
 	for(var/obj/machinery/camera/C in alarm.cameras())
-		if(was_raised)
+		if (was_raised)
 			C.add_network(category)
 		else
 			C.remove_network(category)
 	notify_listeners(alarm, was_raised)
 
 /datum/alarm_handler/proc/get_alarm_severity_for_origin(atom/origin)
-	if(!origin)
+	if (!origin)
 		return
 
 	origin = origin.get_alarm_origin()
 	var/datum/alarm/existing = alarms_assoc[origin]
-	if(!existing)
+	if (!existing)
 		return
 
 	return existing.max_severity()

@@ -16,7 +16,7 @@
 	. = ..()
 
 /obj/item/mech_component/manipulators/show_missing_parts(mob/user)
-	if(!motivator)
+	if (!motivator)
 		to_chat(user, SPAN_WARNING("It is missing an actuator."))
 
 /obj/item/mech_component/manipulators/ready_to_install()
@@ -26,11 +26,11 @@
 	motivator = new(src)
 
 /obj/item/mech_component/manipulators/attackby(obj/item/thing, mob/user)
-	if(istype(thing,/obj/item/robot_parts/robot_component/actuator))
-		if(motivator)
+	if (istype(thing,/obj/item/robot_parts/robot_component/actuator))
+		if (motivator)
 			to_chat(user, SPAN_WARNING("\The [src] already has an actuator installed."))
 			return
-		if(install_component(thing, user)) motivator = thing
+		if (install_component(thing, user)) motivator = thing
 	else
 		return ..()
 
@@ -38,13 +38,13 @@
 	motivator = locate() in src
 
 /obj/item/mech_component/manipulators/get_damage_string()
-	if(!motivator || !motivator.is_functional())
+	if (!motivator || !motivator.is_functional())
 		return SPAN_DANGER("disabled")
 	return ..()
 
 /obj/item/mech_component/manipulators/return_diagnostics(mob/user)
 	..()
-	if(motivator)
+	if (motivator)
 		to_chat(user, SPAN_NOTICE(" Actuator Integrity: <b>[round((((motivator.max_dam - motivator.total_dam) / motivator.max_dam)) * 100)]%</b>"))
 	else
 		to_chat(user, SPAN_WARNING(" Actuator Missing or Non-functional."))
@@ -84,4 +84,3 @@
 	icon_state = "combat_arms"
 	action_delay = 10
 	power_use = 50
-

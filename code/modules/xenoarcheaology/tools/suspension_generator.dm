@@ -13,9 +13,9 @@
 	var/obj/effect/suspension_field/suspension_field
 
 /obj/machinery/suspension_gen/Process()
-	if(suspension_field)
+	if (suspension_field)
 		updateDialog()
-		if(!is_powered())
+		if (!is_powered())
 			deactivate()
 			return
 
@@ -24,13 +24,13 @@
 		for(var/mob/living/M in T)
 			M.weakened = max(M.weakened, 3)
 			victims++
-			if(prob(5))
+			if (prob(5))
 				to_chat(M, SPAN_WARNING("[pick("You feel tingly","You feel like floating","It is hard to speak","You can barely move")]."))
-		if(victims)
+		if (victims)
 			use_power_oneoff(active_power_usage * victims)
 
 		for(var/obj/item/I in T)
-			if(!length(suspension_field.contents))
+			if (!length(suspension_field.contents))
 				suspension_field.icon_state = "energynet"
 				suspension_field.overlays += "shield2"
 			I.forceMove(suspension_field)
@@ -39,12 +39,12 @@
 	user.set_machine(src)
 	var/dat = "<b>Multi-phase mobile suspension field generator MK II \"Steadfast\"</b><br>"
 	var/obj/item/cell/cell = get_cell()
-	if(cell)
+	if (cell)
 		var/colour = "red"
 		var/percent = cell.percent()
-		if(percent > 66)
+		if (percent > 66)
 			colour = "green"
-		else if(percent > 33)
+		else if (percent > 33)
 			colour = "orange"
 		dat += "<b>Energy cell</b>: [SPAN_COLOR("[colour]", "[percent]%")]<br>"
 	else
@@ -60,22 +60,22 @@
 	onclose(user, "suspension")
 
 /obj/machinery/suspension_gen/OnTopic(mob/user, href_list)
-	if(href_list["toggle_field"])
-		if(!suspension_field)
+	if (href_list["toggle_field"])
+		if (!suspension_field)
 			var/obj/item/cell/cell = get_cell()
-			if(cell.charge > 0)
-				if(anchored)
+			if (cell.charge > 0)
+				if (anchored)
 					activate()
 				else
 					to_chat(user, SPAN_WARNING("You are unable to activate [src] until it is properly secured on the ground."))
 		else
 			deactivate()
 		. = TOPIC_REFRESH
-	else if(href_list["close"])
+	else if (href_list["close"])
 		close_browser(user, "window=suspension")
 		return TOPIC_HANDLED
 
-	if(. == TOPIC_REFRESH)
+	if (. == TOPIC_REFRESH)
 		interact(user)
 
 /obj/machinery/suspension_gen/interface_interact(mob/user)
@@ -86,18 +86,18 @@
 	return !suspension_field && ..()
 
 /obj/machinery/suspension_gen/cannot_transition_to(state_path)
-	if(suspension_field)
+	if (suspension_field)
 		return SPAN_NOTICE("Turn \the [src] off first.")
 	return ..()
 
 /obj/machinery/suspension_gen/attackby(obj/item/W, mob/user)
-	if(component_attackby(W, user))
+	if (component_attackby(W, user))
 		return TRUE
-	else if(isWrench(W))
-		if(!suspension_field)
+	else if (isWrench(W))
+		if (!suspension_field)
 			anchored = !anchored
 			to_chat(user, SPAN_INFO("You wrench the stabilising bolts [anchored ? "into place" : "loose"]."))
-			if(anchored)
+			if (anchored)
 				desc = "Its tracks are securely held in place with securing bolts."
 				icon_state = "suspension_wrenched"
 			else
@@ -128,12 +128,12 @@
 		I.forceMove(suspension_field)
 		collected++
 
-	if(collected)
+	if (collected)
 		suspension_field.icon_state = "energynet"
 		suspension_field.overlays += "shield2"
 		src.visible_message(SPAN_NOTICE("[icon2html(suspension_field, viewers(get_turf(src)))] [suspension_field] gently absconds [collected > 1 ? "something" : "several things"]."))
 	else
-		if(istype(T,/turf/simulated/mineral) || istype(T,/turf/simulated/wall))
+		if (istype(T,/turf/simulated/mineral) || istype(T,/turf/simulated/wall))
 			suspension_field.icon_state = "shieldsparkles"
 		else
 			suspension_field.icon_state = "shield2"
@@ -165,7 +165,7 @@
 	set name = "Rotate suspension gen (counter-clockwise)"
 	set category = "Object"
 
-	if(anchored)
+	if (anchored)
 		to_chat(usr, SPAN_WARNING("You cannot rotate [src], it has been firmly fixed to the floor."))
 	else
 		set_dir(turn(dir, 90))
@@ -175,14 +175,14 @@
 	set name = "Rotate suspension gen (clockwise)"
 	set category = "Object"
 
-	if(anchored)
+	if (anchored)
 		to_chat(usr, SPAN_WARNING("You cannot rotate [src], it has been firmly fixed to the floor."))
 	else
 		set_dir(turn(dir, -90))
 
 /obj/machinery/suspension_gen/on_update_icon()
 	overlays.Cut()
-	if(panel_open)
+	if (panel_open)
 		overlays += "suspension_panel"
 	. = ..()
 

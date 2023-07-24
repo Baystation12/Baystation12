@@ -61,9 +61,9 @@
 	update_icon()
 
 /obj/machinery/biogenerator/on_update_icon()
-	if(state == BG_NO_BEAKER)
+	if (state == BG_NO_BEAKER)
 		icon_state = "biogen-empty"
-	else if(state == BG_READY || state == BG_COMPLETE)
+	else if (state == BG_READY || state == BG_COMPLETE)
 		icon_state = "biogen-stand"
 	else
 		icon_state = "biogen-work"
@@ -73,47 +73,47 @@
 	return !processing && ..()
 
 /obj/machinery/biogenerator/cannot_transition_to(state_path)
-	if(processing)
+	if (processing)
 		return SPAN_NOTICE("You must turn \the [src] off first.")
 	return ..()
 
 /obj/machinery/biogenerator/attackby(obj/item/O, mob/user)
-	if((. = component_attackby(O, user)))
+	if ((. = component_attackby(O, user)))
 		return
-	if(processing)
+	if (processing)
 		to_chat(user, SPAN_NOTICE("\The [src] is currently processing."))
-	if(istype(O, /obj/item/reagent_containers/glass))
-		if(beaker)
+	if (istype(O, /obj/item/reagent_containers/glass))
+		if (beaker)
 			to_chat(user, SPAN_NOTICE("The [src] is already loaded."))
 			return TRUE
-		else if(user.unEquip(O, src))
+		else if (user.unEquip(O, src))
 			beaker = O
 			state = BG_READY
 			updateUsrDialog()
 			return TRUE
 
-	if(ingredients >= capacity)
+	if (ingredients >= capacity)
 		to_chat(user, SPAN_NOTICE("\The [src] is already full! Activate it."))
-	else if(istype(O, /obj/item/storage/plants))
+	else if (istype(O, /obj/item/storage/plants))
 		var/obj/item/storage/plants/P = O
 		var/hadPlants = 0
 		for(var/obj/item/reagent_containers/food/snacks/grown/G in P.contents)
 			hadPlants = 1
 			P.remove_from_storage(G, src, 1) //No UI updates until we are all done.
 			ingredients++
-			if(ingredients >= capacity)
+			if (ingredients >= capacity)
 				to_chat(user, SPAN_NOTICE("You fill \the [src] to its capacity."))
 				break
 		P.finish_bulk_removal() //Now do the UI stuff once.
-		if(!hadPlants)
+		if (!hadPlants)
 			to_chat(user, SPAN_NOTICE("\The [P] has no produce inside."))
-		else if(ingredients < capacity)
+		else if (ingredients < capacity)
 			to_chat(user, SPAN_NOTICE("You empty \the [P] into \the [src]."))
 
 
-	else if(!istype(O, /obj/item/reagent_containers/food/snacks/grown))
+	else if (!istype(O, /obj/item/reagent_containers/food/snacks/grown))
 		to_chat(user, SPAN_NOTICE("You cannot put this in \the [src]."))
-	else if(user.unEquip(O, src))
+	else if (user.unEquip(O, src))
 		ingredients++
 		to_chat(user, SPAN_NOTICE("You put \the [O] in \the [src]"))
 	update_icon()
@@ -159,15 +159,15 @@
 
 /obj/machinery/biogenerator/OnTopic(user, href_list)
 	switch (href_list["action"])
-		if("activate")
+		if ("activate")
 			activate()
-		if("detach")
-			if(beaker)
+		if ("detach")
+			if (beaker)
 				beaker.dropInto(src.loc)
 				beaker = null
 				state = BG_NO_BEAKER
 				update_icon()
-		if("create")
+		if ("create")
 			if (state == BG_PROCESSING)
 				return TOPIC_REFRESH
 			var/type = href_list["type"]
@@ -178,7 +178,7 @@
 			if (product_index < 1 || product_index > length(sub_products))
 				return TOPIC_REFRESH
 			create_product(type, sub_products[product_index])
-		if("return")
+		if ("return")
 			state = BG_READY
 	return TOPIC_REFRESH
 
@@ -196,11 +196,11 @@
 	for(var/obj/item/reagent_containers/food/snacks/grown/I in contents)
 		S += 5
 		ingredients--
-		if(I.reagents.get_reagent_amount(/datum/reagent/nutriment) < 0.1)
+		if (I.reagents.get_reagent_amount(/datum/reagent/nutriment) < 0.1)
 			points += 1
 		else points += I.reagents.get_reagent_amount(/datum/reagent/nutriment) * 10 * eat_eff
 		qdel(I)
-	if(S)
+	if (S)
 		state = BG_PROCESSING
 		SSnano.update_uis(src)
 		update_icon()

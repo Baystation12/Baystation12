@@ -40,9 +40,9 @@
 
 /mob/living/simple_animal/hostile/human/pirate/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
-	if(corpse)
+	if (corpse)
 		new corpse (src.loc)
-	if(weapon1)
+	if (weapon1)
 		new weapon1 (src.loc)
 	qdel(src)
 	return

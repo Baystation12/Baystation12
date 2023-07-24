@@ -3,13 +3,13 @@
 	changer.ui_interact(user, state = state)
 
 /mob/living/carbon/human/proc/change_species(new_species)
-	if(!new_species)
+	if (!new_species)
 		return
 
-	if(species == new_species)
+	if (species == new_species)
 		return
 
-	if(!(new_species in all_species))
+	if (!(new_species in all_species))
 		return
 
 	set_species(new_species)
@@ -21,7 +21,7 @@
 	return 1
 
 /mob/living/carbon/human/proc/change_gender(gender)
-	if(src.gender == gender)
+	if (src.gender == gender)
 		return
 
 	src.gender = gender
@@ -34,7 +34,7 @@
 	change_gender(pick(species.genders))
 
 /mob/living/carbon/human/proc/change_pronouns(pronouns)
-	if(src.pronouns == pronouns)
+	if (src.pronouns == pronouns)
 		return
 	src.pronouns = pronouns
 	return 1
@@ -43,13 +43,13 @@
 	change_pronouns(pick(species.pronouns))
 
 /mob/living/carbon/human/proc/change_hair(new_head_hair_style)
-	if(!new_head_hair_style)
+	if (!new_head_hair_style)
 		return
 
-	if(head_hair_style == new_head_hair_style)
+	if (head_hair_style == new_head_hair_style)
 		return
 
-	if(!(new_head_hair_style in GLOB.hair_styles_list))
+	if (!(new_head_hair_style in GLOB.hair_styles_list))
 		return
 
 	head_hair_style = new_head_hair_style
@@ -58,13 +58,13 @@
 	return 1
 
 /mob/living/carbon/human/proc/change_facial_hair(new_facial_hair_style)
-	if(!new_facial_hair_style)
+	if (!new_facial_hair_style)
 		return
 
-	if(facial_hair_style == new_facial_hair_style)
+	if (facial_hair_style == new_facial_hair_style)
 		return
 
-	if(!(new_facial_hair_style in GLOB.facial_hair_styles_list))
+	if (!(new_facial_hair_style in GLOB.facial_hair_styles_list))
 		return
 
 	facial_hair_style = new_facial_hair_style
@@ -76,13 +76,13 @@
 	var/list/valid_hairstyles = generate_valid_hairstyles()
 	var/list/valid_facial_hairstyles = generate_valid_facial_hairstyles()
 
-	if(length(valid_hairstyles))
+	if (length(valid_hairstyles))
 		head_hair_style = pick(valid_hairstyles)
 	else
 		//this shouldn't happen
 		head_hair_style = "Bald"
 
-	if(length(valid_facial_hairstyles))
+	if (length(valid_facial_hairstyles))
 		facial_hair_style = pick(valid_facial_hairstyles)
 	else
 		//this shouldn't happen
@@ -129,7 +129,7 @@
 	return 1
 
 /mob/living/carbon/human/proc/change_skin_tone(new_skin_tone)
-	if(skin_tone == new_skin_tone || !(species.appearance_flags & SPECIES_APPEARANCE_HAS_A_SKIN_TONE))
+	if (skin_tone == new_skin_tone || !(species.appearance_flags & SPECIES_APPEARANCE_HAS_A_SKIN_TONE))
 		return
 	skin_tone = new_skin_tone
 	force_update_limbs()
@@ -186,10 +186,10 @@
 	var/list/hair_styles = species.get_hair_styles()
 	for(var/hair_style in hair_styles)
 		var/datum/sprite_accessory/S = hair_styles[hair_style]
-		if(check_gender)
-			if(gender == MALE && S.gender == FEMALE)
+		if (check_gender)
+			if (gender == MALE && S.gender == FEMALE)
 				continue
-			if(gender == FEMALE && S.gender == MALE)
+			if (gender == FEMALE && S.gender == MALE)
 				continue
 		.[hair_style] = S
 

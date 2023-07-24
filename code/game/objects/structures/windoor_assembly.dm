@@ -32,11 +32,11 @@
 
 /obj/structure/windoor_assembly/New(Loc, start_dir=NORTH, constructed=0)
 	..()
-	if(constructed)
+	if (constructed)
 		state = WINDOOR_STATE_FRAME
 		anchored = FALSE
 	switch(start_dir)
-		if(NORTH, SOUTH, EAST, WEST)
+		if (NORTH, SOUTH, EAST, WEST)
 			set_dir(start_dir)
 		else //If the user is facing northeast. northwest, southeast, southwest or north, default to north
 			set_dir(NORTH)
@@ -52,18 +52,18 @@
 	icon_state = "[facing]_[secure]windoor_assembly[state]"
 
 /obj/structure/windoor_assembly/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
+	if (istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return 1
-	if(get_dir(loc, target) == dir) //Make sure looking at appropriate border
-		if(air_group) return 0
+	if (get_dir(loc, target) == dir) //Make sure looking at appropriate border
+		if (air_group) return 0
 		return !density
 	else
 		return 1
 
 /obj/structure/windoor_assembly/CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
-	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
+	if (istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return 1
-	if(get_dir(loc, target) == dir)
+	if (get_dir(loc, target) == dir)
 		return !density
 	else
 		return 1
@@ -329,12 +329,12 @@
 	if (src.anchored)
 		to_chat(usr, "It is fastened to the floor; therefore, you can't rotate it!")
 		return 0
-	if(src.state != WINDOOR_STATE_FRAME)
+	if (src.state != WINDOOR_STATE_FRAME)
 		update_nearby_tiles(need_rebuild=1) //Compel updates before
 
 	src.set_dir(turn(src.dir, 270))
 
-	if(src.state != WINDOOR_STATE_FRAME)
+	if (src.state != WINDOOR_STATE_FRAME)
 		update_nearby_tiles(need_rebuild=1)
 
 	update_icon()
@@ -346,7 +346,7 @@
 	set category = "Object"
 	set src in oview(1)
 
-	if(src.facing == "l")
+	if (src.facing == "l")
 		to_chat(usr, "The windoor will now slide to the right.")
 		src.facing = "r"
 	else

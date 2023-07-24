@@ -24,30 +24,30 @@
 	return
 
 /obj/machinery/keycard_auth/attackby(obj/item/W as obj, mob/user as mob)
-	if(inoperable())
+	if (inoperable())
 		to_chat(user, "This device is not powered.")
 		return
-	if(istype(W,/obj/item/card/id))
+	if (istype(W,/obj/item/card/id))
 		var/obj/item/card/id/ID = W
-		if(access_keycard_auth in ID.access)
-			if(active == 1)
+		if (access_keycard_auth in ID.access)
+			if (active == 1)
 				//This is not the device that made the initial request. It is the device confirming the request.
-				if(event_source && event_source.event_triggered_by != usr)
+				if (event_source && event_source.event_triggered_by != usr)
 					event_source.confirmed = 1
 					event_source.event_confirmed_by = usr
 				else
 					to_chat(user, SPAN_WARNING("Unable to confirm, DNA matches that of origin."))
-			else if(screen == 2)
+			else if (screen == 2)
 				event_triggered_by = usr
 				broadcast_request() //This is the device making the initial event request. It needs to broadcast to other devices
 
 //icon_state gets set everwhere besides here, that needs to be fixed sometime
 /obj/machinery/keycard_auth/on_update_icon()
-	if(!is_powered())
+	if (!is_powered())
 		icon_state = "auth_off"
 
 /obj/machinery/keycard_auth/interface_interact(mob/user)
-	if(busy)
+	if (busy)
 		to_chat(user, "This device is busy.")
 		return TRUE
 	interact(user)
@@ -61,19 +61,19 @@
 	dat += "This device is used to trigger some high security events. It requires the simultaneous swipe of two high-level ID cards."
 	dat += "<br><hr><br>"
 
-	if(screen == 1)
+	if (screen == 1)
 		dat += "Select an event to trigger:<ul>"
 
 		var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
-		if(security_state.current_security_level == security_state.severe_security_level)
+		if (security_state.current_security_level == security_state.severe_security_level)
 			dat += "<li>Cannot modify the alert level at this time: [security_state.severe_security_level.name] engaged.</li>"
 		else
-			if(security_state.current_security_level == security_state.high_security_level)
+			if (security_state.current_security_level == security_state.high_security_level)
 				dat += "<li><A href='?src=\ref[src];triggerevent=Revert alert'>Disengage [security_state.high_security_level.name]</A></li>"
 			else
 				dat += "<li><A href='?src=\ref[src];triggerevent=Red alert'>Engage [security_state.high_security_level.name]</A></li>"
 
-		if(!config.ert_admin_call_only)
+		if (!config.ert_admin_call_only)
 			dat += "<li><A href='?src=\ref[src];triggerevent=Emergency Response Team'>Emergency Response Team</A></li>"
 
 		dat += "<li><A href='?src=\ref[src];triggerevent=Grant Emergency Maintenance Access'>Grant Emergency Maintenance Access</A></li>"
@@ -81,31 +81,31 @@
 		dat += "<li><A href='?src=\ref[src];triggerevent=Grant Nuclear Authorization Code'>Grant Nuclear Authorization Code</A></li>"
 		dat += "</ul>"
 		show_browser(user, dat, "window=keycard_auth;size=500x250")
-	if(screen == 2)
+	if (screen == 2)
 		dat += "Please swipe your card to authorize the following event: <b>[event]</b>"
 		dat += "<p><A href='?src=\ref[src];reset=1'>Back</A>"
 		show_browser(user, dat, "window=keycard_auth;size=500x250")
 	return
 
 /obj/machinery/keycard_auth/CanUseTopic(mob/user, href_list)
-	if(busy)
+	if (busy)
 		to_chat(user, "This device is busy.")
 		return STATUS_CLOSE
-	if(!user.IsAdvancedToolUser())
+	if (!user.IsAdvancedToolUser())
 		to_chat(user, FEEDBACK_YOU_LACK_DEXTERITY)
 		return min(..(), STATUS_UPDATE)
 	return ..()
 
 /obj/machinery/keycard_auth/OnTopic(user, href_list)
-	if(href_list["triggerevent"])
+	if (href_list["triggerevent"])
 		event = href_list["triggerevent"]
 		screen = 2
 		. = TOPIC_REFRESH
-	if(href_list["reset"])
+	if (href_list["reset"])
 		reset()
 		. = TOPIC_REFRESH
 
-	if(. == TOPIC_REFRESH)
+	if (. == TOPIC_REFRESH)
 		attack_hand(user)
 
 /obj/machinery/keycard_auth/proc/reset()
@@ -121,20 +121,20 @@
 /obj/machinery/keycard_auth/proc/broadcast_request()
 	icon_state = "auth_on"
 	for(var/obj/machinery/keycard_auth/KA in world)
-		if(KA == src) continue
+		if (KA == src) continue
 		KA.reset()
 		spawn()
 			KA.receive_request(src)
 
 	sleep(confirm_delay)
-	if(confirmed)
+	if (confirmed)
 		confirmed = 0
 		trigger_event(event)
 		log_and_message_admins("triggered and [key_name(event_confirmed_by)] confirmed event [event]", event_triggered_by || usr)
 	reset()
 
 /obj/machinery/keycard_auth/proc/receive_request(obj/machinery/keycard_auth/source)
-	if(inoperable())
+	if (inoperable())
 		return
 	event_source = source
 	busy = 1
@@ -150,30 +150,30 @@
 
 /obj/machinery/keycard_auth/proc/trigger_event()
 	switch(event)
-		if("Red alert")
+		if ("Red alert")
 			var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 			security_state.stored_security_level = security_state.current_security_level
 			security_state.set_security_level(security_state.high_security_level)
-		if("Revert alert")
+		if ("Revert alert")
 			var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 			security_state.set_security_level(security_state.stored_security_level)
-		if("Grant Emergency Maintenance Access")
+		if ("Grant Emergency Maintenance Access")
 			GLOB.using_map.make_maint_all_access()
-		if("Revoke Emergency Maintenance Access")
+		if ("Revoke Emergency Maintenance Access")
 			GLOB.using_map.revoke_maint_all_access()
-		if("Emergency Response Team")
-			if(is_ert_blocked())
+		if ("Emergency Response Team")
+			if (is_ert_blocked())
 				to_chat(usr, SPAN_WARNING("All emergency response teams are dispatched and can not be called at this time."))
 				return
 
 			trigger_armed_response_team(1)
-		if("Grant Nuclear Authorization Code")
+		if ("Grant Nuclear Authorization Code")
 			var/obj/machinery/nuclearbomb/nuke = locate(/obj/machinery/nuclearbomb/station) in world
-			if(nuke)
+			if (nuke)
 				to_chat(usr, "The nuclear authorization code is [nuke.r_code]")
 			else
 				to_chat(usr, "No self destruct terminal found.")
 
 /obj/machinery/keycard_auth/proc/is_ert_blocked()
-	if(config.ert_admin_call_only) return 1
+	if (config.ert_admin_call_only) return 1
 	return SSticker.mode && SSticker.mode.ert_disabled

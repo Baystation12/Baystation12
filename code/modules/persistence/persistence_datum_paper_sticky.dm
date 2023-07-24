@@ -5,7 +5,7 @@
 
 /datum/persistent/paper/sticky/CreateEntryInstance(turf/creating, list/tokens)
 	var/atom/paper = ..()
-	if(paper)
+	if (paper)
 		paper.pixel_x = tokens["offset_x"]
 		paper.pixel_y = tokens["offset_y"]
 		paper.color =   tokens["color"]

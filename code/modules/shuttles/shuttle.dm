@@ -31,35 +31,35 @@
 
 /datum/shuttle/New(_name, obj/effect/shuttle_landmark/initial_location)
 	..()
-	if(_name)
+	if (_name)
 		src.name = _name
 
 	var/list/areas = list()
-	if(!islist(shuttle_area))
+	if (!islist(shuttle_area))
 		shuttle_area = list(shuttle_area)
 	for(var/T in shuttle_area)
 		var/area/A = locate(T)
-		if(!istype(A))
+		if (!istype(A))
 			CRASH("Shuttle \"[name]\" couldn't locate area [T].")
 		areas += A
 	shuttle_area = areas
 
-	if(initial_location)
+	if (initial_location)
 		current_location = initial_location
 	else
 		current_location = SSshuttle.get_landmark(current_location)
-	if(!istype(current_location))
+	if (!istype(current_location))
 		CRASH("Shuttle \"[name]\" could not find its starting location.")
 
-	if(src.name in SSshuttle.shuttles)
+	if (src.name in SSshuttle.shuttles)
 		CRASH("A shuttle with the name '[name]' is already defined.")
 	SSshuttle.shuttles[src.name] = src
-	if(logging_home_tag)
+	if (logging_home_tag)
 		new /datum/shuttle_log(src)
-	if(flags & SHUTTLE_FLAGS_PROCESS)
+	if (flags & SHUTTLE_FLAGS_PROCESS)
 		SSshuttle.process_shuttles += src
-	if(flags & SHUTTLE_FLAGS_SUPPLY)
-		if(SSsupply.shuttle)
+	if (flags & SHUTTLE_FLAGS_SUPPLY)
+		if (SSsupply.shuttle)
 			CRASH("A supply shuttle is already defined.")
 		SSsupply.shuttle = src
 
@@ -69,24 +69,24 @@
 	SSshuttle.shuttles -= src.name
 	SSshuttle.process_shuttles -= src
 	SSshuttle.shuttle_logs -= src
-	if(SSsupply.shuttle == src)
+	if (SSsupply.shuttle == src)
 		SSsupply.shuttle = null
 
 	. = ..()
 
 /datum/shuttle/proc/short_jump(obj/effect/shuttle_landmark/destination)
-	if(moving_status != SHUTTLE_IDLE) return
+	if (moving_status != SHUTTLE_IDLE) return
 
 	moving_status = SHUTTLE_WARMUP
-	if(sound_takeoff)
+	if (sound_takeoff)
 		playsound(current_location, sound_takeoff, 100, 20, 0.2)
 	spawn(warmup_time*10)
 		if (moving_status == SHUTTLE_IDLE)
 			return //someone cancelled the launch
 
-		if(!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
+		if (!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
 			var/datum/shuttle/autodock/S = src
-			if(istype(S))
+			if (istype(S))
 				S.cancel_launch(null)
 			return
 
@@ -95,12 +95,12 @@
 		moving_status = SHUTTLE_IDLE
 
 /datum/shuttle/proc/long_jump(obj/effect/shuttle_landmark/destination, obj/effect/shuttle_landmark/interim, travel_time)
-	if(moving_status != SHUTTLE_IDLE) return
+	if (moving_status != SHUTTLE_IDLE) return
 
 	var/obj/effect/shuttle_landmark/start_location = current_location
 
 	moving_status = SHUTTLE_WARMUP
-	if(sound_takeoff)
+	if (sound_takeoff)
 		playsound(current_location, sound_takeoff, 100, 20, 0.2)
 		if (!istype(start_location.base_area, /area/space))
 			var/area/A = get_area(start_location)
@@ -110,21 +110,21 @@
 					to_chat(M, SPAN_NOTICE("The rumble of engines are heard as a shuttle lifts off."))
 
 	spawn(warmup_time*10)
-		if(moving_status == SHUTTLE_IDLE)
+		if (moving_status == SHUTTLE_IDLE)
 			return	//someone cancelled the launch
 
-		if(!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
+		if (!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
 			var/datum/shuttle/autodock/S = src
-			if(istype(S))
+			if (istype(S))
 				S.cancel_launch(null)
 			return
 
 		arrive_time = world.time + travel_time*10
 		moving_status = SHUTTLE_INTRANSIT
-		if(attempt_move(interim))
+		if (attempt_move(interim))
 			var/fwooshed = 0
 			while (world.time < arrive_time)
-				if(!fwooshed && (arrive_time - world.time) < 100)
+				if (!fwooshed && (arrive_time - world.time) < 100)
 					fwooshed = 1
 					playsound(destination, sound_landing, 100, 0, 7)
 					if (!istype(destination.base_area, /area/space))
@@ -135,7 +135,7 @@
 								to_chat(M, SPAN_NOTICE("The rumble of a shuttle's engines fill the area as a ship manuevers in for a landing."))
 
 				sleep(5)
-			if(!attempt_move(destination))
+			if (!attempt_move(destination))
 				attempt_move(start_location) //try to go back to where we started. If that fails, I guess we're stuck in the interim location
 
 		moving_status = SHUTTLE_IDLE
@@ -149,12 +149,12 @@
 *****************/
 
 /datum/shuttle/proc/attempt_move(obj/effect/shuttle_landmark/destination)
-	if(current_location == destination)
+	if (current_location == destination)
 		return FALSE
 
-	if(!destination.is_valid(src))
+	if (!destination.is_valid(src))
 		return FALSE
-	if(current_location.cannot_depart(src))
+	if (current_location.cannot_depart(src))
 		return FALSE
 	testing("[src] moving to [destination]. Areas are [english_list(shuttle_area)]")
 	var/list/translation = list()
@@ -186,35 +186,35 @@
 //	log_debug("move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination].")
 //	log_degug("area_coming_from: [origin]")
 //	log_debug("destination: [destination]")
-	if((flags & SHUTTLE_FLAGS_ZERO_G))
+	if ((flags & SHUTTLE_FLAGS_ZERO_G))
 		var/new_grav = 1
-		if(destination.flags & SLANDMARK_FLAG_ZERO_G)
+		if (destination.flags & SLANDMARK_FLAG_ZERO_G)
 			var/area/new_area = get_area(destination)
 			new_grav = new_area.has_gravity
 		for(var/area/our_area in shuttle_area)
-			if(our_area.has_gravity != new_grav)
+			if (our_area.has_gravity != new_grav)
 				our_area.gravitychange(new_grav)
 
 	for(var/turf/src_turf in turf_translation)
 		var/turf/dst_turf = turf_translation[src_turf]
-		if(src_turf.is_solid_structure()) //in case someone put a hole in the shuttle and you were lucky enough to be under it
+		if (src_turf.is_solid_structure()) //in case someone put a hole in the shuttle and you were lucky enough to be under it
 			for(var/atom/movable/AM in dst_turf)
-				if(!AM.simulated)
+				if (!AM.simulated)
 					continue
 				AM.shuttle_land_on()
 	var/list/powernets = list()
 	for(var/area/A in shuttle_area)
 		// if there was a zlevel above our origin, erase our ceiling now we're leaving
-		if(HasAbove(current_location.z))
+		if (HasAbove(current_location.z))
 			for(var/turf/TO in A.contents)
 				var/turf/TA = GetAbove(TO)
-				if(istype(TA, ceiling_type))
+				if (istype(TA, ceiling_type))
 					TA.ChangeTurf(get_base_turf_by_area(TA), 1, 1)
-		if(knockdown)
+		if (knockdown)
 			for(var/mob/M in A)
 				spawn(0)
-					if(istype(M, /mob/living/carbon))
-						if(M.buckled)
+					if (istype(M, /mob/living/carbon))
+						if (M.buckled)
 							to_chat(M, SPAN_WARNING("Sudden acceleration presses you into your chair!"))
 							shake_camera(M, 3, 1)
 						else
@@ -225,7 +225,7 @@
 
 		for(var/obj/structure/cable/C in A)
 			powernets |= C.powernet
-	if(logging_home_tag)
+	if (logging_home_tag)
 		var/datum/shuttle_log/s_log = SSshuttle.shuttle_logs[src]
 		s_log.handle_move(current_location, destination)
 
@@ -233,12 +233,12 @@
 	current_location = destination
 
 	// if there's a zlevel above our destination, paint in a ceiling on it so we retain our air
-	if(HasAbove(current_location.z))
+	if (HasAbove(current_location.z))
 		for(var/area/A in shuttle_area)
 			for(var/turf/TD in A.contents)
 				var/turf/TA = GetAbove(TD)
-				if(istype(TA, get_base_turf_by_area(TA)) || istype(TA, /turf/simulated/open))
-					if(get_area(TA) in shuttle_area)
+				if (istype(TA, get_base_turf_by_area(TA)) || istype(TA, /turf/simulated/open))
+					if (get_area(TA) in shuttle_area)
 						continue
 					TA.ChangeTurf(ceiling_type, TRUE, TRUE, TRUE)
 
@@ -248,15 +248,15 @@
 		cables |= P.cables
 		qdel(P)
 	for(var/obj/structure/cable/C in cables)
-		if(!C.powernet)
+		if (!C.powernet)
 			var/datum/powernet/NewPN = new()
 			NewPN.add_cable(C)
 			propagate_network(C,C.powernet)
 
-	if(mothershuttle)
+	if (mothershuttle)
 		var/datum/shuttle/mothership = SSshuttle.shuttles[mothershuttle]
-		if(mothership)
-			if(current_location.landmark_tag == motherdock)
+		if (mothership)
+			if (current_location.landmark_tag == motherdock)
 				mothership.shuttle_area |= shuttle_area
 			else
 				mothership.shuttle_area -= shuttle_area
@@ -276,7 +276,7 @@
 	. = list()
 	for(var/shuttle_name in SSshuttle.shuttles)
 		var/datum/shuttle/shuttle = SSshuttle.shuttles[shuttle_name]
-		if(shuttle.mothershuttle == name)
+		if (shuttle.mothershuttle == name)
 			. += shuttle
 
 //Returns those areas that are not actually child shuttles.
@@ -286,11 +286,11 @@
 		. -= child.shuttle_area
 
 /datum/shuttle/autodock/proc/get_location_name()
-	if(moving_status == SHUTTLE_INTRANSIT)
+	if (moving_status == SHUTTLE_INTRANSIT)
 		return "In transit"
 	return current_location.name
 
 /datum/shuttle/autodock/proc/get_destination_name()
-	if(!next_location)
+	if (!next_location)
 		return "None"
 	return next_location.name

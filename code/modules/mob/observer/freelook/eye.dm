@@ -30,12 +30,12 @@
 	. = ..()
 
 /mob/observer/eye/Move(n, direct)
-	if(owner == src)
+	if (owner == src)
 		return EyeMove(direct)
 	return 0
 
 /mob/observer/eye/facedir(ndir)
-	if(!canface())
+	if (!canface())
 		return 0
 	set_dir(ndir)
 	return 1
@@ -54,22 +54,22 @@
 	return TRUE
 
 /mob/observer/eye/proc/possess(mob/user)
-	if(owner && owner != user)
+	if (owner && owner != user)
 		return
-	if(owner && owner.eyeobj != src)
+	if (owner && owner.eyeobj != src)
 		return
 	owner = user
 	owner.eyeobj = src
 	SetName("[owner.name] ([name_sufix])") // Update its name
-	if(owner.client)
+	if (owner.client)
 		owner.client.eye = src
 	setLoc(owner)
 	visualnet.update_eye_chunks(src, TRUE)
 
 /mob/observer/eye/proc/release(mob/user)
-	if(owner != user || !user)
+	if (owner != user || !user)
 		return
-	if(owner.eyeobj != src)
+	if (owner.eyeobj != src)
 		return
 	visualnet.remove_eye(src)
 	owner.eyeobj = null
@@ -79,26 +79,26 @@
 // Use this when setting the eye's location.
 // It will also stream the chunk that the new loc is in.
 /mob/observer/eye/proc/setLoc(T)
-	if(!owner)
+	if (!owner)
 		return FALSE
 
 	T = get_turf(T)
-	if(!T || T == loc)
+	if (!T || T == loc)
 		return FALSE
 
 	forceMove(T)
 
-	if(owner.client)
+	if (owner.client)
 		owner.client.eye = src
-	if(owner_follows_eye)
+	if (owner_follows_eye)
 		owner.forceMove(loc)
 
 	visualnet.update_eye_chunks(src)
 	return TRUE
 
 /mob/observer/eye/proc/getLoc()
-	if(owner)
-		if(!isturf(owner.loc) || !owner.client)
+	if (owner)
+		if (!isturf(owner.loc) || !owner.client)
 			return
 		return loc
 
@@ -106,7 +106,7 @@
 	var/mob/observer/eye/eyeobj
 
 /mob/proc/EyeMove(n, direct)
-	if(!eyeobj)
+	if (!eyeobj)
 		return
 
 	return eyeobj.EyeMove(n, direct)
@@ -115,21 +115,21 @@
 	var/initial = initial(sprint)
 	var/max_sprint = 50
 
-	if(cooldown && cooldown < world.time)
+	if (cooldown && cooldown < world.time)
 		sprint = initial
 
 	for(var/i = 0; i < max(sprint, initial); i += 20)
 		var/turf/step = get_turf(get_step(src, direct))
-		if(step)
+		if (step)
 			//We do this specifically as they have special conditions
-			if(direct == UP && !HasAbove(z))
+			if (direct == UP && !HasAbove(z))
 				return FALSE
-			if(direct == DOWN && !HasBelow(z))
+			if (direct == DOWN && !HasBelow(z))
 				return FALSE
 			setLoc(step)
 
 	cooldown = world.time + 5
-	if(acceleration)
+	if (acceleration)
 		sprint = min(sprint + 0.5, max_sprint)
 	else
 		sprint = initial

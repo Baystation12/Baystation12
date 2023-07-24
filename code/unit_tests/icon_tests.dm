@@ -15,21 +15,21 @@
 
 	var/list/original_valid_states = valid_states.Copy()
 	for(var/icon_state in valid_states)
-		if(icon_state in excepted_icon_states_)
+		if (icon_state in excepted_icon_states_)
 			continue
-		if(text_starts_with(icon_state, "eyes-"))
+		if (text_starts_with(icon_state, "eyes-"))
 			continue
-		if(findtext(icon_state, "openpanel"))
+		if (findtext(icon_state, "openpanel"))
 			continue
 		var/eye_icon_state = "eyes-[icon_state]"
-		if(!(eye_icon_state in valid_states))
+		if (!(eye_icon_state in valid_states))
 			log_unit_test("Eye icon state [eye_icon_state] is missing.")
 			missing_states++
 
-	if(missing_states)
+	if (missing_states)
 		fail("[missing_states] eye icon state\s [missing_states == 1 ? "is" : "are"] missing.")
 		var/list/difference = uniquemergelist(original_valid_states, valid_states)
-		if(length(difference))
+		if (length(difference))
 			log_unit_test("[ascii_yellow]---  DEBUG  --- ICON STATES AT START: " + jointext(original_valid_states, ",") + "[ascii_reset]")
 			log_unit_test("[ascii_yellow]---  DEBUG  --- ICON STATES AT END: "   + jointext(valid_states, ",") + "[ascii_reset]")
 			log_unit_test("[ascii_yellow]---  DEBUG  --- UNIQUE TO EACH LIST: " + jointext(difference, ",") + "[ascii_reset]")
@@ -57,23 +57,23 @@
 			var/datum/sprite_accessory/sat = sprite_accessory_type
 
 			var/sat_name = initial(sat.name)
-			if(sat_name)
+			if (sat_name)
 				group_by(sprite_accessories_by_name, sat_name, sat)
 			else
 				failed = TRUE
 				log_bad("[sat] - Did not have a name set.")
 
 			var/sat_icon = initial(sat.icon)
-			if(sat_icon)
+			if (sat_icon)
 				var/sat_icon_states = icon_state_cache[sat_icon]
-				if(!sat_icon_states)
+				if (!sat_icon_states)
 					sat_icon_states = icon_states(sat_icon)
 					icon_state_cache[sat_icon] = sat_icon_states
 
 				var/sat_icon_state = initial(sat.icon_state)
-				if(sat_icon_state)
+				if (sat_icon_state)
 					sat_icon_state = "[sat_icon_state]_s"
-					if(!(sat_icon_state in sat_icon_states))
+					if (!(sat_icon_state in sat_icon_states))
 						failed = TRUE
 						log_bad("[sat] - \"[sat_icon_state]\" did not exist in '[sat_icon]'.")
 				else
@@ -83,13 +83,13 @@
 				failed = TRUE
 				log_bad("[sat] - Did not have an icon set.")
 
-			if(failed)
+			if (failed)
 				failed_sprite_accessories += sat
 
-		if(number_of_issues(sprite_accessories_by_name, "Sprite Accessory Names"))
+		if (number_of_issues(sprite_accessories_by_name, "Sprite Accessory Names"))
 			duplicates_found = TRUE
 
-	if(length(failed_sprite_accessories) || duplicates_found)
+	if (length(failed_sprite_accessories) || duplicates_found)
 		fail("One or more sprite accessory issues detected.")
 	else
 		pass("All sprite accessories were valid.")
@@ -105,10 +105,10 @@
 
 	for(var/poster_type in subtypesof(/singleton/poster))
 		var/singleton/poster/P = GET_SINGLETON(poster_type)
-		if(!(P.icon_state in contraband_icons))
+		if (!(P.icon_state in contraband_icons))
 			invalid_posters += poster_type
 
-	if(length(invalid_posters))
+	if (length(invalid_posters))
 		fail("/singleton/poster with missing icon states: [english_list(invalid_posters)]")
 	else
 		pass("All /singleton/poster subtypes have valid icon states.")
@@ -128,15 +128,15 @@
 			var/list/type_setup = item_modifier.type_setups[type_setup_type]
 			var/list/icon_states = icon_states_by_type[type_setup_type]
 
-			if(!icon_states)
+			if (!icon_states)
 				var/obj/item/I = type_setup_type
 				icon_states = icon_states(initial(I.icon))
 				LAZYSET(icon_states_by_type, type_setup_type, icon_states)
 
-			if(!(type_setup["icon_state"] in icon_states))
+			if (!(type_setup["icon_state"] in icon_states))
 				bad_modifiers += type_setup_type
 
-	if(length(bad_modifiers))
+	if (length(bad_modifiers))
 		fail("Item modifiers with missing icon states: [english_list(bad_modifiers)]")
 	else
 		pass("All item modifiers have valid icon states.")
@@ -154,14 +154,14 @@
 		var/icon_state = initial(R.icon_state) || ""
 
 		var/icon_states = states_per_icon[icon]
-		if(!icon_states)
+		if (!icon_states)
 			icon_states = icon_states(icon)
 			states_per_icon[icon] = icon_states
 
-		if(!(icon_state in icon_states))
+		if (!(icon_state in icon_states))
 			invalid_spawners += random_type
 
-	if(length(invalid_spawners))
+	if (length(invalid_spawners))
 		fail("[length(invalid_spawners)] /obj/random type\s with missing icon states: [json_encode(invalid_spawners)]")
 	else
 		pass("All /obj/random types have valid icon states.")

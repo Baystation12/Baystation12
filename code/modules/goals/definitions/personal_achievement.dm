@@ -5,7 +5,7 @@
 	var/success = FALSE
 
 /datum/goal/achievement/update_progress(progress)
-	if(!success && !failable)
+	if (!success && !failable)
 		success = progress
 		on_completion()
 	else if (success && failable)

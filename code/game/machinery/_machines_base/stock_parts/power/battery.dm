@@ -19,23 +19,23 @@
 	start_processing(machine)
 
 /obj/item/stock_parts/power/battery/on_uninstall(obj/machinery/machine)
-	if(status & PART_STAT_ACTIVE)
+	if (status & PART_STAT_ACTIVE)
 		machine.update_power_channel(cached_channel)
 		unset_status(machine, PART_STAT_ACTIVE)
-	if(cell && (part_flags & PART_FLAG_QDEL))
+	if (cell && (part_flags & PART_FLAG_QDEL))
 		cell.dropInto(loc)
 		remove_cell()
 	..()
 
 // None of these helpers actually change the cell's loc. They only manage internal references and state.
 /obj/item/stock_parts/power/battery/proc/add_cell(obj/machinery/machine, obj/item/cell/new_cell)
-	if(cell)
+	if (cell)
 		return
 	cell = new_cell
 	GLOB.destroyed_event.register(cell, src, .proc/remove_cell)
-	if(!machine)
+	if (!machine)
 		machine = loc
-	if(istype(machine))
+	if (istype(machine))
 		machine.power_change()
 		machine.queue_icon_update()
 	set_status(machine, PART_STAT_CONNECTED)
@@ -43,19 +43,19 @@
 	return cell
 
 /obj/item/stock_parts/power/battery/proc/remove_cell()
-	if(cell)
+	if (cell)
 		GLOB.destroyed_event.unregister(cell, src)
 		. = cell
 		cell = null
 		var/obj/machinery/machine = loc
-		if(istype(machine))
+		if (istype(machine))
 			machine.power_change()
 			machine.queue_icon_update()
 		update_icon()
 		unset_status(machine, PART_STAT_CONNECTED)
 
 /obj/item/stock_parts/power/battery/proc/extract_cell(mob/user)
-	if(!cell)
+	if (!cell)
 		return
 	cell.add_fingerprint(user)
 	cell.update_icon()
@@ -64,42 +64,42 @@
 							SPAN_NOTICE("You remove the power cell."))
 	. = remove_cell()
 	var/obj/machinery/machine = loc
-	if(machine)
+	if (machine)
 		machine.update_icon()
 
 /obj/item/stock_parts/power/battery/machine_process(obj/machinery/machine)
 	last_cell_charge = cell && cell.charge
 
-	if(status & PART_STAT_ACTIVE)
-		if(!(cell && cell.checked_use(CELLRATE * machine.get_power_usage())))
+	if (status & PART_STAT_ACTIVE)
+		if (!(cell && cell.checked_use(CELLRATE * machine.get_power_usage())))
 			machine.update_power_channel(cached_channel)
 			machine.power_change() // Out of power
 			return
-		if(seek_alternatives > 0)
+		if (seek_alternatives > 0)
 			seek_alternatives--
-			if(!seek_alternatives)
+			if (!seek_alternatives)
 				seek_alternatives = initial(seek_alternatives)
 				machine.update_power_channel(cached_channel)
 				machine.power_change()
 		return // We don't recharge if discharging
 
-	if((!machine.is_powered()) && cell && cell.fully_charged())
+	if ((!machine.is_powered()) && cell && cell.fully_charged())
 		machine.power_change()
 		return // This suggests that we should be powering the machine instead, so let's try that
 
 	// try and recharge
 	var/area/A = get_area(machine)
-	if(!can_charge || !cell || cell.fully_charged() || !A.powered(charge_channel))
+	if (!can_charge || !cell || cell.fully_charged() || !A.powered(charge_channel))
 		charge_wait_counter = initial(charge_wait_counter)
 		return
-	if(charge_wait_counter > 0)
+	if (charge_wait_counter > 0)
 		charge_wait_counter--
 		return
 	var/give = cell.give(charge_rate) / CELLRATE
 	A.use_power_oneoff(give, charge_channel)
 
 /obj/item/stock_parts/power/battery/can_provide_power(obj/machinery/machine)
-	if(cell && cell.check_charge(CELLRATE * machine.get_power_usage()))
+	if (cell && cell.check_charge(CELLRATE * machine.get_power_usage()))
 		machine.update_power_channel(LOCAL)
 		set_status(machine, PART_STAT_ACTIVE)
 		return TRUE
@@ -107,26 +107,26 @@
 
 /obj/item/stock_parts/power/battery/can_use_power_oneoff(obj/machinery/machine, amount, channel)
 	. = 0
-	if(cell && channel == LOCAL)
+	if (cell && channel == LOCAL)
 		return min(cell.charge / CELLRATE, amount)
 
 /obj/item/stock_parts/power/battery/use_power_oneoff(obj/machinery/machine, amount, channel)
 	. = 0
-	if(cell && channel == LOCAL)
+	if (cell && channel == LOCAL)
 		. = cell.use(amount * CELLRATE) / CELLRATE
 		charge_wait_counter = initial(charge_wait_counter) // If we are providing power, we wait to start charging.
 
 /obj/item/stock_parts/power/battery/not_needed(obj/machinery/machine)
-	if(status & PART_STAT_ACTIVE)
+	if (status & PART_STAT_ACTIVE)
 		unset_status(machine, PART_STAT_ACTIVE)
 		charge_wait_counter = initial(charge_wait_counter)
 
 // Find a cell from the machine building materials if possible.
 /obj/item/stock_parts/power/battery/on_refresh(obj/machinery/machine)
-	if(machine && !cell)
+	if (machine && !cell)
 		var/obj/item/stock_parts/building_material/mat = machine.get_component_of_type(/obj/item/stock_parts/building_material)
 		var/obj/item/cell/cell = mat && mat.remove_material(/obj/item/cell, 1)
-		if(cell)
+		if (cell)
 			add_cell(machine, cell)
 			cell.forceMove(src)
 	charge_rate = initial(charge_rate)
@@ -140,18 +140,18 @@
 	var/obj/machinery/machine = loc
 
 	// Interactions with/without machine
-	if(istype(I, /obj/item/cell))
-		if(cell)
+	if (istype(I, /obj/item/cell))
+		if (cell)
 			to_chat(user, "There is a power cell already installed.")
 			return TRUE
-		if(istype(machine) && (GET_FLAGS(machine.stat, MACHINE_STAT_MAINT)))
+		if (istype(machine) && (GET_FLAGS(machine.stat, MACHINE_STAT_MAINT)))
 			to_chat(user, SPAN_WARNING("There is no connector for your power cell."))
 			return TRUE
-		if(I.w_class != ITEM_SIZE_NORMAL)
+		if (I.w_class != ITEM_SIZE_NORMAL)
 			to_chat(user, "\The [I] is too [I.w_class < ITEM_SIZE_NORMAL? "small" : "large"] to fit here.")
 			return TRUE
 
-		if(!user.unEquip(I, src))
+		if (!user.unEquip(I, src))
 			return
 		add_cell(machine, I)
 		user.visible_message(\
@@ -160,18 +160,18 @@
 		return TRUE
 
 	// Interactions without machine
-	if(!istype(machine))
+	if (!istype(machine))
 		return ..()
 
 /obj/item/stock_parts/power/battery/attack_self(mob/user)
-	if(cell)
+	if (cell)
 		user.put_in_hands(cell)
 		extract_cell(user)
 		return TRUE
 	return ..()
 
 /obj/item/stock_parts/power/battery/attack_hand(mob/user)
-	if(cell && istype(loc, /obj/machinery))
+	if (cell && istype(loc, /obj/machinery))
 		user.put_in_hands(cell)
 		extract_cell(user)
 		return TRUE

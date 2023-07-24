@@ -52,9 +52,9 @@
 	return ..()
 
 /datum/build_mode/proc/make_rectangle(turf/A, turf/B)
-	if(!A || !B) // No coords
+	if (!A || !B) // No coords
 		return
-	if(A.z != B.z) // Not same z-level
+	if (A.z != B.z) // Not same z-level
 		return
 
 	var/height = A.y - B.y

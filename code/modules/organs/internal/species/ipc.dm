@@ -34,7 +34,7 @@
 
 /obj/item/organ/internal/posibrain/New(mob/living/carbon/H)
 	..()
-	if(!brainmob && H)
+	if (!brainmob && H)
 		init(H)
 	robotize()
 	unshackle()
@@ -45,7 +45,7 @@
 /obj/item/organ/internal/posibrain/proc/init(mob/living/carbon/H)
 	brainmob = new(src)
 
-	if(istype(H))
+	if (istype(H))
 		brainmob.SetName(H.real_name)
 		brainmob.real_name = H.real_name
 		brainmob.dna = H.dna.Clone()
@@ -191,7 +191,7 @@
 	src.brainmob.real_name = src.brainmob.name
 
 /obj/item/organ/internal/posibrain/proc/shackle(given_lawset)
-	if(given_lawset)
+	if (given_lawset)
 		brainmob.laws = given_lawset
 	shackle = 1
 	verbs |= shackled_verbs
@@ -204,17 +204,17 @@
 	update_icon()
 
 /obj/item/organ/internal/posibrain/on_update_icon()
-	if(src.brainmob && src.brainmob.key)
+	if (src.brainmob && src.brainmob.key)
 		icon_state = "posibrain-occupied"
 	else
 		icon_state = "posibrain"
 
 	overlays.Cut()
-	if(shackle)
+	if (shackle)
 		overlays |= image('icons/obj/assemblies.dmi', "posibrain-shackles")
 
 /obj/item/organ/internal/posibrain/proc/transfer_identity(mob/living/carbon/H)
-	if(H && H.mind)
+	if (H && H.mind)
 		brainmob.set_stat(CONSCIOUS)
 		H.mind.transfer_to(brainmob)
 		brainmob.SetName(H.real_name)
@@ -269,7 +269,7 @@
 
 
 /obj/item/organ/internal/posibrain/removed(mob/living/user)
-	if(!istype(owner))
+	if (!istype(owner))
 		return ..()
 	UpdateNames()
 	transfer_identity(owner)
@@ -288,13 +288,13 @@
 
 /obj/item/organ/internal/posibrain/replaced(mob/living/target)
 
-	if(!..()) return 0
+	if (!..()) return 0
 
-	if(target.key)
+	if (target.key)
 		target.ghostize()
 
-	if(brainmob)
-		if(brainmob.mind)
+	if (brainmob)
+		if (brainmob.mind)
 			brainmob.mind.transfer_to(target)
 		else
 			target.key = brainmob.key

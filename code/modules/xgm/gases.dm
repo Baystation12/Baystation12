@@ -85,18 +85,18 @@
 	name = "Compound #[num]"
 	specific_heat = rand(1, 400)	// J/(mol*K)
 	molar_mass = rand(20,800)/1000	// kg/mol
-	if(prob(40))
+	if (prob(40))
 		flags |= XGM_GAS_FUEL
-	else if(prob(40)) //it's prooobably a bad idea for gas being oxidizer to itself.
+	else if (prob(40)) //it's prooobably a bad idea for gas being oxidizer to itself.
 		flags |= XGM_GAS_OXIDIZER
-	if(prob(40))
+	if (prob(40))
 		flags |= XGM_GAS_CONTAMINANT
-	if(prob(40))
+	if (prob(40))
 		flags |= XGM_GAS_FUSION_FUEL
 
 	symbol_html = "X<sup>[num]</sup>"
 	symbol = "X-[num]"
-	if(prob(50))
+	if (prob(50))
 		tile_color = RANDOM_RGB
 		overlay_limit = 0.5
 

@@ -78,8 +78,8 @@
 
 /obj/item/robot_module/flying/emergency/respawn_consumable(mob/living/silicon/robot/R, amount)
 	var/obj/item/reagent_containers/spray/PS = emag
-	if(PS && PS.reagents.total_volume < PS.volume)
+	if (PS && PS.reagents.total_volume < PS.volume)
 		var/adding = min(PS.volume-PS.reagents.total_volume, 2*amount)
-		if(adding > 0)
+		if (adding > 0)
 			PS.reagents.add_reagent(/datum/reagent/acid/polyacid, adding)
 	..()

@@ -2,9 +2,9 @@
 	name = "map"
 
 /datum/vote/map/can_run(mob/creator, automatic)
-	if(!config.allow_map_switching)
+	if (!config.allow_map_switching)
 		return FALSE
-	if(!automatic && !isadmin(creator))
+	if (!automatic && !isadmin(creator))
 		return FALSE // Must be an admin.
 	return ..()
 
@@ -14,7 +14,7 @@
 	..()
 
 /datum/vote/map/report_result()
-	if(..())
+	if (..())
 		return 1
 	var/datum/map/M = GLOB.all_maps[result[1]]
 	fdel("use_map")

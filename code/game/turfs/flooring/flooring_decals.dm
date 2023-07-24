@@ -14,24 +14,24 @@ var/global/list/floor_decals = list()
 
 /obj/effect/floor_decal/New(newloc, newdir, newcolour, newappearance)
 	supplied_dir = newdir
-	if(newappearance) appearance = newappearance
-	if(newcolour) color = newcolour
+	if (newappearance) appearance = newappearance
+	if (newcolour) color = newcolour
 	..(newloc)
 
 /obj/effect/floor_decal/Initialize()
 	SHOULD_CALL_PARENT(FALSE)
-	if(supplied_dir) set_dir(supplied_dir)
+	if (supplied_dir) set_dir(supplied_dir)
 	var/turf/T = get_turf(src)
-	if(istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
+	if (istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
 		layer = T.is_plating() ? DECAL_PLATING_LAYER : DECAL_LAYER
 		var/cache_key = "[alpha]-[color]-[dir]-[icon_state]-[plane]-[layer]-[detail_overlay]-[detail_color]"
-		if(!floor_decals[cache_key])
+		if (!floor_decals[cache_key])
 			var/image/I = image(icon = src.icon, icon_state = src.icon_state, dir = src.dir)
 			I.layer = layer
 			I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | appearance_flags
 			I.color = src.color
 			I.alpha = src.alpha
-			if(detail_overlay)
+			if (detail_overlay)
 				var/image/B = overlay_image(icon, "[detail_overlay]", flags=RESET_COLOR)
 				B.color = detail_color
 				I.overlays |= B

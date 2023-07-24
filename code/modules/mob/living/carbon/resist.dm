@@ -1,7 +1,7 @@
 /mob/living/carbon/process_resist()
 
 	//drop && roll
-	if(on_fire && !buckled)
+	if (on_fire && !buckled)
 		fire_stacks -= 1.2
 		Weaken(3)
 		spin(32,2)
@@ -10,7 +10,7 @@
 			SPAN_NOTICE("You stop, drop, and roll!")
 			)
 		sleep(30)
-		if(fire_stacks <= 0)
+		if (fire_stacks <= 0)
 			visible_message(
 				SPAN_DANGER("[src] has successfully extinguished themselves!"),
 				SPAN_NOTICE("You extinguish yourself.")
@@ -18,20 +18,20 @@
 			ExtinguishMob()
 		return TRUE
 
-	if(..())
+	if (..())
 		return TRUE
 
-	if(handcuffed)
+	if (handcuffed)
 		spawn() escape_handcuffs()
 
 /mob/living/carbon/proc/escape_handcuffs()
-	//if(!(last_special <= world.time)) return
+	//if (!(last_special <= world.time)) return
 
 	//This line represent a significant buff to grabs...
 	// We don't have to check the click cooldown because /mob/living/verb/resist() has done it for us, we can simply set the delay
 	setClickCooldown(100)
 
-	if(can_break_cuffs()) //Don't want to do a lot of logic gating here.
+	if (can_break_cuffs()) //Don't want to do a lot of logic gating here.
 		break_handcuffs()
 		return
 
@@ -41,10 +41,10 @@
 	var/breakouttime = istype(HC) ? HC.breakouttime : 2 MINUTES
 
 	var/mob/living/carbon/human/H = src
-	if(istype(H) && H.gloves && istype(H.gloves,/obj/item/clothing/gloves/rig))
+	if (istype(H) && H.gloves && istype(H.gloves,/obj/item/clothing/gloves/rig))
 		breakouttime /= 2
 
-	if(psi && psi.can_use())
+	if (psi && psi.can_use())
 		var/psi_mod = (1 - (psi.get_rank(PSI_PSYCHOKINESIS)*0.2))
 		breakouttime = max(5, breakouttime * psi_mod)
 
@@ -55,16 +55,16 @@
 
 	var/stages = 4
 	for(var/i = 1 to stages)
-		if(do_after(src, breakouttime*0.25, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
-			if(!handcuffed || buckled)
+		if (do_after(src, breakouttime*0.25, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
+			if (!handcuffed || buckled)
 				return
 			to_chat(src, SPAN_WARNING("You try to slip free of \the [handcuffed] ([i*100/stages]% done)."))
 		else
-			if(!handcuffed || buckled)
+			if (!handcuffed || buckled)
 				return
 			to_chat(src, SPAN_WARNING("You stop trying to slip free of \the [handcuffed]."))
 			return
-		if(!handcuffed || buckled)
+		if (!handcuffed || buckled)
 			return
 	if (handcuffed.damage_health(handcuffed.get_max_health() / 2))
 		visible_message(
@@ -72,7 +72,7 @@
 			SPAN_NOTICE("You successfully remove \the [handcuffed], breaking them!"), range = 2
 			)
 		QDEL_NULL(handcuffed)
-		if(buckled && buckled.buckle_require_restraints)
+		if (buckled && buckled.buckle_require_restraints)
 			buckled.unbuckle_mob()
 		update_inv_handcuffed()
 		return
@@ -95,8 +95,8 @@
 		SPAN_WARNING("You attempt to break your [handcuffed.name]. (This will take around 5 seconds and you need to stand still)")
 		)
 
-	if(do_after(src, 5 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
-		if(!handcuffed || buckled)
+	if (do_after(src, 5 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
+		if (!handcuffed || buckled)
 			return
 
 		visible_message(
@@ -104,12 +104,12 @@
 			SPAN_WARNING("You successfully break your [handcuffed.name].")
 			)
 
-		if(MUTATION_HULK in mutations)
+		if (MUTATION_HULK in mutations)
 			say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 
 		qdel(handcuffed)
 		handcuffed = null
-		if(buckled && buckled.buckle_require_restraints)
+		if (buckled && buckled.buckle_require_restraints)
 			buckled.unbuckle_mob()
 		update_inv_handcuffed()
 
@@ -118,18 +118,18 @@
 
 /mob/living/carbon/escape_buckle()
 	var/unbuckle_time
-	if(src.handcuffed && istype(src.buckled, /obj/effect/energy_net))
+	if (src.handcuffed && istype(src.buckled, /obj/effect/energy_net))
 		var/obj/effect/energy_net/N = src.buckled
 		N.escape_net(src) //super snowflake but is literally used NOWHERE ELSE.-Luke
 		return
 
-	if(!buckled) return
-	if(!restrained())
+	if (!buckled) return
+	if (!restrained())
 		..()
 	else
 		setClickCooldown(100)
 		unbuckle_time = 2 MINUTES
-		if(psi && psi.can_use())
+		if (psi && psi.can_use())
 			unbuckle_time = max(0, unbuckle_time - ((25 SECONDS) * psi.get_rank(PSI_PSYCHOKINESIS)))
 
 		visible_message(
@@ -137,15 +137,15 @@
 			SPAN_WARNING("You attempt to unbuckle yourself. (This will take around [unbuckle_time / (1 SECOND)] second\s and you need to stand still)"), range = 2
 			)
 
-	if(unbuckle_time && buckled)
+	if (unbuckle_time && buckled)
 		var/stages = 2
 		for(var/i = 1 to stages)
-			if(!unbuckle_time || do_after(usr, unbuckle_time*0.5, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT, incapacitation_flags = INCAPACITATION_DISABLED))
-				if(!buckled)
+			if (!unbuckle_time || do_after(usr, unbuckle_time*0.5, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT, incapacitation_flags = INCAPACITATION_DISABLED))
+				if (!buckled)
 					return
 				to_chat(src, SPAN_WARNING("You try to unbuckle yourself ([i*100/stages]% done)."))
 			else
-				if(!buckled)
+				if (!buckled)
 					return
 				to_chat(src, SPAN_WARNING("You stop trying to unbuckle yourself."))
 				return

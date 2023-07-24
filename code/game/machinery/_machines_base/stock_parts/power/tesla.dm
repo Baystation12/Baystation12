@@ -12,17 +12,17 @@
 /obj/item/stock_parts/power/apc/can_use_power_oneoff(obj/machinery/machine, amount, channel)
 	var/area/A = get_area(machine)		// make sure it's in an area
 	. = 0
-	if(!A)
+	if (!A)
 		return
-	if(A.powered(channel))
+	if (A.powered(channel))
 		return amount
 
 /obj/item/stock_parts/power/apc/use_power_oneoff(obj/machinery/machine, amount, channel)
 	var/area/A = get_area(machine)
 	. = 0
-	if(!A)
+	if (!A)
 		return
-	if(A.powered(channel))
+	if (A.powered(channel))
 		A.use_power_oneoff(amount, channel)
 		return amount
 

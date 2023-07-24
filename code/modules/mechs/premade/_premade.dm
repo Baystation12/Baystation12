@@ -6,19 +6,19 @@
 	var/decal
 
 /mob/living/exosuit/premade/Initialize()
-	if(arms)
+	if (arms)
 		arms.decal = decal
 		arms.prebuild()
-	if(legs)
+	if (legs)
 		legs.decal = decal
 		legs.prebuild()
-	if(head)
+	if (head)
 		head.decal = decal
 		head.prebuild()
-	if(body)
+	if (body)
 		body.decal = decal
 		body.prebuild()
-	if(!material)
+	if (!material)
 		material = SSmaterials.get_material_by_name(MATERIAL_STEEL)
 	. = ..()
 
@@ -33,11 +33,11 @@
 	desc = "It seems to have been roughly thrown together and then spraypainted a single colour."
 
 /mob/living/exosuit/premade/random/Initialize(mapload, obj/structure/heavy_vehicle_frame/source_frame, super_random = FALSE, using_boring_colours = FALSE)
-	//if(!prob(100/(LAZYLEN(GLOB.mech_decals)+1)))
+	//if (!prob(100/(LAZYLEN(GLOB.mech_decals)+1)))
 	//	decal = pick(GLOB.mech_decals)
 
 	var/list/use_colours
-	if(using_boring_colours)
+	if (using_boring_colours)
 		use_colours = list(
 			COLOR_DARK_GRAY,
 			COLOR_GRAY40,
@@ -129,19 +129,19 @@
 		)
 
 	var/mech_colour = super_random ? FALSE : pick(use_colours)
-	if(!arms)
+	if (!arms)
 		var/armstype = pick(typesof(/obj/item/mech_component/manipulators)-/obj/item/mech_component/manipulators)
 		arms = new armstype(src)
 		arms.color = mech_colour ? mech_colour : pick(use_colours)
-	if(!legs)
+	if (!legs)
 		var/legstype = pick(typesof(/obj/item/mech_component/propulsion)-/obj/item/mech_component/propulsion)
 		legs = new legstype(src)
 		legs.color = mech_colour ? mech_colour : pick(use_colours)
-	if(!head)
+	if (!head)
 		var/headtype = pick(typesof(/obj/item/mech_component/sensors)-/obj/item/mech_component/sensors)
 		head = new headtype(src)
 		head.color = mech_colour ? mech_colour : pick(use_colours)
-	if(!body)
+	if (!body)
 		var/bodytype = pick(typesof(/obj/item/mech_component/chassis)-/obj/item/mech_component/chassis)
 		body = new bodytype(src)
 		body.color = mech_colour ? mech_colour : pick(use_colours)

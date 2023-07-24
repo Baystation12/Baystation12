@@ -63,17 +63,17 @@
 /obj/effect/turf_fire/Initialize(mapload, power, fire_color)
 	. = ..()
 	var/turf/open_turf = loc
-	if(open_turf.turf_fire)
+	if (open_turf.turf_fire)
 		return INITIALIZE_HINT_QDEL
 
-	if(fire_color && ((color != fire_color) && color == null)) //Take colour from proc unless base colour was already custom
+	if (fire_color && ((color != fire_color) && color == null)) //Take colour from proc unless base colour was already custom
 		color = fire_color
-	if(color != null)
+	if (color != null)
 		set_color(color)
 
 	open_turf.turf_fire = src
 	SSturf_fire.fires += src
-	if(power)
+	if (power)
 		fire_power = min(TURF_FIRE_MAX_POWER, power)
 	UpdateFireState()
 
@@ -107,7 +107,7 @@
 	if (oxy < TURF_FIRE_BURN_MINIMUM_OXYGEN_REQUIRED)
 		return FALSE
 	var/burn_rate = TURF_FIRE_BURN_RATE_BASE + fire_power * TURF_FIRE_BURN_RATE_PER_POWER
-	if(burn_rate > oxy)
+	if (burn_rate > oxy)
 		burn_rate = oxy
 
 	env.adjust_gas(GAS_OXYGEN, -burn_rate)
@@ -121,40 +121,40 @@
 
 /obj/effect/turf_fire/Process()
 	var/turf/simulated/T = get_turf(src)
-	if(!T || T.density)
+	if (!T || T.density)
 		qdel(src)
 		return
-	if(T.hotspot) //If we have an active hotspot, let it do the damage instead and lets not loose power
+	if (T.hotspot) //If we have an active hotspot, let it do the damage instead and lets not loose power
 		return
-	if(interact_with_atmos)
-		if(!process_waste())
+	if (interact_with_atmos)
+		if (!process_waste())
 			qdel(src)
 			return
-	if(passive_loss)
-		if(T.air?.temperature < TURF_FIRE_REQUIRED_TEMP)
+	if (passive_loss)
+		if (T.air?.temperature < TURF_FIRE_REQUIRED_TEMP)
 			fire_power -= TURF_FIRE_POWER_LOSS_ON_LOW_TEMP
 		fire_power--
-		if(fire_power <= 0)
+		if (fire_power <= 0)
 			qdel(src)
 			return
 	var/effective_temperature = TURF_FIRE_TEMP_BASE + (TURF_FIRE_TEMP_INCREMENT_PER_POWER*fire_power)
 	T.hotspot_expose( effective_temperature, TURF_FIRE_VOLUME)
 	//Nearby turfs may also trigger a fire (will only start fires if there's fuel, currently)
 	//Guaranteed fire spread in the last tick
-	if(prob(50 + fire_power) || fire_power == 1)
+	if (prob(50 + fire_power) || fire_power == 1)
 		for(var/direction in GLOB.cardinal)
 			var/turf/simulated/other_tile = get_step(T, direction)
 
-			if(istype(other_tile))
-				if(T.open_directions & direction) //Grab all valid bordering tiles
-					if(other_tile.hotspot || other_tile.turf_fire)
+			if (istype(other_tile))
+				if (T.open_directions & direction) //Grab all valid bordering tiles
+					if (other_tile.hotspot || other_tile.turf_fire)
 						continue
 					other_tile.hotspot_expose( effective_temperature, TURF_FIRE_VOLUME)
 
 	for(var/atom/movable/burning_atom as anything in T)
 		burning_atom.fire_act(exposed_temperature = effective_temperature, exposed_volume = TURF_FIRE_VOLUME)
-	if(interact_with_atmos)
-		if(prob(fire_power) && istype(T, /turf/simulated/floor))
+	if (interact_with_atmos)
+		if (prob(fire_power) && istype(T, /turf/simulated/floor))
 			var/turf/simulated/floor/F = T
 			F.burn_tile(effective_temperature)
 		UpdateFireState()
@@ -162,10 +162,10 @@
 /obj/effect/turf_fire/Crossed(O)
 	. = ..()
 	var/turf/T = loc
-	if(T.hotspot) //If we have an active hotspot, let it do the damage instead
+	if (T.hotspot) //If we have an active hotspot, let it do the damage instead
 		return
 	var/atom/movable/crossing = O
-	if(istype(crossing))
+	if (istype(crossing))
 		crossing.fire_act(exposed_temperature = TURF_FIRE_TEMP_BASE + (TURF_FIRE_TEMP_INCREMENT_PER_POWER*fire_power), exposed_volume = TURF_FIRE_VOLUME)
 	return
 
@@ -181,30 +181,30 @@
 /obj/effect/turf_fire/proc/UpdateFireState()
 	var/new_state
 	switch(fire_power)
-		if(0 to 10)
+		if (0 to 10)
 			new_state = TURF_FIRE_STATE_SMALL
-		if(11 to 24)
+		if (11 to 24)
 			new_state = TURF_FIRE_STATE_MEDIUM
-		if(25 to 39)
+		if (25 to 39)
 			new_state = TURF_FIRE_STATE_LARGE
-		if(40 to INFINITY)
+		if (40 to INFINITY)
 			new_state = TURF_FIRE_STATE_MAX
 
-	if(new_state == current_fire_state)
+	if (new_state == current_fire_state)
 		return
 	current_fire_state = new_state
 
 	switch(current_fire_state)
-		if(TURF_FIRE_STATE_SMALL)
+		if (TURF_FIRE_STATE_SMALL)
 			icon_state = "small"
 			set_light(0.5, 1, 1.5)
-		if(TURF_FIRE_STATE_MEDIUM)
+		if (TURF_FIRE_STATE_MEDIUM)
 			icon_state = "medium"
 			set_light(0.5, 1, 2,)
-		if(TURF_FIRE_STATE_LARGE)
+		if (TURF_FIRE_STATE_LARGE)
 			icon_state = "big"
 			set_light(0.5, 1.5, 2,)
-		if(TURF_FIRE_STATE_MAX)
+		if (TURF_FIRE_STATE_MAX)
 			icon_state = "max"
 			set_light(0.7, 1.6, 3)
 

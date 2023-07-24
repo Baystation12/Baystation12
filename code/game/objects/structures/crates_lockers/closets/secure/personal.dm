@@ -30,7 +30,7 @@
 
 /obj/structure/closet/secure_closet/personal/togglelock(mob/user, obj/item/card/id/id_card)
 	if (..())
-		if(locked)
+		if (locked)
 			id_card = istype(id_card) ? id_card : user.GetIdCard()
 			if (id_card)
 				set_owner(id_card.registered_name)

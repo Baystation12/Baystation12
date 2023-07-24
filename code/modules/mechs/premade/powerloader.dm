@@ -3,16 +3,16 @@
 	desc = "An ancient, but well-liked cargo handling exosuit."
 
 /mob/living/exosuit/premade/powerloader/Initialize()
-	if(!arms)
+	if (!arms)
 		arms = new /obj/item/mech_component/manipulators/powerloader(src)
 		arms.color = "#ffbc37"
-	if(!legs)
+	if (!legs)
 		legs = new /obj/item/mech_component/propulsion/powerloader(src)
 		legs.color = "#ffbc37"
-	if(!head)
+	if (!head)
 		head = new /obj/item/mech_component/sensors/powerloader(src)
 		head.color = "#ffbc37"
-	if(!body)
+	if (!body)
 		body = new /obj/item/mech_component/chassis/powerloader(src)
 		body.color = "#ffbc37"
 
@@ -57,16 +57,16 @@
 
 
 /mob/living/exosuit/premade/firefighter/Initialize(mapload)
-	if(!arms)
+	if (!arms)
 		arms = new /obj/item/mech_component/manipulators/powerloader(src)
 		arms.color = "#385b3c"
-	if(!legs)
+	if (!legs)
 		legs = new /obj/item/mech_component/propulsion/powerloader(src)
 		legs.color = "#385b3c"
-	if(!head)
+	if (!head)
 		head = new /obj/item/mech_component/sensors/powerloader(src)
 		head.color = "#385b3c"
-	if(!body)
+	if (!body)
 		body = new /obj/item/mech_component/chassis/heavy(src)
 		body.color = "#385b3c"
 
@@ -94,12 +94,12 @@
 	. = ..()
 	var/list/parts = list(arms,legs,head,body)
 	for(var/obj/item/mech_component/MC in parts)
-		if(prob(35))
+		if (prob(35))
 			MC.color = rgb(255,rand(188, 225),rand(55, 136))
 	//Damage it
 	var/obj/item/mech_component/damaged = pick(parts)
 	damaged.take_brute_damage((damaged.max_damage / 4 ) * MECH_COMPONENT_DAMAGE_DAMAGED)
-	if(prob(33))
+	if (prob(33))
 		parts -= damaged
 		damaged = pick(parts)
 		damaged.take_brute_damage((damaged.max_damage / 4 ) * MECH_COMPONENT_DAMAGE_DAMAGED)

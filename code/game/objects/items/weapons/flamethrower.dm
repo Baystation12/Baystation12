@@ -30,26 +30,26 @@
 	. = ..()
 
 /obj/item/flamethrower/Process()
-	if(!lit)
+	if (!lit)
 		STOP_PROCESSING(SSobj, src)
 		return null
 	var/turf/location = loc
-	if(ismob(location))
+	if (ismob(location))
 		var/mob/M = location
 		if (M.IsHolding(src))
 			location = M.loc
-	if(isturf(location)) //start a fire if possible
+	if (isturf(location)) //start a fire if possible
 		location.hotspot_expose(700, 2)
 	return
 
 
 /obj/item/flamethrower/on_update_icon()
 	overlays.Cut()
-	if(igniter)
+	if (igniter)
 		overlays += "+igniter[status]"
-	if(beaker)
+	if (beaker)
 		overlays += "+ptank"
-	if(lit)
+	if (lit)
 		overlays += "+lit"
 		item_state = "flamethrower_1"
 	else
@@ -58,17 +58,17 @@
 
 /obj/item/flamethrower/afterattack(atom/target, mob/user, proximity)
 	// Make sure our user is still holding us
-	if(user.a_intent == I_HELP) //don't shoot if we're on help intent
+	if (user.a_intent == I_HELP) //don't shoot if we're on help intent
 		to_chat(user, SPAN_WARNING("You refrain from firing \the [src] as your intent is set to help."))
 		return
 	var/turf/target_turf = get_turf(target)
-	if(target_turf)
+	if (target_turf)
 		var/turflist = getline(user, target_turf)
 		flame_turf(turflist)
 
 /obj/item/flamethrower/attack_hand(mob/user)
-	if(user.get_inactive_hand() == src)
-		if(beaker && CanPhysicallyInteract(user))
+	if (user.get_inactive_hand() == src)
+		if (beaker && CanPhysicallyInteract(user))
 			user.put_in_hands(beaker)
 			beaker = null
 			to_chat(user, SPAN_NOTICE("You remove the fuel container from [src]!"))
@@ -77,40 +77,40 @@
 		return ..()
 
 /obj/item/flamethrower/attackby(obj/item/W as obj, mob/user as mob)
-	if(user.stat || user.restrained() || user.lying)	return
-	if(isWrench(W) && !status && !complete)//Taking this apart
-		if(weldtool)
+	if (user.stat || user.restrained() || user.lying)	return
+	if (isWrench(W) && !status && !complete)//Taking this apart
+		if (weldtool)
 			weldtool.dropInto(loc)
 			weldtool = null
-		if(igniter)
+		if (igniter)
 			igniter.dropInto(loc)
 			igniter = null
-		if(beaker)
+		if (beaker)
 			beaker.dropInto(loc)
 			beaker = null
 		new /obj/item/stack/material/rods(get_turf(src))
 		qdel(src)
 		return
 
-	if(isScrewdriver(W) && igniter && !lit && !complete)
+	if (isScrewdriver(W) && igniter && !lit && !complete)
 		status = !status
 		to_chat(user, SPAN_NOTICE("\The [igniter] is now [status ? "secured" : "unsecured"]!"))
 		update_icon()
 		return
 
-	if(isigniter(W))
+	if (isigniter(W))
 		var/obj/item/device/assembly/igniter/I = W
-		if(I.secured)	return
-		if(igniter)		return
-		if(!user.unEquip(I, src))
+		if (I.secured)	return
+		if (igniter)		return
+		if (!user.unEquip(I, src))
 			return
 		igniter = I
 		update_icon()
 		return
 
 	if (istype(W, /obj/item/reagent_containers) && W.is_open_container() && (W.w_class <= max_beaker))
-		if(user.unEquip(W, src))
-			if(beaker)
+		if (user.unEquip(W, src))
+			if (beaker)
 				beaker.forceMove(get_turf(src))
 				to_chat(user, SPAN_NOTICE("You swap the fuel container in [src]!"))
 			beaker = W
@@ -125,21 +125,21 @@
 	toggle_igniter(user)
 
 /obj/item/flamethrower/proc/toggle_igniter(mob/user)
-	if(!beaker)
+	if (!beaker)
 		to_chat(user, SPAN_NOTICE("Attach a fuel container first!"))
 		return
-	if(!status)
+	if (!status)
 		to_chat(user,SPAN_NOTICE("Secure the igniter first!"))
 		return
 	to_chat(user, SPAN_NOTICE("You [lit ? "extinguish" : "ignite"] [src]!"))
 	lit = !lit
-	if(lit)
+	if (lit)
 		playsound(loc, 'sound/items/welderactivate.ogg', 50, TRUE)
 		START_PROCESSING(SSobj, src)
 	else
 		playsound(loc, 'sound/items/welderdeactivate.ogg', 50, TRUE)
 		STOP_PROCESSING(SSobj,src)
-	if(lit)
+	if (lit)
 		set_light(0.7, 1, 2.5, l_color = COLOR_ORANGE)
 	else
 		set_light(0)
@@ -151,9 +151,9 @@
 #define FLAMETHROWER_RELEASE_AMOUNT 5
 
 /obj/item/flamethrower/proc/flame_turf(list/turflist)
-	if(!beaker)
+	if (!beaker)
 		return
-	if(!lit || operating)	return
+	if (!lit || operating)	return
 
 	var/size = length(turflist)
 	if (!size)
@@ -168,11 +168,11 @@
 	var/highest_amount = 0
 	for(var/datum/reagent/R in beaker_reagents.reagent_list)
 		power += R.accelerant_quality * FLAMETHROWER_POWER_MULTIPLIER //Flamethrowers inflate flammability compared to a pool of fuel
-		if(R.volume > highest_amount && R.accelerant_quality > 0)
+		if (R.volume > highest_amount && R.accelerant_quality > 0)
 			highest_amount = R.volume
 			fire_colour = R.fire_colour
 
-	if(power < REQUIRED_POWER_TO_FIRE_FLAMETHROWER)
+	if (power < REQUIRED_POWER_TO_FIRE_FLAMETHROWER)
 		audible_message(SPAN_DANGER("The [src] sputters."))
 		playsound(src, 'sound/weapons/guns/flamethrower_empty.ogg', 50, TRUE, -3)
 		return
@@ -180,12 +180,12 @@
 
 	operating = TRUE //anti-spam tool, is unset when the flame projectile goes away
 	for(var/turf/T in turflist)
-		if(T.density || istype(T, /turf/space))
+		if (T.density || istype(T, /turf/space))
 			break
-		if(!previousturf && length(turflist)>1)
+		if (!previousturf && length(turflist)>1)
 			previousturf = get_turf(src)
 			continue	//so we don't burn the tile we be standin on
-		if(previousturf && (!T.CanPass(null, previousturf, 0,0) || !previousturf.CanPass(null, T, 0,0)))
+		if (previousturf && (!T.CanPass(null, previousturf, 0,0) || !previousturf.CanPass(null, T, 0,0)))
 			break
 		previousturf = T
 
@@ -196,8 +196,8 @@
 		sleep(1)
 	previousturf = null
 	operating = FALSE
-	if(beaker) //In the event we earlied out that means some fuel goes back into tank
-		if(my_fraction.total_volume > 0)
+	if (beaker) //In the event we earlied out that means some fuel goes back into tank
+		if (my_fraction.total_volume > 0)
 			my_fraction.trans_to_holder(beaker_reagents, my_fraction.total_volume, safety = TRUE)
 	QDEL_NULL(my_fraction)
 

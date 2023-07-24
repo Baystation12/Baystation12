@@ -23,8 +23,8 @@
 	var/light_amount = T ? T.get_lumcount() : 0
 	var/adjusted_power = max(max_power * light_amount, 0)
 	adjusted_power = round(adjusted_power, 0.1)
-	if(adjusted_power)
-		if(assembly)
+	if (adjusted_power)
+		if (assembly)
 			assembly.give_power(adjusted_power)
 
 /obj/item/integrated_circuit/passive/power/starter
@@ -37,9 +37,9 @@
 	var/is_charge = FALSE
 
 /obj/item/integrated_circuit/passive/power/starter/make_energy()
-	if(assembly.battery)
-		if(assembly.battery.charge)
-			if(!is_charge)
+	if (assembly.battery)
+		if (assembly.battery.charge)
+			if (!is_charge)
 				activate_pin(1)
 			is_charge = TRUE
 		else
@@ -62,10 +62,10 @@
 
 
 /obj/item/integrated_circuit/passive/power/relay/make_energy()
-	if(!assembly)
+	if (!assembly)
 		return
 	var/area/A = get_area(src)
-	if(A && A.powered(EQUIP) && assembly.give_power(power_amount))
+	if (A && A.powered(EQUIP) && assembly.give_power(power_amount))
 		A.use_power_oneoff(power_amount, EQUIP)
 		// give_power() handles CELLRATE on its own.
 
@@ -117,14 +117,14 @@
 	push_data()
 
 /obj/item/integrated_circuit/passive/power/chemical_cell/make_energy()
-	if(assembly)
-		if(assembly.battery)
+	if (assembly)
+		if (assembly.battery)
 			var/bp = 5000
-			if((assembly.battery.maxcharge-assembly.battery.charge) / CELLRATE > bp && reagents.remove_reagent(/datum/reagent/blood, 1)) //only blood is powerful enough to power the station(c)
+			if ((assembly.battery.maxcharge-assembly.battery.charge) / CELLRATE > bp && reagents.remove_reagent(/datum/reagent/blood, 1)) //only blood is powerful enough to power the station(c)
 				assembly.give_power(bp)
 			for(var/I in fuel)
-				if((assembly.battery.maxcharge-assembly.battery.charge) / CELLRATE > fuel[I])
-					if(reagents.remove_reagent(I, 1))
+				if ((assembly.battery.maxcharge-assembly.battery.charge) / CELLRATE > fuel[I])
+					if (reagents.remove_reagent(I, 1))
 						assembly.give_power(fuel[I]*multi)
 
 /obj/item/integrated_circuit/passive/power/chemical_cell/do_work()

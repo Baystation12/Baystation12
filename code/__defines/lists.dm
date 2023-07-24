@@ -8,15 +8,15 @@
 // Sets a L back to null iff it is empty
 #define UNSETEMPTY(L) if (L && !length(L)) L = null
 // Removes I from list L, and sets I to null if it is now empty
-#define LAZYREMOVE(L, I) if(L) { L -= I; if(!length(L)) { L = null; } }
+#define LAZYREMOVE(L, I) if (L) { L -= I; if (!length(L)) { L = null; } }
 // Adds I to L, initalizing L if necessary
-#define LAZYADD(L, I) if(!L) { L = list(); } L += I;
+#define LAZYADD(L, I) if (!L) { L = list(); } L += I;
 // Insert I into L at position X, initalizing L if necessary
-#define LAZYINSERT(L, I, X) if(!L) { L = list(); } L.Insert(X, I);
+#define LAZYINSERT(L, I, X) if (!L) { L = list(); } L.Insert(X, I);
 // Adds I to L, initalizing L if necessary, if I is not already in L
-#define LAZYDISTINCTADD(L, I) if(!L) { L = list(); } L |= I;
+#define LAZYDISTINCTADD(L, I) if (!L) { L = list(); } L |= I;
 // Sets L[A] to I, initalizing L if necessary
-#define LAZYSET(L, A, I) if(!L) { L = list(); } L[A] = I;
+#define LAZYSET(L, A, I) if (!L) { L = list(); } L[A] = I;
 // Reads I from L safely - Works with both associative and traditional lists.
 #define LAZYACCESS(L, I) (L ? (isnum(I) ? (I > 0 && I <= length(L) ? L[I] : null) : L[I]) : null)
 // Reads the length of L, returning 0 if null
@@ -24,7 +24,7 @@
 // Safely checks if I is in L
 #define LAZYISIN(L, I) (L ? (I in L) : FALSE)
 // Null-safe List.Cut() and discard.
-#define LAZYCLEARLIST(L) if(L) { L.len = 0; L = null; }
+#define LAZYCLEARLIST(L) if (L) { L.len = 0; L = null; }
 // Safely merges L2 into L1 as lazy lists, initializing L1 if necessary.
 #define LAZYMERGELIST(L1, L2) if (length(L2)) { if (!L1) { L1 = list() } L1 |= L2 }
 // Reads L or an empty list if L is not a list.  Note: Does NOT assign, L may be an expression.
@@ -44,7 +44,7 @@
 	do {\
 		var/list/__BIN_LIST = LIST;\
 		var/__BIN_CTTL = length(__BIN_LIST);\
-		if(!__BIN_CTTL) {\
+		if (!__BIN_CTTL) {\
 			__BIN_LIST += INPUT;\
 		} else {\
 			var/__BIN_LEFT = 1;\
@@ -53,7 +53,7 @@
 			var ##TYPECONT/__BIN_ITEM;\
 			while(__BIN_LEFT < __BIN_RIGHT) {\
 				__BIN_ITEM = COMPTYPE;\
-				if(__BIN_ITEM.##COMPARISON <= COMPARE.##COMPARISON) {\
+				if (__BIN_ITEM.##COMPARISON <= COMPARE.##COMPARISON) {\
 					__BIN_LEFT = __BIN_MID + 1;\
 				} else {\
 					__BIN_RIGHT = __BIN_MID;\

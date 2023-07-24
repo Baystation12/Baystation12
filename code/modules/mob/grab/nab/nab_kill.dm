@@ -24,7 +24,7 @@
 	affecting.Stun(3)
 
 	switch(assailant.a_intent)
-		if(I_GRAB)
+		if (I_GRAB)
 			on_hit_grab(G)
-		if(I_HURT)
+		if (I_HURT)
 			on_hit_harm(G)

@@ -44,7 +44,7 @@
 
 /mob/living/simple_animal/hostile/lar_maria/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
-	if(corpse)
+	if (corpse)
 		new corpse (src.loc)
 	if (weapon)
 		new weapon(src.loc)

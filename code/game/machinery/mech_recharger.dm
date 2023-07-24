@@ -23,12 +23,12 @@
 
 /obj/machinery/mech_recharger/Crossed(mob/living/exosuit/M)
 	. = ..()
-	if(istype(M) && charging != M)
+	if (istype(M) && charging != M)
 		start_charging(M)
 
 /obj/machinery/mech_recharger/Uncrossed(mob/living/exosuit/M)
 	. = ..()
-	if(M == charging)
+	if (M == charging)
 		stop_charging()
 
 /obj/machinery/mech_recharger/RefreshParts()
@@ -44,50 +44,50 @@
 	repair += 2 * total_component_rating_of_type(/obj/item/stock_parts/manipulator)
 	repair += total_component_rating_of_type(/obj/item/stock_parts/scanning_module)
 
-	if(chargerate_multiplier)
+	if (chargerate_multiplier)
 		change_power_consumption(base_charge_rate * (chargerate_multiplier / chargerate_divisor), POWER_USE_ACTIVE)
 	else
 		change_power_consumption(base_charge_rate, POWER_USE_ACTIVE)
 
 /obj/machinery/mech_recharger/Process()
-	if(!charging)
+	if (!charging)
 		update_use_power(POWER_USE_IDLE)
 		return
-	if(charging.loc != loc)
+	if (charging.loc != loc)
 		stop_charging()
 		return
 
-	if(inoperable())
+	if (inoperable())
 		charging.show_message(SPAN_WARNING("Internal system Error - Charging aborted."))
 		stop_charging()
 		return
 
 	// Cell could have been removed.
-	if(!charging.get_cell(TRUE))
+	if (!charging.get_cell(TRUE))
 		stop_charging()
 		return
 
 	var/remaining_energy = active_power_usage
 
-	if(repair && !fully_repaired())
+	if (repair && !fully_repaired())
 		for(var/obj/item/mech_component/MC in charging)
-			if(MC)
+			if (MC)
 				MC.repair_brute_damage(repair)
 				MC.repair_burn_damage(repair)
 				remaining_energy -= repair * repair_power_usage
-			if(remaining_energy <= 0)
+			if (remaining_energy <= 0)
 				break
 		charging.updatehealth()
-		if(fully_repaired())
+		if (fully_repaired())
 			charging.show_message(SPAN_NOTICE("Exosuit integrity has been fully restored."))
 
 	var/obj/item/cell/cell = charging.get_cell(TRUE)
-	if(cell && !cell.fully_charged() && remaining_energy > 0)
+	if (cell && !cell.fully_charged() && remaining_energy > 0)
 		cell.give(remaining_energy * CELLRATE)
-		if(cell.fully_charged())
+		if (cell.fully_charged())
 			charging.show_message(SPAN_NOTICE("Exosuit power reserves are at maximum."))
 
-	if((!repair || fully_repaired()) && cell.fully_charged())
+	if ((!repair || fully_repaired()) && cell.fully_charged())
 		stop_charging()
 
 // An ugly proc, but apparently mechs don't have maxhealth var of any kind.
@@ -95,10 +95,10 @@
 	return charging && (charging.health == charging.maxHealth)
 
 /obj/machinery/mech_recharger/proc/start_charging(mob/living/exosuit/M)
-	if(inoperable())
+	if (inoperable())
 		M.show_message(SPAN_WARNING("Power port not responding. Terminating."))
 		return
-	if(M.get_cell(TRUE))
+	if (M.get_cell(TRUE))
 		M.show_message(SPAN_NOTICE("Now charging..."))
 		charging = M
 		update_use_power(POWER_USE_ACTIVE)

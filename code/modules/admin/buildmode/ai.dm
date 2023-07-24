@@ -181,7 +181,7 @@
 			return
 
 	if (pa["middle"])
-		if(isliving(A)) // Follow or attack.
+		if (isliving(A)) // Follow or attack.
 			var/mob/living/L = A
 			var/i = 0 // Attacking mobs.
 			var/j = 0 // Following mobs.
@@ -189,20 +189,20 @@
 				var/datum/ai_holder/AI = unit.ai_holder
 				if (!AI)
 					return
-				if(L.IIsAlly(unit) || !AI.hostile || pa["shift"])
+				if (L.IIsAlly(unit) || !AI.hostile || pa["shift"])
 					AI.set_follow(L)
 					j++
 				else
 					AI.give_target(L)
 					i++
 			var/message = "Commanded "
-			if(i)
+			if (i)
 				message += "[i] mob\s to attack \the [L]"
-				if(j)
+				if (j)
 					message += ", and "
 				else
 					message += "."
-			if(j)
+			if (j)
 				message += "[j] mob\s to follow \the [L]."
 			to_chat(user, SPAN_NOTICE(message))
 			var/image/orderimage = image(buildmode_hud,L,"ai_targetorder")
@@ -252,20 +252,20 @@
 
 	var/datum/build_mode/ai/holder = buildmode
 	for(var/datum/build_mode/ai/H)
-		if(H.user == user)
+		if (H.user == user)
 			holder = H
 			break
-	if(!holder) return
+	if (!holder) return
 	var/list/pa = params2list(params)
 	if (pa["ctrl"])
 		//Holding shift prevents the deselection of existing
-		if(!pa["shift"])
+		if (!pa["shift"])
 			for(var/mob/living/unit in holder.selected_mobs)
 				holder.deselect_AI_mob(unit)
 
 		var/turf/c1 = get_turf(fromatom)
 		var/turf/c2 = get_turf(toatom)
-		if(!c1 || !c2)
+		if (!c1 || !c2)
 			return //Dragged outside window or something
 
 		var/low_x = min(c1.x,c2.x)
@@ -275,9 +275,9 @@
 		var/z = c1.z
 
 		for(var/mob/living/L in GLOB.alive_mobs)
-			if(L.z != z || L.client)
+			if (L.z != z || L.client)
 				continue
-			if(L.x >= low_x && L.x <= hi_x && L.y >= low_y && L.y <= hi_y)
+			if (L.x >= low_x && L.x <= hi_x && L.y >= low_y && L.y <= hi_y)
 				if (L.ai_holder)
 					holder.select_AI_mob(L)
 

@@ -64,12 +64,12 @@
 /singleton/backpack_outfit/New()
 	tweaks = tweaks || list()
 
-	if(HAS_FLAGS(flags, BACKPACK_HAS_TYPE_SELECTION|BACKPACK_HAS_SUBTYPE_SELECTION))
+	if (HAS_FLAGS(flags, BACKPACK_HAS_TYPE_SELECTION|BACKPACK_HAS_SUBTYPE_SELECTION))
 		CRASH("May not have both type and subtype selection tweaks")
 
-	if(flags & BACKPACK_HAS_TYPE_SELECTION)
+	if (flags & BACKPACK_HAS_TYPE_SELECTION)
 		tweaks += new/datum/backpack_tweak/selection/types(path)
-	if(flags & BACKPACK_HAS_SUBTYPE_SELECTION)
+	if (flags & BACKPACK_HAS_SUBTYPE_SELECTION)
 		tweaks += new/datum/backpack_tweak/selection/subtypes(path)
 
 /singleton/backpack_outfit/proc/spawn_backpack(location, metadata, desired_type)
@@ -116,23 +116,23 @@
 	var/list/selections
 
 /datum/backpack_tweak/selection/New(list/selections)
-	if(!length(selections))
+	if (!length(selections))
 		CRASH("No selections offered")
-	if(RETURN_GIVEN_BACKPACK in selections)
+	if (RETURN_GIVEN_BACKPACK in selections)
 		CRASH("May not use the keyword '[RETURN_GIVEN_BACKPACK]'")
-	if(RETURN_RANDOM_BACKPACK in selections)
+	if (RETURN_RANDOM_BACKPACK in selections)
 		CRASH("May not use the keyword '[RETURN_RANDOM_BACKPACK]'")
 	var/list/duplicate_keys = duplicates(selections)
-	if(length(duplicate_keys))
+	if (length(duplicate_keys))
 		CRASH("Duplicate names found: [english_list(duplicate_keys)]")
 	var/list/duplicate_values = duplicates(list_values(selections))
-	if(length(duplicate_values))
+	if (length(duplicate_values))
 		CRASH("Duplicate types found: [english_list(duplicate_values)]")
 	for(var/selection_key in selections)
-		if(!istext(selection_key))
+		if (!istext(selection_key))
 			CRASH("Expected a valid selection key, was [log_info_line(selection_key)]")
 		var/selection_type = selections[selection_key]
-		if(!ispath(selection_type, /obj/item/storage/backpack))
+		if (!ispath(selection_type, /obj/item/storage/backpack))
 			CRASH("Expected a valid selection value, was [log_info_line(selection_type)]")
 
 	src.selections = selections
@@ -153,9 +153,9 @@
 
 /datum/backpack_tweak/selection/get_backpack_type(given_backpack_type, metadata)
 	switch(metadata)
-		if(RETURN_GIVEN_BACKPACK)
+		if (RETURN_GIVEN_BACKPACK)
 			return given_backpack_type
-		if(RETURN_RANDOM_BACKPACK)
+		if (RETURN_RANDOM_BACKPACK)
 			var/random_choice = pick(selections - RETURN_RANDOM_BACKPACK)
 			return get_backpack_type(given_backpack_type, random_choice)
 		else
@@ -192,7 +192,7 @@
 	var backpacks = GET_SINGLETON_SUBTYPE_MAP(/singleton/backpack_outfit)
 	for(var/backpack in backpacks)
 		var/singleton/backpack_outfit/bo = backpacks[backpack]
-		if(bo.is_default)
+		if (bo.is_default)
 			return bo
 
 #undef BACKPACK_HAS_TYPE_SELECTION

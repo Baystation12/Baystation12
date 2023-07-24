@@ -22,7 +22,7 @@
 
 /mob/living/silicon/robot/flying/Life()
 	. = ..()
-	if(incapacitated() || !is_component_functioning("actuator"))
+	if (incapacitated() || !is_component_functioning("actuator"))
 		stop_flying()
 	else
 		start_flying()
@@ -39,7 +39,7 @@
 
 /mob/living/silicon/robot/flying/death()
 	. = ..()
-	if(!QDELETED(src) && stat == DEAD)
+	if (!QDELETED(src) && stat == DEAD)
 		stop_flying()
 
 /mob/living/silicon/robot/flying/Process_Spacemove()

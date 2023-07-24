@@ -90,17 +90,17 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 	return 1
 
 /datum/unit_test/proc/get_safe_turf()
-	if(!safe_landmark)
+	if (!safe_landmark)
 		for(var/landmark in landmarks_list)
-			if(istype(landmark, /obj/effect/landmark/test/safe_turf))
+			if (istype(landmark, /obj/effect/landmark/test/safe_turf))
 				safe_landmark = landmark
 				break
 	return get_turf(safe_landmark)
 
 /datum/unit_test/proc/get_space_turf()
-	if(!space_landmark)
+	if (!space_landmark)
 		for(var/landmark in landmarks_list)
-			if(istype(landmark, /obj/effect/landmark/test/space_turf))
+			if (istype(landmark, /obj/effect/landmark/test/space_turf))
 				space_landmark = landmark
 				break
 	return get_turf(space_landmark)
@@ -112,7 +112,7 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 /proc/load_unit_test_changes()
 /*
 	//This takes about 60 seconds to run when unit testing and is only used for the ZAS vacume check on The Asteroid.
-	if(config.generate_map != 1)
+	if (config.generate_map != 1)
 		log_unit_test("Overiding Configuration option for Asteroid Generation to ENABLED")
 		config.generate_map = 1	// The default map requires it, the example config doesn't have this enabled.
  */
@@ -122,15 +122,15 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 	. = list()
 	for(var/test in subtypesof(/datum/unit_test))
 		var/datum/unit_test/d = test
-		if(test == initial(d.template))
+		if (test == initial(d.template))
 			continue
 		. += d
 
 /proc/do_unit_test(datum/unit_test/test, end_time, skip_disabled_tests = TRUE)
-	if(test.disabled && skip_disabled_tests)
+	if (test.disabled && skip_disabled_tests)
 		test.pass("[ascii_red]Check Disabled: [test.why_disabled]")
 		return
-	if(world.time > end_time)
+	if (world.time > end_time)
 		test.fail("Unit Tests Ran out of time")   // This should never happen, and if it does either fix your unit tests to be faster or if you can make them async checks.
 		return
 	if (test.start_test() == null)	// Runtimed.
@@ -139,21 +139,21 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 
 //For async tests. Returns 1 if done.
 /proc/check_unit_test(datum/unit_test/test, end_time)
-	if(world.time > end_time)
+	if (world.time > end_time)
 		test.fail("Unit Tests Ran out of Time")// If we're going to run out of time, most likely it's here.  If you can't speed up your unit tests then add time to the timeout at the top.
 		return 1
 	var/result = test.check_result()
-	if(isnull(result))
+	if (isnull(result))
 		test.fail("Test Runtimed")
 		return 1
-	else if(result)
+	else if (result)
 		return 1
 
 /proc/unit_test_final_message()
 	var/skipped_message = ""
-	if(skipped_unit_tests)
+	if (skipped_unit_tests)
 		skipped_message = "| \[[skipped_unit_tests]\\[total_unit_tests]\] Unit Tests Skipped "
-	if(all_unit_tests_passed)
+	if (all_unit_tests_passed)
 		log_unit_test("[ascii_green]**** All Unit Tests Passed \[[total_unit_tests]\] [skipped_message]****[ascii_reset]")
 	else
 		log_unit_test("[ascii_red]**** \[[failed_unit_tests]\\[total_unit_tests]\] Unit Tests Failed [skipped_message]****[ascii_reset]")
@@ -163,17 +163,17 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 	set desc = "Runs the selected unit test - Remember to enable Debug Log Messages"
 	set category = "Debug"
 
-	if(!unit_test_type)
+	if (!unit_test_type)
 		return
 
-	if(!check_rights(R_DEBUG))
+	if (!check_rights(R_DEBUG))
 		return
 
 	log_and_message_admins("has started the unit test '[initial(unit_test_type.name)]'")
 	var/datum/unit_test/test = new unit_test_type
 	var/end_unit_tests = world.time + MAX_UNIT_TEST_RUN_TIME
 	do_unit_test(test, end_unit_tests, FALSE)
-	if(test.async)
+	if (test.async)
 		while(!check_unit_test(test, end_unit_tests))
 			sleep(20)
 	unit_test_final_message()

@@ -9,7 +9,7 @@
 	tray_light = 0
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/attackby(obj/item/O as obj, mob/user as mob)
-	if(istype(O,/obj/item/tank))
+	if (istype(O,/obj/item/tank))
 		return
 	else
 		..()
@@ -46,7 +46,7 @@
 	lastcycle = world.time
 	pixel_y = rand(-12,12)
 	pixel_x = rand(-12,12)
-	if(seed)
+	if (seed)
 		name = seed.display_name
 	check_health()
 
@@ -55,9 +55,9 @@
 	connected_zlevels = GetConnectedZlevels(z)
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Process()
-	if(z in GLOB.using_map.station_levels) //plants on station always tick
+	if (z in GLOB.using_map.station_levels) //plants on station always tick
 		return ..()
-	if(living_observers_present(connected_zlevels))
+	if (living_observers_present(connected_zlevels))
 		return ..()
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/remove_dead(mob/user, silent)
@@ -66,14 +66,14 @@
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/harvest()
 	..()
-	if(!seed) // Repeat harvests are a thing.
+	if (!seed) // Repeat harvests are a thing.
 		qdel(src)
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/die()
 	qdel(src)
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Process()
-	if(!seed)
+	if (!seed)
 		qdel(src)
 		return
 	..()
@@ -81,6 +81,6 @@
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Destroy()
 	// Check if we're masking a decal that needs to be visible again.
 	for(var/obj/effect/vine/plant in get_turf(src))
-		if(plant.invisibility == INVISIBILITY_MAXIMUM)
+		if (plant.invisibility == INVISIBILITY_MAXIMUM)
 			plant.set_invisibility(initial(plant.invisibility))
 	. = ..()

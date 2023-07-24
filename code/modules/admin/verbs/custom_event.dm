@@ -3,12 +3,12 @@
 	set category = "Fun"
 	set name = "Change Event"
 
-	if(!holder)
+	if (!holder)
 		to_chat(src, "Only administrators may use this command.")
 		return
 
 	var/input = sanitize(input(usr, "Enter the description of the event. Be descriptive. To cancel the event, make this blank or hit cancel.", "Event", config.event) as message|null, MAX_BOOK_MESSAGE_LEN, extra = 0)
-	if(isnull(input))
+	if (isnull(input))
 		config.event = ""
 		log_admin("[usr.key] has cleared the event text.")
 		message_admins("[key_name_admin(usr)] has cleared the event text.")
@@ -31,7 +31,7 @@
 	set category = "OOC"
 	set name = "Event Info"
 
-	if(!config.event)
+	if (!config.event)
 		to_chat(src, "There currently is no known event taking place.")
 		to_chat(src, "Keep in mind: it is possible that an admin has not properly set this.")
 		return

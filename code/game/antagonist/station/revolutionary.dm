@@ -35,11 +35,11 @@ GLOBAL_DATUM_INIT(revs, /datum/antagonist/revolutionary, new)
 
 
 /datum/antagonist/revolutionary/create_global_objectives()
-	if(!..())
+	if (!..())
 		return
 	global_objectives = list()
 	for(var/mob/living/carbon/human/player in SSmobs.mob_list)
-		if(!player.mind || player.stat==2 || !(player.mind.assigned_role in SSjobs.titles_by_department(COM)))
+		if (!player.mind || player.stat==2 || !(player.mind.assigned_role in SSjobs.titles_by_department(COM)))
 			continue
 		var/datum/objective/rev/rev_obj = new
 		rev_obj.target = player.mind
@@ -49,7 +49,7 @@ GLOBAL_DATUM_INIT(revs, /datum/antagonist/revolutionary, new)
 /datum/antagonist/revolutionary/equip(mob/living/carbon/human/revolutionary_mob)
 	spawn_uplink(revolutionary_mob)
 	. = ..()
-	if(!.)
+	if (!.)
 		return
 
 /datum/antagonist/revolutionary/proc/spawn_uplink(mob/living/carbon/human/revolutionary_mob)

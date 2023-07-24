@@ -3,7 +3,7 @@
 // This is the main power restoration sequence. Only one sequence per AI can exist.
 /mob/living/silicon/ai/proc/handle_power_failure()
 	// Power restoration routine already running in other spawn(). Don't start it again.
-	if(aiRestorePowerRoutine != 1)
+	if (aiRestorePowerRoutine != 1)
 		return
 
 	to_chat(src, SPAN_DANGER("Main power lost. System switched to internal capacitor. Beginning diagnostics."))
@@ -11,41 +11,41 @@
 	var/connection_failures = 0
 	while(aiRestorePowerRoutine)
 		// If the routine is running, proceed to another step.
-		if(aiRestorePowerRoutine > AI_RESTOREPOWER_FAILED)
+		if (aiRestorePowerRoutine > AI_RESTOREPOWER_FAILED)
 			aiRestorePowerRoutine++
 
 		sleep(5 SECONDS)
 
-		if(self_shutdown)
+		if (self_shutdown)
 			to_chat(src, SPAN_NOTICE("Systems offline. Power restoration routine aborted."))
 			aiRestorePowerRoutine = AI_RESTOREPOWER_IDLE
 			return
 
-		if(has_power(0))
+		if (has_power(0))
 			to_chat(src, SPAN_NOTICE("Main power restored. All systems returning to normal mode."))
 			aiRestorePowerRoutine = AI_RESTOREPOWER_IDLE
 			update_icon()
 			return
 
-		if(aiRestorePowerRoutine == AI_RESTOREPOWER_FAILED)
+		if (aiRestorePowerRoutine == AI_RESTOREPOWER_FAILED)
 			continue
 
 		switch(aiRestorePowerRoutine)
-			if(AI_RESTOREPOWER_DIAGNOSTICS)
+			if (AI_RESTOREPOWER_DIAGNOSTICS)
 				to_chat(src, SPAN_NOTICE("Diagnostics completed. Failure confirmed: Main power connection nonfunctional."))
 				continue
-			if(AI_RESTOREPOWER_CONNECTING)
+			if (AI_RESTOREPOWER_CONNECTING)
 				to_chat(src, SPAN_NOTICE("Attempting to connect to area power controller."))
 				continue
 			// step 3 tries to locate an APC. It tries up to three times before failing, relying on external influence to restore power only.
-			if(AI_RESTOREPOWER_CONNECTED)
+			if (AI_RESTOREPOWER_CONNECTED)
 				var/area/A = get_area(src)
 				theAPC = A.get_apc()
 
-				if(!istype(theAPC))
+				if (!istype(theAPC))
 					to_chat(src, SPAN_NOTICE("Error processing connection to APC: Attempt [connection_failures+1]/[AI_POWER_RESTORE_MAX_ATTEMPTS]"))
 					connection_failures++
-					if(connection_failures == AI_POWER_RESTORE_MAX_ATTEMPTS)
+					if (connection_failures == AI_POWER_RESTORE_MAX_ATTEMPTS)
 						aiRestorePowerRoutine = AI_RESTOREPOWER_FAILED
 						to_chat(src, SPAN_DANGER("Unable to connect to APC after [AI_POWER_RESTORE_MAX_ATTEMPTS] attempts. Aborting power restoration sequence."))
 						continue
@@ -54,27 +54,27 @@
 				to_chat(src, SPAN_NOTICE("APC connection confirmed: [theAPC]. Sending emergency reset signal..."))
 				continue
 			// step 4 tries to reset the APC, if we still have connection to it.
-			if(AI_RESTOREPOWER_COMPLETED)
+			if (AI_RESTOREPOWER_COMPLETED)
 				// The APC was destroyed since last step
-				if(!istype(theAPC))
+				if (!istype(theAPC))
 					to_chat(src, SPAN_DANGER("Connection to APC lost. Attempting to re-connect."))
 					aiRestorePowerRoutine = AI_RESTOREPOWER_CONNECTING
 					connection_failures = 0
 					continue
 				// Our area has changed.
-				if(get_area(src) != get_area(theAPC))
+				if (get_area(src) != get_area(theAPC))
 					to_chat(src, SPAN_DANGER("APC change detected. Attempting to locate new APC."))
 					aiRestorePowerRoutine = AI_RESTOREPOWER_CONNECTING
 					connection_failures = 0
 					continue
 				// The APC is damaged
-				if(MACHINE_IS_BROKEN(theAPC))
+				if (MACHINE_IS_BROKEN(theAPC))
 					to_chat(src, SPAN_DANGER("APC internal diagnostics reports hardware failure. Unable to reset. Aborting power restoration sequence."))
 					aiRestorePowerRoutine = AI_RESTOREPOWER_FAILED
 					continue
 				// APC's cell is removed and/or below 1% charge. This prevents the AI from briefly regaining power as we force the APC on, only to lose it again next tick due to 0% cell charge.
 				var/obj/item/cell/cell = theAPC.get_cell()
-				if(cell && cell.percent() < 1)
+				if (cell && cell.percent() < 1)
 					to_chat(src, SPAN_DANGER("APC internal power reserves are critical. Unable to restore main power."))
 					aiRestorePowerRoutine = AI_RESTOREPOWER_FAILED
 					continue
@@ -86,19 +86,19 @@
 
 // Handles all necessary power checks: Area power, inteliCard and Malf AI APU power and manual override.
 /mob/living/silicon/ai/proc/has_power(respect_override = 1)
-	if(psupply && psupply.powered())
+	if (psupply && psupply.powered())
 		return 1
-	if(istype(src.loc,/obj/item))
+	if (istype(src.loc,/obj/item))
 		return 1
-	if(APU_power || admin_powered)
+	if (APU_power || admin_powered)
 		return 1
-	if(respect_override && power_override_active)
+	if (respect_override && power_override_active)
 		return 1
 	return 0
 
 // Resets passed APC so the AI may function again.
 /mob/living/silicon/ai/proc/reset_apc(obj/machinery/power/apc/A)
-	if(!istype(A))
+	if (!istype(A))
 		return
 
 	A.operating = 1
@@ -109,38 +109,38 @@
 	update_icon()
 
 /mob/living/silicon/ai/proc/calculate_power_usage()
-	if(admin_powered)
+	if (admin_powered)
 		return 0
 
-	if(istype(loc, /obj/item/aicard))
+	if (istype(loc, /obj/item/aicard))
 		return 0
 
-	if(self_shutdown)
+	if (self_shutdown)
 		return AI_POWERUSAGE_LOWPOWER
 
-	if(aiRestorePowerRoutine && power_override_active)
+	if (aiRestorePowerRoutine && power_override_active)
 		return AI_POWERUSAGE_NORMAL
-	else if(aiRestorePowerRoutine == -1)
+	else if (aiRestorePowerRoutine == -1)
 		return AI_POWERUSAGE_LOWPOWER
-	else if(aiRestorePowerRoutine)
+	else if (aiRestorePowerRoutine)
 		return AI_POWERUSAGE_RESTORATION
 
-	if(getOxyLoss())
+	if (getOxyLoss())
 		return AI_POWERUSAGE_RECHARGING
 	return AI_POWERUSAGE_NORMAL
 
 /mob/living/silicon/ai/proc/update_power_usage()
 	var/newusage = calculate_power_usage()
 	newusage *= AI_POWERUSAGE_OXYLOSS_TO_WATTS_MULTIPLIER
-	if(psupply)
+	if (psupply)
 		psupply.change_power_consumption(newusage, POWER_USE_ACTIVE)
 		psupply.update_power_state()
 
 /mob/living/silicon/ai/proc/handle_power_oxyloss()
 	// Powered, lose oxyloss
-	if(has_power(0))
+	if (has_power(0))
 		// Self-shutdown mode uses only 10kW, so we don't have any spare power to charge.
-		if(!self_shutdown || carded)
+		if (!self_shutdown || carded)
 			adjustOxyLoss(AI_POWERUSAGE_NORMAL - AI_POWERUSAGE_RECHARGING)
 		return
 
@@ -155,7 +155,7 @@
 
 	power_override_active = !power_override_active
 
-	if(power_override_active)
+	if (power_override_active)
 		to_chat(src, "You have enabled power override. Should you lose power you will remain normally operational, but your backup capacitor will run out much faster.")
 	else
 		to_chat(src, "You have disabled power override. Should you lose power you will enter diagnostics and low power mode, which will prolong the time for which you can remain operational.")
@@ -166,21 +166,21 @@
 	set name = "Shutdown"
 	set desc = "Allows you to shut yourself down, sacrificing most functions for considerably reduced power usage."
 
-	if(self_shutdown)
+	if (self_shutdown)
 		to_chat(src, SPAN_NOTICE("System rebooted. Camera, communication and network systems operational."))
 		self_shutdown = 0
 		return
 
 	var/confirm = alert("Are you sure that you want to shut yourself down? You can reboot yourself later by using the \"Shutdown\" command again. This will put you into reduced power usage mode, at the cost of losing most functions.", "Confirm Shutdown", "Yes", "No")
 
-	if(confirm == "Yes")
+	if (confirm == "Yes")
 		to_chat(src, SPAN_NOTICE("Shutting down. Minimal power mode: Enabled. You may reboot yourself by using the \"Shutdown\" command again."))
 		self_shutdown = 1
 		return
 
 
 /mob/living/silicon/ai/proc/create_powersupply()
-	if(psupply)
+	if (psupply)
 		qdel(psupply)
 	psupply = new/obj/machinery/ai_powersupply(src)
 
@@ -211,7 +211,7 @@
 
 /obj/machinery/ai_powersupply/proc/get_power_state()
 	// Dead, powered by APU, admin power, or inside an item (inteliCard/IIS). No power usage.
-	if(!powered_ai.stat == DEAD || powered_ai.APU_power || powered_ai.admin_powered || istype(powered_ai.loc, /obj/item))
+	if (!powered_ai.stat == DEAD || powered_ai.APU_power || powered_ai.admin_powered || istype(powered_ai.loc, /obj/item))
 		return 0
 	// Normal power usage.
 	return 2

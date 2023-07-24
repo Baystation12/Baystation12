@@ -53,24 +53,24 @@ GLOBAL_LIST_EMPTY(all_disposal_pipe_datums_by_category)
 	AssemblePipeDesc()
 
 /datum/pipe/proc/AssemblePipeName()
-	if(!name && build_path)					//Get name from build path if posible
+	if (!name && build_path)					//Get name from build path if posible
 		var/atom/movable/A = build_path
 		name = initial(A.name)
 
 /datum/pipe/proc/AssemblePipeDesc()
-	if(!desc)								//Try to make up a nice description if we don't have one
+	if (!desc)								//Try to make up a nice description if we don't have one
 		desc = "\A [name]."
 
 /datum/pipe/proc/Build(datum/pipe/D, loc, pipe_color = PIPE_COLOR_WHITE)
-	if(D.build_path)
+	if (D.build_path)
 		var/obj/item/pipe/new_item = new build_path(loc)
-		if(istype(new_item))
-			if(D.connect_types != null)
+		if (istype(new_item))
+			if (D.connect_types != null)
 				new_item.connect_types = D.connect_types
 			new_item.pipe_class = D.pipe_class
 			new_item.rotate_class = D.rotate_class
 			new_item.constructed_path = D.constructed_path
-		if(D.colorable)
+		if (D.colorable)
 			new_item.color = pipe_color
 		else if (D.pipe_color != null)
 			new_item.color = D.pipe_color
@@ -81,7 +81,7 @@ GLOBAL_LIST_EMPTY(all_disposal_pipe_datums_by_category)
 		new_item.icon_state = D.build_icon_state
 
 /datum/pipe/disposal_dispenser/Build(datum/pipe/disposal_dispenser/D, loc, pipe_color = PIPE_COLOR_GREY)
-	if(D.build_path)
+	if (D.build_path)
 		var/obj/structure/disposalconstruct/new_item = new build_path(loc)
 		new_item.SetName(D.name)
 		new_item.desc = D.desc

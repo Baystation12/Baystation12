@@ -151,7 +151,7 @@
 	return .
 
 /obj/item/device/paint_sprayer/proc/remove_paint(atom/A, mob/user)
-	if(!user.Adjacent(A) || user.incapacitated())
+	if (!user.Adjacent(A) || user.incapacitated())
 		return FALSE
 	if (istype(A, /turf/simulated/floor))
 		var/turf/simulated/floor/F = A
@@ -188,47 +188,47 @@
 	return picked_color
 
 /obj/item/device/paint_sprayer/proc/paint_floor(turf/simulated/floor/F, mob/user, params)
-	if(!F.flooring)
+	if (!F.flooring)
 		to_chat(user, SPAN_WARNING("You need flooring to paint on."))
 		return FALSE
 
-	if(!F.flooring.can_paint || F.broken || F.burnt)
+	if (!F.flooring.can_paint || F.broken || F.burnt)
 		to_chat(user, SPAN_WARNING("\The [src] cannot paint \the [F.name]."))
 		return FALSE
 
 	var/list/decal_data = decals[decal]
 	var/config_error
-	if(!islist(decal_data))
+	if (!islist(decal_data))
 		config_error = 1
 	var/painting_decal
-	if(!config_error)
+	if (!config_error)
 		painting_decal = decal_data["path"]
-		if(!ispath(painting_decal))
+		if (!ispath(painting_decal))
 			config_error = 1
 
-	if(config_error)
+	if (config_error)
 		to_chat(user, SPAN_WARNING("\The [src] flashes an error light. You might need to reconfigure it."))
 		return FALSE
 
-	if((F.decals && length(F.decals) > 5) && !ispath(painting_decal, /obj/effect/floor_decal/reset))
+	if ((F.decals && length(F.decals) > 5) && !ispath(painting_decal, /obj/effect/floor_decal/reset))
 		to_chat(user, SPAN_WARNING("\The [F] has been painted too much; you need to clear it off."))
 		return FALSE
 
 	var/painting_dir = 0
-	if(!decal_data["precise"])
+	if (!decal_data["precise"])
 		painting_dir = user.dir
 	else
 		var/list/mouse_control = params2list(params)
 		var/mouse_x = text2num(mouse_control["icon-x"])
 		var/mouse_y = text2num(mouse_control["icon-y"])
-		if(isnum(mouse_x) && isnum(mouse_y))
-			if(mouse_x <= 16)
-				if(mouse_y <= 16)
+		if (isnum(mouse_x) && isnum(mouse_y))
+			if (mouse_x <= 16)
+				if (mouse_y <= 16)
 					painting_dir = WEST
 				else
 					painting_dir = NORTH
 			else
-				if(mouse_y <= 16)
+				if (mouse_y <= 16)
 					painting_dir = SOUTH
 				else
 					painting_dir = EAST
@@ -236,7 +236,7 @@
 			painting_dir = user.dir
 
 	var/painting_color
-	if(decal_data["colored"] && paint_color)
+	if (decal_data["colored"] && paint_color)
 		painting_color = paint_color
 
 	new painting_decal(F, painting_dir, painting_color)
@@ -321,7 +321,7 @@
 	set category = "Object"
 	set src in usr
 
-	if(usr.incapacitated())
+	if (usr.incapacitated())
 		return
 	var/new_color = input(usr, "Choose a color.", name, paint_color) as color|null
 	if (usr.incapacitated())
@@ -334,10 +334,10 @@
 	set category = "Object"
 	set src in usr
 
-	if(usr.incapacitated())
+	if (usr.incapacitated())
 		return
 	var/preset = input(usr, "Choose a color.", name, paint_color) as null|anything in preset_colors
-	if(usr.incapacitated())
+	if (usr.incapacitated())
 		return
 	change_color(preset_colors[preset], usr)
 
@@ -347,12 +347,12 @@
 	set category = "Object"
 	set src in usr
 
-	if(usr.incapacitated())
+	if (usr.incapacitated())
 		return
 	var/new_decal = input("Select a decal.") as null|anything in decals
-	if(usr.incapacitated())
+	if (usr.incapacitated())
 		return
-	if(new_decal && !isnull(decals[new_decal]))
+	if (new_decal && !isnull(decals[new_decal]))
 		decal = new_decal
 		to_chat(usr, SPAN_NOTICE("You set \the [src] decal to '[decal]'."))
 
@@ -362,11 +362,11 @@
 /datum/click_handler/default/paint_sprayer/OnClick(atom/A, params)
 	var/list/modifiers = params2list(params)
 	if (A != paint_sprayer)
-		if(!istype(user.buckled) || user.buckled.buckle_movable)
+		if (!istype(user.buckled) || user.buckled.buckle_movable)
 			user.face_atom(A)
-		if(modifiers["ctrl"] && paint_sprayer.pick_color(A, user))
+		if (modifiers["ctrl"] && paint_sprayer.pick_color(A, user))
 			return
-		if(modifiers["shift"] && paint_sprayer.remove_paint(A, user))
+		if (modifiers["shift"] && paint_sprayer.remove_paint(A, user))
 			return
 	user.ClickOn(A, params)
 

@@ -31,21 +31,21 @@
 		qdel(G)
 		return
 
-	if(G.target_zone in list(BP_L_HAND, BP_R_HAND))
+	if (G.target_zone in list(BP_L_HAND, BP_R_HAND))
 		affecting.drop_l_hand()
 		affecting.drop_r_hand()
 
 	// Keeps those who are on the ground down
-	if(affecting.lying)
+	if (affecting.lying)
 		affecting.Weaken(4)
 
 /datum/grab/normal/aggressive/can_upgrade(obj/item/grab/G)
-	if(!(G.target_zone in list(BP_CHEST, BP_HEAD)))
+	if (!(G.target_zone in list(BP_CHEST, BP_HEAD)))
 		to_chat(G.assailant, SPAN_WARNING("You need to be grabbing their torso or head for this!"))
 		return FALSE
 	var/obj/item/clothing/C = G.affecting.head
-	if(istype(C)) //hardsuit helmets etc
-		if((C.max_pressure_protection) && C.armor["melee"] > 20)
+	if (istype(C)) //hardsuit helmets etc
+		if ((C.max_pressure_protection) && C.armor["melee"] > 20)
 			to_chat(G.assailant, SPAN_WARNING("\The [C] is in the way!"))
 			return FALSE
 	return TRUE

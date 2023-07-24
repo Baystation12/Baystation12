@@ -16,15 +16,15 @@
 	var/skip_main_unit_tests
 
 /datum/map_template/New(list/paths = null, rename = null)
-	if(paths && !islist(paths))
+	if (paths && !islist(paths))
 		crash_with("Non-list paths passed into map template constructor.")
-	if(paths)
+	if (paths)
 		mappaths = paths
-	if(mappaths)
+	if (mappaths)
 		preload_size(mappaths)
-	if(rename)
+	if (rename)
 		name = rename
-	if(!name && id)
+	if (!name && id)
 		name = id
 
 /datum/map_template/proc/preload_size()
@@ -32,7 +32,7 @@
 	var/z_offset = 1 // needed to calculate z-bounds correctly
 	for (var/mappath in mappaths)
 		var/datum/map_load_metadata/M = GLOB.maploader.load_map(file(mappath), 1, 1, z_offset, cropMap=FALSE, measureOnly=TRUE, no_changeturf=TRUE, clear_contents= template_flags & TEMPLATE_FLAG_CLEAR_CONTENTS)
-		if(M)
+		if (M)
 			bounds = extend_bounds_if_needed(bounds, M.bounds)
 			z_offset++
 		else
@@ -52,19 +52,19 @@
 	var/list/obj/structure/cable/cables = list()
 
 	for(var/atom/A in atoms)
-		if(istype(A, /turf))
+		if (istype(A, /turf))
 			turfs += A
-		if(istype(A, /obj/structure/cable))
+		if (istype(A, /obj/structure/cable))
 			cables += A
-		if(istype(A, /obj/machinery/atmospherics))
+		if (istype(A, /obj/machinery/atmospherics))
 			atmos_machines += A
-		if(istype(A, /obj/machinery))
+		if (istype(A, /obj/machinery))
 			machines += A
-		if(istype(A,/obj/effect/landmark/map_load_mark))
+		if (istype(A,/obj/effect/landmark/map_load_mark))
 			LAZYADD(subtemplates_to_spawn, A)
 
 	var/notsuspended
-	if(!SSmachines.suspended)
+	if (!SSmachines.suspended)
 		SSmachines.suspend()
 		notsuspended = TRUE
 
@@ -72,7 +72,7 @@
 
 	SSmachines.setup_powernets_for_cables(cables)
 	SSmachines.setup_atmos_machinery(atmos_machines)
-	if(notsuspended)
+	if (notsuspended)
 		SSmachines.wake()
 
 	for (var/i in machines)
@@ -82,11 +82,11 @@
 	for (var/i in turfs)
 		var/turf/T = i
 		T.post_change()
-		if(template_flags & TEMPLATE_FLAG_NO_RUINS)
+		if (template_flags & TEMPLATE_FLAG_NO_RUINS)
 			T.turf_flags |= TURF_FLAG_NORUINS
-		if(template_flags & TEMPLATE_FLAG_NO_RADS)
+		if (template_flags & TEMPLATE_FLAG_NO_RADS)
 			qdel(SSradiation.sources_assoc[i])
-		if(istype(T,/turf/simulated))
+		if (istype(T,/turf/simulated))
 			var/turf/simulated/sim = T
 			sim.update_air_properties()
 
@@ -142,15 +142,15 @@
 	return locate(world.maxx/2, world.maxy/2, world.maxz)
 
 /datum/map_template/proc/load(turf/T, centered=FALSE)
-	if(centered)
+	if (centered)
 		T = locate(T.x - round(width/2) , T.y - round(height/2) , T.z)
-	if(!T)
+	if (!T)
 		log_debug("[src] map template failed to load, could not locate a center turf.")
 		return
-	if(T.x+width > world.maxx)
+	if (T.x+width > world.maxx)
 		log_debug("[src] map template failed to load, map would extend past world X bound.")
 		return
-	if(T.y+height > world.maxy)
+	if (T.y+height > world.maxy)
 		log_debug("[src] map template failed to load, map would extend past world Y bound.")
 		return
 
@@ -179,7 +179,7 @@
 /datum/map_template/proc/after_load(z)
 	for(var/obj/effect/landmark/map_load_mark/mark in subtemplates_to_spawn)
 		subtemplates_to_spawn -= mark
-		if(LAZYLEN(mark.templates))
+		if (LAZYLEN(mark.templates))
 			var/template = pick(mark.templates)
 			var/datum/map_template/M = new template()
 			M.load(get_turf(mark), TRUE)
@@ -197,9 +197,9 @@
 
 /datum/map_template/proc/get_affected_turfs(turf/T, centered = FALSE)
 	var/turf/placement = T
-	if(centered)
+	if (centered)
 		var/turf/corner = locate(placement.x - round(width/2), placement.y - round(height/2), placement.z)
-		if(corner)
+		if (corner)
 			placement = corner
 	return block(placement, locate(placement.x+width-1, placement.y+height-1, placement.z))
 

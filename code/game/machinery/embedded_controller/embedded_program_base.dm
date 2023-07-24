@@ -12,7 +12,7 @@
 	..()
 
 /datum/computer/file/embedded_program/Destroy()
-	if(master)
+	if (master)
 		master.program = null
 		master = null
 	return ..()
@@ -27,7 +27,7 @@
 	return
 
 /datum/computer/file/embedded_program/proc/post_signal(datum/signal/signal, comm_line)
-	if(master)
+	if (master)
 		master.post_signal(signal, comm_line)
 	else
 		qdel(signal)

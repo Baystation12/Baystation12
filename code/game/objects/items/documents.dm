@@ -11,7 +11,7 @@
 
 /obj/item/documents/examine(mob/user)
 	. = ..()
-	if(description_antag)
+	if (description_antag)
 		to_chat(user, description_antag)
 
 /obj/item/documents/nanotrasen

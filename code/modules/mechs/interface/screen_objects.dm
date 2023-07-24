@@ -15,8 +15,8 @@
 	maptext_y = 12
 
 /obj/screen/exosuit/radio/Click()
-	if(..())
-		if(owner.radio)
+	if (..())
+		if (owner.radio)
 			owner.radio.attack_self(usr)
 		else
 			to_chat(usr, SPAN_WARNING("There is no radio installed."))
@@ -24,7 +24,7 @@
 /obj/screen/exosuit/Initialize()
 	. = ..()
 	var/mob/living/exosuit/newowner = loc
-	if(!istype(newowner))
+	if (!istype(newowner))
 		return qdel(src)
 	owner = newowner
 
@@ -43,26 +43,26 @@
 
 /obj/screen/exosuit/hardpoint/MouseDrop()
 	..()
-	if(holding) holding.screen_loc = screen_loc
+	if (holding) holding.screen_loc = screen_loc
 
 /obj/screen/exosuit/hardpoint/proc/update_system_info()
 
 	// No point drawing it if we have no item to use or nobody to see it.
-	if(!holding || !owner)
+	if (!holding || !owner)
 		return
 
 	var/has_pilot_with_client = owner.client
-	if(!has_pilot_with_client && LAZYLEN(owner.pilots))
+	if (!has_pilot_with_client && LAZYLEN(owner.pilots))
 		for(var/thing in owner.pilots)
 			var/mob/pilot = thing
-			if(pilot.client)
+			if (pilot.client)
 				has_pilot_with_client = TRUE
 				break
-	if(!has_pilot_with_client)
+	if (!has_pilot_with_client)
 		return
 
 	var/list/new_overlays = list()
-	if(!owner.get_cell() || (owner.get_cell().charge <= 0))
+	if (!owner.get_cell() || (owner.get_cell().charge <= 0))
 		overlays.Cut()
 		maptext = ""
 		return
@@ -72,16 +72,16 @@
 	var/ui_damage = (!owner.body.diagnostics || !owner.body.diagnostics.is_functional() || ((owner.emp_damage>EMP_GUI_DISRUPT) && prob(owner.emp_damage)))
 
 	var/value = holding.get_hardpoint_status_value()
-	if(isnull(value))
+	if (isnull(value))
 		overlays.Cut()
 		return
 
-	if(ui_damage)
+	if (ui_damage)
 		value = -1
 		maptext = SPAN_STYLE("font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 7px;", "ERROR")
 	else
-		if((owner.emp_damage>EMP_GUI_DISRUPT) && prob(owner.emp_damage*2))
-			if(prob(10))
+		if ((owner.emp_damage>EMP_GUI_DISRUPT) && prob(owner.emp_damage*2))
+			if (prob(10))
 				value = -1
 			else
 				value = rand(1,BAR_CAP)
@@ -89,32 +89,32 @@
 			value = round(value * BAR_CAP)
 
 	// Draw background.
-	if(!GLOB.default_hardpoint_background)
+	if (!GLOB.default_hardpoint_background)
 		GLOB.default_hardpoint_background = image(icon = 'icons/mecha/mech_hud.dmi', icon_state = "bar_bkg")
 		GLOB.default_hardpoint_background.pixel_x = 34
 	new_overlays += GLOB.default_hardpoint_background
 
-	if(value == 0)
-		if(!GLOB.hardpoint_bar_empty)
+	if (value == 0)
+		if (!GLOB.hardpoint_bar_empty)
 			GLOB.hardpoint_bar_empty = image(icon='icons/mecha/mech_hud.dmi',icon_state="bar_flash")
 			GLOB.hardpoint_bar_empty.pixel_x = 24
 			GLOB.hardpoint_bar_empty.color = "#ff0000"
 		new_overlays += GLOB.hardpoint_bar_empty
-	else if(value < 0)
-		if(!GLOB.hardpoint_error_icon)
+	else if (value < 0)
+		if (!GLOB.hardpoint_error_icon)
 			GLOB.hardpoint_error_icon = image(icon='icons/mecha/mech_hud.dmi',icon_state="bar_error")
 			GLOB.hardpoint_error_icon.pixel_x = 34
 		new_overlays += GLOB.hardpoint_error_icon
 	else
 		value = min(value, BAR_CAP)
 		// Draw statbar.
-		if(!LAZYLEN(GLOB.hardpoint_bar_cache))
+		if (!LAZYLEN(GLOB.hardpoint_bar_cache))
 			for(var/i=0;i<BAR_CAP;i++)
 				var/image/bar = image(icon='icons/mecha/mech_hud.dmi',icon_state="bar")
 				bar.pixel_x = 24+(i*2)
-				if(i>5)
+				if (i>5)
 					bar.color = "#00ff00"
-				else if(i>1)
+				else if (i>1)
 					bar.color = "#ffff00"
 				else
 					bar.color = "#ff0000"
@@ -130,29 +130,29 @@
 
 /obj/screen/exosuit/hardpoint/Click(location, control, params)
 
-	if(!(..()))
+	if (!(..()))
 		return
 
-	if(!owner?.hatch_closed)
+	if (!owner?.hatch_closed)
 		to_chat(usr, SPAN_WARNING("Error: Hardpoint interface disabled while [owner.body.hatch_descriptor] is open."))
 		return
 
 	var/modifiers = params2list(params)
-	if(modifiers["ctrl"])
-		if(owner.hardpoints_locked)
+	if (modifiers["ctrl"])
+		if (owner.hardpoints_locked)
 			to_chat(usr, SPAN_WARNING("Hardpoint ejection system is locked."))
 			return
-		if(owner.remove_system(hardpoint_tag))
+		if (owner.remove_system(hardpoint_tag))
 			to_chat(usr, SPAN_NOTICE("You disengage and discard the system mounted to your [hardpoint_tag] hardpoint."))
 		else
 			to_chat(usr, SPAN_DANGER("You fail to remove the system mounted to your [hardpoint_tag] hardpoint."))
 		return
 
-	if(owner.selected_hardpoint == hardpoint_tag)
+	if (owner.selected_hardpoint == hardpoint_tag)
 		icon_state = "hardpoint"
 		owner.clear_selected_hardpoint()
 	else
-		if(owner.set_hardpoint(hardpoint_tag))
+		if (owner.set_hardpoint(hardpoint_tag))
 			icon_state = "hardpoint_selected"
 
 /obj/screen/exosuit/eject
@@ -162,7 +162,7 @@
 	maptext_y = 12
 
 /obj/screen/exosuit/eject/Click()
-	if(..())
+	if (..())
 		owner.eject(usr)
 
 /obj/screen/exosuit/rename
@@ -178,7 +178,7 @@
 	maptext_width = 64
 
 /obj/screen/exosuit/rename/Click()
-	if(..())
+	if (..())
 		owner.rename(usr)
 
 /obj/screen/exosuit/toggle
@@ -195,7 +195,7 @@
 	maptext = SPAN_COLOR(toggled ? COLOR_WHITE : COLOR_GRAY,initial(maptext))
 
 /obj/screen/exosuit/toggle/Click()
-	if(..()) toggled()
+	if (..()) toggled()
 
 /obj/screen/exosuit/toggle/proc/toggled()
 	toggled = !toggled
@@ -262,7 +262,7 @@
 	maptext_y = 12
 
 /obj/screen/exosuit/toggle/hatch/toggled()
-	if(!owner.hatch_locked && !owner.hatch_closed)
+	if (!owner.hatch_locked && !owner.hatch_closed)
 		to_chat(usr, SPAN_WARNING("You cannot lock the hatch while it is open."))
 		return
 	owner.hatch_locked = ..()
@@ -278,7 +278,7 @@
 /obj/screen/exosuit/toggle/hatch_open/toggled()
 	if (!owner)
 		return
-	if(owner.hatch_locked && owner.hatch_closed)
+	if (owner.hatch_locked && owner.hatch_closed)
 		to_chat(usr, SPAN_WARNING("You cannot open the hatch while it is locked."))
 		return
 	owner.hatch_closed = ..()
@@ -289,7 +289,7 @@
 /obj/screen/exosuit/toggle/hatch_open/on_update_icon()
 	toggled = owner.hatch_closed
 	. = ..()
-	if(toggled)
+	if (toggled)
 		maptext = MECH_UI_STYLE("OPEN")
 		maptext_x = 5
 	else
@@ -302,13 +302,13 @@
 	icon_state = "health"
 
 /obj/screen/exosuit/health/Click()
-	if(..())
-		if(owner && owner.body && owner.get_cell() && owner.body.diagnostics?.is_functional())
+	if (..())
+		if (owner && owner.body && owner.get_cell() && owner.body.diagnostics?.is_functional())
 			usr.setClickCooldown(0.2 SECONDS)
 			to_chat(usr, SPAN_NOTICE("The diagnostics panel blinks several times as it updates:"))
 			playsound(owner.loc,'sound/effects/scanbeep.ogg',30,0)
 			for(var/obj/item/mech_component/MC in list(owner.arms, owner.legs, owner.body, owner.head))
-				if(MC)
+				if (MC)
 					MC.return_diagnostics(usr)
 
 //Controls if cameras set the vision flags
@@ -321,13 +321,13 @@
 	height = 12
 
 /obj/screen/exosuit/toggle/camera/toggled()
-	if(!owner.head)
+	if (!owner.head)
 		to_chat(usr, SPAN_WARNING("I/O Error: Camera systems not found."))
 		return
-	if(!owner.head.vision_flags)
+	if (!owner.head.vision_flags)
 		to_chat(usr,  SPAN_WARNING("Alternative sensor configurations not found. Contact manufacturer for more details."))
 		return
-	if(!owner.get_cell())
+	if (!owner.get_cell())
 		to_chat(usr,  SPAN_WARNING("The augmented vision systems are offline."))
 		return
 	owner.head.active_sensors = ..()
@@ -357,24 +357,24 @@
 	. = ..()
 
 /obj/screen/exosuit/heat/Click(location, control, params)
-	if(..())
+	if (..())
 		var/modifiers = params2list(params)
-		if(modifiers["shift"])
-			if(owner && owner.material)
+		if (modifiers["shift"])
+			if (owner && owner.material)
 				usr.show_message(SPAN_NOTICE("Your suit's safe operating limit ceiling is [(celsius ? "[owner.material.melting_point - T0C] °C" : "[owner.material.melting_point] K" )]."), VISIBLE_MESSAGE)
 			return
-		if(modifiers["ctrl"])
+		if (modifiers["ctrl"])
 			celsius = !celsius
 			usr.show_message(SPAN_NOTICE("You switch the chassis probe display to use [celsius ? "celsius" : "kelvin"]."), VISIBLE_MESSAGE)
 			return
-		if(owner && owner.body && owner.body.diagnostics?.is_functional() && owner.loc)
+		if (owner && owner.body && owner.body.diagnostics?.is_functional() && owner.loc)
 			usr.show_message(SPAN_NOTICE("The life support panel blinks several times as it updates:"), VISIBLE_MESSAGE)
 
 			usr.show_message(SPAN_NOTICE("Chassis heat probe reports temperature of [(celsius ? "[owner.bodytemperature - T0C] °C" : "[owner.bodytemperature] K" )]."), VISIBLE_MESSAGE)
-			if(owner.material.melting_point < owner.bodytemperature)
+			if (owner.material.melting_point < owner.bodytemperature)
 				usr.show_message(SPAN_WARNING("Warning: Current chassis temperature exceeds operating parameters."), VISIBLE_MESSAGE)
 			var/air_contents = owner.loc.return_air()
-			if(!air_contents)
+			if (!air_contents)
 				usr.show_message(SPAN_WARNING("The external air probe isn't reporting any data!"), VISIBLE_MESSAGE)
 			else
 				usr.show_message(SPAN_NOTICE("External probes report: [jointext(atmosanalyzer_scan(owner.loc, air_contents), "<br>")]"), VISIBLE_MESSAGE)
@@ -383,7 +383,7 @@
 
 /obj/screen/exosuit/heat/proc/Update()
 	//Relative value of heat
-	if(owner && owner.body && owner.body.diagnostics?.is_functional() && gauge_needle)
+	if (owner && owner.body && owner.body.diagnostics?.is_functional() && gauge_needle)
 		var/value = clamp( owner.bodytemperature / (owner.material.melting_point * 1.55), 0, 1)
 		animate(
 			gauge_needle,

@@ -45,7 +45,7 @@
 
 // Returns a percentage value for use by GetOxyloss().
 /obj/item/organ/internal/lungs/proc/get_oxygen_deprivation()
-	if(status & ORGAN_DEAD)
+	if (status & ORGAN_DEAD)
 		return 100
 	return round((oxygen_deprivation/species.total_health)*100)
 
@@ -73,16 +73,16 @@
 
 /obj/item/organ/internal/lungs/Process()
 	..()
-	if(!owner)
+	if (!owner)
 		return
 
 	if (germ_level > INFECTION_LEVEL_ONE && active_breathing)
-		if(prob(5))
+		if (prob(5))
 			owner.emote("cough")		//respitory tract infection
 
-	if(is_bruised() && !owner.is_asystole())
-		if(prob(2))
-			if(active_breathing)
+	if (is_bruised() && !owner.is_asystole())
+		if (prob(2))
+			if (active_breathing)
 				owner.visible_message(
 					"<B>\The [owner]</B> coughs up blood!",
 					SPAN_WARNING("You cough up blood!"),
@@ -95,8 +95,8 @@
 				)
 
 			owner.drip(1)
-		if(prob(4))
-			if(active_breathing)
+		if (prob(4))
+			if (active_breathing)
 				owner.visible_message(
 					"<B>\The [owner]</B> gasps for air!",
 					SPAN_DANGER("You can't breathe!"),
@@ -109,30 +109,30 @@
 
 /obj/item/organ/internal/lungs/proc/rupture()
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-	if(istype(parent))
+	if (istype(parent))
 		owner.custom_pain("You feel a stabbing pain in your [parent.name]!", 50, affecting = parent)
 	bruise()
 
 //exposure to extreme pressures can rupture lungs
 /obj/item/organ/internal/lungs/proc/check_rupturing(breath_pressure)
-	if(isnull(last_int_pressure))
+	if (isnull(last_int_pressure))
 		last_int_pressure = breath_pressure
 		return
 	var/datum/gas_mixture/environment = loc.return_air_for_internal_lifeform()
 	var/ext_pressure = environment && environment.return_pressure() // May be null if, say, our owner is in nullspace
 	var/int_pressure_diff = abs(last_int_pressure - breath_pressure)
 	var/ext_pressure_diff = abs(last_ext_pressure - ext_pressure) * owner.get_pressure_weakness(ext_pressure)
-	if(int_pressure_diff > max_pressure_diff && ext_pressure_diff > max_pressure_diff)
+	if (int_pressure_diff > max_pressure_diff && ext_pressure_diff > max_pressure_diff)
 		var/lung_rupture_prob = BP_IS_ROBOTIC(src) ? prob(30) : prob(60) //Robotic lungs are less likely to rupture.
-		if(!is_bruised() && lung_rupture_prob) //only rupture if NOT already ruptured
+		if (!is_bruised() && lung_rupture_prob) //only rupture if NOT already ruptured
 			rupture()
 
 /obj/item/organ/internal/lungs/proc/handle_breath(datum/gas_mixture/breath, forced)
 
-	if(!owner)
+	if (!owner)
 		return 1
 
-	if(!breath || (max_damage <= 0))
+	if (!breath || (max_damage <= 0))
 		breath_fail_ratio = 1
 		handle_failed_breath()
 		return 1
@@ -143,7 +143,7 @@
 	var/datum/gas_mixture/environment = loc.return_air_for_internal_lifeform()
 	last_ext_pressure = environment && environment.return_pressure()
 	last_int_pressure = breath_pressure
-	if(breath.total_moles == 0)
+	if (breath.total_moles == 0)
 		breath_fail_ratio = 1
 		handle_failed_breath()
 		return 1
@@ -152,7 +152,7 @@
 	// Lung damage increases the minimum safe pressure.
 	safe_pressure_min *= 1 + rand(1,4) * damage/max_damage
 
-	if(!forced && owner.chem_effects[CE_BREATHLOSS] && !owner.chem_effects[CE_STABLE]) //opiates are bad mmkay
+	if (!forced && owner.chem_effects[CE_BREATHLOSS] && !owner.chem_effects[CE_STABLE]) //opiates are bad mmkay
 		safe_pressure_min *= 1 + rand(1,4) * owner.chem_effects[CE_BREATHLOSS]
 
 	var/failed_inhale = 0
@@ -162,11 +162,11 @@
 	var/inhale_efficiency = min(round(((inhaling/breath.total_moles)*breath_pressure)/safe_pressure_min, 0.001), 3)
 
 	// Not enough to breathe
-	if(inhale_efficiency < 1)
-		if(prob(20) && active_breathing)
-			if(inhale_efficiency < 0.8)
+	if (inhale_efficiency < 1)
+		if (prob(20) && active_breathing)
+			if (inhale_efficiency < 0.8)
 				owner.emote("gasp")
-			else if(prob(20))
+			else if (prob(20))
 				to_chat(owner, SPAN_WARNING("It's hard to breathe..."))
 		breath_fail_ratio = 1 - inhale_efficiency
 		failed_inhale = 1
@@ -179,13 +179,13 @@
 	breath.adjust_gas(breath_type, -inhaled_gas_used, update = 0) //update afterwards
 
 	owner.phoron_alert = 0 // Reset our toxins alert for now.
-	if(!failed_inhale) // Enough gas to tell we're being poisoned via chemical burns or whatever.
+	if (!failed_inhale) // Enough gas to tell we're being poisoned via chemical burns or whatever.
 		var/poison_total = 0
-		if(poison_types)
+		if (poison_types)
 			for(var/gname in breath.gas)
-				if(poison_types[gname])
+				if (poison_types[gname])
 					poison_total += breath.gas[gname]
-		if(((poison_total/breath.total_moles)*breath_pressure) > safe_toxins_max)
+		if (((poison_total/breath.total_moles)*breath_pressure) > safe_toxins_max)
 			owner.phoron_alert = 1
 
 	// Pass reagents from the gas into our body.
@@ -194,24 +194,24 @@
 	var/ratio = BP_IS_ROBOTIC(src)? 0.66 : 1
 	for(var/gasname in breath.gas - breath_type)
 		var/breathed_product = gas_data.breathed_product[gasname]
-		if(breathed_product)
+		if (breathed_product)
 			var/reagent_amount = breath.gas[gasname] * REAGENT_GAS_EXCHANGE_FACTOR * ratio
 			 // Little bit of sanity so we aren't trying to add 0.0000000001 units of CO2, and so we don't end up with 99999 units of CO2.
-			if(reagent_amount >= 0.05)
+			if (reagent_amount >= 0.05)
 				owner.reagents.add_reagent(breathed_product, reagent_amount)
 				breath.adjust_gas(gasname, -breath.gas[gasname], update = 0) //update after
 
 	// Moved after reagent injection so we don't instantly poison ourselves with CO2 or whatever.
-	if(exhale_type && (!istype(owner.wear_mask) || !(exhale_type in owner.wear_mask.filtered_gases)))
+	if (exhale_type && (!istype(owner.wear_mask) || !(exhale_type in owner.wear_mask.filtered_gases)))
 		breath.adjust_gas_temp(exhale_type, inhaled_gas_used, owner.bodytemperature, update = 0) //update afterwards
 
 	// Were we able to breathe?
 	var/failed_breath = failed_inhale || failed_exhale
-	if(!failed_breath)
+	if (!failed_breath)
 		last_successful_breath = world.time
 		owner.adjustOxyLoss(-5 * inhale_efficiency)
-		if(!BP_IS_ROBOTIC(src) && species.breathing_sound && is_below_sound_pressure(get_turf(owner)))
-			if(breathing || owner.shock_stage >= 10)
+		if (!BP_IS_ROBOTIC(src) && species.breathing_sound && is_below_sound_pressure(get_turf(owner)))
+			if (breathing || owner.shock_stage >= 10)
 				sound_to(owner, sound(species.breathing_sound,0,0,0,5))
 				breathing = 0
 			else
@@ -220,21 +220,21 @@
 	handle_temperature_effects(breath)
 	breath.update_values()
 
-	if(failed_breath)
+	if (failed_breath)
 		handle_failed_breath()
 	else
 		owner.oxygen_alert = 0
 	return failed_breath
 
 /obj/item/organ/internal/lungs/proc/handle_failed_breath()
-	if(prob(15) && !owner.nervous_system_failure())
-		if(!owner.is_asystole())
-			if(active_breathing)
+	if (prob(15) && !owner.nervous_system_failure())
+		if (!owner.is_asystole())
+			if (active_breathing)
 				owner.emote("gasp")
 		else
 			owner.emote(pick("shiver","twitch"))
 
-	if(damage || owner.chem_effects[CE_BREATHLOSS] || world.time > last_successful_breath + 2 MINUTES)
+	if (damage || owner.chem_effects[CE_BREATHLOSS] || world.time > last_successful_breath + 2 MINUTES)
 		owner.adjustOxyLoss(HUMAN_MAX_OXYLOSS*breath_fail_ratio)
 
 	owner.oxygen_alert = max(owner.oxygen_alert, 2)
@@ -285,25 +285,25 @@
 		species.get_environment_discomfort(owner,"cold")
 
 /obj/item/organ/internal/lungs/listen()
-	if(owner.failed_last_breath || !active_breathing)
+	if (owner.failed_last_breath || !active_breathing)
 		return "no respiration"
 
-	if(BP_IS_ROBOTIC(src))
-		if(is_bruised())
+	if (BP_IS_ROBOTIC(src))
+		if (is_bruised())
 			return "malfunctioning fans"
 		else
 			return "air flowing"
 
 	. = list()
-	if(is_bruised())
+	if (is_bruised())
 		. += "[pick("wheezing", "gurgling")] sounds"
 
 	var/list/breathtype = list()
-	if(get_oxygen_deprivation() > 50)
+	if (get_oxygen_deprivation() > 50)
 		breathtype += pick("straining","labored")
-	if(owner.shock_stage > 50)
+	if (owner.shock_stage > 50)
 		breathtype += pick("shallow and rapid")
-	if(!length(breathtype))
+	if (!length(breathtype))
 		breathtype += "healthy"
 
 	. += "[english_list(breathtype)] breathing"

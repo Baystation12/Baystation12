@@ -42,14 +42,14 @@
 
 
 /obj/item/gun/launcher/foam/consume_next_projectile()
-	if(length(darts))
+	if (length(darts))
 		var/obj/item/I = darts[1]
 		darts -= I
 		return I
 	return null
 
 /obj/item/gun/launcher/foam/CtrlAltClick(mob/user)
-	if(length(darts) && src.loc == user)
+	if (length(darts) && src.loc == user)
 		to_chat(user, "You empty \the [src].")
 		for(var/obj/item/foam_dart/D in darts)
 			darts -= D
@@ -83,7 +83,7 @@
 
 /obj/item/gun/launcher/foam/revolver/tampered/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
+	if (distance <= 1)
 		to_chat(user, "The hammer is a lot more resistant than you'd expect.")
 
 //the projectile
@@ -113,7 +113,7 @@
 
 /obj/item/foam_dart/tampered/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
+	if (distance <= 1)
 		to_chat(user, SPAN_WARNING("Closer inspection reveals some weights in the rubber dome."))
 
 //boxes of the projectile

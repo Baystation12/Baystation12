@@ -101,38 +101,38 @@
 	qdel(src)
 
 /obj/effect/gateway/active/Crossed(atom/A)
-	if(!istype(A, /mob/living))
+	if (!istype(A, /mob/living))
 		return
 
 	var/mob/living/M = A
 
-	if(M.stat != DEAD)
-		if(M.HasMovementHandler(/datum/movement_handler/mob/transformation))
+	if (M.stat != DEAD)
+		if (M.HasMovementHandler(/datum/movement_handler/mob/transformation))
 			return
-		if(M.has_brain_worms())
+		if (M.has_brain_worms())
 			return //Borer stuff - RR
 
-		if(iscultist(M)) return
-		if(!ishuman(M) && !isrobot(M)) return
+		if (iscultist(M)) return
+		if (!ishuman(M) && !isrobot(M)) return
 
 		M.AddMovementHandler(/datum/movement_handler/mob/transformation)
 		M.icon = null
 		M.overlays.Cut()
 		M.set_invisibility(INVISIBILITY_ABSTRACT)
 
-		if(istype(M, /mob/living/silicon/robot))
+		if (istype(M, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/Robot = M
-			if(Robot.mmi)
+			if (Robot.mmi)
 				qdel(Robot.mmi)
 		else
 			for(var/obj/item/W in M)
 				M.drop_from_inventory(W)
-				if(istype(W, /obj/item/implant))
+				if (istype(W, /obj/item/implant))
 					qdel(W)
 
 		var/mob/living/new_mob = new /mob/living/simple_animal/passive/corgi(A.loc)
 		new_mob.a_intent = I_HURT
-		if(M.mind)
+		if (M.mind)
 			M.mind.transfer_to(new_mob)
 		else
 			new_mob.key = M.key

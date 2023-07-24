@@ -5,7 +5,7 @@
 	var/max_temp
 
 /datum/artifact_trigger/temperature/New()
-	if(isnull(min_temp) && isnull(max_temp))
+	if (isnull(min_temp) && isnull(max_temp))
 		min_temp = rand(T0C - 100, T0C + 200)
 		max_temp = min_temp + rand(10, 30)
 

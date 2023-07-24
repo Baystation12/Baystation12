@@ -33,25 +33,25 @@
 
 /datum/alarm/proc/process()
 	// Has origin gone missing?
-	if(!origin && !end_time)
+	if (!origin && !end_time)
 		end_time = world.time + ALARM_RESET_DELAY
 	for(var/datum/alarm_source/AS in sources)
 		// Has the alarm passed its best before date?
-		if((AS.end_time && world.time > AS.end_time) || (AS.duration && world.time > (AS.start_time + AS.duration)))
+		if ((AS.end_time && world.time > AS.end_time) || (AS.duration && world.time > (AS.start_time + AS.duration)))
 			sources -= AS
 		// Has the source gone missing?	Then reset the normal duration and set end_time
-		if(!AS.source && !AS.end_time)	// end_time is used instead of duration to ensure the reset doesn't remain in the future indefinetely.
+		if (!AS.source && !AS.end_time)	// end_time is used instead of duration to ensure the reset doesn't remain in the future indefinetely.
 			AS.duration = 0
 			AS.end_time = world.time + ALARM_RESET_DELAY
 
 /datum/alarm/proc/set_source_data(atom/source, duration, severity)
 	var/datum/alarm_source/AS = sources_assoc[source]
-	if(!AS)
+	if (!AS)
 		AS = new/datum/alarm_source(source)
 		sources += AS
 		sources_assoc[source] = AS
 	// Currently only non-0 durations can be altered (normal alarms VS EMP blasts)
-	if(AS.duration)
+	if (AS.duration)
 		duration = SecondsToTicks(duration)
 		AS.duration = duration
 	AS.severity = severity
@@ -62,19 +62,19 @@
 	sources_assoc -= source
 
 /datum/alarm/proc/alarm_z()
-	if(origin)
+	if (origin)
 		last_z_level = origin.get_alarm_z(origin)
 	return last_z_level
 
 /datum/alarm/proc/alarm_area()
-	if(!origin)
+	if (!origin)
 		return last_area
 
 	last_area = origin.get_alarm_area()
 	return last_area
 
 /datum/alarm/proc/alarm_name()
-	if(!origin)
+	if (!origin)
 		return last_name
 
 	last_name = origin.get_alarm_name()
@@ -82,15 +82,15 @@
 
 /datum/alarm/proc/cameras()
 	// reset camera cache
-	if(camera_repository.camera_cache_id != cache_id)
+	if (camera_repository.camera_cache_id != cache_id)
 		cameras = null
 		cache_id = camera_repository.camera_cache_id
 	// If the alarm origin has changed area, for example a borg containing an alarming camera, reset the list of cameras
-	else if(cameras && (last_camera_area != alarm_area()))
+	else if (cameras && (last_camera_area != alarm_area()))
 		cameras = null
 
 	// The list of cameras is also reset by /proc/invalidateCameraCache()
-	if(!cameras)
+	if (!cameras)
 		cameras = origin ? origin.get_alarm_cameras() : last_area.get_alarm_cameras()
 
 	last_camera_area = last_area

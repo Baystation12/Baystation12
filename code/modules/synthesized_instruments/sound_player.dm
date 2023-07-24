@@ -46,16 +46,16 @@
 	. = ..()
 
 /datum/sound_player/proc/check_wait(obj/other)
-	if(wait && (other != actual_instrument))
+	if (wait && (other != actual_instrument))
 		var/mob/M = wait.resolve()
-		if(istype(M) && CanPhysicallyInteractWith(M, actual_instrument) && !shouldStopPlaying(M))
-			if(get_dist(get_turf(actual_instrument), get_turf(other)) <= 5 && !song.playing)
+		if (istype(M) && CanPhysicallyInteractWith(M, actual_instrument) && !shouldStopPlaying(M))
+			if (get_dist(get_turf(actual_instrument), get_turf(other)) <= 5 && !song.playing)
 				song.playing = TRUE
 				song.play_song(M)
 	wait = null //Either way clean it up
 
 /datum/sound_player/proc/subscribe(datum/sound_token/instrument/newtoken)
-	if(!istype(newtoken))
+	if (!istype(newtoken))
 		CRASH("Non token type passed to subscribe function.")
 	tokens += newtoken
 
@@ -64,7 +64,7 @@
 
 
 /datum/sound_player/proc/unsubscribe(datum/sound_token/instrument/oldtoken)
-	if(!istype(oldtoken))
+	if (!istype(oldtoken))
 		CRASH("Non token type passed to unsubscribe function.")
 	tokens -= oldtoken
 
@@ -89,9 +89,9 @@
 /datum/sound_player/proc/shouldStopPlaying(mob/user)
 	var/obj/structure/synthesized_instrument/S = actual_instrument
 	var/obj/item/device/synthesized_instrument/D = actual_instrument
-	if(istype(S))
+	if (istype(S))
 		return S.shouldStopPlaying(user)
-	if(istype(D))
+	if (istype(D))
 		return D.shouldStopPlaying(user)
 
 	return 1 //Well if you got this far you did something very wrong

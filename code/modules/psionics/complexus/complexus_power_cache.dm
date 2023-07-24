@@ -1,5 +1,5 @@
 /datum/psi_complexus/proc/rebuild_power_cache()
-	if(rebuild_power_cache)
+	if (rebuild_power_cache)
 
 		melee_powers =         list()
 		grab_powers =          list()
@@ -12,19 +12,19 @@
 			var/singleton/psionic_faculty/faculty_singleton = SSpsi.get_faculty(faculty)
 			for(var/thing in faculty_singleton.powers)
 				var/singleton/psionic_power/power = thing
-				if(relevant_rank >= power.min_rank)
-					if(!powers_by_faculty[power.faculty]) powers_by_faculty[power.faculty] = list()
+				if (relevant_rank >= power.min_rank)
+					if (!powers_by_faculty[power.faculty]) powers_by_faculty[power.faculty] = list()
 					powers_by_faculty[power.faculty] += power
-					if(power.use_ranged)
-						if(!ranged_powers[faculty]) ranged_powers[faculty] = list()
+					if (power.use_ranged)
+						if (!ranged_powers[faculty]) ranged_powers[faculty] = list()
 						ranged_powers[faculty] += power
-					if(power.use_melee)
-						if(!melee_powers[faculty]) melee_powers[faculty] = list()
+					if (power.use_melee)
+						if (!melee_powers[faculty]) melee_powers[faculty] = list()
 						melee_powers[faculty] += power
-					if(power.use_manifest)
+					if (power.use_manifest)
 						manifestation_powers += power
-					if(power.use_grab)
-						if(!grab_powers[faculty]) grab_powers[faculty] = list()
+					if (power.use_grab)
+						if (!grab_powers[faculty]) grab_powers[faculty] = list()
 						grab_powers[faculty] += power
 		rebuild_power_cache = FALSE
 

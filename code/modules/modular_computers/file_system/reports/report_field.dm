@@ -20,12 +20,12 @@
 
 //Access stuff. Can be given access constants or lists. See report access procs for documentation.
 /datum/report_field/proc/set_access(access, access_edit, override = 1)
-	if(access)
-		if(!islist(access))
+	if (access)
+		if (!islist(access))
 			access = list(access)
 		override ? (src.access = list(access)) : (src.access += list(access))
-	if(access_edit)
-		if(!islist(access_edit))
+	if (access_edit)
+		if (!islist(access_edit))
 			access_edit = list(access_edit)
 		override ? (src.access_edit = list(access_edit)) : (src.access_edit += list(access_edit))
 
@@ -33,7 +33,7 @@
 	return has_access_pattern(access, given_access)
 
 /datum/report_field/proc/verify_access_edit(given_access)
-	if(!verify_access(given_access))
+	if (!verify_access(given_access))
 		return
 	return has_access_pattern(access_edit, given_access)
 
@@ -59,10 +59,10 @@
 	return name
 
 /datum/report_field/proc/generate_row_pencode(access, with_fields)
-	if(!ignore_value)
+	if (!ignore_value)
 		. += "\[row\]\[cell\]\[b\][display_name()]:\[/b\]"
 		var/field = ((with_fields && can_edit) ? "\[field\]" : "" )
-		if(!access || verify_access(access))
+		if (!access || verify_access(access))
 			. += (needs_big_box ? "\[/grid\][get_value()][field]\[grid\]" : "\[cell\][get_value()][field]")
 		else
 			. += "\[cell\]\[REDACTED\][field]"
@@ -72,7 +72,7 @@
 
 /datum/report_field/proc/generate_nano_data(list/given_access)
 	var/dat = list()
-	if(given_access)
+	if (given_access)
 		dat["access"] = verify_access(given_access)
 		dat["access_edit"] = verify_access_edit(given_access)
 	dat["name"] = display_name()
@@ -115,7 +115,7 @@ Basic field subtypes.
 	value = ""
 
 /datum/report_field/simple_text/set_value(given_value)
-	if(istext(given_value))
+	if (istext(given_value))
 		value = sanitize(given_value) || ""
 
 /datum/report_field/simple_text/ask_value(mob/user)
@@ -131,7 +131,7 @@ Basic field subtypes.
 	return digitalPencode2html(value)
 
 /datum/report_field/pencode_text/set_value(given_value)
-	if(istext(given_value))
+	if (istext(given_value))
 		value = sanitize(replacetext(given_value, "\n", "\[br\]"), MAX_PAPER_MESSAGE_LEN) || ""
 
 /datum/report_field/pencode_text/ask_value(mob/user)
@@ -163,7 +163,7 @@ Basic field subtypes.
 	value = 0
 
 /datum/report_field/number/set_value(given_value)
-	if(isnum(given_value))
+	if (isnum(given_value))
 		value = given_value
 
 /datum/report_field/number/ask_value(mob/user)
@@ -173,7 +173,7 @@ Basic field subtypes.
 /datum/report_field/options/proc/get_options()
 
 /datum/report_field/options/set_value(given_value)
-	if(given_value in get_options())
+	if (given_value in get_options())
 		value = given_value
 
 /datum/report_field/options/ask_value(mob/user)

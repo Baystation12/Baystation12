@@ -18,22 +18,22 @@
 		SPECIES_IPC = /spell/camera_connection)
 
 /obj/item/magic_rock/attack_self(mob/user)
-	if(!istype(user,/mob/living/carbon/human))
+	if (!istype(user,/mob/living/carbon/human))
 		to_chat(user, "\The [src] can do nothing for such a simple being.")
 		return
 	var/mob/living/carbon/human/H = user
 	var/reward = potentials[H.species.get_bodytype(H)] //we get body type because that lets us ignore subspecies.
-	if(!reward)
+	if (!reward)
 		to_chat(user, "\The [src] does not know what to make of you.")
 		return
 	for(var/spell/S in user.mind.learned_spells)
-		if(istype(S,reward))
+		if (istype(S,reward))
 			to_chat(user, "\The [src] can do no more for you.")
 			return
 	var/a = new reward()
-	if(ispath(reward,/spell))
+	if (ispath(reward,/spell))
 		H.add_spell(a)
-	else if(ispath(reward,/obj))
+	else if (ispath(reward,/obj))
 		H.put_in_hands(a)
 	to_chat(user, "\The [src] crumbles in your hands.")
 	qdel(src)
@@ -44,8 +44,8 @@
 //HUMAN
 /obj/item/storage/bag/cash/infinite/remove_from_storage(obj/item/W as obj, atom/new_location)
 	. = ..()
-	if(.)
-		if(istype(W,/obj/item/spacecash)) //only matters if its spacecash.
+	if (.)
+		if (istype(W,/obj/item/spacecash)) //only matters if its spacecash.
 			var/obj/item/I = new /obj/item/spacecash/bundle/c1000()
 			src.handle_item_insertion(I,1)
 
@@ -55,7 +55,7 @@
 /spell/messa_shroud/cast(list/targets, mob/user)
 	var/turf/T = targets[1]
 
-	if(!istype(T))
+	if (!istype(T))
 		return
 
 	var/obj/O = new /obj(T)
@@ -162,19 +162,19 @@
 
 /obj/item/contract/apprentice/skrell/New(newloc,spellbook, owner)
 	..()
-	if(istype(spellbook,/obj/item/spellbook))
+	if (istype(spellbook,/obj/item/spellbook))
 		linked = spellbook
-	if(istype(owner,/mob))
+	if (istype(owner,/mob))
 		contract_master = owner
 
 /obj/item/contract/apprentice/skrell/attack_self(mob/user as mob)
-	if(!linked)
+	if (!linked)
 		to_chat(user, SPAN_WARNING("This contract requires a link to a spellbook."))
 		return
 	..()
 
 /obj/item/contract/apprentice/skrell/afterattack(atom/A, mob/user as mob, proximity)
-	if(!linked && istype(A,/obj/item/spellbook))
+	if (!linked && istype(A,/obj/item/spellbook))
 		linked = A
 		to_chat(user, SPAN_NOTICE("You've linked \the [A] to \the [src]"))
 		return
@@ -182,7 +182,7 @@
 
 /obj/item/contract/apprentice/skrell/contract_effect(mob/user as mob)
 	. = ..()
-	if(.)
+	if (.)
 		linked.uses += 0.5
 		var/obj/item/I = new /obj/item/contract/apprentice/skrell(get_turf(src),linked,contract_master)
 		user.put_in_hands(I)
@@ -218,7 +218,7 @@
 
 /spell/camera_connection/choose_targets()
 	var/mob/living/L = holder
-	if(!istype(L) || L.eyeobj) //no using if we already have an eye on.
+	if (!istype(L) || L.eyeobj) //no using if we already have an eye on.
 		return null
 	return list(holder)
 
@@ -252,12 +252,12 @@
 
 	verbs -= /mob/living/proc/release_eye //regardless of if we have an eye or not we want to get rid of this verb.
 
-	if(!eyeobj)
+	if (!eyeobj)
 		return
 	eyeobj.release(src)
 
 /mob/observer/eye/wizard_eye/Destroy()
-	if(istype(eyeobj.owner, /mob/living))
+	if (istype(eyeobj.owner, /mob/living))
 		var/mob/living/L = eyeobj.owner
 		L.release_eye()
 	qdel(eyeobj)

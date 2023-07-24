@@ -22,7 +22,7 @@ var/global/repository/area/area_repository = new()
 
 /repository/area/proc/priv_get_cached_areas(list/area_cache, area_group_proc, list/area_predicates, naming_proc)
 	. = get_cache_entry(area_cache, area_predicates)
-	if(.)
+	if (.)
 		return
 	. = priv_get_areas_by_proc(area_group_proc, area_predicates, naming_proc)
 	set_cache_entry(area_cache, area_predicates, .)
@@ -35,16 +35,16 @@ var/global/repository/area/area_repository = new()
 		var/list/list_of_areas = grouped_areas[area_key]
 		list_of_areas = sortAtom(list_of_areas)
 		for(var/area/A in list_of_areas)
-			if(A.has_turfs())
+			if (A.has_turfs())
 				.[call(naming_proc)(A)] = A
 
 /repository/area/proc/get_cache_entry(list/cache_data, key)
 	var/datum/cache_entry/cache_entry = cache_data[key]
-	if(!cache_entry)
+	if (!cache_entry)
 		cache_entry = new/datum/cache_entry
 		cache_data[key] = cache_entry
 
-	if(world.time < cache_entry.timestamp)
+	if (world.time < cache_entry.timestamp)
 		return cache_entry.data
 
 /repository/area/proc/set_cache_entry(list/cache_data, key, data)

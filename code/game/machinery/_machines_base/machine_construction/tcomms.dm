@@ -8,13 +8,13 @@
 
 /singleton/machine_construction/tcomms/panel_closed/validate_state(obj/machinery/machine)
 	. = ..()
-	if(!.)
+	if (!.)
 		try_change_state(machine, /singleton/machine_construction/tcomms/panel_open)
 
 /singleton/machine_construction/tcomms/panel_closed/attackby(obj/item/I, mob/user, obj/machinery/machine)
-	if((. = ..()))
+	if ((. = ..()))
 		return
-	if(isScrewdriver(I))
+	if (isScrewdriver(I))
 		TRANSFER_STATE(/singleton/machine_construction/tcomms/panel_open)
 		machine.panel_open = TRUE
 		to_chat(user, "You unfasten the bolts.")
@@ -37,22 +37,22 @@
 
 /singleton/machine_construction/tcomms/panel_open/validate_state(obj/machinery/machine)
 	. = ..()
-	if(!.)
+	if (!.)
 		try_change_state(machine, /singleton/machine_construction/tcomms/panel_closed)
 
 /singleton/machine_construction/tcomms/panel_open/attackby(obj/item/I, mob/user, obj/machinery/machine)
-	if((. = ..()))
+	if ((. = ..()))
 		return
 	return state_interactions(I, user, machine)
 
 /singleton/machine_construction/tcomms/panel_open/proc/state_interactions(obj/item/I, mob/user, obj/machinery/machine)
-	if(isScrewdriver(I))
+	if (isScrewdriver(I))
 		TRANSFER_STATE(/singleton/machine_construction/tcomms/panel_closed)
 		machine.panel_open = FALSE
 		to_chat(user, "You fasten the bolts.")
 		playsound(machine.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		return
-	if(isWrench(I))
+	if (isWrench(I))
 		TRANSFER_STATE(/singleton/machine_construction/tcomms/panel_open/unwrenched)
 		to_chat(user, "You dislodge the external plating.")
 		playsound(machine.loc, 'sound/items/Ratchet.ogg', 75, 1)
@@ -63,12 +63,12 @@
 	. += "Use a wrench to remove the external plating."
 
 /singleton/machine_construction/tcomms/panel_open/unwrenched/state_interactions(obj/item/I, mob/user, obj/machinery/machine)
-	if(isWrench(I))
+	if (isWrench(I))
 		TRANSFER_STATE(/singleton/machine_construction/tcomms/panel_open)
 		to_chat(user, "You secure the external plating.")
 		playsound(machine.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		return
-	if(isWirecutter(I))
+	if (isWirecutter(I))
 		TRANSFER_STATE(/singleton/machine_construction/tcomms/panel_open/no_cable)
 		playsound(machine.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 		to_chat(user, "You remove the cables.")
@@ -82,7 +82,7 @@
 	. += "Use wirecutters to remove the cabling."
 
 /singleton/machine_construction/tcomms/panel_open/no_cable/state_interactions(obj/item/I, mob/user, obj/machinery/machine)
-	if(isCoil(I))
+	if (isCoil(I))
 		var/obj/item/stack/cable_coil/A = I
 		if (A.can_use(5))
 			TRANSFER_STATE(/singleton/machine_construction/tcomms/panel_open/unwrenched)
@@ -93,18 +93,18 @@
 		else
 			to_chat(user, SPAN_WARNING("You need five coils of wire for this."))
 			return TRUE
-	if(isCrowbar(I))
+	if (isCrowbar(I))
 		TRANSFER_STATE(/singleton/machine_construction/default/deconstructed)
 		machine.dismantle()
 		return
 
-	if(istype(I, /obj/item/storage/part_replacer))
+	if (istype(I, /obj/item/storage/part_replacer))
 		return machine.part_replacement(I, user)
 
-	if(isWrench(I))
+	if (isWrench(I))
 		return machine.part_removal(user)
 
-	if(istype(I))
+	if (istype(I))
 		return machine.part_insertion(user, I)
 
 /singleton/machine_construction/tcomms/panel_open/no_cable/mechanics_info()

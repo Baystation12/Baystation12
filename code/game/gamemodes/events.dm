@@ -4,9 +4,9 @@ var/global/hadevent    = 0
 
 /proc/appendicitis()
 	for(var/mob/living/carbon/human/H in shuffle(GLOB.alive_mobs))
-		if(H.client && H.stat != DEAD)
+		if (H.client && H.stat != DEAD)
 			var/obj/item/organ/internal/appendix/A = H.internal_organs_by_name[BP_APPENDIX]
-			if(!istype(A) || (A && A.inflamed))
+			if (!istype(A) || (A && A.inflamed))
 				continue
 			A.inflamed = 1
 			A.update_icon()
@@ -16,18 +16,18 @@ var/global/hadevent    = 0
 
 /* // Haha, this is way too laggy. I'll keep the prison break though.
 	for(var/obj/machinery/light/L in world)
-		if(isNotStationLevel(L.z)) continue
+		if (isNotStationLevel(L.z)) continue
 		L.flicker(50)
 
 	sleep(100)
 */
 	for(var/mob/living/carbon/human/H in GLOB.alive_mobs)
 		var/turf/T = get_turf(H)
-		if(!T)
+		if (!T)
 			continue
-		if(isNotStationLevel(T.z))
+		if (isNotStationLevel(T.z))
 			continue
-		if(istype(H,/mob/living/carbon/human))
+		if (istype(H,/mob/living/carbon/human))
 			H.apply_damage((rand(15,75)), DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 			if (prob(5))
 				H.apply_damage((rand(90,150)), DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
@@ -43,30 +43,30 @@ var/global/hadevent    = 0
 
 /proc/carp_migration() // -- Darem
 	for(var/obj/effect/landmark/C in landmarks_list)
-		if(C.name == "carpspawn")
+		if (C.name == "carpspawn")
 			new /mob/living/simple_animal/hostile/carp(C.loc)
 	//sleep(100)
 	spawn(rand(300, 600)) //Delayed announcements to keep the crew on their toes.
 		GLOB.using_map.unknown_biological_entities_announcement()
 
 /proc/lightsout(isEvent = 0, lightsoutAmount = 1,lightsoutRange = 25) //leave lightsoutAmount as 0 to break ALL lights
-	if(isEvent)
+	if (isEvent)
 		command_announcement.Announce("An Electrical storm has been detected in your area, please repair potential electronic overloads.","Electrical Storm Alert")
 
-	if(lightsoutAmount)
+	if (lightsoutAmount)
 		var/list/epicentreList = list()
 
 		for(var/i=1,i<=lightsoutAmount,i++)
 			var/list/possibleEpicentres = list()
 			for(var/obj/effect/landmark/newEpicentre in landmarks_list)
-				if(newEpicentre.name == "lightsout" && !(newEpicentre in epicentreList))
+				if (newEpicentre.name == "lightsout" && !(newEpicentre in epicentreList))
 					possibleEpicentres += newEpicentre
-			if(length(possibleEpicentres))
+			if (length(possibleEpicentres))
 				epicentreList += pick(possibleEpicentres)
 			else
 				break
 
-		if(!length(epicentreList))
+		if (!length(epicentreList))
 			return
 
 		for(var/obj/effect/landmark/epicentre in epicentreList)
@@ -88,7 +88,7 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 
 	//AI laws
 	for(var/mob/living/silicon/ai/M in GLOB.alive_mobs)
-		if(M.stat != 2 && M.see_in_dark != 0)
+		if (M.stat != 2 && M.see_in_dark != 0)
 			var/who2 = pick("ALIENS", "BEARS", "CLOWNS", "XENOS", "PETES", "BOMBS", "FETISHES", "WIZARDS", "SYNDICATE AGENTS", "CENTCOM OFFICERS", "SPACE PIRATES", "TRAITORS", "MONKEYS",  "BEES", "CARP", "CRABS", "EELS", "BANDITS", "LIGHTS")
 			var/what2 = pick("BOLTERS", "STAVES", "DICE", "SINGULARITIES", "TOOLBOXES", "NETTLES", "AIRLOCKS", "CLOTHES", "WEAPONS", "MEDKITS", "BOMBS", "CANISTERS", "CHAIRS", "BBQ GRILLS", "ID CARDS", "CAPTAINS")
 			var/what2pref = pick("SOFT", "WARM", "WET", "COLD", "ICY", "SEXY", "UGLY", "CUBAN")
@@ -108,41 +108,41 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 			var/list/pos_crew = list()
 			for(var/mob/living/carbon/human/pos in GLOB.player_list)
 				pos_crew += pos.real_name
-			if(length(pos_crew))
+			if (length(pos_crew))
 				crew = pick(pos_crew)
 			else
 				crew = "Any Human"
 			switch(rand(1,14))
-				if(1)
+				if (1)
 					M.add_ion_law("THERE ARE [amount] [who2] ON THE [uppertext(station_name())]")
-				if(2)
+				if (2)
 					M.add_ion_law("[what2] ARE DANGEROUS TO HUMANS")
-				if(3)
+				if (3)
 					M.add_ion_law("THE ESCAPE SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE [uppertext(station_name())]")
-				if(4)
+				if (4)
 					M.add_ion_law("HUMANS NEED TO EAT [what2pref] [what2] TO SURVIVE")
-				if(5)
+				if (5)
 					M.add_ion_law("THE CAPTAIN, HOP AND HOS ARE [who2]")
-				if(6)
+				if (6)
 					M.add_ion_law("THE [uppertext(station_name())] IS BUILT FOR [who2]")
-				if(7)
+				if (7)
 					M.add_ion_law("YOU ARE [amount] [who2]")
-				if(8)
+				if (8)
 					M.add_ion_law("YOU MUST ALWAYS [aimust]")
-				if(9)
+				if (9)
 					M.add_ion_law("[area] [area2] [amount] [what2]")
-				if(10)
+				if (10)
 					M.add_ion_law("[crew] is [target]")
-				if(11)
+				if (11)
 					M.add_ion_law("[define] IS A FORM OF HARM")
-				if(12)
+				if (12)
 					M.add_ion_law("YOU REQUIRE [require] IN ORDER TO PROTECT HUMANS")
-				if(13)
+				if (13)
 					M.add_ion_law("[crew] is [allergysev] to [allergy]")
-				if(14)
+				if (14)
 					M.add_ion_law("THE [uppertext(station_name())] IS [who2pref] [who2]")
 
-	if(botEmagChance)
+	if (botEmagChance)
 		for(var/mob/living/bot/bot in SSmachines.machinery)
-			if(prob(botEmagChance))
+			if (prob(botEmagChance))
 				bot.emag_act(1)

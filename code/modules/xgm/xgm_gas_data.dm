@@ -57,14 +57,14 @@ var/global/datum/xgm_gas_data/gas_data
 	for(var/p in (typesof(/singleton/xgm_gas) - /singleton/xgm_gas))
 		var/singleton/xgm_gas/gas = new p //avoid initial() because of potential New() actions
 
-		if(gas.id in gas_data.gases)
+		if (gas.id in gas_data.gases)
 			error("Duplicate gas id `[gas.id]` in `[p]`")
 
 		gas_data.gases += gas.id
 		gas_data.name[gas.id] = gas.name
 		gas_data.specific_heat[gas.id] = gas.specific_heat
 		gas_data.molar_mass[gas.id] = gas.molar_mass
-		if(gas.overlay_limit)
+		if (gas.overlay_limit)
 			gas_data.overlay_limit[gas.id] = gas.overlay_limit
 			gas_data.tile_overlay[gas.id] = gas.tile_overlay
 			gas_data.tile_overlay_color[gas.id] = gas.tile_color
@@ -74,7 +74,7 @@ var/global/datum/xgm_gas_data/gas_data
 		gas_data.symbol_html[gas.id] = gas.symbol_html
 		gas_data.symbol[gas.id] = gas.symbol
 
-		if(!isnull(gas.condensation_product) && !isnull(gas.condensation_point))
+		if (!isnull(gas.condensation_product) && !isnull(gas.condensation_point))
 			gas_data.condensation_points[gas.id] = gas.condensation_point
 			gas_data.condensation_products[gas.id] = gas.condensation_product
 
@@ -102,7 +102,7 @@ var/global/datum/xgm_gas_data/gas_data
 /obj/effect/gas_overlay/Initialize(mapload, gas)
 	. = ..()
 	gas_id = gas
-	if(gas_data.tile_overlay[gas_id])
+	if (gas_data.tile_overlay[gas_id])
 		icon_state = gas_data.tile_overlay[gas_id]
 		color = gas_data.tile_overlay_color[gas_id]
 

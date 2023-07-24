@@ -55,7 +55,7 @@
 	. = ..()
 
 	var/mob/living/silicon/robot/R = loc
-	if(!istype(R))
+	if (!istype(R))
 		return INITIALIZE_HINT_QDEL
 
 	R.module = src
@@ -65,7 +65,7 @@
 	add_subsystems(R)
 	apply_status_flags(R)
 
-	if(R.silicon_radio)
+	if (R.silicon_radio)
 		R.silicon_radio.recalculateChannels()
 
 	build_equipment(R)
@@ -82,9 +82,9 @@
 /obj/item/robot_module/proc/build_equipment()
 	var/list/created_equipment = list()
 	for(var/thing in equipment)
-		if(ispath(thing, /obj/item))
+		if (ispath(thing, /obj/item))
 			created_equipment |= new thing(src)
-		else if(isitem(thing))
+		else if (isitem(thing))
 			var/obj/item/I = thing
 			I.forceMove(src)
 			created_equipment |= I
@@ -99,12 +99,12 @@
 /obj/item/robot_module/proc/build_synths()
 	var/list/created_synths = list()
 	for(var/thing in synths)
-		if(ispath(thing, /datum/matter_synth))
-			if(!isnull(synths[thing]))
+		if (ispath(thing, /datum/matter_synth))
+			if (!isnull(synths[thing]))
 				created_synths += new thing(synths[thing])
 			else
 				created_synths += new thing
-		else if(istype(thing, /datum/matter_synth))
+		else if (istype(thing, /datum/matter_synth))
 			created_synths |= thing
 		else
 			log_debug("Invalid var type in [type] synth creation - [thing]")
@@ -114,11 +114,11 @@
 	return
 
 /obj/item/robot_module/proc/build_emag()
-	if(ispath(emag))
+	if (ispath(emag))
 		emag = new emag(src)
 
 /obj/item/robot_module/proc/finalize_emag()
-	if(istype(emag))
+	if (istype(emag))
 		emag.canremove = FALSE
 	else
 		log_debug("Invalid var type in [type] emag creation - [emag]")
@@ -130,7 +130,7 @@
 	remove_status_flags(R)
 	reset_skills(R)
 
-	if(R.silicon_radio)
+	if (R.silicon_radio)
 		R.silicon_radio.recalculateChannels()
 	R.choose_icon(0, R.set_module_sprites(list("Default" = initial(R.icon_state))))
 
@@ -140,31 +140,31 @@
 	QDEL_NULL(emag)
 	QDEL_NULL(jetpack)
 	var/mob/living/silicon/robot/R = loc
-	if(istype(R) && R.module == src)
+	if (istype(R) && R.module == src)
 		R.module = null
 	. = ..()
 
 /obj/item/robot_module/emp_act(severity)
-	if(equipment)
+	if (equipment)
 		for(var/obj/O in equipment)
 			O.emp_act(severity)
-	if(emag)
+	if (emag)
 		emag.emp_act(severity)
-	if(synths)
+	if (synths)
 		for(var/datum/matter_synth/S in synths)
 			S.emp_act(severity)
 	..()
 
 /obj/item/robot_module/proc/respawn_consumable(mob/living/silicon/robot/R, rate)
 	var/obj/item/device/flash/F = locate() in equipment
-	if(F)
-		if(F.broken)
+	if (F)
+		if (F.broken)
 			F.broken = 0
 			F.times_used = 0
 			F.icon_state = "flash"
-		else if(F.times_used)
+		else if (F.times_used)
 			F.times_used--
-	if(!synths || !length(synths))
+	if (!synths || !length(synths))
 		return
 	for(var/datum/matter_synth/T in synths)
 		T.add_charge(T.recharge_rate * rate)
@@ -197,11 +197,11 @@
 		R.remove_subsystem(subsystem_type)
 
 /obj/item/robot_module/proc/apply_status_flags(mob/living/silicon/robot/R)
-	if(!can_be_pushed)
+	if (!can_be_pushed)
 		R.status_flags &= ~CANPUSH
 
 /obj/item/robot_module/proc/remove_status_flags(mob/living/silicon/robot/R)
-	if(!can_be_pushed)
+	if (!can_be_pushed)
 		R.status_flags |= CANPUSH
 
 /obj/item/robot_module/proc/handle_emagged()

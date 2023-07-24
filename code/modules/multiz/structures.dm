@@ -30,9 +30,9 @@
 /obj/structure/ladder/Initialize()
 	. = ..()
 	// the upper will connect to the lower
-	if(allowed_directions & DOWN) //we only want to do the top one, as it will initialize the ones before it.
+	if (allowed_directions & DOWN) //we only want to do the top one, as it will initialize the ones before it.
 		for(var/obj/structure/ladder/L in GetBelow(src))
-			if(L.allowed_directions & UP)
+			if (L.allowed_directions & UP)
 				target_down = L
 				L.target_up = src
 				var/turf/T = get_turf(src)
@@ -45,10 +45,10 @@
 
 
 /obj/structure/ladder/Destroy()
-	if(target_down)
+	if (target_down)
 		target_down.target_up = null
 		target_down = null
-	if(target_up)
+	if (target_up)
 		target_up.target_down = null
 		target_up = null
 	return ..()
@@ -60,9 +60,9 @@
 
 
 /turf/hitby(atom/movable/AM)
-	if(isobj(AM))
+	if (isobj(AM))
 		var/obj/structure/ladder/L = locate() in contents
-		if(L)
+		if (L)
 			L.hitby(AM)
 			return
 	..()
@@ -71,16 +71,16 @@
 	if (istype(src, /obj/structure/ladder/up))
 		return
 
-	if(!has_gravity())
+	if (!has_gravity())
 		return
 
 	var/atom/blocker
 	var/turf/landing = get_turf(target_down)
 	for(var/atom/A in landing)
-		if(!A.CanPass(I, I.loc, 1.5, 0))
+		if (!A.CanPass(I, I.loc, 1.5, 0))
 			blocker = A
 			break
-	if(blocker)
+	if (blocker)
 		visible_message(SPAN_WARNING("\The [I] fails to go down \the [src], blocked by the [blocker]!"))
 	else
 		visible_message(SPAN_WARNING("\The [I] goes down \the [src]!"))
@@ -92,10 +92,10 @@
 
 /obj/structure/ladder/attack_ai(mob/M)
 	var/mob/living/silicon/ai/ai = M
-	if(!istype(ai))
+	if (!istype(ai))
 		return
 	var/mob/observer/eye/AIeye = ai.eyeobj
-	if(istype(AIeye))
+	if (istype(AIeye))
 		instant_climb(AIeye)
 
 /obj/structure/ladder/attack_robot(mob/M)
@@ -103,16 +103,16 @@
 
 /obj/structure/ladder/proc/instant_climb(mob/M)
 	var/atom/target_ladder = getTargetLadder(M)
-	if(target_ladder)
+	if (target_ladder)
 		M.dropInto(target_ladder.loc)
 
 /obj/structure/ladder/proc/climb(mob/M, obj/item/I = null)
-	if(!M.may_climb_ladders(src))
+	if (!M.may_climb_ladders(src))
 		return
 
 	add_fingerprint(M)
 	var/obj/structure/ladder/target_ladder = getTargetLadder(M)
-	if(!target_ladder)
+	if (!target_ladder)
 		return
 	if (bluespace_affected && prob(displacement_chance))
 		var/list/obj/structure/ladder/other_ladders= list()
@@ -121,7 +121,7 @@
 			if (src != ladder && (ladder.z in zlevels))
 				other_ladders += ladder
 		target_ladder = pick(other_ladders)
-	if(!M.Move(get_turf(src)))
+	if (!M.Move(get_turf(src)))
 		to_chat(M, SPAN_NOTICE("You fail to reach \the [src]."))
 		return
 
@@ -136,7 +136,7 @@
 
 	target_ladder.audible_message(SPAN_NOTICE("You hear something coming [direction] \the [src]"))
 
-	if(do_after(M, climb_time, src, DO_PUBLIC_UNIQUE))
+	if (do_after(M, climb_time, src, DO_PUBLIC_UNIQUE))
 		climbLadder(M, target_ladder, I)
 		if (bluespace_affected && prob(20))
 			to_chat(M, SPAN_WARNING("You feel like you didn't end up where you were supposed to..."))
@@ -148,43 +148,43 @@
 	instant_climb(M)
 
 /obj/structure/ladder/proc/getTargetLadder(mob/M)
-	if((!target_up && !target_down) || (target_up && !istype(target_up.loc, /turf/simulated/open) || (target_down && !istype(target_down.loc, /turf))))
+	if ((!target_up && !target_down) || (target_up && !istype(target_up.loc, /turf/simulated/open) || (target_down && !istype(target_down.loc, /turf))))
 		to_chat(M, SPAN_NOTICE("\The [src] is incomplete and can't be climbed."))
 		return
 
-	if(target_down && target_up)
+	if (target_down && target_up)
 		var/direction = alert(M,"Do you want to go up or down?", "Ladder", "Up", "Down", "Cancel")
 
-		if(direction == "Cancel")
+		if (direction == "Cancel")
 			return
 
-		if(!M.may_climb_ladders(src))
+		if (!M.may_climb_ladders(src))
 			return
 
 		switch(direction)
-			if("Up")
+			if ("Up")
 				return target_up
-			if("Down")
+			if ("Down")
 				return target_down
 	else
 		return target_down || target_up
 
 /mob/proc/may_climb_ladders(ladder)
-	if(!Adjacent(ladder))
+	if (!Adjacent(ladder))
 		to_chat(src, SPAN_WARNING("You need to be next to \the [ladder] to start climbing."))
 		return FALSE
-	if(incapacitated())
+	if (incapacitated())
 		to_chat(src, SPAN_WARNING("You are physically unable to climb \the [ladder]."))
 		return FALSE
 
 	var/carry_count = 0
 	for(var/obj/item/grab/G in src)
-		if(!G.ladder_carry())
+		if (!G.ladder_carry())
 			to_chat(src, SPAN_WARNING("You can't carry [G.affecting] up \the [ladder]."))
 			return FALSE
 		else
 			carry_count++
-	if(carry_count > 1)
+	if (carry_count > 1)
 		to_chat(src, SPAN_WARNING("You can't carry more than one person up \the [ladder]."))
 		return FALSE
 
@@ -196,13 +196,13 @@
 /obj/structure/ladder/proc/climbLadder(mob/user, target_ladder, obj/item/I = null)
 	var/turf/T = get_turf(target_ladder)
 	for(var/atom/A in T)
-		if(!A.CanPass(user, user.loc, 1.5, 0))
+		if (!A.CanPass(user, user.loc, 1.5, 0))
 			to_chat(user, SPAN_NOTICE("\The [A] is blocking \the [src]."))
 
 			//We cannot use the ladder, but we probably can remove the obstruction
 			var/atom/movable/M = A
-			if(istype(M) && M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
-				if(isnull(I))
+			if (istype(M) && M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
+				if (isnull(I))
 					M.attack_hand(user)
 				else
 					M.attackby(I, user)
@@ -246,15 +246,15 @@
 /obj/structure/stairs/Initialize()
 	for(var/turf/turf in locs)
 		var/turf/simulated/open/above = GetAbove(turf)
-		if(!above)
+		if (!above)
 			warning("Stair created without level above: ([loc.x], [loc.y], [loc.z])")
 			return INITIALIZE_HINT_QDEL
-		if(!istype(above))
+		if (!istype(above))
 			above.ChangeTurf(/turf/simulated/open)
 	. = ..()
 
 /obj/structure/stairs/CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
-	if(get_dir(loc, target) == dir && upperStep(mover.loc))
+	if (get_dir(loc, target) == dir && upperStep(mover.loc))
 		return FALSE
 	return ..()
 
@@ -263,7 +263,7 @@
 	if (above)
 		var/turf/target = get_step(above, dir)
 		var/turf/source = A.loc
-		if(above.CanZPass(source, UP) && target.Enter(A, src))
+		if (above.CanZPass(source, UP) && target.Enter(A, src))
 			if (bluespace_affected)
 				var/list/obj/structure/other_stairs= list()
 				for (var/obj/structure/stairs/stair)
@@ -275,13 +275,13 @@
 					if (prob(20))
 						to_chat(A, SPAN_WARNING("You feel turned around..."))
 			A.forceMove(target)
-			if(isliving(A))
+			if (isliving(A))
 				var/mob/living/L = A
-				if(L.pulling)
+				if (L.pulling)
 					L.pulling.forceMove(target)
-			if(ishuman(A))
+			if (ishuman(A))
 				var/mob/living/carbon/human/H = A
-				if(H.has_footsteps())
+				if (H.has_footsteps())
 					playsound(source, 'sound/effects/stairs_step.ogg', 50)
 					playsound(target, 'sound/effects/stairs_step.ogg', 50)
 		else

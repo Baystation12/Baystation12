@@ -19,7 +19,7 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 
 /singleton/public_access/public_variable/input_toggle/write_var(obj/machinery/machine, new_value)
 	. = ..()
-	if(.)
+	if (.)
 		machine.input_toggle = new_value
 
 /singleton/public_access/public_method/toggle_input_toggle
@@ -61,7 +61,7 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 
 /singleton/public_access/public_variable/identifier/write_var(obj/machinery/machine, new_value)
 	. = ..()
-	if(.)
+	if (.)
 		machine.identifier = new_value
 
 /singleton/public_access/public_variable/use_power
@@ -76,10 +76,10 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 	return machine.use_power
 
 /singleton/public_access/public_variable/use_power/write_var(obj/machinery/machine, new_value)
-	if(!(new_value in list(POWER_USE_OFF, POWER_USE_IDLE, POWER_USE_ACTIVE)))
+	if (!(new_value in list(POWER_USE_OFF, POWER_USE_IDLE, POWER_USE_ACTIVE)))
 		return FALSE
 	. = ..()
-	if(.)
+	if (.)
 		machine.update_use_power(new_value)
 
 /singleton/public_access/public_variable/name
@@ -95,7 +95,7 @@ Public vars at /obj/machinery level. Just because they are here does not mean th
 
 /singleton/public_access/public_variable/name/write_var(obj/machinery/machine, new_value)
 	. = ..()
-	if(.)
+	if (.)
 		machine.SetName(new_value)
 
 /singleton/public_access/public_method/toggle_power

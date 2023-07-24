@@ -28,14 +28,14 @@ var/global/total_lighting_overlays = 0
 
 /atom/movable/lighting_overlay/New(atom/loc, no_update = FALSE)
 	var/turf/T = loc //If this runtimes atleast we'll know what's creating overlays outside of turfs.
-	if(T.dynamic_lighting)
+	if (T.dynamic_lighting)
 		. = ..()
 		verbs.Cut()
 		total_lighting_overlays++
 
 		T.lighting_overlay = src
 		T.luminosity = 0
-		if(no_update)
+		if (no_update)
 			return
 		update_overlay()
 	else
@@ -45,14 +45,14 @@ var/global/total_lighting_overlays = 0
 	set waitfor = FALSE
 	var/turf/T = loc
 
-	if(!istype(T))
-		if(loc)
+	if (!istype(T))
+		if (loc)
 			log_debug("A lighting overlay realised its loc was NOT a turf (actual loc: [loc][loc ? ", " + loc.type : "null"]) in update_overlay() and got qdel'ed!")
 		else
 			log_debug("A lighting overlay realised it was in nullspace in update_overlay() and got pooled!")
 		qdel(src)
 		return
-	if(!T.dynamic_lighting)
+	if (!T.dynamic_lighting)
 		qdel(src)
 		return
 
@@ -97,11 +97,11 @@ var/global/total_lighting_overlays = 0
 	var/set_luminosity = max > 1e-6
 	#endif
 
-	if((rr & gr & br & ar) && (rg + gg + bg + ag + rb + gb + bb + ab == 8))
+	if ((rr & gr & br & ar) && (rg + gg + bg + ag + rb + gb + bb + ab == 8))
 	//anything that passes the first case is very likely to pass the second, and addition is a little faster in this case
 		icon_state = "transparent"
 		color = null
-	else if(!set_luminosity)
+	else if (!set_luminosity)
 		icon_state = LIGHTING_ICON_STATE_DARK
 		color = null
 	else
@@ -130,7 +130,7 @@ var/global/total_lighting_overlays = 0
 	SSlighting.overlay_queue -= src
 
 	var/turf/T = loc
-	if(istype(T))
+	if (istype(T))
 		T.lighting_overlay = null
 
 	. = ..()
@@ -138,7 +138,7 @@ var/global/total_lighting_overlays = 0
 /atom/movable/lighting_overlay/forceMove()
 	//should never move
 	//In theory... except when getting deleted :C
-	if(QDELING(src))
+	if (QDELING(src))
 		return ..()
 	return 0
 

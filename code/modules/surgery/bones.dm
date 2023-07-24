@@ -9,7 +9,7 @@
 
 /singleton/surgery_step/bone/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && (affected.status & ORGAN_BROKEN) && affected.stage == required_stage)
+	if (affected && (affected.status & ORGAN_BROKEN) && affected.stage == required_stage)
 		return affected
 
 //////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@
 	var/bone = affected.encased ? "\the [target]'s [affected.encased]" : "bones in \the [target]'s [affected.name]"
 	user.visible_message(SPAN_NOTICE("[user] applies some [tool.name] to [bone]"), \
 		SPAN_NOTICE("You apply some [tool.name] to [bone]."))
-	if(affected.stage == 0)
+	if (affected.stage == 0)
 		affected.stage = 1
 	affected.status &= ~ORGAN_BRITTLE
 
@@ -70,7 +70,7 @@
 /singleton/surgery_step/bone/set_bone/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	var/bone = affected.encased ? "\the [target]'s [affected.encased]" : "bones in \the [target]'s [affected.name]"
-	if(affected.encased == "skull")
+	if (affected.encased == "skull")
 		user.visible_message("[user] is beginning to piece [bone] back together with \the [tool]." , \
 			"You are beginning to piece [bone] back together with \the [tool].")
 	else
@@ -83,7 +83,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	var/bone = affected.encased ? "\the [target]'s [affected.encased]" : "bones in \the [target]'s [affected.name]"
 	if (affected.status & ORGAN_BROKEN)
-		if(affected.encased == "skull")
+		if (affected.encased == "skull")
 			user.visible_message(SPAN_NOTICE("\The [user] pieces [bone] back together with \the [tool]."), \
 				SPAN_NOTICE("You piece [bone] back together with \the [tool]."))
 		else

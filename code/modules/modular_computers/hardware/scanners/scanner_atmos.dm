@@ -4,9 +4,9 @@
 	can_run_scan = 1
 
 /obj/item/stock_parts/computer/scanner/atmos/can_use_scanner(mob/user, atom/target, proximity = TRUE)
-	if(!..())
+	if (!..())
 		return 0
-	if(!target.simulated)
+	if (!target.simulated)
 		return 0
 	return 1
 
@@ -29,10 +29,10 @@
 		SSnano.update_uis(driver.NM)
 
 /obj/item/stock_parts/computer/scanner/atmos/proc/scan_data(mob/user, atom/target, proximity = TRUE)
-	if(!can_use_scanner(user, target, proximity))
+	if (!can_use_scanner(user, target, proximity))
 		return 0
 	var/air_contents = target.return_air()
-	if(!air_contents)
+	if (!air_contents)
 		return 0
 	return atmosanalyzer_scan(target, air_contents)
 

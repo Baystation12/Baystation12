@@ -31,7 +31,7 @@ GLOBAL_DATUM_INIT(ert, /datum/antagonist/ert, new)
 
 /datum/antagonist/ert/create_default(mob/source)
 	var/mob/living/carbon/human/M = ..()
-	if(istype(M)) M.age = rand(25,45)
+	if (istype(M)) M.age = rand(25,45)
 
 /datum/antagonist/ert/Initialize()
 	..()
@@ -39,12 +39,12 @@ GLOBAL_DATUM_INIT(ert, /datum/antagonist/ert, new)
 	welcome_text =        SPAN_BOLD("You are a member of the Emergency Response Team.") + "As a member of the Emergency Response Team, you answer only to your leader and [GLOB.using_map.company_name] officials."
 
 /datum/antagonist/ert/greet(datum/mind/player)
-	if(!..())
+	if (!..())
 		return
 	to_chat(player.current, "You are part of a Fifth Fleet Quick Reaction Force. There is a severe emergency on \the [GLOB.using_map.station_name] and you are tasked to fix the problem.")
 	to_chat(player.current, "You should first gear up and discuss a plan with your team. More members may be joining, so don't move out before you're all ready. You might receive further instruction from a superior in person or through holocomms soon.")
 
-	if(reason)
+	if (reason)
 		to_chat(player.current, SPAN_BOLD(FONT_LARGE("You have been summoned to \the [GLOB.using_map.station_name] for the following reason: " + SPAN_NOTICE(reason))))
 
 //Equip proc has been moved to the map specific folders.

@@ -29,13 +29,13 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 
 /obj/effect/overmap/visitable/Initialize()
 	. = ..()
-	if(. == INITIALIZE_HINT_QDEL)
+	if (. == INITIALIZE_HINT_QDEL)
 		return
 
 	find_z_levels()     // This populates map_z and assigns z levels to the ship.
 	register_z_levels() // This makes external calls to update global z level information.
 
-	if(!GLOB.using_map.overmap_z)
+	if (!GLOB.using_map.overmap_z)
 		build_overmap()
 
 	var/map_low = OVERMAP_EDGE
@@ -56,7 +56,7 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 	for(var/obj/effect/overmap/event/E in loc)
 		qdel(E)
 
-	if(HAS_FLAGS(sector_flags, OVERMAP_SECTOR_KNOWN))
+	if (HAS_FLAGS(sector_flags, OVERMAP_SECTOR_KNOWN))
 		LAZYADD(GLOB.known_overmap_sectors, src)
 		layer = ABOVE_LIGHTING_LAYER
 		plane = EFFECTS_ABOVE_LIGHTING_PLANE
@@ -89,28 +89,28 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 		map_sectors["[zlevel]"] = src
 
 	GLOB.using_map.player_levels |= map_z
-	if(!HAS_FLAGS(sector_flags, OVERMAP_SECTOR_IN_SPACE))
+	if (!HAS_FLAGS(sector_flags, OVERMAP_SECTOR_IN_SPACE))
 		GLOB.using_map.sealed_levels |= map_z
-	if(HAS_FLAGS(sector_flags, OVERMAP_SECTOR_BASE))
+	if (HAS_FLAGS(sector_flags, OVERMAP_SECTOR_BASE))
 		GLOB.using_map.station_levels |= map_z
 		GLOB.using_map.contact_levels |= map_z
 		GLOB.using_map.map_levels |= map_z
 
 //Helper for init.
 /obj/effect/overmap/visitable/proc/check_ownership(obj/object)
-	if((object.z in map_z) && !(get_area(object) in SSshuttle.shuttle_areas))
+	if ((object.z in map_z) && !(get_area(object) in SSshuttle.shuttle_areas))
 		return 1
 
 //If shuttle_name is false, will add to generic waypoints; otherwise will add to restricted. Does not do checks.
 /obj/effect/overmap/visitable/proc/add_landmark(obj/effect/shuttle_landmark/landmark, shuttle_name)
 	landmark.sector_set(src, shuttle_name)
-	if(shuttle_name)
+	if (shuttle_name)
 		LAZYADD(restricted_waypoints[shuttle_name], landmark)
 	else
 		generic_waypoints += landmark
 
 /obj/effect/overmap/visitable/proc/remove_landmark(obj/effect/shuttle_landmark/landmark, shuttle_name)
-	if(shuttle_name)
+	if (shuttle_name)
 		var/list/shuttles = restricted_waypoints[shuttle_name]
 		LAZYREMOVE(shuttles, landmark)
 	else
@@ -122,7 +122,7 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 		. += contained.get_waypoints(shuttle_name)
 	for(var/thing in generic_waypoints)
 		.[thing] = name
-	if(shuttle_name in restricted_waypoints)
+	if (shuttle_name in restricted_waypoints)
 		for(var/thing in restricted_waypoints[shuttle_name])
 			.[thing] = name
 
@@ -151,7 +151,7 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 
 /obj/effect/overmap/visitable/sector/Initialize()
 	. = ..()
-	if(HAS_FLAGS(sector_flags, OVERMAP_SECTOR_KNOWN))
+	if (HAS_FLAGS(sector_flags, OVERMAP_SECTOR_KNOWN))
 		for(var/obj/machinery/computer/ship/helm/H as anything in GLOB.overmap_helm_computers)
 			update_known_connections(TRUE)
 
@@ -168,7 +168,7 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 /obj/effect/overmap/visitable/sector/hide()
 
 /proc/build_overmap()
-	if(!GLOB.using_map.use_overmap)
+	if (!GLOB.using_map.use_overmap)
 		return 1
 
 	testing("Building overmap...")
@@ -179,7 +179,7 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 	var/area/overmap/A = new
 	for (var/square in block(locate(1,1,GLOB.using_map.overmap_z), locate(GLOB.using_map.overmap_size,GLOB.using_map.overmap_size,GLOB.using_map.overmap_z)))
 		var/turf/T = square
-		if(T.x == GLOB.using_map.overmap_size || T.y == GLOB.using_map.overmap_size)
+		if (T.x == GLOB.using_map.overmap_size || T.y == GLOB.using_map.overmap_size)
 			T = T.ChangeTurf(/turf/unsimulated/map/edge)
 		else
 			T = T.ChangeTurf(/turf/unsimulated/map)

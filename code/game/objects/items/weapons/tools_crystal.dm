@@ -10,7 +10,7 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_TOOLS
 
 /obj/item/weldingtool/electric/crystal/on_update_icon()
-	if(welding)
+	if (welding)
 		icon_state = "crystal_welder_on"
 		item_state = "crystal_tool_lit"
 		set_light(0.6, 0.5, 2.5, l_color = COLOR_LIGHT_CYAN)
@@ -19,27 +19,27 @@
 		item_state = "crystal_tool"
 		set_light(0)
 	var/mob/M = loc
-	if(istype(M))
+	if (istype(M))
 		M.update_inv_l_hand()
 		M.update_inv_r_hand()
 
 /obj/item/weldingtool/electric/crystal/get_available_charge()
 	. = 0
 	var/mob/living/carbon/human/adherent = loc
-	if(istype(adherent))
+	if (istype(adherent))
 		for(var/obj/item/organ/internal/cell/cell in adherent.internal_organs)
-			if(!cell.is_broken())
+			if (!cell.is_broken())
 				. += cell.get_charge()
 
 /obj/item/weldingtool/electric/crystal/spend_charge(amount)
 	var/mob/living/carbon/human/adherent = loc
-	if(istype(adherent))
+	if (istype(adherent))
 		for(var/obj/item/organ/internal/cell/cell in adherent.internal_organs)
-			if(!cell.is_broken() && cell.get_charge() >= amount)
+			if (!cell.is_broken() && cell.get_charge() >= amount)
 				var/spending = min(amount, cell.get_charge())
 				cell.use(spending)
 				amount -= spending
-				if(amount <= 0)
+				if (amount <= 0)
 					break
 
 /obj/item/wirecutters/crystal

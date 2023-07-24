@@ -45,24 +45,24 @@
 	var/price = 10
 	var/mob/living/silicon/ai/user = usr
 
-	if(!A)
+	if (!A)
 		return
 
-	if(!istype(A))
+	if (!istype(A))
 		to_chat(user, "This is not an APC!")
 		return
 
-	if(A)
-		if(A.hacker && A.hacker == user)
+	if (A)
+		if (A.hacker && A.hacker == user)
 			to_chat(user, "You already control this APC!")
 			return
-		else if(A.aidisabled)
+		else if (A.aidisabled)
 			to_chat(user, SPAN_NOTICE("Unable to connect to APC. Please verify wire connection and try again."))
 			return
 	else
 		return
 
-	if(!ability_prechecks(user, price, TRUE) || !ability_pay(user, price))
+	if (!ability_prechecks(user, price, TRUE) || !ability_pay(user, price))
 		return
 
 	log_ability_use(user, "basic encryption hack", A, 0)	// Does not notify admins, but it's still logged for reference.
@@ -72,9 +72,9 @@
 	sleep(200)
 	to_chat(user, "Restarting APC to apply changes..")
 	sleep(100)
-	if(A)
+	if (A)
 		A.ai_hack(user)
-		if(A.hacker == user)
+		if (A.hacker == user)
 			to_chat(user, "Hack successful. You now have full control over \the [A].")
 		else
 			to_chat(user, SPAN_NOTICE("Hack failed. Connection to APC has been lost. Please verify wire connection and try again."))
@@ -89,10 +89,10 @@
 	var/price = 75
 	var/mob/living/silicon/ai/user = usr
 
-	if(!ability_prechecks(user, price))
+	if (!ability_prechecks(user, price))
 		return
 
-	if(user.last_failed_malf_title || user.last_failed_malf_message)
+	if (user.last_failed_malf_title || user.last_failed_malf_message)
 		if (alert(user, "Your last hack attempt with title '[user.last_failed_malf_title]' has failed. Try again?", "Retransmission", "Yes", "No") != "Yes")
 			user.last_failed_malf_title = null
 			user.last_failed_malf_message = null
@@ -100,14 +100,14 @@
 	var/title = user.last_failed_malf_title ? user.last_failed_malf_title : sanitize(input("Select message title: "))
 	var/text = user.last_failed_malf_message ? user.last_failed_malf_message : sanitize(input("Select message text: "))
 
-	if(!title || !text || !ability_pay(user, price))
+	if (!title || !text || !ability_pay(user, price))
 		to_chat(user, "Hack Aborted")
 		return
 	log_ability_use(user, "advanced encryption hack")
 
-	if(prob(60) && user.hack_can_fail)
+	if (prob(60) && user.hack_can_fail)
 		to_chat(user, "Hack Failed.")
-		if(prob(10))
+		if (prob(10))
 			user.hack_fails ++
 			announce_hack_failure(user, "quantum message relay")
 			log_ability_use(user, "elite encryption hack (CRITFAIL - title: [title])")
@@ -125,18 +125,18 @@
 	set desc = "200 CPU - Allows you to hack ALERTCON system, changing alert level. Has high chance of failing."
 	var/price = 200
 	var/mob/living/silicon/ai/user = usr
-	if(!ability_prechecks(user, price))
+	if (!ability_prechecks(user, price))
 		return
 
 	var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 	var/alert_target = input("Select new alert level:") as null|anything in (security_state.all_security_levels - security_state.current_security_level)
-	if(!alert_target || !ability_pay(user, price))
+	if (!alert_target || !ability_pay(user, price))
 		to_chat(user, "Hack Aborted")
 		return
 
-	if(prob(75) && user.hack_can_fail)
+	if (prob(75) && user.hack_can_fail)
 		to_chat(user, "Hack Failed.")
-		if(prob(20))
+		if (prob(20))
 			user.hack_fails++
 			announce_hack_failure(user, "alert control system")
 			log_ability_use(user, "elite encryption hack (CRITFAIL - [alert_target])")
@@ -156,36 +156,36 @@
 	if (alert(user, "Begin system override? This cannot be stopped once started. The network administrators will probably notice this.", "System Override:", "Yes", "No") != "Yes")
 		return
 	if (!ability_prechecks(user, price) || !ability_pay(user, price) || user.system_override)
-		if(user.system_override)
+		if (user.system_override)
 			to_chat(user, "You already started the system override sequence.")
 		return
 	log_ability_use(user, "system override (STARTED)")
 	var/list/remaining_apcs = list()
 	var/list/valid_zlevels = GetConnectedZlevels(user.z)
 	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
-		if(!(A.z in valid_zlevels)) 		// Only station APCs
+		if (!(A.z in valid_zlevels)) 		// Only station APCs
 			continue
-		if(A.hacker == user || A.aidisabled) 		// This one is already hacked, or AI control is disabled on it.
+		if (A.hacker == user || A.aidisabled) 		// This one is already hacked, or AI control is disabled on it.
 			continue
 		remaining_apcs += A
 
 	var/duration = (length(remaining_apcs) * 100)		// Calculates duration for announcing system
-	if(user.hack_can_fail)								// Two types of announcements. Short hacks trigger immediate warnings. Long hacks are more "progressive".
+	if (user.hack_can_fail)								// Two types of announcements. Short hacks trigger immediate warnings. Long hacks are more "progressive".
 		spawn(0)
 			sleep(duration/5)
-			if(!user || user.stat == DEAD)
+			if (!user || user.stat == DEAD)
 				return
 			command_announcement.Announce("Caution, [GLOB.using_map.station_name]. We have detected abnormal behaviour in your network. It seems someone is trying to hack your electronic systems. We will update you when we have more information.", "Network Monitoring")
 			sleep(duration/5)
-			if(!user || user.stat == DEAD)
+			if (!user || user.stat == DEAD)
 				return
 			command_announcement.Announce("We started tracing the intruder. Whoever is doing this, they seem to be onboard. We suggest checking all network control terminals. We will keep you updated on the situation.", "Network Monitoring")
 			sleep(duration/5)
-			if(!user || user.stat == DEAD)
+			if (!user || user.stat == DEAD)
 				return
 			command_announcement.Announce("This is highly abnormal and somewhat concerning. The intruder is too fast, he is evading our traces. No man could be this fast...", "Network Monitoring")
 			sleep(duration/5)
-			if(!user || user.stat == DEAD)
+			if (!user || user.stat == DEAD)
 				return
 			command_announcement.Announce("We have traced the intrude#, it seem& t( e yo3r AI s7stem, it &# *#ck@ng th$ sel$ destru$t mechani&m, stop i# bef*@!)$#&&@@  <CONNECTION LOST>", "Network Monitoring")
 
@@ -195,25 +195,25 @@
 	// Now actually begin the hack. Each APC takes 10 seconds.
 	for(var/obj/machinery/power/apc/A in shuffle(remaining_apcs))
 		sleep(100)
-		if(!user || user.stat == DEAD)
+		if (!user || user.stat == DEAD)
 			return
-		if(!A || !istype(A) || A.aidisabled)
+		if (!A || !istype(A) || A.aidisabled)
 			continue
 		A.ai_hack(user)
-		if(A.hacker == user)
+		if (A.hacker == user)
 			to_chat(user, "## OVERRIDDEN: [A.name]")
 
 	to_chat(user, "## REACHABLE APC SYSTEMS OVERTAKEN. BYPASSING PRIMARY FIREWALL.")
 	sleep(1 MINUTE)
 	// Hack all APCs, including those built during hack sequence.
 	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
-		if((!A.hacker || A.hacker != src) && !A.aidisabled && (A.z in valid_zlevels))
+		if ((!A.hacker || A.hacker != src) && !A.aidisabled && (A.z in valid_zlevels))
 			A.ai_hack(src)
 
 	log_ability_use(user, "system override (FINISHED)")
 	to_chat(user, "## PRIMARY FIREWALL BYPASSED. YOU NOW HAVE FULL SYSTEM CONTROL.")
 
-	if(user.hack_can_fail)
+	if (user.hack_can_fail)
 		command_announcement.Announce("Our system administrators just reported that we've been locked out from your control network. Whoever did this now has full access to [GLOB.using_map.station_name]'s systems.", "Network Administration Center")
 	user.hack_can_fail = 0
 	user.system_override = 2

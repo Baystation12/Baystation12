@@ -10,12 +10,12 @@
 	update_icon()
 
 /obj/screen/psi/Destroy()
-	if(owner && owner.client)
+	if (owner && owner.client)
 		owner.client.screen -= src
 	. = ..()
 
 /obj/screen/psi/on_update_icon()
-	if(hidden)
+	if (hidden)
 		invisibility = INVISIBILITY_ABSTRACT
 	else
 		invisibility = 0

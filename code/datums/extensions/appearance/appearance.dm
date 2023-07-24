@@ -8,7 +8,7 @@
 
 /datum/extension/appearance/New(holder)
 	var/appearance_handler = appearance_manager.get_appearance_handler(appearance_handler_type)
-	if(!appearance_handler)
+	if (!appearance_handler)
 		CRASH("Unable to acquire the [appearance_handler_type] appearance handler.")
 
 	GLOB.item_equipped_event.register(holder, appearance_handler, item_equipment_proc)

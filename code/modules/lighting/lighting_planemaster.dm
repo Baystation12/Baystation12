@@ -21,5 +21,5 @@
 
 
 /mob/proc/change_light_colour(new_colour)
-	if(l_general)
+	if (l_general)
 		l_general.sync(new_colour)

@@ -13,7 +13,7 @@
 	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_CRYSTAL | SURGERY_NO_STUMP
 
 /singleton/surgery_step/generic/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	if(target_zone != BP_EYES) //there are specific steps for eye surgery
+	if (target_zone != BP_EYES) //there are specific steps for eye surgery
 		. = ..()
 
 //////////////////////////////////////////////////////////////////
@@ -31,9 +31,9 @@
 
 /singleton/surgery_step/generic/cut_with_laser/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	. = ..()
-	if(.)
+	if (.)
 		var/obj/item/organ/external/affected = .
-		if(affected.how_open())
+		if (affected.how_open())
 			var/datum/wound/cut/incision = affected.get_incision()
 			to_chat(user, SPAN_NOTICE("The [incision.desc] provides enough access."))
 			return FALSE
@@ -73,9 +73,9 @@
 
 /singleton/surgery_step/generic/managed/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	. = ..()
-	if(.)
+	if (.)
 		var/obj/item/organ/external/affected = .
-		if(affected.how_open())
+		if (affected.how_open())
 			var/datum/wound/cut/incision = affected.get_incision()
 			to_chat(user, SPAN_NOTICE("The [incision.desc] provides enough access."))
 			return FALSE
@@ -119,9 +119,9 @@
 
 /singleton/surgery_step/generic/cut_open/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	. = ..()
-	if(.)
+	if (.)
 		var/obj/item/organ/external/affected = .
-		if(affected.how_open())
+		if (affected.how_open())
 			var/datum/wound/cut/incision = affected.get_incision()
 			to_chat(user, SPAN_NOTICE("The [incision.desc] provides enough access."))
 			return FALSE
@@ -148,9 +148,9 @@
 
 /singleton/surgery_step/generic/cut_open/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	. = ..()
-	if(user.skill_check(SKILL_FORENSICS, SKILL_TRAINED))
+	if (user.skill_check(SKILL_FORENSICS, SKILL_TRAINED))
 		. += 40
-		if(target.stat == DEAD)
+		if (target.stat == DEAD)
 			. += 40
 
 //////////////////////////////////////////////////////////////////
@@ -170,7 +170,7 @@
 
 /singleton/surgery_step/generic/clamp_bleeders/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && !affected.clamped())
+	if (affected && !affected.clamped())
 		return affected
 
 /singleton/surgery_step/generic/clamp_bleeders/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -214,8 +214,8 @@
 /singleton/surgery_step/generic/retract_skin/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	. = FALSE
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(affected)
-		if(affected.how_open() >= SURGERY_RETRACTED)
+	if (affected)
+		if (affected.how_open() >= SURGERY_RETRACTED)
 			var/datum/wound/cut/incision = affected.get_incision()
 			to_chat(user, SPAN_NOTICE("The [incision.desc] provides enough access, a larger incision isn't needed."))
 		else
@@ -260,24 +260,24 @@
 /singleton/surgery_step/generic/cauterize/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	. = FALSE
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(affected)
-		if(affected.is_stump())
-			if(affected.status & ORGAN_ARTERY_CUT)
+	if (affected)
+		if (affected.is_stump())
+			if (affected.status & ORGAN_ARTERY_CUT)
 				. = TRUE
 			else
 				to_chat(user, SPAN_WARNING("There is no bleeding to repair within this stump."))
-		else if(!affected.get_incision(1))
+		else if (!affected.get_incision(1))
 			to_chat(user, SPAN_WARNING("There are no incisions on [target]'s [affected.name] that can be closed cleanly with \the [tool]!"))
 		else
 			. = TRUE
 
 /singleton/surgery_step/generic/cauterize/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected)
-		if(affected.is_stump())
-			if(affected.status & ORGAN_ARTERY_CUT)
+	if (affected)
+		if (affected.is_stump())
+			if (affected.status & ORGAN_ARTERY_CUT)
 				return affected
-		else if(affected.how_open())
+		else if (affected.how_open())
 			return affected
 
 /singleton/surgery_step/generic/cauterize/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -293,12 +293,12 @@
 	var/datum/wound/W = affected.get_incision()
 	user.visible_message(SPAN_NOTICE("[user] [post_cauterize_term][W ? " \a [W.desc] on" : ""] \the [target]'s [affected.name] with \the [tool]."), \
 	SPAN_NOTICE("You [cauterize_term][W ? " \a [W.desc] on" : ""] \the [target]'s [affected.name] with \the [tool]."))
-	if(istype(W))
+	if (istype(W))
 		W.close()
 		affected.update_wounds()
-	if(affected.is_stump())
+	if (affected.is_stump())
 		affected.status &= ~ORGAN_ARTERY_CUT
-	if(affected.clamped())
+	if (affected.clamped())
 		affected.remove_clamps()
 
 /singleton/surgery_step/generic/cauterize/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -322,13 +322,13 @@
 
 /singleton/surgery_step/generic/amputate/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
-	if(affected && (affected.limb_flags & ORGAN_FLAG_CAN_AMPUTATE) && !affected.how_open())
+	if (affected && (affected.limb_flags & ORGAN_FLAG_CAN_AMPUTATE) && !affected.how_open())
 		return affected
 
 /singleton/surgery_step/generic/amputate/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	var/target_zone = user.zone_sel.selecting
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(BP_IS_ROBOTIC(affected))
+	if (BP_IS_ROBOTIC(affected))
 		return SURGERY_SKILLS_ROBOTIC
 	else
 		return ..()

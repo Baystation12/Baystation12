@@ -26,7 +26,7 @@
 		H.adjustHalLoss(loss)
 
 /spell/targeted/torment/empower_spell()
-	if(!..())
+	if (!..())
 		return 0
 
 	loss += 30

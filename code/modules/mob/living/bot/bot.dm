@@ -60,21 +60,21 @@
 
 /mob/living/bot/Initialize()
 	. = ..()
-	if(on)
+	if (on)
 		turn_on() // Update lights and other stuff
 	else
 		turn_off()
 
 /mob/living/bot/Life()
 	..()
-	if(health <= 0)
+	if (health <= 0)
 		death()
 		return
 	weakened = 0
 	stunned = 0
 	paralysis = 0
 
-	if(on && !client && !busy)
+	if (on && !client && !busy)
 		spawn(0)
 			handleAI()
 
@@ -157,22 +157,22 @@
 	var/dat
 
 	var/curText = GetInteractTitle()
-	if(curText)
+	if (curText)
 		dat += curText
 		dat += "<hr>"
 
 	curText = GetInteractStatus()
-	if(curText)
+	if (curText)
 		dat += curText
 		dat += "<hr>"
 
 	curText = (CanAccessPanel(user)) ? GetInteractPanel() : "The access panel is locked."
-	if(curText)
+	if (curText)
 		dat += curText
 		dat += "<hr>"
 
 	curText = (CanAccessMaintenance(user)) ? GetInteractMaintenance() : "The maintenance panel is locked."
-	if(curText)
+	if (curText)
 		dat += curText
 
 	var/datum/browser/popup = new(user, "botpanel", "[src] controls")
@@ -183,7 +183,7 @@
 	return GLOB.default_state
 
 /mob/living/bot/OnTopic(mob/user, href_list)
-	if(href_list["command"])
+	if (href_list["command"])
 		ProcessCommand(user, href_list["command"], href_list)
 	Interact(user)
 
@@ -202,8 +202,8 @@
 	return
 
 /mob/living/bot/proc/ProcessCommand(mob/user, command, href_list)
-	if(command == "toggle" && CanToggle(user))
-		if(on)
+	if (command == "toggle" && CanToggle(user))
+		if (on)
 			turn_off()
 		else
 			turn_on()
@@ -226,9 +226,9 @@
 	..(message, null, verb)
 
 /mob/living/bot/Bump(atom/A)
-	if(on && botcard && istype(A, /obj/machinery/door))
+	if (on && botcard && istype(A, /obj/machinery/door))
 		var/obj/machinery/door/D = A
-		if(!istype(D, /obj/machinery/door/firedoor) && !istype(D, /obj/machinery/door/blast) && D.check_access(botcard))
+		if (!istype(D, /obj/machinery/door/firedoor) && !istype(D, /obj/machinery/door/blast) && D.check_access(botcard))
 			D.open()
 	else
 		..()
@@ -237,31 +237,31 @@
 	return 0
 
 /mob/living/bot/proc/handleAI()
-	if(length(ignore_list))
+	if (length(ignore_list))
 		for(var/atom/A in ignore_list)
-			if(!A || !A.loc || prob(1))
+			if (!A || !A.loc || prob(1))
 				ignore_list -= A
 	handleRegular()
-	if(target && confirmTarget(target))
-		if(Adjacent(target))
+	if (target && confirmTarget(target))
+		if (Adjacent(target))
 			handleAdjacentTarget()
 		else
 			handleRangedTarget()
-		if(!wait_if_pulled || !pulledby)
+		if (!wait_if_pulled || !pulledby)
 			for(var/i = 1 to target_speed)
 				sleep(20 / (target_speed + 1))
 				stepToTarget()
-		if(max_frustration && frustration > max_frustration * target_speed)
+		if (max_frustration && frustration > max_frustration * target_speed)
 			handleFrustrated(1)
 	else
 		resetTarget()
 		lookForTargets()
-		if(will_patrol && !pulledby && !target)
-			if(patrol_path && length(patrol_path))
+		if (will_patrol && !pulledby && !target)
+			if (patrol_path && length(patrol_path))
 				for(var/i = 1 to patrol_speed)
 					sleep(20 / (patrol_speed + 1))
 					handlePatrol()
-				if(max_frustration && frustration > max_frustration * patrol_speed)
+				if (max_frustration && frustration > max_frustration * patrol_speed)
 					handleFrustrated(0)
 			else
 				startPatrol()
@@ -278,14 +278,14 @@
 	return
 
 /mob/living/bot/proc/stepToTarget()
-	if(!target || !target.loc)
+	if (!target || !target.loc)
 		return
-	if(get_dist(src, target) > min_target_dist)
-		if(!length(target_path) || get_turf(target) != target_path[length(target_path)])
+	if (get_dist(src, target) > min_target_dist)
+		if (!length(target_path) || get_turf(target) != target_path[length(target_path)])
 			calcTargetPath()
-		if(makeStep(target_path))
+		if (makeStep(target_path))
 			frustration = 0
-		else if(max_frustration)
+		else if (max_frustration)
 			++frustration
 	return
 
@@ -299,11 +299,11 @@
 	return
 
 /mob/living/bot/proc/confirmTarget(atom/A)
-	if(A.invisibility >= INVISIBILITY_LEVEL_ONE)
+	if (A.invisibility >= INVISIBILITY_LEVEL_ONE)
 		return 0
-	if(A in ignore_list)
+	if (A in ignore_list)
 		return 0
-	if(!A.loc)
+	if (!A.loc)
 		return 0
 	return 1
 
@@ -313,9 +313,9 @@
 
 /mob/living/bot/proc/startPatrol()
 	var/turf/T = getPatrolTurf()
-	if(T)
+	if (T)
 		patrol_path = AStar(get_turf(loc), T, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, max_patrol_dist, id = botcard, exclude = obstacle)
-		if(!patrol_path)
+		if (!patrol_path)
 			patrol_path = list()
 		obstacle = null
 	return
@@ -324,21 +324,21 @@
 	var/minDist = INFINITY
 	var/obj/machinery/navbeacon/targ = locate() in get_turf(src)
 
-	if(!targ)
+	if (!targ)
 		for(var/obj/machinery/navbeacon/N in navbeacons)
-			if(!N.codes["patrol"])
+			if (!N.codes["patrol"])
 				continue
-			if(get_dist(src, N) < minDist)
+			if (get_dist(src, N) < minDist)
 				minDist = get_dist(src, N)
 				targ = N
 
-	if(targ && targ.codes["next_patrol"])
+	if (targ && targ.codes["next_patrol"])
 		for(var/obj/machinery/navbeacon/N in navbeacons)
-			if(N.location == targ.codes["next_patrol"])
+			if (N.location == targ.codes["next_patrol"])
 				targ = N
 				break
 
-	if(targ)
+	if (targ)
 		return get_turf(targ)
 	return null
 
@@ -347,18 +347,18 @@
 
 /mob/living/bot/proc/calcTargetPath()
 	target_path = AStar(get_turf(loc), get_turf(target), /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, max_target_dist, id = botcard, exclude = obstacle)
-	if(!target_path)
-		if(target && target.loc)
+	if (!target_path)
+		if (target && target.loc)
 			ignore_list |= target
 		resetTarget()
 		obstacle = null
 	return
 
 /mob/living/bot/proc/makeStep(list/path)
-	if(!length(path))
+	if (!length(path))
 		return 0
 	var/turf/T = path[1]
-	if(get_turf(src) == T)
+	if (get_turf(src) == T)
 		path -= T
 		return makeStep(path)
 
@@ -371,7 +371,7 @@
 	obstacle = null
 
 /mob/living/bot/proc/turn_on()
-	if(stat)
+	if (stat)
 		return 0
 	on = 1
 	set_light(0.5, 0.1, light_strength)
@@ -403,8 +403,8 @@
 
 	for(var/d in GLOB.cardinal)
 		var/turf/simulated/T = get_step(src, d)
-		if(istype(T) && !T.density)
-			if(!LinkBlockedWithAccess(src, T, ID))
+		if (istype(T) && !T.density)
+			if (!LinkBlockedWithAccess(src, T, ID))
 				L.Add(T)
 	return L
 
@@ -413,27 +413,27 @@
 // Movement through doors allowed if ID has access
 /proc/LinkBlockedWithAccess(turf/A, turf/B, obj/item/card/id/ID)
 
-	if(A == null || B == null) return 1
+	if (A == null || B == null) return 1
 	var/adir = get_dir(A,B)
 	var/rdir = get_dir(B,A)
-	if((adir & (NORTH|SOUTH)) && (adir & (EAST|WEST)))	//	diagonal
+	if ((adir & (NORTH|SOUTH)) && (adir & (EAST|WEST)))	//	diagonal
 		var/iStep = get_step(A,adir&(NORTH|SOUTH))
-		if(!LinkBlockedWithAccess(A,iStep, ID) && !LinkBlockedWithAccess(iStep,B,ID))
+		if (!LinkBlockedWithAccess(A,iStep, ID) && !LinkBlockedWithAccess(iStep,B,ID))
 			return 0
 
 		var/pStep = get_step(A,adir&(EAST|WEST))
-		if(!LinkBlockedWithAccess(A,pStep,ID) && !LinkBlockedWithAccess(pStep,B,ID))
+		if (!LinkBlockedWithAccess(A,pStep,ID) && !LinkBlockedWithAccess(pStep,B,ID))
 			return 0
 		return 1
 
-	if(DirBlockedWithAccess(A,adir, ID))
+	if (DirBlockedWithAccess(A,adir, ID))
 		return 1
 
-	if(DirBlockedWithAccess(B,rdir, ID))
+	if (DirBlockedWithAccess(B,rdir, ID))
 		return 1
 
 	for(var/obj/O in B)
-		if(O.density && !istype(O, /obj/machinery/door) && !(O.atom_flags & ATOM_FLAG_CHECKS_BORDER))
+		if (O.density && !istype(O, /obj/machinery/door) && !(O.atom_flags & ATOM_FLAG_CHECKS_BORDER))
 			return 1
 
 	return 0
@@ -442,16 +442,16 @@
 // Checks doors against access with given ID
 /proc/DirBlockedWithAccess(turf/loc,dir,obj/item/card/id/ID)
 	for(var/obj/structure/window/D in loc)
-		if(!D.density)			continue
-		if(D.dir == SOUTHWEST)	return 1
-		if(D.dir == dir)		return 1
+		if (!D.density)			continue
+		if (D.dir == SOUTHWEST)	return 1
+		if (D.dir == dir)		return 1
 
 	for(var/obj/machinery/door/D in loc)
-		if(!D.density)			continue
-		if(istype(D, /obj/machinery/door/window))
-			if( dir & D.dir )	return !D.check_access(ID)
+		if (!D.density)			continue
+		if (istype(D, /obj/machinery/door/window))
+			if ( dir & D.dir )	return !D.check_access(ID)
 
-			//if((dir & SOUTH) && (D.dir & (EAST|WEST)))		return !D.check_access(ID)
-			//if((dir & EAST ) && (D.dir & (NORTH|SOUTH)))	return !D.check_access(ID)
+			//if ((dir & SOUTH) && (D.dir & (EAST|WEST)))		return !D.check_access(ID)
+			//if ((dir & EAST ) && (D.dir & (NORTH|SOUTH)))	return !D.check_access(ID)
 		else return !D.check_access(ID)	// it's a real, air blocking door
 	return 0

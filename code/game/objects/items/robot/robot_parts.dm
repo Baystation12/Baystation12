@@ -16,13 +16,13 @@
 
 /obj/item/robot_parts/New(newloc, model)
 	..(newloc)
-	if(model_info && model)
+	if (model_info && model)
 		model_info = model
 		var/datum/robolimb/R = all_robolimbs[model]
-		if(R)
+		if (R)
 			SetName("[R.company] [initial(name)]")
 			desc = "[R.desc]"
-			if(icon_state in icon_states(R.icon))
+			if (icon_state in icon_states(R.icon))
 				icon = R.icon
 	else
 		SetDefaultName()
@@ -77,7 +77,7 @@
 
 /obj/item/robot_parts/head/can_install(mob/user)
 	var/success = TRUE
-	if(!flash1 || !flash2)
+	if (!flash1 || !flash2)
 		to_chat(user, SPAN_WARNING("You need to attach a flash to it first!"))
 		success = FALSE
 	return success && ..()
@@ -94,35 +94,35 @@
 
 /obj/item/robot_parts/chest/can_install(mob/user)
 	var/success = TRUE
-	if(!wires)
+	if (!wires)
 		to_chat(user, SPAN_WARNING("You need to attach wires to it first!"))
 		success = FALSE
-	if(!cell)
+	if (!cell)
 		to_chat(user, SPAN_WARNING("You need to attach a cell to it first!"))
 		success = FALSE
 	return success && ..()
 
 /obj/item/robot_parts/chest/attackby(obj/item/W as obj, mob/user as mob)
 	..()
-	if(istype(W, /obj/item/cell))
-		if(src.cell)
+	if (istype(W, /obj/item/cell))
+		if (src.cell)
 			to_chat(user, SPAN_WARNING("You have already inserted a cell!"))
 			return
 		else
-			if(!user.unEquip(W, src))
+			if (!user.unEquip(W, src))
 				return
 			src.cell = W
 			to_chat(user, SPAN_NOTICE("You insert the cell!"))
-	if(isCoil(W))
-		if(src.wires)
+	if (isCoil(W))
+		if (src.wires)
 			to_chat(user, SPAN_WARNING("You have already inserted wire!"))
 			return
 		else
 			var/obj/item/stack/cable_coil/coil = W
-			if(coil.use(1))
+			if (coil.use(1))
 				src.wires = 1.0
 				to_chat(user, SPAN_NOTICE("You insert the wire!"))
-	if(istype(W, /obj/item/robot_parts/head))
+	if (istype(W, /obj/item/robot_parts/head))
 		var/obj/item/robot_parts/head/head_part = W
 		// Attempt to create full-body prosthesis.
 		var/success = TRUE
@@ -132,10 +132,10 @@
 
 			// Species selection.
 			var/species = input(user, "Select a species for the prosthetic.") as null|anything in GetCyborgSpecies()
-			if(!species)
+			if (!species)
 				return
 			var/name = sanitizeSafe(input(user,"Set a name for the new prosthetic."), MAX_NAME_LEN)
-			if(!name)
+			if (!name)
 				SetName("prosthetic ([random_id("prosthetic_id", 1, 999)])")
 
 			// Create a new, nonliving human.
@@ -178,16 +178,16 @@
 	. = list()
 	for(var/N in playable_species)
 		var/datum/species/S = all_species[N]
-		if(S.spawn_flags & SPECIES_NO_FBP_CONSTRUCTION)
+		if (S.spawn_flags & SPECIES_NO_FBP_CONSTRUCTION)
 			continue
 		. += N
 
 /obj/item/robot_parts/head/attackby(obj/item/W as obj, mob/user as mob)
 	..()
-	if(istype(W, /obj/item/device/flash))
-		if(istype(user,/mob/living/silicon/robot))
+	if (istype(W, /obj/item/device/flash))
+		if (istype(user,/mob/living/silicon/robot))
 			var/current_module = user.get_active_hand()
-			if(current_module == W)
+			if (current_module == W)
 				to_chat(user, SPAN_WARNING("How do you propose to do that?"))
 				return
 			else
@@ -196,23 +196,23 @@
 			add_flashes(W,user)
 
 /obj/item/robot_parts/head/proc/add_flashes(obj/item/W as obj, mob/user as mob) //Made into a seperate proc to avoid copypasta
-	if(src.flash1 && src.flash2)
+	if (src.flash1 && src.flash2)
 		to_chat(user, SPAN_NOTICE("You have already inserted the eyes!"))
 		return
-	else if(src.flash1)
-		if(!user.unEquip(W, src))
+	else if (src.flash1)
+		if (!user.unEquip(W, src))
 			return
 		src.flash2 = W
 		to_chat(user, SPAN_NOTICE("You insert the flash into the eye socket!"))
 	else
-		if(!user.unEquip(W, src))
+		if (!user.unEquip(W, src))
 			return
 		src.flash1 = W
 		to_chat(user, SPAN_NOTICE("You insert the flash into the eye socket!"))
 
 
 /obj/item/robot_parts/emag_act(remaining_charges, mob/user)
-	if(sabotaged)
+	if (sabotaged)
 		to_chat(user, SPAN_WARNING("[src] is already sabotaged!"))
 	else
 		to_chat(user, SPAN_WARNING("You short out the safeties."))

@@ -12,15 +12,15 @@
 
 /datum/language/human/get_spoken_verb(msg_end)
 	switch(msg_end)
-		if("!")
+		if ("!")
 			return pick("exclaims","shouts","yells")
-		if("?")
+		if ("?")
 			return ask_verb
 	return speech_verb
 
 /datum/language/human/get_random_name(gender)
 	if (prob(80))
-		if(gender==FEMALE)
+		if (gender==FEMALE)
 			return capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
 		else
 			return capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))

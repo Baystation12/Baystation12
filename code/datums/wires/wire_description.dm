@@ -5,8 +5,8 @@
 
 /datum/wire_description/New(index, description, skill_level)
 	src.index = index
-	if(description)
+	if (description)
 		src.description = description
-	if(skill_level)
+	if (skill_level)
 		src.skill_level = skill_level
 	..()

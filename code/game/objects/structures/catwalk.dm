@@ -25,7 +25,7 @@
 /obj/structure/catwalk/proc/redraw_nearby_catwalks()
 	for(var/direction in GLOB.alldirs)
 		var/obj/structure/catwalk/L = locate() in get_step(src, direction)
-		if(L)
+		if (L)
 			L.update_connections()
 			L.update_icon() //so siding get updated properly
 
@@ -35,31 +35,31 @@
 	overlays.Cut()
 	icon_state = ""
 	var/image/I
-	if(!hatch_open)
+	if (!hatch_open)
 		for(var/i = 1 to 4)
 			I = image('icons/obj/catwalks.dmi', "catwalk[connections[i]]", dir = SHIFTL(1, i - 1))
 			overlays += I
-	if(plated_tile)
+	if (plated_tile)
 		I = image('icons/obj/catwalks.dmi', "plated")
 		I.color = plated_tile.color
 		overlays += I
 
 /obj/structure/catwalk/ex_act(severity)
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			new /obj/item/stack/material/rods(src.loc)
 			qdel(src)
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			new /obj/item/stack/material/rods(src.loc)
 			qdel(src)
 
 /obj/structure/catwalk/attack_hand(mob/user)
-	if(user.pulling)
+	if (user.pulling)
 		do_pull_click(user, src)
 	..()
 
 /obj/structure/catwalk/attack_robot(mob/user)
-	if(Adjacent(user))
+	if (Adjacent(user))
 		attack_hand(user)
 
 /obj/structure/catwalk/proc/deconstruct(mob/user)
@@ -68,9 +68,9 @@
 	new /obj/item/stack/material/rods(src.loc)
 	new /obj/item/stack/material/rods(src.loc)
 	//Lattice would delete itself, but let's save ourselves a new obj
-	if(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open))
+	if (istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open))
 		new /obj/structure/lattice/(src.loc)
-	if(plated_tile)
+	if (plated_tile)
 		new plated_tile.build_type(src.loc)
 	qdel(src)
 
@@ -158,7 +158,7 @@
 /obj/effect/catwalk_plated/Initialize(mapload)
 	. = ..()
 	var/auto_activate = mapload || (GAME_STATE < RUNLEVEL_GAME)
-	if(auto_activate)
+	if (auto_activate)
 		activate()
 		return INITIALIZE_HINT_QDEL
 
@@ -175,9 +175,9 @@
 	activate()
 
 /obj/effect/catwalk_plated/proc/activate()
-	if(activated) return
+	if (activated) return
 
-	if(locate(/obj/structure/catwalk) in loc)
+	if (locate(/obj/structure/catwalk) in loc)
 		warning("Frame Spawner: A catwalk already exists at [loc.x]-[loc.y]-[loc.z]")
 	else
 		var/obj/structure/catwalk/C = new /obj/structure/catwalk(loc)
@@ -187,7 +187,7 @@
 	activated = 1
 	for(var/turf/T in orange(src, 1))
 		for(var/obj/effect/wallframe_spawn/other in T)
-			if(!other.activated) other.activate()
+			if (!other.activated) other.activate()
 
 /obj/effect/catwalk_plated/dark
 	icon_state = "catwalk_plateddark"

@@ -38,9 +38,9 @@
 /mob/living/simple_animal/hostile/retaliate/beast/antlion/Life()
 	. = ..()
 
-	process_healing() //this needs to occur before if(!.) because of stop_automation
+	process_healing() //this needs to occur before if (!.) because of stop_automation
 
-	if(!.)
+	if (!.)
 		return
 
 /mob/living/simple_animal/hostile/retaliate/beast/antlion/do_special_attack(atom/A)
@@ -55,31 +55,31 @@
 
 /mob/living/simple_animal/hostile/retaliate/beast/antlion/proc/diggy()
 	var/list/turf_targets
-	if(target_mob)
+	if (target_mob)
 		for(var/turf/T in range(1, get_turf(target_mob)))
-			if(!T.is_floor())
+			if (!T.is_floor())
 				continue
-			if(!T.z != src.z)
+			if (!T.z != src.z)
 				continue
 			turf_targets += T
 	else
 		for(var/turf/T in orange(5, src))
-			if(!T.is_floor())
+			if (!T.is_floor())
 				continue
-			if(!T.z != src.z)
+			if (!T.z != src.z)
 				continue
 			turf_targets += T
-	if(!LAZYLEN(turf_targets)) //oh no
+	if (!LAZYLEN(turf_targets)) //oh no
 		addtimer(new Callback(src, .proc/emerge, 2 SECONDS))
 		return
 	var/turf/T = pick(turf_targets)
-	if(T && !incapacitated())
+	if (T && !incapacitated())
 		forceMove(T)
 	addtimer(new Callback(src, .proc/emerge, 2 SECONDS))
 
 /mob/living/simple_animal/hostile/retaliate/beast/antlion/proc/emerge()
 	var/turf/T = get_turf(src)
-	if(!T)
+	if (!T)
 		return
 	visible_message(SPAN_WARNING("\The [src] erupts from \the [T]!"))
 	set_invisibility(initial(invisibility))
@@ -91,9 +91,9 @@
 		H.Weaken(1)
 
 /mob/living/simple_animal/hostile/retaliate/beast/antlion/proc/process_healing()
-	if(!incapacitated() && healing)
+	if (!incapacitated() && healing)
 		var/old_health = health
-		if(old_health < maxHealth)
+		if (old_health < maxHealth)
 			health = old_health + heal_amount
 
 /mob/living/simple_animal/hostile/retaliate/beast/antlion/proc/prep_burrow(new_bool)

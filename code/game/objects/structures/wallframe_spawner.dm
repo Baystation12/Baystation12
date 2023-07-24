@@ -24,49 +24,49 @@
 
 /obj/effect/wallframe_spawn/Initialize(mapload)
 	. = ..()
-	if(!win_path)
+	if (!win_path)
 		return
 	var/auto_activate = mapload || (GAME_STATE < RUNLEVEL_GAME)
-	if(auto_activate)
+	if (auto_activate)
 		activate()
 		return INITIALIZE_HINT_QDEL
 
 /obj/effect/wallframe_spawn/proc/activate()
-	if(activated) return
+	if (activated) return
 
-	if(locate(frame_path) in loc)
+	if (locate(frame_path) in loc)
 		warning("Frame Spawner: A frame structure already exists at [loc.x]-[loc.y]-[loc.z]")
 	else
 		var/obj/structure/wall_frame/F = new frame_path(loc)
 		handle_frame_spawn(F)
 
-	if(locate(win_path) in loc)
+	if (locate(win_path) in loc)
 		warning("Frame Spawner: A window structure already exists at [loc.x]-[loc.y]-[loc.z]")
 
 	var/list/neighbours = list()
-	if(fulltile)
+	if (fulltile)
 		var/obj/structure/window/new_win = new win_path(loc)
 		handle_window_spawn(new_win)
 	else
 		for (var/dir in GLOB.cardinal)
 			var/turf/T = get_step(src, dir)
 			var/obj/effect/wallframe_spawn/other = locate(type) in T
-			if(!other)
+			if (!other)
 				var/found_connection
-				if(locate(/obj/structure/grille) in T)
+				if (locate(/obj/structure/grille) in T)
 					for(var/obj/structure/window/W in T)
-						if(W.type == win_path && W.dir == get_dir(T,src))
+						if (W.type == win_path && W.dir == get_dir(T,src))
 							found_connection = 1
 							qdel(W)
-				if(!found_connection)
+				if (!found_connection)
 					var/obj/structure/window/new_win = new win_path(loc)
 					new_win.set_dir(dir)
 					handle_window_spawn(new_win)
 			else
 				neighbours |= other
 
-	if(grille_path)
-		if(locate(grille_path) in loc)
+	if (grille_path)
+		if (locate(grille_path) in loc)
 			warning("Frame Spawner: A grille already exists at [loc.x]-[loc.y]-[loc.z]")
 		else
 			var/obj/structure/grille/G = new grille_path (loc)
@@ -74,13 +74,13 @@
 
 	activated = 1
 	for(var/obj/effect/wallframe_spawn/other in neighbours)
-		if(!other.activated) other.activate()
+		if (!other.activated) other.activate()
 
 /obj/effect/wallframe_spawn/proc/handle_frame_spawn(obj/structure/wall_frame/F)
 	for(var/direction in GLOB.cardinal)
 		var/turf/T = get_step(src, direction)
 		for(var/obj/O in T)
-			if( istype(O, /obj/machinery/door))
+			if ( istype(O, /obj/machinery/door))
 				var/obj/machinery/door/D = O
 				D.update_connections()
 				D.update_icon()
@@ -163,5 +163,5 @@
 	win_path = /obj/structure/window/basic/full/polarized
 
 /obj/effect/wallframe_spawn/reinforced/polarized/handle_window_spawn(obj/structure/window/reinforced/polarized/P)
-	if(id)
+	if (id)
 		P.id = id

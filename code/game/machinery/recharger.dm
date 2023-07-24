@@ -21,29 +21,29 @@
 	for (var/allowed_type in allowed_devices)
 		if (istype(G, allowed_type)) allowed = 1
 
-	if(allowed)
-		if(charging)
+	if (allowed)
+		if (charging)
 			to_chat(user, SPAN_WARNING("\A [charging] is already charging here."))
 			return
 		// Checks to make sure he's not in space doing it, and that the area got proper power.
-		if(!powered())
+		if (!powered())
 			to_chat(user, SPAN_WARNING("The [name] blinks red as you try to insert the item!"))
 			return
 		if (istype(G, /obj/item/gun/energy))
 			var/obj/item/gun/energy/E = G
-			if(E.self_recharge)
+			if (E.self_recharge)
 				to_chat(user, SPAN_NOTICE("You can't find a charging port on \the [E]."))
 				return
-		if(!G.get_cell())
+		if (!G.get_cell())
 			to_chat(user, "This device does not have a battery installed.")
 			return
 
-		if(user.unEquip(G))
+		if (user.unEquip(G))
 			G.forceMove(src)
 			charging = G
 			update_icon()
-	else if(portable && isWrench(G))
-		if(charging)
+	else if (portable && isWrench(G))
+		if (charging)
 			to_chat(user, SPAN_WARNING("Remove [charging] first!"))
 			return
 		anchored = !anchored
@@ -51,7 +51,7 @@
 		playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
 
 /obj/machinery/recharger/physical_attack_hand(mob/user)
-	if(charging)
+	if (charging)
 		charging.update_icon()
 		user.put_in_hands(charging)
 		charging = null
@@ -59,18 +59,18 @@
 		return TRUE
 
 /obj/machinery/recharger/Process()
-	if(inoperable() || !anchored)
+	if (inoperable() || !anchored)
 		update_use_power(POWER_USE_OFF)
 		icon_state = icon_state_idle
 		return
 
-	if(!charging)
+	if (!charging)
 		update_use_power(POWER_USE_IDLE)
 		icon_state = icon_state_idle
 	else
 		var/obj/item/cell/C = charging.get_cell()
-		if(istype(C))
-			if(!C.fully_charged())
+		if (istype(C))
+			if (!C.fully_charged())
 				icon_state = icon_state_charging
 				C.give(active_power_usage*CELLRATE)
 				update_use_power(POWER_USE_ACTIVE)
@@ -79,28 +79,28 @@
 				update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/recharger/emp_act(severity)
-	if(inoperable() || !anchored)
+	if (inoperable() || !anchored)
 		..(severity)
 		return
-	if(charging)
+	if (charging)
 		var/obj/item/cell/C = charging.get_cell()
-		if(istype(C))
+		if (istype(C))
 			C.emp_act(severity)
 	..(severity)
 
 /obj/machinery/recharger/on_update_icon()	//we have an update_icon() in addition to the stuff in process to make it feel a tiny bit snappier.
-	if(charging)
+	if (charging)
 		icon_state = icon_state_charging
 	else
 		icon_state = icon_state_idle
 
 /obj/machinery/recharger/examine(mob/user)
 	. = ..()
-	if(isnull(charging))
+	if (isnull(charging))
 		return
 
 	var/obj/item/cell/C = charging.get_cell()
-	if(!isnull(C))
+	if (!isnull(C))
 		to_chat(user, "Item's charge at [round(C.percent())]%.")
 
 /obj/machinery/recharger/wallcharger

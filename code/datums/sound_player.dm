@@ -43,10 +43,10 @@ GLOBAL_DATUM_INIT(sound_player, /singleton/sound_player, new)
 	var/sound_id = sound_token.sound_id
 
 	var/sound_tokens = sound_tokens_by_sound_id[sound_id]
-	if(!(sound_token in sound_tokens))
+	if (!(sound_token in sound_tokens))
 		return
 	sound_tokens -= sound_token
-	if(length(sound_tokens))
+	if (length(sound_tokens))
 		return
 
 	GLOB.sound_channels.ReleaseChannel(channel)
@@ -57,14 +57,14 @@ GLOBAL_DATUM_INIT(sound_player, /singleton/sound_player, new)
 	var/sound_id = sound_token.sound_id
 
 	. = taken_channels[sound_id] // Does this sound_id already have an assigned channel?
-	if(!.) // If not, request a new one.
+	if (!.) // If not, request a new one.
 		. = GLOB.sound_channels.RequestChannel(sound_id)
-		if(!.) // Oh no, still no channel. Abort
+		if (!.) // Oh no, still no channel. Abort
 			return
 		taken_channels[sound_id] = .
 
 	var/sound_tokens = sound_tokens_by_sound_id[sound_id]
-	if(!sound_tokens)
+	if (!sound_tokens)
 		sound_tokens = list()
 		sound_tokens_by_sound_id[sound_id] = sound_tokens
 	sound_tokens += sound_token
@@ -90,13 +90,13 @@ GLOBAL_DATUM_INIT(sound_player, /singleton/sound_player, new)
 
 /datum/sound_token/New(atom/source, sound_id, sound/sound, range = 4, prefer_mute = FALSE)
 	..()
-	if(!istype(source))
+	if (!istype(source))
 		CRASH("Invalid sound source: [log_info_line(source)]")
-	if(!istype(sound))
+	if (!istype(sound))
 		CRASH("Invalid sound: [log_info_line(sound)]")
-	if(sound.repeat && !sound_id)
+	if (sound.repeat && !sound_id)
 		CRASH("No sound id given")
-	if(!PrivIsValidEnvironment(sound.environment))
+	if (!PrivIsValidEnvironment(sound.environment))
 		CRASH("Invalid sound environment: [log_info_line(sound.environment)]")
 
 	src.prefer_mute = prefer_mute
@@ -105,9 +105,9 @@ GLOBAL_DATUM_INIT(sound_player, /singleton/sound_player, new)
 	src.sound       = sound
 	src.sound_id    = sound_id
 
-	if(sound.repeat) // Non-looping sounds may not reserve a sound channel due to the risk of not hearing when someone forgets to stop the token
+	if (sound.repeat) // Non-looping sounds may not reserve a sound channel due to the risk of not hearing when someone forgets to stop the token
 		var/channel = GLOB.sound_player.PrivGetChannel(src) //Attempt to find a channel
-		if(!isnum(channel))
+		if (!isnum(channel))
 			CRASH("All available sound channels are in active use.")
 		sound.channel = channel
 	else
@@ -118,7 +118,7 @@ GLOBAL_DATUM_INIT(sound_player, /singleton/sound_player, new)
 
 	GLOB.destroyed_event.register(source, src, /datum/proc/qdel_self)
 
-	if(ismovable(source))
+	if (ismovable(source))
 		proxy_listener = new(source, /datum/sound_token/proc/PrivAddListener, /datum/sound_token/proc/PrivLocateListeners, range, proc_owner = src)
 		proxy_listener.register_turfs()
 
@@ -128,7 +128,7 @@ GLOBAL_DATUM_INIT(sound_player, /singleton/sound_player, new)
 
 /datum/sound_token/proc/SetVolume(new_volume)
 	new_volume = clamp(new_volume, 0, 100)
-	if(sound.volume == new_volume)
+	if (sound.volume == new_volume)
 		return
 	sound.volume = new_volume
 	PrivUpdateListeners()
@@ -147,7 +147,7 @@ GLOBAL_DATUM_INIT(sound_player, /singleton/sound_player, new)
 	PrivUpdateStatus(status & ~SOUND_PAUSED)
 
 /datum/sound_token/proc/Stop()
-	if(status & SOUND_STOPPED)
+	if (status & SOUND_STOPPED)
 		return
 	status |= SOUND_STOPPED
 
@@ -164,7 +164,7 @@ GLOBAL_DATUM_INIT(sound_player, /singleton/sound_player, new)
 	GLOB.sound_player.PrivStopSound(src)
 
 /datum/sound_token/proc/PrivLocateListeners(list/prior_turfs, list/current_turfs)
-	if(status & SOUND_STOPPED)
+	if (status & SOUND_STOPPED)
 		return
 
 	can_be_heard_from = current_turfs
@@ -183,20 +183,20 @@ GLOBAL_DATUM_INIT(sound_player, /singleton/sound_player, new)
 
 /datum/sound_token/proc/PrivUpdateStatus(new_status)
 	// Once stopped, always stopped. Go ask the player to play the sound again.
-	if(status & SOUND_STOPPED)
+	if (status & SOUND_STOPPED)
 		return
-	if(new_status == status)
+	if (new_status == status)
 		return
 	status = new_status
 	PrivUpdateListeners()
 
 /datum/sound_token/proc/PrivAddListener(atom/listener)
-	if(isvirtualmob(listener))
+	if (isvirtualmob(listener))
 		var/mob/observer/virtual/v = listener
-		if(!(v.abilities & VIRTUAL_ABILITY_HEAR))
+		if (!(v.abilities & VIRTUAL_ABILITY_HEAR))
 			return
 		listener = v.host
-	if(listener in listeners)
+	if (listener in listeners)
 		return
 
 	listeners += listener
@@ -221,13 +221,13 @@ GLOBAL_DATUM_INIT(sound_player, /singleton/sound_player, new)
 		return
 
 	var/distance = get_dist(source_turf, listener_turf)
-	if(!listener_turf || (distance > range) || !(listener_turf in can_be_heard_from))
-		if(prefer_mute)
+	if (!listener_turf || (distance > range) || !(listener_turf in can_be_heard_from))
+		if (prefer_mute)
 			listener_status[listener] |= SOUND_MUTE
 		else
 			PrivRemoveListener(listener)
 			return
-	else if(prefer_mute)
+	else if (prefer_mute)
 		listener_status[listener] &= ~SOUND_MUTE
 
 	sound.x = source_turf.x - listener_turf.x
@@ -245,7 +245,7 @@ GLOBAL_DATUM_INIT(sound_player, /singleton/sound_player, new)
 /datum/sound_token/proc/PrivUpdateListener(listener, update_sound = TRUE)
 	sound.environment = PrivGetEnvironment(listener)
 	sound.status = status|listener_status[listener]
-	if(update_sound)
+	if (update_sound)
 		sound.status |= SOUND_UPDATE
 	sound_to(listener, sound)
 
@@ -254,9 +254,9 @@ GLOBAL_DATUM_INIT(sound_player, /singleton/sound_player, new)
 	return A && PrivIsValidEnvironment(A.sound_env) ? A.sound_env : sound.environment
 
 /datum/sound_token/proc/PrivIsValidEnvironment(environment)
-	if(islist(environment) && length(environment) != 23)
+	if (islist(environment) && length(environment) != 23)
 		return FALSE
-	if(!isnum(environment) || environment < 0 || environment > 25)
+	if (!isnum(environment) || environment < 0 || environment > 25)
 		return FALSE
 	return TRUE
 

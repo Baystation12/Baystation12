@@ -66,7 +66,7 @@ research holder datum.
 //Checks to see if design has all the required pre-reqs.
 //Input: datum/design; Output: 0/1 (false/true)
 /datum/research/proc/DesignHasReqs(datum/design/D)
-	if(length(D.req_tech) == 0)
+	if (length(D.req_tech) == 0)
 		return 1
 
 	var/list/k_tech = list()
@@ -75,7 +75,7 @@ research holder datum.
 		k_tech[known.id] = known.level
 
 	for(var/req in D.req_tech)
-		if(isnull(k_tech[req]) || k_tech[req] < D.req_tech[req])
+		if (isnull(k_tech[req]) || k_tech[req] < D.req_tech[req])
 			return 0
 
 	return 1
@@ -84,21 +84,21 @@ research holder datum.
 //Input: datum/tech; Output: Null
 /datum/research/proc/AddTech2Known(datum/tech/T)
 	for(var/datum/tech/known in known_tech)
-		if(T.id == known.id)
-			if(T.level > known.level)
+		if (T.id == known.id)
+			if (T.level > known.level)
 				known.level = T.level
 			return
 	return
 
 /datum/research/proc/AddDesign2Known(datum/design/D)
-	if(!length(known_designs)) // Special case
+	if (!length(known_designs)) // Special case
 		known_designs.Add(D)
 		return
 	for(var/i = 1 to length(known_designs))
 		var/datum/design/A = known_designs[i]
-		if(A.id == D.id) // We are guaranteed to reach this if the ids are the same, because sort_string will also be the same
+		if (A.id == D.id) // We are guaranteed to reach this if the ids are the same, because sort_string will also be the same
 			return
-		if(A.sort_string > D.sort_string)
+		if (A.sort_string > D.sort_string)
 			known_designs.Insert(i, D)
 			return
 	known_designs.Add(D)
@@ -108,7 +108,7 @@ research holder datum.
 //Input/Output: n/a
 /datum/research/proc/RefreshResearch()
 	for(var/datum/design/PD in possible_designs)
-		if(DesignHasReqs(PD))
+		if (DesignHasReqs(PD))
 			AddDesign2Known(PD)
 	for(var/datum/tech/T in known_tech)
 		T = clamp(T.level, 0, 20)
@@ -119,12 +119,12 @@ research holder datum.
 /datum/research/proc/UpdateTech(ID, level)
 	// If a "brain expansion" event is active, we gain 1 extra level
 	for(var/datum/event/E in SSevent.active_events)
-		if(istype(E, /datum/event/brain_expansion))
+		if (istype(E, /datum/event/brain_expansion))
 			level += 1
 			break
 
 	for(var/datum/tech/KT in known_tech)
-		if(KT.id == ID && KT.level <= level)
+		if (KT.id == ID && KT.level <= level)
 			KT.level = max(KT.level + 1, level - 1)
 	return
 
@@ -132,7 +132,7 @@ research holder datum.
 /proc/CallTechName(ID)
 	for(var/T in subtypesof(/datum/tech))
 		var/datum/tech/check_tech = T
-		if(initial(check_tech.id) == ID)
+		if (initial(check_tech.id) == ID)
 			return  initial(check_tech.name)
 
 /***************************************************************

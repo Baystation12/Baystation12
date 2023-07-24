@@ -36,16 +36,16 @@
 /datum/ai_holder/hostile/melee/vagrant
 
 /datum/ai_holder/hostile/melee/vagrant/engage_target()
-	if(ishuman(target))
+	if (ishuman(target))
 		var/mob/living/carbon/human/H = target
 		var/mob/living/simple_animal/hostile/vagrant/V = holder
-		if(V.gripping == H)
+		if (V.gripping == H)
 			H.Weaken(1)
 			H.Stun(1)
 			return
 		//This line ensures there's always a reasonable chance of grabbing, while still
 		//Factoring in health
-		if(!V.gripping && (V.cloaked || prob(V.health + ((V.maxHealth - V.health) * 2))))
+		if (!V.gripping && (V.cloaked || prob(V.health + ((V.maxHealth - V.health) * 2))))
 			V.gripping = H
 			V.cloaked = 0
 			V.update_icon()
@@ -62,48 +62,48 @@
 		return PROJECTILE_FORCE_MISS
 	var/oldhealth = health
 	. = ..()
-	if((target_mob != Proj.firer) && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
+	if ((target_mob != Proj.firer) && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
 		target_mob = Proj.firer
 		turns_per_move = 3
 		ai_holder.walk_to_target()
 
 /mob/living/simple_animal/hostile/vagrant/death(gibbed)
 	. = ..()
-	if(. && !gibbed)
+	if (. && !gibbed)
 		gib()
 
 /mob/living/simple_animal/hostile/vagrant/Life()
 	. = ..()
-	if(!.)
+	if (!.)
 		return FALSE
-	if(gripping)
-		if(!(get_turf(src) == get_turf(gripping)))
+	if (gripping)
+		if (!(get_turf(src) == get_turf(gripping)))
 			gripping = null
 
-		else if(gripping.should_have_organ(BP_HEART))
+		else if (gripping.should_have_organ(BP_HEART))
 			var/blood_volume = round(gripping.vessel.get_reagent_amount(/datum/reagent/blood))
-			if(blood_volume > 5)
+			if (blood_volume > 5)
 				gripping.vessel.remove_reagent(/datum/reagent/blood, blood_per_tick)
 				health = min(health + health_per_tick, maxHealth)
-				if(prob(15))
+				if (prob(15))
 					to_chat(gripping, SPAN_DANGER("You feel your fluids being drained!"))
 			else
 				gripping = null
 
-		if(turns_per_move != initial(turns_per_move))
+		if (turns_per_move != initial(turns_per_move))
 			turns_per_move = initial(turns_per_move)
 
-	if(stance == STANCE_IDLE && !cloaked)
+	if (stance == STANCE_IDLE && !cloaked)
 		cloaked = 1
 		update_icon()
-	if(health == maxHealth)
+	if (health == maxHealth)
 		new/mob/living/simple_animal/hostile/vagrant(src.loc)
 		new/mob/living/simple_animal/hostile/vagrant(src.loc)
 		gib()
 		return
 
 /mob/living/simple_animal/hostile/vagrant/on_update_icon()
-	if(cloaked) //It's fun time
+	if (cloaked) //It's fun time
 		alpha = 75
 		set_light(0)
 		icon_state = initial(icon_state)
@@ -116,5 +116,5 @@
 
 /mob/living/simple_animal/hostile/vagrant/swarm/Initialize()
 	. = ..()
-	if(prob(75)) new/mob/living/simple_animal/hostile/vagrant(loc)
-	if(prob(50)) new/mob/living/simple_animal/hostile/vagrant(loc)
+	if (prob(75)) new/mob/living/simple_animal/hostile/vagrant(loc)
+	if (prob(50)) new/mob/living/simple_animal/hostile/vagrant(loc)

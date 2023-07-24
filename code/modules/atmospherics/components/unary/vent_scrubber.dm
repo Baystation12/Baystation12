@@ -63,22 +63,22 @@
 	icon = null
 
 /obj/machinery/atmospherics/unary/vent_scrubber/on_update_icon(safety = 0)
-	if(!check_icon_cache())
+	if (!check_icon_cache())
 		return
 
 	overlays.Cut()
 
 
 	var/turf/T = get_turf(src)
-	if(!istype(T))
+	if (!istype(T))
 		return
 
 	var/scrubber_icon = "scrubber"
-	if(welded)
+	if (welded)
 		scrubber_icon += "weld"
 	else if (!powered() || !use_power)
 		scrubber_icon += "off"
-	else if(scrubbing == SCRUBBER_SIPHON)
+	else if (scrubbing == SCRUBBER_SIPHON)
 		scrubber_icon += "in"
 	else
 		scrubber_icon += "on"
@@ -86,15 +86,15 @@
 	overlays += icon_manager.get_atmos_icon("device", , , scrubber_icon)
 
 /obj/machinery/atmospherics/unary/vent_scrubber/update_underlays()
-	if(..())
+	if (..())
 		underlays.Cut()
 		var/turf/T = get_turf(src)
-		if(!istype(T))
+		if (!istype(T))
 			return
-		if(!T.is_plating() && node && node.level == ATOM_LEVEL_UNDER_TILE && istype(node, /obj/machinery/atmospherics/pipe))
+		if (!T.is_plating() && node && node.level == ATOM_LEVEL_UNDER_TILE && istype(node, /obj/machinery/atmospherics/pipe))
 			return
 		else
-			if(node)
+			if (node)
 				add_underlay(T, node, dir, node.icon_connect_type)
 			else
 				add_underlay(T,, dir)
@@ -102,10 +102,10 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/Initialize()
 	if (!id_tag)
 		id_tag = num2text(sequential_id("obj/machinery"))
-	if(!scrubbing_gas)
+	if (!scrubbing_gas)
 		reset_scrubbing()
 	var/area/A = get_area(src)
-	if(A && !A.air_scrub_names[id_tag])
+	if (A && !A.air_scrub_names[id_tag])
 		var/new_name = "[A.name] Vent Scrubber #[length(A.air_scrub_names)+1]"
 		A.air_scrub_names[id_tag] = new_name
 		SetName(new_name)
@@ -118,7 +118,7 @@
 	else
 		scrubbing_gas = list()
 		for(var/g in gas_data.gases)
-			if(g != GAS_OXYGEN && g != GAS_NITROGEN)
+			if (g != GAS_OXYGEN && g != GAS_NITROGEN)
 				add_to_scrubbing(g)
 
 
@@ -144,16 +144,16 @@
 	if (!node)
 		update_use_power(POWER_USE_OFF)
 	//broadcast_status()
-	if(!use_power || (inoperable()))
+	if (!use_power || (inoperable()))
 		return 0
-	if(welded)
+	if (welded)
 		return 0
 
 	var/datum/gas_mixture/environment = loc.return_air()
 
 	var/power_draw = -1
 	var/transfer_moles = 0
-	if(scrubbing == SCRUBBER_SIPHON) //Just siphon all air
+	if (scrubbing == SCRUBBER_SIPHON) //Just siphon all air
 		//limit flow rate from turfs
 		transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
 		power_draw = pump_gas(src, environment, air_contents, transfer_moles, power_rating)
@@ -161,10 +161,10 @@
 		transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SCRUBBER_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
 		power_draw = scrub_gas(src, scrubbing_gas, environment, air_contents, transfer_moles, power_rating)
 
-	if(scrubbing != SCRUBBER_SIPHON && power_draw <= 0)	//99% of all scrubbers
+	if (scrubbing != SCRUBBER_SIPHON && power_draw <= 0)	//99% of all scrubbers
 		//Fucking hibernate because you ain't doing shit.
 		hibernate = world.time + (rand(100,200))
-	else if(scrubbing == SCRUBBER_EXCHANGE) // after sleep check so it only does an exchange if there are bad gasses that have been scrubbed
+	else if (scrubbing == SCRUBBER_EXCHANGE) // after sleep check so it only does an exchange if there are bad gasses that have been scrubbed
 		transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SCRUBBER_FLOWRATE/environment.volume)
 		power_draw += pump_gas(src, environment, air_contents, transfer_moles / 4, power_rating)
 
@@ -172,7 +172,7 @@
 		last_power_draw = power_draw
 		use_power_oneoff(power_draw)
 
-	if(network)
+	if (network)
 		network.update = 1
 
 	return 1
@@ -187,11 +187,11 @@
 
 /obj/machinery/atmospherics/unary/vent_scrubber/proc/set_scrub_gas(list/gases)
 	for(var/gas_id in gases)
-		if((gas_id in scrubbing_gas) ^ gases[gas_id])
+		if ((gas_id in scrubbing_gas) ^ gases[gas_id])
 			scrubbing_gas ^= gas_id
 
 /obj/machinery/atmospherics/unary/vent_scrubber/cannot_transition_to(state_path, mob/user)
-	if(state_path == /singleton/machine_construction/default/deconstructed)
+	if (state_path == /singleton/machine_construction/default/deconstructed)
 		if (is_powered() && use_power)
 			return SPAN_WARNING("You cannot take this [src] apart, turn it off first.")
 		var/turf/T = get_turf(src)
@@ -204,29 +204,29 @@
 	return ..()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weldingtool))
+	if (istype(W, /obj/item/weldingtool))
 
 		var/obj/item/weldingtool/WT = W
 
-		if(!WT.isOn())
+		if (!WT.isOn())
 			to_chat(user, SPAN_NOTICE("The welding tool needs to be on to start this task."))
 			return 1
 
-		if(!WT.remove_fuel(0,user))
+		if (!WT.remove_fuel(0,user))
 			to_chat(user, SPAN_WARNING("You need more welding fuel to complete this task."))
 			return 1
 
 		to_chat(user, SPAN_NOTICE("Now welding \the [src]."))
 		playsound(src, 'sound/items/Welder.ogg', 50, 1)
 
-		if(!do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
+		if (!do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
 			to_chat(user, SPAN_NOTICE("You must remain close to finish this task."))
 			return 1
 
-		if(!src)
+		if (!src)
 			return 1
 
-		if(!WT.isOn())
+		if (!WT.isOn())
 			to_chat(user, SPAN_NOTICE("The welding tool needs to be on to finish this task."))
 			return 1
 
@@ -242,11 +242,11 @@
 
 /obj/machinery/atmospherics/unary/vent_scrubber/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
+	if (distance <= 1)
 		to_chat(user, "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W")
 	else
 		to_chat(user, "You are too far away to read the gauge.")
-	if(welded)
+	if (welded)
 		to_chat(user, "It seems welded shut.")
 
 /obj/machinery/atmospherics/unary/vent_scrubber/refresh()
@@ -270,12 +270,12 @@
 	return machine.scrubbing
 
 /singleton/public_access/public_variable/scrubbing/write_var(obj/machinery/atmospherics/unary/vent_scrubber/machine, new_value)
-	if(!(new_value in list(SCRUBBER_EXCHANGE, SCRUBBER_SCRUB, SCRUBBER_SIPHON)))
+	if (!(new_value in list(SCRUBBER_EXCHANGE, SCRUBBER_SCRUB, SCRUBBER_SIPHON)))
 		return FALSE
 	. = ..()
-	if(.)
+	if (.)
 		machine.scrubbing = new_value
-		if(new_value != SCRUBBER_SIPHON)
+		if (new_value != SCRUBBER_SIPHON)
 			machine.panic = FALSE
 
 /singleton/public_access/public_variable/panic
@@ -290,12 +290,12 @@
 	return machine.panic
 
 /singleton/public_access/public_variable/panic/write_var(obj/machinery/atmospherics/unary/vent_scrubber/machine, new_value)
-	if(!(new_value in list(TRUE, FALSE)))
+	if (!(new_value in list(TRUE, FALSE)))
 		return FALSE
 	. = ..()
-	if(.)
+	if (.)
 		machine.panic = new_value
-		if(machine.panic)
+		if (machine.panic)
 			machine.update_use_power(POWER_USE_IDLE)
 			machine.scrubbing = SCRUBBER_SIPHON
 		else

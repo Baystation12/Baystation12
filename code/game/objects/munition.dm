@@ -12,9 +12,9 @@
 // make a screeching noise to drive people mad
 /obj/structure/ship_munition/Move()
 	. = ..()
-	if(.)
+	if (.)
 		var/turf/T = get_turf(src)
-		if(!isspace(T) && !istype(T, /turf/simulated/floor/carpet))
+		if (!isspace(T) && !istype(T, /turf/simulated/floor/carpet))
 			playsound(T, pick(move_sounds), 75, 1)
 
 /obj/structure/ship_munition/md_slug

@@ -10,19 +10,19 @@
 	var/savefile/info = new("data/player_saves/[copytext_char(target, 1, 2)]/[target]/info.sav")
 	var/list/infos
 	from_save(info, infos)
-	if(!infos) infos = list()
+	if (!infos) infos = list()
 
 	//Overly complex timestamp creation
 	var/modifyer = "th"
 	switch(time2text(world.timeofday, "DD"))
-		if("01","21","31")
+		if ("01","21","31")
 			modifyer = "st"
-		if("02","22",)
+		if ("02","22",)
 			modifyer = "nd"
-		if("03","23")
+		if ("03","23")
 			modifyer = "rd"
 	var/day_string = "[time2text(world.timeofday, "DD")][modifyer]"
-	if(copytext(day_string,1,2) == "0")
+	if (copytext(day_string,1,2) == "0")
 		day_string = copytext(day_string,2)
 	var/full_date = time2text(world.timeofday, "DDD, Month DD of YYYY")
 	var/day_loc = findtext(full_date, time2text(world.timeofday, "DD"))
@@ -53,8 +53,8 @@
 	var/savefile/note_list = new("data/player_notes.sav")
 	var/list/note_keys
 	from_save(note_list, note_keys)
-	if(!note_keys) note_keys = list()
-	if(!note_keys.Find(target)) note_keys += target
+	if (!note_keys) note_keys = list()
+	if (!note_keys.Find(target)) note_keys += target
 	to_save(note_list, note_keys)
 	del(note_list) // savefile, so NOT qdel
 
@@ -64,7 +64,7 @@
 	var/savefile/info = new("data/player_saves/[copytext_char(target, 1, 2)]/[target]/info.sav")
 	var/list/infos
 	from_save(info, infos)
-	if(!infos || length(infos) < index) return
+	if (!infos || length(infos) < index) return
 
 	var/datum/player_info/item = infos[index]
 	infos.Remove(item)
@@ -81,7 +81,7 @@
 	var/savefile/info = new("data/player_saves/[copytext_char(target, 1, 2)]/[target]/info.sav")
 	var/list/infos
 	from_save(info, infos)
-	if(!infos)
+	if (!infos)
 		dat = "No information found on the given key."
 	else
 		for(var/datum/player_info/I in infos)

@@ -118,10 +118,10 @@ var/global/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
 	)
 
 	var/skrellcaste = input(H, "What is your Skrell's Caste?", "SDTF Rank") as null|anything in skrellscoutcastes
-	if(skrellcaste)
+	if (skrellcaste)
 		var/skrellsubcaste = input(H, "What is your Skrell's Subcaste?", "SDTF Rank") as null|anything in skrellscoutcastes[skrellcaste]
 		var/obj/item/card/id/C = H.wear_id
-		if(istype(C))
+		if (istype(C))
 			C.assignment = skrellsubcaste
 
 /obj/item/clothing/gloves/thick/swat/skrell

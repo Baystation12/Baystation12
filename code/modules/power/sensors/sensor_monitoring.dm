@@ -24,19 +24,19 @@
 // Checks the sensors for alerts. If change (alerts cleared or detected) occurs, calls for icon update.
 /obj/machinery/computer/power_monitor/Process()
 	var/alert = check_warnings()
-	if(alert != alerting)
+	if (alert != alerting)
 		alerting = !alerting
 		update_icon()
 
 // Updates icon of this computer according to current status.
 /obj/machinery/computer/power_monitor/on_update_icon()
-	if(MACHINE_IS_BROKEN(src))
+	if (MACHINE_IS_BROKEN(src))
 		icon_state = "powerb"
 		return
-	if(!is_powered())
+	if (!is_powered())
 		icon_state = "power0"
 		return
-	if(alerting)
+	if (alerting)
 		icon_state = "power_alert"
 		return
 	icon_state = "power"
@@ -59,6 +59,6 @@
 // Verifies if any warnings were registered by connected sensors.
 /obj/machinery/computer/power_monitor/proc/check_warnings()
 	for(var/obj/machinery/power/sensor/S in power_monitor.grid_sensors)
-		if(S.check_grid_warning())
+		if (S.check_grid_warning())
 			return 1
 	return 0

@@ -87,16 +87,16 @@ var/global/list/meteors_cataclysm = list(\
 	var/starty
 	var/startx
 	switch(startSide)
-		if(NORTH)
+		if (NORTH)
 			starty = world.maxy-(TRANSITIONEDGE+1)
 			startx = rand((TRANSITIONEDGE+1), world.maxx-(TRANSITIONEDGE+1))
-		if(EAST)
+		if (EAST)
 			starty = rand((TRANSITIONEDGE+1),world.maxy-(TRANSITIONEDGE+1))
 			startx = world.maxx-(TRANSITIONEDGE+1)
-		if(SOUTH)
+		if (SOUTH)
 			starty = (TRANSITIONEDGE+1)
 			startx = rand((TRANSITIONEDGE+1), world.maxx-(TRANSITIONEDGE+1))
-		if(WEST)
+		if (WEST)
 			starty = rand((TRANSITIONEDGE+1), world.maxy-(TRANSITIONEDGE+1))
 			startx = (TRANSITIONEDGE+1)
 	var/turf/T = locate(startx, starty, Z)
@@ -107,16 +107,16 @@ var/global/list/meteors_cataclysm = list(\
 	var/endy
 	var/endx
 	switch(startSide)
-		if(NORTH)
+		if (NORTH)
 			endy = TRANSITIONEDGE
 			endx = rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE)
-		if(EAST)
+		if (EAST)
 			endy = rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE)
 			endx = TRANSITIONEDGE
-		if(SOUTH)
+		if (SOUTH)
 			endy = world.maxy-TRANSITIONEDGE
 			endx = rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE)
-		if(WEST)
+		if (WEST)
 			endy = rand(TRANSITIONEDGE,world.maxy-TRANSITIONEDGE)
 			endx = world.maxx-TRANSITIONEDGE
 	var/turf/T = locate(endx, endy, Z)
@@ -159,11 +159,11 @@ var/global/list/meteors_cataclysm = list(\
 /obj/effect/meteor/Move()
 	. = ..() //process movement...
 	move_count++
-	if(loc == dest)
+	if (loc == dest)
 		qdel(src)
 
 /obj/effect/meteor/touch_map_edge()
-	if(move_count > TRANSITIONEDGE)
+	if (move_count > TRANSITIONEDGE)
 		qdel(src)
 
 /obj/effect/meteor/Destroy()
@@ -178,7 +178,7 @@ var/global/list/meteors_cataclysm = list(\
 
 /obj/effect/meteor/Bump(atom/A)
 	..()
-	if(A && !QDELETED(src))	// Prevents explosions and other effects when we were deleted by whatever we Bumped() - currently used by shields.
+	if (A && !QDELETED(src))	// Prevents explosions and other effects when we were deleted by whatever we Bumped() - currently used by shields.
 		ram_turf(get_turf(A))
 		get_hit() //should only get hit once per move attempt
 
@@ -188,18 +188,18 @@ var/global/list/meteors_cataclysm = list(\
 /obj/effect/meteor/proc/ram_turf(turf/T)
 	//first bust whatever is in the turf
 	for(var/atom/A in T)
-		if(A != src && !A.CanPass(src, src.loc, 0.5, 0)) //only ram stuff that would actually block us
+		if (A != src && !A.CanPass(src, src.loc, 0.5, 0)) //only ram stuff that would actually block us
 			A.ex_act(hitpwr)
 
 	//then, ram the turf if it still exists
-	if(T && !T.CanPass(src, src.loc, 0.5, 0))
+	if (T && !T.CanPass(src, src.loc, 0.5, 0))
 		T.ex_act(hitpwr, TRUE)
 
 //process getting 'hit' by colliding with a dense object
 //or randomly when ramming turfs
 /obj/effect/meteor/proc/get_hit()
 	hits--
-	if(hits <= 0)
+	if (hits <= 0)
 		make_debris()
 		meteor_effect()
 		qdel(src)
@@ -227,10 +227,10 @@ var/global/list/meteors_cataclysm = list(\
 		O.throw_at(dest, 5, 10)
 
 /obj/effect/meteor/proc/meteor_effect()
-	if(heavy)
+	if (heavy)
 		for(var/mob/M in GLOB.player_list)
 			var/turf/T = get_turf(M)
-			if(!T || T.z != src.z)
+			if (!T || T.z != src.z)
 				continue
 			var/dist = get_dist(M.loc, src.loc)
 			shake_camera(M, dist > 20 ? 3 : 5, dist > 20 ? 1 : 3)

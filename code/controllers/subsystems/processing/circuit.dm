@@ -28,16 +28,16 @@ PROCESSING_SUBSYSTEM_DEF(circuit)
 	for(var/path in typesof(/obj/item/integrated_circuit))
 		var/obj/item/integrated_circuit/IC = path
 		var/name = initial(IC.name)
-		if(name == default_name)
+		if (name == default_name)
 			continue
 		all_components[name] = path // Populating the component lists
 		cached_components[IC] = new path
 
-		if(!(initial(IC.spawn_flags) & (IC_SPAWN_DEFAULT | IC_SPAWN_RESEARCH)))
+		if (!(initial(IC.spawn_flags) & (IC_SPAWN_DEFAULT | IC_SPAWN_RESEARCH)))
 			continue
 
 		var/category = initial(IC.category_text)
-		if(!circuit_fabricator_recipe_list[category])
+		if (!circuit_fabricator_recipe_list[category])
 			circuit_fabricator_recipe_list[category] = list()
 		var/list/category_list = circuit_fabricator_recipe_list[category]
 		category_list += IC // Populating the fabricator categories

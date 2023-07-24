@@ -16,13 +16,13 @@
 	cinematic.screen_loc = "1,0"
 
 /datum/universal_state/nuclear_explosion/OnEnter()
-	if(SSticker.mode)
+	if (SSticker.mode)
 		SSticker.mode.explosion_in_progress = 1
 
 	start_cinematic_intro()
 
 	var/turf/T = get_turf(explosion_source)
-	if(isStationLevel(T.z))
+	if (isStationLevel(T.z))
 		to_world(SPAN_DANGER("The [station_name()] was destoyed by the nuclear blast!"))
 
 		dust_mobs(GetConnectedZlevels(T.z))
@@ -36,34 +36,34 @@
 	sleep(100)
 
 	for(var/mob/living/L in GLOB.alive_mobs)
-		if(L.client)
+		if (L.client)
 			L.client.screen -= cinematic
 
 	sleep(200)
 
-	if(SSticker.mode)
+	if (SSticker.mode)
 		SSticker.mode.station_was_nuked = 1
 		SSticker.mode.explosion_in_progress = 0
-		if(!SSticker.mode.check_finished())//If the mode does not deal with the nuke going off so just reboot because everyone is stuck as is
+		if (!SSticker.mode.check_finished())//If the mode does not deal with the nuke going off so just reboot because everyone is stuck as is
 			SSticker.game_over = TRUE
 
 /datum/universal_state/nuclear_explosion/OnExit()
-	if(SSticker.mode)
+	if (SSticker.mode)
 		SSticker.mode.explosion_in_progress = 0
 
 /datum/universal_state/nuclear_explosion/proc/dust_mobs(list/affected_z_levels)
 	for(var/mob/living/L in SSmobs.mob_list)
 		var/turf/T = get_turf(L)
-		if(T && (T.z in affected_z_levels))
+		if (T && (T.z in affected_z_levels))
 			//this is needed because dusting resets client screen 1.5 seconds after being called (delayed due to the dusting animation)
 			var/mob/ghost = L.ghostize(0) //So we ghostize them right beforehand instead
-			if(ghost && ghost.client)
+			if (ghost && ghost.client)
 				ghost.client.screen += cinematic
 			L.dust() //then dust the body
 
 /datum/universal_state/nuclear_explosion/proc/show_cinematic_to_players()
 	for(var/mob/M in GLOB.player_list)
-		if(M.client)
+		if (M.client)
 			M.client.screen += cinematic
 
 /datum/universal_state/nuclear_explosion/proc/start_cinematic_intro()

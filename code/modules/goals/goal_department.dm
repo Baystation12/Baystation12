@@ -6,7 +6,7 @@
 	var/max_goals = 2
 
 /datum/department/proc/Initialize()
-	if(!name || !flag || LAZYLEN(goals) <= 0)
+	if (!name || !flag || LAZYLEN(goals) <= 0)
 		return
 	var/list/possible_goals = goals.Copy()
 	goals.Cut()
@@ -14,7 +14,7 @@
 	while(goals_to_pick && LAZYLEN(possible_goals))
 		var/goal = pick_n_take(possible_goals)
 		var/datum/goal/deptgoal = new goal(src)
-		if(deptgoal.is_valid())
+		if (deptgoal.is_valid())
 			LAZYADD(goals, deptgoal)
 			goals_to_pick--
 		else
@@ -28,5 +28,5 @@
 
 /datum/department/proc/update_progress(goal_type, progress)
 	var/datum/goal/goal = locate(goal_type) in goals
-	if(goal)
+	if (goal)
 		goal.update_progress(progress)

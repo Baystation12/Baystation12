@@ -35,24 +35,24 @@
 	return ..()
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/attackby(obj/O, mob/user)
-	if(istype(O, /obj/item/gun/energy))
+	if (istype(O, /obj/item/gun/energy))
 		var/obj/item/gun/energy/gun = O
-		if(installed_gun)
+		if (installed_gun)
 			to_chat(user, SPAN_WARNING("There's already a weapon installed."))
 			return
-		if(!user.unEquip(gun,src))
+		if (!user.unEquip(gun,src))
 			return
 		installed_gun = gun
 		to_chat(user, SPAN_NOTICE("You slide \the [gun] into the firing mechanism."))
 		playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
-		if(installed_gun.fire_delay)
+		if (installed_gun.fire_delay)
 			cooldown_per_use = installed_gun.fire_delay * 10
-		if(cooldown_per_use < 30)
+		if (cooldown_per_use < 30)
 			cooldown_per_use = 30 //If there's no defined fire delay let's put some
-		if(installed_gun.charge_cost)
+		if (installed_gun.charge_cost)
 			power_draw_per_use = installed_gun.charge_cost
 		set_pin_data(IC_OUTPUT, 1, weakref(installed_gun))
-		if(length(installed_gun.firemodes))
+		if (length(installed_gun.firemodes))
 			var/datum/firemode/fm = installed_gun.firemodes[installed_gun.sel_mode]
 			set_pin_data(IC_OUTPUT, 2, fm.name)
 		push_data()
@@ -60,7 +60,7 @@
 		..()
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/attack_self(mob/user)
-	if(installed_gun)
+	if (installed_gun)
 		installed_gun.dropInto(loc)
 		to_chat(user, SPAN_NOTICE("You slide \the [installed_gun] out of the firing mechanism."))
 		size = initial(size)
@@ -72,20 +72,20 @@
 		to_chat(user, SPAN_NOTICE("There's no weapon to remove from the mechanism."))
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/do_work(ord)
-	if(!installed_gun)
+	if (!installed_gun)
 		return
-	if(!isturf(assembly.loc) && !((IC_FLAG_CAN_FIRE & assembly.circuit_flags)  && ishuman(assembly.loc)))
+	if (!isturf(assembly.loc) && !((IC_FLAG_CAN_FIRE & assembly.circuit_flags)  && ishuman(assembly.loc)))
 		return
 	set_pin_data(IC_OUTPUT, 1, weakref(installed_gun))
 	push_data()
 	switch(ord)
-		if(1)
+		if (1)
 			var/datum/integrated_io/xo = inputs[1]
 			var/datum/integrated_io/yo = inputs[2]
-			if(assembly && !isnull(xo.data) && !isnull(yo.data))
-				if(isnum(xo.data))
+			if (assembly && !isnull(xo.data) && !isnull(yo.data))
+				if (isnum(xo.data))
 					xo.data = round(xo.data, 1)
-				if(isnum(yo.data))
+				if (isnum(yo.data))
 					yo.data = round(yo.data, 1)
 
 				var/turf/T = get_turf(assembly)
@@ -94,7 +94,7 @@
 
 				assembly.visible_message(SPAN_DANGER("[assembly] fires [installed_gun]!"))
 				shootAt(locate(target_x, target_y, T.z))
-		if(2)
+		if (2)
 			var/datum/firemode/next_firemode = installed_gun.switch_firemodes()
 			set_pin_data(IC_OUTPUT, 2, next_firemode ? next_firemode.name : null)
 			push_data()
@@ -102,11 +102,11 @@
 /obj/item/integrated_circuit/manipulation/weapon_firing/proc/shootAt(turf/target)
 	var/turf/T = get_turf(src)
 	var/turf/U = target
-	if(!istype(T) || !istype(U))
+	if (!istype(T) || !istype(U))
 		return
 	update_icon()
 	var/obj/item/projectile/A = installed_gun.consume_next_projectile()
-	if(!A)
+	if (!A)
 		return
 	//Shooting Code:
 	A.shot_from = assembly.name
@@ -135,13 +135,13 @@
 /obj/item/integrated_circuit/manipulation/locomotion/do_work()
 	..()
 	var/turf/T = get_turf(src)
-	if(T && assembly)
-		if(assembly.anchored || !assembly.can_move())
+	if (T && assembly)
+		if (assembly.anchored || !assembly.can_move())
 			return
-		if(assembly.loc == T) // Check if we're held by someone.  If the loc is the floor, we're not held.
+		if (assembly.loc == T) // Check if we're held by someone.  If the loc is the floor, we're not held.
 			var/datum/integrated_io/wanted_dir = inputs[1]
-			if(isnum(wanted_dir.data))
-				if(step(assembly, wanted_dir.data))
+			if (isnum(wanted_dir.data))
+				if (step(assembly, wanted_dir.data))
 					activate_pin(2)
 					return
 				else
@@ -170,21 +170,21 @@
 
 /obj/item/integrated_circuit/manipulation/grenade/Initialize()
 	. = ..()
-	if(pre_attached_grenade_type)
+	if (pre_attached_grenade_type)
 		var/grenade = new pre_attached_grenade_type(src)
 		attach_grenade(grenade)
 
 /obj/item/integrated_circuit/manipulation/grenade/Destroy()
-	if(attached_grenade && !attached_grenade.active)
+	if (attached_grenade && !attached_grenade.active)
 		attached_grenade.forceMove(loc)
 	detach_grenade()
 	return ..()
 
 /obj/item/integrated_circuit/manipulation/grenade/attackby(obj/item/grenade/G, mob/user)
-	if(istype(G))
-		if(attached_grenade)
+	if (istype(G))
+		if (attached_grenade)
 			to_chat(user, SPAN_WARNING("There is already a grenade attached!"))
-		else if(user.unEquip(G,src))
+		else if (user.unEquip(G,src))
 			user.visible_message(SPAN_WARNING("\The [user] attaches \a [G] to \the [src]!"), SPAN_NOTICE("You attach \the [G] to \the [src]."))
 			attach_grenade(G)
 			G.forceMove(src)
@@ -192,7 +192,7 @@
 		return ..()
 
 /obj/item/integrated_circuit/manipulation/grenade/attack_self(mob/user)
-	if(attached_grenade)
+	if (attached_grenade)
 		user.visible_message(SPAN_WARNING("\The [user] removes \an [attached_grenade] from \the [src]!"), SPAN_NOTICE("You remove \the [attached_grenade] from \the [src]."))
 		user.put_in_hands(attached_grenade)
 		detach_grenade()
@@ -200,10 +200,10 @@
 		return ..()
 
 /obj/item/integrated_circuit/manipulation/grenade/do_work()
-	if(attached_grenade && !attached_grenade.active)
+	if (attached_grenade && !attached_grenade.active)
 		var/datum/integrated_io/detonation_time = inputs[1]
 		var/dt
-		if(isnum(detonation_time.data) && detonation_time.data > 0)
+		if (isnum(detonation_time.data) && detonation_time.data > 0)
 			dt = clamp(detonation_time.data, 1, 12)*10
 		else
 			dt = 15
@@ -218,7 +218,7 @@
 	desc += " \An [attached_grenade] is attached to it!"
 
 /obj/item/integrated_circuit/manipulation/grenade/proc/detach_grenade()
-	if(!attached_grenade)
+	if (!attached_grenade)
 		return
 	attached_grenade.dropInto(loc)
 	attached_grenade = null
@@ -245,49 +245,49 @@
 	var/obj/OM = get_pin_data_as_type(IC_INPUT, 1, /obj)
 	var/obj/O = get_pin_data_as_type(IC_INPUT, 3, /obj/item)
 
-	if(!check_target(OM))
+	if (!check_target(OM))
 		push_data()
 		activate_pin(2)
 		return
 
-	if(istype(OM,/obj/effect/vine) && check_target(OM) && get_pin_data(IC_INPUT, 2) == 2)
+	if (istype(OM,/obj/effect/vine) && check_target(OM) && get_pin_data(IC_INPUT, 2) == 2)
 		qdel(OM)
 		push_data()
 		activate_pin(2)
 		return
 
 	var/obj/machinery/portable_atmospherics/hydroponics/TR = OM
-	if(istype(TR))
+	if (istype(TR))
 		switch(get_pin_data(IC_INPUT, 2))
-			if(0)
+			if (0)
 				var/list/harvest_output = TR.harvest()
 				for(var/i in 1 to length(harvest_output))
 					harvest_output[i] = weakref(harvest_output[i])
 
-				if(length(harvest_output))
+				if (length(harvest_output))
 					set_pin_data(IC_OUTPUT, 1, harvest_output)
 					push_data()
-			if(1)
+			if (1)
 				TR.weedlevel = 0
 				TR.update_icon()
-			if(2)
-				if(TR.seed) //Could be that they're just using it as a de-weeder
+			if (2)
+				if (TR.seed) //Could be that they're just using it as a de-weeder
 					TR.age = 0
 					TR.health = 0
-					if(TR.harvest)
+					if (TR.harvest)
 						TR.harvest = FALSE //To make sure they can't just put in another seed and insta-harvest it
 					qdel(TR.seed)
 					TR.seed = null
 				TR.weedlevel = 0 //Has a side effect of cleaning up those nasty weeds
 				TR.dead = 0
 				TR.update_icon()
-			if(3)
-				if(!check_target(O))
+			if (3)
+				if (!check_target(O))
 					activate_pin(2)
 					return FALSE
 
-				else if(istype(O, /obj/item/seeds) && !istype(O, /obj/item/seeds/cutting))
-					if(!TR.seed)
+				else if (istype(O, /obj/item/seeds) && !istype(O, /obj/item/seeds/cutting))
+					if (!TR.seed)
 						acting_object.visible_message(SPAN_NOTICE("[acting_object] plants [O]."))
 						TR.dead = 0
 						TR.seed = O
@@ -313,7 +313,7 @@
 /obj/item/integrated_circuit/manipulation/seed_extractor/do_work()
 	..()
 	var/obj/item/reagent_containers/food/snacks/grown/O = get_pin_data_as_type(IC_INPUT, 1, /obj/item/reagent_containers/food/snacks/grown)
-	if(!check_target(O))
+	if (!check_target(O))
 		push_data()
 		activate_pin(2)
 		return
@@ -326,7 +326,7 @@
 		seed_output += weakref(seeds)
 	qdel(O)
 
-	if(length(seed_output))
+	if (length(seed_output))
 		set_pin_data(IC_OUTPUT, 1, seed_output)
 		push_data()
 	activate_pin(2)
@@ -351,18 +351,18 @@
 	var/atom/movable/acting_object = get_object()
 	var/turf/T = get_turf(acting_object)
 	var/obj/item/AM = get_pin_data_as_type(IC_INPUT, 1, /obj/item)
-	if(!QDELETED(AM) && !istype(AM, /obj/item/device/electronic_assembly) && !istype(AM, /obj/item/device/transfer_valve) && !istype(AM, /obj/item/material/twohanded) && !istype(assembly.loc, /obj/item/implant))
+	if (!QDELETED(AM) && !istype(AM, /obj/item/device/electronic_assembly) && !istype(AM, /obj/item/device/transfer_valve) && !istype(AM, /obj/item/material/twohanded) && !istype(assembly.loc, /obj/item/implant))
 		var/mode = get_pin_data(IC_INPUT, 2)
-		if(mode == 1)
-			if(check_target(AM))
-				if((length(contents) < max_items) && AM.w_class <= assembly.w_class)
+		if (mode == 1)
+			if (check_target(AM))
+				if ((length(contents) < max_items) && AM.w_class <= assembly.w_class)
 					AM.forceMove(src)
-		if(mode == 0)
-			if(length(contents))
+		if (mode == 0)
+			if (length(contents))
 				var/obj/item/U = contents[1]
 				U.forceMove(T)
-		if(mode == -1)
-			if(length(contents))
+		if (mode == -1)
+			if (length(contents))
 				var/obj/item/U
 				for(U in contents)
 					U.forceMove(T)
@@ -370,7 +370,7 @@
 	activate_pin(2)
 
 /obj/item/integrated_circuit/manipulation/grabber/proc/update_outputs()
-	if(length(contents))
+	if (length(contents))
 		set_pin_data(IC_OUTPUT, 1, weakref(contents[1]))
 		set_pin_data(IC_OUTPUT, 2, weakref(contents[length(contents)]))
 	else
@@ -381,7 +381,7 @@
 	push_data()
 
 /obj/item/integrated_circuit/manipulation/grabber/attack_self(mob/user)
-	if(length(contents))
+	if (length(contents))
 		var/turf/T = get_turf(src)
 		var/obj/item/U
 		for(U in contents)
@@ -414,9 +414,9 @@
 	var/obj/acting_object = get_object()
 	var/obj/item/to_pull = get_pin_data_as_type(IC_INPUT, 1, /obj/item)
 	switch(ord)
-		if(1)
-			if(can_pull(to_pull))
-				if(check_target(to_pull, exclude_contents = TRUE))
+		if (1)
+			if (can_pull(to_pull))
+				if (check_target(to_pull, exclude_contents = TRUE))
 					set_pin_data(IC_OUTPUT, 1, TRUE)
 					pulling = to_pull
 					acting_object.visible_message("\The [acting_object] starts pulling \the [to_pull] around.")
@@ -424,19 +424,19 @@
 					GLOB.destroyed_event.register(to_pull, src, .proc/stop_pulling) //Stop pulling if it gets destroyed
 					GLOB.moved_event.register(acting_object, src, .proc/pull) //Make sure we actually pull it.
 			push_data()
-		if(3)
-			if(pulling)
+		if (3)
+			if (pulling)
 				stop_pulling()
-		if(4)
-			if(pulling)
+		if (4)
+			if (pulling)
 				var/dir = get_pin_data(IC_INPUT, 2)
 				var/turf/G =get_step(get_turf(acting_object),dir)
 				var/turf/Pl = get_turf(pulling)
 				var/turf/F = get_step_towards(Pl,G)
-				if(acting_object.Adjacent(F))
-					if(!step_towards(pulling, F))
+				if (acting_object.Adjacent(F))
+					if (!step_towards(pulling, F))
 						F = get_step_towards2(Pl,G)
-						if(acting_object.Adjacent(F))
+						if (acting_object.Adjacent(F))
 							step_towards(pulling, F)
 	activate_pin(2)
 
@@ -445,13 +445,13 @@
 
 /obj/item/integrated_circuit/manipulation/claw/proc/pull()
 	var/obj/acting_object = get_object()
-	if(istype(acting_object.loc, /turf))
+	if (istype(acting_object.loc, /turf))
 		step_towards(pulling,src)
 	else
 		stop_pulling()
 
 /obj/item/integrated_circuit/manipulation/claw/proc/check_pull()
-	if(get_dist(pulling,src) > 1)
+	if (get_dist(pulling,src) > 1)
 		stop_pulling()
 
 /obj/item/integrated_circuit/manipulation/claw/proc/stop_pulling()
@@ -495,30 +495,30 @@
 	var/target_y_rel = round(get_pin_data(IC_INPUT, 2))
 	var/obj/item/A = get_pin_data_as_type(IC_INPUT, 3, /obj/item)
 
-	if(!A || A.anchored || A.throwing || A == assembly || istype(A, /obj/item/material/twohanded) || istype(A, /obj/item/device/transfer_valve))
+	if (!A || A.anchored || A.throwing || A == assembly || istype(A, /obj/item/material/twohanded) || istype(A, /obj/item/device/transfer_valve))
 		return
 
 	if (istype(assembly.loc, /obj/item/implant/compressed)) //Prevents the more abusive form of chestgun.
 		return
 
-	if(A.w_class > assembly.w_class)
+	if (A.w_class > assembly.w_class)
 		return
 
-	if(!(IC_FLAG_CAN_FIRE & assembly.circuit_flags) && ishuman(assembly.loc))
+	if (!(IC_FLAG_CAN_FIRE & assembly.circuit_flags) && ishuman(assembly.loc))
 		return
 
 	// Is the target inside the assembly or close to it?
-	if(!check_target(A, exclude_components = TRUE))
+	if (!check_target(A, exclude_components = TRUE))
 		return
 
 	var/turf/T = get_turf(get_object())
-	if(!T)
+	if (!T)
 		return
 
 	// If the item is in mob's inventory, try to remove it from there.
-	if(ismob(A.loc))
+	if (ismob(A.loc))
 		var/mob/living/M = A.loc
-		if(!M.unEquip(A))
+		if (!M.unEquip(A))
 			return
 
 	// If the item is in a grabber circuit we'll update the grabber's outputs after we've thrown it.
@@ -534,7 +534,7 @@
 	A.throw_at(locate(x_abs, y_abs, T.z), range, 3)
 
 	// If the item came from a grabber now we can update the outputs since we've thrown it.
-	if(istype(G))
+	if (istype(G))
 		G.update_outputs()
 
 /obj/item/integrated_circuit/manipulation/bluespace_rift
@@ -612,21 +612,21 @@
 
 /obj/item/integrated_circuit/manipulation/ai/relaymove(mob/user, direction)
 	switch(direction)
-		if(1)
+		if (1)
 			activate_pin(1)
-		if(2)
+		if (2)
 			activate_pin(2)
-		if(4)
+		if (4)
 			activate_pin(3)
-		if(8)
+		if (8)
 			activate_pin(4)
 
 /obj/item/integrated_circuit/manipulation/ai/proc/load_ai(mob/user, obj/item/card)
-	if(controlling)
+	if (controlling)
 		to_chat(user, SPAN_WARNING("There is already a card in there!"))
 		return
 	var/mob/living/L = locate(/mob/living) in card.contents
-	if(L && L.key && user.unEquip(card))
+	if (L && L.key && user.unEquip(card))
 		L.forceMove(src)
 		controlling = L
 		card.dropInto(src)
@@ -635,7 +635,7 @@
 		to_chat(L, SPAN_NOTICE("### IICC FIRMWARE LOADED ###"))
 
 /obj/item/integrated_circuit/manipulation/ai/proc/unload_ai()
-	if(!controlling)
+	if (!controlling)
 		return
 	controlling.forceMove(aicard)
 	to_chat(controlling, SPAN_NOTICE("### IICC FIRMWARE DELETED. HAVE A NICE DAY ###"))
@@ -646,7 +646,7 @@
 
 
 /obj/item/integrated_circuit/manipulation/ai/attackby(obj/item/I, mob/user)
-	if(is_type_in_list(I, list(/obj/item/aicard, /obj/item/device/paicard, /obj/item/device/mmi)))
+	if (is_type_in_list(I, list(/obj/item/aicard, /obj/item/device/paicard, /obj/item/device/mmi)))
 		load_ai(user, I)
 	else return ..()
 
@@ -654,9 +654,9 @@
 	unload_ai()
 
 /obj/item/integrated_circuit/manipulation/ai/contents_nano_distance(src_object, mob/living/user)
-	if(istype(src_object, /obj/item/device/electronic_assembly))
+	if (istype(src_object, /obj/item/device/electronic_assembly))
 		var/obj/item/device/electronic_assembly/assembly = src_object
-		if(src in assembly.assembly_components)
+		if (src in assembly.assembly_components)
 			return STATUS_INTERACTIVE
 	return ..()
 
@@ -683,15 +683,15 @@
 	origin_tech = list(TECH_ENGINEERING = 2)
 
 /obj/item/integrated_circuit/manipulation/anchoring/do_work(ord)
-	if(!isturf(assembly.loc))
+	if (!isturf(assembly.loc))
 		return
 
 	// Doesn't work with anchorable assemblies
-	if(assembly.circuit_flags & IC_FLAG_ANCHORABLE)
+	if (assembly.circuit_flags & IC_FLAG_ANCHORABLE)
 		visible_message(SPAN_WARNING("\The [get_object()]'s anchoring bolt circuitry blinks red. The preinstalled assembly anchoring bolts are in the way of the pop-out bolts!"))
 		return
 
-	if(ord == 1)
+	if (ord == 1)
 		assembly.anchored = !assembly.anchored
 
 		visible_message(
@@ -728,7 +728,7 @@
 	var/lock_enabled = FALSE
 
 /obj/item/integrated_circuit/manipulation/hatchlock/do_work(ord)
-	if(ord == 1)
+	if (ord == 1)
 		lock_enabled = !lock_enabled
 
 		visible_message(

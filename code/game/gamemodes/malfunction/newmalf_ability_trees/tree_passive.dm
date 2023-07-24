@@ -31,7 +31,7 @@
 
 /datum/malf_research_ability/passive/relay_suppression/research_finished(mob/living/silicon/ai/user)
 	..()
-	if(!user)
+	if (!user)
 		return
 	to_chat(user, SPAN_NOTICE("You have suppressed the IDS system of nearby quantum relay. Your hacks will no longer be prevented or detected."))
 	user.hack_can_fail = 0
@@ -44,7 +44,7 @@
 
 /datum/malf_research_ability/passive/relay_override/research_finished(mob/living/silicon/ai/user)
 	..()
-	if(!user)
+	if (!user)
 		return
 	to_chat(user, SPAN_NOTICE("You have completely overtaken a nearby quantum relay. No remote communications will work."))
 	user.intercepts_communication = 1
@@ -59,7 +59,7 @@
 	var/price = 0
 
 	var/mob/living/silicon/ai/user = usr
-	if(!ability_prechecks(user, price, 1))
+	if (!ability_prechecks(user, price, 1))
 		return
 
 	user.uncardable = !user.uncardable
@@ -72,7 +72,7 @@
 	var/price = 0
 
 	var/mob/living/silicon/ai/user = usr
-	if(!ability_prechecks(user, price, 1))
+	if (!ability_prechecks(user, price, 1))
 		return
 
 	user.hacked_apcs_hidden = !user.hacked_apcs_hidden

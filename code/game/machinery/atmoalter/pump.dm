@@ -33,26 +33,26 @@
 /obj/machinery/portable_atmospherics/powered/pump/on_update_icon()
 	overlays.Cut()
 
-	if((use_power == POWER_USE_ACTIVE) && is_powered())
+	if ((use_power == POWER_USE_ACTIVE) && is_powered())
 		icon_state = "psiphon:1"
 	else
 		icon_state = "psiphon:0"
 
-	if(holding)
+	if (holding)
 		overlays += "siphon-open"
 
-	if(connected_port)
+	if (connected_port)
 		overlays += "siphon-connector"
 
 /obj/machinery/portable_atmospherics/powered/pump/emp_act(severity)
-	if(inoperable())
+	if (inoperable())
 		..(severity)
 		return
 
-	if(prob(50/severity))
+	if (prob(50/severity))
 		update_use_power(use_power == POWER_USE_ACTIVE ? POWER_USE_IDLE : POWER_USE_ACTIVE)
 
-	if(prob(100/severity))
+	if (prob(100/severity))
 		direction_out = !direction_out
 
 	target_pressure = rand(0, 10 * ONE_ATMOSPHERE)
@@ -64,9 +64,9 @@
 	..()
 	var/power_draw = -1
 
-	if((use_power == POWER_USE_ACTIVE) && is_powered())
+	if ((use_power == POWER_USE_ACTIVE) && is_powered())
 		var/datum/gas_mixture/environment
-		if(holding)
+		if (holding)
 			environment = holding.air_contents
 		else
 			environment = loc.return_air()
@@ -74,7 +74,7 @@
 		var/pressure_delta
 		var/output_volume
 		var/air_temperature
-		if(direction_out)
+		if (direction_out)
 			pressure_delta = target_pressure - environment.return_pressure()
 			output_volume = environment.volume * environment.group_multiplier
 			air_temperature = environment.temperature? environment.temperature : air_contents.temperature
@@ -90,7 +90,7 @@
 				power_draw = pump_gas(src, air_contents, environment, transfer_moles, power_rating)
 			else
 				power_draw = pump_gas(src, environment, air_contents, transfer_moles, power_rating)
-			if(holding)
+			if (holding)
 				holding.queue_icon_update()
 
 	if (power_draw < 0)
@@ -98,7 +98,7 @@
 		last_power_draw = 0
 	else
 		power_draw = max(power_draw, power_losses)
-		if(abs(power_draw - last_power_draw) > 0.1 * last_power_draw)
+		if (abs(power_draw - last_power_draw) > 0.1 * last_power_draw)
 			change_power_consumption(power_draw, POWER_USE_ACTIVE)
 			last_power_draw = power_draw
 
@@ -136,14 +136,14 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/portable_atmospherics/powered/pump/OnTopic(user, href_list)
-	if(href_list["power"])
+	if (href_list["power"])
 		update_use_power(use_power == POWER_USE_ACTIVE ? POWER_USE_IDLE : POWER_USE_ACTIVE)
 		. = TOPIC_REFRESH
-	if(href_list["direction"])
+	if (href_list["direction"])
 		direction_out = !direction_out
 		. = TOPIC_REFRESH
 	if (href_list["remove_tank"])
-		if(holding)
+		if (holding)
 			holding.dropInto(loc)
 			holding = null
 		. = TOPIC_REFRESH
@@ -152,5 +152,5 @@
 		target_pressure = min(10*ONE_ATMOSPHERE, max(0, target_pressure+diff))
 		. = TOPIC_REFRESH
 
-	if(.)
+	if (.)
 		update_icon()

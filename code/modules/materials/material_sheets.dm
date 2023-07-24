@@ -29,14 +29,14 @@
 
 /obj/item/stack/material/Initialize(mapload, amount, _material, _reinf_material)
 	. = ..()
-	if(_material)
+	if (_material)
 		default_type = _material
-	if(_reinf_material)
+	if (_reinf_material)
 		default_reinf_type = _reinf_material
 	material = SSmaterials.get_material_by_name(default_type)
-	if(!material)
+	if (!material)
 		return INITIALIZE_HINT_QDEL
-	if(default_reinf_type)
+	if (default_reinf_type)
 		reinf_material = SSmaterials.get_material_by_name(default_reinf_type)
 
 	update_materials()
@@ -74,7 +74,7 @@
 
 
 /obj/item/stack/material/list_recipes(mob/user, recipes_sublist)
-	if(!material)
+	if (!material)
 		return
 	recipes = material.get_recipes(reinf_material && reinf_material.name)
 	..()
@@ -94,20 +94,20 @@
 	matter = material.get_matter()
 	for(var/mat in matter)
 		matter[mat] = round(matter[mat]*matter_multiplier*amount)
-	if(reinf_material)
+	if (reinf_material)
 		var/list/rmatter = reinf_material.get_matter()
 		for(var/mat in rmatter)
 			rmatter[mat] = round(0.5*rmatter[mat]*matter_multiplier*amount)
 			matter[mat] += rmatter[mat]
 
-	if(material_flags & USE_MATERIAL_SINGULAR_NAME)
+	if (material_flags & USE_MATERIAL_SINGULAR_NAME)
 		singular_name = material.sheet_singular_name
 
-	if(material_flags & USE_MATERIAL_PLURAL_NAME)
+	if (material_flags & USE_MATERIAL_PLURAL_NAME)
 		plural_name = material.sheet_plural_name
 
 	SetName(get_stack_name())
-	if(amount>1)
+	if (amount>1)
 		SetName("[name] [plural_name]")
 		desc = "A stack of [get_vague_name()]."
 		gender = PLURAL
@@ -115,7 +115,7 @@
 		SetName("[name] [singular_name]")
 		desc = "[get_vague_name()]."
 		gender = NEUTER
-	if(reinf_material)
+	if (reinf_material)
 		desc += "\nIt is reinforced with the [reinf_material.use_name] lattice."
 
 /obj/item/stack/material/use(used)
@@ -124,46 +124,46 @@
 	return
 
 /obj/item/stack/material/proc/is_same(obj/item/stack/material/M)
-	if(!istype(M))
+	if (!istype(M))
 		return FALSE
-	if(matter_multiplier != M.matter_multiplier)
+	if (matter_multiplier != M.matter_multiplier)
 		return FALSE
-	if(material.name != M.material.name)
+	if (material.name != M.material.name)
 		return FALSE
-	if((reinf_material && reinf_material.name) != (M.reinf_material && M.reinf_material.name))
+	if ((reinf_material && reinf_material.name) != (M.reinf_material && M.reinf_material.name))
 		return FALSE
 	return TRUE
 
 /obj/item/stack/material/transfer_to(obj/item/stack/material/M, tamount=null, type_verified)
-	if(!is_same(M))
+	if (!is_same(M))
 		return 0
 	var/transfer = ..(M,tamount,1)
-	if(!QDELETED(src))
+	if (!QDELETED(src))
 		update_strings()
-	if(!QDELETED(M))
+	if (!QDELETED(M))
 		M.update_strings()
 	return transfer
 
 /obj/item/stack/material/copy_from(obj/item/stack/material/other)
 	..()
-	if(istype(other))
+	if (istype(other))
 		material = other.material
 		reinf_material = other.reinf_material
 		update_materials()
 
 /obj/item/stack/material/attackby(obj/item/W, mob/user)
-	if(isCoil(W))
+	if (isCoil(W))
 		material.build_wired_product(user, W, src)
 		return
-	else if(istype(W, /obj/item/stack/material))
-		if(is_same(W))
+	else if (istype(W, /obj/item/stack/material))
+		if (is_same(W))
 			..()
-		else if(!reinf_material)
+		else if (!reinf_material)
 			material.reinforce(user, W, src)
 		return
-	else if(reinf_material && reinf_material.stack_type && isWelder(W))
+	else if (reinf_material && reinf_material.stack_type && isWelder(W))
 		var/obj/item/weldingtool/WT = W
-		if(WT.isOn() && WT.get_fuel() > 2 && use(2))
+		if (WT.isOn() && WT.get_fuel() > 2 && use(2))
 			WT.remove_fuel(2, user)
 			to_chat(user,SPAN_NOTICE("You recover some [reinf_material.use_name] from \the [src]."))
 			reinf_material.place_sheet(get_turf(user), 1)
@@ -172,14 +172,14 @@
 
 /obj/item/stack/material/on_update_icon()
 	overlays.Cut()
-	if(material_flags & USE_MATERIAL_COLOR)
+	if (material_flags & USE_MATERIAL_COLOR)
 		color = material.icon_colour
 		alpha = 100 + max(1, amount/25)*(material.opacity * 255)
 	var/reinf_icon_state = reinf_state
-	if(max_icon_state && amount == max_amount)
+	if (max_icon_state && amount == max_amount)
 		icon_state = max_icon_state
 		reinf_icon_state = max_reinf_state
-	else if(plural_icon_state && amount > 2)
+	else if (plural_icon_state && amount > 2)
 		icon_state = plural_icon_state
 		reinf_icon_state = plural_reinf_state
 	else
@@ -505,7 +505,7 @@
 
 /obj/item/stack/material/generic/Initialize()
 	. = ..()
-	if(material) color = material.icon_colour
+	if (material) color = material.icon_colour
 
 /obj/item/stack/material/generic/skin
 	icon_state = "skin"

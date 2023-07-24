@@ -2,7 +2,7 @@
 	RETURN_TYPE(/obj/item/archaeological_find)
 	for(var/T in typesof(/obj/item/archaeological_find))
 		var/obj/item/archaeological_find/F = T
-		if(find_type == initial(F.find_type))
+		if (find_type == initial(F.find_type))
 			return T
 	return /obj/item/archaeological_find
 
@@ -22,9 +22,9 @@
 	var/obj/item/I = spawn_item()
 	var/source_material = ""
 	var/material_descriptor = ""
-	if(prob(40))
+	if (prob(40))
 		material_descriptor = pick("rusted","dusty","archaic","fragile")
-	if(istype(I, /obj/item/material))
+	if (istype(I, /obj/item/material))
 		var/obj/item/material/M = I
 		M.set_material(MATERIAL_ALIENALLOY)
 		source_material = "alien alloy"
@@ -32,66 +32,66 @@
 		source_material = pick("cordite","quadrinium","steel","titanium","aluminium","ferritic-alloy","plasteel","duranium")
 
 	var/decorations = ""
-	if(apply_material_decorations)
+	if (apply_material_decorations)
 		source_material = pick("cordite","quadrinium","steel","titanium","aluminium","ferritic-alloy","plasteel","duranium")
 		desc = "A [material_descriptor ? "[material_descriptor] " : ""][item_type] made of [source_material], all craftsmanship is of [pick("the lowest","low","average","high","the highest")] quality."
 
 		var/list/descriptors = list()
-		if(prob(30))
+		if (prob(30))
 			descriptors.Add("is encrusted with [pick("","synthetic ","multi-faceted ","uncut ","sparkling ") + pick("rubies","emeralds","diamonds","opals","lapiz lazuli")]")
-		if(prob(30))
+		if (prob(30))
 			descriptors.Add("is studded with [pick("gold","silver","aluminium","titanium")]")
-		if(prob(30))
+		if (prob(30))
 			descriptors.Add("is encircled with bands of [pick("quadrinium","cordite","ferritic-alloy","plasteel","duranium")]")
-		if(prob(30))
+		if (prob(30))
 			descriptors.Add("menaces with spikes of [pick("solid phoron","uranium","white pearl","black steel")]")
-		if(length(descriptors) > 0)
+		if (length(descriptors) > 0)
 			decorations = "It "
 			for(var/index=1, index <= length(descriptors), index++)
-				if(index > 1)
-					if(index == length(descriptors))
+				if (index > 1)
+					if (index == length(descriptors))
 						decorations += " and "
 					else
 						decorations += ", "
 				decorations += descriptors[index]
 			decorations += "."
-		if(decorations)
+		if (decorations)
 			desc += " " + decorations
 
 	var/engravings = ""
-	if(apply_image_decorations)
+	if (apply_image_decorations)
 		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 		engravings = "[pick("Engraved","Carved","Etched")] on the item is [pick("an image of","a frieze of","a depiction of")] "
-		if(istype(E))
+		if (istype(E))
 			engravings += E.get_engravings()
 		else
 			engravings += "[pick("an alien humanoid","an amorphic blob","a short, hairy being","a rodent-like creature","a robot","a primate","a reptilian alien","an unidentifiable object","a statue","a starship","unusual devices","a structure")] \
 			[pick("surrounded by","being held aloft by","being struck by","being examined by","communicating with")] \
 			[pick("alien humanoids","amorphic blobs","short, hairy beings","rodent-like creatures","robots","primates","reptilian aliens")]"
-			if(prob(50))
+			if (prob(50))
 				engravings += ", [pick("they seem to be enjoying themselves","they seem extremely angry","they look pensive","they are making gestures of supplication","the scene is one of subtle horror","the scene conveys a sense of desperation","the scene is completely bizarre")]"
 			engravings += "."
 
-		if(desc)
+		if (desc)
 			desc += " "
 		desc += engravings
 
-	if(apply_prefix)
+	if (apply_prefix)
 		name = "[pick("strange ","ancient ","alien ")][item_type]"
 	else
 		name = item_type
 
-	if(desc)
+	if (desc)
 		desc += " "
 	desc += additional_desc
-	if(!desc)
+	if (!desc)
 		desc = "This item is completely [pick("alien","bizarre")]."
 
 	//icon and icon_state should have already been set
 	I.SetName(name)
 	I.desc = desc
 
-	if(prob(5))
+	if (prob(5))
 		I.talking_atom = new(I)
 
 	return INITIALIZE_HINT_QDEL
@@ -110,13 +110,13 @@
 
 /obj/item/archaeological_find/bowl/spawn_item()
 	var/obj/item/reagent_containers/R
-	if(prob(33))
+	if (prob(33))
 		R = new /obj/item/reagent_containers/glass/replenishing(loc)
 	else
 		R = new /obj/item/reagent_containers/glass/beaker(loc)
 	R.icon = 'icons/obj/xenoarchaeology.dmi'
 	R.icon_state = "bowl"
-	if(prob(20))
+	if (prob(20))
 		additional_desc = "There appear to be [pick("dark","faintly glowing","pungent","bright")] [pick("red","purple","green","blue")] stains inside."
 	return R
 
@@ -128,7 +128,7 @@
 /obj/item/archaeological_find/bowl/urn/spawn_item()
 	var/obj/item/I = ..()
 	I.icon_state = "urn"
-	if(prob(20))
+	if (prob(20))
 		additional_desc = "It [pick("whispers faintly","makes a quiet roaring sound","whistles softly","thrums quietly","throbs")] if you put it to your ear."
 	else
 		additional_desc = null
@@ -140,9 +140,9 @@
 
 /obj/item/archaeological_find/cutlery/spawn_item()
 	var/obj/item/new_item
-	if(prob(25))
+	if (prob(25))
 		new_item = new /obj/item/material/kitchen/utensil/fork(loc)
-	else if(prob(50))
+	else if (prob(50))
 		new_item = new /obj/item/material/knife/table(loc)
 	else
 		new_item = new /obj/item/material/kitchen/utensil/spoon(loc)
@@ -158,7 +158,7 @@
 
 /obj/item/archaeological_find/statuette/spawn_item()
 	var/obj/item/new_item
-	if(prob(25))
+	if (prob(25))
 		new_item = new /obj/item/vampiric(loc)
 	else
 		new_item = ..()
@@ -181,7 +181,7 @@
 	new_item.SetName("instrument")
 	new_item.icon = 'icons/obj/xenoarchaeology.dmi'
 	new_item.icon_state = "instrument"
-	if(prob(30))
+	if (prob(30))
 		apply_image_decorations = 1
 		additional_desc = "[pick("You're not sure how anyone could have played this",\
 		"You wonder how many mouths the creator had",\
@@ -239,7 +239,7 @@
 	new_box.max_storage_space = rand(storage_amount, storage_amount * 10)
 	new_box.icon_state = "box"
 	new_box.foldable = null
-	if(prob(30))
+	if (prob(30))
 		apply_image_decorations = 1
 	return new_box
 
@@ -261,9 +261,9 @@
 
 /obj/item/archaeological_find/tool/spawn_item()
 	var/obj/item/new_item
-	if(prob(25))
+	if (prob(25))
 		new_item = new /obj/item/wrench(loc)
-	else if(prob(25))
+	else if (prob(25))
 		new_item = new /obj/item/crowbar(loc)
 	else
 		new_item = new /obj/item/screwdriver(loc)
@@ -301,7 +301,7 @@
 
 /obj/item/archaeological_find/crystal/spawn_item()
 	var/obj/item/new_item
-	if(prob(25))
+	if (prob(25))
 		new_item = new /obj/item/device/soulstone(loc)
 	else
 		new_item = ..()
@@ -309,10 +309,10 @@
 	additional_desc = pick("It shines faintly as it catches the light.","It appears to have a faint inner glow.","It seems to draw you inward as you look it at.","Something twinkles faintly as you look at it.","It's mesmerizing to behold.")
 
 	new_item.icon = 'icons/obj/xenoarchaeology.dmi'
-	if(prob(25))
+	if (prob(25))
 		item_type = "smooth green crystal"
 		new_item.icon_state = "Green lump"
-	else if(prob(33))
+	else if (prob(33))
 		item_type = "irregular purple crystal"
 		new_item.icon_state = "Phazon"
 	else
@@ -387,9 +387,9 @@
 
 	//10% chance to have an unchargeable cell
 	//15% chance to gain a random amount of starting energy, otherwise start with an empty cell
-	if(prob(10))
+	if (prob(10))
 		new_gun.power_supply.maxcharge = 0
-	if(prob(15))
+	if (prob(15))
 		new_gun.power_supply.charge = rand(0, new_gun.power_supply.maxcharge)
 	else
 		new_gun.power_supply.charge = 0
@@ -410,17 +410,17 @@
 	new_gun.icon_state = "gun[rand(1,4)]"
 
 	//33% chance to be able to reload the gun with human ammunition
-	if(prob(66))
+	if (prob(66))
 		new_gun.caliber = "999"
 	//33% chance to fill it with a random amount of bullets
 	new_gun.max_shells = rand(1,12)
 	new_gun.loaded.Cut()
-	if(prob(33))
+	if (prob(33))
 		var/num_bullets = rand(1, new_gun.max_shells)
 		for(var/i = 1 to num_bullets)
 			var/obj/item/ammo_casing/A = new new_gun.ammo_type(new_gun)
 			new_gun.loaded += A
-			if(A.caliber != new_gun.caliber)
+			if (A.caliber != new_gun.caliber)
 				A.caliber = new_gun.caliber
 				A.desc = "A bullet casing of unknown caliber."
 
@@ -451,7 +451,7 @@
 	apply_material_decorations = 0
 
 /obj/item/archaeological_find/shell/spawn_item()
-	if(prob(10))
+	if (prob(10))
 		apply_image_decorations = 1
 	return new /obj/item/fossil/shell(loc)
 
@@ -483,7 +483,7 @@
 
 /obj/item/archaeological_find/remains/spawn_item()
 	item_type = "humanoid [pick("remains","skeleton")]"
-	if(prob(5))
+	if (prob(5))
 		apply_image_decorations = 1
 	var/obj/item/I = new(loc)
 	I.icon = icon
@@ -529,7 +529,7 @@
 
 /obj/item/archaeological_find/mask/spawn_item()
 	var/obj/item/clothing/mask/gas/new_item
-	if(prob(25))
+	if (prob(25))
 		new_item = new /obj/item/clothing/mask/gas/poltergeist(loc)
 	else
 		new_item = new /obj/item/clothing/mask/gas(loc)

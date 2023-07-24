@@ -16,13 +16,13 @@
 	return ..()
 
 /datum/extension/interactive/proc/extension_status(mob/user)
-	if(!holder || !user)
+	if (!holder || !user)
 		return STATUS_CLOSE
-	if(!all_predicates_true(list(holder), host_predicates))
+	if (!all_predicates_true(list(holder), host_predicates))
 		return STATUS_CLOSE
-	if(!all_predicates_true(list(user), user_predicates))
+	if (!all_predicates_true(list(user), user_predicates))
 		return STATUS_CLOSE
-	if(holder.CanUseTopic(user, GLOB.default_state) != STATUS_INTERACTIVE)
+	if (holder.CanUseTopic(user, GLOB.default_state) != STATUS_INTERACTIVE)
 		return STATUS_CLOSE
 
 	return STATUS_INTERACTIVE
@@ -31,6 +31,6 @@
 	return extension_status(user) == STATUS_CLOSE
 
 /datum/extension/interactive/Topic(href, list/href_list)
-	if(..())
+	if (..())
 		return TRUE
 	return extension_act(href, href_list, usr)

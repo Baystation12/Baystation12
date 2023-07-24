@@ -14,13 +14,13 @@
 	to_chat(user, SPAN_NOTICE("***********************************************************"))
 
 /datum/build_mode/relocate_to/OnClick(atom/A, list/parameters)
-	if(parameters["left"])
-		if(istype(A, /atom/movable))
+	if (parameters["left"])
+		if (istype(A, /atom/movable))
 			SetRelocator(A)
-	else if(parameters["right"])
-		if(to_relocate)
+	else if (parameters["right"])
+		if (to_relocate)
 			var/destination_turf = get_turf(A)
-			if(destination_turf)
+			if (destination_turf)
 				to_relocate.forceMove(destination_turf)
 				Log("Relocated '[log_info_line(to_relocate)]' to '[log_info_line(destination_turf)]'")
 			else
@@ -29,7 +29,7 @@
 			to_chat(user, SPAN_WARNING("You have nothing selected to relocate."))
 
 /datum/build_mode/relocate_to/proc/SetRelocator(new_relocator)
-	if(to_relocate == new_relocator)
+	if (to_relocate == new_relocator)
 		return
 	ClearRelocator()
 
@@ -38,10 +38,10 @@
 	to_chat(user, SPAN_NOTICE("Will now be relocating \the [to_relocate]."))
 
 /datum/build_mode/relocate_to/proc/ClearRelocator(feedback)
-	if(!to_relocate)
+	if (!to_relocate)
 		return
 
 	GLOB.destroyed_event.unregister(to_relocate, src, /datum/build_mode/relocate_to/proc/ClearRelocator)
 	to_relocate = null
-	if(feedback)
+	if (feedback)
 		Warn("The selected relocation object was deleted.")

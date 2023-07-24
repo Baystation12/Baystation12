@@ -15,25 +15,25 @@
 /mob/living/bot/remotebot/movement_delay()
 	var/tally = ..()
 	tally += speed
-	if(holding)
+	if (holding)
 		tally += (2 * holding.w_class)
 	return tally
 
 /mob/living/bot/remotebot/examine(mob/user)
 	. = ..()
-	if(holding)
+	if (holding)
 		to_chat(user, SPAN_NOTICE("It is holding \the [icon2html(holding, user)] [holding]."))
 
 /mob/living/bot/remotebot/explode()
 	on = 0
 	new /obj/effect/decal/cleanable/blood/oil(get_turf(src.loc))
 	visible_message(SPAN_DANGER("[src] blows apart!"))
-	if(controller)
+	if (controller)
 		controller.bot = null
 		controller = null
 	for(var/i in 1 to rand(3,5))
 		var/obj/item/stack/material/cardboard/C = new(src.loc)
-		if(prob(50))
+		if (prob(50))
 			C.forceMove(get_step(src, pick(GLOB.alldirs)))
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -76,13 +76,13 @@
 	icon_state = "fetchbot[on]"
 
 /mob/living/bot/remotebot/Destroy()
-	if(holding)
+	if (holding)
 		holding.forceMove(loc)
 		holding = null
 	return ..()
 
 /mob/living/bot/remotebot/proc/pickup(obj/item/I)
-	if(holding || get_dist(src,I) > 1)
+	if (holding || get_dist(src,I) > 1)
 		return
 	src.visible_message("<b>\The [src]</b> picks up \the [I].")
 	flick("fetchbot-c", src)
@@ -93,7 +93,7 @@
 	holding = I
 
 /mob/living/bot/remotebot/proc/drop()
-	if(working || !holding)
+	if (working || !holding)
 		return
 	holding.forceMove(loc)
 	holding = null
@@ -106,11 +106,11 @@
 	working = 0
 
 /mob/living/bot/remotebot/proc/command(atom/a)
-	if(working || stat || !on || a == src) //can't touch itself
+	if (working || stat || !on || a == src) //can't touch itself
 		return
-	if(isturf(a) || get_dist(src,a) > 1)
+	if (isturf(a) || get_dist(src,a) > 1)
 		walk_to(src,a,0,movement_delay())
-	else if(istype(a, /obj/item))
+	else if (istype(a, /obj/item))
 		pickup(a)
 	else
 		hit(a)
@@ -130,7 +130,7 @@
 
 /obj/item/device/bot_controller/interact(mob/user)
 	user.set_machine(src)
-	if(!(src in user) || !bot)
+	if (!(src in user) || !bot)
 		close_browser(user, "window=bot_controller")
 		return
 	var/dat = "<center><TT><b>Remote Control: [bot.name]</b></TT><br>"
@@ -147,13 +147,13 @@
 
 /obj/item/device/bot_controller/Topic(href, href_list)
 	..()
-	if(!bot)
+	if (!bot)
 		return
 
-	if(href_list["drop"])
+	if (href_list["drop"])
 		bot.drop()
-	if(href_list["look"])
-		if(href_list["look"] == "1")
+	if (href_list["look"])
+		if (href_list["look"] == "1")
 			usr.reset_view(usr)
 			usr.visible_message("\The [usr] looks up from \the [src]'s screen.")
 		else
@@ -164,17 +164,17 @@
 
 
 /obj/item/device/bot_controller/dropped(mob/living/user)
-	if(user.client.eye == bot)
+	if (user.client.eye == bot)
 		user.client.eye = user
 	return ..()
 
 
 /obj/item/device/bot_controller/afterattack(atom/A, mob/living/user)
-	if(bot)
+	if (bot)
 		bot.command(A)
 
 /obj/item/device/bot_controller/Destroy()
-	if(bot)
+	if (bot)
 		bot.controller_deleted(src)
 		bot = null
 	return ..()

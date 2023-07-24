@@ -18,19 +18,19 @@
 
 /obj/item/cell/Initialize()
 	. = ..()
-	if(type == /obj/item/cell)
+	if (type == /obj/item/cell)
 		crash_with("Invalid use of cell base type")
 		return INITIALIZE_HINT_QDEL
-	if(isnull(charge))
+	if (isnull(charge))
 		charge = maxcharge
 	update_icon()
 
 /obj/item/cell/drain_power(drain_check, surge, power = 0)
 
-	if(drain_check)
+	if (drain_check)
 		return 1
 
-	if(charge <= 0)
+	if (charge <= 0)
 		return 0
 
 	var/cell_amt = power * CELLRATE
@@ -41,17 +41,17 @@
 
 	var/new_overlay_state = null
 	switch(percent())
-		if(95 to 100)
+		if (95 to 100)
 			new_overlay_state = "cell-o2"
-		if(25 to 95)
+		if (25 to 95)
 			new_overlay_state = "cell-o1"
-		if(0.05 to 25)
+		if (0.05 to 25)
 			new_overlay_state = "cell-o0"
 
-	if(new_overlay_state != overlay_state)
+	if (new_overlay_state != overlay_state)
 		overlay_state = new_overlay_state
 		overlays.Cut()
-		if(overlay_state)
+		if (overlay_state)
 			overlays += image('icons/obj/power.dmi', overlay_state)
 
 /obj/item/cell/proc/percent()		// return % charge of cell
@@ -74,7 +74,7 @@
 // Checks if the specified amount can be provided. If it can, it removes the amount
 // from the cell and returns 1. Otherwise does nothing and returns 0.
 /obj/item/cell/proc/checked_use(amount)
-	if(!check_charge(amount))
+	if (!check_charge(amount))
 		return 0
 	use(amount)
 	return 1
@@ -92,7 +92,7 @@
 
 /obj/item/cell/emp_act(severity)
 	//remove this once emp changes on dev are merged in
-	if(isrobot(loc))
+	if (isrobot(loc))
 		var/mob/living/silicon/robot/R = loc
 		severity *= R.cell_emp_mult
 

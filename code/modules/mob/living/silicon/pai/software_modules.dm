@@ -163,7 +163,7 @@
 	if (!istype(P))
 		return FALSE
 	if (href_list["jack"])
-		if(P.cable && P.cable.machine)
+		if (P.cable && P.cable.machine)
 			P.hackdoor = P.cable.machine
 			P.hackloop()
 		return TRUE
@@ -185,7 +185,7 @@
 /mob/living/silicon/pai/proc/hackloop()
 	var/turf/T = get_turf_or_move(loc)
 	for (var/mob/living/silicon/ai/AI in GLOB.player_list)
-		if(T.loc)
+		if (T.loc)
 			to_chat(AI, SPAN_COLOR("red", "<b>Network Alert: Brute-force encryption crack in progress in [T.loc].</b>"))
 		else
 			to_chat(AI, SPAN_COLOR("red", "<b>Network Alert: Brute-force encryption crack in progress. Unable to pinpoint location.</b>"))

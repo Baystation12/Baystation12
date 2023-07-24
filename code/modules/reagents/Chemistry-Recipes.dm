@@ -15,25 +15,25 @@
 
 /datum/chemical_reaction/proc/can_happen(datum/reagents/holder)
 	//check that all the required reagents are present
-	if(!holder.has_all_reagents(required_reagents))
+	if (!holder.has_all_reagents(required_reagents))
 		return 0
 
 	//check that all the required catalysts are present in the required amount
-	if(!holder.has_all_reagents(catalysts))
+	if (!holder.has_all_reagents(catalysts))
 		return 0
 
 	//check that none of the inhibitors are present in the required amount
-	if(holder.has_any_reagent(inhibitors))
+	if (holder.has_any_reagent(inhibitors))
 		return 0
 
 	var/temperature = holder.my_atom ? holder.my_atom.temperature : T20C
-	if(temperature < minimum_temperature || temperature > maximum_temperature)
+	if (temperature < minimum_temperature || temperature > maximum_temperature)
 		return 0
 
 	return 1
 
 /datum/chemical_reaction/proc/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
-	if(thermal_product && ATOM_IS_TEMPERATURE_SENSITIVE(holder.my_atom))
+	if (thermal_product && ATOM_IS_TEMPERATURE_SENSITIVE(holder.my_atom))
 		ADJUST_ATOM_TEMPERATURE(holder.my_atom, thermal_product)
 
 // This proc returns a list of all reagents it wants to use; if the holder has several reactions that use the same reagent, it will split the reagent evenly between them
@@ -51,7 +51,7 @@
 	var/reaction_volume = holder.maximum_volume
 	for(var/reactant in required_reagents)
 		var/A = holder.get_reagent_amount(reactant) / required_reagents[reactant] / limit // How much of this reagent we are allowed to use
-		if(reaction_volume > A)
+		if (reaction_volume > A)
 			reaction_volume = A
 
 	var/reaction_flags = get_reaction_flags(holder)
@@ -61,7 +61,7 @@
 
 	//add the product
 	var/amt_produced = result_amount * reaction_volume
-	if(result)
+	if (result)
 		holder.add_reagent(result, amt_produced, data, safety = 1)
 
 	on_reaction(holder, amt_produced, reaction_flags)
@@ -69,7 +69,7 @@
 //called after processing reactions, if they occurred
 /datum/chemical_reaction/proc/post_reaction(datum/reagents/holder)
 	var/atom/container = holder.my_atom
-	if(mix_message && container && !ismob(container))
+	if (mix_message && container && !ismob(container))
 		container.visible_message(SPAN_NOTICE("[icon2html(container, viewers(get_turf(container)))] [mix_message]"))
 		playsound(container, reaction_sound, 80, 1)
 
@@ -517,10 +517,10 @@
 	..()
 	var/datum/effect/effect/system/reagents_explosion/e = new()
 	e.set_up(round (created_volume/10, 1), holder.my_atom, 0, 0)
-	if(isliving(holder.my_atom))
+	if (isliving(holder.my_atom))
 		e.amount *= 0.5
 		var/mob/living/L = holder.my_atom
-		if(L.stat != DEAD)
+		if (L.stat != DEAD)
 			e.amount *= 0.5
 	e.start()
 	holder.clear_reagents()
@@ -540,7 +540,7 @@
 	s.start()
 	for(var/mob/living/carbon/M in viewers(world.view, location))
 		switch(get_dist(M, location))
-			if(0 to 1)
+			if (0 to 1)
 				if (M.eyecheck() < FLASH_PROTECTION_MODERATE)
 					M.flash_eyes(2)
 					M.weakened = min(10, (created_volume / 20))
@@ -551,7 +551,7 @@
 					M.confused = min(20, (created_volume / 10))
 					M.eye_blurry = min(40, (created_volume / 10))
 
-			if(2 to 4)
+			if (2 to 4)
 				if (M.eyecheck() < FLASH_PROTECTION_MODERATE)
 					M.flash_eyes(2)
 					M.stunned = min(5, (created_volume / 30))
@@ -589,10 +589,10 @@
 	..()
 	var/datum/effect/effect/system/reagents_explosion/e = new()
 	e.set_up(round (created_volume/2, 1), holder.my_atom, 0, 0)
-	if(isliving(holder.my_atom))
+	if (isliving(holder.my_atom))
 		e.amount *= 0.5
 		var/mob/living/L = holder.my_atom
-		if(L.stat!=DEAD)
+		if (L.stat!=DEAD)
 			e.amount *= 0.5
 	e.start()
 	holder.clear_reagents()
@@ -775,7 +775,7 @@
 
 /datum/chemical_reaction/blood_paint/send_data(datum/reagents/T)
 	var/t = T.get_data("blood")
-	if(t && t["blood_colour"])
+	if (t && t["blood_colour"])
 		return t["blood_colour"]
 	return "#fe191a" // Probably red
 
@@ -927,9 +927,9 @@
 	var/required = null
 
 /datum/chemical_reaction/slime/can_happen(datum/reagents/holder)
-	if(holder.my_atom && istype(holder.my_atom, required))
+	if (holder.my_atom && istype(holder.my_atom, required))
 		var/obj/item/slime_extract/T = holder.my_atom
-		if(T.Uses > 0)
+		if (T.Uses > 0)
 			return ..()
 	return 0
 
@@ -937,7 +937,7 @@
 	..()
 	var/obj/item/slime_extract/T = holder.my_atom
 	T.Uses--
-	if(T.Uses <= 0)
+	if (T.Uses <= 0)
 		T.visible_message("[icon2html(T, viewers(get_turf(T)))][SPAN_NOTICE("\The [T]'s power is consumed in the reaction.")]")
 		T.SetName("used slime extract")
 		T.desc = "This extract has been used up."
@@ -1040,14 +1040,14 @@
 	var/list/borks = typesof(/obj/item/reagent_containers/food/snacks) - /obj/item/reagent_containers/food/snacks
 	playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
 	for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
-		if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
+		if (M.eyecheck() < FLASH_PROTECTION_MODERATE)
 			M.flash_eyes()
 
 	for(var/i = 1, i <= 4 + rand(1,2), i++)
 		var/chosen = pick(borks)
 		var/obj/B = new chosen(get_turf(holder.my_atom))
-		if(B)
-			if(prob(50))
+		if (B)
+			if (prob(50))
 				for(var/j = 1, j <= rand(1, 3), j++)
 					step(B, pick(NORTH, SOUTH, EAST, WEST))
 
@@ -1063,14 +1063,14 @@
 	var/list/mixers = typesof(/obj/item/reagent_containers/food/drinks) - typesof(/obj/item/reagent_containers/food/drinks/glass2)
 	playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
 	for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
-		if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
+		if (M.eyecheck() < FLASH_PROTECTION_MODERATE)
 			M.flash_eyes()
 
 	for(var/i = 1, i <= 4 + rand(1,2), i++)
 		var/chosen = pick(mixers)
 		var/obj/B = new chosen(get_turf(holder.my_atom))
-		if(B)
-			if(prob(50))
+		if (B)
+			if (prob(50))
 				for(var/j = 1, j <= rand(1, 3), j++)
 					step(B, pick(NORTH, SOUTH, EAST, WEST))
 
@@ -1120,7 +1120,7 @@
 	set waitfor = 0
 	..()
 	sleep(50)
-	if(!(holder.my_atom && holder.my_atom.loc))
+	if (!(holder.my_atom && holder.my_atom.loc))
 		return
 
 	var/turf/location = get_turf(holder.my_atom)
@@ -1312,7 +1312,7 @@
 	for(var/turf/T in orange(holder.my_atom,6))
 		turfs += T
 	for(var/atom/movable/a in viewers(holder.my_atom,2))
-		if(!a.simulated)
+		if (!a.simulated)
 			continue
 		a.forceMove(pick(turfs))
 	..()
@@ -1346,13 +1346,13 @@
 	var/strength = 3
 
 /datum/chemical_reaction/soap_key/can_happen(datum/reagents/holder)
-	if(holder.my_atom && istype(holder.my_atom, /obj/item/soap))
+	if (holder.my_atom && istype(holder.my_atom, /obj/item/soap))
 		return ..()
 	return 0
 
 /datum/chemical_reaction/soap_key/on_reaction(datum/reagents/holder)
 	var/obj/item/soap/S = holder.my_atom
-	if(S.key_data)
+	if (S.key_data)
 		var/obj/item/key/soap/key = new(get_turf(holder.my_atom), S.key_data)
 		key.uses = strength
 	..()
@@ -2283,7 +2283,7 @@
 /datum/chemical_reaction/deuterium/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
 	..()
 	var/turf/T = get_turf(holder.my_atom)
-	if(istype(T)) new /obj/item/stack/material/deuterium(T, created_volume)
+	if (istype(T)) new /obj/item/stack/material/deuterium(T, created_volume)
 	return
 
 /datum/chemical_reaction/antidexafen
@@ -2502,9 +2502,9 @@
 /datum/chemical_reaction/resin_pack/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
 	..()
 	var/turf/T = get_turf(holder.my_atom)
-	if(istype(T))
+	if (istype(T))
 		var/create_stacks = floor(created_volume)
-		if(create_stacks > 0)
+		if (create_stacks > 0)
 			new /obj/item/stack/medical/resin/handmade(T, create_stacks)
 
 /datum/chemical_reaction/crystal_agent

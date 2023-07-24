@@ -34,7 +34,7 @@
 
 //Don't want to render prison breaks impossible
 /obj/machinery/flasher/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWirecutter(W))
+	if (isWirecutter(W))
 		add_fingerprint(user, 0, W)
 		src.disable = !src.disable
 		if (src.disable)
@@ -68,22 +68,22 @@
 			continue
 
 		var/flash_time = strength
-		if(isliving(O))
-			if(O.eyecheck() > FLASH_PROTECTION_NONE)
+		if (isliving(O))
+			if (O.eyecheck() > FLASH_PROTECTION_NONE)
 				continue
-			if(ishuman(O))
+			if (ishuman(O))
 				var/mob/living/carbon/human/H = O
 				flash_time = round(H.getFlashMod() * flash_time)
-				if(flash_time <= 0)
+				if (flash_time <= 0)
 					return
 				var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name[H.species.vision_organ]
-				if(!E)
+				if (!E)
 					return
-				if(E.is_bruised() && prob(E.damage + 50))
+				if (E.is_bruised() && prob(E.damage + 50))
 					H.flash_eyes()
 					E.damage += rand(1, 5)
 
-		if(!O.blinded)
+		if (!O.blinded)
 			do_flash(O, flash_time)
 
 /obj/machinery/flasher/proc/do_flash(mob/living/victim, flash_time)
@@ -108,19 +108,19 @@
 	density = TRUE
 
 /obj/machinery/flasher/portable/HasProximity(atom/movable/AM as mob|obj)
-	if(!anchored || disable || last_flash && world.time < last_flash + 150)
+	if (!anchored || disable || last_flash && world.time < last_flash + 150)
 		return
 
-	if(istype(AM, /mob/living/carbon))
+	if (istype(AM, /mob/living/carbon))
 		var/mob/living/carbon/M = AM
-		if(!MOVING_DELIBERATELY(M))
+		if (!MOVING_DELIBERATELY(M))
 			flash()
 
-	if(isanimal(AM))
+	if (isanimal(AM))
 		flash()
 
 /obj/machinery/flasher/portable/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWrench(W))
+	if (isWrench(W))
 		add_fingerprint(user)
 		src.anchored = !src.anchored
 

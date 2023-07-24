@@ -15,11 +15,11 @@
 	var/poster_type
 
 /obj/item/contraband/poster/New(maploading, given_poster_type)
-	if(given_poster_type && !ispath(given_poster_type, /singleton/poster))
+	if (given_poster_type && !ispath(given_poster_type, /singleton/poster))
 		CRASH("Invalid poster type: [log_info_line(given_poster_type)]")
 
 	poster_type = given_poster_type || poster_type
-	if(!poster_type)
+	if (!poster_type)
 		poster_type = pick(subtypesof(/singleton/poster))
 	..()
 
@@ -37,7 +37,7 @@
 
 	//must place on a wall and user must not be inside a closet/exosuit/whatever
 	var/turf/W = A
-	if(!isturf(W))
+	if (!isturf(W))
 		return
 
 	if (!W.is_wall() || !isturf(user.loc))
@@ -59,7 +59,7 @@
 	qdel(src)
 	flick("poster_being_set", P)
 	// Time to place is equal to the time needed to play the flick animation
-	if(do_after(user, 2.8 SECONDS, W, DO_PUBLIC_UNIQUE) && W.is_wall() && !ArePostersOnWall(W, P))
+	if (do_after(user, 2.8 SECONDS, W, DO_PUBLIC_UNIQUE) && W.is_wall() && !ArePostersOnWall(W, P))
 		user.visible_message(SPAN_NOTICE("\The [user] has placed a poster on \the [W]."),SPAN_NOTICE("You have placed the poster on \the [W]."))
 	else
 		// We cannot rely on user being on the appropriate turf when placement fails
@@ -103,12 +103,12 @@
 /obj/structure/sign/poster/New(newloc, placement_dir = null, give_poster_type = null)
 	..(newloc)
 
-	if(!poster_type)
-		if(give_poster_type)
+	if (!poster_type)
+		if (give_poster_type)
 			poster_type = give_poster_type
 		else
 			poster_type = pick(subtypesof(/singleton/poster) - typesof(/singleton/poster/torch))
-	if(torch_poster)
+	if (torch_poster)
 		poster_type = pick(subtypesof(/singleton/poster/torch))
 	set_poster(poster_type)
 
@@ -160,12 +160,12 @@
 
 /obj/structure/sign/poster/attack_hand(mob/user as mob)
 
-	if(ruined)
+	if (ruined)
 		return
 
-	if(alert("Do I want to rip the poster from the wall?","You think...","Yes","No") == "Yes")
+	if (alert("Do I want to rip the poster from the wall?","You think...","Yes","No") == "Yes")
 
-		if(ruined || !user.Adjacent(src))
+		if (ruined || !user.Adjacent(src))
 			return
 
 		visible_message(SPAN_WARNING("\The [user] rips \the [src] in a single, decisive motion!") )

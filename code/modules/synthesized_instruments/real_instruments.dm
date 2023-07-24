@@ -34,7 +34,7 @@
 				GLOB.instrument_synchronizer.raise_event(player.actual_instrument)
 				src.player.song.play_song(usr)
 		if ("wait")
-			if(value)
+			if (value)
 				src.player.wait = weakref(usr)
 			else
 				src.player.wait = null
@@ -45,32 +45,32 @@
 			var/t = ""
 			do
 				t = html_encode(input(usr, "Please paste the entire song, formatted:", text("[]", owner.name), t)  as message)
-				if(!CanInteractWith(usr, owner, GLOB.physical_state))
+				if (!CanInteractWith(usr, owner, GLOB.physical_state))
 					return
 
-				if(length(t) >= 2*src.maximum_lines*src.maximum_line_length)
+				if (length(t) >= 2*src.maximum_lines*src.maximum_line_length)
 					var/cont = input(usr, "Your message is too long! Would you like to continue editing it?", "", "yes") in list("yes", "no")
-					if(!CanInteractWith(usr, owner, GLOB.physical_state))
+					if (!CanInteractWith(usr, owner, GLOB.physical_state))
 						return
-					if(cont == "no")
+					if (cont == "no")
 						break
 			while(length(t) > 2*src.maximum_lines*src.maximum_line_length)
 			if (length(t))
 				src.player.song.lines = splittext(t, "\n")
-				if(copytext(src.player.song.lines[1],1,6) == "BPM: ")
-					if(text2num(copytext(src.player.song.lines[1],6)) != 0)
+				if (copytext(src.player.song.lines[1],1,6) == "BPM: ")
+					if (text2num(copytext(src.player.song.lines[1],6)) != 0)
 						src.player.song.tempo = src.player.song.sanitize_tempo(600 / text2num(copytext(src.player.song.lines[1],6)))
 						src.player.song.lines.Cut(1,2)
 					else
 						src.player.song.tempo = src.player.song.sanitize_tempo(5)
 				else
 					src.player.song.tempo = src.player.song.sanitize_tempo(5) // default 120 BPM
-				if(length(src.player.song.lines) > maximum_lines)
+				if (length(src.player.song.lines) > maximum_lines)
 					to_chat(usr,"Too many lines!")
 					src.player.song.lines.Cut(maximum_lines+1)
 				var/linenum = 1
 				for(var/l in src.player.song.lines)
-					if(length(l) > maximum_line_length)
+					if (length(l) > maximum_line_length)
 						to_chat(usr, "Line [linenum] too long!")
 						src.player.song.lines.Remove(l)
 					else
@@ -98,7 +98,7 @@
 			src.player.song.sustain_timer = max(min(player.song.sustain_timer+value, GLOB.musical_config.longest_sustain_timer), 1)
 		if ("soft_coeff")
 			var/new_coeff = input(usr, "from [GLOB.musical_config.gentlest_drop] to [GLOB.musical_config.steepest_drop]") as num
-			if(!CanInteractWith(usr, owner, GLOB.physical_state))
+			if (!CanInteractWith(usr, owner, GLOB.physical_state))
 				return
 			new_coeff = round(min(max(new_coeff, GLOB.musical_config.gentlest_drop), GLOB.musical_config.steepest_drop), 0.001)
 			src.player.song.soft_coeff = new_coeff
@@ -112,7 +112,7 @@
 				categories |= instrument.category
 
 			var/category = input(usr, "Choose a category") as null|anything in categories
-			if(!CanInteractWith(usr, owner, GLOB.physical_state))
+			if (!CanInteractWith(usr, owner, GLOB.physical_state))
 				return
 			var/list/instruments_available = list()
 			for (var/key in as_list)
@@ -121,7 +121,7 @@
 					instruments_available += key
 
 			var/new_instrument = input(usr, "Choose an instrument") as null|anything in instruments_available
-			if(!CanInteractWith(usr, owner, GLOB.physical_state))
+			if (!CanInteractWith(usr, owner, GLOB.physical_state))
 				return
 			if (new_instrument)
 				src.player.song.instrument_data = instruments[new_instrument]

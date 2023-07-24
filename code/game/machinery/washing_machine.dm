@@ -41,29 +41,29 @@
 	set category = "Object"
 	set src in oview(1)
 
-	if(!CanPhysicallyInteract(usr))
+	if (!CanPhysicallyInteract(usr))
 		return
 
-	if(!anchored)
+	if (!anchored)
 		to_chat(usr, "\The [src] must be secured to the floor.")
 		return
 
-	if(state & WASHER_STATE_RUNNING)
+	if (state & WASHER_STATE_RUNNING)
 		to_chat(usr, "\The [src] is already running.")
 		return
-	if(!(state & WASHER_STATE_FULL))
+	if (!(state & WASHER_STATE_FULL))
 		to_chat(usr, "Load \the [src] first!")
 		return
-	if(!(state & WASHER_STATE_CLOSED))
+	if (!(state & WASHER_STATE_CLOSED))
 		to_chat(usr, "You must first close the machine.")
 		return
 
-	if(!is_powered())
+	if (!is_powered())
 		to_chat(usr, SPAN_WARNING("\The [src] is unpowered."))
 		return
 
 	state |= WASHER_STATE_RUNNING
-	if(locate(/mob/living) in src)
+	if (locate(/mob/living) in src)
 		state |= WASHER_STATE_BLOODY
 
 	update_use_power(POWER_USE_ACTIVE)
@@ -72,19 +72,19 @@
 
 /obj/machinery/washing_machine/proc/wash()
 	for(var/atom/A in (contents - component_parts))
-		if(detergent)
+		if (detergent)
 			A.clean_blood()
-		if(isitem(A))
+		if (isitem(A))
 			var/obj/item/I = A
-			if(detergent)
+			if (detergent)
 				I.decontaminate()
-			if(crayon && iscolorablegloves(I))
+			if (crayon && iscolorablegloves(I))
 				var/obj/item/clothing/gloves/C = I
 				C.color = crayon.color
-			if(istype(A, /obj/item/clothing))
+			if (istype(A, /obj/item/clothing))
 				var/obj/item/clothing/C = A
 				C.ironed_state = WRINKLES_WRINKLY
-				if(detergent)
+				if (detergent)
 					C.change_smell(SMELL_CLEAN)
 					addtimer(new Callback(C, /obj/item/clothing/proc/change_smell), detergent.smell_clean_time, TIMER_UNIQUE | TIMER_OVERRIDE)
 	QDEL_NULL(detergent)
@@ -96,7 +96,7 @@
 		qdel(HH)
 
 	update_use_power(POWER_USE_IDLE)
-	if(locate(/mob/living) in src)
+	if (locate(/mob/living) in src)
 		gibs_ready = 1
 	state &= ~WASHER_STATE_RUNNING
 	update_icon()
@@ -106,14 +106,14 @@
 	set category = "Object"
 	set src in usr.loc
 
-	if(!CanPhysicallyInteract(usr))
+	if (!CanPhysicallyInteract(usr))
 		return
-	if(state & WASHER_STATE_CLOSED)
+	if (state & WASHER_STATE_CLOSED)
 		to_chat(usr, SPAN_WARNING("\The [src] is closed."))
 		return
-	if(!do_after(usr, 2 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+	if (!do_after(usr, 2 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return
-	if(!(state & WASHER_STATE_CLOSED))
+	if (!(state & WASHER_STATE_CLOSED))
 		usr.dropInto(loc)
 
 /obj/machinery/washing_machine/on_update_icon()
@@ -128,18 +128,18 @@
 	return !(state & WASHER_STATE_RUNNING) && ..()
 
 /obj/machinery/washing_machine/attackby(obj/item/W, mob/user)
-	if(!(state & WASHER_STATE_CLOSED))
-		if(!crayon && istype(W,/obj/item/pen/crayon))
-			if(!user.unEquip(W, src))
+	if (!(state & WASHER_STATE_CLOSED))
+		if (!crayon && istype(W,/obj/item/pen/crayon))
+			if (!user.unEquip(W, src))
 				return
 			crayon = W
 			return TRUE
-		if(!detergent && istype(W,/obj/item/reagent_containers/pill/detergent))
-			if(!user.unEquip(W, src))
+		if (!detergent && istype(W,/obj/item/reagent_containers/pill/detergent))
+			if (!user.unEquip(W, src))
 				return
 			detergent = W
 			return TRUE
-	if(istype(W, /obj/item/holder)) // Mob holder
+	if (istype(W, /obj/item/holder)) // Mob holder
 		for(var/mob/living/doggy in W)
 			doggy.forceMove(src)
 		qdel(W)
@@ -172,15 +172,15 @@
 
 
 /obj/machinery/washing_machine/physical_attack_hand(mob/user)
-	if(state & WASHER_STATE_RUNNING)
+	if (state & WASHER_STATE_RUNNING)
 		to_chat(user, SPAN_WARNING("\The [src] is busy."))
 		return TRUE
-	if(state & WASHER_STATE_CLOSED)
+	if (state & WASHER_STATE_CLOSED)
 		state &= ~WASHER_STATE_CLOSED
-		if(gibs_ready)
+		if (gibs_ready)
 			gibs_ready = 0
 			var/mob/M = locate(/mob/living) in src
-			if(M)
+			if (M)
 				M.gib()
 		for(var/atom/movable/O in (contents - component_parts))
 			O.dropInto(loc)

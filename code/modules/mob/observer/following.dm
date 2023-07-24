@@ -6,7 +6,7 @@
 	stop_following()
 
 /mob/observer/proc/stop_following()
-	if(!following)
+	if (!following)
 		return
 	GLOB.destroyed_event.unregister(following, src)
 	GLOB.moved_event.unregister(following, src)

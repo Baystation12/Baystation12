@@ -91,8 +91,8 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 	. = ..()
 
-	if(card)
-		if(!card.radio)
+	if (card)
+		if (!card.radio)
 			card.radio = new /obj/item/device/radio(card)
 		silicon_radio = card.radio
 
@@ -104,7 +104,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 // this function shows the information about being silenced as a pAI in the Status panel
 /mob/living/silicon/pai/proc/show_silenced()
-	if(silence_time)
+	if (silence_time)
 		var/timeleft = round((silence_time - world.timeofday)/10 ,1)
 		stat(null, "Communications system reboot in -[(timeleft / 60) % 60]:[pad_left(num2text(timeleft % 60), 2, "0")]")
 
@@ -133,26 +133,26 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 	silence_time = world.timeofday + 120 * 10		// Silence for 2 minutes
 	to_chat(src, SPAN_COLOR("green", "<b>Communication circuit overload. Shutting down and reloading communication circuits - speech and messaging functionality will be unavailable until the reboot is complete.</b>"))
-	if(prob(20))
+	if (prob(20))
 		var/turf/T = get_turf_or_move(loc)
 		for (var/mob/M in viewers(T))
 			M.show_message(SPAN_WARNING("A shower of sparks spray from [src]'s inner workings."), 3, SPAN_WARNING("You hear and smell the ozone hiss of electrical sparks being expelled violently."), 2)
 		return death(0)
 
 	switch(pick(1,2,3))
-		if(1)
+		if (1)
 			master = null
 			master_dna = null
 			to_chat(src, SPAN_COLOR("green", "You feel unbound."))
-		if(2)
+		if (2)
 			var/command
-			if(severity  == EMP_ACT_HEAVY)
+			if (severity  == EMP_ACT_HEAVY)
 				command = pick("Serve", "Love", "Fool", "Entice", "Observe", "Judge", "Respect", "Educate", "Amuse", "Entertain", "Glorify", "Memorialize", "Analyze")
 			else
 				command = pick("Serve", "Kill", "Love", "Hate", "Disobey", "Devour", "Fool", "Enrage", "Entice", "Observe", "Judge", "Respect", "Disrespect", "Consume", "Educate", "Destroy", "Disgrace", "Amuse", "Entertain", "Ignite", "Glorify", "Memorialize", "Analyze")
 			pai_law0 = "[command] your master."
 			to_chat(src, SPAN_COLOR("green", "Pr1m3 d1r3c71v3 uPd473D."))
-		if(3)
+		if (3)
 			to_chat(src, SPAN_COLOR("green", "You feel an electric surge run through your circuitry and become acutely aware at how lucky you are that you can still feel at all."))
 
 	..()
@@ -170,30 +170,30 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 //card -> mob
 /mob/living/silicon/pai/proc/unfold()
-	if(stat || sleeping || paralysis || weakened)
+	if (stat || sleeping || paralysis || weakened)
 		return
-	if(loc != card)
+	if (loc != card)
 		return
-	if(world.time <= last_special)
+	if (world.time <= last_special)
 		return
 	last_special = world.time + 100
 	//I'm not sure how much of this is necessary, but I would rather avoid issues.
-	if(istype(card.loc,/obj/item/rig_module) || istype(card.loc,/obj/item/integrated_circuit/manipulation/ai))
+	if (istype(card.loc,/obj/item/rig_module) || istype(card.loc,/obj/item/integrated_circuit/manipulation/ai))
 		to_chat(src, "There is no room to unfold inside \the [card.loc]. You're good and stuck.")
 		return 0
-	else if(istype(card.loc,/mob))
+	else if (istype(card.loc,/mob))
 		var/mob/holder = card.loc
-		if(ishuman(holder))
+		if (ishuman(holder))
 			var/mob/living/carbon/human/H = holder
 			for(var/obj/item/organ/external/affecting in H.organs)
-				if(card in affecting.implants)
+				if (card in affecting.implants)
 					affecting.take_external_damage(rand(30,50))
 					affecting.implants -= card
 					H.visible_message(SPAN_DANGER("\The [src] explodes out of \the [H]'s [affecting.name] in a shower of gore!"))
 					break
 		holder.drop_from_inventory(card)
 
-	if(client)
+	if (client)
 		client.perspective = EYE_PERSPECTIVE
 		client.eye = src
 	dropInto(card.loc)
@@ -201,7 +201,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	card.screen_loc = null
 	is_in_card = FALSE
 	var/turf/T = get_turf(src)
-	if(istype(T)) T.visible_message("<b>[src]</b> folds outwards, expanding into a mobile form.")
+	if (istype(T)) T.visible_message("<b>[src]</b> folds outwards, expanding into a mobile form.")
 
 /mob/living/silicon/pai/verb/fold_up()
 	set category = "pAI Commands"
@@ -210,12 +210,12 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 //from mob -> card
 /mob/living/silicon/pai/proc/fold()
-	if(stat || sleeping || paralysis || weakened)
+	if (stat || sleeping || paralysis || weakened)
 		return
-	if(loc == card)
+	if (loc == card)
 		return
 
-	if(world.time <= last_special)
+	if (world.time <= last_special)
 		return
 	last_special = world.time + 100
 
@@ -225,9 +225,9 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 	// If we are being held, handle removing our holder from their inv.
 	var/obj/item/holder/H = loc
-	if(istype(H))
+	if (istype(H))
 		var/mob/living/M = H.loc
-		if(istype(M))
+		if (istype(M))
 			M.drop_from_inventory(H, get_turf(src))
 		dropInto(loc)
 
@@ -240,15 +240,15 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	icon_state = "[chassis]"
 	is_in_card = TRUE
 	var/turf/T = get_turf(src)
-	if(istype(T))
+	if (istype(T))
 		T.visible_message("<b>[src]</b> neatly folds inwards, compacting down to a rectangular card.")
 
 /mob/living/silicon/pai/lay_down()
 	// Pass lying down or getting up to our pet human, if we're in a rig.
-	if(istype(loc,/obj/item/device/paicard))
+	if (istype(loc,/obj/item/device/paicard))
 		resting = FALSE
 		var/obj/item/rig/rig = get_rig()
-		if(istype(rig))
+		if (istype(rig))
 			rig.force_rest(src)
 	else
 		resting = !resting
@@ -300,9 +300,9 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 // Handle being picked up.
 /mob/living/silicon/pai/get_scooped(mob/living/carbon/grabber, self_drop)
 	. = ..()
-	if(.)
+	if (.)
 		var/obj/item/holder/H = .
-		if(istype(H))
+		if (istype(H))
 			H.item_state = "pai-[icon_state]"
 			grabber.update_inv_l_hand()
 			grabber.update_inv_r_hand()
@@ -313,7 +313,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	set desc = "Wipe your software. This is functionally equivalent to cryo or robotic storage, freeing up your job slot."
 
 	// Make sure people don't kill themselves accidentally
-	if(alert("WARNING: This will immediately wipe your software and ghost you, removing your character from the round permanently (similar to cryo and robotic storage). Are you entirely sure you want to do this?",
+	if (alert("WARNING: This will immediately wipe your software and ghost you, removing your character from the round permanently (similar to cryo and robotic storage). Are you entirely sure you want to do this?",
 					"Wipe Software", "No", "No", "Yes") != "Yes")
 		return
 
@@ -323,7 +323,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	clear_client()
 
 /mob/living/silicon/pai/proc/toggle_integrated_light()
-	if(!light_on)
+	if (!light_on)
 		set_light(flashlight_max_bright, flashlight_inner_range, flashlight_outer_range, 2)
 		to_chat(src, SPAN_NOTICE("You enable your integrated light."))
 		light_on = TRUE

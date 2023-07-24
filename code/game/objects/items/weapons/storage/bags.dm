@@ -9,16 +9,16 @@
 
 /obj/item/storage/bag/handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
 	. = ..()
-	if(.) update_w_class()
+	if (.) update_w_class()
 
 /obj/item/storage/bag/remove_from_storage(obj/item/W as obj, atom/new_location)
 	. = ..()
-	if(.) update_w_class()
+	if (.) update_w_class()
 
 /obj/item/storage/bag/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
 	var/mob/living/carbon/human/H = ishuman(user) ? user : null // if we're human, then we need to check if bag in a pocket
-	if(istype(src.loc, /obj/item/storage) || H?.is_in_pocket(src))
-		if(!stop_messages)
+	if (istype(src.loc, /obj/item/storage) || H?.is_in_pocket(src))
+		if (!stop_messages)
 			to_chat(user, SPAN_NOTICE("Take \the [src] out of [istype(src.loc, /obj) ? "\the [src.loc]" : "the pocket"] first."))
 		return 0 //causes problems if the bag expands and becomes larger than src.loc can hold, so disallow it
 	. = ..()
@@ -57,10 +57,10 @@
 
 /obj/item/storage/bag/trash/on_update_icon()
 	switch(w_class)
-		if(2) icon_state = "[initial(icon_state)]"
-		if(3) icon_state = "[initial(icon_state)]1"
-		if(4) icon_state = "[initial(icon_state)]2"
-		if(5 to INFINITY) icon_state = "[initial(icon_state)]3"
+		if (2) icon_state = "[initial(icon_state)]"
+		if (3) icon_state = "[initial(icon_state)]1"
+		if (4) icon_state = "[initial(icon_state)]2"
+		if (5 to INFINITY) icon_state = "[initial(icon_state)]3"
 
 /obj/item/storage/bag/trash/bluespace
 	name = "trash bag of holding"
@@ -69,7 +69,7 @@
 	icon_state = "bluetrashbag"
 
 /obj/item/storage/bag/trash/bluespace/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/storage/backpack/holding) || istype(W, /obj/item/storage/bag/trash/bluespace))
+	if (istype(W, /obj/item/storage/backpack/holding) || istype(W, /obj/item/storage/bag/trash/bluespace))
 		to_chat(user, SPAN_WARNING("The Bluespace interfaces of the two devices conflict and malfunction."))
 		qdel(W)
 		return 1

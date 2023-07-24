@@ -5,7 +5,7 @@
 #define PREPARE_ARGUMENTS \
 	var/extra_arguments = predicates[predicate];\
 	var/list/predicate_input = input;\
-	if(LAZYLEN(extra_arguments)) {\
+	if (LAZYLEN(extra_arguments)) {\
 		predicate_input = predicate_input.Copy();\
 		predicate_input += list(extra_arguments);\
 	}
@@ -14,18 +14,18 @@
 	PREPARE_INPUT
 	for(var/predicate in predicates)
 		PREPARE_ARGUMENTS
-		if(!call(predicate)(arglist(predicate_input)))
+		if (!call(predicate)(arglist(predicate_input)))
 			return FALSE
 	return TRUE
 
 /proc/any_predicate_true(list/input, list/predicates)
 	PREPARE_INPUT
-	if(!length(predicates))
+	if (!length(predicates))
 		return TRUE
 
 	for(var/predicate in predicates)
 		PREPARE_ARGUMENTS
-		if(call(predicate)(arglist(predicate_input)))
+		if (call(predicate)(arglist(predicate_input)))
 			return TRUE
 	return FALSE
 
@@ -34,12 +34,12 @@
 
 /proc/is_atom_predicate(value, feedback_receiver)
 	. = isatom(value)
-	if(!. && feedback_receiver)
+	if (!. && feedback_receiver)
 		to_chat(feedback_receiver, SPAN_WARNING("Value must be an atom."))
 
 /proc/is_num_predicate(value, feedback_receiver)
 	. = isnum(value)
-	if(!. && feedback_receiver)
+	if (!. && feedback_receiver)
 		to_chat(feedback_receiver, SPAN_WARNING("Value must be a numeral."))
 
 /proc/is_non_zero_predicate(value, feedback_receiver)
@@ -59,12 +59,12 @@
 
 /proc/is_text_predicate(value, feedback_receiver)
 	. = !value || istext(value)
-	if(!. && feedback_receiver)
+	if (!. && feedback_receiver)
 		to_chat(feedback_receiver, SPAN_WARNING("Value must be a text."))
 
 /proc/is_dir_predicate(value, feedback_receiver)
 	. = (value in GLOB.alldirs)
-	if(!. && feedback_receiver)
+	if (!. && feedback_receiver)
 		to_chat(feedback_receiver, SPAN_WARNING("Value must be a direction."))
 
 /proc/is_strict_bool_predicate(value, feedback_receiver)
@@ -84,12 +84,12 @@
 	. = list()
 	for(var/entry in list_to_filter)
 		var/predicate_input
-		if(extra_predicate_input)
+		if (extra_predicate_input)
 			predicate_input = (list(entry) + extra_predicate_input)
 		else
 			predicate_input = entry
 
-		if(all_predicates_true(predicate_input, predicates))
+		if (all_predicates_true(predicate_input, predicates))
 			. += entry
 
 /proc/map(list/list_to_map, map_proc)

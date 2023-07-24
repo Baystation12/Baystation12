@@ -13,36 +13,36 @@
 	addtimer(new Callback(src, .proc/timed_out), vote_time)
 
 /datum/gestalt_vote/proc/timed_out()
-	if(owner && !passed)
+	if (owner && !passed)
 		for(var/thing in owner.nymphs)
 			to_chat(thing, SPAN_NOTICE("\The vote to <i>[descriptor]</i> has run out of time and has failed."))
 	qdel(src)
 
 /datum/gestalt_vote/Topic(href, href_list)
 	. = ..()
-	if(!. && href_list["voter"])
+	if (!. && href_list["voter"])
 		var/mob/living/carbon/alien/diona/voter = locate(href_list["voter"])
-		if(!voter.incapacitated() && voter.loc == owner && !voted[voter] && !passed && !QDELETED(src))
+		if (!voter.incapacitated() && voter.loc == owner && !voted[voter] && !passed && !QDELETED(src))
 			voted[voter] = TRUE
 			var/target_value = 0
 			for(var/thing in owner.nymphs)
 				var/mob/living/carbon/alien/diona/chirp = thing
-				if(chirp.client)
+				if (chirp.client)
 					target_value++
 			target_value = ceil(target_value/2)
 			passed = (length(voted) >= target_value)
 			for(var/thing in owner.nymphs)
 				to_chat(thing, SPAN_NOTICE("\The [voter] voted yes to <i>[descriptor]</i> ([length(voted)]/[target_value])."))
-				if(passed)
+				if (passed)
 					to_chat(thing, SPAN_NOTICE("<b>Motion passed!</b>"))
-			if(passed) succeeded()
+			if (passed) succeeded()
 			return TRUE
 
 /datum/gestalt_vote/Destroy()
 	voted.Cut()
 	caller = null
-	if(owner)
-		if(owner.current_vote == src)
+	if (owner)
+		if (owner.current_vote == src)
 			owner.current_vote = null
 		owner = null
 	. = ..()
@@ -57,7 +57,7 @@
 
 	var/mob/living/carbon/human/diona/humanoid_gestalt = new(get_turf(owner))
 	transfer_languages(caller, humanoid_gestalt)
-	if(caller.mind)
+	if (caller.mind)
 		caller.mind.transfer_to(humanoid_gestalt)
 	else
 		humanoid_gestalt.key = caller.key
@@ -70,7 +70,7 @@
 	var/caller_instance_num = caller.instance_num
 	spawn
 		var/newname = sanitize(input(humanoid_gestalt, "You have become a humanoid gestalt. Choose a name for yourself.", "Gestalt Name") as null|text, MAX_NAME_LEN)
-		if(!newname)
+		if (!newname)
 			humanoid_gestalt.fully_replace_character_name("diona gestalt ([caller_instance_num])")
 		else
 			humanoid_gestalt.fully_replace_character_name(newname)

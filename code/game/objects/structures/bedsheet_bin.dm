@@ -20,9 +20,9 @@ LINEN BINS
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/bedsheet/attackby(obj/item/I, mob/user)
-	if(is_sharp(I))
+	if (is_sharp(I))
 		user.visible_message(SPAN_NOTICE("\The [user] begins cutting up \the [src] with \a [I]."), SPAN_NOTICE("You begin cutting up \the [src] with \the [I]."))
-		if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
+		if (do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			to_chat(user, SPAN_NOTICE("You cut \the [src] into pieces!"))
 			for(var/i in 1 to rand(2,5))
 				new /obj/item/reagent_containers/glass/rag(get_turf(src))
@@ -109,10 +109,10 @@ LINEN BINS
 /obj/structure/bedsheetbin/examine(mob/user)
 	. = ..()
 
-	if(amount < 1)
+	if (amount < 1)
 		to_chat(user, "There are no bed sheets in the bin.")
 		return
-	if(amount == 1)
+	if (amount == 1)
 		to_chat(user, "There is one bed sheet in the bin.")
 		return
 	to_chat(user, "There are [amount] bed sheets in the bin.")
@@ -169,7 +169,7 @@ LINEN BINS
 
 /obj/structure/bedsheetbin/attack_hand(mob/user)
 	var/obj/item/bedsheet/B = remove_sheet()
-	if(B)
+	if (B)
 		user.put_in_hands(B)
 		to_chat(user, SPAN_NOTICE("You take \a [B] out of \the [src]."))
 		add_fingerprint(user)
@@ -180,11 +180,11 @@ LINEN BINS
 
 /obj/structure/bedsheetbin/proc/remove_sheet()
 	set waitfor = 0
-	if(amount <= 0)
+	if (amount <= 0)
 		return
 	amount--
 	var/obj/item/bedsheet/B
-	if(length(sheets) > 0)
+	if (length(sheets) > 0)
 		B = sheets[length(sheets)]
 		sheets.Remove(B)
 	else
@@ -193,7 +193,7 @@ LINEN BINS
 	update_icon()
 	. = B
 	sleep(-1)
-	if(hidden)
+	if (hidden)
 		hidden.dropInto(loc)
 		visible_message(SPAN_NOTICE("\The [hidden] falls out!"))
 		hidden = null

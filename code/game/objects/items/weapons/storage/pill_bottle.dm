@@ -17,17 +17,17 @@
 
 
 /obj/item/storage/pill_bottle/afterattack(mob/living/target, mob/living/user, proximity_flag)
-	if(!proximity_flag || !istype(target) || target != user)
+	if (!proximity_flag || !istype(target) || target != user)
 		return 1
-	if(!length(contents))
+	if (!length(contents))
 		to_chat(user, SPAN_WARNING("It's empty!"))
 		return 1
 	var/zone = user.zone_sel.selecting
-	if(zone == BP_MOUTH && target.can_eat())
+	if (zone == BP_MOUTH && target.can_eat())
 		user.visible_message(SPAN_NOTICE("[user] pops a pill from \the [src]."))
 		playsound(get_turf(src), 'sound/effects/peelz.ogg', 50)
 		var/list/peelz = filter_list(contents,/obj/item/reagent_containers/pill)
-		if(length(peelz))
+		if (length(peelz))
 			var/obj/item/reagent_containers/pill/P = pick(peelz)
 			remove_from_storage(P)
 			P.attack(target,user)
@@ -35,15 +35,15 @@
 
 
 /obj/item/storage/pill_bottle/afterattack(obj/target, mob/living/user, proximity)
-	if(!proximity)
+	if (!proximity)
 		return
-	if(target.is_open_container() && target.reagents)
-		if(!target.reagents.total_volume)
+	if (target.is_open_container() && target.reagents)
+		if (!target.reagents.total_volume)
 			to_chat(user, SPAN_NOTICE("[target] is empty. Can't dissolve a pill."))
 			return
 
 		var/list/peelz = filter_list(contents,/obj/item/reagent_containers/pill)
-		if(length(peelz))
+		if (length(peelz))
 			var/obj/item/reagent_containers/pill/P = pick(peelz)
 			remove_from_storage(P)
 			P.afterattack(target, user, proximity)
@@ -51,16 +51,16 @@
 
 
 /obj/item/storage/pill_bottle/attack_self(mob/living/user)
-	if(user.get_inactive_hand())
+	if (user.get_inactive_hand())
 		to_chat(user, SPAN_NOTICE("You need an empty hand to take something out."))
 		return
-	if(length(contents))
+	if (length(contents))
 		var/obj/item/I = contents[1]
-		if(!remove_from_storage(I,user))
+		if (!remove_from_storage(I,user))
 			return
-		if(user.put_in_inactive_hand(I))
+		if (user.put_in_inactive_hand(I))
 			to_chat(user, SPAN_NOTICE("You take \the [I] out of \the [src]."))
-			if(iscarbon(user))
+			if (iscarbon(user))
 				var/mob/living/carbon/C = user
 				C.swap_hand()
 		else
@@ -77,7 +77,7 @@
 
 /obj/item/storage/pill_bottle/on_update_icon()
 	overlays.Cut()
-	if(wrapper_color)
+	if (wrapper_color)
 		var/image/I = image(icon, "pillbottle_wrap")
 		I.color = wrapper_color
 		overlays += I

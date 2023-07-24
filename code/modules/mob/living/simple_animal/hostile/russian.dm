@@ -37,9 +37,9 @@
 
 /mob/living/simple_animal/hostile/russian/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
-	if(corpse)
+	if (corpse)
 		new corpse (src.loc)
-	if(dropped_weapon)
+	if (dropped_weapon)
 		new dropped_weapon (src.loc)
 	qdel(src)
 	return

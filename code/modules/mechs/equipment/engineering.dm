@@ -6,17 +6,17 @@
 
 /obj/item/rcd/mounted/get_hardpoint_maptext()
 	var/obj/item/mech_equipment/mounted_system/MS = loc
-	if(istype(MS) && MS.owner)
+	if (istype(MS) && MS.owner)
 		var/obj/item/cell/C = MS.owner.get_cell()
-		if(istype(C))
+		if (istype(C))
 			return "[round(C.charge)]/[round(C.maxcharge)]"
 	return null
 
 /obj/item/rcd/mounted/get_hardpoint_status_value()
 	var/obj/item/mech_equipment/mounted_system/MS = loc
-	if(istype(MS) && MS.owner)
+	if (istype(MS) && MS.owner)
 		var/obj/item/cell/C = MS.owner.get_cell()
-		if(istype(C))
+		if (istype(C))
 			return C.charge/C.maxcharge
 	return null
 
@@ -77,8 +77,8 @@
 	update_nearby_tiles(need_rebuild=1)
 
 /obj/effect/mech_shield/Destroy()
-	if(shields)
-		if(length(shields.segments))
+	if (shields)
+		if (length(shields.segments))
 			shields.segments -= src
 		shields = null
 	atmos_canpass = CANPASS_ALWAYS
@@ -90,11 +90,11 @@
 	return "[current_mode ? "BUBBLE" : "BARRIER"]\n[active ? "ONLINE" : "OFFLINE"]"
 
 /obj/item/mech_equipment/atmos_shields/proc/on_moved()
-	if(active)
+	if (active)
 		deactivate()
 
 /obj/item/mech_equipment/atmos_shields/proc/on_turned()
-	if(active && !current_mode)
+	if (active && !current_mode)
 		deactivate()
 
 /obj/item/mech_equipment/atmos_shields/proc/activate()
@@ -106,22 +106,22 @@
 		active = TRUE
 		var/list/turfs = list()
 
-		if(current_mode) //Generate a bubble
+		if (current_mode) //Generate a bubble
 			var/turf/T = null
 			for (var/x_offset = -shield_range +1; x_offset <= shield_range -1; x_offset++)
 				T = locate(owner.x + x_offset, owner.y - shield_range, owner.z)
-				if(T)
+				if (T)
 					turfs += T
 				T = locate(owner.x + x_offset, owner.y + 2, owner.z)
-				if(T)
+				if (T)
 					turfs += T
 
 			for (var/y_offset = -shield_range+1; y_offset < shield_range; y_offset++)
 				T = locate(owner.x - shield_range, owner.y + y_offset, owner.z)
-				if(T)
+				if (T)
 					turfs += T
 				T = locate(owner.x + shield_range, owner.y + y_offset, owner.z)
-				if(T)
+				if (T)
 					turfs += T
 		else
 			var/front = get_step(get_turf(owner), owner.dir)
@@ -132,7 +132,7 @@
 		segments = list()
 		for(var/turf/T in turfs)
 			var/obj/effect/mech_shield/MS = new(T)
-			if(istype(MS))
+			if (istype(MS))
 				MS.shields = src
 				segments += MS
 				GLOB.moved_event.register(MS, src, .proc/on_moved)
@@ -150,9 +150,9 @@
 
 /obj/item/mech_equipment/atmos_shields/deactivate()
 	for(var/obj/effect/mech_shield/MS in segments)
-		if(istype(MS))
+		if (istype(MS))
 			GLOB.moved_event.unregister(MS, src, .proc/on_moved)
-	if(length(segments))
+	if (length(segments))
 		owner.visible_message(SPAN_WARNING("The energy shields in front of \the [owner] disappear!"))
 	QDEL_NULL_LIST(segments)
 	passive_power_use = 0
@@ -164,8 +164,8 @@
 
 /obj/item/mech_equipment/atmos_shields/attack_self(mob/user)
 	. = ..()
-	if(.)
-		if(active)
+	if (.)
+		if (active)
 			deactivate()
 		else
 			activate()

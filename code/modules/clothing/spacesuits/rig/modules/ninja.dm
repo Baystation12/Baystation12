@@ -32,22 +32,22 @@
 
 /obj/item/rig_module/stealth_field/activate()
 
-	if(!..())
+	if (!..())
 		return 0
 
 	var/mob/living/carbon/human/H = holder.wearer
 
-	if(H.add_cloaking_source(src))
+	if (H.add_cloaking_source(src))
 		anim(H, 'icons/effects/effects.dmi', "electricity",null,20,null)
 
 /obj/item/rig_module/stealth_field/deactivate()
 
-	if(!..())
+	if (!..())
 		return 0
 
 	var/mob/living/carbon/human/H = holder.wearer
 
-	if(H.remove_cloaking_source(src))
+	if (H.remove_cloaking_source(src))
 		anim(H,'icons/mob/mob.dmi',,"uncloak",,H.dir)
 		anim(H, 'icons/effects/effects.dmi', "electricity",null,20,null)
 
@@ -71,13 +71,13 @@
 	interface_desc = "An advanced teleportation system. It is capable of pinpoint precision or random leaps forward."
 
 /obj/item/rig_module/teleporter/proc/phase_in(mob/M,turf/T)
-	if(!M || !T)
+	if (!M || !T)
 		return
 	holder.spark_system.start()
 	M.phase_in(T)
 
 /obj/item/rig_module/teleporter/proc/phase_out(mob/M,turf/T)
-	if(!M || !T)
+	if (!M || !T)
 		return
 	M.phase_out(T)
 
@@ -85,44 +85,44 @@
 
 	var/mob/living/carbon/human/H = holder.wearer
 
-	if(!istype(H.loc, /turf))
+	if (!istype(H.loc, /turf))
 		to_chat(H, SPAN_WARNING("You cannot teleport out of your current location."))
 		return 0
 
 	var/turf/T
-	if(target)
+	if (target)
 		T = get_turf(target)
 	else
 		T = get_teleport_loc(get_turf(H), H, 6, 1, 1, 1)
 
-	if(!T)
+	if (!T)
 		to_chat(H, SPAN_WARNING("No valid teleport target found."))
 		return 0
 
-	if(T.density)
+	if (T.density)
 		to_chat(H, SPAN_WARNING("You cannot teleport into solid walls."))
 		return 0
 
-	if(T.z in GLOB.using_map.admin_levels)
+	if (T.z in GLOB.using_map.admin_levels)
 		to_chat(H, SPAN_WARNING("You cannot use your teleporter on this Z-level."))
 		return 0
 
-	if(T.contains_dense_objects())
+	if (T.contains_dense_objects())
 		to_chat(H, SPAN_WARNING("You cannot teleport to a location with solid objects."))
 		return 0
 
-	if(T.z != H.z || get_dist(T, get_turf(H)) > world.view)
+	if (T.z != H.z || get_dist(T, get_turf(H)) > world.view)
 		to_chat(H, SPAN_WARNING("You cannot teleport to such a distant object."))
 		return 0
 
-	if(!..()) return 0
+	if (!..()) return 0
 
 	phase_out(H,get_turf(H))
 	H.forceMove(T)
 	phase_in(H,get_turf(H))
 
 	for(var/obj/item/grab/G in H.contents)
-		if(G.affecting)
+		if (G.affecting)
 			phase_out(G.affecting,get_turf(G.affecting))
 			G.affecting.forceMove(locate(T.x+rand(-1,1),T.y+rand(-1,1),T.z))
 			phase_in(G.affecting,get_turf(G.affecting))
@@ -148,8 +148,8 @@
 
 /obj/item/rig_module/fabricator/energy_net/engage(atom/target)
 
-	if(holder && holder.wearer)
-		if(..(target) && target)
+	if (holder && holder.wearer)
+		if (..(target) && target)
 			holder.wearer.Beam(target,"n_beam",,10)
 		return 1
 	return 0
@@ -187,24 +187,24 @@
 
 /obj/item/rig_module/self_destruct/activate()
 	activation_check = 1
-	if(!..())
+	if (!..())
 		return 0
 
 /obj/item/rig_module/self_destruct/engage(skip_check = FALSE)
 	set waitfor = 0
 
-	if(self_destructing) //prevents repeat calls
+	if (self_destructing) //prevents repeat calls
 		return 0
 
-	if(activation_check)
+	if (activation_check)
 		activation_check = 0
 		return 1
 
-	if(!skip_check)
-		if(!usr || alert(usr, "Are you sure you want to push that button?", "Self-destruct", "No", "Yes") == "No")
+	if (!skip_check)
+		if (!usr || alert(usr, "Are you sure you want to push that button?", "Self-destruct", "No", "Yes") == "No")
 			return
 
-		if(usr == holder.wearer)
+		if (usr == holder.wearer)
 			holder.wearer.visible_message(SPAN_WARNING(" \The [src.holder.wearer] flicks a small switch on the back of \the [src.holder]."),1)
 			sleep(blink_delay)
 
@@ -223,37 +223,37 @@
 	src.holder.set_light(0, 0, 0, 2, "#000000")
 
 	explosion(get_turf(src), explosion_radius, explosion_max_power)
-	if(holder && holder.wearer)
+	if (holder && holder.wearer)
 		holder.wearer.gib()
 		qdel(holder)
 	qdel(src)
 
 /obj/item/rig_module/self_destruct/Process()
 	// Not being worn, leave it alone.
-	if(!holder || !holder.wearer || !holder.wearer.wear_suit == holder)
+	if (!holder || !holder.wearer || !holder.wearer.wear_suit == holder)
 		return 0
 
 	//OH SHIT.
-	if(holder.wearer.stat == DEAD)
-		if(src.active)
+	if (holder.wearer.stat == DEAD)
+		if (src.active)
 			engage(1)
 
 /obj/item/rig_module/self_destruct/proc/blink()
 	set waitfor = 0
 	switch (blink_mode)
-		if(0)
+		if (0)
 			return
-		if(1)
+		if (1)
 			src.holder.set_light(1, 1, 8.5, 2, "#ff0a00")
 			sleep(6)
 			src.holder.set_light(0, 0, 0, 2, "#000000")
 			spawn(6) .()
-		if(2)
+		if (2)
 			src.holder.set_light(1, 1, 8.5, 2, "#ff0a00")
 			sleep(2)
 			src.holder.set_light(0, 0, 0, 2, "#000000")
 			spawn(2) .()
-		if(3)
+		if (3)
 			src.holder.set_light(1, 1, 8.5, 2, "#ff0a00")
 
 /obj/item/rig_module/grenade_launcher/ninja

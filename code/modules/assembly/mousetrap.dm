@@ -8,36 +8,36 @@
 
 /obj/item/device/assembly/mousetrap/examine(mob/user)
 	. = ..()
-	if(armed)
+	if (armed)
 		to_chat(user, "It looks like it's armed.")
 
 /obj/item/device/assembly/mousetrap/on_update_icon()
-	if(armed)
+	if (armed)
 		icon_state = "mousetraparmed"
 	else
 		icon_state = "mousetrap"
-	if(holder)
+	if (holder)
 		holder.update_icon()
 
 /obj/item/device/assembly/mousetrap/proc/triggered(mob/target, type = "feet")
-	if(!armed)
+	if (!armed)
 		return
 	var/obj/item/organ/external/affecting = null
-	if(ishuman(target))
+	if (ishuman(target))
 		var/mob/living/carbon/human/H = target
 		switch(type)
-			if("feet")
-				if(!H.shoes)
+			if ("feet")
+				if (!H.shoes)
 					affecting = H.get_organ(pick(BP_L_LEG, BP_R_LEG))
 					H.Weaken(3)
-			if(BP_L_HAND, BP_R_HAND)
-				if(!H.gloves)
+			if (BP_L_HAND, BP_R_HAND)
+				if (!H.gloves)
 					affecting = H.get_organ(type)
 					H.Stun(3)
-		if(affecting)
+		if (affecting)
 			affecting.take_external_damage(1, 0)
 			H.updatehealth()
-	else if(ismouse(target))
+	else if (ismouse(target))
 		var/mob/living/simple_animal/passive/mouse/M = target
 		M.death()
 	playsound(target.loc, 'sound/effects/snap.ogg', 50, 1)
@@ -48,12 +48,12 @@
 
 
 /obj/item/device/assembly/mousetrap/attack_self(mob/living/user)
-	if(!armed)
+	if (!armed)
 		to_chat(user, SPAN_NOTICE("You arm [src]."))
 	else
-		if((MUTATION_CLUMSY in user.mutations) && prob(50))
+		if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 			var/which_hand = BP_L_HAND
-			if(!user.hand)
+			if (!user.hand)
 				which_hand = BP_R_HAND
 			triggered(user, which_hand)
 			user.visible_message(SPAN_WARNING("[user] accidentally sets off [src], breaking their fingers."), \
@@ -66,10 +66,10 @@
 
 
 /obj/item/device/assembly/mousetrap/attack_hand(mob/living/user)
-	if(armed)
-		if((MUTATION_CLUMSY in user.mutations) && prob(50))
+	if (armed)
+		if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 			var/which_hand = BP_L_HAND
-			if(!user.hand)
+			if (!user.hand)
 				which_hand = BP_R_HAND
 			triggered(user, which_hand)
 			user.visible_message(SPAN_WARNING("[user] accidentally sets off [src], breaking their fingers."), \
@@ -79,20 +79,20 @@
 
 
 /obj/item/device/assembly/mousetrap/Crossed(atom/movable/AM)
-	if(armed)
-		if(ishuman(AM))
+	if (armed)
+		if (ishuman(AM))
 			var/mob/living/carbon/H = AM
-			if(!MOVING_DELIBERATELY(H))
+			if (!MOVING_DELIBERATELY(H))
 				triggered(H)
 				H.visible_message(SPAN_WARNING("[H] accidentally steps on [src]."), \
 								  SPAN_WARNING("You accidentally step on [src]"))
-		if(ismouse(AM))
+		if (ismouse(AM))
 			triggered(AM)
 	..()
 
 
 /obj/item/device/assembly/mousetrap/on_found(mob/finder)
-	if(armed)
+	if (armed)
 		finder.visible_message(SPAN_WARNING("[finder] accidentally sets off [src], breaking their fingers."), \
 							   SPAN_WARNING("You accidentally trigger [src]!"))
 		triggered(finder, finder.hand ? BP_L_HAND : BP_R_HAND)
@@ -101,7 +101,7 @@
 
 
 /obj/item/device/assembly/mousetrap/hitby(atom/A)
-	if(!armed)
+	if (!armed)
 		return ..()
 	visible_message(SPAN_WARNING("[src] is triggered by [A]."))
 	triggered(A)
@@ -117,7 +117,7 @@
 	set name = "Hide"
 	set category = "Object"
 
-	if(usr.incapacitated())
+	if (usr.incapacitated())
 		return
 
 	layer = MOUSETRAP_LAYER

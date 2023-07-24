@@ -21,7 +21,7 @@
 	anchored = TRUE
 
 /obj/structure/morgue/Destroy()
-	if(connected)
+	if (connected)
 		qdel(connected)
 		connected = null
 	return ..()
@@ -38,20 +38,20 @@
 
 /obj/structure/morgue/ex_act(severity)
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			for(var/atom/movable/A as mob|obj in src)
 				A.forceMove(src.loc)
 				ex_act(severity)
 			qdel(src)
 			return
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			if (prob(50))
 				for(var/atom/movable/A as mob|obj in src)
 					A.forceMove(src.loc)
 					ex_act(severity)
 				qdel(src)
 				return
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			if (prob(5))
 				for(var/atom/movable/A as mob|obj in src)
 					A.forceMove(src.loc)
@@ -88,7 +88,7 @@
 	return
 
 /obj/structure/morgue/attack_robot(mob/user)
-	if(Adjacent(user))
+	if (Adjacent(user))
 		return attack_hand(user)
 	else return ..()
 
@@ -150,7 +150,7 @@
 	throwpass = 1
 
 /obj/structure/m_tray/Destroy()
-	if(connected && connected.connected == src)
+	if (connected && connected.connected == src)
 		connected.connected = null
 	connected = null
 	return ..()
@@ -200,13 +200,13 @@
 	var/locked = FALSE
 
 /obj/structure/crematorium/Destroy()
-	if(connected)
+	if (connected)
 		qdel(connected)
 		connected = null
 	return ..()
 
 /obj/structure/crematorium/proc/update()
-	if(cremating)
+	if (cremating)
 		icon_state = "crema_active"
 	else if (src.connected)
 		src.icon_state = "crema0"
@@ -218,20 +218,20 @@
 
 /obj/structure/crematorium/ex_act(severity)
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
+		if (EX_ACT_DEVASTATING)
 			for(var/atom/movable/A as mob|obj in src)
 				A.forceMove(src.loc)
 				ex_act(severity)
 			qdel(src)
 			return
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_HEAVY)
 			if (prob(50))
 				for(var/atom/movable/A as mob|obj in src)
 					A.forceMove(src.loc)
 					ex_act(severity)
 				qdel(src)
 				return
-		if(EX_ACT_LIGHT)
+		if (EX_ACT_LIGHT)
 			if (prob(5))
 				for(var/atom/movable/A as mob|obj in src)
 					A.forceMove(src.loc)
@@ -241,17 +241,17 @@
 	return
 
 /obj/structure/crematorium/attack_hand(mob/user)
-	if(cremating)
+	if (cremating)
 		to_chat(usr, SPAN_WARNING("It's locked."))
 		return
-	if(src.connected && (src.locked == FALSE))
+	if (src.connected && (src.locked == FALSE))
 		for(var/atom/movable/A as mob|obj in src.connected.loc)
 			if (!( A.anchored ))
 				A.forceMove(src)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		qdel(src.connected)
 		src.connected = null
-	else if(src.locked == 0)
+	else if (src.locked == 0)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		src.connected = new /obj/structure/c_tray(src.loc)
 		step(src.connected, dir)
@@ -310,15 +310,15 @@
 	return
 
 /obj/structure/crematorium/proc/cremate(atom/A, mob/user as mob)
-	if(cremating)
+	if (cremating)
 		return //don't let you cremate something twice or w/e
 
-	if(length(contents) <= 0)
+	if (length(contents) <= 0)
 		src.audible_message(SPAN_WARNING("You hear a hollow crackle."), 1)
 		return
 
 	else
-		if(length(search_contents_for(/obj/item/disk/nuclear)))
+		if (length(search_contents_for(/obj/item/disk/nuclear)))
 			to_chat(loc, "The button's status indicator flashes yellow, indicating that something important is inside the crematorium, and must be removed.")
 			return
 		src.audible_message(SPAN_WARNING("You hear a roar as the [src] activates."), 1)
@@ -329,52 +329,52 @@
 
 		for(var/mob/living/M in contents)
 			admin_attack_log(A, M, "Began cremating their victim.", "Has begun being cremated.", "began cremating")
-			if(iscarbon(M))
+			if (iscarbon(M))
 				var/mob/living/carbon/C = M
 				for(var/I, I < 60, I++)
 					C.bodytemperature += 50
 					C.adjustFireLoss(20)
 					C.adjustBrainLoss(5)
 
-					if(C.stat == DEAD || !(C in contents)) //In case we die or are removed at any point.
+					if (C.stat == DEAD || !(C in contents)) //In case we die or are removed at any point.
 						cremating = 0
 						update()
 						break
 
 					sleep(0.5 SECONDS)
-					if(prob(40))
+					if (prob(40))
 						var/desperation = rand(1,5)
 						switch(desperation) //This is messy. A better solution would probably be to make more sounds, but...
-							if(1)
+							if (1)
 								playsound(src.loc, 'sound/weapons/genhit.ogg', 45, 1)
 								shake_animation(2)
 								playsound(src.loc, 'sound/weapons/genhit.ogg', 45, 1)
-							if(2)
+							if (2)
 								playsound(src.loc, 'sound/effects/grillehit.ogg', 45, 1)
 								shake_animation(3)
 								playsound(src.loc, 'sound/effects/grillehit.ogg', 45, 1)
-							if(3)
+							if (3)
 								playsound(src, 'sound/effects/bang.ogg', 45, 1)
-								if(prob(50))
+								if (prob(50))
 									playsound(src, 'sound/effects/bang.ogg', 45, 1)
 									shake_animation()
 								else
 									shake_animation(5)
-							if(4)
+							if (4)
 								playsound(src, 'sound/effects/clang.ogg', 45, 1)
 								shake_animation(5)
-							if(5)
+							if (5)
 								playsound(src, 'sound/weapons/smash.ogg', 50, 1)
-								if(prob(50))
+								if (prob(50))
 									playsound(src, 'sound/weapons/smash.ogg', 50, 1)
 									shake_animation(9)
 								else
 									shake_animation()
 
 
-			if(M.stat == DEAD)
-				if(round_is_spooky())
-					if(prob(50))
+			if (M.stat == DEAD)
+				if (round_is_spooky())
+					if (prob(50))
 						playsound(src, 'sound/effects/ghost.ogg', 10, 5)
 					else
 						playsound(src, 'sound/effects/ghost2.ogg', 10, 5)
@@ -409,7 +409,7 @@
 	throwpass = 1
 
 /obj/structure/c_tray/Destroy()
-	if(connected && connected.connected == src)
+	if (connected && connected.connected == src)
 		connected.connected = null
 	connected = null
 	return ..()
@@ -450,7 +450,7 @@
 	return
 
 /obj/machinery/button/crematorium/activate(mob/user)
-	if(operating)
+	if (operating)
 		return
 	for(var/obj/structure/crematorium/C in range())
 		if (C.id == id_tag)

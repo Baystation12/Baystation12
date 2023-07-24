@@ -47,7 +47,7 @@
 /obj/item/gun/magnetic/railgun/use_ammo()
 	var/obj/item/rcd_ammo/ammo = loaded
 	ammo.remaining--
-	if(ammo.remaining <= 0)
+	if (ammo.remaining <= 0)
 		spawn(3)
 			playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
 		out_of_ammo()
@@ -82,7 +82,7 @@
 
 /obj/item/gun/magnetic/railgun/tcc/show_ammo(mob/user)
 	var/obj/item/stack/material/rods/ammo = loaded
-	if(istype(ammo))
+	if (istype(ammo))
 		to_chat(user, SPAN_NOTICE("It has [ammo.amount] shots loaded."))
 
 /obj/item/gun/magnetic/railgun/tcc/check_ammo()
@@ -99,7 +99,7 @@
 /obj/item/gun/magnetic/railgun/tcc/use_ammo()
 	var/obj/item/stack/material/rods/ammo = loaded
 	ammo.use(1)
-	if(!istype(ammo))
+	if (!istype(ammo))
 		out_of_ammo()
 
 /obj/item/gun/magnetic/railgun/automatic // Adminspawn only, this shit is absurd.
@@ -125,7 +125,7 @@
 
 /obj/item/gun/magnetic/railgun/automatic/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
+	if (distance <= 1)
 		to_chat(user, SPAN_NOTICE("Someone has scratched <i>Ultima Ratio Regum</i> onto the side of the barrel."))
 
 /obj/item/gun/magnetic/railgun/automatic/mmi
