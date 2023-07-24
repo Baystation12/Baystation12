@@ -3,7 +3,7 @@
 /proc/get_atom_on_turf(atom/movable/M)
 	RETURN_TYPE(/atom)
 	var/atom/mloc = M
-	while(mloc && mloc.loc && !isturf(mloc.loc))
+	while (mloc && mloc.loc && !isturf(mloc.loc))
 		mloc = mloc.loc
 	return mloc
 

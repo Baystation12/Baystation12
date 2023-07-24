@@ -757,7 +757,7 @@
 		O.show_message(message,2,deaf_message,1)
 
 /atom/movable/proc/dropInto(atom/destination)
-	while(istype(destination))
+	while (istype(destination))
 		var/atom/drop_destination = destination.onDropInto(src)
 		if (!istype(drop_destination) || drop_destination == destination)
 			return forceMove(destination)

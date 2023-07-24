@@ -14,7 +14,7 @@
 
 		create_deepmaint_ladder_connection()
 
-	while(--attempts > 0)
+	while (--attempts > 0)
 
 	if (length(spawned_ladders) == 0)
 		log_debug("Failed to spawn any ladders for deepmaint event. Aborting.")

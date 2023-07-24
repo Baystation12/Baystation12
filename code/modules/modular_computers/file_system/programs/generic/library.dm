@@ -42,7 +42,7 @@ The answer was five and a half years -ZeroBits
 			var/DBQuery/query = dbcon_old.NewQuery("SELECT id, author, title, category FROM library ORDER BY "+sanitizeSQL(sort_by))
 			query.Execute()
 
-			while(query.NextRow())
+			while (query.NextRow())
 				all_entries.Add(list(list(
 				"id" = query.item[1],
 				"author" = query.item[2],
@@ -180,7 +180,7 @@ The answer was five and a half years -ZeroBits
 	var/DBQuery/query = dbcon_old.NewQuery("SELECT * FROM library WHERE id=[sqlid]")
 	query.Execute()
 
-	while(query.NextRow())
+	while (query.NextRow())
 		current_book = list(
 			"id" = query.item[1],
 			"author" = query.item[2],

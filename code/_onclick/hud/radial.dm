@@ -134,7 +134,7 @@ var/global/list/radial_menus = list()
 	page_data = list(null)
 	var/list/current = list()
 	var/list/choices_left = choices.Copy()
-	while(length(choices_left))
+	while (length(choices_left))
 		if (length(current) == max_elements)
 			page_data[page] = current
 			page++

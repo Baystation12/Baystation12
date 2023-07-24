@@ -110,7 +110,7 @@
 					alert(user, "The selected key is already the default key for another prefix.", "Error", "Ok")
 				else
 					return TOPIC_REFRESH
-		while(TRUE)
+		while (TRUE)
 
 	else if (href_list["reset_prefix"])
 		var/singleton/prefix/prefix_instance = locate(href_list["reset_prefix"])

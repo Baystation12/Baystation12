@@ -292,7 +292,7 @@
 	query.Execute()
 	var/sql_id = 0
 	player_age = 0	// New players won't have an entry so knowing we have a connection we set this to zero to be updated if their is a record.
-	while(query.NextRow())
+	while (query.NextRow())
 		sql_id = query.item[1]
 		player_age = text2num(query.item[2])
 		break
@@ -300,14 +300,14 @@
 	var/DBQuery/query_ip = dbcon.NewQuery("SELECT ckey FROM erro_player WHERE ip = '[address]'")
 	query_ip.Execute()
 	related_accounts_ip = ""
-	while(query_ip.NextRow())
+	while (query_ip.NextRow())
 		related_accounts_ip += "[query_ip.item[1]], "
 		break
 
 	var/DBQuery/query_cid = dbcon.NewQuery("SELECT ckey FROM erro_player WHERE computerid = '[computer_id]'")
 	query_cid.Execute()
 	related_accounts_cid = ""
-	while(query_cid.NextRow())
+	while (query_cid.NextRow())
 		related_accounts_cid += "[query_cid.item[1]], "
 		break
 

@@ -109,7 +109,7 @@ var/global/datum/repository/crew/crew_repository = new()
 	return check_queue(modifiers_of_this_priority, H, C, pos, crew_data)
 
 /datum/repository/crew/proc/check_queue(list/modifiers_of_this_priority, H, C, pos, crew_data)
-	while(length(modifiers_of_this_priority))
+	while (length(modifiers_of_this_priority))
 		var/crew_sensor_modifier/pcsm = pick(modifiers_of_this_priority)
 		modifiers_of_this_priority -= pcsm
 		if (pcsm.may_process_crew_data(H, C, pos))

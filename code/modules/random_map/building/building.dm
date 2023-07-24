@@ -47,7 +47,7 @@
 		possible_doors -= placing_door
 		target_map.map[placing_door] = DOOR_CHAR
 		// Keep placing doors until we get bored or lose interest.
-		while(possible_doors && !prob(30))
+		while (possible_doors && !prob(30))
 			placing_door = pick(possible_doors)
 			possible_doors -= placing_door
 			target_map.map[placing_door] = DOOR_CHAR

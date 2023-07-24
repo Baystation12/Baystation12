@@ -245,7 +245,7 @@
 		open_turfs |= origin_turf
 
 		// Flood fill to get affected turfs.
-		while(length(open_turfs))
+		while (length(open_turfs))
 			var/turf/T = pick(open_turfs)
 			open_turfs -= T
 			closed_turfs |= T

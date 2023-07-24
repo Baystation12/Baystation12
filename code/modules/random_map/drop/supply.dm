@@ -46,21 +46,21 @@
 
 		choice = alert("Do you wish to add mobs?",,"No","Yes")
 		if (choice == "Yes")
-			while(1)
+			while (1)
 				var/adding_loot_type = input("Select a new loot path. Cancel to finish.", "Loot Selection", null) as null|anything in typesof(/mob/living)
 				if (!adding_loot_type)
 					break
 				chosen_loot_types |= adding_loot_type
 		choice = alert("Do you wish to add structures or machines?",,"No","Yes")
 		if (choice == "Yes")
-			while(1)
+			while (1)
 				var/adding_loot_type = input("Select a new loot path. Cancel to finish.", "Loot Selection", null) as null|anything in typesof(/obj/structure) + typesof(/obj/machinery)
 				if (!adding_loot_type)
 					break
 				chosen_loot_types |= adding_loot_type
 		choice = alert("Do you wish to add any items?",,"No","Yes")
 		if (choice == "Yes")
-			while(1)
+			while (1)
 				var/adding_loot_type = input("Select a new loot path. Cancel to finish.", "Loot Selection", null) as null|anything in typesof(/obj/item)
 				if (!adding_loot_type)
 					break
@@ -68,7 +68,7 @@
 
 		choice = alert("Do you wish to add ABSOLUTELY ANYTHING ELSE? (you really shouldn't need to)",,"No","Yes")
 		if (choice == "Yes")
-			while(1)
+			while (1)
 				var/adding_loot_type = input("Select a new loot path. Cancel to finish.", "Loot Selection", null) as null|anything in typesof(/atom/movable)
 				if (!adding_loot_type)
 					break

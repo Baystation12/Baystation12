@@ -18,7 +18,7 @@ SUBSYSTEM_DEF(radiation)
 		current_res_cache = resistance_cache.Copy()
 		listeners = GLOB.alive_mobs.Copy()
 
-	while(length(current_sources))
+	while (length(current_sources))
 		var/datum/radiation_source/S = current_sources[length(current_sources)]
 		LIST_DEC(current_sources)
 
@@ -29,7 +29,7 @@ SUBSYSTEM_DEF(radiation)
 		if (MC_TICK_CHECK)
 			return
 
-	while(length(current_res_cache))
+	while (length(current_res_cache))
 		var/turf/T = current_res_cache[length(current_res_cache)]
 		LIST_DEC(current_res_cache)
 
@@ -43,7 +43,7 @@ SUBSYSTEM_DEF(radiation)
 	if (!length(sources))
 		listeners.Cut()
 
-	while(length(listeners))
+	while (length(listeners))
 		var/atom/A = listeners[length(listeners)]
 		LIST_DEC(listeners)
 
@@ -91,7 +91,7 @@ SUBSYSTEM_DEF(radiation)
 		// Okay, now ray trace to find resistence!
 		var/turf/origin = source.source_turf
 		var/working = source.rad_power
-		while(origin != T)
+		while (origin != T)
 			origin = get_step_towards(origin, T) //Raytracing
 			if (!resistance_cache[origin]) //Only get the resistance if we don't already know it.
 				origin.calc_rad_resistance()

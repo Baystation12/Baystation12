@@ -220,7 +220,7 @@
 
 	pending += location
 
-	while(length(pending))
+	while (length(pending))
 		for (var/turf/current in pending)
 			for (var/D in GLOB.cardinal)
 				var/turf/target = get_step(current, D)

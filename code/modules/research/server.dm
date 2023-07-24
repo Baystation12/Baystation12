@@ -103,7 +103,7 @@
 
 	for (var/obj/machinery/r_n_d/server/S in no_id_servers)
 		var/num = 1
-		while(!S.server_id)
+		while (!S.server_id)
 			if (num in server_ids)
 				num++
 			else

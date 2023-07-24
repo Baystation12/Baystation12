@@ -28,7 +28,7 @@ SUBSYSTEM_DEF(processing)
 	var/wait = src.wait
 	var/times_fired = src.times_fired
 
-	while(length(current_run))
+	while (length(current_run))
 		var/datum/thing = current_run[length(current_run)]
 		LIST_DEC(current_run)
 		if (QDELETED(thing) || (call(thing, process_proc)(wait, times_fired, src) == PROCESS_KILL))

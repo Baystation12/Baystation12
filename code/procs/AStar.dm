@@ -69,14 +69,14 @@ length to avoid portals or something i guess?? Not that they're counted right no
 	if (!start)
 		return 0
 	open.Enqueue(new /PathNode(start, null, 0, call(start, dist)(end), 0))
-	while(!open.IsEmpty() && !path)
+	while (!open.IsEmpty() && !path)
 		var/PathNode/current = open.Dequeue()
 		closed.Add(current.position)
 		if (current.position == end || call(current.position, dist)(end) <= min_target_dist)
 			path = new /list(current.nodes_traversed + 1)
 			path[length(path)] = current.position
 			var/index = length(path) - 1
-			while(current.previous_node)
+			while (current.previous_node)
 				current = current.previous_node
 				path[index--] = current.position
 			break

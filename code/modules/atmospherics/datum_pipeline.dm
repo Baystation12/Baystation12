@@ -63,7 +63,7 @@
 	if (base.leaking)
 		leaks |= base
 
-	while(length(possible_expansions)>0)
+	while (length(possible_expansions)>0)
 		for (var/obj/machinery/atmospherics/pipe/borderline in possible_expansions)
 
 			var/list/result = borderline.pipeline_expansion()

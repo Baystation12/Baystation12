@@ -188,7 +188,7 @@
 			user.forceMove(src)
 			showOptions(user)
 			var/warning = 0
-			while(user.loc == src)
+			while (user.loc == src)
 				user.take_organ_damage(0, 2)
 				if (user.getFireLoss() > 50)
 					to_chat(user, SPAN_DANGER("Your body can't handle the heat anymore!"))
@@ -337,7 +337,7 @@
 		if (O.key == tmpkey)
 			soul = O
 			break
-	while(user)
+	while (user)
 		if (user.stat == DEAD)
 			return
 		if (user.key)
@@ -450,7 +450,7 @@
 	for (var/mob/living/M in cultists)
 		M.say("Barhah hra zar[pick("'","`")]garis!")
 
-	while(victim && victim.loc == T && victim.stat != DEAD)
+	while (victim && victim.loc == T && victim.stat != DEAD)
 		var/list/mob/living/casters = get_cultists()
 		if (length(casters) < 3)
 			break
@@ -579,7 +579,7 @@
 			damaged += I
 	if (length(damaged))
 		statuses += "you feel pain inside for a moment that passes quickly"
-		while(charges && length(damaged))
+		while (charges && length(damaged))
 			var/obj/item/organ/fix = pick(damaged)
 			fix.damage = max(0, fix.damage - min(charges, 1))
 			charges = max(charges - 1, 0)
@@ -750,7 +750,7 @@
 
 	var/list/mob/living/previous = list()
 	var/list/mob/living/current = list()
-	while(length(cultists) >= 3)
+	while (length(cultists) >= 3)
 		cultists = get_cultists()
 		for (var/mob/living/carbon/M in viewers(src))
 			if (iscultist(M))
@@ -794,7 +794,7 @@
 
 	var/area/A = get_area(src)
 	command_announcement.Announce("High levels of bluespace interference detected at \the [A]. Suspected wormhole forming. Investigate it immediately.")
-	while(length(cultists) > 4 || the_end_comes)
+	while (length(cultists) > 4 || the_end_comes)
 		cultists = get_cultists()
 		if (length(cultists) > 8)
 			++the_end_comes

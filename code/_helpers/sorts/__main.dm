@@ -71,7 +71,7 @@ var/global/datum/sortInstance/sortInstance = new()
 		start += runLen
 		remaining -= runLen
 
-	while(remaining > 0)
+	while (remaining > 0)
 
 
 		//Merge all remaining runs to complete sort
@@ -113,7 +113,7 @@ start	the index of the first element in the range that is	not already known to b
 
 		//[lo, left) elements <= pivot < [right, start) elements
 		//in other words, find where the pivot element should go using bisection search
-		while(left < right)
+		while (left < right)
 			var/mid = SHIFTR(left + right, 1)	//round((left+right)/2)
 			if (call(cmp)(fetchElement(L,mid), pivot) > 0)
 				right = mid
@@ -146,7 +146,7 @@ reverse a descending sequence without violating stability.
 	var/current = fetchElement(L,runHi++)
 
 	if (call(cmp)(current, last) < 0)
-		while(runHi < hi)
+		while (runHi < hi)
 			last = current
 			current = fetchElement(L,runHi)
 			if (call(cmp)(current, last) >= 0)
@@ -154,7 +154,7 @@ reverse a descending sequence without violating stability.
 			++runHi
 		reverseRange(L, lo, runHi)
 	else
-		while(runHi < hi)
+		while (runHi < hi)
 			last = current
 			current = fetchElement(L,runHi)
 			if (call(cmp)(current, last) < 0)
@@ -168,7 +168,7 @@ reverse a descending sequence without violating stability.
 /datum/sortInstance/proc/minRunLength(n)
 	//ASSERT(n >= 0)
 	var/r = 0	//becomes 1 if any bits are shifted off
-	while(n >= MIN_MERGE)
+	while (n >= MIN_MERGE)
 		r |= (n & 1)
 		n = SHIFTR(n, 1)
 	return n + r
@@ -179,7 +179,7 @@ reverse a descending sequence without violating stability.
 //This method is called each time a new run is pushed onto the stack.
 //So the invariants are guaranteed to hold for i<stackSize upon entry to the method
 /datum/sortInstance/proc/mergeCollapse()
-	while(length(runBases) >= 2)
+	while (length(runBases) >= 2)
 		var/n = length(runBases) - 1
 		if (n > 1 && runLens[n-1] <= runLens[n] + runLens[n+1])
 			if (runLens[n-1] < runLens[n+1])
@@ -194,7 +194,7 @@ reverse a descending sequence without violating stability.
 //Merges all runs on the stack until only one remains.
 //Called only once, to finalise the sort
 /datum/sortInstance/proc/mergeForceCollapse()
-	while(length(runBases) >= 2)
+	while (length(runBases) >= 2)
 		var/n = length(runBases) - 1
 		if (n > 1 && runLens[n-1] < runLens[n+1])
 			--n
@@ -265,7 +265,7 @@ reverse a descending sequence without violating stability.
 	var/offset = 1
 	if (call(cmp)(key, fetchElement(L,base+hint)) > 0)
 		var/maxOffset = len - hint
-		while(offset < maxOffset && call(cmp)(key, fetchElement(L,base+hint+offset)) > 0)
+		while (offset < maxOffset && call(cmp)(key, fetchElement(L,base+hint+offset)) > 0)
 			lastOffset = offset
 			offset = SHIFTL(offset, 1) + 1
 
@@ -277,7 +277,7 @@ reverse a descending sequence without violating stability.
 
 	else
 		var/maxOffset = hint + 1
-		while(offset < maxOffset && call(cmp)(key, fetchElement(L,base+hint-offset)) <= 0)
+		while (offset < maxOffset && call(cmp)(key, fetchElement(L,base+hint-offset)) <= 0)
 			lastOffset = offset
 			offset = SHIFTL(offset, 1) + 1
 
@@ -293,7 +293,7 @@ reverse a descending sequence without violating stability.
 	//Now L[base+lastOffset] < key <= L[base+offset], so key belongs somewhere to the right of lastOffset but no farther than
 	//offset. Do a binary search with invariant L[base+lastOffset-1] < key <= L[base+offset]
 	++lastOffset
-	while(lastOffset < offset)
+	while (lastOffset < offset)
 		var/m = lastOffset + SHIFTR(offset - lastOffset, 1)
 
 		if (call(cmp)(key, fetchElement(L,base+m)) > 0)
@@ -324,7 +324,7 @@ reverse a descending sequence without violating stability.
 	var/lastOffset = 0
 	if (call(cmp)(key, fetchElement(L,base+hint)) < 0)	//key <= L[base+hint]
 		var/maxOffset = hint + 1	//therefore we want to insert somewhere in the range [base,base+hint] = [base+,base+(hint+1))
-		while(offset < maxOffset && call(cmp)(key, fetchElement(L,base+hint-offset)) < 0)	//we are iterating backwards
+		while (offset < maxOffset && call(cmp)(key, fetchElement(L,base+hint-offset)) < 0)	//we are iterating backwards
 			lastOffset = offset
 			offset = SHIFTL(offset, 1) + 1	//1 3 7 15
 			//if (offset <= 0)	//int overflow, not an issue here since we are using floats
@@ -339,7 +339,7 @@ reverse a descending sequence without violating stability.
 
 	else	//key > L[base+hint]
 		var/maxOffset = len - hint	//therefore we want to insert somewhere in the range (base+hint,base+len) = [base+hint+1, base+hint+(len-hint))
-		while(offset < maxOffset && call(cmp)(key, fetchElement(L,base+hint+offset)) >= 0)
+		while (offset < maxOffset && call(cmp)(key, fetchElement(L,base+hint+offset)) >= 0)
 			lastOffset = offset
 			offset = SHIFTL(offset, 1) + 1
 			//if (offset <= 0)	//int overflow, not an issue here since we are using floats
@@ -354,7 +354,7 @@ reverse a descending sequence without violating stability.
 	//ASSERT(-1 <= lastOffset && lastOffset < offset && offset <= len)
 
 	++lastOffset
-	while(lastOffset < offset)
+	while (lastOffset < offset)
 		var/m = lastOffset + SHIFTR(offset - lastOffset, 1)
 
 		if (call(cmp)(key, fetchElement(L,base+m)) < 0)	//key <= L[base+m]
@@ -390,7 +390,7 @@ reverse a descending sequence without violating stability.
 	--len2
 
 	outer:
-		while(1)
+		while (1)
 			var/count1 = 0	//# of times in a row that first run won
 			var/count2 = 0	//	"	"	"	"	"	"  second run won
 
@@ -416,7 +416,7 @@ reverse a descending sequence without violating stability.
 					if (--len1 == 1)
 						break outer
 
-			while((count1 | count2) < minGallop)
+			while ((count1 | count2) < minGallop)
 
 
 			//one run is winning consistently so galloping may provide huge benifits
@@ -455,7 +455,7 @@ reverse a descending sequence without violating stability.
 
 				--minGallop
 
-			while((count1|count2) > MIN_GALLOP)
+			while ((count1|count2) > MIN_GALLOP)
 
 			if (minGallop < 0)
 				minGallop = 0
@@ -490,7 +490,7 @@ reverse a descending sequence without violating stability.
 	--len1
 
 	outer:
-		while(1)
+		while (1)
 			var/count1 = 0	//# of times in a row that first run won
 			var/count2 = 0	//	"	"	"	"	"	"  second run won
 
@@ -515,7 +515,7 @@ reverse a descending sequence without violating stability.
 
 					if (len2 == 1)
 						break outer
-			while((count1 | count2) < minGallop)
+			while ((count1 | count2) < minGallop)
 
 			//one run is winning consistently so galloping may provide huge benifits
 			//so try galloping, until such time as the run is no longer consistently winning
@@ -554,7 +554,7 @@ reverse a descending sequence without violating stability.
 					break outer
 
 				--minGallop
-			while((count1|count2) > MIN_GALLOP)
+			while ((count1|count2) > MIN_GALLOP)
 
 			if (minGallop < 0)
 				minGallop = 0
@@ -596,9 +596,9 @@ reverse a descending sequence without violating stability.
 		start += runLen
 		remaining -= runLen
 
-	while(remaining > 0)
+	while (remaining > 0)
 
-	while(length(runBases) >= 2)
+	while (length(runBases) >= 2)
 		var/n = length(runBases) - 1
 		if (n > 1 && runLens[n-1] <= runLens[n] + runLens[n+1])
 			if (runLens[n-1] < runLens[n+1])
@@ -609,7 +609,7 @@ reverse a descending sequence without violating stability.
 		else
 			break	//Invariant is established
 
-	while(length(runBases) >= 2)
+	while (length(runBases) >= 2)
 		var/n = length(runBases) - 1
 		if (n > 1 && runLens[n-1] < runLens[n+1])
 			--n
@@ -627,7 +627,7 @@ reverse a descending sequence without violating stability.
 	var/val1 = fetchElement(L,cursor1)
 	var/val2 = fetchElement(L,cursor2)
 
-	while(1)
+	while (1)
 		if (call(cmp)(val1,val2) < 0)
 			if (++cursor1 >= end1)
 				break

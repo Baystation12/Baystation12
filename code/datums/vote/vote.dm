@@ -69,7 +69,7 @@
 	result = list()
 	var/list/remaining_choices = choices.Copy()
 	var/list/remaining_votes = votes.Copy()
-	while(length(result) < result_length)
+	while (length(result) < result_length)
 		remaining_choices = shuffle(remaining_choices)
 		sortTim(remaining_choices, /proc/cmp_numeric_dsc, TRUE)
 		if (!length(remaining_votes) || !length(remaining_choices))  // we ran out of options or votes, you get what we have

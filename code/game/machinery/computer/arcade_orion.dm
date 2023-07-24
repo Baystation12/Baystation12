@@ -372,7 +372,7 @@
 				for (var/i=0;i<num_traitors;i++)
 					traitors += pick((settlers-traitors)-settlers[1])
 				var/list/nontraitors = settlers-traitors
-				while(length(nontraitors) && length(traitors))
+				while (length(nontraitors) && length(traitors))
 					if (prob(50))
 						var/t = rand(1,length(traitors))
 						remove_settler(t,"was slain like the traitorous scum they were!")

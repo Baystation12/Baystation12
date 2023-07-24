@@ -71,7 +71,7 @@
 			display_msg = pick("grows dull!","fades in intensity!","suddenly becomes very still!","suddenly becomes very quiet!")
 
 		var/atom/toplevelholder = holder
-		while(!isnull(toplevelholder.loc) && !istype(toplevelholder.loc, /turf))
+		while (!isnull(toplevelholder.loc) && !istype(toplevelholder.loc, /turf))
 			toplevelholder = toplevelholder.loc
 		toplevelholder.visible_message(SPAN_WARNING("[icon2html(toplevelholder, viewers(get_turf(toplevelholder)))] [toplevelholder] [display_msg]"))
 

@@ -152,7 +152,7 @@
 			if (failed)
 				var/list/other_atoms = orange(1, A)
 				A = null
-				while(LAZYLEN(other_atoms))
+				while (LAZYLEN(other_atoms))
 					var/atom/picked = pick_n_take(other_atoms)
 					if (istype(picked) && picked.simulated)
 						A = picked

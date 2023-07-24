@@ -174,7 +174,7 @@
 
 	var/DBQuery/query = dbcon.NewQuery(sql)
 	query.Execute()
-	while(query.NextRow())
+	while (query.NextRow())
 		ban_id = query.item[1]
 		ban_number++;
 
@@ -269,7 +269,7 @@
 	var/pckey
 	var/DBQuery/query = dbcon.NewQuery(sql)
 	query.Execute()
-	while(query.NextRow())
+	while (query.NextRow())
 		pckey = query.item[1]
 		ban_number++;
 
@@ -448,7 +448,7 @@
 
 			var/now = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss") // MUST BE the same format as SQL gives us the dates in, and MUST be least to most specific (i.e. year, month, day not day, month, year)
 
-			while(select_query.NextRow())
+			while (select_query.NextRow())
 				var/banid = select_query.item[1]
 				var/bantime = select_query.item[2]
 				var/bantype  = select_query.item[3]

@@ -50,7 +50,7 @@
 
 		query.Execute()
 
-		while(query.NextRow())
+		while (query.NextRow())
 			var/pckey = query.item[1]
 			//var/pip = query.item[2]
 			//var/pcid = query.item[3]

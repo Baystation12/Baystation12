@@ -255,7 +255,7 @@
 	else
 		slot_num = slot_start + 1
 
-	while(slot_start != slot_num) //If we wrap around without finding any free slots, just give up.
+	while (slot_start != slot_num) //If we wrap around without finding any free slots, just give up.
 		if (module_active(slot_num))
 			select_module(slot_num)
 			return

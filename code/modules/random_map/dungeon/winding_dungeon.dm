@@ -94,7 +94,7 @@
 	logging("Attempting to add [num_of_loot] # of loot")
 	var/sanity = 0
 	if ((loot_common && length(loot_common)) || (loot_uncommon && length(loot_uncommon)) || (loot_rare && length(loot_rare))) //no monsters no problem
-		while(length(rooms) && num_of_loot > 0)
+		while (length(rooms) && num_of_loot > 0)
 			if (!priority_process)
 				sleep(-1)
 			var/datum/room/R = pick(rooms)
@@ -119,7 +119,7 @@
 	var/num_of_monsters = round(limit_x * limit_y * monster_multiplier)
 	logging("Attempting to add [num_of_monsters] # of monsters")
 
-	while(num_of_monsters > 0)
+	while (num_of_monsters > 0)
 		if (!priority_process)
 			sleep(-1)
 		if (!monster_available || !length(monster_available))

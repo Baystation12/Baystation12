@@ -27,7 +27,7 @@
 			continue
 		var/list/to_search = list(C)
 		var/list/searched = list()
-		while(length(to_search))
+		while (length(to_search))
 			var/obj/structure/cable/next = to_search[length(to_search)]
 			LIST_DEC(to_search)
 			searched += next

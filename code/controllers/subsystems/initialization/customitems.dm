@@ -24,7 +24,7 @@ SUBSYSTEM_DEF(customitems)
 	var/dir_count = -1
 	var/item_count = 0
 	var/list/directories_to_check = list(CUSTOM_ITEM_CONFIG)
-	while(length(directories_to_check))
+	while (length(directories_to_check))
 		var/checkdir = directories_to_check[1]
 		directories_to_check -= checkdir
 		if (checkdir == "[CUSTOM_ITEM_CONFIG]examples/")

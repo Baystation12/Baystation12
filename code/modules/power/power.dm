@@ -198,7 +198,7 @@
 
 	worklist+=O //start propagating from the passed object
 
-	while(index<=length(worklist)) //until we've exhausted all power objects
+	while (index<=length(worklist)) //until we've exhausted all power objects
 		P = worklist[index] //get the next power object found
 		index++
 

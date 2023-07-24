@@ -163,7 +163,7 @@
 			C.reagents.trans_to(container, amount*mult)
 			var/contaminants_left = rand(0, max(SKILL_TRAINED - user.get_skill_value(core_skill), 0)) * can_contaminate
 			var/choices = cartridges.Copy()
-			while(length(choices) && contaminants_left)
+			while (length(choices) && contaminants_left)
 				var/chosen_label = pick_n_take(choices)
 				var/obj/item/reagent_containers/chem_disp_cartridge/choice = cartridges[chosen_label]
 				if (choice == C)

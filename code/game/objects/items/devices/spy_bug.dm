@@ -117,14 +117,14 @@
 	view_camera(user)
 
 	operating = 1
-	while(selected_camera && Adjacent(user))
+	while (selected_camera && Adjacent(user))
 		selected_camera = input("Select camera bug to view.") as null|anything in cameras
 	selected_camera = null
 	operating = 0
 
 /obj/item/device/spy_monitor/proc/view_camera(mob/user)
 	spawn(0)
-		while(selected_camera && Adjacent(user))
+		while (selected_camera && Adjacent(user))
 			var/turf/T = get_turf(selected_camera)
 			if (!T || !is_on_same_plane_or_station(T.z, user.z) || !selected_camera.can_use())
 				user.unset_machine()

@@ -212,7 +212,7 @@
 /obj/machinery/organ_printer/flesh/dismantle()
 	var/turf/T = get_turf(src)
 	if (T)
-		while(stored_matter >= amount_list[/obj/item/reagent_containers/food/snacks/meat])
+		while (stored_matter >= amount_list[/obj/item/reagent_containers/food/snacks/meat])
 			stored_matter -= amount_list[/obj/item/reagent_containers/food/snacks/meat]
 			new /obj/item/reagent_containers/food/snacks/meat(T)
 	return ..()

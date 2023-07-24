@@ -55,7 +55,7 @@
 	var/heal = (amount < 0)
 	amount = abs(amount)
 	var/list/pick_organs = organs.Copy()
-	while(amount > 0 && length(pick_organs))
+	while (amount > 0 && length(pick_organs))
 		var/obj/item/organ/external/E = pick(pick_organs)
 		pick_organs -= E
 		if (!istype(E))
@@ -132,7 +132,7 @@
 	amount = abs(amount)
 
 	var/list/pick_organs = organs.Copy()
-	while(amount > 0 && length(pick_organs))
+	while (amount > 0 && length(pick_organs))
 		var/obj/item/organ/external/E = pick(pick_organs)
 		pick_organs -= E
 		if (heal)
@@ -321,7 +321,7 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 /mob/living/carbon/human/heal_overall_damage(brute, burn)
 	var/list/obj/item/organ/external/parts = get_damaged_organs(brute,burn)
 
-	while(length(parts) && (brute>0 || burn>0) )
+	while (length(parts) && (brute>0 || burn>0) )
 		var/obj/item/organ/external/picked = pick(parts)
 
 		var/brute_was = picked.brute_dam

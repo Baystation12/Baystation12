@@ -74,7 +74,7 @@ english_only - whether to use traditional english letters only (for use in NanoU
 	var/lentext = 0
 	if (input_size < 20) // Short messages get distorted too. Bit hacksy.
 		distortion += (20-input_size)/2
-	while(lentext <= input_size)
+	while (lentext <= input_size)
 		var/newletter=copytext_char(message, lentext, lentext+1)
 		if (!prob(distortion_chance))
 			new_message += newletter

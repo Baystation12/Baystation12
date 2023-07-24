@@ -9,7 +9,7 @@ var/global/explosion_in_progress = 0
 
 /proc/explosion_rec(turf/epicenter, power, shaped)
 	var/loopbreak = 0
-	while(explosion_in_progress)
+	while (explosion_in_progress)
 		if (loopbreak >= 15) return
 		sleep(10)
 		loopbreak++

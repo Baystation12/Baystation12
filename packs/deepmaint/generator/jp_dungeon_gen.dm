@@ -153,7 +153,7 @@
 	var/counter = num
 	var/k = null
 	k = get_step(t,NORTH)
-	while(counter > 0)
+	while (counter > 0)
 		if (k)
 			k = get_step(k,NORTH)
 			counter--
@@ -164,7 +164,7 @@
 		.+=k
 	counter = num
 	k = get_step(t,SOUTH)
-	while(counter > 0)
+	while (counter > 0)
 		if (k)
 			k = get_step(k,SOUTH)
 			counter--
@@ -175,7 +175,7 @@
 		.+=k
 	counter = num
 	k = get_step(t,EAST)
-	while(counter > 0)
+	while (counter > 0)
 		if (k)
 			k = get_step(k,EAST)
 			counter--
@@ -186,7 +186,7 @@
 		.+=k
 	counter = num
 	k = get_step(t,WEST)
-	while(counter > 0)
+	while (counter > 0)
 		if (k)
 			k = get_step(k,WEST)
 			counter--
@@ -597,7 +597,7 @@
 		if (nextentry.required>0) required+=nextentry
 
 	var/rooms_placed = 0
-	while(rooms_placed<numRooms)
+	while (rooms_placed<numRooms)
 		if (numits>maximumIterations)
 			out_error=ERROR_MAX_ITERATIONS_ROOMS
 			break
@@ -654,7 +654,7 @@
 	numits = 0
 	paths = numExtraPaths
 
-	while(length(regions)>1 || paths>0)
+	while (length(regions)>1 || paths>0)
 		if (numits>maximumIterations)
 			if (length(regions)>1) out_error = ERROR_MAX_ITERATIONS_CONNECTIVITY
 			else out_error = ERROR_MAX_ITERATIONS_EXTRAPATHS
@@ -737,7 +737,7 @@
 	var/list/walls = list()
 	var/list/next = list(t)
 
-	while(length(next)>=1)
+	while (length(next)>=1)
 		var/turf/nt = next[length(next)]
 
 		next-=nt
@@ -871,7 +871,7 @@
 
 	if (!length(next)) return list() //We've somehow found a route that can not be continued.
 	var/check_tick_in = 3
-	while(1)
+	while (1)
 		check_tick_in = check_tick_in - 1
 		var/turf/min
 		var/mincost = maxPathLength
@@ -917,7 +917,7 @@
 	var/list/ret = list()
 	ret += GetSquare(end, pathWidth)
 	var/turf/last = end
-	while(1)
+	while (1)
 		if (last==start) break
 		ret+= GetSquare(previous["\ref[last]"], pathWidth)
 		last=previous["\ref[last]"]

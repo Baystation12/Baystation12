@@ -499,7 +499,7 @@ var/global/list/turret_icons
 	if (length(targets) && last_target && (last_target in targets) && target(last_target))
 		return 1
 
-	while(length(targets) > 0)
+	while (length(targets) > 0)
 		var/mob/living/M = pick(targets)
 		targets -= M
 		if (target(M))

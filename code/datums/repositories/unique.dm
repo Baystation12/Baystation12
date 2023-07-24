@@ -66,5 +66,5 @@ var/global/repository/unique/uniqueness_repository = new()
 	else
 		do
 			. = rand(min, max)
-		while(. in ids)
+		while (. in ids)
 		ids += .

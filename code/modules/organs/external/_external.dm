@@ -132,7 +132,7 @@
 		owner.organs -= src
 		owner.organs_by_name[organ_tag] = null
 		owner.organs_by_name -= organ_tag
-		while(null in owner.organs)
+		while (null in owner.organs)
 			owner.organs -= null
 
 	if (autopsy_data)    autopsy_data.Cut()
@@ -281,7 +281,7 @@
 
 /obj/item/organ/external/proc/is_parent_dislocated()
 	var/obj/item/organ/external/O = parent
-	while(O && O.dislocated != -1)
+	while (O && O.dislocated != -1)
 		if (O.dislocated == 1)
 			return 1
 		O = O.parent
@@ -451,7 +451,7 @@ This function completely restores a damaged organ to perfect condition.
 		owner.organs -= src
 		owner.organs_by_name[organ_tag] = null
 		owner.organs_by_name -= organ_tag
-		while(null in owner.organs) owner.organs -= null
+		while (null in owner.organs) owner.organs -= null
 	if (LAZYLEN(children))
 		for (var/obj/item/organ/external/E in children)
 			E.remove_rejuv()
@@ -1132,7 +1132,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 					owner.internal_organs.Remove(thing)
 					qdel(thing)
 
-		while(null in owner.internal_organs)
+		while (null in owner.internal_organs)
 			owner.internal_organs -= null
 
 	CLEAR_FLAGS(status, ORGAN_ARTERY_CUT)

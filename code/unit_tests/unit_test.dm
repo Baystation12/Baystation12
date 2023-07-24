@@ -174,7 +174,7 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 	var/end_unit_tests = world.time + MAX_UNIT_TEST_RUN_TIME
 	do_unit_test(test, end_unit_tests, FALSE)
 	if (test.async)
-		while(!check_unit_test(test, end_unit_tests))
+		while (!check_unit_test(test, end_unit_tests))
 			sleep(20)
 	unit_test_final_message()
 

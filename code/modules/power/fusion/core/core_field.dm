@@ -322,7 +322,7 @@
 		percent_unstable -= a_energy/10000
 		if (percent_unstable < 0)
 			percent_unstable = 0
-	while(energy >= 100)
+	while (energy >= 100)
 		energy -= 100
 		plasma_temperature += 1
 	UpdateVisuals()
@@ -421,7 +421,7 @@
 		//loop through all the reacting reagents, picking out random reactions for them
 		var/list/produced_reactants = new/list
 		var/list/p_react_pool = react_pool.Copy()
-		while(length(p_react_pool))
+		while (length(p_react_pool))
 			//pick one of the unprocessed reacting reagents randomly
 			var/cur_p_react = pick(p_react_pool)
 			p_react_pool.Remove(cur_p_react)
@@ -450,7 +450,7 @@
 			sortTim(possible_reactions, /proc/cmp_fusion_reaction_des)
 
 			//split up the reacting atoms between the possible reactions
-			while(length(possible_reactions))
+			while (length(possible_reactions))
 				var/singleton/fusion_reaction/cur_reaction = possible_reactions[1]
 				possible_reactions.Remove(cur_reaction)
 

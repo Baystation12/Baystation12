@@ -112,7 +112,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	var/i = 1
 	var/max_objectives = pick(2,2,2,2,3,3,3,4)
 	global_objectives = list()
-	while(i<= max_objectives)
+	while (i<= max_objectives)
 		var/list/goals = list("kidnap","loot","salvage")
 		var/goal = pick(goals)
 		var/datum/objective/heist/O

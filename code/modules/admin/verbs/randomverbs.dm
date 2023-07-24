@@ -975,7 +975,7 @@ Ccomp's first proc.
 
 	var/range
 	var/max_power
-	while(booms > 0)
+	while (booms > 0)
 		max_power = prob(45) ? EX_ACT_DEVASTATING : EX_ACT_HEAVY
 		range = rand(8, 13)
 		var/turf/T

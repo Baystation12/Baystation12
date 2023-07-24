@@ -241,7 +241,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/p = 3 - 2 * radius
 
 	. = list()
-	while(y >= x) // only formulate 1/8 of circle
+	while (y >= x) // only formulate 1/8 of circle
 
 		. += LOCATE_COORDS(center.x - x, center.y - y, center.z) //upper left left
 		. += LOCATE_COORDS(center.x - y, center.y - x, center.z) //upper upper left
@@ -534,7 +534,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		x=2*rand()-1
 		y=2*rand()-1
 		rsq=x*x+y*y
-	while(rsq>1 || !rsq)
+	while (rsq>1 || !rsq)
 	return sigma*y*sqrt(-2*log(rsq)/rsq)
 
 //returns random gauss number, rounded to 'roundto'
@@ -569,7 +569,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	if (!current || !target_turf)
 		return 0
 
-	while(current != target_turf)
+	while (current != target_turf)
 		if (steps > length) return 0
 		if (current.opacity) return 0
 		for (var/atom/A in current)
@@ -600,7 +600,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		var/free_tile = null
 		var/breakpoint = 0
 
-		while(!free_tile && breakpoint < 10)
+		while (!free_tile && breakpoint < 10)
 			if (!is_blocked_turf(turf_last1))
 				free_tile = turf_last1
 				break
@@ -844,7 +844,7 @@ GLOBAL_LIST_INIT(duplicate_object_disallowed_vars, list(
 	else return zone
 
 /proc/get(atom/loc, type)
-	while(loc)
+	while (loc)
 		if (istype(loc, type))
 			return loc
 		loc = loc.loc

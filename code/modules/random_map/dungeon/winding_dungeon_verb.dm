@@ -32,7 +32,7 @@
 	var/list/rare
 	var/list/current_list
 	var/mode = "room_theme"
-	while(1)
+	while (1)
 		if (mode == "room_theme")
 			common = list(/datum/room_theme = 10)
 		else
@@ -60,7 +60,7 @@
 				total_types = subtypesof(/mob/living)
 			if ("loot")
 				total_types = subtypesof(/obj/item)
-		while(1)
+		while (1)
 			var/layout = input("Pick an item to add to the current pool. Press cancel to finish.") as null|anything in total_types
 			if (!layout)
 				if (current_list == common && alert("Would you like to add items to the uncommon pool?",,"No","Yes") == "Yes")

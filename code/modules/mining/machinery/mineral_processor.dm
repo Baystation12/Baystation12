@@ -71,7 +71,7 @@
 				result = attempt_smelt(M, sheets_per_tick - sheets)
 
 			sheets += abs(result)
-			while(result < 0)
+			while (result < 0)
 				new /obj/item/ore(output_turf, MATERIAL_WASTE)
 				result++
 

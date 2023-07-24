@@ -162,7 +162,7 @@ Class Procs:
 		var/product = gas_data.condensation_products[g]
 		if (product && air.temperature <= gas_data.condensation_points[g])
 			var/condensation_area = air.group_multiplier
-			while(condensation_area > 0)
+			while (condensation_area > 0)
 				condensation_area--
 				var/turf/flooding = pick(contents)
 				var/condense_amt = min(air.gas[g], rand(3,5))

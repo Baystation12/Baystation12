@@ -47,7 +47,7 @@
 			M.AddMovementHandler(/datum/movement_handler/no_move/toss)
 
 	affecting.Add(AM)
-	while(AM && !stopthrow)
+	while (AM && !stopthrow)
 		if (tiles)
 			if (curtiles >= tiles)
 				break

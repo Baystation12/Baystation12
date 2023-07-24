@@ -280,7 +280,7 @@
 		return
 	var/opentag = 1 //These store the position of < and > respectively.
 	var/closetag = 1
-	while(1)
+	while (1)
 		opentag = findtext(input, "<")
 		closetag = findtext(input, ">")
 		if (closetag && opentag)

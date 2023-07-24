@@ -119,7 +119,7 @@
 		var/descriptor_num = rand(2,4)
 		var/descriptor_count = descriptor_num
 		desc = "A"
-		while(length(descriptors) && descriptor_num > 0)
+		while (length(descriptors) && descriptor_num > 0)
 			var/chosen = pick(descriptors)
 			descriptors -= chosen
 			desc += "[(descriptor_count>1 && descriptor_count!=descriptor_num) ? "," : "" ] [chosen]"

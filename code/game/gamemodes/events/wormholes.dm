@@ -21,7 +21,7 @@
 
 
 			var/i = 1
-			while(TRUE)
+			while (TRUE)
 
 				//we've run into overtime. End the event
 				if (end_time < world.time)

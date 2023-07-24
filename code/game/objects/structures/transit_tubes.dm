@@ -204,7 +204,7 @@
 		if (automatic_launch_time)
 			var/const/wait_step = 5
 			var/i = 0
-			while(i < automatic_launch_time)
+			while (i < automatic_launch_time)
 				sleep(wait_step)
 				i += wait_step
 
@@ -295,7 +295,7 @@
 				current_tube = tube
 				break
 
-		while(current_tube)
+		while (current_tube)
 			next_dir = current_tube.get_exit(dir)
 
 			if (!next_dir)
@@ -344,7 +344,7 @@
 				if (last_delay > 10)
 					break
 
-			while(isturf(loc) && Move(get_step(loc, dir)))
+			while (isturf(loc) && Move(get_step(loc, dir)))
 
 		moving = 0
 

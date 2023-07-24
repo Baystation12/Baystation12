@@ -96,7 +96,7 @@ var/global/can_call_ert
 // Increments the ERT chance automatically, so that the later it is in the round,
 // the more likely an ERT is to be able to be called.
 /proc/increment_ert_chance()
-	while(send_emergency_team == 0) // There is no ERT at the time.
+	while (send_emergency_team == 0) // There is no ERT at the time.
 		var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 		var/index = security_state.all_security_levels.Find(security_state.current_security_level)
 		ert_base_chance += 2**index

@@ -771,7 +771,7 @@
 	var/list/traversed = list(sort) // Avoid self-looping, infinite loops.
 	var/obj/structure/disposalpipe/our_pipe = sort
 	var/current_dir = sort.sortdir
-	while(1)
+	while (1)
 		if (istype(our_pipe, /obj/structure/disposalpipe/trunk))
 			var/obj/structure/disposalpipe/trunk/trunk = our_pipe
 			return trunk.linked

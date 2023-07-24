@@ -89,7 +89,7 @@
 	if (length(resource_field))
 		var/turf/simulated/harvesting = pick(resource_field)
 
-		while(length(resource_field) && !harvesting.resources)
+		while (length(resource_field) && !harvesting.resources)
 			harvesting.has_resources = 0
 			harvesting.resources = null
 			resource_field -= harvesting

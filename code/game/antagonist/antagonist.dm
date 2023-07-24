@@ -211,7 +211,7 @@
 		return 0
 
 	//Grab candidates randomly until we have enough.
-	while(length(candidates) && length(pending_antagonists) < spawn_target)
+	while (length(candidates) && length(pending_antagonists) < spawn_target)
 		var/datum/mind/player = pick(candidates)
 		candidates -= player
 		draft_antagonist(player)

@@ -248,7 +248,7 @@
 	var/locid = 0
 	var/laststart = 1
 	var/textindex = 1
-	while(locid < MAX_FIELDS)
+	while (locid < MAX_FIELDS)
 		var/istart = 0
 		if (links)
 			istart = findtext(info_links, "<span class=\"paper_field\">", laststart)
@@ -336,7 +336,7 @@
 
 	//Count the fields
 	var/laststart = 1
-	while(fields < MAX_FIELDS)
+	while (fields < MAX_FIELDS)
 		var/i = findtext(t, "<span class=\"paper_field\">", laststart)	//</span>
 		if (i==0)
 			break

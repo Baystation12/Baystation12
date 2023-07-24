@@ -199,7 +199,7 @@
 		update_icons()
 		visible_message(SPAN_NOTICE("[src] starts refilling its tank from \the [A]."))
 		busy = 1
-		while(do_after(src, 1 SECOND, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && tank.reagents.total_volume < tank.reagents.maximum_volume)
+		while (do_after(src, 1 SECOND, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && tank.reagents.total_volume < tank.reagents.maximum_volume)
 			tank.reagents.add_reagent(/datum/reagent/water, 100)
 			if (prob(5))
 				playsound(loc, 'sound/effects/slosh.ogg', 25, 1)

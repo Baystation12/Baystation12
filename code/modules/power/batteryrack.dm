@@ -216,7 +216,7 @@
 		cell["percentage"] = round(C.percent(), 0.01)
 		cell_index++
 		cells += list(cell)
-	while(cell_index <= PSU_MAXCELLS)
+	while (cell_index <= PSU_MAXCELLS)
 		var/list/cell[0]
 		cell["slot"] = cell_index
 		cell["used"] = 0

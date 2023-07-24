@@ -63,7 +63,7 @@
 	var/sum = src.worth
 	var/num = 0
 	for (var/i in denominations)
-		while(sum >= i && num < 50)
+		while (sum >= i && num < 50)
 			sum -= i
 			num++
 			. += "spacecash[i]"

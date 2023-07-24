@@ -55,9 +55,9 @@
 	var/i = Seek(A)
 	if (i == 0)
 		return
-	while(i < length(L) && call(cmp)(L[i],L[i+1]) > 0)
+	while (i < length(L) && call(cmp)(L[i],L[i+1]) > 0)
 		L.Swap(i,i+1)
 		i++
-	while(i > 1 && call(cmp)(L[i],L[i-1]) <= 0) //last inserted element being first in case of ties (optimization)
+	while (i > 1 && call(cmp)(L[i],L[i-1]) <= 0) //last inserted element being first in case of ties (optimization)
 		L.Swap(i,i-1)
 		i--

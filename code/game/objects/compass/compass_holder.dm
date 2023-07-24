@@ -76,7 +76,7 @@ var/global/list/angle_step_to_dir = list(
 /obj/compass_holder/proc/get_heading_angle()
 	var/atom/A = loc
 	// Bit of a strange loop - grab the highest atom in our stack that isn't a turf.
-	while(istype(A) && A.loc && !isturf(A.loc))
+	while (istype(A) && A.loc && !isturf(A.loc))
 		A = A.loc
 	if (istype(A) && !isturf(A))
 		. = dir2angle(A.dir)

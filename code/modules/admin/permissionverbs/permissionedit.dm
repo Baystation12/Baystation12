@@ -76,7 +76,7 @@
 
 	var/new_admin = 1
 	var/admin_id
-	while(select_query.NextRow())
+	while (select_query.NextRow())
 		new_admin = 0
 		admin_id = text2num(select_query.item[1])
 
@@ -128,7 +128,7 @@
 
 	var/admin_id
 	var/admin_rights
-	while(select_query.NextRow())
+	while (select_query.NextRow())
 		admin_id = text2num(select_query.item[1])
 		admin_rights = text2num(select_query.item[2])
 

@@ -50,7 +50,7 @@
 	var/happyWithFood = 0
 	var/totalDrained = 0
 
-	while(Victim && stat != 2)
+	while (Victim && stat != 2)
 		if (Adjacent(M))
 			UpdateFeed()
 

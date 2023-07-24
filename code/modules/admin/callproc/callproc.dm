@@ -114,7 +114,7 @@
 	var/done = 0
 	var/current = null
 
-	while(!done)
+	while (!done)
 		if (hastarget && !target)
 			to_chat(usr, "Your callproc target no longer exists.")
 			return CANCEL

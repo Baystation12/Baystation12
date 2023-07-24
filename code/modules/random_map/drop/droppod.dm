@@ -130,7 +130,7 @@
 	// Mobs will not double up; if you want multiple mobs, you
 	// will need multiple drop tiles.
 	if (islist(supplied_drop_types) && length(supplied_drop_types))
-		while(length(supplied_drop_types))
+		while (length(supplied_drop_types))
 			drop = pick(supplied_drop_types)
 			supplied_drop_types -= drop
 			if (istype(drop))

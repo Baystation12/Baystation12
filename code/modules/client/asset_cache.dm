@@ -57,7 +57,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 	var/t = 0
 	var/timeout_time = (ASSET_CACHE_SEND_TIMEOUT * length(client.sending)) + ASSET_CACHE_SEND_TIMEOUT
-	while(client && !client.completed_asset_jobs.Find(job) && t < timeout_time) // Reception is handled in Topic()
+	while (client && !client.completed_asset_jobs.Find(job) && t < timeout_time) // Reception is handled in Topic()
 		sleep(1) // Lock up the caller until this is received.
 		t++
 
@@ -105,7 +105,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 	var/t = 0
 	var/timeout_time = ASSET_CACHE_SEND_TIMEOUT * length(client.sending)
-	while(client && !client.completed_asset_jobs.Find(job) && t < timeout_time) // Reception is handled in Topic()
+	while (client && !client.completed_asset_jobs.Find(job) && t < timeout_time) // Reception is handled in Topic()
 		sleep(1) // Lock up the caller until this is received.
 		t++
 

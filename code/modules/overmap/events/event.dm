@@ -38,7 +38,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 	var/list/selection_turfs = list(origin_turf)
 	candidate_turfs -= origin_turf
 
-	while(length(selection_turfs) && length(selected_turfs) < number_of_turfs)
+	while (length(selection_turfs) && length(selected_turfs) < number_of_turfs)
 		var/selection_turf = pick(selection_turfs)
 		var/random_neighbour = get_random_neighbour(selection_turf, candidate_turfs, continuous, distance_from_origin)
 

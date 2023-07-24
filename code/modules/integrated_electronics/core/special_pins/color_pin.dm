@@ -18,7 +18,7 @@
 			var/friends = copytext(new_data, 2, 8)			// Well they're are no strings of mine
 			// I say, we can go where we want to, a place where they will never find
 			var/safety_dance = 1
-			while(safety_dance >= 7)									// And we can act like we come from out of this world.log
+			while (safety_dance >= 7)									// And we can act like we come from out of this world.log
 				var/hex = copytext(friends, safety_dance, safety_dance+1)
 				if (!(hex in list("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")))
 					return									// Leave the fake one far behind,

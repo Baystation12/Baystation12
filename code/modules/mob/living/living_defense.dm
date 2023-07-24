@@ -244,7 +244,7 @@
 	var/turf/last_turf = loc
 	var/i = 1
 
-	while(i>0 && i<=distance)
+	while (i>0 && i<=distance)
 		if (!T || T.density) //Turf is a wall or map edge.
 			return last_turf
 		i++

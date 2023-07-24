@@ -80,7 +80,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 		return
 	processing = 1
 	spawn(0)
-		while(charge_counter < charge_max || silenced > 0)
+		while (charge_counter < charge_max || silenced > 0)
 			charge_counter = min(charge_max,charge_counter+1)
 			silenced = max(0,silenced-1)
 			sleep(1)
@@ -129,7 +129,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 			after_cast(targets) //generates the sparks, smoke, target messages etc.
 		else
 			break
-	while(time != number_of_channels && do_after(user, time_between_channels, do_flags = (DO_DEFAULT | DO_USER_UNIQUE_ACT) & ~DO_USER_CAN_TURN, incapacitation_flags = INCAPACITATION_KNOCKOUT | INCAPACITATION_FORCELYING | INCAPACITATION_STUNNED))
+	while (time != number_of_channels && do_after(user, time_between_channels, do_flags = (DO_DEFAULT | DO_USER_UNIQUE_ACT) & ~DO_USER_CAN_TURN, incapacitation_flags = INCAPACITATION_KNOCKOUT | INCAPACITATION_FORCELYING | INCAPACITATION_STUNNED))
 	after_spell(targets, user, time) //When we are done with the spell completely.
 
 

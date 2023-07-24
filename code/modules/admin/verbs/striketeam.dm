@@ -41,7 +41,7 @@ var/global/const/commandos_possible = 6 //if more Commandos are needed in the fu
 	alert("This 'mode' will go on until everyone is dead or the installation is destroyed. You may also admin-call the evac shuttle when appropriate. Spawned commandos have internals cameras which are viewable through a monitor inside the Spec. Ops. Office. Assigning the team's detailed task is recommended from there. While you will be able to manually pick the candidates from active ghosts, their assignment in the squad will be random.")
 
 	choice = null
-	while(!choice)
+	while (!choice)
 		choice = sanitize(input(src, "Please specify which mission the strike team shall undertake.", "Specify Mission", ""))
 		if (!choice)
 			if (alert("Error, no mission set. Do you want to exit the setup process?",,"Yes","No")=="Yes")

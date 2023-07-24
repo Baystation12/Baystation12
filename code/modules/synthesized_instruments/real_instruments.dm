@@ -54,7 +54,7 @@
 						return
 					if (cont == "no")
 						break
-			while(length(t) > 2*src.maximum_lines*src.maximum_line_length)
+			while (length(t) > 2*src.maximum_lines*src.maximum_line_length)
 			if (length(t))
 				src.player.song.lines = splittext(t, "\n")
 				if (copytext(src.player.song.lines[1],1,6) == "BPM: ")

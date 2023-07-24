@@ -234,7 +234,7 @@ var/global/list/organ_rel_size = list(
 	var/counter = length_char(phrase)
 	var/newphrase=""
 	var/newletter=""
-	while(counter>=1)
+	while (counter>=1)
 		newletter=copytext_char(phrase,(leng-counter)+1,(leng-counter)+2)
 		if (rand(1,3)==3)
 			if (lowertext(newletter)=="o")	newletter="u"
@@ -259,7 +259,7 @@ var/global/list/organ_rel_size = list(
 	n = length_char(n)//length of the entire word
 	var/p = null
 	p = 1//1 is the start of any word
-	while(p <= n)//while P, which starts at 1 is less or equal to N which is the length.
+	while (p <= n)//while P, which starts at 1 is less or equal to N which is the length.
 		var/n_letter = copytext_char(te, p, p + 1)//copies text from a certain distance. In this case, only one letter at a time.
 		if (prob(80) && (ckey(n_letter) in list("b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z")))
 			if (prob(10))
@@ -633,7 +633,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	var/success = 0
 	var/turf/end
 	var/candidates = L.Copy()
-	while(length(L))
+	while (length(L))
 		attempt = pick(L)
 		success = Move(attempt)
 		if (!success)

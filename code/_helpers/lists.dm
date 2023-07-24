@@ -110,7 +110,7 @@
 //Removes any null entries from the list
 /proc/listclearnulls(list/list)
 	if (istype(list))
-		while(null in list)
+		while (null in list)
 			list -= null
 	return
 
@@ -319,7 +319,7 @@ Checks if a list has the same entries and values as an element of big.
 	var/Li=1
 	var/Ri=1
 	var/list/result = new()
-	while(Li <= length(L) && Ri <= length(R))
+	while (Li <= length(L) && Ri <= length(R))
 		var/client/rL = L[Li]
 		var/client/rR = R[Ri]
 		if (sorttext(rL.ckey, rR.ckey) == order)
@@ -348,7 +348,7 @@ Checks if a list has the same entries and values as an element of big.
 	var/Ri=1
 	var/list/result = new()
 
-	while(Li <= length(L) && Ri <= length(R))
+	while (Li <= length(L) && Ri <= length(R))
 		var/atom/rL = L[Li]
 		var/atom/rR = R[Ri]
 		if (sorttext(rL.name, rR.name) == order)
@@ -381,7 +381,7 @@ Checks if a list has the same entries and values as an element of big.
 	var/Li=1
 	var/Ri=1
 	var/list/result = new()
-	while(Li <= length(L) && Ri <= length(R))
+	while (Li <= length(L) && Ri <= length(R))
 		if (sorttext(L[Li], R[Ri]) < 1)
 			result += R[Ri++]
 		else
@@ -405,7 +405,7 @@ Checks if a list has the same entries and values as an element of big.
 	var/Li=1
 	var/Ri=1
 	var/list/result = new()
-	while(Li <= length(L) && Ri <= length(R))
+	while (Li <= length(L) && Ri <= length(R))
 		if (sorttext(L[Li][key], R[Ri][key]) < 1)
 			// Works around list += list2 merging lists; it's not pretty but it works
 			result += "temp item"
@@ -432,7 +432,7 @@ Checks if a list has the same entries and values as an element of big.
 	var/Li=1
 	var/Ri=1
 	var/list/result = new()
-	while(Li <= length(L) && Ri <= length(R))
+	while (Li <= length(L) && Ri <= length(R))
 		if (sorttext(L[Li], R[Ri]) < 1)
 			result += R&R[Ri++]
 		else
@@ -518,7 +518,7 @@ Checks if a list has the same entries and values as an element of big.
 	var/j = length(L)
 	var/mid
 
-	while(i < j)
+	while (i < j)
 		mid = round((i+j)/2)
 
 		if (call(cmp)(L[mid],A) < 0)
@@ -544,7 +544,7 @@ Checks if a list has the same entries and values as an element of big.
 	var/Li=1
 	var/Ri=1
 	var/list/result = new()
-	while(Li <= length(L) && Ri <= length(R))
+	while (Li <= length(L) && Ri <= length(R))
 		var/LLi = L[Li]
 		var/RRi = R[Ri]
 		var/LLiV = cache[LLi]
@@ -571,7 +571,7 @@ Checks if a list has the same entries and values as an element of big.
 	var/max = length(L) + 1
 	var/Oval = O:dd_SortValue()
 
-	while(1)
+	while (1)
 		var/mid = min+round((max-min)/2)
 
 		if (mid == max)
@@ -767,7 +767,7 @@ Checks if a list has the same entries and values as an element of big.
 			end += length(L) + 1
 
 		--end
-		while(start < end)
+		while (start < end)
 			L.Swap(start++,end--)
 
 	return L

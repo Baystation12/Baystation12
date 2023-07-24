@@ -65,7 +65,7 @@ var/global/jobban_keylist[0]		//to store the keys & ranks
 		var/DBQuery/query = dbcon.NewQuery("SELECT ckey, job FROM erro_ban WHERE bantype = 'JOB_PERMABAN' AND isnull(unbanned)")
 		query.Execute()
 
-		while(query.NextRow())
+		while (query.NextRow())
 			var/ckey = query.item[1]
 			var/job = query.item[2]
 
@@ -75,7 +75,7 @@ var/global/jobban_keylist[0]		//to store the keys & ranks
 		var/DBQuery/query1 = dbcon.NewQuery("SELECT ckey, job FROM erro_ban WHERE bantype = 'JOB_TEMPBAN' AND isnull(unbanned) AND expiration_time > Now()")
 		query1.Execute()
 
-		while(query1.NextRow())
+		while (query1.NextRow())
 			var/ckey = query1.item[1]
 			var/job = query1.item[2]
 

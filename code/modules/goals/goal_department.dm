@@ -11,7 +11,7 @@
 	var/list/possible_goals = goals.Copy()
 	goals.Cut()
 	var/goals_to_pick = min(LAZYLEN(possible_goals), rand(min_goals, max_goals))
-	while(goals_to_pick && LAZYLEN(possible_goals))
+	while (goals_to_pick && LAZYLEN(possible_goals))
 		var/goal = pick_n_take(possible_goals)
 		var/datum/goal/deptgoal = new goal(src)
 		if (deptgoal.is_valid())

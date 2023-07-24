@@ -100,7 +100,7 @@
 	var/scrambled_text = ""
 	var/capitalize = 0
 
-	while(length(scrambled_text) < input_size)
+	while (length(scrambled_text) < input_size)
 		var/next = pick(syllables)
 		if (capitalize)
 			next = capitalize(next)

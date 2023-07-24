@@ -58,7 +58,7 @@
 					temp = copytext(trim_left(temp), 6)	//normal speech
 					virgin = 0
 
-				while(findtext(trim_left(temp), channel_key, 1, 2))	//dept radio again (necessary)
+				while (findtext(trim_left(temp), channel_key, 1, 2))	//dept radio again (necessary)
 					temp = copytext(trim_left(temp), 3)
 
 				var/custom_emote_key = get_prefix_key(/singleton/prefix/custom_emote)

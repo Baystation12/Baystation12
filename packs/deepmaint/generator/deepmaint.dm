@@ -54,7 +54,7 @@ GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 		var/length = length(line)
 		var/turf/T = A
 		walls += T
-		while(length > 0)
+		while (length > 0)
 			length = length - 1
 			T = get_step(T, direction)
 			if (T.is_wall())
@@ -74,7 +74,7 @@ GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 	if (numRooms < ladders_to_place)
 		return
 	var/list/obj/procedural/jp_dungeonroom/done_rooms = list()
-	while(ladders_to_place > 0)
+	while (ladders_to_place > 0)
 		if (numRooms > 1)
 			if (length(done_rooms) == length(out_rooms))
 				testing("Deepmaint generator went through all rooms, but couldn't place all ladders! Ladders left - [ladders_to_place]")
@@ -123,7 +123,7 @@ GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 /obj/procedural/dungenerator/deepmaint/New()
 	..()
 	spawn()
-		while(1)
+		while (1)
 			if (Master.current_runlevel)
 				populateDeepMaintMapLists()
 				break

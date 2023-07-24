@@ -96,7 +96,7 @@ Teleporter beacon, and its subtypes
 
 
 /mob/living/simple_animal/hostile/hivebot/tele/proc/warpbots()
-	while(bot_amt > 0 && bot_type)
+	while (bot_amt > 0 && bot_type)
 		bot_amt--
 		var/mob/M = new bot_type(get_turf(src))
 		M.faction = faction

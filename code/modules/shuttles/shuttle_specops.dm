@@ -111,7 +111,7 @@
 
 	cancel_countdown = 0
 	launch_prep = 1
-	while(!cancel_countdown && (launch_time - world.time) > 0)
+	while (!cancel_countdown && (launch_time - world.time) > 0)
 		var/ticksleft = launch_time - world.time
 
 		//if (ticksleft > 1e5)

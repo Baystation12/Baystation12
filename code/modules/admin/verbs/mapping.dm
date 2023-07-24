@@ -271,7 +271,7 @@ var/global/list/debug_verbs = list (
 	for (var/atom/A in world)
 		if (istype(A,type_path))
 			var/atom/B = A
-			while(!(isturf(B.loc)))
+			while (!(isturf(B.loc)))
 				if (B && B.loc)
 					B = B.loc
 				else

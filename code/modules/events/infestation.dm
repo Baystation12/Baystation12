@@ -27,7 +27,7 @@
 		vermin_turfs = set_location_get_infestation_turfs()
 		if (!location)
 			return
-	while(!vermin_turfs && --attempts > 0)
+	while (!vermin_turfs && --attempts > 0)
 
 	if (!vermin_turfs)
 		log_debug("Vermin infestation failed to find a viable spawn after 3 attempts. Aborting.")
@@ -55,7 +55,7 @@
 		for (var/i = 1 to severity)
 			num += rand(2,max_number)
 		log_and_message_admins("Vermin infestation spawned ([vermstring] x[num]) in \the [location]", location = pick_area_turf(location))
-		while(length(vermin_turfs) && num > 0)
+		while (length(vermin_turfs) && num > 0)
 			var/turf/simulated/floor/T = pick(vermin_turfs)
 			vermin_turfs.Remove(T)
 			num--

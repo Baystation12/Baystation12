@@ -434,7 +434,7 @@
 		nymph_count++
 		if (nymph_count >= 3) return
 
-	while(nymph_count < 3)
+	while (nymph_count < 3)
 		new /mob/living/carbon/alien/diona/sterile(H)
 		nymph_count++
 

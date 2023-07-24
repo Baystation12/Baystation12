@@ -44,7 +44,7 @@
 		round_autoantag = 0
 		return
 
-	while(length(usable_templates))
+	while (length(usable_templates))
 		var/datum/antagonist/spawn_antag = pick(usable_templates)
 		usable_templates -= spawn_antag
 

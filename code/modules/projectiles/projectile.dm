@@ -354,7 +354,7 @@
 /obj/item/projectile/Process()
 	var/first_step = 1
 
-	spawn while(src && src.loc)
+	spawn while (src && src.loc)
 		if (life_span-- < 1)
 			on_impact(src.loc) //for any final impact behaviours
 			qdel(src)
@@ -489,7 +489,7 @@
 	return Process(targloc)
 
 /obj/item/projectile/test/Process(turf/targloc)
-	while(src) //Loop on through!
+	while (src) //Loop on through!
 		if (result > 1)
 			return hit_thing
 		else if (result)

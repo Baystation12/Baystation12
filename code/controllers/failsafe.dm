@@ -42,7 +42,7 @@ var/global/datum/controller/failsafe/Failsafe
 	return QDEL_HINT_HARDDEL_NOW
 
 /datum/controller/failsafe/proc/Loop()
-	while(running)
+	while (running)
 		lasttick = world.time
 		if (!Master)
 			// Replace the missing Master! This should never, ever happen.

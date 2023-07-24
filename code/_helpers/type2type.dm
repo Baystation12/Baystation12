@@ -155,7 +155,7 @@
 	var/month = 1 //This will be the returned MONTH NUMBER.
 	var/day //This will be the returned day number.
 
-	while(tmpDays > daysInYear) //Start adding years to 1970
+	while (tmpDays > daysInYear) //Start adding years to 1970
 		year++
 		if (isLeap(year))
 			tmpDays -= daysInLYear

@@ -528,7 +528,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	C.digitalcamo = !C.digitalcamo
 
 	spawn(0)
-		while(C && C.digitalcamo && C.mind && C.mind.changeling)
+		while (C && C.digitalcamo && C.mind && C.mind.changeling)
 			C.mind.changeling.chem_charges = max(C.mind.changeling.chem_charges - 1, 0)
 			sleep(40)
 
@@ -659,7 +659,7 @@ var/global/list/datum/absorbed_dna/hivemind_bank = list()
 	to_chat(src, SPAN_NOTICE("Use this power again to return to our original voice and reproduce chemicals again."))
 
 	spawn(0)
-		while(src && src.mind && src.mind.changeling && src.mind.changeling.mimicing)
+		while (src && src.mind && src.mind.changeling && src.mind.changeling.mimicing)
 			src.mind.changeling.chem_charges = max(src.mind.changeling.chem_charges - 1, 0)
 			sleep(40)
 		if (src && src.mind && src.mind.changeling)

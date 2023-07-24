@@ -76,7 +76,7 @@
 			return
 
 		// Move papers one by one as they fit; stop when we are empty or can't fit any more
-		while(paperamount > 0)
+		while (paperamount > 0)
 
 			var/obj/item/shred_temp = get_shredded_paper()
 
@@ -94,7 +94,7 @@
 			to_chat(user, SPAN_NOTICE("\The [empty_into] will not fit any more shredded paper."))
 
 	else // Just dump the paper out on the floor
-		while(paperamount > 0)
+		while (paperamount > 0)
 			get_shredded_paper()
 
 	update_icon()

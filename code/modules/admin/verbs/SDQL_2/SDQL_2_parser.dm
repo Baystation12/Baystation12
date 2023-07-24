@@ -422,7 +422,7 @@
 			temp_expression_list = list()
 			i = expression(i, temp_expression_list)
 
-		while(token(i) && token(i) != "]")
+		while (token(i) && token(i) != "]")
 
 		if (temp_expression_list)
 			expression_list[LIST_PRE_INC(expression_list)] = temp_expression_list
@@ -451,7 +451,7 @@
 					temp_expression_list = list()
 					continue
 
-			while(token(i) && token(i) != ")")
+			while (token(i) && token(i) != ")")
 
 			arguments[LIST_PRE_INC(arguments)] = temp_expression_list // The code this is copy pasted from won't be executed when it's the last param, this fixes that.
 		else

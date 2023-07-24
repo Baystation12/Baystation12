@@ -20,7 +20,7 @@
 				if (M)
 					if (!M.get_amount())
 						return
-					while(metal_amount < 150000 && M.use(1))
+					while (metal_amount < 150000 && M.use(1))
 						src.metal_amount += O.matter[MATERIAL_STEEL] /*O:height * O:width * O:length * 100000.0*/
 						count++
 

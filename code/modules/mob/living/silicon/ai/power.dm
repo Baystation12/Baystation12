@@ -9,7 +9,7 @@
 	to_chat(src, SPAN_DANGER("Main power lost. System switched to internal capacitor. Beginning diagnostics."))
 	var/obj/machinery/power/apc/theAPC = null
 	var/connection_failures = 0
-	while(aiRestorePowerRoutine)
+	while (aiRestorePowerRoutine)
 		// If the routine is running, proceed to another step.
 		if (aiRestorePowerRoutine > AI_RESTOREPOWER_FAILED)
 			aiRestorePowerRoutine++

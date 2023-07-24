@@ -265,7 +265,7 @@ var/global/list/mining_floors = list()
 
 			//drop some rocks
 			next_rock += P.excavation_amount
-			while(next_rock > 50)
+			while (next_rock > 50)
 				next_rock -= 50
 				var/obj/item/ore/O = new(src)
 				geologic_data.UpdateNearbyArtifactInfo(src)

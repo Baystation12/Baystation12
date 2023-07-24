@@ -188,7 +188,7 @@
 		mytape.record_speech("Recording started.")
 
 		//count seconds until full, or recording is stopped
-		while(mytape && recording && mytape.used_capacity < mytape.max_capacity)
+		while (mytape && recording && mytape.used_capacity < mytape.max_capacity)
 			sleep(10)
 			if (!mytape)
 				if (ismob(loc))

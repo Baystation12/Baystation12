@@ -89,7 +89,7 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 	var/ore_count = round(length(map)/20)
 	var/door_count = 0
 	var/empty_count = 0
-	while((ore_count>0) && (length(ore_turfs)>0))
+	while ((ore_count>0) && (length(ore_turfs)>0))
 
 		if (!priority_process)
 			CHECK_TICK

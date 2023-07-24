@@ -169,7 +169,7 @@
 			overlays += "fab-load-metal"
 			spawn(10)
 				overlays -= "fab-load-metal"
-			while(materials[material] + amnt <= res_max_amount && stack.amount >= 1)
+			while (materials[material] + amnt <= res_max_amount && stack.amount >= 1)
 				materials[material] += amnt
 				stack.use(1)
 				count++

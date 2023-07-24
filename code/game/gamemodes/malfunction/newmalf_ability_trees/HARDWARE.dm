@@ -35,7 +35,7 @@
 	to_chat(user, "***** CORE SELF-DESTRUCT SEQUENCE ACTIVATED *****")
 	to_chat(user, "Use command again to cancel self-destruct. Destroying in 15 seconds.")
 	var/timer = 15
-	while(timer)
+	while (timer)
 		sleep(10)
 		timer--
 		if (!user || !user.bombing_core)
@@ -124,7 +124,7 @@
 	radio.autosay("Self destruct sequence has been activated. Self-destructing in 5 minutes.", "Self-Destruct Control")
 
 	var/timer = 300
-	while(timer)
+	while (timer)
 		sleep(10)
 		if (!user || !user.bombing_station || user.stat == DEAD)
 			radio.autosay("Self destruct sequence has been cancelled.", "Self-Destruct Control")

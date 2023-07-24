@@ -123,7 +123,7 @@ var/global/list/ai_verbs_default = list(
 	var/list/possibleNames = GLOB.ai_names
 
 	var/pickedName = null
-	while(!pickedName)
+	while (!pickedName)
 		pickedName = pick(GLOB.ai_names)
 		for (var/mob/living/silicon/ai/A in GLOB.silicon_mobs)
 			if (A.real_name == pickedName && length(possibleNames) > 1) //fixing the theoretically possible infinite loop

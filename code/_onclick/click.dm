@@ -527,7 +527,7 @@ GLOBAL_LIST_INIT(click_catchers, create_click_catcher())
 	if (delay)
 		selected_target[1] = object
 		selected_target[2] = params
-		while(selected_target[1])
+		while (selected_target[1])
 			Click(selected_target[1], location, control, selected_target[2])
 			sleep(delay)
 

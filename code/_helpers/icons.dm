@@ -699,7 +699,7 @@ The _flatIcons list is a cache for generated icon files.
 	var/currentLayer // Calculated layer that overlay appears on (special case for FLOAT_LAYER)
 	var/compare // The overlay 'add' is being compared against
 	var/cmpIndex // The index in the layers list of 'compare'
-	while(TRUE)
+	while (TRUE)
 		if (curIndex<=length(process))
 			current = process[curIndex]
 			if (current)

@@ -108,7 +108,7 @@ var/global/list/admin_ranks = list()								//list of all ranks with associated 
 
 		var/DBQuery/query = dbcon.NewQuery("SELECT ckey, rank, level, flags FROM erro_admin")
 		query.Execute()
-		while(query.NextRow())
+		while (query.NextRow())
 			var/ckey = query.item[1]
 			var/rank = query.item[2]
 			if (rank == "Removed")	continue	//This person was de-adminned. They are only in the admin list for archive purposes.

@@ -469,7 +469,7 @@
 	if (!length(held))
 		to_chat(usr, SPAN_WARNING("\The [src] is empty."))
 		return
-	while(length(held))
+	while (length(held))
 		attack_self(usr)
 
 /obj/item/bioreactor

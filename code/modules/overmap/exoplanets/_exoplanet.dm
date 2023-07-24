@@ -254,7 +254,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	var/places = list()
 	var/attempts = 30*num
 	var/new_type = landmark_type
-	while(num)
+	while (num)
 		attempts--
 		var/turf/T = locate(rand(TRANSITIONEDGE + LANDING_ZONE_RADIUS, maxx - TRANSITIONEDGE - LANDING_ZONE_RADIUS), rand(TRANSITIONEDGE + LANDING_ZONE_RADIUS, maxy - TRANSITIONEDGE - LANDING_ZONE_RADIUS),map_z[length(map_z)])
 		if (!T || (T in places) || T.density) // Don't allow two landmarks on one turf, and don't use a dense turf.

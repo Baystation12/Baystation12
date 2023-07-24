@@ -71,7 +71,7 @@
 	RETURN_TYPE(/turf)
 	var/list/areas = get_filtered_areas(area_predicates)
 	// We loop over all area candidates, until we finally get a valid turf or run out of areas
-	while(!. && length(areas))
+	while (!. && length(areas))
 		var/area/A = pick_n_take(areas)
 		. = pick_area_turf(A, turf_predicates)
 

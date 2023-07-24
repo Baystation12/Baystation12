@@ -269,7 +269,7 @@ var/global/datum/controller/master/Master = new
 		var/added_to_any = FALSE
 		for (var/I in 1 to length(GLOB.bitflags))
 			if (ss_runlevels & GLOB.bitflags[I])
-				while(length(runlevel_sorted_subsystems) < I)
+				while (length(runlevel_sorted_subsystems) < I)
 					runlevel_sorted_subsystems += list(list())
 				runlevel_sorted_subsystems[I] += SS
 				added_to_any = TRUE
@@ -599,7 +599,7 @@ var/global/datum/controller/master/Master = new
 
 /datum/controller/master/StartLoadingMap()
 	//disallow more than one map to load at once, multithreading it will just cause race conditions
-	while(map_loading)
+	while (map_loading)
 		stoplag()
 	for (var/S in subsystems)
 		var/datum/controller/subsystem/SS = S

@@ -508,14 +508,14 @@
 	if (!check_flag(MODEFLAG_MULTIZ))
 		return turfs
 
-	while(HasAbove(T.z))
+	while (HasAbove(T.z))
 		T = GetAbove(T)
 		if (istype(T))
 			turfs.Add(T)
 
 	T = get_turf(src)
 
-	while(HasBelow(T.z))
+	while (HasBelow(T.z))
 		T = GetBelow(T)
 		if (istype(T))
 			turfs.Add(T)

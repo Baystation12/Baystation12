@@ -14,7 +14,7 @@
 		controller()
 
 /obj/effect/bhole/proc/controller()
-	while(src)
+	while (src)
 
 		if (!isturf(loc))
 			qdel(src)

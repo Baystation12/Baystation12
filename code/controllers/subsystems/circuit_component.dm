@@ -22,7 +22,7 @@ SUBSYSTEM_DEF(circuit_components)
 		return
 
 	var/list/queued_components = src.queued_components
-	while(length(queued_components))
+	while (length(queued_components))
 		var/list/entry = queued_components[length(queued_components)]
 		position = length(queued_components)
 		LIST_DEC(queued_components)
@@ -68,7 +68,7 @@ SUBSYSTEM_DEF(circuit_components)
 
 /datum/controller/subsystem/circuit_components/proc/dequeue_component(obj/item/integrated_circuit/circuit)
 	var/i = 1
-	while(i <= length(queued_components)) // Either i increases or length decreases on every iteration.
+	while (i <= length(queued_components)) // Either i increases or length decreases on every iteration.
 		var/list/entry = queued_components[i]
 		if (length(entry) && entry[1] == circuit)
 			queued_components.Cut(i, i+1)

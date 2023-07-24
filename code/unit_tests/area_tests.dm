@@ -20,7 +20,7 @@
 			var/turf/T = area_turfs[1]
 			sub_area_turfs += T
 			area_turfs -= get_turfs_fill(T)
-		while(length(area_turfs))
+		while (length(area_turfs))
 
 		if (length(sub_area_turfs) != expected_number_of_sub_areas)
 			incoherent_areas++
@@ -40,7 +40,7 @@
 	. = list()
 	var/datum/stack/turfs_to_check = new()
 	turfs_to_check.Push(origin)
-	while(!turfs_to_check.is_empty())
+	while (!turfs_to_check.is_empty())
 		var/turf/T = turfs_to_check.Pop()
 		. |= T
 		var/turf/neighbour

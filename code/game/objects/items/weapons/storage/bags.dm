@@ -29,7 +29,7 @@
 		w_class = max(w_class, I.w_class)
 
 	var/cur_storage_space = storage_space_used()
-	while(BASE_STORAGE_CAPACITY(w_class) < cur_storage_space)
+	while (BASE_STORAGE_CAPACITY(w_class) < cur_storage_space)
 		w_class++
 
 /obj/item/storage/bag/get_storage_cost()

@@ -295,7 +295,7 @@
 		else
 			var/s = SIMPLE_SIGN(Y2-Y1)
 			Y1+=s
-			while(Y1!=Y2)
+			while (Y1!=Y2)
 				T=locate(X1,Y1,Z)
 				if (T.opacity)
 					return 0
@@ -307,7 +307,7 @@
 		var/signY = SIMPLE_SIGN(Y2-Y1)
 		if (X1<X2)
 			b+=m
-		while(X1!=X2 || Y1!=Y2)
+		while (X1!=X2 || Y1!=Y2)
 			if (round(m*X1+b-Y1))
 				Y1+=signY //Line exits tile vertically
 			else
@@ -360,7 +360,7 @@
 
 	var/list/candidates = list() //List of candidate KEYS to assume control of the new larva ~Carn
 	var/i = 0
-	while(length(candidates) <= 0 && i < 5)
+	while (length(candidates) <= 0 && i < 5)
 		for (var/mob/observer/ghost/G in GLOB.player_list)
 			if (((G.client.inactivity/10)/60) <= buffer + i) // the most active players are more likely to become an alien
 				if (!(G.mind && G.mind.current && G.mind.current.stat != DEAD))

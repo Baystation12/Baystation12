@@ -120,7 +120,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 	var/list/atoms_to_initialise = list()
 	var/list/atoms_to_delete = list()
 
-	while(dmmRegex.Find_char(tfile, stored_index))
+	while (dmmRegex.Find_char(tfile, stored_index))
 		stored_index = dmmRegex.next
 
 		// "aa" = (/type{vars=blah})
@@ -174,7 +174,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 			var/list/gridLines = splittext(dmmRegex.group[6], "\n")
 
 			var/leadingBlanks = 0
-			while(leadingBlanks < length(gridLines) && gridLines[++leadingBlanks] == "")
+			while (leadingBlanks < length(gridLines) && gridLines[++leadingBlanks] == "")
 			if (leadingBlanks > 1)
 				gridLines.Cut(1, leadingBlanks) // Remove all leading blank lines.
 
@@ -344,7 +344,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 			members_attributes[index++] = fields
 
 			CHECK_TICK
-		while(dpos != 0)
+		while (dpos != 0)
 
 		//check and see if we can just skip this turf
 		//So you don't have to understand this horrid statement, we can do this if
@@ -392,7 +392,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 	//then instance the /turf and, if multiple tiles are presents, simulates the DMM underlays piling effect
 
 	var/first_turf_index = 1
-	while(!ispath(members[first_turf_index], /turf)) //find first /turf object in members
+	while (!ispath(members[first_turf_index], /turf)) //find first /turf object in members
 		first_turf_index++
 
 	//turn off base new Initialization until the whole thing is loaded
@@ -410,7 +410,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 	if (T)
 		//if others /turf are presents, simulates the underlays piling effect
 		index = first_turf_index + 1
-		while(index <= length(members) - 1) // Last item is an /area
+		while (index <= length(members) - 1) // Last item is an /area
 			var/underlay = T.appearance
 			T = instance_atom(members[index],members_attributes[index],crds,no_changeturf)//instance new turf
 			T.underlays += underlay
@@ -474,7 +474,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 	var/next_delimiter = findtext(text,delimiter,position,0)
 	var/next_opening = findtext(text,opening_escape,position,0)
 
-	while((next_opening != 0) && (next_opening < next_delimiter))
+	while ((next_opening != 0) && (next_opening < next_delimiter))
 		position = findtext(text,closing_escape,next_opening + 1,0)+1
 		next_delimiter = findtext(text,delimiter,position,0)
 		next_opening = findtext(text,opening_escape,position,0)
@@ -545,7 +545,7 @@ GLOBAL_DATUM_INIT(maploader, /dmm_suite, new)
 			var/trim_right = trim_text(copytext(text,equal_position+1,position))//the content of the variable
 			to_return[left] = readlistitem(trim_right)
 
-	while(position != 0)
+	while (position != 0)
 
 	return to_return
 

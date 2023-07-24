@@ -40,7 +40,7 @@ var/global/list/alien_whitelist = list()
 		to_world_log(dbcon_old.ErrorMsg())
 		return 0
 	else
-		while(query.NextRow())
+		while (query.NextRow())
 			var/list/row = query.GetRowData()
 			if (alien_whitelist[row["ckey"]])
 				var/list/A = alien_whitelist[row["ckey"]]

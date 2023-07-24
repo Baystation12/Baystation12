@@ -18,18 +18,18 @@ SUBSYSTEM_DEF(character_setup)
 
 
 /datum/controller/subsystem/character_setup/Initialize(start_uptime)
-	while(length(prefs_awaiting_setup))
+	while (length(prefs_awaiting_setup))
 		var/datum/preferences/prefs = prefs_awaiting_setup[length(prefs_awaiting_setup)]
 		LIST_DEC(prefs_awaiting_setup)
 		prefs.setup()
-	while(length(newplayers_requiring_init))
+	while (length(newplayers_requiring_init))
 		var/mob/new_player/new_player = newplayers_requiring_init[length(newplayers_requiring_init)]
 		LIST_DEC(newplayers_requiring_init)
 		new_player.deferred_login()
 
 
 /datum/controller/subsystem/character_setup/fire(resumed = FALSE)
-	while(length(save_queue))
+	while (length(save_queue))
 		var/datum/preferences/prefs = save_queue[length(save_queue)]
 		LIST_DEC(save_queue)
 

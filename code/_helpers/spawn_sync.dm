@@ -81,6 +81,6 @@
 
 	//Create a while loop to check if the sync is complete yet, it will return once all the spawn threads have
 	// completed, or the failsafe has expired.
-	while(check())
+	while (check())
 		//Add a sleep call to delay each check.
 		sleep(1)

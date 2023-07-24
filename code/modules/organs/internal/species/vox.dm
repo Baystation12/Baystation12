@@ -140,7 +140,7 @@
 						updated_stacks = TRUE
 
 				// Create new stacks if needed.
-				while(sheets > 0)
+				while (sheets > 0)
 					var/obj/item/stack/material/mat_stack = new M.stack_type(src)
 					var/taking_sheets = min(sheets, mat_stack.max_amount)
 					mat_stack.set_amount(mat_stack.amount + taking_sheets)
