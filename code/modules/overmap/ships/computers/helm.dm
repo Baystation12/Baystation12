@@ -166,7 +166,7 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 		if (sec_name in known_sectors)
 			to_chat(user, SPAN_WARNING("Sector with that name already exists, please input a different name."))
 			return TOPIC_REFRESH
-		switch(href_list["add"])
+		switch (href_list["add"])
 			if ("current")
 				R.fields["x"] = linked.x
 				R.fields["y"] = linked.y

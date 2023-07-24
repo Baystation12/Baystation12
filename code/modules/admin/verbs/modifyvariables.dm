@@ -16,7 +16,7 @@
 
 	var/var_value = null
 
-	switch(class)
+	switch (class)
 
 		if ("text")
 			var_value = input("Enter new text:","Text") as null|text
@@ -69,7 +69,7 @@
 
 	var/var_value = null
 
-	switch(class)
+	switch (class)
 
 		if ("text")
 			var_value = input("Enter new text:","Text") as text
@@ -97,7 +97,7 @@
 
 	if (!var_value) return
 
-	switch(alert("Would you like to associate a var with the list entry?",,"Yes","No"))
+	switch (alert("Would you like to associate a var with the list entry?",,"Yes","No"))
 		if ("Yes")
 			L += var_value
 			L[var_value] = mod_list_add_ass() //haha
@@ -191,7 +191,7 @@
 
 	to_chat(usr, "Variable contains: [variable]")
 	if (dir)
-		switch(variable)
+		switch (variable)
 			if (1)
 				dir = "NORTH"
 			if (2)
@@ -238,7 +238,7 @@
 		original_var = L[L.Find(variable)]
 
 	var/new_var
-	switch(class) //Spits a runtime error if you try to modify an entry in the contents list. Dunno how to fix it, yet.
+	switch (class) //Spits a runtime error if you try to modify an entry in the contents list. Dunno how to fix it, yet.
 
 		if ("list")
 			mod_list(variable, O, original_name, objectvar)
@@ -444,7 +444,7 @@
 
 		to_chat(usr, "Variable contains: [var_value]")
 		if (dir)
-			switch(var_value)
+			switch (var_value)
 				if (1)
 					dir = "NORTH"
 				if (2)
@@ -486,7 +486,7 @@
 	if (marked_datum && class == "marked datum ([marked_datum.type])")
 		class = "marked datum"
 
-	switch(class)
+	switch (class)
 
 		if ("list")
 			mod_list(O.get_variable_value(variable), O, original_name, variable)

@@ -23,7 +23,7 @@
 
 	affecting.Stun(3)
 
-	switch(assailant.a_intent)
+	switch (assailant.a_intent)
 		if (I_GRAB)
 			on_hit_grab(G)
 		if (I_HURT)

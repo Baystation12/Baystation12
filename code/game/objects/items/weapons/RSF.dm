@@ -78,7 +78,7 @@ RSF
 	var/used_energy = 0
 	var/obj/product
 
-	switch(mode)
+	switch (mode)
 		if (1)
 			product = new /obj/item/clothing/mask/smokable/cigarette()
 			used_energy = 10

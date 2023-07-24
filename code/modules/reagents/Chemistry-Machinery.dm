@@ -47,7 +47,7 @@
 	..()
 
 /obj/machinery/chem_master/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			qdel(src)
 			return

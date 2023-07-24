@@ -45,7 +45,7 @@ GLOBAL_DATUM_INIT(paramounts, /datum/antagonist/paramount, new)
 	// Copied from ninja for now.
 	var/objective_list = list(1,2,3)
 	for (var/i=rand(2,3),i>0,i--)
-		switch(pick(objective_list))
+		switch (pick(objective_list))
 			if (1)//Kill
 				var/datum/objective/assassinate/objective = new
 				objective.owner = player

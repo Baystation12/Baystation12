@@ -143,7 +143,7 @@ var/global/list/rad_collectors = list()
 		return 1
 
 /obj/machinery/power/rad_collector/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_HEAVY, EX_ACT_LIGHT)
 			eject()
 	return ..()

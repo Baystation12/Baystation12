@@ -16,7 +16,7 @@
 				continue
 
 			entry += " - Playing as [C.mob.real_name]"
-			switch(C.mob.stat)
+			switch (C.mob.stat)
 				if (UNCONSCIOUS)
 					entry += " - [SPAN_COLOR("darkgray", "<b>Unconscious</b>")]"
 				if (DEAD)

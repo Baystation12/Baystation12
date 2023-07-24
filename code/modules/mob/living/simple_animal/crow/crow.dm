@@ -74,7 +74,7 @@
 		return ..()
 	if (href_list["remove_inv"])
 		var/obj/item/removed
-		switch(href_list["remove_inv"])
+		switch (href_list["remove_inv"])
 			if ("access cuff")
 				removed = access_card
 				access_card = null
@@ -97,7 +97,7 @@
 			return 0
 		var/obj/item/equipped
 		var/checktype
-		switch(href_list["add_inv"])
+		switch (href_list["add_inv"])
 			if ("access cuff")
 				equipped = access_card
 				checktype = /obj/item/card/id
@@ -110,7 +110,7 @@
 		if (!istype(equipping, checktype))
 			to_chat(user, SPAN_WARNING("\The [equipping] won't fit on \the [src]'s [href_list["add_inv"]]."))
 			return TOPIC_HANDLED
-		switch(href_list["add_inv"])
+		switch (href_list["add_inv"])
 			if ("access cuff")
 				access_card = equipping
 			if ("back")

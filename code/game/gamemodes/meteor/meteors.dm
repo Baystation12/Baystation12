@@ -86,7 +86,7 @@ var/global/list/meteors_cataclysm = list(\
 	RETURN_TYPE(/turf)
 	var/starty
 	var/startx
-	switch(startSide)
+	switch (startSide)
 		if (NORTH)
 			starty = world.maxy-(TRANSITIONEDGE+1)
 			startx = rand((TRANSITIONEDGE+1), world.maxx-(TRANSITIONEDGE+1))
@@ -106,7 +106,7 @@ var/global/list/meteors_cataclysm = list(\
 	RETURN_TYPE(/turf)
 	var/endy
 	var/endx
-	switch(startSide)
+	switch (startSide)
 		if (NORTH)
 			endy = TRANSITIONEDGE
 			endx = rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE)

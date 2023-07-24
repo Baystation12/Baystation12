@@ -299,7 +299,7 @@
 		if (!can_clone) // Copying and printing ICs is cloning
 			to_chat(usr, SPAN_WARNING("This printer does not have the cloning upgrade."))
 			return
-		switch(href_list["print"])
+		switch (href_list["print"])
 			if ("load")
 				if (cloning)
 					return

@@ -45,7 +45,7 @@
 		overlays += I
 
 /obj/structure/catwalk/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			new /obj/item/stack/material/rods(src.loc)
 			qdel(src)

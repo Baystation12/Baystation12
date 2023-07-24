@@ -160,7 +160,7 @@
 /mob/living/silicon/robot/proc/module_active(module) //Module is 1-3
 	if (module < 1 || module > 3) return 0
 
-	switch(module)
+	switch (module)
 		if (1)
 			if (module_state_1)
 				return 1
@@ -189,7 +189,7 @@
 
 	if (!module_active(module)) return
 
-	switch(module)
+	switch (module)
 		if (1)
 			if (module_active != module_state_1)
 				inv1.icon_state = "inv1 +a"
@@ -216,7 +216,7 @@
 	if (module < 1 || module > 3) return
 
 	GLOB.module_deselected_event.raise_event(src, module_active)
-	switch(module)
+	switch (module)
 		if (1)
 			if (module_active == module_state_1)
 				inv1.icon_state = "inv1"

@@ -40,7 +40,7 @@
 		uncommon = list()
 		rare = list()
 		current_list = common
-		switch(mode)
+		switch (mode)
 			if ("room_theme")
 				if (alert("Would you like to modify what room layouts are used?",,"No","Yes") != "Yes")
 					mode = "monsters"
@@ -53,7 +53,7 @@
 				if (alert("Would you like to modify what loot gets spawned?",,"No","Yes") !="Yes")
 					break
 		var/list/total_types
-		switch(mode)
+		switch (mode)
 			if ("room_theme")
 				total_types = typesof(/datum/room_theme)
 			if ("monsters")
@@ -84,7 +84,7 @@
 		vars["[mode]_common"] = common.Copy()
 		vars["[mode]_uncommon"] = uncommon.Copy()
 		vars["[mode]_rare"] = rare.Copy()
-		switch(mode)
+		switch (mode)
 			if ("room_theme")
 				mode = "monsters"
 			if ("monsters")

@@ -20,7 +20,7 @@
 
 /obj/structure/closet/crate/secure/loot/proc/generate_loot()
 	var/loot = rand(1, 100)
-	switch(loot)
+	switch (loot)
 		if (1 to 5) // Common things go, 5%
 			new/obj/item/reagent_containers/food/drinks/bottle/rum(src)
 			new/obj/item/reagent_containers/food/drinks/bottle/whiskey(src)

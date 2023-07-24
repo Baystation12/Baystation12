@@ -348,7 +348,7 @@
 			set_light(0.8, 0.1, 1, 2, "#00ecff")
 		else if (!MACHINE_IS_BROKEN(src) && !GET_FLAGS(stat, MACHINE_STAT_MAINT) && update_state & UPDATE_ALLGOOD)
 			var/color
-			switch(charging)
+			switch (charging)
 				if (0)
 					color = "#f86060"
 				if (1)
@@ -473,7 +473,7 @@
 			if (get_cell())
 				to_chat(user, SPAN_WARNING("Either close the cover or remove the cell first."))
 				return TRUE
-			switch(has_electronics)
+			switch (has_electronics)
 				if (1)
 					if (!terminal())
 						to_chat(user, SPAN_WARNING("You must attach a wire connection first!"))
@@ -637,7 +637,7 @@
 			"You hear a bang")
 		if (W.force >= 5 && W.w_class >= ITEM_SIZE_NORMAL && prob(W.force))
 			var/roulette = rand(1,100)
-			switch(roulette)
+			switch (roulette)
 				if (1 to 10)
 					locked = FALSE
 					to_chat(user, SPAN_NOTICE("You manage to disable the lock on \the [src]!"))
@@ -1018,7 +1018,7 @@
 // defines a state machine, returns the new state
 /obj/machinery/power/apc/proc/autoset(cur_state, on)
 	//autoset will never turn on a channel set to off
-	switch(cur_state)
+	switch (cur_state)
 		if (POWERCHAN_OFF_TEMP)
 			if (on == 1 || on == 2)
 				return POWERCHAN_ON
@@ -1043,7 +1043,7 @@
 
 /obj/machinery/power/apc/ex_act(severity)
 	var/obj/item/cell/C = get_cell()
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			qdel(src)
 			if (C)
@@ -1112,7 +1112,7 @@
 				sleep(1)
 
 /obj/machinery/power/apc/proc/setsubsystem(val)
-	switch(val)
+	switch (val)
 		if (2)
 			return POWERCHAN_OFF_AUTO
 		if (1)

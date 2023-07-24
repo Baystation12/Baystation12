@@ -41,7 +41,7 @@
 		if (M == user)
 			if (!M.can_eat(loaded))
 				return
-			switch(M.get_fullness())
+			switch (M.get_fullness())
 				if (0 to 50)
 					to_chat(M, SPAN_DANGER("You ravenously stick \the [src] into your mouth and gobble the food!"))
 				if (50 to 150)

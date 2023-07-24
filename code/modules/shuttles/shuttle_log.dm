@@ -54,7 +54,7 @@
 
 /datum/shuttle_log/proc/process_queue()
 	if (current_mission) //Process queue changes due to stage changes.
-		switch(current_mission.stage)
+		switch (current_mission.stage)
 			if (SHUTTLE_MISSION_FINISHED)
 				current_mission = null
 			if (SHUTTLE_MISSION_STARTED)

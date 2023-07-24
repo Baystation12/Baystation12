@@ -117,7 +117,7 @@ meteor_act
 
 ///Returns null or the first equipped item covering the bodypart
 /mob/living/carbon/human/proc/get_clothing_coverage(bodypart)
-	switch(bodypart)
+	switch (bodypart)
 		if (BP_HEAD)
 			bodypart = HEAD
 		if (BP_EYES)
@@ -255,7 +255,7 @@ meteor_act
 				H.bloody_body(src)
 				H.bloody_hands(src)
 
-		switch(hit_zone)
+		switch (hit_zone)
 			if (BP_HEAD)
 				if (wear_mask)
 					wear_mask.add_blood(src)

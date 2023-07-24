@@ -18,7 +18,7 @@ var/global/const/TTV_WIRE_DEVICECHANGE = FLAG(4)
 
 /datum/wires/transfer_valve/UpdatePulsed(index)
 	var/obj/item/device/transfer_valve/T = holder
-	switch(index)
+	switch (index)
 		if (TTV_WIRE_TOGGLEVALVE)
 			T.toggle_valve()
 		if (TTV_WIRE_GASRELEASE)
@@ -39,7 +39,7 @@ var/global/const/TTV_WIRE_DEVICECHANGE = FLAG(4)
 /datum/wires/transfer_valve/UpdateCut(index, mended)
 	var/obj/item/device/transfer_valve/T = holder
 	var/timer = rand(3,5)
-	switch(index)
+	switch (index)
 		if (TTV_WIRE_TOGGLEVALVE)
 			if (!mended)
 				T.toggle_valve()

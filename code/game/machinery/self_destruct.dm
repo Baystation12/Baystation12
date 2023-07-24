@@ -86,7 +86,7 @@
 	..()
 
 /obj/machinery/self_destruct/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			set_damaged()
 		if (EX_ACT_HEAVY)

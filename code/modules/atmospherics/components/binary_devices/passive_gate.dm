@@ -207,12 +207,12 @@
 		unlocked = !unlocked
 
 	if (href_list["regulate_mode"])
-		switch(href_list["regulate_mode"])
+		switch (href_list["regulate_mode"])
 			if ("off") regulate_mode = REGULATE_NONE
 			if ("input") regulate_mode = REGULATE_INPUT
 			if ("output") regulate_mode = REGULATE_OUTPUT
 
-	switch(href_list["set_press"])
+	switch (href_list["set_press"])
 		if ("min")
 			target_pressure = 0
 		if ("max")
@@ -221,7 +221,7 @@
 			var/new_pressure = input(usr,"Enter new output pressure (0-[max_pressure_setting]kPa)","Pressure Control",src.target_pressure) as num
 			src.target_pressure = clamp(new_pressure, 0, max_pressure_setting)
 
-	switch(href_list["set_flow_rate"])
+	switch (href_list["set_flow_rate"])
 		if ("min")
 			set_flow_rate = 0
 		if ("max")

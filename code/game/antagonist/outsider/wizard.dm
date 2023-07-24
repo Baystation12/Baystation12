@@ -29,7 +29,7 @@ GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
 	var/steal
 	var/hijack
 
-	switch(rand(1,100))
+	switch (rand(1,100))
 		if (1 to 30)
 			escape = 1
 			kill = 1

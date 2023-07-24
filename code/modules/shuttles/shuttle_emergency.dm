@@ -177,7 +177,7 @@
 		return
 
 	var/shuttle_state
-	switch(shuttle.moving_status)
+	switch (shuttle.moving_status)
 		if (SHUTTLE_IDLE) shuttle_state = "idle"
 		if (SHUTTLE_WARMUP) shuttle_state = "warmup"
 		if (SHUTTLE_INTRANSIT) shuttle_state = "in_transit"

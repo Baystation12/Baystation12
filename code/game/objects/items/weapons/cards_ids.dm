@@ -59,7 +59,7 @@
 /obj/item/card/operant_card/proc/set_info(mob/living/carbon/human/human)
 	if (!istype(human))
 		return
-	switch(human.psi?.rating)
+	switch (human.psi?.rating)
 		if (0)
 			use_rating = "[human.psi.rating]-Lambda"
 		if (1)

@@ -76,7 +76,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 /obj/machinery/computer/rdconsole/proc/CallMaterialName(ID)
 	var/return_name = ID
-	switch(return_name)
+	switch (return_name)
 		if (MATERIAL_STEEL)
 			return_name = "Steel"
 		if (MATERIAL_ALUMINIUM)
@@ -396,7 +396,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 	else if (href_list["disconnect"]) //The R&D console disconnects with a specific device.
 		. = TOPIC_REFRESH
-		switch(href_list["disconnect"])
+		switch (href_list["disconnect"])
 			if ("destroy")
 				CHECK_DESTROY
 				linked_destroy.linked_console = null
@@ -557,7 +557,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	user.set_machine(src)
 	var/dat = list()
 	files.RefreshResearch()
-	switch(screen) //A quick check to make sure you get the right screen when a device is disconnected.
+	switch (screen) //A quick check to make sure you get the right screen when a device is disconnected.
 		if (2 to 2.9)
 			if (linked_destroy == null)
 				screen = 2.0
@@ -572,7 +572,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			if (linked_imprinter == null)
 				screen = 4.0
 
-	switch(screen)
+	switch (screen)
 
 		//////////////////////R&D CONSOLE SCREENS//////////////////
 		if (0.0)
@@ -666,7 +666,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				dat += "<A href='?src=\ref[src];menu=1.5'>Load Design to Disk</A> || "
 			else
 				dat += "Name: [d_disk.blueprint.name]<BR>"
-				switch(d_disk.blueprint.build_type)
+				switch (d_disk.blueprint.build_type)
 					if (IMPRINTER) dat += "Lathe Type: Circuit Imprinter<BR>"
 					if (PROTOLATHE) dat += "Lathe Type: Proto-lathe<BR>"
 				dat += "Required Materials:<BR>"

@@ -155,7 +155,7 @@
 	qdel(src)
 
 /obj/machinery/shieldgen/emp_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EMP_ACT_HEAVY)
 			malfunction = 1
 			locked = pick(0,1)

@@ -159,7 +159,7 @@
 		unhalt()
 
 /obj/effect/overmap/visitable/ship/landable/get_landed_info()
-	switch(status)
+	switch (status)
 		if (SHIP_STATUS_LANDED)
 			var/obj/effect/overmap/visitable/location = loc
 			if (istype(loc, /obj/effect/overmap/visitable/sector))

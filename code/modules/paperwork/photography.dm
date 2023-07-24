@@ -120,7 +120,7 @@ var/global/photo_count = 0
 			return ..()
 		playsound(loc, "rustle", 50, 1, -5)
 		if ((!( M.restrained() ) && !( M.stat ) && M.back == src))
-			switch(over_object.name)
+			switch (over_object.name)
 				if ("r_hand")
 					if (M.unEquip(src))
 						M.put_in_r_hand(src)

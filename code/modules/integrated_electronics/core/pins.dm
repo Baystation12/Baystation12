@@ -170,7 +170,7 @@ D [1]/  ||
 		return
 
 	var/new_data = null
-	switch(type_to_use)
+	switch (type_to_use)
 		if ("string")
 			var/input_text = input(user, "Now type in a string.", "[src] string writing", istext(default) ? default : null) as null|text
 			new_data = sanitize(input_text, trim = 0)

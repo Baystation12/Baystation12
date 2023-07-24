@@ -103,7 +103,7 @@
 /obj/item/gun/projectile/proc/process_chambered()
 	if (!chambered) return
 
-	switch(handle_casings)
+	switch (handle_casings)
 		if (EJECT_CASINGS) //eject casing onto ground.
 			chambered.dropInto(loc)
 			chambered.throw_at(get_ranged_target_turf(get_turf(src),turn(loc.dir,270),1), rand(0,1), 5)
@@ -136,7 +136,7 @@
 		if (!(load_method & AM.mag_type) || ((istext(caliber) && caliber != AM.caliber) && (islist(caliber) && !is_type_in_list(AM.caliber, caliber))))
 			return //incompatible
 
-		switch(AM.mag_type)
+		switch (AM.mag_type)
 			if (MAGAZINE)
 				if ((ispath(allowed_magazines) && !istype(A, allowed_magazines)) || (islist(allowed_magazines) && !is_type_in_list(A, allowed_magazines)) || (ispath(banned_magazines) && istype(A, banned_magazines)) || (islist(banned_magazines) && is_type_in_list(A, banned_magazines)))
 					to_chat(user, SPAN_WARNING("\The [A] won't fit into [src]."))

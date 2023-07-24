@@ -83,7 +83,7 @@ var/global/bomb_set
 			return attack_hand(user)
 
 	if (anchored)
-		switch(removal_stage)
+		switch (removal_stage)
 			if (0)
 				if (isWelder(O))
 					var/obj/item/weldingtool/WT = O

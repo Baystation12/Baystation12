@@ -8,7 +8,7 @@
 		if (!O || !BP_IS_ROBOTIC(O)) // Don't make medical freak out over prosthetic hearts
 			crew_data["true_pulse"] = H.pulse()
 			crew_data["pulse"] = H.get_pulse(GETPULSE_TOOL)
-			switch(crew_data["true_pulse"])
+			switch (crew_data["true_pulse"])
 				if (PULSE_NONE)
 					crew_data["pulse_span"] = "bad"
 				if (PULSE_SLOW)

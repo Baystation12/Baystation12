@@ -65,7 +65,7 @@
 // otherwise it will return the direction string in lower case
 /proc/dir_name(dir, capitalize = 0)
 	var/string = null
-	switch(dir)
+	switch (dir)
 		if (NORTH)
 			string = "North"
 		if (SOUTH)
@@ -84,7 +84,7 @@
 // case insensitive
 /proc/dir_flag(dir)
 	dir = lowertext(dir)
-	switch(dir)
+	switch (dir)
 		if ("north")
 			return NORTH
 		if ("south")

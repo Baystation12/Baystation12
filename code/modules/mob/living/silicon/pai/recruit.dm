@@ -62,7 +62,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 		var/option = href_list["option"]
 		var/t = ""
 
-		switch(option)
+		switch (option)
 			if ("name")
 				t = sanitizeSafe(input("Enter a name for your pAI", "pAI Name", candidate.name) as text, MAX_NAME_LEN)
 				if (t)

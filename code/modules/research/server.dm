@@ -43,7 +43,7 @@
 /obj/machinery/r_n_d/server/Process()
 	..()
 	var/datum/gas_mixture/environment = loc.return_air()
-	switch(environment.temperature)
+	switch (environment.temperature)
 		if (0 to T0C)
 			health = min(100, health + 1)
 		if (T0C to (T20C + 20))
@@ -93,7 +93,7 @@
 	var/list/no_id_servers = list()
 	var/list/server_ids = list()
 	for (var/obj/machinery/r_n_d/server/S in SSmachines.machinery)
-		switch(S.server_id)
+		switch (S.server_id)
 			if (-1)
 				continue
 			if (0)
@@ -205,7 +205,7 @@
 	user.set_machine(src)
 	var/dat = ""
 
-	switch(screen)
+	switch (screen)
 		if (0) //Main Menu
 			dat += "Connected Servers:<BR><BR>"
 			var/turf/T = get_turf(src)

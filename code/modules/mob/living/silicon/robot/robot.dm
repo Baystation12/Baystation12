@@ -1160,7 +1160,7 @@
 /mob/living/silicon/robot/proc/notify_ai(notifytype, first_arg, second_arg)
 	if (!connected_ai)
 		return
-	switch(notifytype)
+	switch (notifytype)
 		if (ROBOT_NOTIFICATION_NEW_UNIT) //New Robot
 			to_chat(connected_ai, "<br><br>[SPAN_NOTICE("NOTICE - New [lowertext(braintype)] connection detected: <a href='byond://?src=\ref[connected_ai];track2=\ref[connected_ai];track=\ref[src]'>[name]</a>")]<br>")
 		if (ROBOT_NOTIFICATION_NEW_MODULE) //New Module

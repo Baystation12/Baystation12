@@ -89,7 +89,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	errory = abs(errory)
 	//var/errorxy = round((errorx+errory)/2)//Used for diagonal boxes.
 
-	switch(target.dir)//This can be done through equations but switch is the simpler method. And works fast to boot.
+	switch (target.dir)//This can be done through equations but switch is the simpler method. And works fast to boot.
 	//Directs on what values need modifying.
 		if (1)//North
 			diry+=distance
@@ -803,7 +803,7 @@ GLOBAL_LIST_INIT(duplicate_object_disallowed_vars, list(
 
 /proc/view_or_range(distance = world.view , center = usr , type)
 	RETURN_TYPE(/list)
-	switch(type)
+	switch (type)
 		if ("view")
 			. = view(distance,center)
 		if ("range")
@@ -812,7 +812,7 @@ GLOBAL_LIST_INIT(duplicate_object_disallowed_vars, list(
 
 /proc/oview_or_orange(distance = world.view , center = usr , type)
 	RETURN_TYPE(/list)
-	switch(type)
+	switch (type)
 		if ("view")
 			. = oview(distance,center)
 		if ("range")
@@ -954,7 +954,7 @@ GLOBAL_LIST_INIT(duplicate_object_disallowed_vars, list(
 			return FALSE
 
 /proc/reverse_direction(dir)
-	switch(dir)
+	switch (dir)
 		if (NORTH)
 			return SOUTH
 		if (NORTHEAST)
@@ -992,7 +992,7 @@ var/global/list/WALLITEMS = list(
 					return 1
 
 				//Some stuff doesn't use dir properly, so we need to check pixel instead
-				switch(dir)
+				switch (dir)
 					if (SOUTH)
 						if (O.pixel_y > 10)
 							return 1

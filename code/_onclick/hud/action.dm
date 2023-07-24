@@ -60,7 +60,7 @@
 /datum/action/proc/Trigger()
 	if (!Checks())
 		return
-	switch(action_type)
+	switch (action_type)
 		if (AB_ITEM, AB_ITEM_USE_ICON)
 			if (target)
 				var/obj/item/item = target

@@ -38,7 +38,7 @@
 					placing = checkdir
 					break
 
-		switch(placing)
+		switch (placing)
 			if (NORTH)
 				pixel_x = 0
 				pixel_y = 32
@@ -112,7 +112,7 @@
 		if (!choice || !user.use_sanity_check(src, tool))
 			return TRUE
 		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
-		switch(choice)
+		switch (choice)
 			if ("North")
 				pixel_x = 0
 				pixel_y = 32

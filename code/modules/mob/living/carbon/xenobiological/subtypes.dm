@@ -1,5 +1,5 @@
 /mob/living/carbon/slime/proc/GetMutations()
-	switch(src.colour)
+	switch (src.colour)
 		if ("grey")
 			return list("orange", "metal", "blue", "purple")
 		if ("purple")
@@ -33,7 +33,7 @@
 			return list()
 
 /mob/living/carbon/slime/proc/GetCoreType()
-	switch(src.colour)
+	switch (src.colour)
 		// Tier 1
 		if ("grey")
 			return /obj/item/slime_extract/grey

@@ -3,7 +3,7 @@
 	set category = "Admin"
 
 	var/obj/item/reagent_containers/chem_disp_cartridge/C
-	switch(size)
+	switch (size)
 		if ("small") C = new /obj/item/reagent_containers/chem_disp_cartridge/small(usr.loc)
 		if ("medium") C = new /obj/item/reagent_containers/chem_disp_cartridge/medium(usr.loc)
 		if ("large") C = new /obj/item/reagent_containers/chem_disp_cartridge(usr.loc)

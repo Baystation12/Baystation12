@@ -95,7 +95,7 @@
 /mob/living/bot/mulebot/ProcessCommand(mob/user, command, href_list)
 	..()
 	if (CanAccessPanel(user))
-		switch(command)
+		switch (command)
 			if ("stop")
 				obeyCommand("Stop")
 			if ("go")
@@ -122,12 +122,12 @@
 				crates_only = !crates_only
 
 	if (CanAccessMaintenance(user))
-		switch(command)
+		switch (command)
 			if ("safety")
 				safety = !safety
 
 /mob/living/bot/mulebot/proc/obeyCommand(command)
-	switch(command)
+	switch (command)
 		if ("Home")
 			resetTarget()
 			target = home

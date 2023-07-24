@@ -51,7 +51,7 @@ This is /obj/machinery level code to properly manage power usage from the area.
 
 /// Returns the current power usage draw, based on the state of `use_power`.
 /obj/machinery/proc/get_power_usage()
-	switch(use_power)
+	switch (use_power)
 		if (POWER_USE_IDLE)
 			return idle_power_usage
 		if (POWER_USE_ACTIVE)
@@ -145,7 +145,7 @@ This is /obj/machinery level code to properly manage power usage from the area.
 /// Updates the machine's `*_power_usage` to the new value and updates the machine's current power consumption state if applicable.
 /obj/machinery/proc/change_power_consumption(new_power_consumption, use_power_mode = POWER_USE_IDLE)
 	var/old_power
-	switch(use_power_mode)
+	switch (use_power_mode)
 		if (POWER_USE_IDLE)
 			old_power = idle_power_usage
 			idle_power_usage = new_power_consumption

@@ -60,7 +60,7 @@
 
 		src.add_fingerprint(usr)
 		if (usr.unEquip(src))
-			switch(over_object.name)
+			switch (over_object.name)
 				if (BP_R_HAND)
 					usr.put_in_r_hand(src)
 				if (BP_L_HAND)

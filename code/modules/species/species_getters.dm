@@ -71,7 +71,7 @@
 			covered = 1
 			break
 
-	switch(msg_type)
+	switch (msg_type)
 		if ("cold")
 			if (!covered)
 				to_chat(H, SPAN_DANGER("[pick(cold_discomfort_strings)]"))

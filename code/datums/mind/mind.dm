@@ -367,7 +367,7 @@
 				if (isnull(target_number))//Ordinarily, you wouldn't need isnull. In this case, the value may already exist.
 					return
 
-				switch(new_obj_type)
+				switch (new_obj_type)
 					if ("download")
 						new_objective = new /datum/objective/download
 						new_objective.explanation_text = "Download [target_number] research levels."
@@ -405,7 +405,7 @@
 
 		SET_BIT(H.hud_updateflag, IMPLOYAL_HUD)   // updates that players HUD images so secHUD's pick up they are implanted or not.
 
-		switch(href_list["implant"])
+		switch (href_list["implant"])
 			if ("remove")
 				for (var/obj/item/implant/loyalty/I in H.contents)
 					for (var/obj/item/organ/external/organs in H.organs)
@@ -420,7 +420,7 @@
 				log_admin("[key_name_admin(usr)] has loyalty implanted [current].")
 	else if (href_list["silicon"])
 		SET_BIT(current.hud_updateflag, SPECIALROLE_HUD)
-		switch(href_list["silicon"])
+		switch (href_list["silicon"])
 
 			if ("unemag")
 				var/mob/living/silicon/robot/R = current
@@ -459,7 +459,7 @@
 					log_admin("[key_name_admin(usr)] has unemag'ed [ai]'s Cyborgs.")
 
 	else if (href_list["common"])
-		switch(href_list["common"])
+		switch (href_list["common"])
 			if ("undress")
 				for (var/obj/item/W in current)
 					current.drop_from_inventory(W)

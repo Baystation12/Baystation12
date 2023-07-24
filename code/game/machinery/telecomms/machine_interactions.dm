@@ -217,7 +217,7 @@
 	var/obj/item/device/multitool/P = get_multitool(usr)
 
 	if (href_list["input"])
-		switch(href_list["input"])
+		switch (href_list["input"])
 
 			if ("resetoverload")
 				overloaded_for = 0

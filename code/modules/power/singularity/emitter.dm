@@ -192,7 +192,7 @@
 		if (active)
 			to_chat(user, SPAN_WARNING("Turn \the [src] off first."))
 			return
-		switch(state)
+		switch (state)
 			if (EMITTER_LOOSE)
 				state = EMITTER_WRENCHED
 				playsound(loc, 'sound/items/Ratchet.ogg', 75, TRUE)
@@ -220,7 +220,7 @@
 		if (active)
 			to_chat(user, SPAN_WARNING("Turn \the [src] off first."))
 			return
-		switch(state)
+		switch (state)
 			if (EMITTER_LOOSE)
 				to_chat(user, SPAN_WARNING("\The [src] needs to be wrenched to the floor."))
 			if (EMITTER_WRENCHED)

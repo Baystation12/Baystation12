@@ -9,7 +9,7 @@
 				to_chat(src, SPAN_NOTICE("You feel weak."))
 			else//Fluff-wise, since the brain can't detect anything itself, the MMI handles thing like that
 				to_chat(src, SPAN_WARNING("STATUS: CRITICAL AMOUNTS OF RADIATION DETECTED."))
-		switch(radiation)
+		switch (radiation)
 			if (1 to 49)
 				radiation--
 				if (prob(25))
@@ -106,7 +106,7 @@
 				emp_damage = 0
 			else
 				emp_damage = round(emp_damage,1)//Let's have some nice numbers to work with
-			switch(emp_damage)
+			switch (emp_damage)
 				if (31 to INFINITY)
 					emp_damage = 30//Let's not overdo it
 				if (21 to 30)//High level of EMP damage, unable to see, hear, or speak
@@ -159,7 +159,7 @@
 	update_sight()
 	if (healths)
 		if (stat != 2)
-			switch(health)
+			switch (health)
 				if (100 to INFINITY)
 					healths.icon_state = "health0"
 				if (80 to 100)

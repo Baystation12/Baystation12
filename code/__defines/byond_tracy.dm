@@ -12,7 +12,7 @@
 	set name = "Start Tracy Profiler"
 	set category = "Debug"
 	set desc = "Starts the tracy profiler, which will await the client connection."
-	switch(alert("Are you sure? Tracy will remain active until the server restarts.", "Tracy Init", "No", "Yes"))
+	switch (alert("Are you sure? Tracy will remain active until the server restarts.", "Tracy Init", "No", "Yes"))
 		if ("Yes")
 			prof_init()
 
@@ -22,7 +22,7 @@
 /proc/prof_init()
 	var/lib
 
-	switch(world.system_type)
+	switch (world.system_type)
 		if (MS_WINDOWS) lib = "prof.dll"
 		if (UNIX) lib = "libprof.so"
 		else CRASH("Tracy initialization failed: unsupported platform or DLL not found.")

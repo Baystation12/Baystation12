@@ -93,7 +93,7 @@
 				if (skill_level < SKILL_BASIC)
 					brain_result = "there's movement on the graph"
 				else if (istype(brain))
-					switch(brain.get_current_damage_threshold())
+					switch (brain.get_current_damage_threshold())
 						if (0)
 							brain_result = "normal"
 						if (1 to 2)
@@ -138,7 +138,7 @@
 		if (H.get_blood_volume() <= 70)
 			dat += SPAN_CLASS("scan_danger", "Severe blood loss detected.")
 		var/oxygenation_string = "[H.get_blood_oxygenation()]% blood oxygenation"
-		switch(H.get_blood_oxygenation())
+		switch (H.get_blood_oxygenation())
 			if (BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 				oxygenation_string = SPAN_CLASS("scan_notice", "[oxygenation_string]")
 			if (BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_OKAY)
@@ -153,7 +153,7 @@
 	dat += "Body temperature: [H.bodytemperature-T0C]&deg;C ([H.bodytemperature*1.8-459.67]&deg;F)"
 
 	// Radiation.
-	switch(H.radiation)
+	switch (H.radiation)
 		if (-INFINITY to 0)
 			dat += "No radiation detected."
 		if (1 to 30)
@@ -299,7 +299,7 @@
 /proc/get_wound_severity(damage_ratio, can_heal_overkill = 0)
 	var/degree
 
-	switch(damage_ratio)
+	switch (damage_ratio)
 		if (0 to 10)
 			degree = "minor"
 		if (10 to 25)

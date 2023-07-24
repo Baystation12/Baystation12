@@ -177,7 +177,7 @@
 	var/receiver_rh = (findtext(dna.b_type, "+") > 0)
 
 	if (donor_rh && !receiver_rh) return 1
-	switch(receiver_antigen)
+	switch (receiver_antigen)
 		if ("A")
 			if (donor_antigen != "A" && donor_antigen != "O") return 1
 		if ("B")
@@ -285,7 +285,7 @@
 	if ((status_flags & FAKEDEATH) || BP_IS_ROBOTIC(heart))
 		pulse_mod = 1
 	else
-		switch(heart.pulse)
+		switch (heart.pulse)
 			if (PULSE_NONE)
 				if (recent_pump)
 					pulse_mod = LAZYACCESS(heart.external_pump, 2)

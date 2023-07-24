@@ -162,7 +162,7 @@
 	..()
 	if (get_max_health())
 		return
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			qdel(src)
 		if (EX_ACT_HEAVY)
@@ -174,7 +174,7 @@
 
 /obj/item/examine(mob/user, distance)
 	var/size
-	switch(src.w_class)
+	switch (src.w_class)
 		if (ITEM_SIZE_TINY)
 			size = "tiny"
 		if (ITEM_SIZE_SMALL)
@@ -418,7 +418,7 @@ var/global/list/slot_flags_enumeration = list(
 					return FALSE
 
 	//Lastly, check special rules for the desired slot.
-	switch(slot)
+	switch (slot)
 		if (slot_l_ear, slot_r_ear)
 			var/slot_other_ear = (slot == slot_l_ear)? slot_r_ear : slot_l_ear
 			if ( (w_class > ITEM_SIZE_TINY) && !(slot_flags & SLOT_EARS) )
@@ -735,7 +735,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		return
 
 	var/viewoffset = WORLD_ICON_SIZE * tileoffset
-	switch(user.dir)
+	switch (user.dir)
 		if (NORTH)
 			user.client.pixel_x = 0
 			user.client.pixel_y = viewoffset

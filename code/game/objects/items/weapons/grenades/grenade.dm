@@ -65,7 +65,7 @@
 
 /obj/item/grenade/attackby(obj/item/W as obj, mob/user as mob)
 	if (isScrewdriver(W))
-		switch(det_time)
+		switch (det_time)
 			if (1)
 				det_time = 10
 				to_chat(user, SPAN_NOTICE("You set the [name] for 1 second detonation time."))

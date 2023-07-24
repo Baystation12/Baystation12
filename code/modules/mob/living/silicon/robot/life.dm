@@ -193,7 +193,7 @@
 			src.cells.icon_state = "charge-empty"
 
 	if (bodytemp)
-		switch(src.bodytemperature) //310.055 optimal body temp
+		switch (src.bodytemperature) //310.055 optimal body temp
 			if (335 to INFINITY)
 				src.bodytemp.icon_state = "temp2"
 			if (320 to 335)
@@ -207,7 +207,7 @@
 
 	var/datum/gas_mixture/environment = loc?.return_air()
 	if (fire && environment)
-		switch(environment.temperature)
+		switch (environment.temperature)
 			if (-INFINITY to T100C)
 				src.fire.icon_state = "fire0"
 			else

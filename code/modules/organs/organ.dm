@@ -201,7 +201,7 @@ var/global/list/organ_cache = list()
 		else
 			rejecting++ //Rejection severity increases over time.
 			if (rejecting % 10 == 0) //Only fire every ten rejection ticks.
-				switch(rejecting)
+				switch (rejecting)
 					if (1 to 50)
 						germ_level++
 					if (51 to 200)

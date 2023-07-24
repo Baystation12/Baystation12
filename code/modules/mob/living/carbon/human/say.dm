@@ -163,7 +163,7 @@
 		. = ..(message_data)
 
 /mob/living/carbon/human/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
-	switch(message_mode)
+	switch (message_mode)
 		if ("intercom")
 			if (!src.restrained())
 				for (var/obj/item/device/radio/I in view(1))

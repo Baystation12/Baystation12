@@ -25,10 +25,10 @@
 
 /obj/structure/dispenser/on_update_icon()
 	overlays.Cut()
-	switch(oxygentanks)
+	switch (oxygentanks)
 		if (1 to 3)	overlays += "oxygen-[oxygentanks]"
 		if (4 to INFINITY) overlays += "oxygen-4"
-	switch(phorontanks)
+	switch (phorontanks)
 		if (1 to 4)	overlays += "phoron-[phorontanks]"
 		if (5 to INFINITY) overlays += "phoron-5"
 

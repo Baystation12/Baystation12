@@ -29,7 +29,7 @@
 	expected_machine_type = "machine"
 
 /obj/machinery/constructable_frame/machine_frame/on_update_icon()
-	switch(construct_state && construct_state.type)
+	switch (construct_state && construct_state.type)
 		if (/singleton/machine_construction/frame/awaiting_circuit)
 			icon_state = "box_1"
 		if (/singleton/machine_construction/frame/awaiting_parts)

@@ -145,7 +145,7 @@
 	set src in view(1)
 
 	var/selection = input(usr, "Please select the type of target to locate.", "Mode" , "") as null|anything in list("Location", "Disk Recovery", "DNA", "Other Signature")
-	switch(selection)
+	switch (selection)
 		if ("Disk Recovery")
 			var/obj/item/disk/nuclear/the_disk = locate()
 			target = weakref(the_disk)

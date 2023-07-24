@@ -52,7 +52,7 @@ Contains helper procs for airflow, handled in /connection_group.
 	if (isnull(w_class))
 		if (n < vsc.airflow_dense_pressure) return 0 //most non-item objs don't have a w_class yet
 	else
-		switch(w_class)
+		switch (w_class)
 			if (1,2)
 				if (n < vsc.airflow_lightest_pressure) return 0
 			if (3)

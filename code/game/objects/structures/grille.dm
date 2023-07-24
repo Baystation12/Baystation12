@@ -129,7 +129,7 @@
 
 	//20% chance that the grille provides a bit more cover than usual. Support structure for example might take up 20% of the grille's area.
 	//If they click on the grille itself then we assume they are aiming at the grille itself and the extra cover behaviour is always used.
-	switch(Proj.damage_type)
+	switch (Proj.damage_type)
 		if (DAMAGE_BRUTE)
 			//bullets
 			if (Proj.original == src || prob(20))

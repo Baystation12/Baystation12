@@ -82,7 +82,7 @@
 	overlays.Cut()
 	if (bcell)
 		var/percent = bcell.percent()
-		switch(percent)
+		switch (percent)
 			if (0 to 25)
 				overlays += "forth_quarter"
 			if (25 to 50)

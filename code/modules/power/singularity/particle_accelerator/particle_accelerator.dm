@@ -93,7 +93,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 
 /obj/structure/particle_accelerator/examine(mob/user)
 	. = ..()
-	switch(construction_state)
+	switch (construction_state)
 		if (0)
 			to_chat(user, "Looks like it's not attached to the flooring")
 		if (1)
@@ -188,7 +188,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 		investigate_log("was moved whilst active; it [SPAN_COLOR("red", "powered down")].","singulo")
 
 /obj/structure/particle_accelerator/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			qdel(src)
 			return
@@ -204,7 +204,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	return
 
 /obj/structure/particle_accelerator/on_update_icon()
-	switch(construction_state)
+	switch (construction_state)
 		if (0,1)
 			icon_state="[reference]"
 		if (2)
@@ -265,7 +265,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 
 /obj/machinery/particle_accelerator/examine(mob/user)
 	. = ..()
-	switch(construction_state)
+	switch (construction_state)
 		if (0)
 			to_chat(user, "Looks like it's not attached to the flooring")
 		if (1)
@@ -287,7 +287,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 
 
 /obj/machinery/particle_accelerator/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			qdel(src)
 			return
@@ -313,7 +313,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	if (!ismob(user) || !isobj(O))
 		return 0
 	var/temp_state = src.construction_state
-	switch(src.construction_state)//TODO:Might be more interesting to have it need several parts rather than a single list of steps
+	switch (src.construction_state)//TODO:Might be more interesting to have it need several parts rather than a single list of steps
 		if (0)
 			if (isWrench(O))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)

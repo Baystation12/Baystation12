@@ -66,7 +66,7 @@
 		return ..()
 
 /obj/structure/bed/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			qdel(src)
 			return

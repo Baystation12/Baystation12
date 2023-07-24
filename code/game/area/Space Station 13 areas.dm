@@ -29,7 +29,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	layer = BASE_AREA_LAYER
 	luminosity = 0
 	mouse_opacity = 0
-	/// Boolean. Whether or not the area's lightswitch is switched to 'On' or 'Off'. Used to synchronize lightswitch buttons. Do not modify directly; Use `./set_lightswitch()` instead.
+	/// Boolean. Whether or not the area's lightswitch is switched to 'On' or 'Off'. Used to synchronize lightswitch buttons. Do not modify directly; Use `./set_lightswitch ()` instead.
 	var/lightswitch = 1
 
 	/// Boolean. Whether or not the area is in the 'Evacuation' alert state. Do not modify directly; Use `./readyalert()` or `./readyreset()` instead.

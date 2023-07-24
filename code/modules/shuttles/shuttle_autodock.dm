@@ -89,7 +89,7 @@
 	Doing so will ensure that multiple jumps cannot be initiated in parallel.
 */
 /datum/shuttle/autodock/Process()
-	switch(process_state)
+	switch (process_state)
 		if (WAIT_LAUNCH)
 			if (check_undocked())
 				//*** ready to go

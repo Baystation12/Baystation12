@@ -61,7 +61,7 @@
 	return
 
 /obj/machinery/door/unpowered/simple/do_animate(animation)
-	switch(animation)
+	switch (animation)
 		if ("opening")
 			flick("[icon_base]opening", src)
 		if ("closing")

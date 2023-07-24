@@ -224,7 +224,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 //explosion handling
 /obj/structure/cable/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			qdel(src)
 		if (EX_ACT_HEAVY)

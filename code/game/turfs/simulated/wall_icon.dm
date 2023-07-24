@@ -118,7 +118,7 @@
 	var/list/other_dirs = list()
 
 	for (var/turf/simulated/wall/W in orange(src, 1))
-		switch(can_join_with(W))
+		switch (can_join_with(W))
 			if (0)
 				continue
 			if (1)

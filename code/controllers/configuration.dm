@@ -864,7 +864,7 @@
 		value = text2num(value)
 		if (!value)
 			log_misc("Unknown value for '[name]' in config/game_options.txt")
-		switch(name)
+		switch (name)
 			if ("health_threshold_dead")
 				health_threshold_dead = value
 			if ("revival_brain_life")

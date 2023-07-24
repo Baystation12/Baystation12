@@ -18,13 +18,13 @@ var/global/list/admin_ranks = list()								//list of all ranks with associated 
 		if (!length(List))					continue
 
 		var/rank = ckeyEx(List[1])
-		switch(rank)
+		switch (rank)
 			if (null,"")		continue
 			if ("Removed")	continue				//Reserved
 
 		var/rights = 0
 		for (var/i=2, i<=length(List), i++)
-			switch(ckey(List[i]))
+			switch (ckey(List[i]))
 				if ("@","prev")					rights |= previous_rights
 				if ("buildmode","build")			rights |= R_BUILDMODE
 				if ("admin")						rights |= R_ADMIN

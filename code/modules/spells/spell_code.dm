@@ -144,7 +144,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 	return
 
 /spell/proc/adjust_var(mob/living/target = usr, type, amount) //handles the adjustment of the var when the spell is used. has some hardcoded types
-	switch(type)
+	switch (type)
 		if ("bruteloss")
 			target.adjustBruteLoss(amount)
 		if ("fireloss")
@@ -269,7 +269,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 
 /spell/proc/check_charge(skipcharge, mob/user)
 	if (!skipcharge)
-		switch(charge_type)
+		switch (charge_type)
 			if (Sp_RECHARGE)
 				if (charge_counter < charge_max)
 					to_chat(user, still_recharging_msg)
@@ -282,7 +282,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 
 /spell/proc/take_charge(mob/user = user, skipcharge)
 	if (!skipcharge)
-		switch(charge_type)
+		switch (charge_type)
 			if (Sp_RECHARGE)
 				charge_counter = 0 //doesn't start recharging until the targets selecting ends
 				src.process()
@@ -312,7 +312,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 
 /spell/proc/invocation(mob/user = usr, list/targets) //spelling the spell out and setting it on recharge/reducing charges amount
 
-	switch(invocation_type)
+	switch (invocation_type)
 		if (SpI_SHOUT)
 			if (prob(50))//Auto-mute? Fuck that noise
 				user.say(invocation)
@@ -369,7 +369,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 
 	var/temp = ""
 	name = initial(name)
-	switch(level_max[Sp_SPEED] - spell_levels[Sp_SPEED])
+	switch (level_max[Sp_SPEED] - spell_levels[Sp_SPEED])
 		if (3)
 			temp = "You have improved [name] into Efficient [name]."
 			name = "Efficient [name]"

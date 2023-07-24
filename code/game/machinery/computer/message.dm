@@ -98,7 +98,7 @@
 		if (!linkedServer || (linkedServer.inoperable())) message = noserver
 		screen = 0
 
-	switch(screen)
+	switch (screen)
 		//Main menu
 		if (0)
 			//&#09; = TAB

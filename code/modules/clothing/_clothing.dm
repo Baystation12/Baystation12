@@ -116,7 +116,7 @@
 		return //this item doesn't use the species_restricted system
 
 	//Set species_restricted list
-	switch(target_species)
+	switch (target_species)
 		if (SPECIES_HUMAN, SPECIES_SKRELL)	//humanoid bodytypes
 			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_IPC) //skrell/humans/machines can wear each other's suits
 		else
@@ -132,7 +132,7 @@
 		return //this item doesn't use the species_restricted system
 
 	//Set species_restricted list
-	switch(target_species)
+	switch (target_species)
 		if (SPECIES_SKRELL)
 			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_IPC) //skrell helmets fit humans too
 		if (SPECIES_HUMAN)
@@ -956,7 +956,7 @@ BLIND     // can't see anything
 
 /obj/item/clothing/under/examine(mob/user)
 	. = ..()
-	switch(src.sensor_mode)
+	switch (src.sensor_mode)
 		if (SUIT_SENSOR_OFF)
 			to_chat(user, "Its sensors appear to be disabled.")
 		if (SUIT_SENSOR_BINARY)
@@ -986,7 +986,7 @@ BLIND     // can't see anything
 	sensor_mode = SUIT_SENSOR_MODES[switchMode]
 
 	if (src.loc == user)
-		switch(sensor_mode)
+		switch (sensor_mode)
 			if (SUIT_SENSOR_OFF)
 				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "You disable your suit's remote sensing equipment.")
 			if (SUIT_SENSOR_BINARY)
@@ -1007,7 +1007,7 @@ BLIND     // can't see anything
 /obj/item/clothing/under/emp_act(severity)
 	..()
 	var/new_mode
-	switch(severity)
+	switch (severity)
 		if (EMP_ACT_HEAVY)
 			new_mode = pick(75;SUIT_SENSOR_OFF, 15;SUIT_SENSOR_BINARY, 10;SUIT_SENSOR_VITAL)
 		if (EMP_ACT_LIGHT)

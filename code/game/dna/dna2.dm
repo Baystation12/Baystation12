@@ -107,7 +107,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 // Create random UI.
 /datum/dna/proc/ResetUI(defer=0)
 	for (var/i=1,i<=DNA_UI_LENGTH,i++)
-		switch(i)
+		switch (i)
 			if (DNA_UI_SKIN_TONE)
 				SetUIValueRange(DNA_UI_SKIN_TONE,rand(1,220),220,1) // Otherwise, it gets fucked
 			else

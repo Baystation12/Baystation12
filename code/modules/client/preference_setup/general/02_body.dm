@@ -492,7 +492,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		if (pref.organ_data[BP_CHEST] == "cyborg")
 			choice_options = list("Amputated", "Prosthesis")
 
-		switch(organ_tag)
+		switch (organ_tag)
 			if ("Left Leg")
 				limb = BP_L_LEG
 				second_limb = BP_L_FOOT
@@ -528,7 +528,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		var/new_state = input(user, "What state do you wish the limb to be in?") as null|anything in choice_options
 		if (!new_state || !CanUseTopic(user)) return TOPIC_NOACTION
 
-		switch(new_state)
+		switch (new_state)
 			if ("Normal")
 				if (limb == BP_CHEST)
 					for (var/other_limb in (BP_ALL_LIMBS - BP_CHEST))
@@ -594,7 +594,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		if (!organ_name) return
 
 		var/organ = null
-		switch(organ_name)
+		switch (organ_name)
 			if ("Heart")
 				organ = BP_HEART
 			if ("Eyes")
@@ -621,7 +621,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		var/new_state = input(user, "What state do you wish the organ to be in?") as null|anything in organ_choices
 		if (!new_state) return
 
-		switch(new_state)
+		switch (new_state)
 			if ("Normal")
 				pref.organ_data[organ] = null
 			if ("Assisted")

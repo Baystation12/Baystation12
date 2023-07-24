@@ -138,7 +138,7 @@
 
 	if (G.check_action_cooldown() && !G.attacking)
 		var/intent = G.assailant.a_intent
-		switch(intent)
+		switch (intent)
 
 			if (I_HELP)
 				if (on_hit_help(G))
@@ -177,7 +177,7 @@
 		adir = assailant.dir
 		affecting.set_dir(assailant.dir)
 
-	switch(adir)
+	switch (adir)
 		if (NORTH)
 			animate(affecting, pixel_x = 0, pixel_y =-shift, 5, 1, LINEAR_EASING)
 			G.draw_affecting_under()

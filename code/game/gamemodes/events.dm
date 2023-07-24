@@ -112,7 +112,7 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 				crew = pick(pos_crew)
 			else
 				crew = "Any Human"
-			switch(rand(1,14))
+			switch (rand(1,14))
 				if (1)
 					M.add_ion_law("THERE ARE [amount] [who2] ON THE [uppertext(station_name())]")
 				if (2)

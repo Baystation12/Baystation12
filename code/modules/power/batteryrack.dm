@@ -82,7 +82,7 @@
 // Sets input/output depending on our "mode" var.
 /obj/machinery/power/smes/batteryrack/proc/update_io(newmode)
 	mode = newmode
-	switch(mode)
+	switch (mode)
 		if (PSU_OFFLINE)
 			input_attempt = 0
 			output_attempt = 0

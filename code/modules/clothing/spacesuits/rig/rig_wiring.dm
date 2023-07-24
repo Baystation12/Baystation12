@@ -26,7 +26,7 @@
 /datum/wires/rig/UpdateCut(index, mended)
 
 	var/obj/item/rig/rig = holder
-	switch(index)
+	switch (index)
 		if (RIG_SECURITY)
 			if (mended)
 				rig.req_access = initial(rig.req_access)
@@ -37,7 +37,7 @@
 /datum/wires/rig/UpdatePulsed(index)
 
 	var/obj/item/rig/rig = holder
-	switch(index)
+	switch (index)
 		if (RIG_SECURITY)
 			rig.security_check_enabled = !rig.security_check_enabled
 			rig.visible_message("\The [rig] twitches as several suit locks [rig.security_check_enabled?"close":"open"].")

@@ -176,7 +176,7 @@
 		overlays.Add("station_map-panel")
 
 /obj/machinery/ship_map/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			qdel(src)
 		if (EX_ACT_HEAVY)

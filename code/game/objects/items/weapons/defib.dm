@@ -607,7 +607,7 @@
 /obj/item/shockpaddles/standalone/emp_act(severity)
 	..()
 	var/new_fail = 0
-	switch(severity)
+	switch (severity)
 		if (EMP_ACT_HEAVY)
 			new_fail = max(fail_counter, 20)
 			visible_message("\The [src]'s reactor overloads!")

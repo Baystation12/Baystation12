@@ -50,7 +50,7 @@
 			var/kpa = air.return_pressure()  / (TANK_LEAK_PRESSURE * 0.8) * 100
 			var/display = "[round(kpa)]%"
 			if (user.skill_check(SKILL_ATMOS, SKILL_BASIC))
-				switch(kpa)
+				switch (kpa)
 					if (100 to INFINITY)
 						display = "unsafe ([display])"
 					if (67 to 100)

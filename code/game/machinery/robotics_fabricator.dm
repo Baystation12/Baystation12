@@ -281,7 +281,7 @@
 	var/recursive = amount == -1 ? 1 : 0
 	material = lowertext(material)
 	var/mattype
-	switch(material)
+	switch (material)
 		if (MATERIAL_STEEL)
 			mattype = /obj/item/stack/material/steel
 		if (MATERIAL_GLASS)

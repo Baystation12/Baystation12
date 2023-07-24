@@ -312,7 +312,7 @@
 		update_icon()
 		return 1
 	else if ( href_list["input"] )
-		switch( href_list["input"] )
+		switch ( href_list["input"] )
 			if ("min")
 				input_level = 0
 			if ("max")
@@ -322,7 +322,7 @@
 		input_level = max(0, min(input_level_max, input_level))	// clamp to range
 		return 1
 	else if ( href_list["output"] )
-		switch( href_list["output"] )
+		switch ( href_list["output"] )
 			if ("min")
 				output_level = 0
 			if ("max")
@@ -352,7 +352,7 @@
 	if (damage > maxdamage)
 		visible_message(SPAN_DANGER("\The [src] explodes in large rain of sparks and smoke!"))
 		// Depending on stored charge percentage cause damage.
-		switch(Percentage())
+		switch (Percentage())
 			if (75 to INFINITY)
 				explosion(get_turf(src), 7)
 			if (40 to 74)
@@ -395,7 +395,7 @@
 	if (!damage)
 		return
 	var/damage_percentage = round((damage / maxdamage) * 100)
-	switch(damage_percentage)
+	switch (damage_percentage)
 		if (75 to INFINITY)
 			to_chat(user, SPAN_DANGER("It's casing is severely damaged, and sparking circuitry may be seen through the holes!"))
 		if (50 to 74)

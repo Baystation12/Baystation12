@@ -68,7 +68,7 @@
 	if (istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if (H.species)
-			switch(H.species.name)
+			switch (H.species.name)
 				if (SPECIES_VOX)
 					disposition = 1000
 					hailed_vox = TRUE

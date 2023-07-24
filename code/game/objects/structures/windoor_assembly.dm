@@ -35,7 +35,7 @@
 	if (constructed)
 		state = WINDOOR_STATE_FRAME
 		anchored = FALSE
-	switch(start_dir)
+	switch (start_dir)
 		if (NORTH, SOUTH, EAST, WEST)
 			set_dir(start_dir)
 		else //If the user is facing northeast. northwest, southeast, southwest or north, default to north

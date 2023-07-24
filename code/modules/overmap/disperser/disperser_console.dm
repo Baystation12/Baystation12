@@ -183,7 +183,7 @@
 		data["skill"] = user.get_skill_value(core_skill) > skill_offset
 
 		var/charge = SPAN_BOLD("UNKNOWN ERROR")
-		switch(get_charge_type())
+		switch (get_charge_type())
 			if (OVERMAP_WEAKNESS_NONE)
 				charge = "[SPAN_BOLD("ERROR")]: No valid charge detected."
 			if (OVERMAP_WEAKNESS_DROPPOD)

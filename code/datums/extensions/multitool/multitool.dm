@@ -50,7 +50,7 @@
 	else
 		. = on_topic(href, href_list, user)
 
-	switch(.)
+	switch (.)
 		if (MT_REFRESH)
 			interact(M, user)
 		if (MT_CLOSE)

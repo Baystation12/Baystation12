@@ -35,7 +35,7 @@
 	ports = new()
 	for (var/d in GLOB.cardinal)
 		var/datum/omni_port/new_port = new(src, d)
-		switch(d)
+		switch (d)
 			if (NORTH)
 				new_port.mode = tag_north
 			if (SOUTH)
@@ -129,7 +129,7 @@
 	for (var/datum/omni_port/P in ports)
 		if (P.update)
 			var/ref_layer = 0
-			switch(P.dir)
+			switch (P.dir)
 				if (NORTH)
 					ref_layer = 1
 				if (SOUTH)
@@ -165,7 +165,7 @@
 		var/ic_dir = dir_name(P.dir)
 		var/ic_on = ic_dir
 		var/ic_off = ic_dir
-		switch(P.mode)
+		switch (P.mode)
 			if (ATM_INPUT)
 				ic_on += "_in_glow"
 				ic_off += "_in"

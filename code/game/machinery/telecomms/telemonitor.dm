@@ -28,7 +28,7 @@
 	var/list/dat = list()
 	dat += "<TITLE>Telecommunications Monitor</TITLE><center><b>Telecommunications Monitor</b></center>"
 
-	switch(screen)
+	switch (screen)
 
 
 		// --- Main Menu ---
@@ -82,7 +82,7 @@
 				break
 
 	if (href_list["operation"])
-		switch(href_list["operation"])
+		switch (href_list["operation"])
 
 			if ("release")
 				machinelist = list()

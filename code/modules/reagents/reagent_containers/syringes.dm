@@ -41,7 +41,7 @@
 	update_icon()
 
 /obj/item/reagent_containers/syringe/attack_self(mob/user as mob)
-	switch(mode)
+	switch (mode)
 		if (SYRINGE_DRAW)
 			mode = SYRINGE_INJECT
 		if (SYRINGE_INJECT)
@@ -88,7 +88,7 @@
 		rounded_vol = 0
 	if (ismob(loc))
 		var/injoverlay
-		switch(mode)
+		switch (mode)
 			if (SYRINGE_DRAW)
 				injoverlay = "draw"
 			if (SYRINGE_INJECT)
@@ -106,7 +106,7 @@
 		underlays += filling
 
 /obj/item/reagent_containers/syringe/proc/handleTarget(atom/target, mob/user)
-	switch(mode)
+	switch (mode)
 		if (SYRINGE_DRAW)
 			drawReagents(target, user)
 

@@ -34,7 +34,7 @@
 	if (!registered_user && register_user(user))
 		to_chat(user, SPAN_NOTICE("The microscanner marks you as its owner, preventing others from accessing its internals."))
 	if (registered_user == user)
-		switch(alert("Would you like edit the ID, or show it?","Show or Edit?", "Edit","Show"))
+		switch (alert("Would you like edit the ID, or show it?","Show or Edit?", "Edit","Show"))
 			if ("Edit")
 				ui_interact(user)
 			if ("Show")
@@ -99,7 +99,7 @@
 		electronic_warfare = text2num(href_list["electronic_warfare"])
 		to_chat(user, SPAN_NOTICE("Electronic warfare [electronic_warfare ? "enabled" : "disabled"]."))
 	else if (href_list["set"])
-		switch(href_list["set"])
+		switch (href_list["set"])
 			if ("Age")
 				var/new_age = input(user,"What age would you like to put on this card?","Agent Card Age", age) as null|num
 				if (!isnull(new_age) && CanUseTopic(user, state))

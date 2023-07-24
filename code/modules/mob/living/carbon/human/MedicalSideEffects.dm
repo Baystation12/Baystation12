@@ -92,7 +92,7 @@
 /datum/medical_effect/headache/on_life(mob/living/carbon/human/H, strength)
 	var/obj/item/organ/external/head/head = H.get_organ("head")
 	if (istype(head))
-		switch(strength)
+		switch (strength)
 			if (1 to 10)
 				H.custom_pain("You feel a light pain in your head.",0, affecting = head)
 			if (11 to 30)
@@ -109,7 +109,7 @@
 	cure_message = "Your stomach feels a little better now..."
 
 /datum/medical_effect/bad_stomach/on_life(mob/living/carbon/human/H, strength)
-	switch(strength)
+	switch (strength)
 		if (1 to 10)
 			H.custom_pain("You feel a bit light around the stomach.",0)
 		if (11 to 30)
@@ -126,7 +126,7 @@
 	cure_message = "The cramps let up..."
 
 /datum/medical_effect/cramps/on_life(mob/living/carbon/human/H, strength)
-	switch(strength)
+	switch (strength)
 		if (1 to 10)
 			H.custom_pain("The muscles in your body hurt a little.",0)
 		if (11 to 30)
@@ -144,7 +144,7 @@
 	cure_message = "The itching stops..."
 
 /datum/medical_effect/itch/on_life(mob/living/carbon/human/H, strength)
-	switch(strength)
+	switch (strength)
 		if (1 to 10)
 			H.custom_pain("You feel a slight itch.",0)
 		if (11 to 30)

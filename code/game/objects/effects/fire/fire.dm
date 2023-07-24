@@ -180,7 +180,7 @@
 
 /obj/effect/turf_fire/proc/UpdateFireState()
 	var/new_state
-	switch(fire_power)
+	switch (fire_power)
 		if (0 to 10)
 			new_state = TURF_FIRE_STATE_SMALL
 		if (11 to 24)
@@ -194,7 +194,7 @@
 		return
 	current_fire_state = new_state
 
-	switch(current_fire_state)
+	switch (current_fire_state)
 		if (TURF_FIRE_STATE_SMALL)
 			icon_state = "small"
 			set_light(0.5, 1, 1.5)

@@ -23,7 +23,7 @@
 
 /obj/item/clothingbag/rubbersuit/New()
 	..()
-	switch(rand(1,3))
+	switch (rand(1,3))
 		if (1)
 			new/obj/item/clothing/suit/rubber(src)
 			new/obj/item/clothing/mask/rubber/species(src)

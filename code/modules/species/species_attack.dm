@@ -48,10 +48,10 @@
 		user.visible_message(SPAN_DANGER("[user] [pick(attack_verb)] \himself in the [affecting.name]!"))
 		return 0
 
-	switch(zone)
+	switch (zone)
 		if (BP_HEAD, BP_MOUTH, BP_EYES)
 			// ----- HEAD ----- //
-			switch(attack_damage)
+			switch (attack_damage)
 				if (1 to 2) user.visible_message(SPAN_DANGER("[user] scratched [target] across \his cheek!"))
 				if (3 to 4)
 					user.visible_message(pick(
@@ -65,7 +65,7 @@
 						))
 		else
 			// ----- BODY ----- //
-			switch(attack_damage)
+			switch (attack_damage)
 				if (1 to 2)	user.visible_message(SPAN_CLASS("danger", "[user] [pick("scratched", "grazed")] [target]'s [affecting.name]!"))
 				if (3 to 4)
 					user.visible_message(pick(
@@ -144,7 +144,7 @@
 	var/organ = affecting.name
 	attack_damage = clamp(attack_damage, 1, 6)
 	attack_damage = 3 + attack_damage - rand(1, 5)
-	switch(attack_damage)
+	switch (attack_damage)
 
 		if (1 to 5)	user.visible_message(SPAN_DANGER("[user] glanced [target] with their [pick(attack_noun)] in the [organ]!"))
 

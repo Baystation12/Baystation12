@@ -79,7 +79,7 @@
 /mob/living/silicon/emp_act(severity)
 	if (status_flags & GODMODE)
 		return
-	switch(severity)
+	switch (severity)
 		if (EMP_ACT_HEAVY)
 			take_organ_damage(0, 16, ORGAN_DAMAGE_SILICON_EMP)
 			if (prob(50)) Stun(rand(5,10))
@@ -122,7 +122,7 @@
 		return PROJECTILE_FORCE_MISS
 
 	if (!Proj.nodamage)
-		switch(Proj.damage_type)
+		switch (Proj.damage_type)
 			if (DAMAGE_BRUTE)
 				adjustBruteLoss(Proj.damage)
 			if (DAMAGE_BURN)
@@ -226,7 +226,7 @@
 
 /mob/living/silicon/proc/toggle_sensor_mode()
 	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Security", "Medical","Disable")
-	switch(sensor_type)
+	switch (sensor_type)
 		if ("Security")
 			sensor_mode = SEC_HUD
 			to_chat(src, SPAN_NOTICE("Security records overlay enabled."))
@@ -262,7 +262,7 @@
 
 	var/brute
 	var/burn
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			brute = 400
 			burn = 100

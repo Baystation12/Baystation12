@@ -63,7 +63,7 @@
 
 /mob/living/simple_animal/passive/juvenile_space_whale/set_dir()
 	..()
-	switch(dir)
+	switch (dir)
 		if (NORTH, SOUTH)
 			bound_height = 64
 			bound_width = 32

@@ -69,7 +69,7 @@
 		var/obj/item/projectile/pew
 		var/pew_sound
 
-		switch(user_rank)
+		switch (user_rank)
 			if (PSI_RANK_PARAMOUNT)
 				pew = new /obj/item/projectile/beam/heavylaser(get_turf(user))
 				pew.name = "gigawatt mental laser"

@@ -55,7 +55,7 @@
 			break
 		. += copytext_char(message, 1, min_index)
 		if (copytext_char(message, min_index, min_index+1) == uppertext(min_char))
-			switch(text2ascii(message, min_index+1))
+			switch (text2ascii(message, min_index+1))
 				if (65 to 90) // A-Z, uppercase; uppercase R/S followed by another uppercase letter, uppercase the entire replacement string
 					. += uppertext(pick(map[min_char]))
 				else

@@ -33,7 +33,7 @@
 	if (config.vote_no_default)
 		return
 	var/factor = 0.5
-	switch(world.time / (1 MINUTE))
+	switch (world.time / (1 MINUTE))
 		if (0 to 60)
 			factor = 0.5
 		if (61 to 120)

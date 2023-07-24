@@ -166,7 +166,7 @@
 		//Removing from inventory
 		if (href_list["remove_inv"])
 			var/remove_from = href_list["remove_inv"]
-			switch(remove_from)
+			switch (remove_from)
 				if ("ears")
 					if (ears)
 						if (length(available_channels))
@@ -188,7 +188,7 @@
 			if (!user.get_active_hand())
 				to_chat(user, SPAN_WARNING("You have nothing in your hand to put on its [add_to]."))
 				return TOPIC_HANDLED
-			switch(add_to)
+			switch (add_to)
 				if ("ears")
 					if (ears)
 						to_chat(user, SPAN_WARNING("It's already wearing something."))
@@ -210,7 +210,7 @@
 
 						available_channels.Cut()
 						for (var/ch in headset_to_add.channels)
-							switch(ch)
+							switch (ch)
 								if ("Engineering")
 									available_channels.Add(":e")
 								if ("Command")

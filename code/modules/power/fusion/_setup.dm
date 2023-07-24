@@ -39,7 +39,7 @@
 		// SETUP PHASE
 		for (var/obj/effect/engine_setup/S in world)
 			var/result = S.activate(0)
-			switch(result)
+			switch (result)
 				if (SETUP_OK)
 					success++
 					continue
@@ -57,7 +57,7 @@
 		if (!errors)
 			for (var/obj/effect/engine_setup/S in delayed_objects)
 				var/result = S.activate(1)
-				switch(result)
+				switch (result)
 					if (SETUP_OK)
 						success++
 						continue

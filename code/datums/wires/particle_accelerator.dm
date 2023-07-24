@@ -22,7 +22,7 @@ var/global/const/PARTICLE_LIMIT_POWER_WIRE = 8 // Determines how strong the PA c
 
 /datum/wires/particle_acc/control_box/UpdatePulsed(index)
 	var/obj/machinery/particle_accelerator/control_box/C = holder
-	switch(index)
+	switch (index)
 
 		if (PARTICLE_TOGGLE_WIRE)
 			C.toggle_power()
@@ -38,7 +38,7 @@ var/global/const/PARTICLE_LIMIT_POWER_WIRE = 8 // Determines how strong the PA c
 
 /datum/wires/particle_acc/control_box/UpdateCut(index, mended)
 	var/obj/machinery/particle_accelerator/control_box/C = holder
-	switch(index)
+	switch (index)
 
 		if (PARTICLE_TOGGLE_WIRE)
 			if (C.active == !mended)

@@ -124,7 +124,7 @@
 
 	if (isobj(AM) && !client && powerlevel > 0)
 		var/probab = 10
-		switch(powerlevel)
+		switch (powerlevel)
 			if (1 to 2)	probab = 20
 			if (3 to 4)	probab = 30
 			if (5 to 6)	probab = 40
@@ -256,7 +256,7 @@
 				step_away(src, M)
 			return
 
-	switch(M.a_intent)
+	switch (M.a_intent)
 
 		if (I_HELP)
 			help_shake_act(M)

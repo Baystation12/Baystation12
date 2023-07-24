@@ -25,7 +25,7 @@ var/global/const/WIRE_TRANSMIT = 4
 
 /datum/wires/radio/UpdatePulsed(index)
 	var/obj/item/device/radio/R = holder
-	switch(index)
+	switch (index)
 		if (WIRE_SIGNAL)
 			R.listening = !R.listening && !IsIndexCut(WIRE_RECEIVE)
 			R.broadcasting = R.listening && !IsIndexCut(WIRE_TRANSMIT)
@@ -39,7 +39,7 @@ var/global/const/WIRE_TRANSMIT = 4
 
 /datum/wires/radio/UpdateCut(index, mended)
 	var/obj/item/device/radio/R = holder
-	switch(index)
+	switch (index)
 		if (WIRE_SIGNAL)
 			R.listening = mended && !IsIndexCut(WIRE_RECEIVE)
 			R.broadcasting = mended && !IsIndexCut(WIRE_TRANSMIT)

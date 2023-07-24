@@ -234,7 +234,7 @@
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/clothing/mask/bandana/equipped(mob/user, slot)
-	switch(slot)
+	switch (slot)
 		if (slot_wear_mask) //Mask is the default for all the settings
 			flags_inv = initial(flags_inv)
 			body_parts_covered = initial(body_parts_covered)

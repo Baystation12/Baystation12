@@ -261,7 +261,7 @@
 			removePersonality()
 	if (href_list["wires"])
 		var/t1 = text2num(href_list["wires"])
-		switch(t1)
+		switch (t1)
 			if (4)
 				radio.ToggleBroadcast()
 			if (2)
@@ -293,7 +293,7 @@
 /obj/item/device/paicard/proc/setEmotion(emotion)
 	if (pai)
 		src.overlays.Cut()
-		switch(emotion)
+		switch (emotion)
 			if (1) src.overlays += "pai-happy"
 			if (2) src.overlays += "pai-cat"
 			if (3) src.overlays += "pai-extremely-happy"

@@ -223,7 +223,7 @@
 		icon_state = null
 
 /// Sets the area's light switch state to on or off, in turn turning all lights in the area on or off.
-/area/proc/set_lightswitch(new_switch)
+/area/proc/set_lightswitch (new_switch)
 	if (lightswitch != new_switch)
 		lightswitch = new_switch
 		for (var/obj/machinery/light_switch/L in src)

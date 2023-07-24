@@ -63,7 +63,7 @@
 		. = max(., S.get_status())
 
 /datum/nano_module/supermatter_monitor/proc/process_data_output(skill, value)
-	switch(skill)
+	switch (skill)
 		if (SKILL_UNSKILLED)
 			return (0.6 + 0.8 * rand()) * value
 		if (SKILL_BASIC)

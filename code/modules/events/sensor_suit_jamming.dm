@@ -4,7 +4,7 @@
 /datum/event/sensor_suit_jamming/setup()
 	announceWhen = 10
 	endWhen = rand(15, 60) * severity
-	switch(severity)
+	switch (severity)
 		if (EVENT_LEVEL_MAJOR)
 			jamming_method = new/suit_sensor_jammer_method/random/major()
 		if (EVENT_LEVEL_MODERATE)

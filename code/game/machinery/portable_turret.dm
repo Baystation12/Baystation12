@@ -116,7 +116,7 @@
 	weapon_setup(installation)
 
 /obj/machinery/porta_turret/proc/weapon_setup(guntype)
-	switch(guntype)
+	switch (guntype)
 		if (/obj/item/gun/energy/laser/practice)
 			iconholder = 1
 			eprojectile = /obj/item/projectile/beam
@@ -432,7 +432,7 @@ var/global/list/turret_icons
 		restore_health(1)
 
 /obj/machinery/porta_turret/proc/assess_and_assign(mob/living/L, list/targets, list/secondarytargets)
-	switch(assess_living(L))
+	switch (assess_living(L))
 		if (TURRET_PRIORITY_TARGET)
 			targets += L
 		if (TURRET_SECONDARY_TARGET)
@@ -648,7 +648,7 @@ var/global/list/turret_icons
 
 /obj/machinery/porta_turret_construct/attackby(obj/item/I, mob/user)
 	//this is a bit unwieldy but self-explanatory
-	switch(build_step)
+	switch (build_step)
 		if (0)	//first step
 			if (isWrench(I) && !anchored)
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
@@ -813,7 +813,7 @@ var/global/list/turret_icons
 
 
 /obj/machinery/porta_turret_construct/attack_hand(mob/user)
-	switch(build_step)
+	switch (build_step)
 		if (4)
 			if (!installation)
 				return

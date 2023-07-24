@@ -86,7 +86,7 @@
 	update_sight()
 	if (healths)
 		if (stat != DEAD)
-			switch(health)
+			switch (health)
 				if (100 to INFINITY)
 					healths.icon_state = "health0"
 				if (80 to 100)

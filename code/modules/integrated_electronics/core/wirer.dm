@@ -23,7 +23,7 @@
 	if (!io.holder.assembly)
 		to_chat(user, SPAN_WARNING("\The [io.holder] needs to be secured inside an assembly first."))
 		return
-	switch(mode)
+	switch (mode)
 		if (WIRE)
 			select_io(io)
 			to_chat(user, SPAN_NOTICE("You attach a data wire to \the [selected_io.holder]'s [selected_io.name] data channel."))
@@ -82,7 +82,7 @@
 		unselect_io(selected_io)
 	selected_io = io
 	GLOB.destroyed_event.register(selected_io, src, .proc/unselect_io)
-	switch(mode)
+	switch (mode)
 		if (UNWIRE)
 			mode = UNWIRING
 		if (WIRE)
@@ -93,14 +93,14 @@
 		return
 	GLOB.destroyed_event.unregister(selected_io, src)
 	selected_io = null
-	switch(mode)
+	switch (mode)
 		if (UNWIRING)
 			mode = UNWIRE
 		if (WIRING)
 			mode = WIRE
 
 /obj/item/device/integrated_electronics/wirer/attack_self(mob/user)
-	switch(mode)
+	switch (mode)
 		if (WIRE)
 			mode = UNWIRE
 		if (WIRING)

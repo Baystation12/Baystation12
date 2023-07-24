@@ -23,7 +23,7 @@
 	. = ..()
 
 /obj/item/flame/candle/on_update_icon()
-	switch(wax)
+	switch (wax)
 		if (1500 to INFINITY)
 			icon_state = "[icon_set]1"
 		if (800 to 1500)

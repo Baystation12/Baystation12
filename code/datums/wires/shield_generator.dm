@@ -22,7 +22,7 @@ var/global/const/SHIELDGEN_WIRE_NOTHING = 16		// A blank wire that doesn't have 
 
 /datum/wires/shield_generator/UpdateCut(index, mended)
 	var/obj/machinery/power/shield_generator/S = holder
-	switch(index)
+	switch (index)
 		if (SHIELDGEN_WIRE_POWER)
 			S.input_cut = !mended
 		if (SHIELDGEN_WIRE_HACK)
@@ -39,6 +39,6 @@ var/global/const/SHIELDGEN_WIRE_NOTHING = 16		// A blank wire that doesn't have 
 
 /datum/wires/shield_generator/UpdatePulsed(index)
 	var/obj/machinery/power/shield_generator/S = holder
-	switch(index)
+	switch (index)
 		if (SHIELDGEN_WIRE_HACK)
 			S.hacked = 1

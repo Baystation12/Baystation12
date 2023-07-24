@@ -25,7 +25,7 @@ var/global/const/NUCLEARBOMB_WIRE_SAFETY		= 4
 
 /datum/wires/nuclearbomb/UpdatePulsed(index)
 	var/obj/machinery/nuclearbomb/N = holder
-	switch(index)
+	switch (index)
 		if (NUCLEARBOMB_WIRE_LIGHT)
 			N.lighthack = !N.lighthack
 			N.update_icon()
@@ -49,7 +49,7 @@ var/global/const/NUCLEARBOMB_WIRE_SAFETY		= 4
 
 /datum/wires/nuclearbomb/UpdateCut(index, mended)
 	var/obj/machinery/nuclearbomb/N = holder
-	switch(index)
+	switch (index)
 		if (NUCLEARBOMB_WIRE_SAFETY)
 			N.safety = mended
 			if (N.timing)

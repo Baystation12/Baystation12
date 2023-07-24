@@ -70,7 +70,7 @@
 /// Returns the current network speed in GQ/s for the specified connection quality
 /datum/extension/interactive/ntos/proc/get_ntnet_speed(status)
 	. = 0
-	switch(status)
+	switch (status)
 		if (1)
 			. = NTNETSPEED_LOWSIGNAL
 		if (2)

@@ -192,7 +192,7 @@
 		options += list("Visual Narrate", "Audible Narrate")
 
 	var/result = input("What type of narrate?") as null | anything in options
-	switch(result)
+	switch (result)
 		if (null)
 			return
 		if ("Direct Narrate")
@@ -332,7 +332,7 @@
 	var/muteunmute
 	var/mute_string
 
-	switch(mute_type)
+	switch (mute_type)
 		if (MUTE_IC)			mute_string = "IC (say and emote)"
 		if (MUTE_OOC)		mute_string = "OOC"
 		if (MUTE_PRAY)		mute_string = "pray"
@@ -624,7 +624,7 @@ Ccomp's first proc.
 	//New message handling
 	post_comm_message(customname, replacetext(input, "\n", "<br/>"))
 
-	switch(alert("Should this be announced to the general population?",,"Yes","No"))
+	switch (alert("Should this be announced to the general population?",,"Yes","No"))
 		if ("Yes")
 			command_announcement.Announce(input, customname, new_sound = GLOB.using_map.command_report_sound, msg_sanitized = 1);
 		if ("No")

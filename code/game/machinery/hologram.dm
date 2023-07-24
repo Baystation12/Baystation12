@@ -105,7 +105,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 	if (allow_ai && ai_exists)
 		handle_type = alert(user,"Would you like to request an AI's presence or establish communications with another pad?", "Holopad","AI","Holocomms","Cancel")
 
-	switch(handle_type)
+	switch (handle_type)
 		if ("AI")
 			if (last_request + 200 < world.time) //don't spam the AI with requests you jerk!
 				last_request = world.time
@@ -444,7 +444,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 
 //Destruction procs.
 /obj/machinery/hologram/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			qdel(src)
 		if (EX_ACT_HEAVY)

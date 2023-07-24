@@ -139,7 +139,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 			M.show_message(SPAN_WARNING("A shower of sparks spray from [src]'s inner workings."), 3, SPAN_WARNING("You hear and smell the ozone hiss of electrical sparks being expelled violently."), 2)
 		return death(0)
 
-	switch(pick(1,2,3))
+	switch (pick(1,2,3))
 		if (1)
 			master = null
 			master_dna = null

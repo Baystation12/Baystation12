@@ -27,7 +27,7 @@
 
 		if (!new_religion)
 			new_religion = religion_name
-		switch(lowertext(new_religion))
+		switch (lowertext(new_religion))
 			if ("christianity")
 				B.SetName(pick("The Holy Bible","The Dead Sea Scrolls"))
 			if ("satanism")
@@ -68,7 +68,7 @@
 		while (!accepted)
 			if (!B) break // prevents possible runtime errors
 			new_book_style = input(H,"Which bible style would you like?") in list("Bible", "Koran", "Scrapbook", "Creeper", "White Bible", "Holy Light", "Athiest", "Tome", "The King in Yellow", "Ithaqua", "Scientology", "the bible melts", "Necronomicon")
-			switch(new_book_style)
+			switch (new_book_style)
 				if ("Koran")
 					B.icon_state = "koran"
 					B.item_state = "koran"
@@ -111,7 +111,7 @@
 
 			H.update_inv_l_hand() // so that it updates the bible's item_state in his hand
 
-			switch(input(H,"Look at your bible - is this what you want?") in list("Yes","No"))
+			switch (input(H,"Look at your bible - is this what you want?") in list("Yes","No"))
 				if ("Yes")
 					accepted = 1
 				if ("No")

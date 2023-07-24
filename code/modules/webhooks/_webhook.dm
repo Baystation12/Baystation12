@@ -37,7 +37,7 @@
 			if (!islist(httpresponse))
 				. = FALSE
 				continue
-			switch(httpresponse["status_code"])
+			switch (httpresponse["status_code"])
 				if (200 to 299)
 					continue
 				if (400 to 599)

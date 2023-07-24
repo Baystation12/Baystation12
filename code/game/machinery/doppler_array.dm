@@ -61,7 +61,7 @@ var/global/list/doppler_arrays = list()
 		update_icon()
 
 /obj/machinery/doppler_array/proc/getcurrentdirection()
-	switch(direct)
+	switch (direct)
 		if (EAST)
 			currentlyfacing = "east"
 		if (WEST)

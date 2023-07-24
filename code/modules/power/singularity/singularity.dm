@@ -55,7 +55,7 @@
 /obj/singularity/ex_act(severity)
 	if (current_size == STAGE_SUPER)//IT'S UNSTOPPABLE
 		return
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			if (prob(25))
 				investigate_log("has been destroyed by an explosion.", I_SINGULO)
@@ -317,7 +317,7 @@
 		return 0
 	var/steps = 0
 	if (!step)
-		switch(current_size)
+		switch (current_size)
 			if (1)
 				steps = 1
 			if (3)
@@ -341,7 +341,7 @@
 	turfs.Add(T)
 	var/dir2 = 0
 	var/dir3 = 0
-	switch(direction)
+	switch (direction)
 		if (NORTH, SOUTH)
 			dir2 = 4
 			dir3 = 8

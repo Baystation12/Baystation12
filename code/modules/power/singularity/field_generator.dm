@@ -101,7 +101,7 @@ field_generator power level display
 		to_chat(user, "The [src] needs to be off.")
 		return
 	else if (isWrench(W))
-		switch(state)
+		switch (state)
 			if (0)
 				state = 1
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
@@ -121,7 +121,7 @@ field_generator power level display
 				return
 	else if (isWelder(W))
 		var/obj/item/weldingtool/WT = W
-		switch(state)
+		switch (state)
 			if (0)
 				to_chat(user, SPAN_WARNING("The [src.name] needs to be wrenched to the floor."))
 				return

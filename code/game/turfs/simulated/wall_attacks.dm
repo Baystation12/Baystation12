@@ -98,7 +98,7 @@
 
 	if (iscarbon(user))
 		var/mob/living/carbon/M = user
-		switch(M.a_intent)
+		switch (M.a_intent)
 			if (I_HELP)
 				return
 			if (I_DISARM, I_GRAB)
@@ -276,7 +276,7 @@
 
 	//Reinforced dismantling.
 	else
-		switch(construction_stage)
+		switch (construction_stage)
 			if (6)
 
 				if (istype(W, /obj/item/psychic_power/psiblade/master/grand/paramount))

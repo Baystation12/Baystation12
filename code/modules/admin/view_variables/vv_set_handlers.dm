@@ -44,7 +44,7 @@
 		var/x = AM.x || 1
 		var/y = AM.y || 1
 		var/z = AM.z || 1
-		switch(variable)
+		switch (variable)
 			if ("x")
 				x = var_value
 			if ("y")

@@ -169,7 +169,7 @@
 	if (!..())
 		return 0
 
-	switch(spell_levels[Sp_POWER])
+	switch (spell_levels[Sp_POWER])
 		if (1)
 			duration *= 2
 			return "You will now stay corrupted for [duration/10] seconds."

@@ -171,7 +171,7 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 
 /proc/get_sfx(soundin)
 	if (istext(soundin))
-		switch(soundin)
+		switch (soundin)
 			if ("shatter") soundin = pick(GLOB.shatter_sound)
 			if ("explosion") soundin = pick(GLOB.explosion_sound)
 			if ("sparks") soundin = pick(GLOB.spark_sound)

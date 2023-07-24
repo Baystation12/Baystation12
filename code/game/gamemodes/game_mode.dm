@@ -59,7 +59,7 @@ var/global/list/additional_antag_types = list()
 	if (..())
 		return
 	if (href_list["toggle"])
-		switch(href_list["toggle"])
+		switch (href_list["toggle"])
 			if ("respawn")
 				deny_respawn = !deny_respawn
 			if ("ert")
@@ -72,7 +72,7 @@ var/global/list/additional_antag_types = list()
 		message_admins("Admin [key_name_admin(usr)] toggled game mode option '[href_list["toggle"]]'.")
 	else if (href_list["set"])
 		var/choice = ""
-		switch(href_list["set"])
+		switch (href_list["set"])
 			if ("shuttle_delay")
 				choice = input("Enter a new shuttle delay multiplier") as num
 				if (!choice || choice < 1 || choice > 20)

@@ -48,7 +48,7 @@
 
 	//spamming the flash before it's fully charged (60seconds) increases the chance of it breaking
 	//It will never break on the first use.
-	switch(times_used)
+	switch (times_used)
 		if (0 to 5)
 			last_used = world.time
 			if (prob(times_used))	//if you use it 5 times in a minute it has a 10% chance to break!
@@ -158,7 +158,7 @@
 
 	//spamming the flash before it's fully charged (60seconds) increases the chance of it  breaking
 	//It will never break on the first use.
-	switch(times_used)
+	switch (times_used)
 		if (0 to 5)
 			if (prob(2*times_used))	//if you use it 5 times in a minute it has a 10% chance to break!
 				broken = 1
@@ -196,7 +196,7 @@
 /obj/item/device/flash/emp_act(severity)
 	if (broken)	return
 	flash_recharge()
-	switch(times_used)
+	switch (times_used)
 		if (0 to 5)
 			if (prob(2*times_used))
 				broken = 1

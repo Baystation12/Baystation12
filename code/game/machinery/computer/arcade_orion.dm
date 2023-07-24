@@ -90,7 +90,7 @@
 	if (event == null)
 		newgame()
 	user.set_machine(src)
-	switch(view)
+	switch (view)
 		if (ORION_VIEW_MAIN)
 			if (event == ORION_TRAIL_START) //new game? New game.
 				dat = "<center><h1>Orion Trail[emagged ? ": Realism Edition" : ""]</h1><br>Learn how our ancestors got to Orion, and have fun in the process!</center><br><P ALIGN=Right><a href='?src=\ref[src];continue=1'>Start New Game</a></P>"
@@ -99,7 +99,7 @@
 			else
 				event_title = event
 				event_actions = "<a href='?src=\ref[src];continue=1'>Continue your journey</a><br>"
-			switch(event)
+			switch (event)
 				if (ORION_TRAIL_GAMEOVER)
 					event_info = ""
 					event_actions = "<a href='?src=\ref[src];continue=1'>Start New Game</a><br>"
@@ -306,7 +306,7 @@
 		else
 			specific = pickweight(events)
 
-	switch(specific)
+	switch (specific)
 		if (ORION_TRAIL_RAIDERS)
 			if (prob(17 * length(settlers)))
 				event_info = "You managed to fight them off!<br>"
@@ -398,7 +398,7 @@
 	event = specific
 
 /obj/machinery/computer/arcade/orion_trail/proc/emag_effect(event)
-	switch(event)
+	switch (event)
 		if (ORION_TRAIL_RAIDERS)
 			if (istype(usr,/mob/living/carbon))
 				var/mob/living/carbon/M = usr

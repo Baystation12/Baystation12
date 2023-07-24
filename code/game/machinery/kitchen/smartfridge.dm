@@ -233,7 +233,7 @@
 		is_off = "-off"
 
 	// Fridge contents
-	switch(length(contents))
+	switch (length(contents))
 		if (0)
 			I = image(icon, "empty[is_off]")
 		if (1 to 2)

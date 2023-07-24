@@ -97,7 +97,7 @@
 				state = MC.damage_state
 		if (!GLOB.mech_damage_overlay_cache["[part]-[state]"])
 			var/image/I = image(icon='icons/mecha/mech_hud.dmi',icon_state="dam_[part]")
-			switch(state)
+			switch (state)
 				if (1)
 					I.color = "#00ff00"
 				if (2)

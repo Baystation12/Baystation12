@@ -83,7 +83,7 @@
 			add_alert_border_to_display()
 		return 1
 
-	switch(mode)
+	switch (mode)
 		if (STATUS_DISPLAY_BLANK)	//blank
 			if (status_display_show_alert_border)
 				add_alert_border_to_display()
@@ -234,7 +234,7 @@
 	set_light(0)
 
 /obj/machinery/status_display/receive_signal(datum/signal/signal)
-	switch(signal.data["command"])
+	switch (signal.data["command"])
 		if ("blank")
 			mode = STATUS_DISPLAY_BLANK
 

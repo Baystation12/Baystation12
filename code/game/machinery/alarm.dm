@@ -212,7 +212,7 @@
 		apply_mode()
 
 	//atmos computer remote controll stuff
-	switch(rcon_setting)
+	switch (rcon_setting)
 		if (RCON_NO)
 			remote_control = 0
 		if (RCON_AUTO)
@@ -348,7 +348,7 @@
 		icon_level = max(icon_level, 1)	//if there's an atmos alarm but everything is okay locally, no need to go past yellow
 
 	var/new_color = null
-	switch(icon_level)
+	switch (icon_level)
 		if (0)
 			new_color = COLOR_LIME
 		if (1)
@@ -436,7 +436,7 @@
 
 	breach_start_cooldown()
 
-	switch(mode)
+	switch (mode)
 		if (AALARM_MODE_SCRUBBING)
 			for (var/device_id in alarm_area.air_scrub_names)
 				send_signal(device_id, list("set_power"= 1, "set_scrub_gas" = list(GAS_CO2 = 1), "set_scrubbing"= SCRUBBER_SCRUB, "panic_siphon"= 0) )
@@ -555,7 +555,7 @@
 	data["target_temperature"] = "[target_temperature - T0C]C"
 
 /obj/machinery/alarm/proc/populate_controls(list/data)
-	switch(screen)
+	switch (screen)
 		if (AALARM_SCREEN_MAIN)
 			data["mode"] = mode
 		if (AALARM_SCREEN_VENT)
@@ -663,7 +663,7 @@
 	if (href_list["rcon"])
 		var/attempted_rcon_setting = text2num(href_list["rcon"])
 
-		switch(attempted_rcon_setting)
+		switch (attempted_rcon_setting)
 			if (RCON_NO)
 				rcon_setting = RCON_NO
 			if (RCON_AUTO)
@@ -689,7 +689,7 @@
 	if (!(locked && !extra_href["remote_connection"]) || extra_href["remote_access"] || issilicon(user))
 		if (href_list["command"])
 			var/device_id = href_list["id_tag"]
-			switch(href_list["command"])
+			switch (href_list["command"])
 				if ("set_external_pressure")
 					var/input_pressure = input(user, "What pressure you like the system to mantain?", "Pressure Controls") as num|null
 					if (isnum(input_pressure) && CanUseTopic(user, state))
@@ -784,7 +784,7 @@
 			return TOPIC_REFRESH
 
 		if (href_list["atmos_unlock"])
-			switch(href_list["atmos_unlock"])
+			switch (href_list["atmos_unlock"])
 				if ("0")
 					alarm_area.air_doors_close()
 				if ("1")
@@ -809,7 +809,7 @@
 			return TOPIC_REFRESH
 
 /obj/machinery/alarm/attackby(obj/item/W as obj, mob/user as mob)
-	switch(buildstage)
+	switch (buildstage)
 		if (2)
 			if (isScrewdriver(W))  // Opening that Air Alarm up.
 //				to_chat(user, "You pop the Air Alarm's maintence panel open.")
@@ -995,7 +995,7 @@ FIRE ALARM
 		return
 
 	if (wiresexposed)
-		switch(buildstage)
+		switch (buildstage)
 			if (2)
 				if (isMultitool(W))
 					src.detecting = !( src.detecting )

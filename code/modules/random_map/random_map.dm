@@ -84,7 +84,7 @@ var/global/list/map_count = list()
 		return null
 
 /datum/random_map/proc/get_map_char(value)
-	switch(value)
+	switch (value)
 		if (WALL_CHAR)
 			return "#"
 		if (FLOOR_CHAR)
@@ -185,7 +185,7 @@ var/global/list/map_count = list()
 	return 0
 
 /datum/random_map/proc/get_appropriate_path(value)
-	switch(value)
+	switch (value)
 		if (FLOOR_CHAR)
 			return floor_type
 		if (WALL_CHAR)

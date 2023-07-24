@@ -25,7 +25,7 @@
 	if (!has_power)
 		msg += "[SPAN_WARNING("It appears to be running on backup power.")]\n"
 
-	switch(src.stat)
+	switch (src.stat)
 		if (CONSCIOUS)
 			if (!src.client)	msg += "It appears to be in stand-by mode.\n" //afk
 		if (UNCONSCIOUS)		msg += "[SPAN_WARNING("It doesn't seem to be responding.")]\n"

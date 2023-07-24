@@ -419,7 +419,7 @@ var/global/floorIsLava = 0
 	var/dat
 	dat = text("<HEAD><TITLE>Admin Newscaster</TITLE></HEAD><H3>Admin Newscaster Unit</H3>")
 
-	switch(admincaster_screen)
+	switch (admincaster_screen)
 		if (0)
 			dat += {"Welcome to the admin newscaster.<BR> Here you can add, edit and censor every newspiece on the network.
 				<BR>Feed channels and stories entered through here will be uneditable and handled as official news by the rest of the units.
@@ -1370,7 +1370,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		C = M.client
 	else
 		return "<b>(*not a mob*)</b>"
-	switch(detail)
+	switch (detail)
 		if (0)
 			return "<b>[key_name(C, link, name, highlight_special, ticket)]</b>"
 
@@ -1556,7 +1556,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 
 	var/shouldStamp = 1
 	if (!P.sender) // admin initiated
-		switch(alert("Would you like the fax stamped?",, "Yes", "No"))
+		switch (alert("Would you like the fax stamped?",, "Yes", "No"))
 			if ("No")
 				shouldStamp = 0
 

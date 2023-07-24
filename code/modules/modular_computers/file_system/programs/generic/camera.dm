@@ -7,7 +7,7 @@
 	if (.)
 		return
 
-	switch(network)
+	switch (network)
 		if (NETWORK_ENGINEERING, NETWORK_ALARM_ATMOS, NETWORK_ALARM_CAMERA, NETWORK_ALARM_FIRE, NETWORK_ALARM_POWER)
 			return access_engine
 		if (NETWORK_CRESCENT, NETWORK_ERT)

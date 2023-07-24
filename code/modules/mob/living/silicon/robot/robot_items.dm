@@ -216,7 +216,7 @@
 
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
 
-	switch(choice)
+	switch (choice)
 
 		if ("Colour")
 			var/newcolour = input("Which colour would you like to use?") as null|anything in list("black","blue","red","green","yellow")

@@ -55,7 +55,7 @@
 	var/ey = (uy+lift_size_y)
 	var/ez = (uz+(depth-1))
 
-	switch(dir)
+	switch (dir)
 
 		if (NORTH)
 

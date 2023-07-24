@@ -65,7 +65,7 @@ var/global/const/AIRLOCK_WIRE_LIGHT = 2048
 /datum/wires/airlock/UpdateCut(index, mended)
 
 	var/obj/machinery/door/airlock/A = holder
-	switch(index)
+	switch (index)
 		if (AIRLOCK_WIRE_IDSCAN)
 			A.aiDisabledIdScanner = !mended
 		if (AIRLOCK_WIRE_MAIN_POWER1, AIRLOCK_WIRE_MAIN_POWER2)
@@ -128,7 +128,7 @@ var/global/const/AIRLOCK_WIRE_LIGHT = 2048
 /datum/wires/airlock/UpdatePulsed(index)
 
 	var/obj/machinery/door/airlock/A = holder
-	switch(index)
+	switch (index)
 		if (AIRLOCK_WIRE_IDSCAN)
 			//Sending a pulse through flashes the red light on the door (if the door has power).
 			if (A.arePowerSystemsOn() && A.density)

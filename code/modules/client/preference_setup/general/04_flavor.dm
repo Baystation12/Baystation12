@@ -48,7 +48,7 @@
 
 /datum/category_item/player_setup_item/physical/flavor/OnTopic(href,list/href_list, mob/user)
 	if (href_list["flavor_text"])
-		switch(href_list["flavor_text"])
+		switch (href_list["flavor_text"])
 			if ("open")
 			if ("general")
 				var/msg = sanitize(input(usr,"Give a general description of your character. This will be shown regardless of clothing. Do not include OOC information here.","Flavor Text",html_decode(pref.flavor_texts[href_list["flavor_text"]])) as message, extra = 0)
@@ -62,7 +62,7 @@
 		return TOPIC_HANDLED
 
 	else if (href_list["flavour_text_robot"])
-		switch(href_list["flavour_text_robot"])
+		switch (href_list["flavour_text_robot"])
 			if ("open")
 			if ("Default")
 				var/msg = sanitize(input(usr,"Set the default flavour text for your robot. It will be used for any module without individual setting.","Flavour Text",html_decode(pref.flavour_texts_robot["Default"])) as message, extra = 0)

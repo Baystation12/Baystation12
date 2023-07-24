@@ -80,7 +80,7 @@
 // rd: DURATION
 /proc/miniscrambletarget(input,rs,rd)
 	var/output = null
-	switch(input)
+	switch (input)
 		if ("0")
 			output = pick(prob((rs*10)+(rd));"0",prob((rs*10)+(rd));"1",prob((rs*10));"2",prob((rs*10)-(rd));"3")
 		if ("1")

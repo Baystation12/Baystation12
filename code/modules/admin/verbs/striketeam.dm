@@ -23,7 +23,7 @@ var/global/const/commandos_possible = 6 //if more Commandos are needed in the fu
 		return
 
 	var/datum/antagonist/deathsquad/team
-	switch(choice)
+	switch (choice)
 		if ("Heavy Asset Protection")
 			team = GLOB.deathsquad
 		if ("Mercenaries")

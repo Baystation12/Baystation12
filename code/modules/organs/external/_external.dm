@@ -221,7 +221,7 @@
 		child.show_decay_status(user)
 
 /obj/item/organ/external/attackby(obj/item/W as obj, mob/user as mob)
-	switch(stage)
+	switch (stage)
 		if (0)
 			if (W.sharp)
 				user.visible_message(SPAN_DANGER("<b>[user]</b> cuts [src] open with [W]!"))
@@ -359,7 +359,7 @@
 		return 0
 
 	var/damage_amount
-	switch(damage_type)
+	switch (damage_type)
 		if (DAMAGE_BRUTE)
 			damage_amount = brute_dam
 		if (DAMAGE_BURN)
@@ -390,7 +390,7 @@
 	if (!do_after(user, 1 SECOND, owner, DO_SURGERY))
 		return 0
 
-	switch(damage_type)
+	switch (damage_type)
 		if (DAMAGE_BRUTE)
 			src.heal_damage(repair_amount, 0, 0, 1)
 		if (DAMAGE_BURN)
@@ -485,7 +485,7 @@ This function completely restores a damaged organ to perfect condition.
 	//Burn damage can cause fluid loss due to blistering and cook-off
 	if ((type in list(INJURY_TYPE_BURN, INJURY_TYPE_LASER)) && (damage > 5 || damage + burn_dam >= 15) && !BP_IS_ROBOTIC(src))
 		var/fluid_loss_severity
-		switch(type)
+		switch (type)
 			if (INJURY_TYPE_BURN)
 				fluid_loss_severity = FLUIDLOSS_WIDE_BURN
 			if (INJURY_TYPE_LASER)
@@ -814,7 +814,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			"You hear the sound of something shattering!"
 		)
 	else
-		switch(droptype)
+		switch (droptype)
 			if (DROPLIMB_EDGE)
 				if (!clean)
 					var/gore_sound = "[BP_IS_ROBOTIC(src) ? "tortured metal" : "ripping tendons and flesh"]"
@@ -894,7 +894,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		victim.regenerate_icons()
 		dir = 2
 
-	switch(disintegrate)
+	switch (disintegrate)
 		if (DROPLIMB_EDGE)
 			compile_icon()
 			add_blood(victim)
@@ -1194,7 +1194,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if (limb_flags & ORGAN_FLAG_CAN_GRASP) owner.grasp_limbs -= src
 	if (limb_flags & ORGAN_FLAG_CAN_STAND) owner.stance_limbs -= src
 
-	switch(body_part)
+	switch (body_part)
 		if (FOOT_LEFT, FOOT_RIGHT)
 			if (istype(owner.wear_suit, /obj/item/clothing/suit/space/void))
 				var/obj/item/clothing/suit/space/void/voidsuit = owner.wear_suit

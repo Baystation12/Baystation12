@@ -46,7 +46,7 @@
 		..()
 
 /turf/simulated/floor/exoplanet/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			ChangeTurf(get_base_turf_by_area(src))
 		if (EX_ACT_HEAVY)
@@ -66,7 +66,7 @@
 		if (!istype(turf_to_check, type))
 			var/image/rock_side = image(icon, "edge[pick(0,1,2)]", dir = turn(direction, 180))
 			rock_side.plating_decal_layerise()
-			switch(direction)
+			switch (direction)
 				if (NORTH)
 					rock_side.pixel_y += world.icon_size
 				if (SOUTH)

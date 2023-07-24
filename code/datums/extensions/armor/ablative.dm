@@ -39,7 +39,7 @@
 		return
 	var/result = list()
 	for (var/key in damages)
-		switch(round(100 * damages[key]/max_armor_values[key]))
+		switch (round(100 * damages[key]/max_armor_values[key]))
 			if (5 to 10)
 				result[key] = "minor"
 			if (11 to 25)

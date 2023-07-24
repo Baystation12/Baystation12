@@ -182,7 +182,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	changeling.isabsorbing = 1
 	for (var/stage = 1, stage<=3, stage++)
-		switch(stage)
+		switch (stage)
 			if (1)
 				to_chat(src, SPAN_NOTICE("This creature is compatible. We must hold still..."))
 			if (2)

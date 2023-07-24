@@ -146,7 +146,7 @@ var/global/vs_control/vsc = new
 			else
 				how = "Text"
 	var/newvar = vw
-	switch(how)
+	switch (how)
 		if ("Numeric")
 			newvar = input(user,"Enter a number:","Settings",newvar) as num
 		if ("Bit Flag")
@@ -197,7 +197,7 @@ var/global/vs_control/vsc = new
 	var/def = input(user, "Which of these presets should be used?") as null|anything in setting_choices
 	if (!def)
 		return
-	switch(def)
+	switch (def)
 		if ("Phoron - Standard")
 			plc.CLOTH_CONTAMINATION = 1 //If this is on, phoron does damage by getting into cloth.
 			plc.PHORONGUARD_ONLY = 0

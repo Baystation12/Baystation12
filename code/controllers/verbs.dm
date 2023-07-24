@@ -22,7 +22,7 @@
 	if (!holder || !controller)
 		return
 
-	switch(controller)
+	switch (controller)
 		if ("Radio")
 			debug_variables(radio_controller)
 		if ("Evacuation")

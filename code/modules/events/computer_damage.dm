@@ -1,6 +1,6 @@
 /datum/event/computer_damage/start()
 	var/number_of_victims = 0
-	switch(severity)
+	switch (severity)
 		if (EVENT_LEVEL_MUNDANE)
 			number_of_victims = 4
 		if (EVENT_LEVEL_MODERATE)

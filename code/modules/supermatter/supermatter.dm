@@ -259,7 +259,7 @@
 	. = ..()
 	if (user.skill_check(SKILL_ENGINES, SKILL_EXPERIENCED))
 		var/integrity_message
-		switch(get_integrity())
+		switch (get_integrity())
 			if (0 to 30)
 				integrity_message = SPAN_DANGER("It looks highly unstable!")
 			if (31 to 70)
@@ -578,7 +578,7 @@
 
 /obj/machinery/power/supermatter/ex_act(severity)
 	..()
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			power *= 4
 		if (EX_ACT_HEAVY)

@@ -63,7 +63,7 @@
 			else
 				icon_state = "u[reference]p"
 		else
-			switch(construction_state)
+			switch (construction_state)
 				if (0)
 					icon_state = "[reference]"
 				if (1)

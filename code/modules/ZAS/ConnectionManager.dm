@@ -47,7 +47,7 @@ Macros:
 #endif
 
 /connection_manager/proc/get(d)
-	switch(d)
+	switch (d)
 		if (NORTH)
 			if (check(N)) return N
 			else return null
@@ -71,7 +71,7 @@ Macros:
 		#endif
 
 /connection_manager/proc/place(connection/c, d)
-	switch(d)
+	switch (d)
 		if (NORTH) N = c
 		if (SOUTH) S = c
 		if (EAST) E = c

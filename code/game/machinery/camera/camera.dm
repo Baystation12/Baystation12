@@ -352,7 +352,7 @@
 		T = get_ranged_target_turf(src, i, 1)
 		if (istype(T))
 			//If someone knows a better way to do this, let me know. -Giacom
-			switch(i)
+			switch (i)
 				if (NORTH)
 					src.set_dir(SOUTH)
 				if (SOUTH)

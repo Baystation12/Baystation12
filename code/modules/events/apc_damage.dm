@@ -5,7 +5,7 @@
 	var/obj/machinery/power/apc/A = acquire_random_apc()
 
 	var/severity_range = 0
-	switch(severity)
+	switch (severity)
 		if (EVENT_LEVEL_MUNDANE)
 			severity_range = 0
 		if (EVENT_LEVEL_MODERATE)

@@ -176,7 +176,7 @@
 	var/blood_volume = owner.get_blood_circulation()
 
 	//Effects of bloodloss
-	switch(blood_volume)
+	switch (blood_volume)
 		if (BLOOD_VOLUME_FULL)
 			lowblood_tally = 0
 		if (BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)

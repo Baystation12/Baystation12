@@ -435,7 +435,7 @@ This function restores all organs.
 		make_reagent(round(damage/10), /datum/reagent/adrenaline)
 	var/datum/wound/created_wound
 	damageoverlaytemp = 20
-	switch(damagetype)
+	switch (damagetype)
 		if (DAMAGE_BRUTE)
 			created_wound = organ.take_external_damage(damage, 0, damage_flags, used_weapon)
 		if (DAMAGE_BURN)

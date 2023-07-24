@@ -178,7 +178,7 @@ The Appraise verb. Used on objects to estimate their value.
 	to_chat(src, message)
 
 /proc/get_appraise_level(skill)
-	switch(skill)
+	switch (skill)
 		if (SKILL_MAX)
 			return 5
 		if (SKILL_EXPERIENCED)

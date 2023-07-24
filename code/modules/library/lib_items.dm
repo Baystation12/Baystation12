@@ -87,7 +87,7 @@
 			update_icon()
 
 /obj/structure/bookcase/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			for (var/obj/item/book/b in contents)
 				qdel(b)
@@ -208,7 +208,7 @@
 			to_chat(user, "These pages don't seem to take the ink well. Looks like you can't modify it.")
 			return
 		var/choice = input("What would you like to change?") in list("Title", "Contents", "Author", "Cancel")
-		switch(choice)
+		switch (choice)
 			if ("Title")
 				var/newtitle = reject_bad_text(sanitizeSafe(input("Write a new title:")))
 				if (!newtitle)

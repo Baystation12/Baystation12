@@ -29,7 +29,7 @@ The "dust" will damage the hull of the station causin minor hull breaches.
 	var/randomz = pick(zlevels)
 	var/randomx = rand(1+TRANSITIONEDGE*2, world.maxx-TRANSITIONEDGE*2)
 	var/randomy = rand(1+TRANSITIONEDGE*2, world.maxx-TRANSITIONEDGE*2)
-	switch(start_dir)
+	switch (start_dir)
 		if (NORTH)
 			startloc = locate(randomx, world.maxy - TRANSITIONEDGE, randomz)
 			targloc = locate(world.maxx - randomx,  1 + TRANSITIONEDGE, randomz)

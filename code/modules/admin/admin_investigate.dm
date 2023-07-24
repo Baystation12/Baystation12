@@ -30,7 +30,7 @@
 	set name = "Investigate"
 	set category = "Admin"
 	if (!holder)	return
-	switch(subject)
+	switch (subject)
 		if ("singulo", "telesci")			//general one-round-only stuff
 			var/F = investigate_subject2file(subject)
 			if (!F)

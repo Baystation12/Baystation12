@@ -59,7 +59,7 @@ var/global/list/sparring_attack_cache = list()
 	var/armour = target.get_blocked_ratio(zone, DAMAGE_BRUTE, damage = attack_damage)
 
 	if (attack_damage >= 5 && armour < 1 && !(target == user) && stun_chance <= attack_damage * 5) // 25% standard chance
-		switch(zone) // strong punches can have effects depending on where they hit
+		switch (zone) // strong punches can have effects depending on where they hit
 			if (BP_HEAD, BP_EYES, BP_MOUTH)
 				// Induce blurriness
 				target.visible_message(SPAN_DANGER("[target] looks momentarily disoriented."), SPAN_DANGER("You see stars."))
@@ -166,10 +166,10 @@ var/global/list/sparring_attack_cache = list()
 	user.update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
 
 	if (!target.lying)
-		switch(zone)
+		switch (zone)
 			if (BP_HEAD, BP_MOUTH, BP_EYES)
 				// ----- HEAD ----- //
-				switch(attack_damage)
+				switch (attack_damage)
 					if (1 to 2)
 						user.visible_message(SPAN_DANGER("[user] slapped [target] across \his cheek!"))
 					if (3 to 4)
@@ -185,7 +185,7 @@ var/global/list/sparring_attack_cache = list()
 							))
 			else
 				// ----- BODY ----- //
-				switch(attack_damage)
+				switch (attack_damage)
 					if (1 to 2)	user.visible_message(SPAN_DANGER("[user] threw a glancing punch at [target]'s [organ]!"))
 					if (1 to 4)	user.visible_message(SPAN_DANGER("[user] [pick(attack_verb)] [target] in \his [organ]!"))
 					if (5)		user.visible_message(SPAN_DANGER("[user] smashed \his [pick(attack_noun)] into [target]'s [organ]!"))
@@ -225,7 +225,7 @@ var/global/list/sparring_attack_cache = list()
 
 	attack_damage = clamp(attack_damage, 1, 5)
 
-	switch(attack_damage)
+	switch (attack_damage)
 		if (1 to 2)	user.visible_message(SPAN_DANGER("[user] threw [target] a glancing [pick(attack_noun)] to the [organ]!")) //it's not that they're kicking lightly, it's that the kick didn't quite connect
 		if (3 to 4)	user.visible_message(SPAN_DANGER("[user] [pick(attack_verb)] [target] in \his [organ]!"))
 		if (5)		user.visible_message(SPAN_DANGER("[user] landed a strong [pick(attack_noun)] against [target]'s [organ]!"))
@@ -266,7 +266,7 @@ var/global/list/sparring_attack_cache = list()
 	attack_damage = clamp(attack_damage, 1, 5)
 
 	var/shoe_text = shoes ? copytext(shoes.name, 1, -1) : "foot"
-	switch(attack_damage)
+	switch (attack_damage)
 		if (1 to 4)
 			user.visible_message(pick(
 				SPAN_CLASS("danger", "[user] stomped on [target]'s [organ][pick("", "with their [shoe_text]")]!"),

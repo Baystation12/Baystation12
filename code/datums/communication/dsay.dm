@@ -15,7 +15,7 @@
 
 /singleton/communication_channel/dsay/can_communicate(client/communicator, message, speech_method_type)
 	var/singleton/dsay_communication/speech_method = GET_SINGLETON(speech_method_type)
-	switch(speech_method.can_communicate(communicator, message))
+	switch (speech_method.can_communicate(communicator, message))
 		if (DSAY_CAN_COMMUNICATE)
 			return TRUE
 		if (DSAY_ASK_BASE)

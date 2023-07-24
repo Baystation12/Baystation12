@@ -162,7 +162,7 @@
 
 	var/obj/item/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)
 	if (battery_module)
-		switch(battery_module.battery.percent())
+		switch (battery_module.battery.percent())
 			if (80 to 200) // 100 should be maximal but just in case..
 				data["PC_batteryicon"] = "batt_100.gif"
 			if (60 to 80)
@@ -190,7 +190,7 @@
 	if (network_card && network_card.is_banned())
 		data["PC_ntneticon"] = "sig_warning.gif"
 	else
-		switch(get_ntnet_status())
+		switch (get_ntnet_status())
 			if (0)
 				data["PC_ntneticon"] = "sig_none.gif"
 			if (1)

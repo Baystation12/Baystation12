@@ -22,7 +22,7 @@
 	z_flags = ZMM_MANGLE_PLANES
 
 /obj/item/clothing/mask/smokable/equipped(mob/user, slot)
-	switch(slot)
+	switch (slot)
 		if (slot_wear_mask)
 			sprite_sheets = list(
 				SPECIES_VOX = 'icons/mob/species/vox/onmob_mask_vox.dmi',

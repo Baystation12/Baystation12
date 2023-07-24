@@ -57,7 +57,7 @@ Buildable meters
 	set_dir(old_dir)
 
 /obj/item/pipe/proc/sanitize_dir()
-	switch(rotate_class)
+	switch (rotate_class)
 		if (PIPE_ROTATE_TWODIR)
 			if (dir==2)
 				set_dir(1)

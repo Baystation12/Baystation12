@@ -34,7 +34,7 @@
 	// CONFIGURATION PHASE
 	// Coolant canisters, set types according to response.
 	for (var/obj/effect/engine_setup/coolant_canister/C in world)
-		switch(response)
+		switch (response)
 			if ("N2")
 				C.canister_type = /obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup
 				continue
@@ -49,7 +49,7 @@
 				continue
 
 	for (var/obj/effect/engine_setup/core/C in world)
-		switch(response)
+		switch (response)
 			if ("N2")
 				C.energy_setting = ENERGY_NITROGEN
 				continue
@@ -70,7 +70,7 @@
 	// SETUP PHASE
 	for (var/obj/effect/engine_setup/S in world)
 		var/result = S.activate(0)
-		switch(result)
+		switch (result)
 			if (SETUP_OK)
 				success++
 				continue
@@ -88,7 +88,7 @@
 	if (!errors)
 		for (var/obj/effect/engine_setup/S in delayed_objects)
 			var/result = S.activate(1)
-			switch(result)
+			switch (result)
 				if (SETUP_OK)
 					success++
 					continue

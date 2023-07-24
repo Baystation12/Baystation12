@@ -98,7 +98,7 @@
 			var/ore_type
 			var/data_value = 1
 
-			switch(metal)
+			switch (metal)
 				if (MATERIAL_SAND, MATERIAL_GRAPHITE, MATERIAL_IRON)
 					ore_type = ORE_SURFACE
 				if (MATERIAL_GOLD, MATERIAL_SILVER, MATERIAL_DIAMOND, MATERIAL_RUTILE)
@@ -122,7 +122,7 @@
 	for (var/ore_type in metals)
 		var/result = "no sign"
 
-		switch(metals[ore_type])
+		switch (metals[ore_type])
 			if (1 to 25) result = "trace amounts"
 			if (26 to 75) result = "significant amounts"
 			if (76 to INFINITY) result = "huge quantities"

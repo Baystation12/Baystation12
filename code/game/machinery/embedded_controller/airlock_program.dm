@@ -99,7 +99,7 @@
 
 	else if (receive_tag==id_tag)
 		if (istype(master, /obj/machinery/embedded_controller/radio/airlock/access_controller))
-			switch(signal.data["command"])
+			switch (signal.data["command"])
 				if ("cycle_exterior")
 					receive_user_command("cycle_ext_door")
 				if ("cycle_interior")
@@ -110,7 +110,7 @@
 					else
 						receive_user_command("cycle_int")
 		else
-			switch(signal.data["command"])
+			switch (signal.data["command"])
 				if ("cycle_exterior")
 					receive_user_command("cycle_ext")
 				if ("cycle_interior")
@@ -125,7 +125,7 @@
 /datum/computer/file/embedded_program/airlock/receive_user_command(command)
 	var/shutdown_pump = 0
 	. = TRUE
-	switch(command)
+	switch (command)
 		if ("cycle_ext")
 			//If airlock is already cycled in this direction, just toggle the doors.
 			if (!memory["purge"] && IsInRange(memory["external_sensor_pressure"], memory["chamber_sensor_pressure"] - SENSOR_TOLERANCE, memory["chamber_sensor_pressure"] + SENSOR_TOLERANCE))
@@ -185,7 +185,7 @@
 /datum/computer/file/embedded_program/airlock/process()
 	if (!state) //Idle
 		if (target_state)
-			switch(target_state)
+			switch (target_state)
 				if (TARGET_INOPEN)
 					memory["target_pressure"] = memory["internal_sensor_pressure"]
 				if (TARGET_OUTOPEN)
@@ -207,7 +207,7 @@
 		//the airlock will not allow itself to continue to cycle when any of the doors are forced open.
 		stop_cycling()
 
-	switch(state)
+	switch (state)
 		if (STATE_PREPARE)
 			if (check_doors_secured())
 				var/chamber_pressure = memory["chamber_sensor_pressure"]
@@ -348,7 +348,7 @@
 
 //this is called to set the appropriate door state at the end of a cycling process, or for the exterior buttons
 /datum/computer/file/embedded_program/airlock/proc/cycleDoors(target)
-	switch(target)
+	switch (target)
 		if (TARGET_OUTOPEN)
 			toggleDoor(memory["interior_status"], tag_interior_door, memory["secure"], "close")
 			toggleDoor(memory["exterior_status"], tag_exterior_door, memory["secure"], "open")
@@ -398,7 +398,7 @@ send an additional command to open the door again.
 		else if (doorStatus["state"] == "closed")
 			command = "open"
 
-	switch(command)
+	switch (command)
 		if ("close")
 			if (secure)
 				if (doorStatus["state"] == "open")

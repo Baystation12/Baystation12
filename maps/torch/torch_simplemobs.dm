@@ -249,7 +249,7 @@
 	if (!new_mode || new_mode == attack_mode)
 		return
 
-	switch(new_mode)
+	switch (new_mode)
 		if (ATTACK_MODE_LAS)
 			attack_mode = ATTACK_MODE_LAS
 			ranged = TRUE
@@ -291,7 +291,7 @@
 			return
 
 		overlays.Cut()
-		switch(attack_mode)
+		switch (attack_mode)
 			if (ATTACK_MODE_LAS)
 				overlays += image(icon, "laser")
 

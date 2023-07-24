@@ -91,7 +91,7 @@
 			log_and_message_admins("Meteor: Wave fired. Escalation: [escalated ? "Yes" : "No"]. Severity: [meteor_severity]/[maximal_severity]")
 
 /datum/game_mode/meteor/proc/get_meteor_types()
-	switch(meteor_severity)
+	switch (meteor_severity)
 		if (1 to 9)
 			return meteors_dust
 		if (10 to 19)

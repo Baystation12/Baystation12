@@ -107,7 +107,7 @@
 		return
 
 
-	switch(choice)
+	switch (choice)
 		if ("Airlocks")
 			work_mode = GET_SINGLETON(/singleton/hierarchy/rcd_mode/airlock)
 		if ("Floors & Walls")

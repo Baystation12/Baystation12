@@ -76,7 +76,7 @@ var/global/list/mining_floors = list()
 		else if (istype(turf_to_check,/turf/space) || istype(turf_to_check,/turf/simulated/floor))
 			var/image/rock_side = image(icon, "rock_side", dir = turn(direction, 180))
 			rock_side.turf_decal_layerise()
-			switch(direction)
+			switch (direction)
 				if (NORTH)
 					rock_side.pixel_y += world.icon_size
 				if (SOUTH)
@@ -97,7 +97,7 @@ var/global/list/mining_floors = list()
 		overlays += archaeo_overlay
 
 /turf/simulated/mineral/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_HEAVY)
 			if (prob(70))
 				mined_ore = 1 //some of the stuff gets blown up
@@ -352,7 +352,7 @@ var/global/list/mining_floors = list()
 /turf/simulated/mineral/proc/artifact_debris(severity = 0)
 	//Give a random amount of loot from 1 to 3 or 5, varying on severity.
 	for (var/j in 1 to rand(1, 3 + max(min(severity, 1), 0) * 2))
-		switch(rand(1,7))
+		switch (rand(1,7))
 			if (1)
 				var/obj/item/stack/material/rods/R = new(src)
 				R.amount = rand(5,25)
@@ -434,7 +434,7 @@ var/global/list/mining_floors = list()
 	return ..()
 
 /turf/simulated/floor/asteroid/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_LIGHT)
 			return
 		if (EX_ACT_HEAVY)

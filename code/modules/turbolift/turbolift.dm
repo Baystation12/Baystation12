@@ -42,7 +42,7 @@
 /datum/turbolift/Process()
 	if (world.time < next_process)
 		return
-	switch(busy_state)
+	switch (busy_state)
 		if (LIFT_MOVING)
 			if (!do_move())
 				queued_floors.Cut()

@@ -17,7 +17,7 @@ GLOBAL_LIST_EMPTY(skills)
 	var/prerequisites                      // A list of skill prerequisites, if needed.
 
 /singleton/hierarchy/skill/proc/get_cost(level)
-	switch(level)
+	switch (level)
 		if (SKILL_BASIC, SKILL_TRAINED)
 			return difficulty
 		if (SKILL_EXPERIENCED, SKILL_MASTER)
@@ -186,7 +186,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Master"		= "You specialize in hand-to-hand combat. You're well-trained in a practical martial art, and in good shape. You spend a lot of time practicing. You can take on just about anyone, use just about any weapon, and usually come out on top. You may be a professional athlete or special forces member.")
 
 /singleton/hierarchy/skill/security/combat/get_cost(level)
-	switch(level)
+	switch (level)
 		if (SKILL_BASIC)
 			return difficulty
 		if (SKILL_TRAINED, SKILL_EXPERIENCED)
@@ -207,7 +207,7 @@ GLOBAL_LIST_EMPTY(skills)
 						"Master"		= "You are an exceptional shot with a variety of weapons, from simple to exotic. You use a weapon as naturally as though it were a part of your own body. You may be a sniper or special forces operator of some kind.<br>- You get extra accuracy for sniper rifles.<br>- You automatically eject shells from bolt-action firearms.")
 
 /singleton/hierarchy/skill/security/weapons/get_cost(level)
-	switch(level)
+	switch (level)
 		if (SKILL_BASIC)
 			return difficulty
 		if (SKILL_TRAINED)
@@ -231,7 +231,7 @@ GLOBAL_LIST_EMPTY(skills)
 
 
 /singleton/hierarchy/skill/security/forensics/get_cost(level)
-	switch(level)
+	switch (level)
 		if (SKILL_BASIC, SKILL_TRAINED, SKILL_EXPERIENCED)
 			return difficulty * 2
 		if (SKILL_MASTER)

@@ -51,7 +51,7 @@
 			else
 				new_aggress = 1
 			aggressiveness = max(aggressiveness, new_aggress)
-		switch(aggressiveness)
+		switch (aggressiveness)
 			if (1)
 				src.audible_message("\The [src] growls.")
 			if (2)

@@ -21,7 +21,7 @@
 	if (prob(stealth_chance))
 		return
 	var/naming
-	switch(severity)
+	switch (severity)
 		if (EVENT_LEVEL_MUNDANE)
 			naming = "malfunction"
 		if (EVENT_LEVEL_MODERATE)

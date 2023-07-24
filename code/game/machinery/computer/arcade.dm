@@ -59,7 +59,7 @@
 		return
 	var/empprize = null
 	var/num_of_prizes = 0
-	switch(severity)
+	switch (severity)
 		if (EMP_ACT_HEAVY)
 			num_of_prizes = rand(1,4)
 		if (EMP_ACT_LIGHT)

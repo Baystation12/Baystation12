@@ -382,7 +382,7 @@
 	if (isScrewdriver(tool))
 		// Reinforced Window
 		if (reinf_material)
-			switch(construction_state)
+			switch (construction_state)
 				if (CONSTRUCT_STATE_UNANCHORED)
 					if (!can_install_here(user))
 						return TRUE

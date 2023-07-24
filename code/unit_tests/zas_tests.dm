@@ -30,7 +30,7 @@
 	if (isnull(test))
 		fail("Check Runtimed")
 
-	switch(test["result"])
+	switch (test["result"])
 		if (SUCCESS) pass(test["msg"])
 		if (SKIP)    skip(test["msg"])
 		else        fail(test["msg"])
@@ -77,7 +77,7 @@
 		var/pressure = GM.return_pressure()
 		var/temp = GM.temperature
 
-		switch(expectation)
+		switch (expectation)
 
 			if (UT_VACUUM)
 				if (pressure > 10)
@@ -168,7 +168,7 @@
 			fail("Check Runtimed")
 			return 1
 
-		switch(test["result"])
+		switch (test["result"])
 			if (SUCCESS) pass(test["msg"])
 			if (SKIP)    skip(test["msg"])
 			else        fail(test["msg"])

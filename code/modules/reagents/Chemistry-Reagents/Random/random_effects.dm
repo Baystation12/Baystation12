@@ -11,7 +11,7 @@
 	var/cost = 500 // Modify if an effect should be valued more.
 
 /singleton/random_chem_effect/proc/get_random_value()
-	switch(mode)
+	switch (mode)
 		if (RANDOM_CHEM_EFFECT_TRUE)
 			return 1
 		if (RANDOM_CHEM_EFFECT_INT)
@@ -20,7 +20,7 @@
 			return rand() * (maximum - minimum) + minimum
 
 /singleton/random_chem_effect/proc/mix_data(first_value, first_ratio, second_value)
-	switch(mode)
+	switch (mode)
 		if (RANDOM_CHEM_EFFECT_TRUE)
 			return !!(first_value * first_ratio + second_value * (1 - first_ratio)) // Basically |, unless ratio is 0 or 1
 		if (RANDOM_CHEM_EFFECT_INT)
@@ -43,7 +43,7 @@
 
 // This is referring to monetary value.
 /singleton/random_chem_effect/proc/get_value(value)
-	switch(beneficial)
+	switch (beneficial)
 		if (1)
 			return cost * (value - minimum)/(maximum - minimum)
 		if (0)
@@ -166,7 +166,7 @@
 	if (target == value)
 		return
 	var/rate = reaction_rate_cache[reagent.type]
-	switch(mode)
+	switch (mode)
 		if (RANDOM_CHEM_EFFECT_TRUE)
 			if (prob(10 * rate))
 				return target

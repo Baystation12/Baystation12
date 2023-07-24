@@ -161,7 +161,7 @@
 		if (!M.may_climb_ladders(src))
 			return
 
-		switch(direction)
+		switch (direction)
 			if ("Up")
 				return target_up
 			if ("Down")

@@ -86,7 +86,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 		if (length(key) > 7 && findtext(key, "param")) // 7 is the amount of characters in the basic param key template.
 			params[copytext(key, 7, -1)] = href_list[key]
 	var/data // Data to be sent back to the chat.
-	switch(href_list["proc"])
+	switch (href_list["proc"])
 		if ("doneLoading")
 			data = doneLoading(arglist(params))
 		if ("debug")

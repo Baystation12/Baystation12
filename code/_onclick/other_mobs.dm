@@ -145,14 +145,14 @@
 	else
 		var/power = max(0, min(10, (powerlevel + rand(0, 3))))
 
-		switch(src.a_intent)
+		switch (src.a_intent)
 			if (I_HELP) // We just poke the other
 				M.visible_message(SPAN_NOTICE("[src] gently pokes [M]!"), SPAN_NOTICE("[src] gently pokes you!"))
 			if (I_DISARM) // We stun the target, with the intention to feed
 				var/stunprob = 1
 
 				if (powerlevel > 0 && !istype(A, /mob/living/carbon/slime))
-					switch(power * 10)
+					switch (power * 10)
 						if (0) stunprob *= 10
 						if (1 to 2) stunprob *= 20
 						if (3 to 4) stunprob *= 30

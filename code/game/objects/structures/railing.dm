@@ -150,7 +150,7 @@
 			if (neighbor_status & 4)
 				var/pix_offset_x = 0
 				var/pix_offset_y = 0
-				switch(dir)
+				switch (dir)
 					if (NORTH)
 						pix_offset_x = 32
 					if (SOUTH)

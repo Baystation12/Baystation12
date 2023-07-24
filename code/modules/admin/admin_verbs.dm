@@ -527,7 +527,7 @@ var/global/list/admin_verbs_mod = list(
 	var/turf/epicenter = mob.loc
 	var/list/choices = list("Small Bomb", "Medium Bomb", "Big Bomb", "Custom Bomb")
 	var/choice = input("What size explosion would you like to produce?") as null | anything in choices
-	switch(choice)
+	switch (choice)
 		if (null)
 			return
 		if ("Small Bomb")
@@ -669,7 +669,7 @@ var/global/list/admin_verbs_mod = list(
 		to_chat(usr, "Only mobs with clients can alter their own appearance.")
 		return
 
-	switch(alert("Do you wish for [H] to be allowed to select non-whitelisted races?","Alter Mob Appearance","Yes","No","Cancel"))
+	switch (alert("Do you wish for [H] to be allowed to select non-whitelisted races?","Alter Mob Appearance","Yes","No","Cancel"))
 		if ("Yes")
 			log_and_message_admins("has allowed [H] to change \his appearance, ignoring allow lists.")
 			H.change_appearance(APPEARANCE_COMMON | APPEARANCE_SKIP_ALLOW_LIST_CHECK)
@@ -708,7 +708,7 @@ var/global/list/admin_verbs_mod = list(
 	if (!istype(M, /mob/living/carbon/human))
 		to_chat(usr, SPAN_WARNING("You can only do this to humans!"))
 		return
-	switch(alert("Are you sure you wish to edit this mob's appearance? Skrell, Unathi and Vox can result in unintended consequences.",,"Yes","No"))
+	switch (alert("Are you sure you wish to edit this mob's appearance? Skrell, Unathi and Vox can result in unintended consequences.",,"Yes","No"))
 		if ("No")
 			return
 	var/new_facial = input("Please select facial hair color.", "Character Generation") as color
@@ -745,7 +745,7 @@ var/global/list/admin_verbs_mod = list(
 		M.facial_hair_style = new_fstyle
 
 	var/new_gender = input(usr, "Please select a bodytype", "Character Generation") as null|anything in all_genders_text_list
-	switch(new_gender)
+	switch (new_gender)
 		if ("Male")
 			M.gender = MALE
 		if ("Female")

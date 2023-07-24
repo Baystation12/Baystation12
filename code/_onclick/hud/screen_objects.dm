@@ -92,9 +92,9 @@
 	var/icon_y = text2num(PL["icon-y"])
 	var/new_selecting
 
-	switch(icon_y)
+	switch (icon_y)
 		if (1 to 3) //Feet
-			switch(icon_x)
+			switch (icon_x)
 				if (10 to 15)
 					new_selecting = BP_R_FOOT
 				if (17 to 22)
@@ -102,7 +102,7 @@
 				else
 					return 1
 		if (4 to 9) //Legs
-			switch(icon_x)
+			switch (icon_x)
 				if (10 to 15)
 					new_selecting = BP_R_LEG
 				if (17 to 22)
@@ -110,7 +110,7 @@
 				else
 					return 1
 		if (10 to 13) //Hands and groin
-			switch(icon_x)
+			switch (icon_x)
 				if (8 to 11)
 					new_selecting = BP_R_HAND
 				if (12 to 20)
@@ -120,7 +120,7 @@
 				else
 					return 1
 		if (14 to 22) //Chest and arms to shoulders
-			switch(icon_x)
+			switch (icon_x)
 				if (8 to 11)
 					new_selecting = BP_R_ARM
 				if (12 to 20)
@@ -132,7 +132,7 @@
 		if (23 to 30) //Head, but we need to check for eye or mouth
 			if (icon_x in 12 to 20)
 				new_selecting = BP_HEAD
-				switch(icon_y)
+				switch (icon_y)
 					if (23 to 24)
 						if (icon_x in 15 to 17)
 							new_selecting = BP_MOUTH
@@ -188,7 +188,7 @@
 
 /obj/screen/Click(location, control, params)
 	if (!usr)	return 1
-	switch(name)
+	switch (name)
 		if ("toggle")
 			if (usr.hud_used.inventory_shown)
 				usr.hud_used.inventory_shown = 0
@@ -357,7 +357,7 @@
 		return 1
 	if (usr.incapacitated())
 		return 1
-	switch(name)
+	switch (name)
 		if ("r_hand")
 			if (iscarbon(usr))
 				var/mob/living/carbon/C = usr

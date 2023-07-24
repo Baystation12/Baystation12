@@ -25,7 +25,7 @@
 	var/obj/item/organ/external/affecting = null
 	if (ishuman(target))
 		var/mob/living/carbon/human/H = target
-		switch(type)
+		switch (type)
 			if ("feet")
 				if (!H.shoes)
 					affecting = H.get_organ(pick(BP_L_LEG, BP_R_LEG))

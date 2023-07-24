@@ -11,7 +11,7 @@
 	category = /datum/language/human
 
 /datum/language/human/get_spoken_verb(msg_end)
-	switch(msg_end)
+	switch (msg_end)
 		if ("!")
 			return pick("exclaims","shouts","yells")
 		if ("?")

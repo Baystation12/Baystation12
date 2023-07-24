@@ -58,7 +58,7 @@
 	if (QDELETED(src) || stat)
 		return
 
-	switch(toggle_prompt)
+	switch (toggle_prompt)
 		if ("On")
 			if (emergency_signal)
 				to_chat(user, SPAN_WARNING("Turn off the distress signal first!"))

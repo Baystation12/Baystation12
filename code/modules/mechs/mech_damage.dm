@@ -33,7 +33,7 @@
 		user.visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly with \the [I]."))
 		return
 
-	switch(def_zone)
+	switch (def_zone)
 		if (BP_HEAD , BP_CHEST, BP_MOUTH, BP_EYES)
 			if (LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
 				var/mob/living/pilot = pick(pilots)
@@ -69,7 +69,7 @@
 /mob/living/exosuit/bullet_act(obj/item/projectile/P, def_zone, used_weapon)
 	if (status_flags & GODMODE)
 		return PROJECTILE_FORCE_MISS
-	switch(def_zone)
+	switch (def_zone)
 		if (BP_HEAD , BP_CHEST, BP_MOUTH, BP_EYES)
 			if (LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
 				var/mob/living/pilot = pick(pilots)
@@ -98,7 +98,7 @@
 		MC.update_health()
 
 /mob/living/exosuit/proc/zoneToComponent(zone)
-	switch(zone)
+	switch (zone)
 		if (BP_EYES , BP_HEAD)
 			return head
 		if (BP_L_ARM , BP_R_ARM)
@@ -143,7 +143,7 @@
 
 	var/target = zoneToComponent(def_zone)
 	//Only 3 types of damage concern mechs and vehicles
-	switch(damagetype)
+	switch (damagetype)
 		if (DAMAGE_BRUTE)
 			adjustBruteLoss(damage, target)
 		if (DAMAGE_BURN)

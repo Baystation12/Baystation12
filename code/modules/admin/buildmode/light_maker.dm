@@ -15,7 +15,7 @@
 
 /datum/build_mode/light_maker/Configurate()
 	var/choice = alert("Change the new light range, power, or color?", "Light Maker", "Range", "Power", "Color", "Cancel")
-	switch(choice)
+	switch (choice)
 		if ("Range")
 			var/input = input("New light range.", name, light_outer_range) as null|num
 			if (input)

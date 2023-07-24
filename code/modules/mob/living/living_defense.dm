@@ -87,7 +87,7 @@
 	for (var/a in auras)
 		var/obj/aura/aura = a
 		var/result = EMPTY_BITFIELD
-		switch(type)
+		switch (type)
 			if (AURA_TYPE_WEAPON)
 				result = aura.aura_check_weapon(arglist(newargs))
 			if (AURA_TYPE_BULLET)

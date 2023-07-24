@@ -60,7 +60,7 @@
 		return TOPIC_REFRESH
 
 /obj/machinery/shieldwallgen/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			active = 0
 			storedpower = 0
@@ -70,7 +70,7 @@
 			storedpower -= rand(0, max_stored_power)
 
 /obj/machinery/shieldwallgen/emp_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EMP_ACT_HEAVY)
 			storedpower = 0
 		if (EMP_ACT_LIGHT)
@@ -323,7 +323,7 @@
 /obj/machinery/shieldwall/ex_act(severity)
 	if (needs_power)
 		var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary
-		switch(severity)
+		switch (severity)
 			if (EX_ACT_DEVASTATING) //big boom
 				G.storedpower -= rand(30000, min(G.storedpower, 60000))
 

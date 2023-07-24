@@ -26,7 +26,7 @@
 	set_dir(host.dir)
 
 /obj/effect/bmode/dir/OnClick(list/parameters)
-	switch(dir)
+	switch (dir)
 		if (SOUTH)
 			set_dir(WEST)
 		if (WEST)

@@ -343,7 +343,7 @@ world
 		else if (ch >= 97 && ch <= 102) ch -= 87
 		else break
 		--digits
-		switch(which)
+		switch (which)
 			if (0)
 				r = SHIFTL(r, 4) | ch
 				if (single)
@@ -393,7 +393,7 @@ world
 		else if (ch >= 97 && ch <= 102) ch -= 87
 		else break
 		--digits
-		switch(which)
+		switch (which)
 			if (0)
 				hue = SHIFTL(hue, 4) | ch
 				if (digits == (usealpha ? 6 : 4)) ++which
@@ -807,7 +807,7 @@ The _flatIcons list is a cache for generated icon files.
 	opacity_icon.ChangeOpacity(0.4)//Front end for MapColors so it's fast. 0.5 means half opacity and looks the best in my opinion.
 	for (var/i=0,i<5,i++)//And now we add it as overlays. It's faster than creating an icon and then merging it.
 		var/image/I = image("icon" = opacity_icon, "icon_state" = A.icon_state, "layer" = layer+0.8)//So it's above other stuff but below weapons and the like.
-		switch(i)//Now to determine offset so the result is somewhat blurred.
+		switch (i)//Now to determine offset so the result is somewhat blurred.
 			if (1)	I.pixel_x--
 			if (2)	I.pixel_x++
 			if (3)	I.pixel_y--

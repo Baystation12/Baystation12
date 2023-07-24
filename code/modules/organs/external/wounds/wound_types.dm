@@ -4,9 +4,9 @@
 //e.g. /datum/wound/cut/deep should only be applied for 15 damage and up,
 //because in it's stages list, "deep cut" = 15.
 /proc/get_wound_type(type, damage)
-	switch(type)
+	switch (type)
 		if (INJURY_TYPE_CUT)
-			switch(damage)
+			switch (damage)
 				if (70 to INFINITY)
 					return /datum/wound/cut/massive
 				if (60 to 70)
@@ -20,7 +20,7 @@
 				if (0 to 15)
 					return /datum/wound/cut/small
 		if (INJURY_TYPE_PIERCE)
-			switch(damage)
+			switch (damage)
 				if (60 to INFINITY)
 					return /datum/wound/puncture/massive
 				if (50 to 60)
@@ -34,7 +34,7 @@
 		if (INJURY_TYPE_BRUISE)
 			return /datum/wound/bruise
 		if (INJURY_TYPE_BURN, INJURY_TYPE_LASER)
-			switch(damage)
+			switch (damage)
 				if (50 to INFINITY)
 					return /datum/wound/burn/carbonised
 				if (40 to 50)
@@ -46,7 +46,7 @@
 				if (0 to 15)
 					return /datum/wound/burn/moderate
 		if (INJURY_TYPE_SHATTER)
-			switch(damage)
+			switch (damage)
 				if (50 to INFINITY)
 					return /datum/wound/shatter/smashed
 				if (40 to 50)
@@ -273,7 +273,7 @@
 	var/damage_amt = lost_limb.max_damage
 	if (clean) damage_amt /= 2
 
-	switch(losstype)
+	switch (losstype)
 		if (DROPLIMB_EDGE, DROPLIMB_BLUNT)
 			damage_type = INJURY_TYPE_CUT
 			if (BP_IS_ROBOTIC(lost_limb))

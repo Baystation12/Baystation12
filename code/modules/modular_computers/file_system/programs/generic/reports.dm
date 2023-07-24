@@ -26,7 +26,7 @@
 /datum/nano_module/program/reports/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data()
 	data["prog_state"] = prog_state
-	switch(prog_state)
+	switch (prog_state)
 		if (REPORTS_VIEW)
 			if (selected_report)
 				data["report_data"] = selected_report.generate_nano_data(get_access(user))
@@ -51,7 +51,7 @@
 /datum/nano_module/program/reports/proc/switch_state(new_state)
 	if (prog_state == new_state)
 		return
-	switch(new_state)
+	switch (new_state)
 		if (REPORTS_VIEW)
 			program.requires_ntnet_feature = null
 			program.requires_ntnet = FALSE

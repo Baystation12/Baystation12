@@ -160,7 +160,7 @@
 	return 1
 
 /datum/language/proc/get_spoken_verb(msg_end)
-	switch(msg_end)
+	switch (msg_end)
 		if ("!")
 			return exclaim_verb
 		if ("?")

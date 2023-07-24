@@ -526,7 +526,7 @@
 	var/list/temps = new/list(4)
 	for (var/dir in GLOB.cardinal)
 		var/direction
-		switch(dir)
+		switch (dir)
 			if (NORTH)
 				direction = 1
 			if (SOUTH)

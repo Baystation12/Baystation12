@@ -56,7 +56,7 @@
 	if (T.is_wall())
 		return
 	var/parsed_value = noise2value(value)
-	switch(parsed_value)
+	switch (parsed_value)
 		if (2 to 3)
 			if (prob(fauna_prob))
 				spawn_fauna(T)

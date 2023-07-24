@@ -72,6 +72,6 @@
 	if (alert("Do you want lighting to be included in capture?", "Map Capture", "No", "Yes") == "Yes")
 		ligths = 1
 
-	switch(alert("Are you sure? (This will cause masive lag!!!)", "Map Capture", "No", "Yes"))
+	switch (alert("Are you sure? (This will cause masive lag!!!)", "Map Capture", "No", "Yes"))
 		if ("Yes")
 			usr.client.holder.capture_map_capture_next(tz, 1, 1, ligths)

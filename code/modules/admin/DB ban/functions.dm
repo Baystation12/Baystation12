@@ -61,7 +61,7 @@
 	var/serverip = "[world.internet_address]:[world.port]"
 	var/bantype_pass = 0
 	var/bantype_str
-	switch(bantype)
+	switch (bantype)
 		if (BANTYPE_PERMA)
 			bantype_str = "PERMABAN"
 			duration = -1
@@ -137,7 +137,7 @@
 	var/bantype_str
 	if (bantype)
 		var/bantype_pass = 0
-		switch(bantype)
+		switch (bantype)
 			if (BANTYPE_PERMA)
 				bantype_str = "PERMABAN"
 				bantype_pass = 1
@@ -221,7 +221,7 @@
 	reason = sql_sanitize_text(reason)
 	var/value
 
-	switch(param)
+	switch (param)
 		if ("reason")
 			if (!value)
 				value = sanitize(input("Insert the new reason for [pckey]'s ban", "New Reason", "[reason]", null) as null|text)
@@ -433,7 +433,7 @@
 			if (dbbantype)
 				bantypesearch = "AND bantype = "
 
-				switch(dbbantype)
+				switch (dbbantype)
 					if (BANTYPE_TEMP)
 						bantypesearch += "'TEMPBAN' "
 					if (BANTYPE_JOB_PERMA)
@@ -478,7 +478,7 @@
 					dcolor = adcolor
 
 				var/typedesc =""
-				switch(bantype)
+				switch (bantype)
 					if ("PERMABAN")
 						typedesc = SPAN_COLOR("red", "<b>PERMABAN</b>")
 					if ("TEMPBAN")

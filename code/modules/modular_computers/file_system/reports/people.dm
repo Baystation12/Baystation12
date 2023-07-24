@@ -104,7 +104,7 @@
 /datum/report_field/people/list_from_manifest/ask_value(mob/user)
 	var/alert = alert(user, "Would you like to add or remove a name?", "Form Input", "Add", "Remove")
 	var/list/formatted_manifest = list()
-	switch(alert)
+	switch (alert)
 		if ("Add")
 			var/list/full_manifest = flat_nano_crew_manifest()
 			for (var/entry in full_manifest)

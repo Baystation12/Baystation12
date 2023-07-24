@@ -60,7 +60,7 @@
 	if (usr.incapacitated())
 		return
 
-	switch(over_object.name)
+	switch (over_object.name)
 		if ("r_hand")
 			if (usr.unEquip(src))
 				usr.put_in_r_hand(src)
@@ -74,12 +74,12 @@
 	for (var/obj/item/clothing/accessory/A in accessories)
 		if (!(A.accessory_flags & ACCESSORY_HIDDEN))
 			to_chat(user, "[icon2html(A, user)] \A [A] is attached to it.")
-	switch(ironed_state)
+	switch (ironed_state)
 		if (WRINKLES_WRINKLY)
 			to_chat(user, SPAN_BAD("It's wrinkly."))
 		if (WRINKLES_NONE)
 			to_chat(user, SPAN_NOTICE("It's completely wrinkle-free!"))
-	switch(smell_state)
+	switch (smell_state)
 		if (SMELL_CLEAN)
 			to_chat(user, SPAN_NOTICE("It smells clean!"))
 		if (SMELL_STINKY)

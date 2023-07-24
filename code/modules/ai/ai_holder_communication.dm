@@ -106,7 +106,7 @@
 		if (!length(comm_types))
 			return // All the relevant lists are empty, so do nothing.
 
-		switch(pick(comm_types))
+		switch (pick(comm_types))
 			if (COMM_SAY)
 				holder.ISay(pick(holder.say_list.speak))
 			if (COMM_AUDIBLE_EMOTE)

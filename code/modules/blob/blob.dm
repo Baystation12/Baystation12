@@ -412,7 +412,7 @@ regen() will cover update_icon() for this proc
 	if (is_tendril)
 		var/tendril_type
 		tendril_type = pick(types_of_tendril)
-		switch(tendril_type)
+		switch (tendril_type)
 			if ("solid")
 				desc = "An incredibly dense, yet flexible, tendril, removed from an asteroclast."
 				force = 10

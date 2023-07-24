@@ -252,7 +252,7 @@
 
 /mob/living/simple_animal/bullet_impact_visuals(obj/item/projectile/P, def_zone)
 	..()
-	switch(get_bullet_impact_effect_type(def_zone))
+	switch (get_bullet_impact_effect_type(def_zone))
 		if (BULLET_IMPACT_MEAT)
 			if (P.damtype == DAMAGE_BRUTE)
 				var/hit_dir = get_dir(P.starting, src)
@@ -310,7 +310,7 @@
 	return /datum/reagent/nutriment
 
 /mob/living/simple_animal/eyecheck()
-	switch(flash_vulnerability)
+	switch (flash_vulnerability)
 		if (2 to INFINITY)
 			return FLASH_PROTECTION_REDUCED
 		if (1)

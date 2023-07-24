@@ -158,7 +158,7 @@ Thus, the two variables affect pump operation are set in New():
 		update_use_power(!use_power)
 		. = 1
 
-	switch(href_list["set_press"])
+	switch (href_list["set_press"])
 		if ("min")
 			target_pressure = 0
 			. = 1

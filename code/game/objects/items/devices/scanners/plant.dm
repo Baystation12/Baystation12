@@ -136,13 +136,13 @@
 	else if (grown_seed.get_trait(TRAIT_WEED_TOLERANCE) > 6)
 		dat += "<br>It is remarkably resistant to weeds."
 
-	switch(grown_seed.get_trait(TRAIT_SPREAD))
+	switch (grown_seed.get_trait(TRAIT_SPREAD))
 		if (1)
 			dat += "<br>It is able to be planted outside of a tray."
 		if (2)
 			dat += "<br>It is a robust and vigorous vine that will spread rapidly."
 
-	switch(grown_seed.get_trait(TRAIT_CARNIVOROUS))
+	switch (grown_seed.get_trait(TRAIT_CARNIVOROUS))
 		if (1)
 			dat += "<br>It is carnivorous and will eat tray pests for sustenance."
 		if (2)

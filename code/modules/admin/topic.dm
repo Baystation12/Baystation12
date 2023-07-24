@@ -46,7 +46,7 @@
 
 		banckey = ckey(banckey)
 
-		switch(bantype)
+		switch (bantype)
 			if (BANTYPE_PERMA)
 				if (!banckey || !banreason)
 					to_chat(usr, "Not enough parameters (Requires ckey and reason)")
@@ -134,7 +134,7 @@
 			var/rights = 0
 			if (D)
 				rights = D.rights
-			switch(new_rank)
+			switch (new_rank)
 				if (null,"") return
 				if ("*New Rank*")
 					new_rank = input("Please input a new rank", "New custom rank", null, null) as null|text
@@ -197,7 +197,7 @@
 			alert("You can't call the shuttle during blob!")
 			return
 
-		switch(href_list["call_shuttle"])
+		switch (href_list["call_shuttle"])
 			if ("1")
 				if (evacuation_controller.call_evacuation(usr, TRUE))
 					log_and_message_admins("called an evacuation.")
@@ -224,13 +224,13 @@
 			return
 
 		var/delmob = 0
-		switch(alert("Delete old mob?","Message","Yes","No","Cancel"))
+		switch (alert("Delete old mob?","Message","Yes","No","Cancel"))
 			if ("Cancel")	return
 			if ("Yes")		delmob = 1
 
 		log_and_message_admins("has used rudimentary transformation on [key_name_admin(M)]. Transforming to [href_list["simplemake"]]; deletemob=[delmob]")
 
-		switch(href_list["simplemake"])
+		switch (href_list["simplemake"])
 			if ("observer")			M.change_mob_type( /mob/observer/ghost , null, null, delmob )
 			if ("nymph")				M.change_mob_type( /mob/living/carbon/alien/diona , null, null, delmob )
 			if ("human")				M.change_mob_type( /mob/living/carbon/human , null, null, delmob, href_list["species"])
@@ -286,7 +286,7 @@
 
 		var/duration
 
-		switch(alert("Temporary Ban?",,"Yes","No"))
+		switch (alert("Temporary Ban?",,"Yes","No"))
 			if ("Yes")
 				temp = 1
 				var/mins = 0
@@ -654,7 +654,7 @@
 
 		//get jobs for department if specified, otherwise just returnt he one job in a list.
 		var/list/job_list = list()
-		switch(href_list["jobban3"])
+		switch (href_list["jobban3"])
 			if ("commanddept")
 				for (var/jobPos in SSjobs.titles_by_department(COM))
 					if (!jobPos)	continue
@@ -740,7 +740,7 @@
 
 		//Banning comes first
 		if (length(notbannedlist)) //at least 1 unbanned job exists in job_list so we have stuff to ban.
-			switch(alert("Temporary Ban?",,"Yes","No", "Cancel"))
+			switch (alert("Temporary Ban?",,"Yes","No", "Cancel"))
 				if ("Yes")
 					if (!check_rights(R_BAN, 0))
 						to_chat(usr, SPAN_WARNING(" You cannot issue temporary job-bans!"))
@@ -806,7 +806,7 @@
 			for (var/job in SSjobs.titles_to_datums)
 				var/reason = jobban_isbanned(M, job)
 				if (!reason) continue //skip if it isn't jobbanned anyway
-				switch(alert("Job: '[job]' Reason: '[reason]' Un-jobban?","Please Confirm","Yes","No"))
+				switch (alert("Job: '[job]' Reason: '[reason]' Un-jobban?","Please Confirm","Yes","No"))
 					if ("Yes")
 						ban_unban_log_save("[key_name(usr)] unjobbanned [key_name(M)] from [job]")
 						log_admin("[key_name(usr)] unbanned [key_name(M)] from [job]")
@@ -869,7 +869,7 @@
 			to_chat(usr, SPAN_DANGER("This mob has no known last occupant and cannot be banned."))
 			return
 
-		switch(alert("Temporary Ban?",,"Yes","No", "Cancel"))
+		switch (alert("Temporary Ban?",,"Yes","No", "Cancel"))
 			if ("Yes")
 				var/mins = input(usr,"How long (in minutes)?","Ban time",1440) as num|null
 				if (!mins)
@@ -914,7 +914,7 @@
 					to_chat(usr, SPAN_DANGER("This mob's occupant has changed from [given_key] to [mob_key]. Please try again."))
 					show_player_panel(M)
 					return
-				switch(alert(usr,"IP ban?",,"Yes","No","Cancel"))
+				switch (alert(usr,"IP ban?",,"Yes","No","Cancel"))
 					if ("Cancel")	return
 					if ("Yes")
 						AddBan(mob_key, M.computer_id, reason, usr.ckey, 0, 0, M.lastKnownIP)
@@ -1433,7 +1433,7 @@
 			health_description = "This mob type has no health to speak of."
 
 		//Gener
-		switch(M.gender)
+		switch (M.gender)
 			if (MALE,FEMALE)	gender_description = "[M.gender]"
 			else			gender_description = SPAN_COLOR("red", "<b>[M.gender]</b>")
 
@@ -2046,7 +2046,7 @@
 
 		if (M.client && M.client.holder) return // admins don't get staffnotify'd about
 
-		switch(alert("Really set staff warn?",,"Yes","No"))
+		switch (alert("Really set staff warn?",,"Yes","No"))
 			if ("Yes")
 				var/last_ckey = LAST_CKEY(M)
 				var/reason = sanitize(input(usr,"Staff warn message","Staff Warn","Problem Player") as text|null)
@@ -2065,7 +2065,7 @@
 		var/mob/M = locate(href_list["removestaffwarn"])
 		if (!ismob(M)) return
 
-		switch(alert("Really remove staff warn?",,"Yes","No"))
+		switch (alert("Really remove staff warn?",,"Yes","No"))
 			if ("Yes")
 				var/last_ckey = LAST_CKEY(M)
 				if (!DB_staffwarn_remove(last_ckey))

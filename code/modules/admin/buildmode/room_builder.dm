@@ -21,7 +21,7 @@
 
 /datum/build_mode/room_builder/Configurate()
 	var/choice = alert("Would you like to set the floor or wall type?", name, "Floor", "Wall", "Cancel")
-	switch(choice)
+	switch (choice)
 		if ("Floor")
 			floor_type = select_subpath(floor_type) || floor_type
 			to_chat(user, SPAN_NOTICE("Floor type set to [floor_type]."))

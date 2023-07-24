@@ -112,7 +112,7 @@ var/global/const/FINGERPRINT_COMPLETE = 6
 	if (!fingerprints[full_print])
 		fingerprints[full_print] = stars(full_print, rand(0 + bonus, 20 + bonus))	//Initial touch, not leaving much evidence the first time.
 	else
-		switch(max(stringpercent(fingerprints[full_print]) - bonus,0))		//tells us how many stars are in the current prints.
+		switch (max(stringpercent(fingerprints[full_print]) - bonus,0))		//tells us how many stars are in the current prints.
 			if (28 to 32)
 				if (prob(1))
 					fingerprints[full_print] = full_print 		// You rolled a one buddy.

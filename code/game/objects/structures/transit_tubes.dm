@@ -57,7 +57,7 @@
 
 // When destroyed by explosions, properly handle contents.
 /obj/structure/transit_tube_pod/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			for (var/atom/movable/AM in contents)
 				AM.dropInto(loc)
@@ -561,7 +561,7 @@
 // A copy of text2dir, extended to accept one and two letter
 //  directions, and to clearly return 0 otherwise.
 /obj/structure/transit_tube/proc/text2dir_extended(direction)
-	switch(uppertext(direction))
+	switch (uppertext(direction))
 		if ("NORTH", "N")
 			return 1
 		if ("SOUTH", "S")
@@ -586,7 +586,7 @@
 // A copy of dir2text, which returns the short one or two letter
 //  directions used in tube icon states.
 /obj/structure/transit_tube/proc/dir2text_short(direction)
-	switch(direction)
+	switch (direction)
 		if (1)
 			return "N"
 		if (2)

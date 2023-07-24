@@ -173,7 +173,7 @@
 
 /obj/item/device/eftpos/Topic(href, href_list)
 	if (href_list["choice"])
-		switch(href_list["choice"])
+		switch (href_list["choice"])
 			if ("change_code")
 				var/attempt_code = input("Re-enter the current EFTPOS access code", "Confirm old EFTPOS code") as num
 				if (attempt_code == access_code)

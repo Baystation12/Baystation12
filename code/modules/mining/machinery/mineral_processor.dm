@@ -134,7 +134,7 @@
 		var/line = "[capitalize(M.display_name)]</td><td>[floor(ores_stored[ore] / M.units_per_sheet)] ([ores_stored[ore]]u)"
 		var/status_string
 		if (ores_processing[ore])
-			switch(ores_processing[ore])
+			switch (ores_processing[ore])
 				if (ORE_DISABLED)
 					status_string = SPAN_COLOR("red", "not processing")
 				if (ORE_SMELT)
@@ -156,7 +156,7 @@
 	if (href_list["toggle_smelting"])
 		var/choice = input("What setting do you wish to use for processing [href_list["toggle_smelting"]]?") as null|anything in list("Smelting","Compressing","Alloying","Nothing")
 		if (!choice) return
-		switch(choice)
+		switch (choice)
 			if ("Nothing")     choice = ORE_DISABLED
 			if ("Smelting")    choice = ORE_SMELT
 			if ("Compressing") choice = ORE_COMPRESS

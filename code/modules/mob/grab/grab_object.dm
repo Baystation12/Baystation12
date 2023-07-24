@@ -59,7 +59,7 @@
 	if (!assailant)
 		return
 
-	switch(assailant.a_intent)
+	switch (assailant.a_intent)
 		if (I_HELP)
 			downgrade()
 		else

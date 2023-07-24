@@ -820,7 +820,7 @@
 		SPAN_CLASS("italics", "You hear clicking."))
 	if (user.unEquip(src,T))
 		var/rotation = 0
-		switch(ndir)
+		switch (ndir)
 			if (NORTH)
 				rotation = 180
 				pixel_y = -32

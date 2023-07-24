@@ -256,7 +256,7 @@ var/global/const/POWER = 8
 
 /datum/wires/door/UpdateCut(index, mended)
 	var/obj/machinery/door/airlock/A = holder
-	switch(index)
+	switch (index)
 		if (BOLTED)
 		if (!mended)
 			A.bolt()

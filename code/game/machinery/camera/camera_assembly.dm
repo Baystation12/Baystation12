@@ -25,7 +25,7 @@
 
 /obj/item/camera_assembly/attackby(obj/item/W as obj, mob/living/user as mob)
 
-	switch(state)
+	switch (state)
 
 		if (0)
 			// State 0

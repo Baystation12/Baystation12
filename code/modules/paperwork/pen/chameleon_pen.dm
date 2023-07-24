@@ -29,7 +29,7 @@
 	var/selected_type = input("Pick new colour.", "Pen Colour", null, null) as null|anything in possible_colours
 
 	if (selected_type)
-		switch(selected_type)
+		switch (selected_type)
 			if ("Yellow")
 				colour = COLOR_YELLOW
 				color_description = "yellow ink"

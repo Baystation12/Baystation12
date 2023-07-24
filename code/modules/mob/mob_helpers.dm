@@ -123,7 +123,7 @@ var/global/list/organ_rel_size = list(
 
 /proc/check_zone(zone)
 	if (!zone)	return BP_CHEST
-	switch(zone)
+	switch (zone)
 		if (BP_EYES)
 			zone = BP_HEAD
 		if (BP_MOUTH)
@@ -242,7 +242,7 @@ var/global/list/organ_rel_size = list(
 			if (lowertext(newletter)=="a")	newletter="ah"
 			if (lowertext(newletter)=="c")	newletter="k"
 		var/randomizer = rand(1, 15)
-		switch(randomizer)
+		switch (randomizer)
 			if (1 to 4)
 				newletter="[lowertext(newletter)]"
 			if (5 to 8)
@@ -340,13 +340,13 @@ var/global/list/organ_rel_size = list(
 var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 /proc/intent_numeric(argument)
 	if (istext(argument))
-		switch(argument)
+		switch (argument)
 			if (I_HELP)		return 0
 			if (I_DISARM)	return 1
 			if (I_GRAB)		return 2
 			else			return 3
 	else
-		switch(argument)
+		switch (argument)
 			if (0)			return I_HELP
 			if (1)			return I_DISARM
 			if (2)			return I_GRAB
@@ -358,7 +358,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	set hidden = 1
 
 	if (ishuman(src) || isbrain(src) || isslime(src))
-		switch(input)
+		switch (input)
 			if (I_HELP,I_DISARM,I_GRAB,I_HURT)
 				a_intent = input
 			if ("right")
@@ -369,7 +369,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 			hud_used.action_intent.icon_state = "intent_[a_intent]"
 
 	else if (isrobot(src))
-		switch(input)
+		switch (input)
 			if (I_HELP)
 				a_intent = I_HELP
 			if (I_HURT)
@@ -664,7 +664,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	if (islist(choice_type))
 		choice = input(src, message, title, default) as null|anything in choice_type
 	else
-		switch(choice_type)
+		switch (choice_type)
 			if (MOB_INPUT_TEXT)
 				choice = input(src, message, title, default) as null|text
 			if (MOB_INPUT_NUM)

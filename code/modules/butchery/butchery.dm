@@ -184,7 +184,7 @@
 
 	if (do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) && !QDELETED(user) && !QDELETED(last_occupant) && occupant == last_occupant && occupant_state == last_state)
 		user.visible_message(SPAN_NOTICE("\The [user] finishes [butchery_string] \the [occupant]."))
-		switch(next_state)
+		switch (next_state)
 			if (CARCASS_SKINNED)
 				occupant.harvest_skin()
 			if (CARCASS_JOINTED)
@@ -205,7 +205,7 @@
 			USE_FEEDBACK_FAILURE("\The [src] is currently being used by someone else.")
 			return TRUE
 		busy = TRUE
-		switch(occupant_state)
+		switch (occupant_state)
 			if (CARCASS_FRESH)
 				do_butchery_step(user, CARCASS_SKINNED, "skinning")
 			if (CARCASS_SKINNED)

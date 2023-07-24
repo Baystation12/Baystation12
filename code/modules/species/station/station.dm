@@ -413,7 +413,7 @@
 		H.equip_to_slot_or_del(new /obj/item/device/flashlight/flare(H), slot_r_hand)
 
 /datum/species/diona/skills_from_age(age)
-	switch(age)
+	switch (age)
 		if (101 to 200)	. = 12 // age bracket before this is 46 to 100 . = 8 making this +4
 		if (201 to 300)	. = 16 // + 8
 		else			. = ..()

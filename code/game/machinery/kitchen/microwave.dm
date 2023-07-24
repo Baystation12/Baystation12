@@ -491,7 +491,7 @@
 		updateUsrDialog()
 		return
 
-	switch(href_list["action"])
+	switch (href_list["action"])
 		if ("cook")
 			playsound(loc, 'sound/machines/quiet_beep.ogg', 50, 1)
 			cook()

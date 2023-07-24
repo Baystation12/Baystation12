@@ -128,7 +128,7 @@
 		gift.forceMove(src)
 
 		//a good example of where we don't want to use the w_class defines
-		switch(gift.w_class)
+		switch (gift.w_class)
 			if (1) icon_state = "gift1"
 			if (2) icon_state = "gift1"
 			if (3) icon_state = "gift2"

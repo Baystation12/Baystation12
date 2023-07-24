@@ -29,7 +29,7 @@
 	if (mapper_set())
 		var/con = 0
 		for (var/datum/omni_port/P in ports)
-			switch(P.dir)
+			switch (P.dir)
 				if (NORTH)
 					if (tag_north_con && tag_north == 1)
 						P.concentration = tag_north_con
@@ -63,7 +63,7 @@
 			if (inputs.Find(P))
 				inputs -= P
 
-			switch(P.mode)
+			switch (P.mode)
 				if (ATM_INPUT)
 					inputs += P
 				if (ATM_OUTPUT)
@@ -158,7 +158,7 @@
 
 		var/input = 0
 		var/output = 0
-		switch(P.mode)
+		switch (P.mode)
 			if (ATM_INPUT)
 				input = 1
 			if (ATM_OUTPUT)
@@ -181,7 +181,7 @@
 /obj/machinery/atmospherics/omni/mixer/Topic(href, href_list)
 	if (..()) return 1
 
-	switch(href_list["command"])
+	switch (href_list["command"])
 		if ("power")
 			if (!configuring)
 				update_use_power(!use_power)
@@ -194,7 +194,7 @@
 
 	//only allows config changes when in configuring mode ~otherwise you'll get weird pressure stuff going on
 	if (configuring && !use_power)
-		switch(href_list["command"])
+		switch (href_list["command"])
 			if ("set_flow_rate")
 				var/new_flow_rate = input(usr,"Enter new flow rate limit (0-[max_flow_rate]L/s)","Flow Rate Control",set_flow_rate) as num
 				set_flow_rate = clamp(new_flow_rate, 0, max_flow_rate)
@@ -211,7 +211,7 @@
 
 /obj/machinery/atmospherics/omni/mixer/proc/switch_mode(port = NORTH, mode = ATM_NONE)
 	if (mode != ATM_INPUT && mode != ATM_OUTPUT)
-		switch(mode)
+		switch (mode)
 			if ("in")
 				mode = ATM_INPUT
 			if ("out")
@@ -222,7 +222,7 @@
 	for (var/datum/omni_port/P in ports)
 		var/old_mode = P.mode
 		if (P.dir == port)
-			switch(mode)
+			switch (mode)
 				if (ATM_INPUT)
 					if (P.mode == ATM_OUTPUT)
 						return
@@ -237,7 +237,7 @@
 		else if (P.mode == ATM_OUTPUT && mode == ATM_OUTPUT)
 			P.mode = ATM_INPUT
 		if (P.mode != old_mode)
-			switch(P.mode)
+			switch (P.mode)
 				if (ATM_NONE)
 					initialize_directions &= ~P.dir
 					P.disconnect()

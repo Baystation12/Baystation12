@@ -86,7 +86,7 @@
 	if (!active)
 		return
 	var/duration
-	switch(severity)
+	switch (severity)
 		if (EMP_ACT_HEAVY)
 			set_broken(TRUE)
 			if (prob(75)) explode()

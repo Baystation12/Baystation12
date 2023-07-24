@@ -9,7 +9,7 @@
 /datum/random_map/noise/tundra/get_map_char(value)
 	var/val = min(9,max(0,round((value/cell_range)*10)))
 	if (isnull(val)) val = 0
-	switch(val)
+	switch (val)
 		if (0)
 			return SPAN_COLOR("#000099", "~")
 		if (1)
@@ -34,7 +34,7 @@
 /datum/random_map/noise/tundra/get_appropriate_path(value)
 	var/val = min(9,max(0,round((value/cell_range)*10)))
 	if (isnull(val)) val = 0
-	switch(val)
+	switch (val)
 		if (0 to 4)
 			return /turf/simulated/floor/beach/water/ocean
 		else
@@ -43,7 +43,7 @@
 /datum/random_map/noise/tundra/get_additional_spawns(value, turf/T)
 	var/val = min(9,max(0,round((value/cell_range)*10)))
 	if (isnull(val)) val = 0
-	switch(val)
+	switch (val)
 		if (2)
 			if (prob(5))
 				new /mob/living/simple_animal/passive/crab(T)

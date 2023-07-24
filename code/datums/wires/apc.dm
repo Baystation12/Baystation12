@@ -29,7 +29,7 @@
 
 	var/obj/machinery/power/apc/A = holder
 
-	switch(index)
+	switch (index)
 
 		if (APC_WIRE_IDSCAN)
 			A.locked = 0
@@ -57,7 +57,7 @@
 /datum/wires/apc/UpdateCut(index, mended)
 	var/obj/machinery/power/apc/A = holder
 
-	switch(index)
+	switch (index)
 		if (APC_WIRE_MAIN_POWER1, APC_WIRE_MAIN_POWER2)
 
 			if (!mended)

@@ -42,7 +42,7 @@
 			options -= "slime"
 
 		var/randomize = pick(options)
-		switch(randomize)
+		switch (randomize)
 			if ("robot")
 				new_mob = new /mob/living/silicon/robot(M.loc)
 				new_mob.gender = M.gender

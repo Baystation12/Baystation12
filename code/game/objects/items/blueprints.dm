@@ -34,7 +34,7 @@
 	return GLOB.physical_state
 
 /obj/item/blueprints/OnTopic(user, href_list)
-	switch(href_list["action"])
+	switch (href_list["action"])
 		if ("create_area")
 			if (get_area_type()!=AREA_SPACE)
 				interact()
@@ -87,7 +87,7 @@
 
 	var/res = detect_room(get_turf(usr))
 	if (!istype(res,/list))
-		switch(res)
+		switch (res)
 			if (ROOM_ERR_SPACE)
 				to_chat(usr, SPAN_WARNING("The new area must be completely airtight!"))
 				return
@@ -204,7 +204,7 @@
 			if (!isturf(NT) || (NT in found) || (NT in pending))
 				continue
 
-			switch(check_tile_is_border(NT,dir))
+			switch (check_tile_is_border(NT,dir))
 				if (BORDER_NONE)
 					pending+=NT
 				if (BORDER_BETWEEN)

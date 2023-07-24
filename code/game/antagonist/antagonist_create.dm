@@ -42,7 +42,7 @@
 /datum/antagonist/proc/create_radio(freq, mob/living/carbon/human/player)
 	var/obj/item/device/radio/R
 
-	switch(freq)
+	switch (freq)
 		if (SYND_FREQ)
 			R = new/obj/item/device/radio/headset/syndicate(player)
 		if (RAID_FREQ)

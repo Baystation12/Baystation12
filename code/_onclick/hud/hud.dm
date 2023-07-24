@@ -71,7 +71,7 @@
 		for (var/gear_slot in H.species.hud.gear)
 			var/list/hud_data = H.species.hud.gear[gear_slot]
 			if (inventory_shown && hud_shown)
-				switch(hud_data["slot"])
+				switch (hud_data["slot"])
 					if (slot_head)
 						if (H.head)      H.head.screen_loc =      hud_data["loc"]
 					if (slot_shoes)
@@ -91,7 +91,7 @@
 					if (slot_wear_mask)
 						if (H.wear_mask) H.wear_mask.screen_loc = hud_data["loc"]
 			else
-				switch(hud_data["slot"])
+				switch (hud_data["slot"])
 					if (slot_head)
 						if (H.head)      H.head.screen_loc =      null
 					if (slot_shoes)
@@ -121,7 +121,7 @@
 		for (var/gear_slot in H.species.hud.gear)
 			var/list/hud_data = H.species.hud.gear[gear_slot]
 			if (hud_shown)
-				switch(hud_data["slot"])
+				switch (hud_data["slot"])
 					if (slot_s_store)
 						if (H.s_store) H.s_store.screen_loc = hud_data["loc"]
 					if (slot_wear_id)
@@ -135,7 +135,7 @@
 					if (slot_r_store)
 						if (H.r_store) H.r_store.screen_loc = hud_data["loc"]
 			else
-				switch(hud_data["slot"])
+				switch (hud_data["slot"])
 					if (slot_s_store)
 						if (H.s_store) H.s_store.screen_loc = null
 					if (slot_wear_id)

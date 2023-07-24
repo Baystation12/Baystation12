@@ -53,7 +53,7 @@
 
 /datum/computer/file/embedded_program/docking/simple/receive_user_command(command)
 	. = TRUE
-	switch(command)
+	switch (command)
 		if ("force_door")
 			if (override_enabled)
 				if (memory["door_status"]["state"] == "open")

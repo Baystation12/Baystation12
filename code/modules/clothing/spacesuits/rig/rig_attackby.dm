@@ -116,7 +116,7 @@
 					to_chat(user, "You can't remove an installed device while the hardsuit is being worn.")
 					return
 
-			switch(to_remove)
+			switch (to_remove)
 
 				if ("cell")
 

@@ -161,7 +161,7 @@
 					else
 						owner.vessel.remove_reagent(/datum/reagent/blood, bleed_amount)
 
-		switch(pulse)
+		switch (pulse)
 			if (PULSE_SLOW)
 				blood_max *= 0.8
 			if (PULSE_FAST)
@@ -212,7 +212,7 @@
 	if (is_bruised())
 		pulsesound = "irregular"
 
-	switch(pulse)
+	switch (pulse)
 		if (PULSE_SLOW)
 			pulsesound = "slow"
 		if (PULSE_FAST)

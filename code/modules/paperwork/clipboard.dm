@@ -29,7 +29,7 @@
 			return ..()
 
 		if (!M.restrained() && !M.stat)
-			switch(over_object.name)
+			switch (over_object.name)
 				if ("r_hand")
 					if (M.unEquip(src))
 						M.put_in_r_hand(src)

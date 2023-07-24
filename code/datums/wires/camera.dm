@@ -35,7 +35,7 @@ var/global/const/CAMERA_WIRE_NOTHING2 = 32
 /datum/wires/camera/UpdateCut(index, mended)
 	var/obj/machinery/camera/C = holder
 
-	switch(index)
+	switch (index)
 		if (CAMERA_WIRE_FOCUS)
 			var/range = (mended ? initial(C.view_range) : C.short_range)
 			C.setViewRange(range)
@@ -58,7 +58,7 @@ var/global/const/CAMERA_WIRE_NOTHING2 = 32
 	var/obj/machinery/camera/C = holder
 	if (IsIndexCut(index))
 		return
-	switch(index)
+	switch (index)
 		if (CAMERA_WIRE_FOCUS)
 			var/new_range = (C.view_range == initial(C.view_range) ? C.short_range : initial(C.view_range))
 			C.setViewRange(new_range)

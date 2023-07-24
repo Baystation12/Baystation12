@@ -58,7 +58,7 @@
 
 /obj/item/rig_module/examine(mob/user)
 	. = ..()
-	switch(damage)
+	switch (damage)
 		if (0)
 			to_chat(user, "It is undamaged.")
 		if (1)
@@ -87,7 +87,7 @@
 
 	else if (isCoil(W))
 
-		switch(damage)
+		switch (damage)
 			if (0)
 				to_chat(user, "There is no damage to mend.")
 				return

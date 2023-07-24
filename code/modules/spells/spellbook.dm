@@ -125,7 +125,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 				if (testing & NEEDSCLOTHES)
 					info = SPAN_COLOR("#ff33cc", "W")
 				var/type = ""
-				switch(initial(S.charge_type))
+				switch (initial(S.charge_type))
 					if (Sp_RECHARGE)
 						type = "R"
 					if (Sp_HOLDVAR)
@@ -264,7 +264,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 			if (!S.can_improve())
 				return
 			if (S.can_improve(Sp_SPEED) && S.can_improve(Sp_POWER))
-				switch(alert(user, "Do you want to upgrade this spell's speed or power?", "Spell upgrade", "Speed", "Power", "Cancel"))
+				switch (alert(user, "Do you want to upgrade this spell's speed or power?", "Spell upgrade", "Speed", "Power", "Cancel"))
 					if ("Speed")
 						return S.quicken_spell()
 					if ("Power")

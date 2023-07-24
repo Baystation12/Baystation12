@@ -211,7 +211,7 @@
 	linked.Beam(get_step(linked, overmapdir), "disperser_beam", time = 150, maxdistance = world.maxx)
 
 /obj/machinery/computer/ship/disperser/proc/get_target_turf(turf/start, direction)
-	switch(direction)
+	switch (direction)
 		if (NORTH)
 			return locate(start.x,world.maxy,start.z)
 		if (SOUTH)

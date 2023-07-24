@@ -28,7 +28,7 @@
 	artifact_id = "[pick("kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[rand(100,999)]"
 
 	//random charge time and distance
-	switch(pick(100;1, 50;2, 25;3))
+	switch (pick(100;1, 50;2, 25;3))
 		if (1)
 			//short range, short charge time
 			chargelevelmax = rand(3, 20)
@@ -95,7 +95,7 @@
 
 /datum/artifact_effect/proc/getDescription()
 	. = "<b>"
-	switch(effect_type)
+	switch (effect_type)
 		if (EFFECT_ENERGY)
 			. += "Concentrated energy emissions"
 		if (EFFECT_PSIONIC)
@@ -115,7 +115,7 @@
 
 	. += "</b> have been detected <b>"
 
-	switch(effect)
+	switch (effect)
 		if (EFFECT_TOUCH)
 			. += "interspersed throughout substructure and shell."
 		if (EFFECT_AURA)

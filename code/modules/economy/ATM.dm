@@ -134,7 +134,7 @@
 				if (authenticated_account.suspended)
 					t += "[SPAN_BAD("<b>Access to this account has been suspended, and the funds within frozen.</b>")]</div>"
 				else
-					switch(view_screen)
+					switch (view_screen)
 						if (CHANGE_SECURITY_LEVEL)
 							t += "Select a new security level for this account:<br><hr>"
 							if (authenticated_account.security_level != 0)
@@ -231,7 +231,7 @@
 	if ((. = ..()))
 		return
 	if (href_list["choice"])
-		switch(href_list["choice"])
+		switch (href_list["choice"])
 			if ("transfer")
 				if (authenticated_account)
 					var/transfer_amount = text2num(href_list["funds_amount"])

@@ -209,7 +209,7 @@
 /obj/machinery/conveyor_switch/interface_interact(mob/user)
 	if (!CanInteract(user, DefaultTopicState()))
 		return FALSE
-	do_switch()
+	do_switch ()
 	operated = 1
 	update_icon()
 
@@ -220,7 +220,7 @@
 			S.update_icon()
 	return TRUE
 
-/obj/machinery/conveyor_switch/proc/do_switch(mob/user)
+/obj/machinery/conveyor_switch/proc/do_switch (mob/user)
 	if (position == 0)
 		if (last_pos < 0)
 			position = 1
@@ -244,7 +244,7 @@
 	var/convdir = 1 //Set to 1 or -1 depending on which way you want the convayor to go. (In other words keep at 1 and set the proper dir on the belts.)
 	desc = "A conveyor control switch. It appears to only go in one direction."
 
-/obj/machinery/conveyor_switch/oneway/do_switch(mob/user)
+/obj/machinery/conveyor_switch/oneway/do_switch (mob/user)
 	if (position == 0)
 		position = convdir
 	else
@@ -311,7 +311,7 @@
 	if (!found)
 		to_chat(user, "[icon2html(src, user)][SPAN_NOTICE("The conveyor switch did not detect any linked conveyor belts in range.")]")
 		return
-	var/obj/machinery/conveyor_switch/NC = new /obj/machinery/conveyor_switch(A, id)
+	var/obj/machinery/conveyor_switch/NC = new /obj/machinery/conveyor_switch (A, id)
 	transfer_fingerprints_to(NC)
 	qdel(src)
 

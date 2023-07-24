@@ -64,7 +64,7 @@
 
 	if (!sound_token) update_sound(1)
 
-	switch(radiation_count)
+	switch (radiation_count)
 		if (null) icon_state = "geiger_on_1"
 		if (-INFINITY to RAD_LEVEL_LOW)
 			icon_state = "geiger_on_1"

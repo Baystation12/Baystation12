@@ -10,7 +10,7 @@
 		return 1
 	if (always_unpowered)
 		return 0
-	switch(chan)
+	switch (chan)
 		if (EQUIP)
 			return power_equip
 		if (LIGHT)
@@ -31,7 +31,7 @@
 
 /// Returns Integer. The total amount of power usage queued for the area from both `used_*` and `oneoff_*` for the given power channel, or all channels if `TOTAL` is passed instead.
 /area/proc/usage(chan)
-	switch(chan)
+	switch (chan)
 		if (LIGHT)
 			return used_light + oneoff_light
 		if (EQUIP)
@@ -57,7 +57,7 @@
  * - `chan` Integer (`EQUIP`, `LIGHT`, or `ENVIRON`). The power channel to add the power to.
  */
 /area/proc/use_power(amount, chan)
-	switch(chan)
+	switch (chan)
 		if (EQUIP)
 			used_equip += amount
 		if (LIGHT)
@@ -88,7 +88,7 @@
  * - `chan` Integer (`EQUIP`, `LIGHT`, or `ENVIRON`). The power channel to add the power to.
  */
 /area/proc/use_power_oneoff(amount, chan)
-	switch(chan)
+	switch (chan)
 		if (EQUIP)
 			oneoff_equip += amount
 		if (LIGHT)
@@ -102,7 +102,7 @@
 	used_light = 0
 	used_environ = 0
 	for (var/obj/machinery/M in src)
-		switch(M.power_channel)
+		switch (M.power_channel)
 			if (EQUIP)
 				used_equip += M.get_power_usage()
 			if (LIGHT)

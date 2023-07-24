@@ -97,7 +97,7 @@
 
 /datum/spellbound_type/servant/familiar/modify_servant(list/equipment, mob/living/carbon/human/H)
 	var/familiar_type
-	switch(input(H,"Choose your desired animal form:", "Form") as anything in list("Space Pike", "Mouse", "Cat", "Bear"))
+	switch (input(H,"Choose your desired animal form:", "Form") as anything in list("Space Pike", "Mouse", "Cat", "Bear"))
 		if ("Space Pike")
 			H.mutations |= mNobreath
 			H.mutations |= MUTATION_SPACERES

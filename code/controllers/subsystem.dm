@@ -157,7 +157,7 @@
 
 /datum/controller/subsystem/proc/pause()
 	. = 1
-	switch(state)
+	switch (state)
 		if (SS_RUNNING)
 			state = SS_PAUSED
 		if (SS_SLEEPING)

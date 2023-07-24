@@ -192,7 +192,7 @@
 		threat_guess += average_damage
 
 	// Consider intent.
-	switch(a_intent)
+	switch (a_intent)
 		if (I_HELP) // Not likely to fight us.
 			threat_guess *= 0.4
 		if (I_DISARM) // Might engage us, but unlikely to be with the intent to kill.

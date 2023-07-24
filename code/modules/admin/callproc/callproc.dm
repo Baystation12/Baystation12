@@ -11,10 +11,10 @@
 	var/target = null
 	var/targetselected = 0
 
-	switch(alert("Proc owned by something?",, "Yes", "No", "Cancel"))
+	switch (alert("Proc owned by something?",, "Yes", "No", "Cancel"))
 		if ("Yes")
 			targetselected=1
-			switch(input("Proc owned by...", "Owner", null) as null|anything in list("Obj", "Mob", "Area or Turf", "Client"))
+			switch (input("Proc owned by...", "Owner", null) as null|anything in list("Obj", "Mob", "Area or Turf", "Client"))
 				if ("Obj")
 					target = input("Select target:", "Target") as null|obj in world
 				if ("Mob")
@@ -103,7 +103,7 @@
 	do_args()
 
 /datum/callproc/proc/do_args()
-	switch(get_args())
+	switch (get_args())
 		if (WAITING)
 			return
 		if (DONE)
@@ -118,7 +118,7 @@
 		if (hastarget && !target)
 			to_chat(usr, "Your callproc target no longer exists.")
 			return CANCEL
-		switch(input("Type of [length(arguments)+1]\th variable", "argument [length(arguments)+1]") as null|anything in list(
+		switch (input("Type of [length(arguments)+1]\th variable", "argument [length(arguments)+1]") as null|anything in list(
 				"finished", "null", "text", "num", "type", "obj reference", "mob reference",
 				"area/turf reference", "icon", "file", "client", "mob's area", "path", "marked datum", "click on atom"))
 			if (null)
@@ -168,7 +168,7 @@
 				if (!M) return
 				current = get_area(M)
 				if (!current)
-					switch(alert("\The [M] appears to not have an area; do you want to pass null instead?",, "Yes", "Cancel"))
+					switch (alert("\The [M] appears to not have an area; do you want to pass null instead?",, "Yes", "Cancel"))
 						if ("Yes")
 							; // do nothing
 						if ("Cancel")
@@ -177,7 +177,7 @@
 			if ("marked datum")
 				current = C.holder.marked_datum()
 				if (!current)
-					switch(alert("You do not currently have a marked datum; do you want to pass null instead?",, "Yes", "Cancel"))
+					switch (alert("You do not currently have a marked datum; do you want to pass null instead?",, "Yes", "Cancel"))
 						if ("Yes")
 							; // do nothing
 						if ("Cancel")

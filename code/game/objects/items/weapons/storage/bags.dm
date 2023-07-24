@@ -56,7 +56,7 @@
 	update_icon()
 
 /obj/item/storage/bag/trash/on_update_icon()
-	switch(w_class)
+	switch (w_class)
 		if (2) icon_state = "[initial(icon_state)]"
 		if (3) icon_state = "[initial(icon_state)]1"
 		if (4) icon_state = "[initial(icon_state)]2"

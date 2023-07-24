@@ -571,7 +571,7 @@
 	//This looks like shit, but it's a lot easier to read/change this way.
 	var/total_mutations = rand(1,1+degree)
 	for (var/i = 0;i<total_mutations;i++)
-		switch(rand(0,11))
+		switch (rand(0,11))
 			if (0) //Plant cancer!
 				set_trait(TRAIT_ENDURANCE,get_trait(TRAIT_ENDURANCE)-rand(10,20),null,0)
 				source_turf.visible_message(SPAN_DANGER("\The [display_name] withers rapidly!"))
@@ -637,7 +637,7 @@
 
 	// Splicing products has some detrimental effects on yield and lifespan.
 	// We handle this before we do the rest of the looping, as normal traits don't really include lists.
-	switch(gene.genetype)
+	switch (gene.genetype)
 		if (GENE_BIOCHEMISTRY)
 			for (var/trait in list(TRAIT_YIELD, TRAIT_ENDURANCE))
 				if (get_trait(trait) > 0) set_trait(trait,get_trait(trait),null,1,0.85)
@@ -695,7 +695,7 @@
 	P.genetype = genetype
 	P.values = list()
 
-	switch(genetype)
+	switch (genetype)
 		if (GENE_BIOCHEMISTRY)
 			P.values["[TRAIT_CHEMS]"] =        chems
 			P.values["[TRAIT_EXUDE_GASSES]"] = exude_gasses
@@ -838,7 +838,7 @@
 
 /datum/seed/proc/get_growth_type()
 	if (get_trait(TRAIT_SPREAD) == 2)
-		switch(seed_noun)
+		switch (seed_noun)
 			if (SEED_NOUN_CUTTINGS)
 				return GROWTH_WORMS
 			if (SEED_NOUN_NODES)

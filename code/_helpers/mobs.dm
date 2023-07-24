@@ -47,7 +47,7 @@
 
 /proc/random_skin_tone(datum/species/current_species)
 	var/species_tone = current_species ? 35 - current_species.max_skin_tone() : -185
-	switch(pick(60;"caucasian", 15;"afroamerican", 10;"african", 10;"latino", 5;"albino"))
+	switch (pick(60;"caucasian", 15;"afroamerican", 10;"african", 10;"latino", 5;"albino"))
 		if ("caucasian")		. = -10
 		if ("afroamerican")	. = -115
 		if ("african")		. = -165
@@ -70,7 +70,7 @@
 		else					return "unknown"
 
 /proc/age2agedescription(age)
-	switch(age)
+	switch (age)
 		if (0 to 1)			return "infant"
 		if (1 to 3)			return "toddler"
 		if (3 to 13)			return "child"

@@ -157,7 +157,7 @@
 	if (!cell || !on)
 		return
 
-	switch(round(cell.percent()))
+	switch (round(cell.percent()))
 		if (86 to INFINITY)
 			overlays.Add("battery-0")
 		if (69 to 85)

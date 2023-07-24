@@ -3,7 +3,7 @@
 
 /proc/commence_updates(severity)
 	var/updates_to_install = 0
-	switch(severity)
+	switch (severity)
 		if (EVENT_LEVEL_MUNDANE)
 			updates_to_install = rand(10000, 100000)
 		if (EVENT_LEVEL_MODERATE)

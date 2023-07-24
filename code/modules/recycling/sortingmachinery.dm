@@ -235,7 +235,7 @@
 			to_chat(user, SPAN_WARNING("You need to set a destination first!"))
 
 	else if (istype(W, /obj/item/pen))
-		switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))
+		switch (alert("What would you like to alter?",,"Title","Description", "Cancel"))
 			if ("Title")
 				var/str = sanitizeSafe(input(usr,"Label text?","Set label",""), MAX_NAME_LEN)
 				if (!str || !length(str))
@@ -275,7 +275,7 @@
 		overlays += I
 	if (src.sortTag)
 		var/image/I = new/image('icons/obj/storage.dmi',"delivery_tag")
-		switch(icon_state)
+		switch (icon_state)
 			if ("deliverycrate1")
 				I.pixel_y = -5
 			if ("deliverycrate2")
@@ -349,7 +349,7 @@
 			var/i = round(O.w_class)
 			if (i in list(1,2,3,4,5))
 				P.icon_state = "deliverycrate[i]"
-				switch(i)
+				switch (i)
 					if (1) P.SetName("tiny parcel")
 					if (3) P.SetName("normal-sized parcel")
 					if (4) P.SetName("large parcel")
@@ -478,7 +478,7 @@
 
 /obj/machinery/disposal/deliveryChute/Bumped(atom/movable/AM) //Go straight into the chute
 	if (istype(AM, /obj/item/projectile) || istype(AM, /obj/effect))	return
-	switch(dir)
+	switch (dir)
 		if (NORTH)
 			if (AM.loc.y != src.loc.y+1) return
 		if (EAST)

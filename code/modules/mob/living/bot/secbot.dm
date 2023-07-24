@@ -78,7 +78,7 @@
 
 /mob/living/bot/secbot/GetInteractMaintenance()
 	. = "Threat identifier status: "
-	switch(emagged)
+	switch (emagged)
 		if (0)
 			. += "<a href='?src=\ref[src];command=emag'>Normal</a>"
 		if (1)
@@ -89,7 +89,7 @@
 /mob/living/bot/secbot/ProcessCommand(mob/user, command, href_list)
 	..()
 	if (CanAccessPanel(user))
-		switch(command)
+		switch (command)
 			if ("idcheck")
 				idcheck = !idcheck
 			if ("ignorerec")
@@ -102,7 +102,7 @@
 				declare_arrests = !declare_arrests
 
 	if (CanAccessMaintenance(user))
-		switch(command)
+		switch (command)
 			if ("emag")
 				if (emagged < 2)
 					emagged = !emagged

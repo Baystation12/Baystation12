@@ -74,7 +74,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 	return (O && !O.is_stump())
 
 /mob/living/carbon/human/proc/has_organ_for_slot(slot)
-	switch(slot)
+	switch (slot)
 		if (slot_back)
 			return has_organ(BP_CHEST)
 		if (slot_wear_mask)
@@ -236,7 +236,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 	var/obj/item/old_item = get_equipped_item(slot)
 
-	switch(slot)
+	switch (slot)
 		if (slot_back)
 			src.back = W
 			W.equipped(src, slot)
@@ -380,7 +380,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 	var/obj/item/covering = null
 	var/check_flags = 0
 
-	switch(slot)
+	switch (slot)
 		if (slot_wear_mask)
 			covering = src.head
 			check_flags = FACE
@@ -396,7 +396,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 	return 1
 
 /mob/living/carbon/human/get_equipped_item(slot)
-	switch(slot)
+	switch (slot)
 		if (slot_back)       return back
 		if (slot_handcuffed) return handcuffed
 		if (slot_l_store)    return l_store

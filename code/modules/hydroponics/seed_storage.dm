@@ -209,12 +209,12 @@
 					dat += "<td>No</td>"
 
 			dat += "<td>"
-			switch(seed.get_trait(TRAIT_CARNIVOROUS))
+			switch (seed.get_trait(TRAIT_CARNIVOROUS))
 				if (1)
 					dat += "CARN "
 				if (2)
 					dat	+= SPAN_COLOR("red", "CARN ")
-			switch(seed.get_trait(TRAIT_SPREAD))
+			switch (seed.get_trait(TRAIT_SPREAD))
 				if (1)
 					dat += "VINE "
 				if (2)

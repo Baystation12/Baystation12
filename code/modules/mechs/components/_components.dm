@@ -173,7 +173,7 @@
 	return
 
 /obj/item/mech_component/proc/get_damage_string()
-	switch(damage_state)
+	switch (damage_state)
 		if (MECH_COMPONENT_DAMAGE_UNDAMAGED)
 			return SPAN_COLOR(COLOR_GREEN, "undamaged")
 		if (MECH_COMPONENT_DAMAGE_DAMAGED)

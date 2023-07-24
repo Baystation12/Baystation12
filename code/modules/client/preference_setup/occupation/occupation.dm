@@ -223,7 +223,7 @@
 					. += SPAN_COLOR("#cccccc", "Not available at roundstart.")
 				else
 					var/level_link
-					switch(current_level)
+					switch (current_level)
 						if (JOB_LEVEL_LOW)
 							level_link = SPAN_COLOR("#cc5555", "Low")
 						if (JOB_LEVEL_MEDIUM)
@@ -237,7 +237,7 @@
 			. += "</td></tr></table>"
 			. += "</center></table><center>"
 	. += "<hr/>"
-	switch(pref.alternate_option)
+	switch (pref.alternate_option)
 		if (GET_RANDOM_JOB)
 			. += "<u><a href='?src=\ref[src];job_alternative=1'>Get random job if preferences unavailable</a></u>"
 		if (BE_ASSISTANT)
@@ -476,7 +476,7 @@
 
 	var/current_level = GetCurrentJobLevel(job.title)
 
-	switch(current_level)
+	switch (current_level)
 		if (JOB_LEVEL_HIGH)
 			pref.job_high = null
 		if (JOB_LEVEL_MEDIUM)
@@ -484,7 +484,7 @@
 		if (JOB_LEVEL_LOW)
 			pref.job_low -= job.title
 
-	switch(level)
+	switch (level)
 		if (JOB_LEVEL_HIGH)
 			if (pref.job_high)
 				pref.job_medium |= pref.job_high
@@ -498,7 +498,7 @@
 
 /datum/preferences/proc/CorrectLevel(datum/job/job, level)
 	if (!job || !level)	return 0
-	switch(level)
+	switch (level)
 		if (1)
 			return job_high == job.title
 		if (2)

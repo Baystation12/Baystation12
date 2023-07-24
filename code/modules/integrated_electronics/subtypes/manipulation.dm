@@ -78,7 +78,7 @@
 		return
 	set_pin_data(IC_OUTPUT, 1, weakref(installed_gun))
 	push_data()
-	switch(ord)
+	switch (ord)
 		if (1)
 			var/datum/integrated_io/xo = inputs[1]
 			var/datum/integrated_io/yo = inputs[2]
@@ -258,7 +258,7 @@
 
 	var/obj/machinery/portable_atmospherics/hydroponics/TR = OM
 	if (istype(TR))
-		switch(get_pin_data(IC_INPUT, 2))
+		switch (get_pin_data(IC_INPUT, 2))
 			if (0)
 				var/list/harvest_output = TR.harvest()
 				for (var/i in 1 to length(harvest_output))
@@ -413,7 +413,7 @@
 /obj/item/integrated_circuit/manipulation/claw/do_work(ord)
 	var/obj/acting_object = get_object()
 	var/obj/item/to_pull = get_pin_data_as_type(IC_INPUT, 1, /obj/item)
-	switch(ord)
+	switch (ord)
 		if (1)
 			if (can_pull(to_pull))
 				if (check_target(to_pull, exclude_contents = TRUE))
@@ -611,7 +611,7 @@
 	assembly.closed_interact(usr)
 
 /obj/item/integrated_circuit/manipulation/ai/relaymove(mob/user, direction)
-	switch(direction)
+	switch (direction)
 		if (1)
 			activate_pin(1)
 		if (2)

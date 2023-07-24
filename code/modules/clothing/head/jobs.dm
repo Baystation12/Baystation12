@@ -97,7 +97,7 @@
 	body_parts_covered = 0
 
 /obj/item/clothing/head/beret/equipped(mob/user, slot)
-	switch(slot)
+	switch (slot)
 		if (slot_belt)
 			sprite_sheets = list()
 		if (slot_head)

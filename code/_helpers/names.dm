@@ -31,7 +31,7 @@
 	GLOB.using_map.station_name += name + " "
 
 	// ID Number
-	switch(random)
+	switch (random)
 		if (1)
 			GLOB.using_map.station_name += "[rand(1, 99)]"
 		if (2)
@@ -92,9 +92,9 @@
 		else if (words==1&&maxwords==2)//Else if there is only one word remaining (and there were two originally), and 1 or 2 were chosen,
 			safety = list(3)//Default to list 3
 
-		switch(pick(safety))//Chance based on the safety list.
+		switch (pick(safety))//Chance based on the safety list.
 			if (1)//1 and 2 can only be selected once each to prevent more than two specific names/places/etc.
-				switch(rand(1,2))//Mainly to add more options later.
+				switch (rand(1,2))//Mainly to add more options later.
 					if (1)
 						if (length(names)&&prob(70))
 							code_phrase += pick(names)
@@ -106,14 +106,14 @@
 						code_phrase += pick(SSjobs.titles_to_datums) //Returns a job.
 				safety -= 1
 			if (2)
-				switch(rand(1,2))//Places or things.
+				switch (rand(1,2))//Places or things.
 					if (1)
 						code_phrase += pick(drinks)
 					if (2)
 						code_phrase += pick(locations)
 				safety -= 2
 			if (3)
-				switch(rand(1,3))//Nouns, adjectives, verbs. Can be selected more than once.
+				switch (rand(1,3))//Nouns, adjectives, verbs. Can be selected more than once.
 					if (1)
 						code_phrase += pick(nouns)
 					if (2)

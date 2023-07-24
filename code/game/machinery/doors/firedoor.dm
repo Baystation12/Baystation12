@@ -104,7 +104,7 @@
 	to_chat(user, "<b>Sensor readings:</b>")
 	for (var/index = 1; index <= length(tile_info); index++)
 		var/o = "&nbsp;&nbsp;"
-		switch(index)
+		switch (index)
 			if (1)
 				o += "NORTH: "
 			if (2)
@@ -366,7 +366,7 @@
 /obj/machinery/door/firedoor/proc/latetoggle()
 	if (operating || !nextstate)
 		return
-	switch(nextstate)
+	switch (nextstate)
 		if (FIREDOOR_OPEN)
 			nextstate = null
 			open()
@@ -475,7 +475,7 @@
 	return TRUE
 
 /obj/machinery/door/firedoor/do_animate(animation)
-	switch(animation)
+	switch (animation)
 		if ("opening")
 			flick("opening", src)
 		if ("closing")

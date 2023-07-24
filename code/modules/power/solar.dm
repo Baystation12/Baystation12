@@ -134,7 +134,7 @@ var/global/solar_gen_rate = 1500
 	..()
 
 /obj/machinery/power/solar/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			if (prob(15))
 				new /obj/item/material/shard( src.loc )
@@ -338,7 +338,7 @@ var/global/solar_gen_rate = 1500
 	if (inoperable())
 		return
 
-	switch(track)
+	switch (track)
 		if (1)
 			if (trackrate) //we're manual tracking. If we set a rotation speed...
 				cdir = targetdir //...the current direction is the targetted one (and rotates panels to it)
@@ -379,7 +379,7 @@ var/global/solar_gen_rate = 1500
 	t += "<B>[SPAN_CLASS("highlight", "Star Orientation")]</B>: [GLOB.sun_angle]&deg ([angle2text(GLOB.sun_angle)])<BR>"
 	t += "<B>[SPAN_CLASS("highlight", "Array Orientation")]</B>: [rate_control(src,"cdir","[cdir]&deg",1,15)] ([angle2text(cdir)])<BR>"
 	t += "<B>[SPAN_CLASS("highlight", "Tracking:")]</B><div class='statusDisplay'>"
-	switch(track)
+	switch (track)
 		if (0)
 			t += "[SPAN_CLASS("linkOn", "Off")] <A href='?src=\ref[src];track=1'>Timed</A> <A href='?src=\ref[src];track=2'>Auto</A><BR>"
 		if (1)
@@ -470,7 +470,7 @@ var/global/solar_gen_rate = 1500
 	update_icon()
 
 /obj/machinery/power/solar_control/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (1.0)
 			//SN src = null
 			qdel(src)

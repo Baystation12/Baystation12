@@ -91,7 +91,7 @@ var/global/list/tank_gauge_cache = list()
 			descriptive = "empty"
 		else
 			var/celsius_temperature = air_contents.temperature - T0C
-			switch(celsius_temperature)
+			switch (celsius_temperature)
 				if (300 to INFINITY)
 					descriptive = "furiously hot"
 				if (100 to 300)

@@ -57,7 +57,7 @@
 
 /mob/living/bot/farmbot/GetInteractMaintenance()
 	. = "Plant identifier status: "
-	switch(emagged)
+	switch (emagged)
 		if (0)
 			. += "<a href='?src=\ref[src];command=emag'>Normal</a>"
 		if (1)
@@ -68,7 +68,7 @@
 /mob/living/bot/farmbot/ProcessCommand(mob/user, command, href_list)
 	..()
 	if (CanAccessPanel(user))
-		switch(command)
+		switch (command)
 			if ("water")
 				waters_trays = !waters_trays
 			if ("refill")
@@ -83,7 +83,7 @@
 				removes_dead = !removes_dead
 
 	if (CanAccessMaintenance(user))
-		switch(command)
+		switch (command)
 			if ("emag")
 				if (emagged < 2)
 					emagged = !emagged
@@ -152,7 +152,7 @@
 	if (istype(A, /obj/machinery/portable_atmospherics/hydroponics))
 		var/obj/machinery/portable_atmospherics/hydroponics/T = A
 		var/t = confirmTarget(T)
-		switch(t)
+		switch (t)
 			if (0)
 				return
 			if (FARMBOT_COLLECT)
@@ -212,7 +212,7 @@
 		busy = 1
 		spawn(50) // Some delay
 			busy = 0
-		switch(action)
+		switch (action)
 			if ("weed")
 				flick("farmbot_hoe", src)
 				do_attack_animation(A)

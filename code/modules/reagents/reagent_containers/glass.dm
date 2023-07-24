@@ -166,7 +166,7 @@
 	if (reagents.total_volume)
 		var/image/filling = image('icons/obj/reagentfillings.dmi', src, "[icon_state]10")
 		var/percent = round((reagents.total_volume / volume) * 100)
-		switch(percent)
+		switch (percent)
 			if (0 to 9)
 				filling.icon_state = "[icon_state]-10"
 			if (10 to 24)
@@ -329,7 +329,7 @@
 	volume = 100
 
 	on_reagent_change()
-		switch(src.reagents.total_volume)
+		switch (src.reagents.total_volume)
 			if (0)
 				icon_state = "blender_jug_e"
 			if (1 to 75)

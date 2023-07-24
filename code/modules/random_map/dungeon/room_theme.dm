@@ -24,7 +24,7 @@
 	if (!T)
 		return 0
 	var/path
-	switch(value)
+	switch (value)
 		if (WALL_CHAR)
 			if (!wall_type)
 				return

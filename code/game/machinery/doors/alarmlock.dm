@@ -36,7 +36,7 @@
 	var/area/our_area = get_area(src)
 
 	if (alarm_area == our_area.name)
-		switch(alert)
+		switch (alert)
 			if ("severe")
 				autoclose = TRUE
 				close()

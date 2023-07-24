@@ -148,7 +148,7 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 		return
 	var/datum/gender/G = GLOB.gender_datums[H.gender]
 
-	switch(stored_shock_by_ref["\ref[H]"])
+	switch (stored_shock_by_ref["\ref[H]"])
 		if (1 to 10)
 			return "[G.He] [G.is] flickering gently with a little electrical activity."
 		if (11 to 20)

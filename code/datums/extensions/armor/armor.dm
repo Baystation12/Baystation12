@@ -74,7 +74,7 @@
 // There is a disconnect between legacy damage and armor code. This here helps bridge the gap.
 /proc/get_armor_key(damage_type, damage_flags)
 	var/key
-	switch(damage_type)
+	switch (damage_type)
 		if (DAMAGE_BRUTE)
 			if (damage_flags & DAMAGE_FLAG_BULLET)
 				key = "bullet"

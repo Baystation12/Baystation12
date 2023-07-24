@@ -22,7 +22,7 @@
 /spell/targeted/equip_item/party_hardy/empower_spell()
 	if (!..())
 		return 0
-	switch(spell_levels[Sp_POWER])
+	switch (spell_levels[Sp_POWER])
 		if (1)
 			equipped_summons = list("active hand" = /obj/item/reagent_containers/food/drinks/bottle/small/beer,
 								"off hand" = /obj/item/reagent_containers/food/snacks/poppypretzel)

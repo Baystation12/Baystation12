@@ -47,7 +47,7 @@
 	data["prog_state"] = prog_state
 	data["default_access"] = get_default_access(user)
 
-	switch(prog_state)
+	switch (prog_state)
 		if (DECK_HOME)
 			var/shuttles = list()
 			for (var/datum/shuttle/shuttle in logs)
@@ -61,7 +61,7 @@
 					shuttle_data["mission_ID"] = log.current_mission.ID
 					var/datum/computer_file/report/flight_plan/plan = log.current_mission.flight_plan
 					shuttle_data["flight_plan"] = plan
-					switch(log.current_mission.stage)
+					switch (log.current_mission.stage)
 						if (SHUTTLE_MISSION_PLANNED)
 							shuttle_data["status"] = "Mission Preparing."
 							shuttle_data["departure"] = plan ? "[plan.planned_depart.get_value()] (PLANNED)" : "N/A"
@@ -152,7 +152,7 @@
 	mission_data["name"] = mission.name
 	mission_data["departure"] = mission.depart_time || "N/A"
 	mission_data["return_time"] = mission.return_time || "N/A"
-	switch(mission.stage)
+	switch (mission.stage)
 		if (SHUTTLE_MISSION_QUEUED)
 			mission_data["status"] = "Mission Scheduled."
 		if (SHUTTLE_MISSION_PLANNED)
@@ -244,7 +244,7 @@
 		var/function = href_list["modify"]
 		if (set_shuttle(user, shuttle_name, 1) && set_mission(mission_ID))
 			var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[selected_shuttle]
-			switch(function)
+			switch (function)
 				if ("rename")
 					var/input = input(user, "Mission Name:", "Rename Mission") as null|text
 					my_log.rename_mission(selected_mission, sanitize(input, 50))

@@ -13,7 +13,7 @@ GLOBAL_LIST_INIT(responsive_carriers_to_finds, list(
 
 
 /proc/get_responsive_reagent(find_type)
-	switch(find_type)
+	switch (find_type)
 		if (ARCHAEO_BOWL, ARCHAEO_URN, ARCHAEO_CUTLERY, ARCHAEO_STATUETTE, ARCHAEO_INSTRUMENT, ARCHAEO_HANDCUFFS, ARCHAEO_BEARTRAP, ARCHAEO_BOX, ARCHAEO_GASTANK, ARCHAEO_UNKNOWN)
 			return /datum/reagent/mercury
 		if (ARCHAEO_COIN, ARCHAEO_KNIFE, ARCHAEO_TOOL, ARCHAEO_METAL, ARCHAEO_CLAYMORE, ARCHAEO_KATANA, ARCHAEO_LASER, ARCHAEO_GUN)
@@ -31,7 +31,7 @@ GLOBAL_LIST_INIT(responsive_carriers_to_finds, list(
 
 /proc/get_random_find_type(digsite)
 	. = 0
-	switch(digsite)
+	switch (digsite)
 		if (DIGSITE_GARDEN)
 			. = pick(
 			100;ARCHAEO_PLANT,

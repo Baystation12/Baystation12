@@ -41,7 +41,7 @@
 	update_sight()
 
 	handle_regular_hud_updates()
-	switch(src.sensor_mode)
+	switch (src.sensor_mode)
 		if (SEC_HUD)
 			process_sec_hud(src,0,src.eyeobj)
 		if (MED_HUD)

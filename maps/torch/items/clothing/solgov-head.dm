@@ -127,7 +127,7 @@
 
 /obj/item/clothing/head/beret/solgov/equipped(mob/user, slot)
 	..()
-	switch(slot)
+	switch (slot)
 		if (slot_belt)
 			sprite_sheets = list()
 		if (slot_head)

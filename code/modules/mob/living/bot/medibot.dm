@@ -165,7 +165,7 @@
 
 /mob/living/bot/medbot/GetInteractMaintenance()
 	. = "Injection mode: "
-	switch(emagged)
+	switch (emagged)
 		if (0)
 			. += "<a href='?src=\ref[src];command=emag'>Treatment</a>"
 		if (1)
@@ -176,7 +176,7 @@
 /mob/living/bot/medbot/ProcessCommand(mob/user, command, href_list)
 	..()
 	if (CanAccessPanel(user))
-		switch(command)
+		switch (command)
 			if ("adj_threshold")
 				if (!locked || issilicon(user))
 					var/adjust_num = text2num(href_list["amount"])
@@ -203,7 +203,7 @@
 					declare_treatment = !declare_treatment
 
 	if (CanAccessMaintenance(user))
-		switch(command)
+		switch (command)
 			if ("emag")
 				if (emagged < 2)
 					emagged = !emagged

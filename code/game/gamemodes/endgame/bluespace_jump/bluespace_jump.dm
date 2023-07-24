@@ -126,7 +126,7 @@
 		reality++
 		if (reality > 5)
 			to_chat(daddy, SPAN_NOTICE("Yep, it's certainly the other one. Your existance was a glitch, and it's finally being mended..."))
-			blueswitch()
+			blueswitch ()
 		else if (reality > 3)
 			to_chat(daddy, SPAN_DANGER("Something is definitely wrong. Why do you think YOU are the original?"))
 		else
@@ -141,8 +141,8 @@
 	return daddy?.examine(arglist(args))
 
 
-/obj/effect/bluegoast/proc/blueswitch()
-	daddy.blueswitch(src)
+/obj/effect/bluegoast/proc/blueswitch ()
+	daddy.blueswitch (src)
 	qdel(src)
 
 
@@ -154,7 +154,7 @@
  *
  * Returns instance of mob. The created bluespace clone, or null if no clone was created.
  */
-/mob/proc/blueswitch(obj/effect/bluegoast/ghost)
+/mob/proc/blueswitch (obj/effect/bluegoast/ghost)
 	var/mob/clone = new type(get_turf(ghost))
 	clone.appearance = appearance
 	clone.real_name = real_name
@@ -163,16 +163,16 @@
 	return clone
 
 
-/mob/living/exosuit/blueswitch(obj/effect/bluegoast/ghost)
+/mob/living/exosuit/blueswitch (obj/effect/bluegoast/ghost)
 	if (!length(pilots))
 		return
 	for (var/mob/pilot in pilots)
 		remove_pilot(pilot)
-		var/mob/clone = pilot.blueswitch(ghost)
+		var/mob/clone = pilot.blueswitch (ghost)
 		add_pilot(clone)
 
 
-/mob/living/carbon/human/blueswitch(obj/effect/bluegoast/ghost)
+/mob/living/carbon/human/blueswitch (obj/effect/bluegoast/ghost)
 	var/mob/living/carbon/human/clone = new(get_turf(ghost), species.name)
 	clone.dna = dna.Clone()
 	clone.sync_organ_dna()

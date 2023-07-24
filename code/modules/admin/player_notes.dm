@@ -14,7 +14,7 @@
 
 	//Overly complex timestamp creation
 	var/modifyer = "th"
-	switch(time2text(world.timeofday, "DD"))
+	switch (time2text(world.timeofday, "DD"))
 		if ("01","21","31")
 			modifyer = "st"
 		if ("02","22",)

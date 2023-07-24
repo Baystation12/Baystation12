@@ -41,7 +41,7 @@
 
 /obj/item/storage/fancy/matches/matchbox/UpdateTypeCounts()
 	. = ..()
-	switch(key_type_count)
+	switch (key_type_count)
 		if (0)
 			sprite_key_type_count = 0
 		if (1 to 3)

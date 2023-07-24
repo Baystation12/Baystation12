@@ -163,7 +163,7 @@
 
 
 /DBColumn/proc/SqlTypeName(type_handler=src.sql_type)
-	switch(type_handler)
+	switch (type_handler)
 		if (TINYINT) return "TINYINT"
 		if (SMALLINT) return "SMALLINT"
 		if (MEDIUMINT) return "MEDIUMINT"

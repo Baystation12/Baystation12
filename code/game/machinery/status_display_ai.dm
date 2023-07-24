@@ -80,7 +80,7 @@ var/global/list/ai_status_emotions = list(
 		overlays.Cut()
 		return
 
-	switch(mode)
+	switch (mode)
 		if (0) //Blank
 			overlays.Cut()
 		if (1) // AI emoticon

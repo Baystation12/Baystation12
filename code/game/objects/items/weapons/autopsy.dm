@@ -98,7 +98,7 @@
 		var/damaging_weapon = (total_score != 0)
 
 		// total score happens to be the total damage
-		switch(total_score)
+		switch (total_score)
 			if (0)
 				damage_desc = "Unknown"
 			if (1 to 5)

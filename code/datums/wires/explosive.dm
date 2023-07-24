@@ -7,12 +7,12 @@ var/global/const/WIRE_EXPLODE = 1
 	return
 
 /datum/wires/explosive/UpdatePulsed(index)
-	switch(index)
+	switch (index)
 		if (WIRE_EXPLODE)
 			explode()
 
 /datum/wires/explosive/UpdateCut(index, mended)
-	switch(index)
+	switch (index)
 		if (WIRE_EXPLODE)
 			if (!mended)
 				explode()

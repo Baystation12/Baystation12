@@ -121,7 +121,7 @@
 /mob/living/bot/cleanbot/ProcessCommand(mob/user, command, href_list)
 	..()
 	if (CanAccessPanel(user))
-		switch(command)
+		switch (command)
 			if ("blood")
 				blood = !blood
 				get_targets()
@@ -130,7 +130,7 @@
 				patrol_path = null
 
 	if (CanAccessMaintenance(user))
-		switch(command)
+		switch (command)
 			if ("screw")
 				screwloose = !screwloose
 			if ("oddbutton")

@@ -33,7 +33,7 @@ GLOBAL_DATUM_INIT(traitors, /datum/antagonist/traitor, new)
 		survive_objective.owner = traitor
 		traitor.objectives += survive_objective
 	else
-		switch(rand(1,100))
+		switch (rand(1,100))
 			if (1 to 33)
 				var/datum/objective/assassinate/kill_objective = new
 				kill_objective.owner = traitor
@@ -54,7 +54,7 @@ GLOBAL_DATUM_INIT(traitors, /datum/antagonist/traitor, new)
 				steal_objective.owner = traitor
 				steal_objective.find_target()
 				traitor.objectives += steal_objective
-		switch(rand(1,100))
+		switch (rand(1,100))
 			if (1 to 100)
 				if (!(locate(/datum/objective/escape) in traitor.objectives))
 					var/datum/objective/escape/escape_objective = new

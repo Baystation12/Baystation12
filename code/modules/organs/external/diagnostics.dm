@@ -3,18 +3,18 @@
 	if (BP_IS_ROBOTIC(src))
 		var/list/descriptors = list()
 		if (brute_dam)
-			switch(brute_dam)
+			switch (brute_dam)
 				if (0 to 20)
 					descriptors += "some dents"
 				if (21 to INFINITY)
 					descriptors += pick("a lot of dents","severe denting")
 		if (burn_dam)
-			switch(burn_dam)
+			switch (burn_dam)
 				if (0 to 20)
 					descriptors += "some burns"
 				if (21 to INFINITY)
 					descriptors += pick("a lot of burns","severe melting")
-		switch(hatch_state)
+		switch (hatch_state)
 			if (HATCH_UNSCREWED)
 				descriptors += "a closed but unsecured panel"
 			if (HATCH_OPENED)
@@ -66,7 +66,7 @@
 				wound_descriptors["[english_list(bits)] visible in the wounds"] = 1
 
 	for (var/wound in wound_descriptors)
-		switch(wound_descriptors[wound])
+		switch (wound_descriptors[wound])
 			if (1)
 				flavor_text += "a [wound]"
 			if (2)

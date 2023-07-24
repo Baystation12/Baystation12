@@ -304,7 +304,7 @@
 
 /obj/screen/food/Click(location, control, params)
 	if (istype(usr) && usr.nutrition_icon == src)
-		switch(icon_state)
+		switch (icon_state)
 			if ("nutrition0")
 				to_chat(usr, SPAN_WARNING("You are completely stuffed."))
 			if ("nutrition1")
@@ -318,7 +318,7 @@
 
 /obj/screen/drink/Click(location, control, params)
 	if (istype(usr) && usr.hydration_icon == src)
-		switch(icon_state)
+		switch (icon_state)
 			if ("hydration0")
 				to_chat(usr, SPAN_WARNING("You are overhydrated."))
 			if ("hydration1")
@@ -332,7 +332,7 @@
 
 /obj/screen/bodytemp/Click(location, control, params)
 	if (istype(usr) && usr.bodytemp == src)
-		switch(icon_state)
+		switch (icon_state)
 			if ("temp4")
 				to_chat(usr, SPAN_DANGER("You are being cooked alive!"))
 			if ("temp3")
@@ -354,7 +354,7 @@
 
 /obj/screen/pressure/Click(location, control, params)
 	if (istype(usr) && usr.pressure == src)
-		switch(icon_state)
+		switch (icon_state)
 			if ("pressure2")
 				to_chat(usr, SPAN_DANGER("The air pressure here is crushing!"))
 			if ("pressure1")

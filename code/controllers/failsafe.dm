@@ -52,7 +52,7 @@ var/global/datum/controller/failsafe/Failsafe
 			if (Master.processing && Master.iteration)
 				// Check if processing is done yet.
 				if (Master.iteration == master_iteration)
-					switch(defcon)
+					switch (defcon)
 						if (4,5)
 							--defcon
 						if (3)

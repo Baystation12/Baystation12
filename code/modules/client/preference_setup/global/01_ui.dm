@@ -96,7 +96,7 @@
 		return TOPIC_REFRESH
 
 	else if (href_list["reset"])
-		switch(href_list["reset"])
+		switch (href_list["reset"])
 			if ("ui")
 				pref.UI_style_color = initial(pref.UI_style_color)
 			if ("alpha")

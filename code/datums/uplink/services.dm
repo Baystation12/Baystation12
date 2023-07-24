@@ -66,7 +66,7 @@
 /obj/item/device/uplink_service/examine(mob/user, distance)
 	. = ..()
 	if (distance <= 1)
-		switch(state)
+		switch (state)
 			if (AWAITING_ACTIVATION)
 				to_chat(user, "It is labeled '[service_label]' and appears to be awaiting activation.")
 			if (CURRENTLY_ACTIVE)
@@ -104,7 +104,7 @@
 	visible_message(SPAN_WARNING("\The [src] shuts down with a spark."))
 
 /obj/item/device/uplink_service/on_update_icon()
-	switch(state)
+	switch (state)
 		if (AWAITING_ACTIVATION)
 			icon_state = initial(icon_state)
 		if (CURRENTLY_ACTIVE)

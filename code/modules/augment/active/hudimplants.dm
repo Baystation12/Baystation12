@@ -14,7 +14,7 @@
 		return
 
 	if (active)
-		switch(hud_type)
+		switch (hud_type)
 			if (HUD_MEDICAL)
 				req_access = list(access_medical)
 				if (allowed(owner))

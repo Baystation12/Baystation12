@@ -262,7 +262,7 @@
 	var/resiliance
 	if (is_mature())
 		resiliance = 0
-		switch(seed.get_trait(TRAIT_ENDURANCE))
+		switch (seed.get_trait(TRAIT_ENDURANCE))
 			if (30 to 70)
 				resiliance = 1
 			if (70 to 95)

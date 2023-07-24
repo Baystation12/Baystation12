@@ -8,7 +8,7 @@
 			var/spell/S = screen.spell
 			if ((!S.connected_button) || !statpanel(S.panel))
 				continue //Not showing the noclothes spell
-			switch(S.charge_type)
+			switch (S.charge_type)
 				if (Sp_RECHARGE)
 					statpanel(S.panel,"[S.charge_counter/10.0]/[S.charge_max/10]",S.connected_button)
 				if (Sp_CHARGES)

@@ -99,7 +99,7 @@
 /datum/SDQL_parser/proc/query(i, list/node)
 	query_type = tokenl(i)
 
-	switch(query_type)
+	switch (query_type)
 		if ("select")
 			select_query(i, node)
 

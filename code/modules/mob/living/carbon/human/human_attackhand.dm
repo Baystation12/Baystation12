@@ -70,7 +70,7 @@
 				if (G.resolve_openhand_attack())
 					return 1
 
-	switch(M.a_intent)
+	switch (M.a_intent)
 		if (I_HELP)
 			if (MUTATION_FERAL in M.mutations)
 				return 0
@@ -166,7 +166,7 @@
 				to_chat(M, SPAN_DANGER("They are missing that limb!"))
 				return 1
 
-			switch(src.a_intent)
+			switch (src.a_intent)
 				if (I_HELP)
 					// We didn't see this coming, so we get the full blow
 					rand_damage = 5

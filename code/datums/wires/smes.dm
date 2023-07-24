@@ -35,7 +35,7 @@ var/global/const/SMES_WIRE_FAILSAFES = 16	// Cut to disable failsafes, mend to r
 
 /datum/wires/smes/UpdateCut(index, mended)
 	var/obj/machinery/power/smes/buildable/S = holder
-	switch(index)
+	switch (index)
 		if (SMES_WIRE_RCON)
 			S.RCon = mended
 		if (SMES_WIRE_INPUT)
@@ -50,7 +50,7 @@ var/global/const/SMES_WIRE_FAILSAFES = 16	// Cut to disable failsafes, mend to r
 
 /datum/wires/smes/UpdatePulsed(index)
 	var/obj/machinery/power/smes/buildable/S = holder
-	switch(index)
+	switch (index)
 		if (SMES_WIRE_RCON)
 			if (S.RCon)
 				S.RCon = 0

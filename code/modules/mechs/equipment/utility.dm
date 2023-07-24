@@ -394,7 +394,7 @@
 /obj/item/mech_equipment/catapult/afterattack(atom/target, mob/living/user, inrange, params)
 	. = ..()
 	if (.)
-		switch(mode)
+		switch (mode)
 			if (CATAPULT_SINGLE)
 				if (!locked && (get_dist(owner, target) <= max_dist))
 					var/atom/movable/AM = target

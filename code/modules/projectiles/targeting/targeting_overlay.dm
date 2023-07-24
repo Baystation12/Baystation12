@@ -65,7 +65,7 @@
 		message = "now permitted to "
 		use_span = "notice"
 
-	switch(perm)
+	switch (perm)
 		if (TARGET_CAN_MOVE)
 			message += "move"
 		if (TARGET_CAN_CLICK)

@@ -70,7 +70,7 @@
 	if (clogged <= 0)
 		drain()
 	var/flood_amt
-	switch(clogged)
+	switch (clogged)
 		if (1)
 			flood_amt = FLUID_SHALLOW
 		if (2)
@@ -624,7 +624,7 @@
 	var/sheets = 30
 
 /obj/item/taperoll/bog/equipped(mob/user, slot)
-	switch(slot)
+	switch (slot)
 		if (slot_wear_suit)
 			sprite_sheets = list(
 				SPECIES_VOX = 'icons/mob/species/vox/onmob_suit_vox.dmi',

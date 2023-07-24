@@ -29,7 +29,7 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 
 	var/objective_list = list(1,2,3,4,5)
 	for (var/i=rand(2,4),i>0,i--)
-		switch(pick(objective_list))
+		switch (pick(objective_list))
 			if (1)//Kill
 				var/datum/objective/assassinate/ninja_objective = new
 				ninja_objective.owner = ninja
@@ -107,7 +107,7 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 
 /datum/antagonist/ninja/proc/generate_ninja_directive(side)
 	var/directive = "[side=="face"?"[GLOB.using_map.company_name]":"A criminal syndicate"] is your employer. "//Let them know which side they're on.
-	switch(rand(1,19))
+	switch (rand(1,19))
 		if (1)
 			directive += "The Spider Clan must not be linked to this operation. Remain hidden and covert when possible."
 		if (2)

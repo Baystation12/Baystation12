@@ -82,7 +82,7 @@ SUBSYSTEM_DEF(atoms)
 		BadInitializeCalls[atom_type] |= BAD_INIT_SLEPT
 	var/qdeleted = FALSE
 	if (result != INITIALIZE_HINT_NORMAL)
-		switch(result)
+		switch (result)
 			if (INITIALIZE_HINT_LATELOAD)
 				if (arguments[1])	//mapload
 					late_loaders[A] = arguments

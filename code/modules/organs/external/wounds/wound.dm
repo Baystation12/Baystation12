@@ -79,7 +79,7 @@
 // checks whether the wound has been appropriately treated
 /datum/wound/proc/is_treated()
 	if (!LAZYLEN(embedded_objects))
-		switch(damage_type)
+		switch (damage_type)
 			if (INJURY_TYPE_BRUISE, INJURY_TYPE_CUT, INJURY_TYPE_PIERCE)
 				return bandaged
 			if (INJURY_TYPE_BURN)

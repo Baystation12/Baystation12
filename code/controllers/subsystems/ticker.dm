@@ -56,7 +56,7 @@ SUBSYSTEM_DEF(ticker)
 
 
 /datum/controller/subsystem/ticker/fire(resumed, no_mc_tick)
-	switch(GAME_STATE)
+	switch (GAME_STATE)
 		if (RUNLEVEL_LOBBY)
 			pregame_tick()
 		if (RUNLEVEL_SETUP)
@@ -140,7 +140,7 @@ SUBSYSTEM_DEF(ticker)
 			return
 #endif
 
-	switch(choose_gamemode())
+	switch (choose_gamemode())
 		if (CHOOSE_GAMEMODE_SILENT_REDO)
 			log_debug("Silently re-rolling game mode...")
 			return
@@ -203,7 +203,7 @@ SUBSYSTEM_DEF(ticker)
 		SSvote.initiate_vote(/datum/vote/transfer, automatic = 1)
 
 /datum/controller/subsystem/ticker/proc/post_game_tick()
-	switch(end_game_state)
+	switch (end_game_state)
 		if (END_GAME_AWAITING_MAP)
 			return
 		if (END_GAME_READY_TO_END)

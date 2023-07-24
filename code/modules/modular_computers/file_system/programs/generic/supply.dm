@@ -62,7 +62,7 @@
 	data["credits"] = "[SSsupply.points]"
 	data["currency"] = GLOB.using_map.supply_currency_name
 	data["currency_short"] = GLOB.using_map.supply_currency_name_short
-	switch(screen)
+	switch (screen)
 		if (1)// Main ordering menu
 			data["categories"] = category_names
 			if (selected_category)
@@ -269,7 +269,7 @@
 		var/id = text2num(href_list["print_receipt"])
 		var/list_id = text2num(href_list["list_id"])
 		var/list/list_to_search
-		switch(list_id)
+		switch (list_id)
 			if (SUPPLY_LIST_ID_CART)
 				list_to_search = SSsupply.shoppinglist
 			if (SUPPLY_LIST_ID_REQUEST)

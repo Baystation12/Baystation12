@@ -11,7 +11,7 @@
 	desc = "A soft cotton towel."
 
 /obj/item/towel/equipped(mob/user, slot)
-	switch(slot)
+	switch (slot)
 		if (slot_head)
 			sprite_sheets = list(
 				SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi',

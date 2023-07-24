@@ -78,7 +78,7 @@
 			unequip_item()
 		var/burning = damaged_organ.burn_dam > damaged_organ.brute_dam
 		var/msg
-		switch(maxdam)
+		switch (maxdam)
 			if (1 to 10)
 				msg =  "Your [damaged_organ.name] [burning ? "burns" : "hurts"]."
 			if (11 to 90)
@@ -102,7 +102,7 @@
 
 
 	if (prob(1))
-		switch(getToxLoss())
+		switch (getToxLoss())
 			if (5 to 17)
 				custom_pain("Your body stings slightly.", getToxLoss())
 			if (17 to 35)

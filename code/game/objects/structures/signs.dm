@@ -15,7 +15,7 @@
 	return ..()
 
 /obj/structure/sign/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			qdel(src)
 			return
@@ -60,7 +60,7 @@
 		var/direction = input("In which direction?", "Select direction.") in list("North", "East", "South", "West", "Cancel")
 		if (direction == "Cancel") return
 		var/obj/structure/sign/S = new(user.loc)
-		switch(direction)
+		switch (direction)
 			if ("North")
 				S.pixel_y = 32
 			if ("East")

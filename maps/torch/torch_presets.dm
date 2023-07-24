@@ -8,7 +8,7 @@ var/global/const/NETWORK_THIRD_DECK  = "Third Deck"
 var/global/const/NETWORK_FIFTH_DECK  = "Fifth Deck"
 
 /datum/map/torch/get_network_access(network)
-	switch(network)
+	switch (network)
 		if (NETWORK_AQUILA)
 			return access_aquila
 		if (NETWORK_BRIDGE)
@@ -155,7 +155,7 @@ var/global/const/NETWORK_ENGINE  = "Engine"
 var/global/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
 
 /datum/map/proc/get_shared_network_access(network)
-	switch(network)
+	switch (network)
 		if (NETWORK_COMMAND)
 			return access_heads
 		if (NETWORK_ENGINE, NETWORK_ENGINEERING_OUTPOST)

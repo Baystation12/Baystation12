@@ -45,7 +45,7 @@
 	A.push_data()
 
 /obj/item/integrated_circuit/proc/get_pin_ref(pin_type, pin_number)
-	switch(pin_type)
+	switch (pin_type)
 		if (IC_INPUT)
 			if (!inputs || pin_number > length(inputs))
 				return
@@ -85,7 +85,7 @@
 	var/component_number = components.Find(holder)
 
 	var/list/pin_holder_list
-	switch(pin_type)
+	switch (pin_type)
 		if (IC_INPUT)
 			pin_holder_list = holder.inputs
 		if (IC_OUTPUT)

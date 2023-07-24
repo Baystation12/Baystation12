@@ -35,7 +35,7 @@
 /obj/item/device/powersink/proc/set_mode(value)
 	if (value == mode)
 		return
-	switch(value)
+	switch (value)
 		if (DISCONNECTED)
 			attached = null
 			if (mode == OPERATING)
@@ -103,7 +103,7 @@
 	. = ..()
 	if (.)
 		return
-	switch(mode)
+	switch (mode)
 		if (DISCONNECTED)
 			..()
 

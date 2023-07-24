@@ -92,7 +92,7 @@
 
 
 /obj/structure/plasticflaps/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			qdel(src)
 		if (EX_ACT_HEAVY)

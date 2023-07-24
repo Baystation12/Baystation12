@@ -29,7 +29,7 @@
 /mob/living/simple_animal/attack_hand(mob/living/carbon/human/M as mob)
 	..()
 
-	switch(M.a_intent)
+	switch (M.a_intent)
 
 		if (I_HELP)
 			if (health > 0)

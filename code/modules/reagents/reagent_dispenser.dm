@@ -51,7 +51,7 @@
 		amount_per_transfer_from_this = N
 
 /obj/structure/reagent_dispensers/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			qdel(src)
 			return

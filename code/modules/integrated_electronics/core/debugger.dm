@@ -15,7 +15,7 @@
 	var/type_to_use = input("Please choose a type to use.","[src] type setting") as null|anything in list("string","number","ref", "null")
 
 	var/new_data = null
-	switch(type_to_use)
+	switch (type_to_use)
 		if ("string")
 			accepting_refs = FALSE
 			new_data = user.get_input("Now type in a string", "[src] string writing", null, MOB_INPUT_TEXT, src)

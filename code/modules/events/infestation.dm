@@ -36,7 +36,7 @@
 	var/list/spawn_types = list()
 	var/max_number
 	vermin = rand(0,2)
-	switch(vermin)
+	switch (vermin)
 		if (VERM_MICE)
 			spawn_types = list(/mob/living/simple_animal/passive/mouse) // The base mouse type selects a random color for us
 			max_number = 12

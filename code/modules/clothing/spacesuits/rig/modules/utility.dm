@@ -318,7 +318,7 @@
 	if (!choice)
 		return 0
 
-	switch(choice)
+	switch (choice)
 		if ("Enable")
 			active = 1
 			voice_holder.active = 1

@@ -118,7 +118,7 @@ var/global/datum/ntnet/ntnet_global = new()
 
 /// Checks whether NTNet allows a specific action over wireless connections
 /datum/ntnet/proc/check_capability(specific_action)
-	switch(specific_action)
+	switch (specific_action)
 		if (NTNET_SOFTWAREDOWNLOAD)
 			return setting_softwaredownload
 		if (NTNET_PEERTOPEER)
@@ -209,7 +209,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	if (!function)
 		return
 	function = text2num(function)
-	switch(function)
+	switch (function)
 		if (NTNET_SOFTWAREDOWNLOAD)
 			setting_softwaredownload = !setting_softwaredownload
 			add_log("Configuration Updated. Wireless network firewall now [setting_softwaredownload ? "allows" : "disallows"] connection to software repositories.")

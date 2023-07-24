@@ -53,7 +53,7 @@
 			var/list/from_objs = list()
 			var/list/select_types = list()
 
-			switch(query_tree[1])
+			switch (query_tree[1])
 				if ("explain")
 					SDQL_testout(query_tree["explain"])
 					return
@@ -85,7 +85,7 @@
 						objs += d
 					CHECK_TICK
 
-			switch(query_tree[1])
+			switch (query_tree[1])
 				if ("call")
 					for (var/datum/d in objs)
 						SDQL_var(d, query_tree["call"][1], source = d)
@@ -279,7 +279,7 @@
 		i = ret["i"]
 
 		if (op != "")
-			switch(op)
+			switch (op)
 				if ("+")
 					result += val
 				if ("-")
@@ -401,7 +401,7 @@
 		v = expression[start]
 
 	else if (!long || expression[start + 1] == ".")
-		switch(expression[start])
+		switch (expression[start])
 			if ("usr")
 				v = usr
 			if ("src")

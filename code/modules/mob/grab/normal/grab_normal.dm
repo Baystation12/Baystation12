@@ -205,7 +205,7 @@
 // Handles special targeting like eyes and mouth being covered.
 /datum/grab/normal/special_target_effect(obj/item/grab/G)
 	if (G.special_target_functional)
-		switch(G.target_zone)
+		switch (G.target_zone)
 			if (BP_MOUTH)
 				if (G.affecting.silent < 2)
 					G.affecting.silent = 2
@@ -217,7 +217,7 @@
 /datum/grab/normal/special_target_change(obj/item/grab/G, old_zone, new_zone)
 	if (old_zone != BP_HEAD && old_zone != BP_CHEST)
 		return
-	switch(new_zone)
+	switch (new_zone)
 		if (BP_MOUTH)
 			G.assailant.visible_message(SPAN_WARNING("\The [G.assailant] covers [G.affecting]'s mouth!"))
 		if (BP_EYES)
@@ -225,7 +225,7 @@
 
 
 /datum/grab/normal/check_special_target(obj/item/grab/G)
-	switch(G.target_zone)
+	switch (G.target_zone)
 		if (BP_MOUTH)
 			if (!G.affecting.check_has_mouth())
 				to_chat(G.assailant, SPAN_DANGER("You cannot locate a mouth on [G.affecting]!"))
@@ -237,7 +237,7 @@
 	return TRUE
 
 /datum/grab/normal/resolve_item_attack(obj/item/grab/G, mob/living/carbon/human/user, obj/item/I)
-	switch(G.assailant.zone_sel.selecting)
+	switch (G.assailant.zone_sel.selecting)
 		if (BP_HEAD, BP_MOUTH)
 			return attack_throat(G, I, user)
 		else

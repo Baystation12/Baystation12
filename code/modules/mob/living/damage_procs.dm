@@ -18,7 +18,7 @@
 	if (!damage)
 		return FALSE
 
-	switch(damagetype)
+	switch (damagetype)
 		if (DAMAGE_BRUTE)
 			adjustBruteLoss(damage)
 		if (DAMAGE_BURN)
@@ -69,7 +69,7 @@
 /mob/living/proc/apply_effect(effect = 0, effecttype = EFFECT_STUN, blocked = 0)
 	if (!effect || (blocked >= 100))	return FALSE
 
-	switch(effecttype)
+	switch (effecttype)
 		if (EFFECT_STUN)
 			Stun(effect * blocked_mult(blocked))
 		if (EFFECT_WEAKEN)

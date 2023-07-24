@@ -223,7 +223,7 @@ var/global/list/tape_roll_applications = list()
 		var/turf/cur = start
 		var/orientation = get_dir(start, end)
 		var/dir = 0
-		switch(orientation)
+		switch (orientation)
 			if (NORTH, SOUTH)	dir = NORTH|SOUTH	// North-South taping
 			if (EAST,   WEST)	dir =  EAST|WEST	// East-West taping
 

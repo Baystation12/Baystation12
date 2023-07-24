@@ -16,7 +16,7 @@
 		if (!event_type)
 			return
 
-		switch(event_type)
+		switch (event_type)
 			if (RIOTS)
 				dearer_goods = list(SECURITY)
 				cheaper_goods = list(MINERALS, FOOD)
@@ -58,7 +58,7 @@
 	//see if our location has custom event info for this event
 	var/body = affected_dest.get_custom_eventstring()
 	if (!body)
-		switch(event_type)
+		switch (event_type)
 			if (RIOTS)
 				body = "[pick("Riots have","Unrest has")] broken out on planet [affected_dest.name]. Authorities call for calm, as [pick("various parties","rebellious elements","peacekeeping forces","\'REDACTED\'")] begin stockpiling weaponry and armour. Meanwhile, food and mineral prices are dropping as local industries attempt empty their stocks in expectation of looting."
 			if (WILD_ANIMAL_ATTACK)

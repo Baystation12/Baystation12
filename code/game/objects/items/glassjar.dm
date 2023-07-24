@@ -44,7 +44,7 @@
 		return
 
 /obj/item/glass_jar/attack_self(mob/user)
-	switch(contains)
+	switch (contains)
 		if (1)
 			for (var/obj/O in src)
 				O.dropInto(user.loc)
@@ -83,7 +83,7 @@
 /obj/item/glass_jar/on_update_icon() // Also updates name and desc
 	underlays.Cut()
 	overlays.Cut()
-	switch(contains)
+	switch (contains)
 		if (0)
 			SetName(initial(name))
 			desc = initial(desc)

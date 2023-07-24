@@ -44,7 +44,7 @@
 
 /datum/computer/file/embedded_program/airlock/tin_can/receive_user_command(command)
 	. = TRUE
-	switch(command)
+	switch (command)
 		if ("toggle_door_safety")
 			door_safety = !door_safety
 			if (!door_safety)

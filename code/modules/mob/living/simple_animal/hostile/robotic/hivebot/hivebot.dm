@@ -200,7 +200,7 @@ The megabot
 
 		overlays.Cut()
 		overlays += image(icon, "active_indicator")
-		switch(attack_mode)
+		switch (attack_mode)
 			if (ATTACK_MODE_MELEE)
 				overlays += image(icon, "melee")
 			if (ATTACK_MODE_LASER)
@@ -212,7 +212,7 @@ The megabot
 	if (!new_mode || new_mode == attack_mode)
 		return
 
-	switch(new_mode)
+	switch (new_mode)
 		if (ATTACK_MODE_MELEE)
 			attack_mode = ATTACK_MODE_MELEE
 			ranged = FALSE

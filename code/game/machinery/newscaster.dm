@@ -224,7 +224,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 
 		src.scan_user(human_or_robot_user) //Newscaster scans you
 
-		switch(screen)
+		switch (screen)
 			if (0)
 				dat += "Welcome to Newscasting Unit #[src.unit_no].<BR> Interface & News networks Operational."
 				dat += "<BR>[FONT_SMALL("Property of Ward-Takahashi GMB")]"
@@ -799,7 +799,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 		var/mob/living/carbon/human/human_user = user
 		var/dat
 		src.pages = 0
-		switch(screen)
+		switch (screen)
 			if (0) //Cover
 				dat+="<DIV ALIGN='center'><B>[SPAN_SIZE(6, "The Griffon")]</B></div>"
 				dat+="<DIV ALIGN='center'>[FONT_NORMAL("[GLOB.using_map.company_name]-standard newspaper, for use on [GLOB.using_map.company_name] Space Facilities")]</div><HR>"

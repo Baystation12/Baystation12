@@ -9,7 +9,7 @@
 /datum/random_map/noise/seafloor/get_additional_spawns(value, turf/T)
 	var/val = min(9,max(0,round((value/cell_range)*10)))
 	if (isnull(val)) val = 0
-	switch(val)
+	switch (val)
 		if (3,4)
 			if (prob(20))
 				new /obj/structure/flora/seaweed(T)
@@ -34,7 +34,7 @@
 				new /obj/structure/flora/seaweed/glow(T)
 	var/turf/simulated/ocean/O = T
 	if (istype(O))
-		switch(val)
+		switch (val)
 			if (6)
 				O.icon_state = "mud_light"
 			if (7 to 9)

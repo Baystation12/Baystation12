@@ -351,7 +351,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/heist/loot/choose_target()
 	var/loot = "an object"
-	switch(rand(1,8))
+	switch (rand(1,8))
 		if (1)
 			target = /obj/structure/particle_accelerator
 			target_amount = 6
@@ -388,7 +388,7 @@ var/global/list/all_objectives = list()
 	explanation_text = "It's a buyer's market out here. Steal [loot] for resale."
 
 /datum/objective/heist/salvage/choose_target()
-	switch(rand(1,8))
+	switch (rand(1,8))
 		if (1)
 			target = MATERIAL_STEEL
 			target_amount = 300

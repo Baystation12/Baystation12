@@ -157,7 +157,7 @@
 	return "coolant"
 
 /datum/species/adherent/skills_from_age(age)
-	switch(age)
+	switch (age)
 		if (0 to 1000)    . = -4
 		if (1000 to 2000) . =  0
 		if (2000 to 8000) . =  4

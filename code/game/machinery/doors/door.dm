@@ -317,7 +317,7 @@
 		set_dir(SOUTH)
 
 /obj/machinery/door/proc/do_animate(animation)
-	switch(animation)
+	switch (animation)
 		if ("opening")
 			if (p_open)
 				flick("o_doorc0", src)

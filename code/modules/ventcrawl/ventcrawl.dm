@@ -124,7 +124,7 @@ var/global/list/ventcrawl_machinery = list(
 			to_chat(src, "You begin climbing into the ventilation system...")
 			if (vent_found.air_contents && !issilicon(src))
 
-				switch(vent_found.air_contents.temperature)
+				switch (vent_found.air_contents.temperature)
 					if (0 to BODYTEMP_COLD_DAMAGE_LIMIT)
 						to_chat(src, SPAN_DANGER("You feel a painful freeze coming from the vent!"))
 					if (BODYTEMP_COLD_DAMAGE_LIMIT to T0C)
@@ -133,7 +133,7 @@ var/global/list/ventcrawl_machinery = list(
 						to_chat(src, SPAN_WARNING("You feel a hot wash coming from the vent."))
 					if (BODYTEMP_HEAT_DAMAGE_LIMIT to INFINITY)
 						to_chat(src, SPAN_DANGER("You feel a searing heat coming from the vent!"))
-				switch(vent_found.air_contents.return_pressure())
+				switch (vent_found.air_contents.return_pressure())
 					if (0 to HAZARD_LOW_PRESSURE)
 						to_chat(src, SPAN_DANGER("You feel a rushing draw pulling you into the vent!"))
 					if (HAZARD_LOW_PRESSURE to WARNING_LOW_PRESSURE)

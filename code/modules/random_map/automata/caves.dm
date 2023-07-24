@@ -60,7 +60,7 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 	..()
 
 /datum/random_map/automata/cave_system/get_appropriate_path(value)
-	switch(value)
+	switch (value)
 		if (DOOR_CHAR, EMPTY_CHAR)
 			return mineral_turf
 		if (FLOOR_CHAR)
@@ -69,7 +69,7 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 			return wall_type
 
 /datum/random_map/automata/cave_system/get_map_char(value)
-	switch(value)
+	switch (value)
 		if (DOOR_CHAR)
 			return "x"
 		if (EMPTY_CHAR)

@@ -7,7 +7,7 @@
 	set category = "Server"
 #if ENABLE_MEMOS == 1
 	if (!check_rights(0))	return
-	switch(task)
+	switch (task)
 		if ("write")		admin_memo_write()
 		if ("show")		admin_memo_show()
 		if ("delete")	admin_memo_delete()
@@ -18,7 +18,7 @@
 	var/savefile/F = new(MEMOFILE)
 	if (F)
 		var/memo = sanitize(input(src,"Type your memo\n(Leaving it blank will delete your current memo):","Write Memo",null) as null|message, extra = 0)
-		switch(memo)
+		switch (memo)
 			if (null)
 				return
 			if ("")

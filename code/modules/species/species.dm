@@ -430,7 +430,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 /datum/species/proc/hug(mob/living/carbon/human/H,mob/living/target)
 
 	var/t_him = "them"
-	switch(target.gender)
+	switch (target.gender)
 		if (MALE)
 			t_him = "him"
 		if (FEMALE)
@@ -836,7 +836,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	show_browser(src, species.get_description(), "window=species;size=700x400")
 
 /datum/species/proc/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
-	switch(age)
+	switch (age)
 		if (0 to 22) 	. = 0
 		if (23 to 30) 	. = 3
 		if (31 to 45)	. = 6

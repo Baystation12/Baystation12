@@ -303,7 +303,7 @@
 /mob/living/simple_animal/construct/armoured/Life()
 	. = ..()
 	if (healths)
-		switch(health)
+		switch (health)
 			if (250 to INFINITY)		healths.icon_state = "juggernaut_health0"
 			if (208 to 249)			healths.icon_state = "juggernaut_health1"
 			if (167 to 207)			healths.icon_state = "juggernaut_health2"
@@ -317,7 +317,7 @@
 /mob/living/simple_animal/construct/behemoth/Life()
 	. = ..()
 	if (healths)
-		switch(health)
+		switch (health)
 			if (750 to INFINITY)		healths.icon_state = "juggernaut_health0"
 			if (625 to 749)			healths.icon_state = "juggernaut_health1"
 			if (500 to 624)			healths.icon_state = "juggernaut_health2"
@@ -330,7 +330,7 @@
 /mob/living/simple_animal/construct/builder/Life()
 	. = ..()
 	if (healths)
-		switch(health)
+		switch (health)
 			if (50 to INFINITY)		healths.icon_state = "artificer_health0"
 			if (42 to 49)			healths.icon_state = "artificer_health1"
 			if (34 to 41)			healths.icon_state = "artificer_health2"
@@ -345,7 +345,7 @@
 /mob/living/simple_animal/construct/wraith/Life()
 	. = ..()
 	if (healths)
-		switch(health)
+		switch (health)
 			if (75 to INFINITY)		healths.icon_state = "wraith_health0"
 			if (62 to 74)			healths.icon_state = "wraith_health1"
 			if (50 to 61)			healths.icon_state = "wraith_health2"
@@ -359,7 +359,7 @@
 /mob/living/simple_animal/construct/harvester/Life()
 	. = ..()
 	if (healths)
-		switch(health)
+		switch (health)
 			if (150 to INFINITY)		healths.icon_state = "harvester_health0"
 			if (125 to 149)			healths.icon_state = "harvester_health1"
 			if (100 to 124)			healths.icon_state = "harvester_health2"

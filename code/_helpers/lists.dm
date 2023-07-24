@@ -11,7 +11,7 @@
 
 //Returns a list in plain english as a string
 /proc/english_list(list/input, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "," )
-	switch(length(input))
+	switch (length(input))
 		if (0) return nothing_text
 		if (1) return "[input[1]]"
 		if (2) return "[input[1]][and_text][input[2]]"
@@ -622,7 +622,7 @@ Checks if a list has the same entries and values as an element of big.
 			else
 				sort_result = sorttext(current_sort_text, current_item)
 
-			switch(sort_result)
+			switch (sort_result)
 				if (1)
 					high_index = current_index - 1	// current_sort_text < current_item
 				if (-1)

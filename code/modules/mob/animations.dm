@@ -150,7 +150,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 	var/pixel_x_diff = 0
 	var/pixel_y_diff = 0
 	var/direction = get_dir(src, A)
-	switch(direction)
+	switch (direction)
 		if (NORTH)
 			pixel_y_diff = 8
 		if (SOUTH)
@@ -252,7 +252,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 	var/D = dir
 	while (spintime >= speed)
 		sleep(speed)
-		switch(D)
+		switch (D)
 			if (NORTH)
 				D = EAST
 			if (SOUTH)

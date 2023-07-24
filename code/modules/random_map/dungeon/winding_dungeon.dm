@@ -322,7 +322,7 @@
 	return room.add_loot(type)
 
 /datum/random_map/winding_dungeon/get_appropriate_path(value)
-	switch(value)
+	switch (value)
 		if (WALL_CHAR)
 			return wall_type
 		if (ARTIFACT_TURF_CHAR)
@@ -334,6 +334,6 @@
 
 /datum/random_map/winding_dungeon/get_map_char(value)
 	. = ..(value)
-	switch(value)
+	switch (value)
 		if (BORDER_CHAR)
 			. = "#"

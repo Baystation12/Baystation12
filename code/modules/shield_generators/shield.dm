@@ -145,7 +145,7 @@
 	impact_effect(round(abs(damage * 2)))
 
 	var/list/field_segments = gen.field_segments
-	switch(gen.take_damage(damage, damtype))
+	switch (gen.take_damage(damage, damtype))
 		if (SHIELD_ABSORBED)
 			return
 		if (SHIELD_BREACHED_MINOR)

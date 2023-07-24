@@ -199,7 +199,7 @@
 	if (href_list["PRG_scroll"])
 		. = TOPIC_HANDLED
 		var/scrolled = 0
-		switch(href_list["PRG_scroll"])
+		switch (href_list["PRG_scroll"])
 			if ("right")
 				scrolled = 1
 			if ("left")

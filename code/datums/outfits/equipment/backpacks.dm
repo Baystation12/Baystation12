@@ -152,7 +152,7 @@
 	return input(user, "Choose a type.", title, metadata) as null|anything in selections
 
 /datum/backpack_tweak/selection/get_backpack_type(given_backpack_type, metadata)
-	switch(metadata)
+	switch (metadata)
 		if (RETURN_GIVEN_BACKPACK)
 			return given_backpack_type
 		if (RETURN_RANDOM_BACKPACK)

@@ -34,7 +34,7 @@ var/global/const/AALARM_WIRE_AALARM = 16
 
 /datum/wires/alarm/UpdateCut(index, mended)
 	var/obj/machinery/alarm/A = holder
-	switch(index)
+	switch (index)
 		if (AALARM_WIRE_IDSCAN)
 			if (!mended)
 				A.locked = 1
@@ -68,7 +68,7 @@ var/global/const/AALARM_WIRE_AALARM = 16
 
 /datum/wires/alarm/UpdatePulsed(index)
 	var/obj/machinery/alarm/A = holder
-	switch(index)
+	switch (index)
 		if (AALARM_WIRE_IDSCAN)
 			A.locked = !A.locked
 //			log_debug("Idscan wire pulsed")

@@ -107,7 +107,7 @@
 	var/datum/nanoui/ui = SSnano.get_open_ui(usr, src, "main")
 
 	if (href_list["choice"])
-		switch(href_list["choice"])
+		switch (href_list["choice"])
 			if ("create_account")
 				creating_new_account = 1
 

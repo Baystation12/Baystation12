@@ -67,7 +67,7 @@
 	return req_access
 
 /proc/get_centcom_access(job)
-	switch(job)
+	switch (job)
 		if ("VIP Guest")
 			return list(access_cent_general)
 		if ("Custodian")
@@ -175,7 +175,7 @@ var/global/list/priv_region_access
 	return region.Copy()
 
 /proc/get_region_accesses_name(code)
-	switch(code)
+	switch (code)
 		if (ACCESS_REGION_ALL)
 			return "All"
 		if (ACCESS_REGION_SECURITY) //security

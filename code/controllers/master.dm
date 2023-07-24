@@ -144,7 +144,7 @@ var/global/datum/controller/master/Master = new
 	if (istype(BadBoy))
 		msg = null
 		LAZYINITLIST(BadBoy.failure_strikes)
-		switch(++BadBoy.failure_strikes[BadBoy.type])
+		switch (++BadBoy.failure_strikes[BadBoy.type])
 			if (2)
 				msg = "The [BadBoy.name] subsystem was the last to fire for 2 controller restarts. It will be recovered now and disabled if it happens again."
 				FireHim = TRUE

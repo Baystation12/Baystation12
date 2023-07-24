@@ -86,7 +86,7 @@
 	if (!proximity) return
 	if (istype(target,/turf/simulated/floor))
 		var/drawtype = input("Choose what you'd like to draw.", "Crayon scribbles") in list("graffiti","rune","letter","arrow", "defector graffiti")
-		switch(drawtype)
+		switch (drawtype)
 			if ("letter")
 				drawtype = input("Choose the letter.", "Crayon scribbles") in list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
 				to_chat(user, "You start drawing a letter on the [target.name].")

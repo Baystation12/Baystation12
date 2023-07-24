@@ -9,7 +9,7 @@
 
 	if (A && A.type)
 		if (typesof(A.type))
-			switch(input("Strict object type detection?") as null|anything in list("Strictly this type","This type and subtypes", "Cancel"))
+			switch (input("Strict object type detection?") as null|anything in list("Strictly this type","This type and subtypes", "Cancel"))
 				if ("Strictly this type")
 					method = 0
 				if ("This type and subtypes")
@@ -92,7 +92,7 @@
 
 	to_chat(usr, "Variable contains: [var_value]")
 	if (dir)
-		switch(var_value)
+		switch (var_value)
 			if (1)
 				dir = "NORTH"
 			if (2)
@@ -127,7 +127,7 @@
 	else
 		original_name = O:name
 
-	switch(class)
+	switch (class)
 
 		if ("restore to default")
 			O.vars[variable] = initial(O.vars[variable])

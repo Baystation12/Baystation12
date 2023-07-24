@@ -81,14 +81,14 @@
 	if (GLOB.href_logfile)
 		to_chat(GLOB.href_logfile, "<small>[time2text(world.timeofday,"hh:mm")] [src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]<br>")
 
-	switch(href_list["_src_"])
+	switch (href_list["_src_"])
 		if ("holder")	hsrc = holder
 		if ("usr")		hsrc = mob
 		if ("prefs")		return prefs.process_link(usr,href_list)
 		if ("vars")		return view_var_Topic(href,href_list,hsrc)
 		if ("chat")		return chatOutput.Topic(href, href_list)
 
-	switch(href_list["action"])
+	switch (href_list["action"])
 		if ("openLink")
 			send_link(src, href_list["link"])
 

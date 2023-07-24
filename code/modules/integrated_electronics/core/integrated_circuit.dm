@@ -165,7 +165,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 			var/datum/integrated_io/io = null
 			var/words = list()
 			var/height = 1
-			switch(j)
+			switch (j)
 				if (1)
 					io = get_pin_ref(IC_INPUT, i)
 					if (io)

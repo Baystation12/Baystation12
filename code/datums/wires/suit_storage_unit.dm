@@ -30,7 +30,7 @@ var/global/const/SUIT_STORAGE_WIRE_LOCKED		= 4
 
 /datum/wires/suit_storage_unit/UpdatePulsed(index)
 	var/obj/machinery/suit_cycler/S = holder
-	switch(index)
+	switch (index)
 		if (SUIT_STORAGE_WIRE_SAFETY)
 			S.safeties = !S.safeties
 		if (SUIT_STORAGE_WIRE_ELECTRIFY)
@@ -40,7 +40,7 @@ var/global/const/SUIT_STORAGE_WIRE_LOCKED		= 4
 
 /datum/wires/suit_storage_unit/UpdateCut(index, mended)
 	var/obj/machinery/suit_cycler/S = holder
-	switch(index)
+	switch (index)
 		if (SUIT_STORAGE_WIRE_SAFETY)
 			S.safeties = mended
 		if (SUIT_STORAGE_WIRE_LOCKED)

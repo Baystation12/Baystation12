@@ -34,7 +34,7 @@
 					dat += SPAN_COLOR("#ff0000", "<b>Their mind has been cored like an apple, and enslaved by another operant psychic.</b>")
 
 		if (!use_rating)
-			switch(effective_rating)
+			switch (effective_rating)
 				if (1)
 					use_rating = "[effective_rating]-Epsilon"
 					rating_descriptor = "This indicates the presence of minor latent psi potential with little or no operant capabilities."

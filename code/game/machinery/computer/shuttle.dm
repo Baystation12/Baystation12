@@ -39,7 +39,7 @@
 		var/choice = alert(user, text("Would you like to (un)authorize a shortened launch time? [] authorization\s are still needed. Use abort to cancel all authorizations.", src.auth_need - length(src.authorized)), "Shuttle Launch", "Authorize", "Repeal", "Abort")
 		if (evacuation_controller.is_prepared() && user.get_active_hand() != W)
 			return 0
-		switch(choice)
+		switch (choice)
 			if ("Authorize")
 				src.authorized -= W:registered_name
 				src.authorized += W:registered_name
@@ -69,7 +69,7 @@
 		var/choice = alert(user, "Would you like to launch the shuttle?","Shuttle control", "Launch", "Cancel")
 
 		if (!emagged && !evacuation_controller.is_prepared() && user.get_active_hand() == W)
-			switch(choice)
+			switch (choice)
 				if ("Launch")
 					to_world(SPAN_NOTICE("<b>Alert: Shuttle launch time shortened to 10 seconds!</b>"))
 					evacuation_controller.set_launch_time(world.time+100)

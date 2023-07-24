@@ -40,7 +40,7 @@
 /obj/item/cell/on_update_icon()
 
 	var/new_overlay_state = null
-	switch(percent())
+	switch (percent())
 		if (95 to 100)
 			new_overlay_state = "cell-o2"
 		if (25 to 95)

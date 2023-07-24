@@ -73,7 +73,7 @@
 
 	for (var/i=1, i<=length(input), i++)
 		var/ascii_char = text2ascii(input,i)
-		switch(ascii_char)
+		switch (ascii_char)
 			// A  .. Z
 			if (65 to 90)			//Uppercase Letters
 				output += ascii2text(ascii_char)
@@ -136,7 +136,7 @@
 	var/last_was_space = 1
 	for (var/i=1, i<=length(text), i++)
 		var/ascii_char = text2ascii(text,i)
-		switch(ascii_char)
+		switch (ascii_char)
 			if (65 to 90)	//A-Z, make them lowercase
 				dat += ascii2text(ascii_char + 32)
 			if (97 to 122)	//a-z
@@ -159,7 +159,7 @@
 	if (length(text) > max_length)	return			//message too long
 	var/non_whitespace = 0
 	for (var/i=1, i<=length(text), i++)
-		switch(text2ascii(text,i))
+		switch (text2ascii(text,i))
 			if (62,60,92,47)	return			//rejects the text if it contains these bad characters: <, >, \ or /
 			if (127 to 255)	return			//rejects non-ASCII letters
 			if (0 to 31)		return			//more weird stuff
@@ -359,7 +359,7 @@
 /proc/contains_az09(input)
 	for (var/i=1, i<=length(input), i++)
 		var/ascii_char = text2ascii(input,i)
-		switch(ascii_char)
+		switch (ascii_char)
 			// A  .. Z
 			if (65 to 90)			//Uppercase Letters
 				return 1
@@ -527,7 +527,7 @@
 	var/rest = next_backslash > leng ? "" : copytext(string, next_space + 1)
 
 	//See http://www.byond.com/docs/ref/info.html#/DM/text/macros
-	switch(macro)
+	switch (macro)
 		//prefixes/agnostic
 		if ("the")
 			rest = text("\the []", rest)
@@ -634,7 +634,7 @@
 /proc/get_compass_direction_string(turf/A, turf/B)
 	var/degree = Get_Angle(A, B)
 /// % appears to round down floats, hence below values all being integers
-	switch(round(degree, 22.5) % 360)
+	switch (round(degree, 22.5) % 360)
 		if (0)
 			return "North"
 		if (22)

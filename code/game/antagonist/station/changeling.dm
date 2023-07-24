@@ -54,7 +54,7 @@ GLOBAL_DATUM_INIT(changelings, /datum/antagonist/changeling, new)
 	steal_objective.find_target()
 	changeling.objectives += steal_objective
 
-	switch(rand(1,100))
+	switch (rand(1,100))
 		if (1 to 80)
 			if (!(locate(/datum/objective/escape) in changeling.objectives))
 				var/datum/objective/escape/escape_objective = new

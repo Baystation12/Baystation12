@@ -99,7 +99,7 @@
 
 /atom/movable/proc/momentum_do(power, datum/thrownthing/TT)
 	var/direction = TT.init_dir
-	switch(power)
+	switch (power)
 		if (0.75 to INFINITY)		//blown backward, also calls being pinned to walls
 			throw_at(get_edge_target_turf(src, direction), min((TT.maxrange - TT.dist_travelled) * power, 10), throw_speed * min(power, 1.5))
 

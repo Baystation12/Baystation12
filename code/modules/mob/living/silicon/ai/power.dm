@@ -30,7 +30,7 @@
 		if (aiRestorePowerRoutine == AI_RESTOREPOWER_FAILED)
 			continue
 
-		switch(aiRestorePowerRoutine)
+		switch (aiRestorePowerRoutine)
 			if (AI_RESTOREPOWER_DIAGNOSTICS)
 				to_chat(src, SPAN_NOTICE("Diagnostics completed. Failure confirmed: Main power connection nonfunctional."))
 				continue

@@ -33,7 +33,7 @@
 
 //more specialised stuff
 /proc/sanitize_gender(gender,neuter=0,plural=0, default="male")
-	switch(gender)
+	switch (gender)
 		if (MALE, FEMALE)return gender
 		if (NEUTER)
 			if (neuter)	return gender
@@ -51,7 +51,7 @@
 	. = "#"
 	for (var/i=2,i<=len,i++)
 		var/ascii = text2ascii(color,i)
-		switch(ascii)
+		switch (ascii)
 			if (48 to 57)	. += ascii2text(ascii)		//numbers 0 to 9
 			if (97 to 102)	. += ascii2text(ascii)		//letters a to f
 			if (65 to 70)	. += ascii2text(ascii+32)	//letters A to F - translates to lowercase
@@ -81,7 +81,7 @@
 	var/list/ainput = list()
 	for (var/i = 1, i <= length(input), i++)
 		ainput += text2ascii(input, i)
-	switch(format)
+	switch (format)
 		if ("YY")
 			if (!(ainput[1] in 48 to 57) || !(ainput[2] in 48 to 57))//0 to 9
 				return (default || "00")

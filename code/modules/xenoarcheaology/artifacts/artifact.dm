@@ -121,7 +121,7 @@
 /obj/machinery/artifact/ex_act(severity)
 	if (check_triggers(/datum/artifact_trigger/proc/on_explosion, severity))
 		return
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			qdel(src)
 		if (EX_ACT_HEAVY)
@@ -193,7 +193,7 @@
 		return
 
 	damage_desc = "The physical structure is vulnerable to "
-	switch(damage_type)
+	switch (damage_type)
 		if (DAMAGE_FLAG_SHARP)
 			damage_desc += "physical attack from serrated objects."
 		if (DAMAGE_FLAG_BULLET)

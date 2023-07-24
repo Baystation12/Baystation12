@@ -83,7 +83,7 @@
 		var/list/roles = valid_special_roles(FALSE)
 
 		for (var/id in roles)
-			switch(selection)
+			switch (selection)
 				if (0)
 					pref.be_special_role -= id
 					pref.may_be_special_role -= id

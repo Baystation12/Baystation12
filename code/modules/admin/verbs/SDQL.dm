@@ -224,7 +224,7 @@
 				var/value = SDQL_text2value(t, v)
 				var/result = SDQL_evaluate(t, where.Copy(i, j))
 
-				switch(compare_op)
+				switch (compare_op)
 					if ("=", "==")
 						currently_false = !(value == result)
 
@@ -283,7 +283,7 @@
 	for (var/datum/t in objs)
 		to_chat(usr, t)
 */
-	switch(lowertext(query_list[1]))
+	switch (lowertext(query_list[1]))
 		if ("delete")
 			for (var/datum/t in objs)
 				// turfs are special snowflakes that explode if qdeleted

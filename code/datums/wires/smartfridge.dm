@@ -34,7 +34,7 @@ var/global/const/SMARTFRIDGE_WIRE_IDSCAN		= 4
 
 /datum/wires/smartfridge/UpdatePulsed(index)
 	var/obj/machinery/smartfridge/S = holder
-	switch(index)
+	switch (index)
 		if (SMARTFRIDGE_WIRE_THROW)
 			S.shoot_inventory = !S.shoot_inventory
 		if (SMARTFRIDGE_WIRE_ELECTRIFY)
@@ -44,7 +44,7 @@ var/global/const/SMARTFRIDGE_WIRE_IDSCAN		= 4
 
 /datum/wires/smartfridge/UpdateCut(index, mended)
 	var/obj/machinery/smartfridge/S = holder
-	switch(index)
+	switch (index)
 		if (SMARTFRIDGE_WIRE_THROW)
 			S.shoot_inventory = !mended
 		if (SMARTFRIDGE_WIRE_ELECTRIFY)

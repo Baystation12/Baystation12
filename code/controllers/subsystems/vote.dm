@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(vote)
 			queued_auto_vote = null
 		return
 
-	switch(active_vote.Process())
+	switch (active_vote.Process())
 		if (VOTE_PROCESS_ABORT)
 			QDEL_NULL(active_vote)
 			reset()

@@ -56,7 +56,7 @@ var/global/list/pipe_colors = list(
 	color = "[color]"
 	dir = "[dir]"
 
-	switch(device)
+	switch (device)
 		if ("pipe")
 			return pipe_icons[state + color]
 		if ("manifold")
@@ -94,7 +94,7 @@ var/global/list/pipe_colors = list(
 	// In case of a non-default color, generate the missing icon and add it to the cache.
 	if (pipe_color_check(color))
 		return
-	switch("[device]")
+	switch ("[device]")
 		if ("pipe")
 			if (!pipe_icons[color + state])
 				gen_single_pipe_icon(color, state)
@@ -252,7 +252,7 @@ var/global/list/pipe_colors = list(
 
 		for (var/D in cardinal)
 			var/image/I = image('icons/atmos/pipe_underlays.dmi', icon_state = state, dir = D)
-			switch(state)
+			switch (state)
 				if ("intact")
 					underlays_intact["[D]"] = I
 				if ("exposed")
@@ -286,7 +286,7 @@ var/global/list/pipe_colors = list(
 			for (var/pipe_color in pipe_colors)
 				I = image('icons/atmos/pipe_underlays.dmi', icon_state = state, dir = D)
 				I.color = pipe_colors[pipe_color]
-				switch(state)
+				switch (state)
 					if ("intact")
 						underlays_intact["[D]" + pipe_colors[pipe_color]] = I
 					if ("exposed")

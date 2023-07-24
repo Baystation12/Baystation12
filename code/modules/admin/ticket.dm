@@ -152,7 +152,7 @@ var/global/list/ticket_panels = list()
 			var/open = 0
 			var/status = "Unknown status"
 			var/color = "#6aa84f"
-			switch(ticket.status)
+			switch (ticket.status)
 				if (TICKET_OPEN)
 					open = 1
 					status = "Opened [round((world.time - ticket.opened_time) / (1 MINUTE))] minute\s ago, unassigned"
@@ -222,7 +222,7 @@ var/global/list/ticket_panels = list()
 	if (href_list["close"])
 		ticket_panels -= usr.client
 
-	switch(href_list["action"])
+	switch (href_list["action"])
 		if ("unview")
 			open_ticket = null
 			ticket_panel_window.set_content(get_dat())
@@ -232,7 +232,7 @@ var/global/list/ticket_panels = list()
 	if (!ticket)
 		return
 
-	switch(href_list["action"])
+	switch (href_list["action"])
 		if ("view")
 			open_ticket = ticket
 			ticket_panel_window.set_content(get_dat())

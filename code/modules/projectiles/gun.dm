@@ -331,7 +331,7 @@
 
 		if (one_hand_penalty)
 			if (!src.is_held_twohanded(user))
-				switch(one_hand_penalty)
+				switch (one_hand_penalty)
 					if (4 to 6)
 						if (prob(50)) //don't need to tell them every single time
 							to_chat(user, SPAN_WARNING("Your aim wavers slightly."))
@@ -340,7 +340,7 @@
 					if (8 to INFINITY)
 						to_chat(user, SPAN_WARNING("You struggle to keep \the [src] on target with just one hand!"))
 			else if (!user.can_wield_item(src))
-				switch(one_hand_penalty)
+				switch (one_hand_penalty)
 					if (4 to 6)
 						if (prob(50)) //don't need to tell them every single time
 							to_chat(user, SPAN_WARNING("Your aim wavers slightly."))

@@ -48,7 +48,7 @@
 	update_icon()
 
 /obj/machinery/light_construct/on_update_icon()
-	switch(stage)
+	switch (stage)
 		if (LIGHT_STAGE_EMPTY) icon_state = "tube-construct-stage1"
 		if (LIGHT_STAGE_WIRED) icon_state = "tube-construct-stage2"
 		if (LIGHT_STAGE_COMPLETE) icon_state = "tube-empty"
@@ -58,7 +58,7 @@
 	if (distance > 2)
 		return
 
-	switch(stage)
+	switch (stage)
 		if (LIGHT_STAGE_EMPTY) to_chat(user, "It's an empty frame.")
 		if (LIGHT_STAGE_WIRED) to_chat(user, "It's wired.")
 		if (LIGHT_STAGE_COMPLETE) to_chat(user, "The casing is closed.")
@@ -67,7 +67,7 @@
 	add_fingerprint(user)
 	if (isWrench(W))
 
-		switch(stage)
+		switch (stage)
 			if (LIGHT_STAGE_EMPTY)
 				playsound(loc, 'sound/items/Ratchet.ogg', 50, TRUE)
 				to_chat(user, SPAN_NOTICE("You begin deconstructing \the [src]."))
@@ -146,7 +146,7 @@
 	sheets_refunded = 1
 
 /obj/machinery/light_construct/small/on_update_icon()
-	switch(stage)
+	switch (stage)
 		if (LIGHT_STAGE_EMPTY) icon_state = "bulb-construct-stage1"
 		if (LIGHT_STAGE_WIRED) icon_state = "bulb-construct-stage2"
 		if (LIGHT_STAGE_COMPLETE) icon_state = "bulb-empty"
@@ -272,7 +272,7 @@
 			pixel_x = -10
 
 	var/_state
-	switch(get_status())		// set icon_states
+	switch (get_status())		// set icon_states
 		if (LIGHT_OK)
 			_state = "[base_state][on]"
 			atom_flags |= ATOM_FLAG_CAN_BE_PAINTED
@@ -377,7 +377,7 @@
 /obj/machinery/light/examine(mob/user)
 	. = ..()
 	var/fitting = get_fitting_name()
-	switch(get_status())
+	switch (get_status())
 		if (LIGHT_OK)
 			to_chat(user, "It is turned [on? "on" : "off"].")
 		if (LIGHT_EMPTY)
@@ -588,7 +588,7 @@
 
 // destroy the whole light fixture or just shatter it
 /obj/machinery/light/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			qdel(src)
 			return
@@ -801,7 +801,7 @@
 /obj/item/light/on_update_icon()
 	color = b_colour
 	var/broken
-	switch(status)
+	switch (status)
 		if (LIGHT_OK)
 			icon_state = base_state
 			desc = "A replacement [name]."

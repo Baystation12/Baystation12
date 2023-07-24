@@ -306,7 +306,7 @@
 	for (var/datum/playingcard/P in cards)
 		var/image/I = P.card_image(concealed, src.icon)
 		//I.pixel_x = origin+(offset*i)
-		switch(direction)
+		switch (direction)
 			if (SOUTH)
 				I.pixel_x = 8-(offset*i)
 			if (WEST)

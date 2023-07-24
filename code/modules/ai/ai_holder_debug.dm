@@ -27,7 +27,7 @@
 //For debug purposes!
 /datum/ai_holder/proc/ai_log_output(msg = "missing message", ver = AI_LOG_INFO)
 	var/span_type
-	switch(ver)
+	switch (ver)
 		if (AI_LOG_OFF)
 			return
 		if (AI_LOG_ERROR)
@@ -47,7 +47,7 @@
 // Probably not something you want for regular use.
 /datum/ai_holder/proc/stance_color()
 	var/new_color = null
-	switch(stance)
+	switch (stance)
 		if (STANCE_SLEEP)
 			new_color = "#ffffff" // White
 		if (STANCE_IDLE)

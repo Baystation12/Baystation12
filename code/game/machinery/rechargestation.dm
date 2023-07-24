@@ -135,7 +135,7 @@
 
 /obj/machinery/recharge_station/proc/overlay_state()
 	var/obj/item/cell/cell = get_cell()
-	switch(cell && cell.percent() || 0)
+	switch (cell && cell.percent() || 0)
 		if (0 to 20)
 			return "statn_c0"
 		if (20 to 40)

@@ -132,7 +132,7 @@
 		usr.unset_machine()
 		return 1
 
-	switch(href_list["op"])
+	switch (href_list["op"])
 
 		if ("temp")
 			var/value = text2num(href_list["val"])

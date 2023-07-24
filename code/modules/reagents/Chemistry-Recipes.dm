@@ -539,7 +539,7 @@
 	s.set_up(2, 1, location)
 	s.start()
 	for (var/mob/living/carbon/M in viewers(world.view, location))
-		switch(get_dist(M, location))
+		switch (get_dist(M, location))
 			if (0 to 1)
 				if (M.eyecheck() < FLASH_PROTECTION_MODERATE)
 					M.flash_eyes(2)

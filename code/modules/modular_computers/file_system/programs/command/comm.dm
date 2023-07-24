@@ -126,7 +126,7 @@
 	var/ntn_comm = (program && program.computer) ? program.computer.get_ntnet_capability(NTNET_COMMUNICATION) : TRUE
 	var/ntn_cont = (program && program.computer) ? program.computer.get_ntnet_capability(NTNET_SYSTEMCONTROL) : TRUE
 	var/datum/comm_message_listener/l = obtain_message_listener()
-	switch(href_list["action"])
+	switch (href_list["action"])
 		if ("sw_menu")
 			. = TOPIC_HANDLED
 			current_status = text2num(href_list["target"])
@@ -201,7 +201,7 @@
 		if ("setstatus")
 			. = TOPIC_HANDLED
 			if (is_authenticated(user) && ntn_cont)
-				switch(href_list["target"])
+				switch (href_list["target"])
 					if ("line1")
 						var/linput = reject_bad_text(sanitize(input("Line 1", "Enter Message Text", msg_line1) as text|null, 40), 40)
 						if (can_still_topic())
@@ -308,7 +308,7 @@ var/global/last_message_id = 0
 	status_signal.transmission_method = 1
 	status_signal.data["command"] = command
 
-	switch(command)
+	switch (command)
 		if ("message")
 			status_signal.data["msg1"] = data1
 			status_signal.data["msg2"] = data2

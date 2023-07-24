@@ -13,7 +13,7 @@
 	tag = "landmark*[name]"
 
 	//TODO clean up this mess
-	switch(name)			//some of these are probably obsolete
+	switch (name)			//some of these are probably obsolete
 		if ("monkey")
 			GLOB.monkeystart += loc
 			delete_me = 1

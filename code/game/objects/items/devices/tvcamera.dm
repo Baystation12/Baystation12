@@ -114,7 +114,7 @@ Using robohead because of restricting to roboticist */
 	w_class = ITEM_SIZE_LARGE
 
 /obj/item/TVAssembly/attackby(obj/item/W, mob/user)
-	switch(buildstep)
+	switch (buildstep)
 		if (0)
 			if (istype(W, /obj/item/robot_parts/robot_component/camera))
 				to_chat(user, SPAN_NOTICE("You add the camera module to [src]"))

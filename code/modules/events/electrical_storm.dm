@@ -15,7 +15,7 @@
 
 /datum/event/electrical_storm/announce()
 	..()
-	switch(severity)
+	switch (severity)
 		if (EVENT_LEVEL_MUNDANE)
 			command_announcement.Announce("A minor electrical storm has been detected near the [location_name()]. Please watch out for possible electrical discharges.", "[location_name()] Sensor Array", zlevels = affecting_z)
 		if (EVENT_LEVEL_MODERATE)

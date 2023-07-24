@@ -1258,7 +1258,7 @@
 
 /obj/item/reagent_containers/food/snacks/mysterysoup/Initialize()
 	.=..()
-	switch(rand(1,10))
+	switch (rand(1,10))
 		if (1)
 			reagents.add_reagent(/datum/reagent/nutriment, 6)
 			reagents.add_reagent(/datum/reagent/capsaicin, 3)

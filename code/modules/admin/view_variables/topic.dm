@@ -190,7 +190,7 @@
 			return
 
 		var/O_type = O.type
-		switch(action_type)
+		switch (action_type)
 			if ("Strict type")
 				var/i = 0
 				for (var/obj/Obj in world)
@@ -255,7 +255,7 @@
 			to_chat(usr, "This can only be done to instances of type /atom")
 			return
 
-		switch(href_list["rotatedir"])
+		switch (href_list["rotatedir"])
 			if ("right")	A.set_dir(turn(A.dir, -45))
 			if ("left")	A.set_dir(turn(A.dir, 45))
 		href_list["datumrefresh"] = href_list["rotatedatum"]
@@ -394,7 +394,7 @@
 		var/list/possibleverbs = list()
 		possibleverbs += "Cancel" 								// One for the top...
 		possibleverbs += typesof(/mob/proc,/mob/verb,/mob/living/proc,/mob/living/verb)
-		switch(H.type)
+		switch (H.type)
 			if (/mob/living/carbon/human)
 				possibleverbs += typesof(/mob/living/carbon/proc,/mob/living/carbon/verb,/mob/living/carbon/human/verb,/mob/living/carbon/human/proc)
 			if (/mob/living/silicon/robot)
@@ -517,7 +517,7 @@
 			to_chat(usr, "Mob doesn't exist anymore")
 			return
 
-		switch(Text)
+		switch (Text)
 			if ("brute")	L.adjustBruteLoss(amount)
 			if ("fire")	L.adjustFireLoss(amount)
 			if ("toxin")	L.adjustToxLoss(amount)

@@ -50,7 +50,7 @@
 
 /mob/living/bot/floorbot/GetInteractMaintenance()
 	. = "Disassembly mode: "
-	switch(emagged)
+	switch (emagged)
 		if (0)
 			. += "<a href='?src=\ref[src];command=emag'>Off</a>"
 		if (1)
@@ -61,7 +61,7 @@
 /mob/living/bot/floorbot/ProcessCommand(mob/user, command, href_list)
 	..()
 	if (CanAccessPanel(user))
-		switch(command)
+		switch (command)
 			if ("improve")
 				improvefloors = !improvefloors
 			if ("tiles")
@@ -70,7 +70,7 @@
 				maketiles = !maketiles
 
 	if (CanAccessMaintenance(user))
-		switch(command)
+		switch (command)
 			if ("emag")
 				if (emagged < 2)
 					emagged = !emagged

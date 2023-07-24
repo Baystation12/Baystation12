@@ -254,7 +254,7 @@ if (!(datum.process_flags & AI_FASTPROCESSING)) { \
 			set_stance(STANCE_FLEE)
 			return
 
-	switch(stance)
+	switch (stance)
 		if (STANCE_ALERT)
 			ai_log("handle_stance_tactical() : STANCE_ALERT, going to threaten_target().", AI_LOG_TRACE)
 			threaten_target()
@@ -312,7 +312,7 @@ if (!(datum.process_flags & AI_FASTPROCESSING)) { \
 	if (stance in STANCES_COMBAT)
 		request_help() // Call our allies.
 
-	switch(stance)
+	switch (stance)
 		if (STANCE_IDLE)
 			if (speak_chance) // In the long loop since otherwise it wont shut up.
 				handle_idle_speaking()

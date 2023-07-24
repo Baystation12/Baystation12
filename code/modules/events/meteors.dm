@@ -23,7 +23,7 @@
 	endWhen = worst_case_end()
 
 /datum/event/meteor_wave/announce()
-	switch(severity)
+	switch (severity)
 		if (EVENT_LEVEL_MAJOR)
 			command_announcement.Announce(replacetext(GLOB.using_map.meteor_detected_message, "%STATION_NAME%", location_name()), "[location_name()] Sensor Array", new_sound = GLOB.using_map.meteor_detected_sound, zlevels = affecting_z)
 		else
@@ -53,14 +53,14 @@
 	return severity * rand(2,4)
 
 /datum/event/meteor_wave/end()
-	switch(severity)
+	switch (severity)
 		if (EVENT_LEVEL_MAJOR)
 			command_announcement.Announce("The [location_name()] has cleared the meteor storm.", "[location_name()] Sensor Array", zlevels = affecting_z)
 		else
 			command_announcement.Announce("The [location_name()] has cleared the meteor shower", "[location_name()] Sensor Array", zlevels = affecting_z)
 
 /datum/event/meteor_wave/proc/get_meteors()
-	switch(severity)
+	switch (severity)
 		if (EVENT_LEVEL_MAJOR)
 			return meteors_major
 		if (EVENT_LEVEL_MODERATE)

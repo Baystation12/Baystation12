@@ -39,7 +39,7 @@
 		cur_command = null
 
 /obj/machinery/door/airlock/proc/do_command(command)
-	switch(command)
+	switch (command)
 		if ("open")
 			open()
 
@@ -70,7 +70,7 @@
 	send_status()
 
 /obj/machinery/door/airlock/proc/command_completed(command)
-	switch(command)
+	switch (command)
 		if ("open")
 			return (!density)
 

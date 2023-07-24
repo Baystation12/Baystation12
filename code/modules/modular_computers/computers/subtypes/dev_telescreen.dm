@@ -33,7 +33,7 @@
 		else
 			var/choice = input(user, "Where do you want to place \the [src]?", "Offset selection") in list("North", "South", "West", "East", "This tile", "Cancel")
 			var/valid = FALSE
-			switch(choice)
+			switch (choice)
 				if ("North")
 					valid = TRUE
 					pixel_y = 32

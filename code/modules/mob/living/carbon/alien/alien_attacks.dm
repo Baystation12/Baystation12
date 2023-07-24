@@ -6,7 +6,7 @@
 
 	..()
 
-	switch(M.a_intent)
+	switch (M.a_intent)
 
 		if (I_HELP)
 			help_shake_act(M)

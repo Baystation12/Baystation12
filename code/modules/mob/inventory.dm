@@ -339,7 +339,7 @@
 
 //Returns the item equipped to the specified slot, if any.
 /mob/proc/get_equipped_item(slot)
-	switch(slot)
+	switch (slot)
 		if (slot_l_hand) return l_hand
 		if (slot_r_hand) return r_hand
 		if (slot_back) return back

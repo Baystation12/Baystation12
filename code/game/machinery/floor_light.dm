@@ -138,7 +138,7 @@ var/global/list/floor_light_cache = list()
 	update_brightness()
 
 /obj/machinery/floor_light/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			qdel(src)
 		if (EX_ACT_HEAVY)

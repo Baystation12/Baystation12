@@ -38,7 +38,7 @@
 		return
 
 	user.visible_message(SPAN_NOTICE("\The [user] has analyzed [M]'s components."),SPAN_NOTICE("You have analyzed [M]'s components."))
-	switch(scan_type)
+	switch (scan_type)
 		if ("robot")
 			var/BU = M.getFireLoss() > 50 	? 	"<b>[M.getFireLoss()]</b>" 		: M.getFireLoss()
 			var/BR = M.getBruteLoss() > 50 	? 	"<b>[M.getBruteLoss()]</b>" 	: M.getBruteLoss()

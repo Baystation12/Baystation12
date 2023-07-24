@@ -27,7 +27,7 @@
 
 /datum/wires/fabricator/UpdateCut(index, mended)
 	var/obj/machinery/fabricator/A = holder
-	switch(index)
+	switch (index)
 		if (AUTOLATHE_HACK_WIRE)
 			if (mended)
 				A.fab_status_flags &= ~FAB_HACKED
@@ -48,7 +48,7 @@
 	if (IsIndexCut(index))
 		return
 	var/obj/machinery/fabricator/A = holder
-	switch(index)
+	switch (index)
 		if (AUTOLATHE_HACK_WIRE)
 			if (A.fab_status_flags & FAB_HACKED)
 				A.fab_status_flags &= ~FAB_HACKED

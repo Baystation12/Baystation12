@@ -34,7 +34,7 @@
 	if (!dir)
 		return
 
-	switch(dir)
+	switch (dir)
 		if (NORTH)
 			return locate(rand(clearance, world.maxx - clearance), world.maxy - clearance, Z)
 		if (SOUTH)

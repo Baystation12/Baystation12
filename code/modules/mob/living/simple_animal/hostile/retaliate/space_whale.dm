@@ -56,7 +56,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/space_whale/set_dir()
 	..()
-	switch(dir)
+	switch (dir)
 		if (NORTH, SOUTH)
 			bound_height = 128
 			bound_width = 64

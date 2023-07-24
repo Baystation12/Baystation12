@@ -149,7 +149,7 @@
 	busy = 0
 
 /obj/machinery/keycard_auth/proc/trigger_event()
-	switch(event)
+	switch (event)
 		if ("Red alert")
 			var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 			security_state.stored_security_level = security_state.current_security_level

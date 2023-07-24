@@ -145,7 +145,7 @@
 		<tr><td><strong>Brain Activity:</strong></td><td>100%</td></tr>
 	*/
 	dat += "<tr><td><strong>Brain activity:</strong></td>"
-	switch(scan["brain_activity"])
+	switch (scan["brain_activity"])
 		if (0)
 			dat += "<td>[SPAN_BAD("none, patient is braindead")]</td></tr>"
 		if (-1)

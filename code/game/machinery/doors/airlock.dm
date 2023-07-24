@@ -636,7 +636,7 @@ About the new airlock wires panel:
 	else
 		set_dir(SOUTH)
 
-	switch(state)
+	switch (state)
 		if (0)
 			if (density)
 				icon_state = "closed"
@@ -710,7 +710,7 @@ About the new airlock wires panel:
 				airlock_icon_cache["[ikey2]"] = stripe_filling_overlay
 
 	if (arePowerSystemsOn())
-		switch(state)
+		switch (state)
 			if (AIRLOCK_CLOSED)
 				if (lights && locked)
 					lights_overlay = overlay_image(bolts_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
@@ -766,7 +766,7 @@ About the new airlock wires panel:
 	if (overlays)
 		overlays.Cut()
 
-	switch(animation)
+	switch (animation)
 		if ("opening")
 			set_airlock_overlays(AIRLOCK_OPENING)
 			flick("opening", src)//[stat ? "_stat":]

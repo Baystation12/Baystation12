@@ -24,7 +24,7 @@
 	if (name == initial(name))
 		SetName("light switch ([connected_area.name])")
 
-	connected_area.set_lightswitch(on)
+	connected_area.set_lightswitch (on)
 	update_icon()
 
 /obj/machinery/light_switch/on_update_icon()
@@ -51,7 +51,7 @@
 /obj/machinery/light_switch/proc/set_state(newstate)
 	if (on != newstate)
 		on = newstate
-		connected_area.set_lightswitch(on)
+		connected_area.set_lightswitch (on)
 		update_icon()
 
 /obj/machinery/light_switch/proc/sync_state()
@@ -68,7 +68,7 @@
 
 /obj/machinery/light_switch/attackby(obj/item/tool as obj, mob/user as mob)
 	if (istype(tool, /obj/item/screwdriver))
-		new /obj/item/frame/light_switch(user.loc, 1)
+		new /obj/item/frame/light_switch (user.loc, 1)
 		qdel(src)
 
 

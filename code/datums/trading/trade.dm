@@ -143,7 +143,7 @@
 		return "<b>[initial(M.name)]</b>"
 
 /datum/trader/proc/skill_curve(skill)
-	switch(skill)
+	switch (skill)
 		if (SKILL_EXPERIENCED)
 			. = 1
 		if (SKILL_EXPERIENCED to SKILL_MAX)

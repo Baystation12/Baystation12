@@ -127,7 +127,7 @@
 
 	if (!elevel)
 		elevel = "Full Explosion"
-	switch(elevel)
+	switch (elevel)
 		if ("Localized Limb")
 			if (part)
 				if (istype(part,/obj/item/organ/external/chest) ||	\

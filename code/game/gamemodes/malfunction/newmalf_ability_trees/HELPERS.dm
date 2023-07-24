@@ -135,7 +135,7 @@
 	if (!user || !text)
 		return 0
 	var/fulltext = ""
-	switch(user.hack_fails)
+	switch (user.hack_fails)
 		if (1)
 			fulltext = "We have detected a hack attempt into your [text]. The intruder failed to access anything of importance, but disconnected before we could complete our traces."
 		if (2)

@@ -195,7 +195,7 @@
 	if (!brainmob)
 		return
 	else
-		switch(severity)
+		switch (severity)
 			if (EMP_ACT_HEAVY)
 				brainmob.emp_damage += rand(20,30)
 			if (EMP_ACT_LIGHT)

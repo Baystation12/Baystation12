@@ -377,7 +377,7 @@
 		mitigation_heat -= MITIGATION_HIT_LOSS
 		mitigation_physical -= MITIGATION_HIT_LOSS
 
-		switch(shield_damtype)
+		switch (shield_damtype)
 			if (SHIELD_DAMTYPE_PHYSICAL)
 				mitigation_physical += MITIGATION_HIT_LOSS + MITIGATION_HIT_GAIN
 				energy_to_use *= 1 - (mitigation_physical / 100)

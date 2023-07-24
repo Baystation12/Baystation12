@@ -77,7 +77,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 				gas_filters -= P
 
 			P.air.volume = ATMOS_DEFAULT_VOLUME_FILTER
-			switch(P.mode)
+			switch (P.mode)
 				if (ATM_INPUT)
 					input = P
 				if (ATM_OUTPUT)
@@ -162,7 +162,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 		var/output = 0
 		var/is_filter = 1
 		var/f_type = null
-		switch(P.mode)
+		switch (P.mode)
 			if (ATM_INPUT)
 				input = 1
 				is_filter = 0
@@ -170,7 +170,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 				output = 1
 				is_filter = 0
 			if (ATM_GAS_MIN to ATM_GAS_MAX)
-				f_type = mode_send_switch(P.mode)
+				f_type = mode_send_switch (P.mode)
 
 		portData[LIST_PRE_INC(portData)] = list("dir" = dir_name(P.dir, capitalize = 1), \
 										"input" = input, \
@@ -186,12 +186,12 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 
 	return data
 
-/obj/machinery/atmospherics/omni/filter/proc/mode_send_switch(mode = ATM_NONE)
+/obj/machinery/atmospherics/omni/filter/proc/mode_send_switch (mode = ATM_NONE)
 	return GLOB.filter_mode_to_gas["[mode]"]
 
 /obj/machinery/atmospherics/omni/filter/Topic(href, href_list)
 	if (..()) return 1
-	switch(href_list["command"])
+	switch (href_list["command"])
 		if ("power")
 			if (!configuring)
 				update_use_power(!use_power)
@@ -204,24 +204,24 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 
 	//only allows config changes when in configuring mode ~otherwise you'll get weird pressure stuff going on
 	if (configuring && !use_power)
-		switch(href_list["command"])
+		switch (href_list["command"])
 			if ("set_flow_rate")
 				var/new_flow_rate = input(usr,"Enter new flow rate limit (0-[max_flow_rate]L/s)","Flow Rate Control",set_flow_rate) as num
 				set_flow_rate = clamp(new_flow_rate, 0, max_flow_rate)
 			if ("switch_mode")
-				switch_mode(dir_flag(href_list["dir"]), mode_return_switch(href_list["mode"]))
+				switch_mode(dir_flag(href_list["dir"]), mode_return_switch (href_list["mode"]))
 			if ("switch_filter")
 				var/new_filter = input(usr,"Select filter mode:","Change filter",href_list["mode"]) in GLOB.filter_gas_to_mode
-				switch_filter(dir_flag(href_list["dir"]), mode_return_switch(new_filter))
+				switch_filter(dir_flag(href_list["dir"]), mode_return_switch (new_filter))
 
 	update_icon()
 	SSnano.update_uis(src)
 	return
 
-/obj/machinery/atmospherics/omni/filter/proc/mode_return_switch(mode)
+/obj/machinery/atmospherics/omni/filter/proc/mode_return_switch (mode)
 	. = GLOB.filter_gas_to_mode[mode]
 	if (!.)
-		switch(mode)
+		switch (mode)
 			if ("in")
 				return ATM_INPUT
 			if ("out")
@@ -277,7 +277,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 			filtering_outputs[gasid] = P.air
 
 /obj/machinery/atmospherics/omni/filter/proc/handle_port_change(datum/omni_port/P)
-	switch(P.mode)
+	switch (P.mode)
 		if (ATM_NONE)
 			initialize_directions &= ~P.dir
 			P.disconnect()

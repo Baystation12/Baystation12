@@ -138,7 +138,7 @@
 		if (!iscultist(target) && target.loc == get_turf(src)) // They hesitated, resisted, or can't join, and they are still on the rune - burn them
 			if (target.stat == CONSCIOUS)
 				target.take_overall_damage(0, 10)
-				switch(target.getFireLoss())
+				switch (target.getFireLoss())
 					if (0 to 25)
 						to_chat(target, SPAN_DANGER("Your blood boils as you force yourself to resist the corruption invading every corner of your mind."))
 					if (25 to 45)

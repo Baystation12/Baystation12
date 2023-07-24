@@ -100,7 +100,7 @@ var/global/list/radial_menus = list()
 //Sets defaults
 //These assume 45 deg min_angle
 /datum/radial_menu/proc/restrict_to_dir(dir)
-	switch(dir)
+	switch (dir)
 		if (NORTH)
 			starting_angle = 270
 			ending_angle = 135

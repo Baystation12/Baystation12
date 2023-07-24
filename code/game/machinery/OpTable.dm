@@ -42,7 +42,7 @@
 
 /obj/machinery/optable/ex_act(severity)
 
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			//SN src = null
 			qdel(src)

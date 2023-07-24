@@ -225,7 +225,7 @@
 	So you'd call g.errString(g.out_error)
 */
 /obj/procedural/jp_DungeonGenerator/proc/errString(e)
-	switch(e)
+	switch (e)
 		if (0) return "No error"
 		if (ERROR_NO_ROOMS) return "The allowedRooms list was either empty, or an illegal value"
 		if (ERROR_BAD_AREA) return "The area that the generator is allowed to work on was either empty, or crossed a z-level"

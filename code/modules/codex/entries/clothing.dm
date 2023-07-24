@@ -18,7 +18,7 @@
 	var/list/armor_strings = list()
 	for (var/armor_type in armour_to_descriptive_term)
 		if (LAZYACCESS(armor, armor_type))
-			switch(armor[armor_type])
+			switch (armor[armor_type])
 				if (1 to 20)
 					armor_strings += "It barely protects against [armour_to_descriptive_term[armor_type]]."
 				if (21 to 30)

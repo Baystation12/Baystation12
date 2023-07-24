@@ -62,7 +62,7 @@
 		if (fabricate)
 			fabricated_laptop = new(src)
 		total_price = 99
-		switch(dev_cpu)
+		switch (dev_cpu)
 			if (1)
 				if (fabricate)
 					fabricated_laptop.processor_unit = new/obj/item/stock_parts/computer/processor_unit/small(fabricated_laptop)
@@ -70,7 +70,7 @@
 				if (fabricate)
 					fabricated_laptop.processor_unit = new/obj/item/stock_parts/computer/processor_unit(fabricated_laptop)
 				total_price += 299
-		switch(dev_battery)
+		switch (dev_battery)
 			if (1) // Basic(750C)
 				if (fabricate)
 					fabricated_laptop.battery_module = new/obj/item/stock_parts/computer/battery_module(fabricated_laptop)
@@ -82,7 +82,7 @@
 				if (fabricate)
 					fabricated_laptop.battery_module = new/obj/item/stock_parts/computer/battery_module/super(fabricated_laptop)
 				total_price += 499
-		switch(dev_disk)
+		switch (dev_disk)
 			if (1) // Basic(128GQ)
 				if (fabricate)
 					fabricated_laptop.hard_drive = new/obj/item/stock_parts/computer/hard_drive(fabricated_laptop)
@@ -94,7 +94,7 @@
 				if (fabricate)
 					fabricated_laptop.hard_drive = new/obj/item/stock_parts/computer/hard_drive/super(fabricated_laptop)
 				total_price += 299
-		switch(dev_netcard)
+		switch (dev_netcard)
 			if (1) // Basic(Short-Range)
 				if (fabricate)
 					fabricated_laptop.network_card = new/obj/item/stock_parts/computer/network_card(fabricated_laptop)
@@ -126,7 +126,7 @@
 			fabricated_tablet = new(src)
 			fabricated_tablet.processor_unit = new/obj/item/stock_parts/computer/processor_unit/small(fabricated_tablet)
 		total_price = 199
-		switch(dev_battery)
+		switch (dev_battery)
 			if (1) // Basic(300C)
 				if (fabricate)
 					fabricated_tablet.battery_module = new/obj/item/stock_parts/computer/battery_module/nano(fabricated_tablet)
@@ -138,7 +138,7 @@
 				if (fabricate)
 					fabricated_tablet.battery_module = new/obj/item/stock_parts/computer/battery_module(fabricated_tablet)
 				total_price += 499
-		switch(dev_disk)
+		switch (dev_disk)
 			if (1) // Basic(32GQ)
 				if (fabricate)
 					fabricated_tablet.hard_drive = new/obj/item/stock_parts/computer/hard_drive/micro(fabricated_tablet)
@@ -150,7 +150,7 @@
 				if (fabricate)
 					fabricated_tablet.hard_drive = new/obj/item/stock_parts/computer/hard_drive(fabricated_tablet)
 				total_price += 299
-		switch(dev_netcard)
+		switch (dev_netcard)
 			if (1) // Basic(Short-Range)
 				if (fabricate)
 					fabricated_tablet.network_card = new/obj/item/stock_parts/computer/network_card(fabricated_tablet)

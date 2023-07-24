@@ -116,7 +116,7 @@
 	if (!user_id_card || !id_card || !module)
 		return
 
-	switch(href_list["action"])
+	switch (href_list["action"])
 		if ("switchm")
 			if (href_list["target"] == "mod")
 				module.mod_mode = 1

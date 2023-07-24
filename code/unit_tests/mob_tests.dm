@@ -99,7 +99,7 @@ var/global/default_mobloc = null
 /proc/damage_check(mob/living/M, damage_type)
 	var/loss = null
 
-	switch(damage_type)
+	switch (damage_type)
 		if (DAMAGE_BRUTE)
 			loss = M.getBruteLoss()
 		if (DAMAGE_BURN)
@@ -215,7 +215,7 @@ var/global/default_mobloc = null
 
 	var/expected_msg = null
 
-	switch(expected_vulnerability)
+	switch (expected_vulnerability)
 		if (STANDARD)
 			expected_msg = "to take standard damage"
 		if (ARMORED)

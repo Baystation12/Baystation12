@@ -37,7 +37,7 @@
 	return
 
 /obj/structure/morgue/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			for (var/atom/movable/A as mob|obj in src)
 				A.forceMove(src.loc)
@@ -217,7 +217,7 @@
 
 
 /obj/structure/crematorium/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			for (var/atom/movable/A as mob|obj in src)
 				A.forceMove(src.loc)
@@ -344,7 +344,7 @@
 					sleep(0.5 SECONDS)
 					if (prob(40))
 						var/desperation = rand(1,5)
-						switch(desperation) //This is messy. A better solution would probably be to make more sounds, but...
+						switch (desperation) //This is messy. A better solution would probably be to make more sounds, but...
 							if (1)
 								playsound(src.loc, 'sound/weapons/genhit.ogg', 45, 1)
 								shake_animation(2)

@@ -573,7 +573,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if (!found)
 		to_chat(user, "[icon2html(src, user)][SPAN_NOTICE("\The [src] is not linked to any junctions!")]")
 		return
-	var/obj/machinery/disposal_switch/NC = new/obj/machinery/disposal_switch(A, id_tag)
+	var/obj/machinery/disposal_switch/NC = new/obj/machinery/disposal_switch (A, id_tag)
 	transfer_fingerprints_to(NC)
 	qdel(src)
 

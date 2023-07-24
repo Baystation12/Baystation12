@@ -232,7 +232,7 @@
 				var/mob/living/L = src
 				skip = L.default_language == language
 			if (!skip)
-				switch(src.get_preference_value(/datum/client_preference/language_display))
+				switch (src.get_preference_value(/datum/client_preference/language_display))
 					if (GLOB.PREF_FULL)
 						nverb = "[verb] in [language.name]"
 					if (GLOB.PREF_SHORTHAND)
@@ -275,7 +275,7 @@
 
 	if (say_understands(speaker, language))
 		var/nverb = null
-		switch(src.get_preference_value(/datum/client_preference/language_display))
+		switch (src.get_preference_value(/datum/client_preference/language_display))
 			if (GLOB.PREF_FULL) // Full language name
 				nverb = "[verb] in [language.name]"
 			if (GLOB.PREF_SHORTHAND) //Shorthand codes
@@ -286,7 +286,7 @@
 	else
 		var/adverb
 		var/length = length(message) * pick(0.8, 0.9, 1.0, 1.1, 1.2)	//Inserts a little fuzziness.
-		switch(length)
+		switch (length)
 			if (0 to 12) 	adverb = " briefly"
 			if (12 to 30)	adverb = " a short message"
 			if (30 to 48)	adverb = " a message"

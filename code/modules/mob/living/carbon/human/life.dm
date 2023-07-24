@@ -691,7 +691,7 @@
 		if (stat == UNCONSCIOUS && health < maxHealth/2)
 			//Critical damage passage overlay
 			var/severity = 0
-			switch(health - maxHealth/2)
+			switch (health - maxHealth/2)
 				if (-20 to -10)			severity = 1
 				if (-30 to -20)			severity = 2
 				if (-40 to -30)			severity = 3
@@ -708,7 +708,7 @@
 			//Oxygen damage overlay
 			if (getOxyLoss())
 				var/severity = 0
-				switch(getOxyLoss())
+				switch (getOxyLoss())
 					if (10 to 20)		severity = 1
 					if (20 to 25)		severity = 2
 					if (25 to 30)		severity = 3
@@ -725,7 +725,7 @@
 		damageoverlaytemp = 0 // We do this so we can detect if someone hits us or not.
 		if (hurtdamage)
 			var/severity = 0
-			switch(hurtdamage)
+			switch (hurtdamage)
 				if (10 to 25)		severity = 1
 				if (25 to 40)		severity = 2
 				if (40 to 55)		severity = 3
@@ -784,7 +784,7 @@
 				healths.overlays += health_images
 
 		if (nutrition_icon)
-			switch(nutrition)
+			switch (nutrition)
 				if (450 to INFINITY)				nutrition_icon.icon_state = "nutrition0"
 				if (350 to 450)					nutrition_icon.icon_state = "nutrition1"
 				if (250 to 350)					nutrition_icon.icon_state = "nutrition2"
@@ -792,7 +792,7 @@
 				else							nutrition_icon.icon_state = "nutrition4"
 
 		if (hydration_icon)
-			switch(hydration)
+			switch (hydration)
 				if (450 to INFINITY)				hydration_icon.icon_state = "hydration0"
 				if (350 to 450)					hydration_icon.icon_state = "hydration1"
 				if (250 to 350)					hydration_icon.icon_state = "hydration2"
@@ -818,7 +818,7 @@
 
 		if (bodytemp)
 			if (!species)
-				switch(bodytemperature) //310.055 optimal body temp
+				switch (bodytemperature) //310.055 optimal body temp
 					if (370 to INFINITY)		bodytemp.icon_state = "temp4"
 					if (350 to 370)			bodytemp.icon_state = "temp3"
 					if (335 to 350)			bodytemp.icon_state = "temp2"
@@ -1034,7 +1034,7 @@
 
 		var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
 		if (E)
-			switch(E.get_criminalStatus())
+			switch (E.get_criminalStatus())
 				if ("Arrest")
 					holder.icon_state = "hudwanted"
 				if ("Incarcerated")

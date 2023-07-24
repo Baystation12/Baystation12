@@ -133,7 +133,7 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 		if (new_message)
 			message = new_message
 			screen = RCS_MESSAUTH
-			switch(href_list["priority"])
+			switch (href_list["priority"])
 				if ("1") priority = 1
 				if ("2")	priority = 2
 				else	priority = 0

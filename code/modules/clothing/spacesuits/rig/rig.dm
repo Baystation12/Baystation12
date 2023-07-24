@@ -346,7 +346,7 @@
 						failed_to_seal = 1
 
 					piece.icon_state = "[initial(icon_state)][!seal_target ? "_sealed" : ""]"
-					switch(msg_type)
+					switch (msg_type)
 						if ("boots")
 							to_chat(wearer, SPAN_INFO("\The [piece] [!seal_target ? "seal around your feet" : "relax their grip on your legs"]."))
 							wearer.update_inv_shoes()
@@ -689,7 +689,7 @@
 
 		if (module_index > 0 && module_index <= length(installed_modules))
 			var/obj/item/rig_module/module = installed_modules[module_index]
-			switch(href_list["module_mode"])
+			switch (href_list["module_mode"])
 				if ("activate")
 					module.activate()
 				if ("deactivate")
@@ -758,7 +758,7 @@
 	if (!wearer)
 		return
 
-	switch(piece)
+	switch (piece)
 		if ("helmet")
 			equip_to = slot_head
 			use_obj = helmet

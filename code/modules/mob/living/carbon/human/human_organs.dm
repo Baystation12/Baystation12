@@ -182,7 +182,7 @@
 /mob/living/carbon/human/proc/stance_damage_prone(obj/item/organ/external/affected)
 
 	if (affected)
-		switch(affected.body_part)
+		switch (affected.body_part)
 			if (FOOT_LEFT, FOOT_RIGHT)
 				if (!BP_IS_ROBOTIC(affected))
 					to_chat(src, SPAN_WARNING("You lose your footing as your [affected.name] spasms!"))
@@ -199,7 +199,7 @@
 
 /mob/living/carbon/human/proc/grasp_damage_disarm(obj/item/organ/external/affected)
 	var/disarm_slot
-	switch(affected.body_part)
+	switch (affected.body_part)
 		if (HAND_LEFT, ARM_LEFT)
 			disarm_slot = slot_l_hand
 		if (HAND_RIGHT, ARM_RIGHT)

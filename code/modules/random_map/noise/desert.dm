@@ -12,7 +12,7 @@
 /datum/random_map/noise/desert/get_appropriate_path(value)
 	var/val = min(9,max(0,round((value/cell_range)*10)))
 	if (isnull(val)) val = 0
-	switch(val)
+	switch (val)
 		if (0 to 1)
 			return /turf/simulated/floor/beach/water
 		else
@@ -21,7 +21,7 @@
 /datum/random_map/noise/desert/get_additional_spawns(value, turf/T)
 	var/val = min(9,max(0,round((value/cell_range)*10)))
 	if (isnull(val)) val = 0
-	switch(val)
+	switch (val)
 		if (2 to 3)
 			if (prob(60))
 				var/grass_path = pick(typesof(/obj/structure/flora/grass)-/obj/structure/flora/grass)

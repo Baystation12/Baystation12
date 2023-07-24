@@ -22,7 +22,7 @@
 
 		//Repeat the first letter to create a stutter.
 		var/rnum = rand(1,3)
-		switch(rnum)
+		switch (rnum)
 			if (1)
 				word = "[first_letter]-[word]"
 			if (2)
@@ -122,7 +122,7 @@ english_only - whether to use traditional english letters only (for use in NanoU
 				new_message += newletter
 				break
 			else if (prob(2.5 * distortion)) // Sound distortion. Still recognisable, mostly.
-				switch(lowertext(newletter))
+				switch (lowertext(newletter))
 					if ("s")
 						newletter = "$"
 					if ("e")

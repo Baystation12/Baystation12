@@ -25,7 +25,7 @@ var/global/can_call_ert
 
 	var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 	if (security_state.current_security_level_is_lower_than(security_state.high_security_level)) // Allow admins to reconsider if the alert level is below High
-		switch(alert("Current security level lower than [security_state.high_security_level.name]. Do you still want to dispatch a response team?",,"Yes","No"))
+		switch (alert("Current security level lower than [security_state.high_security_level.name]. Do you still want to dispatch a response team?",,"Yes","No"))
 			if ("No")
 				return
 

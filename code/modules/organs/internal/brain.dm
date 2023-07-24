@@ -166,7 +166,7 @@
 			var/can_heal = damage && damage < max_damage && (damage % damage_threshold_value || owner.chem_effects[CE_BRAIN_REGEN] || (!past_damage_threshold(3) && owner.chem_effects[CE_STABLE]))
 			var/damprob
 			//Effects of bloodloss
-			switch(blood_volume)
+			switch (blood_volume)
 
 				if (BLOOD_VOLUME_SAFE to INFINITY)
 					if (can_heal)

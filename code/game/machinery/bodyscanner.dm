@@ -172,7 +172,7 @@
 	return TRUE
 
 /obj/machinery/bodyscanner/ex_act(severity)
-	switch(severity)
+	switch (severity)
 		if (EX_ACT_DEVASTATING)
 			for (var/atom/movable/A as mob|obj in src)
 				A.dropInto(loc)

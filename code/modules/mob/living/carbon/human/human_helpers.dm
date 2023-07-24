@@ -128,7 +128,7 @@
 //Get species or synthetic temp if the mob is a FBP. Used when a synthetic type human mob is exposed to a temp check.
 //Essentially, used when a synthetic human mob should act diffferently than a normal type mob.
 /mob/living/carbon/human/proc/getSpeciesOrSynthTemp(temptype)
-	switch(temptype)
+	switch (temptype)
 		if (COLD_LEVEL_1)
 			return isSynthetic()? SYNTH_COLD_LEVEL_1 : species.cold_level_1
 		if (COLD_LEVEL_2)
@@ -198,7 +198,7 @@
 		var/direction = get_dir(src, L)
 		if (direction)
 			feedback += "towards the [dir2text(direction)], "
-			switch(get_dist(src, L) / client.view)
+			switch (get_dist(src, L) / client.view)
 				if (0 to 0.2)
 					feedback += "very close by."
 				if (0.2 to 0.4)
@@ -231,7 +231,7 @@
 	if (!E)
 		return
 	var/safety = eyecheck()
-	switch(safety)
+	switch (safety)
 		if (FLASH_PROTECTION_MODERATE)
 			to_chat(src, SPAN_WARNING("Your eyes sting a little."))
 			E.damage += rand(1, 2)

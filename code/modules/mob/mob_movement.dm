@@ -44,7 +44,7 @@
 	diagonal_action(SOUTHWEST)
 
 /client/proc/diagonal_action(direction)
-	switch(client_dir(direction, 1))
+	switch (client_dir(direction, 1))
 		if (NORTHEAST)
 			swap_hand()
 			return

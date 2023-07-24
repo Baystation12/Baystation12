@@ -10,7 +10,7 @@
 			else
 				msg += "[SPAN_WARNING("<B>It has severe punctures and tears in its flesh!</B>")]\n"
 
-		switch(powerlevel)
+		switch (powerlevel)
 
 			if (2 to 3)
 				msg += "It is flickering gently with a little electrical activity.\n"

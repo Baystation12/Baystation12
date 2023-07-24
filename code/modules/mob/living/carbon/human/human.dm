@@ -524,7 +524,7 @@
 
 /mob/living/carbon/human/update_flavor_text(key)
 	var/msg
-	switch(key)
+	switch (key)
 		if ("done")
 			show_browser(src, null, "window=flavor_changes")
 			return
@@ -1547,7 +1547,7 @@
 	if (!heart_organ)
 		return 0
 
-	switch(pulse())
+	switch (pulse())
 		if (PULSE_NONE)
 			return 0
 		if (PULSE_SLOW)
@@ -1669,7 +1669,7 @@
 			var/brutedamage = org.brute_dam * feels
 			var/burndamage = org.burn_dam * feels
 
-			switch(brutedamage)
+			switch (brutedamage)
 				if (1 to 20)
 					status += "slightly sore"
 				if (20 to 40)
@@ -1677,7 +1677,7 @@
 				if (40 to INFINITY)
 					status += "throbbing with agony"
 
-			switch(burndamage)
+			switch (burndamage)
 				if (1 to 10)
 					status += "tingling"
 				if (10 to 40)
@@ -1856,7 +1856,7 @@
 
 /mob/living/carbon/human/bullet_impact_visuals(obj/item/projectile/P, def_zone, damage)
 	..()
-	switch(get_bullet_impact_effect_type(def_zone))
+	switch (get_bullet_impact_effect_type(def_zone))
 		if (BULLET_IMPACT_MEAT)
 			if (damage && P.damtype == DAMAGE_BRUTE)
 				var/hit_dir = get_dir(P.starting, src)

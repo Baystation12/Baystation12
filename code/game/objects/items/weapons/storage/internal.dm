@@ -45,7 +45,7 @@
 
 		//TODO make this less terrible
 		if (!( user.restrained() ) && !( user.stat ))
-			switch(over_object.name)
+			switch (over_object.name)
 				if (BP_R_HAND)
 					if (user.unEquip(master_item))
 						user.put_in_r_hand(master_item)

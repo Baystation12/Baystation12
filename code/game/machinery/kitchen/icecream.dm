@@ -23,7 +23,7 @@
 	var/flavour_name = "vanilla"
 
 /obj/machinery/icecream_vat/proc/get_ingredient_list(type)
-	switch(type)
+	switch (type)
 		if (ICECREAM_CHOCOLATE)
 			return list(/datum/reagent/drink/milk, /datum/reagent/drink/ice, /datum/reagent/nutriment/coco)
 		if (ICECREAM_STRAWBERRY)
@@ -42,7 +42,7 @@
 			return list(/datum/reagent/drink/milk, /datum/reagent/drink/ice)
 
 /obj/machinery/icecream_vat/proc/get_flavour_name(flavour_type)
-	switch(flavour_type)
+	switch (flavour_type)
 		if (ICECREAM_CHOCOLATE)
 			return "chocolate"
 		if (ICECREAM_STRAWBERRY)

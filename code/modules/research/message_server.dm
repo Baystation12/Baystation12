@@ -23,7 +23,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	if (param_id_auth)
 		id_auth = param_id_auth
 	if (param_priority)
-		switch(param_priority)
+		switch (param_priority)
 			if (1)
 				priority = "Normal"
 			if (2)

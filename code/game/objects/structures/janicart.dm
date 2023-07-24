@@ -167,7 +167,7 @@
 	var/mob/living/user = usr
 
 	if (href_list["take"])
-		switch(href_list["take"])
+		switch (href_list["take"])
 			if ("garbage")
 				if (mybag)
 					user.put_in_hands(mybag)
@@ -334,7 +334,7 @@
 /obj/structure/bed/chair/janicart/proc/update_mob()
 	if (buckled_mob)
 		buckled_mob.set_dir(dir)
-		switch(dir)
+		switch (dir)
 			if (SOUTH)
 				buckled_mob.pixel_x = 0
 				buckled_mob.pixel_y = 7
