@@ -102,7 +102,7 @@
 		/obj/item/clothing/glasses/hud/health,
 		/obj/item/storage/firstaid/adv,
 		/obj/item/clothing/suit/storage/medical_chest_rig,
-		/obj/item/clothing/head/hardhat/EMS,
+		/obj/item/clothing/head/hardhat/light/medic,
 		/obj/item/material/knife/folding/swiss/medic,
 		/obj/item/storage/backpack/dufflebag/med
 	)
