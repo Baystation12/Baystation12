@@ -1,13 +1,88 @@
-body{font-family:Tahoma,sans-serif;}
-.top{font-size:12px;}
+html { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  background-color: #111;
+  color: #ccc;
+}
+
+a {
+  text-decoration: none;
+  color: #6cbfc4;
+}
+a:hover { text-decoration: underline; }
+
+.content {
+  width: 650px;
+  max-width: 650px;
+  margin: 0 auto;
+}
+.title {
+  color: white;
+  text-align: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #555;
+}
+.title h2 {
+  font-size: 28px;
+  margin-bottom: 3px;
+}
+
+.changelog {
+	margin-bottom: 20px;
+	font-size: 100%;
+	font-weight: normal;
+	padding: 0 12px;
+}
+.date {
+	margin-top: 24px;
+	margin-bottom: 8px;
+	color:#6cbfc4;
+	border-bottom: 2px solid #6cbfc4;
+	width: 60%;
+	padding: 2px 0;
+	font-size: 16px;
+	font-weight: bold;
+}
+.author {
+	margin-top: 12px;
+	margin-bottom: 6px;
+	padding-left: 10px;
+	font-weight: bold;
+	font-size: 14px;
+}
+.changes {
+	list-style:none;
+	margin: 5px 0;
+	padding: 0 0 0 25px;
+	font-size: 14px;
+}
+
 a img {border:none;}
-.bgimages16 li {
-	padding:2px 10px 2px 30px;
-	background-position:6px center;
-	background-repeat:no-repeat;
-	border:1px solid #ddd;
-	border-left:4px solid #999;
-	margin-bottom:2px;
+.bgimages16 .log {
+	margin-bottom: 4px;
+	background-position: 8px center;
+	background-repeat: no-repeat;
+	background-color: #1a1a1a;
+	border: 1px solid #333;
+	border-left: 4px solid #555;
+	border-radius: 0;
+	padding: 6px 12px 6px 38px;
+	background-size: 20px;
+	/* box-shadow: 2px 2px 20px rgba(255, 255, 255, 0.05); */
+}
+.bgimages16 .log:first-child {
+	border-top-right-radius: 8px;
+}
+.bgimages16 .log:last-child {
+	border-bottom-right-radius: 8px;
+}
+
+.bgimages16 img {
+	padding: 4px;
+	border-radius: 2px;
+	background-color: #ffffff;
 }
 .bugfix {background-image:url(bug-minus.png)}
 .wip {background-image:url(hard-hat-exclamation.png)}
@@ -23,57 +98,10 @@ a img {border:none;}
 .balance {background-image:url(scales.png)}
 .maptweak {background-image:url(map-pencil.png)}
 .admin {background-image:url(auction-hammer-gavel.png)}
-.sansserif {font-size:12px;}
-.commit {
-	margin-bottom:20px;
-	font-size:100%;font-weight:normal;
+
+.icons-by {
+	font-size: 14px;
+	padding: 8px 0;
+	margin-bottom: 12px;
+	text-align: center;
 }
-.changes {
-	list-style:none;
-	margin:5px 0;
-	padding:0 0 0 25px;
-	font-size:0.8em;
-}
-.date {
-	margin:10px 0;
-	color:blue;
-	border-bottom:2px solid #00f;
-	width:60%;
-	padding:2px 0;
-	font-size:1em;
-	font-weight:bold;
-}	
-.author {
-	padding-left:10px;
-	margin:0;
-	font-weight:bold;
-	font-size:0.9em;
-	}
-.drop {
-	cursor:pointer;
-	border:1px solid #999;
-	display:inline;
-	font-size:0.9em;
-	padding:1px 20px 1px 5px;
-	line-height:16px;
-}
-.hidden {display:none;}
-.indrop {
-	margin:2px 0 0 0;
-	clear:both;
-	background:#fff;
-	border:1px solid #ddd;
-	padding:5px 10px;
-	}
-.indrop p {
-	margin:0;
-	font-size:0.8em;
-	line-height:16px;
-	margin:1px 0;
-}
-.indrop img {
-	margin-right:5px;
-	vertical-align:middle;}
-.closed {background:url(chevron-expand.png) right center no-repeat;}
-.open {background:url(chevron.png) right center no-repeat;}
-.lic {font-size:9px;}
