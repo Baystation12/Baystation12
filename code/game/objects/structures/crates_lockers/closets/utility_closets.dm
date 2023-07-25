@@ -57,7 +57,8 @@
 		/obj/item/device/flashlight,
 		/obj/item/tank/oxygen_scba,
 		/obj/item/extinguisher,
-		/obj/item/clothing/head/hardhat/firefighter/Chief)
+		/obj/item/clothing/head/hardhat/firefighter/chief
+	)
 
 /*
  * Tool Closet

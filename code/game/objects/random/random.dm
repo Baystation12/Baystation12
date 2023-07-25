@@ -858,7 +858,7 @@
 				/obj/item/clothing/head/hardhat = 4,
 				/obj/item/clothing/head/hardhat/orange = 4,
 				/obj/item/clothing/head/hardhat/red = 4,
-				/obj/item/clothing/head/hardhat/dblue = 4,
+				/obj/item/clothing/head/hardhat/blue = 4,
 				/obj/item/clothing/head/ushanka = 3,
 				/obj/item/clothing/head/welding = 2)
 

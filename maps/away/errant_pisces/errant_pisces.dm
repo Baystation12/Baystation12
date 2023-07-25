@@ -184,7 +184,7 @@
 	suit = /obj/item/clothing/suit/apron/overalls
 	belt = /obj/item/material/knife/combat
 	shoes = /obj/item/clothing/shoes/jackboots
-	head = /obj/item/clothing/head/hardhat/dblue
+	head = /obj/item/clothing/head/hardhat/blue
 
 /obj/effect/computer_file_creator/ahabs_harpoon01
 	name = "ahab's harpoon file spawner - sensor dump"
