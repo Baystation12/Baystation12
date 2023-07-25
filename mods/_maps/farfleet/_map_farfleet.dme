@@ -1,0 +1,15 @@
+#ifndef MODPACK_MAP_FARFLEET
+#define MODPACK_MAP_FARFLEET
+
+#include "_map_farfleet.dm"
+#include "code/farfleet.dm"
+#include "code/farfleet_areas.dm"
+#include "code/farfleet_crew.dm"
+#include "code/farfleet_faction.dm"
+#include "code/farfleet_items.dm"
+#include "code/farfleet_presets.dm"
+#include "code/farfleet_shuttle.dm"
+#include "code/farfleet_structures.dm"
+#include "code/farfleet_turbolift.dm"
+
+#endif

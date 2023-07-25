@@ -2,6 +2,6 @@
 #define MODPACK_QUANTUM_MECHANIC
 
 #include "_quantum_mechanic.dm"
-#include "quantum_mechanic.dm"
+#include "code/quantum_mechanic.dm"
 
 #endif

@@ -152,21 +152,25 @@
 	#include "../event/iccgn_ship/icgnv_hound.dm" // SIERRA TODO: Пофиксить или удалить
 
 	// USED MODS
-	// #include "../../mods/species/resomi/_resomi.dme"
-	// #include "../../mods/species/tajara/_tajara.dme"
-	// #include "../../mods/screentips/_screentips.dme"
-	// #include "../../mods/fancy_sofas/_fancy_sofas.dme"
-	// #include "../../mods/quantum_mechanic/_quantum_mechanic.dme"
-	// #include "../../mods/machinery/atmos_ret_field/_atm_ret_field.dme"
-	// #include "../../mods/don_loadout/_don_loadout.dme"
-	// #include "../../mods/leroy_beasts/_leroy_beasts.dme"
-	// #include "../../mods/maps/liberia/_map_liberia.dme"
+	// Keep them in ascending alphabetical order, please
+
+	// #include "../../mods/_maps/liberia/_map_liberia.dme"
+	#include "../../mods/_maps/sentinel/_map_sentinel.dme"
+	#include "../../mods/_maps/farfleet/_map_farfleet.dme"
+	// #include "../../mods/atmos_ret_field/_atm_ret_field.dme"
 	// #include "../../mods/bluespace_kitty/_bluespace_kitty.dme"
-	// #include "../../mods/maps/sentinel/_map_sentinel.dme"
-	// #include "../../mods/skills/bureaucracy/legalese_language/_legalese.dme"
-	// #include "../../mods/maps/farfleet/_map_farfleet.dme"
+	// #include "../../mods/don_loadout/_don_loadout.dme"
+	// #include "../../mods/fancy_sofas/_fancy_sofas.dme"
+	// #include "../../mods/legalese_language/_legalese.dme"
+	// #include "../../mods/leroy_beasts/_leroy_beasts.dme"
+	// #include "../../mods/quantum_mechanic/_quantum_mechanic.dme"
+	// #include "../../mods/resomi/_resomi.dme"
+	// #include "../../mods/screentips/_screentips.dme"
+	// #include "../../mods/tajara/_tajara.dme"
 
 	// UNUSED MODS
+	// Keep them in ascending alphabetical order too, please
+
 	// #include "../../mods/_events/mortar/_mortar.dme"
 
 	// Почему UNUSED MODS стоит хранить?

@@ -2,6 +2,6 @@
 #define MODPACK_LEROY_BEASTS
 
 #include "_leroy_beasts.dm"
-#include "beasts.dm"
+#include "code/beasts.dm"
 
 #endif

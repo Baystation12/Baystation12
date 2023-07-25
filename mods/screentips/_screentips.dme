@@ -3,9 +3,9 @@
 
 #include "_screentips.dm"
 
-#include "handler.dm"
-#include "hud.dm"
-#include "preference.dm"
-#include "screentip.dm"
+#include "code/handler.dm"
+#include "code/hud.dm"
+#include "code/preference.dm"
+#include "code/screentip.dm"
 
 #endif

@@ -1,0 +1,14 @@
+#ifndef MODPACK_MAP_SENTINEL
+#define MODPACK_MAP_SENTINEL
+
+#include "_map_sentinel.dm"
+#include "code/sentinel.dm"
+#include "code/sentinel_areas.dm"
+#include "code/sentinel_crew.dm"
+#include "code/sentinel_items.dm"
+#include "code/sentinel_presets.dm"
+#include "code/sentinel_shuttle.dm"
+#include "code/sentinel_structures.dm"
+#include "code/sentinel_turbolift.dm"
+
+#endif

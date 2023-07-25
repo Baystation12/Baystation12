@@ -3,7 +3,7 @@
 
 #include "_fancy_sofas.dm"
 
-#include "roundedchair.dm"
-#include "sofa.dm"
+#include "code/roundedchair.dm"
+#include "code/sofa.dm"
 
 #endif

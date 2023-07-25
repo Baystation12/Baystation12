@@ -86,6 +86,7 @@
 #include "code\__defines\xenoarcheaology.dm"
 #include "code\__defines\ZAS.dm"
 #include "code\__defines\zmimic.dm"
+#include "code\__defines\~mods\~master_defines.dm"
 #include "code\_global_vars\edible.dm"
 #include "code\_global_vars\logging.dm"
 #include "code\_global_vars\mapping.dm"
