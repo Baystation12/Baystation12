@@ -274,6 +274,41 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	return FALSE
 
 
+/mob/living/use_weapon(obj/item/weapon, mob/living/user, list/click_params)
+	if (weapon.force > 0 && get_max_health() && !HAS_FLAGS(weapon.item_flags, ITEM_FLAG_NO_BLUDGEON))
+		user.setClickCooldown(user.get_attack_speed(weapon))
+		user.do_attack_animation(src)
+		var/damage_flags = weapon.damage_flags()
+		if (!can_damage_health(weapon.force, weapon.damtype, damage_flags))
+			playsound(src, weapon.hitsound, 50, TRUE)
+			user.visible_message(
+				SPAN_WARNING("\The [user] hits \the [src] with \a [weapon], but it bounces off!"),
+				SPAN_WARNING("You hit \the [src] with \the [weapon], but it bounces off!"),
+				exclude_mobs = list(src)
+			)
+			show_message(
+				SPAN_WARNING("\The [user] hits you with \a [weapon], but it bounces off!"),
+				VISIBLE_MESSAGE,
+				SPAN_WARNING("You feel something bounce off you harmlessly.")
+			)
+			return TRUE
+		playsound(src, weapon.hitsound, 75, TRUE)
+		user.visible_message(
+			SPAN_DANGER("\The [user] hits \the [src] with \a [weapon]!"),
+			SPAN_DANGER("You hit \the [src] with \the [weapon]!"),
+			exclude_mobs = list(src)
+		)
+		show_message(
+			SPAN_DANGER("\The [user] hits you with \a [weapon]!"),
+			VISIBLE_MESSAGE,
+			SPAN_DANGER("You feel something hit you!")
+		)
+		general_health_adjustment(weapon.force, weapon.damtype, damage_flags, user.zone_sel.selecting, weapon)
+		return TRUE
+
+	return ..()
+
+
 /**
  * Interaction handler for using an item on this atom with a non-harm intent, or if `use_weapon()` did not resolve an
  * action. Generally, this is for any standard interactions with items.
