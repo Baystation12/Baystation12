@@ -56,6 +56,7 @@ else {\
 if(MOB.is_processing == SSmobs) {\
 	MOB.is_processing = null;\
 	SSmobs.mob_list -= MOB;\
+	SSmobs.queue -= MOB;\
 }\
 else if (MOB.is_processing) {\
 	crash_with("Failed to stop processing mob. Being processed by [MOB.is_processing] instead.")\
