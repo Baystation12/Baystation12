@@ -288,11 +288,26 @@
 	var/watertemp = "normal"	//freezing, normal, or boiling
 	var/is_washing = 0
 	var/list/temperature_settings = list("normal" = 310, "boiling" = T0C+100, "freezing" = T0C)
+	var/working_sound = 'sound/machines/shower.ogg'
+	var/datum/sound_token/sound_token
+	var/sound_id
 
 /obj/structure/hygiene/shower/New()
 	..()
 	create_reagents(50)
 
+/obj/structure/hygiene/shower/proc/update_sound()
+	if(!working_sound)
+		return
+	if(!sound_id)
+		sound_id = "[type]_[sequential_id(/obj/structure/hygiene/shower)]"
+	if(on)
+		var/volume = 20
+		if(!sound_token)
+			sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, working_sound, volume = volume, range = 10)
+		sound_token.SetVolume(volume)
+	else if(sound_token)
+		QDEL_NULL(sound_token)
 //add heat controls? when emagged, you can freeze to death in it?
 
 /obj/effect/mist
@@ -306,6 +321,7 @@
 /obj/structure/hygiene/shower/attack_hand(mob/M)
 	on = !on
 	update_icon()
+	update_sound()
 	if(on)
 		if (M.loc == loc)
 			wash(M)
