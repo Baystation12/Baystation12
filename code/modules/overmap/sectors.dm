@@ -35,14 +35,6 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 	find_z_levels()     // This populates map_z and assigns z levels to the ship.
 	register_z_levels() // This makes external calls to update global z level information.
 
-	if(HAS_FLAGS(sector_flags, OVERMAP_SECTOR_KNOWN))
-		LAZYADD(GLOB.known_overmap_sectors, src)
-		layer = ABOVE_LIGHTING_LAYER
-		plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		for(var/obj/machinery/computer/ship/helm/H as anything in GLOB.overmap_helm_computers)
-			H.add_known_sector(src)
-
-
 	if(!GLOB.using_map.overmap_z)
 		build_overmap()
 
@@ -63,6 +55,13 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 
 	for(var/obj/effect/overmap/event/E in loc)
 		qdel(E)
+
+	if(HAS_FLAGS(sector_flags, OVERMAP_SECTOR_KNOWN))
+		LAZYADD(GLOB.known_overmap_sectors, src)
+		layer = ABOVE_LIGHTING_LAYER
+		plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		for(var/obj/machinery/computer/ship/helm/H as anything in GLOB.overmap_helm_computers)
+			H.add_known_sector(src)
 
 	docking_codes = "[ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))]"
 
