@@ -1,5 +1,0 @@
-author: SuhEugene
-delete-after: true
-changes:
-  - bugfix: Fixed sensors I've broken.
-  - bugfix: Fixed the sensors not working when the shuttle is docked.
