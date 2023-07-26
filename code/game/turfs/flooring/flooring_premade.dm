@@ -32,6 +32,15 @@
 	light_max_bright = 2
 	light_color = COLOR_RED
 
+/turf/simulated/floor/selfestructgrid
+	name = "self-destruct mainframe floor"
+	icon = 'icons/turf/flooring/circuit.dmi'
+	icon_state = "rcircuit_off"
+	initial_flooring = /singleton/flooring/reinforced/circuit/selfdestruct
+	light_outer_range = 2
+	light_max_bright = 2
+	light_color = COLOR_BLACK
+
 /turf/simulated/floor/wood
 	name = "wooden floor"
 	icon = 'icons/turf/flooring/wood.dmi'
