@@ -251,7 +251,7 @@ var/global/const/NO_EMAG_ACT = -50
 /obj/item/card/id/OnTopic(mob/user, list/href_list)
 	if(href_list["look_at_id"])
 		if(istype(user))
-			user.examinate(src)
+			examinate(user, src)
 			return TOPIC_HANDLED
 
 /obj/item/card/id/examine(mob/user, distance)

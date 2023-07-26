@@ -84,7 +84,7 @@
 /obj/item/device/holowarrant/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	user.visible_message(SPAN_NOTICE("[user] holds up a warrant projector and shows the contents to [M]."), \
 			SPAN_NOTICE("You show the warrant to [M]."))
-	M.examinate(src)
+	examinate(M, src)
 
 /obj/item/device/holowarrant/on_update_icon()
 	if(active)
