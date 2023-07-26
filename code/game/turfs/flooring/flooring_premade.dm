@@ -23,7 +23,7 @@
 	light_max_bright = 3
 	light_color = COLOR_GREEN
 
-/turf/simulated/floor/blackgrid
+/turf/simulated/floor/redgrid
 	name = "mainframe floor"
 	icon = 'icons/turf/flooring/circuit.dmi'
 	icon_state = "rcircuit"
