@@ -80,6 +80,7 @@
 	service_shoes = /obj/item/clothing/shoes/dress
 	service_heels = /obj/item/clothing/shoes/dressheels
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/garrison
+	service_extra = list(/obj/item/clothing/suit/solgov/fleet_sweater)
 
 	dress_under = /obj/item/clothing/under/solgov/service/fleet
 	dress_skirt = /obj/item/clothing/under/solgov/service/fleet/skirt
