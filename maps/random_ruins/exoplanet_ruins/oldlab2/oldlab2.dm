@@ -7,6 +7,7 @@
 	spawn_cost = 1
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
 	ruin_tags = RUIN_HUMAN
+	ban_ruins = list(/datum/map_template/ruin/exoplanet/oldlab)
 
 	// Areas //
 
@@ -63,7 +64,7 @@
 /area/map_template/oldlab2/living6
 	name = "\improper Living Quarters"
 	icon_state = "surgery"
-	
+
 /area/map_template/oldlab2/cso
 	name = "\improper CSO Office"
 	icon_state = "surgery"
@@ -75,35 +76,35 @@
 /area/map_template/oldlab2/mess
 	name = "\improper Mess Hall"
 	icon_state = "surgery"
-	
+
 /area/map_template/oldlab2/bathroom
 	name = "\improper Bathroom"
 	icon_state = "surgery"
-	
+
 /area/map_template/oldlab2/server
 	name = "\improper Archives"
 	icon_state = "surgery"
-	
+
 /area/map_template/oldlab2/fixedsecurity
 	name = "\improper Security Office"
 	icon_state = "surgery"
-	
+
 /area/map_template/oldlab2/test1
 	name = "\improper Testing Lab"
 	icon_state = "surgery"
-	
+
 /area/map_template/oldlab2/test2
 	name = "\improper Special Testing Lab"
 	icon_state = "surgery"
-	
+
 /area/map_template/oldlab2/mess
 	name = "\improper Mess Hall"
 	icon_state = "surgery"
-	
+
 /area/map_template/oldlab2/engineerhall
 	name = "\improper Engineering Hall"
 	icon_state = "surgery"
-	
+
 /area/map_template/oldlab2/lab
 	name = "\improper Materials Lab"
 	icon_state = "surgery"
