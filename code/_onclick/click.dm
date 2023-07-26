@@ -282,7 +282,7 @@
  */
 /atom/proc/ShiftClick(mob/user)
 	if (user.client && user.client.eye == user)
-		user.examinate(src)
+		examinate(user, src)
 		return TRUE
 	return FALSE
 

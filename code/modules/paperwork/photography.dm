@@ -41,7 +41,7 @@ var/global/photo_count = 0
 	id = photo_count++
 
 /obj/item/photo/attack_self(mob/user as mob)
-	user.examinate(src)
+	examinate(user, src)
 
 /obj/item/photo/on_update_icon()
 	overlays.Cut()

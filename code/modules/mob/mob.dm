@@ -324,60 +324,11 @@
 	return
 
 
-/mob/verb/examinate(atom/A as mob|obj|turf in view())
+/mob/verb/ExaminateVerb(atom/A as mob|obj|turf in view())
 	set name = "Examine"
 	set category = "IC"
 
-	if((is_blind(src) || usr && usr.stat) && !isobserver(src))
-		to_chat(src, SPAN_NOTICE("Something is there but you can't see it."))
-		return 1
-	face_atom(A)
-	if(!isghost(src))
-		if(A.loc != src || IsHolding(A))
-			for(var/mob/M in viewers(4, src))
-				if(M == src)
-					continue
-				if(M.client && M.client.get_preference_value(/datum/client_preference/examine_messages) == GLOB.PREF_SHOW)
-					if(M.is_blind() || is_invisible_to(M))
-						continue
-					to_chat(M, SPAN_SUBTLE("<b>\The [src]</b> looks at \the [A]."))
-	var/distance = INFINITY
-	if(isghost(src) || stat == DEAD)
-		distance = 0
-	else
-		var/turf/source_turf = get_turf(src)
-		var/turf/target_turf = get_turf(A)
-		if(source_turf && source_turf.z == target_turf?.z)
-			distance = get_dist(source_turf, target_turf)
-	if(!A.examine(src, distance))
-		crash_with("Improper /examine() override: [log_info_line(A)]")
-	if(get_skill_value(SKILL_FORENSICS) >= SKILL_EXPERIENCED && get_dist(src, A) <= (get_skill_value(SKILL_FORENSICS) - SKILL_TRAINED))
-		var/clue
-		if(LAZYLEN(A.suit_fibers))
-			to_chat(src, SPAN_NOTICE("You notice some fibers embedded in \the [A]."))
-			clue = 1
-		if(LAZYLEN(A.fingerprints))
-			to_chat(src, SPAN_NOTICE("You notice a partial print on \the [A]."))
-			clue = 1
-		if(LAZYLEN(A.gunshot_residue))
-			if(isliving(src))
-				var/mob/living/M = src
-				if(M.isSynthetic())
-					to_chat(src, SPAN_NOTICE("You notice faint black residue on \the [A]."))
-				else
-					to_chat(src, SPAN_NOTICE("You notice a faint acrid smell coming from \the [A]."))
-			else if(isrobot(src))
-				to_chat(src, SPAN_NOTICE("You notice faint black residue on \the [A]."))
-			else
-				to_chat(src, SPAN_NOTICE("You notice a faint acrid smell coming from \the [A]."))
-			clue = 1
-		//Noticing wiped blood is a bit harder
-		if((get_skill_value(SKILL_FORENSICS) >= SKILL_MASTER) && LAZYLEN(A.blood_DNA))
-			to_chat(src, SPAN_WARNING("You notice faint blood traces on \The [A]."))
-			clue = 1
-		if(clue && has_client_color(/datum/client_color/noir))
-			playsound_local(null, pick('sound/effects/clue1.ogg','sound/effects/clue2.ogg'), 60, is_global = TRUE)
-
+	examinate(usr, A)
 
 /mob/verb/pointed(atom/A as mob|obj|turf in view())
 	set name = "Point To"

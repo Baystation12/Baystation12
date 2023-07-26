@@ -217,7 +217,7 @@
 		user.visible_message("\The [user] crumples \the [src] into a ball!")
 		icon_state = "scrap"
 		return
-	user.examinate(src)
+	examinate(user, src)
 
 /obj/item/paper/attack_ai(mob/living/silicon/ai/user)
 	show_content(user)
@@ -226,7 +226,7 @@
 	if(user.zone_sel.selecting == BP_EYES)
 		user.visible_message(SPAN_NOTICE("You show the paper to [M]. "), \
 			SPAN_NOTICE(" [user] holds up a paper and shows it to [M]. "))
-		M.examinate(src)
+		examinate(M, src)
 
 	else if(user.zone_sel.selecting == BP_MOUTH) // lipstick wiping
 		if(ishuman(M))

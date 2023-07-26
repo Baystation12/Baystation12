@@ -33,7 +33,7 @@
 		if(istype(user))
 			var/mob/living/carbon/human/H = get_holder_of_type(src, /mob/living/carbon/human)
 			if(H.Adjacent(user))
-				user.examinate(src)
+				examinate(user, src)
 				return TOPIC_HANDLED
 
 /obj/item/clothing/ring/material/get_examine_line()

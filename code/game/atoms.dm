@@ -366,7 +366,8 @@
  * - `infix` String - String that is appended immediately after the atom's name.
  * - `suffix` String - Additional string appended after the atom's name and infix.
  *
- * Returns boolean.
+ * Returns boolean - The caller always expects TRUE
+ *  This is used rather than SHOULD_CALL_PARENT as it enforces that subtypes of a type that explicitly returns still call parent
  */
 /atom/proc/examine(mob/user, distance, infix = "", suffix = "")
 	//This reformat names to get a/an properly working on item descriptions when they are bloody
@@ -388,6 +389,13 @@
 	else if (distance <= 1 && IsHeatSource())
 		to_chat(user, SPAN_WARNING("It's hot to the touch."))
 
+	return TRUE
+
+/// Works same as /atom/proc/Examine(), only this output comes immediately after any and all made by /atom/proc/Examine()
+/atom/proc/LateExamine(mob/user, distance)
+	SHOULD_NOT_SLEEP(TRUE)
+
+	user.ForensicsExamination(src, distance)
 	return TRUE
 
 /**

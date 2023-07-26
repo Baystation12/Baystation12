@@ -55,7 +55,7 @@
 	if(!istype(user))
 		return
 	if(user.client && user.client.inquisitive_ghost)
-		user.examinate(src)
+		examinate(user, src)
 	return
 
 

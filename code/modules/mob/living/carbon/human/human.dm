@@ -385,7 +385,7 @@
 	if (href_list["lookitem"])
 		var/obj/item/I = locate(href_list["lookitem"])
 		if(I)
-			src.examinate(I)
+			examinate(src, I)
 			return TOPIC_HANDLED
 	return ..()
 
