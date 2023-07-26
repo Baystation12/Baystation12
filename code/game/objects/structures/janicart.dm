@@ -1,7 +1,7 @@
 /obj/structure/janitorialcart
 	name = "janitorial cart"
 	desc = "The ultimate in janitorial carts! Has space for water, mops, signs, trash bags, and more!"
-	icon = 'icons/obj/janitor.dmi'
+	icon = 'icons/obj/carts.dmi'
 	icon_state = "cart"
 	anchored = FALSE
 	density = TRUE

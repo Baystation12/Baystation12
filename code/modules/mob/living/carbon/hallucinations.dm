@@ -221,7 +221,7 @@
 	number = 2
 
 /datum/hallucination/mirage/money/generate_mirage()
-	return image('icons/obj/items.dmi', "spacecash[pick(1000,500,200,100,50)]", layer = BELOW_TABLE_LAYER)
+	return image('icons/obj/money.dmi', "spacecash[pick(1000,500,200,100,50)]", layer = BELOW_TABLE_LAYER)
 
 //Blood and aftermath of firefight
 /datum/hallucination/mirage/carnage
@@ -234,7 +234,7 @@
 		I.color = COLOR_BLOOD_HUMAN
 		return I
 	else
-		var/image/I = image('icons/obj/ammo.dmi', "s-casing-spent", layer = BELOW_TABLE_LAYER)
+		var/image/I = image('icons/obj/weapons/ammo.dmi', "s-casing-spent", layer = BELOW_TABLE_LAYER)
 		I.layer = BELOW_TABLE_LAYER
 		I.dir = pick(GLOB.alldirs)
 		I.pixel_x = rand(-10,10)

@@ -4,7 +4,7 @@
 
 /obj/item/fossil
 	name = "Fossil"
-	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon = 'icons/obj/xenoarchaeology_finds.dmi'
 	icon_state = "bone"
 	desc = "It's a fossil."
 	var/animal = 1
@@ -50,7 +50,7 @@
 
 /obj/skeleton
 	name = "Incomplete skeleton"
-	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon = 'icons/obj/xenoarchaeology_finds.dmi'
 	icon_state = "uskel"
 	desc = "Incomplete skeleton."
 	var/bnum = 1

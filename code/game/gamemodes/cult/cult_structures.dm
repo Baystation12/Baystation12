@@ -17,7 +17,7 @@
 /obj/structure/cult/pylon
 	name = "pylon"
 	desc = "A floating crystal that hums with an unearthly energy."
-	icon = 'icons/obj/pylon.dmi'
+	icon = 'icons/obj/structures/pylon.dmi'
 	icon_state = "pylon"
 	light_max_bright = 0.5
 	light_inner_range = 1

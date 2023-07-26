@@ -17,7 +17,7 @@
 /obj/item/ore/strangerock
 	name = "strange rock"
 	desc = "Seems to have some unusal strata evident throughout it."
-	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon = 'icons/obj/xenoarchaeology_finds.dmi'
 	icon_state = "strange"
 	origin_tech = list(TECH_MATERIAL = 5)
 

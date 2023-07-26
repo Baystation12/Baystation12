@@ -5,7 +5,7 @@
 /obj/item/device/flashlight
 	name = "flashlight"
 	desc = "A hand-held emergency light."
-	icon = 'icons/obj/lighting.dmi'
+	icon = 'icons/obj/tools/flashlights.dmi'
 	icon_state = "flashlight"
 	item_state = "flashlight"
 	w_class = ITEM_SIZE_SMALL
@@ -180,7 +180,6 @@
 /obj/item/device/flashlight/lantern
 	name = "lantern"
 	desc = "A mining lantern."
-	icon = 'icons/obj/lighting.dmi'
 	icon_state = "lantern"
 	item_state = "lantern"
 	force = 10
@@ -217,6 +216,7 @@
 /obj/item/device/flashlight/lamp
 	name = "desk lamp"
 	desc = "A desk lamp with an adjustable mount."
+	icon = 'icons/obj/structures/desklamps.dmi'
 	icon_state = "lamp"
 	item_state = "lamp"
 	w_class = ITEM_SIZE_LARGE
@@ -249,6 +249,7 @@
 	desc = "A red standard-issue flare. There are instructions on the side reading 'pull cord, make light'."
 	w_class = ITEM_SIZE_TINY
 	light_color = "#e58775"
+	icon = 'icons/obj/glowsticks.dmi'
 	icon_state = "flare"
 	item_state = "flare"
 	action_button_name = null //just pull it manually, neckbeard.
@@ -327,6 +328,7 @@
 	desc = "A military-grade glowstick."
 	w_class = 2.0
 	color = "#49f37c"
+	icon = 'icons/obj/glowsticks.dmi'
 	icon_state = "glowstick"
 	item_state = "glowstick"
 	randpixel = 12
@@ -397,7 +399,7 @@
 	gender = PLURAL
 	name = "glowing slime extract"
 	desc = "A glowing ball of what appears to be amber."
-	icon = 'icons/obj/lighting.dmi'
+	icon = 'icons/obj/structures/lighting.dmi'
 	icon_state = "floor1" //not a slime extract sprite but... something close enough!
 	item_state = "slime"
 	w_class = ITEM_SIZE_TINY
@@ -434,7 +436,6 @@
 /obj/item/device/flashlight/lamp/lava
 	name = "lava lamp"
 	desc = "A kitchy throwback decorative light. Noir Edition."
-	icon = 'icons/obj/lighting.dmi'
 	icon_state = "lavalamp"
 	on = 0
 	action_button_name = "Toggle lamp"

@@ -1,6 +1,6 @@
 /obj/item/organ/internal/diona
 	name = "diona nymph"
-	icon = 'icons/obj/objects.dmi'
+	icon = 'icons/mob/gestalt.dmi'
 	icon_state = "nymph"
 	organ_tag = "special" // Turns into a nymph instantly, no transplanting possible.
 

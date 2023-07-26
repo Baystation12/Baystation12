@@ -3,36 +3,42 @@
 	desc = "The by-product of human farming."
 	singular_name = "human skin piece"
 	icon_state = "sheet-hide"
+	icon = 'icons/obj/materials/hides.dmi'
 
 /obj/item/stack/animalhide/corgi
 	name = "corgi hide"
 	desc = "The by-product of corgi farming."
 	singular_name = "corgi hide piece"
 	icon_state = "sheet-corgi"
+	icon = 'icons/obj/materials/hides.dmi'
 
 /obj/item/stack/animalhide/cat
 	name = "cat hide"
 	desc = "The by-product of cat farming."
 	singular_name = "cat hide piece"
 	icon_state = "sheet-cat"
+	icon = 'icons/obj/materials/hides.dmi'
 
 /obj/item/stack/animalhide/monkey
 	name = "monkey hide"
 	desc = "The by-product of monkey farming."
 	singular_name = "monkey hide piece"
 	icon_state = "sheet-monkey"
+	icon = 'icons/obj/materials/hides.dmi'
 
 /obj/item/stack/animalhide/lizard
 	name = "lizard skin"
 	desc = "Sssssss..."
 	singular_name = "lizard skin piece"
 	icon_state = "sheet-lizard"
+	icon = 'icons/obj/materials/hides.dmi'
 
 /obj/item/stack/animalhide/xeno
 	name = "alien hide"
 	desc = "The skin of a terrible creature."
 	singular_name = "alien hide piece"
 	icon_state = "sheet-xeno"
+	icon = 'icons/obj/materials/hides.dmi'
 
 //don't see anywhere else to put these, maybe together they could be used to make the xenos suit?
 /obj/item/stack/xenochitin
@@ -59,12 +65,14 @@
 	desc = "This hide was stripped of it's hair, but still needs tanning."
 	singular_name = "hairless hide piece"
 	icon_state = "sheet-hairlesshide"
+	icon = 'icons/obj/materials/hides.dmi'
 
 /obj/item/stack/wetleather
 	name = "wet leather"
 	desc = "This leather has been cleaned but still needs to be dried."
 	singular_name = "wet leather piece"
 	icon_state = "sheet-wetleather"
+	icon = 'icons/obj/materials/hides.dmi'
 	var/wetness = 30 //Reduced when exposed to high temperautres
 	var/drying_threshold_temperature = 500 //Kelvin to start drying
 

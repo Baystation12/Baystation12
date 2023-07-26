@@ -1,5 +1,5 @@
 /obj/machinery/computer/air_control
-	icon = 'icons/obj/computer.dmi'
+	icon = 'icons/obj/machines/computer.dmi'
 	icon_keyboard = "atmos_key"
 	icon_screen = "tank"
 
@@ -260,7 +260,7 @@
 	radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 
 /obj/machinery/computer/air_control/fuel_injection
-	icon = 'icons/obj/computer.dmi'
+	icon = 'icons/obj/machines/computer.dmi'
 	icon_screen = "alert:0"
 	machine_name = "injector control"
 	machine_desc = "An atmosphere monitoring console, modified specifically for controlling gas injectors."
@@ -328,7 +328,7 @@
 	..()
 
 /obj/machinery/computer/air_control/supermatter_core
-	icon = 'icons/obj/computer.dmi'
+	icon = 'icons/obj/machines/computer.dmi'
 	frequency = 1438
 	out_pressure_mode = 1
 	machine_name = "core control"

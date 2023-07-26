@@ -1,7 +1,7 @@
 /obj/machinery/giga_drill
 	name = "alien drill"
 	desc = "A giant, alien drill mounted on long treads."
-	icon = 'icons/obj/mining.dmi'
+	icon = 'icons/obj/gigadrill.dmi'
 	icon_state = "gigadrill"
 	var/active = 0
 	var/drill_time = 10

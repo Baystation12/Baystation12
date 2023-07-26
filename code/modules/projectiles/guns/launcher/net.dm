@@ -11,7 +11,7 @@
 /obj/item/net_shell
 	name = "net gun shell"
 	desc = "A casing containing an autodeploying net for use in a net gun. Kind of looks like a flash light."
-	icon = 'icons/obj/ammo.dmi'
+	icon = 'icons/obj/weapons/ammo.dmi'
 	icon_state = "netshell"
 
 /obj/item/net_shell/attackby(obj/item/gun/launcher/net/I, mob/user)

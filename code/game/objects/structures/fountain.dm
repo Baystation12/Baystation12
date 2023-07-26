@@ -1,7 +1,7 @@
 /obj/structure/fountain
 	name = "fountain"
 	desc = "A beautifully constructed fountain."
-	icon = 'icons/obj/fountain.dmi'
+	icon = 'icons/obj/structures/fountain.dmi'
 	icon_state = "fountain_g"
 	density = TRUE
 	anchored = TRUE

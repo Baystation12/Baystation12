@@ -1,5 +1,5 @@
 /obj/item/material/kitchen
-	icon = 'icons/obj/kitchen.dmi'
+	icon = 'icons/obj/machines/kitchen.dmi'
 	worth_multiplier = 1.1
 
 /*

@@ -35,7 +35,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 	name = "holopad"
 	desc = "It's a floor-mounted device for projecting holographic images."
 	icon_state = "holopad-B0"
-
+	icon = 'icons/obj/machines/holopads.dmi'
 	layer = ABOVE_TILE_LAYER
 
 	var/power_per_hologram = 500 //per usage per hologram
@@ -494,7 +494,7 @@ Holographic project of everything else.
 /obj/machinery/hologram/projector
 	name = "hologram projector"
 	desc = "It makes a hologram appear...with magnets or something..."
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/structures/coatrack.dmi'
 	icon_state = "hologram0"
 
 /obj/machinery/hologram/holopad/longrange

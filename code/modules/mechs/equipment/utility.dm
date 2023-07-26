@@ -2,7 +2,7 @@
 /obj/structure/cargopile
 	name = "spilled cargo"
 	desc = "The jetsam of some unfortunate power loader."
-	icon = 'icons/obj/rubble.dmi'
+	icon = 'icons/obj/structures/rubble.dmi'
 	icon_state = "base"
 	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
 	atom_flags = ATOM_FLAG_CLIMBABLE

@@ -4,7 +4,7 @@
 /obj/structure/wall_frame
 	name = "low wall"
 	desc = "A low wall section which serves as the base of windows, amongst other things."
-	icon = 'icons/obj/wall_frame.dmi'
+	icon = 'icons/obj/structures/wall_frame.dmi'
 	icon_state = "frame"
 
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE | ATOM_FLAG_CAN_BE_PAINTED | ATOM_FLAG_ADJACENT_EXCEPTION
@@ -144,17 +144,17 @@
 
 	for(var/i = 1 to 4)
 		if(other_connections[i] != "0")
-			I = image('icons/obj/wall_frame.dmi', "frame_other[connections[i]]", dir = SHIFTL(1, i - 1))
+			I = image('icons/obj/structures/wall_frame.dmi', "frame_other[connections[i]]", dir = SHIFTL(1, i - 1))
 		else
-			I = image('icons/obj/wall_frame.dmi', "frame[connections[i]]", dir = SHIFTL(1, i - 1))
+			I = image('icons/obj/structures/wall_frame.dmi', "frame[connections[i]]", dir = SHIFTL(1, i - 1))
 		overlays += I
 
 	if(stripe_color)
 		for(var/i = 1 to 4)
 			if(other_connections[i] != "0")
-				I = image('icons/obj/wall_frame.dmi', "stripe_other[connections[i]]", dir = SHIFTL(1, i - 1))
+				I = image('icons/obj/structures/wall_frame.dmi', "stripe_other[connections[i]]", dir = SHIFTL(1, i - 1))
 			else
-				I = image('icons/obj/wall_frame.dmi', "stripe[connections[i]]", dir = SHIFTL(1, i - 1))
+				I = image('icons/obj/structures/wall_frame.dmi', "stripe[connections[i]]", dir = SHIFTL(1, i - 1))
 			I.color = stripe_color
 			overlays += I
 

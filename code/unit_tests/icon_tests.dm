@@ -100,7 +100,7 @@
 	name = "ICON STATE - Posters Shall Have Icon States"
 
 /datum/unit_test/icon_test/posters_shall_have_icon_states/start_test()
-	var/contraband_icons = icon_states('icons/obj/contraband.dmi')
+	var/contraband_icons = icon_states('icons/obj/structures/contraband.dmi')
 	var/list/invalid_posters = list()
 
 	for(var/poster_type in subtypesof(/singleton/poster))

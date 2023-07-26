@@ -2,7 +2,7 @@
 	name = "half-pint glass"
 	base_name = "glass"
 	base_icon = "square"
-	icon = 'icons/obj/drink_glasses/square.dmi'
+	icon = 'icons/obj/food/drink_glasses/square.dmi'
 	desc = "Your standard drinking glass."
 	filling_states = "20;40;60;80;100"
 	volume = 30
@@ -14,7 +14,7 @@
 	desc = "A robust tumbler with a thick, weighted bottom."
 	base_name = "glass"
 	base_icon = "rocks"
-	icon = 'icons/obj/drink_glasses/rocks.dmi'
+	icon = 'icons/obj/food/drink_glasses/rocks.dmi'
 	filling_states = "25;50;75;100"
 	volume = 20
 	possible_transfer_amounts = "5;10;20"
@@ -25,7 +25,7 @@
 	desc = "Stemware with an untapered conical bowl."
 	base_name = "glass"
 	base_icon = "shake"
-	icon = 'icons/obj/drink_glasses/shake.dmi'
+	icon = 'icons/obj/food/drink_glasses/shake.dmi'
 	filling_states = "25;50;75;100"
 	volume = 30
 	possible_transfer_amounts = "5;10;15;30"
@@ -36,7 +36,7 @@
 	desc = "Fragile stemware with a stout conical bowl. Don't spill."
 	base_name = "glass"
 	base_icon = "cocktail"
-	icon = 'icons/obj/drink_glasses/cocktail.dmi'
+	icon = 'icons/obj/food/drink_glasses/cocktail.dmi'
 	filling_states = "33;66;100"
 	volume = 15
 	possible_transfer_amounts = "5;10;15"
@@ -47,7 +47,7 @@
 	desc = "A small glass, designed so that its contents can be consumed in one gulp."
 	base_name = "shot"
 	base_icon = "shot"
-	icon = 'icons/obj/drink_glasses/shot.dmi'
+	icon = 'icons/obj/food/drink_glasses/shot.dmi'
 	filling_states = "33;66;100"
 	volume = 5
 	matter = list(MATERIAL_GLASS = 15)
@@ -58,7 +58,7 @@
 	name = "pint glass"
 	base_name = "pint"
 	base_icon = "pint"
-	icon = 'icons/obj/drink_glasses/pint.dmi'
+	icon = 'icons/obj/food/drink_glasses/pint.dmi'
 	filling_states = "16;33;50;66;83;100"
 	volume = 60
 	matter = list(MATERIAL_GLASS = 125)
@@ -70,7 +70,7 @@
 	desc = "A heavy mug with thick walls."
 	base_name = "mug"
 	base_icon = "mug"
-	icon = 'icons/obj/drink_glasses/mug.dmi'
+	icon = 'icons/obj/food/drink_glasses/mug.dmi'
 	filling_states = "25;50;75;100"
 	volume = 40
 	possible_transfer_amounts = "5;10;20;40"
@@ -81,7 +81,7 @@
 	desc = "A piece of elegant stemware."
 	base_name = "glass"
 	base_icon = "wine"
-	icon = 'icons/obj/drink_glasses/wine.dmi'
+	icon = 'icons/obj/food/drink_glasses/wine.dmi'
 	filling_states = "20;40;60;80;100"
 	volume = 25
 	possible_transfer_amounts = "5;10;15;25"
@@ -92,7 +92,7 @@
 	desc = "A piece of very elegant stemware."
 	base_name = "glass"
 	base_icon = "flute"
-	icon = 'icons/obj/drink_glasses/flute.dmi'
+	icon = 'icons/obj/food/drink_glasses/flute.dmi'
 	filling_states = "20;40;60;80;100"
 	volume = 25
 	possible_transfer_amounts = "5;10;15;25"
@@ -103,7 +103,7 @@
 	desc = "A handled glass pitcher."
 	base_name = "pitcher"
 	base_icon = "carafe"
-	icon = 'icons/obj/drink_glasses/carafe.dmi'
+	icon = 'icons/obj/food/drink_glasses/carafe.dmi'
 	filling_states = "10;20;30;40;50;60;70;80;90;100"
 	volume = 120
 	matter = list(MATERIAL_GLASS = 250)
@@ -114,7 +114,7 @@
 /obj/item/reagent_containers/food/drinks/glass2/coffeecup
 	name = "coffee cup"
 	desc = "A plain white coffee cup."
-	icon = 'icons/obj/drink_glasses/coffecup.dmi'
+	icon = 'icons/obj/food/drink_glasses/coffecup.dmi'
 	icon_state = "coffeecup"
 	item_state = "coffee"
 	volume = 30
@@ -231,7 +231,7 @@
 /obj/item/reagent_containers/food/drinks/glass2/coffeecup/teacup
 	name = "teacup"
 	desc = "A plain white porcelain teacup."
-	icon = 'icons/obj/drink_glasses/teacup.dmi'
+	icon = 'icons/obj/food/drink_glasses/teacup.dmi'
 	icon_state = "teacup"
 	item_state = "coffee"
 	volume = 20
@@ -245,7 +245,7 @@
 	desc = "A heavy mug. A beagle mug. Careful not to break it!"
 	icon_state = "beaglemug"
 	item_state = "coffee"
-	icon = 'icons/obj/drink_glasses/mug.dmi'
+	icon = 'icons/obj/food/drink_glasses/mug.dmi'
 	filling_states = "100"
 	volume = 40
 	center_of_mass = "x=17;y=13"
@@ -264,7 +264,7 @@
 	desc = "A mug made from a hollowed pineapple. Tropical!"
 	base_name = "pineapple mug"
 	base_icon = "pineapple"
-	icon = 'icons/obj/drink_glasses/pineapple.dmi'
+	icon = 'icons/obj/food/drink_glasses/pineapple.dmi'
 	filling_states = "25;50;75;100"
 	volume = 40
 	possible_transfer_amounts = "5;10;20;40"
@@ -274,7 +274,7 @@
 	name = "coconut cup"
 	base_name = "coconut cup"
 	base_icon = "coconut"
-	icon = 'icons/obj/drink_glasses/coconut.dmi'
+	icon = 'icons/obj/food/drink_glasses/coconut.dmi'
 	desc = "A cup made from a hollowed coconut."
 	filling_states = "20;40;60;80;100"
 	volume = 30
@@ -286,7 +286,7 @@
 	desc = "A snitfer, also known as a cognac glass, made for serving aged spirits."
 	base_name = "glass"
 	base_icon = "cognac"
-	icon = 'icons/obj/drink_glasses/cognac.dmi'
+	icon = 'icons/obj/food/drink_glasses/cognac.dmi'
 	filling_states = "25;50;75;100"
 	volume = 20
 	possible_transfer_amounts = "5;10;20"
@@ -297,7 +297,7 @@
 	desc = "A glass goblet, used to deliver alcohol to the upper class since ancient times."
 	base_name = "goblet"
 	base_icon = "goblet"
-	icon = 'icons/obj/drink_glasses/goblet.dmi'
+	icon = 'icons/obj/food/drink_glasses/goblet.dmi'
 	filling_states = "20;40;60;80;100"
 	volume = 25
 	possible_transfer_amounts = "5;10;15;25"
@@ -314,7 +314,7 @@
 /obj/item/reagent_containers/food/drinks/glass2/coffeecup/tall
 	name = "tall coffee cup"
 	desc = "An unreasonably tall coffee cup, for when you really need to wake up in the morning."
-	icon = 'icons/obj/drink_glasses/coffecup_tall.dmi'
+	icon = 'icons/obj/food/drink_glasses/coffecup_tall.dmi'
 	icon_state = "coffeecup_tall"
 	volume = 60
 	center_of_mass = "x=15;y=19"

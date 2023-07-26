@@ -4,7 +4,7 @@
 /obj/item/reagent_containers/pill
 	name = "pill"
 	desc = "A pill."
-	icon = 'icons/obj/chemical.dmi'
+	icon = 'icons/obj/pills.dmi'
 	icon_state = null
 	item_state = "pill"
 	randpixel = 7

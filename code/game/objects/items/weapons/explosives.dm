@@ -2,7 +2,7 @@
 	name = "plastic explosives"
 	desc = "Used to put holes in specific areas without too much extra hole."
 	gender = PLURAL
-	icon = 'icons/obj/assemblies.dmi'
+	icon = 'icons/obj/assemblies/assemblies.dmi'
 	icon_state = "plastic-explosive0"
 	item_state = "plasticx"
 	item_flags = ITEM_FLAG_NO_BLUDGEON
@@ -16,7 +16,7 @@
 
 /obj/item/plastique/New()
 	wires = new(src)
-	image_overlay = image('icons/obj/assemblies.dmi', "plastic-explosive2")
+	image_overlay = image('icons/obj/assemblies/assemblies.dmi', "plastic-explosive2")
 	..()
 
 /obj/item/plastique/Destroy()

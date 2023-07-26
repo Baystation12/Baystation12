@@ -41,8 +41,10 @@ field_generator power level display
 	overlays.Cut()
 	if(!active)
 		if(warming_up)
+			overlays += emissive_appearance(icon, "+a[warming_up]")
 			overlays += "+a[warming_up]"
 	if(length(fields))
+		overlays += emissive_appearance(icon, "+on")
 		overlays += "+on"
 	// Power level indicator
 	// Scale % power to % num_power_levels and truncate value
@@ -50,6 +52,7 @@ field_generator power level display
 	// Clamp between 0 and num_power_levels for out of range power values
 	level = clamp(level, 0, num_power_levels)
 	if(level)
+		overlays += emissive_appearance(icon, "+p[level]")
 		overlays += "+p[level]"
 
 	return

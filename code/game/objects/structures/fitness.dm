@@ -1,5 +1,5 @@
 /obj/structure/fitness
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/structures/gym_equipment.dmi'
 	anchored = TRUE
 	var/being_used = 0
 

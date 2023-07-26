@@ -1,6 +1,6 @@
 /obj/machinery/pager
 	name = "departmental pager button"
-	icon = 'icons/obj/objects.dmi'
+	icon = 'icons/obj/structures/buttons.dmi'
 	icon_state = "doorbell"
 	desc = "A button used to request the presence of anyone in the department."
 	anchored = TRUE

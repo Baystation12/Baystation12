@@ -37,7 +37,7 @@
 /obj/machinery/ion_engine
 	name = "ion propulsion device"
 	desc = "An advanced ion propulsion device, using energy and minutes amount of gas to generate thrust."
-	icon = 'icons/obj/ship_engine.dmi'
+	icon = 'icons/obj/machines/ship_engine.dmi'
 	icon_state = "nozzle"
 	power_channel = ENVIRON
 	idle_power_usage = 100

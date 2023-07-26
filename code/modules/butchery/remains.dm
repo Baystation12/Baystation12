@@ -1,5 +1,5 @@
 /obj/item/bone
-	icon = 'icons/obj/butchery.dmi'
+	icon = 'icons/obj/structures/butchery.dmi'
 	var/bone_amt = 1
 	var/obj/item/carve_product
 
@@ -103,7 +103,7 @@
 
 /obj/item/clothing/head/skull/deer
 	name = "carved deer skull"
-	icon = 'icons/obj/butchery.dmi'
+	icon = 'icons/obj/structures/butchery.dmi'
 	icon_state = "deer_skull"
 	light_overlay = "deer_skull"
 	action_button_name = "Toggle Deer Skull"

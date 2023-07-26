@@ -1,7 +1,7 @@
 /obj/structure/boulder
 	name = "rocky debris"
 	desc = "Leftover rock from an excavation, it's been partially dug out already but there's still a lot to go."
-	icon = 'icons/obj/mining.dmi'
+	icon = 'icons/obj/boulder.dmi'
 	icon_state = "boulder1"
 	density = TRUE
 	opacity = 1

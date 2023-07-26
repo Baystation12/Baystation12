@@ -75,7 +75,7 @@
 	name = "ectoplasm"
 	desc = "Spooky."
 	gender = PLURAL
-	icon = 'icons/obj/wizard.dmi'
+	icon = 'icons/obj/cult.dmi'
 	icon_state = "ectoplasm"
 
 /////////////////Juggernaut///////////////

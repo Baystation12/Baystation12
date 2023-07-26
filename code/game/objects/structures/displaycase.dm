@@ -1,6 +1,6 @@
 /obj/structure/displaycase
 	name = "display case"
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/showcases.dmi'
 	icon_state = "glassbox"
 	desc = "A display case for prized possessions. It taunts you to kick it."
 	density = TRUE

@@ -8,7 +8,7 @@
 
 /obj/item/archaeological_find
 	name = "object"
-	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon = 'icons/obj/xenoarchaeology_finds.dmi'
 	icon_state = "unknown2"
 	var/find_type = ARCHAEO_UNKNOWN
 	var/item_type = "object"
@@ -98,7 +98,7 @@
 
 /obj/item/archaeological_find/proc/spawn_item()
 	var/obj/item/material/kitchen/utensil/fork/F = new(loc)
-	F.icon = 'icons/obj/xenoarchaeology.dmi'
+	F.icon = 'icons/obj/xenoarchaeology_finds.dmi'
 	F.icon_state = "unknown[rand(1,4)]"
 	return F
 
@@ -114,7 +114,7 @@
 		R = new /obj/item/reagent_containers/glass/replenishing(loc)
 	else
 		R = new /obj/item/reagent_containers/glass/beaker(loc)
-	R.icon = 'icons/obj/xenoarchaeology.dmi'
+	R.icon = 'icons/obj/xenoarchaeology_finds.dmi'
 	R.icon_state = "bowl"
 	if(prob(20))
 		additional_desc = "There appear to be [pick("dark","faintly glowing","pungent","bright")] [pick("red","purple","green","blue")] stains inside."
@@ -163,7 +163,7 @@
 	else
 		new_item = ..()
 	new_item.SetName("statuette")
-	new_item.icon = 'icons/obj/xenoarchaeology.dmi'
+	new_item.icon = 'icons/obj/xenoarchaeology_finds.dmi'
 	new_item.icon_state = "statuette"
 
 	additional_desc = "It depicts a [pick("small","ferocious","wild","pleasing","hulking")] \
@@ -179,7 +179,7 @@
 /obj/item/archaeological_find/instrument/spawn_item()
 	var/obj/item/new_item = new(loc)
 	new_item.SetName("instrument")
-	new_item.icon = 'icons/obj/xenoarchaeology.dmi'
+	new_item.icon = 'icons/obj/xenoarchaeology_finds.dmi'
 	new_item.icon_state = "instrument"
 	if(prob(30))
 		apply_image_decorations = 1
@@ -213,7 +213,7 @@
 
 /obj/item/archaeological_find/trap
 	item_type = "trap"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/beartrap.dmi'
 	icon_state = "beartrap0"
 	find_type = ARCHAEO_BEARTRAP
 	apply_prefix = 0
@@ -233,7 +233,7 @@
 
 /obj/item/archaeological_find/container/spawn_item()
 	var/obj/item/storage/box/new_box = new(loc)
-	new_box.icon = 'icons/obj/xenoarchaeology.dmi'
+	new_box.icon = 'icons/obj/xenoarchaeology_finds.dmi'
 	new_box.max_w_class = pick(ITEM_SIZE_TINY,2;ITEM_SIZE_SMALL,3;ITEM_SIZE_NORMAL,4;ITEM_SIZE_LARGE)
 	var/storage_amount = BASE_STORAGE_COST(new_box.max_w_class)
 	new_box.max_storage_space = rand(storage_amount, storage_amount * 10)
@@ -267,7 +267,7 @@
 		new_item = new /obj/item/crowbar(loc)
 	else
 		new_item = new /obj/item/screwdriver(loc)
-	new_item.icon = 'icons/obj/xenoarchaeology.dmi'
+	new_item.icon = 'icons/obj/xenoarchaeology_finds.dmi'
 	new_item.icon_state = "unknown[rand(1,4)]"
 	additional_desc = "[pick("It doesn't look safe.",\
 	"You wonder what it was used for",\
@@ -308,7 +308,7 @@
 	apply_image_decorations = 1
 	additional_desc = pick("It shines faintly as it catches the light.","It appears to have a faint inner glow.","It seems to draw you inward as you look it at.","Something twinkles faintly as you look at it.","It's mesmerizing to behold.")
 
-	new_item.icon = 'icons/obj/xenoarchaeology.dmi'
+	new_item.icon = 'icons/obj/xenoarchaeology_finds.dmi'
 	if(prob(25))
 		item_type = "smooth green crystal"
 		new_item.icon_state = "Green lump"
@@ -381,7 +381,7 @@
 	/obj/item/gun/energy/captain)
 	var/obj/item/gun/energy/new_gun =  new spawn_type(loc)
 
-	new_gun.icon = 'icons/obj/xenoarchaeology.dmi'
+	new_gun.icon = 'icons/obj/xenoarchaeology_finds.dmi'
 	new_gun.icon_state = "egun[rand(1,6)]"
 	new_gun.charge_meter = 0
 
@@ -406,7 +406,7 @@
 /obj/item/archaeological_find/gun/spawn_item()
 	var/obj/item/gun/projectile/revolver/new_gun = new(loc)
 
-	new_gun.icon = 'icons/obj/xenoarchaeology.dmi'
+	new_gun.icon = 'icons/obj/xenoarchaeology_finds.dmi'
 	new_gun.icon_state = "gun[rand(1,4)]"
 
 	//33% chance to be able to reload the gun with human ammunition

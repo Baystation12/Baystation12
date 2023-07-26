@@ -2,7 +2,7 @@
 /obj/machinery/microscope
 	name = "high powered electron microscope"
 	desc = "A highly advanced microscope capable of zooming up to 3000x."
-	icon = 'icons/obj/forensics.dmi'
+	icon = 'icons/obj/machines/forensics/microscope.dmi'
 	icon_state = "microscope"
 	anchored = TRUE
 	density = TRUE
@@ -138,8 +138,12 @@
 		return ..()
 
 /obj/machinery/microscope/on_update_icon()
-	icon_state = "microscope"
-	if(!is_powered())
-		icon_state += "_unpowered"
+	overlays.Cut()
+	if(panel_open)
+		overlays += "[icon_state]_panel"
+	if(is_powered())
+		overlays += emissive_appearance(icon, "[icon_state]_lights")
+		overlays += "[icon_state]_lights"
 	if(sample)
-		icon_state += "_slide"
+		overlays += emissive_appearance(icon, "[icon_state]_lights_working")
+		overlays += "[icon_state]_lights_working"

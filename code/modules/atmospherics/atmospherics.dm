@@ -32,7 +32,7 @@ Pipelines + Other Objects -> Pipe network
 	var/obj/machinery/atmospherics/node2
 
 	var/atmos_initalized = FALSE
-	var/build_icon = 'icons/obj/pipe-item.dmi'
+	var/build_icon = 'icons/obj/atmospherics/pipe-item.dmi'
 	var/build_icon_state = "buildpipe"
 	var/colorable = FALSE
 

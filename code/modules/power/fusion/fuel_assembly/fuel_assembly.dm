@@ -1,6 +1,6 @@
 /obj/item/fuel_assembly
 	name = "fuel rod assembly"
-	icon = 'icons/obj/machines/power/fusion.dmi'
+	icon = 'icons/obj/fusion_fuel_assembly.dmi'
 	icon_state = "fuel_assembly"
 	layer = 4
 
@@ -43,7 +43,7 @@
 		SetName("[fuel_type] fuel rod assembly")
 		desc = "A fuel rod for a fusion reactor. This one is made from [fuel_type]."
 
-	icon_state = "blank"
+	icon_state = "fuel_assembly"
 	var/image/I = image(icon, "fuel_assembly")
 	I.color = fuel_colour
 	overlays += list(I, image(icon, "fuel_assembly_bracket"))

@@ -3,7 +3,7 @@
 /obj/item/implantpad
 	name = "implant pad"
 	desc = "Used to reprogramm implants."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/tools/implanter.dmi'
 	icon_state = "implantpad-0"
 	item_state = "electronic"
 	w_class = ITEM_SIZE_SMALL

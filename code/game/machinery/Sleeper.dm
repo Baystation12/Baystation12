@@ -1,8 +1,8 @@
 /obj/machinery/sleeper
 	name = "sleeper"
 	desc = "A fancy bed with built-in injectors, a dialysis machine, and a limited health scanner."
-	icon = 'icons/obj/Cryogenic2.dmi'
-	icon_state = "sleeper_0"
+	icon = 'icons/obj/machines/medical/sleeper.dmi'
+	icon_state = "sleeper"
 	density = TRUE
 	anchored = TRUE
 	clicksound = 'sound/machines/buttonbeep.ogg'
@@ -79,12 +79,15 @@
 			to_chat(occupant, SPAN_NOTICE(SPAN_BOLD("... [pick("comfy", "feels slow", "warm")] ...")))
 
 /obj/machinery/sleeper/on_update_icon()
+	overlays.Cut()
+	if(panel_open)
+		overlays += "[icon_state]_panel"
 	if(!occupant)
-		icon_state = "sleeper_0"
+		icon_state = "sleeper"
 	else if(inoperable())
-		icon_state = "sleeper_1"
+		icon_state = "sleeper_closed"
 	else
-		icon_state = "sleeper_2"
+		icon_state = "sleeper_working"
 
 /obj/machinery/sleeper/DefaultTopicState()
 	return GLOB.outside_state

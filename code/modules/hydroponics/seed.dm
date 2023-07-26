@@ -851,19 +851,19 @@
 
 /datum/seed/proc/get_icon(growth_stage)
 	var/plant_icon = get_trait(TRAIT_PLANT_ICON)
-	var/image/res = image('icons/obj/hydroponics_growing.dmi', "[plant_icon]-[growth_stage]")
+	var/image/res = image('icons/obj/flora/hydroponics_growing.dmi', "[plant_icon]-[growth_stage]")
 	if(get_growth_type())
 		res.icon_state = "[get_growth_type()]-[growth_stage]"
 	else
 		res.icon_state = "[plant_icon]-[growth_stage]"
 
 	if(get_growth_type())
-		res.icon = 'icons/obj/hydroponics_vines.dmi'
+		res.icon = 'icons/obj/flora/hydroponics_vines.dmi'
 
 	res.color = get_trait(TRAIT_PLANT_COLOUR)
 
 	if(get_trait(TRAIT_LARGE))
-		res.icon = 'icons/obj/hydroponics_large.dmi'
+		res.icon = 'icons/obj/flora/hydroponics_large.dmi'
 		res.pixel_x = -8
 		res.pixel_y = -16
 

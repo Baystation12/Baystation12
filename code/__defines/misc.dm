@@ -104,13 +104,13 @@
 #define CUSTOM_ITEM_SYNTH_CONFIG "config/custom_sprites.txt"
 #endif
 #ifndef CUSTOM_ITEM_OBJ
-#define CUSTOM_ITEM_OBJ 'icons/obj/custom_items_obj.dmi'
+#define CUSTOM_ITEM_OBJ 'icons/obj/unused.dmi'
 #endif
 #ifndef CUSTOM_ITEM_MOB
-#define CUSTOM_ITEM_MOB 'icons/mob/custom_items_mob.dmi'
+#define CUSTOM_ITEM_MOB 'icons/obj/unused.dmi'
 #endif
 #ifndef CUSTOM_ITEM_SYNTH
-#define CUSTOM_ITEM_SYNTH 'icons/mob/custom_synthetic.dmi'
+#define CUSTOM_ITEM_SYNTH 'icons/obj/unused.dmi'
 #endif
 
 #define WALL_CAN_OPEN 1

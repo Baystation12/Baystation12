@@ -159,7 +159,7 @@
 	desc = "a sensor. It detects gasses."
 	build_path = /obj/item/machine_chassis/air_sensor
 	build_icon_state = "gsensor1"
-	build_icon = 'icons/obj/stationobjs.dmi'
+	build_icon = 'icons/obj/structures/airfilter.dmi'
 	pipe_color = null
 	connect_types = null
 	colorable = FALSE
@@ -181,7 +181,7 @@
 /datum/pipe/pipe_dispenser/device/drain
 	name = "gutter"
 	desc = "You probably can't get sucked down the plughole."
-	build_icon = 'icons/obj/drain.dmi'
+	build_icon = 'icons/obj/structures/drain.dmi'
 	build_icon_state = "drain"
 	build_path = /obj/item/drain
 	connect_types = null
@@ -193,7 +193,7 @@
 /datum/pipe/pipe_dispenser/device/drain/bath
 	name = "sealable gutter"
 	desc = "You probably can't get sucked down the plughole. Specially not when it's closed!"
-	build_icon = 'icons/obj/drain.dmi'
+	build_icon = 'icons/obj/structures/drain.dmi'
 	build_icon_state = "drain_bath"
 	build_path = /obj/item/drain/bath
 	connect_types = null

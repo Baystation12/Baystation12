@@ -1,7 +1,7 @@
 /obj/structure/droppod_door
 	name = "pod door"
 	desc = "A drop pod door. Opens rapidly using explosive bolts."
-	icon = 'icons/obj/structures.dmi'
+	icon = 'icons/obj/structures/structures.dmi'
 	icon_state = "droppod_door_closed"
 	anchored = TRUE
 	density = TRUE

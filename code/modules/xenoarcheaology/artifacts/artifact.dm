@@ -1,7 +1,7 @@
 /obj/machinery/artifact
 	name = "alien artifact"
 	desc = "A large alien device."
-	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon = 'icons/obj/xenoarchaeology_finds.dmi'
 	icon_state = "ano00"
 	var/icon_num = 0
 	density = TRUE

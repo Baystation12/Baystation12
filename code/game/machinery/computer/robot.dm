@@ -1,7 +1,7 @@
 /obj/machinery/computer/robotics
 	name = "robotics control console"
 	desc = "Used to remotely lockdown or monitor linked synthetics."
-	icon = 'icons/obj/computer.dmi'
+	icon = 'icons/obj/machines/computer.dmi'
 	icon_keyboard = "mining_key"
 	icon_screen = "robot"
 	light_color = "#a97faa"

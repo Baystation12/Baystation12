@@ -1,7 +1,7 @@
 /obj/machinery/seed_extractor
 	name = "seed extractor"
 	desc = "Extracts and bags seeds from produce."
-	icon = 'icons/obj/hydroponics_machines.dmi'
+	icon = 'icons/obj/machines/hydroponics_machines.dmi'
 	icon_state = "sextractor"
 	density = TRUE
 	anchored = TRUE

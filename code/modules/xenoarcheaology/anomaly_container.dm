@@ -1,7 +1,7 @@
 /obj/machinery/anomaly_container
 	name = "anomaly container"
 	desc = "A massive, steel container used to transport anomalous materials in a suspended state."
-	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon = 'icons/obj/machines/research/anomaly_cage.dmi'
 	icon_state = "anomaly_container"
 	density = TRUE
 	idle_power_usage = 0
@@ -220,10 +220,11 @@
 /obj/machinery/anomaly_container/on_update_icon()
 	overlays.Cut()
 	if(health_dead)
-		icon_state = "anomaly_container_broken"
+		icon_state = "[icon_state]_broken"
 	if(attached_paper)
-		overlays += "anomaly_container_paper"
+		overlays += "[icon_state]_paper"
 	if(panel_open)
-		overlays += "anomaly_container_panel"
+		overlays += "[icon_state]_panel"
 	if(is_powered())
-		overlays += "anomaly_container_power"
+		overlays += emissive_appearance(icon, "anomaly_container_lights") //in the rare case its broken AND powered.
+		overlays += "anomaly_container_lights"

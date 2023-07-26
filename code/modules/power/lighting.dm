@@ -22,7 +22,7 @@
 /obj/machinery/light_construct
 	name = "light fixture frame"
 	desc = "A light fixture under construction."
-	icon = 'icons/obj/lighting.dmi'
+	icon = 'icons/obj/structures/lighting.dmi'
 	icon_state = "tube-construct-stage1"
 	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER
@@ -160,7 +160,7 @@
 // the standard tube light fixture
 /obj/machinery/light
 	name = "light fixture"
-	icon = 'icons/obj/lighting.dmi'
+	icon = 'icons/obj/structures/lighting.dmi'
 	/// Base description and `icon_state`.
 	var/base_state = "tube"
 	icon_state = "tube_map"
@@ -624,7 +624,7 @@
 // can be tube or bulb subtypes
 // will fit into empty /obj/machinery/light of the corresponding type
 /obj/item/light
-	icon = 'icons/obj/lighting.dmi'
+	icon = 'icons/obj/structures/lighting.dmi'
 	force = 2
 	throwforce = 5
 	w_class = ITEM_SIZE_TINY

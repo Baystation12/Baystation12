@@ -63,7 +63,7 @@
 /obj/effect/quicksand
 	name = "quicksand"
 	desc = "There is no candy at the bottom."
-	icon = 'icons/obj/quicksand.dmi'
+	icon = 'icons/obj/structures/quicksand.dmi'
 	icon_state = "intact0"
 	density = FALSE
 	anchored = TRUE

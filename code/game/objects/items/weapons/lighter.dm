@@ -1,7 +1,7 @@
 /obj/item/flame/lighter
 	name = "lighter"
 	desc = "A cheap-as-free lighter."
-	icon = 'icons/obj/lighters.dmi'
+	icon = 'icons/obj/tools/lighters.dmi'
 	icon_state = "lighter"
 	item_state = "lighter"
 	w_class = ITEM_SIZE_TINY

@@ -2,8 +2,8 @@
 /obj/machinery/dnaforensics
 	name = "DNA analyzer"
 	desc = "A high tech machine that is designed to read DNA samples properly."
-	icon = 'icons/obj/forensics.dmi'
-	icon_state = "dnaopen"
+	icon = 'icons/obj/machines/forensics/dna_scanner.dmi'
+	icon_state = "dna"
 	anchored = TRUE
 	density = TRUE
 
@@ -144,10 +144,15 @@
 	src.update_icon()
 
 /obj/machinery/dnaforensics/on_update_icon()
-	..()
-	if(is_powered() && scanning)
-		icon_state = "dnaworking"
+	overlays.Cut()
+	if(panel_open)
+		overlays += "[icon_state]_panel"
+	if(is_powered())
+		overlays += emissive_appearance(icon, "[icon_state]_screen")
+		overlays += "[icon_state]_screen"
+	else if(is_powered() && scanning)
+		overlays += "[icon_state]_working"
+		overlays += emissive_appearance(icon, "[icon_state]_screen_working")
+		overlays += "[icon_state]_screen_working"
 	else if(closed)
-		icon_state = "dnaclosed"
-	else
-		icon_state = "dnaopen"
+		overlays += "[icon_state]_closed"

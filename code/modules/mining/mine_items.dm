@@ -28,7 +28,7 @@
 /obj/item/pickaxe
 	name = "mining drill"
 	desc = "The most basic of mining drills, for short excavations and small mineral extractions."
-	icon = 'icons/obj/tools.dmi'
+	icon = 'icons/obj/tools/mining_drills.dmi'
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	force = 15.0
@@ -137,7 +137,7 @@
 /obj/item/shovel
 	name = "shovel"
 	desc = "A large tool for digging and moving dirt."
-	icon = 'icons/obj/tools.dmi'
+	icon = 'icons/obj/tools/shovels.dmi'
 	icon_state = "shovel"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT

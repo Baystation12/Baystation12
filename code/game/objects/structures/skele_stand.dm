@@ -2,7 +2,7 @@
 	name = "hanging skeleton model"
 	density = TRUE
 	anchored = FALSE
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/obj/surgery_tools.dmi'
 	icon_state = "hangskele"
 	desc = "It's an anatomical model of a human skeletal system made of plaster."
 	var/list/swag = list()

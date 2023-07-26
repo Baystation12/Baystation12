@@ -2,7 +2,7 @@
 /obj/machinery/holosign
 	name = "holosign"
 	desc = "Small wall-mounted holographic projector."
-	icon = 'icons/obj/holosign.dmi'
+	icon = 'icons/obj/machines/holosign.dmi'
 	icon_state = "sign_off"
 	layer = ABOVE_DOOR_LAYER
 	idle_power_usage = 2
@@ -71,7 +71,7 @@
 /obj/machinery/button/holosign
 	name = "holosign switch"
 	desc = "A remote control switch for holosign."
-	icon = 'icons/obj/power.dmi'
+	icon = 'icons/obj/structures/buttons.dmi'
 	icon_state = "crema_switch"
 
 /obj/machinery/button/holosign/on_update_icon()

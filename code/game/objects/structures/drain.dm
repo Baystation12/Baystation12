@@ -3,7 +3,7 @@
 /obj/structure/hygiene/drain
 	name = "gutter"
 	desc = "You probably can't get sucked down the plughole."
-	icon = 'icons/obj/drain.dmi'
+	icon = 'icons/obj/structures/drain.dmi'
 	icon_state = "drain"
 	anchored = TRUE
 	density = FALSE
@@ -58,7 +58,7 @@
 /obj/item/drain
 	name = "gutter"
 	desc = "You probably can't get sucked down the plughole."
-	icon = 'icons/obj/drain.dmi'
+	icon = 'icons/obj/structures/drain.dmi'
 	icon_state = "drain"
 	var/constructed_type = /obj/structure/hygiene/drain
 

@@ -9,7 +9,7 @@ Buildable meters
 	var/pipename
 	var/connect_types = CONNECT_TYPE_REGULAR
 	force = 7
-	icon = 'icons/obj/pipe-item.dmi'
+	icon = 'icons/obj/atmospherics/pipe-item.dmi'
 	icon_state = "simple"
 	randpixel = 5
 	item_state = "buildpipe"
@@ -227,7 +227,7 @@ Buildable meters
 /obj/item/machine_chassis/air_sensor
 	name = "gas sensor"
 	desc = "A sensor. It detects gasses."
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/structures/airfilter.dmi'
 	icon_state = "gsensor1"
 	w_class = ITEM_SIZE_LARGE
 	build_type = /obj/machinery/air_sensor
@@ -235,7 +235,7 @@ Buildable meters
 /obj/item/machine_chassis/pipe_meter
 	name = "meter"
 	desc = "A meter that can measure gas inside pipes or in the general area."
-	icon = 'icons/obj/pipe-item.dmi'
+	icon = 'icons/obj/atmospherics/pipe-item.dmi'
 	icon_state = "meter"
 	item_state = "buildpipe"
 	w_class = ITEM_SIZE_LARGE

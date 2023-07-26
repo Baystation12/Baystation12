@@ -3,7 +3,7 @@
 /obj/machinery/mass_driver
 	name = "mass driver"
 	desc = "Shoots things into space."
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/structures/massdriver.dmi'
 	icon_state = "mass_driver"
 	anchored = TRUE
 	idle_power_usage = 2

@@ -5,7 +5,7 @@
 var/global/list/default_material_composition = list(MATERIAL_STEEL = 0, MATERIAL_ALUMINIUM = 0, MATERIAL_PLASTIC = 0, MATERIAL_GLASS = 0, MATERIAL_GOLD = 0, MATERIAL_SILVER = 0, MATERIAL_PHORON = 0, MATERIAL_URANIUM = 0, MATERIAL_DIAMOND = 0)
 /obj/machinery/r_n_d
 	name = "R&D Device"
-	icon = 'icons/obj/machines/research.dmi'
+	icon = 'icons/obj/machines/research/protolathe.dmi'
 	density = TRUE
 	anchored = TRUE
 	uncreated_component_parts = null

@@ -1,5 +1,5 @@
 /obj/machinery/mining
-	icon = 'icons/obj/mining_drill.dmi'
+	icon = 'icons/obj/machines/mining/mining_drill.dmi'
 	anchored = FALSE
 	use_power = POWER_USE_OFF //The drill takes power directly from a cell.
 	density = TRUE
@@ -183,11 +183,19 @@
 	return TRUE
 
 /obj/machinery/mining/drill/on_update_icon()
+	overlays.Cut()
+	if(panel_open)
+		overlays += "mining_drill_panel"
 	if(need_player_check)
-		icon_state = "mining_drill_error"
+		overlays += emissive_appearance(icon, "mining_drill_lights_error")
+		overlays += "mining_drill_lights_error"
+		icon_state = "mining_drill_braced"
 	else if(active)
+		icon_state = "mining_drill_braced"
+		icon_state = "[icon_state]_active"
 		var/status = clamp(round( (length(contents) / capacity) * 4 ), 0, 3)
-		icon_state = "mining_drill_active[status]"
+		overlays += emissive_appearance(icon, "mining_drill_lights_[status]")
+		overlays += "mining_drill_lights_[status]"
 	else if(supported)
 		icon_state = "mining_drill_braced"
 	else

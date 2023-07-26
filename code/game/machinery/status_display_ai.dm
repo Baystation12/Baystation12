@@ -56,7 +56,7 @@ var/global/list/ai_status_emotions = list(
 				SD.friendc = 0
 
 /obj/machinery/ai_status_display
-	icon = 'icons/obj/status_display.dmi'
+	icon = 'icons/obj/machines/status_display.dmi'
 	icon_state = "frame"
 	name = "\improper AI display"
 	anchored = TRUE
@@ -93,5 +93,5 @@ var/global/list/ai_status_emotions = list(
 	picture_state = state
 	if(length(overlays))
 		overlays.Cut()
-	overlays += overlay_image('icons/obj/status_display.dmi', icon_state=picture_state, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
+	overlays += overlay_image('icons/obj/machines/status_display.dmi', icon_state=picture_state, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 	set_light(0.8, 0.1, 1, l_color = "#0093ff")

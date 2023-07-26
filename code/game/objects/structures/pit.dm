@@ -1,7 +1,7 @@
 /obj/structure/pit
 	name = "pit"
 	desc = "Watch your step, partner."
-	icon = 'icons/obj/pit.dmi'
+	icon = 'icons/obj/structures/pit.dmi'
 	icon_state = "pit1"
 	blend_mode = BLEND_MULTIPLY
 	density = FALSE
@@ -156,7 +156,7 @@
 /obj/structure/gravemarker
 	name = "grave marker"
 	desc = "You're not the first."
-	icon = 'icons/obj/gravestone.dmi'
+	icon = 'icons/obj/structures/gravestone.dmi'
 	icon_state = "wood"
 	pixel_x = 15
 	pixel_y = 8

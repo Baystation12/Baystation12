@@ -64,5 +64,5 @@
 /obj/effect/portal/wizard
 	name = "dark anomaly"
 	desc = "It pulls on the edges of reality as if trying to draw them in."
-	icon = 'icons/obj/objects.dmi'
+	icon = 'icons/obj/unused.dmi'
 	icon_state = "bhole3"

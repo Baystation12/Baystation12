@@ -1,7 +1,7 @@
 /obj/item/device/scanner/spectrometer
 	name = "mass spectrometer"
 	desc = "A hand-held mass spectrometer which identifies trace chemicals in a blood sample or analyzes unusual chemicals."
-	icon = 'icons/obj/spectrometer.dmi'
+	icon = 'icons/obj/tools/spectrometer.dmi'
 	icon_state = "spectrometer"
 	item_state = "analyzer"
 
@@ -82,7 +82,7 @@
 
 /obj/item/device/scanner/spectrometer/adv
 	name = "advanced mass spectrometer"
-	icon = 'icons/obj/spectrometer_advanced.dmi'
+	icon = 'icons/obj/tools/spectrometer_advanced.dmi'
 	icon_state = "adv_spectrometer"
 	details = 1
 	origin_tech = list(TECH_MAGNET = 4, TECH_BIO = 2)

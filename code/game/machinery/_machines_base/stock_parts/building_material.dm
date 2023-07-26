@@ -2,7 +2,7 @@
 /obj/item/stock_parts/building_material
 	name = "building materials"
 	desc = "Various standard wires, pipes, and other materials."
-	icon = 'icons/obj/power.dmi'
+	icon = 'icons/obj/machines/power/power_cond_white.dmi'
 	icon_state = "coil"
 	part_flags = PART_FLAG_QDEL
 	var/list/materials

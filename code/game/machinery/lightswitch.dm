@@ -4,7 +4,7 @@
 /obj/machinery/light_switch
 	name = "light switch"
 	desc = "It turns lights on and off. What are you, simple?"
-	icon = 'icons/obj/power.dmi'
+	icon = 'icons/obj/structures/buttons.dmi'
 	icon_state = "light0"
 	anchored = TRUE
 	idle_power_usage = 20

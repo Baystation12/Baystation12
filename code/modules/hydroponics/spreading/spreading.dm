@@ -45,7 +45,7 @@
 /obj/effect/vine
 	name = "vine"
 	anchored = TRUE
-	icon = 'icons/obj/hydroponics_growing.dmi'
+	icon = 'icons/obj/flora/hydroponics_growing.dmi'
 	icon_state = ""
 	pass_flags = PASS_FLAG_TABLE
 	buckle_sound = null

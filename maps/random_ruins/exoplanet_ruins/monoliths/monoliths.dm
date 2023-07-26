@@ -10,7 +10,7 @@
 /obj/structure/monolith
 	name = "monolith"
 	desc = "An obviously artifical structure of unknown origin. The symbols '𒁀𒀝 𒋢𒌦 𒉡 𒋺𒂊' are engraved on the base." //for the sake of the reader, "BAKU SUUN NU TAKE"
-	icon = 'icons/obj/monolith.dmi'
+	icon = 'icons/obj/structures/monolith.dmi'
 	icon_state = "jaggy1"
 	layer = ABOVE_HUMAN_LAYER
 	density = TRUE

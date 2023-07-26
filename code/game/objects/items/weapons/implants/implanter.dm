@@ -1,6 +1,6 @@
 /obj/item/implanter
 	name = "implanter"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/tools/implanter.dmi'
 	icon_state = "implanter0"
 	item_state = "syringe_0"
 	throw_speed = 1

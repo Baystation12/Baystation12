@@ -1,7 +1,7 @@
 /obj/structure/ironing_board
 	name = "ironing board"
 	desc = "An ironing board to unwrinkle your wrinkled clothing."
-	icon = 'icons/obj/ironing.dmi'
+	icon = 'icons/obj/structures/ironing.dmi'
 	icon_state = "basic-down"
 	can_buckle = TRUE
 	buckle_dir = SOUTH
@@ -268,7 +268,7 @@
 /obj/item/ironing_board
 	name = "ironing board"
 	desc = "A collapsed ironing board that can be carried around."
-	icon = 'icons/obj/ironing.dmi'
+	icon = 'icons/obj/structures/ironing.dmi'
 	icon_state = "basic-item"
 	item_state = "rbed"
 	slot_flags = SLOT_BACK
@@ -302,7 +302,7 @@
 /obj/item/ironing_iron
 	name = "iron"
 	desc = "An ironing iron for ironing your iro- err... clothes."
-	icon = 'icons/obj/ironing.dmi'
+	icon = 'icons/obj/structures/ironing.dmi'
 	icon_state = "iron"
 	item_state = "ironingiron"
 	slot_flags = SLOT_BELT
@@ -324,7 +324,7 @@
 
 /obj/random/ironing_board_structure
 	name = "random deployed ironing board"
-	icon = 'icons/obj/ironing.dmi'
+	icon = 'icons/obj/structures/ironing.dmi'
 	icon_state = "basic-down"
 
 
@@ -337,7 +337,7 @@
 
 /obj/random/ironing_board_item
 	name = "random collapsed ironing board"
-	icon = 'icons/obj/ironing.dmi'
+	icon = 'icons/obj/structures/ironing.dmi'
 	icon_state = "basic-item"
 
 

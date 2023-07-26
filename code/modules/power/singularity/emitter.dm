@@ -3,7 +3,7 @@
 /obj/machinery/power/emitter
 	name = "emitter"
 	desc = "A massive, heavy-duty industrial laser. This design is a fixed installation, capable of shooting in only one direction."
-	icon = 'icons/obj/singularity.dmi'
+	icon = 'icons/obj/machines/power/emitter.dmi'
 	icon_state = "emitter"
 	anchored = FALSE
 	density = TRUE
@@ -71,10 +71,10 @@
 			to_chat(user, SPAN_WARNING("Its control locks have been fried."))
 
 /obj/machinery/power/emitter/on_update_icon()
-	if (active && powernet && avail(active_power_usage))
-		icon_state = "emitter_+a"
-	else
-		icon_state = "emitter"
+	overlays.Cut()
+	if(active && powernet && avail(active_power_usage))
+		overlays += emissive_appearance(icon, "[icon_state]_lights")
+		overlays += "[icon_state]_lights"
 
 /obj/machinery/power/emitter/interface_interact(mob/user)
 	if (!CanInteract(user, DefaultTopicState()))

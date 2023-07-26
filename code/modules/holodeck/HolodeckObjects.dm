@@ -132,7 +132,7 @@
 /obj/structure/holostool
 	name = "stool"
 	desc = "Apply butt."
-	icon = 'icons/obj/furniture.dmi'
+	icon = 'icons/obj/structures/furniture.dmi'
 	icon_state = "stool_padded_preview"
 	anchored = TRUE
 
@@ -267,7 +267,7 @@
 //BASKETBALL OBJECTS
 
 /obj/item/beach_ball/holoball
-	icon = 'icons/obj/basketball.dmi'
+	icon = 'icons/obj/structures/basketball.dmi'
 	icon_state = "basketball"
 	name = "basketball"
 	item_state = "basketball"
@@ -277,7 +277,7 @@
 /obj/structure/holohoop
 	name = "basketball hoop"
 	desc = "Boom, Shakalaka!"
-	icon = 'icons/obj/basketball.dmi'
+	icon = 'icons/obj/structures/basketball.dmi'
 	icon_state = "hoop"
 	anchored = TRUE
 	density = TRUE
@@ -300,7 +300,7 @@
 //VOLLEYBALL OBJECTS
 
 /obj/item/beach_ball/holovolleyball
-	icon = 'icons/obj/basketball.dmi'
+	icon = 'icons/obj/structures/basketball.dmi'
 	icon_state = "volleyball"
 	name = "volleyball"
 	item_state = "volleyball"
@@ -310,7 +310,7 @@
 /obj/structure/holonet
 	name = "net"
 	desc = "Bullshit, you can be mine!"
-	icon = 'icons/obj/basketball.dmi'
+	icon = 'icons/obj/structures/basketball.dmi'
 	icon_state = "volleynet_mid"
 	density = TRUE
 	anchored = TRUE
@@ -338,7 +338,7 @@
 /obj/machinery/readybutton
 	name = "Ready Declaration Device"
 	desc = "This device is used to declare ready. If all devices in an area are ready, the event will begin!"
-	icon = 'icons/obj/monitors.dmi'
+	icon = 'icons/obj/structures/keycard_authenticator.dmi'
 	icon_state = "auth_off"
 	var/ready = 0
 	var/area/currentarea = null

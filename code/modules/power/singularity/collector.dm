@@ -205,13 +205,16 @@ var/global/list/rad_collectors = list()
 
 	if(P)
 		overlays += image(icon, "ptank")
+		overlays += emissive_appearance(icon, "ca_filling")
 		underlays += image(icon, "ca_filling")
 	underlays += image(icon, "ca_inside")
 	if(inoperable())
 		return
 	if(active)
 		var/rad_power = round(min(100 * last_rads / max_rads, 100), 20)
+		overlays += emissive_appearance(icon, "rads_[rad_power]")
 		overlays += image(icon, "rads_[rad_power]")
+		overlays += emissive_appearance(icon, "on")
 		overlays += image(icon, "on")
 
 /obj/machinery/power/rad_collector/toggle_power()

@@ -2,7 +2,7 @@
 /obj/machinery/microwave
 	name = "microwave"
 	desc = "A possibly occult device capable of perfectly preparing many types of food."
-	icon = 'icons/obj/kitchen.dmi'
+	icon = 'icons/obj/machines/kitchen.dmi'
 	icon_state = "mw"
 	layer = BELOW_OBJ_LAYER
 	density = TRUE

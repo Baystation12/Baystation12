@@ -1,7 +1,7 @@
 /obj/item/flora/pottedplantsmall
 	name = "small potted plant"
 	desc = "This is a pot of assorted small flora. Some look familiar."
-	icon = 'icons/obj/plants.dmi'
+	icon = 'icons/obj/flora/plants.dmi'
 	icon_state = "plant-15"
 	item_state = "plant-15"
 	w_class = ITEM_SIZE_LARGE

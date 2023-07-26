@@ -5,7 +5,7 @@
 /obj/item/defibrillator
 	name = "auto-resuscitator"
 	desc = "A device that delivers powerful shocks via detachable paddles to resuscitate incapacitated patients."
-	icon = 'icons/obj/defibrillator.dmi'
+	icon = 'icons/obj/tools/defibrillator.dmi'
 	icon_state = "defibunit"
 	item_state = "defibunit"
 	slot_flags = SLOT_BACK
@@ -201,7 +201,7 @@
 /obj/item/shockpaddles
 	name = "defibrillator paddles"
 	desc = "A pair of plastic-gripped paddles with flat metal surfaces that are used to deliver powerful electric shocks."
-	icon = 'icons/obj/defibrillator.dmi'
+	icon = 'icons/obj/tools/defibrillator.dmi'
 	icon_state = "defibpaddles"
 	item_state = "defibpaddles"
 	gender = PLURAL

@@ -4,7 +4,7 @@
 /obj/item/reagent_containers/food/drinks
 	name = "drink"
 	desc = "Yummy!"
-	icon = 'icons/obj/drinks.dmi'
+	icon = 'icons/obj/food/drinks.dmi'
 	icon_state = null
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	amount_per_transfer_from_this = 5
@@ -323,7 +323,7 @@
 	icon_state = "coffee"
 	item_state = "coffee"
 	center_of_mass = "x=16;y=14"
-	filling_states = "100"
+	//filling_states = "100"
 	base_name = "cup"
 	base_icon = "cup"
 
@@ -357,7 +357,7 @@
 	icon_state = "coffee"
 	item_state = "coffee"
 	center_of_mass = "x=16;y=14"
-	filling_states = "100"
+	//filling_states = "100"
 	base_name = "cup"
 	base_icon = "cup"
 

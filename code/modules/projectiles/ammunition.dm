@@ -1,7 +1,7 @@
 /obj/item/ammo_casing
 	name = "bullet casing"
 	desc = "A bullet casing."
-	icon = 'icons/obj/ammo.dmi'
+	icon = 'icons/obj/weapons/ammo.dmi'
 	icon_state = "pistolcasing"
 	randpixel = 10
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -100,7 +100,7 @@
 	name = "magazine"
 	desc = "A magazine for some kind of gun."
 	icon_state = "357"
-	icon = 'icons/obj/ammo.dmi'
+	icon = 'icons/obj/weapons/ammo.dmi'
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	item_state = "syringe_kit"

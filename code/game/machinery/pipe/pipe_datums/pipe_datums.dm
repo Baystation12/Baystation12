@@ -51,7 +51,7 @@
 	name = "upward pipe fitting"
 	desc = "an upward pipe."
 	build_path = /obj/item/pipe
-	build_icon = 'icons/obj/structures.dmi'
+	build_icon = 'icons/obj/structures/structures.dmi'
 	build_icon_state = "up"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/up
 
@@ -59,7 +59,7 @@
 	name = "downward pipe fitting"
 	desc = "a downward pipe."
 	build_path = /obj/item/pipe
-	build_icon = 'icons/obj/structures.dmi'
+	build_icon = 'icons/obj/structures/structures.dmi'
 	build_icon_state = "down"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/down
 
@@ -124,7 +124,7 @@
 	name = "upward supply pipe fitting"
 	desc = "an upward supply pipe segment."
 	build_path = /obj/item/pipe
-	build_icon = 'icons/obj/structures.dmi'
+	build_icon = 'icons/obj/structures/structures.dmi'
 	build_icon_state = "up"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/up/supply
 
@@ -132,7 +132,7 @@
 	name = "downward supply pipe fitting"
 	desc = "a downward supply pipe segment."
 	build_path = /obj/item/pipe
-	build_icon = 'icons/obj/structures.dmi'
+	build_icon = 'icons/obj/structures/structures.dmi'
 	build_icon_state = "down"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/down/supply
 
@@ -196,7 +196,7 @@
 	name = "upward scrubber pipe fitting"
 	desc = "an upward scrubber pipe segment."
 	build_path = /obj/item/pipe
-	build_icon = 'icons/obj/structures.dmi'
+	build_icon = 'icons/obj/structures/structures.dmi'
 	build_icon_state = "up"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/up/scrubbers
 
@@ -204,7 +204,7 @@
 	name = "downward scrubber pipe fitting"
 	desc = "a downward scrubber pipe segment."
 	build_path = /obj/item/pipe
-	build_icon = 'icons/obj/structures.dmi'
+	build_icon = 'icons/obj/structures/structures.dmi'
 	build_icon_state = "down"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/down/scrubbers
 
@@ -269,7 +269,7 @@
 	name = "upward fuel pipe fitting"
 	desc = "an upward fuel pipe segment."
 	build_path = /obj/item/pipe
-	build_icon = 'icons/obj/structures.dmi'
+	build_icon = 'icons/obj/structures/structures.dmi'
 	build_icon_state = "up"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/up/fuel
 
@@ -277,7 +277,7 @@
 	name = "downward fuel pipe fitting"
 	desc = "a downward fuel pipe segment."
 	build_path = /obj/item/pipe
-	build_icon = 'icons/obj/structures.dmi'
+	build_icon = 'icons/obj/structures/structures.dmi'
 	build_icon_state = "down"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/down/fuel
 

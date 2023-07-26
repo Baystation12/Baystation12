@@ -14,7 +14,7 @@
 /obj/item/card
 	name = "card"
 	desc = "Does card things."
-	icon = 'icons/obj/card.dmi'
+	icon = 'icons/obj/tools/card.dmi'
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 
@@ -110,7 +110,7 @@
 
 /obj/item/card/data/on_update_icon()
 	overlays.Cut()
-	var/image/detail_overlay = image('icons/obj/card.dmi', src,"[icon_state]-color")
+	var/image/detail_overlay = image('icons/obj/tools/card.dmi', src,"[icon_state]-color")
 	detail_overlay.color = detail_color
 	overlays += detail_overlay
 

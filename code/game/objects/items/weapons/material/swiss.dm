@@ -12,7 +12,7 @@
 /obj/item/material/knife/folding/swiss
 	name = "combi-knife"
 	desc = "A small, colourable, multi-purpose folding knife."
-	icon = 'icons/obj/swiss_knife.dmi'
+	icon = 'icons/obj/tools/swiss_knife.dmi'
 	icon_state = "swissknf_closed"
 	handle_icon = "swissknf_handle"
 	takes_colour = FALSE

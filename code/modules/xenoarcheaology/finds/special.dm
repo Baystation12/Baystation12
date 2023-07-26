@@ -51,7 +51,7 @@
 /obj/item/vampiric
 	name = "statuette"
 	icon_state = "statuette"
-	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon = 'icons/obj/xenoarchaeology_finds.dmi'
 	var/charges = 0
 	var/list/nearby_mobs = list()
 	var/last_bloodcall = 0

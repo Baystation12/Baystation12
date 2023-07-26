@@ -17,7 +17,7 @@
 			var/ikey = "[seed.get_trait(TRAIT_PLANT_ICON)]-dead"
 			var/image/dead_overlay = SSplants.plant_icon_cache["[ikey]"]
 			if(!dead_overlay)
-				dead_overlay = image('icons/obj/hydroponics_growing.dmi', "[ikey]")
+				dead_overlay = image('icons/obj/flora/hydroponics_growing.dmi', "[ikey]")
 				dead_overlay.color = DEAD_PLANT_COLOUR
 			new_overlays |= dead_overlay
 		else
@@ -37,7 +37,7 @@
 				ikey = "[seed.get_trait(TRAIT_PRODUCT_ICON)]"
 				var/image/harvest_overlay = SSplants.plant_icon_cache["product-[ikey]-[seed.get_trait(TRAIT_PLANT_COLOUR)]"]
 				if(!harvest_overlay)
-					harvest_overlay = image('icons/obj/hydroponics_products.dmi', "[ikey]")
+					harvest_overlay = image('icons/obj/flora/hydroponics_products.dmi', "[ikey]")
 					harvest_overlay.color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
 					SSplants.plant_icon_cache["product-[ikey]-[harvest_overlay.color]"] = harvest_overlay
 				new_overlays |= harvest_overlay

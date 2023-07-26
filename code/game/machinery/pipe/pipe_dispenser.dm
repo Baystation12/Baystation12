@@ -1,6 +1,6 @@
 /obj/machinery/pipedispenser
 	name = "pipe dispenser"
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/machines/pipe_dispenser.dmi'
 	icon_state = "pipe_d"
 	density = TRUE
 	anchored = FALSE
@@ -110,7 +110,7 @@
 
 /obj/machinery/pipedispenser/disposal
 	name = "disposal pipe dispenser"
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/machines/pipe_dispenser.dmi'
 	icon_state = "pipe_d"
 	machine_name = "disposal pipe dispenser"
 	machine_desc = "Similar to a normal pipe dispenser, but calibrated for the heavy, dense metal tubes used in disposals networks."

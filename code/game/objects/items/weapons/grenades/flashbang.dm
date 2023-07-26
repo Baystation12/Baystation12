@@ -90,7 +90,7 @@
 /obj/item/grenade/flashbang/clusterbang//Created by Polymorph, fixed by Sieve
 	desc = "Use of this weapon may constiute a war crime in your area, consult your local captain."
 	name = "clusterbang"
-	icon = 'icons/obj/grenade.dmi'
+	icon = 'icons/obj/weapons/grenade.dmi'
 	icon_state = "clusterbang"
 
 /obj/item/grenade/flashbang/clusterbang/detonate(mob/living/user)
@@ -114,7 +114,7 @@
 /obj/item/grenade/flashbang/clusterbang/segment
 	desc = "A smaller segment of a clusterbang. Better run."
 	name = "clusterbang segment"
-	icon = 'icons/obj/grenade.dmi'
+	icon = 'icons/obj/weapons/grenade.dmi'
 	icon_state = "clusterbang_segment"
 
 /obj/item/grenade/flashbang/clusterbang/segment/New()//Segments should never exist except part of the clusterbang, since these immediately 'do their thing' and asplode

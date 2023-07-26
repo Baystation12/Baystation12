@@ -1,7 +1,7 @@
 /obj/item/reagent_containers/food/snacks
 	name = "snack"
 	desc = "Yummy!"
-	icon = 'icons/obj/food.dmi'
+	icon = 'icons/obj/food/food.dmi'
 	center_of_mass = "x=16;y=16"
 	var/bitesize = 1
 	var/bitecount = 0
@@ -415,7 +415,7 @@
 /obj/item/reagent_containers/food/snacks/organ
 	name = "organ"
 	desc = "It's good for you."
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/obj/organs.dmi'
 	icon_state = "appendix"
 	filling_color = "#e00d34"
 	center_of_mass = "x=16;y=16"
@@ -551,7 +551,7 @@
 /obj/item/reagent_containers/food/snacks/sausage
 	name = "sausage"
 	desc = "A piece of mixed, long meat."
-	icon = 'icons/obj/food_ingredients.dmi'
+	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "sausage"
 	filling_color = "#db0000"
 	center_of_mass = "x=16;y=16"
@@ -2746,7 +2746,7 @@
 /obj/item/pizzabox
 	name = "pizza box"
 	desc = "A box suited for pizzas."
-	icon = 'icons/obj/food.dmi'
+	icon = 'icons/obj/food/food.dmi'
 	icon_state = "pizzabox1"
 
 	var/open = 0 // Is the box open?
@@ -2953,7 +2953,7 @@
 /obj/item/reagent_containers/food/snacks/dough
 	name = "dough"
 	desc = "A piece of dough."
-	icon = 'icons/obj/food_ingredients.dmi'
+	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "dough"
 	filling_color = "#d6bca4"
 	bitesize = 2
@@ -2976,7 +2976,7 @@
 /obj/item/reagent_containers/food/snacks/sliceable/flatdough
 	name = "flat dough"
 	desc = "A flattened dough."
-	icon = 'icons/obj/food_ingredients.dmi'
+	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "flat dough"
 	filling_color = "#d6bca4"
 	slice_path = /obj/item/reagent_containers/food/snacks/doughslice
@@ -2991,7 +2991,7 @@
 /obj/item/reagent_containers/food/snacks/doughslice
 	name = "dough slice"
 	desc = "A building block of an impressive dish."
-	icon = 'icons/obj/food_ingredients.dmi'
+	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "doughslice"
 	filling_color = "#d6bca4"
 	slice_path = /obj/item/reagent_containers/food/snacks/spagetti
@@ -3004,7 +3004,7 @@
 /obj/item/reagent_containers/food/snacks/bun
 	name = "bun"
 	desc = "A base for any self-respecting burger."
-	icon = 'icons/obj/food_ingredients.dmi'
+	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "bun"
 	filling_color = "#b8824c"
 	bitesize = 2
@@ -3015,7 +3015,7 @@
 /obj/item/reagent_containers/food/snacks/customburger
 	name = "custom burger"
 	desc = "A tasty burger."
-	icon = 'icons/obj/food_custom.dmi'
+	icon = 'icons/obj/food/food_custom.dmi'
 	icon_state = "customburger"
 	filling_color = "#b8824c"
 	center_of_mass = "x=16;y=12"
@@ -3123,7 +3123,7 @@
 /obj/item/reagent_containers/food/snacks/rawcutlet
 	name = "raw cutlet"
 	desc = "A thin piece of raw meat."
-	icon = 'icons/obj/food_ingredients.dmi'
+	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "rawcutlet"
 	filling_color = "#fb8258"
 	slice_path = /obj/item/reagent_containers/food/snacks/rawbacon
@@ -3139,7 +3139,7 @@
 /obj/item/reagent_containers/food/snacks/cutlet
 	name = "cutlet"
 	desc = "A tasty meat slice."
-	icon = 'icons/obj/food_ingredients.dmi'
+	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "cutlet"
 	filling_color = "#d75608"
 	bitesize = 2
@@ -3171,7 +3171,7 @@
 /obj/item/reagent_containers/food/snacks/rawmeatball
 	name = "raw meatball"
 	desc = "A raw meatball."
-	icon = 'icons/obj/food_ingredients.dmi'
+	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "rawmeatball"
 	filling_color = "#ce3711"
 	bitesize = 2
@@ -3208,7 +3208,7 @@
 /obj/item/reagent_containers/food/snacks/flatbread
 	name = "flatbread"
 	desc = "Bland but filling."
-	icon = 'icons/obj/food_ingredients.dmi'
+	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "flatbread"
 	filling_color = "#c17f3e"
 	bitesize = 2
@@ -3228,7 +3228,7 @@
 /obj/item/reagent_containers/food/snacks/rawsticks
 	name = "raw potato sticks"
 	desc = "Raw fries, not very tasty."
-	icon = 'icons/obj/food_ingredients.dmi'
+	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "rawsticks"
 	filling_color = "#e4bf7e"
 	bitesize = 2
@@ -3240,7 +3240,7 @@
 
 /obj/item/reagent_containers/food/snacks/canned
 	name = "void can"
-	icon = 'icons/obj/food_canned.dmi'
+	icon = 'icons/obj/food/food_canned.dmi'
 	atom_flags = 0
 	var/sealed = TRUE
 

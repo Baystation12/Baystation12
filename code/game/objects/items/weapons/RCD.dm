@@ -3,7 +3,7 @@
 /obj/item/rcd
 	name = "rapid construction device"
 	desc = "Small, portable, and far, far heavier than it looks, this gun-shaped device has a port into which one may insert compressed matter cartridges."
-	icon = 'icons/obj/tools.dmi'
+	icon = 'icons/obj/tools/rcd.dmi'
 	icon_state = "rcd"
 	opacity = 0
 	density = FALSE
@@ -155,7 +155,7 @@
 /obj/item/rcd_ammo
 	name = "compressed matter cartridge"
 	desc = "A highly-compressed matter cartridge usable in rapid construction (and deconstruction) devices, such as railguns."
-	icon = 'icons/obj/ammo.dmi'
+	icon = 'icons/obj/weapons/ammo.dmi'
 	icon_state = "rcd"
 	item_state = "rcdammo"
 	w_class = ITEM_SIZE_SMALL

@@ -8,7 +8,7 @@
 /obj/item/reagent_containers/syringe
 	name = "syringe"
 	desc = "A syringe."
-	icon = 'icons/obj/syringe.dmi'
+	icon = 'icons/obj/tools/syringe.dmi'
 	item_state = "rg0"
 	icon_state = "rg"
 	matter = list(MATERIAL_GLASS = 150)

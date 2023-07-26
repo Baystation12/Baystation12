@@ -1,7 +1,7 @@
 //Grown foods.
 /obj/item/reagent_containers/food/snacks/grown
 	name = "fruit"
-	icon = 'icons/obj/hydroponics_products.dmi'
+	icon = 'icons/obj/flora/hydroponics_products.dmi'
 	icon_state = "blank"
 	randpixel = 5
 	desc = "Nutritious! Probably."
@@ -137,8 +137,8 @@
 	overlays.Cut()
 	icon_state = "[seed.get_trait(TRAIT_PRODUCT_ICON)]-product"
 	color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
-	if("[seed.get_trait(TRAIT_PRODUCT_ICON)]-leaf" in icon_states('icons/obj/hydroponics_products.dmi'))
-		var/image/fruit_leaves = image('icons/obj/hydroponics_products.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]-leaf")
+	if("[seed.get_trait(TRAIT_PRODUCT_ICON)]-leaf" in icon_states('icons/obj/flora/hydroponics_products.dmi'))
+		var/image/fruit_leaves = image('icons/obj/flora/hydroponics_products.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]-leaf")
 		fruit_leaves.color = seed.get_trait(TRAIT_PLANT_COLOUR)
 		overlays |= fruit_leaves
 
@@ -308,7 +308,7 @@
 /obj/item/reagent_containers/food/snacks/fruit_slice
 	name = "fruit slice"
 	desc = "A slice of some tasty fruit."
-	icon = 'icons/obj/hydroponics_misc.dmi'
+	icon = 'icons/obj/flora/hydroponics_misc.dmi'
 	icon_state = ""
 
 var/global/list/fruit_icon_cache = list()

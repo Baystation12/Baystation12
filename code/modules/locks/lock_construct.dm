@@ -1,7 +1,7 @@
 /obj/item/material/lock_construct
 	name = "lock"
 	desc = "a crude but useful lock and bolt."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/keys.dmi'
 	icon_state = "lock"
 	w_class = ITEM_SIZE_TINY
 	var/lock_data

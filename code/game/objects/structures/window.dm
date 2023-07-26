@@ -1,7 +1,7 @@
 /obj/structure/window
 	name = "window"
 	desc = "A window."
-	icon = 'icons/obj/window.dmi'
+	icon = 'icons/obj/structures/window.dmi'
 	density = TRUE
 	w_class = ITEM_SIZE_NORMAL
 
@@ -707,7 +707,7 @@
 /obj/structure/window/shuttle
 	name = "shuttle window"
 	desc = "It looks rather strong. Might take a few good hits to shatter it."
-	icon = 'icons/obj/podwindows.dmi'
+	icon = 'icons/obj/structures/podwindows.dmi'
 	basestate = "w"
 	reinf_basestate = "w"
 	dir = 5
@@ -748,7 +748,7 @@
 
 /obj/machinery/button/windowtint
 	name = "window tint control"
-	icon = 'icons/obj/power.dmi'
+	icon = 'icons/obj/structures/buttons.dmi'
 	icon_state = "light0"
 	desc = "A remote control switch for electrochromic windows."
 	var/id

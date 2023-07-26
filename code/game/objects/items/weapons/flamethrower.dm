@@ -1,7 +1,7 @@
 /obj/item/flamethrower
 	name = "flamethrower"
 	desc = "You are a firestarter!"
-	icon = 'icons/obj/flamethrower.dmi'
+	icon = 'icons/obj/weapons/flamethrower.dmi'
 	icon_state = "flamethrowerbase"
 	item_state = "flamethrower_0"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -205,13 +205,13 @@
 #undef FLAMETHROWER_POWER_MULTIPLIER
 
 /obj/item/flamethrower/full
-	icon = 'icons/obj/flamethrower_new.dmi'
+	icon = 'icons/obj/weapons/flamethrower_new.dmi'
 	item_state = "prebuilt_flamethrower_0"
 	complete = TRUE
 
 	item_icons = list(
-		slot_l_hand_str = 'icons/obj/flamethrower_new.dmi',
-		slot_r_hand_str = 'icons/obj/flamethrower_new.dmi',
+		slot_l_hand_str = 'icons/obj/weapons/flamethrower_new.dmi',
+		slot_r_hand_str = 'icons/obj/weapons/flamethrower_new.dmi',
 		)
 
 	item_state_slots = list(

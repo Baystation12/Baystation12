@@ -1,7 +1,7 @@
 /obj/item/mop
 	desc = "The world of janitalia wouldn't be complete without a mop."
 	name = "mop"
-	icon = 'icons/obj/janitor.dmi'
+	icon = 'icons/obj/janitor_tools.dmi'
 	icon_state = "mop"
 	force = 5
 	throwforce = 10.0

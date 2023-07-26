@@ -7,8 +7,8 @@
 /obj/machinery/biogenerator
 	name = "biogenerator"
 	desc = ""
-	icon = 'icons/obj/biogenerator.dmi'
-	icon_state = "biogen-stand"
+	icon = 'icons/obj/machines/biogenerator.dmi'
+	icon_state = "biogen"
 	density = TRUE
 	anchored = TRUE
 	idle_power_usage = 40
@@ -61,12 +61,18 @@
 	update_icon()
 
 /obj/machinery/biogenerator/on_update_icon()
-	if(state == BG_NO_BEAKER)
-		icon_state = "biogen-empty"
-	else if(state == BG_READY || state == BG_COMPLETE)
-		icon_state = "biogen-stand"
-	else
-		icon_state = "biogen-work"
+	overlays.Cut()
+	if(panel_open)
+		overlays += "[icon_state]_panel"
+	if(is_powered())
+		overlays += emissive_appearance(icon, "[icon_state]_lights")
+		overlays += "[icon_state]_lights"
+	if(state == BG_READY || state == BG_COMPLETE)
+		overlays += "biogen_stand"
+	else if (state == BG_PROCESSING)
+		overlays += emissive_appearance(icon, "[icon_state]_lights_working")
+		overlays += "[icon_state]_lights_working"
+		overlays += "biogen_stand"
 	return
 
 /obj/machinery/biogenerator/components_are_accessible(path)

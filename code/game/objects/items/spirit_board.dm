@@ -1,7 +1,7 @@
 /obj/item/spirit_board
 	name = "spirit board"
 	desc = "A wooden board with letters etched into it, used in seances."
-	icon = 'icons/obj/objects.dmi'
+	icon = 'icons/obj/spiritboard.dmi'
 	icon_state = "spirit_board"
 	density = TRUE
 	var/next_use = 0

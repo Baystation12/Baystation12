@@ -13,7 +13,7 @@
 /obj/structure/morgue
 	name = "morgue"
 	desc = "Used to keep bodies in until someone fetches them."
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/structures/morgue_tray.dmi'
 	icon_state = "morgue1"
 	dir = EAST
 	density = TRUE
@@ -141,7 +141,7 @@
 /obj/structure/m_tray
 	name = "morgue tray"
 	desc = "Apply corpse before closing."
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/structures/morgue_tray.dmi'
 	icon_state = "morguet"
 	density = TRUE
 	layer = BELOW_OBJ_LAYER
@@ -190,7 +190,7 @@
 /obj/structure/crematorium
 	name = "crematorium"
 	desc = "A human incinerator. Works well on barbeque nights."
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/structures/crematorium.dmi'
 	icon_state = "crema1"
 	density = TRUE
 	var/obj/structure/c_tray/connected = null
@@ -400,7 +400,7 @@
 /obj/structure/c_tray
 	name = "crematorium tray"
 	desc = "Apply body before burning."
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/structures/crematorium.dmi'
 	icon_state = "cremat"
 	density = TRUE
 	layer = BELOW_OBJ_LAYER
@@ -441,13 +441,10 @@
 /obj/machinery/button/crematorium
 	name = "crematorium igniter"
 	desc = "Burn baby burn!"
-	icon = 'icons/obj/power.dmi'
-	icon_state = "crema_switch"
+	icon = 'icons/obj/structures/buttons.dmi'
+	icon_state = "blast_ctrl"
 	req_access = list(access_crematorium)
 	id_tag = 1
-
-/obj/machinery/button/crematorium/on_update_icon()
-	return
 
 /obj/machinery/button/crematorium/activate(mob/user)
 	if(operating)

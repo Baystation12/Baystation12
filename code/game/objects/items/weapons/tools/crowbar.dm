@@ -1,7 +1,7 @@
 /obj/item/crowbar
 	name = "crowbar"
 	desc = "A heavy crowbar of solid steel, good and solid in your hand."
-	icon = 'icons/obj/tools.dmi'
+	icon = 'icons/obj/tools/crowbar.dmi'
 	icon_state = "crowbar"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT

@@ -129,7 +129,7 @@
 /obj/item/slimepotion
 	name = "docility potion"
 	desc = "A potent chemical mix that will nullify a slime's powers, causing it to become docile and tame."
-	icon = 'icons/obj/chemical.dmi'
+	icon = 'icons/obj/chemical_storage.dmi'
 	icon_state = "Pinkpotion"
 
 /obj/item/slimepotion/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
@@ -163,7 +163,7 @@
 /obj/item/slimepotion2
 	name = "advanced docility potion"
 	desc = "A potent chemical mix that will nullify a slime's powers, causing it to become docile and tame. This one is meant for adult slimes."
-	icon = 'icons/obj/chemical.dmi'
+	icon = 'icons/obj/chemical_storage.dmi'
 	icon_state = "LPinkpotion"
 
 /obj/item/slimepotion2/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
@@ -195,7 +195,7 @@
 /obj/item/slimesteroid
 	name = "slime steroid"
 	desc = "A potent chemical mix that will cause a slime to generate more extract."
-	icon = 'icons/obj/chemical.dmi'
+	icon = 'icons/obj/chemical_storage.dmi'
 	icon_state = "Greenpotion"
 
 /obj/item/slimesteroid/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
@@ -219,7 +219,7 @@
 /obj/item/slimesteroid2
 	name = "extract enhancer"
 	desc = "A potent chemical mix that will give a slime extract three uses."
-	icon = 'icons/obj/chemical.dmi'
+	icon = 'icons/obj/chemical_storage.dmi'
 	icon_state = "Ceruleanpotion"
 
 /obj/item/slimesteroid2/afterattack(obj/target, mob/user , flag)
@@ -240,7 +240,7 @@
 /obj/item/slimepotion3
 	name= "revival potion"
 	desc= "A potent chemical mix that will revitalize a recently dead slime"
-	icon= 'icons/obj/chemical.dmi'
+	icon= 'icons/obj/chemical_storage.dmi'
 	icon_state= "Goldpotion"
 
 /obj/item/slimepotion3/attack(mob/living/carbon/slime/M, mob/user)

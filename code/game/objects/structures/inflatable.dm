@@ -1,7 +1,7 @@
 /obj/item/inflatable
 	name = "inflatable"
 	w_class = ITEM_SIZE_NORMAL
-	icon = 'icons/obj/inflatable.dmi'
+	icon = 'icons/obj/structures/inflatable.dmi'
 	health_max = 10
 	health_min_damage = 10
 	var/deploy_path = null
@@ -64,7 +64,7 @@
 	density = TRUE
 	anchored = TRUE
 	opacity = 0
-	icon = 'icons/obj/inflatable.dmi'
+	icon = 'icons/obj/structures/inflatable.dmi'
 	icon_state = "wall"
 	atmos_canpass = CANPASS_DENSITY
 	health_max = 20
@@ -310,7 +310,7 @@
 /obj/item/inflatable/torn
 	name = "torn inflatable wall"
 	desc = "A folded membrane which rapidly expands into a large cubical shape on activation. It is too torn to be usable."
-	icon = 'icons/obj/inflatable.dmi'
+	icon = 'icons/obj/structures/inflatable.dmi'
 	icon_state = "folded_wall_torn"
 
 /obj/item/inflatable/torn/attack_self(mob/user)
@@ -320,7 +320,7 @@
 /obj/item/inflatable/door/torn
 	name = "torn inflatable door"
 	desc = "A folded membrane which rapidly expands into a simple door on activation. It is too torn to be usable."
-	icon = 'icons/obj/inflatable.dmi'
+	icon = 'icons/obj/structures/inflatable.dmi'
 	icon_state = "folded_door_torn"
 
 /obj/item/inflatable/door/torn/attack_self(mob/user)
@@ -330,6 +330,7 @@
 /obj/item/storage/briefcase/inflatable
 	name = "inflatable barrier box"
 	desc = "Contains inflatable walls and doors."
+	icon = 'icons/obj/tools/inflatable_dispenser.dmi'
 	icon_state = "inf_box"
 	item_state = "case"
 	w_class = ITEM_SIZE_LARGE

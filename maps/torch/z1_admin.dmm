@@ -2688,7 +2688,7 @@
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "avd" = (
-/obj/machinery/robotic_fabricator,
+/obj/machinery/robotics_fabricator,
 /obj/machinery/light{
 	dir = 1
 	},

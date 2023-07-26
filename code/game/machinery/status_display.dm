@@ -10,7 +10,7 @@
 // Alert status
 // And arbitrary messages set by comms computer
 /obj/machinery/status_display
-	icon = 'icons/obj/status_display.dmi'
+	icon = 'icons/obj/machines/status_display.dmi'
 	icon_state = "frame"
 	name = "status display"
 	layer = ABOVE_WINDOW_LAYER
@@ -198,7 +198,7 @@
 	remove_display()
 	if(!picture || picture_state != state)
 		picture_state = state
-		picture = image('icons/obj/status_display.dmi', icon_state=picture_state)
+		picture = image('icons/obj/machines/status_display.dmi', icon_state=picture_state)
 	overlays |= picture
 	set_light(0.5, 0.1, 1, 2, COLOR_WHITE)
 

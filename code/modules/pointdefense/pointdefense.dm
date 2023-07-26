@@ -2,7 +2,7 @@
 /obj/machinery/pointdefense_control
 	name = "fire assist mainframe"
 	desc = "A specialized computer designed to synchronize a variety of weapon systems and a vessel's astronav data."
-	icon = 'icons/obj/artillery.dmi'
+	icon = 'icons/obj/machines/artillery.dmi'
 	icon_state = "control"
 	var/ui_template = "pointdefense_control.tmpl"
 	var/initial_id_tag
@@ -98,7 +98,7 @@
 
 /obj/machinery/pointdefense
 	name = "point defense battery"
-	icon = 'icons/obj/artillery.dmi'
+	icon = 'icons/obj/machines/artillery.dmi'
 	icon_state = "pointdefense"
 	desc = "A Kuiper pattern anti-meteor battery. Capable of destroying most threats in a single salvo."
 	density = TRUE

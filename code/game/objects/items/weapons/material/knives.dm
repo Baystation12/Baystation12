@@ -2,7 +2,7 @@
 /obj/item/material/knife //master obj
 	name = "the concept of a knife"
 	desc = "You call that a knife? This is a master item - berate the admin or mapper who spawned this!"
-	icon = 'icons/obj/knife.dmi'
+	icon = 'icons/obj/weapons/knife.dmi'
 	icon_state = "knife"
 	item_state = "knife"
 	max_force = 15
@@ -97,7 +97,7 @@
 /obj/item/material/knife/ritual
 	name = "ritual knife"
 	desc = "The unearthly energies that once powered this blade are now dormant."
-	icon = 'icons/obj/wizard.dmi'
+	icon = 'icons/obj/cult.dmi'
 	icon_state = "render"
 	base_parry_chance = 30
 	applies_material_colour = FALSE

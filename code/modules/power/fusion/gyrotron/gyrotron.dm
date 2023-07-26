@@ -2,9 +2,9 @@
 
 /obj/machinery/power/emitter/gyrotron
 	name = "gyrotron"
-	icon = 'icons/obj/machines/power/fusion.dmi'
+	icon = 'icons/obj/machines/power/gyrotron.dmi'
 	desc = "A heavy-duty, highly configurable industrial gyrotron suited for powering fusion reactors."
-	icon_state = "emitter-off"
+	icon_state = "emitter"
 	req_lock_access = list(access_engine)
 	use_power = POWER_USE_IDLE
 	active_power_usage = GYRO_POWER
@@ -48,10 +48,12 @@
 	return E
 
 /obj/machinery/power/emitter/gyrotron/on_update_icon()
+	overlays.Cut()
+	if(panel_open)
+		overlays += "[icon_state]_panel"
 	if (active && powernet && avail(active_power_usage))
-		icon_state = "emitter-on"
-	else
-		icon_state = "emitter-off"
+		overlays += emissive_appearance(icon, "[icon_state]_lights")
+		overlays += "[icon_state]_lights"
 
 /obj/machinery/power/emitter/gyrotron/attackby(obj/item/W, mob/user)
 	if(isMultitool(W))

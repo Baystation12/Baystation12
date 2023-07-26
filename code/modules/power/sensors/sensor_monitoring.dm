@@ -6,7 +6,7 @@
 /obj/machinery/computer/power_monitor
 	name = "power monitoring console"
 	desc = "Computer designed to remotely monitor power levels."
-	icon = 'icons/obj/computer.dmi'
+	icon = 'icons/obj/machines/computer.dmi'
 	icon_keyboard = "power_key"
 	icon_screen = "power"
 	light_color = "#ffcc33"

@@ -42,7 +42,7 @@
 /obj/item/gun/energy/staff/focus
 	name = "mental focus"
 	desc = "An artefact that channels the will of the user into destructive bolts of force. If you aren't careful with it, you might poke someone's brain out."
-	icon = 'icons/obj/wizard.dmi'
+	icon = 'icons/obj/cult.dmi'
 	icon_state = "focus"
 	item_state = "focus"
 	projectile_type = /obj/item/projectile/forcebolt

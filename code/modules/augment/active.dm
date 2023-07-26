@@ -8,7 +8,8 @@
 
 
 /obj/item/organ/internal/augment/active/proc/activate()
-
+	set category = "Object"
+	set name = "Activate"
 
 /obj/item/organ/internal/augment/active/onInstall()
 	limb = owner.get_organ(parent_organ)

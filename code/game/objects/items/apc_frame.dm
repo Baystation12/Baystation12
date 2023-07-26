@@ -3,7 +3,7 @@
 /obj/item/frame/apc
 	name = "\improper APC frame"
 	desc = "Used for repairing or building APCs."
-	icon = 'icons/obj/apc_repair.dmi'
+	icon = 'icons/obj/machines/apc_repair.dmi'
 	icon_state = "apc_frame"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 

@@ -200,7 +200,7 @@
 		L.reagents.add_reagent(/datum/reagent/toxin/venom, 5)
 
 /obj/item/missile
-	icon = 'icons/obj/grenade.dmi'
+	icon = 'icons/obj/weapons/grenade.dmi'
 	icon_state = "missile"
 	var/primed = null
 	throwforce = 15

@@ -1,7 +1,7 @@
 /obj/machinery/barrier
 	name = "deployable barrier"
 	desc = "A deployable barrier."
-	icon = 'icons/obj/objects.dmi'
+	icon = 'icons/obj/security_barriers.dmi'
 	icon_state = "barrier0"
 	req_access = list(access_brig)
 	density = TRUE

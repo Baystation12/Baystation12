@@ -1,7 +1,7 @@
 // Used to deploy the bacon.
 /obj/item/supply_beacon
 	name = "inactive supply beacon"
-	icon = 'icons/obj/supplybeacon.dmi'
+	icon = 'icons/obj/machines/supplybeacon.dmi'
 	desc = "An inactive, hacked supply beacon stamped with the Nyx Rapid Fabrication logo. Good for one (1) ballistic supply pod shipment."
 	icon_state = "beacon"
 	var/deploy_path = /obj/machinery/power/supply_beacon
@@ -24,7 +24,7 @@
 /obj/machinery/power/supply_beacon
 	name = "supply beacon"
 	desc = "A bulky moonshot supply beacon. Someone has been messing with the wiring."
-	icon = 'icons/obj/supplybeacon.dmi'
+	icon = 'icons/obj/machines/supplybeacon.dmi'
 	icon_state = "beacon"
 
 	anchored = FALSE

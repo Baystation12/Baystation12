@@ -157,7 +157,7 @@
 /obj/structure/casino/pod_controller
 	name = "escape pod controller"
 	desc = "An escape pod controller. This one seems to have crashed and doesn't respond to commands."
-	icon = 'icons/obj/airlock_machines.dmi'
+	icon = 'icons/obj/doors/airlock_machines.dmi'
 	icon_state = "airlock_control_off"
 
 //========================used bullet casings=======================

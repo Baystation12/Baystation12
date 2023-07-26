@@ -1,7 +1,7 @@
 /obj/item/autopsy_scanner
 	name = "autopsy scanner"
 	desc = "Used to gather information on wounds."
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/obj/surgery_tools.dmi'
 	icon_state = "autopsy_scanner"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL

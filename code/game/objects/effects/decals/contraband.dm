@@ -4,7 +4,7 @@
 /obj/item/contraband
 	name = "contraband item"
 	desc = "You probably shouldn't be holding this."
-	icon = 'icons/obj/contraband.dmi'
+	icon = 'icons/obj/structures/contraband.dmi'
 	force = 0
 
 
@@ -84,7 +84,7 @@
 /obj/structure/sign/poster
 	name = "poster"
 	desc = "A large piece of space-resistant printed paper."
-	icon = 'icons/obj/contraband.dmi'
+	icon = 'icons/obj/structures/contraband.dmi'
 	anchored = TRUE
 	var/poster_type
 	var/ruined = 0

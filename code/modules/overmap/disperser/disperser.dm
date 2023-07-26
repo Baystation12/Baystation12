@@ -2,7 +2,7 @@
 //This is just basic construction and deconstruction and the like
 
 /obj/machinery/disperser
-	icon = 'icons/obj/disperser.dmi'
+	icon = 'icons/obj/machines/disperser.dmi'
 	density = TRUE
 	anchored = TRUE
 	construct_state = /singleton/machine_construction/default/panel_closed
