@@ -1,4 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - bugfix: Airlocks don't crush mobs for twice the damage anymore
