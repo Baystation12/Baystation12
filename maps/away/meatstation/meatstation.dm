@@ -254,7 +254,7 @@
 
 /obj/random/single/meatstation/laser
 	icon_state = "laser50"
-	spawn_object = /obj/item/gun/energy/laser/xenofauna/broken
+	spawn_object = /obj/item/gun/energy/laser/old
 
 /obj/random/single/meatstation/low/biocell
 	icon_state = "biocell10"

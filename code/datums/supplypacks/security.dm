@@ -324,9 +324,3 @@
 	containername = "security voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_brig
-
-/singleton/hierarchy/supply_pack/security/xenofauna
-	name = "Weapons - Xenofauna Carbines"
-	contains = list(/obj/item/gun/energy/laser/xenofauna = 3)
-	cost = 40
-	containername = "xenofauna carbine crate"

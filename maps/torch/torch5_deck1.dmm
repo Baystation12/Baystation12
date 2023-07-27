@@ -23899,8 +23899,6 @@
 "ozG" = (
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/gun/energy/laser/xenofauna,
-/obj/item/gun/energy/laser/xenofauna,
 /turf/simulated/floor/tiled/dark,
 /area/security/secure_storage)
 "oAp" = (
