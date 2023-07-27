@@ -143,7 +143,7 @@
 	meat_amount = 3
 	projectilesound = 'sound/weapons/Laser.ogg'
 	ranged = 1
-	projectiletype = /obj/item/projectile/beam/meatstation
+	projectiletype = /obj/item/projectile/beam/smalllaser
 
 	say_list_type = /datum/say_list/meatstation/meat_human
 /obj/item/natural_weapon/wormguard
@@ -171,47 +171,7 @@
 	sharp = TRUE
 	attack_verb = list("chomped")
 
-//projectile
-
-/obj/item/projectile/beam/meatstation
-	damage = 10
-	agony = 10
-	armor_penetration = 5
-
-	muzzle_type = /obj/effect/projectile/meatstation/muzzle
-	tracer_type = /obj/effect/projectile/meatstation/tracer
-	impact_type = /obj/effect/projectile/meatstation/impact
-
-/obj/effect/projectile/meatstation
-	light_color = COLOR_RED_LIGHT
-	icon = 'maps/away/meatstation/meatstation_sprites.dmi'
-
-/obj/effect/projectile/meatstation/tracer
-	icon_state = "redstun"
-
-/obj/effect/projectile/meatstation/muzzle
-	icon_state = "muzzle_redstun"
-
-/obj/effect/projectile/meatstation/impact
-	icon_state = "impact_redstun"
-
 //items
-
-/obj/item/gun/energy/laser/meatstation
-	name = "LP76 carbine"
-	desc = "An outdated energy carbine, originally designed for peacekeeping operations. Fires super-heated stun beams."
-	icon = 'maps/away/meatstation/meatstation_sprites.dmi'
-	item_icons = list(
-		slot_l_hand_str = 'maps/away/meatstation/meatstation_left_hand.dmi',
-		slot_r_hand_str = 'maps/away/meatstation/meatstation_right_hand.dmi',
-		)
-	icon_state = "meatstationlaser"
-	item_state = "meatstationlaser"
-	projectile_type = /obj/item/projectile/beam/meatstation
-	slot_flags = null
-	wielded_item_state = "meatstationlaser-wielded"
-	fire_delay = 15
-	max_shots = 12
 
 /obj/item/reagent_containers/food/snacks/meat/meatstationmeat
 	name = "tainted meat"
@@ -294,7 +254,7 @@
 
 /obj/random/single/meatstation/laser
 	icon_state = "laser50"
-	spawn_object = /obj/item/gun/energy/laser/meatstation
+	spawn_object = /obj/item/gun/energy/laser/xenofauna/broken
 
 /obj/random/single/meatstation/low/biocell
 	icon_state = "biocell10"
