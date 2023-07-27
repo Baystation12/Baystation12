@@ -1,10 +1,22 @@
-/obj/item/clothing/suit/storage/solgov
-	name = "master solgov jacket"
+/obj/item/clothing/suit/solgov
+	abstract_type = /obj/item/clothing/suit/solgov
+	name = "master solgov suit"
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_solgov_unathi.dmi'
 	)
+
+
+/obj/item/clothing/suit/storage/solgov
+	abstract_type = /obj/item/clothing/suit/storage/solgov
+	name = "master solgov suit with pockets"
+	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_solgov_unathi.dmi'
+	)
+
 
 //Service
 
@@ -138,6 +150,46 @@
 	icon_state = "blueservice_flag"
 	item_state = "blueservice_flag"
 
+//Fleet Service Sweater
+
+/obj/item/clothing/suit/solgov/fleet_sweater
+	name = "fleet service sweater"
+	desc = "A navy blue SCG Fleet service sweater."
+	icon_state = "fleet_sweater"
+	item_state = "fleet_sweater"
+	body_parts_covered = UPPER_TORSO|ARMS
+	allowed = null
+	valid_accessory_slots = list(
+		ACCESSORY_SLOT_ARMBAND,
+		ACCESSORY_SLOT_MEDAL,
+		ACCESSORY_SLOT_INSIGNIA,
+		ACCESSORY_SLOT_RANK,
+		ACCESSORY_SLOT_DEPT,
+		ACCESSORY_SLOT_DECOR
+	)
+	restricted_accessory_slots = list(
+		ACCESSORY_SLOT_ARMBAND,
+		ACCESSORY_SLOT_RANK,
+		ACCESSORY_SLOT_DEPT
+	)
+
+/obj/item/clothing/suit/solgov/fleet_sweater/officer
+	name = "fleet officer's service sweater"
+	desc = "A navy blue SCG Fleet service sweater with silver accents."
+	icon_state = "fleet_sweater_off"
+	item_state = "fleet_sweater_off"
+
+/obj/item/clothing/suit/solgov/fleet_sweater/command
+	name = "fleet senior officer's service sweater"
+	desc = "A navy blue SCG Fleet service sweater with gold accents."
+	icon_state = "fleet_sweater_comm"
+	item_state = "fleet_sweater_comm"
+
+/obj/item/clothing/suit/solgov/fleet_sweater/flag
+	name = "fleet flag officer's service sweater"
+	desc = "A navy blue SCG Fleet serivce sweater with red accents."
+	icon_state = "fleet_sweater_flag"
+	item_state = "fleet_sweater_flag"
 
 //Dress - murder me with a gun why are these 3 different types
 
