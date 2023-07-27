@@ -10,7 +10,7 @@
 	available_on_ntnet = TRUE
 	var/stored_login = ""
 	var/stored_password = ""
-	usage_flags = PROGRAM_ALL
+	usage_flags = PROGRAM_ALL|PROGRAM_NO_KILL
 	category = PROG_OFFICE
 
 	nanomodule_path = /datum/nano_module/email_client

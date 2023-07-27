@@ -113,6 +113,11 @@
 /datum/extension/interactive/ntos/proc/kill_program_remote(datum/computer_file/program/P, forced = FALSE, mob/user = null)
 	if(!P)
 		return
+
+	if (!forced && GET_FLAGS(P.usage_flags, PROGRAM_NO_KILL))
+		minimize_program(user)
+		return
+
 	P.on_shutdown(forced)
 	running_programs -= P
 	if(active_program == P)
