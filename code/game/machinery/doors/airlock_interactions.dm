@@ -71,29 +71,27 @@
 	return TRUE
 
 /mob/living/airlock_crush(crush_damage)
-	..()
-
-	for(var/i in 1 to round(crush_damage/AIRLOCK_CRUSH_INCREMENT, 1))
+	for (var/i in 1 to round(crush_damage/AIRLOCK_CRUSH_INCREMENT, 1))
 		apply_damage(AIRLOCK_CRUSH_INCREMENT, DAMAGE_BRUTE)
 
 	SetStunned(round(crush_damage / 8, 1))
 	SetWeakened(round(crush_damage / 8, 1))
 
 	var/turf/T = loc
-	if(!istype(T))
+	if (!istype(T))
 		return
 
 	var/list/valid_turfs = list()
-	for(var/dir_to_test in GLOB.cardinal)
+	for (var/dir_to_test in GLOB.cardinal)
 		var/turf/new_turf = get_step(T, dir_to_test)
-		if(!new_turf.contains_dense_objects())
+		if (!new_turf.contains_dense_objects())
 			valid_turfs |= new_turf
 
-	while(length(valid_turfs))
+	while (length(valid_turfs))
 		T = pick(valid_turfs)
 		valid_turfs -= T
 		// Try to move us to the turf. If all turfs fail for some reason we will stay on this tile.
-		if(src.Move(T))
+		if (src.Move(T))
 			return
 
 /mob/living/carbon/airlock_crush(crush_damage)
