@@ -443,3 +443,32 @@
 	muzzle_type = /obj/effect/projectile/laser/blue/muzzle
 	tracer_type = /obj/effect/projectile/laser/blue/tracer
 	impact_type = /obj/effect/projectile/laser/blue/impact
+
+/obj/item/projectile/beam/xenofauna
+	damage = 0
+	agony = 5
+
+	muzzle_type = /obj/effect/projectile/xenofauna/muzzle
+	tracer_type = /obj/effect/projectile/xenofauna/tracer
+	impact_type = /obj/effect/projectile/xenofauna/impact
+
+/obj/effect/projectile/xenofauna
+	light_color = COLOR_RED_LIGHT
+
+/obj/effect/projectile/xenofauna/tracer
+	icon_state = "redstun"
+
+/obj/effect/projectile/xenofauna/muzzle
+	icon_state = "muzzle_redstun"
+
+/obj/effect/projectile/xenofauna/impact
+	icon_state = "impact_redstun"
+
+
+/obj/item/projectile/beam/xenofauna/on_hit(atom/target, blocked)
+	..()
+	if (!istype(target, /mob/living/simple_animal))
+		return
+	if (istype(target, /mob/living/simple_animal/hostile/human))
+		return
+	target.damage_health(35, DAMAGE_BURN)

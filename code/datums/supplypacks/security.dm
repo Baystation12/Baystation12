@@ -187,7 +187,7 @@
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "lethal shotgun shells crate"
-	access = access_security
+	access = access_hos
 	security_level = SUPPLY_SECURITY_ELEVATED
 
 /singleton/hierarchy/supply_pack/security/shotgunbeanbag
@@ -196,24 +196,24 @@
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "beanbag shotgun shells crate"
-	access = access_security
+	access = access_armory
 
 /singleton/hierarchy/supply_pack/security/pdwammo
 	name = "Ammunition - SMG top mounted"
-	contains = list(/obj/item/ammo_magazine/smg_top = 4)
-	cost = 40
+	contains = list(/obj/item/storage/box/ammo/smg = 2)
+	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "SMG ammunition crate"
-	access = access_security
+	access = access_hos
 	security_level = SUPPLY_SECURITY_HIGH
 
 /singleton/hierarchy/supply_pack/security/pdwammorubber
 	name = "Ammunition - SMG top mounted rubber"
-	contains = list(/obj/item/ammo_magazine/smg_top/rubber = 4)
-	cost = 30
+	contains = list(/obj/item/storage/box/ammo/smg/rubber = 2)
+	cost = 20
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "SMG rubber ammunition crate"
-	access = access_security
+	access = access_armory
 
 /singleton/hierarchy/supply_pack/security/pdwammopractice
 	name = "Ammunition - SMG top mounted practice"
@@ -225,11 +225,11 @@
 
 /singleton/hierarchy/supply_pack/security/bullpupammo
 	name = "Ammunition - heavy bullpup rifle"
-	contains = list(/obj/item/ammo_magazine/mil_rifle/heavy = 4)
-	cost = 60
+	contains = list(/obj/item/storage/box/ammo/heavy_bullpup = 2)
+	cost = 40
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "heavy bullpup rifle ammunition crate"
-	access = access_security
+	access = access_hos
 	security_level = SUPPLY_SECURITY_HIGH
 
 /singleton/hierarchy/supply_pack/security/bullpupammopractice
@@ -242,11 +242,11 @@
 
 /singleton/hierarchy/supply_pack/security/lightbullpupammo
 	name = "Ammunition - light bullpup rifle"
-	contains = list(/obj/item/ammo_magazine/mil_rifle/light = 4)
-	cost = 40
+	contains = list(/obj/item/storage/box/ammo/light_bullpup = 2)
+	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "light bullpup ammunition crate"
-	access = access_security
+	access = access_armory
 	security_level = SUPPLY_SECURITY_HIGH
 
 /singleton/hierarchy/supply_pack/security/lightbullpupammopractice
@@ -324,3 +324,9 @@
 	containername = "security voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_brig
+
+/singleton/hierarchy/supply_pack/security/xenofauna
+	name = "Weapons - Xenofauna Carbines"
+	contains = list(/obj/item/gun/energy/laser/xenofauna = 3)
+	cost = 40
+	containername = "xenofauna carbine crate"
