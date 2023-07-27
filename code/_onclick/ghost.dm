@@ -40,7 +40,7 @@
 			AltClickOn(target_turf)
 		return
 	if(modifiers["shift"])
-		examinate(A)
+		examinate(src, A)
 		return
 	A.attack_ghost(src)
 
