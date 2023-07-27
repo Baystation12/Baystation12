@@ -1,0 +1,4 @@
+author: SuhEugene
+delete-after: true
+changes:
+  - admin: Added selection of a specific lights fix or destruction zone.
