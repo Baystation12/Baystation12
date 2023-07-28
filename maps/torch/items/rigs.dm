@@ -297,9 +297,8 @@
 		/obj/item/device/core_sampler,
 		/obj/item/device/gps,
 		/obj/item/pinpointer/radio,
-		/obj/item/pickaxe/xeno,
-		/obj/item/storage/bag/fossils,
-		/obj/item/rig_module/grenade_launcher/light
+		/obj/item/pickaxe,
+		/obj/item/storage/bag/fossils
 	)
 
 /obj/item/clothing/shoes/magboots/rig/command/science
@@ -308,6 +307,7 @@
 
 /obj/item/rig/command/science/equipped
 	initial_modules = list(
+		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/flash,
 		/obj/item/rig_module/device/anomaly_scanner,

@@ -11217,12 +11217,6 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/cell3)
-"AS" = (
-/obj/structure/table/glass,
-/obj/item/modular_computer/tablet/lease/preset/command,
-/obj/item/book/manual/nt_regs,
-/turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
 "AT" = (
 /obj/structure/table/steel,
 /obj/machinery/chemical_dispenser/bar_soft/full,
@@ -11654,7 +11648,7 @@
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/phoron)
 "CJ" = (
-/obj/structure/bed/chair/office/comfy/red{
+/obj/structure/bed/chair/office/comfy/purple{
 	dir = 1
 	},
 /turf/simulated/floor/lino,
@@ -11878,7 +11872,6 @@
 /area/shuttle/petrov/phoron)
 "Du" = (
 /obj/structure/table/glass,
-/obj/item/device/paicard,
 /turf/simulated/floor/lino,
 /area/shuttle/petrov/rd)
 "Dv" = (
@@ -12707,12 +12700,12 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/hallwaya)
 "GX" = (
-/obj/structure/bed/chair/padded/red,
 /obj/structure/cable/cyan{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/structure/bed/chair/padded/purple,
 /turf/simulated/floor/lino,
 /area/shuttle/petrov/rd)
 "Ha" = (
@@ -42822,7 +42815,7 @@ MN
 LW
 eW
 GX
-AS
+Du
 PR
 wu
 LA
