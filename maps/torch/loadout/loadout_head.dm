@@ -148,6 +148,27 @@
 	options["SCG flag"] = /obj/item/clothing/accessory/armor_tag/solgov
 	options["EC flag"] = /obj/item/clothing/accessory/armor_tag/solgov/ec
 	options["Fleet flag"] =  /obj/item/clothing/accessory/armor_tag/solgov/fleet
+	options["Venus flag"] = /obj/item/clothing/accessory/armor_tag/venus
+	options["Earth flag"] = /obj/item/clothing/accessory/armor_tag/earth
+	options["Luna flag"] = /obj/item/clothing/accessory/armor_tag/luna
+	options["Mars flag"] = /obj/item/clothing/accessory/armor_tag/mars
+	options["Phobos flag"] = /obj/item/clothing/accessory/armor_tag/phobos
+	options["Ceres flag"] = /obj/item/clothing/accessory/armor_tag/ceres
+	options["Pluto flag"] = /obj/item/clothing/accessory/armor_tag/pluto
+	options["Terra flag"] = /obj/item/clothing/accessory/armor_tag/terra
+	options["Eos flag"] = /obj/item/clothing/accessory/armor_tag/eos
+	options["Pirx flag"] = /obj/item/clothing/accessory/armor_tag/pirx
+	options["Tadmor flag"] = /obj/item/clothing/accessory/armor_tag/tadmor
+	options["Saffar flag"] = /obj/item/clothing/accessory/armor_tag/saffar
+	options["Foster's World flag"] = /obj/item/clothing/accessory/armor_tag/fostersworld
+	options["Nueva Castilla flag"] = /obj/item/clothing/accessory/armor_tag/nuevacastilla
+	options["North Gaia flag"] = /obj/item/clothing/accessory/armor_tag/northgaia
+	options["South Gaia flag"] = /obj/item/clothing/accessory/armor_tag/southgaia
+	options["The Strip flag"] = /obj/item/clothing/accessory/armor_tag/middlegaia
+	options["Iolaus flag"] = /obj/item/clothing/accessory/armor_tag/iolaus
+	options["Brahe flag"] = /obj/item/clothing/accessory/armor_tag/brahe
+	options["Magnitka flag"] = /obj/item/clothing/accessory/armor_tag/magnitka
+	options["ICCG flag"] = /obj/item/clothing/accessory/armor_tag/gilgamesh
 	gear_tweaks += new /datum/gear_tweak/path (options)
 
 
