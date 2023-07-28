@@ -16,14 +16,14 @@
 
 /obj/item/natural_weapon/bite
 	name = "teeth"
-	attack_verb = list("bitten")
+	attack_verb = list("bit")
 	hitsound = 'sound/weapons/bite.ogg'
 	force = 10
 	sharp = TRUE
 
 /obj/item/natural_weapon/bite/weak
 	force = 5
-	attack_verb = list("bitten", "nipped")
+	attack_verb = list("bit", "nipped")
 
 /obj/item/natural_weapon/bite/mouse
 	force = 1

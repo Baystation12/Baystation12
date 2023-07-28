@@ -53,9 +53,9 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if (HAS_FLAGS(item_flags, ITEM_FLAG_TRY_ATTACK))
 		use_call = "on"
 		. = use_on(atom, user, click_params)
-		if (!. && attack(atom, user))
+		if (!.)
 			use_call = "attack"
-			. = TRUE
+			. = attack(atom, user)
 	if (!. && user.a_intent == I_HURT)
 		use_call = "weapon"
 		. = atom.use_weapon(src, user, click_params)
@@ -281,17 +281,22 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		if (!aura_check(AURA_TYPE_WEAPON, weapon, user))
 			return TRUE
 		var/damage_flags = weapon.damage_flags()
+		var/weapon_mention
+		if (weapon.attack_message_name())
+			weapon_mention = " with [weapon.attack_message_name()]"
+		var/attack_verb = "[pick(weapon.attack_verb)]"
+
 		if (!can_damage_health(weapon.force, weapon.damtype, damage_flags))
 			playsound(src, weapon.hitsound, 50, TRUE)
 			user.visible_message(
-				SPAN_WARNING("\The [user] hits \the [src] with \a [weapon], but it bounces off!"),
-				SPAN_WARNING("You hit \the [src] with \the [weapon], but it bounces off!"),
+				SPAN_WARNING("\The [user] hit \the [src] [weapon_mention], but it bounced off!"),
+				SPAN_WARNING("You hit \the [src] [weapon_mention], but it bounced off!"),
 				exclude_mobs = list(src)
 			)
 			show_message(
-				SPAN_WARNING("\The [user] hits you with \a [weapon], but it bounces off!"),
+				SPAN_WARNING("\The [user] hit you [weapon_mention], but it bounced off!"),
 				VISIBLE_MESSAGE,
-				SPAN_WARNING("You feel something bounce off you harmlessly.")
+				SPAN_WARNING("You felt something bounce off you harmlessly.")
 			)
 			return TRUE
 
@@ -373,13 +378,11 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /atom/proc/attackby(obj/item/item, mob/living/user, click_params)
 	return FALSE
 
-
 /mob/living/attackby(obj/item/item, mob/living/user, click_params)
-	// Legacy mob attack code is handled by the weapon
+	// Legacy mob attack code is handled by the weapon. Should work towards removing this.
 	if (item.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone()))
 		return TRUE
 	return ..()
-
 
 /**
  * Called when the item is in the active hand and another atom is clicked and `resolve_attackby()` returns FALSE. This is generally called by `ClickOn()`.
@@ -417,7 +420,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
  * Called when a mob is clicked while the item is in the active hand and the interaction is not valid for surgery. Generally called by the mob's `attackby()` proc.
  *
  * **Parameters**:
- * - `M` - The mob that was clicked.
+ * - `subject` - The mob that was clicked.
  * - `user` - The mob that clicked the target.
  * - `target_zone` - The mob targeting zone `user` had selected when clicking.
  * - `animate` (boolean) - Whether or not to show the attack animation.
@@ -425,28 +428,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
  * Returns boolean to indicate whether the item usage was successful or not.
  */
 /obj/item/proc/attack(mob/living/subject, mob/living/user, target_zone, animate = TRUE)
-	if (!force || (item_flags & ITEM_FLAG_NO_BLUDGEON))
-		return FALSE
-	if (subject == user && user.a_intent != I_HURT)
-		return FALSE
-	if (user.a_intent == I_HELP && !attack_ignore_harm_check)
-		return FALSE
-	if (!no_attack_log)
-		admin_attack_log(user, subject, "Attacked using \a [src] (DAMTYE: [uppertext(damtype)])", "Was attacked with \a [src] (DAMTYE: [uppertext(damtype)])", "used \a [src] (DAMTYE: [uppertext(damtype)]) to attack")
-	user.setClickCooldown(user.get_attack_speed(src))
-	if (animate)
-		user.do_attack_animation(subject)
-	if (!subject.aura_check(AURA_TYPE_WEAPON, src, user))
-		return FALSE
-	var/hit_zone = subject.resolve_item_attack(src, user, target_zone)
-	var/datum/attack_result/result = hit_zone
-	if (istype(result))
-		if (result.hit_zone)
-			apply_hit_effect(result.attackee ? result.attackee : subject, user, result.hit_zone)
-		return TRUE
-	if (hit_zone)
-		apply_hit_effect(subject, user, hit_zone)
-	return TRUE
+	SHOULD_CALL_PARENT(TRUE)
+	return FALSE
 
 
 /**
@@ -460,8 +443,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
  * Returns boolean to indicate whether or not damage was dealt.
  */
 /obj/item/proc/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
-	if (hitsound)
-		playsound(loc, hitsound, 75, TRUE)
 	var/power = force
 	if (MUTATION_HULK in user.mutations)
 		power *= 2

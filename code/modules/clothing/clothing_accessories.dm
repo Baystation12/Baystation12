@@ -33,14 +33,6 @@
 						return FALSE
 	return TRUE
 
-
-/obj/item/clothing/attackby(obj/item/I, mob/user)
-	if (attempt_attach_accessory(I, user))
-		return
-	if (attempt_store_item(I, user))
-		return
-	..()
-
 /obj/item/clothing/attack_hand(mob/user)
 	//only forward to the attached accessory if the clothing is equipped (not in a storage)
 	if(length(accessories) && src.loc == user)

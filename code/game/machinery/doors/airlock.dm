@@ -1142,19 +1142,6 @@ About the new airlock wires panel:
 
 	else if(istype(C, /obj/item/device/paint_sprayer))
 		return
-	else if((inoperable()) && istype(user, /mob/living/simple_animal))
-		var/mob/living/simple_animal/A = user
-		var/obj/item/I = A.get_natural_weapon()
-		if(I.force >= 10)
-			if(density)
-				visible_message(SPAN_DANGER("\The [A] forces \the [src] open!"))
-				open(1)
-			else
-				visible_message(SPAN_DANGER("\The [A] forces \the [src] closed!"))
-				close(1)
-		else
-			visible_message(SPAN_NOTICE("\The [A] strains fruitlessly to force \the [src] [density ? "open" : "closed"]."))
-		return
 	else
 		..()
 	return
