@@ -8,7 +8,7 @@
   "files.trimTrailingWhitespace": true,
 
   "files.associations": {
-    "*.{dme,dmf,dmm,dm}": "dm",
+    "*.{dme,dmf,dmm,dm}": "dm"
   },
   "[dm]": {
     "files.eol": "\r\n",
