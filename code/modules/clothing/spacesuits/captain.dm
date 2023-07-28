@@ -57,7 +57,7 @@
 		)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
-	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = SPACE_GEAR_MIN_TEMPERATURE
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/suit/armor/captain/Initialize()

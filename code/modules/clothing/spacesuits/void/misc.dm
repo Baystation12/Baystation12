@@ -30,7 +30,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 		)
-	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_temperature = SPACE_GEAR_MAX_TEMPERATURE
 	species_restricted = list(SPECIES_SKRELL,SPECIES_HUMAN)
 
 /obj/item/clothing/head/helmet/space/void/skrell/white
@@ -53,7 +53,7 @@
 		)
 	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/storage/ore,/obj/item/device/t_scanner,/obj/item/pickaxe,/obj/item/rcd,/obj/item/rpd)
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_temperature = SPACE_GEAR_MAX_TEMPERATURE
 	species_restricted = list(SPECIES_SKRELL,SPECIES_HUMAN)
 
 /obj/item/clothing/suit/space/void/skrell/white

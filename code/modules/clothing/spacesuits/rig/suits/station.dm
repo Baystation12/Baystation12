@@ -55,7 +55,7 @@
 	offline_slowdown = 4
 	vision_restriction = TINT_MODERATE
 	offline_vision_restriction = TINT_BLIND
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	max_pressure_protection = ATMOS_GEAR_MAX_PRESSURE
 	min_pressure_protection = 0
 
 	chest_type = /obj/item/clothing/suit/space/rig/industrial
@@ -194,14 +194,14 @@
 	)
 	online_slowdown = 0.75
 	offline_vision_restriction = TINT_HEAVY
-	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE // this is passed to the rig suit components when deployed, including the helmet.
+	max_temperature = ATMOS_GEAR_MAX_TEMPERATURE // this is passed to the rig suit components when deployed, including the helmet.
 
 	chest_type = /obj/item/clothing/suit/space/rig/ce
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ce
 	glove_type = /obj/item/clothing/gloves/rig/ce
 
 	req_access = list(access_ce)
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	max_pressure_protection = ATMOS_GEAR_MAX_PRESSURE
 	min_pressure_protection = 0
 
 /obj/item/rig/ce/equipped

@@ -18,7 +18,6 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_RESISTANT
 		)
-	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
 	siemens_coefficient = 0.3
 
 /obj/item/clothing/suit/space/void/engineering
@@ -29,7 +28,6 @@
 		slot_l_hand_str = "eng_voidsuit",
 		slot_r_hand_str = "eng_voidsuit",
 	)
-	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
 	siemens_coefficient = 0.3
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
@@ -65,7 +63,6 @@
 		rad = ARMOR_RAD_MINOR
 		)
 	light_overlay = "helmet_light_dual_alt"
-	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
 
 /obj/item/clothing/suit/space/void/mining
 	icon_state = "rig-mining"
@@ -83,7 +80,6 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
-	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
 	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/stack/flag,/obj/item/device/suit_cooling_unit,/obj/item/storage/ore,/obj/item/device/t_scanner,/obj/item/pickaxe, /obj/item/rcd,/obj/item/rpd)
 
 /obj/item/clothing/suit/space/void/mining/prepared
@@ -193,9 +189,9 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
 		)
-	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_temperature = ATMOS_GEAR_MAX_TEMPERATURE
 	light_overlay = "helmet_light_dual"
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	max_pressure_protection = ATMOS_GEAR_MAX_PRESSURE
 
 /obj/item/clothing/suit/space/void/atmos
 	desc = "A durable voidsuit with advanced temperature-regulation systems as well as minor radiation protection. Well worth the price."
@@ -213,8 +209,8 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
 		)
-	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	max_temperature = ATMOS_GEAR_MAX_TEMPERATURE
+	max_pressure_protection = ATMOS_GEAR_MAX_PRESSURE
 	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/device/t_scanner,/obj/item/rcd,/obj/item/rpd)
 
 /obj/item/clothing/suit/space/void/atmos/prepared

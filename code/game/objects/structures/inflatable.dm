@@ -73,8 +73,8 @@
 	var/undeploy_path = null
 	var/taped
 
-	var/max_pressure_diff = RIG_MAX_PRESSURE
-	var/max_temp = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	var/max_pressure_diff = VOIDSUIT_MAX_PRESSURE
+	var/max_temp = SPACE_GEAR_MAX_TEMPERATURE
 
 /obj/structure/inflatable/wall
 	name = "inflatable wall"

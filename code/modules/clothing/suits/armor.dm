@@ -5,9 +5,9 @@
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	flags_inv = CLOTHING_BULKY
 	cold_protection = UPPER_TORSO|LOWER_TORSO
-	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = ARMOR_MIN_TEMPERATURE
 	heat_protection = UPPER_TORSO|LOWER_TORSO
-	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_temperature = ARMOR_MAX_TEMPERATURE
 	siemens_coefficient = 0.6
 	equip_delay = 2 SECONDS
 
@@ -227,9 +227,9 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	cold_protection = UPPER_TORSO|LOWER_TORSO
-	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = ARMOR_MIN_TEMPERATURE
 	heat_protection = UPPER_TORSO|LOWER_TORSO
-	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_temperature = ARMOR_MAX_TEMPERATURE
 	siemens_coefficient = 0.6
 
 /obj/item/clothing/suit/storage/vest/nt
@@ -477,7 +477,7 @@
 	)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
-	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = SPACE_GEAR_MIN_TEMPERATURE
 	siemens_coefficient = 0
 
 /obj/item/clothing/suit/armor/heavy

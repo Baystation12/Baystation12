@@ -36,8 +36,8 @@
 	heat_protection = UPPER_TORSO | LOWER_TORSO | ARMS
 	cold_protection = UPPER_TORSO | LOWER_TORSO | ARMS
 
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
-	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_pressure_protection = CLOTHING_MAX_PRESSURE
+	max_temperature = ARMOR_MAX_TEMPERATURE
 
 /obj/item/clothing/suit/fire/Initialize()
 	. = ..()
@@ -99,7 +99,7 @@
 	flags_inv = HIDEJUMPSUIT|HIDETAIL
 	heat_protection = UPPER_TORSO|LOWER_TORSO
 	item_flags = null
-	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_temperature = ARMOR_MAX_TEMPERATURE
 	siemens_coefficient = 0
 
 /obj/item/clothing/suit/bomb_suit/Initialize()

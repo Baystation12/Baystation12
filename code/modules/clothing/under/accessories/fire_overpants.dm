@@ -13,5 +13,5 @@
 	heat_protection = LOWER_TORSO | LEGS
 	cold_protection = LOWER_TORSO | LEGS
 
-	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	max_temperature = ARMOR_MAX_TEMPERATURE
+	max_pressure_protection = CLOTHING_MAX_PRESSURE

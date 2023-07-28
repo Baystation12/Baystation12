@@ -113,7 +113,7 @@
 	permeability_coefficient = 0.02
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | ARMS //Needs gloves and shoes with cold protection to be fully protected.
-	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = SPACE_GEAR_MIN_TEMPERATURE
 
 /obj/item/clothing/under/acj
 	name = "administrative cybernetic jumpsuit"
@@ -134,7 +134,7 @@
 		rad = ARMOR_RAD_SHIELDED
 		)
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
-	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = SPACE_GEAR_MIN_TEMPERATURE
 	siemens_coefficient = 0
 
 /obj/item/clothing/under/owl
@@ -700,7 +700,6 @@
 		energy = ARMOR_ENERGY_SMALL,
 		rad = ARMOR_RAD_MINOR
 		)
-	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/under/sterile
 	name = "sterile jumpsuit"

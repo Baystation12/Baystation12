@@ -48,9 +48,9 @@
 	siemens_coefficient = 0.6
 
 	cold_protection = FEET
-	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = SHOE_MIN_TEMPERATURE
 	heat_protection = FEET
-	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_temperature = SHOE_MAX_TEMPERATURE
 
 
 /obj/item/clothing/shoes/dutyboots
@@ -67,9 +67,6 @@
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
 	body_parts_covered = FEET
-	heat_protection = FEET
-	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 
 /obj/item/clothing/shoes/tactical
 	name = "tactical boots"
@@ -145,9 +142,9 @@
 	siemens_coefficient = 0.7
 
 	cold_protection = FEET
-	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = SHOE_MIN_TEMPERATURE
 	heat_protection = FEET
-	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_temperature = SHOE_MAX_TEMPERATURE
 	species_restricted = null
 
 /obj/item/clothing/shoes/cyborg

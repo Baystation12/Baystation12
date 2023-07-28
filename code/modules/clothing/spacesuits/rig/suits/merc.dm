@@ -97,7 +97,7 @@
 		)
 	online_slowdown = 2
 	offline_slowdown = 4
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	max_pressure_protection = ATMOS_GEAR_MAX_PRESSURE
 
 	chest_type = /obj/item/clothing/suit/space/rig/merc/heavy
 	helm_type = /obj/item/clothing/head/helmet/space/rig/merc/heavy

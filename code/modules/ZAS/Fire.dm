@@ -374,7 +374,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 		if (IsHolding(C))
 			continue
 
-		if( C.max_heat_protection_temperature >= last_temperature )
+		if( C.max_temperature >= last_temperature )
 			if(C.body_parts_covered & HEAD)
 				head_exposure = 0
 			if(C.body_parts_covered & UPPER_TORSO)

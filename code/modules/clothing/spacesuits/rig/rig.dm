@@ -25,9 +25,9 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
-	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
-	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	max_pressure_protection = RIG_MAX_PRESSURE
+	min_temperature = SPACE_GEAR_MIN_TEMPERATURE
+	max_temperature = SPACE_GEAR_MAX_TEMPERATURE
+	max_pressure_protection = VOIDSUIT_MAX_PRESSURE
 	min_pressure_protection = 0
 
 	siemens_coefficient = 0.2
@@ -220,8 +220,8 @@
 		piece.SetName("[suit_type] [initial(piece.name)]")
 		piece.desc = "It seems to be part of a [src.name]."
 		piece.icon_state = "[initial(icon_state)]"
-		piece.min_cold_protection_temperature = min_cold_protection_temperature
-		piece.max_heat_protection_temperature = max_heat_protection_temperature
+		piece.min_temperature = min_temperature
+		piece.max_temperature = max_temperature
 		if(piece.siemens_coefficient > siemens_coefficient) //So that insulated gloves keep their insulation.
 			piece.siemens_coefficient = siemens_coefficient
 		piece.permeability_coefficient = permeability_coefficient

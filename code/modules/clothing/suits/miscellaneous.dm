@@ -313,7 +313,7 @@
 	icon_state = "bomber"
 	body_parts_covered = UPPER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|ARMS
-	min_cold_protection_temperature = T0C - 20
+	min_temperature = T0C - 20
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/suit/storage/leather_jacket
@@ -356,7 +356,7 @@
 	name = "hoodie"
 	desc = "A warm sweatshirt."
 	icon_state = "hoodie"
-	min_cold_protection_temperature = T0C - 20
+	min_temperature = T0C - 20
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 
 /obj/item/clothing/suit/storage/toggle/hoodie/cti

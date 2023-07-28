@@ -57,7 +57,7 @@
 		bullet = ARMOR_BALLISTIC_SMALL
 	)
 	cold_protection = HEAD
-	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = SPACE_GEAR_MIN_TEMPERATURE
 	siemens_coefficient = 0.8 //That's a pretty cool opening in the hood. Also: Cloth making physical contact to the skull.
 
 /obj/item/clothing/head/culthood/magus

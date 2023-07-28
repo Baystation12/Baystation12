@@ -51,7 +51,7 @@
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	body_parts_covered = HANDS
 	cold_protection =    HANDS
-	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = SPACE_GEAR_MIN_TEMPERATURE
 	species_restricted = null
 	gender = PLURAL
 	gas_transfer_coefficient = 0.01

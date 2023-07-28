@@ -17,7 +17,7 @@
 	offline_slowdown = 1
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	offline_vision_restriction = TINT_NONE
-	max_pressure_protection = LIGHT_RIG_MAX_PRESSURE
+	max_pressure_protection = SPACE_SUIT_MAX_PRESSURE
 	min_pressure_protection = 0
 
 	chest_type = /obj/item/clothing/suit/space/rig/light

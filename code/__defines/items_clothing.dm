@@ -165,27 +165,23 @@
 #define BODYTEMP_HEAT_DAMAGE_LIMIT 360.15 // The limit the human body can take before it starts taking damage from heat.
 #define BODYTEMP_COLD_DAMAGE_LIMIT 260.15 // The limit the human body can take before it starts taking damage from coldness.
 
-#define SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE 2.0 // What min_cold_protection_temperature is set to for space-helmet quality headwear. MUST NOT BE 0.
-#define   SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE 2.0 // What min_cold_protection_temperature is set to for space-suit quality jumpsuits or suits. MUST NOT BE 0.
-#define       HELMET_MIN_COLD_PROTECTION_TEMPERATURE 160 // For normal helmets.
-#define        ARMOR_MIN_COLD_PROTECTION_TEMPERATURE 160 // For armor.
-#define       GLOVES_MIN_COLD_PROTECTION_TEMPERATURE 2.0 // For some gloves.
-#define         SHOE_MIN_COLD_PROTECTION_TEMPERATURE 2.0 // For shoes.
+#define  SPACE_GEAR_MIN_TEMPERATURE 2.0 // What min_temperature is set to for space-suit quality clothing. MUST NOT BE 0.
+#define  HELMET_MIN_TEMPERATURE 	160 // For normal helmets.
+#define  ARMOR_MIN_TEMPERATURE  	160 // For armor.
+#define  GLOVES_MIN_TEMPERATURE 	2.0 // For some gloves.
+#define  SHOE_MIN_TEMPERATURE 		2.0 // For shoes.
 
-#define  SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE 5000  // These need better heat protect, but not as good heat protect as firesuits.
-#define    FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE 30000 // What max_heat_protection_temperature is set to for firesuit quality headwear. MUST NOT BE 0.
-#define FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE 30000 // For fire-helmet quality items. (Red and white hardhats)
-#define      HELMET_MAX_HEAT_PROTECTION_TEMPERATURE 600   // For normal helmets.
-#define       ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE 600   // For armor.
-#define      GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE 1500  // For some gloves.
-#define        SHOE_MAX_HEAT_PROTECTION_TEMPERATURE 1500  // For shoes.
+#define  SPACE_GEAR_MAX_TEMPERATURE 2000  // These need better heat protect, but not as good heat protect as firesuits.
+#define  ATMOS_GEAR_MAX_TEMPERATURE 4000 // What max_temperature is set to for firesuit quality clothing. MUST NOT BE 0.
+#define  HELMET_MAX_TEMPERATURE		600   // For normal helmets.
+#define  ARMOR_MAX_TEMPERATURE 		600   // For armor.
+#define  GLOVES_MAX_TEMPERATURE 	600  // For some gloves.
+#define  SHOE_MAX_TEMPERATURE 		600  // For shoes.
 
-#define  FIRESUIT_MAX_PRESSURE 		100 * ONE_ATMOSPHERE   // Firesuis and atmos voidsuits
-#define  RIG_MAX_PRESSURE 			50 * ONE_ATMOSPHERE   // Rigs
-#define  LIGHT_RIG_MAX_PRESSURE 	25 * ONE_ATMOSPHERE   // Rigs
-#define  ENG_VOIDSUIT_MAX_PRESSURE 	50 * ONE_ATMOSPHERE 
-#define  VOIDSUIT_MAX_PRESSURE 		25 * ONE_ATMOSPHERE 
-#define  SPACE_SUIT_MAX_PRESSURE 	5 * ONE_ATMOSPHERE
+#define  ATMOS_GEAR_MAX_PRESSURE 	9 * ONE_ATMOSPHERE
+#define  VOIDSUIT_MAX_PRESSURE 		7.5 * ONE_ATMOSPHERE
+#define  SPACE_SUIT_MAX_PRESSURE 	6 * ONE_ATMOSPHERE
+#define  CLOTHING_MAX_PRESSURE		3 * ONE_ATMOSPHERE
 
 // Fire.
 #define FIRE_MIN_STACKS          -20

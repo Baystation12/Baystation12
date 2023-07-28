@@ -14,7 +14,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
-	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_temperature = SPACE_GEAR_MAX_TEMPERATURE
 	max_pressure_protection = VOIDSUIT_MAX_PRESSURE
 	min_pressure_protection = 0
 	siemens_coefficient = 0.4
@@ -49,7 +49,7 @@
 	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit)
 	flags_inv = HIDEGLOVES | HIDESHOES | HIDEJUMPSUIT | HIDETAIL | CLOTHING_BULKY
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_temperature = SPACE_GEAR_MAX_TEMPERATURE
 	max_pressure_protection = VOIDSUIT_MAX_PRESSURE
 	siemens_coefficient = 0.4
 

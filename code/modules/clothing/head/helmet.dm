@@ -19,9 +19,9 @@
 		)
 	flags_inv = HIDEEARS|BLOCKHEADHAIR
 	cold_protection = HEAD
-	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = HELMET_MIN_TEMPERATURE
 	heat_protection = HEAD
-	max_heat_protection_temperature = HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_temperature = HELMET_MAX_TEMPERATURE
 	siemens_coefficient = 0.7
 	w_class = ITEM_SIZE_NORMAL
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_ADHERENT)
@@ -127,7 +127,7 @@
 		)
 	valid_accessory_slots = null
 	cold_protection = HEAD
-	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = SPACE_GEAR_MIN_TEMPERATURE
 	siemens_coefficient = 0.5
 
 /obj/item/clothing/head/helmet/thunderdome
@@ -143,7 +143,7 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	cold_protection = HEAD
-	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = SPACE_GEAR_MIN_TEMPERATURE
 	siemens_coefficient = 1
 
 /obj/item/clothing/head/helmet/gladiator
@@ -170,7 +170,7 @@
 	flags_inv = HIDEEARS|HIDEEYES
 	body_parts_covered = HEAD|EYES|BLOCKHEADHAIR
 	cold_protection = HEAD
-	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = SPACE_GEAR_MIN_TEMPERATURE
 	siemens_coefficient = 0.5
 
 //Non-hardsuit ERT helmets.
@@ -249,8 +249,8 @@
 	flash_protection = FLASH_PROTECTION_MINOR
 	item_flags = ITEM_FLAG_AIRTIGHT
 	min_pressure_protection = 0
-	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
-	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	min_temperature = SPACE_GEAR_MIN_TEMPERATURE
+	max_temperature = SPACE_GEAR_MAX_TEMPERATURE
 	max_pressure_protection = VOIDSUIT_MAX_PRESSURE
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,

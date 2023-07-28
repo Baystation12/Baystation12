@@ -12,8 +12,8 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 		)
-	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	max_temperature = ATMOS_GEAR_MAX_TEMPERATURE
+	max_pressure_protection = ATMOS_GEAR_MAX_PRESSURE
 
 	chest_type = /obj/item/clothing/suit/space/rig/vox_rig
 	helm_type = /obj/item/clothing/head/helmet/space/rig/vox_rig

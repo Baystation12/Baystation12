@@ -10,7 +10,7 @@
 		)
 	icon_state = "necromancer"
 	item_flags = ITEM_FLAG_AIRTIGHT
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	max_pressure_protection = CLOTHING_MAX_PRESSURE
 	min_pressure_protection = 0
 	flags_inv = HIDEEARS | BLOCKHAIR
 
@@ -26,7 +26,7 @@
 		bomb = ARMOR_BOMB_SHIELDED
 		)
 	item_flags = ITEM_FLAG_AIRTIGHT
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	max_pressure_protection = CLOTHING_MAX_PRESSURE
 	min_pressure_protection = 0
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 

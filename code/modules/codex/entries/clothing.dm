@@ -50,12 +50,12 @@
 	if(item_flags & ITEM_FLAG_THICKMATERIAL)
 		armor_strings += "The material is exceptionally thick."
 
-	if(max_heat_protection_temperature >= FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE)
+	if(max_temperature >= ATMOS_GEAR_MAX_TEMPERATURE)
 		armor_strings += "You could probably safely skydive into the Sun wearing this."
-	else if(max_heat_protection_temperature >= SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE)
+	else if(max_temperature >= SPACE_GEAR_MAX_TEMPERATURE)
 		armor_strings += "It provides good protection against fire and heat."
 
-	if(!isnull(min_cold_protection_temperature) && min_cold_protection_temperature <= SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE)
+	if(!isnull(min_temperature) && min_temperature <= SPACE_GEAR_MIN_TEMPERATURE)
 		armor_strings += "It provides very good protection against very cold temperatures."
 
 	var/list/covers = list()

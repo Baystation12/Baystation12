@@ -70,7 +70,7 @@
 	icon_state = "coatwinter"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
-	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = ARMOR_MIN_TEMPERATURE
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 	armor = list(
 		bio = ARMOR_BIO_MINOR
@@ -88,7 +88,7 @@
 	cold_protection = HEAD
 	flags_inv = HIDEEARS | BLOCKHAIR
 	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
-	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = ARMOR_MIN_TEMPERATURE
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/captain
 	name = "captain's winter coat"
@@ -166,7 +166,7 @@
 	name = "hoodie"
 	desc = "A warm sweatshirt."
 	icon_state = "hoodie"
-	min_cold_protection_temperature = T0C - 20
+	min_temperature = T0C - 20
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 	action_button_name = "Toggle Hood"
 	hoodtype = /obj/item/clothing/head/hoodiehood
@@ -177,7 +177,7 @@
 	desc = "A hood attached to a warm sweatshirt."
 	icon_state = "generic_hood"
 	body_parts_covered = HEAD
-	min_cold_protection_temperature = T0C - 20
+	min_temperature = T0C - 20
 	cold_protection = HEAD
 	flags_inv = HIDEEARS | BLOCKHAIR
 	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON

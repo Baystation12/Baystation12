@@ -16,7 +16,7 @@
 		)
 	siemens_coefficient = 0.6
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_temperature = SPACE_GEAR_MAX_TEMPERATURE
 	species_restricted = list(SPECIES_VOX)
 	flags_inv = HIDEJUMPSUIT
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON

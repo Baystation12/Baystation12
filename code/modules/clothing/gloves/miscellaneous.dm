@@ -19,6 +19,10 @@
 	item_state = "lgloves"
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
+	cold_protection = HANDS
+	min_temperature = GLOVES_MIN_TEMPERATURE
+	heat_protection = HANDS
+	max_temperature = GLOVES_MAX_TEMPERATURE
 
 /obj/item/clothing/gloves/insulated/cheap                             //Cheap Chinese Crap
 	desc = "These gloves are cheap copies of the coveted gloves, no way this can end badly."
@@ -39,9 +43,9 @@
 	permeability_coefficient = 0.05
 
 	cold_protection = HANDS
-	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = GLOVES_MIN_TEMPERATURE
 	heat_protection = HANDS
-	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_temperature = GLOVES_MAX_TEMPERATURE
 
 /obj/item/clothing/gloves/thick
 	desc = "These work gloves are thick and fire-resistant."
@@ -53,9 +57,9 @@
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_WASHER_ALLOWED
 
 	cold_protection = HANDS
-	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = GLOVES_MIN_TEMPERATURE
 	heat_protection = HANDS
-	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_temperature = GLOVES_MAX_TEMPERATURE
 
 /obj/item/clothing/gloves/thick/modified
 	item_flags = ITEM_FLAG_PREMODIFIED | ITEM_FLAG_WASHER_ALLOWED
@@ -89,9 +93,9 @@
 		bomb = ARMOR_BOMB_RESISTANT,
 		bio = ARMOR_BIO_MINOR)
 	cold_protection = HANDS
-	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = GLOVES_MIN_TEMPERATURE
 	heat_protection = HANDS
-	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
+	max_temperature = GLOVES_MAX_TEMPERATURE
 
 /obj/item/clothing/gloves/thick/botany
 	desc = "These leather work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."
@@ -180,8 +184,7 @@
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_WASHER_ALLOWED
 	body_parts_covered = HANDS
 	cold_protection = HANDS
+	min_temperature = GLOVES_MIN_TEMPERATURE
 	heat_protection = HANDS
-	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = HANDS
-	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	max_temperature = GLOVES_MAX_TEMPERATURE
+	max_pressure_protection = CLOTHING_MAX_PRESSURE

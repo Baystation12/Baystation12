@@ -19,8 +19,8 @@
 	flags_inv = 0
 	siemens_coefficient = 0.9
 	heat_protection = HEAD
-	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	max_temperature = HELMET_MAX_TEMPERATURE
+	max_pressure_protection = CLOTHING_MAX_PRESSURE
 
 /obj/item/clothing/head/hardhat/orange
 	icon_state = "hardhat0_orange"
@@ -61,7 +61,7 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 	cold_protection = HEAD
-	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
+	min_temperature = SPACE_GEAR_MIN_TEMPERATURE
 	siemens_coefficient = 0.9
 	randpixel = 0
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)

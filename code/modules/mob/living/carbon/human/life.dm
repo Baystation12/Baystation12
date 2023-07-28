@@ -479,11 +479,11 @@
 	//Handle normal clothing
 	for(var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
 		if(C)
-			if(C.max_heat_protection_temperature && C.max_heat_protection_temperature >= temperature)
+			if(C.max_temperature && C.max_temperature >= temperature)
 				. |= C.heat_protection
 			if(length(C.accessories))
 				for(var/obj/item/clothing/accessory/A in C.accessories)
-					if(A.max_heat_protection_temperature && A.max_heat_protection_temperature >= temperature)
+					if(A.max_temperature && A.max_temperature >= temperature)
 						. |= A.heat_protection
 
 //See proc/get_heat_protection_flags(temperature) for the description of this proc.
@@ -492,11 +492,11 @@
 	//Handle normal clothing
 	for(var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
 		if(C)
-			if(C.min_cold_protection_temperature && C.min_cold_protection_temperature <= temperature)
+			if(C.min_temperature && C.min_temperature <= temperature)
 				. |= C.cold_protection
 			if(length(C.accessories))
 				for(var/obj/item/clothing/accessory/A in C.accessories)
-					if(A.min_cold_protection_temperature && A.min_cold_protection_temperature <= temperature)
+					if(A.min_temperature && A.min_temperature <= temperature)
 						. |= A.cold_protection
 
 

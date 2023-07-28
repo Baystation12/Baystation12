@@ -530,8 +530,8 @@
 		if(istype(H))
 			if(H.gloves)
 				var/obj/item/clothing/gloves/G = H.gloves
-				if(G.max_heat_protection_temperature)
-					if(G.max_heat_protection_temperature > LIGHT_BULB_TEMPERATURE)
+				if(G.max_temperature)
+					if(G.max_temperature > LIGHT_BULB_TEMPERATURE)
 						prot = TRUE
 		else
 			prot = TRUE

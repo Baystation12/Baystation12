@@ -16,8 +16,6 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_RESISTANT
 	)
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
-	min_pressure_protection = 0
 	flags_inv = BLOCKHAIR
 	siemens_coefficient = 0.6
 
