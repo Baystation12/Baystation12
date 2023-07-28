@@ -48,7 +48,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /obj/item/proc/resolve_attackby(atom/atom, mob/living/user, click_params)
 	if (!atom.can_use_item(src, user, click_params))
 		return FALSE
-	atom.pre_use_item(src, user, click_params)
+	if (atom.pre_use_item(src, user, click_params))
+		return TRUE
 	var/use_call
 	if (HAS_FLAGS(item_flags, ITEM_FLAG_TRY_ATTACK))
 		use_call = "on"
@@ -78,15 +79,18 @@ avoid code duplication. This includes items that may sometimes act as a standard
  *
  * By default, this does nothing.
  *
+ * Logic that returns `TRUE` should either perform an action or present a feedback message to the user.
+ *
  * **Parameters**:
  * - `tool` - The item being used.
  * - `user` - The mob performing the interaction.
  * - `click_params` - List of click parameters.
  *
- * Has no return value.
+ * Returns boolean. Indicates whether or not the interaction should be considered handled at this stage.
+ * If `TRUE`, halts `resolve_attackby()` and returns `TRUE` there as well.
  */
 /atom/proc/pre_use_item(obj/item/tool, mob/living/user, click_params)
-	return
+	return FALSE
 
 
 /**
@@ -110,7 +114,16 @@ avoid code duplication. This includes items that may sometimes act as a standard
 			add_fingerprint(user, tool = tool)
 
 
-/// Whether or not an item interaction is possible. Checked before any use calls.
+/**
+ * Whether or not an item interaction is possible. Checked before any use calls.
+ *
+ * By default, this checks for `ATOM_FLAG_NO_TOOLS`.
+ *
+ * Logic that returns `FALSE` should either perform an action or present a feedback message to the user.
+ *
+ * Returns boolean. Indicates whether or not the interaction is permitted.
+ * If `FALSE`, halts `resolve_attackby()` and returns `FALSE` there as well.
+ */
 /atom/proc/can_use_item(obj/item/tool, mob/living/user, click_params)
 	// No Tools flag check
 	if (HAS_FLAGS(atom_flags, ATOM_FLAG_NO_TOOLS))
