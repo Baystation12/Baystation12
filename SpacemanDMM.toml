@@ -12,6 +12,7 @@ disallow_relative_type_definitions = true
 disallow_relative_proc_definitions = true
 
 [diagnostics]
+# Dreamchecker
 disabled_directive = "error"
 sets_directive_twice = "error"
 invalid_lint_directive_value = "error"
@@ -40,10 +41,22 @@ control_condition_static = "error"
 if_condition_determinate = "error"
 loop_condition_determinate = "error"
 
+# Lexer
 integer_precision_loss = "error"
 
+# Parser
+var_in_proc_parameter = "error"
+static_in_proc_parameter = "error"
+semicolon_in_proc_parameter = "error"
+in_precedes_as = "error"
+tmp_no_effect = "error"
+final_no_effect = "error"
+as_local_var = "error"
+
+# Preprocessor
 duplicate_include = "error"
 macro_redefined = "error"
 macro_undefined_no_definition = "error"
 
+# Object Tree
 override_precedes_definition = "error"
