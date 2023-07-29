@@ -2868,7 +2868,6 @@
 /area/space)
 "fl" = (
 /obj/structure/table/glass,
-/obj/random/clipboard,
 /obj/random_multi/single_item/memo_research,
 /obj/random_multi/single_item/memo_exploration,
 /turf/simulated/floor/tiled,
@@ -10775,7 +10774,6 @@
 	pixel_x = 32
 	},
 /obj/structure/table/rack,
-/obj/item/aicard,
 /obj/item/pinpointer,
 /obj/item/storage/toolbox/mechanical,
 /obj/item/device/multitool,
@@ -12139,6 +12137,12 @@
 /obj/effect/floor_decal/corner/research/half{
 	dir = 1
 	},
+/obj/machinery/button/windowtint{
+	id = "rd_windows";
+	pixel_x = 28;
+	pixel_y = 18;
+	range = 11
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/heads/office/rd)
 "IW" = (
@@ -12616,7 +12620,6 @@
 /area/maintenance/bridge/foreport)
 "Lv" = (
 /obj/structure/table/glass,
-/obj/item/book/manual/nt_regs,
 /obj/item/stamp/rd,
 /obj/effect/floor_decal/corner/research{
 	dir = 5
@@ -13952,12 +13955,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "Rj" = (
-/obj/machinery/button/windowtint{
-	id = "rd_windows";
-	pixel_x = 6;
-	pixel_y = -24;
-	range = 11
-	},
 /obj/machinery/light_switch{
 	pixel_x = -6;
 	pixel_y = -24
