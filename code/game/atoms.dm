@@ -32,32 +32,27 @@
 	/// Stores overlays managed by update_overlays() to prevent removing overlays that were not added by the same proc
 	var/list/managed_overlays
 
+
 /atom/New(loc, ...)
-	SHOULD_CALL_PARENT(TRUE) // Ensures atoms don't unintentionally skip initialization by not calling parent in New()
-
-	//atom creation method that preloads variables at creation
-	if(GLOB.use_preloader && (src.type == GLOB._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
+	SHOULD_CALL_PARENT(TRUE)
+	if (GLOB.use_preloader && type == GLOB._preloader.target_path)
 		GLOB._preloader.load(src)
-
-	var/do_initialize = SSatoms.atom_init_stage
-	var/list/created = SSatoms.created_atoms
-	if(do_initialize > INITIALIZATION_INSSATOMS_LATE)
-		args[1] = do_initialize == INITIALIZATION_INNEW_MAPLOAD
-		if(SSatoms.InitAtom(src, args))
-			//we were deleted
+	var/atom_init_stage = SSatoms.atom_init_stage
+	var/list/init_queue = SSatoms.init_queue
+	if (atom_init_stage > INITIALIZATION_INSSATOMS_LATE)
+		args[1] = atom_init_stage == INITIALIZATION_INNEW_MAPLOAD
+		if (SSatoms.InitAtom(src, args))
 			return
-	else if(created)
-
+	else if (init_queue)
 		var/list/argument_list
-		if(length(args) > 1)
+		if (length(args) > 1)
 			argument_list = args.Copy(2)
-		if(argument_list || do_initialize == INITIALIZATION_INSSATOMS_LATE)
-			created[src] = argument_list
-
-	if(atom_flags & ATOM_FLAG_CLIMBABLE)
+		if (argument_list || atom_init_stage == INITIALIZATION_INSSATOMS_LATE)
+			init_queue[src] = argument_list
+	if (atom_flags & ATOM_FLAG_CLIMBABLE)
 		verbs += /atom/proc/climb_on
-
 	..()
+
 
 /**
  * Initialization handler for atoms. It is preferred to use this over `New()`.
