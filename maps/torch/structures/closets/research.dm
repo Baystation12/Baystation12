@@ -34,8 +34,6 @@
 		/obj/item/gun/energy/confuseray,
 		/obj/item/device/megaphone,
 		/obj/item/device/tape/random = 3,
-		/obj/item/device/camera,
-		/obj/item/material/clipboard/steel,
 		/obj/item/clothing/glasses/welding/superior,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
