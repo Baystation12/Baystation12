@@ -31,6 +31,7 @@
 		</div>
 		<div class="itemContent">
 			{{:helper.link(data.muted ? 'Disabled' : 'Enabled', data.muted ? 'volume-off' : 'volume-on', { 'mute' : 1 }, null, null)}}
+			{{:helper.link(data.sound_off ? '' : '', 'volume-off', { 'sound_off' : 1 }, null, data.sound_off ? 'selected' : null)}}
 		</div>
 	</div>
 
