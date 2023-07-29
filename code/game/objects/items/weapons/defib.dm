@@ -208,6 +208,7 @@
 	force = 2
 	throwforce = 6
 	w_class = ITEM_SIZE_LARGE
+	item_flags = ITEM_FLAG_TRY_ATTACK
 
 	var/safety = 1 //if you can zap people with the paddles on harm mode
 	var/combat = 0 //If it can be used to revive people wearing thick clothing (e.g. spacesuits)
@@ -298,10 +299,10 @@
 
 /obj/item/shockpaddles/attack(mob/living/M, mob/living/user, target_zone)
 	var/mob/living/carbon/human/H = M
-	if(!istype(H) || user.a_intent == I_HURT)
-		return ..() //Do a regular attack. Harm intent shocking happens as a hit effect
+	if (!istype(H) || user.a_intent == I_HURT)
+		return ..() //Cycle through the rest of the use_* calls.
 
-	if(can_use(user, H))
+	if (can_use(user, H))
 		busy = 1
 		update_icon()
 

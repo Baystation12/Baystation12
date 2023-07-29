@@ -8,6 +8,7 @@
 	force_multiplier = 0.1
 	thrown_force_multiplier = 0.1
 	w_class = ITEM_SIZE_NORMAL
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	default_material = MATERIAL_WOOD
 	attack_verb = list("poked", "jabbed")
 
@@ -33,5 +34,5 @@
 		//Consider adding a check to see if target is dead
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(M)
-		return
+		return TRUE
 	return ..()

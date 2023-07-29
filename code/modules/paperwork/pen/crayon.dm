@@ -4,6 +4,7 @@
 	icon = 'icons/obj/crayons.dmi'
 	icon_state = "crayonred"
 	w_class = ITEM_SIZE_TINY
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	attack_verb = list("attacked", "coloured")
 	colour = "#ff0000" //RGB
 	color_description = "red crayon"

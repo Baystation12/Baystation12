@@ -136,10 +136,6 @@
 	else
 		return 0
 
-/obj/item/inducer/attack(mob/M, mob/user)
-	return
-
-
 /obj/item/inducer/attack_self(mob/user)
 	if(opened && cell)
 		user.visible_message("\The [user] removes \the [cell] from \the [src]!",SPAN_NOTICE("You remove \the [cell]."))

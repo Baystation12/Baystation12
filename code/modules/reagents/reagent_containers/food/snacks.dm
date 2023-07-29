@@ -1496,6 +1496,7 @@
 			W.src_flavor = ""
 		else
 			to_chat(user,"The cube doesn't so much as twitch without a DNA sample.")
+		return TRUE
 	return ..()
 
 
