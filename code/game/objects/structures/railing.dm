@@ -344,5 +344,13 @@
 	else
 		..()
 
+/obj/structure/railing/hitby(atom/movable/AM, datum/thrownthing/TT)
+	var/mob/living/L = AM
+	if (!istype(L))
+		return
+	var/chance = TT.thrower.skill_check(SKILL_HAULING, SKILL_EXPERIENCED) ? 100 : 50
+	if (prob(chance))
+		slam_into(L)
+
 /obj/structure/railing/set_color(color)
 	src.color = color ? color : material.icon_colour
