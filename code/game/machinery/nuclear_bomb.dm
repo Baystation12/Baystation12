@@ -345,19 +345,47 @@ var/global/bomb_set
 
 	SetUniversalState(/datum/universal_state/nuclear_explosion, arguments=list(src))
 
-/obj/machinery/nuclearbomb/on_update_icon()
-	if(lighthack)
-		icon_state = "idle"
-	else if(timing == -1)
-		icon_state = "exploding"
-	else if(timing)
-		icon_state = "urgent"
-	else if(extended || !safety)
-		icon_state = "greenlight"
-	else
-		icon_state = "idle"
 
-//====The nuclear authentication disc====
+/obj/machinery/nuclearbomb/wmd
+	name = "weapon of mass destruction"
+	desc = "A thoroughly crafted machine with ample destructive power."
+	icon = 'icons/obj/nuke.dmi'
+	icon_state = "payload"
+	density = TRUE
+	use_power = POWER_USE_OFF
+	uncreated_component_parts = null
+	unacidable = TRUE
+	interact_offline = TRUE
+
+	var/state = 0
+	var/armed = FALSE
+	var/code = ""
+	var/timeLeft = 5 MINUTES
+	var/minTime = 5 MINUTES
+	var/maxTime = 10 MINUTES
+	var/obj/item/warhead_core/core = null
+
+/obj/machinery/nuclearbomb/wmd/on_update_icon()
+	overlays.Cut()
+	if (core)
+		overlays += "[initial(icon_state)]_core"
+	if (panel_open)
+		overlays += "[initial(icon_state)]_panel"
+	if (anchored)
+		overlays += "[initial(icon_state)]_stable"
+		overlays += "[initial(icon_state)]_cherenkov"
+		if (state == 1)
+			overlays += "[initial(icon_state)]_exploding"
+		else if (state == 2)
+			overlays += "[initial(icon_state)]_terminal"
+
+
+/obj/machinery/nuclearbomb/wmd/proc/activate()
+	log_and_message_admins("activated the detonation countdown of \the [src]")
+	update_icon()
+
+
+//====The nuclear authentication disk====
 /obj/item/disk/nuclear
 	name = "nuclear authentication disk"
 	desc = "Better keep this safe."

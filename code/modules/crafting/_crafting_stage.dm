@@ -34,6 +34,8 @@
 	var/list/next_stages
 	/// Typepath (types of `/obj/item`). Crafting result. If set, creates an instance of `product` instead of a crafting holder. Only set this for the final step.
 	var/product
+	var/skill_req
+	var/skill_level = SKILL_UNSKILLED
 
 
 /singleton/crafting_stage/New()
@@ -43,35 +45,17 @@
 	next_stages = stages
 	..()
 
+/singleton/crafting_stage/proc/is_skilled(mob/user)
+	if (!skill_req)
+		return TRUE
+	. = user.skill_check(skill_req, skill_level)
 
-/**
- * Whether or not this crafting stage can begin with the provided item.
- *
- * By default, passes through to a type check against `begins_with_object_type`.
- *
- * **Parameters**:
- * - `thing` - Item to check.
- *
- * Returns boolean.
- */
 /singleton/crafting_stage/proc/can_begin_with(obj/item/thing)
 	. = istype(thing, begins_with_object_type)
 
-
-/**
- * Retrieves the next crafting stage using the provided item.
- *
- * By default, checks all stages in `next_stages` and compares the item
- * through the next stage's `is_appropriate_tool()` check.
- *
- * **Parameters**:
- * - `trigger` - Item to check.
- *
- * Returns path (Types of `/singleton/crafting_stage`).
- */
-/singleton/crafting_stage/proc/get_next_stage(obj/item/trigger)
+/singleton/crafting_stage/proc/get_next_stage(obj/item/trigger, mob/user)
 	for(var/singleton/crafting_stage/next_stage in next_stages)
-		if(next_stage.is_appropriate_tool(trigger))
+		if(next_stage.is_appropriate_tool(trigger) && next_stage.is_skilled(user))
 			return next_stage
 
 
@@ -88,9 +72,11 @@
  * Returns boolean. If `TRUE`, the stage was able to progress.
  */
 /singleton/crafting_stage/proc/progress_to(obj/item/thing, mob/user, obj/item/target)
-	. = is_appropriate_tool(thing, user) && consume(user, thing, target)
+	. = is_appropriate_tool(thing) && consume(user, thing, target) && is_skilled(user)
 	if(.)
 		on_progress(user)
+	else if(!is_skilled(user))
+		to_chat(user, SPAN_WARNING("You are not skilled enough to complete this task!"))
 
 
 /**

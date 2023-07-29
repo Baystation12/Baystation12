@@ -99,3 +99,42 @@
 	icon = 'icons/obj/crafting_icons.dmi'
 	icon_state = "can_barrel"
 	matter = list(MATERIAL_ALUMINIUM = 60)
+
+
+// Bomb Making
+
+/obj/item/warhead_core_case
+	name = "warhead core assembly frame"
+	desc = "The first step to mass destruction."
+	icon = 'icons/obj/crafting_icons.dmi'
+	icon_state = "core0"
+	item_state = "core0"
+
+
+/obj/item/warhead_core
+	name = "warhead core assembly"
+	desc = "A cuboid osmium-carbide plasteel shell. This has a central chamber to hold a payload."
+	icon = 'icons/obj/crafting_icons.dmi'
+	icon_state = "core6"
+	item_state = "core6"
+
+
+/obj/item/warhead_core/uranium
+	name = "uranium warhead core"
+	desc = "A bulky uranium core with wires coiled around its length. A timer-detonator assembly sits snugly on it's frame. This one can cause a big explosion."
+	icon = 'icons/obj/nuke.dmi'
+	icon_state = "core_u"
+
+
+/obj/item/warhead_core/tritium
+	name = "tritium warhead core"
+	desc = "A bulky tritium core with wires coiled around its length. A timer-detonator assembly sits snugly on it's frame. This one can cause a big fire."
+	icon = 'icons/obj/nuke.dmi'
+	icon_state = "core_t"
+
+
+/obj/item/warhead_core/supermatter
+	name = "supermatter warhead core"
+	desc = "A bulky supermatter core with wires coiled around its length. A timer-detonator assembly sits snugly on it's frame. This one can cause a cascading delamination."
+	icon = 'icons/obj/nuke.dmi'
+	icon_state = "core_s"

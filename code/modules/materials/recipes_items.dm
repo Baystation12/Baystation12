@@ -244,6 +244,13 @@
 	time = 25
 	difficulty = 3
 
+/datum/stack_recipe/warhead_core_case
+	title = "warhead core assembly"
+	result_type = /obj/item/warhead_core_case
+	req_amount = 7
+	time = 30
+	difficulty = 3
+
 /datum/stack_recipe/beehive_assembly
 	title = "beehive assembly"
 	result_type = /obj/item/beehive_assembly

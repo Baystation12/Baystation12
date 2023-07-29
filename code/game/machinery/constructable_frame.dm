@@ -12,6 +12,8 @@
 	uncreated_component_parts = null
 	construct_state = /singleton/machine_construction/frame/unwrenched
 	var/obj/item/stock_parts/circuitboard/circuit = null
+	var/obj/item/stock_parts/circuitboard/stored_circuit = null
+	var/obj/item/warhead_core/core = null
 	var/expected_machine_type
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	obj_flags = OBJ_FLAG_CAN_TABLE
@@ -34,6 +36,21 @@
 			icon_state = "box_1"
 		if(/singleton/machine_construction/frame/awaiting_parts)
 			icon_state = "box_2"
+		if(istype(circuit, /obj/item/stock_parts/circuitboard/wmd))
+			if(/singleton/machine_construction/frame/awaiting_circuit)
+				icon_state = "payload_5"
+			if(/singleton/machine_construction/frame/awaiting_parts)
+				icon_state = "payload_6"
+		if(/singleton/machine_construction/frame/reinforced)
+			icon_state = "payload_0"
+		if(/singleton/machine_construction/frame/framed)
+			icon_state = "payload_1"
+		if(/singleton/machine_construction/frame/awaiting_board)
+			icon_state = "payload_2"
+		if(/singleton/machine_construction/frame/awaiting_cable)
+			icon_state = "payload_3"
+		if(/singleton/machine_construction/frame/awaiting_connection)
+			icon_state = "payload_4"
 		else
 			icon_state = "box_0"
 

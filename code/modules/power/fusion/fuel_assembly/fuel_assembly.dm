@@ -11,6 +11,8 @@
 	var/fuel_colour
 	var/radioactivity = 0
 	var/initial_amount
+	var/linked = FALSE
+	var/obj/item/device/assembly_holder/detonator = null
 
 /obj/item/fuel_assembly/New(newloc, _material, _colour)
 	fuel_type = _material
@@ -75,3 +77,6 @@
 
 /obj/item/fuel_assembly/hydrogen/New(newloc)
 	..(newloc, MATERIAL_HYDROGEN)
+
+/obj/item/fuel_assembly/uranium/New(newloc)
+	..(newloc, MATERIAL_URANIUM)
