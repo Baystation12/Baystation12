@@ -3,9 +3,9 @@
 #define INITIALIZATION_INNEW_MAPLOAD  2	//New should call Initialize(TRUE)
 #define INITIALIZATION_INNEW_REGULAR  3	//New should call Initialize(FALSE)
 
-#define INITIALIZE_HINT_NORMAL   0  //Nothing happens
-#define INITIALIZE_HINT_LATELOAD 1  //Call LateInitialize
-#define INITIALIZE_HINT_QDEL     2  //Call qdel on the atom
+#define INITIALIZE_HINT_NORMAL   1  //Nothing happens
+#define INITIALIZE_HINT_LATELOAD 2  //Call LateInitialize
+#define INITIALIZE_HINT_QDEL     3  //Call qdel on the atom
 
 #define ATOM_FLAG_INITIALIZED FLAG(0) // The atom has been initialized. Also see flags.dm
 
