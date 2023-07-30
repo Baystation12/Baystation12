@@ -34,6 +34,7 @@
 		user.visible_message("\The [user] starts applying \the [tool] to [bone]." , \
 		"You start applying \the [tool] to [bone].")
 	target.custom_pain("Something in your [affected.name] is causing you a lot of pain!",50, affecting = affected)
+	playsound(target.loc, 'sound/items/bonegel.ogg', 50, TRUE)
 	..()
 
 /singleton/surgery_step/bone/glue/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -77,6 +78,7 @@
 		user.visible_message("[user] is beginning to set [bone] in place with \the [tool]." , \
 			"You are beginning to set [bone] in place with \the [tool].")
 	target.custom_pain("The pain in your [affected.name] is going to make you pass out!",50, affecting = affected)
+	playsound(target.loc, 'sound/items/bonesetter.ogg', 50, TRUE)
 	..()
 
 /singleton/surgery_step/bone/set_bone/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -123,6 +125,7 @@
 	var/bone = affected.encased ? "\the [target]'s damaged [affected.encased]" : "damaged bones in \the [target]'s [affected.name]"
 	user.visible_message("[user] starts to finish mending [bone] with \the [tool].", \
 	"You start to finish mending [bone] with \the [tool].")
+	playsound(target.loc, 'sound/items/bonegel.ogg', 50, TRUE)
 	..()
 
 /singleton/surgery_step/bone/finish/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

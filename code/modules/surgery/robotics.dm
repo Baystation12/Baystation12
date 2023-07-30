@@ -52,6 +52,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] starts to unscrew the maintenance hatch on [target]'s [affected.name] with \the [tool].", \
 	"You start to unscrew the maintenance hatch on [target]'s [affected.name] with \the [tool].")
+	playsound(target.loc, 'sound/items/Screwdriver.ogg', 15, 1)
 	..()
 
 /singleton/surgery_step/robotics/unscrew_hatch/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -88,6 +89,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] starts to screw down the maintenance hatch on [target]'s [affected.name] with \the [tool].", \
 	"You start to screw down the maintenance hatch on [target]'s [affected.name] with \the [tool].")
+	playsound(target.loc, 'sound/items/Screwdriver.ogg', 15, 1)
 	..()
 
 /singleton/surgery_step/robotics/screw_hatch/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -125,6 +127,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] starts to pry open the maintenance hatch on [target]'s [affected.name] with \the [tool].",
 	"You start to pry open the maintenance hatch on [target]'s [affected.name] with \the [tool].")
+	playsound(target.loc, 'sound/items/Crowbar.ogg', 15, 1)
 	..()
 
 /singleton/surgery_step/robotics/open_hatch/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -162,6 +165,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] begins to close the hatch on [target]'s [affected.name] with \the [tool]." , \
 	"You begin to close the hatch on [target]'s [affected.name] with \the [tool].")
+	playsound(target.loc, 'sound/items/Crowbar.ogg', 15, 1)
 	..()
 
 /singleton/surgery_step/robotics/close_hatch/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -229,6 +233,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] begins to patch damage to [target]'s [affected.name]'s support structure with \the [tool]." , \
 	"You begin to patch damage to [target]'s [affected.name]'s support structure with \the [tool].")
+	playsound(target.loc, 'sound/items/Welder.ogg', 15, 1)
 	..()
 
 /singleton/surgery_step/robotics/repair_brute/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -271,6 +276,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] begins to repair the brittle metal inside \the [target]'s [affected.name]." , \
 	"You begin to repair the brittle metal inside \the [target]'s [affected.name].")
+	playsound(target.loc, 'sound/items/bonegel.ogg', 50, TRUE)
 	..()
 
 /singleton/surgery_step/robotics/repair_brittle/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -332,6 +338,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] begins to splice new cabling into [target]'s [affected.name]." , \
 	"You begin to splice new cabling into [target]'s [affected.name].")
+	playsound(target.loc, 'sound/items/Deconstruct.ogg', 15, 1)
 	..()
 
 /singleton/surgery_step/robotics/repair_burn/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -385,6 +392,7 @@
 			if(BP_IS_ROBOTIC(I))
 				user.visible_message("[user] starts mending the damage to [target]'s [I.name]'s mechanisms.", \
 				"You start mending the damage to [target]'s [I.name]'s mechanisms." )
+	playsound(target.loc, 'sound/items/bonegel.ogg', 50, TRUE)
 	..()
 
 /singleton/surgery_step/robotics/fix_organ_robotic/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -440,6 +448,7 @@
 /singleton/surgery_step/robotics/detatch_organ_robotic/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message("[user] starts to decouple [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].", \
 	"You start to decouple [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool]." )
+	playsound(target.loc, 'sound/items/Deconstruct.ogg', 15, 1)
 	..()
 
 /singleton/surgery_step/robotics/detatch_organ_robotic/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -501,6 +510,7 @@
 /singleton/surgery_step/robotics/attach_organ_robotic/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message("[user] begins reattaching [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].", \
 	"You start reattaching [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].")
+	playsound(target.loc, 'sound/items/Screwdriver.ogg', 15, 1)
 	..()
 
 /singleton/surgery_step/robotics/attach_organ_robotic/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -558,6 +568,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("[user] starts installing \the [tool] into [target]'s [affected.name].", \
 	"You start installing \the [tool] into [target]'s [affected.name].")
+	playsound(target.loc, 'sound/items/bonesetter.ogg', 50, TRUE)
 	..()
 
 /singleton/surgery_step/robotics/install_mmi/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -618,6 +629,7 @@
 	"\The [user] starts poking around inside [target]'s [affected.name] with \the [tool].", \
 	"You start poking around inside [target]'s [affected.name] with \the [tool]." )
 	target.custom_pain("The pain in your [affected.name] is living hell!",1,affecting = affected)
+	playsound(target.loc, 'sound/items/bonesetter.ogg', 50, TRUE)
 	..()
 
 /singleton/surgery_step/remove_mmi/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -681,6 +693,7 @@
 			SPAN_NOTICE("\The [user] starts mending \the [prosthetic] with \the [tool]."),
 			SPAN_NOTICE("You start mending \the [prosthetic] with \the [tool].")
 		)
+	playsound(target.loc, 'sound/items/Welder.ogg', 15, 1)
 	..()
 
 /singleton/surgery_step/robone/weld/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -731,6 +744,7 @@
 			SPAN_NOTICE("\The [user] is beginning to twist \the [prosthetic] in place with \the [tool]."),
 			SPAN_NOTICE("You are beginning to twist \the [prosthetic] in place with \the [tool].")
 		)
+	playsound(target.loc, 'sound/items/bonesetter.ogg', 50, TRUE)
 	..()
 
 /singleton/surgery_step/robone/realign_support/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -785,6 +799,7 @@
 		SPAN_NOTICE("\the [user] starts to finish mending [prosthetic] with \the [tool]."),
 		SPAN_NOTICE("You start to finish mending [prosthetic] with \the [tool].")
 	)
+	playsound(target.loc, 'sound/items/Welder.ogg', 15, 1)
 	..()
 
 /singleton/surgery_step/robone/finish/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

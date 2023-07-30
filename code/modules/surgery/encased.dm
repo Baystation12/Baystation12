@@ -32,6 +32,7 @@
 	user.visible_message("[user] begins to cut through [target]'s [affected.encased] with \the [tool].", \
 	"You begin to cut through [target]'s [affected.encased] with \the [tool].")
 	target.custom_pain("Something hurts horribly in your [affected.name]!",60, affecting = affected)
+	playsound(target.loc, 'sound/items/circularsaw.ogg', 50, TRUE)
 	..()
 
 /singleton/surgery_step/open_encased/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
