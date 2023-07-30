@@ -23,6 +23,7 @@
 /singleton/surgery_step/fix_face/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message("[user] starts repairing damage to \the [target]'s face with \the [tool].", \
 	"You start repairing damage to \the [target]'s face with \the [tool].")
+	playsound(target.loc, 'sound/items/hemostat.ogg', 50, TRUE)
 	..()
 
 /singleton/surgery_step/fix_face/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -72,6 +73,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(affected.stage == 0)
 		affected.stage = 1
+	playsound(target.loc, 'sound/items/scalpel.ogg', 50, TRUE)
 	..()
 
 /singleton/surgery_step/plastic_surgery/prepare_face/end_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -107,6 +109,7 @@
 		SPAN_NOTICE("\The [user] starts molding \the [target]'s face with \the [tool]."),
 		SPAN_NOTICE("You start molding \the [target]'s face with \the [tool].")
 	)
+	playsound(target.loc, 'sound/items/hemostat.ogg', 50, TRUE)
 	..()
 
 /singleton/surgery_step/plastic_surgery/reform_face/end_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

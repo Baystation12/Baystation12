@@ -71,6 +71,7 @@
 	var/obj/item/organ/external/E = tool
 	user.visible_message("[user] starts attaching [E.name] to [target]'s [E.amputation_point].", \
 	"You start attaching [E.name] to [target]'s [E.amputation_point].")
+	playsound(target.loc, 'sound/items/bonesetter.ogg', 50, TRUE)
 
 /singleton/surgery_step/limb/attach/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(!user.unEquip(tool))
@@ -121,6 +122,7 @@
 	var/obj/item/organ/external/E = target.get_organ(target_zone)
 	user.visible_message("[user] starts connecting tendons and muscles in [target]'s [E.amputation_point] with [tool].", \
 	"You start connecting tendons and muscle in [target]'s [E.amputation_point].")
+	playsound(target.loc, 'sound/items/fixovein.ogg', 50, TRUE)
 
 /singleton/surgery_step/limb/connect/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = target.get_organ(target_zone)
@@ -167,6 +169,7 @@
 /singleton/surgery_step/limb/mechanize/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message("[user] starts attaching \the [tool] to [target].", \
 	"You start attaching \the [tool] to [target].")
+	playsound(target.loc, 'sound/items/bonesetter.ogg', 50, TRUE)
 
 /singleton/surgery_step/limb/mechanize/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/robot_parts/L = tool
