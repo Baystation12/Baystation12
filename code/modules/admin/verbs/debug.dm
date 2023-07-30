@@ -71,7 +71,7 @@
 		if(confirm != "Yes")
 			return 0
 	var/obj/item/device/paicard/card = new(T)
-	var/mob/living/silicon/pai/pai = new(card)
+	var/mob/living/silicon/pai/pai = new(card, card)
 	pai.SetName(sanitizeSafe(input(choice, "Enter your pAI name:", "pAI Name", "Personal AI") as text))
 	pai.real_name = pai.name
 	pai.key = choice.key
