@@ -9,6 +9,7 @@ SUBSYSTEM_DEF(icon_update)
 
 /datum/controller/subsystem/icon_update/Recover()
 	LIST_RESIZE(queue, 0)
+	queue = list()
 
 
 /datum/controller/subsystem/icon_update/UpdateStat(time)
@@ -22,14 +23,11 @@ SUBSYSTEM_DEF(icon_update)
 
 
 /datum/controller/subsystem/icon_update/fire(resumed, no_mc_tick)
-	if (!length(queue))
-		suspend()
-		return
+	var/atom/atom
 	var/list/params
-	var/cut_until = 1
-	for (var/atom/atom as anything in queue)
-		++cut_until
-		if (!atom)
+	for (var/i = 1 to length(queue))
+		atom = queue[i]
+		if (QDELETED(atom))
 			continue
 		params = queue[atom]
 		if (islist(params))
@@ -39,9 +37,9 @@ SUBSYSTEM_DEF(icon_update)
 		if (no_mc_tick)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
-			queue.Cut(1, cut_until)
+			queue.Cut(1, i + 1)
 			return
-	queue.Cut()
+	LIST_RESIZE(queue, 0)
 	suspend()
 
 
