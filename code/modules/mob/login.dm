@@ -101,6 +101,7 @@
 	reload_fullscreen() // Reload any fullscreen overlays this mob has.
 	add_click_catcher()
 	update_action_buttons()
+	update_mouse_pointer()
 
 	if(machine)
 		machine.on_user_login(src)
@@ -109,8 +110,6 @@
 		if(client.get_preference_value(/datum/client_preference/goonchat) == GLOB.PREF_YES)
 			client.chatOutput.start()
 
-	//set macro to normal incase it was overriden (like cyborg currently does)
-	winset(src, null, "mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5")
 
 /mob/living/carbon/Login()
 	. = ..()

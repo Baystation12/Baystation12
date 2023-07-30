@@ -628,6 +628,7 @@ function handleToggleClick($sub, $toggle) {
 	}
 }
 
+
 /*****************************************
 *
 * DOM READY
