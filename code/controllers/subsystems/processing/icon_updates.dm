@@ -55,3 +55,8 @@ SUBSYSTEM_DEF(icon_update)
 	SSicon_update.queue[src] = length(args) ? args : TRUE
 	if (SSicon_update.suspended)
 		SSicon_update.wake()
+
+
+/hook/game_ready/proc/FlushIconUpdateQueue()
+	SSicon_update.fire(FALSE, TRUE)
+	return TRUE
