@@ -2,7 +2,7 @@
 	name = "SUBSYSTEM - ATOMS: Shall have no bad init calls"
 
 /datum/unit_test/subsystem_atom_shall_have_no_bad_init_calls/start_test()
-	if(length(SSatoms.BadInitializeCalls))
+	if(length(SSatoms.bad_inits))
 		log_bad(jointext(SSatoms.InitLog(), null))
 		fail("[SSatoms] had bad initialization calls.")
 	else

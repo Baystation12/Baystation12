@@ -20,26 +20,20 @@ var/global/total_lighting_overlays = 0
 
 	var/needs_update = FALSE
 
-/atom/movable/lighting_overlay/Initialize()
-	// doesn't need special init
-	SHOULD_CALL_PARENT(FALSE)
-	atom_flags |= ATOM_FLAG_INITIALIZED
-	return INITIALIZE_HINT_NORMAL
+/atom/movable/lighting_overlay/Initialize(mapload, no_update)
+	var/turf/turf = loc
+	if (!turf.dynamic_lighting)
+		atom_flags |= ATOM_FLAG_INITIALIZED
+		return INITIALIZE_HINT_QDEL
+	. = ..()
+	verbs.Cut()
+	total_lighting_overlays++
+	turf.lighting_overlay = src
+	turf.luminosity = 0
+	if (no_update)
+		return
+	update_overlay()
 
-/atom/movable/lighting_overlay/New(atom/loc, no_update = FALSE)
-	var/turf/T = loc //If this runtimes atleast we'll know what's creating overlays outside of turfs.
-	if(T.dynamic_lighting)
-		. = ..()
-		verbs.Cut()
-		total_lighting_overlays++
-
-		T.lighting_overlay = src
-		T.luminosity = 0
-		if(no_update)
-			return
-		update_overlay()
-	else
-		qdel(src)
 
 /atom/movable/lighting_overlay/proc/update_overlay()
 	set waitfor = FALSE
