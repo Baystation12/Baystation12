@@ -35,7 +35,8 @@ SUBSYSTEM_DEF(icon_update)
 		else
 			atom.update_icon()
 		if (no_mc_tick)
-			CHECK_TICK
+			if (!(i % 100))
+				CHECK_TICK
 		else if (MC_TICK_CHECK)
 			queue.Cut(1, i + 1)
 			return
@@ -51,3 +52,8 @@ SUBSYSTEM_DEF(icon_update)
 	SSicon_update.queue[src] = length(args) ? args : TRUE
 	if (SSicon_update.suspended)
 		SSicon_update.wake()
+
+
+/hook/game_ready/proc/FlushIconUpdateQueue()
+	SSicon_update.fire(FALSE, TRUE)
+	return TRUE
