@@ -76,6 +76,9 @@
 	else if (modifiers["ctrl"] && modifiers["alt"])
 		if (CtrlAltClickOn(A))
 			return TRUE
+	else if(modifiers["middle"] && modifiers["alt"])
+		if (AltMiddleClickOn(A))
+			return TRUE
 	else if (modifiers["shift"] && modifiers["alt"])
 		if (AltShiftClickOn(A))
 			return TRUE
@@ -260,6 +263,12 @@
 
 /atom/proc/MiddleClick(mob/M as mob)
 	return FALSE
+
+
+/mob/proc/AltMiddleClickOn(atom/A)
+	pointed(A)
+	return TRUE
+
 
 /**
  * Called when the mob shift+clicks on an atom. By default, this calls the targeted atom's `ShiftClick()` proc.

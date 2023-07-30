@@ -126,6 +126,17 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav"))
 	winset(owner, "browseroutput", "is-disabled=false;is-visible=true")
 
 
+/client/verb/ChatOutputCopyText()
+	set name = "Chat Output Copy Text"
+	set hidden = TRUE
+
+	if (chatOutput?.loaded)
+		chatOutput.copyText()
+
+/datum/chatOutput/proc/copyText()
+	send_output(owner, null, "browseroutput:copyText")
+
+
 /datum/chatOutput/proc/updatePing()
 	if (!owner)
 		qdel(src)
