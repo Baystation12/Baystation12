@@ -81,26 +81,24 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	hud_type = /datum/hud/pai
 
 
-/mob/living/silicon/pai/Initialize(mapload, obj/item/device/paicard)
-	status_flags |= NO_ANTAG
-	card = paicard
-
-	//As a human made device, we'll understand sol common without the need of the translator
-	add_language(LANGUAGE_HUMAN_EURO, TRUE)
-	verbs -= /mob/living/verb/ghost
-
-	. = ..()
-
-	if(card)
-		if(!card.radio)
-			card.radio = new /obj/item/device/radio(card)
-		silicon_radio = card.radio
-
-
 /mob/living/silicon/pai/Destroy()
 	card = null
-	silicon_radio = null // Because this radio actually belongs to another instance we simply null
+	silicon_radio = null
+	return ..()
+
+
+/mob/living/silicon/pai/Initialize(mapload, obj/item/device/paicard)
 	. = ..()
+	status_flags |= NO_ANTAG
+	card = paicard
+	add_language(LANGUAGE_HUMAN_EURO, TRUE)
+	verbs -= /mob/living/verb/ghost
+	if (card)
+		if (!card.radio)
+			card.radio = new /obj/item/device/radio(card)
+		silicon_radio = card.radio
+	software = default_pai_software.Copy()
+
 
 // this function shows the information about being silenced as a pAI in the Status panel
 /mob/living/silicon/pai/proc/show_silenced()

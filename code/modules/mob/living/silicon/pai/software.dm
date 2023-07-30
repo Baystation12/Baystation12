@@ -34,11 +34,6 @@ var/global/list/default_pai_software = list()
 	return r
 
 
-/mob/living/silicon/pai/Initialize(mapload)
-	. = ..()
-	software = default_pai_software.Copy()
-
-
 /mob/living/silicon/pai/proc/paiInterface()
 	ui_interact(src)
 
