@@ -49,6 +49,9 @@
 	..()
 
 /datum/preferences/proc/setup()
+	// give them default keybinds too
+	key_bindings = deepCopyList(GLOB.hotkey_keybinding_list_by_key)
+
 	if(!length(GLOB.skills))
 		GET_SINGLETON(/singleton/hierarchy/skill)
 	player_setup = new(src)
@@ -66,6 +69,10 @@
 	if(client && istype(client.mob, /mob/new_player))
 		var/mob/new_player/np = client.mob
 		np.new_player_panel(TRUE)
+
+	if(client)
+		client.set_macros()
+
 
 /datum/preferences/proc/load_data()
 	load_failed = null
