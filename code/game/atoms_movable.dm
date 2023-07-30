@@ -129,8 +129,6 @@
 
 
 /atom/movable/Initialize()
-	if (!isnull(config.glide_size))
-		glide_size = config.glide_size
 	. = ..()
 	var/emissive_block = update_emissive_blocker()
 	if(emissive_block)
