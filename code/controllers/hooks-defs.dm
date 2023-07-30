@@ -11,6 +11,12 @@
 /hook/startup
 
 /**
+ * Game Ready hook.
+ * Called in master.dm once initialization is complete.
+ */
+/hook/game_ready
+
+/**
  * Roundstart hook.
  * Called in ticker.dm when a round starts.
  */
