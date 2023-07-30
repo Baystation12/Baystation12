@@ -17,23 +17,28 @@
 	/// Color code. If set, the railing will be painted this color on init. Primarily used for mapping variants.
 	var/init_color
 
+
 /obj/structure/railing/mapped
 	material = MATERIAL_ALUMINIUM
 	anchored = TRUE
 	init_color = COLOR_GUNMETAL
 
+
 /obj/structure/railing/mapped/no_density
 	density = FALSE
+
 
 /obj/structure/railing/mapped/no_density/Initialize()
 	. = ..()
 	update_icon()
 
+
 /obj/structure/railing/Process()
-	if(!material || !material.radioactivity)
+	if (!material || !material.radioactivity)
 		return
-	for(var/mob/living/L in range(1,src))
+	for (var/mob/living/L in range(1,src))
 		L.apply_damage(round(material.radioactivity/20), DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
+
 
 /obj/structure/railing/Initialize(mapload, material_key)
 	. = ..()
@@ -42,9 +47,9 @@
 		material = material_key
 	if (!material)
 		material = DEFAULT_FURNITURE_MATERIAL
-	if(!isnull(material) && !istype(material))
+	if (!isnull(material) && !istype(material))
 		material = SSmaterials.get_material_by_name(material)
-	if(!istype(material))
+	if (!istype(material))
 		return INITIALIZE_HINT_QDEL
 
 	name = "[material.display_name] [initial(name)]"
@@ -52,9 +57,9 @@
 	set_max_health(material.integrity / 5)
 	color = material.icon_colour
 
-	if(material.products_need_process())
+	if (material.products_need_process())
 		START_PROCESSING(SSobj, src)
-	if(material.conductive)
+	if (material.conductive)
 		obj_flags |= OBJ_FLAG_CONDUCTIBLE
 	else
 		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
@@ -64,16 +69,19 @@
 
 	update_icon(FALSE)
 
+
 /obj/structure/railing/Destroy()
 	NeighborsCheck(TRUE)
 	. = ..()
 
+
 /obj/structure/railing/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(!istype(mover) || mover.checkpass(PASS_FLAG_TABLE))
+	if (!istype(mover) || mover.checkpass(PASS_FLAG_TABLE))
 		return TRUE
-	if(get_dir(loc, target) == dir)
+	if (get_dir(loc, target) == dir)
 		return !density
 	return TRUE
+
 
 /obj/structure/railing/on_death()
 	visible_message(SPAN_DANGER("\The [src] [material.destruction_desc]!"))
@@ -81,12 +89,13 @@
 	material.place_shard(get_turf(usr))
 	qdel(src)
 
+
 /obj/structure/railing/proc/NeighborsCheck(UpdateNeighbors = 1)
 	neighbor_status = 0
 	var/Rturn = turn(src.dir, -90)
 	var/Lturn = turn(src.dir, 90)
 
-	for(var/obj/structure/railing/R in src.loc)
+	for (var/obj/structure/railing/R in src.loc)
 		if (QDELETED(R))
 			continue
 		if ((R.dir == Lturn) && R.anchored)
@@ -126,6 +135,7 @@
 			if (UpdateNeighbors)
 				R.update_icon(0)
 
+
 /obj/structure/railing/on_update_icon(update_neighbors = TRUE)
 	NeighborsCheck(update_neighbors)
 	overlays.Cut()
@@ -147,35 +157,36 @@
 			overlays += image(icon, "frontoverlay_r[density]")
 			if (density)
 				overlays += image(icon, "_frontoverlay_r1", layer = ABOVE_HUMAN_LAYER)
-			if(neighbor_status & 4)
+			if (neighbor_status & 4)
 				var/pix_offset_x = 0
 				var/pix_offset_y = 0
-				switch(dir)
-					if(NORTH)
+				switch (dir)
+					if (NORTH)
 						pix_offset_x = 32
-					if(SOUTH)
+					if (SOUTH)
 						pix_offset_x = -32
-					if(EAST)
+					if (EAST)
 						pix_offset_y = -32
-					if(WEST)
+					if (WEST)
 						pix_offset_y = 32
 				overlays += image(icon, "mcorneroverlay[density]", pixel_x = pix_offset_x, pixel_y = pix_offset_y)
 				if (density)
 					overlays += image(icon, "_mcorneroverlay1", pixel_x = pix_offset_x, pixel_y = pix_offset_y, layer = ABOVE_HUMAN_LAYER)
+
 
 /obj/structure/railing/verb/flip() // This will help push railing to remote places, such as open space turfs
 	set name = "Flip Railing"
 	set category = "Object"
 	set src in oview(1)
 
-	if(usr.incapacitated())
+	if (usr.incapacitated())
 		return 0
 
-	if(anchored)
+	if (anchored)
 		to_chat(usr, SPAN_WARNING("It is fastened to the floor and cannot be flipped."))
 		return 0
 
-	if(!turf_is_crowded())
+	if (!turf_is_crowded())
 		to_chat(usr, SPAN_WARNING("You can't flip \the [src] - something is in the way."))
 		return 0
 
@@ -184,10 +195,10 @@
 	update_icon()
 
 /obj/structure/railing/CheckExit(atom/movable/O, turf/target)
-	if(istype(O) && O.checkpass(PASS_FLAG_TABLE))
+	if (istype(O) && O.checkpass(PASS_FLAG_TABLE))
 		return 1
-	if(get_dir(O.loc, target) == dir)
-		if(!density)
+	if (get_dir(O.loc, target) == dir)
+		if (!density)
 			return 1
 		return 0
 	return 1
@@ -323,14 +334,16 @@
 			to_chat(user, SPAN_WARNING("You can't climb there, the way is blocked."))
 			return 0
 
+
 /obj/structure/railing/do_climb(mob/living/user)
 	. = ..()
-	if(.)
-		if(!anchored || material.is_brittle())
+	if (.)
+		if (!anchored || material.is_brittle())
 			kill_health() // Fatboy
 
 		user.jump_layer_shift()
 		addtimer(new Callback(user, /mob/living/proc/jump_layer_shift_end), 2)
+
 
 /obj/structure/railing/slam_into(mob/living/L)
 	var/turf/target_turf = get_turf(src)
@@ -343,6 +356,16 @@
 		playsound(L, 'sound/effects/grillehit.ogg', 25, 1, FALSE)
 	else
 		..()
+
+
+/obj/structure/railing/hitby(atom/movable/AM, datum/thrownthing/TT)
+	var/mob/living/L = AM
+	if (!istype(L))
+		return
+	var/chance = TT.thrower.skill_check(SKILL_HAULING, SKILL_EXPERIENCED) ? 100 : 50
+	if (prob(chance))
+		slam_into(L)
+
 
 /obj/structure/railing/set_color(color)
 	src.color = color ? color : material.icon_colour
