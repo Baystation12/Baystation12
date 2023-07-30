@@ -1,7 +1,6 @@
 /obj
 	layer = OBJ_LAYER
 	animate_movement = 2
-	glide_size = 3
 
 	var/obj_flags
 
