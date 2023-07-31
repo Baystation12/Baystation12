@@ -1,5 +1,5 @@
 // Generates a simple HTML crew manifest for use in various places
-/proc/html_crew_manifest(monochrome, OOC)
+/proc/html_crew_manifest(monochrome)
 	var/list/dept_data = list(
 		list("names" = list(), "header" = "Heads of Staff", "flag" = COM, "color" = MANIFEST_COLOR_COMMAND),
 		list("names" = list(), "header" = "Command Support", "flag" = SPT, "color" = MANIFEST_COLOR_SUPPORT),
@@ -49,16 +49,7 @@
 			if(branch_obj && rank_obj)
 				mil_ranks[name] = "<abbr title=\"[rank_obj.name], [branch_obj.name]\">[rank_obj.name_short]</abbr> "
 
-		if(OOC)
-			var/active = 0
-			for(var/mob/M in GLOB.player_list)
-				var/mob_real_name = M.real_name
-				if(sanitize(mob_real_name) == CR.get_name() && M.client && M.client.inactivity <= 10 MINUTES)
-					active = 1
-					break
-			isactive[name] = active ? "Active" : "Inactive"
-		else
-			isactive[name] = CR.get_status()
+		isactive[name] = CR.get_status()
 
 		var/datum/job/job = SSjobs.get_by_title(rank)
 		var/found_place = 0

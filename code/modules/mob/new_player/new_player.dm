@@ -42,8 +42,6 @@
 		if (config.lore_url)
 			output += "<a href='byond://?src=\ref[src];show_lore=1'>Lore</a>"
 	output += "<hr>"
-	if (GAME_STATE > RUNLEVEL_LOBBY)
-		output += "<a href='byond://?src=\ref[src];manifest=1'>Manifest</a>"
 	output += "<a href='byond://?src=\ref[src];show_preferences=1'>Options</a>"
 	output += "<hr>"
 	output += "<b>Playing As</b><br>"
@@ -179,9 +177,6 @@
 				to_chat(usr, SPAN_WARNING("You must wait [time2text(dsdiff, "mm:ss")] before rejoining."))
 				return
 		LateChoices() //show the latejoin job selection menu
-
-	if(href_list["manifest"])
-		ViewManifest()
 
 	if(href_list["SelectedJob"])
 		var/datum/job/job = SSjobs.get_by_title(href_list["SelectedJob"])
@@ -419,14 +414,6 @@
 
 	new_character.key = key		//Manually transfer the key to log them in
 	return new_character
-
-/mob/new_player/proc/ViewManifest()
-	var/dat = "<div align='center'>"
-	dat += html_crew_manifest(OOC = 1)
-	//show_browser(src, dat, "window=manifest;size=370x420;can_close=1")
-	var/datum/browser/popup = new(src, "Crew Manifest", "Crew Manifest", 370, 420, src)
-	popup.set_content(dat)
-	popup.open()
 
 /mob/new_player/Move()
 	return 0
