@@ -56,37 +56,39 @@ SUBSYSTEM_DEF(atoms)
 			if (++count % 1000)
 				continue
 			CHECK_TICK
-	for (var/i = 1 to length(init_queue))
-		atom = init_queue[i]
-		if (!atom || atom.atom_flags & ATOM_FLAG_INITIALIZED)
-			continue
-		params = init_queue[atom]
-		if (params)
-			InitAtom(atom, mapload_arg + params)
-		else
-			InitAtom(atom, mapload_arg)
-		if (++count % 50)
-			continue
-		CHECK_TICK
-	LIST_RESIZE(init_queue, 0)
+	var/init_queue_length = length(init_queue)
+	if (init_queue_length)
+		for (var/i = 1 to init_queue_length)
+			atom = init_queue[i]
+			if (!atom || atom.atom_flags & ATOM_FLAG_INITIALIZED)
+				continue
+			params = init_queue[atom]
+			if (params)
+				InitAtom(atom, mapload_arg + params)
+			else
+				InitAtom(atom, mapload_arg)
+			if (++count % 500)
+				continue
+			CHECK_TICK
+		init_queue.Cut(1, init_queue_length + 1)
 	time = max((Uptime() - time) * 0.1, 0.1)
 	report_progress("Initialized [count] atom\s in [time]s ([floor(count/time)]/s)")
 	atom_init_stage = INITIALIZATION_INNEW_REGULAR
-	if (!length(late_init_queue))
-		return
-	count = 0
-	time = Uptime()
-	for (var/i = 1 to length(late_init_queue))
-		atom = late_init_queue[i]
-		if (!atom)
-			continue
-		atom.LateInitialize(arglist(late_init_queue[atom]))
-		if (++count % 50)
-			continue
-		CHECK_TICK
-	LIST_RESIZE(late_init_queue, 0)
-	time = max((Uptime() - time) * 0.1, 0.1)
-	report_progress("Late initialized [count] atom\s in [time]s ([floor(count/time)]/s)")
+	var/late_queue_length = length(late_init_queue)
+	if (late_queue_length)
+		count = 0
+		time = Uptime()
+		for (var/i = 1 to late_queue_length)
+			atom = late_init_queue[i]
+			if (!atom)
+				continue
+			atom.LateInitialize(arglist(late_init_queue[atom]))
+			if (++count % 250)
+				continue
+			CHECK_TICK
+		late_init_queue.Cut(1, late_queue_length + 1)
+		time = max((Uptime() - time) * 0.1, 0.1)
+		report_progress("LateInitialized [count] atom\s in [time]s ([floor(count/time)]/s)")
 
 
 /datum/controller/subsystem/atoms/proc/InitAtom(atom/atom, list/arguments)
