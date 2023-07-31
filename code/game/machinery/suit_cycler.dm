@@ -83,37 +83,6 @@
 			attack_hand(user)
 		return
 	//Other interface stuff.
-	if(istype(I, /obj/item/grab))
-		var/obj/item/grab/G = I
-
-		if(!(ismob(G.affecting)))
-			return
-
-		if(locked)
-			to_chat(user, SPAN_DANGER("The suit cycler is locked."))
-			return
-
-		if(length(contents) > 0)
-			to_chat(user, SPAN_DANGER("There is no room inside the cycler for [G.affecting.name]."))
-			return
-
-		visible_message(SPAN_NOTICE("[user] starts putting [G.affecting.name] into the suit cycler."), range = 3)
-
-		if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
-			if(!G || !G.affecting) return
-			var/mob/M = G.affecting
-			if (M.client)
-				M.client.perspective = EYE_PERSPECTIVE
-				M.client.eye = src
-			M.forceMove(src)
-			occupant = M
-
-			add_fingerprint(user)
-			qdel(G)
-
-			updateUsrDialog()
-
-			return
 	else if(isScrewdriver(I))
 
 		panel_open = !panel_open
@@ -162,8 +131,48 @@
 
 		updateUsrDialog()
 		return
-
 	..()
+
+/obj/machinery/suit_cycler/proc/move_target_inside(mob/target, mob/user)
+	visible_message(SPAN_NOTICE("\The [user] starts putting \the [target] into \the [src]."), range = 3)
+	add_fingerprint(user)
+	if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if (!user_can_move_target_inside(target, user))
+			return
+		if (target.client)
+			target.client.perspective = EYE_PERSPECTIVE
+			target.client.eye = src
+		target.forceMove(src)
+		occupant = target
+		if (user != target)
+			add_fingerprint (target)
+		target.remove_grabs_and_pulls()
+		updateUsrDialog()
+
+/obj/machinery/suit_cycler/user_can_move_target_inside(mob/target, mob/user)
+	if (locked)
+		to_chat(user, SPAN_WARNING("\The [src] is locked."))
+		return FALSE
+	if (suit || helmet || occupant)
+		to_chat(user, SPAN_WARNING("There is no room inside \the [src] for \the [target]."))
+		return FALSE
+	return ..()
+
+/obj/machinery/suit_cycler/use_grab(obj/item/grab/grab, list/click_params)
+	if (!user_can_move_target_inside(grab.affecting, grab.assailant))
+		return TRUE
+	move_target_inside(grab.affecting, grab.assailant)
+	return TRUE
+
+/obj/machinery/suit_cycler/MouseDrop_T(mob/target, mob/user)
+	if (!ismob(target) || !CanMouseDrop(target, user))
+		return
+	if (user != target)
+		to_chat(user, SPAN_WARNING("You need to grab \the [target] to be able to do that!"))
+		return
+	else if (user_can_move_target_inside(target, user))
+		move_target_inside(target, user)
+		return
 
 /obj/machinery/suit_cycler/emag_act(remaining_charges, mob/user)
 	if(emagged)

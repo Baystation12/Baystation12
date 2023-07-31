@@ -454,33 +454,16 @@
 	log_and_message_admins("placed [target == user ? "themself" : key_name_admin(target)] into \a [src]")
 	target.remove_grabs_and_pulls()
 
-/obj/machinery/cryopod/proc/user_can_move_target_inside(mob/target, mob/user)
-	if (!user.use_sanity_check(src, target))
-		return FALSE
-	if (!istype(target))
-		to_chat(user, SPAN_WARNING("\The [src] cannot handle such a lifeform!"))
-		return FALSE
-	if (user.incapacitated() || !istype(user))
-		return FALSE
-	if (!target.simulated)
-		return FALSE
+/obj/machinery/cryopod/user_can_move_target_inside(mob/target, mob/user)
 	if (occupant)
 		to_chat(user, SPAN_WARNING("\The [src] is already occupied!"))
 		return FALSE
-	if (target.buckled)
-		to_chat(user, SPAN_WARNING("Unbuckle [user == target ? "yourself" : "\the [target]"] before attempting to [user == target ? "enter \the [src]" : "move them"]."))
+	if (!check_occupant_allowed(target))
 		return FALSE
-	for (var/obj/item/grab/grab in target.grabbed_by)
-		if (grab.assailant == user || grab.assailant == target)
-			continue
-		to_chat(user, SPAN_WARNING("\The [target] is being grabbed by [grab.assailant] and can't be placed in \the [src]."))
-		return FALSE
-	return TRUE
+	return ..()
 
 /obj/machinery/cryopod/MouseDrop_T(mob/target, mob/user)
 	if (!CanMouseDrop(target, user) || !ismob(target))
-		return
-	if (!check_occupant_allowed(target))
 		return
 	if (!user_can_move_target_inside(target, user))
 		return
@@ -491,6 +474,7 @@
 /obj/machinery/cryopod/use_grab(obj/item/grab/grab, list/click_params) //Grab is deleted at the level of attempt_enter if all checks are passed.
 	MouseDrop_T(grab.affecting, grab.assailant)
 	return TRUE
+
 /obj/machinery/cryopod/verb/eject()
 	set name = "Eject Pod"
 	set category = "Object"
