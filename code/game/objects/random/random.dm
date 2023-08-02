@@ -324,8 +324,7 @@
 				/obj/item/gun/projectile/heavysniper = 1,
 				/obj/item/gun/projectile/shotgun/pump/combat = 2,
 				/obj/item/gun/projectile/pistol/throwback = 3,
-				/obj/item/gun/projectile/pistol/broomstick = 1,
-				/obj/item/gun/projectile/shotgun/magshot = 3)
+				/obj/item/gun/projectile/pistol/broomstick = 1)
 
 /obj/random/handgun
 	name = "Random Handgun"
