@@ -2,7 +2,7 @@
 	name = "handcuffs"
 	desc = "Use this to keep prisoners in line."
 	gender = PLURAL
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/tools/handcuffs.dmi'
 	icon_state = "handcuff"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT

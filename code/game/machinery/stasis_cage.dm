@@ -5,7 +5,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 /obj/machinery/stasis_cage
 	name = "stasis cage"
 	desc = "A high-tech animal cage, designed to keep contained fauna docile and safe."
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/machines/research/stasis_cage.dmi'
 	icon_state = "stasis_cage"
 	density = TRUE
 	layer = ABOVE_OBJ_LAYER

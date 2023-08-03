@@ -17,7 +17,7 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 	var/const/MAX_COIL_AMOUNT = 30
 
 	name = "multipurpose cable coil"
-	icon = 'icons/obj/power.dmi'
+	icon = 'icons/obj/machines/power/power_cond_white.dmi'
 	icon_state = "coil"
 	randpixel = 2
 	amount = MAX_COIL_AMOUNT
@@ -324,7 +324,7 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 
 
 /obj/random/single/color/cable_coil
-	icon = 'icons/obj/power.dmi'
+	icon = 'icons/obj/machines/power/power_cond_white.dmi'
 	icon_state = "coil"
 	spawn_object = /obj/item/stack/cable_coil
 

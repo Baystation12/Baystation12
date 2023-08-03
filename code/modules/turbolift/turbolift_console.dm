@@ -1,7 +1,7 @@
 // Base type, do not use.
 /obj/structure/lift
 	name = "turbolift control component"
-	icon = 'icons/obj/turbolift.dmi'
+	icon = 'icons/obj/structures/turbolift.dmi'
 	anchored = TRUE
 	density = FALSE
 	layer = ABOVE_OBJ_LAYER

@@ -481,7 +481,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	linked_destroy.busy = TRUE
 	if (!quick_deconstruct)
 		screen = 0.1
-	flick("d_analyzer_process", linked_destroy)
+	linked_destroy.icon_state = "d_analyzer_process"
 	addtimer(new Callback(src, .proc/finish_deconstruct, W), 24)
 
 /obj/machinery/computer/rdconsole/proc/finish_deconstruct(weakref/W)

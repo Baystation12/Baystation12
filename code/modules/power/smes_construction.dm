@@ -282,7 +282,7 @@
 /obj/machinery/power/smes/buildable/on_update_icon()
 	if (failing)
 		overlays.Cut()
-		overlays += image('icons/obj/power.dmi', "smes-crit")
+		overlays += image('icons/obj/machines/power/smes.dmi', "smes-crit")
 	else
 		..()
 

@@ -191,7 +191,7 @@
 /obj/random/donkpocket
 	name = "random donk-pocket"
 	desc = "This is a random donk-pocket."
-	icon = 'icons/obj/food.dmi'
+	icon = 'icons/obj/food/food.dmi'
 	icon_state = "donkpocket"
 
 
@@ -267,7 +267,7 @@
 /obj/random/donkpocket_box
 	name = "random box of donk-pockets"
 	desc = "This is a random box of donk-pockets."
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/boxes.dmi'
 	icon_state = "donk_kit"
 
 

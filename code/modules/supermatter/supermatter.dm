@@ -27,7 +27,7 @@
 /obj/machinery/power/supermatter
 	name = "supermatter core"
 	desc = "A strangely translucent and iridescent crystal. <span class='danger'>You get headaches just from looking at it.</span>"
-	icon = 'icons/obj/supermatter.dmi'
+	icon = 'icons/obj/machines/power/supermatter.dmi'
 	icon_state = "supermatter"
 	density = TRUE
 	anchored = FALSE

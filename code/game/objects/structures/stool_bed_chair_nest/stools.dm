@@ -4,7 +4,7 @@ var/global/list/stool_cache = list() //haha stool
 /obj/item/stool
 	name = "stool"
 	desc = "Apply butt."
-	icon = 'icons/obj/furniture.dmi'
+	icon = 'icons/obj/structures/furniture.dmi'
 	icon_state = "stool_preview" //set for the map
 	item_state = "stool"
 	randpixel = 0

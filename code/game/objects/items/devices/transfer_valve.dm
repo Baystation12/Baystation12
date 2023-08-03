@@ -1,7 +1,7 @@
 /obj/item/device/transfer_valve
 	name = "tank transfer valve"
 	desc = "A small, versatile valve with dual-headed heat-resistant pipes. This mechanism is the standard size for coupling with portable gas tanks."
-	icon = 'icons/obj/assemblies.dmi'
+	icon = 'icons/obj/assemblies/assemblies.dmi'
 	icon_state = "valve_1"
 	var/obj/item/tank/tank_one
 	var/obj/item/tank/tank_two

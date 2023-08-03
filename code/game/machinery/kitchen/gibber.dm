@@ -2,7 +2,7 @@
 /obj/machinery/gibber
 	name = "meat grinder"
 	desc = "The name isn't descriptive enough?"
-	icon = 'icons/obj/kitchen.dmi'
+	icon = 'icons/obj/machines/kitchen.dmi'
 	icon_state = "grinder"
 	density = TRUE
 	anchored = TRUE
@@ -36,15 +36,15 @@
 /obj/machinery/gibber/on_update_icon()
 	overlays.Cut()
 	if (dirty)
-		src.overlays += image('icons/obj/kitchen.dmi', "grbloody")
+		src.overlays += image('icons/obj/machines/kitchen.dmi', "grbloody")
 	if(inoperable())
 		return
 	if (!occupant)
-		src.overlays += image('icons/obj/kitchen.dmi', "grjam")
+		src.overlays += image('icons/obj/machines/kitchen.dmi', "grjam")
 	else if (operating)
-		src.overlays += image('icons/obj/kitchen.dmi', "gruse")
+		src.overlays += image('icons/obj/machines/kitchen.dmi', "gruse")
 	else
-		src.overlays += image('icons/obj/kitchen.dmi', "gridle")
+		src.overlays += image('icons/obj/machines/kitchen.dmi', "gridle")
 
 /obj/machinery/gibber/relaymove(mob/user as mob)
 	src.go_out()

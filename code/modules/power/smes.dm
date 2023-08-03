@@ -7,6 +7,7 @@
 /obj/machinery/power/smes
 	name = "power storage unit"
 	desc = "A high-capacity superconducting magnetic energy storage (SMES) unit."
+	icon = 'icons/obj/machines/power/smes.dmi'
 	icon_state = "smes"
 	density = TRUE
 	anchored = TRUE
@@ -23,7 +24,7 @@
 
 	var/capacity = 5e6 // maximum charge
 	var/charge = 1e6 // actual charge
-	var/overlay_icon = 'icons/obj/power.dmi'
+	var/overlay_icon = 'icons/obj/machines/power/smes.dmi'
 	var/input_attempt = 0 			// 1 = attempting to charge, 0 = not attempting to charge
 	var/inputting = 0 				// 1 = actually inputting, 0 = not inputting
 	var/input_level = 50000 		// amount of power the SMES attempts to charge by
@@ -99,28 +100,32 @@
 	overlays.Cut()
 	if(MACHINE_IS_BROKEN(src))	return
 
+	overlays += emissive_appearance(icon, "smes-op[outputting]")
 	overlays += image(overlay_icon, "smes-op[outputting]")
 
 	if(inputting == 2)
+		overlays += emissive_appearance(icon, "smes-oc2")
 		overlays += image(overlay_icon, "smes-oc2")
 	else if (inputting == 1)
+		overlays += emissive_appearance(icon, "smes-oc1")
 		overlays += image(overlay_icon, "smes-oc1")
 	else if (input_attempt)
+		overlays += emissive_appearance(icon, "smes-oc0")
 		overlays += image(overlay_icon, "smes-oc0")
 
 	var/clevel = chargedisplay()
 	if(clevel)
-		var/image/I = image(overlay_icon, "smes-og[clevel]")
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		I.layer = ABOVE_LIGHTING_LAYER
-		overlays += I
-		set_light(0.4, 1.2, 4, 10)
+		overlays += emissive_appearance(icon, "smes-og[clevel]")
+		overlays += image(overlay_icon, "smes-og[clevel]")
 
 	if(outputting == 2)
+		overlays += emissive_appearance(icon, "smes-op2")
 		overlays += image(overlay_icon, "smes-op2")
 	else if (outputting == 1)
+		overlays += emissive_appearance(icon, "smes-op1")
 		overlays += image(overlay_icon, "smes-op1")
 	else
+		overlays += emissive_appearance(icon, "smes-op0")
 		overlays += image(overlay_icon, "smes-op0")
 
 	if(panel_open)

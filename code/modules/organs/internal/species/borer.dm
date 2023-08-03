@@ -1,8 +1,8 @@
 //CORTICAL BORER ORGANS.
 /obj/item/organ/internal/borer
 	name = "cortical borer"
-	icon = 'icons/obj/objects.dmi'
-	icon_state = "borer"
+	icon = 'icons/mob/simple_animal/animal.dmi'
+	icon_state = "brainslug"
 	organ_tag = BP_BRAIN
 	desc = "A disgusting space slug."
 	parent_organ = BP_HEAD

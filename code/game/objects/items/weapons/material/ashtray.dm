@@ -1,7 +1,7 @@
 /obj/item/material/ashtray
 	name = "ashtray"
 	desc = "A thing to keep your butts in."
-	icon = 'icons/obj/objects.dmi'
+	icon = 'icons/obj/ashtray.dmi'
 	icon_state = "ashtray"
 	max_force = 10
 	force_multiplier = 0.1
@@ -22,9 +22,9 @@
 	..()
 	overlays.Cut()
 	if (length(contents) == max_butts)
-		overlays |= image('icons/obj/objects.dmi',"ashtray_full")
+		overlays |= image('icons/obj/ashtray.dmi',"ashtray_full")
 	else if (length(contents) >= max_butts/2)
-		overlays |= image('icons/obj/objects.dmi',"ashtray_half")
+		overlays |= image('icons/obj/ashtray.dmi',"ashtray_half")
 
 /obj/item/material/ashtray/attackby(obj/item/W as obj, mob/user as mob)
 	if (health_dead())

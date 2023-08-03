@@ -1,7 +1,7 @@
 /obj/machinery/floorlayer
 
 	name = "automatic floor layer"
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/machines/pipe_dispenser.dmi'
 	icon_state = "pipe_d"
 	density = TRUE
 	var/turf/old_turf

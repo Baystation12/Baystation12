@@ -7,7 +7,7 @@
 /obj/item/device/debugger
 	name = "debugger"
 	desc = "Used to debug electronic equipment."
-	icon = 'icons/obj/hacktool.dmi'
+	icon = 'icons/obj/tools/hacktool.dmi'
 	icon_state = "hacktool-g"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 5.0

@@ -1,7 +1,7 @@
 /obj/item/serving_bowl
 	name = "serving bowl"
 	desc = "A portion-sized bowl for serving hungry customers."
-	icon = 'icons/obj/food_custom.dmi'
+	icon = 'icons/obj/food/food_custom.dmi'
 	icon_state = "serving_bowl"
 	center_of_mass = "x=16;y=10"
 	w_class = ITEM_SIZE_SMALL
@@ -31,7 +31,7 @@
 /obj/item/reagent_containers/food/snacks/custombowl
 	name = "serving bowl"
 	desc = "A delicious bowl of food."
-	icon = 'icons/obj/food_custom.dmi'
+	icon = 'icons/obj/food/food_custom.dmi'
 	icon_state = "serving_bowl"
 	filling_color = null
 	trash = /obj/item/serving_bowl

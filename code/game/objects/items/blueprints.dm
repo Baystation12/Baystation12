@@ -1,7 +1,7 @@
 /obj/item/blueprints
 	name = "blueprints"
 	desc = "Blueprints..."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/tools/blueprints.dmi'
 	icon_state = "blueprints"
 	attack_verb = list("attacked", "bapped", "hit")
 	var/const/AREA_ERRNONE = 0

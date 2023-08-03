@@ -4,8 +4,8 @@
 /obj/machinery/atmospherics/unary/heater
 	name = "gas heating system"
 	desc = "Heats gas when connected to a pipe network."
-	icon = 'icons/obj/Cryogenic2.dmi'
-	icon_state = "heater_0"
+	icon = 'icons/obj/atmospherics/temperature_machines.dmi'
+	icon_state = "heater"
 	density = TRUE
 	anchored = TRUE
 	use_power = POWER_USE_OFF
@@ -51,14 +51,19 @@
 
 
 /obj/machinery/atmospherics/unary/heater/on_update_icon()
-	if(node)
-		if(use_power && heating)
-			icon_state = "heater_1"
-		else
-			icon_state = "heater"
-	else
-		icon_state = "heater_0"
-	return
+	overlays.Cut()
+	if(panel_open)
+		overlays += "freezer_panel" //Reuse the freezer icons because no point in creating duplicates for essentially the same machine.
+	if(is_powered())
+		overlays += emissive_appearance(icon, "freezer_lights")
+		overlays += "freezer_lights"
+		if(node)
+			if(use_power && heating)
+				overlays += emissive_appearance(icon, "[icon_state]_lights_working")
+				overlays += "[icon_state]_lights_working"
+			else
+				overlays += emissive_appearance(icon, "freezer_lights_standby")
+				overlays += "freezer_lights_standby"
 
 
 /obj/machinery/atmospherics/unary/heater/Process()

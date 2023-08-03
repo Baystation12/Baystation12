@@ -52,7 +52,7 @@
 	name = "tiny device"
 	desc = "Press button to activate. Can be done once and only once."
 	w_class = ITEM_SIZE_TINY
-	icon = 'icons/obj/flash_synthetic.dmi'
+	icon = 'icons/obj/tools/flash_synthetic.dmi'
 	icon_state = "sflash"
 	var/state = AWAITING_ACTIVATION
 	var/service_label = "Unnamed Service"

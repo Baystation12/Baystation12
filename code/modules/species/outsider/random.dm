@@ -137,7 +137,7 @@
 /obj/structure/aliumizer
 	name = "alien monolith"
 	desc = "Your true form is calling. Use this to become an alien humanoid."
-	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon = 'icons/obj/xenoarchaeology_finds.dmi'
 	icon_state = "ano51"
 	anchored = TRUE
 

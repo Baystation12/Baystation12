@@ -1,7 +1,7 @@
 /obj/effect/accelerated_particle
 	name = "accelerated particles"
 	desc = "Small things moving very fast."
-	icon = 'icons/obj/machines/particle_accelerator2.dmi'
+	icon = 'icons/obj/machines/power/particle_accelerator2.dmi'
 	icon_state = "particle"
 	anchored = TRUE
 	density = TRUE

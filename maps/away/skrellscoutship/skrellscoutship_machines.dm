@@ -32,7 +32,7 @@
 	. = ..()
 
 	if(!field_image)
-		field_image = image(icon = 'icons/obj/machines/power/fusion.dmi', icon_state = "emfield_s1")
+		field_image = image(icon = 'icons/obj/machines/power/fusion_core.dmi', icon_state = "emfield_s1")
 		field_image.color = COLOR_CYAN
 		field_image.alpha = 50
 		field_image.layer = SINGULARITY_LAYER

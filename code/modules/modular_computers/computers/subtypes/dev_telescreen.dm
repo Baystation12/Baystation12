@@ -1,7 +1,7 @@
 /obj/item/modular_computer/telescreen
 	name = "telescreen"
 	desc = "A wall-mounted touchscreen computer."
-	icon = 'icons/obj/modular_telescreen.dmi'
+	icon = 'icons/obj/machines/modular_telescreen.dmi'
 	icon_state = "telescreen"
 	icon_state_unpowered = "telescreen"
 	hardware_flag = PROGRAM_TELESCREEN

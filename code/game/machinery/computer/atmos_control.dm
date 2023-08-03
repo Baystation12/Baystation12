@@ -4,7 +4,7 @@
 
 /obj/machinery/computer/atmoscontrol
 	name = "\improper Central Atmospherics Computer"
-	icon = 'icons/obj/computer.dmi'
+	icon = 'icons/obj/machines/computer.dmi'
 	icon_keyboard = "generic_key"
 	icon_screen = "comm_logs"
 	light_color = "#00b000"

@@ -1,6 +1,6 @@
 /obj/item/tableflag
 	name = "table flag"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/table_flags.dmi'
 	icon_state = "tableflag"
 	force = 0.5
 	w_class = ITEM_SIZE_SMALL

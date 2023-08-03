@@ -196,7 +196,7 @@
 /obj/effect/rift
 	name = "rift"
 	desc = "a tear in space and time."
-	icon = 'icons/obj/wizard.dmi'
+	icon = 'icons/obj/cult.dmi'
 	icon_state = "rift"
 	unacidable = TRUE
 	anchored = TRUE

@@ -5,7 +5,7 @@
 /obj/machinery/vitals_monitor
 	name = "vitals monitor"
 	desc = "A bulky yet mobile machine, showing some odd graphs."
-	icon = 'icons/obj/heartmonitor.dmi'
+	icon = 'icons/obj/machines/heartmonitor.dmi'
 	icon_state = "base"
 	anchored = FALSE
 	power_channel = EQUIP
@@ -179,6 +179,8 @@
 	if (istype(heart) && !BP_IS_ROBOTIC(heart))
 		switch (victim.pulse())
 			if (PULSE_NONE)
+				overlays += emissive_appearance(icon, "pulse_flatline")
+				overlays += emissive_appearance(icon, "pulse_warning")
 				overlays += image(icon, icon_state = "pulse_flatline")
 				overlays += image(icon, icon_state = "pulse_warning")
 				if (beep)
@@ -186,21 +188,26 @@
 				if (read_alerts)
 					alerts[PULSE_ALERT] = "Cardiac flatline detected!"
 			if (PULSE_SLOW, PULSE_NORM,)
+				overlays += emissive_appearance(icon, "pulse_normal")
 				overlays += image(icon, icon_state = "pulse_normal")
 				if (beep)
 					playsound(src, 'sound/machines/quiet_beep.ogg', 40)
 			if (PULSE_FAST, PULSE_2FAST)
+				overlays += emissive_appearance(icon, "pulse_veryfast")
 				overlays += image(icon, icon_state = "pulse_veryfast")
 				if (beep)
 					playsound(src, 'sound/machines/quiet_double_beep.ogg', 40)
 			if (PULSE_THREADY)
+				overlays += emissive_appearance(icon, "pulse_thready")
 				overlays += image(icon, icon_state = "pulse_thready")
+				overlays += emissive_appearance(icon, "pulse_warning")
 				overlays += image(icon, icon_state = "pulse_warning")
 				if (beep)
 					playsound(src, 'sound/machines/ekg_alert.ogg', 40)
 				if (read_alerts)
 					alerts[PULSE_ALERT] = "Excessive heartbeat! Possible Shock Detected!"
 	else
+		overlays += emissive_appearance(icon, "pulse_warning")
 		overlays += image(icon, icon_state = "pulse_warning")
 
 /obj/machinery/vitals_monitor/proc/handle_brain()
@@ -210,17 +217,22 @@
 	if (istype(brain) && victim.stat != DEAD && !(victim.status_flags & FAKEDEATH))
 		switch (brain.get_current_damage_threshold())
 			if (0 to 2)
+				overlays += emissive_appearance(icon, "brain_ok")
 				overlays += image(icon, icon_state = "brain_ok")
 			if (3 to 5)
+				overlays += emissive_appearance(icon, "breathing_bad")
 				overlays += image(icon, icon_state = "brain_bad")
 				if (read_alerts)
 					alerts[BRAIN_ALERT] = "Weak brain activity!"
 			if (6 to INFINITY)
+				overlays += emissive_appearance(icon, "brain_verybad")
 				overlays += image(icon, icon_state = "brain_verybad")
+				overlays += emissive_appearance(icon, "brain_warning")
 				overlays += image(icon, icon_state = "brain_warning")
 				if (read_alerts)
 					alerts[BRAIN_ALERT] = "Very weak brain activity!"
 	else
+		overlays += emissive_appearance(icon, "brain_warning")
 		overlays += image(icon, icon_state = "brain_warning")
 
 /obj/machinery/vitals_monitor/proc/handle_lungs()
@@ -229,16 +241,20 @@
 	var/obj/item/organ/internal/lungs/lungs = victim.internal_organs_by_name[BP_LUNGS]
 	if (istype(lungs) && !(victim.status_flags & FAKEDEATH))
 		if (lungs.breath_fail_ratio < 0.3)
+			overlays += emissive_appearance(icon, "breathing_normal")
 			overlays += image(icon, icon_state = "breathing_normal")
 		else if (lungs.breath_fail_ratio < 1)
+			overlays += emissive_appearance(icon, "breathing_shallow")
 			overlays += image(icon, icon_state = "breathing_shallow")
 			if (read_alerts)
 				alerts[LUNGS_ALERT] = "Abnormal breathing detected!"
 		else
+			overlays += emissive_appearance(icon, "breathing_warning")
 			overlays += image(icon, icon_state = "breathing_warning")
 			if (read_alerts)
 				alerts[LUNGS_ALERT] = "Patient is not breathing!"
 	else
+		overlays += emissive_appearance(icon, "breathing_warning")
 		overlays += image(icon, icon_state = "breathing_warning")
 
 /obj/machinery/vitals_monitor/proc/handle_alerts()

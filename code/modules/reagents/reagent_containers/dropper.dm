@@ -4,7 +4,7 @@
 /obj/item/reagent_containers/dropper
 	name = "dropper"
 	desc = "A dropper. Transfers 5 units."
-	icon = 'icons/obj/chemical.dmi'
+	icon = 'icons/obj/tools/dropper.dmi'
 	icon_state = "dropper0"
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = "1;2;3;4;5"

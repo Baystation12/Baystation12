@@ -1,7 +1,7 @@
 /obj/item/material/twohanded/jack
 	name = "maintenance jack"
 	desc = "A heavy-duty combination hammer and prying tool that can be used to remove airlock braces."
-	icon = 'icons/obj/tools.dmi'
+	icon = 'icons/obj/tools/crowbar.dmi'
 	icon_state = "jack0"
 	base_icon = "jack"
 	w_class = ITEM_SIZE_LARGE
@@ -35,7 +35,7 @@
 /obj/item/airlock_brace
 	name = "airlock brace"
 	desc = "A sturdy device that can be attached to an airlock to reinforce it and provide additional security."
-	icon = 'icons/obj/airlock_machines.dmi'
+	icon = 'icons/obj/doors/airlock_machines.dmi'
 	icon_state = "brace_open"
 	health_max = 300
 	var/obj/machinery/door/airlock/airlock

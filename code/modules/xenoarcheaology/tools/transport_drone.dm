@@ -1,7 +1,7 @@
 /obj/item/device/drone_designator
 	name = "drone telemetry designator"
 	desc = "A small, handheld tool used to transmit location data to a transport drone."
-	icon = 'icons/obj/landing_pad.dmi'
+	icon = 'icons/obj/tools/drone_control.dmi'
 	icon_state = "pad_designator"
 	var/network = null
 	w_class = ITEM_SIZE_SMALL
@@ -87,7 +87,7 @@
 /obj/machinery/drone_pad
 	name = "transport drone landing pad"
 	desc = "A small pad for transport drones to deposit their payloads at."
-	icon = 'icons/obj/landing_pad.dmi'
+	icon = 'icons/obj/machines/landing_pad.dmi'
 	icon_state = "pad_base"
 	anchored = TRUE
 	density = FALSE
@@ -146,7 +146,7 @@
 	var/image/object = new
 	object.appearance = target
 	object.loc = target.loc
-	var/image/drone = image('icons/obj/landing_pad.dmi', target.loc, "pad_drone")
+	var/image/drone = image('icons/obj/machines/landing_pad.dmi', target.loc, "pad_drone")
 	drone.plane = DEFAULT_PLANE
 	drone.layer = ABOVE_PROJECTILE_LAYER
 	drone.alpha = 10

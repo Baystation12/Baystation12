@@ -1,7 +1,7 @@
 /obj/item/screwdriver
 	name = "screwdriver"
 	desc = "Your archetypal flathead screwdriver, with a nice, heavy polymer handle."
-	icon = 'icons/obj/tools.dmi'
+	icon = 'icons/obj/tools/screwdriver.dmi'
 	icon_state = "screwdriver_preview"
 	item_state = "screwdriver"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE

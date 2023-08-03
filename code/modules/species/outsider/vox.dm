@@ -146,7 +146,7 @@
 /obj/item/vox_changer
 	name = "mouldy mirror"
 	desc = "Something seems strange about this old, dirty mirror. Your reflection doesn't look like you remember it."
-	icon = 'icons/obj/watercloset.dmi'
+	icon = 'icons/obj/structures/mirror.dmi'
 	icon_state = "mirror_broke"
 	color = "#bcd4a9"
 	anchored = TRUE

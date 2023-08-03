@@ -5,7 +5,7 @@
 // So this cannot be abused for other uses, we make it two-handed and inable to have its storage looked into.
 /obj/item/storage/laundry_basket
 	name = "laundry basket"
-	icon = 'icons/obj/janitor.dmi'
+	icon = 'icons/obj/janitor_tools.dmi'
 	icon_state = "laundry-empty"
 	item_state = "laundry"
 	desc = "The peak of thousands of years of laundry evolution."

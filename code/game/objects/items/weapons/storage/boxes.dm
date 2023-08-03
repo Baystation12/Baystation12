@@ -172,6 +172,7 @@
 
 /obj/item/storage/box/ammo
 	name = "ammo box"
+	icon = 'icons/obj/weapons/ammo_boxes.dmi'
 	icon_state = "ammo"
 	desc = "A sturdy metal box with several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
 	use_sound = 'sound/effects/closet_open.ogg'
@@ -374,7 +375,7 @@
 /obj/item/storage/box/monkeycubes
 	name = "monkey cube box"
 	desc = "Drymate brand monkey cubes. Just add water!"
-	icon = 'icons/obj/food.dmi'
+	icon = 'icons/obj/food/food.dmi'
 	icon_state = "monkeycubebox"
 	can_hold = list(/obj/item/reagent_containers/food/snacks/monkeycube)
 	startswith = list(/obj/item/reagent_containers/food/snacks/monkeycube/wrapped = 5)
@@ -460,7 +461,7 @@
 
 /obj/item/storage/box/lights
 	name = "box of replacement bulbs"
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/boxes.dmi'
 	icon_state = "light"
 	desc = "This box is shaped on the inside so that only light tubes and bulbs fit."
 	item_state = "syringe_kit"
@@ -598,6 +599,7 @@
 
 /obj/item/storage/box/detergent
 	name = "detergent pods bag"
+	icon = 'icons/obj/chemical_storage.dmi'
 	desc = "A bag full of juicy, yummy detergent pods. This bag has been labeled: Tod Pods, a Waffle Co. product."
 	icon_state = "detergent"
 	startswith = list(/obj/item/reagent_containers/pill/detergent = 10)

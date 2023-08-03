@@ -1,7 +1,7 @@
 /obj/item/wrench
 	name = "wrench"
 	desc = "A good, durable combination wrench, with self-adjusting, universal open- and ring-end mechanisms to match a wide variety of nuts and bolts."
-	icon = 'icons/obj/tools.dmi'
+	icon = 'icons/obj/tools/wrench.dmi'
 	icon_state = "wrench"
 	item_state = "wrench"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE

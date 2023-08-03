@@ -35,7 +35,7 @@
 /obj/machinery/rotating_alarm
 	name = "industrial alarm"
 	desc = "An industrial rotating alarm light."
-	icon = 'icons/obj/rotating_alarm.dmi'
+	icon = 'icons/obj/structures/rotating_alarm.dmi'
 	icon_state = "alarm"
 	idle_power_usage = 0
 	active_power_usage = 0

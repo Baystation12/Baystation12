@@ -17,7 +17,7 @@
 /obj/item/bikehorn
 	name = "bike horn"
 	desc = "A horn off of a bicycle."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/toy.dmi'
 	icon_state = "bike_horn"
 	item_state = "bike_horn"
 	throwforce = 3

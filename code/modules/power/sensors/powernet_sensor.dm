@@ -13,7 +13,7 @@
 	anchored = TRUE
 	density = FALSE
 	level = ATOM_LEVEL_UNDER_TILE
-	icon = 'icons/obj/objects.dmi'
+	icon = 'icons/obj/structures/floor_magnet.dmi'
 	icon_state = "floor_beacon" // If anyone wants to make better sprite, feel free to do so without asking me.
 
 	var/name_tag = "#UNKN#" // ID tag displayed in list of powernet sensors. Each sensor should have it's own tag!

@@ -14,8 +14,8 @@
 	desc = "This large machine uses a complex filtration system to split, merge, condense, or bottle up any kind of chemical, for all your medicinal* needs."
 	density = TRUE
 	anchored = TRUE
-	icon = 'icons/obj/chemical.dmi'
-	icon_state = "mixer0"
+	icon = 'icons/obj/machines/medical/mixer.dmi'
+	icon_state = "mixer"
 	layer = BELOW_OBJ_LAYER
 	idle_power_usage = 20
 	clicksound = "button"
@@ -46,6 +46,21 @@
 	create_reagents(reagent_limit)
 	..()
 
+/obj/machinery/chem_master/on_update_icon()
+	overlays.Cut()
+	if(panel_open)
+		overlays += "[icon_state]_panel"
+	if(is_powered())
+		overlays += emissive_appearance(icon, "[icon_state]_lights")
+		overlays += "[icon_state]_lights"
+	if((beaker) || (loaded_pill_bottle))
+		if(!is_powered())
+			overlays += "[icon_state]_working_nopower"
+		else
+			overlays += emissive_appearance(icon, "[icon_state]_lights_working")
+			overlays += "[icon_state]_lights_working"
+			overlays += "[icon_state]_working"
+
 /obj/machinery/chem_master/ex_act(severity)
 	switch(severity)
 		if(EX_ACT_DEVASTATING)
@@ -67,7 +82,6 @@
 			return
 		beaker = B
 		to_chat(user, "You add the container to the machine!")
-		icon_state = "mixer1"
 		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 	else if(istype(B, /obj/item/storage/pill_bottle))
@@ -79,6 +93,7 @@
 			return
 		loaded_pill_bottle = B
 		to_chat(user, "You add the pill bottle into the dispenser slot!")
+	update_icon()
 
 /obj/machinery/chem_master/proc/eject_beaker(mob/user)
 	if(!beaker)
@@ -87,7 +102,7 @@
 	user.put_in_hands(B)
 	beaker = null
 	reagents.clear_reagents()
-	icon_state = "mixer0"
+	update_icon()
 	atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER
 
 /obj/machinery/chem_master/proc/get_remaining_volume()
@@ -289,9 +304,9 @@
 		spawn()
 			has_sprites += user.client
 			for(var/i = 1 to MAX_PILL_SPRITE)
-				send_rsc(usr, icon('icons/obj/chemical.dmi', "pill" + num2text(i)), "pill[i].png")
+				send_rsc(usr, icon('icons/obj/pills.dmi', "pill" + num2text(i)), "pill[i].png")
 			for(var/sprite in BOTTLE_SPRITES)
-				send_rsc(usr, icon('icons/obj/chemical.dmi', sprite), "[sprite].png")
+				send_rsc(usr, icon('icons/obj/chemical_storage.dmi', sprite), "[sprite].png")
 
 	var/data = list()
 	if (analyzed_reagent)

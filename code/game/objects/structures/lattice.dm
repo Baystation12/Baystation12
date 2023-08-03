@@ -1,7 +1,7 @@
 /obj/structure/lattice
 	name = "lattice"
 	desc = "A lightweight support lattice."
-	icon = 'icons/obj/smoothlattice.dmi'
+	icon = 'icons/obj/structures/smoothlattice.dmi'
 	icon_state = "lattice0"
 	density = FALSE
 	anchored = TRUE

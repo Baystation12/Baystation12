@@ -1,7 +1,7 @@
 /obj/item/retractor
 	name = "retractor"
 	desc = "Used to separate the edges of a surgical incision to get to the juicy organs inside."
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/obj/surgery_tools.dmi'
 	icon_state = "retractor"
 	matter = list(MATERIAL_STEEL = 10000, MATERIAL_GLASS = 5000)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -11,7 +11,7 @@
 /obj/item/hemostat
 	name = "hemostat"
 	desc = "A type of forceps used to prevent an incision from bleeding, or to extract objects from the inside of the body."
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/obj/surgery_tools.dmi'
 	icon_state = "hemostat"
 	matter = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 2500)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -22,7 +22,7 @@
 /obj/item/cautery
 	name = "cautery"
 	desc = "Uses chemicals to quickly cauterize incisions and other small cuts without causing further damage."
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/obj/surgery_tools.dmi'
 	icon_state = "cautery"
 	matter = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 2500, MATERIAL_ALUMINIUM = 1000)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -33,7 +33,7 @@
 /obj/item/surgicaldrill
 	name = "surgical drill"
 	desc = "Effectively a very precise hand drill, used to bore holes through bone."
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/obj/surgery_tools.dmi'
 	icon_state = "drill"
 	hitsound = 'sound/weapons/circsawhit.ogg'
 	matter = list(MATERIAL_STEEL = 15000, MATERIAL_GLASS = 10000)
@@ -44,7 +44,7 @@
 	attack_verb = list("drilled")
 
 /obj/item/scalpel
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/obj/surgery_tools.dmi'
 	abstract_type = /obj/item/scalpel
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 10.0
@@ -85,7 +85,7 @@
 /obj/item/circular_saw
 	name = "circular saw"
 	desc = "A small and nasty-looking hand saw used to cut through bone, or in an emergency, pizza."
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/obj/surgery_tools.dmi'
 	icon_state = "saw"
 	hitsound = 'sound/weapons/circsawhit.ogg'
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -103,7 +103,7 @@
 /obj/item/bonegel
 	name = "bone gel"
 	desc = "A pack of sophisticated chemical gel used to mend fractures and broken bones before setting."
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/obj/surgery_tools.dmi'
 	icon_state = "bone-gel"
 	force = 0
 	w_class = ITEM_SIZE_SMALL
@@ -112,7 +112,7 @@
 /obj/item/FixOVein
 	name = "vascular recoupler"
 	desc = "Derived from a Vey-Med design, this miniature 3D printer is used to quickly synthetize and thread new organic tissue during surgical procedures."
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/obj/surgery_tools.dmi'
 	icon_state = "fixovein"
 	force = 0
 	throwforce = 1.0
@@ -124,7 +124,7 @@
 /obj/item/bonesetter
 	name = "bone setter"
 	desc = "A large, heavy clamp for setting dislocated or fractured bones back in place."
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/obj/surgery_tools.dmi'
 	icon_state = "bone setter"
 	force = 8.0
 	throwforce = 9.0

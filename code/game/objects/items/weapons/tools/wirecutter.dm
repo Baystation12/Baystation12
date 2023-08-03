@@ -1,7 +1,7 @@
 /obj/item/wirecutters
 	name = "wirecutters"
 	desc = "A special pair of pliers with cutting edges. Various brackets and manipulators built into the handle allow it to repair severed wiring."
-	icon = 'icons/obj/tools.dmi'
+	icon = 'icons/obj/tools/wirecutter.dmi'
 	icon_state = "cutters_preview"
 	item_state = "cutters"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE

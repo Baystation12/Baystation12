@@ -1,6 +1,6 @@
 /obj/item/material/coin
 	name = "coin"
-	icon = 'icons/obj/coin.dmi'
+	icon = 'icons/obj/materials/coin.dmi'
 	icon_state = "coin1"
 	applies_material_colour = TRUE
 	randpixel = 8
@@ -201,7 +201,7 @@
 /obj/random/coin
 	name = "random coin"
 	desc = "This is a random coin."
-	icon = 'icons/obj/coin.dmi'
+	icon = 'icons/obj/materials/coin.dmi'
 	icon_state = "coin1"
 
 

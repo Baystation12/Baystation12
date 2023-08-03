@@ -1,6 +1,6 @@
 /obj/machinery/photocopier
 	name = "photocopier"
-	icon = 'icons/obj/bureaucracy.dmi'
+	icon = 'icons/obj/machines/bureaucracy/photocopier.dmi'
 	icon_state = "photocopier"
 	var/insert_anim = "photocopier_animation"
 	anchored = TRUE

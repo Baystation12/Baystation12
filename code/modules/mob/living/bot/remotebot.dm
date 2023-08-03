@@ -118,7 +118,7 @@
 /obj/item/device/bot_controller
 	name = "remote control"
 	desc = "Used to control something remotely. Even has a tiny screen!"
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/obj/surgery_tools.dmi'
 	icon_state = "autopsy_scanner"
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
@@ -182,7 +182,7 @@
 /obj/item/device/bot_kit
 	name = "Remote-Bot Kit"
 	desc = "The cover says 'control your own cardboard nuclear powered robot. Comes with real plutonium!"
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/boxes.dmi'
 	icon_state = "remotebot"
 
 /obj/item/device/bot_kit/attack_self(mob/living/user)

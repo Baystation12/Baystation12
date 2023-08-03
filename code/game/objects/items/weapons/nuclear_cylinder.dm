@@ -1,7 +1,7 @@
 /obj/item/nuclear_cylinder
 	name = "\improper nuclear cylinder"
 	desc = "This cylinder is used in the self destruct system of the ship."
-	icon = 'icons/obj/nuclear_cylinder.dmi'
+	icon = 'icons/obj/machines/nuclear_cylinder.dmi'
 	icon_state = "nuclear_cylinder"
 	item_state = "nuclear"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE

@@ -3,6 +3,7 @@
 /obj/item/tank/jetpack
 	name = "jetpack (empty)"
 	desc = "The O'Neill Manufacturing VMU-12-U is a tank-based maneuvering pack that uses compressed gas for propulsion in zero-gravity areas. Use with caution."
+	icon = 'icons/obj/jetpacks.dmi'
 	icon_state = "jetpack"
 	gauge_icon = null
 	w_class = ITEM_SIZE_HUGE

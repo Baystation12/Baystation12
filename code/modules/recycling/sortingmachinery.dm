@@ -1,7 +1,7 @@
 /obj/structure/bigDelivery
 	desc = "A big wrapped package."
 	name = "large parcel"
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/parcels.dmi'
 	icon_state = "deliverycloset"
 	health_max = 5
 	var/obj/wrapped = null
@@ -110,7 +110,7 @@
 /obj/structure/bigDelivery/on_update_icon()
 	overlays.Cut()
 	if(nameset || examtext)
-		var/image/I = new/image('icons/obj/storage.dmi',"delivery_label")
+		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_label")
 		if(icon_state == "deliverycloset")
 			I.pixel_x = 2
 			if(label_y == null)
@@ -123,7 +123,7 @@
 			I.pixel_y = -3
 		overlays += I
 	if(src.sortTag)
-		var/image/I = new/image('icons/obj/storage.dmi',"delivery_tag")
+		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_tag")
 		if(icon_state == "deliverycloset")
 			if(tag_x == null)
 				tag_x = rand(-2, 3)
@@ -159,7 +159,7 @@
 /obj/item/smallDelivery
 	desc = "A small wrapped package."
 	name = "small parcel"
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/parcels.dmi'
 	icon_state = "deliverycrate3"
 	health_max = 5
 	var/obj/item/wrapped = null
@@ -269,12 +269,12 @@
 /obj/item/smallDelivery/on_update_icon()
 	overlays.Cut()
 	if((nameset || examtext) && icon_state != "deliverycrate1")
-		var/image/I = new/image('icons/obj/storage.dmi',"delivery_label")
+		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_label")
 		if(icon_state == "deliverycrate5")
 			I.pixel_y = -1
 		overlays += I
 	if(src.sortTag)
-		var/image/I = new/image('icons/obj/storage.dmi',"delivery_tag")
+		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_tag")
 		switch(icon_state)
 			if("deliverycrate1")
 				I.pixel_y = -5
@@ -304,7 +304,7 @@
 	desc = "Heavy duty brown paper used to wrap packages to protect them during shipping."
 	singular_name = "sheet"
 	max_amount = 25
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/parcels.dmi'
 	icon_state = "deliveryPaper"
 	w_class = ITEM_SIZE_NORMAL
 
@@ -315,7 +315,7 @@
 /obj/item/c_tube
 	name = "cardboard tube"
 	desc = "A tube... of cardboard."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/parcels.dmi'
 	icon_state = "c_tube"
 	throwforce = 1
 	w_class = ITEM_SIZE_SMALL
@@ -404,7 +404,7 @@
 /obj/item/device/destTagger
 	name = "destination tagger"
 	desc = "Used to set the destination of properly wrapped packages."
-	icon = 'icons/obj/destination_tagger.dmi'
+	icon = 'icons/obj/tools/destination_tagger.dmi'
 	icon_state = "dest_tagger"
 	var/currTag = 0
 	w_class = ITEM_SIZE_SMALL
@@ -570,7 +570,7 @@
 
 /obj/item/stack/package_wrap/cyborg
 	name = "package wrapper synthesizer"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/parcels.dmi'
 	icon_state = "deliveryPaper"
 	gender = NEUTER
 	matter = null

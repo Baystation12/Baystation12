@@ -30,7 +30,7 @@
 /obj/item/device/mmi
 	name = "\improper Man-Machine Interface"
 	desc = "A complex life support shell that interfaces between a brain and electronic devices."
-	icon = 'icons/obj/assemblies.dmi'
+	icon = 'icons/obj/assemblies/assemblies.dmi'
 	icon_state = "mmi_empty"
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_BIO = 3)

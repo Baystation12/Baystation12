@@ -124,7 +124,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 
 
 /obj/effect/ftl
-	icon = 'icons/obj/singularity.dmi'
+	icon = 'icons/obj/machines/power/singularity.dmi'
 	icon_state = "singularity_s1"
 	blend_mode = BLEND_MULTIPLY
 	mouse_opacity = 0

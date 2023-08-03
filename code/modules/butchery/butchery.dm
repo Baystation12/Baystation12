@@ -61,7 +61,7 @@
 	desc = "It looks pretty sharp."
 	anchored = TRUE
 	density =  TRUE
-	icon = 'icons/obj/butchery.dmi'
+	icon = 'icons/obj/structures/butchery.dmi'
 	icon_state = "spike"
 
 	var/mob/living/occupant

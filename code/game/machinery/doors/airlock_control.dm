@@ -142,7 +142,7 @@
 	return ..()
 
 /obj/machinery/airlock_sensor
-	icon = 'icons/obj/airlock_machines.dmi'
+	icon = 'icons/obj/doors/airlock_machines.dmi'
 	icon_state = "airlock_sensor_off"
 	name = "airlock sensor"
 
@@ -226,7 +226,7 @@
 	command = "cycle_exterior"
 
 /obj/machinery/access_button
-	icon = 'icons/obj/airlock_machines.dmi'
+	icon = 'icons/obj/doors/airlock_machines.dmi'
 	icon_state = "access_button_standby"
 	name = "access button"
 

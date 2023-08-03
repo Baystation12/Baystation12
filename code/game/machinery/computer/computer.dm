@@ -1,6 +1,6 @@
 /obj/machinery/computer
 	name = "computer"
-	icon = 'icons/obj/computer.dmi'
+	icon = 'icons/obj/machines/computer.dmi'
 	icon_state = "computer"
 	density = TRUE
 	anchored = TRUE
@@ -64,7 +64,7 @@
 
 	if(reason_broken & MACHINE_BROKEN_NO_PARTS)
 		set_light(0)
-		icon = 'icons/obj/computer.dmi'
+		icon = 'icons/obj/machines/computer.dmi'
 		icon_state = "wired"
 		var/screen = get_component_of_type(/obj/item/stock_parts/console_screen)
 		var/keyboard = get_component_of_type(/obj/item/stock_parts/keyboard)

@@ -3,7 +3,7 @@
 /obj/item/material/knife/folding
 	name = "pocketknife"
 	desc = "A small folding knife."
-	icon = 'icons/obj/folding_knife.dmi'
+	icon = 'icons/obj/weapons/folding_knife.dmi'
 	icon_state = "knife_preview"
 	item_state = null
 	force = 0.2 //force of folded obj

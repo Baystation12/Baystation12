@@ -7,7 +7,7 @@
 	desc = "A heavy, unwieldy machine that can filter harmful gasses out of the atmosphere. It runs on an internal power source."
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/scrubpack.dmi'
 	icon_state = "scrubpack"
 	item_state_slots = list(slot_l_hand_str = "scrubberpack", slot_r_hand_str = "scrubberpack")
 	action_button_name = "Toggle Scrubber"

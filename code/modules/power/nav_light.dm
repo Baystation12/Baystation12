@@ -1,7 +1,7 @@
 /obj/machinery/nav_light
 	name = "navigation light"
 	desc = "A navigation light."
-	icon = 'icons/obj/nav_light.dmi'
+	icon = 'icons/obj/structures/nav_light.dmi'
 	icon_state = "nav_light"
 	color = "#f0f0f0"
 

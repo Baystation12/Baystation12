@@ -20,7 +20,7 @@
 	buckle_require_restraints = TRUE
 	var/datum/sound_token/sound_token
 	build_icon_state = "simple"
-	build_icon = 'icons/obj/pipe-item.dmi'
+	build_icon = 'icons/obj/atmospherics/pipe-item.dmi'
 	pipe_class = PIPE_CLASS_BINARY
 	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
 

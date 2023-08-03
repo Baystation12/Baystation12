@@ -1,7 +1,7 @@
 /obj/machinery/auto_cloner
 	name = "mysterious pod"
 	desc = "It's full of a viscous liquid, but appears dark and silent."
-	icon = 'icons/obj/cryogenics.dmi'
+	icon = 'icons/obj/machines/medical/cryogenics.dmi'
 	icon_state = "cellold0"
 	var/spawn_type
 	var/time_spent_spawning = 0

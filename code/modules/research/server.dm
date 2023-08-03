@@ -1,6 +1,6 @@
 /obj/machinery/r_n_d/server
 	name = "\improper R&D server"
-	icon = 'icons/obj/machines/research.dmi'
+	icon = 'icons/obj/machines/research/server.dmi'
 	icon_state = "server"
 	base_type = /obj/machinery/r_n_d/server
 	construct_state = /singleton/machine_construction/default/panel_closed

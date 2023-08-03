@@ -100,17 +100,17 @@
 
 /obj/machinery/fabricator/on_update_icon()
 	overlays.Cut()
-	if(!is_powered())
-		icon_state = "[base_icon_state]_d"
-	else if(currently_building)
-		icon_state = "[base_icon_state]_p"
-	else
-		icon_state = base_icon_state
+	if(panel_open)
+		overlays += "[icon_state]_panel"
+	if(currently_building)
+		overlays += emissive_appearance(icon, "[icon_state]_lights_working")
+		overlays += "[icon_state]_lights_working"
+	else if(is_powered())
+		overlays += emissive_appearance(icon, "[icon_state]_lights")
+		overlays += "[icon_state]_lights"
 
 	var/list/new_overlays = material_overlays.Copy()
-	if(panel_open)
-		new_overlays += panel_image
-	overlays = new_overlays
+	overlays += new_overlays
 
 /obj/machinery/fabricator/proc/remove_mat_overlay(mat_overlay)
 	material_overlays -= mat_overlay

@@ -2,7 +2,7 @@
 
 /obj/machinery/computer/ship/disperser
 	name = "obstruction field disperser control"
-	icon = 'icons/obj/computer.dmi'
+	icon = 'icons/obj/machines/computer.dmi'
 	icon_state = "computer"
 
 	core_skill = SKILL_PILOT

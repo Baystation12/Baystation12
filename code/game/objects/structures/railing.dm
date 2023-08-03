@@ -1,7 +1,7 @@
 /obj/structure/railing
 	name = "railing"
 	desc = "A simple bar railing designed to protect against careless trespass."
-	icon = 'icons/obj/railing.dmi'
+	icon = 'icons/obj/structures/railing.dmi'
 	icon_state = "railing_preview"
 	density = TRUE
 	throwpass = 1

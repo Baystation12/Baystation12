@@ -1,7 +1,7 @@
 /obj/machinery/acting/wardrobe
 	name = "wardrobe dispenser"
 	desc = "A machine that dispenses holo-clothing for those in need."
-	icon = 'icons/obj/vending.dmi'
+	icon = 'icons/obj/machines/vending.dmi'
 	icon_state = "cart"
 	anchored = TRUE
 	density = TRUE
@@ -19,7 +19,7 @@
 /obj/machinery/acting/changer
 	name = "\improper Quickee's Plastic Surgeon"
 	desc = "For when you need to be someone else right now."
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/obj/machines/fabricators/organprinters.dmi'
 	icon_state = "bioprinter"
 	anchored = TRUE
 	density = TRUE
@@ -39,7 +39,7 @@
 /obj/machinery/acting/changer/mirror
 	name = "\improper Mirror of Many Faces"
 	desc = "For when you need to be someone else right now."
-	icon = 'icons/obj/watercloset.dmi'
+	icon = 'icons/obj/structures/mirror.dmi'
 	icon_state = "mirror_broke"
 	anchored = TRUE
 	density = FALSE

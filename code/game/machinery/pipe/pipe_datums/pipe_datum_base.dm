@@ -32,7 +32,7 @@ GLOBAL_LIST_EMPTY(all_disposal_pipe_datums_by_category)
 	var/connect_types = CONNECT_TYPE_REGULAR								//what sort of connection this has
 	var/pipe_color = PIPE_COLOR_WHITE										//what color the pipe should be by default
 	var/build_icon_state = "simple"											//Which icon state to use when creating a new pipe item.
-	var/build_icon = 'icons/obj/pipe-item.dmi'								//Which file the icon is located at.
+	var/build_icon = 'icons/obj/atmospherics/pipe-item.dmi'								//Which file the icon is located at.
 	var/dir = SOUTH															//Direction the pipe faces
 	var/colorable = TRUE													//Can this pipe be colored?
 	var/constructed_path = /obj/machinery/atmospherics/pipe/simple/hidden	//What's the final form of this item?

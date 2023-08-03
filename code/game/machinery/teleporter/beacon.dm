@@ -7,7 +7,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 /obj/machinery/tele_beacon
 	name = "teleporter beacon"
 	desc = "A beacon used by a teleporter."
-	icon = 'icons/obj/teleporter.dmi'
+	icon = 'icons/obj/machines/teleporter.dmi'
 	icon_state = "beacon"
 	idle_power_usage = 10
 	active_power_usage = 50

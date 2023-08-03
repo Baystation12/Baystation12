@@ -55,7 +55,7 @@
 /obj/machinery/atmospherics/unary/engine
 	name = "rocket nozzle"
 	desc = "Simple rocket nozzle, expelling gas at hypersonic velocities to propell the ship."
-	icon = 'icons/obj/ship_engine.dmi'
+	icon = 'icons/obj/machines/ship_engine.dmi'
 	icon_state = "nozzle"
 	opacity = 1
 	density = TRUE
@@ -198,7 +198,7 @@
 //Exhaust effect
 /obj/effect/engine_exhaust
 	name = "engine exhaust"
-	icon = 'icons/obj/ship_engine.dmi'
+	icon = 'icons/obj/machines/ship_engine.dmi'
 	icon_state = "nozzle_burn"
 	light_color = "#00a2ff"
 	anchored = TRUE

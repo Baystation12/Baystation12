@@ -2,7 +2,7 @@
 	use_power = POWER_USE_OFF
 	anchored = FALSE
 	density = TRUE
-	icon = 'icons/obj/atmos.dmi'
+	icon = 'icons/obj/atmospherics/atmos.dmi'
 	icon_state = "sheater-off"
 	name = "space heater"
 	desc = "Made by Space Amish using traditional space techniques, this heater is guaranteed not to set anything, or anyone, on fire."

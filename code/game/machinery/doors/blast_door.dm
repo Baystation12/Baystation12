@@ -231,7 +231,7 @@
 	)
 
 /obj/machinery/button/blast_door
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/structures/buttons.dmi'
 	name = "remote blast door-control"
 	desc = "It controls blast doors, remotely."
 	icon_state = "blastctrl"

@@ -1,7 +1,7 @@
 /obj/item/grenade/spawnergrenade
 	desc = "It is set to detonate in 5 seconds. It will unleash unleash an unspecified anomaly into the vicinity."
 	name = "delivery grenade"
-	icon = 'icons/obj/grenade.dmi'
+	icon = 'icons/obj/weapons/grenade.dmi'
 	icon_state = "delivery"
 	item_state = "flashbang"
 	origin_tech = list(TECH_MATERIAL = 3, TECH_MAGNET = 4)

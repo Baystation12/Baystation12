@@ -1,8 +1,8 @@
 /obj/machinery/recharge_station
 	name = "cyborg recharging station"
 	desc = "A heavy duty rapid charging system, designed to quickly recharge cyborg power reserves."
-	icon = 'icons/obj/objects.dmi'
-	icon_state = "borgcharger0"
+	icon = 'icons/obj/machines/robot_charger.dmi'
+	icon_state = "borgcharger"
 	density = TRUE
 	anchored = TRUE
 	idle_power_usage = 50
@@ -14,7 +14,7 @@
 	machine_name = "cyborg recharging station"
 	machine_desc = "A station for recharging robots, cyborgs, and silicon-based humanoids such as IPCs and full-body prosthetics."
 
-	var/overlay_icon = 'icons/obj/objects.dmi'
+	var/overlay_icon = 'icons/obj/machines/robot_charger.dmi'
 	var/mob/living/occupant = null
 	var/charging = 0
 	var/last_overlay_state
@@ -151,20 +151,22 @@
 
 /obj/machinery/recharge_station/on_update_icon()
 	..()
-	if(MACHINE_IS_BROKEN(src))
-		icon_state = "borgcharger0"
-		return
+	overlays.Cut()
+
+	if(panel_open)
+		overlays += "[icon_state]_panel"
 
 	if(occupant)
-		if(!is_powered())
-			icon_state = "borgcharger2"
-		else
-			icon_state = "borgcharger1"
+		icon_state = "borgcharger_closed"
+		if(is_powered())
+			overlays += "borgcharger_lights_working"
+			overlays += emissive_appearance(icon, "borgcharger_lights_working")
 	else
-		icon_state = "borgcharger0"
+		icon_state = "borgcharger"
 
 	last_overlay_state = overlay_state()
-	overlays = list(image(overlay_icon, overlay_state()))
+	overlays += list(image(overlay_icon, overlay_state()))
+	overlays += emissive_appearance(icon, "statn_c100")
 
 /obj/machinery/recharge_station/Bumped(mob/living/silicon/robot/R)
 	go_in(R)

@@ -5,7 +5,7 @@
 /obj/item/reagent_containers/hypospray //obsolete, use hypospray/vial for the actual hypospray item
 	name = "hypospray"
 	desc = "The DeForest Medical Corporation, a subsidiary of Zeng-Hu Pharmaceuticals, hypospray is a sterile, air-needle autoinjector for rapid administration of drugs to patients."
-	icon = 'icons/obj/syringe.dmi'
+	icon = 'icons/obj/tools/syringe.dmi'
 	item_state = "hypo"
 	icon_state = "hypo"
 	origin_tech = list(TECH_MATERIAL = 4, TECH_BIO = 5)

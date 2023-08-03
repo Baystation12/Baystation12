@@ -23,7 +23,7 @@
 	/// Boolean. Whether or not spawned drones should be locked to the machinery's z-level.
 	var/z_locked = TRUE
 
-	icon = 'icons/obj/machines/drone_fab.dmi'
+	icon = 'icons/obj/machines/fabricators/drone_fab.dmi'
 	icon_state = "drone_fab_idle"
 
 /obj/machinery/drone_fabricator/derelict

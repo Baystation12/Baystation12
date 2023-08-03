@@ -448,10 +448,6 @@
 	pixel_y = -14
 	},
 /obj/structure/curtain/open/shower,
-/obj/structure/curtain/open/shower{
-	dir = 1;
-	icon_state = "shower"
-	},
 /obj/structure/cable,
 /obj/machinery/alarm/low{
 	dir = 4;
@@ -467,10 +463,6 @@
 	pixel_y = -14
 	},
 /obj/structure/curtain/open/shower,
-/obj/structure/curtain/open/shower{
-	dir = 1;
-	icon_state = "shower"
-	},
 /obj/machinery/atmospherics/unary/vent_pump/low{
 	dir = 1
 	},

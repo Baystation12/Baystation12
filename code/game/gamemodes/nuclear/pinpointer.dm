@@ -1,6 +1,6 @@
 /obj/item/pinpointer
 	name = "pinpointer"
-	icon = 'icons/obj/pinpointer.dmi'
+	icon = 'icons/obj/tools/pinpointer.dmi'
 	icon_state = "pinoff"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT

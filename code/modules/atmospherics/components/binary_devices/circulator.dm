@@ -4,7 +4,7 @@
 /obj/machinery/atmospherics/binary/circulator
 	name = "circulator"
 	desc = "A gas circulator turbine and heat exchanger."
-	icon = 'icons/obj/power.dmi'
+	icon = 'icons/obj/machines/power/teg.dmi'
 	icon_state = "circ-unassembled"
 	anchored = FALSE
 
@@ -80,13 +80,16 @@
 		return 1
 	if (last_pressure_delta > 0 && recent_moles_transferred > 0)
 		if (temperature_overlay)
-			overlays += image('icons/obj/power.dmi', temperature_overlay)
+			overlays += emissive_appearance(icon, temperature_overlay)
+			overlays += image(icon, temperature_overlay)
 		if (last_pressure_delta > 5*ONE_ATMOSPHERE)
-			overlays += image('icons/obj/power.dmi', "circ-run")
+			overlays += emissive_appearance(icon, "circ-run")
+			overlays += image(icon, "circ-run")
 		else
-			overlays += image('icons/obj/power.dmi', "circ-slow")
+			overlays += emissive_appearance(icon, "circ-slow")
+			overlays += image(icon, "circ-slow")
 	else
-		overlays += image('icons/obj/power.dmi', "circ-off")
+		overlays += image(icon, "circ-off")
 
 	return 1
 

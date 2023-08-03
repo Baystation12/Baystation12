@@ -1,7 +1,7 @@
 /obj/item/material/bell
 	name = "bell"
 	desc = "A bell to ring to get people's attention. Don't break it."
-	icon = 'icons/obj/objects.dmi'
+	icon = 'icons/obj/structures/bells.dmi'
 	icon_state = "bell"
 	max_force = 5
 	force_multiplier = 0.8

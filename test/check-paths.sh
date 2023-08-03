@@ -48,7 +48,7 @@ exactly 24 "text2path uses" 'text2path'
 exactly 3 "update_icon() override" '/update_icon\((.*)\)'  -P
 exactly 5 "goto use" 'goto '
 exactly 1 "NOOP match" 'NOOP'
-exactly 345 "spawn uses" '^\s*spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
+exactly 344 "spawn uses" '^\s*spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
 exactly 0 "tag uses" '\stag = ' -P '**/*.dmm'
 exactly 0 "anchored = 0/1" 'anchored\s*=\s*\d' -P
 exactly 2 "density = 0/1" 'density\s*=\s*\d' -P
@@ -57,7 +57,7 @@ exactly 0 "simulated = 0/1" 'simulated\s*=\s*\d' -P
 exactly 2 "var/ in proc arguments" '(^/[^/].+/.+?\(.*?)var/' -P
 exactly 0 "tmp/ vars" 'var.*/tmp/' -P
 exactly 6 "uses of .len" '\.len\b' -P
-exactly 395 "attackby() override" '\/attackby\((.*)\)'  -P
+exactly 394 "attackby() override" '\/attackby\((.*)\)'  -P
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
 
 num=`find ./html/changelogs -not -name "*.yml" | wc -l`

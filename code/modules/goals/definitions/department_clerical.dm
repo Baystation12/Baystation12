@@ -98,8 +98,8 @@
 	name = "paperwork"
 	gender = PLURAL
 	desc = "This densely typed sheaf of documents is filled with legalese and jargon. You can't make heads or tails of them."
-	icon = 'icons/obj/goal_paperwork.dmi'
-	icon_state = "generic"
+	icon = 'icons/obj/paper.dmi'
+	icon_state = "paper_objective"
 
 	var/datum/goal/department/paperwork/associated_goal
 	var/list/all_signatories
@@ -117,7 +117,7 @@
 
 /obj/item/paperwork/on_update_icon()
 	icon_state = "[icon_state][length(has_signed) || ""]"
-	
+
 /obj/item/paperwork/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)

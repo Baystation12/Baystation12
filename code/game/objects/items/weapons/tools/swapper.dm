@@ -8,7 +8,7 @@
 	abstract_type = /obj/item/swapper
 	name = "the concept of a tool that can swap between multiple heads"
 	desc = "This is a master item, berate the admin or mapper that spawned this!"
-	icon = 'icons/obj/tools.dmi'
+	icon = 'icons/obj/tools/swapper.dmi'
 	var/icon_stem = null
 	icon_state = "crowbar"
 	item_state = null

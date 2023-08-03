@@ -19,7 +19,7 @@
 /obj/machinery/suit_storage_unit
 	name = "suit storage unit"
 	desc = "An industrial U-Stor-It Storage unit designed to accomodate all kinds of space suits. Its on-board equipment also allows the user to decontaminate the contents through a UV-ray purging cycle. There's a warning label dangling from the control pad, reading \"STRICTLY NO BIOLOGICALS IN THE CONFINES OF THE UNIT\"."
-	icon = 'icons/obj/suitstorage.dmi'
+	icon = 'icons/obj/machines/suitstorage.dmi'
 	icon_state = "close"
 	anchored = TRUE
 	density = TRUE

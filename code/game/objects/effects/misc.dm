@@ -2,7 +2,7 @@
 /obj/effect/spresent
 	name = "strange present"
 	desc = "It's a ... present?"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/gifts.dmi'
 	icon_state = "strangepresent"
 	density = TRUE
 	anchored = FALSE

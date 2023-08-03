@@ -13,7 +13,7 @@
 /obj/machinery/cooker
 	name = "cooker"
 	desc = "You shouldn't be seeing this!"
-	icon = 'icons/obj/cooking_machines.dmi'
+	icon = 'icons/obj/machines/cooking_machines.dmi'
 	density = TRUE
 	anchored = TRUE
 	idle_power_usage = 0
@@ -496,7 +496,7 @@
 		I.color = source.color
 		I.overlays += source.overlays
 		I.SetTransform(scale = 0.5)
-		result.icon = 'icons/obj/food.dmi'
+		result.icon = 'icons/obj/food/food.dmi'
 		result.icon_state = "cereal_box"
 		result.color = null
 		result.overlays += I
@@ -505,12 +505,12 @@
 
 /obj/item/reagent_containers/food/snacks/variable
 	name = "cooked food"
-	icon = 'icons/obj/food_custom.dmi'
+	icon = 'icons/obj/food/food_custom.dmi'
 	bitesize = 2
 
 /obj/item/reagent_containers/food/snacks/sliceable/variable
 	name = "cooked food"
-	icon = 'icons/obj/food_custom.dmi'
+	icon = 'icons/obj/food/food_custom.dmi'
 	slice_path = /obj/item/reagent_containers/food/snacks/slice
 	slices_num = 5
 	bitesize = 2
@@ -518,7 +518,7 @@
 
 /obj/item/reagent_containers/food/snacks/slice/variable
 	name = "cooked food slice"
-	icon = 'icons/obj/food_custom.dmi'
+	icon = 'icons/obj/food/food_custom.dmi'
 	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/variable
 	bitesize = 2
 
@@ -627,7 +627,7 @@
 /obj/item/reagent_containers/food/snacks/donut/variable
 	name = "donut"
 	desc = "Donut eat this!"
-	icon = 'icons/obj/food_custom.dmi'
+	icon = 'icons/obj/food/food_custom.dmi'
 	icon_state = "donut"
 	nutriment_amt = 2
 	nutriment_desc = list("donut" = 2)
@@ -690,7 +690,7 @@
 /obj/item/material/chopping_board
 	name = "chopping board"
 	desc = "A food preparation surface that allows you to combine food more easily."
-	icon = 'icons/obj/chopping_board.dmi'
+	icon = 'icons/obj/food/chopping_board.dmi'
 	icon_state = "chopping_board"
 	w_class = ITEM_SIZE_NORMAL
 	default_material = MATERIAL_MAPLE

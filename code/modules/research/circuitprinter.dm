@@ -8,6 +8,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	name = "circuit imprinter"
 	desc = "Accessed by a connected core fabricator console, it produces circuits from various materials and sulphuric acid."
 	icon_state = "circuit_imprinter"
+	icon = 'icons/obj/machines/research/circuit_imprinter.dmi'
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	base_type = /obj/machinery/r_n_d/circuit_imprinter
 	construct_state = /singleton/machine_construction/default/panel_closed
@@ -75,12 +76,14 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	..()
 
 /obj/machinery/r_n_d/circuit_imprinter/on_update_icon()
+	overlays.Cut()
 	if(panel_open)
-		icon_state = "circuit_imprinter_t"
-	else if(busy)
-		icon_state = "circuit_imprinter_ani"
-	else
-		icon_state = "circuit_imprinter"
+		overlays += "[icon_state]_panel"
+	if(is_powered())
+		overlays += emissive_appearance(icon, "[icon_state]_lights")
+		overlays += "[icon_state]_lights"
+	if(busy)
+		overlays += "[icon_state]_working"
 
 /obj/machinery/r_n_d/circuit_imprinter/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()

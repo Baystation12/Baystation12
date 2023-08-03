@@ -1,7 +1,7 @@
 /obj/machinery/keycard_auth
 	name = "keycard authentication device"
 	desc = "This device is used to trigger functions which require more than one ID card to authenticate."
-	icon = 'icons/obj/monitors.dmi'
+	icon = 'icons/obj/structures/keycard_authenticator.dmi'
 	icon_state = "auth_off"
 	var/active = 0 //This gets set to 1 on all devices except the one where the initial request was made.
 	var/event = ""

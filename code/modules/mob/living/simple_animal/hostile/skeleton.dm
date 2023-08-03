@@ -1,7 +1,7 @@
 /mob/living/simple_animal/hostile/skeleton
 	name = "skeleton"
 	desc = "A walking pile of bones, somehow living."
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/obj/surgery_tools.dmi'
 	icon_state = "skeletor"
 	icon_living = "skeletor"
 	icon_dead = "skeletor"

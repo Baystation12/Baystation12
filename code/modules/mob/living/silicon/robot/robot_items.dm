@@ -1,7 +1,7 @@
 //A portable analyzer, for research borgs.  This is better then giving them a gripper which can hold anything and letting them use the normal analyzer.
 /obj/item/portable_destructive_analyzer
 	name = "Portable Destructive Analyzer"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/tools/portable_analyzer.dmi'
 	icon_state = "portable_analyzer"
 	desc = "Similar to the stationary version, this rather unwieldy device allows you to break down objects in the name of science."
 
@@ -99,7 +99,7 @@
 /obj/item/party_light
 	name = "party light"
 	desc = "An array of LEDs in tons of colors."
-	icon = 'icons/obj/lighting.dmi'
+	icon = 'icons/obj/structures/lighting.dmi'
 	icon_state = "partylight-off"
 	item_state = "partylight-off"
 	var/activated = 0
@@ -279,7 +279,7 @@
 /obj/item/borg/combat/shield
 	name = "personal shielding"
 	desc = "A powerful experimental module that turns aside or absorbs incoming attacks at the cost of charge."
-	icon = 'icons/obj/decals.dmi'
+	icon = 'icons/obj/structures/decals.dmi'
 	icon_state = "shock"
 	var/shield_level = 0.5 //Percentage of damage absorbed by the shield.
 
@@ -295,13 +295,13 @@
 /obj/item/borg/combat/mobility
 	name = "mobility module"
 	desc = "By retracting limbs and tucking in its head, a combat android can roll at high speeds."
-	icon = 'icons/obj/decals.dmi'
+	icon = 'icons/obj/structures/decals.dmi'
 	icon_state = "shock"
 
 /obj/item/inflatable_dispenser
 	name = "inflatables dispenser"
 	desc = "Hand-held device which allows rapid deployment and removal of inflatables."
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/tools/inflatable_dispenser.dmi'
 	icon_state = "inf_deployer"
 	item_state = "RPED"
 	w_class = ITEM_SIZE_LARGE
@@ -475,7 +475,7 @@
 /obj/item/bioreactor
 	name = "bioreactor"
 	desc = "An integrated power generator that runs on most kinds of biomass."
-	icon = 'icons/obj/power.dmi'
+	icon = 'icons/obj/structures/portgen.dmi'
 	icon_state = "portgen0"
 
 	var/base_power_generation = 75 KILOWATTS

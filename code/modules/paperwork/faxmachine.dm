@@ -6,7 +6,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 /obj/machinery/photocopier/faxmachine
 	name = "fax machine"
-	icon = 'icons/obj/bureaucracy.dmi'
+	icon = 'icons/obj/machines/bureaucracy/fax_machine.dmi'
 	icon_state = "fax"
 	insert_anim = "faxsend"
 	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_CAN_TABLE

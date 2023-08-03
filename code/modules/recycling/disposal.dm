@@ -506,7 +506,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 /obj/machinery/disposal_switch
 	name = "disposal switch"
 	desc = "A disposal control switch."
-	icon = 'icons/obj/recycling.dmi'
+	icon = 'icons/obj/machines/recycling.dmi'
 	icon_state = "switch-off"
 	layer = ABOVE_OBJ_LAYER
 	var/on = 0
@@ -551,7 +551,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 /obj/item/disposal_switch_construct
 	name = "disposal switch assembly"
 	desc = "A disposal control switch assembly."
-	icon = 'icons/obj/recycling.dmi'
+	icon = 'icons/obj/machines/recycling.dmi'
 	icon_state = "switch-off"
 	w_class = ITEM_SIZE_LARGE
 	var/id_tag

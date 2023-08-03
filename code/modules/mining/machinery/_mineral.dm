@@ -1,5 +1,5 @@
 /obj/machinery/mineral
-	icon = 'icons/obj/machines/mining_machines.dmi'
+	icon = 'icons/obj/machines/mining/mining_machines.dmi'
 	density =  TRUE
 	anchored = TRUE
 	construct_state = /singleton/machine_construction/default/panel_closed
