@@ -46,6 +46,11 @@
 		/obj/item/material/star/ninja,
 	)
 
+/obj/item/storage/fancy/smokable/case/syndiecoins
+	startswith = list(
+		/obj/item/material/coin/challenge/syndie = 5
+	)
+
 // Space suit uplink kit
 /obj/item/storage/backpack/satchel/syndie_kit/space
 	//name = "\improper EVA gear pack"

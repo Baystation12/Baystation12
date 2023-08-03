@@ -22,6 +22,13 @@
 		We hope you like the best!;\
 		Try our new chocolate!\
 	"}
+	antag_slogans = {"\
+		I love Sol!  Ha ha, just kidding.;\
+		Sol woke up and chose violence!;\
+		The worst joe for the average Joe.;\
+		Capitalism tiring you out? The boss tell you to perk up or ship out?;\
+		Tired of working for the man? Try a coffee. It won't help and it won't make you feel better either.\
+	"}
 	prices = list(
 		/obj/item/reagent_containers/food/drinks/coffee = 10,
 		/obj/item/reagent_containers/food/drinks/decafcoffee = 10,
@@ -52,7 +59,14 @@
 		/obj/item/reagent_containers/pill/pod/mint = 10,
 		/obj/item/reagent_containers/food/drinks/ice = 10
 	)
-
+	rare_products = list(
+		/obj/item/reagent_containers/hypospray/autoinjector/combatstim = 70
+	)
+	antag = list(
+		/obj/item/reagent_containers/food/snacks/donkpocket/premium = 1,
+		/obj/item/reagent_containers/syringe/steroid = 2,
+		/obj/item/reagent_containers/hypospray/autoinjector/combatstim = 0
+	)
 
 /obj/machinery/vending/coffee/on_update_icon()
 	..()

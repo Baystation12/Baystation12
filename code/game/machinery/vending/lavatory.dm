@@ -10,6 +10,11 @@
 		Get a haircut, hippie!;\
 		Reeking of vox taint? Take a shower!\
 	"}
+	antag_slogans = {"\
+		You reek of capitalist pig! Freshen up with some communism!;\
+		Hey, you dropped something!;\
+		Cleansing the world, one Solarian skull at a time!\
+	"}
 	prices = list(
 		/obj/item/soap = 20,
 		/obj/item/mirror = 40,
@@ -26,6 +31,15 @@
 		/obj/item/towel/random = 6,
 		/obj/item/reagent_containers/spray/cleaner/deodorant = 5
 	)
+	rare_products = list(
+		/obj/item/grenade/chem_grenade/metalfoam = 80,
+		/obj/item/gun/projectile/shotgun/cane  = 40
+	)
 	contraband = list(
 		/obj/item/inflatable_duck = 1
+	)
+	antag = list(
+		/obj/item/cane/concealed = 1,
+		/obj/item/grenade/chem_grenade/metalfoam = 0,
+		/obj/item/gun/projectile/shotgun/cane = 0
 	)

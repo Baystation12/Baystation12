@@ -14,6 +14,11 @@
 		This stuff saves lives.;\
 		Don't you want some?\
 	"}
+	antag_slogans = {"\
+		Accidents happen! But you just actually suck.;\
+		Serving up treatments that'll leave your patients feeling breathless.;\
+		Try toxin! Sponsored by the Captain to cure mutiny!\
+	"}
 	products = list(
 		/obj/item/reagent_containers/hypospray/autoinjector/inaprovaline = 5,
 		/obj/item/stack/medical/bruise_pack = 4,
@@ -24,7 +29,14 @@
 		/obj/item/storage/med_pouch/toxin,
 		/obj/item/storage/med_pouch/radiation
 	)
+	rare_products = list(
+		/obj/item/storage/firstaid/combat = 50
+	)
 	contraband = list(
 		/obj/item/reagent_containers/pill/tox = 3,
 		/obj/item/reagent_containers/hypospray/autoinjector/pain = 2
+	)
+	antag = list(
+		/obj/item/storage/pill_bottle/assorted = 1,
+		/obj/item/storage/firstaid/combat = 0
 	)

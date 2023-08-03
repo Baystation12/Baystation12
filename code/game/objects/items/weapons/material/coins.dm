@@ -107,6 +107,20 @@
 		return TRUE
 	..()
 
+/// Non-craftable coins intented to display specific imagery.
+/obj/item/material/coin/challenge
+	abstract_type = /obj/item/material/coin/challenge
+	applies_material_colour = FALSE
+
+
+/obj/item/material/coin/challenge/on_update_icon()
+	overlays.Cut()
+	if (isnull(string_color))
+		return
+	var/image/image = image(icon = icon, icon_state = "coin_string_overlay")
+	image.appearance_flags |= RESET_COLOR
+	image.color = string_color
+	overlays += image
 
 /obj/item/material/coin/challenge/throw_impact()
 	..()
@@ -116,7 +130,6 @@
 	visible_message(
 		SPAN_WARNING("\The [src] clatters to \the [get_turf(src)]!")
 	)
-
 
 /obj/item/material/coin/challenge/verb/drop_coin()
 	set src in usr
@@ -136,23 +149,12 @@
 		SPAN_WARNING("You flick \the [src] onto the ground!")
 	)
 
-
-// Non-craftable coins intented to display specific imagery.
-/obj/item/material/coin/challenge
-	abstract_type = /obj/item/material/coin/challenge
-	applies_material_colour = FALSE
-
-
-/obj/item/material/coin/challenge/on_update_icon()
-	overlays.Cut()
-	if (isnull(string_color))
-		return
-	var/image/image = image(icon = icon, icon_state = "coin_string_overlay")
-	image.appearance_flags |= RESET_COLOR
-	image.color = string_color
-	overlays += image
-
-
+///Antag challenge coins, used to hack vendors.
+/obj/item/material/coin/challenge/syndie
+	name = "Syndicate Challenge Coin"
+	desc = "A heavy coin emblazoned with a shiny, red skull. The rim of the coin shows words in a language you do not understand."
+	icon = 'icons/obj/materials/coin.dmi'
+	icon_state = "syndie"
 
 /obj/item/material/coin/aluminium
 	default_material = MATERIAL_ALUMINIUM

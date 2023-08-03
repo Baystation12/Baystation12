@@ -17,6 +17,11 @@
 		Don't cry, sweat!;\
 		Healthy is an outfit that looks good on everybody.\
 	"}
+	antag_slogans = {"\
+		Don't believe the rumors. SweatMAX absolutely employs sweatshop workers.;\
+		The only reason to build muscle is to use them against the capitalist SCG scum!;\
+		Want to hide from the Solarian authorities? Don't worry, they don't know what the inside of a gym looks like.\
+	"}
 	prices = list(
 		/obj/item/reagent_containers/food/drinks/small_milk = 3,
 		/obj/item/reagent_containers/food/drinks/small_milk_choc = 3,
@@ -39,10 +44,18 @@
 		/obj/item/reagent_containers/pill/diet = 8,
 		/obj/item/towel/random = 8
 	)
+	rare_products = list(
+		/obj/item/device/augment_implanter/iatric_monitor = 50,
+		/obj/item/device/augment_implanter/internal_air_system = 25
+	)
 	contraband = list(
 		/obj/item/reagent_containers/syringe/steroid = 4
 	)
-
+	antag = list(
+		/obj/item/reagent_containers/hypospray/autoinjector/combatpain = 2,
+		/obj/item/device/augment_implanter/iatric_monitor = 0,
+		/obj/item/device/augment_implanter/internal_air_system = 0
+	)
 
 /obj/machinery/vending/fitness/on_update_icon()
 	..()

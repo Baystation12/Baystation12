@@ -1,12 +1,36 @@
 /obj/item/storage/fancy/smokable/case
 	name = "cigarette case"
 	desc = "A fancy little case for holding cigarettes in it."
+	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cigscase"
+	item_state = "syringe_kit"
+	open_sound = 'sound/effects/storage/pillbottle.ogg'
 	max_storage_space = null
+	sealed = FALSE
 	storage_slots = 6
+	key_type_2 = /obj/item/material/coin
 	startswith = list(
 		/obj/item/clothing/mask/smokable/cigarette = 6
 	)
+
+/obj/item/storage/fancy/smokable/case/on_update_icon()
+	overlays.Cut()
+	icon_state = "[initial(icon_state)][opened ? "0" : ""]"
+	if (!opened)
+		return
+	for (var/i = 1 to length(contents))
+		if (istype(contents[i], key_type))
+			overlays += image(icon, "cig[i]")
+		else if (istype(contents[i], key_type_2))
+			var/obj/item/material/coin/C = contents[i]
+			var/image/I = image(icon, "colorcoin[i]")
+			if (C.applies_material_colour)
+				var/material/M = C.material
+				I.color = M.icon_colour
+				overlays += I
+			else
+				I.color = COLOR_GOLD
+				overlays += I
 
 
 /obj/item/storage/fancy/smokable/transstellar

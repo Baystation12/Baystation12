@@ -14,6 +14,11 @@
 		Woo, utensils.;\
 		You don't really need these...\
 	"}
+	antag_slogans = {"\
+		Revenge is a dish better served cold.;\
+		Serving up the defeat of Sol since time immemorial.;\
+		You call these knives? Can't wait to see your frigates.\
+	"}
 	products = list(
 		/obj/item/reagent_containers/glass/beaker/bowl =2,
 		/obj/item/tray = 8,
@@ -41,4 +46,11 @@
 	)
 	contraband = list(
 		/obj/item/material/knife/kitchen/cleaver/bronze = 1
+	)
+	rare_products = list(
+		/obj/item/melee/energy/machete = 33
+	)
+	antag = list(
+		/obj/item/material/sword = 1,
+		/obj/item/melee/energy/machete = 0
 	)
