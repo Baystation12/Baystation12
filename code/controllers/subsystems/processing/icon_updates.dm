@@ -25,7 +25,8 @@ SUBSYSTEM_DEF(icon_update)
 /datum/controller/subsystem/icon_update/fire(resumed, no_mc_tick)
 	var/atom/atom
 	var/list/params
-	for (var/i = 1 to length(queue))
+	var/queue_length = length(queue)
+	for (var/i = 1 to queue_length)
 		atom = queue[i]
 		if (QDELETED(atom))
 			continue
@@ -35,11 +36,17 @@ SUBSYSTEM_DEF(icon_update)
 		else
 			atom.update_icon()
 		if (no_mc_tick)
+<<<<<<< ours
+=======
+			if (i % 100)
+				continue
+>>>>>>> theirs
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
 			queue.Cut(1, i + 1)
 			return
-	LIST_RESIZE(queue, 0)
+	if (queue_length)
+		queue.Cut(1, queue_length + 1)
 	suspend()
 
 
