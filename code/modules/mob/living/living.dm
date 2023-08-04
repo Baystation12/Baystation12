@@ -198,6 +198,12 @@ default behaviour is:
 		var/obj/item/device/gps/G = locate() in src
 		if(istype(G))
 			stat("Coordinates:", "[G.fetch_coordinates()]")
+		var/obj/item/clothing/under/U = locate() in src
+		if (istype(U))
+			var/obj/item/clothing/accessory/wristwatch/W = locate() in U.accessories
+			if (istype(W))
+				stat("Local Time:", "[stationtime2text()]")
+				stat("Local Date:", "[stationdate2text()]")
 
 		if(evacuation_controller)
 			var/eta_status = evacuation_controller.get_status_panel_eta()
