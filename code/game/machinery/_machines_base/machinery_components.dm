@@ -241,6 +241,10 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		return TRUE
 	return ..()
 
+/obj/machinery/post_anchor_change()
+	power_change()
+	return ..()
+
 /// Passes `attackby()` calls through to components within the machine, if they are accessible.
 /obj/machinery/proc/component_attackby(obj/item/I, mob/user)
 	for(var/obj/item/stock_parts/part in component_parts)

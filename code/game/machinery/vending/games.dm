@@ -15,6 +15,12 @@
 		Totally not satanic!;\
 		Fun times forever!\
 	"}
+	antag_slogans = {"\
+		We put the laughter in slaughter!;\
+		Is it a surprise that the ship staffed by overgrown toddlers needs a game vending machine?;\
+		Affordable toys, because you can't afford real fun!;\
+		Barros thinks politics is a game, so why don’t you start playing?\
+	"}
 	prices = list(
 		/obj/item/toy/blink = 3,
 		/obj/item/toy/eightball = 10,
@@ -45,6 +51,10 @@
 		/obj/item/board = 2,
 		/obj/item/storage/fancy/crayons = 3
 	)
+	rare_products = list(
+		/obj/item/storage/box/large/foam_gun/revolver/tampered = 20,
+		/obj/item/toy/balloon = 5
+	)
 	contraband = list(
 		/obj/item/reagent_containers/spray/waterflower = 2,
 		/obj/item/storage/box/snappops = 3,
@@ -55,4 +65,9 @@
 	)
 	premium = list(
 		/obj/item/spirit_board = 1
+	)
+	antag = list(
+		/obj/item/clothing/head/bowlerhat/razor = 1,
+		/obj/item/storage/box/large/foam_gun/revolver/tampered = 0,
+		/obj/item/toy/balloon = 0
 	)

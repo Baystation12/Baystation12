@@ -12,6 +12,12 @@
 		All sales are final!;\
 		Lowest prices guaranteed!\
 	"}
+	antag_slogans = {"\
+		Why you'd wear Solarian clothes is beyond me, you look ridiculous.;\
+		Forcing others to stare at that solarian outfit is an act of terrorism!;\
+		Dress your best as you bring down the SCG, make history in style!;\
+		Our clothes are 100% sweatshop guaranteed, for your convienience!\
+	"}
 	prices = list(
 		/obj/item/mirror = 60,
 		/obj/item/haircomb = 40,
@@ -34,10 +40,21 @@
 		/obj/item/lipstick/jade = 3,
 		/obj/item/storage/wallet/poly = 2
 	)
+	rare_products = list(
+		/obj/item/clothing/shoes/laceup/sneakies = 75,
+		/obj/item/storage/backpack/chameleon/sydie_kit = 40,
+		/obj/item/device/chameleon = 15
+	)
 	contraband = list(
 		/obj/item/clothing/glasses/eyepatch = 2,
 		/obj/item/clothing/accessory/horrible = 2
 	)
 	premium = list(
 		/obj/item/clothing/mask/smokable/pipe = 3
+	)
+	antag = list(
+		/obj/item/clothing/mask/fakemoustache = 1,
+		/obj/item/clothing/shoes/laceup/sneakies = 0,
+		/obj/item/storage/backpack/chameleon/sydie_kit = 0,
+		/obj/item/device/chameleon = 0
 	)

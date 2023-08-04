@@ -7,6 +7,11 @@
 	product_slogans = {"\
 		A taste of home!\
 	"}
+	antag_slogans = {"\
+		We cut all the red-tape so that you can have diarrhea!;\
+		Food safety standards are merely a suggestion if you know the right people!;\
+		Snacks from home, corruption included!\
+	"}
 	prices = list(
 		/obj/item/reagent_containers/food/snacks/lunacake = 12,
 		/obj/item/reagent_containers/food/snacks/lunacake/mochicake = 12,
@@ -30,4 +35,11 @@
 		/obj/item/reagent_containers/food/snacks/mars = 8,
 		/obj/item/reagent_containers/food/snacks/venus = 8,
 		/obj/item/reagent_containers/food/snacks/oort = 8
+	)
+	rare_products = list(
+		/obj/item/storage/backpack/satchel/syndie_kit/clerical = 60
+	)
+	antag = list(
+		/obj/item/storage/box/syndie_kit/toxin = 1,
+		/obj/item/storage/backpack/satchel/syndie_kit/clerical = 0
 	)

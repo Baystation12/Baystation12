@@ -21,6 +21,12 @@
 		We love chocolate!;\
 		Try our new jerky!\
 	"}
+	antag_slogans = {"\
+		Popsicle sticks are now Sol-approved for poking GAS!;\
+		There's nothing we love more than a diabetic Solarian.;\
+		Jerky for the jerks!;\
+		Our snacks are unBEARable.\
+	"}
 	prices = list(
 		/obj/item/clothing/mask/chewable/candy/lolli = 2,
 		/obj/item/storage/chewables/candy/gum = 4,
@@ -47,7 +53,14 @@
 		/obj/item/reagent_containers/food/snacks/cheesiehonkers = 6,
 		/obj/item/reagent_containers/food/snacks/tastybread = 6
 	)
+	rare_products = list(
+		/obj/item/storage/box/syndie_kit/shuriken = 70
+	)
 	contraband = list(
 		/obj/item/reagent_containers/food/snacks/syndicake = 6,
 		/obj/item/reagent_containers/food/snacks/skrellsnacks = 3
+	)
+	antag = list(
+		/obj/item/beartrap = 3,
+		/obj/item/storage/box/syndie_kit/shuriken = 0
 	)

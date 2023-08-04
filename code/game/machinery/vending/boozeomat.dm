@@ -30,6 +30,14 @@
 		Man loves beer.;\
 		A toast for progress!\
 	"}
+	antag_slogans = {"\
+		Drink away the pain of living under SolGov!;\
+		Vodka is the only acceptable drink!;\
+		Is this the best you can serve, bartender? This swill?!;\
+		These drinks are as tasteless as Sol's people!;\
+		Who are you kidding? You knew you were about to drink piss the second you stepped in here.;\
+		Drinking on the job is socially acceptable for executives, why not for you?\
+	"}
 	products = list(
 		/obj/item/reagent_containers/food/drinks/glass2/square = 10,
 		/obj/item/reagent_containers/food/drinks/flask/barflask = 5,
@@ -99,4 +107,13 @@
 		/obj/item/reagent_containers/food/drinks/bottle/goldschlager = 5,
 		/obj/item/reagent_containers/food/drinks/bottle/tadmorwine = 5,
 		/obj/item/reagent_containers/food/drinks/bottle/brandy = 5
+	)
+	rare_products = list(
+		/obj/item/reagent_containers/glass/bottle/dye/polychromic/strong = 50,
+		/obj/item/storage/pill_bottle/tramadol = 50
+	)
+	antag = list(
+		/obj/item/storage/secure/briefcase/money = 1,
+		/obj/item/reagent_containers/glass/bottle/dye/polychromic/strong = 0,
+		/obj/item/storage/pill_bottle/tramadol = 0
 	)
