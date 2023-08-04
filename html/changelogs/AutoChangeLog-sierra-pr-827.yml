@@ -1,0 +1,5 @@
+author: Merlin1230
+delete-after: true
+changes:
+  - bugfix: stops hacker hardsuits (and maybe some others) from being unable to remove
+      anything from them with a wrench
