@@ -169,7 +169,7 @@
 	SSplants.active_plants -= src
 	return ..()
 
-/obj/machinery/portable_atmospherics/hydroponics/LateInitialize()
+/obj/machinery/portable_atmospherics/hydroponics/LateInitialize(mapload)
 	..()
 	if(locate(/obj/item/seeds) in get_turf(src))
 		plant()

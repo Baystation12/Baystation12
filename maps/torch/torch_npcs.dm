@@ -16,7 +16,6 @@
 
 
 /mob/living/carbon/human/monkey/punitelli/LateInitialize(mapload)
-	..()
 	equip_to_appropriate_slot(new /obj/item/clothing/under/solgov/utility/expeditionary/monkey, skip_timer = TRUE)
 	put_in_hands(new /obj/item/reagent_containers/food/drinks/glass2/coffeecup/punitelli)
 	equip_to_appropriate_slot(new /obj/item/clothing/mask/smokable/cigarette/jerichos, skip_timer = TRUE)

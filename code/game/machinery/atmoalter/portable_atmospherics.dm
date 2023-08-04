@@ -32,7 +32,7 @@
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/machinery/portable_atmospherics/LateInitialize()
+/obj/machinery/portable_atmospherics/LateInitialize(mapload)
 	var/obj/machinery/atmospherics/portables_connector/port = locate() in loc
 	if(port)
 		connect(port)

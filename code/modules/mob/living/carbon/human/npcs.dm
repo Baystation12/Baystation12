@@ -9,7 +9,6 @@
 
 
 /mob/living/carbon/human/monkey/punpun/LateInitialize(mapload)
-	..()
 	var/obj/item/clothing/C
 	if(prob(50))
 		C = new /obj/item/clothing/under/punpun(src)
@@ -47,7 +46,7 @@
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
-/mob/living/carbon/human/blank/LateInitialize()
+/mob/living/carbon/human/blank/LateInitialize(mapload)
 	var/number = "[pick(possible_changeling_IDs)]-[rand(1,30)]"
 	fully_replace_character_name("Subject [number]")
 	var/singleton/hierarchy/outfit/outfit = outfit_by_type(/singleton/hierarchy/outfit/blank_subject)

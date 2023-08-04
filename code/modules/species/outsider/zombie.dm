@@ -532,7 +532,6 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 
 /mob/living/carbon/human/zombie/LateInitialize(mapload)
-	..()
 	var/singleton/hierarchy/outfit/outfit = pick(spawn_outfit_options)
 	outfit = outfit_by_type(outfit)
 	outfit.equip(src, OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR)
