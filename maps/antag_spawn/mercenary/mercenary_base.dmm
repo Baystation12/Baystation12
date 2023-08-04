@@ -229,7 +229,7 @@
 	_input_on = 1;
 	_output_maxed = 1;
 	_output_on = 1;
-	uncreated_component_parts = list(/obj/item/stock_parts/smes_coil/super_io = 1, /obj/item/stock_parts/smes_coil/super_capacity = 1)
+	uncreated_component_parts = list(/obj/item/stock_parts/smes_coil/super_io=1,/obj/item/stock_parts/smes_coil/super_capacity=1)
 	},
 /obj/structure/cable{
 	d2 = 8;
@@ -286,7 +286,7 @@
 /area/map_template/merc_shuttle)
 "cM" = (
 /obj/machinery/computer/ship/engines{
-	uncreated_component_parts = list(/obj/item/stock_parts/power/battery/buildable/responsive = 1, /obj/item/cell/high = 1)
+	uncreated_component_parts = list(/obj/item/stock_parts/power/battery/buildable/responsive=1,/obj/item/cell/high=1)
 	},
 /obj/item/device/radio/intercom/hailing{
 	dir = 4;
@@ -297,7 +297,7 @@
 "cN" = (
 /obj/machinery/computer/shuttle_control/explore/merc_shuttle{
 	req_access = list("ACCESS_SYNDICATE");
-	uncreated_component_parts = list(/obj/item/stock_parts/power/battery/buildable/responsive = 1, /obj/item/cell/high = 1)
+	uncreated_component_parts = list(/obj/item/stock_parts/power/battery/buildable/responsive=1,/obj/item/cell/high=1)
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle)
@@ -480,13 +480,15 @@
 /obj/structure/table/rack{
 	pixel_x = -1
 	},
-/obj/item/shield/energy,
-/obj/item/shield/energy,
-/obj/item/shield/energy,
-/obj/item/shield/energy,
-/obj/item/shield/energy,
-/obj/item/shield/energy,
 /obj/effect/floor_decal/corner/red/mono,
+/obj/item/storage/box/handcuffs{
+	pixel_x = 4;
+	pixel_y = 2
+	},
+/obj/item/storage/box/handcuffs{
+	pixel_x = 4;
+	pixel_y = 2
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/merc_spawn)
 "fa" = (
@@ -935,7 +937,7 @@
 	_input_on = 1;
 	_output_maxed = 1;
 	_output_on = 1;
-	uncreated_component_parts = list(/obj/item/stock_parts/smes_coil/super_io = 1, /obj/item/stock_parts/smes_coil/super_capacity = 1)
+	uncreated_component_parts = list(/obj/item/stock_parts/smes_coil/super_io=1,/obj/item/stock_parts/smes_coil/super_capacity=1)
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/cable/green{
@@ -1575,14 +1577,6 @@
 /obj/item/clothing/glasses/night,
 /obj/item/clothing/glasses/night,
 /obj/item/clothing/glasses/night,
-/obj/item/storage/box/handcuffs{
-	pixel_x = 4;
-	pixel_y = 2
-	},
-/obj/item/storage/box/handcuffs{
-	pixel_x = 4;
-	pixel_y = 2
-	},
 /obj/item/clothing/glasses/night,
 /obj/item/clothing/glasses/night,
 /obj/item/clothing/glasses/night,
