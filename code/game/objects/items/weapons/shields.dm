@@ -17,6 +17,7 @@
 		return 1
 	return 0
 
+
 /proc/default_parry_check(mob/user, mob/attacker, atom/damage_source)
 	//parry only melee attacks
 	if(istype(damage_source, /obj/item/projectile) || (attacker && get_dist(user, attacker) > 1) || user.incapacitated())
@@ -29,10 +30,12 @@
 
 	return 1
 
+
 /obj/item/shield
 	name = "shield"
 	var/base_block_chance = 60
 	var/max_block = 0
+
 
 /obj/item/shield/handle_shield(mob/user, damage, atom/damage_source = null, mob/attacker = null, def_zone = null, attack_text = "the attack")
 	if(user.incapacitated())
@@ -48,6 +51,7 @@
 
 /obj/item/shield/proc/get_block_chance(mob/user, damage, atom/damage_source = null, mob/attacker = null)
 	return base_block_chance
+
 
 /obj/item/shield/riot
 	name = "riot shield"
@@ -68,9 +72,11 @@
 	var/cooldown = 0 //shield bash cooldown. based on world.time
 	var/can_block_lasers = FALSE
 
+
 /obj/item/shield/riot/handle_shield(mob/user)
 	. = ..()
 	if(.) playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
+
 
 /obj/item/shield/riot/get_block_chance(mob/user, damage, atom/damage_source = null, mob/attacker = null)
 	if(istype(damage_source, /obj/item/projectile))
@@ -82,6 +88,7 @@
 			return 0
 	return base_block_chance
 
+
 /obj/item/shield/riot/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/melee/baton))
 		if(cooldown < world.time - 25)
@@ -90,6 +97,7 @@
 			cooldown = world.time
 	else
 		..()
+
 
 /obj/item/shield/riot/metal
 	name = "plasteel combat shield"
@@ -125,9 +133,11 @@
 	matter = list(MATERIAL_STEEL = 1000, MATERIAL_WOOD = 1000)
 	attack_verb = list("shoved", "bashed")
 
+
 /obj/item/shield/buckler/handle_shield(mob/user)
 	. = ..()
 	if(.) playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
+
 
 /obj/item/shield/buckler/get_block_chance(mob/user, damage, atom/damage_source = null, mob/attacker = null)
 	if (istype(damage_source, /obj/item/projectile))
@@ -155,6 +165,8 @@
 	var/next_action
 	var/sound_token
 	var/sound_id
+	var/damaged = FALSE
+	var/disabled
 	var/datum/effect/effect/system/spark_spread/sparks
 
 
@@ -178,30 +190,70 @@
 		set_light(0)
 
 
-/obj/item/shield/energy/attack_self(mob/living/user)
+/obj/item/shield/energy/proc/activate(mob/living/user)
 	var/time = world.time
+
+	if (active)
+		return
+
 	if (time < next_action)
 		return
+
+	if (damaged)
+		if (world.time < disabled)
+			if (user)
+				user.show_message(SPAN_WARNING("\The [src] sputters. It's not going to work right now!"))
+			return
+		user.visible_message(SPAN_NOTICE("\The [src] resonates perfectly, once again."))
+		damaged = FALSE
+
 	next_action = time + 3 SECONDS
 	active = !active
+
 	if (active)
-		addtimer(new Callback(src, /obj/item/shield/energy/proc/UpdateSoundLoop), 0.25 SECONDS)
 		playsound(src, 'sound/obj/item/shield/energy/shield-start.ogg', 40)
 		force = 10
 		w_class = ITEM_SIZE_NO_CONTAINER
-	else
-		addtimer(new Callback(src, /obj/item/shield/energy/proc/UpdateSoundLoop), 0.1 SECONDS)
+
+	if (istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		H.update_inv_l_hand()
+		H.update_inv_r_hand()
+
+	update_icon()
+	addtimer(new Callback(src, /obj/item/shield/energy/proc/UpdateSoundLoop), 0.25 SECONDS)
+
+
+/obj/item/shield/energy/proc/deactivate(mob/living/user)
+	if (!active)
+		return
+
+	active = !active
+
+	if (!active)
 		playsound(src, 'sound/obj/item/shield/energy/shield-stop.ogg', 40)
 		force = initial(force)
 		w_class = initial(w_class)
-	add_fingerprint(user)
-	user.update_inv_l_hand()
-	user.update_inv_r_hand()
+
+	if (istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		H.update_inv_l_hand()
+		H.update_inv_r_hand()
+
 	update_icon()
+	addtimer(new Callback(src, /obj/item/shield/energy/proc/UpdateSoundLoop), 0.1 SECONDS)
+
+
+/obj/item/shield/energy/attack_self(mob/living/user)
+	if (!active)
+		activate(user)
+	else
+		deactivate(user)
+	return
 
 
 /obj/item/shield/energy/handle_shield(mob/living/user)
-	if (!active)
+	if (!active && damaged)
 		return FALSE
 	. = ..()
 	if (!.)
@@ -215,6 +267,28 @@
 		if (damage > 10 && is_sharp(damage_source) || isbeam(damage_source))
 			return base_block_chance - round(damage / 2.5)
 	return base_block_chance
+
+
+/obj/item/shield/energy/emp_act(severity)
+	if (!active)
+		return
+	if (damaged)
+		return
+	var/disabletime = 30 SECONDS
+	if (severity == EMP_ACT_HEAVY)
+		disabletime = 1 MINUTES
+
+	visible_message(SPAN_DANGER("\The [src] violently shudders!"))
+	new /obj/effect/overlay/self_deleting/emppulse(get_turf(src))
+
+	disabled = world.time + disabletime
+	damaged = TRUE
+	var/mob/living/carbon/M = loc
+	if (M)
+		deactivate(M)
+	else
+		deactivate()
+	update_icon()
 
 
 /obj/item/shield/energy/proc/UpdateSoundLoop()
