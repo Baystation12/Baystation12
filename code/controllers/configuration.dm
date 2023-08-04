@@ -431,7 +431,7 @@
 
 	var/static/run_empty_levels = FALSE
 
-	var/static/deletion_starts_paused = FALSE
+	var/static/deletion_starts_paused = TRUE
 
 
 /datum/configuration/New()
