@@ -123,7 +123,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/machinery/telecomms/LateInitialize()
+/obj/machinery/telecomms/LateInitialize(mapload)
 	//Set the listening_levels if there's none.
 	if(!listening_levels)
 		//Defaults to our Z level!
@@ -138,7 +138,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		else
 			for(var/obj/machinery/telecomms/T in telecomms_list)
 				add_link(T)
-	. = ..()
 	update_power()
 
 /obj/machinery/telecomms/Destroy()

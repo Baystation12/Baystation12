@@ -39,7 +39,7 @@
 	SetName(name + " ([x],[y])")
 	SSshuttle.register_landmark(landmark_tag, src)
 
-/obj/effect/shuttle_landmark/LateInitialize()
+/obj/effect/shuttle_landmark/LateInitialize(mapload)
 	if(!docking_controller)
 		return
 	var/docking_tag = docking_controller
@@ -82,6 +82,7 @@
 	return FALSE
 
 /obj/effect/shuttle_landmark/proc/shuttle_arrived(datum/shuttle/shuttle)
+	return
 
 /proc/check_collision(area/target_area, list/target_turfs)
 	for(var/target_turf in target_turfs)
@@ -116,7 +117,7 @@
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/effect/shuttle_landmark/automatic/clearing/LateInitialize()
+/obj/effect/shuttle_landmark/automatic/clearing/LateInitialize(mapload)
 	..()
 	for(var/turf/T in range(radius, src))
 		if(T.density)

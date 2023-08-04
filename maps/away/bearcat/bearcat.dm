@@ -104,7 +104,7 @@
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/effect/landmark/deadcap/LateInitialize()
+/obj/effect/landmark/deadcap/LateInitialize(mapload)
 	var/turf/T = get_turf(src)
 	var/mob/living/carbon/human/corpse = new(T)
 	scramble(1, corpse, 100)

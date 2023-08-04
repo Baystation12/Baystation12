@@ -13,7 +13,7 @@
 	. = ..()
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/effect/landmark/carnage_mark/LateInitialize()
+/obj/effect/landmark/carnage_mark/LateInitialize(mapload)
 	var/area/A = get_area(src)
 	for(var/atom/movable/AM in A)
 		if(AM && !AM.anchored && AM.simulated && prob(movement_prob))

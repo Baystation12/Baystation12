@@ -95,11 +95,15 @@
 	return INITIALIZE_HINT_NORMAL
 
 /**
- * Late initialization handler. Called after the `Initialize()` chain for any atoms that returned `INITIALIZE_HINT_LATELOAD`. Primarily used for atoms that rely on initialized values from other atoms.
+ * Late initialization handler.
+ * Called after the `Initialize()` chain for any atoms that returned `INITIALIZE_HINT_LATELOAD`.
+ * Primarily used for atoms that rely on initialized values from other atoms.
  *
  * **Parameters**:
  * - `mapload` - Whether or not the initialization was called while the map was being loaded.
  * - All parameters except `loc` are passed directly from `New()`.
+ *
+ * Has no return value.
  */
 /atom/proc/LateInitialize(mapload, ...)
 	return

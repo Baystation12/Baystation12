@@ -674,8 +674,7 @@
 	. = ..()
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/item/device/radio/born/LateInitialize()
-	. = ..()
+/obj/item/device/radio/borg/LateInitialize(mapload)
 	recalculateChannels()
 
 /obj/item/device/radio/borg/Destroy()

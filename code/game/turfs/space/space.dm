@@ -39,7 +39,7 @@
 			T.z_eventually_space = FALSE
 	return ..()
 
-/turf/space/LateInitialize()
+/turf/space/LateInitialize(mapload)
 	if(GLOB.using_map.base_floor_area)
 		var/area/new_area = locate(GLOB.using_map.base_floor_area) || new GLOB.using_map.base_floor_area
 		ChangeArea(src, new_area)

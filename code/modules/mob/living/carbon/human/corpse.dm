@@ -47,7 +47,7 @@
 	return INITIALIZE_HINT_LATELOAD
 
 
-/obj/effect/landmark/corpse/LateInitialize()
+/obj/effect/landmark/corpse/LateInitialize(mapload)
 	var/new_species = pickweight(species)
 	var/mob/living/carbon/human/corpse = new (loc, new_species)
 	corpse.adjustOxyLoss(corpse.maxHealth)

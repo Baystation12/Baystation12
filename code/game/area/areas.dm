@@ -39,8 +39,7 @@
 	if (turfs_airless)
 		return INITIALIZE_HINT_LATELOAD
 
-/area/LateInitialize(mapload, ...)
-	..()
+/area/LateInitialize(mapload)
 	turfs_airless = FALSE
 
 

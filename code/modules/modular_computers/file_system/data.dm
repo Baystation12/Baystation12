@@ -57,7 +57,7 @@
 	. = ..()
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/effect/computer_file_creator/LateInitialize()
+/obj/effect/computer_file_creator/LateInitialize(mapload)
 	var/turf/T = get_turf(src)
 	for (var/obj/O in T)
 		if (!istype(O, /obj/machinery/computer/modular) && !istype(O, /obj/item/modular_computer))
