@@ -39,6 +39,6 @@
 	return 1
 
 
-/obj/item/device/assembly/voice/toggle_secure()
+/obj/item/device/assembly/voice/set_secure(make_secure)
 	. = ..()
 	listening = 0

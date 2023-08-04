@@ -44,8 +44,8 @@
 		proximity_trigger.unregister_turfs()
 	update_icon()
 
-/obj/item/device/assembly/infra/toggle_secure()
-	secured = !secured
+/obj/item/device/assembly/infra/set_secure(make_secure)
+	..()
 	set_active(secured ? FALSE : on)
 	return secured
 

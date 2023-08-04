@@ -24,8 +24,8 @@
 	return 0
 
 
-/obj/item/device/assembly/timer/toggle_secure()
-	secured = !secured
+/obj/item/device/assembly/timer/set_secure(make_secure)
+	..()
 	if(secured)
 		START_PROCESSING(SSobj, src)
 	else

@@ -93,8 +93,8 @@
 /obj/item/device/assembly_holder/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Screwdriver - Toggle secured
 	if (isScrewdriver(tool))
-		a_left.toggle_secure()
-		a_right.toggle_secure()
+		a_left.set_secure(TRUE)
+		a_right.set_secure(TRUE)
 		secured = !secured
 		update_icon()
 		user.visible_message(
