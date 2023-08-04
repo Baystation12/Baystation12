@@ -663,10 +663,13 @@
 			target_turf = get_step(C, dir)
 
 		var/connected = FALSE
-		for(var/obj/structure/cable/revC in target_turf)
-			if(revC.d1 == rev_dir || revC.d2 == rev_dir)
-				connected = TRUE
-				break
+		if (dir != UP & dir != DOWN && (locate(/obj/machinery/power/breakerbox) in target_turf))
+			connected = TRUE
+		else
+			for(var/obj/structure/cable/revC in target_turf)
+				if(revC.d1 == rev_dir || revC.d2 == rev_dir)
+					connected = TRUE
+					break
 
 		if(!connected)
 			log_bad("Disconnected wire: [dir2text(dir)] - [log_info_line(C)]")
