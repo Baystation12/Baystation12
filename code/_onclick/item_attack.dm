@@ -303,7 +303,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 			VISIBLE_MESSAGE,
 			SPAN_DANGER("You feel something hit you!")
 		)
-		general_health_adjustment(weapon.force, weapon.damtype, damage_flags, user.zone_sel.selecting, weapon)
+		general_health_adjustment(weapon.force, weapon.damtype, damage_flags, user.zone_sel?.selecting, weapon)
 		return TRUE
 
 	return ..()
