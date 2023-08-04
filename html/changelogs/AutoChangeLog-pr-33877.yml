@@ -1,6 +1,0 @@
-author: SomeAngryMiner, l3lb0t
-delete-after: true
-changes:
-  - rscadd: most machines now have emissive lights.
-  - rscadd: most machines also have maintenance panels, if they were missing them.
-  - rscadd: thermal regulators now have overlays when cooling.
