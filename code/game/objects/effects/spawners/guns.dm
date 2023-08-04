@@ -45,6 +45,5 @@
 				/obj/item/gun/energy/crossbow/largecrossbow,
 				/obj/item/gun/projectile/shotgun/pump/combat,
 				/obj/item/gun/energy/ionrifle,
-				/obj/item/gun/projectile/shotgun/pump,
-				/obj/item/gun/projectile/shotgun/magshot
+				/obj/item/gun/projectile/shotgun/pump
 	)
