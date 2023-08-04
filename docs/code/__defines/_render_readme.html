@@ -14,7 +14,7 @@
 </header>
 <main>
 <h1>The Render Readme <aside>code/__defines/_render_readme.md</aside> 
-            <a href="https://github.com/Baystation12/Baystation12/blob/9cad1f3df9bb7a90e92eb2ce74325715ebedc028/code/__defines/_render_readme.md">
+            <a href="https://github.com/Baystation12/Baystation12/blob/1d2802334c2e728e80d447e147d7cb49a25df4c6/code/__defines/_render_readme.md">
         <img src="git.png" width="16" height="16" title="code&#x2F;__defines&#x2F;_render_readme.md"/></a></h1>
 
 <table class="summary" cellspacing="0">
@@ -24,11 +24,11 @@
 <li><a href="#the-rendering-solution">The rendering solution</a></li>
 <li><a href="#render-plates">Render plates</a></li>
 </ol>
-<h2 id="byond-internal-functionality">Byond internal functionality</h2>
+<hh2 id="byond-internal-functionality">Byond internal functionality</hh2>
 <p>This part of the guide will assume that you have read the byond reference entry for rendering at www.byond.com/docs/ref//#/{notes}/renderer</p>
 <p>When you create an atom, this will always create an internal byond structure called an &quot;appearance&quot;. This appearance you will likely be familiar with, as it is exposed through the /atom/var/appearance var. This appearance var holds data on how to render the object, ie what icon/icon_state/color etc it is using. Note that appearance vars will always copy, and do not hold a reference. When you update a var, for example lets pretend we add a filter, the appearance will be updated to include the filter. Note that, however, vis_contents objets are uniquely excluded from appearances. Then, when the filter is updated, the appearance will be recreated, and the atom marked as &quot;dirty&quot;. After it has been updated, the SendMaps() function (sometimes also called maptick), which is a internal byond function that iterates over all objects in a clients view and in the clients.mob.contents, checks for &quot;dirty&quot; atoms, then resends any &quot;dirty&quot; appearances to clients as needed and unmarks them as dirty. This function is notoriosly slow, but we can see it's tick usage through the world.map_cpu var. We can also avoid more complex checks checking whether an object is visible on a clients screen by using the TILE_BOUND appearance flag.</p>
 <p>Finally, we arrive at clientside behavior, where we have two main clientside functions: GetMapIcons, and Render. GetMapIcons is repsonsible for actual rendering calculations on the clientside, such as &quot;Group Icons and Set bounds&quot;, which performs clientside calculations for transform matrixes. Note that particles here are handled in a seperate thread and are not diplayed in the clientside profiler. Render handles the actual drawing of the screen.</p>
-<h2 id="known-internal-snowflake">Known internal snowflake</h2>
+<hh2 id="known-internal-snowflake">Known internal snowflake</hh2>
 <p>The following is an incomplete list of pitfalls that come from byond snowflake that are known, this list is obviously incomplete.</p>
 <ol>
 <li>Transforms are very slow on clientside. This is not usually noticable, but if you start using large amounts of them it will grind you to a halt quickly, regardless of whether its on overlays or objs</li>
@@ -42,7 +42,7 @@
 <li>Particles are just fancy overlays and are not independent of their owner</li>
 <li>Maptick items inside mob.contents are cheaper compared to most other movables</li>
 </ol>
-<h2 id="the-rendering-solution">The rendering solution</h2>
+<hh2 id="the-rendering-solution">The rendering solution</hh2>
 <p>One of the main issues with making pretty effects is how objects can only render to one plane, and how filters can only be applied to single objects. Quite simply it means we cant apply effects to multiple planes at once, and an effect to one plane only by treating it as a single unit:</p>
 <p><img src="https://raw.githubusercontent.com/tgstation/documentation-assets/main/rendering/renderpipe_old.png" alt="" /></p>
 <p>A semi-fix to stop from having to apply effects to every single plane is to use the render controllers, to automatically apply filters and colors automatically onto their controlled planes.</p>
@@ -51,11 +51,11 @@
 <p>We can also choose to render these by decreasing the scaling all applied effects (effect_size/number_of_plates_rendered_to) then rendering it onto multiple planes:</p>
 <p><img src="https://raw.githubusercontent.com/tgstation/documentation-assets/main/rendering/renderpipe_refactored_multiple.png" alt="" /></p>
 <p>Through these this allows us to treat planes as single objects, and lets us distort them as a single unit, most notably works wonders with the displacement filter. Specifically, here you can displacement_filter a plane onto a plate, which then will treat all the other planes rendered on that plate as a single unit.</p>
-<h2 id="render-plates">Render plates</h2>
+<hh2 id="render-plates">Render plates</hh2>
 <p>The rendering system uses two objects to unify planes: render_relay and render_plates. Render relays use render_target/source and the relay_render_to_plane proc to replicate the plane master on the render relay. This render relay is then rendered onto a render_plate, which is a plane master that renders the render_relays onto itself. This plate can then be hierachically rendered with the same process until it reaches the master render_plate, which is the plate that will actually render to the player. These plates naturally in the byond style have quirks. For example, rendering to two plates will double any effects such as color or filters, and as such you need to carefully manage how you render them. Keep in mind as well that when sorting the layers for rendering on a plane that they should not be negative, this is handled automatically in relay_render_to_plane. When debugging note that mouse_opacity can act bizzarly with this method, such as only allowing you to click things that are layered over objects on a certain plane but auomatically setting the mouse_opacity should be handling this. Note that if you decide to manipulate a plane with internal byond objects that you will have to manually extrapolate the vars that are set if you want to render them to another plane (See blackness plane for example), and that this is not documented anywhere.</p>
 <p>Goodluck and godspeed with coding
 - Just another contributor</p>
-<h2 id="baystation-differences">Baystation Differences</h2>
+<hh2 id="baystation-differences">Baystation Differences</hh2>
 <p>The bay implementation differs in some points but you can treat the prior sections as broadly accurate.</p>
 <ul>
 <li>Locally we have refactored and simplified the above concepts down to <code>/atom/movable/renderer</code> and undifferentiated relay movables.</li>
@@ -66,7 +66,7 @@
 </ul></td></tr></table></main>
 <footer>
     baystation12.dme
-    <a href="https://github.com/Baystation12/Baystation12/tree/9cad1f3df9bb7a90e92eb2ce74325715ebedc028">9cad1f3</a>
-        (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/src/dmdoc/README.md">dmdoc 1.4.1</a></footer>
+    <a href="https://github.com/Baystation12/Baystation12/tree/1d2802334c2e728e80d447e147d7cb49a25df4c6">1d28023</a>
+        (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.7.3</a></footer>
 </body>
 </html>
