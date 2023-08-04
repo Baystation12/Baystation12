@@ -103,8 +103,7 @@
 	outturf = get_step(src, dir)
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/machinery/power/turbine/LateInitialize()
-	..()
+/obj/machinery/power/turbine/LateInitialize(mapload)
 	if(!compressor) // It should have found us and subscribed.
 		set_broken(TRUE)
 

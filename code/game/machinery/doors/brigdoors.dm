@@ -35,7 +35,7 @@
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/machinery/door_timer/LateInitialize()
+/obj/machinery/door_timer/LateInitialize(mapload)
 	for(var/obj/machinery/door/window/brigdoor/M in SSmachines.machinery)
 		if (M.id == src.id)
 			targets += M
