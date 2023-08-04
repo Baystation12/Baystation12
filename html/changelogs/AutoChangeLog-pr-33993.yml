@@ -1,5 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - admin: The automatic connections checker no longer fires on staff and gives a
-      number for matches instead of listing every ckey and ban match in chat.

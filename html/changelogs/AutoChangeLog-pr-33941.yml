@@ -1,6 +1,0 @@
-author: Fre3bie, Spookerton
-delete-after: true
-changes:
-  - tweak: Wheelchair now moves at walk speed instead of sprint speed.
-  - tweak: You need your hands free to drive your own wheelchair.
-  - tweak: You need gravity to move a wheelchair as the person in it.
