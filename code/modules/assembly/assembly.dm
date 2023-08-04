@@ -32,7 +32,7 @@
 /obj/item/device/assembly/proc/pulse(radio = 0)						//Called when this device attempts to act on another device, radio determines if it was sent via radio or direct
 	return
 
-/obj/item/device/assembly/proc/toggle_secure()								//Code that has to happen when the assembly is un\secured goes here
+/obj/item/device/assembly/proc/set_secure(make_secure = FALSE)								//Code that has to happen when the assembly is un\secured goes here
 	return
 
 /obj/item/device/assembly/proc/attach_assembly(obj/A, mob/user)	//Called when an assembly is attacked by another
@@ -82,9 +82,12 @@
 	return 1
 
 
-/obj/item/device/assembly/toggle_secure()
-	secured = !secured
-	update_icon()
+/obj/item/device/assembly/set_secure(make_secure)
+	if (make_secure == secured)
+		return
+	else
+		secured = make_secure
+		update_icon()
 	return secured
 
 
@@ -101,7 +104,7 @@
 			USE_FEEDBACK_FAILURE("\The [src] is not ready to be modified or attached.")
 			return TRUE
 		var/obj/item/device/assembly/assembly = tool
-		if (!assembly.secured)
+		if (assembly.secured)
 			USE_FEEDBACK_FAILURE("\The [tool] is not ready to be modified or attached.")
 			return TRUE
 		user.unEquip(src)
@@ -117,6 +120,8 @@
 		holder.SetName("[name]-[tool.name] assembly")
 		holder.update_icon()
 		user.put_in_hands(holder)
+		set_secure(TRUE)
+		assembly.set_secure(TRUE)
 		user.visible_message(
 			SPAN_NOTICE("\The [user] attaches \a [tool] to \a [src]."),
 			SPAN_NOTICE("You attach \the [tool] to \the [src]."),
@@ -126,7 +131,7 @@
 
 	// Screwdriver - Toggle secured
 	if (isScrewdriver(tool))
-		toggle_secure()
+		set_secure(!secured)
 		user.visible_message(
 			SPAN_NOTICE("\The [user] adjusts \a [src] with \a [tool]."),
 			SPAN_NOTICE("You adjust \the [src] with \the [tool]. It [secured ? "is now ready to use" : "can now be taken apart"].")
