@@ -13,11 +13,9 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	idle_power_usage = 0
 	active_power_usage = 5 KILOWATTS
 	use_power = POWER_USE_IDLE
-	power_channel = LOCAL
 	health_max = 200
 	health_min_damage = 10
 	construct_state = /singleton/machine_construction/default/panel_closed
-	uncreated_component_parts = null
 
 	machine_name = "stasis cage"
 	machine_desc = "A container with an internal stasis suspender to keep any fauna inside safe and secure for transport. Fauna not included."
@@ -29,7 +27,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 
 	var/god = FALSE //Check if mob had godmode before being contained
 
-	var/obj/item/stock_parts/power/battery/battery
+	var/obj/item/cell/cell = null
 
 /obj/machinery/stasis_cage/Initialize()
 	. = ..()
@@ -38,7 +36,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	airtank.adjust_gas(GAS_OXYGEN, MOLES_O2STANDARD, FALSE)
 	airtank.adjust_gas(GAS_NITROGEN, MOLES_N2STANDARD)
 
-	battery = get_component_of_type(/obj/item/stock_parts/power/battery)
+	cell = get_cell()
 
 	var/mob/living/A = locate() in loc
 	if(!A)
@@ -132,8 +130,8 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 			to_chat(user, "\The [contained] is kept inside.")
 	if (broken)
 		to_chat(user, SPAN_WARNING("\The [src]'s lid is broken. It probably can not be used."))
-	if (battery.get_cell())
-		to_chat(user, "\The [src]'s power gauge shows [battery.cell.percent()]% remaining.")
+	if (cell)
+		to_chat(user, "\The [src]'s power gauge shows [cell.percent()]% remaining.")
 
 /obj/machinery/stasis_cage/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Crowbar - Pry thing out of cage
@@ -243,9 +241,8 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	release()
 	QDEL_NULL(airtank)
 	QDEL_NULL(contained)
-	QDEL_NULL(battery)
-	if (battery.get_cell())
-		QDEL_NULL(battery.cell)
+	if (cell)
+		QDEL_NULL(cell)
 	return ..()
 
 /obj/machinery/stasis_cage/emp_act(severity)
@@ -265,8 +262,8 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	broken = TRUE
 	new /obj/effect/sparks(get_turf(src))
 
-	if (battery.get_cell())
-		battery.cell.emp_act(severity)
+	if (cell)
+		cell.emp_act(severity)
 
 	update_icon()
 
