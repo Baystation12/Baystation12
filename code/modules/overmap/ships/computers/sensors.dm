@@ -13,6 +13,7 @@
 	var/weakref/sensor_ref
 	var/list/last_scan
 	var/muted = FALSE
+	var/sound_off = FALSE
 	var/print_language = LANGUAGE_HUMAN_EURO
 	var/working_sound = 'sound/machines/sensors/sensorloop.ogg'
 	var/datum/sound_token/sound_token
@@ -39,6 +40,10 @@
 	update_sound()
 
 /obj/machinery/computer/ship/sensors/proc/update_sound()
+	if (sound_off)
+		if (sound_token)
+			QDEL_NULL(sound_token)
+		return
 	if(!working_sound)
 		return
 	if(!sound_id)
@@ -93,6 +98,7 @@
 	var/obj/machinery/shipsensors/sensors = get_sensors()
 	data["viewing"] = viewing_overmap(user)
 	data["muted"] = muted
+	data["sound_off"] = sound_off
 	var/mob/living/silicon/silicon = user
 	data["viewing_silicon"] = ismachinerestricted(silicon)
 	if(sensors)
@@ -182,6 +188,10 @@
 
 	if (href_list["mute"])
 		muted = !muted
+		return TOPIC_REFRESH
+
+	if (href_list["sound_off"])
+		sound_off = !sound_off
 		return TOPIC_REFRESH
 
 	var/obj/machinery/shipsensors/sensors = get_sensors()
