@@ -394,7 +394,7 @@
 
 	displayed_level = level
 
-	station_map.overlays.Cut()
+	station_map.ClearOverlays()
 	station_map.vis_contents.Cut()
 
 	if(z == z_levels[displayed_level])

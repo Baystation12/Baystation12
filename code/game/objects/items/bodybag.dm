@@ -78,7 +78,7 @@
 	else
 		icon_state = "closed"
 
-	src.overlays.Cut()
+	ClearOverlays()
 	if(label)
 		src.overlays += image(src.icon, "bodybag_label")
 

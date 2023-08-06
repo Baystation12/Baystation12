@@ -75,7 +75,7 @@
 
 /mob/living/exosuit/handle_hud_icons_health()
 
-	hud_health.overlays.Cut()
+	hud_health.ClearOverlays()
 
 	if(!body || !get_cell() || (get_cell().charge <= 0))
 		return

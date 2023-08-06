@@ -120,7 +120,7 @@ var/global/list/image/splatter_cache=list()
 				S.overlays += S.blood_overlay
 			if(S.blood_overlay && S.blood_overlay.color != basecolor)
 				S.blood_overlay.color = basecolor
-				S.overlays.Cut()
+				S.ClearOverlays()
 				S.overlays += S.blood_overlay
 			S.blood_DNA |= blood_DNA.Copy()
 
