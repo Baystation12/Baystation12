@@ -170,7 +170,7 @@
 			var/count = 0
 			overlays += "fab-load-metal"
 			spawn(10)
-				overlays -= "fab-load-metal"
+				CutOverlays("fab-load-metal")
 			while(materials[material] + amnt <= res_max_amount && stack.amount >= 1)
 				materials[material] += amnt
 				stack.use(1)

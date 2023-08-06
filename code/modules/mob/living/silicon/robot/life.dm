@@ -285,8 +285,8 @@
 	update_icon()
 
 /mob/living/silicon/robot/update_fire()
-	overlays -= image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
-	if(on_fire)
+	CutOverlays(image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing"))
+	if (on_fire)
 		overlays += image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
 
 /mob/living/silicon/robot/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)

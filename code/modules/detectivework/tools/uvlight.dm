@@ -45,7 +45,7 @@
 		stored_alpha.Cut()
 	if(length(reset_objects))
 		for(var/obj/item/I in reset_objects)
-			I.overlays -= I.blood_overlay
+			I.CutOverlays(I.blood_overlay)
 			if(I.fluorescent == ATOM_FLOURESCENCE_ACTVE)
 				I.fluorescent = ATOM_FLOURESCENCE_INACTIVE
 		reset_objects.Cut()

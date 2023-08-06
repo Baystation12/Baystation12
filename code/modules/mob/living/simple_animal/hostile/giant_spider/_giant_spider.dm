@@ -84,7 +84,7 @@ GLOBAL_VAR_INIT(SPIDER_COUNT, 0)
 /mob/living/simple_animal/hostile/giant_spider/death(gibbed, deathmessage, show_dead_message)
 	. = ..()
 	GLOB.SPIDER_COUNT -= 1
-	overlays -= eye_layer
+	CutOverlays(eye_layer)
 
 /mob/living/simple_animal/hostile/giant_spider/proc/spider_randomify() //random math nonsense to get their damage, health and venomness values
 	maxHealth = rand(initial(maxHealth), (1.4 * initial(maxHealth)))

@@ -35,7 +35,7 @@
 
 	wet = 0
 	if(wet_overlay)
-		overlays -= wet_overlay
+		CutOverlays(wet_overlay)
 		wet_overlay = null
 
 /turf/simulated/clean_blood()

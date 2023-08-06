@@ -55,7 +55,7 @@ var/global/image/contamination_overlay = image('icons/effects/contamination.dmi'
 
 /obj/item/proc/decontaminate()
 	contaminated = 0
-	overlays -= contamination_overlay
+	CutOverlays(contamination_overlay)
 
 /mob/proc/contaminate()
 

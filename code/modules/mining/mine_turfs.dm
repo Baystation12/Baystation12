@@ -275,7 +275,7 @@ var/global/list/mining_floors = list()
 		return ..()
 
 /turf/simulated/mineral/proc/clear_ore_effects()
-	overlays -= ore_overlay
+	CutOverlays(ore_overlay)
 	ore_overlay = null
 
 /turf/simulated/mineral/proc/DropMineral()

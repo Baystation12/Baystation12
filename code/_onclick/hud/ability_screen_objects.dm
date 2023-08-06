@@ -362,8 +362,7 @@
 
 	if(last_charge == spell.charge_counter && !forced_update)
 		return //nothing to see here
-
-	overlays -= spell.hud_state
+	CutOverlays(spell.hud_state)
 
 	if(spell.charge_type == Sp_RECHARGE || spell.charge_type == Sp_CHARGES)
 		if(spell.charge_counter < spell.charge_max)
@@ -373,15 +372,15 @@
 				partial_charge.Crop(1, 1, partial_charge.Width(), round(partial_charge.Height() * spell.charge_counter / spell.charge_max))
 				overlays += partial_charge
 				if(last_charged_icon)
-					overlays -= last_charged_icon
+					CutOverlays(last_charged_icon)
 				last_charged_icon = partial_charge
 			else if(last_charged_icon)
-				overlays -= last_charged_icon
+				CutOverlays(last_charged_icon)
 				last_charged_icon = null
 		else
 			icon_state = "[spell_base]_spell_ready"
 			if(last_charged_icon)
-				overlays -= last_charged_icon
+				CutOverlays(last_charged_icon)
 	else
 		icon_state = "[spell_base]_spell_ready"
 
@@ -389,7 +388,7 @@
 
 	last_charge = spell.charge_counter
 
-	overlays -= "silence"
+	CutOverlays("silence")
 	if(spell.silenced)
 		overlays += "silence"
 

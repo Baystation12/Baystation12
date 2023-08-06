@@ -113,7 +113,7 @@
 	AddOverlays(new_overlays)
 
 /obj/machinery/fabricator/proc/remove_mat_overlay(mat_overlay)
-	material_overlays -= mat_overlay
+	CutOverlays(mat_overlay)
 	update_icon()
 
 //Updates overall lathe storage size.

@@ -83,7 +83,7 @@
 		else
 			target.ex_act(EX_ACT_DEVASTATING)
 	if(target)
-		target.overlays -= image_overlay
+		target.CutOverlays(image_overlay)
 	qdel(src)
 
 /obj/item/plastique/proc/run_timer() //Basically exists so the C4 will beep when running. Better idea than putting sleeps in attackby.

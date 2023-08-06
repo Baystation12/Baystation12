@@ -130,7 +130,7 @@
 	I.color = stack.material.icon_colour
 	overlays += I
 	spawn(10)
-		overlays -= I
+		CutOverlays(I)
 
 	busy = 1
 	use_power_oneoff(max(1000, (SHEET_MATERIAL_AMOUNT * amount / 10)))

@@ -12,7 +12,7 @@ var/global/image/mark = image('icons/Testing/Zone.dmi', icon_state = "mark")
 /turf/var/dbg_img
 /turf/proc/dbg(image/img, d = 0)
 	if(d > 0) img.dir = d
-	overlays -= dbg_img
+	CutOverlays(dbg_img)
 	overlays += img
 	dbg_img = img
 

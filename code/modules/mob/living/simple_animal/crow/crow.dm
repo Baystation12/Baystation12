@@ -136,8 +136,7 @@
 
 /mob/living/simple_animal/crow/on_update_icon()
 	..()
-	overlays -= "bag"
-	overlays -= "bag_dead"
+	CutOverlays(list("bag", "bag_dead"))
 	if(messenger_bag)
 		if(icon_state != icon_dead)
 			overlays |= "bag"
@@ -151,8 +150,7 @@
 
 /mob/living/simple_animal/crow/cyber/on_update_icon()
 	..()
-	overlays -= "cyber"
-	overlays -= "cyber_dead"
+	CutOverlays(list("cyber", "cyber_dead"))
 	if(icon_state != icon_dead)
 		overlays |= "cyber"
 	else

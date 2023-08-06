@@ -68,7 +68,7 @@
 
 /mob/living/exosuit/proc/update_pilots(update_overlays = TRUE)
 	if(update_overlays && LAZYLEN(pilot_overlays))
-		overlays -= pilot_overlays
+		CutOverlays(pilot_overlays)
 	pilot_overlays = null
 	if(body && !(body.hide_pilot))
 		for(var/i = 1 to LAZYLEN(pilots))

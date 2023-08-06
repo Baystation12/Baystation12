@@ -57,7 +57,7 @@ var/global/bomb_set
 				playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 			else
 				panel_open = 0
-				overlays -= "panel_open"
+				CutOverlays("panel_open")
 				to_chat(user, "You screw the control panel of [src] back on.")
 				playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 		else
@@ -65,7 +65,7 @@ var/global/bomb_set
 				to_chat(user, "\The [src] emits a buzzing noise, the panel staying locked in.")
 			if(panel_open == 1)
 				panel_open = 0
-				overlays -= "panel_open"
+				CutOverlays("panel_open")
 				to_chat(user, "You screw the control panel of \the [src] back on.")
 				playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 			flick("lock", src)
