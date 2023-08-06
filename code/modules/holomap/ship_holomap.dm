@@ -164,16 +164,16 @@
 
 		// Put the little "map" overlay down where it looks nice
 		if(small_station_map)
-			overlays.Add(small_station_map)
+			AddOverlays(small_station_map)
 
 	if(floor_markings)
 		floor_markings.dir = src.dir
 		floor_markings.pixel_x = -src.pixel_x
 		floor_markings.pixel_y = -src.pixel_y
-		src.overlays.Add(floor_markings)
+		AddOverlays(floor_markings)
 
 	if(panel_open)
-		overlays.Add("station_map-panel")
+		AddOverlays("station_map-panel")
 
 /obj/machinery/ship_map/ex_act(severity)
 	switch(severity)

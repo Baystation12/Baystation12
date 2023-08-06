@@ -195,7 +195,7 @@ var/global/list/radial_menus = list()
 	if(choice_id == NEXT_PAGE_ID)
 		E.name = "Next Page"
 		E.next_page = TRUE
-		E.overlays.Add("radial_next")
+		E.AddOverlays("radial_next")
 	else
 		if(istext(choices_values[choice_id]))
 			E.name = choices_values[choice_id]
@@ -206,7 +206,7 @@ var/global/list/radial_menus = list()
 		E.maptext = null
 		E.next_page = FALSE
 		if(choices_icons[choice_id])
-			E.overlays.Add(choices_icons[choice_id])
+			E.AddOverlays(choices_icons[choice_id])
 
 /datum/radial_menu/New()
 	close_button = new

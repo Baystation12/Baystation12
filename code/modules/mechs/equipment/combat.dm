@@ -391,7 +391,7 @@
 				icon_state = "mech_shield_[hardpoint]"
 				var/image/I = image(icon, "[icon_state]_over")
 				I.layer = ABOVE_HUMAN_LAYER
-				overlays.Add(I)
+				AddOverlays(I)
 
 /obj/aura/mech_ballistic/added_to(mob/living/target)
 	. = ..()

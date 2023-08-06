@@ -52,13 +52,13 @@
 //			O.handle_icon_updates = 0
 		showing = 0
 		ClearOverlays()
-		overlays.Add(closed_state)
+		AddOverlays(closed_state)
 	else if(forced_state != 1) // We're opening it, show the icons.
 		open_ability_master()
 		update_abilities(1)
 		showing = 1
 		ClearOverlays()
-		overlays.Add(open_state)
+		AddOverlays(open_state)
 	update_icon()
 
 /obj/screen/movable/ability_master/proc/open_ability_master()
