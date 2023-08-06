@@ -49,9 +49,9 @@
 	else
 		icon_state = "bsd_core"
 	if (state & STATE_UNSTABLE)
-		overlays += "bsd_c_u"
+		AddOverlays("bsd_c_u")
 	else
-		overlays += "bsd_c_s"
+		AddOverlays("bsd_c_s")
 
 
 /obj/machinery/bluespacedrive/emp_act(severity)

@@ -72,9 +72,9 @@
 		var/state = clamp(Roundm(Percent(reagents.total_volume, volume, 0), 25), 0, 100)
 		var/image/filling = image(icon, icon_state = "[state]")
 		filling.color = reagents.get_color()
-		overlays += filling
+		AddOverlays(filling)
 	if (patient)
-		overlays += image(icon, icon_state = "dongle")
+		AddOverlays(image(icon, icon_state = "dongle"))
 
 
 /obj/item/reagent_containers/ivbag/MouseDrop(atom/over_atom)

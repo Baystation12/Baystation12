@@ -159,7 +159,7 @@
 
 /obj/screen/zone_sel/on_update_icon()
 	ClearOverlays()
-	overlays += image('icons/mob/zone_sel.dmi', "[selecting]")
+	AddOverlays(image('icons/mob/zone_sel.dmi', "[selecting]"))
 
 /obj/screen/intent
 	name = "intent"

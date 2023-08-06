@@ -70,8 +70,8 @@
 		if (91 to INFINITY)
 			reagents_overlay.icon_state = "reagent100"
 			light_overlay.icon_state = "light_full"
-	overlays += reagents_overlay
-	overlays += light_overlay
+	AddOverlays(reagents_overlay)
+	AddOverlays(light_overlay)
 
 
 /obj/structure/iv_stand/MouseDrop(atom/over_atom, source_loc, over_loc)

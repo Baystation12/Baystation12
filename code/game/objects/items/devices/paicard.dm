@@ -21,7 +21,7 @@
 
 /obj/item/device/paicard/Initialize()
 	. = ..()
-	overlays += "pai-off"
+	AddOverlays("pai-off")
 	if (!pai)
 		pai = new /mob/living/silicon/pai(src)
 		pai.card = src

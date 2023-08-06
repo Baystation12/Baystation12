@@ -194,7 +194,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 		icon_state = "newscaster_off"
 		if(MACHINE_IS_BROKEN(src)) //If the thing is smashed, add crack overlay on top of the unpowered sprite.
 			ClearOverlays()
-			overlays += image(src.icon, "crack3")
+			AddOverlays(image(src.icon, "crack3"))
 		return
 
 	ClearOverlays()

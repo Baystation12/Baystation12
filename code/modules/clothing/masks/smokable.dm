@@ -209,13 +209,13 @@
 	..()
 	ClearOverlays()
 	if(lit)
-		overlays += overlay_image(icon, "cigon", flags=RESET_COLOR)
+		AddOverlays(overlay_image(icon, "cigon", flags=RESET_COLOR))
 
 /obj/item/clothing/mask/smokable/cigarette/trident/on_update_icon()
 	..()
 	ClearOverlays()
 	if(lit)
-		overlays += overlay_image(icon, "cigarello-on", flags=RESET_COLOR)
+		AddOverlays(overlay_image(icon, "cigarello-on", flags=RESET_COLOR))
 
 /obj/item/clothing/mask/smokable/extinguish(mob/user, no_message)
 	..()

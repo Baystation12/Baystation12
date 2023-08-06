@@ -47,7 +47,7 @@ var/global/list/doppler_arrays = list()
 	if(MACHINE_IS_BROKEN(src))
 		icon_state = "[initial(icon_state)]-broken"
 	if(panel_open)
-		overlays += "[initial(icon_state)]-open"
+		AddOverlays("[initial(icon_state)]-open")
 	if(inoperable())
 		icon_state = "[initial(icon_state)]-off"
 

@@ -17,5 +17,5 @@
 /obj/item/storage/fancy/vials/on_update_icon()
 	ClearOverlays()
 	if (!opened)
-		overlays += image('icons/obj/vialbox.dmi', "cover")
+		AddOverlays(image('icons/obj/vialbox.dmi', "cover"))
 	icon_state = "[initial(icon_state)][floor(total_keys / 2)]"

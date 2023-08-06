@@ -783,7 +783,7 @@
 	I.color = other.color
 	I.overlays += other.overlays
 	I.SetTransform(scale = 0.8)
-	overlays += I
+	AddOverlays(I)
 	qdel(other)
 	return TRUE
 

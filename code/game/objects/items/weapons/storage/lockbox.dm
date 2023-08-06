@@ -106,11 +106,11 @@
 	src.icon_state = "vialbox[floor(total_contents/2)]"
 	ClearOverlays()
 	if (!broken)
-		overlays += image(icon, src, "led[locked]")
+		AddOverlays(image(icon, src, "led[locked]"))
 		if(locked)
-			overlays += image(icon, src, "cover")
+			AddOverlays(image(icon, src, "cover"))
 	else
-		overlays += image(icon, src, "ledb")
+		AddOverlays(image(icon, src, "ledb"))
 	return
 
 /obj/item/storage/lockbox/vials/attackby(obj/item/item, mob/living/user)

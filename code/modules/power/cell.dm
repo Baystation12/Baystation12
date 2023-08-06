@@ -52,7 +52,7 @@
 		overlay_state = new_overlay_state
 		ClearOverlays()
 		if(overlay_state)
-			overlays += image('icons/obj/powercells.dmi', overlay_state)
+			AddOverlays(image('icons/obj/powercells.dmi', overlay_state))
 
 /obj/item/cell/proc/percent()		// return % charge of cell
 	return maxcharge && (100.0*charge/maxcharge)

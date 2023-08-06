@@ -82,8 +82,8 @@
 	ClearOverlays()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
-		overlays += os.get_screen_overlay()
-		overlays += os.get_keyboard_overlay()
+		AddOverlays(os.get_screen_overlay())
+		AddOverlays(os.get_keyboard_overlay())
 
 	if(enabled)
 		set_light(0.2, 0.1, light_strength)

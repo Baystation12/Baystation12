@@ -93,7 +93,7 @@ GLOBAL_VAR_INIT(SPIDER_COUNT, 0)
 	I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 	eye_layer = I
-	overlays += I
+	AddOverlays(I)
 	z_flags |= ZMM_MANGLE_PLANES
 
 

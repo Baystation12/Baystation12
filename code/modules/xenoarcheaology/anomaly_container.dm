@@ -222,9 +222,9 @@
 	if(health_dead)
 		icon_state = "anomaly_container_broken"
 	if(attached_paper)
-		overlays += "anomaly_container_paper"
+		AddOverlays("anomaly_container_paper")
 	if(panel_open)
-		overlays += "anomaly_container_panel"
+		AddOverlays("anomaly_container_panel")
 	if(is_powered())
 		AddOverlays(list(
 			emissive_appearance(icon, "anomaly_container_lights"),

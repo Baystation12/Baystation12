@@ -183,7 +183,7 @@
 /obj/machinery/suspension_gen/on_update_icon()
 	ClearOverlays()
 	if(panel_open)
-		overlays += "suspension_panel"
+		AddOverlays("suspension_panel")
 	. = ..()
 
 /obj/effect/suspension_field

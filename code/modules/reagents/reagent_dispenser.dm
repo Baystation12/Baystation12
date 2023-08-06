@@ -266,7 +266,7 @@
 		var/icon/rig_overlay = getFlatIcon(rig)
 		rig_overlay.Shift(NORTH, 1)
 		rig_overlay.Shift(EAST, 6)
-		overlays += rig_overlay
+		AddOverlays(rig_overlay)
 
 
 /obj/structure/reagent_dispensers/fueltank/bullet_act(obj/item/projectile/Proj)

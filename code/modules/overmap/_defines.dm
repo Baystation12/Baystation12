@@ -45,7 +45,7 @@ var/global/list/map_sectors = list()
 			I.pixel_x = 5*i - 2
 		if(x == GLOB.using_map.overmap_size)
 			I.pixel_x = 5*i + 2
-		overlays += I
+		AddOverlays(I)
 
 //list used to track which zlevels are being 'moved' by the proc below
 var/global/list/moving_levels = list()

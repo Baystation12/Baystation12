@@ -256,7 +256,7 @@
 			var/image/area = image(SSminimap.holomaps[z_level].holomap_areas[A])
 			area.pixel_x = ((HOLOMAP_ICON_SIZE / 2) - world.maxx / 2) - pixel_x
 			area.pixel_y = ((HOLOMAP_ICON_SIZE / 2) - world.maxy / 2) - pixel_y
-			overlays += area
+			AddOverlays(area)
 			has_areas = TRUE
 
 //What happens when we are clicked on / when another is clicked on

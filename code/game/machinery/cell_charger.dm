@@ -17,8 +17,8 @@
 		var/newlevel = 	round(charging.percent() * 4.0 / 99)
 		if(chargelevel != newlevel)
 			ClearOverlays()
-			overlays += emissive_appearance(icon, "ccharger-o[newlevel]")
-			overlays += "ccharger-o[newlevel]"
+			AddOverlays(emissive_appearance(icon, "ccharger-o[newlevel]"))
+			AddOverlays("ccharger-o[newlevel]")
 			chargelevel = newlevel
 	else
 		ClearOverlays()

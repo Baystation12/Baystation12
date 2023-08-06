@@ -155,4 +155,4 @@
 	var/image/item_image = image("icon" = I.icon, "icon_state" = I.icon_state, "layer" = 30 + I.layer, "pixel_x" = rand(-3, 3), "pixel_y" = rand(-3, 3)) // this line terrifies me
 	item_image.color = I.color
 	item_image.overlays = I.overlays // Inherit the color and overlays of stored items to make sure they render accurately on the tray
-	overlays += item_image
+	AddOverlays(item_image)

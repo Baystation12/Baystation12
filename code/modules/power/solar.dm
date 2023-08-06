@@ -82,9 +82,9 @@ var/global/solar_gen_rate = 1500
 	..()
 	ClearOverlays()
 	if(MACHINE_IS_BROKEN(src))
-		overlays += image('icons/obj/machines/power/solar_panels.dmi', icon_state = "solar_panel-b", layer = ABOVE_HUMAN_LAYER)
+		AddOverlays(image('icons/obj/machines/power/solar_panels.dmi', icon_state = "solar_panel-b", layer = ABOVE_HUMAN_LAYER))
 	else
-		overlays += image('icons/obj/machines/power/solar_panels.dmi', icon_state = "solar_panel", layer = ABOVE_HUMAN_LAYER)
+		AddOverlays(image('icons/obj/machines/power/solar_panels.dmi', icon_state = "solar_panel", layer = ABOVE_HUMAN_LAYER))
 		src.set_dir(angle2dir(adir))
 	return
 
@@ -366,7 +366,7 @@ var/global/solar_gen_rate = 1500
 	icon_state = "solar"
 	ClearOverlays()
 	if(cdir > -1)
-		overlays += image('icons/obj/machines/computer.dmi', "solcon-o", angle2dir(cdir))
+		AddOverlays(image('icons/obj/machines/computer.dmi', "solcon-o", angle2dir(cdir)))
 	return
 
 /obj/machinery/power/solar_control/interface_interact(mob/user)

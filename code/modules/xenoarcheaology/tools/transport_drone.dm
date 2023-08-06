@@ -120,17 +120,17 @@
 	ClearOverlays()
 	if (current_flight)
 		AddOverlays(list(
-			emissive_appearance(icon, "pad_incoming")
+			emissive_appearance(icon, "pad_incoming"),
 			image(icon, "pad_incoming")
 		))
 	else
 		var/datum/extension/local_network_member/transport = get_extension(src, /datum/extension/local_network_member)
 		var/network = transport ? transport.id_tag : null
 		if (network && operable())
-			overlays += emissive_appearance(icon, "pad_waiting")
-			overlays += image(icon, "pad_waiting")
+			AddOverlays(emissive_appearance(icon, "pad_waiting"))
+			AddOverlays(image(icon, "pad_waiting"))
 	if(panel_open)
-		overlays += image(icon, "pad_maintenance")
+		AddOverlays(image(icon, "pad_maintenance"))
 
 /obj/machinery/drone_pad/examine(mob/user, distance)
 	. = ..()

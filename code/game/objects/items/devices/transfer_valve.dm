@@ -181,13 +181,13 @@
 	icon_state = "valve"
 
 	if(tank_one)
-		overlays += "[tank_one.icon_state]"
+		AddOverlays("[tank_one.icon_state]")
 	if(tank_two)
 		var/icon/J = new(icon, icon_state = "[tank_two.icon_state]")
 		J.Shift(WEST, 13)
 		underlays += J
 	if(attached_device)
-		overlays += "device"
+		AddOverlays("device")
 
 /obj/item/device/transfer_valve/proc/remove_tank(obj/item/tank/T)
 	if(tank_one == T)

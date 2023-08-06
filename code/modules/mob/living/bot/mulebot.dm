@@ -286,7 +286,7 @@
 	if(C.layer < layer)
 		C.layer = layer + 0.1
 	C.plane = plane
-	overlays += C
+	AddOverlays(C)
 
 	if(ismob(C))
 		var/mob/M = C

@@ -282,7 +282,7 @@
 /obj/machinery/power/smes/buildable/on_update_icon()
 	if (failing)
 		ClearOverlays()
-		overlays += image('icons/obj/machines/power/smes.dmi', "smes-crit")
+		AddOverlays(image('icons/obj/machines/power/smes.dmi', "smes-crit"))
 	else
 		..()
 

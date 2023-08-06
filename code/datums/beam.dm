@@ -155,7 +155,7 @@
 /obj/effect/ebeam/emissive/on_update_icon()
 	. = ..()
 	var/mutable_appearance/emissive_overlay = emissive_appearance(icon, icon_state, src)
-	overlays += emissive_overlay
+	AddOverlays(emissive_overlay)
 
 /**
  * This is what you use to start a beam. Example: origin.Beam(target, args). **Store the return of this proc if you don't set maxdist or time, you need it to delete the beam.**

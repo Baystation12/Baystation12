@@ -51,13 +51,13 @@
 /obj/machinery/robotics_fabricator/on_update_icon()
 	ClearOverlays()
 	if(panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 	if(is_powered())
-		overlays += emissive_appearance(icon, "[icon_state]_lights")
-		overlays += "[icon_state]_lights"
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
+		AddOverlays("[icon_state]_lights")
 	else if(busy)
-		overlays += emissive_appearance(icon, "[icon_state]_lights_working")
-		overlays += "[icon_state]_lights_working"
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights_working"))
+		AddOverlays("[icon_state]_lights_working")
 
 /obj/machinery/robotics_fabricator/dismantle()
 	for(var/f in materials)
@@ -168,7 +168,7 @@
 	if(materials[material] + amnt <= res_max_amount)
 		if(stack && stack.can_use(1))
 			var/count = 0
-			overlays += "fab-load-metal"
+			AddOverlays("fab-load-metal")
 			spawn(10)
 				CutOverlays("fab-load-metal")
 			while(materials[material] + amnt <= res_max_amount && stack.amount >= 1)

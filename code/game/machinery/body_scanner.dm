@@ -106,7 +106,7 @@
 /obj/machinery/bodyscanner/on_update_icon()
 	ClearOverlays()
 	if(panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 	if(!occupant)
 		icon_state = "body_scanner_0"
 	else if(inoperable())

@@ -139,7 +139,7 @@
 		var/image/I = image(null)
 		I.appearance = occupant
 		I.SetTransform(rotation = occupant.butchery_rotation)
-		overlays += I
+		AddOverlays(I)
 
 /obj/structure/kitchenspike/mob_breakout(mob/living/escapee)
 	. = ..()

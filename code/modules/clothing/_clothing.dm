@@ -511,7 +511,7 @@ BLIND     // can't see anything
 /obj/item/clothing/head/on_update_icon(mob/user)
 	ClearOverlays()
 	if (on && light_overlay)
-		overlays += get_obj_light_overlay(light_overlay)
+		AddOverlays(get_obj_light_overlay(light_overlay))
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		H.update_inv_head()

@@ -132,7 +132,7 @@
 	var/ikey = "\ref[seed]-plant-[growth]"
 	if(!SSplants.plant_icon_cache[ikey])
 		SSplants.plant_icon_cache[ikey] = seed.get_icon(growth)
-	overlays += SSplants.plant_icon_cache[ikey]
+	AddOverlays(SSplants.plant_icon_cache[ikey])
 
 	if(growth > 2 && growth == max_growth)
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER

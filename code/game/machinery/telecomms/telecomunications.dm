@@ -161,11 +161,11 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	ClearOverlays()
 
 	if(panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 
 	if(on && !overloaded_for)
-		overlays += "[icon_state]_lights_working"
-		overlays += emissive_appearance(icon, "[icon_state]_lights_working")
+		AddOverlays("[icon_state]_lights_working")
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights_working"))
 
 /obj/machinery/telecomms/Move()
 	. = ..()

@@ -105,7 +105,7 @@
 		if(filling_states)
 			var/image/filling = image(icon, src, "[base_icon][get_filling_state()]")
 			filling.color = reagents.get_color()
-			overlays += filling
+			AddOverlays(filling)
 	else
 		SetName(initial(name))
 		desc = initial(desc)

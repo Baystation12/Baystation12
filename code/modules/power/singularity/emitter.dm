@@ -73,8 +73,8 @@
 /obj/machinery/power/emitter/on_update_icon()
 	ClearOverlays()
 	if(active && powernet && avail(active_power_usage))
-		overlays += emissive_appearance(icon, "[icon_state]_lights")
-		overlays += "[icon_state]_lights"
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
+		AddOverlays("[icon_state]_lights")
 
 /obj/machinery/power/emitter/interface_interact(mob/user)
 	if (!CanInteract(user, DefaultTopicState()))

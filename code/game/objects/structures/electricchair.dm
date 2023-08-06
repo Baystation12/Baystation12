@@ -10,7 +10,7 @@
 
 /obj/structure/bed/chair/e_chair/New()
 	..()
-	overlays += image('icons/obj/structures/furniture.dmi', src, "echair_over", MOB_LAYER + 1, dir)
+	AddOverlays(image('icons/obj/structures/furniture.dmi', src, "echair_over", MOB_LAYER + 1, dir))
 	return
 
 

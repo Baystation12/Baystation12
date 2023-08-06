@@ -38,7 +38,7 @@
 
 /mob/living/simple_animal/adultslime/Initialize(mapload)
 	. = ..()
-	overlays += "aslime-:33"
+	AddOverlays("aslime-:33")
 
 
 /mob/living/simple_animal/slime/adult/death()

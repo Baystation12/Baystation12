@@ -60,10 +60,10 @@
 			if (91 to INFINITY)
 				filling.icon_state = "[icon_state]-100"
 		filling.color = reagents.get_color()
-		overlays += filling
+		AddOverlays(filling)
 	if (!is_open_container())
 		var/image/lid = image(icon, src, "lid_bottle")
-		overlays += lid
+		AddOverlays(lid)
 
 
 /obj/item/reagent_containers/glass/bottle/inaprovaline

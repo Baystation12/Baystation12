@@ -60,7 +60,7 @@
 /turf/simulated/floor/exoplanet/on_update_icon(update_neighbors)
 	ClearOverlays()
 	if(LAZYLEN(decals))
-		overlays += decals
+		AddOverlays(decals)
 	for(var/direction in GLOB.cardinal)
 		var/turf/turf_to_check = get_step(src,direction)
 		if(!istype(turf_to_check, type))
@@ -75,7 +75,7 @@
 					rock_side.pixel_x += world.icon_size
 				if(WEST)
 					rock_side.pixel_x -= world.icon_size
-			overlays += rock_side
+			AddOverlays(rock_side)
 		else if(update_neighbors)
 			turf_to_check.update_icon()
 

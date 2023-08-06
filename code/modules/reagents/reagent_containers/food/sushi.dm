@@ -20,7 +20,7 @@
 		var/image/I = image(icon, sushi_overlay)
 		if(sushi_overlay == "fish" || sushi_overlay == "meat")
 			I.color = topping.filling_color
-		overlays += I
+		AddOverlays(I)
 
 		if(istype(topping, /obj/item/reagent_containers/food/snacks/sashimi))
 			var/obj/item/reagent_containers/food/snacks/sashimi/sashimi = topping
@@ -39,7 +39,7 @@
 	else
 		var/image/I = image(icon, sushi_overlay)
 		I.color = "#ff4040"
-		overlays += I
+		AddOverlays(I)
 
 	if(istype(rice))
 		if(rice.reagents)
@@ -52,7 +52,7 @@
 
 /obj/item/reagent_containers/food/snacks/sushi/on_update_icon()
 	name = "[sushi_type] sushi"
-	overlays += "nori"
+	AddOverlays("nori")
 
 /////////////
 // SASHIMI //

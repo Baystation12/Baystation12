@@ -85,7 +85,7 @@
 			else if ((code == l_code) && (!emagged) && (l_set == 1))
 				locked = 0
 				ClearOverlays()
-				overlays += image(icon, icon_opened)
+				AddOverlays(image(icon, icon_opened))
 				code = null
 			else
 				code = "ERROR"
@@ -118,7 +118,7 @@
 	src.overlays += image(icon, icon_sparking)
 	sleep(6)
 	ClearOverlays()
-	overlays += image(icon, icon_locking)
+	AddOverlays(image(icon, icon_locking))
 	locked = 0
 	to_chat(user, (feedback ? feedback : "You short out the lock of \the [src]."))
 	return TRUE

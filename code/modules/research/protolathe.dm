@@ -73,14 +73,14 @@
 /obj/machinery/r_n_d/protolathe/on_update_icon()
 	ClearOverlays()
 	if(panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 	if(is_powered())
-		overlays += emissive_appearance(icon, "[icon_state]_lights")
-		overlays += "[icon_state]_lights"
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
+		AddOverlays("[icon_state]_lights")
 	if(busy)
-		overlays += "[icon_state]_working"
-		overlays += emissive_appearance(icon, "[icon_state]_lights_working")
-		overlays += "[icon_state]_lights_working"
+		AddOverlays("[icon_state]_working")
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights_working"))
+		AddOverlays("[icon_state]_lights_working")
 
 /obj/machinery/r_n_d/protolathe/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()
@@ -128,7 +128,7 @@
 
 	var/image/I = image(icon, "protolathe_stack")
 	I.color = stack.material.icon_colour
-	overlays += I
+	AddOverlays(I)
 	spawn(10)
 		CutOverlays(I)
 

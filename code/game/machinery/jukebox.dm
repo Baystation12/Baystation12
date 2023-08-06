@@ -36,8 +36,8 @@
 	icon_state = initial(icon_state)
 	if (!jukebox?.playing)
 		return
-	overlays += emissive_appearance(icon, "[initial(icon_state)]-[emagged ? "emagged" : "running"]")
-	overlays += "[initial(icon_state)]-[emagged ? "emagged" : "running"]"
+	AddOverlays(emissive_appearance(icon, "[initial(icon_state)]-[emagged ? "emagged" : "running"]"))
+	AddOverlays("[initial(icon_state)]-[emagged ? "emagged" : "running"]")
 
 
 /obj/machinery/jukebox/powered()

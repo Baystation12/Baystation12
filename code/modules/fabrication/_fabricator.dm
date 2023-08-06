@@ -101,13 +101,13 @@
 /obj/machinery/fabricator/on_update_icon()
 	ClearOverlays()
 	if(panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 	if(currently_building)
-		overlays += emissive_appearance(icon, "[icon_state]_lights_working")
-		overlays += "[icon_state]_lights_working"
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights_working"))
+		AddOverlays("[icon_state]_lights_working")
 	else if(is_powered())
-		overlays += emissive_appearance(icon, "[icon_state]_lights")
-		overlays += "[icon_state]_lights"
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
+		AddOverlays("[icon_state]_lights")
 
 	var/list/new_overlays = material_overlays.Copy()
 	AddOverlays(new_overlays)

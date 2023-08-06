@@ -80,7 +80,7 @@
 	if(wrapper_color)
 		var/image/I = image(icon, "pillbottle_wrap")
 		I.color = wrapper_color
-		overlays += I
+		AddOverlays(I)
 
 
 /obj/item/storage/pill_bottle/antitox

@@ -110,7 +110,7 @@
 	ClearOverlays()
 	for(var/slot in swag)
 		var/obj/item/I = swag[slot]
-		overlays += I.get_mob_overlay(null, slot)
+		AddOverlays(I.get_mob_overlay(null, slot))
 
 /obj/structure/skele_stand/maint
 	name = "decayed skeleton model"

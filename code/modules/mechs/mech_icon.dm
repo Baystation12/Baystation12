@@ -95,7 +95,7 @@
 
 			LAZYADD(pilot_overlays, draw_pilot)
 		if(update_overlays && LAZYLEN(pilot_overlays))
-			overlays += pilot_overlays
+			AddOverlays(pilot_overlays)
 
 /mob/living/exosuit/regenerate_icons()
 	return

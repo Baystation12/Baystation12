@@ -57,7 +57,7 @@
 	if(active)
 		var/image/eye = overlay_image(icon, "[icon_state]_eye", flags=RESET_COLOR)
 		eye.color = eye_color
-		overlays += eye
+		AddOverlays(eye)
 
 /obj/item/clothing/glasses/eyepatch/hud/get_mob_overlay(mob/user_mob, slot)
 	var/image/res = ..()

@@ -161,7 +161,7 @@ var/global/list/image/fluidtrack_cache=list()
 
 		track.fresh=0
 		track.overlay=I
-		overlays += I
+		AddOverlays(I)
 
 /obj/effect/decal/cleanable/blood/tracks/footprints
 	name = "wet footprints"

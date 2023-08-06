@@ -22,10 +22,10 @@
 /obj/machinery/portable_atmospherics/cracker/on_update_icon()
 	ClearOverlays()
 	if(panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 	if(use_power == POWER_USE_ACTIVE)
-		overlays += emissive_appearance(icon, "[icon_state]_lights")
-		overlays += "[icon_state]_lights"
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
+		AddOverlays("[icon_state]_lights")
 
 /obj/machinery/portable_atmospherics/cracker/interface_interact(mob/user)
 	if(use_power == POWER_USE_IDLE)

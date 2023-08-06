@@ -14,7 +14,7 @@
 			icon_state = "wired"
 		if(/singleton/machine_construction/frame/awaiting_parts)
 			icon_state = "wired"
-			overlays += "circuit"
+			AddOverlays("circuit")
 		else
 			icon_state = "unwired"
 

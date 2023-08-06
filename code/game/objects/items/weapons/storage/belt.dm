@@ -29,7 +29,7 @@
 	ClearOverlays()
 	if(overlay_flags & BELT_OVERLAY_ITEMS)
 		for(var/obj/item/I in contents)
-			overlays += image('icons/obj/clothing/obj_belt_overlays.dmi', "[I.icon_state]")
+			AddOverlays(image('icons/obj/clothing/obj_belt_overlays.dmi', "[I.icon_state]"))
 
 /obj/item/storage/belt/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
@@ -95,9 +95,9 @@
 		for(var/obj/item/I in contents)
 			if(I == H.holstered)
 				if(overlay_flags & BELT_OVERLAY_HOLSTER)
-					overlays += image('icons/obj/clothing/obj_belt_overlays.dmi', "[I.icon_state]")
+					AddOverlays(image('icons/obj/clothing/obj_belt_overlays.dmi', "[I.icon_state]"))
 			else if(overlay_flags & BELT_OVERLAY_ITEMS)
-				overlays += image('icons/obj/clothing/obj_belt_overlays.dmi', "[I.icon_state]")
+				AddOverlays(image('icons/obj/clothing/obj_belt_overlays.dmi', "[I.icon_state]"))
 
 /obj/item/storage/belt/utility
 	name = "tool belt"

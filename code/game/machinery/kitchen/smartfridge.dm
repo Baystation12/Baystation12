@@ -222,10 +222,10 @@
 		icon_state = icon_base
 
 	if(is_secure)
-		overlays += image(icon, "[icon_base]-sidepanel")
+		AddOverlays(image(icon, "[icon_base]-sidepanel"))
 
 	if(panel_open)
-		overlays += image(icon, "[icon_base]-panel")
+		AddOverlays(image(icon, "[icon_base]-panel"))
 
 	var/image/I
 	var/is_off = ""
@@ -244,13 +244,13 @@
 			I = image(icon, "[icon_contents]-3[is_off]")
 		else
 			I = image(icon, "[icon_contents]-4[is_off]")
-	overlays += I
+	AddOverlays(I)
 
 	// Fridge top
 	I = image(icon, "[icon_base]-top")
 	I.pixel_z = 32
 	I.layer = ABOVE_WINDOW_LAYER
-	overlays += I
+	AddOverlays(I)
 
 /*******************
 *   Item Adding

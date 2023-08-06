@@ -674,7 +674,7 @@ var/global/list/slot_flags_enumeration = list(
 	//apply the blood-splatter overlay if it isn't already in there
 	if(!length(blood_DNA))
 		blood_overlay.color = blood_color
-		overlays += blood_overlay
+		AddOverlays(blood_overlay)
 
 	//if this blood isn't already in the list, add it
 	if(istype(M))

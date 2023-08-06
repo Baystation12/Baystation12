@@ -52,7 +52,7 @@
 	ClearOverlays()
 	if (deployed)
 		if (clothing)
-			overlays += clothing.appearance
+			AddOverlays(clothing.appearance)
 		if (iron)
 			icon_state = "[base_state]-up-iron"
 		else

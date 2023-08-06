@@ -157,7 +157,7 @@ var/global/list/tape_roll_applications = list()
 			overlay.icon_state = "start"
 		else
 			overlay.icon_state = "stop"
-		overlays += overlay
+		AddOverlays(overlay)
 
 /obj/item/taperoll/dropped(mob/user)
 	update_icon()

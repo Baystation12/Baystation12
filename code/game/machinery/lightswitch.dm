@@ -40,7 +40,7 @@
 	else
 		icon_state = "light[on]"
 		overlay.icon_state = "light[on]-overlay"
-		overlays += overlay
+		AddOverlays(overlay)
 		set_light(0.1, 0.1, 1, 2, on ? "#82ff4c" : "#f86060")
 
 /obj/machinery/light_switch/examine(mob/user, distance)

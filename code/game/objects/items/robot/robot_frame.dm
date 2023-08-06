@@ -23,7 +23,7 @@
 	ClearOverlays()
 	for(var/part in required_parts)
 		if(parts[part])
-			overlays += "[part]+o"
+			AddOverlays("[part]+o")
 
 /obj/item/robot_parts/robot_suit/proc/check_completion()
 	for(var/part in required_parts)

@@ -81,7 +81,7 @@
 /obj/machinery/sleeper/on_update_icon()
 	ClearOverlays()
 	if(panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 	if(!occupant)
 		icon_state = "sleeper"
 	else if(inoperable())

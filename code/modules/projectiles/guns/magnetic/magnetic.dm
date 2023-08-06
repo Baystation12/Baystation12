@@ -85,7 +85,7 @@
 			if(mag.remaining)
 				overlays_to_add += image(icon, "[icon_state]_ammo")
 
-	overlays += overlays_to_add
+	AddOverlays(overlays_to_add)
 
 /obj/item/gun/magnetic/proc/show_ammo(mob/user)
 	if(loaded)

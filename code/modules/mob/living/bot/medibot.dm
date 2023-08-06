@@ -87,7 +87,7 @@
 /mob/living/bot/medbot/update_icons()
 	ClearOverlays()
 	if(skin)
-		overlays += image('icons/mob/bot/medibot_skins.dmi', "medskin_[skin]")
+		AddOverlays(image('icons/mob/bot/medibot_skins.dmi', "medskin_[skin]"))
 	if(busy)
 		icon_state = "medibots"
 	else

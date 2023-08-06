@@ -121,7 +121,7 @@
 /obj/item/powerfist/on_update_icon()
 	..()
 	if (tank)
-		overlays += image(icon, "powerfist_tank")
+		AddOverlays(image(icon, "powerfist_tank"))
 	else
 		CutOverlays("powerfist_tank")
 

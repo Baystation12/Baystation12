@@ -91,7 +91,7 @@
 	if(furniture_icon)
 		var/image/I = image(icon, icon_state = furniture_icon)
 		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
-		overlays += I
+		AddOverlays(I)
 
 /obj/item/material/Destroy()
 	STOP_PROCESSING(SSobj, src)

@@ -80,16 +80,16 @@
 		return 1
 	if (last_pressure_delta > 0 && recent_moles_transferred > 0)
 		if (temperature_overlay)
-			overlays += emissive_appearance(icon, temperature_overlay)
-			overlays += image(icon, temperature_overlay)
+			AddOverlays(emissive_appearance(icon, temperature_overlay))
+			AddOverlays(image(icon, temperature_overlay))
 		if (last_pressure_delta > 5*ONE_ATMOSPHERE)
-			overlays += emissive_appearance(icon, "circ-run")
-			overlays += image(icon, "circ-run")
+			AddOverlays(emissive_appearance(icon, "circ-run"))
+			AddOverlays(image(icon, "circ-run"))
 		else
-			overlays += emissive_appearance(icon, "circ-slow")
-			overlays += image(icon, "circ-slow")
+			AddOverlays(emissive_appearance(icon, "circ-slow"))
+			AddOverlays(image(icon, "circ-slow"))
 	else
-		overlays += image(icon, "circ-off")
+		AddOverlays(image(icon, "circ-off"))
 
 	return 1
 

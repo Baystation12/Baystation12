@@ -135,13 +135,13 @@
 
 /obj/item/gun/energy/gun/nuclear/on_update_icon()
 	ClearOverlays()
-	overlays += get_charge_overlay()
-	overlays += get_reactor_overlay()
-	overlays += get_mode_overlay()
+	AddOverlays(get_charge_overlay())
+	AddOverlays(get_reactor_overlay())
+	AddOverlays(get_mode_overlay())
 	item_state = get_mode_overlay()
 
 	// Safety
 	if (ismob(loc))
 		var/mob/M = loc
 		if (M.skill_check(SKILL_WEAPONS, SKILL_BASIC))
-			overlays += image('icons/obj/guns/gui.dmi', "safety[safety()]")
+			AddOverlays(image('icons/obj/guns/gui.dmi', "safety[safety()]"))

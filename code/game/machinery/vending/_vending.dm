@@ -147,11 +147,11 @@
 		spawn(rand(0, 15))
 			icon_state = "[initial(icon_state)]-off"
 	if (panel_open || IsShowingAntag())
-		overlays += image(icon, "[initial(icon_state)]-panel")
+		AddOverlays(image(icon, "[initial(icon_state)]-panel"))
 	if (IsShowingAntag() && is_powered())
-		overlays += image(icon, "sparks")
+		AddOverlays(image(icon, "sparks"))
 	if (!vend_ready)
-		overlays += image(icon, "[initial(icon_state)]-shelf[rand(max_overlays)]")
+		AddOverlays(image(icon, "[initial(icon_state)]-shelf[rand(max_overlays)]"))
 
 
 /obj/machinery/vending/ex_act(severity)

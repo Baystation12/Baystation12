@@ -191,7 +191,7 @@
 	ClearOverlays()
 	icon_state = "[background_base_state]_spell_base"
 
-	overlays += ability_icon_state
+	AddOverlays(ability_icon_state)
 
 /obj/screen/ability/Click()
 	if(!usr)
@@ -370,7 +370,7 @@
 			if(spell.charge_counter > 0)
 				var/icon/partial_charge = icon(src.icon, "[spell_base]_spell_ready")
 				partial_charge.Crop(1, 1, partial_charge.Width(), round(partial_charge.Height() * spell.charge_counter / spell.charge_max))
-				overlays += partial_charge
+				AddOverlays(partial_charge)
 				if(last_charged_icon)
 					CutOverlays(last_charged_icon)
 				last_charged_icon = partial_charge
@@ -384,13 +384,13 @@
 	else
 		icon_state = "[spell_base]_spell_ready"
 
-	overlays += spell.hud_state
+	AddOverlays(spell.hud_state)
 
 	last_charge = spell.charge_counter
 
 	CutOverlays("silence")
 	if(spell.silenced)
-		overlays += "silence"
+		AddOverlays("silence")
 
 /obj/screen/ability/spell/on_update_icon(forced = 0)
 	update_charge(forced)

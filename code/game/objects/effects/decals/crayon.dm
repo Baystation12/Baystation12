@@ -18,6 +18,6 @@
 	var/icon/shadeOverlay = new/icon('icons/effects/crayondecal.dmi',"[type]s", 2.1)
 	mainOverlay.Blend(main,ICON_ADD)
 	shadeOverlay.Blend(shade,ICON_ADD)
-	overlays += mainOverlay
-	overlays += shadeOverlay
+	AddOverlays(mainOverlay)
+	AddOverlays(shadeOverlay)
 	add_hiddenprint(usr)

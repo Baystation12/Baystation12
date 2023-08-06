@@ -42,7 +42,7 @@
 		var/image/I = image('icons/obj/food/food.dmi', "[i][D.overlay_state]")
 		if(D.overlay_state == "box-donut1")
 			I.color = D.filling_color
-		overlays += I
+		AddOverlays(I)
 		i++
 
 /obj/item/storage/box/donut/empty

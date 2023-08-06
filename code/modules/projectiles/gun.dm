@@ -136,9 +136,9 @@
 				item_state_slots[slot_l_hand_str] = initial(item_state)
 				item_state_slots[slot_r_hand_str] = initial(item_state)
 		if(M.skill_check(gun_skill,SKILL_BASIC))
-			overlays += image('icons/obj/guns/gui.dmi',"safety[safety()]")
+			AddOverlays(image('icons/obj/guns/gui.dmi',"safety[safety()]"))
 	if(safety_icon)
-		overlays += image(icon,"[safety_icon][safety()]")
+		AddOverlays(image(icon,"[safety_icon][safety()]"))
 
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.

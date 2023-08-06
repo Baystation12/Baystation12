@@ -44,10 +44,10 @@
 /obj/machinery/ntnet_relay/on_update_icon()
 	ClearOverlays()
 	if(panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 	if(operable())
-		overlays += "[icon_state]_lights_working"
-		overlays += emissive_appearance(icon, "[icon_state]_lights_working")
+		AddOverlays("[icon_state]_lights_working")
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights_working"))
 
 /obj/machinery/ntnet_relay/Process()
 	if(operable())

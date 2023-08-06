@@ -180,6 +180,6 @@
 /obj/item/soap/on_update_icon()
 	ClearOverlays()
 	if(key_data)
-		overlays += image('icons/obj/soap.dmi', icon_state = "soap_key_overlay")
+		AddOverlays(image('icons/obj/soap.dmi', icon_state = "soap_key_overlay"))
 	else if(decal_name)
-		overlays +=	overlay_image(icon, "decal-[decal_name]")
+		AddOverlays(overlay_image(icon, "decal-[decal_name]"))

@@ -67,7 +67,7 @@
 /obj/item/swapper/on_update_icon()
 	CutOverlays("[icon_state]_[replacetext_char((tool_list[previous_tool]), " ", "_")]")
 
-	overlays += "[icon_state]_[replacetext_char(active_tool, " ", "_")]"
+	AddOverlays("[icon_state]_[replacetext_char(active_tool, " ", "_")]")
 
 /obj/item/swapper/power_drill
 	name = "hand drill"
