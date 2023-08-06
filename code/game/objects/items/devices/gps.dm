@@ -198,7 +198,7 @@ var/global/list/all_gps_units = list()
 		to_chat(loc, SPAN_NOTICE("\The [src] appears to be functional again."))
 
 /obj/item/device/gps/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(emped)
 		overlays.Add("gps_emp")
 	else if(tracking)

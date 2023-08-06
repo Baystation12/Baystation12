@@ -146,7 +146,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 
 /obj/item/reagent_containers/food/drinks/glass2/on_update_icon()
 	underlays.Cut()
-	overlays.Cut()
+	ClearOverlays()
 
 	if (length(reagents?.reagent_list))
 		var/datum/reagent/R = reagents.get_master_reagent()

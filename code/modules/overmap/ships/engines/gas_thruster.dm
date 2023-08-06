@@ -103,7 +103,7 @@
 	. = ..()
 
 /obj/machinery/atmospherics/unary/engine/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(is_on())
 		overlays += image_repository.overlay_image(icon, "nozzle_idle", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 

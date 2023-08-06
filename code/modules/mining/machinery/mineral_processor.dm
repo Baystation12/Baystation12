@@ -175,7 +175,7 @@
 		console.updateUsrDialog()
 
 /obj/machinery/mineral/processing_unit/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(active)
 		icon_state = "furnace_1"
 	else

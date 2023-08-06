@@ -171,7 +171,7 @@
 	return ..()
 
 /obj/item/stack/material/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(material_flags & USE_MATERIAL_COLOR)
 		color = material.icon_colour
 		alpha = 100 + max(1, amount/25)*(material.opacity * 255)

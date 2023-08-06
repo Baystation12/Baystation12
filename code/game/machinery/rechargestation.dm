@@ -151,7 +151,7 @@
 
 /obj/machinery/recharge_station/on_update_icon()
 	..()
-	overlays.Cut()
+	ClearOverlays()
 
 	if(panel_open)
 		overlays += "[icon_state]_panel"

@@ -38,7 +38,7 @@ field_generator power level display
 
 
 /obj/machinery/field_generator/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(!active)
 		if(warming_up)
 			overlays += emissive_appearance(icon, "+a[warming_up]")

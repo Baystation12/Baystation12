@@ -33,7 +33,7 @@
 	update_icon()
 
 /obj/item/device/integrated_electronics/detailer/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	var/image/detail_overlay = image('icons/obj/assemblies/electronic_tools.dmi',src, "detailer-color")
 	detail_overlay.color = detail_color
 	overlays += detail_overlay

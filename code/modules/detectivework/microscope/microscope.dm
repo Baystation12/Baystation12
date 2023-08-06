@@ -138,7 +138,7 @@
 		return ..()
 
 /obj/machinery/microscope/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
 		overlays += "[icon_state]_panel"
 	if(is_powered())

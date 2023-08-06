@@ -181,7 +181,7 @@
 		set_dir(turn(dir, -90))
 
 /obj/machinery/suspension_gen/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
 		overlays += "suspension_panel"
 	. = ..()

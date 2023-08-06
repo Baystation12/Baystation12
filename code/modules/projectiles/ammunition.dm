@@ -191,7 +191,7 @@
 
 
 /obj/item/ammo_magazine/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 
 	if (ammo_type == /obj/item/ammo_casing/pistol/rubber)
 		overlays += image(icon, "[initial(icon_state)]_r")

@@ -97,7 +97,7 @@
 	return 0
 
 /obj/machinery/power/smes/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(MACHINE_IS_BROKEN(src))	return
 
 	overlays += emissive_appearance(icon, "smes-op[outputting]")

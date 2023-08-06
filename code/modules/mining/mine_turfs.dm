@@ -66,7 +66,7 @@ var/global/list/mining_floors = list()
 	else
 		SetName("[mineral.ore_name] deposit")
 
-	overlays.Cut()
+	ClearOverlays()
 
 	for(var/direction in GLOB.cardinal)
 		var/turf/turf_to_check = get_step(src,direction)
@@ -512,7 +512,7 @@ var/global/list/mining_floors = list()
 
 /turf/simulated/floor/asteroid/proc/updateMineralOverlays(update_neighbors)
 
-	overlays.Cut()
+	ClearOverlays()
 
 	var/list/step_overlays = list("n" = NORTH, "s" = SOUTH, "e" = EAST, "w" = WEST)
 	for(var/direction in step_overlays)

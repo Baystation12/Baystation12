@@ -126,7 +126,7 @@
 
 /obj/item/gun/on_update_icon()
 	var/mob/living/M = loc
-	overlays.Cut()
+	ClearOverlays()
 	if(istype(M))
 		if(wielded_item_state)
 			if(M.can_wield_item(src) && src.is_held_twohanded(M))

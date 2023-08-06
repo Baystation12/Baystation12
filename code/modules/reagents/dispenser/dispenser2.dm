@@ -190,7 +190,7 @@
 	return TRUE
 
 /obj/machinery/chemical_dispenser/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(is_powered())
 		overlays += emissive_appearance(icon, "[icon_state]_lights")
 		overlays += "[icon_state]_lights"

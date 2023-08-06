@@ -104,7 +104,7 @@
 		add_fingerprint(target) //Add fingerprints of the person stuffed in.
 
 /obj/machinery/bodyscanner/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
 		overlays += "[icon_state]_panel"
 	if(!occupant)

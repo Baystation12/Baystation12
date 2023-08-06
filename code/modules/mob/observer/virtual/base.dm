@@ -42,7 +42,7 @@ var/global/list/all_virtual_listeners = list()
 		overlay_icons = list()
 		for(var/i_state in icon_states(icon))
 			overlay_icons[i_state] = image(icon = icon, icon_state = i_state)
-	overlays.Cut()
+	ClearOverlays()
 
 	if(abilities & VIRTUAL_ABILITY_HEAR)
 		overlays += overlay_icons["hear"]

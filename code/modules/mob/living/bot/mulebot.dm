@@ -301,7 +301,7 @@
 		return
 
 	busy = 1
-	overlays.Cut()
+	ClearOverlays()
 
 	load.forceMove(loc)
 	load.pixel_y -= 9

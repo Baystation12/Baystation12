@@ -51,13 +51,13 @@
 				my_mob.client.screen -= O
 //			O.handle_icon_updates = 0
 		showing = 0
-		overlays.Cut()
+		ClearOverlays()
 		overlays.Add(closed_state)
 	else if(forced_state != 1) // We're opening it, show the icons.
 		open_ability_master()
 		update_abilities(1)
 		showing = 1
-		overlays.Cut()
+		ClearOverlays()
 		overlays.Add(open_state)
 	update_icon()
 
@@ -188,7 +188,7 @@
 	return ..()
 
 /obj/screen/ability/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	icon_state = "[background_base_state]_spell_base"
 
 	overlays += ability_icon_state

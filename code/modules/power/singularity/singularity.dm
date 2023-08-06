@@ -133,7 +133,7 @@
 			dissipate_delay = 10
 			dissipate_track = 0
 			dissipate_strength = 1
-			overlays.Cut()
+			ClearOverlays()
 			if(chained)
 				overlays = list("chain_s1")
 			visible_message(SPAN_NOTICE("The singularity has shrunk to a rather pitiful size."))
@@ -150,7 +150,7 @@
 			dissipate_delay = 5
 			dissipate_track = 0
 			dissipate_strength = 5
-			overlays.Cut()
+			ClearOverlays()
 			if(chained)
 				overlays = list("chain_s3")
 			if(growing)
@@ -171,7 +171,7 @@
 				dissipate_delay = 4
 				dissipate_track = 0
 				dissipate_strength = 20
-				overlays.Cut()
+				ClearOverlays()
 				if(chained)
 					overlays = list("chain_s5")
 				if(growing)
@@ -192,7 +192,7 @@
 				dissipate_delay = 10
 				dissipate_track = 0
 				dissipate_strength = 10
-				overlays.Cut()
+				ClearOverlays()
 				if(chained)
 					overlays = list("chain_s7")
 				if(growing)
@@ -210,7 +210,7 @@
 			grav_pull = 10
 			consume_range = 4
 			dissipate = 0 //It can't go smaller due to e loss.
-			overlays.Cut()
+			ClearOverlays()
 			if(chained)
 				overlays = list("chain_s9")
 			if(growing)
@@ -457,7 +457,7 @@
 
 /obj/singularity/proc/on_capture()
 	chained = 1
-	overlays.Cut()
+	ClearOverlays()
 	move_self = 0
 	switch (current_size)
 		if(1)
@@ -473,7 +473,7 @@
 
 /obj/singularity/proc/on_release()
 	chained = 0
-	overlays.Cut()
+	ClearOverlays()
 	move_self = 1
 
 /obj/singularity/singularity_act(S, size)

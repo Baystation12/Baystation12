@@ -76,7 +76,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	..()
 
 /obj/machinery/r_n_d/circuit_imprinter/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
 		overlays += "[icon_state]_panel"
 	if(is_powered())

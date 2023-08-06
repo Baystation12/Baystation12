@@ -40,7 +40,7 @@
 
 
 /obj/item/reagent_containers/glass/bottle/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (reagents.total_volume && (icon_state == "bottle-1" || icon_state == "bottle-2" || icon_state == "bottle-3" || icon_state == "bottle-4"))
 		var/image/filling = image('icons/obj/reagentfillings.dmi', src, "[icon_state]10")
 		var/percent = round((reagents.total_volume / volume) * 100)

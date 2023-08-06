@@ -76,7 +76,7 @@
 
 
 /obj/item/storage/pill_bottle/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(wrapper_color)
 		var/image/I = image(icon, "pillbottle_wrap")
 		I.color = wrapper_color

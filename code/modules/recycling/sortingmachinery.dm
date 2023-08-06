@@ -108,7 +108,7 @@
 
 
 /obj/structure/bigDelivery/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(nameset || examtext)
 		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_label")
 		if(icon_state == "deliverycloset")
@@ -267,7 +267,7 @@
 	return
 
 /obj/item/smallDelivery/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if((nameset || examtext) && icon_state != "deliverycrate1")
 		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_label")
 		if(icon_state == "deliverycrate5")

@@ -216,7 +216,7 @@
 
 /obj/item/weldingtool/on_update_icon()
 	..()
-	overlays.Cut()
+	ClearOverlays()
 	if(tank)
 		overlays += image('icons/obj/tools/welder.dmi', "welder_[tank.icon_state]")
 	if(welding)

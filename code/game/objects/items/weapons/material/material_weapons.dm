@@ -84,7 +84,7 @@
 		update_icon()
 
 /obj/item/material/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(applies_material_colour && istype(material))
 		color = material.icon_colour
 		alpha = 100 + material.opacity * 255

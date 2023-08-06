@@ -82,7 +82,7 @@
 
 /obj/item/material/knife/folding/swiss/on_update_icon()
 	if(active_tool != null)
-		overlays.Cut()
+		ClearOverlays()
 		overlays += overlay_image(icon, active_tool, flags=RESET_COLOR)
 		item_state = initial(item_state)
 		if(active_tool == SWISSKNF_LBLADE || active_tool == SWISSKNF_SBLADE)

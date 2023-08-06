@@ -10,7 +10,7 @@
 	if(icon_state != "ghost-narsie")
 		icon = 'icons/mob/mob.dmi'
 		icon_state = "ghost-narsie"
-		overlays.Cut()
+		ClearOverlays()
 		set_invisibility(0)
 		to_chat(src, SPAN_CLASS("sinister", "Even as a non-corporal being, you can feel Nar-Sie's presence altering you. You are now visible to everyone."))
 

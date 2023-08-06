@@ -151,7 +151,7 @@
 
 /obj/machinery/ship_map/on_update_icon()
 	. = ..()
-	overlays.Cut()
+	ClearOverlays()
 	if(MACHINE_IS_BROKEN(src))
 		icon_state = "station_mapb"
 		set_light(0)
@@ -250,7 +250,7 @@
 /obj/screen/legend/proc/Setup(z_level)
 	has_areas = FALSE
 	//Get the areas for this z level and mark if we're empty
-	overlays.Cut()
+	ClearOverlays()
 	for(var/area/A in SSminimap.holomaps[z_level].holomap_areas)
 		if(A.holomap_color == saved_color)
 			var/image/area = image(SSminimap.holomaps[z_level].holomap_areas[A])

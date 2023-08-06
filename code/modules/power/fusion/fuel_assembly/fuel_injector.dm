@@ -26,7 +26,7 @@
 	. = ..()
 
 /obj/machinery/fusion_fuel_injector/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
 		overlays += "[icon_state]_panel"
 	if(injecting && cur_assembly)

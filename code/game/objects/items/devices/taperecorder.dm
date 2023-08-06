@@ -417,7 +417,7 @@
 
 
 /obj/item/device/tape/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(ruined && max_capacity)
 		overlays += "ribbonoverlay"
 

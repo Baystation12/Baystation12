@@ -509,7 +509,7 @@ BLIND     // can't see anything
 
 
 /obj/item/clothing/head/on_update_icon(mob/user)
-	overlays.Cut()
+	ClearOverlays()
 	if (on && light_overlay)
 		overlays += get_obj_light_overlay(light_overlay)
 	if(istype(user,/mob/living/carbon/human))

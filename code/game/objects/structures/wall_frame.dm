@@ -136,7 +136,7 @@
 // icon related
 
 /obj/structure/wall_frame/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	var/image/I
 
 	var/new_color = (paint_color ? paint_color : material.icon_colour)

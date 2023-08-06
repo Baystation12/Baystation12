@@ -117,7 +117,7 @@
 
 /obj/machinery/drone_pad/on_update_icon()
 	. = ..()
-	overlays.Cut()
+	ClearOverlays()
 	if (current_flight)
 		overlays += emissive_appearance(icon, "pad_incoming") //we cut the hole, and...
 		overlays += image(icon, "pad_incoming") // add the actual image

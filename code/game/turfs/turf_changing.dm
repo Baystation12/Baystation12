@@ -54,7 +54,7 @@
 
 	if(connections) connections.erase_all()
 
-	overlays.Cut()
+	ClearOverlays()
 	underlays.Cut()
 	if(istype(src,/turf/simulated))
 		//Yeah, we're just going to rebuild the whole thing.

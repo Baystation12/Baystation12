@@ -51,7 +51,7 @@
 
 
 /obj/machinery/atmospherics/unary/heater/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
 		overlays += "freezer_panel" //Reuse the freezer icons because no point in creating duplicates for essentially the same machine.
 	if(is_powered())

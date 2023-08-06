@@ -332,7 +332,7 @@
 	return 0
 
 /obj/machinery/alarm/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	icon_state = "alarmp"
 	if(wiresexposed)
 		icon_state = "alarmx"
@@ -933,7 +933,7 @@ FIRE ALARM
 	return overlays_cache[state]
 
 /obj/machinery/firealarm/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 
 	pixel_x = 0
 	pixel_y = 0

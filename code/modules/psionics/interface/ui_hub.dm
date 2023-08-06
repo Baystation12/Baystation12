@@ -26,7 +26,7 @@
 	if(world.time < owner.psi.next_power_use)
 		overlays |= on_cooldown
 	else
-		overlays.Cut()
+		ClearOverlays()
 	var/offset = 1
 	for(var/thing in components)
 		var/obj/screen/psi/component = thing

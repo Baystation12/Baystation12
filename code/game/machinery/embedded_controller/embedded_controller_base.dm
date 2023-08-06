@@ -63,7 +63,7 @@
 	..()
 
 /obj/machinery/embedded_controller/radio/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(!on || !istype(program))
 		return
 	if(!program.memory["processing"])

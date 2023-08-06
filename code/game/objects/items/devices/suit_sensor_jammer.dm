@@ -79,7 +79,7 @@
 
 
 /obj/item/device/suit_sensor_jammer/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(bcell)
 		var/percent = bcell.percent()
 		switch(percent)

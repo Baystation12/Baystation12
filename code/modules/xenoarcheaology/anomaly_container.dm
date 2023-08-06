@@ -218,7 +218,7 @@
 	return ..()
 
 /obj/machinery/anomaly_container/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(health_dead)
 		icon_state = "anomaly_container_broken"
 	if(attached_paper)

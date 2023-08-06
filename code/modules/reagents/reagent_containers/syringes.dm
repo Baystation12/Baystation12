@@ -76,7 +76,7 @@
 	handleTarget(target, user)
 
 /obj/item/reagent_containers/syringe/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	underlays.Cut()
 
 	if(mode == SYRINGE_BROKEN)

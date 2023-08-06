@@ -127,7 +127,7 @@
 	if (!node)
 		return
 
-	overlays.Cut()
+	ClearOverlays()
 
 	var/vent_icon = "vent"
 

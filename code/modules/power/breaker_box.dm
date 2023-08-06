@@ -132,7 +132,7 @@
 			update_locked = 0
 
 /obj/machinery/power/breakerbox/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
 		overlays += "[icon_state]_panel"
 	if(on)

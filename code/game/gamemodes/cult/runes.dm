@@ -20,7 +20,7 @@
 	set_extension(src, /datum/extension/turf_hand, 10)
 
 /obj/effect/rune/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(GLOB.cult.rune_strokes[type])
 		var/list/f = GLOB.cult.rune_strokes[type]
 		for(var/i in f)

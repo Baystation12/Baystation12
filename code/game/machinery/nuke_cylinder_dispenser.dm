@@ -64,7 +64,7 @@
 		add_fingerprint(usr)
 
 /obj/machinery/nuke_cylinder_dispenser/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(length(cylinders))
 		overlays += "rods_[length(cylinders)]"
 	if(!open)

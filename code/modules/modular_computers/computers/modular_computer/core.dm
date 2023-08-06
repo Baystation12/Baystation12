@@ -79,7 +79,7 @@
 /obj/item/modular_computer/on_update_icon()
 	icon_state = icon_state_unpowered
 
-	overlays.Cut()
+	ClearOverlays()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
 		overlays += os.get_screen_overlay()

@@ -24,7 +24,7 @@
 	update_icon()
 
 /obj/machinery/body_scanconsole/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
 		overlays += "[icon_state]_panel"
 	if(!connected.inoperable())

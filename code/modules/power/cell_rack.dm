@@ -47,7 +47,7 @@
 	return ..()
 
 /obj/machinery/power/smes/batteryrack/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	icon_update = 0
 
 	var/cellcount = 0

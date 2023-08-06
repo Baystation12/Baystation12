@@ -65,7 +65,7 @@
 
 /obj/item/reagent_containers/food/snacks/csandwich/proc/update()
 	var/i = 0
-	overlays.Cut()
+	ClearOverlays()
 
 	filling_color = null
 	var/list/ingredient_names = list()

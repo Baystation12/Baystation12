@@ -44,7 +44,7 @@ var/global/photo_count = 0
 	examinate(user, src)
 
 /obj/item/photo/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	var/scale = 8/(photo_size*32)
 	var/image/small_img = image(img)
 	small_img.SetTransform(scale = scale)

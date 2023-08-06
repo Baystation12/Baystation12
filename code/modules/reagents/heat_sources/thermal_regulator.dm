@@ -114,7 +114,7 @@
 	return ..()
 
 /obj/machinery/reagent_temperature/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 
 	var/list/adding_overlays
 

@@ -39,7 +39,7 @@
 		icon_state = "up"
 	else
 		icon_state = "down"
-	overlays.Cut()
+	ClearOverlays()
 	if (!iv_bag)
 		return
 	var/image/drip_overlay = image(icon, icon_state = "drip[drip_active]")

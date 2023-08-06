@@ -107,7 +107,7 @@
 	. = ..()
 
 /obj/structure/skele_stand/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	for(var/slot in swag)
 		var/obj/item/I = swag[slot]
 		overlays += I.get_mob_overlay(null, slot)

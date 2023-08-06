@@ -427,7 +427,7 @@
 
 
 /obj/structure/door_assembly/proc/update_state()
-	overlays.Cut()
+	ClearOverlays()
 	var/image/filling_overlay
 	var/image/panel_overlay
 	var/final_name = ""

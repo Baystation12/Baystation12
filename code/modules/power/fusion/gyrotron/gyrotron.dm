@@ -48,7 +48,7 @@
 	return E
 
 /obj/machinery/power/emitter/gyrotron/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
 		overlays += "[icon_state]_panel"
 	if (active && powernet && avail(active_power_usage))

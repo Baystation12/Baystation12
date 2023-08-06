@@ -183,7 +183,7 @@
 	return TRUE
 
 /obj/machinery/mining/drill/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
 		overlays += "mining_drill_panel"
 	if(need_player_check)

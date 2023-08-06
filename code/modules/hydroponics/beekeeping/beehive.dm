@@ -19,7 +19,7 @@
 	update_icon()
 
 /obj/machinery/beehive/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	icon_state = "beehive-[closed]"
 	if(closed)
 		overlays += "lid"
@@ -294,14 +294,14 @@ var/global/list/datum/stack_recipe/wax_recipes = list(
 	full = 0
 	name = "empty bee pack"
 	desc = "A stasis pack for moving bees. It's empty."
-	overlays.Cut()
+	ClearOverlays()
 	overlays += "beepack-empty"
 
 /obj/item/bee_pack/proc/fill()
 	full = initial(full)
 	SetName(initial(name))
 	desc = initial(desc)
-	overlays.Cut()
+	ClearOverlays()
 	overlays += "beepack-full"
 
 /obj/structure/closet/crate/hydroponics/beekeeping

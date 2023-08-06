@@ -19,7 +19,7 @@
 	playsound(src, 'sound/weapons/wave.ogg', 100)
 
 /obj/item/grenade/supermatter/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(implode_at)
 		overlays += image(icon = 'icons/obj/machines/power/fusion_field.dmi', icon_state = "emfield_s1")
 

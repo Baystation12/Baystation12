@@ -144,7 +144,7 @@
 
 
 /obj/item/device/suit_cooling_unit/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (cover_open)
 		if (cell)
 			icon_state = "suitcooler1"

@@ -20,7 +20,7 @@
 	var/deuterium_generation_amount = 1
 
 /obj/machinery/portable_atmospherics/cracker/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
 		overlays += "[icon_state]_panel"
 	if(use_power == POWER_USE_ACTIVE)

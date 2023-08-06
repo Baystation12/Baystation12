@@ -24,7 +24,7 @@
 	update_icon()
 
 /obj/structure/rubble/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	var/list/parts = list()
 	for(var/i = 1 to 7)
 		var/image/I = image(icon,"rubble[rand(1,15)]")

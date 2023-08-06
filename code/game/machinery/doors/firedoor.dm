@@ -488,7 +488,7 @@
 	var/icon/panel_overlay
 	var/icon/weld_overlay
 
-	overlays.Cut()
+	ClearOverlays()
 	set_light(0)
 	var/do_set_light = FALSE
 
