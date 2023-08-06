@@ -14,23 +14,22 @@
 	)
 
 /obj/item/storage/fancy/smokable/case/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	icon_state = "[initial(icon_state)][opened ? "0" : ""]"
 	if (!opened)
 		return
 	for (var/i = 1 to length(contents))
 		if (istype(contents[i], /obj/item/clothing/mask/smokable/cigarette))
-			overlays += image(icon, "cig[i]")
+			AddOverlays(image(icon, "cig[i]"))
 		else if (istype(contents[i], /obj/item/material/coin))
 			var/obj/item/material/coin/C = contents[i]
 			var/image/I = image(icon, "colorcoin[i]")
 			if (C.applies_material_colour)
 				var/material/M = C.material
 				I.color = M.icon_colour
-				overlays += I
 			else
 				I.color = COLOR_GOLD
-				overlays += I
+			AddOverlays(I)
 
 
 /obj/item/storage/fancy/smokable/transstellar
