@@ -130,11 +130,10 @@
 
 /atom/movable/Initialize()
 	. = ..()
-	var/emissive_block = update_emissive_blocker()
-	if(emissive_block)
-		overlays += emissive_block
-		// Since this overlay is managed by the update_overlays proc
-		LAZYADD(managed_overlays, emissive_block)
+	update_emissive_blocker()
+	if (em_block)
+		AddOverlays(em_block)
+
 
 /atom/movable/Destroy()
 	if(!(atom_flags & ATOM_FLAG_INITIALIZED))
@@ -269,28 +268,31 @@
 
 	SSthrowing.processing[src] = TT
 
-/atom/movable/proc/update_emissive_blocker()
-	if (!blocks_emissive)
-		return
-	if (blocks_emissive == EMISSIVE_BLOCK_GENERIC)
-		return fast_emissive_blocker(src)
-	if (blocks_emissive == EMISSIVE_BLOCK_UNIQUE)
-		if (!em_block && !QDELETED(src))
-			appearance_flags |= KEEP_TOGETHER
-			render_target = ref(src)
-			var/mutable_appearance/gen_emissive_blocker = emissive_blocker(
-				icon = icon,
-				appearance_flags = appearance_flags,
-				source = render_target
-			)
-			em_block = gen_emissive_blocker
-		return em_block
 
-/atom/movable/update_overlays()
-	. = ..()
-	var/emissive_blocker = update_emissive_blocker()
-	if (emissive_blocker)
-		. += emissive_blocker
+/atom/movable/proc/update_emissive_blocker()
+	switch (blocks_emissive)
+		if (EMISSIVE_BLOCK_GENERIC)
+			em_block = fast_emissive_blocker(src)
+		if (EMISSIVE_BLOCK_UNIQUE)
+			if (!em_block && !QDELING(src))
+				appearance_flags |= KEEP_TOGETHER
+				render_target = ref(src)
+				em_block = emissive_blocker(
+					icon = icon,
+					appearance_flags = appearance_flags,
+					source = render_target
+				)
+	return em_block
+
+
+/atom/movable/update_icon()
+	..()
+	if (em_block)
+		CutOverlays(em_block)
+	update_emissive_blocker()
+	if (em_block)
+		AddOverlays(em_block)
+
 
 //Overlays
 /atom/movable/overlay
