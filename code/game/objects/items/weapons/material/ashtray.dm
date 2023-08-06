@@ -22,9 +22,9 @@
 	..()
 	ClearOverlays()
 	if (length(contents) == max_butts)
-		overlays |= image('icons/obj/ashtray.dmi',"ashtray_full")
+		AddOverlays(image('icons/obj/ashtray.dmi',"ashtray_full"))
 	else if (length(contents) >= max_butts/2)
-		overlays |= image('icons/obj/ashtray.dmi',"ashtray_half")
+		AddOverlays(image('icons/obj/ashtray.dmi',"ashtray_half"))
 
 /obj/item/material/ashtray/attackby(obj/item/W as obj, mob/user as mob)
 	if (health_dead())

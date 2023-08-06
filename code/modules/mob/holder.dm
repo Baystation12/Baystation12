@@ -111,7 +111,7 @@ var/global/list/holder_mob_icon_cache = list()
 	color = M.color
 	name = M.name
 	desc = M.desc
-	overlays |= M.overlays
+	AddOverlays(M.overlays)
 	var/mob/living/carbon/human/H = loc
 	last_holder = H
 	if (M.pulledby)

@@ -198,9 +198,9 @@
 /turf/simulated/floor/exoplanet/concrete/on_update_icon()
 	ClearOverlays()
 	if(burnt)
-		overlays |= get_damage_overlay("burned[(x + y) % 3]", BLEND_MULTIPLY)
+		AddOverlays(get_damage_overlay("burned[(x + y) % 3]", BLEND_MULTIPLY))
 	if(broken)
-		overlays |= get_damage_overlay("broken[(x + y) % 5]", BLEND_MULTIPLY)
+		AddOverlays(get_damage_overlay("broken[(x + y) % 5]", BLEND_MULTIPLY))
 
 /turf/simulated/floor/exoplanet/concrete/melt()
 	burnt = TRUE

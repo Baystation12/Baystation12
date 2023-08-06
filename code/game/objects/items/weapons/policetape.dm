@@ -64,7 +64,7 @@ var/global/list/tape_roll_applications = list()
 	if(detail_overlay)
 		var/image/I = overlay_image(icon, "[new_state]_[detail_overlay]", flags=RESET_COLOR)
 		I.color = detail_color
-		overlays |= I
+		AddOverlays(I)
 
 /obj/item/taperoll/police
 	name = "police tape"

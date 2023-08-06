@@ -50,7 +50,7 @@ var/global/photo_count = 0
 	small_img.SetTransform(scale = scale)
 	small_img.pixel_x = -32*(photo_size-1)/2 - 3
 	small_img.pixel_y = -32*(photo_size-1)/2
-	overlays |= small_img
+	AddOverlays(small_img)
 
 	tiny = image(img)
 	tiny.SetTransform(scale = 0.5 * scale)

@@ -211,7 +211,7 @@
 
 	ClearOverlays()
 	if(shackle)
-		overlays |= image('icons/obj/assemblies/assemblies.dmi', "posibrain-shackles")
+		AddOverlays(image('icons/obj/assemblies/assemblies.dmi', "posibrain-shackles"))
 
 /obj/item/organ/internal/posibrain/proc/transfer_identity(mob/living/carbon/H)
 	if(H && H.mind)

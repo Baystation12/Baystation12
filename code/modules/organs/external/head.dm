@@ -119,15 +119,16 @@
 
 			// Floating eyes or other effects.
 			var/image/eye_glow = get_eye_overlay()
-			if(eye_glow) overlays |= eye_glow
+			if(eye_glow)
+				AddOverlays(eye_glow)
 
 		if(owner.makeup_style && !BP_IS_ROBOTIC(src) && (species && (species.appearance_flags & SPECIES_APPEARANCE_HAS_LIPS)))
 			var/mutable_appearance/lip_appearance = mutable_appearance('icons/mob/human_races/species/human/lips.dmi', "lips_[owner.makeup_style]_s",flags = DEFAULT_APPEARANCE_FLAGS)
 			mob_overlays |= lip_appearance
 
 	SetOverlays(mob_overlays)
-
-	overlays |= get_hair_icon() //Hair is handled separately for mob icon so we do not add it to mob_overlays Maybe this should change sometime
+	var/hair_icon = get_hair_icon()
+	AddOverlays(hair_icon)
 
 /obj/item/organ/external/head/proc/get_hair_icon()
 	var/image/res = image(species.icon_template,"")

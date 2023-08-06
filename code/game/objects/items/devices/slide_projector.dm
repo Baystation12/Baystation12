@@ -174,7 +174,7 @@
 	MA.alpha = 170
 	MA.pixel_x = 0
 	MA.pixel_y = 0
-	overlays |= MA
+	AddOverlays(MA)
 
 /obj/effect/projection/proc/set_source(obj/item/I)
 	source = weakref(I)

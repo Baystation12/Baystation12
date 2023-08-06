@@ -123,7 +123,7 @@ var/global/list/floor_light_cache = list()
 				I.plane = plane
 				I.layer = layer+0.001
 				floor_light_cache[cache_key] = I
-			overlays |= floor_light_cache[cache_key]
+			AddOverlays(floor_light_cache[cache_key])
 		else
 			if(damaged == 0) //Needs init.
 				damaged = rand(1,4)
@@ -134,7 +134,7 @@ var/global/list/floor_light_cache = list()
 				I.plane = plane
 				I.layer = layer+0.001
 				floor_light_cache[cache_key] = I
-			overlays |= floor_light_cache[cache_key]
+			AddOverlays(floor_light_cache[cache_key])
 	update_brightness()
 
 /obj/machinery/floor_light/ex_act(severity)

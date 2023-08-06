@@ -67,7 +67,7 @@
 			set_density(0)
 		set_opacity(0)
 
-	overlays |= new_overlays
+	AddOverlays(new_overlays)
 
 	// Update bioluminescence.
 	if(seed && seed.get_trait(TRAIT_BIOLUM))

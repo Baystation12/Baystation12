@@ -47,8 +47,8 @@ var/global/list/plant_seed_sprites = list()
 		seed_overlay.color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
 		plant_seed_sprites[seed_overlay_key] = seed_overlay
 
-	overlays |= seed_mask
-	overlays |= seed_overlay
+	AddOverlays(seed_mask)
+	AddOverlays(seed_overlay)
 
 	if(is_seeds)
 		src.SetName("packet of [seed.seed_name] [seed.seed_noun]")
