@@ -19,7 +19,6 @@
 	machine_desc = "Autolathes can produce a very wide array of useful objects from raw materials."
 
 	var/has_recycler = TRUE
-	var/list/material_overlays = list()
 	var/base_icon_state = "autolathe"
 	var/image/panel_image
 
@@ -108,9 +107,6 @@
 	else if(is_powered())
 		AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
 		AddOverlays("[icon_state]_lights")
-
-	var/list/new_overlays = material_overlays.Copy()
-	AddOverlays(new_overlays)
 
 /obj/machinery/fabricator/proc/remove_mat_overlay(mat_overlay)
 	CutOverlays(mat_overlay)
