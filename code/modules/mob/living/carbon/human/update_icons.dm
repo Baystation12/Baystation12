@@ -300,7 +300,7 @@ var/global/list/damage_icon_parts = list()
 		else
 			DI = damage_icon_parts[cache_index]
 
-		standing_image.overlays += DI
+		standing_image.AddOverlays(DI)
 
 	overlays_standing[HO_DAMAGE_LAYER]	= standing_image
 	update_bandages(update_icons)
@@ -318,7 +318,7 @@ var/global/list/damage_icon_parts = list()
 				continue
 			var/bandage_level = O.bandage_level()
 			if(bandage_level)
-				standing_image.overlays += image(bandage_icon, "[O.icon_name][bandage_level]")
+				standing_image.AddOverlays(image(bandage_icon, "[O.icon_name][bandage_level]"))
 
 		overlays_standing[HO_DAMAGE_LAYER]	= standing_image
 	if(update_icons)
@@ -435,7 +435,7 @@ var/global/list/damage_icon_parts = list()
 	for(var/mut in mutations)
 		switch(mut)
 			if(MUTATION_LASER)
-				standing.overlays	+= "lasereyes_s"
+				standing.AddOverlays("lasereyes_s")
 				add_image = 1
 	if(add_image)
 		overlays_standing[HO_MUTATIONS_LAYER]	= standing
@@ -537,9 +537,9 @@ var/global/list/damage_icon_parts = list()
 		// Blank image upon which to layer left & right overlays.
 		var/image/both = image("icon" = 'icons/effects/effects.dmi', "icon_state" = "nothing")
 		if(l_ear)
-			both.overlays += l_ear.get_mob_overlay(src,slot_l_ear_str)
+			both.AddOverlays(l_ear.get_mob_overlay(src,slot_l_ear_str))
 		if(r_ear)
-			both.overlays += r_ear.get_mob_overlay(src,slot_r_ear_str)
+			both.AddOverlays(r_ear.get_mob_overlay(src,slot_r_ear_str))
 		overlays_standing[HO_EARS_LAYER] = both
 
 	else
@@ -803,7 +803,7 @@ var/global/list/damage_icon_parts = list()
 		overlay_state = "[base_state]-bones"
 		if(overlay_state in surgery_states)
 			LAZYADD(overlays_to_add, image(icon = surgery_icon, icon_state = overlay_state, layer = -HO_SURGERY_LAYER))
-		total.overlays |= overlays_to_add
+		total.AddOverlays(overlays_to_add)
 
 	total.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 	overlays_standing[HO_SURGERY_LAYER] = total

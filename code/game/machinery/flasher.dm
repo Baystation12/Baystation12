@@ -131,7 +131,7 @@
 
 		else if (src.anchored)
 			user.show_message(text(SPAN_WARNING("[src] is now secured.")))
-			src.overlays += "[base_state]-s"
+			AddOverlays("[base_state]-s")
 
 /obj/machinery/button/flasher
 	name = "flasher button"

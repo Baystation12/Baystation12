@@ -97,7 +97,7 @@
 		if(istype(scanned, /obj/machinery/atmospherics/pipe))
 			var/obj/machinery/atmospherics/pipe/P = scanned
 			I.color = P.pipe_color
-			I.overlays += P.overlays
+			I.CopyOverlays(P)
 			I.underlays += P.underlays
 
 		if(ismob(scanned))
@@ -109,7 +109,7 @@
 					I.icon_state = "phaseout"
 			var/mob/M = scanned
 			I.color = M.color
-			I.overlays += M.overlays
+			I.CopyOverlays(M)
 			I.underlays += M.underlays
 
 		I.alpha = 128

@@ -44,7 +44,7 @@
 	..()
 	if(toppaper)
 		AddOverlays(overlay_image(toppaper.icon, toppaper.icon_state, flags=RESET_COLOR))
-		AddOverlays(toppaper.overlays)
+		CopyOverlays(toppaper)
 	if(haspen)
 		AddOverlays(overlay_image(icon, "clipboard_pen", flags=RESET_COLOR))
 	AddOverlays(overlay_image(icon, "clipboard_over", flags=RESET_COLOR))

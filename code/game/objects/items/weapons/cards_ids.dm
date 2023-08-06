@@ -235,7 +235,8 @@ var/global/const/NO_EMAG_ACT = -50
 
 /obj/item/card/id/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
-	ret.overlays += overlay_image(ret.icon, "[ret.icon_state]_colors", detail_color, RESET_COLOR)
+	var/overlay = overlay_image(ret.icon, "[ret.icon_state]_colors", detail_color, RESET_COLOR)
+	ret.AddOverlays(overlay)
 	return ret
 
 /obj/item/card/id/on_update_icon()

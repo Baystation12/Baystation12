@@ -398,9 +398,9 @@
 	station_map.vis_contents.Cut()
 
 	if(z == z_levels[displayed_level])
-		station_map.overlays += cursor
+		station_map.AddOverlays(cursor)
 
-	station_map.overlays += levels["[z_levels[displayed_level]]"]
+	station_map.AddOverlays(levels["[z_levels[displayed_level]]"])
 	station_map.vis_contents += maptexts["[z_levels[displayed_level]]"]
 
 	//Fix legend position
@@ -429,6 +429,7 @@
 
 /datum/station_holomap/proc/initialize_holomap_bogus()
 	station_map = image('icons/480x480.dmi', "stationmap")
-	station_map.overlays |= image('icons/effects/64x64.dmi', "notfound", pixel_x = 7 * WORLD_ICON_SIZE, pixel_y = 7 * WORLD_ICON_SIZE)
+	var/notfound = image('icons/effects/64x64.dmi', "notfound", pixel_x = 7 * WORLD_ICON_SIZE, pixel_y = 7 * WORLD_ICON_SIZE)
+	station_map.AddOverlays(notfound)
 
 #undef HOLOMAP_LEGEND_STYLING

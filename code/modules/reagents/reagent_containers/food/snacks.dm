@@ -162,7 +162,7 @@
 			U.loaded = "[src]"
 			var/image/I = new(U.icon, "loadedfood")
 			I.color = src.filling_color
-			U.overlays += I
+			U.AddOverlays(I)
 
 			if(!reagents)
 				crash_with("A snack [type] failed to have a reagent holder when attacked with a [W.type]. It was [QDELETED(src) ? "" : "not"] being deleted.")
@@ -215,7 +215,7 @@
 					S.filling_color = filling_color
 					var/image/I = image(S.icon, "[S.icon_state]_filling")
 					I.color = filling_color
-					S.overlays += I
+					S.AddOverlays(I)
 
 			qdel(src)
 			return
@@ -3054,7 +3054,7 @@
 		C.filling_color = F.filling_color
 		var/image/I = image(C.icon, "customburger_filling")
 		I.color = F.filling_color
-		C.overlays += I
+		C.AddOverlays(I)
 		F.reagents.trans_to_obj(C, F.reagents.total_volume)
 		to_chat(user, "You make \a [C].")
 		qdel(F)

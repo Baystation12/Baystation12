@@ -34,7 +34,7 @@ var/global/list/floor_decals = list()
 			if(detail_overlay)
 				var/image/B = overlay_image(icon, "[detail_overlay]", flags=RESET_COLOR)
 				B.color = detail_color
-				I.overlays |= B
+				I.AddOverlays(B)
 			floor_decals[cache_key] = I
 		LAZYADD(T.decals, floor_decals[cache_key])
 		T.queue_icon_update()

@@ -140,7 +140,7 @@
 					var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
 					if(facial_hair_style.do_coloration & DO_COLORATION_USER)
 						facial_s.Blend(owner.facial_hair_color, facial_hair_style.blend)
-					res.overlays |= facial_s
+					res.AddOverlays(facial_s)
 
 	if (owner?.head_hair_style)
 		var/icon/HI
@@ -166,7 +166,7 @@
 			for (var/entry in sorted_hair_markings)
 				HI.Blend(entry[2], ICON_OVERLAY)
 			//TODO : Add emissive blocker here if hair should block it. Else, leave as is
-			res.overlays |= HI
+			res.AddOverlays(HI)
 
 	var/list/sorted_head_markings = list()
 	for (var/E in markings)
@@ -203,7 +203,7 @@
 				)
 			ADD_SORTED(sorted_head_markings, list(list(M.draw_order, I)), /proc/cmp_marking_order)
 	for (var/entry in sorted_head_markings)
-		res.overlays |= entry[2]
+		res.AddOverlays(entry[2])
 
 	return res
 

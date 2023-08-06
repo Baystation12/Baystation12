@@ -781,7 +781,7 @@
 				else if(no_damage)
 					health_images += image('icons/mob/screen1_health.dmi',"fullhealth")
 
-				healths.overlays += health_images
+				healths.AddOverlays(health_images)
 
 		if(nutrition_icon)
 			switch(nutrition)

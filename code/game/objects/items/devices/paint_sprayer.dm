@@ -88,7 +88,7 @@
 /obj/item/device/paint_sprayer/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	var/image/overlay = overlay_image(ret.icon, "paint_sprayer_color", paint_color)
-	ret.overlays += overlay
+	ret.AddOverlays(overlay)
 	return ret
 
 /obj/item/device/paint_sprayer/on_active_hand(mob/user)

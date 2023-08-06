@@ -270,7 +270,7 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 			limb_icon_cache[cache_key] = appearances
 		var/list/appearances = limb_icon_cache[cache_key]
 		hud_damage_image = image(null)
-		hud_damage_image.overlays += appearances
+		hud_damage_image.AddOverlays(appearances)
 
 	// Calculate the required color index.
 	var/dam_state = min(1,((brute_dam+burn_dam)/max(1,max_damage)))

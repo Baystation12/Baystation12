@@ -40,7 +40,7 @@
 	ClearOverlays()
 	var/image/I = image(icon = focus.icon, icon_state = focus.icon_state)
 	I.color = focus.color
-	I.overlays = focus.overlays
+	I.CopyOverlays(focus)
 	AddOverlays(I)
 	return TRUE
 

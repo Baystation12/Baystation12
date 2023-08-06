@@ -173,4 +173,4 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 	for(var/turf/T in old_turfs)
 		T.CutOverlays(overlay)
 	for(var/turf/T in new_turfs)
-		T.overlays += overlay
+		T.AddOverlays(overlay)

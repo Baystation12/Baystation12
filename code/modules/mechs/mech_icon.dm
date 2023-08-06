@@ -7,7 +7,7 @@
 			var/image/masked_color = image(icon = cache_icon, icon_state = "[cache_key]_mask")
 			masked_color.color = image_colour
 			masked_color.blend_mode = BLEND_MULTIPLY
-			I.overlays += masked_color
+			I.AddOverlays(masked_color)
 		if(decal)
 			var/decal_key = "[decal]-[cache_key]"
 			if(!GLOB.mech_icon_cache[decal_key])
@@ -19,7 +19,7 @@
 				GLOB.mech_icon_cache[decal_key] = decal_icon
 			var/image/decal_image = get_mech_image(null, decal_key, GLOB.mech_icon_cache[decal_key])
 			decal_image.blend_mode = BLEND_MULTIPLY
-			I.overlays += decal_image
+			I.AddOverlays(decal_image)
 		I.appearance_flags |= RESET_COLOR
 		I.layer = overlay_layer
 		I.plane = FLOAT_PLANE

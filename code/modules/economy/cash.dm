@@ -81,7 +81,7 @@
 			offset_x = rand(-6, 6),
 			offset_y = rand(-4, 8)
 		)
-		src.overlays += banknote
+		AddOverlays(banknote)
 
 	src.desc = "They are worth [worth] [GLOB.using_map.local_currency_name]."
 	if(worth in denominations)

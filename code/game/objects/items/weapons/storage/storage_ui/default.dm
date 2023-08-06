@@ -220,9 +220,11 @@
 			offset_x = startpoint + stored_cap_width + (endpoint - startpoint - stored_cap_width * 2) / 2 - 16,
 			scale_x = (endpoint - startpoint - stored_cap_width * 2) / 32
 		)
-		storage_start.overlays += stored_start
-		storage_start.overlays += stored_continue
-		storage_start.overlays += stored_end
+		storage_start.AddOverlays(list(
+			stored_start,
+			stored_continue,
+			stored_end
+		))
 
 		O.screen_loc = "4:[round((startpoint+endpoint)/2)+2],2:16"
 		O.maptext = ""

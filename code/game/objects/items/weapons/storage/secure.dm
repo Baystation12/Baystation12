@@ -115,10 +115,10 @@
 	if (emagged)
 		return
 	emagged = TRUE
-	src.overlays += image(icon, icon_sparking)
+	AddOverlays(icon_sparking)
 	sleep(6)
 	ClearOverlays()
-	AddOverlays(image(icon, icon_locking))
+	AddOverlays(icon_locking)
 	locked = 0
 	to_chat(user, (feedback ? feedback : "You short out the lock of \the [src]."))
 	return TRUE

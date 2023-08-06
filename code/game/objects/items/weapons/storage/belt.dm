@@ -42,7 +42,7 @@
 				ret_overlays += H.species.get_offset_overlay_image(FALSE, 'icons/mob/onmob/onmob_belt.dmi', use_state, I.color, slot)
 			else
 				ret_overlays += overlay_image('icons/mob/onmob/onmob_belt.dmi', use_state, I.color, RESET_COLOR)
-			ret.overlays += ret_overlays
+			ret.AddOverlays(ret_overlays)
 	return ret
 
 /obj/item/storage/belt/holster

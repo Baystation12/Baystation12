@@ -88,7 +88,7 @@
 		return
 	parent = S
 	forceMove(parent)
-	parent.overlays += get_inv_overlay()
+	parent.AddOverlays(get_inv_overlay())
 
 	if(user)
 		to_chat(user, SPAN_NOTICE("You attach \the [src] to \the [parent]."))

@@ -259,7 +259,7 @@
 		var/image/ID = image('icons/obj/machines/status_display.dmi', icon_state=char)
 		ID.pixel_x = -(d-1)*5 + px
 		ID.pixel_y = py
-		I.overlays += ID
+		I.AddOverlays(ID)
 	return I
 
 

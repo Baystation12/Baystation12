@@ -52,7 +52,7 @@
 	if (check_effect_shield())
 		var/image/shield_image = image(icon = 'icons/obj/overmap.dmi', icon_state = "shield")
 		shield_image.pixel_x = 8
-		marker.overlays += shield_image
+		marker.AddOverlays(shield_image)
 
 	if (range > 0)
 		radar.transform = null

@@ -36,7 +36,7 @@
 
 	var/image/I = image(icon = 'icons/mob/robots.dmi', icon_state = ca.icon_state, loc = H)
 	I.override = 1
-	I.overlays += image(icon = 'icons/mob/robots.dmi', icon_state = "eyes-[ca.icon_state]") //gotta look realistic
+	I.AddOverlays(image(icon = 'icons/mob/robots.dmi', icon_state = "eyes-[ca.icon_state]"))
 	return I
 
 /singleton/appearance_handler/cardborg/proc/init_appearances()

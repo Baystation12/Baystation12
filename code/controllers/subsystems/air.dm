@@ -357,7 +357,7 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 		return
 	tiles_to_update += T
 	#ifdef ZASDBG
-	T.overlays += mark
+	T.AddOverlays(mark)
 	#endif
 	T.needs_air_update = 1
 

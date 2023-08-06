@@ -62,7 +62,7 @@
 		else
 			log_and_message_admins("planted \a [src] with a [timer] second fuse on \the [target].")
 
-		target.overlays += image_overlay
+		target.AddOverlays(image_overlay)
 		to_chat(user, "Bomb has been planted. Timer counting down from [timer].")
 		run_timer()
 

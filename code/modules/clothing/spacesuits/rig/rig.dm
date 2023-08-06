@@ -622,7 +622,8 @@
 	if(equipment_overlay_icon && LAZYLEN(installed_modules))
 		for(var/obj/item/rig_module/module in installed_modules)
 			if(module.suit_overlay)
-				chest.overlays += image("icon" = equipment_overlay_icon, "icon_state" = "[module.suit_overlay]", "dir" = SOUTH)
+				var/overlay = image("icon" = equipment_overlay_icon, "icon_state" = "[module.suit_overlay]", "dir" = SOUTH)
+				chest.AddOverlays(overlay)
 
 	if(wearer)
 		wearer.update_inv_shoes()
@@ -642,7 +643,8 @@
 	if(equipment_overlay_icon && LAZYLEN(installed_modules))
 		for(var/obj/item/rig_module/module in installed_modules)
 			if(module.suit_overlay)
-				ret.overlays += image("icon" = equipment_overlay_icon, "icon_state" = "[module.suit_overlay]")
+				var/overlay = image("icon" = equipment_overlay_icon, "icon_state" = "[module.suit_overlay]")
+				ret.AddOverlays(overlay)
 	return ret
 
 /obj/item/rig/get_req_access()
