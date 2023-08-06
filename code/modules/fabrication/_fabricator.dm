@@ -110,7 +110,7 @@
 		overlays += "[icon_state]_lights"
 
 	var/list/new_overlays = material_overlays.Copy()
-	overlays += new_overlays
+	AddOverlays(new_overlays)
 
 /obj/machinery/fabricator/proc/remove_mat_overlay(mat_overlay)
 	material_overlays -= mat_overlay

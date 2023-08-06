@@ -763,7 +763,6 @@ GLOBAL_LIST_INIT(duplicate_object_disallowed_vars, list(
 					var/old_dir1 = source_turf.dir
 					var/old_icon_state1 = source_turf.icon_state
 					var/old_icon1 = source_turf.icon
-					var/old_overlays = source_turf.overlays.Copy()
 					var/old_underlays = source_turf.underlays.Copy()
 					if (plating_required)
 						if (istype(target_turf, get_base_turf_by_area(target_turf)))
@@ -773,7 +772,7 @@ GLOBAL_LIST_INIT(duplicate_object_disallowed_vars, list(
 					temp_target_turf.set_dir(old_dir1)
 					temp_target_turf.icon_state = old_icon_state1
 					temp_target_turf.icon = old_icon1
-					temp_target_turf.overlays = old_overlays
+					temp_target_turf.CopyOverlays(source_turf)
 					temp_target_turf.underlays = old_underlays
 					for (var/obj/obj in source_turf)
 						if (!obj.simulated)
