@@ -17,18 +17,18 @@
 	icon_state = "wristwatch_fancy"
 
 
-/obj/item/clothing/accessory/wristwatch/examine(mob/user)
+/obj/item/clothing/accessory/wristwatch/examine(mob/user, distance)
 	. = ..()
-	if (in_range(src, user))
-		checktime()
+	if (distance <= 1)
+		CheckTime(user)
 
 
-/obj/item/clothing/accessory/wristwatch/proc/checktime()
-	to_chat(usr, "You check \the [src]. The time is [stationtime2text()] on the [time2text(world.timeofday, "DD")]\th of [time2text(world.timeofday, "Month")], [GLOB.using_map.game_year].")
+/obj/item/clothing/accessory/wristwatch/proc/CheckTime(mob/user)
+	to_chat(user, "You check \the [src]. The time is [stationtime2text()] on the [time2text(world.timeofday, "DD")]\th of [time2text(world.timeofday, "Month")], [GLOB.using_map.game_year].")
 
 
 /obj/item/clothing/accessory/wristwatch/OnTopic(mob/user, list/href_list)
 	if(href_list["check_watch"])
 		if(istype(user))
-			examine(user)
+			examinate(user, src)
 			return TOPIC_HANDLED
