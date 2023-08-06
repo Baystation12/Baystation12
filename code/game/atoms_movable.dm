@@ -295,13 +295,13 @@
 
 
 //Overlays
-/atom/movable/overlay
+/atom/movable/fake_overlay
 	var/atom/master = null
 	var/follow_proc = /atom/movable/proc/move_to_loc_or_null
 	anchored = TRUE
 	simulated = FALSE
 
-/atom/movable/overlay/Initialize()
+/atom/movable/fake_overlay/Initialize()
 	if(!loc)
 		crash_with("[type] created in nullspace.")
 		return INITIALIZE_HINT_QDEL
@@ -318,10 +318,10 @@
 
 	. = ..()
 
-/atom/movable/overlay/proc/SetInitLoc()
+/atom/movable/fake_overlay/proc/SetInitLoc()
 	forceMove(master.loc)
 
-/atom/movable/overlay/Destroy()
+/atom/movable/fake_overlay/Destroy()
 	if(istype(master, /atom/movable))
 		GLOB.moved_event.unregister(master, src)
 	GLOB.destroyed_event.unregister(master, src)
@@ -329,28 +329,28 @@
 	master = null
 	. = ..()
 
-/atom/movable/overlay/use_grab(obj/item/grab/grab, list/click_params)
+/atom/movable/fake_overlay/use_grab(obj/item/grab/grab, list/click_params)
 	if (master)
 		return master.use_grab(grab, click_params)
 	return FALSE
 
-/atom/movable/overlay/use_weapon(obj/item/weapon, mob/user, list/click_params)
+/atom/movable/fake_overlay/use_weapon(obj/item/weapon, mob/user, list/click_params)
 	SHOULD_CALL_PARENT(FALSE)
 	if (master)
 		return master.use_weapon(weapon, user, click_params)
 	return FALSE
 
-/atom/movable/overlay/use_tool(obj/item/tool, mob/user, list/click_params)
+/atom/movable/fake_overlay/use_tool(obj/item/tool, mob/user, list/click_params)
 	SHOULD_CALL_PARENT(FALSE)
 	if (master)
 		return master.use_tool(tool, user, click_params)
 	return FALSE
 
-/atom/movable/overlay/attackby(obj/item/I, mob/user)
+/atom/movable/fake_overlay/attackby(obj/item/I, mob/user)
 	if (master)
 		return master.attackby(I, user)
 
-/atom/movable/overlay/attack_hand(mob/user)
+/atom/movable/fake_overlay/attack_hand(mob/user)
 	if (master)
 		return master.attack_hand(user)
 

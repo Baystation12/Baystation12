@@ -55,7 +55,7 @@
 	var/turf_hand_priority = 3
 
 	// turf animation
-	var/atom/movable/overlay/c_animation = null
+	var/atom/movable/fake_overlay/c_animation = null
 
 	atmos_canpass = CANPASS_PROC
 

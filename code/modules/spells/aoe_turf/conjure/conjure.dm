@@ -50,7 +50,7 @@ How they spawn stuff is decided by behaviour vars, which are explained below
 			summoned_object = spawn_place
 		else
 			summoned_object = new summoned_object_type(spawn_place)
-		var/atom/movable/overlay/animation = new /atom/movable/overlay(summoned_object)
+		var/atom/movable/fake_overlay/animation = new /atom/movable/fake_overlay(summoned_object)
 		animation.SetName("conjure")
 		animation.set_density(0)
 		animation.anchored = TRUE
@@ -70,5 +70,5 @@ How they spawn stuff is decided by behaviour vars, which are explained below
 		conjure_animation(animation, spawn_place)
 	return
 
-/spell/aoe_turf/conjure/proc/conjure_animation(atom/movable/overlay/animation, turf/target)
+/spell/aoe_turf/conjure/proc/conjure_animation(atom/movable/fake_overlay/animation, turf/target)
 	qdel(animation)

@@ -69,7 +69,7 @@
 
 	if(isrobot(user))
 		spawn(0)
-			var/atom/movable/overlay/animation = new(user)
+			var/atom/movable/fake_overlay/animation = new(user)
 			animation.plane = user.plane
 			animation.layer = user.layer + 0.01
 			animation.icon_state = "blank"
@@ -174,7 +174,7 @@
 	flick("[initial(icon_state)]_on", src)
 	if(user && isrobot(user))
 		spawn(0)
-			var/atom/movable/overlay/animation = new(user.loc)
+			var/atom/movable/fake_overlay/animation = new(user.loc)
 			animation.plane = user.plane
 			animation.layer = user.layer + 0.01
 			animation.icon_state = "blank"
