@@ -193,7 +193,7 @@ Please contact me on #coderbus IRC. ~Carn x
 	if(auras)
 		overlays_to_apply += auras
 
-	overlays = overlays_to_apply
+	SetOverlays(overlays_to_apply)
 	var/list/scale = get_scale()
 	animate(
 		src,

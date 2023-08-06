@@ -125,7 +125,7 @@
 
 
 /mob/living/simple_animal/passive/corgi/regenerate_icons()
-	overlays = list()
+	ClearOverlays()
 
 	if(inventory_head)
 		var/head_icon_state = inventory_head.icon_state

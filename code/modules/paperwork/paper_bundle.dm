@@ -210,7 +210,7 @@
 /obj/item/paper_bundle/on_update_icon()
 	var/obj/item/paper/P = pages[1]
 	icon_state = P.icon_state
-	overlays = P.overlays
+	CopyOverlays(P)
 	underlays.Cut()
 	var/i = 0
 	var/photo

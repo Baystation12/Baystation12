@@ -419,7 +419,7 @@ var/global/list/tank_gauge_cache = list()
 			LAZYADD(overlays_to_add, tank_gauge_cache[indicator])
 		previous_gauge_pressure = gauge_pressure
 
-	overlays = overlays_to_add
+	SetOverlays(overlays_to_add)
 
 #undef TANK_IDEAL_PRESSURE
 

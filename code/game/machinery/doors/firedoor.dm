@@ -503,7 +503,7 @@
 	if(density)
 		icon_state = "closed"
 		if(hatch_open)
-			overlays = panel_overlay
+			SetOverlays(panel_overlay)
 		if(pdiff_alert)
 			lights_overlay += "palert"
 			do_set_light = TRUE

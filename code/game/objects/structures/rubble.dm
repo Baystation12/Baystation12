@@ -41,7 +41,7 @@
 		I.pixel_y = rand(-16,16)
 		I.SetTransform(rotation = rand(0,360))
 		parts += I
-	overlays = parts
+	SetOverlays(parts)
 	if(lootleft)
 		AddOverlays(image(icon,"twinkle[rand(1,3)]"))
 

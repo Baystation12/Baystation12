@@ -125,7 +125,7 @@
 			var/mutable_appearance/lip_appearance = mutable_appearance('icons/mob/human_races/species/human/lips.dmi', "lips_[owner.makeup_style]_s",flags = DEFAULT_APPEARANCE_FLAGS)
 			mob_overlays |= lip_appearance
 
-	overlays = mob_overlays
+	SetOverlays(mob_overlays)
 
 	overlays |= get_hair_icon() //Hair is handled separately for mob icon so we do not add it to mob_overlays Maybe this should change sometime
 

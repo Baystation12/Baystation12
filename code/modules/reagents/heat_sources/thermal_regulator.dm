@@ -143,7 +143,7 @@
 			beaker_icon = image(icon, "[icon_state]_beaker")
 		LAZYADD(adding_overlays, beaker_icon)
 
-	overlays = adding_overlays
+	SetOverlays(adding_overlays)
 
 /obj/machinery/reagent_temperature/interact(mob/user)
 

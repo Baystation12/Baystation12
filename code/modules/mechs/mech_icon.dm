@@ -64,7 +64,7 @@
 					decal = head.decal
 
 				new_overlays += get_mech_image(decal, use_icon_state, 'icons/mecha/mech_weapon_overlays.dmi', color, hardpoint_object.mech_layer )
-	overlays = new_overlays
+	SetOverlays(new_overlays)
 
 /mob/living/exosuit/proc/update_pilots(update_overlays = TRUE)
 	if(update_overlays && LAZYLEN(pilot_overlays))
