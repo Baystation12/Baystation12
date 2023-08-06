@@ -772,7 +772,7 @@
 			src.id = t
 			to_chat(user, SPAN_NOTICE("The new ID of the button is [id]"))
 		return
-	if(istype(W, /obj/item/screwdriver))
+	if(isScrewdriver(W))
 		new /obj/item/frame/light_switch/windowtint(user.loc, 1)
 		qdel(src)
 
