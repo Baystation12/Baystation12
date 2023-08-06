@@ -119,8 +119,10 @@
 	. = ..()
 	ClearOverlays()
 	if (current_flight)
-		overlays += emissive_appearance(icon, "pad_incoming") //we cut the hole, and...
-		overlays += image(icon, "pad_incoming") // add the actual image
+		AddOverlays(list(
+			emissive_appearance(icon, "pad_incoming")
+			image(icon, "pad_incoming")
+		))
 	else
 		var/datum/extension/local_network_member/transport = get_extension(src, /datum/extension/local_network_member)
 		var/network = transport ? transport.id_tag : null

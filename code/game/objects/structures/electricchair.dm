@@ -51,7 +51,7 @@
 /obj/structure/bed/chair/e_chair/rotate()
 	..()
 	ClearOverlays()
-	overlays += image('icons/obj/structures/furniture.dmi', src, "echair_over", MOB_LAYER + 1, dir)	//there's probably a better way of handling this, but eh. -Pete
+	AddOverlays(image('icons/obj/structures/furniture.dmi', src, "echair_over", MOB_LAYER + 1, dir))
 	return
 
 /obj/structure/bed/chair/e_chair/proc/shock()

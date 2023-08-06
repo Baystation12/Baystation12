@@ -594,7 +594,7 @@ The _flatIcons list is a cache for generated icon files.
 			if(2)	I.pixel_x++
 			if(3)	I.pixel_y--
 			if(4)	I.pixel_y++
-		overlays += I//And finally add the overlay.
+		AddOverlays(overlays) //And finally add the overlay.
 
 #define HOLOPAD_SHORT_RANGE 1 //For determining the color of holopads based on whether they're short or long range.
 #define HOLOPAD_LONG_RANGE 2

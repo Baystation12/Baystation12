@@ -53,7 +53,7 @@
 /obj/machinery/atmospherics/unary/heater/on_update_icon()
 	ClearOverlays()
 	if(panel_open)
-		overlays += "freezer_panel" //Reuse the freezer icons because no point in creating duplicates for essentially the same machine.
+		AddOverlays("freezer_panel")
 	if(is_powered())
 		overlays += emissive_appearance(icon, "freezer_lights")
 		overlays += "freezer_lights"

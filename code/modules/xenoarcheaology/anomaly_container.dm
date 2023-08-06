@@ -226,5 +226,7 @@
 	if(panel_open)
 		overlays += "anomaly_container_panel"
 	if(is_powered())
-		overlays += emissive_appearance(icon, "anomaly_container_lights") //in the rare case its broken AND powered.
-		overlays += "anomaly_container_lights"
+		AddOverlays(list(
+			emissive_appearance(icon, "anomaly_container_lights"),
+			"anomaly_container_lights"
+		))
