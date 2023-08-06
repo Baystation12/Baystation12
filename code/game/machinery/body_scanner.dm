@@ -17,9 +17,9 @@
 	machine_name = "body scanner"
 	machine_desc = "A full-body scanning suite that provides a complete health assessment of a patient placed inside. Requires an adjacent console to operate."
 
-/obj/machinery/bodyscanner/examine(mob/user)
+/obj/machinery/bodyscanner/examine(mob/user, distance, is_adjacent)
 	. = ..()
-	if (occupant && user.Adjacent(src))
+	if (occupant && is_adjacent)
 		occupant.examine(arglist(args))
 
 /obj/machinery/bodyscanner/relaymove(mob/user)

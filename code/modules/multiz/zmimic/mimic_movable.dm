@@ -207,9 +207,9 @@
 /atom/movable/openspace/turf_proxy/attack_generic(mob/user as mob)
 	loc.attack_generic(user)
 
-/atom/movable/openspace/turf_proxy/examine(mob/examiner)
+/atom/movable/openspace/turf_proxy/examine(...)
 	SHOULD_CALL_PARENT(FALSE)
-	. = loc.examine(examiner)
+	. = loc.examine(arglist(args))
 
 
 // -- TURF MIMIC --
@@ -235,6 +235,6 @@
 /atom/movable/openspace/turf_mimic/attack_generic(mob/user as mob)
 	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))
 
-/atom/movable/openspace/turf_mimic/examine(mob/examiner)
+/atom/movable/openspace/turf_mimic/examine(...)
 	SHOULD_CALL_PARENT(FALSE)
-	. = delegate.examine(examiner)
+	. = delegate.examine(arglist(args))

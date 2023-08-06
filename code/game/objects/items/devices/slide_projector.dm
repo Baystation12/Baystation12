@@ -187,7 +187,7 @@
 	if(!istype(slide))
 		qdel(src)
 		return
-	return slide.examine(user, 1)
+	return slide.examine(user, max(distance, 1), FALSE)
 
 /obj/effect/projection/photo
 	alpha = 170

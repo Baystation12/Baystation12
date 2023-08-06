@@ -362,13 +362,14 @@
  * **Parameters**:
  * - `user` - The mob performing the examine.
  * - `distance` - The distance in tiles from `user` to `src`.
+ * - `is_adjacent` - Whether `user` is adjacent to `src`.
  * - `infix` String - String that is appended immediately after the atom's name.
  * - `suffix` String - Additional string appended after the atom's name and infix.
  *
  * Returns boolean - The caller always expects TRUE
  *  This is used rather than SHOULD_CALL_PARENT as it enforces that subtypes of a type that explicitly returns still call parent
  */
-/atom/proc/examine(mob/user, distance, infix = "", suffix = "")
+/atom/proc/examine(mob/user, distance, is_adjacent, infix = "", suffix = "")
 	//This reformat names to get a/an properly working on item descriptions when they are bloody
 	var/f_name = "\a [src][infix]."
 	if(blood_color && !istype(src, /obj/effect/decal))
@@ -391,7 +392,7 @@
 	return TRUE
 
 /// Works same as /atom/proc/Examine(), only this output comes immediately after any and all made by /atom/proc/Examine()
-/atom/proc/LateExamine(mob/user, distance)
+/atom/proc/LateExamine(mob/user, distance, is_adjacent)
 	SHOULD_NOT_SLEEP(TRUE)
 
 	user.ForensicsExamination(src, distance)
