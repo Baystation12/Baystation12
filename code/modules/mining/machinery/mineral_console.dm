@@ -10,6 +10,9 @@
 	interact(user)
 	return TRUE
 
+/obj/machinery/computer/mining/on_update_icon()
+	return //we don't want this to fetch any overlays that it shouldn't
+
 /obj/machinery/computer/mining/interact(mob/user)
 	if (!connected)
 		to_chat(user, SPAN_WARNING("\The [src] is not connected to a processing machine. <a href='?src=\ref[src];scan_for_machine=1'>Scan</a>"))
