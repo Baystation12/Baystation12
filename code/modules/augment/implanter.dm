@@ -1,8 +1,8 @@
 /obj/item/device/augment_implanter
-	name = "augment autodoc"
+	name = "augment implanter"
 	desc = "An oblong box with an irregular shape and a seam running down the center."
-	icon = 'icons/obj/tools/implanter.dmi'
-	icon_state = "compact_bionic_module"
+	icon = 'icons/obj/tools/augment_implanter.dmi'
+	icon_state = "augment_implanter"
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_DATA = 3, TECH_ESOTERIC = 3)
 	var/obj/item/organ/internal/augment/augment
