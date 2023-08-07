@@ -144,9 +144,6 @@
 		var/turf/simulated/location = get_turf(src)
 		if(istype(location)) location.add_blood_floor(src)
 
-	if (ai_holder)
-		ai_holder.react_to_attack(user)
-
 ///returns false if the effects failed to apply for some reason, true otherwise.
 /mob/living/proc/standard_weapon_hit_effects(obj/item/I, mob/living/user, effective_force, hit_zone)
 	if(!effective_force)

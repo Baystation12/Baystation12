@@ -292,20 +292,20 @@ avoid code duplication. This includes items that may sometimes act as a standard
 				SPAN_WARNING("You feel something bounce off you harmlessly.")
 			)
 			return TRUE
-		playsound(src, weapon.hitsound, 75, TRUE)
-		user.visible_message(
-			SPAN_DANGER("\The [user] hits \the [src] with \a [weapon]!"),
-			SPAN_DANGER("You hit \the [src] with \the [weapon]!"),
-			exclude_mobs = list(src)
-		)
-		show_message(
-			SPAN_DANGER("\The [user] hits you with \a [weapon]!"),
-			VISIBLE_MESSAGE,
-			SPAN_DANGER("You feel something hit you!")
-		)
-		general_health_adjustment(weapon.force, weapon.damtype, damage_flags, user.zone_sel?.selecting, weapon)
-		return TRUE
 
+		var/hit_zone = resolve_item_attack(weapon, user, user.zone_sel? user.zone_sel.selecting : ran_zone())
+		if (!hit_zone)
+			return TRUE
+
+		var/datum/attack_result/result = hit_zone
+		if (istype(result))
+			if (result.hit_zone)
+				var/mob/living/victim = result.attackee ? result.attackee : src
+				weapon.apply_hit_effect(victim, user, result.hit_zone)
+				return TRUE
+		if (hit_zone)
+			weapon.apply_hit_effect(src, user, hit_zone)
+		return TRUE
 	return ..()
 
 
@@ -450,7 +450,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
  */
 /obj/item/proc/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	if (hitsound)
-		playsound(loc, hitsound, 50, TRUE, -1)
+		playsound(loc, hitsound, 75, TRUE)
 	var/power = force
 	if (MUTATION_HULK in user.mutations)
 		power *= 2
