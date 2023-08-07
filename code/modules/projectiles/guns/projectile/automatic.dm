@@ -200,30 +200,38 @@
 		)
 
 	var/use_launcher = 0
+
+	///Determines if bullpup spawns with launcher, used in Initialize()
+	var/has_launcher = TRUE
 	var/obj/item/gun/launcher/grenade/underslung/launcher
 
 /obj/item/gun/projectile/automatic/bullpup_rifle/Initialize()
 	. = ..()
-	launcher = new(src)
+	if (has_launcher)
+		launcher = new(src)
 
 
 /obj/item/gun/projectile/automatic/bullpup_rifle/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Grenade - Load launcher
-	if (istype(tool, /obj/item/grenade))
+	if (istype(tool, /obj/item/grenade) && launcher)
 		launcher.load(tool, user)
 		return TRUE
 
 	return ..()
 
+/obj/item/gun/projectile/automatic/bullpup_rifle/toggle_safety(mob/user)
+	..()
+	if(launcher)
+		launcher.safety_state = safety_state //Set the launcher's safety to be equivalent to the bullpup's.
 
 /obj/item/gun/projectile/automatic/bullpup_rifle/attack_hand(mob/user)
-	if(user.get_inactive_hand() == src && use_launcher)
+	if(user.get_inactive_hand() == src && launcher && use_launcher)
 		launcher.unload(user)
 	else
 		..()
 
 /obj/item/gun/projectile/automatic/bullpup_rifle/Fire(atom/target, mob/living/user, params, pointblank=0, reflex=0)
-	if(use_launcher)
+	if(launcher && use_launcher)
 		launcher.Fire(target, user, params, pointblank, reflex)
 		if(!launcher.chambered)
 			switch_firemodes() //switch back automatically
@@ -242,6 +250,8 @@
 
 /obj/item/gun/projectile/automatic/bullpup_rifle/examine(mob/user)
 	. = ..()
+	if(!launcher)
+		return
 	if(launcher.chambered)
 		to_chat(user, "\The [launcher] has \a [launcher.chambered] loaded.")
 	else
@@ -255,13 +265,12 @@
 	magazine_type = /obj/item/ammo_magazine/mil_rifle/light
 	one_hand_penalty = 6 //Slightly lighter than the Z8. Still don't try it.
 	bulk = GUN_BULK_LIGHT_RIFLE
+	has_launcher = FALSE
 	wielded_item_state = "z9carbine-wielded"
 	firemodes = list( //Two round bursts. More accurate than the Z8 due to less maximum dispersion. More delay between shots, however, so slower.
 		list(mode_name="semi auto",       burst=1,    fire_delay=null,    move_delay=null, use_launcher=null, one_hand_penalty=6, burst_accuracy=null, dispersion=null),
 		list(mode_name="2-round bursts", burst=2,    fire_delay=null, move_delay=6,    use_launcher=null, one_hand_penalty=7, burst_accuracy=list(0,-1), dispersion=list(0.0, 0.6))
 		)
-
-
 
 /obj/item/gun/projectile/automatic/l6_saw
 	name = "light machine gun"
