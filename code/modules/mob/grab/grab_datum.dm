@@ -144,16 +144,19 @@
 				if(on_hit_help(G))
 					G.action_used()
 					make_log(G, help_action)
+					return TRUE
 
 			if(I_DISARM)
 				if(on_hit_disarm(G))
 					G.action_used()
 					make_log(G, disarm_action)
+					return TRUE
 
 			if(I_GRAB)
 				if(on_hit_grab(G))
 					G.action_used()
 					make_log(G, grab_action)
+					return TRUE
 
 			if(I_HURT)
 				if(on_hit_harm(G))
@@ -162,6 +165,7 @@
 
 	else
 		to_chat(G.assailant, SPAN_WARNING("You must wait before you can do that."))
+		return FALSE
 
 /datum/grab/proc/make_log(obj/item/grab/G, action)
 	admin_attack_log(G.assailant, G.affecting, "[action]s their victim", "was [action]ed", "used [action] on")
@@ -245,25 +249,25 @@
 
 // What happens when you hit the grabbed person with the grab on help intent.
 /datum/grab/proc/on_hit_help(obj/item/grab/G)
-	return 1
+	return TRUE
 
 // What happens when you hit the grabbed person with the grab on disarm intent.
 /datum/grab/proc/on_hit_disarm(obj/item/grab/G)
-	return 1
+	return TRUE
 
 // What happens when you hit the grabbed person with the grab on grab intent.
 /datum/grab/proc/on_hit_grab(obj/item/grab/G)
-	return 1
+	return TRUE
 
 // What happens when you hit the grabbed person with the grab on harm intent.
 /datum/grab/proc/on_hit_harm(obj/item/grab/G)
-	return 1
+	return TRUE
 
 // What happens when you hit the grabbed person with an open hand and you want it
 // to do some special snowflake action based on some other factor such as
 // intent.
 /datum/grab/proc/resolve_openhand_attack(obj/item/grab/G)
-	return 0
+	return FALSE
 
 // Used when you want an effect to happen when the grab enters this state as an upgrade
 /datum/grab/proc/enter_as_up(obj/item/grab/G)
@@ -271,7 +275,7 @@
 /datum/grab/proc/item_attack(obj/item/grab/G, obj/item)
 
 /datum/grab/proc/resolve_item_attack(obj/item/grab/G, mob/living/carbon/human/user, obj/item/I, target_zone)
-	return 0
+	return FALSE
 
 /datum/grab/proc/handle_resist(obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
