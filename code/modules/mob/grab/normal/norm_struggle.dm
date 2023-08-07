@@ -70,15 +70,15 @@
 
 /datum/grab/normal/struggle/on_hit_disarm(obj/item/grab/normal/G)
 	to_chat(G.assailant, SPAN_WARNING("Your grip isn't strong enough to pin."))
-	return 0
+	return FALSE
 
 /datum/grab/normal/struggle/on_hit_grab(obj/item/grab/normal/G)
 	to_chat(G.assailant, SPAN_WARNING("Your grip isn't strong enough to jointlock."))
-	return 0
+	return FALSE
 
 /datum/grab/normal/struggle/on_hit_harm(obj/item/grab/normal/G)
 	to_chat(G.assailant, SPAN_WARNING("Your grip isn't strong enough to dislocate."))
-	return 0
+	return FALSE
 
 /datum/grab/normal/struggle/resolve_openhand_attack(obj/item/grab/G)
-	return 0
+	return FALSE
