@@ -475,3 +475,9 @@ meteor_act
 	if (was_burned)
 		fire_act(air, temperature)
 	return FALSE
+
+/mob/living/carbon/human/can_damage_health(damage, damage_type)
+	. = ..()
+
+	if (check_shields(damage, damage_type))
+		return FALSE
