@@ -289,9 +289,9 @@
 
 	return 1
 
-/obj/machinery/cryopod/examine(mob/user)
+/obj/machinery/cryopod/examine(mob/user, distance, is_adjacent)
 	. = ..()
-	if (occupant && user.Adjacent(src))
+	if (occupant && is_adjacent)
 		occupant.examine(arglist(args))
 
 //Lifted from Unity stasis.dm and refactored.

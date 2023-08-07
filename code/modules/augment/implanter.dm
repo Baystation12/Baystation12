@@ -28,7 +28,7 @@
 		to_chat(user, "It seems to be empty.")
 		return
 	to_chat(user, SPAN_BOLD("It contains:"))
-	augment.examine(user)
+	augment.examine(arglist(args))
 
 
 /obj/item/device/augment_implanter/use_tool(obj/item/tool, mob/user, list/click_params)
