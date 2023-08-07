@@ -148,7 +148,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return FALSE
 
 
-/turf/can_use_item(obj/item/tool, mob/living/user, click_params)
+/turf/simulated/floor/can_use_item(obj/item/tool, mob/living/user, click_params)
 	. = ..()
 	if (!.)
 		return
