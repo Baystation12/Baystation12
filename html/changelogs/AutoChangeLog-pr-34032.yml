@@ -1,0 +1,4 @@
+author: Mucker
+delete-after: true
+changes:
+  - bugfix: Plant genes are now properly randomized again.
