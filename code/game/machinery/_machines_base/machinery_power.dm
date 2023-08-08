@@ -23,7 +23,7 @@ This is /obj/machinery level code to properly manage power usage from the area.
 	//	return 1
 
 	if(!check_area)
-		check_area = loc.loc		// make sure it's in an area
+		check_area = get_area(src)	// make sure it's in an area
 	if(!check_area || !isarea(check_area))
 		return FALSE					// if not, then not powered
 	if(chan == POWER_CHAN)
