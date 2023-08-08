@@ -129,6 +129,6 @@
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = TRUE
 		req_access.Cut()
-		to_chat(user, SPAN_NOTICE("You you disable the security protocols"))
+		to_chat(user, SPAN_NOTICE("You disable the security protocols"))
 		src.updateUsrDialog()
 		return 1
