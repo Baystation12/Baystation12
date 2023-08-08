@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Attaching and removing augments now displays the augment's name instead
+      of, i.e., "r_arm_aug".
