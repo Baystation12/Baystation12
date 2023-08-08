@@ -36,35 +36,25 @@
 		power_supply = new cell_type(src)
 	else
 		power_supply = new /obj/item/cell/device/variable(src, max_shots*charge_cost)
-	if(self_recharge)
-		START_PROCESSING(SSobj, src)
 	update_icon()
-
-/obj/item/gun/energy/Destroy()
-	if(self_recharge)
-		STOP_PROCESSING(SSobj, src)
-	return ..()
 
 /obj/item/gun/energy/get_cell()
 	return power_supply
 
 /obj/item/gun/energy/Process()
-	if(self_recharge) //Every [recharge_time] ticks, recharge a shot for the cyborg
-		charge_tick++
-		if(charge_tick < recharge_time) return 0
-		charge_tick = 0
+	if (!power_supply || power_supply.charge >= power_supply.maxcharge)
+		return PROCESS_KILL
+	if (++charge_tick < recharge_time)
+		return
 
-		if(!power_supply || power_supply.charge >= power_supply.maxcharge)
-			return 0 // check if we actually need to recharge
+	var/obj/item/cell/external = get_external_power_supply()
+	charge_tick = 0
+	if (use_external_power && (!external || !external.use(charge_cost))) //Take power from the borg to recharge.
+		return
 
-		if(use_external_power)
-			var/obj/item/cell/external = get_external_power_supply()
-			if(!external || !external.use(charge_cost)) //Take power from the borg...
-				return 0
+	power_supply.give(charge_cost) //... to recharge the shot
+	update_icon()
 
-		power_supply.give(charge_cost) //... to recharge the shot
-		update_icon()
-	return 1
 
 /obj/item/gun/energy/consume_next_projectile()
 	if(!power_supply) return null
@@ -104,3 +94,8 @@
 		else
 			icon_state = "[initial(icon_state)][ratio]"
 		update_held_icon()
+
+/obj/item/gun/energy/handle_post_fire(mob/user, atom/target, pointblank, reflex, obj/projectile)
+	..()
+	if (self_recharge)
+		START_PROCESSING(SSobj, src)
