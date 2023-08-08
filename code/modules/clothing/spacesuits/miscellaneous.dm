@@ -40,7 +40,7 @@
 /obj/item/clothing/head/helmet/space/emergency
 	name = "emergency space helmet"
 	icon_state = "spacebowl"
-	light_overlay = "yellow_light"
+	light_overlay = "helmet_light_wide"
 	desc = "A simple helmet with a built-in light. Smells like mothballs."
 	flash_protection = FLASH_PROTECTION_NONE
 

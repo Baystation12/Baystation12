@@ -6,6 +6,8 @@
 	filedesc = "Report Editor"
 	nanomodule_path = /datum/nano_module/program/reports
 	extended_desc = "A general paperwork viewing and editing utility."
+	program_icon_state = "word"
+	program_key_state = "atmos_key"
 	size = 2
 	available_on_ntnet = TRUE
 	requires_ntnet = FALSE

@@ -21,12 +21,13 @@
 /obj/machinery/body_scanconsole/Initialize()
 	. = ..()
 	FindScanner()
+	update_icon()
 
 /obj/machinery/body_scanconsole/on_update_icon()
 	overlays.Cut()
 	if(panel_open)
 		overlays += "[icon_state]_panel"
-	if(is_powered())
+	if(!connected.inoperable())
 		overlays += emissive_appearance(icon, "[icon_state]_lights")
 		overlays += "[icon_state]_lights"
 
@@ -45,10 +46,12 @@
 		if(connected)
 			break
 		GLOB.destroyed_event.register(connected, src, .proc/unlink_scanner)
+	update_icon()
 
 /obj/machinery/body_scanconsole/proc/unlink_scanner(obj/machinery/bodyscanner/scanner)
 	GLOB.destroyed_event.unregister(scanner, src, .proc/unlink_scanner)
 	connected = null
+	update_icon()
 
 /obj/machinery/body_scanconsole/proc/FindDisplays()
 	for(var/obj/machinery/body_scan_display/D in SSmachines.machinery)

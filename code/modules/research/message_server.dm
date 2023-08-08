@@ -127,13 +127,16 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 		..(O, user)
 
 /obj/machinery/message_server/on_update_icon()
-	if((inoperable()))
-		icon_state = "server-nopower"
-	else if (!active)
-		icon_state = "server-off"
+	overlays.Cut()
+	if(panel_open)
+		overlays += "[icon_state]_panel"
+	if(active)
+		overlays += "[icon_state]_on"
+		overlays += emissive_appearance(icon, "[icon_state]_lights_off")
+		overlays += "[icon_state]_lights_on"
 	else
-		icon_state = "server-on"
-
+		overlays += emissive_appearance(icon, "[icon_state]_lights_off")
+		overlays += "[icon_state]_lights_off"
 	return
 
 /obj/machinery/message_server/proc/send_to_department(department, message, tone)
