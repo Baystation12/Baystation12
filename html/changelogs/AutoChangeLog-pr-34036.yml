@@ -1,6 +1,0 @@
-author: emmanuelbassil, Mucker
-delete-after: true
-changes:
-  - bugfix: Restored ability to parry attacks.
-  - bugfix: Restored ability for melee attacks with weapons to miss.
-  - bugfix: Some melee weapons no longer ignore armor

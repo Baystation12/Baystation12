@@ -1,5 +1,0 @@
-author: Sbotkin
-delete-after: true
-changes:
-  - bugfix: The Petrov's R&D console now correctly synchronizes with the robotics
-      server.
