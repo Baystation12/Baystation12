@@ -25,6 +25,7 @@
 /obj/item/clothing/head/helmet/space/vox
 	icon = 'icons/obj/clothing/species/vox/obj_head_vox.dmi'
 	item_icons = list(slot_head_str = 'icons/mob/species/vox/onmob_head_vox.dmi')
+	light_overlay = "helmet_light_alt"
 	armor = list(
 		melee = ARMOR_MELEE_MAJOR,
 		bullet = ARMOR_BALLISTIC_PISTOL,
