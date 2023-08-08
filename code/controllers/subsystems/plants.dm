@@ -103,8 +103,9 @@ SUBSYSTEM_DEF(plants)
 
 	var/list/gene_datums = GET_SINGLETON_SUBTYPE_MAP(/singleton/plantgene)
 	var/list/used_masks = list()
+	var/list/plant_genes = shuffle(ALL_GENES)
 
-	for (var/tag in ALL_GENES)
+	for (var/tag in plant_genes)
 		var/mask = uppertext(num2hex(rand(0, 0xFF)))
 		while (mask in used_masks)
 			mask = uppertext(num2hex(rand(0, 0xFF)))
