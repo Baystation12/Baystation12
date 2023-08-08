@@ -820,11 +820,7 @@
 	throw_speed = 3
 	throw_range = 5
 	item_state = "beer"
+	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("stabbed", "slashed", "attacked")
 	sharp = TRUE
 	var/icon/broken_outline = icon('icons/obj/food/drinks.dmi', "broken")
-
-
-/obj/item/broken_bottle/attack(mob/living/carbon/M, mob/living/carbon/user)
-	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
-	return ..()

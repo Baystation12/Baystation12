@@ -66,6 +66,7 @@
 			range = 5
 		)
 		return TRUE
+	else return ..()
 
 
 /obj/item/material/coin/attack_self(mob/living/user)

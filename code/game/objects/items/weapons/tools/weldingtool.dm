@@ -5,6 +5,7 @@
 	item_state = "welder"
 	desc = "A portable welding gun with a port for attaching fuel tanks."
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	slot_flags = SLOT_BELT
 	center_of_mass = "x=14;y=15"
 	waterproof = FALSE
@@ -280,26 +281,25 @@
 		update_icon()
 
 /obj/item/weldingtool/attack(mob/living/M, mob/living/user, target_zone)
-	if(ishuman(M))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/S = H.organs_by_name[target_zone]
 
-		if(!S || !BP_IS_ROBOTIC(S) || user.a_intent != I_HELP)
+		if (!S || !BP_IS_ROBOTIC(S) || user.a_intent != I_HELP)
 			return ..()
 
-		if(BP_IS_BRITTLE(S))
+		if (BP_IS_BRITTLE(S))
 			to_chat(user, SPAN_WARNING("\The [M]'s [S.name] is hard and brittle - \the [src]  cannot repair it."))
-			return 1
+			return TRUE
 
-		if(!welding)
+		if (!welding)
 			to_chat(user, SPAN_WARNING("You'll need to turn [src] on to patch the damage on [M]'s [S.name]!"))
-			return 1
+			return TRUE
 
-		if(S.robo_repair(15, DAMAGE_BRUTE, "some dents", src, user))
+		if (S.robo_repair(15, DAMAGE_BRUTE, "some dents", src, user))
 			remove_fuel(1, user)
-
-	else
-		return ..()
+		return TRUE
+	else return ..()
 
 
 /obj/item/weldingtool/IsFlameSource()

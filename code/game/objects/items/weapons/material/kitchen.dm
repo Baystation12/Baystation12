@@ -124,6 +124,7 @@
 	icon_state = "rolling_pin"
 	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "whacked")
 	default_material = MATERIAL_WOOD
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	max_force = 15
 	force_multiplier = 0.7 // 10 when wielded with weight 15 (wood)
 	thrown_force_multiplier = 1 // as above
@@ -141,5 +142,5 @@
 		)
 		user.take_organ_damage(10, 0)
 		user.Paralyse(2)
-		return
+		return TRUE
 	return ..()

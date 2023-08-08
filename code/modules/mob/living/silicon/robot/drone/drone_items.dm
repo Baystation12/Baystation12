@@ -211,10 +211,6 @@
 	wrapped = null
 	update_icon()
 
-/obj/item/gripper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	// Don't fall through and smack people with gripper, instead just no-op
-	return 0
-
 /obj/item/gripper/resolve_attackby(atom/target, mob/living/user, params)
 
 	// Ensure fumbled items are accessible.
@@ -342,9 +338,6 @@
 	var/datum/matter_synth/glass = null
 	var/datum/matter_synth/wood = null
 	var/datum/matter_synth/plastic = null
-
-/obj/item/matter_decompiler/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	return
 
 /obj/item/matter_decompiler/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, proximity, params)
 

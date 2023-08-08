@@ -17,9 +17,6 @@
 	var/require_adjacent = TRUE
 	var/active = FALSE //For gear that has an active state (ie, floodlights)
 
-/obj/item/mech_equipment/attack(mob/living/M, mob/living/user, target_zone) //Generally it's not desired to be able to attack with items
-	return 0
-
 /obj/item/mech_equipment/afterattack(atom/target, mob/living/user, inrange, params)
 	if(require_adjacent)
 		if(!inrange)

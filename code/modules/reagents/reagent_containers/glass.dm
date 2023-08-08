@@ -14,6 +14,7 @@
 	volume = 60
 	w_class = ITEM_SIZE_SMALL
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	unacidable = TRUE
 
 
@@ -67,18 +68,18 @@
 	update_icon()
 
 /obj/item/reagent_containers/glass/attack(mob/M as mob, mob/user as mob, def_zone)
-	if(force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
-		return	..()
-	if(standard_feed_mob(user, M))
-		return
-	return 0
+	if (!istype(M))
+		return ..()
+	if (standard_feed_mob(user, M))
+		return TRUE
+	else return ..()
 
 /obj/item/reagent_containers/glass/standard_feed_mob(mob/user, mob/target)
 	if(!is_open_container())
 		to_chat(user, SPAN_NOTICE("You need to open \the [src] first."))
-		return 1
+		return TRUE
 	if(user.a_intent == I_HURT)
-		return 1
+		return FALSE
 	return ..()
 
 /obj/item/reagent_containers/glass/self_feed_message(mob/user)

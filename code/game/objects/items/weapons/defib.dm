@@ -299,7 +299,7 @@
 
 /obj/item/shockpaddles/attack(mob/living/M, mob/living/user, target_zone)
 	var/mob/living/carbon/human/H = M
-	if (!istype(H) || user.a_intent == I_HURT)
+	if (!istype(H) || user.a_intent != I_HELP)
 		return ..() //Cycle through the rest of the use_* calls.
 
 	if (can_use(user, H))
@@ -310,8 +310,7 @@
 
 		busy = 0
 		update_icon()
-
-	return 1
+	return TRUE
 
 //Since harm-intent now skips the delay for deliberate placement, you have to be able to hit them in combat in order to shock people.
 /obj/item/shockpaddles/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
@@ -405,7 +404,7 @@
 		return
 
 	//no need to spend time carefully placing the paddles, we're just trying to shock them
-	user.visible_message(SPAN_DANGER("\The [user] slaps [src] onto [H]'s [affecting.name]."), SPAN_DANGER("You overcharge [src] and slap them onto [H]'s [affecting.name]."))
+	user.visible_message(SPAN_DANGER("\The [user] slaps [src] onto [H]'s [affecting.name]. [safety? "However, it fizzles out as the safety indicator flashes.": ""]"), SPAN_DANGER("You overcharge [src] and slap them onto [H]'s [affecting.name]. [safety? "However, it fizzles out as the safety indicator flashes.": ""]"))
 
 	//Just stop at awkwardly slapping electrodes on people if the safety is enabled
 	if(safety)

@@ -26,6 +26,7 @@
 	if (label)
 		target.AddLabel(label, user)
 		return TRUE
+	else return ..()
 
 
 /obj/item/hand_labeler/attack_self(mob/living/user)

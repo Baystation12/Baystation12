@@ -1089,7 +1089,7 @@ About the new airlock wires panel:
 		return src.attack_hand(user)
 	else if(istype(C, /obj/item/pai_cable))	// -- TLE
 		var/obj/item/pai_cable/cable = C
-		cable.plugin(src, user)
+		cable.resolve_attackby(src, user)
 	else if(!repairing && isCrowbar(C))
 		if (p_open && (operating == DOOR_OPERATING_BROKEN || (!operating && welded && !arePowerSystemsOn() && density && !locked)) && !brace)
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)

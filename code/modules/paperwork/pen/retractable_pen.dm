@@ -35,7 +35,7 @@
 /obj/item/pen/retractable/attack(atom/A, mob/user, target_zone)
 	if(!active)
 		toggle()
-	..()
+	return ..()
 
 /obj/item/pen/retractable/attack_self(mob/user)
 	toggle()

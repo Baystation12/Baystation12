@@ -256,9 +256,6 @@
 	icon_state = "paper_bin1"
 	item_state = "sheet-metal"
 
-/obj/item/form_printer/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	return
-
 /obj/item/form_printer/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
 
 	if(!target || !flag)

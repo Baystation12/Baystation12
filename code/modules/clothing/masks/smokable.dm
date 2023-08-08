@@ -3,7 +3,7 @@
 	desc = "You're not sure what this is. You should probably ahelp it."
 	body_parts_covered = 0
 	waterproof = FALSE
-	item_flags = null
+	item_flags = ITEM_FLAG_TRY_ATTACK
 
 	var/lit = 0
 	var/icon_on
@@ -163,10 +163,10 @@
 		light(text)
 
 /obj/item/clothing/mask/smokable/attack(mob/living/M, mob/living/user, def_zone)
-	if(istype(M) && M.on_fire)
+	if (istype(M) && M.on_fire)
 		user.do_attack_animation(M)
 		light(SPAN_NOTICE("\The [user] coldly lights the \the [src] with the burning body of \the [M]."))
-		return 1
+		return TRUE
 	else
 		return ..()
 
@@ -334,16 +334,16 @@
 	return
 
 /obj/item/clothing/mask/smokable/cigarette/attack(mob/living/carbon/human/H, mob/user, def_zone)
-	if(lit && H == user && istype(H))
+	if (lit && H == user && istype(H))
 		var/obj/item/blocked = H.check_mouth_coverage()
-		if(blocked)
+		if (blocked)
 			to_chat(H, SPAN_WARNING("\The [blocked] is in the way!"))
-			return 1
+			return TRUE
 		to_chat(H, SPAN_NOTICE("You take a drag on your [name]."))
 		smoke(5)
 		add_trace_DNA(H)
-		return 1
-	return ..()
+		return TRUE
+	else return ..()
 
 /obj/item/clothing/mask/smokable/cigarette/afterattack(obj/item/reagent_containers/glass/glass, mob/user, proximity)
 	..()

@@ -19,6 +19,7 @@
 	name = "Anomaly power utilizer"
 	icon = 'icons/obj/tools/xenoarcheology_anomaly_utilizer.dmi'
 	icon_state = "anodev"
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	var/activated = 0
 	var/duration = 0
 	var/interval = 0
@@ -205,9 +206,9 @@
 
 /obj/item/anodevice/attack(mob/living/M as mob, mob/living/user as mob, def_zone)
 	if (!istype(M))
-		return
+		return ..()
 
-	if(activated && inserted_battery.battery_effect.effect == EFFECT_TOUCH && !isnull(inserted_battery))
+	if (activated && inserted_battery.battery_effect.effect == EFFECT_TOUCH && !isnull(inserted_battery))
 		inserted_battery.battery_effect.DoEffectTouch(M)
 		inserted_battery.use_power(energy_consumed_on_touch)
 		user.visible_message(SPAN_NOTICE("[user] taps [M] with [src], and it shudders on contact."))
@@ -216,3 +217,4 @@
 
 	if(inserted_battery.battery_effect)
 		admin_attack_log(user, M, "Tapped their victim with \a [src] (EFFECT: [inserted_battery.battery_effect.name])", "Was tapped by \a [src] (EFFECT: [inserted_battery.battery_effect.name])", "used \a [src] (EFFECT: [inserted_battery.battery_effect.name]) to tap")
+	return TRUE
