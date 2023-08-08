@@ -24,6 +24,7 @@
 
 	atom_holder = holder
 	chameleon_verb = /atom/proc/chameleon_appearance
+	atom_holder.verbs += chameleon_verb
 
 /datum/extension/chameleon/Destroy()
 	. = ..()
