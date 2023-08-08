@@ -266,14 +266,14 @@
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = TRUE
 		req_access.Cut()
-		to_chat(user, SPAN_NOTICE("You you disable the security protocols."))
+		to_chat(user, SPAN_NOTICE("You disable the security protocols."))
 		src.updateUsrDialog()
 		return 1
 
 /obj/machinery/r_n_d/server/robotics
 	name = "robotics R&D server"
-	id_with_upload_string = "1;2"
-	id_with_download_string = "1;2"
+	id_with_upload_string = "1;2;3"
+	id_with_download_string = "1;2;3"
 	server_id = 2
 
 /obj/machinery/r_n_d/server/core
