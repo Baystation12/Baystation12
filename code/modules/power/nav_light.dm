@@ -4,6 +4,7 @@
 	icon = 'icons/obj/structures/nav_light.dmi'
 	icon_state = "nav_light"
 	color = "#f0f0f0"
+	anchored = TRUE
 
 
 /obj/machinery/nav_light/Initialize()
