@@ -1,8 +1,0 @@
-author: emmanuelbassil, SierraKomodo
-delete-after: true
-changes:
-  - tweak: Melee weapon cooldown has been tweaked to be less spammy.
-  - bugfix: You are now able to examine/jointlock/dislocate/and pin other mobs using
-      grabs, depending on intent.
-  - tweak: Grabs now leave fingerprints on uncovered body parts. If covered, chance
-      of prints/fibers on clothing as previous behavior.
