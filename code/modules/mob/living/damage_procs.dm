@@ -18,6 +18,14 @@
 	if(!damage)
 		return FALSE
 
+	switch (damagetype)
+		if (DAMAGE_EMP, DAMAGE_FIRE)
+			return FALSE // These damages are handled separately by existing legacy code
+		if (DAMAGE_BIO)
+			damagetype = DAMAGE_TOXIN
+		if (DAMAGE_EXPLODE, DAMAGE_PSIONIC)
+			damagetype = DAMAGE_BRUTE
+
 	switch(damagetype)
 		if (DAMAGE_BRUTE)
 			adjustBruteLoss(damage)
@@ -31,12 +39,14 @@
 			adjustOxyLoss(damage)
 		if (DAMAGE_GENETIC)
 			adjustCloneLoss(damage)
-		if (DAMAGE_PAIN)
+		if (DAMAGE_STUN, DAMAGE_PAIN)
 			adjustHalLoss(damage)
 		if (DAMAGE_SHOCK)
 			electrocute_act(damage, used_weapon, 1, def_zone)
 		if (DAMAGE_RADIATION)
 			apply_radiation(damage)
+		if (DAMAGE_BRAIN)
+			adjustBrainLoss(damage)
 
 	updatehealth()
 	return TRUE
