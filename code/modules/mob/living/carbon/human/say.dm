@@ -148,19 +148,18 @@
 	return verb
 
 /mob/living/carbon/human/handle_speech_problems(list/message_data)
-	if(silent || (sdisabilities & MUTED))
+	if (silent || (sdisabilities & MUTED))
 		message_data[1] = ""
-		. = 1
+		return TRUE
 
-	else if(istype(wear_mask, /obj/item/clothing/mask))
+	if (istype(wear_mask, /obj/item/clothing/mask))
 		var/obj/item/clothing/mask/M = wear_mask
 		if(M.voicechange)
 			message_data[1] = pick(M.say_messages)
 			message_data[2] = pick(M.say_verbs)
-			. = 1
+			return TRUE
 
-	else
-		. = ..(message_data)
+	return ..(message_data)
 
 /mob/living/carbon/human/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
 	switch(message_mode)
