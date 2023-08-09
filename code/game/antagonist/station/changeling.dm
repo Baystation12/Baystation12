@@ -28,6 +28,7 @@ GLOBAL_DATUM_INIT(changelings, /datum/antagonist/changeling, new)
 	if(. && player && player.current)
 		player.current.remove_changeling_powers()
 		player.current.verbs -= /datum/changeling/proc/EvolutionMenu
+		player.current.remove_language(LANGUAGE_CHANGELING_GLOBAL)
 		QDEL_NULL(player.changeling)
 
 /datum/antagonist/changeling/create_objectives(datum/mind/changeling)
