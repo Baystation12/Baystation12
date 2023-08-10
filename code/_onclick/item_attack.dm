@@ -278,6 +278,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if (weapon.force > 0 && get_max_health() && !HAS_FLAGS(weapon.item_flags, ITEM_FLAG_NO_BLUDGEON))
 		user.setClickCooldown(user.get_attack_speed(weapon))
 		user.do_attack_animation(src)
+		if (!aura_check(AURA_TYPE_WEAPON, weapon, user))
+			return TRUE
 		var/damage_flags = weapon.damage_flags()
 		if (!can_damage_health(weapon.force, weapon.damtype, damage_flags))
 			playsound(src, weapon.hitsound, 50, TRUE)
