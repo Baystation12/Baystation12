@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Bluespace turfs made from the BSD event now properly revert to normal
-      floors.
