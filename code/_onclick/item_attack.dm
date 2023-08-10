@@ -299,6 +299,15 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		if (!hit_zone)
 			return TRUE
 
+		if (!weapon.no_attack_log)
+			admin_attack_log(
+				user,
+				src,
+				"Attacked using \a [weapon] (DAMTYE: [uppertext(weapon.damtype)])",
+				"Was attacked with \a [weapon] (DAMTYE: [uppertext(weapon.damtype)])",
+				"used \a [weapon] (DAMTYE: [uppertext(weapon.damtype)]) to attack"
+			)
+
 		var/datum/attack_result/result = hit_zone
 		if (istype(result))
 			if (result.hit_zone)
