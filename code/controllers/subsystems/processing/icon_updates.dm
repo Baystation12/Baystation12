@@ -36,11 +36,8 @@ SUBSYSTEM_DEF(icon_update)
 		else
 			atom.update_icon()
 		if (no_mc_tick)
-<<<<<<< ours
-=======
 			if (i % 100)
 				continue
->>>>>>> theirs
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
 			queue.Cut(1, i + 1)
