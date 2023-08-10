@@ -422,7 +422,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return FALSE
 	if (!no_attack_log)
 		admin_attack_log(user, subject, "Attacked using \a [src] (DAMTYE: [uppertext(damtype)])", "Was attacked with \a [src] (DAMTYE: [uppertext(damtype)])", "used \a [src] (DAMTYE: [uppertext(damtype)]) to attack")
-	user.setClickCooldown(attack_cooldown + w_class)
+	user.setClickCooldown(user.get_attack_speed(src))
 	if (animate)
 		user.do_attack_animation(subject)
 	if (!subject.aura_check(AURA_TYPE_WEAPON, src, user))
@@ -473,7 +473,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /mob/living/get_attack_speed(obj/item/item)
 	var/speed = base_attack_cooldown
 	if (istype(item))
-		speed = item.attack_cooldown
+		speed = item.attack_cooldown + item.w_class
 	return speed
 
 
