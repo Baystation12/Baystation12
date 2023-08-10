@@ -1,7 +1,7 @@
 /obj/machinery/reagentgrinder
 	name = "reagent grinder"
 	desc = "An industrial reagent grinder with heavy carbide cutting blades."
-	icon = 'icons/obj/kitchen.dmi'
+	icon = 'icons/obj/machines/kitchen.dmi'
 	icon_state = "rgrinder"
 	layer = BELOW_OBJ_LAYER
 	density = TRUE

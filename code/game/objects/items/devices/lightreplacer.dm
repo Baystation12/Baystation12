@@ -36,7 +36,7 @@
 /obj/item/device/lightreplacer
 	name = "light replacer"
 	desc = "A lightweight automated device, capable of interfacing with and rapidly replacing standard light installations."
-	icon = 'icons/obj/janitor.dmi'
+	icon = 'icons/obj/janitor_tools.dmi'
 	icon_state = "lightreplacer0"
 	item_state = "electronic"
 

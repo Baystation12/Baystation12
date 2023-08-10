@@ -2,7 +2,7 @@
 	name = "wet floor sign"
 	desc = "The words flicker as if they mean nothing."
 	anchored = TRUE
-	icon = 'icons/obj/janitor.dmi' // move these into their own dmi if we ever add more than 1 of these
+	icon = 'icons/obj/janitor_tools.dmi' // move these into their own dmi if we ever add more than 1 of these
 	var/obj/item/holosign_creator/projector
 	icon_state = "holosign"
 

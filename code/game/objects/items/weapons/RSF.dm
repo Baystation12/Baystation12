@@ -7,7 +7,7 @@ RSF
 /obj/item/rsf
 	name = "rapid service fabricator"
 	desc = "A device used to rapidly deploy service items."
-	icon = 'icons/obj/tools.dmi'
+	icon = 'icons/obj/tools/rcd.dmi'
 	icon_state = "rcd"
 	opacity = 0
 	density = FALSE

@@ -1,7 +1,7 @@
 /obj/item/rocksliver
 	name = "rock sliver"
 	desc = "It looks extremely delicate."
-	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon = 'icons/obj/xenoarchaeology_finds.dmi'
 	icon_state = "sliver1"
 	randpixel = 8
 	w_class = ITEM_SIZE_TINY
@@ -82,7 +82,7 @@
 /obj/item/device/core_sampler
 	name = "core sampler"
 	desc = "Used to extract geological core samples."
-	icon = 'icons/obj/sampler.dmi'
+	icon = 'icons/obj/tools/sampler.dmi'
 	icon_state = "sampler0"
 	item_state = "screwdriver_brown"
 	w_class = ITEM_SIZE_TINY

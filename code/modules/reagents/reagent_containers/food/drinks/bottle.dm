@@ -57,7 +57,7 @@
 	if (prob(33))
 		new /obj/item/material/shard (newloc)
 	B.icon_state = icon_state
-	var/icon/I = new ('icons/obj/drinks.dmi', icon_state)
+	var/icon/I = new ('icons/obj/food/drinks.dmi', icon_state)
 	I.Blend(B.broken_outline, ICON_OVERLAY, rand(5), 1)
 	I.SwapColor(rgb(255, 0, 220, 255), rgb(0, 0, 0, 0))
 	B.icon = I
@@ -117,7 +117,7 @@
 /obj/item/reagent_containers/food/drinks/bottle/on_update_icon()
 	underlays.Cut()
 	if (rag)
-		var/underlay_image = image(icon='icons/obj/drinks.dmi', icon_state=rag.on_fire? "[rag_underlay]_lit" : rag_underlay)
+		var/underlay_image = image(icon='icons/obj/food/drinks.dmi', icon_state=rag.on_fire? "[rag_underlay]_lit" : rag_underlay)
 		underlays += underlay_image
 		set_light(rag.light_max_bright, 0.1, rag.light_outer_range, 2, rag.light_color)
 	else
@@ -813,7 +813,7 @@
 /obj/item/broken_bottle
 	name = "Broken Bottle"
 	desc = "A bottle with a sharp broken bottom."
-	icon = 'icons/obj/drinks.dmi'
+	icon = 'icons/obj/food/drinks.dmi'
 	icon_state = "broken_bottle"
 	force = 9
 	throwforce = 5
@@ -822,7 +822,7 @@
 	item_state = "beer"
 	attack_verb = list("stabbed", "slashed", "attacked")
 	sharp = TRUE
-	var/icon/broken_outline = icon('icons/obj/drinks.dmi', "broken")
+	var/icon/broken_outline = icon('icons/obj/food/drinks.dmi', "broken")
 
 
 /obj/item/broken_bottle/attack(mob/living/carbon/M, mob/living/carbon/user)

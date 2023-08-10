@@ -1,7 +1,7 @@
 /obj/item/gunbox
 	name = "sidearm kit"
 	desc = "A secure box containing a sidearm."
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/boxes.dmi'
 	icon_state = "excavation"
 	var/list/gun_options = list(
 		"Classic - Secure Smartgun" = /obj/item/gun/energy/gun/secure/preauthorized,

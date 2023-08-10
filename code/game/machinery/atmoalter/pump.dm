@@ -1,7 +1,7 @@
 /obj/machinery/portable_atmospherics/powered/pump
 	name = "portable air pump"
 
-	icon = 'icons/obj/atmos.dmi'
+	icon = 'icons/obj/atmospherics/atmos.dmi'
 	icon_state = "psiphon:0"
 	density = TRUE
 	w_class = ITEM_SIZE_NORMAL

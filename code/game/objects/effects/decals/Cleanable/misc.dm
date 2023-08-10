@@ -2,14 +2,14 @@
 	name = "clutter"
 	desc = "Someone should clean that up."
 	gender = PLURAL
-	icon = 'icons/obj/objects.dmi'
+	icon = 'icons/obj/materials/shards.dmi'
 	icon_state = "shards"
 
 /obj/effect/decal/cleanable/ash
 	name = "ashes"
 	desc = "Ashes to ashes, dust to dust, and into space."
 	gender = PLURAL
-	icon = 'icons/obj/objects.dmi'
+	icon = 'icons/obj/ash.dmi'
 	icon_state = "ash"
 
 /obj/effect/decal/cleanable/ash/attack_hand(mob/user)
@@ -60,7 +60,7 @@
 /obj/effect/decal/cleanable/molten_item
 	name = "gooey grey mass"
 	desc = "It looks like a melted... something."
-	icon = 'icons/obj/chemical.dmi'
+	icon = 'icons/obj/chemical_storage.dmi'
 	icon_state = "molten"
 	persistent = TRUE
 	generic_filth = TRUE

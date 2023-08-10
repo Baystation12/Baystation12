@@ -9,7 +9,7 @@
 
 /obj/machinery/porta_turret
 	name = "turret"
-	icon = 'icons/obj/turrets.dmi'
+	icon = 'icons/obj/machines/turrets.dmi'
 	icon_state = "turretCover"
 	anchored = TRUE
 
@@ -636,7 +636,7 @@ var/global/list/turret_icons
 
 /obj/machinery/porta_turret_construct
 	name = "turret frame"
-	icon = 'icons/obj/turrets.dmi'
+	icon = 'icons/obj/machines/turrets.dmi'
 	icon_state = "turret_frame"
 	density = TRUE
 	var/target_type = /obj/machinery/porta_turret	// The type we intend to build
@@ -835,7 +835,7 @@ var/global/list/turret_icons
 	return
 
 /atom/movable/porta_turret_cover
-	icon = 'icons/obj/turrets.dmi'
+	icon = 'icons/obj/machines/turrets.dmi'
 
 
 

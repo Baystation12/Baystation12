@@ -22,7 +22,7 @@
 	return 0	//If it gets to here, it means no suitable wire to link to was found.
 
 /obj/machinery/logic/indicator/bulb
-	icon = 'icons/obj/lighting.dmi'
+	icon = 'icons/obj/structures/lighting.dmi'
 	icon_state = "bulb0"
 
 /obj/machinery/logic/indicator/bulb/process()

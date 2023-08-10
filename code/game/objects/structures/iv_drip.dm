@@ -1,6 +1,6 @@
 /obj/structure/iv_stand
 	name = "\improper IV drip"
-	icon = 'icons/obj/iv_drip.dmi'
+	icon = 'icons/obj/structures/iv_drip.dmi'
 	icon_state = "unhooked"
 	anchored = FALSE
 	density = FALSE

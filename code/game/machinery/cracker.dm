@@ -1,7 +1,7 @@
 /obj/machinery/portable_atmospherics/cracker
 	name = "molecular cracking unit"
 	desc = "An integrated catalytic water cracking system used to break H2O down into H and O. An advanced molecular extractor also allows it to isolate liquid deuterium from seawater."
-	icon = 'icons/obj/machines/cracker.dmi'
+	icon = 'icons/obj/machines/mining/cracker.dmi'
 	icon_state = "cracker"
 	construct_state = /singleton/machine_construction/default/panel_closed
 	density = TRUE
@@ -20,7 +20,12 @@
 	var/deuterium_generation_amount = 1
 
 /obj/machinery/portable_atmospherics/cracker/on_update_icon()
-	icon_state = (use_power == POWER_USE_ACTIVE) ? "cracker_on" : "cracker"
+	overlays.Cut()
+	if(panel_open)
+		overlays += "[icon_state]_panel"
+	if(use_power == POWER_USE_ACTIVE)
+		overlays += emissive_appearance(icon, "[icon_state]_lights")
+		overlays += "[icon_state]_lights"
 
 /obj/machinery/portable_atmospherics/cracker/interface_interact(mob/user)
 	if(use_power == POWER_USE_IDLE)

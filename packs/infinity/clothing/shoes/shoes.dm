@@ -1,8 +1,8 @@
 /obj/item/clothing/shoes/civilian
 	name = "leather shoes"
 	desc = "The best choice for haired assistants."
-	icon = 'packs/infinity/icons/obj/clothing/obj_feet.dmi'
-	item_icons = list(slot_shoes_str = 'packs/infinity/icons/mob/onmob/onmob_feet.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_feet.dmi'
+	item_icons = list(slot_shoes_str = 'maps/sierra/icons/mob/onmob/onmob_feet.dmi')
 	icon_state = "leather_shoes"
 	item_state = "leather_shoes"
 
@@ -22,8 +22,8 @@
 	name = "low workboots"
 	icon_state = "workboots"
 	item_state = "workboots"
-	icon = 'packs/infinity/icons/obj/clothing/obj_feet.dmi'
-	item_icons = list(slot_shoes_str = 'packs/infinity/icons/mob/onmob/onmob_feet.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_feet.dmi'
+	item_icons = list(slot_shoes_str = 'maps/sierra/icons/mob/onmob/onmob_feet.dmi')
 
 /obj/item/clothing/shoes/combat/marine
 	icon_state = "swat"
@@ -32,9 +32,9 @@
 /obj/item/clothing/shoes/anime_white
 	name = "white shoes"
 	desc = "Just a nice looking shoes."
-	icon = 'packs/infinity/icons/obj/clothing/obj_feet.dmi'
+	icon = 'maps/sierra/icons/obj/clothing/obj_feet.dmi'
 	item_icons = list(
-		slot_shoes_str = 'packs/infinity/icons/mob/onmob/onmob_feet.dmi',
+		slot_shoes_str = 'maps/sierra/icons/mob/onmob/onmob_feet.dmi',
 		slot_r_hand_str = 'packs/infinity/icons/mob/onmob/righthand.dmi',
 		slot_l_hand_str = 'packs/infinity/icons/mob/onmob/lefthand.dmi')
 	icon_state = "anime_shoes_white"
@@ -43,9 +43,9 @@
 /obj/item/clothing/shoes/anime_blue
 	name = "blue shoes"
 	desc = "Just a nice looking shoes."
-	icon = 'packs/infinity/icons/obj/clothing/obj_feet.dmi'
+	icon = 'maps/sierra/icons/obj/clothing/obj_feet.dmi'
 	item_icons = list(
-		slot_shoes_str = 'packs/infinity/icons/mob/onmob/onmob_feet.dmi',
+		slot_shoes_str = 'maps/sierra/icons/mob/onmob/onmob_feet.dmi',
 		slot_r_hand_str = 'packs/infinity/icons/mob/onmob/righthand.dmi',
 		slot_l_hand_str = 'packs/infinity/icons/mob/onmob/lefthand.dmi')
 	icon_state = "anime_shoes_blue"
@@ -56,8 +56,8 @@
 	desc = "Lacking a durasteel horse to ride."
 	icon_state = "cowboy"
 	item_state = "cowboy"
-	icon = 'packs/infinity/icons/obj/clothing/obj_feet.dmi'
-	item_icons = list(slot_shoes_str = 'packs/infinity/icons/mob/onmob/onmob_feet.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_feet.dmi'
+	item_icons = list(slot_shoes_str = 'maps/sierra/icons/mob/onmob/onmob_feet.dmi')
 
 /obj/item/clothing/shoes/cowboy/classic
 	name = "classic cowboy boots"
@@ -74,8 +74,8 @@
 /obj/item/clothing/shoes/brand_shoes
 	name = "brand shoes"
 	desc = "Some sneakers with pretty much distinctive fashion."
-	icon = 'packs/infinity/icons/obj/clothing/obj_feet.dmi'
-	item_icons = list(slot_shoes_str = 'packs/infinity/icons/mob/onmob/onmob_feet.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_feet.dmi'
+	item_icons = list(slot_shoes_str = 'maps/sierra/icons/mob/onmob/onmob_feet.dmi')
 	icon_state = "brand_shoes1"
 	item_state = "brand_shoes1"
 
@@ -106,23 +106,23 @@
 /obj/item/clothing/shoes/geta
 	name = "red geta"
 	desc = "These sandals originate from culture of Japan and are meant to be an accompaniment for kimonos."
-	icon = 'packs/infinity/icons/obj/clothing/obj_feet.dmi'
-	item_icons = list(slot_shoes_str = 'packs/infinity/icons/mob/onmob/onmob_feet.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_feet.dmi'
+	item_icons = list(slot_shoes_str = 'maps/sierra/icons/mob/onmob/onmob_feet.dmi')
 	icon_state = "red_geta"
 	item_state = "red_geta"
 
 /obj/item/clothing/shoes/geta/black
 	name = "black geta"
 	desc = "These sandals originate from culture of Japan and are meant to be an accompaniment for kimonos."
-	icon = 'packs/infinity/icons/obj/clothing/obj_feet.dmi'
-	item_icons = list(slot_shoes_str = 'packs/infinity/icons/mob/onmob/onmob_feet.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_feet.dmi'
+	item_icons = list(slot_shoes_str = 'maps/sierra/icons/mob/onmob/onmob_feet.dmi')
 	icon_state = "black_geta"
 	item_state = "black_geta"
 
 /obj/item/clothing/shoes/noble_boots
 	name = "noble boots"
 	desc = "Polished leather boots that would rather fit some Avalonian nobleman."
-	icon = 'packs/infinity/icons/obj/clothing/obj_feet.dmi'
-	item_icons = list(slot_shoes_str = 'packs/infinity/icons/mob/onmob/onmob_feet.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_feet.dmi'
+	item_icons = list(slot_shoes_str = 'maps/sierra/icons/mob/onmob/onmob_feet.dmi')
 	icon_state = "noble_boots"
 	item_state = "noble_boots"

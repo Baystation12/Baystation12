@@ -11,7 +11,7 @@
 /obj/machinery/computer/cryopod
 	name = "cryogenic oversight console"
 	desc = "An interface between crew and the cryogenic storage oversight systems."
-	icon = 'icons/obj/Cryogenic2.dmi'
+	icon = 'icons/obj/machines/medical/bodyscanner.dmi'
 	icon_state = "cellconsole"
 	density = FALSE
 	interact_offline = 1
@@ -29,12 +29,15 @@
 /obj/machinery/computer/cryopod/robot
 	name = "robotic storage console"
 	desc = "An interface between crew and the robotic storage systems."
-	icon = 'icons/obj/robot_storage.dmi'
+	icon = 'icons/obj/machines/robot_storage.dmi'
 	icon_state = "console"
 
 	storage_type = "cyborgs"
 	storage_name = "Robotic Storage Control"
 	allow_items = 0
+
+/obj/machinery/computer/cryopod/robot/on_update_icon()
+	return
 
 /obj/machinery/computer/cryopod/interface_interact(mob/user)
 	interact(user)
@@ -126,7 +129,7 @@
 
 	name = "cryogenic feed"
 	desc = "A bewildering tangle of machinery and pipes."
-	icon = 'icons/obj/Cryogenic2.dmi'
+	icon = 'icons/obj/machines/medical/cryogenic_legacy.dmi'
 	icon_state = "cryo_rear"
 	anchored = TRUE
 	dir = WEST
@@ -135,7 +138,7 @@
 /obj/machinery/cryopod
 	name = "cryogenic freezer"
 	desc = "A man-sized pod for entering suspended animation."
-	icon = 'icons/obj/Cryogenic2.dmi'
+	icon = 'icons/obj/machines/medical/bodyscanner.dmi'
 	icon_state = "body_scanner_0"
 	density = TRUE
 	anchored = TRUE
@@ -180,7 +183,7 @@
 /obj/machinery/cryopod/robot
 	name = "robotic storage unit"
 	desc = "A storage unit for robots."
-	icon = 'icons/obj/robot_storage.dmi'
+	icon = 'icons/obj/machines/robot_storage.dmi'
 	icon_state = "pod_0"
 	base_icon_state = "pod_0"
 	occupied_icon_state = "pod_1"
@@ -588,7 +591,7 @@
 /obj/structure/broken_cryo
 	name = "broken cryo sleeper"
 	desc = "Whoever was inside isn't going to wake up now. It looks like you could pry it open with a crowbar."
-	icon = 'icons/obj/Cryogenic2.dmi'
+	icon = 'icons/obj/machines/medical/bodyscanner.dmi'
 	icon_state = "broken_cryo"
 	anchored = TRUE
 	density = TRUE

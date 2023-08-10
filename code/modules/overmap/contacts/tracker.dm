@@ -1,7 +1,7 @@
 /obj/item/ship_tracker
 	name = "long range tracker"
 	desc = "A complex device that transmits conspicuous signals, easily locked onto by modern sensors hardware."
-	icon = 'icons/obj/ship_tracker.dmi'
+	icon = 'icons/obj/machines/ship_tracker.dmi'
 	icon_state = "disabled"
 	w_class = ITEM_SIZE_SMALL
 

@@ -3,7 +3,7 @@ var/global/const/SAFETY_COOLDOWN = 100
 /obj/machinery/recycler
 	name = "recycler"
 	desc = "A large crushing machine which is used to grind lumps of trash down; there are lights on the side of it."
-	icon = 'icons/obj/recycling.dmi'
+	icon = 'icons/obj/machines/recycling.dmi'
 	icon_state = "grinder-b0"
 	layer = MOB_LAYER+1 // Overhead
 	anchored = TRUE

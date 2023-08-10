@@ -1,7 +1,7 @@
 /obj/item/storage/fancy/pencilcase
 	name = "pencil case"
 	desc = "A pencil case for all those schoolboys to carry."
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/pencil_case.dmi'
 	icon_state = "pencil_case"
 	open_sound = 'sound/effects/storage/unzip.ogg'
 	w_class = ITEM_SIZE_SMALL

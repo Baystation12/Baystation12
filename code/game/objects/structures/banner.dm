@@ -25,7 +25,7 @@
 		, "sundial" = "the sundial, a symbol of Precursor worship, an Unathi faith"
 		, "cupofknowledge" = "the Cup of Knowledge, a symbol of Markesheli, an Unathi faith"
 	)
-	icon = 'icons/obj/banner.dmi'
+	icon = 'icons/obj/structures/banner.dmi'
 	icon_state = "blank_up"
 	var/selected = "blank"
 

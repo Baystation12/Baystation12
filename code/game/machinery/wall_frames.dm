@@ -1,7 +1,7 @@
 /obj/item/frame
 	name = "frame"
 	desc = "Used for building machines."
-	icon = 'icons/obj/monitors.dmi'
+	icon = 'icons/obj/machines/frames.dmi'
 	icon_state = "alarm_bitem"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	var/build_machine_type
@@ -54,19 +54,21 @@
 /obj/item/frame/fire_alarm
 	name = "fire alarm frame"
 	desc = "Used for building fire alarms."
-	icon = 'icons/obj/firealarm.dmi'
+	icon = 'icons/obj/machines/firealarm.dmi'
 	icon_state = "casing"
 	build_machine_type = /obj/machinery/firealarm
 
 /obj/item/frame/air_alarm
 	name = "air alarm frame"
 	desc = "Used for building air alarms."
+	icon = 'icons/obj/machines/airalarm.dmi'
+	icon_state = "alarm_bitem"
 	build_machine_type = /obj/machinery/alarm
 
 /obj/item/frame/intercom
 	name = "intercom frame"
 	desc = "Used for building intercoms."
-	icon = 'icons/obj/radio.dmi'
+	icon = 'icons/obj/machines/radio.dmi'
 	icon_state = "intercom-f"
 	build_machine_type = /obj/item/device/radio/intercom
 
@@ -82,7 +84,7 @@
 /obj/item/frame/light
 	name = "light fixture frame"
 	desc = "Used for building lights."
-	icon = 'icons/obj/lighting.dmi'
+	icon = 'icons/obj/structures/lighting.dmi'
 	icon_state = "tube-construct-item"
 	build_machine_type = /obj/machinery/light_construct
 	reverse = 1
@@ -103,7 +105,7 @@
 
 /obj/item/frame/supermatter_alarm
 	name = "supermatter alarm frame"
-	icon = 'icons/obj/lighting.dmi'
+	icon = 'icons/obj/structures/lighting.dmi'
 	icon_state = "bulb-construct-item"
 	refund_amt = 1
 	build_machine_type = /obj/machinery/rotating_alarm/supermatter

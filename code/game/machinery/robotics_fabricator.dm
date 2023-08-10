@@ -1,8 +1,8 @@
 /obj/machinery/robotics_fabricator
 	name = "exosuit fabricator"
 	desc = "A machine used for construction of robotics and mechs."
-	icon = 'icons/obj/robotics.dmi'
-	icon_state = "fab-idle"
+	icon = 'icons/obj/machines/fabricators/robotics_fabricator.dmi'
+	icon_state = "fab"
 	density = TRUE
 	anchored = TRUE
 	idle_power_usage = 20
@@ -51,11 +51,13 @@
 /obj/machinery/robotics_fabricator/on_update_icon()
 	overlays.Cut()
 	if(panel_open)
-		icon_state = "fab-o"
-	else
-		icon_state = "fab-idle"
-	if(busy)
-		overlays += "fab-active"
+		overlays += "[icon_state]_panel"
+	if(is_powered())
+		overlays += emissive_appearance(icon, "[icon_state]_lights")
+		overlays += "[icon_state]_lights"
+	else if(busy)
+		overlays += emissive_appearance(icon, "[icon_state]_lights_working")
+		overlays += "[icon_state]_lights_working"
 
 /obj/machinery/robotics_fabricator/dismantle()
 	for(var/f in materials)

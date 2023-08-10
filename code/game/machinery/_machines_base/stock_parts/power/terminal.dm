@@ -3,6 +3,7 @@
 /obj/item/stock_parts/power/terminal
 	name = "wired connection"
 	desc = "A power connection directly to the grid, via power cables."
+	icon = 'icons/obj/machines/apc.dmi'
 	icon_state = "terminal"
 	priority = 2
 	var/obj/machinery/power/terminal/terminal

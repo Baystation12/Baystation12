@@ -42,7 +42,7 @@
 /obj/item/storage/bag/trash
 	name = "trash bag"
 	desc = "It's the heavy-duty black polymer kind. Time to take out the trash!"
-	icon = 'icons/obj/janitor.dmi'
+	icon = 'icons/obj/bags.dmi'
 	icon_state = "trashbag"
 	item_state = "trashbag"
 
@@ -97,7 +97,7 @@
 
 /obj/item/storage/bag/cash
 	name = "cash bag"
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/bags.dmi'
 	icon_state = "cashbag"
 	desc = "A bag for carrying lots of cash. It's got a big dollar sign printed on the front."
 	max_storage_space = 100

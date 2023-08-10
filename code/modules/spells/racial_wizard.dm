@@ -3,7 +3,7 @@
 /obj/item/magic_rock
 	name = "magical rock"
 	desc = "Legends say that this rock will unlock the true potential of anyone who touches it."
-	icon = 'icons/obj/wizard.dmi'
+	icon = 'icons/obj/cult.dmi'
 	icon_state = "magic rock"
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 1

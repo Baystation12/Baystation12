@@ -53,7 +53,7 @@
 
 /obj/machinery/alarm
 	name = "alarm"
-	icon = 'icons/obj/monitors.dmi'
+	icon = 'icons/obj/machines/airalarm.dmi'
 	icon_state = "alarm0"
 	anchored = TRUE
 	idle_power_usage = 80
@@ -900,7 +900,7 @@ FIRE ALARM
 /obj/machinery/firealarm
 	name = "fire alarm"
 	desc = "<i>\"Pull this in case of emergency\"</i>. Thus, keep pulling it forever."
-	icon = 'icons/obj/firealarm.dmi'
+	icon = 'icons/obj/machines/firealarm.dmi'
 	icon_state = "casing"
 	var/detecting = 1.0
 	var/working = 1.0
@@ -1189,7 +1189,7 @@ Just a object used in constructing fire alarms
 /obj/machinery/partyalarm
 	name = "\improper PARTY BUTTON"
 	desc = "Cuban Pete is in the house!"
-	icon = 'icons/obj/monitors.dmi'
+	icon = 'icons/obj/machines/firealarm.dmi'
 	icon_state = "fire0"
 	var/detecting = 1.0
 	var/working = 1.0

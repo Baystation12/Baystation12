@@ -1,6 +1,6 @@
 /obj/machinery/scrap/stacking_machine
 	name = "scrap stacking machine"
-	icon = 'icons/obj/machines/mining_machines.dmi'
+	icon = 'icons/obj/machines/mining/mining_machines.dmi'
 	icon_state = "stacker"
 	density = TRUE
 	anchored = TRUE

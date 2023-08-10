@@ -1,6 +1,6 @@
 /obj/turbolift_map_holder/sentinel
 	name = "Sentinel turbolift map placeholder"
-	icon = 'icons/obj/turbolift_preview_2x2.dmi'
+	icon = 'icons/obj/structures/turbolift_preview_2x2.dmi'
 	depth = 2
 	lift_size_x = 3
 	lift_size_y = 3

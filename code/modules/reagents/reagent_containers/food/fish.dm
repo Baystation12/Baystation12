@@ -181,7 +181,7 @@
 /obj/random/fish
 	name = "random fish fillet"
 	desc = "This is a random fish fillet."
-	icon = 'icons/obj/food.dmi'
+	icon = 'icons/obj/food/food.dmi'
 	icon_state = "fishfillet"
 	color = "#ff4040"
 

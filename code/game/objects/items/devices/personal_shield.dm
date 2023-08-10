@@ -1,7 +1,7 @@
 /obj/item/device/personal_shield
 	name = "personal shield"
 	desc = "Truly a life-saver: this device protects its user from being hit by objects moving very, very fast, as long as it holds a charge."
-	icon = 'icons/obj/batterer.dmi'
+	icon = 'icons/obj/tools/batterer.dmi'
 	icon_state = "battereroff"
 	slot_flags = SLOT_BELT
 	var/open = FALSE

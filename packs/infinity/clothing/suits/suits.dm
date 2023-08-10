@@ -1,8 +1,8 @@
 /obj/item/clothing/suit/sc_labcoat
 	name = "robotic bathrobe"
 	desc = "A suit that protects against minor chemical spills."
-	icon = 'packs/infinity/icons/obj/clothing/obj_suit.dmi'
-	item_icons = list(slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_suit.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
 	icon_state = "sc_labcoat"
 	item_state = "sc_labcoat"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
@@ -12,8 +12,8 @@
 /obj/item/clothing/suit/storage/toggle/civilian
 	name = "black jacket"
 	desc = "A black jacket for real white men."
-	icon = 'packs/infinity/icons/obj/clothing/obj_suit.dmi'
-	item_icons = list(slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_suit.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
 	icon_state = "black_jacket_o"
 	//icon_open = "black_jacket_o"
 	//icon_closed = "black_jacket_c"
@@ -21,8 +21,8 @@
 /obj/item/clothing/suit/storage/toggle/longjacket
 	name = "long jacket"
 	desc = "A long gray jacket"
-	icon = 'packs/infinity/icons/obj/clothing/obj_suit.dmi'
-	item_icons = list(slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_suit.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
 	icon_state = "longjacket_o"
 	//icon_open = "longjacket_o"
 	//icon_closed = "longjacket_c"
@@ -47,8 +47,8 @@
 /obj/item/clothing/suit/storage/tgbomber
 	name = "modern bomber jacket"
 	desc = "A leather bomber jacket."
-	icon = 'packs/infinity/icons/obj/clothing/obj_suit.dmi'
-	item_icons = list(slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_suit.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
 	icon_state = "bomberjacket"
 	body_parts_covered = UPPER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|ARMS
@@ -57,8 +57,8 @@
 /obj/item/clothing/suit/storage/janjacket
 	name = "janitor jacket"
 	desc = "A janitor's jacket. Gives unbelivable protection versus depression about your job."
-	icon = 'packs/infinity/icons/obj/clothing/obj_suit.dmi'
-	item_icons = list(slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_suit.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
 	icon_state = "janitor_jacket"
 	body_parts_covered = UPPER_TORSO|ARMS
 	allowed = list(/obj/item/device/flashlight,/obj/item/device/lightreplacer,/obj/item/storage/bag/trash,/obj/item/grenade/chem_grenade/cleaner,/obj/item/reagent_containers/spray/cleaner, /obj/item/mop, /obj/item/reagent_containers/glass/bucket)
@@ -71,8 +71,8 @@
 /obj/item/clothing/suit/armor/pcarrier/mainkraft/plastic
 	name = "plastic plate carrier"
 	desc = "Someone made it out of plastic with their own hands. There you can hang a sheet of armor."
-	icon = 'packs/infinity/icons/obj/clothing/obj_suit.dmi'
-	item_icons = list(slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_suit.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
 	icon_state = "plvest"
 
 /obj/item/clothing/suit/armor/pcarrier/mainkraft/plastic/New()
@@ -82,8 +82,8 @@
 /obj/item/clothing/suit/lux_tunic
 	name = "luxury tunic"
 	desc = "A luxury suit for some high-ranked officer."
-	icon = 'packs/infinity/icons/obj/clothing/obj_suit.dmi'
-	item_icons = list(slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_suit.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
 	icon_state = "admiral_tunic"
 	item_state = "admiral_tunic"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
@@ -100,7 +100,7 @@
 	desc = "Just a nice looking dress."
 	icon = 'packs/infinity/icons/obj/clothing/obj_under.dmi'
 	item_icons = list(
-		slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_suit.dmi',
+		slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi',
 		slot_r_hand_str = 'packs/infinity/icons/mob/onmob/righthand.dmi',
 		slot_l_hand_str = 'packs/infinity/icons/mob/onmob/lefthand.dmi')
 	icon_state = "anime_white"
@@ -111,16 +111,16 @@
 	desc = "Just a nice looking dress."
 	icon = 'packs/infinity/icons/obj/clothing/obj_under.dmi'
 	item_icons = list(
-		slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_suit.dmi')
+		slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
 	icon_state = "anime_blue"
 	item_state = "anime_blue"
 
 /obj/item/clothing/suit/snakeskin
 	name = "snakeskin coat"
 	desc = "A stylish snakeskin coat."
-	icon = 'packs/infinity/icons/obj/clothing/obj_suit.dmi'
+	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
 	item_icons = list(
-		slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_suit.dmi') //sprite by CeUvi#1236
+		slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi') //sprite by CeUvi#1236
 	icon_state = "snakeskin"
 	item_state = "snakeskin"
 	body_parts_covered = UPPER_TORSO|ARMS

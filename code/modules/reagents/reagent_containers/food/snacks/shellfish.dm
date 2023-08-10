@@ -2,7 +2,7 @@
 	abstract_type = /obj/item/shellfish
 	name = "shellfish"
 	desc = "You shouldn't be seeing this."
-	icon = 'icons/obj/food_shellfish.dmi'
+	icon = 'icons/obj/food/food_shellfish.dmi'
 	icon_state = "clam"
 	w_class = ITEM_SIZE_SMALL
 	throwforce = 0
@@ -80,7 +80,7 @@
 	abstract_type = /obj/item/reagent_containers/food/snacks/shellfish
 	name = "raw shellfish"
 	desc = "You shouldn't be seeing this."
-	icon = 'icons/obj/food_shellfish.dmi'
+	icon = 'icons/obj/food/food_shellfish.dmi'
 	icon_state = "clam_open"
 	filling_color = "#f6db93"
 	bitesize = 4
@@ -158,7 +158,7 @@
 	abstract_type = /obj/item/shell
 	name = "shell"
 	desc = "An empty shell."
-	icon = 'icons/obj/food_shellfish.dmi'
+	icon = 'icons/obj/food/food_shellfish.dmi'
 	icon_state = "clam_empty"
 	w_class = ITEM_SIZE_TINY
 	throw_speed = 4

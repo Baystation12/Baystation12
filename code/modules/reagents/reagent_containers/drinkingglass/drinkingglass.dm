@@ -8,7 +8,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	name = "glass" // Name when empty
 	base_name = "glass"
 	desc = "A generic drinking glass." // Description when empty
-	icon = 'icons/obj/drink_glasses/square.dmi'
+	icon = 'icons/obj/food/drink_glasses/square.dmi'
 	icon_state = null
 	base_icon = "square" // Base icon name
 	filling_states = "20;40;60;80;100"
@@ -138,7 +138,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	if(!filling_icons_cache["[base_icon][amount][overlay]"])
 		var/icon/base = new/icon(icon, "[base_icon][amount]")
 		if(overlay)
-			var/icon/extra = new/icon('icons/obj/drink_glasses/extras.dmi', overlay)
+			var/icon/extra = new/icon('icons/obj/food/drink_glasses/extras.dmi', overlay)
 			base.Blend(extra, ICON_MULTIPLY)
 		filling_icons_cache["[base_icon][amount][overlay]"] = image(base)
 	I.appearance = filling_icons_cache["[base_icon][amount][overlay]"]

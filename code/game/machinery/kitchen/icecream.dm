@@ -12,7 +12,7 @@
 /obj/machinery/icecream_vat
 	name = "icecream vat"
 	desc = "A heavy metal container used to produce and store ice cream."
-	icon = 'icons/obj/kitchen.dmi'
+	icon = 'icons/obj/machines/kitchen.dmi'
 	icon_state = "icecream_vat"
 	density = TRUE
 	anchored = FALSE

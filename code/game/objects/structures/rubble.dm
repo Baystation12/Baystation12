@@ -1,7 +1,7 @@
 /obj/structure/rubble
 	name = "pile of rubble"
 	desc = "One man's garbage is another man's treasure."
-	icon = 'icons/obj/rubble.dmi'
+	icon = 'icons/obj/structures/rubble.dmi'
 	icon_state = "base"
 	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
 	opacity = 1

@@ -1,7 +1,7 @@
 /obj/effect/force_portal
 	name = "portal"
 	desc = "Like looking into a mirror."
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/portals.dmi'
 	icon_state = "portal"
 	blend_mode = BLEND_SUBTRACT
 	density = TRUE

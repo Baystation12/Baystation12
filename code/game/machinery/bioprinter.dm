@@ -4,7 +4,7 @@
 /obj/machinery/organ_printer
 	name = "organ printer"
 	desc = "It's a machine that prints organs."
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/obj/machines/fabricators/organprinters.dmi'
 	icon_state = "bioprinter"
 
 	anchored = TRUE
@@ -31,9 +31,13 @@
 /obj/machinery/organ_printer/on_update_icon()
 	overlays.Cut()
 	if(panel_open)
-		overlays += "[icon_state]_panel_open"
-	if(printing)
-		overlays += "[icon_state]_working"
+		overlays += "[icon_state]_panel"
+	if(is_powered())
+		overlays += emissive_appearance(icon, "[icon_state]_lights")
+		overlays += "[icon_state]_lights"
+	else if(printing)
+		overlays += emissive_appearance(icon, "[icon_state]_lights_working")
+		overlays += "[icon_state]_lights_working"
 
 /obj/machinery/organ_printer/examine(mob/user)
 	. = ..()

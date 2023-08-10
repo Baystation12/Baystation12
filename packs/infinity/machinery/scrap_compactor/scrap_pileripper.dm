@@ -1,7 +1,7 @@
 /obj/machinery/pile_ripper
 	name = "pile ripper"
 	desc = "This machine rips everything in front of it apart."
-	icon = 'icons/obj/recycling.dmi'
+	icon = 'icons/obj/machines/recycling.dmi'
 	icon_state = "grinder-o0"
 	layer = MOB_LAYER+1 // Overhead
 	anchored = TRUE

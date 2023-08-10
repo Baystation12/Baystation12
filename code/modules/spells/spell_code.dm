@@ -42,7 +42,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 	var/cooldown_min = 0 //minimum possible cooldown for a charging spell
 
 	var/overlay = 0
-	var/overlay_icon = 'icons/obj/wizard.dmi'
+	var/overlay_icon = 'icons/obj/cult.dmi'
 	var/overlay_icon_state = "spell"
 	var/overlay_lifespan = 0
 

@@ -34,7 +34,7 @@
 /area/map_template/deepmaint)
 "gq" = (
 /obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
-	icon = 'icons/obj/hydroponics_growing.dmi';
+	icon = 'icons/obj/flora/hydroponics_growing.dmi';
 	icon_state = null
 	},
 /turf/simulated/floor/plating{
@@ -82,7 +82,7 @@
 /area/map_template/deepmaint)
 "no" = (
 /obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
-	icon = 'icons/obj/hydroponics_growing.dmi';
+	icon = 'icons/obj/flora/hydroponics_growing.dmi';
 	icon_state = null
 	},
 /turf/simulated/floor/asteroid{
@@ -94,7 +94,7 @@
 	dir = 8
 	},
 /obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
-	icon = 'icons/obj/hydroponics_growing.dmi';
+	icon = 'icons/obj/flora/hydroponics_growing.dmi';
 	icon_state = null
 	},
 /turf/simulated/floor/asteroid{

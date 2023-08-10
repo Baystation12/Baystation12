@@ -8,7 +8,7 @@
 
 /obj/machinery/power
 	name = null
-	icon = 'icons/obj/power.dmi'
+	icon = 'icons/obj/machines/power/supermatter.dmi'
 	anchored = TRUE
 	var/datum/powernet/powernet = null
 	use_power = POWER_USE_OFF

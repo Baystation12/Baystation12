@@ -180,6 +180,6 @@
 /obj/item/soap/on_update_icon()
 	overlays.Cut()
 	if(key_data)
-		overlays += image('icons/obj/items.dmi', icon_state = "soap_key_overlay")
+		overlays += image('icons/obj/soap.dmi', icon_state = "soap_key_overlay")
 	else if(decal_name)
 		overlays +=	overlay_image(icon, "decal-[decal_name]")

@@ -1,7 +1,7 @@
 /obj/item/glass_jar
 	name = "glass jar"
 	desc = "A small empty jar."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/jars.dmi'
 	icon_state = "jar"
 	w_class = ITEM_SIZE_SMALL
 	matter = list(MATERIAL_GLASS = 200)
@@ -93,7 +93,7 @@
 			for(var/obj/item/spacecash/S in src)
 				var/list/moneyImages = S.getMoneyImages()
 				for(var/A in moneyImages)
-					var/image/money = image('icons/obj/items.dmi', A)
+					var/image/money = image('icons/obj/jars.dmi', A)
 					money.pixel_x = rand(-2, 3)
 					money.pixel_y = rand(-6, 6)
 					money.SetTransform(scale = 0.6)

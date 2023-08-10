@@ -2,7 +2,7 @@
 
 /obj/machinery/atmospherics/unary/cryo_cell
 	name = "cryo cell"
-	icon = 'icons/obj/cryogenics.dmi' // map only
+	icon = 'icons/obj/machines/medical/cryogenics.dmi' // map only
 	icon_state = "pod_preview"
 	density = TRUE
 	anchored = TRUE
@@ -30,7 +30,7 @@
 
 /obj/machinery/atmospherics/unary/cryo_cell/Initialize()
 	. = ..()
-	icon = 'icons/obj/cryogenics_split.dmi'
+	icon = 'icons/obj/machines/medical/cryogenics_split.dmi'
 	update_icon()
 	atmos_init()
 
@@ -214,6 +214,9 @@
 	overlays.Cut()
 	icon_state = "pod[on]"
 	var/image/I
+
+	if(panel_open)
+		overlays += "pod_panel"
 
 	I = image(icon, "pod[on]_top")
 	I.pixel_z = 32

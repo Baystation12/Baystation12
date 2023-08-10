@@ -23,7 +23,7 @@ Random item spawning
 /obj/random/maintenance/solgov
 	name = "random maintenance item"
 	desc = "This is a random maintenance item."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/gifts.dmi'
 	icon_state = "gift1"
 
 /obj/random/maintenance/solgov/spawn_choices()
@@ -34,7 +34,7 @@ Random item spawning
 /obj/random/maintenance/solgov/clean
 	name = "random maintenance item"
 	desc = "This is a random maintenance item."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/gifts.dmi'
 	icon_state = "gift2"
 
 /obj/random/maintenance/solgov/clean/spawn_choices()
@@ -58,8 +58,8 @@ Random item spawning
 /obj/random/material_rnd_steel
 	name = "random steel"
 	desc = "This is a random metal ammout for RND's storage."
-	icon = 'icons/obj/materials.dmi'
-	icon_state = "sheet-plastic-mult"
+	icon = 'icons/obj/materials/materials.dmi'
+	icon_state = "sheet-metal-mult"
 	spawn_nothing_percentage = 50
 
 /obj/random/material_rnd_steel/spawn_choices()
@@ -69,7 +69,7 @@ Random item spawning
 /obj/random/material_rnd_glass
 	name = "random glass"
 	desc = "This is a random glass ammout for RND's storage."
-	icon = 'icons/obj/materials.dmi'
+	icon = 'icons/obj/materials/materials.dmi'
 	icon_state = "sheet-reinf-mult"
 	spawn_nothing_percentage = 50
 
@@ -80,7 +80,7 @@ Random item spawning
 /obj/random/blood_packs
 	name = "random blood"
 	desc = "This is random ammout of blood packs for medical bay."
-	icon = 'icons/obj/bloodpack.dmi'
+	icon = 'icons/obj/tools/bloodpack.dmi'
 	icon_state = "empty"
 	spawn_nothing_percentage = 0
 

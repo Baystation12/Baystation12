@@ -58,7 +58,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 /obj/structure/particle_accelerator
 	name = "particle accelerator"
 	desc = "Part of a Particle Accelerator."
-	icon = 'icons/obj/machines/particle_accelerator2.dmi'
+	icon = 'icons/obj/machines/power/particle_accelerator2.dmi'
 	icon_state = "none"
 	anchored = FALSE
 	density = TRUE
@@ -246,7 +246,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 /obj/machinery/particle_accelerator
 	name = "particle accelerator"
 	desc = "Part of a Particle Accelerator."
-	icon = 'icons/obj/machines/particle_accelerator2.dmi'
+	icon = 'icons/obj/machines/power/particle_accelerator2.dmi'
 	icon_state = "none"
 	anchored = FALSE
 	density = TRUE

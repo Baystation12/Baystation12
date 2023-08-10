@@ -1,8 +1,8 @@
 /obj/item/clothing/head/helmet/daft_punk //By KaReTa
 	name = "Daft Punk helm"
 	desc = "This fancy helm gives you the ability to see through clothes! Well, at least that's what rumors say.."
-	icon = 'packs/infinity/icons/obj/clothing/obj_head.dmi'
-	item_icons = list(slot_head_str = 'packs/infinity/icons/mob/onmob/onmob_head.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_head.dmi'
+	item_icons = list(slot_head_str = 'maps/sierra/icons/mob/onmob/onmob_head.dmi')
 	icon_state = "daft_helmet"
 
 

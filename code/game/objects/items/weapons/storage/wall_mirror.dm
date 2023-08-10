@@ -2,7 +2,7 @@
 /obj/item/storage/mirror
 	name = "mirror"
 	desc = "A SalonPro Nano-Mirror! The leading brand in hair salon products, utilizing nano-machinery to style your hair just right."
-	icon = 'icons/obj/watercloset.dmi'
+	icon = 'icons/obj/structures/mirror.dmi'
 	icon_state = "mirror"
 	density = FALSE
 	anchored = TRUE
@@ -64,7 +64,7 @@
 /obj/item/mirror
 	name = "mirror"
 	desc = "A SalonPro Nano-Mirror(TM) brand mirror! Now a portable version."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/lavatory.dmi'
 	icon_state = "mirror"
 	var/list/ui_cache
 

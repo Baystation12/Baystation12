@@ -10,6 +10,7 @@ Note: Must be placed within 3 tiles of the R&D Console
 	name = "destructive analyzer"
 	desc = "Accessed by a connected core fabricator console, it destroys and analyzes items and materials, recycling materials to any connected protolathe, and progressing the learning matrix of the connected core fabricator console."
 	icon_state = "d_analyzer"
+	icon = 'icons/obj/machines/research/destructive_analyzer.dmi'
 	var/obj/item/loaded_item = null
 	var/decon_mod = 0
 
@@ -28,12 +29,14 @@ Note: Must be placed within 3 tiles of the R&D Console
 	..()
 
 /obj/machinery/r_n_d/destructive_analyzer/on_update_icon()
+	overlays.Cut()
 	if(panel_open)
-		icon_state = "d_analyzer_t"
-	else if(loaded_item)
-		icon_state = "d_analyzer_l"
-	else
-		icon_state = "d_analyzer"
+		overlays += "d_analyzer_panel"
+	if(is_powered())
+		if(loaded_item)
+			overlays += emissive_appearance(icon, "d_analyzer_lights_item")
+		else
+			overlays += emissive_appearance(icon, "[icon_state]_lights")
 
 /obj/machinery/r_n_d/destructive_analyzer/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()
@@ -80,7 +83,7 @@ Note: Must be placed within 3 tiles of the R&D Console
 		busy = 1
 		loaded_item = O
 		to_chat(user, SPAN_NOTICE("You add \the [O] to \the [src]."))
-		flick("d_analyzer_la", src)
+		icon_state = "d_analyzer_entry"
 		spawn(10)
 			update_icon()
 			busy = 0

@@ -3,7 +3,7 @@
 /obj/singularity
 	name = "gravitational singularity"
 	desc = "A gravitational singularity."
-	icon = 'icons/obj/singularity.dmi'
+	icon = 'icons/obj/machines/power/singularity.dmi'
 	icon_state = "singularity_s1"
 	anchored = TRUE
 	density = TRUE
@@ -124,7 +124,7 @@
 			SetName("gravitational singularity")
 			desc = "A gravitational singularity."
 			current_size = STAGE_ONE
-			icon = 'icons/obj/singularity.dmi'
+			icon = 'icons/obj/machines/power/singularity.dmi'
 			icon_state = "singularity_s1"
 			pixel_x = 0
 			pixel_y = 0
@@ -461,7 +461,7 @@
 	move_self = 0
 	switch (current_size)
 		if(1)
-			overlays += image('icons/obj/singularity.dmi',"chain_s1")
+			overlays += image('icons/obj/machines/power/singularity.dmi',"chain_s1")
 		if(3)
 			overlays += image('icons/effects/96x96.dmi',"chain_s3")
 		if(5)

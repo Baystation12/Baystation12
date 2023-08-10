@@ -1,7 +1,7 @@
 /obj/item/device/measuring_tape
 	name = "measuring tape"
 	desc = "A coiled metallic tape used to check dimensions and lengths."
-	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon = 'icons/obj/tools/xenoarcheology_tape.dmi'
 	icon_state = "measuring"
 	origin_tech = list(TECH_MATERIAL = 1)
 	matter = list(MATERIAL_STEEL = 100)
@@ -10,7 +10,7 @@
 /obj/item/storage/bag/fossils
 	name = "fossil satchel"
 	desc = "Transports delicate fossils in suspension so they don't break during transit."
-	icon = 'icons/obj/mining.dmi'
+	icon = 'icons/obj/mining_satchel.dmi'
 	icon_state = "satchel"
 	slot_flags = SLOT_BELT | SLOT_POCKET
 	w_class = ITEM_SIZE_NORMAL
@@ -33,7 +33,7 @@
 /obj/item/device/ano_scanner
 	name = "\improper Alden-Saraspova counter"
 	desc = "A device which aids in triangulation of exotic particles."
-	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon = 'icons/obj/tools/xenoarcheology_scanner.dmi'
 	icon_state = "alden"
 	item_state = "analyzer"
 	origin_tech = list(TECH_BLUESPACE = 3, TECH_MAGNET = 3)
@@ -89,7 +89,7 @@
 /obj/item/device/depth_scanner
 	name = "depth analysis scanner"
 	desc = "A device used to check spatial depth and density of rock outcroppings."
-	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon = 'icons/obj/tools/xenoarcheology_scanner.dmi'
 	icon_state = "depth"
 	item_state = "xenoarch_device"
 	origin_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2, TECH_BLUESPACE = 2)

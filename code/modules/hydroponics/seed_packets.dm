@@ -3,7 +3,7 @@ var/global/list/plant_seed_sprites = list()
 //Seed packet object/procs.
 /obj/item/seeds
 	name = "packet of seeds"
-	icon = 'icons/obj/seeds.dmi'
+	icon = 'icons/obj/flora/seeds.dmi'
 	icon_state = "seedy"
 	w_class = ITEM_SIZE_SMALL
 
@@ -33,7 +33,7 @@ var/global/list/plant_seed_sprites = list()
 	if(plant_seed_sprites[seed_base_key])
 		seed_mask = plant_seed_sprites[seed_base_key]
 	else
-		seed_mask = image('icons/obj/seeds.dmi',"[is_seeds ? "seed" : "spore"]-mask")
+		seed_mask = image('icons/obj/flora/seeds.dmi',"[is_seeds ? "seed" : "spore"]-mask")
 		if(is_seeds) // Spore glass bits aren't coloured.
 			seed_mask.color = seed.get_trait(TRAIT_PLANT_COLOUR)
 		plant_seed_sprites[seed_base_key] = seed_mask
@@ -43,7 +43,7 @@ var/global/list/plant_seed_sprites = list()
 	if(plant_seed_sprites[seed_overlay_key])
 		seed_overlay = plant_seed_sprites[seed_overlay_key]
 	else
-		seed_overlay = image('icons/obj/seeds.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]")
+		seed_overlay = image('icons/obj/flora/seeds.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]")
 		seed_overlay.color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
 		plant_seed_sprites[seed_overlay_key] = seed_overlay
 
@@ -291,9 +291,11 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds/bamboo
 	seed_type = "bamboo"
 
-/obj/item/seeds/breather/seed_type = "breather"
+/obj/item/seeds/breather
+	seed_type = "breather"
 
-/obj/item/seeds/resin/seed_type = "resinplant"
+/obj/item/seeds/resin
+	seed_type = "resinplant"
 
 // fruit expansion
 

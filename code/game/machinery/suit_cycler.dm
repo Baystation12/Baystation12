@@ -5,7 +5,7 @@
 	anchored = TRUE
 	density = TRUE
 
-	icon = 'icons/obj/suitstorage.dmi'
+	icon = 'icons/obj/machines/suitstorage.dmi'
 	icon_state = "close"
 
 	req_access = list(access_captain, access_bridge)

@@ -178,7 +178,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 /obj/item/voxartifact
 	name = "Apex shard"
 	desc = "An odd-looking piece of organic matter, You can hear faint humming from the inside."
-	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon = 'icons/obj/urn.dmi'
 	icon_state = "urn"
 	var/favor_value = 4
 	var/open_chance = 1
@@ -267,7 +267,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 /obj/structure/voxanalyzer
 	name = "oddity analyzer"
 	desc = "An old, dusty machine meant to analyze various bluespace anomalies and send research data directly to SCGEC Observatory."
-	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon = 'icons/obj/machines/research/xenoarcheology_scanner.dmi'
 	icon_state = "scanner"
 	breakable = FALSE
 	anchored = FALSE

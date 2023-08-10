@@ -4,7 +4,7 @@
 	anchored = TRUE
 	density = TRUE
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	icon = 'icons/obj/virology.dmi'
+	icon = 'icons/obj/machines/research/virology.dmi'
 	icon_state = "analyser"
 
 	idle_power_usage = 20

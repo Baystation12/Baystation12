@@ -4,7 +4,7 @@
 	complexity = 2
 	activators = list("compare" = IC_PINTYPE_PULSE_IN, "if valid" = IC_PINTYPE_PULSE_OUT, "if not valid" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
-	icon = 'icons/obj/electronic_assemblies.dmi'
+	icon = 'icons/obj/assemblies/electronic_assemblies.dmi'
 
 /obj/item/integrated_circuit/filter/proc/may_pass(input)
 	return FALSE

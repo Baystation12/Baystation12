@@ -1,7 +1,7 @@
 /obj/item/magnetic_ammo
 	name = "flechette magazine"
 	desc = "A magazine containing steel flechettes."
-	icon = 'icons/obj/ammo.dmi'
+	icon = 'icons/obj/weapons/ammo.dmi'
 	icon_state = "assault_rifle"
 	var/projectile_type = /obj/item/projectile/bullet/magnetic/flechette
 	var/projectile_name = "flechette"
@@ -14,7 +14,7 @@
 /obj/item/magnetic_ammo/examine(mob/user)
 	. = ..()
 	to_chat(user, "There [(remaining == 1)? "is" : "are"] [remaining] [projectile_name]\s left!")
-	
+
 /obj/item/magnetic_ammo/skrell
 	name = "flechette cylinder"
 	desc = "A magazine containing flechettes, the design harkening back to cylinders on revolvers."
@@ -23,7 +23,7 @@
 	projectile_type = /obj/item/projectile/bullet/magnetic/flechette
 	projectile_name = "slug"
 	basetype = /obj/item/magnetic_ammo/skrell
-	
+
 /obj/item/magnetic_ammo/skrell/slug
 	name = "slug cylinder"
 	desc = "A magazine containing slugs, the design harkening back to cylinders on revolvers."

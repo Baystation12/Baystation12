@@ -1,7 +1,7 @@
 /obj/structure/grille
 	name = "grille"
 	desc = "A flimsy lattice of metal rods, with bolts to secure it to the floor."
-	icon = 'icons/obj/grille.dmi'
+	icon = 'icons/obj/structures/grille.dmi'
 	icon_state = "grille"
 	color = COLOR_STEEL
 	density = TRUE

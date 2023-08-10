@@ -1,6 +1,6 @@
 /obj/item/device/cosmetic_surgery_kit
 	name = "cosmetic surgery auto-kit"
-	icon = 'icons/obj/chameleon_projector.dmi'
+	icon = 'icons/obj/tools/chameleon_projector.dmi'
 	icon_state = "shield0"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT

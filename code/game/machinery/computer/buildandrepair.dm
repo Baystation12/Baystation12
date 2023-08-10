@@ -2,7 +2,7 @@
 
 /obj/machinery/constructable_frame/computerframe
 	name = "computer frame"
-	icon = 'icons/obj/stock_parts.dmi'
+	icon = 'icons/obj/machines/frames.dmi'
 	icon_state = "unwired"
 	obj_flags = OBJ_FLAG_ROTATABLE
 	expected_machine_type = "computer"

@@ -1,8 +1,8 @@
 /obj/item/clothing/head/beret/infinity //just a subtype to don't override original one
 	name = "service beret"
 	desc = "A light green beret for workers in service department. Someone may confuse it with leafs or limes, though."
-	icon = 'packs/infinity/icons/obj/clothing/obj_head.dmi'
-	item_icons = list(slot_head_str = 'packs/infinity/icons/mob/onmob/onmob_head.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_head.dmi'
+	item_icons = list(slot_head_str = 'maps/sierra/icons/mob/onmob/onmob_head.dmi')
 	icon_state = "service_beret"
 
 /obj/item/clothing/head/beret/infinity/hop
@@ -58,27 +58,27 @@
 /obj/item/clothing/head/beret/sec/corporate/saare
 	name = "SAARE beret"
 	desc = "A dark beret with a silver SAARE logo, usually worn by the company's employees."
-	icon = 'packs/infinity/icons/obj/clothing/obj_head.dmi'
-	item_icons = list(slot_head_str = 'packs/infinity/icons/mob/onmob/onmob_head.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_head.dmi'
+	item_icons = list(slot_head_str = 'maps/sierra/icons/mob/onmob/onmob_head.dmi')
 	icon_state = "corporate_beret_SAARE"
 
 /obj/item/clothing/head/beret/sec/corporate/pcrc
 	name = "PCRC beret"
 	desc = "A navy blue beret with a cyan PCRC logo, usually worn by the company's employees."
-	icon = 'packs/infinity/icons/obj/clothing/obj_head.dmi'
-	item_icons = list(slot_head_str = 'packs/infinity/icons/mob/onmob/onmob_head.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_head.dmi'
+	item_icons = list(slot_head_str = 'maps/sierra/icons/mob/onmob/onmob_head.dmi')
 	icon_state = "corporate_beret_PCRC"
 
 /obj/item/clothing/head/beret/sec/corporate/whitered
 	name = "white and red corporate beret"
 	desc = "A white corporate beret with a red logo."
-	icon = 'packs/infinity/icons/obj/clothing/obj_head.dmi'
-	item_icons = list(slot_head_str = 'packs/infinity/icons/mob/onmob/onmob_head.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_head.dmi'
+	item_icons = list(slot_head_str = 'maps/sierra/icons/mob/onmob/onmob_head.dmi')
 	icon_state = "corporate_beret_whitered"
 
 /obj/item/clothing/head/beret/sec/corporate/zpci
 	name = "ZPCI beret"
 	desc = "Black beret with blue ZPCI logo, typically worn by company's employees."
-	icon = 'packs/infinity/icons/obj/clothing/obj_head.dmi'
-	item_icons = list(slot_head_str = 'packs/infinity/icons/mob/onmob/onmob_head.dmi')
+	icon = 'maps/sierra/icons/obj/clothing/obj_head.dmi'
+	item_icons = list(slot_head_str = 'maps/sierra/icons/mob/onmob/onmob_head.dmi')
 	icon_state = "corporate_beret_ZPCI"

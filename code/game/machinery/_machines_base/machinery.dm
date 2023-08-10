@@ -7,7 +7,7 @@
 
 /obj/machinery
 	name = "machinery"
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/machines/wooden_tv.dmi'
 	w_class = ITEM_SIZE_NO_CONTAINER
 	layer = STRUCTURE_LAYER // Layer under items
 	init_flags = INIT_MACHINERY_START_PROCESSING

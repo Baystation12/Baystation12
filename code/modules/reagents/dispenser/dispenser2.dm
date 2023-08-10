@@ -1,6 +1,6 @@
 /obj/machinery/chemical_dispenser
 	name = "chemical dispenser"
-	icon = 'icons/obj/chemical.dmi'
+	icon = 'icons/obj/machines/dispensers.dmi'
 	icon_state = "dispenser"
 	layer = BELOW_OBJ_LAYER
 	clicksound = "button"
@@ -191,8 +191,11 @@
 
 /obj/machinery/chemical_dispenser/on_update_icon()
 	overlays.Cut()
+	if(is_powered())
+		overlays += emissive_appearance(icon, "[icon_state]_lights")
+		overlays += "[icon_state]_lights"
 	if(container)
 		var/mutable_appearance/beaker_overlay
-		beaker_overlay = image('icons/obj/chemical.dmi', src, "lil_beaker")
+		beaker_overlay = image('icons/obj/machines/dispensers.dmi', src, "lil_beaker")
 		beaker_overlay.pixel_x = rand(-10, 5)
 		overlays += beaker_overlay

@@ -36,7 +36,7 @@
 "i" = (
 /obj/effect/floor_decal/industrial/warning/dust,
 /obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
-	icon = 'icons/obj/hydroponics_growing.dmi';
+	icon = 'icons/obj/flora/hydroponics_growing.dmi';
 	icon_state = null
 	},
 /turf/simulated/floor/asteroid{
@@ -93,7 +93,7 @@
 	dir = 4
 	},
 /obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
-	icon = 'icons/obj/hydroponics_growing.dmi';
+	icon = 'icons/obj/flora/hydroponics_growing.dmi';
 	icon_state = null
 	},
 /turf/simulated/floor/asteroid{
@@ -159,7 +159,7 @@
 	dir = 4
 	},
 /obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
-	icon = 'icons/obj/hydroponics_growing.dmi';
+	icon = 'icons/obj/flora/hydroponics_growing.dmi';
 	icon_state = null
 	},
 /obj/machinery/light/small{
@@ -184,7 +184,7 @@
 	dir = 1
 	},
 /obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
-	icon = 'icons/obj/hydroponics_growing.dmi';
+	icon = 'icons/obj/flora/hydroponics_growing.dmi';
 	icon_state = null
 	},
 /turf/simulated/floor/asteroid{
@@ -246,7 +246,7 @@
 /area/map_template/deepmaint)
 "R" = (
 /obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
-	icon = 'icons/obj/hydroponics_growing.dmi';
+	icon = 'icons/obj/flora/hydroponics_growing.dmi';
 	icon_state = null
 	},
 /turf/simulated/floor/asteroid{

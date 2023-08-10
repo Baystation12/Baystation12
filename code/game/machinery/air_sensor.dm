@@ -1,5 +1,5 @@
 /obj/machinery/air_sensor
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/structures/airfilter.dmi'
 	icon_state = "gsensor1"
 	name = "gas sensor"
 

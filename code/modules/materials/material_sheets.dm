@@ -7,7 +7,7 @@
 	throw_range = 3
 	max_amount = 60
 	randpixel = 3
-	icon = 'icons/obj/materials.dmi'
+	icon = 'icons/obj/materials/materials.dmi'
 
 	var/reinf_state
 	var/plural_reinf_state

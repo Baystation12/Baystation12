@@ -1,7 +1,7 @@
 /obj/machinery/fusion_fuel_injector
 	name = "fuel injector"
-	icon = 'icons/obj/machines/power/fusion.dmi'
-	icon_state = "injector0"
+	icon = 'icons/obj/machines/power/fusion_fuel_injectors.dmi'
+	icon_state = "injector"
 	density = TRUE
 	anchored = FALSE
 	req_access = list(access_engine)
@@ -24,6 +24,14 @@
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.set_tag(null, initial_id_tag)
 	. = ..()
+
+/obj/machinery/fusion_fuel_injector/on_update_icon()
+	overlays.Cut()
+	if(panel_open)
+		overlays += "[icon_state]_panel"
+	if(injecting && cur_assembly)
+		overlays += emissive_appearance(icon, "[icon_state]_lights")
+		overlays += "[icon_state]_lights"
 
 /obj/machinery/fusion_fuel_injector/Destroy()
 	if(cur_assembly)
@@ -95,14 +103,14 @@
 
 /obj/machinery/fusion_fuel_injector/proc/BeginInjecting()
 	if(!injecting && cur_assembly)
-		icon_state = "injector1"
 		injecting = 1
+		update_icon()
 		update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/fusion_fuel_injector/proc/StopInjecting()
 	if(injecting)
 		injecting = 0
-		icon_state = "injector0"
+		update_icon()
 		update_use_power(POWER_USE_OFF)
 
 /obj/machinery/fusion_fuel_injector/proc/Inject()
@@ -124,9 +132,11 @@
 					amount_left += cur_assembly.rod_quantities[reagent]
 		if(cur_assembly)
 			cur_assembly.percent_depleted = amount_left / cur_assembly.initial_amount
-		flick("injector-emitting",src)
+		overlays += emissive_appearance(icon, "[icon_state]_lights_emitting")
+		overlays += "[icon_state]_lights_emitting"
 	else
 		StopInjecting()
+		update_icon()
 
 /obj/machinery/fusion_fuel_injector/verb/rotate_clock()
 	set category = "Object"

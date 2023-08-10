@@ -154,7 +154,7 @@
 	desc = "A specialized hardsuit rig control module issued to ranking medical command staff of the NanoTrasen and their peers."
 
 	sprite_sheets = list(
-		SPECIES_RESOMI = 'mods/species/resomi/icons/clothing/onmob_rig_back_resomi.dmi',
+		SPECIES_RESOMI = 'mods/resomi/icons/clothing/onmob_rig_back_resomi.dmi',
 		//SPECIES_UNATHI = 'icons/mob/onmob/Unathi/rig_back.dmi' TODO: SIERRA PORT
 		)
 

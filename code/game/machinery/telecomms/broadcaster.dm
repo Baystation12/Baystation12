@@ -12,7 +12,7 @@ var/global/message_delay = 0 // To make sure restarting the recentmessages list 
 
 /obj/machinery/telecomms/broadcaster
 	name = "subspace broadcaster"
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/machines/telecomms.dmi'
 	icon_state = "broadcaster"
 	desc = "A dish-shaped machine used to broadcast processed subspace signals."
 	density = TRUE
@@ -115,7 +115,7 @@ var/global/message_delay = 0 // To make sure restarting the recentmessages list 
 
 /obj/machinery/telecomms/allinone
 	name = "telecommunications mainframe"
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/machines/telecomms.dmi'
 	icon_state = "comm_server"
 	desc = "A compact machine used for portable subspace telecommuniations processing."
 	density = TRUE

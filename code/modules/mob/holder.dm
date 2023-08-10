@@ -4,7 +4,7 @@ var/global/list/holder_mob_icon_cache = list()
 /obj/item/holder
 	name = "holder"
 	desc = "You shouldn't ever see this."
-	icon = 'icons/obj/objects.dmi'
+	icon = 'icons/obj/ash.dmi'
 	slot_flags = SLOT_HEAD | SLOT_HOLSTER
 
 	sprite_sheets = list(

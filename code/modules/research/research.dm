@@ -200,7 +200,7 @@ research holder datum.
 /obj/item/disk/tech_disk
 	name = "fabricator data disk"
 	desc = "A disk for storing fabricator learning data for backup."
-	icon = 'icons/obj/cloning.dmi'
+	icon = 'icons/obj/datadisks.dmi'
 	icon_state = "datadisk2"
 	item_state = "card-id"
 	w_class = ITEM_SIZE_SMALL
@@ -211,7 +211,7 @@ research holder datum.
 /obj/item/disk/design_disk
 	name = "component design disk"
 	desc = "A disk for storing device design data for construction in lathes."
-	icon = 'icons/obj/cloning.dmi'
+	icon = 'icons/obj/datadisks.dmi'
 	icon_state = "datadisk2"
 	item_state = "card-id"
 	w_class = ITEM_SIZE_SMALL

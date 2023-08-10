@@ -179,8 +179,8 @@
 /obj/item/clothing/head/cloak_hood
 	name = "crimson hood"
 	desc = "A hood."
-	icon = 'packs/infinity/icons/obj/clothing/obj_head.dmi'
-	item_icons = list(slot_head_str = 'packs/infinity/icons/mob/onmob/onmob_head.dmi')
+	icon = 'maps/sierra/icons/mob/onmob/onmob_head.dmi'
+	item_icons = list(slot_head_str = 'maps/sierra/icons/mob/onmob/onmob_head.dmi')
 	icon_state = "crimson_cloak_hood"
 	flags_inv = BLOCKHEADHAIR
 	body_parts_covered = HEAD

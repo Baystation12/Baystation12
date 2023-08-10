@@ -3,7 +3,7 @@
 	desc = "This is possibly the least sanitary object around."
 	icon_state = "plunger_black"
 	item_state = "plunger_black"
-	icon = 'icons/obj/plunger.dmi'
+	icon = 'icons/obj/tools/plunger.dmi'
 	attack_verb = list("plunged")
 	force = 1
 	w_class = 3
@@ -17,7 +17,7 @@
 	desc = "a plunger. It unclogs things."
 	icon_state = "plunger_black"
 	item_state = "plunger_black"
-	icon = 'icons/obj/plunger.dmi'
+	icon = 'icons/obj/tools/plunger.dmi'
 	attack_verb = list("plunged")
 	force = 1
 	w_class = 3

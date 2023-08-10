@@ -1,7 +1,7 @@
 /obj/item/reagent_containers/borghypo
 	name = "robot hypospray"
 	desc = "An advanced chemical synthesizer and injection system, designed for heavy-duty medical equipment."
-	icon = 'icons/obj/syringe.dmi'
+	icon = 'icons/obj/tools/syringe.dmi'
 	item_state = "hypo"
 	icon_state = "borghypo"
 	amount_per_transfer_from_this = 5
@@ -203,7 +203,7 @@
 /obj/item/reagent_containers/borghypo/service
 	name = "cyborg drink synthesizer"
 	desc = "A portable drink dispencer."
-	icon = 'icons/obj/drinks.dmi'
+	icon = 'icons/obj/food/drinks.dmi'
 	icon_state = "shaker"
 	charge_cost = 5
 	recharge_time = 3
@@ -282,7 +282,7 @@
 
 /obj/item/robot_rack/bottle
 	name = "bottle rack"
-	icon = 'icons/obj/chemical.dmi'
+	icon = 'icons/obj/chemical_storage.dmi'
 	icon_state = "bottle-1"
 	object_type = /obj/item/reagent_containers/glass/bottle
 	capacity = 4

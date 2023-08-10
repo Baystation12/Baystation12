@@ -2,7 +2,7 @@
 	name = "mine"
 	desc = "An explosive device that tends to detonate if you look at it wrong."
 	anchored = TRUE
-	icon = 'icons/obj/mines.dmi'
+	icon = 'icons/obj/weapons/mines.dmi'
 	icon_state = "uglymine"
 
 	/// Boolean. If set, the mine is already triggered and won't trigger again. Used for both preventing duplicate activations, and for mines which have a delayed or ongoing effect.

@@ -4,7 +4,7 @@
 	density = TRUE
 	anchored = TRUE
 	use_power = POWER_USE_IDLE
-	icon = 'icons/obj/kinetic_harvester.dmi'
+	icon = 'icons/obj/machines/kinetic_harvester.dmi'
 	icon_state = "off"
 	var/initial_id_tag
 	var/list/stored =     list()
@@ -94,12 +94,15 @@
 			harvesting.Cut()
 
 /obj/machinery/kinetic_harvester/on_update_icon()
-	if(inoperable())
-		icon_state = "broken"
-	else if(use_power >= POWER_USE_ACTIVE)
-		icon_state = "on"
-	else
-		icon_state = "off"
+	overlays.Cut()
+	if(panel_open)
+		overlays += "[icon_state]_panel"
+	if(is_powered())
+		overlays += emissive_appearance(icon, "[icon_state]_lights")
+		overlays += "[icon_state]_lights"
+	if(use_power == POWER_USE_ACTIVE)
+		overlays += emissive_appearance(icon, "[icon_state]_lights_working")
+		overlays += "[icon_state]_lights_working"
 
 /obj/machinery/kinetic_harvester/OnTopic(mob/user, href_list, datum/topic_state/state)
 	if(href_list["remove_mat"])

@@ -5,6 +5,7 @@
 
 /obj/machinery/power/terminal
 	name = "terminal"
+	icon = 'icons/obj/machines/apc.dmi'
 	icon_state = "term"
 	desc = "It's an underfloor wiring terminal for power equipment."
 	level = ATOM_LEVEL_UNDER_TILE

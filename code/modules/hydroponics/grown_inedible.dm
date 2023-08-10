@@ -5,7 +5,7 @@
 /obj/item/bananapeel
 	name = "banana peel"
 	desc = "A peel from a banana."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/flora/hydroponics_products.dmi'
 	icon_state = "banana_peel"
 	item_state = "banana_peel"
 	w_class = ITEM_SIZE_SMALL

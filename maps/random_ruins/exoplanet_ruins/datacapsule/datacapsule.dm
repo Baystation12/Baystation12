@@ -47,7 +47,7 @@
 
 /obj/structure/backup_server
 	name = "backup server"
-	icon = 'icons/obj/machines/research.dmi'
+	icon = 'icons/obj/machines/research/server.dmi'
 	icon_state = "server"
 	desc = "Impact resistant server rack. You might be able to pry a disk out."
 	var/obj/item/stock_parts/computer/hard_drive/cluster/drive = new /obj/item/stock_parts/computer/hard_drive/cluster

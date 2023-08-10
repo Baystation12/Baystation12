@@ -5,7 +5,7 @@ var/global/solar_gen_rate = 1500
 /obj/machinery/power/solar
 	name = "solar panel"
 	desc = "A solar electrical generator."
-	icon = 'icons/obj/power.dmi'
+	icon = 'icons/obj/machines/power/solar_panels.dmi'
 	icon_state = "sp_base"
 	anchored = TRUE
 	density = TRUE
@@ -82,9 +82,9 @@ var/global/solar_gen_rate = 1500
 	..()
 	overlays.Cut()
 	if(MACHINE_IS_BROKEN(src))
-		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel-b", layer = ABOVE_HUMAN_LAYER)
+		overlays += image('icons/obj/machines/power/solar_panels.dmi', icon_state = "solar_panel-b", layer = ABOVE_HUMAN_LAYER)
 	else
-		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel", layer = ABOVE_HUMAN_LAYER)
+		overlays += image('icons/obj/machines/power/solar_panels.dmi', icon_state = "solar_panel", layer = ABOVE_HUMAN_LAYER)
 		src.set_dir(angle2dir(adir))
 	return
 
@@ -201,7 +201,7 @@ var/global/solar_gen_rate = 1500
 /obj/item/solar_assembly
 	name = "solar panel assembly"
 	desc = "A solar panel assembly kit, allows constructions of a solar panel, or with a tracking circuit board, a solar tracker."
-	icon = 'icons/obj/power.dmi'
+	icon = 'icons/obj/machines/power/solar_panels.dmi'
 	icon_state = "sp_base"
 	item_state = "electropack"
 	w_class = ITEM_SIZE_HUGE // Pretty big!
@@ -275,8 +275,8 @@ var/global/solar_gen_rate = 1500
 /obj/machinery/power/solar_control
 	name = "solar panel control"
 	desc = "A controller for solar panel arrays."
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "solar"
+	icon = 'icons/obj/machines/computer.dmi'
+	icon_state = "computer"
 	anchored = TRUE
 	density = TRUE
 	use_power = POWER_USE_IDLE
@@ -360,13 +360,13 @@ var/global/solar_gen_rate = 1500
 		overlays.Cut()
 		return
 	if(!is_powered())
-		icon_state = "c_unpowered"
+		icon_state = "computer"
 		overlays.Cut()
 		return
 	icon_state = "solar"
 	overlays.Cut()
 	if(cdir > -1)
-		overlays += image('icons/obj/computer.dmi', "solcon-o", ABOVE_OBJ_LAYER, angle2dir(cdir))
+		overlays += image('icons/obj/machines/computer.dmi', "solcon-o", angle2dir(cdir))
 	return
 
 /obj/machinery/power/solar_control/interface_interact(mob/user)

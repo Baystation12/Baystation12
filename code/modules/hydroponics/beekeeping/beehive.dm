@@ -172,7 +172,7 @@
 /obj/machinery/honey_extractor
 	name = "honey extractor"
 	desc = "A machine used to extract honey and wax from a beehive frame."
-	icon = 'icons/obj/virology.dmi'
+	icon = 'icons/obj/machines/research/virology.dmi'
 	icon_state = "centrifuge"
 	anchored = TRUE
 	density = TRUE
@@ -229,7 +229,7 @@
 /obj/item/bee_smoker
 	name = "bee smoker"
 	desc = "A device used to calm down bees before harvesting honey."
-	icon = 'icons/obj/batterer.dmi'
+	icon = 'icons/obj/tools/batterer.dmi'
 	icon_state = "batterer"
 	w_class = ITEM_SIZE_SMALL
 
@@ -254,8 +254,8 @@
 /obj/item/beehive_assembly
 	name = "beehive assembly"
 	desc = "Contains everything you need to build a beehive."
-	icon = 'icons/obj/apiary_bees_etc.dmi'
-	icon_state = "apiary"
+	icon = 'icons/obj/beekeeping.dmi'
+	icon_state = "beepack"
 
 /obj/item/beehive_assembly/attack_self(mob/user)
 	to_chat(user, SPAN_NOTICE("You start assembling \the [src]..."))

@@ -58,7 +58,7 @@ Tiny, weak, and mostly harmless alone. dangerous in groups.
 /obj/structure/leech_spawner
 	name = "rigus regzorfra" // Similar naming to exoplanet flora, but not quite.
 	desc = "Wait... Something is wrong about this one." // Someone is actually checking for pests, let's reward them.
-	icon = 'icons/obj/hydroponics_growing.dmi'
+	icon = 'icons/obj/flora/hydroponics_growing.dmi'
 	icon_state = "alien1-1" // Placeholder until initalize. If seen like this, something went wrong.
 	color = COLOR_GRAY
 	anchored = TRUE

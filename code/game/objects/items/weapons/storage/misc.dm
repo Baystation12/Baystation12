@@ -27,7 +27,7 @@
 
 
 /obj/item/storage/box/donut
-	icon = 'icons/obj/food.dmi'
+	icon = 'icons/obj/food/food.dmi'
 	icon_state = "donutbox"
 	name = "donut box"
 	can_hold = list(/obj/item/reagent_containers/food/snacks/donut)
@@ -39,7 +39,7 @@
 	overlays.Cut()
 	var/i = 0
 	for(var/obj/item/reagent_containers/food/snacks/donut/D in contents)
-		var/image/I = image('icons/obj/food.dmi', "[i][D.overlay_state]")
+		var/image/I = image('icons/obj/food/food.dmi', "[i][D.overlay_state]")
 		if(D.overlay_state == "box-donut1")
 			I.color = D.filling_color
 		overlays += I
@@ -173,6 +173,7 @@
 /obj/item/storage/medical_lolli_jar
 	name = "lollipops jar"
 	desc = "A mixed pack of flavored medicinal lollipops. Perfect for small boo-boos."
+	icon = 'icons/obj/jars.dmi'
 	icon_state = "lollijar"
 	max_storage_space = 20
 	startswith = list(/obj/item/clothing/mask/chewable/candy/lolli/weak_meds = 15)

@@ -1,11 +1,13 @@
+// SIERRA TODO: Перенести к диванам в мод + вернуть иконки
+
 /obj/structure/bed/chair/pew/up
-	icon = 'packs/infinity/icons/obj/furniture.dmi'
-	icon_state = "pew_up"
+	// icon = 'packs/infinity/icons/obj/furniture.dmi'
+	// icon_state = "pew_up"
 	base_icon = "pew_up"
 
 /obj/structure/bed/chair/pew/down
-	icon = 'packs/infinity/icons/obj/furniture.dmi'
-	icon_state = "pew_down"
+	// icon = 'packs/infinity/icons/obj/furniture.dmi'
+	// icon_state = "pew_down"
 	base_icon = "pew_down"
 
 /obj/structure/bed/chair/pew/up/mahogany

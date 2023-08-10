@@ -2,7 +2,7 @@
 
 /obj/item/material/shard
 	name = "shard"
-	icon = 'icons/obj/shards.dmi'
+	icon = 'icons/obj/materials/shards.dmi'
 	desc = "Made of nothing. How does this even exist?" // set based on material, if this desc is visible it's a bug (shards default to being made of glass)
 	icon_state = "large"
 	randpixel = 8

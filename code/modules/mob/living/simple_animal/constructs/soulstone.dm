@@ -4,7 +4,7 @@
 
 /obj/item/device/soulstone
 	name = "soul stone shard"
-	icon = 'icons/obj/wizard.dmi'
+	icon = 'icons/obj/cult.dmi'
 	icon_state = "soulstone"
 	item_state = "electronic"
 	desc = "A strange, ridged chunk of some glassy red material. Achingly cold to the touch."
@@ -148,7 +148,7 @@
 
 /obj/structure/constructshell
 	name = "empty shell"
-	icon = 'icons/obj/wizard.dmi'
+	icon = 'icons/obj/cult.dmi'
 	icon_state = "construct"
 	desc = "A wicked machine used by those skilled in magical arts. It is inactive."
 

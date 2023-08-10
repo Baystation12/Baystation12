@@ -51,7 +51,7 @@
 /obj/item/reagent_containers/powder
 	name = "chemical powder"
 	desc = "A powdered form of... something."
-	icon = 'icons/obj/chemical.dmi'
+	icon = 'icons/obj/chemical_storage.dmi'
 	icon_state = "powder"
 	item_state = "powder"
 	amount_per_transfer_from_this = 5

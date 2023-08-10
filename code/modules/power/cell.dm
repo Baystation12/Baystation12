@@ -2,7 +2,7 @@
 /obj/item/cell
 	name = "power cell"
 	desc = "A rechargable electrochemical power cell."
-	icon = 'icons/obj/power.dmi'
+	icon = 'icons/obj/powercells.dmi'
 	icon_state = "cell"
 	item_state = "cell"
 	origin_tech = list(TECH_POWER = 1)
@@ -52,7 +52,7 @@
 		overlay_state = new_overlay_state
 		overlays.Cut()
 		if(overlay_state)
-			overlays += image('icons/obj/power.dmi', overlay_state)
+			overlays += image('icons/obj/powercells.dmi', overlay_state)
 
 /obj/item/cell/proc/percent()		// return % charge of cell
 	return maxcharge && (100.0*charge/maxcharge)
@@ -224,7 +224,7 @@
 	name = "potato battery"
 	desc = "A rechargable starch based power cell."
 	origin_tech = list(TECH_POWER = 1)
-	icon = 'icons/obj/power.dmi' //'icons/obj/harvest.dmi'
+	icon = 'icons/obj/powercells.dmi' //'icons/obj/harvest.dmi'
 	icon_state = "potato_cell" //"potato_battery"
 	maxcharge = 20
 

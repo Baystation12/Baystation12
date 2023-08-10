@@ -1,7 +1,7 @@
 /obj/item/device/scanner/xenobio
 	name = "xenolife scanner"
 	desc = "Multipurpose organic life scanner. With spectral breath analyzer you can find out what snacks Ian had! Or what gasses alien life breathes."
-	icon = 'icons/obj/xenolife_scanner.dmi'
+	icon = 'icons/obj/tools/xenolife_scanner.dmi'
 	icon_state = "xenobio"
 	item_state = "analyzer"
 	scan_sound = 'sound/effects/scanbeep.ogg'

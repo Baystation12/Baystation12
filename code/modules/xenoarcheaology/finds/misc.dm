@@ -4,7 +4,7 @@
 //legacy crystal
 /obj/machinery/crystal
 	name = "Crystal"
-	icon = 'icons/obj/mining.dmi'
+	icon = 'icons/obj/crystals.dmi'
 	icon_state = "crystal"
 
 
@@ -16,7 +16,7 @@
 //Variant crystals, in case you want to spawn/map those directly.
 /obj/machinery/crystal_static
 	name = "Crystal"
-	icon = 'icons/obj/mining.dmi'
+	icon = 'icons/obj/crystals.dmi'
 	icon_state = "crystal"
 
 /obj/machinery/crystal_static/pink

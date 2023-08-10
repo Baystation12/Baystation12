@@ -73,7 +73,7 @@
 
 /obj/structure/flora/pottedplant
 	name = "potted plant"
-	icon = 'icons/obj/plants.dmi'
+	icon = 'icons/obj/flora/plants.dmi'
 	icon_state = "plant-26"
 	layer = ABOVE_HUMAN_LAYER
 
@@ -177,7 +177,7 @@
 
 /obj/structure/flora/ausbushes/ppflowers/New()
 	..()
-	icon_state = "ppflowers_[rand(1, 4)]"
+	icon_state = "ppflowers_[rand(1, 3)]"
 
 /obj/structure/flora/ausbushes/sparsegrass
 	icon_state = "sparsegrass_1"
@@ -198,7 +198,7 @@
 /obj/structure/flora/pottedplant
 	name = "potted plant"
 	desc = "Really brings the room together."
-	icon = 'icons/obj/plants.dmi'
+	icon = 'icons/obj/flora/plants.dmi'
 	icon_state = "plant-01"
 	layer = ABOVE_HUMAN_LAYER
 

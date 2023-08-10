@@ -1,7 +1,7 @@
 /obj/item/reagent_containers/spray
 	name = "spray bottle"
 	desc = "A spray bottle, with an unscrewable top."
-	icon = 'icons/obj/janitor.dmi'
+	icon = 'icons/obj/janitor_tools.dmi'
 	icon_state = "cleaner"
 	item_state = "cleaner"
 	item_flags = ITEM_FLAG_NO_BLUDGEON
@@ -156,7 +156,7 @@
 /obj/item/reagent_containers/spray/waterflower
 	name = "water flower"
 	desc = "A seemingly innocent sunflower...with a twist."
-	icon = 'icons/obj/sunflower.dmi'
+	icon = 'icons/obj/flora/sunflower.dmi'
 	icon_state = "sunflower"
 	item_state = "sunflower"
 	amount_per_transfer_from_this = 1
@@ -210,7 +210,7 @@
 /obj/item/reagent_containers/spray/plantbgone
 	name = "Plant-B-Gone"
 	desc = "Kills those pesky weeds!"
-	icon = 'icons/obj/hydroponics_machines.dmi'
+	icon = 'icons/obj/machines/hydroponics_machines.dmi'
 	icon_state = "plantbgone"
 	item_state = "plantbgone"
 	volume = 100
@@ -232,6 +232,6 @@
 	desc = "A can of Gold Standard spray deodorant - for when you're too lazy to shower."
 	gender = PLURAL
 	volume = 35
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/lavatory.dmi'
 	icon_state = "deodorant"
 	item_state = "deodorant"

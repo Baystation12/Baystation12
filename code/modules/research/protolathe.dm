@@ -2,6 +2,7 @@
 	name = "protolathe"
 	desc = "Accessed by a connected core fabricator console, it produces items from various materials."
 	icon_state = "protolathe"
+	icon = 'icons/obj/machines/research/protolathe.dmi'
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 
 	idle_power_usage = 30
@@ -70,12 +71,16 @@
 
 
 /obj/machinery/r_n_d/protolathe/on_update_icon()
+	overlays.Cut()
 	if(panel_open)
-		icon_state = "protolathe_t"
-	else if(busy)
-		icon_state = "protolathe_n"
-	else
-		icon_state = "protolathe"
+		overlays += "[icon_state]_panel"
+	if(is_powered())
+		overlays += emissive_appearance(icon, "[icon_state]_lights")
+		overlays += "[icon_state]_lights"
+	if(busy)
+		overlays += "[icon_state]_working"
+		overlays += emissive_appearance(icon, "[icon_state]_lights_working")
+		overlays += "[icon_state]_lights_working"
 
 /obj/machinery/r_n_d/protolathe/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()

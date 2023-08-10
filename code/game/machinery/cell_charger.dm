@@ -1,7 +1,7 @@
 /obj/machinery/cell_charger
 	name = "heavy-duty cell charger"
 	desc = "A much more powerful version of the standard recharger that is specially designed for charging power cells."
-	icon = 'icons/obj/power.dmi'
+	icon = 'icons/obj/machines/power/cell_charger.dmi'
 	icon_state = "ccharger0"
 	anchored = TRUE
 	obj_flags = OBJ_FLAG_CAN_TABLE
@@ -17,6 +17,7 @@
 		var/newlevel = 	round(charging.percent() * 4.0 / 99)
 		if(chargelevel != newlevel)
 			overlays.Cut()
+			overlays += emissive_appearance(icon, "ccharger-o[newlevel]")
 			overlays += "ccharger-o[newlevel]"
 			chargelevel = newlevel
 	else

@@ -98,7 +98,7 @@
 /obj/machinery/jukebox/custom_tape/old
 	name = "space jukebox"
 	desc = "A battered and hard-loved jukebox in some forgotten style, carefully restored to some semblance of working condition."
-	icon = 'icons/obj/jukebox.dmi'
+	icon = 'icons/obj/machines/jukebox.dmi'
 	icon_state = "jukebox2"
 	pixel_x = 0
 

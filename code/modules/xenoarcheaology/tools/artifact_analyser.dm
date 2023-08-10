@@ -1,7 +1,7 @@
 /obj/machinery/artifact_analyser
 	name = "Anomaly Analyser"
 	desc = "Studies the emissions of anomalous materials to discover their uses."
-	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon = 'icons/obj/machines/research/xenoarcheology_scanner.dmi'
 	icon_state = "xenoarch_console"
 	anchored = TRUE
 	density = TRUE

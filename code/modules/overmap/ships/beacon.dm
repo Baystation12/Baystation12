@@ -1,8 +1,8 @@
 /obj/machinery/radio_beacon
 	name = "transmission beacon"
 	desc = "A bulky hyperspace transmitter, capable of continuously broadcasting a signal that can be picked up by ship sensors."
-	icon = 'icons/obj/structures/beacon.dmi'
-	icon_state = "inactive"
+	icon = 'icons/obj/machines/beacon.dmi'
+	icon_state = "beacon"
 	density = TRUE
 	anchored = TRUE
 	idle_power_usage = 0
@@ -139,12 +139,18 @@
 
 /obj/machinery/radio_beacon/on_update_icon()
 	overlays.Cut()
-	icon_state = signal ? "active" : "inactive"
-	if(emergency_signal)
-		overlays += "distress"
 	if(panel_open)
-		overlays += "panel"
-	. = ..()
+		overlays += "[icon_state]_panel"
+	if(is_powered())
+		overlays += emissive_appearance(icon, "[icon_state]_lights")
+		overlays += "[icon_state]_lights"
+	if(signal)
+		overlays += emissive_appearance(icon, "[icon_state]_lights_active")
+		overlays += "[icon_state]_lights_active"
+	else if(emergency_signal)
+		overlays += emissive_appearance(icon, "[icon_state]_lights_distress")
+		overlays += "[icon_state]_lights_distress"
+
 /obj/machinery/radio_beacon/Destroy()
 	QDEL_NULL(signal)
 	QDEL_NULL(emergency_signal)

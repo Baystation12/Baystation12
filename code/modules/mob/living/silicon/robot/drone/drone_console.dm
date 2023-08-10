@@ -1,7 +1,7 @@
 /obj/machinery/computer/drone_control
 	name = "Maintenance Drone Control"
 	desc = "Used to monitor the drone population and the assembler that services them."
-	icon = 'icons/obj/computer.dmi'
+	icon = 'icons/obj/machines/computer.dmi'
 	icon_keyboard = "power_key"
 	icon_screen = "power"
 	req_access = list(access_engine_equip)

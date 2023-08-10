@@ -1,5 +1,5 @@
 /obj/machinery/power/debug_items
-	icon = 'icons/obj/power.dmi'
+	icon = 'icons/obj/machines/power/solar_panels.dmi'
 	icon_state = "tracker"
 	anchored = TRUE
 	density = TRUE

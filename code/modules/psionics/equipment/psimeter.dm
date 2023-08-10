@@ -1,7 +1,7 @@
 /obj/machinery/psi_meter
 	name = "psi-meter"
 	desc = "A bulky psi-meter for conducting assays of psi-operants."
-	icon = 'icons/obj/machines/psimeter.dmi'
+	icon = 'icons/obj/machines/research/psimeter.dmi'
 	icon_state = "meter_on"
 	use_power = POWER_USE_ACTIVE
 	anchored = TRUE

@@ -1,7 +1,7 @@
 /obj/machinery/tele_projector
 	name = "projector"
 	desc = "This machine is capable of projecting a miniature wormhole leading directly to its provided target."
-	icon = 'icons/obj/teleporter.dmi'
+	icon = 'icons/obj/machines/teleporter.dmi'
 	icon_state = "station"
 	density = TRUE
 	anchored = TRUE

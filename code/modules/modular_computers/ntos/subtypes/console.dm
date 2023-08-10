@@ -1,6 +1,6 @@
 /datum/extension/interactive/ntos/console
 	expected_type = /obj/machinery
-	screen_icon_file = 'icons/obj/modular_console.dmi'
+	screen_icon_file = 'icons/obj/machines/modular_console.dmi'
 
 /datum/extension/interactive/ntos/console/get_hardware_flag()
 	return PROGRAM_CONSOLE

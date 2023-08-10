@@ -1,7 +1,7 @@
 /obj/machinery/suspension_gen
 	name = "suspension field generator"
 	desc = "It has stubby bolts bolted up against its tracks for stabilizing."
-	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon = 'icons/obj/machines/research/suspension_generator.dmi'
 	icon_state = "suspension"
 	density = TRUE
 	construct_state = /singleton/machine_construction/default/panel_closed

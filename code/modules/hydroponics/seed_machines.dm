@@ -1,7 +1,7 @@
 /obj/item/disk/botany
 	name = "flora data disk"
 	desc = "A small disk used for carrying data on plant genetics."
-	icon = 'icons/obj/hydroponics_machines.dmi'
+	icon = 'icons/obj/machines/hydroponics_machines.dmi'
 	icon_state = "disk"
 	w_class = ITEM_SIZE_TINY
 
@@ -24,7 +24,7 @@
 	startswith = list(/obj/item/disk/botany = 14)
 
 /obj/machinery/botany
-	icon = 'icons/obj/hydroponics_machines.dmi'
+	icon = 'icons/obj/machines/hydroponics_machines.dmi'
 	icon_state = "hydrotray3"
 	density = TRUE
 	anchored = TRUE

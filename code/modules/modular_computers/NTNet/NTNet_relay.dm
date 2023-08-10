@@ -2,10 +2,12 @@
 /obj/machinery/ntnet_relay
 	name = "\improper NTNet quantum relay"
 	desc = "A very complex router and transmitter capable of connecting electronic devices together. Looks fragile."
+	icon = 'icons/obj/machines/telecomms.dmi'
+	icon_state = "relay"
 	use_power = POWER_USE_ACTIVE
 	active_power_usage = 20000 //20kW, apropriate for machine that keeps massive cross-Zlevel wireless network operational.
 	idle_power_usage = 100
-	icon_state = "bus"
+	icon_state = "relay"
 	anchored = TRUE
 	density = TRUE
 	construct_state = /singleton/machine_construction/default/panel_closed
@@ -40,10 +42,12 @@
 	return TRUE
 
 /obj/machinery/ntnet_relay/on_update_icon()
+	overlays.Cut()
+	if(panel_open)
+		overlays += "[icon_state]_panel"
 	if(operable())
-		icon_state = "bus"
-	else
-		icon_state = "bus_off"
+		overlays += "[icon_state]_lights_working"
+		overlays += emissive_appearance(icon, "[icon_state]_lights_working")
 
 /obj/machinery/ntnet_relay/Process()
 	if(operable())
