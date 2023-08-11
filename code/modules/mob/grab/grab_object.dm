@@ -349,8 +349,8 @@
 /obj/item/grab/proc/use_sanity_check(atom/target, flags = SANITY_CHECK_DEFAULT)
 	if (QDELETED(src) || QDELETED(assailant))
 		return FALSE
-	// Sanity check the grab itself
-	if (!assailant.use_sanity_check(target, src, flags))
+	// Sanity check the grab itself, allowing hand swapping
+	if (!assailant.use_sanity_check(target, src, flags & ~SANITY_CHECK_TOOL_IN_HAND))
 		return FALSE
 	// Sanity check the victim
 	if (!assailant.use_sanity_check(target, affecting, flags))
