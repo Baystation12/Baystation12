@@ -278,6 +278,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if (weapon.force > 0 && get_max_health() && !HAS_FLAGS(weapon.item_flags, ITEM_FLAG_NO_BLUDGEON))
 		user.setClickCooldown(user.get_attack_speed(weapon))
 		user.do_attack_animation(src)
+		if (!aura_check(AURA_TYPE_WEAPON, weapon, user))
+			return TRUE
 		var/damage_flags = weapon.damage_flags()
 		if (!can_damage_health(weapon.force, weapon.damtype, damage_flags))
 			playsound(src, weapon.hitsound, 50, TRUE)
@@ -296,6 +298,15 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		var/hit_zone = resolve_item_attack(weapon, user, user.zone_sel? user.zone_sel.selecting : ran_zone())
 		if (!hit_zone)
 			return TRUE
+
+		if (!weapon.no_attack_log)
+			admin_attack_log(
+				user,
+				src,
+				"Attacked using \a [weapon] (DAMTYE: [uppertext(weapon.damtype)])",
+				"Was attacked with \a [weapon] (DAMTYE: [uppertext(weapon.damtype)])",
+				"used \a [weapon] (DAMTYE: [uppertext(weapon.damtype)]) to attack"
+			)
 
 		var/datum/attack_result/result = hit_zone
 		if (istype(result))
@@ -422,7 +433,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return FALSE
 	if (!no_attack_log)
 		admin_attack_log(user, subject, "Attacked using \a [src] (DAMTYE: [uppertext(damtype)])", "Was attacked with \a [src] (DAMTYE: [uppertext(damtype)])", "used \a [src] (DAMTYE: [uppertext(damtype)]) to attack")
-	user.setClickCooldown(attack_cooldown + w_class)
+	user.setClickCooldown(user.get_attack_speed(src))
 	if (animate)
 		user.do_attack_animation(subject)
 	if (!subject.aura_check(AURA_TYPE_WEAPON, src, user))
@@ -473,7 +484,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /mob/living/get_attack_speed(obj/item/item)
 	var/speed = base_attack_cooldown
 	if (istype(item))
-		speed = item.attack_cooldown
+		speed = item.attack_cooldown + item.w_class
 	return speed
 
 
