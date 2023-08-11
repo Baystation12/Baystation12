@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Weapon attacks now generate attack logs again.
-  - bugfix: Weapon attacks can now be blocked by auras and things using aura code.
