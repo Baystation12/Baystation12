@@ -21,7 +21,7 @@
 /obj/structure/adherent_bath/use_grab(obj/item/grab/grab, list/click_params)
 	// Put victim in bath
 	if (enter_bath(grab.affecting, grab.assailant))
-		qdel(grab)
+		grab.affecting.remove_grabs_and_pulls()
 	return TRUE
 
 

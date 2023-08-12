@@ -284,7 +284,7 @@
 			visible_message(SPAN_DANGER("\The [user] has broken \the [src]'s grip on \the [grab.affecting]!"))
 			success = TRUE
 		spawn(1)
-			qdel(grab)
+			grab.current_grab.let_go(grab)
 
 	return success
 /*

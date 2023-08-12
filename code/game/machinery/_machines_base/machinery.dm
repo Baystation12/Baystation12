@@ -64,7 +64,6 @@
 	var/frame_type = /obj/machinery/constructable_frame/machine_frame/deconstruct
 	/// Whether or not the machine is allowed to be dismantled/modified. Used for snowflake consoles that would break permanently if dismantled. Also prevents damage, since the machine would be irreparable in this state. Has to be defined here because machinery datums.
 	var/can_use_tools = TRUE
-
 	/// Component parts queued for processing by the machine. Expected type: `/obj/item/stock_parts`
 	var/list/processing_parts
 	/// Bitflag. What is being processed. One of `MACHINERY_PROCESS_*`.
@@ -259,6 +258,44 @@
 	..()
 	power_change()
 
+/**
+ * Called by machines that can hold a mob (sleeper, suit cycler, etc.), checking if mob can be moved before doing so.
+ * Call parent first if you want to add new checks specific for each machine, this proc handles the common stuff.
+ * Returns TRUE if mob can be moved into a machine, FALSE if it cannot.
+ */
+/obj/machinery/proc/user_can_move_target_inside(mob/target, mob/user)
+	SHOULD_CALL_PARENT(TRUE)
+	if (!user.use_sanity_check(src, target))
+		return FALSE
+	if (!istype(target))
+		to_chat(user, SPAN_WARNING("\The [src] cannot handle such a lifeform!"))
+		return FALSE
+	if (user.incapacitated() || !istype(user))
+		return FALSE
+	if (!target.simulated)
+		return FALSE
+	if (inoperable())
+		to_chat(user, SPAN_WARNING("\The [src] is not functioning."))
+		return FALSE
+	if (target.abiotic())
+		to_chat(user, SPAN_WARNING("[user == target ? "You" : "[target]"] can't enter \the [src] while wearing abiotic items."))
+		return FALSE
+	if (target.buckled)
+		to_chat(user, SPAN_WARNING("Unbuckle [user == target ? "yourself" : "\the [target]"] before attempting to [user == target ? "enter \the [src]" : "move them"]."))
+		return FALSE
+	if (panel_open)
+		to_chat(user, SPAN_WARNING("Close the maintenance panel before attempting to place [user == target ? "yourself" : "\the [target]"] in \the [src]."))
+		return FALSE
+	for (var/mob/living/carbon/slime/slime in range(0,target))
+		if (slime.Victim == target)
+			to_chat(user, "[target] will not fit into \the [src] because they have a slime latched onto them.")
+			return FALSE
+	for (var/obj/item/grab/grab in target.grabbed_by)
+		if (grab.assailant == user || grab.assailant == target)
+			continue
+		to_chat(user, SPAN_WARNING("\The [target] is being grabbed by [grab.assailant] and can't be placed in \the [src]."))
+		return FALSE
+	return TRUE
 
 /**
  * If you want to have interface interactions handled for you conveniently, use this.

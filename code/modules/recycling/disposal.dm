@@ -125,7 +125,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 					GM.client.eye = src
 				GM.forceMove(src)
 				usr.visible_message(SPAN_DANGER("\The [GM] has been placed in the [src] by \the [user]."))
-				qdel(G)
+				GM.remove_grabs_and_pulls()
 				admin_attack_log(usr, GM, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
 		return
 

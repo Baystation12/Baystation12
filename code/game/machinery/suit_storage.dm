@@ -121,34 +121,6 @@
 		else if(islocked)
 			to_chat(user, SPAN_WARNING("You can't pry the unit open, it's locked!"))
 		return
-	if(istype(I, /obj/item/grab) )
-		var/obj/item/grab/G = I
-		if(!(ismob(G.affecting)) )
-			return
-		if(!isopen)
-			to_chat(user, SPAN_NOTICE("The unit's doors are shut."))
-			return
-		if(inoperable())
-			to_chat(user, SPAN_NOTICE("The unit is not operational."))
-			return
-		if(occupant || helmet || suit || boots || tank || mask)
-			to_chat(user, SPAN_NOTICE("The unit's storage area is too cluttered."))
-			return
-		visible_message(SPAN_WARNING("[user] starts putting [G.affecting.name] into the Suit Storage Unit."))
-		if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) && G && G.affecting)
-			var/mob/M = G.affecting
-			if(M.client)
-				M.client.perspective = EYE_PERSPECTIVE
-				M.client.eye = src
-			M.forceMove(src)
-			occupant = M
-			isopen = FALSE
-			add_fingerprint(user)
-			qdel(G)
-			SSnano.update_uis(src)
-			update_icon()
-		return
-
 	TRY_INSERT_SUIT_PIECE(suit, clothing/suit/space)
 	TRY_INSERT_SUIT_PIECE(helmet, clothing/head/helmet/space)
 	TRY_INSERT_SUIT_PIECE(boots, clothing/shoes/magboots)
@@ -156,6 +128,49 @@
 	TRY_INSERT_SUIT_PIECE(mask, clothing/mask)
 	update_icon()
 	SSnano.update_uis(src)
+
+/obj/machinery/suit_storage_unit/proc/move_target_inside(mob/target, mob/user)
+	visible_message(SPAN_WARNING("\The [user] starts putting \the [target] into \the [src]."))
+	add_fingerprint(user)
+	if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
+		if(!user_can_move_target_inside(target, user))
+			return
+		if (target.client)
+			target.client.perspective = EYE_PERSPECTIVE
+			target.client.eye = src
+		target.forceMove(src)
+		occupant = target
+		if (user != target)
+			add_fingerprint (target)
+		isopen = FALSE
+		target.remove_grabs_and_pulls()
+		SSnano.update_uis(src)
+		update_icon()
+
+/obj/machinery/suit_storage_unit/user_can_move_target_inside(mob/target, mob/user)
+	if (!isopen)
+		to_chat(user, SPAN_NOTICE("The unit's doors are shut."))
+		return FALSE
+	if (occupant || suit || tank || (helmet && boots && mask))
+		to_chat(user, SPAN_NOTICE("The unit's storage area is too cluttered."))
+		return FALSE
+	return ..()
+
+/obj/machinery/suit_storage_unit/use_grab(obj/item/grab/grab, list/click_params)
+	if (!user_can_move_target_inside(grab.affecting, grab.assailant))
+		return TRUE
+	move_target_inside(grab.affecting, grab.assailant)
+	return TRUE
+
+/obj/machinery/suit_storage_unit/MouseDrop_T(mob/target, mob/user)
+	if (!ismob(target) || !CanMouseDrop(target, user))
+		return
+	if (user != target)
+		to_chat(user, SPAN_WARNING("You need to grab \the [target] to be able to do that!"))
+		return
+	else if (user_can_move_target_inside(target, user))
+		move_target_inside(target, user)
+		return
 
 /obj/machinery/suit_storage_unit/interface_interact(mob/user)
 	ui_interact(user)

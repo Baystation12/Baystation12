@@ -52,9 +52,9 @@
 
 /obj/machinery/gibber/physical_attack_hand(mob/user)
 	if(operating)
-		to_chat(user, SPAN_DANGER("\The [src] is locked and running, wait for it to finish."))
+		to_chat(user, SPAN_WARNING("\The [src] is locked and running, wait for it to finish."))
 		return TRUE
-	src.startgibbing(user)
+	startgibbing(user)
 	return TRUE
 
 /obj/machinery/gibber/examine(mob/user)
@@ -63,7 +63,7 @@
 
 /obj/machinery/gibber/emag_act(remaining_charges, mob/user)
 	emagged = !emagged
-	to_chat(user, SPAN_CLASS("danger", "You [emagged ? "disable" : "enable"] \the [src]'s safety guard."))
+	to_chat(user, SPAN_DANGER("You [emagged ? "disable" : "enable"] \the [src]'s safety guard."))
 	return 1
 
 /obj/machinery/gibber/components_are_accessible(path)
@@ -77,13 +77,6 @@
 /obj/machinery/gibber/attackby(obj/item/W, mob/user)
 	if(!operating)
 		return
-	if(istype(W, /obj/item/grab))
-		var/obj/item/grab/G = W
-		if(!G.force_danger())
-			to_chat(user, SPAN_DANGER("You need a better grip to do that!"))
-			return
-		move_into_gibber(user,G.affecting)
-		qdel(G)
 	else if(istype(W, /obj/item/organ))
 		if(!user.unEquip(W))
 			return
@@ -92,43 +85,53 @@
 	else
 		return ..()
 
+/obj/machinery/gibber/user_can_move_target_inside(mob/target, mob/user)
+	if (occupant)
+		to_chat(user, SPAN_WARNING("\The [src] is already occupied!"))
+		return FALSE
+	if (operating)
+		to_chat(user, SPAN_WARNING("\The [src] is locked and running, wait for it to finish."))
+		return FALSE
+	if (!(istype(target, /mob/living/carbon)) && !(istype(target, /mob/living/simple_animal)) )
+		to_chat(user, SPAN_WARNING("\The [target] is not suitable for \the [src]!"))
+		return FALSE
+	if (istype(target,/mob/living/carbon/human) && !emagged)
+		to_chat(user, SPAN_WARNING("\The [src] safety guard is engaged!"))
+		return FALSE
+	return ..()
+
+/obj/machinery/gibber/use_grab(obj/item/grab/grab, list/click_params)
+	if (!user_can_move_target_inside(grab.affecting, grab.assailant))
+		return TRUE
+	if (!grab.force_danger())
+		to_chat(grab.assailant, SPAN_WARNING("You need a better grip to do that!"))
+		return TRUE
+	move_into_gibber(grab.assailant, grab.affecting)
+	return TRUE
+
 /obj/machinery/gibber/MouseDrop_T(mob/target, mob/user)
-	if(user.stat || user.restrained())
+	if (!ismob(target) || !CanMouseDrop(target, user))
 		return
-	move_into_gibber(user,target)
-
-/obj/machinery/gibber/proc/move_into_gibber(mob/user,mob/living/victim)
-
-	if(src.occupant)
-		to_chat(user, SPAN_DANGER("\The [src] is full, empty it first!"))
+	if (user == target && user_can_move_target_inside(target, user))
+		move_into_gibber(user, target)
 		return
-
-	if(operating)
-		to_chat(user, SPAN_DANGER("\The [src] is locked and running, wait for it to finish."))
+	else
+		to_chat(user, SPAN_WARNING("You need to grab \the [target] to be able to do that!"))
 		return
 
-	if(!(istype(victim, /mob/living/carbon)) && !(istype(victim, /mob/living/simple_animal)) )
-		to_chat(user, SPAN_DANGER("This is not suitable for \the [src]!"))
-		return
-
-	if(istype(victim,/mob/living/carbon/human) && !emagged)
-		to_chat(user, SPAN_DANGER("\The [src] safety guard is engaged!"))
-		return
-
-
-	if(victim.abiotic(1))
-		to_chat(user, SPAN_DANGER("\The [victim] may not have any abiotic items on."))
-		return
-
+/obj/machinery/gibber/proc/move_into_gibber(mob/user, mob/living/victim)
 	user.visible_message(SPAN_DANGER("\The [user] starts to put \the [victim] into \the [src]!"))
-	src.add_fingerprint(user)
+	add_fingerprint(user)
 	if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) && victim.Adjacent(src) && user.Adjacent(src) && victim.Adjacent(user) && !occupant)
 		user.visible_message(SPAN_DANGER("\The [user] stuffs \the [victim] into \the [src]!"))
 		if(victim.client)
 			victim.client.perspective = EYE_PERSPECTIVE
 			victim.client.eye = src
 		victim.forceMove(src)
-		src.occupant = victim
+		victim.remove_grabs_and_pulls()
+		occupant = victim
+		if (user != victim)
+			add_fingerprint(victim)
 		GLOB.destroyed_event.register(occupant, src, .proc/occupant_destroyed)
 		update_icon()
 
@@ -164,14 +167,14 @@
 	return
 
 /obj/machinery/gibber/proc/startgibbing(mob/user as mob)
-	if(src.operating)
+	if (operating)
 		return
-	if(!src.occupant)
-		visible_message(SPAN_DANGER("You hear a loud metallic grinding sound."))
+	if (!occupant)
+		visible_message(SPAN_WARNING("You hear metallic gears click harmlessly."))
 		return
 
 	use_power_oneoff(1000)
-	visible_message(SPAN_CLASS("danger", "You hear a loud [occupant.isSynthetic() ? "metallic" : "squelchy"] grinding sound."))
+	visible_message(SPAN_DANGER("You hear a loud [occupant.isSynthetic() ? "metallic" : "squelchy"] grinding sound."))
 	src.operating = 1
 	update_icon()
 
