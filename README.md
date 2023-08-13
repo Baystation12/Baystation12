@@ -37,7 +37,3 @@ All assets including icons and sound are under a [Creative Commons 3.0 BY-SA lic
 ### GETTING THE CODE AND INSTALLING
 
 Please see [/docs/installation.md](/docs/installation.md) for instructions on obtaining, installing, updating, and running this code.
-
-
-
-This bam4000's fork. Best fork in my opinion
