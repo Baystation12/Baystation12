@@ -238,11 +238,8 @@
 		return TRUE
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		if(H.getBrainLoss() >= 55)
+		if(H.getBrainLoss() >= 80)
 			visible_message(SPAN_WARNING("\The [H] stares cluelessly at \the [src]."))
-			return TRUE
-		else if(prob(H.getBrainLoss()))
-			to_chat(user, SPAN_WARNING("You momentarily forget how to use \the [src]."))
 			return TRUE
 	if((. = component_attack_hand(user)))
 		return
