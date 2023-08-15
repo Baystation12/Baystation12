@@ -73,15 +73,8 @@
 	else
 		dat += "<A href='?src=\ref[src];addpen=1'>Add Pen</A><BR><HR>"
 
-	//The topmost paper. I don't think there's any way to organise contents in byond, so this is what we're stuck with.	-Pete
-	if(toppaper)
-		var/obj/item/paper/P = toppaper
-		dat += "<A href='?src=\ref[src];write=\ref[P]'>Write</A> <A href='?src=\ref[src];remove=\ref[P]'>Remove</A> <A href='?src=\ref[src];rename=\ref[P]'>Rename</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR><HR>"
-
 	for(var/obj/item/paper/P in src)
-		if(P==toppaper)
-			continue
-		dat += "<A href='?src=\ref[src];remove=\ref[P]'>Remove</A> <A href='?src=\ref[src];rename=\ref[P]'>Rename</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR>"
+		dat += "<A href='?src=\ref[src];write=\ref[P]'>Write</A> <A href='?src=\ref[src];remove=\ref[P]'>Remove</A> <A href='?src=\ref[src];rename=\ref[P]'>Rename</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR>"
 	for(var/obj/item/photo/Ph in src)
 		dat += "<A href='?src=\ref[src];remove=\ref[Ph]'>Remove</A> <A href='?src=\ref[src];rename=\ref[Ph]'>Rename</A> - <A href='?src=\ref[src];look=\ref[Ph]'>[Ph.name]</A><BR>"
 
@@ -114,7 +107,7 @@
 		else if(href_list["write"])
 			var/obj/item/P = locate(href_list["write"])
 
-			if(P && (P.loc == src) && istype(P, /obj/item/paper) && (P == toppaper) )
+			if(P && (P.loc == src) && istype(P, /obj/item/paper))
 
 				var/obj/item/I = usr.get_active_hand()
 
