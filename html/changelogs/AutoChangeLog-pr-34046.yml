@@ -1,0 +1,4 @@
+author: Jux
+delete-after: true
+changes:
+  - bugfix: pAIs can use their radios.
