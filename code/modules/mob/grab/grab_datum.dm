@@ -249,19 +249,19 @@
 
 // What happens when you hit the grabbed person with the grab on help intent.
 /datum/grab/proc/on_hit_help(obj/item/grab/G)
-	return TRUE
+	return FALSE
 
 // What happens when you hit the grabbed person with the grab on disarm intent.
 /datum/grab/proc/on_hit_disarm(obj/item/grab/G)
-	return TRUE
+	return FALSE
 
 // What happens when you hit the grabbed person with the grab on grab intent.
 /datum/grab/proc/on_hit_grab(obj/item/grab/G)
-	return TRUE
+	return FALSE
 
 // What happens when you hit the grabbed person with the grab on harm intent.
 /datum/grab/proc/on_hit_harm(obj/item/grab/G)
-	return TRUE
+	return FALSE
 
 // What happens when you hit the grabbed person with an open hand and you want it
 // to do some special snowflake action based on some other factor such as
