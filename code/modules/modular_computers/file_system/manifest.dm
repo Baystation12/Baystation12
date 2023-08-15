@@ -38,6 +38,9 @@
 	"}
 	// sort mobs
 	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
+		var/status = CR.get_status()
+		if (OOC && status == "Stored")
+			continue
 		var/name = CR.get_formal_name()
 		var/rank = CR.get_job()
 		mil_ranks[name] = ""
@@ -49,7 +52,7 @@
 			if(branch_obj && rank_obj)
 				mil_ranks[name] = "<abbr title=\"[rank_obj.name], [branch_obj.name]\">[rank_obj.name_short]</abbr> "
 
-		isactive[name] = CR.get_status()
+		isactive[name] = status
 
 		var/datum/job/job = SSjobs.get_by_title(rank)
 		var/found_place = 0
