@@ -87,17 +87,20 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	return ..()
 
 
-/mob/living/silicon/pai/Initialize(mapload, obj/item/device/paicard)
+/mob/living/silicon/pai/Initialize()
 	. = ..()
 	status_flags |= NO_ANTAG
-	card = paicard
 	add_language(LANGUAGE_HUMAN_EURO, TRUE)
 	verbs -= /mob/living/verb/ghost
-	if (card)
-		if (!card.radio)
-			card.radio = new /obj/item/device/radio(card)
-		silicon_radio = card.radio
 	software = default_pai_software.Copy()
+
+
+/mob/living/silicon/pai/proc/CreateRadio()
+	if (card)
+		if (ispath(card.radio))
+			silicon_radio = new card.radio(src)
+	else
+		silicon_radio = new /obj/item/device/radio(src)
 
 
 // this function shows the information about being silenced as a pAI in the Status panel
