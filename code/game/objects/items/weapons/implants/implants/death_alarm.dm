@@ -44,8 +44,9 @@
 		death_message = "[mobname] has died-zzzzt in-in-in..."
 	STOP_PROCESSING(SSobj, src)
 
-	for(var/channel in list("Security", "Medical", "Command"))
-		GLOB.global_headset.autosay(death_message, "[mobname]'s Death Alarm", channel)
+	broadcast_radio_message(death_message, "[mobname]'s Death Alarm", frequency = "Security", speak_emote = "declares", channel_color = COMMS_COLOR_SECURITY)
+	broadcast_radio_message(death_message, "[mobname]'s Death Alarm", frequency = "Command", speak_emote = "declares", channel_color = COMMS_COLOR_COMMAND)
+	broadcast_radio_message(death_message, "[mobname]'s Death Alarm", frequency = "Medical", speak_emote = "declares", channel_color = COMMS_COLOR_MEDICAL)
 
 /obj/item/implant/death_alarm/disable()
 	. = ..()

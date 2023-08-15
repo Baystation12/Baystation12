@@ -288,6 +288,8 @@
 /obj/machinery/power/supermatter/proc/announce_warning()
 	var/integrity = get_integrity()
 	var/alert_msg = " Integrity at [integrity]%"
+	var/radio_emote = "states"
+	var/delam_radio_emote = "blares"
 
 	if(damage > emergency_point)
 		alert_msg = emergency_alert + alert_msg
@@ -303,10 +305,10 @@
 	else
 		alert_msg = null
 	if(alert_msg)
-		GLOB.global_announcer.autosay(alert_msg, "Supermatter Monitor", "Engineering")
+		broadcast_radio_message(alert_msg, "Supermatter Monitor", frequency = ENG_FREQ, speak_emote = radio_emote, channel_color = COMMS_COLOR_ENGINEER)
 		//Public alerts
 		if((damage > emergency_point) && !public_alert)
-			GLOB.global_announcer.autosay("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT! SAFEROOMS UNBOLTED.", "Supermatter Monitor")
+			broadcast_radio_message("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT! SAFEROOMS UNBOLTED.", "Supermatter Monitor", speak_emote = delam_radio_emote)
 			public_alert = 1
 			GLOB.using_map.unbolt_saferooms() // torch
 			for(var/mob/M in GLOB.player_list)
@@ -314,7 +316,7 @@
 				if(T && (T.z in GLOB.using_map.station_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
 					sound_to(M, 'sound/ambience/matteralarm.ogg')
 		else if(safe_warned && public_alert)
-			GLOB.global_announcer.autosay(alert_msg, "Supermatter Monitor")
+			broadcast_radio_message(alert_msg, "Supermatter Monitor", speak_emote = radio_emote, channel_color = COMMS_COLOR_ENGINEER)
 			public_alert = 0
 
 /obj/machinery/power/supermatter/Process()

@@ -436,3 +436,44 @@ var/global/datum/controller/radio/radio_controller
 			var/list/L = data[i]
 			for(var/t in L)
 				. += "data\[\"[i]\"\] list has: [t]"
+
+/proc/broadcast_radio_message(message, sender_name, job_name, levels, frequency, speak_emote, language, channel_tag, channel_color)
+
+	if (!message || length(message) == 0)
+		message = "Test message"
+
+	if (!sender_name)
+		sender_name = "Unknown"
+
+	if (istext(frequency))
+		var/new_frequency = radiochannels[frequency]
+
+		if (new_frequency)
+			channel_tag = frequency
+			frequency = radiochannels[frequency]
+
+	if (!frequency)
+		frequency = PUB_FREQ
+
+	if (!job_name)
+		job_name = "Unknown"
+
+	if (!levels)
+		levels = GLOB.using_map.station_levels
+
+	if (!speak_emote)
+		speak_emote = "says"
+
+	if (!language)
+		language = all_languages[LANGUAGE_HUMAN_EURO]
+
+	if (!channel_tag)
+		for (var/tag in radiochannels)
+			if (radiochannels[tag] == frequency)
+				channel_tag = tag
+				break
+
+	var/datum/radio_frequency/connection = radio_controller.frequencies["[frequency]"]
+
+	return Broadcast_Message(connection, null, FALSE, null, null, message, sender_name, job_name,
+					  sender_name, null, 4, 0, levels, frequency, speak_emote, language, channel_tag, channel_color)

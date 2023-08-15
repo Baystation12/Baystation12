@@ -19,7 +19,7 @@
 	if(is_special_character(src))
 		log_and_message_admins("removed themselves from the round via Wipe Core")
 
-	GLOB.global_announcer.autosay("[src] has been moved to intelligence storage.", "Artificial Intelligence Oversight")
+	broadcast_radio_message("[src] has been moved to intelligence storage.", "Artificial Intelligence Oversight", speak_emote = "states")
 	despawn()
 
 /mob/living/silicon/ai/proc/despawn()
