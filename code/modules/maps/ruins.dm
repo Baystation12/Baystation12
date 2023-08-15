@@ -22,7 +22,7 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 	for (var/datum/map_template/ruin/map in SSmapping.map_templates)
 		if (map.loaded && map.player_cost)
 			player_budget -= map.player_cost
-
+	player_budget = max(0, player_budget)
 	for(var/datum/map_template/ruin/ruin in potentialRuins)
 		if (ruin.id in GLOB.banned_ruin_ids)
 			continue
