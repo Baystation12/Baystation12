@@ -146,9 +146,27 @@ var/global/list/holder_mob_icon_cache = list()
 	origin_tech = list(TECH_BIO = 3, TECH_ENGINEERING = 4)
 	item_state = "poppy"
 
-/obj/item/holder/attackby(obj/item/W as obj, mob/user as mob)
-	for(var/mob/M in src.contents)
-		M.attackby(W,user)
+
+/obj/item/holder/use_grab(obj/item/grab/grab, list/click_params)
+	// Handled by `use_tool()`
+	return FALSE
+
+
+/obj/item/holder/use_weapon(obj/item/weapon, mob/living/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE)
+
+	// Handled by `use_tool()`
+	return FALSE
+
+
+/obj/item/holder/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	SHOULD_CALL_PARENT(FALSE)
+
+	. = FALSE
+	for (var/mob/held in contents)
+		if (tool.resolve_attackby(held, user, click_params))
+			. = TRUE
+
 
 //Mob procs and vars for scooping up
 /mob/living/var/holder_type
