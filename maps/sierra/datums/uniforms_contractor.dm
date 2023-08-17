@@ -101,7 +101,7 @@
 		/obj/item/clothing/head/surgery/blue, /obj/item/clothing/head/surgery/green, \
 		/obj/item/clothing/head/surgery/black, /obj/item/clothing/head/surgery/navyblue, \
 		/obj/item/clothing/head/surgery/lilac, /obj/item/clothing/head/surgery/teal, \
-		/obj/item/clothing/head/surgery/heliodor, /obj/item/clothing/head/hardhat/EMS, \
+		/obj/item/clothing/head/surgery/heliodor, /obj/item/clothing/head/hardhat/light/medic, \
 		/obj/item/clothing/head/beret/infinity/medical)
 	dress_under = list(\
 		/obj/item/clothing/under/rank/chemist, /obj/item/clothing/under/rank/chemist_new, \

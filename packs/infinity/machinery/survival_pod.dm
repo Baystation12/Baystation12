@@ -24,7 +24,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
-		ui = new(user, src, ui_key, "_inf-mod-stasis.tmpl", "Stasis Pod UI", 400, 300, state = state)
+		ui = new(user, src, ui_key, "mods-stasis.tmpl", "Stasis Pod UI", 400, 300, state = state)
 		ui.set_initial_data(data)
 		ui.open()
 

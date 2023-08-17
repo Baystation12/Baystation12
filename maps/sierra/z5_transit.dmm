@@ -141,15 +141,15 @@
 /turf/space/transit/north,
 /area/space)
 "ao" = (
-/obj/effect/shuttle_landmark/escape_pod/transit/pod7,
+/obj/effect/shuttle_landmark/escape_pod/transit/pod6,
 /turf/space/transit/north,
 /area/space)
 "ap" = (
-/obj/effect/shuttle_landmark/escape_pod/transit/pod8,
+/obj/effect/shuttle_landmark/escape_pod/transit/pod7,
 /turf/space/transit/north,
 /area/space)
 "aq" = (
-/obj/effect/shuttle_landmark/escape_pod/transit/pod9,
+/obj/effect/shuttle_landmark/escape_pod/transit/pod8,
 /turf/space/transit/north,
 /area/space)
 "ar" = (

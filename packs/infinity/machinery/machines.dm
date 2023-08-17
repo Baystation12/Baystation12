@@ -21,3 +21,7 @@
 /obj/machinery/door/window/phoronreinforced
 	color = GLASS_COLOR_BORON
 	health_max = 300
+
+/obj/machinery/disposal/small
+	icon = 'packs/infinity/icons/obj/machinery/disposal_small.dmi'
+	density = FALSE

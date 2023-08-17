@@ -2253,10 +2253,6 @@
 	dir = 4
 	},
 /obj/structure/table/steel,
-/obj/machinery/iff_beacon{
-	dir = 4;
-	pixel_x = -22
-	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cockpit)
 "en" = (
@@ -28691,7 +28687,6 @@
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	active_timers = 1;
 	dir = 4;
 	id_tag = "guppy_shield_left";
 	name = "Window Shield"
@@ -30683,10 +30678,6 @@
 	},
 /obj/machinery/cell_charger,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/iff_beacon{
-	dir = 1;
-	pixel_y = -22
-	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/guppy_hangar/start)
 "YZ" = (

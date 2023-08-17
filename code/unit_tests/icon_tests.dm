@@ -101,11 +101,17 @@
 
 /datum/unit_test/icon_test/posters_shall_have_icon_states/start_test()
 	var/contraband_icons = icon_states('icons/obj/structures/contraband.dmi')
+	// [SIERRA-ADD] - NYC_POSTERS
+	var/new_year_icons = icon_states('mods/nyc_posters/icons/nyc_posters.dmi')
+	// [/SIERRA-ADD]
 	var/list/invalid_posters = list()
 
 	for(var/poster_type in subtypesof(/singleton/poster))
 		var/singleton/poster/P = GET_SINGLETON(poster_type)
-		if(!(P.icon_state in contraband_icons))
+		// [SIERRA-EDIT] - NYC_POSTERS
+		// if(!(P.icon_state in contraband_icons)) // SIERRA-EDIT - ORIGINAL
+		if(!(P.icon_state in contraband_icons) && !(P.icon_state in new_year_icons))
+		// [/SIERRA-EDIT]
 			invalid_posters += poster_type
 
 	if(length(invalid_posters))

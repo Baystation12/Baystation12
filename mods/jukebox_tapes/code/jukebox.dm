@@ -27,7 +27,7 @@
 
 /obj/machinery/jukebox/custom_tape/Initialize()
 	. = ..()
-	jukebox = new(src, "_jukebox-mod_jukebox.tmpl", "MediaTronic Library", 400, 600)
+	jukebox = new(src, "mods-jukebox.tmpl", "MediaTronic Library", 400, 600)
 	jukebox.falloff = 3
 	queue_icon_update()
 

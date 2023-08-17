@@ -25,7 +25,7 @@
 /obj/structure/bed/sofa/on_update_icon()
 	..()
 
-	cache_key = "[base_icon]-[material.name]-over"
+	var/cache_key = "[base_icon]-[material.name]-over"
 	if(isnull(stool_cache[cache_key]))
 		var/image/I = image('mods/fancy_sofas/icons/furniture.dmi', "[base_icon]_over")
 		if(material_alteration & MATERIAL_ALTERATION_COLOR)
@@ -35,7 +35,7 @@
 	overlays |= stool_cache[cache_key]
 	// Padding overlay.
 	if(padding_material)
-		padding_cache_key = "[base_icon]-padding-[padding_material.name]-over"
+		var/padding_cache_key = "[base_icon]-padding-[padding_material.name]-over"
 		if(isnull(stool_cache[padding_cache_key]))
 			var/image/I =  image(icon, "[base_icon]_padding_over")
 			if(material_alteration & MATERIAL_ALTERATION_COLOR)
@@ -54,14 +54,14 @@
 			stool_cache[cache_key] = I
 		overlays |= stool_cache[cache_key]
 		if(padding_material)
-			padding_cache_key = "[base_icon]-padding-armrest-[padding_material.name]"
-			if(isnull(stool_cache[padding_cache_key]))
+			cache_key = "[base_icon]-padding-armrest-[padding_material.name]"
+			if(isnull(stool_cache[cache_key]))
 				var/image/I = image(icon, "[base_icon]_padding_armrest")
 				I.layer = ABOVE_HUMAN_LAYER
 				if(material_alteration & MATERIAL_ALTERATION_COLOR)
 					I.color = padding_material.icon_colour
-				stool_cache[padding_cache_key] = I
-			overlays |= stool_cache[padding_cache_key]
+				stool_cache[cache_key] = I
+			overlays |= stool_cache[cache_key]
 
 /obj/structure/bed/sofa/m/rotate(mob/user)
 	if(!CanPhysicallyInteract(user) || anchored)
@@ -80,34 +80,34 @@
 	update_icon()
 
 /obj/structure/bed/sofa/m/red/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_RED_CLOTH)
+	..(newloc, newmaterial, MATERIAL_CARPET)
 
 /obj/structure/bed/sofa/m/brown/New(newloc, newmaterial = MATERIAL_WOOD)
 	..(newloc, newmaterial, MATERIAL_LEATHER_GENERIC)
 
 /obj/structure/bed/sofa/m/teal/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_TEAL_CLOTH)
+	..(newloc, newmaterial, "teal")
 
 /obj/structure/bed/sofa/m/black/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_BLACK_CLOTH)
+	..(newloc, newmaterial, "black")
 
 /obj/structure/bed/sofa/m/green/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_GREEN_CLOTH)
+	..(newloc, newmaterial, "green")
 
 /obj/structure/bed/sofa/m/purple/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_PURPLE_CLOTH)
+	..(newloc, newmaterial, "purple")
 
 /obj/structure/bed/sofa/m/blue/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_BLUE_CLOTH)
+	..(newloc, newmaterial, "blue")
 
 /obj/structure/bed/sofa/m/beige/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_BEIGE_CLOTH)
+	..(newloc, newmaterial, "beige")
 
 /obj/structure/bed/sofa/m/lime/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_LIME_CLOTH)
+	..(newloc, newmaterial, "lime")
 
 /obj/structure/bed/sofa/m/yellow/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_YELLOW_CLOTH)
+	..(newloc, newmaterial, "yellow")
 
 /obj/structure/bed/sofa/m/light/New(newloc, newmaterial = MATERIAL_WOOD)
 	..(newloc, newmaterial, MATERIAL_CLOTH)
@@ -119,34 +119,34 @@
 	base_icon = "sofa_r"
 
 /obj/structure/bed/sofa/r/red/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_RED_CLOTH)
+	..(newloc, newmaterial, MATERIAL_CARPET)
 
 /obj/structure/bed/sofa/r/brown/New(newloc, newmaterial = MATERIAL_WOOD)
 	..(newloc, newmaterial, MATERIAL_LEATHER_GENERIC)
 
 /obj/structure/bed/sofa/r/teal/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_TEAL_CLOTH)
+	..(newloc, newmaterial, "teal")
 
 /obj/structure/bed/sofa/r/black/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_BLACK_CLOTH)
+	..(newloc, newmaterial, "black")
 
 /obj/structure/bed/sofa/r/green/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_GREEN_CLOTH)
+	..(newloc, newmaterial, "green")
 
 /obj/structure/bed/sofa/r/purple/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_PURPLE_CLOTH)
+	..(newloc, newmaterial, "purple")
 
 /obj/structure/bed/sofa/r/blue/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_BLUE_CLOTH)
+	..(newloc, newmaterial, "blue")
 
 /obj/structure/bed/sofa/r/beige/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_BEIGE_CLOTH)
+	..(newloc, newmaterial, "beige")
 
 /obj/structure/bed/sofa/r/lime/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_LIME_CLOTH)
+	..(newloc, newmaterial, "lime")
 
 /obj/structure/bed/sofa/r/yellow/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_YELLOW_CLOTH)
+	..(newloc, newmaterial, "yellow")
 
 /obj/structure/bed/sofa/r/light/New(newloc, newmaterial = MATERIAL_WOOD)
 	..(newloc, newmaterial, MATERIAL_CLOTH)
@@ -158,34 +158,34 @@
 	base_icon = "sofa_l"
 
 /obj/structure/bed/sofa/l/red/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_RED_CLOTH)
+	..(newloc, newmaterial, MATERIAL_CARPET)
 
 /obj/structure/bed/sofa/l/brown/New(newloc, newmaterial = MATERIAL_WOOD)
 	..(newloc, newmaterial, MATERIAL_LEATHER_GENERIC)
 
 /obj/structure/bed/sofa/l/teal/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_TEAL_CLOTH)
+	..(newloc, newmaterial, "teal")
 
 /obj/structure/bed/sofa/l/black/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_BLACK_CLOTH)
+	..(newloc, newmaterial, "black")
 
 /obj/structure/bed/sofa/l/green/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_GREEN_CLOTH)
+	..(newloc, newmaterial, "green")
 
 /obj/structure/bed/sofa/l/purple/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_PURPLE_CLOTH)
+	..(newloc, newmaterial, "purple")
 
 /obj/structure/bed/sofa/l/blue/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_BLUE_CLOTH)
+	..(newloc, newmaterial, "blue")
 
 /obj/structure/bed/sofa/l/beige/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_BEIGE_CLOTH)
+	..(newloc, newmaterial, "beige")
 
 /obj/structure/bed/sofa/l/lime/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_LIME_CLOTH)
+	..(newloc, newmaterial, "lime")
 
 /obj/structure/bed/sofa/l/yellow/New(newloc, newmaterial = MATERIAL_WOOD)
-	..(newloc, newmaterial, MATERIAL_YELLOW_CLOTH)
+	..(newloc, newmaterial, "yellow")
 
 /obj/structure/bed/sofa/l/light/New(newloc, newmaterial = MATERIAL_WOOD)
 	..(newloc, newmaterial, MATERIAL_CLOTH)

@@ -1928,7 +1928,7 @@
 /obj/effect/floor_decal/corner/green/border{
 	dir = 4
 	},
-/obj/structure/sign/poster/nyc_would_you_plant{
+/obj/structure/sign/poster/nyc/would_you_plant{
 	pixel_x = 32
 	},
 /turf/simulated/floor/tiled,
@@ -3701,14 +3701,6 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
-	},
-/obj/machinery/door/window/brigdoor/westleft{
-	id_tag = null;
-	polarized = 1;
-	req_access = list("ACCESS_CAPTAIN");
-	dir = 2;
-	id = "cap_room_window";
-	autoset_access = 0
 	},
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/cobed)
@@ -15213,13 +15205,6 @@
 /obj/machinery/door/blast/regular/lockdown{
 	dir = 4;
 	id_tag = "lockdown2_6"
-	},
-/obj/machinery/door/window/brigdoor/westleft{
-	id_tag = null;
-	polarized = 1;
-	req_access = list("ACCESS_BRIDGE");
-	id = "bridge_windows";
-	autoset_access = 0
 	},
 /obj/structure/wall_frame/standard,
 /obj/structure/table/wallf{
@@ -30794,10 +30779,6 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/spline/fancy/black,
-/obj/machinery/iff_beacon/sierra{
-	dir = 1;
-	pixel_y = -22
-	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/nano)
 "bfE" = (
@@ -34392,7 +34373,6 @@
 	},
 /obj/item/clothing/accessory/toggleable/hawaii/red,
 /obj/item/clothing/suit/storage/toggle/hoodie,
-/obj/item/clothing/under/blackskirt,
 /obj/item/clothing/shoes/red,
 /obj/item/storage/backpack,
 /turf/simulated/floor/wood/walnut,
@@ -34510,7 +34490,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/forestarboard)
 "gJd" = (
-/obj/machinery/light/navigation,
+/obj/machinery/nav_light,
 /turf/simulated/floor/reinforced{
 	map_airless = 1
 	},
@@ -36595,7 +36575,7 @@
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "mLP" = (
-/obj/machinery/light/navigation/delay2,
+/obj/machinery/nav_light,
 /obj/structure/lattice,
 /turf/space,
 /area/space)
@@ -37013,7 +36993,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/engineering/hardstorage)
 "oig" = (
-/obj/machinery/light/navigation,
+/obj/machinery/nav_light,
 /obj/structure/lattice,
 /turf/space,
 /area/space)
@@ -38153,7 +38133,7 @@
 /area/crew_quarters/cafe)
 "rcD" = (
 /obj/structure/lattice,
-/obj/machinery/light/navigation/delay5,
+/obj/machinery/nav_light,
 /turf/space,
 /area/space)
 "reb" = (
@@ -38451,7 +38431,7 @@
 /area/crew_quarters/sleep/bunk_big)
 "rTr" = (
 /obj/structure/lattice,
-/obj/machinery/light/navigation,
+/obj/machinery/nav_light,
 /turf/space,
 /area/space)
 "rUZ" = (
@@ -39339,7 +39319,7 @@
 /area/crew_quarters/head_big)
 "uan" = (
 /obj/structure/lattice,
-/obj/machinery/light/navigation/delay3,
+/obj/machinery/nav_light,
 /turf/space,
 /area/space)
 "ufw" = (
@@ -40451,7 +40431,7 @@
 /area/bridge/nano)
 "xbP" = (
 /obj/structure/lattice,
-/obj/machinery/light/navigation/delay4,
+/obj/machinery/nav_light,
 /turf/space,
 /area/space)
 "xeM" = (

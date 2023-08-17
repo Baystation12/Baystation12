@@ -1020,7 +1020,7 @@
 /turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod/escape_pod6/station)
 "ach" = (
-/obj/effect/shuttle_landmark/escape_pod/start/pod7,
+/obj/effect/shuttle_landmark/escape_pod/start/pod6,
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod/escape_pod6/station)
@@ -1030,7 +1030,7 @@
 /turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod/escape_pod7/station)
 "acj" = (
-/obj/effect/shuttle_landmark/escape_pod/start/pod8,
+/obj/effect/shuttle_landmark/escape_pod/start/pod7,
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod/escape_pod7/station)
@@ -1040,7 +1040,7 @@
 /turf/simulated/wall/r_titanium,
 /area/shuttle/escape_pod/escape_pod8/station)
 "acl" = (
-/obj/effect/shuttle_landmark/escape_pod/start/pod9,
+/obj/effect/shuttle_landmark/escape_pod/start/pod8,
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod/escape_pod8/station)
@@ -11747,12 +11747,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/door/window/brigdoor/eastright{
-	id_tag = null;
-	req_access = newlist();
-	polarized = 1;
-	id = "iaaleft"
-	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/iaa)
 "aut" = (
@@ -11764,12 +11758,6 @@
 "auu" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
-	},
-/obj/machinery/door/window/brigdoor/westleft{
-	id_tag = null;
-	req_access = newlist();
-	polarized = 1;
-	id = "iaaright"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/iaa)
@@ -19938,13 +19926,6 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/machinery/door/window/northleft{
-	dir = 8;
-	name = "Security Sergeant's Desk";
-	req_access = newlist();
-	polarized = 1;
-	id = "bo_windows"
-	},
 /obj/machinery/door/blast/shutters{
 	dir = 4;
 	id_tag = "security_sergeant_shutters";
@@ -20288,7 +20269,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 9
 	},
-/obj/structure/sign/poster/nyc_unusual_gas{
+/obj/structure/sign/poster/nyc/unusual_gas{
 	pixel_x = -32
 	},
 /obj/structure/closet/shipping_wall/filled{
@@ -21323,8 +21304,6 @@
 /obj/machinery/door/window/southleft{
 	name = "HoP's Desk";
 	req_access = newlist();
-	id = "hop_windows";
-	polarized = 1
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/shutters{

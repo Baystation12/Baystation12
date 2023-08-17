@@ -12,31 +12,31 @@
 	..(newloc, newmaterial, MATERIAL_LEATHER_GENERIC)
 
 /obj/structure/bed/chair/rounded/red/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_RED_CLOTH)
+	..(newloc, newmaterial, MATERIAL_CARPET)
 
 /obj/structure/bed/chair/rounded/teal/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_TEAL_CLOTH)
+	..(newloc, newmaterial, "teal")
 
 /obj/structure/bed/chair/rounded/black/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_BLACK_CLOTH)
+	..(newloc, newmaterial, "black")
 
 /obj/structure/bed/chair/rounded/green/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_GREEN_CLOTH)
+	..(newloc, newmaterial, "green")
 
 /obj/structure/bed/chair/rounded/purple/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_PURPLE_CLOTH)
+	..(newloc, newmaterial, "purple")
 
 /obj/structure/bed/chair/rounded/blue/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_BLUE_CLOTH)
+	..(newloc, newmaterial, "blue")
 
 /obj/structure/bed/chair/rounded/beige/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_BEIGE_CLOTH)
+	..(newloc, newmaterial, "beige")
 
 /obj/structure/bed/chair/rounded/lime/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_LIME_CLOTH)
+	..(newloc, newmaterial, "lime")
 
 /obj/structure/bed/chair/rounded/yellow/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_YELLOW_CLOTH)
+	..(newloc, newmaterial, "yellow")
 
 /obj/structure/bed/chair/rounded/light/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
 	..(newloc, newmaterial, MATERIAL_CLOTH)

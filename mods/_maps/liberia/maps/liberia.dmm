@@ -1463,9 +1463,6 @@
 "cC" = (
 /obj/structure/table/reinforced,
 /obj/item/paper/sierrau/merchant,
-/obj/machinery/iff_beacon/table{
-	pixel_y = -4
-	},
 /turf/simulated/floor/carpet/blue2,
 /area/liberia/mule)
 "cD" = (
@@ -5015,10 +5012,6 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/blue/mono,
-/obj/machinery/iff_beacon/table{
-	dir = 8;
-	pixel_x = -5
-	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/bridge)
 "iN" = (
