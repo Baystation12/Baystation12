@@ -102,24 +102,31 @@
 
 // Buckle movement
 /datum/movement_handler/mob/buckle_relay/DoMove(direction, mover)
-	// TODO: Datumlize buckle-handling
-	if(mob.pulledby || mob.buckled) // Wheelchair driving!
-		if(istype(mob.loc, /turf/space))
-			return // No wheelchair driving in space
-		if(istype(mob.pulledby, /obj/structure/bed/chair/wheelchair))
-			. = MOVEMENT_HANDLED
-			mob.pulledby.DoMove(direction, mob)
-		else if(istype(mob.buckled, /obj/structure/bed/chair/wheelchair))
-			. = MOVEMENT_HANDLED
-			if(ishuman(mob))
-				var/mob/living/carbon/human/driver = mob
-				var/obj/item/organ/external/l_hand = driver.get_organ(BP_L_HAND)
-				var/obj/item/organ/external/r_hand = driver.get_organ(BP_R_HAND)
-				if((!l_hand || l_hand.is_stump()) && (!r_hand || r_hand.is_stump()))
-					return // No hands to drive your chair? Tough luck!
-			//drunk wheelchair driving
-			direction = mob.AdjustMovementDirection(direction)
-			mob.buckled.DoMove(direction, mob)
+	if (!mob.pulledby && !mob.buckled)
+		return
+	if (isturf(mob.loc))
+		var/turf/turf = mob.loc
+		if (!turf.has_gravity())
+			DoFeedback(SPAN_WARNING("You need gravity to move!"))
+			return
+	if (istype(mob.pulledby, /obj/structure/bed/chair/wheelchair))
+		. = MOVEMENT_HANDLED
+		mob.pulledby.DoMove(direction, mob)
+		return
+	if (istype(mob.buckled, /obj/structure/bed/chair/wheelchair))
+		. = MOVEMENT_HANDLED
+		if(ishuman(mob))
+			var/mob/living/carbon/human/driver = mob
+			if (!isnull(driver.l_hand) && !isnull(driver.r_hand))
+				DoFeedback(SPAN_WARNING("You need at least one free hand to move!"))
+				return
+			var/obj/item/organ/external/l_hand = driver.get_organ(BP_L_HAND)
+			var/obj/item/organ/external/r_hand = driver.get_organ(BP_R_HAND)
+			if (!l_hand && !r_hand || l_hand?.is_stump() && r_hand?.is_stump())
+				DoFeedback(SPAN_WARNING("You need at least one free hand to move!"))
+				return
+		direction = mob.AdjustMovementDirection(direction)
+		mob.buckled.DoMove(direction, mob)
 
 /datum/movement_handler/mob/buckle_relay/MayMove(mover)
 	if(mob.buckled)
