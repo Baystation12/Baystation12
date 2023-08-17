@@ -220,17 +220,17 @@
 	// This turns out to be a touch too much when a bunch of people are connecting at once from a restart during init.
 	if (GAME_STATE & RUNLEVELS_DEFAULT)
 		spawn()
+		if (!check_rights(R_MOD, FALSE, src))
 			// Check connections
 			var/list/connections = fetch_connections()
 			var/list/ckeys = _unique_ckeys_from_connections(connections) - ckey
 			if (length(ckeys))
-				log_and_message_staff(SPAN_INFO("[key_name_admin(src)] has connection details associated with other ckeys in the log: [english_list(ckeys)]"))
+				log_and_message_staff(SPAN_INFO("[key_name_admin(src)] has connection details associated with [length(ckeys)] other ckeys in the log."))
 
 			// Check bans
 			var/list/bans = _find_bans_in_connections(connections)
-			ckeys = _unique_ckeys_from_connections(bans)
 			if (length(bans))
-				log_and_message_staff(SPAN_DANGER("[key_name_admin(src)] has connection details associated with active bans: [english_list(ckeys)]"))
+				log_and_message_staff(SPAN_DANGER("[key_name_admin(src)] has connection details associated with [length(bans)] active bans."))
 
 	//////////////
 	//DISCONNECT//
