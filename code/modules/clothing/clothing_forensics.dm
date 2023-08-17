@@ -88,7 +88,7 @@
 /obj/item/clothing/accessory/buddy_tag/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
 /obj/item/clothing/accessory/chaplain/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
 /obj/item/clothing/accessory/ftu_pin/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
-/obj/item/clothing/accessory/wristwatches/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
+/obj/item/clothing/accessory/wristwatch/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
 /obj/item/clothing/accessory/solgov/skillbadge/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
 /obj/item/clothing/accessory/solgov/skillstripe/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS
 /obj/item/clothing/accessory/solgov/torch_patch/clothing_flags = CLOTHING_FLAGS_ACCESSORY_DEFAULT_FIBERLESS

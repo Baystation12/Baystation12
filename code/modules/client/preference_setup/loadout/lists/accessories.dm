@@ -165,7 +165,7 @@
 
 /datum/gear/accessory/wristwatch
 	display_name = "wrist watch selection"
-	path = /obj/item/clothing/accessory/wristwatches
+	path = /obj/item/clothing/accessory/wristwatch
 	cost = 1
 	flags = GEAR_HAS_TYPE_SELECTION
 
