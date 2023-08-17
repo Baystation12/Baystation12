@@ -1,7 +1,7 @@
 /datum/build_mode/placeholders
 	name = "Placeholder Control"
 	icon_state = "mode_ships"
-	var/obj/effect/overmap/placeholder/selected
+	var/obj/effect/overmap/visitable/placeholder/selected
 
 /datum/build_mode/placeholders/Help()
 	to_chat(user, {"
@@ -22,7 +22,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 /datum/build_mode/placeholders/Configurate()
 	if (!selected)
 		return
-	var/option = alert(user, "Pick name and hit Cancel if you didn't want this.", "Placeholder Options", "Name", "Color", "Sensor")
+	var/option = alert(user, "Pick name and hit Cancel if you didn't want this.", "Placeholder Options", "Name", "Color", "Scan")
 	if (!option)
 		return
 	else if (option == "Name")
@@ -40,7 +40,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 		if (isnull(option))
 			return
 		selected.color = option
-	else if (option == "Sensor")
+/*	else if (option == "Sensor")
 		option = alert(user, "Sensor Range", null, "Off", "Short", "Far")
 		if (isnull(option))
 			return
@@ -49,19 +49,23 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 		else if (option == "Short")
 			selected.set_light(1, 2, 3)
 		else if (option == "Far")
-			selected.set_light(1, 6, 7)
+			selected.set_light(1, 6, 7)*/
+	else if (option == "Scan")
+		var/scantext = ""
+		option = input(user, "Placeholder Scan Description", null, scantext) as null | text
+		selected.add_scan_data("secondary_scan", option, "You detect an active sensor contact.", SKILL_SCIENCE, SKILL_TRAINED)
 
 /datum/build_mode/placeholders/OnClick(atom/atom, list/parameters)
 	if (!atom)
 		return
 	var/modifier = parameters["ctrl"]
 	if (parameters["left"] && !modifier)
-		if (istype(atom, /obj/effect/overmap/placeholder))
+		if (istype(atom, /obj/effect/overmap/visitable/placeholder))
 			selected = atom
 			to_chat(user, "Selected [selected].")
 			return
 		else
-			var/find = locate(/obj/effect/overmap/placeholder) in get_turf(atom)
+			var/find = locate(/obj/effect/overmap/visitable/placeholder) in get_turf(atom)
 			if (!find)
 				if (!selected)
 					to_chat(user, "No placeholders found.")
@@ -142,7 +146,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	animate(transform = matrix().Update(scale_x = 0, scale_y = 0), alpha = 0, time = 0.5 SECONDS)
 
 
-/obj/effect/overmap/placeholder
+/obj/effect/overmap/visitable/placeholder
 	scannable = TRUE
 	requires_contact = TRUE
 
@@ -153,12 +157,12 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	var/speed = 1
 
 
-/obj/effect/overmap/placeholder/Initialize()
+/obj/effect/overmap/visitable/placeholder/Initialize()
 	. = ..()
 	SetTransform(scale = scale, rotation = rotation)
 
 
-/obj/effect/overmap/placeholder/gcn_a298
+/obj/effect/overmap/visitable/placeholder/gcn_a298
 	name = "A298-Class Patrol Vessel"
 	desc = "A small, agile military and policing starship built by the Confederation Navy."
 	icon = 'gcn-64.dmi'
@@ -168,7 +172,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	speed = 0.75
 
 
-/obj/effect/overmap/placeholder/gcn_centurion
+/obj/effect/overmap/visitable/placeholder/gcn_centurion
 	name = "Centurion-Class Frigate"
 	desc = "A medium sized military light carrier built by the Confederation Navy."
 	icon = 'gcn-64.dmi'
@@ -177,7 +181,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	pixel_y = -16
 
 
-/obj/effect/overmap/placeholder/gcn_chevalier
+/obj/effect/overmap/visitable/placeholder/gcn_chevalier
 	name = "Chevalier-Class Frigate"
 	desc = "A medium sized line warship built by the Confederation Navy."
 	icon = 'gcn-64.dmi'
@@ -187,7 +191,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	speed = 0.9
 
 
-/obj/effect/overmap/placeholder/gcn_lucerne
+/obj/effect/overmap/visitable/placeholder/gcn_lucerne
 	name = "Lucerne-Class Destroyer"
 	desc = "A large mixed-role capital warship built by the Confederation Navy."
 	icon = 'gcn-64.dmi'
@@ -198,7 +202,15 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	speed = 1.5
 
 
-/obj/effect/overmap/placeholder/scg_arrow
+/obj/effect/overmap/visitable/placeholder/gcn_wombat
+	name = "Wombat-Model Heavy Interceptor"
+	desc = "A medium-sized interceptor platform, built by the Confederation Navy"
+	icon = 'gcn-32.dmi'
+	icon_state = "sf-wombat"
+	speed = 0.3
+
+
+/obj/effect/overmap/visitable/placeholder/scg_arrow
 	name = "Arrow-Class Corvette"
 	desc = "A small, aging missile warship built for the Solar Assembly Fleets."
 	icon = 'scg-64.dmi'
@@ -208,7 +220,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	speed = 1.2
 
 
-/obj/effect/overmap/placeholder/scg_lexington
+/obj/effect/overmap/visitable/placeholder/scg_lexington
 	name = "Lexington-Class Corvette"
 	desc = "A small, fairly modern missile carrying warship built for the Solar Assembly Fleets."
 	icon = 'scg-64.dmi'
@@ -217,7 +229,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	pixel_y = -16
 
 
-/obj/effect/overmap/placeholder/scg_rockfish
+/obj/effect/overmap/visitable/placeholder/scg_rockfish
 	name = "Rockfish-Class Corvette"
 	desc = "A small, top of the line stealth warship built for the Solar Assembly Fleets."
 	icon = 'scg-64.dmi'
@@ -227,7 +239,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	speed = 0.8
 
 
-/obj/effect/overmap/placeholder/scg_nuum
+/obj/effect/overmap/visitable/placeholder/scg_nuum
 	name = "Nuum-Class Missile Frigate"
 	desc = "An aging medium sized frigate with a heavy focus on missiles, built for the Solar Assembly Fleets."
 	icon = 'scg-64.dmi'
@@ -236,7 +248,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	pixel_y = -16
 
 
-/obj/effect/overmap/placeholder/scg_somme
+/obj/effect/overmap/visitable/placeholder/scg_somme
 	name = "Somme-Class Frigate"
 	desc = "A fairly modern medium sized frigate of the line, built for the Solar Assembly Fleets."
 	icon = 'scg-64.dmi'
@@ -245,7 +257,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	pixel_y = -16
 
 
-/obj/effect/overmap/placeholder/scg_kestrel
+/obj/effect/overmap/visitable/placeholder/scg_kestrel
 	name = "Kestrel-Model Starfighter"
 	desc = "An aging model of space fighter built for the Solar Assembly Fleets but now common in private ownership."
 	icon = 'scg-32.dmi'
@@ -253,7 +265,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	speed = 0.2
 
 
-/obj/effect/overmap/placeholder/scg_eagle_ii
+/obj/effect/overmap/visitable/placeholder/scg_eagle_ii
 	name = "Eagle-II-Model Strike Fighter"
 	desc = "A modernized take on a venerable payload-carrying platform, built for the Solar Assembly Fleets."
 	icon = 'scg-32.dmi'
@@ -261,9 +273,27 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	speed = 0.2
 
 
-/obj/effect/overmap/placeholder/scg_hermes
+/obj/effect/overmap/visitable/placeholder/scg_hermes
 	name = "Hermes-Model Utility Pod"
 	desc = "A tiny workhorse found across human space, able to carry a pilot and some cargo a short distance."
 	icon = 'scg-32.dmi'
 	icon_state = "uv-hermes"
 	speed = 0.4
+
+
+/obj/effect/overmap/visitable/placeholder/gen_dingo
+	name = "Dingo-Class Cargo Freighter"
+	desc = "A heavy cargo freighter often used in shipping and logistics, made for independent mercantile use."
+	icon = 'gen-64.dmi'
+	icon_state = "cf-dingo"
+	speed = 1.8
+	pixel_x = -16
+	pixel_y = -16
+
+
+/obj/effect/overmap/visitable/placeholder/gen_mantaray
+	name = "Mantaray-Model Escort Fighter"
+	desc = "A light escort fighter carrying capable payload, made for independent defense use."
+	icon = 'gen-32.dmi'
+	icon_state = "sf-mantaray"
+	speed = 0.2
