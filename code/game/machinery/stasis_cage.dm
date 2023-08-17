@@ -13,11 +13,9 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	idle_power_usage = 0
 	active_power_usage = 5 KILOWATTS
 	use_power = POWER_USE_IDLE
-	power_channel = LOCAL
 	health_max = 200
 	health_min_damage = 10
 	construct_state = /singleton/machine_construction/default/panel_closed
-	uncreated_component_parts = null
 
 	machine_name = "stasis cage"
 	machine_desc = "A container with an internal stasis suspender to keep any fauna inside safe and secure for transport. Fauna not included."
@@ -29,7 +27,8 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 
 	var/god = FALSE //Check if mob had godmode before being contained
 
-	var/obj/item/stock_parts/power/battery/battery
+	var/obj/item/cell/cell = null
+
 
 /obj/machinery/stasis_cage/Initialize()
 	. = ..()
@@ -38,7 +37,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	airtank.adjust_gas(GAS_OXYGEN, MOLES_O2STANDARD, FALSE)
 	airtank.adjust_gas(GAS_NITROGEN, MOLES_N2STANDARD)
 
-	battery = get_component_of_type(/obj/item/stock_parts/power/battery)
+	cell = get_cell()
 
 	var/mob/living/A = locate() in loc
 	if(!A)
@@ -47,6 +46,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 		contain(A)
 
 	wires = new/datum/wires/stasis_cage(src)
+
 
 /obj/machinery/stasis_cage/Process()
 	if (!is_powered())
@@ -60,6 +60,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 			SA.in_stasis = TRUE
 			if (!god)
 				SA.status_flags ^= GODMODE
+
 
 /obj/machinery/stasis_cage/proc/try_release(mob/user)
 	if(!contained)
@@ -83,6 +84,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 		user.visible_message("[user] releases \the [contained] from \the [src]!")
 		release()
 
+
 /obj/machinery/stasis_cage/proc/release()
 	if (contained)
 		contained.dropInto(src)
@@ -93,6 +95,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 		playsound(loc, 'sound/machines/airlock_heavy.ogg', 40)
 		update_icon()
 		update_use_power(POWER_USE_IDLE)
+
 
 /obj/machinery/stasis_cage/proc/contain(mob/user, mob/thing)
 	if(contained || broken)
@@ -110,18 +113,22 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	set_contained(thing)
 	update_use_power(POWER_USE_ACTIVE)
 
+
 /obj/machinery/stasis_cage/proc/set_contained(mob/contained)
 	src.contained = contained
 	contained.forceMove(src)
 	update_icon()
 
+
 /obj/machinery/stasis_cage/physical_attack_hand(mob/user)
 	if (!panel_open)
 		try_release(user)
 
+
 /obj/machinery/stasis_cage/attack_robot(mob/user)
 	if (Adjacent(user) && !panel_open)
 		try_release(user)
+
 
 /obj/machinery/stasis_cage/examine(mob/user)
 	. = ..()
@@ -132,8 +139,9 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 			to_chat(user, "\The [contained] is kept inside.")
 	if (broken)
 		to_chat(user, SPAN_WARNING("\The [src]'s lid is broken. It probably can not be used."))
-	if (battery.get_cell())
-		to_chat(user, "\The [src]'s power gauge shows [battery.cell.percent()]% remaining.")
+	if (cell)
+		to_chat(user, "\The [src]'s power gauge shows [cell.percent()]% remaining.")
+
 
 /obj/machinery/stasis_cage/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Crowbar - Pry thing out of cage
@@ -227,6 +235,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 
 	return ..()
 
+
 /obj/machinery/stasis_cage/return_air() //Used to make stasis cage protect from vacuum.
 	if (!is_powered())
 		return
@@ -234,19 +243,21 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 		return airtank
 	..()
 
+
 /obj/machinery/stasis_cage/RefreshParts()
 	..()
 	var/charge_multiplier = clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0.1, 10)
 	change_power_consumption(initial(active_power_usage) / charge_multiplier, POWER_USE_ACTIVE)
 
+
 /obj/machinery/stasis_cage/Destroy()
 	release()
 	QDEL_NULL(airtank)
 	QDEL_NULL(contained)
-	QDEL_NULL(battery)
-	if (battery.get_cell())
-		QDEL_NULL(battery.cell)
+	if (cell)
+		QDEL_NULL(cell)
 	return ..()
+
 
 /obj/machinery/stasis_cage/emp_act(severity)
 	if (health_dead())
@@ -265,10 +276,11 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	broken = TRUE
 	new /obj/effect/sparks(get_turf(src))
 
-	if (battery.get_cell())
-		battery.cell.emp_act(severity)
+	if (cell)
+		cell.emp_act(severity)
 
 	update_icon()
+
 
 /obj/machinery/stasis_cage/on_update_icon()
 	overlays.Cut()
@@ -294,11 +306,13 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	if (panel_open)
 		overlays += "[initial(icon_state)]_panel"
 
+
 /obj/machinery/stasis_cage/on_death()
 	. = ..()
 	visible_message(
 		SPAN_DANGER("\The [src] lets out a painful whine, as its structure deforms!")
 	)
+
 
 /obj/machinery/stasis_cage/MouseDrop_T(mob/target, mob/user)
 	if(!CanMouseDrop(target, user))
@@ -325,6 +339,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 		qdel(EN)
 		contain(user, target)
 
+
 /datum/wires/stasis_cage
 	holder_type = /obj/machinery/stasis_cage
 	random = TRUE
@@ -336,11 +351,13 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 		new /datum/wire_description(STASISCAGE_WIRE_LOCK, "This wire is connected to the lid motors.", SKILL_TRAINED)
 	)
 
+
 /datum/wires/stasis_cage/CanUse(mob/living/L)
 	var/obj/machinery/stasis_cage/stasis_cage = holder
 	if (stasis_cage.panel_open)
 		return TRUE
 	return FALSE
+
 
 /datum/wires/stasis_cage/GetInteractWindow(mob/user)
 	. = ..()
@@ -353,6 +370,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	else
 		. += "<li>There are lights and wires here, but you don't know how the wiring works.</li>"
 	. += "</ul>"
+
 
 /datum/wires/stasis_cage/UpdateCut(index, mended)
 	var/obj/machinery/stasis_cage/stasis_cage = holder
@@ -371,6 +389,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 					SPAN_NOTICE("You notice the cage lid override flag blink hastily.")
 				)
 				stasis_cage.broken = TRUE
+
 
 /datum/wires/stasis_cage/UpdatePulsed(index)
 	var/obj/machinery/stasis_cage/stasis_cage = holder
