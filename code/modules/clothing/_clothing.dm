@@ -188,13 +188,15 @@
 		return STATUS_INTERACTIVE
 
 /obj/item/clothing/OnTopic(user, list/href_list, datum/topic_state/state)
+	. = ..()
+
 	if(href_list["list_ungabunga"])
 		var/list/visible = get_visible_accessories()
 		if (length(visible))
 			var/list/display = list()
 			for (var/obj/item/clothing/accessory/A in visible)
 				if (!(A.accessory_flags & ACCESSORY_HIDDEN))
-					display += "[icon2html(A, user)] \a [A]"
+					display += "[icon2html(A, user)] \a [A]<a href='?src=\ref[A];examine=1'>\[?\]</a>"
 			to_chat(user, "Attached to \the [src] are [english_list(display)].")
 		return TOPIC_HANDLED
 	if(href_list["list_armor_damage"])
