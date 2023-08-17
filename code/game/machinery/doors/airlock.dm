@@ -649,7 +649,7 @@ About the new airlock wires panel:
 		if(AIRLOCK_CLOSED)
 			icon_state = "closed"
 		if(AIRLOCK_OPENING, AIRLOCK_CLOSING, AIRLOCK_EMAG, AIRLOCK_DENY)
-			icon_state = ""
+			icon_state = "blank"
 
 	set_airlock_overlays(state)
 
