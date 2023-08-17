@@ -18,6 +18,11 @@
 		Drink up!;\
 		The best drinks in space.\
 	"}
+	antag_slogans = {"\
+		Robust Softdrinks: The only robust product Sol has ever produced!;\
+		Hey you! Yes you! Come drink some diabetes in a can!;\
+		You've tried the best, now make do with the rest. Space-Cola!\
+	"}
 	prices = list(
 		/obj/item/reagent_containers/food/drinks/cans/cola = 1,
 		/obj/item/reagent_containers/food/drinks/cans/space_mountain_wind = 1,
@@ -44,10 +49,14 @@
 	)
 	rare_products = list(
 		/obj/item/reagent_containers/food/drinks/cans/cola_pork = 75,
-		/obj/item/reagent_containers/food/drinks/cans/syndicola = 30
-
+		/obj/item/reagent_containers/food/drinks/cans/syndicola = 30,
+		/obj/item/pen/reagent/sleepy = 35
 	)
 	contraband = list(
 		/obj/item/reagent_containers/food/drinks/cans/thirteenloko = 5,
 		/obj/item/reagent_containers/food/snacks/liquidfood = 6
+	)
+	antag = list(
+		/obj/item/storage/box/syndie_kit/toxin = 1,
+		/obj/item/pen/reagent/sleepy = 0
 	)

@@ -62,6 +62,7 @@ var/global/list/uplink_random_selections_
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealth_items/chameleon_kit)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealth_items/chameleon_projector)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealth_items/voice)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealth_items/cosmetic_surgery_kit, reselect_propbability = 10)
 
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/toolbox, reselect_propbability = 10)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/plastique)
@@ -75,6 +76,7 @@ var/global/list/uplink_random_selections_
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/powersink, 10, 10)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/ai_module, 25, 0)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/polychromic_dye_bottle)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/vendorcoins, reselect_propbability = 5)
 
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/implants/imp_freedom)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/implants/imp_compress)

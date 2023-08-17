@@ -209,3 +209,11 @@
 	item_cost = 5
 	path = /obj/item/storage/box/handcuffs
 	desc = "A box of 7 handcuffs."
+
+/datum/uplink_item/item/tools/vendorcoins
+	name = "Syndicate Coins"
+	item_cost = 50
+	path = /obj/item/storage/fancy/smokable/case/syndiecoins
+	desc = "A packet of five coins that unlock a secret compartment in any vending machine. \
+		Each coin unlocks on average 15 TCs worth of items. Depending on your luck, you may half or more than triple your TCs worth! \
+		These compartments cannot be accessed by hacking."

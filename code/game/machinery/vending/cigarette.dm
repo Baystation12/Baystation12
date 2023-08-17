@@ -26,6 +26,11 @@
 		We understand the depressed, alcoholic cowboy in you. That's why we also smoke Jericho.;\
 		Professionals. Better cigarettes for better people. Yes, better people.\
 	"}
+	antag_slogans = {"\
+		With your lungs full of smoke, you’ll share the experience of countless Gaian civilians!;\
+		Smoke your troubles away. Is being a citizen of Sol worth all this trouble?;\
+		We kill you, you buy! It's the SCG way!\
+	"}
 	prices = list(
 		/obj/item/storage/chewables/tobacco = 40,
 		/obj/item/storage/chewables/tobacco2 = 50,
@@ -105,4 +110,15 @@
 	premium = list(
 		/obj/item/storage/fancy/smokable/cigar = 5,
 		/obj/item/storage/fancy/smokable/killthroat = 5
+	)
+	rare_products = list(
+		/obj/item/storage/box/syndie_kit/cigarette = 50,
+		/obj/item/storage/box/syndie_kit/syringegun = 40,
+		/obj/item/clothing/mask/chameleon/voice = 20
+	)
+	antag = list(
+		/obj/item/grenade/smokebomb = 1,
+		/obj/item/storage/box/syndie_kit/cigarette = 0,
+		/obj/item/storage/box/syndie_kit/syringegun = 0,
+		/obj/item/clothing/mask/chameleon/voice = 0
 	)
