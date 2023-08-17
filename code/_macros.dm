@@ -219,6 +219,8 @@
 
 #define crash_with(X) crash_at(X, __FILE__, __LINE__)
 
+#define TO_HEX_DIGIT(n) ascii2text((n&15) + ((n&15)<10 ? 48 : 87))
+
 
 /// Semantic define for a 0 int intended for use as a bitfield
 #define EMPTY_BITFIELD 0
