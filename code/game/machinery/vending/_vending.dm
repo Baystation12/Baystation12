@@ -90,6 +90,9 @@
 	var/shooting_chance = 2 //The chance that items are being shot per tick
 	var/scan_id = TRUE
 	var/obj/item/material/coin/coin
+	var/light_max_bright_on = 0.2
+	var/light_inner_range_on = 1
+	var/light_outer_range_on = 2
 
 
 /obj/machinery/vending/Destroy()
@@ -111,6 +114,7 @@
 	if (minrandom > maxrandom)
 		minrandom = maxrandom
 	build_inventory(populate_parts)
+	update_icon()
 
 /obj/machinery/vending/examine(mob/user)
 	. = ..()
@@ -136,9 +140,20 @@
 /obj/machinery/vending/powered()
 	return anchored && ..()
 
+/obj/machinery/vending/proc/update_glow()
+	var/light_color
+	if (IsShowingAntag())
+		light_color = COLOR_RED
+		light_max_bright_on = 0.4
+	if (!is_powered() || MACHINE_IS_BROKEN(src))
+		set_light(0)
+	else
+		set_light(light_max_bright_on, light_inner_range_on, light_outer_range_on, 2, light_color)
+
 
 /obj/machinery/vending/on_update_icon()
 	ClearOverlays()
+	update_glow()
 	if (MACHINE_IS_BROKEN(src))
 		icon_state = "[initial(icon_state)]-broken"
 	else if (is_powered())
@@ -150,6 +165,7 @@
 		AddOverlays(image(icon, "[initial(icon_state)]-panel"))
 	if (IsShowingAntag() && is_powered())
 		AddOverlays(image(icon, "sparks"))
+		AddOverlays(emissive_appearance(icon, "sparks"))
 	if (!vend_ready)
 		AddOverlays(image(icon, "[initial(icon_state)]-shelf[rand(max_overlays)]"))
 
