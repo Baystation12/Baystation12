@@ -1,0 +1,6 @@
+author: SomeAngryMiner
+delete-after: true
+changes:
+  - bugfix: fixes airlock error icons.
+  - bugfix: fixes vine error icons.
+  - bugfix: fixes ore processor console error icons.
