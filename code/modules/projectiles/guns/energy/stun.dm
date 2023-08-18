@@ -131,3 +131,13 @@
 	max_shots = 4
 	projectile_type = /obj/item/projectile/beam/confuseray
 	combustion = 0
+
+/obj/item/gun/energy/sec_taser
+	name = "taser"
+	desc = "A small device which launches a charged projectile. It has a low capacity and reliability issues, but when it works it's quite painful to be on the receiving end."
+	icon = 'icons/obj/guns/sec_taser.dmi'
+	icon_state = "sec_taser"
+	w_class = ITEM_SIZE_SMALL
+	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
+	max_shots = 2
+	projectile_type = /obj/item/projectile/energy/taser

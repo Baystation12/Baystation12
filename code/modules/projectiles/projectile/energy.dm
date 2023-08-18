@@ -227,3 +227,26 @@
 	damage = 10
 	armor_penetration = 35
 	damage_type = DAMAGE_BRUTE
+
+/obj/item/projectile/energy/taser
+	name = "electrode"
+	fire_sound = 'sound/weapons/Taser.ogg'
+	agony = 0
+	damage = 0
+	damage_type = DAMAGE_SHOCK
+	step_delay = 0.7
+	life_span = 3
+
+/obj/item/projectile/energy/taser/on_hit(atom/target, blocked, def_zone)
+
+	if (istype(target, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = target
+		var/obj/item/clothing/C = H.get_covering_equipped_item_by_zone(def_zone)
+
+		if (C && GET_FLAGS(C.item_flags, ITEM_FLAG_THICKMATERIAL))
+			return FALSE
+
+		agony = 50
+		H.stun_effect_act(stun, agony, def_zone, src)
+
+	return TRUE

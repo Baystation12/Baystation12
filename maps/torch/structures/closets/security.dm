@@ -53,7 +53,8 @@
 		/obj/item/material/knife/folding/swiss/sec,
 		/obj/item/storage/backpack/dufflebag/sec,
 		/obj/item/gun/projectile/pistol/m19/empty,
-		/obj/item/ammo_magazine/pistol/rubber = 3
+		/obj/item/ammo_magazine/pistol/rubber = 3,
+		/obj/item/gun/energy/sec_taser
 	)
 
 
@@ -86,7 +87,8 @@
 		/obj/item/device/personal_shield,
 		/obj/item/storage/backpack/dufflebag/sec,
 		/obj/item/gun/projectile/pistol/m19/empty,
-		/obj/item/ammo_magazine/pistol/rubber = 3
+		/obj/item/ammo_magazine/pistol/rubber = 3,
+		/obj/item/gun/energy/sec_taser
 	)
 
 /obj/structure/closet/secure_closet/brigchief
@@ -114,7 +116,8 @@
 		/obj/item/material/knife/folding/swiss/sec,
 		/obj/item/storage/backpack/dufflebag/sec,
 		/obj/item/gun/projectile/pistol/m19/empty,
-		/obj/item/ammo_magazine/pistol/rubber = 3
+		/obj/item/ammo_magazine/pistol/rubber = 3,
+		/obj/item/gun/energy/sec_taser
 	)
 
 /obj/structure/closet/secure_closet/forensics
@@ -146,7 +149,8 @@
 		/obj/item/material/knife/folding/swiss/sec,
 		/obj/item/storage/backpack/dufflebag/sec,
 		/obj/item/gun/projectile/pistol/m19/empty,
-		/obj/item/ammo_magazine/pistol/rubber = 2
+		/obj/item/ammo_magazine/pistol/rubber = 2,
+		/obj/item/gun/energy/sec_taser
 	)
 
 /obj/structure/closet/bombclosetsecurity/WillContain()
