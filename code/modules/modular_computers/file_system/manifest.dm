@@ -34,10 +34,13 @@
 		.manifest tr.alt td {[monochrome?"border-top-width: 2px":"background-color: #373737; color:white"]}
 	</style></head>
 	<table class="manifest" width='350px'>
-	<tr class='head'><th>Name</th><th>Position</th><th>Activity</th></tr>
+	<tr class='head'><th>Name</th><th>Position</th>[OOC ? "" : "<th>Activity</th>"]</tr>
 	"}
 	// sort mobs
 	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
+		var/status = CR.get_status()
+		if (OOC && status == "Stored")
+			continue
 		var/name = CR.get_formal_name()
 		var/rank = CR.get_job()
 		mil_ranks[name] = ""
@@ -49,16 +52,7 @@
 			if(branch_obj && rank_obj)
 				mil_ranks[name] = "<abbr title=\"[rank_obj.name], [branch_obj.name]\">[rank_obj.name_short]</abbr> "
 
-		if(OOC)
-			var/active = 0
-			for(var/mob/M in GLOB.player_list)
-				var/mob_real_name = M.real_name
-				if(sanitize(mob_real_name) == CR.get_name() && M.client && M.client.inactivity <= 10 MINUTES)
-					active = 1
-					break
-			isactive[name] = active ? "Active" : "Inactive"
-		else
-			isactive[name] = CR.get_status()
+		isactive[name] = status
 
 		var/datum/job/job = SSjobs.get_by_title(rank)
 		var/found_place = 0
@@ -85,9 +79,11 @@
 	for(var/list/department in dept_data)
 		var/list/names = department["names"]
 		if(length(names) > 0)
-			dat += "<tr><th colspan=3 style=background-color:[department["color"]]>[department["header"]]</th></tr>"
+			var/columns = OOC ? 2 : 3
+			dat += "<tr><th colspan=[columns] style=background-color:[department["color"]]>[department["header"]]</th></tr>"
 			for(var/name in names)
-				dat += "<tr class='candystripe'><td>[mil_ranks[name]][name]</td><td>[names[name]]</td><td>[isactive[name]]</td></tr>"
+				var/status_cell = OOC ? "" : "<td>[isactive[name]]</td>"
+				dat += "<tr class='candystripe'><td>[mil_ranks[name]][name]</td><td>[names[name]]</td>[status_cell]</tr>"
 
 	dat += "</table>"
 	dat = replacetext(dat, "\n", "") // so it can be placed on paper correctly
