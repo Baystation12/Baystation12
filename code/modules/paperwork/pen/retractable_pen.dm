@@ -14,7 +14,7 @@
 	icon_state = "pen_red"
 	colour = "red"
 	color_description = "red ink"
-	base_state = "ret_blue"
+	base_state = "ret_red"
 
 /obj/item/pen/retractable/green
 	icon_state = "pen_green"
