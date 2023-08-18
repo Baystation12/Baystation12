@@ -6,9 +6,10 @@
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 	origin_tech = list(TECH_DATA = 2)
-	var/obj/item/device/radio/radio
-	var/looking_for_personality = 0
+	var/radio = /obj/item/device/radio/infinite
+	var/looking_for_personality = FALSE
 	var/mob/living/silicon/pai/pai
+
 
 /obj/item/device/paicard/relaymove(mob/user, direction)
 	if(user.stat || user.stunned)
@@ -17,15 +18,20 @@
 	if(istype(rig))
 		rig.forced_move(direction, user)
 
+
 /obj/item/device/paicard/Initialize()
 	. = ..()
 	overlays += "pai-off"
+	if (!pai)
+		pai = new /mob/living/silicon/pai(src)
+		pai.card = src
+		pai.CreateRadio()
+
 
 /obj/item/device/paicard/Destroy()
 	//Will stop people throwing friend pAIs into the singularity so they can respawn
 	if(!isnull(pai))
 		pai.death(0)
-	QDEL_NULL(radio)
 	return ..()
 
 /obj/item/device/paicard/attack_self(mob/user)
@@ -38,90 +44,90 @@
 			<head>
 				<style>
 					body {
-					    margin-top:5px;
-					    font-family:Verdana;
-					    color:white;
-					    font-size:13px;
-					    background-image:url('uiBackground.png');
-					    background-repeat:repeat-x;
-					    background-color:#272727;
+						margin-top:5px;
+						font-family:Verdana;
+						color:white;
+						font-size:13px;
+						background-image:url('uiBackground.png');
+						background-repeat:repeat-x;
+						background-color:#272727;
 						background-position:center top;
 					}
 					table {
-					    font-size:13px;
-					    margin-left:-2px;
+						font-size:13px;
+						margin-left:-2px;
 					}
 					table.request {
-					    border-collapse:collapse;
+						border-collapse:collapse;
 					}
 					table.desc {
-					    border-collapse:collapse;
-					    font-size:13px;
-					    border: 1px solid #161616;
-					    width:100%;
+						border-collapse:collapse;
+						font-size:13px;
+						border: 1px solid #161616;
+						width:100%;
 					}
 					table.download {
-					    border-collapse:collapse;
-					    font-size:13px;
-					    border: 1px solid #161616;
-					    width:100%;
+						border-collapse:collapse;
+						font-size:13px;
+						border: 1px solid #161616;
+						width:100%;
 					}
 					tr.d0 td, tr.d0 th {
-					    background-color: #506070;
-					    color: white;
+						background-color: #506070;
+						color: white;
 					}
 					tr.d1 td, tr.d1 th {
-					    background-color: #708090;
-					    color: white;
+						background-color: #708090;
+						color: white;
 					}
 					tr.d2 td {
-					    background-color: #00ff00;
-					    color: white;
-					    text-align:center;
+						background-color: #00ff00;
+						color: white;
+						text-align:center;
 					}
 					td.button {
-					    border: 1px solid #161616;
-					    background-color: #40628a;
+						border: 1px solid #161616;
+						background-color: #40628a;
 					}
 					td.button {
-					    border: 1px solid #161616;
-					    background-color: #40628a;
-					    text-align: center;
+						border: 1px solid #161616;
+						background-color: #40628a;
+						text-align: center;
 					}
 					td.button_red {
-					    border: 1px solid #161616;
-					    background-color: #b04040;
-					    text-align: center;
+						border: 1px solid #161616;
+						background-color: #b04040;
+						text-align: center;
 					}
 					td.download {
-					    border: 1px solid #161616;
-					    background-color: #40628a;
-					    text-align: center;
+						border: 1px solid #161616;
+						background-color: #40628a;
+						text-align: center;
 					}
 					th {
-					    text-align:left;
-					    width:125px;
+						text-align:left;
+						width:125px;
 					}
 					td.request {
-					    width:140px;
-					    vertical-align:top;
+						width:140px;
+						vertical-align:top;
 					}
 					td.radio {
-					    width:90px;
-					    vertical-align:top;
+						width:90px;
+						vertical-align:top;
 					}
 					td.request {
-					    vertical-align:top;
+						vertical-align:top;
 					}
 					a {
-					    color:#4477e0;
+						color:#4477e0;
 					}
 					a.button {
-					    color:white;
-					    text-decoration: none;
+						color:white;
+						text-decoration: none;
 					}
 					h2 {
-					    font-size:15px;
+						font-size:15px;
 					}
 				</style>
 			</head>
@@ -163,19 +169,19 @@
 				</table>
 			"}
 		dat += "<br>"
-		if(radio)
+		if(pai.silicon_radio)
 			dat += "<b>Radio Uplink</b>"
 			dat += {"
 				<table class="request">
 					<tr>
 						<td class="radio">Transmit:</td>
-						<td><a href='byond://?src=\ref[src];wires=4'>[radio.broadcasting ? SPAN_COLOR("#55ff55", "Enabled") : SPAN_COLOR("#ff5555", "Disabled") ]</a>
+						<td><a href='byond://?src=\ref[src];wires=4'>[pai.silicon_radio.broadcasting ? SPAN_COLOR("#55ff55", "Enabled") : SPAN_COLOR("#ff5555", "Disabled") ]</a>
 
 						</td>
 					</tr>
 					<tr>
 						<td class="radio">Receive:</td>
-						<td><a href='byond://?src=\ref[src];wires=2'>[radio.listening ? SPAN_COLOR("#55ff55", "Enabled") : SPAN_COLOR("#ff5555", "Disabled") ]</a>
+						<td><a href='byond://?src=\ref[src];wires=2'>[pai.silicon_radio.listening ? SPAN_COLOR("#55ff55", "Enabled") : SPAN_COLOR("#ff5555", "Disabled") ]</a>
 
 						</td>
 					</tr>
@@ -210,7 +216,7 @@
 		else
 			dat += {"
 				<b><span style='font-size: 3px'>pAI Request Module</span></b><br><br>
-			    <p>No personality is installed.</p>
+				<p>No personality is installed.</p>
 				<table>
 					<tr>
 						<td class="button"><a href='byond://?src=\ref[src];request=1' class="button">Request personality</a>
@@ -263,9 +269,9 @@
 		var/t1 = text2num(href_list["wires"])
 		switch(t1)
 			if(4)
-				radio.ToggleBroadcast()
+				pai.silicon_radio.ToggleBroadcast()
 			if(2)
-				radio.ToggleReception()
+				pai.silicon_radio.ToggleReception()
 	if(href_list["setlaws"])
 		var/newlaws = sanitize(input("Enter any additional directives you would like your pAI personality to follow. Note that these directives will not override the personality's allegiance to its imprinted master. Conflicting directives will be ignored.", "pAI Directive Configuration", pai.pai_laws) as message)
 		if(newlaws)

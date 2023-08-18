@@ -91,31 +91,7 @@
 
 
 /datum/pai_software/radio_config/on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui, force_open = TRUE)
-	var/data[0]
-	data["listening"] = user.silicon_radio.broadcasting
-	data["frequency"] = format_frequency(user.silicon_radio.frequency)
-	var/channels[0]
-	for (var/ch_name in user.silicon_radio.channels)
-		var/ch_stat = user.silicon_radio.channels[ch_name]
-		var/ch_dat[0]
-		ch_dat["name"] = ch_name
-		ch_dat["listening"] = !!(ch_stat & user.silicon_radio.FREQ_LISTENING)
-		channels[LIST_PRE_INC(channels)] = ch_dat
-	data["channels"] = channels
-	ui = SSnano.try_update_ui(user, user, id, ui, data, force_open)
-	if (!ui)
-		ui = new(user, user, id, "pai_radio.tmpl", "Radio Configuration", 300, 150)
-		ui.set_initial_data(data)
-		ui.open()
-
-
-/datum/pai_software/radio_config/Topic(href, href_list)
-	var/mob/living/silicon/pai/P = usr
-	if (!istype(P))
-		return
-	P.silicon_radio.Topic(href, href_list)
-	return TRUE
-
+	user.silicon_radio.ui_interact(user)
 
 /datum/pai_software/crew_manifest
 	name = "Crew Manifest"
