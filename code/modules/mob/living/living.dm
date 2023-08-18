@@ -7,7 +7,7 @@
 
 	selected_image = image(icon('icons/misc/buildmode.dmi'), loc = src, icon_state = "ai_sel")
 
-/mob/living/examine(mob/user, distance, infix, suffix)
+/mob/living/examine(mob/user, distance, is_adjacent, infix, suffix)
 	. = ..()
 	if (admin_paralyzed)
 		to_chat(user, SPAN_DEBUG("OOC: They have been paralyzed by staff. Please avoid interacting with them unless cleared to do so by staff."))

@@ -152,10 +152,10 @@
 
 
 /obj/structure/noticeboard/attack_ai(mob/user)
-	examine(user)
+	examinate(user, src)
 
 /obj/structure/noticeboard/attack_hand(mob/user)
-	examine(user)
+	examinate(user, src)
 
 /obj/structure/noticeboard/examine(mob/user)
 	. = ..()

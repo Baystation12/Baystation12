@@ -4,7 +4,7 @@
 		to_chat(user, SPAN_NOTICE("Something is there but you can't see it."))
 		return
 	user.face_atom(A)
-	if (!isghost(user))
+	if (user.simulated)
 		if (A.loc != user || user.IsHolding(A))
 			for (var/mob/M in viewers(4, user))
 				if (M == user)
@@ -14,19 +14,22 @@
 						continue
 					to_chat(M, SPAN_SUBTLE("<b>\The [user]</b> looks at \the [A]."))
 	var/distance = INFINITY
+	var/is_adjacent = FALSE
 	if (isghost(user) || user.stat == DEAD)
 		distance = 0
+		is_adjacent = TRUE
 	else
 		var/turf/source_turf = get_turf(user)
 		var/turf/target_turf = get_turf(A)
 		if (source_turf && source_turf.z == target_turf?.z)
 			distance = get_dist(source_turf, target_turf)
-	if (!A.examine(user, distance))
+		is_adjacent = user.Adjacent(A)
+	if (!A.examine(user, distance, is_adjacent))
 		crash_with("Improper /examine() override: [log_info_line(A)]")
-	if (!A.LateExamine(user, distance))
+	if (!A.LateExamine(user, distance, is_adjacent))
 		crash_with("Improper /LateExamine() override: [log_info_line(A)]")
 
-/mob/proc/ForensicsExamination(atom/A, distance)
+/mob/proc/ForensicsExamination(atom/A, distance, is_adjacent)
 	if (!(get_skill_value(SKILL_FORENSICS) >= SKILL_EXPERIENCED && distance <= (get_skill_value(SKILL_FORENSICS) - SKILL_TRAINED)))
 		return
 

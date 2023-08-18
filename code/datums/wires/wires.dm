@@ -208,7 +208,7 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 						to_chat(L, SPAN_CLASS("error", "You need a remote signaller!"))
 			else if(href_list["examine"])
 				var/colour = href_list["examine"]
-				to_chat(usr, examine(GetIndex(colour), usr))
+				to_chat(usr, ExamineWire(GetIndex(colour), usr))
 
 		// Update Window
 			Interact(usr)
@@ -233,7 +233,7 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 /datum/wires/proc/ResetPulsed(index)
 	return
 
-/datum/wires/proc/examine(index, mob/user)
+/datum/wires/proc/ExamineWire(index, mob/user)
 	. = "You aren't sure what this wire does."
 
 	var/datum/wire_description/wd = get_description(index)

@@ -1,6 +1,6 @@
-/mob/living/silicon/robot/examine(mob/user, distance)
+/mob/living/silicon/robot/examine(mob/user, distance, is_adjacent)
 	var/custom_infix = custom_name ? ", [modtype] [braintype]" : ""
-	. = ..(user, distance, infix = custom_infix)
+	. = ..(user, distance, is_adjacent, infix = custom_infix)
 
 	var/msg = ""
 	var/damage_msg = ""
