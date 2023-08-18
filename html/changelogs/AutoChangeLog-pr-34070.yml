@@ -1,0 +1,4 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: Airlocks no longer beep impatiently when they cannot close.
