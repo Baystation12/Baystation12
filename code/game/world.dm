@@ -70,6 +70,7 @@ GLOBAL_VAR(href_logfile)
 #ifndef UNIT_TEST
 /hook/startup/proc/set_visibility()
 	world.update_hub_visibility(config.hub_visible)
+	return TRUE
 #endif
 
 /world/New()
