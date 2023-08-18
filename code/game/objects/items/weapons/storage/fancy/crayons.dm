@@ -7,7 +7,7 @@
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 6
-	key_type = /obj/item/pen/crayon
+	key_type = list(/obj/item/pen/crayon)
 	startswith = list(
 		/obj/item/pen/crayon/red,
 		/obj/item/pen/crayon/orange,
