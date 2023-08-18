@@ -190,17 +190,16 @@
 	Animals
 */
 /mob/living/simple_animal/UnarmedAttack(atom/A, proximity)
-
-	if(!..())
+	if (!..())
 		return
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(istype(A,/mob/living))
-		if(!get_natural_weapon() || a_intent == I_HELP)
-			custom_emote(1,"[friendly] [A]!")
+	if (istype(A,/mob/living))
+		if (!get_natural_weapon() || a_intent == I_HELP)
+			custom_emote(VISIBLE_MESSAGE, "[friendly] [A]!")
 			return
-		if(ckey)
+		if (ckey)
 			admin_attack_log(src, A, "Has attacked its victim.", "Has been attacked by its attacker.")
-	if(a_intent == I_HELP)
+	if (a_intent == I_HELP)
 		A.attack_animal(src)
 	else if (get_natural_weapon())
 		A.attackby(get_natural_weapon(), src)

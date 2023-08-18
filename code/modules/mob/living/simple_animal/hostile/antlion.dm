@@ -50,43 +50,46 @@
 /mob/living/simple_animal/hostile/retaliate/beast/antlion/proc/vanish()
 	visible_message(SPAN_NOTICE("\The [src] burrows into \the [get_turf(src)]!"))
 	set_invisibility(INVISIBILITY_OBSERVER)
+	set_density(FALSE)
 	prep_burrow(TRUE)
 	addtimer(new Callback(src, .proc/diggy), 5 SECONDS)
 
 /mob/living/simple_animal/hostile/retaliate/beast/antlion/proc/diggy()
-	var/list/turf_targets
-	if(target_mob)
-		for(var/turf/T in range(1, get_turf(target_mob)))
-			if(!T.is_floor())
+	var/list/turf_targets = list()
+	if (ai_holder.target)
+		for (var/turf/T in range(2, get_turf(ai_holder.target)))
+			if (!T.is_floor())
 				continue
-			if(!T.z != src.z)
+			if (T.z != src.z)
 				continue
 			turf_targets += T
 	else
-		for(var/turf/T in orange(5, src))
-			if(!T.is_floor())
+		for (var/turf/T in orange(5, src))
+			if (!T.is_floor())
 				continue
-			if(!T.z != src.z)
+			if (T.z != src.z)
 				continue
 			turf_targets += T
-	if(!LAZYLEN(turf_targets)) //oh no
+	if (!LAZYLEN(turf_targets))
 		addtimer(new Callback(src, .proc/emerge, 2 SECONDS))
 		return
 	var/turf/T = pick(turf_targets)
-	if(T && !incapacitated())
+	if (T && !incapacitated())
 		forceMove(T)
 	addtimer(new Callback(src, .proc/emerge, 2 SECONDS))
 
 /mob/living/simple_animal/hostile/retaliate/beast/antlion/proc/emerge()
 	var/turf/T = get_turf(src)
-	if(!T)
+	if (!T)
 		return
 	visible_message(SPAN_WARNING("\The [src] erupts from \the [T]!"))
 	set_invisibility(initial(invisibility))
+	set_density(TRUE)
 	prep_burrow(FALSE)
 	// cooldown_ability(ability_cooldown)
-	for(var/mob/living/carbon/human/H in get_turf(src))
-		H.attackby(natural_weapon, src)
+	for (var/mob/living/carbon/human/H in get_turf(src))
+		var/obj/item/weapon = get_natural_weapon()
+		weapon.resolve_attackby(H, src)
 		visible_message(SPAN_DANGER("\The [src] tears into \the [H] from below!"))
 		H.Weaken(1)
 
