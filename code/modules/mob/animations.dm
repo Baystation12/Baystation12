@@ -293,3 +293,27 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/living/Move()
 	. = ..()
 	on_structure_offset(0)
+
+/mob/var/waddling = FALSE
+
+/mob/proc/waddle()
+	var/mob/living/L = src
+
+	if (!istype(L) || L.incapacitated() || L.lying)
+		return
+
+	animate(L, pixel_z = 4, time = 0)
+	animate(
+		pixel_z = 0,
+		transform = matrix().Update(rotation = pick(-12, 0, 12)),
+		time = 2
+	)
+	animate(pixel_z = 0, transform = matrix(), time = 0)
+
+/mob/proc/make_waddle()
+	waddling = TRUE
+	GLOB.moved_event.register(usr, src, .proc/waddle)
+
+/mob/proc/stop_waddle()
+	waddling = FALSE
+	GLOB.moved_event.unregister(usr, src, .proc/waddle)

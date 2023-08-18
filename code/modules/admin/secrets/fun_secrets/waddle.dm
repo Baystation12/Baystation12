@@ -1,22 +1,11 @@
 /datum/admin_secret_item/fun_secret/waddle
-	name = "Toggle Waddling"
-	var/waddling = FALSE
+	name = "Toggle all waddling"
+	var/all_waddling = FALSE
 
 /datum/admin_secret_item/fun_secret/waddle/do_execute(mob/user)
-	waddling = !waddling
-	if(waddling)
-		GLOB.moved_event.register_global(src, .proc/waddle)
-	else
-		GLOB.moved_event.unregister_global(src, .proc/waddle)
-
-/datum/admin_secret_item/fun_secret/waddle/proc/waddle(atom/movable/AM)
-	var/mob/living/L = AM
-	if(!istype(L) || L.incapacitated() || L.lying)
-		return
-	animate(L, pixel_z = 4, time = 0)
-	animate(
-		pixel_z = 0,
-		transform = matrix().Update(rotation = pick(-12, 0, 12)),
-		time = 2
-	)
-	animate(pixel_z = 0, transform = matrix(), time = 0)
+	all_waddling = !all_waddling
+	for (var/mob/L in GLOB.player_list)
+		if (all_waddling)
+			L.make_waddle()
+		else
+			L.stop_waddle()
