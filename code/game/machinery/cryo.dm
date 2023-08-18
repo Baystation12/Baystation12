@@ -316,44 +316,14 @@
 	target.remove_grabs_and_pulls()
 	return TRUE
 
-/obj/machinery/atmospherics/unary/cryo_cell/proc/user_can_move_target_inside(mob/target, mob/user)
-	if (!user.use_sanity_check(src, target))
-		return FALSE
-	if (!istype(target))
-		to_chat(user, SPAN_WARNING("\The [src] cannot handle such a lifeform!"))
-		return FALSE
-	if (user.incapacitated() || !istype(user))
-		return FALSE
-	if (!target.simulated)
-		return FALSE
-	if (inoperable())
-		to_chat(user, SPAN_WARNING("\The [src] is not functioning."))
-		return FALSE
+/obj/machinery/atmospherics/unary/cryo_cell/user_can_move_target_inside(mob/target, mob/user)
 	if (occupant)
 		to_chat(user, SPAN_WARNING("\The [src] is already occupied!"))
 		return FALSE
-	if (target.abiotic())
-		to_chat(user, SPAN_WARNING("[user == target ? "You" : "[target]"] can't enter \the [src] while wearing abiotic items."))
-		return FALSE
-	if (target.buckled)
-		to_chat(user, SPAN_WARNING("Unbuckle [user == target ? "yourself" : "\the [target]"] before attempting to [user == target ? "enter \the [src]" : "move them"]."))
-		return FALSE
-	if (panel_open)
-		to_chat(user, SPAN_WARNING("Close the maintenance panel before attempting to place [user == target ? "yourself" : "\the [target]"] in \the [src]."))
-		return FALSE
-	for (var/mob/living/carbon/slime/slime in range(1,target))
-		if (slime.Victim == target)
-			to_chat(user, "[target] will not fit into \the [src] because they have a slime latched onto their head.")
-			return FALSE
 	if (!node)
 		to_chat(usr, SPAN_WARNING("The cell is not correctly connected to its pipe network!"))
 		return FALSE
-	for (var/obj/item/grab/grab in target.grabbed_by)
-		if (grab.assailant == user || grab.assailant == target)
-			continue
-		to_chat(user, SPAN_WARNING("\The [target] is being grabbed by [grab.assailant] and can't be placed in \the [src]."))
-		return FALSE
-	return TRUE
+	return ..()
 
 /obj/machinery/atmospherics/unary/cryo_cell/MouseDrop_T(mob/target, mob/user)
 	if (!CanMouseDrop(target, user) || !ismob(target))

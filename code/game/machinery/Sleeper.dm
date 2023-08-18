@@ -186,37 +186,11 @@
 		return TRUE
 	return ..()
 
-/obj/machinery/sleeper/proc/user_can_move_target_inside(mob/target, mob/user)
-	if(!user.use_sanity_check(src, target))
-		return FALSE
-	if (!istype(target))
-		to_chat(user, SPAN_WARNING("\The [src] cannot handle such a lifeform!"))
-		return FALSE
-	if (user.incapacitated() || !istype(user))
-		return FALSE
-	if (!target.simulated)
-		return FALSE
-	if (inoperable())
-		to_chat(user, SPAN_WARNING("\The [src] is not functioning."))
-		return FALSE
+/obj/machinery/sleeper/user_can_move_target_inside(mob/target, mob/user)
 	if (occupant)
 		to_chat(user, SPAN_WARNING("\The [src] is already occupied!"))
 		return FALSE
-	if (target.abiotic())
-		to_chat(user, SPAN_WARNING("[user == target ? "You" : "[target]"] can't enter \the [src] while wearing abiotic items."))
-		return FALSE
-	if (target.buckled)
-		to_chat(user, SPAN_WARNING("Unbuckle [user == target ? "yourself" : "\the [target]"] before attempting to [user == target ? "enter \the [src]" : "move them"]."))
-		return FALSE
-	if (panel_open)
-		to_chat(user, SPAN_WARNING("Close the maintenance panel before attempting to place [user == target ? "yourself" : "\the [target]"] in \the [src]."))
-		return FALSE
-	for (var/obj/item/grab/grab in target.grabbed_by)
-		if (grab.assailant == user || grab.assailant == target)
-			continue
-		to_chat(user, SPAN_WARNING("\The [target] is being grabbed by [grab.assailant] and can't be placed in \the [src]."))
-		return FALSE
-	return TRUE
+	return ..()
 
 /obj/machinery/sleeper/MouseDrop_T(mob/target, mob/user)
 	if (!CanMouseDrop(target, user) || !ismob(target))

@@ -53,6 +53,9 @@
 	to_chat(user, "A grab on \the [affecting]'s [O.name].")
 
 /obj/item/grab/Process()
+	if (!use_sanity_check(affecting))
+		current_grab.let_go(src)
+		return
 	current_grab.process(src)
 
 /obj/item/grab/attack_self(mob/user)

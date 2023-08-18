@@ -538,7 +538,7 @@
 			if(prob(25))
 				visible_message(SPAN_WARNING("\The [src] fails to pull \the [G.assailant] away from \the [G.affecting]!"), SPAN_WARNING("You fail to pull \the [G.assailant] away from \the [G.affecting]!"))
 				return
-			qdel(G) // Makes sure dragging the assailant away from their victim makes them release the grab instead of holding it at long range forever.
+			G.current_grab.let_go(G) // Makes sure dragging the assailant away from their victim makes them release the grab instead of holding it at long range forever.
 
 		if(!can_pull_mobs || !can_pull_size)
 			to_chat(src, SPAN_WARNING("It won't budge!"))

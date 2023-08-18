@@ -581,7 +581,7 @@ default behaviour is:
 			if (prob(75))
 				if(istype(G))
 					M.visible_message(SPAN_WARNING("[G.affecting] has been pulled from [G.assailant]'s grip by [src]!"), SPAN_WARNING("[G.affecting] has been pulled from your grip by [src]!"))
-					qdel(G)
+					G.current_grab.let_go(G)
 		if (!length(M.grabbed_by))
 			M.handle_pull_damage(src)
 
