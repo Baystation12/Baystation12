@@ -66,8 +66,6 @@
 	var/close_sound_powered = 'sound/machines/airlock_close.ogg'
 	/// Soundfile. The sound played when the door closes while unpowered.
 	var/close_sound_unpowered = 'sound/machines/airlock_close_force.ogg'
-	/// Soundfile. The sound played when the door cannot close because it's blocked.
-	var/close_failure_blocked = 'sound/machines/triple_beep.ogg'
 	/// Soundfile. The sound played when the door is unlocked/unbolted.
 	var/bolts_rising = 'sound/machines/bolts_up.ogg'
 	/// Soundfile. The sound played when the door is locked/bolted.
@@ -1280,9 +1278,6 @@ About the new airlock wires panel:
 		for(var/turf/turf in locs)
 			for(var/atom/movable/AM in turf)
 				if(AM.blocks_airlock())
-					if(world.time > next_beep_at)
-						playsound(src.loc, close_failure_blocked, 30, 0, -3)
-						next_beep_at = world.time + SecondsToTicks(10)
 					close_door_at = world.time + 6
 					return
 
