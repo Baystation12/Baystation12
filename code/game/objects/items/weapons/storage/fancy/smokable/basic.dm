@@ -8,7 +8,7 @@
 	max_storage_space = null
 	sealed = FALSE
 	storage_slots = 6
-	key_type_2 = /obj/item/material/coin
+	key_type = list(/obj/item/clothing/mask/smokable/cigarette, /obj/item/material/coin)
 	startswith = list(
 		/obj/item/clothing/mask/smokable/cigarette = 6
 	)
@@ -19,9 +19,9 @@
 	if (!opened)
 		return
 	for (var/i = 1 to length(contents))
-		if (istype(contents[i], key_type))
+		if (istype(contents[i], /obj/item/clothing/mask/smokable/cigarette))
 			overlays += image(icon, "cig[i]")
-		else if (istype(contents[i], key_type_2))
+		else if (istype(contents[i], /obj/item/material/coin))
 			var/obj/item/material/coin/C = contents[i]
 			var/image/I = image(icon, "colorcoin[i]")
 			if (C.applies_material_colour)
@@ -84,7 +84,6 @@
 	desc = "With a sharp and natural organic menthol flavor, these Temperamentos are a favorite of NDV crews. Hardly anyone knows they make 'em in non-menthol!"
 	icon_state = "TMpacket"
 	item_state = "Dpacket"
-	key_type = /obj/item/clothing/mask/smokable/cigarette/menthol
 	startswith = list(
 		/obj/item/clothing/mask/smokable/cigarette/menthol = 6
 	)
@@ -116,7 +115,6 @@
 	icon_state = "CRpacket"
 	item_state = "Dpacket"
 	max_storage_space = 5
-	key_type = /obj/item/clothing/mask/smokable/cigarette/trident
 	startswith = list(
 		/obj/item/clothing/mask/smokable/cigarette/trident = 5
 	)
@@ -128,7 +126,6 @@
 	icon_state = "CRFpacket"
 	item_state = "Dpacket"
 	max_storage_space = 5
-	key_type = /obj/item/clothing/mask/smokable/cigarette/trident
 	startswith = list(
 		/obj/item/clothing/mask/smokable/cigarette/trident/watermelon,
 		/obj/item/clothing/mask/smokable/cigarette/trident/orange,
@@ -144,7 +141,6 @@
 	icon_state = "CRMpacket"
 	item_state = "Dpacket"
 	max_storage_space = 5
-	key_type = /obj/item/clothing/mask/smokable/cigarette/trident
 	startswith = list(
 		/obj/item/clothing/mask/smokable/cigarette/trident/mint = 5
 	)
@@ -158,7 +154,7 @@
 	max_storage_space = null
 	storage_slots = 7
 	slot_flags = SLOT_BELT
-	key_type = /obj/item/clothing/mask/smokable/cigarette/cigar
+	key_type = list(/obj/item/clothing/mask/smokable/cigarette/cigar)
 	startswith = list(
 		/obj/item/clothing/mask/smokable/cigarette/cigar = 6
 	)

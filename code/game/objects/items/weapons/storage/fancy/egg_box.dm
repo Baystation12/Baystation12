@@ -6,7 +6,7 @@
 	storage_slots = 12
 	max_w_class = ITEM_SIZE_SMALL
 	w_class = ITEM_SIZE_NORMAL
-	key_type = /obj/item/reagent_containers/food/snacks/egg
+	key_type = list(/obj/item/reagent_containers/food/snacks/egg)
 	can_hold = list(
 		/obj/item/reagent_containers/food/snacks/egg,
 		/obj/item/reagent_containers/food/snacks/boiledegg

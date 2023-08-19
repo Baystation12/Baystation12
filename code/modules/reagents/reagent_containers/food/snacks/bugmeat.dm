@@ -7,7 +7,7 @@
 	storage_slots = 6
 	max_w_class = ITEM_SIZE_SMALL
 	w_class = ITEM_SIZE_NORMAL
-	key_type = /obj/item/reagent_containers/food/snacks/rawcutlet/bugmeat
+	key_type = list(/obj/item/reagent_containers/food/snacks/rawcutlet/bugmeat)
 	can_hold = list(
 		/obj/item/reagent_containers/food/snacks/rawcutlet/bugmeat,
 		/obj/item/reagent_containers/food/snacks/cutlet/bugmeat
