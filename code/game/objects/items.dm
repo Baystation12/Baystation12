@@ -41,10 +41,14 @@
 	var/action_button_name //It is also the text which gets displayed on the action button. If not set it defaults to 'Use [name]'. If it's not set, there'll be no button.
 	var/default_action_type = /datum/action/item_action // Specify the default type and behavior of the action button for this atom.
 
-	//This flag is used to determine when items in someone's inventory cover others. IE helmets making it so you can't see glasses, etc.
-	//It should be used purely for appearance. For gameplay effects caused by items covering body parts, use body_parts_covered.
+	/**
+	* This flag is used to determine when items in someone's inventory cover others. IE helmets making it so you can't see glasses, etc.
+	*
+	* It should be used purely for appearance. For gameplay effects caused by items covering body parts, use body_parts_covered.
+	*/
 	var/flags_inv = 0
-	var/body_parts_covered = 0 //see setup.dm for appropriate bit flags
+	///See items_clothing.dm for appropriate bit flags
+	var/body_parts_covered = EMPTY_BITFIELD
 
 	var/item_flags = 0 //Miscellaneous flags pertaining to equippable objects.
 
@@ -579,61 +583,66 @@ var/global/list/slot_flags_enumeration = list(
 		return FALSE
 
 	var/mob/living/carbon/human/H = M
-	if(istype(H))
-		for(var/obj/item/protection in list(H.head, H.wear_mask, H.glasses))
-			if(protection && (protection.body_parts_covered & EYES))
-				// you can't stab someone in the eyes wearing a mask!
-				to_chat(user, SPAN_WARNING("You're going to need to remove the eye covering first."))
-				return
+	if (!istype(H))
+		return FALSE
 
-	if(!M.has_eyes())
+	if (!M.has_eyes())
 		to_chat(user, SPAN_WARNING("You cannot locate any eyes on [M]!"))
-		return
+		return TRUE
 
 	admin_attack_log(user, M, "Attacked using \a [src]", "Was attacked with \a [src]", "used \a [src] to attack")
-
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	user.do_attack_animation(M)
+	user.do_attack_animation(M) //Addition of fingerprints is handled in post_use_item, since this is called by use_weapon. By returning TRUE is goes to post_use item.
+	playsound(loc, hitsound, 50, TRUE, -1)
 
-	src.add_fingerprint(user)
+	for (var/obj/item/protection in list(H.head, H.wear_mask, H.glasses)) //Order in list is important, it will check head first. If protective hat covers masks/eyes; they can't be destroyed.
+		var/breakcover =  force * user.get_skill_value(SKILL_COMBAT) //Make it impossible to break glasses with screwdrivers/pens (force 2-3); no matter how skilled.
+		if (protection != H.head && (protection.body_parts_covered & EYES) && breakcover > 20) //Only make eye/mask items destroyable; else riot helmets can be destroyed with eye stabbing.
+			H.visible_message(SPAN_DANGER("\The [M]'s [protection.name] has been damaged with by \the [src] by \the [user]."))
+			CLEAR_FLAGS(protection.body_parts_covered, EYES)
+			protection.name = "damaged [protection.name]"
+			protection.desc += "<br>[SPAN_NOTICE("It looks damaged.")]"
+			H.unEquip(protection, H.loc)
+			return TRUE
+		if (protection && (protection.body_parts_covered & EYES))
+			M.visible_message(SPAN_DANGER("\The [user] lunges at \the [H]'s eyes with \the [src], but the attack was deflected by \the [protection]."))
+			return TRUE
 
-	if(istype(H))
+	var/obj/item/organ/internal/eyes/eyes = H.internal_organs_by_name[BP_EYES]
+	if (H != user)
+		for (var/mob/O in (viewers(M) - user - M))
+			O.show_message(SPAN_DANGER("[M] has been stabbed in the eye with [src] by [user]."), 1)
+		to_chat(M, SPAN_DANGER("[user] stabs you in the eye with [src]!"))
+		to_chat(user, SPAN_DANGER("You stab [M] in the eye with [src]!"))
+	else
+		user.visible_message( \
+			SPAN_DANGER("[user] has stabbed themself with [src]!"), \
+			SPAN_DANGER("You stab yourself in the eyes with [src]!") \
+		)
 
-		var/obj/item/organ/internal/eyes/eyes = H.internal_organs_by_name[BP_EYES]
-
-		if(H != user)
-			for(var/mob/O in (viewers(M) - user - M))
-				O.show_message(SPAN_DANGER("[M] has been stabbed in the eye with [src] by [user]."), 1)
-			to_chat(M, SPAN_DANGER("[user] stabs you in the eye with [src]!"))
-			to_chat(user, SPAN_DANGER("You stab [M] in the eye with [src]!"))
-		else
-			user.visible_message( \
-				SPAN_DANGER("[user] has stabbed themself with [src]!"), \
-				SPAN_DANGER("You stab yourself in the eyes with [src]!") \
-			)
-
-		eyes.damage += rand(3,4)
-		if(eyes.damage >= eyes.min_bruised_damage)
-			if(M.stat != 2)
-				if(!BP_IS_ROBOTIC(eyes)) //robot eyes bleeding might be a bit silly
-					to_chat(M, SPAN_DANGER("Your eyes start to bleed profusely!"))
-			if(prob(50))
-				if(M.stat != 2)
-					to_chat(M, SPAN_WARNING("You drop what you're holding and clutch at your eyes!"))
-					M.unequip_item()
-				M.eye_blurry += 10
-				M.Paralyse(1)
-				M.Weaken(4)
-			if (eyes.damage >= eyes.min_broken_damage)
-				if(M.stat != 2)
-					to_chat(M, SPAN_WARNING("You go blind!"))
+	eyes.damage += rand(3,4)
+	if (eyes.damage >= eyes.min_bruised_damage)
+		if (M.stat != 2)
+			if (!BP_IS_ROBOTIC(eyes)) //robot eyes bleeding might be a bit silly
+				to_chat(M, SPAN_DANGER("Your eyes start to bleed profusely!"))
+		if (prob(50))
+			if (M.stat != 2)
+				to_chat(M, SPAN_WARNING("You drop what you're holding and clutch at your eyes!"))
+				M.unequip_item()
+			M.eye_blurry += 10
+			M.Paralyse(1)
+			M.Weaken(4)
+		if (eyes.damage >= eyes.min_broken_damage)
+			if (M.stat != 2)
+				to_chat(M, SPAN_WARNING("You go blind!"))
 
 		var/obj/item/organ/external/affecting = H.get_organ(eyes.parent_organ)
 		affecting.take_external_damage(7)
 	else
 		M.take_organ_damage(7, 0)
+
 	M.eye_blurry += rand(3,4)
-	return
+	return TRUE
 
 /obj/item/clean_blood()
 	. = ..()

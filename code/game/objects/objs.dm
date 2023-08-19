@@ -8,8 +8,12 @@
 	var/w_class // Size of the object.
 	var/unacidable = FALSE //universal "unacidabliness" var, here so you can use it in any obj.
 	var/throwforce = 0
-	var/sharp = FALSE		// whether this object cuts
-	var/edge = FALSE		// whether this object is more likely to dismember
+	///// whether this object cuts
+	var/sharp = FALSE
+	///Whether this object is more likely to dismember
+	var/edge = FALSE
+	///For items that can puncture e.g. thick plastic but aren't necessarily sharp. Called in can_puncture()
+	var/puncture = FALSE
 	var/in_use = 0 // If we have a user using us, this will be set on. We will check if the user has stopped using us, and thus stop updating and LAGGING EVERYTHING!
 	var/damtype = DAMAGE_BRUTE
 	var/armor_penetration = 0
@@ -182,8 +186,8 @@
 		. |= DAMAGE_FLAG_EDGE
 	if(is_sharp(src))
 		. |= DAMAGE_FLAG_SHARP
-		if (damtype == DAMAGE_BURN)
-			. |= DAMAGE_FLAG_LASER
+	if (damtype == DAMAGE_BURN)
+		. |= DAMAGE_FLAG_LASER
 
 /obj/attackby(obj/item/O, mob/user)
 	if (isWrench(O) && HAS_FLAGS(obj_flags, OBJ_FLAG_ANCHORABLE))

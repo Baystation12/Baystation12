@@ -149,6 +149,7 @@
 	matter = list(MATERIAL_STEEL = 50)
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
 	edge = TRUE
+	puncture = TRUE
 
 /obj/item/shovel/spade
 	name = "spade"

@@ -7,8 +7,11 @@
 	slot_flags = SLOT_BELT | SLOT_EARS
 	throwforce = 0
 	w_class = ITEM_SIZE_TINY
+	force = 2
+	puncture = TRUE
 	throw_speed = 7
 	throw_range = 15
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	matter = list(MATERIAL_PLASTIC = 10)
 	var/colour = "black"	//what colour the ink is!
 	var/color_description = "black ink"
@@ -44,19 +47,19 @@
 	color_description = "transluscent ink"
 
 /obj/item/pen/attack(atom/A, mob/user, target_zone)
-	if(ismob(A))
-		var/mob/M = A
-		if(ishuman(A) && user.a_intent == I_HELP && target_zone == BP_HEAD)
-			var/mob/living/carbon/human/H = M
-			var/obj/item/organ/external/head/head = H.organs_by_name[BP_HEAD]
-			if(istype(head))
-				head.write_on(user, color_description)
-		else
-			to_chat(user, SPAN_WARNING("You stab [M] with \the [src]."))
-			admin_attack_log(user, M, "Stabbed using \a [src]", "Was stabbed with \a [src]", "used \a [src] to stab")
-	else if(istype(A, /obj/item/organ/external/head))
+	if(ishuman(A) && user.a_intent == I_HELP && target_zone == BP_HEAD)
+		var/mob/living/carbon/human/H = A
+		var/obj/item/organ/external/head/head = H.organs_by_name[BP_HEAD]
+		if(istype(head))
+			head.write_on(user, color_description)
+			return TRUE
+
+	if(istype(A, /obj/item/organ/external/head) && user.a_intent != I_HELP) //Not on help intent to not break ghetto surgery.
 		var/obj/item/organ/external/head/head = A
 		head.write_on(user, color_description)
+		return TRUE
+
+	else return FALSE
 
 /obj/item/pen/proc/toggle()
 	return
