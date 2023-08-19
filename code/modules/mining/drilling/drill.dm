@@ -192,7 +192,7 @@
 		icon_state = "mining_drill_braced"
 	else if(active)
 		icon_state = "mining_drill_braced"
-		icon_state = "[icon_state]_active"
+		overlays += "mining_drill_active"
 		var/status = clamp(round( (length(contents) / capacity) * 4 ), 0, 3)
 		overlays += emissive_appearance(icon, "mining_drill_lights_[status]")
 		overlays += "mining_drill_lights_[status]"
