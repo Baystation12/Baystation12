@@ -6,7 +6,7 @@
 	storage_slots = 6
 	max_w_class = ITEM_SIZE_TINY
 	w_class = ITEM_SIZE_SMALL
-	key_type = /obj/item/reagent_containers/food/snacks/cracker
+	key_type = list(/obj/item/reagent_containers/food/snacks/cracker)
 	can_hold = list(
 		/obj/item/reagent_containers/food/snacks/cracker
 	)

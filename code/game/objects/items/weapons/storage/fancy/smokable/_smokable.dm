@@ -10,7 +10,7 @@
 	throwforce = 2
 	slot_flags = SLOT_BELT
 	item_flags = ITEM_FLAG_TRY_ATTACK
-	key_type = /obj/item/clothing/mask/smokable/cigarette
+	key_type = list(/obj/item/clothing/mask/smokable/cigarette)
 	atom_flags = ATOM_FLAG_NO_REACT | ATOM_FLAG_OPEN_CONTAINER
 
 	/// A map? of reagents to add to this container on initialization.
