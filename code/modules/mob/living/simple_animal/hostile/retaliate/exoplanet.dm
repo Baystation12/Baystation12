@@ -198,9 +198,8 @@
 
 /datum/ai_holder/simple_animal/melee/charbaby/engage_target()
 	. = ..()
-	var/mob/living/simple_animal/hostile/retaliate/beast/charbaby/C = holder
-	if(isliving(C.target_mob) && prob(25))
-		var/mob/living/L = C.target_mob
+	if(isliving(target) && prob(25))
+		var/mob/living/L = target
 		if(prob(10))
 			L.adjust_fire_stacks(1)
 			L.IgniteMob()

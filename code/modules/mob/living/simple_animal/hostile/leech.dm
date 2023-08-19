@@ -50,7 +50,7 @@ Tiny, weak, and mostly harmless alone. dangerous in groups.
 	if(!.)
 		return FALSE
 
-	if(target_mob)
+	if(ai_holder.target)
 		belly -= 3
 	else
 		belly -= 1

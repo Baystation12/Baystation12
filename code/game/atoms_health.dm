@@ -88,8 +88,6 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if (!get_max_health())
 		return FALSE
-	if (health_dead())
-		return FALSE
 	if (!damage || damage < health_min_damage)
 		return FALSE
 	if (is_damage_immune(damage_type))

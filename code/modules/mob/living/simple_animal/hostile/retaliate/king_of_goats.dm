@@ -42,8 +42,8 @@
 /datum/ai_holder/simple_animal/goat/king/engage_target()
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/goat/king/G = holder
-	if(isliving(G.target_mob))
-		var/mob/living/L = G.target_mob
+	if(isliving(target))
+		var/mob/living/L = target
 		if(prob(G.stun_chance))
 			L.Weaken(0.5)
 			L.confused += 1
