@@ -62,8 +62,8 @@
 		return PROJECTILE_FORCE_MISS
 	var/oldhealth = health
 	. = ..()
-	if((target_mob != Proj.firer) && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
-		target_mob = Proj.firer
+	if((ai_holder.target != Proj.firer) && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
+		ai_holder.target = Proj.firer
 		turns_per_move = 3
 		ai_holder.walk_to_target()
 
