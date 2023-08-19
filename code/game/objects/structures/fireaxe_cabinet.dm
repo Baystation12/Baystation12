@@ -18,6 +18,9 @@
 	unlocked = TRUE
 	update_icon()
 
+/obj/structure/fireaxecabinet/on_revive()
+	update_icon()
+
 /obj/structure/fireaxecabinet/on_update_icon()
 	ClearOverlays()
 	if(fireaxe)
@@ -83,6 +86,27 @@
 			SPAN_NOTICE("\The [user] places \a [tool] into \the [src]."),
 			SPAN_NOTICE("You place \the [tool] into \the [src].")
 		)
+		return TRUE
+
+	// Material Stack - Repair damage
+	if (istype(tool, /obj/item/stack/material))
+		var/obj/item/stack/material/stack = tool
+		if (stack.material.name != MATERIAL_GLASS)
+			return ..()
+		if (!health_dead && !health_damaged())
+			USE_FEEDBACK_FAILURE("\The [src] doesn't need repair.")
+			return TRUE
+		if (!stack.reinf_material)
+			USE_FEEDBACK_FAILURE("\The [src] can only be repaired with reinforced glass.")
+			return TRUE
+		if (!stack.use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(stack, 1, "to repair \the [src].")
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] repairs \the [src]'s damage with [stack.get_vague_name(FALSE)]."),
+			SPAN_NOTICE("You repair \the [src]'s damage with [stack.get_exact_name(1)].")
+		)
+		revive_health()
 		return TRUE
 
 	// Multitool - Toggle manual lock
