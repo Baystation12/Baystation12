@@ -10,7 +10,7 @@
 /obj/item/locator
 	name = "locator"
 	desc = "Used to track those with locater implants."
-	icon = 'icons/obj/tools/locator.dmi'
+	icon = 'icons/obj/tools/pinpointer.dmi'
 	icon_state = "locator"
 	var/temp = null
 	var/frequency = 1451

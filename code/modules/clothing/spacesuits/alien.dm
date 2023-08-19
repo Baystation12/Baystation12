@@ -25,7 +25,6 @@
 /obj/item/clothing/head/helmet/space/vox
 	icon = 'icons/obj/clothing/species/vox/obj_head_vox.dmi'
 	item_icons = list(slot_head_str = 'icons/mob/species/vox/onmob_head_vox.dmi')
-	light_overlay = "helmet_light_alt"
 	armor = list(
 		melee = ARMOR_MELEE_MAJOR,
 		bullet = ARMOR_BALLISTIC_PISTOL,
@@ -45,7 +44,7 @@
 	name = "alien helmet"
 	icon_state = "vox-pressure"
 	desc = "A huge, armoured, pressurized helmet. Looks like an ancient human diving suit."
-	light_overlay = "invis_light"
+	light_overlay = "helmet_light_alt"
 
 /obj/item/clothing/suit/space/vox/pressure
 	name = "alien pressure suit"
@@ -56,7 +55,7 @@
 	name = "alien visor"
 	icon_state = "vox-carapace"
 	desc = "A glowing visor. The light slowly pulses, and seems to follow you."
-	light_overlay = "invis_light"
+	light_overlay = "helmet_light_alt"
 
 /obj/item/clothing/suit/space/vox/carapace
 	name = "alien carapace armour"
@@ -67,7 +66,7 @@
 	name = "alien stealth helmet"
 	icon_state = "vox-stealth"
 	desc = "A smoothly contoured, matte-black alien helmet."
-	light_overlay = "invis_light"
+	light_overlay = "helmet_light_alt"
 
 /obj/item/clothing/suit/space/vox/stealth
 	name = "alien stealth suit"
@@ -78,7 +77,7 @@
 	name = "alien goggled helmet"
 	icon_state = "vox-medic"
 	desc = "An alien helmet with enormous goggled lenses."
-	light_overlay = "invis_light"
+	light_overlay = "helmet_light_alt"
 
 /obj/item/clothing/suit/space/vox/medic
 	name = "alien armour"
