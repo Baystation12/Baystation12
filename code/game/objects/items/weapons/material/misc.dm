@@ -56,7 +56,6 @@
 	max_force = 15
 	force_multiplier = 0.2 // 12 with hardness 60 (steel)
 	thrown_force_multiplier = 0.75 // 15 with weight 20 (steel)
-	w_class = ITEM_SIZE_SMALL
 	sharp = TRUE
 	edge = TRUE
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 1)
@@ -72,7 +71,7 @@
 	desc = "A long, sturdy blade with a rugged handle. Leading the way to cursed treasures since before space travel."
 	icon = 'icons/obj/weapons/melee_physical.dmi'
 	item_state = "machete"
-	w_class = ITEM_SIZE_NORMAL
+	w_class = ITEM_SIZE_LARGE
 	slot_flags = SLOT_BELT
 	default_material = MATERIAL_TITANIUM
 	base_parry_chance = 50

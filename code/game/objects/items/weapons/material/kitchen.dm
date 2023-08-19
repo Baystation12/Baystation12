@@ -13,7 +13,9 @@
 	max_force = 5
 	force_multiplier = 0.1 // 6 when wielded with hardness 60 (steel)
 	thrown_force_multiplier = 0.25 // 5 when thrown with weight 20 (steel)
+	puncture = TRUE
 	default_material = MATERIAL_ALUMINIUM
+	item_flags = ITEM_FLAG_TRY_ATTACK
 
 	var/loaded      //Descriptive string for currently loaded food object.
 	var/scoop_food = 1
@@ -27,20 +29,12 @@
 
 /obj/item/material/kitchen/utensil/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M))
-		return ..()
+		return FALSE
 
-	if(user.a_intent != I_HELP)
-		if(user.zone_sel.selecting == BP_HEAD || user.zone_sel.selecting == BP_EYES)
-			if((MUTATION_CLUMSY in user.mutations) && prob(50))
-				M = user
-			return eyestab(M,user)
-		else
-			return ..()
-
-	if (reagents.total_volume > 0)
+	if (user.a_intent == I_HELP && reagents.total_volume > 0)
 		if(M == user)
 			if(!M.can_eat(loaded))
-				return
+				return TRUE
 			switch(M.get_fullness())
 				if (0 to 50)
 					to_chat(M, SPAN_DANGER("You ravenously stick \the [src] into your mouth and gobble the food!"))
@@ -52,23 +46,22 @@
 					to_chat(M, SPAN_NOTICE("You unwillingly chew the food on \the [src]."))
 				if (550 to INFINITY)
 					to_chat(M, SPAN_WARNING("You cannot take one more bite from \the [src]!"))
-					return
+					return TRUE
 
 		else
 			user.visible_message(SPAN_WARNING("\The [user] begins to feed \the [M]!"))
 			if(!M.can_force_feed(user, loaded) || !do_after(user, 5 SECONDS, M, DO_PUBLIC_UNIQUE))
-				return
+				return TRUE
 
 			if (user.get_active_hand() != src)
-				return
+				return TRUE
 			M.visible_message(SPAN_NOTICE("\The [user] feeds some [loaded] to \the [M] with \the [src]."))
 		reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		playsound(M.loc,'sound/items/eatfood.ogg', rand(10,40), 1)
 		overlays.Cut()
-		return
-	else
-		to_chat(user, SPAN_WARNING("You don't have anything on \the [src]."))//if we have help intent and no food scooped up DON'T STAB OURSELVES WITH THE FORK
-		return
+		return TRUE
+	else return FALSE
+
 
 
 /obj/item/material/kitchen/utensil/fork

@@ -898,31 +898,23 @@ GLOBAL_LIST_INIT(duplicate_object_disallowed_vars, list(
 	return 0
 
 
-//For items that can puncture e.g. thick plastic but aren't necessarily sharp
-//Returns 1 if the given item is capable of popping things like balloons, inflatable barriers, or cutting police tape.
+/**
+ * For items that can puncture e.g. thick plastic but aren't necessarily sharp.
+ *
+ * Returns TRUE if the given item is capable of popping things like balloons, inflatable barriers, or cutting police tape. Also used to determine what items can eyestab.
+ */
 /obj/item/proc/can_puncture()
-	return src.sharp
-
-/obj/item/screwdriver/can_puncture()
-	return 1
-
-/obj/item/pen/can_puncture()
-	return 1
+	if(sharp || puncture) return TRUE
+	return FALSE
 
 /obj/item/weldingtool/can_puncture()
-	return 1
-
-/obj/item/screwdriver/can_puncture()
-	return 1
-
-/obj/item/shovel/can_puncture() //includes spades
-	return 1
+	return welding
 
 /obj/item/flame/can_puncture()
-	return src.lit
+	return lit
 
 /obj/item/clothing/mask/smokable/cigarette/can_puncture()
-	return src.lit
+	return lit
 
 //check if mob is lying down on something we can operate him on.
 /proc/can_operate(mob/living/carbon/M, mob/living/carbon/user)

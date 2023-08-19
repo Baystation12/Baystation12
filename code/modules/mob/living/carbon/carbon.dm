@@ -100,6 +100,17 @@
 
 	return
 
+///Processes stabbing eyes with any sharp items. Only works for normal sized or smaller items; if attacking eyes with a large sword will default to parent use_weapon and do a regular attack.
+/mob/living/carbon/use_weapon(obj/item/weapon, mob/living/user, list/click_params)
+	if (user.a_intent == I_HURT && user.zone_sel.selecting == BP_EYES && weapon.can_puncture() && get_max_health() && weapon.w_class <= ITEM_SIZE_NORMAL)
+		var/hit_zone = resolve_item_attack(weapon, user, user.zone_sel.selecting)
+		if (!hit_zone) //Miss message to user is processed in resolve_item_attack.
+			return TRUE
+		if (hit_zone == BP_HEAD || hit_zone == BP_EYES) //Resolve_item_attack on non-self mobs never returns BP_EYES, but changes it to BP_HEAD because of check_zone()
+			return weapon.eyestab(src, user)
+	else return ..()
+
+
 /mob/living/carbon/electrocute_act(shock_damage, obj/source, siemens_coeff = 1.0, def_zone = null)
 	if(status_flags & GODMODE)	return 0	//godmode
 
