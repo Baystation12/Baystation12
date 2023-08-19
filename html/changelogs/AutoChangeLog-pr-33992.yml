@@ -1,9 +1,0 @@
-author: emmanuelbassil
-delete-after: true
-changes:
-  - tweak: Can now stab eyes with all tiny, small, and normal sized sharp items.
-  - tweak: It is now possible to damage glass/mask items if eye-stabbing with sufficient
-      force. This is affected by CQC skill, making it easier to break glasses with
-      higher skill. It is not possible to break hats that cover eyes (e.g riot helmets)
-      in this way however, no matter the force.
-  - tweak: It is now possible to miss while trying to stab someone's eyes.
