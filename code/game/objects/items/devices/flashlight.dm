@@ -348,14 +348,14 @@
 
 /obj/item/device/flashlight/flare/glowstick/on_update_icon()
 	item_state = "glowstick"
-	overlays.Cut()
+	ClearOverlays()
 	if(fuel <= 0)
 		icon_state = "glowstick-empty"
 		on = FALSE
 	else if (on)
 		var/image/I = overlay_image(icon,"glowstick-on",color)
 		I.blend_mode = BLEND_ADD
-		overlays += I
+		AddOverlays(I)
 		item_state = "glowstick-on"
 	else
 		icon_state = "glowstick"
@@ -444,10 +444,10 @@
 	flashlight_flags = FLASHLIGHT_CANNOT_BLIND
 
 /obj/item/device/flashlight/lamp/lava/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	var/image/I = image(icon = icon, icon_state = "lavalamp-[on ? "on" : "off"]")
 	I.color = light_color
-	overlays += I
+	AddOverlays(I)
 
 /obj/item/device/flashlight/lamp/lava/red
 	desc = "A kitchy red decorative light."

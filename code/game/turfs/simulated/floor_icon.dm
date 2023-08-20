@@ -27,7 +27,7 @@ var/global/list/flooring_cache = list()
 				flooring_override = icon_state
 
 		// Apply edges, corners, and inner corners.
-		overlays.Cut()
+		ClearOverlays()
 		var/has_border = 0
 		//Check the cardinal turfs
 		for(var/step_dir in GLOB.cardinal)
@@ -39,26 +39,29 @@ var/global/list/flooring_cache = list()
 				has_border |= step_dir
 
 				//Now, if we don't, then lets add a border
-				overlays |= get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[step_dir]", "[flooring.icon_base]_edges", step_dir, (flooring.flags & TURF_HAS_EDGES))
+				var/floor_overlay = get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[step_dir]", "[flooring.icon_base]_edges", step_dir, (flooring.flags & TURF_HAS_EDGES))
+				AddOverlays(floor_overlay)
 
 		has_smooth = ~(has_border & (NORTH | SOUTH | EAST | WEST))
 
 		if(flooring.can_paint && decals && length(decals))
-			overlays |= decals
+			AddOverlays(decals)
 
 		//We can only have inner corners if we're smoothed with something
 		if (has_smooth && flooring.flags & TURF_HAS_INNER_CORNERS)
 			for(var/direction in GLOB.cornerdirs)
 				if((has_smooth & direction) == direction)
 					if(!flooring.symmetric_test_link(src, get_step(src, direction)))
-						overlays |= get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-corner-[direction]", "[flooring.icon_base]_corners", direction)
+						var/floor_overlay = get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-corner-[direction]", "[flooring.icon_base]_corners", direction)
+						AddOverlays(floor_overlay)
 
 		//Next up, outer corners
 		if (has_border && flooring.flags & TURF_HAS_CORNERS)
 			for(var/direction in GLOB.cornerdirs)
 				if((has_border & direction) == direction)
 					if(!flooring.symmetric_test_link(src, get_step(src, direction)))
-						overlays |= get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[direction]", "[flooring.icon_base]_edges", direction,(flooring.flags & TURF_HAS_EDGES))
+						var/floor_overlay = get_flooring_overlay("[flooring.icon]_[flooring.icon_base]-edge-[direction]", "[flooring.icon_base]_edges", direction,(flooring.flags & TURF_HAS_EDGES))
+						AddOverlays(floor_overlay)
 
 		/*
 		//Now lets handle those fancy floors which have many centre icons
@@ -75,16 +78,16 @@ var/global/list/flooring_cache = list()
 		for(var/image/I in decals)
 			if (floor(I.layer) != floor(layer))
 				continue
-			overlays |= I
+			AddOverlays(I)
 
 	if(is_plating() && !(isnull(broken) && isnull(burnt))) //temp, todo
 		icon = 'icons/turf/flooring/plating.dmi'
 		icon_state = "dmg[rand(1,4)]"
 	else if(flooring)
 		if(!isnull(broken) && (flooring.flags & TURF_CAN_BREAK))
-			overlays |= get_damage_overlay("broken[broken]", BLEND_MULTIPLY)
+			AddOverlays(get_damage_overlay("broken[broken]", BLEND_MULTIPLY))
 		if(!isnull(burnt) && (flooring.flags & TURF_CAN_BURN))
-			overlays |= get_damage_overlay("burned[burnt]")
+			AddOverlays(get_damage_overlay("burned[burnt]"))
 
 	queue_ao(FALSE)
 	if(update_neighbors)

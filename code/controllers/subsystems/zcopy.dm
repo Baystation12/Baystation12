@@ -524,7 +524,7 @@ SUBSYSTEM_DEF(zcopy)
 		MA.layer = FLY_LAYER	// probably fine
 
 	if (fixed_overlays)
-		MA.overlays = fixed_overlays
+		MA.AddOverlays(fixed_overlays)
 
 	if (fixed_underlays)
 		MA.underlays = fixed_underlays

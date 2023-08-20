@@ -151,22 +151,22 @@
 
 /obj/machinery/recharge_station/on_update_icon()
 	..()
-	overlays.Cut()
+	ClearOverlays()
 
 	if(panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 
 	if(occupant)
 		icon_state = "borgcharger_closed"
 		if(is_powered())
-			overlays += "borgcharger_lights_working"
-			overlays += emissive_appearance(icon, "borgcharger_lights_working")
+			AddOverlays("borgcharger_lights_working")
+			AddOverlays(emissive_appearance(icon, "borgcharger_lights_working"))
 	else
 		icon_state = "borgcharger"
 
 	last_overlay_state = overlay_state()
-	overlays += list(image(overlay_icon, overlay_state()))
-	overlays += emissive_appearance(icon, "statn_c100")
+	AddOverlays(list(image(overlay_icon, overlay_state())))
+	AddOverlays(emissive_appearance(icon, "statn_c100"))
 
 /obj/machinery/recharge_station/Bumped(mob/living/silicon/robot/R)
 	go_in(R)

@@ -68,15 +68,15 @@
 
 /obj/item/material/knife/folding/on_update_icon()
 	if(open)
-		overlays.Cut()
-		overlays += overlay_image(icon, hardware_open, flags=RESET_COLOR)
+		ClearOverlays()
+		AddOverlays(overlay_image(icon, hardware_open, flags=RESET_COLOR))
 		item_state = "knife"
 	else
-		overlays.Cut()
-		overlays += overlay_image(icon, hardware_closed, flags=RESET_COLOR)
+		ClearOverlays()
+		AddOverlays(overlay_image(icon, hardware_closed, flags=RESET_COLOR))
 		item_state = initial(item_state)
 	if(blood_overlay)
-		overlays += blood_overlay
+		AddOverlays(blood_overlay)
 
 //Subtypes
 /obj/item/material/knife/folding/wood

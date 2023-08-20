@@ -16,14 +16,14 @@
 
 /obj/machinery/atmospherics/valve/shutoff/on_update_icon()
 	icon_state = "vclamp[icon_connect_type]"
-	overlays.Cut()
+	ClearOverlays()
 	if (!close_on_leaks)
-		overlays += image('icons/atmos/clamp.dmi', "override[icon_connect_type]")
+		AddOverlays(image('icons/atmos/clamp.dmi', "override[icon_connect_type]"))
 		return
 	if (shutoff_state & NODE1_CLOSED)
-		overlays += image('icons/atmos/clamp.dmi', "closed1[icon_connect_type]")
+		AddOverlays(image('icons/atmos/clamp.dmi', "closed1[icon_connect_type]"))
 	if (shutoff_state & NODE2_CLOSED)
-		overlays += image('icons/atmos/clamp.dmi', "closed2[icon_connect_type]")
+		AddOverlays(image('icons/atmos/clamp.dmi', "closed2[icon_connect_type]"))
 
 /obj/machinery/atmospherics/valve/shutoff/examine(mob/user)
 	. = ..()

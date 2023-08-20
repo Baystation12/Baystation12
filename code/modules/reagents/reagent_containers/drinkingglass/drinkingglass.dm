@@ -146,7 +146,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 
 /obj/item/reagent_containers/food/drinks/glass2/on_update_icon()
 	underlays.Cut()
-	overlays.Cut()
+	ClearOverlays()
 
 	if (length(reagents?.reagent_list))
 		var/datum/reagent/R = reagents.get_master_reagent()
@@ -178,11 +178,11 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 		var/image/filling = get_filling_overlay(amnt, R.glass_icon)
 		filling.color = reagents.get_color()
 		if(filling_overlayed)
-			overlays += filling
+			AddOverlays(filling)
 		else
 			underlays += filling
 
-		overlays += over_liquid
+		AddOverlays(over_liquid)
 
 	else
 		SetName(custom_name || initial(name))

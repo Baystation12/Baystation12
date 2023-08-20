@@ -44,13 +44,13 @@
 
 
 /obj/item/flamethrower/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(igniter)
-		overlays += "+igniter[status]"
+		AddOverlays("+igniter[status]")
 	if(beaker)
-		overlays += "+ptank"
+		AddOverlays("+ptank")
 	if(lit)
-		overlays += "+lit"
+		AddOverlays("+lit")
 		item_state = "flamethrower_1"
 	else
 		item_state = "flamethrower_0"

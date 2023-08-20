@@ -76,7 +76,7 @@
 	handleTarget(target, user)
 
 /obj/item/reagent_containers/syringe/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	underlays.Cut()
 
 	if(mode == SYRINGE_BROKEN)
@@ -93,7 +93,7 @@
 				injoverlay = "draw"
 			if (SYRINGE_INJECT)
 				injoverlay = "inject"
-		overlays += injoverlay
+		AddOverlays(injoverlay)
 	icon_state = "[initial(icon_state)][rounded_vol]"
 	item_state = "syringe_[rounded_vol]"
 

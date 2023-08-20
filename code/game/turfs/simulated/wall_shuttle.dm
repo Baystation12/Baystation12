@@ -30,12 +30,12 @@
 
 /turf/simulated/shuttle/wall/corner/proc/reset_overlay()
 	if(corner_overlay)
-		overlays -= corner_overlay
+		CutOverlays(corner_overlay)
 	else
 		corner_overlay = image(icon = 'icons/turf/shuttle.dmi', icon_state = corner_overlay_state, dir = src.dir)
 		corner_overlay.plane = plane
 		corner_overlay.layer = layer
-	overlays += corner_overlay
+	AddOverlays(corner_overlay)
 
 //Predefined Shuttle Corners
 /turf/simulated/shuttle/wall/corner/smoothwhite

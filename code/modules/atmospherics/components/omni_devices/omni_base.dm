@@ -52,11 +52,11 @@
 
 /obj/machinery/atmospherics/omni/on_update_icon()
 	if(!is_powered())
-		overlays = overlays_off
+		SetOverlays(overlays_off)
 	else if(error_check())
-		overlays = overlays_error
+		SetOverlays(overlays_error)
 	else
-		overlays = use_power ? (overlays_on) : (overlays_off)
+		SetOverlays(use_power ? (overlays_on) : (overlays_off))
 
 	underlays = underlays_current
 

@@ -139,7 +139,7 @@ var/global/list/image/fluidtrack_cache=list()
 		update_icon()
 
 /obj/effect/decal/cleanable/blood/tracks/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	color = "#ffffff"
 	var/truedir=0
 
@@ -161,7 +161,7 @@ var/global/list/image/fluidtrack_cache=list()
 
 		track.fresh=0
 		track.overlay=I
-		overlays += I
+		AddOverlays(I)
 
 /obj/effect/decal/cleanable/blood/tracks/footprints
 	name = "wet footprints"

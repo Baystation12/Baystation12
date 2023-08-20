@@ -625,7 +625,7 @@ About the new airlock wires panel:
 		return 0
 
 
-/obj/machinery/door/airlock/on_update_icon(state=0, override=0)
+/obj/machinery/door/airlock/on_update_icon(state = 0)
 	if(connections in list(NORTH, SOUTH, NORTH|SOUTH))
 		if(connections in list(WEST, EAST, EAST|WEST))
 			set_dir(SOUTH)
@@ -651,27 +651,20 @@ About the new airlock wires panel:
 
 	set_airlock_overlays(state)
 
+
 /obj/machinery/door/airlock/proc/set_airlock_overlays(state)
-	var/icon/color_overlay
-	var/icon/filling_overlay
-	var/icon/stripe_overlay
-	var/icon/stripe_filling_overlay
-	var/icon/lights_overlay
-	var/icon/panel_overlay
-	var/icon/weld_overlay
-	var/icon/damage_overlay
-	var/icon/sparks_overlay
-	var/icon/brace_overlay
-
 	set_light(0)
-
-	if(door_color && !(door_color == "none"))
+	var/list/new_overlays = list()
+	if(door_color && door_color != "none")
 		var/ikey = "[airlock_type]-[door_color]-color"
-		color_overlay = airlock_icon_cache["[ikey]"]
+		var/icon/color_overlay = airlock_icon_cache["[ikey]"]
 		if(!color_overlay)
 			color_overlay = new(color_file)
 			color_overlay.Blend(door_color, ICON_MULTIPLY)
 			airlock_icon_cache["[ikey]"] = color_overlay
+		if (color_overlay)
+			new_overlays += color_overlay
+	var/icon/filling_overlay
 	if(glass)
 		if (window_color && window_color != "none")
 			var/ikey = "[airlock_type]-[window_color]-windowcolor"
@@ -683,7 +676,7 @@ About the new airlock wires panel:
 		else
 			filling_overlay = glass_file
 	else
-		if(door_color && !(door_color == "none"))
+		if(door_color && door_color != "none")
 			var/ikey = "[airlock_type]-[door_color]-fillcolor"
 			filling_overlay = airlock_icon_cache["[ikey]"]
 			if(!filling_overlay)
@@ -692,78 +685,64 @@ About the new airlock wires panel:
 				airlock_icon_cache["[ikey]"] = filling_overlay
 		else
 			filling_overlay = fill_file
-	if(stripe_color && !(stripe_color == "none"))
+	if (filling_overlay)
+		new_overlays += filling_overlay
+	if(stripe_color && stripe_color != "none")
+		var/icon/stripe_overlay
 		var/ikey = "[airlock_type]-[stripe_color]-stripe"
 		stripe_overlay = airlock_icon_cache["[ikey]"]
 		if(!stripe_overlay)
 			stripe_overlay = new(stripe_file)
 			stripe_overlay.Blend(stripe_color, ICON_MULTIPLY)
 			airlock_icon_cache["[ikey]"] = stripe_overlay
+		if (stripe_overlay)
+			new_overlays += stripe_overlay
 		if(!glass)
+			var/icon/stripe_filling_overlay
 			var/ikey2 = "[airlock_type]-[stripe_color]-fillstripe"
 			stripe_filling_overlay = airlock_icon_cache["[ikey2]"]
 			if(!stripe_filling_overlay)
 				stripe_filling_overlay = new(stripe_fill_file)
 				stripe_filling_overlay.Blend(stripe_color, ICON_MULTIPLY)
 				airlock_icon_cache["[ikey2]"] = stripe_filling_overlay
-
+			if (stripe_filling_overlay)
+				new_overlays += stripe_filling_overlay
 	if(arePowerSystemsOn())
 		switch(state)
 			if(AIRLOCK_CLOSED)
 				if(lights && locked)
-					lights_overlay = overlay_image(bolts_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
+					new_overlays += overlay_image(bolts_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 					set_light(0.25, 0.1, 1, 2, COLOR_RED_LIGHT)
-
 			if(AIRLOCK_DENY)
 				if(lights)
-					lights_overlay = overlay_image(deny_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
+					new_overlays += overlay_image(deny_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 					set_light(0.25, 0.1, 1, 2, COLOR_RED_LIGHT)
-
 			if(AIRLOCK_EMAG)
-				sparks_overlay = overlay_image(emag_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
-
+				new_overlays += overlay_image(emag_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 			if(AIRLOCK_CLOSING)
 				if(lights)
-					lights_overlay = overlay_image(lights_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
+					new_overlays += overlay_image(lights_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 					set_light(0.25, 0.1, 1, 2, COLOR_LIME)
-
 			if(AIRLOCK_OPENING)
 				if(lights)
-					lights_overlay = overlay_image(lights_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
+					new_overlays += overlay_image(lights_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 					set_light(0.25, 0.1, 1, 2, COLOR_LIME)
-
 		if(MACHINE_IS_BROKEN(src))
-			damage_overlay = overlay_image(sparks_broken_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
+			new_overlays += overlay_image(sparks_broken_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 		else if (get_damage_percentage() >= 25)
-			damage_overlay = overlay_image(sparks_damaged_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
-
+			new_overlays += overlay_image(sparks_damaged_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 	if(welded)
-		weld_overlay = welded_file
-
+		new_overlays += welded_file
 	if(p_open)
-		panel_overlay = panel_file
-
+		new_overlays += panel_file
 	if(brace)
 		brace.update_icon()
-		brace_overlay += image(brace.icon, brace.icon_state)
+		new_overlays += image(brace.icon, brace.icon_state)
+	SetOverlays(new_overlays)
+	ImmediateOverlayUpdate()
 
-	overlays.Cut()
-
-	overlays += color_overlay
-	overlays += filling_overlay
-	overlays += stripe_overlay
-	overlays += stripe_filling_overlay
-	overlays += panel_overlay
-	overlays += weld_overlay
-	overlays += brace_overlay
-	overlays += lights_overlay
-	overlays += sparks_overlay
-	overlays += damage_overlay
 
 /obj/machinery/door/airlock/do_animate(animation)
-	if(overlays)
-		overlays.Cut()
-
 	switch(animation)
 		if("opening")
 			set_airlock_overlays(AIRLOCK_OPENING)
@@ -787,7 +766,7 @@ About the new airlock wires panel:
 				flick("deny", src)
 		else
 			update_icon()
-	return
+
 
 /obj/machinery/door/airlock/attack_robot(mob/user)
 	ui_interact(user)

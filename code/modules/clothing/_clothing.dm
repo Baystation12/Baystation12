@@ -64,11 +64,11 @@
 		if(blood_DNA && user_human.species.blood_mask)
 			var/image/bloodsies = overlay_image(user_human.species.blood_mask, blood_overlay_type, blood_color, RESET_COLOR)
 			bloodsies.appearance_flags |= NO_CLIENT_COLOR
-			ret.overlays	+= bloodsies
+			ret.AddOverlays(bloodsies)
 
 	if(length(accessories))
 		for(var/obj/item/clothing/accessory/A in accessories)
-			ret.overlays |= A.get_mob_overlay(user_mob, slot)
+			ret.AddOverlays(A.get_mob_overlay(user_mob, slot))
 	return ret
 
 
@@ -425,7 +425,7 @@ BLIND     // can't see anything
 /obj/item/clothing/head/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
 	if(light_overlay_image)
-		ret.overlays -= light_overlay_image
+		ret.CutOverlays(light_overlay_image)
 	if(on && slot == slot_head_str)
 		if(!light_overlay_image)
 			if(ishuman(user_mob))
@@ -439,7 +439,7 @@ BLIND     // can't see anything
 					light_overlay_image = user_human.species.get_offset_overlay_image(FALSE, 'icons/mob/light_overlays.dmi', "[light_overlay]", color, slot)
 			else
 				light_overlay_image = overlay_image('icons/mob/light_overlays.dmi', "[light_overlay]", null, RESET_COLOR)
-		ret.overlays |= light_overlay_image
+		ret.AddOverlays(light_overlay_image)
 	return ret
 
 /obj/item/clothing/head/attack_self(mob/user)
@@ -509,9 +509,9 @@ BLIND     // can't see anything
 
 
 /obj/item/clothing/head/on_update_icon(mob/user)
-	overlays.Cut()
+	ClearOverlays()
 	if (on && light_overlay)
-		overlays += get_obj_light_overlay(light_overlay)
+		AddOverlays(get_obj_light_overlay(light_overlay))
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		H.update_inv_head()

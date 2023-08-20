@@ -815,7 +815,7 @@ default behaviour is:
 
 /mob/living/update_icons()
 	if(auras)
-		overlays |= auras
+		AddOverlays(auras)
 
 /mob/living/proc/add_aura(obj/aura/aura)
 	LAZYDISTINCTADD(auras,aura)

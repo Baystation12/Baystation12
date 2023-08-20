@@ -17,11 +17,11 @@
 			icon_state = "[initial(icon_state)]-e"
 	if(ammo_indicator)
 		if(!ammo_magazine || !LAZYLEN(ammo_magazine.stored_ammo))
-			overlays += image(icon, "[initial(icon_state)]-ammo0")
+			AddOverlays(image(icon, "[initial(icon_state)]-ammo0"))
 		else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
-			overlays += image(icon, "[initial(icon_state)]-ammo1")
+			AddOverlays(image(icon, "[initial(icon_state)]-ammo1"))
 		else
-			overlays += image(icon, "[initial(icon_state)]-ammo2")
+			AddOverlays(image(icon, "[initial(icon_state)]-ammo2"))
 
 /obj/item/gun/projectile/pistol/sec
 	name = "pistol"

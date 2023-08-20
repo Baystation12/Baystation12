@@ -8,7 +8,7 @@
 	UpdateLyingBuckledAndVerbStatus()
 	remove_from_dead_mob_list()
 
-	var/atom/movable/overlay/animation = new(src)
+	var/atom/movable/fake_overlay/animation = new(src)
 	animation.icon_state = "blank"
 	animation.icon = 'icons/mob/mob.dmi'
 
@@ -17,7 +17,7 @@
 
 	addtimer(new Callback(src, .proc/check_delete, animation), 15)
 
-/mob/proc/check_delete(atom/movable/overlay/animation)
+/mob/proc/check_delete(atom/movable/fake_overlay/animation)
 	if(animation)	qdel(animation)
 	if(src)			qdel(src)
 
@@ -30,7 +30,7 @@
 	if(stat == DEAD)
 		ghostize(FALSE) //Ghosts the mob here so it keeps its sprite
 
-	var/atom/movable/overlay/animation = null
+	var/atom/movable/fake_overlay/animation = null
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(INVISIBILITY_ABSTRACT)
@@ -77,7 +77,7 @@
 
 	//TODO:  Change death state to health_dead for all these icon files.  This is a stop gap.
 	if(healths)
-		healths.overlays.Cut() // This is specific to humans but the relevant code is here; shouldn't mess with other mobs.
+		healths.ClearOverlays()
 		if("health7" in icon_states(healths.icon))
 			healths.icon_state = "health7"
 		else

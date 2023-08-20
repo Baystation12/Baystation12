@@ -23,7 +23,7 @@
 /obj/item/tray/attack_self(mob/living/user)
 	if (LAZYLEN(carrying))
 		var/turf/T = get_turf(user)
-		overlays.Cut()
+		ClearOverlays()
 		for (var/obj/item/carried in carrying)
 			carried.dropInto(T)
 			LAZYREMOVE(carrying, carried)
@@ -37,7 +37,7 @@
 		return FALSE
 	. = ..()
 	// Drop all the things. All of them.
-	overlays.Cut()
+	ClearOverlays()
 	for(var/obj/item/I in carrying)
 		I.dropInto(get_turf(M))
 		carrying.Remove(I)
@@ -104,7 +104,7 @@
 
 	if (LAZYLEN(carrying))
 		if (istype(A, /obj/structure/table)) // If we're a table, prioritize dumping stuff out
-			overlays.Cut()
+			ClearOverlays()
 			for (var/obj/item/carried in carrying)
 				carried.dropInto(T)
 				LAZYREMOVE(carrying, carried)
@@ -113,7 +113,7 @@
 		else if (istype(A, /obj/machinery/smartfridge))
 			var/obj/machinery/smartfridge/fridge = A
 			var/fed_in = 0
-			overlays.Cut()
+			ClearOverlays()
 			for (var/obj/item/carried in carrying)
 				if (fridge.accept_check(carried))
 					carried.dropInto(fridge)
@@ -154,5 +154,5 @@
 		return
 	var/image/item_image = image("icon" = I.icon, "icon_state" = I.icon_state, "layer" = 30 + I.layer, "pixel_x" = rand(-3, 3), "pixel_y" = rand(-3, 3)) // this line terrifies me
 	item_image.color = I.color
-	item_image.overlays = I.overlays // Inherit the color and overlays of stored items to make sure they render accurately on the tray
-	overlays += item_image
+	item_image.CopyOverlays(I)
+	AddOverlays(item_image)

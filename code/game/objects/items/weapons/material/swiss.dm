@@ -82,13 +82,13 @@
 
 /obj/item/material/knife/folding/swiss/on_update_icon()
 	if(active_tool != null)
-		overlays.Cut()
-		overlays += overlay_image(icon, active_tool, flags=RESET_COLOR)
+		ClearOverlays()
+		AddOverlays(overlay_image(icon, active_tool, flags=RESET_COLOR))
 		item_state = initial(item_state)
 		if(active_tool == SWISSKNF_LBLADE || active_tool == SWISSKNF_SBLADE)
 			item_state = "knife"
 		if(blood_overlay)
-			overlays += blood_overlay
+			AddOverlays(blood_overlay)
 
 /obj/item/material/knife/folding/swiss/IsCrowbar()
 	return active_tool == SWISSKNF_CROWBAR && can_use_tools

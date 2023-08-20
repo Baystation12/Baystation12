@@ -29,8 +29,12 @@
 	var/climb_speed_mult = 1
 	/// Bitflag (Any of `INIT_*`). Flags for special/additional handling of the `Initialize()` chain. See `code\__defines\misc.dm`.
 	var/init_flags = EMPTY_BITFIELD
-	/// Stores overlays managed by update_overlays() to prevent removing overlays that were not added by the same proc
-	var/list/managed_overlays
+
+	/// This atom's cache of non-protected overlays, used for normal icon additions. Do not manipulate directly- See SSoverlays.
+	var/list/atom_overlay_cache
+
+	/// This atom's cache of overlays that can only be removed explicitly, like C4. Do not manipulate directly- See SSoverlays.
+	var/list/atom_protected_overlay_cache
 
 
 /atom/New(loc, ...)
@@ -109,7 +113,6 @@
 	return
 
 /atom/Destroy()
-	LAZYCLEARLIST(managed_overlays)
 	QDEL_NULL(reagents)
 	. = ..()
 
@@ -447,13 +450,6 @@
 		return
 	on_update_icon(arglist(args))
 
-	var/list/new_overlays = update_overlays()
-	if (managed_overlays)
-		overlays -= managed_overlays
-		managed_overlays = null
-	if (length(new_overlays))
-		managed_overlays = new_overlays
-		overlays += new_overlays
 
 /**
  * Handler for updating the atom's icon and overlay states. Generally, all changes to `overlays`, `underlays`, `icon`,
@@ -464,10 +460,6 @@
 /atom/proc/on_update_icon()
 	return
 
-/** Updates the overlays of the atom */
-/atom/proc/update_overlays()
-	SHOULD_CALL_PARENT(TRUE)
-	. = list()
 
 /**
  * Called when an explosion affects the atom.

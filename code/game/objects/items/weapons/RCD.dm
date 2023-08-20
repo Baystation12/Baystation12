@@ -142,11 +142,11 @@
 	return 1
 
 /obj/item/rcd/on_update_icon()	//For the fancy "ammo" counter
-	overlays.Cut()
+	ClearOverlays()
 	var/ratio = 0
 	ratio = stored_matter / max_stored_matter
 	ratio = max(round(ratio, 0.10) * 100, 10)
-	overlays += "rcd-[ratio]"
+	AddOverlays("rcd-[ratio]")
 
 /obj/item/rcd/proc/lowAmmo(mob/user)	//Kludge to make it animate when out of ammo, but I guess you can make it blow up when it's out of ammo or something
 	to_chat(user, SPAN_WARNING("The \'Low Ammo\' light on the device blinks yellow."))

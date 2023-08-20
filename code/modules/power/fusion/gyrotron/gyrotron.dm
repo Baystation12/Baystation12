@@ -48,12 +48,12 @@
 	return E
 
 /obj/machinery/power/emitter/gyrotron/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 	if (active && powernet && avail(active_power_usage))
-		overlays += emissive_appearance(icon, "[icon_state]_lights")
-		overlays += "[icon_state]_lights"
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
+		AddOverlays("[icon_state]_lights")
 
 /obj/machinery/power/emitter/gyrotron/attackby(obj/item/W, mob/user)
 	if(isMultitool(W))

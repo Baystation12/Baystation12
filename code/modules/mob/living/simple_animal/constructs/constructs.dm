@@ -59,7 +59,7 @@
 	qdel(src)
 
 /mob/living/simple_animal/construct/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	..()
 	add_glow()
 
@@ -278,7 +278,7 @@
 	var/image/eye_glow = image(icon,"glow-[icon_state]")
 	eye_glow.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	eye_glow.layer = EYE_GLOW_LAYER
-	overlays += eye_glow
+	AddOverlays(eye_glow)
 	set_light(-2, 0.1, 1.5, l_color = "#ffffff")
 
 	z_flags |= ZMM_MANGLE_PLANES

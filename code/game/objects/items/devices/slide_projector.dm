@@ -166,7 +166,7 @@
 	if(!istype(I))
 		qdel(src)
 		return
-	overlays.Cut()
+	ClearOverlays()
 	var/mutable_appearance/MA = new(I)
 	MA.plane = FLOAT_PLANE
 	MA.layer = FLOAT_LAYER
@@ -174,7 +174,7 @@
 	MA.alpha = 170
 	MA.pixel_x = 0
 	MA.pixel_y = 0
-	overlays |= MA
+	AddOverlays(MA)
 
 /obj/effect/projection/proc/set_source(obj/item/I)
 	source = weakref(I)
@@ -210,6 +210,6 @@
 	if(!istype(P))
 		qdel(src)
 		return
-	overlays.Cut()
+	ClearOverlays()
 	if(P.info)
 		icon_state = "text[rand(1,3)]"

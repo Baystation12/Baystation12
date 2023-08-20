@@ -6,8 +6,9 @@
 #define SS_PRIORITY_DEFAULT 50          // Default priority for all processes levels
 
 // SS_TICKER
-#define SS_PRIORITY_TIMER          20
-#define SS_PRIORITY_ICON_UPDATE    20  // Queued icon updates. Mostly used by APCs and tables.
+#define SS_PRIORITY_TIMER 30
+#define SS_PRIORITY_OVERLAYS 20
+#define SS_PRIORITY_ICON_UPDATE 10
 
 // Normal
 #define SS_PRIORITY_TICKER         100 // Gameticker.

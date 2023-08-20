@@ -105,8 +105,7 @@
 		var/obj/item/paper/P = new(src)
 		P.SetName("[src] report #[++report_num]: [bloodsamp.name]")
 		P.stamped = list(/obj/item/stamp)
-		P.overlays = list("paper_stamped")
-		//dna data itself
+		P.SetOverlays("paper_stamped")
 		var/data = "No scan information available."
 		if(bloodsamp.dna != null || bloodsamp.trace_dna != null)
 			data = "Spectometric analysis on provided sample has determined the presence of DNA.<br><br>"
@@ -144,15 +143,15 @@
 	src.update_icon()
 
 /obj/machinery/dnaforensics/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 	if(is_powered())
-		overlays += emissive_appearance(icon, "[icon_state]_screen")
-		overlays += "[icon_state]_screen"
+		AddOverlays(emissive_appearance(icon, "[icon_state]_screen"))
+		AddOverlays("[icon_state]_screen")
 	else if(is_powered() && scanning)
-		overlays += "[icon_state]_working"
-		overlays += emissive_appearance(icon, "[icon_state]_screen_working")
-		overlays += "[icon_state]_screen_working"
+		AddOverlays("[icon_state]_working")
+		AddOverlays(emissive_appearance(icon, "[icon_state]_screen_working"))
+		AddOverlays("[icon_state]_screen_working")
 	else if(closed)
-		overlays += "[icon_state]_closed"
+		AddOverlays("[icon_state]_closed")

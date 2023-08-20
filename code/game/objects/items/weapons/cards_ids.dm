@@ -109,10 +109,10 @@
 	update_icon()
 
 /obj/item/card/data/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	var/image/detail_overlay = image('icons/obj/tools/card.dmi', src,"[icon_state]-color")
 	detail_overlay.color = detail_color
-	overlays += detail_overlay
+	AddOverlays(detail_overlay)
 
 /obj/item/card/data/attackby(obj/item/I, mob/living/user)
 	if(istype(I, /obj/item/device/integrated_electronics/detailer))
@@ -235,14 +235,15 @@ var/global/const/NO_EMAG_ACT = -50
 
 /obj/item/card/id/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
-	ret.overlays += overlay_image(ret.icon, "[ret.icon_state]_colors", detail_color, RESET_COLOR)
+	var/overlay = overlay_image(ret.icon, "[ret.icon_state]_colors", detail_color, RESET_COLOR)
+	ret.AddOverlays(overlay)
 	return ret
 
 /obj/item/card/id/on_update_icon()
-	overlays.Cut()
-	overlays += overlay_image(icon, "[icon_state]_colors", detail_color, RESET_COLOR)
+	ClearOverlays()
+	AddOverlays(overlay_image(icon, "[icon_state]_colors", detail_color, RESET_COLOR))
 	for(var/detail in extra_details)
-		overlays += overlay_image(icon, detail, flags=RESET_COLOR)
+		AddOverlays(overlay_image(icon, detail, flags=RESET_COLOR))
 
 /obj/item/card/id/CanUseTopic(user)
 	if(user in view(get_turf(src)))

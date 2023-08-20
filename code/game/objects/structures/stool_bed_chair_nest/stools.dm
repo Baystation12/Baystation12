@@ -63,7 +63,7 @@ var/global/list/stool_cache = list() //haha stool
 			I.color = padding_material.icon_colour
 			stool_cache[padding_cache_key] = I
 		noverlays |= stool_cache[padding_cache_key]
-	overlays = noverlays
+	SetOverlays(noverlays)
 	// Strings.
 	if(padding_material)
 		SetName("[padding_material.display_name] [initial(name)]") //this is not perfect but it will do for now.

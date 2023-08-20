@@ -50,9 +50,8 @@
 		if(mat_colour)
 			var/image/adding_mat_overlay = image(icon, "[base_icon_state]_mat")
 			adding_mat_overlay.color = mat_colour
-			material_overlays += adding_mat_overlay
-			update_icon()
-			addtimer(new Callback(src, /obj/machinery/fabricator/proc/remove_mat_overlay, adding_mat_overlay), 1 SECOND)
+			AddOverlays(adding_mat_overlay)
+			addtimer(new Callback(src, /atom/proc/CutOverlays, adding_mat_overlay), 1 SECOND)
 		if(istype(thing, /obj/item/stack))
 			var/obj/item/stack/S = thing
 			S.use(stacks_used)

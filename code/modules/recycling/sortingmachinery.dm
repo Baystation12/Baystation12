@@ -108,7 +108,7 @@
 
 
 /obj/structure/bigDelivery/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(nameset || examtext)
 		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_label")
 		if(icon_state == "deliverycloset")
@@ -121,7 +121,7 @@
 				label_x = rand(-8, 6)
 			I.pixel_x = label_x
 			I.pixel_y = -3
-		overlays += I
+		AddOverlays(I)
 	if(src.sortTag)
 		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_tag")
 		if(icon_state == "deliverycloset")
@@ -134,7 +134,7 @@
 				tag_x = rand(-8, 6)
 			I.pixel_x = tag_x
 			I.pixel_y = -3
-		overlays += I
+		AddOverlays(I)
 
 /obj/structure/bigDelivery/examine(mob/user, distance)
 	. = ..()
@@ -267,12 +267,12 @@
 	return
 
 /obj/item/smallDelivery/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if((nameset || examtext) && icon_state != "deliverycrate1")
 		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_label")
 		if(icon_state == "deliverycrate5")
 			I.pixel_y = -1
-		overlays += I
+		AddOverlays(I)
 	if(src.sortTag)
 		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_tag")
 		switch(icon_state)
@@ -289,7 +289,7 @@
 				I.pixel_y = 3
 			if("deliverycrate5")
 				I.pixel_y = -3
-		overlays += I
+		AddOverlays(I)
 
 /obj/item/smallDelivery/examine(mob/user, distance)
 	. = ..()

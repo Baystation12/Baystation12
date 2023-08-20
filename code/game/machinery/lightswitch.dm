@@ -33,14 +33,14 @@
 		overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		overlay.layer = ABOVE_LIGHTING_LAYER
 
-	overlays.Cut()
+	ClearOverlays()
 	if(inoperable())
 		icon_state = "light-p"
 		set_light(0)
 	else
 		icon_state = "light[on]"
 		overlay.icon_state = "light[on]-overlay"
-		overlays += overlay
+		AddOverlays(overlay)
 		set_light(0.1, 0.1, 1, 2, on ? "#82ff4c" : "#f86060")
 
 /obj/machinery/light_switch/examine(mob/user, distance)

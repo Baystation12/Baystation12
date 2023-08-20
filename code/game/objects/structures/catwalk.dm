@@ -32,17 +32,17 @@
 
 /obj/structure/catwalk/on_update_icon()
 	update_connections()
-	overlays.Cut()
+	ClearOverlays()
 	icon_state = ""
 	var/image/I
 	if(!hatch_open)
 		for(var/i = 1 to 4)
 			I = image('icons/obj/structures/catwalks.dmi', "catwalk[connections[i]]", dir = SHIFTL(1, i - 1))
-			overlays += I
+			AddOverlays(I)
 	if(plated_tile)
 		I = image('icons/obj/structures/catwalks.dmi', "plated")
 		I.color = plated_tile.color
-		overlays += I
+		AddOverlays(I)
 
 /obj/structure/catwalk/ex_act(severity)
 	switch(severity)

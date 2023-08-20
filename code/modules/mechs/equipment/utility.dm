@@ -12,7 +12,7 @@
 
 
 /obj/structure/cargopile/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	for(var/obj/thing in contents)
 		var/image/I = new
 		I.appearance = thing.appearance
@@ -20,7 +20,7 @@
 		I.pixel_x = rand(-16,16)
 		I.pixel_y = rand(-16,16)
 		I.SetTransform(rotation = rand(0, 360))
-		overlays += I
+		AddOverlays(I)
 
 /obj/structure/cargopile/attack_hand(mob/user)
 	. = ..()

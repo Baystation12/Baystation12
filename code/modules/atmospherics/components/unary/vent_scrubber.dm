@@ -66,7 +66,7 @@
 	if(!check_icon_cache())
 		return
 
-	overlays.Cut()
+	ClearOverlays()
 
 
 	var/turf/T = get_turf(src)
@@ -83,7 +83,7 @@
 	else
 		scrubber_icon += "on"
 
-	overlays += icon_manager.get_atmos_icon("device", , , scrubber_icon)
+	AddOverlays(icon_manager.get_atmos_icon("device", , , scrubber_icon))
 
 /obj/machinery/atmospherics/unary/vent_scrubber/update_underlays()
 	if(..())

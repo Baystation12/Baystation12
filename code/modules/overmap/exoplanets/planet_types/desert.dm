@@ -126,9 +126,9 @@
 	if(!exposed)
 		return
 	icon_state = "open"
-	overlays.Cut()
+	ClearOverlays()
 	if(buckled_mob)
-		overlays += image(icon,icon_state="overlay",layer=ABOVE_HUMAN_LAYER)
+		AddOverlays(image(icon,icon_state="overlay",layer=ABOVE_HUMAN_LAYER))
 
 /obj/effect/quicksand/proc/expose()
 	if(exposed)

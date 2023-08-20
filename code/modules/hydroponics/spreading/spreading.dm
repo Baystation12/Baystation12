@@ -118,7 +118,7 @@
 	return ..()
 
 /obj/effect/vine/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	var/growth = growth_threshold ? min(max_growth, round(get_current_health() / growth_threshold)) : 1
 	var/at_fringe = get_dist(src,parent)
 	if(spread_distance > 5)
@@ -132,7 +132,7 @@
 	var/ikey = "\ref[seed]-plant-[growth]"
 	if(!SSplants.plant_icon_cache[ikey])
 		SSplants.plant_icon_cache[ikey] = seed.get_icon(growth)
-	overlays += SSplants.plant_icon_cache[ikey]
+	AddOverlays(SSplants.plant_icon_cache[ikey])
 
 	if(growth > 2 && growth == max_growth)
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER

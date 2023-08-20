@@ -39,11 +39,11 @@ var/global/list/cached_icons = list()
 		update_icon()
 
 /obj/item/reagent_containers/glass/paint/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(reagents.total_volume)
 		var/image/filling = image('icons/obj/reagentfillings.dmi', src, "paintbucket")
 		filling.color = reagents.get_color()
-		overlays += filling
+		AddOverlays(filling)
 
 /obj/item/reagent_containers/glass/paint/red
 	name = "red paint bucket"

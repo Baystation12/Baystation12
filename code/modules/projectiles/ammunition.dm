@@ -191,20 +191,20 @@
 
 
 /obj/item/ammo_magazine/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 
 	if (ammo_type == /obj/item/ammo_casing/pistol/rubber)
-		overlays += image(icon, "[initial(icon_state)]_r")
+		AddOverlays(image(icon, "[initial(icon_state)]_r"))
 	else if (ammo_type == /obj/item/ammo_casing/pistol/practice)
-		overlays += image(icon, "[initial(icon_state)]_p")
+		AddOverlays(image(icon, "[initial(icon_state)]_p"))
 
 	else if (ammo_type == /obj/item/ammo_casing/pistol/small/rubber)
-		overlays += image(icon, "[initial(icon_state)]_r")
+		AddOverlays(image(icon, "[initial(icon_state)]_r"))
 	else if (ammo_type == /obj/item/ammo_casing/pistol/small/practice)
-		overlays += image(icon, "[initial(icon_state)]_p")
+		AddOverlays(image(icon, "[initial(icon_state)]_p"))
 
 	else if (ammo_type == /obj/item/ammo_casing/rifle/military/practice)
-		overlays += image(icon, "[initial(icon_state)]_p")
+		AddOverlays(image(icon, "[initial(icon_state)]_p"))
 
 	else
 		icon_state = initial(icon_state)

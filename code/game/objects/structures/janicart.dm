@@ -204,17 +204,17 @@
 
 
 /obj/structure/janitorialcart/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(mybag)
-		overlays += "cart_garbage"
+		AddOverlays("cart_garbage")
 	if(mymop)
-		overlays += "cart_mop"
+		AddOverlays("cart_mop")
 	if(myspray)
-		overlays += "cart_spray"
+		AddOverlays("cart_spray")
 	if(myreplacer)
-		overlays += "cart_replacer"
+		AddOverlays("cart_replacer")
 	if(signs)
-		overlays += "cart_sign[signs]"
+		AddOverlays("cart_sign[signs]")
 
 
 //old style cart

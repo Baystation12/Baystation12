@@ -43,11 +43,11 @@ var/global/list/doppler_arrays = list()
 	audible_message(SPAN_CLASS("game say", "[SPAN_CLASS("name", "\The [src]")] states coldly, \"[message]\""))
 
 /obj/machinery/doppler_array/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(MACHINE_IS_BROKEN(src))
 		icon_state = "[initial(icon_state)]-broken"
 	if(panel_open)
-		overlays += "[initial(icon_state)]-open"
+		AddOverlays("[initial(icon_state)]-open")
 	if(inoperable())
 		icon_state = "[initial(icon_state)]-off"
 

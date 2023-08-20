@@ -158,11 +158,11 @@
 			to_chat(user, SPAN_NOTICE("You scoop up some [src] with \the [U]!"))
 
 			src.bitecount++
-			U.overlays.Cut()
+			U.ClearOverlays()
 			U.loaded = "[src]"
 			var/image/I = new(U.icon, "loadedfood")
 			I.color = src.filling_color
-			U.overlays += I
+			U.AddOverlays(I)
 
 			if(!reagents)
 				crash_with("A snack [type] failed to have a reagent holder when attacked with a [W.type]. It was [QDELETED(src) ? "" : "not"] being deleted.")
@@ -215,7 +215,7 @@
 					S.filling_color = filling_color
 					var/image/I = image(S.icon, "[S.icon_state]_filling")
 					I.color = filling_color
-					S.overlays += I
+					S.AddOverlays(I)
 
 			qdel(src)
 			return
@@ -2757,7 +2757,7 @@
 
 /obj/item/pizzabox/on_update_icon()
 
-	overlays.Cut()
+	ClearOverlays()
 
 	// Set appropriate description
 	if( open && pizza )
@@ -2785,7 +2785,7 @@
 		if( pizza )
 			var/image/pizzaimg = image("food.dmi", icon_state = pizza.icon_state)
 			pizzaimg.pixel_y = -3
-			overlays += pizzaimg
+			AddOverlays(pizzaimg)
 
 		return
 	else
@@ -2802,7 +2802,7 @@
 		if( doimgtag )
 			var/image/tagimg = image("food.dmi", icon_state = "pizzabox_tag")
 			tagimg.pixel_y = length(boxes) * 3
-			overlays += tagimg
+			AddOverlays(tagimg)
 
 	icon_state = "pizzabox[length(boxes)+1]"
 
@@ -3054,7 +3054,7 @@
 		C.filling_color = F.filling_color
 		var/image/I = image(C.icon, "customburger_filling")
 		I.color = F.filling_color
-		C.overlays += I
+		C.AddOverlays(I)
 		F.reagents.trans_to_obj(C, F.reagents.total_volume)
 		to_chat(user, "You make \a [C].")
 		qdel(F)

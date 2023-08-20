@@ -73,4 +73,4 @@
 	if (MACHINE_IS_BROKEN(src) && prob(20))
 		icon_state = "[initial(icon_state)]-hellfire"
 	else if (is_powered())
-		overlays += image(icon, "[initial(icon_state)]-screen")
+		AddOverlays(image(icon, "[initial(icon_state)]-screen"))

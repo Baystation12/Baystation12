@@ -47,14 +47,14 @@
 	return ..()
 
 /obj/machinery/power/smes/batteryrack/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	icon_update = 0
 
 	var/cellcount = 0
 	var/charge_level = clamp(round(Percentage() / 12), 0, 7)
 
-	overlays += emissive_appearance(icon, "charge[charge_level]")
-	overlays += "charge[charge_level]"
+	AddOverlays(emissive_appearance(icon, "charge[charge_level]"))
+	AddOverlays("charge[charge_level]")
 
 	if(!panel_open)
 		icon_state = "rack-closed"
@@ -63,11 +63,11 @@
 		for(var/obj/item/cell/C as anything in internal_cells)
 			if (++cellcount > max_cells)
 				break
-			overlays += "cell[cellcount]"
+			AddOverlays("cell[cellcount]")
 			if(C.fully_charged())
-				overlays += "cell[cellcount]f"
+				AddOverlays("cell[cellcount]f")
 			else if(!C.charge)
-				overlays += "cell[cellcount]e"
+				AddOverlays("cell[cellcount]e")
 
 // Recalculate maxcharge and similar variables.
 /obj/machinery/power/smes/batteryrack/proc/update_maxcharge()

@@ -42,7 +42,7 @@ SUBSYSTEM_DEF(skybox)
 		dust.blend_mode = BLEND_ADD
 		var/mutable_appearance/space = new /mutable_appearance(/turf/space)
 		space.icon_state = "white"
-		space.overlays += dust
+		space.AddOverlays(dust)
 		space_appearance_cache[index] = space.appearance
 	background_color = RANDOM_RGB
 
@@ -63,21 +63,21 @@ SUBSYSTEM_DEF(skybox)
 	var/image/base = overlay_image(skybox_icon, background_icon, background_color)
 	if (use_stars)
 		var/image/stars = overlay_image(skybox_icon, star_state, flags = RESET_COLOR)
-		base.overlays += stars
-	res.overlays += base
+		base.AddOverlays(stars)
+	res.AddOverlays(base)
 	if (GLOB.using_map.use_overmap && use_overmap_details)
 		var/obj/effect/overmap/visitable/O = map_sectors["[z]"]
 		if (istype(O))
 			var/image/overmap = image(skybox_icon)
-			overmap.overlays += O.generate_skybox()
+			overmap.AddOverlays(O.generate_skybox())
 			for (var/obj/effect/overmap/visitable/other in O.loc)
 				if (other != O)
-					overmap.overlays += other.get_skybox_representation()
+					overmap.AddOverlays(other.get_skybox_representation())
 			overmap.appearance_flags |= RESET_COLOR
-			res.overlays += overmap
+			res.AddOverlays(overmap)
 	for (var/datum/event/event as anything in SSevent.active_events)
 		if(event.has_skybox_image && event.isRunning && (z in event.affecting_z))
-			res.overlays += event.get_skybox_image()
+			res.AddOverlays(event.get_skybox_image())
 	return res
 
 

@@ -84,14 +84,14 @@
 		update_icon()
 
 /obj/item/material/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(applies_material_colour && istype(material))
 		color = material.icon_colour
 		alpha = 100 + material.opacity * 255
 	if(furniture_icon)
 		var/image/I = image(icon, icon_state = furniture_icon)
 		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
-		overlays += I
+		AddOverlays(I)
 
 /obj/item/material/Destroy()
 	STOP_PROCESSING(SSobj, src)

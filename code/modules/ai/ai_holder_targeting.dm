@@ -214,17 +214,17 @@
 		lose_target_position()
 
 	if (last_turf_display && target_last_seen_turf)
-		target_last_seen_turf.overlays -= last_turf_overlay
+		target_last_seen_turf.CutOverlays(last_turf_overlay)
 
 	target_last_seen_turf = get_turf(target)
 
 	if (last_turf_display)
-		target_last_seen_turf.overlays += last_turf_overlay
+		target_last_seen_turf.AddOverlays(last_turf_overlay)
 
 /// Resets the last known position to null.
 /datum/ai_holder/proc/lose_target_position()
 	if (last_turf_display && target_last_seen_turf)
-		target_last_seen_turf.overlays -= last_turf_overlay
+		target_last_seen_turf.CutOverlays(last_turf_overlay)
 	ai_log("lose_target_position() : Last position is being reset.", AI_LOG_INFO)
 	target_last_seen_turf = null
 

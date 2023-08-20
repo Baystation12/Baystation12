@@ -12,7 +12,7 @@
 	set_invisibility(INVISIBILITY_ABSTRACT)
 	for(var/t in organs)
 		qdel(t)
-	var/atom/movable/overlay/animation = new /atom/movable/overlay(src)
+	var/atom/movable/fake_overlay/animation = new /atom/movable/fake_overlay(src)
 	animation.icon_state = "blank"
 	animation.icon = 'icons/mob/mob.dmi'
 	flick("h2monkey", animation)

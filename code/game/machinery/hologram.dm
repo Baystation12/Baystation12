@@ -336,15 +336,15 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 /obj/machinery/hologram/holopad/proc/create_holo(mob/living/silicon/ai/A, mob/living/carbon/caller_id, turf/T = loc)
 	var/obj/effect/overlay/hologram = new(T)//Spawn a blank effect at the location.
 	if(caller_id)
-		hologram.overlays += getHologramIcon(getFlatIcon(caller_id), hologram_color = holopadType) // Add the callers image as an overlay to keep coloration!
+		hologram.AddOverlays(getHologramIcon(getFlatIcon(caller_id), hologram_color = holopadType))
 	else if(A)
 		if(holopadType == HOLOPAD_LONG_RANGE)
-			hologram.overlays += A.holo_icon_longrange
+			hologram.AddOverlays(A.holo_icon_longrange)
 		else
-			hologram.overlays += A.holo_icon // Add the AI's configured holo Icon
+			hologram.AddOverlays(A.holo_icon)
 	if(A)
 		if(A.holo_icon_malf == TRUE)
-			hologram.overlays += icon("icons/effects/effects.dmi", "malf-scanline")
+			hologram.AddOverlays(icon("icons/effects/effects.dmi", "malf-scanline"))
 	hologram.mouse_opacity = 0//So you can't click on it.
 	hologram.layer = ABOVE_HUMAN_LAYER //Above all the other objects/mobs. Or the vast majority of them.
 	hologram.anchored = TRUE//So space wind cannot drag it.

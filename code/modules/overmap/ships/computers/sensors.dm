@@ -304,12 +304,12 @@
 
 
 /obj/machinery/shipsensors/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 	if (use_power)
-		overlays += emissive_appearance(icon, "[icon_state]_lights_working")
-		overlays += "[icon_state]_lights_working"
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights_working"))
+		AddOverlays("[icon_state]_lights_working")
 	if (health_dead())
 		icon_state = "sensors_broken"
 	. = ..()

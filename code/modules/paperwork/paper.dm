@@ -293,7 +293,7 @@
 	stamps = null
 	free_space = MAX_PAPER_MESSAGE_LEN
 	stamped = list()
-	overlays.Cut()
+	ClearOverlays()
 	updateinfolinks()
 	update_icon()
 
@@ -529,7 +529,7 @@
 		if(!stamped)
 			stamped = new
 		stamped += P.type
-		overlays += stampoverlay
+		AddOverlays(stampoverlay)
 
 		playsound(src, 'sound/effects/stamp.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("You stamp the paper with your [P.name]."))

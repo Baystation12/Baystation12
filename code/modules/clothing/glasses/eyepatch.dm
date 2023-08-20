@@ -53,11 +53,11 @@
 
 /obj/item/clothing/glasses/eyepatch/hud/on_update_icon()
 	..()
-	overlays.Cut()
+	ClearOverlays()
 	if(active)
 		var/image/eye = overlay_image(icon, "[icon_state]_eye", flags=RESET_COLOR)
 		eye.color = eye_color
-		overlays += eye
+		AddOverlays(eye)
 
 /obj/item/clothing/glasses/eyepatch/hud/get_mob_overlay(mob/user_mob, slot)
 	var/image/res = ..()
@@ -65,8 +65,10 @@
 		var/image/eye = overlay_image(res.icon, "[icon_state]_eye", flags=RESET_COLOR)
 		eye.color = eye_color
 		eye.layer = FLOAT_LAYER
-		res.overlays += eye
-		res.overlays += emissive_appearance(res.icon, "[icon_state]_eye", -15)
+		res.AddOverlays(list(
+			eye,
+			emissive_appearance(res.icon, "[icon_state]_eye", -15)
+		))
 		user_mob.z_flags |= ZMM_MANGLE_PLANES
 	return res
 

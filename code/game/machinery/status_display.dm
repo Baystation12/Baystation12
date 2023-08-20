@@ -181,7 +181,7 @@
 
 	var/border = image(sl.icon,sl.alert_border)
 
-	overlays |= border
+	AddOverlays(border)
 
 /obj/machinery/status_display/proc/display_alert()
 	remove_display()
@@ -192,14 +192,14 @@
 	var/image/alert = overlay_image(sl.icon, sl.overlay_status_display, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 
 	set_light(sl.light_max_bright, sl.light_inner_range, sl.light_outer_range, 2, sl.light_color_alarm)
-	overlays |= alert
+	AddOverlays(alert)
 
 /obj/machinery/status_display/proc/set_picture(state)
 	remove_display()
 	if(!picture || picture_state != state)
 		picture_state = state
 		picture = image('icons/obj/machines/status_display.dmi', icon_state=picture_state)
-	overlays |= picture
+	AddOverlays(picture)
 	set_light(0.5, 0.1, 1, 2, COLOR_WHITE)
 
 /obj/machinery/status_display/proc/update_display(line1, line2)
@@ -228,7 +228,7 @@
 
 /obj/machinery/status_display/proc/remove_display()
 	if(length(overlays))
-		overlays.Cut()
+		ClearOverlays()
 	if(maptext)
 		maptext = ""
 	set_light(0)

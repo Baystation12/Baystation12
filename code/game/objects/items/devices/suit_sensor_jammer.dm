@@ -79,26 +79,26 @@
 
 
 /obj/item/device/suit_sensor_jammer/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(bcell)
 		var/percent = bcell.percent()
 		switch(percent)
 			if(0 to 25)
-				overlays += "forth_quarter"
+				AddOverlays("forth_quarter")
 			if(25 to 50)
-				overlays += "one_quarter"
-				overlays += "third_quarter"
+				AddOverlays("one_quarter")
+				AddOverlays("third_quarter")
 			if(50 to 75)
-				overlays += "two_quarters"
-				overlays += "second_quarter"
+				AddOverlays("two_quarters")
+				AddOverlays("second_quarter")
 			if(75 to 99)
-				overlays += "three_quarters"
-				overlays += "first_quarter"
+				AddOverlays("three_quarters")
+				AddOverlays("first_quarter")
 			else
-				overlays += "four_quarters"
+				AddOverlays("four_quarters")
 
 		if(active)
-			overlays += "active"
+			AddOverlays("active")
 
 /obj/item/device/suit_sensor_jammer/emp_act(severity)
 	..()

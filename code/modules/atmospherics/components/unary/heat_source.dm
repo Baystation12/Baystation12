@@ -51,19 +51,19 @@
 
 
 /obj/machinery/atmospherics/unary/heater/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
-		overlays += "freezer_panel" //Reuse the freezer icons because no point in creating duplicates for essentially the same machine.
+		AddOverlays("freezer_panel")
 	if(is_powered())
-		overlays += emissive_appearance(icon, "freezer_lights")
-		overlays += "freezer_lights"
+		AddOverlays(emissive_appearance(icon, "freezer_lights"))
+		AddOverlays("freezer_lights")
 		if(node)
 			if(use_power && heating)
-				overlays += emissive_appearance(icon, "[icon_state]_lights_working")
-				overlays += "[icon_state]_lights_working"
+				AddOverlays(emissive_appearance(icon, "[icon_state]_lights_working"))
+				AddOverlays("[icon_state]_lights_working")
 			else
-				overlays += emissive_appearance(icon, "freezer_lights_standby")
-				overlays += "freezer_lights_standby"
+				AddOverlays(emissive_appearance(icon, "freezer_lights_standby"))
+				AddOverlays("freezer_lights_standby")
 
 
 /obj/machinery/atmospherics/unary/heater/Process()

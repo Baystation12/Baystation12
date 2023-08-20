@@ -10,7 +10,7 @@
 	if(icon_state != "ghost-narsie")
 		icon = 'icons/mob/mob.dmi'
 		icon_state = "ghost-narsie"
-		overlays.Cut()
+		ClearOverlays()
 		set_invisibility(0)
 		to_chat(src, SPAN_CLASS("sinister", "Even as a non-corporal being, you can feel Nar-Sie's presence altering you. You are now visible to everyone."))
 
@@ -24,7 +24,7 @@
 		var/mob/observer/ghost/G = (ghostize())
 		G.icon = 'icons/mob/mob.dmi'
 		G.icon_state = "ghost-narsie"
-		G.overlays.Cut()
+		G.ClearOverlays()
 		G.set_invisibility(0)
 		to_chat(G, SPAN_CLASS("sinister", "You feel relieved as what's left of your soul finally escapes its prison of flesh."))
 	else

@@ -198,15 +198,15 @@ The megabot
 			icon_living = "megabot_standby"
 			return
 
-		overlays.Cut()
-		overlays += image(icon, "active_indicator")
+		ClearOverlays()
+		AddOverlays(image(icon, "active_indicator"))
 		switch(attack_mode)
 			if(ATTACK_MODE_MELEE)
-				overlays += image(icon, "melee")
+				AddOverlays(image(icon, "melee"))
 			if(ATTACK_MODE_LASER)
-				overlays += image(icon, "laser")
+				AddOverlays(image(icon, "laser"))
 			if(ATTACK_MODE_ROCKET)
-				overlays += image(icon, "rocket")
+				AddOverlays(image(icon, "rocket"))
 
 /mob/living/simple_animal/hostile/hivebot/mega/proc/switch_mode(new_mode)
 	if(!new_mode || new_mode == attack_mode)

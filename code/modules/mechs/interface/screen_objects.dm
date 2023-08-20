@@ -63,7 +63,7 @@
 
 	var/list/new_overlays = list()
 	if(!owner.get_cell() || (owner.get_cell().charge <= 0))
-		overlays.Cut()
+		ClearOverlays()
 		maptext = ""
 		return
 
@@ -73,7 +73,7 @@
 
 	var/value = holding.get_hardpoint_status_value()
 	if(isnull(value))
-		overlays.Cut()
+		ClearOverlays()
 		return
 
 	if(ui_damage)
@@ -121,7 +121,7 @@
 				GLOB.hardpoint_bar_cache += bar
 		for(var/i=1;i<=value;i++)
 			new_overlays += GLOB.hardpoint_bar_cache[i]
-	overlays = new_overlays
+	SetOverlays(new_overlays)
 
 /obj/screen/exosuit/hardpoint/Initialize(mapload, newtag)
 	. = ..()

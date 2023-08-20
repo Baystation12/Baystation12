@@ -152,8 +152,10 @@
 			//update the sample bag
 			filled_bag.icon_state = "evidence"
 			var/image/I = image("icon"=R, "layer"=FLOAT_LAYER)
-			filled_bag.overlays += I
-			filled_bag.overlays += "evidence"
+			filled_bag.AddOverlays(list(
+				I,
+				"evidence"
+			))
 			filled_bag.w_class = ITEM_SIZE_TINY
 			filled_bag.stored_item = R
 

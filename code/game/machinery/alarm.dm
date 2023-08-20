@@ -332,7 +332,7 @@
 	return 0
 
 /obj/machinery/alarm/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	icon_state = "alarmp"
 	if(wiresexposed)
 		icon_state = "alarmx"
@@ -355,7 +355,7 @@
 			new_color = COLOR_SUN
 		if (2)
 			new_color = COLOR_RED_LIGHT
-	overlays  += overlay_image(icon, "alarm[icon_level]", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
+	AddOverlays(overlay_image(icon, "alarm[icon_level]", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
 
 	pixel_x = 0
 	pixel_y = 0
@@ -933,7 +933,7 @@ FIRE ALARM
 	return overlays_cache[state]
 
 /obj/machinery/firealarm/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 
 	pixel_x = 0
 	pixel_y = 0
@@ -951,28 +951,28 @@ FIRE ALARM
 
 	icon_state = "casing"
 	if(wiresexposed)
-		overlays += get_cached_overlay("b[buildstage]")
+		AddOverlays(get_cached_overlay("b[buildstage]"))
 		set_light(0)
 		return
 
 	if(MACHINE_IS_BROKEN(src))
-		overlays += get_cached_overlay("broken")
+		AddOverlays(get_cached_overlay("broken"))
 		set_light(0)
 	else if(!is_powered())
-		overlays += get_cached_overlay("unpowered")
+		AddOverlays(get_cached_overlay("unpowered"))
 		set_light(0)
 	else
 		if(!detecting)
-			overlays += get_cached_overlay("fire1")
+			AddOverlays(get_cached_overlay("fire1"))
 			set_light(0.25, 0.1, 1, 2, COLOR_RED)
 		else if(z in GLOB.using_map.contact_levels)
 			var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 			var/singleton/security_level/sl = security_state.current_security_level
 
 			set_light(sl.light_max_bright, sl.light_inner_range, sl.light_outer_range, 2, sl.light_color_alarm)
-			overlays += image(sl.icon, sl.overlay_alarm)
+			AddOverlays(image(sl.icon, sl.overlay_alarm))
 		else
-			overlays += get_cached_overlay("fire0")
+			AddOverlays(get_cached_overlay("fire0"))
 
 /obj/machinery/firealarm/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(src.detecting)

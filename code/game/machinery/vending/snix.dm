@@ -36,4 +36,4 @@
 /obj/machinery/vending/snix/on_update_icon()
 	..()
 	if (is_powered())
-		overlays += image(icon, "[initial(icon_state)]-fan")
+		AddOverlays(image(icon, "[initial(icon_state)]-fan"))

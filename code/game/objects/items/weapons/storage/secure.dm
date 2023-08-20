@@ -84,15 +84,15 @@
 				l_set = 1
 			else if ((code == l_code) && (!emagged) && (l_set == 1))
 				locked = 0
-				overlays.Cut()
-				overlays += image(icon, icon_opened)
+				ClearOverlays()
+				AddOverlays(image(icon, icon_opened))
 				code = null
 			else
 				code = "ERROR"
 		else
 			if ((href_list["type"] == "R") && (!emagged) && (!l_setshort))
 				locked = 1
-				overlays.Cut()
+				ClearOverlays()
 				code = null
 				close(usr)
 			else
@@ -115,10 +115,10 @@
 	if (emagged)
 		return
 	emagged = TRUE
-	src.overlays += image(icon, icon_sparking)
+	AddOverlays(icon_sparking)
 	sleep(6)
-	overlays.Cut()
-	overlays += image(icon, icon_locking)
+	ClearOverlays()
+	AddOverlays(icon_locking)
 	locked = 0
 	to_chat(user, (feedback ? feedback : "You short out the lock of \the [src]."))
 	return TRUE

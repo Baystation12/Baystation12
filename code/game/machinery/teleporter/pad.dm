@@ -74,13 +74,13 @@
 
 
 /obj/machinery/tele_pad/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (computer?.active)
 		update_use_power(POWER_USE_ACTIVE)
 		var/image/I = image(icon, src, "[initial(icon_state)]_active_overlay")
 		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		I.layer = ABOVE_LIGHTING_LAYER
-		overlays += I
+		AddOverlays(I)
 		set_light(0.4, 1.2, 4, 10)
 
 		if (interference && prob(20))
@@ -93,4 +93,4 @@
 			var/image/I = image(icon, src, "[initial(icon_state)]_idle_overlay")
 			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 			I.layer = ABOVE_LIGHTING_LAYER
-			overlays += I
+			AddOverlays(I)

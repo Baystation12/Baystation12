@@ -15,7 +15,7 @@
 	if(!AI) return
 
 	var/image/I = image(appear.icon, appear.icon_state)
-	I.overlays = appear.overlays
+	I.CopyOverlays(appear)
 	I.underlays = appear.underlays
 	I.color = list(
 			0.30, 0.30, 0.30, 0.0, // Greyscale and reduce the alpha of the icon
@@ -37,7 +37,7 @@
 	// Combine the mob image and the scanlines into a single KEEP_TOGETHER'd image
 	var/image/I2 = image(null)
 	I2.underlays += I
-	I2.overlays += scan
+	I2.AddOverlays(scan)
 	I2.appearance_flags = DEFAULT_APPEARANCE_FLAGS | KEEP_TOGETHER
 	I2.color = rgb(125, 180, 225) // make it blue!
 	AI.holo_icon = I2

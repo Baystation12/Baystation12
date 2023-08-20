@@ -32,7 +32,7 @@
 		for(var/obj/item/I in T)
 			if(!length(suspension_field.contents))
 				suspension_field.icon_state = "energynet"
-				suspension_field.overlays += "shield2"
+				suspension_field.AddOverlays("shield2")
 			I.forceMove(suspension_field)
 
 /obj/machinery/suspension_gen/interact(mob/user)
@@ -130,7 +130,7 @@
 
 	if(collected)
 		suspension_field.icon_state = "energynet"
-		suspension_field.overlays += "shield2"
+		suspension_field.AddOverlays("shield2")
 		src.visible_message(SPAN_NOTICE("[icon2html(suspension_field, viewers(get_turf(src)))] [suspension_field] gently absconds [collected > 1 ? "something" : "several things"]."))
 	else
 		if(istype(T,/turf/simulated/mineral) || istype(T,/turf/simulated/wall))
@@ -181,9 +181,9 @@
 		set_dir(turn(dir, -90))
 
 /obj/machinery/suspension_gen/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
-		overlays += "suspension_panel"
+		AddOverlays("suspension_panel")
 	. = ..()
 
 /obj/effect/suspension_field

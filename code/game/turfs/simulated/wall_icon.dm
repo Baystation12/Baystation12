@@ -46,45 +46,45 @@
 	if(!damage_overlays[1]) //list hasn't been populated; note that it is always of fixed length, so we must check for membership.
 		generate_overlays()
 
-	overlays.Cut()
+	ClearOverlays()
 
 	var/image/I
 	var/base_color = paint_color ? paint_color : material.icon_colour
 	if(!density)
 		I = image('icons/turf/wall_masks.dmi', "[material.wall_icon_base]fwall_open")
 		I.color = base_color
-		overlays += I
+		AddOverlays(I)
 		return
 
 	for(var/i = 1 to 4)
 		I = image('icons/turf/wall_masks.dmi', "[material.wall_icon_base][wall_connections[i]]", dir = SHIFTL(1, i - 1))
 		I.color = base_color
-		overlays += I
+		AddOverlays(I)
 		if(other_connections[i] != "0")
 			I = image('icons/turf/wall_masks.dmi', "[material.wall_icon_base]_other[wall_connections[i]]", dir = SHIFTL(1, i - 1))
 			I.color = base_color
-			overlays += I
+			AddOverlays(I)
 
 	if(reinf_material)
 		var/reinf_color = paint_color ? paint_color : reinf_material.icon_colour
 		if(construction_stage != null && construction_stage < 6)
 			I = image('icons/turf/wall_masks.dmi', "reinf_construct-[construction_stage]")
 			I.color = reinf_color
-			overlays += I
+			AddOverlays(I)
 		else
 			if("[material.wall_icon_reinf]0" in icon_states('icons/turf/wall_masks.dmi'))
 				// Directional icon
 				for(var/i = 1 to 4)
 					I = image('icons/turf/wall_masks.dmi', "[material.wall_icon_reinf][wall_connections[i]]", dir = SHIFTL(1, i - 1))
 					I.color = reinf_color
-					overlays += I
+					AddOverlays(I)
 			else
 				I = image('icons/turf/wall_masks.dmi', material.wall_icon_reinf)
 				I.color = reinf_color
-				overlays += I
+				AddOverlays(I)
 	var/image/texture = material.get_wall_texture()
 	if(texture)
-		overlays += texture
+		AddOverlays(texture)
 	if(stripe_color)
 		for(var/i = 1 to 4)
 			if(other_connections[i] != "0")
@@ -92,13 +92,13 @@
 			else
 				I = image('icons/turf/wall_masks.dmi', "stripe[wall_connections[i]]", dir = SHIFTL(1, i - 1))
 			I.color = stripe_color
-			overlays += I
+			AddOverlays(I)
 
 	if(get_damage_value() != 0)
 		var/overlay = round((get_damage_percentage() / 100) * length(damage_overlays)) + 1
 		overlay = clamp(overlay, 1, length(damage_overlays))
 
-		overlays += damage_overlays[overlay]
+		AddOverlays(damage_overlays[overlay])
 	return
 
 /turf/simulated/wall/proc/generate_overlays()

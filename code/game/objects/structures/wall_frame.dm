@@ -136,7 +136,7 @@
 // icon related
 
 /obj/structure/wall_frame/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	var/image/I
 
 	var/new_color = (paint_color ? paint_color : material.icon_colour)
@@ -147,7 +147,7 @@
 			I = image('icons/obj/structures/wall_frame.dmi', "frame_other[connections[i]]", dir = SHIFTL(1, i - 1))
 		else
 			I = image('icons/obj/structures/wall_frame.dmi', "frame[connections[i]]", dir = SHIFTL(1, i - 1))
-		overlays += I
+		AddOverlays(I)
 
 	if(stripe_color)
 		for(var/i = 1 to 4)
@@ -156,7 +156,7 @@
 			else
 				I = image('icons/obj/structures/wall_frame.dmi', "stripe[connections[i]]", dir = SHIFTL(1, i - 1))
 			I.color = stripe_color
-			overlays += I
+			AddOverlays(I)
 
 /obj/structure/wall_frame/hull/Initialize()
 	. = ..()

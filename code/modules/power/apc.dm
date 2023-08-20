@@ -327,19 +327,19 @@
 
 	if(!(update_state & UPDATE_ALLGOOD))
 		if(length(overlays))
-			overlays.Cut()
+			ClearOverlays()
 			return
 
 	if(update & 2)
 		if(length(overlays))
-			overlays.Cut()
+			ClearOverlays()
 		if(!MACHINE_IS_BROKEN(src) && !GET_FLAGS(stat, MACHINE_STAT_MAINT) && update_state & UPDATE_ALLGOOD)
-			overlays += status_overlays_lock[locked+1]
-			overlays += status_overlays_charging[charging+1]
+			AddOverlays(status_overlays_lock[locked+1])
+			AddOverlays(status_overlays_charging[charging+1])
 			if(operating)
-				overlays += status_overlays_equipment[equipment+1]
-				overlays += status_overlays_lighting[lighting+1]
-				overlays += status_overlays_environ[environ+1]
+				AddOverlays(status_overlays_equipment[equipment+1])
+				AddOverlays(status_overlays_lighting[lighting+1])
+				AddOverlays(status_overlays_environ[environ+1])
 
 	if(update & 3)
 		if(update_state & (UPDATE_OPENED1|UPDATE_OPENED2|UPDATE_BROKE))

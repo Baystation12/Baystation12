@@ -160,12 +160,12 @@
 		to_chat(M,SPAN_NOTICE("Its battery compartment is open."))
 
 /obj/item/inducer/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(opened)
 		if(!get_cell())
-			overlays += image(icon, "inducer-nobat")
+			AddOverlays(image(icon, "inducer-nobat"))
 		else
-			overlays += image(icon,"inducer-bat")
+			AddOverlays(image(icon,"inducer-bat"))
 
 /obj/item/inducer/Destroy()
 	. = ..()
@@ -187,7 +187,7 @@
 
 /obj/item/inducer/borg/on_update_icon()
 	. = ..()
-	overlays += image("icons/obj/guns/gui.dmi","safety[safety()]")
+	AddOverlays(image("icons/obj/guns/gui.dmi","safety[safety()]"))
 
 /obj/item/inducer/borg/verb/toggle_safety(mob/user)
 	set src in usr

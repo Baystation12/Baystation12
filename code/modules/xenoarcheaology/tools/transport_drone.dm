@@ -117,18 +117,20 @@
 
 /obj/machinery/drone_pad/on_update_icon()
 	. = ..()
-	overlays.Cut()
+	ClearOverlays()
 	if (current_flight)
-		overlays += emissive_appearance(icon, "pad_incoming") //we cut the hole, and...
-		overlays += image(icon, "pad_incoming") // add the actual image
+		AddOverlays(list(
+			emissive_appearance(icon, "pad_incoming"),
+			image(icon, "pad_incoming")
+		))
 	else
 		var/datum/extension/local_network_member/transport = get_extension(src, /datum/extension/local_network_member)
 		var/network = transport ? transport.id_tag : null
 		if (network && operable())
-			overlays += emissive_appearance(icon, "pad_waiting")
-			overlays += image(icon, "pad_waiting")
+			AddOverlays(emissive_appearance(icon, "pad_waiting"))
+			AddOverlays(image(icon, "pad_waiting"))
 	if(panel_open)
-		overlays += image(icon, "pad_maintenance")
+		AddOverlays(image(icon, "pad_maintenance"))
 
 /obj/machinery/drone_pad/examine(mob/user, distance)
 	. = ..()

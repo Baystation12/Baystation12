@@ -171,10 +171,9 @@
 	c.ico = copy.ico
 	c.offset_x = copy.offset_x
 	c.offset_y = copy.offset_y
-	var/list/temp_overlays = copy.overlays       //Iterates through stamps
 	var/image/img                                //and puts a matching
 
-	for (var/j = 1 to min(length(temp_overlays), length(copy.ico))) //gray overlay onto the copy
+	for (var/j = 1 to min(length(copy.overlays), length(copy.ico))) //gray overlay onto the copy
 		if (findtext(copy.ico[j], "cap") || findtext(copy.ico[j], "cent"))
 			img = image('icons/obj/bureaucracy.dmi', "paper_stamp-circle")
 		else if (findtext(copy.ico[j], "deny"))
@@ -183,7 +182,7 @@
 			img = image('icons/obj/bureaucracy.dmi', "paper_stamp-dots")
 		img.pixel_x = copy.offset_x[j]
 		img.pixel_y = copy.offset_y[j]
-		c.overlays += img
+		c.AddOverlays(img)
 	c.updateinfolinks()
 	if(need_toner)
 		toner--

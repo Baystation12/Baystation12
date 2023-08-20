@@ -131,9 +131,9 @@
 /obj/machinery/atmospherics/pipe/cap/sparker/on_update_icon()
 	..()
 	if (signaler)
-		overlays += image('icons/atmos/pipe-sparker.dmi', "pipe-sparker-s")
+		AddOverlays(image('icons/atmos/pipe-sparker.dmi', "pipe-sparker-s"))
 	if (disabled)
-		overlays += image('icons/atmos/pipe-sparker.dmi', "pipe-sparker-d")
+		AddOverlays(image('icons/atmos/pipe-sparker.dmi', "pipe-sparker-d"))
 	update_underlays()
 
 /obj/machinery/atmospherics/pipe/cap/sparker/update_underlays()
