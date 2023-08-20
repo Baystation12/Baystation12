@@ -256,7 +256,6 @@
 
 	// Final layout
 	var/final_body = {"
-		<h1>Associated Bans</h1>
 		<h2>Queried Details</h2>
 		<table class="data">
 			<thead>
@@ -285,8 +284,9 @@
 		<p><small>Entries matching the current query are <span class='highlight'>highlighted</span>.</small></p>
 		[all_bans_table]
 	"}
-	send_rsc(user, 'html/browser/common.css', "common.css")
-	show_browser(user, html_page("Associated Bans ([target_ckey ? target_ckey : "NO CKEY"])", final_body), "window=associatedbans;size=700x480;")
+	var/datum/browser/popup = new(user, "associatedbans", "Associated Bans ([target_ckey ? target_ckey : "NO CKEY"])", 700, 480)
+	popup.set_content(final_body)
+	popup.open()
 
 
 /**
