@@ -202,6 +202,8 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 			if(length(dept_list) > 0)
 				positions[dept] = list()
 				for(var/list/person in dept_list)
+					if (person["status"] == "Stored")
+						continue
 					positions[dept][person["name"]] = person["rank"]
 
 		for(var/k in positions)
