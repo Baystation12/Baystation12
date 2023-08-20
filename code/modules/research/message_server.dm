@@ -127,17 +127,21 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 		..(O, user)
 
 /obj/machinery/message_server/on_update_icon()
-	overlays.Cut()
-	if(panel_open)
-		overlays += "[icon_state]_panel"
-	if(active)
-		overlays += "[icon_state]_on"
-		overlays += emissive_appearance(icon, "[icon_state]_lights_off")
-		overlays += "[icon_state]_lights_on"
+	ClearOverlays()
+	if (panel_open)
+		AddOverlays("[icon_state]_panel")
+	if (active)
+		AddOverlays(list(
+			"[icon_state]_on",
+			emissive_appearance(icon, "[icon_state]_lights_off"),
+			"[icon_state]_lights_on"
+		))
 	else
-		overlays += emissive_appearance(icon, "[icon_state]_lights_off")
-		overlays += "[icon_state]_lights_off"
-	return
+		AddOverlays(list(
+			emissive_appearance(icon, "[icon_state]_lights_off"),
+			"[icon_state]_lights_off"
+		))
+
 
 /obj/machinery/message_server/proc/send_to_department(department, message, tone)
 	var/reached = 0

@@ -292,14 +292,14 @@ SUBSYSTEM_DEF(overlays)
 /// Removes all of the image's overlays.
 /image/proc/ClearOverlays()
 	SHOULD_NOT_OVERRIDE(TRUE)
-	overlays.Cut()
+	LIST_RESIZE(overlays, 0)
 
 
 /// Copies the overlays from the atom other, clearing first if set, and using the caches indicated.
 /image/proc/CopyOverlays(atom/other, clear, cache_target = ATOM_ICON_CACHE_ALL)
 	SHOULD_NOT_OVERRIDE(TRUE)
 	if (clear)
-		overlays.Cut()
+		LIST_RESIZE(overlays, 0)
 	if (!istype(other))
 		return
 	if (cache_target & ATOM_ICON_CACHE_PROTECTED)
