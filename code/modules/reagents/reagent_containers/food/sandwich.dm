@@ -65,7 +65,7 @@
 
 /obj/item/reagent_containers/food/snacks/csandwich/proc/update()
 	var/i = 0
-	overlays.Cut()
+	ClearOverlays()
 
 	filling_color = null
 	var/list/ingredient_names = list()
@@ -79,12 +79,12 @@
 		I.color = O.filling_color
 		I.pixel_x = pick(list(-1,0,1))
 		I.pixel_y = (i*2)+1
-		overlays += I
+		AddOverlays(I)
 
 	var/image/T = new(src.icon, "sandwich_top")
 	T.pixel_x = pick(list(-1,0,1))
 	T.pixel_y = (length(ingredients) * 2)+1
-	overlays += T
+	AddOverlays(T)
 
 	fullname = english_list(ingredient_names)
 	SetName(lowertext("[fullname] sandwich"))

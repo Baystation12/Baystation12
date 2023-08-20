@@ -41,7 +41,7 @@
 	..(severity)
 
 /obj/machinery/portable_atmospherics/powered/scrubber/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 
 	if((use_power == POWER_USE_ACTIVE) && operable())
 		icon_state = "pscrubber:1"
@@ -49,10 +49,10 @@
 		icon_state = "pscrubber:0"
 
 	if(holding)
-		overlays += "scrubber-open"
+		AddOverlays("scrubber-open")
 
 	if(connected_port)
-		overlays += "scrubber-connector"
+		AddOverlays("scrubber-connector")
 
 /obj/machinery/portable_atmospherics/powered/scrubber/Process()
 	..()
@@ -183,7 +183,7 @@
 	return TRUE
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 
 	if((use_power == POWER_USE_ACTIVE) && operable())
 		icon_state = "scrubber:1"

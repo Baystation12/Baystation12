@@ -185,7 +185,7 @@
 			usr.visible_message(SPAN_NOTICE("\The [usr] detaches \the [rig] from \the [src]."), SPAN_NOTICE("You detach [rig] from \the [src]"))
 			rig.dropInto(usr.loc)
 			rig = null
-			overlays.Cut()
+			ClearOverlays()
 
 
 /obj/structure/reagent_dispensers/fueltank/use_weapon(obj/item/weapon, mob/user, list/click_params)
@@ -261,12 +261,12 @@
 
 
 /obj/structure/reagent_dispensers/fueltank/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (rig)
 		var/icon/rig_overlay = getFlatIcon(rig)
 		rig_overlay.Shift(NORTH, 1)
 		rig_overlay.Shift(EAST, 6)
-		overlays += rig_overlay
+		AddOverlays(rig_overlay)
 
 
 /obj/structure/reagent_dispensers/fueltank/bullet_act(obj/item/projectile/Proj)

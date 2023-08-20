@@ -114,19 +114,19 @@
 	return ..()
 
 /obj/machinery/reagent_temperature/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 
 	var/list/adding_overlays
 
 	if(use_power >= POWER_USE_ACTIVE)
 		if(!on_icon)
 			on_icon = image(icon, "[icon_state]_lights")
-			overlays += emissive_appearance(icon, "[icon_state]_lights")
+			AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
 		LAZYADD(adding_overlays, on_icon)
 		if(temperature > MINIMUM_GLOW_TEMPERATURE) // 50C
 			if(!glow_icon)
 				glow_icon += emissive_appearance(icon, "[icon_state]_lights_[heating ? "cold" : "hot"]")
-				overlays += emissive_appearance(icon, "[icon_state]_lights_cold")
+				AddOverlays(emissive_appearance(icon, "[icon_state]_lights_cold"))
 			glow_icon.alpha = clamp(temperature - MINIMUM_GLOW_TEMPERATURE, MINIMUM_GLOW_VALUE, MAXIMUM_GLOW_VALUE)
 			LAZYADD(adding_overlays, glow_icon)
 			set_light(0.2, 0.1, 1, l_color = COLOR_GREEN)
@@ -136,14 +136,14 @@
 		set_light(0)
 
 	if(panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 
 	if(container)
 		if(!beaker_icon)
 			beaker_icon = image(icon, "[icon_state]_beaker")
 		LAZYADD(adding_overlays, beaker_icon)
 
-	overlays = adding_overlays
+	SetOverlays(adding_overlays)
 
 /obj/machinery/reagent_temperature/interact(mob/user)
 

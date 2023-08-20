@@ -283,7 +283,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 
 
 /obj/machinery/stasis_cage/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (health_dead())
 		icon_state = "[initial(icon_state)]_dead"
 	else if (is_powered())
@@ -304,7 +304,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 			icon_state = initial(icon_state)
 
 	if (panel_open)
-		overlays += "[initial(icon_state)]_panel"
+		AddOverlays("[initial(icon_state)]_panel")
 
 
 /obj/machinery/stasis_cage/on_death()

@@ -257,7 +257,7 @@
 		var/image/I = image(result.icon, result, "[result.icon_state]_filling")
 		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 		I.color = result.filling_color
-		result.overlays += I
+		result.AddOverlays(I)
 
 
 /obj/machinery/cooker/candy
@@ -494,12 +494,12 @@
 	if (cook_mode == "Make Cereal")
 		var/image/I = image(source.icon, source.icon_state)
 		I.color = source.color
-		I.overlays += source.overlays
+		I.CopyOverlays(source)
 		I.SetTransform(scale = 0.5)
 		result.icon = 'icons/obj/food/food.dmi'
 		result.icon_state = "cereal_box"
 		result.color = null
-		result.overlays += I
+		result.AddOverlays(I)
 		result.filling_color = BlendRGB(source.color || source.filling_color , "#fcaf32") //for cereal contents
 
 
@@ -720,7 +720,7 @@
 		result.icon = source.icon
 		result.icon_state = source.icon_state
 		result.color = source.color
-		result.overlays += source.overlays
+		result.CopyOverlays(source)
 		result.name = source.name
 		result.desc = source.desc
 		qdel(source)
@@ -781,9 +781,9 @@
 	I.pixel_x = rand(-8, 8)
 	I.pixel_y = rand(-8, 8)
 	I.color = other.color
-	I.overlays += other.overlays
+	I.CopyOverlays(other)
 	I.SetTransform(scale = 0.8)
-	overlays += I
+	AddOverlays(I)
 	qdel(other)
 	return TRUE
 

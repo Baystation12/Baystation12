@@ -81,14 +81,14 @@
 	. = ..()
 
 /obj/item/device/paint_sprayer/on_update_icon()
-	overlays.Cut()
-	overlays += overlay_image(icon, "paint_sprayer_color", paint_color)
+	ClearOverlays()
+	AddOverlays(overlay_image(icon, "paint_sprayer_color", paint_color))
 	update_held_icon()
 
 /obj/item/device/paint_sprayer/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
 	var/image/overlay = overlay_image(ret.icon, "paint_sprayer_color", paint_color)
-	ret.overlays += overlay
+	ret.AddOverlays(overlay)
 	return ret
 
 /obj/item/device/paint_sprayer/on_active_hand(mob/user)

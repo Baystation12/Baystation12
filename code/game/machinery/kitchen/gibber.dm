@@ -34,17 +34,17 @@
 	. = ..()
 
 /obj/machinery/gibber/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (dirty)
-		src.overlays += image('icons/obj/machines/kitchen.dmi', "grbloody")
+		AddOverlays(image('icons/obj/machines/kitchen.dmi', "grbloody"))
 	if(inoperable())
 		return
 	if (!occupant)
-		src.overlays += image('icons/obj/machines/kitchen.dmi', "grjam")
+		AddOverlays(image('icons/obj/machines/kitchen.dmi', "grjam"))
 	else if (operating)
-		src.overlays += image('icons/obj/machines/kitchen.dmi', "gruse")
+		AddOverlays(image('icons/obj/machines/kitchen.dmi', "gruse"))
 	else
-		src.overlays += image('icons/obj/machines/kitchen.dmi', "gridle")
+		AddOverlays(image('icons/obj/machines/kitchen.dmi', "gridle"))
 
 /obj/machinery/gibber/relaymove(mob/user as mob)
 	src.go_out()

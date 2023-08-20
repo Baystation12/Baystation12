@@ -123,7 +123,7 @@
 
 	if (path_display)
 		var/turf/T = src.path[1]
-		T.overlays -= path_overlay
+		T.CutOverlays(path_overlay)
 
 	if (holder.IMove(get_step_towards(holder, src.path[1])) != MOVEMENT_ON_COOLDOWN)
 		if (holder.loc != src.path[1])

@@ -96,7 +96,7 @@
 			return k
 
 /obj/item/reagent_containers/food/drinks/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(length(reagents.reagent_list) > 0)
 		if(base_name)
 			var/datum/reagent/R = reagents.get_master_reagent()
@@ -105,7 +105,7 @@
 		if(filling_states)
 			var/image/filling = image(icon, src, "[base_icon][get_filling_state()]")
 			filling.color = reagents.get_color()
-			overlays += filling
+			AddOverlays(filling)
 	else
 		SetName(initial(name))
 		desc = initial(desc)

@@ -43,11 +43,11 @@
 /obj/item/material/clipboard/on_update_icon()
 	..()
 	if(toppaper)
-		overlays += overlay_image(toppaper.icon, toppaper.icon_state, flags=RESET_COLOR)
-		overlays += toppaper.overlays
+		AddOverlays(overlay_image(toppaper.icon, toppaper.icon_state, flags=RESET_COLOR))
+		CopyOverlays(toppaper)
 	if(haspen)
-		overlays += overlay_image(icon, "clipboard_pen", flags=RESET_COLOR)
-	overlays += overlay_image(icon, "clipboard_over", flags=RESET_COLOR)
+		AddOverlays(overlay_image(icon, "clipboard_pen", flags=RESET_COLOR))
+	AddOverlays(overlay_image(icon, "clipboard_over", flags=RESET_COLOR))
 	return
 
 /obj/item/material/clipboard/attackby(obj/item/W as obj, mob/user as mob)

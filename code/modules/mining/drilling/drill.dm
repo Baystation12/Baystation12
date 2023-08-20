@@ -183,19 +183,19 @@
 	return TRUE
 
 /obj/machinery/mining/drill/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
-		overlays += "mining_drill_panel"
+		AddOverlays("mining_drill_panel")
 	if(need_player_check)
-		overlays += emissive_appearance(icon, "mining_drill_lights_error")
-		overlays += "mining_drill_lights_error"
+		AddOverlays(emissive_appearance(icon, "mining_drill_lights_error"))
+		AddOverlays("mining_drill_lights_error")
 		icon_state = "mining_drill_braced"
 	else if(active)
 		icon_state = "mining_drill_braced"
-		overlays += "mining_drill_active"
+		AddOverlays("mining_drill_active")
 		var/status = clamp(round( (length(contents) / capacity) * 4 ), 0, 3)
-		overlays += emissive_appearance(icon, "mining_drill_lights_[status]")
-		overlays += "mining_drill_lights_[status]"
+		AddOverlays(emissive_appearance(icon, "mining_drill_lights_[status]"))
+		AddOverlays("mining_drill_lights_[status]")
 	else if(supported)
 		icon_state = "mining_drill_braced"
 	else

@@ -54,7 +54,7 @@
 
 	if(connections) connections.erase_all()
 
-	overlays.Cut()
+	ClearOverlays()
 	underlays.Cut()
 	if(istype(src,/turf/simulated))
 		//Yeah, we're just going to rebuild the whole thing.
@@ -136,7 +136,7 @@
 	src.set_dir(other.dir)
 	src.icon_state = other.icon_state
 	src.icon = other.icon
-	src.overlays = other.overlays.Copy()
+	CopyOverlays(other)
 	src.underlays = other.underlays.Copy()
 	if(other.decals)
 		src.decals = other.decals.Copy()

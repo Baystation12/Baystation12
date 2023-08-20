@@ -165,7 +165,7 @@ var/global/list/radial_menus = list()
 			SetElement(E,page_choices[i],angle,anim = anim,anim_order = i)
 
 /datum/radial_menu/proc/HideElement(obj/screen/radial/slice/E)
-	E.overlays.Cut()
+	E.ClearOverlays()
 	E.alpha = 0
 	E.name = "None"
 	E.maptext = null
@@ -191,11 +191,11 @@ var/global/list/radial_menus = list()
 	//Visuals
 	E.alpha = 255
 	E.mouse_opacity = 1
-	E.overlays.Cut()
+	E.ClearOverlays()
 	if(choice_id == NEXT_PAGE_ID)
 		E.name = "Next Page"
 		E.next_page = TRUE
-		E.overlays.Add("radial_next")
+		E.AddOverlays("radial_next")
 	else
 		if(istext(choices_values[choice_id]))
 			E.name = choices_values[choice_id]
@@ -206,7 +206,7 @@ var/global/list/radial_menus = list()
 		E.maptext = null
 		E.next_page = FALSE
 		if(choices_icons[choice_id])
-			E.overlays.Add(choices_icons[choice_id])
+			E.AddOverlays(choices_icons[choice_id])
 
 /datum/radial_menu/New()
 	close_button = new

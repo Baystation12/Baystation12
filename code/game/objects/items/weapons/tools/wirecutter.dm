@@ -26,7 +26,7 @@
 	if(build_from_parts)
 		icon_state = "cutters_handle"
 		color = pick(valid_colours)
-		overlays += overlay_image(icon, "[hardware_icon]", flags=RESET_COLOR)
+		AddOverlays(overlay_image(icon, "[hardware_icon]", flags=RESET_COLOR))
 	. = ..()
 
 /obj/item/wirecutters/attack(mob/living/carbon/C as mob, mob/user as mob)

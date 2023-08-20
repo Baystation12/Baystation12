@@ -75,7 +75,7 @@
 
 /mob/living/exosuit/handle_hud_icons_health()
 
-	hud_health.overlays.Cut()
+	hud_health.ClearOverlays()
 
 	if(!body || !get_cell() || (get_cell().charge <= 0))
 		return
@@ -83,7 +83,7 @@
 	if(!body.diagnostics || !body.diagnostics.is_functional() || ((emp_damage>EMP_GUI_DISRUPT) && prob(emp_damage*2)))
 		if(!GLOB.mech_damage_overlay_cache["critfail"])
 			GLOB.mech_damage_overlay_cache["critfail"] = image(icon='icons/mecha/mech_hud.dmi',icon_state="dam_error")
-		hud_health.overlays |= GLOB.mech_damage_overlay_cache["critfail"]
+		hud_health.AddOverlays(GLOB.mech_damage_overlay_cache["critfail"])
 		return
 
 	var/list/part_to_state = list("legs" = legs,"body" = body,"head" = head,"arms" = arms)
@@ -109,7 +109,7 @@
 				else
 					I.color = "#f5f5f0"
 			GLOB.mech_damage_overlay_cache["[part]-[state]"] = I
-		hud_health.overlays |= GLOB.mech_damage_overlay_cache["[part]-[state]"]
+		hud_health.AddOverlays(GLOB.mech_damage_overlay_cache["[part]-[state]"])
 
 /mob/living/exosuit/proc/reset_hardpoint_color()
 	for(var/hardpoint in hardpoint_hud_elements)

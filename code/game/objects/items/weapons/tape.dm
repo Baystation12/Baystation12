@@ -110,7 +110,7 @@
 	W.forceMove(src)
 	icon_state = W.icon_state + "_taped"
 	name = W.name + " (taped)"
-	overlays = W.overlays
+	CopyOverlays(W)
 
 /obj/item/ducttape/attack_self(mob/user)
 	if(!stuck)

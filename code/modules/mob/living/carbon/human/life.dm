@@ -737,7 +737,7 @@
 			clear_fullscreen("brute")
 
 		if(healths)
-			healths.overlays.Cut()
+			healths.ClearOverlays()
 			if (chem_effects[CE_PAINKILLER] > 100)
 				healths.icon_state = "health_numb"
 			else
@@ -781,7 +781,7 @@
 				else if(no_damage)
 					health_images += image('icons/mob/screen1_health.dmi',"fullhealth")
 
-				healths.overlays += health_images
+				healths.AddOverlays(health_images)
 
 		if(nutrition_icon)
 			switch(nutrition)

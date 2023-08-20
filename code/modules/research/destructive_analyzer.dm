@@ -29,14 +29,14 @@ Note: Must be placed within 3 tiles of the R&D Console
 	..()
 
 /obj/machinery/r_n_d/destructive_analyzer/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
-		overlays += "d_analyzer_panel"
+		AddOverlays("d_analyzer_panel")
 	if(is_powered())
 		if(loaded_item)
-			overlays += emissive_appearance(icon, "d_analyzer_lights_item")
+			AddOverlays(emissive_appearance(icon, "d_analyzer_lights_item"))
 		else
-			overlays += emissive_appearance(icon, "[icon_state]_lights")
+			AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
 
 /obj/machinery/r_n_d/destructive_analyzer/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()

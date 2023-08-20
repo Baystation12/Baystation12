@@ -220,7 +220,7 @@
 		for(var/i = 0 to length(loaded) - 4)
 			var/image/I = image(icon, "shell")
 			I.pixel_x = i * 2
-			overlays += I
+			AddOverlays(I)
 
 /obj/item/gun/projectile/shotgun/pump/combat/empty
 	starts_loaded = FALSE
@@ -376,13 +376,13 @@
 		wielded_item_state = initial(wielded_item_state)
 
 		if(LAZYLEN(ammo_magazine.stored_ammo) == ammo_magazine.max_ammo)
-			overlays += image(icon, "ammo100")
+			AddOverlays(image(icon, "ammo100"))
 		else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.75 * ammo_magazine.max_ammo)
-			overlays += image(icon, "ammo75")
+			AddOverlays(image(icon, "ammo75"))
 		else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
-			overlays += image(icon, "ammo50")
+			AddOverlays(image(icon, "ammo50"))
 		else
-			overlays += image(icon, "ammo25")
+			AddOverlays(image(icon, "ammo25"))
 
 	else
 		icon_state = "[initial(icon_state)]-empty"

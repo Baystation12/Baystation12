@@ -33,9 +33,9 @@
 
 	if(lit != last_lit)
 		last_lit = lit
-		overlays.Cut()
+		ClearOverlays()
 		if(lit)
-			overlays += overlay_image(icon, "[icon_state]_lit", flags=RESET_COLOR)
+			AddOverlays(overlay_image(icon, "[icon_state]_lit", flags=RESET_COLOR))
 
 /obj/item/flame/candle/attackby(obj/item/W as obj, mob/user as mob)
 	..()

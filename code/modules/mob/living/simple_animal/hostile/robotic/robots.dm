@@ -184,8 +184,10 @@
 	//we could use do_attack_effect here, but doesnt give a lot of freedom for animation
 
 	var/image/I = image('icons/effects/Targeted.dmi', A, "lockonbig")
-	I.overlays += emissive_appearance(icon, "lockonbig")
-	I.overlays += image(icon, "lockonbig")
+	I.AddOverlays(
+		emissive_appearance(icon, "lockonbig"),
+		"lockonbig"
+	)
 
 	if (!I)
 		return

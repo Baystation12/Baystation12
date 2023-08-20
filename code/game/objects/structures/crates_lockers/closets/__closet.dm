@@ -428,7 +428,7 @@
 /obj/structure/closet/on_update_icon()
 	if(opened)
 		icon_state = "open"
-		overlays.Cut()
+		ClearOverlays()
 	else
 		if(broken)
 			icon_state = "closed_emagged[welded ? "_welded" : ""]"
@@ -437,7 +437,7 @@
 				icon_state = "closed_locked[welded ? "_welded" : ""]"
 			else
 				icon_state = "closed_unlocked[welded ? "_welded" : ""]"
-			overlays.Cut()
+			ClearOverlays()
 
 /obj/structure/closet/on_death()
 	dump_contents()

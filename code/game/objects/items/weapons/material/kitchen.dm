@@ -58,7 +58,7 @@
 			M.visible_message(SPAN_NOTICE("\The [user] feeds some [loaded] to \the [M] with \the [src]."))
 		reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		playsound(M.loc,'sound/items/eatfood.ogg', rand(10,40), 1)
-		overlays.Cut()
+		ClearOverlays()
 		return TRUE
 	else return FALSE
 

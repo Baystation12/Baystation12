@@ -41,7 +41,7 @@
 	var/shape = pick(prybar_types)
 	icon_state = "bar[shape]_handle"
 	color = pick(valid_colours)
-	overlays += overlay_image(icon, "bar[shape]_hardware", flags=RESET_COLOR)
+	AddOverlays(overlay_image(icon, "bar[shape]_hardware", flags=RESET_COLOR))
 	. = ..()
 
 /obj/item/crowbar/emergency_forcing_tool

@@ -138,25 +138,25 @@
 
 /obj/structure/railing/on_update_icon(update_neighbors = TRUE)
 	NeighborsCheck(update_neighbors)
-	overlays.Cut()
+	ClearOverlays()
 	if (!neighbor_status || !anchored)
 		icon_state = "railing0-[density]"
 		if (density)//walking over a railing which is above you is really weird, do not do this if density is 0
-			overlays += image(icon, "_railing0-1", layer = ABOVE_HUMAN_LAYER)
+			AddOverlays(image(icon, "_railing0-1", layer = ABOVE_HUMAN_LAYER))
 	else
 		icon_state = "railing1-[density]"
 		if (density)
-			overlays += image(icon, "_railing1-1", layer = ABOVE_HUMAN_LAYER)
+			AddOverlays(image(icon, "_railing1-1", layer = ABOVE_HUMAN_LAYER))
 		if (neighbor_status & 32)
-			overlays += image(icon, "corneroverlay[density]")
+			AddOverlays(image(icon, "corneroverlay[density]"))
 		if ((neighbor_status & 16) || !(neighbor_status & 32) || (neighbor_status & 64))
-			overlays += image(icon, "frontoverlay_l[density]")
+			AddOverlays(image(icon, "frontoverlay_l[density]"))
 			if (density)
-				overlays += image(icon, "_frontoverlay_l1", layer = ABOVE_HUMAN_LAYER)
+				AddOverlays(image(icon, "_frontoverlay_l1", layer = ABOVE_HUMAN_LAYER))
 		if (!(neighbor_status & 2) || (neighbor_status & 1) || (neighbor_status & 4))
-			overlays += image(icon, "frontoverlay_r[density]")
+			AddOverlays(image(icon, "frontoverlay_r[density]"))
 			if (density)
-				overlays += image(icon, "_frontoverlay_r1", layer = ABOVE_HUMAN_LAYER)
+				AddOverlays(image(icon, "_frontoverlay_r1", layer = ABOVE_HUMAN_LAYER))
 			if (neighbor_status & 4)
 				var/pix_offset_x = 0
 				var/pix_offset_y = 0
@@ -169,9 +169,9 @@
 						pix_offset_y = -32
 					if (WEST)
 						pix_offset_y = 32
-				overlays += image(icon, "mcorneroverlay[density]", pixel_x = pix_offset_x, pixel_y = pix_offset_y)
+				AddOverlays(image(icon, "mcorneroverlay[density]", pixel_x = pix_offset_x, pixel_y = pix_offset_y))
 				if (density)
-					overlays += image(icon, "_mcorneroverlay1", pixel_x = pix_offset_x, pixel_y = pix_offset_y, layer = ABOVE_HUMAN_LAYER)
+					AddOverlays(image(icon, "_mcorneroverlay1", pixel_x = pix_offset_x, pixel_y = pix_offset_y, layer = ABOVE_HUMAN_LAYER))
 
 
 /obj/structure/railing/verb/flip() // This will help push railing to remote places, such as open space turfs

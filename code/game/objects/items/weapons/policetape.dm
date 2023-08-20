@@ -48,7 +48,7 @@ var/global/list/tape_roll_applications = list()
 
 /obj/item/tape/on_update_icon()
 	//Possible directional bitflags: 0 (AIRLOCK), 1 (NORTH), 2 (SOUTH), 4 (EAST), 8 (WEST), 3 (VERTICAL), 12 (HORIZONTAL)
-	overlays.Cut()
+	ClearOverlays()
 	var/new_state
 	switch (tape_dir)
 		if(0)  // AIRLOCK
@@ -64,7 +64,7 @@ var/global/list/tape_roll_applications = list()
 	if(detail_overlay)
 		var/image/I = overlay_image(icon, "[new_state]_[detail_overlay]", flags=RESET_COLOR)
 		I.color = detail_color
-		overlays |= I
+		AddOverlays(I)
 
 /obj/item/taperoll/police
 	name = "police tape"
@@ -149,7 +149,7 @@ var/global/list/tape_roll_applications = list()
 	detail_color = COLOR_RED
 
 /obj/item/taperoll/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	var/image/overlay = image(icon = src.icon)
 	overlay.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 	if(ismob(loc))
@@ -157,7 +157,7 @@ var/global/list/tape_roll_applications = list()
 			overlay.icon_state = "start"
 		else
 			overlay.icon_state = "stop"
-		overlays += overlay
+		AddOverlays(overlay)
 
 /obj/item/taperoll/dropped(mob/user)
 	update_icon()
@@ -305,13 +305,13 @@ var/global/list/tape_roll_applications = list()
 		if(tape_roll_applications[F] == null)
 			tape_roll_applications[F] = 0
 
-		if(tape_roll_applications[F] & direction) // hazard_overlay in F.overlays wouldn't work.
+		if(tape_roll_applications[F] & direction)
 			user.visible_message("\The [user] uses the adhesive of \the [src] to remove area markings from \the [F].", "You use the adhesive of \the [src] to remove area markings from \the [F].")
-			F.overlays -= hazard_overlay
+			F.CutOverlays(hazard_overlay)
 			tape_roll_applications[F] &= ~direction
 		else
 			user.visible_message("\The [user] applied \the [src] on \the [F] to create area markings.", "You apply \the [src] on \the [F] to create area markings.")
-			F.overlays |= hazard_overlay
+			F.AddOverlays(hazard_overlay)
 			tape_roll_applications[F] |= direction
 		return
 

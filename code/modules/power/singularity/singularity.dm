@@ -133,9 +133,9 @@
 			dissipate_delay = 10
 			dissipate_track = 0
 			dissipate_strength = 1
-			overlays.Cut()
+			ClearOverlays()
 			if(chained)
-				overlays = list("chain_s1")
+				SetOverlays("chain_s1")
 			visible_message(SPAN_NOTICE("The singularity has shrunk to a rather pitiful size."))
 		if (STAGE_TWO) //1 to 3 does not check for the turfs if you put the gens right next to a 1x1 then its going to eat them.
 			SetName("gravitational singularity")
@@ -150,9 +150,9 @@
 			dissipate_delay = 5
 			dissipate_track = 0
 			dissipate_strength = 5
-			overlays.Cut()
+			ClearOverlays()
 			if(chained)
-				overlays = list("chain_s3")
+				SetOverlays("chain_s3")
 			if(growing)
 				visible_message(SPAN_NOTICE("The singularity noticeably grows in size."))
 			else
@@ -171,9 +171,9 @@
 				dissipate_delay = 4
 				dissipate_track = 0
 				dissipate_strength = 20
-				overlays.Cut()
+				ClearOverlays()
 				if(chained)
-					overlays = list("chain_s5")
+					SetOverlays("chain_s5")
 				if(growing)
 					visible_message(SPAN_NOTICE("The singularity expands to a reasonable size."))
 				else
@@ -192,9 +192,9 @@
 				dissipate_delay = 10
 				dissipate_track = 0
 				dissipate_strength = 10
-				overlays.Cut()
+				ClearOverlays()
 				if(chained)
-					overlays = list("chain_s7")
+					SetOverlays("chain_s7")
 				if(growing)
 					visible_message(SPAN_WARNING("The singularity expands to a dangerous size."))
 				else
@@ -210,9 +210,9 @@
 			grav_pull = 10
 			consume_range = 4
 			dissipate = 0 //It can't go smaller due to e loss.
-			overlays.Cut()
+			ClearOverlays()
 			if(chained)
-				overlays = list("chain_s9")
+				SetOverlays("chain_s9")
 			if(growing)
 				visible_message(SPAN_DANGER(FONT_NORMAL("The singularity has grown out of control!")))
 			else
@@ -230,7 +230,7 @@
 			dissipate = 0 //It can't go smaller due to e loss
 			event_chance = 25 //Events will fire off more often.
 			if(chained)
-				overlays = list("chain_s9")
+				SetOverlays("chain_s9")
 			visible_message(SPAN_CLASS("sinister", FONT_LARGE("You witness the creation of a destructive force that cannot possibly be stopped by human hands.")))
 
 	if (current_size == allowed_size)
@@ -457,23 +457,23 @@
 
 /obj/singularity/proc/on_capture()
 	chained = 1
-	overlays.Cut()
+	ClearOverlays()
 	move_self = 0
 	switch (current_size)
 		if(1)
-			overlays += image('icons/obj/machines/power/singularity.dmi',"chain_s1")
+			AddOverlays(image('icons/obj/machines/power/singularity.dmi',"chain_s1"))
 		if(3)
-			overlays += image('icons/effects/96x96.dmi',"chain_s3")
+			AddOverlays(image('icons/effects/96x96.dmi',"chain_s3"))
 		if(5)
-			overlays += image('icons/effects/160x160.dmi',"chain_s5")
+			AddOverlays(image('icons/effects/160x160.dmi',"chain_s5"))
 		if(7)
-			overlays += image('icons/effects/224x224.dmi',"chain_s7")
+			AddOverlays(image('icons/effects/224x224.dmi',"chain_s7"))
 		if(9)
-			overlays += image('icons/effects/288x288.dmi',"chain_s9")
+			AddOverlays(image('icons/effects/288x288.dmi',"chain_s9"))
 
 /obj/singularity/proc/on_release()
 	chained = 0
-	overlays.Cut()
+	ClearOverlays()
 	move_self = 1
 
 /obj/singularity/singularity_act(S, size)

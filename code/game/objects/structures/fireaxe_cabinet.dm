@@ -27,13 +27,13 @@
 	update_icon()
 
 /obj/structure/fireaxecabinet/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(fireaxe)
-		overlays += image(icon, "fireaxe_item")
+		AddOverlays(image(icon, "fireaxe_item"))
 	if(shattered)
-		overlays += image(icon, "fireaxe_window_broken")
+		AddOverlays(image(icon, "fireaxe_window_broken"))
 	else if(!open)
-		overlays += image(icon, "fireaxe_window")
+		AddOverlays(image(icon, "fireaxe_window"))
 
 /obj/structure/fireaxecabinet/New()
 	..()

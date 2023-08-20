@@ -21,7 +21,7 @@
 
 /obj/item/device/paicard/Initialize()
 	. = ..()
-	overlays += "pai-off"
+	AddOverlays("pai-off")
 	if (!pai)
 		pai = new /mob/living/silicon/pai(src)
 		pai.card = src
@@ -287,34 +287,34 @@
 
 /obj/item/device/paicard/proc/setPersonality(mob/living/silicon/pai/personality)
 	src.pai = personality
-	src.overlays += "pai-happy"
+	AddOverlays("pai-happy")
 
 /obj/item/device/paicard/proc/removePersonality()
 	src.pai = null
-	src.overlays.Cut()
-	src.overlays += "pai-off"
+	ClearOverlays()
+	AddOverlays("pai-off")
 
 /obj/item/device/paicard
 	var/current_emotion = 1
 /obj/item/device/paicard/proc/setEmotion(emotion)
 	if(pai)
-		src.overlays.Cut()
+		ClearOverlays()
 		switch(emotion)
-			if(1) src.overlays += "pai-happy"
-			if(2) src.overlays += "pai-cat"
-			if(3) src.overlays += "pai-extremely-happy"
-			if(4) src.overlays += "pai-face"
-			if(5) src.overlays += "pai-laugh"
-			if(6) src.overlays += "pai-off"
-			if(7) src.overlays += "pai-sad"
-			if(8) src.overlays += "pai-angry"
-			if(9) src.overlays += "pai-what"
-			if(10) src.overlays += "pai-neutral"
-			if(11) src.overlays += "pai-silly"
-			if(12) src.overlays += "pai-nose"
-			if(13) src.overlays += "pai-smirk"
-			if(14) src.overlays += "pai-exclamation"
-			if(15) src.overlays += "pai-question"
+			if(1) AddOverlays("pai-happy")
+			if(2) AddOverlays("pai-cat")
+			if(3) AddOverlays("pai-extremely-happy")
+			if(4) AddOverlays("pai-face")
+			if(5) AddOverlays("pai-laugh")
+			if(6) AddOverlays("pai-off")
+			if(7) AddOverlays("pai-sad")
+			if(8) AddOverlays("pai-angry")
+			if(9) AddOverlays("pai-what")
+			if(10) AddOverlays("pai-neutral")
+			if(11) AddOverlays("pai-silly")
+			if(12) AddOverlays("pai-nose")
+			if(13) AddOverlays("pai-smirk")
+			if(14) AddOverlays("pai-exclamation")
+			if(15) AddOverlays("pai-question")
 		current_emotion = emotion
 
 /obj/item/device/paicard/proc/alertUpdate()

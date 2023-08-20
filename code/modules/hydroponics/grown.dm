@@ -134,13 +134,13 @@
 /obj/item/reagent_containers/food/snacks/grown/on_update_icon()
 	if(!seed)
 		return
-	overlays.Cut()
+	ClearOverlays()
 	icon_state = "[seed.get_trait(TRAIT_PRODUCT_ICON)]-product"
 	color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
 	if("[seed.get_trait(TRAIT_PRODUCT_ICON)]-leaf" in icon_states('icons/obj/flora/hydroponics_products.dmi'))
 		var/image/fruit_leaves = image('icons/obj/flora/hydroponics_products.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]-leaf")
 		fruit_leaves.color = seed.get_trait(TRAIT_PLANT_COLOUR)
-		overlays |= fruit_leaves
+		AddOverlays(fruit_leaves)
 
 /obj/item/reagent_containers/food/snacks/grown/Crossed(mob/living/M)
 	if(seed && seed.get_trait(TRAIT_JUICY) == 2)
@@ -330,9 +330,9 @@ var/global/list/fruit_icon_cache = list()
 		var/image/I = image(icon,"fruit_rind")
 		I.color = rind_colour
 		fruit_icon_cache["rind-[rind_colour]"] = I
-	overlays |= fruit_icon_cache["rind-[rind_colour]"]
+	AddOverlays(fruit_icon_cache["rind-[rind_colour]"])
 	if(!fruit_icon_cache["slice-[rind_colour]"])
 		var/image/I = image(icon,"fruit_slice")
 		I.color = flesh_colour
 		fruit_icon_cache["slice-[rind_colour]"] = I
-	overlays |= fruit_icon_cache["slice-[rind_colour]"]
+	AddOverlays(fruit_icon_cache["slice-[rind_colour]"])

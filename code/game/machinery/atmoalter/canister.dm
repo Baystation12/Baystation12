@@ -122,29 +122,29 @@
 
 /obj/machinery/portable_atmospherics/canister/on_update_icon()
 	if (destroyed)
-		overlays.Cut()
+		ClearOverlays()
 		icon_state = "[canister_color]-1"
 		return
 
 	if (icon_state != "[canister_color]")
 		icon_state = "[canister_color]"
 
-	overlays.Cut()
+	ClearOverlays()
 
 	if (holding)
-		overlays += "can-open"
+		AddOverlays("can-open")
 	if (connected_port)
-		overlays += "can-connector"
+		AddOverlays("can-connector")
 
 	var/tank_pressure = return_pressure()
 	if (tank_pressure <= CANISTER_PRESSURE_EMPTY)
-		overlays += "can-o0"
+		AddOverlays("can-o0")
 	else if (tank_pressure <= CANISTER_PRESSURE_LOW)
-		overlays += "can-o1"
+		AddOverlays("can-o1")
 	else if (tank_pressure <= CANISTER_PRESSURE_MID)
-		overlays += "can-o2"
+		AddOverlays("can-o2")
 	else
-		overlays += "can-o3"
+		AddOverlays("can-o3")
 
 /obj/machinery/portable_atmospherics/canister/get_material_melting_point()
 	return temperature_resistance

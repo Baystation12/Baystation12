@@ -35,9 +35,9 @@
 		var/image/image = image(icon = icon, icon_state = "coin_string_overlay")
 		image.appearance_flags |= RESET_COLOR
 		image.color = string_color
-		overlays += image
+		AddOverlays(image)
 	else
-		overlays.Cut()
+		ClearOverlays()
 
 
 /obj/item/material/coin/attack(atom/target, mob/living/user, target_zone)
@@ -114,13 +114,13 @@
 
 
 /obj/item/material/coin/challenge/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (isnull(string_color))
 		return
 	var/image/image = image(icon = icon, icon_state = "coin_string_overlay")
 	image.appearance_flags |= RESET_COLOR
 	image.color = string_color
-	overlays += image
+	AddOverlays(image)
 
 /obj/item/material/coin/challenge/throw_impact()
 	..()

@@ -151,7 +151,7 @@
 
 /obj/machinery/ship_map/on_update_icon()
 	. = ..()
-	overlays.Cut()
+	ClearOverlays()
 	if(MACHINE_IS_BROKEN(src))
 		icon_state = "station_mapb"
 		set_light(0)
@@ -164,16 +164,16 @@
 
 		// Put the little "map" overlay down where it looks nice
 		if(small_station_map)
-			overlays.Add(small_station_map)
+			AddOverlays(small_station_map)
 
 	if(floor_markings)
 		floor_markings.dir = src.dir
 		floor_markings.pixel_x = -src.pixel_x
 		floor_markings.pixel_y = -src.pixel_y
-		src.overlays.Add(floor_markings)
+		AddOverlays(floor_markings)
 
 	if(panel_open)
-		overlays.Add("station_map-panel")
+		AddOverlays("station_map-panel")
 
 /obj/machinery/ship_map/ex_act(severity)
 	switch(severity)
@@ -250,13 +250,13 @@
 /obj/screen/legend/proc/Setup(z_level)
 	has_areas = FALSE
 	//Get the areas for this z level and mark if we're empty
-	overlays.Cut()
+	ClearOverlays()
 	for(var/area/A in SSminimap.holomaps[z_level].holomap_areas)
 		if(A.holomap_color == saved_color)
 			var/image/area = image(SSminimap.holomaps[z_level].holomap_areas[A])
 			area.pixel_x = ((HOLOMAP_ICON_SIZE / 2) - world.maxx / 2) - pixel_x
 			area.pixel_y = ((HOLOMAP_ICON_SIZE / 2) - world.maxy / 2) - pixel_y
-			overlays += area
+			AddOverlays(area)
 			has_areas = TRUE
 
 //What happens when we are clicked on / when another is clicked on
@@ -394,13 +394,13 @@
 
 	displayed_level = level
 
-	station_map.overlays.Cut()
+	station_map.ClearOverlays()
 	station_map.vis_contents.Cut()
 
 	if(z == z_levels[displayed_level])
-		station_map.overlays += cursor
+		station_map.AddOverlays(cursor)
 
-	station_map.overlays += levels["[z_levels[displayed_level]]"]
+	station_map.AddOverlays(levels["[z_levels[displayed_level]]"])
 	station_map.vis_contents += maptexts["[z_levels[displayed_level]]"]
 
 	//Fix legend position
@@ -429,6 +429,7 @@
 
 /datum/station_holomap/proc/initialize_holomap_bogus()
 	station_map = image('icons/480x480.dmi', "stationmap")
-	station_map.overlays |= image('icons/effects/64x64.dmi', "notfound", pixel_x = 7 * WORLD_ICON_SIZE, pixel_y = 7 * WORLD_ICON_SIZE)
+	var/notfound = image('icons/effects/64x64.dmi', "notfound", pixel_x = 7 * WORLD_ICON_SIZE, pixel_y = 7 * WORLD_ICON_SIZE)
+	station_map.AddOverlays(notfound)
 
 #undef HOLOMAP_LEGEND_STYLING

@@ -171,7 +171,7 @@
 	return ..()
 
 /obj/item/stack/material/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(material_flags & USE_MATERIAL_COLOR)
 		color = material.icon_colour
 		alpha = 100 + max(1, amount/25)*(material.opacity * 255)
@@ -189,7 +189,7 @@
 		if (HAS_FLAGS(material_flags, USE_MATERIAL_COLOR))
 			reinf_overlay.color = reinf_material.icon_colour
 			reinf_overlay.alpha = min(100 + (reinf_material.opacity * 255), 255)
-		overlays += reinf_overlay
+		AddOverlays(reinf_overlay)
 
 /obj/item/stack/material/iron
 	name = "iron"

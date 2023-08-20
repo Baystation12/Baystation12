@@ -10,7 +10,7 @@
 
 /obj/structure/bed/chair/e_chair/New()
 	..()
-	overlays += image('icons/obj/structures/furniture.dmi', src, "echair_over", MOB_LAYER + 1, dir)
+	AddOverlays(image('icons/obj/structures/furniture.dmi', src, "echair_over", MOB_LAYER + 1, dir))
 	return
 
 
@@ -50,8 +50,8 @@
 
 /obj/structure/bed/chair/e_chair/rotate()
 	..()
-	overlays.Cut()
-	overlays += image('icons/obj/structures/furniture.dmi', src, "echair_over", MOB_LAYER + 1, dir)	//there's probably a better way of handling this, but eh. -Pete
+	ClearOverlays()
+	AddOverlays(image('icons/obj/structures/furniture.dmi', src, "echair_over", MOB_LAYER + 1, dir))
 	return
 
 /obj/structure/bed/chair/e_chair/proc/shock()

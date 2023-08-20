@@ -20,7 +20,7 @@
 
 /obj/item/storage/fancy/crayons/on_update_icon()
 	icon_state = "[initial(icon_state)][opened ? "open" : ""]"
-	overlays.Cut()
-	overlays += image('icons/obj/crayons.dmi', icon_state)
+	ClearOverlays()
+	AddOverlays(image('icons/obj/crayons.dmi', icon_state))
 	for (var/obj/item/pen/crayon/crayon in contents)
-		overlays += image('icons/obj/crayons.dmi', crayon.colourName)
+		AddOverlays(image('icons/obj/crayons.dmi', crayon.colourName))

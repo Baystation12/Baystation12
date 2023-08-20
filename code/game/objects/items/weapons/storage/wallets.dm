@@ -68,7 +68,7 @@
 
 
 /obj/item/storage/wallet/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (front_id)
 		var/tiny_state = "id-generic"
 		var/check_state = "id-[front_id.icon_state]"
@@ -76,7 +76,7 @@
 			tiny_state = check_state
 		var/image/tiny_image = new/image(icon, icon_state = tiny_state)
 		tiny_image.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
-		overlays += tiny_image
+		AddOverlays(tiny_image)
 
 
 /obj/item/storage/wallet/GetIdCard()

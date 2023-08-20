@@ -42,7 +42,7 @@
 	visible_message(SPAN_WARNING("\The [src] breaks!"))
 
 /obj/machinery/computer/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	icon = initial(icon)
 	icon_state = initial(icon_state)
 
@@ -69,27 +69,27 @@
 		var/screen = get_component_of_type(/obj/item/stock_parts/console_screen)
 		var/keyboard = get_component_of_type(/obj/item/stock_parts/keyboard)
 		if(screen)
-			overlays += "comp_screen"
+			AddOverlays("comp_screen")
 		if(keyboard)
-			overlays += icon_keyboard ? "[icon_keyboard]_off" : "keyboard"
+			AddOverlays(icon_keyboard ? "[icon_keyboard]_off" : "keyboard")
 		return
 
 	if(!is_powered())
 		if(icon_keyboard)
-			overlays += image(icon,"[icon_keyboard]_off", overlay_layer)
+			AddOverlays(image(icon,"[icon_keyboard]_off", overlay_layer))
 		return
 
 	if(MACHINE_IS_BROKEN(src))
-		overlays += image(icon,"[icon_state]_broken", overlay_layer)
+		AddOverlays(image(icon,"[icon_state]_broken", overlay_layer))
 	else
-		overlays += get_screen_overlay()
+		AddOverlays(get_screen_overlay())
 
-	overlays += get_keyboard_overlay()
+	AddOverlays(get_keyboard_overlay())
 	var/screen_is_glowing = update_glow()
 	if(screen_is_glowing)
-		overlays += emissive_appearance(icon, icon_screen)
+		AddOverlays(emissive_appearance(icon, icon_screen))
 		if(icon_keyboard)
-			overlays += emissive_appearance(icon, "[icon_keyboard]_mask")
+			AddOverlays(emissive_appearance(icon, "[icon_keyboard]_mask"))
 
 /obj/machinery/computer/proc/get_screen_overlay()
 	return overlay_image(icon,icon_screen)

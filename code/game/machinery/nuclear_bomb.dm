@@ -49,15 +49,15 @@ var/global/bomb_set
 /obj/machinery/nuclearbomb/attackby(obj/item/O as obj, mob/user as mob, params)
 	if(isScrewdriver(O))
 		add_fingerprint(user)
+		ClearOverlays()
 		if(auth)
 			if(panel_open == 0)
 				panel_open = 1
-				overlays |= "panel_open"
+				AddOverlays("panel_open")
 				to_chat(user, "You unscrew the control panel of [src].")
 				playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 			else
 				panel_open = 0
-				overlays -= "panel_open"
 				to_chat(user, "You screw the control panel of [src] back on.")
 				playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 		else
@@ -65,7 +65,6 @@ var/global/bomb_set
 				to_chat(user, "\The [src] emits a buzzing noise, the panel staying locked in.")
 			if(panel_open == 1)
 				panel_open = 0
-				overlays -= "panel_open"
 				to_chat(user, "You screw the control panel of \the [src] back on.")
 				playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 			flick("lock", src)
@@ -440,7 +439,7 @@ var/global/bomb_set
 	var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
 	stampoverlay.icon_state = "paper_stamp-hos"
 	R.stamped += /obj/item/stamp
-	R.overlays += stampoverlay
+	R.AddOverlays(stampoverlay)
 	R.stamps += "<HR><i>This paper has been stamped as 'Top Secret'.</i>"
 
 //====vessel self-destruct system====

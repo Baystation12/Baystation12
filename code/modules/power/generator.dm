@@ -63,7 +63,7 @@
 
 /obj/machinery/power/generator/on_update_icon()
 	icon_state = anchored ? "teg-assembled" : "teg-unassembled"
-	overlays.Cut()
+	ClearOverlays()
 	if (circ1)
 		circ1.temperature_overlay = null
 	if (circ2)
@@ -72,8 +72,8 @@
 		return 1
 	else
 		if (lastgenlev != 0)
-			overlays += emissive_appearance(icon, "teg-op[lastgenlev]")
-			overlays += image(icon, "teg-op[lastgenlev]")
+			AddOverlays(emissive_appearance(icon, "teg-op[lastgenlev]"))
+			AddOverlays(image(icon, "teg-op[lastgenlev]"))
 			if (circ1 && circ2)
 				var/extreme = (lastgenlev > 9) ? "ex" : ""
 				if (circ1.last_temperature < circ2.last_temperature)

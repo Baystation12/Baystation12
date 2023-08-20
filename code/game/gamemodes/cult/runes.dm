@@ -20,12 +20,12 @@
 	set_extension(src, /datum/extension/turf_hand, 10)
 
 /obj/effect/rune/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(GLOB.cult.rune_strokes[type])
 		var/list/f = GLOB.cult.rune_strokes[type]
 		for(var/i in f)
 			var/image/t = image('icons/effects/uristrunes.dmi', "rune-[i]")
-			overlays += t
+			AddOverlays(t)
 	else
 		var/list/q = list(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 		var/list/f = list()
@@ -34,7 +34,7 @@
 			f += j
 			q -= f
 			var/image/t = image('icons/effects/uristrunes.dmi', "rune-[j]")
-			overlays += t
+			AddOverlays(t)
 		GLOB.cult.rune_strokes[type] = f.Copy()
 	color = bcolor
 	desc = "A strange collection of symbols drawn in [blood]."

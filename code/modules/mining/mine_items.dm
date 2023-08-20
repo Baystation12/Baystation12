@@ -51,7 +51,7 @@
 	if(build_from_parts)
 		icon_state = "pick_hardware"
 		color = hardware_color
-		overlays += overlay_image(icon, "pick_handle", flags=RESET_COLOR)
+		AddOverlays(overlay_image(icon, "pick_handle", flags=RESET_COLOR))
 	. = ..()
 
 /obj/item/pickaxe/hammer
@@ -231,7 +231,7 @@
 	update_icon()
 
 /obj/item/stack/flag/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(upright)
 		pixel_x = 0
 		pixel_y = 0
@@ -240,7 +240,7 @@
 		addon.color = light_color
 		addon.layer = ABOVE_LIGHTING_LAYER
 		addon.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		overlays += addon
+		AddOverlays(addon)
 		set_light(0.5, 0.5, 3)
 	else
 		pixel_x = rand(-randpixel, randpixel)
@@ -248,7 +248,7 @@
 		icon_state = "folded"
 		var/image/addon = image(icon = icon, icon_state = "basebit")
 		addon.color = light_color
-		overlays += addon
+		AddOverlays(addon)
 		set_light(0)
 
 /obj/item/stack/flag/proc/knock_down()

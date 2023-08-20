@@ -12,9 +12,9 @@
 	machine_desc = "Used to instantly send messages across vast distances. An emergency relay is required to directly contact Expeditionary Command through crisis channels."
 
 /obj/machinery/bluespacerelay/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 	if(!inoperable())
-		overlays += "[icon_state]_lights_working"
-		overlays += emissive_appearance(icon, "[icon_state]_lights_working")
+		AddOverlays("[icon_state]_lights_working")
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights_working"))

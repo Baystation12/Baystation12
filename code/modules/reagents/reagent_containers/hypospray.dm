@@ -190,7 +190,7 @@
 	update_icon()
 
 /obj/item/reagent_containers/hypospray/autoinjector/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(reagents.total_volume > 0)
 		icon_state = "[initial(icon_state)]1"
 	else
@@ -201,7 +201,7 @@
 			overlay_color = reagents.get_color()
 		else
 			overlay_color = COLOR_GRAY
-	overlays += overlay_image(icon, "injector_band", overlay_color, RESET_COLOR)
+	AddOverlays(overlay_image(icon, "injector_band", overlay_color, RESET_COLOR))
 
 /obj/item/reagent_containers/hypospray/autoinjector/examine(mob/user)
 	. = ..(user)

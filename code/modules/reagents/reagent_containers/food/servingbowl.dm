@@ -96,7 +96,7 @@
 	ingredients |= snack.name
 	var/image/image = new (icon, "serving_bowl_[ingredients_left]")
 	image.color = snack.filling_color
-	overlays += image
+	AddOverlays(image)
 	fullname = english_list(ingredients)
 	SetName(lowertext("[fullname] bowl"))
 	--ingredients_left

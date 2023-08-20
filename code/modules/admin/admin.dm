@@ -1581,7 +1581,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		if(!P.stamped)
 			P.stamped = new
 		P.stamped += /obj/item/stamp/boss
-		P.overlays += stampoverlay
+		P.AddOverlays(stampoverlay)
 
 	var/obj/item/rcvdcopy
 	var/obj/machinery/photocopier/faxmachine/destination = P.destinations[1]

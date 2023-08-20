@@ -218,13 +218,13 @@
 		var/image/image = image(icon, "active")
 		image.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		image.layer = ABOVE_LIGHTING_LAYER
-		overlays += image
+		AddOverlays(image)
 		pixel_x = rand(-6, 6)
 		pixel_y = rand(-6, 6)
 		set_light(0.7, 0.1, 7, 2, "#85d1ff")
 	else
 		icon_state = initial(icon_state)
-		overlays.Cut()
+		ClearOverlays()
 		set_light(0)
 
 

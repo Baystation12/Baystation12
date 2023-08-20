@@ -7,7 +7,7 @@ var/global/list/limb_icon_cache = list()
 	return
 
 /obj/item/organ/external/proc/compile_icon()
-	overlays.Cut()
+	ClearOverlays()
 	update_icon()
 
 /obj/item/organ/external/proc/sync_colour_to_human(mob/living/carbon/human/human)
@@ -114,7 +114,7 @@ var/global/list/limb_icon_cache = list()
 	return .
 
 /obj/item/organ/external/on_update_icon(regenerate = 0)
-	overlays.Cut()
+	ClearOverlays()
 	mob_overlays = list()
 
 	var/husk_color_mod = rgb(96,88,80)
@@ -230,7 +230,7 @@ var/global/list/limb_icon_cache = list()
 		limb_em_block.dir = dir
 		mob_overlays += limb_em_block
 
-	overlays += mob_overlays
+	AddOverlays(mob_overlays)
 
 	dir = EAST
 	icon = null
@@ -270,7 +270,7 @@ var/global/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888"
 			limb_icon_cache[cache_key] = appearances
 		var/list/appearances = limb_icon_cache[cache_key]
 		hud_damage_image = image(null)
-		hud_damage_image.overlays += appearances
+		hud_damage_image.AddOverlays(appearances)
 
 	// Calculate the required color index.
 	var/dam_state = min(1,((brute_dam+burn_dam)/max(1,max_damage)))

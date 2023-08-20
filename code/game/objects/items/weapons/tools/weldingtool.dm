@@ -216,11 +216,11 @@
 
 /obj/item/weldingtool/on_update_icon()
 	..()
-	overlays.Cut()
+	ClearOverlays()
 	if(tank)
-		overlays += image('icons/obj/tools/welder.dmi', "welder_[tank.icon_state]")
+		AddOverlays(image('icons/obj/tools/welder.dmi', "welder_[tank.icon_state]"))
 	if(welding)
-		overlays += image('icons/obj/tools/welder.dmi', "welder_on")
+		AddOverlays(image('icons/obj/tools/welder.dmi', "welder_on"))
 		set_light(0.6, 0.5, 2.5, l_color =COLOR_PALE_ORANGE)
 	else
 		set_light(0)

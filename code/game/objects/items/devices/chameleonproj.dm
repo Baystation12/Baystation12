@@ -37,7 +37,7 @@
 			saved_item = target.type
 			saved_icon = target.icon
 			saved_icon_state = target.icon_state
-			saved_overlays = target.overlays
+			saved_overlays = target.overlays.Copy()
 
 /obj/item/device/chameleon/proc/toggle()
 	if(!can_use || !saved_item) return
@@ -97,7 +97,7 @@
 	desc = O.desc
 	icon = new_icon
 	icon_state = new_iconstate
-	overlays = new_overlays
+	SetOverlays(new_overlays)
 	set_dir(O.dir)
 	M.forceMove(src)
 	master = C

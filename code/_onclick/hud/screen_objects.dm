@@ -158,8 +158,8 @@
 		return TRUE
 
 /obj/screen/zone_sel/on_update_icon()
-	overlays.Cut()
-	overlays += image('icons/mob/zone_sel.dmi', "[selecting]")
+	ClearOverlays()
+	AddOverlays(image('icons/mob/zone_sel.dmi', "[selecting]"))
 
 /obj/screen/intent
 	name = "intent"

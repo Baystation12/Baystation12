@@ -17,7 +17,7 @@
 
 	var/reappear_duration = 5
 	var/obj/effect/dummy/spell_jaunt/jaunt_holder
-	var/atom/movable/overlay/animation
+	var/atom/movable/fake_overlay/animation
 
 /spell/targeted/ethereal_jaunt/Destroy()
 	if (jaunt_holder) // eject our user in case something happens and we get deleted
@@ -38,7 +38,7 @@
 		spawn(0)
 			var/mobloc = get_turf(target.loc)
 			jaunt_holder = new/obj/effect/dummy/spell_jaunt(mobloc)
-			animation = new/atom/movable/overlay(mobloc)
+			animation = new/atom/movable/fake_overlay(mobloc)
 			animation.SetName("residue")
 			animation.set_density(FALSE)
 			animation.anchored = TRUE
@@ -77,12 +77,12 @@
 
 	return "[src] now lasts longer."
 
-/spell/targeted/ethereal_jaunt/proc/jaunt_disappear(atom/movable/overlay/animation, mob/living/target)
+/spell/targeted/ethereal_jaunt/proc/jaunt_disappear(atom/movable/fake_overlay/animation, mob/living/target)
 	animation.icon_state = "liquify"
 	flick("liquify",animation)
 	playsound(get_turf(target), 'sound/magic/ethereal_enter.ogg', 30)
 
-/spell/targeted/ethereal_jaunt/proc/jaunt_reappear(atom/movable/overlay/animation, mob/living/target)
+/spell/targeted/ethereal_jaunt/proc/jaunt_reappear(atom/movable/fake_overlay/animation, mob/living/target)
 	flick("reappear",animation)
 	playsound(get_turf(target), 'sound/magic/ethereal_exit.ogg', 30)
 

@@ -280,9 +280,9 @@
 
 /mob/living/simple_animal/update_fire()
 	. = ..()
-	overlays -= image("icon"='icons/mob/OnFire.dmi', "icon_state"="Generic_mob_burning")
+	CutOverlays(image("icon"='icons/mob/OnFire.dmi', "icon_state"="Generic_mob_burning"))
 	if(on_fire)
-		overlays += image("icon"='icons/mob/OnFire.dmi', "icon_state"="Generic_mob_burning")
+		AddOverlays(image("icon"='icons/mob/OnFire.dmi', "icon_state"="Generic_mob_burning"))
 
 /mob/living/simple_animal/is_burnable()
 	return heat_damage_per_tick

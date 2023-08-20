@@ -19,7 +19,6 @@
 	machine_desc = "Autolathes can produce a very wide array of useful objects from raw materials."
 
 	var/has_recycler = TRUE
-	var/list/material_overlays = list()
 	var/base_icon_state = "autolathe"
 	var/image/panel_image
 
@@ -99,21 +98,18 @@
 		update_current_build(wait)
 
 /obj/machinery/fabricator/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 	if(currently_building)
-		overlays += emissive_appearance(icon, "[icon_state]_lights_working")
-		overlays += "[icon_state]_lights_working"
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights_working"))
+		AddOverlays("[icon_state]_lights_working")
 	else if(is_powered())
-		overlays += emissive_appearance(icon, "[icon_state]_lights")
-		overlays += "[icon_state]_lights"
-
-	var/list/new_overlays = material_overlays.Copy()
-	overlays += new_overlays
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
+		AddOverlays("[icon_state]_lights")
 
 /obj/machinery/fabricator/proc/remove_mat_overlay(mat_overlay)
-	material_overlays -= mat_overlay
+	CutOverlays(mat_overlay)
 	update_icon()
 
 //Updates overall lathe storage size.

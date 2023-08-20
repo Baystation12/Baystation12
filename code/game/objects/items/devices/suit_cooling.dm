@@ -144,7 +144,7 @@
 
 
 /obj/item/device/suit_cooling_unit/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (cover_open)
 		if (cell)
 			icon_state = "suitcooler1"
@@ -159,17 +159,17 @@
 
 	switch(round(cell.percent()))
 		if(86 to INFINITY)
-			overlays.Add("battery-0")
+			AddOverlays("battery-0")
 		if(69 to 85)
-			overlays.Add("battery-1")
+			AddOverlays("battery-1")
 		if(52 to 68)
-			overlays.Add("battery-2")
+			AddOverlays("battery-2")
 		if(35 to 51)
-			overlays.Add("battery-3")
+			AddOverlays("battery-3")
 		if(18 to 34)
-			overlays.Add("battery-4")
+			AddOverlays("battery-4")
 		if(-INFINITY to 17)
-			overlays.Add("battery-5")
+			AddOverlays("battery-5")
 
 
 /obj/item/device/suit_cooling_unit/examine(mob/user, distance)

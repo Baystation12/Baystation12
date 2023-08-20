@@ -399,7 +399,7 @@ var/global/list/tank_gauge_cache = list()
 		LAZYADD(overlays_to_add, image(icon,"bomb_assembly"))
 		if(proxyassembly.assembly)
 			var/image/bombthing = image(proxyassembly.assembly.icon, proxyassembly.assembly.icon_state)
-			bombthing.overlays |= proxyassembly.assembly.overlays
+			bombthing.CopyOverlays(proxyassembly.assembly)
 			bombthing.pixel_y = -1
 			bombthing.pixel_x = -3
 			LAZYADD(overlays_to_add, bombthing)
@@ -419,7 +419,7 @@ var/global/list/tank_gauge_cache = list()
 			LAZYADD(overlays_to_add, tank_gauge_cache[indicator])
 		previous_gauge_pressure = gauge_pressure
 
-	overlays = overlays_to_add
+	SetOverlays(overlays_to_add)
 
 #undef TANK_IDEAL_PRESSURE
 

@@ -582,7 +582,7 @@ The _flatIcons list is a cache for generated icon files.
 
 /mob/proc/AddCamoOverlay(atom/A)//A is the atom which we are using as the overlay.
 	var/icon/opacity_icon = new(A.icon, A.icon_state)//Don't really care for overlays/underlays.
-	//Now we need to culculate overlays+underlays and add them together to form an image for a mask.
+	//Now we need to culculate overlays and underlays and add them together to form an image for a mask.
 	//var/icon/alpha_mask = getFlatIcon(src)//Accurate but SLOW. Not designed for running each tick. Could have other uses I guess.
 	var/icon/alpha_mask = getIconMask(src)//Which is why I created that proc. Also a little slow since it's blending a bunch of icons together but good enough.
 	opacity_icon.AddAlphaMask(alpha_mask)//Likely the main source of lag for this proc. Probably not designed to run each tick.
@@ -594,7 +594,7 @@ The _flatIcons list is a cache for generated icon files.
 			if(2)	I.pixel_x++
 			if(3)	I.pixel_y--
 			if(4)	I.pixel_y++
-		overlays += I//And finally add the overlay.
+		AddOverlays(overlays) //And finally add the overlay.
 
 #define HOLOPAD_SHORT_RANGE 1 //For determining the color of holopads based on whether they're short or long range.
 #define HOLOPAD_LONG_RANGE 2

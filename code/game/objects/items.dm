@@ -647,7 +647,7 @@ var/global/list/slot_flags_enumeration = list(
 /obj/item/clean_blood()
 	. = ..()
 	if(blood_overlay)
-		overlays.Remove(blood_overlay)
+		CutOverlays(blood_overlay)
 	if(istype(src, /obj/item/clothing/gloves))
 		var/obj/item/clothing/gloves/G = src
 		G.transfer_blood = 0
@@ -674,7 +674,7 @@ var/global/list/slot_flags_enumeration = list(
 	//apply the blood-splatter overlay if it isn't already in there
 	if(!length(blood_DNA))
 		blood_overlay.color = blood_color
-		overlays += blood_overlay
+		AddOverlays(blood_overlay)
 
 	//if this blood isn't already in the list, add it
 	if(istype(M))

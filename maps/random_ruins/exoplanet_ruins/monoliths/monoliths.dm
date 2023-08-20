@@ -30,20 +30,20 @@
 	update_icon()
 
 /obj/structure/monolith/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(active)
 		var/image/I = image(icon,"[icon_state]decor")
 		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 		I.color = get_random_colour(0, 150, 255)
 		I.layer = ABOVE_LIGHTING_LAYER
 		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		overlays += I
+		AddOverlays(I)
 		set_light(0.3, 0.1, 2, l_color = I.color)
 
 	var/turf/simulated/floor/exoplanet/T = get_turf(src)
 	if(istype(T))
 		var/image/I = overlay_image(icon, "dugin", T.dirt_color, RESET_COLOR)
-		overlays += I
+		AddOverlays(I)
 
 /obj/structure/monolith/attack_hand(mob/user)
 	visible_message("[user] touches \the [src].")

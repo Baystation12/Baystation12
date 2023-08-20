@@ -441,12 +441,12 @@
 	if(..())
 		set_light(0)
 		return 1
-	overlays.Cut()
+	ClearOverlays()
 	if(power_output >= max_safe_output)
 		var/image/I = image(icon,"[initial(icon_state)]rad")
 		I.blend_mode = BLEND_ADD
 		I.alpha = round(255*power_output/max_power_output)
-		overlays += I
+		AddOverlays(I)
 		set_light(0.7, 0.1, rad_power + power_output - max_safe_output, 2, "#3b97ca")
 	else
 		set_light(0)

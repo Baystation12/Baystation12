@@ -127,7 +127,7 @@
 	SetName("spiked barricade")
 	desc = "A rather simple [material.display_name] spiked barricade, also known as a cheval-de-frise. It menaces with spikes of [rod_material.display_name] which look like they would hurt to walk in to."
 	damage = (rod_material.hardness * 0.85)
-	overlays += overlay_image(icon, spike_overlay, color = rod_material.icon_colour, flags = RESET_COLOR)
+	AddOverlays(overlay_image(icon, spike_overlay, color = rod_material.icon_colour, flags = RESET_COLOR))
 
 /obj/structure/barricade/spike/Bumped(mob/living/victim)
 	. = ..()

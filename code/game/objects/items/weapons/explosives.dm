@@ -62,7 +62,7 @@
 		else
 			log_and_message_admins("planted \a [src] with a [timer] second fuse on \the [target].")
 
-		target.overlays += image_overlay
+		target.AddOverlays(image_overlay)
 		to_chat(user, "Bomb has been planted. Timer counting down from [timer].")
 		run_timer()
 
@@ -83,7 +83,7 @@
 		else
 			target.ex_act(EX_ACT_DEVASTATING)
 	if(target)
-		target.overlays -= image_overlay
+		target.CutOverlays(image_overlay)
 	qdel(src)
 
 /obj/item/plastique/proc/run_timer() //Basically exists so the C4 will beep when running. Better idea than putting sleeps in attackby.

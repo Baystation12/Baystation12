@@ -121,9 +121,9 @@
 /obj/item/powerfist/on_update_icon()
 	..()
 	if (tank)
-		overlays += image(icon, "powerfist_tank")
+		AddOverlays(image(icon, "powerfist_tank"))
 	else
-		overlays -= image(icon,"powerfist_tank")
+		CutOverlays("powerfist_tank")
 
 
 /obj/item/powerfist/examine(mob/living/user, distance)

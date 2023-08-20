@@ -211,29 +211,29 @@
 	return
 
 /obj/machinery/atmospherics/unary/cryo_cell/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	icon_state = "pod[on]"
 	var/image/I
 
 	if(panel_open)
-		overlays += "pod_panel"
+		AddOverlays("pod_panel")
 
 	I = image(icon, "pod[on]_top")
 	I.pixel_z = 32
-	overlays += I
+	AddOverlays(I)
 
 	if(occupant)
 		var/image/pickle = image(occupant.icon, occupant.icon_state)
-		pickle.overlays = occupant.overlays
+		pickle.CopyOverlays(occupant)
 		pickle.pixel_z = 18
-		overlays += pickle
+		AddOverlays(pickle)
 
 	I = image(icon, "lid[on]")
-	overlays += I
+	AddOverlays(I)
 
 	I = image(icon, "lid[on]_top")
 	I.pixel_z = 32
-	overlays += I
+	AddOverlays(I)
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/process_occupant()
 	if(air_contents.total_moles < 10)

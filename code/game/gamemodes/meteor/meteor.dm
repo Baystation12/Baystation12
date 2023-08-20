@@ -63,7 +63,7 @@
 	if(GLOB.using_map.use_overmap)
 		var/area/map = locate(/area/overmap)
 		for(var/turf/T in map)
-			T.overlays += image('icons/obj/overmap.dmi', "meteor[rand(1,4)]")
+			T.AddOverlays(image('icons/obj/overmap.dmi', "meteor[rand(1,4)]"))
 	next_wave = round_duration_in_ticks + meteor_wave_delay
 
 /datum/game_mode/meteor/process()

@@ -47,19 +47,19 @@
 	..()
 
 /obj/machinery/chem_master/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 	if(is_powered())
-		overlays += emissive_appearance(icon, "[icon_state]_lights")
-		overlays += "[icon_state]_lights"
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
+		AddOverlays("[icon_state]_lights")
 	if((beaker) || (loaded_pill_bottle))
 		if(!is_powered())
-			overlays += "[icon_state]_working_nopower"
+			AddOverlays("[icon_state]_working_nopower")
 		else
-			overlays += emissive_appearance(icon, "[icon_state]_lights_working")
-			overlays += "[icon_state]_lights_working"
-			overlays += "[icon_state]_working"
+			AddOverlays(emissive_appearance(icon, "[icon_state]_lights_working"))
+			AddOverlays("[icon_state]_lights_working")
+			AddOverlays("[icon_state]_working")
 
 /obj/machinery/chem_master/ex_act(severity)
 	switch(severity)

@@ -47,7 +47,7 @@
 
 /obj/effect/fluid/on_update_icon()
 
-	overlays.Cut()
+	ClearOverlays()
 
 	if(fluid_amount > FLUID_OVER_MOB_HEAD)
 		layer = DEEP_FLUID_LAYER

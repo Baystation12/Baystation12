@@ -49,19 +49,19 @@
 	update_icon()
 
 /obj/machinery/atmospherics/unary/freezer/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 	if(is_powered())
-		overlays += emissive_appearance(icon, "[icon_state]_lights")
-		overlays += "[icon_state]_lights"
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
+		AddOverlays("[icon_state]_lights")
 		if(node)
 			if(use_power && cooling)
-				overlays += emissive_appearance(icon, "[icon_state]_lights_working")
-				overlays += "[icon_state]_lights_working"
+				AddOverlays(emissive_appearance(icon, "[icon_state]_lights_working"))
+				AddOverlays("[icon_state]_lights_working")
 			else
-				overlays += emissive_appearance(icon, "[icon_state]_lights_standby")
-				overlays += "[icon_state]_lights_standby"
+				AddOverlays(emissive_appearance(icon, "[icon_state]_lights_standby"))
+				AddOverlays("[icon_state]_lights_standby")
 
 /obj/machinery/atmospherics/unary/freezer/interface_interact(mob/user)
 	ui_interact(user)

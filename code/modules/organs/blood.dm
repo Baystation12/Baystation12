@@ -242,7 +242,7 @@
 
 	var/obj/effect/decal/cleanable/blood/drip/drop = B
 	if(istype(drop) && drips && length(drips) && !large)
-		drop.overlays |= drips
+		drop.AddOverlays(drips)
 		drop.drips |= drips
 
 	// If there's no data to copy, call it quits here.

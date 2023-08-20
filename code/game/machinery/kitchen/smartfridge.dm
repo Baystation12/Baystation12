@@ -155,7 +155,7 @@
 		update_icon()
 
 /obj/machinery/smartfridge/drying_rack/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(inoperable())
 		if(length(contents))
 			icon_state = "drying_rack-plant-off"
@@ -215,17 +215,17 @@
 		src.throw_item()
 
 /obj/machinery/smartfridge/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(inoperable())
 		icon_state = "[icon_base]-off"
 	else
 		icon_state = icon_base
 
 	if(is_secure)
-		overlays += image(icon, "[icon_base]-sidepanel")
+		AddOverlays(image(icon, "[icon_base]-sidepanel"))
 
 	if(panel_open)
-		overlays += image(icon, "[icon_base]-panel")
+		AddOverlays(image(icon, "[icon_base]-panel"))
 
 	var/image/I
 	var/is_off = ""
@@ -244,13 +244,13 @@
 			I = image(icon, "[icon_contents]-3[is_off]")
 		else
 			I = image(icon, "[icon_contents]-4[is_off]")
-	overlays += I
+	AddOverlays(I)
 
 	// Fridge top
 	I = image(icon, "[icon_base]-top")
 	I.pixel_z = 32
 	I.layer = ABOVE_WINDOW_LAYER
-	overlays += I
+	AddOverlays(I)
 
 /*******************
 *   Item Adding

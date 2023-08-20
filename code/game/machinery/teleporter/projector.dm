@@ -46,17 +46,17 @@
 
 
 /obj/machinery/tele_projector/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (computer?.active)
 		update_use_power(POWER_USE_ACTIVE)
 		var/image/I = image(icon, src, "[initial(icon_state)]_active_overlay")
 		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		I.layer = ABOVE_LIGHTING_LAYER
-		overlays += I
+		AddOverlays(I)
 	else
 		update_use_power(POWER_USE_IDLE)
 		if (operable())
 			var/image/I = image(icon, src, "[initial(icon_state)]_idle_overlay")
 			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 			I.layer = ABOVE_LIGHTING_LAYER
-			overlays += I
+			AddOverlays(I)

@@ -65,7 +65,7 @@
 /obj/machinery/compressor/Process()
 	if(!starter)
 		return
-	overlays.Cut()
+	ClearOverlays()
 	if(MACHINE_IS_BROKEN(src))
 		return
 	rpm = 0.9* rpm + 0.1 * rpmtarget
@@ -89,13 +89,13 @@
 
 
 	if(rpm>50000)
-		overlays += image('icons/obj/atmospherics/pipes.dmi', "comp-o4", FLY_LAYER)
+		AddOverlays(image('icons/obj/atmospherics/pipes.dmi', "comp-o4", FLY_LAYER))
 	else if(rpm>10000)
-		overlays += image('icons/obj/atmospherics/pipes.dmi', "comp-o3", FLY_LAYER)
+		AddOverlays(image('icons/obj/atmospherics/pipes.dmi', "comp-o3", FLY_LAYER))
 	else if(rpm>2000)
-		overlays += image('icons/obj/atmospherics/pipes.dmi', "comp-o2", FLY_LAYER)
+		AddOverlays(image('icons/obj/atmospherics/pipes.dmi', "comp-o2", FLY_LAYER))
 	else if(rpm>500)
-		overlays += image('icons/obj/atmospherics/pipes.dmi', "comp-o1", FLY_LAYER)
+		AddOverlays(image('icons/obj/atmospherics/pipes.dmi', "comp-o1", FLY_LAYER))
 	 //TODO: DEFERRED
 
 /obj/machinery/power/turbine/Initialize()
@@ -121,7 +121,7 @@
 /obj/machinery/power/turbine/Process()
 	if(!compressor.starter)
 		return
-	overlays.Cut()
+	ClearOverlays()
 	if(MACHINE_IS_BROKEN(src))
 		return
 	lastgen = ((compressor.rpm / TURBGENQ)**TURBGENG) *TURBGENQ
@@ -139,7 +139,7 @@
 		outturf.assume_air(removed)
 
 	if(lastgen > 100)
-		overlays += image('icons/obj/atmospherics/pipes.dmi', "turb-o", FLY_LAYER)
+		AddOverlays(image('icons/obj/atmospherics/pipes.dmi', "turb-o", FLY_LAYER))
 
 
 	for(var/mob/M in viewers(1, src))

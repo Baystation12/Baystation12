@@ -26,12 +26,12 @@
 	. = ..()
 
 /obj/machinery/fusion_fuel_injector/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 	if(injecting && cur_assembly)
-		overlays += emissive_appearance(icon, "[icon_state]_lights")
-		overlays += "[icon_state]_lights"
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
+		AddOverlays("[icon_state]_lights")
 
 /obj/machinery/fusion_fuel_injector/Destroy()
 	if(cur_assembly)
@@ -132,8 +132,8 @@
 					amount_left += cur_assembly.rod_quantities[reagent]
 		if(cur_assembly)
 			cur_assembly.percent_depleted = amount_left / cur_assembly.initial_amount
-		overlays += emissive_appearance(icon, "[icon_state]_lights_emitting")
-		overlays += "[icon_state]_lights_emitting"
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights_emitting"))
+		AddOverlays("[icon_state]_lights_emitting")
 	else
 		StopInjecting()
 		update_icon()

@@ -18,4 +18,4 @@
 /obj/machinery/vending/props/on_update_icon()
 	..()
 	if (is_powered())
-		overlays += image(icon, "[initial(icon_state)]-overlay")
+		AddOverlays(image(icon, "[initial(icon_state)]-overlay"))

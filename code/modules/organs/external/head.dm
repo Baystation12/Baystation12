@@ -119,15 +119,16 @@
 
 			// Floating eyes or other effects.
 			var/image/eye_glow = get_eye_overlay()
-			if(eye_glow) overlays |= eye_glow
+			if(eye_glow)
+				AddOverlays(eye_glow)
 
 		if(owner.makeup_style && !BP_IS_ROBOTIC(src) && (species && (species.appearance_flags & SPECIES_APPEARANCE_HAS_LIPS)))
 			var/mutable_appearance/lip_appearance = mutable_appearance('icons/mob/human_races/species/human/lips.dmi', "lips_[owner.makeup_style]_s",flags = DEFAULT_APPEARANCE_FLAGS)
 			mob_overlays |= lip_appearance
 
-	overlays = mob_overlays
-
-	overlays |= get_hair_icon() //Hair is handled separately for mob icon so we do not add it to mob_overlays Maybe this should change sometime
+	SetOverlays(mob_overlays)
+	var/hair_icon = get_hair_icon()
+	AddOverlays(hair_icon)
 
 /obj/item/organ/external/head/proc/get_hair_icon()
 	var/image/res = image(species.icon_template,"")
@@ -139,7 +140,7 @@
 					var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
 					if(facial_hair_style.do_coloration & DO_COLORATION_USER)
 						facial_s.Blend(owner.facial_hair_color, facial_hair_style.blend)
-					res.overlays |= facial_s
+					res.AddOverlays(facial_s)
 
 	if (owner?.head_hair_style)
 		var/icon/HI
@@ -165,7 +166,7 @@
 			for (var/entry in sorted_hair_markings)
 				HI.Blend(entry[2], ICON_OVERLAY)
 			//TODO : Add emissive blocker here if hair should block it. Else, leave as is
-			res.overlays |= HI
+			res.AddOverlays(HI)
 
 	var/list/sorted_head_markings = list()
 	for (var/E in markings)
@@ -202,7 +203,7 @@
 				)
 			ADD_SORTED(sorted_head_markings, list(list(M.draw_order, I)), /proc/cmp_marking_order)
 	for (var/entry in sorted_head_markings)
-		res.overlays |= entry[2]
+		res.AddOverlays(entry[2])
 
 	return res
 

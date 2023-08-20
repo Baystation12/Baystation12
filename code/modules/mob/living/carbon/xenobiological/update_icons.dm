@@ -3,7 +3,7 @@
 		icon_state = "[colour] baby slime dead"
 	else
 		icon_state = "[colour] [is_adult ? "adult" : "baby"] slime[Victim ? "" : " eat"]"
-	overlays.Cut()
+	ClearOverlays()
 	if (mood)
-		overlays += image('icons/mob/simple_animal/slimes.dmi', icon_state = "aslime-[mood]")
+		AddOverlays(image('icons/mob/simple_animal/slimes.dmi', icon_state = "aslime-[mood]"))
 	..()

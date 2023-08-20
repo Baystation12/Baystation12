@@ -281,8 +281,8 @@
 // Description: Allows us to use special icon overlay for critical SMESs
 /obj/machinery/power/smes/buildable/on_update_icon()
 	if (failing)
-		overlays.Cut()
-		overlays += image('icons/obj/machines/power/smes.dmi', "smes-crit")
+		ClearOverlays()
+		AddOverlays(image('icons/obj/machines/power/smes.dmi', "smes-crit"))
 	else
 		..()
 

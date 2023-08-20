@@ -39,13 +39,13 @@
 		icon_state = "up"
 	else
 		icon_state = "down"
-	overlays.Cut()
+	ClearOverlays()
 	if (!iv_bag)
 		return
 	var/image/drip_overlay = image(icon, icon_state = "drip[drip_active]")
 	if (density)
 		drip_overlay.pixel_y += 6
-	overlays += drip_overlay
+	AddOverlays(drip_overlay)
 	var/image/filling_overlay = image(icon, icon_state = "filling0")
 	if (density)
 		filling_overlay.pixel_y += 6
@@ -60,14 +60,14 @@
 		if (86 to INFINITY)
 			filling_overlay.icon_state = "filling100"
 	filling_overlay.color = last_reagent_color
-	overlays += filling_overlay
+	AddOverlays(filling_overlay)
 	if (percent_full < 25)
 		var/image/light_overlay = image(icon, icon_state = "light_low")
 		light_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		light_overlay.layer = ABOVE_LIGHTING_LAYER
 		if (density)
 			light_overlay.pixel_y += 6
-		overlays += light_overlay
+		AddOverlays(light_overlay)
 
 
 /obj/structure/roller_bed/examine(mob/user, distance)

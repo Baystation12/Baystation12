@@ -61,18 +61,18 @@
 	update_icon()
 
 /obj/machinery/biogenerator/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(panel_open)
-		overlays += "[icon_state]_panel"
+		AddOverlays("[icon_state]_panel")
 	if(is_powered())
-		overlays += emissive_appearance(icon, "[icon_state]_lights")
-		overlays += "[icon_state]_lights"
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
+		AddOverlays("[icon_state]_lights")
 	if(state == BG_READY || state == BG_COMPLETE)
-		overlays += "biogen_stand"
+		AddOverlays("biogen_stand")
 	else if (state == BG_PROCESSING)
-		overlays += emissive_appearance(icon, "[icon_state]_lights_working")
-		overlays += "[icon_state]_lights_working"
-		overlays += "biogen_stand"
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights_working"))
+		AddOverlays("[icon_state]_lights_working")
+		AddOverlays("biogen_stand")
 	return
 
 /obj/machinery/biogenerator/components_are_accessible(path)

@@ -49,15 +49,15 @@
 	..()
 	icon_state = "mpistolen"
 	if(ammo_magazine)
-		overlays += image(icon, "mag")
+		AddOverlays(image(icon, "mag"))
 
 	if(!ammo_magazine || !LAZYLEN(ammo_magazine.stored_ammo))
 		icon_state = "mpistolen-empty"
-		overlays += image(icon, "[initial(icon_state)]-ammo0")
+		AddOverlays(image(icon, "[initial(icon_state)]-ammo0"))
 	else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
-		overlays += image(icon, "[initial(icon_state)]-ammo1")
+		AddOverlays(image(icon, "[initial(icon_state)]-ammo1"))
 	else
-		overlays += image(icon, "[initial(icon_state)]-ammo2")
+		AddOverlays(image(icon, "[initial(icon_state)]-ammo2"))
 
 /obj/item/gun/projectile/automatic/merc_smg
 	name = "submachine gun"
@@ -160,11 +160,11 @@
 /obj/item/gun/projectile/automatic/sec_smg/on_update_icon()
 	..()
 	if(ammo_magazine)
-		overlays += image(icon, "mag-[round(length(ammo_magazine.stored_ammo),5)]")
+		AddOverlays(image(icon, "mag-[round(length(ammo_magazine.stored_ammo),5)]"))
 	if(ammo_magazine && LAZYLEN(ammo_magazine.stored_ammo))
-		overlays += image(icon, "ammo-ok")
+		AddOverlays(image(icon, "ammo-ok"))
 	else
-		overlays += image(icon, "ammo-bad")
+		AddOverlays(image(icon, "ammo-bad"))
 
 /obj/item/gun/projectile/automatic/sec_smg/empty
 	starts_loaded = FALSE

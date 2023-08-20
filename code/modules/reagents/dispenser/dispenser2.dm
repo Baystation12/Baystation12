@@ -190,12 +190,12 @@
 	return TRUE
 
 /obj/machinery/chemical_dispenser/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(is_powered())
-		overlays += emissive_appearance(icon, "[icon_state]_lights")
-		overlays += "[icon_state]_lights"
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
+		AddOverlays("[icon_state]_lights")
 	if(container)
 		var/mutable_appearance/beaker_overlay
 		beaker_overlay = image('icons/obj/machines/dispensers.dmi', src, "lil_beaker")
 		beaker_overlay.pixel_x = rand(-10, 5)
-		overlays += beaker_overlay
+		AddOverlays(beaker_overlay)

@@ -14,7 +14,7 @@
 	ai_log("forget_path() : Entering.", AI_LOG_DEBUG)
 	if (path_display)
 		for (var/turf/T in path)
-			T.overlays -= path_overlay
+			T.CutOverlays(path_overlay)
 	path.Cut()
 	ai_log("forget_path() : Exiting.", AI_LOG_DEBUG)
 
@@ -49,7 +49,7 @@
 		ai_log("get_path() : Made new path.", AI_LOG_DEBUG)
 		if (path_display)
 			for(var/turf/T in path)
-				T.overlays |= path_overlay
+				T.AddOverlays(path_overlay)
 	else
 		ai_log("get_path() : Failed to make new path. Exiting.", AI_LOG_DEBUG)
 		return 0

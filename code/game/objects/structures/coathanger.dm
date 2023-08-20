@@ -50,10 +50,10 @@
 		return 1
 
 /obj/structure/coatrack/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if (istype(coat, /obj/item/clothing/suit/storage/toggle/labcoat))
-		overlays += image(icon, icon_state = "coat_lab")
+		AddOverlays(image(icon, icon_state = "coat_lab"))
 	if (istype(coat, /obj/item/clothing/suit/storage/toggle/labcoat/cmo))
-		overlays += image(icon, icon_state = "coat_cmo")
+		AddOverlays(image(icon, icon_state = "coat_cmo"))
 	if (istype(coat, /obj/item/clothing/suit/storage/det_trench))
-		overlays += image(icon, icon_state = "coat_det")
+		AddOverlays(image(icon, icon_state = "coat_det"))
