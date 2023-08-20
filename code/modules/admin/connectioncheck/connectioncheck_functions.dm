@@ -203,7 +203,6 @@
 
 	// Final layout
 	var/final_body = {"
-		<h1>Associated Connections</h1>
 		<h2>Queried Details</h2>
 		<table class="data hover">
 			<thead>
@@ -249,8 +248,9 @@
 			Entries matching the current query are <span class='highlight'>highlighted</span>.</small></p>
 		[all_connections_table]
 	"}
-	send_rsc(user, 'html/browser/common.css', "common.css")
-	show_browser(user, html_page("Associated Connections ([target_ckey ? target_ckey : "NO CKEY"])", final_body), "window=associatedconnections;size=500x480;")
+	var/datum/browser/popup = new(user, "associatedconnections", "Associated Connections ([target_ckey ? target_ckey : "NO CKEY"])", 500, 480)
+	popup.set_content(final_body)
+	popup.open()
 
 
 /**
