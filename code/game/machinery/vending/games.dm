@@ -5,6 +5,7 @@
 	icon_deny = "games-deny"
 	icon_vend = "games-vend"
 	base_type = /obj/machinery/vending/games
+	maxrandom = 5
 	product_slogans = {"
 		Escape to a fantasy world!;\
 		Fuel your gambling addiction!;\
@@ -34,30 +35,36 @@
 		/obj/item/storage/box/checkers/chess/red = 10,
 		/obj/item/storage/box/checkers/chess = 10,
 		/obj/item/board = 2,
-		/obj/item/storage/fancy/crayons = 3
+		/obj/item/storage/fancy/crayons = 3,
+		/obj/item/reagent_containers/spray/waterflower = 10,
+		/obj/item/storage/box/snappops = 15
 	)
 	products = list(
-		/obj/item/toy/blink = 5,
-		/obj/item/toy/eightball = 8,
-		/obj/item/deck/cards = 5,
-		/obj/item/deck/tarot = 5,
-		/obj/item/pack/cardemon = 6,
-		/obj/item/pack/spaceball = 6,
-		/obj/item/storage/pill_bottle/dice_nerd = 5,
-		/obj/item/storage/pill_bottle/dice = 5,
-		/obj/item/storage/box/checkers = 2,
-		/obj/item/storage/box/checkers/chess/red = 2,
-		/obj/item/storage/box/checkers/chess = 2,
-		/obj/item/board = 2,
-		/obj/item/storage/fancy/crayons = 3
+		/obj/item/toy/blink = 0,
+		/obj/item/toy/eightball = 0,
+		/obj/item/deck/cards = 0,
+		/obj/item/deck/tarot = 0,
+		/obj/item/pack/cardemon = 0,
+		/obj/item/pack/spaceball = 0,
+		/obj/item/storage/pill_bottle/dice_nerd = 0,
+		/obj/item/storage/pill_bottle/dice = 0,
+		/obj/item/storage/box/checkers = 0,
+		/obj/item/storage/box/checkers/chess/red = 0,
+		/obj/item/storage/box/checkers/chess = 0,
+		/obj/item/board = 0,
+		/obj/item/storage/fancy/crayons = 0,
+		/obj/item/reagent_containers/spray/waterflower = 0,
+		/obj/item/storage/box/snappops = 0
 	)
 	rare_products = list(
+		/obj/item/reagent_containers/spray/waterflower = 30,
+		/obj/item/storage/box/snappops = 30,
 		/obj/item/storage/box/large/foam_gun/revolver/tampered = 20,
 		/obj/item/toy/balloon = 5
 	)
 	contraband = list(
-		/obj/item/reagent_containers/spray/waterflower = 2,
-		/obj/item/storage/box/snappops = 3,
+		/obj/item/toy/crossbow = 1,
+		/obj/item/toy/ammo/crossbow = 4,
 		/obj/item/toy/sword = 3,
 		/obj/item/toy/katana = 3,
 		/obj/item/gun/projectile/revolver/capgun = 1,

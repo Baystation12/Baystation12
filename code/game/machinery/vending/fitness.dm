@@ -5,6 +5,7 @@
 	icon_vend = "fitness-vend"
 	icon_deny = "fitness-deny"
 	base_type = /obj/machinery/vending/fitness
+	maxrandom = 8
 	product_slogans = {"\
 		SweatMAX, get robust!\
 	"}
@@ -31,20 +32,23 @@
 		/obj/item/reagent_containers/food/snacks/proteinbar = 5,
 		/obj/item/reagent_containers/food/snacks/meatcube = 10,
 		/obj/item/reagent_containers/pill/diet = 25,
-		/obj/item/towel/random = 40
+		/obj/item/towel/random = 40,
+		/obj/item/reagent_containers/food/condiment/small/packet/protein = 100
 	)
 	products = list(
-		/obj/item/reagent_containers/food/drinks/small_milk = 8,
-		/obj/item/reagent_containers/food/drinks/small_milk_choc = 8,
-		/obj/item/reagent_containers/food/drinks/cans/waterbottle = 8,
-		/obj/item/reagent_containers/food/drinks/glass2/fitnessflask/proteinshake = 8,
-		/obj/item/reagent_containers/food/drinks/glass2/fitnessflask = 8,
-		/obj/item/reagent_containers/food/snacks/proteinbar = 8,
-		/obj/item/reagent_containers/food/snacks/meatcube = 8,
-		/obj/item/reagent_containers/pill/diet = 8,
-		/obj/item/towel/random = 8
+		/obj/item/reagent_containers/food/drinks/small_milk = 0,
+		/obj/item/reagent_containers/food/drinks/small_milk_choc = 0,
+		/obj/item/reagent_containers/food/drinks/cans/waterbottle = 0,
+		/obj/item/reagent_containers/food/drinks/glass2/fitnessflask/proteinshake = 0,
+		/obj/item/reagent_containers/food/drinks/glass2/fitnessflask = 0,
+		/obj/item/reagent_containers/food/snacks/proteinbar = 0,
+		/obj/item/reagent_containers/food/snacks/meatcube = 0,
+		/obj/item/reagent_containers/pill/diet = 0,
+		/obj/item/towel/random = 0,
+		/obj/item/reagent_containers/food/condiment/small/packet/protein = 0
 	)
 	rare_products = list(
+		/obj/item/reagent_containers/food/condiment/small/packet/protein = 30,
 		/obj/item/device/augment_implanter/iatric_monitor = 50,
 		/obj/item/device/augment_implanter/internal_air_system = 25
 	)

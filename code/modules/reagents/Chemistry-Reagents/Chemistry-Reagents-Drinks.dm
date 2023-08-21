@@ -244,7 +244,7 @@
 	color = "#baeece"
 	glass_name = "th'oom juice"
 	glass_desc = "sweet and savory goodness!"
-	sugar_amount = 50
+	sugar_amount = 0.5
 	nutrition = 4
 	hydration = 3
 

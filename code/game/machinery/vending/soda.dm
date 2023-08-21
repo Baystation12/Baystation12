@@ -14,18 +14,23 @@
 		/obj/item/reagent_containers/food/drinks/cans/waterbottle = 1,
 		/obj/item/reagent_containers/food/drinks/cans/cola_grape = 1,
 		/obj/item/reagent_containers/food/drinks/cans/cola_lemonlime = 1,
-		/obj/item/reagent_containers/food/drinks/cans/cola_strawberry = 1
+		/obj/item/reagent_containers/food/drinks/cans/cola_strawberry = 1,
+		/obj/item/reagent_containers/food/drinks/cans/cola_pork = 5
 	)
 	products = list(
-		/obj/item/reagent_containers/food/drinks/cans/cola_diet = 10,
-		/obj/item/reagent_containers/food/drinks/cans/rootbeer = 10,
-		/obj/item/reagent_containers/food/drinks/cans/cola_apple = 10,
-		/obj/item/reagent_containers/food/drinks/cans/cola_orange = 10,
-		/obj/item/reagent_containers/food/drinks/cans/waterbottle = 10,
-		/obj/item/reagent_containers/food/drinks/cans/cola_grape = 10,
-		/obj/item/reagent_containers/food/drinks/cans/cola_lemonlime = 10,
-		/obj/item/reagent_containers/food/drinks/cans/cola_strawberry = 10
+		/obj/item/reagent_containers/food/drinks/cans/cola_diet = 0,
+		/obj/item/reagent_containers/food/drinks/cans/rootbeer = 0,
+		/obj/item/reagent_containers/food/drinks/cans/cola_apple = 0,
+		/obj/item/reagent_containers/food/drinks/cans/cola_orange = 0,
+		/obj/item/reagent_containers/food/drinks/cans/waterbottle = 0,
+		/obj/item/reagent_containers/food/drinks/cans/cola_grape = 0,
+		/obj/item/reagent_containers/food/drinks/cans/cola_lemonlime = 0,
+		/obj/item/reagent_containers/food/drinks/cans/cola_strawberry = 0,
+		/obj/item/reagent_containers/food/drinks/cans/cola_pork = 0
+	)
+	rare_products = list(
+		/obj/item/reagent_containers/food/drinks/cans/cola_pork = 30
 	)
 	contraband = list(
-		/obj/item/reagent_containers/food/drinks/cans/cola_pork = 10
+		/obj/item/reagent_containers/food/drinks/cans/space_mountain_wind = 3
 	)
