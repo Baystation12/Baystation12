@@ -387,9 +387,9 @@
 
 /obj/machinery/gravity_generator/main/on_update_icon()
 	. = ..()
-	overlays.Cut()
+	ClearOverlays()
 	for(var/obj/machinery/gravity_generator/part/P in lights)
-		P.overlays.Cut()
+		P.ClearOverlays()
 
 	var/console
 	if(power_supply && !(stat & (MACHINE_BROKEN_GENERIC|MACHINE_STAT_NOPOWER)))
@@ -397,16 +397,16 @@
 			console = charge_count ? "console_charged" : "console_discharged"
 		else
 			console = "console_charging"
-		overlays += console
+		AddOverlays(console)
 		if(breaker)
 			for(var/obj/machinery/gravity_generator/part/P in lights)
-				P.overlays += "[P.sprite_number]_light"
+				P.AddOverlays("[P.sprite_number]_light")
 
 	if(!panel_open)
 		if(power_supply && !(stat & MACHINE_BROKEN_GENERIC|MACHINE_STAT_NOPOWER))
-			overlays += "keyboard_on"
+			AddOverlays("keyboard_on")
 		else
-			overlays += "keyboard_off"
+			AddOverlays("keyboard_off")
 
 	var/overlay_state
 	switch(charge_count)
@@ -427,9 +427,9 @@
 			set_light(1,l_outer_range = 8, l_color = "#7de1e1")
 
 	if(middle)
-		middle.overlays.Cut()
+		middle.ClearOverlays()
 		if(overlay_state)
-			middle.overlays += overlay_state
+			middle.AddOverlays(overlay_state)
 
 	for(var/obj/machinery/gravity_generator/part/P in parts)
 		P.update_icon()

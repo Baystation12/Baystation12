@@ -155,16 +155,16 @@ GLOBAL_LIST_INIT(switch_small_sound, list(
 			USE_FEEDBACK_FAILURE("It's broken.")
 
 /obj/item/music_player/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 
 	if(mode == PLAYER_STATE_PLAY)
-		overlays += image(icon, "[icon_state]_play")
+		AddOverlays(image(icon, "[icon_state]_play"))
 
 	if(panel == PANEL_OPENED)
-		overlays += image(icon, "[icon_state]_panel-open")
+		AddOverlays(image(icon, "[icon_state]_panel-open"))
 
 		if(cell)
-			overlays += image(icon, "[icon_state]_panel-cell")
+			AddOverlays(image(icon, "[icon_state]_panel-cell"))
 
 /obj/item/music_player/Process()
 	if(!get_cell() || !cell.checked_use(power_usage * CELLRATE))

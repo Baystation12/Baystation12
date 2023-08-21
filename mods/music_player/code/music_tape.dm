@@ -27,9 +27,9 @@
 		icon_state = "tape_[pick("white", "blue", "red", "yellow", "purple")]"
 
 /obj/item/music_tape/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	if(ruined)
-		overlays += "ribbonoverlay"
+		AddOverlays("ribbonoverlay")
 
 /obj/item/music_tape/examine(mob/user)
 	. = ..(user)

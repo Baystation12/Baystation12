@@ -145,7 +145,7 @@
 		right.update_icon()
 
 /obj/machinery/crusher_base/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	var/obj/machinery/crusher_base/left = locate(/obj/machinery/crusher_base, get_step(src, WEST))
 	var/obj/machinery/crusher_base/right = locate(/obj/machinery/crusher_base, get_step(src, EAST))
 
@@ -170,13 +170,13 @@
 
 	if(powered(EQUIP))
 		if(blocked == 1)
-			overlays += "[asmtype]-overlay-red"
+			AddOverlays("[asmtype]-overlay-red")
 		else if(action != "idle")
-			overlays += "[asmtype]-overlay-orange"
+			AddOverlays("[asmtype]-overlay-orange")
 		else
-			overlays += "[asmtype]-overlay-green"
+			AddOverlays("[asmtype]-overlay-green")
 	if(panel_open)
-		overlays += image(icon, "[asmtype]-hatch")
+		AddOverlays(image(icon, "[asmtype]-hatch"))
 
 	var/turf/above = GetAbove(get_turf(src))
 	if(above && isopenspace(above))

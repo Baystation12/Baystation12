@@ -44,14 +44,14 @@ GLOBAL_LIST_INIT(recomended_holoplants_colors, list(COLOR_PALE_RED_GRAY,COLOR_BL
 	. = ..()
 	if(!islist(possible_states))
 		parse_icon()
-	overlays.Cut()
+	ClearOverlays()
 	hologram_opacity = (emagged ? 0.95 : initial(hologram_opacity))
 	if(!isicon(plant))
 		change_plant(plant)
 	change_color(plant_color)
 
 	if(enabled)
-		overlays += plant
+		AddOverlays(plant)
 	set_light(brightness_on, l_outer_range = 1, l_color = plant_color)
 
 /obj/structure/holoplant/proc/change_plant(state)
@@ -115,19 +115,19 @@ GLOBAL_LIST_INIT(recomended_holoplants_colors, list(COLOR_PALE_RED_GRAY,COLOR_BL
 	if (QDELETED(src))
 		return
 	interference = TRUE
-	overlays.Cut()
+	ClearOverlays()
 	set_light(0, l_outer_range = 0, l_color = plant_color)
 	sleep(3)
 	if(QDELETED(src))
 		return
 
-	overlays += plant
+	AddOverlays(plant)
 	set_light(brightness_on, l_outer_range = 1, l_color = plant_color)
 	sleep(3)
 	if(QDELETED(src))
 		return
 
-	overlays -= plant
+	CutOverlays(plant)
 	set_light(0, l_outer_range = 0, l_color = plant_color)
 	sleep(3)
 	if(QDELETED(src))

@@ -58,7 +58,7 @@ GLOBAL_LIST_INIT(duplicate_forbidden_vars, list(
 
 	if(ismob(O)) // Overlays are carried over despite disallowing them, if a fix is found remove this
 		var/mob/M = O
-		M.overlays.Cut()
+		M.ClearOverlays()
 		M.regenerate_icons()
 	return O
 

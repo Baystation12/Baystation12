@@ -24,24 +24,24 @@
 			var/image/I = image(icon = ret.icon, icon_state = "wc_screen")
 			I.appearance_flags |= RESET_COLOR
 			I.color = (bsod || os.updating) ? "#0000ff" : "#00ff00"
-			ret.overlays.Add(I)
+			ret.AddOverlays(I)
 		else
-			ret.overlays.Add(image(icon = ret.icon, icon_state = "wc_screen_off"))
+			ret.AddOverlays(image(icon = ret.icon, icon_state = "wc_screen_off"))
 		if(stripe_color)
 			var/image/I = image(icon = ret.icon, icon_state = "wc_stripe")
 			I.appearance_flags |= RESET_COLOR
 			I.color = stripe_color
-			overlays.Add(I)
+			AddOverlays(I)
 	return ret
 
 /obj/item/modular_computer/pda/wrist/on_update_icon()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	icon_state = icon_state_unpowered
-	overlays.Cut()
+	ClearOverlays()
 
 	if(os)
 		var/image/_screen_overlay = os.get_screen_overlay()
-		overlays.Add(overlay_image(_screen_overlay.icon, _screen_overlay.icon_state, flags = RESET_COLOR))
+		AddOverlays(overlay_image(_screen_overlay.icon, _screen_overlay.icon_state, flags = RESET_COLOR))
 
 	if(enabled)
 		set_light(0.2, 0.1, light_strength, l_color = (bsod || os.updating) ? "#0000ff" : light_color)
@@ -52,7 +52,7 @@
 		var/image/I = image(icon = icon, icon_state = "wc_stripe")
 		I.appearance_flags |= RESET_COLOR
 		I.color = stripe_color
-		overlays.Add(I)
+		AddOverlays(I)
 
 	var/mob/living/carbon/human/H = loc
 	if(istype(H) && H.wear_id == src)

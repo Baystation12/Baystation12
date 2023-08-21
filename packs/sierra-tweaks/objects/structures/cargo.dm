@@ -158,7 +158,7 @@
 	cargo.plane = plane
 	cargo.layer = OBJ_LAYER
 
-	overlays += cargo
+	AddOverlays(cargo)
 
 	//we can set these back now since we have already cloned the icon into the overlay
 	cargo.pixel_y = initial(cargo.pixel_y)
@@ -170,7 +170,7 @@
 		load = dummy_load.actual_load
 		dummy_load.actual_load = null
 		qdel(dummy_load)
-		overlays.Cut()
+		ClearOverlays()
 
 	if(!load)
 		return

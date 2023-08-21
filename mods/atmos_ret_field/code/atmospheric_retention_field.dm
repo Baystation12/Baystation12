@@ -215,7 +215,7 @@
 	light_color = "#ffffff"
 
 /obj/structure/atmospheric_retention_field/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	var/list/dirs = list()
 	for(var/obj/structure/atmospheric_retention_field/F in orange(src,1))
 		dirs += get_dir(src, F)
@@ -225,7 +225,7 @@
 	icon_state = ""
 	for(var/i = 1 to 4)
 		var/image/I = image(icon, "[basestate][connections[i]]", dir = SHIFTL(1, i-1))
-		overlays += I
+		AddOverlays(I)
 
 	return
 

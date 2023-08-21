@@ -11,13 +11,13 @@
 	var/sprite_offset = 32 // В целях правильного расчета спрайта
 
 /obj/item/photo/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	var/scale = 8/(photo_size*sprite_offset)
 	var/image/small_img = image(img)
 	small_img.transform *= scale
 	small_img.pixel_x = -sprite_offset*(photo_size-1)/2 - 3
 	small_img.pixel_y = -sprite_offset*(photo_size-1)/2
-	overlays |= small_img
+	AddOverlays(small_img)
 
 	tiny = image(img)
 	tiny.transform *= 0.5*scale

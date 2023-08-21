@@ -5,38 +5,38 @@
 
 
 /obj/machinery/suit_storage_unit/on_update_icon()
-	overlays.Cut()
+	ClearOverlays()
 	//if things arent powered, these show anyways
 	if(panelopen)
-		overlays.Add(image(icon,"[base_icon_state]_panel"))
+		AddOverlays(image(icon,"[base_icon_state]_panel"))
 
 	if(isopen)
-		overlays.Add(image(icon,"[base_icon_state]_open"))
+		AddOverlays(image(icon,"[base_icon_state]_open"))
 		if(suit)
-			overlays.Add(image(icon,"[base_icon_state]_suit"))
+			AddOverlays(image(icon,"[base_icon_state]_suit"))
 		if(helmet)
-			overlays.Add(image(icon,"[base_icon_state]_helm"))
+			AddOverlays(image(icon,"[base_icon_state]_helm"))
 		if(boots || tank || mask)
-			overlays.Add(image(icon,"[base_icon_state]_storage"))
+			AddOverlays(image(icon,"[base_icon_state]_storage"))
 		if(isUV && issuperUV)
-			overlays.Add(image(icon,"[base_icon_state]_super"))
+			AddOverlays(image(icon,"[base_icon_state]_super"))
 
 	if(!MACHINE_IS_BROKEN(src))
 		if(isopen)
-			overlays.Add(image(icon,"[base_icon_state]_lights_open"))
+			AddOverlays(image(icon,"[base_icon_state]_lights_open"))
 		else
 			if(isUV)
-				overlays.Add(image(icon,"[base_icon_state]_lights_red"))
+				AddOverlays(image(icon,"[base_icon_state]_lights_red"))
 			else
-				overlays.Add(image(icon,"[base_icon_state]_lights_closed"))
+				AddOverlays(image(icon,"[base_icon_state]_lights_closed"))
 		//top lights
 		if(isUV)
 			if(issuperUV)
-				overlays.Add(overlay_image(icon,"[base_icon_state]_uvstrong", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
+				AddOverlays(overlay_image(icon,"[base_icon_state]_uvstrong", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
 			else
-				overlays.Add(overlay_image(icon,"[base_icon_state]_uv", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
+				AddOverlays(overlay_image(icon,"[base_icon_state]_uv", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
 		else
-			overlays.Add(overlay_image(icon, "[base_icon_state]_ready", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
+			AddOverlays(overlay_image(icon, "[base_icon_state]_ready", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
 
 /obj/machinery/suit_storage_unit/industrial
 	name = "industrial suit storage unit"
