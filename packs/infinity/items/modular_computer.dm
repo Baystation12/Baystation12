@@ -45,6 +45,10 @@
 
 	if(enabled)
 		set_light(0.2, 0.1, light_strength, l_color = (bsod || os.updating) ? "#0000ff" : light_color)
+
+	if(enabled && os)
+		var/image/_screen_overlay = os.get_screen_overlay()
+		AddOverlays(emissive_appearance(_screen_overlay.icon, _screen_overlay.icon_state))
 	else
 		set_light(0)
 
@@ -57,14 +61,6 @@
 	var/mob/living/carbon/human/H = loc
 	if(istype(H) && H.wear_id == src)
 		H.update_inv_wear_id()
-
-/obj/item/modular_computer/pda/wrist/update_overlays()
-	. = ..()
-	// SIERRA TODO: Заставить эту штуку работать. Сейчас при смене экранов оно лишь на секунду мигает.
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(enabled && os)
-		var/image/_screen_overlay = os.get_screen_overlay()
-		. += emissive_appearance(_screen_overlay.icon, _screen_overlay.icon_state)
 
 /obj/item/modular_computer/pda/wrist/AltClick(mob/user)
 	if(!CanPhysicallyInteract(user) || !card_slot?.stored_card)
