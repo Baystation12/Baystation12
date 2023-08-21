@@ -17,9 +17,9 @@
 	mysize = newsize
 	UpdateSize()
 
-/obj/effect/fusion_particle_catcher/proc/AddParticles(name, quantity = 1)
+/obj/effect/fusion_particle_catcher/proc/AddReactants(name, quantity = 1)
 	if(parent && parent.size >= mysize)
-		parent.AddParticles(name, quantity)
+		parent.AddReactants(name, quantity)
 		return 1
 	return 0
 

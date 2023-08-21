@@ -42,27 +42,27 @@
 
 	var/last_reactants = 0
 
-	particles = new/particles/fusion
-
 	var/animating_ripple = FALSE
 
 /obj/effect/fusion_em_field/proc/UpdateVisuals()
-	//Take the particle system and edit it
-
-	//size
 	var/radius = ((size-1) / 2) * WORLD_ICON_SIZE
 
 	particles.position = generator("circle", radius - size, radius + size, NORMAL_RAND)
 
 	//Radiation affects drift
-	var/radiationfactor = clamp((radiation * 0.001), 0, 0.5)
-	particles.drift = generator("circle", (0.2 + radiationfactor), NORMAL_RAND)
+	var/radiationfactor = clamp((radiation * 0.001), 0, 0.5) + 0.2
+	particles.drift = generator("circle", -radiationfactor, radiationfactor, , NORMAL_RAND)
 
 	particles.spawning = last_reactants * 0.9 + Interpolate(0, 200, clamp(plasma_temperature / 70000, 0, 1))
 
 
 /obj/effect/fusion_em_field/New(loc, obj/machinery/power/fusion_core/new_owned_core)
 	..()
+
+	owned_core = new_owned_core
+	if (!owned_core)
+		qdel(src)
+		return
 
 	filters = list(filter(type = "ripple", size = 4, "radius" = 1, "falloff" = 1)
 	, filter(type="outline", size = 2, color =  COLOR_RED)
@@ -72,10 +72,7 @@
 	last_range = light_min_range
 	last_power = light_min_power
 
-	owned_core = new_owned_core
-	if(!owned_core)
-		qdel(src)
-		return
+	AddParticles(/particles/torus/fusion, TRUE)
 
 	particles.spawning = 0 //Turn off particles until something calls for it
 
@@ -154,7 +151,7 @@
 		last_range = use_range
 		last_power = use_power
 		//Temperature based color
-		particles.gradient = list(0, COLOR_WHITE, 0.85, light_color)
+		particles.gradient = list(0, COLOR_WHITE, 1, light_color)
 		UNLINT(var/dm_filter/outline = filters[2])
 		UNLINT(outline.color = light_color)
 		UNLINT(var/dm_filter/bloom = filters[3])
@@ -174,7 +171,7 @@
 	if(uptake_gas && uptake_gas.total_moles)
 		for(var/gasname in uptake_gas.gas)
 			if(uptake_gas.gas[gasname]*10 > reactants[gasname])
-				AddParticles(gasname, uptake_gas.gas[gasname]*10)
+				AddReactants(gasname, uptake_gas.gas[gasname]*10)
 				uptake_gas.adjust_gas(gasname, -(uptake_gas.gas[gasname]), update=FALSE)
 				added_particles = TRUE
 		if(added_particles)
@@ -327,7 +324,7 @@
 		plasma_temperature += 1
 	UpdateVisuals()
 
-/obj/effect/fusion_em_field/proc/AddParticles(name, quantity = 1)
+/obj/effect/fusion_em_field/proc/AddReactants(name, quantity = 1)
 	if(name in reactants)
 		reactants[name] += quantity
 	else if(name != "proton" && name != "electron" && name != "neutron")
@@ -513,11 +510,11 @@
 
 		// Loop through the newly produced reactants and add them to the pool.
 		for(var/reactant in produced_reactants)
-			AddParticles(reactant, produced_reactants[reactant])
+			AddReactants(reactant, produced_reactants[reactant])
 
 		// Check whether there are reactants left, and add them back to the pool.
 		for(var/reactant in react_pool)
-			AddParticles(reactant, react_pool[reactant])
+			AddReactants(reactant, react_pool[reactant])
 
 	UpdateVisuals()
 
