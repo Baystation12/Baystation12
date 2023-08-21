@@ -1111,6 +1111,14 @@
 					L.broken()
 				sleep(1)
 
+
+/obj/machinery/power/apc/proc/flicker_lighting(amount = 10)
+	if (!operating || shorted)
+		return
+	for (var/obj/machinery/light/L in area)
+		L.flicker(amount)
+
+
 /obj/machinery/power/apc/proc/setsubsystem(val)
 	switch(val)
 		if(2)

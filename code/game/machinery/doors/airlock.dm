@@ -1395,11 +1395,11 @@ About the new airlock wires panel:
 		electrified_until = 0
 
 /obj/machinery/door/airlock/proc/prison_open()
-	if(arePowerSystemsOn())
-		src.unlock()
-		src.open()
-		src.lock()
-	return
+	if (!arePowerSystemsOn())
+		return
+	unlock(TRUE)
+	open(TRUE)
+	lock(TRUE)
 
 /obj/machinery/door/airlock/get_material_melting_point()
 	. = ..()
