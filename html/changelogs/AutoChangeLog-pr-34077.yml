@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: External bots no longer receive stored characters when requesting the manifest.
