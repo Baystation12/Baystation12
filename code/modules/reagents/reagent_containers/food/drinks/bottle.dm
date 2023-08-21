@@ -722,7 +722,7 @@
 
 /obj/item/reagent_containers/food/drinks/bottle/small/beer/fake/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/chloralhydrate/beer2, 50)
+	reagents.add_reagent(/datum/reagent/chloralhydrate/beer, 50)
 
 
 /obj/item/reagent_containers/food/drinks/bottle/small/ale

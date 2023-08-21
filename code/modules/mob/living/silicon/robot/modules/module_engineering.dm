@@ -22,7 +22,6 @@
 	)
 	no_slip = 1
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/borg/sight/meson,
 		/obj/item/extinguisher,
 		/obj/item/weldingtool/hugetank,
@@ -64,7 +63,16 @@
 		/datum/matter_synth/plasteel = 20000,
 		/datum/matter_synth/wire =     50
 	)
-	emag = /obj/item/melee/baton/robot/electrified_arm
+	emag_gear = list(
+		/obj/item/melee/baton/robot/electrified_arm,
+		/obj/item/device/flash,
+		/obj/item/gun/energy/gun,
+		/obj/item/rcd/borg,
+		/obj/item/flamethrower/full/loaded,
+		/obj/item/shield_diffuser,
+		/obj/item/gun/launcher/grenade/foam
+	)
+
 	skills = list(
 		SKILL_ATMOS        = SKILL_MASTER,
 		SKILL_ENGINES      = SKILL_MASTER,
@@ -117,6 +125,17 @@
 	PL.synths = list(plasteel)
 
 /obj/item/robot_module/engineering/respawn_consumable(mob/living/silicon/robot/R, amount)
+	..()
 	var/obj/item/device/lightreplacer/LR = locate() in equipment
 	LR.Charge(R, amount)
-	..()
+
+	if (R.emagged)
+		var/obj/item/flamethrower/full/loaded/flamethrower = locate() in equipment
+		flamethrower.beaker.reagents.add_reagent(/datum/reagent/napalm, 10 * amount)
+
+		var/obj/item/shield_diffuser/diff = locate() in equipment
+		diff.cell.charge += amount
+
+		var/obj/item/gun/launcher/grenade/foam/foam = locate() in equipment
+		if (LAZYLEN(foam.grenades) < foam.max_grenades)
+			foam.grenades += new /obj/item/grenade/chem_grenade/metalfoam(src)

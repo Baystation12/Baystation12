@@ -10,10 +10,41 @@
 		/datum/nano_module/crew_monitor
 	)
 	can_be_pushed = 0
+	emag_gear = list(
+		/obj/item/melee/baton/robot/electrified_arm,
+		/obj/item/device/flash,
+		/obj/item/gun/energy/gun,
+		/obj/item/reagent_containers/spray,
+		/obj/item/gun/launcher/syringe/rapid/sleepy
+	)
+
 
 /obj/item/robot_module/medical/build_equipment()
 	. = ..()
 	equipment += new /obj/item/robot_rack/roller_bed(src, 1)
+
+
+/obj/item/robot_module/medical/finalize_emag()
+	. = ..()
+
+	var/obj/item/reagent_containers/spray/acid = locate() in equipment
+	acid.reagents.add_reagent(/datum/reagent/acid/polyacid, 250)
+	acid.SetName("Polyacid spray")
+
+	var/obj/item/shockpaddles/robot/shock = locate() in equipment
+	shock.safety = FALSE
+
+
+/obj/item/robot_module/medical/respawn_consumable(mob/living/silicon/robot/R, amount)
+	..()
+	if(R.emagged)
+		var/obj/item/reagent_containers/spray/acid = locate() in equipment
+		acid.reagents.add_reagent(/datum/reagent/acid/polyacid, 2 * amount)
+
+		var/obj/item/gun/launcher/syringe/rapid/sleepy = locate() in equipment
+		if (sleepy.darts < sleepy.max_darts)
+			sleepy.darts += new /obj/item/syringe_cartridge/sleepy(src)
+
 
 /obj/item/robot_module/medical/surgeon
 	name = "surgeon robot module"
@@ -25,7 +56,6 @@
 		"Needles" = "medicalrobot"
 		)
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/borg/sight/hud/med,
 		/obj/item/device/scanner/health,
 		/obj/item/reagent_containers/borghypo/surgeon,
@@ -51,7 +81,7 @@
 	synths = list(
 		/datum/matter_synth/medicine = 10000,
 	)
-	emag = /obj/item/reagent_containers/spray
+
 	skills = list(
 		SKILL_ANATOMY     = SKILL_MASTER,
 		SKILL_MEDICAL     = SKILL_EXPERIENCED,
@@ -70,10 +100,6 @@
 		stack.uses_charge = 1
 		stack.charge_costs = list(1000)
 
-/obj/item/robot_module/medical/surgeon/finalize_emag()
-	. = ..()
-	emag.reagents.add_reagent(/datum/reagent/acid/polyacid, 250)
-	emag.SetName("Polyacid spray")
 
 /obj/item/robot_module/medical/surgeon/finalize_synths()
 	. = ..()
@@ -85,11 +111,6 @@
 		var/obj/item/stack/medical/stack = locate(thing) in equipment
 		stack.synths = list(medicine)
 
-/obj/item/robot_module/medical/surgeon/respawn_consumable(mob/living/silicon/robot/R, amount)
-	if(emag)
-		var/obj/item/reagent_containers/spray/PS = emag
-		PS.reagents.add_reagent(/datum/reagent/acid/polyacid, 2 * amount)
-	..()
 
 /obj/item/robot_module/medical/crisis
 	name = "crisis robot module"
@@ -102,7 +123,6 @@
 	)
 	equipment = list(
 		/obj/item/crowbar,
-		/obj/item/device/flash,
 		/obj/item/borg/sight/hud/med,
 		/obj/item/device/scanner/health,
 		/obj/item/device/scanner/reagent/adv,
@@ -124,7 +144,6 @@
 	synths = list(
 		/datum/matter_synth/medicine = 15000
 	)
-	emag = /obj/item/reagent_containers/spray
 	skills = list(
 		SKILL_ANATOMY     = SKILL_BASIC,
 		SKILL_MEDICAL     = SKILL_MASTER,
@@ -144,10 +163,6 @@
 		stack.uses_charge = 1
 		stack.charge_costs = list(1000)
 
-/obj/item/robot_module/medical/crisis/finalize_emag()
-	. = ..()
-	emag.reagents.add_reagent(/datum/reagent/acid/polyacid, 250)
-	emag.SetName("Polyacid spray")
 
 /obj/item/robot_module/medical/crisis/finalize_synths()
 	. = ..()
@@ -162,12 +177,9 @@
 
 /obj/item/robot_module/medical/crisis/respawn_consumable(mob/living/silicon/robot/R, amount)
 	var/obj/item/reagent_containers/syringe/S = locate() in equipment
-	if(S.mode == 2)
+	if (S.mode == 2)
 		S.reagents.clear_reagents()
 		S.mode = initial(S.mode)
 		S.desc = initial(S.desc)
 		S.update_icon()
-	if(emag)
-		var/obj/item/reagent_containers/spray/PS = emag
-		PS.reagents.add_reagent(/datum/reagent/acid/polyacid, 2 * amount)
 	..()

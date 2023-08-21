@@ -21,7 +21,6 @@
 		"Default" = "Service2"
 	)
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/gripper/service,
 		/obj/item/reagent_containers/glass/bucket,
 		/obj/item/material/minihoe,
@@ -38,7 +37,12 @@
 		/obj/item/tray/robotray,
 		/obj/item/reagent_containers/borghypo/service
 	)
-	emag = /obj/item/reagent_containers/food/drinks/bottle/small/beer/fake
+	emag_gear = list(
+		/obj/item/melee/baton/robot/electrified_arm,
+		/obj/item/device/flash,
+		/obj/item/gun/energy/gun,
+		/obj/item/reagent_containers/food/drinks/bottle/small/beer/fake
+	)
 	skills = list(
 		SKILL_BUREAUCRACY         = SKILL_MASTER,
 		SKILL_COMPUTER            = SKILL_EXPERIENCED,
@@ -57,13 +61,14 @@
 
 /obj/item/robot_module/clerical/butler/finalize_emag()
 	. = ..()
-	emag.SetName("Mickey Finn's Special Brew")
+	var/obj/item/reagent_containers/food/drinks/bottle/small/beer/fake/booze = locate() in equipment
+	booze.SetName("Mickey Finn's Special Brew")
 
 /obj/item/robot_module/clerical/butler/respawn_consumable(mob/living/silicon/robot/R, amount)
 	..()
-	if(emag)
-		var/obj/item/reagent_containers/food/drinks/bottle/small/beer/fake/B = emag
-		B.reagents.add_reagent(/datum/reagent/chloralhydrate/beer2, 2 * amount)
+	if (R.emagged)
+		var/obj/item/reagent_containers/food/drinks/bottle/small/beer/fake/fake = locate() in equipment
+		fake.reagents.add_reagent(/datum/reagent/chloralhydrate/beer, 2 * amount)
 
 /obj/item/robot_module/clerical/general
 	name = "clerical robot module"
@@ -91,7 +96,13 @@
 		/obj/item/crowbar,
 		/obj/item/stack/package_wrap/cyborg
 	)
-	emag = /obj/item/stamp/chameleon
+	emag_gear = list(
+		/obj/item/melee/baton/robot/electrified_arm,
+		/obj/item/device/flash,
+		/obj/item/gun/energy/gun,
+		/obj/item/flamethrower/full/loaded,
+		/obj/item/stamp/chameleon
+	)
 	synths = list(
 		/datum/matter_synth/package_wrap
 	)
@@ -101,3 +112,10 @@
 	var/datum/matter_synth/package_wrap/wrap = locate() in synths
 	var/obj/item/stack/package_wrap/cyborg/wrap_item = locate() in equipment
 	wrap_item.synths = list(wrap)
+
+
+/obj/item/robot_module/clerical/general/respawn_consumable(mob/living/silicon/robot/R, amount)
+	..()
+	if (R.emagged)
+		var/obj/item/flamethrower/full/loaded/flamethrower = locate() in equipment
+		flamethrower.beaker.reagents.add_reagent(/datum/reagent/napalm, 10 * amount)

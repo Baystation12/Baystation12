@@ -265,7 +265,7 @@
 	return
 
 /mob/living/silicon/robot/proc/activate_module(obj/item/O)
-	if(!(locate(O) in module.equipment) && O != src.module.emag)
+	if(!(locate(O) in module.equipment))
 		return
 	if (IsHolding(O))
 		to_chat(src, SPAN_NOTICE("Already activated"))
