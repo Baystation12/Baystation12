@@ -113,6 +113,9 @@
 	RETURN_TYPE(/list)
 	var/list/filtered_entries = list()
 	for(var/datum/computer_file/report/crew_record/CR in department_crew_manifest(filter, blacklist))
+		if (CR.get_status() == "Stored")
+			continue
+
 		filtered_entries.Add(list(list(
 			"name" = CR.get_name(),
 			"rank" = CR.get_job(),
