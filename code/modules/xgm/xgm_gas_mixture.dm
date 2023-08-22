@@ -145,15 +145,27 @@
 /datum/gas_mixture/proc/add_thermal_energy(thermal_energy)
 
 	if (total_moles == 0)
-		return 0
+		return FALSE
 
+	var/thermal_mod = 1
 	var/heat_capacity = heat_capacity()
 	if (thermal_energy < 0)
 		if (temperature < TCMB)
-			return 0
-		var/thermal_energy_limit = -(temperature - TCMB)*heat_capacity	//ensure temperature does not go below TCMB
+			return FALSE
+		var/thermal_energy_limit = -(temperature - TCMB) * heat_capacity	//ensure temperature does not go below TCMB
 		thermal_energy = max( thermal_energy, thermal_energy_limit )	//thermal_energy and thermal_energy_limit are negative here.
-	temperature += thermal_energy/heat_capacity
+	else
+		switch (temperature)
+			if (500 to 1000)
+				thermal_mod = 0.8
+			if (1000 to 1500)
+				thermal_mod = 0.6
+			if (1500 to 1750)
+				thermal_mod = 0.4
+			else
+				thermal_mod = 0.2
+
+	temperature += thermal_energy / heat_capacity * thermal_mod
 	return thermal_energy
 
 //Returns the thermal energy change required to get to a new temperature

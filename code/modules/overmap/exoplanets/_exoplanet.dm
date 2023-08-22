@@ -62,18 +62,8 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	var/list/spawned_features
 
 	//Either a type or a list of types and weights. You must include all types if it's a list
-	var/list/habitability_distribution = list(
-		HABITABILITY_IDEAL = 10,
-		HABITABILITY_OKAY = 40,
-		HABITABILITY_BAD = 50
-	)
-	var/habitability_class
 
-/obj/effect/overmap/visitable/sector/exoplanet/proc/generate_habitability()
-	if (isnum(habitability_distribution))
-		habitability_class = habitability_distribution
-	else
-		habitability_class = pickweight_index(habitability_distribution)
+	var/habitability_weight = HABITABILITY_TYPICAL
 
 /obj/effect/overmap/visitable/sector/exoplanet/New(nloc, max_x, max_y)
 	if (!GLOB.using_map.use_overmap)
@@ -115,14 +105,13 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	..()
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/build_level()
-	generate_habitability()
 	generate_atmosphere()
 	for (var/datum/exoplanet_theme/T in themes)
 		T.adjust_atmosphere(src)
 	if (atmosphere)
 		//Set up gases for living things
 		if (!length(breathgas))
-			var/list/goodgases = gas_data.gases.Copy()
+			var/list/goodgases = atmosphere.gas.Copy()
 			var/gasnum = min(rand(1,3), length(goodgases))
 			for (var/i = 1 to gasnum)
 				var/gas = pick(goodgases)
