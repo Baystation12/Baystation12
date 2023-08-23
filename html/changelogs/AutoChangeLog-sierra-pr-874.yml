@@ -1,0 +1,9 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: Exoplanet atmospheres are more varied now, with a wider, but more grounded
+      temperature range and less non-terraformed planets with ideal atmospheres.
+  - tweak: All exoplanet types can now generate with all templates - volcanic cities,
+      for example.
+  - tweak: Thermal energy in gas mixtures is gained significantly slower the hotter
+      the mixture is.
