@@ -1,0 +1,8 @@
+author: SingingSpock
+delete-after: true
+changes:
+  - maptweak: Minor D2 wiring fixes
+  - maptweak: Rewired the RUST, making both SMESes useful. Engineers should read the
+      note in the antechamber before setting up.
+  - maptweak: Removed superfluous SMES in the shield bay area and rewired area for
+      better useability
