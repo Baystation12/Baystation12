@@ -141,3 +141,18 @@
 	<i>Regards, John.</i></tt>
 	<i>This paper has been stamped with the stamp of Office of the General Secretary of SCG.</i>
 	"}
+
+/obj/item/paper/newrust
+	name = "note - RUST Wiring Updates (Mandatory Reading)"
+	info = {"
+	<div style="text-align: center;">
+<h1>RUST Wiring Updates</h1>
+</div>
+<h2></h2>
+<p>Boys at the Observatory decided to upgrade the wiring of our fusion engine room. To adapt, we will need to adjust our normal procedures.</p>
+<ul>
+<li>You do NOT need to bypass the SMES in this antechamber. It is no longer irrelevant, it is the only thing separating RUST output from the main power grid.</li>
+<li>If you are running a standard setup, you SHOULD NOT run the gyrotron after the Hydrogen to Helium reaction starts. This was always a bad idea, as it isn't necessary and the gyrotron will eat 1.25 MW of power at the highest settings, but now it is on a subgrid that will struggle if that much power is being drained constantly.</li>
+</ul>
+<p><i>Chief Petty Officer Meng Jiao</i></p>
+"}
