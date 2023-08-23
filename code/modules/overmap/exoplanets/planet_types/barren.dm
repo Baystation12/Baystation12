@@ -4,20 +4,23 @@
 	color = "#6c6c6c"
 	planetary_area = /area/exoplanet/barren
 	rock_colors = list(COLOR_BEIGE, COLOR_GRAY80, COLOR_BROWN)
+	possible_themes = list(/datum/exoplanet_theme/mountains)
 	map_generators = list(/datum/random_map/noise/exoplanet/barren, /datum/random_map/noise/ore/rich)
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 	features_budget = 6
 	surface_color = "#807d7a"
 	water_color = null
-	habitability_weight = HABITABILITY_LOCKED
+	habitability_distribution = HABITABILITY_BAD
 	has_trees = FALSE
 
 /obj/effect/overmap/visitable/sector/exoplanet/barren/generate_atmosphere()
-	atmosphere = new
-	return
+	..()
+	atmosphere.remove_ratio(0.9)
 
 /obj/effect/overmap/visitable/sector/exoplanet/barren/generate_flora()
-	return
+	if(prob(10))
+		flora_diversity = 1
+	..()
 
 /datum/random_map/noise/exoplanet/barren
 	descriptor = "barren exoplanet"
