@@ -36,25 +36,17 @@ pr_labels = pr.labels
 
 CL_INVALID = ":scroll: CL невалиден"
 CL_VALID = ":scroll: CL валиден"
-CL_NOT_NEEDED = ":scroll: CL не требуется"
 
 pr_is_mirror = pr.title.startswith("[MIRROR]")
 
 has_valid_label = False
 has_invalid_label = False
-cl_required = True
 for label in pr_labels:
     print("Found label: ", label.name)
-    if label.name == CL_NOT_NEEDED:
-        print("No CL needed!")
-        cl_required = False
     if label.name == CL_VALID:
         has_valid_label = True
     if label.name == CL_INVALID:
         has_invalid_label = True
-
-if pr_is_mirror:
-    cl_required = False
 
 write_cl = {}
 try:
@@ -63,21 +55,12 @@ try:
 except AttributeError:
     print("No CL found!")
 
-    if not cl_required:
-        # remove invalid, remove valid
-        if has_invalid_label:
-            pr.remove_from_labels(CL_INVALID)
-        if has_valid_label:
-            pr.remove_from_labels(CL_VALID)
-        exit(0)
-
-    # add invalid, remove valid
-    if not has_invalid_label:
-        pr.add_to_labels(CL_INVALID)
+    # remove invalid, remove valid
+    if has_invalid_label:
+        pr.remove_from_labels(CL_INVALID)
     if has_valid_label:
         pr.remove_from_labels(CL_VALID)
-    exit(1)
-
+    exit(0)
 
 if cl.group(2) is not None:
     write_cl['author'] = cl.group(2).strip()
