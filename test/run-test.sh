@@ -198,6 +198,7 @@ function run_code_tests {
     find_code_deps
     pip install --user PyYaml -q
     pip install --user beautifulsoup4 -q
+    pip install --user Pillow -q
     shopt -s globstar
     run_test_fail "maps contain no step_[xy]" "grep 'step_[xy]' maps/**/*.dmm"
     run_test_fail "maps contain no layer adjustments" "grep 'layer = ' maps/**/*.dmm"
