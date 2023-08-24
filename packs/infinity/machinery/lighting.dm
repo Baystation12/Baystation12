@@ -54,16 +54,17 @@
 	base_state = "small_tape"
 	icon_state = "small_tape_preset"
 
-/obj/item/light/led_neon/small/attackby(obj/item/I, mob/user)
-	. = ..()
-	if(istype(I, type))
+/obj/item/light/led_neon/small/use_tool(obj/item/tool, mob/user, list/click_params)
+	if(istype(tool, type))
 		var/turf/T = get_turf(user)
 		if(isturf(T))
 			user.drop_from_inventory(src, T)
-			user.drop_from_inventory(I, T)
-			qdel(I)
+			user.drop_from_inventory(tool, T)
+			qdel(tool)
 			qdel(src)
 			user.put_in_any_hand_if_possible(new /obj/item/light/led_neon/large(T))
+			return TRUE
+	return ..()
 
 /obj/item/storage/box/lights/led_neon
 	name = "box of neon leds"

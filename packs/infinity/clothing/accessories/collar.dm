@@ -38,16 +38,18 @@
 	icon_state = "collar_pisilv"
 	renameable = TRUE
 
-/obj/item/clothing/accessory/necklace/collar/attackby(obj/item/S, mob/user)
-	if(renameable && S.sharp)
+/obj/item/clothing/accessory/necklace/collar/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	if(renameable && tool.sharp)
 		var/inscription = sanitize(input("Enter an inscription to engrave.", "Inscription") as null|text)
 
-		if(!user.stat && !user.incapacitated() && user.Adjacent(src) && S.loc == user)
+		if(!user.stat && !user.incapacitated() && user.Adjacent(src) && user.use_sanity_check(src, tool))
 			if(!inscription)
-				return
+				return TRUE
 			USE_FEEDBACK_FAILURE("You carve \"[inscription]\" into \the [src].")
 			name = initial(name) + " ([inscription])"
 			desc = initial(desc) + " The tag says \"[inscription]\"."
+			return TRUE
+	return ..()
 
 /obj/item/clothing/accessory/necklace/collar/holo
 	name = "holo-collar"

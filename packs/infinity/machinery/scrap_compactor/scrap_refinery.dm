@@ -41,12 +41,12 @@ var/global/const/SAFETY_COOLDOWN = 100
 	update_icon()
 
 
-/obj/machinery/recycler/attackby(obj/item/I, mob/user, params)
+/obj/machinery/recycler/use_tool(obj/item/tool, mob/living/user, list/click_params)
 	add_fingerprint(user)
-	if (istype(I, /obj/item/card/emag))
+	if (istype(tool, /obj/item/card/emag))
 		emag_act(user)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		return
+		return TRUE
 	return ..()
 
 /obj/machinery/recycler/emag_act(mob/user)

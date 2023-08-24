@@ -99,7 +99,7 @@
 	QDEL_NULL(piston)
 	return ..()
 
-/obj/machinery/crusher_base/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/crusher_base/use_tool(obj/item/tool, mob/living/user, list/click_params)
 	if(status != "idle" && prob(40) && ishuman(user))
 		var/mob/living/carbon/human/M = user
 		var/prot = 0
@@ -120,20 +120,20 @@
 			M.visible_message(SPAN_DANGER("[user]'s hand catches in the [src]!"), SPAN_DANGER("Your hand gets caught in the [src]!"))
 			if(M.can_feel_pain())
 				M.emote("scream")
-		return
+		return TRUE
 
 	//Stuff you can do if the maint hatch is open
 	if(panel_open)
-		if(isWrench(O))
+		if(isWrench(tool))
 			to_chat(user, SPAN_NOTICE("You start [valve_open ? "closing" : "opening"] the pressure relief valve of [src]."))
-			if(do_after(user,50))
+			if(do_after(user, 50) && user.use_sanity_check(src, tool))
 				valve_open = !valve_open
 				to_chat(user, SPAN_NOTICE("You [valve_open ? "open" : "close"] the pressure relief valve of [src]."))
 				if(valve_open)
 					blocked = 0
 					action = "retract"
-			return
-	..()
+			return TRUE
+	return ..()
 
 /obj/machinery/crusher_base/proc/change_neighbor_base_icons()
 	var/obj/machinery/crusher_base/left = locate(/obj/machinery/crusher_base, get_step(src, WEST))

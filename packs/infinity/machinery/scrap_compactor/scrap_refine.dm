@@ -37,14 +37,17 @@
 	if(size < 0)
 		new /obj/structure/rubble/house(src)
 
-/obj/structure/scrap_cube/attackby(obj/item/W, mob/user)
+/obj/structure/scrap_cube/use_tool(obj/item/tool, mob/living/user, list/click_params)
 	user.do_attack_animation(src)
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-	if(istype(W,/obj/item) && W.force >=8)
-		visible_message(SPAN_NOTICE ("The [user] smashes the [src], restoring it's original form."))
-		make_pile()
-	else
-		visible_message(SPAN_NOTICE ("The [user] smashes the [src], but [W] is too weak to break it!"))
+	if (istype(tool, /obj/item))
+		if(tool.force >=8)
+			visible_message(SPAN_NOTICE ("The [user] smashes the [src], restoring it's original form."))
+			make_pile()
+		else
+			visible_message(SPAN_NOTICE ("The [user] smashes the [src], but [tool] is too weak to break it!"))
+		return TRUE
+	return ..()
 
 
 /obj/item/scrap_lump

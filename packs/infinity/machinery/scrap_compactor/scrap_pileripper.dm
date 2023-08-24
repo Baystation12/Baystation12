@@ -78,11 +78,12 @@
 	last_ripped += SAFETY_COOLDOWN
 	update_icon()
 
-/obj/machinery/pile_ripper/attackby(obj/item/I, mob/user, params)
+/obj/machinery/pile_ripper/use_tool(obj/item/tool, mob/living/user, list/click_params)
 	add_fingerprint(user)
-	if (istype(I, /obj/item/card/emag))
+	if (istype(tool, /obj/item/card/emag))
 		emag_act(user)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		return TRUE
 	return ..()
 
 /obj/machinery/pile_ripper/emag_act(mob/user)
