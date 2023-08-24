@@ -38,16 +38,16 @@
 		return TRUE
 	return ..()
 
-/obj/item/gun/projectile/shotgun/pump/exploration/attackby(obj/item/I, mob/user)
-	if(!reinforced && istype(I, /obj/item/pipe) && user.unEquip(I, src))
-		reinforced = I
+/obj/item/gun/projectile/shotgun/pump/exploration/use_tool(obj/item/tool, mob/user, list/click_params)
+	if(!reinforced && istype(tool, /obj/item/pipe) && user.unEquip(tool, src))
+		reinforced = tool
 		to_chat(user, SPAN_WARNING("You reinforce \the [src] with \the [reinforced]."))
 		playsound(src, 'sound/effects/tape.ogg',25)
 		explosion_chance = 10
 		bulk = bulk + 4
 		update_icon()
-		return 1
-	if(reinforced && isWirecutter(I))
+		return TRUE
+	if(reinforced && isWirecutter(tool))
 		to_chat(user, SPAN_WARNING("You remove \the [reinforced] that was reinforcing \the [src]."))
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 25, 1)
 		reinforced.dropInto(loc)
@@ -55,7 +55,7 @@
 		explosion_chance = initial(explosion_chance)
 		bulk = initial(bulk)
 		update_icon()
-		return 1
+		return TRUE
 	return ..()
 
 /obj/item/gun/projectile/shotgun/pump/exploration/special_check()

@@ -35,14 +35,14 @@
 			if(door.id_tag == id_tag && door.density && door.operable())
 				invoke_async(door, /obj/machinery/door/proc/do_animate, "emag")
 
-/obj/machinery/door/blast/regular/lockdown/attackby(obj/item/C as obj, mob/user as mob)
-	. = ..(C, user)
-	if(isid(C) || istype(C, /obj/item/modular_computer/pda))
+/obj/machinery/door/blast/regular/lockdown/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	if(isid(tool) || istype(tool, /obj/item/modular_computer/pda))
 		if(allowed(user))
 			for(var/obj/machinery/door/blast/regular/lockdown/door in SSmachines.machinery)
 				if(door.id_tag == id_tag)
 					invoke_async(door, /obj/machinery/door/proc/open)
-		return
+		return TRUE
+	return ..()
 
 /obj/machinery/door/blast/regular/lockdown/attack_ai()
 	for(var/obj/machinery/door/blast/regular/lockdown/door in SSmachines.machinery)

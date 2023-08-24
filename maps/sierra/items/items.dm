@@ -301,9 +301,9 @@ Passports
 	QDEL_NULL(ID)
 	return ..()
 
-/obj/item/device/remote_device/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/card/id))
-		var/obj/item/card/id/ID = I
+/obj/item/device/remote_device/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	if(istype(tool, /obj/item/card/id))
+		var/obj/item/card/id/ID = tool
 		if((ID.access && region_access) && (ID.access & region_access))
 			safety = !safety
 			to_chat(user, SPAN_NOTICE("You swipe your indefication card on \the [src]. The safety lock [safety ? "has been reset" : "off"]."))
@@ -316,14 +316,17 @@ Passports
 			)
 			playsound(src.loc, pick(beepsounds),15,1,10)
 			create_access(ID)
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+			return TRUE
 
-	if(istype(I, /obj/item/card/emag) && !emagged)
+	if(istype(tool, /obj/item/card/emag) && !emagged)
 		safety = FALSE
 		emagged = TRUE
 		to_chat(user, "This device now can electrify doors.")
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		return TRUE
 
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	return
+	return ..()
 
 /obj/item/device/remote_device/attack_self(mob/user)
 	if(mode == REMOTE_OPEN)
