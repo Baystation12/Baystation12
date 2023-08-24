@@ -1,0 +1,5 @@
+author: Petro1Ne1Koder
+delete-after: true
+changes:
+  - bugfix: Из шейкера нельзя вылить содержимае на пол
+  - bugfix: Face direction во вкладке IC не замедляет
