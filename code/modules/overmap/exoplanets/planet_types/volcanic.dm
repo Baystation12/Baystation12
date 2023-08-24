@@ -96,17 +96,16 @@
 
 	ambient_light_multiplier = 1
 
-/turf/simulated/floor/exoplanet/lava/Initialize()
-	. = ..()
-	add_ambient_light(COLOR_ORANGE, 0.5)
+/turf/simulated/floor/exoplanet/lava/setup_local_ambient()
+	set_ambient_light(COLOR_ORANGE, 1)
 
 /turf/simulated/floor/exoplanet/lava/on_update_icon()
 	return
 
 /turf/simulated/floor/exoplanet/lava/Destroy()
-	replace_ambient_light(COLOR_ORANGE, null, 0.5, null)
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
+	clear_ambient_light()
 
 /turf/simulated/floor/exoplanet/lava/Entered(atom/movable/AM)
 	..()

@@ -215,6 +215,7 @@
 	dynamic_lighting = FALSE
 	icon = null
 	icon_state = null
+	permit_ao = FALSE
 
 /turf/simulated/planet_edge/Initialize()
 	. = ..()

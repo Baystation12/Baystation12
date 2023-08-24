@@ -17,7 +17,7 @@
 	transform = matrix(WORLD_ICON_SIZE / 32, 0, (WORLD_ICON_SIZE - 32) / 2, 0, WORLD_ICON_SIZE / 32, (WORLD_ICON_SIZE - 32) / 2)
 	#endif
 
-/atom/movable/lighting_overlay/Initialize(mapload, no_update)
+/atom/movable/lighting_overlay/Initialize(mapload, update_now = FALSE)
 	. = ..()
 	atom_flags |= ATOM_FLAG_INITIALIZED
 	SSlighting.total_lighting_overlays += 1

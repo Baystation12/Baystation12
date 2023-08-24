@@ -18,6 +18,17 @@
 	var/ambient_light_old_g = 0
 	var/ambient_light_old_b = 0
 
+	var/ambient_bitflag = 0
+
+//Done on init if mapload, done post copying corners if changeturf
+/turf/proc/setup_local_ambient()
+	return
+
+/turf/Initialize(mapload, ...)
+	. = ..()
+	if(mapload)
+		setup_local_ambient()
+
 /turf/proc/set_ambient_light(color, multiplier)
 	if (color == ambient_light && multiplier == ambient_light_multiplier)
 		return
@@ -149,8 +160,7 @@
 // Builds a lighting overlay for us, but only if our area is dynamic.
 /turf/proc/lighting_build_overlay(now = FALSE)
 	if (lighting_overlay)
-		return	// shrug
-		// CRASH("Attempted to create lighting_overlay on tile that already had one.")
+		CRASH("Attempted to create lighting_overlay on tile that already had one.")
 
 	if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(src))
 		if (!lighting_corners_initialised || !corners)

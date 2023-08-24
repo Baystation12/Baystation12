@@ -19,7 +19,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	//DAY/NIGHT CYCLE
 	var/daycycle //How often do we change day and night
 	//var/current_time // Holds the current time for sun positioning.  Note that we assume day and night is the same length because simplicity.
-	var/sun_process_interval = 5 MINUTES //How often we update planetary sunlight -> This has a performance impact, though consider lengthening days if you increase this else you may skip over phases
+	var/sun_process_interval = 1 MINUTES //How often we update planetary sunlight -> This has a performance impact, though consider lengthening days if you increase this else you may skip over phases
 	var/sun_last_process = null // world.time
 
 	/// 0 means midnight, 1 means noon.
@@ -27,13 +27,8 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	/// This a multiplier used to apply to the brightness of ambient lighting.  0.3 means 30% of the brightness of the sun.
 	var/sun_brightness_modifier = 0.5
 
-	/// The color currently applied to the sun.
-	var/sun_apparent_color
-	var/sun_apparent_brightness
-	var/sun_updating = FALSE //Once a color/brightness value has been set, we must finish setting turfs before changing values again
-	var/sun_next_color
-	var/sun_next_brightness
-	var/sun_needs_update = FALSE
+	/// Sun control
+	var/ambient_group_index = -1
 
 	var/maxx
 	var/maxy
@@ -197,14 +192,10 @@ GLOBAL_VAR(planet_repopulation_disabled)
 
 	if(sun_last_process <= world.time - sun_process_interval)
 		update_sun()
-	if(sun_needs_update)
-		update_sunlight()
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_daycycle()
-	daycycle = rand(20 MINUTES, 40 MINUTES)
-
+	daycycle = 10 MINUTES
 	update_sun()
-
 
 // This changes the position of the sun on the planet.
 /obj/effect/overmap/visitable/sector/exoplanet/proc/update_sun()
@@ -272,47 +263,11 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	//We do a gradient instead of linear interpolation because linear interpolations of colours are unintuitive
 	var/new_color = UNLINT(gradient(low_color, high_color, space = COLORSPACE_HSV, index=interpolate_weight))
 
-	finish_updating_sun(new_brightness, new_color)
-
-/obj/effect/overmap/visitable/sector/exoplanet/proc/finish_updating_sun(new_brightness, new_color)
-	set waitfor = FALSE
-	ASSERT(length(args) < 3)
-	// Delta updates: changing the sun while it's still updating will permanently corrupt ambient lights (short of resetting them globally)
-	while(sun_updating)
-		stoplag()
-
-	sun_updating = TRUE //Block any further changes
-
-	sun_next_brightness = new_brightness
-	sun_next_color = new_color
-
-	sun_needs_update = TRUE
-
-
-/obj/effect/overmap/visitable/sector/exoplanet/proc/update_sunlight()
-	sun_needs_update = FALSE
-	if (sun_next_brightness == sun_apparent_brightness && sun_next_color == sun_apparent_color)
-		sun_updating = FALSE
-		log_debug("update_sunlight(): apparent == next, not bothering")
-		return
-
-	//Replace implies we already set colour before. Else we're going to run into an assert
-	var/replace = (sun_apparent_color != null) && (sun_apparent_brightness != null)
-
-	var/list/surface = block(locate(1, 1, min(map_z)),locate(maxx,maxy, max(map_z)))
-	for (var/turf/simulated/floor/T in surface)
-		if(istype(T))
-			if(T.is_outside() && TURF_IS_DYNAMICALLY_LIT_UNSAFE(T)) //Probably more accurate to base it on z stack
-				if(replace)
-					T.replace_ambient_light(sun_apparent_color, sun_next_color, sun_apparent_brightness, sun_next_brightness)
-				else
-					T.add_ambient_light(sun_next_color, sun_next_brightness)
-
-			CHECK_TICK
-
-	sun_apparent_color = sun_next_color
-	sun_apparent_brightness = sun_next_brightness
-	sun_updating = FALSE
+	if(ambient_group_index > 0)
+		var/datum/ambient_group/A = SSambient_lighting.ambient_groups[ambient_group_index]
+		A.set_color(new_color, new_brightness)
+	else
+		ambient_group_index = SSambient_lighting.create_ambient_group(new_color, new_brightness)
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_map()
 	var/list/grasscolors = plant_colors.Copy()

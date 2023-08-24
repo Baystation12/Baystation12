@@ -43,12 +43,6 @@
 	var/old_above = above
 	var/old_permit_ao = permit_ao
 
-	var/old_ambience =         ambient_light
-	var/old_ambience_mult =    ambient_light_multiplier
-	var/old_ambient_light_old_r = ambient_light_old_r
-	var/old_ambient_light_old_g = ambient_light_old_g
-	var/old_ambient_light_old_b = ambient_light_old_b
-
 	if(isspaceturf(N) || isopenspace(N))
 		QDEL_NULL(turf_fire)
 	else
@@ -69,9 +63,11 @@
 		var/turf/simulated/S = src
 		if(S.zone) S.zone.rebuild()
 
+	if(ambient_bitflag) //Should remove everything about current bitflag, let it be recalculated by SS later
+		SSambient_lighting.clean_turf(src)
+
 	// Run the Destroy() chain.
 	qdel(src)
-
 	var/turf/simulated/W = new N(src)
 
 	if (permit_ao)
@@ -105,30 +101,23 @@
 	W.ao_neighbors = old_ao_neighbors
 	// lighting stuff
 
-	affecting_lights = old_affecting_lights
-	corners = old_corners
+	if(SSlighting.initialized)
+		recalc_atom_opacity()
+		lighting_overlay = old_lighting_overlay
+		affecting_lights = old_affecting_lights
+		corners = old_corners
+		if (old_opacity != opacity || dynamic_lighting != old_dynamic_lighting)
+			reconsider_lights()
+			updateVisibility(src)
 
-	lighting_overlay = old_lighting_overlay
+		if (dynamic_lighting != old_dynamic_lighting)
+			if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(src))
+				lighting_build_overlay()
+			else
+				lighting_clear_overlay()
 
-	recalc_atom_opacity()
 
-	ambient_light_old_r = old_ambient_light_old_r
-	ambient_light_old_g = old_ambient_light_old_g
-	ambient_light_old_b = old_ambient_light_old_b
-
-	if (old_ambience != ambient_light || old_ambience_mult != ambient_light_multiplier)
-		update_ambient_light(FALSE)
-
-	var/tidlu = TURF_IS_DYNAMICALLY_LIT_UNSAFE(src)
-	if ((old_opacity != opacity) || (tidlu != old_dynamic_lighting) || force_lighting_update)
-		reconsider_lights()
-
-	if (tidlu != old_dynamic_lighting)
-		if (tidlu)
-			lighting_build_overlay()
-		else
-			lighting_clear_overlay()
-
+	W.setup_local_ambient()
 	// end of lighting stuff
 
 	for(var/turf/T in RANGE_TURFS(src, 1))

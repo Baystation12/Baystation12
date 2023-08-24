@@ -11,6 +11,7 @@
 	turf_flags = TURF_DISALLOW_BLOB
 
 	z_eventually_space = TRUE
+	var/starlit = FALSE
 
 /turf/space/Initialize()
 	. = ..()
@@ -32,6 +33,7 @@
 	return INITIALIZE_HINT_LATELOAD // oh no! we need to switch to being a different kind of turf!
 
 /turf/space/Destroy()
+	remove_starlight()
 	// Cleanup cached z_eventually_space values above us.
 	if (above)
 		var/turf/T = src
@@ -53,6 +55,11 @@
 /turf/space/is_solid_structure()
 	return locate(/obj/structure/lattice, src) || locate(/obj/structure/catwalk, src) //counts as solid structure if it has a lattice or catwalk
 
+/turf/space/proc/remove_starlight()
+	if(starlit)
+		replace_ambient_light(SSskybox.background_color, null, config.starlight, 0)
+		starlit = FALSE
+
 /turf/space/proc/update_starlight()
 	if(!config.starlight)
 		return
@@ -62,11 +69,12 @@
 		if (!isloc(T.loc) || !TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
 			continue
 
-		set_ambient_light(SSskybox.background_color, 0.5)
+		add_ambient_light(SSskybox.background_color, config.starlight)
+		starlit = TRUE
 		return
 
 	if(TURF_IS_AMBIENT_LIT_UNSAFE(src))
-		clear_ambient_light()
+		remove_starlight()
 
 /turf/space/attackby(obj/item/C as obj, mob/user as mob)
 

@@ -37,8 +37,8 @@
 	icon = 'icons/turf/flooring/circuit.dmi'
 	icon_state = "rcircuit_off"
 	initial_flooring = /singleton/flooring/reinforced/circuit/selfdestruct
-	light_outer_range = 2
-	light_max_bright = 2
+	light_range = 2
+	light_power = 2
 	light_color = COLOR_BLACK
 
 /turf/simulated/floor/wood

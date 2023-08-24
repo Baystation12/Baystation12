@@ -335,8 +335,8 @@
 
 	var/static/aooc_allowed = TRUE
 
-	/// Whether space turfs have ambient light or not
-	var/static/starlight = 0
+	/// Whether space turfs have ambient light or not, value clamped 0 to 1, default, 0.5
+	var/static/starlight = 0.5
 
 	var/static/list/ert_species = list(SPECIES_HUMAN)
 

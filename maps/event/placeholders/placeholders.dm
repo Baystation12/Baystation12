@@ -40,7 +40,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 		if (isnull(option))
 			return
 		selected.color = option
-/*	else if (option == "Sensor")
+	else if (option == "Sensor")
 		option = alert(user, "Sensor Range", null, "Off", "Short", "Far")
 		if (isnull(option))
 			return
