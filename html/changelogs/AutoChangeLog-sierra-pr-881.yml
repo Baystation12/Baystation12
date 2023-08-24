@@ -1,0 +1,5 @@
+author: emmanuelbassil
+delete-after: true
+changes:
+  - tweak: Vending machines now emit weak light when powered. Let capitalism be your
+      guide in the darkness.
