@@ -1,8 +1,9 @@
 /datum/event/prison_break
-	startWhen		= 5
-	announceWhen	= 75
+	startWhen = 5
+	announceWhen = 75
+	endWhen = 60
+	var/warning = 0.5
 
-	var/releaseWhen = 60
 	var/list/area/areas = list()		//List of areas to affect. Filled by start()
 
 	var/eventDept = "Security"			//Department name in announcement
@@ -12,14 +13,13 @@
 
 /datum/event/prison_break/setup()
 	announceWhen = rand(75, 105)
-	releaseWhen = rand(60, 90)
-
-	src.endWhen = src.releaseWhen+2
+	endWhen = announceWhen + rand(5, 25)
+	warning = rand(5, 10) / 10
 
 
 /datum/event/prison_break/announce()
-	if(areas && length(areas) > 0)
-		command_announcement.Announce("[pick("Gr3yT1d3 virus","Malignant trojan",)] detected in [location_name()] [(eventDept == "Security")? "imprisonment":"containment"] subroutines. Secure any compromised areas immediately.", "[location_name()] Anti-Virus Alert", zlevels = affecting_z)
+	if (areas && length(areas) > 0)
+		command_announcement.Announce("[pick("Gr3yT1d3 virus","Malignant trojan",)] detected in [location_name()] [eventDept] subroutines. Secure any compromised areas immediately.", "[location_name()] Anti-Virus Alert", zlevels = affecting_z)
 
 
 /datum/event/prison_break/start()
@@ -42,14 +42,13 @@
 
 
 /datum/event/prison_break/tick()
-	if(activeFor == releaseWhen)
-		if(areas && length(areas) > 0)
+	if (activeFor >= warning * endWhen)
+		if (areas && length(areas) > 0)
 			var/obj/machinery/power/apc/theAPC = null
-			for(var/area/A in areas)
+			for (var/area/A in areas)
 				theAPC = A.get_apc()
-				if(theAPC && theAPC.operating)	//If the apc's off, it's a little hard to overload the lights.
-					for(var/obj/machinery/light/L in A)
-						L.flicker(10)
+				if (theAPC && theAPC.operating)
+					theAPC.flicker_lighting()
 
 
 /datum/event/prison_break/end()
