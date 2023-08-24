@@ -41,18 +41,19 @@
 		to_chat(user, SPAN_NOTICE("You pull out all the tape!"))
 		ruin()
 
-/obj/item/music_tape/attackby(obj/item/I, mob/user, params)
-	if(ruined && (isScrewdriver(I) || istype(I, /obj/item/pen)))
+/obj/item/music_tape/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	if(ruined && (isScrewdriver(tool) || istype(tool, /obj/item/pen)))
 		to_chat(user, SPAN_NOTICE("You start winding \the [src] back in..."))
-		if(do_after(user, 120, target = src))
+		if(do_after(user, 12 SECONDS, target = src) && user.use_sanity_check(src, tool))
 			to_chat(user, SPAN_NOTICE("You wound \the [src] back in."))
 			fix()
-		return
+		return TRUE
 
-	if(istype(I, /obj/item/pen))
+	if(istype(tool, /obj/item/pen))
 		if(loc == user && !user.incapacitated())
 			var/new_name = input(user, "What would you like to label \the [src]?", "\improper [src] labeling", name) as null|text
-			if(isnull(new_name) || new_name == name) return
+			if(isnull(new_name) || new_name == name)
+				return TRUE
 
 			new_name = sanitizeSafe(new_name)
 
@@ -66,8 +67,9 @@
 				if(track)
 					track.title = "unknown"
 				SetName("tape")
-		return
-	..()
+		return TRUE
+
+	return ..()
 
 /obj/item/music_tape/fire_act()
 	ruin()

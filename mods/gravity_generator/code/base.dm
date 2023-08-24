@@ -175,7 +175,7 @@
 				var/obj/item/stack/material/plasteel/PS = tool
 				if(PS.amount < 10)
 					to_chat(user, SPAN_WARNING("You need 10 sheets of plasteel."))
-					return FALSE
+					return TRUE
 
 				user.visible_message(
 					SPAN_NOTICE("[user] begins to add plasteel to the destroyed frame."),
@@ -183,8 +183,8 @@
 				)
 				playsound(loc, 'sound/machines/click.ogg', 75, 1)
 
-				if(!do_after(user, 15 SECONDS, middle) || PS.amount < 10)
-					return FALSE
+				if(!do_after(user, 15 SECONDS, middle) || !user.use_sanity_check(src, tool) || PS.amount < 10)
+					return TRUE
 
 				PS.use(10)
 				health += 250
@@ -208,8 +208,8 @@
 				playsound(loc, 'sound/items/Welder2.ogg', 50, 1)
 				var/obj/item/weldingtool/WT = tool
 
-				if(!do_after(user, 15 SECONDS, middle) || !WT.remove_fuel(1, user) || broken_state != GRAV_NEEDS_WELDING)
-					return FALSE
+				if(!do_after(user, 15 SECONDS, middle) || !user.use_sanity_check(src, tool) || !WT.remove_fuel(1, user) || broken_state != GRAV_NEEDS_WELDING)
+					return TRUE
 
 				health += 250
 				user.visible_message(
@@ -230,8 +230,8 @@
 				)
 				playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
 
-				if(!do_after(user, 15 SECONDS, middle) || broken_state != GRAV_NEEDS_WRENCH)
-					return FALSE
+				if(!do_after(user, 15 SECONDS, middle) || !user.use_sanity_check(src, tool) || broken_state != GRAV_NEEDS_WRENCH)
+					return TRUE
 
 				health += 250
 				user.visible_message(
@@ -252,8 +252,8 @@
 				)
 				playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 
-				if(!do_after(user, 15 SECONDS, middle) || broken_state != GRAV_NEEDS_SCREWDRIVER)
-					return FALSE
+				if(!do_after(user, 15 SECONDS, middle) || !user.use_sanity_check(src, tool) || broken_state != GRAV_NEEDS_SCREWDRIVER)
+					return TRUE
 
 				health += max(initial(health), health + 250)
 				user.visible_message(
@@ -268,8 +268,8 @@
 				return TRUE
 
 	if(isCrowbar(tool))
-		if(!do_after(user, 5 SECONDS, middle))
-			return FALSE
+		if(!do_after(user, 5 SECONDS, middle) || !user.use_sanity_check(src, tool))
+			return TRUE
 
 		playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 		panel_open = !panel_open
@@ -547,8 +547,10 @@
 	. = ..()
 	main_part.show_broken_info(user)
 
-/obj/machinery/gravity_generator/part/attackby(obj/item/I, mob/user)
-	return main_part.attackby(I, user)
+/obj/machinery/gravity_generator/part/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	if (main_part)
+		return main_part.use_tool(tool, user, click_params)
+	return ..()
 
 /obj/machinery/gravity_generator/part/bullet_act(obj/item/projectile/P)
 	return main_part.bullet_act(P)

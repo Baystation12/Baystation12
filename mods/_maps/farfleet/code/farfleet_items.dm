@@ -190,11 +190,11 @@
 	. = ..()
 	launcher = new(src)
 
-/obj/item/gun/energy/laser/bonfire/attackby(obj/item/I, mob/user)
-	if((istype(I, /obj/item/grenade)))
-		launcher.load(I, user)
-	else
-		..()
+/obj/item/gun/energy/laser/bonfire/use_tool(obj/item/tool, mob/user, list/click_params)
+	if(istype(tool, /obj/item/grenade))
+		launcher.load(tool, user)
+		return TRUE
+	return ..()
 
 /obj/item/gun/energy/laser/bonfire/attack_hand(mob/user)
 	if(user.get_inactive_hand() == src && use_launcher)

@@ -199,55 +199,55 @@ GLOBAL_LIST_INIT(switch_small_sound, list(
 		if(PLAYER_STATE_PAUSE)
 			set_mode(PLAYER_STATE_PLAY)
 
-/obj/item/music_player/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/music_tape))
-		var/obj/item/music_tape/C = I
+/obj/item/music_player/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	if(istype(tool, /obj/item/music_tape))
+		var/obj/item/music_tape/C = tool
 		if(tape)
 			to_chat(user, SPAN_NOTICE("There is already \a [tape] inside."))
-			return
+			return TRUE
 
 		if(C.ruined)
 			USE_FEEDBACK_FAILURE("\The [C] is ruined, you can't use it.")
-			return
+			return TRUE
 
 		if(!user.unEquip(C))
-			return
+			return TRUE
 
-		I.forceMove(src)
+		C.forceMove(src)
 		tape = C
 		user.visible_message(
 			SPAN_NOTICE("[user] insert \a [tape] into \the [src]."),
 			SPAN_NOTICE("You insert \a [tape] into \the [src]."))
 		playsound(src, 'sound/weapons/TargetOn.ogg', 35, 1)
 		update_icon()
-		return
+		return TRUE
 
-	if(istype(I, /obj/item/cell/device))
-		var/obj/item/cell/device/C = I
+	if(istype(tool, /obj/item/cell/device))
+		var/obj/item/cell/device/C = tool
 		if(panel == PANEL_OPENED)
 			if(cell)
 				to_chat(user, SPAN_NOTICE("[src] already has \a [cell] installed."))
-				return
+				return TRUE
 
 			if(!user.unEquip(C))
-				return
+				return TRUE
 
-			I.forceMove(src)
+			C.forceMove(src)
 			cell = C
 			to_chat(user, SPAN_NOTICE("You insert \a [cell] into \the [src]."))
 			update_icon()
-		return
+		return TRUE
 
-	if(isScrewdriver(I))
+	if(isScrewdriver(tool))
 		switch(panel)
 			if(PANEL_UNSCREWED)
-				user.visible_message(SPAN_NOTICE("\The [user] screw \the [src]'s front panel with \the [I]."), SPAN_NOTICE("You screw \the [src]'s front panel."))
+				user.visible_message(SPAN_NOTICE("\The [user] screw \the [src]'s front panel with \the [tool]."), SPAN_NOTICE("You screw \the [src]'s front panel."))
 				playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 				panel = PANEL_CLOSED
 				return TRUE
 
 			if(PANEL_CLOSED)
-				user.visible_message(SPAN_NOTICE("\The [user] unscrew \the [src]'s front panel with \the [I]."), SPAN_NOTICE("You unscrew \the [src]'s front panel."))
+				user.visible_message(SPAN_NOTICE("\The [user] unscrew \the [src]'s front panel with \the [tool]."), SPAN_NOTICE("You unscrew \the [src]'s front panel."))
 				playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 				panel = PANEL_UNSCREWED
 				return TRUE
@@ -262,7 +262,7 @@ GLOBAL_LIST_INIT(switch_small_sound, list(
 				var/response = input(user, "What do you want to do?", "[src]") as null|anything in choices
 
 				if(!Adjacent(user) || !response)	//moved away or cancelled
-					return
+					return TRUE
 
 				switch(response)
 					if("Remove cell")
@@ -270,7 +270,7 @@ GLOBAL_LIST_INIT(switch_small_sound, list(
 							if(!MayAdjust(user))
 								return FALSE
 							playsound(src, 'sound/items/Screwdriver.ogg', 45, 1)
-							to_chat(user, SPAN_NOTICE("You pulled out [cell] out of [src] with [I]."))
+							to_chat(user, SPAN_NOTICE("You pulled out [cell] out of [src] with [tool]."))
 							user.put_in_hands(cell)
 							cell = null
 							update_icon()
@@ -278,55 +278,53 @@ GLOBAL_LIST_INIT(switch_small_sound, list(
 							USE_FEEDBACK_FAILURE("\The [src] doesn't have a cell installed.")
 					if("Adjust player")
 						if(!broken)
-							AdjustFrequency(I, user)
-							return TRUE
-		return
+							AdjustFrequency(tool, user)
+				return TRUE
 
-	if(isCrowbar(I))
+	if(isCrowbar(tool))
 		switch(panel)
 			if(PANEL_OPENED)
-				user.visible_message(SPAN_NOTICE("\The [user] re-attaches \the [src]'s front panel with \the [I]."), SPAN_NOTICE("You re-attach \the [src]'s front panel."))
+				user.visible_message(SPAN_NOTICE("\The [user] re-attaches \the [src]'s front panel with \the [tool]."), SPAN_NOTICE("You re-attach \the [src]'s front panel."))
 				playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 				panel = PANEL_UNSCREWED
 				update_icon()
 				return TRUE
 
 			if(PANEL_UNSCREWED)
-				user.visible_message(SPAN_NOTICE("\The [user] unhinges \the [src]'s front panel with \the [I]."), SPAN_NOTICE("You unhinge \the [src]'s front panel."))
+				user.visible_message(SPAN_NOTICE("\The [user] unhinges \the [src]'s front panel with \the [tool]."), SPAN_NOTICE("You unhinge \the [src]'s front panel."))
 				playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 				panel = PANEL_OPENED
 				update_icon()
 				return TRUE
-		return
 
-	if(istype(I,/obj/item/stack/nanopaste))
-		var/obj/item/stack/S = I
+	if(istype(tool, /obj/item/stack/nanopaste))
+		var/obj/item/stack/S = tool
 		if(broken && panel == PANEL_OPENED)
 			if(S.use(1))
 				user.visible_message(SPAN_NOTICE("\The [user] pours some of \the [S] onto \the [src]."), SPAN_NOTICE("You pour some of \the [S] over \the [src]'s internals and watch as it retraces and resolders paths."))
 				broken = FALSE
 			else
 				to_chat(user, SPAN_NOTICE("\The [S] is empty."))
-		return
+			return TRUE
 
-	if(isCoil(I))
-		var/obj/item/stack/S = I
+	if(isCoil(tool))
+		var/obj/item/stack/S = tool
 		if(broken && panel == PANEL_OPENED)
 			if(user.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
 				if(S.use(5))
 					user.visible_message(SPAN_NOTICE("\The [user] starts replace burned out wires in \the [src]."), SPAN_NOTICE("You are replacing burned out wires in \the [src]'."))
 					if(!do_after(user, 60, src))
-						return
+						return TRUE
 					user.visible_message(SPAN_NOTICE("\The [user] replaces burned out wires in \the [src]."), SPAN_NOTICE("You replace burned out wires in \the [src]."))
 					broken = FALSE
 				else
-					to_chat(user, SPAN_NOTICE("You need more [I] to fix \the [src]."))
+					to_chat(user, SPAN_NOTICE("You need more [S] to fix \the [src]."))
 
 			else
 				to_chat(user, SPAN_NOTICE("You don't know how to fix \the [src]."))
-		return
-	else
-		. = ..()
+			return TRUE
+
+	return ..()
 
 /obj/item/music_player/get_cell()
 	return cell
