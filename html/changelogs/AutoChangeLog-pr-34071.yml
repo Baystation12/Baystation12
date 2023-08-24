@@ -1,0 +1,6 @@
+author: Jux
+delete-after: true
+changes:
+  - bugfix: The prison break event now bolts open doors like it used to.
+  - tweak: The prison break event will now always announce itself before it ends,
+      and can target both the tac-arm and xenobio cells.
