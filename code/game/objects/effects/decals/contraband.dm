@@ -135,7 +135,7 @@
 /obj/structure/sign/poster/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Screwdriver - Block interaction
 	if (isScrewdriver(tool))
-		USE_FEEDBACK_FAILURE("You msut use wirecutters to remove \the [src].")
+		USE_FEEDBACK_FAILURE("You must use wirecutters to remove \the [src].")
 		return TRUE
 
 	// Wirecutters - Remove poster
