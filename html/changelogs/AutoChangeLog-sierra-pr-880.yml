@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - rscadd: You can now interact with held mobs using tools, including stabbing that
+      cat you're holding hostage when security tries to bang-rush you.
