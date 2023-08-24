@@ -4,8 +4,12 @@
 /client/New()
 	. = ..()
 	screentip = new
-	if(mob)
-		screentip.set_show(mob.get_preference_value(/datum/client_preference/show_screentip) == GLOB.PREF_SHOW)
+	if (SScharacter_setup.initialized)
+		screentip.set_show(get_preference_value(/datum/client_preference/show_screentip) == GLOB.PREF_SHOW)
+
+/mob/new_player/deferred_login()
+	. = ..()
+	client?.screentip.set_show(get_preference_value(/datum/client_preference/show_screentip) == GLOB.PREF_SHOW)
 
 /obj/screen/screentip
 	icon = null

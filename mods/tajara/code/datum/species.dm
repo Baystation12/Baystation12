@@ -154,3 +154,11 @@
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
 	H.equip_to_slot_or_del(new /obj/item/clothing/glasses/tajblind(H),slot_glasses)
+
+// human_species part
+/mob/living/carbon/human/tajaran/Initialize(mapload)
+	head_hair_style = "Tajaran Ears"
+	. = ..(mapload, SPECIES_TAJARA)
+
+/mob/living/carbon/human/farwa/Initialize(mapload)
+	. = ..(mapload, "Farwa")

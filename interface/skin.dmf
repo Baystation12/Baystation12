@@ -1047,6 +1047,7 @@ window "mapwindow"
 		font-size = 7
 		is-default = true
 		saved-params = "icon-size"
+		style = ".maptext { font-family: 'Small Fonts'; font-size: 7px; -dm-text-outline: 1px black; color: white; line-height: 1.1; }"
 		on-show = ".winset\"mainwindow.mainvsplit.left=mapwindow\""
 		on-hide = ".winset\"mainwindow.mainvsplit.left=\""
 	elem "lobbybrowser"

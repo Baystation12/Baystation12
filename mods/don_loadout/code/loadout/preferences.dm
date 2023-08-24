@@ -43,7 +43,8 @@
 		var/list/loadout_taken_slots = list()
 		var/list/accessories = list()
 
-		var/list/gears = Gear().Copy()
+		var/list/orig_gears = Gear()
+		var/list/gears = orig_gears.Copy()
 		if(trying_on_gear)
 			gears[trying_on_gear] = trying_on_tweaks.Copy()
 

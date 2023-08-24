@@ -187,7 +187,7 @@
 
 /obj/item/passport/xeno/tajara
 	name = "\improper Tajaran passport"
-	icon = 'packs/infinity/icons/obj/passports.dmi'
+	icon = 'maps/sierra/icons/obj/passports.dmi'
 	icon_state = "passport_taj"
 	desc = "A passport that apparently belongs to the Tajara."
 
