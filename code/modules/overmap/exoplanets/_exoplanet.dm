@@ -17,9 +17,9 @@ GLOBAL_VAR(planet_repopulation_disabled)
 
 
 	//DAY/NIGHT CYCLE
-	var/daycycle //How often do we change day and night
-	//var/current_time // Holds the current time for sun positioning.  Note that we assume day and night is the same length because simplicity.
-	var/sun_process_interval = 1 MINUTES //How often we update planetary sunlight -> This has a performance impact, though consider lengthening days if you increase this else you may skip over phases
+	var/daycycle_range = list(15 MINUTES, 30 MINUTES)
+	var/daycycle = 0//How often do we change day and night, at first list, to determine min and max day length
+	var/sun_process_interval = 1.5 MINUTES //How often we update planetary sunlight
 	var/sun_last_process = null // world.time
 
 	/// 0 means midnight, 1 means noon.
@@ -190,11 +190,11 @@ GLOBAL_VAR(planet_repopulation_disabled)
 			daddy.group_multiplier = Z.air.group_multiplier
 			Z.air.equalize(daddy)
 
-	if(sun_last_process <= world.time - sun_process_interval)
+	if(sun_last_process <= (world.time - sun_process_interval))
 		update_sun()
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_daycycle()
-	daycycle = 10 MINUTES
+	daycycle = rand(daycycle_range[1], daycycle_range[2])
 	update_sun()
 
 // This changes the position of the sun on the planet.

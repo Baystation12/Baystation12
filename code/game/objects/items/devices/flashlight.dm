@@ -19,9 +19,9 @@
 	action_button_name = "Toggle Flashlight"
 	var/on = FALSE
 	var/activation_sound = 'sound/effects/flashlight.ogg'
-	var/flashlight_power = 1 //brightness of light when on, must be no greater than 1.
+	var/flashlight_power = 1 //brightness of light when on
 	var/flashlight_range = 4 //outer range of light when on, can be negative
-	light_wedge = LIGHT_WIDE
+	light_wedge = LIGHT_VERY_WIDE
 	var/flashlight_flags = EMPTY_BITFIELD // FLASHLIGHT_ bitflags
 
 	var/spawn_dir // a way for mappers to force which way a flashlight faces upon spawning

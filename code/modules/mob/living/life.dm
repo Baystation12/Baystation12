@@ -193,9 +193,6 @@
 		reset_view(null)
 
 /mob/living/proc/update_sight()
-	handle_darksight() //Use last frame data as carbons do things out of order
-	set_sight(0)
-	set_see_in_dark(0)
 	if(stat == DEAD || eyeobj)
 		update_dead_sight()
 	else
@@ -229,7 +226,8 @@
 	return
 
 //Adaptative darksight
-//Ideally this would run instantly as mob updates are a bit too slow for this (noticeable when moving fast), but set_see_in_dark is called several times so it's not a good place to put item_states
+//Ideally this would run instantly as mob updates are a bit too slow for this (noticeable when moving fast), but set_see_in_dark is called several timees.
+//For the time being it's instant and called whenever see in dark changes. Replace with a single call at end of updates once code is not spaghetti
 /mob/living/proc/handle_darksight()
 	if(!darksight)
 		return
@@ -264,4 +262,14 @@
 	if(negative)
 		distance = 0 //Make it instant
 
-	animate(darksight, alpha = (adjust_to*255), transform = matrix().Update(scale_x = newScale, scale_y = newScale), time = (distance*10 SECONDS), flags = ANIMATION_LINEAR_TRANSFORM)
+	//TODO:.
+	//FIX VISION CODE! There is no correct place to update darksight as it keeps being reset and enabled several times a frame (even placing it on Life doesnt work because overrides set it in wrong function)
+	// Time = 0 means instant change, avoids some issues of animation resetting several times a frame
+	distance = 0
+
+	animate(darksight, alpha = (adjust_to*255), transform = matrix().Update(scale_x = newScale, scale_y = newScale), time = (distance*1 SECOND), flags = ANIMATION_LINEAR_TRANSFORM)
+
+//Need to update every time we set see in dark as it can be called at many different points and waiting for next frame causes visual artifacts
+/mob/living/set_see_in_dark(new_see_in_dark)
+	. = ..()
+	handle_darksight()

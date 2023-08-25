@@ -43,7 +43,7 @@ SUBSYSTEM_DEF(ambient_lighting) //A simple SS that handles updating ambient ligh
 	busy = TRUE
 
 	// Doing it ordered by zlev should ensure that it looks vaguely coherent mid-update regardless of turf insertion order.
-	for (var/zlev in 1 to member_turfs_by_z.len)
+	for (var/zlev in 1 to length(member_turfs_by_z))
 		for (var/turf/T as anything in member_turfs_by_z[zlev])
 			T.add_ambient_light_raw(dr, dg, db)
 			CHECK_TICK
@@ -74,7 +74,7 @@ SUBSYSTEM_DEF(ambient_lighting) //A simple SS that handles updating ambient ligh
 	if(T.ambient_bitflag & FLAG(global_index))
 		return
 
-	if (T.z > member_turfs_by_z)
+	if (T.z > length(member_turfs_by_z))
 		member_turfs_by_z.len = T.z
 
 	LAZYADD(member_turfs_by_z[T.z], T)
@@ -88,7 +88,7 @@ SUBSYSTEM_DEF(ambient_lighting) //A simple SS that handles updating ambient ligh
 	if(!(T.ambient_bitflag & FLAG(global_index)))
 		return
 
-	if (T.z > member_turfs_by_z.len)
+	if (T.z > length(member_turfs_by_z))
 		CRASH("Attempt to remove member turf with Z greater than local max -- this turf is not a member")
 
 	remove_ambient_light(T)
@@ -140,7 +140,8 @@ SUBSYSTEM_DEF(ambient_lighting) //A simple SS that handles updating ambient ligh
 
 /datum/controller/subsystem/ambient_lighting/Initialize(start_timeofday)
 	//Create space ambient group if nothing created it until now.
-	add_space_ambient_group()
+	if(ambient_groups[SPACE_AMBIENT_GROUP] == null)
+		add_space_ambient_group()
 
 	fire(FALSE, TRUE)
 	return ..()

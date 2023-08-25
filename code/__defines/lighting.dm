@@ -114,6 +114,7 @@
 // Some angle presets for directional lighting.
 #define LIGHT_OMNI null
 #define LIGHT_SEMI 180
+#define LIGHT_VERY_WIDE 135
 #define LIGHT_WIDE 90
 #define LIGHT_NARROW 45
 
