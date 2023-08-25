@@ -46,14 +46,11 @@
 	if (ishuman(A))
 		var/mob/living/carbon/human/H = A
 		var/obj/item/organ/external/head/head = H.organs_by_name[BP_HEAD]
-		to_world("Correctly created head [head].")
 
 		if (!istype(head))
-			to_world("Breaking early to return true.")
 			return TRUE
 
 		if (user.a_intent == I_HELP && user.zone_sel.selecting == BP_HEAD)
-			to_world("NOT A HEAD.")
 			head.write_on(user, name)
 			return TRUE
 

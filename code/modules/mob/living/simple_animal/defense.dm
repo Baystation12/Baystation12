@@ -59,16 +59,6 @@
 
 	return
 
-/mob/living/simple_animal/use_weapon(obj/item/weapon, mob/user, list/click_params)
-	// Attempt attack
-	var/result = weapon.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone())
-	if (result && ai_holder)
-		ai_holder.react_to_attack(user)
-		return TRUE
-
-	return ..()
-
-
 /mob/living/simple_animal/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Butcher's Cleaver - Butcher dead mob
 	if (istype(tool, /obj/item/material/knife/kitchen/cleaver))
@@ -138,8 +128,7 @@
 
 
 /mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, effective_force, hit_zone)
-	visible_message(SPAN_DANGER("\The [src] has been attacked with \the [O] by [user]!"))
-	if (O.force <= resistance)
+	if(O.force <= resistance)
 		to_chat(user, SPAN_DANGER("This weapon is ineffective; it does no damage."))
 		return FALSE
 
@@ -154,8 +143,6 @@
 	adjustBruteLoss(damage)
 	if (O.edge || O.sharp)
 		adjustBleedTicks(damage)
-	if (ai_holder)
-		ai_holder.react_to_attack(user)
 	return TRUE
 
 /mob/living/simple_animal/proc/reflect_unarmed_damage(mob/living/carbon/human/attacker, damage_type, description)

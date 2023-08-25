@@ -300,7 +300,7 @@
 /obj/item/shockpaddles/attack(mob/living/M, mob/living/user, target_zone)
 	var/mob/living/carbon/human/H = M
 	if (!istype(H) || user.a_intent != I_HELP)
-		return ..() //Cycle through the rest of the use_* calls.
+		return ..()
 
 	if (can_use(user, H))
 		busy = 1

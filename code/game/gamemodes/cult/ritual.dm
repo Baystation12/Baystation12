@@ -22,7 +22,6 @@
 		to_chat(user, "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though.")
 
 /obj/item/book/tome/attack(mob/living/M, mob/living/user)
-	SHOULD_CALL_PARENT(FALSE)
 	if (user.a_intent == I_HELP && user.zone_sel.selecting == BP_EYES)
 		user.visible_message(
 			SPAN_NOTICE("\The [user] shows \the [src] to \the [M]."),

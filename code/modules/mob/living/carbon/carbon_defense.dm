@@ -1,6 +1,6 @@
 
-/mob/living/carbon/standard_weapon_hit_effects(obj/item/I, mob/living/user, effective_force, hit_zone)
-	if(!effective_force)
+/mob/living/carbon/hit_with_weapon(obj/item/I, mob/living/user, effective_force, hit_zone)
+	if (!effective_force)
 		return 0
 
 	//Apply weapon damage

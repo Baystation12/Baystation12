@@ -27,7 +27,6 @@
 
 ///Clickon() with medical stacks will never go past attack() because this proc will never return FALSE. If needed, this is where to change it. Returns TRUE if handled and cannot progress.
 /obj/item/stack/medical/attack(mob/living/carbon/M, mob/user)
-	SHOULD_CALL_PARENT(FALSE)
 	if (!istype(M))
 		to_chat(user, SPAN_WARNING("\The [src] cannot be applied to [M]!"))
 		return TRUE

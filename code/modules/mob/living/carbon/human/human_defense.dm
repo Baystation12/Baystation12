@@ -159,10 +159,10 @@ meteor_act
 /mob/living/carbon/human/resolve_item_attack(obj/item/I, mob/living/user, target_zone)
 
 	for (var/obj/item/grab/G in grabbed_by)
-		if(G.resolve_item_attack(user, I, target_zone))
+		if (G.resolve_item_attack(user, I, target_zone))
 			return null
 
-	if(user == src) // Attacking yourself can't miss
+	if (user == src)
 		return target_zone
 
 	var/accuracy_penalty = user.melee_accuracy_mods()
@@ -172,11 +172,11 @@ meteor_act
 
 	var/hit_zone = get_zone_with_miss_chance(target_zone, src, accuracy_penalty)
 
-	if(!hit_zone)
+	if (!hit_zone)
 		visible_message(SPAN_DANGER("\The [user] misses [src] with \the [I]!"))
 		return null
 
-	if(check_shields(I.force, I, user, target_zone, "the [I.name]"))
+	if (check_shields(I.force, I, user, hit_zone, "the [I.name]"))
 		return null
 
 	var/obj/item/organ/external/affecting = get_organ(hit_zone)
@@ -188,50 +188,38 @@ meteor_act
 
 /mob/living/carbon/human/hit_with_weapon(obj/item/I, mob/living/user, effective_force, hit_zone)
 	var/obj/item/organ/external/affecting = get_organ(hit_zone)
-	if(!affecting)
-		return //should be prevented by attacked_with_item() but for sanity.
+	if (!affecting)
+		return FALSE
 
-	var/weapon_mention
-	if(I.attack_message_name())
-		weapon_mention = " with [I.attack_message_name()]"
-	visible_message(SPAN_DANGER("\The [src] has been [length(I.attack_verb)? pick(I.attack_verb) : "attacked"] in the [affecting.name][weapon_mention] by \the [user]!"))
-	return standard_weapon_hit_effects(I, user, effective_force, hit_zone)
-
-/mob/living/carbon/human/standard_weapon_hit_effects(obj/item/I, mob/living/user, effective_force, hit_zone)
-	var/obj/item/organ/external/affecting = get_organ(hit_zone)
-	if(!affecting)
-		return 0
-
-	if(user.a_intent == I_DISARM)
+	if (user.a_intent == I_DISARM)
 		effective_force *= 0.66 //reduced effective force...
 
 	var/blocked = get_blocked_ratio(hit_zone, I.damtype, I.damage_flags(), I.armor_penetration, effective_force)
 
 	// Handle striking to cripple.
-	if(user.a_intent == I_DISARM)
-		if(!..(I, user, effective_force, hit_zone))
-			return 0
+	if (user.a_intent == I_DISARM)
+		if (!..(I, user, effective_force, hit_zone))
+			return FALSE
 
 		//set the dislocate mult less than the effective force mult so that
 		//dislocating limbs on disarm is a bit easier than breaking limbs on harm
 		attack_joint(affecting, I, effective_force, 0.5, blocked) //...but can dislocate joints
-	else if(!..())
-		return 0
+	else if (!..())
+		return FALSE
 
 	var/unimpeded_force = (1 - blocked) * effective_force
-	if(effective_force > 10 || effective_force >= 5 && prob(33))
+	if (effective_force > 10 || effective_force >= 5 && prob(33))
 		forcesay(GLOB.hit_appends)	//forcesay checks stat already
 		radio_interrupt_cooldown = world.time + (RADIO_INTERRUPT_DEFAULT * 0.8) //getting beat on can briefly prevent radio use
 	if ((I.damtype == DAMAGE_BRUTE || I.damtype == DAMAGE_PAIN) && prob(25 + (unimpeded_force * 2)))
-		if(!stat)
-			if(!headcheck(hit_zone))
-				if(prob(unimpeded_force + 5))
+		if (!stat)
+			if (!headcheck(hit_zone))
+				if (prob(unimpeded_force + 5))
 					apply_effect(3, EFFECT_WEAKEN, 100 * blocked)
 					visible_message(SPAN_DANGER("[src] has been knocked down!"))
 		//Apply blood
 		attack_bloody(I, user, effective_force, hit_zone)
-
-	return 1
+	return TRUE
 
 /mob/living/carbon/human/proc/attack_bloody(obj/item/W, mob/living/attacker, effective_force, hit_zone)
 	if (W.damtype != DAMAGE_BRUTE)

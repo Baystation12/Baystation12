@@ -56,7 +56,7 @@
 	if (c.scanned == null)
 		to_chat(user, "Please compress an object with the implanter first.")
 		return TRUE
-	else return ..() //Implanting code is under the parent's attack proc.
+	else return ..()
 
 /obj/item/implanter/compressed/afterattack(obj/item/A, mob/user as mob, proximity)
 	if(!proximity)

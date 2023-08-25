@@ -57,7 +57,7 @@
 		if (DAMAGE_BRAIN)
 			adjustBrainLoss(damage)
 		else
-			apply_damage(damage, damage_type, def_zone, damage_flags, used_weapon, silent = TRUE)
+			apply_damage(damage, damage_type, def_zone, damage_flags, used_weapon, used_weapon.armor_penetration, TRUE)
 	return prior_death_state != health_dead()
 
 

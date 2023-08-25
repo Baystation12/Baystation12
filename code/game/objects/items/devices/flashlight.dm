@@ -70,9 +70,9 @@
 	if(on && user.zone_sel.selecting == BP_EYES)
 
 		if((MUTATION_CLUMSY in user.mutations) && prob(50) || user.a_intent == I_HURT)
-			return M.use_weapon(src, user)	//just hit them in the head
+			return M.use_weapon(src, user)
 
-		var/mob/living/carbon/human/H = M	//mob has protective eyewear
+		var/mob/living/carbon/human/H = M
 		if(istype(H))
 			for(var/obj/item/clothing/C in list(H.head,H.wear_mask,H.glasses))
 				if(istype(C) && (C.body_parts_covered & EYES))
@@ -95,7 +95,7 @@
 
 			inspect_vision(vision, user)
 
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //can be used offensively
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			if (!(flashlight_flags & FLASHLIGHT_CANNOT_BLIND))
 				M.flash_eyes()
 		return TRUE

@@ -34,7 +34,7 @@
 
 /obj/item/device/dociler/attack(mob/living/L, mob/user)
 	if (!istype(L))
-		return FALSE
+		return ..()
 	if (istype(L, /mob/living/simple_animal))
 		if (!loaded)
 			to_chat(user, SPAN_WARNING("\The [src] isn't loaded!"))

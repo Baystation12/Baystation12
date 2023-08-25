@@ -7,6 +7,7 @@
  */
 /obj/item/material/kitchen/utensil
 	w_class = ITEM_SIZE_TINY
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	thrown_force_multiplier = 1
 	origin_tech = list(TECH_MATERIAL = 1)
 	attack_verb = list("attacked", "stabbed", "poked")
@@ -28,10 +29,10 @@
 	return
 
 /obj/item/material/kitchen/utensil/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(!istype(M))
-		return FALSE
+	if (!istype(M) || user.a_intent != I_HELP)
+		return ..()
 
-	if (user.a_intent == I_HELP && reagents.total_volume > 0)
+	if (reagents.total_volume > 0)
 		if(M == user)
 			if(!M.can_eat(loaded))
 				return TRUE
@@ -50,7 +51,7 @@
 
 		else
 			user.visible_message(SPAN_WARNING("\The [user] begins to feed \the [M]!"))
-			if(!M.can_force_feed(user, loaded) || !do_after(user, 5 SECONDS, M, DO_PUBLIC_UNIQUE))
+			if (!M.can_force_feed(user, loaded) || !do_after(user, 5 SECONDS, M, DO_PUBLIC_UNIQUE))
 				return TRUE
 
 			if (user.get_active_hand() != src)
@@ -60,8 +61,9 @@
 		playsound(M.loc,'sound/items/eatfood.ogg', rand(10,40), 1)
 		ClearOverlays()
 		return TRUE
-	else return FALSE
-
+	else
+		to_chat(user, SPAN_WARNING("You don't have anything on \the [src]."))
+		return TRUE
 
 
 /obj/item/material/kitchen/utensil/fork

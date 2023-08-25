@@ -9,9 +9,8 @@ item/resolve_attackby() calls the target atom's attackby() proc.
 
 Mobs:
 
-mob/living/attackby() after checking for surgery, calls the item's attack() proc.
-item/attack() generates attack logs, sets click cooldown and calls the mob's attacked_with_item() proc. If you override this, consider whether you need to set a click cooldown, play attack animations, and generate logs yourself.
-mob/attacked_with_item() should then do mob-type specific stuff (like determining hit/miss, handling shields, etc) and then possibly call the item's apply_hit_effect() proc to actually apply the effects of being hit.
+item/use_weapon() generates attack logs, determines miss chance, sets click cooldown and calls the apply_hit_effect() proc. If you override this, consider whether you need to set a click cooldown, play attack animations, and generate logs yourself.
+use_weapon also call resolve_item_attack() and do mob-type specific stuff (like determining hit/miss, handling shields, etc).
 
 Item Hit Effects:
 
@@ -304,6 +303,18 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		if (!hit_zone)
 			return TRUE
 
+		playsound(src, weapon.hitsound, 75, TRUE)
+		user.visible_message(
+			SPAN_DANGER("\The [user] [attack_verb] \the [src] [weapon_mention]"),
+			SPAN_DANGER("You [attack_verb] \the [src] [weapon_mention]!"),
+			exclude_mobs = list(src)
+		)
+		show_message(
+			SPAN_DANGER("\The [user] [attack_verb] you [weapon_mention]!"),
+			VISIBLE_MESSAGE,
+			SPAN_DANGER("You feel something hit you!")
+		)
+
 		if (!weapon.no_attack_log)
 			admin_attack_log(
 				user,
@@ -347,6 +358,10 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if (can_operate(src, user) && tool.do_surgery(src, user))
 		return TRUE
 
+	if (length(auras))
+		for (var/obj/aura/web/web in auras)
+			web.remove_webbing(user)
+			return TRUE
 	return ..()
 
 
@@ -378,14 +393,9 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /atom/proc/attackby(obj/item/item, mob/living/user, click_params)
 	return FALSE
 
-/mob/living/attackby(obj/item/item, mob/living/user, click_params)
-	// Legacy mob attack code is handled by the weapon. Should work towards removing this.
-	if (item.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone()))
-		return TRUE
-	return ..()
-
 /**
  * Called when the item is in the active hand and another atom is clicked and `resolve_attackby()` returns FALSE. This is generally called by `ClickOn()`.
+ * Use this similar to how attack() is used; but for non-mob targets. Whenever you want specific behavior at the item level.
  *
  * **Parameters**:
  * - `target` - The atom that was clicked on.
@@ -428,12 +438,12 @@ avoid code duplication. This includes items that may sometimes act as a standard
  * Returns boolean to indicate whether the item usage was successful or not.
  */
 /obj/item/proc/attack(mob/living/subject, mob/living/user, target_zone, animate = TRUE)
-	SHOULD_CALL_PARENT(TRUE)
 	return FALSE
 
 
 /**
- * Called when a weapon is used to make a successful melee attack on a mob. Generally called by the target's `attack()` proc.
+ * Called when a weapon is used to make a successful melee attack on a mob. Generally called by the target's `use_weapon()` proc.
+ * Overriden to apply special effects like electrical shocks from stun batons/defib paddles.
  *
  * **Parameters**:
  * - `target` - The mob struck with the weapon.
@@ -444,7 +454,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
  */
 /obj/item/proc/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	var/power = force
-	if (MUTATION_HULK in user.mutations)
+	if (MUTATION_HULK in user.mutations && damtype == DAMAGE_BRUTE) //Repeat this check here because it is only used under use_weapon to check if it's even possible to damage the mob. Value not carried over here.
 		power *= 2
 	return target.hit_with_weapon(src, user, power, hit_zone)
 

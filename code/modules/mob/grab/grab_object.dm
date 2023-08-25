@@ -70,7 +70,6 @@
 
 
 /obj/item/grab/resolve_attackby(atom/A, mob/user, click_params)
-	// Relying on BYOND proc ordering isn't working, so go go ugly workaround.
 	if (ishuman(user) && affecting == A)
 		var/mob/living/carbon/human/H = user
 		if (H.check_psi_grab(src))
@@ -84,9 +83,7 @@
 		if (current_grab.downgrade_on_action)
 			downgrade()
 		return TRUE
-	if(current_grab.hit_with_grab(src)) //If there is no use_grab override or if it returns FALSE; then will behave according to intent.
-		return TRUE
-	return ..() //To cover for legacy behavior. Should not reach here normally. Have all grabs be handled by use_grab or hit_with_grab.
+	else return current_grab.hit_with_grab(src)
 
 /obj/item/grab/dropped()
 	..()
