@@ -198,6 +198,7 @@ function run_code_tests {
     find_code_deps
     pip install --user PyYaml -q
     pip install --user beautifulsoup4 -q
+    pip install --user Pillow -q
     shopt -s globstar
     run_test_fail "maps contain no step_[xy]" "grep 'step_[xy]' maps/**/*.dmm"
     run_test_fail "maps contain no layer adjustments" "grep 'layer = ' maps/**/*.dmm"
@@ -210,7 +211,7 @@ function run_code_tests {
     run_test "check tags" "python3 tools/TagMatcher/tag-matcher.py ."
     run_test "check color hex" "python3 tools/ColorHexChecker/color-hex-checker.py ."
     run_test "check punctuation" "python3 tools/PunctuationChecker/punctuation-checker.py ."
-    run_test "check icon state limit" "python3 tools/dmitool/check_icon_state_limit.py ."
+    run_test "check icon state limit" "python3 test/check_icon_state_limit.py ."
     run_test_ci "check changelog builds" "python3 tools/changelog/ss13_genchangelog.py html/changelog.html html/changelogs"
 }
 
