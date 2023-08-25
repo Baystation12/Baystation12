@@ -43,8 +43,7 @@
 		/obj/item/device/radio/intercept = 25
 	)
 	contraband = list(
-		/obj/item/rcd = 1,
-		/obj/item/rcd_ammo = 5
+		/obj/item/rcd_ammo = 3
 	)
 	antag = list(
 		/obj/item/device/encryptionkey/syndicate = 2,

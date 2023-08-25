@@ -118,3 +118,13 @@
 	materials = list(MATERIAL_STEEL = 6000, MATERIAL_ALUMINIUM = 1000, MATERIAL_PLASTIC = 750)
 	build_path = /obj/item/swapper/jaws_of_life
 	sort_string = "VAGAM"
+
+
+/datum/design/item/tool/rcd
+	name = "rapid construction device"
+	desc = "a gun-shaped device that uses compressed matter to build and dismantle various structures."
+	id = "hand_rcd"
+	req_tech = list(TECH_ENGINEERING = 5, TECH_MATERIAL = 4)
+	materials = list(MATERIAL_STEEL = 25000, MATERIAL_PHORON = 4000, MATERIAL_GOLD = 2000, MATERIAL_SILVER = 2000)
+	build_path = /obj/item/rcd
+	sort_string = "VAGAN"
