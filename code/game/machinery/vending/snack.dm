@@ -41,17 +41,17 @@
 		/obj/item/reagent_containers/food/snacks/tastybread = 2
 	)
 	products = list(
-		/obj/item/clothing/mask/chewable/candy/lolli = 8,
-		/obj/item/storage/chewables/candy/gum = 4,
-		/obj/item/storage/chewables/candy/cookies = 4,
-		/obj/item/reagent_containers/food/snacks/candy = 6,
-		/obj/item/reagent_containers/food/drinks/dry_ramen = 6,
-		/obj/item/reagent_containers/food/snacks/chips = 6,
-		/obj/item/reagent_containers/food/snacks/sosjerky = 6,
-		/obj/item/reagent_containers/food/snacks/no_raisin = 6,
-		/obj/item/reagent_containers/food/snacks/spacetwinkie = 6,
-		/obj/item/reagent_containers/food/snacks/cheesiehonkers = 6,
-		/obj/item/reagent_containers/food/snacks/tastybread = 6
+		/obj/item/clothing/mask/chewable/candy/lolli = 0,
+		/obj/item/storage/chewables/candy/gum = 0,
+		/obj/item/storage/chewables/candy/cookies = 0,
+		/obj/item/reagent_containers/food/snacks/candy = 0,
+		/obj/item/reagent_containers/food/drinks/dry_ramen = 0,
+		/obj/item/reagent_containers/food/snacks/chips = 0,
+		/obj/item/reagent_containers/food/snacks/sosjerky = 0,
+		/obj/item/reagent_containers/food/snacks/no_raisin = 0,
+		/obj/item/reagent_containers/food/snacks/spacetwinkie = 0,
+		/obj/item/reagent_containers/food/snacks/cheesiehonkers = 0,
+		/obj/item/reagent_containers/food/snacks/tastybread = 0
 	)
 	rare_products = list(
 		/obj/item/storage/box/syndie_kit/shuriken = 70

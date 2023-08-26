@@ -5,6 +5,7 @@
 	icon_vend = "coffee-vend"
 	icon_deny = "coffee-deny"
 	base_type = /obj/machinery/vending/coffee
+	maxrandom = 20
 	idle_power_usage = 200
 	vend_power_usage = 40000
 	product_ads = {"\
@@ -45,19 +46,19 @@
 		/obj/item/reagent_containers/food/drinks/ice = 5
 	)
 	products = list(
-		/obj/item/reagent_containers/food/drinks/coffee = 15,
-		/obj/item/reagent_containers/food/drinks/decafcoffee = 15,
-		/obj/item/reagent_containers/food/drinks/tea/black = 15,
-		/obj/item/reagent_containers/food/drinks/tea/green = 15,
-		/obj/item/reagent_containers/food/drinks/tea/chai = 15,
-		/obj/item/reagent_containers/food/drinks/tea/decaf = 15,
-		/obj/item/reagent_containers/food/drinks/h_chocolate = 15,
-		/obj/item/reagent_containers/food/condiment/small/packet/sugar = 25,
-		/obj/item/reagent_containers/pill/pod/cream = 25,
-		/obj/item/reagent_containers/pill/pod/cream_soy = 25,
-		/obj/item/reagent_containers/pill/pod/orange = 10,
-		/obj/item/reagent_containers/pill/pod/mint = 10,
-		/obj/item/reagent_containers/food/drinks/ice = 10
+		/obj/item/reagent_containers/food/drinks/coffee = 0,
+		/obj/item/reagent_containers/food/drinks/decafcoffee = 0,
+		/obj/item/reagent_containers/food/drinks/tea/black = 0,
+		/obj/item/reagent_containers/food/drinks/tea/green = 0,
+		/obj/item/reagent_containers/food/drinks/tea/chai = 0,
+		/obj/item/reagent_containers/food/drinks/tea/decaf = 0,
+		/obj/item/reagent_containers/food/drinks/h_chocolate = 0,
+		/obj/item/reagent_containers/food/condiment/small/packet/sugar = 0,
+		/obj/item/reagent_containers/pill/pod/cream = 0,
+		/obj/item/reagent_containers/pill/pod/cream_soy = 0,
+		/obj/item/reagent_containers/pill/pod/orange = 0,
+		/obj/item/reagent_containers/pill/pod/mint = 0,
+		/obj/item/reagent_containers/food/drinks/ice = 0
 	)
 	rare_products = list(
 		/obj/item/reagent_containers/hypospray/autoinjector/combatstim = 70
