@@ -134,10 +134,8 @@
 	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/slimepotion/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
-	. = ..()
-	if (!istype(M, /mob/living/carbon/slime))//If target is not a slime.
-		to_chat(user, SPAN_WARNING(" The potion only works on baby slimes!"))
-		return TRUE
+	if (!istype(M, /mob/living/carbon/slime))
+		return FALSE
 	if (M.is_adult) //Can't tame adults
 		to_chat(user, SPAN_WARNING(" Only baby slimes can be tamed!"))
 		return TRUE
@@ -171,10 +169,8 @@
 	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/slimepotion2/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
-	. = ..()
 	if (!istype(M, /mob/living/carbon/slime))
-		to_chat(user, SPAN_WARNING(" The potion only works on slimes!"))
-		return TRUE
+		return FALSE
 	if (M.stat)
 		to_chat(user, SPAN_WARNING(" The slime is dead!"))
 		return TRUE
@@ -205,10 +201,8 @@
 	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/slimesteroid/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
-	. = ..()
-	if (!istype(M, /mob/living/carbon/slime))//If target is not a slime.
-		to_chat(user, SPAN_WARNING(" The steroid only works on baby slimes!"))
-		return TRUE
+	if (!istype(M, /mob/living/carbon/slime))
+		return FALSE
 	if (M.is_adult) //Can't tame adults
 		to_chat(user, SPAN_WARNING(" Only baby slimes can use the steroid!"))
 		return TRUE
@@ -253,10 +247,8 @@
 	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/slimepotion3/attack(mob/living/carbon/slime/M, mob/user)
-	. = ..()
-	if (!istype(M)) //If target is not a slime.
-		to_chat(user, SPAN_WARNING("\The [src] only works on slimes!"))
-		return TRUE
+	if (!istype(M, /mob/living/carbon/slime))
+		return FALSE
 	if (M.is_adult) //Can't revive adults
 		to_chat(user, SPAN_WARNING("Only baby slimes can use \the [src]!"))
 		return TRUE

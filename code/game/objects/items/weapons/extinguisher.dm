@@ -64,8 +64,8 @@
 	return
 
 /obj/item/extinguisher/attack(mob/living/M, mob/user)
-	if (user.a_intent == I_HELP)
-		if (safety || (world.time < src.last_use + 20))
+	if (user.a_intent == I_HELP && !safety)
+		if (world.time < last_use + 20)
 			return TRUE
 		if (reagents.total_volume < 1)
 			to_chat(user, SPAN_NOTICE("\The [src] is empty."))
@@ -78,7 +78,7 @@
 		playsound(src.loc, 'sound/effects/extinguish.ogg', 75, 1, -3)
 
 		return TRUE
-	return ..()
+	else return ..()
 
 /obj/item/extinguisher/proc/propel_object(obj/O, mob/user, movementdirection)
 	if(O.anchored) return

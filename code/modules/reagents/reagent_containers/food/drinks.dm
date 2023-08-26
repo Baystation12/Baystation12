@@ -31,13 +31,15 @@
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/reagent_containers/food/drinks/attack(mob/M as mob, mob/user as mob, def_zone)
+	if (!istype(M))
+		return FALSE
 	if(force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
-		return ..()
+		return FALSE
 
 	if(standard_feed_mob(user, M))
 		return TRUE
 
-	return ..()
+	else return ..()
 
 /obj/item/reagent_containers/food/drinks/afterattack(obj/target, mob/user, proximity)
 	if(!proximity) return

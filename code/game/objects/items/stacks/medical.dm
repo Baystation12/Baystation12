@@ -28,8 +28,7 @@
 ///Clickon() with medical stacks will never go past attack() because this proc will never return FALSE. If needed, this is where to change it. Returns TRUE if handled and cannot progress.
 /obj/item/stack/medical/attack(mob/living/carbon/M, mob/user)
 	if (!istype(M))
-		to_chat(user, SPAN_WARNING("\The [src] cannot be applied to [M]!"))
-		return TRUE
+		return FALSE
 
 	if (!(istype(user, /mob/living/carbon/human) || \
 			istype(user, /mob/living/silicon)) )
@@ -124,7 +123,8 @@
 					to_chat(user, SPAN_WARNING("\The [src] is used up, but there are more wounds to treat on \the [affecting.name]."))
 			use(used)
 			H.update_bandages(1)
-	return TRUE
+		return TRUE
+	else return FALSE
 /obj/item/stack/medical/ointment
 	name = "ointment"
 	desc = "Used to treat those nasty burns."
@@ -159,6 +159,7 @@
 			affecting.salve()
 			affecting.disinfect()
 		return TRUE
+	else return FALSE
 
 /obj/item/stack/medical/advanced/bruise_pack
 	name = "advanced trauma kit"
@@ -174,6 +175,13 @@
 /obj/item/stack/medical/advanced/bruise_pack/attack(mob/living/carbon/M, mob/user)
 	if (..())
 		return TRUE
+
+	var/list/possible_surgeries
+	var/list/all_surgeries = GET_SINGLETON_SUBTYPE_MAP(/singleton/surgery_step)
+	for (var/singleton in all_surgeries)
+		var/singleton/surgery_step/S = all_surgeries[singleton]
+		if (S.name && S.tool_quality(src) && S.can_use(user, M, user.zone_sel.selecting, src))
+			return FALSE
 
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
@@ -217,6 +225,7 @@
 			use(used)
 			H.update_bandages(1)
 		return TRUE
+	else return FALSE
 
 /obj/item/stack/medical/advanced/ointment
 	name = "advanced burn kit"
@@ -255,6 +264,7 @@
 			if (M.stat == UNCONSCIOUS && prob(25))
 				to_chat(M, SPAN_NOTICE(SPAN_BOLD("... [pick("feels better", "hurts less")] ...")))
 		return TRUE
+	else return FALSE
 
 /obj/item/stack/medical/splint
 	name = "medical splints"
@@ -306,6 +316,7 @@
 				S.dropInto(src.loc) //didn't get applied, so just drop it
 			user.visible_message(SPAN_DANGER("\The [user] fails to apply [src]."), SPAN_DANGER("You fail to apply [src]."), SPAN_DANGER("You hear something being wrapped."))
 		return TRUE
+	else return FALSE
 
 /obj/item/stack/medical/splint/ghetto
 	name = "makeshift splints"
@@ -388,3 +399,4 @@
 		affecting.heal_damage(heal_brute, heal_burn, robo_repair = TRUE)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		return TRUE
+	else return FALSE

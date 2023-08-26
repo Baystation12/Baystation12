@@ -33,6 +33,7 @@
 			playsound(src, 'sound/effects/tape.ogg',25)
 			user.visible_message(SPAN_DANGER("\The [user] has taped up \the [H]'s eyes!"))
 			H.equip_to_slot_or_del(new /obj/item/clothing/glasses/blindfold/tape(H), slot_glasses)
+			return TRUE
 
 		else if (user.zone_sel.selecting == BP_MOUTH || user.zone_sel.selecting == BP_HEAD)
 			if (!H.organs_by_name[BP_HEAD])
@@ -59,22 +60,24 @@
 			playsound(src, 'sound/effects/tape.ogg',25)
 			user.visible_message(SPAN_DANGER("\The [user] has taped up \the [H]'s mouth!"))
 			H.equip_to_slot_or_del(new /obj/item/clothing/mask/muzzle/tape(H), slot_wear_mask)
+			return TRUE
 
 		else if(user.zone_sel.selecting == BP_R_HAND || user.zone_sel.selecting == BP_L_HAND)
 			playsound(src, 'sound/effects/tape.ogg',25)
 			var/obj/item/handcuffs/cable/tape/T = new(user)
 			if (!T.place_handcuffs(H, user))
 				qdel(T)
+			return TRUE
 
 		else if (user.zone_sel.selecting == BP_CHEST)
 			if (H.wear_suit && istype(H.wear_suit, /obj/item/clothing/suit/space))
 				H.wear_suit.attackby(src, user)//everything is handled by attackby
 			else
 				to_chat(user, SPAN_WARNING("\The [H] isn't wearing a spacesuit for you to reseal."))
+			return TRUE
 
 		else
-			return ..()
-		return TRUE //If one of the above conditions met, do not call further use_*. If not; call parent to continue chain.
+			return FALSE
 
 /obj/item/tape_roll/proc/stick(obj/item/W, mob/user)
 	if(!istype(W, /obj/item/paper) || istype(W, /obj/item/paper/sticky) || !user.unEquip(W))

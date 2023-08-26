@@ -115,7 +115,8 @@
 	return
 
 /obj/item/device/robotanalyzer/attack(mob/living/M, mob/living/user)
-	. = ..()
+	if (!istype(M))
+		return FALSE
 	roboscan(M, user)
 	add_fingerprint(user)
 	return TRUE

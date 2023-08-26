@@ -211,7 +211,7 @@
 
 
 /obj/item/toy/crossbow/attack(mob/M as mob, mob/user as mob)
-	if(istype(M) && M.lying)
+	if (istype(M) && M.lying)
 		if (bullets > 0)
 			M.visible_message(
 				SPAN_DANGER("\The [user] casually lines up a shot with \the [M]'s head and pulls the trigger!"),

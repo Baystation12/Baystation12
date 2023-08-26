@@ -15,7 +15,7 @@
 
 /obj/item/melee/cultblade/attack(mob/living/M, mob/living/user, target_zone)
 	if (iscultist(user))
-		return ..()
+		return FALSE
 
 	var/zone = (user.hand ? BP_L_ARM : BP_R_ARM)
 	var/obj/item/organ/external/affecting = null

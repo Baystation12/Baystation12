@@ -43,7 +43,9 @@
 	return
 
 /obj/item/reagent_containers/food/condiment/attack(mob/M as mob, mob/user as mob, def_zone)
-	if(standard_feed_mob(user, M))
+	if (!istype(M))
+		return FALSE
+	if (standard_feed_mob(user, M))
 		return TRUE
 	else return ..()
 

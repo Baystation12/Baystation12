@@ -67,7 +67,7 @@
 		set_light(0)
 
 /obj/item/device/flashlight/attack(mob/living/M as mob, mob/living/user as mob)
-	if(on && user.zone_sel.selecting == BP_EYES)
+	if (istype(M) && on && user.zone_sel.selecting == BP_EYES)
 
 		if((MUTATION_CLUMSY in user.mutations) && prob(50) || user.a_intent == I_HURT)
 			return M.use_weapon(src, user)

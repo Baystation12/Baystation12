@@ -37,8 +37,8 @@
 
 //attack_as_weapon
 /obj/item/device/flash/attack(mob/living/M, mob/living/user, target_zone)
-	. = ..()
-
+	if (!istype(M))
+		return FALSE
 	if (!clown_check(user))
 		return TRUE
 	if (broken)

@@ -49,3 +49,4 @@
 				user.visible_message(SPAN_NOTICE("\The [user] applies some nanite paste on [user != M ? "[M]'s [S.name]" : "[S]"] with [src]."),\
 				SPAN_NOTICE("You apply some nanite paste on [user == M ? "your" : "[M]'s"] [S.name]."))
 			return TRUE
+	else return FALSE

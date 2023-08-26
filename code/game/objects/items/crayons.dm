@@ -122,7 +122,7 @@
 				qdel(src)
 		return TRUE
 	else
-		..()
+		return ..()
 
 
 /obj/random/crayon

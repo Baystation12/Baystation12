@@ -182,7 +182,6 @@
 		if (user.zone_sel.selecting == BP_MOUTH)
 			to_chat(user, SPAN_WARNING("\The [src] is too dry to use on \the [target]!"))
 			return TRUE
-		return ..()
 	else return ..()
 
 /obj/item/reagent_containers/glass/rag/afterattack(atom/A as obj|turf|area, mob/user as mob, proximity)

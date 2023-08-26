@@ -245,7 +245,7 @@
 		..()
 
 /obj/item/book/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if (user.a_intent == I_HELP && user.zone_sel.selecting == BP_EYES)
+	if (istype(M) && user.a_intent == I_HELP && user.zone_sel.selecting == BP_EYES)
 		user.visible_message(SPAN_NOTICE("You open up the book and show it to [M]. "), \
 			SPAN_NOTICE(" [user] opens up a book and shows it to [M]. "))
 		show_browser(M, "<i>Author: [author].</i><br><br>" + "[dat]", "window=book;size=1000x550")

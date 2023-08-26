@@ -213,7 +213,7 @@
 		else
 			to_chat(user, SPAN_NOTICE("\The [M] is undamaged."))
 		return TRUE
-	return ..()
+	else return ..()
 
 /////////////////////////////Behemoth/////////////////////////
 
