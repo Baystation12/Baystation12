@@ -98,4 +98,5 @@
 /obj/item/gun/energy/handle_post_fire(mob/user, atom/target, pointblank, reflex, obj/projectile)
 	..()
 	if (self_recharge)
+		charge_tick = 0
 		START_PROCESSING(SSobj, src)
