@@ -561,6 +561,8 @@
 		return FALSE
 	var/obj/item/throw_item
 	for (var/datum/stored_items/vending_products/product in shuffle(product_records))
+		if (product.category == VENDOR_CATEGORY_ANTAG)
+			continue
 		throw_item = product.get_product(loc)
 		if (throw_item)
 			break
