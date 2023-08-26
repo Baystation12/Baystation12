@@ -10,13 +10,17 @@ SUBSYSTEM_DEF(lighting)
 	var/total_ambient_turfs = 0
 	var/total_lighting_corners = 0
 
-	var/list/light_queue   = list() // lighting sources  queued for update.
+	/// lighting sources  queued for update.
+	var/list/light_queue   = list()
 	var/lq_idex = 1
-	var/list/corner_queue  = list() // lighting corners  queued for update.
+	/// lighting corners  queued for update.
+	var/list/corner_queue  = list()
 	var/cq_idex = 1
-	var/list/overlay_queue = list() // lighting overlays queued for update.
+	/// lighting overlays queued for update.
+	var/list/overlay_queue = list()
 	var/oq_idex = 1
 
+	// - Performance and analytics data
 	var/processed_lights = 0
 	var/processed_corners = 0
 	var/processed_overlays = 0
@@ -52,7 +56,7 @@ SUBSYSTEM_DEF(lighting)
 	total_instant_updates = 0
 
 #endif
-
+/// Generate overlays for all Zlevels and then fire normally
 /datum/controller/subsystem/lighting/Initialize(timeofday)
 	var/overlaycount = 0
 	var/starttime = REALTIMEOFDAY
@@ -76,6 +80,12 @@ SUBSYSTEM_DEF(lighting)
 
 	..()
 
+/**
+ * Go over turfs thay may be dynamically lit and add a lighting overlay if they don't have one. Then do the same for turfs that may be ambient lit.
+ *
+ * **Parameters**:
+ * - `zlev` int - z-level index
+ */
 /datum/controller/subsystem/lighting/proc/InitializeZlev(zlev)
 	for (var/thing in Z_ALL_TURFS(zlev))
 		var/turf/T = thing
@@ -87,7 +97,7 @@ SUBSYSTEM_DEF(lighting)
 
 		CHECK_TICK
 
-// It's safe to pass a list of non-turfs to this list - it'll only check turfs.
+/// Initialize a set of turfs (for example as part of loading a map template) It's safe to pass a list of non-turfs to this list - it'll only check turfs.
 /datum/controller/subsystem/lighting/proc/InitializeTurfs(list/targets)
 	for (var/turf/T in (targets || world))
 		if (TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
@@ -96,6 +106,11 @@ SUBSYSTEM_DEF(lighting)
 		// If this isn't here, BYOND will set-background us.
 		CHECK_TICK
 
+/**
+ * Go over light queue and update corners as needed
+ * Go over light corner queue and update overlays as needed
+ * Go over overlay queue and update as needed
+ */
 /datum/controller/subsystem/lighting/fire(resumed = FALSE, no_mc_tick = FALSE)
 	if (!resumed)
 		processed_lights = 0

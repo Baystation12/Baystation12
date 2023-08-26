@@ -18,8 +18,7 @@ GLOBAL_DATUM_INIT(sight_set_event, /singleton/observ/sight_set, new)
 * Sight Set Handling *
 *********************/
 
-/mob
-	var/see_black = FALSE
+/mob/var/see_black = FALSE
 
 /mob/proc/set_sight(new_sight)
 	var/old_sight = sight

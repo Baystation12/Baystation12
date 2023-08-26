@@ -1,7 +1,6 @@
-/area
-	luminosity           = TRUE
-	var/dynamic_lighting = TRUE
-	var/lighting_tone = AREA_LIGHTING_DEFAULT
+/area/luminosity           = TRUE
+/area/var/dynamic_lighting = TRUE
+/area/var/lighting_tone    = AREA_LIGHTING_DEFAULT
 
 /area/Initialize()
 	. = ..()

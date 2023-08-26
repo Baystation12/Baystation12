@@ -1,20 +1,26 @@
 #define MINIMUM_USEFUL_LIGHT_RANGE 1.4
 
-/atom
-	var/light_power = 1 // Intensity of the light.
-	var/light_range = 0 // Range in tiles of the light.
-	var/light_color     // Hexadecimal RGB string representing the colour of the light.
-	var/light_wedge     // The angle that the light's emission should be restricted to. null for omnidirectional.
-	// These two vars let you override the default light offset detection (pixel_x/y).
-	//  Useful for objects like light fixtures that aren't visually in the middle of the turf, but aren't offset either.
-	var/light_offset_x
-	var/light_offset_y
+ /// Intensity of the light.
+/atom/var/light_power = 1
+/// Range in tiles of the light.
+/atom/var/light_range = 0
+/// Hexadecimal RGB string representing the colour of the light.
+/atom/var/light_color
+/// The angle that the light's emission should be restricted to. null for omnidirectional.
+/atom/var/light_wedge
+/** These two vars let you override the default light offset detection (pixel_x/y).
+ *  Useful for objects like light fixtures that aren't visually in the middle of the turf, but aren't offset either.
+ */
+/atom/var/light_offset_x
+/atom/var/light_offset_y
+/// Our light source. Don't fuck with this directly unless you have a good reason!
+/atom/var/datum/light_source/light
+/// Any light sources that are "inside" of us, for example, if src here was a mob that's carrying a flashlight, that flashlight's light source would be part of this list.
+/atom/var/list/light_source_multi
+/// Same as above - this is a shortcut to avoid allocating the above list if we can
+/atom/var/datum/light_source/light_source_solo
 
-	var/datum/light_source/light // Our light source. Don't fuck with this directly unless you have a good reason!
-	var/list/light_source_multi       // Any light sources that are "inside" of us, for example, if src here was a mob that's carrying a flashlight, that flashlight's light source would be part of this list.
-	var/datum/light_source/light_source_solo    // Same as above - this is a shortcut to avoid allocating the above list if we can
-
-// Nonsensical value for l_color default, so we can detect if it gets set to null.
+/// Nonsensical value for l_color default, so we can detect if it gets set to null.
 #define NONSENSICAL_VALUE -99999
 
 /**
@@ -27,7 +33,7 @@
  * - `angle` integer (Default `NONSENSICAL_VALUE`) - The angle of the cone that the light should shine at (directional lighting). Behavior of lights over 180 degrees is undefined. Best to stick to using the LIGHT_ defines for this. Optional.
  * - `no_update` boolean (Default `FALSE`) -if TRUE, `update_light()` will not be called. Useful for when making several of these calls to the same object. Optional.
  *
- * Returns boolean. Whether or not the light was actually changed.
+ * Returns null
  */
 /atom/proc/set_light(l_range, l_power, l_color = NONSENSICAL_VALUE, angle = NONSENSICAL_VALUE, no_update = FALSE)
 	if(l_range > 0 && l_range < MINIMUM_USEFUL_LIGHT_RANGE)
@@ -51,8 +57,11 @@
 
 #undef NONSENSICAL_VALUE
 
-// Will update the light (duh).
-// Creates or destroys it if needed, makes it update values, makes sure it's got the correct source turf...
+/**
+ * Will update the light (duh).
+ *
+ * Creates or destroys it if needed, makes it update values, makes sure it's got the correct source turf...
+ */
 /atom/proc/update_light()
 	if (QDELING(src))
 		return
