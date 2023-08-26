@@ -12,7 +12,8 @@
 	var/traitor_frequency = 0 //tune to frequency to unlock traitor supplies
 	var/canhear_range = 3 // the range which mobs can hear this radio from
 	var/datum/wires/radio/wires = null
-	var/b_stat = 0 // whether or not it is modifiable/attachable
+	/// whether or not it is modifiable/attachable
+	var/b_stat = 0
 	var/broadcasting = FALSE
 	var/listening = TRUE
 	var/list/channels = list() //see communications.dm for full list. First channel is a "default" for :h
