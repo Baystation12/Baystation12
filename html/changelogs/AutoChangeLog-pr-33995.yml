@@ -1,0 +1,6 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: Energy machetes now do more damage.
+  - tweak: Antagonist or Emagged borgs now have multiple new tools, and non-antagonist
+      borgs lose their flashes.
