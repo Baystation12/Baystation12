@@ -59,7 +59,7 @@ Random item spawning
 	name = "random steel"
 	desc = "This is a random metal ammout for RND's storage."
 	icon = 'icons/obj/materials/materials.dmi'
-	icon_state = "sheet-metal-mult"
+	icon_state = "sheet-mult"
 	spawn_nothing_percentage = 50
 
 /obj/random/material_rnd_steel/spawn_choices()
