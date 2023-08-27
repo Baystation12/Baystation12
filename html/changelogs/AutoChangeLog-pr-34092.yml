@@ -1,0 +1,5 @@
+author: Merlin1230
+delete-after: true
+changes:
+  - bugfix: Fixes intercoms so clicking on them with an empty hand when the wire panel
+      is open will now allow to actually mess with the wires
