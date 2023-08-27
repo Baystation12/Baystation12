@@ -4,33 +4,28 @@
 	icon_state = "fireaxe"
 	anchored = TRUE
 	density = FALSE
+	health_max = 30
+	health_min_damage = 15
+	damage_hitsound = 'sound/effects/Glasshit.ogg'
 
-	var/damage_threshold = 15
 	var/open
 	var/unlocked
-	var/shattered
 	var/obj/item/material/twohanded/fireaxe/fireaxe
 
-/obj/structure/fireaxecabinet/attack_generic(mob/user, damage, attack_verb = "hits", wallbreaker = FALSE, damtype = DAMAGE_BRUTE, armorcheck = "melee", dam_flags = EMPTY_BITFIELD)
-	attack_animation(user)
-	playsound(user, 'sound/effects/Glasshit.ogg', 50, 1)
-	visible_message(SPAN_DANGER("[user] [attack_verb] \the [src]!"))
-	if(damage_threshold > damage)
-		to_chat(user, SPAN_DANGER("Your strike is deflected by the reinforced glass!"))
-		return
-	if(shattered)
-		return
-	shattered = 1
-	unlocked = 1
-	open = 1
-	playsound(user, 'sound/effects/Glassbr3.ogg', 100, 1)
+/obj/structure/fireaxecabinet/on_death()
+	playsound(src, 'sound/effects/Glassbr3.ogg', 50, TRUE)
+	open = TRUE
+	unlocked = TRUE
+	update_icon()
+
+/obj/structure/fireaxecabinet/on_revive()
 	update_icon()
 
 /obj/structure/fireaxecabinet/on_update_icon()
 	ClearOverlays()
 	if(fireaxe)
 		AddOverlays(image(icon, "fireaxe_item"))
-	if(shattered)
+	if(health_dead)
 		AddOverlays(image(icon, "fireaxe_window_broken"))
 	else if(!open)
 		AddOverlays(image(icon, "fireaxe_window"))
@@ -73,17 +68,6 @@
 	return ..()
 
 
-/obj/structure/fireaxecabinet/use_weapon(obj/item/weapon, mob/user, list/click_params)
-	// Snowflake damage handler - TODO: Replace with standardized damage
-	if (weapon.force > 0 && !HAS_FLAGS(weapon.item_flags, ITEM_FLAG_NO_BLUDGEON))
-		user.setClickCooldown(user.get_attack_speed(weapon))
-		user.do_attack_animation(src)
-		attack_generic(user, weapon.force, pick(weapon.attack_verb), damtype = weapon.damtype, dam_flags = weapon.damage_flags())
-		return TRUE
-
-	return ..()
-
-
 /obj/structure/fireaxecabinet/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Fireaxe - Place inside
 	if (istype(tool, /obj/item/material/twohanded/fireaxe))
@@ -104,12 +88,33 @@
 		)
 		return TRUE
 
+	// Material Stack - Repair damage
+	if (istype(tool, /obj/item/stack/material))
+		var/obj/item/stack/material/stack = tool
+		if (stack.material.name != MATERIAL_GLASS)
+			return ..()
+		if (!health_dead && !health_damaged())
+			USE_FEEDBACK_FAILURE("\The [src] doesn't need repair.")
+			return TRUE
+		if (!stack.reinf_material)
+			USE_FEEDBACK_FAILURE("\The [src] can only be repaired with reinforced glass.")
+			return TRUE
+		if (!stack.use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(stack, 1, "to repair \the [src].")
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] repairs \the [src]'s damage with [stack.get_vague_name(FALSE)]."),
+			SPAN_NOTICE("You repair \the [src]'s damage with [stack.get_exact_name(1)].")
+		)
+		revive_health()
+		return TRUE
+
 	// Multitool - Toggle manual lock
 	if (isMultitool(tool))
 		if (open)
 			USE_FEEDBACK_FAILURE("\The [src] must be closed before you can lock it.")
 			return TRUE
-		if (shattered)
+		if (health_dead)
 			USE_FEEDBACK_FAILURE("\The [src] is shattered and the lock doesn't function.")
 			return TRUE
 		user.visible_message(
@@ -131,7 +136,7 @@
 
 
 /obj/structure/fireaxecabinet/proc/toggle_open(mob/user)
-	if(shattered)
+	if(health_dead)
 		open = 1
 		unlocked = 1
 	else
