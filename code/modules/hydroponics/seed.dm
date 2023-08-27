@@ -481,7 +481,7 @@
 			/datum/reagent/nanites,
 			/datum/reagent/water/holywater,
 			/datum/reagent/toxin/plantbgone,
-			/datum/reagent/chloralhydrate/beer2,
+			/datum/reagent/chloralhydrate/beer,
 			/datum/reagent/zombie
 			)
 		banned_chems += subtypesof(/datum/reagent/ethanol)

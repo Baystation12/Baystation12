@@ -61,6 +61,12 @@
 	icon_state = initial(icon_state) //reset icon state
 	update_icon()
 
+
+/obj/item/syringe_cartridge/sleepy/Initialize()
+	. = ..()
+	syringe = new /obj/item/reagent_containers/syringe/ld50_syringe/choral(src)
+
+
 /obj/item/gun/launcher/syringe
 	name = "syringe gun"
 	desc = "A spring loaded rifle designed to fit syringes, designed to incapacitate unruly patients from a distance."
@@ -146,6 +152,14 @@
 	icon_state = "rapidsyringegun"
 	item_state = "rapidsyringegun"
 	max_darts = 5
+
+
+/obj/item/gun/launcher/syringe/rapid/sleepy/Initialize()
+	. = ..()
+
+	for (var/i in 1 to max_darts)
+		darts += new /obj/item/syringe_cartridge/sleepy(src)
+
 
 /obj/item/gun/launcher/syringe/disguised
 	name = "deluxe electronic cigarette"

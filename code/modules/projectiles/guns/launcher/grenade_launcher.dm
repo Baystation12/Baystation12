@@ -160,3 +160,11 @@
 		chambered = null
 	else
 		to_chat(user, SPAN_WARNING("\The [src] is empty."))
+
+
+/obj/item/gun/launcher/grenade/foam/Initialize()
+	. = ..()
+
+	chambered = new /obj/item/grenade/chem_grenade/metalfoam(src)
+	for (var/i in 1 to max_grenades)
+		grenades += new /obj/item/grenade/chem_grenade/metalfoam(src)

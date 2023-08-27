@@ -44,11 +44,13 @@
 	var/list/added_networks = list()
 
 	// Gear lists/types.
-	var/obj/item/emag
 	// Please note that due to how locate() works, equipments that are subtypes of other equipment need to be placed after their closest parent
 	var/list/equipment = list()
 	var/list/synths = list()
 	var/list/skills = list() // Skills that this module grants. Other skills will remain at minimum levels.
+	var/is_emagged = FALSE
+	var/list/emag_gear = list()
+
 
 /obj/item/robot_module/Initialize()
 
@@ -69,11 +71,9 @@
 		R.silicon_radio.recalculateChannels()
 
 	build_equipment(R)
-	build_emag(R)
 	build_synths(R)
 
 	finalize_equipment(R)
-	finalize_emag(R)
 	finalize_synths(R)
 
 	R.set_module_sprites(sprites)
@@ -114,15 +114,23 @@
 	return
 
 /obj/item/robot_module/proc/build_emag()
-	if(ispath(emag))
-		emag = new emag(src)
+	var/list/created_toys = list()
+	for (var/thing in emag_gear)
+		if (ispath(thing, /obj/item))
+			created_toys |= new thing(src)
+		else if (isitem(thing))
+			var/obj/item/I = thing
+			I.forceMove(src)
+			created_toys |= I
+		else
+			log_debug("Invalid var type in [type] emag creation - [emag_gear[thing]]")
+	equipment |= created_toys
+
 
 /obj/item/robot_module/proc/finalize_emag()
-	if(istype(emag))
-		emag.canremove = FALSE
-	else
-		log_debug("Invalid var type in [type] emag creation - [emag]")
-		emag = null
+	for(var/obj/item/I in equipment)
+		I.canremove = FALSE
+
 
 /obj/item/robot_module/proc/Reset(mob/living/silicon/robot/R)
 	remove_languages(R)
@@ -137,7 +145,6 @@
 /obj/item/robot_module/Destroy()
 	QDEL_NULL_LIST(equipment)
 	QDEL_NULL_LIST(synths)
-	QDEL_NULL(emag)
 	QDEL_NULL(jetpack)
 	var/mob/living/silicon/robot/R = loc
 	if(istype(R) && R.module == src)
@@ -148,8 +155,6 @@
 	if(equipment)
 		for(var/obj/O in equipment)
 			O.emp_act(severity)
-	if(emag)
-		emag.emp_act(severity)
 	if(synths)
 		for(var/datum/matter_synth/S in synths)
 			S.emp_act(severity)
@@ -168,6 +173,25 @@
 		return
 	for(var/datum/matter_synth/T in synths)
 		T.add_charge(T.recharge_rate * rate)
+
+	for (var/obj/item/gun/energy/T in equipment)
+		if (T && T.power_supply)
+			if (T.self_recharge)
+				return
+			if (T.power_supply.charge < T.power_supply.maxcharge)
+				T.power_supply.give(T.charge_cost * rate)
+				T.update_icon()
+			else
+				T.charge_tick = 0
+
+	for (var/obj/item/gun/projectile/P in equipment)
+		if (P.load_method == MAGAZINE)
+			if (P.ammo_magazine == null || P.ammo_magazine.stored_ammo == 0)
+				P.ammo_magazine = new P.magazine_type(src)
+		else
+			if (length(P.loaded) <= P.max_shells)
+				P.loaded += new P.ammo_type(src)
+
 
 /obj/item/robot_module/proc/add_languages(mob/living/silicon/robot/R)
 	// Stores the languages as they were before receiving the module, and whether they could be synthezized.
@@ -204,8 +228,12 @@
 	if(!can_be_pushed)
 		R.status_flags |= CANPUSH
 
-/obj/item/robot_module/proc/handle_emagged()
-	return
+/obj/item/robot_module/proc/handle_emagged(mob/living/silicon/robot/R)
+	build_emag()
+	finalize_emag()
+	R.emagged = TRUE
+	is_emagged = TRUE
+	R.hud_used.update_robot_modules_display()
 
 /obj/item/robot_module/proc/grant_skills(mob/living/silicon/robot/R)
 	reset_skills(R) // for safety

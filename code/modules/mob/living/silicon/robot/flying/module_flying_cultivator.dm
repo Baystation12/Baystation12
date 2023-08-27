@@ -20,7 +20,13 @@
 		/obj/item/device/scanner/plant,
 		/obj/item/robot_harvester
 	)
-	emag = /obj/item/melee/energy/machete
+	emag_gear = list(
+		/obj/item/melee/baton/robot/electrified_arm,
+		/obj/item/device/flash,
+		/obj/item/gun/energy/gun,
+		/obj/item/melee/energy/machete
+	)
+
 	skills = list(
 		SKILL_BOTANY    = SKILL_MAX,
 		SKILL_COMBAT    = SKILL_EXPERIENCED,

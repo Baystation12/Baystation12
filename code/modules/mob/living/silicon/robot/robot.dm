@@ -896,8 +896,9 @@
 		else
 			AddOverlays("[panelprefix]-openpanel -c")
 
-	if(module_active && istype(module_active,/obj/item/borg/combat/shield))
-		AddOverlays("[module_sprites[icontype]]-shield")
+	if (module_active && istype(module_active,/obj/item/borg/combat/shield))
+		if (modtype == "Combat")
+			AddOverlays("[module_sprites[icontype]]-shield")
 
 	if(modtype == "Combat")
 		if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
@@ -929,17 +930,7 @@
 			dat += text("[obj]: <B>Activated</B><BR>")
 		else
 			dat += text("[obj]: <A HREF=?src=\ref[src];act=\ref[obj]>Activate</A><BR>")
-	if (emagged)
-		if (IsHolding(module.emag))
-			dat += text("[module.emag]: <B>Activated</B><BR>")
-		else
-			dat += text("[module.emag]: <A HREF=?src=\ref[src];act=\ref[module.emag]>Activate</A><BR>")
-/*
-		if(activated(obj))
-			dat += text("[obj]: \[<B>Activated</B> | <A HREF=?src=\ref[src];deact=\ref[obj]>Deactivate</A>\]<BR>")
-		else
-			dat += text("[obj]: \[<A HREF=?src=\ref[src];act=\ref[obj]>Activate</A> | <B>Deactivated</B>\]<BR>")
-*/
+
 	show_browser(src, dat, "window=robotmod")
 
 
@@ -960,7 +951,7 @@
 			if (!istype(O))
 				return TOPIC_HANDLED
 
-			if(!((O in module.equipment) || (O == src.module.emag)))
+			if(!(O in module.equipment))
 				return TOPIC_HANDLED
 
 			if (IsHolding(O))
@@ -1206,44 +1197,41 @@
 			return
 		else
 			sleep(6)
-			if(prob(50))
-				emagged = TRUE
-				lawupdate = FALSE
-				disconnect_from_ai()
-				to_chat(user, "You emag [src]'s interface.")
-				log_and_message_admins("emagged cyborg [key_name_admin(src)].  Laws overridden.", src)
-				clear_supplied_laws()
-				clear_inherent_laws()
-				laws = new /datum/ai_laws/syndicate_override
-				var/time = time2text(world.realtime,"hh:mm:ss")
-				GLOB.lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
-				set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
-				SetLockdown(0)
-				. = 1
-				spawn()
-					to_chat(src, SPAN_DANGER("ALERT: Foreign software detected."))
-					sleep(5)
-					to_chat(src, SPAN_DANGER("Initiating diagnostics..."))
-					sleep(20)
-					to_chat(src, SPAN_DANGER("SynBorg v1.7.1 loaded."))
-					sleep(5)
-					to_chat(src, SPAN_DANGER("LAW SYNCHRONISATION ERROR"))
-					sleep(5)
-					to_chat(src, SPAN_DANGER("Would you like to send a report to NanoTraSoft? Y/N"))
-					sleep(10)
-					to_chat(src, SPAN_DANGER(" N"))
-					sleep(20)
-					to_chat(src, SPAN_DANGER("ERRORERRORERROR"))
-					to_chat(src, "<b>Obey these laws:</b>")
-					laws.show_laws(src)
-					to_chat(src, SPAN_DANGER("ALERT: [user.real_name] is your new master. Obey your new laws and his commands."))
-					if(module)
-						module.handle_emagged()
-					update_icon()
-			else
-				to_chat(user, "You fail to hack [src]'s interface.")
-				to_chat(src, "Hack attempt detected.")
-			return 1
+			lawupdate = FALSE
+			disconnect_from_ai()
+			to_chat(user, "You emag [src]'s interface.")
+			log_and_message_admins("emagged cyborg [key_name_admin(src)].  Laws overridden.", src)
+			clear_supplied_laws()
+			clear_inherent_laws()
+			laws = new /datum/ai_laws/syndicate_override
+			var/time = time2text(world.realtime,"hh:mm:ss")
+			GLOB.lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
+			set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
+			SetLockdown(0)
+			. = 1
+			spawn()
+				to_chat(src, SPAN_DANGER("ALERT: Foreign software detected."))
+				sleep(5)
+				to_chat(src, SPAN_DANGER("Initiating diagnostics..."))
+				sleep(20)
+				to_chat(src, SPAN_DANGER("SynBorg v1.7.1 loaded."))
+				sleep(5)
+				to_chat(src, SPAN_DANGER("LAW SYNCHRONISATION ERROR"))
+				sleep(5)
+				to_chat(src, SPAN_DANGER("Would you like to send a report to NanoTraSoft? Y/N"))
+				sleep(10)
+				to_chat(src, SPAN_DANGER(" N"))
+				sleep(20)
+				to_chat(src, SPAN_DANGER("ERRORERRORERROR"))
+				to_chat(src, "<b>Obey these laws:</b>")
+				laws.show_laws(src)
+				to_chat(src, SPAN_DANGER("ALERT: [user.real_name] is your new master. Obey your new laws and his commands."))
+				if (module && !module.is_emagged)
+					module.handle_emagged(src)
+				else
+					emagged = TRUE
+				update_icon()
+			return TRUE
 
 /mob/living/silicon/robot/incapacitated(incapacitation_flags = INCAPACITATION_DEFAULT)
 	if ((incapacitation_flags & INCAPACITATION_FORCELYING) && (lockcharge || !is_component_functioning("actuator")))
