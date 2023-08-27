@@ -25,6 +25,7 @@
 	)
 
 	equipment = list(
+		/obj/item/device/flash,
 		/obj/item/material/hatchet/machete/unbreakable,
 		/obj/item/inducer/borg,
 		/obj/item/device/scanner/gas,
@@ -45,7 +46,11 @@
 		/obj/item/robot_harvester
 	)
 
-	emag = /obj/item/melee/energy/machete
+	emag_gear = list(
+		/obj/item/melee/baton/robot/electrified_arm,
+		/obj/item/gun/energy/gun,
+		/obj/item/melee/energy/machete
+	)
 
 /obj/item/robot_module/flying/surveyor/finalize_synths()
 	. = ..()

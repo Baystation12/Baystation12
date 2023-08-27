@@ -187,14 +187,10 @@ var/global/obj/screen/robot_inventory
 		//Unfortunately adding the emag module to the list of modules has to be here. This is because a borg can
 		//be emagged before they actually select a module. - or some situation can cause them to get a new module
 		// - or some situation might cause them to get de-emagged or something.
-		if(r.emagged)
-			if(!(r.module.emag in r.module.equipment))
-				r.module.equipment.Add(r.module.emag)
-		else
-			if(r.module.emag in r.module.equipment)
-				r.module.equipment.Remove(r.module.emag)
+		if (r.emagged && !r.module.is_emagged)
+			r.module.handle_emagged(r)
 
-		for(var/atom/movable/A in r.module.equipment)
+		for (var/atom/movable/A in r.module.equipment)
 			if (!r.IsHolding(A))
 				//Module is not currently active
 				r.client.screen += A

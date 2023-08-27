@@ -31,7 +31,12 @@
 		/obj/item/device/scanner/mining,
 		/obj/item/crowbar
 	)
-	emag = /obj/item/gun/energy/plasmacutter
+	emag_gear = list(
+		/obj/item/melee/baton/robot/electrified_arm,
+		/obj/item/gun/energy/gun,
+		/obj/item/rcd/borg
+	)
+
 	skills = list(
 		SKILL_PILOT        = SKILL_EXPERIENCED,
 		SKILL_EVA          = SKILL_MASTER,
@@ -40,6 +45,7 @@
 	no_slip = 1
 
 /obj/item/robot_module/miner/handle_emagged()
+	..()
 	var/obj/item/pickaxe/D = locate(/obj/item/pickaxe/borgdrill) in equipment
 	if(D)
 		equipment -= D

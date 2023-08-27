@@ -46,7 +46,7 @@
 		/datum/matter_synth/plastic = 1000,
 		/datum/matter_synth/wire =    30
 	)
-	emag = /obj/item/gun/energy/plasmacutter
+	emag_gear = list(/obj/item/gun/energy/plasmacutter)
 	skills = list(
 		SKILL_ATMOS        = SKILL_EXPERIENCED,
 		SKILL_ENGINES      = SKILL_EXPERIENCED,
@@ -59,9 +59,6 @@
 	if(istype(R))
 		R.internals = locate(/obj/item/tank/jetpack/carbondioxide) in equipment
 
-/obj/item/robot_module/drone/finalize_emag()
-	. = ..()
-	emag.SetName("Plasma Cutter")
 
 /obj/item/robot_module/drone/finalize_synths()
 	. = ..()

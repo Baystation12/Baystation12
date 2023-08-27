@@ -9,7 +9,6 @@
 		"Eyebot" = "eyebot-medical"
 	)
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/borg/sight/hud/med,
 		/obj/item/device/scanner/health,
 		/obj/item/device/scanner/reagent/adv,
@@ -33,7 +32,14 @@
 		/obj/item/reagent_containers/spray/cleaner/drone
 	)
 	synths = list(/datum/matter_synth/medicine = 15000)
-	emag = /obj/item/reagent_containers/spray
+	emag_gear = list(
+		/obj/item/melee/baton/robot/electrified_arm,
+		/obj/item/device/flash,
+		/obj/item/gun/energy/gun,
+		/obj/item/reagent_containers/spray,
+		/obj/item/gun/launcher/syringe/rapid/sleepy,
+		/obj/item/shockpaddles/robot
+	)
 	skills = list(
 		SKILL_ANATOMY      = SKILL_BASIC,
 		SKILL_MEDICAL      = SKILL_MASTER,
@@ -42,10 +48,28 @@
 		SKILL_ELECTRICAL   = SKILL_EXPERIENCED
 	)
 
-/obj/item/robot_module/flying/emergency/finalize_emag()
+
+/obj/item/robot_module/medical/finalize_emag()
 	. = ..()
-	emag.reagents.add_reagent(/datum/reagent/acid/polyacid, 250)
-	emag.SetName("Polyacid spray")
+
+	var/obj/item/reagent_containers/spray/acid = locate() in equipment
+	acid.reagents.add_reagent(/datum/reagent/acid/polyacid, 250)
+	acid.SetName("Polyacid spray")
+
+	var/obj/item/shockpaddles/robot/shock = locate() in equipment
+	shock.safety = FALSE
+
+
+/obj/item/robot_module/medical/respawn_consumable(mob/living/silicon/robot/R, amount)
+	..()
+	if (R.emagged)
+		var/obj/item/reagent_containers/spray/acid = locate() in equipment
+		acid.reagents.add_reagent(/datum/reagent/acid/polyacid, 2 * amount)
+
+		var/obj/item/gun/launcher/syringe/rapid/sleepy = locate() in equipment
+		if (sleepy.darts < sleepy.max_darts)
+			sleepy.darts += new /obj/item/syringe_cartridge/sleepy(src)
+
 
 /obj/item/robot_module/flying/emergency/finalize_equipment()
 	. = ..()
@@ -75,11 +99,3 @@
 		))
 		var/obj/item/stack/medical/stack = locate(thing) in equipment
 		stack.synths = list(medicine)
-
-/obj/item/robot_module/flying/emergency/respawn_consumable(mob/living/silicon/robot/R, amount)
-	var/obj/item/reagent_containers/spray/PS = emag
-	if(PS && PS.reagents.total_volume < PS.volume)
-		var/adding = min(PS.volume-PS.reagents.total_volume, 2*amount)
-		if(adding > 0)
-			PS.reagents.add_reagent(/datum/reagent/acid/polyacid, adding)
-	..()

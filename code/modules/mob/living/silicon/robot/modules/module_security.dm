@@ -20,18 +20,6 @@
 		SKILL_BUREAUCRACY = SKILL_TRAINED
 	)
 
-/obj/item/robot_module/security/respawn_consumable(mob/living/silicon/robot/R, amount)
-	..()
-	for(var/obj/item/gun/energy/T in equipment)
-		if(T && T.power_supply)
-			if(T.power_supply.charge < T.power_supply.maxcharge)
-				T.power_supply.give(T.charge_cost * amount)
-				T.update_icon()
-			else
-				T.charge_tick = 0
-	var/obj/item/melee/baton/robot/B = locate() in equipment
-	if(B && B.bcell)
-		B.bcell.give(amount)
 
 /obj/item/robot_module/security/general
 	name = "security robot module"
@@ -57,7 +45,13 @@
 		/obj/item/crowbar,
 		/obj/item/device/hailer
 	)
-	emag = /obj/item/gun/energy/laser/mounted
+	emag_gear = list(
+		/obj/item/melee/baton/robot/electrified_arm,
+		/obj/item/gun/energy/gun,
+		/obj/item/gun/projectile/automatic/sec_smg,
+		/obj/item/gun/energy/plasmacutter,
+		/obj/item/borg/combat/shield
+	)
 
 /obj/item/robot_module/security/combat
 	name = "combat robot module"
@@ -76,7 +70,11 @@
 		/obj/item/borg/combat/mobility,
 		/obj/item/crowbar
 	)
-	emag = /obj/item/gun/energy/lasercannon/mounted
+	emag_gear = list(
+		/obj/item/melee/baton/robot/electrified_arm,
+		/obj/item/gun/projectile/automatic/l6_saw
+	)
+
 
 /obj/item/robot_module/security/combat/Initialize()
 	. = ..()
