@@ -1,0 +1,5 @@
+author: emmanuelbassil
+delete-after: true
+changes:
+  - bugfix: You are now able to store guns in your inventory objects while on harm
+      intent
