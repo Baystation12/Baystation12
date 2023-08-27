@@ -810,6 +810,14 @@
 	build_path = /obj/item/stock_parts/circuitboard/engine/ion
 	sort_string = "XAAAB"
 
+// [SIERRA-ADD] - Fix unit test failing
+/datum/design/circuit/sublimator
+	name = "reagent sublimator"
+	id = "reagsubl"
+	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 1)
+	build_path = /obj/item/stock_parts/circuitboard/sublimator
+	sort_string = "XAAACA"
+// [/SIERRA-ADD]
 /datum/design/circuit/sublimator/sauna
 	name = "sauna heater system"
 	id = "sauna"
