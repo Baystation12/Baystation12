@@ -115,6 +115,7 @@
 				A.clean_blood()
 
 /obj/item/reagent_containers/glass/rag/attack(atom/target as obj|turf|area, mob/user as mob , flag)
+	. = FALSE
 	if (isliving(target))
 		var/mob/living/M = target
 		if (on_fire)
@@ -182,7 +183,6 @@
 		if (user.zone_sel.selecting == BP_MOUTH)
 			to_chat(user, SPAN_WARNING("\The [src] is too dry to use on \the [target]!"))
 			return TRUE
-	else return ..()
 
 /obj/item/reagent_containers/glass/rag/afterattack(atom/A as obj|turf|area, mob/user as mob, proximity)
 	if(!proximity)

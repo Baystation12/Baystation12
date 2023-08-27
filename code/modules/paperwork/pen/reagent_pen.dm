@@ -6,10 +6,12 @@
 	..()
 	create_reagents(30)
 
-/obj/item/pen/reagent/attack(mob/living/M, mob/user, target_zone)
+/obj/item/pen/reagent/attack(mob/living/M, mob/user)
+	. = FALSE
 	if (!istype(M))
-		return ..()
+		return FALSE
 
+	var/target_zone = user.zone_sel.selecting
 	var/allow = M.can_inject(user, target_zone)
 	if (allow)
 		if (allow == INJECTION_PORT)
@@ -27,7 +29,6 @@
 				if (should_admin_log)
 					admin_inject_log(user, M, src, contained_reagents, trans)
 		return TRUE
-	else return ..()
 
 /*
  * Sleepy Pens

@@ -10,8 +10,9 @@
 
 
 /obj/item/stack/nanopaste/attack(mob/living/M as mob, mob/user as mob)
+	. = FALSE
 	if (!istype(M) || !istype(user))
-		return ..()
+		return FALSE
 	if (istype(M,/mob/living/silicon/robot))	//Repairing cyborgs
 		var/mob/living/silicon/robot/R = M
 		if (R.getBruteLoss() || R.getFireLoss() )
@@ -49,4 +50,3 @@
 				user.visible_message(SPAN_NOTICE("\The [user] applies some nanite paste on [user != M ? "[M]'s [S.name]" : "[S]"] with [src]."),\
 				SPAN_NOTICE("You apply some nanite paste on [user == M ? "your" : "[M]'s"] [S.name]."))
 			return TRUE
-	else return FALSE

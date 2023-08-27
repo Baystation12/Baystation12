@@ -30,7 +30,8 @@
 	to_chat(user, SPAN_NOTICE("You open \the [src] with an audible pop!"))
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
-/obj/item/reagent_containers/food/drinks/attack(mob/M as mob, mob/user as mob, def_zone)
+/obj/item/reagent_containers/food/drinks/attack(mob/M as mob, mob/user as mob)
+	. = FALSE
 	if (!istype(M))
 		return FALSE
 	if(force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
@@ -38,8 +39,6 @@
 
 	if(standard_feed_mob(user, M))
 		return TRUE
-
-	else return ..()
 
 /obj/item/reagent_containers/food/drinks/afterattack(obj/target, mob/user, proximity)
 	if(!proximity) return

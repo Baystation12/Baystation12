@@ -39,6 +39,7 @@
 		icon_state = initial(icon_state)
 
 /obj/item/lipstick/attack(atom/A, mob/living/user as mob)
+	. = FALSE
 	if (!open)
 		to_chat(user, SPAN_NOTICE("You need to uncap \the [src] first!"))
 		return TRUE
@@ -80,7 +81,6 @@
 		head.write_on(user, name)
 		return TRUE
 
-	else return ..()
 
 //you can wipe off lipstick with paper! see code/modules/paperwork/paper.dm, paper/attack()
 

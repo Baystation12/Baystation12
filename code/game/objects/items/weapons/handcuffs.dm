@@ -27,6 +27,7 @@
 	return ..()
 
 /obj/item/handcuffs/attack(mob/living/carbon/C, mob/living/user)
+	. = FALSE
 	if (!user.IsAdvancedToolUser())
 		return FALSE
 
@@ -50,8 +51,6 @@
 		else
 			to_chat(user, SPAN_WARNING("\The [C] is already handcuffed!"))
 		return TRUE
-	else
-		return ..()
 
 /obj/item/handcuffs/proc/can_place(mob/target, mob/user)
 	if(user == target || istype(user, /mob/living/silicon/robot) || istype(user, /mob/living/bot))

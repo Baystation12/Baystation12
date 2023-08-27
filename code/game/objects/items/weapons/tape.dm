@@ -7,6 +7,7 @@
 	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/tape_roll/attack(mob/living/carbon/human/H, mob/user)
+	. = FALSE
 	if (istype(H))
 		if (user.zone_sel.selecting == BP_EYES)
 			if (!H.organs_by_name[BP_HEAD])
@@ -75,9 +76,6 @@
 			else
 				to_chat(user, SPAN_WARNING("\The [H] isn't wearing a spacesuit for you to reseal."))
 			return TRUE
-
-		else
-			return FALSE
 
 /obj/item/tape_roll/proc/stick(obj/item/W, mob/user)
 	if(!istype(W, /obj/item/paper) || istype(W, /obj/item/paper/sticky) || !user.unEquip(W))

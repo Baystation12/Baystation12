@@ -34,8 +34,9 @@
 
 // When hitting people with the tray, drop all its items everywhere. You jerk.
 /obj/item/tray/attack(mob/living/M, mob/living/user)
+	. = FALSE
 	if (user.a_intent != I_HURT)
-		return ..()
+		return FALSE
 
 	// Drop all the things. All of them.
 	ClearOverlays()

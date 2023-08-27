@@ -42,12 +42,12 @@
 /obj/item/reagent_containers/food/condiment/attack_self(mob/user as mob)
 	return
 
-/obj/item/reagent_containers/food/condiment/attack(mob/M as mob, mob/user as mob, def_zone)
+/obj/item/reagent_containers/food/condiment/attack(mob/M as mob, mob/user as mob)
+	. = FALSE
 	if (!istype(M))
 		return FALSE
 	if (standard_feed_mob(user, M))
 		return TRUE
-	else return ..()
 
 /obj/item/reagent_containers/food/condiment/afterattack(obj/target, mob/user, proximity)
 	if(!proximity)

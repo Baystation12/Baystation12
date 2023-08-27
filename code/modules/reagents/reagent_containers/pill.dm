@@ -19,9 +19,10 @@
 	if(!icon_state)
 		icon_state = "pill[rand(1, 5)]" //preset pills only use colour changing or unique icons
 
-/obj/item/reagent_containers/pill/attack(mob/M as mob, mob/user as mob, def_zone)
+/obj/item/reagent_containers/pill/attack(mob/M as mob, mob/user as mob)
+	. = FALSE
 	if (!istype(M))
-		return ..()
+		return FALSE
 
 	if (M == user)
 		if (!M.can_eat(src))
@@ -53,7 +54,6 @@
 			reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		qdel(src)
 		return TRUE
-	return ..()
 
 /obj/item/reagent_containers/pill/afterattack(obj/target, mob/user, proximity)
 	if(!proximity) return

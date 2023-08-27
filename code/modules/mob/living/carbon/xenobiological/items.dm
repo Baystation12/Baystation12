@@ -134,6 +134,7 @@
 	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/slimepotion/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
+	. = FALSE
 	if (!istype(M, /mob/living/carbon/slime))
 		return FALSE
 	if (M.is_adult) //Can't tame adults
@@ -169,6 +170,7 @@
 	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/slimepotion2/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
+	. = FALSE
 	if (!istype(M, /mob/living/carbon/slime))
 		return FALSE
 	if (M.stat)
@@ -201,6 +203,7 @@
 	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/slimesteroid/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
+	. = FALSE
 	if (!istype(M, /mob/living/carbon/slime))
 		return FALSE
 	if (M.is_adult) //Can't tame adults
@@ -247,6 +250,7 @@
 	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/slimepotion3/attack(mob/living/carbon/slime/M, mob/user)
+	. = FALSE
 	if (!istype(M, /mob/living/carbon/slime))
 		return FALSE
 	if (M.is_adult) //Can't revive adults

@@ -13,7 +13,8 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "tore", "ripped", "diced", "cut")
 
-/obj/item/melee/cultblade/attack(mob/living/M, mob/living/user, target_zone)
+/obj/item/melee/cultblade/attack(mob/living/M, mob/living/user)
+	. = FALSE
 	if (iscultist(user))
 		return FALSE
 
@@ -37,7 +38,6 @@
 
 	var/spooky = pick('sound/hallucinations/growl1.ogg', 'sound/hallucinations/growl2.ogg', 'sound/hallucinations/growl3.ogg', 'sound/hallucinations/wail.ogg')
 	playsound(loc, spooky, 50, 1)
-
 	return TRUE
 
 /obj/item/melee/cultblade/pickup(mob/living/user as mob)

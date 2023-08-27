@@ -159,14 +159,14 @@
 		user.update_personal_goal(/datum/goal/clean, 1)
 
 //attack_as_weapon
-/obj/item/soap/attack(mob/living/target, mob/living/user, target_zone)
-	if (target && user && ishuman(target) && ishuman(user) && !target.stat && !user.stat && user.zone_sel &&user.zone_sel.selecting == BP_MOUTH)
+/obj/item/soap/attack(mob/living/target, mob/living/user)
+	. = FALSE
+	if (target && user && ishuman(target) && ishuman(user) && !target.stat && !user.stat && user.zone_sel.selecting == BP_MOUTH)
 		user.visible_message(SPAN_DANGER("\The [user] washes \the [target]'s mouth out with soap!"))
 		if (reagents)
 			reagents.trans_to_mob(target, reagents.total_volume / 2, CHEM_INGEST)
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //prevent spam
 		return TRUE
-	else return ..()
 
 /obj/item/soap/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/key))

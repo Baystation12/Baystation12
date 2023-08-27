@@ -206,6 +206,7 @@
 	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/natural_weapon/cult_builder/attack(mob/living/M, mob/living/user)
+	. = FALSE
 	if (istype(M, /mob/living/simple_animal/construct))
 		if (M.health < M.maxHealth)
 			M.adjustBruteLoss(-5)
@@ -213,7 +214,6 @@
 		else
 			to_chat(user, SPAN_NOTICE("\The [M] is undamaged."))
 		return TRUE
-	else return ..()
 
 /////////////////////////////Behemoth/////////////////////////
 

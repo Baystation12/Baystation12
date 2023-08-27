@@ -131,8 +131,9 @@
 		update_icon()
 
 /obj/item/melee/baton/attack(mob/M, mob/user)
+	. = FALSE
 	if (!istype(M))
-		return ..()
+		return FALSE
 	if (status && (MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, SPAN_DANGER("You accidentally hit yourself with the [src]!"))
 		user.Weaken(30)
@@ -143,7 +144,6 @@
 		user.do_attack_animation(M)
 		apply_hit_effect(M, user, user.zone_sel? user.zone_sel.selecting : ran_zone())
 		return TRUE
-	else return ..()
 
 /obj/item/melee/baton/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	if(isrobot(target))

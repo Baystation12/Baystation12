@@ -204,9 +204,10 @@
 	STOP_PROCESSING(SSobj, src)
 	..()
 
-/obj/item/anodevice/attack(mob/living/M as mob, mob/living/user as mob, def_zone)
+/obj/item/anodevice/attack(mob/living/M as mob, mob/living/user as mob)
+	. = FALSE
 	if (!istype(M))
-		return ..()
+		return FALSE
 
 	if (activated && inserted_battery.battery_effect.effect == EFFECT_TOUCH && !isnull(inserted_battery))
 		inserted_battery.battery_effect.DoEffectTouch(M)

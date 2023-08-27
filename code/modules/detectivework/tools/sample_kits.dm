@@ -95,9 +95,9 @@
 	update_icon()
 
 /obj/item/sample/print/attack(mob/living/M, mob/user)
-
+	. = FALSE
 	if (!ishuman(M))
-		return ..()
+		return FALSE
 
 	if (evidence && length(evidence))
 		return FALSE
@@ -131,7 +131,6 @@
 		SetName("[initial(name)] (\the [H])")
 		update_icon()
 		return TRUE
-	else return ..()
 
 /obj/item/sample/print/copy_evidence(atom/supplied)
 	if(supplied.fingerprints && length(supplied.fingerprints))

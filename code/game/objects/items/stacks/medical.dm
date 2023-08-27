@@ -27,6 +27,7 @@
 
 ///Clickon() with medical stacks will never go past attack() because this proc will never return FALSE. If needed, this is where to change it. Returns TRUE if handled and cannot progress.
 /obj/item/stack/medical/attack(mob/living/carbon/M, mob/user)
+	. = FALSE
 	if (!istype(M))
 		return FALSE
 
@@ -78,6 +79,7 @@
 	amount = 10
 
 /obj/item/stack/medical/bruise_pack/attack(mob/living/carbon/M, mob/user)
+	. = FALSE
 	if (..())
 		return TRUE
 
@@ -124,7 +126,7 @@
 			use(used)
 			H.update_bandages(1)
 		return TRUE
-	else return FALSE
+
 /obj/item/stack/medical/ointment
 	name = "ointment"
 	desc = "Used to treat those nasty burns."
@@ -137,6 +139,7 @@
 	apply_sounds = list('sound/effects/ointment.ogg')
 
 /obj/item/stack/medical/ointment/attack(mob/living/carbon/M, mob/user)
+	. = FALSE
 	if (..())
 		return TRUE
 
@@ -159,7 +162,6 @@
 			affecting.salve()
 			affecting.disinfect()
 		return TRUE
-	else return FALSE
 
 /obj/item/stack/medical/advanced/bruise_pack
 	name = "advanced trauma kit"
@@ -173,10 +175,10 @@
 	amount = 10
 
 /obj/item/stack/medical/advanced/bruise_pack/attack(mob/living/carbon/M, mob/user)
+	. = FALSE
 	if (..())
 		return TRUE
 
-	var/list/possible_surgeries
 	var/list/all_surgeries = GET_SINGLETON_SUBTYPE_MAP(/singleton/surgery_step)
 	for (var/singleton in all_surgeries)
 		var/singleton/surgery_step/S = all_surgeries[singleton]
@@ -225,7 +227,6 @@
 			use(used)
 			H.update_bandages(1)
 		return TRUE
-	else return FALSE
 
 /obj/item/stack/medical/advanced/ointment
 	name = "advanced burn kit"
@@ -239,6 +240,7 @@
 
 
 /obj/item/stack/medical/advanced/ointment/attack(mob/living/carbon/M, mob/user)
+	. = FALSE
 	if (..())
 		return TRUE
 
@@ -264,7 +266,6 @@
 			if (M.stat == UNCONSCIOUS && prob(25))
 				to_chat(M, SPAN_NOTICE(SPAN_BOLD("... [pick("feels better", "hurts less")] ...")))
 		return TRUE
-	else return FALSE
 
 /obj/item/stack/medical/splint
 	name = "medical splints"
@@ -278,6 +279,7 @@
 	var/list/splintable_organs = list(BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT)	//List of organs you can splint, natch.
 
 /obj/item/stack/medical/splint/attack(mob/living/carbon/M, mob/user)
+	. = FALSE
 	if (..())
 		return TRUE
 
@@ -316,7 +318,6 @@
 				S.dropInto(src.loc) //didn't get applied, so just drop it
 			user.visible_message(SPAN_DANGER("\The [user] fails to apply [src]."), SPAN_DANGER("You fail to apply [src]."), SPAN_DANGER("You hear something being wrapped."))
 		return TRUE
-	else return FALSE
 
 /obj/item/stack/medical/splint/ghetto
 	name = "makeshift splints"
@@ -360,6 +361,7 @@
 
 
 /obj/item/stack/medical/resin/attack(mob/living/carbon/M, mob/user)
+	. = FALSE
 	if (..())
 		return TRUE
 
@@ -399,4 +401,3 @@
 		affecting.heal_damage(heal_brute, heal_burn, robo_repair = TRUE)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		return TRUE
-	else return FALSE

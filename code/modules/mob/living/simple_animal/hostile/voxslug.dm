@@ -75,6 +75,7 @@ Small, little HP, poisonous.
 			R.add_reagent(/datum/reagent/drugs/cryptobiolin, 0.5)
 
 /obj/item/holder/voxslug/attack(mob/target, mob/user)
+	. = FALSE
 	var/mob/living/simple_animal/hostile/voxslug/V = contents[1]
 	if (!V.stat && istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = target
@@ -83,4 +84,3 @@ Small, little HP, poisonous.
 		V.attach(H)
 		qdel(src)
 		return TRUE
-	else return ..()

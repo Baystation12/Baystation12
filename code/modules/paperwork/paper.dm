@@ -224,6 +224,7 @@
 	show_content(user)
 
 /obj/item/paper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	. = FALSE
 	if (!istype(M))
 		return FALSE
 	if (user.zone_sel.selecting == BP_EYES)
@@ -232,7 +233,7 @@
 		examinate(M, src)
 		return TRUE
 
-	else if (user.zone_sel.selecting == BP_MOUTH) // lipstick wiping
+	if (user.zone_sel.selecting == BP_MOUTH) // lipstick wiping
 		if (ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if (H == user)
@@ -250,7 +251,6 @@
 				H.makeup_style = null
 				H.update_body()
 				return TRUE
-	else return ..()
 
 /obj/item/paper/proc/addtofield(id, text, links = 0)
 	var/locid = 0

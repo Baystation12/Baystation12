@@ -40,8 +40,9 @@
 
 
 /obj/item/storage/fancy/smokable/attack(mob/living/carbon/target, mob/living/carbon/user)
+	. = FALSE
 	if (user != target || !istype(user) || user.a_intent != I_HELP)
-		return ..()
+		return FALSE
 
 	if (!opened)
 		opened = !opened

@@ -102,9 +102,10 @@
 	var/obj/item/O = pick(contents)
 	to_chat(user, SPAN_ITALIC("You think you can see [O.name] in there."))
 
-/obj/item/reagent_containers/food/snacks/csandwich/attack(mob/living/M as mob, mob/user as mob, def_zone)
+/obj/item/reagent_containers/food/snacks/csandwich/attack(mob/living/M as mob, mob/user as mob)
+	. = FALSE
 	if (!istype(M))
-		return ..()
+		return FALSE
 	var/obj/item/shard
 	for (var/obj/item/O in contents)
 		if (istype(O,/obj/item/material/shard))

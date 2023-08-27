@@ -297,10 +297,11 @@
 /obj/item/shockpaddles/proc/checked_use(charge_amt)
 	return 0
 
-/obj/item/shockpaddles/attack(mob/living/M, mob/living/user, target_zone)
+/obj/item/shockpaddles/attack(mob/living/M, mob/living/user)
+	. = FALSE
 	var/mob/living/carbon/human/H = M
 	if (!istype(H) || user.a_intent != I_HELP)
-		return ..()
+		return FALSE
 
 	if (can_use(user, H))
 		busy = 1

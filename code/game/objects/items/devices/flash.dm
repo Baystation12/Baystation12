@@ -36,7 +36,8 @@
 	times_used = max(0,round(times_used)) //sanity
 
 //attack_as_weapon
-/obj/item/device/flash/attack(mob/living/M, mob/living/user, target_zone)
+/obj/item/device/flash/attack(mob/living/M, mob/living/user)
+	. = FALSE
 	if (!istype(M))
 		return FALSE
 	if (!clown_check(user))

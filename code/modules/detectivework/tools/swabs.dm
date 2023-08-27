@@ -30,9 +30,9 @@
 	return used
 
 /obj/item/forensics/swab/attack(mob/living/M, mob/user)
-
+	. = FALSE
 	if (!ishuman(M))
-		return ..()
+		return FALSE
 
 	if (is_used())
 		to_chat(user, SPAN_WARNING("This swab has already been used."))

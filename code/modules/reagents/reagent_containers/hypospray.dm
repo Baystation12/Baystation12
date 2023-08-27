@@ -30,8 +30,9 @@
 	var/single_use = TRUE // autoinjectors are not refillable (overriden for hypospray)
 
 /obj/item/reagent_containers/hypospray/attack(mob/living/M, mob/user)
+	. = FALSE
 	if (!istype(M))
-		return ..()
+		return FALSE
 	if (!reagents.total_volume)
 		to_chat(user, SPAN_WARNING("[src] is empty."))
 		return TRUE

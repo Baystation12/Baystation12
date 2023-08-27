@@ -24,10 +24,10 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	return ITEM_SIZE_NO_CONTAINER
 
 /obj/item/magic_hand/attack(mob/living/M, mob/living/user)
+	. = FALSE
 	if (hand_spell && hand_spell.valid_target(M, user))
 		fire_spell(M, user)
 		return TRUE
-	return ..()
 
 /obj/item/magic_hand/proc/fire_spell(atom/A, mob/living/user)
 	if(!hand_spell) //no spell? Die.

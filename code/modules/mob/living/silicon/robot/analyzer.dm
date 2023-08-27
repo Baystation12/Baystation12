@@ -115,6 +115,7 @@
 	return
 
 /obj/item/device/robotanalyzer/attack(mob/living/M, mob/living/user)
+	. = FALSE
 	if (!istype(M))
 		return FALSE
 	roboscan(M, user)

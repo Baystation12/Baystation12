@@ -16,8 +16,9 @@
 	return src
 
 /obj/item/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
+	. = FALSE
 	if (!istype(M) || user.a_intent == I_HELP)
-		return ..()
+		return FALSE
 
 	admin_attack_log(user, M, "Attacked using \a [src]", "Was attacked with \a [src]", "used \a [src] to attack")
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -43,8 +44,6 @@
 		M.visible_message(SPAN_NOTICE("\The [user] waves \the [src] over \the [M]'s head."))
 		GLOB.cult.offer_uncult(M)
 		return TRUE
-
-	else return ..()
 
 /obj/item/energy_net
 	name = "energy net"

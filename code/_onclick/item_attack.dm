@@ -427,17 +427,16 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 //I would prefer to rename this attack_as_weapon(), but that would involve touching hundreds of files.
 /**
- * Called when a mob is clicked while the item is in the active hand and the interaction is not valid for surgery. Generally called by the mob's `attackby()` proc.
+ * Called when a mob is clicked while the item is in the active hand and ITEM_FLAG_TRY_ATTACK is set. Generally called by the mob's `attackby()` proc.
+ * This is called before anything else if set correctly. Returns boolean to indicate whether the item usage was successful or not.
+ * If returns FALSE, the rest of the resolve_attackby() chain is called.
  *
  * **Parameters**:
  * - `subject` - The mob that was clicked.
  * - `user` - The mob that clicked the target.
- * - `target_zone` - The mob targeting zone `user` had selected when clicking.
- * - `animate` (boolean) - Whether or not to show the attack animation.
- *
- * Returns boolean to indicate whether the item usage was successful or not.
+ * * - `click_parameters` - List of click parameters. See BYOND's `Click()` documentation.
  */
-/obj/item/proc/attack(mob/living/subject, mob/living/user, target_zone, animate = TRUE)
+/obj/item/proc/attack(mob/living/subject, mob/living/user, click_parameters)
 	return FALSE
 
 

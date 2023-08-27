@@ -211,6 +211,7 @@
 
 
 /obj/item/toy/crossbow/attack(mob/M as mob, mob/user as mob)
+	. = FALSE
 	if (istype(M) && M.lying)
 		if (bullets > 0)
 			M.visible_message(
@@ -227,7 +228,6 @@
 			M.visible_message(SPAN_DANGER("\The [user] casually lines up a shot with \the [M]'s head, pulls the trigger, then realizes they are out of ammo and drops to the floor in search of some!"))
 			user.Weaken(5)
 			return TRUE
-	else return ..()
 
 /obj/item/toy/crossbow/examine(mob/user, distance)
 	. = ..()

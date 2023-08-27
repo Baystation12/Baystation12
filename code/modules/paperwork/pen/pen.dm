@@ -48,20 +48,19 @@
 	colour = "white"
 	color_description = "transluscent ink"
 
-/obj/item/pen/attack(atom/A, mob/user, target_zone)
-	if (ishuman(A) && user.a_intent == I_HELP && target_zone == BP_HEAD)
+/obj/item/pen/attack(atom/A, mob/user)
+	. = FALSE
+	if (ishuman(A) && user.a_intent == I_HELP && user.zone_sel.selecting == BP_HEAD)
 		var/mob/living/carbon/human/H = A
 		var/obj/item/organ/external/head/head = H.organs_by_name[BP_HEAD]
 		if (istype(head))
 			head.write_on(user, color_description)
 			return TRUE
 
-	else if (istype(A, /obj/item/organ/external/head) && user.a_intent != I_HELP) //Not on help intent to not break ghetto surgery.
+	if (istype(A, /obj/item/organ/external/head) && user.a_intent != I_HELP) //Not on help intent to not break ghetto surgery.
 		var/obj/item/organ/external/head/head = A
 		head.write_on(user, color_description)
 		return TRUE
-
-	else return ..()
 
 /obj/item/pen/proc/toggle()
 	return

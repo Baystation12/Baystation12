@@ -107,8 +107,9 @@
 
 
 /obj/item/device/soulstone/attack(mob/living/simple_animal/M, mob/user)
+	. = FALSE
 	if (!istype(M))
-		return ..()
+		return FALSE
 
 	if (M == shade)
 		to_chat(user, SPAN_NOTICE("You recapture \the [M]."))

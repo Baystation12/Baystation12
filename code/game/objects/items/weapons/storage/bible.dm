@@ -67,6 +67,7 @@
 	icon_changed = 1
 
 /obj/item/storage/bible/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
+	. = FALSE
 	if (user == M || !ishuman(user) || !ishuman(M))
 		return FALSE
 	if (user.mind && istype(user.mind.assigned_job, /datum/job/chaplain))
@@ -78,7 +79,6 @@
 			else
 				to_chat(M, "Nothing happened.")
 		return TRUE
-	else return ..()
 
 /obj/item/storage/bible/afterattack(atom/A, mob/user as mob, proximity)
 	if(!proximity) return

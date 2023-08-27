@@ -76,6 +76,7 @@
 		AddOverlays(overlay_image(icon, "[bis.base_icon_state]_striker", flags=RESET_COLOR))
 
 /obj/item/flame/lighter/attack(mob/living/M, mob/living/carbon/user)
+	. = FALSE
 	if (!istype(M))
 		return FALSE
 
@@ -88,7 +89,6 @@
 			else
 				cig.light(SPAN_NOTICE("[user] holds the [name] out for [M], and lights the [cig.name]."))
 			return TRUE
-	return ..()
 
 /obj/item/flame/lighter/Process()
 	if(!submerged() && reagents.has_reagent(/datum/reagent/fuel))

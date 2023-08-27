@@ -22,11 +22,11 @@
 	icon_state = "labeler[!isnull(label)]"
 
 
-/obj/item/hand_labeler/attack(atom/target, mob/living/user, target_zone, animate)
+/obj/item/hand_labeler/attack(atom/target, mob/living/user)
+	. = FALSE
 	if (label)
 		target.AddLabel(label, user)
 		return TRUE
-	else return ..()
 
 
 /obj/item/hand_labeler/attack_self(mob/living/user)

@@ -44,8 +44,9 @@
 		..()
 
 /obj/item/implanter/attack(mob/M as mob, mob/user as mob)
+	. = FALSE
 	if (!istype(M, /mob/living/carbon))
-		return ..()
+		return FALSE
 
 	if (user && imp)
 		M.visible_message(SPAN_WARNING("[user] is attemping to implant [M]."))
@@ -63,4 +64,3 @@
 				src.imp = null
 				update_icon()
 		return TRUE
-	else return ..()

@@ -57,9 +57,10 @@
 					reagent_volumes[T] = min(reagent_volumes[T] + 5, volume)
 	return 1
 
-/obj/item/reagent_containers/borghypo/attack(mob/living/M, mob/user, target_zone)
+/obj/item/reagent_containers/borghypo/attack(mob/living/M, mob/user)
+	. = FALSE
 	if (!istype(M))
-		return ..()
+		return FALSE
 
 	if (mode && !reagent_volumes[reagent_ids[mode]])
 		to_chat(user, SPAN_WARNING("\The [src] is empty."))
@@ -74,6 +75,7 @@
 			to_chat(user, SPAN_WARNING("\The [container] is empty."))
 			return TRUE
 
+	var/target_zone = user.zone_sel.selecting
 	var/allow = M.can_inject(user, target_zone)
 	if (allow)
 		if (allow == INJECTION_PORT)
@@ -105,7 +107,6 @@
 					admin_inject_log(user, M, src, contained, transferred)
 				to_chat(user, SPAN_NOTICE("[transferred] units injected. [R.total_volume] units remaining in \the [container]."))
 				return TRUE
-	else return ..()
 
 /obj/item/reagent_containers/borghypo/attack_self(mob/user as mob)
 	ui_interact(user)

@@ -7,10 +7,11 @@
 
 
 /obj/item/clothing/accessory/stethoscope/attack(mob/living/target, mob/living/user)
+	. = FALSE
 	if (!ishuman(target) || !istype(user))
-		return ..()
+		return FALSE
 	if (user.a_intent != I_HELP)
-		return ..()
+		return FALSE
 	var/mob/living/carbon/human/H = target
 	var/obj/item/organ/organ = H.get_organ(user.zone_sel.selecting)
 	if (!organ)

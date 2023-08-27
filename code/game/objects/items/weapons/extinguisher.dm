@@ -64,6 +64,7 @@
 	return
 
 /obj/item/extinguisher/attack(mob/living/M, mob/user)
+	. = FALSE
 	if (user.a_intent == I_HELP && !safety)
 		if (world.time < last_use + 20)
 			return TRUE
@@ -78,7 +79,6 @@
 		playsound(src.loc, 'sound/effects/extinguish.ogg', 75, 1, -3)
 
 		return TRUE
-	else return ..()
 
 /obj/item/extinguisher/proc/propel_object(obj/O, mob/user, movementdirection)
 	if(O.anchored) return

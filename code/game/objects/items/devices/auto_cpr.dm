@@ -19,7 +19,8 @@
 	else
 		return FALSE
 
-/obj/item/auto_cpr/attack(mob/living/carbon/human/M, mob/living/user, target_zone)
+/obj/item/auto_cpr/attack(mob/living/carbon/human/M, mob/living/user)
+	. = FALSE
 	if (istype(M) && user.a_intent == I_HELP)
 		if (M.wear_suit)
 			to_chat(user, SPAN_WARNING("Their [M.wear_suit] is in the way, remove it first!"))
@@ -33,8 +34,6 @@
 			if (!M.equip_to_slot_if_possible(src, slot_wear_suit, TRYEQUIP_REDRAW | TRYEQUIP_SILENT))
 				user.put_in_active_hand(src)
 			return TRUE
-	else
-		return ..()
 
 /obj/item/auto_cpr/equipped(mob/user, slot)
 	..()

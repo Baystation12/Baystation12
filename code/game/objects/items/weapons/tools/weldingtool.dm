@@ -280,13 +280,15 @@
 		playsound(src, 'sound/items/welderdeactivate.ogg', 10, 1)
 		update_icon()
 
-/obj/item/weldingtool/attack(mob/living/M, mob/living/user, target_zone)
+/obj/item/weldingtool/attack(mob/living/M, mob/living/user)
+	. = FALSE
 	if (ishuman(M))
+		var/target_zone = user.zone_sel.selecting
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/S = H.organs_by_name[target_zone]
 
 		if (!S || !BP_IS_ROBOTIC(S) || user.a_intent != I_HELP)
-			return ..()
+			return FALSE
 
 		if (BP_IS_BRITTLE(S))
 			to_chat(user, SPAN_WARNING("\The [M]'s [S.name] is hard and brittle - \the [src]  cannot repair it."))
@@ -299,7 +301,6 @@
 		if (S.robo_repair(15, DAMAGE_BRUTE, "some dents", src, user))
 			remove_fuel(1, user)
 		return TRUE
-	else return ..()
 
 
 /obj/item/weldingtool/IsFlameSource()

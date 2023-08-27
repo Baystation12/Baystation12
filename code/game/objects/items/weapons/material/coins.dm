@@ -40,7 +40,8 @@
 		ClearOverlays()
 
 
-/obj/item/material/coin/attack(atom/target, mob/living/user, target_zone)
+/obj/item/material/coin/attack(atom/target, mob/living/user)
+	. = FALSE
 	if (target == user)
 		attack_self(user)
 		return TRUE
@@ -66,7 +67,6 @@
 			range = 5
 		)
 		return TRUE
-	else return ..()
 
 
 /obj/item/material/coin/attack_self(mob/living/user)

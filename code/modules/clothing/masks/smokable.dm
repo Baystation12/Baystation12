@@ -162,13 +162,12 @@
 		text = replacetext(text, "FLAME", "[W.name]")
 		light(text)
 
-/obj/item/clothing/mask/smokable/attack(mob/living/M, mob/living/user, def_zone)
+/obj/item/clothing/mask/smokable/attack(mob/living/M, mob/living/user)
+	. = FALSE
 	if (istype(M) && M.on_fire)
 		user.do_attack_animation(M)
 		light(SPAN_NOTICE("\The [user] coldly lights the \the [src] with the burning body of \the [M]."))
 		return TRUE
-	else
-		return ..()
 
 
 /obj/item/clothing/mask/smokable/IsFlameSource()
@@ -333,7 +332,7 @@
 
 	return
 
-/obj/item/clothing/mask/smokable/cigarette/attack(mob/living/carbon/human/H, mob/user, def_zone)
+/obj/item/clothing/mask/smokable/cigarette/attack(mob/living/carbon/human/H, mob/user)
 	if (lit && H == user && istype(H))
 		var/obj/item/blocked = H.check_mouth_coverage()
 		if (blocked)
@@ -343,7 +342,7 @@
 		smoke(5)
 		add_trace_DNA(H)
 		return TRUE
-	else return ..()
+	return ..()
 
 /obj/item/clothing/mask/smokable/cigarette/afterattack(obj/item/reagent_containers/glass/glass, mob/user, proximity)
 	..()

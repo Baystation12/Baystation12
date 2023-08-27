@@ -92,6 +92,7 @@ var/global/list/holder_mob_icon_cache = list()
 		M.show_inv(usr)
 
 /obj/item/holder/attack(mob/target, mob/user)
+	. = FALSE
 	// Devour on click on self with holder
 	if (target == user && istype(user,/mob/living/carbon))
 		var/mob/living/carbon/M = user
@@ -99,7 +100,6 @@ var/global/list/holder_mob_icon_cache = list()
 			M.devour(victim)
 		update_state()
 		return TRUE
-	else return ..()
 
 /obj/item/holder/proc/sync(mob/living/M)
 	dir = 2

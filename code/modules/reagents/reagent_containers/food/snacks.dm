@@ -56,9 +56,10 @@
 	return
 
 
-/obj/item/reagent_containers/food/snacks/attack(mob/M as mob, mob/user as mob, def_zone)
+/obj/item/reagent_containers/food/snacks/attack(mob/M as mob, mob/user as mob)
+	. = FALSE
 	if (!istype(M, /mob/living/carbon))
-		return ..()
+		return FALSE
 	if (!reagents || !reagents.total_volume)
 		to_chat(user, SPAN_DANGER("None of [src] left!"))
 		qdel(src)

@@ -88,9 +88,10 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 			SetName(initial(name))
 
 
-/obj/item/stack/cable_coil/attack(mob/living/carbon/human/target, mob/living/user, def_zone)
+/obj/item/stack/cable_coil/attack(mob/living/carbon/human/target, mob/living/user)
+	. = FALSE
 	if (user.a_intent != I_HELP || !istype(target))
-		return ..()
+		return FALSE
 	var/obj/item/organ/external/organ = target.organs_by_name[user.zone_sel.selecting]
 	if (!organ)
 		to_chat(user, SPAN_WARNING("\The [target] is missing that organ."))

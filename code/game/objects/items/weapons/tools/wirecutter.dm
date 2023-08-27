@@ -31,6 +31,7 @@
 	. = ..()
 
 /obj/item/wirecutters/attack(mob/living/carbon/C as mob, mob/user as mob)
+	. = FALSE
 	if (istype(C) && user.a_intent == I_HELP && (C.handcuffed) && (istype(C.handcuffed, /obj/item/handcuffs/cable)))
 		usr.visible_message("\The [usr] cuts \the [C]'s restraints with \the [src]!",\
 		"You cut \the [C]'s restraints with \the [src]!",\
@@ -40,4 +41,3 @@
 			C.buckled.unbuckle_mob()
 		C.update_inv_handcuffed()
 		return TRUE
-	else return ..()

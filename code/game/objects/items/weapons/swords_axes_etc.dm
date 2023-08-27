@@ -19,6 +19,7 @@
 	force = 10
 
 /obj/item/melee/classic_baton/attack(mob/M as mob, mob/living/user as mob)
+	. = FALSE
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, SPAN_WARNING("You club yourself over the head."))
 		user.Weaken(3 * force)
@@ -28,7 +29,6 @@
 		else
 			user.take_organ_damage(2*force, 0)
 		return TRUE
-	else return ..()
 
 //Telescopic baton
 /obj/item/melee/telebaton
@@ -80,6 +80,7 @@
 		AddOverlays(blood_overlay)
 
 /obj/item/melee/telebaton/attack(mob/target as mob, mob/living/user as mob)
+	. = FALSE
 	if (on && (MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, SPAN_WARNING("You club yourself over the head."))
 		user.Weaken(3 * force)
@@ -89,4 +90,3 @@
 		else
 			user.take_organ_damage(2*force, 0)
 		return TRUE
-	else return ..()

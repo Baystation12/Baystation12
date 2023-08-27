@@ -67,12 +67,12 @@
 		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 	update_icon()
 
-/obj/item/reagent_containers/glass/attack(mob/M as mob, mob/user as mob, def_zone)
+/obj/item/reagent_containers/glass/attack(mob/M as mob, mob/user as mob)
+	. = FALSE
 	if (!istype(M))
-		return ..()
+		return FALSE
 	if (standard_feed_mob(user, M))
 		return TRUE
-	else return ..()
 
 /obj/item/reagent_containers/glass/standard_feed_mob(mob/user, mob/target)
 	if(!is_open_container())

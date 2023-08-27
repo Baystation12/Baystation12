@@ -36,6 +36,7 @@
 		src_flavor = ""
 
 /obj/item/device/dna_sampler/attack(mob/living/carbon/human/L, mob/user)
+	. = FALSE
 	if (istype(L) && L.can_inject(user, check_zone(user.zone_sel.selecting)))
 		if (loaded)
 			user.visible_message("\The [src]'s DNA buffer is already full, please flush the existing DNA buffer first")
@@ -50,4 +51,3 @@
 		src_species = L.species.name
 		src_flavor = L.flavor_texts
 		return TRUE
-	else return ..()

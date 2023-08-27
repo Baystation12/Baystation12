@@ -29,8 +29,9 @@
 	return
 
 /obj/item/material/kitchen/utensil/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	. = FALSE
 	if (!istype(M) || user.a_intent != I_HELP)
-		return ..()
+		return FALSE
 
 	if (reagents.total_volume > 0)
 		if(M == user)
@@ -136,6 +137,7 @@
 
 
 /obj/item/material/kitchen/rollingpin/attack(mob/living/target, mob/living/user)
+	. = FALSE
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50) && user.unEquip(src))
 		user.visible_message(
 			SPAN_WARNING("\The [user] manages to hit \himself on the head with \the [src]!"),
@@ -145,4 +147,3 @@
 		user.take_organ_damage(10, 0)
 		user.Paralyse(2)
 		return TRUE
-	return ..()

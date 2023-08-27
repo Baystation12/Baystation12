@@ -22,6 +22,7 @@
 		to_chat(user, "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though.")
 
 /obj/item/book/tome/attack(mob/living/M, mob/living/user)
+	. = FALSE
 	if (!istype(M))
 		return FALSE
 	if (user.a_intent == I_HELP && user.zone_sel.selecting == BP_EYES)
@@ -37,7 +38,6 @@
 			to_chat(M, SPAN_NOTICE("\The [src] seems full of illegible scribbles. Is this a joke?"))
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 		return TRUE
-	else return FALSE
 
 /obj/item/book/tome/afterattack(atom/A, mob/user, proximity)
 	if(!proximity || !iscultist(user))

@@ -67,6 +67,7 @@
 		set_light(0)
 
 /obj/item/device/flashlight/attack(mob/living/M as mob, mob/living/user as mob)
+	. = FALSE
 	if (istype(M) && on && user.zone_sel.selecting == BP_EYES)
 
 		if((MUTATION_CLUMSY in user.mutations) && prob(50) || user.a_intent == I_HURT)
@@ -99,8 +100,6 @@
 			if (!(flashlight_flags & FLASHLIGHT_CANNOT_BLIND))
 				M.flash_eyes()
 		return TRUE
-	else
-		return ..()
 
 /obj/item/device/flashlight/proc/inspect_vision(obj/item/organ/vision, mob/living/user)
 	var/mob/living/carbon/human/H = vision.owner

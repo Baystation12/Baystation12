@@ -199,8 +199,9 @@
 		to_chat(user, text("There is about [] square units of paper left!", src.amount))
 
 /obj/item/wrapping_paper/attack(mob/target as mob, mob/user as mob)
+	. = FALSE
 	if (!istype(target, /mob/living/carbon/human))
-		return ..()
+		return FALSE
 
 	var/mob/living/carbon/human/H = target
 	if (istype(H.wear_suit, /obj/item/clothing/suit/straight_jacket) || H.stat)
