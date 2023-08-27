@@ -254,6 +254,7 @@
 			USE_FEEDBACK_FAILURE("\The [src] has no wiring to expose.")
 			return TRUE
 		wiresexposed = !wiresexposed
+		b_stat = !b_stat
 		update_icon()
 		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
 		user.visible_message(
