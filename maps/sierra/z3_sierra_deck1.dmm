@@ -676,7 +676,7 @@
 /area/maintenance/firstdeck/centralstarboard)
 "abw" = (
 /obj/machinery/door/blast/regular/escape_pod{
-	id_tag = "escape_pod_7"
+	id_tag = "escape_pod_6"
 	},
 /turf/simulated/floor/reinforced{
 	map_airless = 1
@@ -2209,10 +2209,10 @@
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
 	dir = 4;
-	id_tag = "escape_pod_7";
+	id_tag = "escape_pod_6";
 	name = "escape pod seven controller";
 	pixel_x = -20;
-	tag_door = "escape_pod_7_hatch";
+	tag_door = "escape_pod_6_hatch";
 	frequency = 1380
 	},
 /obj/structure/bed/chair/shuttle{
@@ -2227,10 +2227,10 @@
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
 	dir = 4;
-	id_tag = "escape_pod_8";
+	id_tag = "escape_pod_7";
 	name = "escape pod eight controller";
 	pixel_x = -20;
-	tag_door = "escape_pod_8_hatch";
+	tag_door = "escape_pod_7_hatch";
 	frequency = 1380
 	},
 /obj/structure/bed/chair/shuttle{
@@ -2245,10 +2245,10 @@
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod{
 	dir = 4;
-	id_tag = "escape_pod_9";
+	id_tag = "escape_pod_8";
 	name = "escape pod nine controller";
 	pixel_x = -20;
-	tag_door = "escape_pod_9_hatch";
+	tag_door = "escape_pod_8_hatch";
 	frequency = 1380
 	},
 /obj/structure/bed/chair/shuttle{
@@ -2608,7 +2608,7 @@
 /area/shuttle/escape_pod/escape_pod6/station)
 "afo" = (
 /obj/machinery/door/airlock/external/escapepod{
-	id_tag = "escape_pod_7_hatch";
+	id_tag = "escape_pod_6_hatch";
 	name = "Escape Pod Seven Hatch"
 	},
 /obj/effect/floor_decal/industrial/warning/fulltile,
@@ -2624,7 +2624,7 @@
 /area/shuttle/escape_pod/escape_pod7/station)
 "afq" = (
 /obj/machinery/door/airlock/external/escapepod{
-	id_tag = "escape_pod_8_hatch";
+	id_tag = "escape_pod_7_hatch";
 	name = "Escape Pod Eight Hatch"
 	},
 /obj/effect/floor_decal/industrial/warning/fulltile,
@@ -2640,7 +2640,7 @@
 /area/shuttle/escape_pod/escape_pod8/station)
 "afs" = (
 /obj/machinery/door/airlock/external/escapepod{
-	id_tag = "escape_pod_9_hatch";
+	id_tag = "escape_pod_8_hatch";
 	name = "Escape Pod Nine Hatch"
 	},
 /obj/effect/floor_decal/industrial/warning/fulltile,
@@ -3221,7 +3221,7 @@
 /obj/machinery/shield_diffuser,
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /obj/machinery/door/airlock/external/escapepod{
-	id_tag = "escape_pod_7_berth_hatch";
+	id_tag = "escape_pod_6_berth_hatch";
 	name = "Escape Pod Seven"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -3230,7 +3230,7 @@
 /obj/machinery/shield_diffuser,
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /obj/machinery/door/airlock/external/escapepod{
-	id_tag = "escape_pod_8_berth_hatch";
+	id_tag = "escape_pod_7_berth_hatch";
 	name = "Escape Pod Eeigh"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -3239,7 +3239,7 @@
 /obj/machinery/shield_diffuser,
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /obj/machinery/door/airlock/external/escapepod{
-	id_tag = "escape_pod_9_berth_hatch";
+	id_tag = "escape_pod_8_berth_hatch";
 	name = "Escape Pod Nine"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -3867,11 +3867,11 @@
 	dir = 1
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth{
-	id_tag = "escape_pod_7_berth";
+	id_tag = "escape_pod_6_berth";
 	name = "escape pod seven berth controller";
 	pixel_x = -32;
 	pixel_y = 21;
-	tag_door = "escape_pod_7_berth_hatch";
+	tag_door = "escape_pod_6_berth_hatch";
 	frequency = 1380
 	},
 /obj/structure/catwalk,
@@ -3927,11 +3927,11 @@
 	dir = 1
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth{
-	id_tag = "escape_pod_8_berth";
+	id_tag = "escape_pod_7_berth";
 	name = "escape pod eight berth controller";
 	pixel_x = -32;
 	pixel_y = 21;
-	tag_door = "escape_pod_8_berth_hatch";
+	tag_door = "escape_pod_7_berth_hatch";
 	frequency = 1380
 	},
 /obj/structure/catwalk,
@@ -3967,11 +3967,11 @@
 	dir = 1
 	},
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth{
-	id_tag = "escape_pod_9_berth";
+	id_tag = "escape_pod_8_berth";
 	name = "escape pod nine berth controller";
 	pixel_x = -32;
 	pixel_y = 21;
-	tag_door = "escape_pod_9_berth_hatch";
+	tag_door = "escape_pod_8_berth_hatch";
 	frequency = 1380
 	},
 /obj/structure/catwalk,
@@ -39065,7 +39065,7 @@
 /area/maintenance/firstdeck/centralport)
 "lBT" = (
 /obj/machinery/door/blast/regular/escape_pod{
-	id_tag = "escape_pod_8"
+	id_tag = "escape_pod_7"
 	},
 /turf/simulated/floor/reinforced{
 	map_airless = 1
@@ -41271,7 +41271,7 @@
 /area/rnd/xenobiology/xenoflora)
 "ssY" = (
 /obj/machinery/door/blast/regular/escape_pod{
-	id_tag = "escape_pod_9"
+	id_tag = "escape_pod_8"
 	},
 /turf/simulated/floor/reinforced{
 	map_airless = 1
