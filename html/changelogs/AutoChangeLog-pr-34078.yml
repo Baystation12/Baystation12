@@ -1,0 +1,9 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Fireaxe cabinets now use standardized health. Minimum damage threshold
+      is set to 15 (Matching the previous force requirement to break the cabinet),
+      and maximum health is set to 30.
+  - rscadd: Fireaxe cabinets can now be repaired using reinforced glass. A fully broken
+      fireaxe cabinet will still be open and unlocked once repaired. The cost is 1
+      sheet regardless of damage - You're replacing the entire glass pane.
