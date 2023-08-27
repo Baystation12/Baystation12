@@ -20,7 +20,7 @@
 	var/levitation_sound
 
 	/// list of sierra port developers
-	var/developers = "K.G. List, S.H. Eugene, L.D. Nest and J.X. Kand"
+	var/developers = "K.G. List, S.H. Eugene, L.D. Nest, J.X. Kand and A.T. Cuddle"
 
 /obj/structure/sign/memorial/sierra/Initialize()
 	. = ..()
