@@ -384,3 +384,62 @@ table th.disabled {
 	color: #999999;
 	font-style: italic;
 }
+
+
+/* SIERRABAY ADDITIONS AND INSERTIONS */
+
+a.gold, a.gold:link, a.gold:visited, a.gold:active
+{
+	color: #ffa600;
+	background: #000000;
+}
+
+a.gold:hover
+{
+	color: #000000;
+	background: #f5b338;
+}
+
+a.gray, a.gray:link, a.gray:visited, a.gray:active
+{
+	color: #ffffff;
+	background: #696969;
+}
+
+a.gray:hover
+{
+	color: #474747;
+	background: #dadada;
+}
+
+a.linkOn:hover {
+	color: #24742e;
+	background: #d7eeda;
+}
+
+a.selected { box-shadow: inset 0 0 0 1px #aec6eb; }
+a.gold.selected {	box-shadow: inset 0 0 0 1px #ebccae; }
+a.gray.selected {	box-shadow: inset 0 0 0 1px #ebebeb; }
+a.linkOn.selected { box-shadow: inset 0 0 0 1px #aeebae; }
+a.linkOff.selected { box-shadow: inset 0 0 0 1px #ebebeb; }
+
+.dt_1 {
+	font-weight: bold;
+	color: rgb(83, 107, 189);
+	text-shadow: 0 0 8px rgba(83, 107, 189, .4);
+}
+.dt_2 {
+	font-weight: bold;
+	color: rgb(91, 16, 212);
+	text-shadow: 0 0 8px rgba(91, 16, 212, .4);
+}
+.dt_3 {
+	font-weight: bold;
+	color: rgb(175, 48, 207);
+	text-shadow: 0 0 8px rgba(175, 48, 207, .4);
+}
+.dt_4 {
+	font-weight: bold;
+	color: rgb(229, 25, 219);
+	text-shadow: 0 0 8px rgba(229, 25, 219, .4);
+}

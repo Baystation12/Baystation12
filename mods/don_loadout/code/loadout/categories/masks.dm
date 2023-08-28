@@ -1,5 +1,6 @@
 /datum/gear/mask
 	sort_category = "Masks"
+	category = /datum/gear/mask
 	slot = slot_wear_mask
 
 /datum/gear/mask/surgical

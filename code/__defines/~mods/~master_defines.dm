@@ -17,3 +17,23 @@
 #undef show_browser
 #define show_browser(target, content, title)  to_target(target, browse(utf_8_html(content), title))
 // UTF8 - End
+
+// DON_LOADOUT - Start
+#define DONATION_TIER_NONE   null
+#define DONATION_TIER_ONE    "Tier 1"
+#define DONATION_TIER_TWO    "Tier 2"
+#define DONATION_TIER_THREE  "Tier 3"
+#define DONATION_TIER_FOUR   "Tier 4"
+
+#define DONATION_TIER_ONE_SUM    100
+#define DONATION_TIER_TWO_SUM    300
+#define DONATION_TIER_THREE_SUM  500
+#define DONATION_TIER_FOUR_SUM   1000
+
+// Keep this in ascending order
+// (from the lower tier to the higher)
+#define DONATION_TIER_ALL_TIERS list(\
+	DONATION_TIER_NONE, DONATION_TIER_ONE, \
+	DONATION_TIER_TWO, DONATION_TIER_THREE, \
+	DONATION_TIER_FOUR)
+// DON_LOADOUT - End

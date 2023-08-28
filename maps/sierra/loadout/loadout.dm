@@ -3,12 +3,14 @@
 	description = "With additional light armor plate"
 	path = /obj/item/clothing/suit/armor/pcarrier/light
 	cost = 25
+	donation_tier = DONATION_TIER_TWO
 
 /datum/gear/pmp_w_tape
 	display_name = "music player"
 	description = "With custom tape"
 	path = /obj/item/music_player
 	cost = 0
+	donation_tier = DONATION_TIER_TWO
 
 /datum/gear/pmp_w_tape/New()
 	. = ..()
@@ -24,24 +26,28 @@
 	description = "With custom tape"
 	path = /obj/item/music_player/boombox/custom_tape
 	cost = 0
+	donation_tier = DONATION_TIER_FOUR
 
 /datum/gear/bikehorn
 	display_name = "bike horn"
 	description = "for real aesthetes"
 	path = /obj/item/bikehorn
 	cost = 0
+	donation_tier = DONATION_TIER_ONE
 
 /datum/gear/bikehorn/rubberducky
 	display_name = "rubber duck"
 	description = "QUACK"
 	path = /obj/item/bikehorn/rubberducky
 	cost = 0
+	donation_tier = DONATION_TIER_ONE
 
 /datum/gear/premium_alcohol
 	display_name = "expensive alcohol"
 	description = "sometimes it turns out that the bar is closed, but you want a drink."
 	path = /obj/item/reagent_containers/food/drinks/bottle
 	cost = 0
+	donation_tier = DONATION_TIER_ONE
 
 /datum/gear/premium_alcohol/New()
 	. = ..()
@@ -59,6 +65,7 @@
 	description = "pizza time"
 	path = /obj/item/pizzabox
 	cost = 0
+	donation_tier = DONATION_TIER_ONE
 
 /datum/gear/pizzabox/New()
 	. = ..()
@@ -75,6 +82,7 @@
 	description = "let's DOOT"
 	path = /obj/item/device/synthesized_instrument
 	cost = 0
+	donation_tier = DONATION_TIER_ONE
 
 /datum/gear/musical_instruments/New()
 	. = ..()
@@ -94,6 +102,7 @@
 	description = "Admit it, you invested so much money just for one clown costume."
 	path = /obj/item/clothing/mask/gas/sexyclown
 	cost = 0
+	donation_tier = DONATION_TIER_THREE
 
 /datum/gear/head/kittyears
 	display_name = "kitty ears"
@@ -101,11 +110,13 @@
 	sort_category = "Earwear"
 	allowed_roles = null
 	cost = 0
+	donation_tier = DONATION_TIER_TWO
 
 /datum/gear/mre
 	display_name = "MRE"
 	path = /obj/item/storage/mre
 	cost = 0
+	donation_tier = DONATION_TIER_ONE
 
 /datum/gear/mre/New()
 	. = ..()
@@ -127,3 +138,4 @@
 	description = "Ah, I see you're a man of culture as well."
 	path = /obj/item/material/sword/katana/replica
 	cost = 0
+	donation_tier = DONATION_TIER_TWO

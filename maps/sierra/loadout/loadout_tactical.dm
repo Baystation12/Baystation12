@@ -6,9 +6,6 @@
 	path = /obj/item/clothing/accessory/ubac
 	flags = GEAR_HAS_TYPE_SELECTION
 
-/datum/gear/tactical/armor_deco
-	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer)
-
 /datum/gear/tactical/helm_covers
 	allowed_roles = ARMORED_ROLES
 /datum/gear/tactical/security_belt

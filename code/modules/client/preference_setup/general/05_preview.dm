@@ -16,6 +16,10 @@
 
 
 /datum/preferences/proc/dress_preview_mob(mob/living/carbon/human/mannequin)
+	// [SIERRA-ADD] - DON_LOADOUT - Mob preview
+	if(!mannequin)
+		return
+	// [/SIERRA-ADD]
 	var/update_icon = FALSE
 	copy_to(mannequin, TRUE)
 	var/datum/job/previewJob
@@ -27,6 +31,10 @@
 			previewJob = SSjobs.get_by_title(job_high)
 	else
 		return
+	// [SIERRA-ADD] - DON_LOADOUT - Mob preview
+	if(!previewJob && mannequin.icon)
+		update_icon = TRUE // So we don't end up stuck with a borg/AI icon after setting their priority to non-high
+	// [/SIERRA-ADD]
 	if(preview_job && previewJob)
 		mannequin.job = previewJob.title
 		var/datum/mil_branch/branch = GLOB.mil_branches.get_branch(branches[previewJob.title])
@@ -39,7 +47,17 @@
 	if(preview_gear && !(previewJob && preview_job && (previewJob.type == /datum/job/ai || previewJob.type == /datum/job/cyborg)))
 		// Equip custom gear loadout, replacing any job items
 		var/list/loadout_taken_slots = list()
-		for(var/thing in Gear())
+		// [SIERRA-EDIT] - DON_LOADOUT - Trying gears
+		// for(var/thing in Gear()) // SIERRA-EDIT - ORIGINAL
+		var/list/accessories = list()
+
+		var/list/orig_gears = Gear()
+		var/list/gears = orig_gears.Copy()
+		if(trying_on_gear)
+			gears[trying_on_gear] = trying_on_tweaks.Copy()
+
+		for(var/thing in gears)
+		// [/SIERRA-EDIT]
 			var/datum/gear/G = gear_datums[thing]
 			if(G)
 				var/permitted = 0
@@ -54,9 +72,21 @@
 					permitted = 0
 				if(!permitted)
 					continue
+				// [SIERRA-ADD] - DON_LOADOUT - Accessories preview
+				if(G.slot == slot_tie)
+					accessories.Add(G)
+					continue
+				// [/SIERRA-ADD]
 				if(G.slot && G.slot != slot_tie && !(G.slot in loadout_taken_slots) && G.spawn_on_mob(mannequin, gear_list[gear_slot][G.display_name]))
 					loadout_taken_slots.Add(G.slot)
 					update_icon = TRUE
+		// [SIERRA-ADD] - DON_LOADOUT - Accessories preview
+		// equip accessories after other slots so they don't attach to a suit which will be replaced
+		for(var/datum/gear/G in accessories)
+			G.spawn_as_accessory_on_mob(mannequin, gears[G.display_name])
+		if(length(accessories))
+			update_icon = TRUE
+		// [/SIERRA-ADD]
 	if(update_icon)
 		mannequin.update_icons()
 

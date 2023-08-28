@@ -27,16 +27,16 @@
 
 	var/was_donator = player.donator_info.donator
 
-	var/DBQuery/query = sql_query({"
+	var/DBQuery/query = dbcon.NewQuery({"
 		SELECT CAST(SUM(amount) as UNSIGNED INTEGER)
 		FROM budget
 		WHERE
-			ckey = $ckey AND
+			ckey = '[player.ckey]' AND
 			is_valid = TRUE AND
 			date_start <= NOW() AND
 			(NOW() < date_end OR date_end IS NULL)
 		GROUP BY ckey
-	"}, dbcon, list(ckey = player.ckey))
+	"})
 
 	if(query.NextRow())
 		var/total = query.item[1]

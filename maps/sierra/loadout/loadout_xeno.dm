@@ -23,29 +23,6 @@
 	helmets["tan skrellian helmet"] = /obj/item/clothing/head/helmet/skrell/tan
 	gear_tweaks += new/datum/gear_tweak/path(helmets)
 
-// Resomi clothing
-
-/datum/gear/uniform/resomi/eng
-	allowed_roles = ENGINEERING_ROLES
-
-/datum/gear/uniform/resomi/sec
-	allowed_roles = SECURITY_ROLES
-
-/datum/gear/uniform/resomi/med
-	allowed_roles = MEDICAL_ROLES
-
-/datum/gear/uniform/resomi/science
-	allowed_roles = RESEARCH_ROLES
-
-/datum/gear/uniform/resomi/roboitcs
-	allowed_roles = list(/datum/job/roboticist)
-
-/datum/gear/eyes/resomi/lenses_sec
-	allowed_roles = SECURITY_ROLES
-
-/datum/gear/eyes/resomi/lenses_med
-	allowed_roles = MEDICAL_ROLES
-
 // IPC clothing
 
 /datum/gear/suit/lab_xyn_machine

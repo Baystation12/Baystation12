@@ -171,13 +171,11 @@
 	#include "../../mods/_maps/sentinel/_map_sentinel.dme"
 	#include "../../mods/_maps/farfleet/_map_farfleet.dme"
 	#include "../../mods/bluespace_kitty/_bluespace_kitty.dme"
-	#include "../../mods/don_loadout/_don_loadout.dme"
 	#include "../../mods/fancy_sofas/_fancy_sofas.dme"
 	#include "../../mods/jukebox_tapes/_jukebox_tapes.dme"
 	#include "../../mods/legalese_language/_legalese.dme"
 	#include "../../mods/nyc_posters/_nyc_posters.dme"
 	#include "../../mods/leroy_beasts/_leroy_beasts.dme"
-	// #include "../../mods/resomi/_resomi.dme"
 	#include "../../mods/screentips/_screentips.dme"
 	#include "../../mods/tajara/_tajara.dme"
 
@@ -185,7 +183,7 @@
 	// Keep them in ascending alphabetical order too, please
 
 	// #include "../../mods/atmos_ret_field/_atm_ret_field.dme"
-	// #include "../../mods/_events/mortar/_mortar.dme"
+	// #include "../../mods/resomi/_resomi.dme"
 
 	// Почему UNUSED MODS стоит хранить?
 	// Потому что никто не проверяет использование тех или иных файлов
