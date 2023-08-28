@@ -1,0 +1,4 @@
+author: SuhEugene
+delete-after: true
+changes:
+  - rscadd: Переписал и включил адекватно мод лодаута.
