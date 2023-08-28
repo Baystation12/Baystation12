@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - tweak: The email program no longer closes completely when exiting so notifications
-      will be more often heard.

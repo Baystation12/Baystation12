@@ -1,6 +1,0 @@
-author: emmanuelbassil
-delete-after: true
-changes:
-  - tweak: Adds 'rare items' to sovietsoda, fitness, and games vendor.
-  - bugfix: Fixes oversight allowing hacked vending machines to hurl traitor coin
-      items at people.

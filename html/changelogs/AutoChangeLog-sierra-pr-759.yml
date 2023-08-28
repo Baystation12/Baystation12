@@ -1,6 +1,0 @@
-author: SuhEugene
-delete-after: true
-changes:
-  - bugfix: More sensors consoles no longer show more marks.
-  - bugfix: Sensors reconnect popup no longer stays open on success link.
-  - bugfix: Fixed sensors marks visual positioning.

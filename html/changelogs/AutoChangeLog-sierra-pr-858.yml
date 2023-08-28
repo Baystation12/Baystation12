@@ -1,9 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: The crew manifest displayed to observers and ghosts now uses the IC manifest,
-      reflecting the state of the `Status` field as displayed to people in game.
-  - tweak: The OOC manifest (The one displayed in the player lobby) now hides the
-      Activity column, masking the life and activity status of crew entries.
-  - tweak: Crew manifest entries for crew members listed as `Stored` do not appear
-      on the OOC manifest.

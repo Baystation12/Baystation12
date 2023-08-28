@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fixed shortwaves having no 'power' button
-  - bugfix: Fixed automatic radio announcements (arrivals, SM warnings, etc) not working.

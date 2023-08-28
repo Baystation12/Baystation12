@@ -1,8 +1,0 @@
-author: emmanuelbassil
-delete-after: true
-changes:
-  - bugfix: Grabbing someone that is weakly grabbed by someone else and walking away
-      should now release the other person's grab. No more infinite range grabs.
-  - bugfix: Fixed not being able to put mobs into suit cyclers. You require a weak
-      grab to put a mob into a suit cycler, suit storage, or gibber. Can click and
-      drag self.

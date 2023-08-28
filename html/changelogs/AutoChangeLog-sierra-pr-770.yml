@@ -1,6 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Clicking adjacent targets with a gun on harm intent now point-blank fires,
-      if applicable, instead of pistol-whipping. Pistol whipping can still occur using
-      disarm intent.

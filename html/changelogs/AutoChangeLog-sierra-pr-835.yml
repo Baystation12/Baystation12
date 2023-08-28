@@ -1,7 +1,0 @@
-author: Ryan180602
-delete-after: true
-changes:
-  - tweak: Watches will now tell the time when examined.
-  - tweak: You can examine your uniform with a watch, and check the watch.
-  - tweak: Local Time/Date in Status does not show unless a watch is attached to your
-      uniform.

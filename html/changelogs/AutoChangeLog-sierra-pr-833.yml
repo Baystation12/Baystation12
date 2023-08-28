@@ -1,6 +1,0 @@
-author: Ryan180602
-delete-after: true
-changes:
-  - bugfix: Placeholder icons show up on scan panel.
-  - tweak: Placeholder buildmode has a scan data option instead of sensor now.
-  - rscadd: Add the Dingo, Mantaray and Wombat.

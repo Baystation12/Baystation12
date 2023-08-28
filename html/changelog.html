@@ -1,52 +1,24 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-  <title>Baystation 12 Changelog</title>
+  <title>Sierra SS13 - Changelog</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="changelog.css">
-  <base target="_blank" />
-  <script type='text/javascript'>
-
-	function changeText(tagID, newText, linkTagID){
-		var tag = document.getElementById(tagID);
-		tag.innerHTML = newText;
-		var linkTag = document.getElementById(linkTagID);
-		linkTag.removeAttribute("href");
-		linkTag.removeAttribute("onclick");
-	}
-
-  </script>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base target="_blank" />
 </head>
 
 <body>
-<table align='center' width='650'><tr><td>
-<table align='center' class="top">
-	<tr>
-		<td valign='top'>
-			<div align='center'><font size='3'><b>Baystation 12</b></font></div>
-			<div align='center'><font size='3'><b><i>A Space Station 13 Project</i></b></font></div>
-
-			<p><div align='center'><font size='3'><a href="https://baydoc.ss13.me/">Wiki</a> | <a href="https://github.com/Baystation12/Baystation12/">Source code</a></font></div></p>
-			<font size='2'>Code licensed under <a href="http://www.gnu.org/licenses/agpl.html">AGPLv3</a>. Content licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>.<br><br>
-			<font size='2'><b>Join our Discord server:</b> <a href='https://bay.ss13.me/discord'>-Click Here-</a><br></font>
-			</td>
-	</tr>
-</table>
-
-<br><b>Baystation 12 Credit List</b>
-<table align='center' class="top">
-	<tr>
-		<td valign='top'>
-			<font size='2'><b>Developers:</b> CrimsonShrike, MuckerMayhem, PsiOmegaDelta, SierraKomodo<br></font>
-			<font size='2'><b>Retired Developers:</b> afterthought, chinsky, F-Tang Steve, mloc, xales<br></font>
-			<font size='2'><b>Currently Active GitHub contributor list:</b> <a href='https://github.com/Baystation12/Baystation12/graphs/contributors'>-Click Here-</a><br></font>
-			<p><font size='2'><b>Credits:</b> Abi79, Apple_Master, Arcalane, Aryn, babydoll, Cael_Aislinn, Ccomp5950, chinsky, CompactNinja, Deus Dactyl, DopeGhoti, Erthilo, Flashkirby, Hawk_v3, Head, Ipsil, Invisty, JoeyJo0, Lexusjjss, Melonstorm, Miniature, mloc, NerdyBoy1104, PsiOmegaDelta, Searif, SkyMarshal, Snapshot, Spectre, Strumpetplaya, Sunfall, Tastyfish, Uristqwerty, Xenone, cib, faux, Zuhayr<br></p>
-			<font size='2'><b>Special thanks to:</b> The developers of /tg/station, /vg/station, GoonStation, the original Space Station 13, and BYOND</font>
-			<div align='center'><font size='2' color='red'><b><br>Have a bug to report?</b> Visit our <a href="https://github.com/Baystation12/Baystation12/issues?labels=Bug&state=open">Issue Tracker</a>.<br></font></div>
-		</td>
-	</tr>
-</table>
-
+	<div class="content">
+		<div class="title">
+      <h2>Sierra SS13</h2>
+      <div class="buttons">
+        <a href="https://github.com/SierraBay/SierraBay12">GitHub</a> -
+        <a href="https://sierra.ss220.space/">Wiki</a> -
+        <a href="https://discord.ss220.space/">Discord</a>
+      </div>
+    </div>
 		<!--
 
 		TO ADD AN ENTRY, ADD AND MAINTAIN YOUR OWN changelog/USERNAME.yml FILE.
@@ -54,688 +26,473 @@
 		*** DO NOT MODIFY THIS FILE OR YOU WILL CAUSE MERGE CONFLICTS. ***
 
 		-->
-		<div class="commit sansserif">
+		<div class="changelog">
 
-			<h2 class="date">18 July 2023</h2>
-			<h3 class="author">TheNightingale updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Vitals monitors can now be upgraded with scanning modules to show broken bones and arterial bleeding.</li>
-				<li class="tweak">Vitals monitors now show BP, BO and temperature by default.</li>
-			</ul>
-			<h3 class="author">emmanuelbassil updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Can now use grabs to put mobs in sleepers. This is already existing behavior for cryopods and bodyscanners.</li>
-				<li class="tweak">Can no longer put a mob in a sleeper/cryotube/cryopod/body scanners if they are being grabbed by someone other than you.</li>
-				<li class="tweak">Added eject verb to sleeper. Remember, you can use Alt+Click to eject people from sleepers.</li>
-				<li class="bugfix">Fixed bug where a mob could not be buckled if mob was grabbing itself.</li>
-				<li class="bugfix">Grabs and pulls now properly release when you put a mob in a sleeper, cryopod, body scanner, or cryotube</li>
-			</ul>
+			<h2 class="date">28.08 - 2023</h2>
+			<h3 class="author">Обновления Fre3bie, Spookerton:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Wheelchair now moves at walk speed instead of sprint speed.</div>
+				<div class="log tweak">You need your hands free to drive your own wheelchair.</div>
+				<div class="log tweak">You need gravity to move a wheelchair as the person in it.</div>
+			</div>
+			<h3 class="author">Обновления Jux:</h3>
+			<div class="changes bgimages16">
+				<div class="log rscadd">Individual mobs can now be made to waddle.</div>
+				<div class="log tweak">Energy machetes now do more damage.</div>
+				<div class="log tweak">Antagonist or Emagged borgs now have multiple new tools, and non-antagonist borgs lose their flashes.</div>
+				<div class="log bugfix">pAIs can use their radios.</div>
+				<div class="log bugfix">Handmade assemblies are now functional.</div>
+				<div class="log admin">The automatic connections checker no longer fires on staff and gives a number for matches instead of listing every ckey and ban match in chat.</div>
+				<div class="log rscadd">Adds xenofauna carbines, which are effective against simplemobs but not humanoids. Sec-Arm gets two by default, and more can be ordered. They can be emagged, which changes their beam to that of a compact smartgun lethal beam.</div>
+				<div class="log tweak">Supply packs for ammo have had their costs reduced and delivered items increased to make ordering ammo a competitive option, but they also require appropriate access to open beyond just normal security access. Sec SMGs can now be ordered on code blue.</div>
+				<div class="log tweak">Meatstation guards now use already emagged xenofauna carbines, increasing their lethality *significantly*. Their potential spawns have been reduced to account for this.</div>
+				<div class="log bugfix">Airlocks don't crush mobs for twice the damage anymore</div>
+				<div class="log tweak">Autoshotgun no longer available in gun spawns.</div>
+				<div class="log tweak">Exoplanet atmospheres are more varied now, with a wider, but more grounded temperature range and less non-terraformed planets with ideal atmospheres.</div>
+				<div class="log tweak">All exoplanet types can now generate with all templates - volcanic cities, for example.</div>
+				<div class="log tweak">Thermal energy in gas mixtures is gained significantly slower the hotter the mixture is.</div>
+				<div class="log tweak">Exoplanet ruins with player_cost (colony, survival pod) now use that when being generated.</div>
+				<div class="log tweak">The oldlabs prevent each other from spawning.</div>
+				<div class="log bugfix">Rogue drones, fleet tracker bots and space syndies can now move in space.</div>
+				<div class="log tweak">Fleet robots now miss more often, fire less rapidly, won't hesitate to break things and won't run away from targets unless they're a bit closer.</div>
+				<div class="log tweak">Hullbreakers are now less afraid to break hulls.</div>
+				<div class="log bugfix">The prison break event now bolts open doors like it used to.</div>
+				<div class="log tweak">The prison break event will now always announce itself before it ends, and can target both the tac-arm and xenobio cells.</div>
+				<div class="log tweak">Airlocks no longer beep impatiently when they cannot close.</div>
+			</div>
+			<h3 class="author">Обновления Jux, Ryan180602:</h3>
+			<div class="changes bgimages16">
+				<div class="log maptweak">Remaps security armoury.</div>
+				<div class="log maptweak">Adds stunshells to sec-armoury.</div>
+				<div class="log maptweak">E-arm now contains 4 light bullpups and 2 UNSECURE laser carbines instead of SMGs and Shotguns.</div>
+				<div class="log tweak">Various ballistics balance adjustments, see github for details.</div>
+				<div class="log tweak">All Torch handguns, except those in E-Arm, are now the m19. Hopefully eliminates magazine confusion.</div>
+			</div>
+			<h3 class="author">Обновления LordNest:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Подключил недостающие моды</div>
+				<div class="log bugfix">Убрал переусложнённую систему покраски для исключения конфликтов. Поправил некоторые пути объектов. Вернул гравген.</div>
+			</div>
+			<h3 class="author">Обновления Merlin1230:</h3>
+			<div class="changes bgimages16">
+				<div class="log bugfix">Fixes intercoms so clicking on them with an empty hand when the wire panel is open will now allow to actually mess with the wires</div>
+				<div class="log bugfix">stops hacker hardsuits (and maybe some others) from being unable to remove anything from them with a wrench</div>
+				<div class="log tweak">allows ghosts to perceive time  in the status panel</div>
+			</div>
+			<h3 class="author">Обновления Mucker:</h3>
+			<div class="changes bgimages16">
+				<div class="log rscadd">Added an alert when trying to late-join as a role not set in your Occupation preferences.</div>
+				<div class="log bugfix">Fixed the fall-down sound constantly triggering in some cases.</div>
+				<div class="log tweak">The email program no longer closes completely when exiting so notifications will be more often heard.</div>
+				<div class="log bugfix">Fixed shortwaves having no 'power' button</div>
+				<div class="log bugfix">Fixed automatic radio announcements (arrivals, SM warnings, etc) not working.</div>
+				<div class="log bugfix">Observers can examine things again.</div>
+				<div class="log tweak">Changeling now requires 5 people to be readied to roll.</div>
+			</div>
+			<h3 class="author">Обновления Petro1Ne1Koder:</h3>
+			<div class="changes bgimages16">
+				<div class="log bugfix">Из шейкера нельзя вылить содержимае на пол</div>
+				<div class="log bugfix">Face direction во вкладке IC не замедляет</div>
+			</div>
+			<h3 class="author">Обновления Ryan180602:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">E-Shields will now be damaged by EMP if active during blast, and be unable to be used, temporarily.</div>
+				<div class="log tweak">E-Swords/E-Melee weapons will now be damaged by EMP if active during blast, and be unable to be used temporarily.</div>
+				<div class="log tweak">E-Shields are now buyable for 24 TC on uplink.</div>
+				<div class="log tweak">Personal Belt Shield is now buyable for 40 TC.</div>
+				<div class="log maptweak">E-Shields aren't available freely on the merc-base anymore.</div>
+				<div class="log tweak">Sensor panel has a mute button to mute ambient `woomb` sound.</div>
+				<div class="log bugfix">Placeholder icons show up on scan panel.</div>
+				<div class="log tweak">Placeholder buildmode has a scan data option instead of sensor now.</div>
+				<div class="log rscadd">Add the Dingo, Mantaray and Wombat.</div>
+				<div class="log tweak">Watches will now tell the time when examined.</div>
+				<div class="log tweak">You can examine your uniform with a watch, and check the watch.</div>
+				<div class="log tweak">Local Time/Date in Status does not show unless a watch is attached to your uniform.</div>
+				<div class="log tweak">Stasis cage now uses equipment channel (can power from APCs).</div>
+				<div class="log bugfix">Sensor mute button works again.</div>
+				<div class="log tweak">People can now be thrown into railings (and thus over them).</div>
+				<div class="log rscdel">Autoshotgun mags are no longer lathe printable.</div>
+				<div class="log bugfix">Magazine icons depict ammo count accurately again.</div>
+			</div>
+			<h3 class="author">Обновления Sbotkin:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Added the ability to write on any of the sheets on the clipboard.</div>
+				<div class="log bugfix">Fixed red retractable pens not staying red.</div>
+				<div class="log tweak">The CSO now has an AI module in their hardsuit and can carry drills in the suit slot.</div>
+				<div class="log maptweak">Removed duplicate items from the CSO office(s).</div>
+				<div class="log tweak">Added SFX to the telescopic cane.</div>
+			</div>
+			<h3 class="author">Обновления SierraKomodo:</h3>
+			<div class="changes bgimages16">
+				<div class="log bugfix">Fixed melee attacks ignoring selected target zones.</div>
+				<div class="log tweak">The crew manifest displayed to observers and ghosts now uses the IC manifest, reflecting the state of the `Status` field as displayed to people in game.</div>
+				<div class="log tweak">The OOC manifest (The one displayed in the player lobby) now hides the Activity column, masking the life and activity status of crew entries.</div>
+				<div class="log tweak">Crew manifest entries for crew members listed as `Stored` do not appear on the OOC manifest.</div>
+				<div class="log tweak">Fireaxe cabinets now use standardized health. Minimum damage threshold is set to 15 (Matching the previous force requirement to break the cabinet), and maximum health is set to 30.</div>
+				<div class="log rscadd">Fireaxe cabinets can now be repaired using reinforced glass. A fully broken fireaxe cabinet will still be open and unlocked once repaired. The cost is 1 sheet regardless of damage - You're replacing the entire glass pane.</div>
+				<div class="log tweak">External bots no longer receive stored characters when requesting the manifest.</div>
+				<div class="log bugfix">Clicking adjacent targets with a gun on harm intent now point-blank fires, if applicable, instead of pistol-whipping. Pistol whipping can still occur using disarm intent.</div>
+				<div class="log rscadd">You can now interact with held mobs using tools, including stabbing that cat you're holding hostage when security tries to bang-rush you.</div>
+			</div>
+			<h3 class="author">Обновления SingingSpock:</h3>
+			<div class="changes bgimages16">
+				<div class="log maptweak">Minor D2 wiring fixes</div>
+				<div class="log maptweak">Rewired the RUST, making both SMESes useful. Engineers should read the note in the antechamber before setting up.</div>
+				<div class="log maptweak">Removed superfluous SMES in the shield bay area and rewired area for better useability</div>
+			</div>
+			<h3 class="author">Обновления SomeAngryMiner:</h3>
+			<div class="changes bgimages16">
+				<div class="log rscadd">Several sprite errors have been fixed.</div>
+				<div class="log rscadd">Surgery steps now have sounds.</div>
+				<div class="log rscadd">Airlocks, blinking toys, lockboxes, locators, vox helmets, mining drills, glowshrooms, merc smgs, nuclear reactors, bloodpacks and adherent wirecutters had their sprites fixed.</div>
+				<div class="log bugfix">fixes airlock error icons.</div>
+				<div class="log bugfix">fixes vine error icons.</div>
+				<div class="log bugfix">fixes ore processor console error icons.</div>
+			</div>
+			<h3 class="author">Обновления SomeAngryMiner, l3lb0t:</h3>
+			<div class="changes bgimages16">
+				<div class="log rscadd">most machines now have emissive lights.</div>
+				<div class="log rscadd">most machines also have maintenance panels, if they were missing them.</div>
+				<div class="log rscadd">thermal regulators now have overlays when cooling.</div>
+			</div>
+			<h3 class="author">Обновления Spookerton:</h3>
+			<div class="changes bgimages16">
+				<div class="log bugfix">Fixed pAIs.</div>
+				<div class="log tweak">Emergency Management Bureau identifying gear is not available in loadout.</div>
+				<div class="log tweak">Mobs and objects glide at the same rate again.</div>
+			</div>
+			<h3 class="author">Обновления SuhEugene:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Сделал чейнджлог в разы красивее и удалил из него Credits.</div>
+				<div class="log bugfix">Fixed sensors I've broken.</div>
+				<div class="log bugfix">Fixed the sensors not working when the shuttle is docked.</div>
+				<div class="log admin">Made object spawn panel prettier.</div>
+				<div class="log soundadd">Возвращены уникальные звуки окружения Сьерры.</div>
+				<div class="log imageadd">Возвращена иконка овермапы Сьерры.</div>
+				<div class="log bugfix">Fixed nonsensical Torch log in the helm console.</div>
+				<div class="log tweak">CuddleAndTea добавлен в описание мемориала Сьерры.</div>
+				<div class="log rscadd">Added Try again button to the legacy chat that appears when goonchat load fails.</div>
+				<div class="log tweak">The rest verb changes standing/lying state instantly.</div>
+				<div class="log bugfix">Починена (возвращена) система модов.</div>
+				<div class="log tweak">Куча файлов перемещено туда-сюда, изменены чтобы код был чище.</div>
+				<div class="log bugfix">More sensors consoles no longer show more marks.</div>
+				<div class="log bugfix">Sensors reconnect popup no longer stays open on success link.</div>
+				<div class="log bugfix">Fixed sensors marks visual positioning.</div>
+				<div class="log admin">Added selection of a specific lights fix or destruction zone.</div>
+				<div class="log soundadd">Добавлен новый приветственный звук на Сьерру.</div>
+				<div class="log soundadd">Возвращены мелодии лобби.</div>
+				<div class="log bugfix">Fixed goonchat loading for players re-entering game outside the lobby.</div>
+			</div>
+			<h3 class="author">Обновления drfarson, Pawnty:</h3>
+			<div class="changes bgimages16">
+				<div class="log rscadd">Added fleet service sweaters to uniform dispensers.</div>
+			</div>
+			<h3 class="author">Обновления emmanuelbassil:</h3>
+			<div class="changes bgimages16">
+				<div class="log rscadd">Adds challenge coins in the traitor uplink. They unlock a secret compartment containing uplink items in any vendor on the ship. Item costs 50 TCs; comes with 5 coins making each worth 10 TCs.</div>
+				<div class="log tweak">Each compartment has an average worth of 16 TCs. They are usually related to the theme of the vendor. Higher cost items are not guaranteed to spawn, meaning you may get less TCs than your coin is worth. Or much more, depending on your luck.</div>
+				<div class="log tweak">Using a challenge coin or an emag on a vending machine makes it scream anti-Sol slogans for the benefit of all nearby non-traitors.</div>
+				<div class="log bugfix">Makes vending machine icons turn back on after being anchored in a powered area.</div>
+				<div class="log bugfix">Docilers now properly self-recharge</div>
+				<div class="log bugfix">Can now properly disable safety on underslung grenade launcher.</div>
+				<div class="log bugfix">Light bullpup can no longer be loaded with grenades it can't even fire. It also no longer insists it has a grenade launcher despite best attempts to convince it otherwise.</div>
+				<div class="log bugfix">Grabbing someone that is weakly grabbed by someone else and walking away should now release the other person's grab. No more infinite range grabs.</div>
+				<div class="log bugfix">Fixed not being able to put mobs into suit cyclers. You require a weak grab to put a mob into a suit cycler, suit storage, or gibber. Can click and drag self.</div>
+				<div class="log tweak">Vending machines now emit weak light when powered. Let capitalism be your guide in the darkness.</div>
+				<div class="log bugfix">Antlions now properly burrow and appear near/on you to ruin your day.</div>
+				<div class="log bugfix">King goats have re-learned the lost skill of explorer bowling, and have a chance of running you over.</div>
+				<div class="log bugfix">Charbabys now have a 10% chance per attack of setting you on fire again.</div>
+				<div class="log tweak">Can now stab eyes with all tiny, small, and normal sized sharp items.</div>
+				<div class="log tweak">It is now possible to damage glass/mask items if eye-stabbing with sufficient force. This is affected by CQC skill, making it easier to break glasses with higher skill. It is not possible to break hats that cover eyes (e.g riot helmets) in this way however, no matter the force.</div>
+				<div class="log tweak">It is now possible to miss while trying to stab someone's eyes.</div>
+				<div class="log tweak">Adds 'rare items' to sovietsoda, fitness, and games vendor.</div>
+				<div class="log bugfix">Fixes oversight allowing hacked vending machines to hurl traitor coin items at people.</div>
+			</div>
+			<h3 class="author">Обновления emmanuelbassil, SierraKomodo:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Melee weapon cooldown has been tweaked to be less spammy.</div>
+				<div class="log bugfix">You are now able to examine/jointlock/dislocate/and pin other mobs using grabs, depending on intent.</div>
+				<div class="log tweak">Grabs now leave fingerprints on uncovered body parts. If covered, chance of prints/fibers on clothing as previous behavior.</div>
+			</div>
+			<h3 class="author">Обновления gy1ta23:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">The showers make sound.</div>
+			</div>
 
-			<h2 class="date">17 July 2023</h2>
-			<h3 class="author">Fre3bie updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Forehead writing is now removed after using the cosmetic surgery kit.</li>
-			</ul>
-			<h3 class="author">TheNightingale updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Adds species fall sounds for when you've fallen and can't get up.</li>
-			</ul>
+			<h2 class="date">18.07 - 2023</h2>
+			<h3 class="author">Обновления TheNightingale:</h3>
+			<div class="changes bgimages16">
+				<div class="log rscadd">Vitals monitors can now be upgraded with scanning modules to show broken bones and arterial bleeding.</div>
+				<div class="log tweak">Vitals monitors now show BP, BO and temperature by default.</div>
+			</div>
+			<h3 class="author">Обновления emmanuelbassil:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Can now use grabs to put mobs in sleepers. This is already existing behavior for cryopods and bodyscanners.</div>
+				<div class="log tweak">Can no longer put a mob in a sleeper/cryotube/cryopod/body scanners if they are being grabbed by someone other than you.</div>
+				<div class="log tweak">Added eject verb to sleeper. Remember, you can use Alt+Click to eject people from sleepers.</div>
+				<div class="log bugfix">Fixed bug where a mob could not be buckled if mob was grabbing itself.</div>
+				<div class="log bugfix">Grabs and pulls now properly release when you put a mob in a sleeper, cryopod, body scanner, or cryotube</div>
+			</div>
 
-			<h2 class="date">15 July 2023</h2>
-			<h3 class="author">Jux updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">No more autoshotgun in uplinks.</li>
-			</ul>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Makes robot surgery less successful for non-roboticists.</li>
-				<li class="tweak">Makes resin apply brittle to prosthetics (and damage if used further). All depending on skill and chance.</li>
-				<li class="tweak">Roboticists now get Experienced CD by default.</li>
-				<li class="tweak">Spiders bite less hard.</li>
-				<li class="tweak">Spiders have less health.</li>
-				<li class="tweak">Phoron spider bites even less, but can blow up quicker.</li>
-			</ul>
-			<h3 class="author">SuhEugene updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Point To arrow is animated now and visible only if the pointing player is visible.</li>
-				<li class="bugfix">Tooltips are no longer displayed on the radar waves.</li>
-			</ul>
+			<h2 class="date">17.07 - 2023</h2>
+			<h3 class="author">Обновления Fre3bie:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Forehead writing is now removed after using the cosmetic surgery kit.</div>
+			</div>
+			<h3 class="author">Обновления TheNightingale:</h3>
+			<div class="changes bgimages16">
+				<div class="log rscadd">Adds species fall sounds for when you've fallen and can't get up.</div>
+			</div>
 
-			<h2 class="date">14 July 2023</h2>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Surgery defaults to the only available option again if only one is available.</li>
-			</ul>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Reverts accuracy changes to shotguns.</li>
-			</ul>
-			<h3 class="author">Ryan180602, DrFarson updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Adds colour coded stripes for rubber/practice magazines.</li>
-				<li class="tweak">Fix inconsistences with bullet sprites.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Action buttons now have tooltips denoting the target object and the action.</li>
-			</ul>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Replaced 1-LT stun with 1-LT confusion when your aorta spits at the sky.</li>
-			</ul>
-			<h3 class="author">jux updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">10mm rubber bullets do 15 brute, up from 5, and 15 agony, down from 30. Holdout rubber bullets do 10 brute, up from 5, and 10 agony, down from 20. Shotgun beanbags do 20 brute, down from 25, and 30 agony, down from 60.</li>
-				<li class="tweak">Projectiles that deal agony reduce agony dealt by the armor blocking it.</li>
-			</ul>
+			<h2 class="date">15.07 - 2023</h2>
+			<h3 class="author">Обновления Jux:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">No more autoshotgun in uplinks.</div>
+			</div>
+			<h3 class="author">Обновления Ryan180602:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Makes robot surgery less successful for non-roboticists.</div>
+				<div class="log tweak">Makes resin apply brittle to prosthetics (and damage if used further). All depending on skill and chance.</div>
+				<div class="log tweak">Roboticists now get Experienced CD by default.</div>
+				<div class="log tweak">Spiders bite less hard.</div>
+				<div class="log tweak">Spiders have less health.</div>
+				<div class="log tweak">Phoron spider bites even less, but can blow up quicker.</div>
+			</div>
+			<h3 class="author">Обновления SuhEugene:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Point To arrow is animated now and visible only if the pointing player is visible.</div>
+				<div class="log bugfix">Tooltips are no longer displayed on the radar waves.</div>
+			</div>
 
-			<h2 class="date">12 July 2023</h2>
-			<h3 class="author">Jux updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="maptweak">Secarm has been divided in two, with more advanced ballistic weaponry, the ammo for said weapons and lethal handgun ammo requiring COS access.</li>
-				<li class="tweak">Secarm now has ion pistols instead of ion rifles.</li>
-				<li class="tweak">The BC and COS no longer spawn with lethal ammo in their lockers, and FTs now have an m19.</li>
-			</ul>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Giant spider counts are now capped at 30 globally (to start) so they don't consume everything everywhere.</li>
-				<li class="bugfix">Fixed the Paralyze verb not working.</li>
-			</ul>
+			<h2 class="date">14.07 - 2023</h2>
+			<h3 class="author">Обновления Mucker:</h3>
+			<div class="changes bgimages16">
+				<div class="log bugfix">Surgery defaults to the only available option again if only one is available.</div>
+			</div>
+			<h3 class="author">Обновления Ryan180602:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Reverts accuracy changes to shotguns.</div>
+			</div>
+			<h3 class="author">Обновления Ryan180602, DrFarson:</h3>
+			<div class="changes bgimages16">
+				<div class="log rscadd">Adds colour coded stripes for rubber/practice magazines.</div>
+				<div class="log tweak">Fix inconsistences with bullet sprites.</div>
+			</div>
+			<h3 class="author">Обновления SierraKomodo:</h3>
+			<div class="changes bgimages16">
+				<div class="log rscadd">Action buttons now have tooltips denoting the target object and the action.</div>
+			</div>
+			<h3 class="author">Обновления Spookerton:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Replaced 1-LT stun with 1-LT confusion when your aorta spits at the sky.</div>
+			</div>
+			<h3 class="author">Обновления jux:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">10mm rubber bullets do 15 brute, up from 5, and 15 agony, down from 30. Holdout rubber bullets do 10 brute, up from 5, and 10 agony, down from 20. Shotgun beanbags do 20 brute, down from 25, and 30 agony, down from 60.</div>
+				<div class="log tweak">Projectiles that deal agony reduce agony dealt by the armor blocking it.</div>
+			</div>
 
-			<h2 class="date">11 July 2023</h2>
-			<h3 class="author">Azlan, Jux updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Adds a select fire, drum fed shotgun to gun spawners and merc uplinks, sprited by Azlan!</li>
-				<li class="rscadd">Adds shotgun drums to lathes and uplinks, sprited by Azlan!</li>
-				<li class="tweak">Individual shotgun shells are now a little less than half their old material cost.</li>
-				<li class="tweak">The random projectile weapon spawner now favors old-fashioned items less.</li>
-			</ul>
-			<h3 class="author">Jux updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">The SEV Torch now issues ballistic weapons instead of laser weapons.</li>
-			</ul>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Spider nurses will now lay eggs if left undisturbed for too long, making spiders a persistent threat if not totally eradicated.</li>
-				<li class="admin">Moved the 'path' variable type in VV menus to 'type'.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Decals on turfs now disappear when their tiles are removed.</li>
-			</ul>
-			<h3 class="author">TheNightingale updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="maptweak">Adds rainbow table flags to the Torch.</li>
-			</ul>
+			<h2 class="date">12.07 - 2023</h2>
+			<h3 class="author">Обновления Jux:</h3>
+			<div class="changes bgimages16">
+				<div class="log maptweak">Secarm has been divided in two, with more advanced ballistic weaponry, the ammo for said weapons and lethal handgun ammo requiring COS access.</div>
+				<div class="log tweak">Secarm now has ion pistols instead of ion rifles.</div>
+				<div class="log tweak">The BC and COS no longer spawn with lethal ammo in their lockers, and FTs now have an m19.</div>
+			</div>
+			<h3 class="author">Обновления Mucker:</h3>
+			<div class="changes bgimages16">
+				<div class="log bugfix">Giant spider counts are now capped at 30 globally (to start) so they don't consume everything everywhere.</div>
+				<div class="log bugfix">Fixed the Paralyze verb not working.</div>
+			</div>
 
-			<h2 class="date">10 July 2023</h2>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fixed the boots loadout menu select, jungle boots have been readded as 'tan' SCGA boots.</li>
-				<li class="rscadd">Added rogue construction drones to the rogue maintenance drone event (moderate - major only).</li>
-				<li class="bugfix">RUST observation shutters work again.</li>
-			</ul>
-			<h3 class="author">PurplePineapple, Escalation1984 Developers updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Adds autoclick functionality to clients.</li>
-				<li class="tweak">can_autofire on guns now uses the autoclick to allow for more natural automatic fire by holding the mouse down in one place.</li>
-				<li class="rscdel">Click-drag automatic fire has been removed now that it has been replaced with the autoclick.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">The lift now declares Telecommunications on Deck 4 instead of Deck 3.</li>
-				<li class="bugfix">Fixes certain floor decals disappearing when a turf initializes or updates its icons.</li>
-			</ul>
-			<h3 class="author">TheNightingale updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Exosuit medigel dispensers now come with a built-in health analyzer alternate mode.</li>
-				<li class="bugfix">Exosuits now require harm intent to slam, preventing unintentional slams when changing equipment.</li>
-				<li class="bugfix">Exosuit cameras now actually work.</li>
-				<li class="bugfix">Exosuit sleepers no longer act as power sinks when empty.</li>
-				<li class="bugfix">Exosuit floodlights are no longer required in order to climb ladders.</li>
-				<li class="tweak">Suit sensor consoles now beep when someone's critical.</li>
-				<li class="tweak">Chem dispensers and chemmasters now accept IV bags.</li>
-			</ul>
+			<h2 class="date">11.07 - 2023</h2>
+			<h3 class="author">Обновления Azlan, Jux:</h3>
+			<div class="changes bgimages16">
+				<div class="log rscadd">Adds a select fire, drum fed shotgun to gun spawners and merc uplinks, sprited by Azlan!</div>
+				<div class="log rscadd">Adds shotgun drums to lathes and uplinks, sprited by Azlan!</div>
+				<div class="log tweak">Individual shotgun shells are now a little less than half their old material cost.</div>
+				<div class="log tweak">The random projectile weapon spawner now favors old-fashioned items less.</div>
+			</div>
+			<h3 class="author">Обновления Jux:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">The SEV Torch now issues ballistic weapons instead of laser weapons.</div>
+			</div>
+			<h3 class="author">Обновления Mucker:</h3>
+			<div class="changes bgimages16">
+				<div class="log rscadd">Spider nurses will now lay eggs if left undisturbed for too long, making spiders a persistent threat if not totally eradicated.</div>
+				<div class="log admin">Moved the 'path' variable type in VV menus to 'type'.</div>
+			</div>
+			<h3 class="author">Обновления SierraKomodo:</h3>
+			<div class="changes bgimages16">
+				<div class="log bugfix">Decals on turfs now disappear when their tiles are removed.</div>
+			</div>
+			<h3 class="author">Обновления TheNightingale:</h3>
+			<div class="changes bgimages16">
+				<div class="log maptweak">Adds rainbow table flags to the Torch.</div>
+			</div>
 
-			<h2 class="date">09 July 2023</h2>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fixed radial menus breaking with too many options.</li>
-				<li class="bugfix">Fixed being able to remove non-removable accessories.</li>
-			</ul>
+			<h2 class="date">10.07 - 2023</h2>
+			<h3 class="author">Обновления Mucker:</h3>
+			<div class="changes bgimages16">
+				<div class="log bugfix">Fixed the boots loadout menu select, jungle boots have been readded as 'tan' SCGA boots.</div>
+				<div class="log rscadd">Added rogue construction drones to the rogue maintenance drone event (moderate - major only).</div>
+				<div class="log bugfix">RUST observation shutters work again.</div>
+			</div>
+			<h3 class="author">Обновления PurplePineapple, Escalation1984 Developers:</h3>
+			<div class="changes bgimages16">
+				<div class="log rscadd">Adds autoclick functionality to clients.</div>
+				<div class="log tweak">can_autofire on guns now uses the autoclick to allow for more natural automatic fire by holding the mouse down in one place.</div>
+				<div class="log rscdel">Click-drag automatic fire has been removed now that it has been replaced with the autoclick.</div>
+			</div>
+			<h3 class="author">Обновления SierraKomodo:</h3>
+			<div class="changes bgimages16">
+				<div class="log bugfix">The lift now declares Telecommunications on Deck 4 instead of Deck 3.</div>
+				<div class="log bugfix">Fixes certain floor decals disappearing when a turf initializes or updates its icons.</div>
+			</div>
+			<h3 class="author">Обновления TheNightingale:</h3>
+			<div class="changes bgimages16">
+				<div class="log rscadd">Exosuit medigel dispensers now come with a built-in health analyzer alternate mode.</div>
+				<div class="log bugfix">Exosuits now require harm intent to slam, preventing unintentional slams when changing equipment.</div>
+				<div class="log bugfix">Exosuit cameras now actually work.</div>
+				<div class="log bugfix">Exosuit sleepers no longer act as power sinks when empty.</div>
+				<div class="log bugfix">Exosuit floodlights are no longer required in order to climb ladders.</div>
+				<div class="log tweak">Suit sensor consoles now beep when someone's critical.</div>
+				<div class="log tweak">Chem dispensers and chemmasters now accept IV bags.</div>
+			</div>
 
-			<h2 class="date">08 July 2023</h2>
-			<h3 class="author">LordNest updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Ported input subsystem and keybinding from Nebula. Added Gliding for mob movement.</li>
-			</ul>
+			<h2 class="date">09.07 - 2023</h2>
+			<h3 class="author">Обновления Mucker:</h3>
+			<div class="changes bgimages16">
+				<div class="log bugfix">Fixed radial menus breaking with too many options.</div>
+				<div class="log bugfix">Fixed being able to remove non-removable accessories.</div>
+			</div>
 
-			<h2 class="date">07 July 2023</h2>
-			<h3 class="author">Jux updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">The adminpm noise is now plays at a lower volume by default, and also plays when someone in your line of sight is paralyzed.</li>
-				<li class="tweak">The staffwarn noise is significantly quieter, and staffwarns only notify staff when a player joins the round.</li>
-			</ul>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">The 'Remove Accessory' Verb now uses a radial menu.</li>
-			</ul>
+			<h2 class="date">08.07 - 2023</h2>
+			<h3 class="author">Обновления LordNest:</h3>
+			<div class="changes bgimages16">
+				<div class="log rscadd">Ported input subsystem and keybinding from Nebula. Added Gliding for mob movement.</div>
+			</div>
 
-			<h2 class="date">06 July 2023</h2>
-			<h3 class="author">Alex6511 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Torch side navigation light colors are laterally accurate. Dorsal and ventral colors also included, should someone do something absurd and vertical!</li>
-			</ul>
-			<h3 class="author">Dr. Farson updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Split armor tags into separate loadout options - flags, blood type, and corporate insignia.</li>
-				<li class="rscadd">Added a fleet flag armor tag.</li>
-			</ul>
-			<h3 class="author">Fre3bie updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Corpse Cube now copies the flavour text with the DNA sampler.</li>
-			</ul>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">The Torch will be removed from the overmap during jump.</li>
-				<li class="tweak">If the drive is missing/destroyed, there will be no jump, round will simply end after the same amount of time.</li>
-			</ul>
+			<h2 class="date">07.07 - 2023</h2>
+			<h3 class="author">Обновления Jux:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">The adminpm noise is now plays at a lower volume by default, and also plays when someone in your line of sight is paralyzed.</div>
+				<div class="log tweak">The staffwarn noise is significantly quieter, and staffwarns only notify staff when a player joins the round.</div>
+			</div>
+			<h3 class="author">Обновления Mucker:</h3>
+			<div class="changes bgimages16">
+				<div class="log rscadd">The 'Remove Accessory' Verb now uses a radial menu.</div>
+			</div>
 
-			<h2 class="date">05 July 2023</h2>
-			<h3 class="author">SuhEugene updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fixed overmap placeholder objects visibility and big objects positioning.</li>
-				<li class="bugfix">Fixed overmap animation of distant objects.</li>
-				<li class="bugfix">Sensors mute now mutes sensors.</li>
-				<li class="balance">Sensor scan progress formula has changed completely to be less vessel-mass-based. Sensors scan everything a way more faster than before.</li>
-				<li class="maptweak">Placed a little better sensors on Torch.</li>
-				<li class="rscadd">Scan progress added to UI instead of chat spamming.</li>
-				<li class="rscadd">Sensors have a memory and will remember anyone who goes out of range, however every turn off progress goes down by 18 percents.</li>
-				<li class="tweak">Sensors view is round now.</li>
-				<li class="tweak">Slightly improved sensor scan display look.</li>
-				<li class="tweak">Slavage Gantry now twice as heavy.</li>
-				<li class="tweak">Made overmap darker, much better on the eyes.</li>
-			</ul>
+			<h2 class="date">06.07 - 2023</h2>
+			<h3 class="author">Обновления Alex6511:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Torch side navigation light colors are laterally accurate. Dorsal and ventral colors also included, should someone do something absurd and vertical!</div>
+			</div>
+			<h3 class="author">Обновления Dr. Farson:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Split armor tags into separate loadout options - flags, blood type, and corporate insignia.</div>
+				<div class="log rscadd">Added a fleet flag armor tag.</div>
+			</div>
+			<h3 class="author">Обновления Fre3bie:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Corpse Cube now copies the flavour text with the DNA sampler.</div>
+			</div>
+			<h3 class="author">Обновления Ryan180602:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">The Torch will be removed from the overmap during jump.</div>
+				<div class="log tweak">If the drive is missing/destroyed, there will be no jump, round will simply end after the same amount of time.</div>
+			</div>
 
-			<h2 class="date">03 July 2023</h2>
-			<h3 class="author">Fre3bie updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Loadout items favour being equipped/attached instead of going into containers.</li>
-			</ul>
-			<h3 class="author">Rootoo807 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Jukebox no longer clips through windows.</li>
-			</ul>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fixes FA Vacsuit sprite path.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Hailer message length limit reduce from 1,024 to 64.</li>
-				<li class="bugfix">Assembly holders are now properly constructed and don't duplicate.</li>
-			</ul>
-			<h3 class="author">Vex8tion updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Removed arithrazine's ability to heal internal organs</li>
-				<li class="tweak">Peridaxon's metabolism rate is now halved, and it now heals for slightly more per tick</li>
-			</ul>
+			<h2 class="date">05.07 - 2023</h2>
+			<h3 class="author">Обновления SuhEugene:</h3>
+			<div class="changes bgimages16">
+				<div class="log bugfix">Fixed overmap placeholder objects visibility and big objects positioning.</div>
+				<div class="log bugfix">Fixed overmap animation of distant objects.</div>
+				<div class="log bugfix">Sensors mute now mutes sensors.</div>
+				<div class="log balance">Sensor scan progress formula has changed completely to be less vessel-mass-based. Sensors scan everything a way more faster than before.</div>
+				<div class="log maptweak">Placed a little better sensors on Torch.</div>
+				<div class="log rscadd">Scan progress added to UI instead of chat spamming.</div>
+				<div class="log rscadd">Sensors have a memory and will remember anyone who goes out of range, however every turn off progress goes down by 18 percents.</div>
+				<div class="log tweak">Sensors view is round now.</div>
+				<div class="log tweak">Slightly improved sensor scan display look.</div>
+				<div class="log tweak">Slavage Gantry now twice as heavy.</div>
+				<div class="log tweak">Made overmap darker, much better on the eyes.</div>
+			</div>
 
-			<h2 class="date">30 June 2023</h2>
-			<h3 class="author">CrimsonShrike updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Ipatch now uses new emissive system and will glow in dark when on.</li>
-				<li class="bugfix">Fixes mobs occluding all emissives, including their own</li>
-			</ul>
-			<h3 class="author">Jux updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">The colour-select bandana now has shading on the front sprite.</li>
-			</ul>
-			<h3 class="author">Karl Johansson updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Buckshot accuracy is now calculated once per shot, rather than individually for each pellet.</li>
-				<li class="tweak">Shotguns are generally more accurate at range (to account for accuracy only being calculated once)</li>
-				<li class="bugfix">Fixes pump shotgun sprites inaccurately displaying the condition of the shotgun</li>
-				<li class="rscadd">Adds wound and bandage overlays to the health display on the HUD</li>
-			</ul>
-			<h3 class="author">LordNest updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Added tooltips for overmap</li>
-			</ul>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Spiderlings should no longer grow while not on a turf (no more surprise spiders-armies popping out of cocoons)</li>
-				<li class="bugfix">Fixed some bluespace turfs not reverting after the BSD event runs.</li>
-				<li class="tweak">The BSD event now only runs for about 18 minutes.</li>
-				<li class="tweak">The BSD event should happen less often now (it's not THAT broken).</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fixes fire alarms becoming stuck in alarm monitoring programs.</li>
-				<li class="maptweak">Added a manual valve between the supply and waste pipes in the xenoflora lab.</li>
-			</ul>
-			<h3 class="author">rootoo807 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="maptweak">Remaps the galley. Combines the bar and the kitchen. Adds a galley storage space on D4 for fancy O-mess booze and cigars.</li>
-			</ul>
+			<h2 class="date">03.07 - 2023</h2>
+			<h3 class="author">Обновления Fre3bie:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Loadout items favour being equipped/attached instead of going into containers.</div>
+			</div>
+			<h3 class="author">Обновления Rootoo807:</h3>
+			<div class="changes bgimages16">
+				<div class="log bugfix">Jukebox no longer clips through windows.</div>
+			</div>
+			<h3 class="author">Обновления Ryan180602:</h3>
+			<div class="changes bgimages16">
+				<div class="log bugfix">Fixes FA Vacsuit sprite path.</div>
+			</div>
+			<h3 class="author">Обновления SierraKomodo:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Hailer message length limit reduce from 1,024 to 64.</div>
+				<div class="log bugfix">Assembly holders are now properly constructed and don't duplicate.</div>
+			</div>
+			<h3 class="author">Обновления Vex8tion:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Removed arithrazine's ability to heal internal organs</div>
+				<div class="log tweak">Peridaxon's metabolism rate is now halved, and it now heals for slightly more per tick</div>
+			</div>
 
-			<h2 class="date">27 June 2023</h2>
-			<h3 class="author">Jux updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">There's now colour select bandanas available using a new sprite. Replaces the single-colour bandanas, but not the special ones.</li>
-				<li class="bugfix">The familiar's headband is no longer a bandana available in loadout.</li>
-				<li class="rscdel">Removes the NJP form.</li>
-			</ul>
-			<h3 class="author">rootoo807 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="maptweak">Moves the thermal regulator 1 tile closer to the pharmacy chair</li>
-			</ul>
+			<h2 class="date">30.06 - 2023</h2>
+			<h3 class="author">Обновления CrimsonShrike:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Ipatch now uses new emissive system and will glow in dark when on.</div>
+				<div class="log bugfix">Fixes mobs occluding all emissives, including their own</div>
+			</div>
+			<h3 class="author">Обновления Jux:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">The colour-select bandana now has shading on the front sprite.</div>
+			</div>
+			<h3 class="author">Обновления Karl Johansson:</h3>
+			<div class="changes bgimages16">
+				<div class="log tweak">Buckshot accuracy is now calculated once per shot, rather than individually for each pellet.</div>
+				<div class="log tweak">Shotguns are generally more accurate at range (to account for accuracy only being calculated once)</div>
+				<div class="log bugfix">Fixes pump shotgun sprites inaccurately displaying the condition of the shotgun</div>
+				<div class="log rscadd">Adds wound and bandage overlays to the health display on the HUD</div>
+			</div>
+			<h3 class="author">Обновления LordNest:</h3>
+			<div class="changes bgimages16">
+				<div class="log rscadd">Added tooltips for overmap</div>
+			</div>
+			<h3 class="author">Обновления Mucker:</h3>
+			<div class="changes bgimages16">
+				<div class="log bugfix">Spiderlings should no longer grow while not on a turf (no more surprise spiders-armies popping out of cocoons)</div>
+				<div class="log bugfix">Fixed some bluespace turfs not reverting after the BSD event runs.</div>
+				<div class="log tweak">The BSD event now only runs for about 18 minutes.</div>
+				<div class="log tweak">The BSD event should happen less often now (it's not THAT broken).</div>
+			</div>
+			<h3 class="author">Обновления SierraKomodo:</h3>
+			<div class="changes bgimages16">
+				<div class="log bugfix">Fixes fire alarms becoming stuck in alarm monitoring programs.</div>
+				<div class="log maptweak">Added a manual valve between the supply and waste pipes in the xenoflora lab.</div>
+			</div>
+			<h3 class="author">Обновления rootoo807:</h3>
+			<div class="changes bgimages16">
+				<div class="log maptweak">Remaps the galley. Combines the bar and the kitchen. Adds a galley storage space on D4 for fancy O-mess booze and cigars.</div>
+			</div>
 
-			<h2 class="date">26 June 2023</h2>
-			<h3 class="author">Bam4000 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Changed the red cross status display into a blue cross.</li>
-			</ul>
-
-			<h2 class="date">25 June 2023</h2>
-			<h3 class="author">Al-1ce updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="spellcheck">Adds a missing definite article to the tranship sensor scan.</li>
-			</ul>
-
-			<h2 class="date">24 June 2023</h2>
-			<h3 class="author">Al-1ce updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Adds pajamas to the loadout.</li>
-			</ul>
-
-			<h2 class="date">23 June 2023</h2>
-			<h3 class="author">Jux updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Helmet cams can be observed again.</li>
-				<li class="tweak">Helmet cams require SolGov crew access instead of EVA access.</li>
-			</ul>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="admin">Added a button to the player panel called 'Equip Loadout' that equips the player's currently saved loadout.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fixes radio signal and distress signal scans having line breaks after every character.</li>
-			</ul>
-			<h3 class="author">jux updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Secure tech storage now requires Tech Storage + Senior Engi Access, instead of Tech + Bridge access</li>
-				<li class="tweak">Senior engineers now always have trained IT and atmospherics, but lose 4 skill points</li>
-			</ul>
-
-			<h2 class="date">22 June 2023</h2>
-			<h3 class="author">Jux updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="maptweak">Most of the Torch's cameras have been removed. Areas exempt are generally hallways, main ship entrance points, shuttle cockpits, and high traffic or high security areas.</li>
-				<li class="maptweak">Some cameras have had their positions adjusted.</li>
-			</ul>
-			<h3 class="author">LordNest updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="maptweak">Adds new ruins for exoplanets and damaged shuttle,</li>
-			</ul>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Planet atmospheric generation has been reverted to its previous state due to various issues.</li>
-			</ul>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="maptweak">Swaps BSD with AI Upload, centralises the BSD, gives it a bit more security, but ways of access.</li>
-				<li class="maptweak">D2 Shield-Room SMES is now on the main-grid. New AI Upload room has its own SMES (on the main grid).</li>
-			</ul>
-			<h3 class="author">emmanuelbassil updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">The amount of soda in the cola machine is now randomly generated. This is an experiment, should not cause any shortages.</li>
-				<li class="tweak">Vending machines now display rare items in gold, hidden items (contraband wire/emag) in orange.</li>
-				<li class="tweak">Emagging a vendor now makes all items free.</li>
-				<li class="bugfix">Wooden crates now properly spawn wood instead of metal when crowbar'd open.</li>
-			</ul>
-			<h3 class="author">emmanuelbassil,Azlan updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Adds matchbook, a smaller version of matchboxes with 3 matches that fit in your ear slot, pockets, and wallets.</li>
-				<li class="tweak">Matchbook available in same vending machines where matchboxes are and loadout.</li>
-				<li class="tweak">New sprites for matchboxes and the matchbook, courtesy of Azlan</li>
-				<li class="tweak">Matchbox sprites were supposed to open/close and change as they are emptied, this now works.</li>
-			</ul>
-			<h3 class="author">jux updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Un-restricts bananas in loadout.</li>
-			</ul>
-
-			<h2 class="date">21 June 2023</h2>
-			<h3 class="author">SomeAngryMiner updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Hullbreaker monitors and fleet androids can be found, now.</li>
-				<li class="rscadd">Frontier alliance and clothing medals were added.</li>
-			</ul>
-
-			<h2 class="date">20 June 2023</h2>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Ladders should no longer be bugged after the BSD event runs.</li>
-				<li class="tweak">BSD event lasts longer.</li>
-				<li class="tweak">Bluespace turfs spawned by the BSD event will teleport mobs to a random place if stepped on (sometimes).</li>
-				<li class="tweak">Mobs affected by the 'pulse' from the BSD event will now have their position swapped with other mobs, instead of teleported randomly.</li>
-				<li class="tweak">Bluespace figments do 5 less damage on hit.</li>
-			</ul>
-
-			<h2 class="date">16 June 2023</h2>
-			<h3 class="author">Gy1ta23 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">screwdrivers can now be hidden in boots like knives</li>
-				<li class="tweak">gave the holdout revolver an inhand sprite, copying the holdout pistol</li>
-			</ul>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fixed spacedrift affecting objects that were currently being pulled.</li>
-			</ul>
-			<h3 class="author">PapiSmirnov updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Adds the fake corpse cube antag item.</li>
-			</ul>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Add a cosmetic auto-surgery kit to uplink for 12TC. So now, you can be a different person (fully so with a syndi-ID and arrivals device).</li>
-			</ul>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Rigs get some storage on the suit part. Most get 2x normal items of freeform, lights get 3x small, and zeros get nothing. It can be dumped out via the panel->wrench pathway when not worn.</li>
-			</ul>
-
-			<h2 class="date">14 June 2023</h2>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Makes sure ckey checks are done when shuttle pod taking off.</li>
-			</ul>
-
-			<h2 class="date">13 June 2023</h2>
-			<h3 class="author">Bam4000 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fixed the landing markers for the Abandoned Hotel Away Site.</li>
-				<li class="bugfix">Fixed the spawning of a parent circuit board (that was a dumb mistake)</li>
-				<li class="tweak">Tweaked the abandoned hotel a bit</li>
-			</ul>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Closets can no longer trap large mobs in them.</li>
-			</ul>
-
-			<h2 class="date">11 June 2023</h2>
-			<h3 class="author">Bam40002 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Added the abandoned hotel away site.</li>
-			</ul>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Adds the 'BSD Instability' Event, which causes spooky anomalies while its active, can trigger in the 'moderate' and 'major' categories.</li>
-				<li class="tweak">Fixed a grammatical thing in the bluespace figment description.</li>
-				<li class="tweak">Most simple mobs have had their movement speed increased to match current player speeds, so you can no longer out-walk them.</li>
-				<li class="tweak">Phoron spiders will explode in 1-3 seconds instead of 3-5.</li>
-			</ul>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Adds tesla-link to stasis cages.</li>
-			</ul>
-			<h3 class="author">SomeAngryMiner updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Welders sounds have been re-added, for actions of: Turning on, Turning off, removing tank and adding tank.</li>
-			</ul>
-			<h3 class="author">emmanuelbassil updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Vending machines now have the ability to spawn 'rare' items based on chance. Functionality to randomize amount of stuff in the machine as well.</li>
-				<li class="tweak">Cola vending machine now has a random chance to spawn with two rare drinks.</li>
-			</ul>
-
-			<h2 class="date">09 June 2023</h2>
-			<h3 class="author">Gy1ta23 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">latex gloves and nitrile gloves are now separate</li>
-			</ul>
-			<h3 class="author">emmanuelbassil updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">You will now be able to dismantle unreinforced windows that spawn in with the map</li>
-				<li class="bugfix">Leather sheets and material hydrogen sheets will no longer disappear when in stacks greater than 2</li>
-				<li class="bugfix">Pianos and the minimoog can be unwrenched and wrenched at your heart's content again.</li>
-				<li class="bugfix">Can now properly disassemble/reassemble washing machines.</li>
-			</ul>
-
-			<h2 class="date">07 June 2023</h2>
-			<h3 class="author">SuhEugene updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Transport drone pad scanners upgrade now works</li>
-			</ul>
-
-			<h2 class="date">04 June 2023</h2>
-			<h3 class="author">Karl Johansson updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Adds the hand drill, a portable hand drill that can swap between a bolt and screw head. Does (most) things twice as fast! Sprites done by Azlan.</li>
-				<li class="rscadd">Adds the hydraulic prying tool, a tool that can swap between prying and cutting heads. Does (most) things twice as fast! Sprites also done by Azlan.</li>
-				<li class="tweak">Redoes tool logic to allow for tools that perform actions faster or slower than the baseline.</li>
-				<li class="maptweak">Changes the toolbelt in the Chief Engineer's locker to include a hand drill and hydraulic prying tool.</li>
-			</ul>
-			<h3 class="author">LordNest updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Cleanbots and Farmbots use sprites ported from [source]</li>
-			</ul>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Holopads can now have PDAs registered to be notified on call.</li>
-			</ul>
-			<h3 class="author">Ryan180602, Juxtaposed updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Allow artefacts to be exported. Worth is calculated based on effects/trigger. Needs the scan-sheet on the anomaly container.</li>
-				<li class="rscadd">Allow simplemobs (caged animals) to be exported. Worth is based on passive/retaliate/hostile.</li>
-				<li class="bugfix">Stasis cages now properly delete nets when containing animals.</li>
-				<li class="bugfix">Stasis cages cells and power usage are fixed.</li>
-			</ul>
-
-			<h2 class="date">03 June 2023</h2>
-			<h3 class="author"> updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Emagging a vending machine unlocks hidden items again.</li>
-				<li class="bugfix">Fixes seed vendor disappearing for a second when vending items.</li>
-			</ul>
-
-			<h2 class="date">01 June 2023</h2>
-			<h3 class="author">BoNT updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Laser scalpels and IMS will check if there is already an existing incision, like regular scalpels.</li>
-			</ul>
-			<h3 class="author">BurpleBineapple updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Scoped guns now no longer throw your camera across the map with recoil and will properly reset to initial values.</li>
-				<li class="tweak">The Panther has 2 tiles extra of scoped accuracy to be more usable at below Master WE.</li>
-			</ul>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Stasis cages are now constructable/deconstructable.</li>
-				<li class="tweak">Stasis cages can now be hacked to bolt the lid, release, or allow people in it.</li>
-				<li class="tweak">Stasis cages can be damaged, emp'd and broken completely.</li>
-				<li class="tweak">Stasis cages can be upgraded with better capacitor/cell.</li>
-			</ul>
-
-			<h2 class="date">31 May 2023</h2>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscdel">Removed shotgun knockback, whoops.</li>
-			</ul>
-
-			<h2 class="date">30 May 2023</h2>
-			<h3 class="author">Gy1ta23 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">security reports don't call you an officer anymore</li>
-			</ul>
-
-			<h2 class="date">29 May 2023</h2>
-			<h3 class="author">Alex6511 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="maptweak">Exoplanet types have been overhauled, planets atmospheres will now be more consistent</li>
-				<li class="maptweak">Artic Planetoid has been renamed Artic dwarf planet, because a planetoid is not a planet type recognized by the IAU</li>
-			</ul>
-			<h3 class="author">ImJustKisik updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Bullets now leave holes.</li>
-				<li class="rscadd">Ricochet sparkles.</li>
-				<li class="rscadd">Shotgun blast knocks back whoever is hit.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="admin">Evacuation subsystem now displays stat information in the MC tab, including current stage, time to next stage, time evac was called, and the point of no return status.</li>
-				<li class="bugfix">Climbing tables no longer displays a message about buckling.</li>
-			</ul>
-
-			<h2 class="date">28 May 2023</h2>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Ships that scan the Torch will now show if the ship is currently dealing with a spider infestation or a Blob.</li>
-				<li class="rscadd">Exoplanets undergoing the 'Exoplanet Awakening' will now display as such on scans.</li>
-			</ul>
-
-			<h2 class="date">27 May 2023</h2>
-			<h3 class="author">Bam4000 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Changes emotes for the virologists like "he shakes his hand above his head" and such.</li>
-			</ul>
-			<h3 class="author">BoNT updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="imageadd">Updated sprites for EC Science bags</li>
-				<li class="rscadd">Slime surgery with laser scalpels & incision management systems will create both incisions in a single step.</li>
-			</ul>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="admin">Tickets now timeout after (roughly) 30 minutes of inactivity.</li>
-			</ul>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">OFD will not fire accurately (according to calibration).</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="balance">Skill level now plays a stronger role in the time it takes to perform skilled actions. Lower skills will have much longer timers, while higher skills have shorter timers.</li>
-				<li class="bugfix">Reinforced walls and tables with a combination of two different materials now use the current reinforced material icon.</li>
-				<li class="rscadd">Alien alloy now has random icons for sheet stacks, as well as constructed tables, doors, and walls.</li>
-			</ul>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">You can carve deer skulls into fashionable headwear with sharp objects. With the addition of a pen light, the eyes light up! They hide identity, provide some very minor armor, and are good protection against electrocution via the head.</li>
-			</ul>
-			<h3 class="author">rootoo807 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">Adds toe-less foam clogs and toe-less flip flobsters. Both are available in loadout under the Xenowear section.</li>
-				<li class="rscadd">Using wirecutters or a scalpel on foam clogs/flip flobsters now chops the toes off. Three cheers for OSHA violations.</li>
-				<li class="tweak">Updates Unathi onmob sprites (sec aviators, EC ranks) to match new sprites.</li>
-			</ul>
-
-			<h2 class="date">26 May 2023</h2>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="maptweak">Reverts chemlab remap.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Incorrect physical interaction checks have been removed from general interactions; Various things that weren't working when clicked on should be working again now.</li>
-			</ul>
-
-			<h2 class="date">25 May 2023</h2>
-			<h3 class="author">Juxtaposed, Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Add wirehack mechanics to disarm TTVs.</li>
-				<li class="tweak">TTVs need to be armed before they can be activated via the interface.</li>
-			</ul>
-			<h3 class="author">PurplePineapple updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Damage layers such as wounds, gauze, and splints are applied above your clothes. Armor and voidsuits still go over them.</li>
-			</ul>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="maptweak">Remove external bridge cameras. (B-Deck Bridge)</li>
-				<li class="maptweak">Remap chemistry lab to be a bit bigger, while not taking up more space than normal in the medbay. (D-1 Med)</li>
-				<li class="maptweak">Remove `NO IDLE` sign between cryo-lab, replace with bodyscan screen. (D-1 Med)</li>
-				<li class="maptweak">Replace BC's crowbar with prybar. (D-1 Sec)</li>
-				<li class="maptweak">Replace FT's cigarette pack spawn with a random cigarette pack spawn. (D-1 Sec)</li>
-				<li class="maptweak">Add General Intercom to D1 Briefing Room. (D-1 Mid)</li>
-				<li class="maptweak">Shift scrubber spawn a bit to not be inconvenient on ladders. (D-3 Behind SecCP)</li>
-				<li class="maptweak">Remove glass panes between consoles. (D-3 Rec Room)</li>
-				<li class="maptweak">Make PF office cameras belong to Exploration network. (D-4 PF Office)</li>
-				<li class="maptweak">Replace Atmos Storage waste canisters with oxygen canisters. (D-5 Hangar)</li>
-			</ul>
-			<h3 class="author">limelier updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fix name of research bowman headset</li>
-				<li class="rscdel">Clean up researcher's locker by removing extra tapes and the oxygen tank</li>
-			</ul>
-
-			<h2 class="date">24 May 2023</h2>
-			<h3 class="author">BurpleBineapple updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Damage and Surgery steps show through underclothes. Armor/Voidsuits is still over this layer.</li>
-				<li class="bugfix">Fixes uranium being spelled "nuranium" as a stack. Caused incorrect displays on the merchant console, etc.</li>
-			</ul>
-			<h3 class="author">Mucker updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Fixed psionics not being toggleable.</li>
-			</ul>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">OFDs can now take coordinates.</li>
-				<li class="tweak">Accuracy depending on calibration.</li>
-				<li class="tweak">People on the receiving end will feel the effects of an explosion.</li>
-			</ul>
-
-			<h2 class="date">22 May 2023</h2>
-			<h3 class="author">JoeyNosegay updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscadd">adds 'dress heels' to the uniform vendor as service and dress options</li>
-			</ul>
-			<h3 class="author">Ryan180602 updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Unathis regenerate again.</li>
-			</ul>
-
-			<h2 class="date">20 May 2023</h2>
-			<h3 class="author">Jux updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="rscdel">Removes pets from loadouts.</li>
-			</ul>
-			<h3 class="author">Sbotkin updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="maptweak">CSO office is less green and more purple now.</li>
-				<li class="maptweak">Research doors are now of correct color.</li>
-			</ul>
-			<h3 class="author">SierraKomodo updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="tweak">Full-size windows can be alt-clicked to show the turf tab again.</li>
-			</ul>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">Body scanners etc produce a correct burn level description.</li>
-			</ul>
-
-			<h2 class="date">17 May 2023</h2>
-			<h3 class="author">Spookerton updated:</h3>
-			<ul class="changes bgimages16">
-				<li class="bugfix">secbots don't attack people with html escapable symbols in their names.</li>
-				<li class="bugfix">You can't install an infinite number of augments in robotic limbs anymore.</li>
-				<li class="bugfix">Fixed some species being selectable in change appearance menus.</li>
-				<li class="tweak">Spike throwers can't be fumbled.</li>
-				<li class="tweak">Records aren't deleted when people exit a round through cryopods.</li>
-				<li class="tweak">If wearing an ID card while being stored by a cryopod, the record associated with the name on that ID has its status updated to "Stored".</li>
-			</ul>
-		</div>
-
-<b>GoonStation 13 Development Team</b>
-	<div class = "top">
-	<b>Coders:</b> Stuntwaffle, Showtime, Pantaloons, Nannek, Keelin, Exadv1, hobnob, Justicefries, 0staf, sniperchance, AngriestIBM, BrianOBlivion<br>
-	<b>Spriters:</b> Supernorn, Haruhi, Stuntwaffle, Pantaloons, Rho, SynthOrange, I Said No<br>
-	</div>
-<br>
-<p class="lic"><a name="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img src="88x31.png" alt="Creative Commons License" /></a><br><i>Except where otherwise noted, Goon Station 13 is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-Noncommercial-Share Alike 3.0 License</a>.<br>Rights are currently extended to <a href="http://forums.somethingawful.com/">SomethingAwful Goons</a> only.</i></p>
-<p class="lic">Some icons by <a href="http://p.yusukekamiyamane.com/">Yusuke Kamiyamane</a>. All rights reserved. Licensed under a <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>.</p>
-</td></tr></table>
-</body>
-</html>
+			<h2 class="date">27.06 - 2023</h2>
+			<h3 class="author">Обновления Jux:</h3>
+			<div class="changes bgimages16">
+				<div class="log rscadd">There's now colour select bandanas available using a new sprite. Replaces the single-colour bandanas, but not the special ones.</div>
+				<div class="log bugfix">The familiar's headband is no longer a bandana available in loadout.</div>
+				<div class="log rscdel">Removes the NJP form.</div>
+			</div>
+			<h3 class="author">Обновления rootoo807:</h3>
+			<div class="changes bgimages16">
+				<div class="log maptweak">Moves the thermal regulator 1 tile closer to the pharmacy chair</div>
+			</div>
+	</div></div>
+	<div class="icons-by">Icons by <a target="_blank" href="https://icons8.com">Icons8</a></div>
+</body></html>

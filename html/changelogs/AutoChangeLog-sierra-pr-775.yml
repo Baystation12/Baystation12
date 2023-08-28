@@ -1,4 +1,0 @@
-author: SuhEugene
-delete-after: true
-changes:
-  - bugfix: Fixed nonsensical Torch log in the helm console.

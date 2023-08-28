@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - rscadd: Added an alert when trying to late-join as a role not set in your Occupation
-      preferences.

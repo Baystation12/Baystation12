@@ -1,8 +1,0 @@
-author: emmanuelbassil
-delete-after: true
-changes:
-  - bugfix: Docilers now properly self-recharge
-  - bugfix: Can now properly disable safety on underslung grenade launcher.
-  - bugfix: Light bullpup can no longer be loaded with grenades it can't even fire.
-      It also no longer insists it has a grenade launcher despite best attempts to
-      convince it otherwise.

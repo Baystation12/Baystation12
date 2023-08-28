@@ -1,6 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - tweak: Exoplanet ruins with player_cost (colony, survival pod) now use that when
-      being generated.
-  - tweak: The oldlabs prevent each other from spawning.

@@ -1,6 +1,0 @@
-author: Sbotkin
-delete-after: true
-changes:
-  - tweak: The CSO now has an AI module in their hardsuit and can carry drills in
-      the suit slot.
-  - maptweak: Removed duplicate items from the CSO office(s).

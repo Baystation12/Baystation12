@@ -1,7 +1,0 @@
-author: emmanuelbassil
-delete-after: true
-changes:
-  - bugfix: Antlions now properly burrow and appear near/on you to ruin your day.
-  - bugfix: King goats have re-learned the lost skill of explorer bowling, and have
-      a chance of running you over.
-  - bugfix: Charbabys now have a 10% chance per attack of setting you on fire again.

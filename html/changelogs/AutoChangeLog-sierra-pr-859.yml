@@ -1,5 +1,0 @@
-author: Sbotkin
-delete-after: true
-changes:
-  - tweak: Added the ability to write on any of the sheets on the clipboard.
-  - bugfix: Fixed red retractable pens not staying red.
