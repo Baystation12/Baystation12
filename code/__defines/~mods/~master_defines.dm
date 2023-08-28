@@ -37,3 +37,7 @@
 	DONATION_TIER_TWO, DONATION_TIER_THREE, \
 	DONATION_TIER_FOUR)
 // DON_LOADOUT - End
+
+// GLIDING - Start
+#define DELAY2GLIDESIZE(delay) (world.icon_size / max(ceil(delay / world.tick_lag), 1))
+// GLIDING - End

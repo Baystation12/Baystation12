@@ -141,6 +141,10 @@
 	if(is_external)
 		return
 	next_move = world.time + max(1, mob.movement_delay())
+	// [SIERRA-ADD] - GLIDING
+	delay = max(1, mob.movement_delay())
+	UpdateGlideSize()
+	// [/SIERRA-ADD]
 
 /datum/movement_handler/mob/delay/MayMove(mover, is_external)
 	if(IS_NOT_SELF(mover) && is_external)
@@ -148,10 +152,22 @@
 	return ((mover && mover != mob) ||  world.time >= next_move) ? MOVEMENT_PROCEED : MOVEMENT_STOP
 
 /datum/movement_handler/mob/delay/proc/SetDelay(delay)
+	// [SIERRA-ADD] - GLIDING
+	src.delay = delay
+	// [/SIERRA-ADD]
 	next_move = max(next_move, world.time + delay)
+	// [SIERRA-ADD] - GLIDING
+	UpdateGlideSize()
+	// [/SIERRA-ADD]
 
 /datum/movement_handler/mob/delay/proc/AddDelay(delay)
+	// [SIERRA-ADD] - GLIDING
+	src.delay += delay
+	// [/SIERRA-ADD]
 	next_move += max(0, delay)
+	// [SIERRA-ADD] - GLIDING
+	UpdateGlideSize()
+	// [/SIERRA-ADD]
 
 // Stop effect
 /datum/movement_handler/mob/stop_effect/DoMove()
@@ -302,7 +318,10 @@
 					if (get_dist(old_turf, M) <= 1)
 						if (isturf(M.loc) && isturf(mob.loc))
 							if (mob.loc != old_turf && M.loc != mob.loc)
-								step(M, get_dir(M.loc, old_turf))
+								// [SIERRA-EDIT] - GLIDING
+								// step(M, get_dir(M.loc, old_turf)) // SIERRA-EDIT - ORIGINAL
+								step_glide(M, get_dir(M.loc, old_turf), host.glide_size)
+								// [/SIERRA-EDIT]
 			else
 				for(var/mob/M in L)
 					M.other_mobs = 1

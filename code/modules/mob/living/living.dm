@@ -570,7 +570,10 @@ default behaviour is:
 		return
 
 	if (!isliving(pulling))
-		step(pulling, get_dir(pulling.loc, old_loc))
+		// [SIERRA-EDIT] - GLIDING
+		// step(pulling, get_dir(pulling.loc, old_loc)) // SIERRA-EDIT - ORIGINAL
+		step_glide(pulling, get_dir(pulling.loc, old_loc), glide_size)
+		// [/SIERRA-EDIT]
 	else
 		var/mob/living/M = pulling
 		if(length(M.grabbed_by))
@@ -587,7 +590,10 @@ default behaviour is:
 
 			var/atom/movable/t = M.pulling
 			M.stop_pulling()
-			step(M, get_dir(pulling.loc, old_loc))
+			// [SIERRA-EDIT] - GLIDING
+			// step(M, get_dir(pulling.loc, old_loc)) // SIERRA-EDIT - ORIGINAL
+			step_glide(M, get_dir(pulling.loc, old_loc), glide_size)
+			// [/SIERRA-EDIT]
 			if(t)
 				M.start_pulling(t)
 
