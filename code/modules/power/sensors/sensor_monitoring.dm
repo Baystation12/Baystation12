@@ -7,6 +7,7 @@
 	name = "power monitoring console"
 	desc = "Computer designed to remotely monitor power levels."
 	icon = 'icons/obj/machines/computer.dmi'
+	icon_state = "computer"
 	icon_keyboard = "power_key"
 	icon_screen = "power"
 	light_color = "#ffcc33"
