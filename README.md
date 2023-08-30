@@ -1,39 +1,56 @@
-# SierraBay12 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3.0-orange.svg)](https://opensource.org/licenses/AGPL-3.0) [![CodeQL](https://github.com/SierraBay/SierraBay12/workflows/CodeQL/badge.svg)](https://github.com/SierraBay/SierraBay12/actions/workflows/codeql-analysis.yml) [![CI Status](https://github.com/SierraBay/SierraBay12/workflows/Run%20Tests/badge.svg)](https://github.com/SierraBay/SierraBay12/actions/workflows/test.yml)
+<div align="center">
 
-[Website](https://baystation.xyz) - [Discord](https://baystation.xyz/discord) - [Code](https://baystation.xyz/github) - [DMDoc](https://baystation.xyz/dmdoc)
+# SierraBay12
+ [![CodeQL](https://github.com/SierraBay/SierraBay12/workflows/CodeQL/badge.svg)](https://github.com/SierraBay/SierraBay12/actions/workflows/codeql-analysis.yml) [![CI Status](https://github.com/SierraBay/SierraBay12/workflows/Run%20Tests/badge.svg)](https://github.com/SierraBay/SierraBay12/actions/workflows/test.yml) [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3.0-blue.svg)](https://opensource.org/licenses/AGPL-3.0)
 
----
+</div>
 
-### CONTRIBUTING GUIDELINES
-
-**Please refrain from making non code related comments in pull requests on GitHub.** See the Code of Conduct on where you may provide feedback to users.
-
-All users are expected to review [/docs/CODE_OF_CONDUCT.md](/docs/CODE_OF_CONDUCT.md) before interacting with the repository or other users.
-
----
-
-### SECURITY
-
-Please see [/docs/SECURITY.md](/docs/SECURITY.md) for this repository's security policy, and how to report security issues.
-
----
-
-### LICENSE
-
-The code for Baystation is licensed under the [GNU Affero General Public License v3](https://www.gnu.org/licenses/agpl.html), which can be found in full in [/LICENSE](/LICENSE).
-
-Code with a git authorship date prior to `1420675200 +0000` (2015/01/08 00:00 GMT) is licensed under the GNU General Public License version 3, which can be found in full in [/docs/GPL3.txt](/docs/GPL3.txt)
-
-All code where the authorship dates on or after `1420675200 +0000` is assumed to be licensed under AGPL v3, if you wish to license under GPL v3 please make this clear in the commit message and any added files.
-
-If you wish to develop and host this codebase in a closed source manner you may use all commits prior to `1420675200 +0000`, which are licensed under GPL v3.  The major change here is that if you host a server using any code licensed under AGPLv3 you are required to provide full source code for your servers users as well including addons and modifications you have made.
-
-See [here](https://www.gnu.org/licenses/why-affero-gpl.html) for more information.
-
-All assets including icons and sound are under a [Creative Commons 3.0 BY-SA license](https://creativecommons.org/licenses/by-sa/3.0/) unless otherwise indicated.
+<table>
+<tr><td align="center" width="2000"><b>
+<a href="https://github.com/baystation12/baystation12">Апстрим</a> • 
+<a href="https://discord.ss220.space">Discord</a> • 
+<a href="https://sierra.ss220.space">Wiki</a>
+</b></td></tr>
+<tr><td align="center" width="2000"><b>
+<a href="#рекомендации-для-контрибьюторов">Коллаборация</a> • 
+<a href="#безопасность">Безопасность</a> • 
+<a href="#лизцензия">Лицензия</a> • 
+<a href="#получение-кода-и-установка">Установка</a>
+</b></td></tr>
+</table>
 
 ---
 
-### GETTING THE CODE AND INSTALLING
+### Рекомендации для контрибьюторов
 
-Please see [/docs/installation.md](/docs/installation.md) for instructions on obtaining, installing, updating, and running this code.
+**Пожалуйста, воздержись от написания комментариев, не связанных с кодом в PR на GitHub.** Ознакомься с Правилами Поведения, где сказано о том где следует оставлять отзывы пользователям.
+
+Ожидается, что все пользователи ознакомятся с [`/docs/CODE_OF_CONDUCT.md`](/docs/CODE_OF_CONDUCT.md) перед взаимодействием с репозиторием или другими пользователями.
+
+---
+
+### Безопасность
+
+С Политикой Безопасности этого репозитория, а также с тем, как репортить уязвисости ты можешь ознакомиться в [`/docs/SECURITY.md`](/docs/SECURITY.md).
+
+---
+
+### Лизцензия
+
+Код Baystation, и, следовательно, SierraBay лицензируется в соответствии с [GNU Affero General Public License v3](https://www.gnu.org/licenses/agpl.html), полное содержание которой находится в файле [`LICENSE`](/LICENSE).
+
+Код с датой авторства git до `1420675200 +0000` (08.01.2015, 00:00 GMT) распространяется под лицензией [GNU General Public License v3](https://www.gnu.org/licenses/gpl-3.0.html), с полной версией которой вы можете ознакомиться в [`/docs/GPL3.txt`](/docs/GPL3.txt).
+
+Предполагается, что весь код, авторство которого датируется `1420675200 +0000` или позже, лицензируется по AGPL v3. Если вы хотите лицензировать по GPL v3, укажите это в сообщении коммита, а также внутри всех добавленных файлов.
+
+Если ты желаешь разрабатывать и хостить эту кодбазу, закрыв исходный код, ты можешь использовать все коммиты до `1420675200 +0000`, которые лицензированы по GPL v3. Главное различие заключается ва том, что если ты хостишь сервер, используя любой код, лицензированный в соответствии с AGPLv3, ты должен предоставить полный исходный код для пользователей ваших серверов, включая дополнения и изменения, которые ты сделал.
+
+Статья ["Зачем нужна GPL Афферо"](https://www.gnu.org/licenses/why-affero-gpl.html) рассказывает об этом подробнее.
+
+Все ассеты, включая иконки и звуки, лицензируются по [Creative Commons 3.0 BY-SA license](https://creativecommons.org/licenses/by-sa/3.0/), если не указано иное.
+
+---
+
+### Получение кода и установка
+
+Все инструкции по получению, установке, обновлению и запуску этого кода находятся можно изучить в [`/docs/installation.md`](/docs/installation.md).

@@ -1,5 +1,8 @@
 # Contributing
 
+<details>
+<summary> Содержание</summary>
+
 - [Основное](#основное)
 - [Создание PR](#создание-pull-request)
 - [Continuous Integration](#continuous-integration)
@@ -11,6 +14,8 @@
 - [Разработка безопасного кода](#разработка-безопасного-кода)
 - [Файлы](#файлы)
 - [Фишки и лайфхаки Dream Maker](#фишки-и-лайфхаки-dream-maker)
+
+</details>
 
 # Основное
 

@@ -1,84 +1,99 @@
-### GETTING THE CODE
+# Установка SierraBay
 
-The simplest way to obtain the code is using Github's .zip feature.
+<details>
+<summary> Содержание</summary>
 
-Click [here](https://github.com/Baystation12/Baystation12/archive/dev.zip) to get the latest code as a .zip file, then unzip it to wherever you want.
+- [Скачивание](#скачивание-кода)
+- [Установка](#установка)
+- [Конфигурация](#конфигурация)
+- [Вебхуки](#вебхуки)
+- [Обновление](#обновление)
+- [База данных](#установка-базы-данных)
 
-The more complicated and easier to update method is using git.  You'll need to download git or some client from [here](http://git-scm.com/).  When that's installed, right click in any folder and click on "Git Bash".  When that opens, type in:
+</details>
 
-    git clone https://github.com/Baystation12/Baystation12.git
+### Скачивание кода
 
-(hint: hold down ctrl and press insert to paste into git bash)
+Самый простой способ получить код - использовать GitHub функцию скачивания `.zip`.
 
-This will take a while to download, but it provides an easier method for updating.
+Нажми [сюда](https://github.com/SierraBay/SierraBay12/archive/dev-sierra.zip) чтобы получить последнюю версию кода в виде .zip файла, а затем разархивируй его куда захочешь.
 
----
+Более сложный в скачивании, но более простой в обновлении метод - использование git. Тебе нужно скачать git или клиент [отсюда](http://git-scm.com/). Когда он установится, нажми правой кнопкой мыши в любой папке правую кнопку мыши и выбери "Git Bash". Когда окно откроется, пиши в него:
 
-### INSTALLATION
+```sh
+git clone https://github.com/SierraBay/SierraBay12.git
+```
 
-First-time installation should be fairly straightforward.  First, you'll need BYOND installed.  You can get it from [here](http://www.byond.com/).
+(Подсказка: чтобы вставить в git bash можно нажать ПКМ по окну, или использовать <kbd>Ctrl</kbd>+<kbd>Insert</kbd>)
 
-This is a sourcecode-only release, so the next step is to compile the server files.  Open `baystation12.dme` by double-clicking it, open the Build menu, and click compile.  This'll take a little while, and if everything's done right you'll get a message like this:
-
-    saving baystation12.dmb (DEBUG mode)
-    
-    baystation12.dmb - 0 errors, 0 warnings
-
-If you see any errors or warnings, something has gone wrong - possibly a corrupt download or the files extracted wrong, or a code issue on the main repo.  Ask on IRC or discord.
-
----
-
-### CONFIGURATION
-
-Copy the contents of the `/config/examples` folder into `/config`. You will now work with everthing contained within `/config`.
-
-Edit `config.txt` to set the probabilities for different gamemodes in Secret and to set your server location so that all your players don't get disconnected at the end of each round.  It's recommended you don't turn on the gamemodes with probability 0, as they have various issues and aren't currently being tested, they may have unknown and bizarre bugs.
-
-Edit `admins.txt` to remove the default admins and add your own.  "Game Master" is the highest level of access, and the other recommended admin levels for now are "Game Admin" and "Moderator".  The format is:
-
-    byondkey - Rank
-
-where the BYOND key must be in lowercase and the admin rank must be properly capitalised.  There are a bunch more admin ranks, but these two should be enough for most servers, assuming you have trustworthy admins.
-
-To start the server, run Dream Daemon and enter the path to your compiled `baystation12.dmb` file.  Make sure to set the port to the one you  specified in the `config.txt`, and set the Security box to 'Trusted' so you don't have to confirm access to every single configuration and storage file for the server.  Then press GO and the server should start up and be ready to join.
+Загрузка займет некоторое время, но обновлять билд будет проще.
 
 ---
 
-### WEBHOOKS
+### Установка
 
-If you wish to use Discord webhooks, which are a way of passing information from the server to a Discord channel, you will need to copy `webhooks.json` into `config/` from `config/example/` and add definitions pointing the desired event at the desired [Discord webhook URL](https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks). Valid webhook IDs as of time of writing are as follows:
-- webhook_roundend: The round has ended. Will include the mode name and summarize survivors and ghosts.
-- webhook_roundstart: The master controller has finished initializing and the round will begin soon.
-- webhook_submap_loaded: A submap has been loaded and placed, and is available for people to join. Includes the name of the submap.
-- webhook_submap_vox: The vox submap specifically has been loaded and placed. This is distinct for the purposes of tagging vox players with a @mention.
-- webhook_submap_skrell: The Skrell submap specifically has been loaded and placed. This is distinct for the purposes of tagging Skrell players with a @mention.
-- webhook_custom_event: The custom event text for the round has been set or changed.
+Первая установка должна быть довольно простой. Во-первых, тебе надо установить BYOND. Его можно скачать [здесь](http://www.byond.com/).
 
-Each definition can optionally include an array of roles to mention when the webhook is called. Roles must be provided using the role ID (ex. `<@&555231866735689749>`), which can be obtained by writing `\@somerole` into the chat, in order for pinging to work correctly.
+Ты скачал только исходный код, поэтому его нужно скомпилировать. Открой `baystation12.dme` двойным кликом, слева сверху выбери вкладку `Build` и там нажми `Compile`. Не пугайся того что почти ничего в консоли долго не происходит, просто жди, это нормально. Это займёт время, но по итогу внизу ты должен увидеть такое сообщение:
+```
+saving baystation12.dmb (DEBUG mode)
 
-Webhooks additionally require a HTTP POST library called [byhttp](https://github.com/Lohikar/byhttp). The compiled lib, `byhttp.dll` on Windows or `libbyhttp.so` on Linux, must be placed in the lib directory by default in order for webhooks to function. The DLL location can be customized by supplying `WINDOWS_HTTP_POST_DLL_LOCATION` `UNIX_HTTP_POST_DLL_LOCATION`, or `HTTP_POST_DLL_LOCATION` as preprocessor macros containing the desired path.
+baystation12.dmb - 0 errors, 0 warnings
+```
 
----
-
-### UPDATING
-
-To update an existing installation, first back up your `/config` and `/data` folders
-as these store your server configuration, player preferences and banlist.
-
-If you used the zip method, you'll need to download the zip file again and unzip it somewhere else, and then copy the `/config` and `/data` folders over.
-
-If you used the git method, you simply need to type this in to git bash:
-
-    git pull
-
-When this completes, copy over your `/data` and `/config` folders again, just in case.
-
-When you have done this, you'll need to recompile the code, but then it should work fine.
+Если ты видишь какие-то ошибки или предупреждения - что-то однозанчно пошло не по плану. Скорее всего либо повреждена загрузка, либо файлы извлечены неправильно, либо мы допустили ошибку в коде. Спросить можно в дискорде, указанном в [`README`](/README.md)
 
 ---
 
-### SQL Setup
+### Конфигурация
 
-The SQL backend for the `/library/stats` and bans requires a MySQL server.  Your server details go in `/config/dbconfig.txt`.
+Копируй всё из папки `/config/examples` в папку `/config`. Теперь ты работаешь со всем, что содержится внутри `/config`.
 
-For initial setup and migrations refer to `/sql/README.md`
+Отредактируй `config.txt`, чтобы установить вероятности для различных режимов игры в режиме "Secret" или указать адрес вашего сервера таким образом, чтобы все ваши игроки не отключались в конце каждого раунда. Не рекомендуется включать игровые режимы с вероятностью 0, ибо в них могут быть различные проблемы и эти режимы в настоящее время не тестируются - повсюду могут быть неизвестные и неестественные ошибки.
+
+Отредактируй `admins.txt` чтобы удалить администраторов по умолчанию и добавить своих собственных. "Game Master" это самый высокий уровень доступа. Также, рекомендуемые уровни администратора - "Game Admin" и "Moderator".  Формат ввода:
+```
+byondkey - Rank
+```
+Сикей должен быть в нижнем регистре, а в ранге администратора заглавные буквы должны быть правильно указаны. Есть еще несколько рангов администратора, но этих двух должно быть достаточно для большинства серверов, при условии, что у тебя есть заслуживающие доверия администраторы.
+
+Чтобы запустить сервер, запусти Dream Daemon и введи путь к твоему скомпилированному `baystation12.dmb` файлу.  Убедись, что ты выставил порт, который указан в `config.txt`, а также установи в ячейке "Security" значение 'Trusted', чтобы не приходилось подтверждать доступ к каждому отдельному файлу конфигурации и данных сервера. Затем просто жми GO, и сервер должен запуститься, готовым к подключению.
+
+---
+
+### Вебхуки
+
+Если хочешь использовать вебхуки Discord, которые являются способом передачи информации с сервера в канал Discord, нужно будет скопировать `webhooks.json` в папку `config/` из `config/example/` и прописать определения, указывающие на желаемый [Discord webhook URL](https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks). Действительными ID вебхука на момент написания статьи являются следующие:
+- `webhook_roundend`: Раунд закончился. Будет указано название режима и краткое описание выживших и призраков.
+- `webhook_roundstart`: Мастер контроллер завершил инициализацию, и раунд скоро начнется.
+- `webhook_submap_loaded`: Авейка была загружена и размещена, и к ней могут присоединиться пользователи. Включает название авейки.
+- `webhook_submap_vox`: Была загружена и размещена авейка воксов. Это необходимо для того, чтобы отдельно пингануть игроков-воксов с помощью @упоминания.
+- `webhook_submap_skrell`: Была загружена и размещена авейка скреллов. Это необходимо для того, чтобы отдельно пингануть игроков-скреллов с помощью @упоминания.
+- `webhook_custom_event`: Текст ивента раунда был установлен или изменен.
+
+Каждое определение может включать массив ролей, которые нужно упомянуть при вызове вебхука. Роли должны быть записаны с помощью их ID (например: `<@&555231866735689749>`), который можно узнать, написав `\@роль` в чате, чтобы пинги работали правильно.
+
+Вебхуки дополнительно требуют HTTP POST библиотеку, которая называется [byhttp](https://github.com/Lohikar/byhttp). Скомпилированная библиотека, `byhttp.dll` на Windows или `libbyhttp.so` на Linux, должны быть в папке `lib`, чтобы вебхуки могли функционировать. Расположение DLL файла может быть настроено путем установки `WINDOWS_HTTP_POST_DLL_LOCATION`, `UNIX_HTTP_POST_DLL_LOCATION`, or `HTTP_POST_DLL_LOCATION` как макросов препроцессора, содержащих желаемый путь.
+
+---
+
+### Обновление
+
+Перед обновлением, лучше всего создать резервную копию папок `/config` и `/data`, так как в них хранятся конфигурация вашего сервера, предпочтения игроков и банлист.
+
+Если ты использовал метод `zip`, то тебе нужно снова [скачать zip-файл](https://github.com/SierraBay/SierraBay12/archive/dev-sierra.zip) и распаковать его в другом месте, а затем скопировать туда папки `/config` и `/data`.
+
+Если ты использовал метод git, нужно просто ввести это в git bash:
+```sh
+git pull
+```
+
+Когда команда выполнится, скопируй поверх твоих `/data` и `/config` резервно скопированные папки, на всякий случай.
+
+После этого нужно лишь вновь скомпилировать код и всё должно работать прекрасно.
+
+---
+
+### Установка базы данных
+
+Серверная часть для SQL `/library/stats` и банов требуют наличие MySQL сервера. Конфигурация сведений о сервере находится в `/config/dbconfig.txt`.
