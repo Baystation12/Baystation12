@@ -239,7 +239,7 @@
 		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
 
 
-/obj/item/melee/energy/sword/get_parry_chance(mob/user)
+/obj/item/melee/energy/sword/get_parry_chance(mob/user, mob/attacker)
 	return active ? ..() : 0
 
 
