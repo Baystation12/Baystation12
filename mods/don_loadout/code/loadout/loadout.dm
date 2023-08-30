@@ -33,6 +33,7 @@
 	var/hide_donate_gear = FALSE
 
 /datum/category_item/player_setup_item/loadout/sanitize_character()
+	. = ..()
 	for(var/index = 1 to config.loadout_slots)
 		var/list/gears = pref.gear_list[index]
 		if(istype(gears))
