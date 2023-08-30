@@ -230,7 +230,7 @@
 	var/icon_state_modified = "foamclog-toeless"
 
 /obj/item/clothing/shoes/foamclog/use_tool(obj/item/W, mob/user)
-	if(istype(W, /obj/item/wirecutters) || istype(W, /obj/item/scalpel))
+	if(IsWirecutter(W) || istype(W, /obj/item/scalpel))
 		if (clipped)
 			to_chat(user, SPAN_NOTICE("\The [src] have already been modified!"))
 			update_icon()

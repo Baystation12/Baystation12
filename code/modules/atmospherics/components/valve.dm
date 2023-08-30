@@ -216,7 +216,7 @@
 	return null
 
 /obj/machinery/atmospherics/valve/attackby(obj/item/W as obj, mob/user as mob)
-	if (!istype(W, /obj/item/wrench))
+	if (!IsWrench(W))
 		return ..()
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()

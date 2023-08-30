@@ -241,7 +241,7 @@ else if(##equipment_var) {\
 	if(istype(W,/obj/item/clothing/accessory) || istype(W, /obj/item/hand_labeler))
 		return ..()
 
-	if(istype(W,/obj/item/screwdriver))
+	if(IsScrewdriver(W))
 		if(user.get_inventory_slot(src) == slot_wear_suit)//maybe I should make this into a proc?
 			to_chat(user, SPAN_WARNING("You cannot modify \the [src] while it is being worn."))
 			return
