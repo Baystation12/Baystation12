@@ -6347,7 +6347,7 @@
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},
-/obj/structure/closet/secure_closet/hydroponics_torch,
+/obj/structure/closet/hydroponics_torch,
 /obj/effect/floor_decal/corner/green{
 	dir = 5
 	},
