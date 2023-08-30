@@ -2,7 +2,7 @@
   "recommendations": [
     "gbasood.byond-dm-language-support",
     "platymuus.dm-langclient",
-    "rome.rome",
+    "biomejs.biome",
     "eamodio.gitlens",
     "anturk.dmi-editor"
   ]
