@@ -850,6 +850,14 @@
 				warn_if_staff_same_ip = TRUE
 			if ("deletion_starts_paused")
 				deletion_starts_paused = TRUE
+			// [SIERRA-ADD] - EX666_ECOSYSTEM
+			if ("overflow_server_url")
+				overflow_server_url = value
+			if("usewhitelist_database")
+				usewhitelist_database = TRUE
+			if("minimum_byondacc_age")
+				minimum_byondacc_age = text2num(value)
+			// [/SIERRA-ADD]
 			else
 				log_misc("Unknown setting in config/config.txt: '[name]'")
 
@@ -932,6 +940,10 @@
 				sqlfdbklogin = value
 			if ("feedback_password")
 				sqlfdbkpass = value
+			// [SIERRA-ADD] - EX666_ECOSYSTEM
+			if("utility_database")
+				sqlfdbkdbutil = value
+			// [/SIERRA-ADD]
 			else
 				log_misc("Unknown setting in config/dbconfig.txt: '[name]'")
 

@@ -3314,6 +3314,7 @@
 #include "mods\_master_files\code\game\objects\effects\decals\contraband.dm"
 #include "mods\_master_files\code\modules\client\asset_cache.dm"
 #include "mods\_master_files\code\modules\events\gravity.dm"
+#include "mods\_master_files\code\modules\mob\new_player\new_player.dm"
 #include "mods\_master_files\code\modules\power\gravitygenerator.dm"
 #include "~code\global_init.dm"
 // END_INCLUDE

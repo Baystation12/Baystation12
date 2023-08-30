@@ -23,12 +23,21 @@
 	if (cid)
 		selection += "`computerid` = '[cid]'"
 	selection = english_list(selection, "", "", " OR ", " OR ")
+
+	// [SIERRA-EDIT] - EX666_ECOSYSTEM
+	// 	var/DBQuery/query = dbcon.NewQuery("\ // SIERRA-EDIT - ORIGINAL
+	// 	SELECT `bantype`, `reason`, `expiration_time`, `ckey`, `ip`, `computerid`, `a_ckey`, `unbanned`\ // SIERRA-EDIT - ORIGINAL
+	// 		FROM `erro_ban`\ // SIERRA-EDIT - ORIGINAL
+	// 		WHERE `bantype` IN ('PERMABAN', 'TEMPBAN') AND \ // SIERRA-EDIT - ORIGINAL
+	// 		([selection])\ // SIERRA-EDIT - ORIGINAL
+	// ") // SIERRA-EDIT - ORIGINAL
 	var/DBQuery/query = dbcon.NewQuery("\
 		SELECT `bantype`, `reason`, `expiration_time`, `ckey`, `ip`, `computerid`, `a_ckey`, `unbanned`\
-			FROM `erro_ban`\
+			FROM `[sqlfdbkdbutil]`.`ban`\
 			WHERE `bantype` IN ('PERMABAN', 'TEMPBAN') AND \
 			([selection])\
 	")
+	// [/SIERRA-EDIT]
 	query.Execute()
 	var/now = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
 	while (query.NextRow())
@@ -99,12 +108,20 @@
 	if (!dbcon.IsConnected())
 		crash_with("Database connection failed.")
 		return
+	// [SIERRA-EDIT] - EX666_ECOSYSTEM
+	// var/DBQuery/query = dbcon.NewQuery({" // SIERRA-EDIT - ORIGINAL
+	// 	SELECT `bantype`, `reason`, `expiration_time`, `ckey`, `ip`, `computerid`, `a_ckey`, `unbanned` // SIERRA-EDIT - ORIGINAL
+	// 		FROM `erro_ban` // SIERRA-EDIT - ORIGINAL
+	// 		WHERE `bantype` IN ('PERMABAN', 'TEMPBAN') AND // SIERRA-EDIT - ORIGINAL
+	// 		([english_list(final_query_components, "", "", " OR ", " OR ")]) // SIERRA-EDIT - ORIGINAL
+	// "}) // SIERRA-EDIT - ORIGINAL
 	var/DBQuery/query = dbcon.NewQuery({"
 		SELECT `bantype`, `reason`, `expiration_time`, `ckey`, `ip`, `computerid`, `a_ckey`, `unbanned`
-			FROM `erro_ban`
+			FROM `[sqlfdbkdbutil]`.`ban`
 			WHERE `bantype` IN ('PERMABAN', 'TEMPBAN') AND
 			([english_list(final_query_components, "", "", " OR ", " OR ")])
 	"})
+	// [/SIERRA-EDIT]
 	query.Execute()
 	var/now = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
 	while (query.NextRow())

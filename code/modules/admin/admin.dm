@@ -50,6 +50,10 @@ var/global/floorIsLava = 0
 	if(M.client)
 		body += " played by <b>[M.client]</b> "
 		body += "\[<A href='?src=\ref[src];editrights=show'>[M.client.holder ? M.client.holder.rank : "Player"]</A>\]"
+		// [SIERRA-ADD] - EX666_ECOSYSTEM
+		if (M.client.discord_id && length(M.client.discord_id) < 32)
+			body += "\[<@![M.client.discord_id]>  <b>[M.client.discord_name]</b>\]"
+		// [/SIERRA-ADD]
 	else if(last_ckey)
 		body += " (last occupied by ckey <b>[last_ckey]</b>)"
 
