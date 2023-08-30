@@ -2572,7 +2572,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/merc_spawn)
 "Gn" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /obj/item/reagent_containers/food/snacks/meat,
 /obj/item/reagent_containers/food/snacks/meat,
 /obj/item/reagent_containers/food/snacks/meat,
@@ -2775,7 +2775,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
 "Nn" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /obj/item/reagent_containers/food/snacks/meat,
 /obj/item/reagent_containers/food/snacks/meat,
 /obj/item/reagent_containers/food/snacks/meat,

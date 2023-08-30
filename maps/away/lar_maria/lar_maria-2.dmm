@@ -2566,15 +2566,13 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "hn" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /obj/random/snack,
 /obj/random/snack,
 /turf/simulated/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "ho" = (
-/obj/structure/closet/secure_closet/freezer/kitchen{
-	req_access = newlist()
-	},
+/obj/structure/closet/kitchen,
 /turf/simulated/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "hp" = (
@@ -2775,7 +2773,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "hK" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /obj/random/snack,
 /turf/simulated/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
@@ -2902,7 +2900,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "ig" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /obj/random/snack,
 /obj/random/snack,
 /turf/simulated/floor/tiled/freezer,
@@ -3097,7 +3095,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "iF" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /obj/random/snack,
 /turf/simulated/floor/tiled/freezer,
 /area/lar_maria/mess_hall)

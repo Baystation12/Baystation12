@@ -2549,7 +2549,7 @@
 /turf/simulated/floor/shuttle/white,
 /area/shuttle/administration/centcom)
 "auE" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /turf/simulated/floor/shuttle/white,
 /area/shuttle/administration/centcom)
 "auF" = (
@@ -2645,7 +2645,7 @@
 	},
 /area/centcom/living)
 "auV" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /turf/unsimulated/floor{
 	icon_state = "freezerfloor"
 	},
@@ -3567,7 +3567,7 @@
 	},
 /area/centcom/test)
 "axC" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
@@ -6972,13 +6972,13 @@
 	},
 /area/tdome/tdomeobserve)
 "aKt" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
 /area/tdome)
 "aKu" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},

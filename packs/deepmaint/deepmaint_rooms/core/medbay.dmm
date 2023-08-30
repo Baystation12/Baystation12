@@ -45,7 +45,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "dy" = (
-/obj/structure/closet/secure_closet/freezer/blood,
+/obj/structure/closet/fridge/blood,
 /turf/simulated/floor/tiled/steel/techfloor,
 /area/map_template/deepmaint)
 "dF" = (
@@ -497,7 +497,7 @@
 /turf/simulated/wall,
 /area/map_template/deepmaint)
 "VO" = (
-/obj/structure/closet/secure_closet/freezer/blood,
+/obj/structure/closet/fridge/blood,
 /obj/item/stock_parts/matter_bin,
 /obj/item/stock_parts/matter_bin,
 /turf/simulated/floor/tiled/steel/techfloor,

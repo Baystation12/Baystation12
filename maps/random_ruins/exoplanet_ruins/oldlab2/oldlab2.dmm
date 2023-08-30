@@ -5374,7 +5374,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/oldlab2/living6)
 "CK" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/oldlab2/mess)
 "CN" = (
@@ -7227,7 +7227,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/oldlab2/living)
 "LW" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/light/small{
 	dir = 1

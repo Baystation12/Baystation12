@@ -102,7 +102,7 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "cq" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /obj/item/storage/box/snack/tastybread,
 /obj/item/storage/box/glasses,
 /obj/effect/floor_decal/corner/paleblue/mono,
@@ -413,7 +413,7 @@
 /area/map_template/colony2/ship)
 "fT" = (
 /obj/effect/floor_decal/corner/paleblue/mono,
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/commons)
 "fU" = (

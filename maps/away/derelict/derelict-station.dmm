@@ -950,10 +950,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/bridge)
 "da" = (
-/obj/structure/closet/secure_closet/freezer/fridge{
-	icon_state = "fridgebroken";
-	locked = 0
-	},
+/obj/structure/closet/fridge,
 /obj/random/contraband,
 /turf/simulated/floor,
 /area/constructionsite/hallway/fore)

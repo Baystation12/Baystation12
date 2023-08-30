@@ -23,7 +23,7 @@
 /turf/simulated/wall,
 /area/map_template/deepmaint)
 "ag" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /obj/random/mre,
 /obj/random/mre,
 /obj/random/mre,

@@ -404,7 +404,7 @@
 /turf/simulated/floor/wood/yew,
 /area/yacht/living)
 "bg" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/wood/yew,
 /area/yacht/living)
@@ -699,7 +699,7 @@
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "ca" = (
-/obj/structure/closet/secure_closet/freezer/kitchen,
+/obj/structure/closet/kitchen,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/plating,
 /area/yacht/engine)
@@ -1030,7 +1030,7 @@
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "cW" = (
-/obj/structure/closet/secure_closet/freezer/kitchen,
+/obj/structure/closet/kitchen,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/wood/yew,
@@ -1454,7 +1454,7 @@
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "ub" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/plating,
 /area/yacht/engine)
@@ -1490,7 +1490,7 @@
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "Ty" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/wood/yew,

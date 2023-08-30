@@ -3070,7 +3070,7 @@
 /area/map_template/mininghome_solars)
 "AZ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/mininghome_mess)
 "Bc" = (
