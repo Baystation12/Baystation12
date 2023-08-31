@@ -259,14 +259,26 @@ var/global/list/asset_datums = list()
 
 /datum/asset/simple/fontawesome
 	verify = FALSE
+	// [SIERRA-EDIT] - LOBBYSCREEN - Приходится комментить всё ибо комменты в list'ах фейлят юнит-тесты
+	// assets = list( // SIERRA-EDIT - ORIGINAL
+	// 	"fa-regular-400.eot"  = 'html/font-awesome/webfonts/fa-regular-400.eot',  // SIERRA-EDIT - ORIGINAL
+	// 	"fa-regular-400.woff" = 'html/font-awesome/webfonts/fa-regular-400.woff', // SIERRA-EDIT - ORIGINAL
+	// 	"fa-solid-900.eot"    = 'html/font-awesome/webfonts/fa-solid-900.eot',    // SIERRA-EDIT - ORIGINAL
+	// 	"fa-solid-900.woff"   = 'html/font-awesome/webfonts/fa-solid-900.woff',   // SIERRA-EDIT - ORIGINAL
+	// 	"font-awesome.css"    = 'html/font-awesome/css/all.min.css',              // SIERRA-EDIT - ORIGINAL
+	// 	"v4shim.css"          = 'html/font-awesome/css/v4-shims.min.css'          // SIERRA-EDIT - ORIGINAL
+	// ) // SIERRA-EDIT - ORIGINAL
 	assets = list(
 		"fa-regular-400.eot"  = 'html/font-awesome/webfonts/fa-regular-400.eot',
 		"fa-regular-400.woff" = 'html/font-awesome/webfonts/fa-regular-400.woff',
 		"fa-solid-900.eot"    = 'html/font-awesome/webfonts/fa-solid-900.eot',
 		"fa-solid-900.woff"   = 'html/font-awesome/webfonts/fa-solid-900.woff',
+		"fa-brands-400.eot"   = 'mods/lobbyscreen/html/font-awesome/fa-brands-400.eot',
+		"fa-brands-400.woff"  = 'mods/lobbyscreen/html/font-awesome/fa-brands-400.woff',
 		"font-awesome.css"    = 'html/font-awesome/css/all.min.css',
 		"v4shim.css"          = 'html/font-awesome/css/v4-shims.min.css'
 	)
+	// [/SIERRA-EDIT]
 
 /*
 	Asset cache

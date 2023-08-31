@@ -189,6 +189,11 @@
 	if(href_list["save"])
 		save_preferences()
 		save_character()
+		// [SIERRA-ADD] - LOBBYSCREEN
+		if (istype(client.mob, /mob/new_player))
+			var/mob/new_player/M = client.mob
+			M.new_player_panel()
+		// [/SIERRA-ADD]
 	else if(href_list["reload"])
 		load_preferences()
 		load_character()

@@ -172,7 +172,10 @@
 	init_finish = Uptime()
 	. = (Uptime() - start_uptime) / 10
 	var/msg = "Initialized [name] subsystem within [.] second[. == 1 ? "" : "s"]!"
-	to_chat(world, SPAN_CLASS("boldannounce", "[msg]"))
+	// [SIERRA-EDIT] - LOBBYSCREEN
+	// to_chat(world, SPAN_CLASS("boldannounce", "[msg]")) // SIERRA-EDIT - ORIGINAL
+	admin_notice(SPAN_CLASS("boldannounce", "[msg]"))
+	// [/SIERRA-EDIT]
 	log_world(msg)
 
 	init_state = SS_INITSTATE_DONE

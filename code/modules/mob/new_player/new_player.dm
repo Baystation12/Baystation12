@@ -29,6 +29,13 @@
 /mob/new_player/proc/new_player_panel(force)
 	if (!force && !SScharacter_setup.initialized)
 		return
+	// [SIERRA-ADD] - LOBBYSCREEN
+	// Yeah, I know client will exist here
+	// It's like TRUE, but DreamChecker won't cry
+	if (client)
+		GLOB.using_map.update_titlescreen(client)
+		return
+	// [/SIERRA-ADD]
 	var/list/output = list()
 	output += "<div align='center'>"
 	if (config.wiki_url || config.rules_url || config.lore_url)
@@ -433,7 +440,9 @@
 
 /mob/new_player/proc/close_spawn_windows()
 	close_browser(src, "window=latechoices") //closes late choices window
-	panel.close()
+	// [SIERRA-REMOVE] - LOBBYSCREEN
+	// panel.close()
+	// [/SIERRA-REMOVE]
 
 /mob/new_player/proc/check_species_allowed(datum/species/S, show_alert=1)
 	if(!S.is_available_for_join() && !has_admin_rights())
