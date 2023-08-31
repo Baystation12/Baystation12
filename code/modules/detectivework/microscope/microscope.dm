@@ -55,7 +55,7 @@
 	to_chat(user, SPAN_NOTICE("Printing findings now..."))
 	var/obj/item/paper/report = new(get_turf(src))
 	report.stamped = list(/obj/item/stamp)
-	report.SetOverlays("paper_stamped")
+	report.SetOverlays("paper_stamp-circle")
 	report_num++
 
 	var/list/evidence = list()
