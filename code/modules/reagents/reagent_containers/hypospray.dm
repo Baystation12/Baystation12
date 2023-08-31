@@ -86,6 +86,7 @@
 	volume = 0
 	time = 7
 	single_use = FALSE
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 
 /obj/item/reagent_containers/hypospray/vial/New()
 	..()
