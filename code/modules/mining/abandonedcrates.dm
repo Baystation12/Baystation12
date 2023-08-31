@@ -38,8 +38,8 @@
 				new/obj/item/ore/diamond(src)
 		if(21 to 25)
 			for(var/i = 0, i < 3, i++)
-				// [SIERRA-EDIT] - HOW THE FUCK DO YOU STUFF HYDROPONIC TRAYS INTO THE CRATE?!
-				// new/obj/machinery/portable_atmospherics/hydroponics(src)
+				// [SIERRA-EDIT]
+				// new/obj/machinery/portable_atmospherics/hydroponics(src) // SIERRA-EDIT - ORIGINAL
 				new/obj/item/mop/advanced(src)
 				// [/SIERRA-EDIT]
 		if(26 to 30)
