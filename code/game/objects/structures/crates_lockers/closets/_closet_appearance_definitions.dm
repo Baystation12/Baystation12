@@ -212,7 +212,6 @@
 	can_lock = TRUE
 
 /singleton/closet_appearance/secure_closet/engineering
-	can_lock = TRUE
 	color = COLOR_YELLOW_GRAY
 	decals = list(
 		"upper_side_vent",
