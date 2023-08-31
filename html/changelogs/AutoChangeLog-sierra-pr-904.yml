@@ -1,0 +1,5 @@
+author: SuhEugene
+delete-after: true
+changes:
+  - bugfix: Пофиксил кривую загрузку превью моба в лодауте.
+  - bugfix: Пофиксил постеры, которые сам же и сломал.
