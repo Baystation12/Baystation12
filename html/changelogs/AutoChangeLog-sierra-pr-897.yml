@@ -1,4 +1,0 @@
-author: SuhEugene
-delete-after: true
-changes:
-  - rscadd: Добавил штуку, делающую движение плавным, на замену дёрганиям экрана оффов.
