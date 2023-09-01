@@ -22,7 +22,3 @@
 
 /datum/fabricator_recipe/engineering/camera_assembly
 	path = /obj/item/camera_assembly
-
-/datum/fabricator_recipe/engineering/rcd
-	path = /obj/item/rcd
-	hidden = TRUE
