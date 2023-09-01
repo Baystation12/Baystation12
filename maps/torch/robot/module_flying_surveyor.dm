@@ -48,8 +48,7 @@
 
 	emag_gear = list(
 		/obj/item/melee/baton/robot/electrified_arm,
-		/obj/item/gun/energy/gun,
-		/obj/item/melee/energy/machete
+		/obj/item/gun/energy/gun
 	)
 
 /obj/item/robot_module/flying/surveyor/finalize_synths()
