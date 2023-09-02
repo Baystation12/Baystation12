@@ -442,7 +442,7 @@
 	name = "crematorium igniter"
 	desc = "Burn baby burn!"
 	icon = 'icons/obj/structures/buttons.dmi'
-	icon_state = "blast_ctrl"
+	icon_state = "blastctrl"
 	req_access = list(access_crematorium)
 	id_tag = 1
 
