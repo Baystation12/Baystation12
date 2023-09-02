@@ -1,0 +1,4 @@
+author: LordNest
+delete-after: true
+changes:
+  - rscadd: Added NanoUI-style latejoin menu
