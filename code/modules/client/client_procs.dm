@@ -221,6 +221,10 @@
 	if(holder)
 		src.control_freak = 0 //Devs need 0 for profiler access
 
+	// [SIERRA-ADD] - SSINPUT
+	if(SSinput.initialized)
+		set_macros()
+	// [/SIERRA-ADD]
 	// This turns out to be a touch too much when a bunch of people are connecting at once from a restart during init.
 	if (GAME_STATE & RUNLEVELS_DEFAULT)
 		spawn()

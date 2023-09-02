@@ -12,6 +12,9 @@
 
 // Normal
 #define SS_PRIORITY_TICKER         100 // Gameticker.
+// [SIERRA-ADD] - SSINPUT
+#define SS_PRIORITY_INPUT          99 // Input things.
+// [/SIERRA-ADD]
 #define SS_PRIORITY_MOB            95  // Mob Life().
 #define SS_PRIORITY_MACHINERY      95  // Machinery + powernet ticks.
 #define SS_PRIORITY_AIR            80  // ZAS processing.

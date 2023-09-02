@@ -26,6 +26,9 @@
 #define SS_INIT_MAPPING          9
 #define SS_INIT_JOBS             8
 #define SS_INIT_CHAR_SETUP       7
+// [SIERRA-ADD] - SSINPUT - Input must be after char setup
+#define SS_INIT_INPUT            6
+// [/SIERRA-ADD]
 #define SS_INIT_CIRCUIT          6
 #define SS_INIT_GRAPH            5
 #define SS_INIT_OPEN_SPACE       4

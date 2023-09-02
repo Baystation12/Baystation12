@@ -7,4 +7,5 @@
 #include "lobbyscreen/_lobbyscreen.dme"
 #include "music_player/_music_player.dme"
 #include "nyc_posters/_nyc_posters.dme"
+#include "ssinput/_ssinput.dme"
 #include "utf8/_utf8.dme"

@@ -6,7 +6,10 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	desc = "It's a g-g-g-g-ghooooost!" //jinkies!
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "ghost"
-	appearance_flags = DEFAULT_APPEARANCE_FLAGS | KEEP_TOGETHER
+	// [SIERRA-EDIT] - SSINPUT
+	// appearance_flags = DEFAULT_APPEARANCE_FLAGS | KEEP_TOGETHER // SIERRA-EDIT - ORIGINAL
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | KEEP_TOGETHER | LONG_GLIDE
+	// [/SIERRA-EDIT]
 	blinded = 0
 	anchored = TRUE	//  don't get pushed around
 	universal_speak = TRUE

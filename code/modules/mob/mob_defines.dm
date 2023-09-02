@@ -3,7 +3,10 @@
 	plane = DEFAULT_PLANE
 	layer = MOB_LAYER
 
-	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
+	// [SIERRA-EDIT] - SSINPUT
+	// appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE // SIERRA-EDIT - ORIGINAL
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE | LONG_GLIDE
+	// [SIERRA-EDIT]
 	animate_movement = 2
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 
