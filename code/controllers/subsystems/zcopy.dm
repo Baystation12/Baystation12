@@ -182,6 +182,9 @@ SUBSYSTEM_DEF(zcopy)
 			T.z_generation += 1
 			T.z_queued -= 1
 
+			if (T.above)
+				T.above.update_mimic()
+
 			if (no_mc_tick)
 				CHECK_TICK
 			else if (MC_TICK_CHECK)
@@ -269,7 +272,7 @@ SUBSYSTEM_DEF(zcopy)
 			var/atom/movable/openspace/turf_mimic/DC = T.below.mimic_above_copy
 			DC.appearance = T.below
 			DC.mouse_opacity = initial(DC.mouse_opacity)
-			DC.plane = OPENTURF_MAX_PLANE
+			DC.plane = OPENTURF_MAX_PLANE - turf_depth - 1
 
 		else if (T.below.mimic_above_copy)
 			QDEL_NULL(T.below.mimic_above_copy)
@@ -298,6 +301,7 @@ SUBSYSTEM_DEF(zcopy)
 			var/have_performed_fixup = FALSE
 
 			switch (object.type)
+				// Layering for recursive mimic needs to be inherited.
 				if (/atom/movable/openspace/mimic)
 					var/atom/movable/openspace/mimic/OOO = object
 					original_type = OOO.mimiced_type

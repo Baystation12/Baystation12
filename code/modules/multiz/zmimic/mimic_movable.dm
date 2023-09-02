@@ -97,6 +97,7 @@
 	layer = MIMICED_LIGHTING_LAYER
 	plane = OPENTURF_MAX_PLANE
 	invisibility = 0
+
 	if (icon_state == LIGHTING_BASE_ICON_STATE)
 		blend_mode = BLEND_MULTIPLY
 		// We're using a color matrix, so just darken the colors across the board.
@@ -125,8 +126,7 @@
 
 	var/turf/parent = loc
 	ASSERT(isturf(parent))
-	if (LAZYLEN(parent.ao_overlays_mimic))
-		AddOverlays(parent.ao_overlays_mimic)
+	UpdateOverlays()
 
 	if (bound_overlay)
 		update_above()
