@@ -8,6 +8,7 @@
 	max_amount = 60
 	randpixel = 3
 	icon = 'icons/obj/materials/materials.dmi'
+	icon_state = "sheet-mult"
 
 	var/reinf_state
 	var/plural_reinf_state
@@ -240,6 +241,7 @@
 
 /obj/item/stack/material/plastic
 	name = "plastic"
+	item_state = "sheet-plastic-mult"
 	default_type = MATERIAL_PLASTIC
 
 /obj/item/stack/material/plastic/ten
@@ -306,7 +308,7 @@
 
 /obj/item/stack/material/ocp
 	name = "osmium-carbide plasteel"
-	item_state = "sheet-metal"
+	item_state = "sheet-reinf-mult"
 	default_type = MATERIAL_OSMIUM_CARBIDE_PLASTEEL
 
 /obj/item/stack/material/ocp/ten
@@ -335,7 +337,7 @@
 
 /obj/item/stack/material/aluminium
 	name = "aluminium"
-	item_state = "sheet-shiny"
+	item_state = "sheet-sheen-mult"
 	default_type = MATERIAL_ALUMINIUM
 
 /obj/item/stack/material/aluminium/ten
@@ -356,7 +358,7 @@
 
 /obj/item/stack/material/plasteel
 	name = "plasteel"
-	item_state = "sheet-metal"
+	item_state = "sheet-reinf-mult"
 	default_type = MATERIAL_PLASTEEL
 
 /obj/item/stack/material/plasteel/ten
@@ -367,6 +369,7 @@
 
 /obj/item/stack/material/wood
 	name = "wooden plank"
+	item_state = "sheet-wood-mult"
 	default_type = MATERIAL_WOOD
 
 /obj/item/stack/material/wood/ten
@@ -460,6 +463,7 @@
 
 /obj/item/stack/material/glass
 	name = "glass"
+	item_state = "sheet-clear-mult"
 	default_type = MATERIAL_GLASS
 
 /obj/item/stack/material/glass/ten
