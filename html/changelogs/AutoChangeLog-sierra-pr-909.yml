@@ -1,7 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - tweak: RCDs can no longer be made or decon'd at autolathes, but can be produced
-      by science.
-  - tweak: The Robco Tool Maker no longer has a contraband RCD, and has two less RCD
-      ammo charges.
