@@ -49,6 +49,9 @@
 	canister_color = "blue"
 	can_label = 0
 
+/obj/machinery/portable_atmospherics/canister/oxygen/full
+	start_pressure = 15000
+
 /obj/machinery/portable_atmospherics/canister/oxygen/prechilled
 	name = "\improper Canister: \[O2 (Cryo)\]"
 	start_pressure = 20 * ONE_ATMOSPHERE
@@ -59,17 +62,26 @@
 	canister_color = "purple"
 	can_label = 0
 
+/obj/machinery/portable_atmospherics/canister/hydrogen/full
+	start_pressure = 15000
+
 /obj/machinery/portable_atmospherics/canister/phoron
 	name = "\improper Canister \[Phoron\]"
 	icon_state = "orange"
 	canister_color = "orange"
 	can_label = 0
 
+/obj/machinery/portable_atmospherics/canister/phoron/full
+	start_pressure = 15000
+
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide
 	name = "\improper Canister \[CO2\]"
 	icon_state = "black"
 	canister_color = "black"
 	can_label = 0
+
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide/full
+	start_pressure = 15000
 
 /obj/machinery/portable_atmospherics/canister/air
 	name = "\improper Canister \[Air\]"

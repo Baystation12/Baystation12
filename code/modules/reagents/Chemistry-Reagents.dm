@@ -36,7 +36,7 @@
 	var/list/glass_special = null // null equivalent to list()
 
 	// GAS DATA, generic values copied from base XGM datum type.
-	var/gas_specific_heat = 20
+	var/gas_molar_heat_capacity = 20
 	var/gas_molar_mass =    0.032
 	var/gas_overlay_limit = 0.7
 	var/gas_flags =         0

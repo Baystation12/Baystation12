@@ -106,7 +106,7 @@
 		var/delta_temperature = abs(air2.temperature - air1.temperature)
 
 		if(delta_temperature > 0 && air1_heat_capacity > 0 && air2_heat_capacity > 0)
-			var/energy_transfer = delta_temperature*air2_heat_capacity*air1_heat_capacity/(air2_heat_capacity+air1_heat_capacity)
+			var/energy_transfer = delta_temperature*air2_heat_capacity*air1_heat_capacity/((air2_heat_capacity+air1_heat_capacity)*0.5)
 			var/heat = energy_transfer*(1-thermal_efficiency)
 			last_thermal_gen = energy_transfer*thermal_efficiency
 
@@ -116,6 +116,7 @@
 			else
 				air2.temperature = air2.temperature + heat/air2_heat_capacity
 				air1.temperature = air1.temperature - energy_transfer/air1_heat_capacity
+
 		playsound(src.loc, 'sound/effects/beam.ogg', 25, 0, 10,  is_ambiance = 1)
 
 	//Transfer the air
@@ -145,7 +146,7 @@
 	stored_energy += last_thermal_gen + last_circ1_gen + last_circ2_gen
 	lastgen1 = stored_energy*0.4 //smoothened power generation to prevent slingshotting as pressure is equalized, then restored by pumps
 	stored_energy -= lastgen1
-	effective_gen = (lastgen1 + lastgen2) / 2
+	effective_gen = (lastgen1 + lastgen2) * 0.75
 
 	// update icon overlays and power usage only when necessary
 	var/genlev = max(0, min( round(11*effective_gen / max_power), 11))

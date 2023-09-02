@@ -36,15 +36,15 @@
 	layer = ABOVE_HUMAN_LAYER
 
 	var/nitrogen_retardation_factor = 0.15	//Higher == N2 slows reaction more
-	var/thermal_release_modifier = 15000		//Higher == more heat released during reaction
+	var/thermal_release_modifier = 3000		//Higher == more heat released during reaction
 	var/phoron_release_modifier = 1500		//Higher == less phoron released by reaction
 	var/oxygen_release_modifier = 15000		//Higher == less oxygen released at high temperature/power
 	var/radiation_release_modifier = 2      //Higher == more radiation released with more power.
-	var/reaction_power_modifier =  1.1			//Higher == more overall power
+	var/reaction_power_modifier =  0.8			//Higher == more overall power
 
 	//Controls how much power is produced by each collector in range - this is the main parameter for tweaking SM balance, as it basically controls how the power variable relates to the rest of the game.
 	var/power_factor = 1.0
-	var/decay_factor = 700			//Affects how fast the supermatter power decays
+	var/decay_factor = 700			//Affects how fast the supermatter power decays, higher == slower?
 	var/critical_temperature = 5000	//K
 	var/charging_factor = 0.05
 	var/damage_rate_limit = 4.5		//damage rate cap at power = 300, scales linearly with power
@@ -106,7 +106,7 @@
 	var/aw_EPR = FALSE
 
 	var/list/threshholds = list( // List of lists defining the amber/red labeling threshholds in readouts. Numbers are minminum red and amber and maximum amber and red, in that order
-		list("name" = SUPERMATTER_DATA_EER,         "min_h" = -1, "min_l" = -1,  "max_l" = 150,  "max_h" = 300),
+		list("name" = SUPERMATTER_DATA_EER,         "min_h" = -1, "min_l" = -1,  "max_l" = 400,  "max_h" = 600),
 		list("name" = SUPERMATTER_DATA_TEMPERATURE, "min_h" = -1, "min_l" = -1,  "max_l" = 4000, "max_h" = 5000),
 		list("name" = SUPERMATTER_DATA_PRESSURE,    "min_h" = -1, "min_l" = -1,  "max_l" = 5000, "max_h" = 10000),
 		list("name" = SUPERMATTER_DATA_EPR,         "min_h" = -1, "min_l" = 1.0, "max_l" = 2.5,  "max_h" = 4.0)
@@ -396,7 +396,7 @@
 		//Release reaction gasses
 		var/heat_capacity = removed.heat_capacity()
 		removed.adjust_multi(GAS_PHORON, max(device_energy / phoron_release_modifier, 0), \
-		                     GAS_OXYGEN, max((device_energy + removed.temperature - T0C) / oxygen_release_modifier, 0))
+							 GAS_OXYGEN, max((device_energy + removed.temperature - T0C) / oxygen_release_modifier, 0))
 
 		var/thermal_power = thermal_release_modifier * device_energy
 		if (debug)

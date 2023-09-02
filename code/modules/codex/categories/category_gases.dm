@@ -8,7 +8,7 @@
 			continue
 
 		var/list/gas_info = list()
-		gas_info+= "Specific heat: [gas_data.specific_heat[gas]] J/(mol*K)."
+		gas_info+= "Specific heat: [gas_data.molar_heat_capacity[gas]] J/(mol*K)."
 		gas_info+= "Molar mass: [gas_data.molar_mass[gas]] kg/mol."
 		if(gas_data.flags[gas] & XGM_GAS_FUEL)
 			gas_info+= "It is flammable."

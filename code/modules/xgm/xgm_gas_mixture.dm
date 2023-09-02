@@ -51,7 +51,7 @@
 
 	if(moles > 0 && abs(temperature - temp) > MINIMUM_TEMPERATURE_DELTA_TO_CONSIDER)
 		var/self_heat_capacity = heat_capacity()
-		var/giver_heat_capacity = gas_data.specific_heat[gasid] * moles
+		var/giver_heat_capacity = gas_data.molar_heat_capacity[gasid] * moles
 		var/combined_heat_capacity = giver_heat_capacity + self_heat_capacity
 		if(combined_heat_capacity != 0)
 			temperature = (temp * giver_heat_capacity + temperature * self_heat_capacity) / combined_heat_capacity
@@ -135,25 +135,37 @@
 
 //Returns the heat capacity of the gas mix based on the specific heat of the gases.
 /datum/gas_mixture/proc/heat_capacity()
-	. = 0
+	var/capacity = 0
 	for(var/g in gas)
-		. += gas_data.specific_heat[g] * gas[g]
-	. *= group_multiplier
+		capacity += gas_data.molar_heat_capacity[g] * gas[g]
+	return (capacity * group_multiplier)
 
 
 //Adds or removes thermal energy. Returns the actual thermal energy change, as in the case of removing energy we can't go below TCMB.
 /datum/gas_mixture/proc/add_thermal_energy(thermal_energy)
 
 	if (total_moles == 0)
-		return 0
+		return FALSE
 
+	var/thermal_mod = 1
 	var/heat_capacity = heat_capacity()
 	if (thermal_energy < 0)
 		if (temperature < TCMB)
-			return 0
-		var/thermal_energy_limit = -(temperature - TCMB)*heat_capacity	//ensure temperature does not go below TCMB
+			return FALSE
+		var/thermal_energy_limit = -(temperature - TCMB) * heat_capacity	//ensure temperature does not go below TCMB
 		thermal_energy = max( thermal_energy, thermal_energy_limit )	//thermal_energy and thermal_energy_limit are negative here.
-	temperature += thermal_energy/heat_capacity
+	else
+		switch (temperature)
+			if (500 to 1000)
+				thermal_mod = 0.8
+			if (1000 to 1500)
+				thermal_mod = 0.6
+			if (1500 to 1750)
+				thermal_mod = 0.4
+			else
+				thermal_mod = 0.2
+
+	temperature += thermal_energy / heat_capacity * thermal_mod
 	return thermal_energy
 
 //Returns the thermal energy change required to get to a new temperature
@@ -193,9 +205,9 @@
 
 	//group_multiplier gets divided out in volume/gas[gasid] - also, V/(m*T) = R/(partial pressure)
 	var/molar_mass = gas_data.molar_mass[gasid]
-	var/specific_heat = gas_data.specific_heat[gasid]
+	var/molar_heat_capacity = gas_data.molar_heat_capacity[gasid]
 	var/safe_temp = max(temperature, TCMB) // We're about to divide by this.
-	return R_IDEAL_GAS_EQUATION * ( log( (IDEAL_GAS_ENTROPY_CONSTANT*volume/(gas[gasid] * safe_temp)) * (molar_mass*specific_heat*safe_temp)**(2/3) + 1 ) +  15 )
+	return R_IDEAL_GAS_EQUATION * ( log( (IDEAL_GAS_ENTROPY_CONSTANT*volume/(gas[gasid] * safe_temp)) * (molar_mass*molar_heat_capacity*safe_temp)**(2/3) + 1 ) +  15 )
 
 	//alternative, simpler equation
 	//var/partial_pressure = gas[gasid] * R_IDEAL_GAS_EQUATION * temperature / volume

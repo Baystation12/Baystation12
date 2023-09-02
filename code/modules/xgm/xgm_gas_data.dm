@@ -6,7 +6,7 @@ var/global/datum/xgm_gas_data/gas_data
 	//The friendly, human-readable name for the gas.
 	var/list/name = list()
 	//Specific heat of the gas.  Used for calculating heat capacity.
-	var/list/specific_heat = list()
+	var/list/molar_heat_capacity = list()
 	//Molar mass of the gas.  Used for calculating specific entropy.
 	var/list/molar_mass = list()
 	//Tile overlays.  /obj/effect/gas_overlay, created from references to 'icons/effects/tile_effects.dmi'
@@ -35,7 +35,7 @@ var/global/datum/xgm_gas_data/gas_data
 /singleton/xgm_gas
 	var/id = ""
 	var/name = "Unnamed Gas"
-	var/specific_heat = 20	// J/(mol*K)
+	var/molar_heat_capacity = 20	// J/(mol*K)
 	var/molar_mass = 0.032	// kg/mol
 
 	var/tile_overlay = "generic"
@@ -62,7 +62,7 @@ var/global/datum/xgm_gas_data/gas_data
 
 		gas_data.gases += gas.id
 		gas_data.name[gas.id] = gas.name
-		gas_data.specific_heat[gas.id] = gas.specific_heat
+		gas_data.molar_heat_capacity[gas.id] = gas.molar_heat_capacity
 		gas_data.molar_mass[gas.id] = gas.molar_mass
 		if(gas.overlay_limit)
 			gas_data.overlay_limit[gas.id] = gas.overlay_limit

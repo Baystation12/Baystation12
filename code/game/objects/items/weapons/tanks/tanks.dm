@@ -445,10 +445,9 @@ var/global/list/tank_gauge_cache = list()
 			var/strength = ((pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE)
 
 			var/mult = ((air_contents.volume/140)**(1/2)) * (air_contents.total_moles**2/3)/((29*0.64) **2/3) //tanks appear to be experiencing a reduction on scale of about 0.64 total moles
-			//tanks appear to be experiencing a reduction on scale of about 0.64 total moles
 
 			var/turf/simulated/T = get_turf(src)
-			T.hotspot_expose(air_contents.temperature, 70, 1)
+			T.hotspot_expose((air_contents.temperature)/2, 70, 1)
 			if(!T)
 				return
 

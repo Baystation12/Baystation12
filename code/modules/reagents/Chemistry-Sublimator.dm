@@ -14,7 +14,7 @@
 
 	gas_data.gases +=                   gas_id
 	gas_data.name[gas_id] =             reagent.name
-	gas_data.specific_heat[gas_id] =    reagent.gas_specific_heat
+	gas_data.molar_heat_capacity[gas_id] =    reagent.gas_molar_heat_capacity
 	gas_data.molar_mass[gas_id] =       reagent.gas_molar_mass
 	gas_data.overlay_limit[gas_id] =    reagent.gas_overlay_limit
 	gas_data.flags[gas_id] =            reagent.gas_flags

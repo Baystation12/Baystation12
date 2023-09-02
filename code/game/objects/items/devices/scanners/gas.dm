@@ -50,7 +50,7 @@
 				text_details += "<dt>[gas_data.name[mix]]</dt><dd><ul>"
 				text_details += "<li>Percentage: [percentage]%</li>"
 				text_details += "<li>Moles: [round(mixture.gas[mix], 0.01)]</li>"
-				text_details += "<li>Specific Heat: [gas_data.specific_heat[mix]] J/(mol*K)</li>"
+				text_details += "<li>Specific Heat: [gas_data.molar_heat_capacity[mix]] J/(mol*K)</li>"
 				text_details += "<li>Molar Mass: [gas_data.molar_mass[mix]] kg/mol</li>"
 				var/list/traits = list()
 				if(gas_data.flags[mix] & XGM_GAS_FUEL)
