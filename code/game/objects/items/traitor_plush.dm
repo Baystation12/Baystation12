@@ -12,9 +12,6 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 10)
 
-/obj/item/reagent_containers/food/snacks/dehydrated_carp/attack(mob/M, mob/user, def_zone)
-	return
-
 /obj/item/reagent_containers/food/snacks/dehydrated_carp/attack_self(mob/user)
 	if (user.a_intent == I_HELP)
 		user.visible_message(SPAN_NOTICE("\The [user] hugs [src]!"), SPAN_NOTICE("You hug [src]!"))

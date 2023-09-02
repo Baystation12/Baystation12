@@ -10,9 +10,11 @@
 	item_state = "flashlight"
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	slot_flags = SLOT_BELT
 
 	matter = list(MATERIAL_PLASTIC = 50, MATERIAL_GLASS = 20)
+	force = 7
 
 	action_button_name = "Toggle Flashlight"
 	var/on = FALSE
@@ -65,40 +67,39 @@
 		set_light(0)
 
 /obj/item/device/flashlight/attack(mob/living/M as mob, mob/living/user as mob)
-	add_fingerprint(user)
-	if(on && user.zone_sel.selecting == BP_EYES)
+	. = FALSE
+	if (istype(M) && on && user.zone_sel.selecting == BP_EYES)
 
-		if((MUTATION_CLUMSY in user.mutations) && prob(50))	//too dumb to use flashlight properly
-			return ..()	//just hit them in the head
+		if((MUTATION_CLUMSY in user.mutations) && prob(50) || user.a_intent == I_HURT)
+			return M.use_weapon(src, user)
 
-		var/mob/living/carbon/human/H = M	//mob has protective eyewear
+		var/mob/living/carbon/human/H = M
 		if(istype(H))
 			for(var/obj/item/clothing/C in list(H.head,H.wear_mask,H.glasses))
 				if(istype(C) && (C.body_parts_covered & EYES))
 					to_chat(user, SPAN_WARNING("You're going to need to remove [C] first."))
-					return
+					return TRUE
 
 			var/obj/item/organ/vision
 			if(!H.species.vision_organ || !H.should_have_organ(H.species.vision_organ))
 				to_chat(user, SPAN_WARNING("You can't find anything on [H] to direct [src] into!"))
-				return
+				return TRUE
 
 			vision = H.internal_organs_by_name[H.species.vision_organ]
 			if(!vision)
 				vision = H.species.has_organ[H.species.vision_organ]
 				to_chat(user, SPAN_WARNING("\The [H] is missing \his [initial(vision.name)]!"))
-				return
+				return TRUE
 
 			user.visible_message(SPAN_NOTICE("\The [user] directs [src] into [M]'s [vision.name]."), \
 								 SPAN_NOTICE("You direct [src] into [M]'s [vision.name]."))
 
 			inspect_vision(vision, user)
 
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //can be used offensively
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			if (!(flashlight_flags & FLASHLIGHT_CANNOT_BLIND))
 				M.flash_eyes()
-	else
-		return ..()
+		return TRUE
 
 /obj/item/device/flashlight/proc/inspect_vision(obj/item/organ/vision, mob/living/user)
 	var/mob/living/carbon/human/H = vision.owner

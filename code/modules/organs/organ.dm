@@ -5,6 +5,7 @@ var/global/list/organ_cache = list()
 	icon = 'icons/obj/organs.dmi'
 	germ_level = 0
 	w_class = ITEM_SIZE_TINY
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	default_action_type = /datum/action/item_action/organ
 
 	// Strings.
@@ -304,15 +305,15 @@ var/global/list/organ_cache = list()
 	return 1
 
 /obj/item/organ/attack(mob/target, mob/user)
+	. = FALSE
+	if (status & ORGAN_ROBOTIC || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
+		return FALSE
 
-	if(status & ORGAN_ROBOTIC || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
-		return ..()
-
-	if(alert("Do you really want to use this organ as food? It will be useless for anything else afterwards.",,"Ew, no.","Bon appetit!") == "Ew, no.")
+	if (alert("Do you really want to use this organ as food? It will be useless for anything else afterwards.",,"Ew, no.","Bon appetit!") == "Ew, no.")
 		to_chat(user, SPAN_NOTICE("You successfully repress your cannibalistic tendencies."))
-		return
-	if(!user.unEquip(src))
-		return
+		return TRUE
+	if (!user.unEquip(src))
+		return TRUE
 	var/obj/item/reagent_containers/food/snacks/organ/O = new(get_turf(src))
 	O.SetName(name)
 	O.appearance = src
@@ -321,7 +322,8 @@ var/global/list/organ_cache = list()
 	transfer_fingerprints_to(O)
 	user.put_in_active_hand(O)
 	qdel(src)
-	target.attackby(O, user)
+	O.resolve_attackby(target, user)
+	return TRUE
 
 /obj/item/organ/proc/can_feel_pain()
 	return (!BP_IS_ROBOTIC(src) && (!species || !(species.species_flags & SPECIES_FLAG_NO_PAIN)))

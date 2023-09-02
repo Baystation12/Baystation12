@@ -57,7 +57,7 @@ exactly 0 "simulated = 0/1" 'simulated\s*=\s*\d' -P
 exactly 2 "var/ in proc arguments" '(^/[^/].+/.+?\(.*?)var/' -P
 exactly 0 "tmp/ vars" 'var.*/tmp/' -P
 exactly 6 "uses of .len" '\.len\b' -P
-exactly 393 "attackby() override" '\/attackby\((.*)\)'  -P
+exactly 389 "attackby() override" '\/attackby\((.*)\)'  -P
 exactly 15 "uses of examine()" '[.|\s]examine\(' -P # If this fails it's likely because you used '/atom/proc/examine(mob)' instead of '/proc/examinate(mob, atom)' - Exception: An examine()-proc may call other examine()-procs
 exactly 7 "direct modifications of overlays list" '\boverlays((\s*[|^=+&-])|(\.(Cut)|(Add)|(Copy)|(Remove)|(Remove)))' -P
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong

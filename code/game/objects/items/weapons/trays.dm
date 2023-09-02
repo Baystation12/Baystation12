@@ -12,6 +12,7 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	matter = list(MATERIAL_ALUMINIUM = 3000)
 	hitsound = "tray_hit"
 	var/bash_cooldown = 0 // You can bash a rolling pin against a tray to make a shield bash sound! Based on world.time
@@ -33,15 +34,17 @@
 
 // When hitting people with the tray, drop all its items everywhere. You jerk.
 /obj/item/tray/attack(mob/living/M, mob/living/user)
+	. = FALSE
 	if (user.a_intent != I_HURT)
 		return FALSE
-	. = ..()
+
 	// Drop all the things. All of them.
 	ClearOverlays()
 	for(var/obj/item/I in carrying)
 		I.dropInto(get_turf(M))
 		carrying.Remove(I)
 		step(I, pick(NORTH, SOUTH, EAST, WEST, NORTHWEST, NORTHEAST, SOUTHWEST, SOUTHEAST))
+	return TRUE
 
 
 // Bash a rolling pin against a tray like a true knight!

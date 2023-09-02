@@ -5,7 +5,9 @@
 	icon_state = "pen"
 	item_state = "pen"
 	slot_flags = SLOT_BELT | SLOT_EARS
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	throwforce = 0
+	force = 2
 	w_class = ITEM_SIZE_TINY
 	force = 2
 	puncture = TRUE
@@ -46,20 +48,19 @@
 	colour = "white"
 	color_description = "transluscent ink"
 
-/obj/item/pen/attack(atom/A, mob/user, target_zone)
-	if(ishuman(A) && user.a_intent == I_HELP && target_zone == BP_HEAD)
+/obj/item/pen/attack(atom/A, mob/user)
+	. = FALSE
+	if (ishuman(A) && user.a_intent == I_HELP && user.zone_sel.selecting == BP_HEAD)
 		var/mob/living/carbon/human/H = A
 		var/obj/item/organ/external/head/head = H.organs_by_name[BP_HEAD]
-		if(istype(head))
+		if (istype(head))
 			head.write_on(user, color_description)
 			return TRUE
 
-	if(istype(A, /obj/item/organ/external/head) && user.a_intent != I_HELP) //Not on help intent to not break ghetto surgery.
+	if (istype(A, /obj/item/organ/external/head) && user.a_intent != I_HELP) //Not on help intent to not break ghetto surgery.
 		var/obj/item/organ/external/head/head = A
 		head.write_on(user, color_description)
 		return TRUE
-
-	else return FALSE
 
 /obj/item/pen/proc/toggle()
 	return

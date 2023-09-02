@@ -6,6 +6,7 @@
 	item_state = "fire_extinguisher"
 	hitsound = 'sound/weapons/smash.ogg'
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	throwforce = 10
 	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 2
@@ -63,21 +64,21 @@
 	return
 
 /obj/item/extinguisher/attack(mob/living/M, mob/user)
-	if(user.a_intent == I_HELP)
-		if(src.safety || (world.time < src.last_use + 20)) // We still catch help intent to not randomly attack people
-			return
-		if(src.reagents.total_volume < 1)
+	. = FALSE
+	if (user.a_intent == I_HELP && !safety)
+		if (world.time < last_use + 20)
+			return TRUE
+		if (reagents.total_volume < 1)
 			to_chat(user, SPAN_NOTICE("\The [src] is empty."))
-			return
+			return TRUE
 
-		src.last_use = world.time
+		last_use = world.time
 		reagents.splash(M, min(reagents.total_volume, spray_amount))
 
 		user.visible_message(SPAN_NOTICE("\The [user] sprays \the [M] with \the [src]."))
 		playsound(src.loc, 'sound/effects/extinguish.ogg', 75, 1, -3)
 
-		return 1 // No afterattack
-	return ..()
+		return TRUE
 
 /obj/item/extinguisher/proc/propel_object(obj/O, mob/user, movementdirection)
 	if(O.anchored) return

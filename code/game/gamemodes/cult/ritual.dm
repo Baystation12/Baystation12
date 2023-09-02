@@ -22,19 +22,22 @@
 		to_chat(user, "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though.")
 
 /obj/item/book/tome/attack(mob/living/M, mob/living/user)
-	if (user.a_intent != I_HELP || user.zone_sel.selecting != BP_EYES)
-		return ..()
-	user.visible_message(
-		SPAN_NOTICE("\The [user] shows \the [src] to \the [M]."),
-		SPAN_NOTICE("You open up \the [src] and show it to \the [M].")
-	)
-	if (iscultist(M))
-		if (user != M)
-			to_chat(user, SPAN_NOTICE("But they already know all there is to know."))
-		to_chat(M, SPAN_NOTICE("But you already know all there is to know."))
-	else
-		to_chat(M, SPAN_NOTICE("\The [src] seems full of illegible scribbles. Is this a joke?"))
-	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+	. = FALSE
+	if (!istype(M))
+		return FALSE
+	if (user.a_intent == I_HELP && user.zone_sel.selecting == BP_EYES)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] shows \the [src] to \the [M]."),
+			SPAN_NOTICE("You open up \the [src] and show it to \the [M].")
+		)
+		if (iscultist(M))
+			if (user != M)
+				to_chat(user, SPAN_NOTICE("But they already know all there is to know."))
+			to_chat(M, SPAN_NOTICE("But you already know all there is to know."))
+		else
+			to_chat(M, SPAN_NOTICE("\The [src] seems full of illegible scribbles. Is this a joke?"))
+		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+		return TRUE
 
 /obj/item/book/tome/afterattack(atom/A, mob/user, proximity)
 	if(!proximity || !iscultist(user))

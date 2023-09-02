@@ -208,6 +208,7 @@
 	force = 2
 	throwforce = 6
 	w_class = ITEM_SIZE_LARGE
+	item_flags = ITEM_FLAG_TRY_ATTACK
 
 	var/safety = 1 //if you can zap people with the paddles on harm mode
 	var/combat = 0 //If it can be used to revive people wearing thick clothing (e.g. spacesuits)
@@ -296,12 +297,13 @@
 /obj/item/shockpaddles/proc/checked_use(charge_amt)
 	return 0
 
-/obj/item/shockpaddles/attack(mob/living/M, mob/living/user, target_zone)
+/obj/item/shockpaddles/attack(mob/living/M, mob/living/user)
+	. = FALSE
 	var/mob/living/carbon/human/H = M
-	if(!istype(H) || user.a_intent == I_HURT)
-		return ..() //Do a regular attack. Harm intent shocking happens as a hit effect
+	if (!istype(H) || user.a_intent != I_HELP)
+		return FALSE
 
-	if(can_use(user, H))
+	if (can_use(user, H))
 		busy = 1
 		update_icon()
 
@@ -309,8 +311,7 @@
 
 		busy = 0
 		update_icon()
-
-	return 1
+	return TRUE
 
 //Since harm-intent now skips the delay for deliberate placement, you have to be able to hit them in combat in order to shock people.
 /obj/item/shockpaddles/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
@@ -404,7 +405,7 @@
 		return
 
 	//no need to spend time carefully placing the paddles, we're just trying to shock them
-	user.visible_message(SPAN_DANGER("\The [user] slaps [src] onto [H]'s [affecting.name]."), SPAN_DANGER("You overcharge [src] and slap them onto [H]'s [affecting.name]."))
+	user.visible_message(SPAN_DANGER("\The [user] slaps [src] onto [H]'s [affecting.name]. [safety? "However, it fizzles out as the safety indicator flashes.": ""]"), SPAN_DANGER("You overcharge [src] and slap them onto [H]'s [affecting.name]. [safety? "However, it fizzles out as the safety indicator flashes.": ""]"))
 
 	//Just stop at awkwardly slapping electrodes on people if the safety is enabled
 	if(safety)

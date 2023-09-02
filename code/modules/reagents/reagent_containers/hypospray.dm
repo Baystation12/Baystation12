@@ -16,6 +16,7 @@
 	possible_transfer_amounts = null
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	slot_flags = SLOT_BELT
+	item_flags = ITEM_FLAG_TRY_ATTACK
 
 	// autoinjectors takes less time than a normal syringe (overriden for hypospray).
 	// This delay is only applied when injecting concious mobs, and is not applied for self-injection
@@ -29,15 +30,16 @@
 	var/single_use = TRUE // autoinjectors are not refillable (overriden for hypospray)
 
 /obj/item/reagent_containers/hypospray/attack(mob/living/M, mob/user)
-	if(!reagents.total_volume)
-		to_chat(user, SPAN_WARNING("[src] is empty."))
-		return
+	. = FALSE
 	if (!istype(M))
-		return
+		return FALSE
+	if (!reagents.total_volume)
+		to_chat(user, SPAN_WARNING("[src] is empty."))
+		return TRUE
 
 	var/allow = M.can_inject(user, check_zone(user.zone_sel.selecting))
-	if(!allow)
-		return
+	if (!allow)
+		return TRUE
 
 	if (allow == INJECTION_PORT)
 		if(M != user)
@@ -45,7 +47,7 @@
 		else
 			to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
 		if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
-			return
+			return TRUE
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	user.do_attack_animation(M)
@@ -53,10 +55,11 @@
 	if(user != M && !M.incapacitated() && time) // you're injecting someone else who is concious, so apply the device's intrisic delay
 		to_chat(user, SPAN_WARNING("\The [user] is trying to inject \the [M] with \the [name]."))
 		if(!user.do_skilled(time, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
-			return
+			return TRUE
 
 	if(single_use && reagents.total_volume <= 0) // currently only applies to autoinjectors
 		atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER // Prevents autoinjectors to be refilled.
+		update_icon()
 
 	to_chat(user, SPAN_NOTICE("You inject [M] with [src]."))
 	if(ishuman(M))
@@ -73,8 +76,7 @@
 		if (should_admin_log)
 			admin_inject_log(user, M, src, contained, trans)
 		to_chat(user, SPAN_NOTICE("[trans] units injected. [reagents.total_volume] units remaining in \the [src]."))
-
-	return
+	return TRUE
 
 /obj/item/reagent_containers/hypospray/vial
 	name = "hypospray"
@@ -182,10 +184,6 @@
 		reagents.add_reagent(T, starts_with[T])
 	update_icon()
 	return
-
-/obj/item/reagent_containers/hypospray/autoinjector/attack(mob/M as mob, mob/user as mob)
-	..()
-	update_icon()
 
 /obj/item/reagent_containers/hypospray/autoinjector/on_reagent_change()
 	update_icon()

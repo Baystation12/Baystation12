@@ -51,11 +51,12 @@
 
 /obj/item/implanter/compressed/attack(mob/M as mob, mob/user as mob)
 	var/obj/item/implant/compressed/c = imp
-	if (!c)	return
+	if (!c || !istype(M, /mob/living/carbon))
+		return FALSE
 	if (c.scanned == null)
 		to_chat(user, "Please compress an object with the implanter first.")
-		return
-	..()
+		return TRUE
+	else return ..()
 
 /obj/item/implanter/compressed/afterattack(obj/item/A, mob/user as mob, proximity)
 	if(!proximity)

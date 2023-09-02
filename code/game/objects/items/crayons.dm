@@ -120,8 +120,8 @@
 			if(uses <= 0)
 				to_chat(M, SPAN_WARNING("You ate your crayon!"))
 				qdel(src)
-	else
-		..()
+		return TRUE
+	return ..()
 
 
 /obj/random/crayon

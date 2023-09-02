@@ -76,6 +76,7 @@
 	icon = 'icons/obj/tools/card.dmi'
 	icon_state = "fingerprint0"
 	item_state = "paper"
+	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/sample/print/attack_self(mob/user)
 	if(evidence && length(evidence))
@@ -94,43 +95,42 @@
 	update_icon()
 
 /obj/item/sample/print/attack(mob/living/M, mob/user)
+	. = FALSE
+	if (!ishuman(M))
+		return FALSE
 
-	if(!ishuman(M))
-		return ..()
-
-	if(evidence && length(evidence))
-		return 0
+	if (evidence && length(evidence))
+		return FALSE
 
 	var/mob/living/carbon/human/H = M
 
-	if(H.gloves)
+	if (H.gloves)
 		to_chat(user, SPAN_WARNING("\The [H] is wearing gloves."))
-		return 1
+		return TRUE
 
-	if(user != H && H.a_intent != I_HELP && !H.lying)
+	if (user != H && H.a_intent != I_HELP && !H.lying)
 		user.visible_message(SPAN_DANGER("\The [user] tries to take prints from \the [H], but they move away."))
-		return 1
+		return TRUE
 
-	if(user.zone_sel.selecting == BP_R_HAND || user.zone_sel.selecting == BP_L_HAND)
+	if (user.zone_sel.selecting == BP_R_HAND || user.zone_sel.selecting == BP_L_HAND)
 		var/has_hand
 		var/obj/item/organ/external/O = H.organs_by_name[BP_R_HAND]
-		if(istype(O) && !O.is_stump())
+		if (istype(O) && !O.is_stump())
 			has_hand = 1
 		else
 			O = H.organs_by_name[BP_L_HAND]
-			if(istype(O) && !O.is_stump())
+			if (istype(O) && !O.is_stump())
 				has_hand = 1
-		if(!has_hand)
+		if (!has_hand)
 			to_chat(user, SPAN_WARNING("They don't have any hands."))
-			return 1
+			return TRUE
 		user.visible_message("[user] takes a copy of \the [H]'s fingerprints.")
 		var/fullprint = H.get_full_print()
 		evidence[fullprint] = fullprint
 		copy_evidence(src)
 		SetName("[initial(name)] (\the [H])")
 		update_icon()
-		return 1
-	return 0
+		return TRUE
 
 /obj/item/sample/print/copy_evidence(atom/supplied)
 	if(supplied.fingerprints && length(supplied.fingerprints))

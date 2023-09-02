@@ -33,6 +33,7 @@
 	to_chat(user, SPAN_NOTICE("It is currently [loaded? "loaded": "recharging"]."))
 
 /obj/item/device/dociler/attack(mob/living/L, mob/user)
+	. = FALSE
 	if (!istype(L))
 		return FALSE
 	if (istype(L, /mob/living/simple_animal))

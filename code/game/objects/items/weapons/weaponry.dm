@@ -5,6 +5,7 @@
 	icon_state = "nullrod"
 	item_state = "nullrod"
 	slot_flags = SLOT_BELT
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	force = 10
 	throw_speed = 1
 	throw_range = 4
@@ -15,35 +16,34 @@
 	return src
 
 /obj/item/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
-	if (user.a_intent == I_HELP)
+	. = FALSE
+	if (!istype(M) || user.a_intent == I_HELP)
 		return FALSE
 
 	admin_attack_log(user, M, "Attacked using \a [src]", "Was attacked with \a [src]", "used \a [src] to attack")
-
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(M)
 	//if(user != M)
-	if(M.mind && LAZYLEN(M.mind.learned_spells))
-		M.silence_spells(300) //30 seconds
-		to_chat(M, SPAN_DANGER("You've been silenced!"))
-		return
-
 	if (!user.IsAdvancedToolUser())
 		to_chat(user, SPAN_DANGER("You don't have the dexterity to do this!"))
-		return
+		return TRUE
 
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, SPAN_DANGER("The rod slips out of your hand and hits your head."))
 		user.take_organ_damage(10, 0)
 		user.Paralyse(20)
-		return
+		return TRUE
+
+	if (M.mind && LAZYLEN(M.mind.learned_spells))
+		M.silence_spells(300) //30 seconds
+		M.visible_message(SPAN_NOTICE("\The [user] waves \the [src] over \the [M]'s head."))
+		to_chat(M, SPAN_DANGER("You've been silenced!"))
+		return TRUE
 
 	if(GLOB.cult && iscultist(M))
 		M.visible_message(SPAN_NOTICE("\The [user] waves \the [src] over \the [M]'s head."))
 		GLOB.cult.offer_uncult(M)
-		return
-
-	..()
+		return TRUE
 
 /obj/item/energy_net
 	name = "energy net"

@@ -4,9 +4,6 @@
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "swab"
 
-/obj/item/swabber/attack()
-	return 0
-
 // This is pretty nasty but is a damn sight easier than trying to make swabs a stack item.
 /obj/item/swabber/afterattack(atom/A, mob/user, proximity, params)
 	if(proximity)
@@ -23,6 +20,7 @@
 	name = "swab"
 	desc = "A sterilized cotton swab and vial used to take forensic samples."
 	icon_state = "swab"
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	var/list/gunshot_residue_sample
 	var/list/dna
 	var/list/trace_dna
@@ -32,59 +30,58 @@
 	return used
 
 /obj/item/forensics/swab/attack(mob/living/M, mob/user)
+	. = FALSE
+	if (!ishuman(M))
+		return FALSE
 
-	if(!ishuman(M))
-		return ..()
-
-	if(is_used())
-		return
+	if (is_used())
+		to_chat(user, SPAN_WARNING("This swab has already been used."))
+		return TRUE
 
 	var/mob/living/carbon/human/H = M
 	var/sample_type
 
-	if(H.wear_mask)
-		to_chat(user, SPAN_WARNING("\The [H] is wearing a mask."))
-		return
-
-	if(!H.dna || !H.dna.unique_enzymes)
+	if (!H.dna || !H.dna.unique_enzymes)
 		to_chat(user, SPAN_WARNING("They don't seem to have DNA!"))
-		return
+		return TRUE
 
-	if(user != H && (H.a_intent != I_HELP && !H.lying && !H.incapacitated(INCAPACITATION_DEFAULT)))
+	if (user != H && (H.a_intent != I_HELP && !H.lying && !H.incapacitated(INCAPACITATION_DEFAULT)))
 		user.visible_message(SPAN_DANGER("\The [user] tries to take a swab sample from \the [H], but they move away."))
-		return
+		return TRUE
 
-	if(user.zone_sel.selecting == BP_MOUTH)
-		if(!H.organs_by_name[BP_HEAD])
+	if (user.zone_sel.selecting == BP_MOUTH)
+		if (!H.organs_by_name[BP_HEAD])
 			to_chat(user, SPAN_WARNING("They don't have a head."))
-			return
-		if(!H.check_has_mouth())
+			return TRUE
+		if (!H.check_has_mouth())
 			to_chat(user, SPAN_WARNING("They don't have a mouth."))
-			return
+			return TRUE
+		if (H.wear_mask)
+			to_chat(user, SPAN_WARNING("\The [H] is wearing a mask."))
+			return TRUE
 		user.visible_message("[user] swabs \the [H]'s mouth for a saliva sample.")
 		dna = list(H.dna.unique_enzymes)
 		sample_type = "DNA"
 
 	else
 		var/zone = user.zone_sel.selecting
-		if(!H.has_organ(zone))
+		if (!H.has_organ(zone))
 			to_chat(user, SPAN_WARNING("They don't have that part!"))
-			return
+			return TRUE
 		var/obj/item/organ/external/O = H.get_organ(zone)
-		if(!O.gunshot_residue)
-			return
+		if (!O.gunshot_residue)
+			to_chat(user, SPAN_NOTICE("There is no gunshot residue on \the [O]."))
+			return TRUE
 		var/obj/C = H.get_covering_equipped_item_by_zone(zone)
-		if(C)
+		if (C)
 			afterattack(C, user, 1) //Lazy but this would work
-			return
+			return TRUE
 		user.visible_message("[user] swabs [H]'s [O.name] for a sample.")
 		sample_type = "gunshot_residue"
 		gunshot_residue_sample = O.gunshot_residue.Copy()
-
-	if(sample_type)
+	if (sample_type)
 		set_used(sample_type, H)
-		return
-	return 1
+	return TRUE
 
 /obj/item/forensics/swab/afterattack(atom/A, mob/user, proximity)
 

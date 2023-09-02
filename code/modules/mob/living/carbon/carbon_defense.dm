@@ -1,6 +1,6 @@
 
-/mob/living/carbon/standard_weapon_hit_effects(obj/item/I, mob/living/user, effective_force, hit_zone)
-	if(!effective_force)
+/mob/living/carbon/hit_with_weapon(obj/item/I, mob/living/user, effective_force, hit_zone)
+	if (!effective_force)
 		return 0
 
 	//Apply weapon damage
@@ -18,8 +18,8 @@
 		var/embed_threshold = weapon_sharp? 5*I.w_class : 15*I.w_class
 
 		//Sharp objects will always embed if they do enough damage.
-		if((weapon_sharp && damage > (10*I.w_class)) || (damage > embed_threshold && prob(embed_chance)))
+		if ((weapon_sharp && damage > (10*I.w_class)) || (damage > embed_threshold && prob(embed_chance)))
 			src.embed(I, hit_zone, supplied_wound = created_wound)
 			I.has_embedded()
 
-	return 1
+	return TRUE

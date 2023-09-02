@@ -203,16 +203,17 @@
 	name = "heavy arms"
 	attack_verb = list("rammed")
 	force = 5
+	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/natural_weapon/cult_builder/attack(mob/living/M, mob/living/user)
-	if(istype(M, /mob/living/simple_animal/construct))
-		if(M.health < M.maxHealth)
+	. = FALSE
+	if (istype(M, /mob/living/simple_animal/construct))
+		if (M.health < M.maxHealth)
 			M.adjustBruteLoss(-5)
 			user.visible_message(SPAN_NOTICE("\The [user] mends some of \the [M]'s wounds."))
 		else
 			to_chat(user, SPAN_NOTICE("\The [M] is undamaged."))
-		return
-	return ..()
+		return TRUE
 
 /////////////////////////////Behemoth/////////////////////////
 

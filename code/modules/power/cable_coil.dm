@@ -35,6 +35,7 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 	)
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CAN_BE_PAINTED
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	slot_flags = SLOT_BELT
 	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
@@ -87,11 +88,10 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 			SetName(initial(name))
 
 
-/obj/item/stack/cable_coil/attack(mob/living/carbon/human/target, mob/living/user, def_zone)
-	if (user.a_intent != I_HELP)
-		return ..()
-	if (!istype(target))
-		return ..()
+/obj/item/stack/cable_coil/attack(mob/living/carbon/human/target, mob/living/user)
+	. = FALSE
+	if (user.a_intent != I_HELP || !istype(target))
+		return FALSE
 	var/obj/item/organ/external/organ = target.organs_by_name[user.zone_sel.selecting]
 	if (!organ)
 		to_chat(user, SPAN_WARNING("\The [target] is missing that organ."))

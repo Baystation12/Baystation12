@@ -6,11 +6,12 @@
 	icon_state = "stunbaton"
 	item_state = "baton"
 	slot_flags = SLOT_BELT
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	force = 15
 	throwforce = 7
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_COMBAT = 2)
-	attack_verb = list("beaten")
+	attack_verb = list("beat", "whacked")
 	base_parry_chance = 30
 	attack_ignore_harm_check = TRUE
 	var/stunforce = 0
@@ -130,12 +131,19 @@
 		update_icon()
 
 /obj/item/melee/baton/attack(mob/M, mob/user)
-	if(status && (MUTATION_CLUMSY in user.mutations) && prob(50))
+	. = FALSE
+	if (!istype(M))
+		return FALSE
+	if (status && (MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, SPAN_DANGER("You accidentally hit yourself with the [src]!"))
 		user.Weaken(30)
 		deductcharge(hitcost)
-		return
-	return ..()
+		return TRUE
+	if (user.a_intent != I_HURT) //If not harm-batonning; bypass use_weapon entirely and just apply stun effect. Set cooldowns since bypassing use_weapon.
+		user.setClickCooldown(user.get_attack_speed(src))
+		user.do_attack_animation(M)
+		apply_hit_effect(M, user, user.zone_sel? user.zone_sel.selecting : ran_zone())
+		return TRUE
 
 /obj/item/melee/baton/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	if(isrobot(target))
@@ -147,42 +155,40 @@
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
 		affecting = H.get_organ(hit_zone)
-	var/abuser =  user ? "" : "by [user]"
-	if(user && user.a_intent == I_HURT)
-		. = ..()
-		if(.)
-			return
+	var/abuser =  user ? "" : "by \the [user]"
+	if (user && user.a_intent == I_HURT)
+		if (!..())
+			return FALSE
 
 		//whacking someone causes a much poorer electrical contact than deliberately prodding them.
 		stun *= 0.5
-		if(status)		//Checks to see if the stunbaton is on.
+		if (status)		//Checks to see if the stunbaton is on.
 			agony *= 0.5	//whacking someone causes a much poorer contact than prodding them.
 		else
 			agony = 0	//Shouldn't really stun if it's off, should it?
 		//we can't really extract the actual hit zone from ..(), unfortunately. Just act like they attacked the area they intended to.
-	else if(!status)
-		if(affecting)
-			target.visible_message(SPAN_WARNING("[target] has been prodded in the [affecting.name] with [src][abuser]. Luckily it was off."))
+	else if (!status)
+		if (affecting)
+			target.visible_message(SPAN_WARNING("\The [target] has been prodded in the \the [affecting.name] with \the [src][abuser]. Luckily \the [src] was off."))
 		else
-			target.visible_message(SPAN_WARNING("[target] has been prodded with [src][abuser]. Luckily it was off."))
+			target.visible_message(SPAN_WARNING("\The [target] has been prodded with \the[src][abuser]. Luckily \the [src] was off."))
 	else
-		if(affecting)
-			target.visible_message(SPAN_DANGER("[target] has been prodded in the [affecting.name] with [src]!"))
+		if (affecting)
+			target.visible_message(SPAN_DANGER("\The [target] has been prodded in the \the [affecting.name] with \the [src]!"))
 		else
-			target.visible_message(SPAN_DANGER("[target] has been prodded with [src][abuser]!"))
+			target.visible_message(SPAN_DANGER("\The [target] has been prodded with \the [src][abuser]!"))
 		playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 
 	//stun effects
-	if(status)
+	if (status)
 		target.stun_effect_act(stun, agony, hit_zone, src)
 		msg_admin_attack("[key_name(user)] stunned [key_name(target)] with the [src].")
 		deductcharge(hitcost)
 
-		if(ishuman(target))
+		if (ishuman(target))
 			var/mob/living/carbon/human/H = target
 			H.forcesay(GLOB.hit_appends)
-
-	return 1
+	return TRUE
 
 /obj/item/melee/baton/emp_act(severity)
 	if(bcell)

@@ -7,17 +7,18 @@
 	edge = TRUE
 	sharp = TRUE
 	w_class = ITEM_SIZE_LARGE
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	force = 30
 	throwforce = 10
 	hitsound = 'sound/weapons/bladeslice.ogg'
-	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "tore", "ripped", "diced", "cut")
 
-/obj/item/melee/cultblade/attack(mob/living/M, mob/living/user, target_zone)
-	if(iscultist(user))
-		return ..()
+/obj/item/melee/cultblade/attack(mob/living/M, mob/living/user)
+	. = FALSE
+	if (iscultist(user))
+		return FALSE
 
 	var/zone = (user.hand ? BP_L_ARM : BP_R_ARM)
-
 	var/obj/item/organ/external/affecting = null
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
@@ -37,11 +38,10 @@
 
 	var/spooky = pick('sound/hallucinations/growl1.ogg', 'sound/hallucinations/growl2.ogg', 'sound/hallucinations/growl3.ogg', 'sound/hallucinations/wail.ogg')
 	playsound(loc, spooky, 50, 1)
-
-	return 1
+	return TRUE
 
 /obj/item/melee/cultblade/pickup(mob/living/user as mob)
-	if(!iscultist(user))
+	if (!iscultist(user))
 		to_chat(user, SPAN_WARNING("An overwhelming feeling of dread comes over you as you pick up the cultist's sword. It would be wise to be rid of this blade quickly."))
 		user.make_dizzy(120)
 

@@ -1089,7 +1089,7 @@ About the new airlock wires panel:
 		return src.attack_hand(user)
 	else if(istype(C, /obj/item/pai_cable))	// -- TLE
 		var/obj/item/pai_cable/cable = C
-		cable.plugin(src, user)
+		cable.resolve_attackby(src, user)
 	else if(!repairing && isCrowbar(C))
 		if (p_open && (operating == DOOR_OPERATING_BROKEN || (!operating && welded && !arePowerSystemsOn() && density && !locked)) && !brace)
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
@@ -1141,19 +1141,6 @@ About the new airlock wires panel:
 					to_chat(user, SPAN_WARNING("You need to be wielding \the [C] to do that."))
 
 	else if(istype(C, /obj/item/device/paint_sprayer))
-		return
-	else if((inoperable()) && istype(user, /mob/living/simple_animal))
-		var/mob/living/simple_animal/A = user
-		var/obj/item/I = A.get_natural_weapon()
-		if(I.force >= 10)
-			if(density)
-				visible_message(SPAN_DANGER("\The [A] forces \the [src] open!"))
-				open(1)
-			else
-				visible_message(SPAN_DANGER("\The [A] forces \the [src] closed!"))
-				close(1)
-		else
-			visible_message(SPAN_NOTICE("\The [A] strains fruitlessly to force \the [src] [density ? "open" : "closed"]."))
 		return
 	else
 		..()

@@ -238,7 +238,7 @@
 	else
 		a_intent = I_GRAB
 
-	stun_baton.attack(M, src, BP_CHEST) //robots and turrets aim for center of mass
+	stun_baton.resolve_attackby(M, src)
 	flick(attack_state, src)
 
 /mob/living/bot/secbot/explode()
