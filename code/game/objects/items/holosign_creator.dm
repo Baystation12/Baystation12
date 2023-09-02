@@ -52,9 +52,6 @@
 				else
 					to_chat(user, SPAN_NOTICE("[src] is projecting at max capacity!"))
 
-/obj/item/holosign_creator/attack(mob/living/carbon/human/M, mob/user)
-	return
-
 /obj/item/holosign_creator/attack_self(mob/user)
 	if(length(signs))
 		for(var/H in signs)

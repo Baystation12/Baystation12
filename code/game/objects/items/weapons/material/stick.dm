@@ -8,6 +8,7 @@
 	force_multiplier = 0.1
 	thrown_force_multiplier = 0.1
 	w_class = ITEM_SIZE_NORMAL
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	default_material = MATERIAL_WOOD
 	attack_verb = list("poked", "jabbed")
 
@@ -27,11 +28,11 @@
 
 
 /obj/item/material/stick/attack(mob/M, mob/user)
-	if(user != M && user.a_intent == I_HELP)
+	. = FALSE
+	if(istype(M) && user != M && user.a_intent == I_HELP)
 		//Playful poking is its own thing
 		user.visible_message(SPAN_NOTICE("[user] pokes [M] with [src]."), SPAN_NOTICE("You poke [M] with [src]."))
 		//Consider adding a check to see if target is dead
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(M)
-		return
-	return ..()
+		return TRUE

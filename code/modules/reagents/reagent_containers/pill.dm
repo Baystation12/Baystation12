@@ -10,6 +10,7 @@
 	randpixel = 7
 	possible_transfer_amounts = null
 	w_class = ITEM_SIZE_TINY
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	slot_flags = SLOT_EARS
 	volume = 30
 
@@ -18,41 +19,41 @@
 	if(!icon_state)
 		icon_state = "pill[rand(1, 5)]" //preset pills only use colour changing or unique icons
 
-/obj/item/reagent_containers/pill/attack(mob/M as mob, mob/user as mob, def_zone)
-		//TODO: replace with standard_feed_mob() call.
+/obj/item/reagent_containers/pill/attack(mob/M as mob, mob/user as mob)
+	. = FALSE
+	if (!istype(M))
+		return FALSE
 
-	if(M == user)
-		if(!M.can_eat(src))
-			return
+	if (M == user)
+		if (!M.can_eat(src))
+			return TRUE
 
 		M.visible_message(SPAN_NOTICE("[M] swallows a pill."), SPAN_NOTICE("You swallow \the [src]."), null, 2)
-		if(reagents.total_volume)
+		if (reagents.total_volume)
 			reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		qdel(src)
-		return 1
+		return TRUE
 
-	else if(istype(M, /mob/living/carbon/human))
-		if(!M.can_force_feed(user, src))
-			return
+	if (ishuman(M))
+		if (!M.can_force_feed(user, src))
+			return TRUE
 
 		user.visible_message(SPAN_WARNING("[user] attempts to force [M] to swallow \the [src]."))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(!do_after(user, 3 SECONDS, M, DO_MEDICAL))
-			return
+		if (!do_after(user, 3 SECONDS, M, DO_MEDICAL))
+			return TRUE
 
 		if (user.get_active_hand() != src)
-			return
+			return TRUE
 
 		user.visible_message(SPAN_WARNING("[user] forces [M] to swallow \the [src]."))
 		var/contained = reagentlist()
 		if (reagents.should_admin_log())
 			admin_attack_log(user, M, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
-		if(reagents.total_volume)
+		if (reagents.total_volume)
 			reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		qdel(src)
-		return 1
-
-	return 0
+		return TRUE
 
 /obj/item/reagent_containers/pill/afterattack(obj/target, mob/user, proximity)
 	if(!proximity) return

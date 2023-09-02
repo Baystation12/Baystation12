@@ -17,6 +17,7 @@
 	var/list/ingredients = list()
 	var/fullname = ""
 	var/renamed = 0
+	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/reagent_containers/food/snacks/csandwich/verb/rename_sandwich()
 	set name = "Rename Sandwich"
@@ -101,19 +102,17 @@
 	var/obj/item/O = pick(contents)
 	to_chat(user, SPAN_ITALIC("You think you can see [O.name] in there."))
 
-/obj/item/reagent_containers/food/snacks/csandwich/attack(mob/M as mob, mob/user as mob, def_zone)
-
+/obj/item/reagent_containers/food/snacks/csandwich/attack(mob/living/M as mob, mob/user as mob)
+	. = FALSE
+	if (!istype(M))
+		return FALSE
 	var/obj/item/shard
-	for(var/obj/item/O in contents)
-		if(istype(O,/obj/item/material/shard))
+	for (var/obj/item/O in contents)
+		if (istype(O,/obj/item/material/shard))
 			shard = O
 			break
 
-	var/mob/living/H
-	if(istype(M,/mob/living))
-		H = M
-
-	if(H && shard && M == user) //This needs a check for feeding the food to other people, but that could be abusable.
-		to_chat(H, SPAN_WARNING("You lacerate your mouth on a [shard.name] in the sandwich!"))
-		H.adjustBruteLoss(5) //TODO: Target head if human.
-	..()
+	if (shard && M == user)
+		to_chat(M, SPAN_WARNING("You lacerate your mouth on a [shard.name] in the sandwich!"))
+		M.adjustBruteLoss(5) //TODO: Target head if human.
+	return ..()

@@ -40,9 +40,10 @@
 
 
 /obj/item/storage/fancy/smokable/attack(mob/living/carbon/target, mob/living/carbon/user)
+	. = FALSE
 	if (user != target || !istype(user) || user.a_intent != I_HELP)
-		return ..()
-	. = TRUE
+		return FALSE
+
 	if (!opened)
 		opened = !opened
 		playsound(src.loc, src.open_sound, 50, 0, -5)
@@ -50,18 +51,19 @@
 	var/obj/item/clothing/mask/smokable/smokable = locate() in contents
 	if (!smokable)
 		to_chat(user, SPAN_WARNING("\The [src] has nothing smokable left inside."))
-		return
+		return TRUE
 	if (user.wear_mask)
 		to_chat(user, SPAN_WARNING("Your [user.wear_mask.name] is in the way."))
-		return
+		return TRUE
 	if (!smokable.mob_can_equip(user, slot_wear_mask))
-		return
+		return TRUE
 	remove_from_storage(smokable, user.loc)
 	update_icon()
 	if (!user.equip_to_slot_if_possible(smokable, slot_wear_mask))
 		to_chat(user, SPAN_WARNING("\The [smokable] falls from you. Oh no."))
-		return
+		return TRUE
 	to_chat(user, SPAN_NOTICE("You take \a [smokable] from \the [src]."))
+	return TRUE
 
 
 /obj/item/storage/fancy/smokable/proc/UpdateReagents()

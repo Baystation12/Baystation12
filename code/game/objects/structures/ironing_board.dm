@@ -130,7 +130,7 @@
 		var/obj/item/ironing_iron/iron = weapon
 		var/zone = user.zone_sel.selecting
 		if (!iron.iron_enabled)
-			weapon.attack(buckled_mob, user, zone, TRUE)
+			buckled_mob.use_weapon(iron, user)
 			return TRUE
 		var/mob/living/carbon/human/human
 		var/obj/item/organ/external/organ

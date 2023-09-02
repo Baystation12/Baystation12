@@ -9,9 +9,8 @@ item/resolve_attackby() calls the target atom's attackby() proc.
 
 Mobs:
 
-mob/living/attackby() after checking for surgery, calls the item's attack() proc.
-item/attack() generates attack logs, sets click cooldown and calls the mob's attacked_with_item() proc. If you override this, consider whether you need to set a click cooldown, play attack animations, and generate logs yourself.
-mob/attacked_with_item() should then do mob-type specific stuff (like determining hit/miss, handling shields, etc) and then possibly call the item's apply_hit_effect() proc to actually apply the effects of being hit.
+item/use_weapon() generates attack logs, determines miss chance, sets click cooldown and calls the apply_hit_effect() proc. If you override this, consider whether you need to set a click cooldown, play attack animations, and generate logs yourself.
+use_weapon also call resolve_item_attack() and do mob-type specific stuff (like determining hit/miss, handling shields, etc).
 
 Item Hit Effects:
 
@@ -53,9 +52,9 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if (HAS_FLAGS(item_flags, ITEM_FLAG_TRY_ATTACK))
 		use_call = "on"
 		. = use_on(atom, user, click_params)
-		if (!. && attack(atom, user))
+		if (!.)
 			use_call = "attack"
-			. = TRUE
+			. = attack(atom, user)
 	if (!. && user.a_intent == I_HURT)
 		use_call = "weapon"
 		. = atom.use_weapon(src, user, click_params)
@@ -148,7 +147,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return FALSE
 
 
-/turf/can_use_item(obj/item/tool, mob/living/user, click_params)
+/turf/simulated/floor/can_use_item(obj/item/tool, mob/living/user, click_params)
 	. = ..()
 	if (!.)
 		return
@@ -278,34 +277,62 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if (weapon.force > 0 && get_max_health() && !HAS_FLAGS(weapon.item_flags, ITEM_FLAG_NO_BLUDGEON))
 		user.setClickCooldown(user.get_attack_speed(weapon))
 		user.do_attack_animation(src)
+		if (!aura_check(AURA_TYPE_WEAPON, weapon, user))
+			return TRUE
 		var/damage_flags = weapon.damage_flags()
+		var/weapon_mention
+		if (weapon.attack_message_name())
+			weapon_mention = " with [weapon.attack_message_name()]"
+		var/attack_verb = "[pick(weapon.attack_verb)]"
+
 		if (!can_damage_health(weapon.force, weapon.damtype, damage_flags))
 			playsound(src, weapon.hitsound, 50, TRUE)
 			user.visible_message(
-				SPAN_WARNING("\The [user] hits \the [src] with \a [weapon], but it bounces off!"),
-				SPAN_WARNING("You hit \the [src] with \the [weapon], but it bounces off!"),
+				SPAN_WARNING("\The [user] hit \the [src] [weapon_mention], but it bounced off!"),
+				SPAN_WARNING("You hit \the [src] [weapon_mention], but it bounced off!"),
 				exclude_mobs = list(src)
 			)
 			show_message(
-				SPAN_WARNING("\The [user] hits you with \a [weapon], but it bounces off!"),
+				SPAN_WARNING("\The [user] hit you [weapon_mention], but it bounced off!"),
 				VISIBLE_MESSAGE,
-				SPAN_WARNING("You feel something bounce off you harmlessly.")
+				SPAN_WARNING("You felt something bounce off you harmlessly.")
 			)
 			return TRUE
+
+		var/hit_zone = resolve_item_attack(weapon, user, user.zone_sel? user.zone_sel.selecting : ran_zone())
+		if (!hit_zone)
+			return TRUE
+
 		playsound(src, weapon.hitsound, 75, TRUE)
 		user.visible_message(
-			SPAN_DANGER("\The [user] hits \the [src] with \a [weapon]!"),
-			SPAN_DANGER("You hit \the [src] with \the [weapon]!"),
+			SPAN_DANGER("\The [user] [attack_verb] \the [src] [weapon_mention]"),
+			SPAN_DANGER("You [attack_verb] \the [src] [weapon_mention]!"),
 			exclude_mobs = list(src)
 		)
 		show_message(
-			SPAN_DANGER("\The [user] hits you with \a [weapon]!"),
+			SPAN_DANGER("\The [user] [attack_verb] you [weapon_mention]!"),
 			VISIBLE_MESSAGE,
 			SPAN_DANGER("You feel something hit you!")
 		)
-		general_health_adjustment(weapon.force, weapon.damtype, damage_flags, user.zone_sel?.selecting, weapon)
-		return TRUE
 
+		if (!weapon.no_attack_log)
+			admin_attack_log(
+				user,
+				src,
+				"Attacked using \a [weapon] (DAMTYE: [uppertext(weapon.damtype)])",
+				"Was attacked with \a [weapon] (DAMTYE: [uppertext(weapon.damtype)])",
+				"used \a [weapon] (DAMTYE: [uppertext(weapon.damtype)]) to attack"
+			)
+
+		var/datum/attack_result/result = hit_zone
+		if (istype(result))
+			if (result.hit_zone)
+				var/mob/living/victim = result.attackee ? result.attackee : src
+				weapon.apply_hit_effect(victim, user, result.hit_zone)
+				return TRUE
+		if (hit_zone)
+			weapon.apply_hit_effect(src, user, hit_zone)
+		return TRUE
 	return ..()
 
 
@@ -331,6 +358,10 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if (can_operate(src, user) && tool.do_surgery(src, user))
 		return TRUE
 
+	if (length(auras))
+		for (var/obj/aura/web/web in auras)
+			web.remove_webbing(user)
+			return TRUE
 	return ..()
 
 
@@ -362,16 +393,9 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /atom/proc/attackby(obj/item/item, mob/living/user, click_params)
 	return FALSE
 
-
-/mob/living/attackby(obj/item/item, mob/living/user, click_params)
-	// Legacy mob attack code is handled by the weapon
-	if (item.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone()))
-		return TRUE
-	return ..()
-
-
 /**
  * Called when the item is in the active hand and another atom is clicked and `resolve_attackby()` returns FALSE. This is generally called by `ClickOn()`.
+ * Use this similar to how attack() is used; but for non-mob targets. Whenever you want specific behavior at the item level.
  *
  * **Parameters**:
  * - `target` - The atom that was clicked on.
@@ -403,43 +427,22 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 //I would prefer to rename this attack_as_weapon(), but that would involve touching hundreds of files.
 /**
- * Called when a mob is clicked while the item is in the active hand and the interaction is not valid for surgery. Generally called by the mob's `attackby()` proc.
+ * Called when a mob is clicked while the item is in the active hand and ITEM_FLAG_TRY_ATTACK is set. Generally called by the mob's `attackby()` proc.
+ * This is called before anything else if set correctly. Returns boolean to indicate whether the item usage was successful or not.
+ * If returns FALSE, the rest of the resolve_attackby() chain is called.
  *
  * **Parameters**:
- * - `M` - The mob that was clicked.
+ * - `subject` - The mob that was clicked.
  * - `user` - The mob that clicked the target.
- * - `target_zone` - The mob targeting zone `user` had selected when clicking.
- * - `animate` (boolean) - Whether or not to show the attack animation.
- *
- * Returns boolean to indicate whether the item usage was successful or not.
+ * * - `click_parameters` - List of click parameters. See BYOND's `Click()` documentation.
  */
-/obj/item/proc/attack(mob/living/subject, mob/living/user, target_zone, animate = TRUE)
-	if (!force || (item_flags & ITEM_FLAG_NO_BLUDGEON))
-		return FALSE
-	if (subject == user && user.a_intent != I_HURT)
-		return FALSE
-	if (user.a_intent == I_HELP && !attack_ignore_harm_check)
-		return FALSE
-	if (!no_attack_log)
-		admin_attack_log(user, subject, "Attacked using \a [src] (DAMTYE: [uppertext(damtype)])", "Was attacked with \a [src] (DAMTYE: [uppertext(damtype)])", "used \a [src] (DAMTYE: [uppertext(damtype)]) to attack")
-	user.setClickCooldown(attack_cooldown + w_class)
-	if (animate)
-		user.do_attack_animation(subject)
-	if (!subject.aura_check(AURA_TYPE_WEAPON, src, user))
-		return FALSE
-	var/hit_zone = subject.resolve_item_attack(src, user, target_zone)
-	var/datum/attack_result/result = hit_zone
-	if (istype(result))
-		if (result.hit_zone)
-			apply_hit_effect(result.attackee ? result.attackee : subject, user, result.hit_zone)
-		return TRUE
-	if (hit_zone)
-		apply_hit_effect(subject, user, hit_zone)
-	return TRUE
+/obj/item/proc/attack(mob/living/subject, mob/living/user, click_parameters)
+	return FALSE
 
 
 /**
- * Called when a weapon is used to make a successful melee attack on a mob. Generally called by the target's `attack()` proc.
+ * Called when a weapon is used to make a successful melee attack on a mob. Generally called by the target's `use_weapon()` proc.
+ * Overriden to apply special effects like electrical shocks from stun batons/defib paddles.
  *
  * **Parameters**:
  * - `target` - The mob struck with the weapon.
@@ -449,10 +452,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
  * Returns boolean to indicate whether or not damage was dealt.
  */
 /obj/item/proc/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
-	if (hitsound)
-		playsound(loc, hitsound, 50, TRUE, -1)
 	var/power = force
-	if (MUTATION_HULK in user.mutations)
+	if (MUTATION_HULK in user.mutations && damtype == DAMAGE_BRUTE) //Repeat this check here because it is only used under use_weapon to check if it's even possible to damage the mob. Value not carried over here.
 		power *= 2
 	return target.hit_with_weapon(src, user, power, hit_zone)
 
@@ -473,7 +474,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /mob/living/get_attack_speed(obj/item/item)
 	var/speed = base_attack_cooldown
 	if (istype(item))
-		speed = item.attack_cooldown
+		speed = item.attack_cooldown + item.w_class
 	return speed
 
 

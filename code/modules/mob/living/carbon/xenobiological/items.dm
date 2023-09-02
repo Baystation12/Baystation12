@@ -131,20 +131,21 @@
 	desc = "A potent chemical mix that will nullify a slime's powers, causing it to become docile and tame."
 	icon = 'icons/obj/chemical_storage.dmi'
 	icon_state = "Pinkpotion"
+	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/slimepotion/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
-	if(!istype(M, /mob/living/carbon/slime))//If target is not a slime.
-		to_chat(user, SPAN_WARNING(" The potion only works on baby slimes!"))
-		return ..()
-	if(M.is_adult) //Can't tame adults
+	. = FALSE
+	if (!istype(M, /mob/living/carbon/slime))
+		return FALSE
+	if (M.is_adult) //Can't tame adults
 		to_chat(user, SPAN_WARNING(" Only baby slimes can be tamed!"))
-		return..()
-	if(M.stat)
+		return TRUE
+	if (M.stat)
 		to_chat(user, SPAN_WARNING(" The slime is dead!"))
-		return..()
-	if(M.mind)
+		return TRUE
+	if (M.mind)
 		to_chat(user, SPAN_WARNING(" The slime resists!"))
-		return ..()
+		return TRUE
 	var/mob/living/simple_animal/slime/pet = new /mob/living/simple_animal/slime(M.loc)
 	pet.icon_state = "[M.colour] baby slime"
 	pet.icon_living = "[M.colour] baby slime"
@@ -159,23 +160,25 @@
 	pet.SetName(newname)
 	pet.real_name = newname
 	qdel(src)
+	return TRUE
 
 /obj/item/slimepotion2
 	name = "advanced docility potion"
 	desc = "A potent chemical mix that will nullify a slime's powers, causing it to become docile and tame. This one is meant for adult slimes."
 	icon = 'icons/obj/chemical_storage.dmi'
 	icon_state = "LPinkpotion"
+	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/slimepotion2/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
-	if(!istype(M, /mob/living/carbon/slime))
-		to_chat(user, SPAN_WARNING(" The potion only works on slimes!"))
-		return ..()
-	if(M.stat)
+	. = FALSE
+	if (!istype(M, /mob/living/carbon/slime))
+		return FALSE
+	if (M.stat)
 		to_chat(user, SPAN_WARNING(" The slime is dead!"))
-		return..()
-	if(M.mind)
+		return TRUE
+	if (M.mind)
 		to_chat(user, SPAN_WARNING(" The slime resists!"))
-		return ..()
+		return TRUE
 	var/mob/living/simple_animal/adultslime/pet = new /mob/living/simple_animal/adultslime(M.loc)
 	pet.icon_state = "[M.colour] adult slime"
 	pet.icon_living = "[M.colour] adult slime"
@@ -190,31 +193,33 @@
 	pet.SetName(newname)
 	pet.real_name = newname
 	qdel(src)
-
+	return TRUE
 
 /obj/item/slimesteroid
 	name = "slime steroid"
 	desc = "A potent chemical mix that will cause a slime to generate more extract."
 	icon = 'icons/obj/chemical_storage.dmi'
 	icon_state = "Greenpotion"
+	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/slimesteroid/attack(mob/living/carbon/slime/M as mob, mob/user as mob)
-	if(!istype(M, /mob/living/carbon/slime))//If target is not a slime.
-		to_chat(user, SPAN_WARNING(" The steroid only works on baby slimes!"))
-		return ..()
-	if(M.is_adult) //Can't tame adults
+	. = FALSE
+	if (!istype(M, /mob/living/carbon/slime))
+		return FALSE
+	if (M.is_adult) //Can't tame adults
 		to_chat(user, SPAN_WARNING(" Only baby slimes can use the steroid!"))
-		return..()
-	if(M.stat)
+		return TRUE
+	if (M.stat)
 		to_chat(user, SPAN_WARNING(" The slime is dead!"))
-		return..()
-	if(M.cores == 3)
+		return TRUE
+	if (M.cores == 3)
 		to_chat(user, SPAN_WARNING(" The slime already has the maximum amount of extract!"))
-		return..()
+		return TRUE
 
 	to_chat(user, "You feed the slime the steroid. It now has triple the amount of extract.")
 	M.cores = 3
 	qdel(src)
+	return TRUE
 
 /obj/item/slimesteroid2
 	name = "extract enhancer"
@@ -242,27 +247,28 @@
 	desc= "A potent chemical mix that will revitalize a recently dead slime"
 	icon= 'icons/obj/chemical_storage.dmi'
 	icon_state= "Goldpotion"
+	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/slimepotion3/attack(mob/living/carbon/slime/M, mob/user)
-	if(!istype(M)) //If target is not a slime.
-		to_chat(user, SPAN_WARNING("\The [src] only works on slimes!"))
-		return..()
-	if(M.is_adult) //Can't revive adults
+	. = FALSE
+	if (!istype(M, /mob/living/carbon/slime))
+		return FALSE
+	if (M.is_adult) //Can't revive adults
 		to_chat(user, SPAN_WARNING("Only baby slimes can use \the [src]!"))
-		return FALSE
-	if(M.cores < 1)
+		return TRUE
+	if (M.cores < 1)
 		to_chat(user, SPAN_WARNING("\The [M] has no cores!"))
-		return FALSE
-	if(M.stat== CONSCIOUS)//need to change this to living?
+		return TRUE
+	if (M.stat== CONSCIOUS)//need to change this to living?
 		to_chat(user, SPAN_WARNING("\The [M] is already alive!"))
-		return FALSE
+		return TRUE
 	user.visible_message(
 		SPAN_NOTICE("The [user] feeds \a [src] to \the [M]. Life floods back into it!"),
 		SPAN_NOTICE("You feed \the [src] to \the [M]. Life floods back into it!")
 		)
 	M.revive()
 	qdel(src)
-
+	return TRUE
 
 /obj/effect/golemrune
 	anchored = TRUE

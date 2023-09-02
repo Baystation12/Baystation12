@@ -22,7 +22,8 @@
 //	causeerrorheresoifixthis
 	var/obj/item/master = null
 	var/list/origin_tech = null	//Used by R&D to determine what research bonuses it grants.
-	var/list/attack_verb = list("hit") //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
+	///Used in use_weapon() and attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
+	var/list/attack_verb = list("attacked")
 	var/lock_picking_level = 0 //used to determine whether something can pick a lock, and how well.
 	var/force = 0
 	var/attack_cooldown = DEFAULT_WEAPON_COOLDOWN
@@ -284,8 +285,15 @@
 			if(S.collection_mode) //Mode is set to collect all items
 				if(isturf(src.loc))
 					S.gather_all(src.loc, user)
-			else if(S.can_be_inserted(src, user))
+			else if (S.can_be_inserted(src, user))
 				S.handle_item_insertion(src)
+
+/obj/item/use_on(obj/target, mob/user)
+	if (istype(target, /obj/item/clothing))
+		var/obj/item/clothing/clothes = target
+		if (clothes.attempt_store_item(src, user))
+			return TRUE
+	return ..()
 
 /obj/item/can_embed()
 	if (!canremove)

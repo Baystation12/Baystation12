@@ -7,6 +7,7 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
 	max_w_class = ITEM_SIZE_SMALL
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	max_storage_space = 4
 	var/mob/affecting = null
 	var/deity_name = "Christ"
@@ -66,17 +67,18 @@
 	icon_changed = 1
 
 /obj/item/storage/bible/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
-	if(user == M || !ishuman(user) || !ishuman(M))
-		return
-	if(user.mind && istype(user.mind.assigned_job, /datum/job/chaplain))
+	. = FALSE
+	if (user == M || !ishuman(user) || !ishuman(M))
+		return FALSE
+	if (user.mind && istype(user.mind.assigned_job, /datum/job/chaplain))
 		user.visible_message(SPAN_NOTICE("\The [user] places \the [src] on \the [M]'s forehead, reciting a prayer..."))
-		if(do_after(user, 5 SECONDS, M, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && user.Adjacent(M))
+		if (do_after(user, 5 SECONDS, M, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && user.Adjacent(M))
 			user.visible_message("\The [user] finishes reciting \his prayer, removing \the [src] from \the [M]'s forehead.", "You finish reciting your prayer, removing \the [src] from \the [M]'s forehead.")
-			if(user.get_cultural_value(TAG_RELIGION) == M.get_cultural_value(TAG_RELIGION))
+			if (user.get_cultural_value(TAG_RELIGION) == M.get_cultural_value(TAG_RELIGION))
 				to_chat(M, SPAN_NOTICE("You feel calm and relaxed, at one with the universe."))
 			else
 				to_chat(M, "Nothing happened.")
-		..()
+		return TRUE
 
 /obj/item/storage/bible/afterattack(atom/A, mob/user as mob, proximity)
 	if(!proximity) return

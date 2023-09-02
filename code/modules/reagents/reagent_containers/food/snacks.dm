@@ -3,6 +3,7 @@
 	desc = "Yummy!"
 	icon = 'icons/obj/food/food.dmi'
 	center_of_mass = "x=16;y=16"
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	var/bitesize = 1
 	var/bitecount = 0
 	var/slice_path
@@ -55,74 +56,76 @@
 	return
 
 
-/obj/item/reagent_containers/food/snacks/attack(mob/M as mob, mob/user as mob, def_zone)
-	if(!reagents || !reagents.total_volume)
+/obj/item/reagent_containers/food/snacks/attack(mob/M as mob, mob/user as mob)
+	. = FALSE
+	if (!istype(M, /mob/living/carbon))
+		return FALSE
+	if (!reagents || !reagents.total_volume)
 		to_chat(user, SPAN_DANGER("None of [src] left!"))
 		qdel(src)
-		return 0
-	if(!is_open_container())
+		return TRUE
+	if (!is_open_container())
 		to_chat(user, SPAN_NOTICE("\The [src] isn't open!"))
-		return 0
-	if(istype(M, /mob/living/carbon))
-		//TODO: replace with standard_feed_mob() call.
-		var/mob/living/carbon/C = M
-		var/fullness = C.get_fullness()
-		if(C == user)								//If you're eating it yourself
-			if(istype(C,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = M
-				if(!H.check_has_mouth())
-					to_chat(user, "Where do you intend to put \the [src]? You don't have a mouth!")
-					return
-				var/obj/item/blocked = H.check_mouth_coverage()
-				if(blocked)
-					to_chat(user, SPAN_WARNING("\The [blocked] is in the way!"))
-					return
+		return TRUE
 
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)//puts a limit on how fast people can eat/drink things
-			if (fullness <= 50)
-				to_chat(C, SPAN_DANGER("You hungrily chew out a piece of [src] and gobble it!"))
-			if (fullness > 50 && fullness <= 150)
-				to_chat(C, SPAN_NOTICE("You hungrily begin to eat [src]."))
-			if (fullness > 150 && fullness <= 350)
-				to_chat(C, SPAN_NOTICE("You take a bite of [src]."))
-			if (fullness > 350 && fullness <= 550)
-				to_chat(C, SPAN_NOTICE("You unwillingly chew a bit of [src]."))
-			if (fullness > 550)
-				to_chat(C, SPAN_DANGER("You cannot force any more of [src] to go down your throat."))
-				return 0
+	//TODO: replace with standard_feed_mob() call.
+	var/mob/living/carbon/C = M
+	var/fullness = C.get_fullness()
+	if (C == user)								//If you're eating it yourself
+		if (istype(C,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			if (!H.check_has_mouth())
+				to_chat(user, "Where do you intend to put \the [src]? You don't have a mouth!")
+				return TRUE
+			var/obj/item/blocked = H.check_mouth_coverage()
+			if (blocked)
+				to_chat(user, SPAN_WARNING("\The [blocked] is in the way!"))
+				return TRUE
+
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)//puts a limit on how fast people can eat/drink things
+		if (fullness <= 50)
+			to_chat(C, SPAN_DANGER("You hungrily chew out a piece of [src] and gobble it!"))
+		if (fullness > 50 && fullness <= 150)
+			to_chat(C, SPAN_NOTICE("You hungrily begin to eat [src]."))
+		if (fullness > 150 && fullness <= 350)
+			to_chat(C, SPAN_NOTICE("You take a bite of [src]."))
+		if (fullness > 350 && fullness <= 550)
+			to_chat(C, SPAN_NOTICE("You unwillingly chew a bit of [src]."))
+		if (fullness > 550)
+			to_chat(C, SPAN_DANGER("You cannot force any more of [src] to go down your throat."))
+			return TRUE
+	else
+		if(!M.can_force_feed(user, src))
+			return TRUE
+
+		if (fullness <= 550)
+			user.visible_message(SPAN_DANGER("[user] attempts to feed [M] [src]."))
 		else
-			if(!M.can_force_feed(user, src))
-				return
+			user.visible_message(SPAN_DANGER("[user] cannot force anymore of [src] down [M]'s throat."))
+			return TRUE
 
-			if (fullness <= 550)
-				user.visible_message(SPAN_DANGER("[user] attempts to feed [M] [src]."))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		if (!do_after(user, 3 SECONDS, M, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+			return TRUE
+
+		if (user.get_active_hand() != src)
+			return TRUE
+
+		var/contained = reagentlist()
+		admin_attack_log(user, M, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
+		user.visible_message(SPAN_DANGER("[user] feeds [M] [src]."))
+
+	if (reagents) //Handle ingestion of the reagent.
+		if (eat_sound)
+			playsound(M, pick(eat_sound), rand(10, 50), 1)
+		if (reagents.total_volume)
+			if (reagents.total_volume > bitesize)
+				reagents.trans_to_mob(M, bitesize, CHEM_INGEST)
 			else
-				user.visible_message(SPAN_DANGER("[user] cannot force anymore of [src] down [M]'s throat."))
-				return 0
-
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			if(!do_after(user, 3 SECONDS, M, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)) return
-
-			if (user.get_active_hand() != src)
-				return
-
-			var/contained = reagentlist()
-			admin_attack_log(user, M, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
-			user.visible_message(SPAN_DANGER("[user] feeds [M] [src]."))
-
-		if(reagents) //Handle ingestion of the reagent.
-			if(eat_sound)
-				playsound(M, pick(eat_sound), rand(10, 50), 1)
-			if(reagents.total_volume)
-				if(reagents.total_volume > bitesize)
-					reagents.trans_to_mob(M, bitesize, CHEM_INGEST)
-				else
-					reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
-				bitecount++
-				OnConsume(M, user)
-			return 1
-
-	return 0
+				reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
+			bitecount++
+			OnConsume(M, user)
+	return TRUE
 
 /obj/item/reagent_containers/food/snacks/examine(mob/user, distance)
 	. = ..()
@@ -1496,6 +1499,7 @@
 			W.src_flavor = ""
 		else
 			to_chat(user,"The cube doesn't so much as twitch without a DNA sample.")
+		return TRUE
 	return ..()
 
 

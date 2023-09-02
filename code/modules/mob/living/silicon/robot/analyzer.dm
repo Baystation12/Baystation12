@@ -9,6 +9,7 @@
 	desc = "A hand-held scanner able to diagnose robotic injuries."
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	throwforce = 3
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 5
@@ -114,6 +115,9 @@
 	return
 
 /obj/item/device/robotanalyzer/attack(mob/living/M, mob/living/user)
+	. = FALSE
+	if (!istype(M))
+		return FALSE
 	roboscan(M, user)
-	src.add_fingerprint(user)
-	return
+	add_fingerprint(user)
+	return TRUE

@@ -6,6 +6,7 @@ var/global/list/holder_mob_icon_cache = list()
 	desc = "You shouldn't ever see this."
 	icon = 'icons/obj/ash.dmi'
 	slot_flags = SLOT_HEAD | SLOT_HOLSTER
+	item_flags = ITEM_FLAG_TRY_ATTACK
 
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi'
@@ -91,16 +92,14 @@ var/global/list/holder_mob_icon_cache = list()
 		M.show_inv(usr)
 
 /obj/item/holder/attack(mob/target, mob/user)
+	. = FALSE
 	// Devour on click on self with holder
-	if(target == user && istype(user,/mob/living/carbon))
+	if (target == user && istype(user,/mob/living/carbon))
 		var/mob/living/carbon/M = user
-
-		for(var/mob/victim in src.contents)
+		for (var/mob/victim in src.contents)
 			M.devour(victim)
-
 		update_state()
-
-	..()
+		return TRUE
 
 /obj/item/holder/proc/sync(mob/living/M)
 	dir = 2

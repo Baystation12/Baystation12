@@ -202,7 +202,8 @@
 	if (a_intent == I_HELP)
 		A.attack_animal(src)
 	else if (get_natural_weapon())
-		A.attackby(get_natural_weapon(), src)
+		var/obj/item/weapon = get_natural_weapon()
+		weapon.resolve_attackby(A, src)
 
 
 /**

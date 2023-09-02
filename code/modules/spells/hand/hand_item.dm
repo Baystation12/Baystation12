@@ -9,6 +9,7 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	item_flags = 0
 	obj_flags = 0
 	simulated = FALSE
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	icon_state = "spell"
 	var/next_spell_time = 0
 	var/spell/hand/hand_spell
@@ -23,10 +24,10 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	return ITEM_SIZE_NO_CONTAINER
 
 /obj/item/magic_hand/attack(mob/living/M, mob/living/user)
-	if(hand_spell && hand_spell.valid_target(M, user))
+	. = FALSE
+	if (hand_spell && hand_spell.valid_target(M, user))
 		fire_spell(M, user)
-		return 0
-	return 1
+		return TRUE
 
 /obj/item/magic_hand/proc/fire_spell(atom/A, mob/living/user)
 	if(!hand_spell) //no spell? Die.

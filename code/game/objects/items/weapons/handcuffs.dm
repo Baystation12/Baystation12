@@ -5,6 +5,7 @@
 	icon = 'icons/obj/tools/handcuffs.dmi'
 	icon_state = "handcuff"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	slot_flags = SLOT_BELT
 	throwforce = 5
 	w_class = ITEM_SIZE_SMALL
@@ -26,31 +27,30 @@
 	return ..()
 
 /obj/item/handcuffs/attack(mob/living/carbon/C, mob/living/user)
-
-	if(!user.IsAdvancedToolUser())
-		return
+	. = FALSE
+	if (!user.IsAdvancedToolUser())
+		return FALSE
 
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, SPAN_WARNING("Uh ... how do those things work?!"))
 		place_handcuffs(user, user)
-		return
+		return TRUE
 
 	// only carbons can be handcuffed
-	if(istype(C))
-		if(!C.handcuffed)
+	if (istype(C))
+		if (!C.handcuffed)
 			if (C == user)
 				place_handcuffs(user, user)
-				return
+				return TRUE
 
 			//check for an aggressive grab (or robutts)
-			if(C.has_danger_grab(user))
+			if (C.has_danger_grab(user))
 				place_handcuffs(C, user)
 			else
 				to_chat(user, SPAN_DANGER("You need to have a firm grip on [C] before you can put \the [src] on!"))
 		else
 			to_chat(user, SPAN_WARNING("\The [C] is already handcuffed!"))
-	else
-		..()
+		return TRUE
 
 /obj/item/handcuffs/proc/can_place(mob/target, mob/user)
 	if(user == target || istype(user, /mob/living/silicon/robot) || istype(user, /mob/living/bot))

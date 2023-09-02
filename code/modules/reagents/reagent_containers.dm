@@ -145,11 +145,11 @@
 	var/is_self = target == user
 	if (!target.check_has_mouth())
 		to_chat(user, SPAN_WARNING("[is_self ? "You" : "\The [target]"] can't consume \the [src] - [is_self ? "you" : "they"] don't have a mouth!"))
-		return FALSE
+		return TRUE
 	var/obj/item/blocker = target.check_mouth_coverage()
 	if (blocker)
 		to_chat(user, SPAN_WARNING("[is_self ? "Your" : "\The [target]'s"] [blocker] is in the way!"))
-		return FALSE
+		return TRUE
 	user?.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if (is_self)
 		self_feed_message(target)
@@ -157,7 +157,7 @@
 	else
 		other_feed_message_start(user, target)
 		if (!do_after(user, 3 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
-			return FALSE
+			return TRUE
 		other_feed_message_finish(user, target)
 		add_trace_DNA(target)
 		var/contained = reagentlist()

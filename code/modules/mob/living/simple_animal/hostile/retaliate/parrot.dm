@@ -508,7 +508,8 @@
 				return
 
 			//Time for the hurt to begin!
-			L.attackby(get_natural_weapon(), src)
+			var/obj/item/weapon = get_natural_weapon()
+			weapon.resolve_attackby(L, src)
 			return
 
 		//Otherwise, fly towards the mob!

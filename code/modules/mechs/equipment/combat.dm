@@ -264,7 +264,7 @@
 			playsound(E, 'sound/mecha/mech_punch_fast.ogg', 35, 1)
 			if (do_after(E, 1.2 SECONDS, get_turf(user), DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && E && MC)
 				for (var/mob/living/M in orange(1, E))
-					attack(M, E, E.zone_sel.selecting, FALSE)
+					M.use_weapon(src, E)
 				E.spin(0.65 SECONDS, 0.125 SECONDS)
 				playsound(E, 'sound/mecha/mechstep01.ogg', 40, 1)
 

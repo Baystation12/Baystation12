@@ -5,6 +5,7 @@
 	slot_flags = SLOT_BELT | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
 	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	on_rolled_down = ACCESSORY_ROLLED_NONE
 	var/badge_string = "Detective"
 	var/stored_name
@@ -59,10 +60,12 @@
 
 
 /obj/item/clothing/accessory/badge/attack(mob/living/carbon/human/M, mob/living/user)
+	. = FALSE
 	if (isliving(user))
 		user.visible_message(SPAN_DANGER("[user] invades [M]'s personal space, thrusting \the [src] into their face insistently."),SPAN_DANGER("You invade [M]'s personal space, thrusting \the [src] into their face insistently."))
 		if (stored_name)
 			to_chat(M, SPAN_WARNING("It reads: [stored_name], [badge_string]."))
+		return TRUE
 
 
 /obj/item/clothing/accessory/badge/investigator

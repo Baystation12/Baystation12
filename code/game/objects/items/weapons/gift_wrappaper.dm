@@ -151,6 +151,7 @@
 	icon = 'icons/obj/gifts.dmi'
 	icon_state = "wrap_paper"
 	var/amount = 2.5*BASE_STORAGE_COST(ITEM_SIZE_HUGE)
+	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/wrapping_paper/attackby(obj/item/W as obj, mob/user as mob)
 	..()
@@ -198,9 +199,11 @@
 		to_chat(user, text("There is about [] square units of paper left!", src.amount))
 
 /obj/item/wrapping_paper/attack(mob/target as mob, mob/user as mob)
-	if (!istype(target, /mob/living/carbon/human)) return
-	var/mob/living/carbon/human/H = target
+	. = FALSE
+	if (!istype(target, /mob/living/carbon/human))
+		return FALSE
 
+	var/mob/living/carbon/human/H = target
 	if (istype(H.wear_suit, /obj/item/clothing/suit/straight_jacket) || H.stat)
 		if (src.amount > 2)
 			var/obj/effect/spresent/present = new /obj/effect/spresent (H.loc)
@@ -217,3 +220,4 @@
 			to_chat(user, SPAN_WARNING("You need more paper."))
 	else
 		to_chat(user, "They are moving around too much. A straightjacket would help.")
+	return TRUE

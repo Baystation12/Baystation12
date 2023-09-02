@@ -97,6 +97,3 @@
 			playsound(loc, 'sound/items/timer.ogg', 50)
 		T--
 	explode(get_turf(target))
-
-/obj/item/plastique/attack(mob/M as mob, mob/user as mob, def_zone)
-	return

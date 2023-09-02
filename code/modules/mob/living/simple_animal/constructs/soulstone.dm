@@ -10,6 +10,7 @@
 	desc = "A strange, ridged chunk of some glassy red material. Achingly cold to the touch."
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 4)
 
 	var/full = SOULSTONE_EMPTY
@@ -106,20 +107,25 @@
 
 
 /obj/item/device/soulstone/attack(mob/living/simple_animal/M, mob/user)
-	if(M == shade)
+	. = FALSE
+	if (!istype(M))
+		return FALSE
+
+	if (M == shade)
 		to_chat(user, SPAN_NOTICE("You recapture \the [M]."))
 		M.forceMove(src)
-		return
-	if(full == SOULSTONE_ESSENCE)
+		return TRUE
+	if (full == SOULSTONE_ESSENCE)
 		to_chat(user, SPAN_NOTICE("\The [src] is already full."))
-		return
-	if(M.stat != DEAD && !M.is_asystole())
+		return TRUE
+	if (M.stat != DEAD && !M.is_asystole())
 		to_chat(user, SPAN_NOTICE("Kill or maim the victim first."))
-		return
-	for(var/obj/item/W in M)
+		return TRUE
+	for (var/obj/item/W in M)
 		M.drop_from_inventory(W)
 	M.dust()
 	set_full(SOULSTONE_ESSENCE)
+	return TRUE
 
 /obj/item/device/soulstone/attack_self(mob/user)
 	if(full != SOULSTONE_ESSENCE) // No essence - no shade

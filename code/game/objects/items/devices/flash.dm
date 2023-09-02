@@ -9,6 +9,7 @@
 	throw_speed = 4
 	throw_range = 10
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	origin_tech = list(TECH_MAGNET = 2, TECH_COMBAT = 1)
 
 	var/times_used = 0 //Number of times it's been used.
@@ -35,39 +36,41 @@
 	times_used = max(0,round(times_used)) //sanity
 
 //attack_as_weapon
-/obj/item/device/flash/attack(mob/living/M, mob/living/user, target_zone)
-	if(!user || !M)	return 0 //sanity
-	admin_attack_log(user, M, "flashed their victim using \a [src].", "Was flashed by \a [src].", "used \a [src] to flash")
-
-	if(!clown_check(user))	return 0
-	if(broken)
+/obj/item/device/flash/attack(mob/living/M, mob/living/user)
+	. = FALSE
+	if (!istype(M))
+		return FALSE
+	if (!clown_check(user))
+		return TRUE
+	if (broken)
 		to_chat(user, SPAN_WARNING("\The [src] is broken."))
-		return 0
+		return TRUE
 
 	flash_recharge()
 
 	//spamming the flash before it's fully charged (60seconds) increases the chance of it breaking
 	//It will never break on the first use.
-	switch(times_used)
-		if(0 to 5)
+	switch (times_used)
+		if (0 to 5)
 			last_used = world.time
-			if(prob(times_used))	//if you use it 5 times in a minute it has a 10% chance to break!
+			if (prob(times_used))	//if you use it 5 times in a minute it has a 10% chance to break!
 				broken = 1
 				to_chat(user, SPAN_WARNING("The bulb has burnt out!"))
 				icon_state = "[initial(icon_state)]_burnt"
-				return 0
+				return TRUE
 			times_used++
 		else	//can only use it 5 times a minute
 			to_chat(user, SPAN_WARNING("*click* *click*"))
-			return 0
+			return TRUE
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(M)
+	admin_attack_log(user, M, "flashed their victim using \a [src].", "Was flashed by \a [src].", "used \a [src] to flash")
 
 	playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)
 	var/flashfail = do_flash(M)
 
-	if(isrobot(user))
+	if (isrobot(user))
 		spawn(0)
 			var/atom/movable/fake_overlay/animation = new(user)
 			animation.plane = user.plane
@@ -78,15 +81,15 @@
 			sleep(5)
 			qdel(animation)
 
-	if(!flashfail)
+	if (!flashfail)
 		flick("[initial(icon_state)]_on", src)
-		if(!issilicon(M))
+		if (!issilicon(M))
 			user.visible_message(SPAN_CLASS("disarm", "[user] blinds [M] with \the [src]!"))
 		else
 			user.visible_message(SPAN_NOTICE("[user] overloads [M]'s sensors with \the [src]!"))
 	else
 		user.visible_message(SPAN_NOTICE("[user] fails to blind [M] with \the [src]!"))
-	return 1
+	return TRUE
 
 
 /**

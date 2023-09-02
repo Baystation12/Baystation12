@@ -131,31 +131,14 @@
 /mob/living/proc/resolve_item_attack(obj/item/I, mob/living/user, target_zone)
 	return target_zone
 
-//Called when the mob is hit with an item in combat. Returns the blocked result
+///Called when the mob is hit with an item in combat. Returns the blocked result
 /mob/living/proc/hit_with_weapon(obj/item/I, mob/living/user, effective_force, hit_zone)
-	var/weapon_mention
-	if(I.attack_message_name())
-		weapon_mention = " with [I.attack_message_name()]"
-	visible_message(SPAN_DANGER("\The [src] has been [length(I.attack_verb)? pick(I.attack_verb) : "attacked"][weapon_mention] by \the [user]!"))
-
-	. = standard_weapon_hit_effects(I, user, effective_force, hit_zone)
-
-	if (I.damtype == DAMAGE_BRUTE && prob(33)) // Added blood for whacking non-humans too
-		var/turf/simulated/location = get_turf(src)
-		if(istype(location)) location.add_blood_floor(src)
-
-	if (ai_holder)
-		ai_holder.react_to_attack(user)
-
-///returns false if the effects failed to apply for some reason, true otherwise.
-/mob/living/proc/standard_weapon_hit_effects(obj/item/I, mob/living/user, effective_force, hit_zone)
 	if(!effective_force)
 		return FALSE
 
-	//Apply weapon damage
 	var/damage_flags = I.damage_flags()
-
 	return apply_damage(effective_force, I.damtype, hit_zone, damage_flags, used_weapon=I, armor_pen=I.armor_penetration)
+
 
 //this proc handles being hit by a thrown atom
 /mob/living/hitby(atom/movable/AM, datum/thrownthing/TT)

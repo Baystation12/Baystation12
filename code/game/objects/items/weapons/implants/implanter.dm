@@ -6,6 +6,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	matter = list(MATERIAL_ALUMINIUM = 1000, MATERIAL_GLASS = 1000)
 	var/obj/item/implant/imp = null
 
@@ -43,23 +44,23 @@
 		..()
 
 /obj/item/implanter/attack(mob/M as mob, mob/user as mob)
+	. = FALSE
 	if (!istype(M, /mob/living/carbon))
-		return
-	if (user && src.imp)
-		M.visible_message(SPAN_WARNING("[user] is attemping to implant [M]."))
+		return FALSE
 
+	if (user && imp)
+		M.visible_message(SPAN_WARNING("[user] is attemping to implant [M]."))
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 		user.do_attack_animation(M)
 
 		var/target_zone = user.zone_sel.selecting
-		if(src.imp.can_implant(M, user, target_zone))
+		if (imp.can_implant(M, user, target_zone))
 			var/imp_name = imp.name
 
-			if(do_after(user, 5 SECONDS, M, DO_EQUIP) && src.imp?.implant_in_mob(M, target_zone))
+			if (do_after(user, 5 SECONDS, M, DO_EQUIP) && src.imp?.implant_in_mob(M, target_zone))
 				M.visible_message(SPAN_WARNING("[M] has been implanted by [user]."))
 				admin_attack_log(user, M, "Implanted using \the [src] ([imp_name])", "Implanted with \the [src] ([imp_name])", "used an implanter, \the [src] ([imp_name]), on")
 
 				src.imp = null
 				update_icon()
-
-	return
+		return TRUE

@@ -4,6 +4,7 @@
 	icon = 'icons/obj/auto_cpr.dmi'
 	icon_state = "pumper"
 	w_class = ITEM_SIZE_NORMAL
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
 	slot_flags = SLOT_OCLOTHING
 	var/last_pump
@@ -18,22 +19,21 @@
 	else
 		return FALSE
 
-/obj/item/auto_cpr/attack(mob/living/carbon/human/M, mob/living/user, target_zone)
-	if(istype(M) && user.a_intent == I_HELP)
-		if(M.wear_suit)
+/obj/item/auto_cpr/attack(mob/living/carbon/human/M, mob/living/user)
+	. = FALSE
+	if (istype(M) && user.a_intent == I_HELP)
+		if (M.wear_suit)
 			to_chat(user, SPAN_WARNING("Their [M.wear_suit] is in the way, remove it first!"))
-			return 1
+			return TRUE
 		user.visible_message(SPAN_NOTICE("[user] starts fitting [src] onto the [M]'s chest."))
 
-		if(!do_after(user, 2 SECONDS, M, DO_EQUIP))
-			return
+		if (!do_after(user, 2 SECONDS, M, DO_EQUIP))
+			return TRUE
 
-		if(user.unEquip(src))
-			if(!M.equip_to_slot_if_possible(src, slot_wear_suit, TRYEQUIP_REDRAW | TRYEQUIP_SILENT))
+		if (user.unEquip(src))
+			if (!M.equip_to_slot_if_possible(src, slot_wear_suit, TRYEQUIP_REDRAW | TRYEQUIP_SILENT))
 				user.put_in_active_hand(src)
-			return 1
-	else
-		return ..()
+			return TRUE
 
 /obj/item/auto_cpr/equipped(mob/user, slot)
 	..()

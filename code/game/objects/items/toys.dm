@@ -44,9 +44,6 @@
 	create_reagents(10)
 	..()
 
-/obj/item/toy/water_balloon/attack(mob/living/carbon/human/M as mob, mob/user as mob)
-	return
-
 /obj/item/toy/water_balloon/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
 	if(!proximity) return
 	if (istype(A, /obj/structure/reagent_dispensers/watertank) && get_dist(src,A) <= 1)
@@ -149,6 +146,7 @@
 		icon_r_hand = 'icons/mob/onmob/items/righthand_guns.dmi',
 		)
 	w_class = ITEM_SIZE_SMALL
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	attack_verb = list("attacked", "struck", "hit")
 	var/bullets = 5
 
@@ -213,25 +211,23 @@
 
 
 /obj/item/toy/crossbow/attack(mob/M as mob, mob/user as mob)
-	src.add_fingerprint(user)
+	. = FALSE
+	if (istype(M) && M.lying)
+		if (bullets > 0)
+			M.visible_message(
+				SPAN_DANGER("\The [user] casually lines up a shot with \the [M]'s head and pulls the trigger!"),
+				SPAN_WARNING("You hear the sound of foam against skull")
+			)
+			M.visible_message(SPAN_WARNING("\The [M] was hit in the head by the foam dart!"))
 
-// ******* Check
-
-	if (src.bullets > 0 && M.lying)
-
-		M.visible_message(
-			SPAN_DANGER("\The [user] casually lines up a shot with \the [M]'s head and pulls the trigger!"),
-			SPAN_WARNING("You hear the sound of foam against skull")
-		)
-		M.visible_message(SPAN_WARNING("\The [M] was hit in the head by the foam dart!"))
-
-		playsound(user.loc, 'sound/items/syringeproj.ogg', 50, 1)
-		new /obj/item/toy/ammo/crossbow(M.loc)
-		src.bullets--
-	else if (M.lying && src.bullets == 0)
-		M.visible_message(SPAN_DANGER("\The [user] casually lines up a shot with \the [M]'s head, pulls the trigger, then realizes they are out of ammo and drops to the floor in search of some!"))
-		user.Weaken(5)
-	return
+			playsound(user.loc, 'sound/items/syringeproj.ogg', 50, 1)
+			new /obj/item/toy/ammo/crossbow(M.loc)
+			src.bullets--
+			return TRUE
+		if (bullets == 0)
+			M.visible_message(SPAN_DANGER("\The [user] casually lines up a shot with \the [M]'s head, pulls the trigger, then realizes they are out of ammo and drops to the floor in search of some!"))
+			user.Weaken(5)
+			return TRUE
 
 /obj/item/toy/crossbow/examine(mob/user, distance)
 	. = ..()

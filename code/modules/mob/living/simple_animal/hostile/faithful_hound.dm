@@ -39,10 +39,11 @@
 			if((m == src) || (m in allowed_mobs) || m.faction == faction)
 				continue
 			var/new_aggress = 1
+			var/obj/item/weapon = get_natural_weapon()
 			var/mob/living/M = m
 			var/dist = get_dist(M, src)
 			if(dist < 2) //Attack! Attack!
-				M.attackby(get_natural_weapon(), src)
+				weapon.resolve_attackby(M, src)
 				return .
 			else if(dist == 2)
 				new_aggress = 3

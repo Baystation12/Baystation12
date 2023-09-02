@@ -7,6 +7,7 @@
 	amount_per_transfer_from_this = 5
 	volume = 30
 	possible_transfer_amounts = null
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	canremove = FALSE
 
 	/// Numeric index of the synthesizer in use, or 0 if dispensing from an external container
@@ -56,34 +57,37 @@
 					reagent_volumes[T] = min(reagent_volumes[T] + 5, volume)
 	return 1
 
-/obj/item/reagent_containers/borghypo/attack(mob/living/M, mob/user, target_zone)
-	if(!istype(M))
-		return
+/obj/item/reagent_containers/borghypo/attack(mob/living/M, mob/user)
+	. = FALSE
+	if (!istype(M))
+		return FALSE
 
-	if(mode && !reagent_volumes[reagent_ids[mode]])
+	if (mode && !reagent_volumes[reagent_ids[mode]])
 		to_chat(user, SPAN_WARNING("\The [src] is empty."))
-		return
+		return TRUE
 	var/obj/item/reagent_containers/container = null
 	if (!mode)
 		container = dispense.resolve()
 		if (!valid_container(user, container))
 			to_chat(user, SPAN_WARNING("Can't find the container to dispense from."))
-			return
+			return TRUE
 		if (!container.reagents?.total_volume)
 			to_chat(user, SPAN_WARNING("\The [container] is empty."))
+			return TRUE
 
+	var/target_zone = user.zone_sel.selecting
 	var/allow = M.can_inject(user, target_zone)
 	if (allow)
 		if (allow == INJECTION_PORT)
 			user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [M]'s suit!"))
-			if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
-				return
+			if (!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
+				return TRUE
 		to_chat(user, SPAN_NOTICE("You inject [M] with the injector."))
-		if(ishuman(M))
+		if (ishuman(M))
 			var/mob/living/carbon/human/H = M
 			H.custom_pain(SPAN_WARNING("You feel a tiny prick!"), 1, TRUE, H.get_organ(user.zone_sel.selecting))
 
-		if(M.reagents)
+		if (M.reagents)
 			if (mode)
 				var/datum/reagent/R = reagent_ids[mode]
 				var/should_admin_log = initial(R.should_admin_log)
@@ -93,6 +97,7 @@
 				if (should_admin_log)
 					admin_inject_log(user, M, src, R, transferred)
 				to_chat(user, SPAN_NOTICE("[transferred] units injected. [reagent_volumes[R]] units remaining."))
+				return TRUE
 			else
 				var/datum/reagents/R = container.reagents
 				var/should_admin_log = R.should_admin_log()
@@ -101,7 +106,7 @@
 				if (should_admin_log)
 					admin_inject_log(user, M, src, contained, transferred)
 				to_chat(user, SPAN_NOTICE("[transferred] units injected. [R.total_volume] units remaining in \the [container]."))
-	return
+				return TRUE
 
 /obj/item/reagent_containers/borghypo/attack_self(mob/user as mob)
 	ui_interact(user)
@@ -246,7 +251,7 @@
 		)
 
 /obj/item/reagent_containers/borghypo/service/attack(mob/M, mob/user)
-	return
+	return FALSE //We don't want the service borg to be able to inject alcohol into blood.
 
 /obj/item/reagent_containers/borghypo/service/afterattack(obj/target, mob/user, proximity)
 	if(!proximity)

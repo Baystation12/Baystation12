@@ -21,6 +21,7 @@
 	randpixel = 8
 	throwforce = 0
 	w_class = ITEM_SIZE_TINY
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	throw_range = 1
 	throw_speed = 1
 	layer = ABOVE_OBJ_LAYER
@@ -223,26 +224,33 @@
 	show_content(user)
 
 /obj/item/paper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(user.zone_sel.selecting == BP_EYES)
+	. = FALSE
+	if (!istype(M))
+		return FALSE
+	if (user.zone_sel.selecting == BP_EYES)
 		user.visible_message(SPAN_NOTICE("You show the paper to [M]. "), \
 			SPAN_NOTICE(" [user] holds up a paper and shows it to [M]. "))
 		examinate(M, src)
+		return TRUE
 
-	else if(user.zone_sel.selecting == BP_MOUTH) // lipstick wiping
-		if(ishuman(M))
+	if (user.zone_sel.selecting == BP_MOUTH) // lipstick wiping
+		if (ishuman(M))
 			var/mob/living/carbon/human/H = M
-			if(H == user)
+			if (H == user)
 				to_chat(user, SPAN_NOTICE("You wipe off the lipstick with [src]."))
 				H.makeup_style = null
 				H.update_body()
+				return TRUE
 			else
 				user.visible_message(SPAN_WARNING("[user] begins to wipe [H]'s lipstick off with \the [src]."), \
 								 	 SPAN_NOTICE("You begin to wipe off [H]'s lipstick."))
-				if(do_after(user, 2 SECONDS, H, (DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) & ~DO_BOTH_CAN_TURN))
-					user.visible_message(SPAN_NOTICE("[user] wipes [H]'s lipstick off with \the [src]."), \
-										 SPAN_NOTICE("You wipe off [H]'s lipstick."))
-					H.makeup_style = null
-					H.update_body()
+				if (!do_after(user, 2 SECONDS, H, (DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) & ~DO_BOTH_CAN_TURN))
+					return TRUE
+				user.visible_message(SPAN_NOTICE("[user] wipes [H]'s lipstick off with \the [src]."), \
+									 SPAN_NOTICE("You wipe off [H]'s lipstick."))
+				H.makeup_style = null
+				H.update_body()
+				return TRUE
 
 /obj/item/paper/proc/addtofield(id, text, links = 0)
 	var/locid = 0

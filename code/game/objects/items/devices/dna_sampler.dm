@@ -2,6 +2,7 @@
 	name = "dna sampler"
 	desc = "An all in one DNA sampling and sequencing device which can be used to deliver a genetic payload to a mimic cube. Requires a DNA sample from the target."
 	w_class = ITEM_SIZE_SMALL
+	item_flags = ITEM_FLAG_TRY_ATTACK
 	origin_tech = list(TECH_BIO = 5, TECH_MATERIAL = 2)
 	icon = 'icons/obj/tools/implanter.dmi'
 	icon_state = "dnainjector0"
@@ -35,18 +36,18 @@
 		src_flavor = ""
 
 /obj/item/device/dna_sampler/attack(mob/living/carbon/human/L, mob/user)
-	var/allow = L.can_inject(user, check_zone(user.zone_sel.selecting))
-	if(!allow)
-		return
-	if (loaded == TRUE)
-		user.visible_message("\The [src]'s DNA buffer is already full, please flush the existing DNA buffer first")
-		return
-	user.visible_message("\The [user] jams \the [src] into \the [L], extracting a viscous orange fluid!")
-	icon_state = "dnainjector"
-	loaded = TRUE
-	src_name = L.real_name
-	src_dna = L.dna
-	src_pronouns = L.pronouns
-	src_faction = L.faction
-	src_species = L.species.name
-	src_flavor = L.flavor_texts
+	. = FALSE
+	if (istype(L) && L.can_inject(user, check_zone(user.zone_sel.selecting)))
+		if (loaded)
+			user.visible_message("\The [src]'s DNA buffer is already full, please flush the existing DNA buffer first")
+			return TRUE
+		user.visible_message("\The [user] jams \the [src] into \the [L], extracting a viscous orange fluid!")
+		icon_state = "dnainjector"
+		loaded = TRUE
+		src_name = L.real_name
+		src_dna = L.dna
+		src_pronouns = L.pronouns
+		src_faction = L.faction
+		src_species = L.species.name
+		src_flavor = L.flavor_texts
+		return TRUE
