@@ -208,7 +208,10 @@
 
 	if (GLOB.changelog_hash && prefs.lastchangelog != GLOB.changelog_hash) //bolds the changelog button on the interface so we know there are updates.
 		to_chat(src, SPAN_INFO("You have unread updates in the changelog."))
-		winset(src, "rpane.changelog", "background-color=#eaeaea;font-style=bold")
+		// [SIERRA-EDIT] - Interface
+		// winset(src, "rpane.changelog", "background-color=#eaeaea;font-style=bold") // SIERRA-EDIT - ORIGINAL
+		winset(src, "rpane.changelog", "font-style=bold")
+		// [/SIERRA-EDIT]
 		if(config.aggressive_changelog)
 			src.changes()
 

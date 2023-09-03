@@ -431,7 +431,10 @@
 	if (GLOB.changelog_hash && prefs.lastchangelog != GLOB.changelog_hash)
 		prefs.lastchangelog = GLOB.changelog_hash
 		SScharacter_setup.queue_preferences_save(prefs)
-		winset(src, "rpane.changelog", "background-color=none;font-style=;")
+		// [SIERRA-EDIT] - Interface
+		// winset(src, "rpane.changelog", "background-color=none;font-style=;") // SIERRA-EDIT - ORIGINAL
+		winset(src, "rpane.changelog", "font-style=;")
+		// [/SIERRA-EDIT]
 
 /mob/verb/cancel_camera()
 	set name = "Cancel Camera View"
