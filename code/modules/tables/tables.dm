@@ -227,6 +227,17 @@
 	return TRUE
 
 
+/obj/structure/table/MouseDrop_T(atom/dropped, mob/user)
+	// Place held objects on table
+	if (user.IsHolding(dropped))
+		if (!user.use_sanity_check(src, dropped, SANITY_CHECK_DEFAULT | SANITY_CHECK_TOOL_UNEQUIP))
+			return TRUE
+		user.unEquip(dropped, get_turf(src))
+		return TRUE
+
+	return ..()
+
+
 /obj/structure/table/proc/reinforce_table(obj/item/stack/material/S, mob/user)
 	if(reinforced)
 		to_chat(user, SPAN_WARNING("\The [src] is already reinforced!"))
