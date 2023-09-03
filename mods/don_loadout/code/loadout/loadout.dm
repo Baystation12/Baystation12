@@ -517,7 +517,7 @@
 			var/branch_ok = FALSE
 			for(var/branch in branches)
 				var/datum/mil_branch/player_branch = GLOB.mil_branches.get_branch(branch)
-				if(player_branch.type in selected_gear.allowed_branches)
+				if(player_branch.type in G.allowed_branches)
 					branch_ok = TRUE
 					break
 
