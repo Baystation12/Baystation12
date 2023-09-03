@@ -39,7 +39,10 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = 'sound/
 		message = sanitize(message, extra = 0)
 	message_title = sanitizeSafe(message_title)
 
-	var/msg = FormMessage(message, message_title)
+	// [SIERRA-EDIT] - ERIS_ANNOUNCER
+	// var/msg = FormMessage(message, message_title) // SIERRA-EDIT - ORIGINAL
+	var/msg = FormRadioMessage(message, message_title, length(zlevels) ? pick(zlevels) : 1)
+	// [/SIERRA-EDIT]
 	for(var/mob/M in GLOB.player_list)
 		if(M.client && (get_z(M) in (zlevels | GLOB.using_map.admin_levels)) && !istype(M,/mob/new_player) && !isdeaf(M))
 			to_chat(M, msg)
