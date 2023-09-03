@@ -1,0 +1,4 @@
+author: SuhEugene
+delete-after: true
+changes:
+  - rscadd: Добавлена более логичная система анонсов - не напрямую в голову, а в радиоканал.
