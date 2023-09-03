@@ -11,4 +11,4 @@
 	cache_lifespan = 7
 	hub = "Exadv1.spacestation13"
 	icon_size = WORLD_ICON_SIZE
-	fps = 40
+	fps = 20
