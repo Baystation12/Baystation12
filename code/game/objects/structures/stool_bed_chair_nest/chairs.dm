@@ -308,6 +308,48 @@
 /obj/structure/bed/chair/office/comfy/yellow/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
 	..(newloc, newmaterial, "yellow")
 
+/obj/structure/bed/chair/rounded
+	name = "rounded chair"
+	desc = "It's a rounded chair. It looks comfy."
+	icon_state = "roundedchair_preview"
+	base_icon = "roundedchair"
+
+/obj/structure/bed/chair/rounded/hard/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, padding_material)
+
+/obj/structure/bed/chair/rounded/brown/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, MATERIAL_LEATHER_GENERIC)
+
+/obj/structure/bed/chair/rounded/red/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, MATERIAL_CARPET)
+
+/obj/structure/bed/chair/rounded/teal/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "teal")
+
+/obj/structure/bed/chair/rounded/black/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "black")
+
+/obj/structure/bed/chair/rounded/green/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "green")
+
+/obj/structure/bed/chair/rounded/purple/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "purple")
+
+/obj/structure/bed/chair/rounded/blue/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "blue")
+
+/obj/structure/bed/chair/rounded/beige/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "beige")
+
+/obj/structure/bed/chair/rounded/lime/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "lime")
+
+/obj/structure/bed/chair/rounded/yellow/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, "yellow")
+
+/obj/structure/bed/chair/rounded/light/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, newmaterial, MATERIAL_CLOTH)
+
 /obj/structure/bed/chair/shuttle
 	name = "shuttle seat"
 	desc = "A comfortable, secure seat. It has a sturdy-looking buckling system for smoother flights."
