@@ -20,6 +20,9 @@
 	var/last_move_dir_pressed
 
 
+/datum/preferences
+	var/dark_theme = FALSE
+
 /client/Click(atom/A)
 	if(!user_acted(src))
 		return
@@ -94,16 +97,24 @@
 		// so that the visual focus indicator matches reality.
 		winset(src, "mainwindow.mainwindow", "macro=default")
 		winset(src, "mapwindow.map", "focus=true")
-		winset(src, "hotkey_toggle", "is-checked=true")
-		winset(src, "mainwindow.input", "background-color = [COLOR_DARKMODE_BACKGROUND]; background-color = #ffffff")
-		winset(src, "mainwindow.input", "text-color = [COLOR_DARKMODE_TEXT]; text-color = #000000")
+		winset(src, "outputwindow.hotkeytoggle", "is-checked=true")
+		if (prefs.dark_theme)
+			winset(src, "outputwindow.input", "background-color = #ffffff; background-color = [COLOR_DARKMODE_BACKGROUND]")
+			winset(src, "outputwindow.input", "text-color = #000000; text-color = [COLOR_DARKMODE_TEXT]")
+		else
+			winset(src, "outputwindow.input", "background-color = [COLOR_DARKMODE_BACKGROUND]; background-color = #ffffff")
+			winset(src, "outputwindow.input", "text-color = [COLOR_DARKMODE_TEXT]; text-color = #000000")
 	else
 		winset(src, "mainwindow.mainwindow", "macro=macro")
-		winset(src, "hotkey_toggle", "is-checked=false")
-		winset(src, "mainwindow.input", "focus=true")
-		winset(src, "mainwindow.input", "text-color = #000000; background-color = #d3b5b5")
+		winset(src, "outputwindow.hotkeytoggle", "is-checked=false")
+		winset(src, "outputwindow.input", "focus=true")
+		winset(src, "outputwindow.input", "text-color = #000000; background-color = #d3b5b5")
 
-
+/client/proc/update_client_theme()
+	if (prefs.dark_theme)
+		force_dark_theme()
+	else
+		force_white_theme()
 
 // Я срал, Глист, на читаемость и отладку
 // Это уже протестировано и мы просто ждём пока на оффбей зальют эти кейбинды вонючие

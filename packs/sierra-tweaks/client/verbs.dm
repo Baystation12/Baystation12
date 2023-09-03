@@ -17,3 +17,8 @@
 		winset(usr, "mapwindow.statusbar", "is-visible=false")
 	else
 		winset(usr, "mapwindow.statusbar", "is-visible=true")
+
+/client/verb/onresize()
+	set hidden = TRUE
+
+	fit_viewport()

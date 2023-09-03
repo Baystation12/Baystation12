@@ -4,6 +4,9 @@
 	if(config.usewhitelist_database && config.overflow_server_url && !whitelist_check())
 		to_target(src, link(config.overflow_server_url))
 	// [/SIERRA-ADD]
+	// [SIERRA-ADD] - Statusbar
+	winset(client, "mapwindow.statusbar", "is-visible=false")
+	// [/SIERRA-ADD]
 	if (config.motd)
 		to_chat(src, "<div class=\"motd\">[config.motd]</div>", handle_whitespace=FALSE)
 	to_chat(src, "<div class='info'>Game ID: <div class='danger'>[game_id]</div></div>")

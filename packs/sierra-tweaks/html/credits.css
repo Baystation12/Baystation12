@@ -3,8 +3,15 @@ html { box-sizing: border-box; }
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
-  background-color: #222222;
+  background-color: #111;
   color: #cccccc;
+  scrollbar-base-color: #1c1c1c;
+	scrollbar-face-color: #3b3b3b;
+	scrollbar-3dlight-color: #252525;
+	scrollbar-highlight-color: #252525;
+	scrollbar-track-color: #1c1c1c;
+	scrollbar-arrow-color: #929292;
+	scrollbar-shadow-color: #3b3b3b;
 }
 
 b { color: white; }
@@ -25,7 +32,7 @@ a:hover { text-decoration: underline; }
   color: white;
   text-align: center;
   padding: 12px 0;
-  border-bottom: 1px solid #666666;
+  border-bottom: 1px solid #555;
   margin-bottom: 12px;
 }
 .title h2 {
@@ -37,7 +44,8 @@ a:hover { text-decoration: underline; }
   line-height: 1.45;
   padding: 12px 16px;
   margin: 12px 8px;
-  background-color: #333333;
+  background-color: #222;
+  border: 1px solid #333;
   border-radius: 5px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.15);
 }

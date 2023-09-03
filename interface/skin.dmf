@@ -306,11 +306,15 @@ window "mainwindow"
 		anchor1 = none
 		anchor2 = none
 		is-default = true
+		statusbar = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		is-maximized = true
 		icon = 'icons\\ss13_64.png'
 		macro = "default"
 		menu = "menu"
+		on-size = "onresize"
+		outer-size = 1874x1096
+		inner-size = 1858x1037
 	elem "asset_cache_browser"
 		type = BROWSER
 		pos = 424,208
@@ -319,21 +323,10 @@ window "mainwindow"
 		anchor2 = none
 		is-visible = false
 		saved-params = ""
-	elem "hotkey_toggle"
-		type = BUTTON
-		pos = 560,420
-		size = 80x20
-		anchor1 = 100,100
-		anchor2 = none
-		saved-params = ""
-		text = "Hotkey Toggle"
-		command = "ToggleHotkeyMode"
-		button-type = pushbox
-		is-checked = true
 	elem "mainvsplit"
 		type = CHILD
-		pos = 3,0
-		size = 634x416
+		pos = 0,0
+		size = 640x440
 		anchor1 = 0,0
 		anchor2 = 100,100
 		saved-params = "splitter"
@@ -349,41 +342,16 @@ window "mainwindow"
 		is-visible = false
 		saved-params = ""
 
-	elem "input"
-		type = INPUT
-		pos = 3,420
-		size = 517x20
-		anchor1 = 0,100
-		anchor2 = 100,100
-		background-color = #ffffff
-		is-default = true
-		border = sunken
-		saved-params = "command"
-	elem "saybutton"
-		type = BUTTON
-		pos = 520,420
-		size = 40x20
-		anchor1 = 100,100
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "Chat"
-		command = ".winset \"saybutton.is-checked=true?input.command=\"!say \\\"\" macrobutton.is-checked=false:input.command=\""
-		button-type = pushbox
-
 window "mapwindow"
 	elem "mapwindow"
 		type = MAIN
-		pos = 281,0
+		pos = 219,0
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
 		saved-params = "pos;size;is-minimized;is-maximized"
-		titlebar = false
-		statusbar = false
-		can-close = false
-		can-minimize = false
-		can-resize = false
 		is-pane = true
+		on-status = ".winset \"statusbar.text=[[*]]\" "
 	elem "map"
 		type = MAP
 		pos = 0,0
@@ -406,12 +374,23 @@ window "mapwindow"
 		is-visible = false
 		is-disabled = true
 		saved-params = ""
+	elem "statusbar"
+		type = LABEL
+		pos = 0,464
+		size = 280x16
+		anchor1 = 0,100
+		is-visible = true
+		text = ""
+		align = left
+		background-color = #171717
+		text-color = #a4bad6
+		border = line
 
 window "outputwindow"
 	elem "outputwindow"
 		type = MAIN
-		pos = 281,0
-		size = 640x480
+		pos = 219,0
+		size = 658x450
 		anchor1 = none
 		anchor2 = none
 		saved-params = "pos;size;is-minimized;is-maximized"
@@ -421,10 +400,12 @@ window "outputwindow"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 672x464
+		inner-size = 658x450
 	elem "browseroutput"
 		type = BROWSER
 		pos = 0,0
-		size = 640x480
+		size = 658x424
 		anchor1 = 0,0
 		anchor2 = 100,100
 		background-color = #ffffff
@@ -433,114 +414,79 @@ window "outputwindow"
 	elem "output"
 		type = OUTPUT
 		pos = 0,0
-		size = 640x480
+		size = 658x424
 		anchor1 = 0,0
 		anchor2 = 100,100
 		is-default = true
 		saved-params = ""
+	elem "input"
+		type = INPUT
+		pos = 0,430
+		size = 552x20
+		anchor1 = 0,100
+		anchor2 = 100,100
+		background-color = #f0f0f0
+		is-default = true
+		border = line
+		saved-params = "command"
+	elem "saybutton"
+		border = line
+		is-flat = true
+		type = BUTTON
+		pos = 551,430
+		size = 48x20
+		anchor1 = 100,100
+		anchor2 = -1,-1
+		background-color = #ffffff
+		saved-params = "is-checked"
+		text = "Chat"
+		command = ".winset \"saybutton.is-checked=true?input.command=\"!say \\\"\" macrobutton.is-checked=false:input.command=\"\"saybutton.is-checked=true?mebutton.is-checked=false\""
+		button-type = pushbox
+	elem "hotkeytoggle"
+		border = line
+		is-flat = true
+		type = BUTTON
+		pos = 598,430
+		size = 60x20
+		anchor1 = 100,100
+		anchor2 = -1,-1
+		background-color = #ffffff
+		saved-params = "is-checked"
+		text = "Hotkey"
+		command = "ToggleHotkeyMode"
+		button-type = pushbox
+		is-checked = true
 
 window "rpane"
 	elem "rpane"
 		type = MAIN
-		pos = 418,0
+		pos = 219,0
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		is-pane = true
+		outer-size = 656x538
+		inner-size = 640x499
 	elem "rpanewindow"
 		type = CHILD
 		pos = 0,0
 		size = 640x474
 		anchor1 = 0,0
 		anchor2 = 100,100
+		background-color = none
 		saved-params = "splitter"
 		right = "outputwindow"
 		is-vert = false
-	elem "linksource"
-		type = BUTTON
-		pos = 536,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "Source"
-		command = "link-source"
-	elem "linkissue"
-		type = BUTTON
-		pos = 596,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "Bug Report"
-		command = "link-issue"
-	elem "linkrules"
-		type = BUTTON
-		pos = 120,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "Rules"
-		command = "link-rules"
-		group = "rpanemode"
-	elem "changelog"
-		type = BUTTON
-		pos = 476,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "Changelog"
-		command = "Changelog"
-		group = "rpanemode"
-	elem "linklore"
-		type = BUTTON
-		pos = 208,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "Lore"
-		command = "link-lore"
-		group = "rpanemode"
-	elem "linkforum"
-		type = BUTTON
-		pos = 328,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "Forum"
-		command = "link-forum"
-		group = "rpanemode"
-	elem "linkdiscord"
-		type = BUTTON
-		pos = 388,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "Discord"
-		command = "link-discord"
-		group = "rpanemode"
-	elem "linkwiki"
-		type = BUTTON
-		pos = 268,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "Wiki"
-		command = "link-wiki"
-		group = "rpanemode"
 	elem "textb"
+		border = line
+		is-flat = true
 		type = BUTTON
-		pos = 0,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
+		pos = 8,7
+		size = 50x18
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #ffffff
 		is-visible = false
 		saved-params = "is-checked"
 		text = "Text"
@@ -549,28 +495,130 @@ window "rpane"
 		group = "rpanemode"
 		button-type = pushbox
 	elem "infob"
+		border = line
+		is-flat = true
 		type = BUTTON
-		pos = 60,0
-		size = 60x15
-		anchor1 = none
-		anchor2 = none
+		pos = 57,7
+		size = 50x18
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #ffffff
 		is-visible = false
 		saved-params = "is-checked"
 		text = "Info"
 		command = ".winset \"rpanewindow.left=infowindow\""
 		group = "rpanemode"
 		button-type = pushbox
+	elem "linkrules"
+		border = line
+		is-flat = true
+		type = BUTTON
+		pos = 126,7
+		size = 60x18
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #ffffff
+		saved-params = "is-checked"
+		text = "Rules"
+		command = "link-rules"
+	elem "linklore"
+		border = line
+		is-flat = true
+		type = BUTTON
+		pos = 205,7
+		size = 50x18
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #ffffff
+		saved-params = "is-checked"
+		text = "Lore"
+		command = "link-lore"
+	elem "linkwiki"
+		border = line
+		is-flat = true
+		type = BUTTON
+		pos = 254,7
+		size = 50x18
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #ffffff
+		saved-params = "is-checked"
+		text = "Wiki"
+		command = "link-wiki"
+	elem "linkforum"
+		border = line
+		is-flat = true
+		type = BUTTON
+		pos = 303,7
+		size = 60x18
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #ffffff
+		saved-params = "is-checked"
+		text = "Forum"
+		command = "link-forum"
+	elem "linkdiscord"
+		border = line
+		is-flat = true
+		type = BUTTON
+		pos = 362,7
+		size = 60x18
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #ffffff
+		saved-params = "is-checked"
+		text = "Discord"
+		command = "link-discord"
+	elem "changelog"
+		border = line
+		is-flat = true
+		type = BUTTON
+		pos = 441,7
+		size = 75x18
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #ffffff
+		saved-params = "is-checked"
+		text = "Changelog"
+		command = "Changelog"
+	elem "linksource"
+		border = line
+		is-flat = true
+		type = BUTTON
+		pos = 515,7
+		size = 60x18
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #ffffff
+		saved-params = "is-checked"
+		text = "Source"
+		command = "link-source"
+	elem "linkissue"
+		border = line
+		is-flat = true
+		type = BUTTON
+		pos = 574,7
+		size = 75x18
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #ffffff
+		saved-params = "is-checked"
+		text = "Bug Report"
+		command = "link-issue"
+
 
 window "infowindow"
 	elem "infowindow"
 		type = MAIN
-		pos = 281,0
+		pos = 219,0
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		title = "Info"
 		is-pane = true
+		outer-size = 656x538
+		inner-size = 640x499
 	elem "info"
 		type = INFO
 		pos = 0,0
@@ -580,5 +628,6 @@ window "infowindow"
 		is-default = true
 		saved-params = ""
 		highlight-color = #00aa00
-		on-show = ".winset\"rpane.infob.is-visible=true;rpane.infob.pos=65,0 rpane.textb.is-visible=true rpane.infob.is-checked=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=infowindow\""
-		on-hide = ".winset\"rpane.infob.is-visible=false;rpane.textb.is-visible=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=\""
+		tab-background-color = none
+		on-show = ".winset\"rpane.infob.is-visible=true;rpane.textb.is-visible=true rpane.infob.is-checked=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=infowindow\""
+		on-hide = ".winset\"rpane.infob.is-visible=false;rpane.textb.is-visible=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=;\""

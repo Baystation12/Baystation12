@@ -33,6 +33,7 @@ ID мода: SSINPUT
 - `code/game/verbs/ooc.dm`: `/client/verb/ooc()`, `/client/verb/looc()`
 - `code/modules/admin/callproc/callproc.dm`: `/client/Click()`
 - `code/modules/client/client_procs.dm`: `/client/New()`
+- `code/modules/goonchat/browserOutput.dm`: `/datum/chatOutput/Topic()`
 - `code/modules/mob/living/silicon/robot/login.dm`: `/mob/living/silicon/robot/Login()`
 - `code/modules/mob/observer/ghost/ghost.dm`: `/mob/observer/ghost/appearance_flags`
 - `code/modules/mob/login.dm`: `/mob/Login()`
