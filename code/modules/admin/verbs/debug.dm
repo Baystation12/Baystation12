@@ -158,6 +158,8 @@
 	log_and_message_admins("assumed direct control of [M].")
 	var/mob/adminmob = src.mob
 	M.ckey = src.ckey
+	M.teleop = null
+	adminmob.teleop = null
 	if(isghost(adminmob))
 		qdel(adminmob)
 
