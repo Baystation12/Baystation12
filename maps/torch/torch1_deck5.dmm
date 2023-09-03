@@ -13601,9 +13601,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/custodial)
 "Ko" = (
-/obj/structure/bed/chair/shuttle/blue{
-	dir = 4
-	},
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},
@@ -13611,6 +13608,7 @@
 	dir = 4;
 	pixel_x = -21
 	},
+/obj/machinery/recharge_station,
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "Kr" = (
