@@ -114,6 +114,10 @@
 		var/headset = pick(spawn_headset_options)
 		ears = new headset(src)
 
+	icon_state = "[icon_set]_fly"
+	icon_living = "[icon_set]_fly"
+	icon_dead = "[icon_set]_dead"
+
 	parrot_sleep_dur = parrot_sleep_max //In case someone decides to change the max without changing the duration var
 
 	verbs += /mob/living/simple_animal/hostile/retaliate/parrot/proc/steal_from_ground
@@ -133,11 +137,6 @@
 /mob/living/simple_animal/hostile/retaliate/parrot/Stat()
 	. = ..()
 	stat("Held Item", held_item)
-
-/mob/living/simple_animal/hostile/retaliate/parrot/on_update_icon()
-	icon_state = "[icon_set]_fly"
-	icon_living = "[icon_set]_fly"
-	icon_dead = "[icon_set]_dead"
 
 /*
  * Inventory
