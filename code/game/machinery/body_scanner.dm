@@ -1,11 +1,10 @@
 // Pretty much everything here is stolen from the dna scanner FYI
 /obj/machinery/bodyscanner
 	var/mob/living/carbon/human/occupant
-	var/locked
 	name = "body scanner"
 	desc = "A large full-body scanning machine that provides a complete physical assessment of a patient placed inside. Operated using an adjacent console."
 	icon = 'icons/obj/machines/medical/bodyscanner.dmi'
-	icon_state = "body_scanner_0"
+	icon_state = "body_scanner"
 	density = TRUE
 	anchored = TRUE
 	idle_power_usage = 60
@@ -73,7 +72,7 @@
 		O.dropInto(loc)
 
 /obj/machinery/bodyscanner/proc/go_out()
-	if ((!( occupant ) || locked))
+	if(!occupant)
 		return
 	drop_contents()
 	if (occupant.client)
@@ -89,6 +88,7 @@
 	. = ..()
 	if(istype(new_state))
 		updateUsrDialog()
+		go_out()
 
 /obj/machinery/bodyscanner/proc/move_target_inside(mob/target, mob/user)
 	target.forceMove(src)
@@ -108,11 +108,11 @@
 	if(panel_open)
 		AddOverlays("[icon_state]_panel")
 	if(!occupant)
-		icon_state = "body_scanner_0"
+		icon_state = "body_scanner"
 	else if(inoperable())
-		icon_state = "body_scanner_1"
+		icon_state = "body_scanner_open"
 	else
-		icon_state = "body_scanner_2"
+		icon_state = "body_scanner_working"
 
 /obj/machinery/bodyscanner/user_can_move_target_inside(mob/target, mob/user)
 	if (occupant)
