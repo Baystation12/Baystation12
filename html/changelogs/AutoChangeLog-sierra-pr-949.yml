@@ -1,0 +1,4 @@
+author: SuhEugene
+delete-after: true
+changes:
+  - admin: Добавил скачивание логов.
