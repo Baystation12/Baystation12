@@ -61,7 +61,7 @@
 
 /obj/item/clothing/accessory/badge/attack(mob/living/carbon/human/M, mob/living/user)
 	. = FALSE
-	if (isliving(user))
+	if (isliving(user) && istype(M))
 		user.visible_message(SPAN_DANGER("[user] invades [M]'s personal space, thrusting \the [src] into their face insistently."),SPAN_DANGER("You invade [M]'s personal space, thrusting \the [src] into their face insistently."))
 		if (stored_name)
 			to_chat(M, SPAN_WARNING("It reads: [stored_name], [badge_string]."))

@@ -156,7 +156,7 @@
 			update_icon()
 			to_chat(user, "[SPAN_NOTICE("You insert \the [I] into \the [src].")] ")
 
-	if(IsScrewdriver(I))
+	if (isScrewdriver(I))
 		if(cigcell) //if contains powercell
 			cigcell.update_icon()
 			cigcell.dropInto(loc)
