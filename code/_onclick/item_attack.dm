@@ -349,7 +349,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
  * resolve chain will be called.
  */
 /atom/proc/use_tool(obj/item/tool, mob/living/user, list/click_params)
-	SHOULD_CALL_PARENT(TRUE)
 	return FALSE
 
 
@@ -421,7 +420,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
  * Returns boolean to indicate whether the use call was handled or not.
  */
 /obj/item/proc/use_on(atom/target, mob/user, click_parameters)
-	SHOULD_CALL_PARENT(TRUE)
 	return FALSE
 
 
