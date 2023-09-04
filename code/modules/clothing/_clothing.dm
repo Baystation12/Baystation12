@@ -330,17 +330,16 @@ BLIND     // can't see anything
 	return 0 // return 1 to cancel attack_hand()
 
 /obj/item/clothing/gloves/attackby(obj/item/W, mob/user)
-	if(IsWirecutter(W) || istype(W, /obj/item/scalpel))
+	if (isWirecutter(W) || istype(W, /obj/item/scalpel))
 		if (clipped)
 			to_chat(user, SPAN_NOTICE("\The [src] have already been modified!"))
 			update_icon()
-			return
-
-		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+			return TRUE
+		playsound(loc, 'sound/items/Wirecutter.ogg', 100, TRUE)
 		user.visible_message(SPAN_WARNING("\The [user] modifies \the [src] with \the [W]."),SPAN_WARNING("You modify \the [src] with \the [W]."))
-
 		cut_fingertops() // apply change, so relevant xenos can wear these
-		return
+		return TRUE
+	return ..()
 
 // Applies "clipped" and removes relevant restricted species from the list,
 // making them wearable by the specified species, does nothing if already cut
