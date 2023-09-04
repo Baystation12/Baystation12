@@ -9,7 +9,7 @@
 
 /mob/new_player/deferred_login()
 	. = ..()
-	client?.screentip.set_show(get_preference_value(/datum/client_preference/show_screentip) == GLOB.PREF_SHOW)
+	client?.screentip?.set_show(get_preference_value(/datum/client_preference/show_screentip) == GLOB.PREF_SHOW)
 
 /obj/screen/screentip
 	icon = null
