@@ -1,0 +1,5 @@
+author: cuddleandtea
+delete-after: true
+changes:
+  - bugfix: admins can now re-exit their old mobs after entering other mobs and going
+      back
