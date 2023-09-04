@@ -188,7 +188,7 @@
 
 /obj/structure/gravemarker/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Hatchet - Remove marker
-	if (IsHatchet(tool))
+	if (isHatchet(tool))
 		user.visible_message(
 			SPAN_NOTICE("\The [user] starts hacking away at \the [src] with \a [tool]."),
 			SPAN_NOTICE("You start hacking away at \the [src] with \the [tool].")
