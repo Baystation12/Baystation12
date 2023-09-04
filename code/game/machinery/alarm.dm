@@ -644,7 +644,7 @@
 	if(buildstage != 2)
 		return STATUS_CLOSE
 
-	if(aidisabled && isAI(user))
+	if(aidisabled && issilicon(user))
 		to_chat(user, SPAN_WARNING("AI control for \the [src] interface has been disabled."))
 		return STATUS_CLOSE
 

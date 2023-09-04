@@ -21,8 +21,6 @@
 	var/ai_control_disabled = FALSE
 	/// Boolean. Whether or not the AI has bypassed a disabled control mechanism.
 	var/ai_control_bypassed = FALSE
-	/// Boolean. If set, the door cannot by hacked or bypassed by the AI.
-	var/hackProof = FALSE
 	/// Integer. World time when the door is no longer electrified. -1 if it is permanently electrified until someone fixes it.
 	var/electrified_until = 0
 	/// Integer. World time when main power is restored.
@@ -41,8 +39,6 @@
 	var/lights = TRUE
 	/// Boolean. Whether or not the ID scanner is enabled. Tied to the ID scan wire.
 	var/aiDisabledIdScanner = FALSE
-	/// Boolean. Whether or not the AI is currently hacking the door.
-	var/aiHacking = FALSE
 	autoclose = TRUE
 	/// Path. The assembly structure used to create this door. Used during disassembly steps.
 	var/assembly_type = /obj/structure/door_assembly
@@ -449,7 +445,7 @@ About the new airlock wires panel:
 *		one wire for door bolts. Sending a pulse through this drops door bolts (whether the door is powered or not) or raises them (if it is). Cutting this wire also drops the door bolts, and mending it does not raise them. If the wire is cut, trying to raise the door bolts will not work.
 *		two wires for backup power. Sending a pulse through either one causes a breaker to trip, but this does not disable it unless main power is down too (in which case it is disabled for 1 minute or however long it takes main power to come back, whichever is shorter). Cutting either one disables the backup door power (allowing it to be crowbarred open, but disabling bolts-raising), but may electocute the user.
 *		one wire for opening the door. Sending a pulse through this while the door has power makes it open the door if no access is required.
-*		one wire for AI control. Sending a pulse through this blocks AI control for a second or so (which is enough to see the AI control light on the panel dialog go off and back on again). Cutting this prevents the AI from controlling the door unless it has hacked the door through the power connection (which takes about a minute). If both main and backup power are cut, as well as this wire, then the AI cannot operate or hack the door at all.
+*		one wire for AI control. Sending a pulse through this blocks AI control for a second or so (which is enough to see the AI control light on the panel dialog go off and back on again). Cutting this prevents the AI from controlling the door. If both main and backup power are cut, as well as this wire, then the AI cannot operate the door at all.
 *		one wire for electrifying the door. Sending a pulse through this electrifies the door for 30 seconds. Cutting this wire electrifies the door, so that the next person to touch the door without insulated gloves gets electrocuted. (Currently it is also STAYING electrified until someone mends the wire)
 *		one wire for controling door safetys.  When active, door does not close on someone.  When cut, door will ruin someone's shit.  When pulsed, door will immedately ruin someone's shit.
 *		one wire for controlling door speed.  When active, dor closes at normal rate.  When cut, door does not close manually.  When pulsed, door attempts to close every tick.
@@ -483,9 +479,6 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/proc/canAIControl()
 	return ((!ai_control_disabled || ai_control_bypassed) && !isAllPowerLoss())
-
-/obj/machinery/door/airlock/proc/canAIHack()
-	return (ai_control_disabled && !ai_control_bypassed && !hackProof && !isAllPowerLoss())
 
 /obj/machinery/door/airlock/proc/arePowerSystemsOn()
 	if (inoperable())
@@ -802,54 +795,6 @@ About the new airlock wires panel:
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/door/airlock/proc/hack(mob/user as mob)
-	if (!aiHacking)
-		aiHacking = TRUE
-		spawn(20)
-			//TODO: Make this take a minute
-			to_chat(user, "Airlock AI control has been blocked. Beginning fault-detection.")
-			sleep(50)
-			if(src.canAIControl())
-				to_chat(user, "Alert cancelled. Airlock control has been restored without our assistance.")
-				aiHacking = FALSE
-				return
-			else if(!src.canAIHack(user))
-				to_chat(user, "We've lost our connection! Unable to hack airlock.")
-				aiHacking = FALSE
-				return
-			to_chat(user, "Fault confirmed: airlock control wire disabled or cut.")
-			sleep(20)
-			to_chat(user, "Attempting to hack into airlock. This may take some time.")
-			sleep(200)
-			if(src.canAIControl())
-				to_chat(user, "Alert cancelled. Airlock control has been restored without our assistance.")
-				aiHacking = FALSE
-				return
-			else if(!src.canAIHack(user))
-				to_chat(user, "We've lost our connection! Unable to hack airlock.")
-				aiHacking = FALSE
-				return
-			to_chat(user, "Upload access confirmed. Loading control program into airlock software.")
-			sleep(170)
-			if(src.canAIControl())
-				to_chat(user, "Alert cancelled. Airlock control has been restored without our assistance.")
-				aiHacking = FALSE
-				return
-			else if(!src.canAIHack(user))
-				to_chat(user, "We've lost our connection! Unable to hack airlock.")
-				aiHacking = FALSE
-				return
-			to_chat(user, "Transfer complete. Forcing airlock to execute program.")
-			sleep(50)
-			//disable blocked control
-			ai_control_bypassed = TRUE
-			to_chat(user, "Receiving control information from airlock.")
-			sleep(10)
-			//bring up airlock dialog
-			aiHacking = FALSE
-			if (user)
-				src.attack_ai(user)
-
 /obj/machinery/door/airlock/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if (src.isElectrified())
 		if (istype(mover, /obj/item))
@@ -871,13 +816,10 @@ About the new airlock wires panel:
 		to_chat(user, SPAN_WARNING("Unable to interface: Internal error."))
 		return STATUS_CLOSE
 	if(issilicon(user) && !src.canAIControl())
-		if(src.canAIHack(user))
-			src.hack(user)
+		if (src.isAllPowerLoss()) //don't really like how this gets checked a second time, but not sure how else to do it.
+			to_chat(user, SPAN_WARNING("Unable to interface: Connection timed out."))
 		else
-			if (src.isAllPowerLoss()) //don't really like how this gets checked a second time, but not sure how else to do it.
-				to_chat(user, SPAN_WARNING("Unable to interface: Connection timed out."))
-			else
-				to_chat(user, SPAN_WARNING("Unable to interface: Connection refused."))
+			to_chat(user, SPAN_WARNING("Unable to interface: Connection refused."))
 		return STATUS_CLOSE
 
 	return ..()
@@ -1299,6 +1241,9 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/allowed(mob/M)
 	if(locked)
 		return 0
+	if (issilicon(M))
+		if (ai_control_disabled)
+			return FALSE
 	return ..(M)
 
 /obj/machinery/door/airlock/New(newloc, obj/structure/door_assembly/assembly=null)
