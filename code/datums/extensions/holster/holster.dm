@@ -29,7 +29,7 @@
 		return 1
 	if(!holstered && storage.storage_slots != null && length(storage.contents) >= storage.storage_slots - 1)
 		if(!can_holster(I))
-			to_chat(user, SPAN_NOTICE("\The [I] won't fit in \the [atom_holder]'s holster!."))
+			to_chat(user, SPAN_NOTICE("\The [I] won't fit in \the [atom_holder]'s holster!"))
 			return 1
 	if(can_holster(I))
 		if(holstered && istype(user))
@@ -116,7 +116,7 @@
 	set category = "Object"
 
 	if(usr.incapacitated())
-		return
+		return FALSE
 
 	var/list/holsters = list()
 	for (var/obj/item/item in contents)
@@ -124,7 +124,7 @@
 		continue
 
 	if (!length(holsters))
-		return
+		return FALSE
 
 	var/holster_name
 	if (length(holsters) > 1)
@@ -137,21 +137,22 @@
 		holster_name = show_radial_menu(usr, usr, options, tooltips = TRUE, use_labels = TRUE)
 
 		if (!holster_name)
-			return
+			return FALSE
 	else
 		holster_name = holsters[1]
 	var/datum/extension/holster/H = holsters[holster_name]
 	if (!H || !usr.use_sanity_check(H.atom_holder))
-		return
+		return FALSE
 
 	if(!H.holstered)
 		var/obj/item/W = usr.get_active_hand()
-		if(!istype(W, /obj/item))
-			to_chat(usr, SPAN_WARNING("You're not holding anything to holster."))
-			return
+		if(!W)
+			return FALSE
 		H.holster(W, usr)
+		return TRUE
 	else
 		H.unholster(usr, 1)
+		return TRUE
 
 /**
  * Retrieves all holsters contained within the atom, including itself. Generally, this is any atom that has the

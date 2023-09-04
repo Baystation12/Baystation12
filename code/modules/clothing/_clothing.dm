@@ -1074,11 +1074,14 @@ BLIND     // can't see anything
 	sensor_mode = pick(list_values(SUIT_SENSOR_MODES))
 	..()
 
-/obj/item/clothing/under/AltClick(mob/user)
-	if(CanPhysicallyInteract(user))
+/obj/item/clothing/under/AltClick(mob/living/user)
+	if (!CanPhysicallyInteract(user) || !istype(user))
+		return FALSE
+	if (user.holster_verb())
+		return TRUE
+	else
 		set_sensors(user)
 		return TRUE
-	return FALSE
 
 ///////////////////////////////////////////////////////////////////////
 //Rings
