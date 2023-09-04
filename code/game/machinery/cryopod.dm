@@ -11,7 +11,7 @@
 /obj/machinery/computer/cryopod
 	name = "cryogenic oversight console"
 	desc = "An interface between crew and the cryogenic storage oversight systems."
-	icon = 'icons/obj/machines/medical/bodyscanner.dmi'
+	icon = 'icons/obj/machines/medical/cryopod.dmi'
 	icon_state = "cellconsole"
 	density = FALSE
 	interact_offline = 1
@@ -138,14 +138,14 @@
 /obj/machinery/cryopod
 	name = "cryogenic freezer"
 	desc = "A man-sized pod for entering suspended animation."
-	icon = 'icons/obj/machines/medical/bodyscanner.dmi'
-	icon_state = "body_scanner_0"
+	icon = 'icons/obj/machines/medical/cryopod.dmi'
+	icon_state = "cryopod"
 	density = TRUE
 	anchored = TRUE
 	dir = WEST
 
-	var/base_icon_state = "body_scanner_0"
-	var/occupied_icon_state = "body_scanner_1"
+	var/base_icon_state = "cryopod"
+	var/occupied_icon_state = "cryopod_closed"
 	var/on_store_message = "has entered long-term storage."
 	var/on_store_visible_message = "hums and hisses as it moves $occupant$ into storage." // $occupant$ is automatically converted to the occupant's name
 	var/on_store_name = "Cryogenic Oversight"
@@ -575,7 +575,7 @@
 /obj/structure/broken_cryo
 	name = "broken cryo sleeper"
 	desc = "Whoever was inside isn't going to wake up now. It looks like you could pry it open with a crowbar."
-	icon = 'icons/obj/machines/medical/bodyscanner.dmi'
+	icon = 'icons/obj/machines/medical/cryopod.dmi'
 	icon_state = "broken_cryo"
 	anchored = TRUE
 	density = TRUE
