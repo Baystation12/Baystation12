@@ -27,6 +27,8 @@
 
 
 /mob/new_player/proc/new_player_panel(force)
+	if (!client)
+		return
 	if (!force && !SScharacter_setup.initialized)
 		return
 	// [SIERRA-ADD] - LOBBYSCREEN
