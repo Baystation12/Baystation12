@@ -40,7 +40,7 @@
 
 	message_admins("[key_name_admin(src)] accessed file: [path]")
 	log_admin("[key_name_admin(src)] accessed file: [path]")
-	src << ftp(file(path))
+	to_target(src, ftp(file(path)))
 	to_chat(src, "Attempting to send file, this may take a fair few minutes if the file is very large.")
 	return
 
@@ -79,7 +79,7 @@
 	This can be changed by modifying FTPDELAY's value above.
 
 	PLEASE USE RESPONSIBLY, Some log files canr each sizes of 4MB!	*/
-var/fileaccess_timer = 0
+var/global/fileaccess_timer = 0
 /client/proc/file_spam_check()
 	var/time_to_wait = fileaccess_timer - world.time
 	if(time_to_wait > 0)

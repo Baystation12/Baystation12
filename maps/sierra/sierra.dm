@@ -192,7 +192,6 @@
 	#include "../../packs/factions/iccgn/_pack.dm"
 	#include "../../packs/factions/scga/_pack.dm"
 	#include "../../packs/infinity/_pack.dm"
-	#include "../../packs/sierra-tweaks/_pack.dm"
 	#include "../../packs/deepmaint/_pack.dm"
 
 
