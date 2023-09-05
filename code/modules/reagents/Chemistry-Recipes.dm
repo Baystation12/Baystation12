@@ -2423,47 +2423,54 @@
 	result_amount = 3
 	mix_message = "The mint swirls into the drink."
 
+/datum/chemical_reaction/chai
+	name = "Chai"
+	result = /datum/reagent/drink/tea/icetea/chai
+	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/drink/tea = 1, /datum/reagent/drink/milk = 1)
+	result_amount = 3
+	mix_message = "The black tea mixes into the sugar and milk."
+
 /datum/chemical_reaction/icetea_chai
-	name = "Iced Chai Tea"
+	name = "Iced Chai"
 	result = /datum/reagent/drink/tea/icetea/chai
 	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea/chai = 2)
 	result_amount = 3
 	mix_message = "The ice clinks together in the tea."
 
 /datum/chemical_reaction/sweettea_chai
-	name = "Iced Chai Tea"
+	name = "Sweet Chai"
 	result = /datum/reagent/drink/tea/icetea/chai/sweet
 	required_reagents = list(/datum/reagent/drink/tea/icetea/chai = 2, /datum/reagent/sugar = 1)
 	result_amount = 3
 	mix_message = "The ice clinks together in the sweet tea."
 
 /datum/chemical_reaction/latte_chai
-	name = "Chai Latte"
+	name = "Masala Chai"
 	result = /datum/reagent/drink/tea/chai/latte
-	required_reagents = list(/datum/reagent/drink/tea/chai = 2, /datum/reagent/drink/milk = 1)
+	required_reagents = list(/datum/reagent/drink/tea/chaimix = 1, /datum/reagent/drink/tea = 1, /datum/reagent/drink/milk = 1)
 	result_amount = 3
 	mix_message = "The milk swirls into the drink."
 
 /datum/chemical_reaction/soy_latte_chai
-	name = "Chai Soy Latte"
+	name = "Soy Masala Chai"
 	result = /datum/reagent/drink/tea/chai/soy_latte
-	required_reagents = list(/datum/reagent/drink/tea/chai = 2, /datum/reagent/drink/milk/soymilk = 1)
+	required_reagents = list(/datum/reagent/drink/tea/chaimix = 1, /datum/reagent/drink/tea = 1, /datum/reagent/drink/milk/soymilk = 1)
 	result_amount = 3
 	mix_message = "The milk swirls into the drink."
 
 /datum/chemical_reaction/ice_latte_chai
-	name = "Iced Chai Latte"
+	name = "Iced Chai"
 	result = /datum/reagent/drink/tea/icetea/chai/latte
 	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea/chai/latte = 2)
 	result_amount = 3
-	mix_message = "The ice clinks together in the chilled chai latte."
+	mix_message = "The ice clinks together in the chilled masala chai."
 
 /datum/chemical_reaction/ice_soy_latte_chai
 	name = "Iced Chai Soy Latte"
 	result = /datum/reagent/drink/tea/icetea/chai/soy_latte
 	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea/chai/soy_latte = 2)
 	result_amount = 3
-	mix_message = "The ice clinks together in the chilled chai soy latte."
+	mix_message = "The ice clinks together in the chilled soy masala chai."
 
 /datum/chemical_reaction/icetea_red
 	name = "Iced Rooibos tea"

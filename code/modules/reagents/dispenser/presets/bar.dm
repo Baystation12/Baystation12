@@ -71,7 +71,7 @@
 
 
 /obj/item/reagent_containers/chem_disp_cartridge/chai_tea
-	spawn_reagent = /datum/reagent/drink/tea/chai
+	spawn_reagent = /datum/reagent/drink/tea/chaimix
 
 
 /obj/item/reagent_containers/chem_disp_cartridge/red_tea

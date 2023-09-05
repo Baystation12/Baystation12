@@ -44,8 +44,8 @@
 
 
 /singleton/hierarchy/supply_pack/dispenser_cartridges/chai_tea
-	name = "Reagent refill - chai tea"
-	containername = "chai tea reagent cartridge crate"
+	name = "Reagent refill - chai mix"
+	containername = "chai mix reagent cartridge crate"
 	contains = list(
 		/obj/item/reagent_containers/chem_disp_cartridge/chai_tea = 2
 	)

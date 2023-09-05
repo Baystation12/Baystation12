@@ -1216,26 +1216,34 @@
 	glass_name = "Maghrebi mint tea"
 	glass_desc = "Iced green tea prepared with mint and sugar. Refreshing!"
 
+/datum/reagent/drink/tea/chaimix
+	name = "Masala Spice Syrup"
+	description = "A sweet spiced syrup made with ginger and cardomom."
+	taste_description = "strong and bold spices"
+	color = "#693800"
+
+	glass_name = "masala spice syrup"
+	glass_desc = "A sweet spiced syrup made with ginger and cardomom."
+
 /datum/reagent/drink/tea/chai
-	name = "Chai Tea"
-	description = "A spiced, dark tea. Goes great with milk."
-	taste_description = "spiced black tea"
-	color = "#151000"
+	name = "Chai"
+	description = "A sweet black tea brewed with milk."
+	taste_description = "sweet and milky black tea"
+	color = "#c09c73"
 
 	glass_name = "chai tea"
-	glass_desc = "A spiced, dark tea. Goes great with milk."
-
+	glass_desc = "A sweet black tea brewed with milk."
 /datum/reagent/drink/tea/icetea/chai
-	name = "Iced Chai Tea"
+	name = "Iced Chai"
 	description = "It's the chai tea you know and love, but now it's cold."
 	taste_description = "cold spiced black tea"
-	color = "#151000"
+	color = "#c09c73"
 
 	glass_name = "iced chai tea"
 	glass_desc = "It's the chai tea you know and love, but now it's cold."
 
 /datum/reagent/drink/tea/icetea/chai/sweet
-	name = "Sweet Chai Tea"
+	name = "Sweet Chai"
 	description = "It's the chai tea you know and love, but now it's cold. And sweet."
 	taste_description = "sweet spiced black tea"
 
@@ -1243,20 +1251,19 @@
 	glass_desc = "It's the chai tea you know and love, but now it's cold. And sweet."
 
 /datum/reagent/drink/tea/chai/latte
-	name = "Chai Latte"
+	name = "Masala Chai"
 	description = "A warm, inviting cup of spiced, dark tea mixed with steamed milk."
 	taste_description = "creamy spiced tea"
-	color = "#c8a988"
+	color = "#d19351"
 	protein_amount = 0.5
 
-	glass_name = "chai latte"
+	glass_name = "masala chai"
 	glass_desc = "A warm, inviting cup of spiced, dark tea mixed with steamed milk."
-
 /datum/reagent/drink/tea/chai/soy_latte
-	name = "Chai Soy Latte"
+	name = "Soy Masala Chai"
 	description = "A warm, inviting cup of spiced, dark tea mixed with steamed soy milk."
 	taste_description = "creamy spiced tea"
-	color = "#c8a988"
+	color = "#d19351"
 
 	glass_name = "chai soy latte"
 	glass_desc = "A warm, inviting cup of spiced, dark tea mixed with steamed soy milk."
@@ -1265,7 +1272,7 @@
 	name = "Iced Chai Latte"
 	description = "A warm, inviting cup of spiced, dark tea mixed with steamed milk. This one's cold."
 	taste_description = "cold creamy spiced tea"
-	color = "#c8a988"
+	color = "#d19351"
 	protein_amount = 0.5
 
 	glass_name = "iced chai latte"

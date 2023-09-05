@@ -347,7 +347,7 @@
 
 /obj/item/reagent_containers/food/drinks/tea/chai
 	name = "cup of chai tea"
-	desc = "A tall plastic cup of hot chai tea."
+	desc = "A tall plastic cup of hot chai."
 
 /obj/item/reagent_containers/food/drinks/tea/chai/Initialize()
 	. = ..()
