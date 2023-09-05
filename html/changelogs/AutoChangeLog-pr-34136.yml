@@ -1,4 +1,0 @@
-author: 'emmanuelbassil '
-delete-after: true
-changes:
-  - bugfix: Parrot icon properly updates on death again
