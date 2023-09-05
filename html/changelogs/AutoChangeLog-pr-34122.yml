@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Table frames can now be plated or dismantled regardless of user intent.
