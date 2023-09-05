@@ -12,6 +12,21 @@
 	canes["white guide cane"] = /obj/item/cane/white
 	gear_tweaks += new/datum/gear_tweak/path(canes)
 
+/datum/gear/prescription
+	display_name = "prescription bottle"
+	description = "A prescription bottle containing medication used to treat various Illnesses"
+	cost = 2
+	path = /obj/item/storage/pill_bottle/prescription
+
+/datum/gear/prescription/New()
+	..()
+	var/list/prescriptions = list()
+	for(var/prescription_type in typesof(/obj/item/storage/pill_bottle/prescription))
+		var/obj/item/storage/pill_bottle/prescription/prescription = prescription_type
+		if(!initial(prescription.filled))
+			prescriptions[initial(prescription.name)] = prescription_type
+	gear_tweaks += new/datum/gear_tweak/path(prescriptions)
+	gear_tweaks += new/datum/gear_tweak/contents(prescription_pills())
 /datum/gear/union_card
 	display_name = "union membership"
 	path = /obj/item/card/union

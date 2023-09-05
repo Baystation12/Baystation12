@@ -1,3 +1,24 @@
+var/global/list/prescriptions_ = list(
+									/obj/item/reagent_containers/pill/methylphenidate,
+									/obj/item/reagent_containers/pill/citalopram,
+									/obj/item/reagent_containers/pill/paroxetine,
+									/obj/item/reagent_containers/pill/prescription
+)
+
+/proc/prescription_pills()
+	RETURN_TYPE(/list)
+	if(!(prescriptions_[prescriptions_[1]]))
+		prescriptions_ = init_prescription_list(prescriptions_)
+	return prescriptions_
+
+/proc/init_prescription_list(list/prescriptions)
+	RETURN_TYPE(/list)
+	. = list()
+	for(var/prescription in prescriptions)
+		var/obj/O = prescription
+		.[initial(O.name)] = prescription
+	return sortAssoc(.)
+
 ////////////////////////////////////////////////////////////////////////////////
 /// Pills.
 ////////////////////////////////////////////////////////////////////////////////
@@ -350,6 +371,19 @@
 	reagents.add_reagent(/datum/reagent/sugar, 5)
 	color = reagents.get_color()
 
+// loadout pills
+
+/obj/item/reagent_containers/pill/prescription
+	name = "prescription"
+	desc = "A prescription used in treating various illnesses."
+	icon_state = "pill1"
+
+/obj/item/reagent_containers/pill/prescription/New()
+	..()
+	reagents.add_reagent(/datum/reagent/sugar, 10)
+	color = reagents.get_color()
+
+// detergents
 /obj/item/reagent_containers/pill/detergent
 	name = "detergent pod"
 	desc = "Put in water to get space cleaner. Do not eat. Really."

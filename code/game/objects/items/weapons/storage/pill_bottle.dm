@@ -15,6 +15,22 @@
 	var/wrapper_color
 	var/label
 
+/obj/item/storage/pill_bottle/prescription
+	name = "prescription bottle"
+	desc = "Contains a prescription used in treating various illnesses."
+	wrapper_color = COLOR_GRAY
+	var/filled = FALSE
+
+/obj/item/storage/pill_bottle/prescription/New()
+	..()
+	if(filled)
+		var/list/prescriptions = prescription_pills()
+		var/prescription = prescriptions[pick(prescriptions)]
+		startswith = list(prescription = 8)
+
+/obj/item/storage/pill_bottle/prescription/filled
+	filled = TRUE
+
 
 /obj/item/storage/pill_bottle/afterattack(mob/living/target, mob/living/user, proximity_flag)
 	if(!proximity_flag || !istype(target) || target != user)
@@ -172,7 +188,6 @@
 	desc = "High-strength antidepressant. Only for use in severe depression. 10u dose per pill. <span class='warning'>WARNING: side-effects may include hallucinations.</span>"
 	startswith = list(/obj/item/reagent_containers/pill/paroxetine = 14)
 	wrapper_color = COLOR_GRAY
-
 
 /obj/item/storage/pill_bottle/antidexafen
 	name = "pill bottle (cold medicine)"
