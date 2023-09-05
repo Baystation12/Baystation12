@@ -225,7 +225,7 @@
 	if(occupant)
 		var/image/pickle = image(occupant.icon, occupant.icon_state)
 		pickle.CopyOverlays(occupant)
-		pickle.pixel_z = 18
+		pickle.pixel_z = 11
 		AddOverlays(pickle)
 
 	I = image(icon, "lid[on]")
