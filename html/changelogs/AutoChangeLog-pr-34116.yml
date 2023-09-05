@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Robots can no longer interact with doors or alarms that have the AI wire
-      cut.
