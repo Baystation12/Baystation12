@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - rscdel: Click+dragging a stack of metal on a table no longer reinforces the table.
+  - rscadd: Click+dragging held items onto a table now puts that item on the table
+      regardless of intent.
