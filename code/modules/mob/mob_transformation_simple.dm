@@ -43,7 +43,8 @@
 
 	if(mind)
 		mind.transfer_to(M)
-	else
+
+	if(key)
 		M.key = key
 
 	if(subspecies && istype(M,/mob/living/carbon/human))
