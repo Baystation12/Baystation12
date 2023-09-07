@@ -46,10 +46,10 @@ var/global/can_call_ert
 	log_admin("[key_name(usr)] used Dispatch Response Team.")
 	trigger_armed_response_team(1, reason)
 
-/client/verb/JoinResponseTeam()
+/mob/observer/ghost/verb/JoinResponseTeam()
 
 	set name = "Join Response Team"
-	set category = "IC"
+	set category = "Ghost"
 
 	if(!MayRespawn(1))
 		to_chat(usr, SPAN_WARNING("You cannot join the response team at this time."))
