@@ -1364,7 +1364,7 @@
 	// call dibs on IC messages (prays, emergency comms, faxes)
 	else if(href_list["take_ic"])
 
-		var/mob/M = locate(href_list["take_question"])
+		var/mob/M = locate(href_list["take_ic"])
 		if(ismob(M))
 			var/take_msg = SPAN_NOTICE("<b>[key_name(usr.client)]</b> is attending to <b>[key_name(M)]'s</b> message.")
 			for(var/client/X as anything in GLOB.admins)
@@ -1594,6 +1594,7 @@
 		P.admindatum = src
 		P.origin = replyorigin
 
+		P.department = fax.department
 		P.destinations = get_fax_machines_by_department(fax.department)
 		P.sender = sender
 
