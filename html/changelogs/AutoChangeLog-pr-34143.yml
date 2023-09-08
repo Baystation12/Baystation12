@@ -1,0 +1,4 @@
+author: SuhEugene
+delete-after: true
+changes:
+  - bugfix: Player panel rudimentary transformation no longer sends you to nullspace.
