@@ -392,6 +392,11 @@ var/global/list/tank_gauge_cache = list()
 
 #define TANK_IDEAL_PRESSURE 1015
 
+/obj/item/tank/proc/percent()
+	var/gauge_pressure = 0
+	if(air_contents)
+		gauge_pressure = air_contents.return_pressure()
+	return 100.0*gauge_pressure/TANK_IDEAL_PRESSURE
 /obj/item/tank/on_update_icon(override)
 
 	var/list/overlays_to_add
