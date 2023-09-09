@@ -1,0 +1,5 @@
+author: Reishi42
+delete-after: true
+changes:
+  - bugfix: The shard of glass in your hands was not melted into a sheet of glass
+      if you pressed it with welding tool in your hands.
