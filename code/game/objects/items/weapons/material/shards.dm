@@ -51,7 +51,7 @@
 	if(isWelder(W) && material.shard_can_repair)
 		var/obj/item/weldingtool/WT = W
 		if(WT.remove_fuel(0, user))
-			material.place_sheet(loc)
+			material.place_sheet(get_turf(src))
 			qdel(src)
 			return
 	return ..()
