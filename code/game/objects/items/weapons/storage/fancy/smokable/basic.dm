@@ -1,6 +1,6 @@
 /obj/item/storage/fancy/smokable/case
 	name = "cigarette case"
-	desc = "A fancy little case for holding cigarettes in it."
+	desc = "A fancy little case for holding cigarettes. It has a spring-loaded click-open mechanism."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cigscase"
 	item_state = "syringe_kit"
@@ -9,9 +9,6 @@
 	sealed = FALSE
 	storage_slots = 6
 	key_type = list(/obj/item/clothing/mask/smokable/cigarette, /obj/item/material/coin)
-	startswith = list(
-		/obj/item/clothing/mask/smokable/cigarette = 6
-	)
 
 /obj/item/storage/fancy/smokable/case/on_update_icon()
 	ClearOverlays()
@@ -147,7 +144,7 @@
 
 /obj/item/storage/fancy/smokable/cigar
 	name = "cigar case"
-	desc = "A case for holding your cigars when you are not smoking them."
+	desc = "A case for holding your cigars, in the short interstice before you smoke them."
 	icon_state = "cigarcase"
 	item_state = "cigpacket"
 	max_storage_space = null

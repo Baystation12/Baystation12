@@ -104,7 +104,7 @@
 	if(!opened && src.open_sound)
 		playsound(src.loc, src.open_sound, 50, 0, -5)
 		open_sound_played = TRUE
-		to_chat(user, "You open \the [src]")
+		to_chat(user, "You open \the [src].")
 		queue_icon_update()
 	if (src.use_sound && !open_sound_played)
 		playsound(src.loc, src.use_sound, 50, 0, -5)
