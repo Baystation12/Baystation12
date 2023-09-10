@@ -384,7 +384,7 @@
 /turf/simulated/floor/wood/yew,
 /area/map_template/deepmaint)
 "Rs" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/deepmaint)
 "Ru" = (

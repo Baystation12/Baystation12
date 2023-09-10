@@ -28,12 +28,6 @@ var/global/const/access_bearcat_captain = "ACCESS_BEARCAT_CAPTAIN" //999
 /obj/structure/closet/secure_closet/engineering_welding/bearcat
 	req_access = list(access_bearcat)
 
-/obj/structure/closet/secure_closet/freezer/fridge/bearcat
-	req_access = list(access_bearcat)
-
-/obj/structure/closet/secure_closet/freezer/meat/bearcat
-	req_access = list(access_bearcat)
-
 /obj/machinery/vending/engineering/bearcat
 	req_access = list(access_bearcat)
 

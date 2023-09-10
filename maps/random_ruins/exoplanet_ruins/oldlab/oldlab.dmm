@@ -1693,7 +1693,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab/station/hall)
 "Cz" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	level = 2
 	},
@@ -1834,7 +1834,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab/station/xenobio)
 "EE" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/oldlab/station/breakroom)
 "EH" = (

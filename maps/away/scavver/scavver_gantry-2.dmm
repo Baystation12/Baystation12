@@ -2934,7 +2934,7 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "wI" = (
-/obj/structure/closet/secure_closet/freezer/fridge/scavver,
+/obj/structure/closet/fridge,
 /obj/item/material/kitchen/utensil/spork,
 /obj/item/material/kitchen/utensil/spork,
 /obj/item/reagent_containers/food/condiment/enzyme,

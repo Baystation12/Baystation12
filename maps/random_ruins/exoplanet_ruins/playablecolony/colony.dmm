@@ -3392,7 +3392,7 @@
 	dir = 1;
 	level = 2
 	},
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /obj/item/storage/box/snack/tastybread,
 /obj/item/storage/box/snack/tastybread,
 /obj/item/storage/box/snack/noraisin,
@@ -3469,7 +3469,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony)
 "gz" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/colony/messhall)
 "gA" = (

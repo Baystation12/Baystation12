@@ -2887,7 +2887,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "il" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
 	level = 2
@@ -2903,7 +2903,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "im" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
@@ -2912,7 +2912,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "in" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /obj/item/reagent_containers/food/condiment/flour,
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
@@ -3035,7 +3035,7 @@
 /obj/structure/window/basic{
 	dir = 8
 	},
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /obj/item/reagent_containers/food/snacks/meat,
 /obj/item/reagent_containers/food/snacks/meat,
 /obj/item/reagent_containers/food/snacks/meat,

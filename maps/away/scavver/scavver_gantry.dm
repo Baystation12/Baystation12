@@ -193,13 +193,3 @@
 	suit= /obj/item/clothing/suit/space/void/engineering/salvage
 	helmet = /obj/item/clothing/head/helmet/space/void/engineering/salvage/pilot
 	mask = /obj/item/clothing/mask/breath
-
-/obj/structure/closet/secure_closet/freezer/fridge/scavver
-	req_access = list()
-
-/obj/structure/closet/secure_closet/freezer/fridge/scavver/WillContain()
-	return list(
-		/obj/item/reagent_containers/food/drinks/milk = 6,
-		/obj/item/reagent_containers/food/drinks/soymilk = 4,
-		/obj/item/storage/fancy/egg_box/full = 4
-	)
