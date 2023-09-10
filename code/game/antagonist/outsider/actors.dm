@@ -35,8 +35,8 @@ GLOBAL_DATUM_INIT(actor, /datum/antagonist/actor, new)
 
 	return 1
 
-/client/verb/join_as_actor()
-	set category = "IC"
+/mob/observer/ghost/verb/join_as_actor()
+	set category = "Ghost"
 	set name = "Join as Actor"
 	set desc = "Join as an Actor to entertain the crew through television!"
 
