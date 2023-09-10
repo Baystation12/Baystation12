@@ -92,26 +92,3 @@
 	containertype = /obj/item/storage/backpack/dufflebag
 	containername = "insect protein dufflebag"
 	cost = 20
-
-
-/obj/structure/closet/secure_closet/freezer/meat/bugmeat/WillContain()
-	return list(
-		/obj/item/storage/fancy/bugmeat = 3
-	)
-
-
-/obj/structure/closet/secure_closet/freezer/fridge/bugmeat/WillContain()
-	return list(
-		/obj/item/reagent_containers/food/drinks/milk = 2,
-		/obj/item/reagent_containers/food/drinks/soymilk = 2,
-		/obj/item/storage/fancy/egg_box/full = 1
-	)
-
-
-/obj/structure/closet/secure_closet/freezer/kitchen/bugmeat/WillContain()
-	return list(
-		/obj/item/reagent_containers/food/condiment/salt = 1,
-		/obj/item/reagent_containers/food/condiment/flour = 3,
-		/obj/item/reagent_containers/food/condiment/sugar = 1,
-		/obj/item/reagent_containers/glass/bottle/dye/polychromic = 4
-	)

@@ -3200,7 +3200,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "ib" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "ic" = (

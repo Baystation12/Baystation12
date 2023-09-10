@@ -308,7 +308,7 @@
 	},
 /area/map_template/rescue_base/base)
 "aO" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /obj/effect/floor_decal/corner/blue/diagonal,
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -316,7 +316,7 @@
 /area/map_template/rescue_base/base)
 "aP" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -648,7 +648,7 @@
 "bz" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/item/storage/box/donkpocket_premium,
-/obj/structure/closet/secure_closet/freezer/kitchen,
+/obj/structure/closet/kitchen,
 /obj/item/reagent_containers/food/condiment/enzyme,
 /turf/unsimulated/floor{
 	icon_state = "dark"

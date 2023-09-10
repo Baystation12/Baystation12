@@ -249,7 +249,7 @@
 /turf/simulated/floor/tiled/kafel_full,
 /area/abandoned_hotel/kitchen)
 "cm" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /turf/simulated/floor/tiled/freezer,
 /area/abandoned_hotel/kitchen)
 "cp" = (

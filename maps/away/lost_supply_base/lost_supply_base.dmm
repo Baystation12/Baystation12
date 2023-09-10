@@ -1010,12 +1010,12 @@
 /turf/simulated/floor/tiled,
 /area/lost_supply_base/common)
 "cz" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /obj/machinery/cooker/oven,
 /turf/simulated/floor/tiled,
 /area/lost_supply_base/common)
 "cA" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -1024,8 +1024,8 @@
 	},
 /area/lost_supply_base/common)
 "cB" = (
-/obj/structure/closet/secure_closet/freezer/meat,
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
+/obj/structure/closet/fridge/meat,
 /turf/simulated/floor/tiled,
 /area/lost_supply_base/common)
 "cC" = (

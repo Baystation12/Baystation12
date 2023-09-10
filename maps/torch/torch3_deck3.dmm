@@ -2325,7 +2325,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "fy" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /obj/item/reagent_containers/food/condiment/barbecue,
 /obj/structure/window/basic{
 	dir = 1
@@ -2904,7 +2904,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/vacant/mess)
 "gJ" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /obj/random/single/cola,
 /obj/random/single/cola,
 /obj/random/single/cola,
@@ -3131,7 +3131,7 @@
 /area/crew_quarters/gym)
 "hm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /obj/item/reagent_containers/food/condiment/enzyme,
 /obj/structure/window/basic{
 	dir = 1
@@ -7040,7 +7040,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /obj/structure/window/basic{
 	dir = 1
 	},
@@ -16836,9 +16836,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/observation)
 "PI" = (
-/obj/structure/closet/secure_closet/freezer/kitchen{
-	req_access = newlist()
-	},
+/obj/structure/closet/kitchen,
 /obj/item/reagent_containers/food/snacks/mint,
 /obj/item/stack/material/plastic/ten,
 /turf/simulated/floor/tiled/freezer,

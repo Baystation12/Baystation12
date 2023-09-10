@@ -21,7 +21,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "ag" = (
-/obj/structure/closet/secure_closet/freezer/kitchen,
+/obj/structure/closet/kitchen,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
@@ -48,7 +48,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "ak" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},

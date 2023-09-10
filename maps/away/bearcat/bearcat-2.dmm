@@ -1807,7 +1807,7 @@
 /turf/simulated/floor/tiled,
 /area/ship/scrap/crew/kitchen)
 "dG" = (
-/obj/structure/closet/secure_closet/freezer/fridge/bearcat,
+/obj/structure/closet/fridge,
 /obj/machinery/light/small{
 	dir = 4;
 	icon_state = "bulb1"
@@ -2488,7 +2488,7 @@
 /turf/simulated/floor/tiled,
 /area/ship/scrap/crew/kitchen)
 "eF" = (
-/obj/structure/closet/secure_closet/freezer/meat/bearcat,
+/obj/structure/closet/fridge/meat,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
