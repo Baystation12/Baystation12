@@ -51,7 +51,7 @@
 //misc tobacco nonsense
 /obj/item/storage/cigpaper
 	name = "\improper Gen. Eric cigarette paper"
-	desc = "A ubiquitous brand of cigarette paper, allegedly endorsed by 24th century war hero General Eric Osmundsun for rolling your own cigarettes. Osmundsun died in a freak kayak accident. As it ate him alive during his last campaign. It was pretty freaky."
+	desc = "A ubiquitous brand of cigarette rolling-paper endorsed by Commonwealth Civil War General Eric Osmundsun, of the Terran Commonwealth. Osmundsun, known as 'The Aresian Butcher' for his valorant service, died in a freak white-water kayak accident in 2231."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cigpaperbook"
 	item_state = "cigpacket"
@@ -69,14 +69,14 @@
 
 /obj/item/storage/cigpaper/fancy
 	name = "\improper Trident cigarette paper"
-	desc = "A fancy brand of Trident cigarette paper, for rolling your own cigarettes. Like a person who appreciates the finer things in life."
+	desc = "A book of Trident-brand cigarette paper, for rolling to impress. Made to cater to individuals who appreciates the finer things in life."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "fancycigpaperbook"
 	startswith = list(/obj/item/paper/cig/fancy = 10)
 
 /obj/item/storage/cigpaper/filters
 	name = "box of cigarette filters"
-	desc = "A box of generic cigarette filters for those who rolls their own but prefers others to inhale the fumes. Not endorsed by Late General Osmundsun."
+	desc = "A box of generic cigarette filters, for those who roll their own and prefer to reduce the tar concentration in their lungs. Not endorsed by the late General Osmundsun."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "filterbin"
 	startswith = list(/obj/item/paper/cig/filter = 10)
@@ -101,7 +101,7 @@
 
 /obj/item/storage/chewables/rollable/bad
 	name = "bag of Men at Arms tobacco"
-	desc = "A bag of coarse gritty tobacco marketed towards leather-necks."
+	desc = "A bag of coarse, gritty tobacco, marketed towards leather-necks."
 	startswith = list(/obj/item/reagent_containers/food/snacks/grown/dried_tobacco/bad = 8)
 	icon_state = "rollcoarse"
 
@@ -113,13 +113,13 @@
 
 /obj/item/storage/chewables/rollable/fine
 	name = "bag of Golden Sol tobacco"
-	desc = "A exclusive brand of overpriced tobacco, allegedly grown at a lagrange point station in Sol system."
+	desc = "A exclusive brand of overpriced tobacco, allegedly grown at a hidden lagrange point station somewhere in Sol."
 	startswith = list(/obj/item/reagent_containers/food/snacks/grown/dried_tobacco/fine = 8)
 	icon_state = "rollfine"
 
 /obj/item/storage/chewables/rollable/rollingkit
 	name = "bag of Crewman's First tobacco"
-	desc = "Generic middling quality tobacco for the recently enlisted and cost-conscious smokers. This bag comes with rolling papers and filters!"
+	desc = "Generic, middling quality dried tobacco for the recently enlisted and cost-conscious smokers. This bag comes with rolling papers and filters to kick-start your new habit."
 	startswith = list(
 	/obj/item/reagent_containers/food/snacks/grown/dried_tobacco = 8,
 	/obj/item/storage/cigpaper = 1,
@@ -130,14 +130,14 @@
 //chewing tobacco
 /obj/item/storage/chewables/tobacco
 	name = "tin of Lenny's brand chewing tobacco"
-	desc = "A generic brand of chewing tobacco, for when you can't even be assed to light up."
+	desc = "A dark-brown tin of Lenny's chewing tobacco, favored by the more elder end of Hellshen algae technicians."
 	icon_state = "chew_levi"
 	item_state = "Dpacket"
 	startswith = list(/obj/item/clothing/mask/chewable/tobacco/lenni = 6)
 
 /obj/item/storage/chewables/tobacco2
 	name = "tin of Red Lady chewing tobacco"
-	desc = "A finer grade of chewing tobacco."
+	desc = "A platinum-colored tin filled with high-grade chewing tobacco. The slender, red-haired, red-dressed woman on the front is more recognizable than some religious institutions."
 	icon_state = "chew_redman"
 	item_state = "redlady"
 	startswith = list(/obj/item/clothing/mask/chewable/tobacco/redlady = 6)

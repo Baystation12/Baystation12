@@ -58,7 +58,7 @@
 
 /obj/item/clothing/mask/chewable/tobacco
 	name = "wad"
-	desc = "A chewy wad of tobacco. Cut in long strands and treated with syrups so it doesn't taste like a ash-tray when you stuff it into your face."
+	desc = "A chewy wad of tobacco. Cut in long strands and treated with syrups so it doesn't taste like an ashtray when you stuff it into your mouth."
 	throw_speed = 0.5
 	icon_state = "chew"
 	type_butt = /obj/item/trash/cigbutt/spitwad
@@ -89,12 +89,12 @@
 
 /obj/item/clothing/mask/chewable/tobacco/lenni
 	name = "chewing tobacco"
-	desc = "A chewy wad of tobacco. Cut in long strands and treated with syrups so it tastes less like a ash-tray when you stuff it into your face."
+	desc = "A chewy wad of tobacco. Cut in long strands and treated with syrups so it tastes less like an ashtray when you stuff it into your mouth."
 	filling = list(/datum/reagent/tobacco = 2)
 
 /obj/item/clothing/mask/chewable/tobacco/redlady
 	name = "chewing tobacco"
-	desc = "A chewy wad of fine tobacco. Cut in long strands and treated with syrups so it doesn't taste like a ash-tray when you stuff it into your face."
+	desc = "A chewy wad of fine tobacco. Cut in long strands and treated with syrups so it doesn't taste like an ashtray when you stuff it into your mouth."
 	filling = list(/datum/reagent/tobacco/fine = 2)
 
 /obj/item/clothing/mask/chewable/tobacco/nico
