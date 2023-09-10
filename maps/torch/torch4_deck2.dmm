@@ -661,18 +661,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
-"bp" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 1;
-	icon_state = "warning"
-	},
-/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 9
-	},
-/turf/simulated/floor/reinforced{
-	map_airless = 1
-	},
-/area/engineering/engine_room)
 "bq" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/catwalk,
@@ -6171,7 +6159,6 @@
 	icon_state = "tube1"
 	},
 /obj/effect/floor_decal/industrial/warning,
-/obj/machinery/atmospherics/pipe/cap/visible/fuel,
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/engine_room)
 "ol" = (
@@ -11214,9 +11201,6 @@
 /area/maintenance/seconddeck/aftport)
 "Ck" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 10
-	},
 /turf/simulated/floor/reinforced{
 	map_airless = 1
 	},
@@ -11444,9 +11428,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/cap/visible/fuel{
-	dir = 1
-	},
+/obj,
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/engine_room)
 "CN" = (
@@ -14252,15 +14234,6 @@
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/engine_room)
-"Le" = (
-/obj/machinery/door/blast/regular{
-	id_tag = "SupermatterPort";
-	name = "Reactor Blast Door"
-	},
-/obj/effect/wallframe_spawn/reinforced_phoron,
-/obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/turf/simulated/floor/reinforced,
-/area/engineering/engine_room)
 "Lf" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -16076,9 +16049,6 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
-	dir = 1
-	},
 /turf/simulated/floor/reinforced{
 	map_airless = 1
 	},
@@ -16471,7 +16441,6 @@
 /area/vacant/prototype/control)
 "Sk" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction,
 /obj/machinery/camera/network/engineering{
 	c_tag = "Engineering - Engine Core";
 	dir = 8
@@ -16784,7 +16753,6 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/heat_exchanging,
 /turf/simulated/floor/reinforced{
 	map_airless = 1
 	},
@@ -17055,7 +17023,6 @@
 	},
 /obj/machinery/power/supermatter,
 /obj/effect/engine_setup/core,
-/obj/machinery/atmospherics/pipe/simple/heat_exchanging,
 /turf/simulated/floor/greengrid{
 	map_airless = 1
 	},
@@ -17266,7 +17233,6 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/engine_room)
 "Vo" = (
-/obj/machinery/atmospherics/pipe/simple/heat_exchanging,
 /turf/simulated/floor/greengrid{
 	map_airless = 1
 	},
@@ -18425,9 +18391,6 @@
 	use_power = 1
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
-/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 6
-	},
 /turf/simulated/floor/reinforced{
 	map_airless = 1
 	},
@@ -18494,9 +18457,6 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
-	},
-/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 5
 	},
 /turf/simulated/floor/reinforced{
 	map_airless = 1
@@ -44793,7 +44753,7 @@ qc
 Zh
 To
 Rd
-Le
+qc
 CM
 jL
 uI
@@ -45193,10 +45153,10 @@ jO
 jO
 lZ
 ok
-Le
+qc
 Sk
 Vo
-bp
+Zo
 qc
 tf
 tY
