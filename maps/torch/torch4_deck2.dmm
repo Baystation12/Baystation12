@@ -14852,10 +14852,10 @@
 	pixel_x = 25;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
-/obj/machinery/power/smes/buildable/preset/torch/engine_main{
+/obj/structure/cable,
+/obj/machinery/power/smes/buildable/preset/torch/engine_empty{
 	RCon_tag = "R-UST - Main"
 	},
-/obj/structure/cable,
 /turf/simulated/floor/tiled/monotile,
 /area/vacant/prototype/control)
 "Nm" = (
