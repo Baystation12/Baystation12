@@ -1,0 +1,4 @@
+author: SingingSpock
+delete-after: true
+changes:
+  - maptweak: The Rust output SMES no longer has charge in it to start
