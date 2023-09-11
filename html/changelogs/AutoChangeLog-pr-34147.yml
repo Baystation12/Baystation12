@@ -1,5 +1,0 @@
-author: Reishi42
-delete-after: true
-changes:
-  - bugfix: It was strange that "Join Response Team" or "Join as Actor" is on the
-      IC tab of living human.
