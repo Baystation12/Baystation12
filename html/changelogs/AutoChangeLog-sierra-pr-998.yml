@@ -1,0 +1,6 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - tweak: Remove probability for the "You momentarily forget ..!" interaction when
+      brain damaged.
+  - tweak: Increase threshold to 80 brain damage for "You look at x cluelessly" interaction.
