@@ -1,0 +1,8 @@
+author: emmanuelbassil
+delete-after: true
+changes:
+  - tweak: Can now iron any incapacitated mob wherever they may be, all you need is
+      an enabled ironing iron!
+  - bugfix: Fixed ironing boards deleting themselves when buckling a mob to them using
+      a grab
+  - bugfix: Fixed ironing boards never allowing you to place an iron on them
