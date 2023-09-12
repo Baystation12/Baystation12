@@ -1,5 +1,0 @@
-author: Sbotkin
-delete-after: true
-changes:
-  - tweak: Carefully stepping (creep intent) on spilled liquids prevents from smearing
-      it.
