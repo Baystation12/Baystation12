@@ -67,6 +67,12 @@
 		/obj/item/storage/cigpaper/filters
 	)
 
+/obj/item/storage/cigpaper/on_update_icon()
+	if (!length(contents))
+		icon_state = "[icon_state]_empty"
+	else
+		icon_state = initial(icon_state)
+
 /obj/item/storage/cigpaper/fancy
 	name = "\improper Trident cigarette paper"
 	desc = "A book of Trident-brand cigarette paper, for rolling to impress. Made to cater to individuals who appreciates the finer things in life."
@@ -80,6 +86,9 @@
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "filterbin"
 	startswith = list(/obj/item/paper/cig/filter = 10)
+
+/obj/item/storage/cigpaper/filters/on_update_icon()
+	return
 
 /obj/item/storage/chewables
 	name = "box of chewing wads master"

@@ -132,25 +132,28 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 		popup.close()
 
 /obj/item/rpd/afterattack(atom/A, mob/user, proximity)
-	if(!proximity) return
-	if(istype(A, /obj/item/pipe))
+	if (!proximity || istype(A, /obj/item/storage))
+		return
+	if (istype(A, /obj/item/pipe))
 		recycle(A,user)
 	else
-		if(user.skill_fail_prob(SKILL_ATMOS, 80, SKILL_TRAINED))
+		if (user.skill_fail_prob(SKILL_ATMOS, 80, SKILL_TRAINED))
 			var/C = pick(GLOB.rpd_pipe_selection)
 			P = pick(GLOB.rpd_pipe_selection[C])
-			user.visible_message(SPAN_WARNING("[user] cluelessly fumbles with \the [src]."))
+			user.visible_message(SPAN_WARNING("\The [user] cluelessly fumbles with \the [src]."))
 		var/turf/T = get_turf(A)
-		if(!T.Adjacent(src.loc)) return		//checks so it can't pipe through window and such
+		if (!T.Adjacent(loc))
+			return
 
 		playsound(get_turf(user), 'sound/machines/click.ogg', 50, 1)
-		if(T.is_wall())	//pipe through walls!
-			if(!do_after(user, 3 SECONDS, T, DO_PUBLIC_UNIQUE))
+		if (T.is_wall())
+			if (!do_after(user, 3 SECONDS, T, DO_PUBLIC_UNIQUE))
 				return
-			playsound(get_turf(user), 'sound/items/Deconstruct.ogg', 50, 1)
+			playsound (get_turf(user), 'sound/items/Deconstruct.ogg', 50, 1)
 
 		P.Build(P, T, pipe_colors[pipe_color])
-		if(prob(20)) src.spark_system.start()
+		if (prob(20))
+			spark_system.start()
 
 /obj/item/rpd/examine(mob/user, distance)
 	. = ..()
