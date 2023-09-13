@@ -65,6 +65,7 @@
 	force_multiplier = 0.2
 	attack_cooldown_modifier = -1
 	default_material = MATERIAL_PLASTEEL
+	canremove = 0
 
 	/// SMALL prevents dismembering limbs - only hands & feet
 	w_class = ITEM_SIZE_SMALL
