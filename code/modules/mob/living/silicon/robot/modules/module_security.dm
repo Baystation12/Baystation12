@@ -20,7 +20,6 @@
 		SKILL_BUREAUCRACY = SKILL_TRAINED
 	)
 
-
 /obj/item/robot_module/security/general
 	name = "security robot module"
 	display_name = "Security"
@@ -74,7 +73,8 @@
 		/obj/item/melee/baton/robot/electrified_arm,
 		/obj/item/gun/projectile/automatic/l6_saw
 	)
-
+	use_map_synth_access = FALSE
+	use_all_station_access = TRUE
 
 /obj/item/robot_module/security/combat/Initialize()
 	. = ..()

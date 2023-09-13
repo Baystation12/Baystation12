@@ -48,7 +48,6 @@
 		SKILL_ELECTRICAL   = SKILL_EXPERIENCED
 	)
 
-
 /obj/item/robot_module/medical/finalize_emag()
 	. = ..()
 

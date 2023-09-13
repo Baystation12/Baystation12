@@ -467,7 +467,7 @@ var/global/const/NO_EMAG_ACT = -50
 	detail_color = COLOR_AMBER
 
 /obj/item/card/id/synthetic/New()
-	access = get_all_station_access() + access_synth
+	access = GLOB.using_map.synth_access.Copy()
 	..()
 
 /obj/item/card/id/centcom
