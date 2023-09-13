@@ -241,7 +241,6 @@
 	if(!istype(A,/mob/living))	return
 
 	var/mob/living/L = A
-	if(!L.ckey)	return
 
 	if(!L.lastarea)
 		L.lastarea = get_area(L.loc)
