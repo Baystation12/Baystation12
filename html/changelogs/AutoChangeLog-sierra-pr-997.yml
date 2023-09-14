@@ -1,0 +1,4 @@
+author: Sbotkin
+delete-after: true
+changes:
+  - tweak: Removes locks from the fridges and the kitchen cabinet.
