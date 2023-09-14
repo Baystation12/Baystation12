@@ -451,7 +451,6 @@ var/global/bomb_set
 	deployable = 1
 	extended = 1
 
-	var/list/flash_tiles = list()
 	var/list/inserters = list()
 	var/last_turf_state
 
@@ -463,14 +462,17 @@ var/global/bomb_set
 	maxTime = 900
 
 /obj/machinery/nuclearbomb/station/Initialize()
-	. = ..()
+	..()
 	verbs -= /obj/machinery/nuclearbomb/verb/toggle_deployable
-	for(var/turf/simulated/floor/T in get_area(src))
-		if(istype(T.flooring, /singleton/flooring/reinforced/circuit/red))
-			flash_tiles += T
-	update_icon()
 	for(var/obj/machinery/self_destruct/ch in get_area(src))
 		inserters += ch
+	return INITIALIZE_HINT_LATELOAD
+
+
+/obj/machinery/nuclearbomb/station/LateInitialize(mapload, ...)
+	// Relies on turfs to have their `flooring` var set, which is done during init.
+	queue_icon_update()
+
 
 /obj/machinery/nuclearbomb/station/attackby(obj/item/O as obj, mob/user as mob)
 	if(isWrench(O))
@@ -498,10 +500,6 @@ var/global/bomb_set
 		return
 	..()
 
-/obj/machinery/nuclearbomb/station/Destroy()
-	flash_tiles.Cut()
-	return ..()
-
 /obj/machinery/nuclearbomb/station/Process()
 	..()
 	if(timeleft > 0 && GAME_STATE < RUNLEVEL_POSTGAME)
@@ -526,27 +524,29 @@ var/global/bomb_set
 
 /obj/machinery/nuclearbomb/station/on_update_icon()
 	var/target_icon_state
+	var/turf_color = COLOR_BLACK
 	if(lighthack)
 		target_icon_state = "rcircuit_off"
 		icon_state = "idle"
 	else if(timing == -1)
 		target_icon_state = "rcircuitanim"
 		icon_state = "exploding"
+		turf_color = COLOR_RED
 	else if(timing)
 		target_icon_state = "rcircuitanim"
 		icon_state = "urgent"
+		turf_color = COLOR_RED
 	else if(!safety)
 		target_icon_state = "rcircuit"
 		icon_state = "greenlight"
+		turf_color = COLOR_RED
 	else
 		target_icon_state = "rcircuit_off"
 		icon_state = "idle"
 
 	if(!last_turf_state || target_icon_state != last_turf_state)
-		for(var/thing in flash_tiles)
-			var/turf/simulated/floor/T = thing
-			if(!istype(T.flooring, /singleton/flooring/reinforced/circuit/red))
-				flash_tiles -= T
-				continue
-			T.icon_state = target_icon_state
+		for (var/turf/simulated/floor/floor in get_area(src))
+			if (istype(floor.flooring, /singleton/flooring/reinforced/circuit/selfdestruct))
+				floor.icon_state = target_icon_state
+				floor.set_light(l_color = turf_color)
 		last_turf_state = target_icon_state

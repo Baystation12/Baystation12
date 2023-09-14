@@ -307,8 +307,11 @@
 
 /singleton/flooring/reinforced/circuit/red
 	icon_base = "rcircuit"
+
+/singleton/flooring/reinforced/circuit/selfdestruct
+	icon_base = "rcircuit_off"
 	flags = TURF_ACID_IMMUNE
-	can_paint = 0
+	can_paint = FALSE
 
 /singleton/flooring/reinforced/cult
 	name = "engraved floor"
