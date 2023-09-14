@@ -158,19 +158,26 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 	else
 		log_unit_test("[ascii_red]**** \[[failed_unit_tests]\\[total_unit_tests]\] Unit Tests Failed [skipped_message]****[ascii_reset]")
 
-/datum/admins/proc/run_unit_test(datum/unit_test/unit_test_type in get_test_datums())
+/datum/admins/proc/run_unit_test()
 	set name = "Run Unit Test"
 	set desc = "Runs the selected unit test - Remember to enable Debug Log Messages"
 	set category = "Debug"
 
-	if(!unit_test_type)
-		return
-
 	if(!check_rights(R_DEBUG))
 		return
 
-	log_and_message_admins("has started the unit test '[initial(unit_test_type.name)]'")
-	var/datum/unit_test/test = new unit_test_type
+	var/list/options = list()
+	var/list/test_datums = get_test_datums()
+	for (var/datum/unit_test/unit_test_type as anything in test_datums)
+		options["[initial(unit_test_type.name)]"] = unit_test_type
+	options = sortAssoc(options)
+	var/datum/unit_test/selected_unit_test_type = input(usr, "Runs the selected unit test - Remember to enable Debug Log Messages", "Run Unit Test", null) as null|anything in options
+	if (!selected_unit_test_type || !options["[selected_unit_test_type]"])
+		return
+	selected_unit_test_type = options["[selected_unit_test_type]"]
+
+	log_and_message_admins("has started the unit test '[initial(selected_unit_test_type.name)]'")
+	var/datum/unit_test/test = new selected_unit_test_type
 	var/end_unit_tests = world.time + MAX_UNIT_TEST_RUN_TIME
 	do_unit_test(test, end_unit_tests, FALSE)
 	if(test.async)
