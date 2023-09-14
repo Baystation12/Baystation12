@@ -1,0 +1,4 @@
+author: Mucker
+delete-after: true
+changes:
+  - bugfix: Fixed the Morpheus ariborne, blitz, and prime head icons being invisible.
