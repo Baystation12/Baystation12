@@ -18,6 +18,8 @@
 	process_effect(G)
 
 /datum/grab/nab/kill/process_effect(obj/item/grab/G)
+	if (G.attacking)
+		return
 	var/mob/living/carbon/human/assailant = G.assailant
 	var/mob/living/carbon/human/affecting = G.affecting
 
