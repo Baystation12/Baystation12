@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Grabs no longer drop themselves when you switch hands.
