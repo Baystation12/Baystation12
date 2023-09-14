@@ -97,7 +97,7 @@
 		"Computer Frame" = mutable_appearance('icons/screen/radial.dmi', "computer_dir"),
 		"Deconstruction" = mutable_appearance('icons/screen/radial.dmi', "delete"),
 	)
-	var/choice = show_radial_menu(user, src, options, require_near = TRUE, radius = 42, tooltips = TRUE, check_locs = list(src))
+	var/choice = show_radial_menu(user, user, options, require_near = TRUE, radius = 42, tooltips = TRUE, check_locs = list(src))
 
 	if (!choice || !user.use_sanity_check(src))
 		return
