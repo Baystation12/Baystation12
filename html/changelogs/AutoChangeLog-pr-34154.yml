@@ -1,4 +1,0 @@
-author: SuhEugene
-delete-after: true
-changes:
-  - bugfix: Fixes exosuit space movement. They're no longer able to walk in space.
