@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - tweak: The 'Spawn Chemical Dispenser Cartridge' verb now takes an input for the
+      reagent, instead of a giant list.
