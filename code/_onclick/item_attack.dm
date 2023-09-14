@@ -298,7 +298,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
 				SPAN_WARNING("You felt something bounce off you harmlessly.")
 			)
 			return TRUE
-<<<<<<< ours
 
 		var/hit_zone = resolve_item_attack(weapon, user, user.zone_sel? user.zone_sel.selecting : ran_zone())
 		if (!hit_zone)
@@ -324,12 +323,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
 				"Was attacked with \a [weapon] (DAMTYE: [uppertext(weapon.damtype)])",
 				"used \a [weapon] (DAMTYE: [uppertext(weapon.damtype)]) to attack"
 			)
-=======
-
-		var/hit_zone = resolve_item_attack(weapon, user, user.zone_sel? user.zone_sel.selecting : ran_zone())
-		if (!hit_zone)
-			return TRUE
->>>>>>> theirs
 
 		var/datum/attack_result/result = hit_zone
 		if (istype(result))
@@ -458,11 +451,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
  * Returns boolean to indicate whether or not damage was dealt.
  */
 /obj/item/proc/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
-<<<<<<< ours
-=======
-	if (hitsound)
-		playsound(loc, hitsound, 75, TRUE)
->>>>>>> theirs
 	var/power = force
 	if (MUTATION_HULK in user.mutations && damtype == DAMAGE_BRUTE) //Repeat this check here because it is only used under use_weapon to check if it's even possible to damage the mob. Value not carried over here.
 		power *= 2
