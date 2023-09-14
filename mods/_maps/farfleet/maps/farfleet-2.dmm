@@ -457,7 +457,7 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/farfleet/maintenance/anomaly)
 "er" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /turf/simulated/floor/tiled/freezer,
 /area/ship/farfleet/crew/freezer)
 "et" = (
@@ -4066,7 +4066,7 @@
 /turf/simulated/wall/r_wall,
 /area/ship/farfleet/crew/brig/css)
 "NW" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -5314,7 +5314,7 @@
 /turf/simulated/floor/plating,
 /area/ship/farfleet/command/snz_hangar)
 "Zz" = (
-/obj/structure/closet/secure_closet/freezer/kitchen{
+/obj/structure/closet/kitchen{
 	req_access = list()
 	},
 /obj/machinery/light/small{

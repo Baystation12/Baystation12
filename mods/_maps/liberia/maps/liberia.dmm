@@ -4595,7 +4595,7 @@
 	dir = 4;
 	pixel_x = -21
 	},
-/obj/structure/closet/secure_closet/freezer/kitchen{
+/obj/structure/closet/kitchen{
 	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/freezer,
@@ -4605,7 +4605,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/liberia/bar)
 "hS" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/item/reagent_containers/food/condiment/enzyme,
 /turf/simulated/floor/tiled/freezer,

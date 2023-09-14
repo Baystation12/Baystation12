@@ -4129,13 +4129,13 @@
 /turf/unsimulated/floor/techfloor,
 /area/centcom/holding)
 "ayc" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
 /area/tdome/tdomeobserve)
 "ayd" = (
-/obj/structure/closet/secure_closet/freezer/kitchen{
+/obj/structure/closet/kitchen{
 	req_access = null
 	},
 /turf/unsimulated/floor{
@@ -8570,7 +8570,7 @@
 	},
 /area/centcom/living)
 "dqW" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/effect/floor_decal/corner/white/diagonal{
 	dir = 4
@@ -16250,7 +16250,7 @@
 	},
 /area/centcom/creed)
 "tvT" = (
-/obj/structure/closet/secure_closet/freezer/meat,
+/obj/structure/closet/fridge/meat,
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 1
 	},
@@ -17084,7 +17084,7 @@
 /turf/simulated/floor/tiled,
 /area/shuttle/transport1/centcom)
 "vlM" = (
-/obj/structure/closet/secure_closet/freezer/kitchen,
+/obj/structure/closet/kitchen,
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/effect/floor_decal/corner/white/diagonal{
 	dir = 4
@@ -17377,7 +17377,7 @@
 	},
 /area/centcom/living)
 "vNh" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 1
 	},
@@ -18335,7 +18335,7 @@
 /turf/unsimulated/floor/techfloor,
 /area/centcom/holding)
 "ylw" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/structure/closet/fridge,
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/effect/floor_decal/corner/white/diagonal{
 	dir = 4
