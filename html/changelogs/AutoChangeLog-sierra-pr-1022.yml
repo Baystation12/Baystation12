@@ -1,0 +1,7 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Circuitry in the self-destruct room now starts the round with the correct
+      unlit state.
+  - bugfix: Circuitry in the self-destruct room now properly update their lighting
+      color.
