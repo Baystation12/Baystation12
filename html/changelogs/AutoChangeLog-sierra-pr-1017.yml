@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Nabber (GAS) kill-grabs no longer repeatedly cancel themselves.
