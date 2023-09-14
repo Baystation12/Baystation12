@@ -110,7 +110,7 @@
 		drive.set_light(1, 5, 15, 10, COLOR_CYAN)
 		for (var/turf/simulated/floor/floor in range(turf_conversion_range, drive))
 			if (istype(floor.flooring, /singleton/flooring/bluespace))
-				floor.set_flooring(GET_SINGLETON(initial(floor.flooring)))
+				floor.ChangeTurf(/turf/simulated/floor/plating)
 	for (var/obj/structure/stairs/stair in stairs)
 		stair.bluespace_affected = FALSE
 	for (var/obj/structure/ladder/ladder in ladders)
