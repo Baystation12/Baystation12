@@ -839,7 +839,7 @@
 
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		if(H.species.can_shred(H) || MUTATION_FERAL in H.mutations)
+		if(H.species.can_shred(H) || (MUTATION_FERAL in H.mutations))
 			attack_generic(H, rand(10,20), "slashed")
 			playsound(loc, 'sound/weapons/bite.ogg', 50, 1)
 			if (prob(20))
