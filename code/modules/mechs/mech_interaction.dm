@@ -555,6 +555,7 @@
 	return
 
 /mob/living/exosuit/attack_generic(mob/user, damage, attack_message = "smashes into")
+	..()
 	if(damage)
 		playsound(loc, body.damage_sound, 40, 1)
 
