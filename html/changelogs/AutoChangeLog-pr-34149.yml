@@ -1,0 +1,6 @@
+author: Mucker
+delete-after: true
+changes:
+  - balance: Robots no longer have all access, and can only access their relevant
+      department doors. By default, all robots have access to the teleporter and maintenance
+      tunnels, as well as robotics.
