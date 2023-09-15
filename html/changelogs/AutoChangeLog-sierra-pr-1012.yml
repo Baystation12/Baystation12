@@ -1,6 +1,0 @@
-author: Merlin1230
-delete-after: true
-changes:
-  - bugfix: Fixes items that had internal machines that needed to be powered so they
-      could actually get powered from a powered area, which includes the press camera
-      drone

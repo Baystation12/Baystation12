@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: run-unit-tests now displays the test names, and is sorted alphabetically.

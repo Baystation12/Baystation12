@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Mobs no longer keep access to the changeling hivemind when their changeling
-      status is removed.
