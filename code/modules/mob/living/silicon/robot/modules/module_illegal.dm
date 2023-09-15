@@ -15,6 +15,10 @@
 		/obj/item/tank/jetpack/carbondioxide
 	)
 	var/id
+	access = list(
+		access_syndicate
+	)
+	use_map_synth_access = FALSE
 
 /obj/item/robot_module/syndicate/Initialize()
 	for(var/singleton/hierarchy/skill/skill in GLOB.skills)

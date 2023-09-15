@@ -50,6 +50,7 @@
 		SKILL_BOTANY              = SKILL_EXPERIENCED,
 		SKILL_ELECTRICAL          = SKILL_EXPERIENCED
 	)
+
 /obj/item/robot_module/research/finalize_equipment()
 	. = ..()
 	var/obj/item/stack/nanopaste/N = locate() in equipment
