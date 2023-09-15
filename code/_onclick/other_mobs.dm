@@ -32,6 +32,8 @@
 				SPAN_DANGER("\The [user] smashes through \the [src]!"),
 				SPAN_DANGER("You smash through \the [src]!")
 			)
+			if (MUTATION_FERAL in user.mutations)
+				qdel(src)
 		else
 			user.visible_message(
 				SPAN_DANGER("\The [user] [attack_verb] \the [src]!"),
