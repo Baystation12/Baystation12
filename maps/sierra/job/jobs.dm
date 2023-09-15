@@ -51,6 +51,13 @@
 		ACCESS_REGION_SUPPLY = list(access_qm, access_change_ids),
 	)
 
+	// It will autoinit in New()
+	synth_access = list(access_synth)
+
+/datum/map/sierra/New()
+	. = ..()
+	synth_access += get_all_station_access()
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ GAS JOBS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // GRADE C
