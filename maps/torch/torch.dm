@@ -122,6 +122,7 @@
 
 	#include "outfits/scgec.dm"
 
+	#include "robot/_robot_access.dm"
 	#include "robot/module_flying_surveyor.dm"
 
 	#include "structures/signs.dm"

@@ -50,6 +50,18 @@
 		/obj/item/melee/baton/robot/electrified_arm,
 		/obj/item/gun/energy/gun
 	)
+	access = list(
+		access_emergency_storage,
+		access_eva,
+		access_expedition_shuttle,
+		access_explorer,
+		access_guppy,
+		access_hangar,
+		access_petrov,
+		access_research,
+		access_radio_exp,
+		access_radio_sci
+	)
 
 /obj/item/robot_module/flying/surveyor/finalize_synths()
 	. = ..()

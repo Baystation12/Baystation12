@@ -1589,7 +1589,7 @@
 
 /area/assembly/robotics/laboratory
 	name = "\improper Robotics Laboratory"
-	req_access = list(list(access_medical,access_robotics))
+	req_access = list(list(access_medical,access_robotics, access_synth))
 
 /area/assembly/robotics/office
 	name = "\improper Robotics Office"
