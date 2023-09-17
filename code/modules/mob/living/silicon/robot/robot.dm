@@ -839,8 +839,11 @@
 
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		if(H.species.can_shred(H))
-			attack_generic(H, rand(30,50), "slashed")
+		if(H.species.can_shred(H) || (MUTATION_FERAL in H.mutations))
+			attack_generic(H, rand(10,20), "slashed")
+			playsound(loc, 'sound/weapons/bite.ogg', 50, 1)
+			if (prob(20))
+				playsound(loc, 'sound/effects/sparks1.ogg', 50, 1)
 			return
 
 	if(opened && !wiresexposed && (!istype(user, /mob/living/silicon)))

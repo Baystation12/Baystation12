@@ -170,7 +170,26 @@
 			do_animate("deny")
 	return
 
+/obj/machinery/door/airlock/attack_generic(mob/user)
+	if (MUTATION_FERAL in user.mutations)
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2)
+		playsound(loc, damage_hitsound, 50, 1)
+		attack_animation(user)
+
+		if((MACHINE_IS_BROKEN(src)||!arePowerSystemsOn(src)) && density)
+			visible_message(SPAN_DANGER("\The [user] manages to pry \the [src] open!"))
+			open(1)
+		else
+			visible_message(SPAN_DANGER("\The [user] smashes into \the [src]!"))
+			damage_health(10)
+		return
+	..()
+
 /obj/machinery/door/attack_hand(mob/user)
+	if (MUTATION_FERAL in user.mutations)
+		attack_generic(user, 15)
+		return
+
 	..()
 	if (allowed(user) && operable())
 		if (density)

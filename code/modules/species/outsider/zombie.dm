@@ -176,24 +176,61 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 	addtimer(new Callback(src, .proc/handle_action, H), rand(10, 20))
 
+/datum/species/zombie/proc/is_valid_target(mob/living/T)
+	if (!istype(T, /mob/living/carbon/human)) //Ignore Diona and unconscious non-humans
+		if (istype(T, /mob/living/carbon/alien/diona))
+			return FALSE
+		if (T.stat != CONSCIOUS)
+			return FALSE
+
+	var/mob/living/carbon/human/H = T
+	if (H.is_species(SPECIES_ZOMBIE) || H.is_species(SPECIES_DIONA))
+		return FALSE
+
+	if (H.isSynthetic() && H.stat != CONSCIOUS)
+		return FALSE
+
+	if (istype(T, /mob/living/exosuit))
+		var/mob/living/exosuit/X = T
+		if (!LAZYLEN(X.pilots))
+			return FALSE //Don't attack empty mechs
+
+	return TRUE
+
+/datum/species/zombie/proc/is_consumable(mob/living/T)
+	if (!istype(T, /mob/living/carbon/human))
+		return FALSE
+
+	if (T.isSynthetic())
+		return FALSE
+
+	return is_valid_target(T)
+
+/datum/species/zombie/proc/is_being_consumed(mob/living/T, mob/living/carbon/human/H)
+	//Will exclude consumption candidates if there's another zombie on top of them
+	if (!is_consumable(T))
+		return FALSE
+	for (var/mob/living/carbon/human/M in T.loc.contents)
+		if (M != H && M.stat == CONSCIOUS && M.is_species(SPECIES_ZOMBIE))
+			return TRUE
+	return FALSE
+
 /datum/species/zombie/proc/handle_action(mob/living/carbon/human/H)
 	var/dist = 128
-	for(var/mob/living/M in hearers(H, 15))
-		if ((ishuman(M) || istype(M, /mob/living/exosuit)) && !M.is_species(SPECIES_ZOMBIE) && !M.is_species(SPECIES_DIONA)) //Don't attack fellow zombies, or diona
-			if (istype(M, /mob/living/exosuit))
-				var/mob/living/exosuit/MC = M
-				if (!LAZYLEN(MC.pilots))
-					continue //Don't attack empty mechs
-			if (M.stat == DEAD && target)
+	for (var/mob/living/M in hearers(H, 15))
+		if (is_valid_target(M)) //Don't attack fellow zombies, or diona
+			if (target && M.stat != CONSCIOUS)
 				continue //Only eat corpses when no living (and able) targets are around
+			if (is_being_consumed(M, H))
+				continue //Don't queue up to eat
 			var/D = get_dist(M, H)
 			if (D <= dist * 0.5) //Must be significantly closer to change targets
-				target = M //For closest target
+				target = M //Switch to closest target
 				dist = D
 
 	H.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2)
 	if (target)
-		if (target.is_species(SPECIES_ZOMBIE))
+		if (!is_valid_target(target) || is_being_consumed(target, H))
 			target = null
 			return
 
@@ -203,24 +240,23 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 				var/obj/obstacle = locate(type) in dir
 				if (obstacle)
 					H.face_atom(obstacle)
-					obstacle.attack_generic(H, 10, "smashes")
+					obstacle.attack_hand(H)
 					break
 
 			walk_to(H, target.loc, 1, H.move_intent.move_delay * 1.25)
 
 		else
-			if (!target.lying) //Subdue meals
-				H.face_atom(target)
+			if ((is_consumable(target) && target.lying)) //Eat the victim
+				walk_to(H, target.loc, 0, H.move_intent.move_delay * 2.5) //Move over them
+				if (H.Adjacent(target)) //Check we're still next to them
+					H.consume()
 
+			else //Otherwise subdue them
+				H.face_atom(target)
 				if (!H.zone_sel)
 					H.zone_sel = new /obj/screen/zone_sel(null)
 				H.zone_sel.selecting = BP_CHEST
 				target.attack_hand(H)
-
-			else //Eat said meals
-				walk_to(H, target.loc, 0, H.move_intent.move_delay * 2.5) //Move over them
-				if (H.Adjacent(target)) //Check we're still next to them
-					H.consume()
 
 		for(var/mob/living/M in hearers(H, 15))
 			if (target == M) //If our target is still nearby
@@ -258,7 +294,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	. = ..()
 	if (!.)
 		return FALSE
-	if (!target || target.is_species(SPECIES_ZOMBIE))
+	if (istype(target, /mob/living/carbon/human) && target.is_species(SPECIES_ZOMBIE))
 		to_chat(usr, SPAN_WARNING("They don't look very appetizing!"))
 		return FALSE
 	return TRUE
@@ -266,9 +302,9 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 /datum/unarmed_attack/bite/sharp/zombie/apply_effects(mob/living/carbon/human/user, mob/living/carbon/human/target, attack_damage, zone)
 	..()
 	admin_attack_log(user, target, "Bit their victim.", "Was bitten.", "bit")
-	if (!(target.species.name in GLOB.zombie_species) || target.is_species(SPECIES_DIONA) || target.isSynthetic()) //No need to check infection for FBPs
+	if (!istype(target, /mob/living/carbon/human) || !(target.species.name in GLOB.zombie_species) || target.is_species(SPECIES_DIONA) || target.isSynthetic()) //No need to check infection for FBPs
 		return
-	target.adjustHalLoss(9) //To help bring down targets in voidsuits
+	target.adjustHalLoss(6) //To help bring down targets in voidsuits
 	var/vuln = 1 - target.get_blocked_ratio(zone, DAMAGE_TOXIN, damage_flags = DAMAGE_FLAG_BIO) //Are they protected from bites?
 	if (vuln > 0.05)
 		if (prob(vuln * 100)) //Protective infection chance
@@ -309,8 +345,6 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		M.bodytemperature += 7.5
 		if (prob(3))
 			to_chat(M, SPAN_WARNING(FONT_NORMAL(pick(GLOB.zombie_messages["stage1"]))))
-		if (M.getBrainLoss() < 20)
-			M.adjustBrainLoss(rand(1, 2))
 
 	if (true_dose >= 90)
 		M.add_chemical_effect(CE_MIND, -2)
@@ -355,6 +389,13 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	var/turf/T = get_turf(src)
 	new /obj/effect/decal/cleanable/vomit(T)
 	playsound(T, 'sound/effects/splat.ogg', 20, 1)
+
+	var/obj/item/held_l = get_equipped_item(slot_l_hand)
+	var/obj/item/held_r = get_equipped_item(slot_r_hand)
+	if(held_l)
+		drop_from_inventory(held_l)
+	if(held_r)
+		drop_from_inventory(held_r)
 
 	addtimer(new Callback(src, .proc/transform_zombie), 20)
 
@@ -451,7 +492,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	src.visible_message(SPAN_DANGER("\The [src] hunkers down over \the [target], tearing into their flesh."))
 	playsound(loc, 'sound/effects/bonebreak3.ogg', 20, 1)
 
-	target.adjustHalLoss(50)
+	target.adjustHalLoss(25)
 
 	if (do_after(src, 5 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT, INCAPACITATION_KNOCKOUT))
 		admin_attack_log(src, target, "Consumed their victim.", "Was consumed.", "consumed")
@@ -476,6 +517,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		if (target.is_species(SPECIES_ZOMBIE)) //Just in case they turn whilst being eaten
 			return
 
+		target.adjustHalLoss(25)
 		target.apply_damage(rand(50, 60), DAMAGE_BRUTE, BP_CHEST)
 		target.adjustBruteLoss(20)
 		target.update_surgery() //Update broken ribcage sprites etc.
