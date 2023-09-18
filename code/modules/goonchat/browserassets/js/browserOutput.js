@@ -628,6 +628,28 @@ function handleToggleClick($sub, $toggle) {
 	}
 }
 
+function copyText() {
+	var textArea = document.createElement("textarea");
+	var selection = window.getSelection();
+  textArea.value = selection.toString();
+	if (!textArea.value) return;
+
+  textArea.style.top = "0";
+  textArea.style.left = "0";
+  textArea.style.position = "fixed";
+  textArea.style.opacity = "0";
+  textArea.style.pointerEvents = "none";
+
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  try { document.execCommand('copy'); }
+	catch (err) {}
+
+  document.body.removeChild(textArea);
+}
+
 /*****************************************
 *
 * DOM READY
