@@ -1,0 +1,9 @@
+author: emmanuelbassil
+delete-after: true
+changes:
+  - tweak: Bruise kits no longer patch up external damage on mobs placed on optables
+      if on help intent. Need to switch to non-help intent. This is to prevent accidental
+      closures during surgeries. This does not apply to ghetto surgeries.
+  - bugfix: Fixes welders and nano-paste not working during surgeries.
+  - bugfix: Fixes coins not working in ghetto robotic surgeries.
+  - bugfix: Fixes being unable to drink from glass bottles.
