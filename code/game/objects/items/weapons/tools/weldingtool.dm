@@ -281,13 +281,15 @@
 		update_icon()
 
 /obj/item/weldingtool/attack(mob/living/M, mob/living/user)
-	. = FALSE
 	if (ishuman(M))
 		var/target_zone = user.zone_sel.selecting
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/S = H.organs_by_name[target_zone]
 
 		if (!S || !BP_IS_ROBOTIC(S) || user.a_intent != I_HELP)
+			return FALSE
+
+		if (check_possible_surgeries(M, user))
 			return FALSE
 
 		if (BP_IS_BRITTLE(S))
@@ -300,8 +302,8 @@
 
 		if (S.robo_repair(15, DAMAGE_BRUTE, "some dents", src, user))
 			remove_fuel(1, user)
-		return TRUE
-
+			return TRUE
+	else return FALSE
 
 /obj/item/weldingtool/IsFlameSource()
 	return isOn()

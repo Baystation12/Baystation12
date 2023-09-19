@@ -25,7 +25,6 @@
 	else
 		. = TRUE
 
-///Clickon() with medical stacks will never go past attack() because this proc will never return FALSE. If needed, this is where to change it. Returns TRUE if handled and cannot progress.
 /obj/item/stack/medical/attack(mob/living/carbon/M, mob/user)
 	. = FALSE
 	if (!istype(M))
@@ -179,11 +178,12 @@
 	if (..())
 		return TRUE
 
-	var/list/all_surgeries = GET_SINGLETON_SUBTYPE_MAP(/singleton/surgery_step)
-	for (var/singleton in all_surgeries)
-		var/singleton/surgery_step/S = all_surgeries[singleton]
-		if (S.name && S.tool_quality(src) && S.can_use(user, M, user.zone_sel.selecting, src))
-			return FALSE
+	if (check_possible_surgeries(M, user))
+		return FALSE
+
+	var/turf/T = get_turf(M)
+	if (locate(/obj/machinery/optable, T) && user.a_intent == I_HELP)
+		return FALSE
 
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
