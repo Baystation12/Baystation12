@@ -1,0 +1,6 @@
+author: Jux
+delete-after: true
+changes:
+  - admin: Particle effects can be more easily added live using AddParticles(). Arguments
+      are for the type, duration in seconds (0 for infinte) and colour. They can also
+      be removed with RemoveParticles().
