@@ -110,7 +110,7 @@
 
 		points_by_job[job] = job.skill_points							//We compute how many points we had.
 		if(!job.no_skill_buffs)
-			points_by_job[job] += S.skills_from_age(age)				//Applies the species-appropriate age modifier.
+			points_by_job[job] += 8 // Base skill buff
 			points_by_job[job] += S.job_skill_buffs[job.type]			//Applies the per-job species modifier, if any.
 
 		if((points_by_job[job] >= sum) && sum)				//we didn't overspend, so use sanitized imported data
