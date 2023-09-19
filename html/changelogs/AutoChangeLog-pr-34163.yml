@@ -1,0 +1,4 @@
+author: That0nePerson
+delete-after: true
+changes:
+  - tweak: Guns ignoring their safety on harm intent or not is now a preference
