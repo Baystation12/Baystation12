@@ -299,21 +299,17 @@ GLOBAL_LIST_EMPTY(zmimic_renderers)
 			vis_contents -= gas_heat_object
 
 		if (quality == GLOB.PREF_LOW)
-			if(!istype(gas_heat_object, /obj/effect/heat))
-				QDEL_NULL(gas_heat_object)
-				gas_heat_object = new /obj/effect/heat(null)
+			QDEL_NULL(gas_heat_object)
+			gas_heat_object = new /obj/effect/heat(null)
 		else
-			if(!istype(gas_heat_object, /obj/particle_emitter/heat))
-				QDEL_NULL(gas_heat_object)
-				gas_heat_object = new /obj/particle_emitter/heat(null, -1)
+			QDEL_NULL(gas_heat_object)
 			if (quality == GLOB.PREF_MED)
-				gas_heat_object.particles?.count = 250
-				gas_heat_object.particles?.spawning = 15
+				gas_heat_object = new /obj/particle_emitter/heat(null)
 			else if (quality == GLOB.PREF_HIGH)
-				gas_heat_object.particles?.count = 600
-				gas_heat_object.particles?.spawning = 35
+				gas_heat_object = new /obj/particle_emitter/heat/high(null)
 
 		vis_contents += gas_heat_object
+
 
 /atom/movable/renderer/heat/Initialize()
 	. = ..()
