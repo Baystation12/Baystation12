@@ -155,6 +155,8 @@
 		virtual_mob = null
 	if (em_block)
 		QDEL_NULL(em_block)
+	if (particles)
+		particles = null
 	return ..()
 
 /atom/movable/Bump(atom/A, yes)

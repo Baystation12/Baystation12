@@ -22,6 +22,7 @@ var/global/list/language_keys[0]					// Table of say codes for all languages
 var/global/list/playable_species = list(SPECIES_HUMAN)    // A list of ALL playable species, whitelisted, latejoin or otherwise.
 
 
+GLOBAL_LIST_EMPTY(all_particles)
 
 // Grabs
 var/global/list/all_grabstates[0]
@@ -165,7 +166,12 @@ var/global/list/string_slot_flags = list(
 		var/datum/grab/G = all_grabstates[grabstate_name]
 		G.refresh_updown()
 
-	return 1
+	paths = typesof(/particles)
+	for (var/path in paths)
+		var/particles/P = new path()
+		GLOB.all_particles[P.name] = P
+
+	return TRUE
 
 //*** params cache
 var/global/list/paramslist_cache = list()
