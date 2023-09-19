@@ -108,9 +108,6 @@
 	/// if objectives are disabled or not
 	var/static/objectives_disabled = FALSE
 
-	/// If security and such can be traitor/cult/other
-	var/static/protect_roles_from_antagonist = FALSE
-
 	/// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
 	var/static/continous_rounds = FALSE
 
@@ -644,8 +641,6 @@
 						else
 							log_misc("Incorrect objective disabled definition: [value]")
 							objectives_disabled = CONFIG_OBJECTIVE_NONE
-			if ("protect_roles_from_antagonist")
-				protect_roles_from_antagonist = TRUE
 			if ("probability")
 				var/regex/flatten = new (@"\s+", "g")
 				for (var/entry in value)
