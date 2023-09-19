@@ -217,6 +217,10 @@ var/global/list/_client_preferences_by_type
 	description = "Draw gun based on intent"
 	key = "HOLSTER_ON_INTENT"
 
+/datum/client_preference/safety_toggle_on_intent
+	description = "Ignore safety on harm intent"
+	key = "SAFETY_ON_INTENT"
+
 /datum/client_preference/show_credits
 	description = "Show End Titles"
 	key = "SHOW_CREDITS"
