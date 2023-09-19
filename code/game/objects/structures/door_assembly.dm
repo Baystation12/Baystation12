@@ -199,7 +199,6 @@
 			return TRUE
 		electronics.dropInto(loc)
 		electronics.add_fingerprint(user)
-		electronics = null
 		state = ASSEMBLY_STATE_WIRED
 		update_state()
 		playsound(src, 'sound/items/Crowbar.ogg', 50, TRUE)
@@ -207,6 +206,7 @@
 			SPAN_NOTICE("\The [user] removes \the [src]'s [electronics.name] with \a [tool]."),
 			SPAN_NOTICE("You remove \the [src]'s [electronics.name] with \the [tool].")
 		)
+		electronics = null
 		return TRUE
 
 	// Material Stack - Add glass/plating
