@@ -18094,9 +18094,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftport)
 "Tm" = (
-/obj/machinery/light{
-	dir = 8
-	},
 /obj/effect/floor_decal/corner/green{
 	dir = 5
 	},
