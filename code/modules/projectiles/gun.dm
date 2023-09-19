@@ -234,8 +234,11 @@
 		return
 
 	if(safety())
-		handle_click_safety(user)
-		return
+		if(user.a_intent == I_HURT && user.skill_check(SKILL_WEAPONS, SKILL_EXPERIENCED) && user.client?.get_preference_value(/datum/client_preference/safety_toggle_on_intent) == GLOB.PREF_YES)
+			toggle_safety(user)
+		else
+			handle_click_safety(user)
+			return
 
 	if(world.time < next_fire_time)
 		if (world.time % 3) //to prevent spam
