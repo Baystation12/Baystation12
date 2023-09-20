@@ -1,5 +1,0 @@
-author: wb13
-delete-after: true
-changes:
-  - bugfix: Installing items using a gripper no longer causes errors. This mainly
-      includes airlock electronics.
