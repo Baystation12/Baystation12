@@ -4,9 +4,8 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "taperoll"
 	w_class = ITEM_SIZE_SMALL
-	item_flags = ITEM_FLAG_TRY_ATTACK
 
-/obj/item/tape_roll/attack(mob/living/carbon/human/H, mob/user)
+/obj/item/tape_roll/use_before(mob/living/carbon/human/H, mob/user)
 	. = FALSE
 	if (istype(H))
 		if (user.zone_sel.selecting == BP_EYES)

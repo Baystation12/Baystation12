@@ -32,7 +32,7 @@
 	else
 		icon_state = "[base_state]"
 
-/obj/item/pen/retractable/attack(atom/A, mob/user)
+/obj/item/pen/retractable/use_before(atom/A, mob/user)
 	if(!active)
 		toggle()
 	return ..()

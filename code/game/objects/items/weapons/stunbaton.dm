@@ -6,7 +6,6 @@
 	icon_state = "stunbaton"
 	item_state = "baton"
 	slot_flags = SLOT_BELT
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	force = 15
 	throwforce = 7
 	w_class = ITEM_SIZE_NORMAL
@@ -130,7 +129,7 @@
 		status = s
 		update_icon()
 
-/obj/item/melee/baton/attack(mob/M, mob/user)
+/obj/item/melee/baton/use_before(mob/M, mob/user)
 	. = FALSE
 	if (!istype(M))
 		return FALSE

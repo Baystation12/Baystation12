@@ -146,7 +146,6 @@
 		icon_r_hand = 'icons/mob/onmob/items/righthand_guns.dmi',
 		)
 	w_class = ITEM_SIZE_SMALL
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	attack_verb = list("attacked", "struck", "hit")
 	var/bullets = 5
 
@@ -210,7 +209,7 @@
 			O.show_message(SPAN_WARNING("\The [user] realized they were out of ammo and starting scrounging for some!"), 1)
 
 
-/obj/item/toy/crossbow/attack(mob/M as mob, mob/user as mob)
+/obj/item/toy/crossbow/use_before(mob/M as mob, mob/user as mob)
 	. = FALSE
 	if (istype(M) && M.lying)
 		if (bullets > 0)

@@ -5,7 +5,6 @@
 	item_state = "welder"
 	desc = "A portable welding gun with a port for attaching fuel tanks."
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	slot_flags = SLOT_BELT
 	center_of_mass = "x=14;y=15"
 	waterproof = FALSE
@@ -280,7 +279,8 @@
 		playsound(src, 'sound/items/welderdeactivate.ogg', 10, 1)
 		update_icon()
 
-/obj/item/weldingtool/attack(mob/living/M, mob/living/user)
+/obj/item/weldingtool/use_before(mob/living/M, mob/living/user)
+	. = FALSE
 	if (ishuman(M))
 		var/target_zone = user.zone_sel.selecting
 		var/mob/living/carbon/human/H = M

@@ -9,7 +9,6 @@
 	max_storage_space = 6
 	throwforce = 2
 	slot_flags = SLOT_BELT
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	key_type = list(/obj/item/clothing/mask/smokable/cigarette)
 	atom_flags = ATOM_FLAG_NO_REACT | ATOM_FLAG_OPEN_CONTAINER
 
@@ -39,7 +38,7 @@
 		UpdateReagents()
 
 
-/obj/item/storage/fancy/smokable/attack(mob/living/carbon/target, mob/living/carbon/user)
+/obj/item/storage/fancy/smokable/use_before(mob/living/carbon/target, mob/living/carbon/user)
 	. = FALSE
 	if (user != target || !istype(user) || user.a_intent != I_HELP)
 		return FALSE

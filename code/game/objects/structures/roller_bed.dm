@@ -393,7 +393,6 @@
 	icon_state = "item"
 	object_type = /obj/item/roller_bed
 	interact_type = /obj/structure/roller_bed
-	item_flags = ITEM_FLAG_TRY_ATTACK
 
 
 /obj/item/robot_rack/roller_bed/resolve_attackby(atom/target, mob/living/user, click_params)

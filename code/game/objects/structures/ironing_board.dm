@@ -261,7 +261,6 @@
 	icon_state = "iron"
 	item_state = "ironingiron"
 	slot_flags = SLOT_BELT
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	throwforce = 10
 	throw_range = 6
 	force = 8
@@ -277,7 +276,7 @@
 		range = 3
 	)
 
-/obj/item/ironing_iron/attack(mob/living/subject, mob/living/user, click_parameters)
+/obj/item/ironing_iron/use_before(mob/living/subject, mob/living/user, click_parameters)
 	if (!istype(subject) || !istype(user))
 		return
 	if (iron_enabled && subject.incapacitated())

@@ -3,10 +3,8 @@
 	desc = "An outdated medical apparatus for listening to the sounds of the human body. It also makes you look like you know what you're doing."
 	icon_state = "stethoscope"
 	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
-	item_flags = ITEM_FLAG_TRY_ATTACK
 
-
-/obj/item/clothing/accessory/stethoscope/attack(mob/living/target, mob/living/user)
+/obj/item/clothing/accessory/stethoscope/use_before(mob/living/target, mob/living/user)
 	. = FALSE
 	if (!ishuman(target) || !istype(user))
 		return FALSE

@@ -5,7 +5,6 @@
 	icon_state = "nullrod"
 	item_state = "nullrod"
 	slot_flags = SLOT_BELT
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	force = 10
 	throw_speed = 1
 	throw_range = 4
@@ -15,7 +14,7 @@
 /obj/item/nullrod/disrupts_psionics()
 	return src
 
-/obj/item/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
+/obj/item/nullrod/use_before(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
 	. = FALSE
 	if (!istype(M) || user.a_intent == I_HELP)
 		return FALSE

@@ -8,7 +8,6 @@
 	force_multiplier = 0.1
 	thrown_force_multiplier = 0.1
 	w_class = ITEM_SIZE_NORMAL
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	default_material = MATERIAL_WOOD
 	attack_verb = list("poked", "jabbed")
 
@@ -27,7 +26,7 @@
 	return ..()
 
 
-/obj/item/material/stick/attack(mob/M, mob/user)
+/obj/item/material/stick/use_before(mob/M, mob/user)
 	. = FALSE
 	if(istype(M) && user != M && user.a_intent == I_HELP)
 		//Playful poking is its own thing

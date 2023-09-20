@@ -163,7 +163,6 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL		 //upped to three because books are, y'know, pretty big. (and you could hide them inside eachother recursively forever)
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	attack_verb = list("bashed", "whacked", "educated")
 	var/dat			 // Actual page content
 	var/author		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
@@ -244,7 +243,7 @@
 	else
 		..()
 
-/obj/item/book/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/book/use_before(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	. = FALSE
 	if (istype(M) && user.a_intent == I_HELP && user.zone_sel.selecting == BP_EYES)
 		user.visible_message(SPAN_NOTICE("You open up the book and show it to [M]. "), \

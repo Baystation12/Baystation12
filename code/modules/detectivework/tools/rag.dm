@@ -23,7 +23,7 @@
 	possible_transfer_amounts = "5"
 	volume = 10
 	can_be_placed_into = null
-	item_flags = ITEM_FLAG_NO_BLUDGEON | ITEM_FLAG_TRY_ATTACK
+	item_flags = ITEM_FLAG_NO_BLUDGEON
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = FALSE
 
@@ -114,7 +114,7 @@
 			else
 				A.clean_blood()
 
-/obj/item/reagent_containers/glass/rag/attack(atom/target as obj|turf|area, mob/user as mob , flag)
+/obj/item/reagent_containers/glass/rag/use_before(atom/target as obj|turf|area, mob/user as mob , flag)
 	. = FALSE
 	if (isliving(target))
 		var/mob/living/M = target

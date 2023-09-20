@@ -7,7 +7,6 @@
 	w_class = ITEM_SIZE_TINY
 	throwforce = 4
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	slot_flags = SLOT_BELT
 	attack_verb = list("burnt", "singed")
 	var/max_fuel = 5
@@ -75,7 +74,7 @@
 	else
 		AddOverlays(overlay_image(icon, "[bis.base_icon_state]_striker", flags=RESET_COLOR))
 
-/obj/item/flame/lighter/attack(mob/living/M, mob/living/carbon/user)
+/obj/item/flame/lighter/use_before(mob/living/M, mob/living/carbon/user)
 	. = FALSE
 	if (!istype(M))
 		return FALSE

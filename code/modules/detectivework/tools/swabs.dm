@@ -20,7 +20,6 @@
 	name = "swab"
 	desc = "A sterilized cotton swab and vial used to take forensic samples."
 	icon_state = "swab"
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	var/list/gunshot_residue_sample
 	var/list/dna
 	var/list/trace_dna
@@ -29,7 +28,7 @@
 /obj/item/forensics/swab/proc/is_used()
 	return used
 
-/obj/item/forensics/swab/attack(mob/living/M, mob/user)
+/obj/item/forensics/swab/use_before(mob/living/M, mob/user)
 	. = FALSE
 	if (!ishuman(M))
 		return FALSE

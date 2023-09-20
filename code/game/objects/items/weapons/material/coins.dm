@@ -11,7 +11,6 @@
 	thrown_force_multiplier = 0.1
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	item_flags = ITEM_FLAG_TRY_ATTACK
 
 	/// The smallest interval allowed between coin flips.
 	var/const/FLIP_COOLDOWN = 5 SECONDS
@@ -40,7 +39,7 @@
 		ClearOverlays()
 
 
-/obj/item/material/coin/attack(atom/target, mob/living/user)
+/obj/item/material/coin/use_before(atom/target, mob/living/user)
 	. = FALSE
 	if (target == user)
 		attack_self(user)

@@ -17,7 +17,6 @@
 	var/list/ingredients = list()
 	var/fullname = ""
 	var/renamed = 0
-	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/reagent_containers/food/snacks/csandwich/verb/rename_sandwich()
 	set name = "Rename Sandwich"
@@ -102,7 +101,7 @@
 	var/obj/item/O = pick(contents)
 	to_chat(user, SPAN_ITALIC("You think you can see [O.name] in there."))
 
-/obj/item/reagent_containers/food/snacks/csandwich/attack(mob/living/M as mob, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/csandwich/use_before(mob/living/M as mob, mob/user as mob)
 	. = FALSE
 	if (!istype(M))
 		return FALSE

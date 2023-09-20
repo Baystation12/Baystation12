@@ -76,7 +76,6 @@
 	icon = 'icons/obj/tools/card.dmi'
 	icon_state = "fingerprint0"
 	item_state = "paper"
-	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/sample/print/attack_self(mob/user)
 	if(evidence && length(evidence))
@@ -94,7 +93,7 @@
 	SetName("[initial(name)] (\the [H])")
 	update_icon()
 
-/obj/item/sample/print/attack(mob/living/M, mob/user)
+/obj/item/sample/print/use_before(mob/living/M, mob/user)
 	. = FALSE
 	if (!ishuman(M))
 		return FALSE
