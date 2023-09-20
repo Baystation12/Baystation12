@@ -147,7 +147,7 @@ var/global/list/stool_cache = list() //haha stool
 		to_chat(user, "You add padding to \the [src].")
 		add_padding(padding_type)
 		return
-	else if(isWirecutter(W))
+	else if (is_sharp(W))
 		if(!padding_material)
 			to_chat(user, "\The [src] has no padding to remove.")
 			return
