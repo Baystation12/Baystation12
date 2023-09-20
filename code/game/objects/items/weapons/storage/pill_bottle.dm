@@ -16,38 +16,32 @@
 	var/label
 
 
-/obj/item/storage/pill_bottle/afterattack(mob/living/target, mob/living/user, proximity_flag)
-	if(!proximity_flag || !istype(target) || target != user)
-		return 1
-	if(!length(contents))
+/obj/item/storage/pill_bottle/use_after(atom/target, mob/living/user)
+	if (!length(contents))
 		to_chat(user, SPAN_WARNING("It's empty!"))
-		return 1
-	var/zone = user.zone_sel.selecting
-	if(zone == BP_MOUTH && target.can_eat())
+		return TRUE
+
+	if (istype(user) && target == user && user.can_eat())
 		user.visible_message(SPAN_NOTICE("[user] pops a pill from \the [src]."))
 		playsound(get_turf(src), 'sound/effects/peelz.ogg', 50)
 		var/list/peelz = filter_list(contents,/obj/item/reagent_containers/pill)
-		if(length(peelz))
+		if (length(peelz))
 			var/obj/item/reagent_containers/pill/P = pick(peelz)
 			remove_from_storage(P)
-			P.attack(target,user)
-			return 1
+			P.resolve_attackby(target ,user)
+			return TRUE
 
-
-/obj/item/storage/pill_bottle/afterattack(obj/target, mob/living/user, proximity)
-	if(!proximity)
-		return
-	if(target.is_open_container() && target.reagents)
-		if(!target.reagents.total_volume)
+	if (isobj(target) && target.is_open_container() && target.reagents)
+		if (!target.reagents.total_volume)
 			to_chat(user, SPAN_NOTICE("[target] is empty. Can't dissolve a pill."))
-			return
+			return TRUE
 
 		var/list/peelz = filter_list(contents,/obj/item/reagent_containers/pill)
-		if(length(peelz))
+		if (length(peelz))
 			var/obj/item/reagent_containers/pill/P = pick(peelz)
 			remove_from_storage(P)
-			P.afterattack(target, user, proximity)
-	return
+			P.afterattack(target, user, TRUE)
+			return TRUE
 
 
 /obj/item/storage/pill_bottle/attack_self(mob/living/user)

@@ -432,6 +432,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /**
  * Called when a mob is clicked while the item is in the active hand. This is usually called first by the mob's `resolve_attackby()` proc.
  * Use this to set item-level overrides that you want running first. If you have an override you don't want running before use_tool and use_weapon, put it in use_after().
+ * You will need to use type checks on atom/target on overrides; or else this will be called on anything you click.
  * If returns FALSE, the rest of the resolve_attackby() chain is called.
  *
  * **Parameters**:
