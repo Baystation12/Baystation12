@@ -252,6 +252,10 @@
 		I = overlay_image(icon, "lights_[warn_state]_top")
 		I.pixel_z = 32
 		AddOverlays(I)
+		AddOverlays(emissive_appearance(icon, "lights_mask"))
+		I = emissive_appearance(icon, "lights_mask_top")
+		I.pixel_z = 32
+		AddOverlays(I)
 
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/process_occupant()
