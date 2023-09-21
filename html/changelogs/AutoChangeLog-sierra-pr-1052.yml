@@ -1,0 +1,6 @@
+author: emmanuelbassil
+delete-after: true
+changes:
+  - bugfix: Padded beds and brown bar stools now properly drop cloth and carpet respectively
+      when padding is removed.
+  - tweak: Can now remove padding with any sharp item, not only wirecutters.
