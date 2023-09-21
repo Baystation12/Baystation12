@@ -885,6 +885,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	var/ID = GetIdCard()
 	if(ID)
 		. += "  <a href='?src=\ref[ID];look_at_id=1'>\[Look at ID\]</a>"
+	else
+		. += "  <a href='?src=\ref[src];examine=1'>\[?\]</a>"
 
 /obj/item/proc/on_active_hand(mob/M)
 
@@ -951,3 +953,10 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /// Virtual for behavior to do after successful do_after if equip_delay is set
 /obj/item/proc/equip_delay_after(mob/user, slot, equip_flags)
 	return
+
+/obj/item/OnTopic(href, href_list, datum/topic_state/state)
+	. = ..()
+
+	if (href_list["examine"])
+		examinate(usr, src)
+		return TOPIC_HANDLED
