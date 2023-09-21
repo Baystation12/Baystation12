@@ -375,6 +375,14 @@
 	else
 		return SURGERY_SKILLS_ROBOTIC_ON_MEAT
 
+/singleton/surgery_step/robotics/fix_organ_robotic/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	. = ..()
+	if(!target.isSynthetic())
+		if(user.skill_check(SKILL_ANATOMY, SKILL_EXPERIENCED))
+			. += 30
+		if(user.skill_check(SKILL_MEDICAL, SKILL_EXPERIENCED))
+			. += 30
+
 /singleton/surgery_step/robotics/fix_organ_robotic/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
 	if(affected)
