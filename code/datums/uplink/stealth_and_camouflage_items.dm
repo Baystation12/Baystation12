@@ -47,7 +47,7 @@
 
 /datum/uplink_item/item/stealth_items/cosmetic_surgery_kit
 	name = "Cosmetic Surgery Auto-Kit"
-	desc = "A small self-contained auto-surgery device that has the ability to conduct larynxial, facial and even melanin re-structuring surgery,  \
+	desc = "A small self-contained auto-surgery device that has the ability to conduct laryngeal, facial and even melanin re-structuring surgery,  \
 	in a (mostly) blood-less manner."
 	item_cost = 12
 	path = /obj/item/device/cosmetic_surgery_kit

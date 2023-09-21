@@ -237,7 +237,7 @@
 		spark_system.start()
 		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
 
-/obj/item/holo/esword/get_parry_chance(mob/user)
+/obj/item/holo/esword/get_parry_chance(mob/user, mob/attacker)
 	return active ? ..() : 0
 
 /obj/item/holo/esword/Initialize()

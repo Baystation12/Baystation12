@@ -548,7 +548,7 @@ var/global/list/slot_flags_enumeration = list(
 //For non-projectile attacks this usually means the attack is blocked.
 //Otherwise should return 0 to indicate that the attack is not affected in any way.
 /obj/item/proc/handle_shield(mob/user, damage, atom/damage_source = null, mob/attacker = null, def_zone = null, attack_text = "the attack")
-	var/parry_chance = get_parry_chance(user)
+	var/parry_chance = get_parry_chance(user, attacker)
 	if(parry_chance)
 		if(default_parry_check(user, attacker, damage_source) && prob(parry_chance))
 			user.visible_message(SPAN_DANGER("\The [user] parries [attack_text] with \the [src]!"))
@@ -561,12 +561,15 @@ var/global/list/slot_flags_enumeration = list(
 /obj/item/proc/on_parry(damage_source)
 	return
 
-/obj/item/proc/get_parry_chance(mob/user)
+/obj/item/proc/get_parry_chance(mob/user, mob/attacker)
 	. = base_parry_chance
+	if (!istype(user) || !istype(attacker))
+		return
 	if (user.a_intent == I_HELP)
 		. = 0
 	if (.)
-		. += clamp((user.get_skill_value(SKILL_COMBAT) * 10) - 20, 0, 75)
+		. += (user.get_skill_difference(SKILL_COMBAT, attacker) * 5)
+		. = clamp(., 0, 75)
 
 /obj/item/proc/on_disarm_attempt(mob/target, mob/living/attacker)
 	if(force < 1)
