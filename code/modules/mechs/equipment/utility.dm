@@ -274,7 +274,7 @@
 
 
 	var/on = 0
-	var/l_power = 0.9
+	var/l_power = 2
 	var/l_range = 6
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 

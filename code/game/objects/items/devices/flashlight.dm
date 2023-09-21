@@ -73,18 +73,18 @@
 	else
 		set_light(0)
 
-/obj/item/flashlight/examine(mob/user, distance)
+/obj/item/device/flashlight/examine(mob/user, distance)
 	. = ..()
 	if(light_wedge && isturf(loc))
 		to_chat(user, FONT_SMALL(SPAN_NOTICE("\The [src] is facing [dir2text(dir)].")))
 
-/obj/item/flashlight/dropped(mob/user)
+/obj/item/device/flashlight/dropped(mob/user)
 	. = ..()
 	if(light_wedge)
 		set_dir(user.dir)
 		update_light()
 
-/obj/item/flashlight/throw_at()
+/obj/item/device/flashlight/throw_at()
 	. = ..()
 	if(light_wedge)
 		var/new_dir = pick(NORTH, SOUTH, EAST, WEST)
@@ -212,9 +212,10 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	matter = list(MATERIAL_STEEL = 200,MATERIAL_GLASS = 100)
-	flashlight_range = 2
+	flashlight_range = 3
 	light_wedge = LIGHT_OMNI
 	light_color = COLOR_ORANGE
+	flashlight_power = 1
 
 /obj/item/device/flashlight/lantern/on_update_icon()
 	..()
@@ -282,7 +283,7 @@
 	activation_sound = 'sound/effects/flare.ogg'
 	flashlight_flags = FLASHLIGHT_SINGLE_USE
 
-	flashlight_power = 4
+	flashlight_power = 3
 	flashlight_range = 5
 	light_wedge = LIGHT_OMNI
 
@@ -358,7 +359,8 @@
 	produce_heat = 0
 	activation_sound = 'sound/effects/glowstick.ogg'
 
-	flashlight_range =4
+	flashlight_range = 4
+	flashlight_power = 1.5
 	light_wedge = LIGHT_OMNI
 	flashlight_flags = FLASHLIGHT_SINGLE_USE | FLASHLIGHT_CANNOT_BLIND
 

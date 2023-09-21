@@ -753,7 +753,7 @@
 	broken_chance = 3
 	matter = list(MATERIAL_GLASS = 100)
 
-	b_power = 0.6
+	b_power = 0.7
 	b_range = 4
 	lighting_modes = list(
 		LIGHTMODE_EMERGENCY = list(l_range = 3, l_power = 1, l_color = LIGHT_COLOUR_E_RED)

@@ -42,6 +42,7 @@
 	var/old_ao_neighbors = ao_neighbors
 	var/old_above = above
 	var/old_permit_ao = permit_ao
+	var/old_zflags = z_flags
 
 	if(isspaceturf(N) || isopenspace(N))
 		QDEL_NULL(turf_fire)
@@ -106,7 +107,7 @@
 		lighting_overlay = old_lighting_overlay
 		affecting_lights = old_affecting_lights
 		corners = old_corners
-		if (old_opacity != opacity || dynamic_lighting != old_dynamic_lighting)
+		if (old_opacity != opacity || dynamic_lighting != old_dynamic_lighting || force_lighting_update)
 			reconsider_lights()
 			updateVisibility(src)
 
@@ -116,8 +117,9 @@
 			else
 				lighting_clear_overlay()
 
-
 	W.setup_local_ambient()
+	if(z_flags != old_zflags)
+		W.rebuild_zbleed()
 	// end of lighting stuff
 
 	for(var/turf/T in RANGE_TURFS(src, 1))

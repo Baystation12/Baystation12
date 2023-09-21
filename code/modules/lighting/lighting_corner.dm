@@ -237,6 +237,65 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	else
 		update_overlays(TRUE)
 
+//So, a turf with 4 corners needs to reset all 4 of those to 0, then we need to take turf below and tell its corners to rebuild
+// Probably better ways to do this
+/datum/lighting_corner/proc/clear_below_lumcount()
+
+	if(!(below_r || below_b || below_g))
+		return
+
+	below_r = 0
+	below_g = 0
+	below_b = 0
+
+	UPDATE_APPARENT(src, r)
+	UPDATE_APPARENT(src, g)
+	UPDATE_APPARENT(src, b)
+
+	if (needs_update)
+		return
+
+	needs_update = TRUE
+	SSlighting.corner_queue += src
+
+/datum/lighting_corner/proc/set_below_lumcount(_r, _g, _b)
+
+	below_r = _r
+	below_g = _g
+	below_b = _b
+
+	UPDATE_APPARENT(src, r)
+	UPDATE_APPARENT(src, g)
+	UPDATE_APPARENT(src, b)
+
+	if (needs_update)
+		return
+
+	needs_update = TRUE
+	SSlighting.corner_queue += src
+
+/datum/lighting_corner/proc/rebuild_above_below_lumcount()
+	//Destroy current state and rebuild it!
+	var/turf/T
+	var/Ti
+		// Grab the first master that's a Z-turf, if one exists.
+	if ((T = t1?.above) && (T.z_flags & ZM_ALLOW_LIGHTING))
+		Ti = t1i
+	else if ((T = t2?.above) && (T.z_flags & ZM_ALLOW_LIGHTING))
+		Ti = t2i
+	else if ((T = t3?.above) && (T.z_flags & ZM_ALLOW_LIGHTING))
+		Ti = t3i
+	else if ((T = t4?.above) && (T.z_flags & ZM_ALLOW_LIGHTING))
+		Ti = t4i
+	else // Nothing above us that cares about below light.
+		T = null
+
+	if (TURF_IS_DYNAMICALLY_LIT(T))
+		if (!T.corners || !T.corners[Ti])
+			T.generate_missing_corners()
+		var/datum/lighting_corner/above = T.corners[Ti]
+		above.set_below_lumcount(self_r, self_g, self_b)
+
 /datum/lighting_corner/proc/update_ambient_lumcount(delta_r, delta_g, delta_b, skip_update = FALSE)
 	ambient_r += delta_r
 	ambient_g += delta_g
