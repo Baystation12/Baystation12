@@ -104,7 +104,6 @@
 	if(bloodsamp)
 		var/obj/item/paper/P = new(src)
 		P.SetName("[src] report #[++report_num]: [bloodsamp.name]")
-		P.stamped = list(/obj/item/stamp)
 		P.SetOverlays("paper_stamped")
 		var/data = "No scan information available."
 		if(bloodsamp.dna != null || bloodsamp.trace_dna != null)

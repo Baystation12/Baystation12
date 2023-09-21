@@ -133,7 +133,7 @@
 
 /obj/item/shreddedp
 	name = "shredded paper"
-	icon = 'icons/obj/paper.dmi'
+	icon = 'icons/obj/machines/bureaucracy/papershredder.dmi'
 	icon_state = "shredp"
 	randpixel = 5
 	throwforce = 0
