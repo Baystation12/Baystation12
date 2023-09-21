@@ -1,4 +1,5 @@
 #include "mining_areas.dm"
+#include "mining_corporate.dm"
 
 //MINING-1 // CLUSTER
 /obj/effect/overmap/visitable/sector/cluster
