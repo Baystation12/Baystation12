@@ -156,13 +156,33 @@ meteor_act
 		if(.) return
 	return 0
 
+/mob/living/carbon/human/proc/resolve_hand_attack(damage, mob/living/user, target_zone)
+	if (user == src || species.species_flags & SPECIES_FLAG_NO_BLOCK)
+		return target_zone
+
+	var/accuracy_penalty = user.melee_accuracy_mods()
+	accuracy_penalty += 5*get_skill_difference(SKILL_COMBAT, user)
+	var/hit_zone = get_zone_with_miss_chance(target_zone, src, accuracy_penalty)
+
+	if (!hit_zone)
+		return
+	if (check_shields(damage, null, user, hit_zone, user.name))
+		return
+
+	var/obj/item/organ/external/affecting = get_organ(hit_zone)
+	if (!affecting || affecting.is_stump())
+		to_chat(user, SPAN_DANGER("They are missing that limb!"))
+		return
+
+	return hit_zone
+
 /mob/living/carbon/human/resolve_item_attack(obj/item/I, mob/living/user, target_zone)
 
 	for (var/obj/item/grab/G in grabbed_by)
 		if (G.resolve_item_attack(user, I, target_zone))
-			return null
+			return
 
-	if (user == src)
+	if (user == src || species.species_flags & SPECIES_FLAG_NO_BLOCK)
 		return target_zone
 
 	var/accuracy_penalty = user.melee_accuracy_mods()
@@ -174,15 +194,15 @@ meteor_act
 
 	if (!hit_zone)
 		visible_message(SPAN_DANGER("\The [user] misses [src] with \the [I]!"))
-		return null
+		return
 
 	if (check_shields(I.force, I, user, hit_zone, "the [I.name]"))
-		return null
+		return
 
 	var/obj/item/organ/external/affecting = get_organ(hit_zone)
 	if (!affecting || affecting.is_stump())
 		to_chat(user, SPAN_DANGER("They are missing that limb!"))
-		return null
+		return
 
 	return hit_zone
 
