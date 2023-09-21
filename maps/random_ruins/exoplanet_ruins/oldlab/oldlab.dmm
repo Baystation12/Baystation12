@@ -2132,7 +2132,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 1
 	},
-/obj/machinery/computer/power_monitor,
+/obj/machinery/computer/modular/preset/engineering,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/oldlab/solars)
 "Ku" = (
@@ -2328,6 +2328,11 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab/station/breakroom)
+"MB" = (
+/obj/structure/grille,
+/obj/machinery/computer/modular/preset/engineering,
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
 "ME" = (
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -3084,7 +3089,7 @@
 /area/map_template/oldlab/solars)
 
 (1,1,1) = {"
-Xx
+MB
 Xx
 Xx
 Xx

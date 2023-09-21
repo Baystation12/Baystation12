@@ -14,6 +14,7 @@
 	randpixel = 7
 	w_class = ITEM_SIZE_NORMAL
 	max_amount = 100
+	icon_state = "tile"
 	icon = 'icons/obj/tiles.dmi'
 
 	force = 1

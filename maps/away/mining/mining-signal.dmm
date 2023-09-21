@@ -223,19 +223,13 @@
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "aX" = (
-/obj/machinery/r_n_d/circuit_imprinter{
-	icon_state = "circuit_imprinter_t";
-	reason_broken = 1
-	},
 /obj/effect/floor_decal/corner/paleblue/diagonal,
+/obj/machinery/r_n_d/circuit_imprinter,
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "aY" = (
-/obj/machinery/r_n_d/protolathe{
-	icon_state = "protolathe_t";
-	reason_broken = 1
-	},
 /obj/effect/floor_decal/corner/paleblue/diagonal,
+/obj/machinery/r_n_d/protolathe,
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "aZ" = (
@@ -314,11 +308,7 @@
 /turf/simulated/floor/tiled,
 /area/outpost/abandoned)
 "bp" = (
-/obj/machinery/door/airlock/glass/science{
-	icon_state = "door_locked";
-	locked = 1;
-	secured_wires = 1
-	},
+/obj/machinery/door/airlock/glass/science,
 /turf/simulated/floor/tiled,
 /area/outpost/abandoned)
 "bq" = (
@@ -457,18 +447,11 @@
 /obj/random/loot,
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
-"bH" = (
-/turf/simulated/floor/tiled/white,
-/area/outpost/abandoned)
 "bI" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/trash/cigbutt/cigarbutt,
 /turf/simulated/floor/diona,
-/area/outpost/abandoned)
-"bJ" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "bK" = (
 /obj/effect/gibspawner/human,
@@ -703,7 +686,7 @@
 /turf/simulated/floor/wood,
 /area/outpost/abandoned)
 "ct" = (
-/obj/machinery/door/airlock/centcom,
+/obj/machinery/door/airlock/glass/science,
 /obj/machinery/door/blast/regular{
 	id_tag = "mars_blast"
 	},
@@ -1016,9 +999,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
-"dH" = (
-/turf/simulated/floor/tiled,
-/area/outpost/abandoned)
 "dI" = (
 /obj/effect/decal/cleanable/cobweb,
 /obj/machinery/alarm{
@@ -1198,7 +1178,7 @@
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "en" = (
-/obj/machinery/door/airlock/centcom,
+/obj/machinery/door/airlock/glass/science,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "ep" = (
@@ -1705,15 +1685,6 @@
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
-"fT" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/firealarm{
-	dir = 1;
-	icon_state = "firex";
-	pixel_y = -24
-	},
-/turf/simulated/floor/tiled/dark,
-/area/outpost/abandoned)
 "fU" = (
 /obj/structure/table/standard,
 /obj/structure/window/reinforced{
@@ -1798,9 +1769,9 @@
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "gg" = (
-/obj/machinery/computer/power_monitor,
 /obj/effect/decal/cleanable/cobweb2,
 /obj/structure/cable,
+/obj/machinery/computer/modular/preset/engineering,
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "gh" = (
@@ -2526,11 +2497,6 @@
 	id_tag = "mars_blast"
 	},
 /turf/simulated/floor/plating,
-/area/outpost/abandoned)
-"HD" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "IX" = (
 /obj/machinery/door/firedoor,
@@ -12151,8 +12117,8 @@ cG
 dF
 dV
 es
-HD
-HD
+bL
+bL
 fF
 cG
 aa
@@ -12754,7 +12720,7 @@ ce
 cx
 cY
 cG
-dH
+aI
 dY
 ev
 eP
@@ -13968,7 +13934,7 @@ aa
 af
 dI
 ea
-dH
+aI
 eV
 cW
 fK
@@ -14372,7 +14338,7 @@ af
 af
 dK
 cW
-dH
+aI
 eX
 cW
 fM
@@ -14577,7 +14543,7 @@ eb
 cW
 eY
 ft
-dH
+aI
 fW
 aH
 aH
@@ -14767,7 +14733,7 @@ aW
 bf
 af
 bs
-bH
+dD
 bP
 af
 cg
@@ -14779,7 +14745,7 @@ ec
 eA
 eW
 fu
-dH
+aI
 af
 af
 gj
@@ -15171,14 +15137,14 @@ az
 bg
 af
 bt
-bJ
+dW
 aA
 af
 bZ
 tb
 bZ
 cy
-dH
+aI
 cW
 cw
 fa
@@ -15575,7 +15541,7 @@ aY
 az
 af
 bv
-bJ
+dW
 bQ
 bX
 ck
@@ -15583,11 +15549,11 @@ vb
 dd
 dt
 dP
-dH
+aI
 cW
 eZ
 cW
-dH
+aI
 af
 af
 gl
@@ -15790,8 +15756,8 @@ eB
 fb
 cw
 fQ
-dH
-dH
+aI
+aI
 cW
 gy
 cw
@@ -15979,7 +15945,7 @@ aA
 az
 af
 bx
-bJ
+dW
 bP
 af
 af
@@ -15995,7 +15961,7 @@ cw
 cW
 cW
 gm
-dH
+aI
 gE
 gL
 gO
@@ -16181,7 +16147,7 @@ aZ
 ax
 af
 aA
-bH
+dD
 bP
 af
 aa
@@ -16199,7 +16165,7 @@ ga
 gn
 gn
 gF
-dH
+aI
 gP
 cW
 cW
@@ -16406,7 +16372,7 @@ cy
 gS
 cW
 gL
-dH
+aI
 hu
 af
 aa
@@ -16608,7 +16574,7 @@ af
 cy
 dM
 eD
-dH
+aI
 hv
 af
 aa
@@ -16787,7 +16753,7 @@ bb
 bi
 af
 bA
-bH
+dD
 bQ
 af
 aa
@@ -16810,7 +16776,7 @@ ab
 IX
 hb
 hj
-dH
+aI
 ht
 af
 aa
@@ -16989,7 +16955,7 @@ af
 af
 af
 bu
-bJ
+dW
 bQ
 af
 af
@@ -17191,7 +17157,7 @@ ao
 ao
 af
 bB
-bJ
+dW
 bP
 bY
 cm
@@ -17393,7 +17359,7 @@ ao
 ao
 bn
 bx
-bH
+dD
 bS
 bZ
 cn
@@ -18403,7 +18369,7 @@ af
 af
 af
 bC
-bJ
+dW
 bP
 bY
 cs
@@ -18605,7 +18571,7 @@ aI
 aQ
 af
 bC
-bJ
+dW
 bU
 af
 af
@@ -18807,7 +18773,7 @@ aI
 aI
 bo
 by
-bH
+dD
 bU
 af
 aa
@@ -19211,7 +19177,7 @@ aI
 aI
 bo
 bx
-bJ
+dW
 bU
 af
 aa
@@ -19413,7 +19379,7 @@ aI
 bk
 af
 bx
-bJ
+dW
 bV
 af
 aa
@@ -19615,7 +19581,7 @@ aI
 aI
 bp
 bx
-bH
+dD
 bP
 af
 af
@@ -19817,8 +19783,8 @@ af
 af
 af
 bx
-bJ
-bJ
+dW
+dW
 bO
 af
 cN
@@ -20019,7 +19985,7 @@ ap
 aH
 af
 aA
-bH
+dD
 aA
 bP
 af
@@ -20221,7 +20187,7 @@ aI
 aa
 aa
 aa
-bH
+dD
 aA
 aA
 af
@@ -20424,7 +20390,7 @@ aa
 aa
 aa
 aa
-bH
+dD
 bP
 af
 cQ
@@ -20435,7 +20401,7 @@ en
 dT
 dT
 dT
-fT
+eL
 af
 af
 aa
@@ -20626,7 +20592,7 @@ aI
 aa
 aa
 aa
-bH
+dD
 bU
 af
 cQ
@@ -21029,8 +20995,8 @@ aH
 aI
 bq
 bE
-bJ
-bJ
+dW
+dW
 bP
 af
 cR
@@ -21232,7 +21198,7 @@ aI
 af
 bF
 aH
-bH
+dD
 bP
 ct
 cS
