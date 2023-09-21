@@ -113,8 +113,8 @@
 		add_padding(padding_type)
 		return TRUE
 
-	// Wirecutters - Remove padding
-	if (isWirecutter(tool))
+	// Sharp items - Remove padding
+	if (is_sharp(tool))
 		if (!padding_material)
 			USE_FEEDBACK_FAILURE("\The [src] has no padding to remove.")
 			return TRUE
