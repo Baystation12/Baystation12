@@ -19,16 +19,15 @@ LINEN BINS
 	throw_range = 2
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/bedsheet/attackby(obj/item/I, mob/user)
-	if(is_sharp(I))
-		user.visible_message(SPAN_NOTICE("\The [user] begins cutting up \the [src] with \a [I]."), SPAN_NOTICE("You begin cutting up \the [src] with \the [I]."))
-		if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
+/obj/item/bedsheet/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	if (is_sharp(tool))
+		user.visible_message(SPAN_NOTICE("\The [user] begins cutting up \the [src] with \a [tool]."), SPAN_NOTICE("You begin cutting up \the [src] with \the [tool]."))
+		if (do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			to_chat(user, SPAN_NOTICE("You cut \the [src] into pieces!"))
 			for(var/i in 1 to rand(2,5))
 				new /obj/item/reagent_containers/glass/rag(get_turf(src))
 			qdel(src)
-		return
-	..()
+		return TRUE
 
 /obj/item/bedsheet/blue
 	icon_state = "sheetblue"

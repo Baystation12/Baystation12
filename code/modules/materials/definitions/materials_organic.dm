@@ -61,7 +61,7 @@
 	flags = MATERIAL_PADDING
 	brute_armor = 1
 	conductive = 0
-	stack_type = null
+	stack_type = /obj/item/stack/material/cloth
 	hidden_from_codex = TRUE
 	construction_difficulty = MATERIAL_NORMAL_DIY
 
@@ -133,7 +133,7 @@
 	sheet_singular_name = "tile"
 	sheet_plural_name = "tiles"
 	conductive = 0
-	stack_type = null
+	stack_type = /obj/item/stack/tile/carpet
 	construction_difficulty = MATERIAL_NORMAL_DIY
 
 /material/skin
