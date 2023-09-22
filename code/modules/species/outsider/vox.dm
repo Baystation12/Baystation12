@@ -140,9 +140,6 @@
 	var/datum/pronouns/P = H.choose_from_pronouns()
 	return "[SPAN_DANGER("[P.His] beak-segments are cracked and chipped! [P.He] [P.is] not even recognizable.")]\n"
 
-/datum/species/vox/skills_from_age(age)
-	. = 8
-
 /obj/item/vox_changer
 	name = "mouldy mirror"
 	desc = "Something seems strange about this old, dirty mirror. Your reflection doesn't look like you remember it."
