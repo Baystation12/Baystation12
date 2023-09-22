@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: The threshhold for the cryo interface displaying a temperature n warning
+      (orange) colors adjusted to 170, matching the effective temperature limit of
+      cryoxadone and clonexadone.
