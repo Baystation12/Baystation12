@@ -19,11 +19,11 @@
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e6
 	)
-	min_skill = list(
-		SKILL_BUREAUCRACY = SKILL_TRAINED,
-		SKILL_COOKING = SKILL_TRAINED,
-		SKILL_BOTANY = SKILL_BASIC,
-		SKILL_CHEMISTRY = SKILL_BASIC
+	min_skill = list( // 9 points
+		SKILL_BUREAUCRACY = SKILL_TRAINED, // 2 points
+		SKILL_COOKING = SKILL_TRAINED, // 2 points
+		SKILL_BOTANY = SKILL_BASIC, // 1 point
+		SKILL_CHEMISTRY = SKILL_BASIC // 4 points
 	)
 	access = list(
 		access_bridge,
@@ -61,7 +61,9 @@
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/ec/o1)
-	min_skill = list(SKILL_BUREAUCRACY = SKILL_BASIC)
+	min_skill = list( // 1 point
+		SKILL_BUREAUCRACY = SKILL_BASIC // 1 point
+	)
 
 	access = list(
 		access_morgue, access_chapel_office,
@@ -94,7 +96,9 @@
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/fleet/e4
 	)
-	min_skill = list(   SKILL_HAULING = SKILL_BASIC)
+	min_skill = list( // 1 point
+		SKILL_HAULING = SKILL_BASIC // 1 point
+	)
 
 	access = list(
 		access_maint_tunnels, access_emergency_storage,
@@ -131,10 +135,10 @@
 		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/fleet/e5
 	)
-	min_skill = list(
-		SKILL_BOTANY = SKILL_BASIC,
-		SKILL_CHEMISTRY = SKILL_BASIC,
-		SKILL_COOKING = SKILL_TRAINED
+	min_skill = list( // 7 points
+		SKILL_BOTANY = SKILL_BASIC, // 1 point
+		SKILL_CHEMISTRY = SKILL_BASIC, // 4 points
+		SKILL_COOKING = SKILL_TRAINED // 2 points
 	)
 	access = list(
 		access_commissary,

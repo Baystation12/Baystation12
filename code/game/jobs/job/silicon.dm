@@ -14,7 +14,6 @@
 	loadout_allowed = FALSE
 	hud_icon = "hudblank"
 	skill_points = 0
-	no_skill_buffs = TRUE
 	min_skill = list(
 		SKILL_BUREAUCRACY   = SKILL_EXPERIENCED,
 		SKILL_FINANCE       = SKILL_EXPERIENCED,
@@ -63,7 +62,6 @@
 	outfit_type = /singleton/hierarchy/outfit/job/silicon/cyborg
 	hud_icon = "hudblank"
 	skill_points = 0
-	no_skill_buffs = TRUE
 
 /datum/job/cyborg/handle_variant_join(mob/living/carbon/human/H, alt_title)
 	return H && H.Robotize(SSrobots.get_mob_type_by_title(alt_title || title))

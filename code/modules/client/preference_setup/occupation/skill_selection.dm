@@ -88,7 +88,6 @@
 //Sets up skills_allocated
 /datum/preferences/proc/sanitize_skills(list/input)
 	. = list()
-	var/datum/species/S = all_species[species]
 	for(var/job_name in SSjobs.titles_to_datums)
 		var/datum/job/job = SSjobs.get_by_title(job_name)
 		var/input_skills = list()
@@ -109,9 +108,6 @@
 					sum += spent
 
 		points_by_job[job] = job.skill_points							//We compute how many points we had.
-		if(!job.no_skill_buffs)
-			points_by_job[job] += 8 // Base skill buff
-			points_by_job[job] += S.job_skill_buffs[job.type]			//Applies the per-job species modifier, if any.
 
 		if((points_by_job[job] >= sum) && sum)				//we didn't overspend, so use sanitized imported data
 			.[job] = L

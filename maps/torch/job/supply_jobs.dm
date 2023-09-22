@@ -20,15 +20,17 @@
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e8
 	)
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_TRAINED,
-	                    SKILL_FINANCE     = SKILL_BASIC,
-	                    SKILL_HAULING     = SKILL_BASIC,
-	                    SKILL_EVA         = SKILL_BASIC,
-	                    SKILL_PILOT       = SKILL_BASIC,
-						SKILL_MECH        =	SKILL_BASIC)
+	skill_points = 24
+	min_skill = list( // 9 points
+		SKILL_BUREAUCRACY = SKILL_TRAINED, // 2 points
+		SKILL_FINANCE = SKILL_BASIC, // 1 point
+		SKILL_HAULING = SKILL_BASIC, // 1 point
+		SKILL_EVA = SKILL_BASIC, // 1 point
+		SKILL_PILOT = SKILL_BASIC, // 2 points
+		SKILL_MECH = SKILL_BASIC // 2 points
+	)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
-	skill_points = 18
 
 	access = list(
 		access_maint_tunnels, access_bridge, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
@@ -63,10 +65,12 @@
 		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/civ/contractor
 	)
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
-	                    SKILL_FINANCE     = SKILL_BASIC,
-	                    SKILL_HAULING     = SKILL_BASIC,
-	                    SKILL_MECH        =	SKILL_BASIC)
+	min_skill = list( // 5 points
+		SKILL_BUREAUCRACY = SKILL_BASIC, // 1 point
+		SKILL_FINANCE = SKILL_BASIC, // 1 point
+		SKILL_HAULING = SKILL_BASIC, // 1 point
+		SKILL_MECH =	SKILL_BASIC // 2 points
+	)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
 
@@ -94,8 +98,10 @@
 		"Drill Technician",
 		"Shaft Miner",
 		"Salvage Technician")
-	min_skill = list(   SKILL_HAULING = SKILL_TRAINED,
-	                    SKILL_EVA     = SKILL_BASIC)
+	min_skill = list( // 3 points
+		SKILL_HAULING = SKILL_TRAINED, // 2 points
+		SKILL_EVA = SKILL_BASIC // 1 point
+		)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
 

@@ -70,12 +70,14 @@ var/global/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
 	outfit_type = /singleton/hierarchy/outfit/job/skrellscoutship
 	info = "Your vessel is scouting through unknown space, working to map out any potential dangers, as well as potential allies."
 	is_semi_antagonist = TRUE
-	min_skill = list(SKILL_EVA = SKILL_TRAINED,
-					SKILL_PILOT = SKILL_TRAINED,
-					SKILL_HAULING = SKILL_TRAINED,
-					SKILL_COMBAT = SKILL_TRAINED,
-					SKILL_WEAPONS = SKILL_TRAINED,
-					SKILL_MEDICAL = SKILL_BASIC)
+	min_skill = list( // 24 points
+		SKILL_EVA = SKILL_TRAINED, // 2 points
+		SKILL_PILOT = SKILL_TRAINED, // 4 points
+		SKILL_HAULING = SKILL_TRAINED, // 2 points
+		SKILL_COMBAT = SKILL_TRAINED, // 6 points
+		SKILL_WEAPONS = SKILL_TRAINED, // 6 points
+		SKILL_MEDICAL = SKILL_BASIC // 4 points
+	)
 
 /datum/job/submap/skrellscoutship_crew
 	title = "Qrri-Zuumqix"
@@ -90,11 +92,13 @@ var/global/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
 	allowed_ranks = list(/datum/mil_rank/skrell_fleet)
 	skill_points = 30
 	is_semi_antagonist = TRUE
-	min_skill = list(SKILL_EVA = SKILL_TRAINED,
-					SKILL_HAULING = SKILL_TRAINED,
-					SKILL_COMBAT = SKILL_TRAINED,
-					SKILL_WEAPONS = SKILL_TRAINED,
-					SKILL_MEDICAL = SKILL_BASIC)
+	min_skill = list( // 20 points
+		SKILL_EVA = SKILL_TRAINED, // 2 points
+		SKILL_HAULING = SKILL_TRAINED, // 2 points
+		SKILL_COMBAT = SKILL_TRAINED, // 6 points
+		SKILL_WEAPONS = SKILL_TRAINED, // 6 points
+		SKILL_MEDICAL = SKILL_BASIC // 4 points
+	)
 
 /datum/job/submap/skrellscoutship_crew/equip(mob/living/carbon/human/H, alt_title, datum/mil_branch/branch, datum/mil_rank/grade)
 	. = ..(H, alt_title, branch, grade)	//passing through arguments

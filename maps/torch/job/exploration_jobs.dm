@@ -15,16 +15,18 @@
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o1
 	)
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
-	                    SKILL_EVA         = SKILL_TRAINED,
-	                    SKILL_SCIENCE     = SKILL_TRAINED,
-	                    SKILL_PILOT       = SKILL_BASIC)
+	skill_points = 28
+	min_skill = list( // 9 points
+		SKILL_BUREAUCRACY = SKILL_BASIC, // 1 point
+		SKILL_EVA = SKILL_TRAINED, // 2 points
+		SKILL_SCIENCE = SKILL_TRAINED, // 4 points
+		SKILL_PILOT = SKILL_BASIC // 2 points
+	)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX,
 	                    SKILL_COMBAT      = SKILL_EXPERIENCED,
 	                    SKILL_WEAPONS     = SKILL_EXPERIENCED)
-	skill_points = 22
 
 	access = list(
 		access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_bridge, access_emergency_storage,
@@ -71,11 +73,15 @@
 		access_mining, access_pilot, access_solgov_crew, access_eva, access_explorer, access_research,
 		access_radio_exp, access_radio_sci, access_radio_sup, access_maint_tunnels, access_emergency_storage
 	)
-	min_skill = list(	SKILL_EVA   = SKILL_BASIC,
-						SKILL_PILOT = SKILL_TRAINED)
+	min_skill = list( // 5 points
+		SKILL_EVA = SKILL_BASIC, // 1 point
+		SKILL_PILOT = SKILL_TRAINED // 4 points
+	)
 
-	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
-	                    SKILL_SCIENCE     = SKILL_MAX)
+	max_skill = list(
+		SKILL_PILOT = SKILL_MAX,
+		SKILL_SCIENCE = SKILL_MAX
+	)
 
 /datum/job/explorer
 	title = "Explorer"
@@ -94,7 +100,9 @@
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/ec/e5
 	)
-	min_skill = list(   SKILL_EVA = SKILL_BASIC)
+	min_skill = list( // 1 point
+		SKILL_EVA = SKILL_BASIC // 1 point
+	)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX,

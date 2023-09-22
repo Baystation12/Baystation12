@@ -18,9 +18,11 @@
 	outfit_type = /singleton/hierarchy/outfit/job/torch/passenger/workplace_liaison
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
-	min_skill = list(   SKILL_BUREAUCRACY	= SKILL_EXPERIENCED,
-	                    SKILL_FINANCE		= SKILL_BASIC)
-	skill_points = 20
+	skill_points = 26
+	min_skill = list( // 5 points
+		SKILL_BUREAUCRACY = SKILL_EXPERIENCED, // 4 points
+		SKILL_FINANCE = SKILL_BASIC // 1 point
+	)
 
 	access = list(
 		access_liaison, access_bridge, access_solgov_crew,
