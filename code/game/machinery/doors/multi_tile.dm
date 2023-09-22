@@ -20,23 +20,6 @@
 	opacity = 1
 	assembly_type = /obj/structure/door_assembly/multi_tile
 
-/obj/machinery/door/airlock/multi_tile/New()
-	..()
-	SetBounds()
-
-/obj/machinery/door/airlock/multi_tile/Move()
-	. = ..()
-	SetBounds()
-
-/obj/machinery/door/airlock/multi_tile/proc/SetBounds()
-	if(dir in list(NORTH, SOUTH))
-		bound_width = width * world.icon_size
-		bound_height = world.icon_size
-	else
-		bound_width = world.icon_size
-		bound_height = width * world.icon_size
-
-
 /obj/machinery/door/airlock/multi_tile/on_update_icon(state=0)
 	..()
 	if(connections in list(NORTH, SOUTH, NORTH|SOUTH))
@@ -80,6 +63,57 @@
 		if(success)
 			dirs |= direction
 	connections = dirs
+
+
+/obj/airlock_filler_object
+	name = "airlock fluff"
+	desc = "You shouldn't be able to see this fluff!"
+	icon = null
+	icon_state = null
+	density = TRUE
+	opacity = TRUE
+	anchored = TRUE
+	invisibility = INVISIBILITY_MAXIMUM
+	atmos_canpass = CANPASS_DENSITY
+	/// The door/airlock this fluff panel is attached to
+	var/obj/machinery/door/filled_airlock
+
+/obj/airlock_filler_object/Bumped(atom/A)
+	if(isnull(filled_airlock))
+		crash_with("Someone bumped into an airlock filler with no parent airlock specified!")
+	return filled_airlock.Bumped(A)
+
+/obj/airlock_filler_object/Destroy()
+	filled_airlock = null
+	return ..()
+
+/// Multi-tile airlocks pair with a filler panel, if one goes so does the other.
+/obj/airlock_filler_object/proc/pair_airlock(obj/machinery/door/parent_airlock)
+	if(isnull(parent_airlock))
+		crash_with("Attempted to pair an airlock filler with no parent airlock specified!")
+
+	filled_airlock = parent_airlock
+	GLOB.destroyed_event.register(filled_airlock, src, .proc/no_airlock)
+
+/obj/airlock_filler_object/proc/no_airlock()
+	GLOB.destroyed_event.unregister(filled_airlock, src)
+	qdel_self()
+
+/// Multi-tile airlocks (using a filler panel) have special handling for movables with PASS_FLAG_GLASS
+/obj/airlock_filler_object/CanPass(atom/movable/mover, turf/target)
+	. = ..()
+	if(.)
+		return
+
+	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
+		return !opacity
+
+/obj/airlock_filler_object/singularity_act()
+	return
+
+/obj/airlock_filler_object/singularity_pull(S, current_size)
+	return
+
 
 /obj/machinery/door/airlock/multi_tile/command
 	door_color = COLOR_COMMAND_BLUE
@@ -134,6 +168,7 @@
 	name = "Glass Airlock"
 	damage_hitsound = 'sound/effects/Glasshit.ogg'
 	glass = TRUE
+	opacity = 0
 
 /obj/machinery/door/airlock/multi_tile/glass/command
 	door_color = COLOR_COMMAND_BLUE
