@@ -16423,6 +16423,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 9
 	},
+/obj/structure/closet/hydrant{
+	pixel_x = 32
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "ecI" = (
