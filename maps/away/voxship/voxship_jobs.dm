@@ -38,13 +38,13 @@
 	info = "You are the sawbones of your scavenger crew. You are in charge of removing stacks, replacing limbs, and generally keeping \
 	your kin alive at all costs."
 	whitelisted_species = list(SPECIES_VOX)
-	min_skill = list(
-		SKILL_HAULING = SKILL_BASIC,
-		SKILL_EVA = SKILL_EXPERIENCED,
-		SKILL_MEDICAL = SKILL_EXPERIENCED,
-		SKILL_ANATOMY = SKILL_EXPERIENCED,
-		SKILL_CHEMISTRY = SKILL_BASIC,
-		SKILL_DEVICES = SKILL_TRAINED
+	min_skill = list( // 45 points
+		SKILL_HAULING = SKILL_BASIC, // 1 point
+		SKILL_EVA = SKILL_EXPERIENCED, // 4 points
+		SKILL_MEDICAL = SKILL_EXPERIENCED, // 16 points
+		SKILL_ANATOMY = SKILL_EXPERIENCED, // 16 points
+		SKILL_CHEMISTRY = SKILL_BASIC, // 4 points
+		SKILL_DEVICES = SKILL_TRAINED // 4 points
 	)
 
 	max_skill = list(
@@ -77,14 +77,14 @@
 	total_positions = 1
 	info = "You are the mechanic of your scavenger crew. Keep all your salvaged technology running, fix robotics, and disassemble some of \
 	the more complex devices your crew comes across."
-	min_skill = list(
-		SKILL_HAULING = SKILL_BASIC,
-		SKILL_COMPUTER = SKILL_BASIC,
-		SKILL_EVA = SKILL_EXPERIENCED,
-		SKILL_CONSTRUCTION = SKILL_TRAINED,
-		SKILL_ELECTRICAL = SKILL_BASIC,
-		SKILL_ATMOS = SKILL_BASIC,
-		SKILL_ENGINES = SKILL_BASIC
+	min_skill = list( // 16 points
+		SKILL_HAULING = SKILL_BASIC, // 1 point
+		SKILL_COMPUTER = SKILL_BASIC, // 1 point
+		SKILL_EVA = SKILL_EXPERIENCED, // 4 points
+		SKILL_CONSTRUCTION = SKILL_TRAINED, // 2 points
+		SKILL_ELECTRICAL = SKILL_BASIC, // 2 points
+		SKILL_ATMOS = SKILL_BASIC, // 2 points
+		SKILL_ENGINES = SKILL_BASIC // 4 points
 	)
 
 	max_skill = list(
@@ -118,13 +118,13 @@
 	outfit_type = /singleton/hierarchy/outfit/job/voxship/crew
 	supervisors = "apex and the arkship"
 	info = "You're in charge. You fly the ship, and dictate what the crew does. Do not disappoint the Apex."
-	min_skill = list(
-		SKILL_HAULING = SKILL_BASIC,
-		SKILL_EVA = SKILL_EXPERIENCED,
-		SKILL_SCIENCE = SKILL_TRAINED,
-		SKILL_PILOT = SKILL_TRAINED,
-		SKILL_COMBAT = SKILL_TRAINED,
-		SKILL_WEAPONS = SKILL_TRAINED
+	min_skill = list( // 25 points
+		SKILL_HAULING = SKILL_BASIC, // 1 point
+		SKILL_EVA = SKILL_EXPERIENCED, // 4 points
+		SKILL_SCIENCE = SKILL_TRAINED, // 4 points
+		SKILL_PILOT = SKILL_TRAINED, // 4 points
+		SKILL_COMBAT = SKILL_TRAINED, // 6 points
+		SKILL_WEAPONS = SKILL_TRAINED // 6 points
 	)
 
 	max_skill = list(

@@ -21,18 +21,20 @@
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e8,
 	)
-	min_skill = list(   SKILL_COMPUTER     = SKILL_TRAINED,
-						SKILL_EVA          = SKILL_TRAINED,
-						SKILL_CONSTRUCTION = SKILL_TRAINED,
-						SKILL_ELECTRICAL   = SKILL_TRAINED,
-						SKILL_ATMOS        = SKILL_TRAINED,
-						SKILL_ENGINES      = SKILL_TRAINED)
+	skill_points = 26
+	min_skill = list( // 22 points
+		SKILL_COMPUTER = SKILL_TRAINED, // 2 points
+		SKILL_EVA = SKILL_TRAINED, // 2 points
+		SKILL_CONSTRUCTION = SKILL_TRAINED, // 2 points
+		SKILL_ELECTRICAL = SKILL_TRAINED, // 4 points
+		SKILL_ATMOS = SKILL_TRAINED, // 4 points
+		SKILL_ENGINES = SKILL_TRAINED // 8 points
+	)
 
 	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
 						SKILL_ELECTRICAL   = SKILL_MAX,
 						SKILL_ATMOS        = SKILL_MAX,
 						SKILL_ENGINES      = SKILL_MAX)
-	skill_points = 20
 
 	access = list(
 		access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
@@ -80,18 +82,20 @@
 		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/civ/contractor
 	)
-	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
-	                    SKILL_EVA          = SKILL_BASIC,
-	                    SKILL_CONSTRUCTION = SKILL_TRAINED,
-	                    SKILL_ELECTRICAL   = SKILL_BASIC,
-	                    SKILL_ATMOS        = SKILL_BASIC,
-	                    SKILL_ENGINES      = SKILL_BASIC)
+	skill_points = 26
+	min_skill = list( // 12 points
+		SKILL_COMPUTER = SKILL_BASIC, // 1 point
+		SKILL_EVA = SKILL_BASIC, // 1 point
+		SKILL_CONSTRUCTION = SKILL_TRAINED, // 2 points
+		SKILL_ELECTRICAL = SKILL_BASIC, // 2 points
+		SKILL_ATMOS = SKILL_BASIC, // 2 points
+		SKILL_ENGINES = SKILL_BASIC // 4 points
+	)
 
 	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
 	                    SKILL_ELECTRICAL   = SKILL_MAX,
 	                    SKILL_ATMOS        = SKILL_MAX,
 	                    SKILL_ENGINES      = SKILL_MAX)
-	skill_points = 20
 
 	access = list(
 		access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
@@ -131,16 +135,16 @@
 		/datum/mil_rank/fleet/e2
 	)
 
-	skill_points = 4
-	no_skill_buffs = TRUE
-
-	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
-	                    SKILL_HAULING      = SKILL_TRAINED,
-	                    SKILL_EVA          = SKILL_TRAINED,
-	                    SKILL_CONSTRUCTION = SKILL_TRAINED,
-	                    SKILL_ELECTRICAL   = SKILL_TRAINED,
-	                    SKILL_ATMOS        = SKILL_TRAINED,
-	                    SKILL_ENGINES      = SKILL_TRAINED)
+	skill_points = 10
+	min_skill = list( // 23 points
+		SKILL_COMPUTER = SKILL_BASIC, // 1 point
+		SKILL_HAULING = SKILL_TRAINED, // 2 points
+		SKILL_EVA = SKILL_TRAINED, // 2 points
+		SKILL_CONSTRUCTION = SKILL_TRAINED, // 2 points
+		SKILL_ELECTRICAL = SKILL_TRAINED, // 4 points
+		SKILL_ATMOS = SKILL_TRAINED, // 4 points
+		SKILL_ENGINES = SKILL_TRAINED // 8 points
+	)
 
 	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
 	                    SKILL_ELECTRICAL   = SKILL_MAX,
@@ -189,13 +193,16 @@
 		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/civ/contractor
 	)
-	min_skill = list(   SKILL_COMPUTER		= SKILL_TRAINED,
-	                    SKILL_DEVICES		= SKILL_EXPERIENCED,
-	                    SKILL_EVA           = SKILL_TRAINED,
-	                    SKILL_ANATOMY       = SKILL_TRAINED,
-						SKILL_CONSTRUCTION  = SKILL_BASIC,
-						SKILL_ELECTRICAL    = SKILL_BASIC,
-	                    SKILL_MECH          = HAS_PERK)
+	skill_points = 26
+	min_skill = list( // 22 points
+		SKILL_COMPUTER = SKILL_TRAINED, // 2 points
+		SKILL_DEVICES = SKILL_EXPERIENCED, // 4 points
+		SKILL_EVA = SKILL_TRAINED, // 2 points
+		SKILL_ANATOMY = SKILL_TRAINED, // 8 points
+		SKILL_CONSTRUCTION = SKILL_BASIC, // 2 points
+		SKILL_ELECTRICAL = SKILL_BASIC, // 2 points
+		SKILL_MECH = HAS_PERK // 2 points
+	)
 
 	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
 	                    SKILL_ELECTRICAL   = SKILL_MAX,
@@ -204,7 +211,6 @@
 	                    SKILL_DEVICES      = SKILL_MAX,
 	                    SKILL_MEDICAL      = SKILL_EXPERIENCED,
 	                    SKILL_ANATOMY      = SKILL_EXPERIENCED)
-	skill_points = 20
 
 	access = list(
 		access_robotics, access_engine, access_solgov_crew, access_network, access_radio_eng

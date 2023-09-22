@@ -29,18 +29,20 @@
 		access_petrov_maint, access_torch_fax, access_radio_sci, access_radio_exp, access_research_storage
 	)
 
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
-	                    SKILL_COMPUTER    = SKILL_BASIC,
-	                    SKILL_FINANCE     = SKILL_BASIC,
-	                    SKILL_BOTANY      = SKILL_BASIC,
-	                    SKILL_ANATOMY     = SKILL_BASIC,
-	                    SKILL_DEVICES     = SKILL_TRAINED,
-	                    SKILL_SCIENCE     = SKILL_TRAINED)
+	skill_points = 26
+	min_skill = list( // 16 points
+		SKILL_BUREAUCRACY = SKILL_BASIC, // 1 point
+		SKILL_COMPUTER = SKILL_BASIC, // 1 point
+		SKILL_FINANCE = SKILL_BASIC, // 1 point
+		SKILL_BOTANY = SKILL_BASIC, // 1 point
+		SKILL_ANATOMY = SKILL_BASIC, // 4 points
+		SKILL_DEVICES = SKILL_TRAINED, // 4 points
+		SKILL_SCIENCE = SKILL_TRAINED // 4 points
+	)
 
 	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
 	                    SKILL_DEVICES     = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX)
-	skill_points = 20
 	possible_goals = list(/datum/goal/achievement/notslimefodder)
 
 /datum/job/scientist
@@ -59,10 +61,13 @@
 		"Xenobiologist",
 		"Xenobotanist"
 	)
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
-	                    SKILL_COMPUTER    = SKILL_BASIC,
-	                    SKILL_DEVICES     = SKILL_BASIC,
-	                    SKILL_SCIENCE     = SKILL_TRAINED)
+	skill_points = 26
+	min_skill = list( // 6 points
+		SKILL_BUREAUCRACY = SKILL_BASIC, // 1 point
+		SKILL_COMPUTER = SKILL_BASIC, // 1 point
+		SKILL_DEVICES = SKILL_BASIC, // 2 points
+		SKILL_SCIENCE = SKILL_TRAINED // 2 points
+	)
 
 	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
 	                    SKILL_DEVICES     = SKILL_MAX,
@@ -87,7 +92,6 @@
 		access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_control, access_torch_fax,
 		access_petrov_maint, access_radio_sci, access_radio_exp, access_research_storage
 	)
-	skill_points = 20
 	possible_goals = list(/datum/goal/achievement/notslimefodder)
 
 /datum/job/scientist_assistant
