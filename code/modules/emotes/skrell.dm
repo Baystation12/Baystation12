@@ -1,18 +1,17 @@
-/datum/species/skrell
-	default_emotes = list(
-		/singleton/emote/audible/skrell_anger,
-		/singleton/emote/audible/skrell_anger1,
-		/singleton/emote/audible/skrell_anger2,
-		/singleton/emote/audible/skrell_laughter,
-		/singleton/emote/audible/skrell_peep,
-		/singleton/emote/audible/skrell_trill,
-		/singleton/emote/audible/skrell_trill1,
-		/singleton/emote/audible/skrell_trill2,
-		/singleton/emote/audible/skrell_warble,
-		/singleton/emote/audible/skrell_warble1,
-		/singleton/emote/audible/skrell_warble2,
-		/singleton/emote/audible/skrell_warble3
-	)
+/datum/species/skrell/default_emotes = list(
+	/singleton/emote/audible/skrell_anger,
+	/singleton/emote/audible/skrell_anger1,
+	/singleton/emote/audible/skrell_anger2,
+	/singleton/emote/audible/skrell_laughter,
+	/singleton/emote/audible/skrell_peep,
+	/singleton/emote/audible/skrell_trill,
+	/singleton/emote/audible/skrell_trill1,
+	/singleton/emote/audible/skrell_trill2,
+	/singleton/emote/audible/skrell_warble,
+	/singleton/emote/audible/skrell_warble1,
+	/singleton/emote/audible/skrell_warble2,
+	/singleton/emote/audible/skrell_warble3
+)
 
 
 /singleton/emote/audible/skrell_anger
