@@ -28,6 +28,9 @@
 
 	var/current_heat_capacity = 50
 
+	var/temperature_warning_threshhold = 170
+	var/temperature_danger_threshhold = T0C
+
 /obj/machinery/atmospherics/unary/cryo_cell/Initialize()
 	. = ..()
 	icon = 'icons/obj/machines/medical/cryogenics_split.dmi'
@@ -82,6 +85,7 @@
 		temperature_archived = air_contents.temperature
 		heat_gas_contents()
 		expel_gas()
+		queue_icon_update()
 
 	if(abs(temperature_archived-air_contents.temperature) > 1)
 		network.update = 1
@@ -138,9 +142,9 @@
 
 	data["cellTemperature"] = round(air_contents.temperature)
 	data["cellTemperatureStatus"] = "good"
-	if(air_contents.temperature > T0C) // if greater than 273.15 kelvin (0 celsius)
+	if(air_contents.temperature >= temperature_danger_threshhold) // if greater than 273.15 kelvin (0 celsius)
 		data["cellTemperatureStatus"] = "bad"
-	else if(air_contents.temperature > 225)
+	else if(air_contents.temperature >= temperature_warning_threshhold)
 		data["cellTemperatureStatus"] = "average"
 
 	data["isBeakerLoaded"] = beaker ? 1 : 0
@@ -234,6 +238,25 @@
 	I = image(icon, "lid[on]_top")
 	I.pixel_z = 32
 	AddOverlays(I)
+
+	if (powered())
+		var/warn_state = "off"
+		if (on)
+			warn_state = "safe"
+			if (air_contents.temperature >= temperature_danger_threshhold)
+				warn_state = "danger"
+			else if (air_contents.temperature >= temperature_warning_threshhold)
+				warn_state = "warn"
+		I = overlay_image(icon, "lights_[warn_state]")
+		AddOverlays(I)
+		I = overlay_image(icon, "lights_[warn_state]_top")
+		I.pixel_z = 32
+		AddOverlays(I)
+		AddOverlays(emissive_appearance(icon, "lights_mask"))
+		I = emissive_appearance(icon, "lights_mask_top")
+		I.pixel_z = 32
+		AddOverlays(I)
+
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/process_occupant()
 	if(air_contents.total_moles < 10)
