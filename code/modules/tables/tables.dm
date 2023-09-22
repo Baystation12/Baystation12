@@ -241,7 +241,7 @@
 
 /obj/structure/table/MouseDrop_T(atom/dropped, mob/user)
 	// Place held objects on table
-	if (user.IsHolding(dropped))
+	if (isitem(dropped) && user.IsHolding(dropped))
 		if (!user.use_sanity_check(src, dropped, SANITY_CHECK_DEFAULT | SANITY_CHECK_TOOL_UNEQUIP))
 			return TRUE
 		user.unEquip(dropped, get_turf(src))
