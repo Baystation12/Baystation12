@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Skill point bonuses are no longer affected by character age. This has been
-      replaced by a flat 8-point skill bonus.
