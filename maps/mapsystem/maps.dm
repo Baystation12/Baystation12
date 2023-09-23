@@ -518,6 +518,9 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(C.mob) // Check if the client is still connected to something
 		// Hide title screen, allowing player to see the map
 		winset(C, "lobbybrowser", "is-disabled=true;is-visible=false")
+		// [SIERRA-ADD] - LOBBYSCREEN
+		show_browser(C, "", "window=lobbybrowser")
+		// [/SIERRA-ADD]
 
 /datum/map/proc/roundend_player_status()
 	for(var/mob/Player in GLOB.player_list)
