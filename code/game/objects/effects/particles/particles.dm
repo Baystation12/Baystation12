@@ -321,7 +321,7 @@
 
 
 /obj/particle_emitter/heat
-	particle_type = "heat low"
+	particle_type = "heat"
 	render_target = HEAT_EFFECT_TARGET
 
 
@@ -331,4 +331,4 @@
 
 
 /obj/particle_emitter/heat/high
-	particle_type = "heat high"
+	particle_type = "high heat"
