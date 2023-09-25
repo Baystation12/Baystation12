@@ -106,13 +106,6 @@
 	else
 		dropInto(loc)
 
-/obj/item/clothing/accessory/use_on(obj/target, mob/user)
-	if (istype(target, /obj/item/clothing))
-		var/obj/item/clothing/clothes = target
-		if (clothes.attempt_attach_accessory(src, user))
-			return TRUE
-	return ..()
-
 //default attackby behaviour
 /obj/item/clothing/accessory/attackby(obj/item/I, mob/user)
 	..()

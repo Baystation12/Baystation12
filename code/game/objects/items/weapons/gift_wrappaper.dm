@@ -153,45 +153,49 @@
 	var/amount = 2.5*BASE_STORAGE_COST(ITEM_SIZE_HUGE)
 	item_flags = ITEM_FLAG_TRY_ATTACK
 
-/obj/item/wrapping_paper/attackby(obj/item/W as obj, mob/user as mob)
-	..()
-	if (!( locate(/obj/structure/table, src.loc) ))
-		to_chat(user, SPAN_WARNING("You MUST put the paper on a table!"))
-	if (W.w_class < ITEM_SIZE_HUGE)
-		var/is_wirecutter = FALSE
-		for (var/obj/item as anything in user.GetAllHeld())
-			if (isWirecutter(item))
-				is_wirecutter = TRUE
-				break
-		if (is_wirecutter)
-			var/a_used = W.get_storage_cost()
-			if (a_used == ITEM_SIZE_NO_CONTAINER)
-				to_chat(user, SPAN_WARNING("You can't wrap that!"))//no gift-wrapping lit welders
+/obj/item/wrapping_paper/use_tool(obj/item/tool, mob/user)
+	if (!istype(tool))
+		return FALSE
+	if (!isturf(loc))
+		to_chat(user, SPAN_WARNING("You must put \the [src] on a surface in order to wrap \the [tool]!"))
+		return TRUE
+	if (tool.w_class > ITEM_SIZE_LARGE)
+		to_chat(user, SPAN_WARNING("\The [tool] is far too large!"))
+		return TRUE
+	if (!is_sharp(user.get_inactive_hand()))
+		to_chat(user, SPAN_WARNING("You need a sharp object in your other hand to cut \the [src]!"))
+		return TRUE
 
-				return
-			if (src.amount < a_used)
-				to_chat(user, SPAN_WARNING("You need more paper!"))
-				return
-			else
-				if(istype(W, /obj/item/smallDelivery) || istype(W, /obj/item/gift)) //No gift wrapping gifts!
-					return
+	var/a_used = tool.get_storage_cost()
+	if (a_used == ITEM_SIZE_NO_CONTAINER)
+		to_chat(user, SPAN_WARNING("You can't wrap that!"))
+		return TRUE
+	if (amount < a_used)
+		to_chat(user, SPAN_WARNING("You need more paper!"))
+		return TRUE
+	if (istype(tool, /obj/item/smallDelivery) || istype(tool, /obj/item/gift)) //No gift wrapping gifts!
+		to_chat(user, SPAN_WARNING("\The [tool] is already wrapped!"))
+		return TRUE
+	if (!do_after(user, tool.w_class SECONDS, tool, DO_PUBLIC_UNIQUE))
+		return TRUE
 
-				if(user.unEquip(W))
-					var/obj/item/gift/G = new /obj/item/gift( src.loc, W )
-					G.add_fingerprint(user)
-					W.add_fingerprint(user)
-					src.amount -= a_used
+	if (user.unEquip(tool))
+		var/obj/item/gift/G = new /obj/item/gift(loc, tool)
+		G.add_fingerprint(user)
+		tool.add_fingerprint(user)
+		amount -= a_used
 
-			if (src.amount <= 0)
-				new /obj/item/c_tube( src.loc )
-				qdel(src)
-				return
-		else
-			to_chat(user, SPAN_WARNING("You need scissors!"))
-	else
-		to_chat(user, SPAN_WARNING("The object is FAR too large!"))
-	return
+	if (amount <= 0)
+		new /obj/item/c_tube(loc)
+		qdel(src)
+	return TRUE
 
+/obj/item/wrapping_paper/use_on(obj/item/target, mob/user)
+	if (!isitem(target))
+		return FALSE
+	if (!isturf(loc))
+		to_chat(user, SPAN_WARNING("You must put \the [src] on a surface in order to wrap \the [target]!"))
+		return TRUE
 
 /obj/item/wrapping_paper/examine(mob/user, distance)
 	. = ..()
@@ -199,25 +203,35 @@
 		to_chat(user, text("There is about [] square units of paper left!", src.amount))
 
 /obj/item/wrapping_paper/attack(mob/target as mob, mob/user as mob)
-	. = FALSE
 	if (!istype(target, /mob/living/carbon/human))
 		return FALSE
-
 	var/mob/living/carbon/human/H = target
-	if (istype(H.wear_suit, /obj/item/clothing/suit/straight_jacket) || H.stat)
-		if (src.amount > 2)
-			var/obj/effect/spresent/present = new /obj/effect/spresent (H.loc)
-			src.amount -= 2
+	var/a_used = BASE_STORAGE_COST(ITEM_SIZE_LARGE) //get_storage_cost() does not work on mobs, will reproduce same logic here.
 
-			if (H.client)
-				H.client.perspective = EYE_PERSPECTIVE
-				H.client.eye = present
+	if (amount < a_used)
+		to_chat(user, SPAN_WARNING("You need more paper."))
+		return TRUE
 
-			H.forceMove(present)
-			admin_attack_log(user, H, "Used \a [src] to wrap their victim", "Was wrapepd with \a [src]", "used \the [src] to wrap")
+	if (!H.has_danger_grab(user))
+		to_chat(user, "You need to have a firm grip on \the [target] in order to wrap them.")
+		return TRUE
 
-		else
-			to_chat(user, SPAN_WARNING("You need more paper."))
+	if (!do_after(user, ITEM_SIZE_LARGE SECONDS, target, DO_PUBLIC_UNIQUE) || !H.has_danger_grab(user))
+		return TRUE
+
+	var/obj/effect/spresent/present = new /obj/effect/spresent (H.loc)
+	amount -= a_used
+
+	if (H.client)
+		H.client.perspective = EYE_PERSPECTIVE
+		H.client.eye = present
+
+	if (user == target)
+		user.visible_message(SPAN_DANGER("\The [user] has gift-wrapped themselves!"))
 	else
-		to_chat(user, "They are moving around too much. A straightjacket would help.")
+		user.visible_message(SPAN_DANGER("\The [user] has gift-wrapped \the [target]!"))
+
+	H.forceMove(present)
+	H.remove_grabs_and_pulls()
+	admin_attack_log(user, H, "Used \a [src] to wrap their victim", "Was wrapepd with \a [src]", "used \the [src] to wrap")
 	return TRUE
