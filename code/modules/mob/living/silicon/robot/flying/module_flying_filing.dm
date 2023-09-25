@@ -44,4 +44,5 @@
 	..()
 	if (R.emagged)
 		var/obj/item/flamethrower/full/loaded/flamethrower = locate() in equipment
-		flamethrower.beaker.reagents.add_reagent(/datum/reagent/napalm, 10 * amount)
+		if (flamethrower)
+			flamethrower.beaker.reagents.add_reagent(/datum/reagent/napalm, 30 * amount)

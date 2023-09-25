@@ -44,6 +44,7 @@
 	)
 
 /obj/item/robot_module/flying/forensics/respawn_consumable(mob/living/silicon/robot/R, amount)
+	..()
 	var/obj/item/reagent_containers/spray/luminol/luminol = locate() in equipment
 	if(!luminol)
 		luminol = new(src)
@@ -52,4 +53,3 @@
 		var/adding = min(luminol.volume-luminol.reagents.total_volume, 2*amount)
 		if(adding > 0)
 			luminol.reagents.add_reagent(/datum/reagent/luminol, adding)
-	..()
