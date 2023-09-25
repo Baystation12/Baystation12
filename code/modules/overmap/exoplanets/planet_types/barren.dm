@@ -14,7 +14,6 @@
 
 /obj/effect/overmap/visitable/sector/exoplanet/barren/generate_atmosphere()
 	atmosphere = new
-	return
 
 /obj/effect/overmap/visitable/sector/exoplanet/barren/generate_flora()
 	return
