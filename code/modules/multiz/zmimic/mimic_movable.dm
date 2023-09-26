@@ -79,10 +79,11 @@
 	name = "openspace multiplier"
 	desc = "You shouldn't see this."
 	icon = 'icons/effects/lighting_overlay.dmi'
-	icon_state = "dark"
+	icon_state = LIGHTING_TRANSPARENT_ICON_STATE
 	plane = OPENTURF_MAX_PLANE
 	layer = MIMICED_LIGHTING_LAYER
-	color = "#0000004b"
+	color = SHADOWER_DARKENING_COLOR
+	//blend_mode = BLEND_MULTIPLY
 
 /atom/movable/openspace/multiplier/Destroy()
 	var/turf/myturf = loc
@@ -96,38 +97,36 @@
 	layer = MIMICED_LIGHTING_LAYER
 	plane = OPENTURF_MAX_PLANE
 	invisibility = 0
-	blend_mode = BLEND_MULTIPLY
-	if (icon_state == null)
+
+	if (icon_state == LIGHTING_BASE_ICON_STATE)
+		blend_mode = BLEND_MULTIPLY
 		// We're using a color matrix, so just darken the colors across the board.
-		// Bay stores lights as inverted so the lighting PM can invert it for darksight, but
-		//   we don't have a plane master, so invert it again.
 		var/list/c_list = color
-		c_list[CL_MATRIX_RR] *= -SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_RG] *= -SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_RB] *= -SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_GR] *= -SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_GG] *= -SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_GB] *= -SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_BR] *= -SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_BG] *= -SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_BB] *= -SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_AR] *= -SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_AG] *= -SHADOWER_DARKENING_FACTOR
-		c_list[CL_MATRIX_AB] *= -SHADOWER_DARKENING_FACTOR
+		c_list[CL_MATRIX_RR] *= SHADOWER_DARKENING_FACTOR
+		c_list[CL_MATRIX_RG] *= SHADOWER_DARKENING_FACTOR
+		c_list[CL_MATRIX_RB] *= SHADOWER_DARKENING_FACTOR
+		c_list[CL_MATRIX_GR] *= SHADOWER_DARKENING_FACTOR
+		c_list[CL_MATRIX_GG] *= SHADOWER_DARKENING_FACTOR
+		c_list[CL_MATRIX_GB] *= SHADOWER_DARKENING_FACTOR
+		c_list[CL_MATRIX_BR] *= SHADOWER_DARKENING_FACTOR
+		c_list[CL_MATRIX_BG] *= SHADOWER_DARKENING_FACTOR
+		c_list[CL_MATRIX_BB] *= SHADOWER_DARKENING_FACTOR
+		c_list[CL_MATRIX_AR] *= SHADOWER_DARKENING_FACTOR
+		c_list[CL_MATRIX_AG] *= SHADOWER_DARKENING_FACTOR
+		c_list[CL_MATRIX_AB] *= SHADOWER_DARKENING_FACTOR
 		color = c_list
+
+		//Hackfix until I look into planes a bit more, we copy the plane of turf
+		var/turf/myturf = loc
+		if (istype(myturf))
+			plane = myturf.plane
 	else
-		// Not a color matrix, so we just ignore the lighting values.
-		icon_state = "dark"	// this is actually just a white sprite, which is what this blending needs
-		color = list(
-			SHADOWER_DARKENING_FACTOR, 0, 0,
-			0, SHADOWER_DARKENING_FACTOR, 0,
-			0, 0, SHADOWER_DARKENING_FACTOR
-		)
+		// Not a color matrix, so we can just use the color var ourselves.
+		color = (icon_state == LIGHTING_DARKNESS_ICON_STATE) ? COLOR_WHITE : SHADOWER_DARKENING_COLOR
 
 	var/turf/parent = loc
 	ASSERT(isturf(parent))
-	if (LAZYLEN(parent.ao_overlays_mimic))
-		AddOverlays(parent.ao_overlays_mimic)
+	UpdateOverlays()
 
 	if (bound_overlay)
 		update_above()

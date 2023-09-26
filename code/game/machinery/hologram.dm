@@ -356,9 +356,9 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		hologram.SetName("[A.name] (Hologram)") //If someone decides to right click.
 		A.holo = src
 		masters[A] = hologram
-	hologram.set_light(1, 0.1, 2)	//hologram lighting
+	hologram.set_light(2, 0.1)	//hologram lighting
 	hologram.color = color //painted holopad gives coloured holograms
-	set_light(1, 0.1, 2)			//pad lighting
+	set_light(2, 0.1)			//pad lighting
 	icon_state = "[base_icon]1"
 	return 1
 

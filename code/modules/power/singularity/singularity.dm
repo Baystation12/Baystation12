@@ -8,7 +8,7 @@
 	anchored = TRUE
 	density = TRUE
 	layer = SINGULARITY_LAYER
-	light_outer_range = 6
+	light_range = 6
 	unacidable = TRUE
 
 	var/current_size = 1

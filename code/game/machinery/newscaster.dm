@@ -153,7 +153,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 	var/hitstaken = 0      //Death at 3 hits from an item with force>=15
 	var/datum/feed_channel/viewing_channel = null
 	var/datum/feed_network/connected_group
-	light_outer_range = 0
+	light_range = 0
 	anchored = TRUE
 	layer = ABOVE_WINDOW_LAYER
 

@@ -81,7 +81,7 @@
 		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		I.layer = ABOVE_LIGHTING_LAYER
 		AddOverlays(I)
-		set_light(0.4, 1.2, 4, 10)
+		set_light(4, 0.4)
 
 		if (interference && prob(20))
 			visible_message(SPAN_WARNING("The teleporter sparks ominously!"))

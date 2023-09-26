@@ -20,8 +20,7 @@
 			else
 				initial_gas = list()
 				temperature = T0C
-			//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
-			set_light(E.lightlevel, 0.1, 2)
+
 			if(E.planetary_area && istype(loc, world.area))
 				ChangeArea(src, E.planetary_area)
 	..()
@@ -216,6 +215,7 @@
 	dynamic_lighting = FALSE
 	icon = null
 	icon_state = null
+	permit_ao = FALSE
 
 /turf/simulated/planet_edge/Initialize()
 	. = ..()

@@ -142,7 +142,7 @@
 /turf/simulated/floor/away/blueriver/alienfloor/Initialize()
 	.=..()
 
-	set_light(0.7, 1, 5, l_color = "#0066ff")
+	set_light(5, 0.7, l_color = "#0066ff")
 
 /turf/unsimulated/wall/away/blueriver/livingwall
 	name = "alien wall"
@@ -173,7 +173,7 @@
 	.=..()
 
 	icon_state = "bluespacecrystal[rand(1,3)]"
-	set_light(0.7, 1, 5, l_color = "#0066ff")
+	set_light(5, 1, l_color = "#0066ff")
 
 /turf/unsimulated/wall/supermatter/no_spread/Process()
 	return PROCESS_KILL

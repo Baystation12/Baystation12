@@ -447,7 +447,7 @@
 		I.blend_mode = BLEND_ADD
 		I.alpha = round(255*power_output/max_power_output)
 		AddOverlays(I)
-		set_light(0.7, 0.1, rad_power + power_output - max_safe_output, 2, "#3b97ca")
+		set_light(rad_power + power_output - max_safe_output, 0.7, "#3b97ca")
 	else
 		set_light(0)
 

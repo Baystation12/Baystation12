@@ -129,7 +129,7 @@
 				AddOverlays(emissive_appearance(icon, "[icon_state]_lights_cold"))
 			glow_icon.alpha = clamp(temperature - MINIMUM_GLOW_TEMPERATURE, MINIMUM_GLOW_VALUE, MAXIMUM_GLOW_VALUE)
 			LAZYADD(adding_overlays, glow_icon)
-			set_light(0.2, 0.1, 1, l_color = COLOR_GREEN)
+			set_light(1, 0.2, l_color = COLOR_GREEN)
 		else
 			set_light(0)
 	else

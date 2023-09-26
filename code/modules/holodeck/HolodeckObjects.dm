@@ -419,10 +419,9 @@
 /mob/living/simple_animal/hostile/carp/holodeck/on_update_icon()
 	return
 
-
 /mob/living/simple_animal/hostile/carp/holodeck/Initialize(mapload, ...)
 	. = ..()
-	set_light(0.5, 0.1, 2) //hologram lighting
+	set_light(2, 0.5) //hologram lighting
 
 
 /mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(safe)

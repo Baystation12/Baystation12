@@ -17,7 +17,7 @@
 	else
 		var/mult = clamp(radiation/200, 0.5, 1)
 		if(last_glow != mult)
-			set_light(mult, 0.5, (5*mult), 2, "#55ff55")
+			set_light((5*mult), mult, "#55ff55")
 			last_glow = mult
 
 	set_nutrition(clamp(nutrition + floor(radiation/100) + light_amount, 0, 500))

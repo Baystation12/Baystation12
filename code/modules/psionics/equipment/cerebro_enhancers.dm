@@ -164,4 +164,4 @@
 	action_button_name = "Remove Psionic Amplifier"
 	H.update_action_buttons()
 
-	set_light(0.5, 0.1, 3, 2, l_color = "#880000")
+	set_light(3, 0.5, l_color = "#880000")

@@ -173,7 +173,6 @@
 	darkness_view = 5
 	action_button_name = "Toggle Goggles"
 	toggleable = TRUE
-	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	siemens_coefficient = 0.6
 	electric = TRUE
 

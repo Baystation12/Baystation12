@@ -191,7 +191,7 @@
 
 	var/image/alert = overlay_image(sl.icon, sl.overlay_status_display, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 
-	set_light(sl.light_max_bright, sl.light_inner_range, sl.light_outer_range, 2, sl.light_color_alarm)
+	set_light(sl.light_range, sl.light_power, sl.light_color_alarm)
 	AddOverlays(alert)
 
 /obj/machinery/status_display/proc/set_picture(state)
@@ -200,13 +200,13 @@
 		picture_state = state
 		picture = image('icons/obj/machines/status_display.dmi', icon_state=picture_state)
 	AddOverlays(picture)
-	set_light(0.5, 0.1, 1, 2, COLOR_WHITE)
+	set_light(2, 0.5, COLOR_WHITE)
 
 /obj/machinery/status_display/proc/update_display(line1, line2)
 	var/new_text = {"<div style="font-size:[FONT_SIZE];color:[FONT_COLOR];font:'[FONT_STYLE]';text-align:center;" valign="top">[line1]<br>[line2]</div>"}
 	if(maptext != new_text)
 		maptext = new_text
-	set_light(0.5, 0.1, 1, 2, COLOR_WHITE)
+	set_light(2, 0.5, COLOR_WHITE)
 
 /obj/machinery/status_display/proc/get_shuttle_timer()
 	var/timeleft = evacuation_controller.get_eta()

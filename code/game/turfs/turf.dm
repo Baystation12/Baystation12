@@ -52,7 +52,14 @@
 	else
 		luminosity = 1
 
-	RecalculateOpacity()
+	if (light_power && light_range)
+		update_light()
+
+	if (!mapload || (!istype(src, /turf/space) && is_outside()))
+		SSambient_lighting.queued += src
+
+	if (opacity)
+		has_opaque_atom = TRUE
 
 	if (mapload && permit_ao)
 		queue_ao()
@@ -431,3 +438,16 @@ var/global/const/enterloopsanity = 100
 
 /turf/proc/IgniteTurf(power, fire_colour)
 	return
+
+//Maybe we want to make this stateful at some point
+/turf/proc/is_outside()
+
+	//For the purposes of light, dense turfs should not be considered to be outside
+	if(density)
+		return FALSE
+
+	var/area/A = get_area(src)
+	if(A.area_flags & AREA_FLAG_EXTERNAL)
+		return TRUE
+
+	//TODO: CitRP has some concept of outside based on turfs above. We don't really have any use cases right now, revisit this function if this changes

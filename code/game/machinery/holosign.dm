@@ -36,7 +36,7 @@
 		set_light(0)
 	else
 		icon_state = on_icon
-		set_light(0.5, 0.5, 1, l_color = COLOR_CYAN_BLUE)
+		set_light(1, 0.5, COLOR_CYAN_BLUE)
 
 /singleton/public_access/public_variable/holosign_on
 	expected_type = /obj/machinery/holosign

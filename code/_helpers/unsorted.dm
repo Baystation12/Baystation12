@@ -1036,17 +1036,6 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	. = view(range, GLOB.dview_mob)
 	GLOB.dview_mob.loc = null
 
-/mob/dview
-	invisibility = INVISIBILITY_ABSTRACT
-	density = FALSE
-
-	anchored = TRUE
-	simulated = FALSE
-
-	see_in_dark = 1e6
-
-	virtual_mob = null
-
 /mob/dview/Destroy()
 	SHOULD_CALL_PARENT(FALSE)
 	return QDEL_HINT_LETMELIVE
@@ -1062,7 +1051,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 /atom/proc/get_light_and_color(atom/origin)
 	if(origin)
 		color = origin.color
-		set_light(origin.light_max_bright, origin.light_inner_range, origin.light_outer_range, origin.light_falloff_curve)
+		set_light(origin.light_range, origin.light_power)
 
 
 // call to generate a stack trace and print to runtime logs

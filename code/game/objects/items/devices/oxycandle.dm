@@ -11,8 +11,8 @@
 	var/on = 0
 	var/activation_sound = 'sound/effects/flare.ogg'
 	light_color = "#e58775"
-	light_outer_range = 2
-	light_max_bright = 1
+	light_range = 2
+	light_power = 1
 	var/brightness_on = 1 // Moderate-low bright.
 	action_button_name = null
 

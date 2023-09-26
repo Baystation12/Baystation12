@@ -209,7 +209,7 @@
 
 /obj/effect/spider/stickyweb/dark/Initialize()
 	. = ..()
-	set_light(-1, 0.5, 1, 1, l_color = "#ffffff")
+	set_light(1, -1, l_color = "#ffffff")
 
 // The AI for nurse spiders. Wraps things in webs by 'attacking' them.
 /datum/ai_holder/simple_animal/melee/nurse_spider

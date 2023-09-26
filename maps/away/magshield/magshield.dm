@@ -49,8 +49,8 @@
 	icon_state = "maggen"
 	anchored = TRUE
 	density = TRUE
-	light_outer_range = 3
-	light_max_bright = 1
+	light_range = 3
+	light_power = 1
 	light_color = "#ffea61"
 	var/heavy_range = 10
 	var/lighter_range = 20
@@ -130,13 +130,13 @@
 	icon_state = "nav_light_green"
 	anchored = TRUE
 	density = TRUE
-	light_outer_range = 10
-	light_max_bright = 1
+	light_range = 10
+	light_power = 1
 	light_color = "#00ee00"
 
 /obj/structure/magshield/nav_light/New()//try make flashing through the process
 	..()
-	set_light(light_max_bright, light_outer_range / 6, light_outer_range, 2, light_color)
+	set_light(light_range, light_power, light_color)
 
 /obj/structure/magshield/nav_light/red
 	desc = "Large and bright light regularly emitting red flashes."

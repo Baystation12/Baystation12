@@ -206,7 +206,7 @@
 /obj/effect/engine_exhaust/New(turf/nloc, ndir)
 	..(nloc)
 	nloc.hotspot_expose(1000,125)
-	set_light(0.5, 1, 4)
+	set_light(4, 0.5)
 	set_dir(ndir)
 	spawn(20)
 		qdel(src)

@@ -70,6 +70,23 @@
 
 	update_mimic(!mapload)	// Only recursively update if the map isn't loading.
 
+	//Update lights if mapload, else if we're changing turf this will be overriden by corner copy step
+	if(mapload)
+		rebuild_zbleed()
+
+//Force reconsider zbleed
+/turf/proc/rebuild_zbleed()
+	//Only relevant if dynamically lit
+	var/turf/under = GetBelow(src)
+	if(TURF_IS_DYNAMICALLY_LIT_UNSAFE(src) && under)
+		//We need to force recalculation of corners regardless, clear first
+		if(corners && length(corners))
+			for (var/datum/lighting_corner/C in corners)
+				C.clear_below_lumcount()
+		if (under.corners && length(under.corners))
+			for (var/datum/lighting_corner/C in under.corners)
+				C.rebuild_above_below_lumcount()
+
 /// Cleans up Z-mimic objects for this turf. You shouldn't call this directly 99% of the time.
 /turf/proc/cleanup_zmimic()
 	SSzcopy.openspace_turfs -= 1

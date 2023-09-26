@@ -73,9 +73,8 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	var/translator_on = 0 // keeps track of the translator module
 
 
-	var/flashlight_max_bright = 0.5 //brightness of light when on, must be no greater than 1.
-	var/flashlight_inner_range = 1 //inner range of light when on, can be negative
-	var/flashlight_outer_range = 3 //outer range of light when on, can be negative
+	var/flashlight_power = 0.5 //brightness of light when on, must be no greater than 1.
+	var/flashlight_range = 3 //outer range of light when on, can be negative
 	var/light_on = FALSE
 
 	hud_type = /datum/hud/pai
@@ -325,7 +324,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 /mob/living/silicon/pai/proc/toggle_integrated_light()
 	if(!light_on)
-		set_light(flashlight_max_bright, flashlight_inner_range, flashlight_outer_range, 2)
+		set_light(flashlight_range, flashlight_power, 2)
 		to_chat(src, SPAN_NOTICE("You enable your integrated light."))
 		light_on = TRUE
 	else

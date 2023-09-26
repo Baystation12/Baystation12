@@ -14,6 +14,8 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	clicksound = "switch"
 
+	light_power = 0.5
+
 
 /obj/machinery/space_heater/New()
 	..()
@@ -26,10 +28,10 @@
 		set_light(0)
 	else if(active > 0)
 		icon_state = "sheater-heat"
-		set_light(0.7, 1, 2, 3, COLOR_SEDONA)
+		set_light(3, COLOR_SEDONA)
 	else if(active < 0)
 		icon_state = "sheater-cool"
-		set_light(0.7, 1, 2, 3, COLOR_DEEP_SKY_BLUE)
+		set_light(3, l_color = COLOR_DEEP_SKY_BLUE)
 	else
 		icon_state = "sheater-standby"
 		set_light(0)

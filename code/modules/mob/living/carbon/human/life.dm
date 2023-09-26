@@ -231,7 +231,7 @@
 			set_light(0)
 	else
 		if(species.appearance_flags & SPECIES_APPEARANCE_RADIATION_GLOWS)
-			set_light(0.3, 0.1, max(1,min(20,radiation/20)), 2, species.get_flesh_colour(src))
+			set_light(max(1,min(20,radiation/20)), 0.3, species.get_flesh_colour(src))
 		// END DOGSHIT SNOWFLAKE
 
 		var/obj/item/organ/internal/diona/nutrients/rad_organ = locate() in internal_organs
@@ -885,7 +885,7 @@
 	//0.1% chance of playing a scary sound to someone who's in complete darkness
 	if(isturf(loc) && rand(1,1000) == 1)
 		var/turf/T = loc
-		if(T.get_lumcount() <= LIGHTING_SOFT_THRESHOLD)
+		if(T.get_lumcount() <= 0)
 			playsound_local(src,pick(GLOB.scarySounds),50, 1, -1)
 
 	var/area/A = get_area(src)

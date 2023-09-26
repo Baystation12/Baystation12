@@ -190,13 +190,6 @@ GLOBAL_LIST_EMPTY(zmimic_renderers)
 	plane = LIGHTING_PLANE
 	appearance_flags = PLANE_MASTER | NO_CLIENT_COLOR
 	relay_blend_mode = BLEND_MULTIPLY
-	color = list(
-		-1,  0,  0,  0, // R
-		 0, -1,  0,  0, // G
-		 0,  0, -1,  0, // B
-		 0,  0,  0,  0, // A
-		 1,  1,  1,  1  // Mapping
-	)
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 

@@ -10,8 +10,8 @@
 	icon = 'icons/turf/flooring/circuit.dmi'
 	icon_state = "bcircuit"
 	initial_flooring = /singleton/flooring/reinforced/circuit
-	light_outer_range = 2
-	light_max_bright = 1
+	light_range = 2
+	light_power = 1
 	light_color = COLOR_BLUE
 
 /turf/simulated/floor/greengrid
@@ -19,8 +19,8 @@
 	icon = 'icons/turf/flooring/circuit.dmi'
 	icon_state = "gcircuit"
 	initial_flooring = /singleton/flooring/reinforced/circuit/green
-	light_outer_range = 2
-	light_max_bright = 3
+	light_range = 2
+	light_power = 3
 	light_color = COLOR_GREEN
 
 /turf/simulated/floor/redgrid
@@ -28,8 +28,8 @@
 	icon = 'icons/turf/flooring/circuit.dmi'
 	icon_state = "rcircuit"
 	initial_flooring = /singleton/flooring/reinforced/circuit/red
-	light_outer_range = 2
-	light_max_bright = 2
+	light_range = 2
+	light_power = 2
 	light_color = COLOR_RED
 
 /turf/simulated/floor/selfestructgrid
@@ -37,8 +37,8 @@
 	icon = 'icons/turf/flooring/circuit.dmi'
 	icon_state = "rcircuit_off"
 	initial_flooring = /singleton/flooring/reinforced/circuit/selfdestruct
-	light_outer_range = 2
-	light_max_bright = 2
+	light_range = 2
+	light_power = 2
 	light_color = COLOR_BLACK
 
 /turf/simulated/floor/wood
