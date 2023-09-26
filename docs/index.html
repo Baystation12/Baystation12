@@ -29,8 +29,8 @@ General Public License version 3.
 
 
 <h3 id="modules">Modules
-<aside>(224 modules,
-    224/4373 macros, 5.1%)</aside></h3>
+<aside>(227 modules,
+    227/4424 macros, 5.1%)</aside></h3>
 <ul class="index-tree modules">
     <li><a href="(builtins).html" title="(builtins)">(builtins)</a></li>
     <li class="has-children"><span title="code">code</span><ul class="index-tree">
@@ -50,6 +50,7 @@ General Public License version 3.
     <li><a href="code/__defines/health.html" title="code&#x2F;__defines&#x2F;health">health</a></li>
     <li><a href="code/__defines/inventory_sizes.html" title="code&#x2F;__defines&#x2F;inventory_sizes">inventory_sizes</a></li>
     <li><a href="code/__defines/items_clothing.html" title="code&#x2F;__defines&#x2F;items_clothing">items_clothing</a></li>
+    <li><a href="code/__defines/lighting.html" title="code&#x2F;__defines&#x2F;lighting">lighting</a></li>
     <li><a href="code/__defines/lists.html" title="code&#x2F;__defines&#x2F;lists">lists</a></li>
     <li><a href="code/__defines/misc.html" title="code&#x2F;__defines&#x2F;misc">misc</a></li>
     <li><a href="code/__defines/mobs.html" title="code&#x2F;__defines&#x2F;mobs">mobs</a></li>
@@ -189,6 +190,7 @@ General Public License version 3.
     </ul></li>
     <li><span class="no-substance">random&#x2F;</span><a href="code/game/objects/random/date_based.html" title="code&#x2F;game&#x2F;objects&#x2F;random&#x2F;date_based">date_based</a></li>
     </ul></li>
+    <li><span class="no-substance">turfs&#x2F;</span><a href="code/game/turfs/turf.html" title="code&#x2F;game&#x2F;turfs&#x2F;turf">turf</a></li>
     </ul></li>
     <li class="has-children"><span title="code&#x2F;modules">modules</span><ul class="index-tree">
     <li class="has-children"><span title="code&#x2F;modules&#x2F;admin">admin</span><ul class="index-tree">
@@ -222,6 +224,7 @@ General Public License version 3.
     <li><span class="no-substance">games&#x2F;</span><a href="code/modules/games/cards.html" title="code&#x2F;modules&#x2F;games&#x2F;cards">cards</a></li>
     <li><span class="no-substance">ghosttrap&#x2F;</span><a href="code/modules/ghosttrap/trap.html" title="code&#x2F;modules&#x2F;ghosttrap&#x2F;trap">trap</a></li>
     <li><span class="no-substance">goonchat&#x2F;</span><a href="code/modules/goonchat/browserOutput.html" title="code&#x2F;modules&#x2F;goonchat&#x2F;browserOutput">browserOutput</a></li>
+    <li><span class="no-substance">lighting&#x2F;</span><a href="code/modules/lighting/lighting_atom.html" title="code&#x2F;modules&#x2F;lighting&#x2F;lighting_atom">lighting_atom</a></li>
     <li><span class="no-substance">maps&#x2F;</span><a href="code/modules/maps/dmm_suite.html" title="code&#x2F;modules&#x2F;maps&#x2F;dmm_suite">dmm_suite</a></li>
     <li class="has-children"><span title="code&#x2F;modules&#x2F;mining">mining</span><ul class="index-tree">
     <li><a href="code/modules/mining/mine_items.html" title="code&#x2F;modules&#x2F;mining&#x2F;mine_items">mine_items</a></li>
@@ -369,7 +372,7 @@ General Public License version 3.
 
 
 <h3 id="types">Types
-<aside>(291 detailed/564 documented/20426 total, 2.8%)</aside></h3>
+<aside>(296 detailed/569 documented/20428 total, 2.8%)</aside></h3>
 <ul class="index-tree">
     <li><a href="global.html" title="(global)">(global)</a></li>
     <li class="has-children"><a href="area.html" title="&#x2F;area">area</a><ul class="index-tree">
@@ -431,6 +434,7 @@ Null key is always #000000.</li>
     <li><span class="no-substance" title="&#x2F;datum&#x2F;ai_laws&#x2F;syndicate_override">syndicate_override</span> - Syndicate</li>
     <li><span class="no-substance" title="&#x2F;datum&#x2F;ai_laws&#x2F;tyrant">tyrant</span> - T.Y.R.A.N.T.</li>
     </ul></li>
+    <li><a href="datum/ambient_group.html" title="&#x2F;datum&#x2F;ambient_group">ambient_group</a></li>
     <li><a href="datum/antagonist.html" title="&#x2F;datum&#x2F;antagonist">antagonist</a></li>
     <li><a href="datum/artifact_effect.html" title="&#x2F;datum&#x2F;artifact_effect">artifact_effect</a></li>
     <li><span class="no-substance" title="&#x2F;datum&#x2F;backpack_setup">backpack_setup</span> - Character setup</li>
@@ -477,12 +481,14 @@ Null key is always #000000.</li>
     <li><a href="datum/configuration.html" title="&#x2F;datum&#x2F;configuration">configuration</a></li>
     <li class="has-children"><a href="datum/controller.html" title="&#x2F;datum&#x2F;controller">controller</a> - The name of the controller<ul class="index-tree">
     <li class="has-children"><a href="datum/controller/subsystem.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem">subsystem</a><ul class="index-tree">
+    <li><a href="datum/controller/subsystem/ambient_lighting.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;ambient_lighting">ambient_lighting</a></li>
     <li><a href="datum/controller/subsystem/fabrication.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;fabrication">fabrication</a></li>
     <li><a href="datum/controller/subsystem/ghost_images.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;ghost_images">ghost_images</a></li>
     <li><a href="datum/controller/subsystem/goals.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;goals">goals</a></li>
     <li><a href="datum/controller/subsystem/graphs.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;graphs">graphs</a></li>
     <li><a href="datum/controller/subsystem/inactivity.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;inactivity">inactivity</a></li>
     <li><a href="datum/controller/subsystem/jobs.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;jobs">jobs</a></li>
+    <li><a href="datum/controller/subsystem/lighting.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;lighting">lighting</a></li>
     <li><a href="datum/controller/subsystem/machines.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;machines">machines</a></li>
     <li><a href="datum/controller/subsystem/misc_slow.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;misc_slow">misc_slow</a></li>
     <li><a href="datum/controller/subsystem/overlays.html" title="&#x2F;datum&#x2F;controller&#x2F;subsystem&#x2F;overlays">overlays</a></li>
@@ -549,6 +555,7 @@ Variable model is one full map line (e.g /turf/unsimulated/wall{icon_state = &qu
     <li><span class="no-substance" title="&#x2F;datum&#x2F;job&#x2F;assistant">assistant</span> - Civilian</li>
     <li><span class="no-substance" title="&#x2F;datum&#x2F;job&#x2F;cyborg">cyborg</span> - Synthetic</li>
     </ul></li>
+    <li><a href="datum/lighting_corner.html" title="&#x2F;datum&#x2F;lighting_corner">lighting_corner</a></li>
     <li><a href="datum/map.html" title="&#x2F;datum&#x2F;map">map</a></li>
     <li><a href="datum/map_template.html" title="&#x2F;datum&#x2F;map_template">map_template</a></li>
     <li><span class="no-substance" title="&#x2F;datum&#x2F;memory">memory</span> - Memories</li>
@@ -784,6 +791,7 @@ This is an obj because raw atoms can't be placed in DM or third-party mapping to
     <li><span class="no-substance">overlay&#x2F;</span><a href="obj/effect/overlay/self_deleting.html" title="&#x2F;obj&#x2F;effect&#x2F;overlay&#x2F;self_deleting">self_deleting</a> - Effect overlays that should automatically delete themselves after a set time.</li>
     <li class="has-children"><a href="obj/effect/overmap.html" title="&#x2F;obj&#x2F;effect&#x2F;overmap">overmap</a><ul class="index-tree">
     <li class="has-children"><a href="obj/effect/overmap/visitable.html" title="&#x2F;obj&#x2F;effect&#x2F;overmap&#x2F;visitable">visitable</a><ul class="index-tree">
+    <li><span class="no-substance">sector&#x2F;</span><a href="obj/effect/overmap/visitable/sector/exoplanet.html" title="&#x2F;obj&#x2F;effect&#x2F;overmap&#x2F;visitable&#x2F;sector&#x2F;exoplanet">exoplanet</a></li>
     <li><a href="obj/effect/overmap/visitable/ship.html" title="&#x2F;obj&#x2F;effect&#x2F;overmap&#x2F;visitable&#x2F;ship">ship</a></li>
     </ul></li>
     </ul></li>
@@ -1187,7 +1195,7 @@ On a directed graph, these would be the arrows connecting the nodes representing
     <li class="has-children"><a href="spell.html" title="&#x2F;spell">spell</a><ul class="index-tree">
     <li><span class="no-substance">aoe_turf&#x2F;conjure&#x2F;</span><span class="no-substance" title="&#x2F;spell&#x2F;aoe_turf&#x2F;conjure&#x2F;construct">construct</span> - Construct Spells</li>
     </ul></li>
-    <li class="has-children"><a href="turf.html" title="&#x2F;turf">turf</a><ul class="index-tree">
+    <li class="has-children"><a href="turf.html" title="&#x2F;turf">turf</a> - Do we have non-zero ambient light? Use [TURF_IS_AMBIENT_LIT] instead of reading this directly.<ul class="index-tree">
     <li class="has-children"><span title="&#x2F;turf&#x2F;simulated">simulated</span><ul class="index-tree">
     <li class="has-children"><a href="turf/simulated/floor.html" title="&#x2F;turf&#x2F;simulated&#x2F;floor">floor</a><ul class="index-tree">
     <li><span class="no-substance" title="&#x2F;turf&#x2F;simulated&#x2F;floor&#x2F;asteroid">asteroid</span> - Asteroid</li>
@@ -1204,7 +1212,7 @@ The datum can be referenced again using <code>resolve()</code>.</li>
 </main>
 <footer>
     baystation12.dme
-    <a href="https://github.com/Baystation12/Baystation12/tree/32e30c1a32f79c3dbfbf8f005664c5dcba8c1111">32e30c1</a>
+    <a href="https://github.com/Baystation12/Baystation12/tree/1d540e7f117a30eedbdac0a22337e92bef90a402">1d540e7</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.7.3</a></footer>
 </body>
 </html>
