@@ -83,14 +83,14 @@
 		log_debug("Abstract atom [type] created!")
 		return INITIALIZE_HINT_QDEL
 
-	if(light_max_bright && light_outer_range)
+	if(light_power && light_range)
 		update_light()
 
 	if(opacity)
 		updateVisibility(src)
 		var/turf/T = loc
 		if(istype(T))
-			T.RecalculateOpacity()
+			T.recalc_atom_opacity()
 
 	if (health_max)
 		health_current = health_max
@@ -114,6 +114,7 @@
 
 /atom/Destroy()
 	QDEL_NULL(reagents)
+	QDEL_NULL(light)
 	. = ..()
 
 /**
@@ -422,6 +423,18 @@
 		return FALSE
 	dir = new_dir
 	GLOB.dir_set_event.raise_event(src, old_dir, dir)
+
+	//Lighting
+	if(light_source_solo)
+		if(light_source_solo.light_angle)
+			light_source_solo.source_atom.update_light()
+	else if(light_source_multi)
+		var/datum/light_source/L
+		for(var/thing in light_source_multi)
+			L = thing
+			if(L.light_angle)
+				L.source_atom.update_light()
+
 	return TRUE
 
 /**

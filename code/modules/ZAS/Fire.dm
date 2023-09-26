@@ -112,13 +112,13 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	if(firelevel > 6)
 		icon_state = "3"
-		set_light(1, 2, 7)
+		set_light(7, 1)
 	else if(firelevel > 2.5)
 		icon_state = "2"
-		set_light(0.7, 2, 5)
+		set_light(5, 0.7)
 	else
 		icon_state = "1"
-		set_light(0.5, 1, 3)
+		set_light(3, 0.5)
 
 	for(var/mob/living/L in loc)
 		L.FireBurn(firelevel, air_contents.temperature, air_contents.return_pressure())  //Burn the mobs!
@@ -168,7 +168,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	var/datum/gas_mixture/air_contents = loc.return_air()
 	color = fire_color(air_contents.temperature)
-	set_light(0.5, 1, 3, l_color = color)
+	set_light(3, 0.5, l_color = color)
 
 	firelevel = fl
 	SSair.active_hotspots.Add(src)

@@ -221,7 +221,7 @@
 		AddOverlays(image)
 		pixel_x = rand(-6, 6)
 		pixel_y = rand(-6, 6)
-		set_light(0.7, 0.1, 7, 2, "#85d1ff")
+		set_light(7, 0.7, "#85d1ff")
 	else
 		icon_state = initial(icon_state)
 		ClearOverlays()

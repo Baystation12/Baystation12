@@ -1,67 +1,46 @@
 /*
-BS12 object based lighting system
+	-- O7 lighting system --
+
+	Documentation is present in most of the code files.
+		lighting_atom.dm -> procs/vars for tracking/managing lights attached to objects.
+		lighting_turf.dm -> procs/vars for managing lighting overlays bound to turfs, tracking lights affecting said turf, and getting information about the turf's light level.
+		lighting_corner.dm -> contains code for tracking per-corner lighting data.
+		lighting_source.dm -> contains actual light emitter datum & core lighting calculations. Directional lights and Z-lights are implemented here.
+		lighting_area.dm -> contains area vars/procs for managing an area's dynamic lighting state.
+
 */
 
 /*
-Changes from tg DAL:
-  -	Lighting is done using objects instead of subareas.
-  - Animated transitions. (newer tg DAL has this)
-  - Full colours with mixing.
-  - Support for lights on shuttles.
+	Useful procs when using lights:
 
-  - Code:
-	  - Instead of one flat luminosity var, light is represented by 3 atom vars:
-		  - light_range; diameter in tiles of the light, used for calculating falloff, Cannot be 1.
-		  - light_power; multiplier for the brightness of lights,
-		  - light_color; hex string representing the RGB colour of the light.
-	  - setLuminousity() is now set_light() and takes the three variables above.
-		  - Variables can be left as null to not update them.
-	  - set_opacity() is now set_opacity().
-	  - Areas have luminosity set to 1 permanently, no hard-lighting.
-	  - Objects inside other objects can have lights and they properly affect the turf. (flashlights)
-	  - area/master and area/list/related have been eviscerated since subareas aren't needed.
-*/
+/atom/proc/set_light(range, power, color, angle, no_update)
+	desc: Sets an atom's light emission. `set_light(FALSE)` will disable the light.
+	args:
+		range -> the range of the light. 1.4 is the lowest possible value here.
+		power -> the power (intensity) of the light. Generally should be 1 or lower. Optional.
+		color -> The hex string (#FFFFFF) color of the light. Optional.
+		angle -> The angle of the cone that the light should shine at (directional lighting). Behavior of lights over 180 degrees is undefined. Best to stick to using the LIGHT_ defines for this. Optional.
+		no_update -> if TRUE, the light will not be updated. Useful for when making several of these calls to the same object. Optional.
 
-/*
-Relevant vars/procs:
+/atom/proc/set_opacity(new_opacity)
+	desc: Sets an atom's opacity, updating affecting lights' visibility.
+	args:
+		new_opacity -> the new opacity value.
 
-atom: (lighting_atom.dm)
-  - var/light_range; range in tiles of the light, used for calculating falloff
-  - var/light_power; multiplier for the brightness of lights
-  - var/light_color; hex string representing the RGB colour of the light
+/turf/proc/reconsider_lights()
+	desc: Cause all lights affecting this turf to recalculate visibility.
+	args: none
 
-  - var/datum/light_source/light; light source datum for this atom, only present if light_range && light_power
-  - var/list/light_sources; light sources in contents that are shining through this object, including this object
+/turf/proc/force_update_lights()
+	desc: Force all lights affecting this turf to regenerate. Slow, use reconsider_lights instead when possible.
+	args: none
 
-  - proc/set_light(l_max_bright, l_inner_range, l_outer_range, l_falloff_curve, l_color):
-	  - Sets light_range/power/color to non-null args and calls update_light()
-  - proc/set_opacity(new_opacity):
-	  - Sets opacity to new_opacity.
-	  - If opacity has changed, call turf.reconsider_lights() to fix light occlusion
-  - proc/update_light():
-	  - Updates the light var on this atom, deleting or creating as needed and calling .update()
+/turf/proc/get_avg_color()
+	desc: Gets the average color of this tile as a hexadecimal color string. Used by cameras.
 
-
-turf: (lighting_turf.dm)
-  - var/list/affecting_lights; list of light sources that are shining onto this turf
-
-  - proc/reconsider_lights():
-	  - Force all light sources shining onto this turf to update
-
-  - proc/lighting_clear_overlays():
-	  - Delete (manual GC) all light overlays on this turf, used when changing turf to space
-  - proc/lighting_build_overlays():
-	  - Create lighting overlays for this turf
-
-
-/atom/movable/lighting_overlay: (lighting_overlay.dm)
-  - var/lum_r, var/lum_g, var/lum_b; lumcounts of each colour
-  - var/needs_update; set on update_lumcount, checked by lighting process
-
-  - var/xoffset, var/yoffset; (only present when using sub-tile overlays) fractional offset of this overlay in the tile
-
-  - proc/update_lumcount(delta_r, delta_g, delta_b):
-		- Change the lumcount vars and queue the overlay for update
-  - proc/update_overlay()
-		- Called by the lighting process to update the color of the overlay
+/turf/proc/get_lumcount(minlum = 0, maxlum = 1)
+	desc: Gets the brightness of this tile. If not dynamically lit, always returns 0.5, otherwise returns the average brightness of all 4 corners, scaled between minlum and maxlum.
+	args:
+		minlum -> the low-bound of the scalar.
+		maxlum -> the high-bound of the scalar.
 */

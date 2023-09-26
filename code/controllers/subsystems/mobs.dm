@@ -61,8 +61,3 @@ if(MOB.is_processing == SSmobs) {\
 else if (MOB.is_processing) {\
 	crash_with("Failed to stop processing mob. Being processed by [MOB.is_processing] instead.")\
 }
-
-
-/mob/dview/Initialize()
-	. = ..()
-	STOP_PROCESSING_MOB(src)

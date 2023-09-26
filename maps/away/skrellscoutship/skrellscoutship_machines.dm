@@ -41,7 +41,7 @@
 
 	if(on)
 		AddOverlays(field_image)
-		set_light(0.8, 1, 6, l_color = COLOR_CYAN)
+		set_light(6, 0.8, l_color = COLOR_CYAN)
 		icon_state = "core1"
 	else
 		CutOverlays(field_image)

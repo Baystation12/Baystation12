@@ -140,9 +140,10 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 	if(!center)
 		return
 
-	for(var/T in dview(range_, center))
-		if(T in turfs_in_range)
+	FOR_DVIEW(var/T, range_, center, 0)
+		if (T in turfs_in_range)	// This is awful, but I don't want to refactor this to be assoc.
 			. += T
+	END_FOR_DVIEW
 
 /datum/proximity_trigger/proc/acquire_relevant_turfs()
 	. = turf_selection.get_turfs(holder, range_)

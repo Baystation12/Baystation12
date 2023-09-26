@@ -12,11 +12,6 @@
 	fauna_types = list(/mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/retaliate/jelly)
 	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna, /mob/living/simple_animal/hostile/retaliate/goose/dire)
 
-/obj/effect/overmap/visitable/sector/exoplanet/grass/generate_map()
-	if(prob(40))
-		lightlevel = rand(1,7)/10	//give a chance of twilight jungle
-	..()
-
 /obj/effect/overmap/visitable/sector/exoplanet/grass/generate_atmosphere()
 	..()
 	if(atmosphere)
@@ -76,7 +71,7 @@
 	rock_colors = list(COLOR_ASTEROID_ROCK, COLOR_GRAY80, COLOR_BROWN)
 	plant_colors = list("#2f573e","#24574e","#6e9280","#9eab88","#868b58", "#84be7c", "RANDOM")
 	map_generators = list(/datum/random_map/noise/exoplanet/grass/terraformed)
-	lightlevel = 0.5
+	sun_brightness_modifier = 0.8 //Fairly bright
 	has_trees = TRUE
 	flora_diversity = 8
 	fauna_types = list(/mob/living/simple_animal/passive/cat, /mob/living/simple_animal/passive/chicken, /mob/living/simple_animal/passive/mouse, /mob/living/simple_animal/passive/opossum, /mob/living/simple_animal/hostile/retaliate/goat, /mob/living/simple_animal/hostile/retaliate/goose, /mob/living/simple_animal/passive/cow)
@@ -99,10 +94,6 @@
 	if(atmosphere)
 		atmosphere.temperature = T0C + rand(0, 50)
 		atmosphere.update_values()
-
-/obj/effect/overmap/visitable/sector/exoplanet/grass/generate_map()
-	lightlevel = rand(0.7,0.9)/10
-	..()
 
 /datum/random_map/noise/exoplanet/grass/terraformed
 	descriptor = "terraformed grass exoplanet"

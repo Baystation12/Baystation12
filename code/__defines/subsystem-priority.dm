@@ -20,6 +20,7 @@
 #define SS_PRIORITY_AIR            80  // ZAS processing.
 #define SS_PRIORITY_THROWING       75  // Throwing calculation and constant checks
 #define SS_PRIORITY_CHEMISTRY      60  // Multi-tick chemical reactions.
+#define SS_PRIORITY_LIGHTING       50  // Queued lighting engine updates.
 #define SS_PRIORITY_SPACEDRIFT     45  // Drifting things
 #define SS_PRIORITY_CHAT           40  // Chat
 #define SS_PRIORITY_ALARM          20  // Alarm processing.

@@ -48,7 +48,7 @@
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
 		if(os.on)
-			set_light(light_max_bright_on, light_inner_range_on, light_outer_range_on, 2, light_color)
+			set_light(light_range_on, light_power_on, light_color)
 		else
 			set_light(0)
 

@@ -16,7 +16,7 @@
 
 /obj/effect/overmap/visitable/sector/exoplanet/desert/generate_map()
 	if(prob(70))
-		lightlevel = rand(5,10)/10	//deserts are usually :lit:
+		sun_brightness_modifier = rand(4,8)/10	//deserts are usually :lit:
 	..()
 
 /obj/effect/overmap/visitable/sector/exoplanet/desert/generate_atmosphere()

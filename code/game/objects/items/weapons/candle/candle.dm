@@ -11,10 +11,8 @@
 	var/wax
 	var/last_lit
 	var/icon_set = "candle"
-	var/candle_max_bright = 0.3
-	var/candle_inner_range = 0.1
-	var/candle_outer_range = 4
-	var/candle_falloff = 2
+	var/candle_range = CANDLE_LUM
+	var/candle_power
 
 /obj/item/flame/candle/Initialize()
 	wax = rand(27 MINUTES, 33 MINUTES) / SSobj.wait // Enough for 27-33 minutes. 30 minutes on average, adjusted for subsystem tickrate.
@@ -52,7 +50,7 @@
 	if(!lit)
 		lit = 1
 		visible_message(SPAN_NOTICE("\The [user] lights the [name]."))
-		set_light(candle_max_bright, candle_inner_range, candle_outer_range, candle_falloff)
+		set_light(candle_range, candle_power)
 		START_PROCESSING(SSobj, src)
 
 /obj/item/flame/candle/Process()

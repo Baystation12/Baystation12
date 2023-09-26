@@ -240,7 +240,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	icon_state = "sparks"
 
 /obj/effect/effect/smoke/illumination/New(newloc, lifetime=10, range=null, power=null, color=null)
-	set_light(power, 0.1, range, 2, color)
+	set_light(range, power, color)
 	time_to_live=lifetime
 	..()
 

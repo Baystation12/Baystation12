@@ -193,8 +193,6 @@
 		reset_view(null)
 
 /mob/living/proc/update_sight()
-	set_sight(0)
-	set_see_in_dark(0)
 	if(stat == DEAD || eyeobj)
 		update_dead_sight()
 	else
@@ -226,3 +224,52 @@
 
 /mob/living/proc/handle_hud_icons_health()
 	return
+
+//Adaptative darksight
+//Ideally this would run instantly as mob updates are a bit too slow for this (noticeable when moving fast), but set_see_in_dark is called several timees.
+//For the time being it's instant and called whenever see in dark changes. Replace with a single call at end of updates once code is not spaghetti
+/mob/living/proc/handle_darksight()
+	if(!darksight)
+		return
+
+	//For testing purposes
+	var/darksightedness = min(see_in_dark/world.view,1.0)	//A ratio of how good your darksight is, from 'nada' to 'really darn good'
+	var/current = darksight.alpha/255						//Our current adjustedness
+	var/adjusted_diameter = (0.5 + (see_in_dark - 1)) * 2
+	var/newScale = min((adjusted_diameter) * (world.icon_size/DARKSIGHT_GRADIENT_SIZE), 1)*0.9 //Scale the darksight gradient
+
+	var/brightness = 0.0 //We'll assume it's superdark if we can't find something else.
+
+
+	//Currently we're going to assume that only thing that matter is your turf
+	//This is not necessarily correct.
+	//We may want to blind people inside exosuits and such. At some point we could try moving lumcount to atom, default to turf and then we can make those override
+
+	var/turf/my_turf = get_turf(src)
+	if(isturf(my_turf))
+		brightness = my_turf.get_lumcount()
+
+	brightness = min((brightness + brightness*brightness), 1) //Increase apparent brightness so it's not that obvious. TODO: Make this a curve
+
+	var/darkness = 1-brightness					//Silly, I know, but 'alpha' and 'darkness' go the same direction on a number line
+	newScale *= darkness                        // you see further in the dark, in fully lit areas you don't get a bonus
+	var/adjust_to = min(darkness,darksightedness)//Capped by how darksighted they are
+	var/distance = abs(current-adjust_to)		//Used for how long to animate for
+	var/negative = current > adjust_to          //Unfortunately due to a visual issue this must be instant if we go down 1 level of darksight
+
+	if((distance < 0.001) && (abs(darksight.transform.a - newScale) < 0.01)) return	 //We're already all set
+
+	if(negative)
+		distance = 0 //Make it instant
+
+	//TODO:.
+	//FIX VISION CODE! There is no correct place to update darksight as it keeps being reset and enabled several times a frame (even placing it on Life doesnt work because overrides set it in wrong function)
+	// Time = 0 means instant change, avoids some issues of animation resetting several times a frame
+	distance = 0
+
+	animate(darksight, alpha = (adjust_to*255), transform = matrix().Update(scale_x = newScale, scale_y = newScale), time = (distance*1 SECOND), flags = ANIMATION_LINEAR_TRANSFORM)
+
+//Need to update every time we set see in dark as it can be called at many different points and waiting for next frame causes visual artifacts
+/mob/living/set_see_in_dark(new_see_in_dark)
+	. = ..()
+	handle_darksight()

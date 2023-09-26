@@ -197,16 +197,16 @@
 	switch(current_fire_state)
 		if(TURF_FIRE_STATE_SMALL)
 			icon_state = "small"
-			set_light(0.5, 1, 1.5)
+			set_light(1.5, 0.5)
 		if(TURF_FIRE_STATE_MEDIUM)
 			icon_state = "medium"
-			set_light(0.5, 1, 2,)
+			set_light(2, 0.5)
 		if(TURF_FIRE_STATE_LARGE)
 			icon_state = "big"
-			set_light(0.5, 1.5, 2,)
+			set_light(2, 0.6)
 		if(TURF_FIRE_STATE_MAX)
 			icon_state = "max"
-			set_light(0.7, 1.6, 3)
+			set_light(3, 0.7)
 
 #undef TURF_FIRE_REQUIRED_TEMP
 #undef TURF_FIRE_TEMP_BASE

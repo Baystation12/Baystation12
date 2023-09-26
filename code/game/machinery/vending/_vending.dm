@@ -91,7 +91,6 @@
 	var/scan_id = TRUE
 	var/obj/item/material/coin/coin
 	var/light_max_bright_on = 0.2
-	var/light_inner_range_on = 1
 	var/light_outer_range_on = 2
 
 
@@ -148,7 +147,7 @@
 	if (!is_powered() || MACHINE_IS_BROKEN(src))
 		set_light(0)
 	else
-		set_light(light_max_bright_on, light_inner_range_on, light_outer_range_on, 2, light_color)
+		set_light(light_outer_range_on, light_max_bright_on, light_color)
 
 
 /obj/machinery/vending/on_update_icon()

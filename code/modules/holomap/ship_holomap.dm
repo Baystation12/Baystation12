@@ -160,7 +160,7 @@
 		set_light(0)
 	else
 		icon_state = "station_map"
-		set_light(0.8, 0.1, 2, 2, "#1dbe17")
+		set_light(2, 0.8, "#1dbe17")
 
 		// Put the little "map" overlay down where it looks nice
 		if(small_station_map)

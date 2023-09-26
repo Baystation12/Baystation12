@@ -29,7 +29,7 @@
 	if(locked)
 		lock = new(src,locked)
 	if(material.luminescence)
-		set_light(0.5, 1, material.luminescence, l_color = material.icon_colour)
+		set_light(material.luminescence, 0.5, l_color = material.icon_colour)
 
 	if(material.opacity < 0.5)
 		glass = TRUE

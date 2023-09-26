@@ -19,9 +19,8 @@
 	desc = "A floating crystal that hums with an unearthly energy."
 	icon = 'icons/obj/structures/pylon.dmi'
 	icon_state = "pylon"
-	light_max_bright = 0.5
-	light_inner_range = 1
-	light_outer_range = 13
+	light_power = 0.5
+	light_range = 13
 	light_color = "#3e0000"
 	health_max = 20
 	health_min_damage = 4
@@ -73,7 +72,7 @@
 	var/spawnable = null
 
 /obj/effect/gateway/active
-	light_outer_range=5
+	light_range=5
 	light_color="#ff0000"
 	spawnable=list(
 		/mob/living/simple_animal/hostile/scarybat,
@@ -82,7 +81,6 @@
 	)
 
 /obj/effect/gateway/active/cult
-	light_outer_range=5
 	light_color="#ff0000"
 	spawnable=list(
 		/mob/living/simple_animal/hostile/scarybat/cult,

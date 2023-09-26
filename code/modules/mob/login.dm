@@ -92,8 +92,8 @@
 	if(eyeobj)
 		eyeobj.possess(src)
 
-	l_general = new()
-	client.screen += l_general
+	darksight = new()
+	client.screen += darksight
 
 	CreateRenderers()
 
@@ -118,3 +118,10 @@
 	. = ..()
 	if(internals && internal)
 		internals.icon_state = "internal1"
+
+/mob/observer/ghost/Login()
+	. = ..()
+	if(darksight)
+		darksight.icon_state = "ghost"
+		darksight.alpha = 127
+		darksight.SetTransform(2) //Max darksight

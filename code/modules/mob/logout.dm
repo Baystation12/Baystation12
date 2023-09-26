@@ -4,11 +4,10 @@
 	log_access("Logout: [key_name(src)]")
 	handle_admin_logout()
 	if(my_client)
-		my_client.screen -= l_general
-
+		my_client.screen -= darksight
 	RemoveRenderers()
 
-	QDEL_NULL(l_general)
+	QDEL_NULL(darksight)
 	hide_client_images()
 	..()
 

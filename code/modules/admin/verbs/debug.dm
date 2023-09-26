@@ -482,7 +482,7 @@
 	var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(null, world.maxx, world.maxy)
 	new_planet.features_budget = budget
 	new_planet.themes = list(new theme)
-	new_planet.lightlevel = rand(5, 10)/10
+	new_planet.sun_brightness_modifier = rand(0.1, 0.6)
 
 	log_and_message_admins("is spawning [new_planet] at [new_planet.start_x],[new_planet.start_y], containing Z [english_list(new_planet.map_z)]")
 	new_planet.build_level()

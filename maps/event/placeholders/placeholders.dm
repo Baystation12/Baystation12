@@ -40,16 +40,16 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 		if (isnull(option))
 			return
 		selected.color = option
-/*	else if (option == "Sensor")
+	else if (option == "Sensor")
 		option = alert(user, "Sensor Range", null, "Off", "Short", "Far")
 		if (isnull(option))
 			return
 		else if (option == "Off")
 			selected.set_light(0)
 		else if (option == "Short")
-			selected.set_light(1, 2, 3)
+			selected.set_light(3, 1)
 		else if (option == "Far")
-			selected.set_light(1, 6, 7)*/
+			selected.set_light(7, 1)
 	else if (option == "Scan")
 		var/scantext = ""
 		option = input(user, "Placeholder Scan Description", null, scantext) as null | text

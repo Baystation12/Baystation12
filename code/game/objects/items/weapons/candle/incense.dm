@@ -5,10 +5,7 @@
 
 	available_colours = null
 	icon_set = "incense"
-	candle_max_bright = 0.1
-	candle_inner_range = 0.1
-	candle_outer_range = 1
-	candle_falloff = 2
+	candle_range = 1
 
 	scent_types = list(/singleton/scent_type/rose,
 					   /singleton/scent_type/citrus,

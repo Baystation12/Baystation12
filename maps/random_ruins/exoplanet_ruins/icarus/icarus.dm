@@ -38,7 +38,7 @@
 	S.update_rad_power(radiation_power)
 	SSradiation.add_source(S)
 
-	loc.set_light(0.4, 1, req_range, l_color = COLOR_LIME) //The goo doesn't last, so this is another indicator
+	loc.set_light(req_range, 0.4, l_color = COLOR_LIME) //The goo doesn't last, so this is another indicator
 
 /obj/effect/icarus_irradiate/Destroy()
 	. = ..()

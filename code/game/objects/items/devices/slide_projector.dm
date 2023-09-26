@@ -93,7 +93,7 @@
 	projection = new projection_type(target)
 	projection.set_source(current_slide)
 	GLOB.moved_event.register(src, src, .proc/check_projections)
-	set_light(0.1, 0.1, 1, 2, COLOR_WHITE) //Bit of light
+	set_light(1, 0.1, COLOR_WHITE) //Bit of light
 	update_icon()
 
 /obj/item/storage/slide_projector/attack_self(mob/user)
@@ -155,7 +155,7 @@
 
 /obj/effect/projection/Initialize()
 	. = ..()
-	set_light(0.1, 0.1, 1, 2, COLOR_WHITE) //Makes turning off the lights not invalidate projection
+	set_light(1, 0.1, COLOR_WHITE) //Makes turning off the lights not invalidate projection
 
 /obj/effect/projection/on_update_icon()
 	filters = filter(type="drop_shadow", color = COLOR_WHITE, size = 4, offset = 1,x = 0, y = 0)

@@ -207,3 +207,19 @@ var/global/round_start_time = 0
 	var/time_string = time2text(world.realtime, "MM-DD")
 	var/time_list = splittext(time_string, "-")
 	return list(text2num(time_list[1]), text2num(time_list[2]))
+
+
+#define MIDNIGHT_ROLLOVER		864000	//number of deciseconds in a day
+
+var/global/midnight_rollovers = 0
+var/global/rollovercheck_last_timeofday = 0
+/proc/update_midnight_rollover()
+	if (world.timeofday < global.rollovercheck_last_timeofday) //TIME IS GOING BACKWARDS!
+		global.midnight_rollovers += 1
+	global.rollovercheck_last_timeofday = world.timeofday
+	return global.midnight_rollovers
+
+//time of day but automatically adjusts to the server going into the next day within the same round.
+//for when you need a reliable time number that doesn't depend on byond time.
+#define REALTIMEOFDAY (world.timeofday + (MIDNIGHT_ROLLOVER * MIDNIGHT_ROLLOVER_CHECK))
+#define MIDNIGHT_ROLLOVER_CHECK ( global.rollovercheck_last_timeofday != world.timeofday ? update_midnight_rollover() : global.midnight_rollovers )

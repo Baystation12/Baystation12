@@ -338,3 +338,5 @@
 #define SANITY_CHECK_TOPIC_PHYSICALLY_INTERACT FLAG(6)
 
 #define SANITY_CHECK_DEFAULT (SANITY_CHECK_TOOL_IN_HAND | SANITY_CHECK_BOTH_ADJACENT)
+
+#define Z_ALL_TURFS(Z) block(locate(1, 1, Z), locate(world.maxx, world.maxy, Z))
