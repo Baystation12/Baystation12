@@ -32,7 +32,7 @@
 	say_list_type = /datum/say_list/diona
 
 	holder_type = /obj/item/holder/diona
-	possession_candidate = 1
+	possession_candidate = TRUE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
 	hud_type = /datum/hud/diona_nymph
 

@@ -138,9 +138,15 @@
 /obj/machinery/door/blast/get_material_melting_point()
 	return 10000 // Blast doors are implicitly heavily fire resistant and are used for containing high-temperature areas like burn chambers.
 
+/obj/machinery/door/blast/attack_hand(mob/user)
+	if (MUTATION_FERAL in user.mutations)
+		if ((!is_powered() || MACHINE_IS_BROKEN(src)) && density)
+			visible_message(SPAN_DANGER("\The [user] manages to pry \the [src] open!"))
+			return force_open()
+	return ..()
 
-///If we are clicked with crowbar or wielded fire axe, try to manually open the door.
-///This only works on broken doors or doors without power. Also allows repair with Plasteel.
+// If we are clicked with crowbar or wielded fire axe, try to manually open the door.
+// This only works on broken doors or doors without power. Also allows repair with Plasteel.
 /obj/machinery/door/blast/use_tool(obj/item/C, mob/living/user, list/click_params)
 	if(isCrowbar(C) || (istype(C, /obj/item/material/twohanded/fireaxe) && C:wielded == 1))
 		if(((!is_powered()) || MACHINE_IS_BROKEN(src)) && !( operating ))
@@ -293,7 +299,7 @@
 
 	open_sound = 'sound/machines/shutters_open.ogg'
 	close_sound = 'sound/machines/shutters_close.ogg'
-	health_min_damage = 15
+	health_min_damage = 10
 	health_max = 500
 	explosion_resistance = 10
 	pry_mod = 0.55

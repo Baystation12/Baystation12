@@ -776,6 +776,10 @@ default behaviour is:
 		to_chat(possessor, SPAN_WARNING("\The [src] already has a player."))
 		return 0
 
+	var/ask = alert(possessor, "Are you sure you want to possess [src.name]?", "Possess mob?", "Yes", "No")
+	if (ask != "Yes")
+		return 0
+
 	message_admins(SPAN_CLASS("adminnotice", "[key_name_admin(possessor)] has taken control of \the [src]."))
 	log_admin("[key_name(possessor)] took control of \the [src].")
 	src.ckey = possessor.ckey

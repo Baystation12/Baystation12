@@ -248,7 +248,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	changeling.isabsorbing = 0
 
 	T.death(0)
-	T.Drain()
+	T.ChangeToHusk()
 	return 1
 
 

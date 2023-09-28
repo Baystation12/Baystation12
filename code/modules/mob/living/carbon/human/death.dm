@@ -87,11 +87,6 @@
 	update_body(1)
 	return
 
-/mob/living/carbon/human/proc/Drain()
-	ChangeToHusk()
-	mutations |= MUTATION_HUSK
-	return
-
 /mob/living/carbon/human/proc/ChangeToSkeleton()
 	if(MUTATION_SKELETON in src.mutations)	return
 

@@ -55,12 +55,12 @@
 	if(filtering > 0)
 		if(beaker)
 			if(beaker.reagents.total_volume < beaker.reagents.maximum_volume)
-				var/pumped = 0
+				var/filter_speed = 0
 				for(var/datum/reagent/x in occupant.reagents.reagent_list)
-					occupant.reagents.trans_to_obj(beaker, pump_speed)
-					pumped++
+					filter_speed += x.filter_mod * x.volume / occupant.reagents.total_volume
+				occupant.reagents.trans_to_obj(beaker, pump_speed * filter_speed)
 				if(ishuman(occupant))
-					occupant.vessel.trans_to_obj(beaker, pumped + 1)
+					occupant.vessel.trans_to_obj(beaker, pump_speed * filter_speed)
 		else
 			toggle_filter()
 	if(pump > 0)

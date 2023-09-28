@@ -84,45 +84,22 @@
 
 
 /turf/simulated/wall/attack_hand(mob/user)
-
 	radiate()
-	add_fingerprint(user)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	var/rotting = (locate(/obj/overlay/wallrot) in src)
-	if (MUTATION_HULK in user.mutations)
-		if (rotting || !prob(material.hardness))
-			success_smash(user)
-		else
-			fail_smash(user)
-			return 1
-
 	if(iscarbon(user))
 		var/mob/living/carbon/M = user
 		switch(M.a_intent)
 			if(I_HELP)
-				return
+				return ..()
 			if(I_DISARM, I_GRAB)
 				try_touch(M, rotting)
 			if(I_HURT)
-				var/obj/item/organ/external/organ_hand = M.organs_by_name[M.hand ? BP_L_HAND : BP_R_HAND]
-				if (!(organ_hand?.is_usable()))
-					to_chat(user, SPAN_WARNING("You can't use that hand."))
-					return
 				if(rotting && !reinf_material)
 					M.visible_message(SPAN_DANGER("[M.name] punches \the [src] and it crumbles!"), SPAN_DANGER("You punch \the [src] and it crumbles!"))
 					kill_health()
 					playsound(src, pick(GLOB.punch_sound), 20)
-				if (MUTATION_FERAL in user.mutations)
-					M.visible_message(SPAN_DANGER("[M.name] slams into \the [src]!"), SPAN_DANGER("You slam into \the [src]!"))
-					playsound(src, 'sound/effects/clang.ogg', 45, 1)
-					damage_health(20, DAMAGE_BRUTE)
-					user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*5) //Additional cooldown
-					attack_animation(user)
-				else
-					M.visible_message(SPAN_DANGER("[M.name] punches \the [src]!"), SPAN_DANGER("You punch \the [src]!"))
-					M.apply_damage(3, DAMAGE_BRUTE, M.hand ? BP_L_HAND : BP_R_HAND)
-					playsound(src, pick(GLOB.punch_sound), 40)
-
+					return TRUE
+				return ..()
 	else
 		try_touch(user, rotting)
 

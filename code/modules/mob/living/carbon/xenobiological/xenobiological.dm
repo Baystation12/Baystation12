@@ -277,16 +277,6 @@
 
 			attacked += 10
 			if (prob(90))
-				if (MUTATION_HULK in M.mutations)
-					damage += 5
-					if(Victim || Target)
-						Feedstop()
-						Target = null
-					spawn(0)
-						step_away(src,M,15)
-						sleep(3)
-						step_away(src,M,15)
-
 				playsound(loc, "punch", 25, 1, -1)
 				visible_message(SPAN_DANGER("[M] has punched [src]!"), \
 						SPAN_DANGER("[M] has punched [src]!"))

@@ -806,6 +806,16 @@ About the new airlock wires panel:
 				s.start()
 	return ..()
 
+/obj/machinery/door/airlock/attack_hand(mob/user)
+	if (MUTATION_FERAL in user.mutations)
+		if (src.welded)
+			to_chat(user, SPAN_WARNING("You can't pry \the [src] open, it's welded shut!"))
+			return
+		if (src.locked)
+			to_chat(user, SPAN_WARNING("You can't pry \the [src] open, it's bolted tight!"))
+			return
+	return ..()
+
 /obj/machinery/door/airlock/physical_attack_hand(mob/user)
 	if(!istype(usr, /mob/living/silicon))
 		if(src.isElectrified())

@@ -457,8 +457,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
  */
 /obj/item/proc/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	var/power = force
-	if (MUTATION_HULK in user.mutations && damtype == DAMAGE_BRUTE) //Repeat this check here because it is only used under use_weapon to check if it's even possible to damage the mob. Value not carried over here.
-		power *= 2
 	return target.hit_with_weapon(src, user, power, hit_zone)
 
 

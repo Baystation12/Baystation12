@@ -255,14 +255,19 @@
 		var/damage = attack.damage + rand(1,5)
 		var/attack_verb = "[pick(attack.attack_verb)]"
 
+		if (MUTATION_FERAL in user.mutations)
+			attack_verb = "smashes"
+			damage = 10
+
 		if (!can_damage_health(damage, attack.get_damage_type()))
 			playsound(loc, use_weapon_hitsound? attack.attack_sound : damage_hitsound, 25, TRUE, -1)
 			user.visible_message(
 				SPAN_WARNING("\The [user] hits \the [src], but doesn't even leave a dent!"),
 				SPAN_WARNING("You hit \the [src], but cause no visible damage and hurt yourself!")
 			)
-			user.apply_damage(3, DAMAGE_BRUTE, user.hand ? BP_L_HAND : BP_R_HAND)
-			return TRUE
+			if (!(MUTATION_FERAL in user.mutations))
+				user.apply_damage(3, DAMAGE_BRUTE, user.hand ? BP_L_HAND : BP_R_HAND)
+				return TRUE
 
 		playsound(loc, use_weapon_hitsound? attack.attack_sound : damage_hitsound, 25, TRUE, -1)
 		assailant.visible_message(
