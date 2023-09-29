@@ -52,7 +52,7 @@ GLOBAL_LIST_INIT(recomended_holoplants_colors, list(COLOR_PALE_RED_GRAY,COLOR_BL
 
 	if(enabled)
 		AddOverlays(plant)
-	set_light(brightness_on, l_outer_range = 1, l_color = plant_color)
+	set_light(1, brightness_on, plant_color)
 
 /obj/structure/holoplant/proc/change_plant(state)
 	plant = prepare_icon(state)
@@ -116,19 +116,19 @@ GLOBAL_LIST_INIT(recomended_holoplants_colors, list(COLOR_PALE_RED_GRAY,COLOR_BL
 		return
 	interference = TRUE
 	ClearOverlays()
-	set_light(0, l_outer_range = 0, l_color = plant_color)
+	set_light(0, 0, l_color = plant_color)
 	sleep(3)
 	if(QDELETED(src))
 		return
 
 	AddOverlays(plant)
-	set_light(brightness_on, l_outer_range = 1, l_color = plant_color)
+	set_light(1, brightness_on, l_color = plant_color)
 	sleep(3)
 	if(QDELETED(src))
 		return
 
 	CutOverlays(plant)
-	set_light(0, l_outer_range = 0, l_color = plant_color)
+	set_light(0, 0, l_color = plant_color)
 	sleep(3)
 	if(QDELETED(src))
 		return

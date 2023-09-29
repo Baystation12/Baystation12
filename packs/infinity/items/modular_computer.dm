@@ -44,7 +44,7 @@
 		AddOverlays(overlay_image(_screen_overlay.icon, _screen_overlay.icon_state, flags = RESET_COLOR))
 
 	if(enabled)
-		set_light(0.2, 0.1, light_strength, l_color = (bsod || os.updating) ? "#0000ff" : light_color)
+		set_light(light_strength, 0.2, l_color = (bsod || os.updating) ? "#0000ff" : light_color)
 
 	if(enabled && os)
 		var/image/_screen_overlay = os.get_screen_overlay()

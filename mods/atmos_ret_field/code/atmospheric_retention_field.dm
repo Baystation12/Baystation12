@@ -209,9 +209,8 @@
 	atmos_canpass = CANPASS_NEVER
 	var/basestate = "arfg_field"
 
-	light_inner_range = 1
-	light_outer_range = 13
-	light_max_bright = 0.5
+	light_range = 13
+	light_power = 2
 	light_color = "#ffffff"
 
 /obj/structure/atmospheric_retention_field/on_update_icon()

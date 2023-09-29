@@ -13,10 +13,10 @@
 		set_light(0)
 	else if(active > 0)
 		icon_state = "stheater-heat"
-		set_light(0.7, 1, 2, 3, COLOR_SEDONA)
+		set_light(3, 0.7, COLOR_SEDONA)
 	else if(active < 0)
 		icon_state = "stheater-cool"
-		set_light(0.7, 1, 2, 3, COLOR_DEEP_SKY_BLUE)
+		set_light(3, 0.7, COLOR_DEEP_SKY_BLUE)
 	else
 		icon_state = "stheater-standby"
 		set_light(0)
