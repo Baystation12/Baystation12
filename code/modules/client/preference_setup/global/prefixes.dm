@@ -26,4 +26,7 @@
 
 /singleton/prefix/custom_emote
 	name = "Emote, custom"
-	default_key = "/"
+	// [SIERRA-EDIT]
+	// default_key = "/" // SIERRA-EDIT - ORIGINAL
+	default_key = "*"
+	// [SIERRA-EDIT]
