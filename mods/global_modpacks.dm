@@ -1,6 +1,7 @@
 // SIERRA TODO: GET RID OF IT!!!
 #include "don_loadout/_don_loadout.dme"
 #include "eris_announcer/_eris_announcer.dme"
+#include "emote_panel/_emote_panel.dme"
 #include "ex666_ecosystem/_ex666_ecosystem.dme"
 #include "gliding/_gliding.dme"
 #include "gravity_generator/_gravity_generator.dme"
