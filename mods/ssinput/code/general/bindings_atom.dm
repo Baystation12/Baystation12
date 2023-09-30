@@ -37,3 +37,6 @@
 */
 /atom/movable/proc/keybind_face_direction(direction)
 	return
+
+/mob/keybind_face_direction(direction)
+	facedir(direction)
