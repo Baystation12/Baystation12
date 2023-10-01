@@ -1,5 +1,0 @@
-author: SuhEugene
-delete-after: true
-changes:
-  - bugfix: Пофикшен поворот на месте через ctrl.
-  - bugfix: Кастомный эмоут теперь вводится не через слеш, а через звёздочку.
