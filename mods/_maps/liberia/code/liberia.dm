@@ -5,7 +5,7 @@
 	name = "Liberia"
 	id = "awaysite_liberia"
 	description = "A Merchant ship."
-	prefix = "mods/_maps/liberia/maps"
+	prefix = "mods/_maps/liberia/maps/"
 	suffixes = list("liberia.dmm")
 	spawn_cost = 0
 	player_cost = 0

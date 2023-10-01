@@ -40,7 +40,7 @@
 	name = "Pioneer Corps Gunboat (ICGNV)"
 	id = "awaysite_recon_ship"
 	description = "Garibaldi-class Gunboat, ICCG Pioneer Corps Reconnaissance Craft."
-	prefix = "mods/_maps/farfleet/maps"
+	prefix = "mods/_maps/farfleet/maps/"
 	suffixes = list("farfleet-1.dmm", "farfleet-2.dmm")
 	spawn_cost = 50 // Temporary disabled
 	player_cost = 50

@@ -41,7 +41,7 @@
 	name = "Sol Patrol Craft (SFV)"
 	id = "awaysite_patrol_ship"
 	description = "Cobra-class Patrol Craft."
-	prefix = "mods/_maps/sentinel/maps"
+	prefix = "mods/_maps/sentinel/maps/"
 	suffixes = list("sentinel-1.dmm", "sentinel-2.dmm")
 	spawn_cost = 0.5
 	player_cost = 7
