@@ -1,7 +1,7 @@
 SUBSYSTEM_DEF(chat)
 	name = "Chat"
 	wait = 1
-	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
+	runlevels = RUNLEVELS_PREGAME | RUNLEVELS_GAME
 	priority = SS_PRIORITY_CHAT
 	init_order = SS_INIT_CHAT
 	var/static/list/payload = list()

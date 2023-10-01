@@ -1,7 +1,6 @@
 SUBSYSTEM_DEF(misc)
 	name = "Misc Updates"
 	wait = 30 SECONDS
-	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	var/static/list/queue = list()
 	var/static/stage = STAGE_TRADERS
 	var/static/cost_traders = 0

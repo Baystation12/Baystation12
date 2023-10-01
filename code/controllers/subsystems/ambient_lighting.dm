@@ -3,7 +3,7 @@ SUBSYSTEM_DEF(ambient_lighting) //A simple SS that handles updating ambient ligh
 	wait = 1
 	priority = SS_PRIORITY_LIGHTING
 	init_order = SS_INIT_AMBIENT_LIGHT
-	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
+	runlevels = RUNLEVELS_PREGAME | RUNLEVELS_GAME
 
 	/// List of turfs queued for ambient light evaluation
 	var/list/queued = list()

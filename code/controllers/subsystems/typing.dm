@@ -1,7 +1,6 @@
 SUBSYSTEM_DEF(typing)
 	name = "Typing"
 	flags = SS_BACKGROUND | SS_NO_INIT
-	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	wait = 0.5 SECONDS
 
 	/// The skin control to poll for TYPING_STATE_INPUT status.

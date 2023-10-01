@@ -5,7 +5,7 @@ SUBSYSTEM_DEF(unit_tests)
 	name = "Unit Tests"
 	wait = 2 SECONDS
 	init_order = SS_INIT_UNIT_TESTS
-	runlevels = (RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY)
+	runlevels = RUNLEVELS_PREGAME | RUNLEVELS_GAME
 	var/list/queue = list()
 	var/list/async_tests = list()
 	var/list/current_async
