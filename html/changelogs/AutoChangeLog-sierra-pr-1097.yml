@@ -1,0 +1,4 @@
+author: SuhEugene
+delete-after: true
+changes:
+  - tweak: СКМ теперь не требует нажатия Alt чтобы указывать на что-либо.
