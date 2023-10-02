@@ -10,7 +10,6 @@
 
 // Client
 #include "client\spawnpoints.dm"
-#include "client\verbs.dm"
 
 // Gamemodes
 #include "gamemodes\revolutionary.dm"
