@@ -76,11 +76,6 @@
 	else if (modifiers["ctrl"] && modifiers["alt"])
 		if (CtrlAltClickOn(A))
 			return TRUE
-	// [SIERRA-ADD] - SSINPUT
-	else if(modifiers["middle"] && modifiers["alt"])
-		if (AltMiddleClickOn(A))
-			return TRUE
-	// [/SIERRA-ADD]
 	else if (modifiers["shift"] && modifiers["alt"])
 		if (AltShiftClickOn(A))
 			return TRUE
@@ -260,17 +255,15 @@
 /mob/proc/MiddleClickOn(atom/A)
 	if (A.MiddleClick(src))
 		return TRUE
-	swap_hand()
+	// [SIERRA-EDIT] - SSINPUT
+	// swap_hand() // SIERRA-EDIT - ORIGINAL
+	pointed(A)
+	// [/SIERRA-EDIT]
 	return TRUE
 
 /atom/proc/MiddleClick(mob/M as mob)
 	return FALSE
 
-// [SIERRA-ADD] - SSINPUT
-/mob/proc/AltMiddleClickOn(atom/A)
-	pointed(A)
-	return TRUE
-// [/SIERRA-ADD]
 
 /**
  * Called when the mob shift+clicks on an atom. By default, this calls the targeted atom's `ShiftClick()` proc.
