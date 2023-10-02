@@ -1,0 +1,5 @@
+author: SuhEugene
+delete-after: true
+changes:
+  - maptweak: Возвращены РД и СМО их командные консоли в офисы.
+  - maptweak: Пофикшены мультитайловые шлюзы со сбитыми хитбоксами.
