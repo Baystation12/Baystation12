@@ -11,7 +11,7 @@
 /obj/machinery/computer/cryopod
 	name = "cryogenic oversight console"
 	desc = "An interface between crew and the cryogenic storage oversight systems."
-	icon = 'icons/obj/machines/medical/bodyscanner.dmi'
+	icon = 'icons/obj/machines/medical/cryopod.dmi'
 	icon_state = "cellconsole"
 	density = FALSE
 	interact_offline = 1
@@ -138,14 +138,14 @@
 /obj/machinery/cryopod
 	name = "cryogenic freezer"
 	desc = "A man-sized pod for entering suspended animation."
-	icon = 'icons/obj/machines/medical/bodyscanner.dmi'
-	icon_state = "body_scanner_0"
+	icon = 'icons/obj/machines/medical/cryopod.dmi'
+	icon_state = "cryopod"
 	density = TRUE
 	anchored = TRUE
 	dir = WEST
 
-	var/base_icon_state = "body_scanner_0"
-	var/occupied_icon_state = "body_scanner_1"
+	var/base_icon_state = "cryopod"
+	var/occupied_icon_state = "cryopod_closed"
 	var/on_store_message = "has entered long-term storage."
 	var/on_store_visible_message = "hums and hisses as it moves $occupant$ into storage." // $occupant$ is automatically converted to the occupant's name
 	var/on_store_name = "Cryogenic Oversight"
@@ -199,9 +199,9 @@
 	desc = "A man-sized pod for entering suspended animation. Dubbed 'cryocoffin' by more cynical spacers, it is pretty barebone, counting on stasis system to keep the victim alive rather than packing extended supply of food or air. Can be ordered with symbols of common religious denominations to be used in space funerals too."
 	on_store_name = "Life Pod Oversight"
 	time_till_despawn = 20 MINUTES
-	icon_state = "lifepod_0"
-	base_icon_state = "lifepod_0"
-	occupied_icon_state = "lifepod_1"
+	icon_state = "redpod0"
+	base_icon_state = "redpod0"
+	occupied_icon_state = "redpod1"
 	var/launched = 0
 	var/datum/gas_mixture/airtank
 
@@ -575,7 +575,7 @@
 /obj/structure/broken_cryo
 	name = "broken cryo sleeper"
 	desc = "Whoever was inside isn't going to wake up now. It looks like you could pry it open with a crowbar."
-	icon = 'icons/obj/machines/medical/bodyscanner.dmi'
+	icon = 'icons/obj/machines/medical/cryopod.dmi'
 	icon_state = "broken_cryo"
 	anchored = TRUE
 	density = TRUE
