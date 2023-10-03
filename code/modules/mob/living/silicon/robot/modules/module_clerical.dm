@@ -68,7 +68,7 @@
 	..()
 	if (R.emagged)
 		var/obj/item/reagent_containers/food/drinks/bottle/small/beer/fake/fake = locate() in equipment
-		fake.reagents.add_reagent(/datum/reagent/chloralhydrate/beer, 2 * amount)
+		fake.reagents.add_reagent(/datum/reagent/chloralhydrate/beer, 10 * amount)
 
 /obj/item/robot_module/clerical/general
 	name = "clerical robot module"
@@ -118,4 +118,5 @@
 	..()
 	if (R.emagged)
 		var/obj/item/flamethrower/full/loaded/flamethrower = locate() in equipment
-		flamethrower.beaker.reagents.add_reagent(/datum/reagent/napalm, 10 * amount)
+		if (flamethrower)
+			flamethrower.beaker.reagents.add_reagent(/datum/reagent/napalm, 30 * amount)

@@ -23,6 +23,21 @@
 	var/range = 4
 	var/max_beaker = ITEM_SIZE_SMALL
 
+
+/obj/item/flamethrower/examine(mob/user)
+	. = ..()
+	if (beaker)
+		if (beaker.reagents)
+			to_chat(user, SPAN_NOTICE("The loaded [beaker.name] has about [beaker.reagents.total_volume] unit\s left."))
+		else
+			to_chat(user, SPAN_NOTICE("The loaded [beaker.name] is empty."))
+	else
+		to_chat(user, SPAN_NOTICE("\The [src] has no fuel container loaded!."))
+
+	if (lit)
+		to_chat(user, SPAN_WARNING("\The [src] is lit!"))
+
+
 /obj/item/flamethrower/Destroy()
 	QDEL_NULL(weldtool)
 	QDEL_NULL(igniter)
@@ -33,6 +48,13 @@
 	if(!lit)
 		STOP_PROCESSING(SSobj, src)
 		return null
+	else if (!beaker || beaker.reagents.total_volume == 0)
+		visible_message(SPAN_WARNING("\The [src] sputters and goes out!"))
+		playsound(loc, 'sound/items/welderdeactivate.ogg', 50, TRUE)
+		STOP_PROCESSING(SSobj,src)
+		set_light(0)
+		lit = FALSE
+		update_icon()
 	var/turf/location = loc
 	if(ismob(location))
 		var/mob/M = location
@@ -125,8 +147,8 @@
 	toggle_igniter(user)
 
 /obj/item/flamethrower/proc/toggle_igniter(mob/user)
-	if(!beaker)
-		to_chat(user, SPAN_NOTICE("Attach a fuel container first!"))
+	if(!beaker || beaker.reagents.total_volume == 0)
+		to_chat(user, SPAN_NOTICE("There isn't enough fuel!"))
 		return
 	if(!status)
 		to_chat(user,SPAN_NOTICE("Secure the igniter first!"))
@@ -173,7 +195,7 @@
 			fire_colour = R.fire_colour
 
 	if(power < REQUIRED_POWER_TO_FIRE_FLAMETHROWER)
-		audible_message(SPAN_DANGER("The [src] sputters."))
+		audible_message(SPAN_DANGER("\The [src] sputters."))
 		playsound(src, 'sound/weapons/guns/flamethrower_empty.ogg', 50, TRUE, -3)
 		return
 	playsound(src, pick('sound/weapons/guns/flamethrower1.ogg','sound/weapons/guns/flamethrower2.ogg','sound/weapons/guns/flamethrower3.ogg' ), 50, TRUE, -3)
