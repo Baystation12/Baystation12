@@ -3,7 +3,7 @@ SUBSYSTEM_DEF(ghost_images)
 	flags = SS_NO_INIT
 	priority = SS_PRIORITY_GHOST_IMAGES
 	wait = 1
-	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
+	runlevels = RUNLEVELS_PREGAME | RUNLEVELS_GAME
 
 	/// When true, queues all ghosts for update.
 	var/static/queue_all = FALSE

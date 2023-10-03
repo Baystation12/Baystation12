@@ -1,7 +1,7 @@
 SUBSYSTEM_DEF(misc_slow)
 	name = "Misc Updates (Slow)"
 	flags = SS_NO_INIT
-	runlevels = RUNLEVEL_LOBBY | RUNLEVEL_GAME | RUNLEVEL_POSTGAME
+	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_GAME
 	wait = 5 MINUTES
 
 	/// The number of times dbcon can fail in a row before being considered dead

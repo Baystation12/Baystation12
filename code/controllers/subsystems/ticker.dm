@@ -4,7 +4,7 @@ SUBSYSTEM_DEF(ticker)
 	priority = SS_PRIORITY_TICKER
 	init_order = SS_INIT_TICKER
 	flags = SS_NO_TICK_CHECK | SS_KEEP_TIMING
-	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
+	runlevels = RUNLEVELS_PREGAME | RUNLEVELS_GAME
 
 	var/pregame_timeleft
 	var/start_ASAP = FALSE          //the game will start as soon as possible, bypassing all pre-game nonsense

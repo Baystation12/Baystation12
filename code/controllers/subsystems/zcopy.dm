@@ -7,7 +7,7 @@ SUBSYSTEM_DEF(zcopy)
 	wait = 1
 	init_order = SS_INIT_ZCOPY
 	priority = SS_PRIORITY_ZCOPY
-	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
+	runlevels = RUNLEVELS_PREGAME | RUNLEVELS_GAME
 
 	var/list/queued_turfs = list()
 	var/qt_idex = 1

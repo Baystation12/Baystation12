@@ -2,7 +2,6 @@ SUBSYSTEM_DEF(graphs)
 	name = "Graphs"
 	priority = SS_PRIORITY_GRAPH
 	flags = SS_KEEP_TIMING | SS_NO_INIT
-	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	wait = 1
 
 	/// A list of graphs pending update.

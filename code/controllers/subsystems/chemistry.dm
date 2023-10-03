@@ -2,7 +2,6 @@ SUBSYSTEM_DEF(chemistry)
 	name = "Chemistry"
 	priority = SS_PRIORITY_CHEMISTRY
 	init_order = SS_INIT_CHEMISTRY
-	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 	wait = 0.5 SECONDS
 	var/static/list/reactions_by_id = list()
 	var/static/list/reactions_by_result = list()
