@@ -1,5 +1,3 @@
-//Amazing disperser from Bxil(tm). Some icons, sounds, and some code shamelessly stolen from ParadiseSS13.
-
 /obj/machinery/computer/ship/disperser
 	name = "obstruction field disperser control"
 	icon = 'icons/obj/machines/computer.dmi'
@@ -26,8 +24,6 @@
 
 	var/accuracy = 0
 
-	/// Number of digits that needs calibration
-	var/caldigit = 4
 	/// What it is
 	var/list/calibration
 	/// what is should be
@@ -41,6 +37,8 @@
 	var/next_shot = 0
 	/// Time to wait between safe shots in deciseconds
 	var/const/coolinterval = 2 MINUTES
+
+	var/const/cal_count = 4
 
 /obj/machinery/computer/ship/disperser/Initialize()
 	. = ..()
@@ -104,8 +102,8 @@
  * Calculating calibration.
  */
 /obj/machinery/computer/ship/disperser/proc/get_calibration()
-	var/list/calresult[caldigit]
-	for(var/i = 1 to caldigit)
+	var/list/calresult = new(cal_count)
+	for(var/i = 1 to cal_count)
 		if(calibration[i] == calexpected[i])
 			calresult[i] = 2
 		else if(calibration[i] in calexpected)
@@ -118,10 +116,10 @@
  * Resetting calibration.
  */
 /obj/machinery/computer/ship/disperser/proc/reset_calibration()
-	calexpected = new /list(caldigit)
-	calibration = new /list(caldigit)
-	for(var/i = 1 to caldigit)
-		calexpected[i] = rand(0,9)
+	calexpected = new(cal_count)
+	calibration = new(cal_count)
+	for(var/i = 1 to cal_count)
+		calexpected[i] = rand(0, 9)
 		calibration[i] = 0
 
 /**
@@ -130,7 +128,7 @@
 /obj/machinery/computer/ship/disperser/proc/cal_accuracy()
 	var/top = 0
 	// Maximum possible value, aka 100% accuracy
-	var/divisor = caldigit * 2
+	var/divisor = cal_count * 2
 	for(var/i in get_calibration())
 		top += i
 	accuracy = round(top * 100 / divisor)
@@ -240,14 +238,12 @@
 
 	if(href_list["calibration"])
 		var/input = input("0-9", "disperser calibration", 0) as num|null
-		// Can be zero so we explicitly check for null
 		if(!isnull(input))
-			var/calnum = sanitize_integer(text2num(href_list["calibration"]), 0, caldigit) // sanitiiiiize
-			// Must add 1 because nanoui indexes from 0
+			var/calnum = sanitize_integer(text2num(href_list["calibration"]), 0, cal_count - 1)
 			calibration[calnum + 1] = sanitize_integer(input, 0, 9, 0)
 
 	if(href_list["skill_calibration"])
-		for(var/i = 1 to min(caldigit, user.get_skill_value(core_skill) - skill_offset))
+		for(var/i = 1 to clamp(user.get_skill_value(core_skill) - skill_offset, 1, cal_count))
 			calibration[i] = calexpected[i]
 
 	if(href_list["strength"])

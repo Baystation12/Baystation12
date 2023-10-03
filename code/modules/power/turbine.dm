@@ -201,7 +201,7 @@
 	for(var/obj/machinery/compressor/C in SSmachines.machinery)
 		if(id_tag == C.comp_id)
 			compressor = C
-	doors = new /list()
+	doors = list()
 	for(var/obj/machinery/door/blast/P in SSmachines.machinery)
 		if(P.id_tag == id_tag)
 			doors += P

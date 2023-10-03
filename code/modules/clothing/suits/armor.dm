@@ -105,7 +105,7 @@
 /obj/item/clothing/suit/armor/reactive/handle_shield(mob/user, damage, atom/damage_source = null, mob/attacker = null, def_zone = null, attack_text = "the attack")
 	if(prob(50))
 		user.visible_message(SPAN_DANGER("The reactive teleport system flings [user] clear of the attack!"))
-		var/list/turfs = new/list()
+		var/list/turfs = list()
 		for(var/turf/T in orange(6, user))
 			if(istype(T,/turf/space)) continue
 			if(T.density) continue

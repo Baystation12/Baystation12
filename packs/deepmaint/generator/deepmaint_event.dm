@@ -6,7 +6,7 @@
 
 /datum/event/deepmaint/start()
 	var/attempts = 5
-	spawned_ladders = new/list()
+	spawned_ladders = list()
 	free_ladders = GLOB.free_deepmaint_ladders.Copy()
 	do
 		if (!length(free_ladders))
