@@ -1,0 +1,5 @@
+author: SuhEugene
+delete-after: true
+changes:
+  - tweak: Для статусбара добавлен преференс видимости.
+  - admin: Добавлена кнопочка Spawn as Human.
