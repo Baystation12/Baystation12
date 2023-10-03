@@ -14,7 +14,7 @@
 		/obj/item/melee/baton/robot/electrified_arm,
 		/obj/item/device/flash,
 		/obj/item/gun/energy/gun,
-		/obj/item/reagent_containers/spray,
+		/obj/item/reagent_containers/spray/chemsprayer,
 		/obj/item/gun/launcher/syringe/rapid/sleepy
 	)
 
@@ -27,22 +27,25 @@
 /obj/item/robot_module/medical/finalize_emag()
 	. = ..()
 
-	var/obj/item/reagent_containers/spray/acid = locate() in equipment
-	acid.reagents.add_reagent(/datum/reagent/acid/polyacid, 250)
-	acid.SetName("Polyacid spray")
+	var/obj/item/reagent_containers/spray/chemsprayer/acid = locate() in equipment
+	if (acid)
+		acid.reagents.add_reagent(/datum/reagent/acid/polyacid, 250)
+		acid.SetName("Polyacid Spray")
 
 	var/obj/item/shockpaddles/robot/shock = locate() in equipment
-	shock.safety = FALSE
+	if (shock)
+		shock.safety = FALSE
 
 
 /obj/item/robot_module/medical/respawn_consumable(mob/living/silicon/robot/R, amount)
 	..()
-	if(R.emagged)
-		var/obj/item/reagent_containers/spray/acid = locate() in equipment
-		acid.reagents.add_reagent(/datum/reagent/acid/polyacid, 2 * amount)
+	if (R.emagged)
+		var/obj/item/reagent_containers/spray/chemsprayer/acid = locate() in equipment
+		if (acid)
+			acid.reagents.add_reagent(/datum/reagent/acid/polyacid, 40 * amount)
 
 		var/obj/item/gun/launcher/syringe/rapid/sleepy = locate() in equipment
-		if (sleepy.darts < sleepy.max_darts)
+		if (sleepy?.max_darts > length(sleepy?.darts))
 			sleepy.darts += new /obj/item/syringe_cartridge/sleepy(src)
 
 
@@ -112,6 +115,13 @@
 		stack.synths = list(medicine)
 
 
+/obj/item/robot_module/medical/surgeon/respawn_consumable(mob/living/silicon/robot/R, amount)
+	..()
+	var/obj/item/reagent_containers/spray/sterilizine/S = locate() in equipment
+	if (S)
+		S.reagents.add_reagent(/datum/reagent/sterilizine, 10 * amount)
+
+
 /obj/item/robot_module/medical/crisis
 	name = "crisis robot module"
 	display_name = "Crisis"
@@ -176,10 +186,10 @@
 		stack.synths = list(medicine)
 
 /obj/item/robot_module/medical/crisis/respawn_consumable(mob/living/silicon/robot/R, amount)
+	..()
 	var/obj/item/reagent_containers/syringe/S = locate() in equipment
 	if (S.mode == 2)
 		S.reagents.clear_reagents()
 		S.mode = initial(S.mode)
 		S.desc = initial(S.desc)
 		S.update_icon()
-	..()

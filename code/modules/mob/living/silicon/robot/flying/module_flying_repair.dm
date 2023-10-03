@@ -103,15 +103,18 @@
 /obj/item/robot_module/flying/repair/respawn_consumable(mob/living/silicon/robot/R, amount)
 	..()
 	var/obj/item/device/lightreplacer/LR = locate() in equipment
-	LR.Charge(R, amount)
+	if (LR)
+		LR.Charge(R, amount)
 
 	if (R.emagged)
 		var/obj/item/flamethrower/full/loaded/flamethrower = locate() in equipment
-		flamethrower.beaker.reagents.add_reagent(/datum/reagent/napalm, 10 * amount)
+		if (flamethrower)
+			flamethrower.beaker.reagents.add_reagent(/datum/reagent/napalm, 30 * amount)
 
 		var/obj/item/shield_diffuser/diff = locate() in equipment
-		diff.cell.charge += amount
+		if (diff)
+			diff.cell.charge += 10 * amount
 
 		var/obj/item/gun/launcher/grenade/foam/foam = locate() in equipment
-		if (LAZYLEN(foam.grenades) < foam.max_grenades)
+		if (foam?.max_grenades > length(foam?.grenades))
 			foam.grenades += new /obj/item/grenade/chem_grenade/metalfoam(src)

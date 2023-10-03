@@ -88,6 +88,15 @@
 	var/max_darts = 1
 	var/obj/item/syringe_cartridge/next
 
+
+/obj/item/gun/launcher/syringe/examine(mob/user, distance)
+	. = ..()
+	to_chat(user, SPAN_NOTICE("\The [src] has [length(darts)] dart\s left!"))
+
+	if (next)
+		to_chat(user, SPAN_WARNING("\The [src] is ready to fire!"))
+
+
 /obj/item/gun/launcher/syringe/consume_next_projectile()
 	if(next)
 		next.prime()

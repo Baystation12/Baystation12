@@ -178,28 +178,35 @@
 			F.icon_state = "flash"
 		else if(F.times_used)
 			F.times_used--
-	if(!synths || !length(synths))
-		return
-	for(var/datum/matter_synth/T in synths)
-		T.add_charge(T.recharge_rate * rate)
 
-	for (var/obj/item/gun/energy/T in equipment)
-		if (T && T.power_supply)
-			if (T.self_recharge)
-				return
-			if (T.power_supply.charge < T.power_supply.maxcharge)
-				T.power_supply.give(T.charge_cost * rate)
-				T.update_icon()
-			else
-				T.charge_tick = 0
+	if(length(synths))
+		for(var/datum/matter_synth/T in synths)
+			T.add_charge(T.recharge_rate * rate)
 
-	for (var/obj/item/gun/projectile/P in equipment)
+	var/obj/item/reagent_containers/spray/cleaner/drone/SC = locate() in equipment
+	if (SC)
+		SC.reagents.add_reagent(/datum/reagent/space_cleaner, 8 * rate)
+
+	var/obj/item/gun/energy/E = locate() in equipment
+	if (E?.power_supply)
+		if (E.self_recharge)
+			return
+		if (E.power_supply.charge < E.power_supply.maxcharge)
+			E.power_supply.give(E.charge_cost * 2)
+
+	var/obj/item/gun/projectile/P = locate() in equipment
+	if (P)
 		if (P.load_method == MAGAZINE)
-			if (P.ammo_magazine == null || P.ammo_magazine.stored_ammo == 0)
+			var/obj/item/ammo_magazine/mag = P.ammo_magazine
+			if (!mag || length(mag.stored_ammo) <= mag.max_ammo * 0.25)
 				P.ammo_magazine = new P.magazine_type(src)
+				qdel(mag)
 		else
 			if (length(P.loaded) <= P.max_shells)
 				P.loaded += new P.ammo_type(src)
+
+	for (var/obj/gear in equipment)
+		gear.update_icon()
 
 
 /obj/item/robot_module/proc/add_languages(mob/living/silicon/robot/R)
