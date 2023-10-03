@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - rscadd: Adds an artifact effect that can turn robotic limbs to flesh, and give
+      FBP's new bodies.
