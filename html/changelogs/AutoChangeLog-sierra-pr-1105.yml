@@ -1,0 +1,4 @@
+author: Qlonever
+delete-after: true
+changes:
+  - bugfix: Made noexcutite actually prevent jitters like it's supposed to.
