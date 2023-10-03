@@ -1,0 +1,12 @@
+author: Jux
+delete-after: true
+changes:
+  - bugfix: Borg antag items that recharge (guns, various reagent items) now recharge
+      properly,  Borg modules that used the drone space cleaner without ever recharging
+      it now recharge it, and Surgeon borgs recharge their sterilizine. All rechargable
+      borg antag items recharge at a more reasonable speed.
+  - bugfix: Borg item icons now update when recharging, making it less of a guessing
+      game for if your tools are charged.
+  - tweak: Flamethrowers and syringe guns both now give feedback on their ammo and
+      ready status when examined. Flamethrowers require fuel to ignite, and go out
+      when they run out of fuel.
