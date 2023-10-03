@@ -3212,6 +3212,7 @@
 #include "code\modules\xenoarcheaology\effects\goodfeeling.dm"
 #include "code\modules\xenoarcheaology\effects\heal.dm"
 #include "code\modules\xenoarcheaology\effects\heat.dm"
+#include "code\modules\xenoarcheaology\effects\human_ifier.dm"
 #include "code\modules\xenoarcheaology\effects\hurt.dm"
 #include "code\modules\xenoarcheaology\effects\pushback.dm"
 #include "code\modules\xenoarcheaology\effects\radiate.dm"
