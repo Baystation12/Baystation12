@@ -866,7 +866,9 @@
 
 /datum/reagent/noexcutite/affect_blood(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
-		M.make_jittery(-50)
+		return
+
+	M.make_jittery(-50)
 
 /datum/reagent/antidexafen
 	name = "Antidexafen"
