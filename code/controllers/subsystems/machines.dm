@@ -39,7 +39,6 @@ SUBSYSTEM_DEF(machines)
 	init_order = SS_INIT_MACHINES
 	priority = SS_PRIORITY_MACHINERY
 	flags = SS_KEEP_TIMING
-	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	var/static/current_step = SSMACHINES_PIPENETS
 	var/static/cost_pipenets = 0
 	var/static/cost_machinery = 0

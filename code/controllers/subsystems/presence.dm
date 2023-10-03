@@ -4,7 +4,6 @@
 SUBSYSTEM_DEF(presence)
 	name = "Player Presence"
 	priority = SS_PRIORITY_PRESENCE
-	runlevels = RUNLEVEL_GAME
 	wait = 2 SECONDS
 	var/static/list/levels = list()
 	var/static/list/queue = list()

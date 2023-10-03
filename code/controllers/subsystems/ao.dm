@@ -2,7 +2,7 @@ SUBSYSTEM_DEF(ao)
 	name = "Ambient Occlusion"
 	init_order = SS_INIT_MISC_LATE
 	wait = 1
-	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
+	runlevels = RUNLEVELS_PREGAME | RUNLEVELS_GAME
 	flags = SS_NO_INIT
 	var/static/list/image_cache = list()
 	var/static/list/turf/queue = list()

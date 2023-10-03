@@ -23,7 +23,7 @@ SUBSYSTEM_DEF(garbage)
 	priority = SS_PRIORITY_GARBAGE
 	wait = 10 SECONDS
 	flags = SS_POST_FIRE_TIMING | SS_BACKGROUND | SS_NEEDS_SHUTDOWN
-	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
+	runlevels = RUNLEVELS_PREGAME | RUNLEVELS_GAME
 	init_order = SS_INIT_GARBAGE
 
 	var/static/last_tick_enqueues = 0

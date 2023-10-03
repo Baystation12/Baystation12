@@ -4,7 +4,7 @@ SUBSYSTEM_DEF(character_setup)
 	priority = SS_PRIORITY_CHAR_SETUP
 	flags = SS_BACKGROUND
 	wait = 1 SECOND
-	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
+	runlevels = RUNLEVELS_PREGAME | RUNLEVELS_GAME
 
 	var/list/prefs_awaiting_setup = list()
 	var/list/preferences_datums = list()

@@ -2,7 +2,6 @@ SUBSYSTEM_DEF(mobs)
 	name = "Mobs"
 	priority = SS_PRIORITY_MOB
 	flags = SS_NO_INIT | SS_KEEP_TIMING
-	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	wait = 2 SECONDS
 	var/static/list/mob/mob_list = list()
 	var/static/list/mob/queue = list()

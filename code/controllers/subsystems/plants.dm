@@ -1,7 +1,6 @@
 SUBSYSTEM_DEF(plants)
 	name = "Plants"
 	priority = SS_PRIORITY_PLANTS
-	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	flags = SS_BACKGROUND | SS_POST_FIRE_TIMING
 	init_order = SS_INIT_PLANTS
 	wait = 5 SECONDS

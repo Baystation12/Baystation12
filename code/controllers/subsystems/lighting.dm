@@ -3,7 +3,7 @@ SUBSYSTEM_DEF(lighting)
 	wait = LIGHTING_INTERVAL
 	priority = SS_PRIORITY_LIGHTING
 	init_order = SS_INIT_LIGHTING
-	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
+	runlevels = RUNLEVELS_PREGAME | RUNLEVELS_GAME
 
 	var/total_lighting_overlays = 0
 	var/total_lighting_sources = 0

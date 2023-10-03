@@ -3,7 +3,6 @@ SUBSYSTEM_DEF(vote)
 	wait = 1 SECOND
 	priority = SS_PRIORITY_VOTE
 	flags = SS_NO_TICK_CHECK | SS_KEEP_TIMING
-	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 
 	var/last_started_time        //To enforce delay between votes.
 	var/antag_added              //Enforces a maximum of one added antag per round.
