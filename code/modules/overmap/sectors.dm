@@ -22,6 +22,8 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 
 	var/hide_from_reports = FALSE
 
+	var/randomize_location = TRUE
+
 	/// null | num | list. If a num or a (num, num) list, the radius or random bounds for placing this sector near the main map's overmap icon.
 	var/list/place_near_main
 
@@ -38,23 +40,24 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 	if(!GLOB.using_map.overmap_z)
 		build_overmap()
 
-	var/map_low = OVERMAP_EDGE
-	var/map_high = GLOB.using_map.overmap_size - OVERMAP_EDGE
-	var/turf/home
-	if (place_near_main)
-		var/obj/effect/overmap/visitable/main = map_sectors["1"]
-		if (islist(place_near_main))
-			place_near_main = Roundm(Frand(place_near_main[1], place_near_main[2]), 0.1)
-		home = CircularRandomTurfAround(main, abs(place_near_main), map_low, map_low, map_high, map_high)
-		log_debug("place_near_main moving [src] near [main] ([main.x],[main.y]) with radius [place_near_main], got ([home.x],[home.y])")
-	else
-		start_x = start_x || rand(map_low, map_high)
-		start_y = start_y || rand(map_low, map_high)
-		home = locate(start_x, start_y, GLOB.using_map.overmap_z)
-	forceMove(home)
+	if (randomize_location)
+		var/map_low = OVERMAP_EDGE
+		var/map_high = GLOB.using_map.overmap_size - OVERMAP_EDGE
+		var/turf/home
+		if (place_near_main)
+			var/obj/effect/overmap/visitable/main = map_sectors["1"]
+			if (islist(place_near_main))
+				place_near_main = Roundm(Frand(place_near_main[1], place_near_main[2]), 0.1)
+			home = CircularRandomTurfAround(main, abs(place_near_main), map_low, map_low, map_high, map_high)
+			log_debug("place_near_main moving [src] near [main] ([main.x],[main.y]) with radius [place_near_main], got ([home.x],[home.y])")
+		else
+			start_x = start_x || rand(map_low, map_high)
+			start_y = start_y || rand(map_low, map_high)
+			home = locate(start_x, start_y, GLOB.using_map.overmap_z)
+		forceMove(home)
 
-	for(var/obj/effect/overmap/event/E in loc)
-		qdel(E)
+		for(var/obj/effect/overmap/event/E in loc)
+			qdel(E)
 
 	if(HAS_FLAGS(sector_flags, OVERMAP_SECTOR_KNOWN))
 		LAZYADD(GLOB.known_overmap_sectors, src)

@@ -149,7 +149,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 /obj/effect/overmap/visitable/placeholder
 	scannable = TRUE
 	requires_contact = TRUE
-
+	randomize_location = FALSE
 	glide_size = 8
 	appearance_flags = EMPTY_BITFIELD
 	var/scale = 1
