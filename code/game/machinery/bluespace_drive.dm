@@ -154,7 +154,7 @@
 			to_chat(living, SPAN_DANGER(FONT_LARGE("The Drive's field cracks open briefly, emitting a blinding flash of blue light and a deafenening screech!")))
 		living.flash_eyes(FLASH_PROTECTION_MAJOR)
 		living.Stun(3)
-		living.confused += 15
+		living.mod_confused(15)
 		living.ear_damage += rand(0, 5)
 		living.ear_deaf = max(living.ear_deaf, 15)
 	if (!change_turf)

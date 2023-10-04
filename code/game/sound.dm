@@ -141,7 +141,7 @@ var/global/const/FALLOFF_SOUNDS = 0.5
 				S.environment = DRUGGED
 			else if (M.drowsyness)
 				S.environment = DIZZY
-			else if (M.confused)
+			else if (M.is_confused())
 				S.environment = DIZZY
 			else if (M.stat == UNCONSCIOUS)
 				S.environment = UNDERWATER

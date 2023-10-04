@@ -142,7 +142,7 @@
 
 /datum/reagent/toxin/venom/affect_blood(mob/living/carbon/M, removed)
 	if(prob(volume*2))
-		M.confused = max(M.confused, 3)
+		M.set_confused(3)
 	..()
 
 /datum/reagent/toxin/cryotoxin
@@ -341,7 +341,7 @@
 
 /datum/reagent/toxin/taxine/affect_blood(mob/living/carbon/M, removed)
 	..()
-	M.confused += 1.5
+	M.mod_confused(2)
 
 /datum/reagent/toxin/taxine/overdose(mob/living/carbon/M)
 	..()
@@ -643,7 +643,7 @@
 	M.add_chemical_effect(CE_SEDATE, 1)
 
 	if(M.chem_doses[type] <= metabolism * threshold)
-		M.confused += 2
+		M.mod_confused(2)
 		M.drowsyness += 2
 
 	if(M.chem_doses[type] < 2 * threshold)
@@ -683,7 +683,7 @@
 	var/threshold = 2 + (0.4 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
 
 	if(M.chem_doses[type] >= metabolism * threshold * 0.5)
-		M.confused = max(M.confused, 2)
+		M.set_confused(2)
 		M.add_chemical_effect(CE_VOICELOSS, 1)
 	if(M.chem_doses[type] > threshold * 0.5)
 		M.make_dizzy(3)
@@ -714,7 +714,7 @@
 	M.add_chemical_effect(M.add_chemical_effect(CE_SLOWDOWN, 1))
 
 	if(prob(80))
-		M.confused = max(M.confused, 10)
+		M.set_confused(10)
 	if(prob(50))
 		M.drowsyness = max(M.drowsyness, 3)
 	if(prob(10))
@@ -848,7 +848,7 @@
 	var/drug_strength = 4 - (0.8 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
 
 	M.make_dizzy(drug_strength)
-	M.confused = max(M.confused, drug_strength * 5)
+	M.set_confused(drug_strength * 5)
 	..()
 
 /datum/reagent/drugs/mindbreaker

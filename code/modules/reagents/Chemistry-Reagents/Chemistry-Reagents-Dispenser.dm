@@ -148,7 +148,7 @@
 		M.slurring = max(M.slurring, 30)
 	if(effective_dose >= strength * 3) // Confusion - walking in random directions
 		M.add_chemical_effect(CE_PAINKILLER, 150/strength)
-		M.confused = max(M.confused, 20)
+		M.set_confused(20)
 	if(effective_dose >= strength * 4) // Blurry vision
 		M.add_chemical_effect(CE_PAINKILLER, 150/strength)
 		M.eye_blurry = max(M.eye_blurry, 10)

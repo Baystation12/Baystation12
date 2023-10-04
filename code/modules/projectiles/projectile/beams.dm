@@ -352,9 +352,9 @@
 	if(istype(target, /mob/living))
 		var/mob/living/L = target
 		var/potency = rand(potency_min, potency_max)
-		L.confused += potency
+		L.mod_confused(potency)
 		L.eye_blurry += potency
-		if(L.confused >= 10)
+		if(L.is_confused(10))
 			L.Stun(1)
 			L.drop_l_hand()
 			L.drop_r_hand()

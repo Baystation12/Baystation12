@@ -178,7 +178,7 @@
 				SPAN_DANGER("Blood sprays out from \the [owner]'s [spray_organ]!"),
 				FONT_HUGE(SPAN_DANGER("Blood sprays out from your [spray_organ]!"))
 			)
-			owner.confused = max(1, owner.confused)
+			owner.set_confused(1)
 			owner.eye_blurry = 2
 
 			//AB occurs every heartbeat, this only throttles the visible effect
