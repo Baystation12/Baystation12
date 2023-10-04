@@ -173,8 +173,7 @@
 	if(user.incapacitated()  || !user.Adjacent(src) || !user.IsAdvancedToolUser())
 		return
 
-	user.set_machine(src)
-	var/dat = "<B><HR>[FONT_LARGE(name)]</B><BR><HR>"
+	var/dat = ""
 
 	for(var/entry in species.hud.gear)
 		var/list/slot_ref = species.hud.gear[entry]
@@ -217,10 +216,10 @@
 		dat += "<BR><a href='?src=\ref[src];item=\ref[UW]'>Remove \the [UW]</a>"
 
 	dat += "<BR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
-	dat += "<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>"
 
-	show_browser(user, dat, text("window=mob[name];size=340x540"))
-	onclose(user, "mob[name]")
+	var/datum/browser/popup = new(user, "mob[name]", name, 340, 540)
+	popup.set_content(dat)
+	popup.open()
 	return
 
 // called when something steps onto a human

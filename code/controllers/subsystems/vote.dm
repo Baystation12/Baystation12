@@ -88,7 +88,6 @@ SUBSYSTEM_DEF(vote)
 	voting |= C
 
 	. = list()
-	. += "<html><head><title>Voting Panel</title></head><body>"
 	if(active_vote)
 		. += active_vote.interface(C.mob)
 		if(admin)
@@ -109,7 +108,7 @@ SUBSYSTEM_DEF(vote)
 			. += "</li>"
 		. += "</ul><hr>"
 
-	. += "<a href='?src=\ref[src];close=1' style='position:absolute;right:50px'>Close</a></body></html>"
+	. += "<a href='?src=\ref[src];close=1' style='position:absolute;right:50px'>Close</a>"
 	return JOINTEXT(.)
 
 /datum/controller/subsystem/vote/proc/show_panel(mob/user)
@@ -118,8 +117,9 @@ SUBSYSTEM_DEF(vote)
 	if(active_vote)
 		win_x = active_vote.win_x
 		win_y = active_vote.win_y
-	show_browser(user, interface(user.client),"window=vote;size=[win_x]x[win_y]")
-	onclose(user, "vote", src)
+	var/datum/browser/popup = new(user, "vote", "Voting Panel", win_x, win_y)
+	popup.set_content(interface(user.client))
+	popup.open()
 
 /datum/controller/subsystem/vote/proc/close_panel(mob/user)
 	show_browser(user, null, "window=vote")
