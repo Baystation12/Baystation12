@@ -631,7 +631,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		var/area/areatemp = areatype
 		areatype = areatemp.type
 
-	var/list/areas = new/list()
+	var/list/areas = list()
 	for(var/area/N in world)
 		if(istype(N, areatype)) areas += N
 	return areas
@@ -648,7 +648,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	if(!ispath(areatype, /area))
 		return null
 
-	var/list/atoms = new/list()
+	var/list/atoms = list()
 	for(var/area/N in world)
 		if(istype(N, areatype))
 			for(var/atom/A in N)

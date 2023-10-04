@@ -73,7 +73,7 @@ length to avoid portals or something i guess?? Not that they're counted right no
 		var/PathNode/current = open.Dequeue()
 		closed.Add(current.position)
 		if(current.position == end || call(current.position, dist)(end) <= min_target_dist)
-			path = new /list(current.nodes_traversed + 1)
+			path = new (current.nodes_traversed + 1)
 			path[length(path)] = current.position
 			var/index = length(path) - 1
 			while(current.previous_node)
