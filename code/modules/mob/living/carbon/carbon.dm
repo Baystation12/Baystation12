@@ -428,10 +428,7 @@
 	return result
 
 /mob/living/carbon/show_inv(mob/user as mob)
-	user.set_machine(src)
 	var/dat = {"
-	<B><HR>[FONT_LARGE(name)]</B>
-	<BR><HR>
 	<BR><B>Head(Mask):</B> <A href='?src=\ref[src];item=mask'>[(wear_mask ? wear_mask : "Nothing")]</A>
 	<BR><B>Left Hand:</B> <A href='?src=\ref[src];item=l_hand'>[(l_hand ? l_hand  : "Nothing")]</A>
 	<BR><B>Right Hand:</B> <A href='?src=\ref[src];item=r_hand'>[(r_hand ? r_hand : "Nothing")]</A>
@@ -439,10 +436,10 @@
 	<BR>[(internal ? text("<A href='?src=\ref[src];item=internal'>Remove Internal</A>") : "")]
 	<BR><A href='?src=\ref[src];item=pockets'>Empty Pockets</A>
 	<BR><A href='?src=\ref[user];refresh=1'>Refresh</A>
-	<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>
 	<BR>"}
-	show_browser(user, dat, text("window=mob[];size=325x500", name))
-	onclose(user, "mob[name]")
+	var/datum/browser/popup = new(user, "mob[name]", name, 325, 500)
+	popup.set_content(dat)
+	popup.open()
 	return
 
 /**
