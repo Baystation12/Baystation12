@@ -139,6 +139,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 			for(var/obj/machinery/telecomms/T in telecomms_list)
 				add_link(T)
 	update_power()
+	update_icon()
 
 /obj/machinery/telecomms/Destroy()
 	telecomms_list -= src

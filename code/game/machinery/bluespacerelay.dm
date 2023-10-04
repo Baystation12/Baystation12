@@ -11,10 +11,26 @@
 	machine_name = "emergency bluespace relay"
 	machine_desc = "Used to instantly send messages across vast distances. An emergency relay is required to directly contact Expeditionary Command through crisis channels."
 
+
+/obj/machinery/bluespacerelay/Initialize()
+	. = ..()
+	update_icon()
+
+
+/obj/machinery/bluespacerelay/operable()
+	return !inoperable(MACHINE_STAT_EMPED)
+
+
 /obj/machinery/bluespacerelay/on_update_icon()
 	ClearOverlays()
+	if(operable())
+		AddOverlays(list(
+			"bspacerelay_on",
+			emissive_appearance(icon, "bspacerelay_on")
+		))
 	if(panel_open)
-		AddOverlays("[icon_state]_panel")
-	if(!inoperable())
-		AddOverlays("[icon_state]_lights_working")
-		AddOverlays(emissive_appearance(icon, "[icon_state]_lights_working"))
+		AddOverlays("bspacerelay_panel")
+
+
+/obj/machinery/bluespacerelay/Process()
+	update_icon()
