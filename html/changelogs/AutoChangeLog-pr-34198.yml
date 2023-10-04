@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Random events should no longer start firing if the server fails to start
-      a round and returns to the lobby.
