@@ -1,7 +1,5 @@
-#define MESSAGE_SERVER_SPAM_REJECT 1
-#define MESSAGE_SERVER_DEFAULT_SPAM_LIMIT 10
-
 var/global/list/obj/machinery/message_server/message_servers = list()
+
 
 /datum/data_rc_msg
 	var/rec_dpt = "Unspecified" //name of the person
@@ -10,6 +8,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	var/stamp = "Unstamped"
 	var/id_auth = "Unauthenticated"
 	var/priority = "Normal"
+
 
 /datum/data_rc_msg/New(param_rec = "",param_sender = "",param_message = "",param_stamp = "",param_id_auth = "",param_priority)
 	if(param_rec)
@@ -33,6 +32,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 			else
 				priority = "Undetermined"
 
+
 /obj/machinery/message_server
 	icon = 'icons/obj/machines/research/server.dmi'
 	icon_state = "server"
@@ -51,30 +51,98 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	var/list/spamfilter = list("You have won", "your prize", "male enhancement", "shitcurity", \
 			"are happy to inform you", "account number", "enter your PIN")
 			//Messages having theese tokens will be rejected by server. Case sensitive
-	var/spamfilter_limit = MESSAGE_SERVER_DEFAULT_SPAM_LIMIT	//Maximal amount of tokens
+	var/spamfilter_limit = 10
 
-/obj/machinery/message_server/New()
-	message_servers += src
-	decryptkey = GenerateKey()
-	..()
 
 /obj/machinery/message_server/Destroy()
 	message_servers -= src
 	return ..()
 
+
+/obj/machinery/message_server/Initialize()
+	. = ..()
+	message_servers += src
+	decryptkey = GenerateKey()
+	update_icon()
+
+
 /obj/machinery/message_server/Process()
-	..()
-	if(active && (inoperable()))
-		active = 0
-		power_failure = 10
-		update_icon()
+	if (inoperable())
+		if (active)
+			active = FALSE
+			power_failure = 10
+	else if (power_failure > 0)
+		--power_failure
+		if (!power_failure)
+			active = TRUE
+	update_icon()
+
+
+/obj/machinery/r_n_d/server/operable()
+	return !inoperable(MACHINE_STAT_EMPED)
+
+
+/obj/machinery/message_server/on_update_icon()
+	ClearOverlays()
+	if (operable())
+		AddOverlays(list(
+			"server_on",
+			"server_lights_on",
+			emissive_appearance(icon, "server_lights_on")
+		))
+	else
+		AddOverlays(list(
+			"server_lights_off",
+			emissive_appearance(icon, "server_lights_off")
+		))
+	if (panel_open)
+		AddOverlays("server_panel")
+
+
+/obj/machinery/message_server/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
+	to_chat(user, "You toggle PDA message passing from [active ? "On" : "Off"] to [active ? "Off" : "On"]")
+	active = !active
+	power_failure = 0
+	update_icon()
+	return TRUE
+
+
+/obj/machinery/message_server/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	if (!istype(tool, /obj/item/stock_parts/circuitboard/message_monitor))
 		return
-	else if(inoperable())
-		return
-	else if(power_failure > 0)
-		if(!(--power_failure))
-			active = 1
-			update_icon()
+	if (spamfilter_limit >= initial(spamfilter_limit) * 2)
+		to_chat(user, SPAN_WARNING("\The [src] already has as many boards as it can hold."))
+		return TRUE
+	spamfilter_limit += round(initial(spamfilter_limit) / 2)
+	user.visible_message(
+		SPAN_ITALIC("\The [user] installs \a [tool] into \a [src]."),
+		SPAN_ITALIC("You install \the [tool] into \the [src], improving its spam filtering capabilities."),
+		range = 5
+	)
+	qdel(tool)
+	return TRUE
+
+
+/obj/machinery/message_server/proc/send_to_department(department, message, tone)
+	var/reached = 0
+	for(var/mob/living/carbon/human/H in GLOB.human_mobs)
+		var/obj/item/modular_computer/device = locate() in H
+		if(!device || !(get_z(device) in GLOB.using_map.station_levels))
+			continue
+		var/rank = H.get_authentification_rank()
+		var/datum/job/J = SSjobs.get_by_title(rank)
+		if (!J)
+			continue
+		if(!istype(J))
+			log_debug(append_admin_tools("MESSAGE SERVER: Mob has an invalid job, skipping. Mob: '[H]'. Rank: '[rank]'. Job: '[J]'."))
+			continue
+		if(J.department_flag & department)
+			to_chat(H, SPAN_NOTICE("Your [device.name] alerts you to the fact that somebody is requesting your presence at your department."))
+			reached++
+	return reached
+
 
 /obj/machinery/message_server/proc/send_rc_message(recipient = "",sender = "",message = "",stamp = "", id_auth = "", priority = 1)
 	rc_msgs += new/datum/data_rc_msg(recipient,sender,message,stamp,id_auth)
@@ -106,61 +174,3 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 					Console.audible_message("[icon2html(Console, viewers(get_turf(Console)))][SPAN_NOTICE("\The [Console] announces: 'Message received from [sender].'")]", hearing_distance = 5)
 				Console.message_log += "<B>Message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A></B><BR>[authmsg]"
 			Console.set_light(2, 0.5)
-
-
-/obj/machinery/message_server/interface_interact(mob/user)
-	if(!CanInteract(user, DefaultTopicState()))
-		return FALSE
-	to_chat(user, "You toggle PDA message passing from [active ? "On" : "Off"] to [active ? "Off" : "On"]")
-	active = !active
-	power_failure = 0
-	update_icon()
-	return TRUE
-
-/obj/machinery/message_server/attackby(obj/item/O as obj, mob/living/user as mob)
-	if (active && operable() && (spamfilter_limit < MESSAGE_SERVER_DEFAULT_SPAM_LIMIT*2) && \
-		istype(O,/obj/item/stock_parts/circuitboard/message_monitor))
-		spamfilter_limit += round(MESSAGE_SERVER_DEFAULT_SPAM_LIMIT / 2)
-		qdel(O)
-		to_chat(user, "You install additional memory and processors into message server. Its filtering capabilities been enhanced.")
-	else
-		..(O, user)
-
-/obj/machinery/message_server/on_update_icon()
-	ClearOverlays()
-	if (panel_open)
-		AddOverlays("[icon_state]_panel")
-	if (active)
-		AddOverlays(list(
-			"[icon_state]_on",
-			emissive_appearance(icon, "[icon_state]_lights_off"),
-			"[icon_state]_lights_on"
-		))
-	else
-		AddOverlays(list(
-			emissive_appearance(icon, "[icon_state]_lights_off"),
-			"[icon_state]_lights_off"
-		))
-
-
-/obj/machinery/message_server/proc/send_to_department(department, message, tone)
-	var/reached = 0
-
-	for(var/mob/living/carbon/human/H in GLOB.human_mobs)
-		var/obj/item/modular_computer/device = locate() in H
-		if(!device || !(get_z(device) in GLOB.using_map.station_levels))
-			continue
-
-		var/rank = H.get_authentification_rank()
-		var/datum/job/J = SSjobs.get_by_title(rank)
-		if (!J)
-			continue
-		if(!istype(J))
-			log_debug(append_admin_tools("MESSAGE SERVER: Mob has an invalid job, skipping. Mob: '[H]'. Rank: '[rank]'. Job: '[J]'."))
-			continue
-
-		if(J.department_flag & department)
-			to_chat(H, SPAN_NOTICE("Your [device.name] alerts you to the fact that somebody is requesting your presence at your department."))
-			reached++
-
-	return reached

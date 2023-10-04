@@ -18,11 +18,11 @@
 	var/delay = 10
 	req_access = list(access_rd) //Only the R&D can change server settings.
 
-/obj/machinery/r_n_d/server/RefreshParts()
-	var/tot_rating = 0
-	for(var/obj/item/stock_parts/SP in src)
-		tot_rating += SP.rating
-	change_power_consumption(initial(idle_power_usage)/max(1, tot_rating), POWER_USE_IDLE)
+
+/obj/machinery/r_n_d/server/Destroy()
+	QDEL_NULL(files)
+	return ..()
+
 
 /obj/machinery/r_n_d/server/Initialize()
 	. = ..()
@@ -39,6 +39,36 @@
 		temp_list = splittext(id_with_download_string, ";")
 		for(var/N in temp_list)
 			id_with_download += text2num(N)
+	update_icon()
+
+
+/obj/machinery/r_n_d/server/operable()
+	return !inoperable(MACHINE_STAT_EMPED)
+
+
+/obj/machinery/r_n_d/server/on_update_icon()
+	ClearOverlays()
+	if (operable())
+		AddOverlays(list(
+			"server_on",
+			"server_lights_on",
+			emissive_appearance(icon, "server_lights_on"),
+		))
+	else
+		AddOverlays(list(
+			"server_lights_off",
+			emissive_appearance(icon, "server_lights_off")
+		))
+	if (panel_open)
+		AddOverlays("server_panel")
+
+
+/obj/machinery/r_n_d/server/RefreshParts()
+	var/tot_rating = 0
+	for(var/obj/item/stock_parts/SP in src)
+		tot_rating += SP.rating
+	change_power_consumption(initial(idle_power_usage)/max(1, tot_rating), POWER_USE_IDLE)
+
 
 /obj/machinery/r_n_d/server/Process()
 	..()
@@ -61,6 +91,7 @@
 	else
 		produce_heat()
 		delay = initial(delay)
+	update_icon()
 
 /obj/machinery/r_n_d/server/proc/produce_heat()
 	if(!produces_heat)

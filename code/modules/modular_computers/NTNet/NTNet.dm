@@ -43,8 +43,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	if(ntnet_global && (ntnet_global != src))
 		ntnet_global = src // There can be only one.
 	for(var/obj/machinery/ntnet_relay/R in SSmachines.machinery)
-		relays.Add(R)
-		R.NTNet = src
+		relays += R
 	build_software_lists()
 	build_emails_list()
 	build_reports_list()
