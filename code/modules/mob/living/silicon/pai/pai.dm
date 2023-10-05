@@ -222,6 +222,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	// Move us into the card and move the card to the ground.
 	stop_pulling()
 	resting = FALSE
+	anchored = FALSE
 
 	// If we are being held, handle removing our holder from their inv.
 	var/obj/item/holder/H = loc
