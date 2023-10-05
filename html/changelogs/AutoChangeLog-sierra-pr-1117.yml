@@ -1,0 +1,4 @@
+author: SuhEugene
+delete-after: true
+changes:
+  - tweak: Made stripping, vote, fire and party alarm panels use Fake NanoUI
