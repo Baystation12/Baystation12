@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: pAIs are no longer stuck in an anchored state if folded while buckled.
