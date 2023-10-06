@@ -91,3 +91,16 @@
 	great for stashing your stolen goods. Comes with a crowbar and a floor tile."
 	item_cost = 20
 	path = /obj/item/storage/backpack/satchel/flat
+
+/datum/uplink_item/item/tools/old_thermal
+	name = "Helmet-Mounted Thermal Sights"
+	desc= "A set of old thermal sights that have been attached to a replica helmet. Heavily restricts vision when worn and might get in the way of weapon scopes."
+	item_cost = 12
+	path = /obj/item/clothing/head/helmet/nvgmount/thermal
+
+/datum/uplink_item/item/tools/old_nvg
+	name ="Helmet-Mounted Light-Enhancing Sights"
+	desc= "A set of old light-enhancing sights that have been attached to a replica helmet. They aren't as effective as the later models and might get in the way of weapon scopes."
+	item_cost = 12
+	path = /obj/item/clothing/head/helmet/nvgmount/nvg
+	antag_roles = list(MODE_TRAITOR, MODE_REVOLUTIONARY)
