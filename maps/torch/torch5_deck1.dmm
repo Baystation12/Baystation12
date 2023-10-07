@@ -14194,7 +14194,7 @@
 /obj/item/storage/box/mousetraps,
 /obj/item/storage/box/lights/mixed,
 /obj/item/hand_labeler,
-/obj/item/stack/package_wrap/twenty_five,
+/obj/item/stack/package_wrap/cargo_wrap,
 /obj/item/reagent_containers/spray/cleaner{
 	pixel_x = -5
 	},
@@ -15308,7 +15308,7 @@
 	desc = "A colourful crayon. Please refrain from eating it or putting it in your nose. This one is labeled 'Canary Yellow.'"
 	},
 /obj/item/hand_labeler,
-/obj/item/stack/package_wrap/twenty_five,
+/obj/item/stack/package_wrap/cargo_wrap,
 /obj/item/device/destTagger,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/office)
@@ -16356,7 +16356,7 @@
 /area/medical/sleeper)
 "dZx" = (
 /obj/structure/table/steel,
-/obj/item/stack/package_wrap/twenty_five,
+/obj/item/stack/package_wrap/cargo_wrap,
 /obj/item/hand_labeler,
 /obj/item/device/destTagger{
 	pixel_y = 13
@@ -29417,7 +29417,7 @@
 /obj/item/reagent_containers/dropper,
 /obj/item/storage/box/beakers,
 /obj/item/hand_labeler,
-/obj/item/stack/package_wrap/twenty_five,
+/obj/item/stack/package_wrap/cargo_wrap,
 /obj/item/reagent_containers/spray/cleaner{
 	desc = "Someone has crossed out the 'Space' from Space Cleaner and written in Chemistry. Scrawled on the back is, 'Okay, whoever filled this with polytrinic acid, it was only funny the first time. It was hard enough replacing the CMO's first cat!'";
 	name = "Chemistry Cleaner"

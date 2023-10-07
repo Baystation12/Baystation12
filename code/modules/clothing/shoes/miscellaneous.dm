@@ -230,8 +230,6 @@
 	var/icon_state_modified = "foamclog-toeless"
 
 /obj/item/clothing/shoes/foamclog/use_tool(obj/item/W, mob/user)
-	if (!isitem(W))
-		return FALSE
 	if (!is_sharp(W))
 		return ..()
 

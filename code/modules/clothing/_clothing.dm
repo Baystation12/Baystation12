@@ -209,8 +209,6 @@
 
 /obj/item/clothing/use_tool(obj/item/tool, mob/living/user, list/click_params)
 	SHOULD_CALL_PARENT(TRUE)
-	if (!isitem(tool))
-		return FALSE
 	if (attempt_attach_accessory(tool, user))
 		return TRUE
 	if (attempt_store_item(tool, user))
