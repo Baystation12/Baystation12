@@ -36,7 +36,7 @@
 	storage_name = "Robotic Storage Control"
 	allow_items = 0
 
-/obj/machinery/computer/cryopod/robot/on_update_icon()
+/obj/machinery/computer/cryopod/on_update_icon()
 	return
 
 /obj/machinery/computer/cryopod/interface_interact(mob/user)

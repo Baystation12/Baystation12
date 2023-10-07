@@ -433,7 +433,7 @@
 	for(var/obj/item/organ/internal/I in target.internal_organs)
 		if(I && !(I.status & ORGAN_CUT_AWAY) && (I.status & ORGAN_DEAD) && I.parent_organ == affected.organ_tag && !BP_IS_ROBOTIC(I))
 			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
-			radial_button.name = "Attach \the [I.name]"
+			radial_button.name = "Regenerate \the [I.name]"
 			LAZYSET(dead_organs, I, radial_button)
 	if(!length(dead_organs))
 		return FALSE

@@ -220,7 +220,7 @@
 				AddOverlays(emissive_appearance(icon, "brain_ok"))
 				AddOverlays(image(icon, icon_state = "brain_ok"))
 			if (3 to 5)
-				AddOverlays(emissive_appearance(icon, "breathing_bad"))
+				AddOverlays(emissive_appearance(icon, "brain_bad"))
 				AddOverlays(image(icon, icon_state = "brain_bad"))
 				if (read_alerts)
 					alerts[BRAIN_ALERT] = "Weak brain activity!"
