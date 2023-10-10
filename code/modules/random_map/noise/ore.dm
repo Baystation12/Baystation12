@@ -61,7 +61,9 @@
 			var/tmp_cell
 			TRANSLATE_AND_VERIFY_COORD(x, y)
 
-                        var/mapval = (!isnull(tmp_cell) ? map[tmp_cell] : null)
+			var/mapval = null
+			if(!isnull(temp_cell))
+				mapval = map[tmp_cell]
 
 			if(mapval < rare_val)      // Surface metals.
 				T.resources[MATERIAL_IRON] =     rand(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX)
