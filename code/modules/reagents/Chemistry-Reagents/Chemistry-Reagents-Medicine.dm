@@ -349,7 +349,7 @@
 	if(prob(75))
 		H.drowsyness++
 	if(prob(25))
-		H.confused++
+		H.mod_confused(1)
 
 /datum/reagent/deletrathol/overdose(mob/living/carbon/M)
 	..()
@@ -415,7 +415,7 @@
 	M.add_chemical_effect(CE_BRAIN_REGEN, 1)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		H.confused++
+		H.mod_confused(1)
 		H.drowsyness++
 
 /datum/reagent/imidazoline
@@ -458,7 +458,7 @@
 			if(!BP_IS_ROBOTIC(I))
 				if(I.organ_tag == BP_BRAIN)
 					// if we have located an organic brain, apply side effects
-					H.confused++
+					H.mod_confused(1)
 					H.drowsyness++
 					// peridaxon only heals minor brain damage
 					if(I.damage >= I.min_bruised_damage)
@@ -520,7 +520,7 @@
 	M.dizziness = 0
 	M.drowsyness = 0
 	M.stuttering = 0
-	M.confused = 0
+	M.clear_confused()
 	var/datum/reagents/ingested = M.get_ingested_reagents()
 	if(ingested)
 		for(var/datum/reagent/R in ingested.reagent_list)
@@ -987,7 +987,7 @@
 	if(dosage >= 1)
 		if(prob(5)) M.Sleeping(3)
 		M.dizziness =  max(M.dizziness, 3)
-		M.confused =   max(M.confused, 3)
+		M.set_confused(3)
 	if(dosage >= 0.3)
 		if(prob(5)) M.Paralyse(1)
 		M.drowsyness = max(M.drowsyness, 3)

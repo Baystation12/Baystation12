@@ -68,7 +68,7 @@
 	if(M.client)
 		to_chat(M,SPAN_NOTICE("You feel oddly light, and somewhat disoriented as everything around you shimmers and warps ever so slightly."))
 		M.overlay_fullscreen("bluespace", /obj/screen/fullscreen/bluespace_overlay)
-	M.confused = 20
+	M.set_confused(20)
 	bluegoasts += new/obj/effect/bluegoast/(get_turf(M),M)
 
 
@@ -76,7 +76,6 @@
 	if(M.client)
 		to_chat(M,SPAN_NOTICE("You feel rooted in material world again."))
 		M.clear_fullscreen("bluespace")
-	M.confused = 0
 	for(var/mob/goast in GLOB.ghost_mobs)
 		goast.mouse_opacity = initial(goast.mouse_opacity)
 		goast.set_invisibility(initial(goast.invisibility))

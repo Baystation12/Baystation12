@@ -48,7 +48,7 @@
 			M.flash_eyes()
 			M.eye_blind = max(M.eye_blind,3)
 			M.ear_deaf = max(M.ear_deaf,6)
-			M.confused = rand(3,8)
+			M.set_confused(rand(3, 8))
 		return TRUE
 
 /singleton/psionic_power/coercion/mindread

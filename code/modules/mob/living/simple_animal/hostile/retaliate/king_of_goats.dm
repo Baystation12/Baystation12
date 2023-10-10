@@ -46,7 +46,7 @@
 		var/mob/living/L = target
 		if(prob(G.stun_chance))
 			L.Weaken(0.5)
-			L.confused += 1
+			L.mod_confused(1)
 			G.visible_message(SPAN_WARNING("\The [L] is bowled over by the impact of [G]'s attack!"))
 
 /datum/ai_holder/simple_animal/goat/king/react_to_attack(atom/movable/attacker)

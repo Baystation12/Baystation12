@@ -290,7 +290,7 @@
 
 	if(affecting.incapacitated(INCAPACITATION_ALL))
 		break_strength--
-	if(affecting.confused)
+	if(affecting.is_confused())
 		break_strength--
 	if(affecting.eye_blind)
 		break_strength--
@@ -303,7 +303,7 @@
 	if(shock >= 50)
 		break_strength--
 
-	if(assailant.confused)
+	if(assailant.is_confused())
 		break_strength++
 	if(assailant.eye_blind)
 		break_strength++
