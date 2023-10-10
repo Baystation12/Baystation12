@@ -62,7 +62,7 @@
 			TRANSLATE_AND_VERIFY_COORD(x, y)
 
 			var/mapval = null
-			if(!isnull(temp_cell))
+			if(!isnull(tmp_cell))
 				mapval = map[tmp_cell]
 
 			if(mapval < rare_val)      // Surface metals.
