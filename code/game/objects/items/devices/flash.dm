@@ -117,7 +117,7 @@
 					M.flash_eyes(FLASH_PROTECTION_MODERATE - safety)
 					M.Stun(flash_strength / 2)
 					M.eye_blurry = max(M.eye_blurry, flash_strength)
-					M.confused = max(M.confused, (flash_strength + 2))
+					M.set_confused(flash_strength + 2)
 					if(flash_strength > 3)
 						M.drop_l_hand()
 						M.drop_r_hand()
@@ -130,11 +130,11 @@
 		var/mob/living/simple_animal/SA = M
 		var/safety = SA.eyecheck()
 		if(safety < FLASH_PROTECTION_MAJOR)
-			SA.confused = max(SA.confused, (flash_strength * 0.5))
+			SA.set_confused(flash_strength * 0.5)
 			if(safety < FLASH_PROTECTION_MODERATE)
 				SA.flash_eyes(2)
 				SA.eye_blurry = max(SA.eye_blurry, flash_strength)
-				SA.confused = max(SA.confused, (flash_strength))
+				SA.set_confused(flash_strength)
 		else
 			return TRUE
 

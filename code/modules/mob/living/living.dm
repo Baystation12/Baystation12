@@ -135,7 +135,7 @@ default behaviour is:
 		spawn(0)
 			..()
 			var/saved_dir = AM.dir
-			if ((confused || (MUTATION_CLUMSY in mutations)) && !MOVING_DELIBERATELY(src))
+			if ((is_confused() || (MUTATION_CLUMSY in mutations)) && !MOVING_DELIBERATELY(src))
 				AM.slam_into(src)
 			if (!istype(AM, /atom/movable) || AM.anchored)
 				return
@@ -455,7 +455,7 @@ default behaviour is:
 	drowsyness = 0
 	druggy = 0
 	jitteriness = 0
-	confused = 0
+	clear_confused()
 
 	heal_overall_damage(getBruteLoss(), getFireLoss())
 
@@ -845,7 +845,7 @@ default behaviour is:
 	. = 0
 	if(incapacitated(INCAPACITATION_UNRESISTING))
 		. += 100
-	if(confused)
+	if(is_confused())
 		. += 10
 	if(weakened)
 		. += 15
@@ -860,7 +860,7 @@ default behaviour is:
 	. = 0
 	if(jitteriness)
 		. -= 2
-	if(confused)
+	if(is_confused())
 		. -= 2
 	if(eye_blind)
 		. -= 5

@@ -176,7 +176,7 @@
 			S.Feedstop()
 	if(M.chem_doses[type] == removed)
 		M.visible_message(SPAN_WARNING("[S]'s flesh sizzles where the water touches it!"), SPAN_DANGER("Your flesh burns in the water!"))
-		M.confused = max(M.confused, 2)
+		M.set_confused(2)
 
 /datum/reagent/water/boiling
 	name = "Boiling water"

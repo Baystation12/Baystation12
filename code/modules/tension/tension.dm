@@ -86,7 +86,7 @@
 			threat *= 2 // Target cannot see src.
 
 	// Handle statuses.
-	if(confused)
+	if(is_confused())
 		threat /= 2
 
 	// if(has_modifier_of_type(/datum/modifier/berserk))
@@ -128,7 +128,7 @@
 			threat *= 2 // Target cannot see src.
 
 	// Handle statuses.
-	if(confused)
+	if(is_confused())
 		threat /= 2
 
 	// if(has_modifier_of_type(/datum/modifier/berserk))
@@ -239,7 +239,7 @@
 		tension *= 10
 		return tension
 
-	if(confused)
+	if(is_confused())
 		tension *= 2
 
 	return tension

@@ -7,8 +7,8 @@
 			attacked = 50 // Let's not get into absurdly long periods of rage
 		--attacked
 
-	if(confused > 0)
-		--confused
+	handle_confused()
+	if (is_confused())
 		return
 
 	if(nutrition < get_starve_nutrition()) // If a slime is starving, it starts losing its friends
@@ -113,7 +113,7 @@
 		AIproc = 0
 		return // If we're dead or have a client, we don't need AI, if we're feeding, we continue feeding
 
-	if(confused)
+	if(is_confused())
 		AIproc = 0
 		return
 
@@ -185,7 +185,7 @@
 /mob/living/carbon/slime/proc/UpdateFace()
 	var/newmood = ""
 	a_intent = I_HELP
-	if(confused)
+	if(is_confused())
 		newmood = "pout"
 	else if(rabid || attacked)
 		newmood = "angry"

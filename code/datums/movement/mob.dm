@@ -343,7 +343,7 @@
 
 /mob/proc/AdjustMovementDirection(direction)
 	. = direction
-	if(!confused)
+	if(!is_confused())
 		return
 
 	var/stability = MOVING_DELIBERATELY(src) ? 75 : 25

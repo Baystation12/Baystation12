@@ -210,7 +210,7 @@
 		if (owner)
 			owner.flash_eyes()
 			owner.eye_blurry += damage_secondary
-			owner.confused += damage_secondary * 2
+			owner.mod_confused(damage_secondary * 2)
 			owner.Paralyse(damage_secondary)
 			owner.Weaken(round(damageTaken, 1))
 			if (prob(30))
@@ -221,7 +221,7 @@
 		return
 
 	to_chat(owner, SPAN_NOTICE(SPAN_STYLE("font-size: 10", "<B>I can't remember which way is forward...</B>")))
-	owner.confused += damage
+	owner.mod_confused(damage)
 
 /obj/item/organ/internal/brain/proc/handle_disabilities()
 	if(owner.stat)

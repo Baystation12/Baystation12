@@ -544,22 +544,22 @@
 				if (M.eyecheck() < FLASH_PROTECTION_MODERATE)
 					M.flash_eyes(2)
 					M.weakened = min(10, (created_volume / 20))
-					M.confused = min(20, (created_volume / 5))
+					M.set_confused(min(20, (created_volume / 5)))
 					M.eye_blurry = min(40, (created_volume / 5))
 				else
 					M.stunned = min(10, (created_volume / 30))
-					M.confused = min(20, (created_volume / 10))
+					M.set_confused(min(20, (created_volume / 10)))
 					M.eye_blurry = min(40, (created_volume / 10))
 
 			if(2 to 4)
 				if (M.eyecheck() < FLASH_PROTECTION_MODERATE)
 					M.flash_eyes(2)
 					M.stunned = min(5, (created_volume / 30))
-					M.confused = min(10, (created_volume / 10))
+					M.set_confused(min(10, (created_volume / 10)))
 					M.eye_blurry = min(20, (created_volume / 10))
 				else
 					M.stunned = min(5, (created_volume / 60))
-					M.confused = min(10, (created_volume / 20))
+					M.set_confused(min(20, (created_volume / 20)))
 					M.eye_blurry = min(20, (created_volume / 20))
 		playsound(location, 'sound/effects/bang.ogg', 50, 1, 30)
 

@@ -766,8 +766,7 @@
 	M.adjustToxLoss(-2 * removed)
 	if(M.dizziness)
 		M.dizziness = max(0, M.dizziness - 15)
-	if(M.confused)
-		M.confused = max(0, M.confused - 5)
+	M.mod_confused(-5)
 
 /datum/reagent/drink/dry_ramen
 	name = "Dry Ramen"

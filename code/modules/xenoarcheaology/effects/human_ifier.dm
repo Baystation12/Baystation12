@@ -97,7 +97,7 @@
 			to_chat(living, SPAN_DANGER(FONT_LARGE("\The [holder] emits a blinding flash of light!")))
 		living.flash_eyes(FLASH_PROTECTION_MAJOR)
 		living.Stun(1)
-		living.confused += 5
+		living.mod_confused(5)
 	playsound(holder, "sound/effects/supermatter.ogg", 100, TRUE)
 	H.death()
 

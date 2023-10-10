@@ -72,4 +72,4 @@
 
 /datum/genetics/side_effect/confuse/finish(mob/living/carbon/human/H)
 	if(!H.reagents.has_reagent(/datum/reagent/dylovene))
-		H.confused += 100
+		H.set_confused(CONFUSED_MAX)

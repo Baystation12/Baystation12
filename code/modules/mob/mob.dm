@@ -862,6 +862,59 @@
 	sleeping = max(sleeping + amount,0)
 	return
 
+
+/**
+ * Sets a mob's confused value.
+ *
+ * Parameters:
+ * - `amount` (Positive Int) - The confused value to set. Decimal values are rounded.
+ * - `limit` (Positive Int, default `CONFUSED_MAX`) - The maximum value `confused` can be set to. Decimal values are rounded.
+ *
+ * Returns integer. The new value of `confused`.
+ */
+/mob/proc/set_confused(amount, limit = CONFUSED_MAX)
+	confused = clamp(round(amount), 0, round(limit))
+	return confused
+
+
+/**
+ * Modifies a mob's confused value by `mod_amount`.
+ *
+ * Parameters:
+ * - `mod_amount` (Integer) - The amount to modify `confused` by. Allows negative values for subtraction. Decimal values are rounded.
+ * - `floor` (Positive Integer, default `0`) - The minimum value to set `confused` to. Decimal values are rounded.
+ * - `ceiling` (Positive Integer, default `CONFUSED_MAX`) - The maximum value to set `confused` to. Decimal values are rounded.
+ *
+ * Returns integer. The new value of `confused`.
+ */
+/mob/proc/mod_confused(mod_amount, floor = 0, ceiling = CONFUSED_MAX)
+	confused += round(mod_amount)
+	confused = clamp(confused, round(floor), round(ceiling))
+	return confused
+
+
+/**
+ * Sets a mob's confused value to `0`.
+ *
+ * Returns integer. The new value of `confused`.
+ */
+/mob/proc/clear_confused()
+	confused = 0
+	return confused
+
+
+/**
+ * Whether or not the mob's confusion level is at the threshhold.
+ *
+ * Parameters:
+ * - `threshhold` (Positive Integer, default `1`) - The threshhold at which the mob should be considered confused.
+ *
+ * Returns boolean.
+ */
+/mob/proc/is_confused(threshhold = 1)
+	return confused >= threshhold
+
+
 /mob/proc/get_species()
 	return ""
 
