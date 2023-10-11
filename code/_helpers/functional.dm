@@ -42,6 +42,11 @@
 	if(!. && feedback_receiver)
 		to_chat(feedback_receiver, SPAN_WARNING("Value must be a numeral."))
 
+/proc/is_int_predicate(value, feedback_receiver)
+	. = value == round(value)
+	if (!. && feedback_receiver)
+		to_chat(feedback_receiver, SPAN_WARNING("Value must be a whole number."))
+
 /proc/is_non_zero_predicate(value, feedback_receiver)
 	. = value != 0
 	if (!. && feedback_receiver)
