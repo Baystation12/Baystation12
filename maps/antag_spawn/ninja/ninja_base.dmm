@@ -1,220 +1,3526 @@
-"ac" = (/turf/unsimulated/floor{icon = 'icons/turf/snow.dmi'; icon_state = "snowwhite"},/area/map_template/ninja_dojo/dojo)
-"ad" = (/turf/unsimulated/floor{icon_state = "snow"},/area/map_template/ninja_dojo/dojo)
-"ae" = (/obj/effect/floor_decal/asteroid,/turf/unsimulated/floor{icon_state = "snow"},/area/map_template/ninja_dojo/dojo)
-"af" = (/obj/effect/floor_decal/asteroid,/turf/unsimulated/floor{icon = 'icons/turf/snow.dmi'; icon_state = "snowwhite"},/area/map_template/ninja_dojo/dojo)
-"ag" = (/obj/structure/flora/tree/dead,/turf/unsimulated/floor{icon_state = "snow"},/area/map_template/ninja_dojo/dojo)
-"ah" = (/obj/structure/flora/tree/pine,/turf/unsimulated/floor{icon_state = "snow"},/area/map_template/ninja_dojo/dojo)
-"ai" = (/obj/structure/flora/tree/dead,/turf/unsimulated/floor{icon = 'icons/turf/snow.dmi'; icon_state = "snowwhite"},/area/map_template/ninja_dojo/dojo)
-"aj" = (/obj/effect/wallframe_spawn/reinforced,/turf/simulated/wall/prepainted,/area/map_template/ninja_dojo/dojo)
-"ak" = (/obj/structure/table/glass,/obj/item/storage/firstaid/surgery,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"al" = (/obj/machinery/optable,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"am" = (/obj/structure/closet/medical_wall{pixel_y = 32},/obj/item/tank/anesthetic,/obj/item/clothing/mask/breath/medical,/obj/item/clothing/gloves/latex,/obj/item/clothing/mask/surgical,/obj/structure/hygiene/sink{dir = 1; pixel_y = 16},/obj/item/reagent_containers/glass/bottle/stoxin,/obj/item/reagent_containers/glass/bottle/stoxin,/obj/item/reagent_containers/syringe,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"an" = (/obj/structure/table/glass,/obj/item/reagent_containers/ivbag/nanoblood,/obj/item/reagent_containers/ivbag/blood/human/oneg,/obj/item/reagent_containers/ivbag/blood/human/oneg,/obj/item/reagent_containers/ivbag/blood/skrell/oneg,/obj/item/reagent_containers/ivbag/blood/skrell/oneg,/obj/item/reagent_containers/ivbag/blood/unathi/oneg,/obj/item/reagent_containers/ivbag/blood/unathi/oneg,/obj/structure/window/reinforced/crescent{dir = 4},/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"ao" = (/obj/machinery/atmospherics/unary/cryo_cell,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"ap" = (/obj/machinery/atmospherics/portables_connector,/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"aq" = (/obj/item/reagent_containers/glass/beaker/cryoxadone,/obj/structure/table/glass,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"ar" = (/obj/structure/table/glass,/obj/item/reagent_containers/spray/sterilizine,/obj/item/reagent_containers/spray/cleaner,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"as" = (/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"at" = (/obj/structure/table/glass,/obj/item/storage/firstaid/o2{pixel_x = 3; pixel_y = 3},/obj/item/storage/firstaid/fire{pixel_x = 1},/obj/structure/window/reinforced/crescent{dir = 4},/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"au" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 5},/obj/effect/floor_decal/corner/blue,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"av" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 9},/obj/effect/floor_decal/corner/blue{dir = 8},/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"aw" = (/obj/structure/table/glass,/obj/item/storage/box/beakers,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"ax" = (/obj/machinery/computer/teleporter,/turf/unsimulated/floor{icon_state = "plating"; name = "plating"},/area/map_template/ninja_dojo/dojo)
-"ay" = (/obj/machinery/tele_projector,/turf/unsimulated/floor{icon_state = "plating"; name = "plating"},/area/map_template/ninja_dojo/dojo)
-"az" = (/obj/machinery/tele_pad,/obj/effect/floor_decal/industrial/hatch/yellow,/turf/unsimulated/floor{icon_state = "plating"; name = "plating"},/area/map_template/ninja_dojo/dojo)
-"aA" = (/obj/effect/floor_decal/corner/black/border{dir = 4},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"aB" = (/obj/structure/table/glass,/obj/item/reagent_containers/syringe/antiviral,/obj/item/reagent_containers/syringe/antiviral,/obj/item/stack/medical/advanced/bruise_pack,/obj/machinery/light{dir = 8},/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"aC" = (/obj/structure/table/glass,/obj/item/storage/firstaid/toxin{pixel_x = 3; pixel_y = 3},/obj/item/storage/firstaid/adv{pixel_x = 1},/obj/item/storage/firstaid/radiation,/obj/structure/window/reinforced/crescent{dir = 4},/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"aD" = (/obj/item/reagent_containers/glass/beaker/large,/obj/machinery/light{dir = 4},/obj/machinery/chemical_dispenser/full,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"aE" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"aF" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/item/device/radio/intercom/syndicate{dir = 8; pixel_x = 22},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"aG" = (/obj/machinery/cryopod{dir = 1},/obj/effect/floor_decal/industrial/warning{dir = 8},/obj/effect/floor_decal/industrial/warning{dir = 4},/turf/unsimulated/floor{icon_state = "plating"; name = "plating"},/area/map_template/ninja_dojo/dojo)
-"aH" = (/obj/structure/flora/tree/pine,/turf/unsimulated/floor{icon = 'icons/turf/snow.dmi'; icon_state = "snowwhite"},/area/map_template/ninja_dojo/dojo)
-"aI" = (/obj/structure/iv_stand,/obj/structure/window/reinforced/crescent,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"aJ" = (/obj/structure/table/glass,/obj/item/storage/firstaid/regular,/obj/item/storage/firstaid/combat,/obj/structure/window/reinforced/crescent{dir = 4},/obj/structure/window/reinforced/crescent,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"aK" = (/obj/effect/floor_decal/corner/blue{dir = 6},/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"aL" = (/obj/machinery/door/blast/regular/open{icon_state = "pdoor0"; id_tag = "prototype_chamber_blast"},/obj/effect/floor_decal/floordetail/tiled,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"aM" = (/obj/item/reagent_containers/glass/beaker/large,/obj/machinery/chem_master,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"aN" = (/obj/effect/floor_decal/corner/black/border{dir = 7},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"aO" = (/obj/effect/floor_decal/corner/blue{dir = 9},/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"aQ" = (/obj/structure/table/glass,/obj/effect/floor_decal/corner/black/border{dir = 7},/obj/item/paper_bin,/obj/item/pen,/turf/simulated/floor/tiled,/area/map_template/ninja_dojo/dojo)
-"aR" = (/obj/machinery/bodyscanner{dir = 8},/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"aS" = (/obj/machinery/body_scanconsole{dir = 8},/obj/effect/floor_decal/corner/blue{dir = 4},/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"aT" = (/obj/effect/floor_decal/corner/blue{dir = 4},/obj/effect/floor_decal/corner/blue{dir = 5},/obj/effect/floor_decal/corner/blue{dir = 8},/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"aU" = (/obj/effect/floor_decal/industrial/outline/blue,/obj/machinery/portable_atmospherics/canister/nitrogen,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"aV" = (/obj/effect/floor_decal/corner/black/border{dir = 10},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"aW" = (/obj/structure/table/rack,/obj/item/tank/oxygen,/obj/item/tank/oxygen,/obj/item/tank/oxygen,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"aX" = (/obj/machinery/door/blast/regular/open{id_tag = "bsdwindow"; name = "Exit"},/turf/unsimulated/wall,/area/map_template/ninja_dojo/dojo)
-"aY" = (/turf/unsimulated/floor{dir = 9; icon_state = "vault"},/area/map_template/ninja_dojo/dojo)
-"aZ" = (/obj/structure/table/rack,/obj/item/storage/belt/medical/emt,/obj/item/storage/firstaid/adv,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"ba" = (/obj/effect/floor_decal/corner/black/border{dir = 8},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bb" = (/obj/effect/floor_decal/industrial/outline/blue,/obj/machinery/portable_atmospherics/canister/oxygen,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bc" = (/obj/effect/floor_decal/corner/black/border{dir = 6},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bd" = (/turf/simulated/wall/prepainted,/area/map_template/ninja_dojo/dojo)
-"be" = (/obj/machinery/door/blast/regular/open{icon_state = "pdoor0"; id_tag = "prototype_chamber_blast"},/turf/unsimulated/floor{icon = 'icons/turf/snow.dmi'; icon_state = "snowplating"},/area/map_template/ninja_dojo/dojo)
-"bf" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"},/obj/machinery/light{dir = 4},/turf/unsimulated/floor{icon = 'icons/turf/snow.dmi'; icon_state = "snowplating"},/area/map_template/ninja_dojo/dojo)
-"bh" = (/obj/machinery/light{dir = 1},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bi" = (/obj/machinery/light,/obj/effect/floor_decal/corner/black/bordercorner{dir = 8},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bj" = (/obj/structure/bed/chair/office/dark,/obj/item/device/radio/intercom/syndicate{dir = 4; pixel_x = -22},/turf/simulated/floor/tiled,/area/map_template/ninja_dojo/dojo)
-"bl" = (/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/effect/floor_decal/floordetail/tiled,/turf/unsimulated/floor{icon_state = "plating"; name = "plating"},/area/map_template/ninja_dojo/dojo)
-"bm" = (/obj/structure/table/rack,/obj/item/tank/nitrogen,/obj/item/tank/nitrogen,/obj/item/tank/nitrogen,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bn" = (/turf/unsimulated/floor{icon = 'icons/turf/snow.dmi'; icon_state = "snowplating"},/area/map_template/ninja_dojo/dojo)
-"bo" = (/obj/effect/floor_decal/snow,/turf/unsimulated/floor{icon = 'icons/turf/snow.dmi'; icon_state = "snowplating"},/area/map_template/ninja_dojo/dojo)
-"bp" = (/obj/structure/window/reinforced/polarized{dir = 1},/obj/structure/window/reinforced/polarized,/obj/effect/floor_decal/floordetail/tiled,/turf/unsimulated/floor{icon_state = "plating"; name = "plating"},/area/map_template/ninja_dojo/dojo)
-"bq" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled,/area/map_template/ninja_dojo/dojo)
-"br" = (/obj/effect/floor_decal/corner/black/border{dir = 1},/obj/effect/floor_decal/corner/black/border{dir = 1},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bs" = (/obj/machinery/light{dir = 8},/obj/effect/floor_decal/corner/black/border{dir = 7},/obj/effect/floor_decal/corner/black/border{dir = 1},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bt" = (/obj/structure/pit/closed/grave,/turf/unsimulated/floor{icon_state = "snow"},/area/map_template/ninja_dojo/dojo)
-"bu" = (/obj/machinery/light{dir = 4},/obj/effect/floor_decal/industrial/warning/corner{dir = 8},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bv" = (/obj/effect/floor_decal/corner/blue,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"bw" = (/obj/effect/floor_decal/corner/black/border{dir = 7},/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"bx" = (/obj/machinery/recharger/wallcharger{dir = 4; pixel_x = -23; pixel_y = -3},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"by" = (/obj/effect/landmark{name = "ninjastart"},/obj/effect/floor_decal/industrial/warning,/obj/effect/floor_decal/floordetail/tiled,/turf/unsimulated/floor{dir = 1; icon_state = "vault"},/area/map_template/ninja_dojo/dojo)
-"bz" = (/obj/machinery/acting/changer,/obj/effect/floor_decal/industrial/warning{dir = 9; icon_state = "warning"},/obj/effect/floor_decal/industrial/warning{dir = 6; icon_state = "warning"},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bA" = (/obj/effect/floor_decal/industrial/warning/corner{dir = 8},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bB" = (/obj/effect/floor_decal/corner/black/bordercorner{dir = 5},/obj/machinery/light{dir = 4},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bC" = (/obj/machinery/door/airlock/centcom{name = "Equipment"},/turf/unsimulated/floor{icon_state = "snow"},/area/map_template/ninja_dojo/dojo)
-"bD" = (/obj/effect/floor_decal/corner/black/border{dir = 1},/obj/machinery/light{dir = 1},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bE" = (/obj/effect/floor_decal/corner/black/border{dir = 9},/obj/machinery/rotating_alarm/supermatter{dir = 4; name = "emergency alarm"; on = 1},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bF" = (/obj/effect/floor_decal/corner/black/border{dir = 9},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bG" = (/obj/effect/floor_decal/corner/black/bordercorner{dir = 8},/obj/effect/floor_decal/corner/black/bordercorner{dir = 1},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bH" = (/obj/effect/floor_decal/industrial/warning{dir = 4; icon_state = "warning"},/obj/effect/floor_decal/industrial/warning{dir = 4; icon_state = "warning"},/turf/unsimulated/floor{dir = 9; icon_state = "vault"},/area/map_template/ninja_dojo/dojo)
-"bI" = (/obj/machinery/door/blast/regular/open{dir = 4; icon_state = "pdoor0"; id_tag = "prototype_chamber_blast"},/obj/effect/floor_decal/floordetail/tiled,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bJ" = (/obj/effect/floor_decal/industrial/warning{dir = 8},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bK" = (/obj/effect/floor_decal/corner/black/bordercorner{dir = 4},/obj/machinery/light{dir = 4},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bL" = (/obj/effect/floor_decal/industrial/warning{dir = 8},/obj/effect/floor_decal/floordetail/tiled,/turf/unsimulated/floor{icon_state = "plating"; name = "plating"},/area/map_template/ninja_dojo/dojo)
-"bM" = (/obj/effect/floor_decal/corner/black/border{dir = 10},/obj/machinery/rotating_alarm/supermatter{dir = 4; name = "emergency alarm"; on = 1},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bN" = (/obj/machinery/cryopod{dir = 2},/obj/effect/floor_decal/industrial/warning{dir = 8},/obj/effect/floor_decal/industrial/warning{dir = 4},/turf/unsimulated/floor{icon_state = "plating"; name = "plating"},/area/map_template/ninja_dojo/dojo)
-"bO" = (/obj/effect/paint_stripe/yellow,/turf/simulated/wall/prepainted,/area/map_template/ninja_dojo/dojo)
-"bP" = (/obj/effect/floor_decal/corner/black/border{dir = 1},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bQ" = (/obj/effect/floor_decal/corner/black/border{dir = 5},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bR" = (/obj/structure/table/rack,/obj/item/storage/box/syndie_kit/chameleon,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bS" = (/obj/effect/floor_decal/asteroid,/turf/unsimulated/floor{icon = 'icons/turf/snow.dmi'; icon_state = "snowplating"},/area/map_template/ninja_dojo/dojo)
-"bT" = (/obj/effect/floor_decal/industrial/warning/corner,/obj/effect/floor_decal/industrial/warning/corner{dir = 4; icon_state = "warningcorner"},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bU" = (/obj/structure/shuttle/engine/propulsion{dir = 1},/turf/unsimulated/floor{icon_state = "plating"; name = "plating"},/area/map_template/ninja_dojo/start)
-"bV" = (/obj/machinery/light{dir = 8},/obj/effect/floor_decal/industrial/warning/corner{dir = 4; icon_state = "warningcorner"},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bW" = (/obj/machinery/light{dir = 8},/obj/effect/floor_decal/industrial/warning/corner{dir = 2; icon_state = "warningcorner"},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bX" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"bZ" = (/obj/effect/wallframe_spawn/reinforced,/turf/space,/area/map_template/ninja_dojo/dojo)
-"ca" = (/obj/structure/table/glass,/obj/effect/floor_decal/corner/black/border{dir = 10},/turf/simulated/floor/tiled,/area/map_template/ninja_dojo/dojo)
-"cb" = (/obj/machinery/computer/modular/preset/medical,/obj/effect/floor_decal/industrial/outline/grey,/obj/effect/floor_decal/corner/black/border{dir = 6},/turf/simulated/floor/tiled,/area/map_template/ninja_dojo/dojo)
-"ce" = (/obj/machinery/door/airlock/centcom{name = "Equipment"},/turf/simulated/floor/tiled,/area/map_template/ninja_dojo/dojo)
-"cf" = (/obj/effect/floor_decal/corner/black/bordercorner{dir = 7},/obj/machinery/light,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"cg" = (/turf/simulated/floor/tiled,/area/map_template/ninja_dojo/dojo)
-"ch" = (/obj/structure/bed/chair/office/dark{dir = 1},/obj/item/device/radio/intercom/syndicate{dir = 8; pixel_x = 22},/turf/simulated/floor/tiled,/area/map_template/ninja_dojo/dojo)
-"ci" = (/obj/effect/floor_decal/corner/black/border{dir = 6},/obj/structure/table/glass,/obj/item/stack/material/aluminium/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plastic/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/titanium/fifty,/obj/item/stack/material/glass/fifty,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"cj" = (/obj/machinery/rotating_alarm/supermatter{dir = 8; name = "emergency alarm"; on = 1},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"ck" = (/obj/effect/paint/black,/turf/simulated/wall/r_titanium,/area/map_template/ninja_dojo/start)
-"cl" = (/obj/effect/floor_decal/corner/black/border{dir = 9},/obj/machinery/fabricator/hacked,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"cm" = (/obj/effect/floor_decal/corner/black/border{dir = 10},/obj/machinery/fabricator/hacked,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"cn" = (/obj/effect/floor_decal/industrial/warning{dir = 4; icon_state = "warning"},/turf/unsimulated/floor{dir = 9; icon_state = "vault"},/area/map_template/ninja_dojo/dojo)
-"co" = (/obj/structure/aliumizer,/obj/effect/floor_decal/industrial/warning{dir = 10},/obj/effect/floor_decal/industrial/warning{dir = 5; icon_state = "warning"},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"cp" = (/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"cq" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled,/area/map_template/ninja_dojo/dojo)
-"cr" = (/obj/machinery/rotating_alarm/supermatter{dir = 4; name = "emergency alarm"; on = 1},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"cs" = (/obj/structure/table/rack,/obj/item/melee/energy/machete{pixel_x = 9; pixel_y = 9},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"cu" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"},/obj/machinery/light{dir = 8},/turf/unsimulated/floor{icon = 'icons/turf/snow.dmi'; icon_state = "snowplating"},/area/map_template/ninja_dojo/dojo)
-"cv" = (/obj/effect/floor_decal/industrial/warning{dir = 1; icon_state = "warning"},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"cw" = (/obj/effect/floor_decal/industrial/warning{dir = 4; icon_state = "warning"},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"cy" = (/obj/structure/table/rack,/obj/item/storage/belt/utility/full,/obj/item/device/multitool,/obj/item/tape_roll,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"cz" = (/obj/effect/floor_decal/snow,/obj/machinery/light{dir = 4},/turf/unsimulated/floor{icon = 'icons/turf/snow.dmi'; icon_state = "snowplating"},/area/map_template/ninja_dojo/dojo)
-"cA" = (/obj/structure/table/rack,/obj/item/storage/box/flashbangs,/obj/item/storage/box/smokes,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"cB" = (/obj/machinery/light,/turf/unsimulated/floor{icon = 'icons/turf/snow.dmi'; icon_state = "snowplating"},/area/map_template/ninja_dojo/dojo)
-"cC" = (/obj/effect/landmark{name = "ninjastart"},/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/effect/floor_decal/floordetail/tiled,/turf/unsimulated/floor{dir = 1; icon_state = "vault"},/area/map_template/ninja_dojo/dojo)
-"cD" = (/obj/machinery/light,/obj/effect/floor_decal/corner/black/bordercorner{dir = 3},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"cE" = (/obj/machinery/door/blast/regular/open{dir = 4; name = "Operative Cryo Chamber"},/turf/unsimulated/wall,/area/map_template/ninja_dojo/dojo)
-"cF" = (/obj/effect/wallframe_spawn/reinforced,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"cG" = (/obj/effect/floor_decal/industrial/warning{dir = 4; icon_state = "warning"},/obj/machinery/light{dir = 1},/obj/structure/table/rack,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"cH" = (/obj/machinery/computer/teleporter,/turf/simulated/floor/plating,/area/map_template/ninja_dojo/start)
-"cI" = (/obj/machinery/tele_projector,/turf/simulated/floor/plating,/area/map_template/ninja_dojo/start)
-"cJ" = (/obj/machinery/tele_pad,/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/plating,/area/map_template/ninja_dojo/start)
-"cK" = (/obj/machinery/light{dir = 1},/obj/machinery/atmospherics/portables_connector,/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/portable_atmospherics/canister/air/airlock,/obj/effect/floor_decal/industrial/warning{dir = 8; icon_state = "warning"},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"cL" = (/obj/structure/bed/chair{dir = 4},/obj/machinery/light{dir = 8; icon_state = "tube1"},/obj/effect/floor_decal/industrial/outline/grey,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"cM" = (/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"cN" = (/obj/effect/floor_decal/industrial/warning/corner{dir = 4; icon_state = "warningcorner"},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"cO" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"cP" = (/obj/effect/floor_decal/industrial/warning/corner{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"cQ" = (/obj/machinery/embedded_controller/radio/airlock/docking_port{frequency = 1331; id_tag = "ninja_shuttle"; pixel_x = -8; pixel_y = 25; req_access = list("ACCESS_SYNDICATE")},/obj/machinery/light{dir = 8; icon_state = "tube1"},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"cR" = (/obj/machinery/door/airlock/external{frequency = 1331; id_tag = "ninja_shuttle_outer"; name = "Ship External Access"},/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id_tag = "ninjadoor"; name = "Blast Door"; opacity = 0},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"cS" = (/obj/machinery/sleeper{dir = 4},/obj/effect/floor_decal/industrial/outline/grey,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"cT" = (/obj/effect/shuttle_landmark/ninja/start,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"cU" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 5},/obj/machinery/access_button{command = "cycle_interior"; frequency = 1331; master_tag = "ninja_shuttle"; name = "interior access button"; pixel_x = 25; pixel_y = 25; req_access = list("ACCESS_SYNDICATE")},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"cV" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4},/obj/machinery/door/airlock/external{frequency = 1331; id_tag = "ninja_shuttle_inner"; name = "Ship External Access"},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"cW" = (/obj/machinery/airlock_sensor{frequency = 1331; id_tag = "ninja_shuttle_sensor"; pixel_x = 8; pixel_y = -25},/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{dir = 8; id_tag = "ninja_shuttle_pump"},/obj/machinery/button/blast_door{id_tag = "ninjadoor"; name = "remote shutter control"; pixel_x = 25},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"cX" = (/obj/structure/closet,/obj/machinery/light{dir = 8; icon_state = "tube1"},/obj/effect/floor_decal/industrial/outline/grey,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"cY" = (/obj/structure/table/rack,/obj/effect/floor_decal/industrial/outline/grey,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"cZ" = (/obj/structure/table/steel_reinforced,/obj/machinery/light{dir = 8; icon_state = "tube1"},/obj/item/device/radio/intercom/syndicate{dir = 4; pixel_x = -22},/obj/machinery/cell_charger,/obj/item/screwdriver,/obj/effect/floor_decal/industrial/outline/grey,/obj/item/toy/figure/ninja,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"da" = (/obj/structure/bed/chair/shuttle,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"db" = (/obj/machinery/button/blast_door{id_tag = "ninjawindow"; name = "remote shutter control"; pixel_x = 36; pixel_y = -24},/obj/machinery/button/windowtint{id = "ninja_ship"; pixel_x = -24; pixel_y = -25},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"dc" = (/obj/structure/table/steel_reinforced,/obj/machinery/recharger,/obj/item/wrench,/obj/machinery/light{dir = 4; icon_state = "tube1"},/obj/effect/floor_decal/industrial/outline/grey,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"dd" = (/obj/effect/floor_decal/industrial/outline/grey,/obj/machinery/computer/station_alert/all{dir = 1},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"de" = (/obj/effect/floor_decal/industrial/outline/grey,/obj/machinery/computer/shuttle_control/multi/ninja{dir = 1},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"df" = (/obj/effect/floor_decal/industrial/outline/grey,/obj/machinery/computer/modular/preset/security{dir = 1; icon_state = "console"},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/start)
-"dg" = (/obj/machinery/door/blast/regular{id_tag = "ninjawindow"; name = "Blast Shutter"},/obj/effect/wallframe_spawn/reinforced/polarized{id = "ninja_ship"},/obj/effect/paint/black,/turf/simulated/floor/plating,/area/map_template/ninja_dojo/start)
-"gy" = (/obj/structure/table/rack,/obj/item/clothing/mask/gas/swat/vox,/obj/item/clothing/mask/gas/swat/vox,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"qc" = (/obj/effect/floor_decal/corner/blue{dir = 1},/obj/effect/floor_decal/corner/blue{dir = 5},/obj/effect/floor_decal/corner/blue,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"ss" = (/turf/unsimulated/wall,/area/map_template/ninja_dojo/dojo)
-"uZ" = (/obj/effect/floor_decal/corner/blue{dir = 8},/obj/effect/floor_decal/corner/blue,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"vP" = (/obj/effect/floor_decal/industrial/warning/corner{dir = 1; icon_state = "warningcorner"},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"vQ" = (/obj/machinery/light{dir = 4},/obj/effect/floor_decal/industrial/warning/corner{dir = 1; icon_state = "warningcorner"},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"wG" = (/obj/effect/floor_decal/corner/black/border{dir = 5},/obj/structure/table/glass,/obj/item/stack/material/aluminium/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/titanium/fifty,/obj/item/stack/material/plastic/fifty,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"wX" = (/obj/structure/table/glass,/obj/effect/floor_decal/corner/black/border{dir = 1},/obj/item/newspaper,/turf/simulated/floor/tiled,/area/map_template/ninja_dojo/dojo)
-"zr" = (/obj/effect/floor_decal/snow,/turf/unsimulated/wall,/area/map_template/ninja_dojo/dojo)
-"BB" = (/obj/effect/floor_decal/corner/black/bordercorner{dir = 8},/obj/machinery/light,/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"Cj" = (/obj/structure/table/rack,/obj/random/biggun,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"Hl" = (/obj/structure/table/glass,/obj/effect/floor_decal/corner/black/border{dir = 5},/turf/simulated/floor/tiled,/area/map_template/ninja_dojo/dojo)
-"JH" = (/obj/structure/table/rack,/obj/item/clothing/mask/gas/swat,/obj/item/clothing/mask/gas/swat,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"JM" = (/obj/machinery/door/blast/regular/open{icon_state = "pdoor0"; id_tag = "prototype_chamber_blast"},/obj/effect/floor_decal/floordetail/tiled,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"KK" = (/obj/effect/floor_decal/corner/black/bordercorner{dir = 4},/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"LW" = (/obj/structure/table/rack,/obj/item/storage/box/handcuffs,/obj/item/storage/box/handcuffs,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"MC" = (/obj/effect/floor_decal/corner/blue{dir = 1},/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"Oo" = (/obj/machinery/light,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"OL" = (/obj/effect/floor_decal/corner/black/border{dir = 7},/obj/machinery/light,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
-"PF" = (/obj/machinery/computer/modular/preset/civilian{dir = 1; icon_state = "console"},/obj/effect/floor_decal/corner/black/border{dir = 9},/turf/simulated/floor/tiled,/area/map_template/ninja_dojo/dojo)
-"RX" = (/obj/effect/floor_decal/corner/black/border{dir = 7},/obj/effect/floor_decal/corner/blue{dir = 5},/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"TP" = (/obj/effect/floor_decal/corner/blue{dir = 8},/turf/unsimulated/floor{icon_state = "white"},/area/map_template/ninja_dojo/dojo)
-"UV" = (/obj/structure/table/rack,/obj/item/storage/belt/holster/security/tactical,/obj/item/storage/belt/holster/security/tactical,/obj/effect/floor_decal/corner/black/bordercorner{dir = 3},/obj/item/clothing/accessory/storage/webbing,/obj/item/clothing/accessory/storage/webbing,/obj/item/clothing/accessory/storage/webbing_large,/obj/item/clothing/accessory/storage/webbing_large,/obj/machinery/light{dir = 1},/obj/item/clothing/accessory/storage/holster/thigh,/obj/item/clothing/accessory/storage/holster/thigh,/turf/unsimulated/floor{icon_state = "dark"},/area/map_template/ninja_dojo/dojo)
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ac" = (
+/turf/unsimulated/floor{
+	icon = 'icons/turf/snow.dmi';
+	icon_state = "snowwhite"
+	},
+/area/map_template/ninja_dojo/dojo)
+"ad" = (
+/turf/unsimulated/floor{
+	icon_state = "snow"
+	},
+/area/map_template/ninja_dojo/dojo)
+"ae" = (
+/obj/effect/floor_decal/asteroid,
+/turf/unsimulated/floor{
+	icon_state = "snow"
+	},
+/area/map_template/ninja_dojo/dojo)
+"af" = (
+/obj/effect/floor_decal/asteroid,
+/turf/unsimulated/floor{
+	icon = 'icons/turf/snow.dmi';
+	icon_state = "snowwhite"
+	},
+/area/map_template/ninja_dojo/dojo)
+"ag" = (
+/obj/structure/flora/tree/dead,
+/turf/unsimulated/floor{
+	icon_state = "snow"
+	},
+/area/map_template/ninja_dojo/dojo)
+"ah" = (
+/obj/structure/flora/tree/pine,
+/turf/unsimulated/floor{
+	icon_state = "snow"
+	},
+/area/map_template/ninja_dojo/dojo)
+"ai" = (
+/obj/structure/flora/tree/dead,
+/turf/unsimulated/floor{
+	icon = 'icons/turf/snow.dmi';
+	icon_state = "snowwhite"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aj" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/wall/prepainted,
+/area/map_template/ninja_dojo/dojo)
+"ak" = (
+/obj/structure/table/glass,
+/obj/item/storage/firstaid/surgery,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"al" = (
+/obj/machinery/optable,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"am" = (
+/obj/structure/closet/medical_wall{
+	pixel_y = 32
+	},
+/obj/item/tank/anesthetic,
+/obj/item/clothing/mask/breath/medical,
+/obj/item/clothing/gloves/latex,
+/obj/item/clothing/mask/surgical,
+/obj/structure/hygiene/sink{
+	dir = 1;
+	pixel_y = 16
+	},
+/obj/item/reagent_containers/glass/bottle/stoxin,
+/obj/item/reagent_containers/glass/bottle/stoxin,
+/obj/item/reagent_containers/syringe,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"an" = (
+/obj/structure/table/glass,
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/unathi/oneg,
+/obj/item/reagent_containers/ivbag/blood/unathi/oneg,
+/obj/structure/window/reinforced/crescent{
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"ao" = (
+/obj/machinery/atmospherics/unary/cryo_cell,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"ap" = (
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aq" = (
+/obj/item/reagent_containers/glass/beaker/cryoxadone,
+/obj/structure/table/glass,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"ar" = (
+/obj/structure/table/glass,
+/obj/item/reagent_containers/spray/sterilizine,
+/obj/item/reagent_containers/spray/cleaner,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"as" = (
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"at" = (
+/obj/structure/table/glass,
+/obj/item/storage/firstaid/o2{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/obj/item/storage/firstaid/fire{
+	pixel_x = 1
+	},
+/obj/structure/window/reinforced/crescent{
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"au" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5
+	},
+/obj/effect/floor_decal/corner/blue,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"av" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aw" = (
+/obj/structure/table/glass,
+/obj/item/storage/box/beakers,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"ax" = (
+/obj/machinery/computer/teleporter,
+/turf/unsimulated/floor{
+	icon_state = "plating";
+	name = "plating"
+	},
+/area/map_template/ninja_dojo/dojo)
+"ay" = (
+/obj/machinery/tele_projector,
+/turf/unsimulated/floor{
+	icon_state = "plating";
+	name = "plating"
+	},
+/area/map_template/ninja_dojo/dojo)
+"az" = (
+/obj/machinery/tele_pad,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/unsimulated/floor{
+	icon_state = "plating";
+	name = "plating"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aA" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aB" = (
+/obj/structure/table/glass,
+/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/stack/medical/advanced/bruise_pack,
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aC" = (
+/obj/structure/table/glass,
+/obj/item/storage/firstaid/toxin{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/obj/item/storage/firstaid/adv{
+	pixel_x = 1
+	},
+/obj/item/storage/firstaid/radiation,
+/obj/structure/window/reinforced/crescent{
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aD" = (
+/obj/item/reagent_containers/glass/beaker/large,
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/chemical_dispenser/full,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aE" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aF" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/item/device/radio/intercom/syndicate{
+	dir = 8;
+	pixel_x = 22
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aG" = (
+/obj/machinery/cryopod{
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	icon_state = "plating";
+	name = "plating"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aH" = (
+/obj/structure/flora/tree/pine,
+/turf/unsimulated/floor{
+	icon = 'icons/turf/snow.dmi';
+	icon_state = "snowwhite"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aI" = (
+/obj/structure/iv_stand,
+/obj/structure/window/reinforced/crescent,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aJ" = (
+/obj/structure/table/glass,
+/obj/item/storage/firstaid/regular,
+/obj/item/storage/firstaid/combat,
+/obj/structure/window/reinforced/crescent{
+	dir = 4
+	},
+/obj/structure/window/reinforced/crescent,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aK" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aL" = (
+/obj/machinery/door/blast/regular/open{
+	icon_state = "pdoor0";
+	id_tag = "prototype_chamber_blast"
+	},
+/obj/effect/floor_decal/floordetail/tiled,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aM" = (
+/obj/item/reagent_containers/glass/beaker/large,
+/obj/machinery/chem_master,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aN" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 7
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aO" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aQ" = (
+/obj/structure/table/glass,
+/obj/effect/floor_decal/corner/black/border{
+	dir = 7
+	},
+/obj/item/paper_bin,
+/obj/item/pen,
+/turf/simulated/floor/tiled,
+/area/map_template/ninja_dojo/dojo)
+"aR" = (
+/obj/machinery/bodyscanner{
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aS" = (
+/obj/machinery/body_scanconsole{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aT" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 5
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aU" = (
+/obj/effect/floor_decal/industrial/outline/blue,
+/obj/machinery/portable_atmospherics/canister/nitrogen,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aV" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 10
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aW" = (
+/obj/structure/table/rack,
+/obj/item/tank/oxygen,
+/obj/item/tank/oxygen,
+/obj/item/tank/oxygen,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aX" = (
+/obj/machinery/door/blast/regular/open{
+	id_tag = "bsdwindow";
+	name = "Exit"
+	},
+/turf/unsimulated/wall,
+/area/map_template/ninja_dojo/dojo)
+"aY" = (
+/turf/unsimulated/floor{
+	dir = 9;
+	icon_state = "vault"
+	},
+/area/map_template/ninja_dojo/dojo)
+"aZ" = (
+/obj/structure/table/rack,
+/obj/item/storage/belt/medical/emt,
+/obj/item/storage/firstaid/adv,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"ba" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bb" = (
+/obj/effect/floor_decal/industrial/outline/blue,
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bc" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 6
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bd" = (
+/turf/simulated/wall/prepainted,
+/area/map_template/ninja_dojo/dojo)
+"be" = (
+/obj/machinery/door/blast/regular/open{
+	icon_state = "pdoor0";
+	id_tag = "prototype_chamber_blast"
+	},
+/turf/unsimulated/floor{
+	icon = 'icons/turf/snow.dmi';
+	icon_state = "snowplating"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bf" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning"
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	icon = 'icons/turf/snow.dmi';
+	icon_state = "snowplating"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bh" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bi" = (
+/obj/machinery/light,
+/obj/effect/floor_decal/corner/black/bordercorner{
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bj" = (
+/obj/structure/bed/chair/office/dark,
+/obj/item/device/radio/intercom/syndicate{
+	dir = 4;
+	pixel_x = -22
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/ninja_dojo/dojo)
+"bl" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/effect/floor_decal/floordetail/tiled,
+/turf/unsimulated/floor{
+	icon_state = "plating";
+	name = "plating"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bm" = (
+/obj/structure/table/rack,
+/obj/item/tank/nitrogen,
+/obj/item/tank/nitrogen,
+/obj/item/tank/nitrogen,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bn" = (
+/turf/unsimulated/floor{
+	icon = 'icons/turf/snow.dmi';
+	icon_state = "snowplating"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bo" = (
+/obj/effect/floor_decal/snow,
+/turf/unsimulated/floor{
+	icon = 'icons/turf/snow.dmi';
+	icon_state = "snowplating"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bp" = (
+/obj/structure/window/reinforced/polarized{
+	dir = 1
+	},
+/obj/structure/window/reinforced/polarized,
+/obj/effect/floor_decal/floordetail/tiled,
+/turf/unsimulated/floor{
+	icon_state = "plating";
+	name = "plating"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bq" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/ninja_dojo/dojo)
+"br" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/black/border{
+	dir = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bs" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/black/border{
+	dir = 7
+	},
+/obj/effect/floor_decal/corner/black/border{
+	dir = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bt" = (
+/obj/structure/pit/closed/grave,
+/turf/unsimulated/floor{
+	icon_state = "snow"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bu" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bv" = (
+/obj/effect/floor_decal/corner/blue,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bw" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 7
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bx" = (
+/obj/machinery/recharger/wallcharger{
+	dir = 4;
+	pixel_x = -23;
+	pixel_y = -3
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"by" = (
+/obj/effect/landmark{
+	name = "ninjastart"
+	},
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/floor_decal/floordetail/tiled,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bz" = (
+/obj/machinery/acting/changer,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 9;
+	icon_state = "warning"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 6;
+	icon_state = "warning"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bA" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bB" = (
+/obj/effect/floor_decal/corner/black/bordercorner{
+	dir = 5
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bC" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Equipment"
+	},
+/turf/unsimulated/floor{
+	icon_state = "snow"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bD" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 1
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bE" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 9
+	},
+/obj/machinery/rotating_alarm/supermatter{
+	dir = 4;
+	name = "emergency alarm";
+	on = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bF" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 9
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bG" = (
+/obj/effect/floor_decal/corner/black/bordercorner{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/black/bordercorner{
+	dir = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bH" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/turf/unsimulated/floor{
+	dir = 9;
+	icon_state = "vault"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bI" = (
+/obj/machinery/door/blast/regular/open{
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "prototype_chamber_blast"
+	},
+/obj/effect/floor_decal/floordetail/tiled,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bJ" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bK" = (
+/obj/effect/floor_decal/corner/black/bordercorner{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bL" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/effect/floor_decal/floordetail/tiled,
+/turf/unsimulated/floor{
+	icon_state = "plating";
+	name = "plating"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bM" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 10
+	},
+/obj/machinery/rotating_alarm/supermatter{
+	dir = 4;
+	name = "emergency alarm";
+	on = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bN" = (
+/obj/machinery/cryopod{
+	dir = 2
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	icon_state = "plating";
+	name = "plating"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bO" = (
+/obj/effect/paint_stripe/yellow,
+/turf/simulated/wall/prepainted,
+/area/map_template/ninja_dojo/dojo)
+"bP" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bQ" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 5
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bR" = (
+/obj/structure/table/rack,
+/obj/item/storage/box/syndie_kit/chameleon,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bS" = (
+/obj/effect/floor_decal/asteroid,
+/turf/unsimulated/floor{
+	icon = 'icons/turf/snow.dmi';
+	icon_state = "snowplating"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bT" = (
+/obj/effect/floor_decal/industrial/warning/corner,
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4;
+	icon_state = "warningcorner"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bU" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "plating";
+	name = "plating"
+	},
+/area/map_template/ninja_dojo/start)
+"bV" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4;
+	icon_state = "warningcorner"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bW" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 2;
+	icon_state = "warningcorner"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bX" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"bZ" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/space,
+/area/map_template/ninja_dojo/dojo)
+"ca" = (
+/obj/structure/table/glass,
+/obj/effect/floor_decal/corner/black/border{
+	dir = 10
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/ninja_dojo/dojo)
+"cb" = (
+/obj/machinery/computer/modular/preset/medical,
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/effect/floor_decal/corner/black/border{
+	dir = 6
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/ninja_dojo/dojo)
+"ce" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Equipment"
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/ninja_dojo/dojo)
+"cf" = (
+/obj/effect/floor_decal/corner/black/bordercorner{
+	dir = 7
+	},
+/obj/machinery/light,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"cg" = (
+/turf/simulated/floor/tiled,
+/area/map_template/ninja_dojo/dojo)
+"ch" = (
+/obj/structure/bed/chair/office/dark{
+	dir = 1
+	},
+/obj/item/device/radio/intercom/syndicate{
+	dir = 8;
+	pixel_x = 22
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/ninja_dojo/dojo)
+"ci" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 6
+	},
+/obj/structure/table/glass,
+/obj/item/stack/material/aluminium/fifty,
+/obj/item/stack/material/glass/fifty,
+/obj/item/stack/material/plasteel/fifty,
+/obj/item/stack/material/plastic/fifty,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/titanium/fifty,
+/obj/item/stack/material/glass/fifty,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"cj" = (
+/obj/machinery/rotating_alarm/supermatter{
+	dir = 8;
+	name = "emergency alarm";
+	on = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"ck" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/map_template/ninja_dojo/start)
+"cl" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 9
+	},
+/obj/machinery/fabricator/hacked,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"cm" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 10
+	},
+/obj/machinery/fabricator/hacked,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"cn" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/turf/unsimulated/floor{
+	dir = 9;
+	icon_state = "vault"
+	},
+/area/map_template/ninja_dojo/dojo)
+"co" = (
+/obj/structure/aliumizer,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 10
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 5;
+	icon_state = "warning"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"cp" = (
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"cq" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/ninja_dojo/dojo)
+"cr" = (
+/obj/machinery/rotating_alarm/supermatter{
+	dir = 4;
+	name = "emergency alarm";
+	on = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"cs" = (
+/obj/structure/table/rack,
+/obj/item/melee/energy/machete{
+	pixel_x = 9;
+	pixel_y = 9
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"cu" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning"
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon = 'icons/turf/snow.dmi';
+	icon_state = "snowplating"
+	},
+/area/map_template/ninja_dojo/dojo)
+"cv" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1;
+	icon_state = "warning"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"cw" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"cy" = (
+/obj/structure/table/rack,
+/obj/item/storage/belt/utility/full,
+/obj/item/device/multitool,
+/obj/item/tape_roll,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"cz" = (
+/obj/effect/floor_decal/snow,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	icon = 'icons/turf/snow.dmi';
+	icon_state = "snowplating"
+	},
+/area/map_template/ninja_dojo/dojo)
+"cA" = (
+/obj/structure/table/rack,
+/obj/item/storage/box/flashbangs,
+/obj/item/storage/box/smokes,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"cB" = (
+/obj/machinery/light,
+/turf/unsimulated/floor{
+	icon = 'icons/turf/snow.dmi';
+	icon_state = "snowplating"
+	},
+/area/map_template/ninja_dojo/dojo)
+"cC" = (
+/obj/effect/landmark{
+	name = "ninjastart"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/floor_decal/floordetail/tiled,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/ninja_dojo/dojo)
+"cD" = (
+/obj/machinery/light,
+/obj/effect/floor_decal/corner/black/bordercorner{
+	dir = 3
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"cE" = (
+/obj/machinery/door/blast/regular/open{
+	dir = 4;
+	name = "Operative Cryo Chamber"
+	},
+/turf/unsimulated/wall,
+/area/map_template/ninja_dojo/dojo)
+"cF" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"cG" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/structure/table/rack,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"cH" = (
+/obj/machinery/computer/teleporter,
+/turf/simulated/floor/plating,
+/area/map_template/ninja_dojo/start)
+"cI" = (
+/obj/machinery/tele_projector,
+/turf/simulated/floor/plating,
+/area/map_template/ninja_dojo/start)
+"cJ" = (
+/obj/machinery/tele_pad,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/plating,
+/area/map_template/ninja_dojo/start)
+"cK" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/atmospherics/portables_connector,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/portable_atmospherics/canister/air/airlock,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8;
+	icon_state = "warning"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"cL" = (
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1"
+	},
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"cM" = (
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"cN" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4;
+	icon_state = "warningcorner"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"cO" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"cP" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"cQ" = (
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	frequency = 1331;
+	id_tag = "ninja_shuttle";
+	pixel_x = -8;
+	pixel_y = 25;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"cR" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1331;
+	id_tag = "ninja_shuttle_outer";
+	name = "Ship External Access"
+	},
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "ninjadoor";
+	name = "Blast Door";
+	opacity = 0
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"cS" = (
+/obj/machinery/sleeper{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"cT" = (
+/obj/effect/shuttle_landmark/ninja/start,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"cU" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5
+	},
+/obj/machinery/access_button{
+	command = "cycle_interior";
+	frequency = 1331;
+	master_tag = "ninja_shuttle";
+	name = "interior access button";
+	pixel_x = 25;
+	pixel_y = 25;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"cV" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/machinery/door/airlock/external{
+	frequency = 1331;
+	id_tag = "ninja_shuttle_inner";
+	name = "Ship External Access"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"cW" = (
+/obj/machinery/airlock_sensor{
+	frequency = 1331;
+	id_tag = "ninja_shuttle_sensor";
+	pixel_x = 8;
+	pixel_y = -25
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
+	dir = 8;
+	id_tag = "ninja_shuttle_pump"
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "ninjadoor";
+	name = "remote shutter control";
+	pixel_x = 25
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"cX" = (
+/obj/structure/closet,
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1"
+	},
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"cY" = (
+/obj/structure/table/rack,
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"cZ" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1"
+	},
+/obj/item/device/radio/intercom/syndicate{
+	dir = 4;
+	pixel_x = -22
+	},
+/obj/machinery/cell_charger,
+/obj/item/screwdriver,
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/item/toy/figure/ninja,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"da" = (
+/obj/structure/bed/chair/shuttle,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"db" = (
+/obj/machinery/button/blast_door{
+	id_tag = "ninjawindow";
+	name = "remote shutter control";
+	pixel_x = 36;
+	pixel_y = -24
+	},
+/obj/machinery/button/windowtint{
+	id = "ninja_ship";
+	pixel_x = -24;
+	pixel_y = -25
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"dc" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/recharger,
+/obj/item/wrench,
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
+	},
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"dd" = (
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/computer/station_alert/all{
+	dir = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"de" = (
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/computer/shuttle_control/multi/ninja{
+	dir = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"df" = (
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/computer/modular/preset/security{
+	dir = 1;
+	icon_state = "console"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/start)
+"dg" = (
+/obj/machinery/door/blast/regular{
+	id_tag = "ninjawindow";
+	name = "Blast Shutter"
+	},
+/obj/effect/wallframe_spawn/reinforced/polarized{
+	id = "ninja_ship"
+	},
+/obj/effect/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/ninja_dojo/start)
+"gy" = (
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas/swat/vox,
+/obj/item/clothing/mask/gas/swat/vox,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"qc" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 5
+	},
+/obj/effect/floor_decal/corner/blue,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"ss" = (
+/turf/unsimulated/wall,
+/area/map_template/ninja_dojo/dojo)
+"uZ" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/blue,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"vP" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1;
+	icon_state = "warningcorner"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"vQ" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1;
+	icon_state = "warningcorner"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"wG" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 5
+	},
+/obj/structure/table/glass,
+/obj/item/stack/material/aluminium/fifty,
+/obj/item/stack/material/glass/fifty,
+/obj/item/stack/material/glass/fifty,
+/obj/item/stack/material/plasteel/fifty,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/titanium/fifty,
+/obj/item/stack/material/plastic/fifty,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"wX" = (
+/obj/structure/table/glass,
+/obj/effect/floor_decal/corner/black/border{
+	dir = 1
+	},
+/obj/item/newspaper,
+/turf/simulated/floor/tiled,
+/area/map_template/ninja_dojo/dojo)
+"zr" = (
+/obj/effect/floor_decal/snow,
+/turf/unsimulated/wall,
+/area/map_template/ninja_dojo/dojo)
+"BB" = (
+/obj/effect/floor_decal/corner/black/bordercorner{
+	dir = 8
+	},
+/obj/machinery/light,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"Cj" = (
+/obj/structure/table/rack,
+/obj/random/biggun,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"Hl" = (
+/obj/structure/table/glass,
+/obj/effect/floor_decal/corner/black/border{
+	dir = 5
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/ninja_dojo/dojo)
+"JH" = (
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas/swat,
+/obj/item/clothing/mask/gas/swat,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"JM" = (
+/obj/machinery/door/blast/regular/open{
+	icon_state = "pdoor0";
+	id_tag = "prototype_chamber_blast"
+	},
+/obj/effect/floor_decal/floordetail/tiled,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"KK" = (
+/obj/effect/floor_decal/corner/black/bordercorner{
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"LW" = (
+/obj/structure/table/rack,
+/obj/item/storage/box/handcuffs,
+/obj/item/storage/box/handcuffs,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"MC" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"Oo" = (
+/obj/machinery/light,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"OL" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 7
+	},
+/obj/machinery/light,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
+"PF" = (
+/obj/machinery/computer/modular/preset/civilian{
+	dir = 1;
+	icon_state = "console"
+	},
+/obj/effect/floor_decal/corner/black/border{
+	dir = 9
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/ninja_dojo/dojo)
+"RX" = (
+/obj/effect/floor_decal/corner/black/border{
+	dir = 7
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 5
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"TP" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/ninja_dojo/dojo)
+"UV" = (
+/obj/structure/table/rack,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/effect/floor_decal/corner/black/bordercorner{
+	dir = 3
+	},
+/obj/item/clothing/accessory/storage/webbing,
+/obj/item/clothing/accessory/storage/webbing,
+/obj/item/clothing/accessory/storage/webbing_large,
+/obj/item/clothing/accessory/storage/webbing_large,
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/ninja_dojo/dojo)
 
 (1,1,1) = {"
-ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
-ssacadadadacacacacadadadadadadadadadadadadacacadacadadadadacacadadadadadaeadadadadadadss
-ssacafadadacacacagadadadadadadadadacadadadadacadadadacadaeacacadadadadadadadagadadadadss
-ssadadadadacacacacadadadadadadadadahadacacacacadadadacacacacacacacacadadadadadadadadadss
-ssadadacacaeacacadadadadadaeacacacacacacadadadadadadadacadacacadagadacadadadadadadadadss
-ssacadacadadadadadadadadadadadadadacacadacaiadadadacadadadadacacadadadadadacacacadadadss
-ssacaiadadadbdbdbdbdbdbdbdbdbdadadacadadadadadadadacacaeaeacacacacacacadadadadadacadadss
-ssafadadacadbdakalamanaoapaqbdbdbdbdbdadadadadacacacadadadadadadadadadadadadadadadacadss
-ssacacacadacbdarbvTPatauavawbdaxayazbdacafacacadadadadadadadadadadadadadadadadadadacadss
-ssacadacadacbdaBaKaOaCaKaOaDbdaEaEaFbdadadbtadbtadbtadbtadadadadadadadadadadadagadacadss
-ssacadaHacacbdaIaKaOaJaKaOaMbdcDaNbibdadadbtadbtadbtadbtadadadadadadadadadadadadadadacss
-ssacacacacadbdaRaSqcuZaTMCasbdbdJMbdbdadadbtadbtadbtadbtadadadadadadadadadadadadadadacss
-ssagadadadadbdascfbwRXBBasasbaKKbPbdadadadadadadadadadadadadadbdbdbdbdbdbdbdacadadacacss
-ssacadadadadbdbdbdaLaLbdbdbdbdbdbdbdbdbdbdajajajbdbdbdadadadadbdbjcgcgcgcebdacadadadadss
-ssacadadadadadadbdbFbQbdadadadadadadbdcmCjbRLWcAUVcibdadadadadbdPFwXHlbqbdbdacadadadaess
-ssacacadadaeadadbdcpcpbdadadadadadadbdbxbPbPbrbPbPaZbdadadadbdbdbZbZbZbdbdbdacadadadadss
-ssacaeadadacadadbdcpcpbdadadadadadadbdJHaWbbbXbAcpcybdadadbdbdbVcvcvcvvQbdbdacadagadadss
-ssadadadadacadbdbdaVbcbdbdadadadadadbdbdbdbdJMcFcFcFbdbdbdbdcrcpcpbycpcpcjbdbdbdbdbdadss
-ssagadadadagadbdcsbacpbBbdbdbdbdbdbdbdbdbEbDcvbPbPbPbDbQaYbIcpbFbOaGbObQaYbIbhbzcwbCadss
-ssbnbobnbnboadbdbsbGcpbHbIbJbhcpcpbhcnbIbJcpcpcpcpcpcpaAaYbIcpbablbpbLaAaYbIcpcpbTbdadss
-ssbobnbnbobnadbdcsbacpbKbdbdbdbdbdbdbdbdbMOLbXaNaNaNOLbcaYbIcpaVbObNbObcaYbIOococwbCadss
-ssadadacadadadbdbdbFbQbdbdadadadadadbdbdbdbdJMcFcFcFbdbdbdbdcrcpcpcCcpcpcjbdbdbdbdbdadss
-ssagadadadagadadbdcpbnbdadadadadadadbdgybmaUcvvPcpcybdadadbdbdbWbXbXbXbubdbdadacadadaess
-ssacadadaeadadadbdcubfbdadadadadadadbdbxaNaNaNaNaNaZbdadadbdbdbdbZbZbZbdbdadadacadadadss
-sssszrzrzrzrssssssbebesssszrssssadadbdclCjbRLWcAUVwGbdadadbdbdcqcaaQcbbdadadadadacacacss
-ssbnbnbnbobobnbnbnbnbnbnbnbnbozradadbdbdbdajajajbdbdbdadadbdcecgcgcgchbdadadadadaHacadss
-ssbnbobnbnbnbnbnbnbnbnbnbnbnbnzradadadadadadadadadadadadadbdbdbdbdbdbdbdadadadadacadadss
-ssbnbobnbnbobnbnbobobnbnbobnbnzraeadadadbnboadadadadadadadadadadadadadadadadadacadadadss
-ssbobnbnbnbnbnbobobnbnbnbobnbnssadadacacbnbnadadadadadadadadadadadadadadadadadacadadadss
-ssbobnckbnbnbnbnbnbnbockbnbnczssbnbnbnbnbnbnbnbnadadadadadadadadadadadadadadacadadadadss
-ssbnbnckckbnbUbUbUbnckckbnbnbncEbnbnbobnbnbnbnbnadadadadadadadadadadadadadadacadadadadss
-ssbnbnckckckckckckckckckbnbnbncEadadadadadadbnbnbnadadadadadadadadadadadadadadadadadadss
-ssbnckckckcGcHcIcJcKckckckbnbncEacadaeadadadadbnbnbnadadadadadadadadadadadadadadadadadss
-ssbnckcLcMcNcOcOcOcPckcQcRbnbncEacadadacacadadadbnbnbnadadadadadadadadadadadadadadadadss
-ssbockcScMcMcMcTcMcUcVcWckbnczssadadadadadadadadadbnbnbnadadadadadadadadadadacadadadadss
-ssbnckckckcXcMcMcMcYckckckbnbossadagacadacacadadaeadbnbnbnadacadadadadadadadadadacadadss
-ssbnbnckckcZcMdadbdcckckbnbobozradadacadadadadadadacbnbnbnadadadadadadadadadadadadadadss
-ssbobnbnckckdddedfckckbnbnbobnzradadadadadadadadadacadbnbnbnadaHacadadadadadadadagadadss
-zrbobobnbnckdgdgdgckbnbnbnbnbnzracadadacadadagadadacacbnbSbnadacadadadadacacacadadadadss
-zrbobncBbnbnbnbnbnbnbncBbnbnbnssahadaeadacadadadadadadbnbnadadadadadadadadadadadadadadss
-zrzrzrsszrzrzrsssssssssszrsszrssssssssssssssssssssssssaXaXssssssssssssssssssssssssssssss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+zr
+zr
+zr
+"}
+(2,1,1) = {"
+ss
+ac
+ac
+ad
+ad
+ac
+ac
+af
+ac
+ac
+ac
+ac
+ag
+ac
+ac
+ac
+ac
+ad
+ag
+bn
+bo
+ad
+ag
+ac
+ss
+bn
+bn
+bn
+bo
+bo
+bn
+bn
+bn
+bn
+bo
+bn
+bn
+bo
+bo
+bo
+zr
+"}
+(3,1,1) = {"
+ss
+ad
+af
+ad
+ad
+ad
+ai
+ad
+ac
+ad
+ad
+ac
+ad
+ad
+ad
+ac
+ae
+ad
+ad
+bo
+bn
+ad
+ad
+ad
+zr
+bn
+bo
+bo
+bn
+bn
+bn
+bn
+ck
+ck
+ck
+ck
+bn
+bn
+bo
+bn
+zr
+"}
+(4,1,1) = {"
+ss
+ad
+ad
+ad
+ac
+ac
+ad
+ad
+ac
+ac
+aH
+ac
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+bn
+bn
+ac
+ad
+ad
+zr
+bn
+bn
+bn
+bn
+ck
+ck
+ck
+ck
+cL
+cS
+ck
+ck
+bn
+bn
+cB
+ss
+"}
+(5,1,1) = {"
+ss
+ad
+ad
+ad
+ac
+ad
+ad
+ac
+ad
+ad
+ac
+ac
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+bn
+bo
+ad
+ad
+ae
+zr
+bo
+bn
+bn
+bn
+bn
+ck
+ck
+ck
+cM
+cM
+ck
+ck
+ck
+bn
+bn
+zr
+"}
+(6,1,1) = {"
+ss
+ac
+ac
+ac
+ae
+ad
+ad
+ad
+ac
+ac
+ac
+ad
+ad
+ad
+ad
+ae
+ac
+ac
+ag
+bo
+bn
+ad
+ag
+ad
+zr
+bo
+bn
+bo
+bn
+bn
+bn
+ck
+cG
+cN
+cM
+cX
+cZ
+ck
+ck
+bn
+zr
+"}
+(7,1,1) = {"
+ss
+ac
+ac
+ac
+ac
+ad
+bd
+bd
+bd
+bd
+bd
+bd
+bd
+bd
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ss
+bn
+bn
+bn
+bn
+bn
+bU
+ck
+cH
+cO
+cM
+cM
+cM
+dd
+dg
+bn
+zr
+"}
+(8,1,1) = {"
+ss
+ac
+ac
+ac
+ac
+ad
+bd
+ak
+ar
+aB
+aI
+aR
+as
+bd
+ad
+ad
+ad
+bd
+bd
+bd
+bd
+bd
+ad
+ad
+ss
+bn
+bn
+bn
+bo
+bn
+bU
+ck
+cI
+cO
+cT
+cM
+da
+de
+dg
+bn
+ss
+"}
+(9,1,1) = {"
+ss
+ac
+ag
+ac
+ad
+ad
+bd
+al
+bv
+aK
+aK
+aS
+cf
+bd
+bd
+bd
+bd
+bd
+cs
+bs
+cs
+bd
+bd
+bd
+ss
+bn
+bn
+bo
+bo
+bn
+bU
+ck
+cJ
+cO
+cM
+cM
+db
+df
+dg
+bn
+ss
+"}
+(10,1,1) = {"
+ss
+ad
+ad
+ad
+ad
+ad
+bd
+am
+TP
+aO
+aO
+qc
+bw
+aL
+bF
+cp
+cp
+aV
+ba
+bG
+ba
+bF
+cp
+cu
+be
+bn
+bn
+bo
+bn
+bn
+bn
+ck
+cK
+cP
+cU
+cY
+dc
+ck
+ck
+bn
+ss
+"}
+(11,1,1) = {"
+ss
+ad
+ad
+ad
+ad
+ad
+bd
+an
+at
+aC
+aJ
+uZ
+RX
+aL
+bQ
+cp
+cp
+bc
+cp
+cp
+cp
+bQ
+bn
+bf
+be
+bn
+bn
+bn
+bn
+bo
+ck
+ck
+ck
+ck
+cV
+ck
+ck
+ck
+bn
+bn
+ss
+"}
+(12,1,1) = {"
+ss
+ad
+ad
+ad
+ad
+ad
+bd
+ao
+au
+aK
+aK
+aT
+BB
+bd
+bd
+bd
+bd
+bd
+bB
+bH
+bK
+bd
+bd
+bd
+ss
+bn
+bn
+bn
+bn
+ck
+ck
+ck
+ck
+cQ
+cW
+ck
+ck
+bn
+bn
+cB
+ss
+"}
+(13,1,1) = {"
+ss
+ad
+ad
+ad
+ad
+ad
+bd
+ap
+av
+aO
+aO
+MC
+as
+bd
+ad
+ad
+ad
+bd
+bd
+bI
+bd
+bd
+ad
+ad
+ss
+bn
+bn
+bo
+bo
+bn
+bn
+bn
+ck
+cR
+ck
+ck
+bn
+bn
+bn
+bn
+zr
+"}
+(14,1,1) = {"
+ss
+ad
+ad
+ad
+ae
+ad
+bd
+aq
+aw
+aD
+aM
+as
+as
+bd
+ad
+ad
+ad
+ad
+bd
+bJ
+bd
+ad
+ad
+ad
+zr
+bn
+bn
+bn
+bn
+bn
+bn
+bn
+bn
+bn
+bn
+bn
+bo
+bo
+bn
+bn
+ss
+"}
+(15,1,1) = {"
+ss
+ad
+ad
+ad
+ac
+ad
+bd
+bd
+bd
+bd
+bd
+bd
+ba
+bd
+ad
+ad
+ad
+ad
+bd
+bh
+bd
+ad
+ad
+ad
+ss
+bo
+bn
+bn
+bn
+cz
+bn
+bn
+bn
+bn
+cz
+bo
+bo
+bn
+bn
+bn
+zr
+"}
+(16,1,1) = {"
+ss
+ad
+ad
+ad
+ac
+ad
+ad
+bd
+ax
+aE
+cD
+bd
+KK
+bd
+ad
+ad
+ad
+ad
+bd
+cp
+bd
+ad
+ad
+ad
+ss
+zr
+zr
+zr
+ss
+ss
+cE
+cE
+cE
+cE
+ss
+ss
+zr
+zr
+zr
+ss
+ss
+"}
+(17,1,1) = {"
+ss
+ad
+ad
+ad
+ac
+ad
+ad
+bd
+ay
+aE
+aN
+JM
+bP
+bd
+ad
+ad
+ad
+ad
+bd
+cp
+bd
+ad
+ad
+ad
+ad
+ad
+ad
+ae
+ad
+bn
+bn
+ad
+ac
+ac
+ad
+ad
+ad
+ad
+ac
+ah
+ss
+"}
+(18,1,1) = {"
+ss
+ad
+ac
+ah
+ac
+ac
+ac
+bd
+az
+aF
+bi
+bd
+bd
+bd
+ad
+ad
+ad
+ad
+bd
+bh
+bd
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+bn
+bn
+ad
+ad
+ad
+ad
+ag
+ad
+ad
+ad
+ad
+ss
+"}
+(19,1,1) = {"
+ss
+ad
+ad
+ad
+ac
+ac
+ad
+bd
+bd
+bd
+bd
+bd
+ad
+bd
+bd
+bd
+bd
+bd
+bd
+cn
+bd
+bd
+bd
+bd
+bd
+bd
+ad
+ad
+ac
+bn
+bo
+ad
+ae
+ad
+ad
+ac
+ac
+ad
+ad
+ae
+ss
+"}
+(20,1,1) = {"
+ss
+ad
+ad
+ac
+ac
+ad
+ad
+ad
+ac
+ad
+ad
+ad
+ad
+bd
+cm
+bx
+JH
+bd
+bd
+bI
+bd
+bd
+gy
+bx
+cl
+bd
+ad
+ad
+ac
+bn
+bn
+ad
+ad
+ac
+ad
+ad
+ad
+ad
+ac
+ad
+ss
+"}
+(21,1,1) = {"
+ss
+ad
+ad
+ac
+ad
+ac
+ad
+ad
+af
+ad
+ad
+ad
+ad
+bd
+Cj
+bP
+aW
+bd
+bE
+bJ
+bM
+bd
+bm
+aN
+Cj
+bd
+ad
+bn
+bn
+bn
+bn
+ad
+ad
+ac
+ad
+ac
+ad
+ad
+ad
+ac
+ss
+"}
+(22,1,1) = {"
+ss
+ac
+ad
+ac
+ad
+ai
+ad
+ad
+ac
+bt
+bt
+bt
+ad
+aj
+bR
+bP
+bb
+bd
+bD
+cp
+OL
+bd
+aU
+aN
+bR
+aj
+ad
+bo
+bn
+bn
+bn
+ad
+ad
+ad
+ad
+ac
+ad
+ad
+ad
+ad
+ss
+"}
+(23,1,1) = {"
+ss
+ac
+ac
+ac
+ad
+ad
+ad
+ad
+ac
+ad
+ad
+ad
+ad
+aj
+LW
+br
+bX
+JM
+cv
+cp
+bX
+JM
+cv
+aN
+LW
+aj
+ad
+ad
+ad
+bn
+bn
+bn
+ad
+ad
+ad
+ad
+ad
+ad
+ag
+ad
+ss
+"}
+(24,1,1) = {"
+ss
+ad
+ad
+ad
+ad
+ad
+ad
+ac
+ad
+bt
+bt
+bt
+ad
+aj
+cA
+bP
+bA
+cF
+bP
+cp
+aN
+cF
+vP
+aN
+cA
+aj
+ad
+ad
+ad
+bn
+bn
+bn
+bn
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ss
+"}
+(25,1,1) = {"
+ss
+ac
+ad
+ad
+ad
+ad
+ad
+ac
+ad
+ad
+ad
+ad
+ad
+bd
+UV
+bP
+cp
+cF
+bP
+cp
+aN
+cF
+cp
+aN
+UV
+bd
+ad
+ad
+ad
+ad
+ad
+bn
+bn
+bn
+ad
+ae
+ad
+ad
+ad
+ad
+ss
+"}
+(26,1,1) = {"
+ss
+ad
+ad
+ad
+ad
+ac
+ac
+ac
+ad
+bt
+bt
+bt
+ad
+bd
+ci
+aZ
+cy
+cF
+bP
+cp
+aN
+cF
+cy
+aZ
+wG
+bd
+ad
+ad
+ad
+ad
+ad
+ad
+bn
+bn
+bn
+ad
+ac
+ac
+ac
+ad
+ss
+"}
+(27,1,1) = {"
+ss
+ad
+ac
+ac
+ad
+ad
+ac
+ad
+ad
+ad
+ad
+ad
+ad
+bd
+bd
+bd
+bd
+bd
+bD
+cp
+OL
+bd
+bd
+bd
+bd
+bd
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+bn
+bn
+bn
+bn
+ad
+ac
+ad
+ss
+"}
+(28,1,1) = {"
+ss
+ad
+ad
+ac
+ac
+ad
+ae
+ad
+ad
+bt
+bt
+bt
+ad
+ad
+ad
+ad
+ad
+bd
+bQ
+aA
+bc
+bd
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+bn
+bn
+bn
+bn
+bn
+bn
+aX
+"}
+(29,1,1) = {"
+ss
+ad
+ae
+ac
+ad
+ad
+ae
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+bd
+aY
+aY
+aY
+bd
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+bn
+bn
+bn
+bS
+bn
+aX
+"}
+(30,1,1) = {"
+ss
+ac
+ac
+ac
+ac
+ad
+ac
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+bd
+bd
+bI
+bI
+bI
+bd
+bd
+bd
+bd
+bd
+bd
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+bn
+bn
+ad
+ss
+"}
+(31,1,1) = {"
+ss
+ac
+ac
+ac
+ac
+ac
+ac
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+bd
+bd
+cr
+cp
+cp
+cp
+cr
+bd
+bd
+bd
+ce
+bd
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ac
+ad
+ad
+ad
+ad
+ss
+"}
+(32,1,1) = {"
+ss
+ad
+ad
+ac
+ad
+ac
+ac
+ad
+ad
+ad
+ad
+ad
+bd
+bd
+bd
+bd
+bV
+cp
+bF
+ba
+aV
+cp
+bW
+bd
+cq
+cg
+bd
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+aH
+ac
+ad
+ss
+"}
+(33,1,1) = {"
+ss
+ad
+ad
+ac
+ag
+ad
+ac
+ad
+ad
+ad
+ad
+ad
+bd
+bj
+PF
+bZ
+cv
+cp
+bO
+bl
+bO
+cp
+bX
+bZ
+ca
+cg
+bd
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ac
+ad
+ad
+ss
+"}
+(34,1,1) = {"
+ss
+ad
+ad
+ac
+ad
+ad
+ac
+ad
+ad
+ad
+ad
+ad
+bd
+cg
+wX
+bZ
+cv
+by
+aG
+bp
+bN
+cC
+bX
+bZ
+aQ
+cg
+bd
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ss
+"}
+(35,1,1) = {"
+ss
+ad
+ad
+ad
+ac
+ad
+ac
+ad
+ad
+ad
+ad
+ad
+bd
+cg
+Hl
+bZ
+cv
+cp
+bO
+bL
+bO
+cp
+bX
+bZ
+cb
+ch
+bd
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ss
+"}
+(36,1,1) = {"
+ss
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+bd
+cg
+bq
+bd
+vQ
+cp
+bQ
+aA
+bc
+cp
+bu
+bd
+bd
+bd
+bd
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ss
+"}
+(37,1,1) = {"
+ss
+ae
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+bd
+ce
+bd
+bd
+bd
+cj
+aY
+aY
+aY
+cj
+bd
+bd
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ac
+ad
+ss
+"}
+(38,1,1) = {"
+ss
+ad
+ad
+ad
+ad
+ac
+ad
+ad
+ad
+ad
+ad
+ad
+bd
+bd
+bd
+bd
+bd
+bd
+bI
+bI
+bI
+bd
+bd
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ac
+ad
+ss
+"}
+(39,1,1) = {"
+ss
+ad
+ag
+ad
+ad
+ac
+ad
+ad
+ad
+ad
+ad
+ad
+ac
+ac
+ac
+ac
+ac
+bd
+bh
+cp
+Oo
+bd
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ac
+ac
+ad
+ad
+ad
+ac
+ad
+ad
+ad
+ac
+ad
+ss
+"}
+(40,1,1) = {"
+ss
+ad
+ad
+ad
+ad
+ac
+ad
+ad
+ad
+ag
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+bd
+bz
+cp
+co
+bd
+ac
+ac
+ad
+ad
+ad
+ac
+ac
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ss
+"}
+(41,1,1) = {"
+ss
+ad
+ad
+ad
+ad
+ad
+ac
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ag
+bd
+cw
+bT
+cw
+bd
+ad
+ad
+ac
+aH
+ac
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ac
+ad
+ag
+ad
+ad
+ss
+"}
+(42,1,1) = {"
+ss
+ad
+ad
+ad
+ad
+ad
+ad
+ac
+ac
+ac
+ad
+ad
+ac
+ad
+ad
+ad
+ad
+bd
+bC
+bd
+bC
+bd
+ad
+ad
+ac
+ac
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ss
+"}
+(43,1,1) = {"
+ss
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ac
+ac
+ac
+ad
+ae
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ae
+ad
+ac
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ss
+"}
+(44,1,1) = {"
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
+ss
 "}
