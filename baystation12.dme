@@ -2090,6 +2090,7 @@
 #include "code\modules\mob\say.dm"
 #include "code\modules\mob\transform_procs.dm"
 #include "code\modules\mob\update_icons.dm"
+#include "code\modules\mob\vv_handlers.dm"
 #include "code\modules\mob\grab\grab_datum.dm"
 #include "code\modules\mob\grab\grab_object.dm"
 #include "code\modules\mob\grab\grab_readme.dm"
