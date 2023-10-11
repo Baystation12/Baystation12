@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - bugfix: Spiderlings should now grow properly while in your limbs, and eventually
+      pop out.
