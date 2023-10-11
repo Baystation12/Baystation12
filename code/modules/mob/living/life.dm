@@ -132,7 +132,7 @@
 	handle_impaired_hearing()
 
 /mob/living/proc/handle_confused()
-	confused--
+	confused = max(confused - 1, 0)
 	return confused
 
 /mob/living/proc/handle_impaired_vision()
