@@ -1,5 +1,5 @@
 {
-  "editor.renderWhitespace": "all",
+  "editor.renderWhitespace": "boundary",
 
   "files.eol": "\n",
   "files.encoding": "utf8",
