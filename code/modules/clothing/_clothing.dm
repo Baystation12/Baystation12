@@ -207,6 +207,14 @@
 			to_chat(user, "<li><b>[capitalize(damages[key])]</b> damage to the <b>[key]</b> armor.")
 		return TOPIC_HANDLED
 
+/obj/item/clothing/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	SHOULD_CALL_PARENT(TRUE)
+	if (attempt_attach_accessory(tool, user))
+		return TRUE
+	if (attempt_store_item(tool, user))
+		return TRUE
+	return ..()
+
 ///////////////////////////////////////////////////////////////////////
 // Ears: headsets, earmuffs and tiny objects
 /obj/item/clothing/ears

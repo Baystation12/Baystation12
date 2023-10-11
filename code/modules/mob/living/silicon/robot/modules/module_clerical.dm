@@ -94,7 +94,7 @@
 		/obj/item/stamp/denied,
 		/obj/item/device/destTagger,
 		/obj/item/crowbar,
-		/obj/item/stack/package_wrap/cyborg
+		/obj/item/stack/package_wrap/cargo_wrap/cyborg
 	)
 	emag_gear = list(
 		/obj/item/melee/baton/robot/electrified_arm,
@@ -110,7 +110,7 @@
 /obj/item/robot_module/clerical/general/finalize_synths()
 	. = ..()
 	var/datum/matter_synth/package_wrap/wrap = locate() in synths
-	var/obj/item/stack/package_wrap/cyborg/wrap_item = locate() in equipment
+	var/obj/item/stack/package_wrap/cargo_wrap/cyborg/wrap_item = locate() in equipment
 	wrap_item.synths = list(wrap)
 
 

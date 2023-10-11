@@ -149,7 +149,8 @@
 /obj/random/tech_supply/spawn_choices()
 	return list(/obj/random/powercell = 3,
 				/obj/random/technology_scanner = 2,
-				/obj/item/stack/package_wrap/twenty_five = 1,
+				/obj/item/stack/package_wrap/cargo_wrap = 1,
+				/obj/item/stack/package_wrap/gift_wrap = 1,
 				/obj/item/hand_labeler = 1,
 				/obj/random/bomb_supply = 2,
 				/obj/item/extinguisher = 1,
@@ -978,7 +979,7 @@ GLOBAL_LIST_INIT(random_backpacks, list(
 /obj/random/maintenance //Clutter and loot for maintenance and away missions
 	name = "random maintenance item"
 	desc = "This is a random maintenance item."
-	icon = 'icons/obj/gifts.dmi'
+	icon = 'icons/obj/parcels.dmi'
 	icon_state = "gift1"
 
 /obj/random/maintenance/spawn_choices()
@@ -992,8 +993,8 @@ Individual items to add to the maintenance list should go here, if you add
 something, make sure it's not in one of the other lists.*/
 	name = "random clean maintenance item"
 	desc = "This is a random clean maintenance item."
-	icon = 'icons/obj/gifts.dmi'
-	icon_state = "gift2"
+	icon = 'icons/obj/parcels.dmi'
+	icon_state = "gift3"
 
 /obj/random/maintenance/clean/spawn_choices()
 	return list(/obj/random/tech_supply = 100,
@@ -1030,8 +1031,8 @@ something, make sure it's not in one of the other lists.*/
 /obj/random/loot /*Better loot for away missions and salvage */
 	name = "random loot"
 	desc = "This is some random loot."
-	icon = 'icons/obj/gifts.dmi'
-	icon_state = "gift3"
+	icon = 'icons/obj/parcels.dmi'
+	icon_state = "gift5"
 
 /obj/random/loot/spawn_choices()
 	return list(/obj/random/energy = 10,

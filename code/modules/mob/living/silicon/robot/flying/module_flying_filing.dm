@@ -16,7 +16,7 @@
 		/obj/item/device/destTagger,
 		/obj/item/crowbar,
 		/obj/item/device/megaphone,
-		/obj/item/stack/package_wrap/cyborg
+		/obj/item/stack/package_wrap/cargo_wrap/cyborg
 	)
 	emag_gear = list(
 		/obj/item/melee/baton/robot/electrified_arm,
@@ -37,7 +37,7 @@
 /obj/item/robot_module/flying/filing/finalize_synths()
 	. = ..()
 	var/datum/matter_synth/package_wrap =       locate() in synths
-	var/obj/item/stack/package_wrap/cyborg/PW = locate() in equipment
+	var/obj/item/stack/package_wrap/cargo_wrap/cyborg/PW = locate() in equipment
 	PW.synths = list(package_wrap)
 
 /obj/item/robot_module/flying/filing/respawn_consumable(mob/living/silicon/robot/R, amount)

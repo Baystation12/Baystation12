@@ -23,7 +23,7 @@ Random item spawning
 /obj/random/maintenance/solgov
 	name = "random maintenance item"
 	desc = "This is a random maintenance item."
-	icon = 'icons/obj/gifts.dmi'
+	icon = 'icons/obj/parcels.dmi'
 	icon_state = "gift1"
 
 /obj/random/maintenance/solgov/spawn_choices()
@@ -34,8 +34,8 @@ Random item spawning
 /obj/random/maintenance/solgov/clean
 	name = "random maintenance item"
 	desc = "This is a random maintenance item."
-	icon = 'icons/obj/gifts.dmi'
-	icon_state = "gift2"
+	icon = 'icons/obj/parcels.dmi'
+	icon_state = "gift3"
 
 /obj/random/maintenance/solgov/clean/spawn_choices()
 	return list(/obj/random/solgov = 3,

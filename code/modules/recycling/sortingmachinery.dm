@@ -2,7 +2,7 @@
 	desc = "A big wrapped package."
 	name = "large parcel"
 	icon = 'icons/obj/parcels.dmi'
-	icon_state = "deliverycloset"
+	icon_state = "parcelcloset"
 	health_max = 5
 	var/obj/wrapped = null
 	density = TRUE
@@ -13,7 +13,19 @@
 	var/label_y
 	var/label_x
 	var/tag_x
+	var/package_type = "parcel"
 
+/obj/structure/bigDelivery/Initialize(mapload, obj/structure/closet/parcel, wrap_type)
+	..(mapload)
+	if (!parcel || !istype(parcel) || !wrap_type)
+		return INITIALIZE_HINT_QDEL
+
+	wrapped = parcel
+	wrapped.forceMove(src)
+	package_type = wrap_type
+	SetName("large [package_type]")
+	desc = name
+	update_icon()
 
 /obj/structure/bigDelivery/Destroy()
 	QDEL_NULL(wrapped)
@@ -40,19 +52,16 @@
 		victim.dropInto(loc)
 	qdel_self()
 
-
-/obj/structure/bigDelivery/attack_robot(mob/user as mob)
-	unwrap(user)
-
 /obj/structure/bigDelivery/attack_hand(mob/user as mob)
-	unwrap(user)
+	to_chat(user, "You need a sharp tool to unwrap \the [src].")
 
+/obj/structure/bigDelivery/attack_robot(mob/user)
+	to_chat(user, "You need a sharp tool to unwrap \the [src].")
 
 /obj/structure/bigDelivery/proc/unwrap(mob/user)
 	if(Adjacent(user))
 		// Destroy will drop our wrapped object on the turf, so let it.
 		qdel(src)
-
 
 /obj/structure/bigDelivery/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Destination Tagger - Tag
@@ -88,8 +97,8 @@
 				SPAN_NOTICE("You set \the [src]'s label title to '[new_title]' with \the [tool].")
 			)
 			SetName("[initial(name)] ([new_title])")
-			update_icon()
 			nameset = TRUE
+			update_icon()
 		else if (input == "Description")
 			var/new_desc = input(user, "What would you like to set the label to?", "[name] - Label Title") as null|text
 			new_desc = sanitizeSafe(new_desc, MAX_NAME_LEN)
@@ -100,8 +109,16 @@
 				SPAN_NOTICE("You set \the [src]'s label description to '[new_desc]' with \the [tool].")
 			)
 			examtext = new_desc
-			update_icon()
 			nameset = TRUE
+			update_icon()
+		return TRUE
+
+	if (is_sharp(tool))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] cuts open \the [src] with \a [tool]."),
+			SPAN_NOTICE("You cut open \the [src] with \the [tool].")
+		)
+		unwrap(user)
 		return TRUE
 
 	return ..()
@@ -109,14 +126,19 @@
 
 /obj/structure/bigDelivery/on_update_icon()
 	ClearOverlays()
+	if (istype(wrapped, /obj/structure/closet/crate))
+		icon_state = "[package_type]crate"
+	else
+		icon_state = "[package_type]closet"
+
 	if(nameset || examtext)
 		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_label")
-		if(icon_state == "deliverycloset")
+		if (icon_state == "[package_type]closet")
 			I.pixel_x = 2
 			if(label_y == null)
 				label_y = rand(-6, 11)
 			I.pixel_y = label_y
-		else if(icon_state == "deliverycrate")
+		else if (icon_state == "[package_type]crate")
 			if(label_x == null)
 				label_x = rand(-8, 6)
 			I.pixel_x = label_x
@@ -124,12 +146,12 @@
 		AddOverlays(I)
 	if(src.sortTag)
 		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_tag")
-		if(icon_state == "deliverycloset")
+		if (icon_state == "[package_type]closet")
 			if(tag_x == null)
 				tag_x = rand(-2, 3)
 			I.pixel_x = tag_x
 			I.pixel_y = 9
-		else if(icon_state == "deliverycrate")
+		else if (icon_state == "[package_type]crate")
 			if(tag_x == null)
 				tag_x = rand(-8, 6)
 			I.pixel_x = tag_x
@@ -157,17 +179,35 @@
 	return ..()
 
 /obj/item/smallDelivery
-	desc = "A small wrapped package."
 	name = "small parcel"
+	desc = "A small parcel."
 	icon = 'icons/obj/parcels.dmi'
-	icon_state = "deliverycrate3"
+	icon_state = "parcel3"
 	health_max = 5
 	var/obj/item/wrapped = null
 	var/sortTag = null
 	var/examtext = null
 	var/nameset = 0
 	var/tag_x
+	var/package_type = "parcel"
 
+/obj/item/smallDelivery/Initialize(mapload, obj/item/parcel, wrap_type)
+	. = ..()
+	if (!parcel || !isitem(parcel) || !wrap_type)
+		return INITIALIZE_HINT_QDEL
+
+	wrapped = parcel
+	wrapped.forceMove(src)
+	package_type = wrap_type
+	w_class = parcel.w_class
+	switch (w_class)
+		if (ITEM_SIZE_TINY) SetName("tiny [package_type]")
+		if (ITEM_SIZE_SMALL) SetName("small [package_type]")
+		if (ITEM_SIZE_NORMAL) SetName("normal-sized [package_type]")
+		if (ITEM_SIZE_LARGE) SetName("large [package_type]")
+		if (ITEM_SIZE_HUGE) SetName("huge [package_type]")
+	desc = "A [name]."
+	update_icon()
 
 /obj/item/smallDelivery/Destroy()
 	QDEL_NULL(wrapped)
@@ -197,97 +237,115 @@
 /obj/item/smallDelivery/proc/unwrap(mob/user)
 	if (!Adjacent(user))
 		return
-	if (!length(contents))
+	if (!length(contents) || !wrapped)
 		to_chat(user, SPAN_NOTICE("\The [src] was empty!"))
 		qdel_self()
 		return
 
-	user.drop_from_inventory(src)
-	user.put_in_hands(wrapped)
-	wrapped = null
-	// Take out any other items that might be in the package
-	for(var/obj/item/I in src)
-		user.put_in_hands(I)
+	if (user.isEquipped(src))
+		user.drop_from_inventory(src)
+		user.put_in_hands(wrapped)
+		for (var/obj/item/present in src)
+			user.put_in_hands(present)
+	else
+		wrapped.dropInto(loc)
+		for (var/obj/item/present in src)
+			present.dropInto(loc)
 
+	wrapped = null
 	qdel(src)
 
 /obj/item/smallDelivery/attack_robot(mob/user as mob)
-	unwrap(user)
+	to_chat(user, "You need a sharp tool to unwrap \the [src].")
 
 /obj/item/smallDelivery/attack_self(mob/user as mob)
-	unwrap(user)
+	to_chat(user, "You need a sharp tool to unwrap \the [src].")
 
-/obj/item/smallDelivery/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/device/destTagger))
-		var/obj/item/device/destTagger/O = W
-		if(O.currTag)
-			if(src.sortTag != O.currTag)
-				to_chat(user, SPAN_NOTICE("You have labeled the destination as [O.currTag]."))
-				if(!src.sortTag)
-					src.sortTag = O.currTag
+/obj/item/smallDelivery/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	if (is_sharp(tool))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] cuts open \the [src] with \a [tool]."),
+			SPAN_NOTICE("You cut open \the [src] with \the [tool].")
+		)
+		unwrap(user)
+		return TRUE
+
+	if (istype(tool, /obj/item/device/destTagger))
+		var/obj/item/device/destTagger/tagger = tool
+		if (tagger.currTag)
+			if (sortTag != tagger.currTag)
+				to_chat(user, SPAN_NOTICE("You have labeled the destination as [tagger.currTag]."))
+				if (!sortTag)
+					sortTag = tagger.currTag
 					update_icon()
 				else
-					src.sortTag = O.currTag
-				playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
+					sortTag = tagger.currTag
+				playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)
+				return TRUE
 			else
-				to_chat(user, SPAN_WARNING("The package is already labeled for [O.currTag]."))
+				to_chat(user, SPAN_WARNING("The package is already labeled for [tagger.currTag]."))
+				return TRUE
 		else
 			to_chat(user, SPAN_WARNING("You need to set a destination first!"))
+			return TRUE
 
-	else if(istype(W, /obj/item/pen))
-		switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))
-			if("Title")
-				var/str = sanitizeSafe(input(usr,"Label text?","Set label",""), MAX_NAME_LEN)
-				if(!str || !length(str))
+	if (istype(tool, /obj/item/pen))
+		switch (alert("What would you like to alter?",,"Title","Description", "Cancel"))
+			if ("Title")
+				var/str = sanitizeSafe(input(user,"Label text?","Set label",""), MAX_NAME_LEN)
+				if (!str || !length(str))
 					to_chat(usr, SPAN_WARNING(" Invalid text."))
-					return
-				user.visible_message("\The [user] titles \the [src] with \a [W], marking down: \"[str]\"",\
+					return TRUE
+				user.visible_message("\The [user] titles \the [src] with \a [tool], marking down: \"[str]\"",\
 				SPAN_NOTICE("You title \the [src]: \"[str]\""),\
 				"You hear someone scribbling a note.")
 				SetName("[name] ([str])")
-				if(!examtext && !nameset)
+				if (!examtext && !nameset)
 					nameset = 1
 					update_icon()
 				else
 					nameset = 1
+				return TRUE
 
-			if("Description")
-				var/str = sanitize(input(usr,"Label text?","Set label",""))
+			if ("Description")
+				var/str = sanitize(input(user,"Label text?","Set label",""))
 				if(!str || !length(str))
-					to_chat(usr, SPAN_WARNING("Invalid text."))
-					return
-				if(!examtext && !nameset)
+					to_chat(user, SPAN_WARNING("Invalid text."))
+					return TRUE
+				if (!examtext && !nameset)
 					examtext = str
 					update_icon()
 				else
 					examtext = str
-				user.visible_message("\The [user] labels \the [src] with \a [W], scribbling down: \"[examtext]\"",\
+				user.visible_message("\The [user] labels \the [src] with \a [tool], scribbling down: \"[examtext]\"",\
 				SPAN_NOTICE("You label \the [src]: \"[examtext]\""),\
 				"You hear someone scribbling a note.")
-	return
+				return TRUE
 
 /obj/item/smallDelivery/on_update_icon()
 	ClearOverlays()
-	if((nameset || examtext) && icon_state != "deliverycrate1")
+	icon_state = "[package_type][w_class]"
+
+	if ((nameset || examtext) && w_class > ITEM_SIZE_TINY)
 		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_label")
-		if(icon_state == "deliverycrate5")
+		if(w_class == ITEM_SIZE_HUGE)
 			I.pixel_y = -1
 		AddOverlays(I)
-	if(src.sortTag)
+	if (sortTag)
 		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_tag")
-		switch(icon_state)
-			if("deliverycrate1")
+		switch(w_class)
+			if(ITEM_SIZE_TINY)
 				I.pixel_y = -5
-			if("deliverycrate2")
+			if(ITEM_SIZE_SMALL)
 				I.pixel_y = -2
-			if("deliverycrate3")
+			if(ITEM_SIZE_NORMAL)
 				I.pixel_y = 0
-			if("deliverycrate4")
+			if(ITEM_SIZE_LARGE)
 				if(tag_x == null)
 					tag_x = rand(0,5)
 				I.pixel_x = tag_x
 				I.pixel_y = 3
-			if("deliverycrate5")
+			if(ITEM_SIZE_HUGE)
 				I.pixel_y = -3
 		AddOverlays(I)
 
@@ -298,108 +356,6 @@
 			to_chat(user, SPAN_NOTICE("It is labeled \"[sortTag]\""))
 		if(examtext)
 			to_chat(user, SPAN_NOTICE("It has a note attached which reads, \"[examtext]\""))
-
-/obj/item/stack/package_wrap
-	name = "package wrapper"
-	desc = "Heavy duty brown paper used to wrap packages to protect them during shipping."
-	singular_name = "sheet"
-	max_amount = 25
-	icon = 'icons/obj/parcels.dmi'
-	icon_state = "deliveryPaper"
-	w_class = ITEM_SIZE_NORMAL
-
-/obj/item/stack/package_wrap/twenty_five
-	amount = 25
-
-
-/obj/item/c_tube
-	name = "cardboard tube"
-	desc = "A tube... of cardboard."
-	icon = 'icons/obj/parcels.dmi'
-	icon_state = "c_tube"
-	throwforce = 1
-	w_class = ITEM_SIZE_SMALL
-	throw_speed = 4
-	throw_range = 5
-
-/obj/item/stack/package_wrap/afterattack(obj/target as obj, mob/user as mob, proximity)
-	if(!proximity) return
-	if(!istype(target))	//this really shouldn't be necessary (but it is).	-Pete
-		return
-	if(istype(target, /obj/item/smallDelivery) || istype(target,/obj/structure/bigDelivery) \
-	|| istype(target, /obj/item/gift) || istype(target, /obj/item/evidencebag))
-		return
-	if(target.anchored)
-		return
-	if(target in user)
-		return
-	if(user in target) //no wrapping closets that you are inside - it's not physically possible
-		return
-
-	if (istype(target, /obj/item) && !(istype(target, /obj/item/storage) && !istype(target,/obj/item/storage/box)))
-		var/obj/item/O = target
-		if (src.get_amount() >= 1)
-			var/obj/item/smallDelivery/P = new /obj/item/smallDelivery(get_turf(O.loc))	//Aaannd wrap it up!
-			if(!istype(O.loc, /turf))
-				if(user.client)
-					user.client.screen -= O
-			P.wrapped = O
-			O.forceMove(P)
-			P.w_class = O.w_class
-			var/i = round(O.w_class)
-			if(i in list(1,2,3,4,5))
-				P.icon_state = "deliverycrate[i]"
-				switch(i)
-					if(1) P.SetName("tiny parcel")
-					if(3) P.SetName("normal-sized parcel")
-					if(4) P.SetName("large parcel")
-					if(5) P.SetName("huge parcel")
-			if(i < 1)
-				P.icon_state = "deliverycrate1"
-				P.SetName("tiny parcel")
-			if(i > 5)
-				P.icon_state = "deliverycrate5"
-				P.SetName("huge parcel")
-			P.add_fingerprint(usr)
-			O.add_fingerprint(usr)
-			src.add_fingerprint(usr)
-			src.use(1)
-			user.visible_message("\The [user] wraps \a [target] with \a [src].",\
-			SPAN_NOTICE("You wrap \the [target], leaving [src.get_amount()] units of paper on \the [src]."),\
-			"You hear someone taping paper around a small object.")
-		else
-			// Should be possible only to see this as a borg?
-			to_chat(user, SPAN_WARNING("The synthesizer is out of paper."))
-	else if (istype(target, /obj/structure/closet/crate))
-		var/obj/structure/closet/crate/O = target
-		if (src.get_amount() >= 3 && !O.opened)
-			var/obj/structure/bigDelivery/P = new /obj/structure/bigDelivery(get_turf(O.loc))
-			P.icon_state = "deliverycrate"
-			P.wrapped = O
-			O.forceMove(P)
-			src.use(3)
-			user.visible_message("\The [user] wraps \a [target] with \a [src].",\
-			SPAN_NOTICE("You wrap \the [target], leaving [src.get_amount()] units of paper on \the [src]."),\
-			"You hear someone taping paper around a large object.")
-		else if(src.get_amount() < 3)
-			to_chat(user, SPAN_WARNING("You need more paper."))
-	else if (istype (target, /obj/structure/closet))
-		var/obj/structure/closet/O = target
-		if (src.get_amount() >= 3 && !O.opened)
-			var/obj/structure/bigDelivery/P = new /obj/structure/bigDelivery(get_turf(O.loc))
-			P.wrapped = O
-			O.welded = 1
-			O.forceMove(P)
-			src.use(3)
-			user.visible_message("\The [user] wraps \a [target] with \a [src].",\
-			SPAN_NOTICE("You wrap \the [target], leaving [src.get_amount()] units of paper on \the [src]."),\
-			"You hear someone taping paper around a large object.")
-		else if(src.get_amount() < 3)
-			to_chat(user, SPAN_WARNING("You need more paper."))
-	else
-		to_chat(user, SPAN_NOTICE("The object you are trying to wrap is unsuitable for the sorting machinery!"))
-
-	return
 
 /obj/item/device/destTagger
 	name = "destination tagger"
@@ -567,13 +523,3 @@
 	if(trunk)
 		trunk.linked = null
 	..()
-
-/obj/item/stack/package_wrap/cyborg
-	name = "package wrapper synthesizer"
-	icon = 'icons/obj/parcels.dmi'
-	icon_state = "deliveryPaper"
-	gender = NEUTER
-	matter = null
-	uses_charge = 1
-	charge_costs = list(1)
-	stacktype = /obj/item/stack/package_wrap

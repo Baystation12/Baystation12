@@ -15628,7 +15628,7 @@
 "PL" = (
 /obj/structure/table/steel,
 /obj/item/device/destTagger,
-/obj/item/stack/package_wrap/twenty_five,
+/obj/item/stack/package_wrap/cargo_wrap,
 /obj/item/device/radio/intercom{
 	dir = 8;
 	pixel_x = 21

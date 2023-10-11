@@ -5200,7 +5200,7 @@
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
-/obj/item/stack/package_wrap/twenty_five,
+/obj/item/stack/package_wrap/cargo_wrap,
 /obj/item/hand_labeler,
 /obj/item/device/destTagger,
 /turf/simulated/floor/tiled,
@@ -16006,9 +16006,9 @@
 	pixel_x = 4;
 	pixel_y = 3
 	},
-/obj/item/stack/package_wrap/twenty_five,
+/obj/item/stack/package_wrap/cargo_wrap,
 /obj/item/hand_labeler,
-/obj/item/wrapping_paper,
+/obj/item/stack/package_wrap/gift_wrap,
 /obj/machinery/light/spot{
 	dir = 1
 	},

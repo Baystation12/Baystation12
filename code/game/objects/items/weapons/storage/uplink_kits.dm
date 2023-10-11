@@ -87,7 +87,7 @@
 // Clerical uplink kit
 /obj/item/storage/backpack/satchel/syndie_kit/clerical
 	startswith = list(
-		/obj/item/stack/package_wrap/twenty_five,
+		/obj/item/stack/package_wrap/cargo_wrap,
 		/obj/item/hand_labeler,
 		/obj/item/stamp/chameleon,
 		/obj/item/pen/chameleon,
