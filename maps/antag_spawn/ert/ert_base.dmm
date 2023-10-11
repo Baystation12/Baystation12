@@ -1092,8 +1092,8 @@
 /area/map_template/rescue_base/base)
 "cp" = (
 /obj/structure/table/rack,
-/obj/item/rig_module/mounted/taser,
-/obj/item/rig_module/mounted/taser,
+/obj/item/rig_module/mounted/energy/taser,
+/obj/item/rig_module/mounted/energy/taser,
 /obj/item/rig_module/maneuvering_jets,
 /obj/item/rig_module/maneuvering_jets,
 /obj/item/rig_module/chem_dispenser/injector,
@@ -1138,12 +1138,12 @@
 /area/map_template/rescue_base/base)
 "cs" = (
 /obj/structure/table/rack,
-/obj/item/rig_module/mounted/taser,
-/obj/item/rig_module/mounted/taser,
+/obj/item/rig_module/mounted/energy/taser,
+/obj/item/rig_module/mounted/energy/taser,
 /obj/item/rig_module/maneuvering_jets,
 /obj/item/rig_module/maneuvering_jets,
-/obj/item/rig_module/mounted/egun,
-/obj/item/rig_module/mounted/egun,
+/obj/item/rig_module/mounted/energy/egun,
+/obj/item/rig_module/mounted/energy/egun,
 /obj/item/rig_module/chem_dispenser/combat,
 /obj/item/rig_module/chem_dispenser/combat,
 /obj/item/rig_module/grenade_launcher,
@@ -1151,7 +1151,6 @@
 /obj/item/rig_module/vision/sechud,
 /obj/item/rig_module/device/flash,
 /obj/item/rig_module/device/flash,
-/obj/item/rig_module/mounted,
 /obj/structure/window/reinforced/crescent{
 	dir = 1
 	},
@@ -1559,7 +1558,7 @@
 "cY" = (
 /obj/structure/window/reinforced/crescent,
 /obj/structure/table/rack,
-/obj/item/rig_module/mounted/taser,
+/obj/item/rig_module/mounted/energy/taser,
 /obj/item/rig_module/vision/nvg,
 /obj/item/rig_module/device/flash,
 /obj/structure/window/reinforced/crescent{
@@ -1573,14 +1572,14 @@
 "cZ" = (
 /obj/structure/window/reinforced/crescent,
 /obj/structure/table/rack,
-/obj/item/rig_module/mounted/taser,
-/obj/item/rig_module/mounted/taser,
+/obj/item/rig_module/mounted/energy/taser,
+/obj/item/rig_module/mounted/energy/taser,
 /obj/item/rig_module/maneuvering_jets,
 /obj/item/rig_module/maneuvering_jets,
 /obj/item/rig_module/device/drill,
 /obj/item/rig_module/device/drill,
-/obj/item/rig_module/mounted/plasmacutter,
-/obj/item/rig_module/mounted/plasmacutter,
+/obj/item/rig_module/mounted/energy/plasmacutter,
+/obj/item/rig_module/mounted/energy/plasmacutter,
 /obj/item/rig_module/device/rcd,
 /obj/item/rig_module/device/rcd,
 /obj/item/rig_module/vision/meson,

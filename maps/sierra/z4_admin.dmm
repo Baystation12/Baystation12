@@ -3653,9 +3653,9 @@
 /area/holodeck/source_cafe)
 "avN" = (
 /obj/structure/table/rack,
-/obj/item/rig_module/mounted/taser,
-/obj/item/rig_module/mounted/taser,
-/obj/item/rig_module/mounted/taser,
+/obj/item/rig_module/mounted/energy/taser,
+/obj/item/rig_module/mounted/energy/taser,
+/obj/item/rig_module/mounted/energy/taser,
 /obj/item/rig_module/maneuvering_jets,
 /obj/item/rig_module/maneuvering_jets,
 /obj/item/rig_module/grenade_launcher,
@@ -3669,8 +3669,8 @@
 /obj/item/rig_module/chem_dispenser/injector,
 /obj/item/rig_module/chem_dispenser/combat,
 /obj/item/rig_module/chem_dispenser/combat,
-/obj/item/rig_module/mounted/egun,
-/obj/item/rig_module/mounted/egun,
+/obj/item/rig_module/mounted/energy/egun,
+/obj/item/rig_module/mounted/energy/egun,
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/effect/floor_decal/borderfloorblack,
 /turf/unsimulated/floor{

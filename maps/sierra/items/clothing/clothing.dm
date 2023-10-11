@@ -10,6 +10,5 @@
 
 	initial_modules = list(
 		/obj/item/rig_module/maneuvering_jets,
-//INF		/obj/item/rig_module/ai_container,
-		/obj/item/rig_module/mounted/taser
+		/obj/item/rig_module/mounted/energy/taser
 		)

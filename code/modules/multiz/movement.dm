@@ -234,12 +234,21 @@
 		visible_message("\The [src] falls through \the [landing]!", "You hear a whoosh of displaced air.")
 	else
 		visible_message("\The [src] slams into \the [landing]!", "You hear something slam into the deck.")
-		if(fall_damage())
-			for(var/mob/living/M in landing.contents)
-				if(M == src)
+		var/obj/item/rig/rig = get_rig()
+		if (istype(rig))
+			for (var/obj/item/rig_module/actuators/A in rig.installed_modules)
+				if (A.active)
+					visible_message(
+						SPAN_NOTICE("\The [src]'s suit whirrs loudly as \the [rig] absorbs the fall!"),
+						SPAN_NOTICE("You hear an electric <i>*whirr*</i> right after the slam!")
+					)
+		if (fall_damage())
+			for (var/mob/living/M in landing.contents)
+				if (M == src)
 					continue
 				visible_message("\The [src] hits \the [M.name]!")
 				M.take_overall_damage(fall_damage())
+
 
 /atom/movable/proc/fall_damage()
 	return 0
@@ -255,7 +264,14 @@
 	if(species && species.handle_fall_special(src, landing))
 		return
 
+	var/obj/item/rig/rig = get_rig()
+	if (istype(rig))
+		for (var/obj/item/rig_module/actuators/A in rig.installed_modules)
+			if (A.active && rig.check_power_cost(src, 50 KILOWATTS, A, 0))
+				return
+
 	..()
+
 	var/min_damage = 7
 	var/max_damage = 14
 	apply_damage(rand(min_damage, max_damage), DAMAGE_BRUTE, BP_HEAD, armor_pen = 50)
@@ -287,7 +303,27 @@
 
 	var/turf/T = get_turf(A)
 	var/turf/above = GetAbove(src)
+	var/obj/item/rig/rig = get_rig()
 	if(above && T.Adjacent(bound_overlay) && above.CanZPass(src, UP)) //Certain structures will block passage from below, others not
+
+		if (istype(rig)) ///RIG actuator jumps overcome gravity.
+			for (var/obj/item/rig_module/actuators/R in rig.installed_modules)
+				if (R.active && rig.check_power_cost(src, 50 KILOWATTS, A, 0))
+					visible_message(
+						SPAN_NOTICE("\The [src] prepares to leap upwards onto \the [A]!"),
+						SPAN_NOTICE("You crouch, preparing to leap upwards onto \the [A]!")
+					)
+					if (do_after(src, 2 SECONDS, A, DO_PUBLIC_UNIQUE))
+						if(src.incapacitated() || src.restrained())
+							to_chat(src, SPAN_WARNING("You are in no condition to activate your suit."))
+							return TRUE
+						visible_message(
+							SPAN_NOTICE("\The [src]'s suit whirrs aggressively as they leap up to \the [A]!"),
+							SPAN_NOTICE("You leap to \the [A]!")
+						)
+						src.Move(T)
+						return TRUE
+
 		if(loc.has_gravity() && !can_overcome_gravity())
 			return FALSE
 

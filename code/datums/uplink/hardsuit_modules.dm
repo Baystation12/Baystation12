@@ -26,7 +26,7 @@
 	name = "\improper Mounted Energy Gun"
 	desc = "A module that drains your power reserves in order to fire an arm mounted energy gun."
 	item_cost = 48
-	path = /obj/item/rig_module/mounted/egun
+	path = /obj/item/rig_module/mounted/energy/egun
 
 /datum/uplink_item/item/hardsuit_modules/power_sink
 	name = "\improper Power Sink"
@@ -38,5 +38,5 @@
 	name = "\improper Mounted Laser Cannon"
 	desc = "A module capable of draining your suit's power reserves in order to fire a shoulder mounted laser cannon."
 	item_cost = 64
-	path = /obj/item/rig_module/mounted/lcannon
+	path = /obj/item/rig_module/mounted/energy/lcannon
 	antag_roles = list(MODE_MERCENARY)
