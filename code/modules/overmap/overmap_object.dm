@@ -1,4 +1,4 @@
-/obj/effect/overmap
+/obj/overmap
 	name = "map object"
 	icon = 'icons/obj/overmap.dmi'
 	icon_state = "object"
@@ -20,10 +20,10 @@
 	var/next_id = 0
 
 //Overlay of how this object should look on other skyboxes
-/obj/effect/overmap/proc/get_skybox_representation()
+/obj/overmap/proc/get_skybox_representation()
 	return
 
-/obj/effect/overmap/proc/get_scan_data(mob/user)
+/obj/overmap/proc/get_scan_data(mob/user)
 	var/temp_data = list()
 	for(var/id in scans)
 		var/datum/sector_scan/scan = scans[id]
@@ -34,7 +34,7 @@
 
 	return temp_data
 
-/obj/effect/overmap/Initialize()
+/obj/overmap/Initialize()
 	. = ..()
 	add_scan_data("base_scan", desc)
 
@@ -42,32 +42,32 @@
 		return INITIALIZE_HINT_QDEL
 
 	if(scannable)
-		unknown_id = "[pick(GLOB.phonetic_alphabet)]-[random_id(/obj/effect/overmap, 100, 999)]"
+		unknown_id = "[pick(GLOB.phonetic_alphabet)]-[random_id(/obj/overmap, 100, 999)]"
 
 	if(requires_contact)
 		invisibility = INVISIBILITY_OVERMAP // Effects that require identification have their images cast to the client via sensors.
 
 	update_icon()
 
-/obj/effect/overmap/Crossed(obj/effect/overmap/visitable/other)
+/obj/overmap/Crossed(obj/overmap/visitable/other)
 	if(istype(other))
-		for(var/obj/effect/overmap/visitable/O in loc)
+		for(var/obj/overmap/visitable/O in loc)
 			SSskybox.rebuild_skyboxes(O.map_z)
 
-/obj/effect/overmap/Uncrossed(obj/effect/overmap/visitable/other)
+/obj/overmap/Uncrossed(obj/overmap/visitable/other)
 	if(istype(other))
 		SSskybox.rebuild_skyboxes(other.map_z)
-		for(var/obj/effect/overmap/visitable/O in loc)
+		for(var/obj/overmap/visitable/O in loc)
 			SSskybox.rebuild_skyboxes(O.map_z)
 
-/obj/effect/overmap/on_update_icon()
+/obj/overmap/on_update_icon()
 	filters = filter(type="drop_shadow", color = color + "F0", size = 2, offset = 1,x = 0, y = 0)
 
 
 /**
  * Flags the effect as `known` and runs relevant update procs. Intended for admin event usage.
  */
-/obj/effect/overmap/visitable/proc/make_known(notify = FALSE)
+/obj/overmap/visitable/proc/make_known(notify = FALSE)
 	if (!HAS_FLAGS(sector_flags, OVERMAP_SECTOR_KNOWN))
 		sector_flags = OVERMAP_SECTOR_KNOWN
 		update_known_connections(notify)
@@ -76,10 +76,10 @@
 /**
  * Runs any relevant code needed for updating anything connected to known overmap effects, such as helms.
  */
-/obj/effect/overmap/proc/update_known_connections(notify = FALSE)
+/obj/overmap/proc/update_known_connections(notify = FALSE)
 	return
 
-/obj/effect/overmap/proc/add_scan_data(id, description, low_skill_description, required_skill, required_skill_level)
+/obj/overmap/proc/add_scan_data(id, description, low_skill_description, required_skill, required_skill_level)
 
 	var/datum/sector_scan/new_scan = new()
 	//If id isn't specified, generate unique-ish one
@@ -100,7 +100,7 @@
 
 	return TRUE
 
-/obj/effect/overmap/proc/remove_scan_data(id)
+/obj/overmap/proc/remove_scan_data(id)
 	if(!scans[id])
 		return FALSE
 

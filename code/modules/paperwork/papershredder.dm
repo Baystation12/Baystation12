@@ -128,7 +128,7 @@
 	FireBurn()
 
 /obj/item/shreddedp/proc/FireBurn()
-	new /obj/effect/decal/cleanable/ash(get_turf(src))
+	new /obj/decal/cleanable/ash(get_turf(src))
 	qdel(src)
 
 /obj/item/shreddedp

@@ -154,7 +154,7 @@
 			target.revive_health()
 
 /singleton/vv_set_handler/vessel_mass
-	handled_type = /obj/effect/overmap/visitable/ship
+	handled_type = /obj/overmap/visitable/ship
 	handled_vars = list("vessel_mass")
 	predicates = list(
 		/proc/is_num_predicate,

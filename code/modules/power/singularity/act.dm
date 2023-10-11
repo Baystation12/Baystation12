@@ -43,10 +43,10 @@
 	if(simulated && !anchored)
 		step_towards(src, S)
 
-/obj/effect/beam/singularity_pull()
+/obj/beam/singularity_pull()
 	return
 
-/obj/effect/overlay/singularity_pull()
+/obj/overlay/singularity_pull()
 	return
 
 /obj/item/singularity_pull(S, current_size)

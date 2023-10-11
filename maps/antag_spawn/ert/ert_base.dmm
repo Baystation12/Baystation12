@@ -267,7 +267,7 @@
 "aK" = (
 /obj/structure/mopbucket,
 /obj/item/mop,
-/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/floor_decal/corner/blue/diagonal,
 /obj/structure/hygiene/sink/kitchen{
 	pixel_y = 21
 	},
@@ -277,7 +277,7 @@
 /area/map_template/rescue_base/base)
 "aL" = (
 /obj/structure/reagent_dispensers/watertank,
-/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/floor_decal/corner/blue/diagonal,
 /obj/item/device/radio/intercom/specops{
 	pixel_y = 22
 	},
@@ -288,7 +288,7 @@
 "aM" = (
 /obj/structure/table/reinforced,
 /obj/machinery/chemical_dispenser/bar_soft/full,
-/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/floor_decal/corner/blue/diagonal,
 /obj/item/device/radio/intercom/specops{
 	pixel_y = 22
 	},
@@ -299,7 +299,7 @@
 "aN" = (
 /obj/structure/table/reinforced,
 /obj/machinery/chemical_dispenser/bar_alc/full,
-/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/floor_decal/corner/blue/diagonal,
 /obj/machinery/vending/boozeomat{
 	pixel_y = 32
 	},
@@ -309,13 +309,13 @@
 /area/map_template/rescue_base/base)
 "aO" = (
 /obj/structure/closet/fridge,
-/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/floor_decal/corner/blue/diagonal,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
 /area/map_template/rescue_base/base)
 "aP" = (
-/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/floor_decal/corner/blue/diagonal,
 /obj/structure/closet/fridge/meat,
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -395,13 +395,13 @@
 /turf/simulated/floor/wood/bamboo,
 /area/map_template/rescue_base/base)
 "aZ" = (
-/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/floor_decal/corner/blue/diagonal,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
 /area/map_template/rescue_base/base)
 "ba" = (
-/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/floor_decal/corner/blue/diagonal,
 /obj/machinery/door/airlock/centcom{
 	name = "Storage"
 	},
@@ -470,7 +470,7 @@
 	},
 /area/map_template/rescue_base/base)
 "bg" = (
-/obj/effect/wingrille_spawn/reinforced/crescent,
+/obj/wingrille_spawn/reinforced/crescent,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"
@@ -515,7 +515,7 @@
 /area/map_template/rescue_base/base)
 "bm" = (
 /obj/machinery/vending/dinnerware,
-/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/floor_decal/corner/blue/diagonal,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -589,7 +589,7 @@
 /obj/structure/table/rack,
 /obj/item/device/lightreplacer,
 /obj/item/device/lightreplacer,
-/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/floor_decal/corner/blue/diagonal,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -611,14 +611,14 @@
 /obj/item/grenade/chem_grenade/cleaner,
 /obj/item/grenade/chem_grenade/cleaner,
 /obj/item/grenade/chem_grenade/cleaner,
-/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/floor_decal/corner/blue/diagonal,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
 /area/map_template/rescue_base/base)
 "bw" = (
 /obj/structure/table/reinforced,
-/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/floor_decal/corner/blue/diagonal,
 /obj/machinery/microwave,
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -626,7 +626,7 @@
 /area/map_template/rescue_base/base)
 "bx" = (
 /obj/structure/table/reinforced,
-/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/floor_decal/corner/blue/diagonal,
 /obj/item/reagent_containers/food/condiment/small/saltshaker{
 	pixel_x = -3
 	},
@@ -639,14 +639,14 @@
 /area/map_template/rescue_base/base)
 "by" = (
 /obj/structure/table/reinforced,
-/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/floor_decal/corner/blue/diagonal,
 /obj/random/donkpocket_box,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
 /area/map_template/rescue_base/base)
 "bz" = (
-/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/floor_decal/corner/blue/diagonal,
 /obj/item/storage/box/donkpocket_premium,
 /obj/structure/closet/kitchen,
 /obj/item/reagent_containers/food/condiment/enzyme,
@@ -839,7 +839,7 @@
 	},
 /area/map_template/rescue_base/base)
 "bV" = (
-/obj/effect/landmark{
+/obj/landmark{
 	name = "Response Team"
 	},
 /turf/unsimulated/floor{
@@ -1661,7 +1661,7 @@
 /turf/unsimulated/wall,
 /area/map_template/rescue_base/base)
 "dj" = (
-/obj/effect/wingrille_spawn/reinforced/crescent,
+/obj/wingrille_spawn/reinforced/crescent,
 /turf/space,
 /area/map_template/rescue_base/base)
 "dk" = (
@@ -1950,7 +1950,7 @@
 	},
 /area/map_template/rescue_base/base)
 "dN" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/unsimulated/floor{
 	icon_state = "asteroidfloor"
 	},
@@ -1969,7 +1969,7 @@
 	},
 /area/map_template/rescue_base/base)
 "dQ" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/door/airlock/external{
 	frequency = 1331;
 	id_tag = "rescue_base_hatch"
@@ -2042,14 +2042,14 @@
 	},
 /area/map_template/rescue_base/base)
 "dZ" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/unsimulated/floor{
 	icon_state = "asteroidfloor"
 	},
 /area/map_template/rescue_base/base)
 "ea" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/industrial/warning/corner,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/warning/corner,
 /turf/unsimulated/floor{
 	icon_state = "asteroidfloor"
 	},
@@ -2167,8 +2167,8 @@
 	},
 /area/map_template/rescue_base/base)
 "eo" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /turf/unsimulated/floor{
@@ -2537,8 +2537,8 @@
 	},
 /area/map_template/rescue_base/base)
 "eL" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
 /turf/unsimulated/floor{
@@ -2546,7 +2546,7 @@
 	},
 /area/map_template/rescue_base/base)
 "eM" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 9
 	},
 /turf/unsimulated/floor{
@@ -2554,7 +2554,7 @@
 	},
 /area/map_template/rescue_base/base)
 "eN" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1
 	},
 /turf/unsimulated/floor{
@@ -2562,7 +2562,7 @@
 	},
 /area/map_template/rescue_base/base)
 "eO" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 5
 	},
 /turf/unsimulated/floor{
@@ -2570,7 +2570,7 @@
 	},
 /area/map_template/rescue_base/base)
 "eP" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
 /turf/unsimulated/floor{
@@ -2583,13 +2583,13 @@
 	},
 /area/map_template/rescue_base/base)
 "eR" = (
-/obj/effect/floor_decal/industrial/loading,
+/obj/floor_decal/industrial/loading,
 /turf/unsimulated/floor{
 	icon_state = "asteroidfloor"
 	},
 /area/map_template/rescue_base/base)
 "eS" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /turf/unsimulated/floor{
@@ -2597,14 +2597,14 @@
 	},
 /area/map_template/rescue_base/base)
 "eT" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/machinery/porta_turret/crescent,
 /turf/unsimulated/floor{
 	icon_state = "asteroidfloor"
 	},
 /area/map_template/rescue_base/base)
 "eU" = (
-/obj/effect/paint/hull,
+/obj/paint/hull,
 /turf/simulated/wall/titanium,
 /area/map_template/rescue_base/start)
 "eV" = (
@@ -2615,8 +2615,8 @@
 	name = "Cockpit Blast Shutters";
 	opacity = 0
 	},
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/hull,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/hull,
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "eW" = (
@@ -2627,8 +2627,8 @@
 	name = "Blast Shutters";
 	opacity = 0
 	},
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/hull,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/hull,
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "eX" = (
@@ -2637,7 +2637,7 @@
 	id_tag = "rescue_shuttle_outer";
 	name = "Ship External Access"
 	},
-/obj/effect/shuttle_landmark/ert/start,
+/obj/shuttle_landmark/ert/start,
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "eY" = (
@@ -2834,8 +2834,8 @@
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "fx" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/hull,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/hull,
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "fy" = (
@@ -2846,8 +2846,8 @@
 /area/map_template/rescue_base/start)
 "fz" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/hull,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/hull,
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "fA" = (
@@ -2874,8 +2874,8 @@
 	name = "Cockpit Blast Shutters";
 	opacity = 0
 	},
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/hull,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/hull,
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "fD" = (
@@ -2938,8 +2938,8 @@
 	name = "Blast Shutters";
 	opacity = 0
 	},
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/hull,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/hull,
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "fK" = (
@@ -3360,7 +3360,7 @@
 	},
 /area/map_template/rescue_base/base)
 "gU" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	dir = 4;
@@ -3369,7 +3369,7 @@
 	name = "Blast Shutters";
 	opacity = 0
 	},
-/obj/effect/paint/hull,
+/obj/paint/hull,
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "gV" = (
@@ -3391,7 +3391,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "gX" = (
-/obj/effect/paint/sun,
+/obj/paint/sun,
 /turf/simulated/wall/titanium,
 /area/map_template/rescue_base/start)
 "gY" = (
@@ -3399,7 +3399,7 @@
 /obj/structure/window/reinforced/crescent{
 	dir = 1
 	},
-/obj/effect/paint/sun,
+/obj/paint/sun,
 /turf/simulated/wall/titanium,
 /area/map_template/rescue_base/start)
 "gZ" = (
@@ -3413,7 +3413,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "hb" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	dir = 4;
@@ -3422,7 +3422,7 @@
 	name = "Blast Shutters";
 	opacity = 0
 	},
-/obj/effect/paint/hull,
+/obj/paint/hull,
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "hc" = (
@@ -3450,7 +3450,7 @@
 /area/map_template/rescue_base/start)
 "hf" = (
 /obj/structure/shuttle/engine/propulsion,
-/obj/effect/paint/sun,
+/obj/paint/sun,
 /turf/simulated/wall/titanium,
 /area/map_template/rescue_base/start)
 "hg" = (
@@ -3475,7 +3475,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/rescue_base/start)
 "hj" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 10
 	},
 /turf/unsimulated/floor{
@@ -3483,13 +3483,13 @@
 	},
 /area/map_template/rescue_base/base)
 "hk" = (
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /turf/unsimulated/floor{
 	icon_state = "asteroidfloor"
 	},
 /area/map_template/rescue_base/base)
 "hl" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 6
 	},
 /turf/unsimulated/floor{

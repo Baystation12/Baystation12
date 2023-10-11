@@ -1,4 +1,4 @@
-/obj/effect/landmark/map_data/deepmaint/lvl1
+/obj/landmark/map_data/deepmaint/lvl1
 	name = "Deep Dark Marvelous"
 	height = 1
 

@@ -6,7 +6,7 @@
 	var/moving_status = SHUTTLE_IDLE
 
 	var/list/shuttle_area //can be both single area type or a list of areas
-	var/obj/effect/shuttle_landmark/current_location //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.
+	var/obj/shuttle_landmark/current_location //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.
 
 	var/arrive_time = 0	//the time at which the shuttle arrives when long jumping
 	var/flags = 0
@@ -29,7 +29,7 @@
 	var/mothershuttle //tag of mothershuttle
 	var/motherdock    //tag of mothershuttle landmark, defaults to starting location
 
-/datum/shuttle/New(_name, obj/effect/shuttle_landmark/initial_location)
+/datum/shuttle/New(_name, obj/shuttle_landmark/initial_location)
 	..()
 	if(_name)
 		src.name = _name
@@ -74,7 +74,7 @@
 
 	. = ..()
 
-/datum/shuttle/proc/short_jump(obj/effect/shuttle_landmark/destination)
+/datum/shuttle/proc/short_jump(obj/shuttle_landmark/destination)
 	if(moving_status != SHUTTLE_IDLE) return
 
 	moving_status = SHUTTLE_WARMUP
@@ -94,10 +94,10 @@
 		attempt_move(destination)
 		moving_status = SHUTTLE_IDLE
 
-/datum/shuttle/proc/long_jump(obj/effect/shuttle_landmark/destination, obj/effect/shuttle_landmark/interim, travel_time)
+/datum/shuttle/proc/long_jump(obj/shuttle_landmark/destination, obj/shuttle_landmark/interim, travel_time)
 	if(moving_status != SHUTTLE_IDLE) return
 
-	var/obj/effect/shuttle_landmark/start_location = current_location
+	var/obj/shuttle_landmark/start_location = current_location
 
 	moving_status = SHUTTLE_WARMUP
 	if(sound_takeoff)
@@ -148,7 +148,7 @@
 * Shuttle Pre Move Handling * (Observer Pattern Implementation: Shuttle Pre Move)
 *****************/
 
-/datum/shuttle/proc/attempt_move(obj/effect/shuttle_landmark/destination)
+/datum/shuttle/proc/attempt_move(obj/shuttle_landmark/destination)
 	if(current_location == destination)
 		return FALSE
 
@@ -181,7 +181,7 @@
 //just moves the shuttle from A to B, if it can be moved
 //A note to anyone overriding move in a subtype. shuttle_moved() must absolutely not, under any circumstances, fail to move the shuttle.
 //If you want to conditionally cancel shuttle launches, that logic must go in short_jump(), long_jump() or attempt_move()
-/datum/shuttle/proc/shuttle_moved(obj/effect/shuttle_landmark/destination, list/turf_translation)
+/datum/shuttle/proc/shuttle_moved(obj/shuttle_landmark/destination, list/turf_translation)
 
 //	log_debug("move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination].")
 //	log_degug("area_coming_from: [origin]")

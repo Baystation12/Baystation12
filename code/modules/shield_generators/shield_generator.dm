@@ -84,7 +84,7 @@
 
 // Shuts down the shield, removing all shield segments and unlocking generator settings.
 /obj/machinery/power/shield_generator/proc/shutdown_field()
-	for(var/obj/effect/shield/S in field_segments)
+	for(var/obj/shield/S in field_segments)
 		qdel(S)
 
 	running = SHIELD_OFF
@@ -98,7 +98,7 @@
 // Generates the field objects. Deletes existing field, if applicable.
 /obj/machinery/power/shield_generator/proc/regenerate_field()
 	if(length(field_segments))
-		for(var/obj/effect/shield/S in field_segments)
+		for(var/obj/shield/S in field_segments)
 			qdel(S)
 
 	// The generator is not turned on, so don't generate any new tiles.
@@ -114,16 +114,16 @@
 
 	// Rotate shield's animation relative to located ship
 	if(GLOB.using_map.use_overmap)
-		var/obj/effect/overmap/visitable/ship/sector = map_sectors["[src.z]"]
+		var/obj/overmap/visitable/ship/sector = map_sectors["[src.z]"]
 		if(sector && istype(sector))
 			if(!sector.check_ownership(src))
-				for(var/obj/effect/overmap/visitable/ship/candidate in sector)
+				for(var/obj/overmap/visitable/ship/candidate in sector)
 					if(candidate.check_ownership(src))
 						sector = candidate
 			vessel_reverse_dir = GLOB.reverse_dir[sector.fore_dir]
 
 	for(var/turf/T in shielded_turfs)
-		var/obj/effect/shield/S = new(T, src)
+		var/obj/shield/S = new(T, src)
 		S.flags_updated()
 		field_segments |= S
 		S.set_dir(vessel_reverse_dir)
@@ -195,7 +195,7 @@
 		energy_failure()
 
 	if(!overloaded)
-		for(var/obj/effect/shield/S in damaged_segments)
+		for(var/obj/shield/S in damaged_segments)
 			S.regenerate()
 	else if (field_integrity() > 25)
 		overloaded = 0
@@ -222,7 +222,7 @@
 	else
 		current_energy = 0
 		overloaded = 1
-		for(var/obj/effect/shield/S in field_segments)
+		for(var/obj/shield/S in field_segments)
 			S.fail(1)
 
 /obj/machinery/power/shield_generator/proc/set_idle(new_state)
@@ -230,7 +230,7 @@
 		if(running == SHIELD_IDLE)
 			return
 		running = SHIELD_IDLE
-		for(var/obj/effect/shield/S in field_segments)
+		for(var/obj/shield/S in field_segments)
 			qdel(S)
 	else
 		if(running != SHIELD_IDLE)
@@ -417,7 +417,7 @@
 /obj/machinery/power/shield_generator/proc/toggle_flag(flag)
 	shield_modes ^= flag
 	update_upkeep_multiplier()
-	for(var/obj/effect/shield/S in field_segments)
+	for(var/obj/shield/S in field_segments)
 		S.flags_updated()
 
 	if((flag & (MODEFLAG_HULL|MODEFLAG_MULTIZ)) && (running == SHIELD_RUNNING))

@@ -5,7 +5,7 @@
 /datum/exoplanet_theme/mountains/get_sensor_data()
 	return "Extensive cave systems and mountain regions detected."
 
-/datum/exoplanet_theme/mountains/before_map_generation(obj/effect/overmap/visitable/sector/exoplanet/E)
+/datum/exoplanet_theme/mountains/before_map_generation(obj/overmap/visitable/sector/exoplanet/E)
 	rock_color = pick(E.rock_colors)
 	for(var/zlevel in E.map_z)
 		new /datum/random_map/automata/cave_system/mountains(null,TRANSITIONEDGE,TRANSITIONEDGE,zlevel,E.maxx-TRANSITIONEDGE,E.maxy-TRANSITIONEDGE,0,1,1, E.planetary_area, rock_color)

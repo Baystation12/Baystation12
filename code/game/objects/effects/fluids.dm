@@ -1,4 +1,4 @@
-/obj/effect/fluid
+/obj/fluid
 	name = ""
 	icon = 'icons/effects/liquids.dmi'
 	anchored = TRUE
@@ -16,13 +16,13 @@
 	var/equalize_avg_temp = 0
 	var/flow_amount = 0
 
-/obj/effect/fluid/ex_act()
+/obj/fluid/ex_act()
 	return
 
-/obj/effect/fluid/airlock_crush()
+/obj/fluid/airlock_crush()
 	qdel(src)
 
-/obj/effect/fluid/Initialize()
+/obj/fluid/Initialize()
 	. = ..()
 	start_loc = get_turf(src)
 	if(!istype(start_loc) || start_loc.flooded)
@@ -34,7 +34,7 @@
 	forceMove(start_loc)
 	update_icon()
 
-/obj/effect/fluid/Destroy()
+/obj/fluid/Destroy()
 	if(start_loc)
 		var/turf/simulated/T = start_loc
 		if(istype(T))
@@ -45,7 +45,7 @@
 	REMOVE_ACTIVE_FLUID(src)
 	. = ..()
 
-/obj/effect/fluid/on_update_icon()
+/obj/fluid/on_update_icon()
 
 	ClearOverlays()
 
@@ -69,7 +69,7 @@
 		APPLY_FLUID_OVERLAY("ocean")
 
 // Map helper.
-/obj/effect/fluid_mapped
+/obj/fluid_mapped
 	name = "mapped flooded area"
 	alpha = 125
 	icon_state = "shallow_still"
@@ -77,17 +77,17 @@
 
 	var/fluid_amount = FLUID_MAX_DEPTH
 
-/obj/effect/fluid_mapped/Initialize()
+/obj/fluid_mapped/Initialize()
 	..()
 	var/turf/T = get_turf(src)
 	if(istype(T))
-		var/obj/effect/fluid/F = locate() in T
+		var/obj/fluid/F = locate() in T
 		if(!F) F = new(T)
 		SET_FLUID_DEPTH(F, fluid_amount)
 	return INITIALIZE_HINT_QDEL
 
 // Permaflood overlay.
-/obj/effect/flood
+/obj/flood
 	name = ""
 	mouse_opacity = 0
 	layer = DEEP_FLUID_LAYER
@@ -100,9 +100,9 @@
 	opacity = 0
 	anchored = TRUE
 
-/obj/effect/flood/ex_act()
+/obj/flood/ex_act()
 	return
 
-/obj/effect/flood/New()
+/obj/flood/New()
 	..()
 	verbs.Cut()

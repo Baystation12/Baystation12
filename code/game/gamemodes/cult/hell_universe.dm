@@ -41,14 +41,14 @@ In short:
 		wall.decultify_wall()
 	for (var/turf/simulated/floor/cult/floor)
 		floor.decultify_floor()
-	for (var/obj/effect/gateway/active/cult/G)
+	for (var/obj/gateway/active/cult/G)
 		qdel(G)
 	return
 
 /datum/universal_state/hell/proc/MiscSet()
 	for(var/turf/simulated/floor/T)
 		if(!T.holy && prob(1))
-			new /obj/effect/gateway/active/cult(T)
+			new /obj/gateway/active/cult(T)
 
 /datum/universal_state/hell/proc/KillMobs()
 	for(var/mob/living/simple_animal/M in SSmobs.mob_list)

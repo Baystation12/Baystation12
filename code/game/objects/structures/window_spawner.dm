@@ -3,7 +3,7 @@
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=WHAT-EVER=-=-=-=-=-=-=-=-=-=-=-=-=-*/
 /* '~'-._.-'~'-._.-'~'-._.-'~'-._.-'~'-._.-'~'-._.-'~'-._.-'~' */
 
-/obj/effect/wingrille_spawn
+/obj/wingrille_spawn
 	name = "window grille spawner"
 	icon = 'icons/obj/structures/structures.dmi'
 	icon_state = "wingrille"
@@ -14,19 +14,19 @@
 	var/fulltile = FALSE
 
 // stops ZAS expanding zones past us, the windows will block the zone anyway
-/obj/effect/wingrille_spawn/CanPass()
+/obj/wingrille_spawn/CanPass()
 	return 0
 
-/obj/effect/wingrille_spawn/attack_hand()
+/obj/wingrille_spawn/attack_hand()
 	attack_generic()
 
-/obj/effect/wingrille_spawn/attack_ghost()
+/obj/wingrille_spawn/attack_ghost()
 	attack_generic()
 
-/obj/effect/wingrille_spawn/attack_generic()
+/obj/wingrille_spawn/attack_generic()
 	activate()
 
-/obj/effect/wingrille_spawn/Initialize(mapload)
+/obj/wingrille_spawn/Initialize(mapload)
 	. = ..()
 	if(!win_path)
 		return
@@ -41,7 +41,7 @@
 		activate()
 		return INITIALIZE_HINT_QDEL
 
-/obj/effect/wingrille_spawn/proc/activate()
+/obj/wingrille_spawn/proc/activate()
 	if(activated) return
 
 	if(locate(/obj/structure/window) in loc)
@@ -54,7 +54,7 @@
 	else
 		for (var/dir in GLOB.cardinal)
 			var/turf/T = get_step(src, dir)
-			var/obj/effect/wingrille_spawn/other = locate(type) in T
+			var/obj/wingrille_spawn/other = locate(type) in T
 			if(!other)
 				var/found_connection
 				if(locate(/obj/structure/grille) in T)
@@ -76,57 +76,57 @@
 		handle_grille_spawn(G)
 
 	activated = 1
-	for(var/obj/effect/wingrille_spawn/other in neighbours)
+	for(var/obj/wingrille_spawn/other in neighbours)
 		if(!other.activated) other.activate()
 
-/obj/effect/wingrille_spawn/proc/handle_window_spawn(obj/structure/window/W)
+/obj/wingrille_spawn/proc/handle_window_spawn(obj/structure/window/W)
 	return
 
 // Currently unused, could be useful for pre-wired electrified windows.
-/obj/effect/wingrille_spawn/proc/handle_grille_spawn(obj/structure/grille/G)
+/obj/wingrille_spawn/proc/handle_grille_spawn(obj/structure/grille/G)
 	return
 
-/obj/effect/wingrille_spawn/reinforced
+/obj/wingrille_spawn/reinforced
 	name = "reinforced window grille spawner"
 	icon_state = "r-wingrille"
 	win_path = /obj/structure/window/reinforced
 
-/obj/effect/wingrille_spawn/reinforced/full
+/obj/wingrille_spawn/reinforced/full
 	name = "reinforced window grille spawner - full tile"
 	icon_state = "rf-wingrille"
 	fulltile = TRUE
 	win_path = /obj/structure/window/reinforced/full
 
-/obj/effect/wingrille_spawn/reinforced/crescent
+/obj/wingrille_spawn/reinforced/crescent
 	name = "Crescent window grille spawner"
 	win_path = /obj/structure/window/reinforced/crescent
 
-/obj/effect/wingrille_spawn/phoron
+/obj/wingrille_spawn/phoron
 	name = "phoron window grille spawner"
 	icon_state = "p-wingrille"
 	win_path = /obj/structure/window/boron_basic
 
-/obj/effect/wingrille_spawn/reinforced_phoron
+/obj/wingrille_spawn/reinforced_phoron
 	name = "reinforced phoron window grille spawner"
 	icon_state = "pr-wingrille"
 	win_path = /obj/structure/window/boron_reinforced
 
-/obj/effect/wingrille_spawn/reinforced_phoron/full
+/obj/wingrille_spawn/reinforced_phoron/full
 	name = "reinforced phoron window grille spawner - full tile"
 	fulltile = TRUE
 	win_path = /obj/structure/window/boron_reinforced/full
 
-/obj/effect/wingrille_spawn/reinforced/polarized
+/obj/wingrille_spawn/reinforced/polarized
 	name = "polarized window grille spawner"
 	color = "#444444"
 	win_path = /obj/structure/window/reinforced/polarized
 	var/id
 
-/obj/effect/wingrille_spawn/reinforced/polarized/full
+/obj/wingrille_spawn/reinforced/polarized/full
 	name = "polarized window grille spawner - full tile"
 	fulltile = TRUE
 	win_path = /obj/structure/window/reinforced/polarized/full
 
-/obj/effect/wingrille_spawn/reinforced/polarized/handle_window_spawn(obj/structure/window/reinforced/polarized/P)
+/obj/wingrille_spawn/reinforced/polarized/handle_window_spawn(obj/structure/window/reinforced/polarized/P)
 	if(id)
 		P.id = id

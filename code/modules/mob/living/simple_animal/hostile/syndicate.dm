@@ -16,7 +16,7 @@
 	natural_weapon = /obj/item/natural_weapon/punch
 	can_escape = TRUE
 	a_intent = I_HURT
-	var/corpse = /obj/effect/landmark/corpse/syndicate
+	var/corpse = /obj/landmark/corpse/syndicate
 	var/weapon1
 	var/weapon2
 	unsuitable_atmos_damage = 15
@@ -99,7 +99,7 @@
 	icon_state = "syndicatemeleespace"
 	icon_living = "syndicatemeleespace"
 	name = "Syndicate Commando"
-	corpse = /obj/effect/landmark/corpse/syndicate
+	corpse = /obj/landmark/corpse/syndicate
 	speed = 0
 
 /mob/living/simple_animal/hostile/human/syndicate/melee/space/Process_Spacemove()
@@ -123,7 +123,7 @@
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
-	corpse = /obj/effect/landmark/corpse/syndicate/commando
+	corpse = /obj/landmark/corpse/syndicate/commando
 	speed = 0
 
 /mob/living/simple_animal/hostile/human/syndicate/ranged/space/Process_Spacemove()

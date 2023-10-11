@@ -197,7 +197,7 @@
 	if (TICK_CHECK)
 		return TRUE
 	if (radius <= 20)
-		new /obj/effect/temporary (turf, 0.2 SECONDS, 'icons/effects/effects.dmi', "cyan_sparkles")
+		new /obj/temporary (turf, 0.2 SECONDS, 'icons/effects/effects.dmi', "cyan_sparkles")
 	var/obj/machinery/light/light = locate() in turf
 	if (light && prob(20))
 		light.broken()

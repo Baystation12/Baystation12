@@ -1,5 +1,5 @@
 /* The old single tank bombs that dont really work anymore
-/obj/effect/spawner/bomb
+/obj/spawner/bomb
 	name = "bomb"
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
@@ -8,22 +8,22 @@
 	var/btemp = 500	// bomb temperature (degC)
 	var/active = 0
 
-/obj/effect/spawner/bomb/radio
+/obj/spawner/bomb/radio
 	btype = 0
 
-/obj/effect/spawner/bomb/proximity
+/obj/spawner/bomb/proximity
 	btype = 1
 
-/obj/effect/spawner/bomb/timer
+/obj/spawner/bomb/timer
 	btype = 2
 
-/obj/effect/spawner/bomb/timer/syndicate
+/obj/spawner/bomb/timer/syndicate
 	btemp = 450
 
-/obj/effect/spawner/bomb/suicide
+/obj/spawner/bomb/suicide
 	btype = 3
 
-/obj/effect/spawner/bomb/New()
+/obj/spawner/bomb/New()
 	..()
 
 	switch (src.btype)
@@ -112,7 +112,7 @@
 
 	if(!check_rights(R_SPAWN)) return
 
-	var/obj/effect/spawner/newbomb/proto = /obj/effect/spawner/newbomb/radio/custom
+	var/obj/spawner/newbomb/proto = /obj/spawner/newbomb/radio/custom
 
 	var/p = input("Enter phoron amount (mol):","Phoron", initial(proto.phoron_amt)) as num|null
 	if(p == null) return
@@ -123,9 +123,9 @@
 	var/c = input("Enter carbon dioxide amount (mol):","Carbon Dioxide", initial(proto.carbon_amt)) as num|null
 	if(c == null) return
 
-	new /obj/effect/spawner/newbomb/radio/custom(get_turf(mob), p, o, c)
+	new /obj/spawner/newbomb/radio/custom(get_turf(mob), p, o, c)
 
-/obj/effect/spawner/newbomb
+/obj/spawner/newbomb
 	name = "TTV bomb"
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
@@ -137,33 +137,33 @@
 	var/oxygen_amt = 18
 	var/carbon_amt = 0
 
-/obj/effect/spawner/newbomb/traitor
+/obj/spawner/newbomb/traitor
 	name = "TTV bomb - traitor"
 	assembly_type = /obj/item/device/assembly/signaler
 	phoron_amt = 14
 	oxygen_amt = 21
 
-/obj/effect/spawner/newbomb/timer
+/obj/spawner/newbomb/timer
 	name = "TTV bomb - timer"
 	assembly_type = /obj/item/device/assembly/timer
 
-/obj/effect/spawner/newbomb/timer/syndicate
+/obj/spawner/newbomb/timer/syndicate
 	name = "TTV bomb - merc"
 	//High yield bombs. Yes, it is possible to make these with toxins
 	phoron_amt = 16.5
 	oxygen_amt = 23.5
 
-/obj/effect/spawner/newbomb/proximity
+/obj/spawner/newbomb/proximity
 	name = "TTV bomb - proximity"
 	assembly_type = /obj/item/device/assembly/prox_sensor
 
-/obj/effect/spawner/newbomb/radio/custom/New(newloc, ph, ox, co)
+/obj/spawner/newbomb/radio/custom/New(newloc, ph, ox, co)
 	if(ph != null) phoron_amt = ph
 	if(ox != null) oxygen_amt = ox
 	if(co != null) carbon_amt = co
 	..()
 
-/obj/effect/spawner/newbomb/Initialize()
+/obj/spawner/newbomb/Initialize()
 	..()
 	var/obj/item/device/transfer_valve/V = new(src.loc)
 	var/obj/item/tank/phoron/PT = new(V)
@@ -204,7 +204,7 @@
 //One Tank Bombs, WOOOOOOO! -Luke
 ///////////////////////
 
-/obj/effect/spawner/onetankbomb
+/obj/spawner/onetankbomb
 	name = "Single-tank bomb"
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
@@ -215,7 +215,7 @@
 	var/phoron_amt = 0
 	var/oxygen_amt = 0
 
-/obj/effect/spawner/onetankbomb/New(newloc) //just needs an assembly.
+/obj/spawner/onetankbomb/New(newloc) //just needs an assembly.
 	..(newloc)
 
 	var/type = pick(/obj/item/tank/phoron/onetankbomb, /obj/item/tank/oxygen/onetankbomb)

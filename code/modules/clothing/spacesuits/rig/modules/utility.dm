@@ -515,7 +515,7 @@
 	var/atom/movable/locked
 	var/datum/beam = null
 	var/max_dist = 4
-	var/obj/effect/effect/warp/small/warpeffect = null
+	var/obj/effect/warp/small/warpeffect = null
 
 /obj/item/rig_module/kinetic_module/proc/beamdestroyed()
 	if(beam)
@@ -548,7 +548,7 @@
 				to_chat(user, SPAN_NOTICE("Unable to lock on [target]."))
 				return
 			locked = AM
-			beam = holder.wearer.Beam(BeamTarget = target, icon_state = "r_beam", maxdistance = max_dist, beam_type = /obj/effect/ebeam/warp)
+			beam = holder.wearer.Beam(BeamTarget = target, icon_state = "r_beam", maxdistance = max_dist, beam_type = /obj/ebeam/warp)
 			GLOB.destroyed_event.register(beam, src, .proc/beamdestroyed)
 
 			animate(target,pixel_y= initial(target.pixel_y) - 2,time=1 SECOND, easing = SINE_EASING, flags = ANIMATION_PARALLEL, loop = -1)

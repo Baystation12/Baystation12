@@ -26,7 +26,7 @@
 
 /mob/living/bot/remotebot/explode()
 	on = 0
-	new /obj/effect/decal/cleanable/blood/oil(get_turf(src.loc))
+	new /obj/decal/cleanable/blood/oil(get_turf(src.loc))
 	visible_message(SPAN_DANGER("[src] blows apart!"))
 	if(controller)
 		controller.bot = null

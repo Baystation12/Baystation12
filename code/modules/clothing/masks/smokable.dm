@@ -505,7 +505,7 @@
 
 /obj/item/clothing/mask/smokable/pipe/extinguish(mob/user, no_message)
 	..()
-	new /obj/effect/decal/cleanable/ash(get_turf(src))
+	new /obj/decal/cleanable/ash(get_turf(src))
 	if(ismob(loc))
 		var/mob/living/M = loc
 		if (!no_message)
@@ -522,7 +522,7 @@
 	else if (smoketime)
 		var/turf/location = get_turf(user)
 		user.visible_message(SPAN_NOTICE("[user] empties out [src]."), SPAN_NOTICE("You empty out [src]."))
-		new /obj/effect/decal/cleanable/ash(location)
+		new /obj/decal/cleanable/ash(location)
 		smoketime = 0
 		reagents.clear_reagents()
 		SetName("empty [initial(name)]")

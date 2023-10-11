@@ -6,87 +6,87 @@
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "ad" = (
-/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "ak" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 6;
 	icon_state = "warning"
 	},
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/bed,
 /obj/structure/iv_stand,
 /obj/item/bedsheet/medical,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/oldpod)
 "am" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "as" = (
-/obj/effect/decal/cleanable/filth,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/filth,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "at" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/decal/cleanable/blood,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "au" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "av" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "az" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/blood/drip,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "aA" = (
 /obj/random/firstaid,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "aB" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/decal/cleanable/filth,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/blood/drip,
+/obj/decal/cleanable/filth,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "aC" = (
 /obj/item/clothing/head/helmet/space/emergency,
 /obj/item/clothing/suit/space/emergency,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "aH" = (
@@ -95,7 +95,7 @@
 	icon_state = "0-4"
 	},
 /obj/item/frame/apc,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/item/cell/crap/empty,
 /obj/item/module/power_control,
 /turf/simulated/floor/tiled/monotile,
@@ -106,31 +106,31 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/effect/decal/cleanable/filth,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/filth,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "aK" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/blood/drip,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "aL" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood/drip,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "aM" = (
-/obj/effect/landmark/corpse/scientist,
+/obj/landmark/corpse/scientist,
 /obj/item/melee/baton/cattleprod,
 /obj/item/material/shard,
-/obj/effect/decal/cleanable/blood,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/blood,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "aO" = (
@@ -140,12 +140,12 @@
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "aP" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/structure/cable/cyan,
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 5;
 	icon_state = "warning"
 	},
@@ -153,11 +153,11 @@
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "aQ" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "aR" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 9;
 	icon_state = "warning"
 	},
@@ -171,20 +171,20 @@
 	name = "plastic table frame"
 	},
 /obj/item/storage/firstaid/surgery,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/oldpod)
 "aS" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/oldpod)
 "aT" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 5;
 	icon_state = "warning"
 	},
@@ -192,7 +192,7 @@
 	dir = 1
 	},
 /obj/structure/closet/crate/freezer/rations,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/item/gun/projectile/pirate,
 /obj/item/gun/projectile/pirate,
 /obj/item/gun/projectile/pirate,
@@ -200,13 +200,13 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/oldpod)
 "aU" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 9
 	},
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "aV" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 5
 	},
 /obj/machinery/light/small{
@@ -223,7 +223,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /obj/structure/closet/crate,
@@ -231,47 +231,47 @@
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "aX" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
 /obj/structure/window/reinforced{
 	dir = 8
 	},
 /obj/machinery/optable,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/oldpod)
 "aY" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/oldpod)
 "aZ" = (
 /obj/machinery/sleeper{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/oldpod)
 "ba" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 10
 	},
 /obj/item/clothing/suit/space/emergency,
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "bb" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 6
 	},
 /turf/simulated/floor/plating,
@@ -279,18 +279,18 @@
 "bc" = (
 /obj/machinery/power/port_gen/pacman,
 /obj/structure/cable/cyan,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "bd" = (
-/obj/effect/landmark/corpse/bridgeofficer,
-/obj/effect/decal/cleanable/blood,
+/obj/landmark/corpse/bridgeofficer,
+/obj/decal/cleanable/blood,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "be" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 10;
 	icon_state = "warning"
 	},
@@ -302,55 +302,55 @@
 	},
 /obj/random/firstaid,
 /obj/random/firstaid,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/oldpod)
 "bf" = (
-/obj/effect/floor_decal/industrial/warning,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/floor_decal/industrial/warning,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/oldpod)
 "bh" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/filth,
+/obj/decal/cleanable/blood/drip,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/filth,
 /obj/structure/broken_cryo,
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/oldpod)
 "ch" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/landmark/corpse/engineer,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/landmark/corpse/engineer,
 /obj/item/gun/energy/retro,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "dj" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/floor_decal/industrial/warning{
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/industrial/warning{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldpod)
 "go" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/portable_atmospherics/canister/empty,
 /obj/machinery/atmospherics/portables_connector,
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "iV" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "kA" = (
-/obj/effect/decal/cleanable/filth,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/decal/cleanable/filth,
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/structure/table/rack,
 /obj/item/clothing/suit/space/emergency,
 /obj/item/clothing/head/helmet/space/emergency,
@@ -367,19 +367,19 @@
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/item/pickaxe,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "od" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/item/disk/secret_project,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "qV" = (
 /obj/item/frame/air_alarm,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/item/airalarm_electronics,
 /obj/structure/bed/chair/shuttle/black{
 	dir = 4
@@ -387,41 +387,41 @@
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "sN" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/table,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "ut" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/broken_cryo,
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/oldpod)
 "vL" = (
-/obj/effect/landmark/corpse/doctor,
-/obj/effect/decal/cleanable/blood,
-/obj/effect/decal/cleanable/dirt,
+/obj/landmark/corpse/doctor,
+/obj/decal/cleanable/blood,
+/obj/decal/cleanable/dirt,
 /obj/structure/bed/chair/shuttle/black{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "wl" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/structure/table/rack,
 /obj/item/material/twohanded/jack,
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "wJ" = (
 /obj/machinery/door/firedoor,
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "xv" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/bed/chair/shuttle/black{
 	dir = 4
 	},
@@ -448,10 +448,10 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/effect/decal/cleanable/filth,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/floor_decal/industrial/warning{
+/obj/decal/cleanable/filth,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/industrial/warning{
 	dir = 1
 	},
 /obj/structure/closet/hydrant{
@@ -460,55 +460,55 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldpod)
 "Jj" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/floor_decal/industrial/warning{
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldpod)
 "Kh" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "MA" = (
-/obj/effect/paint/red,
+/obj/paint/red,
 /turf/simulated/wall/r_titanium,
 /area/map_template/oldpod)
 "Oy" = (
-/obj/effect/decal/cleanable/blood,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/blood,
+/obj/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "Ps" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldpod)
 "Pt" = (
 /obj/machinery/door/firedoor,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/decal/cleanable/dirt,
+/obj/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "Tx" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/decal/cleanable/blood,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood,
+/obj/decal/cleanable/dirt,
 /obj/structure/bed/chair/shuttle/black{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "Uw" = (
-/obj/effect/decal/cleanable/filth,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/decal/cleanable/filth,
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/machinery/atmospherics/portables_connector,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "Yb" = (

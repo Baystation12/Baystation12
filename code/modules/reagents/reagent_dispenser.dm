@@ -57,12 +57,12 @@
 			return
 		if(EX_ACT_HEAVY)
 			if (prob(50))
-				new /obj/effect/effect/water(src.loc)
+				new /obj/effect/water(src.loc)
 				qdel(src)
 				return
 		if(EX_ACT_LIGHT)
 			if (prob(5))
-				new /obj/effect/effect/water(src.loc)
+				new /obj/effect/water(src.loc)
 				qdel(src)
 				return
 		else
@@ -304,7 +304,7 @@
 
 	amount = min(amount, reagents.total_volume)
 	reagents.remove_reagent(/datum/reagent/fuel,amount)
-	new /obj/effect/decal/cleanable/liquid_fuel(src.loc, amount,1)
+	new /obj/decal/cleanable/liquid_fuel(src.loc, amount,1)
 
 /obj/structure/reagent_dispensers/peppertank
 	name = "pepper spray refiller"

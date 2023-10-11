@@ -5,7 +5,7 @@
 /turf/simulated/floor/carpet,
 /area/map_template/deepmaint)
 "cF" = (
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /obj/item/ammo_casing/pistol/used,
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/deepmaint)
@@ -13,14 +13,14 @@
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "dW" = (
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/deepmaint)
 "fo" = (
 /obj/item/ammo_casing/pistol/used,
 /obj/item/ammo_casing/pistol/used,
 /obj/item/ammo_casing/pistol/used,
-/obj/effect/floor_decal/industrial/warning/corner,
+/obj/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/deepmaint)
 "fL" = (
@@ -39,7 +39,7 @@
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/deepmaint)
 "hv" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /obj/machinery/vending/sovietsoda{
@@ -59,7 +59,7 @@
 /turf/simulated/floor/carpet,
 /area/map_template/deepmaint)
 "ik" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /obj/machinery/vending/weeb{
@@ -96,7 +96,7 @@
 /turf/simulated/floor/carpet,
 /area/map_template/deepmaint)
 "lF" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /obj/machinery/vending/snix{
@@ -126,7 +126,7 @@
 "ru" = (
 /obj/item/ammo_casing/pistol/used,
 /obj/item/ammo_casing/pistol/used,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 10
 	},
 /turf/simulated/floor/shuttle/darkred,
@@ -136,7 +136,7 @@
 /turf/simulated/floor/wood/mahogany,
 /area/map_template/deepmaint)
 "ur" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
 /obj/machinery/vending/cigarette{
@@ -148,7 +148,7 @@
 /turf/simulated/wall,
 /area/map_template/deepmaint)
 "vp" = (
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/wood/mahogany,
 /area/map_template/deepmaint)
 "wH" = (
@@ -156,7 +156,7 @@
 /turf/simulated/floor/wood/mahogany,
 /area/map_template/deepmaint)
 "xL" = (
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/darkred,
@@ -172,7 +172,7 @@
 /turf/simulated/floor/carpet,
 /area/map_template/deepmaint)
 "zL" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
 /obj/machinery/vending/hotfood{
@@ -192,16 +192,16 @@
 /area/map_template/deepmaint)
 "Ex" = (
 /obj/item/stool/bar/padded,
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor/carpet,
 /area/map_template/deepmaint)
 "Fz" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /obj/item/bananapeel,
 /turf/simulated/floor/wood/mahogany,
 /area/map_template/deepmaint)
 "Gs" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
 /obj/machinery/vending/snack{
@@ -218,8 +218,8 @@
 /turf/simulated/floor/carpet,
 /area/map_template/deepmaint)
 "Hr" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/floor_decal/industrial/warning{
+/obj/decal/cleanable/blood/splatter,
+/obj/floor_decal/industrial/warning{
 	dir = 9;
 	icon_state = "warning"
 	},
@@ -229,13 +229,13 @@
 "HF" = (
 /obj/item/ammo_casing/pistol/used,
 /obj/item/ammo_casing/pistol/used,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 5
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/deepmaint)
 "HN" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /obj/item/stool/bar/padded,
 /obj/item/ammo_casing/pistol/used,
 /turf/simulated/floor/carpet,
@@ -247,9 +247,9 @@
 /turf/simulated/floor/wood/mahogany,
 /area/map_template/deepmaint)
 "Jk" = (
-/obj/effect/decal/cleanable/generic,
+/obj/decal/cleanable/generic,
 /obj/item/trash/cigbutt/jerichos,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
 /obj/machinery/light/spot{
@@ -258,14 +258,14 @@
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/deepmaint)
 "JE" = (
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/deepmaint)
 "JP" = (
-/obj/effect/decal/cleanable/liquid_fuel,
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/decal/cleanable/liquid_fuel,
+/obj/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/darkred,
@@ -279,8 +279,8 @@
 /turf/simulated/floor/wood/mahogany,
 /area/map_template/deepmaint)
 "LJ" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/floor_decal/industrial/warning,
+/obj/decal/cleanable/blood/splatter,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/deepmaint)
 "MB" = (
@@ -289,7 +289,7 @@
 /turf/simulated/floor/wood/mahogany,
 /area/map_template/deepmaint)
 "MO" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 6
 	},
 /obj/structure/closet/crate/trashcart,
@@ -297,12 +297,12 @@
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/deepmaint)
 "Ng" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/wood/mahogany,
 /area/map_template/deepmaint)
 "Nw" = (
-/obj/effect/decal/cleanable/liquid_fuel,
-/obj/effect/floor_decal/industrial/warning{
+/obj/decal/cleanable/liquid_fuel,
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /obj/machinery/light/spot{
@@ -311,7 +311,7 @@
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/deepmaint)
 "Oh" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /obj/item/ammo_casing/pistol/used,
 /obj/item/ammo_casing/pistol/used,
 /obj/item/ammo_casing/pistol/used,
@@ -334,7 +334,7 @@
 /turf/simulated/floor/carpet,
 /area/map_template/deepmaint)
 "Pt" = (
-/obj/effect/floor_decal/industrial/warning/corner,
+/obj/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/deepmaint)
 "PY" = (
@@ -342,7 +342,7 @@
 /turf/simulated/floor/carpet,
 /area/map_template/deepmaint)
 "Qx" = (
-/obj/effect/decal/cleanable/generic,
+/obj/decal/cleanable/generic,
 /turf/simulated/floor/wood/mahogany,
 /area/map_template/deepmaint)
 "Rn" = (
@@ -351,18 +351,18 @@
 /area/map_template/deepmaint)
 "St" = (
 /obj/item/trash/cigbutt/jerichos,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/deepmaint)
 "Sv" = (
-/obj/effect/landmark/corpse/commander,
+/obj/landmark/corpse/commander,
 /turf/simulated/floor/wood/mahogany,
 /area/map_template/deepmaint)
 "Sz" = (
 /obj/item/stool/bar/padded,
-/obj/effect/decal/cleanable/generic,
+/obj/decal/cleanable/generic,
 /turf/simulated/floor/carpet,
 /area/map_template/deepmaint)
 "Wd" = (
@@ -385,14 +385,14 @@
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/deepmaint)
 "Zh" = (
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /obj/machinery/light/spot{
 	dir = 1
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/deepmaint)
 "ZH" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
 /obj/structure/table/rack,

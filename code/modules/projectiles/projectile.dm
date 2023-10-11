@@ -422,7 +422,7 @@
 		return
 
 	if(ispath(muzzle_type))
-		var/obj/effect/projectile/M = new muzzle_type(get_turf(src))
+		var/obj/projectile/M = new muzzle_type(get_turf(src))
 
 		if(istype(M))
 			M.SetTransform(others = effect_transform)
@@ -435,7 +435,7 @@
 
 /obj/item/projectile/proc/tracer_effect()
 	if(ispath(tracer_type))
-		var/obj/effect/projectile/P = new tracer_type(location.loc)
+		var/obj/projectile/P = new tracer_type(location.loc)
 
 		if(istype(P))
 			P.SetTransform(others = effect_transform)
@@ -446,7 +446,7 @@
 
 /obj/item/projectile/proc/impact_effect()
 	if(ispath(impact_type))
-		var/obj/effect/projectile/P = new impact_type(location ? location.loc : get_turf(src))
+		var/obj/projectile/P = new impact_type(location ? location.loc : get_turf(src))
 
 		if(istype(P) && location)
 			P.SetTransform(others = effect_transform)

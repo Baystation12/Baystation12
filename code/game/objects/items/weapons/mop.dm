@@ -13,8 +13,8 @@
 	var/mopcount = 0
 	var/mopspeed = 40
 	var/list/moppable_types = list(
-		/obj/effect/decal/cleanable,
-		/obj/effect/rune,
+		/obj/decal/cleanable,
+		/obj/rune,
 		/obj/structure/catwalk
 		)
 
@@ -29,7 +29,7 @@
 	var/moppable
 	if(istype(A, /turf))
 		var/turf/T = A
-		var/obj/effect/fluid/F = locate() in T
+		var/obj/fluid/F = locate() in T
 		if(F && F.fluid_amount > 0)
 			if(F.fluid_amount > FLUID_SHALLOW)
 				to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))

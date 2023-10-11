@@ -4,11 +4,11 @@
 /turf/simulated/floor/tiled/steel/techfloor,
 /area/map_template/deepmaint)
 "bN" = (
-/obj/effect/decal/cleanable/blood/gibs,
+/obj/decal/cleanable/blood/gibs,
 /turf/simulated/floor/tiled/steel/techfloor,
 /area/map_template/deepmaint)
 "bW" = (
-/obj/effect/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood/drip,
 /obj/machinery/light{
 	dir = 8
 	},
@@ -16,12 +16,12 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "cc" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/decal/cleanable/blood/gibs/xeno,
+/obj/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood/gibs/xeno,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/deepmaint)
 "ch" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
@@ -30,7 +30,7 @@
 /area/map_template/deepmaint)
 "cX" = (
 /obj/structure/table/reinforced,
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /obj/random/firstaid/low_chance,
 /obj/random/firstaid/low_chance,
 /turf/simulated/floor/tiled/white,
@@ -56,27 +56,27 @@
 /turf/simulated/floor/tiled/dark/gray_perforated,
 /area/map_template/deepmaint)
 "dT" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "ep" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/wood,
 /area/map_template/deepmaint)
 "fa" = (
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "fA" = (
-/obj/effect/floor_decal/industrial/loading/white{
+/obj/floor_decal/industrial/loading/white{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/deepmaint)
 "gu" = (
-/obj/effect/decal/cleanable/blood/writing{
+/obj/decal/cleanable/blood/writing{
 	desc = "It looks like a writing in blood. It says: ''NOT SAFE ANYWHERE!''."
 	},
 /turf/simulated/floor/tiled/white,
@@ -86,19 +86,19 @@
 /area/map_template/deepmaint)
 "in" = (
 /obj/machinery/door/firedoor,
-/obj/effect/decal/cleanable/blood,
-/obj/effect/decal/cleanable/blood/tracks,
+/obj/decal/cleanable/blood,
+/obj/decal/cleanable/blood/tracks,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "jt" = (
 /obj/machinery/optable,
-/obj/effect/decal/cleanable/blood,
-/obj/effect/decal/cleanable/blood/gibs,
+/obj/decal/cleanable/blood,
+/obj/decal/cleanable/blood/gibs,
 /turf/simulated/floor/tiled/steel/techfloor,
 /area/map_template/deepmaint)
 "jB" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/decal/cleanable/blood/gibs/xeno,
+/obj/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood/gibs/xeno,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "jF" = (
@@ -114,15 +114,15 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "lM" = (
-/obj/effect/floor_decal/industrial/botright,
+/obj/floor_decal/industrial/botright,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/deepmaint)
 "lN" = (
-/obj/effect/decal/cleanable/blood/tracks,
+/obj/decal/cleanable/blood/tracks,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "mr" = (
-/obj/effect/decal/cleanable/blood/gibs/body,
+/obj/decal/cleanable/blood/gibs/body,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "my" = (
@@ -131,7 +131,7 @@
 /area/map_template/deepmaint)
 "mX" = (
 /obj/structure/bed/chair/comfy/black,
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/wood,
 /area/map_template/deepmaint)
 "nv" = (
@@ -152,7 +152,7 @@
 /obj/machinery/vending/wallmed/lobby{
 	pixel_x = -25
 	},
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "pB" = (
@@ -163,8 +163,8 @@
 /turf/simulated/floor/tiled/dark/gray_perforated,
 /area/map_template/deepmaint)
 "qe" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/decal/cleanable/blood/gibs/xeno/body,
+/obj/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/gibs/xeno/body,
 /obj/item/frame/light{
 	dir = 4;
 	pixel_x = 15
@@ -174,7 +174,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "qq" = (
-/obj/effect/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood/drip,
 /obj/structure/barricade,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
@@ -198,7 +198,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "uZ" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "vg" = (
@@ -215,7 +215,7 @@
 /turf/simulated/floor/wood,
 /area/map_template/deepmaint)
 "wp" = (
-/obj/effect/decal/cleanable/blood/gibs/xeno/body,
+/obj/decal/cleanable/blood/gibs/xeno/body,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "wq" = (
@@ -224,7 +224,7 @@
 /area/map_template/deepmaint)
 "wU" = (
 /obj/machinery/door/blast/regular/open,
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "xb" = (
@@ -236,7 +236,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "xA" = (
-/obj/effect/decal/cleanable/blood/gibs/xeno,
+/obj/decal/cleanable/blood/gibs/xeno,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "yi" = (
@@ -258,7 +258,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "zr" = (
-/obj/effect/decal/cleanable/blood/gibs,
+/obj/decal/cleanable/blood/gibs,
 /turf/simulated/floor/tiled/steel/brown_perforated,
 /area/map_template/deepmaint)
 "zu" = (
@@ -270,7 +270,7 @@
 /area/map_template/deepmaint)
 "zT" = (
 /obj/item/material/shard,
-/obj/effect/decal/cleanable/blood/gibs/xeno,
+/obj/decal/cleanable/blood/gibs/xeno,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "Aw" = (
@@ -309,11 +309,11 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "CK" = (
-/obj/effect/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood/drip,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "Do" = (
-/obj/effect/decal/cleanable/blood/gibs/xeno/limb,
+/obj/decal/cleanable/blood/gibs/xeno/limb,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "Eb" = (
@@ -330,7 +330,7 @@
 /turf/simulated/floor/tiled/dark/gray_platform,
 /area/map_template/deepmaint)
 "Ev" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /obj/random/medical_lowcost/low_chance,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
@@ -351,7 +351,7 @@
 	},
 /obj/structure/windoor_assembly,
 /obj/item/material/shard,
-/obj/effect/decal/cleanable/blood/gibs/xeno,
+/obj/decal/cleanable/blood/gibs/xeno,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "Gg" = (
@@ -363,7 +363,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "Go" = (
-/obj/effect/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood/drip,
 /obj/random/medical_lowcost/low_chance,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
@@ -378,7 +378,7 @@
 /turf/simulated/floor/tiled/steel/techfloor,
 /area/map_template/deepmaint)
 "GP" = (
-/obj/effect/decal/cleanable/blood/gibs/xeno,
+/obj/decal/cleanable/blood/gibs/xeno,
 /turf/simulated/floor/tiled/steel/techfloor,
 /area/map_template/deepmaint)
 "Id" = (
@@ -410,7 +410,7 @@
 /obj/structure/bed/chair/office/dark,
 /obj/item/material/shard,
 /obj/item/material/shard,
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "Ll" = (
@@ -421,7 +421,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/deepmaint)
 "Mu" = (
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
 /turf/simulated/floor/tiled/steel/brown_perforated,
 /area/map_template/deepmaint)
 "MF" = (
@@ -439,7 +439,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "Nx" = (
-/obj/effect/floor_decal/industrial/botleft,
+/obj/floor_decal/industrial/botleft,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/deepmaint)
 "Or" = (
@@ -447,7 +447,7 @@
 /turf/simulated/floor/wood,
 /area/map_template/deepmaint)
 "OL" = (
-/obj/effect/window_lwall_spawn/smartspawn,
+/obj/window_lwall_spawn/smartspawn,
 /turf/simulated/floor/tiled/dark/gray_perforated,
 /area/map_template/deepmaint)
 "Qo" = (
@@ -460,11 +460,11 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "Sa" = (
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "Sj" = (
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
 /turf/simulated/floor/tiled/steel/techfloor,
 /area/map_template/deepmaint)
 "SR" = (
@@ -481,13 +481,13 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "UA" = (
-/obj/effect/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood/drip,
 /obj/structure/girder,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "UY" = (
 /obj/machinery/optable,
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
 /turf/simulated/floor/tiled/steel/techfloor,
 /area/map_template/deepmaint)
 "Vy" = (
@@ -522,8 +522,8 @@
 /turf/simulated/floor/tiled/dark/gray_platform,
 /area/map_template/deepmaint)
 "YS" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/decal/cleanable/blood/gibs/xeno/body,
+/obj/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood/gibs/xeno/body,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "ZE" = (

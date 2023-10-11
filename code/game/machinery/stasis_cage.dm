@@ -270,11 +270,11 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 			release()
 			broken = TRUE
 			update_icon()
-			new /obj/effect/sparks(get_turf(src))
+			new /obj/sparks(get_turf(src))
 			return
 	visible_message(SPAN_DANGER("\The [src] sparks violently, damaging the lid!"))
 	broken = TRUE
-	new /obj/effect/sparks(get_turf(src))
+	new /obj/sparks(get_turf(src))
 
 	if (cell)
 		cell.emp_act(severity)
@@ -323,7 +323,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	if (!allowed(user))
 		to_chat(user, "\The [src] blinks, refusing access.")
 		return
-	if (!stat && !istype(target.buckled, /obj/effect/energy_net))
+	if (!stat && !istype(target.buckled, /obj/energy_net))
 		to_chat(user, "It's going to be difficult to convince \the [target] to move into \the [src] without capturing it in a net.")
 		return
 	if (HAS_FLAGS(target.status_flags, GODMODE))
@@ -335,7 +335,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	playsound(src, 'sound/items/shuttle_beacon_prepare.ogg', 100)
 	Bumped(user)
 	if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
-		var/obj/effect/energy_net/EN = target.buckled
+		var/obj/energy_net/EN = target.buckled
 		qdel(EN)
 		contain(user, target)
 

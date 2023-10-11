@@ -1486,8 +1486,8 @@
 		log_admin("[key_name(M)] has been hit by Bluespace Artillery fired by [src.owner]")
 		message_admins("[key_name(M)] has been hit by Bluespace Artillery fired by [src.owner]")
 
-		var/obj/effect/stop/S
-		S = new /obj/effect/stop(M.loc)
+		var/obj/stop/S
+		S = new /obj/stop(M.loc)
 		S.victim = M
 		spawn(20)
 			qdel(S)
@@ -1692,7 +1692,7 @@
 				if(!check_rights(R_FUN,0))
 					removed_paths += dirty_path
 					continue
-			else if(ispath(path, /obj/effect/bhole))
+			else if(ispath(path, /obj/bhole))
 				if(!check_rights(R_FUN,0))
 					removed_paths += dirty_path
 					continue

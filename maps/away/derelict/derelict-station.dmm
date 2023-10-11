@@ -419,7 +419,7 @@
 /turf/simulated/floor,
 /area/constructionsite/maintenance)
 "bi" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/constructionsite/maintenance)
 "bj" = (
@@ -489,11 +489,11 @@
 /turf/simulated/floor,
 /area/constructionsite/bridge)
 "bx" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/constructionsite/bridge)
 "by" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/bridge)
@@ -781,7 +781,7 @@
 /area/constructionsite/maintenance)
 "cv" = (
 /obj/structure/bookcase/manuals/engineering,
-/obj/effect/decal/cleanable/cobweb,
+/obj/decal/cleanable/cobweb,
 /turf/simulated/floor,
 /area/constructionsite/hallway/fore)
 "cw" = (
@@ -886,7 +886,7 @@
 /turf/simulated/floor,
 /area/constructionsite/bridge)
 "cS" = (
-/obj/effect/decal/cleanable/cobweb,
+/obj/decal/cleanable/cobweb,
 /turf/simulated/floor,
 /area/constructionsite/hallway/fore)
 "cT" = (
@@ -996,7 +996,7 @@
 /turf/simulated/floor,
 /area/constructionsite/hallway/fore)
 "dj" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/constructionsite/hallway/fore)
 "dk" = (
@@ -1083,7 +1083,7 @@
 /turf/simulated/floor,
 /area/constructionsite/hallway/fore)
 "dC" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor{
 	icon_state = "dmg2"
 	},
@@ -1188,7 +1188,7 @@
 /turf/simulated/floor,
 /area/constructionsite/hallway/fore)
 "dX" = (
-/obj/effect/shuttle_landmark/derelict/nav2,
+/obj/shuttle_landmark/derelict/nav2,
 /turf/space,
 /area/space)
 "dY" = (
@@ -1250,7 +1250,7 @@
 /obj/structure/window/basic{
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "ek" = (
@@ -1261,7 +1261,7 @@
 /obj/structure/window/basic{
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "el" = (
@@ -1272,7 +1272,7 @@
 /obj/structure/window/basic{
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "em" = (
@@ -1283,7 +1283,7 @@
 /obj/structure/window/basic{
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "en" = (
@@ -1361,7 +1361,7 @@
 /obj/structure/window/basic{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "ex" = (
@@ -1369,7 +1369,7 @@
 /obj/structure/window/basic{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "ey" = (
@@ -1377,7 +1377,7 @@
 /obj/structure/window/basic{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "ez" = (
@@ -1385,7 +1385,7 @@
 /obj/structure/window/basic{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "eA" = (
@@ -1416,7 +1416,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "eD" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/constructionsite/storage)
 "eE" = (
@@ -1463,7 +1463,7 @@
 	icon_state = "0-2"
 	},
 /obj/machinery/power/port_gen/pacman,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "eL" = (
@@ -1491,7 +1491,7 @@
 /turf/simulated/floor,
 /area/constructionsite/storage)
 "eQ" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
@@ -1507,18 +1507,18 @@
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
 "eS" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/hallway/fore)
 "eU" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
 "eV" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
@@ -1528,7 +1528,7 @@
 /obj/structure/cable/blue,
 /obj/machinery/power/port_gen/pacman,
 /obj/machinery/power/terminal,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "eX" = (
@@ -1550,7 +1550,7 @@
 /area/constructionsite/hallway/fore)
 "fa" = (
 /obj/machinery/light/small,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 10;
 	icon_state = "warning"
 	},
@@ -1564,7 +1564,7 @@
 	id_tag = "constructionsite_sensor";
 	pixel_y = -25
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 6;
 	icon_state = "warning"
 	},
@@ -1587,7 +1587,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
@@ -1620,11 +1620,11 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fi" = (
-/obj/effect/shuttle_landmark/derelict/nav1,
+/obj/shuttle_landmark/derelict/nav1,
 /turf/space,
 /area/space)
 "fj" = (
@@ -1648,7 +1648,7 @@
 	},
 /area/constructionsite/storage)
 "fm" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/storage)
 "fn" = (
@@ -1659,7 +1659,7 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 4;
 	icon_state = "warningcorner"
 	},
@@ -1710,7 +1710,7 @@
 	icon_state = "1-8"
 	},
 /obj/machinery/fabricator,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "ft" = (
@@ -1776,23 +1776,23 @@
 /area/constructionsite/teleporter)
 "fE" = (
 /obj/structure/reagent_dispensers/watertank,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fF" = (
 /obj/structure/reagent_dispensers/fueltank,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fG" = (
 /obj/machinery/light,
 /obj/structure/closet/crate/solar,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/random/loot,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fH" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 9;
 	icon_state = "warning"
 	},
@@ -1801,7 +1801,7 @@
 /area/constructionsite/teleporter)
 "fI" = (
 /obj/machinery/tele_projector,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
 	},
@@ -1809,7 +1809,7 @@
 /area/constructionsite/teleporter)
 "fJ" = (
 /obj/machinery/tele_pad,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
 	},
@@ -1852,7 +1852,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/hallway/fore)
 "fT" = (
-/obj/effect/overmap/visitable/sector/derelict,
+/obj/overmap/visitable/sector/derelict,
 /turf/simulated/floor,
 /area/constructionsite/solar)
 "fU" = (
@@ -1887,7 +1887,7 @@
 /turf/simulated/floor,
 /area/constructionsite/maintenance)
 "gb" = (
-/obj/effect/shuttle_landmark/derelict/nav3,
+/obj/shuttle_landmark/derelict/nav3,
 /turf/space,
 /area/space)
 "gc" = (
@@ -1953,7 +1953,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/ai)
 "gq" = (
-/obj/effect/decal/cleanable/blood/oil,
+/obj/decal/cleanable/blood/oil,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/ai)
 "gr" = (
@@ -2042,7 +2042,7 @@
 /turf/simulated/floor/bluegrid,
 /area/constructionsite/ai)
 "gG" = (
-/obj/effect/decal/cleanable/blood/oil,
+/obj/decal/cleanable/blood/oil,
 /turf/simulated/floor/bluegrid,
 /area/constructionsite/ai)
 "gH" = (
@@ -2094,7 +2094,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/hallway/aft)
 "gS" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/constructionsite/hallway/aft)
 "gT" = (
@@ -2135,7 +2135,7 @@
 /turf/simulated/floor,
 /area/constructionsite/hallway/aft)
 "hb" = (
-/obj/effect/floor_decal/plaque{
+/obj/floor_decal/plaque{
 	desc = "To commemorate the beginning of the Eternity Project, a station that will ferry us through the stars forever without fail.";
 	name = "Eternity Project Dedication Plaque"
 	},
@@ -2167,7 +2167,7 @@
 /turf/simulated/floor,
 /area/constructionsite/hallway/aft)
 "hg" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor{
 	icon_state = "dmg2"
 	},
@@ -2180,7 +2180,7 @@
 	},
 /area/constructionsite/hallway/aft)
 "hi" = (
-/obj/effect/shuttle_landmark/derelict/nav4,
+/obj/shuttle_landmark/derelict/nav4,
 /turf/space,
 /area/space)
 "hj" = (
@@ -2198,7 +2198,7 @@
 /obj/structure/table/standard,
 /obj/random/firstaid,
 /obj/random/firstaid,
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -2244,13 +2244,13 @@
 /area/constructionsite/medical)
 "hx" = (
 /obj/random/junk,
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
 /area/constructionsite/medical)
 "hy" = (
-/obj/effect/floor_decal/corner/green,
+/obj/floor_decal/corner/green,
 /turf/simulated/floor/tiled/white,
 /area/constructionsite/medical)
 "hz" = (
@@ -2271,7 +2271,7 @@
 /turf/simulated/floor,
 /area/constructionsite/medical)
 "hC" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/constructionsite/medical)
 "hD" = (
@@ -2308,7 +2308,7 @@
 /turf/simulated/wall,
 /area/constructionsite/medical)
 "hK" = (
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -2466,7 +2466,7 @@
 /turf/space,
 /area/constructionsite/medical)
 "it" = (
-/obj/effect/shuttle_landmark/derelict/nav5,
+/obj/shuttle_landmark/derelict/nav5,
 /turf/space,
 /area/space)
 "iu" = (
@@ -2595,7 +2595,7 @@
 /turf/simulated/floor,
 /area/constructionsite/hallway/aft)
 "iK" = (
-/obj/effect/floor_decal/industrial/warning/dust{
+/obj/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -2605,14 +2605,14 @@
 /turf/simulated/floor,
 /area/constructionsite/medical)
 "iM" = (
-/obj/effect/floor_decal/plaque{
+/obj/floor_decal/plaque{
 	desc = "In memory of Earl Whitenmeinster. We'll never forget you.";
 	name = "Whitenmeister Memorial Hall Plaque"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/hallway/aft)
 "iN" = (
-/obj/effect/floor_decal/industrial/warning/dust{
+/obj/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
 /turf/simulated/floor,
@@ -2664,7 +2664,7 @@
 /turf/simulated/floor,
 /area/constructionsite/medical)
 "iT" = (
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
@@ -2884,7 +2884,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite)
 "jG" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/constructionsite)
 "jH" = (
@@ -3109,7 +3109,7 @@
 /turf/simulated/floor,
 /area/constructionsite/engineering)
 "kC" = (
-/obj/effect/shuttle_landmark/derelict/nav6,
+/obj/shuttle_landmark/derelict/nav6,
 /turf/space,
 /area/space)
 "kD" = (
@@ -3229,7 +3229,7 @@
 /turf/simulated/floor,
 /area/constructionsite/engineering)
 "lc" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/constructionsite/engineering)
 "ld" = (
@@ -3537,7 +3537,7 @@
 /turf/simulated/floor,
 /area/constructionsite/engineering)
 "md" = (
-/obj/effect/shuttle_landmark/derelict/nav7,
+/obj/shuttle_landmark/derelict/nav7,
 /turf/space,
 /area/space)
 "nb" = (
@@ -3568,7 +3568,7 @@
 /obj/machinery/camera/motion{
 	c_tag = "Construction Site Teleporter Airlock"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 5;
 	icon_state = "warning"
 	},
@@ -3603,7 +3603,7 @@
 	tag_exterior_door = "constructionsite_outer";
 	tag_interior_door = "constructionsite_inner"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 9;
 	icon_state = "warning"
 	},

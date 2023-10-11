@@ -16,23 +16,23 @@
 			seed.display_name = "strange plants" //more thematic for the vine infestation event
 
 			//make vine zero start off fully matured
-			new /obj/effect/vine(T,seed, start_matured = 1)
+			new /obj/vine(T,seed, start_matured = 1)
 
 			log_and_message_admins("Spacevines spawned in \the [get_area(T)]", location = T)
 			return
 		log_and_message_admins(SPAN_NOTICE("Event: Spacevines failed to find a viable turf."))
 
-/obj/effect/dead_plant
+/obj/dead_plant
 	anchored = TRUE
 	opacity = 0
 	density = FALSE
 	color = DEAD_PLANT_COLOUR
 
-/obj/effect/dead_plant/attack_hand()
+/obj/dead_plant/attack_hand()
 	qdel(src)
 
 
-/obj/effect/dead_plant/use_tool(obj/item/weapon, mob/user, list/click_params)
+/obj/dead_plant/use_tool(obj/item/weapon, mob/user, list/click_params)
 	SHOULD_CALL_PARENT(FALSE)
 	user.visible_message(
 		SPAN_WARNING("\The [user] hits \the [src] with \a [weapon], and it falls to pieces!"),
@@ -42,7 +42,7 @@
 	return TRUE
 
 
-/obj/effect/vine
+/obj/vine
 	name = "vine"
 	anchored = TRUE
 	icon = 'icons/obj/flora/hydroponics_growing.dmi'
@@ -53,7 +53,7 @@
 	var/growth_threshold = 0
 	var/growth_type = 0
 	var/max_growth = 0
-	var/obj/effect/vine/parent
+	var/obj/vine/parent
 	var/datum/seed/seed
 	var/floor = 0
 	var/possible_children = 20
@@ -63,10 +63,10 @@
 	var/mature_time		//minimum maturation time
 	var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant
 
-/obj/effect/vine/single
+/obj/vine/single
 	spread_chance = 0
 
-/obj/effect/vine/New(newloc, datum/seed/newseed, obj/effect/vine/newparent, start_matured = 0)
+/obj/vine/New(newloc, datum/seed/newseed, obj/vine/newparent, start_matured = 0)
 	if(!newparent)
 		parent = src
 	else
@@ -77,7 +77,7 @@
 		mature_time = 0
 	..()
 
-/obj/effect/vine/Initialize(mapload, datum/seed/newseed, obj/effect/vine/newparent, start_matured = 0)
+/obj/vine/Initialize(mapload, datum/seed/newseed, obj/vine/newparent, start_matured = 0)
 	. = ..()
 
 	if(!SSplants)
@@ -112,12 +112,12 @@
 
 	START_PROCESSING(SSvines, src)
 
-/obj/effect/vine/Destroy()
+/obj/vine/Destroy()
 	wake_neighbors()
 	STOP_PROCESSING(SSvines, src)
 	return ..()
 
-/obj/effect/vine/on_update_icon()
+/obj/vine/on_update_icon()
 	ClearOverlays()
 	var/growth = growth_threshold ? min(max_growth, round(get_current_health() / growth_threshold)) : 1
 	var/at_fringe = get_dist(src,parent)
@@ -161,7 +161,7 @@
 	else
 		set_light(0)
 
-/obj/effect/vine/proc/calc_dir()
+/obj/vine/proc/calc_dir()
 	set background = 1
 	var/turf/T = get_turf(src)
 	if(!istype(T)) return
@@ -173,7 +173,7 @@
 		if(newTurf && newTurf.density)
 			direction |= wallDir
 
-	for(var/obj/effect/vine/shroom in T.contents)
+	for(var/obj/vine/shroom in T.contents)
 		if(shroom == src)
 			continue
 		if(shroom.floor) //special
@@ -198,12 +198,12 @@
 	return 1
 
 
-/obj/effect/vine/pre_use_item(obj/item/tool, mob/user, click_params)
+/obj/vine/pre_use_item(obj/item/tool, mob/user, click_params)
 	. = ..()
 	START_PROCESSING(SSvines, src)
 
 
-/obj/effect/vine/use_weapon(obj/item/weapon, mob/user, list/click_params)
+/obj/vine/use_weapon(obj/item/weapon, mob/user, list/click_params)
 	// Edged Items - Chop down vine
 	if (has_edge(weapon))
 		if (weapon.w_class < ITEM_SIZE_NORMAL)
@@ -230,7 +230,7 @@
 	return ..()
 
 
-/obj/effect/vine/use_tool(obj/item/tool, mob/user, list/click_params)
+/obj/vine/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Edged Items - Take sample
 	if (has_edge(tool))
 		if (tool.w_class < ITEM_SIZE_NORMAL)
@@ -254,7 +254,7 @@
 
 
 //handles being overrun by vines - note that attacker_parent may be null in some cases
-/obj/effect/vine/proc/vine_overrun(datum/seed/attacker_seed, obj/effect/vine/attacker_parent)
+/obj/vine/proc/vine_overrun(datum/seed/attacker_seed, obj/vine/attacker_parent)
 	var/aggression = 0
 	aggression += (attacker_seed.get_trait(TRAIT_CARNIVOROUS) - seed.get_trait(TRAIT_CARNIVOROUS))
 	aggression += (attacker_seed.get_trait(TRAIT_SPREAD) - seed.get_trait(TRAIT_SPREAD))
@@ -278,18 +278,18 @@
 	if(aggression > 0)
 		damage_health(aggression * 5)
 
-/obj/effect/vine/on_death()
+/obj/vine/on_death()
 	if(plant)
 		plant.die()
 	wake_neighbors()
 	qdel(src)
 
-/obj/effect/vine/post_health_change(health_mod, prior_health, damage_type)
+/obj/vine/post_health_change(health_mod, prior_health, damage_type)
 	..()
 	queue_icon_update()
 
-/obj/effect/vine/proc/is_mature()
+/obj/vine/proc/is_mature()
 	return (get_damage_percentage() < 66 && world.time > mature_time)
 
-/obj/effect/vine/is_burnable()
+/obj/vine/is_burnable()
 	return seed.get_trait(TRAIT_HEAT_TOLERANCE) < 1000

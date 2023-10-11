@@ -49,8 +49,8 @@
 
 #undef BEARCAT_OUTFIT_JOB_NAME
 
-/obj/effect/submap_landmark/spawnpoint/captain
+/obj/submap_landmark/spawnpoint/captain
 	name = "Independant Captain"
 
-/obj/effect/submap_landmark/spawnpoint/crewman
+/obj/submap_landmark/spawnpoint/crewman
 	name = "Independant Crewman"

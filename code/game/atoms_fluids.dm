@@ -14,7 +14,7 @@
  * Retrieves the atom's fluid effect, if present. Generally, this only returns a value for turfs, and for said turfs,
  * the fluid effect present in the turf's contents.
  *
- * Returns instance of `/obj/effect/fluid`.
+ * Returns instance of `/obj/fluid`.
  */
 /atom/proc/return_fluid()
 	return null

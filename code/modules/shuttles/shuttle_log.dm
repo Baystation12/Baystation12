@@ -28,7 +28,7 @@
 	registered += module
 
 /datum/shuttle_log/proc/unregister(datum/nano_module/module)
-	registered -= module	
+	registered -= module
 
 /datum/shuttle_log/proc/update_registred()
 	for(var/datum/nano_module/module in registered)
@@ -116,8 +116,8 @@
 		if(given_id == mission.ID)
 			return mission
 
-/datum/shuttle_log/proc/handle_move(obj/effect/shuttle_landmark/origin, obj/effect/shuttle_landmark/destination)
-	var/obj/effect/shuttle_landmark/home = SSshuttle.get_landmark(home_base)
+/datum/shuttle_log/proc/handle_move(obj/shuttle_landmark/origin, obj/shuttle_landmark/destination)
+	var/obj/shuttle_landmark/home = SSshuttle.get_landmark(home_base)
 	if(origin == home)
 		shuttle_launched()
 	if(destination == home)

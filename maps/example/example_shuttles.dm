@@ -1,9 +1,9 @@
-/obj/effect/shuttle_landmark/lower_level
+/obj/shuttle_landmark/lower_level
 	name = "Lower Level Dock"
 	landmark_tag = "nav_example_station"
 	docking_controller = "lower_level_dock"
 
-/obj/effect/shuttle_landmark/upper_level
+/obj/shuttle_landmark/upper_level
 	name = "Upper Level Dock"
 	landmark_tag = "nav_example_offsite"
 	special_dock_targets = list("Example" = "example_shuttle_port")

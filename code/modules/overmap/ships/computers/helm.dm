@@ -24,14 +24,14 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 /obj/machinery/computer/ship/helm/Initialize()
 	. = ..()
 	LAZYADD(GLOB.overmap_helm_computers, src)
-	for(var/obj/effect/overmap/visitable/sector as anything in GLOB.known_overmap_sectors)
+	for(var/obj/overmap/visitable/sector as anything in GLOB.known_overmap_sectors)
 		add_known_sector(sector)
 
 /obj/machinery/computer/ship/helm/Destroy()
 	. = ..()
 	LAZYREMOVE(GLOB.overmap_helm_computers, src)
 
-/obj/machinery/computer/ship/helm/proc/add_known_sector(obj/effect/overmap/visitable/sector/S, notify = FALSE)
+/obj/machinery/computer/ship/helm/proc/add_known_sector(obj/overmap/visitable/sector/S, notify = FALSE)
 	var/datum/computer_file/data/waypoint/R = new()
 	R.fields["name"] = S.name
 	R.fields["x"] = S.x
@@ -96,7 +96,7 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 		display_reconnect_dialog(user, "helm")
 	else
 		var/turf/T = get_turf(linked)
-		var/obj/effect/overmap/visitable/sector/current_sector = locate() in T
+		var/obj/overmap/visitable/sector/current_sector = locate() in T
 
 		var/mob/living/silicon/silicon = user
 		data["viewing_silicon"] = ismachinerestricted(silicon)
@@ -342,7 +342,7 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 
 
 	var/turf/T = get_turf(linked)
-	var/obj/effect/overmap/visitable/sector/current_sector = locate() in T
+	var/obj/overmap/visitable/sector/current_sector = locate() in T
 
 	var/mob/living/silicon/silicon = user
 	data["viewing_silicon"] = ismachinerestricted(silicon)

@@ -92,7 +92,7 @@
 /obj/item/psychic_power/telekinesis/proc/sparkle()
 	set waitfor = 0
 	if(focus)
-		var/obj/effect/overlay/O = new /obj/effect/overlay(get_turf(focus))
+		var/obj/overlay/O = new /obj/overlay(get_turf(focus))
 		O.name = "sparkles"
 		O.anchored = TRUE
 		O.density = FALSE

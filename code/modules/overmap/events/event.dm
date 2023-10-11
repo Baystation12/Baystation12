@@ -12,7 +12,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 /singleton/overmap_event_handler/proc/create_events(z_level, overmap_size, number_of_events)
 	// Acquire the list of not-yet utilized overmap turfs on this Z-level
 	var/list/candidate_turfs = block(locate(OVERMAP_EDGE, OVERMAP_EDGE, z_level),locate(overmap_size - OVERMAP_EDGE, overmap_size - OVERMAP_EDGE,z_level))
-	candidate_turfs = where(candidate_turfs, /proc/can_not_locate, /obj/effect/overmap/visitable)
+	candidate_turfs = where(candidate_turfs, /proc/can_not_locate, /obj/overmap/visitable)
 
 	for(var/i = 1 to number_of_events)
 		if(!length(candidate_turfs))
@@ -63,7 +63,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 		if(T in candidate_turfs)
 			return T
 
-/singleton/overmap_event_handler/proc/start_hazard(obj/effect/overmap/visitable/ship/ship, obj/effect/overmap/event/hazard)//make these accept both hazards or events
+/singleton/overmap_event_handler/proc/start_hazard(obj/overmap/visitable/ship/ship, obj/overmap/event/hazard)//make these accept both hazards or events
 	if(!(ship in ship_events))
 		ship_events += ship
 
@@ -79,7 +79,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 			E.vars["victim"] = ship
 		LAZYADD(ship_events[ship], E)
 
-/singleton/overmap_event_handler/proc/stop_hazard(obj/effect/overmap/visitable/ship/ship, obj/effect/overmap/event/hazard)
+/singleton/overmap_event_handler/proc/stop_hazard(obj/overmap/visitable/ship/ship, obj/overmap/event/hazard)
 	for(var/event_type in hazard.events)
 		var/datum/event/E = is_event_active(ship,event_type,hazard.difficulty)
 		if(E)
@@ -92,22 +92,22 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 		if(E.type == event_type && E.severity == severity)
 			return E
 
-/singleton/overmap_event_handler/proc/on_turf_entered(turf/new_loc, obj/effect/overmap/visitable/ship/ship, old_loc)
+/singleton/overmap_event_handler/proc/on_turf_entered(turf/new_loc, obj/overmap/visitable/ship/ship, old_loc)
 	if(!istype(ship))
 		return
 	if(new_loc == old_loc)
 		return
 
-	for(var/obj/effect/overmap/event/E in hazard_by_turf[new_loc])
+	for(var/obj/overmap/event/E in hazard_by_turf[new_loc])
 		start_hazard(ship, E)
 
-/singleton/overmap_event_handler/proc/on_turf_exited(turf/old_loc, obj/effect/overmap/visitable/ship/ship, new_loc)
+/singleton/overmap_event_handler/proc/on_turf_exited(turf/old_loc, obj/overmap/visitable/ship/ship, new_loc)
 	if(!istype(ship))
 		return
 	if(new_loc == old_loc)
 		return
 
-	for(var/obj/effect/overmap/event/E in hazard_by_turf[old_loc])
+	for(var/obj/overmap/event/E in hazard_by_turf[old_loc])
 		if(is_event_included(hazard_by_turf[new_loc],E))
 			continue
 		stop_hazard(ship,E)
@@ -117,7 +117,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 		return
 
 	var/list/active_hazards = list()
-	for(var/obj/effect/overmap/event/E in T)
+	for(var/obj/overmap/event/E in T)
 		if(is_event_included(active_hazards, E, TRUE))
 			continue
 		active_hazards += E
@@ -132,23 +132,23 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 		GLOB.entered_event.register(T, src,/singleton/overmap_event_handler/proc/on_turf_entered)
 		GLOB.exited_event.register(T, src, /singleton/overmap_event_handler/proc/on_turf_exited)
 
-	for(var/obj/effect/overmap/visitable/ship/ship in T)
+	for(var/obj/overmap/visitable/ship/ship in T)
 		for(var/datum/event/E in ship_events[ship])
 			if(is_event_in_turf(E,T))
 				continue
 			E.kill()
 			LAZYREMOVE(ship_events[ship], E)
 
-		for(var/obj/effect/overmap/event/E in active_hazards)
+		for(var/obj/overmap/event/E in active_hazards)
 			start_hazard(ship,E)
 
 /singleton/overmap_event_handler/proc/is_event_in_turf(datum/event/E, turf/T)
-	for(var/obj/effect/overmap/event/hazard in hazard_by_turf[T])
+	for(var/obj/overmap/event/hazard in hazard_by_turf[T])
 		if(E in hazard.events && E.severity == hazard.difficulty)
 			return TRUE
 
-/singleton/overmap_event_handler/proc/is_event_included(list/hazards, obj/effect/overmap/event/E, equal_or_better)//this proc is only used so it can break out of 2 loops cleanly
-	for(var/obj/effect/overmap/event/A in hazards)
+/singleton/overmap_event_handler/proc/is_event_included(list/hazards, obj/overmap/event/E, equal_or_better)//this proc is only used so it can break out of 2 loops cleanly
+	for(var/obj/overmap/event/A in hazards)
 		if(istype(A,E.type) || istype(E,A.type))
 			if(same_entries(A.events, E.events))
 				if(equal_or_better)
@@ -160,9 +160,9 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 					if(A.difficulty == E.difficulty)
 						return TRUE
 
-// We don't subtype /obj/effect/overmap/visitable because that'll create sections one can travel to
+// We don't subtype /obj/overmap/visitable because that'll create sections one can travel to
 //  And with them "existing" on the overmap Z-level things quickly get odd.
-/obj/effect/overmap/event
+/obj/overmap/event
 	name = "event"
 	icon = 'icons/obj/overmap.dmi'
 	icon_state = "blank"
@@ -181,33 +181,33 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 	instant_contact = TRUE
 
 
-/obj/effect/overmap/event/Initialize()
+/obj/overmap/event/Initialize()
 	. = ..()
 	icon_state = pick(event_icon_states)
 	overmap_event_handler.update_hazards(loc)
 	if(length(colors))
 		color = pick(colors)
 
-/obj/effect/overmap/event/Move()
+/obj/overmap/event/Move()
 	var/turf/old_loc = loc
 	. = ..()
 	if(.)
 		overmap_event_handler.update_hazards(old_loc)
 		overmap_event_handler.update_hazards(loc)
 
-/obj/effect/overmap/event/forceMove(atom/destination)
+/obj/overmap/event/forceMove(atom/destination)
 	var/old_loc = loc
 	. = ..()
 	if(.)
 		overmap_event_handler.update_hazards(old_loc)
 		overmap_event_handler.update_hazards(loc)
 
-/obj/effect/overmap/event/Destroy()//takes a look at this one as well, make sure everything is A-OK
+/obj/overmap/event/Destroy()//takes a look at this one as well, make sure everything is A-OK
 	var/turf/T = loc
 	. = ..()
 	overmap_event_handler.update_hazards(T)
 
-/obj/effect/overmap/event/meteor
+/obj/overmap/event/meteor
 	name = "asteroid field"
 	events = list(/datum/event/meteor_wave/overmap)
 	event_icon_states = list("meteor1", "meteor2", "meteor3", "meteor4")
@@ -216,7 +216,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 	weaknesses = OVERMAP_WEAKNESS_MINING | OVERMAP_WEAKNESS_EXPLOSIVE
 	colors = list("#fc1100", "#ca3227", "#be1e12")
 
-/obj/effect/overmap/event/electric
+/obj/overmap/event/electric
 	name = "electrical storm"
 	events = list(/datum/event/electrical_storm)
 	opacity = 0
@@ -225,7 +225,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 	weaknesses = OVERMAP_WEAKNESS_EMP
 	colors = list("#f5ed0c", "#f0e935", "#faf450")
 
-/obj/effect/overmap/event/dust
+/obj/overmap/event/dust
 	name = "dust cloud"
 	events = list(/datum/event/dust)
 	opacity = 0
@@ -233,7 +233,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 	weaknesses = OVERMAP_WEAKNESS_MINING | OVERMAP_WEAKNESS_EXPLOSIVE | OVERMAP_WEAKNESS_FIRE
 	color = "#bdbdbd"
 
-/obj/effect/overmap/event/ion
+/obj/overmap/event/ion
 	name = "ion cloud"
 	events = list(/datum/event/ionstorm, /datum/event/computer_damage)
 	opacity = 0
@@ -242,7 +242,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 	weaknesses = OVERMAP_WEAKNESS_EMP
 	colors = list("#02faee", "#34d1c9", "#1b9ce7")
 
-/obj/effect/overmap/event/carp
+/obj/overmap/event/carp
 	name = "carp shoal"
 	events = list(/datum/event/mob_spawning/carp)
 	opacity = 0
@@ -251,14 +251,14 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 	weaknesses = OVERMAP_WEAKNESS_EXPLOSIVE | OVERMAP_WEAKNESS_FIRE
 	colors = list("#a960dd", "#cd60d3", "#ea50f2", "#f67efc")
 
-/obj/effect/overmap/event/carp/major
+/obj/overmap/event/carp/major
 	name = "carp school"
 	difficulty = EVENT_LEVEL_MAJOR
 	event_icon_states = list("carp3", "carp4")
 	colors = list("#a709db", "#c228c7", "#c444e4")
 
 
-/obj/effect/overmap/event/gravity
+/obj/overmap/event/gravity
 	name = "dark matter influx"
 	weaknesses = OVERMAP_WEAKNESS_EXPLOSIVE
 	events = list(/datum/event/gravity)
@@ -280,27 +280,27 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 	count = 15
 	radius = 4
 	continuous = FALSE
-	hazards = /obj/effect/overmap/event/meteor
+	hazards = /obj/overmap/event/meteor
 
 /datum/overmap_event/electric
 	name = "electrical storm"
 	count = 11
 	radius = 3
 	opacity = 0
-	hazards = /obj/effect/overmap/event/electric
+	hazards = /obj/overmap/event/electric
 
 /datum/overmap_event/dust
 	name = "dust cloud"
 	count = 16
 	radius = 4
-	hazards = /obj/effect/overmap/event/dust
+	hazards = /obj/overmap/event/dust
 
 /datum/overmap_event/ion
 	name = "ion cloud"
 	count = 8
 	radius = 3
 	opacity = 0
-	hazards = /obj/effect/overmap/event/ion
+	hazards = /obj/overmap/event/ion
 
 /datum/overmap_event/carp
 	name = "carp shoal"
@@ -308,17 +308,17 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 	radius = 3
 	opacity = 0
 	continuous = FALSE
-	hazards = /obj/effect/overmap/event/carp
+	hazards = /obj/overmap/event/carp
 
 /datum/overmap_event/carp/major
 	name = "carp school"
 	count = 5
 	radius = 4
-	hazards = /obj/effect/overmap/event/carp/major
+	hazards = /obj/overmap/event/carp/major
 
 /datum/overmap_event/gravity
 	name = "dark matter influx"
 	count = 12
 	radius = 4
 	opacity = 0
-	hazards = /obj/effect/overmap/event/gravity
+	hazards = /obj/overmap/event/gravity

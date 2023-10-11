@@ -1,7 +1,7 @@
-/obj/effect/decal/warning_stripes
+/obj/decal/warning_stripes
 	icon = 'icons/effects/warning_stripes.dmi'
 
-/obj/effect/decal/warning_stripes/New()
+/obj/decal/warning_stripes/New()
 	. = ..()
 	var/turf/T=get_turf(src)
 	var/image/I=image(icon, icon_state = icon_state, dir = dir)

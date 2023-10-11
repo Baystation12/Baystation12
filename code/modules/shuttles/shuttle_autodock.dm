@@ -9,16 +9,16 @@
 	var/datum/computer/file/embedded_program/docking/shuttle_docking_controller
 	var/docking_codes
 
-	var/obj/effect/shuttle_landmark/next_location  //This is only used internally.
+	var/obj/shuttle_landmark/next_location  //This is only used internally.
 	var/datum/computer/file/embedded_program/docking/active_docking_controller
 
-	var/obj/effect/shuttle_landmark/landmark_transition  //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.
+	var/obj/shuttle_landmark/landmark_transition  //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.
 	var/move_time = 120		//the time spent in the transition area
 
 	category = /datum/shuttle/autodock
 	flags = SHUTTLE_FLAGS_PROCESS | SHUTTLE_FLAGS_ZERO_G
 
-/datum/shuttle/autodock/New(_name, obj/effect/shuttle_landmark/start_waypoint)
+/datum/shuttle/autodock/New(_name, obj/shuttle_landmark/start_waypoint)
 	..(_name, start_waypoint)
 
 	//Initial dock
@@ -27,7 +27,7 @@
 	if(active_docking_controller)
 		set_docking_codes(active_docking_controller.docking_codes)
 	else if(GLOB.using_map.use_overmap)
-		var/obj/effect/overmap/visitable/location = map_sectors["[current_location.z]"]
+		var/obj/overmap/visitable/location = map_sectors["[current_location.z]"]
 		if(location && location.docking_codes)
 			set_docking_codes(location.docking_codes)
 	dock()
@@ -52,7 +52,7 @@
 	force_undock() //bye!
 	..()
 
-/datum/shuttle/autodock/proc/update_docking_target(obj/effect/shuttle_landmark/location)
+/datum/shuttle/autodock/proc/update_docking_target(obj/shuttle_landmark/location)
 	if(location && location.special_dock_targets && location.special_dock_targets[name])
 		current_dock_target = location.special_dock_targets[name]
 	else
@@ -185,5 +185,5 @@
 /datum/shuttle/autodock/proc/arrived()
 	return	//do nothing for now
 
-/obj/effect/shuttle_landmark/transit
+/obj/shuttle_landmark/transit
 	flags = SLANDMARK_FLAG_ZERO_G

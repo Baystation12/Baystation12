@@ -8,7 +8,7 @@
 /obj/item/remains/human
 	desc = "They look like human remains. They have a strange aura about them."
 
-/obj/effect/decal/remains	// Apparently used by cult somewhere?
+/obj/decal/remains	// Apparently used by cult somewhere?
 	desc = "They look like human remains. They have a strange aura about them."
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "remains"
@@ -34,7 +34,7 @@
 	to_chat(user, SPAN_NOTICE("[src] sinks together into a pile of ash."))
 	var/turf/simulated/floor/F = get_turf(src)
 	if (istype(F))
-		new /obj/effect/decal/cleanable/ash(F)
+		new /obj/decal/cleanable/ash(F)
 	qdel(src)
 
 /obj/item/remains/robot/attack_hand(mob/user as mob)

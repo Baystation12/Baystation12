@@ -74,39 +74,39 @@
 	ceiling_type = null
 	knockdown = 0
 
-/obj/effect/shuttle_landmark/lift/cargo_top
+/obj/shuttle_landmark/lift/cargo_top
 	name = "Top Deck"
 	landmark_tag = "nav_cargo_lift_top"
 	base_area = /area/quartermaster/storage/upper
 	base_turf = /turf/simulated/open
 
-/obj/effect/shuttle_landmark/lift/cargo_bottom
+/obj/shuttle_landmark/lift/cargo_bottom
 	name = "Lower Deck"
 	landmark_tag = "nav_cargo_lift_bottom"
 	flags = SLANDMARK_FLAG_AUTOSET
 	base_area = /area/quartermaster/storage
 	base_turf = /turf/simulated/floor/plating
 
-/obj/effect/shuttle_landmark/lift/robotics_top
+/obj/shuttle_landmark/lift/robotics_top
 	name = "Top Deck"
 	landmark_tag = "nav_robotics_lift_top"
 	base_area = /area/assembly/robotics
 	base_turf = /turf/simulated/open
 
-/obj/effect/shuttle_landmark/lift/robotics_bottom
+/obj/shuttle_landmark/lift/robotics_bottom
 	name = "Lower Deck"
 	landmark_tag = "nav_robotics_lift_bottom"
 	flags = SLANDMARK_FLAG_AUTOSET
 	base_area = /area/assembly/robotics
 	base_turf = /turf/simulated/floor/plating
 
-/obj/effect/shuttle_landmark/lift/medical_top
+/obj/shuttle_landmark/lift/medical_top
 	name = "Top Deck"
 	landmark_tag = "nav_medical_lift_top"
 	base_area = /area/medical/foyer/storeroom
 	base_turf = /turf/simulated/open
 
-/obj/effect/shuttle_landmark/lift/medical_bottom
+/obj/shuttle_landmark/lift/medical_bottom
 	name = "Lower Deck"
 	landmark_tag = "nav_medical_lift_bottom"
 	flags = SLANDMARK_FLAG_AUTOSET

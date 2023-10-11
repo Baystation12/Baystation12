@@ -1,4 +1,4 @@
-/obj/effect/overmap/visitable/sector/exoplanet/desert
+/obj/overmap/visitable/sector/exoplanet/desert
 	name = "desert exoplanet"
 	desc = "An arid exoplanet with sparse biological resources but rich mineral deposits underground."
 	color = "#a08444"
@@ -14,12 +14,12 @@
 	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/voxslug, /mob/living/simple_animal/hostile/retaliate/beast/antlion)
 	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/beast/antlion/mega)
 
-/obj/effect/overmap/visitable/sector/exoplanet/desert/generate_map()
+/obj/overmap/visitable/sector/exoplanet/desert/generate_map()
 	if(prob(70))
 		sun_brightness_modifier = rand(4,8)/10	//deserts are usually :lit:
 	..()
 
-/obj/effect/overmap/visitable/sector/exoplanet/desert/generate_atmosphere()
+/obj/overmap/visitable/sector/exoplanet/desert/generate_atmosphere()
 	..()
 	if(atmosphere)
 		var/limit = 1000
@@ -29,7 +29,7 @@
 		atmosphere.temperature = min(T20C + rand(20, 100), limit)
 		atmosphere.update_values()
 
-/obj/effect/overmap/visitable/sector/exoplanet/desert/adapt_seed(datum/seed/S)
+/obj/overmap/visitable/sector/exoplanet/desert/adapt_seed(datum/seed/S)
 	..()
 	if(prob(90))
 		S.set_trait(TRAIT_REQUIRES_WATER,0)
@@ -54,13 +54,13 @@
 	..()
 	var/v = noise2value(value)
 	if(v > 6 && prob(2))
-		new/obj/effect/quicksand(T)
+		new/obj/quicksand(T)
 
 /area/exoplanet/desert
 	ambience = list('sound/effects/wind/desert0.ogg','sound/effects/wind/desert1.ogg','sound/effects/wind/desert2.ogg','sound/effects/wind/desert3.ogg','sound/effects/wind/desert4.ogg','sound/effects/wind/desert5.ogg')
 	base_turf = /turf/simulated/floor/exoplanet/desert
 
-/obj/effect/quicksand
+/obj/quicksand
 	name = "quicksand"
 	desc = "There is no candy at the bottom."
 	icon = 'icons/obj/structures/quicksand.dmi'
@@ -72,12 +72,12 @@
 	var/exposed = FALSE
 	var/busy
 
-/obj/effect/quicksand/Initialize()
+/obj/quicksand/Initialize()
 	. = ..()
 	var/turf/T = get_turf(src)
 	appearance = T.appearance
 
-/obj/effect/quicksand/user_unbuckle_mob(mob/user)
+/obj/quicksand/user_unbuckle_mob(mob/user)
 	if (!can_unbuckle(user))
 		return
 	if (!user.stat && !user.restrained())
@@ -114,15 +114,15 @@
 			to_chat(user, SPAN_WARNING("You slip and fail to get out!"))
 			return
 
-/obj/effect/quicksand/unbuckle_mob()
+/obj/quicksand/unbuckle_mob()
 	..()
 	update_icon()
 
-/obj/effect/quicksand/buckle_mob(mob/L)
+/obj/quicksand/buckle_mob(mob/L)
 	..()
 	update_icon()
 
-/obj/effect/quicksand/on_update_icon()
+/obj/quicksand/on_update_icon()
 	if(!exposed)
 		return
 	icon_state = "open"
@@ -130,7 +130,7 @@
 	if(buckled_mob)
 		AddOverlays(image(icon,icon_state="overlay",layer=ABOVE_HUMAN_LAYER))
 
-/obj/effect/quicksand/proc/expose()
+/obj/quicksand/proc/expose()
 	if(exposed)
 		return
 	visible_message(SPAN_WARNING("The upper crust breaks, exposing the treacherous quicksand underneath!"))
@@ -141,7 +141,7 @@
 	update_icon()
 
 
-/obj/effect/quicksand/use_tool(obj/item/tool, mob/user, list/click_params)
+/obj/quicksand/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Any object - Expose the quicksand
 	if (!exposed && tool.force)
 		expose()
@@ -150,7 +150,7 @@
 	return ..()
 
 
-/obj/effect/quicksand/Crossed(atom/movable/AM)
+/obj/quicksand/Crossed(atom/movable/AM)
 	if(isliving(AM))
 		var/mob/living/L = AM
 		if(L.throwing || L.can_overcome_gravity() || !can_buckle(L))

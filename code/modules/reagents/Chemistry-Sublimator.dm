@@ -22,7 +22,7 @@
 	gas_data.breathed_product[gas_id] = reagent.type
 
 	if(reagent.gas_overlay)
-		var/obj/effect/gas_overlay/I = new()
+		var/obj/gas_overlay/I = new()
 		I.icon_state = reagent.gas_overlay
 		I.color = initial(reagent.color)
 		gas_data.tile_overlay[gas_id] = I

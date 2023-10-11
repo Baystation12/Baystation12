@@ -18,43 +18,43 @@
 "af" = (
 /obj/structure/lattice,
 /obj/item/stack/material/ocp,
-/obj/effect/landmark/scorcher,
+/obj/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "ag" = (
 /turf/simulated/wall/ocp_wall,
 /area/map_template/marooned)
 "ah" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/ocp_wall,
 /area/map_template/marooned)
 "ai" = (
-/obj/effect/landmark/scorcher,
+/obj/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "aj" = (
 /obj/item/stack/material/ocp,
-/obj/effect/landmark/scorcher,
+/obj/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "ak" = (
 /obj/machinery/computer/dummy,
-/obj/effect/floor_decal/corner/red/full,
+/obj/floor_decal/corner/red/full,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "al" = (
-/obj/effect/floor_decal/corner/red{
+/obj/floor_decal/corner/red{
 	dir = 9
 	},
 /obj/machinery/atmospherics/binary/oxyregenerator,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/marooned)
 "am" = (
-/obj/effect/landmark/corpse/marooned_officer,
+/obj/landmark/corpse/marooned_officer,
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
 /obj/item/gun/projectile/revolver/medium,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
@@ -64,7 +64,7 @@
 	name = "\improper Magnitka medal"
 	},
 /obj/structure/table/steel_reinforced,
-/obj/effect/floor_decal/corner/red{
+/obj/floor_decal/corner/red{
 	dir = 6
 	},
 /obj/item/paper/marooned/note09,
@@ -72,7 +72,7 @@
 /area/map_template/marooned)
 "ao" = (
 /obj/structure/lattice,
-/obj/effect/landmark/scorcher,
+/obj/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "ap" = (
@@ -85,15 +85,15 @@
 	pixel_y = -1
 	},
 /obj/structure/table/steel_reinforced,
-/obj/effect/floor_decal/corner/red{
+/obj/floor_decal/corner/red{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/marooned)
 "aq" = (
 /obj/machinery/space_heater,
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/floor_decal/steeldecal/steel_decals_central7,
+/obj/decal/cleanable/blood/drip,
+/obj/floor_decal/steeldecal/steel_decals_central7,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "ar" = (
@@ -102,7 +102,7 @@
 	pixel_y = 2
 	},
 /obj/structure/table/steel_reinforced,
-/obj/effect/floor_decal/corner/red{
+/obj/floor_decal/corner/red{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -116,7 +116,7 @@
 /obj/structure/handrail{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/outline,
+/obj/floor_decal/industrial/outline,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/marooned)
 "au" = (
@@ -137,7 +137,7 @@
 /area/map_template/marooned)
 "ax" = (
 /obj/machinery/suit_storage_unit/standard_unit,
-/obj/effect/floor_decal/industrial/outline,
+/obj/floor_decal/industrial/outline,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/marooned)
 "ay" = (
@@ -150,18 +150,18 @@
 /obj/structure/handrail{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/outline,
+/obj/floor_decal/industrial/outline,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/marooned)
 "az" = (
 /obj/item/trash/liquidfood,
 /obj/item/trash/liquidfood,
-/obj/effect/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood/drip,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aA" = (
 /obj/random/trash,
-/obj/effect/floor_decal/steeldecal/steel_decals_central7,
+/obj/floor_decal/steeldecal/steel_decals_central7,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aB" = (
@@ -169,14 +169,14 @@
 	pixel_x = 6
 	},
 /obj/random/trash,
-/obj/effect/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood/drip,
 /obj/structure/bed,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aC" = (
 /obj/structure/shuttle/engine/propulsion,
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/landmark/scorcher,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aD" = (
@@ -188,7 +188,7 @@
 	},
 /obj/item/trash/liquidfood,
 /obj/item/trash/liquidfood,
-/obj/effect/floor_decal/industrial/outline,
+/obj/floor_decal/industrial/outline,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/marooned)
 "aE" = (
@@ -197,7 +197,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aF" = (
-/obj/effect/floor_decal/steeldecal/steel_decals_central6,
+/obj/floor_decal/steeldecal/steel_decals_central6,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aG" = (
@@ -210,7 +210,7 @@
 /obj/structure/bed/chair{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/outline,
+/obj/floor_decal/industrial/outline,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/marooned)
 "aI" = (
@@ -224,7 +224,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aJ" = (
-/obj/effect/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood/drip,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aL" = (
@@ -232,7 +232,7 @@
 /obj/structure/handrail{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/marooned)
 "aM" = (
@@ -241,7 +241,7 @@
 	dir = 1;
 	icon_state = "1-6"
 	},
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aN" = (
@@ -249,7 +249,7 @@
 /obj/structure/handrail{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "aO" = (
@@ -258,13 +258,13 @@
 	dir = 1;
 	icon_state = "2-5"
 	},
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /obj/machinery/door/airlock/centcom,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/map_template/marooned)
 "aP" = (
 /obj/structure/fuel_port,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/ocp_wall,
 /area/map_template/marooned)
 "aQ" = (
@@ -272,20 +272,20 @@
 /obj/structure/cable{
 	icon_state = "2-5"
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/landmark/scorcher,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aR" = (
 /obj/structure/inflatable/door,
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/landmark/scorcher,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aS" = (
 /obj/structure/inflatable/wall,
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/landmark/scorcher,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aT" = (
@@ -293,15 +293,15 @@
 	dir = 1;
 	icon_state = "2-5"
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/landmark/scorcher,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aU" = (
 /turf/simulated/wall/ocp_wall,
 /area/template_noop)
 "aV" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/ocp_wall,
 /area/template_noop)
 "aW" = (
@@ -324,8 +324,8 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/landmark/scorcher,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aX" = (
@@ -334,8 +334,8 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/landmark/scorcher,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aY" = (
@@ -349,25 +349,25 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/landmark/scorcher,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "hi" = (
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/landmark/scorcher,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "tb" = (
-/obj/effect/landmark/clear,
-/obj/effect/landmark/scorcher,
+/obj/landmark/clear,
+/obj/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "Wb" = (
 /obj/structure/shuttle/engine/propulsion,
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
-/obj/effect/landmark/scorcher,
+/obj/landmark/scorcher,
+/obj/landmark/clear,
+/obj/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 

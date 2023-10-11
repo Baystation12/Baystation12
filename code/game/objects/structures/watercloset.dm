@@ -80,7 +80,7 @@
 	if(flood_amt)
 		var/turf/T = loc
 		if(istype(T))
-			var/obj/effect/fluid/F = locate() in T
+			var/obj/fluid/F = locate() in T
 			if(!F) F = new(loc)
 			T.show_bubbles()
 			if(world.time > next_gurgle)
@@ -283,7 +283,7 @@
 	drainage = 0.2 			//showers are tiny, drain a little slower
 
 	var/on = 0
-	var/obj/effect/mist/mymist = null
+	var/obj/mist/mymist = null
 	var/ismist = 0				//needs a var so we can make it linger~
 	var/watertemp = "normal"	//freezing, normal, or boiling
 	var/is_washing = 0
@@ -310,7 +310,7 @@
 		QDEL_NULL(sound_token)
 //add heat controls? when emagged, you can freeze to death in it?
 
-/obj/effect/mist
+/obj/mist
 	name = "mist"
 	icon = 'icons/obj/showers.dmi'
 	icon_state = "mist"
@@ -376,13 +376,13 @@
 			spawn(50)
 				if(src && on)
 					ismist = 1
-					mymist = new /obj/effect/mist(loc)
+					mymist = new /obj/mist(loc)
 		else
 			ismist = 1
-			mymist = new /obj/effect/mist(loc)
+			mymist = new /obj/mist(loc)
 	else if(ismist)
 		ismist = 1
-		mymist = new /obj/effect/mist(loc)
+		mymist = new /obj/mist(loc)
 		spawn(250)
 			if(src && !on)
 				qdel(mymist)
@@ -395,8 +395,8 @@
 		wash_mob(washing)
 		if(isturf(loc))
 			var/turf/tile = loc
-			for(var/obj/effect/E in tile)
-				if(istype(E,/obj/effect/decal/cleanable) || istype(E,/obj/effect/overlay))
+			for(var/obj/E in tile)
+				if(istype(E,/obj/decal/cleanable) || istype(E,/obj/overlay))
 					qdel(E)
 		reagents.splash(washing, 10)
 

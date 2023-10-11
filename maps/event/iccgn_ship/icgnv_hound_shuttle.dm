@@ -14,31 +14,31 @@
 /turf/simulated/floor/shuttle_ceiling/iccgn
 	color = COLOR_DARK_GUNMETAL
 
-/obj/effect/paint/iccgn
+/obj/paint/iccgn
 	color = COLOR_DARK_GUNMETAL
 
-/obj/effect/shuttle_landmark/icgnv_hound/start
+/obj/shuttle_landmark/icgnv_hound/start
 	landmark_tag = "nav_icgnv_hound_start"
 	name = "Start Point"
 
-/obj/effect/shuttle_landmark/icgnv_hound/nav1
+/obj/shuttle_landmark/icgnv_hound/nav1
 	landmark_tag = "nav_icgnv_hound_1"
 
-/obj/effect/shuttle_landmark/icgnv_hound/nav2
+/obj/shuttle_landmark/icgnv_hound/nav2
 	landmark_tag = "nav_icgnv_hound_2"
 
-/obj/effect/shuttle_landmark/icgnv_hound/nav3
+/obj/shuttle_landmark/icgnv_hound/nav3
 	landmark_tag = "nav_icgnv_hound_3"
 
-/obj/effect/shuttle_landmark/icgnv_hound/nav4
+/obj/shuttle_landmark/icgnv_hound/nav4
 	landmark_tag = "nav_icgnv_hound_4"
 
-/obj/effect/shuttle_landmark/icgnv_hound/dock
+/obj/shuttle_landmark/icgnv_hound/dock
 	name = "4th Deck, Fore Airlock"
 	landmark_tag = "nav_icgnv_hound_dock"
 	docking_controller = "admin_shuttle_dock_airlock"
 
-/obj/effect/shuttle_landmark/transit/iccgn
+/obj/shuttle_landmark/transit/iccgn
 	name = "In transit"
 	landmark_tag = "nav_transit_iccgn"
 

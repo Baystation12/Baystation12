@@ -9,12 +9,12 @@
 		/mob/living/simple_animal/hostile/hivebot/mega
 	)
 
-/datum/exoplanet_theme/robotic_guardians/before_map_generation(obj/effect/overmap/visitable/sector/exoplanet/E)
+/datum/exoplanet_theme/robotic_guardians/before_map_generation(obj/overmap/visitable/sector/exoplanet/E)
 	E.ruin_tags_whitelist |= RUIN_ALIEN
 	E.fauna_types |= guardian_types
 	E.megafauna_types |= mega_guardian_types
 
-/datum/exoplanet_theme/robotic_guardians/adapt_animal(obj/effect/overmap/visitable/sector/exoplanet/E, mob/A)
+/datum/exoplanet_theme/robotic_guardians/adapt_animal(obj/overmap/visitable/sector/exoplanet/E, mob/A)
 	// Stopping robots from fighting each other
 	if (is_type_in_list(A, guardian_types | mega_guardian_types))
 		A.faction = "Ancient Guardian"

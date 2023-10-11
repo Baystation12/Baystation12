@@ -39,7 +39,7 @@
 	if (isghost(usr))
 		return
 
-	for(var/obj/effect/overmap/visitable/sector/exoplanet/E)
+	for(var/obj/overmap/visitable/sector/exoplanet/E)
 		if(src in E.animals)
 			newname = sanitizeName(newname, allow_numbers = TRUE, force_first_letter_uppercase = FALSE)
 			if(newname && CanInteract(usr, GLOB.conscious_state))

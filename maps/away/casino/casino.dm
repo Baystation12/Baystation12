@@ -1,7 +1,7 @@
 #include "casino_areas.dm"
 #include "../mining/mining_areas.dm"
 
-/obj/effect/overmap/visitable/ship/casino
+/obj/overmap/visitable/ship/casino
 	name = "passenger liner"
 	desc = "Sensors detect an undamaged vessel without any signs of activity."
 	color = "#bd6100"
@@ -20,7 +20,7 @@
 		"Casino Cutter" = list("nav_casino_hangar"),
 	)
 
-/obj/effect/overmap/visitable/ship/casino/New(nloc, max_x, max_y)
+/obj/overmap/visitable/ship/casino/New(nloc, max_x, max_y)
 	name = "IPV [pick("Fortuna","Gold Rush","Ebisu","Lucky Paw","Four Leaves")], \a [name]"
 	..()
 
@@ -39,23 +39,23 @@
 		/area/casino/casino_maintenance = NO_SCRUBBER|NO_VENT
 	)
 
-/obj/effect/shuttle_landmark/nav_casino/nav1
+/obj/shuttle_landmark/nav_casino/nav1
 	name = "Casino Ship Navpoint #1"
 	landmark_tag = "nav_casino_1"
 
-/obj/effect/shuttle_landmark/nav_casino/nav2
+/obj/shuttle_landmark/nav_casino/nav2
 	name = "Casino Ship Navpoint #2"
 	landmark_tag = "nav_casino_2"
 
-/obj/effect/shuttle_landmark/nav_casino/nav3
+/obj/shuttle_landmark/nav_casino/nav3
 	name = "Casino Ship Navpoint #3"
 	landmark_tag = "nav_casino_3"
 
-/obj/effect/shuttle_landmark/nav_casino/nav4
+/obj/shuttle_landmark/nav_casino/nav4
 	name = "Casino Ship Navpoint #4"
 	landmark_tag = "nav_casino_4"
 
-/obj/effect/shuttle_landmark/nav_casino/nav5
+/obj/shuttle_landmark/nav_casino/nav5
 	name = "Casino Ship Navpoint #5"
 	landmark_tag = "nav_casino_antag"
 
@@ -70,13 +70,13 @@
 	range = 1
 	defer_initialisation = TRUE
 
-/obj/effect/shuttle_landmark/nav_casino/cutter_hangar
+/obj/shuttle_landmark/nav_casino/cutter_hangar
 	name = "Casino Hangar"
 	landmark_tag = "nav_casino_hangar"
 	base_area = /area/casino/casino_hangar
 	base_turf = /turf/simulated/floor/plating
 
-/obj/effect/shuttle_landmark/nav_casino/cutter_transit
+/obj/shuttle_landmark/nav_casino/cutter_transit
 	name = "In transit"
 	landmark_tag = "nav_casino_transit"
 

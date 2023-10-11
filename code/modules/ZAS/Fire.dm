@@ -29,7 +29,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 		return 0
 
 	var/igniting = 0
-	var/obj/effect/decal/cleanable/liquid_fuel/liquid = locate() in src
+	var/obj/decal/cleanable/liquid_fuel/liquid = locate() in src
 	if(liquid && air_contents.check_combustability(liquid))
 		IgniteTurf(liquid.amount * 10)
 		QDEL_NULL(liquid)
@@ -303,7 +303,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 			. = 1
 			break
 
-/datum/gas_mixture/proc/check_combustability(obj/effect/decal/cleanable/liquid_fuel/liquid=null)
+/datum/gas_mixture/proc/check_combustability(obj/decal/cleanable/liquid_fuel/liquid=null)
 	. = 0
 	for(var/g in gas)
 		if(gas_data.flags[g] & XGM_GAS_OXIDIZER && QUANTIZE(gas[g] * vsc.fire_consuption_rate) >= 0.1)

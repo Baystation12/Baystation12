@@ -1,6 +1,6 @@
-var/global/list/obj/effect/bump_teleporter/BUMP_TELEPORTERS = list()
+var/global/list/obj/bump_teleporter/BUMP_TELEPORTERS = list()
 
-/obj/effect/bump_teleporter
+/obj/bump_teleporter
 	name = "bump-teleporter"
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x2"
@@ -11,15 +11,15 @@ var/global/list/obj/effect/bump_teleporter/BUMP_TELEPORTERS = list()
 	density = TRUE
 	opacity = 0
 
-/obj/effect/bump_teleporter/New()
+/obj/bump_teleporter/New()
 	..()
 	BUMP_TELEPORTERS += src
 
-/obj/effect/bump_teleporter/Destroy()
+/obj/bump_teleporter/Destroy()
 	BUMP_TELEPORTERS -= src
 	return ..()
 
-/obj/effect/bump_teleporter/Bumped(atom/user)
+/obj/bump_teleporter/Bumped(atom/user)
 	if(!ismob(user))
 		//user.loc = src.loc	//Stop at teleporter location
 		return
@@ -28,7 +28,7 @@ var/global/list/obj/effect/bump_teleporter/BUMP_TELEPORTERS = list()
 		//user.loc = src.loc	//Stop at teleporter location, there is nowhere to teleport to.
 		return
 
-	for(var/obj/effect/bump_teleporter/BT in BUMP_TELEPORTERS)
+	for(var/obj/bump_teleporter/BT in BUMP_TELEPORTERS)
 		if(BT.id == src.id_target)
 			usr.forceMove(BT.loc)	//Teleport to location with correct id.
 			return

@@ -23,7 +23,7 @@
 	set_light(4, 0.6, "#00fff4")
 	icon_state = "glowweed[rand(1,3)]"
 
-/obj/effect/decal/cleanable/lichen
+/obj/decal/cleanable/lichen
 	name = "lichen"
 	desc = "Damp and mossy plant life."
 	icon_state = "lichen"

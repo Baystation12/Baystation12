@@ -387,7 +387,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		mind.special_role = ANTAG_ZOMBIE
 
 	var/turf/T = get_turf(src)
-	new /obj/effect/decal/cleanable/vomit(T)
+	new /obj/decal/cleanable/vomit(T)
 	playsound(T, 'sound/effects/splat.ogg', 20, 1)
 
 	var/obj/item/held_l = get_equipped_item(slot_l_hand)
@@ -529,7 +529,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		src.adjust_nutrition(40)
 
 		playsound(loc, 'sound/effects/splat.ogg', 20, 1)
-		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src), target.species.blood_color)
+		new /obj/decal/cleanable/blood/splatter(get_turf(src), target.species.blood_color)
 		if (target.getBruteLoss() > target.maxHealth*0.75)
 			if (prob(50))
 				gibs(get_turf(src), target.dna)

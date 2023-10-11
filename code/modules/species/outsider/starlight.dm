@@ -83,7 +83,7 @@
 /datum/species/starlight/starborn/handle_death(mob/living/carbon/human/H)
 	..()
 	var/turf/T = get_turf(H)
-	new/obj/effect/decal/cleanable/liquid_fuel(T, 20, TRUE)
+	new/obj/decal/cleanable/liquid_fuel(T, 20, TRUE)
 	T.hotspot_expose(PHORON_MINIMUM_BURN_TEMPERATURE)
 
 /datum/species/starlight/blueforged
@@ -112,4 +112,4 @@
 
 /datum/species/starlight/blueforged/handle_death(mob/living/carbon/human/H)
 	..()
-	new /obj/effect/temporary(get_turf(H),11, 'icons/mob/mob.dmi', "liquify")
+	new /obj/temporary(get_turf(H),11, 'icons/mob/mob.dmi', "liquify")

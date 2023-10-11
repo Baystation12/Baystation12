@@ -4,7 +4,7 @@
 /datum/unit_test/generic_shuttle_landmarks_shall_not_appear_in_restricted_list/start_test()
 	var/fail = FALSE
 
-	for(var/obj/effect/overmap/visitable/sector in world)
+	for(var/obj/overmap/visitable/sector in world)
 		var/list/failures = list()
 		for(var/generic in sector.initial_generic_waypoints)
 			for(var/shuttle in sector.initial_restricted_waypoints)

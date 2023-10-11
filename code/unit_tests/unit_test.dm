@@ -92,7 +92,7 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 /datum/unit_test/proc/get_safe_turf()
 	if(!safe_landmark)
 		for(var/landmark in landmarks_list)
-			if(istype(landmark, /obj/effect/landmark/test/safe_turf))
+			if(istype(landmark, /obj/landmark/test/safe_turf))
 				safe_landmark = landmark
 				break
 	return get_turf(safe_landmark)
@@ -100,7 +100,7 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 /datum/unit_test/proc/get_space_turf()
 	if(!space_landmark)
 		for(var/landmark in landmarks_list)
-			if(istype(landmark, /obj/effect/landmark/test/space_turf))
+			if(istype(landmark, /obj/landmark/test/space_turf))
 				space_landmark = landmark
 				break
 	return get_turf(space_landmark)
@@ -185,10 +185,10 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 			sleep(20)
 	unit_test_final_message()
 
-/obj/effect/landmark/test/safe_turf
+/obj/landmark/test/safe_turf
 	name = "safe_turf" // At creation, landmark tags are set to: "landmark*[name]"
 	desc = "A safe turf should be an as large block as possible of livable, passable turfs, preferably at least 3x3 with the marked turf as the center."
 
-/obj/effect/landmark/test/space_turf
+/obj/landmark/test/space_turf
 	name = "space_turf"
 	desc = "A space turf should be an as large block as possible of space, preferably at least 3x3 with the marked turf as the center."

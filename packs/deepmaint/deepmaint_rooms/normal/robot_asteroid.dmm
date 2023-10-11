@@ -3,7 +3,7 @@
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "b" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 9
 	},
 /turf/simulated/floor/tiled,
@@ -15,13 +15,13 @@
 	},
 /area/map_template/deepmaint)
 "e" = (
-/obj/effect/floor_decal/asteroid,
+/obj/floor_decal/asteroid,
 /turf/simulated/floor/plating{
 	icon_state = "asteroidplating"
 	},
 /area/map_template/deepmaint)
 "g" = (
-/obj/effect/floor_decal/industrial/warning/dust{
+/obj/floor_decal/industrial/warning/dust{
 	dir = 4
 	},
 /turf/simulated/floor/asteroid{
@@ -30,11 +30,11 @@
 /area/map_template/deepmaint)
 "h" = (
 /obj/structure/closet/emcloset,
-/obj/effect/floor_decal/corner/brown/mono,
+/obj/floor_decal/corner/brown/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "i" = (
-/obj/effect/floor_decal/industrial/warning/dust,
+/obj/floor_decal/industrial/warning/dust,
 /obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
 	icon = 'icons/obj/flora/hydroponics_growing.dmi';
 	icon_state = null
@@ -44,7 +44,7 @@
 	},
 /area/map_template/deepmaint)
 "j" = (
-/obj/effect/floor_decal/industrial/warning/dust{
+/obj/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
 /turf/simulated/floor/asteroid{
@@ -52,14 +52,14 @@
 	},
 /area/map_template/deepmaint)
 "k" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "l" = (
 /obj/structure/table/standard,
-/obj/effect/floor_decal/corner/brown/mono,
+/obj/floor_decal/corner/brown/mono,
 /obj/random/firstaid,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
@@ -70,13 +70,13 @@
 	pixel_x = 22
 	},
 /obj/machinery/cell_charger,
-/obj/effect/floor_decal/corner/brown/mono,
+/obj/floor_decal/corner/brown/mono,
 /obj/random/powercell,
 /obj/random/powercell,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "n" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 9
 	},
 /obj/machinery/light{
@@ -89,7 +89,7 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/map_template/deepmaint)
 "p" = (
-/obj/effect/floor_decal/industrial/warning/dust/corner{
+/obj/floor_decal/industrial/warning/dust/corner{
 	dir = 4
 	},
 /obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
@@ -101,7 +101,7 @@
 	},
 /area/map_template/deepmaint)
 "q" = (
-/obj/effect/floor_decal/industrial/warning/dust/corner,
+/obj/floor_decal/industrial/warning/dust/corner,
 /obj/machinery/light/small{
 	dir = 4;
 	icon_state = "bulb1"
@@ -111,7 +111,7 @@
 	},
 /area/map_template/deepmaint)
 "r" = (
-/obj/effect/floor_decal/industrial/warning/dust/corner{
+/obj/floor_decal/industrial/warning/dust/corner{
 	dir = 8
 	},
 /obj/machinery/light/small,
@@ -120,18 +120,18 @@
 	},
 /area/map_template/deepmaint)
 "s" = (
-/obj/effect/floor_decal/industrial/warning/dust,
+/obj/floor_decal/industrial/warning/dust,
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
 	},
 /area/map_template/deepmaint)
 "t" = (
-/obj/effect/floor_decal/corner/brown/full,
+/obj/floor_decal/corner/brown/full,
 /mob/living/simple_animal/hostile/hivebot/ranged_damage/laser,
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "u" = (
-/obj/effect/floor_decal/corner/brown/mono,
+/obj/floor_decal/corner/brown/mono,
 /obj/machinery/computer/modular/preset{
 	dir = 4
 	},
@@ -146,7 +146,7 @@
 	},
 /area/map_template/deepmaint)
 "x" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 5
 	},
 /obj/machinery/light{
@@ -155,7 +155,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "y" = (
-/obj/effect/floor_decal/industrial/warning/dust/corner{
+/obj/floor_decal/industrial/warning/dust/corner{
 	dir = 4
 	},
 /obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
@@ -170,17 +170,17 @@
 	},
 /area/map_template/deepmaint)
 "A" = (
-/obj/effect/floor_decal/corner/brown/full,
+/obj/floor_decal/corner/brown/full,
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "B" = (
 /obj/structure/closet,
-/obj/effect/floor_decal/corner/brown/mono,
+/obj/floor_decal/corner/brown/mono,
 /obj/random/energy,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "D" = (
-/obj/effect/floor_decal/industrial/warning/dust{
+/obj/floor_decal/industrial/warning/dust{
 	dir = 1
 	},
 /obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
@@ -195,7 +195,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "H" = (
-/obj/effect/floor_decal/industrial/warning/dust{
+/obj/floor_decal/industrial/warning/dust{
 	dir = 1
 	},
 /turf/simulated/floor/asteroid{
@@ -204,14 +204,14 @@
 /area/map_template/deepmaint)
 "I" = (
 /obj/structure/closet,
-/obj/effect/floor_decal/corner/brown/mono,
+/obj/floor_decal/corner/brown/mono,
 /obj/random/biggun,
 /obj/random/ammo,
 /obj/random/ammo,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "J" = (
-/obj/effect/floor_decal/industrial/warning/dust,
+/obj/floor_decal/industrial/warning/dust,
 /mob/living/simple_animal/hostile/hivebot,
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
@@ -219,7 +219,7 @@
 /area/map_template/deepmaint)
 "K" = (
 /obj/structure/closet/crate/trashcart,
-/obj/effect/floor_decal/corner/brown/mono,
+/obj/floor_decal/corner/brown/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "L" = (
@@ -228,17 +228,17 @@
 	},
 /area/map_template/deepmaint)
 "M" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/map_template/deepmaint)
 "O" = (
 /obj/structure/table/standard,
-/obj/effect/floor_decal/corner/brown/mono,
+/obj/floor_decal/corner/brown/mono,
 /obj/random/loot,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "P" = (
-/obj/effect/floor_decal/industrial/warning/dust,
+/obj/floor_decal/industrial/warning/dust,
 /mob/living/simple_animal/hostile/hivebot/rapid,
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
@@ -257,11 +257,11 @@
 /obj/structure/bed/chair/padded/brown{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/brown/mono,
+/obj/floor_decal/corner/brown/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "U" = (
-/obj/effect/floor_decal/industrial/warning/dust{
+/obj/floor_decal/industrial/warning/dust{
 	dir = 6
 	},
 /turf/simulated/floor/asteroid{
@@ -272,11 +272,11 @@
 /turf/simulated/wall,
 /area/map_template/deepmaint)
 "X" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/map_template/deepmaint)
 "Z" = (
-/obj/effect/floor_decal/industrial/warning/dust{
+/obj/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
 /obj/machinery/light/small{

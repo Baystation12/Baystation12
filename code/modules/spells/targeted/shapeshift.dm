@@ -50,7 +50,7 @@
 			M.mind.transfer_to(trans)
 		else
 			trans.key = M.key
-		new /obj/effect/temporary(get_turf(M), 5, 'icons/effects/effects.dmi', "summoning")
+		new /obj/temporary(get_turf(M), 5, 'icons/effects/effects.dmi', "summoning")
 
 		M.forceMove(trans) //move inside the new dude to hide him.
 		M.status_flags |= GODMODE //don't want him to die or breathe or do ANYTHING

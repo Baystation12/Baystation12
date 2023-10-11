@@ -1,12 +1,12 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
-/obj/effect/shuttle_landmark/scavver_gantry/two,
+/obj/shuttle_landmark/scavver_gantry/two,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/space)
 "ab" = (
@@ -40,7 +40,7 @@
 /turf/simulated/floor,
 /area/scavver/harvestpod)
 "aq" = (
-/obj/effect/floor_decal/steeldecal/steel_decals_central1,
+/obj/floor_decal/steeldecal/steel_decals_central1,
 /turf/simulated/floor,
 /area/scavver/gantry/up1)
 "as" = (
@@ -122,7 +122,7 @@
 /area/space)
 "bl" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /obj/structure/railing/mapped/no_density{
 	icon_state = "railing0-0"
 	},
@@ -136,7 +136,7 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "bA" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/blast/regular{
 	dir = 2;
 	id_tag = "scavver_window_teg";
@@ -152,7 +152,7 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "bI" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -196,11 +196,11 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "cc" = (
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -212,7 +212,7 @@
 /obj/machinery/computer/ship/helm{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/grey/border{
+/obj/floor_decal/corner/grey/border{
 	dir = 9
 	},
 /obj/machinery/recharger/wallcharger{
@@ -221,17 +221,17 @@
 /turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "cf" = (
-/obj/effect/paint/red,
+/obj/paint/red,
 /turf/simulated/wall/r_wall,
 /area/scavver/harvestpod)
 "ch" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 10
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
@@ -249,16 +249,16 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "cu" = (
 /obj/machinery/door/airlock/external/bolted,
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
@@ -270,7 +270,7 @@
 	dir = 1;
 	pixel_y = -24
 	},
-/obj/effect/floor_decal/steeldecal/steel_decals_central6,
+/obj/floor_decal/steeldecal/steel_decals_central6,
 /turf/simulated/floor,
 /area/scavver/gantry/up1)
 "cA" = (
@@ -294,7 +294,7 @@
 /area/scavver/yachtup)
 "cC" = (
 /obj/structure/fuel_port,
-/obj/effect/paint/red,
+/obj/paint/red,
 /turf/simulated/wall/r_wall,
 /area/scavver/lifepod)
 "cQ" = (
@@ -324,7 +324,7 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 1
 	},
 /obj/structure/handrail,
@@ -364,7 +364,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/lightgrey,
+/obj/floor_decal/corner/lightgrey,
 /turf/simulated/floor/tiled,
 /area/scavver/hab)
 "dx" = (
@@ -378,7 +378,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/floor_decal/corner/grey/border{
+/obj/floor_decal/corner/grey/border{
 	dir = 4
 	},
 /obj/machinery/atmospherics/portables_connector,
@@ -424,7 +424,7 @@
 	pixel_x = -24;
 	req_access = list()
 	},
-/obj/effect/floor_decal/corner_steel_grid{
+/obj/floor_decal/corner_steel_grid{
 	dir = 5
 	},
 /obj/structure/cable{
@@ -447,7 +447,7 @@
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 5
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -480,7 +480,7 @@
 	id_tag = "scav_hab_pump";
 	power_rating = 25000
 	},
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "dX" = (
@@ -503,7 +503,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/structure/reagent_dispensers/watertank,
-/obj/effect/floor_decal/corner_steel_grid{
+/obj/floor_decal/corner_steel_grid{
 	dir = 8
 	},
 /turf/simulated/floor,
@@ -526,7 +526,7 @@
 /turf/simulated/floor,
 /area/scavver/gantry/up2)
 "er" = (
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/floor_decal/corner/lightgrey{
 	dir = 5
 	},
 /obj/structure/bed/chair{
@@ -545,7 +545,7 @@
 /obj/item/tank/oxygen_emergency_double,
 /obj/item/tank/oxygen_emergency_double,
 /obj/random/coin,
-/obj/effect/floor_decal/corner_steel_grid{
+/obj/floor_decal/corner_steel_grid{
 	dir = 1
 	},
 /turf/simulated/floor,
@@ -576,7 +576,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/scavver/hab)
 "fr" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall,
 /area/scavver/gantry/up1)
 "fw" = (
@@ -602,7 +602,7 @@
 	icon_state = "1-8"
 	},
 /obj/machinery/cell_charger,
-/obj/effect/floor_decal/corner_steel_grid{
+/obj/floor_decal/corner_steel_grid{
 	dir = 1
 	},
 /turf/simulated/floor,
@@ -624,8 +624,8 @@
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 4
 	},
-/obj/effect/paint/palegreengray,
-/obj/effect/wallframe_spawn/reinforced,
+/obj/paint/palegreengray,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/scavver/lifepod)
 "fH" = (
@@ -636,10 +636,10 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "fL" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 4
 	},
 /obj/machinery/computer/shuttle_control/lift/gantry,
@@ -660,7 +660,7 @@
 	dir = 8;
 	icon_state = "railing0-1"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
@@ -669,7 +669,7 @@
 /area/scavver/gantry/up1)
 "fS" = (
 /obj/random/tool,
-/obj/effect/floor_decal/steeldecal/steel_decals_central4{
+/obj/floor_decal/steeldecal/steel_decals_central4{
 	dir = 4
 	},
 /turf/simulated/floor,
@@ -694,7 +694,7 @@
 "fX" = (
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/scavver/harvestpod)
 "gc" = (
@@ -713,7 +713,7 @@
 /area/scavver/harvestpod)
 "gf" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black,
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/blast/regular{
 	dir = 2;
 	id_tag = "scavver_window_teg";
@@ -722,18 +722,18 @@
 /turf/simulated/floor/reinforced,
 /area/scavver/yachtup)
 "gk" = (
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /obj/machinery/suit_storage_unit/engineering/salvage/gantry,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
 "gm" = (
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/floor_decal/corner/lightgrey{
 	dir = 6
 	},
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/scavver/hab)
 "gp" = (
@@ -749,7 +749,7 @@
 	dir = 8;
 	icon_state = "railing0-1"
 	},
-/obj/effect/floor_decal/corner_steel_grid{
+/obj/floor_decal/corner_steel_grid{
 	dir = 1
 	},
 /turf/simulated/floor,
@@ -762,7 +762,7 @@
 	pixel_y = -28;
 	req_access = list()
 	},
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /obj/machinery/suit_storage_unit/engineering/salvage/gantry,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
@@ -818,7 +818,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/machinery/power/generator{
 	anchored = 1
 	},
@@ -830,7 +830,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/scavver/hab)
 "hv" = (
-/obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "hB" = (
@@ -849,14 +849,14 @@
 	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped,
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/space)
 "hG" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 10
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
@@ -868,7 +868,7 @@
 	dir = 8;
 	icon_state = "railing0-1"
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/space)
 "hP" = (
@@ -886,11 +886,11 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 9
 	},
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/decal/cleanable/liquid_fuel,
 /turf/simulated/floor/reinforced,
 /area/scavver/yachtup)
 "ih" = (
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/floor_decal/corner/lightgrey{
 	dir = 5
 	},
 /obj/structure/table/standard,
@@ -898,7 +898,7 @@
 /turf/simulated/floor/tiled,
 /area/scavver/hab)
 "ij" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
@@ -911,8 +911,8 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/catwalk_plated/dark,
-/obj/effect/shuttle_landmark/scavver_gantry/three,
+/obj/catwalk_plated/dark,
+/obj/shuttle_landmark/scavver_gantry/three,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
@@ -934,7 +934,7 @@
 /turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "it" = (
-/obj/effect/shuttle_landmark/scavver_gantry/generic/five,
+/obj/shuttle_landmark/scavver_gantry/generic/five,
 /turf/space,
 /area/space)
 "iA" = (
@@ -942,7 +942,7 @@
 	dir = 1;
 	id_tag = "scavpod_shuttle_pump_out_internal"
 	},
-/obj/effect/floor_decal/corner/grey/half,
+/obj/floor_decal/corner/grey/half,
 /obj/structure/closet/crate/plastic,
 /obj/random/tool,
 /obj/random/tool,
@@ -968,11 +968,11 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/space)
 "iT" = (
-/obj/effect/shuttle_landmark/scavver_gantry/generic/desperado,
+/obj/shuttle_landmark/scavver_gantry/generic/desperado,
 /turf/space,
 /area/space)
 "iU" = (
@@ -986,7 +986,7 @@
 	power_rating = 15000;
 	scrubbing = "siphon"
 	},
-/obj/effect/floor_decal/corner/grey/half,
+/obj/floor_decal/corner/grey/half,
 /turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "iW" = (
@@ -995,7 +995,7 @@
 	tag_south = 1;
 	tag_west = 2
 	},
-/obj/effect/floor_decal/techfloor/orange,
+/obj/floor_decal/techfloor/orange,
 /turf/simulated/floor/tiled/techfloor/grid{
 	map_airless = 1
 	},
@@ -1035,7 +1035,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/machinery/space_heater,
-/obj/effect/floor_decal/corner_steel_grid{
+/obj/floor_decal/corner_steel_grid{
 	dir = 1
 	},
 /turf/simulated/floor,
@@ -1044,7 +1044,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/hatch,
-/obj/effect/paint/sun,
+/obj/paint/sun,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/scavver/hab)
 "jq" = (
@@ -1055,7 +1055,7 @@
 	},
 /obj/machinery/atmospherics/valve,
 /obj/machinery/mech_recharger,
-/obj/effect/floor_decal/corner/grey/diagonal{
+/obj/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile{
@@ -1071,7 +1071,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/floor_decal/industrial/hatch/orange,
+/obj/floor_decal/industrial/hatch/orange,
 /obj/machinery/power/solar_control/autostart{
 	dir = 1
 	},
@@ -1100,8 +1100,8 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "jw" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/catwalk_plated,
+/obj/decal/cleanable/dirt,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
@@ -1143,7 +1143,7 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/hatch/blue,
+/obj/floor_decal/industrial/hatch/blue,
 /turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "jG" = (
@@ -1151,7 +1151,7 @@
 	dir = 8;
 	icon_state = "railing0-1"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
@@ -1211,7 +1211,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "kb" = (
-/obj/effect/paint/red,
+/obj/paint/red,
 /turf/simulated/wall/r_wall,
 /area/scavver/lifepod)
 "kf" = (
@@ -1308,7 +1308,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "kP" = (
-/obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/wallframe_spawn/reinforced/no_grille,
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
 	},
@@ -1326,7 +1326,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
 	dir = 8
 	},
-/obj/effect/paint/red,
+/obj/paint/red,
 /turf/simulated/wall/r_wall,
 /area/scavver/lifepod)
 "lt" = (
@@ -1353,7 +1353,7 @@
 /area/scavver/gantry/up1)
 "lB" = (
 /obj/machinery/computer/shuttle_control/explore/scavver_gantry/two,
-/obj/effect/floor_decal/corner/grey/border{
+/obj/floor_decal/corner/grey/border{
 	dir = 5
 	},
 /obj/machinery/recharger/wallcharger{
@@ -1392,7 +1392,7 @@
 /obj/structure/fireaxecabinet{
 	pixel_x = -32
 	},
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /mob/living/exosuit/premade/salvage_gantry,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
@@ -1446,14 +1446,14 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/floor_decal/industrial/hatch/orange,
+/obj/floor_decal/industrial/hatch/orange,
 /turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "ml" = (
 /obj/structure/bed,
 /obj/item/bedsheet/rd,
-/obj/effect/floor_decal/corner/lightgrey/mono,
-/obj/effect/submap_landmark/spawnpoint/scavver_engineer,
+/obj/floor_decal/corner/lightgrey/mono,
+/obj/submap_landmark/spawnpoint/scavver_engineer,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
 "mq" = (
@@ -1483,13 +1483,13 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 9
 	},
-/obj/effect/floor_decal/techfloor/orange,
+/obj/floor_decal/techfloor/orange,
 /turf/simulated/floor/tiled/techfloor/grid{
 	map_airless = 1
 	},
 /area/scavver/lifepod)
 "mC" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/red{
@@ -1500,7 +1500,7 @@
 	},
 /area/scavver/lifepod)
 "mM" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/manifold/visible/red,
@@ -1517,8 +1517,8 @@
 "mQ" = (
 /obj/structure/bed,
 /obj/item/bedsheet/clown,
-/obj/effect/floor_decal/corner/lightgrey/mono,
-/obj/effect/submap_landmark/spawnpoint/scavver_doctor,
+/obj/floor_decal/corner/lightgrey/mono,
+/obj/submap_landmark/spawnpoint/scavver_doctor,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
 "mS" = (
@@ -1537,7 +1537,7 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
-/obj/effect/floor_decal/corner_steel_grid,
+/obj/floor_decal/corner_steel_grid,
 /turf/simulated/floor,
 /area/scavver/gantry/up2)
 "mZ" = (
@@ -1546,7 +1546,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/grey/border,
+/obj/floor_decal/corner/grey/border,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
@@ -1558,7 +1558,7 @@
 	pixel_y = -28
 	},
 /obj/machinery/mech_recharger,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/scavver/lifepod)
 "nd" = (
@@ -1566,7 +1566,7 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "ne" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 9
 	},
 /obj/machinery/atmospherics/valve{
@@ -1587,7 +1587,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/scavver/harvestpod)
 "nj" = (
-/obj/effect/floor_decal/techfloor/orange,
+/obj/floor_decal/techfloor/orange,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
@@ -1618,15 +1618,15 @@
 /turf/simulated/floor/reinforced,
 /area/scavver/yachtup)
 "nH" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/silver,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/silver,
 /turf/simulated/floor,
 /area/scavver/harvestpod)
 "nI" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid{
@@ -1655,7 +1655,7 @@
 /turf/simulated/floor,
 /area/scavver/harvestpod)
 "nN" = (
-/obj/effect/floor_decal/corner_steel_grid{
+/obj/floor_decal/corner_steel_grid{
 	dir = 9
 	},
 /obj/structure/cable{
@@ -1677,13 +1677,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "nZ" = (
-/obj/effect/floor_decal/steeldecal/steel_decals_central4{
+/obj/floor_decal/steeldecal/steel_decals_central4{
 	dir = 8
 	},
 /turf/simulated/floor,
 /area/scavver/gantry/up2)
 "ok" = (
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/decal/cleanable/liquid_fuel,
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 10
 	},
@@ -1696,17 +1696,17 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "oo" = (
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 8;
 	icon_state = "warningcorner"
 	},
-/obj/effect/floor_decal/corner_steel_grid{
+/obj/floor_decal/corner_steel_grid{
 	dir = 5
 	},
 /turf/simulated/floor,
 /area/scavver/gantry/up1)
 "oq" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 1
 	},
 /obj/machinery/atmospherics/valve{
@@ -1718,7 +1718,7 @@
 /area/scavver/lifepod)
 "os" = (
 /obj/structure/railing/mapped,
-/obj/effect/floor_decal/corner_steel_grid,
+/obj/floor_decal/corner_steel_grid,
 /obj/structure/closet/crate/solar,
 /turf/simulated/floor,
 /area/scavver/gantry/up1)
@@ -1751,7 +1751,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "oE" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/red{
@@ -1781,7 +1781,7 @@
 	master_tag = "scav_hab";
 	pixel_y = 21
 	},
-/obj/effect/paint/sun,
+/obj/paint/sun,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/scavver/hab)
 "oJ" = (
@@ -1800,7 +1800,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
@@ -1817,7 +1817,7 @@
 	pixel_x = -25;
 	req_access = list()
 	},
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
@@ -1845,7 +1845,7 @@
 	},
 /area/scavver/escapepod)
 "pn" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 8
 	},
 /obj/machinery/atmospherics/binary/pump{
@@ -1859,7 +1859,7 @@
 /obj/machinery/computer/ship/engines{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
@@ -1882,13 +1882,13 @@
 /turf/simulated/wall/ocp_wall,
 /area/scavver/yachtup)
 "pw" = (
-/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/wallframe_spawn/reinforced/hull,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/paint/palegreengray,
+/obj/paint/palegreengray,
 /turf/simulated/floor{
 	map_airless = 1
 	},
@@ -1915,7 +1915,7 @@
 /turf/space,
 /area/scavver/yachtup)
 "qf" = (
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -1966,7 +1966,7 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "qn" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 6
 	},
 /obj/structure/railing/mapped{
@@ -1977,9 +1977,9 @@
 	},
 /area/scavver/lifepod)
 "qt" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/silver,
-/obj/effect/paint_stripe/white,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/silver,
+/obj/paint_stripe/white,
 /turf/simulated/floor/plating,
 /area/scavver/escapepod)
 "qv" = (
@@ -1991,7 +1991,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/space)
 "qC" = (
@@ -2009,7 +2009,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/random/loot,
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/space)
 "qF" = (
@@ -2026,7 +2026,7 @@
 	dir = 4;
 	pixel_x = -21
 	},
-/obj/effect/floor_decal/corner/grey/border{
+/obj/floor_decal/corner/grey/border{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -2037,7 +2037,7 @@
 	tag_north = 4;
 	tag_south = 1
 	},
-/obj/effect/floor_decal/techfloor/orange,
+/obj/floor_decal/techfloor/orange,
 /turf/simulated/floor/tiled/techfloor/grid{
 	map_airless = 1
 	},
@@ -2046,7 +2046,7 @@
 /obj/structure/fireaxecabinet{
 	pixel_x = -32
 	},
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -2059,7 +2059,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/decal/cleanable/liquid_fuel,
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "qS" = (
@@ -2067,7 +2067,7 @@
 	dir = 1
 	},
 /obj/machinery/meter,
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
@@ -2076,12 +2076,12 @@
 /area/scavver/lifepod)
 "qT" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/scavver/harvestpod)
 "qU" = (
 /obj/structure/ladder,
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "qV" = (
@@ -2120,7 +2120,7 @@
 "rh" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
 /obj/machinery/meter,
-/obj/effect/floor_decal/techfloor/orange,
+/obj/floor_decal/techfloor/orange,
 /turf/simulated/floor/tiled/techfloor/grid{
 	map_airless = 1
 	},
@@ -2138,7 +2138,7 @@
 /obj/structure/closet/emcloset,
 /obj/item/crowbar,
 /obj/item/crowbar,
-/obj/effect/floor_decal/industrial/outline/blue,
+/obj/floor_decal/industrial/outline/blue,
 /obj/item/storage/box/lights/tubes,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -2219,7 +2219,7 @@
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 9
 	},
 /obj/structure/railing/mapped/no_density{
@@ -2231,15 +2231,15 @@
 	},
 /area/scavver/lifepod)
 "rX" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
 /turf/simulated/floor,
 /area/scavver/gantry/up1)
 "sc" = (
-/obj/effect/paint/silver,
-/obj/effect/paint_stripe/red,
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/paint/silver,
+/obj/paint_stripe/red,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
@@ -2247,7 +2247,7 @@
 /area/scavver/escapepod)
 "si" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red,
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
@@ -2276,7 +2276,7 @@
 /turf/simulated/floor,
 /area/scavver/harvestpod)
 "st" = (
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/floor_decal/corner/lightgrey{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
@@ -2285,10 +2285,10 @@
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 5
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
@@ -2349,18 +2349,18 @@
 	pixel_x = -24;
 	req_access = list()
 	},
-/obj/effect/overmap/visitable/ship/landable/scavver_gantry,
-/obj/effect/decal/cleanable/dirt,
+/obj/overmap/visitable/ship/landable/scavver_gantry,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/scavver/lifepod)
 "sK" = (
-/obj/effect/paint/palegreengray,
-/obj/effect/wallframe_spawn/reinforced,
+/obj/paint/palegreengray,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/scavver/lifepod)
 "sP" = (
 /obj/structure/dispenser,
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
 "sU" = (
@@ -2408,7 +2408,7 @@
 /area/scavver/lifepod)
 "ta" = (
 /obj/machinery/hologram/holopad/longrange/remoteship,
-/obj/effect/overmap/visitable/ship/landable/scavver_gantry/two,
+/obj/overmap/visitable/ship/landable/scavver_gantry/two,
 /turf/simulated/floor/tiled/white/monotile{
 	initial_gas = newlist()
 	},
@@ -2417,12 +2417,12 @@
 /turf/space,
 /area/scavver/yachtup)
 "tf" = (
-/obj/effect/shuttle_landmark/scavver_gantry,
-/obj/effect/catwalk_plated/dark,
+/obj/shuttle_landmark/scavver_gantry,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/space)
 "tl" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 10
 	},
 /obj/machinery/atmospherics/portables_connector{
@@ -2457,7 +2457,7 @@
 	},
 /area/scavver/gantry/lift)
 "tD" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/dark,
 /area/scavver/lifepod)
 "tJ" = (
@@ -2466,7 +2466,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/techfloor/orange,
+/obj/floor_decal/techfloor/orange,
 /turf/simulated/floor/tiled/techfloor/grid{
 	map_airless = 1
 	},
@@ -2489,11 +2489,11 @@
 	},
 /area/scavver/escapepod)
 "tP" = (
-/obj/effect/paint/sun,
+/obj/paint/sun,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/wallframe_spawn/reinforced/no_grille,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -2519,7 +2519,7 @@
 	},
 /area/scavver/escapepod)
 "tV" = (
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -2537,21 +2537,21 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/grey/border{
+/obj/floor_decal/corner/grey/border{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "tX" = (
 /obj/structure/railing/mapped,
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/space)
 "ub" = (
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/grey/border{
+/obj/floor_decal/corner/grey/border{
 	dir = 6
 	},
 /obj/structure/handrail{
@@ -2568,13 +2568,13 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/silver,
-/obj/effect/paint_stripe/white,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/silver,
+/obj/paint_stripe/white,
 /turf/simulated/floor,
 /area/scavver/escapepod)
 "ui" = (
-/obj/effect/floor_decal/corner_steel_grid{
+/obj/floor_decal/corner_steel_grid{
 	dir = 9
 	},
 /turf/simulated/floor,
@@ -2588,10 +2588,10 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor/orange/corner{
+/obj/floor_decal/techfloor/orange/corner{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor/orange/corner,
+/obj/floor_decal/techfloor/orange/corner,
 /turf/simulated/floor/tiled/techfloor/grid{
 	map_airless = 1
 	},
@@ -2632,7 +2632,7 @@
 	pixel_y = 4;
 	pixel_z = 1
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 6
 	},
 /obj/structure/handrail{
@@ -2649,7 +2649,7 @@
 	dir = 4;
 	pixel_x = -21
 	},
-/obj/effect/floor_decal/corner/grey/diagonal{
+/obj/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -2669,7 +2669,7 @@
 /area/scavver/escapepod)
 "uV" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
-/obj/effect/floor_decal/techfloor/orange,
+/obj/floor_decal/techfloor/orange,
 /turf/simulated/floor/tiled/techfloor/grid{
 	map_airless = 1
 	},
@@ -2680,7 +2680,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/random/hat,
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/space)
 "va" = (
@@ -2704,7 +2704,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/scavver/hab)
 "vi" = (
-/obj/effect/paint/silver,
+/obj/paint/silver,
 /obj/structure/fuel_port,
 /turf/simulated/wall/r_wall,
 /area/scavver/harvestpod)
@@ -2731,7 +2731,7 @@
 /obj/machinery/atmospherics/unary/tank{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
@@ -2749,11 +2749,11 @@
 /area/scavver/lifepod)
 "vt" = (
 /obj/machinery/atmospherics/omni/filter,
-/obj/effect/overmap/visitable/ship/landable/scavver_gantry/three,
+/obj/overmap/visitable/ship/landable/scavver_gantry/three,
 /turf/simulated/floor/tiled/dark,
 /area/scavver/harvestpod)
 "vy" = (
-/obj/effect/floor_decal/steeldecal/steel_decals_central4{
+/obj/floor_decal/steeldecal/steel_decals_central4{
 	dir = 4
 	},
 /turf/simulated/floor,
@@ -2768,7 +2768,7 @@
 /area/space)
 "vB" = (
 /obj/structure/railing/mapped,
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 1;
 	icon_state = "warningcorner"
 	},
@@ -2784,12 +2784,12 @@
 /turf/simulated/floor,
 /area/scavver/gantry/up1)
 "vE" = (
-/obj/effect/paint/palegreengray,
+/obj/paint/palegreengray,
 /turf/simulated/wall/r_wall,
 /area/scavver/lifepod)
 "vI" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/effect/floor_decal/corner/grey/diagonal{
+/obj/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
 /obj/structure/cable{
@@ -2818,11 +2818,11 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/obj/effect/floor_decal/corner_steel_grid,
+/obj/floor_decal/corner_steel_grid,
 /turf/simulated/floor,
 /area/scavver/gantry/up1)
 "vP" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/machinery/atmospherics/binary/circulator{
 	anchored = 1;
 	dir = 4
@@ -2872,15 +2872,15 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "wd" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/corner/lightgrey{
 	dir = 6
 	},
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled,
 /area/scavver/hab)
 "wh" = (
-/obj/effect/paint/red,
+/obj/paint/red,
 /turf/simulated/wall/titanium,
 /area/scavver/escapepod)
 "wk" = (
@@ -2891,12 +2891,12 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "wl" = (
-/obj/effect/paint/silver,
+/obj/paint/silver,
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 8
 	},
-/obj/effect/paint_stripe/red,
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/paint_stripe/red,
+/obj/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor,
 /area/scavver/escapepod)
 "wz" = (
@@ -2905,7 +2905,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped,
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/space)
 "wB" = (
@@ -2955,12 +2955,12 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "wT" = (
-/obj/effect/paint/silver,
+/obj/paint/silver,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 10
 	},
-/obj/effect/paint_stripe/red,
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/paint_stripe/red,
+/obj/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor,
 /area/scavver/escapepod)
 "wU" = (
@@ -2988,7 +2988,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "xu" = (
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/floor_decal/corner/lightgrey{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -2999,8 +2999,8 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/paint/palegreengray,
-/obj/effect/wallframe_spawn/reinforced,
+/obj/paint/palegreengray,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/scavver/lifepod)
 "xQ" = (
@@ -3015,7 +3015,7 @@
 /turf/simulated/floor,
 /area/scavver/gantry/up1)
 "xR" = (
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /obj/structure/cable{
 	d1 = 2;
 	d2 = 8;
@@ -3024,7 +3024,7 @@
 /turf/simulated/floor,
 /area/space)
 "xU" = (
-/obj/effect/shuttle_landmark/scavver_gantry/generic/charon,
+/obj/shuttle_landmark/scavver_gantry/generic/charon,
 /turf/space,
 /area/space)
 "yd" = (
@@ -3040,8 +3040,8 @@
 /obj/random/shoes,
 /obj/random/shoes,
 /obj/item/device/binoculars,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/corner/lightgrey/mono,
 /obj/item/storage/backpack/satchel/leather/reddish,
 /obj/item/storage/belt/holster/general,
 /obj/random/accessory,
@@ -3054,14 +3054,14 @@
 /turf/simulated/floor/reinforced,
 /area/scavver/yachtup)
 "yn" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/scavver/lifepod)
 "yq" = (
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -3081,7 +3081,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/steeldecal/steel_decals_central1,
+/obj/floor_decal/steeldecal/steel_decals_central1,
 /turf/simulated/floor,
 /area/scavver/gantry/up1)
 "yx" = (
@@ -3089,7 +3089,7 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "yz" = (
@@ -3135,7 +3135,7 @@
 "yN" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/cell_charger,
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
@@ -3157,10 +3157,10 @@
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
@@ -3191,14 +3191,14 @@
 /turf/simulated/floor/tiled/dark,
 /area/scavver/hab)
 "zp" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "zw" = (
 /obj/structure/cable,
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /obj/machinery/power/terminal,
 /obj/machinery/light/small{
 	dir = 8
@@ -3221,7 +3221,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/space)
 "zX" = (
@@ -3255,7 +3255,7 @@
 	},
 /area/scavver/lifepod)
 "Ag" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 4
 	},
 /obj/machinery/atmospherics/portables_connector{
@@ -3278,7 +3278,7 @@
 "An" = (
 /obj/structure/railing/mapped,
 /obj/random/loot,
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/space)
 "Aq" = (
@@ -3287,7 +3287,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/decal/cleanable/liquid_fuel,
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "Ar" = (
@@ -3295,7 +3295,7 @@
 /turf/simulated/floor,
 /area/scavver/gantry/up1)
 "Aw" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 9
 	},
@@ -3310,7 +3310,7 @@
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
 "AN" = (
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -3331,12 +3331,12 @@
 /turf/simulated/floor,
 /area/scavver/gantry/up2)
 "AW" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 6
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /obj/structure/cable{
 	d1 = 2;
 	d2 = 4;
@@ -3346,14 +3346,14 @@
 /area/scavver/hab)
 "AY" = (
 /obj/structure/bed,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/item/bedsheet/green,
-/obj/effect/floor_decal/corner/lightgrey/mono,
-/obj/effect/submap_landmark/spawnpoint/scavver_pilot,
+/obj/floor_decal/corner/lightgrey/mono,
+/obj/submap_landmark/spawnpoint/scavver_pilot,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
 "Bd" = (
-/obj/effect/shuttle_landmark/scavver_gantry/four,
+/obj/shuttle_landmark/scavver_gantry/four,
 /turf/space,
 /area/space)
 "Bf" = (
@@ -3365,7 +3365,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "Bh" = (
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/decal/cleanable/liquid_fuel,
 /obj/machinery/light/spot{
 	dir = 8
 	},
@@ -3385,7 +3385,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/machinery/portable_atmospherics/powered/pump/filled,
-/obj/effect/floor_decal/corner_steel_grid{
+/obj/floor_decal/corner_steel_grid{
 	dir = 4
 	},
 /turf/simulated/floor,
@@ -3395,7 +3395,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/paint/sun,
+/obj/paint/sun,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -3462,11 +3462,11 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/hatch/blue,
+/obj/floor_decal/industrial/hatch/blue,
 /turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "BP" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/hygiene/sink{
 	dir = 8;
 	pixel_x = -12
@@ -3503,7 +3503,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/scavver/hab)
 "CI" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/visible/red,
@@ -3515,7 +3515,7 @@
 /obj/machinery/sleeper{
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/outline/blue,
+/obj/floor_decal/industrial/outline/blue,
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_y = -24
@@ -3523,7 +3523,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/scavver/lifepod)
 "CK" = (
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/floor_decal/corner/lightgrey{
 	dir = 5
 	},
 /obj/structure/table/standard,
@@ -3543,7 +3543,7 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "CT" = (
-/obj/effect/floor_decal/techfloor/orange,
+/obj/floor_decal/techfloor/orange,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
@@ -3552,7 +3552,7 @@
 	},
 /area/scavver/lifepod)
 "CU" = (
-/obj/effect/floor_decal/corner/grey/diagonal,
+/obj/floor_decal/corner/grey/diagonal,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/vulcan{
 	dir = 1;
 	id_tag = "scavpod_shuttle_pump_out_internal"
@@ -3597,7 +3597,7 @@
 /turf/simulated/floor,
 /area/scavver/gantry/up2)
 "Df" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/machinery/atmospherics/binary/circulator{
 	anchored = 1;
 	dir = 8
@@ -3606,8 +3606,8 @@
 /area/scavver/yachtup)
 "Dk" = (
 /obj/structure/ladder,
-/obj/effect/floor_decal/corner/lightgrey/mono,
-/obj/effect/catwalk_plated,
+/obj/floor_decal/corner/lightgrey/mono,
+/obj/catwalk_plated,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
 "Dl" = (
@@ -3673,8 +3673,8 @@
 /turf/simulated/floor,
 /area/scavver/gantry/up2)
 "DY" = (
-/obj/effect/paint/sun,
-/obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/paint/sun,
+/obj/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "Ef" = (
@@ -3712,7 +3712,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "EA" = (
@@ -3721,7 +3721,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner_steel_grid{
+/obj/floor_decal/corner_steel_grid{
 	dir = 10
 	},
 /turf/simulated/floor,
@@ -3742,7 +3742,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/item/caution/cone,
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/space)
 "ES" = (
@@ -3755,7 +3755,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/grey/border{
+/obj/floor_decal/corner/grey/border{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden{
@@ -3764,7 +3764,7 @@
 /turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "EU" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "Fb" = (
@@ -3805,7 +3805,7 @@
 /area/scavver/yachtup)
 "FA" = (
 /obj/machinery/vending/tool,
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /obj/item/device/radio/intercom/map_preset/scavver{
 	pixel_y = 23
 	},
@@ -3821,7 +3821,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/item/caution/cone,
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/space)
 "FF" = (
@@ -3864,17 +3864,17 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/scavver/harvestpod)
 "FO" = (
-/obj/effect/overmap/visitable/ship/scavver_gantry,
+/obj/overmap/visitable/ship/scavver_gantry,
 /turf/space,
 /area/space)
 "FR" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
@@ -3898,7 +3898,7 @@
 	pixel_y = 20;
 	pixel_z = 1
 	},
-/obj/effect/paint/sun,
+/obj/paint/sun,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/scavver/hab)
 "Gh" = (
@@ -3910,7 +3910,7 @@
 /obj/structure/bed/chair/shuttle/white{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/grey/border{
+/obj/floor_decal/corner/grey/border{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -3941,7 +3941,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 9
 	},
-/obj/effect/paint/red,
+/obj/paint/red,
 /turf/simulated/wall/r_wall,
 /area/scavver/lifepod)
 "GC" = (
@@ -3979,7 +3979,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/effect/floor_decal/corner_steel_grid{
+/obj/floor_decal/corner_steel_grid{
 	dir = 6
 	},
 /turf/simulated/floor,
@@ -4036,7 +4036,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
@@ -4063,7 +4063,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/obj/effect/floor_decal/corner_steel_grid{
+/obj/floor_decal/corner_steel_grid{
 	dir = 1
 	},
 /turf/simulated/floor,
@@ -4094,7 +4094,7 @@
 /obj/structure/bed/chair/shuttle/white{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/grey/border{
+/obj/floor_decal/corner/grey/border{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -4123,7 +4123,7 @@
 /turf/simulated/floor,
 /area/scavver/gantry/up2)
 "IF" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
@@ -4145,7 +4145,7 @@
 /turf/simulated/floor,
 /area/scavver/gantry/up1)
 "IK" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 10
 	},
 /obj/structure/railing/mapped/no_density{
@@ -4197,7 +4197,7 @@
 	},
 /area/scavver/escapepod)
 "Je" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -4226,14 +4226,14 @@
 /area/space)
 "JD" = (
 /obj/structure/fuel_port,
-/obj/effect/paint/red,
+/obj/paint/red,
 /turf/simulated/wall/titanium,
 /area/scavver/escapepod)
 "JH" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/brown,
+/obj/floor_decal/corner/brown,
 /turf/simulated/floor/tiled/steel_grid{
 	initial_gas = newlist()
 	},
@@ -4265,8 +4265,8 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/scavver/hab)
 "JS" = (
-/obj/effect/paint/sun,
-/obj/effect/submap_landmark/joinable_submap/scavver_gantry,
+/obj/paint/sun,
+/obj/submap_landmark/joinable_submap/scavver_gantry,
 /turf/simulated/wall,
 /area/scavver/hab)
 "Kf" = (
@@ -4289,7 +4289,7 @@
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
 "Ks" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/manifold/visible/blue{
@@ -4300,7 +4300,7 @@
 	},
 /area/scavver/lifepod)
 "KI" = (
-/obj/effect/shuttle_landmark/scavver_gantry/generic/gup,
+/obj/shuttle_landmark/scavver_gantry/generic/gup,
 /turf/space,
 /area/space)
 "KJ" = (
@@ -4326,7 +4326,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 9
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /obj/item/rpd,
 /obj/item/device/scanner/gas,
 /obj/structure/table/rack,
@@ -4334,8 +4334,8 @@
 /turf/simulated/floor,
 /area/scavver/harvestpod)
 "KX" = (
-/obj/effect/wallframe_spawn/reinforced/no_grille,
-/obj/effect/paint/sun,
+/obj/wallframe_spawn/reinforced/no_grille,
+/obj/paint/sun,
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
 /obj/structure/cable{
 	d1 = 1;
@@ -4359,10 +4359,10 @@
 /turf/simulated/floor,
 /area/scavver/gantry/up1)
 "Lp" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid{
@@ -4370,7 +4370,7 @@
 	},
 /area/scavver/gantry/lift)
 "Lr" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -4392,7 +4392,7 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/hatch/blue,
+/obj/floor_decal/industrial/hatch/blue,
 /turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "LF" = (
@@ -4411,7 +4411,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/paint/sun,
+/obj/paint/sun,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/scavver/hab)
 "LL" = (
@@ -4455,7 +4455,7 @@
 	pixel_x = -24;
 	pixel_y = -3
 	},
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/scavver/lifepod)
 "Mg" = (
@@ -4473,7 +4473,7 @@
 	id_tag = "scavver_teg";
 	pixel_x = -18
 	},
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/decal/cleanable/liquid_fuel,
 /turf/simulated/floor/reinforced,
 /area/scavver/yachtup)
 "MI" = (
@@ -4485,16 +4485,16 @@
 /obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "MK" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "ML" = (
@@ -4519,12 +4519,12 @@
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/grey/half,
+/obj/floor_decal/corner/grey/half,
 /turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "MP" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/obj/effect/floor_decal/industrial/outline/blue,
+/obj/floor_decal/industrial/outline/blue,
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 10
 	},
@@ -4533,8 +4533,8 @@
 "MR" = (
 /obj/structure/railing/mapped,
 /obj/structure/ladder,
-/obj/effect/catwalk_plated/dark,
-/obj/effect/floor_decal/corner_steel_grid,
+/obj/catwalk_plated/dark,
+/obj/floor_decal/corner_steel_grid,
 /obj/structure/cable{
 	d1 = 32;
 	icon_state = "32-1"
@@ -4542,7 +4542,7 @@
 /turf/simulated/open,
 /area/scavver/gantry/up1)
 "MX" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 4
 	},
 /obj/structure/railing/mapped{
@@ -4559,7 +4559,7 @@
 	},
 /obj/machinery/cell_charger,
 /obj/item/device/radio/map_preset/scavver,
-/obj/effect/floor_decal/corner/grey/border{
+/obj/floor_decal/corner/grey/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
@@ -4569,7 +4569,7 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "Ni" = (
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/floor_decal/corner/lightgrey{
 	dir = 6
 	},
 /obj/machinery/light/small,
@@ -4588,7 +4588,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
@@ -4600,7 +4600,7 @@
 /obj/structure/hygiene/toilet{
 	dir = 8
 	},
-/obj/effect/decal/cleanable/vomit,
+/obj/decal/cleanable/vomit,
 /turf/simulated/floor/tiled/freezer,
 /area/scavver/hab)
 "Nw" = (
@@ -4616,7 +4616,7 @@
 /obj/random/shoes,
 /obj/random/shoes,
 /obj/item/device/binoculars,
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /obj/item/storage/belt/utility/full,
 /obj/item/storage/backpack/industrial,
 /obj/random/accessory,
@@ -4634,7 +4634,7 @@
 /area/space)
 "NC" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/blue,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/dark,
 /area/scavver/lifepod)
 "NI" = (
@@ -4666,7 +4666,7 @@
 /obj/random/shoes,
 /obj/random/shoes,
 /obj/item/device/binoculars,
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /obj/item/storage/belt/medical/emt,
 /obj/item/storage/backpack/satchel/med,
 /obj/random/accessory,
@@ -4710,7 +4710,7 @@
 	dir = 8;
 	icon_state = "railing0-1"
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -4760,7 +4760,7 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "Pd" = (
-/obj/effect/floor_decal/techfloor/orange/corner{
+/obj/floor_decal/techfloor/orange/corner{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/visible/red,
@@ -4789,13 +4789,13 @@
 /turf/simulated/floor,
 /area/scavver/gantry/up2)
 "Pk" = (
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /obj/machinery/light,
 /obj/machinery/suit_storage_unit/engineering/salvage/gantry/pilot,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
 "Py" = (
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -4823,7 +4823,7 @@
 	dir = 8;
 	icon_state = "railing0-1"
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 4;
@@ -4857,7 +4857,7 @@
 	},
 /area/scavver/lifepod)
 "Qh" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 9
 	},
 /obj/machinery/atmospherics/portables_connector{
@@ -4869,18 +4869,18 @@
 	},
 /area/scavver/lifepod)
 "Qn" = (
-/obj/effect/paint/sun,
+/obj/paint/sun,
 /turf/simulated/wall,
 /area/scavver/hab)
 "Qr" = (
-/obj/effect/floor_decal/steeldecal/steel_decals_central1,
+/obj/floor_decal/steeldecal/steel_decals_central1,
 /obj/machinery/light/spot{
 	dir = 4
 	},
 /turf/simulated/floor,
 /area/scavver/gantry/up1)
 "Qt" = (
-/obj/effect/floor_decal/corner/grey/border{
+/obj/floor_decal/corner/grey/border{
 	dir = 4
 	},
 /obj/machinery/atmospherics/valve,
@@ -4891,7 +4891,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/floor_decal/corner/lightgrey{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -4908,7 +4908,7 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "QB" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/manifold/visible/blue{
 	dir = 8
 	},
@@ -4932,7 +4932,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "QU" = (
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/floor_decal/corner/lightgrey{
 	dir = 6
 	},
 /obj/machinery/light/small{
@@ -4941,7 +4941,7 @@
 /turf/simulated/floor/tiled,
 /area/scavver/hab)
 "Rb" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/red,
@@ -4964,7 +4964,7 @@
 /turf/simulated/floor,
 /area/scavver/harvestpod)
 "Rm" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall,
 /area/scavver/gantry/up2)
 "Rq" = (
@@ -4976,7 +4976,7 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/light/spot,
-/obj/effect/floor_decal/industrial/hatch/orange,
+/obj/floor_decal/industrial/hatch/orange,
 /turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "Rv" = (
@@ -5026,7 +5026,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/structure/ladder,
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/scavver/gantry/up2)
 "Sj" = (
@@ -5057,7 +5057,7 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
@@ -5065,7 +5065,7 @@
 	},
 /area/scavver/lifepod)
 "SA" = (
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -5119,8 +5119,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
 "TR" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/corner/lightgrey{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
@@ -5163,11 +5163,11 @@
 /turf/simulated/floor,
 /area/scavver/gantry/up2)
 "Ug" = (
-/obj/effect/shuttle_landmark/scavver_gantry/generic/four,
+/obj/shuttle_landmark/scavver_gantry/generic/four,
 /turf/space,
 /area/space)
 "Uh" = (
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/blast/regular{
 	dir = 8;
 	id_tag = "scavver_window_teg";
@@ -5179,7 +5179,7 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "UM" = (
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/floor_decal/corner/lightgrey{
 	dir = 5
 	},
 /obj/structure/bed/chair{
@@ -5199,7 +5199,7 @@
 /turf/simulated/floor,
 /area/scavver/gantry/up1)
 "UT" = (
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/space)
 "UU" = (
@@ -5214,14 +5214,14 @@
 /turf/simulated/floor,
 /area/scavver/gantry/up2)
 "Vb" = (
-/obj/effect/landmark/map_data{
+/obj/landmark/map_data{
 	height = 2
 	},
 /turf/space,
 /area/space)
 "Vg" = (
 /obj/machinery/portable_atmospherics/canister/air,
-/obj/effect/floor_decal/industrial/outline/blue,
+/obj/floor_decal/industrial/outline/blue,
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
 	},
@@ -5240,18 +5240,18 @@
 	id_tag = "scav_hab_pump";
 	power_rating = 25000
 	},
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "Vv" = (
-/obj/effect/paint/silver,
-/obj/effect/paint_stripe/white,
+/obj/paint/silver,
+/obj/paint_stripe/white,
 /turf/simulated/wall/titanium,
 /area/scavver/escapepod)
 "Vz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -5279,7 +5279,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/scavver/hab)
 "VF" = (
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/decal/cleanable/liquid_fuel,
 /obj/item/csi_marker/n1,
 /obj/item/ammo_casing/rifle/used,
 /obj/structure/handrail{
@@ -5337,19 +5337,19 @@
 /turf/simulated/floor,
 /area/scavver/gantry/up1)
 "VW" = (
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/decal/cleanable/liquid_fuel,
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "VX" = (
 /turf/simulated/wall,
 /area/scavver/yachtup)
 "VY" = (
-/obj/effect/wallframe_spawn/reinforced/no_grille,
-/obj/effect/paint/sun,
+/obj/wallframe_spawn/reinforced/no_grille,
+/obj/paint/sun,
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "Wd" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/machinery/light/small{
 	dir = 4
 	},
@@ -5368,8 +5368,8 @@
 "Wf" = (
 /obj/structure/bed,
 /obj/item/bedsheet/yellow,
-/obj/effect/floor_decal/corner/lightgrey/mono,
-/obj/effect/submap_landmark/spawnpoint/scavver_engineer,
+/obj/floor_decal/corner/lightgrey/mono,
+/obj/submap_landmark/spawnpoint/scavver_engineer,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
 "Wl" = (
@@ -5382,7 +5382,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "Ww" = (
@@ -5431,26 +5431,26 @@
 /turf/simulated/floor,
 /area/scavver/gantry/up2)
 "WG" = (
-/obj/effect/floor_decal/corner_steel_grid{
+/obj/floor_decal/corner_steel_grid{
 	dir = 10
 	},
 /turf/simulated/floor,
 /area/scavver/gantry/up1)
 "WP" = (
-/obj/effect/floor_decal/techfloor/orange,
+/obj/floor_decal/techfloor/orange,
 /obj/machinery/atmospherics/pipe/manifold/visible/blue,
 /turf/simulated/floor/tiled/techfloor/grid{
 	map_airless = 1
 	},
 /area/scavver/lifepod)
 "WR" = (
-/obj/effect/floor_decal/corner_steel_grid{
+/obj/floor_decal/corner_steel_grid{
 	dir = 6
 	},
 /turf/simulated/floor,
 /area/scavver/gantry/up2)
 "WW" = (
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/decal/cleanable/liquid_fuel,
 /obj/structure/handrail{
 	dir = 4
 	},
@@ -5476,7 +5476,7 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "Xd" = (
-/obj/effect/paint/silver,
+/obj/paint/silver,
 /turf/simulated/wall/r_wall,
 /area/scavver/harvestpod)
 "Xj" = (
@@ -5523,7 +5523,7 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "Xz" = (
-/obj/effect/floor_decal/corner/grey/diagonal,
+/obj/floor_decal/corner/grey/diagonal,
 /obj/machinery/atmospherics/unary/vent_scrubber/vulcan{
 	id_tag = "scavpod_shuttle_pump_out_scrubber";
 	power_rating = 15000;
@@ -5547,7 +5547,7 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/visible,
 /obj/machinery/meter,
-/obj/effect/floor_decal/corner/grey/diagonal,
+/obj/floor_decal/corner/grey/diagonal,
 /turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
 "XF" = (
@@ -5563,7 +5563,7 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "XI" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
@@ -5578,7 +5578,7 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/space)
 "XX" = (
@@ -5587,7 +5587,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 4
 	},
@@ -5617,8 +5617,8 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "Yd" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/catwalk_plated,
+/obj/decal/cleanable/dirt,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
@@ -5628,7 +5628,7 @@
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "Yf" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/red{
@@ -5640,18 +5640,18 @@
 /area/scavver/lifepod)
 "Yg" = (
 /obj/machinery/light,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/scavver/lifepod)
 "Yo" = (
-/obj/effect/shuttle_landmark/lift/gantry/top,
+/obj/shuttle_landmark/lift/gantry/top,
 /turf/simulated/floor/tiled/steel_grid{
 	initial_gas = newlist()
 	},
 /area/scavver/gantry/lift)
 "Yr" = (
-/obj/effect/wallframe_spawn/reinforced,
-/obj/effect/paint/palegreengray,
+/obj/wallframe_spawn/reinforced,
+/obj/paint/palegreengray,
 /turf/simulated/floor/plating,
 /area/scavver/lifepod)
 "YA" = (
@@ -5668,7 +5668,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/decal/cleanable/liquid_fuel,
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "YL" = (
@@ -5704,7 +5704,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/scavver/lifepod)
 "Zo" = (
-/obj/effect/shuttle_landmark/scavver_gantry/five,
+/obj/shuttle_landmark/scavver_gantry/five,
 /turf/space,
 /area/space)
 "Zx" = (
@@ -5712,7 +5712,7 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "ZB" = (
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/decal/cleanable/liquid_fuel,
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 4
 	},
@@ -5738,7 +5738,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "ZX" = (

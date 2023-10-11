@@ -1,7 +1,7 @@
 /obj/machinery/portable_atmospherics/hydroponics/Process()
 
 	// Handle nearby smoke if any.
-	for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
+	for(var/obj/effect/smoke/chem/smoke in view(1, src))
 		if(smoke.reagents.total_volume)
 			smoke.reagents.trans_to_obj(src, 5, copy = 1)
 
@@ -35,13 +35,13 @@
 	// If there is no seed data (and hence nothing planted),
 	// or the plant is dead, process nothing further.
 	if(!seed || dead)
-		if(mechanical) 
+		if(mechanical)
 			update_icon() //Harvesting would fail to set alert icons properly.
 		return
 
 	// Advance plant age.
 	var/cur_stage = get_overlay_stage()
-	if(prob(30)) 
+	if(prob(30))
 		age += 1 * HYDRO_SPEED_MULTIPLIER
 		if(get_overlay_stage() != cur_stage)
 			needs_icon_update |= 1
@@ -133,9 +133,9 @@
 	if(!closed_system && \
 	 seed.get_trait(TRAIT_SPREAD) == 2 && \
 	 2 * age >= seed.get_trait(TRAIT_MATURATION) && \
-	 !(locate(/obj/effect/vine) in get_turf(src)) && \
+	 !(locate(/obj/vine) in get_turf(src)) && \
 	 prob(2 * seed.get_trait(TRAIT_POTENCY)))
-		new /obj/effect/vine(get_turf(src), seed)
+		new /obj/vine(get_turf(src), seed)
 
 	if(prob(3))  // On each tick, there's a chance the pest population will increase
 		pestlevel += 0.1 * HYDRO_SPEED_MULTIPLIER

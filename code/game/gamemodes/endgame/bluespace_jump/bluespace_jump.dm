@@ -69,7 +69,7 @@
 		to_chat(M,SPAN_NOTICE("You feel oddly light, and somewhat disoriented as everything around you shimmers and warps ever so slightly."))
 		M.overlay_fullscreen("bluespace", /obj/screen/fullscreen/bluespace_overlay)
 	M.set_confused(20)
-	bluegoasts += new/obj/effect/bluegoast/(get_turf(M),M)
+	bluegoasts += new/obj/bluegoast/(get_turf(M),M)
 
 
 /datum/universal_state/bluespace_jump/proc/clear_bluespaced(mob/living/M)
@@ -85,7 +85,7 @@
 	bluegoasts.Cut()
 
 
-/obj/effect/bluegoast
+/obj/bluegoast
 	name = "bluespace echo"
 	desc = "It's not going to punch you, is it?"
 	var/mob/living/carbon/human/daddy
@@ -94,7 +94,7 @@
 	simulated = FALSE
 
 
-/obj/effect/bluegoast/New(nloc, ndaddy)
+/obj/bluegoast/New(nloc, ndaddy)
 	..(nloc)
 	if(!ndaddy)
 		qdel(src)
@@ -102,12 +102,12 @@
 	daddy = ndaddy
 	set_dir(daddy.dir)
 	appearance = daddy.appearance
-	GLOB.moved_event.register(daddy, src, /obj/effect/bluegoast/proc/mirror)
-	GLOB.dir_set_event.register(daddy, src, /obj/effect/bluegoast/proc/mirror_dir)
+	GLOB.moved_event.register(daddy, src, /obj/bluegoast/proc/mirror)
+	GLOB.dir_set_event.register(daddy, src, /obj/bluegoast/proc/mirror_dir)
 	GLOB.destroyed_event.register(daddy, src, /datum/proc/qdel_self)
 
 
-/obj/effect/bluegoast/Destroy()
+/obj/bluegoast/Destroy()
 	GLOB.destroyed_event.unregister(daddy, src)
 	GLOB.dir_set_event.unregister(daddy, src)
 	GLOB.moved_event.unregister(daddy, src)
@@ -115,7 +115,7 @@
 	. = ..()
 
 
-/obj/effect/bluegoast/proc/mirror(atom/movable/am, old_loc, new_loc)
+/obj/bluegoast/proc/mirror(atom/movable/am, old_loc, new_loc)
 	var/ndir = get_dir(new_loc,old_loc)
 	appearance = daddy.appearance
 	var/nloc = get_step(src, ndir)
@@ -132,15 +132,15 @@
 			to_chat(daddy, SPAN_WARNING("You feel a bit less real. Which one of you two was original again?.."))
 
 
-/obj/effect/bluegoast/proc/mirror_dir(atom/movable/am, old_dir, new_dir)
+/obj/bluegoast/proc/mirror_dir(atom/movable/am, old_dir, new_dir)
 	set_dir(GLOB.reverse_dir[new_dir])
 
 
-/obj/effect/bluegoast/examine()
+/obj/bluegoast/examine()
 	return daddy?.examine(arglist(args))
 
 
-/obj/effect/bluegoast/proc/blueswitch()
+/obj/bluegoast/proc/blueswitch()
 	daddy.blueswitch(src)
 	qdel(src)
 
@@ -153,7 +153,7 @@
  *
  * Returns instance of mob. The created bluespace clone, or null if no clone was created.
  */
-/mob/proc/blueswitch(obj/effect/bluegoast/ghost)
+/mob/proc/blueswitch(obj/bluegoast/ghost)
 	var/mob/clone = new type(get_turf(ghost))
 	clone.appearance = appearance
 	clone.real_name = real_name
@@ -162,7 +162,7 @@
 	return clone
 
 
-/mob/living/exosuit/blueswitch(obj/effect/bluegoast/ghost)
+/mob/living/exosuit/blueswitch(obj/bluegoast/ghost)
 	if (!length(pilots))
 		return
 	for (var/mob/pilot in pilots)
@@ -171,7 +171,7 @@
 		add_pilot(clone)
 
 
-/mob/living/carbon/human/blueswitch(obj/effect/bluegoast/ghost)
+/mob/living/carbon/human/blueswitch(obj/bluegoast/ghost)
 	var/mob/living/carbon/human/clone = new(get_turf(ghost), species.name)
 	clone.dna = dna.Clone()
 	clone.sync_organ_dna()

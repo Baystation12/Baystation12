@@ -1,7 +1,7 @@
 #include "lost_supply_base_areas.dm"
 #include "../mining/mining_areas.dm"
 
-/obj/effect/overmap/visitable/sector/lost_supply_base
+/obj/overmap/visitable/sector/lost_supply_base
 	name = "supply station"
 	desc = "This looks like abandoned and heavy damaged supply station."
 	icon_state = "object"
@@ -26,18 +26,18 @@
 		/area/lost_supply_base/solar = NO_SCRUBBER|NO_VENT
 	)
 
-/obj/effect/shuttle_landmark/nav_lost_supply_base/nav1
+/obj/shuttle_landmark/nav_lost_supply_base/nav1
 	name = "Abandoned Supply Base Navpoint #1"
 	landmark_tag = "nav_lost_supply_base_1"
 
-/obj/effect/shuttle_landmark/nav_lost_supply_base/nav2
+/obj/shuttle_landmark/nav_lost_supply_base/nav2
 	name = "Abandoned Supply Base Navpoint #2"
 	landmark_tag = "nav_lost_supply_base_2"
 
-/obj/effect/shuttle_landmark/nav_lost_supply_base/nav3
+/obj/shuttle_landmark/nav_lost_supply_base/nav3
 	name = "Abandoned Supply Base Navpoint #3"
 	landmark_tag = "nav_lost_supply_base_3"
 
-/obj/effect/shuttle_landmark/nav_lost_supply_base/navantag
+/obj/shuttle_landmark/nav_lost_supply_base/navantag
 	name = "Abandoned Supply Base Navpoint #4"
 	landmark_tag = "nav_lost_supply_base_antag"

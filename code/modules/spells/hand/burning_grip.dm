@@ -26,7 +26,7 @@
 	if(H.r_hand)
 		targets += BP_R_HAND
 
-	var/obj/O = new /obj/effect/temporary(get_turf(H),3, 'icons/effects/effects.dmi', "fire_goon")
+	var/obj/O = new /obj/temporary(get_turf(H),3, 'icons/effects/effects.dmi', "fire_goon")
 	O.alpha = 150
 
 	for(var/organ in targets)

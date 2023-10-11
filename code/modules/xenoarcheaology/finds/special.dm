@@ -82,10 +82,10 @@
 
 	//suck up some blood to gain power
 	if(world.time - last_eat > eat_interval)
-		var/obj/effect/decal/cleanable/blood/B = locate() in range(2,src)
+		var/obj/decal/cleanable/blood/B = locate() in range(2,src)
 		if(B)
 			last_eat = world.time
-			if(istype(B, /obj/effect/decal/cleanable/blood/drip))
+			if(istype(B, /obj/decal/cleanable/blood/drip))
 				charges += 0.25
 			else
 				charges += 1
@@ -95,7 +95,7 @@
 	//use up stored charges
 	if(charges >= 10)
 		charges -= 10
-		new /obj/effect/spider/eggcluster(pick(view(1,src)))
+		new /obj/spider/eggcluster(pick(view(1,src)))
 
 	if(charges >= 3)
 		if(prob(5))
@@ -106,7 +106,7 @@
 
 	if(charges >= 1)
 		if(length(shadow_wights) < 5 && prob(5))
-			shadow_wights.Add(new /obj/effect/shadow_wight(src.loc))
+			shadow_wights.Add(new /obj/shadow_wight(src.loc))
 			playsound(src.loc, 'sound/effects/ghost.ogg', 50, 1, -3)
 			charges -= 0.1
 
@@ -121,7 +121,7 @@
 		if(wight_check_index > length(shadow_wights))
 			wight_check_index = 1
 
-		var/obj/effect/shadow_wight/W = shadow_wights[wight_check_index]
+		var/obj/shadow_wight/W = shadow_wights[wight_check_index]
 		if(isnull(W))
 			shadow_wights.Remove(wight_check_index)
 		else if(isnull(W.loc))
@@ -143,27 +143,27 @@
 		var/target = pick(M.organs_by_name)
 		M.apply_damage(rand(5, 10), DAMAGE_BRUTE, target)
 		to_chat(M, SPAN_WARNING("The skin on your [parse_zone(target)] feels like it's ripping apart, and a stream of blood flies out."))
-		var/obj/effect/decal/cleanable/blood/splatter/animated/B = new(M.loc)
+		var/obj/decal/cleanable/blood/splatter/animated/B = new(M.loc)
 		B.target_turf = pick(range(1, src))
 		B.blood_DNA = list()
 		B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 		M.vessel.remove_reagent(/datum/reagent/blood,rand(25,50))
 
 //animated blood 2 SPOOKY
-/obj/effect/decal/cleanable/blood/splatter/animated
+/obj/decal/cleanable/blood/splatter/animated
 	var/turf/target_turf
 	var/loc_last_process
 
-/obj/effect/decal/cleanable/blood/splatter/animated/Initialize()
+/obj/decal/cleanable/blood/splatter/animated/Initialize()
 	. = ..()
 	loc_last_process = src.loc
 	START_PROCESSING(SSobj, src)
 
-/obj/effect/decal/cleanable/blood/splatter/animated/Destroy()
+/obj/decal/cleanable/blood/splatter/animated/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/effect/decal/cleanable/blood/splatter/animated/Process()
+/obj/decal/cleanable/blood/splatter/animated/Process()
 	if(target_turf && src.loc != target_turf)
 		step_towards(src,target_turf)
 		if(src.loc == loc_last_process)
@@ -172,7 +172,7 @@
 
 		//leave some drips behind
 		if(prob(50))
-			var/obj/effect/decal/cleanable/blood/drip/D = new(src.loc)
+			var/obj/decal/cleanable/blood/drip/D = new(src.loc)
 			D.blood_DNA = src.blood_DNA.Copy()
 			if(prob(50))
 				D = new(src.loc)
@@ -183,21 +183,21 @@
 	else
 		..()
 
-/obj/effect/shadow_wight
+/obj/shadow_wight
 	name = "shadow wight"
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "shade"
 	density = TRUE
 
-/obj/effect/shadow_wight/Initialize()
+/obj/shadow_wight/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
 
-/obj/effect/shadow_wight/Destroy()
+/obj/shadow_wight/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/effect/shadow_wight/Process()
+/obj/shadow_wight/Process()
 	if(loc)
 		step_rand(src)
 		var/mob/living/carbon/M = locate() in src.loc
@@ -221,5 +221,5 @@
 	else
 		STOP_PROCESSING(SSobj, src)
 
-/obj/effect/shadow_wight/Bump(atom/obstacle)
+/obj/shadow_wight/Bump(atom/obstacle)
 	to_chat(obstacle, SPAN_WARNING("You feel a chill run down your spine!"))

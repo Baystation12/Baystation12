@@ -108,7 +108,7 @@
 
 /datum/reagent/nutriment/flour/touch_turf(turf/simulated/T)
 	if(istype(T))
-		new /obj/effect/decal/cleanable/flour(T)
+		new /obj/decal/cleanable/flour(T)
 		if(T.wet > 1)
 			T.wet = min(T.wet, 1)
 		else
@@ -125,7 +125,7 @@
 
 /datum/reagent/nutriment/batter/touch_turf(turf/simulated/T)
 	if(!istype(T, /turf/space))
-		new /obj/effect/decal/cleanable/pie_smudge(T)
+		new /obj/decal/cleanable/pie_smudge(T)
 		if(T.wet > 1)
 			T.wet = min(T.wet, 1)
 		else

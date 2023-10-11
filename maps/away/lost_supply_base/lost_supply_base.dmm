@@ -20,7 +20,7 @@
 /turf/simulated/floor,
 /area/space)
 "ae" = (
-/obj/effect/shuttle_landmark/nav_lost_supply_base/nav3,
+/obj/shuttle_landmark/nav_lost_supply_base/nav3,
 /turf/space,
 /area/space)
 "af" = (
@@ -40,7 +40,7 @@
 	id = "auxsolarstarboard";
 	name = "Starboard Auxiliary Solar Array"
 	},
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /turf/simulated/floor,
 /area/space)
 "ah" = (
@@ -146,7 +146,7 @@
 	id = "auxsolarstarboard";
 	name = "Starboard Auxiliary Solar Array"
 	},
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /turf/simulated/floor,
 /area/space)
 "ap" = (
@@ -173,11 +173,11 @@
 	id = "auxsolarstarboard";
 	name = "Starboard Auxiliary Solar Array"
 	},
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /turf/simulated/floor,
 /area/space)
 "at" = (
-/obj/effect/shuttle_landmark/nav_lost_supply_base/nav1,
+/obj/shuttle_landmark/nav_lost_supply_base/nav1,
 /turf/space,
 /area/space)
 "au" = (
@@ -186,7 +186,7 @@
 	name = "Starboard Auxiliary Solar Array"
 	},
 /obj/structure/cable/yellow,
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /turf/simulated/floor,
 /area/space)
 "av" = (
@@ -241,7 +241,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/industrial/warning/full,
+/obj/floor_decal/industrial/warning/full,
 /obj/machinery/light/small{
 	dir = 8
 	},
@@ -322,13 +322,13 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/lost_supply_base/solar)
 "aM" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden{
@@ -360,10 +360,10 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/plating,
 /area/lost_supply_base/solar)
 "aO" = (
@@ -474,7 +474,7 @@
 /turf/simulated/wall/r_wall,
 /area/lost_supply_base)
 "ba" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
@@ -483,7 +483,7 @@
 /turf/simulated/floor,
 /area/lost_supply_base)
 "bb" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 5;
 	icon_state = "warning"
 	},
@@ -491,7 +491,7 @@
 /area/lost_supply_base)
 "bc" = (
 /obj/random/projectile,
-/obj/effect/landmark/corpse/syndicate,
+/obj/landmark/corpse/syndicate,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "bd" = (
@@ -577,11 +577,11 @@
 /turf/space,
 /area/space)
 "bp" = (
-/obj/effect/overmap/visitable/sector/lost_supply_base,
+/obj/overmap/visitable/sector/lost_supply_base,
 /turf/space,
 /area/space)
 "bq" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "br" = (
@@ -596,7 +596,7 @@
 /turf/simulated/floor,
 /area/lost_supply_base)
 "bs" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/machinery/access_button{
 	command = "cycle_interior";
 	frequency = 1379;
@@ -614,13 +614,13 @@
 	},
 /area/lost_supply_base)
 "bu" = (
-/obj/effect/decal/cleanable/blood,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/decal/cleanable/blood,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "bv" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "bw" = (
@@ -719,7 +719,7 @@
 /turf/simulated/floor/tiled,
 /area/lost_supply_base/office)
 "bF" = (
-/obj/effect/landmark/corpse/engineer,
+/obj/landmark/corpse/engineer,
 /turf/simulated/floor/tiled,
 /area/lost_supply_base/office)
 "bG" = (
@@ -733,7 +733,7 @@
 	},
 /area/lost_supply_base/office)
 "bI" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/lost_supply_base/office)
 "bJ" = (
@@ -754,11 +754,11 @@
 /turf/simulated/floor,
 /area/lost_supply_base)
 "bK" = (
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "bL" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 6;
 	icon_state = "warning"
 	},
@@ -794,12 +794,12 @@
 /turf/space,
 /area/lost_supply_base/office)
 "bR" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "bS" = (
 /obj/random/trash,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "bT" = (
@@ -841,7 +841,7 @@
 /turf/simulated/floor/tiled,
 /area/lost_supply_base/office)
 "ca" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled,
 /area/lost_supply_base/office)
 "cb" = (
@@ -906,7 +906,7 @@
 /turf/simulated/wall/r_wall,
 /area/lost_supply_base/common)
 "cl" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
 	},
@@ -919,7 +919,7 @@
 	},
 /area/lost_supply_base)
 "cn" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 5;
 	icon_state = "warning"
 	},
@@ -927,13 +927,13 @@
 /turf/simulated/floor,
 /area/lost_supply_base)
 "co" = (
-/obj/effect/decal/cleanable/blood/gibs/body,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/decal/cleanable/blood/gibs/body,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "cp" = (
 /obj/structure/door_assembly,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "cq" = (
@@ -1033,7 +1033,7 @@
 /turf/simulated/floor,
 /area/lost_supply_base)
 "cD" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /turf/simulated/floor,
@@ -1138,7 +1138,7 @@
 /turf/simulated/floor/tiled,
 /area/lost_supply_base/common)
 "cW" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/lost_supply_base/common)
 "cX" = (
@@ -1212,7 +1212,7 @@
 /turf/simulated/floor,
 /area/lost_supply_base)
 "dh" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /obj/structure/closet/crate/secure/phoron{
@@ -1231,7 +1231,7 @@
 /area/lost_supply_base)
 "dk" = (
 /obj/structure/mech_wreckage/powerloader,
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "dl" = (
@@ -1288,16 +1288,16 @@
 /area/lost_supply_base/common)
 "ds" = (
 /obj/structure/closet/crate/secure/gear,
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "dt" = (
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /obj/structure/closet/crate/hydroponics,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "du" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 6;
 	icon_state = "warning"
 	},
@@ -1305,8 +1305,8 @@
 /turf/simulated/floor,
 /area/lost_supply_base)
 "dv" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/decal/cleanable/blood/writing,
+/obj/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood/writing,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "dw" = (
@@ -1353,7 +1353,7 @@
 /area/lost_supply_base/common)
 "dJ" = (
 /obj/random/junk,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "dL" = (
@@ -1398,7 +1398,7 @@
 /turf/simulated/floor,
 /area/lost_supply_base)
 "dZ" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
@@ -1436,12 +1436,12 @@
 /turf/simulated/floor,
 /area/lost_supply_base)
 "em" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/landmark/corpse/engineer,
+/obj/decal/cleanable/blood/splatter,
+/obj/landmark/corpse/engineer,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "en" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
@@ -1586,15 +1586,15 @@
 /turf/simulated/floor,
 /area/lost_supply_base)
 "fa" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "fb" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled{
 	icon_state = "steel_broken0"
 	},
@@ -1689,7 +1689,7 @@
 /turf/simulated/floor,
 /area/lost_supply_base)
 "fn" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 10;
 	icon_state = "warning"
 	},
@@ -1729,7 +1729,7 @@
 /turf/simulated/floor/tiled,
 /area/lost_supply_base/supply)
 "fu" = (
-/obj/effect/shuttle_landmark/nav_lost_supply_base/nav2,
+/obj/shuttle_landmark/nav_lost_supply_base/nav2,
 /turf/space,
 /area/space)
 "fv" = (
@@ -1767,12 +1767,12 @@
 /area/lost_supply_base)
 "fC" = (
 /obj/random/energy,
-/obj/effect/landmark/corpse/syndicate,
+/obj/landmark/corpse/syndicate,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "fD" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/effect/landmark/corpse/engineer,
+/obj/floor_decal/industrial/hatch/yellow,
+/obj/landmark/corpse/engineer,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "fE" = (
@@ -1797,18 +1797,18 @@
 /turf/simulated/floor,
 /area/lost_supply_base)
 "fI" = (
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "fJ" = (
 /obj/item/material/twohanded/fireaxe,
-/obj/effect/decal/cleanable/blood,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/decal/cleanable/blood,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "fK" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/effect/decal/cleanable/blood,
+/obj/floor_decal/industrial/hatch/yellow,
+/obj/decal/cleanable/blood,
 /obj/item/stack/tile/floor_dark{
 	pixel_x = 5;
 	pixel_y = -3
@@ -1816,10 +1816,10 @@
 /turf/simulated/floor,
 /area/lost_supply_base)
 "fL" = (
-/obj/effect/decal/cleanable/blood/writing{
+/obj/decal/cleanable/blood/writing{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "fM" = (
@@ -1863,10 +1863,10 @@
 /turf/simulated/floor,
 /area/lost_supply_base)
 "fR" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "fS" = (
@@ -1920,7 +1920,7 @@
 /area/lost_supply_base/supply)
 "fX" = (
 /obj/item/gun/projectile/shotgun/pump,
-/obj/effect/landmark/corpse/syndicate,
+/obj/landmark/corpse/syndicate,
 /turf/simulated/floor/tiled{
 	icon_state = "steel_broken4"
 	},
@@ -1964,7 +1964,7 @@
 /turf/simulated/floor,
 /area/lost_supply_base)
 "gc" = (
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/binary/pump/on{
 	dir = 8;
 	target_pressure = 200
@@ -1972,7 +1972,7 @@
 /turf/simulated/floor,
 /area/lost_supply_base)
 "gd" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 6;
 	icon_state = "warning"
 	},
@@ -1985,7 +1985,7 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning/full,
+/obj/floor_decal/industrial/warning/full,
 /turf/simulated/floor,
 /area/lost_supply_base)
 "gf" = (
@@ -2075,7 +2075,7 @@
 /turf/simulated/floor/tiled,
 /area/lost_supply_base/supply)
 "gs" = (
-/obj/effect/shuttle_landmark/nav_lost_supply_base/navantag,
+/obj/shuttle_landmark/nav_lost_supply_base/navantag,
 /turf/space,
 /area/space)
 "gt" = (
@@ -2108,7 +2108,7 @@
 /turf/simulated/floor,
 /area/space)
 "mI" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor,
 /area/space)
 "pr" = (
@@ -2124,7 +2124,7 @@
 /turf/simulated/floor,
 /area/space)
 "zC" = (
-/obj/effect/paint/red,
+/obj/paint/red,
 /turf/simulated/wall/r_titanium,
 /area/space)
 "zL" = (
@@ -2141,7 +2141,7 @@
 /turf/simulated/floor,
 /area/space)
 "EM" = (
-/obj/effect/paint/silver,
+/obj/paint/silver,
 /turf/simulated/wall/r_titanium,
 /area/space)
 "Rn" = (
@@ -2149,7 +2149,7 @@
 /turf/simulated/floor,
 /area/space)
 "Wm" = (
-/obj/effect/paint/red,
+/obj/paint/red,
 /obj/structure/sign/warning/fire,
 /turf/simulated/wall/r_titanium,
 /area/space)

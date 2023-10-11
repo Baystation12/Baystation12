@@ -46,7 +46,7 @@
 		qdel(src)
 		return
 
-	var/obj/effect/overmap/visitable/cell = map_sectors["[associated_z]"]
+	var/obj/overmap/visitable/cell = map_sectors["[associated_z]"]
 	if(istype(cell))
 		sync_cell(cell)
 
@@ -54,7 +54,7 @@
 	var/added_spawnpoint
 	for(var/check_z in GetConnectedZlevels(associated_z))
 		for(var/thing in block(locate(1, 1, check_z), locate(world.maxx, world.maxy, check_z)))
-			for(var/obj/effect/submap_landmark/spawnpoint/landmark in thing)
+			for(var/obj/submap_landmark/spawnpoint/landmark in thing)
 				var/datum/job/submap/job = jobs[landmark.name]
 				if(istype(job))
 					job.spawnpoints += landmark
@@ -68,7 +68,7 @@
 	if(archetype && archetype.call_webhook)
 		SSwebhooks.send(archetype.call_webhook, list("name" = name))
 
-/datum/submap/proc/sync_cell(obj/effect/overmap/visitable/cell)
+/datum/submap/proc/sync_cell(obj/overmap/visitable/cell)
 	name = cell.name
 
 /datum/submap/proc/available()

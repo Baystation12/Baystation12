@@ -112,9 +112,9 @@
 		list(11, 0.9),
 	)
 
-	muzzle_type = /obj/effect/projectile/laser/pulse/muzzle
-	tracer_type = /obj/effect/projectile/laser/pulse/tracer
-	impact_type = /obj/effect/projectile/laser/pulse/impact
+	muzzle_type = /obj/projectile/laser/pulse/muzzle
+	tracer_type = /obj/projectile/laser/pulse/tracer
+	impact_type = /obj/projectile/laser/pulse/impact
 
 /mob/living/simple_animal/hostile/fleet_heavy
 	name = "\improper hullbreaker monitor"
@@ -303,7 +303,7 @@
 		user.visible_message(SPAN_WARNING("\The [user]'s shields flash and crackle."))
 		flick("shield_drop", src)
 		playsound(user,'sound/effects/basscannon.ogg',35,1)
-		new /obj/effect/effect/smoke/illumination(user.loc, 5, 4, 1, "#ffffff")
+		new /obj/effect/smoke/illumination(user.loc, 5, 4, 1, "#ffffff")
 		return AURA_FALSE|AURA_CANCEL
 	visible_message(SPAN_DANGER("\The [src]'s exposed back dents and buckles!"))
 	playsound(user,'sound/items/Welder2.ogg',35,1)

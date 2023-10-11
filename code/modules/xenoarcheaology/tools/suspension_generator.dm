@@ -10,7 +10,7 @@
 	active_power_usage = 5 KILOWATTS
 	machine_name = "suspension generator"
 	machine_desc = "Projects a pacifying energy field, used to hold xenofauna (among other things) for safe study."
-	var/obj/effect/suspension_field/suspension_field
+	var/obj/suspension_field/suspension_field
 
 /obj/machinery/suspension_gen/Process()
 	if(suspension_field)
@@ -186,13 +186,13 @@
 		AddOverlays("suspension_panel")
 	. = ..()
 
-/obj/effect/suspension_field
+/obj/suspension_field
 	name = "energy field"
 	icon = 'icons/effects/effects.dmi'
 	anchored = TRUE
 	density = TRUE
 
-/obj/effect/suspension_field/Destroy()
+/obj/suspension_field/Destroy()
 	for(var/atom/movable/I in src)
 		I.dropInto(loc)
 	return ..()

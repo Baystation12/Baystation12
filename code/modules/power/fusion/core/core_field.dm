@@ -3,7 +3,7 @@
 #define FUSION_RUPTURE_THRESHOLD   10000
 #define FUSION_REACTANT_CAP        10000
 
-/obj/effect/fusion_em_field
+/obj/fusion_em_field
 	name = "electromagnetic field"
 	desc = "A coruscating, barely visible field of energy. It is shaped like a slightly flattened torus."
 	alpha = 30
@@ -44,7 +44,7 @@
 
 	var/animating_ripple = FALSE
 
-/obj/effect/fusion_em_field/proc/UpdateVisuals()
+/obj/fusion_em_field/proc/UpdateVisuals()
 	var/radius = ((size-1) / 2) * WORLD_ICON_SIZE
 
 	particles.position = generator("circle", radius - size, radius + size, NORMAL_RAND)
@@ -56,7 +56,7 @@
 	particles.spawning = last_reactants * 0.9 + Interpolate(0, 200, clamp(plasma_temperature / 70000, 0, 1))
 
 
-/obj/effect/fusion_em_field/New(loc, obj/machinery/power/fusion_core/new_owned_core)
+/obj/fusion_em_field/New(loc, obj/machinery/power/fusion_core/new_owned_core)
 	..()
 
 	owned_core = new_owned_core
@@ -77,7 +77,7 @@
 	particles.spawning = 0 //Turn off particles until something calls for it
 
 	//create the gimmicky things to handle field collisions
-	var/obj/effect/fusion_particle_catcher/catcher
+	var/obj/fusion_particle_catcher/catcher
 
 	catcher = new (locate(src.x,src.y,src.z))
 	catcher.parent = src
@@ -107,11 +107,11 @@
 
 	START_PROCESSING(SSobj, src)
 
-/obj/effect/fusion_em_field/Initialize()
+/obj/fusion_em_field/Initialize()
 	. = ..()
 	addtimer(new Callback(src, .proc/update_light_colors), 10 SECONDS, TIMER_LOOP)
 
-/obj/effect/fusion_em_field/proc/update_light_colors()
+/obj/fusion_em_field/proc/update_light_colors()
 	var/use_range
 	var/use_power
 	switch (plasma_temperature)
@@ -157,7 +157,7 @@
 		UNLINT(var/dm_filter/bloom = filters[3])
 		UNLINT(bloom.alpha = alpha)
 
-/obj/effect/fusion_em_field/Process()
+/obj/fusion_em_field/Process()
 	//make sure the field generator is still intact
 	if(QDELETED(owned_core))
 		qdel(src)
@@ -205,7 +205,7 @@
 		SSradiation.radiate(src, round(radiation*0.001))
 	return 1
 
-/obj/effect/fusion_em_field/proc/check_instability()
+/obj/fusion_em_field/proc/check_instability()
 	if(tick_instability > 0)
 		percent_unstable += (tick_instability*size)/FUSION_INSTABILITY_DIVISOR
 		tick_instability = 0
@@ -269,7 +269,7 @@
 			Ripple(wave_size, ripple_radius)
 	return
 
-/obj/effect/fusion_em_field/proc/Ripple(_size, _radius)
+/obj/fusion_em_field/proc/Ripple(_size, _radius)
 	if(!animating_ripple)
 		UNLINT(var/dm_filter/ripple = filters[1])
 		UNLINT(ripple.size = _size)
@@ -278,13 +278,13 @@
 		animating_ripple = TRUE
 		addtimer(new Callback(src, .proc/ResetRipple), 2 SECONDS)
 
-/obj/effect/fusion_em_field/proc/ResetRipple()
+/obj/fusion_em_field/proc/ResetRipple()
 	animating_ripple = FALSE
 
-/obj/effect/fusion_em_field/proc/is_shutdown_safe()
+/obj/fusion_em_field/proc/is_shutdown_safe()
 	return plasma_temperature < 1000
 
-/obj/effect/fusion_em_field/proc/Rupture()
+/obj/fusion_em_field/proc/Rupture()
 	visible_message(SPAN_DANGER("\The [src] shudders like a dying animal before flaring to eye-searing brightness and rupturing!"))
 	set_light(15, 1, "#ccccff")
 	empulse(get_turf(src), ceil(plasma_temperature/1000), ceil(plasma_temperature/300))
@@ -293,7 +293,7 @@
 	explosion(get_turf(owned_core), 8, EX_ACT_LIGHT) // Blow out all the windows.
 	return
 
-/obj/effect/fusion_em_field/proc/ChangeFieldStrength(new_strength)
+/obj/fusion_em_field/proc/ChangeFieldStrength(new_strength)
 	var/calc_size = 1
 	if(new_strength <= 50)
 		calc_size = 1
@@ -312,7 +312,7 @@
 	field_strength = new_strength
 	change_size(calc_size)
 
-/obj/effect/fusion_em_field/proc/AddEnergy(a_energy, a_plasma_temperature)
+/obj/fusion_em_field/proc/AddEnergy(a_energy, a_plasma_temperature)
 	energy += a_energy
 	plasma_temperature += a_plasma_temperature
 	if(a_energy && percent_unstable > 0)
@@ -324,7 +324,7 @@
 		plasma_temperature += 1
 	UpdateVisuals()
 
-/obj/effect/fusion_em_field/proc/AddReactants(name, quantity = 1)
+/obj/fusion_em_field/proc/AddReactants(name, quantity = 1)
 	if(name in reactants)
 		reactants[name] += quantity
 	else if(name != "proton" && name != "electron" && name != "neutron")
@@ -332,7 +332,7 @@
 		reactants[name] = quantity
 	UpdateVisuals()
 
-/obj/effect/fusion_em_field/proc/RadiateAll(ratio_lost = 1)
+/obj/fusion_em_field/proc/RadiateAll(ratio_lost = 1)
 
 	// Create our plasma field and dump it into our environment.
 	var/turf/T = get_turf(src)
@@ -362,7 +362,7 @@
 	SSradiation.radiate(src, round(radiation*0.001))
 	Radiate()
 
-/obj/effect/fusion_em_field/proc/Radiate()
+/obj/fusion_em_field/proc/Radiate()
 	if(istype(loc, /turf))
 		var/empsev = max(1, min(3, ceil(size/2)))
 		for(var/atom/movable/AM in range(max(1,floor(size/2)), loc))
@@ -388,19 +388,19 @@
 			environment.add_thermal_energy(plasma_temperature*20000)
 	radiation = 0
 
-/obj/effect/fusion_em_field/proc/change_size(newsize = 1)
+/obj/fusion_em_field/proc/change_size(newsize = 1)
 	var/changed = 0
 	if( ((newsize-1)%2==0) && (newsize<=13) )
 		size = newsize
 		changed = newsize
 		UpdateVisuals()
 
-	for(var/obj/effect/fusion_particle_catcher/catcher in particle_catchers)
+	for(var/obj/fusion_particle_catcher/catcher in particle_catchers)
 		catcher.UpdateSize()
 	return changed
 
 //the !!fun!! part
-/obj/effect/fusion_em_field/proc/React()
+/obj/fusion_em_field/proc/React()
 	//loop through the reactants in random order
 	var/list/react_pool = reactants.Copy()
 	last_reactants = 0
@@ -518,7 +518,7 @@
 
 	UpdateVisuals()
 
-/obj/effect/fusion_em_field/Destroy()
+/obj/fusion_em_field/Destroy()
 	set_light(0)
 	RadiateAll()
 	QDEL_NULL_LIST(particle_catchers)
@@ -528,7 +528,7 @@
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/effect/fusion_em_field/bullet_act(obj/item/projectile/Proj)
+/obj/fusion_em_field/bullet_act(obj/item/projectile/Proj)
 	AddEnergy(Proj.damage)
 	update_icon()
 	return 0

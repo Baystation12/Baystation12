@@ -1,4 +1,4 @@
-/obj/effect/overmap/visitable/sector/exoplanet/barren
+/obj/overmap/visitable/sector/exoplanet/barren
 	name = "barren exoplanet"
 	desc = "An exoplanet that couldn't hold its atmosphere."
 	color = "#6c6c6c"
@@ -13,11 +13,11 @@
 	habitability_distribution = HABITABILITY_BAD
 	has_trees = FALSE
 
-/obj/effect/overmap/visitable/sector/exoplanet/barren/generate_atmosphere()
+/obj/overmap/visitable/sector/exoplanet/barren/generate_atmosphere()
 	..()
 	atmosphere.remove_ratio(0.9)
 
-/obj/effect/overmap/visitable/sector/exoplanet/barren/generate_flora()
+/obj/overmap/visitable/sector/exoplanet/barren/generate_flora()
 	if(prob(10))
 		flora_diversity = 1
 	..()

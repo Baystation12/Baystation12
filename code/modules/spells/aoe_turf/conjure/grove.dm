@@ -27,7 +27,7 @@
 
 /spell/aoe_turf/conjure/grove/before_cast()
 	var/turf/T = get_turf(holder)
-	var/obj/effect/vine/P = new(T,seed)
+	var/obj/vine/P = new(T,seed)
 	P.spread_chance = spread
 
 

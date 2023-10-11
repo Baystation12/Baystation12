@@ -211,10 +211,10 @@
 	return data
 
 /proc/blood_splatter(target,datum/reagent/blood/source,large,spray_dir)
-	RETURN_TYPE(/obj/effect/decal/cleanable/blood)
+	RETURN_TYPE(/obj/decal/cleanable/blood)
 
-	var/obj/effect/decal/cleanable/blood/B
-	var/decal_type = /obj/effect/decal/cleanable/blood/splatter
+	var/obj/decal/cleanable/blood/B
+	var/decal_type = /obj/decal/cleanable/blood/splatter
 	var/turf/T = get_turf(target)
 
 	if(istype(source,/mob/living/carbon))
@@ -226,11 +226,11 @@
 	// Are we dripping or splattering?
 	var/list/drips = list()
 	// Only a certain number of drips (or one large splatter) can be on a given turf.
-	for(var/obj/effect/decal/cleanable/blood/drip/drop in T)
+	for(var/obj/decal/cleanable/blood/drip/drop in T)
 		drips |= drop.drips
 		qdel(drop)
 	if(!large && length(drips) < 3)
-		decal_type = /obj/effect/decal/cleanable/blood/drip
+		decal_type = /obj/decal/cleanable/blood/drip
 
 	// Find a blood decal or create a new one.
 	if(T)
@@ -240,7 +240,7 @@
 	if(!B)
 		B = new decal_type(T)
 
-	var/obj/effect/decal/cleanable/blood/drip/drop = B
+	var/obj/decal/cleanable/blood/drip/drop = B
 	if(istype(drop) && drips && length(drips) && !large)
 		drop.AddOverlays(drips)
 		drop.drips |= drips

@@ -330,7 +330,7 @@ var/global/list/mining_floors = list()
 
 	//many finds are ancient and thus very delicate - luckily there is a specialised energy suspension field which protects them when they're being extracted
 	if(prob(F.prob_delicate))
-		var/obj/effect/suspension_field/S = locate() in src
+		var/obj/suspension_field/S = locate() in src
 		if(!S)
 			visible_message(SPAN_CLASS("danger", "[pick("An object in the rock crumbles away into dust.","Something falls out of the rock and shatters onto the ground.")]"))
 			finds.Remove(F)

@@ -24,7 +24,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 
 /datum/antagonist/vox/add_antagonist(datum/mind/player, ignore_role, do_not_equip, move_to_spawn, do_not_announce, preserve_appearance)
 	if(pending_item_spawn)
-		for(var/obj/effect/voxartifactspawner/S as anything in GLOB.vox_artifact_spawners)
+		for(var/obj/voxartifactspawner/S as anything in GLOB.vox_artifact_spawners)
 			S.spawn_artifact()
 		pending_item_spawn = FALSE
 	..()
@@ -230,7 +230,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 	density = TRUE
 	var/favor_value = 12
 
-/obj/effect/voxartifactspawner
+/obj/voxartifactspawner
 	name = "landmark"
 	icon = 'icons/effects/landmarks.dmi'
 	icon_state = "x2"
@@ -239,15 +239,15 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 	simulated = FALSE
 	invisibility = INVISIBILITY_ABSTRACT
 
-/obj/effect/voxartifactspawner/Initialize(mapload)
+/obj/voxartifactspawner/Initialize(mapload)
 	GLOB.vox_artifact_spawners += src
 	return ..()
 
-/obj/effect/voxartifactspawner/Destroy()
+/obj/voxartifactspawner/Destroy()
 	GLOB.vox_artifact_spawners -= src
 	return ..()
 
-/obj/effect/voxartifactspawner/proc/spawn_artifact()
+/obj/voxartifactspawner/proc/spawn_artifact()
 	var/item_list = list(
 	/obj/item/voxartifact = 3,
 	/obj/structure/voxartifactbig = 1,

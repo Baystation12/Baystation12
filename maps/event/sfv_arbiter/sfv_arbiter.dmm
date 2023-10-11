@@ -11,7 +11,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "aq" = (
-/obj/effect/paint/iccgn,
+/obj/paint/iccgn,
 /turf/simulated/wall/r_titanium,
 /area/map_template/sfv_arbiter)
 "au" = (
@@ -23,7 +23,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/grey{
+/obj/floor_decal/corner/grey{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
@@ -31,7 +31,7 @@
 "aR" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -64,7 +64,7 @@
 /area/map_template/sfv_arbiter)
 "cx" = (
 /obj/structure/catwalk,
-/obj/effect/floor_decal/industrial/warning/corner,
+/obj/floor_decal/industrial/warning/corner,
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 2;
@@ -76,7 +76,7 @@
 /obj/structure/bed/chair/shuttle/black{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/red{
+/obj/floor_decal/corner/red{
 	dir = 9;
 	icon_state = "corner_white"
 	},
@@ -110,14 +110,14 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/effect/wallframe_spawn/reinforced/polarized/full{
+/obj/wallframe_spawn/reinforced/polarized/full{
 	color = "#4c535b"
 	},
-/obj/effect/paint/iccgn,
+/obj/paint/iccgn,
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "dd" = (
-/obj/effect/floor_decal/industrial/warning/corner,
+/obj/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "df" = (
@@ -144,7 +144,7 @@
 /obj/structure/bed/chair/shuttle/black{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/grey/mono,
+/obj/floor_decal/corner/grey/mono,
 /obj/item/clothing/head/helmet,
 /obj/machinery/computer/ship/navigation/telescreen{
 	pixel_x = 32
@@ -153,7 +153,7 @@
 /area/map_template/sfv_arbiter)
 "et" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/red,
+/obj/floor_decal/corner/red,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "eQ" = (
@@ -165,7 +165,7 @@
 /area/map_template/sfv_arbiter)
 "fu" = (
 /obj/structure/sign/warning/docking_area,
-/obj/effect/paint/iccgn,
+/obj/paint/iccgn,
 /turf/simulated/wall/r_titanium,
 /area/map_template/sfv_arbiter)
 "fO" = (
@@ -192,7 +192,7 @@
 /obj/machinery/atmospherics/unary/tank{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/outline/blue,
+/obj/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/sfv_arbiter)
 "ip" = (
@@ -204,11 +204,11 @@
 	pixel_x = -5
 	},
 /obj/item/pen,
-/obj/effect/floor_decal/corner/red/mono,
+/obj/floor_decal/corner/red/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/sfv_arbiter)
 "it" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "stripe"
 	},
@@ -225,7 +225,7 @@
 /obj/item/stack/material/phoron/fifty,
 /obj/structure/closet/crate/radiation,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "stripe"
 	},
@@ -242,14 +242,14 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/sfv_arbiter)
 "jM" = (
-/obj/effect/floor_decal/corner/red{
+/obj/floor_decal/corner/red{
 	dir = 4;
 	icon_state = "corner_white"
 	},
 /obj/structure/bed/chair/shuttle/black{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/red{
+/obj/floor_decal/corner/red{
 	dir = 9;
 	icon_state = "corner_white"
 	},
@@ -301,7 +301,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
 /obj/structure/cable/cyan{
@@ -356,7 +356,7 @@
 	},
 /area/map_template/sfv_arbiter)
 "ll" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/item/tank/jetpack/oxygen,
 /obj/item/tank/jetpack/oxygen,
 /obj/item/tank/jetpack/oxygen,
@@ -390,7 +390,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
@@ -409,7 +409,7 @@
 	maximum_pressure = 15000.00;
 	start_pressure = 12000.00
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/sfv_arbiter)
 "nx" = (
@@ -419,7 +419,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/sfv_arbiter)
 "nG" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /obj/structure/extinguisher_cabinet{
@@ -448,7 +448,7 @@
 /area/map_template/sfv_arbiter)
 "oa" = (
 /obj/structure/closet/radiation,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 1
 	},
 /obj/item/device/radio/headset/sfv_arbiter,
@@ -459,7 +459,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/sfv_arbiter)
 "od" = (
-/obj/effect/floor_decal/corner/grey{
+/obj/floor_decal/corner/grey{
 	dir = 5
 	},
 /obj/structure/cable/cyan{
@@ -528,12 +528,12 @@
 	name = "Window Shutters Control";
 	pixel_x = 4
 	},
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /obj/item/device/radio/headset/sfv_arbiter,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/sfv_arbiter)
 "qt" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /obj/machinery/vending/medical/torch,
 /turf/simulated/wall/titanium,
 /area/map_template/sfv_arbiter)
@@ -569,7 +569,7 @@
 /obj/structure/bed/chair/shuttle/black{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/red/three_quarters,
+/obj/floor_decal/corner/red/three_quarters,
 /obj/machinery/flasher{
 	id_tag = "rescueflash";
 	pixel_y = -25
@@ -580,7 +580,7 @@
 /obj/structure/bed/chair/shuttle/black{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/grey/mono,
+/obj/floor_decal/corner/grey/mono,
 /obj/item/clothing/head/helmet,
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -592,12 +592,12 @@
 "sH" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /obj/machinery/radio_beacon,
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "sN" = (
-/obj/effect/floor_decal/corner/b_green/mono,
+/obj/floor_decal/corner/b_green/mono,
 /obj/structure/table/rack,
 /obj/machinery/door/window/eastleft{
 	autoset_access = 0;
@@ -626,7 +626,7 @@
 "tP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/yellow/full,
+/obj/floor_decal/corner/yellow/full,
 /obj/machinery/door/airlock/centcom{
 	name = "Armory";
 	opacity = 1
@@ -634,13 +634,13 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "ue" = (
-/obj/effect/floor_decal/corner/b_green/three_quarters{
+/obj/floor_decal/corner/b_green/three_quarters{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "ut" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
@@ -661,7 +661,7 @@
 	dir = 1;
 	icon_state = "0-2"
 	},
-/obj/effect/paint/iccgn,
+/obj/paint/iccgn,
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "uR" = (
@@ -677,10 +677,10 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/effect/wallframe_spawn/reinforced/polarized/full{
+/obj/wallframe_spawn/reinforced/polarized/full{
 	color = "#4c535b"
 	},
-/obj/effect/paint/iccgn,
+/obj/paint/iccgn,
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "uY" = (
@@ -704,13 +704,13 @@
 	pixel_x = -1;
 	pixel_y = 32
 	},
-/obj/effect/floor_decal/corner/b_green/three_quarters{
+/obj/floor_decal/corner/b_green/three_quarters{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "vK" = (
-/obj/effect/floor_decal/corner/b_green/mono,
+/obj/floor_decal/corner/b_green/mono,
 /obj/structure/table/rack,
 /obj/machinery/door/window/eastleft{
 	autoset_access = 0;
@@ -720,12 +720,12 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "vS" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable/cyan{
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/paint/black,
+/obj/paint/black,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
@@ -746,7 +746,7 @@
 /obj/item/gun/projectile/automatic/merc_smg,
 /obj/item/gun/projectile/automatic/merc_smg,
 /obj/item/gun/projectile/automatic/merc_smg,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/sfv_arbiter)
 "vY" = (
@@ -763,16 +763,16 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/effect/wallframe_spawn/reinforced/polarized/full{
+/obj/wallframe_spawn/reinforced/polarized/full{
 	color = "#4c535b"
 	},
-/obj/effect/paint/iccgn,
+/obj/paint/iccgn,
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "wW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5;
 	icon_state = "corner_white"
 	},
@@ -795,11 +795,11 @@
 /obj/item/reagent_containers/syringe,
 /obj/item/bodybag/cryobag,
 /obj/item/bodybag/cryobag,
-/obj/effect/floor_decal/corner/white/mono,
+/obj/floor_decal/corner/white/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/sfv_arbiter)
 "xB" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
@@ -811,11 +811,11 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/paint/iccgn,
+/obj/paint/iccgn,
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "xW" = (
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /obj/machinery/light/spot{
 	dir = 1
 	},
@@ -845,8 +845,8 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/paint/black,
-/obj/effect/overmap/visitable/ship/landable/sfv_arbiter,
+/obj/paint/black,
+/obj/overmap/visitable/ship/landable/sfv_arbiter,
 /turf/simulated/wall/titanium,
 /area/map_template/sfv_arbiter)
 "yf" = (
@@ -872,7 +872,7 @@
 /area/map_template/sfv_arbiter)
 "zZ" = (
 /obj/machinery/computer/ship/sensors,
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 2;
@@ -890,7 +890,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/b_green/mono,
+/obj/floor_decal/corner/b_green/mono,
 /obj/structure/table/rack,
 /obj/machinery/door/window/eastleft{
 	autoset_access = 0;
@@ -901,7 +901,7 @@
 /area/map_template/sfv_arbiter)
 "Bb" = (
 /obj/machinery/computer/ship/engines,
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/sfv_arbiter)
 "Bd" = (
@@ -913,7 +913,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -923,7 +923,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "BE" = (
-/obj/effect/floor_decal/corner/red/three_quarters{
+/obj/floor_decal/corner/red/three_quarters{
 	dir = 4
 	},
 /obj/structure/bed/chair/shuttle/black{
@@ -944,7 +944,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/sfv_arbiter)
 "Cc" = (
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
 /obj/machinery/light{
@@ -958,7 +958,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 8
 	},
 /obj/structure/cable/cyan{
@@ -973,11 +973,11 @@
 /obj/machinery/portable_atmospherics/canister/air/airlock{
 	start_pressure = 1900
 	},
-/obj/effect/floor_decal/industrial/outline,
+/obj/floor_decal/industrial/outline,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/sfv_arbiter)
 "CT" = (
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 8;
 	icon_state = "warningcorner"
 	},
@@ -999,7 +999,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/sfv_arbiter)
 "Dx" = (
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
 /obj/structure/cable/cyan{
@@ -1013,7 +1013,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "DI" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable/cyan{
 	d2 = 4;
 	icon_state = "0-4"
@@ -1022,7 +1022,7 @@
 	id_tag = "rescuedock";
 	name = "External Blast Shield"
 	},
-/obj/effect/paint/iccgn,
+/obj/paint/iccgn,
 /obj/structure/cable/cyan{
 	d2 = 2;
 	icon_state = "0-2"
@@ -1030,7 +1030,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "DK" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
@@ -1047,7 +1047,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "DU" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /obj/item/device/radio/intercom/hailing{
@@ -1064,7 +1064,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/sfv_arbiter)
 "Ei" = (
-/obj/effect/floor_decal/corner/b_green/three_quarters,
+/obj/floor_decal/corner/b_green/three_quarters,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
@@ -1075,7 +1075,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/b_green/three_quarters{
+/obj/floor_decal/corner/b_green/three_quarters{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
@@ -1090,7 +1090,7 @@
 /obj/item/gun/projectile/pistol/m22f,
 /obj/item/gun/projectile/pistol/m22f,
 /obj/item/gun/projectile/pistol/m22f,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/sfv_arbiter)
 "EP" = (
@@ -1107,10 +1107,10 @@
 	dir = 1;
 	icon_state = "0-2"
 	},
-/obj/effect/wallframe_spawn/reinforced/polarized/full{
+/obj/wallframe_spawn/reinforced/polarized/full{
 	color = "#4c535b"
 	},
-/obj/effect/paint/iccgn,
+/obj/paint/iccgn,
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "EQ" = (
@@ -1132,7 +1132,7 @@
 /obj/structure/bed/chair/shuttle/black{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/grey/mono,
+/obj/floor_decal/corner/grey/mono,
 /obj/machinery/light{
 	dir = 8;
 	icon_state = "tube1";
@@ -1154,7 +1154,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/sfv_arbiter)
 "EY" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/machinery/power/shield_generator,
 /obj/structure/cable/cyan{
 	d2 = 2;
@@ -1163,7 +1163,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/sfv_arbiter)
 "FJ" = (
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -1182,11 +1182,11 @@
 /obj/structure/window/reinforced/crescent{
 	dir = 8
 	},
-/obj/effect/paint/red,
+/obj/paint/red,
 /turf/simulated/wall/r_titanium,
 /area/map_template/sfv_arbiter)
 "HJ" = (
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -1203,7 +1203,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
@@ -1218,7 +1218,7 @@
 	dir = 5;
 	icon_state = "intact"
 	},
-/obj/effect/shuttle_landmark/sfv_arbiter/start,
+/obj/shuttle_landmark/sfv_arbiter/start,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/sfv_arbiter)
 "HT" = (
@@ -1252,7 +1252,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Is" = (
-/obj/effect/floor_decal/corner/b_green/full,
+/obj/floor_decal/corner/b_green/full,
 /obj/machinery/door/airlock/centcom{
 	name = "EVA";
 	opacity = 1
@@ -1277,13 +1277,13 @@
 	icon_state = "tube1";
 	pixel_y = 0
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/sfv_arbiter)
 "IS" = (
-/obj/effect/paint/red,
+/obj/paint/red,
 /turf/simulated/wall/r_titanium,
 /area/map_template/sfv_arbiter)
 "IU" = (
@@ -1293,7 +1293,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Jg" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
@@ -1313,20 +1313,20 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/effect/paint/iccgn,
+/obj/paint/iccgn,
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "Jh" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular/escape_pod{
 	id_tag = "rescuedock";
 	name = "External Blast Shield"
 	},
-/obj/effect/paint/iccgn,
+/obj/paint/iccgn,
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "Jz" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/fabricator/hacked,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
@@ -1345,7 +1345,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/sfv_arbiter)
 "Kt" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /obj/structure/sign/warning/secure_area/armory,
 /turf/simulated/wall/r_titanium,
 /area/map_template/sfv_arbiter)
@@ -1369,7 +1369,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "KK" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable/cyan{
 	d2 = 8;
 	icon_state = "0-8"
@@ -1382,8 +1382,8 @@
 	id_tag = "rescuedock";
 	name = "External Blast Shield"
 	},
-/obj/effect/paint/iccgn,
-/obj/effect/paint/iccgn,
+/obj/paint/iccgn,
+/obj/paint/iccgn,
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "KO" = (
@@ -1410,11 +1410,11 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/sfv_arbiter)
 "Lr" = (
-/obj/effect/paint/red,
+/obj/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 9
 	},
@@ -1438,7 +1438,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 4;
@@ -1453,7 +1453,7 @@
 /area/map_template/sfv_arbiter)
 "LO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
@@ -1461,7 +1461,7 @@
 /area/map_template/sfv_arbiter)
 "LU" = (
 /obj/structure/table/rack,
-/obj/effect/floor_decal/corner/b_green/mono,
+/obj/floor_decal/corner/b_green/mono,
 /obj/item/clothing/accessory/solgov/department/command/fleet,
 /obj/item/clothing/accessory/solgov/department/command/fleet,
 /obj/item/clothing/accessory/solgov/department/engineering/fleet,
@@ -1484,7 +1484,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1496,7 +1496,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Mi" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/machinery/telecomms/allinone/sfv_arbiter,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/sfv_arbiter)
@@ -1512,13 +1512,13 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/b_green{
+/obj/floor_decal/corner/b_green{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
@@ -1531,10 +1531,10 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/red{
+/obj/floor_decal/corner/red{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/b_green{
+/obj/floor_decal/corner/b_green{
 	dir = 5;
 	icon_state = "corner_white"
 	},
@@ -1546,7 +1546,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Mx" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /obj/structure/sign/warning/high_voltage{
 	dir = 8;
 	icon_state = "shock"
@@ -1554,7 +1554,7 @@
 /turf/simulated/wall/titanium,
 /area/map_template/sfv_arbiter)
 "Ne" = (
-/obj/effect/floor_decal/corner/b_green{
+/obj/floor_decal/corner/b_green{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1579,7 +1579,7 @@
 	pixel_x = -4;
 	pixel_y = 4
 	},
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /obj/item/device/radio/headset/sfv_arbiter,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/sfv_arbiter)
@@ -1587,7 +1587,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -1644,7 +1644,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/sfv_arbiter)
 "NO" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable/cyan{
 	d2 = 8;
 	icon_state = "0-8"
@@ -1653,7 +1653,7 @@
 	id_tag = "rescuedock";
 	name = "External Blast Shield"
 	},
-/obj/effect/paint/iccgn,
+/obj/paint/iccgn,
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "NV" = (
@@ -1662,7 +1662,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
 /obj/structure/table/steel_reinforced,
@@ -1680,7 +1680,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
@@ -1699,11 +1699,11 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/titanium,
 /area/map_template/sfv_arbiter)
 "Oo" = (
-/obj/effect/paint/red,
+/obj/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
@@ -1742,12 +1742,12 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Pp" = (
-/obj/effect/landmark/map_data,
-/obj/effect/overmap/visitable/sector/sfv_arbiter_space,
+/obj/landmark/map_data,
+/obj/overmap/visitable/sector/sfv_arbiter_space,
 /turf/template_noop,
 /area/template_noop)
 "Pr" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -1761,7 +1761,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Pw" = (
-/obj/effect/floor_decal/corner/red/full,
+/obj/floor_decal/corner/red/full,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
@@ -1790,7 +1790,7 @@
 "PE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/white/full,
+/obj/floor_decal/corner/white/full,
 /obj/machinery/door/airlock/centcom{
 	name = "Medical";
 	opacity = 1
@@ -1798,14 +1798,14 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/sfv_arbiter)
 "Qh" = (
-/obj/effect/paint/red,
+/obj/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 10
 	},
 /turf/simulated/wall/r_titanium,
 /area/map_template/sfv_arbiter)
 "Qy" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable/cyan{
 	d2 = 4;
 	icon_state = "0-4"
@@ -1814,7 +1814,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/paint/black,
+/obj/paint/black,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
@@ -1825,12 +1825,12 @@
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "QD" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable/cyan{
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/paint/black,
+/obj/paint/black,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
@@ -1841,7 +1841,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "QF" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable/cyan{
 	d2 = 8;
 	icon_state = "0-8"
@@ -1854,7 +1854,7 @@
 	id_tag = "rescuedock";
 	name = "External Blast Shield"
 	},
-/obj/effect/paint/iccgn,
+/obj/paint/iccgn,
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "QG" = (
@@ -1875,7 +1875,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "QQ" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "stripe"
 	},
@@ -1891,7 +1891,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -1903,7 +1903,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -1919,12 +1919,12 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/sfv_arbiter)
 "RK" = (
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /obj/machinery/light/spot,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/sfv_arbiter)
 "RM" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8;
 	icon_state = "corner_white"
 	},
@@ -1940,7 +1940,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Sf" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/dark,
@@ -1950,8 +1950,8 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/black,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/black,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	dir = 4;
@@ -1967,7 +1967,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "Sp" = (
-/obj/effect/floor_decal/corner/red{
+/obj/floor_decal/corner/red{
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1977,7 +1977,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Sw" = (
-/obj/effect/floor_decal/corner/red{
+/obj/floor_decal/corner/red{
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -1986,11 +1986,11 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Sy" = (
-/obj/effect/floor_decal/corner/red{
+/obj/floor_decal/corner/red{
 	dir = 1;
 	icon_state = "corner_white"
 	},
-/obj/effect/floor_decal/corner/red{
+/obj/floor_decal/corner/red{
 	dir = 6
 	},
 /obj/structure/bed/chair/shuttle/black{
@@ -2020,7 +2020,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Td" = (
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 8;
 	icon_state = "warningcorner"
 	},
@@ -2030,7 +2030,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Te" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/map_template/sfv_arbiter)
 "Tw" = (
@@ -2048,7 +2048,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning/corner,
+/obj/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "TZ" = (
@@ -2057,14 +2057,14 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/grey{
+/obj/floor_decal/corner/grey{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Ue" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10;
 	icon_state = "corner_white"
 	},
@@ -2074,7 +2074,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Um" = (
-/obj/effect/floor_decal/corner/yellow,
+/obj/floor_decal/corner/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
@@ -2090,7 +2090,7 @@
 /obj/item/reagent_containers/ivbag/nanoblood,
 /obj/item/reagent_containers/ivbag/nanoblood,
 /obj/item/reagent_containers/ivbag,
-/obj/effect/floor_decal/corner/white/mono,
+/obj/floor_decal/corner/white/mono,
 /obj/item/reagent_containers/ivbag/blood/human/opos,
 /obj/item/reagent_containers/ivbag/blood/human/opos,
 /obj/item/reagent_containers/ivbag/blood/human/opos,
@@ -2098,7 +2098,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/sfv_arbiter)
 "UF" = (
-/obj/effect/paint/red,
+/obj/paint/red,
 /obj/structure/window/reinforced/crescent{
 	dir = 8
 	},
@@ -2109,7 +2109,7 @@
 	dir = 1;
 	name = "Implant Management"
 	},
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /obj/item/device/radio,
 /obj/machinery/power/apc/hyper{
 	dir = 8;
@@ -2128,7 +2128,7 @@
 	dir = 1;
 	icon_state = "console"
 	},
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 2;
@@ -2164,7 +2164,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
@@ -2175,15 +2175,15 @@
 /area/map_template/sfv_arbiter)
 "UR" = (
 /obj/structure/table/steel_reinforced,
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /obj/item/device/radio{
 	pixel_x = 7
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/sfv_arbiter)
 "Vv" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/black,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/black,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	dir = 4;
@@ -2208,7 +2208,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "VJ" = (
-/obj/effect/floor_decal/corner/red{
+/obj/floor_decal/corner/red{
 	dir = 6
 	},
 /obj/structure/bed/chair/shuttle/black{
@@ -2229,7 +2229,7 @@
 	},
 /area/map_template/sfv_arbiter)
 "VT" = (
-/obj/effect/floor_decal/corner/grey{
+/obj/floor_decal/corner/grey{
 	dir = 5
 	},
 /obj/structure/cable/cyan{
@@ -2240,7 +2240,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "VU" = (
-/obj/effect/floor_decal/industrial/warning/corner,
+/obj/floor_decal/industrial/warning/corner,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
 	},
@@ -2250,11 +2250,11 @@
 /obj/machinery/atmospherics/unary/tank/air{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/outline/blue,
+/obj/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/sfv_arbiter)
 "Wm" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
@@ -2266,7 +2266,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/paint/iccgn,
+/obj/paint/iccgn,
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "Wx" = (
@@ -2314,17 +2314,17 @@
 /area/map_template/sfv_arbiter)
 "WU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/red{
+/obj/floor_decal/corner/red{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "WV" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/titanium,
 /area/map_template/sfv_arbiter)
 "WW" = (
-/obj/effect/floor_decal/corner/grey{
+/obj/floor_decal/corner/grey{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/dark,
@@ -2339,7 +2339,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "Xd" = (
-/obj/effect/floor_decal/corner/grey{
+/obj/floor_decal/corner/grey{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/dark,
@@ -2366,7 +2366,7 @@
 /obj/item/gun/projectile/shotgun/pump/combat,
 /obj/item/gun/projectile/shotgun/pump/combat,
 /obj/item/gun/launcher/grenade,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/sfv_arbiter)
 "XC" = (
@@ -2380,20 +2380,20 @@
 	pixel_y = 8
 	},
 /obj/item/reagent_containers/syringe/antiviral,
-/obj/effect/floor_decal/corner/white/mono,
+/obj/floor_decal/corner/white/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/sfv_arbiter)
 "XH" = (
 /turf/template_noop,
 /area/template_noop)
 "XJ" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/structure/cable/cyan{
 	d2 = 2;
 	dir = 1;
 	icon_state = "0-2"
 	},
-/obj/effect/paint/iccgn,
+/obj/paint/iccgn,
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
@@ -2402,7 +2402,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/red/mono,
+/obj/floor_decal/corner/red/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/sfv_arbiter)
 "XP" = (
@@ -2411,7 +2411,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
@@ -2429,7 +2429,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "XS" = (
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /obj/machinery/computer/shuttle_control/explore/sfv_arbiter_shuttle{
 	dir = 4
 	},
@@ -2443,11 +2443,11 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/sfv_arbiter)
 "Yb" = (
-/obj/effect/floor_decal/corner/grey/three_quarters,
+/obj/floor_decal/corner/grey/three_quarters,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Yl" = (
-/obj/effect/floor_decal/corner/grey/three_quarters{
+/obj/floor_decal/corner/grey/three_quarters{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
@@ -2456,7 +2456,7 @@
 /obj/structure/bed/chair/shuttle/black{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/grey/mono,
+/obj/floor_decal/corner/grey/mono,
 /obj/item/clothing/head/helmet,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/sfv_arbiter)
@@ -2494,11 +2494,11 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/sfv_arbiter)
 "YN" = (
-/obj/effect/floor_decal/corner/grey/mono,
+/obj/floor_decal/corner/grey/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/sfv_arbiter)
 "YR" = (
-/obj/effect/floor_decal/corner/grey/mono,
+/obj/floor_decal/corner/grey/mono,
 /obj/structure/reagent_dispensers/water_cooler{
 	dir = 8;
 	icon_state = "water_cooler"
@@ -2509,7 +2509,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/sfv_arbiter)
 "YT" = (
-/obj/effect/floor_decal/corner/white{
+/obj/floor_decal/corner/white{
 	dir = 4;
 	icon_state = "corner_white"
 	},
@@ -2526,7 +2526,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 2;
 	icon_state = "warningcorner"
 	},
@@ -2543,7 +2543,7 @@
 	pixel_x = -24;
 	pixel_y = -4
 	},
-/obj/effect/floor_decal/corner/grey/mono,
+/obj/floor_decal/corner/grey/mono,
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 2;
@@ -2559,7 +2559,7 @@
 "Zj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/white{
+/obj/floor_decal/corner/white{
 	dir = 5
 	},
 /obj/structure/cable/cyan{
@@ -2570,7 +2570,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Zk" = (
-/obj/effect/floor_decal/corner/white{
+/obj/floor_decal/corner/white{
 	dir = 1;
 	icon_state = "corner_white"
 	},
@@ -2591,7 +2591,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/blue/full,
+/obj/floor_decal/corner/blue/full,
 /obj/machinery/door/airlock/centcom{
 	name = "Bridge";
 	opacity = 1
@@ -2599,12 +2599,12 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Zu" = (
-/obj/effect/paint/black,
-/obj/effect/paint/iccgn,
+/obj/paint/black,
+/obj/paint/iccgn,
 /turf/simulated/wall/r_titanium,
 /area/map_template/sfv_arbiter)
 "Zv" = (
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 4
 	},
 /obj/structure/table/rack,
@@ -2618,7 +2618,7 @@
 /area/map_template/sfv_arbiter)
 "Zw" = (
 /obj/machinery/recharge_station,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "ZK" = (

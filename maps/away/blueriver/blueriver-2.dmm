@@ -58,13 +58,13 @@
 	},
 /area/bluespaceriver/ground)
 "ak" = (
-/obj/effect/shuttle_landmark/nav_blueriv/nav3,
+/obj/shuttle_landmark/nav_blueriv/nav3,
 /turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "al" = (
-/obj/effect/overmap/visitable/sector/arcticplanet{
+/obj/overmap/visitable/sector/arcticplanet{
 	desc = "Sensors show an arctic planet with a small vessel on the surface. The vessel is located in the western region of a trough surrounded by mineral-rich mountains on all four sides. Scans further indicate strange energy emissions from below the planet's surface. Sunrise is expected in 56 hours."
 	},
 /turf/simulated/floor/exoplanet/snow{
@@ -72,13 +72,13 @@
 	},
 /area/bluespaceriver/ground)
 "am" = (
-/obj/effect/shuttle_landmark/nav_blueriv/nav1,
+/obj/shuttle_landmark/nav_blueriv/nav1,
 /turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "an" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/bluespaceriver/ship)
 "ao" = (
@@ -290,7 +290,7 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "ba" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/bluespaceriver/ship)
 "bb" = (
@@ -784,7 +784,7 @@
 	},
 /area/bluespaceriver/ground)
 "cx" = (
-/obj/effect/shuttle_landmark/nav_blueriv/nav4,
+/obj/shuttle_landmark/nav_blueriv/nav4,
 /turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
@@ -816,13 +816,13 @@
 	},
 /area/bluespaceriver/ground)
 "cC" = (
-/obj/effect/shuttle_landmark/nav_blueriv/nav2,
+/obj/shuttle_landmark/nav_blueriv/nav2,
 /turf/simulated/floor/exoplanet/snow{
 	temperature = 240
 	},
 /area/bluespaceriver/ground)
 "cD" = (
-/obj/effect/landmark/map_data{
+/obj/landmark/map_data{
 	height = 2
 	},
 /turf/unsimulated/mineral{

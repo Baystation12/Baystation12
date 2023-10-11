@@ -7,14 +7,14 @@
 	suffixes = list("maps/event/iccgn_ship/icgnv_hound.dmm")
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/icgnv_hound)
 
-/obj/effect/overmap/visitable/sector/icgnv_hound_space
+/obj/overmap/visitable/sector/icgnv_hound_space
 	name = "Sensor Anomaly"
 	desc = "Sensors readings are confused and inaccurate on this grid sector."
 	icon_state = "event"
 	hide_from_reports = TRUE
 	sensor_visibility = 10
 
-/obj/effect/overmap/visitable/ship/landable/icgnv_hound
+/obj/overmap/visitable/ship/landable/icgnv_hound
 	name = "ICGNV Hound"
 	desc = "A standard ALFA-pattern, armed ICCGN transport shuttle. The transponder reads on open channels as ICCG and is broadcasting the designation 'ICGNV Hound' in Zurich Accord Common."
 	shuttle = "ICGNV Hound"
@@ -32,7 +32,7 @@
 		"nav_icgnv_hound_antag"
 	)
 
-/obj/effect/shuttle_landmark/icgnv_hound/dock
+/obj/shuttle_landmark/icgnv_hound/dock
 	name = "4th Deck, Port Airlock (ICGNV Hound)"
 	landmark_tag = "nav_hound_dock"
 

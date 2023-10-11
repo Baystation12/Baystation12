@@ -95,7 +95,7 @@
 		BP_CELL =         /obj/item/organ/internal/cell/adherent,
 		BP_COOLING_FINS = /obj/item/organ/internal/powered/cooling_fins
 		)
-	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
+	move_trail = /obj/decal/cleanable/blood/tracks/snake
 	max_players = 3
 
 	base_skin_colours = list(

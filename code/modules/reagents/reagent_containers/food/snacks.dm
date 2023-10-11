@@ -335,7 +335,7 @@
 /obj/item/reagent_containers/food/snacks/egg/throw_impact(atom/hit_atom)
 	if(QDELETED(src))
 		return // Could potentially happen with unscupulous atoms on hitby() throwing again, etc.
-	new/obj/effect/decal/cleanable/egg_smudge(src.loc)
+	new/obj/decal/cleanable/egg_smudge(src.loc)
 	reagents.splash(hit_atom, reagents.total_volume)
 	visible_message(SPAN_WARNING("\The [src] has been squashed!"),SPAN_WARNING("You hear a smack."))
 	..()
@@ -768,7 +768,7 @@
 
 /obj/item/reagent_containers/food/snacks/pie/throw_impact(atom/hit_atom)
 	..()
-	new/obj/effect/decal/cleanable/pie_smudge(src.loc)
+	new/obj/decal/cleanable/pie_smudge(src.loc)
 	src.visible_message(SPAN_DANGER("\The [src.name] splats."),SPAN_DANGER("You hear a splat."))
 	qdel(src)
 
@@ -1447,11 +1447,11 @@
 
 /obj/item/reagent_containers/food/snacks/monkeycube/spidercube
 	name = "spider cube"
-	monkey_type = /obj/effect/spider/spiderling
+	monkey_type = /obj/spider/spiderling
 
 /obj/item/reagent_containers/food/snacks/monkeycube/wrapped/spidercube
 	name = "spider cube"
-	monkey_type = /obj/effect/spider/spiderling
+	monkey_type = /obj/spider/spiderling
 
 /obj/item/reagent_containers/food/snacks/monkeycube/pikecube
 	name = "strange-looking monkey cube"

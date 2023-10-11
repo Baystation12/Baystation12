@@ -60,7 +60,7 @@
 			atmos_machines += A
 		if(istype(A, /obj/machinery))
 			machines += A
-		if(istype(A,/obj/effect/landmark/map_load_mark))
+		if(istype(A,/obj/landmark/map_load_mark))
 			LAZYADD(subtemplates_to_spawn, A)
 
 	var/notsuspended
@@ -177,7 +177,7 @@
 	return TRUE
 
 /datum/map_template/proc/after_load(z)
-	for(var/obj/effect/landmark/map_load_mark/mark in subtemplates_to_spawn)
+	for(var/obj/landmark/map_load_mark/mark in subtemplates_to_spawn)
 		subtemplates_to_spawn -= mark
 		if(LAZYLEN(mark.templates))
 			var/template = pick(mark.templates)

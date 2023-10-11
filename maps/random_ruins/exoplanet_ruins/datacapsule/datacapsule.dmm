@@ -3,11 +3,11 @@
 /turf/template_noop,
 /area/template_noop)
 "b" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/ocp_wall,
 /area/map_template/datacapsule)
 "c" = (
-/obj/effect/landmark/scorcher,
+/obj/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "d" = (
@@ -18,7 +18,7 @@
 /turf/simulated/floor/reinforced,
 /area/map_template/datacapsule)
 "g" = (
-/obj/effect/landmark/map_load_mark/ejected_datapod,
+/obj/landmark/map_load_mark/ejected_datapod,
 /turf/simulated/floor/reinforced,
 /area/map_template/datacapsule)
 

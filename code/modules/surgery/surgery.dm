@@ -160,7 +160,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 			. -= 5
 		else if(locate(/obj/structure/table, T))
 			. -= 10
-		else if(locate(/obj/effect/rune, T))
+		else if(locate(/obj/rune, T))
 			. -= 10
 	. = max(., 0)
 

@@ -191,7 +191,7 @@
 	..()
 	H.add_aura(new /obj/aura/regenerating(H))
 
-/obj/effect/cleanable/spellbound
+/obj/cleanable/spellbound
 	name = "strange rune"
 	desc = "some sort of runic symbol drawn in... crayon?"
 	icon = 'icons/obj/rune.dmi'
@@ -199,11 +199,11 @@
 	var/datum/spellbound_type/stype
 	var/last_called = 0
 
-/obj/effect/cleanable/spellbound/New(loc, spell_type)
+/obj/cleanable/spellbound/New(loc, spell_type)
 	stype = new spell_type()
 	return ..(loc)
 
-/obj/effect/cleanable/spellbound/attack_hand(mob/user)
+/obj/cleanable/spellbound/attack_hand(mob/user)
 	if(last_called > world.time )
 		return
 	last_called = world.time + 30 SECONDS
@@ -212,19 +212,19 @@
 		if(G.assess_candidate(ghost,null,FALSE))
 			to_chat(ghost,"[SPAN_NOTICE("<b>A wizard is requesting a Spell-Bound Servant!</b>")] (<a href='?src=\ref[src];master=\ref[user]'>Join</a>)")
 
-/obj/effect/cleanable/spellbound/CanUseTopic(mob)
+/obj/cleanable/spellbound/CanUseTopic(mob)
 	if(isliving(mob))
 		return STATUS_CLOSE
 	return STATUS_INTERACTIVE
 
-/obj/effect/cleanable/spellbound/OnTopic(mob/user, href_list, state)
+/obj/cleanable/spellbound/OnTopic(mob/user, href_list, state)
 	if(href_list["master"])
 		var/mob/master = locate(href_list["master"])
 		stype.spawn_servant(get_turf(src),master,user)
 		qdel(src)
 	return TOPIC_HANDLED
 
-/obj/effect/cleanable/spellbound/Destroy()
+/obj/cleanable/spellbound/Destroy()
 	qdel(stype)
 	stype = null
 	return ..()
@@ -258,7 +258,7 @@
 	onclose(user,"summoning")
 
 /obj/item/summoning_stone/proc/use_type(type, mob/user)
-	new /obj/effect/cleanable/spellbound(get_turf(src),type)
+	new /obj/cleanable/spellbound(get_turf(src),type)
 	if(prob(20))
 		var/list/base_areas = maintlocs //Have to do it this way as its a macro
 		var/list/pareas = base_areas.Copy()

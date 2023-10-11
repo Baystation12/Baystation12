@@ -201,10 +201,10 @@ var/global/repository/follow/follow_repository = new()
 
 /datum/follow_holder/spiderling
 	sort_order = 6
-	followed_type = /obj/effect/spider/spiderling
+	followed_type = /obj/spider/spiderling
 
 /datum/follow_holder/spiderling/show_entry()
-	var/obj/effect/spider/spiderling/S = followed_instance
+	var/obj/spider/spiderling/S = followed_instance
 	return ..() && S.amount_grown > 0
 
 /datum/follow_holder/bot
@@ -219,7 +219,7 @@ var/global/repository/follow/follow_repository = new()
 
 /datum/follow_holder/blob
 	sort_order = 9
-	followed_type = /obj/effect/blob/core
+	followed_type = /obj/blob/core
 	suffix = "Blob"
 
 /datum/follow_holder/supermatter

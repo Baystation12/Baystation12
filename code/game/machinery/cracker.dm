@@ -70,7 +70,7 @@
 	// Produce materials.
 	var/turf/T = get_turf(src)
 	if(istype(T))
-		var/obj/effect/fluid/F = T.return_fluid()
+		var/obj/fluid/F = T.return_fluid()
 		if(istype(F))
 
 			// Drink more water!

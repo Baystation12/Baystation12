@@ -94,8 +94,8 @@
 			W.shatter()
 		else if(istype(A,/obj/structure/grille))
 			qdel(A)
-		else if(istype(A,/obj/effect/vine))
-			var/obj/effect/vine/P = A
+		else if(istype(A,/obj/vine))
+			var/obj/vine/P = A
 			P.kill_health()
 
 /obj/item/material/twohanded/fireaxe/IsHatchet()

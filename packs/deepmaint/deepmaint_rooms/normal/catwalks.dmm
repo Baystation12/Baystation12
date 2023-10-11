@@ -1,7 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
-/obj/effect/floor_decal/corner_techfloor_grid,
-/obj/effect/floor_decal/techfloor/corner,
+/obj/floor_decal/corner_techfloor_grid,
+/obj/floor_decal/techfloor/corner,
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "b" = (
@@ -9,7 +9,7 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -44,17 +44,17 @@
 	dir = 8;
 	icon_state = "railing0-1"
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "M" = (
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "O" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -67,51 +67,51 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "S" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "T" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "U" = (
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "V" = (
 /obj/structure/railing/mapped,
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "W" = (
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "X" = (
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,

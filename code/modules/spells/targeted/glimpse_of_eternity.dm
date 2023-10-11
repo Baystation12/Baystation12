@@ -18,9 +18,9 @@
 		if(L.faction != user.faction) //Worse for non-allies
 			L.eye_blind += 5
 			L.Stun(5)
-			new /obj/effect/temporary(get_turf(L), 5, 'icons/effects/effects.dmi', "electricity_constant")
+			new /obj/temporary(get_turf(L), 5, 'icons/effects/effects.dmi', "electricity_constant")
 		else
 			L.eye_blind += 2
 			L.adjustBruteLoss(-10)
 			L.adjustFireLoss(-10)
-			new /obj/effect/temporary(get_turf(L), 5, 'icons/effects/effects.dmi', "green_sparkles")
+			new /obj/temporary(get_turf(L), 5, 'icons/effects/effects.dmi', "green_sparkles")

@@ -125,8 +125,8 @@ Weapons
 /obj/item/ammo_magazine/pistol/small/oneway
 	initial_ammo = 1
 
-/obj/effect/paint/hull
+/obj/paint/hull
 	color = COLOR_SOL
 
-/obj/effect/paint/expeditionary
+/obj/paint/expeditionary
 	color = "#68099e"

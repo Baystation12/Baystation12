@@ -1,4 +1,4 @@
-/obj/effect/landmark/map_data
+/obj/landmark/map_data
 	name = "Map Data"
 	desc = "An unknown location."
 	invisibility = INVISIBILITY_ABSTRACT

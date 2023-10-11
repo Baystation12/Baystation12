@@ -104,14 +104,14 @@
 	invocation = "none"
 	invocation_type = SpI_NONE
 	range = 0
-	summon_type = list(/obj/effect/forcefield/cult)
+	summon_type = list(/obj/forcefield/cult)
 	duration = 200
 
 	hud_state = "const_juggwall"
 	cast_sound = 'sound/magic/forcewall.ogg'
 
 //Code for the Juggernaut construct's forcefield, that seemed like a good place to put it.
-/obj/effect/forcefield/cult
+/obj/forcefield/cult
 	name = "juggernaut shield"
 	desc = "An eerie-looking obstacle that seems to have been pulled from another dimension through sheer force."
 	icon = 'icons/effects/effects.dmi'

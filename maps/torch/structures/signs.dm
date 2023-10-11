@@ -7,7 +7,7 @@
 	desc = "S.E.V. Torch - Mako Class - Sol Expeditionary Corps Registry 95519 - Shiva Fleet Yards, Mars - First Vessel To Bear The Name - Launched [GLOB.using_map.game_year - 5] - Sol Central Government - 'Never was anything great achieved without danger.'"
 
 
-/obj/effect/floor_decal/scglogo
+/obj/floor_decal/scglogo
 	alpha = 230
 	icon = 'maps/torch/icons/obj/solgov_floor.dmi'
 	icon_state = "center"

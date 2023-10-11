@@ -1,8 +1,8 @@
-/obj/effect/gibspawner/generic
+/obj/gibspawner/generic
 	gibtypes = list(
-		/obj/effect/decal/cleanable/blood/gibs,
-		/obj/effect/decal/cleanable/blood/gibs,
-		/obj/effect/decal/cleanable/blood/gibs/core
+		/obj/decal/cleanable/blood/gibs,
+		/obj/decal/cleanable/blood/gibs,
+		/obj/decal/cleanable/blood/gibs/core
 	)
 	gibdirections = list(
 		list(WEST, NORTHWEST, SOUTHWEST, NORTH),
@@ -12,15 +12,15 @@
 	gibamounts = list(2, 2, 1)
 
 
-/obj/effect/gibspawner/human
+/obj/gibspawner/human
 	gibtypes = list(
-		/obj/effect/decal/cleanable/blood/gibs,
-		/obj/effect/decal/cleanable/blood/gibs/down,
-		/obj/effect/decal/cleanable/blood/gibs,
-		/obj/effect/decal/cleanable/blood/gibs,
-		/obj/effect/decal/cleanable/blood/gibs,
-		/obj/effect/decal/cleanable/blood/gibs,
-		/obj/effect/decal/cleanable/blood/gibs/core
+		/obj/decal/cleanable/blood/gibs,
+		/obj/decal/cleanable/blood/gibs/down,
+		/obj/decal/cleanable/blood/gibs,
+		/obj/decal/cleanable/blood/gibs,
+		/obj/decal/cleanable/blood/gibs,
+		/obj/decal/cleanable/blood/gibs,
+		/obj/decal/cleanable/blood/gibs/core
 	)
 	gibdirections = list(
 		list(NORTH, NORTHEAST, NORTHWEST),
@@ -34,14 +34,14 @@
 	gibamounts = list(1, 1, 1, 1, 1, 1, 1)
 
 
-/obj/effect/gibspawner/robot
+/obj/gibspawner/robot
 	gibtypes = list(
-		/obj/effect/decal/cleanable/blood/gibs/robot/up,
-		/obj/effect/decal/cleanable/blood/gibs/robot/down,
-		/obj/effect/decal/cleanable/blood/gibs/robot,
-		/obj/effect/decal/cleanable/blood/gibs/robot,
-		/obj/effect/decal/cleanable/blood/gibs/robot,
-		/obj/effect/decal/cleanable/blood/gibs/robot/limb
+		/obj/decal/cleanable/blood/gibs/robot/up,
+		/obj/decal/cleanable/blood/gibs/robot/down,
+		/obj/decal/cleanable/blood/gibs/robot,
+		/obj/decal/cleanable/blood/gibs/robot,
+		/obj/decal/cleanable/blood/gibs/robot,
+		/obj/decal/cleanable/blood/gibs/robot/limb
 	)
 	gibdirections = list(
 		list(NORTH, NORTHEAST, NORTHWEST),

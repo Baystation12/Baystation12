@@ -19,8 +19,8 @@
 			current_build_mode = build_mode
 
 	build_buttons = list()
-	for(var/button_type in subtypesof(/obj/effect/bmode))
-		var/obj/effect/bmode/build_button = new button_type(src)
+	for(var/button_type in subtypesof(/obj/bmode))
+		var/obj/bmode/build_button = new button_type(src)
 		build_buttons += build_button
 	StartTimer()
 	current_build_mode.Selected()
@@ -63,7 +63,7 @@
 /datum/click_handler/build_mode/OnClick(atom/A, params)
 	params = params2list(params)
 	if(A in build_buttons)
-		var/obj/effect/bmode/build_button = A
+		var/obj/bmode/build_button = A
 		build_button.OnClick(params)
 	else
 		current_build_mode.OnClick(A, params)

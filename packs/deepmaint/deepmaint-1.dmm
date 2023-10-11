@@ -6,7 +6,7 @@
 /turf/simulated/wall,
 /area/map_template/deepmaint)
 "c" = (
-/obj/effect/landmark/map_data/deepmaint/lvl1,
+/obj/landmark/map_data/deepmaint/lvl1,
 /turf/unsimulated/wall,
 /area/map_template/deepmaint)
 "d" = (

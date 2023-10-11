@@ -1,9 +1,9 @@
-/obj/effect/decal/cleanable/crayon
+/obj/decal/cleanable/crayon
 	name = "rune"
 	desc = "A rune drawn in crayon."
 	icon = 'icons/obj/rune.dmi'
 
-/obj/effect/decal/cleanable/crayon/New(location, main = "#ffffff", shade = "#000000", type = "rune")
+/obj/decal/cleanable/crayon/New(location, main = "#ffffff", shade = "#000000", type = "rune")
 	..()
 	name = type
 	desc = "A [type] drawn in crayon."

@@ -253,7 +253,7 @@
 	s.set_up(3, 1, src)
 	s.start()
 
-	new /obj/effect/decal/cleanable/blood/oil(Tsec)
+	new /obj/decal/cleanable/blood/oil(Tsec)
 	qdel(src)
 
 /mob/living/bot/secbot/proc/target_name(mob/living/T)

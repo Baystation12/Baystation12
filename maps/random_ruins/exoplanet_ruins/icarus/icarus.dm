@@ -14,7 +14,7 @@
 
 //Radiation death spawner thing from old Icarus
 
-/obj/effect/icarus_irradiate
+/obj/icarus_irradiate
 	name = "SEV Icarus Radiation Spawner"
 	icon = 'icons/effects/landmarks.dmi'
 	icon_state = "x2"
@@ -22,7 +22,7 @@
 	var/datum/radiation_source/S
 	var/req_range = 20 //to cover part of the ruin
 
-/obj/effect/icarus_irradiate/Initialize()
+/obj/icarus_irradiate/Initialize()
 	. = ..()
 
 	name = null
@@ -40,7 +40,7 @@
 
 	loc.set_light(req_range, 0.4, l_color = COLOR_LIME) //The goo doesn't last, so this is another indicator
 
-/obj/effect/icarus_irradiate/Destroy()
+/obj/icarus_irradiate/Destroy()
 	. = ..()
 	QDEL_NULL(S)
 
@@ -132,7 +132,7 @@
 	icon = 'maps/random_ruins/exoplanet_ruins/icarus/icarus.dmi'
 	icon_state = "solgovseal"
 
-/obj/effect/floor_decal/icarus_scglogo
+/obj/floor_decal/icarus_scglogo
 	alpha = 230
 	icon = 'maps/random_ruins/exoplanet_ruins/icarus/icarus_scglogo.dmi'
 	icon_state = "center"

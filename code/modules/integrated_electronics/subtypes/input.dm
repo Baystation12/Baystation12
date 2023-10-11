@@ -474,7 +474,7 @@
 		set_pin_data(IC_OUTPUT, 1, turf_contents)
 		set_pin_data(IC_OUTPUT, 3, area_name)
 		var/list/St = new()
-		for(var/obj/effect/decal/cleanable/crayon/I in scanned_turf)
+		for(var/obj/decal/cleanable/crayon/I in scanned_turf)
 			St.Add(I.icon_state)
 		if(length(St))
 			set_pin_data(IC_OUTPUT, 2, jointext(St, ",", 1, 0))

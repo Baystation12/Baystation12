@@ -926,7 +926,7 @@ GLOBAL_LIST_INIT(duplicate_object_disallowed_vars, list(
 		. = TRUE
 	if(locate(/obj/structure/table, T))
 		. = TRUE
-	if(locate(/obj/effect/rune, T))
+	if(locate(/obj/rune, T))
 		. = TRUE
 
 	if(M == user)

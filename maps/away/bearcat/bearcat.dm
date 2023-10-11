@@ -3,7 +3,7 @@
 #include "bearcat_access.dm"
 #include "bearcat_radio.dm"
 
-/obj/effect/submap_landmark/joinable_submap/bearcat
+/obj/submap_landmark/joinable_submap/bearcat
 	name = "FTV Bearcat"
 	archetype = /singleton/submap_archetype/derelict/bearcat
 
@@ -15,14 +15,14 @@
 		/datum/job/submap/bearcat_crewman
 	)
 
-/obj/effect/overmap/visitable/ship/bearcat
+/obj/overmap/visitable/ship/bearcat
 	name = "light freighter"
 	color = "#00ffff"
 	vessel_mass = 20000
 	max_speed = 1/(10 SECONDS)
 	burn_delay = 10 SECONDS
 
-/obj/effect/overmap/visitable/ship/bearcat/New()
+/obj/overmap/visitable/ship/bearcat/New()
 	name = "[pick("FTV","ITV","IEV")] [pick("Bearcat", "Firebug", "Defiant", "Unsinkable","Horizon","Vagrant")]"
 	for(var/area/ship/scrap/A)
 		A.name = "\improper [name] - [A.name]"
@@ -75,12 +75,12 @@
 	icon_screen = "lift"
 	density = FALSE
 
-/obj/effect/shuttle_landmark/lift/top
+/obj/shuttle_landmark/lift/top
 	name = "Top Deck"
 	landmark_tag = "nav_bearcat_lift_top"
 	flags = SLANDMARK_FLAG_AUTOSET
 
-/obj/effect/shuttle_landmark/lift/bottom
+/obj/shuttle_landmark/lift/bottom
 	name = "Lower Deck"
 	landmark_tag = "nav_bearcat_lift_bottom"
 	base_area = /area/ship/scrap/cargo/lower
@@ -97,14 +97,14 @@
 /obj/machinery/door/airlock/autoname/engineering
 	door_color = COLOR_AMBER
 
-/obj/effect/landmark/deadcap
+/obj/landmark/deadcap
 	name = "Dead Captain"
 
-/obj/effect/landmark/deadcap/Initialize()
+/obj/landmark/deadcap/Initialize()
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/effect/landmark/deadcap/LateInitialize(mapload)
+/obj/landmark/deadcap/LateInitialize(mapload)
 	var/turf/T = get_turf(src)
 	var/mob/living/carbon/human/corpse = new(T)
 	scramble(1, corpse, 100)

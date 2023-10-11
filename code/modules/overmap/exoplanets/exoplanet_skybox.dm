@@ -1,12 +1,12 @@
-/obj/effect/overmap/visitable/sector/exoplanet/get_skybox_representation()
+/obj/overmap/visitable/sector/exoplanet/get_skybox_representation()
 	return skybox_image
 
-/obj/effect/overmap/visitable/sector/exoplanet/proc/get_base_image()
+/obj/overmap/visitable/sector/exoplanet/proc/get_base_image()
 	var/image/base = image('icons/skybox/planet.dmi', "base")
 	base.color = get_surface_color()
 	return base
 
-/obj/effect/overmap/visitable/sector/exoplanet/proc/generate_planet_image()
+/obj/overmap/visitable/sector/exoplanet/proc/generate_planet_image()
 	skybox_image = image('icons/skybox/planet.dmi', "")
 
 	skybox_image.AddOverlays(get_base_image())

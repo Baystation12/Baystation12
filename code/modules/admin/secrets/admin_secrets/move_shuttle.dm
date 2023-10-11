@@ -19,10 +19,10 @@
 	var/datum/shuttle/S = SSshuttle.shuttles[shuttle_tag]
 
 	var/list/destinations = list()
-	for(var/obj/effect/shuttle_landmark/WP in world)
+	for(var/obj/shuttle_landmark/WP in world)
 		destinations += WP
 
-	var/obj/effect/shuttle_landmark/destination = input(user, "Select the destination.") as null|anything in destinations
+	var/obj/shuttle_landmark/destination = input(user, "Select the destination.") as null|anything in destinations
 	if (!destination) return
 
 	S.attempt_move(destination)

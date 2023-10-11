@@ -3,39 +3,39 @@
 /turf/space,
 /area/space)
 "c" = (
-/obj/effect/shuttle_landmark/empty/nav2,
+/obj/shuttle_landmark/empty/nav2,
 /turf/space,
 /area/space)
 "j" = (
-/obj/effect/shuttle_landmark/empty/nav5,
+/obj/shuttle_landmark/empty/nav5,
 /turf/space,
 /area/space)
 "r" = (
-/obj/effect/shuttle_landmark/empty/nav1,
+/obj/shuttle_landmark/empty/nav1,
 /turf/space,
 /area/space)
 "s" = (
-/obj/effect/shuttle_landmark/empty/nav3,
+/obj/shuttle_landmark/empty/nav3,
 /turf/space,
 /area/space)
 "C" = (
-/obj/effect/shuttle_landmark/empty/nav6,
+/obj/shuttle_landmark/empty/nav6,
 /turf/space,
 /area/space)
 "D" = (
-/obj/effect/shuttle_landmark/empty/nav4,
+/obj/shuttle_landmark/empty/nav4,
 /turf/space,
 /area/space)
 "N" = (
 /turf/space,
 /area/empty_tp_target)
 "W" = (
-/obj/effect/shuttle_landmark/empty/nav7,
+/obj/shuttle_landmark/empty/nav7,
 /turf/space,
 /area/space)
 "X" = (
-/obj/effect/landmark/map_data,
-/obj/effect/overmap/visitable/sector/empty,
+/obj/landmark/map_data,
+/obj/overmap/visitable/sector/empty,
 /turf/space,
 /area/space)
 

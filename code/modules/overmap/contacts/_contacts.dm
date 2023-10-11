@@ -18,9 +18,9 @@
 	var/obj/machinery/shipsensors/owner
 
 	/// The actual overmap effect associated with this
-	var/obj/effect/overmap/effect
+	var/obj/overmap/effect
 
-/datum/overmap_contact/New(obj/machinery/computer/ship/sensors/creator, obj/effect/overmap/source)
+/datum/overmap_contact/New(obj/machinery/computer/ship/sensors/creator, obj/overmap/source)
 	// Update local tracking information
 	owner =  creator
 	effect = source
@@ -82,7 +82,7 @@
 				M.client.images |= images
 
 /datum/overmap_contact/proc/check_effect_shield()
-	var/obj/effect/overmap/visitable/visitable_effect = effect
+	var/obj/overmap/visitable/visitable_effect = effect
 	if (!visitable_effect || !istype(visitable_effect))
 		return FALSE
 	for (var/obj/machinery/power/shield_generator/S in SSmachines.machinery)

@@ -7,7 +7,7 @@
 /turf/simulated/wall/uranium,
 /area/template_noop)
 "o" = (
-/obj/effect/decal/cleanable/cobweb,
+/obj/decal/cleanable/cobweb,
 /obj/item/remains/xeno,
 /turf/simulated/floor/fixed/alium,
 /area/template_noop)

@@ -1,7 +1,7 @@
 /////////////////////////////////////////////
 // Chem smoke
 /////////////////////////////////////////////
-/obj/effect/effect/smoke/chem
+/obj/effect/smoke/chem
 	icon = 'icons/effects/chemsmoke.dmi'
 	layer = ABOVE_PROJECTILE_LAYER
 	time_to_live = 300
@@ -9,7 +9,7 @@
 	var/splash_amount = 5 //atoms moving through a smoke cloud get splashed with up to 10 units of reagent
 	var/turf/destination
 
-/obj/effect/effect/smoke/chem/New(newloc, smoke_duration, turf/dest_turf = null, icon/cached_icon = null)
+/obj/effect/smoke/chem/New(newloc, smoke_duration, turf/dest_turf = null, icon/cached_icon = null)
 	time_to_live = smoke_duration
 
 	..()
@@ -26,31 +26,31 @@
 	if(destination)
 		walk_to(src, destination)
 
-/obj/effect/effect/smoke/chem/Move()
+/obj/effect/smoke/chem/Move()
 	var/list/oldlocs = view(1, src)
 	. = ..()
 	if(.)
 		for(var/turf/T in view(1, src) - oldlocs)
 			for(var/atom/movable/AM in T)
-				if(!istype(AM, /obj/effect/effect/smoke/chem))
+				if(!istype(AM, /obj/effect/smoke/chem))
 					reagents.splash(AM, splash_amount, copy = 1)
 
-/obj/effect/effect/smoke/chem/Crossed(atom/movable/AM)
+/obj/effect/smoke/chem/Crossed(atom/movable/AM)
 	..()
-	if(!istype(AM, /obj/effect/effect/smoke/chem))
+	if(!istype(AM, /obj/effect/smoke/chem))
 		reagents.splash(AM, splash_amount, copy = 1)
 
-/obj/effect/effect/smoke/chem/proc/initial_splash()
+/obj/effect/smoke/chem/proc/initial_splash()
 	for(var/turf/T in view(1, src))
 		for(var/atom/movable/AM in T)
-			if(!istype(AM, /obj/effect/effect/smoke/chem))
+			if(!istype(AM, /obj/effect/smoke/chem))
 				reagents.splash(AM, splash_amount, copy = 1)
 
 /////////////////////////////////////////////
 // Chem Smoke Effect System
 /////////////////////////////////////////////
 /datum/effect/effect/system/smoke_spread/chem
-	smoke_type = /obj/effect/effect/smoke/chem
+	smoke_type = /obj/effect/smoke/chem
 	var/obj/chemholder
 	var/range
 	var/list/targetTurfs
@@ -139,7 +139,7 @@
 		for(var/turf/T in targetTurfs)
 			chemholder.reagents.touch_turf(T)
 			for(var/atom/A in T.contents)
-				if(istype(A, /obj/effect/effect/smoke/chem) || istype(A, /mob))
+				if(istype(A, /obj/effect/smoke/chem) || istype(A, /mob))
 					continue
 				else if(isobj(A) && !A.simulated)
 					chemholder.reagents.touch_obj(A)
@@ -191,13 +191,13 @@
 // Randomizes and spawns the smoke effect.
 // Also handles deleting the smoke once the effect is finished.
 //------------------------------------------
-/datum/effect/effect/system/smoke_spread/chem/proc/spawnSmoke(turf/T, icon/I, smoke_duration, dist = 1, splash_initial=0, obj/effect/effect/smoke/chem/passed_smoke)
+/datum/effect/effect/system/smoke_spread/chem/proc/spawnSmoke(turf/T, icon/I, smoke_duration, dist = 1, splash_initial=0, obj/effect/smoke/chem/passed_smoke)
 
-	var/obj/effect/effect/smoke/chem/smoke
+	var/obj/effect/smoke/chem/smoke
 	if(passed_smoke)
 		smoke = passed_smoke
 	else
-		smoke = new /obj/effect/effect/smoke/chem(location, smoke_duration + rand(1.5 SECONDS, 3 SECONDS), T, I)
+		smoke = new /obj/effect/smoke/chem(location, smoke_duration + rand(1.5 SECONDS, 3 SECONDS), T, I)
 
 	if(length(chemholder.reagents.reagent_list))
 		chemholder.reagents.trans_to_obj(smoke, chemholder.reagents.total_volume / dist, copy = 1) //copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
@@ -208,7 +208,7 @@
 
 
 /datum/effect/effect/system/smoke_spread/chem/spores/spawnSmoke(turf/T, icon/I, smoke_duration, dist = 1)
-	var/obj/effect/effect/smoke/chem/spores = new /obj/effect/effect/smoke/chem(location)
+	var/obj/effect/smoke/chem/spores = new /obj/effect/smoke/chem(location)
 	spores.SetName("cloud of [seed.seed_name] [seed.seed_noun]")
 	..(T, I, smoke_duration, dist, passed_smoke=spores)
 

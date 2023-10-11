@@ -1,6 +1,6 @@
 #include "meatstation_areas.dm"
 
-/obj/effect/overmap/visitable/sector/meatstation
+/obj/overmap/visitable/sector/meatstation
 	name = "Unpowered Research Station"
 	desc = "An unpowered research station. A large quantity of nearby debris blocks more detail."
 	icon_state = "object"
@@ -21,32 +21,32 @@
 	spawn_cost = 2
 	area_usage_test_exempted_root_areas = list(/area/meatstation)
 
-/obj/effect/shuttle_landmark/nav_meatstation/nav1
+/obj/shuttle_landmark/nav_meatstation/nav1
 	name = "Navpoint #1"
 	landmark_tag = "nav_meatstation_1"
 
-/obj/effect/shuttle_landmark/nav_meatstation/nav2
+/obj/shuttle_landmark/nav_meatstation/nav2
 	name = "Navpoint #2"
 	landmark_tag = "nav_meatstation_2"
 
-/obj/effect/shuttle_landmark/nav_meatstation/nav3
+/obj/shuttle_landmark/nav_meatstation/nav3
 	name = "Navpoint #3"
 	landmark_tag = "nav_meatstation_3"
 
-/obj/effect/shuttle_landmark/nav_meatstation/nav4
+/obj/shuttle_landmark/nav_meatstation/nav4
 	name = "Navpoint #4"
 	landmark_tag = "nav_meatstation_4"
 
-/obj/effect/shuttle_landmark/nav_meatstation/nav5
+/obj/shuttle_landmark/nav_meatstation/nav5
 	name = "Navpoint #5"
 	landmark_tag = "nav_meatstation_antag"
 
 //structural
 
-/obj/effect/paint/meatstation
+/obj/paint/meatstation
 	color = "#543333"
 
-/obj/effect/paint/meatstation/lab
+/obj/paint/meatstation/lab
 	color = "#301f1f"
 
 /obj/machinery/power/apc/meatstation

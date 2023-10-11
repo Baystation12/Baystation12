@@ -76,7 +76,7 @@
 				z_level = pick(affecting_z)
 			)
 			var/effect_state = pick("cyan_sparkles", "blue_electricity_constant", "shieldsparkles", "empdisabled")
-			var/obj/effect/temporary/temp_effect = new (turf, 1 SECONDS, 'icons/effects/effects.dmi', effect_state)
+			var/obj/temporary/temp_effect = new (turf, 1 SECONDS, 'icons/effects/effects.dmi', effect_state)
 			temp_effect.set_light(1, 1, 2, 3, COLOR_CYAN_BLUE)
 			if (prob(mob_spawn_chance) && length(mobs) < maximum_mobs && !turf.is_dense())
 				turf.visible_message(SPAN_DANGER("A sudden burst of energy gives birth to some sort of ghost-like entity!"))

@@ -17,7 +17,7 @@
 
 	natural_weapon = /obj/item/melee/energy/sword/pirate/activated
 	unsuitable_atmos_damage = 15
-	var/corpse = /obj/effect/landmark/corpse/pirate
+	var/corpse = /obj/landmark/corpse/pirate
 	var/weapon1 = /obj/item/melee/energy/sword/pirate
 
 	faction = "pirate"
@@ -33,7 +33,7 @@
 	ranged = 1
 	rapid = 1
 	projectiletype = /obj/item/projectile/beam
-	corpse = /obj/effect/landmark/corpse/pirate/ranged
+	corpse = /obj/landmark/corpse/pirate/ranged
 	weapon1 = /obj/item/gun/energy/laser
 
 	ai_holder = /datum/ai_holder/simple_animal/pirate/ranged

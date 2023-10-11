@@ -2,7 +2,7 @@
 	name = "Radiation Bombardment"
 	ruin_tags_blacklist = RUIN_HUMAN
 
-/datum/exoplanet_theme/radiation_bombing/adjust_atmosphere(obj/effect/overmap/visitable/sector/exoplanet/E)
+/datum/exoplanet_theme/radiation_bombing/adjust_atmosphere(obj/overmap/visitable/sector/exoplanet/E)
 	if (E.atmosphere)
 		E.atmosphere.temperature += rand(20, 100)
 		E.atmosphere.update_values()
@@ -10,7 +10,7 @@
 /datum/exoplanet_theme/radiation_bombing/get_sensor_data()
 	return "Hotspots of radiation detected."
 
-/datum/exoplanet_theme/radiation_bombing/after_map_generation(obj/effect/overmap/visitable/sector/exoplanet/E)
+/datum/exoplanet_theme/radiation_bombing/after_map_generation(obj/overmap/visitable/sector/exoplanet/E)
 	var/radiation_power = rand(10, 37.5)
 	var/num_craters = round(min(0.04, rand()) * 0.02 * E.maxx * E.maxy)
 	for (var/i = 1 to num_craters)

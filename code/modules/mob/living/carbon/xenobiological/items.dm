@@ -270,7 +270,7 @@
 	qdel(src)
 	return TRUE
 
-/obj/effect/golemrune
+/obj/golemrune
 	anchored = TRUE
 	desc = "a strange rune used to create golems. It glows when it can be activated."
 	name = "rune"
@@ -279,11 +279,11 @@
 	unacidable = TRUE
 	layer = RUNE_LAYER
 
-/obj/effect/golemrune/Initialize()
+/obj/golemrune/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
 
-/obj/effect/golemrune/Process()
+/obj/golemrune/Process()
 	var/mob/observer/ghost/ghost
 	for(var/mob/observer/ghost/O in src.loc)
 		if(!O.client)	continue
@@ -295,7 +295,7 @@
 	else
 		icon_state = "golem"
 
-/obj/effect/golemrune/attack_hand(mob/living/user as mob)
+/obj/golemrune/attack_hand(mob/living/user as mob)
 	var/mob/observer/ghost/ghost
 	for(var/mob/observer/ghost/O in src.loc)
 		if(!O.client)
@@ -326,7 +326,7 @@
 	qdel(src)
 
 
-/obj/effect/golemrune/proc/announce_to_ghosts()
+/obj/golemrune/proc/announce_to_ghosts()
 	for(var/mob/observer/ghost/G in GLOB.player_list)
 		if(G.client)
 			var/area/A = get_area(src)

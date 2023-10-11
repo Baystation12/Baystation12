@@ -5,8 +5,8 @@
 //
 //		Arguments that the called proc should expect:
 //			/datum/shuttle/shuttle: the shuttle moving
-//			/obj/effect/shuttle_landmark/old_location: the old location's shuttle landmark
-//			/obj/effect/shuttle_landmark/new_location: the new location's shuttle landmark
+//			/obj/shuttle_landmark/old_location: the old location's shuttle landmark
+//			/obj/shuttle_landmark/new_location: the new location's shuttle landmark
 
 //	Observer Pattern Implementation: Shuttle Pre Move
 //		Registration type: /datum/shuttle/autodock
@@ -15,8 +15,8 @@
 //
 //		Arguments that the called proc should expect:
 //			/datum/shuttle/shuttle: the shuttle moving
-//			/obj/effect/shuttle_landmark/old_location: the old location's shuttle landmark
-//			/obj/effect/shuttle_landmark/new_location: the new location's shuttle landmark
+//			/obj/shuttle_landmark/old_location: the old location's shuttle landmark
+//			/obj/shuttle_landmark/new_location: the new location's shuttle landmark
 
 GLOBAL_DATUM_INIT(shuttle_moved_event, /singleton/observ/shuttle_moved, new)
 

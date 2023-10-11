@@ -115,7 +115,7 @@ GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 /obj/procedural/jp_DungeonGenerator/deepmaint/proc/populateCorridors()
 	for(var/turf/T in path_turfs)
 		if(prob(30))
-			new /obj/effect/decal/cleanable/dirt(T)
+			new /obj/decal/cleanable/dirt(T)
 
 /obj/procedural/dungenerator/deepmaint
 	name = "Deep Maint Gen"

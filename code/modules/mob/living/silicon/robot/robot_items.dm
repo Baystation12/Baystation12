@@ -124,7 +124,7 @@
 
 	// Create the party light effect and place it on the turf of who/whatever has it.
 	var/turf/T = get_turf(src)
-	var/obj/effect/party_light/L = new(T)
+	var/obj/party_light/L = new(T)
 	strobe_effect = L
 
 	// Make the light effect follow this party light object.
@@ -145,7 +145,7 @@
 	deactivate_strobe()
 	. = .. ()
 
-/obj/effect/party_light
+/obj/party_light
 	name = "party light"
 	desc = "This is probably bad for your eyes."
 	icon = 'icons/effects/lens_flare.dmi'
@@ -155,7 +155,7 @@
 	pixel_x = -30
 	pixel_y = -4
 
-/obj/effect/party_light/Initialize()
+/obj/party_light/Initialize()
 	update_icon()
 	. = ..()
 

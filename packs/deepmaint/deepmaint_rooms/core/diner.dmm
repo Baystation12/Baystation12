@@ -9,13 +9,13 @@
 /obj/structure/hygiene/sink/kitchen{
 	pixel_y = -32
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
 /turf/simulated/floor/lino,
 /area/map_template/deepmaint)
 "aD" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
 /turf/simulated/floor/lino,
@@ -45,8 +45,8 @@
 /turf/simulated/floor/wood/yew,
 /area/map_template/deepmaint)
 "bX" = (
-/obj/effect/wallframe_spawn/reinforced/no_grille,
-/obj/effect/paint/black,
+/obj/wallframe_spawn/reinforced/no_grille,
+/obj/paint/black,
 /turf/simulated/floor/plating,
 /area/map_template/deepmaint)
 "bZ" = (
@@ -70,9 +70,9 @@
 /turf/simulated/floor/wood/yew,
 /area/map_template/deepmaint)
 "cl" = (
-/obj/effect/floor_decal/corner/red/diagonal,
-/obj/effect/landmark/corpse/pirate,
-/obj/effect/gibspawner/human,
+/obj/floor_decal/corner/red/diagonal,
+/obj/landmark/corpse/pirate,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "cq" = (
@@ -87,8 +87,8 @@
 "cL" = (
 /obj/structure/window/reinforced,
 /obj/machinery/door/window/westleft,
-/obj/effect/floor_decal/spline/fancy/wood,
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood,
+/obj/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
 /turf/simulated/floor/lino,
@@ -117,7 +117,7 @@
 /turf/simulated/floor/wood/yew,
 /area/map_template/deepmaint)
 "iQ" = (
-/obj/effect/floor_decal/spline/fancy/wood/corner{
+/obj/floor_decal/spline/fancy/wood/corner{
 	dir = 8
 	},
 /turf/simulated/floor/lino,
@@ -149,14 +149,14 @@
 /turf/simulated/floor/wood/yew,
 /area/map_template/deepmaint)
 "rT" = (
-/obj/effect/spider/spiderling/growing,
+/obj/spider/spiderling/growing,
 /obj/structure/table/marble,
 /obj/item/material/knife/kitchen/cleaver/bronze,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "sJ" = (
-/obj/effect/landmark/corpse/pirate,
-/obj/effect/gibspawner/human,
+/obj/landmark/corpse/pirate,
+/obj/gibspawner/human,
 /turf/simulated/floor/wood/yew,
 /area/map_template/deepmaint)
 "td" = (
@@ -174,9 +174,9 @@
 /turf/simulated/floor/wood/yew,
 /area/map_template/deepmaint)
 "vp" = (
-/obj/effect/landmark/corpse/chef,
-/obj/effect/gibspawner/human,
-/obj/effect/floor_decal/corner/grey/diagonal{
+/obj/landmark/corpse/chef,
+/obj/gibspawner/human,
+/obj/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -184,13 +184,13 @@
 "wf" = (
 /obj/structure/table/marble,
 /obj/item/material/bell,
-/obj/effect/floor_decal/corner/grey/diagonal{
+/obj/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "wH" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
 /obj/random/trash,
@@ -214,8 +214,8 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "zk" = (
-/obj/effect/spider/spiderling/growing,
-/obj/effect/floor_decal/corner/grey/diagonal{
+/obj/spider/spiderling/growing,
+/obj/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -225,7 +225,7 @@
 /turf/simulated/floor/wood/yew,
 /area/map_template/deepmaint)
 "zM" = (
-/obj/effect/floor_decal/corner/red/diagonal,
+/obj/floor_decal/corner/red/diagonal,
 /obj/machinery/light/spot{
 	dir = 4
 	},
@@ -242,13 +242,13 @@
 /obj/machinery/reagentgrinder/juicer,
 /obj/item/reagent_containers/glass/beaker/large,
 /obj/item/reagent_containers/glass/beaker/large,
-/obj/effect/floor_decal/corner/grey/diagonal{
+/obj/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "Bc" = (
-/obj/effect/floor_decal/corner/grey/diagonal{
+/obj/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -272,11 +272,11 @@
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "Fv" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall,
 /area/map_template/deepmaint)
 "He" = (
-/obj/effect/spider/spiderling/growing,
+/obj/spider/spiderling/growing,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/deepmaint)
 "HV" = (
@@ -284,7 +284,7 @@
 	dir = 1
 	},
 /obj/machinery/door/window/westright,
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
 /turf/simulated/floor/lino,
@@ -298,7 +298,7 @@
 /obj/item/reagent_containers/food/snacks/old/burger,
 /obj/item/reagent_containers/food/snacks/old/burger,
 /obj/item/reagent_containers/food/snacks/old/burger,
-/obj/effect/floor_decal/corner/grey/diagonal{
+/obj/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -312,13 +312,13 @@
 /obj/structure/hygiene/sink/kitchen{
 	pixel_y = -32
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
 /turf/simulated/floor/lino,
 /area/map_template/deepmaint)
 "Lr" = (
-/obj/effect/floor_decal/spline/fancy/wood/corner{
+/obj/floor_decal/spline/fancy/wood/corner{
 	dir = 4
 	},
 /turf/simulated/floor/lino,
@@ -340,7 +340,7 @@
 /area/map_template/deepmaint)
 "MQ" = (
 /obj/structure/table/marble,
-/obj/effect/floor_decal/corner/grey/diagonal{
+/obj/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -348,28 +348,28 @@
 "Na" = (
 /obj/item/stool/bar/padded,
 /obj/machinery/floor_light/mapped_on,
-/obj/effect/landmark/corpse/pirate,
+/obj/landmark/corpse/pirate,
 /turf/simulated/floor/wood/yew,
 /area/map_template/deepmaint)
 "Ox" = (
 /obj/machinery/light/small,
-/obj/effect/floor_decal/corner/grey/diagonal{
+/obj/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "Oz" = (
-/obj/effect/spider/spiderling/growing,
+/obj/spider/spiderling/growing,
 /turf/simulated/floor/wood/yew,
 /area/map_template/deepmaint)
 "OQ" = (
-/obj/effect/floor_decal/corner/red/diagonal,
+/obj/floor_decal/corner/red/diagonal,
 /obj/machinery/door/unpowered/simple/ebony,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "Ps" = (
-/obj/effect/floor_decal/corner/red/diagonal,
-/obj/effect/spider/spiderling/growing,
+/obj/floor_decal/corner/red/diagonal,
+/obj/spider/spiderling/growing,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "PU" = (
@@ -410,11 +410,11 @@
 /turf/simulated/floor/wood/yew,
 /area/map_template/deepmaint)
 "Tv" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
-/obj/effect/landmark/corpse/russian,
-/obj/effect/gibspawner/human,
+/obj/landmark/corpse/russian,
+/obj/gibspawner/human,
 /turf/simulated/floor/lino,
 /area/map_template/deepmaint)
 "TA" = (
@@ -441,14 +441,14 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "Yn" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
-/obj/effect/spider/spiderling/growing,
+/obj/spider/spiderling/growing,
 /turf/simulated/floor/lino,
 /area/map_template/deepmaint)
 "Za" = (
-/obj/effect/floor_decal/corner/red/diagonal,
+/obj/floor_decal/corner/red/diagonal,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "Zc" = (
@@ -456,7 +456,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/deepmaint)
 "ZO" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
 /turf/simulated/floor/lino,

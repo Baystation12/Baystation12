@@ -196,10 +196,10 @@
 /obj/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
 	return ..(anchor_fall)
 
-/obj/effect/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
+/obj/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
 	return FALSE
 
-/obj/effect/decal/cleanable/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
+/obj/decal/cleanable/can_fall(anchor_bypass = FALSE, turf/location_override = loc)
 	return TRUE
 
 /obj/item/pipe/can_fall(anchor_bypass = FALSE, turf/location_override = loc)

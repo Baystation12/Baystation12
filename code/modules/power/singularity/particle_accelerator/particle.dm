@@ -1,4 +1,4 @@
-/obj/effect/accelerated_particle
+/obj/accelerated_particle
 	name = "accelerated particles"
 	desc = "Small things moving very fast."
 	icon = 'icons/obj/machines/power/particle_accelerator2.dmi'
@@ -15,7 +15,7 @@
 	var/movetotarget = TRUE
 	var/active = FALSE
 
-/obj/effect/accelerated_particle/Initialize(maploading, dir = 2)
+/obj/accelerated_particle/Initialize(maploading, dir = 2)
 	. = ..()
 	set_dir(dir)
 	if(movement_range > 20)
@@ -23,7 +23,7 @@
 	active = TRUE
 	move(1)
 
-/obj/effect/accelerated_particle/Bump(atom/A)
+/obj/accelerated_particle/Bump(atom/A)
 	if (!active)
 		return
 	if (A)
@@ -38,33 +38,33 @@
 					collided_core.owned_field.plasma_temperature += mega_energy
 					collided_core.owned_field.energy += energy
 					qdel(src)
-		else if(istype(A, /obj/effect/fusion_particle_catcher))
-			var/obj/effect/fusion_particle_catcher/PC = A
+		else if(istype(A, /obj/fusion_particle_catcher))
+			var/obj/fusion_particle_catcher/PC = A
 			if(particle_type && particle_type != "neutron")
 				if (PC.parent.owned_core.AddReactants(particle_type, 1 + additional_particles))
 					PC.parent.plasma_temperature += mega_energy
 					PC.parent.energy += energy
 					qdel(src)
 
-/obj/effect/accelerated_particle/Bumped(atom/A)
+/obj/accelerated_particle/Bumped(atom/A)
 	if (!active)
 		return
 	if(ismob(A))
 		Bump(A)
 
-/obj/effect/accelerated_particle/ex_act(severity)
+/obj/accelerated_particle/ex_act(severity)
 	if (!active)
 		return
 	qdel(src)
 
-/obj/effect/accelerated_particle/proc/toxmob(mob/living/M)
+/obj/accelerated_particle/proc/toxmob(mob/living/M)
 	if (!active)
 		return
 	var/radiation = (energy*2)
 	M.apply_damage((radiation*3), DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 	M.updatehealth()
 
-/obj/effect/accelerated_particle/proc/move(lag)
+/obj/accelerated_particle/proc/move(lag)
 	set waitfor = FALSE
 	if(QDELETED(src))
 		return
@@ -88,10 +88,10 @@
 	sleep(lag)
 	move(lag)
 
-/obj/effect/accelerated_particle/weak
+/obj/accelerated_particle/weak
 	movement_range = 8
 	energy = 5
 
-/obj/effect/accelerated_particle/strong
+/obj/accelerated_particle/strong
 	movement_range = 15
 	energy = 15

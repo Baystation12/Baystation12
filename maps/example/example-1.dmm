@@ -29,7 +29,7 @@
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "g" = (
-/obj/effect/landmark/start,
+/obj/landmark/start,
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "h" = (
@@ -62,7 +62,7 @@
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "l" = (
-/obj/effect/landmark{
+/obj/landmark{
 	name = "tdome1"
 	},
 /turf/simulated/floor/tiled,
@@ -110,7 +110,7 @@
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "t" = (
-/obj/effect/landmark{
+/obj/landmark{
 	name = "JoinLate"
 	},
 /turf/simulated/floor/tiled,
@@ -128,7 +128,7 @@
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "w" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "x" = (
@@ -139,7 +139,7 @@
 /turf/simulated/wall/iron,
 /area/shuttle/escape)
 "z" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/wingrille_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/shuttle/escape)
 "A" = (
@@ -160,7 +160,7 @@
 	id_tag = "example_shuttle_port";
 	pixel_x = -28
 	},
-/obj/effect/shuttle_landmark/lower_level,
+/obj/shuttle_landmark/lower_level,
 /turf/simulated/floor/plating,
 /area/shuttle/escape)
 "C" = (
@@ -200,11 +200,11 @@
 /turf/simulated/floor,
 /area/constructionsite)
 "I" = (
-/obj/effect/landmark/test/safe_turf,
+/obj/landmark/test/safe_turf,
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "J" = (
-/obj/effect/landmark/test/space_turf,
+/obj/landmark/test/space_turf,
 /turf/space,
 /area/space)
 "K" = (

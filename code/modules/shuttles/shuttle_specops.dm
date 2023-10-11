@@ -152,12 +152,12 @@
 		sleep(10)
 
 		var/spawn_marauder[] = new()
-		for(var/obj/effect/landmark/L in world)
+		for(var/obj/landmark/L in world)
 			if(L.name == "Marauder Entry")
 				spawn_marauder.Add(L)
-		for(var/obj/effect/landmark/L in world)
+		for(var/obj/landmark/L in world)
 			if(L.name == "Marauder Exit")
-				var/obj/effect/portal/P = new(L.loc)
+				var/obj/portal/P = new(L.loc)
 				P.set_invisibility(INVISIBILITY_ABSTRACT)//So it is not seen by anyone.
 				P.failchance = 0//So it has no fail chance when teleporting.
 				P.target = pick(spawn_marauder)//Where the marauder will arrive.

@@ -906,7 +906,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 					throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),5)
 				dir = 2
 		if(DROPLIMB_BURN)
-			new /obj/effect/decal/cleanable/ash(get_turf(victim))
+			new /obj/decal/cleanable/ash(get_turf(victim))
 			for(var/obj/item/I in src)
 				if(I.w_class > ITEM_SIZE_SMALL && !istype(I,/obj/item/organ))
 					I.dropInto(loc)
@@ -916,11 +916,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 			if(BP_IS_CRYSTAL(src))
 				gore = new /obj/item/material/shard(get_turf(victim), MATERIAL_CRYSTAL)
 			else if(BP_IS_ROBOTIC(src))
-				gore = new /obj/effect/decal/cleanable/blood/gibs/robot(get_turf(victim))
+				gore = new /obj/decal/cleanable/blood/gibs/robot(get_turf(victim))
 			else
-				gore = new /obj/effect/decal/cleanable/blood/gibs(get_turf(victim))
+				gore = new /obj/decal/cleanable/blood/gibs(get_turf(victim))
 				if(species)
-					var/obj/effect/decal/cleanable/blood/gibs/G = gore
+					var/obj/decal/cleanable/blood/gibs/G = gore
 					G.fleshcolor = use_flesh_colour
 					G.basecolor =  use_blood_colour
 					G.update_icon()

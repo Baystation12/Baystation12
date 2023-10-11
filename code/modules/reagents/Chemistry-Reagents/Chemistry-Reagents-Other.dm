@@ -146,9 +146,9 @@
 /datum/reagent/uranium/touch_turf(turf/T)
 	if(volume >= 3)
 		if(!istype(T, /turf/space))
-			var/obj/effect/decal/cleanable/greenglow/glow = locate(/obj/effect/decal/cleanable/greenglow, T)
+			var/obj/decal/cleanable/greenglow/glow = locate(/obj/decal/cleanable/greenglow, T)
 			if(!glow)
-				new /obj/effect/decal/cleanable/greenglow(T)
+				new /obj/decal/cleanable/greenglow(T)
 			return
 
 /datum/reagent/water/holywater
@@ -166,7 +166,7 @@
 			if(prob(10))
 				GLOB.cult.offer_uncult(M)
 			if(prob(2))
-				var/obj/effect/spider/spiderling/S = new /obj/effect/spider/spiderling(M.loc)
+				var/obj/spider/spiderling/S = new /obj/spider/spiderling(M.loc)
 				M.visible_message(SPAN_WARNING("\The [M] coughs up \the [S]!"))
 
 /datum/reagent/water/holywater/touch_turf(turf/T)
@@ -232,7 +232,7 @@
 	accelerant_quality = 20
 
 /datum/reagent/napalm/touch_turf(turf/T)
-	new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
+	new /obj/decal/cleanable/liquid_fuel(T, volume)
 	remove_self(volume)
 
 /datum/reagent/napalm/touch_mob(mob/living/L, amount)
@@ -302,7 +302,7 @@
 
 /datum/reagent/oil/touch_turf(turf/simulated/T)
 	if(!istype(T, /turf/space))
-		new /obj/effect/decal/cleanable/blood/oil/streak(T)
+		new /obj/decal/cleanable/blood/oil/streak(T)
 
 /datum/reagent/glycerol
 	name = "Glycerol"

@@ -221,7 +221,7 @@ SUBSYSTEM_DEF(ambient_lighting) //A simple SS that handles updating ambient ligh
 						break
 
 			if (needs_ambience)
-				var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[target.z]"]
+				var/obj/overmap/visitable/sector/exoplanet/E = map_sectors["[target.z]"]
 				if (istype(E))
 					if(E.ambient_group_index > 0)
 						var/datum/ambient_group/A = ambient_groups[E.ambient_group_index]

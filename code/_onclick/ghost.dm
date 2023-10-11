@@ -59,6 +59,6 @@
 	return
 
 
-/obj/effect/portal/attack_ghost(mob/user as mob)
+/obj/portal/attack_ghost(mob/user as mob)
 	if(target)
 		user.forceMove(get_turf(target))

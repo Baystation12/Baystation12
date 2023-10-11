@@ -9,7 +9,7 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 	show_ssd =         "totally quiescent"
 	death_message =    "rapidly loses cohesion, splattering across the ground..."
 	knockout_message = "collapses inwards, forming a disordered puddle of goo."
-	remains_type = /obj/effect/decal/cleanable/ash
+	remains_type = /obj/decal/cleanable/ash
 
 	meat_type = null
 	bone_material = null
@@ -90,7 +90,7 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 
 	var/turf/T = H.loc
 	if(istype(T))
-		var/obj/effect/decal/cleanable/C = locate() in T
+		var/obj/decal/cleanable/C = locate() in T
 		if(C)
 			if(H.nutrition < 300)
 				H.adjust_nutrition(rand(10,20))

@@ -19,7 +19,7 @@
 	mob_size = MOB_LARGE
 
 	var/spiderling_count = 0
-	var/spiderling_type = /obj/effect/spider/spiderling
+	var/spiderling_type = /obj/spider/spiderling
 	var/swarmling_type = /mob/living/simple_animal/hostile/giant_spider/hunter
 	var/swarmling_faction = "spiders"
 	/// Odds that a spiderling will be a swarmling instead.

@@ -218,7 +218,7 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/map_template/deepmaint)
 "aT" = (
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
 /turf/simulated/floor/wood,
 /area/map_template/deepmaint)
 "aU" = (
@@ -351,8 +351,8 @@
 /area/map_template/deepmaint)
 "br" = (
 /obj/item/remains/human,
-/obj/effect/decal/cleanable/blood,
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
 /turf/simulated/floor/wood,
 /area/map_template/deepmaint)
 "bt" = (
@@ -374,7 +374,7 @@
 /area/map_template/deepmaint)
 "by" = (
 /obj/item/remains/human,
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
 /turf/simulated/floor/wood,
 /area/map_template/deepmaint)
 "bz" = (
@@ -382,7 +382,7 @@
 /turf/simulated/floor/carpet/red,
 /area/map_template/deepmaint)
 "bA" = (
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
 /obj/random/junk,
 /turf/simulated/floor/wood,
 /area/map_template/deepmaint)
@@ -426,8 +426,8 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/map_template/deepmaint)
 "bK" = (
-/obj/effect/decal/cleanable/blood,
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
 /obj/random/junk,
 /turf/simulated/floor/wood,
 /area/map_template/deepmaint)

@@ -148,7 +148,7 @@
 /obj/structure/closet/proc/store_items(stored_units)
 	. = 0
 
-	for(var/obj/effect/dummy/chameleon/AD in loc)
+	for(var/obj/dummy/chameleon/AD in loc)
 		if(CLOSET_CHECK_TOO_BIG(1))
 			break
 		.++

@@ -412,7 +412,7 @@
 	if(!ishuman(H))	return
 	cmd_analyse_health(H)
 
-/obj/effect/debugmarker
+/obj/debugmarker
 	icon = 'icons/effects/lighting_overlay.dmi'
 	icon_state = "transparent"
 	layer = HOLOMAP_LAYER
@@ -453,7 +453,7 @@
 	GLOB.planet_repopulation_disabled = !GLOB.planet_repopulation_disabled
 	log_and_message_admins("toggled planet mob repopulating [GLOB.planet_repopulation_disabled ? "OFF" : "ON"].")
 
-/client/proc/spawn_exoplanet(exoplanet_type as anything in subtypesof(/obj/effect/overmap/visitable/sector/exoplanet))
+/client/proc/spawn_exoplanet(exoplanet_type as anything in subtypesof(/obj/overmap/visitable/sector/exoplanet))
 	set category = "Debug"
 	set name = "Create Exoplanet"
 
@@ -479,7 +479,7 @@
 	if (last_chance == "Cancel")
 		return
 
-	var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(null, world.maxx, world.maxy)
+	var/obj/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(null, world.maxx, world.maxy)
 	new_planet.features_budget = budget
 	new_planet.themes = list(new theme)
 	new_planet.sun_brightness_modifier = rand(0.1, 0.6)

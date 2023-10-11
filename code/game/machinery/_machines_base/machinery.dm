@@ -114,7 +114,7 @@
 	if(use_power && operable())
 		use_power_oneoff(7500/severity)
 
-		var/obj/effect/overlay/pulse2 = new /obj/effect/overlay(loc)
+		var/obj/overlay/pulse2 = new /obj/overlay(loc)
 		pulse2.icon = 'icons/effects/effects.dmi'
 		pulse2.icon_state = "empdisable"
 		pulse2.SetName("emp sparks")
@@ -131,7 +131,7 @@
 			else
 				wires.RandomPulse()
 				visible_message(SPAN_WARNING("Something sparks inside \the [src]'s wiring panel!"))
-				new /obj/effect/sparks(get_turf(src))
+				new /obj/sparks(get_turf(src))
 
 		..()
 

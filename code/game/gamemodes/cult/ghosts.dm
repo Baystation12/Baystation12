@@ -58,16 +58,16 @@
 		return
 
 	var/num_doodles = 0
-	for(var/obj/effect/decal/cleanable/blood/writing/W in T)
+	for(var/obj/decal/cleanable/blood/writing/W in T)
 		num_doodles++
 	if(num_doodles > 4)
 		to_chat(src, SPAN_WARNING("There is no space to write on!"))
 		return
 
-	var/obj/effect/decal/cleanable/blood/choice
+	var/obj/decal/cleanable/blood/choice
 	if(!bloodless)
 		var/list/choices = list()
-		for(var/obj/effect/decal/cleanable/blood/B in range(1))
+		for(var/obj/decal/cleanable/blood/B in range(1))
 			if(B.amount > 0)
 				choices += B
 
@@ -94,7 +94,7 @@
 			message += "-"
 			to_chat(src, SPAN_WARNING("You ran out of blood to write with!"))
 
-		var/obj/effect/decal/cleanable/blood/writing/W = new(T)
+		var/obj/decal/cleanable/blood/writing/W = new(T)
 		W.basecolor = doodle_color
 		W.update_icon()
 		W.message = message

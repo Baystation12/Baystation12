@@ -11,13 +11,13 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "ae" = (
-/obj/effect/floor_decal/asteroid,
+/obj/floor_decal/asteroid,
 /turf/unsimulated/floor{
 	icon_state = "snow"
 	},
 /area/map_template/ninja_dojo/dojo)
 "af" = (
-/obj/effect/floor_decal/asteroid,
+/obj/floor_decal/asteroid,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/snow.dmi';
 	icon_state = "snowwhite"
@@ -43,7 +43,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "aj" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/wall/prepainted,
 /area/map_template/ninja_dojo/dojo)
 "ak" = (
@@ -147,7 +147,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
@@ -156,7 +156,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/unsimulated/floor{
@@ -186,14 +186,14 @@
 /area/map_template/ninja_dojo/dojo)
 "az" = (
 /obj/machinery/tele_pad,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"
 	},
 /area/map_template/ninja_dojo/dojo)
 "aA" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 4
 	},
 /turf/unsimulated/floor{
@@ -240,7 +240,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "aE" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1
 	},
 /turf/unsimulated/floor{
@@ -248,7 +248,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "aF" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1
 	},
 /obj/item/device/radio/intercom/syndicate{
@@ -263,10 +263,10 @@
 /obj/machinery/cryopod{
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /turf/unsimulated/floor{
@@ -301,7 +301,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "aK" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /turf/unsimulated/floor{
@@ -313,7 +313,7 @@
 	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
-/obj/effect/floor_decal/floordetail/tiled,
+/obj/floor_decal/floordetail/tiled,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
@@ -326,7 +326,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "aN" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 7
 	},
 /turf/unsimulated/floor{
@@ -334,7 +334,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "aO" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /turf/unsimulated/floor{
@@ -343,7 +343,7 @@
 /area/map_template/ninja_dojo/dojo)
 "aQ" = (
 /obj/structure/table/glass,
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 7
 	},
 /obj/item/paper_bin,
@@ -362,7 +362,7 @@
 /obj/machinery/body_scanconsole{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
 /turf/unsimulated/floor{
@@ -370,13 +370,13 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "aT" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/unsimulated/floor{
@@ -384,14 +384,14 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "aU" = (
-/obj/effect/floor_decal/industrial/outline/blue,
+/obj/floor_decal/industrial/outline/blue,
 /obj/machinery/portable_atmospherics/canister/nitrogen,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
 /area/map_template/ninja_dojo/dojo)
 "aV" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 10
 	},
 /turf/unsimulated/floor{
@@ -429,7 +429,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "ba" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 8
 	},
 /turf/unsimulated/floor{
@@ -437,14 +437,14 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bb" = (
-/obj/effect/floor_decal/industrial/outline/blue,
+/obj/floor_decal/industrial/outline/blue,
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
 /area/map_template/ninja_dojo/dojo)
 "bc" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 6
 	},
 /turf/unsimulated/floor{
@@ -465,7 +465,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bf" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	icon_state = "warning"
 	},
 /obj/machinery/light{
@@ -486,7 +486,7 @@
 /area/map_template/ninja_dojo/dojo)
 "bi" = (
 /obj/machinery/light,
-/obj/effect/floor_decal/corner/black/bordercorner{
+/obj/floor_decal/corner/black/bordercorner{
 	dir = 8
 	},
 /turf/unsimulated/floor{
@@ -502,10 +502,10 @@
 /turf/simulated/floor/tiled,
 /area/map_template/ninja_dojo/dojo)
 "bl" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
-/obj/effect/floor_decal/floordetail/tiled,
+/obj/floor_decal/floordetail/tiled,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"
@@ -527,7 +527,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bo" = (
-/obj/effect/floor_decal/snow,
+/obj/floor_decal/snow,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/snow.dmi';
 	icon_state = "snowplating"
@@ -538,7 +538,7 @@
 	dir = 1
 	},
 /obj/structure/window/reinforced/polarized,
-/obj/effect/floor_decal/floordetail/tiled,
+/obj/floor_decal/floordetail/tiled,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"
@@ -551,10 +551,10 @@
 /turf/simulated/floor/tiled,
 /area/map_template/ninja_dojo/dojo)
 "br" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 1
 	},
 /turf/unsimulated/floor{
@@ -565,10 +565,10 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 7
 	},
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 1
 	},
 /turf/unsimulated/floor{
@@ -585,7 +585,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 8
 	},
 /turf/unsimulated/floor{
@@ -593,13 +593,13 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bv" = (
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
 /area/map_template/ninja_dojo/dojo)
 "bw" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 7
 	},
 /turf/unsimulated/floor{
@@ -617,11 +617,11 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "by" = (
-/obj/effect/landmark{
+/obj/landmark{
 	name = "ninjastart"
 	},
-/obj/effect/floor_decal/industrial/warning,
-/obj/effect/floor_decal/floordetail/tiled,
+/obj/floor_decal/industrial/warning,
+/obj/floor_decal/floordetail/tiled,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -629,11 +629,11 @@
 /area/map_template/ninja_dojo/dojo)
 "bz" = (
 /obj/machinery/acting/changer,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 9;
 	icon_state = "warning"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 6;
 	icon_state = "warning"
 	},
@@ -642,7 +642,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bA" = (
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 8
 	},
 /turf/unsimulated/floor{
@@ -650,7 +650,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bB" = (
-/obj/effect/floor_decal/corner/black/bordercorner{
+/obj/floor_decal/corner/black/bordercorner{
 	dir = 5
 	},
 /obj/machinery/light{
@@ -669,7 +669,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bD" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 1
 	},
 /obj/machinery/light{
@@ -680,7 +680,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bE" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 9
 	},
 /obj/machinery/rotating_alarm/supermatter{
@@ -693,7 +693,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bF" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 9
 	},
 /turf/unsimulated/floor{
@@ -701,10 +701,10 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bG" = (
-/obj/effect/floor_decal/corner/black/bordercorner{
+/obj/floor_decal/corner/black/bordercorner{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/black/bordercorner{
+/obj/floor_decal/corner/black/bordercorner{
 	dir = 1
 	},
 /turf/unsimulated/floor{
@@ -712,11 +712,11 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bH" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
@@ -731,13 +731,13 @@
 	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
-/obj/effect/floor_decal/floordetail/tiled,
+/obj/floor_decal/floordetail/tiled,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
 /area/map_template/ninja_dojo/dojo)
 "bJ" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
 /turf/unsimulated/floor{
@@ -745,7 +745,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bK" = (
-/obj/effect/floor_decal/corner/black/bordercorner{
+/obj/floor_decal/corner/black/bordercorner{
 	dir = 4
 	},
 /obj/machinery/light{
@@ -756,17 +756,17 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bL" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
-/obj/effect/floor_decal/floordetail/tiled,
+/obj/floor_decal/floordetail/tiled,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"
 	},
 /area/map_template/ninja_dojo/dojo)
 "bM" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 10
 	},
 /obj/machinery/rotating_alarm/supermatter{
@@ -782,10 +782,10 @@
 /obj/machinery/cryopod{
 	dir = 2
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /turf/unsimulated/floor{
@@ -794,11 +794,11 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bO" = (
-/obj/effect/paint_stripe/yellow,
+/obj/paint_stripe/yellow,
 /turf/simulated/wall/prepainted,
 /area/map_template/ninja_dojo/dojo)
 "bP" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 1
 	},
 /turf/unsimulated/floor{
@@ -806,7 +806,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bQ" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 5
 	},
 /turf/unsimulated/floor{
@@ -821,15 +821,15 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bS" = (
-/obj/effect/floor_decal/asteroid,
+/obj/floor_decal/asteroid,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/snow.dmi';
 	icon_state = "snowplating"
 	},
 /area/map_template/ninja_dojo/dojo)
 "bT" = (
-/obj/effect/floor_decal/industrial/warning/corner,
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner,
+/obj/floor_decal/industrial/warning/corner{
 	dir = 4;
 	icon_state = "warningcorner"
 	},
@@ -850,7 +850,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 4;
 	icon_state = "warningcorner"
 	},
@@ -862,7 +862,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 2;
 	icon_state = "warningcorner"
 	},
@@ -871,7 +871,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bX" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	icon_state = "warning"
 	},
 /turf/unsimulated/floor{
@@ -879,20 +879,20 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "bZ" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/space,
 /area/map_template/ninja_dojo/dojo)
 "ca" = (
 /obj/structure/table/glass,
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/ninja_dojo/dojo)
 "cb" = (
 /obj/machinery/computer/modular/preset/medical,
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/industrial/outline/grey,
+/obj/floor_decal/corner/black/border{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
@@ -904,7 +904,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/ninja_dojo/dojo)
 "cf" = (
-/obj/effect/floor_decal/corner/black/bordercorner{
+/obj/floor_decal/corner/black/bordercorner{
 	dir = 7
 	},
 /obj/machinery/light,
@@ -926,7 +926,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/ninja_dojo/dojo)
 "ci" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 6
 	},
 /obj/structure/table/glass,
@@ -953,11 +953,11 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "ck" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/map_template/ninja_dojo/start)
 "cl" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 9
 	},
 /obj/machinery/fabricator/hacked,
@@ -966,7 +966,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "cm" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 10
 	},
 /obj/machinery/fabricator/hacked,
@@ -975,7 +975,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "cn" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
@@ -986,10 +986,10 @@
 /area/map_template/ninja_dojo/dojo)
 "co" = (
 /obj/structure/aliumizer,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 10
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 5;
 	icon_state = "warning"
 	},
@@ -1029,7 +1029,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "cu" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	icon_state = "warning"
 	},
 /obj/machinery/light{
@@ -1041,7 +1041,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "cv" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
 	},
@@ -1050,7 +1050,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "cw" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
@@ -1068,7 +1068,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "cz" = (
-/obj/effect/floor_decal/snow,
+/obj/floor_decal/snow,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -1093,13 +1093,13 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "cC" = (
-/obj/effect/landmark{
+/obj/landmark{
 	name = "ninjastart"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/effect/floor_decal/floordetail/tiled,
+/obj/floor_decal/floordetail/tiled,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -1107,7 +1107,7 @@
 /area/map_template/ninja_dojo/dojo)
 "cD" = (
 /obj/machinery/light,
-/obj/effect/floor_decal/corner/black/bordercorner{
+/obj/floor_decal/corner/black/bordercorner{
 	dir = 3
 	},
 /turf/unsimulated/floor{
@@ -1122,13 +1122,13 @@
 /turf/unsimulated/wall,
 /area/map_template/ninja_dojo/dojo)
 "cF" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
 /area/map_template/ninja_dojo/dojo)
 "cG" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
@@ -1150,7 +1150,7 @@
 /area/map_template/ninja_dojo/start)
 "cJ" = (
 /obj/machinery/tele_pad,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/plating,
 /area/map_template/ninja_dojo/start)
 "cK" = (
@@ -1158,9 +1158,9 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/portables_connector,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/portable_atmospherics/canister/air/airlock,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
@@ -1176,7 +1176,7 @@
 	dir = 8;
 	icon_state = "tube1"
 	},
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -1187,7 +1187,7 @@
 	},
 /area/map_template/ninja_dojo/start)
 "cN" = (
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 4;
 	icon_state = "warningcorner"
 	},
@@ -1196,7 +1196,7 @@
 	},
 /area/map_template/ninja_dojo/start)
 "cO" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1
 	},
 /turf/unsimulated/floor{
@@ -1204,7 +1204,7 @@
 	},
 /area/map_template/ninja_dojo/start)
 "cP" = (
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
@@ -1249,13 +1249,13 @@
 /obj/machinery/sleeper{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
 /area/map_template/ninja_dojo/start)
 "cT" = (
-/obj/effect/shuttle_landmark/ninja/start,
+/obj/shuttle_landmark/ninja/start,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -1316,14 +1316,14 @@
 	dir = 8;
 	icon_state = "tube1"
 	},
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
 /area/map_template/ninja_dojo/start)
 "cY" = (
 /obj/structure/table/rack,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -1340,7 +1340,7 @@
 	},
 /obj/machinery/cell_charger,
 /obj/item/screwdriver,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/item/toy/figure/ninja,
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -1376,13 +1376,13 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
 /area/map_template/ninja_dojo/start)
 "dd" = (
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/machinery/computer/station_alert/all{
 	dir = 1
 	},
@@ -1391,7 +1391,7 @@
 	},
 /area/map_template/ninja_dojo/start)
 "de" = (
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/machinery/computer/shuttle_control/multi/ninja{
 	dir = 1
 	},
@@ -1400,7 +1400,7 @@
 	},
 /area/map_template/ninja_dojo/start)
 "df" = (
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/machinery/computer/modular/preset/security{
 	dir = 1;
 	icon_state = "console"
@@ -1414,10 +1414,10 @@
 	id_tag = "ninjawindow";
 	name = "Blast Shutter"
 	},
-/obj/effect/wallframe_spawn/reinforced/polarized{
+/obj/wallframe_spawn/reinforced/polarized{
 	id = "ninja_ship"
 	},
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/floor/plating,
 /area/map_template/ninja_dojo/start)
 "gy" = (
@@ -1429,13 +1429,13 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "qc" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
@@ -1444,16 +1444,16 @@
 /turf/unsimulated/wall,
 /area/map_template/ninja_dojo/dojo)
 "uZ" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
 /area/map_template/ninja_dojo/dojo)
 "vP" = (
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 1;
 	icon_state = "warningcorner"
 	},
@@ -1465,7 +1465,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 1;
 	icon_state = "warningcorner"
 	},
@@ -1474,7 +1474,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "wG" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 5
 	},
 /obj/structure/table/glass,
@@ -1492,18 +1492,18 @@
 /area/map_template/ninja_dojo/dojo)
 "wX" = (
 /obj/structure/table/glass,
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 1
 	},
 /obj/item/newspaper,
 /turf/simulated/floor/tiled,
 /area/map_template/ninja_dojo/dojo)
 "zr" = (
-/obj/effect/floor_decal/snow,
+/obj/floor_decal/snow,
 /turf/unsimulated/wall,
 /area/map_template/ninja_dojo/dojo)
 "BB" = (
-/obj/effect/floor_decal/corner/black/bordercorner{
+/obj/floor_decal/corner/black/bordercorner{
 	dir = 8
 	},
 /obj/machinery/light,
@@ -1520,7 +1520,7 @@
 /area/map_template/ninja_dojo/dojo)
 "Hl" = (
 /obj/structure/table/glass,
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 5
 	},
 /turf/simulated/floor/tiled,
@@ -1538,13 +1538,13 @@
 	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
-/obj/effect/floor_decal/floordetail/tiled,
+/obj/floor_decal/floordetail/tiled,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
 /area/map_template/ninja_dojo/dojo)
 "KK" = (
-/obj/effect/floor_decal/corner/black/bordercorner{
+/obj/floor_decal/corner/black/bordercorner{
 	dir = 4
 	},
 /turf/unsimulated/floor{
@@ -1560,7 +1560,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "MC" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 1
 	},
 /turf/unsimulated/floor{
@@ -1574,7 +1574,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "OL" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 7
 	},
 /obj/machinery/light,
@@ -1587,16 +1587,16 @@
 	dir = 1;
 	icon_state = "console"
 	},
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 9
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/ninja_dojo/dojo)
 "RX" = (
-/obj/effect/floor_decal/corner/black/border{
+/obj/floor_decal/corner/black/border{
 	dir = 7
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /turf/unsimulated/floor{
@@ -1604,7 +1604,7 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "TP" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/unsimulated/floor{
@@ -1615,7 +1615,7 @@
 /obj/structure/table/rack,
 /obj/item/storage/belt/holster/security/tactical,
 /obj/item/storage/belt/holster/security/tactical,
-/obj/effect/floor_decal/corner/black/bordercorner{
+/obj/floor_decal/corner/black/bordercorner{
 	dir = 3
 	},
 /obj/item/clothing/accessory/storage/webbing,

@@ -23,7 +23,7 @@
 	icon_state = "marooned_medal"
 	icon = 'maps/random_ruins/exoplanet_ruins/marooned/marooned_icons.dmi'
 
-/obj/effect/landmark/corpse/marooned_officer
+/obj/landmark/corpse/marooned_officer
 	name = "Horazy Warda"
 	corpse_outfits = list(/singleton/hierarchy/outfit/marooned_officer)
 	spawn_flags = ~CORPSE_SPAWNER_RANDOM_NAME

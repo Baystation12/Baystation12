@@ -94,11 +94,11 @@
 	var/list/candidates = list()
 
 	// Prioritize events. Thus you can hide in meteor showers in exchange for protection from the disperser.
-	for(var/obj/effect/overmap/event/O in overmaptarget)
+	for(var/obj/overmap/event/O in overmaptarget)
 		candidates += O
 	// Next we see if there are any ships around. Logically they are between us and the sector if one exists.
 	if(!length(candidates))
-		for(var/obj/effect/overmap/visitable/ship/S in overmaptarget)
+		for(var/obj/overmap/visitable/ship/S in overmaptarget)
 			if(S == linked)
 				/// Why are you shooting yourself?
 				continue
@@ -106,7 +106,7 @@
 
 	// No events, no ships, the last thing to check is a sector.
 	if(!length(candidates))
-		for(var/obj/effect/overmap/O in overmaptarget)
+		for(var/obj/overmap/O in overmaptarget)
 			if(O == linked)
 				// Why are you shooting yourself?
 				continue
@@ -116,11 +116,11 @@
 	if(!length(candidates))
 		return TRUE
 
-	var/obj/effect/overmap/finaltarget = pick(candidates)
+	var/obj/overmap/finaltarget = pick(candidates)
 	log_and_message_admins("A type [chargetype] disperser beam was launched at [finaltarget].", location=finaltarget)
 
 	// Deletion of the overmap effect and the actual event trigger. Bye bye pesky meteors.
-	if(istype(finaltarget, /obj/effect/overmap/event))
+	if(istype(finaltarget, /obj/overmap/event))
 		fire_at_event(finaltarget, chargetype)
 		qdel(atomcharge)
 	// After this point ships act basically as sectors so we stop taking care of differences
@@ -132,7 +132,7 @@
  * Handles firing at events (storms, meteors, etc).
  * If the shot type and the event type's weakness match, it kills it.
  */
-/obj/machinery/computer/ship/disperser/proc/fire_at_event(obj/effect/overmap/event/finaltarget, chargetype)
+/obj/machinery/computer/ship/disperser/proc/fire_at_event(obj/overmap/event/finaltarget, chargetype)
 	if(chargetype & finaltarget.weaknesses)
 		var/turf/T = finaltarget.loc
 		qdel(finaltarget)
@@ -143,7 +143,7 @@
  * Has code to handle manual coordinate-based aiming, and random-aim.
  * If coordinates are put in, gun tries to hit at the inputted coordinates, else chooses a random area.
  */
-/obj/machinery/computer/ship/disperser/proc/fire_at_sector(obj/effect/overmap/visitable/finaltarget, obj/structure/ship_munition/disperser_charge/charge, chargetype)
+/obj/machinery/computer/ship/disperser/proc/fire_at_sector(obj/overmap/visitable/finaltarget, obj/structure/ship_munition/disperser_charge/charge, chargetype)
 	var/list/targetareas = finaltarget.get_areas()
 	targetareas -= locate(/area/space)
 

@@ -190,7 +190,7 @@
 	display_name = "blood tomato plant"
 	mutants = list("killer")
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/blood = list(1,5))
-	splat_type = /obj/effect/decal/cleanable/blood/splatter
+	splat_type = /obj/decal/cleanable/blood/splatter
 
 /datum/seed/tomato/blood/New()
 	..()
@@ -345,7 +345,7 @@
 	display_name = "chanterelle cluster"
 	mutants = list("reishi","amanita","plumphelmet")
 	chems = list(/datum/reagent/nutriment = list(1,25))
-	splat_type = /obj/effect/vine
+	splat_type = /obj/vine
 	kitchen_tag = "mushroom"
 
 /datum/seed/mushroom/New()
@@ -1582,7 +1582,7 @@
 	seed_noun = SEED_NOUN_SPORES
 	display_name = "o'krri cluster"
 	chems = list(/datum/reagent/nutriment = list(1,25), /datum/reagent/drugs/psilocybin = list(1,3))
-	splat_type = /obj/effect/vine
+	splat_type = /obj/vine
 	kitchen_tag = "mushroom"
 
 /datum/seed/okrri/New()

@@ -240,7 +240,7 @@
 			var/obj/item/meat = new meat_type(get_turf(src))
 			meat.SetName("[src.name] [meat.name]")
 			if(can_bleed)
-				var/obj/effect/decal/cleanable/blood/splatter/splat = new(get_turf(src))
+				var/obj/decal/cleanable/blood/splatter/splat = new(get_turf(src))
 				splat.basecolor = bleed_colour
 				splat.update_icon()
 			qdel(src)
@@ -256,7 +256,7 @@
 		if(BULLET_IMPACT_MEAT)
 			if (P.damtype == DAMAGE_BRUTE)
 				var/hit_dir = get_dir(P.starting, src)
-				var/obj/effect/decal/cleanable/blood/B = blood_splatter(get_step(src, hit_dir), src, 1, hit_dir)
+				var/obj/decal/cleanable/blood/B = blood_splatter(get_step(src, hit_dir), src, 1, hit_dir)
 				B.icon_state = pick("dir_splatter_1","dir_splatter_2")
 				B.basecolor = bleed_colour
 				B.SetTransform(scale = min(1, round(mob_size / MOB_MEDIUM, 0.1)))
@@ -302,7 +302,7 @@
 	bleed_ticks--
 	adjustBruteLoss(1)
 
-	var/obj/effect/decal/cleanable/blood/drip/drip = new(get_turf(src))
+	var/obj/decal/cleanable/blood/drip/drip = new(get_turf(src))
 	drip.basecolor = bleed_colour
 	drip.update_icon()
 

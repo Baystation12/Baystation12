@@ -1,4 +1,4 @@
-/obj/effect/overmap/visitable/sector/exoplanet/proc/generate_atmosphere()
+/obj/overmap/visitable/sector/exoplanet/proc/generate_atmosphere()
 	atmosphere = new
 	if (habitability_class == HABITABILITY_IDEAL)
 		atmosphere.adjust_gas(GAS_OXYGEN, MOLES_O2STANDARD, 0)
@@ -43,7 +43,7 @@
 			total_moles = max(total_moles - part, 0)
 			i++
 
-/obj/effect/overmap/visitable/sector/exoplanet/proc/get_atmosphere_color()
+/obj/overmap/visitable/sector/exoplanet/proc/get_atmosphere_color()
 	var/list/colors = list()
 	for (var/g in atmosphere.gas)
 		if (gas_data.tile_overlay_color[g])

@@ -1,4 +1,4 @@
-/obj/effect/decal/cleanable
+/obj/decal/cleanable
 	density = FALSE
 	anchored = TRUE
 	waterproof = FALSE
@@ -13,7 +13,7 @@
 	var/scent_descriptor = SCENT_DESC_SMELL
 	var/scent_range = 2
 
-/obj/effect/decal/cleanable/Initialize()
+/obj/decal/cleanable/Initialize()
 	. = ..()
 	if(isspace(loc))
 		return INITIALIZE_HINT_QDEL
@@ -21,7 +21,7 @@
 	hud_overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	set_cleanable_scent()
 
-/obj/effect/decal/cleanable/Initialize(ml, _age)
+/obj/decal/cleanable/Initialize(ml, _age)
 	if(!isnull(_age))
 		age = _age
 	if(random_icon_states && length(src.random_icon_states) > 0)
@@ -29,20 +29,20 @@
 	SSpersistence.track_value(src, /datum/persistent/filth)
 	. = ..()
 
-/obj/effect/decal/cleanable/Destroy()
+/obj/decal/cleanable/Destroy()
 	SSpersistence.forget_value(src, /datum/persistent/filth)
 	. = ..()
 
-/obj/effect/decal/cleanable/water_act(depth)
+/obj/decal/cleanable/water_act(depth)
 	..()
 	qdel(src)
 
-/obj/effect/decal/cleanable/clean_blood(ignore = 0)
+/obj/decal/cleanable/clean_blood(ignore = 0)
 	if(!ignore)
 		qdel(src)
 		return
 	..()
 
-/obj/effect/decal/cleanable/proc/set_cleanable_scent()
+/obj/decal/cleanable/proc/set_cleanable_scent()
 	if(cleanable_scent)
 		set_extension(src, /datum/extension/scent/custom, cleanable_scent, scent_intensity, scent_descriptor, scent_range)

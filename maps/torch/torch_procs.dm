@@ -58,8 +58,8 @@
 
 
 /datum/map/torch/ship_jump()
-	for(var/obj/effect/overmap/visitable/ship/torch/torch)
-		new /obj/effect/ftl (get_turf(torch))
+	for(var/obj/overmap/visitable/ship/torch/torch)
+		new /obj/ftl (get_turf(torch))
 		qdel(torch)
 		animate(torch, time = 0.5 SECONDS)
 		animate(alpha = 0, time = 0.5 SECONDS)

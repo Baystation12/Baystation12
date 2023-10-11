@@ -198,7 +198,7 @@
 		user.visible_message(SPAN_WARNING("\The [shields.owner]'s shields flash and crackle."))
 		flick("shield_impact", src)
 		playsound(user,'sound/effects/basscannon.ogg',35,1)
-		new /obj/effect/effect/smoke/illumination(user.loc, 5, 4, 1, "#ffffff")
+		new /obj/effect/smoke/illumination(user.loc, 5, 4, 1, "#ffffff")
 		if (proj.damage <= 0)
 			return AURA_FALSE|AURA_CANCEL
 

@@ -7,12 +7,12 @@
 	max_storage_space = BASE_STORAGE_CAPACITY(ITEM_SIZE_SMALL)
 	use_sound = 'sound/effects/storage/toolbox.ogg'
 	var/static/list/projection_types = list(
-		/obj/item/photo = /obj/effect/projection/photo,
-		/obj/item/paper = /obj/effect/projection/paper,
-		/obj/item = /obj/effect/projection
+		/obj/item/photo = /obj/projection/photo,
+		/obj/item/paper = /obj/projection/paper,
+		/obj/item = /obj/projection
 	)
 	var/obj/item/current_slide
-	var/obj/effect/projection/projection
+	var/obj/projection/projection
 
 /obj/item/storage/slide_projector/Destroy()
 	current_slide = null
@@ -142,7 +142,7 @@
 	if(. == TOPIC_REFRESH)
 		interact(user)
 
-/obj/effect/projection
+/obj/projection
 	name = "projected slide"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "white"
@@ -153,15 +153,15 @@
 	alpha = 100
 	var/weakref/source
 
-/obj/effect/projection/Initialize()
+/obj/projection/Initialize()
 	. = ..()
 	set_light(1, 0.1, COLOR_WHITE) //Makes turning off the lights not invalidate projection
 
-/obj/effect/projection/on_update_icon()
+/obj/projection/on_update_icon()
 	filters = filter(type="drop_shadow", color = COLOR_WHITE, size = 4, offset = 1,x = 0, y = 0)
 	project_icon()
 
-/obj/effect/projection/proc/project_icon()
+/obj/projection/proc/project_icon()
 	var/obj/item/I = source.resolve()
 	if(!istype(I))
 		qdel(src)
@@ -176,12 +176,12 @@
 	MA.pixel_y = 0
 	AddOverlays(MA)
 
-/obj/effect/projection/proc/set_source(obj/item/I)
+/obj/projection/proc/set_source(obj/item/I)
 	source = weakref(I)
 	desc = "It's currently showing \the [I]."
 	update_icon()
 
-/obj/effect/projection/examine(mob/user, distance)
+/obj/projection/examine(mob/user, distance)
 	. = ..()
 	var/obj/item/slide = source.resolve()
 	if(!istype(slide))
@@ -189,10 +189,10 @@
 		return
 	return slide.examine(user, max(distance, 1), FALSE)
 
-/obj/effect/projection/photo
+/obj/projection/photo
 	alpha = 170
 
-/obj/effect/projection/photo/project_icon()
+/obj/projection/photo/project_icon()
 	var/obj/item/photo/slide = source.resolve()
 	if(!istype(slide))
 		qdel(src)
@@ -202,10 +202,10 @@
 	pixel_x = -32 * round(slide.photo_size/2)
 	pixel_y = -32 * round(slide.photo_size/2)
 
-/obj/effect/projection/paper
+/obj/projection/paper
 	alpha = 140
 
-/obj/effect/projection/paper/project_icon()
+/obj/projection/paper/project_icon()
 	var/obj/item/paper/P = source.resolve()
 	if(!istype(P))
 		qdel(src)
