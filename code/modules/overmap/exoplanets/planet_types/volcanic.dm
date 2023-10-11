@@ -5,25 +5,27 @@
 	planetary_area = /area/exoplanet/volcanic
 	rock_colors = list(COLOR_DARK_GRAY)
 	plant_colors = list("#a23c05","#3f1f0d","#662929","#ba6222","#7a5b3a","#120309")
-	possible_themes = list()
 	map_generators = list(/datum/random_map/automata/cave_system/mountains/volcanic, /datum/random_map/noise/exoplanet/volcanic, /datum/random_map/noise/ore/filthy_rich)
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 	surface_color = "#261e19"
 	water_color = "#c74d00"
-	habitability_distribution = HABITABILITY_BAD
+	habitability_weight = HABITABILITY_EXTREME
 	has_trees = FALSE
 	flora_diversity = 3
 	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/hostile/retaliate/beast/shantak/lava, /mob/living/simple_animal/hostile/retaliate/beast/charbaby)
 	megafauna_types = list(/mob/living/simple_animal/hostile/drake)
 
 /obj/overmap/visitable/sector/exoplanet/volcanic/get_atmosphere_color()
-	return COLOR_GRAY20
+	var/air_color = ..()
+	return MixColors(COLOR_GRAY20, air_color)
 
 /obj/overmap/visitable/sector/exoplanet/volcanic/generate_atmosphere()
 	..()
-	if(atmosphere)
-		atmosphere.temperature = T20C + rand(220, 800)
-		atmosphere.update_values()
+	var/datum/species/H = all_species[SPECIES_HUMAN]
+	var/xtreme = H.heat_level_2 + (rand(1,3) *  H.heat_level_2)
+	var/generator/new_temp = generator("num", H.heat_level_2, xtreme, UNIFORM_RAND)
+	atmosphere.temperature = new_temp.Rand()
+	atmosphere.update_values()
 
 /obj/overmap/visitable/sector/exoplanet/volcanic/adapt_seed(datum/seed/S)
 	..()
