@@ -72,7 +72,7 @@
 
 /obj/item/rig/combat/equipped
 	initial_modules = list(
-		/obj/item/rig_module/mounted/egun,
+		/obj/item/rig_module/mounted/energy/egun,
 		/obj/item/rig_module/vision/thermal,
 		/obj/item/rig_module/grenade_launcher,
 		/obj/item/rig_module/ai_container,
@@ -157,7 +157,7 @@
 
 /obj/item/rig/military/equipped
 	initial_modules = list(
-		/obj/item/rig_module/mounted/egun,
+		/obj/item/rig_module/mounted/energy/egun,
 		/obj/item/rig_module/vision/multi,
 		/obj/item/rig_module/grenade_launcher,
 		/obj/item/rig_module/ai_container,

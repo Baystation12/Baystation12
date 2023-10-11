@@ -316,3 +316,53 @@
 
 /obj/structure/closet/crate/uranium/WillContain()
 	return list(/obj/item/stack/material/uranium/ten = 5)
+
+///Base ninja equipment
+/obj/structure/closet/crate/ninja
+	name = "ninja equipment crate"
+	desc = "An ominous equipment crate."
+	closet_appearance = /singleton/closet_appearance/crate/secure/weapon
+
+/obj/structure/closet/crate/ninja/WillContain()
+	return list(
+		/obj/item/rig/light/ninja,
+		/obj/item/material/sword/katana,
+		/obj/item/storage/box/syndie_kit/silenced
+	)
+
+///Ninja equipment loadouts. Overwritten in torch/structures/closets.dm because of away/example check evils
+/obj/structure/closet/crate/ninja/sol
+	name = "sol equipment crate"
+	desc = "A tactical equipment crate."
+
+/obj/structure/closet/crate/ninja/sol/WillContain()
+	return list(
+		/obj/item/rig/light/ninja/sol
+	)
+
+/obj/structure/closet/crate/ninja/gcc
+	name = "gcc equipment crate"
+	desc = "A heavy equipment crate."
+
+/obj/structure/closet/crate/ninja/gcc/WillContain()
+	return list(
+		/obj/item/rig/light/ninja/gcc
+	)
+
+/obj/structure/closet/crate/ninja/corpo
+	name = "corporate equipment crate"
+	desc = "A patented equipment crate."
+
+/obj/structure/closet/crate/ninja/corpo/WillContain()
+	return list(
+		/obj/item/rig/light/ninja/corpo
+	)
+
+/obj/structure/closet/crate/ninja/merc
+	name = "mercenary equipment crate"
+	desc = "A traitorous equipment crate."
+
+/obj/structure/closet/crate/ninja/merc/WillContain()
+	return list(
+		/obj/item/rig/merc/ninja
+	)

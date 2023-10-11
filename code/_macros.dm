@@ -42,6 +42,8 @@
 
 #define isbeam(A) istype(A, /obj/item/projectile/beam)
 
+#define ismagazine(A) istype(A, /obj/item/ammo_magazine)
+
 #define isbrain(A) istype(A, /mob/living/carbon/brain)
 
 #define iscarbon(A) istype(A, /mob/living/carbon)

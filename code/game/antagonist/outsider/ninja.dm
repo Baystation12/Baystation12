@@ -2,16 +2,16 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 
 /datum/antagonist/ninja
 	id = MODE_NINJA
-	role_text = "Ninja"
-	role_text_plural = "Ninja"
+	role_text = "Operative"
+	role_text_plural = "Operatives"
 	landmark_id = "ninjastart"
-	welcome_text = "<span class='info'>You are an elite mercenary assassin of the Spider Clan. You have a variety of abilities at your disposal, thanks to your nano-enhanced cyber armor.</span>"
+	welcome_text = "<span class='info'>You are an elite operative of some interest group. You have a variety of abilities at your disposal, thanks to your advanced hardsuit.</span>"
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_RANDSPAWN | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE
 	antaghud_indicator = "hudninja"
 
 	initial_spawn_req = 1
-	initial_spawn_target = 1
-	hard_cap = 1
+	initial_spawn_target = 2
+	hard_cap = 2
 	hard_cap_round = 3
 	min_player_age = 18
 
@@ -81,41 +81,40 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 	player.StoreMemory("<B>Directive:</B> [SPAN_DANGER("[directive]")]<br>", /singleton/memory_options/system)
 	to_chat(player, "<b>Remember your directive:</b> [directive].")
 
-/datum/antagonist/ninja/update_antag_mob(datum/mind/player)
-	..()
-	var/ninja_title = pick(GLOB.ninja_titles)
-	var/ninja_name = pick(GLOB.ninja_names)
-	var/mob/living/carbon/human/H = player.current
-	if(istype(H))
-		H.real_name = "[ninja_title] [ninja_name]"
-		H.SetName(H.real_name)
-	player.name = H.name
-
 /datum/antagonist/ninja/equip(mob/living/carbon/human/player)
 	. = ..()
 	if(.)
-		var/obj/item/device/radio/R = new /obj/item/device/radio/headset(player)
+		var/obj/item/device/radio/R = new /obj/item/device/radio/headset/syndicate(player)
 		player.equip_to_slot_or_del(R, slot_l_ear)
 		player.equip_to_slot_or_del(new /obj/item/clothing/under/color/black(player), slot_w_uniform)
-		player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_belt)
-		create_id("Infiltrator", player)
-		equip_rig(/obj/item/rig/light/ninja, player)
+		create_id("Operative", player)
 		var/obj/item/modular_computer/pda/syndicate/U = new
 		player.put_in_hands(U)
 		var/singleton/uplink_source/pda/uplink_source = new
 		uplink_source.setup_uplink_source(player, 0)
+		var/obj/item/ninja_kit/kit = new
+		player.put_in_hands(kit)
+
+/datum/antagonist/ninja/equip_vox(mob/living/carbon/human/vox, mob/living/carbon/human/old)
+	vox.equip_to_slot_or_del(new /obj/item/clothing/under/vox/vox_casual(vox), slot_w_uniform)
+	vox.equip_to_slot_or_del(new /obj/item/clothing/shoes/magboots/vox(vox), slot_shoes)
+	vox.equip_to_slot_or_del(new /obj/item/clothing/gloves/vox(vox), slot_gloves)
+	vox.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vox(vox), slot_wear_mask)
+	vox.equip_to_slot_or_del(new /obj/item/tank/nitrogen(vox), slot_back)
+	vox.put_in_hands(locate(/obj/item/modular_computer/pda/syndicate) in old.contents)
+	vox.set_internals(locate(/obj/item/tank) in vox.contents)
 
 /datum/antagonist/ninja/proc/generate_ninja_directive(side)
 	var/directive = "[side=="face"?"[GLOB.using_map.company_name]":"A criminal syndicate"] is your employer. "//Let them know which side they're on.
 	switch(rand(1,19))
 		if(1)
-			directive += "The Spider Clan must not be linked to this operation. Remain hidden and covert when possible."
+			directive += "Your interest group must not be linked to this operation. Remain hidden and covert when possible."
 		if(2)
-			directive += "[GLOB.using_map.station_name] is financed by an enemy of the Spider Clan. Cause as much structural damage as desired."
+			directive += "[GLOB.using_map.station_name] is financed by an enemy of your interest group. Cause as much structural damage as desired."
 		if(3)
 			directive += "A wealthy animal rights activist has made a request we cannot refuse. Prioritize saving animal lives whenever possible."
 		if(4)
-			directive += "The Spider Clan absolutely cannot be linked to this operation. Eliminate witnesses at your discretion."
+			directive += "Your interest group absolutely cannot be linked to this operation. Eliminate witnesses at your discretion."
 		if(5)
 			directive += "We are currently negotiating with [GLOB.using_map.company_name] [GLOB.using_map.boss_name]. Prioritize saving human lives over ending them."
 		if(6)
@@ -123,7 +122,7 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 		if(7)
 			directive += "A financial backer has made an offer we cannot refuse. Implicate criminal involvement in the operation."
 		if(8)
-			directive += "Let no one question the mercy of the Spider Clan. Ensure the safety of all non-essential personnel you encounter."
+			directive += "Let no one question the mercy of your interest group. Ensure the safety of all non-essential personnel you encounter."
 		if(9)
 			directive += "A free agent has proposed a lucrative business deal. Implicate [GLOB.using_map.company_name] involvement in the operation."
 		if(10)
@@ -136,15 +135,15 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 			directive += "Some disgruntled [GLOB.using_map.company_name] employees have been supportive of our operations. Be wary of any mistreatment by command staff."
 		if(14)
 			var/xenorace = pick(SPECIES_UNATHI, SPECIES_SKRELL)
-			directive += "A group of [xenorace] radicals have been loyal supporters of the Spider Clan. Favor [xenorace] crew whenever possible."
+			directive += "A group of [xenorace] radicals have been loyal supporters of your interest group. Favor [xenorace] crew whenever possible."
 		if(15)
-			directive += "The Spider Clan has recently been accused of religious insensitivity. Attempt to speak with the Chaplain and prove these accusations false."
+			directive += "Your interest group has recently been accused of religious insensitivity. Attempt to speak with the Chaplain and prove these accusations false."
 		if(16)
-			directive += "The Spider Clan has been bargaining with a competing prosthetics manufacturer. Try to shine [GLOB.using_map.company_name] prosthetics in a bad light."
+			directive += "Your interest group has been bargaining with a competing prosthetics manufacturer. Try to shine [GLOB.using_map.company_name] prosthetics in a bad light."
 		if(17)
-			directive += "The Spider Clan has recently begun recruiting outsiders. Consider suitable candidates and assess their behavior amongst the crew."
+			directive += "Your interest group has recently begun recruiting outsiders. Consider suitable candidates and assess their behavior amongst the crew."
 		if(18)
-			directive += "A cyborg liberation group has expressed interest in our serves. Prove the Spider Clan merciful towards law-bound synthetics."
+			directive += "A cyborg liberation group has expressed interest in our serves. Prove your interest group is merciful towards law-bound synthetics."
 		else
 			directive += "There are no special supplemental instructions at this time."
 	return directive

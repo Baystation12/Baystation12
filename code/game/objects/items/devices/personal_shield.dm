@@ -195,3 +195,83 @@
 		SetName("activated [initial(name)]")
 	else
 		SetName(initial(name))
+
+/obj/item/rig_module/personal_shield
+	name = "hardsuit energy shield"
+	desc = "Truly a life-saver: this device protects its user from being hit by objects moving very, very fast. It draws power from a hardsuit's internal battery."
+	icon = 'icons/obj/tools/batterer.dmi'
+	icon_state = "battereroff"
+	var/shield_type = /obj/aura/personal_shield/device
+	var/shield_power_cost = 100
+	var/obj/aura/personal_shield/device/shield
+
+	VAR_PRIVATE/currently_stored_power = 500
+	VAR_PRIVATE/max_stored_power = 500
+	VAR_PRIVATE/restored_power_per_tick = 5
+	VAR_PRIVATE/enable_when_powered = FALSE
+
+	toggleable = TRUE
+
+	interface_name = "energy shield"
+	interface_desc = "A device that protects its user from being hit by fast moving projectiles. Its internal capacitor can hold 5 charges at a time and recharges slowly over time."
+	module_cooldown = 10 SECONDS
+	origin_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 6, TECH_ESOTERIC = 6, TECH_ENGINEERING = 7)
+	activate_string = "Enable Shield"
+	deactivate_string = "Disable Shield"
+
+/obj/item/rig_module/personal_shield/Initialize()
+	. = ..()
+	if (holder.cell)
+		currently_stored_power = holder.cell.use(max_stored_power)
+
+/obj/item/rig_module/personal_shield/activate()
+	if (!..())
+		return FALSE
+
+	var/mob/living/carbon/human/H = holder.wearer
+
+	if (shield || !H)
+		return FALSE
+	if (currently_stored_power < shield_power_cost)
+		to_chat(H, SPAN_WARNING("\The [src]'s internal capacitor does not have enough charge."))
+		return FALSE
+	shield = new shield_type(H, src)
+	return TRUE
+
+/obj/item/rig_module/personal_shield/deactivate()
+	if (!..())
+		return FALSE
+
+	if (!shield)
+		return
+	QDEL_NULL(shield)
+	return TRUE
+
+/obj/item/rig_module/personal_shield/Process(wait)
+	if (!holder.cell?.charge || currently_stored_power >= max_stored_power)
+		return PROCESS_KILL
+	var/amount_to_restore = min(restored_power_per_tick * wait, max_stored_power - currently_stored_power)
+	currently_stored_power += holder.cell.use(amount_to_restore)
+
+	if (enable_when_powered && currently_stored_power >= shield_power_cost)
+		activate(get_holder_of_type(src, /mob))
+
+/obj/item/rig_module/personal_shield/proc/take_charge()
+	if (!actual_take_charge())
+		deactivate()
+		return FALSE
+	return TRUE
+
+/obj/item/rig_module/personal_shield/proc/actual_take_charge()
+	if (!holder.cell)
+		return FALSE
+	if (currently_stored_power < shield_power_cost)
+		return FALSE
+
+	currently_stored_power -= shield_power_cost
+	START_PROCESSING(SSobj, src)
+
+	if (currently_stored_power < shield_power_cost)
+		enable_when_powered = TRUE
+		return FALSE
+	return TRUE

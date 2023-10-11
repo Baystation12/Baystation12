@@ -16,8 +16,8 @@
 	disruptable = 1
 	disruptive = 0
 
-	use_power_cost = 250 KILOWATTS
-	active_power_cost = 30 KILOWATTS
+	use_power_cost = 500 KILOWATTS
+	active_power_cost = 60 KILOWATTS
 	passive_power_cost = 0
 	module_cooldown = 10 SECONDS
 	origin_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 6, TECH_ESOTERIC = 6, TECH_ENGINEERING = 7)
@@ -60,7 +60,7 @@
 	name = "teleportation module"
 	desc = "A complex, sleek-looking, hardsuit-integrated teleportation module."
 	icon_state = "teleporter"
-	use_power_cost = 400 KILOWATTS
+	use_power_cost = 800 KILOWATTS
 	redundant = 1
 	usable = 1
 	selectable = 1

@@ -32,6 +32,15 @@
 	max_shots = 3
 	projectile_type = /obj/item/projectile/ion/small
 
+/obj/item/gun/energy/ionrifle/mounted
+	name = "mounted ion gun"
+	desc = "You should not see this. Call a developer."
+	fire_delay = 30
+	one_hand_penalty = 0
+	self_recharge = TRUE
+	use_external_power = TRUE
+	has_safety = FALSE
+
 /obj/item/gun/energy/decloner
 	name = "biological demolecularisor"
 	desc = "A gun that discharges high amounts of controlled radiation to slowly break a target into component elements."
