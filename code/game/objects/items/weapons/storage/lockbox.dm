@@ -31,7 +31,7 @@
 	else if (!broken && istype(I, /obj/item/melee/energy/blade))
 		var/success = emag_act(INFINITY, user, I, null, "You hear metal being sliced and sparks flying.")
 		if (success)
-			var/datum/effect/effect/system/spark_spread/spark_system = new
+			var/datum/effect/spark_spread/spark_system = new
 			spark_system.set_up(5, 0, loc)
 			spark_system.start()
 			playsound(loc, 'sound/weapons/blade1.ogg', 50, 1)

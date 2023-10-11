@@ -91,7 +91,7 @@
 		O = A
 	if(C)
 		var/length = 10
-		var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
+		var/datum/effect/spark_spread/sparks = new /datum/effect/spark_spread()
 		sparks.set_up(1, 1, user.loc)
 		sparks.start()
 		if(C.charge >= C.maxcharge)

@@ -437,7 +437,7 @@
 	update_icon()
 
 /obj/machinery/microwave/proc/broke()
-	var/datum/effect/effect/system/spark_spread/s = new
+	var/datum/effect/spark_spread/s = new
 	s.set_up(2, 1, src)
 	s.start()
 	if (prob(100 * break_multiplier))

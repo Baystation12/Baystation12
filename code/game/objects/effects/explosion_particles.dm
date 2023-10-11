@@ -10,17 +10,16 @@
 	..()
 	QDEL_IN(src, 1 SECOND)
 
-/datum/effect/system/expl_particles
-	var/number = 10
-	var/turf/location
+/datum/effect/expl_particles
+	number = 10
 	var/total_particles = 0
 
-/datum/effect/system/expl_particles/proc/set_up(n = 10, loca)
+/datum/effect/expl_particles/set_up(n = 10, loca)
 	number = n
 	if(isturf(loca)) location = loca
 	else location = get_turf(loca)
 
-/datum/effect/system/expl_particles/proc/start()
+/datum/effect/expl_particles/start()
 	var/i = 0
 	for(i=0, i<src.number, i++)
 		spawn(0)
@@ -44,21 +43,19 @@
 	..()
 	QDEL_IN(src, 1 SECOND)
 
-/datum/effect/system/explosion
-	var/turf/location
 
-/datum/effect/system/explosion/proc/set_up(loca)
+/datum/effect/explosion/set_up(loca)
 	if(isturf(loca)) location = loca
 	else location = get_turf(loca)
 
-/datum/effect/system/explosion/proc/start()
+/datum/effect/explosion/start()
 	new/obj/explosion( location )
-	var/datum/effect/system/expl_particles/P = new/datum/effect/system/expl_particles()
+	var/datum/effect/expl_particles/P = new
 	P.set_up(10,location)
 	P.start()
 	addtimer(new Callback(src, .proc/make_smoke), 5)
 
-/datum/effect/system/explosion/proc/make_smoke()
-	var/datum/effect/effect/system/smoke_spread/S = new/datum/effect/effect/system/smoke_spread()
+/datum/effect/explosion/proc/make_smoke()
+	var/datum/effect/smoke_spread/S = new
 	S.set_up(5,0,location,null)
 	S.start()

@@ -202,7 +202,7 @@
 		if (proj.damage <= 0)
 			return AURA_FALSE|AURA_CANCEL
 
-		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+		var/datum/effect/spark_spread/spark_system = new /datum/effect/spark_spread()
 		spark_system.set_up(5, 0, user)
 		spark_system.start()
 		playsound(loc, "sparks", 25, 1)

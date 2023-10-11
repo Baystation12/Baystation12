@@ -735,14 +735,14 @@
 	var/activated_passive_power = 2 KILOWATTS
 	var/movement_power = 75
 	origin_tech = list(TECH_ENGINEERING = 3, TECH_MAGNET = 3, TECH_PHORON = 3)
-	var/datum/effect/effect/system/trail/ion/ion_trail
+	var/datum/effect/trail/ion/ion_trail
 	require_adjacent = FALSE
 	var/stabilizers = FALSE
 	var/slide_distance = 6
 
 /obj/item/mech_equipment/ionjets/Initialize()
 	. = ..()
-	ion_trail = new /datum/effect/effect/system/trail/ion()
+	ion_trail = new /datum/effect/trail/ion()
 	ion_trail.set_up(src)
 
 /obj/item/mech_equipment/ionjets/proc/allowSpaceMove()

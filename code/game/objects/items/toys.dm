@@ -309,7 +309,7 @@
 
 /obj/item/toy/snappop/throw_impact(atom/hit_atom)
 	..()
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 	s.set_up(3, 1, src)
 	s.start()
 	new /obj/decal/cleanable/ash(src.loc)
@@ -323,7 +323,7 @@
 		if(!MOVING_DELIBERATELY(M))
 			to_chat(M, SPAN_WARNING("You step on the snap pop!"))
 
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 			s.set_up(2, 0, src)
 			s.start()
 			new /obj/decal/cleanable/ash(src.loc)

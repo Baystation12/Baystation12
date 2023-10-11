@@ -27,7 +27,7 @@
 	var/interact_page = 0
 	var/components_per_page = 10
 	/// Spark system used for creating sparks while the assembly is damaged and destroyed.
-	var/datum/effect/effect/system/spark_spread/spark_system
+	var/datum/effect/spark_spread/spark_system
 	var/adrone = FALSE
 	pass_flags = 0
 	anchored = FALSE
@@ -112,7 +112,7 @@
 	.=..()
 	START_PROCESSING(SScircuit, src)
 	matter[MATERIAL_STEEL] = round((max_complexity + max_components) / 4) * SScircuit.cost_multiplier
-	spark_system = new /datum/effect/effect/system/spark_spread
+	spark_system = new /datum/effect/spark_spread
 	spark_system.set_up(7, 0, src)
 	spark_system.attach(src)
 

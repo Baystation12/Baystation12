@@ -167,7 +167,7 @@
 	var/sound_id
 	var/damaged = FALSE
 	var/disabled
-	var/datum/effect/effect/system/spark_spread/sparks
+	var/datum/effect/spark_spread/sparks
 
 
 /obj/item/shield/energy/Destroy()

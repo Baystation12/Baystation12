@@ -32,7 +32,7 @@
 		log_error("Gib list length mismatch!")
 		return
 	if (sparks)
-		var/datum/effect/effect/system/spark_spread/s = new
+		var/datum/effect/spark_spread/s = new
 		s.set_up(2, 1, get_turf(location))
 		s.start()
 	var/spread = isturf(location)

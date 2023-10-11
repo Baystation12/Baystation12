@@ -32,7 +32,7 @@
 	var/threshold //Whether (world.time - started) has passed cook_time or burn_time
 	var/started //The world.time when cooking started
 	var/default_color //The fallback color to assign to cooked things if the mode does not supply one
-	var/datum/effect/effect/system/smoke_spread/bad/smoke
+	var/datum/effect/smoke_spread/bad/smoke
 
 
 /obj/machinery/cooker/Initialize()

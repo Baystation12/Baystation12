@@ -75,14 +75,14 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_ENGINEERING = 5, TECH_MATERIAL = 4)
 
-	var/datum/effect/effect/system/spark_spread/spark_system
+	var/datum/effect/spark_spread/spark_system
 	var/datum/pipe/P
 	var/pipe_color = "white"
 	var/datum/browser/popup
 
 /obj/item/rpd/Initialize()
 	. = ..()
-	spark_system = new /datum/effect/effect/system/spark_spread
+	spark_system = new /datum/effect/spark_spread
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 	var/list/L = GLOB.rpd_pipe_selection[GLOB.rpd_pipe_selection[1]]

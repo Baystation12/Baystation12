@@ -54,7 +54,7 @@
 	explosion(loc, explosion_radius, explosion_max_power)
 	var/turf/origin = get_turf(src)
 	if (origin)
-		var/datum/effect/effect/system/spark_spread/sparks = new
+		var/datum/effect/spark_spread/sparks = new
 		sparks.set_up(3, 1, origin)
 		sparks.start()
 		var/list/loot = list()

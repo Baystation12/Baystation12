@@ -182,7 +182,7 @@
 	var/construct_type = /obj/machinery/light_construct
 
 	/// `spark_spread` effect datum.
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 
 	/// The installed light bolb.
 	var/obj/item/light/lightbulb
@@ -481,7 +481,7 @@
 			SPAN_DANGER("You stick \the [W] into \the [src]!")
 		)
 		if(powered() && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
 			if (prob(75))

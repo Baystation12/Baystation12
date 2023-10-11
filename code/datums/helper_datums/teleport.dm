@@ -35,7 +35,7 @@
 	return 1
 
 /singleton/teleport/sparks
-	var/datum/effect/effect/system/spark_spread/spark = new
+	var/datum/effect/spark_spread/spark = new
 
 /singleton/teleport/sparks/proc/do_spark(atom/target)
 	if(!target.simulated)

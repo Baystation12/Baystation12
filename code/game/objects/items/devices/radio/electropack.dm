@@ -104,7 +104,7 @@
 				if(M)
 					M.moved_recently = 0
 		to_chat(M, SPAN_DANGER("You feel a sharp shock!"))
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 		s.set_up(3, 1, M)
 		s.start()
 

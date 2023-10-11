@@ -129,7 +129,7 @@
 
 	// Energy Blade, Psiblade
 	if (istype(weapon, /obj/item/melee/energy/blade) || istype(weapon, /obj/item/psychic_power/psiblade/master/grand/paramount))
-		var/datum/effect/effect/system/spark_spread/spark_system = new(src)
+		var/datum/effect/spark_spread/spark_system = new(src)
 		spark_system.set_up(5, EMPTY_BITFIELD, loc)
 		spark_system.start()
 		playsound(loc, 'sound/weapons/blade1.ogg', 50, TRUE)

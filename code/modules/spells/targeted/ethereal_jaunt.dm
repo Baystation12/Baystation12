@@ -87,7 +87,7 @@
 	playsound(get_turf(target), 'sound/magic/ethereal_exit.ogg', 30)
 
 /spell/targeted/ethereal_jaunt/proc/jaunt_steam(mobloc)
-	var/datum/effect/effect/system/steam_spread/steam = new /datum/effect/effect/system/steam_spread()
+	var/datum/effect/steam_spread/steam = new /datum/effect/steam_spread()
 	steam.set_up(10, 0, mobloc)
 	steam.start()
 
