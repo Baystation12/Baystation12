@@ -22,9 +22,15 @@
 
 /singleton/hierarchy/supply_pack/supply/wpaper
 	name = "Cargo - Wrapping paper"
-	contains = list(/obj/item/stack/package_wrap/twenty_five = 3)
+	contains = list(/obj/item/stack/package_wrap/cargo_wrap = 3)
 	cost = 10
 	containername = "wrapping paper"
+
+/singleton/hierarchy/supply_pack/supply/gpaper
+	name = "Cargo - Gift Wrapping paper"
+	contains = list(/obj/item/stack/package_wrap/gift_wrap = 3)
+	cost = 10
+	containername = "gift wrapping paper"
 
 /singleton/hierarchy/supply_pack/supply/tapes
 	name = "Medium - Blank Tapes (14)"

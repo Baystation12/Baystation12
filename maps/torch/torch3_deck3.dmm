@@ -9739,7 +9739,7 @@
 "xu" = (
 /obj/structure/table/standard,
 /obj/item/hand_labeler,
-/obj/item/stack/package_wrap/twenty_five,
+/obj/item/stack/package_wrap/cargo_wrap,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},

@@ -10779,7 +10779,7 @@
 /obj/item/device/multitool,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/item/device/destTagger,
-/obj/item/stack/package_wrap/twenty_five,
+/obj/item/stack/package_wrap/cargo_wrap,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "Dw" = (

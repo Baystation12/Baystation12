@@ -14,7 +14,7 @@
 	/obj/item/device/camera,
 	/obj/item/device/camera_film = 2,
 	/obj/item/storage/photo_album,
-	/obj/item/stack/package_wrap/twenty_five,
+	/obj/item/stack/package_wrap/cargo_wrap,
 	/obj/item/reagent_containers/glass/paint/red,
 	/obj/item/reagent_containers/glass/paint/green,
 	/obj/item/reagent_containers/glass/paint/blue,
@@ -23,7 +23,7 @@
 	/obj/item/reagent_containers/glass/paint/black,
 	/obj/item/reagent_containers/glass/paint/white,
 	/obj/item/contraband/poster,
-	/obj/item/wrapping_paper = 3)
+	/obj/item/stack/package_wrap/gift_wrap)
 	cost = 10
 	containername = "arts and Crafts crate"
 
