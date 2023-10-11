@@ -1,7 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - balance: Mob confusion should now be limited to 30 seconds. Note that if you are
-      hit by an effect that increases your confusion, it can still extend this time
-      - This change only prevents the total stack from exceeding 30 seconds if you're
-      being spammed by something.
