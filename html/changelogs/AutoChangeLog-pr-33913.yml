@@ -1,0 +1,21 @@
+author: PurplePineapple, [skull132](https://github.com/skull132), Azlan, Ryan0602
+delete-after: true
+changes:
+  - rscadd: Three new hardsuits for the "Operative" mode; a Sol hardsuit, an ICCG
+      hardsuit, and a Corporate hardsuit.
+  - tweak: The new hardsuits, a subtype of the Merc hardsuit, and the original ninja
+      suit for 5 total options for a Ninja.
+  - rscadd: Leg actuator module using some code from [skull132](https://github.com/skull132)
+      on Aurorastation13 for the Corporate RIG
+  - rscadd: Personal shield module for the SCG RIG
+  - rscadd: A mounted 7mm minigun module for the ICCG RIG
+  - rscadd: A separate minigun usable on its own. Adminspawn only for now.
+  - tweak: Cloak and Telportation now use twice as much energy as before.
+  - tweak: Hardsuit mounted weaponry has been separated into ballistic and energy
+      subtypes.
+  - rscadd: A new Operative starting map made by Ryan0602 with tools, medical supplies,
+      and one random large weapon on each side.
+  - tweak: Ninja now requires 10 active players. The minimum number of Operatives
+      is a minimum of 1, but now it's possible to have 2 as a maximum.
+  - rscdel: Removes mentions of the Spider-Clan from antagonist objectives. They are
+      no longer only literal ninjas.
