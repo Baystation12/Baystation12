@@ -10,7 +10,7 @@
 	throw_range = 7
 	layer = BELOW_OBJ_LAYER
 	var/amount = 30					//How much paper is in the bin.
-	var/list/papers = new/list()	//List of papers put in the bin for reference.
+	var/list/papers = list()	//List of papers put in the bin for reference.
 
 
 /obj/item/paper_bin/MouseDrop(mob/user as mob)

@@ -361,7 +361,7 @@
 
 /obj/machinery/power/apc/proc/check_updates()
 	if(!update_overlay_chan)
-		update_overlay_chan = new/list()
+		update_overlay_chan = list()
 	var/last_update_state = update_state
 	var/last_update_overlay = update_overlay
 	var/list/last_update_overlay_chan = update_overlay_chan.Copy()

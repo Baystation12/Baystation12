@@ -410,8 +410,8 @@
 	throwforce = 0
 	var/max_capacity = 600
 	var/used_capacity = 0
-	var/list/storedinfo = new/list()
-	var/list/timestamp = new/list()
+	var/list/storedinfo = list()
+	var/list/timestamp = list()
 	var/ruined = 0
 	var/doctored = 0
 

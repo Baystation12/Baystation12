@@ -17,7 +17,7 @@
 	matter = list(MATERIAL_PLASTIC = 200)
 
 	var/max_darts = 1
-	var/list/darts = new/list()
+	var/list/darts = list()
 
 
 /obj/item/gun/launcher/foam/use_tool(obj/item/tool, mob/user, list/click_params)

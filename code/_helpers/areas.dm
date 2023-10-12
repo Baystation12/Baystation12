@@ -14,7 +14,7 @@
 
 /proc/get_area_turfs(area/A, list/predicates)
 	RETURN_TYPE(/list)
-	. = new/list()
+	. = list()
 	A = istype(A) ? A : locate(A)
 	if(!A)
 		return
@@ -24,7 +24,7 @@
 
 /proc/get_subarea_turfs(area/A, list/predicates)
 	RETURN_TYPE(/list)
-	. = new/list()
+	. = list()
 	A = istype(A) ? A.type : A
 	if(!ispath(A))
 		return

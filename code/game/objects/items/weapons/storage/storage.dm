@@ -9,8 +9,8 @@
 	name = "storage"
 	icon = 'icons/obj/boxes.dmi'
 	w_class = ITEM_SIZE_NORMAL
-	var/list/can_hold = new/list() //List of objects which this item can store (if set, it can't store anything else)
-	var/list/cant_hold = new/list() //List of objects which this item can't store (in effect only if can_hold isn't set)
+	var/list/can_hold = list() //List of objects which this item can store (if set, it can't store anything else)
+	var/list/cant_hold = list() //List of objects which this item can't store (in effect only if can_hold isn't set)
 
 	var/max_w_class = ITEM_SIZE_SMALL //Max size of objects that this object can store (in effect only if can_hold isn't set)
 	var/max_storage_space = null //Total storage cost of items this can hold. Will be autoset based on storage_slots if left null.

@@ -308,8 +308,6 @@
 
 /obj/machinery/computer/ship/disperser/military
 	name = "impulse cannon control"
-	caldigit = 2
-	// coolinterval = 45 SECONDS This blasted code is /const/ And i just give up
 
 /obj/item/stock_parts/circuitboard/disperser/military
 	name = "circuit board (impulse cannon control)"

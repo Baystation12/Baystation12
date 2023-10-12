@@ -82,7 +82,7 @@
 	RETURN_TYPE(/list)
 
 	var/turf/centerturf = get_turf(center)
-	var/list/turfs = new/list()
+	var/list/turfs = list()
 	var/rsq = radius * (radius+0.5)
 
 	for(var/atom/T in range(radius, centerturf))
@@ -98,7 +98,7 @@
 	RETURN_TYPE(/list)
 
 	var/turf/centerturf = get_turf(center)
-	var/list/atoms = new/list()
+	var/list/atoms = list()
 	var/rsq = radius * (radius+0.5)
 
 	for(var/atom/A in view(radius, centerturf))
@@ -152,7 +152,7 @@
 	RETURN_TYPE(/list)
 
 	var/turf/centerturf = get_turf(center)
-	var/list/turfs = new/list()
+	var/list/turfs = list()
 	var/rsq = radius * (radius+0.5)
 
 	for(var/turf/T in view(radius, centerturf))
@@ -524,7 +524,7 @@
 
 /proc/getCardinalAirInfo(turf/loc, list/stats=list("temperature"))
 	RETURN_TYPE(/list)
-	var/list/temps = new/list(4)
+	var/list/temps = new(4)
 	for(var/dir in GLOB.cardinal)
 		var/direction
 		switch(dir)
@@ -537,7 +537,7 @@
 			if(WEST)
 				direction = 4
 		var/turf/simulated/T=get_turf(get_step(loc,dir))
-		var/list/rstats = new /list(length(stats))
+		var/list/rstats = new(length(stats))
 		if(T && istype(T) && T.zone)
 			var/datum/gas_mixture/environment = T.return_air()
 			for(var/i=1;i<=length(stats);i++)

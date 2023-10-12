@@ -1,5 +1,5 @@
 /datum/storage_ui/default
-	var/list/is_seeing = new/list() //List of mobs which are currently seeing the contents of this item's storage
+	var/list/is_seeing = list() //List of mobs which are currently seeing the contents of this item's storage
 
 	var/obj/screen/storage/boxes
 	var/obj/screen/storage/storage_start //storage UI

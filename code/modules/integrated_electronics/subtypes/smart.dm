@@ -125,8 +125,8 @@
 		activate_pin(3)
 		return
 	else
-		var/list/Xn =  new/list(length(P))
-		var/list/Yn =  new/list(length(P))
+		var/list/Xn =  new(length(P))
+		var/list/Yn =  new(length(P))
 		var/turf/T
 		for(var/i =1 to length(P))
 			T=P[i]
