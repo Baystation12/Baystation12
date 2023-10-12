@@ -63,12 +63,12 @@ Retain even if empty - the future exists
 	return result
 */
 
-var/global/const/ANIMATION_SLICE = 8
-var/global/const/ANIMATION_CONTINUE = 512
+#define ANIMATION_SLICE 8
+#define ANIMATION_CONTINUE 512
 
-var/global/const/JSON_PRETTY_PRINT = 1
+#define JSON_PRETTY_PRINT 1
 
-var/global/const/JSON_STRICT = 1
-var/global/const/JSON_ALLOW_COMMENTS = 2
+#define JSON_STRICT 1
+#define JSON_ALLOW_COMMENTS 2
 
 #endif
