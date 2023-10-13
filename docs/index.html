@@ -381,7 +381,7 @@ General Public License version 3.
 
 
 <h3 id="types">Types
-<aside>(302 detailed/583 documented/20453 total, 2.9%)</aside></h3>
+<aside>(302 detailed/583 documented/20449 total, 2.9%)</aside></h3>
 <ul class="index-tree">
     <li><a href="global.html" title="(global)">(global)</a></li>
     <li class="has-children"><a href="area.html" title="&#x2F;area">area</a><ul class="index-tree">
@@ -402,7 +402,7 @@ General Public License version 3.
     <li><span class="no-substance" title="&#x2F;atom&#x2F;movable&#x2F;renderer&#x2F;scene_group">scene_group</span> - Render group for stuff INSIDE the typical game context - people, items, lighting, etc.</li>
     <li><span class="no-substance" title="&#x2F;atom&#x2F;movable&#x2F;renderer&#x2F;screen_effects">screen_effects</span> - Draws full screen visual effects, like pain and bluespace.</li>
     <li><span class="no-substance" title="&#x2F;atom&#x2F;movable&#x2F;renderer&#x2F;screen_group">screen_group</span> - Render group for stuff OUTSIDE the typical game context - UI, full screen effects, etc.</li>
-    <li><span class="no-substance" title="&#x2F;atom&#x2F;movable&#x2F;renderer&#x2F;warp">warp</span> - Renders the /obj/effect/effect/warp example effect as well as gravity catapult effects</li>
+    <li><span class="no-substance" title="&#x2F;atom&#x2F;movable&#x2F;renderer&#x2F;warp">warp</span> - Renders the /obj/effect/warp example effect as well as gravity catapult effects</li>
     </ul></li>
     </ul></li>
     </ul></li>
@@ -514,11 +514,11 @@ Null key is always #000000.</li>
     </ul></li>
     <li><a href="datum/design.html" title="&#x2F;datum&#x2F;design">design</a></li>
     <li><span class="no-substance">dna&#x2F;</span><a href="datum/dna/gene.html" title="&#x2F;datum&#x2F;dna&#x2F;gene">gene</a> - Gene Datum</li>
-    <li class="has-children"><span class="no-substance">effect&#x2F;effect&#x2F;system&#x2F;</span><span class="no-substance" title="&#x2F;datum&#x2F;effect&#x2F;effect&#x2F;system&#x2F;trail">trail</span> - ///// Attach an Ion trail to any object, that spawns when it moves (like for the jetpack)
+    <li class="has-children"><span class="no-substance">effect&#x2F;</span><span class="no-substance" title="&#x2F;datum&#x2F;effect&#x2F;trail">trail</span> - ///// Attach an Ion trail to any object, that spawns when it moves (like for the jetpack)
 just pass in the object to attach it to in set_up
 Then do start() to start it and stop() to stop it, obviously
 and don't call start() in a loop that will be repeated otherwise it'll get spammed!<ul class="index-tree">
-    <li><span class="no-substance" title="&#x2F;datum&#x2F;effect&#x2F;effect&#x2F;system&#x2F;trail&#x2F;steam">steam</span> - Attach a steam trail to an object (eg. a reacting beaker) that will follow it</li>
+    <li><span class="no-substance" title="&#x2F;datum&#x2F;effect&#x2F;trail&#x2F;steam">steam</span> - Attach a steam trail to an object (eg. a reacting beaker) that will follow it</li>
     </ul></li>
     <li class="has-children"><span title="&#x2F;datum&#x2F;event">event</span><ul class="index-tree">
     <li><a href="datum/event/bsd_instability.html" title="&#x2F;datum&#x2F;event&#x2F;bsd_instability">bsd_instability</a></li>
@@ -777,39 +777,19 @@ Parameters: var/obj/item/card/id</li>
     <li class="has-children"><a href="obj.html" title="&#x2F;obj">obj</a><ul class="index-tree">
     <li><a href="obj/airlock_filler_object.html" title="&#x2F;obj&#x2F;airlock_filler_object">airlock_filler_object</a></li>
     <li><a href="obj/aura.html" title="&#x2F;obj&#x2F;aura">aura</a></li>
+    <li><span class="no-substance">blob&#x2F;</span><a href="obj/blob/core.html" title="&#x2F;obj&#x2F;blob&#x2F;core">core</a></li>
     <li><a href="obj/compass_holder.html" title="&#x2F;obj&#x2F;compass_holder">compass_holder</a></li>
-    <li class="has-children"><span title="&#x2F;obj&#x2F;effect">effect</span><ul class="index-tree">
-    <li><span class="no-substance">blob&#x2F;</span><a href="obj/effect/blob/core.html" title="&#x2F;obj&#x2F;effect&#x2F;blob&#x2F;core">core</a></li>
-    <li><a href="obj/effect/computer_file_creator.html" title="&#x2F;obj&#x2F;effect&#x2F;computer_file_creator">computer_file_creator</a> - Mapping tool - creates a named modular computer file in a computer's storage on late initialize.
+    <li><a href="obj/computer_file_creator.html" title="&#x2F;obj&#x2F;computer_file_creator">computer_file_creator</a> - Mapping tool - creates a named modular computer file in a computer's storage on late initialize.
 Use this to do things like automatic records and blackboxes. Alternative for paper records.
 Values can be in the editor for each map or as a subtype.
 This is an obj because raw atoms can't be placed in DM or third-party mapping tools.</li>
-    <li><span class="no-substance">decal&#x2F;cleanable&#x2F;blood&#x2F;</span><a href="obj/effect/decal/cleanable/blood/tracks.html" title="&#x2F;obj&#x2F;effect&#x2F;decal&#x2F;cleanable&#x2F;blood&#x2F;tracks">tracks</a></li>
-    <li class="has-children"><span title="&#x2F;obj&#x2F;effect&#x2F;effect">effect</span><ul class="index-tree">
-    <li><a href="obj/effect/effect/smoke.html" title="&#x2F;obj&#x2F;effect&#x2F;effect&#x2F;smoke">smoke</a> - SMOKE SYSTEMS</li>
-    <li><span class="no-substance" title="&#x2F;obj&#x2F;effect&#x2F;effect&#x2F;warp">warp</span> - Example of a warp filter</li>
+    <li><span class="no-substance">decal&#x2F;cleanable&#x2F;blood&#x2F;</span><a href="obj/decal/cleanable/blood/tracks.html" title="&#x2F;obj&#x2F;decal&#x2F;cleanable&#x2F;blood&#x2F;tracks">tracks</a></li>
+    <li class="has-children"><span title="&#x2F;obj&#x2F;effect">effect</span><ul class="index-tree">
+    <li><a href="obj/effect/smoke.html" title="&#x2F;obj&#x2F;effect&#x2F;smoke">smoke</a> - SMOKE SYSTEMS</li>
+    <li><span class="no-substance" title="&#x2F;obj&#x2F;effect&#x2F;warp">warp</span> - Example of a warp filter</li>
     </ul></li>
-    <li><a href="obj/effect/fusion_em_field.html" title="&#x2F;obj&#x2F;effect&#x2F;fusion_em_field">fusion_em_field</a></li>
-    <li><span class="no-substance">gateway&#x2F;artifact&#x2F;</span><a href="obj/effect/gateway/artifact/big.html" title="&#x2F;obj&#x2F;effect&#x2F;gateway&#x2F;artifact&#x2F;big">big</a></li>
-    <li class="has-children"><span title="&#x2F;obj&#x2F;effect&#x2F;landmark">landmark</span><ul class="index-tree">
-    <li class="has-children"><a href="obj/effect/landmark/corpse.html" title="&#x2F;obj&#x2F;effect&#x2F;landmark&#x2F;corpse">corpse</a><ul class="index-tree">
-    <li><span class="no-substance" title="&#x2F;obj&#x2F;effect&#x2F;landmark&#x2F;corpse&#x2F;lar_maria">lar_maria</span> - crew and prisoners</li>
-    </ul></li>
-    <li><a href="obj/effect/landmark/map_data.html" title="&#x2F;obj&#x2F;effect&#x2F;landmark&#x2F;map_data">map_data</a></li>
-    </ul></li>
-    <li><span class="no-substance">overlay&#x2F;</span><a href="obj/effect/overlay/self_deleting.html" title="&#x2F;obj&#x2F;effect&#x2F;overlay&#x2F;self_deleting">self_deleting</a> - Effect overlays that should automatically delete themselves after a set time.</li>
-    <li class="has-children"><a href="obj/effect/overmap.html" title="&#x2F;obj&#x2F;effect&#x2F;overmap">overmap</a><ul class="index-tree">
-    <li class="has-children"><a href="obj/effect/overmap/visitable.html" title="&#x2F;obj&#x2F;effect&#x2F;overmap&#x2F;visitable">visitable</a><ul class="index-tree">
-    <li><span class="no-substance">sector&#x2F;</span><a href="obj/effect/overmap/visitable/sector/exoplanet.html" title="&#x2F;obj&#x2F;effect&#x2F;overmap&#x2F;visitable&#x2F;sector&#x2F;exoplanet">exoplanet</a></li>
-    <li><a href="obj/effect/overmap/visitable/ship.html" title="&#x2F;obj&#x2F;effect&#x2F;overmap&#x2F;visitable&#x2F;ship">ship</a></li>
-    </ul></li>
-    </ul></li>
-    <li><span class="no-substance">shuttle_landmark&#x2F;automatic&#x2F;</span><a href="obj/effect/shuttle_landmark/automatic/spaceflare.html" title="&#x2F;obj&#x2F;effect&#x2F;shuttle_landmark&#x2F;automatic&#x2F;spaceflare">spaceflare</a></li>
-    <li><span class="no-substance" title="&#x2F;obj&#x2F;effect&#x2F;spider">spider</span> - You will appear adjacent to the beacon</li>
-    <li class="has-children"><a href="obj/effect/turf_fire.html" title="&#x2F;obj&#x2F;effect&#x2F;turf_fire">turf_fire</a><ul class="index-tree">
-    <li><span class="no-substance" title="&#x2F;obj&#x2F;effect&#x2F;turf_fire&#x2F;magical">magical</span> - All the subtypes are for adminbussery and or mapping</li>
-    </ul></li>
-    </ul></li>
+    <li><a href="obj/fusion_em_field.html" title="&#x2F;obj&#x2F;fusion_em_field">fusion_em_field</a></li>
+    <li><span class="no-substance">gateway&#x2F;artifact&#x2F;</span><a href="obj/gateway/artifact/big.html" title="&#x2F;obj&#x2F;gateway&#x2F;artifact&#x2F;big">big</a></li>
     <li class="has-children"><a href="obj/item.html" title="&#x2F;obj&#x2F;item">item</a><ul class="index-tree">
     <li class="has-children"><span title="&#x2F;obj&#x2F;item&#x2F;aiModule">aiModule</span><ul class="index-tree">
     <li><span class="no-substance" title="&#x2F;obj&#x2F;item&#x2F;aiModule&#x2F;antimov">antimov</span> - Antimov</li>
@@ -1079,6 +1059,12 @@ files in particular are also available.<ul class="index-tree">
     <li><a href="obj/item/wirecutters.html" title="&#x2F;obj&#x2F;item&#x2F;wirecutters">wirecutters</a></li>
     <li><a href="obj/item/wrench.html" title="&#x2F;obj&#x2F;item&#x2F;wrench">wrench</a></li>
     </ul></li>
+    <li class="has-children"><span title="&#x2F;obj&#x2F;landmark">landmark</span><ul class="index-tree">
+    <li class="has-children"><a href="obj/landmark/corpse.html" title="&#x2F;obj&#x2F;landmark&#x2F;corpse">corpse</a><ul class="index-tree">
+    <li><span class="no-substance" title="&#x2F;obj&#x2F;landmark&#x2F;corpse&#x2F;lar_maria">lar_maria</span> - crew and prisoners</li>
+    </ul></li>
+    <li><a href="obj/landmark/map_data.html" title="&#x2F;obj&#x2F;landmark&#x2F;map_data">map_data</a></li>
+    </ul></li>
     <li class="has-children"><a href="obj/machinery.html" title="&#x2F;obj&#x2F;machinery">machinery</a><ul class="index-tree">
     <li><a href="obj/machinery/artifact.html" title="&#x2F;obj&#x2F;machinery&#x2F;artifact">artifact</a></li>
     <li><span class="no-substance">atmospherics&#x2F;unary&#x2F;</span><a href="obj/machinery/atmospherics/unary/cryo_cell.html" title="&#x2F;obj&#x2F;machinery&#x2F;atmospherics&#x2F;unary&#x2F;cryo_cell">cryo_cell</a></li>
@@ -1131,6 +1117,13 @@ Research Information Browser//</li>
     <li><a href="obj/machinery/vending.html" title="&#x2F;obj&#x2F;machinery&#x2F;vending">vending</a></li>
     <li><a href="obj/machinery/vitals_monitor.html" title="&#x2F;obj&#x2F;machinery&#x2F;vitals_monitor">vitals_monitor</a></li>
     </ul></li>
+    <li><span class="no-substance">overlay&#x2F;</span><a href="obj/overlay/self_deleting.html" title="&#x2F;obj&#x2F;overlay&#x2F;self_deleting">self_deleting</a> - Effect overlays that should automatically delete themselves after a set time.</li>
+    <li class="has-children"><a href="obj/overmap.html" title="&#x2F;obj&#x2F;overmap">overmap</a><ul class="index-tree">
+    <li class="has-children"><a href="obj/overmap/visitable.html" title="&#x2F;obj&#x2F;overmap&#x2F;visitable">visitable</a><ul class="index-tree">
+    <li><span class="no-substance">sector&#x2F;</span><a href="obj/overmap/visitable/sector/exoplanet.html" title="&#x2F;obj&#x2F;overmap&#x2F;visitable&#x2F;sector&#x2F;exoplanet">exoplanet</a></li>
+    <li><a href="obj/overmap/visitable/ship.html" title="&#x2F;obj&#x2F;overmap&#x2F;visitable&#x2F;ship">ship</a></li>
+    </ul></li>
+    </ul></li>
     <li class="has-children"><span title="&#x2F;obj&#x2F;procedural">procedural</span><ul class="index-tree">
     <li class="has-children"><a href="obj/procedural/jp_DungeonGenerator.html" title="&#x2F;obj&#x2F;procedural&#x2F;jp_DungeonGenerator">jp_DungeonGenerator</a><ul class="index-tree">
     <li><a href="obj/procedural/jp_DungeonGenerator/deepmaint.html" title="&#x2F;obj&#x2F;procedural&#x2F;jp_DungeonGenerator&#x2F;deepmaint">deepmaint</a></li>
@@ -1171,7 +1164,9 @@ unlikely that you'll need to modify this</li>
     <li><span class="no-substance">movable&#x2F;</span><a href="obj/screen/movable/action_button.html" title="&#x2F;obj&#x2F;screen&#x2F;movable&#x2F;action_button">action_button</a></li>
     <li><a href="obj/screen/zone_sel.html" title="&#x2F;obj&#x2F;screen&#x2F;zone_sel">zone_sel</a></li>
     </ul></li>
+    <li><span class="no-substance">shuttle_landmark&#x2F;automatic&#x2F;</span><a href="obj/shuttle_landmark/automatic/spaceflare.html" title="&#x2F;obj&#x2F;shuttle_landmark&#x2F;automatic&#x2F;spaceflare">spaceflare</a></li>
     <li><span class="no-substance">singularity&#x2F;narsie&#x2F;</span><span class="no-substance" title="&#x2F;obj&#x2F;singularity&#x2F;narsie&#x2F;wizard">wizard</span> - Wizard narsie.</li>
+    <li><span class="no-substance" title="&#x2F;obj&#x2F;spider">spider</span> - You will appear adjacent to the beacon</li>
     <li class="has-children"><span title="&#x2F;obj&#x2F;structure">structure</span><ul class="index-tree">
     <li><a href="obj/structure/AIcore.html" title="&#x2F;obj&#x2F;structure&#x2F;AIcore">AIcore</a></li>
     <li class="has-children"><a href="obj/structure/bed.html" title="&#x2F;obj&#x2F;structure&#x2F;bed">bed</a><ul class="index-tree">
@@ -1200,6 +1195,9 @@ Ninja equipment loadouts. Placed here because it relies on Torch evil.</li>
     <li><a href="obj/structure/roller_bed.html" title="&#x2F;obj&#x2F;structure&#x2F;roller_bed">roller_bed</a></li>
     <li><a href="obj/structure/stairs.html" title="&#x2F;obj&#x2F;structure&#x2F;stairs">stairs</a></li>
     <li><a href="obj/structure/windoor_assembly.html" title="&#x2F;obj&#x2F;structure&#x2F;windoor_assembly">windoor_assembly</a></li>
+    </ul></li>
+    <li class="has-children"><a href="obj/turf_fire.html" title="&#x2F;obj&#x2F;turf_fire">turf_fire</a><ul class="index-tree">
+    <li><span class="no-substance" title="&#x2F;obj&#x2F;turf_fire&#x2F;magical">magical</span> - All the subtypes are for adminbussery and or mapping</li>
     </ul></li>
     </ul></li>
     <li><span class="no-substance">repository&#x2F;</span><a href="repository/singletons.html" title="&#x2F;repository&#x2F;singletons">singletons</a></li>
@@ -1249,7 +1247,7 @@ The datum can be referenced again using <code>resolve()</code>.</li>
 </main>
 <footer>
     baystation12.dme
-    <a href="https://github.com/Baystation12/Baystation12/tree/2d82e392e927a2566bdfe56b1d1052209d77dc11">2d82e39</a>
+    <a href="https://github.com/Baystation12/Baystation12/tree/dd1032271d2a39ae2888ab73caf4904fbd6aecd2">dd10322</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.7.3</a></footer>
 </body>
 </html>
