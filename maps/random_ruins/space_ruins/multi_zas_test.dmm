@@ -16,7 +16,7 @@
 /turf/unsimulated/floor/shuttle_ceiling,
 /area/template_noop)
 "f" = (
-/obj/effect/landmark/map_data{
+/obj/landmark/map_data{
 	height = 3
 	},
 /turf/unsimulated/floor/shuttle_ceiling,

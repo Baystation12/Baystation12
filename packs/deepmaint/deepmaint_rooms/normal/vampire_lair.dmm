@@ -14,11 +14,11 @@
 /turf/simulated/floor/wood/walnut,
 /area/map_template/deepmaint)
 "d" = (
-/obj/effect/forcefield,
+/obj/forcefield,
 /turf/space,
 /area/map_template/deepmaint)
 "e" = (
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
 /turf/simulated/floor/wood/walnut,
 /area/map_template/deepmaint)
 "g" = (
@@ -46,8 +46,8 @@
 /turf/space,
 /area/map_template/deepmaint)
 "m" = (
-/obj/effect/gibspawner/human,
-/obj/effect/decal/remains,
+/obj/gibspawner/human,
+/obj/decal/remains,
 /turf/simulated/floor/wood/walnut,
 /area/map_template/deepmaint)
 "n" = (
@@ -74,7 +74,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/map_template/deepmaint)
 "v" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "w" = (
@@ -114,7 +114,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/map_template/deepmaint)
 "F" = (
-/obj/effect/decal/cleanable/blood/tracks/claw{
+/obj/decal/cleanable/blood/tracks/claw{
 	setdirs = list("1"=1,"2"=0,"4"=0,"8"=0,"16"=16,"32"=0,"64"=0,"128"=0)
 	},
 /turf/simulated/floor/wood/walnut,
@@ -132,7 +132,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/map_template/deepmaint)
 "J" = (
-/obj/effect/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood/drip,
 /turf/simulated/floor/wood/walnut,
 /area/map_template/deepmaint)
 "L" = (
@@ -166,15 +166,15 @@
 /area/map_template/deepmaint)
 "Q" = (
 /obj/machinery/door/airlock/civilian,
-/obj/effect/mech_shield,
+/obj/mech_shield,
 /turf/simulated/floor/wood/walnut,
 /area/map_template/deepmaint)
 "S" = (
 /turf/simulated/wall,
 /area/map_template/deepmaint)
 "T" = (
-/obj/effect/decal/remains,
-/obj/effect/gibspawner/human,
+/obj/decal/remains,
+/obj/gibspawner/human,
 /turf/simulated/floor/wood/walnut,
 /area/map_template/deepmaint)
 "U" = (
@@ -188,7 +188,7 @@
 /turf/simulated/wall/r_wall,
 /area/map_template/deepmaint)
 "X" = (
-/obj/effect/mech_shield,
+/obj/mech_shield,
 /turf/simulated/wall,
 /area/map_template/deepmaint)
 "Y" = (
@@ -198,7 +198,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/map_template/deepmaint)
 "Z" = (
-/obj/effect/decal/remains,
+/obj/decal/remains,
 /turf/simulated/floor/wood/walnut,
 /area/map_template/deepmaint)
 

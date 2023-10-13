@@ -20,7 +20,7 @@
 
 
 
-/obj/effect/landmark/corpse/zombiescience
+/obj/landmark/corpse/zombiescience
 	name = "Dead Scientist"
 	corpse_outfits = list(/singleton/hierarchy/outfit/zombie_science)
 
@@ -79,7 +79,7 @@
 	return ..()
 
 
-/obj/effect/landmark/map_load_mark/ejected_datapod
+/obj/landmark/map_load_mark/ejected_datapod
 	name = "random datapod contents"
 	templates = list(/datum/map_template/ejected_datapod_contents, /datum/map_template/ejected_datapod_contents/type2, /datum/map_template/ejected_datapod_contents/type3)
 

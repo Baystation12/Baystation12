@@ -1,6 +1,6 @@
 #define NEIGHBOR_REFRESH_TIME 100
 
-/obj/effect/vine/proc/get_cardinal_neighbors()
+/obj/vine/proc/get_cardinal_neighbors()
 	var/list/cardinal_neighbors = list()
 	for(var/check_dir in GLOB.cardinal)
 		var/turf/simulated/T = get_step(get_turf(src), check_dir)
@@ -8,7 +8,7 @@
 			cardinal_neighbors |= T
 	return cardinal_neighbors
 
-/obj/effect/vine/proc/get_zlevel_neighbors()
+/obj/vine/proc/get_zlevel_neighbors()
 	var/list/zlevel_neighbors = list()
 
 	var/turf/start = loc
@@ -22,7 +22,7 @@
 
 	return zlevel_neighbors
 
-/obj/effect/vine/proc/get_neighbors()
+/obj/vine/proc/get_neighbors()
 	var/list/neighbors = list()
 
 	for(var/turf/simulated/floor in get_cardinal_neighbors())
@@ -30,7 +30,7 @@
 			continue
 
 		var/blocked = 0
-		for(var/obj/effect/vine/other in floor.contents)
+		for(var/obj/vine/other in floor.contents)
 			if(other.seed == src.seed)
 				blocked = 1
 				break
@@ -50,7 +50,7 @@
 	neighbors |= get_zlevel_neighbors()
 	return neighbors
 
-/obj/effect/vine/Process()
+/obj/vine/Process()
 	var/turf/simulated/T = get_turf(src)
 	if(!istype(T))
 		return
@@ -61,7 +61,7 @@
 		return
 
 	//Vine fight!
-	for(var/obj/effect/vine/other in T)
+	for(var/obj/vine/other in T)
 		if(other.seed != seed)
 			other.vine_overrun(seed, src)
 
@@ -105,11 +105,11 @@
 	if(should_sleep())
 		STOP_PROCESSING(SSvines, src)
 
-/obj/effect/vine/proc/can_spawn_plant()
+/obj/vine/proc/can_spawn_plant()
 	var/turf/simulated/T = get_turf(src)
 	return parent == src && !health_damaged() && !plant && istype(T) && !T.CanZPass(src, DOWN)
 
-/obj/effect/vine/proc/should_sleep()
+/obj/vine/proc/should_sleep()
 	if(buckled_mob) //got a victim to fondle
 		return FALSE
 	if(length(get_neighbors())) //got places to spread to
@@ -124,8 +124,8 @@
 
 //spreading vines aren't created on their final turf.
 //Instead, they are created at their parent and then move to their destination.
-/obj/effect/vine/proc/spread_to(turf/target_turf)
-	var/obj/effect/vine/child = new(get_turf(src),seed,parent) // This should do a little bit of animation.
+/obj/vine/proc/spread_to(turf/target_turf)
+	var/obj/vine/child = new(get_turf(src),seed,parent) // This should do a little bit of animation.
 	//move out to the destination
 	if(child.forceMove(target_turf))
 		child.update_icon()
@@ -137,15 +137,15 @@
 	else
 		qdel(child)
 
-/obj/effect/vine/proc/wake_neighbors()
+/obj/vine/proc/wake_neighbors()
 	// This turf is clear now, let our buddies know.
 	for(var/turf/simulated/check_turf in (get_cardinal_neighbors() | get_zlevel_neighbors()))
 		if(!istype(check_turf))
 			continue
-		for(var/obj/effect/vine/neighbor in check_turf.contents)
+		for(var/obj/vine/neighbor in check_turf.contents)
 			START_PROCESSING(SSvines, neighbor)
 
-/obj/effect/vine/proc/targets_in_range()
+/obj/vine/proc/targets_in_range()
 	var/list/mob/targets = list()
 	for(var/turf/simulated/check_turf in (get_cardinal_neighbors() | get_zlevel_neighbors() | list(loc)))
 		if(!istype(check_turf))

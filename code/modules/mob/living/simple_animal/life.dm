@@ -33,8 +33,8 @@
 		handle_bleeding()
 
 	if(buckled && can_escape)
-		if(istype(buckled, /obj/effect/energy_net))
-			var/obj/effect/energy_net/Net = buckled
+		if(istype(buckled, /obj/energy_net))
+			var/obj/energy_net/Net = buckled
 			Net.escape_net(src)
 		else if(prob(50))
 			escape(src, buckled)

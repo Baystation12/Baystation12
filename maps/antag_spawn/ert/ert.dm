@@ -5,7 +5,7 @@
 	apc_test_exempt_areas = list(
 		/area/map_template/rescue_base = NO_SCRUBBER|NO_VENT|NO_APC
 	)
-		
+
 
 /datum/shuttle/autodock/multi/antag/rescue
 	name = "Rescue"
@@ -24,16 +24,16 @@
 	arrival_message = "Attention, vessel detected entering vessel proximity."
 	departure_message = "Attention, vessel detected leaving vessel proximity."
 
-/obj/effect/shuttle_landmark/ert/start
+/obj/shuttle_landmark/ert/start
 	name = "Response Team Base"
 	landmark_tag = "nav_ert_start"
 	docking_controller = "rescue_base"
 
-/obj/effect/shuttle_landmark/ert/internim
+/obj/shuttle_landmark/ert/internim
 	name = "In transit"
 	landmark_tag = "nav_ert_transition"
 
-/obj/effect/shuttle_landmark/ert/dock
+/obj/shuttle_landmark/ert/dock
 	name = "Docking Port"
 	landmark_tag = "nav_ert_dock"
 	docking_controller = "rescue_shuttle_dock_airlock"

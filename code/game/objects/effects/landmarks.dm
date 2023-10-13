@@ -1,4 +1,4 @@
-/obj/effect/landmark
+/obj/landmark
 	name = "landmark"
 	icon = 'icons/effects/landmarks.dmi'
 	icon_state = "x2"
@@ -8,7 +8,7 @@
 	invisibility = INVISIBILITY_ABSTRACT
 	var/delete_me = 0
 
-/obj/effect/landmark/New()
+/obj/landmark/New()
 	..()
 	tag = "landmark*[name]"
 
@@ -66,40 +66,40 @@
 	landmarks_list += src
 	return 1
 
-/obj/effect/landmark/proc/delete()
+/obj/landmark/proc/delete()
 	delete_me = 1
 
-/obj/effect/landmark/Initialize()
+/obj/landmark/Initialize()
 	. = ..()
 	if(delete_me)
 		return INITIALIZE_HINT_QDEL
 
-/obj/effect/landmark/Destroy()
+/obj/landmark/Destroy()
 	landmarks_list -= src
 	return ..()
 
-/obj/effect/landmark/start
+/obj/landmark/start
 	name = "start"
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
 	anchored = TRUE
 	invisibility = INVISIBILITY_ABSTRACT
 
-/obj/effect/landmark/start/New()
+/obj/landmark/start/New()
 	..()
 	tag = "start*[name]"
 	return 1
 
 //Costume spawner landmarks
-/obj/effect/landmark/costume/New() //costume spawner, selects a random subclass and disappears
+/obj/landmark/costume/New() //costume spawner, selects a random subclass and disappears
 	SHOULD_CALL_PARENT(FALSE) // TODO: Replace this entire set of New() overrides with Initialize() and qdel hints
-	var/list/options = typesof(/obj/effect/landmark/costume)
+	var/list/options = typesof(/obj/landmark/costume)
 	var/PICK= options[rand(1,length(options))]
 	new PICK(src.loc)
 	delete_me = 1
 
 //SUBCLASSES.  Spawn a bunch of items and disappear likewise
-/obj/effect/landmark/costume/chameleon/New()
+/obj/landmark/costume/chameleon/New()
 	new /obj/item/clothing/mask/chameleon(src.loc)
 	new /obj/item/clothing/under/chameleon(src.loc)
 	new /obj/item/clothing/glasses/chameleon(src.loc)
@@ -110,44 +110,44 @@
 	new /obj/item/storage/backpack/chameleon(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/gladiator/New()
+/obj/landmark/costume/gladiator/New()
 	new /obj/item/clothing/under/gladiator(src.loc)
 	new /obj/item/clothing/head/helmet/gladiator(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/madscientist/New()
+/obj/landmark/costume/madscientist/New()
 	new /obj/item/clothing/under/gimmick/rank/captain/suit(src.loc)
 	new /obj/item/clothing/head/flatcap(src.loc)
 	new /obj/item/clothing/suit/storage/toggle/labcoat/mad(src.loc)
 	new /obj/item/clothing/glasses/green(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/elpresidente/New()
+/obj/landmark/costume/elpresidente/New()
 	new /obj/item/clothing/under/gimmick/rank/captain/suit(src.loc)
 	new /obj/item/clothing/head/flatcap(src.loc)
 	new /obj/item/clothing/mask/smokable/cigarette/cigar/havana(src.loc)
 	new /obj/item/clothing/shoes/jackboots(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/nyangirl/New()
+/obj/landmark/costume/nyangirl/New()
 	new /obj/item/clothing/under/schoolgirl(src.loc)
 	new /obj/item/clothing/head/kitty(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/maid/New()
+/obj/landmark/costume/maid/New()
 	new /obj/item/clothing/under/skirt(src.loc)
 	var/CHOICE = pick( /obj/item/clothing/head/beret , /obj/item/clothing/head/rabbitears )
 	new CHOICE(src.loc)
 	new /obj/item/clothing/glasses/blindfold(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/butler/New()
+/obj/landmark/costume/butler/New()
 	new /obj/item/clothing/accessory/waistcoat/black(src.loc)
 	new /obj/item/clothing/under/suit_jacket(src.loc)
 	new /obj/item/clothing/head/that(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/scratch/New()
+/obj/landmark/costume/scratch/New()
 	new /obj/item/clothing/gloves/white(src.loc)
 	new /obj/item/clothing/shoes/white(src.loc)
 	new /obj/item/clothing/under/scratch(src.loc)
@@ -155,7 +155,7 @@
 		new /obj/item/clothing/head/cueball(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/prig/New()
+/obj/landmark/costume/prig/New()
 	new /obj/item/clothing/accessory/waistcoat/black(src.loc)
 	new /obj/item/clothing/glasses/monocle(src.loc)
 	var/CHOICE= pick( /obj/item/clothing/head/bowler, /obj/item/clothing/head/that)
@@ -166,24 +166,24 @@
 	new /obj/item/clothing/mask/fakemoustache(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/plaguedoctor/New()
+/obj/landmark/costume/plaguedoctor/New()
 	new /obj/item/clothing/suit/bio_suit/plaguedoctorsuit(src.loc)
 	new /obj/item/clothing/head/plaguedoctorhat(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/nightowl/New()
+/obj/landmark/costume/nightowl/New()
 	new /obj/item/clothing/under/owl(src.loc)
 	new /obj/item/clothing/mask/gas/owl_mask(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/waiter/New()
+/obj/landmark/costume/waiter/New()
 	new /obj/item/clothing/under/waiter(src.loc)
 	var/CHOICE= pick( /obj/item/clothing/head/kitty, /obj/item/clothing/head/rabbitears)
 	new CHOICE(src.loc)
 	new /obj/item/clothing/suit/apron(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/pirate/New()
+/obj/landmark/costume/pirate/New()
 	new /obj/item/clothing/under/pirate(src.loc)
 	new /obj/item/clothing/suit/pirate(src.loc)
 	var/CHOICE = pick( /obj/item/clothing/head/pirate , /obj/item/clothing/mask/bandana/red)
@@ -191,68 +191,68 @@
 	new /obj/item/clothing/glasses/eyepatch(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/commie/New()
+/obj/landmark/costume/commie/New()
 	new /obj/item/clothing/under/soviet(src.loc)
 	new /obj/item/clothing/head/ushanka(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/imperium_monk/New()
+/obj/landmark/costume/imperium_monk/New()
 	new /obj/item/clothing/suit/imperium_monk(src.loc)
 	if (prob(25))
 		new /obj/item/clothing/mask/gas/cyborg(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/holiday_priest/New()
+/obj/landmark/costume/holiday_priest/New()
 	new /obj/item/clothing/suit/holidaypriest(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/marisawizard/fake/New()
+/obj/landmark/costume/marisawizard/fake/New()
 	new /obj/item/clothing/head/wizard/marisa/fake(src.loc)
 	new/obj/item/clothing/suit/wizrobe/marisa/fake(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/cutewitch/New()
+/obj/landmark/costume/cutewitch/New()
 	new /obj/item/clothing/under/sundress(src.loc)
 	new /obj/item/clothing/head/witchwig(src.loc)
 	new /obj/item/staff/broom(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/fakewizard/New()
+/obj/landmark/costume/fakewizard/New()
 	new /obj/item/clothing/suit/wizrobe/fake(src.loc)
 	new /obj/item/clothing/head/wizard/fake(src.loc)
 	new /obj/item/staff/(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/sexyclown/New()
+/obj/landmark/costume/sexyclown/New()
 	new /obj/item/clothing/mask/gas/sexyclown(src.loc)
 	new /obj/item/clothing/under/sexyclown(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/sexymime/New()
+/obj/landmark/costume/sexymime/New()
 	new /obj/item/clothing/mask/gas/sexymime(src.loc)
 	new /obj/item/clothing/under/sexymime(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/savagehunter/New()
+/obj/landmark/costume/savagehunter/New()
 	new /obj/item/clothing/mask/spirit(src.loc)
 	new /obj/item/clothing/under/savage_hunter(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/costume/savagehuntress/New()
+/obj/landmark/costume/savagehuntress/New()
 	new /obj/item/clothing/mask/spirit(src.loc)
 	new /obj/item/clothing/under/savage_hunter/female(src.loc)
 	delete_me = 1
 
-/obj/effect/landmark/ruin
+/obj/landmark/ruin
 	var/datum/map_template/ruin/ruin_template
 
-/obj/effect/landmark/ruin/New(loc, my_ruin_template)
-	name = "ruin_[sequential_id(/obj/effect/landmark/ruin)]"
+/obj/landmark/ruin/New(loc, my_ruin_template)
+	name = "ruin_[sequential_id(/obj/landmark/ruin)]"
 	..(loc)
 	ruin_template = my_ruin_template
 	GLOB.ruin_landmarks |= src
 
-/obj/effect/landmark/ruin/Destroy()
+/obj/landmark/ruin/Destroy()
 	GLOB.ruin_landmarks -= src
 	ruin_template = null
 	. = ..()

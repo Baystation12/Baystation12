@@ -1,4 +1,4 @@
-/obj/effect/overmap/visitable/sector/corporate
+/obj/overmap/visitable/sector/corporate
 	name = "Mining - NanoTrasen outpost"
 	desc = "Sensors capture corporate signal: For authorized NanoTrasen personnel only."
 	icon_state = "sector"
@@ -17,12 +17,12 @@
 		"nav_corporate_9"
 	)
 
-/obj/effect/overmap/visitable/sector/corporate/generate_skybox()
+/obj/overmap/visitable/sector/corporate/generate_skybox()
 	var/image/res = overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
 	res.blend_mode = BLEND_OVERLAY
 	return res
 
-/obj/effect/overmap/visitable/sector/corporate/get_skybox_representation()
+/obj/overmap/visitable/sector/corporate/get_skybox_representation()
 	var/image/res = overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
 	res.blend_mode = BLEND_OVERLAY
 	res.SetTransform(scale = 0.5)
@@ -51,45 +51,45 @@
 
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/data_capsule)
 
-/obj/effect/shuttle_landmark/corporate/nav1
+/obj/shuttle_landmark/corporate/nav1
 	name = "Asteroid Navpoint #1"
 	landmark_tag = "nav_corporate_1"
 
-/obj/effect/shuttle_landmark/corporate/nav2
+/obj/shuttle_landmark/corporate/nav2
 	name = "Asteroid Navpoint #2"
 	landmark_tag = "nav_corporate_2"
 
-/obj/effect/shuttle_landmark/corporate/nav4
+/obj/shuttle_landmark/corporate/nav4
 	name = "Asteroid Navpoint #3"
 	landmark_tag = "nav_corporate_3"
 
-/obj/effect/shuttle_landmark/corporate/nav6
+/obj/shuttle_landmark/corporate/nav6
 	name = "Asteroid Navpoint #4"
 	landmark_tag = "nav_corporate_4"
 
-/obj/effect/shuttle_landmark/corporate/nav5
+/obj/shuttle_landmark/corporate/nav5
 	name = "Asteroid Landing zone #1"
 	landmark_tag = "nav_corporate_5"
 	base_area = /area/mine/explored
 	base_turf = /turf/simulated/floor/asteroid
 
-/obj/effect/shuttle_landmark/corporate/nav7
+/obj/shuttle_landmark/corporate/nav7
 	name = "Asteroid Landing zone #2"
 	landmark_tag = "nav_corporate_6"
 	base_area = /area/mine/explored
 	base_turf = /turf/simulated/floor/asteroid
 
-/obj/effect/shuttle_landmark/corporate/nav8
+/obj/shuttle_landmark/corporate/nav8
 	name = "Asteroid Mining Outpost Hangar"
 	landmark_tag = "nav_corporate_7"
 	base_area = /area/outpost/mining/hangar
 	base_turf = /turf/simulated/floor/plating
 
-/obj/effect/shuttle_landmark/corporate/nav9
+/obj/shuttle_landmark/corporate/nav9
 	name = "Asteroid Mining Outpost"
 	landmark_tag = "nav_corporate_8"
 
-/obj/effect/shuttle_landmark/corporate/nav3
+/obj/shuttle_landmark/corporate/nav3
 	name = "Mining Asteroid Center"
 	landmark_tag = "nav_corporate_antag"
 
@@ -99,7 +99,7 @@
 
 // DATA CAPSULE SHUTTLE
 
-/obj/effect/shuttle_landmark/corporate/nav_hiden
+/obj/shuttle_landmark/corporate/nav_hiden
 	name = "Mining Asteroid ???"
 	landmark_tag = "nav_corporate_hiden"
 	base_area = /area/mine/unexplored
@@ -134,7 +134,7 @@
 	name = "data capsule control console"
 	shuttle_tag = "Data Capsule"
 
-/obj/effect/overmap/visitable/ship/landable/data_capsule
+/obj/overmap/visitable/ship/landable/data_capsule
 	name = "Data Capsule"
 	shuttle = "Data Capsule"
 	max_speed = 1/(10 SECONDS)

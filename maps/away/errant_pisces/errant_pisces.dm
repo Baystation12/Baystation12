@@ -1,6 +1,6 @@
 #include "errant_pisces_areas.dm"
 
-/obj/effect/overmap/visitable/ship/errant_pisces
+/obj/overmap/visitable/ship/errant_pisces
 	name = "XCV Ahab's Harpoon"
 	desc = "Sensors detect civilian vessel with unusual signs of life aboard."
 	color = "#bd6100"
@@ -173,7 +173,7 @@
 	icon = 'maps/away/errant_pisces/errant_pisces_sprites.dmi'
 	item_icons = list(slot_w_uniform_str = 'maps/away/errant_pisces/errant_pisces_sprites.dmi')
 
-/obj/effect/landmark/corpse/carp_fisher
+/obj/landmark/corpse/carp_fisher
 	name = "carp fisher"
 	corpse_outfits = list(/singleton/hierarchy/outfit/corpse/carp_fisher)
 	species = list(SPECIES_HUMAN = 70, SPECIES_IPC = 20, SPECIES_UNATHI = 10)
@@ -186,10 +186,10 @@
 	shoes = /obj/item/clothing/shoes/jackboots
 	head = /obj/item/clothing/head/hardhat/blue
 
-/obj/effect/computer_file_creator/ahabs_harpoon01
+/obj/computer_file_creator/ahabs_harpoon01
 	name = "ahab's harpoon file spawner - sensor dump"
 
-/obj/effect/computer_file_creator/ahabs_harpoon01/Initialize()
+/obj/computer_file_creator/ahabs_harpoon01/Initialize()
 	var/i_month = max(text2num(time2text(world.timeofday, "MM")) - 1, 1) // Prevent month from going below 1
 	var/i_day = max(text2num(time2text(world.timeofday, "DD")) - 5, 1)
 	file_name = "NETMON_SENSORDUMP-BLACKBOX"
@@ -223,18 +223,18 @@
 	"
 	. = ..()
 
-/obj/effect/computer_file_creator/ahabs_harpoon02
+/obj/computer_file_creator/ahabs_harpoon02
 	name = "ahab's harpoon file spawner - black box"
 	file_name = "NETMON_BLACKBOX"
 	file_info = "<p><i>This is the flight recorder data for the XCV Ahab's Harpoon. Its callsign and flight registration indicate that this is a medium size, long-haul commerical space carp fishing vessel, owned by Xynergy. The data recording here only includes hourly status reports, but they indicate that the ship went from nominal function at 09:00 to red alert and critical crew status by 10:00, before continuing at these levels for most of the day until SMES power failed.</i></p>\
 	\
 	<p><i>This data contains a wealth of information about the ship's records, manifest, and specifications, but nothing immediately useful about the events that happened on board. You may be able to glean further information if you could find more complete records.</i></p>"
 
-/obj/effect/computer_file_creator/ahabs_harpoon03
+/obj/computer_file_creator/ahabs_harpoon03
 	name = "ahab's harpoon file spawner - captain's log"
 	file_name = "captainslog"
 
-/obj/effect/computer_file_creator/ahabs_harpoon03/Initialize()
+/obj/computer_file_creator/ahabs_harpoon03/Initialize()
 	var/captain_name = "[capitalize(pick(GLOB.first_names_male + GLOB.first_names_female))] [capitalize(pick(GLOB.last_names))]"
 	file_info = "<p><i>This is the captain's log of the XCV Ahab's Harpoon, authored by Xynergy general manager [captain_name]. According to the log's contents, the ship embarked on its final voyage six months ago. All entries except the last one seem mundane - routine checks, inventory reports, flight path, and so on. The final entry seems to have been written in a hurry, with several typos that didn't get caught by the autocorrect:</i></p>\
 	\

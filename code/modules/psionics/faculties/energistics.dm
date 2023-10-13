@@ -109,7 +109,7 @@
 			S.light("[user] snaps \his fingers and \the [S.name] lights up.")
 			playsound(S.loc, "sparks", 50, 1)
 		else
-			var/datum/effect/effect/system/spark_spread/sparks = new ()
+			var/datum/effect/spark_spread/sparks = new ()
 			sparks.set_up(3, 0, get_turf(target))
 			sparks.start()
 		return TRUE

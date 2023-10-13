@@ -28,7 +28,7 @@
 	. = ohearers(vision_range, holder)
 	. -= global.dview_mob // Not the dview mob!
 
-	var/static/hostile_machines = typecacheof(list(/obj/machinery/porta_turret, /mob/living/exosuit, /obj/effect/blob))
+	var/static/hostile_machines = typecacheof(list(/obj/machinery/porta_turret, /mob/living/exosuit, /obj/blob))
 
 	for (var/HM in typecache_filter_list(range(vision_range, holder), hostile_machines))
 		if (can_see(holder, HM, vision_range))

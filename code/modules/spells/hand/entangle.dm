@@ -34,7 +34,7 @@
 
 /spell/hand/charges/entangle/cast_hand(mob/M,mob/user)
 	var/turf/T = get_turf(M)
-	var/obj/effect/vine/single/P = new(T,seed, start_matured =1)
+	var/obj/vine/single/P = new(T,seed, start_matured =1)
 	P.can_buckle = TRUE
 
 	if (!P.can_buckle(M))

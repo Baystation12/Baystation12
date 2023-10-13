@@ -11,7 +11,7 @@
 	return jointext(., "<br>")
 
 /datum/map/torch/send_welcome()
-	var/obj/effect/overmap/visitable/ship/torch = SSshuttle.ship_by_type(/obj/effect/overmap/visitable/ship/torch)
+	var/obj/overmap/visitable/ship/torch = SSshuttle.ship_by_type(/obj/overmap/visitable/ship/torch)
 
 	var/welcome_text = "<center><img src = sollogo.png /><br />[FONT_LARGE("<b>SEV Torch</b> Sensor Readings:")]<br>"
 	welcome_text += "Report generated on [stationdate2text()] at [stationtime2text()]</center><br /><br />"
@@ -26,16 +26,16 @@
 		welcome_text += "Scan results show the following points of interest:<br />"
 
 		for(var/zlevel in map_sectors)
-			var/obj/effect/overmap/visitable/O = map_sectors[zlevel]
+			var/obj/overmap/visitable/O = map_sectors[zlevel]
 			if(O.name == torch.name)
 				continue
-			if(istype(O, /obj/effect/overmap/visitable/ship/landable)) //Don't show shuttles
+			if(istype(O, /obj/overmap/visitable/ship/landable)) //Don't show shuttles
 				continue
 			if (O.hide_from_reports)
 				continue
 			space_things |= O
 
-		for(var/obj/effect/overmap/visitable/O in space_things)
+		for(var/obj/overmap/visitable/O in space_things)
 			var/location_desc = " at present co-ordinates."
 			if(O.loc != torch.loc)
 				var/bearing = get_bearing(torch, O)

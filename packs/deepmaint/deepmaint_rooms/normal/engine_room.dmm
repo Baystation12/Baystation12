@@ -3,7 +3,7 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/techmaint{
@@ -13,7 +13,7 @@
 "bo" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/black,
 /obj/machinery/meter,
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/techmaint{
@@ -27,7 +27,7 @@
 /turf/space,
 /area/map_template/deepmaint)
 "bX" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 1
 	},
 /obj/structure/dispenser,
@@ -41,7 +41,7 @@
 /area/map_template/deepmaint)
 "de" = (
 /obj/machinery/door/airlock/external,
-/obj/effect/mech_shield,
+/obj/mech_shield,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/deepmaint)
 "df" = (
@@ -63,16 +63,16 @@
 /obj/machinery/atmospherics/binary/passive_gate{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 6
 	},
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/decal/cleanable/liquid_fuel,
 /turf/simulated/floor/tiled/techmaint{
 	initial_gas = list("nitrogen"=50)
 	},
 /area/map_template/deepmaint)
 "fb" = (
-/obj/effect/floor_decal/techfloor/orange,
+/obj/floor_decal/techfloor/orange,
 /obj/structure/inflatable/door,
 /turf/simulated/floor/tiled/techfloor{
 	initial_gas = list("nitrogen"=50)
@@ -82,7 +82,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 9
 	},
 /obj/machinery/portable_atmospherics/canister/oxygen,
@@ -94,21 +94,21 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
-/obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "hB" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
 	dir = 1
 	},
-/obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "hE" = (
 /obj/structure/sign/warning/vacuum{
 	pixel_y = 26
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 1
 	},
 /obj/structure/table/rack,
@@ -126,7 +126,7 @@
 /turf/simulated/wall,
 /area/map_template/deepmaint)
 "jx" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 1
 	},
 /obj/structure/inflatable/door,
@@ -137,7 +137,7 @@
 	dir = 4;
 	target_pressure = 15000
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor{
@@ -148,7 +148,7 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techmaint{
@@ -158,7 +158,7 @@
 "mX" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black,
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 1
 	},
 /obj/machinery/light/small{
@@ -197,7 +197,7 @@
 	dir = 1
 	},
 /obj/machinery/portable_atmospherics/canister/hydrogen,
-/obj/effect/floor_decal/techfloor/orange,
+/obj/floor_decal/techfloor/orange,
 /obj/machinery/light/small{
 	dir = 4
 	},
@@ -226,7 +226,7 @@
 /turf/space,
 /area/map_template/deepmaint)
 "rX" = (
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor{
@@ -241,7 +241,7 @@
 /obj/machinery/power/terminal{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/techmaint{
@@ -255,13 +255,13 @@
 /turf/space,
 /area/map_template/deepmaint)
 "uv" = (
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 1
 	},
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/decal/cleanable/liquid_fuel,
 /turf/simulated/floor/tiled/techfloor/grid{
 	initial_gas = list("nitrogen"=50)
 	},
@@ -288,7 +288,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/machinery/power/generator{
 	anchored = 1
 	},
@@ -311,23 +311,23 @@
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
 	},
-/obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "EL" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/black{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 1
 	},
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/decal/cleanable/liquid_fuel,
 /turf/simulated/floor/tiled/techfloor/grid{
 	initial_gas = list("nitrogen"=50)
 	},
 /area/map_template/deepmaint)
 "EV" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/machinery/atmospherics/binary/circulator{
 	anchored = 1;
 	dir = 8
@@ -338,7 +338,7 @@
 /area/map_template/deepmaint)
 "FM" = (
 /obj/machinery/power/smes/batteryrack,
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 6
 	},
 /obj/machinery/light/small{
@@ -357,7 +357,7 @@
 	dir = 1
 	},
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/obj/effect/floor_decal/techfloor/orange,
+/obj/floor_decal/techfloor/orange,
 /obj/machinery/light/small{
 	dir = 8
 	},
@@ -411,7 +411,7 @@
 /obj/machinery/power/terminal{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techmaint{
@@ -424,7 +424,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 9
 	},
 /obj/machinery/light/small{
@@ -448,7 +448,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/portable_atmospherics/canister/hydrogen,
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/techmaint{
@@ -470,7 +470,7 @@
 /turf/space,
 /area/map_template/deepmaint)
 "Pd" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/machinery/atmospherics/binary/circulator{
 	anchored = 1;
 	dir = 4
@@ -484,7 +484,7 @@
 	dir = 4
 	},
 /obj/machinery/meter,
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor{
@@ -502,7 +502,7 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techmaint{
@@ -517,14 +517,14 @@
 /turf/space,
 /area/map_template/deepmaint)
 "Xk" = (
-/obj/effect/mech_shield,
+/obj/mech_shield,
 /turf/simulated/wall,
 /area/map_template/deepmaint)
 "Xp" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techmaint{
@@ -535,7 +535,7 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor/orange{
+/obj/floor_decal/techfloor/orange{
 	dir = 1
 	},
 /obj/machinery/portable_atmospherics/canister/hydrogen,
@@ -544,7 +544,7 @@
 	},
 /area/map_template/deepmaint)
 "YQ" = (
-/obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "Zq" = (

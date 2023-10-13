@@ -33,7 +33,7 @@
 	print_language = LANGUAGE_SPACER
 
 
-/obj/machinery/computer/ship/sensors/attempt_hook_up(obj/effect/overmap/visitable/ship/sector)
+/obj/machinery/computer/ship/sensors/attempt_hook_up(obj/overmap/visitable/ship/sector)
 	if (!(. = ..()))
 		return
 	find_sensors()
@@ -133,12 +133,12 @@
 		var/list/potential_contacts = list()
 
 		if (sensors?.use_power)
-			for (var/obj/effect/overmap/nearby in view(round(sensors.range,1), linked))
+			for (var/obj/overmap/nearby in view(round(sensors.range,1), linked))
 				if (nearby.requires_contact) // Some ships require.
 					continue
 				potential_contacts |= nearby
 
-		for (var/obj/effect/overmap/visitable/contact in sensors.objects_in_view)
+		for (var/obj/overmap/visitable/contact in sensors.objects_in_view)
 			if (contact in sensors.contact_datums)
 				potential_contacts |= contact
 			else
@@ -150,7 +150,7 @@
 					"progress" = sensors.objects_in_view[contact]
 				)))
 
-		for (var/obj/effect/overmap/contact in potential_contacts)
+		for (var/obj/overmap/contact in potential_contacts)
 			if (linked == contact)
 				continue
 			if (!contact.scannable)
@@ -220,7 +220,7 @@
 			return TOPIC_REFRESH
 
 	if (href_list["scan"])
-		var/obj/effect/overmap/O = locate(href_list["scan"])
+		var/obj/overmap/O = locate(href_list["scan"])
 		if (istype(O) && !QDELETED(O))
 			if ((O in view(7,linked))|| (O in sensors.contact_datums))
 				playsound(loc, "sound/effects/ping.ogg", 50, 1)
@@ -332,7 +332,7 @@
 			toggle()
 		if (heat > critical_heat)
 			src.visible_message(SPAN_DANGER("\The [src] violently spews out sparks!"))
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
 

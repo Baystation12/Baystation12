@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aq" = (
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/machinery/power/solar,
 /obj/structure/cable{
 	dir = 4;
@@ -10,18 +10,18 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarsp)
 "ba" = (
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/machinery/power/solar,
 /obj/item/stack/material/rods,
 /obj/structure/cable{
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarss)
 "bs" = (
@@ -57,14 +57,14 @@
 /area/map_template/ecprobe/engineering)
 "da" = (
 /obj/structure/cable,
-/obj/effect/floor_decal/corner/blue/border,
+/obj/floor_decal/corner/blue/border,
 /obj/machinery/power/apc/derelict{
 	pixel_y = -28
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/ecprobe/bridge)
 "dF" = (
-/obj/effect/floor_decal/corner/blue/bordercorner{
+/obj/floor_decal/corner/blue/bordercorner{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -79,7 +79,7 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/loading{
+/obj/floor_decal/industrial/loading{
 	dir = 8
 	},
 /turf/simulated/floor/reinforced,
@@ -89,12 +89,12 @@
 	dir = 4;
 	icon_state = "1-4"
 	},
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/machinery/portable_atmospherics/canister/empty/carbon_dioxide,
 /turf/simulated/floor/reinforced,
 /area/map_template/ecprobe/engineering)
 "gl" = (
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /obj/structure/shuttle/engine/heater{
 	dir = 8
 	},
@@ -115,7 +115,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/effect/decal/cleanable/blood/gibs/robot{
+/obj/decal/cleanable/blood/gibs/robot{
 	pixel_x = 1
 	},
 /turf/simulated/floor/reinforced,
@@ -161,20 +161,20 @@
 /turf/simulated/floor/reinforced,
 /area/map_template/ecprobe/engineering)
 "in" = (
-/obj/effect/landmark/clear,
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "iL" = (
 /obj/machinery/light/small/red{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/machinery/portable_atmospherics/canister/empty/carbon_dioxide,
 /turf/simulated/floor/reinforced,
 /area/map_template/ecprobe/engineering)
 "jV" = (
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/machinery/power/solar,
 /obj/structure/cable{
 	dir = 4;
@@ -186,7 +186,7 @@
 	dir = 1;
 	icon_state = "0-4"
 	},
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarss)
 "kM" = (
@@ -198,11 +198,11 @@
 	},
 /obj/structure/catwalk,
 /mob/living/simple_animal/hostile/hivebot/ranged_damage/strong/guard,
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarsp)
 "lO" = (
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/machinery/power/solar,
 /obj/structure/cable{
 	d1 = 16;
@@ -214,13 +214,13 @@
 	dir = 4;
 	icon_state = "1-2"
 	},
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarss)
 "mE" = (
 /obj/machinery/telecomms/broadcaster,
-/obj/effect/landmark/clear,
-/obj/effect/landmark/scorcher,
+/obj/landmark/clear,
+/obj/landmark/scorcher,
 /turf/simulated/floor,
 /area/map_template/ecprobe/bridge)
 "mG" = (
@@ -240,13 +240,13 @@
 /obj/machinery/computer/ship/engines{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue/border{
+/obj/floor_decal/corner/blue/border{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/ecprobe/bridge)
 "nJ" = (
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/simulated/wall/r_wall/hull,
 /area/map_template/ecprobe/engineering)
 "nP" = (
@@ -256,15 +256,15 @@
 	},
 /obj/item/material/shard,
 /obj/structure/catwalk,
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarsp)
 "oa" = (
 /obj/structure/shuttle/engine/propulsion{
 	dir = 8
 	},
-/obj/effect/landmark/clear,
-/obj/effect/landmark/scorcher,
+/obj/landmark/clear,
+/obj/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecprobe/engineering)
 "pi" = (
@@ -288,19 +288,19 @@
 	icon_state = "1-2"
 	},
 /obj/structure/catwalk,
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarsp)
 "pX" = (
 /obj/structure/shuttle/engine/propulsion{
 	dir = 8
 	},
-/obj/effect/landmark/clear,
-/obj/effect/landmark/scorcher,
+/obj/landmark/clear,
+/obj/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "qz" = (
-/obj/effect/decal/cleanable/blood/gibs/robot{
+/obj/decal/cleanable/blood/gibs/robot{
 	pixel_x = 1
 	},
 /obj/structure/window/reinforced,
@@ -315,16 +315,16 @@
 	dir = 4;
 	icon_state = "1-4"
 	},
-/obj/effect/landmark/clear,
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarss)
 "rw" = (
 /obj/machinery/light/small/red{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/machinery/portable_atmospherics/canister/empty/carbon_dioxide,
 /turf/simulated/floor/reinforced,
 /area/map_template/ecprobe/engineering)
@@ -347,7 +347,7 @@
 /turf/simulated/floor/bluegrid,
 /area/map_template/ecprobe/engineering)
 "rW" = (
-/obj/effect/floor_decal/corner/blue/border{
+/obj/floor_decal/corner/blue/border{
 	dir = 1
 	},
 /obj/machinery/computer/dummy{
@@ -356,21 +356,21 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/ecprobe/bridge)
 "sk" = (
-/obj/effect/landmark/clear,
-/obj/effect/landmark/scorcher,
+/obj/landmark/clear,
+/obj/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "so" = (
 /obj/item/stack/material/rods,
 /obj/item/material/shard,
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "sw" = (
 /obj/machinery/computer/ship/sensors{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue/border{
+/obj/floor_decal/corner/blue/border{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -382,25 +382,25 @@
 /turf/simulated/floor/reinforced,
 /area/map_template/ecprobe/engineering)
 "tm" = (
-/obj/effect/floor_decal/corner/blue/border{
+/obj/floor_decal/corner/blue/border{
 	dir = 6
 	},
 /obj/structure/table/steel_reinforced,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/ecprobe/bridge)
 "tu" = (
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/machinery/portable_atmospherics/canister/empty/carbon_dioxide,
 /turf/simulated/floor/reinforced,
 /area/map_template/ecprobe/engineering)
 "tQ" = (
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/machinery/power/solar,
 /obj/structure/cable{
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarsp)
 "uw" = (
@@ -408,7 +408,7 @@
 	icon_state = "1-2"
 	},
 /obj/structure/catwalk,
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarss)
 "uG" = (
@@ -416,14 +416,14 @@
 	dir = 1;
 	start_pressure = 1013.25
 	},
-/obj/effect/floor_decal/industrial/outline/orange,
+/obj/floor_decal/industrial/outline/orange,
 /turf/simulated/floor/reinforced,
 /area/map_template/ecprobe/engineering)
 "uK" = (
 /turf/simulated/floor/reinforced,
 /area/map_template/ecprobe/engineering)
 "uT" = (
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /obj/structure/shuttle/engine/heater{
 	dir = 8
 	},
@@ -435,7 +435,7 @@
 /area/map_template/ecprobe/engineering)
 "vu" = (
 /obj/item/stack/material/rods,
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarss)
 "vz" = (
@@ -450,7 +450,7 @@
 /turf/simulated/floor/bluegrid,
 /area/map_template/ecprobe/engineering)
 "yh" = (
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /obj/structure/sign/warning/server_room{
 	pixel_y = 32
 	},
@@ -460,7 +460,7 @@
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup{
 	start_pressure = 7498.00
 	},
-/obj/effect/floor_decal/industrial/outline/orange,
+/obj/floor_decal/industrial/outline/orange,
 /turf/simulated/floor/reinforced,
 /area/map_template/ecprobe/engineering)
 "AH" = (
@@ -477,17 +477,17 @@
 	icon_state = "1-4"
 	},
 /mob/living/simple_animal/hostile/hivebot/ranged_damage/strong/guard,
-/obj/effect/landmark/clear,
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarss)
 "DG" = (
 /obj/item/material/shard,
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarss)
 "DX" = (
-/obj/effect/floor_decal/corner/blue/border{
+/obj/floor_decal/corner/blue/border{
 	dir = 5
 	},
 /obj/machinery/computer/dummy{
@@ -496,13 +496,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/ecprobe/bridge)
 "Eh" = (
-/obj/effect/landmark/clear,
-/obj/effect/landmark/scorcher,
+/obj/landmark/clear,
+/obj/landmark/scorcher,
 /obj/machinery/telecomms/receiver,
 /turf/simulated/floor,
 /area/map_template/ecprobe/bridge)
 "Ez" = (
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /obj/item/material/shard,
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 8
@@ -519,7 +519,7 @@
 /area/map_template/ecprobe/engineering)
 "EP" = (
 /mob/living/simple_animal/hostile/hivebot/ranged_damage/strong/guard,
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "GB" = (
@@ -534,14 +534,14 @@
 "GW" = (
 /obj/item/stack/material/rods,
 /obj/item/material/shard,
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarsp)
 "Hu" = (
 /obj/machinery/computer/ship/helm{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue/border{
+/obj/floor_decal/corner/blue/border{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -554,7 +554,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/ecprobe/bridge)
 "II" = (
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/machinery/power/solar,
 /obj/structure/cable{
 	dir = 4;
@@ -564,11 +564,11 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarss)
 "IP" = (
-/obj/effect/floor_decal/corner/blue/bordercorner,
+/obj/floor_decal/corner/blue/bordercorner,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/ecprobe/bridge)
 "IV" = (
@@ -606,7 +606,7 @@
 /turf/simulated/floor/bluegrid,
 /area/map_template/ecprobe/engineering)
 "JO" = (
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarsp)
 "Ke" = (
@@ -619,7 +619,7 @@
 /turf/template_noop,
 /area/map_template/ecprobe/engineering)
 "Ko" = (
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/engineering)
 "KB" = (
@@ -660,7 +660,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/map_template/ecprobe/bridge)
 "Ml" = (
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /obj/structure/sign/warning/server_room{
 	dir = 1;
 	pixel_y = -32
@@ -685,7 +685,7 @@
 /turf/simulated/floor/reinforced,
 /area/map_template/ecprobe/engineering)
 "NP" = (
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/machinery/power/solar,
 /obj/structure/cable{
 	d1 = 16;
@@ -693,23 +693,23 @@
 	dir = 1;
 	icon_state = "0-4"
 	},
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarss)
 "NX" = (
 /obj/machinery/shipsensors,
-/obj/effect/landmark/clear,
-/obj/effect/landmark/scorcher,
+/obj/landmark/clear,
+/obj/landmark/scorcher,
 /turf/simulated/floor,
 /area/map_template/ecprobe/bridge)
 "Ok" = (
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/machinery/power/solar,
 /obj/structure/cable{
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarss)
 "Ow" = (
@@ -719,12 +719,12 @@
 /turf/simulated/floor/reinforced,
 /area/map_template/ecprobe/engineering)
 "OT" = (
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarss)
 "OX" = (
 /obj/item/stack/material/rods,
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "Ps" = (
@@ -752,7 +752,7 @@
 /obj/machinery/computer/shuttle_control{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue/border{
+/obj/floor_decal/corner/blue/border{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -766,7 +766,7 @@
 /area/map_template/ecprobe/engineering)
 "Rs" = (
 /obj/item/material/shard,
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "RC" = (
@@ -782,7 +782,7 @@
 /turf/simulated/floor/bluegrid,
 /area/map_template/ecprobe/engineering)
 "RP" = (
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "Sz" = (
@@ -800,7 +800,7 @@
 "SM" = (
 /obj/item/stack/cable_coil,
 /obj/item/stack/material/rods,
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarss)
 "TH" = (
@@ -839,7 +839,7 @@
 "UJ" = (
 /obj/item/material/shard,
 /obj/item/stack/material/rods,
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarss)
 "UW" = (
@@ -874,7 +874,7 @@
 /turf/simulated/floor/bluegrid,
 /area/map_template/ecprobe/engineering)
 "Yl" = (
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/machinery/power/solar,
 /obj/structure/cable{
 	dir = 4;
@@ -886,11 +886,11 @@
 	dir = 1;
 	icon_state = "0-4"
 	},
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarsp)
 "YK" = (
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/machinery/power/solar,
 /obj/structure/cable{
 	d1 = 16;
@@ -898,7 +898,7 @@
 	dir = 1;
 	icon_state = "0-4"
 	},
-/obj/effect/landmark/clear,
+/obj/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecprobe/solarsp)
 "YL" = (

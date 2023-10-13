@@ -148,7 +148,7 @@
 /obj/structure/closet/proc/store_items(stored_units)
 	. = 0
 
-	for(var/obj/effect/dummy/chameleon/AD in loc)
+	for(var/obj/dummy/chameleon/AD in loc)
 		if(CLOSET_CHECK_TOO_BIG(1))
 			break
 		.++
@@ -272,7 +272,7 @@
 			SPAN_ITALIC("You hear metal being sliced and sparks flying.")
 		))
 			return TRUE
-		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+		var/datum/effect/spark_spread/spark_system = new /datum/effect/spark_spread()
 		spark_system.set_up(5, loca = src)
 		spark_system.start()
 		playsound(src, 'sound/weapons/blade1.ogg', 50, TRUE)

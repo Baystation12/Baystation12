@@ -1,4 +1,4 @@
-/obj/effect/spinning_light
+/obj/spinning_light
 	var/spin_rate = 1 SECOND
 	var/_size = 48
 	var/_factor = 0.5
@@ -10,7 +10,7 @@
 	mouse_opacity = 0
 
 
-/obj/effect/spinning_light/Initialize()
+/obj/spinning_light/Initialize()
 	. = ..()
 	filters = filter(type="rays", size = _size, color = _color, factor = _factor, density = _density, flags = FILTER_OVERLAY, offset = _offset)
 
@@ -28,7 +28,7 @@
 	animate(transform = test * matrix(),   spin_rate / 4, loop = -1)
 
 
-/obj/effect/spinning_light/set_color(_color)
+/obj/spinning_light/set_color(_color)
 	filters = filter(type="rays", size = _size, color = _color, factor = _factor, density = _density, flags = FILTER_OVERLAY, offset = _offset)
 
 
@@ -45,7 +45,7 @@
 	var/low_alarm = FALSE
 	var/construct_type = /obj/machinery/light_construct
 
-	var/obj/effect/spinning_light/spin_effect = null
+	var/obj/spinning_light/spin_effect = null
 
 	var/alarm_light_color = COLOR_ORANGE
 	/// This is an angle to rotate the colour of alarm and its light. Default is orange, so, a 45 degree angle clockwise will make it green
@@ -83,7 +83,7 @@
 	if (on)
 		vis_contents -= spin_effect
 	if (isnull(spinning_lights_cache["[color]"]))
-		spinning_lights_cache["[color]"] = new /obj/effect/spinning_light()
+		spinning_lights_cache["[color]"] = new /obj/spinning_light()
 	spin_effect = spinning_lights_cache["[color]"]
 	alarm_light_color = color
 	var/HSV = RGBtoHSV(alarm_light_color)

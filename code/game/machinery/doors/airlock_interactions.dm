@@ -16,7 +16,7 @@
 /obj/machinery/mech_sensor/blocks_airlock()
 	return 0
 
-/obj/effect/energy_field/blocks_airlock()
+/obj/energy_field/blocks_airlock()
 	return 0
 
 /obj/machinery/shield/blocks_airlock()
@@ -54,10 +54,10 @@
 /obj/structure/window/airlock_crush(crush_damage)
 	shatter(TRUE)
 
-/obj/effect/energy_field/airlock_can_crush()
+/obj/energy_field/airlock_can_crush()
 	return TRUE
 
-/obj/effect/energy_field/airlock_crush(crush_damage)
+/obj/energy_field/airlock_crush(crush_damage)
 	Stress(crush_damage)
 
 /obj/structure/closet/airlock_crush(crush_damage)

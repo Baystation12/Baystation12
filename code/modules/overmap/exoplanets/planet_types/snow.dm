@@ -1,4 +1,4 @@
-/obj/effect/overmap/visitable/sector/exoplanet/snow
+/obj/overmap/visitable/sector/exoplanet/snow
 	name = "snow exoplanet"
 	desc = "Cold planet with limited plant life."
 	color = "#dcdcdc"
@@ -14,7 +14,7 @@
 	fauna_types = list(/mob/living/simple_animal/hostile/retaliate/beast/samak, /mob/living/simple_animal/hostile/retaliate/beast/diyaab, /mob/living/simple_animal/hostile/retaliate/beast/shantak)
 	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/giant_crab)
 
-/obj/effect/overmap/visitable/sector/exoplanet/snow/generate_atmosphere()
+/obj/overmap/visitable/sector/exoplanet/snow/generate_atmosphere()
 	..()
 	if(atmosphere)
 		var/limit = 0

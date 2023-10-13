@@ -25,7 +25,7 @@
 /turf/unsimulated/wall,
 /area/test_area/requires_power_non_dynamic_lighting)
 "h" = (
-/obj/effect/landmark/virtual_spawn/two,
+/obj/landmark/virtual_spawn/two,
 /turf/unsimulated/floor{
 	icon_state = "hydrofloor"
 	},
@@ -36,13 +36,13 @@
 	},
 /area/test_area/powered_non_dynamic_lighting)
 "j" = (
-/obj/effect/landmark/virtual_spawn/one,
+/obj/landmark/virtual_spawn/one,
 /turf/unsimulated/floor{
 	icon_state = "hydrofloor"
 	},
 /area/test_area/powered_non_dynamic_lighting)
 "k" = (
-/obj/effect/landmark/virtual_spawn/three,
+/obj/landmark/virtual_spawn/three,
 /turf/unsimulated/floor{
 	icon_state = "hydrofloor"
 	},

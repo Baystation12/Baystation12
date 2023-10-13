@@ -1,5 +1,5 @@
 /singleton/teleport
-	var/static/list/teleport_blacklist = list(/obj/item/disk/nuclear, /obj/item/storage/backpack/holding, /obj/effect/sparks) //Items that cannot be teleported, or be in the contents of someone who is teleporting.
+	var/static/list/teleport_blacklist = list(/obj/item/disk/nuclear, /obj/item/storage/backpack/holding, /obj/sparks) //Items that cannot be teleported, or be in the contents of someone who is teleporting.
 
 /singleton/teleport/proc/teleport(atom/target, atom/destination, precision = 0)
 	if(!can_teleport(target,destination))
@@ -35,7 +35,7 @@
 	return 1
 
 /singleton/teleport/sparks
-	var/datum/effect/effect/system/spark_spread/spark = new
+	var/datum/effect/spark_spread/spark = new
 
 /singleton/teleport/sparks/proc/do_spark(atom/target)
 	if(!target.simulated)

@@ -332,13 +332,13 @@
  	///For when targetting a single object, will create a warp beam
 	var/datum/beam = null
 	var/max_dist = 6
-	var/obj/effect/effect/warp/small/warpeffect = null
+	var/obj/effect/warp/small/warpeffect = null
 
-/obj/effect/ebeam/warp
+/obj/ebeam/warp
 	plane = WARP_EFFECT_PLANE
 	z_flags = ZMM_IGNORE
 
-/obj/effect/effect/warp/small
+/obj/effect/warp/small
 	plane = WARP_EFFECT_PLANE
 	appearance_flags = PIXEL_SCALE
 	icon = 'icons/effects/96x96.dmi'
@@ -401,7 +401,7 @@
 						to_chat(user, SPAN_NOTICE("Unable to lock on [target]."))
 						return
 					locked = AM
-					beam = owner.Beam(BeamTarget = target, icon_state = "r_beam", maxdistance = max_dist, beam_type = /obj/effect/ebeam/warp)
+					beam = owner.Beam(BeamTarget = target, icon_state = "r_beam", maxdistance = max_dist, beam_type = /obj/ebeam/warp)
 					GLOB.destroyed_event.register(beam, src, .proc/beamdestroyed)
 
 					animate(target,pixel_y= initial(target.pixel_y) - 2,time=1 SECOND, easing = SINE_EASING, flags = ANIMATION_PARALLEL, loop = -1)
@@ -735,14 +735,14 @@
 	var/activated_passive_power = 2 KILOWATTS
 	var/movement_power = 75
 	origin_tech = list(TECH_ENGINEERING = 3, TECH_MAGNET = 3, TECH_PHORON = 3)
-	var/datum/effect/effect/system/trail/ion/ion_trail
+	var/datum/effect/trail/ion/ion_trail
 	require_adjacent = FALSE
 	var/stabilizers = FALSE
 	var/slide_distance = 6
 
 /obj/item/mech_equipment/ionjets/Initialize()
 	. = ..()
-	ion_trail = new /datum/effect/effect/system/trail/ion()
+	ion_trail = new /datum/effect/trail/ion()
 	ion_trail.set_up(src)
 
 /obj/item/mech_equipment/ionjets/proc/allowSpaceMove()
@@ -823,7 +823,7 @@
 				SPAN_WARNING("\The [src] charges up in preparation for a slide!"),
 				blind_message = SPAN_WARNING("You hear a loud hum and an intense crackling.")
 			)
-			new /obj/effect/temporary(get_step(owner.loc, reverse_direction(owner.dir)), 2 SECONDS, 'icons/effects/effects.dmi',"cyan_sparkles")
+			new /obj/temporary(get_step(owner.loc, reverse_direction(owner.dir)), 2 SECONDS, 'icons/effects/effects.dmi',"cyan_sparkles")
 			owner.setClickCooldown(2 SECONDS)
 			if (do_after(owner, 2 SECONDS, target, (DO_DEFAULT | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) & ~DO_USER_CAN_TURN) && slideCheck(TT))
 				owner.visible_message(SPAN_DANGER("Burning hard, \the [owner] thrusts forward!"))

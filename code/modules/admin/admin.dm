@@ -1099,7 +1099,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 
 	if(!seedtype || !SSplants.seeds[seedtype])
 		return
-	new /obj/effect/vine(get_turf(usr), SSplants.seeds[seedtype])
+	new /obj/vine(get_turf(usr), SSplants.seeds[seedtype])
 	log_admin("[key_name(usr)] spawned [seedtype] vines at ([usr.x],[usr.y],[usr.z])")
 
 /datum/admins/proc/spawn_atom(object as text)

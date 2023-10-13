@@ -376,7 +376,7 @@
 /atom/proc/examine(mob/user, distance, is_adjacent, infix = "", suffix = "")
 	//This reformat names to get a/an properly working on item descriptions when they are bloody
 	var/f_name = "\a [src][infix]."
-	if(blood_color && !istype(src, /obj/effect/decal))
+	if(blood_color && !istype(src, /obj/decal))
 		if(gender == PLURAL)
 			f_name = "some "
 		else
@@ -616,7 +616,7 @@
 	. = 1
 	return 1
 
-/mob/living/proc/handle_additional_vomit_reagents(obj/effect/decal/cleanable/vomit/vomit)
+/mob/living/proc/handle_additional_vomit_reagents(obj/decal/cleanable/vomit/vomit)
 	vomit.reagents.add_reagent(/datum/reagent/acid/stomach, 5)
 
 /**
@@ -1026,7 +1026,7 @@
 /atom/proc/create_bullethole(obj/item/projectile/Proj)
 	var/p_x = Proj.p_x + rand(-8, 8)
 	var/p_y = Proj.p_y + rand(-8, 8)
-	var/obj/effect/overlay/bmark/bullet_mark = new(src)
+	var/obj/overlay/bmark/bullet_mark = new(src)
 
 	bullet_mark.pixel_x = p_x
 	bullet_mark.pixel_y = p_y
@@ -1042,5 +1042,5 @@
 		bullet_mark.icon_state = "light_scorch"
 
 /atom/proc/clear_bulletholes()
-	for(var/obj/effect/overlay/bmark/bullet_mark in src)
+	for(var/obj/overlay/bmark/bullet_mark in src)
 		qdel(bullet_mark)

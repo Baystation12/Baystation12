@@ -16,14 +16,14 @@ Right Click + Ctrl  - Delete all portals
 /datum/build_mode/portals/OnClick(atom/A, list/parameters)
 	if (parameters["ctrl"])
 		if (parameters["left"])
-			if (istype(A, /obj/effect/portal) && (A in portals))
+			if (istype(A, /obj/portal) && (A in portals))
 				qdel(A)
 				to_chat(user, SPAN_NOTICE("Portal deleted."))
 		else if (parameters["right"])
 			var/choice = alert("Delete all active portals?", "Delete All", "Yes", "No")
 
 			if (choice == "Yes")
-				for (var/obj/effect/portal/P in portals)
+				for (var/obj/portal/P in portals)
 					qdel(P)
 				portals.Cut()
 	else if (parameters["left"])
@@ -50,7 +50,7 @@ Right Click + Ctrl  - Delete all portals
 				ttl = rand(30, 60)
 			ttl = ttl SECONDS
 
-			var/obj/effect/portal/P = new /obj/effect/portal(entrance, exit, ttl)
+			var/obj/portal/P = new /obj/portal(entrance, exit, ttl)
 			P.SetName(name)
 			portals += P
 

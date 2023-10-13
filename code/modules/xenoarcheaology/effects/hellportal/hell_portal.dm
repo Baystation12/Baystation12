@@ -64,7 +64,7 @@
 				continue
 
 			if (prob(25))
-				new /obj/effect/gibspawner/human(F)
+				new /obj/gibspawner/human(F)
 
 			F.set_flooring(GET_SINGLETON(/singleton/flooring/flesh))
 			F.desc = "Disgusting flooring made out of flesh, bone, eyes, and various other human bits and peices."
@@ -81,7 +81,7 @@
 			if (!T)
 				return
 
-			var/obj/effect/gateway/artifact/small/gate = new(T)
+			var/obj/gateway/artifact/small/gate = new(T)
 			gate.parent = src
 			portals += gate
 
@@ -98,7 +98,7 @@
 			else
 				to_chat(H, SPAN_DANGER("Searing pain strikes your body as you briefly find yourself in a burning hellscape!"))
 
-/datum/artifact_effect/hellportal/proc/reduce_portal_count(obj/effect/gateway/artifact/P)
+/datum/artifact_effect/hellportal/proc/reduce_portal_count(obj/gateway/artifact/P)
 	GLOB.destroyed_event.unregister(P, src)
 	portals -= P
 
@@ -128,4 +128,4 @@
 				var/mob/living/carbon/human/H = M
 				H.apply_damage((damage / 4), DAMAGE_BRUTE, damage_flags = DAMAGE_FLAG_DISPERSED)
 
-	new /obj/effect/gateway/artifact/big(get_turf(holder))
+	new /obj/gateway/artifact/big(get_turf(holder))

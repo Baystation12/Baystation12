@@ -369,7 +369,7 @@
 				user.visible_message(SPAN_CLASS("[class]", "[user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap."), \
 				SPAN_CLASS("[class]", "You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap."))
 
-				new /obj/effect/decal/cleanable/ash(get_turf(src))
+				new /obj/decal/cleanable/ash(get_turf(src))
 				qdel(src)
 
 			else

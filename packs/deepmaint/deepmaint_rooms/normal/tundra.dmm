@@ -3,7 +3,7 @@
 /turf/simulated/floor/exoplanet/snow,
 /area/map_template/deepmaint)
 "d" = (
-/obj/effect/floor_decal/industrial/traffic{
+/obj/floor_decal/industrial/traffic{
 	dir = 8
 	},
 /turf/simulated/floor/exoplanet/snow,
@@ -43,7 +43,7 @@
 /obj/item/clothing/suit/storage/hooded/wintercoat,
 /obj/item/clothing/suit/storage/hooded/wintercoat,
 /obj/item/clothing/suit/storage/hooded/wintercoat,
-/obj/effect/floor_decal/industrial/traffic{
+/obj/floor_decal/industrial/traffic{
 	dir = 8
 	},
 /turf/simulated/floor/exoplanet/snow,
@@ -157,7 +157,7 @@
 /obj/item/device/flashlight/flare,
 /obj/item/device/flashlight/flare,
 /obj/item/device/flashlight/flare,
-/obj/effect/floor_decal/industrial/traffic{
+/obj/floor_decal/industrial/traffic{
 	dir = 8
 	},
 /turf/simulated/floor/exoplanet/snow,

@@ -1,29 +1,29 @@
-/obj/effect/decal/cleanable/generic
+/obj/decal/cleanable/generic
 	name = "clutter"
 	desc = "Someone should clean that up."
 	gender = PLURAL
 	icon = 'icons/obj/materials/shards.dmi'
 	icon_state = "shards"
 
-/obj/effect/decal/cleanable/ash
+/obj/decal/cleanable/ash
 	name = "ashes"
 	desc = "Ashes to ashes, dust to dust, and into space."
 	gender = PLURAL
 	icon = 'icons/obj/ash.dmi'
 	icon_state = "ash"
 
-/obj/effect/decal/cleanable/ash/attack_hand(mob/user)
+/obj/decal/cleanable/ash/attack_hand(mob/user)
 	to_chat(user, SPAN_NOTICE("[src] sifts through your fingers."))
 	var/turf/simulated/floor/F = get_turf(src)
 	if (istype(F))
 		F.dirt += 4
 	qdel(src)
 
-/obj/effect/decal/cleanable/greenglow/Initialize()
+/obj/decal/cleanable/greenglow/Initialize()
 	. = ..()
 	QDEL_IN(src, 2 MINUTES)
 
-/obj/effect/decal/cleanable/dirt
+/obj/decal/cleanable/dirt
 	name = "dirt"
 	desc = "Someone should clean that up."
 	gender = PLURAL
@@ -32,7 +32,7 @@
 	mouse_opacity = 0
 	persistent = TRUE
 
-/obj/effect/decal/cleanable/flour
+/obj/decal/cleanable/flour
 	name = "flour"
 	desc = "It's still good. Four second rule!"
 	gender = PLURAL
@@ -40,7 +40,7 @@
 	icon_state = "flour"
 	persistent = TRUE
 
-/obj/effect/decal/cleanable/greenglow
+/obj/decal/cleanable/greenglow
 	name = "glowing goo"
 	desc = "Jeez. I hope that's not for lunch."
 	gender = PLURAL
@@ -50,14 +50,14 @@
 	persistent = TRUE
 	generic_filth = TRUE
 
-/obj/effect/decal/cleanable/cobweb
+/obj/decal/cleanable/cobweb
 	name = "cobweb"
 	desc = "Somebody should remove that."
 	layer = ABOVE_HUMAN_LAYER
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "cobweb1"
 
-/obj/effect/decal/cleanable/molten_item
+/obj/decal/cleanable/molten_item
 	name = "gooey grey mass"
 	desc = "It looks like a melted... something."
 	icon = 'icons/obj/chemical_storage.dmi'
@@ -65,7 +65,7 @@
 	persistent = TRUE
 	generic_filth = TRUE
 
-/obj/effect/decal/cleanable/cobweb2
+/obj/decal/cleanable/cobweb2
 	name = "cobweb"
 	desc = "Somebody should remove that."
 	layer = ABOVE_HUMAN_LAYER
@@ -73,7 +73,7 @@
 	icon_state = "cobweb2"
 
 //Vomit (sorry)
-/obj/effect/decal/cleanable/vomit
+/obj/decal/cleanable/vomit
 	name = "vomit"
 	desc = "Gosh, how unpleasant."
 	gender = PLURAL
@@ -82,7 +82,7 @@
 	persistent = TRUE
 	generic_filth = TRUE
 
-/obj/effect/decal/cleanable/vomit/New()
+/obj/decal/cleanable/vomit/New()
 	random_icon_states = icon_states(icon)
 	..()
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
@@ -90,11 +90,11 @@
 	if(prob(75))
 		SetTransform(rotation = pick(90, 180, 270))
 
-/obj/effect/decal/cleanable/vomit/on_update_icon()
+/obj/decal/cleanable/vomit/on_update_icon()
 	. = ..()
 	color = reagents.get_color()
 
-/obj/effect/decal/cleanable/tomato_smudge
+/obj/decal/cleanable/tomato_smudge
 	name = "tomato smudge"
 	desc = "It's red."
 	icon = 'icons/effects/tomatodecal.dmi'
@@ -102,7 +102,7 @@
 	persistent = TRUE
 	generic_filth = TRUE
 
-/obj/effect/decal/cleanable/egg_smudge
+/obj/decal/cleanable/egg_smudge
 	name = "smashed egg"
 	desc = "Seems like this one won't hatch."
 	icon = 'icons/effects/tomatodecal.dmi'
@@ -110,7 +110,7 @@
 	persistent = TRUE
 	generic_filth = TRUE
 
-/obj/effect/decal/cleanable/pie_smudge //honk
+/obj/decal/cleanable/pie_smudge //honk
 	name = "smashed pie"
 	desc = "It's pie cream from a cream pie."
 	icon = 'icons/effects/tomatodecal.dmi'
@@ -118,7 +118,7 @@
 	persistent = TRUE
 	generic_filth = TRUE
 
-/obj/effect/decal/cleanable/fruit_smudge
+/obj/decal/cleanable/fruit_smudge
 	name = "smudge"
 	desc = "Some kind of fruit smear."
 	icon = 'icons/effects/blood.dmi'

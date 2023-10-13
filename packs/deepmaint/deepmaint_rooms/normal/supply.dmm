@@ -4,7 +4,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
 	},
@@ -33,7 +33,7 @@
 /obj/machinery/conveyor{
 	id = "garbag2"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
@@ -61,7 +61,7 @@
 	dir = 8
 	},
 /obj/machinery/portable_atmospherics/powered/scrubber,
-/obj/effect/floor_decal/industrial/outline/blue,
+/obj/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/steel_dirty,
 /area/map_template/deepmaint)
 "gH" = (
@@ -71,14 +71,14 @@
 "hW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/meter,
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "iv" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
 	},
@@ -88,14 +88,14 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/steel_dirty,
 /area/map_template/deepmaint)
 "iU" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
@@ -233,7 +233,7 @@
 /area/map_template/deepmaint)
 "yx" = (
 /obj/machinery/portable_atmospherics/canister/air,
-/obj/effect/floor_decal/industrial/outline/blue,
+/obj/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/steel_dirty,
 /area/map_template/deepmaint)
 "yZ" = (
@@ -250,7 +250,7 @@
 /turf/simulated/floor/steel_dirty,
 /area/map_template/deepmaint)
 "zm" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
@@ -267,14 +267,14 @@
 /area/map_template/deepmaint)
 "zC" = (
 /obj/machinery/atmospherics/valve/shutoff/scrubbers,
-/obj/effect/floor_decal/industrial/shutoff,
+/obj/floor_decal/industrial/shutoff,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "zG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
@@ -284,7 +284,7 @@
 /obj/machinery/conveyor{
 	id = "garbag2"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
@@ -331,7 +331,7 @@
 "EG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "Gu" = (
@@ -340,7 +340,7 @@
 	id = "garbag2";
 	name = "disposal conveyor"
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/steel_dirty,
 /area/map_template/deepmaint)
 "Hf" = (
@@ -355,7 +355,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "HA" = (
@@ -380,7 +380,7 @@
 	dir = 8
 	},
 /obj/machinery/portable_atmospherics/powered/pump/filled,
-/obj/effect/floor_decal/industrial/outline/blue,
+/obj/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/steel_dirty,
 /area/map_template/deepmaint)
 "Ku" = (
@@ -414,7 +414,7 @@
 "LC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "LE" = (
@@ -422,7 +422,7 @@
 	dir = 8
 	},
 /obj/machinery/floodlight,
-/obj/effect/floor_decal/industrial/outline/blue,
+/obj/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/steel_dirty,
 /area/map_template/deepmaint)
 "Nj" = (
@@ -458,7 +458,7 @@
 /turf/simulated/floor/carpet/orange,
 /area/map_template/deepmaint)
 "Pd" = (
-/obj/effect/floor_decal/industrial/loading{
+/obj/floor_decal/industrial/loading{
 	dir = 4
 	},
 /obj/structure/closet/crate/trashcart,
@@ -476,7 +476,7 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
@@ -498,7 +498,7 @@
 /obj/machinery/conveyor{
 	id = "garbag2"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
@@ -507,8 +507,8 @@
 /turf/simulated/floor/plating,
 /area/map_template/deepmaint)
 "RC" = (
-/obj/effect/mech_shield,
-/obj/effect/wallframe_spawn,
+/obj/mech_shield,
+/obj/wallframe_spawn,
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
@@ -545,7 +545,7 @@
 	id = "garbag2"
 	},
 /obj/structure/plasticflaps,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
@@ -580,12 +580,12 @@
 	dir = 8
 	},
 /obj/machinery/meter,
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "Ww" = (
 /obj/machinery/atmospherics/valve/shutoff/supply,
-/obj/effect/floor_decal/industrial/shutoff,
+/obj/floor_decal/industrial/shutoff,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "Yy" = (

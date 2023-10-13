@@ -31,7 +31,7 @@
 	T.update_dirt()
 
 	if(prob(oil_probability))
-		new /obj/effect/decal/cleanable/blood/oil(T)
+		new /obj/decal/cleanable/blood/oil(T)
 
 	if(prob(clutter_probability))
 		var/new_junk = get_random_junk_type()
@@ -63,11 +63,11 @@
 		var/turf/neighbour = get_step(T, dir)
 		if(neighbour && neighbour.density)
 			if(dir == WEST)
-				new /obj/effect/decal/cleanable/cobweb(T)
+				new /obj/decal/cleanable/cobweb(T)
 			if(dir == EAST)
-				new /obj/effect/decal/cleanable/cobweb2(T)
+				new /obj/decal/cleanable/cobweb2(T)
 			if(prob(web_probability))
-				var/obj/effect/spider/spiderling/spiderling = new /obj/effect/spider/spiderling/mundane/dormant(T)
+				var/obj/spider/spiderling/spiderling = new /obj/spider/spiderling/mundane/dormant(T)
 				spiderling.pixel_y = spiderling.shift_range
 				spiderling.pixel_x = dir == WEST ? -spiderling.shift_range : spiderling.shift_range
 

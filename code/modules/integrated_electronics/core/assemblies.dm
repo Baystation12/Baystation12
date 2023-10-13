@@ -27,7 +27,7 @@
 	var/interact_page = 0
 	var/components_per_page = 10
 	/// Spark system used for creating sparks while the assembly is damaged and destroyed.
-	var/datum/effect/effect/system/spark_spread/spark_system
+	var/datum/effect/spark_spread/spark_system
 	var/adrone = FALSE
 	pass_flags = 0
 	anchored = FALSE
@@ -66,11 +66,11 @@
 	visible_message(SPAN_WARNING("\The [src] falls to pieces!"))
 	if(w_class == ITEM_SIZE_HUGE)
 		if(adrone)
-			new /obj/effect/decal/cleanable/blood/gibs/robot(loc)
+			new /obj/decal/cleanable/blood/gibs/robot(loc)
 		new /obj/item/stack/material/steel(loc, rand(7, 10))
 	else if(w_class == ITEM_SIZE_LARGE)
 		if(adrone)
-			new /obj/effect/decal/cleanable/blood/gibs/robot(loc)
+			new /obj/decal/cleanable/blood/gibs/robot(loc)
 		new /obj/item/stack/material/steel(loc, rand(3, 6))
 	else if(w_class == ITEM_SIZE_NORMAL)
 		new /obj/item/stack/material/steel(loc, rand(1, 3))
@@ -112,7 +112,7 @@
 	.=..()
 	START_PROCESSING(SScircuit, src)
 	matter[MATERIAL_STEEL] = round((max_complexity + max_components) / 4) * SScircuit.cost_multiplier
-	spark_system = new /datum/effect/effect/system/spark_spread
+	spark_system = new /datum/effect/spark_spread
 	spark_system.set_up(7, 0, src)
 	spark_system.attach(src)
 

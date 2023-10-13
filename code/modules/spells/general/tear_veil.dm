@@ -20,7 +20,7 @@
 /spell/tear_veil/choose_targets()
 	var/turf/T = get_turf(holder)
 	holder.visible_message(SPAN_NOTICE("A strange portal rips open underneath \the [holder]!"))
-	var/obj/effect/gateway/hole = new(get_turf(T))
+	var/obj/gateway/hole = new(get_turf(T))
 	hole.density = FALSE
 	return list(hole)
 

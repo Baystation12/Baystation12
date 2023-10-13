@@ -126,11 +126,11 @@
 	var/cleaned = FALSE
 	if(user.client && (target in user.client.screen))
 		to_chat(user, SPAN_NOTICE("You need to take that [target.name] off before cleaning it."))
-	else if(istype(target,/obj/effect/decal/cleanable/blood))
+	else if(istype(target,/obj/decal/cleanable/blood))
 		to_chat(user, SPAN_NOTICE("You scrub \the [target.name] out."))
 		target.clean_blood() //Blood is a cleanable decal, therefore needs to be accounted for before all cleanable decals.
 		cleaned = TRUE
-	else if(istype(target,/obj/effect/decal/cleanable))
+	else if(istype(target,/obj/decal/cleanable))
 		to_chat(user, SPAN_NOTICE("You scrub \the [target.name] out."))
 		qdel(target)
 		cleaned = TRUE

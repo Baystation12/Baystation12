@@ -3,7 +3,7 @@
 /turf/space,
 /area/space)
 "ab" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/space)
 "ad" = (
@@ -101,28 +101,28 @@
 /turf/simulated/floor/plating,
 /area/miningstation/hangar)
 "as" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 9;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/plating,
 /area/miningstation/hangar)
 "at" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/plating,
 /area/miningstation/hangar)
 "au" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 5;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/plating,
 /area/miningstation/hangar)
 "av" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
@@ -132,7 +132,7 @@
 /turf/simulated/floor/plating,
 /area/miningstation/hangar)
 "ax" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
@@ -317,7 +317,7 @@
 /area/miningstation/fix)
 "aU" = (
 /obj/machinery/power/solar/improved,
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/structure/cable{
 	d2 = 4;
 	icon_state = "0-4"
@@ -370,7 +370,7 @@
 /turf/simulated/wall/titanium,
 /area/miningstation/fix)
 "bb" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 10;
 	icon_state = "warning"
 	},
@@ -387,7 +387,7 @@
 /turf/simulated/floor/plating,
 /area/miningstation/fix)
 "bd" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 6;
 	icon_state = "warning"
 	},
@@ -409,7 +409,7 @@
 	dir = 4
 	},
 /obj/structure/catwalk,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning";
 	pixel_y = 6
@@ -424,7 +424,7 @@
 	dir = 10
 	},
 /obj/structure/catwalk,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning";
 	pixel_y = 6
@@ -618,7 +618,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/miningstation/hangar)
 "bx" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/power)
 "by" = (
@@ -640,7 +640,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -652,7 +652,7 @@
 /area/miningstation/hangar)
 "bD" = (
 /obj/machinery/airlock_sensor/airlock_interior,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/power)
 "bE" = (
@@ -716,23 +716,23 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "bN" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/prep2)
 "bP" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/hangarhall)
 "bQ" = (
 /obj/structure/closet/firecloset,
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "bR" = (
 /obj/structure/closet/emcloset,
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "bS" = (
@@ -754,7 +754,7 @@
 "bW" = (
 /obj/machinery/power/terminal,
 /obj/structure/cable,
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms)
 "bX" = (
@@ -792,7 +792,7 @@
 "cf" = (
 /obj/structure/sign/warning/airlock,
 /obj/machinery/access_button/airlock_exterior,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/power)
 "cg" = (
@@ -823,7 +823,7 @@
 /area/miningstation/hangarhall)
 "ck" = (
 /obj/structure/fireaxecabinet,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/power)
 "cl" = (
@@ -845,7 +845,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "co" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/hangar)
 "cp" = (
@@ -899,7 +899,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/prep2)
 "cw" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
@@ -923,7 +923,7 @@
 /area/miningstation/power)
 "cA" = (
 /obj/item/device/radio/intercom,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/power)
 "cB" = (
@@ -940,7 +940,7 @@
 /area/miningstation/power)
 "cD" = (
 /obj/machinery/power/solar/improved,
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/structure/cable{
 	d2 = 8;
 	icon_state = "0-8"
@@ -954,7 +954,7 @@
 	dir = 4
 	},
 /obj/structure/catwalk,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning";
 	pixel_y = 6
@@ -1150,7 +1150,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/hangarhall)
 "dd" = (
@@ -1283,7 +1283,7 @@
 	pixel_x = 25;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
@@ -1336,7 +1336,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
@@ -1377,7 +1377,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/hangarhall)
 "dB" = (
@@ -1395,7 +1395,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1412,7 +1412,7 @@
 	icon_state = "2-4"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1437,7 +1437,7 @@
 	icon_state = "4-8"
 	},
 /obj/structure/reagent_dispensers/fueltank,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 9;
 	icon_state = "warning"
 	},
@@ -1450,7 +1450,7 @@
 	icon_state = "4-8"
 	},
 /obj/structure/reagent_dispensers/fueltank,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 5;
 	icon_state = "warning"
 	},
@@ -1473,7 +1473,7 @@
 	icon_state = "1-4"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1493,7 +1493,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1630,7 +1630,7 @@
 /area/miningstation/power)
 "dT" = (
 /obj/machinery/power/solar/improved,
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/structure/cable{
 	d2 = 4;
 	icon_state = "0-4"
@@ -1675,7 +1675,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/bridge)
 "dY" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/prep)
 "dZ" = (
@@ -1696,7 +1696,7 @@
 /area/miningstation/prep)
 "eb" = (
 /obj/structure/fireaxecabinet,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/prep)
 "ec" = (
@@ -1753,32 +1753,32 @@
 /area/miningstation/prep2)
 "ej" = (
 /obj/machinery/vending/engivend,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
 "ek" = (
 /obj/machinery/vending/engivend,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
 "el" = (
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -1790,10 +1790,10 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1801,17 +1801,17 @@
 /area/miningstation/prep)
 "en" = (
 /obj/machinery/vending/engineering,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
 "eo" = (
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
@@ -1819,16 +1819,16 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
 "eq" = (
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -1842,7 +1842,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -1851,24 +1851,24 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
 "eu" = (
 /obj/machinery/vending/tool,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
 "ev" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1880,17 +1880,17 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
 "ex" = (
 /obj/machinery/vending/engivend,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -1912,7 +1912,7 @@
 	dir = 8;
 	icon_state = "tube1"
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -1983,7 +1983,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/fix)
 "eL" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/vault)
 "eM" = (
@@ -1995,7 +1995,7 @@
 	name = "west bump";
 	pixel_x = -24
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 9
 	},
 /obj/structure/table/steel,
@@ -2195,7 +2195,7 @@
 	dir = 1
 	},
 /obj/structure/catwalk,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning";
 	pixel_y = 6
@@ -2224,10 +2224,10 @@
 	dir = 8;
 	pixel_x = -24
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 9
 	},
 /obj/structure/table/steel,
@@ -2235,14 +2235,14 @@
 /area/miningstation/prep)
 "fk" = (
 /obj/machinery/light,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
 /obj/structure/table/steel,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
 "fl" = (
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
 /obj/random/trash,
@@ -2250,26 +2250,26 @@
 /area/miningstation/prep)
 "fm" = (
 /obj/structure/closet/toolcloset,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
 "fn" = (
 /obj/machinery/mech_recharger,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
 "fo" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/cryo)
 "fq" = (
 /obj/machinery/mech_recharger,
 /obj/structure/mech_wreckage,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -2282,7 +2282,7 @@
 /area/miningstation/prep2)
 "fs" = (
 /obj/structure/table/rack,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
 /obj/random/tool,
@@ -2292,7 +2292,7 @@
 /area/miningstation/prep)
 "ft" = (
 /obj/machinery/mech_recharger,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
 /mob/living/exosuit/premade/powerloader,
@@ -2301,7 +2301,7 @@
 "fu" = (
 /obj/structure/table/rack,
 /obj/machinery/light,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
 /obj/random/tool,
@@ -2310,7 +2310,7 @@
 /area/miningstation/prep)
 "fv" = (
 /obj/structure/table/rack,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
 /obj/random/tool,
@@ -2319,7 +2319,7 @@
 "fx" = (
 /obj/structure/table/rack,
 /obj/machinery/light,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
 /obj/random/tool,
@@ -2332,14 +2332,14 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
 /obj/structure/reagent_dispensers/water_cooler,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
 "fz" = (
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
 /obj/structure/table/steel,
@@ -2402,7 +2402,7 @@
 /area/miningstation/vault)
 "fL" = (
 /obj/structure/reagent_dispensers/fueltank,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 5;
 	icon_state = "warning"
 	},
@@ -2414,7 +2414,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/vault)
 "fN" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/structure/cable/cyan{
 	d2 = 2;
 	icon_state = "0-2"
@@ -2434,10 +2434,10 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/vault)
 "fP" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -2459,7 +2459,7 @@
 /area/miningstation/vault)
 "fT" = (
 /obj/structure/reagent_dispensers/fueltank,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 6;
 	icon_state = "warning"
 	},
@@ -2486,7 +2486,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
@@ -2505,7 +2505,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
 	},
@@ -2522,8 +2522,8 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor,
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/floor_decal/techfloor,
+/obj/decal/cleanable/blood/splatter,
 /obj/machinery/power/apc{
 	dir = 4;
 	name = "east bump";
@@ -2541,7 +2541,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall)
 "gh" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
@@ -2549,12 +2549,12 @@
 /turf/simulated/floor/plating,
 /area/miningstation/fix)
 "gi" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/bridge)
 "gj" = (
 /obj/structure/noticeboard,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/bridge)
 "gk" = (
@@ -2578,12 +2578,12 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/fix)
 "gm" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/bathroom)
 "gn" = (
 /obj/structure/sign/warning/secure_area,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/operationshall2)
 "go" = (
@@ -2614,12 +2614,12 @@
 /turf/simulated/floor/plating,
 /area/miningstation/operationshall2)
 "gr" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/atmos)
 "gs" = (
 /obj/structure/fireaxecabinet,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/atmos)
 "gt" = (
@@ -2630,7 +2630,7 @@
 	dir = 6
 	},
 /obj/structure/catwalk,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning";
 	pixel_y = 6
@@ -2639,11 +2639,11 @@
 /area/miningstation/hangar)
 "gu" = (
 /obj/item/device/radio/intercom,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/operationshall)
 "gv" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/intensive)
 "gw" = (
@@ -2651,12 +2651,12 @@
 /area/miningstation/operationshall)
 "gx" = (
 /obj/structure/closet/firecloset,
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall)
 "gy" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall2)
 "gz" = (
@@ -2708,7 +2708,7 @@
 	icon_state = "2-4"
 	},
 /obj/structure/catwalk,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning";
 	pixel_y = 6
@@ -2776,7 +2776,7 @@
 /area/miningstation/operationshall2)
 "gP" = (
 /obj/structure/closet/firecloset,
-/obj/effect/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall2)
 "gQ" = (
@@ -2810,7 +2810,7 @@
 "gU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
 	},
@@ -2822,7 +2822,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
 	},
@@ -2918,7 +2918,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/bridge)
 "hd" = (
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/bridge)
 "he" = (
@@ -2979,7 +2979,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall2)
 "hh" = (
@@ -3111,7 +3111,7 @@
 /obj/machinery/cryopod{
 	dir = 2
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 9;
 	icon_state = "warning"
 	},
@@ -3135,7 +3135,7 @@
 /area/miningstation/operationshall)
 "hs" = (
 /obj/structure/broken_cryo,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 5;
 	icon_state = "warning"
 	},
@@ -3184,7 +3184,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall2)
 "hw" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/janitorcloset)
 "hx" = (
@@ -3288,7 +3288,7 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
@@ -3319,7 +3319,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/atmos)
 "hO" = (
@@ -3454,10 +3454,10 @@
 /obj/structure/table/steel,
 /obj/item/storage/firstaid/surgery,
 /obj/item/storage/firstaid/adv,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /obj/machinery/power/terminal{
@@ -3481,7 +3481,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/chief2)
 "ih" = (
@@ -3519,7 +3519,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms3)
 "il" = (
@@ -3569,11 +3569,11 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms)
 "ir" = (
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms)
 "is" = (
@@ -3593,13 +3593,13 @@
 /area/miningstation/bathroom)
 "iu" = (
 /obj/structure/bed/padded,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -3607,7 +3607,7 @@
 "iv" = (
 /obj/structure/table/steel,
 /obj/structure/curtain/open/privacy,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /obj/random/medical,
@@ -3645,15 +3645,15 @@
 /area/miningstation/bridge)
 "iz" = (
 /obj/structure/closet/emcloset,
-/obj/effect/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall2)
 "iA" = (
 /obj/machinery/power/terminal,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /obj/random/trash,
 /obj/machinery/power/apc{
 	name = "south bump";
@@ -3673,7 +3673,7 @@
 	dir = 8;
 	icon_state = "tube1"
 	},
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall2)
 "iC" = (
@@ -3694,14 +3694,14 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms3)
 "iD" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
 "iE" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -3711,7 +3711,7 @@
 "iF" = (
 /obj/random/trash,
 /obj/structure/table/steel,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /obj/random/technology_scanner,
@@ -3733,10 +3733,10 @@
 	name = "west bump";
 	pixel_x = -24
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /obj/structure/cable{
@@ -3746,10 +3746,10 @@
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
 "iI" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /obj/machinery/alarm,
@@ -3763,11 +3763,11 @@
 /area/miningstation/physician2)
 "iJ" = (
 /obj/machinery/power/terminal,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/blue,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /obj/machinery/power/apc{
@@ -3790,10 +3790,10 @@
 /obj/machinery/power/terminal{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /obj/structure/cable{
@@ -3827,17 +3827,17 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms2)
 "iN" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /obj/structure/table/steel,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
 "iO" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /obj/structure/table/steel,
@@ -3866,14 +3866,14 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall)
 "iS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/bathroom)
 "iT" = (
@@ -3899,7 +3899,7 @@
 /turf/simulated/floor/tiled/white,
 /area/miningstation/bathroom)
 "iV" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -3965,7 +3965,7 @@
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
 "jd" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -3996,17 +3996,17 @@
 /area/miningstation/chief)
 "jh" = (
 /obj/structure/filingcabinet/wallcabinet,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/chief2)
 "ji" = (
 /obj/machinery/body_scan_display,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/intensive)
 "jj" = (
 /obj/structure/sign/bluecross_2,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/intensive)
 "jk" = (
@@ -4022,7 +4022,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/intensive)
 "jl" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/physician2)
 "jm" = (
@@ -4092,7 +4092,7 @@
 /area/miningstation/chief2)
 "ju" = (
 /obj/structure/filingcabinet/wallcabinet,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/chief)
 "jv" = (
@@ -4136,10 +4136,10 @@
 /area/miningstation/mess)
 "jz" = (
 /obj/machinery/vitals_monitor,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
@@ -4149,10 +4149,10 @@
 	dir = 8;
 	pixel_x = -24
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /obj/structure/closet/body_bag,
@@ -4170,7 +4170,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
@@ -4187,15 +4187,15 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
 "jD" = (
 /obj/structure/sign/directions/examroom,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/physician2)
 "jE" = (
@@ -4206,7 +4206,7 @@
 /area/miningstation/chief)
 "jF" = (
 /obj/machinery/access_button/airlock_interior,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/power)
 "jG" = (
@@ -4217,7 +4217,7 @@
 	dir = 1
 	},
 /obj/machinery/alarm,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /obj/machinery/light{
@@ -4227,7 +4227,7 @@
 /area/miningstation/physician1)
 "jH" = (
 /obj/structure/table/steel,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
@@ -4235,8 +4235,8 @@
 /area/miningstation/physician1)
 "jI" = (
 /obj/machinery/computer/modular/preset/medical,
-/obj/effect/floor_decal/corner/blue,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
@@ -4271,13 +4271,13 @@
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/bathroom)
 "jO" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/landmark/corpse/miningstation/deadminer,
+/obj/decal/cleanable/blood/splatter,
+/obj/landmark/corpse/miningstation/deadminer,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "jP" = (
 /obj/structure/iv_stand,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /obj/machinery/light{
@@ -4302,7 +4302,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/chief2)
 "jR" = (
-/obj/effect/floor_decal/asteroid,
+/obj/floor_decal/asteroid,
 /turf/simulated/floor/asteroid,
 /area/space)
 "jS" = (
@@ -4348,8 +4348,8 @@
 /area/miningstation/operationshall)
 "jX" = (
 /obj/structure/closet/emcloset,
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall)
 "jY" = (
@@ -4358,7 +4358,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall)
 "jZ" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
 "ka" = (
@@ -4388,7 +4388,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/chief2)
 "ke" = (
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/chief)
 "kf" = (
@@ -4403,7 +4403,7 @@
 "kg" = (
 /obj/structure/table/rack,
 /obj/machinery/light,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
 /obj/random/toolbox,
@@ -4418,7 +4418,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/chief)
 "kj" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/monotile,
 /area/miningstation/hangar)
@@ -4449,7 +4449,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/chief2)
 "kp" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/dormhall)
 "kq" = (
@@ -4469,7 +4469,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "ks" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/dorms3)
 "kt" = (
@@ -4491,7 +4491,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/chief)
 "kw" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/prep2)
 "kx" = (
@@ -4510,14 +4510,14 @@
 /area/miningstation/chief2)
 "kz" = (
 /obj/structure/closet/emcloset,
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "kA" = (
 /obj/structure/closet/firecloset,
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "kB" = (
@@ -4530,7 +4530,7 @@
 "kC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
 	},
@@ -4542,7 +4542,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
 	},
@@ -4561,8 +4561,8 @@
 "kG" = (
 /obj/structure/closet/toolcloset,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms3)
 "kI" = (
@@ -4609,8 +4609,8 @@
 	dir = 8;
 	icon_state = "tube1"
 	},
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/random/projectile,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms3)
@@ -4624,7 +4624,7 @@
 	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms2)
 "kQ" = (
@@ -4686,8 +4686,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/random/projectile,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms3)
@@ -4738,8 +4738,8 @@
 /area/miningstation/dormhall)
 "ld" = (
 /obj/structure/closet/toolcloset,
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms3)
 "le" = (
@@ -4753,7 +4753,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms3)
 "lf" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall)
 "lg" = (
@@ -4779,11 +4779,11 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall2)
 "lk" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /obj/machinery/light{
@@ -4818,10 +4818,10 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -4909,7 +4909,7 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /mob/living/simple_animal/hostile/meat/humansecurity,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
@@ -4990,7 +4990,7 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -5032,7 +5032,7 @@
 /area/miningstation/operationshall2)
 "lJ" = (
 /obj/random/trash,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /obj/machinery/light{
@@ -5124,7 +5124,7 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "lQ" = (
@@ -5137,7 +5137,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "lR" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
@@ -5217,7 +5217,7 @@
 /area/miningstation/dormhall)
 "lY" = (
 /obj/structure/closet/crate/trashcart,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "lZ" = (
@@ -5237,7 +5237,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "mb" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/dorms2)
 "mc" = (
@@ -5265,7 +5265,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/bathroom)
 "me" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/dorms)
 "mf" = (
@@ -5297,7 +5297,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dorms)
 "mi" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/mess)
 "mj" = (
@@ -5321,10 +5321,10 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/bridge)
 "ml" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -5347,11 +5347,11 @@
 /area/miningstation/mess)
 "mn" = (
 /obj/item/device/radio/intercom,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/janitorcloset)
 "mo" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /obj/structure/closet/body_bag,
@@ -5375,7 +5375,7 @@
 /turf/simulated/floor/plating,
 /area/miningstation/mess)
 "mr" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/kitchen)
 "ms" = (
@@ -5393,23 +5393,23 @@
 "mt" = (
 /obj/structure/table/steel,
 /obj/item/stack/medical/ointment,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
 "mu" = (
 /obj/structure/hygiene/sink/kitchen,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/kitchen)
 "mv" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/walkin)
 "mw" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /obj/structure/table/steel,
@@ -5420,21 +5420,21 @@
 /area/miningstation/intensive)
 "mx" = (
 /obj/structure/lattice,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/walkin)
 "my" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/blue,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/physician1)
 "mz" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/recroom)
 "mA" = (
@@ -5455,8 +5455,8 @@
 /area/miningstation/recroom)
 "mC" = (
 /obj/structure/closet/toolcloset,
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms2)
 "mD" = (
@@ -5478,7 +5478,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/bathroom)
 "mF" = (
-/obj/effect/floor_decal/asteroid,
+/obj/floor_decal/asteroid,
 /turf/simulated/mineral,
 /area/space)
 "mG" = (
@@ -5498,7 +5498,7 @@
 /area/miningstation/dorms2)
 "mI" = (
 /obj/structure/closet/toolcloset,
-/obj/effect/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms)
 "mJ" = (
@@ -5513,7 +5513,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/mess)
 "mK" = (
@@ -5561,7 +5561,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall2)
 "mS" = (
@@ -5594,11 +5594,11 @@
 	icon_state = "mirror_broke";
 	pixel_y = 32
 	},
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/bathroom)
 "mY" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/surgery)
 "mZ" = (
@@ -5618,8 +5618,8 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/surgery)
 "nb" = (
-/obj/effect/floor_decal/corner/blue,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
 /obj/machinery/light{
@@ -5630,7 +5630,7 @@
 /area/miningstation/physician1)
 "nc" = (
 /obj/structure/iv_stand,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /obj/structure/closet/body_bag,
@@ -5648,7 +5648,7 @@
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
 "ne" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /obj/structure/roller_bed,
@@ -5714,37 +5714,37 @@
 /area/miningstation/mess)
 "no" = (
 /obj/machinery/optable,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/surgery)
 "nq" = (
 /obj/machinery/smartfridge/foods,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/miningstation/mess)
 "nr" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/kitchen)
 "ns" = (
 /obj/machinery/alarm,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -5757,20 +5757,20 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/kitchen)
 "nu" = (
 /obj/machinery/vending/dinnerware,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /obj/machinery/light{
@@ -5783,7 +5783,7 @@
 	dir = 4;
 	pixel_x = -24
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /obj/structure/cable{
@@ -5791,7 +5791,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
 	level = 2
@@ -5801,20 +5801,20 @@
 "nw" = (
 /obj/structure/table/marble,
 /obj/machinery/cooker/candy,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/kitchen)
 "nx" = (
-/obj/effect/gibspawner/human,
-/obj/effect/floor_decal/corner/blue{
+/obj/gibspawner/human,
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
@@ -5873,8 +5873,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms2)
 "nH" = (
@@ -5883,7 +5883,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms)
 "nI" = (
@@ -5921,7 +5921,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms)
 "nN" = (
@@ -5934,7 +5934,7 @@
 /area/miningstation/dorms)
 "nO" = (
 /obj/structure/closet/wardrobe/engineering_yellow,
-/obj/effect/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms)
 "nP" = (
@@ -5951,7 +5951,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/effect/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms)
 "nS" = (
@@ -5975,10 +5975,10 @@
 /area/miningstation/dorms)
 "nU" = (
 /obj/structure/table/steel,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
@@ -6038,10 +6038,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/plating,
@@ -6050,10 +6050,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6062,10 +6062,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /obj/random/trash,
@@ -6083,10 +6083,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6103,10 +6103,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6128,10 +6128,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6143,10 +6143,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6154,10 +6154,10 @@
 "oi" = (
 /obj/structure/table/marble,
 /obj/item/material/knife/kitchen,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6189,7 +6189,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
@@ -6206,8 +6206,8 @@
 /turf/simulated/floor/carpet,
 /area/miningstation/recroom)
 "oo" = (
-/obj/effect/landmark/corpse/miningstation/deadmineroverallsf,
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/landmark/corpse/miningstation/deadmineroverallsf,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/carpet,
 /area/miningstation/recroom)
 "op" = (
@@ -6224,7 +6224,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/carpet,
 /area/miningstation/recroom)
 "os" = (
@@ -6241,8 +6241,8 @@
 	dir = 8;
 	icon_state = "tube1"
 	},
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms2)
 "ou" = (
@@ -6267,14 +6267,14 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms2)
 "ow" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/landmark/corpse/doctor,
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/landmark/corpse/doctor,
+/obj/decal/cleanable/blood/splatter,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -6340,30 +6340,30 @@
 "oE" = (
 /obj/structure/table/marble,
 /obj/random/mre,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/miningstation/mess)
 "oF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/kitchen)
 "oG" = (
 /obj/structure/table/marble,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6374,10 +6374,10 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6394,10 +6394,10 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6418,10 +6418,10 @@
 /turf/simulated/floor/plating,
 /area/miningstation/kitchen)
 "oK" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
 "oL" = (
@@ -6499,8 +6499,8 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/item/gun/projectile/pistol/throwback,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms2)
@@ -6518,11 +6518,11 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue,
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/floor_decal/corner/blue,
+/obj/decal/cleanable/blood/splatter,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
 	},
@@ -6539,7 +6539,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor,
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -6548,7 +6548,7 @@
 "oY" = (
 /obj/structure/closet/wardrobe/engineering_yellow,
 /obj/machinery/light,
-/obj/effect/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms)
 "oZ" = (
@@ -6580,10 +6580,10 @@
 "pf" = (
 /obj/structure/table/marble,
 /obj/random/action_figure,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/plating,
@@ -6591,19 +6591,19 @@
 "pg" = (
 /obj/structure/table/marble,
 /obj/item/material/knife/kitchen/cleaver/bronze,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/kitchen)
 "ph" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /obj/random/trash,
@@ -6612,10 +6612,10 @@
 "pi" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6635,11 +6635,11 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/effect/landmark/corpse/doctor,
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/landmark/corpse/doctor,
+/obj/decal/cleanable/blood/splatter,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -6659,10 +6659,10 @@
 /area/miningstation/mess)
 "pp" = (
 /obj/structure/table/marble,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/plating,
@@ -6671,10 +6671,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6683,10 +6683,10 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6696,10 +6696,10 @@
 	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6711,7 +6711,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/walkin)
 "pv" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "pw" = (
@@ -6728,10 +6728,10 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6740,10 +6740,10 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6751,10 +6751,10 @@
 "pA" = (
 /obj/structure/table/marble,
 /obj/machinery/reagent_temperature,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6798,10 +6798,10 @@
 	dir = 1;
 	pixel_y = -24
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6809,10 +6809,10 @@
 "pG" = (
 /obj/structure/table/marble,
 /obj/machinery/microwave,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6820,10 +6820,10 @@
 "pH" = (
 /obj/structure/table/marble,
 /obj/machinery/microwave,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /obj/machinery/light,
@@ -6831,30 +6831,30 @@
 /area/miningstation/kitchen)
 "pI" = (
 /obj/machinery/cooker/oven,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/kitchen)
 "pJ" = (
 /obj/machinery/cooker/fryer,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/kitchen)
 "pK" = (
 /obj/machinery/cooker/grill,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /obj/machinery/light,
@@ -6863,10 +6863,10 @@
 "pL" = (
 /obj/structure/table/marble,
 /obj/machinery/cooker/cereal,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -6883,7 +6883,7 @@
 "pO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "pP" = (
@@ -6892,7 +6892,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /obj/structure/cable{
@@ -6908,7 +6908,7 @@
 /area/miningstation/intensive)
 "pQ" = (
 /obj/item/scalpel/basic,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -6928,25 +6928,25 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "pS" = (
-/obj/effect/landmark/corpse/zombiescience,
-/obj/effect/gibspawner/human,
+/obj/landmark/corpse/zombiescience,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/vault)
 "pT" = (
 /obj/structure/table/steel,
 /obj/item/stack/medical/bruise_pack,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
 "pU" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/physician1)
 "pV" = (
@@ -6976,24 +6976,24 @@
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
 "pZ" = (
-/obj/effect/floor_decal/sign/cmo,
-/obj/effect/paint/black,
+/obj/floor_decal/sign/cmo,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/physician2)
 "qa" = (
 /obj/structure/table/steel,
 /obj/item/paper_bin,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/physician2)
 "qb" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/black,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/black,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/physician2)
 "qc" = (
@@ -7009,7 +7009,7 @@
 /obj/structure/table/steel,
 /obj/item/storage/firstaid/fire,
 /obj/item/storage/firstaid/toxin,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /obj/machinery/light{
@@ -7105,15 +7105,15 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
 	},
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "qk" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /obj/machinery/light_switch{
 	pixel_y = 32
 	},
-/obj/effect/landmark/corpse/miningstation/deadminerf,
+/obj/landmark/corpse/miningstation/deadminerf,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms)
 "ql" = (
@@ -7123,7 +7123,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms)
 "qm" = (
@@ -7138,8 +7138,8 @@
 /turf/simulated/floor/tiled/white,
 /area/miningstation/physician2)
 "qn" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/black,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/black,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "qo" = (
@@ -7196,7 +7196,7 @@
 "qs" = (
 /obj/structure/table/steel,
 /obj/item/storage/firstaid/trauma,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -7212,27 +7212,27 @@
 	dir = 1;
 	pixel_y = -25
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
 "qu" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
 "qv" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
@@ -7244,28 +7244,28 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
 "qx" = (
 /obj/structure/sign/directions/examroom,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/physician1)
 "qy" = (
-/obj/effect/floor_decal/corner/blue,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
 /obj/random/trash,
@@ -7277,8 +7277,8 @@
 /turf/simulated/floor/tiled/white,
 /area/miningstation/physician1)
 "qz" = (
-/obj/effect/floor_decal/corner/blue,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /obj/random/trash,
@@ -7291,11 +7291,11 @@
 /obj/machinery/computer/modular/preset/medical{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -7314,13 +7314,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/bathroom)
 "qD" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/firedoor,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/mess)
 "qE" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
@@ -7328,7 +7328,7 @@
 /area/miningstation/hangar)
 "qF" = (
 /obj/item/device/radio/intercom,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/chief2)
 "qG" = (
@@ -7353,7 +7353,7 @@
 /obj/machinery/cryopod{
 	dir = 2
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
@@ -7370,28 +7370,28 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms)
 "qK" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/firedoor,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/recroom)
 "qL" = (
 /obj/machinery/vending/wallmed1,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/surgery)
 "qM" = (
 /obj/machinery/vending/wallmed1,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/physician2)
 "qN" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
@@ -7461,7 +7461,7 @@
 /area/miningstation/dormhall)
 "qU" = (
 /obj/machinery/computer/cryopod,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/cryo)
 "qV" = (
@@ -7471,7 +7471,7 @@
 /area/miningstation/mess)
 "qW" = (
 /obj/item/device/radio/intercom,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/chief)
 "qX" = (
@@ -7488,22 +7488,22 @@
 /area/miningstation/chief2)
 "qZ" = (
 /obj/structure/closet/crate/secure/biohazard/alt,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/surgery)
 "ra" = (
 /obj/structure/closet/crate/freezer,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/surgery)
@@ -7519,7 +7519,7 @@
 /area/miningstation/dorms3)
 "rc" = (
 /obj/item/device/radio/intercom,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/dormhall)
 "rd" = (
@@ -7528,7 +7528,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "re" = (
@@ -7543,16 +7543,16 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/walkin)
 "rf" = (
-/obj/effect/landmark/corpse/chef,
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/landmark/corpse/chef,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/walkin)
 "rg" = (
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/mess)
 "ri" = (
@@ -7684,7 +7684,7 @@
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/fix)
 "rx" = (
@@ -7735,7 +7735,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/fix)
 "rE" = (
@@ -7744,47 +7744,47 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/gibspawner/human,
+/obj/decal/cleanable/blood/splatter,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms)
 "rF" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 1
 	},
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
 "rG" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/kitchen)
 "rH" = (
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/mess)
 "rI" = (
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/mess)
 "rJ" = (
 /obj/machinery/cryopod/robot,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -7803,7 +7803,7 @@
 	dir = 8;
 	icon_state = "tube1"
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -7814,7 +7814,7 @@
 	name = "west bump";
 	pixel_x = -24
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -7829,7 +7829,7 @@
 /area/miningstation/chief)
 "tB" = (
 /obj/machinery/light,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10
 	},
 /obj/structure/table/steel,
@@ -7841,7 +7841,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/miningstation/hangar)
 "uR" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
@@ -7864,7 +7864,7 @@
 /area/miningstation/fix)
 "vT" = (
 /obj/item/device/radio/intercom,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/prep)
 "wx" = (
@@ -7873,18 +7873,18 @@
 /area/miningstation/dormhall)
 "wF" = (
 /obj/structure/table/steel,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
 "wU" = (
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
 "xe" = (
 /obj/machinery/vending/engineering,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
 /obj/machinery/light_switch{
@@ -7897,7 +7897,7 @@
 	dir = 4
 	},
 /obj/structure/catwalk,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning";
 	pixel_y = 6
@@ -7916,18 +7916,18 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangar)
 "xV" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
 "yc" = (
-/obj/effect/gibspawner/human,
-/obj/effect/floor_decal/corner/blue{
+/obj/gibspawner/human,
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
 "yA" = (
@@ -7951,7 +7951,7 @@
 /turf/simulated/floor/plating,
 /area/miningstation/atmos)
 "yI" = (
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/bathroom)
 "yQ" = (
@@ -7960,7 +7960,7 @@
 /area/miningstation/hangarhall)
 "zi" = (
 /obj/machinery/vending/engivend,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5
 	},
 /obj/machinery/light_switch{
@@ -7977,7 +7977,7 @@
 /turf/simulated/floor/plating,
 /area/miningstation/hangar)
 "zI" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/operationshall2)
 "zP" = (
@@ -7985,7 +7985,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/bridge)
 "zS" = (
-/obj/effect/shuttle_landmark/nav_miningstation/exterior,
+/obj/shuttle_landmark/nav_miningstation/exterior,
 /turf/space,
 /area/space)
 "AD" = (
@@ -7996,7 +7996,7 @@
 	dir = 4
 	},
 /obj/structure/catwalk,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning";
 	pixel_y = 6
@@ -8012,8 +8012,8 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall2)
 "AO" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/landmark/corpse/miningstation/deadmineroveralls,
+/obj/decal/cleanable/blood/splatter,
+/obj/landmark/corpse/miningstation/deadmineroveralls,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "AQ" = (
@@ -8039,16 +8039,16 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall2)
 "Bp" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
 "Br" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
 "Bt" = (
@@ -8058,11 +8058,11 @@
 /turf/simulated/floor/wood/walnut,
 /area/miningstation/recroom)
 "BG" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/chief2)
 "Cq" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /mob/living/simple_animal/hostile/meat/abomination,
@@ -8070,15 +8070,15 @@
 /area/miningstation/cryo)
 "CB" = (
 /obj/structure/table/steel,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
 "CD" = (
-/obj/effect/paint/black,
-/obj/effect/paint/black,
+/obj/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/intensive)
 "Da" = (
@@ -8101,7 +8101,7 @@
 /area/miningstation/hangarhall)
 "DD" = (
 /obj/structure/broken_cryo,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
@@ -8124,8 +8124,8 @@
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/walkin)
 "Ee" = (
-/obj/effect/gibspawner/human,
-/obj/effect/floor_decal/corner/blue{
+/obj/gibspawner/human,
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -8146,17 +8146,17 @@
 /area/miningstation/hangar)
 "EJ" = (
 /obj/structure/broken_cryo,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 10;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
 "EQ" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
 "Fa" = (
@@ -8174,13 +8174,13 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangar)
 "Fy" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
 "FF" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /mob/living/simple_animal/hostile/meat/humansecurity,
@@ -8196,19 +8196,19 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "Gv" = (
-/obj/effect/paint/black,
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/paint/black,
+/obj/wallframe_spawn/reinforced/titanium,
 /turf/space,
 /area/miningstation/bridge)
 "GQ" = (
-/obj/effect/floor_decal/corner/blue,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
 "Ho" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /mob/living/simple_animal/hostile/meat/abomination,
@@ -8266,7 +8266,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/mess)
 "Jd" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /obj/structure/reagent_dispensers/acid,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/prep)
@@ -8287,14 +8287,14 @@
 /area/miningstation/cryo)
 "JC" = (
 /obj/structure/broken_cryo,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 9;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
 "JX" = (
-/obj/effect/shuttle_landmark/nav_miningstation/hangar,
+/obj/shuttle_landmark/nav_miningstation/hangar,
 /turf/simulated/floor/plating,
 /area/miningstation/hangar)
 "Kd" = (
@@ -8335,21 +8335,21 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangar)
 "Lf" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/chief)
 "Li" = (
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
 "Ly" = (
 /obj/structure/sign/bluecross_2,
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/physician2)
 "LT" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -8379,12 +8379,12 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/light,
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "MJ" = (
-/obj/effect/gibspawner/human,
-/obj/effect/floor_decal/corner/blue{
+/obj/gibspawner/human,
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
@@ -8417,7 +8417,7 @@
 /obj/machinery/cryopod{
 	dir = 2
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 6;
 	icon_state = "warning"
 	},
@@ -8447,7 +8447,7 @@
 /obj/machinery/cryopod{
 	dir = 2
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
@@ -8465,7 +8465,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/bridge)
 "OZ" = (
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/walkin)
 "Pk" = (
@@ -8493,16 +8493,16 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "Px" = (
-/obj/effect/paint/black,
+/obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/operationshall)
 "Qb" = (
 /obj/structure/lattice,
-/obj/effect/overmap/visitable/sector/miningstation,
+/obj/overmap/visitable/sector/miningstation,
 /turf/space,
 /area/space)
 "Qf" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -8527,7 +8527,7 @@
 /area/miningstation/operationshall)
 "Rv" = (
 /obj/structure/broken_cryo,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 6;
 	icon_state = "warning"
 	},
@@ -8542,7 +8542,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "Se" = (
@@ -8551,8 +8551,8 @@
 /area/miningstation/prep)
 "Sn" = (
 /obj/structure/closet/emcloset,
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/item/gun/projectile/pistol/throwback,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
@@ -8561,7 +8561,7 @@
 	dir = 4;
 	icon_state = "console"
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -8634,15 +8634,15 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/prep2)
 "VF" = (
-/obj/effect/landmark/corpse/miningstation/deadminersuit,
-/obj/effect/gibspawner/human,
+/obj/landmark/corpse/miningstation/deadminersuit,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/prep2)
 "VL" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -8661,7 +8661,7 @@
 /area/miningstation/prep)
 "Wg" = (
 /obj/structure/broken_cryo,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
@@ -8681,12 +8681,12 @@
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
 "Yq" = (
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall2)
 "Yx" = (
-/obj/effect/paint/black,
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/paint/black,
+/obj/wallframe_spawn/reinforced/titanium,
 /turf/space,
 /area/miningstation/operationshall)
 "YE" = (

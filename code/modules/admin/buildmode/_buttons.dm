@@ -1,4 +1,4 @@
-/obj/effect/bmode
+/obj/bmode
 	density = TRUE
 	anchored = TRUE
 	plane = HUD_PLANE
@@ -6,26 +6,26 @@
 	icon = 'icons/misc/buildmode.dmi'
 	var/datum/click_handler/build_mode/host
 
-/obj/effect/bmode/New(host)
+/obj/bmode/New(host)
 	..()
 	src.host = host
 
-/obj/effect/bmode/Destroy()
+/obj/bmode/Destroy()
 	host = null
 	. = ..()
 
-/obj/effect/bmode/proc/OnClick(list/params)
+/obj/bmode/proc/OnClick(list/params)
 	return
 
-/obj/effect/bmode/dir
+/obj/bmode/dir
 	icon_state = "build"
 	screen_loc = "NORTH,WEST"
 
-/obj/effect/bmode/dir/New()
+/obj/bmode/dir/New()
 	..()
 	set_dir(host.dir)
 
-/obj/effect/bmode/dir/OnClick(list/parameters)
+/obj/bmode/dir/OnClick(list/parameters)
 	switch(dir)
 		if(SOUTH)
 			set_dir(WEST)
@@ -39,21 +39,21 @@
 			set_dir(SOUTH)
 	host.dir = dir
 
-/obj/effect/bmode/help
+/obj/bmode/help
 	icon_state = "buildhelp"
 	screen_loc = "NORTH,WEST+1"
 
-/obj/effect/bmode/help/OnClick()
+/obj/bmode/help/OnClick()
 	host.current_build_mode.Help()
 
-/obj/effect/bmode/mode
+/obj/bmode/mode
 	screen_loc = "NORTH,WEST+2"
 
-/obj/effect/bmode/mode/New()
+/obj/bmode/mode/New()
 	..()
 	icon_state = host.current_build_mode.icon_state
 
-/obj/effect/bmode/mode/OnClick(list/parameters)
+/obj/bmode/mode/OnClick(list/parameters)
 	if(parameters["left"])
 		var/datum/build_mode/build_mode = input("Select build mode", "Select build mode", host.current_build_mode) as null|anything in host.build_modes
 		if(build_mode && host && (build_mode in host.build_modes))
@@ -65,9 +65,9 @@
 	else if(parameters["right"])
 		host.current_build_mode.Configurate()
 
-/obj/effect/bmode/quit
+/obj/bmode/quit
 	icon_state = "buildquit"
 	screen_loc = "NORTH,WEST+3"
 
-/obj/effect/bmode/quit/OnClick()
+/obj/bmode/quit/OnClick()
 	usr.RemoveClickHandler(/datum/click_handler/build_mode)

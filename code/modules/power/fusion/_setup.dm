@@ -37,7 +37,7 @@
 		var/list/delayed_objects = list()
 
 		// SETUP PHASE
-		for(var/obj/effect/engine_setup/S in world)
+		for(var/obj/engine_setup/S in world)
 			var/result = S.activate(0)
 			switch(result)
 				if(SETUP_OK)
@@ -55,7 +55,7 @@
 					continue
 
 		if(!errors)
-			for(var/obj/effect/engine_setup/S in delayed_objects)
+			for(var/obj/engine_setup/S in delayed_objects)
 				var/result = S.activate(1)
 				switch(result)
 					if(SETUP_OK)

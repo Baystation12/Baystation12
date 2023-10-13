@@ -9,17 +9,17 @@
 /turf/simulated/floor/tiled,
 /area/space)
 "d" = (
-/obj/effect/landmark/test/safe_turf,
+/obj/landmark/test/safe_turf,
 /turf/simulated/floor/tiled,
 /area/space)
 "e" = (
-/obj/effect/landmark/start{
+/obj/landmark/start{
 	name = "JoinLate"
 	},
 /turf/simulated/floor/tiled,
 /area/space)
 "f" = (
-/obj/effect/landmark/test/space_turf,
+/obj/landmark/test/space_turf,
 /turf/space,
 /area/space)
 

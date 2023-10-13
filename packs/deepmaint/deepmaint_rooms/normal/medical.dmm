@@ -6,14 +6,14 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "e" = (
-/obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/wallframe_spawn/reinforced/no_grille,
 /obj/machinery/door/blast/regular{
 	id_tag = "deepmaints_med"
 	},
 /turf/simulated/floor/plating,
 /area/map_template/deepmaint)
 "f" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /obj/machinery/body_scanconsole{
@@ -23,32 +23,32 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "g" = (
-/obj/effect/floor_decal/floordetail/edgedrain{
+/obj/floor_decal/floordetail/edgedrain{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "h" = (
-/obj/effect/floor_decal/floordetail/edgedrain{
+/obj/floor_decal/floordetail/edgedrain{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "i" = (
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "j" = (
 /obj/structure/closet/crate/med_crate/toxin,
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "k" = (
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "l" = (
-/obj/effect/floor_decal/floordetail/edgedrain{
+/obj/floor_decal/floordetail/edgedrain{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -57,20 +57,20 @@
 /obj/structure/barricade/spike{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "p" = (
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /obj/machinery/bodyscanner{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "q" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1
 	},
 /obj/machinery/button/blast_door{
@@ -80,7 +80,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "r" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /mob/living/simple_animal/passive/mouse/brown/Tom,
@@ -88,11 +88,11 @@
 /area/map_template/deepmaint)
 "s" = (
 /obj/structure/closet/crate/med_crate/burn,
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "t" = (
-/obj/effect/floor_decal/floordetail/edgedrain,
+/obj/floor_decal/floordetail/edgedrain,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "u" = (
@@ -100,19 +100,19 @@
 	dir = 1;
 	req_access = null
 	},
-/obj/effect/floor_decal/corner/blue/mono,
-/obj/effect/floor_decal/industrial/warning/corner,
+/obj/floor_decal/corner/blue/mono,
+/obj/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "y" = (
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /obj/machinery/bodyscanner{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "A" = (
-/obj/effect/floor_decal/floordetail/edgedrain{
+/obj/floor_decal/floordetail/edgedrain{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
@@ -120,11 +120,11 @@
 "B" = (
 /obj/item/storage/firstaid/surgery,
 /obj/structure/table/standard,
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "C" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /obj/machinery/body_scanconsole{
@@ -134,7 +134,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "D" = (
-/obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/wallframe_spawn/reinforced/no_grille,
 /obj/machinery/door/blast/regular{
 	dir = 4;
 	id_tag = "deepmaints_med"
@@ -142,10 +142,10 @@
 /turf/simulated/floor/plating,
 /area/map_template/deepmaint)
 "E" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 10
 	},
-/obj/effect/floor_decal/floordetail/edgedrain{
+/obj/floor_decal/floordetail/edgedrain{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
@@ -155,7 +155,7 @@
 /area/map_template/deepmaint)
 "G" = (
 /obj/structure/iv_drip,
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "H" = (
@@ -166,7 +166,7 @@
 /area/map_template/deepmaint)
 "J" = (
 /obj/machinery/optable,
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /obj/machinery/light/small/red{
 	dir = 1
 	},
@@ -174,7 +174,7 @@
 /area/map_template/deepmaint)
 "K" = (
 /obj/structure/closet/crate/med_crate/trauma,
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /obj/machinery/light/small{
 	dir = 4
 	},
@@ -190,18 +190,18 @@
 	pixel_y = 32
 	},
 /obj/item/reagent_containers/dropper/peridaxon,
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "N" = (
 /obj/structure/table/standard,
 /obj/item/reagent_containers/chem_disp_cartridge/rezadone,
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /obj/machinery/button/blast_door{
 	id_tag = "deepmaints_med";
 	pixel_y = -25
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -210,7 +210,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "P" = (
-/obj/effect/floor_decal/floordetail/edgedrain{
+/obj/floor_decal/floordetail/edgedrain{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
@@ -219,44 +219,44 @@
 /obj/structure/barricade/spike{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "R" = (
-/obj/effect/floor_decal/floordetail/edgedrain{
+/obj/floor_decal/floordetail/edgedrain{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "S" = (
-/obj/effect/floor_decal/floordetail/edgedrain{
+/obj/floor_decal/floordetail/edgedrain{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "T" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/effect/floor_decal/floordetail/edgedrain{
+/obj/floor_decal/floordetail/edgedrain{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "X" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
-/obj/effect/floor_decal/floordetail/edgedrain{
+/obj/floor_decal/floordetail/edgedrain{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "Y" = (
 /obj/structure/closet/crate/med_crate/oxyloss,
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /obj/machinery/light/small{
 	dir = 8
 	},

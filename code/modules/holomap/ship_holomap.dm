@@ -331,7 +331,7 @@
 
 	//This is where the fun begins
 	if(GLOB.using_map.use_overmap)
-		var/obj/effect/overmap/visitable/O = map_sectors["[z]"]
+		var/obj/overmap/visitable/O = map_sectors["[z]"]
 
 		var/current_z_offset_x = (HOLOMAP_ICON_SIZE / 2) - world.maxx / 2
 		var/current_z_offset_y = (HOLOMAP_ICON_SIZE / 2) - world.maxy / 2

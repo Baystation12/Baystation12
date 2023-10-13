@@ -237,7 +237,7 @@
 /obj/structure/inflatable/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group)
 		return state
-	if(istype(mover, /obj/effect/beam))
+	if(istype(mover, /obj/beam))
 		return !opacity
 	return !density
 

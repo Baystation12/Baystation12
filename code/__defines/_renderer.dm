@@ -264,7 +264,7 @@ GLOBAL_LIST_EMPTY(zmimic_renderers)
 */
 
 
-/// Renders the /obj/effect/effect/warp example effect as well as gravity catapult effects
+/// Renders the /obj/effect/warp example effect as well as gravity catapult effects
 /atom/movable/renderer/warp
 	name = "Warp Effect"
 	group = RENDER_GROUP_NONE
@@ -293,7 +293,7 @@ GLOBAL_LIST_EMPTY(zmimic_renderers)
 
 		if (quality == GLOB.PREF_LOW)
 			QDEL_NULL(gas_heat_object)
-			gas_heat_object = new /obj/effect/heat(null)
+			gas_heat_object = new /obj/heat(null)
 		else
 			QDEL_NULL(gas_heat_object)
 			if (quality == GLOB.PREF_MED)

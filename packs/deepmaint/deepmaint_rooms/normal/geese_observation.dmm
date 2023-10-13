@@ -102,7 +102,7 @@
 /turf/simulated/floor/exoplanet/grass,
 /area/map_template/deepmaint)
 "Q" = (
-/obj/effect/wallframe_spawn/reinforced/bare,
+/obj/wallframe_spawn/reinforced/bare,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "S" = (

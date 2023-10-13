@@ -10,11 +10,11 @@
 #define ADD_ACTIVE_FLUID_SOURCE(T)    SSfluids.water_sources[T] = TRUE
 #define REMOVE_ACTIVE_FLUID_SOURCE(T) SSfluids.water_sources -= T
 
-// Expects /obj/effect/fluid for F.
+// Expects /obj/fluid for F.
 #define ADD_ACTIVE_FLUID(F)           SSfluids.active_fluids[F] = TRUE
 #define REMOVE_ACTIVE_FLUID(F)        SSfluids.active_fluids -= F
 
-// Expects /obj/effect/fluid for F, int for amt.
+// Expects /obj/fluid for F, int for amt.
 #define LOSE_FLUID(F, amt) \
 	F:fluid_amount = max(-1, F:fluid_amount - amt); \
 	ADD_ACTIVE_FLUID(F)
@@ -44,9 +44,9 @@
 		UPDATE_FLUID_BLOCKED_DIRS(next); \
 		if((next.fluid_blocked_dirs & GLOB.reverse_dir[spread_dir]) || !next.CanFluidPass(spread_dir)) continue; \
 		flooded_a_neighbor = TRUE; \
-		var/obj/effect/fluid/F = locate() in next; \
+		var/obj/fluid/F = locate() in next; \
 		if(!F && !dry_run) {\
-			F = new /obj/effect/fluid(next); \
+			F = new /obj/fluid(next); \
 			var/datum/gas_mixture/GM = T:return_air(); \
 			if(GM) F.temperature = GM.temperature; \
 		} \

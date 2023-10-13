@@ -339,7 +339,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		visible_message(SPAN_DANGER("Vomit spews out of the disposal unit!"))
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 		if(istype(src.loc, /turf/simulated))
-			var/obj/effect/decal/cleanable/vomit/splat = new /obj/effect/decal/cleanable/vomit(src.loc)
+			var/obj/decal/cleanable/vomit/splat = new /obj/decal/cleanable/vomit(src.loc)
 			reagents.trans_to_obj(splat, reagents.total_volume)
 			splat.update_icon()
 	reagents.clear_reagents()
@@ -608,7 +608,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 			visible_message(SPAN_DANGER("Vomit seeps out of the disposal outlet!"))
 			playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 			if(istype(src.loc, /turf/simulated))
-				var/obj/effect/decal/cleanable/vomit/splat = new /obj/effect/decal/cleanable/vomit(src.loc)
+				var/obj/decal/cleanable/vomit/splat = new /obj/decal/cleanable/vomit(src.loc)
 				H.reagents.trans_to_obj(splat, H.reagents.total_volume)
 				splat.update_icon()
 
@@ -692,7 +692,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 	return
 
-/obj/effect/decal/cleanable/blood/gibs/pipe_eject(direction)
+/obj/decal/cleanable/blood/gibs/pipe_eject(direction)
 	var/list/dirs
 	if(direction)
 		dirs = list( direction, turn(direction, -45), turn(direction, 45))
@@ -700,7 +700,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		dirs = GLOB.alldirs.Copy()
 	addtimer(new Callback(src, .proc/streak, dirs), 0)
 
-/obj/effect/decal/cleanable/blood/gibs/robot/pipe_eject(direction)
+/obj/decal/cleanable/blood/gibs/robot/pipe_eject(direction)
 	var/list/dirs
 	if(direction)
 		dirs = list( direction, turn(direction, -45), turn(direction, 45))

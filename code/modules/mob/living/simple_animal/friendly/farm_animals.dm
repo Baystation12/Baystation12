@@ -61,8 +61,8 @@
 			if(udder && prob(5))
 				udder.add_reagent(/datum/reagent/drink/milk, rand(5, 10))
 
-		if(locate(/obj/effect/vine) in loc)
-			var/obj/effect/vine/SV = locate() in loc
+		if(locate(/obj/vine) in loc)
+			var/obj/vine/SV = locate() in loc
 			if(prob(60))
 				src.visible_message(SPAN_NOTICE("\The [src] eats the plants."))
 				SV.kill_health(1)
@@ -74,8 +74,8 @@
 			return
 
 		if(!pulledby)
-			var/obj/effect/vine/food
-			food = locate(/obj/effect/vine) in oview(5,loc)
+			var/obj/vine/food
+			food = locate(/obj/vine) in oview(5,loc)
 			if(food)
 				var/step = get_step_to(src, food, 0)
 				Move(step)

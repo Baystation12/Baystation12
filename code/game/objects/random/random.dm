@@ -446,17 +446,17 @@
 
 /obj/random/trash/spawn_choices()
 	return list(/obj/item/remains/lizard,
-				/obj/effect/decal/cleanable/blood/gibs/robot,
-				/obj/effect/decal/cleanable/blood/oil,
-				/obj/effect/decal/cleanable/blood/oil/streak,
-				/obj/effect/decal/cleanable/spiderling_remains,
+				/obj/decal/cleanable/blood/gibs/robot,
+				/obj/decal/cleanable/blood/oil,
+				/obj/decal/cleanable/blood/oil/streak,
+				/obj/decal/cleanable/spiderling_remains,
 				/obj/item/remains/mouse,
-				/obj/effect/decal/cleanable/vomit,
-				/obj/effect/decal/cleanable/blood/splatter,
-				/obj/effect/decal/cleanable/ash,
-				/obj/effect/decal/cleanable/generic,
-				/obj/effect/decal/cleanable/flour,
-				/obj/effect/decal/cleanable/dirt,
+				/obj/decal/cleanable/vomit,
+				/obj/decal/cleanable/blood/splatter,
+				/obj/decal/cleanable/ash,
+				/obj/decal/cleanable/generic,
+				/obj/decal/cleanable/flour,
+				/obj/decal/cleanable/dirt,
 				/obj/item/remains/robot)
 
 
@@ -1247,17 +1247,17 @@ var/global/list/multi_point_spawns
 			/obj/item/trash/syndi_cakes,
 			/obj/item/trash/tray
 		)) + list(
-			/obj/effect/decal/cleanable/spiderling_remains,
+			/obj/decal/cleanable/spiderling_remains,
 			/obj/item/remains/mouse,
 			/obj/item/remains/robot,
 			/obj/item/paper/crumpled,
 			/obj/item/inflatable/torn,
-			/obj/effect/decal/cleanable/molten_item,
+			/obj/decal/cleanable/molten_item,
 			/obj/item/material/shard,
 			/obj/item/hand/missing_card
 		)
 	if (prob(20))
-		return /obj/effect/decal/cleanable/generic
+		return /obj/decal/cleanable/generic
 	if (prob(95))
 		return pick(options)
 	if (prob(75))

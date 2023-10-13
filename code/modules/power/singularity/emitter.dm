@@ -177,7 +177,7 @@
 		var/power_per_shot = (active_power_usage * efficiency) * (burst_time / 10) / burst_shots
 
 		if (prob(35))
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 			s.set_up(5, 1, src)
 			s.start()
 

@@ -29,7 +29,7 @@
 	var/turf/T = get_turf(spell_holder)
 
 	holder.forceMove(T)
-	var/datum/effect/effect/system/smoke_spread/S = new /datum/effect/effect/system/smoke_spread()
+	var/datum/effect/smoke_spread/S = new /datum/effect/smoke_spread()
 	S.set_up(3,0,T)
 	S.start()
 	playsound(src, 'sound/magic/lightningshock.ogg', 50)

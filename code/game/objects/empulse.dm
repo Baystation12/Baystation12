@@ -31,7 +31,7 @@
 		log_and_message_admins(append_admin_tools("EMP with size ([heavy_range], [light_range]) in area [get_area(origin)]", location = epicenter))
 
 	if (heavy_range > 1)
-		new /obj/effect/overlay/self_deleting/emppulse(epicenter)
+		new /obj/overlay/self_deleting/emppulse(epicenter)
 
 	if (heavy_range > light_range)
 		light_range = heavy_range

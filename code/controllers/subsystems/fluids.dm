@@ -58,7 +58,7 @@ SUBSYSTEM_DEF(fluids)
 
 	// We need to iterate through this list a few times, so we're using indexes instead of a while-truncate loop.
 	while (af_index <= length(processing_fluids))
-		var/obj/effect/fluid/F = processing_fluids[af_index++]
+		var/obj/fluid/F = processing_fluids[af_index++]
 		if (QDELETED(F))
 			processing_fluids -= F
 		else
@@ -77,10 +77,10 @@ SUBSYSTEM_DEF(fluids)
 				var/turf/current = get_turf(F)
 				if(istype(current, /turf/simulated/open))
 					var/turf/T = GetBelow(F)
-					var/obj/effect/fluid/other = locate() in T
+					var/obj/fluid/other = locate() in T
 					if((!istype(other) || other.fluid_amount < FLUID_MAX_DEPTH) && T.CanFluidPass(UP))
 						if(!other)
-							other = new /obj/effect/fluid(T)
+							other = new /obj/fluid(T)
 						F.equalizing_fluids += other
 						downward_fluid_overlay_position = length(F.equalizing_fluids)
 			UPDATE_FLUID_BLOCKED_DIRS(F.start_loc)
@@ -97,11 +97,11 @@ SUBSYSTEM_DEF(fluids)
 				var/turf/current = get_turf(F)
 				if((F.fluid_amount + current.height) <= T.height) //Water cannot flow up height differences
 					continue
-				var/obj/effect/fluid/other = locate() in T.contents
+				var/obj/fluid/other = locate() in T.contents
 				if(other && (QDELETED(other) || other.fluid_amount <= FLUID_DELETING))
 					continue
 				if(!other)
-					other = new /obj/effect/fluid(T)
+					other = new /obj/fluid(T)
 					other.temperature = F.temperature
 				F.equalizing_fluids += other
 
@@ -111,7 +111,7 @@ SUBSYSTEM_DEF(fluids)
 	af_index = 1
 
 	while (af_index <= length(processing_fluids))
-		var/obj/effect/fluid/F = processing_fluids[af_index++]
+		var/obj/fluid/F = processing_fluids[af_index++]
 		if (QDELETED(F))
 			processing_fluids -= F
 		else
@@ -125,7 +125,7 @@ SUBSYSTEM_DEF(fluids)
 
 			// Flow downward first, since gravity. TODO: add check for gravity.
 			if(length(F.equalizing_fluids) >= downward_fluid_overlay_position)
-				var/obj/effect/fluid/downward_fluid = F.equalizing_fluids[downward_fluid_overlay_position]
+				var/obj/fluid/downward_fluid = F.equalizing_fluids[downward_fluid_overlay_position]
 				if(downward_fluid.z == F.z-1) // It's below us.
 					F.equalizing_fluids -= downward_fluid
 					var/transfer_amount = min(F.fluid_amount, (FLUID_MAX_DEPTH-downward_fluid.fluid_amount))
@@ -137,7 +137,7 @@ SUBSYSTEM_DEF(fluids)
 
 			var/setting_dir = 0
 
-			for(var/obj/effect/fluid/other in F.equalizing_fluids)
+			for(var/obj/fluid/other in F.equalizing_fluids)
 				if(!istype(other) || QDELETED(other) || other.fluid_amount <= FLUID_DELETING)
 					F.equalizing_fluids -= other
 					continue
@@ -155,7 +155,7 @@ SUBSYSTEM_DEF(fluids)
 				F.equalize_avg_depth = floor(F.equalize_avg_depth/length(F.equalizing_fluids))
 				F.equalize_avg_temp = floor(F.equalize_avg_temp/length(F.equalizing_fluids))
 				for(var/thing in F.equalizing_fluids)
-					var/obj/effect/fluid/other = thing
+					var/obj/fluid/other = thing
 					if(!QDELETED(other))
 						SET_FLUID_DEPTH(other, F.equalize_avg_depth)
 						other.temperature = F.equalize_avg_temp
@@ -169,7 +169,7 @@ SUBSYSTEM_DEF(fluids)
 	af_index = 1
 
 	while (af_index <= length(processing_fluids))
-		var/obj/effect/fluid/F = processing_fluids[af_index++]
+		var/obj/fluid/F = processing_fluids[af_index++]
 		if (QDELETED(F))
 			processing_fluids -= F
 		else
@@ -202,7 +202,7 @@ SUBSYSTEM_DEF(fluids)
 		next_water_act = world.time + water_act_delay
 		af_index = 1
 		while (af_index <= length(processing_fluids))
-			var/obj/effect/fluid/F = processing_fluids[af_index++]
+			var/obj/fluid/F = processing_fluids[af_index++]
 			var/turf/T = get_turf(F)
 			if(istype(T) && !QDELETED(F))
 				for(var/atom/movable/A in T.contents)

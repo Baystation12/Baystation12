@@ -1,6 +1,6 @@
 //quality code theft
 #include "blueriver_areas.dm"
-/obj/effect/overmap/visitable/sector/arcticplanet
+/obj/overmap/visitable/sector/arcticplanet
 	name = "arctic dwarf planet"
 	desc = "Sensor array detects an arctic planet with a small vessel on the planet's surface. Scans further indicate strange energy emissions from below the planet's surface."
 	sector_flags = EMPTY_BITFIELD
@@ -12,7 +12,7 @@
 		"nav_blueriv_antag"
 	)
 
-/obj/effect/overmap/visitable/sector/arcticplanet/New(nloc, max_x, max_y)
+/obj/overmap/visitable/sector/arcticplanet/New(nloc, max_x, max_y)
 	name = "[generate_planet_name()], \a [name]"
 	..()
 
@@ -112,22 +112,22 @@
 	health = 80
 	can_escape = FALSE
 
-/obj/effect/shuttle_landmark/nav_blueriv/nav1
+/obj/shuttle_landmark/nav_blueriv/nav1
 	name = "Arctic Planet Landing Point #1"
 	landmark_tag = "nav_blueriv_1"
 	base_area = /area/bluespaceriver/ground
 
-/obj/effect/shuttle_landmark/nav_blueriv/nav2
+/obj/shuttle_landmark/nav_blueriv/nav2
 	name = "Arctic Planet Landing Point #2"
 	landmark_tag = "nav_blueriv_2"
 	base_area = /area/bluespaceriver/ground
 
-/obj/effect/shuttle_landmark/nav_blueriv/nav3
+/obj/shuttle_landmark/nav_blueriv/nav3
 	name = "Arctic Planet Landing Point #3"
 	landmark_tag = "nav_blueriv_3"
 	base_area = /area/bluespaceriver/ground
 
-/obj/effect/shuttle_landmark/nav_blueriv/nav4
+/obj/shuttle_landmark/nav_blueriv/nav4
 	name = "Arctic Planet Navpoint #4"
 	landmark_tag = "nav_blueriv_antag"
 	base_area = /area/bluespaceriver/ground

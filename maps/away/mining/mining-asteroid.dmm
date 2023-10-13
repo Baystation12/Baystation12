@@ -214,35 +214,35 @@
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "bf" = (
-/obj/effect/overmap/visitable/sector/cluster,
+/obj/overmap/visitable/sector/cluster,
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "cb" = (
-/obj/effect/shuttle_landmark/cluster/nav5,
+/obj/shuttle_landmark/cluster/nav5,
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "db" = (
-/obj/effect/shuttle_landmark/cluster/nav6,
+/obj/shuttle_landmark/cluster/nav6,
 /turf/space,
 /area/space)
 "eb" = (
-/obj/effect/shuttle_landmark/cluster/nav4,
+/obj/shuttle_landmark/cluster/nav4,
 /turf/space,
 /area/space)
 "fb" = (
-/obj/effect/shuttle_landmark/cluster/nav2,
+/obj/shuttle_landmark/cluster/nav2,
 /turf/space,
 /area/space)
 "gb" = (
-/obj/effect/shuttle_landmark/cluster/nav3,
+/obj/shuttle_landmark/cluster/nav3,
 /turf/space,
 /area/space)
 "hb" = (
-/obj/effect/shuttle_landmark/cluster/nav1,
+/obj/shuttle_landmark/cluster/nav1,
 /turf/space,
 /area/space)
 "ib" = (
-/obj/effect/shuttle_landmark/cluster/nav7,
+/obj/shuttle_landmark/cluster/nav7,
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "jb" = (

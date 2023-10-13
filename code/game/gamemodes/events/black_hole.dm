@@ -1,4 +1,4 @@
-/obj/effect/bhole
+/obj/bhole
 	name = "black hole"
 	icon = 'icons/obj/unused.dmi'
 	desc = "FUCK FUCK FUCK AAAHHH!"
@@ -8,12 +8,12 @@
 	density = FALSE
 	anchored = TRUE
 
-/obj/effect/bhole/Initialize()
+/obj/bhole/Initialize()
 	. = ..()
 	spawn(4)
 		controller()
 
-/obj/effect/bhole/proc/controller()
+/obj/bhole/proc/controller()
 	while(src)
 
 		if(!isturf(loc))
@@ -59,7 +59,7 @@
 			step(src,pick(GLOB.alldirs))
 			src.anchored = TRUE
 
-/obj/effect/bhole/proc/grav(r, ex_act_force, pull_chance, turf_removal_chance)
+/obj/bhole/proc/grav(r, ex_act_force, pull_chance, turf_removal_chance)
 	if(!isturf(loc))	//blackhole cannot be contained inside anything. Weird stuff might happen
 		qdel(src)
 		return
@@ -70,7 +70,7 @@
 		affect_coord(x-r, y-t, ex_act_force, pull_chance, turf_removal_chance)
 	return
 
-/obj/effect/bhole/proc/affect_coord(x, y, ex_act_force, pull_chance, turf_removal_chance)
+/obj/bhole/proc/affect_coord(x, y, ex_act_force, pull_chance, turf_removal_chance)
 	//Get turf at coordinate
 	var/turf/T = locate(x, y, z)
 	if(isnull(T))	return

@@ -44,13 +44,13 @@
 /turf/simulated/wall,
 /area/map_template/deepmaint)
 "iu" = (
-/obj/effect/floor_decal/corner/blue/diagonal{
+/obj/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "iF" = (
-/obj/effect/floor_decal/corner/blue/diagonal{
+/obj/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
 /obj/machinery/light/small,
@@ -132,7 +132,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/map_template/deepmaint)
 "rn" = (
-/obj/effect/wingrille_spawn,
+/obj/wingrille_spawn,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "sG" = (
@@ -233,7 +233,7 @@
 /turf/simulated/floor/lino,
 /area/map_template/deepmaint)
 "Ep" = (
-/obj/effect/wingrille_spawn,
+/obj/wingrille_spawn,
 /turf/simulated/wall,
 /area/map_template/deepmaint)
 "Gt" = (
@@ -275,7 +275,7 @@
 /turf/simulated/floor/carpet/red,
 /area/map_template/deepmaint)
 "OH" = (
-/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/floor_decal/corner/blue/diagonal,
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "Pd" = (
@@ -334,7 +334,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/map_template/deepmaint)
 "Xa" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,

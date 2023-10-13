@@ -79,7 +79,7 @@ var/global/explosion_in_progress = 0
 	explosion_turfs[src] = power
 /*
 	sleep(2)
-	var/obj/effect/debugging/M = locate() in src
+	var/obj/debugging/M = locate() in src
 	if (!M)
 		M = new(src, power, direction)
 	M.maptext = "[power] vs [src.get_explosion_resistance()]"

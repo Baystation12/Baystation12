@@ -13,8 +13,8 @@
 /turf/simulated/floor/plating/vox,
 /area/map_template/vox_raider)
 "ac" = (
-/obj/effect/paint/vox,
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/paint/vox,
+/obj/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating/vox,
 /area/map_template/vox_raider)
 "ad" = (
@@ -22,7 +22,7 @@
 /obj/machinery/light/vox{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/b_green/mono,
+/obj/floor_decal/corner/b_green/mono,
 /obj/item/material/hatchet/machete/steel,
 /obj/item/material/hatchet/machete/steel,
 /obj/item/material/hatchet/machete/steel,
@@ -33,7 +33,7 @@
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "ae" = (
-/obj/effect/paint/vox,
+/obj/paint/vox,
 /turf/simulated/wall/titanium,
 /area/map_template/vox_raider)
 "af" = (
@@ -46,7 +46,7 @@
 /area/map_template/vox_raider)
 "ag" = (
 /obj/structure/table/rack,
-/obj/effect/floor_decal/corner/b_green/mono,
+/obj/floor_decal/corner/b_green/mono,
 /obj/item/gun/projectile/heavysniper/boltaction,
 /obj/item/gun/projectile/pistol/broomstick,
 /obj/item/gun/projectile/pistol/throwback,
@@ -68,8 +68,8 @@
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "aj" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/vox,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/vox,
 /turf/simulated/floor/plating/vox,
 /area/map_template/vox_raider)
 "ak" = (
@@ -77,14 +77,14 @@
 /obj/item/reagent_containers/ivbag/blood/vox/oneg,
 /obj/item/reagent_containers/ivbag/blood/vox/oneg,
 /obj/structure/iv_stand,
-/obj/effect/floor_decal/corner/yellow/full,
+/obj/floor_decal/corner/yellow/full,
 /turf/simulated/floor/tiled/freezer{
 	initial_gas = list("nitrogen" = 101.383)
 	},
 /area/map_template/vox_raider)
 "al" = (
 /obj/machinery/optable,
-/obj/effect/floor_decal/corner/yellow/full,
+/obj/floor_decal/corner/yellow/full,
 /turf/simulated/floor/tiled/freezer{
 	initial_gas = list("nitrogen" = 101.383)
 	},
@@ -93,13 +93,13 @@
 /obj/structure/table/rack,
 /obj/item/clothing/mask/gas/swat/vox,
 /obj/item/clothing/under/vox/vox_casual,
-/obj/effect/decal/cleanable/filth,
+/obj/decal/cleanable/filth,
 /obj/item/clothing/suit/armor/vox_scrap,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "an" = (
 /obj/structure/table/rack,
-/obj/effect/floor_decal/corner/b_green/mono,
+/obj/floor_decal/corner/b_green/mono,
 /obj/item/material/harpoon,
 /obj/item/material/harpoon,
 /turf/simulated/floor/tiled/dark/monotile/vox,
@@ -138,7 +138,7 @@
 /obj/item/storage/box/freezer,
 /obj/item/storage/firstaid/surgery,
 /obj/item/stack/nanopaste,
-/obj/effect/floor_decal/corner/yellow/full,
+/obj/floor_decal/corner/yellow/full,
 /turf/simulated/floor/tiled/freezer{
 	initial_gas = list("nitrogen" = 101.383)
 	},
@@ -150,7 +150,7 @@
 /obj/machinery/bodyscanner{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/yellow/full,
+/obj/floor_decal/corner/yellow/full,
 /turf/simulated/floor/tiled/freezer{
 	initial_gas = list("nitrogen" = 101.383)
 	},
@@ -159,7 +159,7 @@
 /obj/machinery/body_scanconsole{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/yellow/full,
+/obj/floor_decal/corner/yellow/full,
 /turf/simulated/floor/tiled/freezer{
 	initial_gas = list("nitrogen" = 101.383)
 	},
@@ -168,7 +168,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/yellow/full,
+/obj/floor_decal/corner/yellow/full,
 /turf/simulated/floor/tiled/freezer{
 	initial_gas = list("nitrogen" = 101.383)
 	},
@@ -180,7 +180,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/yellow/full,
+/obj/floor_decal/corner/yellow/full,
 /turf/simulated/floor/tiled/freezer{
 	initial_gas = list("nitrogen" = 101.383)
 	},
@@ -207,7 +207,7 @@
 /obj/machinery/light/vox{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/yellow/full,
+/obj/floor_decal/corner/yellow/full,
 /turf/simulated/floor/tiled/freezer{
 	initial_gas = list("nitrogen" = 101.383)
 	},
@@ -226,7 +226,7 @@
 	dir = 4
 	},
 /obj/machinery/light/vox,
-/obj/effect/floor_decal/corner/yellow/full,
+/obj/floor_decal/corner/yellow/full,
 /turf/simulated/floor/tiled/freezer{
 	initial_gas = list("nitrogen" = 101.383)
 	},
@@ -245,7 +245,7 @@
 	dir = 4;
 	level = 2
 	},
-/obj/effect/floor_decal/corner/yellow/full,
+/obj/floor_decal/corner/yellow/full,
 /obj/item/storage/box/detergent,
 /obj/item/storage/box/detergent,
 /turf/simulated/floor/tiled/freezer{
@@ -256,7 +256,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/yellow/full,
+/obj/floor_decal/corner/yellow/full,
 /turf/simulated/floor/tiled/freezer{
 	initial_gas = list("nitrogen" = 101.383)
 	},
@@ -265,10 +265,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/landmark{
+/obj/landmark{
 	name = "Vox-Spawn"
 	},
-/obj/effect/floor_decal/corner/yellow/full,
+/obj/floor_decal/corner/yellow/full,
 /turf/simulated/floor/tiled/freezer{
 	initial_gas = list("nitrogen" = 101.383)
 	},
@@ -278,7 +278,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/yellow/full,
+/obj/floor_decal/corner/yellow/full,
 /turf/simulated/floor/tiled/freezer{
 	initial_gas = list("nitrogen" = 101.383)
 	},
@@ -291,7 +291,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/yellow/full,
+/obj/floor_decal/corner/yellow/full,
 /turf/simulated/floor/tiled/freezer{
 	initial_gas = list("nitrogen" = 101.383)
 	},
@@ -307,7 +307,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/b_green{
+/obj/floor_decal/corner/b_green{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/dark/vox,
@@ -328,14 +328,14 @@
 /turf/simulated/floor/shuttle_ceiling/vox,
 /area/map_template/vox_raider)
 "ee" = (
-/obj/effect/floor_decal/corner/b_green/half,
+/obj/floor_decal/corner/b_green/half,
 /obj/machinery/door/airlock/hatch,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "ej" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/b_green/half,
+/obj/floor_decal/corner/b_green/half,
 /obj/machinery/door/airlock/hatch,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
@@ -381,7 +381,7 @@
 "eG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/b_green{
+/obj/floor_decal/corner/b_green{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/dark/vox,
@@ -400,7 +400,7 @@
 /area/map_template/vox_raider)
 "eM" = (
 /obj/machinery/power/smes/buildable/preset/admin,
-/obj/effect/floor_decal/industrial/hatch/blue,
+/obj/floor_decal/industrial/hatch/blue,
 /obj/structure/cable/green{
 	d2 = 8;
 	icon_state = "0-8"
@@ -413,18 +413,18 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/effect/floor_decal/industrial/hatch/orange,
+/obj/floor_decal/industrial/hatch/orange,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "eQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/b_green{
+/obj/floor_decal/corner/b_green{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "eW" = (
-/obj/effect/floor_decal/corner/b_green/three_quarters{
+/obj/floor_decal/corner/b_green/three_quarters{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/vox,
@@ -440,7 +440,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/b_green{
+/obj/floor_decal/corner/b_green{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/dark/vox,
@@ -449,7 +449,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/b_green/three_quarters{
+/obj/floor_decal/corner/b_green/three_quarters{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/vox,
@@ -459,10 +459,10 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/landmark{
+/obj/landmark{
 	name = "Vox-Spawn"
 	},
-/obj/effect/floor_decal/corner/b_green/three_quarters,
+/obj/floor_decal/corner/b_green/three_quarters,
 /turf/simulated/floor/tiled/dark/vox,
 /area/map_template/vox_raider)
 "fV" = (
@@ -472,7 +472,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/b_green/three_quarters{
+/obj/floor_decal/corner/b_green/three_quarters{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/vox,
@@ -486,7 +486,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/b_green{
+/obj/floor_decal/corner/b_green{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/dark/vox,
@@ -499,7 +499,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/floor_decal/corner/b_green{
+/obj/floor_decal/corner/b_green{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/dark/vox,
@@ -515,7 +515,7 @@
 /obj/structure/bed/chair/comfy/green{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/b_green,
+/obj/floor_decal/corner/b_green,
 /turf/simulated/floor/tiled/dark/vox,
 /area/map_template/vox_raider)
 "pU" = (
@@ -524,18 +524,18 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/effect/floor_decal/corner/b_green{
+/obj/floor_decal/corner/b_green{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/dark/vox,
 /area/map_template/vox_raider)
 "qj" = (
-/obj/effect/floor_decal/corner/b_green/three_quarters,
+/obj/floor_decal/corner/b_green/three_quarters,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/dark/vox,
 /area/map_template/vox_raider)
 "rM" = (
-/obj/effect/paint/vox,
+/obj/paint/vox,
 /obj/machinery/atmospherics/pipe/simple/hidden/black{
 	dir = 4
 	},
@@ -548,7 +548,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/b_green/full,
+/obj/floor_decal/corner/b_green/full,
 /turf/simulated/floor/tiled/dark/vox,
 /area/map_template/vox_raider)
 "tN" = (
@@ -558,14 +558,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/b_green/full,
+/obj/floor_decal/corner/b_green/full,
 /turf/simulated/floor/tiled/dark/vox,
 /area/map_template/vox_raider)
 "tW" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/b_green/full,
+/obj/floor_decal/corner/b_green/full,
 /turf/simulated/floor/tiled/dark/vox,
 /area/map_template/vox_raider)
 "vU" = (
@@ -581,7 +581,7 @@
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "vX" = (
-/obj/effect/overmap/visitable/sector/vox_start,
+/obj/overmap/visitable/sector/vox_start,
 /turf/space,
 /area/space)
 "wm" = (
@@ -592,13 +592,13 @@
 /area/map_template/vox_raider)
 "ww" = (
 /obj/machinery/light/vox,
-/obj/effect/landmark{
+/obj/landmark{
 	name = "Vox-Spawn"
 	},
 /obj/structure/bed/chair/comfy/green{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/b_green{
+/obj/floor_decal/corner/b_green{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/vox,
@@ -608,7 +608,7 @@
 	dir = 4;
 	level = 2
 	},
-/obj/effect/floor_decal/corner/b_green{
+/obj/floor_decal/corner/b_green{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/dark/vox,
@@ -635,7 +635,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/b_green/three_quarters{
+/obj/floor_decal/corner/b_green/three_quarters{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/vox,
@@ -657,7 +657,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/b_green/half{
+/obj/floor_decal/corner/b_green/half{
 	dir = 1
 	},
 /obj/machinery/door/airlock/multi_tile{
@@ -672,7 +672,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/b_green/three_quarters{
+/obj/floor_decal/corner/b_green/three_quarters{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/vox,
@@ -680,13 +680,13 @@
 "yQ" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/obj/effect/floor_decal/corner/b_green{
+/obj/floor_decal/corner/b_green{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/dark/vox,
 /area/map_template/vox_raider)
 "zx" = (
-/obj/effect/floor_decal/corner/b_green/full,
+/obj/floor_decal/corner/b_green/full,
 /turf/simulated/floor/tiled/dark/vox,
 /area/map_template/vox_raider)
 "Ah" = (
@@ -699,15 +699,15 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/shuttle_landmark/vox_raider/start,
-/obj/effect/overmap/visitable/ship/landable/vox_raider,
-/obj/effect/floor_decal/corner/b_green{
+/obj/shuttle_landmark/vox_raider/start,
+/obj/overmap/visitable/ship/landable/vox_raider,
+/obj/floor_decal/corner/b_green{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/dark/vox,
 /area/map_template/vox_raider)
 "Am" = (
-/obj/effect/floor_decal/corner/b_green{
+/obj/floor_decal/corner/b_green{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/dark/vox,
@@ -719,7 +719,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/b_green{
+/obj/floor_decal/corner/b_green{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/dark/vox,
@@ -731,7 +731,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/b_green/full,
+/obj/floor_decal/corner/b_green/full,
 /turf/simulated/floor/tiled/dark/vox,
 /area/map_template/vox_raider)
 "Db" = (
@@ -751,7 +751,7 @@
 /area/map_template/vox_raider)
 "DZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/b_green{
+/obj/floor_decal/corner/b_green{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/dark/vox,
@@ -777,10 +777,10 @@
 	pixel_y = -24;
 	req_access = list("ACCESS_SYNDICATE")
 	},
-/obj/effect/landmark{
+/obj/landmark{
 	name = "Vox-Spawn"
 	},
-/obj/effect/floor_decal/corner/b_green{
+/obj/floor_decal/corner/b_green{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/dark/vox,
@@ -792,7 +792,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/b_green/three_quarters{
+/obj/floor_decal/corner/b_green/three_quarters{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/vox,
@@ -807,7 +807,7 @@
 "JN" = (
 /obj/machinery/door/airlock/hatch,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/b_green/half{
+/obj/floor_decal/corner/b_green/half{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/monotile/vox,
@@ -816,7 +816,7 @@
 /obj/machinery/door/airlock/hatch,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/b_green/half{
+/obj/floor_decal/corner/b_green/half{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile/vox,
@@ -865,8 +865,8 @@
 /turf/simulated/floor/shuttle_ceiling/vox,
 /area/map_template/vox_raider)
 "OH" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/vox,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/vox,
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
 	dir = 8
 	},
@@ -882,7 +882,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/b_green{
+/obj/floor_decal/corner/b_green{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/dark/vox,
@@ -891,12 +891,12 @@
 /obj/machinery/light/vox{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/b_green/full,
+/obj/floor_decal/corner/b_green/full,
 /turf/simulated/floor/tiled/dark/vox,
 /area/map_template/vox_raider)
 "Ry" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/b_green/half,
+/obj/floor_decal/corner/b_green/half,
 /obj/machinery/door/airlock/hatch,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
@@ -920,17 +920,17 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
 	dir = 6
 	},
-/obj/effect/landmark{
+/obj/landmark{
 	name = "Vox-Spawn"
 	},
 /turf/simulated/floor/tiled/dark/vox,
 /area/map_template/vox_raider)
 "UC" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
 	dir = 8
 	},
-/obj/effect/paint/vox,
+/obj/paint/vox,
 /turf/simulated/floor/plating/vox,
 /area/map_template/vox_raider)
 "UY" = (
@@ -941,7 +941,7 @@
 /turf/simulated/floor/plating/vox,
 /area/map_template/vox_raider)
 "Vf" = (
-/obj/effect/floor_decal/corner/b_green/half,
+/obj/floor_decal/corner/b_green/half,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)
 "Ww" = (

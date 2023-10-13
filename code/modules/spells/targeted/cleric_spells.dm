@@ -166,13 +166,13 @@
 	amt_dam_tox = -100
 	amt_dam_robo = -1000
 	hud_state = "trance"
-	var/obj/effect/effect
+	var/obj/effect
 
 /spell/targeted/heal_target/trance/cast(list/targets, mob/user)
 	for(var/t in targets)
 		var/mob/living/L = t
 		var/turf/T = get_turf(L)
-		effect = new /obj/effect/rift(T)
+		effect = new /obj/rift(T)
 		effect.color = "f0e68c"
 		L.forceMove(effect)
 		var/time = (L.getBruteLoss() + L.getFireLoss()) * 20
@@ -193,7 +193,7 @@
 		charge_max += 300
 		QDEL_NULL(effect)
 
-/obj/effect/rift
+/obj/rift
 	name = "rift"
 	desc = "a tear in space and time."
 	icon = 'icons/obj/cult.dmi'
@@ -202,7 +202,7 @@
 	anchored = TRUE
 	density = FALSE
 
-/obj/effect/rift/Destroy()
+/obj/rift/Destroy()
 	for(var/o in contents)
 		var/atom/movable/M = o
 		M.dropInto(loc)

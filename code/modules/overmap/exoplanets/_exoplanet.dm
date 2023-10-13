@@ -1,6 +1,6 @@
 GLOBAL_VAR(planet_repopulation_disabled)
 
-/obj/effect/overmap/visitable/sector/exoplanet
+/obj/overmap/visitable/sector/exoplanet
 	name = "exoplanet"
 	icon_state = "globe"
 	sector_flags = OVERMAP_SECTOR_KNOWN
@@ -32,7 +32,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 
 	var/maxx
 	var/maxy
-	var/landmark_type = /obj/effect/shuttle_landmark/automatic
+	var/landmark_type = /obj/shuttle_landmark/automatic
 
 	var/list/rock_colors = list(COLOR_ASTEROID_ROCK)
 	var/list/plant_colors = list("RANDOM")
@@ -78,13 +78,13 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	)
 	var/habitability_class
 
-/obj/effect/overmap/visitable/sector/exoplanet/proc/generate_habitability()
+/obj/overmap/visitable/sector/exoplanet/proc/generate_habitability()
 	if (isnum(habitability_distribution))
 		habitability_class = habitability_distribution
 	else
 		habitability_class = pickweight_index(habitability_distribution)
 
-/obj/effect/overmap/visitable/sector/exoplanet/New(nloc, max_x, max_y)
+/obj/overmap/visitable/sector/exoplanet/New(nloc, max_x, max_y)
 	if (!GLOB.using_map.use_overmap)
 		return
 
@@ -123,7 +123,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 		possible_features += new ruin
 	..()
 
-/obj/effect/overmap/visitable/sector/exoplanet/proc/build_level()
+/obj/overmap/visitable/sector/exoplanet/proc/build_level()
 	generate_habitability()
 	generate_atmosphere()
 	for (var/datum/exoplanet_theme/T in themes)
@@ -153,7 +153,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	START_PROCESSING(SSobj, src)
 
 //attempt at more consistent history generation for xenoarch finds.
-/obj/effect/overmap/visitable/sector/exoplanet/proc/get_engravings()
+/obj/overmap/visitable/sector/exoplanet/proc/get_engravings()
 	if (!length(actors))
 		actors += pick("alien humanoid","an amorphic blob","a short, hairy being","a rodent-like creature","a robot","a primate","a reptilian alien","an unidentifiable object","a statue","a starship","unusual devices","a structure")
 		actors += pick("alien humanoids","amorphic blobs","short, hairy beings","rodent-like creatures","robots","primates","reptilian aliens")
@@ -166,7 +166,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	engravings += "."
 	return engravings
 
-/obj/effect/overmap/visitable/sector/exoplanet/Process(wait, tick)
+/obj/overmap/visitable/sector/exoplanet/Process(wait, tick)
 	if (length(animals) < 0.5*max_animal_count && !repopulating)
 		repopulating = TRUE
 		max_animal_count = round(max_animal_count * 0.5)
@@ -193,12 +193,12 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	if(sun_last_process <= (world.time - sun_process_interval))
 		update_sun()
 
-/obj/effect/overmap/visitable/sector/exoplanet/proc/generate_daycycle()
+/obj/overmap/visitable/sector/exoplanet/proc/generate_daycycle()
 	daycycle = rand(daycycle_range[1], daycycle_range[2])
 	update_sun()
 
 // This changes the position of the sun on the planet.
-/obj/effect/overmap/visitable/sector/exoplanet/proc/update_sun()
+/obj/overmap/visitable/sector/exoplanet/proc/update_sun()
 	if(sun_last_process == world.time) //For now, calling it several times in same frame is not valid. Add a parameter to ignore this if weather is added
 		return
 	sun_last_process = world.time
@@ -269,7 +269,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	else
 		ambient_group_index = SSambient_lighting.create_ambient_group(new_color, new_brightness)
 
-/obj/effect/overmap/visitable/sector/exoplanet/proc/generate_map()
+/obj/overmap/visitable/sector/exoplanet/proc/generate_map()
 	var/list/grasscolors = plant_colors.Copy()
 	grasscolors -= "RANDOM"
 	if (length(grasscolors))
@@ -292,27 +292,27 @@ GLOBAL_VAR(planet_repopulation_disabled)
 			else
 				new map_type(null,1,1,zlevel,maxx,maxy,0,1,1,planetary_area)
 
-/obj/effect/overmap/visitable/sector/exoplanet/proc/generate_features()
+/obj/overmap/visitable/sector/exoplanet/proc/generate_features()
 	spawned_features = seedRuins(map_z, features_budget, possible_features, /area/exoplanet, maxx, maxy)
 
-/obj/effect/overmap/visitable/sector/exoplanet/proc/update_biome()
+/obj/overmap/visitable/sector/exoplanet/proc/update_biome()
 	for (var/datum/seed/S in seeds)
 		adapt_seed(S)
 
 	for (var/mob/living/simple_animal/A in animals)
 		adapt_animal(A)
 
-/obj/effect/landmark/exoplanet_spawn/Initialize()
+/obj/landmark/exoplanet_spawn/Initialize()
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/effect/landmark/exoplanet_spawn/LateInitialize(mapload)
-	var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
+/obj/landmark/exoplanet_spawn/LateInitialize(mapload)
+	var/obj/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 	if (istype(E))
 		do_spawn(E)
 
 //Tries to generate num landmarks, but avoids repeats.
-/obj/effect/overmap/visitable/sector/exoplanet/proc/generate_landing(num = 1)
+/obj/overmap/visitable/sector/exoplanet/proc/generate_landing(num = 1)
 	var/places = list()
 	var/attempts = 30*num
 	var/new_type = landmark_type
@@ -332,7 +332,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 				if (check_collision(T.loc, block_to_check)) //While we have lots of patience, ensure landability
 					valid = FALSE
 			else //Running out of patience, but would rather not clear ruins, so switch to clearing landmarks and bypass landability check
-				new_type = /obj/effect/shuttle_landmark/automatic/clearing
+				new_type = /obj/shuttle_landmark/automatic/clearing
 
 			if (!valid)
 				continue
@@ -341,7 +341,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 		places += T
 		new new_type(T)
 
-/obj/effect/overmap/visitable/sector/exoplanet/get_scan_data(mob/user)
+/obj/overmap/visitable/sector/exoplanet/get_scan_data(mob/user)
 	. = ..()
 	var/list/extra_data = list()
 	if (atmosphere)
@@ -376,7 +376,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 			extra_data += T.get_sensor_data()
 	. += jointext(extra_data, "<br>")
 
-/obj/effect/overmap/visitable/sector/exoplanet/proc/get_surface_color()
+/obj/overmap/visitable/sector/exoplanet/proc/get_surface_color()
 	return surface_color
 
 /area/exoplanet

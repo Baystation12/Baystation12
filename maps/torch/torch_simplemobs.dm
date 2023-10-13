@@ -1,13 +1,13 @@
-/obj/effect/landmark/corpse/fleet
+/obj/landmark/corpse/fleet
 	name = "Fleet Armsman"
 	corpse_outfits = list(/singleton/hierarchy/outfit/job/torch/ert/hostile)
 	spawn_flags = CORPSE_SPAWNER_RANDOM_NAMELESS | CORPSE_SPAWNER_ALL_SKIPS
 
-/obj/effect/landmark/corpse/fleet/leader
+/obj/landmark/corpse/fleet/leader
 	name = "Fleet Team Leader"
 	corpse_outfits = list(/singleton/hierarchy/outfit/job/torch/ert/hostile/leader)
 
-/obj/effect/landmark/corpse/fleet/space
+/obj/landmark/corpse/fleet/space
 	name = "Fleet Assault Armsman"
 	corpse_outfits = list(/singleton/hierarchy/outfit/job/torch/ert/hostile/suit)
 
@@ -76,7 +76,7 @@
 	icon_state = "fleetarmsmanarmed"
 	icon_living = "fleetarmsmanarmed"
 
-	corpse = /obj/effect/landmark/corpse/fleet
+	corpse = /obj/landmark/corpse/fleet
 
 	casingtype = /obj/item/ammo_casing/pistol
 	projectiletype = /obj/item/projectile/bullet/pistol
@@ -119,7 +119,7 @@
 	weapon1 = /obj/item/gun/projectile/automatic/machine_pistol
 	status_flags = EMPTY_BITFIELD
 
-	corpse = /obj/effect/landmark/corpse/fleet/leader
+	corpse = /obj/landmark/corpse/fleet/leader
 
 	ai_holder = /datum/ai_holder/simple_animal/humanoid/hostile/fleet/ranged/teamlead
 	rapid = TRUE
@@ -138,7 +138,7 @@
 	icon_state = "fleetassault"
 	icon_living = "fleetassault"
 	icon_dead = "fleetassault_dead"
-	corpse = /obj/effect/landmark/corpse/fleet/space
+	corpse = /obj/landmark/corpse/fleet/space
 	ranged = TRUE
 	natural_armor = list(
 		melee = ARMOR_MELEE_KNIVES,

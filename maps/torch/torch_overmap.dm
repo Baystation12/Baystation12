@@ -1,4 +1,4 @@
-/obj/effect/overmap/visitable/ship/torch
+/obj/overmap/visitable/ship/torch
 	name = "SEV Torch"
 	desc = "A frankensteined HNS Mako-class corvette, broadcasting SCGEC codes and the designation \"SEV Torch, HSC-4-13-X\"."
 	fore_dir = WEST
@@ -6,9 +6,9 @@
 	burn_delay = 2 SECONDS
 	sector_flags = OVERMAP_SECTOR_KNOWN|OVERMAP_SECTOR_IN_SPACE|OVERMAP_SECTOR_BASE
 	known_ships = list(
-		/obj/effect/overmap/visitable/ship/landable/exploration_shuttle,
-		/obj/effect/overmap/visitable/ship/landable/aquila,
-		/obj/effect/overmap/visitable/ship/landable/guppy
+		/obj/overmap/visitable/ship/landable/exploration_shuttle,
+		/obj/overmap/visitable/ship/landable/aquila,
+		/obj/overmap/visitable/ship/landable/guppy
 	)
 
 	initial_restricted_waypoints = list(
@@ -81,7 +81,7 @@
 		"nav_ert_hanger",
 	)
 
-/obj/effect/overmap/visitable/ship/landable/exploration_shuttle
+/obj/overmap/visitable/ship/landable/exploration_shuttle
 	name = "Charon"
 	desc = "An SSE-U11 long range shuttle, broadcasting SCGEC codes and the callsign \"Torch-2 Charon\"."
 	shuttle = "Charon"
@@ -92,12 +92,12 @@
 	skill_needed = SKILL_BASIC
 	vessel_size = SHIP_SIZE_SMALL
 	known_ships = list(
-		/obj/effect/overmap/visitable/ship/torch,
-		/obj/effect/overmap/visitable/ship/landable/aquila,
-		/obj/effect/overmap/visitable/ship/landable/guppy
+		/obj/overmap/visitable/ship/torch,
+		/obj/overmap/visitable/ship/landable/aquila,
+		/obj/overmap/visitable/ship/landable/guppy
 	)
 
-/obj/effect/overmap/visitable/ship/landable/aquila
+/obj/overmap/visitable/ship/landable/aquila
 	name = "Aquila"
 	desc = "A PM-24 modular transport, broadcasting SCGEC codes and the callsign \"Torch-1 Aquila\"."
 	shuttle = "Aquila"
@@ -107,12 +107,12 @@
 	fore_dir = NORTH
 	vessel_size = SHIP_SIZE_SMALL
 	known_ships = list(
-		/obj/effect/overmap/visitable/ship/torch,
-		/obj/effect/overmap/visitable/ship/landable/exploration_shuttle,
-		/obj/effect/overmap/visitable/ship/landable/guppy
+		/obj/overmap/visitable/ship/torch,
+		/obj/overmap/visitable/ship/landable/exploration_shuttle,
+		/obj/overmap/visitable/ship/landable/guppy
 	)
 
-/obj/effect/overmap/visitable/ship/landable/guppy
+/obj/overmap/visitable/ship/landable/guppy
 	name = "Guppy"
 	desc = "An SSE-U3 utility pod, broadcasting SCGEC codes and the callsign \"Torch-3 Guppy\"."
 	shuttle = "Guppy"
@@ -123,9 +123,9 @@
 	skill_needed = SKILL_BASIC
 	vessel_size = SHIP_SIZE_TINY
 	known_ships = list(
-		/obj/effect/overmap/visitable/ship/torch,
-		/obj/effect/overmap/visitable/ship/landable/exploration_shuttle,
-		/obj/effect/overmap/visitable/ship/landable/aquila
+		/obj/overmap/visitable/ship/torch,
+		/obj/overmap/visitable/ship/landable/exploration_shuttle,
+		/obj/overmap/visitable/ship/landable/aquila
 	)
 
 /obj/machinery/computer/shuttle_control/explore/aquila

@@ -19,13 +19,13 @@ var/global/sent_spiders_to_station = 0
 
 /datum/event/spider_infestation/announce()
 	GLOB.using_map.unidentified_lifesigns_announcement()
-	var/obj/effect/overmap/visitable/O = map_sectors["[pick(affecting_z)]"]
+	var/obj/overmap/visitable/O = map_sectors["[pick(affecting_z)]"]
 	if (!O)
 		return
 
 	O.add_scan_data("spider_infestation", SPAN_COLOR(COLOR_RED, "Unidentified hostile lifeforms detected."))
 
-	addtimer(new Callback(O, /obj/effect/overmap/proc/remove_scan_data, "spider_infestation"), 10 MINUTES)
+	addtimer(new Callback(O, /obj/overmap/proc/remove_scan_data, "spider_infestation"), 10 MINUTES)
 
 /datum/event/spider_infestation/start()
 	var/list/vents = list()
@@ -37,9 +37,9 @@ var/global/sent_spiders_to_station = 0
 	while((spawncount >= 1) && length(vents))
 		var/obj/vent = pick(vents)
 		if (guaranteed_to_grow > 0)
-			new /obj/effect/spider/spiderling/growing(vent.loc)
+			new /obj/spider/spiderling/growing(vent.loc)
 			guaranteed_to_grow--
 		else
-			new /obj/effect/spider/spiderling(vent.loc)
+			new /obj/spider/spiderling(vent.loc)
 		vents -= vent
 		spawncount--

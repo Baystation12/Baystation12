@@ -6,7 +6,7 @@
 	det_time = 20
 	item_state = "flashbang"
 	slot_flags = SLOT_BELT
-	var/datum/effect/effect/system/smoke_spread/bad/smoke
+	var/datum/effect/smoke_spread/bad/smoke
 	var/smoke_times = 4
 
 /obj/item/grenade/smokebomb/Destroy()
@@ -16,11 +16,11 @@
 
 /obj/item/grenade/smokebomb/detonate(mob/living/user)
 	playsound(src.loc, 'sound/effects/smoke.ogg', 50, 1, -3)
-	smoke = new /datum/effect/effect/system/smoke_spread/bad
+	smoke = new /datum/effect/smoke_spread/bad
 	smoke.attach(src)
 	smoke.set_up(10, 0, get_turf(src))
 	START_PROCESSING(SSobj, src)
-	for(var/obj/effect/blob/B in view(8,src))
+	for(var/obj/blob/B in view(8,src))
 		var/damage = round(30/(get_dist(B,src)+1))
 		B.damage_health(damage, DAMAGE_BURN)
 		B.update_icon()

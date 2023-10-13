@@ -7,7 +7,7 @@
 	return bearing_estimate
 
 /obj/machinery/shipsensors
-	var/obj/effect/overmap/visitable/ship/linked
+	var/obj/overmap/visitable/ship/linked
 	var/list/linked_consoles = list() // To
 
 	var/list/objects_in_view = list() // Associative list of objects in view -> identification progress
@@ -26,7 +26,7 @@
 	contact_datums.Cut()
 	. = ..()
 
-/obj/machinery/shipsensors/proc/link_ship(obj/effect/overmap/visitable/ship/new_ship)
+/obj/machinery/shipsensors/proc/link_ship(obj/overmap/visitable/ship/new_ship)
 	if (!isnull(new_ship) && !istype(new_ship))
 		return
 	if (linked == new_ship)
@@ -102,16 +102,16 @@
 	// Find all sectors with a tracker on their z-level. Only works on ships when they are in space.
 	for (var/obj/item/ship_tracker/tracker in trackers)
 		if (tracker.enabled)
-			var/obj/effect/overmap/visitable/tracked_effect = map_sectors["[get_z(tracker)]"]
+			var/obj/overmap/visitable/tracked_effect = map_sectors["[get_z(tracker)]"]
 			if (tracked_effect && istype(tracked_effect) && tracked_effect != linked && tracked_effect.requires_contact)
 				objects_in_current_view.Add(tracked_effect)
 				objects_in_view[tracked_effect] = 100
 
-	var/obj/effect/overmap/overmap_obj = linked
-	if (istype(linked.loc, /obj/effect/overmap/visitable))
+	var/obj/overmap/overmap_obj = linked
+	if (istype(linked.loc, /obj/overmap/visitable))
 		overmap_obj = linked.loc
 
-	for (var/obj/effect/overmap/contact in view(sensor_range, overmap_obj))
+	for (var/obj/overmap/contact in view(sensor_range, overmap_obj))
 		if (contact == linked)
 			continue
 		if (!contact.requires_contact)	// Only some effects require contact for visibility.
@@ -137,7 +137,7 @@
 		else if (!(contact in objects_in_view))
 			objects_in_view[contact] = -1 // Replaced by 0 after notification
 
-	for (var/obj/effect/overmap/contact in objects_in_view) //Update everything.
+	for (var/obj/overmap/contact in objects_in_view) //Update everything.
 		// Are we already aware of this object?
 		var/datum/overmap_contact/record = contact_datums[contact]
 

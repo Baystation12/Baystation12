@@ -26,7 +26,7 @@
 /area/outpost/mining/solar)
 "ae" = (
 /obj/machinery/power/tracker,
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/structure/cable/yellow{
 	d2 = 2;
 	icon_state = "0-2"
@@ -46,7 +46,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/machinery/power/solar,
 /turf/simulated/floor/airless,
 /area/outpost/mining/solar)
@@ -55,7 +55,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/machinery/power/solar,
 /turf/simulated/floor/airless,
 /area/outpost/mining/solar)
@@ -77,7 +77,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/outpost/mining)
 "ak" = (
@@ -85,13 +85,13 @@
 	dir = 1;
 	icon_state = "map"
 	},
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
 /area/outpost/mining)
 "al" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/suit_storage_unit{
 	name = "Mining Voidsuit Storage Unit"
 	},
@@ -102,14 +102,14 @@
 	isopen = 1;
 	name = "Mining Voidsuit Storage Unit"
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/light/small{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/voidsuits)
 "an" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 24
@@ -118,7 +118,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/voidsuits)
 "ao" = (
-/obj/effect/shuttle_landmark/corporate/nav1,
+/obj/shuttle_landmark/corporate/nav1,
 /turf/space,
 /area/space)
 "ap" = (
@@ -134,7 +134,7 @@
 /turf/space,
 /area/space)
 "as" = (
-/obj/effect/shuttle_landmark/corporate/nav9,
+/obj/shuttle_landmark/corporate/nav9,
 /turf/space,
 /area/space)
 "at" = (
@@ -228,7 +228,7 @@
 /turf/simulated/floor/airless,
 /area/outpost/mining/solar)
 "aD" = (
-/obj/effect/shuttle_landmark/corporate/nav6,
+/obj/shuttle_landmark/corporate/nav6,
 /turf/space,
 /area/space)
 "aE" = (
@@ -247,21 +247,21 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/outpost/mining/hangar)
 "aG" = (
-/obj/effect/floor_decal/corner/brown/three_quarters{
+/obj/floor_decal/corner/brown/three_quarters{
 	dir = 8;
 	icon_state = "corner_white_three_quarters"
 	},
 /turf/simulated/floor/tiled,
 /area/outpost/mining/hangar)
 "aH" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 5;
 	icon_state = "corner_white"
 	},
 /turf/simulated/floor/tiled,
 /area/outpost/mining/hangar)
 "aI" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 5;
 	icon_state = "corner_white"
 	},
@@ -272,20 +272,20 @@
 /turf/simulated/floor/tiled,
 /area/outpost/mining/hangar)
 "aJ" = (
-/obj/effect/floor_decal/corner/brown/three_quarters{
+/obj/floor_decal/corner/brown/three_quarters{
 	dir = 1;
 	icon_state = "corner_white_three_quarters"
 	},
 /turf/simulated/floor/tiled,
 /area/outpost/mining/hangar)
 "aK" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 9
 	},
 /turf/simulated/floor/tiled,
 /area/outpost/mining/hangar)
 "aO" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
@@ -304,7 +304,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/hangar)
 "aT" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 9
 	},
 /obj/machinery/light/small{
@@ -313,7 +313,7 @@
 /turf/simulated/floor/tiled,
 /area/outpost/mining/hangar)
 "aU" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 6
 	},
 /obj/machinery/light/small{
@@ -323,7 +323,7 @@
 /turf/simulated/floor/tiled,
 /area/outpost/mining/hangar)
 "aV" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable{
 	d1 = 2;
 	d2 = 4;
@@ -344,7 +344,7 @@
 /turf/space,
 /area/space)
 "aY" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -399,7 +399,7 @@
 	id_tag = "mbase_room_shutters_solar";
 	name = "Space Shutters"
 	},
-/obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/outpost/mining/power)
 "bf" = (
@@ -457,7 +457,7 @@
 /turf/simulated/floor/plating,
 /area/outpost/mining/power)
 "bm" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -469,7 +469,7 @@
 /turf/simulated/floor/plating,
 /area/outpost/mining/hangar)
 "bn" = (
-/obj/effect/shuttle_landmark/corporate/nav8,
+/obj/shuttle_landmark/corporate/nav8,
 /turf/simulated/floor/plating,
 /area/outpost/mining/hangar)
 "bo" = (
@@ -485,7 +485,7 @@
 	dir = 4;
 	id_tag = "mbase_airlock_space_pump"
 	},
-/obj/effect/floor_decal/industrial/warning/cee{
+/obj/floor_decal/industrial/warning/cee{
 	dir = 1;
 	icon_state = "stripecee"
 	},
@@ -510,7 +510,7 @@
 	dir = 8;
 	id_tag = "mbase_airlock_space_pump"
 	},
-/obj/effect/floor_decal/industrial/warning/cee{
+/obj/floor_decal/industrial/warning/cee{
 	dir = 1;
 	icon_state = "stripecee"
 	},
@@ -525,7 +525,7 @@
 	id_tag = "mbase_room_shutters1";
 	name = "Space Shutters"
 	},
-/obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/outpost/mining/recreation)
 "bu" = (
@@ -534,7 +534,7 @@
 	id_tag = "mbase_room_shutters2";
 	name = "Space Shutters"
 	},
-/obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/outpost/mining/recreation)
 "bv" = (
@@ -578,7 +578,7 @@
 	dir = 4;
 	id_tag = "mbase_airlock_space_pump"
 	},
-/obj/effect/floor_decal/industrial/warning/cee,
+/obj/floor_decal/industrial/warning/cee,
 /turf/simulated/floor/plating,
 /area/outpost/mining/cenral)
 "bz" = (
@@ -591,7 +591,7 @@
 	dir = 8;
 	id_tag = "mbase_airlock_space_pump"
 	},
-/obj/effect/floor_decal/industrial/warning/cee,
+/obj/floor_decal/industrial/warning/cee,
 /turf/simulated/floor/plating,
 /area/outpost/mining/cenral)
 "bB" = (
@@ -776,7 +776,7 @@
 	name = "Living Room"
 	},
 /obj/machinery/door/firedoor,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/recreation)
 "bQ" = (
@@ -796,7 +796,7 @@
 	name = "Living Room"
 	},
 /obj/machinery/door/firedoor,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/recreation)
 "bS" = (
@@ -840,7 +840,7 @@
 /area/outpost/mining/hangar)
 "bW" = (
 /obj/structure/closet/emcloset,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/cenral)
 "bX" = (
@@ -848,7 +848,7 @@
 	dir = 2;
 	icon_state = "intact"
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/outpost/mining/cenral)
@@ -859,17 +859,17 @@
 	pixel_y = 26
 	},
 /obj/machinery/recharge_station,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/cenral)
 "bZ" = (
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/machinery/atmospherics/portables_connector,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/cenral)
 "ca" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -883,10 +883,10 @@
 	id_tag = "mbase_airlock_pump"
 	},
 /obj/structure/catwalk,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -899,7 +899,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/obj/effect/floor_decal/industrial/warning/corner,
+/obj/floor_decal/industrial/warning/corner,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
@@ -911,7 +911,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/outpost/mining/power)
 "ce" = (
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9;
 	pixel_y = 0
@@ -926,7 +926,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/floor_decal/industrial/warning/corner{
 	dir = 8;
 	icon_state = "warningcorner"
 	},
@@ -956,11 +956,11 @@
 /turf/simulated/floor/plating,
 /area/outpost/mining/hangar)
 "ch" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/cenral)
 "ci" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/yellow{
 	dir = 5;
 	icon_state = "intact"
@@ -973,7 +973,7 @@
 	dir = 4;
 	icon_state = "intact"
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/outpost/mining/cenral)
 "ck" = (
@@ -996,7 +996,7 @@
 	dir = 9;
 	icon_state = "intact"
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/alarm{
 	dir = 8;
 	pixel_x = 23
@@ -1006,7 +1006,7 @@
 "cn" = (
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/machinery/atmospherics/portables_connector,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/structure/sign/poster{
 	pixel_y = 32
 	},
@@ -1054,7 +1054,7 @@
 /area/outpost/mining/recreation)
 "cu" = (
 /obj/machinery/washing_machine,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -1069,7 +1069,7 @@
 	dir = 2;
 	pixel_y = 24
 	},
-/obj/effect/floor_decal/corner/paleblue/three_quarters{
+/obj/floor_decal/corner/paleblue/three_quarters{
 	dir = 8;
 	icon_state = "corner_white_three_quarters"
 	},
@@ -1079,7 +1079,7 @@
 /area/outpost/mining/medical)
 "cx" = (
 /obj/structure/table/standard,
-/obj/effect/floor_decal/corner/paleblue{
+/obj/floor_decal/corner/paleblue{
 	dir = 5;
 	icon_state = "corner_white"
 	},
@@ -1092,14 +1092,14 @@
 /obj/structure/closet/medical_wall/filled{
 	pixel_y = 30
 	},
-/obj/effect/floor_decal/corner/paleblue/three_quarters{
+/obj/floor_decal/corner/paleblue/three_quarters{
 	dir = 1;
 	icon_state = "corner_white_three_quarters"
 	},
 /turf/simulated/floor/tiled/white,
 /area/outpost/mining/medical)
 "cz" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /obj/structure/cable{
@@ -1121,7 +1121,7 @@
 /turf/simulated/wall/prepainted/mining_corporate,
 /area/outpost/mining/maints)
 "cB" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
 /obj/structure/cable/yellow,
@@ -1134,7 +1134,7 @@
 "cC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -1154,7 +1154,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/hangar)
 "cG" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 9
 	},
 /turf/simulated/floor/tiled,
@@ -1178,7 +1178,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/outpost/mining/cenral)
 "cK" = (
@@ -1201,7 +1201,7 @@
 /area/outpost/mining/cenral)
 "cN" = (
 /obj/machinery/door/firedoor,
-/obj/effect/wallframe_spawn/no_grille,
+/obj/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/outpost/mining/recreation)
 "cO" = (
@@ -1248,18 +1248,18 @@
 "cU" = (
 /obj/structure/table/standard,
 /obj/item/storage/box/detergent,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/item/ironing_board,
 /obj/item/ironing_iron,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/recreation)
 "cV" = (
 /obj/machinery/door/firedoor,
-/obj/effect/wallframe_spawn/no_grille,
+/obj/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/outpost/mining/medical)
 "cW" = (
-/obj/effect/floor_decal/corner/paleblue{
+/obj/floor_decal/corner/paleblue{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
@@ -1270,7 +1270,7 @@
 /area/outpost/mining/medical)
 "cY" = (
 /obj/machinery/sleeper,
-/obj/effect/floor_decal/corner/paleblue{
+/obj/floor_decal/corner/paleblue{
 	dir = 6;
 	icon_state = "corner_white"
 	},
@@ -1293,7 +1293,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 4;
@@ -1305,7 +1305,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -1325,7 +1325,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1;
 	icon_state = "map-supply"
@@ -1347,7 +1347,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -20
@@ -1366,7 +1366,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_x = 0;
@@ -1405,7 +1405,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/outpost/mining/hangar)
 "dh" = (
@@ -1420,7 +1420,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable{
 	d1 = 2;
 	d2 = 4;
@@ -1470,7 +1470,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/hangar)
 "dl" = (
@@ -1491,7 +1491,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -1511,7 +1511,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/outpost/mining/cenral)
 "do" = (
@@ -1525,7 +1525,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
 	},
@@ -1543,7 +1543,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -1552,7 +1552,7 @@
 "dq" = (
 /obj/structure/table/standard,
 /obj/structure/bedsheetbin,
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
@@ -1573,7 +1573,7 @@
 	name = "Recreation Section"
 	},
 /obj/machinery/door/firedoor,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/recreation)
 "ds" = (
@@ -1714,7 +1714,7 @@
 	dir = 4;
 	icon_state = "tube_map"
 	},
-/obj/effect/floor_decal/corner/paleblue{
+/obj/floor_decal/corner/paleblue{
 	dir = 6;
 	icon_state = "corner_white"
 	},
@@ -1778,13 +1778,13 @@
 /obj/structure/table/steel,
 /obj/item/storage/toolbox/mechanical,
 /obj/item/stack/cable_coil,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/hangar)
 "dK" = (
 /obj/structure/cable,
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/power/apc/inactive{
 	name = "south bump";
 	pixel_y = -25
@@ -1792,7 +1792,7 @@
 /turf/simulated/floor/plating,
 /area/outpost/mining/hangar)
 "dL" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -1802,12 +1802,12 @@
 /area/outpost/mining/hangar)
 "dM" = (
 /obj/machinery/portable_atmospherics/powered/pump/filled,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/hangar)
 "dN" = (
 /obj/structure/reagent_dispensers/fueltank,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/hangar)
 "dO" = (
@@ -1815,7 +1815,7 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 10
 	},
 /obj/machinery/disposal,
@@ -1826,7 +1826,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 10
 	},
 /obj/machinery/power/apc/inactive{
@@ -1854,7 +1854,7 @@
 /obj/item/storage/toolbox/mechanical,
 /obj/structure/table/standard,
 /obj/machinery/light/small,
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
@@ -1862,20 +1862,20 @@
 "dS" = (
 /obj/structure/table/standard,
 /obj/machinery/recharger,
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
 /area/outpost/mining/cenral)
 "dT" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 9
 	},
 /obj/structure/flora/pottedplant/dead,
 /turf/simulated/floor/tiled,
 /area/outpost/mining/recreation)
 "dU" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
@@ -1905,7 +1905,7 @@
 /obj/structure/table/standard,
 /obj/item/storage/box/checkers,
 /obj/item/board,
-/obj/effect/floor_decal/corner/brown/half,
+/obj/floor_decal/corner/brown/half,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/recreation)
 "dZ" = (
@@ -1917,7 +1917,7 @@
 	pixel_y = -24
 	},
 /obj/item/storage/box/freezer/blood/human,
-/obj/effect/floor_decal/corner/paleblue{
+/obj/floor_decal/corner/paleblue{
 	dir = 10;
 	icon_state = "corner_white"
 	},
@@ -1928,7 +1928,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/paleblue{
+/obj/floor_decal/corner/paleblue{
 	dir = 10;
 	icon_state = "corner_white"
 	},
@@ -1941,7 +1941,7 @@
 	dir = 1;
 	pixel_y = -20
 	},
-/obj/effect/floor_decal/corner/paleblue/three_quarters{
+/obj/floor_decal/corner/paleblue/three_quarters{
 	dir = 4;
 	icon_state = "corner_white_three_quarters"
 	},
@@ -2030,11 +2030,11 @@
 /obj/machinery/door/airlock/mining{
 	name = "Mining Equipment"
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining)
 "en" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = -24
@@ -2056,7 +2056,7 @@
 /turf/simulated/floor/tiled,
 /area/outpost/mining/recreation)
 "ep" = (
-/obj/effect/floor_decal/industrial/warning/full,
+/obj/floor_decal/industrial/warning/full,
 /obj/structure/cable{
 	d2 = 8;
 	icon_state = "0-8"
@@ -2071,7 +2071,7 @@
 /obj/structure/table/standard,
 /obj/item/paper_bin,
 /obj/machinery/light,
-/obj/effect/floor_decal/corner/brown/half,
+/obj/floor_decal/corner/brown/half,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/recreation)
 "er" = (
@@ -2081,7 +2081,7 @@
 /obj/machinery/computer/modular/preset/civilian{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/brown/half,
+/obj/floor_decal/corner/brown/half,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/recreation)
 "es" = (
@@ -2110,7 +2110,7 @@
 /turf/simulated/floor/tiled,
 /area/outpost/mining/recreation)
 "eu" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/structure/flora/pottedplant/stoutbush,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/recreation)
@@ -2175,7 +2175,7 @@
 	pixel_y = 24
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/effect/floor_decal/corner/brown/three_quarters{
+/obj/floor_decal/corner/brown/three_quarters{
 	dir = 8;
 	icon_state = "corner_white_three_quarters"
 	},
@@ -2190,7 +2190,7 @@
 /turf/simulated/floor/tiled,
 /area/outpost/mining/voidsuits)
 "eE" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
@@ -2200,7 +2200,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining)
 "eF" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/structure/ore_box,
 /obj/machinery/atmospherics/pipe/simple/hidden/yellow{
 	dir = 10;
@@ -2227,7 +2227,7 @@
 /area/outpost/mining/kitchen)
 "eI" = (
 /obj/machinery/door/firedoor,
-/obj/effect/wallframe_spawn/no_grille,
+/obj/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/outpost/mining/kitchen)
 "eJ" = (
@@ -2255,7 +2255,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/outpost/mining)
 "eM" = (
@@ -2389,7 +2389,7 @@
 /obj/machinery/door/airlock/mining{
 	name = "Mining Voidsuits"
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -2398,14 +2398,14 @@
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/voidsuits)
 "eX" = (
-/obj/effect/overmap/visitable/sector/corporate,
+/obj/overmap/visitable/sector/corporate,
 /turf/space,
 /area/space)
 "eY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -2547,7 +2547,7 @@
 /turf/simulated/floor/plating,
 /area/outpost/mining/maints)
 "fn" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
@@ -2561,25 +2561,25 @@
 /obj/structure/dispenser/oxygen{
 	oxygentanks = 3
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/voidsuits)
 "fp" = (
 /obj/machinery/door/firedoor,
-/obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/outpost/mining/voidsuits)
 "fq" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 9
 	},
 /turf/simulated/floor/tiled,
 /area/outpost/mining)
 "fr" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -2589,7 +2589,7 @@
 /turf/simulated/floor/plating,
 /area/outpost/mining)
 "fs" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/structure/railing/mapped,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining)
@@ -2675,7 +2675,7 @@
 	isopen = 1;
 	name = "Mining Voidsuit Storage Unit"
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/light/small{
 	dir = 8
 	},
@@ -2683,7 +2683,7 @@
 /area/outpost/mining/voidsuits)
 "fC" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/voidsuits)
 "fD" = (
@@ -2691,7 +2691,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 9
 	},
 /obj/machinery/power/apc/inactive{
@@ -2719,7 +2719,7 @@
 	dir = 8;
 	icon_state = "map"
 	},
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
@@ -2729,7 +2729,7 @@
 	dir = 8
 	},
 /obj/machinery/portable_atmospherics/canister/air/airlock,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining)
 "fH" = (
@@ -2833,11 +2833,11 @@
 	isopen = 1;
 	name = "Mining Voidsuit Storage Unit"
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/voidsuits)
 "fS" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -2854,7 +2854,7 @@
 	dir = 8
 	},
 /obj/machinery/suit_cycler/mining,
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -2866,7 +2866,7 @@
 /obj/item/stack/flag/yellow,
 /obj/item/stack/flag/yellow,
 /obj/structure/table/rack,
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 9
 	},
 /turf/simulated/floor/tiled,
@@ -2901,7 +2901,7 @@
 	dir = 4;
 	pixel_y = 0
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining)
 "fY" = (
@@ -2915,7 +2915,7 @@
 	icon_state = "alarm0";
 	pixel_x = -23
 	},
-/obj/effect/floor_decal/corner/brown/three_quarters,
+/obj/floor_decal/corner/brown/three_quarters,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/voidsuits)
 "gb" = (
@@ -2932,7 +2932,7 @@
 /obj/machinery/light/small,
 /obj/item/device/radio/off,
 /obj/item/device/radio/off,
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -2944,7 +2944,7 @@
 	icon_state = "0-8"
 	},
 /obj/item/pickaxe,
-/obj/effect/floor_decal/corner/brown/three_quarters{
+/obj/floor_decal/corner/brown/three_quarters{
 	dir = 4;
 	icon_state = "corner_white_three_quarters"
 	},
@@ -2956,7 +2956,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining/voidsuits)
 "gd" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/mech_recharger,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining)
@@ -2976,7 +2976,7 @@
 	master_tag = "mbase_airlock";
 	pixel_y = -21
 	},
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
@@ -2986,7 +2986,7 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/outpost/mining)
 "gh" = (
@@ -2998,7 +2998,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning/cee{
+/obj/floor_decal/industrial/warning/cee{
 	dir = 1;
 	icon_state = "stripecee"
 	},
@@ -3025,7 +3025,7 @@
 	dir = 4;
 	pixel_y = 0
 	},
-/obj/effect/floor_decal/industrial/warning/cee{
+/obj/floor_decal/industrial/warning/cee{
 	dir = 1;
 	icon_state = "stripecee"
 	},
@@ -3041,16 +3041,16 @@
 	id_tag = "mbase_airlock";
 	pixel_x = -24
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/outpost/mining)
 "gl" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/suit_storage_unit{
 	name = "Mining Voidsuit Storage Unit"
 	},
@@ -3066,10 +3066,10 @@
 	id_tag = "mbase_airlock_pump"
 	},
 /obj/structure/catwalk,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -3085,10 +3085,10 @@
 	master_tag = "mbase_airlock";
 	pixel_x = 24
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -3124,16 +3124,16 @@
 	dir = 8;
 	icon_state = "chair_preview"
 	},
-/obj/effect/floor_decal/industrial/warning/cee,
+/obj/floor_decal/industrial/warning/cee,
 /turf/simulated/floor/plating,
 /area/outpost/mining)
 "gq" = (
-/obj/effect/shuttle_landmark/corporate/nav4,
+/obj/shuttle_landmark/corporate/nav4,
 /turf/space,
 /area/space)
 "gr" = (
 /obj/machinery/hologram/holopad/longrange/remoteship,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/outpost/mining/relay)
 "gs" = (
@@ -3157,7 +3157,7 @@
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "gv" = (
-/obj/effect/shuttle_landmark/corporate/nav2,
+/obj/shuttle_landmark/corporate/nav2,
 /turf/space,
 /area/space)
 "gw" = (
@@ -3165,7 +3165,7 @@
 /turf/simulated/floor/asteroid,
 /area/mine/unexplored)
 "gx" = (
-/obj/effect/shuttle_landmark/corporate/nav3,
+/obj/shuttle_landmark/corporate/nav3,
 /turf/space,
 /area/space)
 "gy" = (
@@ -3187,14 +3187,14 @@
 /turf/simulated/floor/airless,
 /area/mine/unexplored)
 "gA" = (
-/obj/effect/shuttle_landmark/corporate/nav5,
+/obj/shuttle_landmark/corporate/nav5,
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "gB" = (
 /turf/space,
 /area/space)
 "gC" = (
-/obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/wallframe_spawn/reinforced/no_grille,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/shutters/open{
 	dir = 4;
@@ -3204,7 +3204,7 @@
 /area/outpost/mining/relay)
 "gD" = (
 /obj/machinery/portable_atmospherics/powered/pump/filled,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/machinery/button/blast_door{
 	dir = 2;
 	id_tag = "mbase_roomrelay_shutters";
@@ -3229,7 +3229,7 @@
 "gG" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/air,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/machinery/light/small/red{
 	dir = 1;
 	icon_state = "bulb_map"
@@ -3245,7 +3245,7 @@
 /area/mine/unexplored)
 "gI" = (
 /obj/machinery/portable_atmospherics/powered/scrubber,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/outpost/mining/relay)
 "gJ" = (
@@ -3325,7 +3325,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/outpost/mining/relay)
 "gQ" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable{
 	d1 = 2;
 	d2 = 4;
@@ -3425,7 +3425,7 @@
 	dir = 1
 	},
 /obj/structure/cable,
-/obj/effect/floor_decal/corner/brown/half,
+/obj/floor_decal/corner/brown/half,
 /obj/machinery/power/apc/inactive{
 	name = "south bump";
 	pixel_y = -25
@@ -3447,20 +3447,20 @@
 /turf/simulated/floor/asteroid,
 /area/mine/unexplored)
 "hk" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/titanium,
+/obj/wallframe_spawn/reinforced_phoron/titanium,
 /obj/machinery/door/blast/regular{
 	id_tag = "data_capsule_shield";
 	name = "shield blast door"
 	},
-/obj/effect/paint/merc,
-/obj/effect/paint_stripe/green,
+/obj/paint/merc,
+/obj/paint_stripe/green,
 /turf/simulated/floor/plating,
 /area/shuttle/abadoned_data_capsule)
 "hl" = (
 /turf/simulated/wall/prepainted/mining_corporate,
 /area/outpost/mining/relay)
 "hm" = (
-/obj/effect/floor_decal/techfloor/corner,
+/obj/floor_decal/techfloor/corner,
 /turf/unsimulated/mask,
 /area/mine/unexplored)
 "hn" = (
@@ -3470,7 +3470,7 @@
 /obj/machinery/computer/ship/helm{
 	dir = 2
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 6;
 	icon_state = "techfloor_edges"
 	},
@@ -3484,11 +3484,11 @@
 /obj/machinery/computer/shuttle_control/explore/data_capsule{
 	dir = 2
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4;
 	icon_state = "techfloor_edges"
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -3497,7 +3497,7 @@
 /obj/machinery/computer/ship/sensors{
 	dir = 2
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 10
 	},
 /obj/machinery/light/small/emergency{
@@ -3507,16 +3507,16 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/shuttle/abadoned_data_capsule)
 "hr" = (
-/obj/effect/paint/merc,
-/obj/effect/paint_stripe/green,
+/obj/paint/merc,
+/obj/paint_stripe/green,
 /turf/simulated/wall/ocp_wall,
 /area/shuttle/abadoned_data_capsule)
 "hs" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1;
 	icon_state = "techfloor_edges"
 	},
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /obj/machinery/power/terminal,
 /obj/structure/cable/yellow{
 	d2 = 4;
@@ -3528,18 +3528,18 @@
 /turf/unsimulated/mask,
 /area/mine/explored)
 "hu" = (
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 4;
 	icon_state = "techfloor_corners"
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 8;
 	icon_state = "techfloor_corners"
 	},
-/obj/effect/floor_decal/techfloor/corner,
+/obj/floor_decal/techfloor/corner,
 /obj/structure/cable/yellow{
 	d1 = 2;
 	d2 = 8;
@@ -3548,8 +3548,8 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/shuttle/abadoned_data_capsule)
 "hv" = (
-/obj/effect/floor_decal/techfloor,
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor,
+/obj/floor_decal/techfloor{
 	dir = 1;
 	icon_state = "techfloor_edges"
 	},
@@ -3602,7 +3602,7 @@
 /obj/machinery/power/smes/buildable{
 	uncreated_component_parts = list(/obj/item/stock_parts/smes_coil/super_io=2,/obj/item/stock_parts/smes_coil/super_capacity=2)
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 5
 	},
 /obj/machinery/light/small,
@@ -3613,10 +3613,10 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/shuttle/abadoned_data_capsule)
 "hy" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4;
 	icon_state = "techfloor_edges"
 	},
@@ -3636,7 +3636,7 @@
 /obj/machinery/computer/ship/engines{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 9
 	},
 /obj/machinery/alarm{
@@ -3670,7 +3670,7 @@
 /area/shuttle/abadoned_data_capsule)
 "hD" = (
 /obj/structure/backup_server,
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 9
 	},
 /obj/machinery/light{
@@ -3680,13 +3680,13 @@
 /turf/simulated/floor/greengrid,
 /area/shuttle/abadoned_data_capsule)
 "hE" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /turf/simulated/floor/greengrid,
 /area/shuttle/abadoned_data_capsule)
 "hF" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /obj/structure/cable/yellow{
@@ -3698,7 +3698,7 @@
 /area/shuttle/abadoned_data_capsule)
 "hG" = (
 /obj/structure/backup_server,
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 5
 	},
 /obj/machinery/light{
@@ -3708,7 +3708,7 @@
 /turf/simulated/floor/greengrid,
 /area/shuttle/abadoned_data_capsule)
 "hH" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8;
 	icon_state = "techfloor_edges"
 	},
@@ -3725,34 +3725,34 @@
 /turf/simulated/floor/greengrid,
 /area/shuttle/abadoned_data_capsule)
 "hI" = (
-/obj/effect/floor_decal/corner_techfloor_grid,
-/obj/effect/floor_decal/techfloor/corner,
+/obj/floor_decal/corner_techfloor_grid,
+/obj/floor_decal/techfloor/corner,
 /turf/simulated/floor/greengrid,
 /area/shuttle/abadoned_data_capsule)
 "hJ" = (
 /obj/structure/railing/mapped,
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /obj/structure/cable/yellow{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/overmap/visitable/ship/landable/data_capsule,
-/obj/effect/shuttle_landmark/corporate/nav_hiden,
+/obj/overmap/visitable/ship/landable/data_capsule,
+/obj/shuttle_landmark/corporate/nav_hiden,
 /turf/simulated/floor/greengrid,
 /area/shuttle/abadoned_data_capsule)
 "hK" = (
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 8;
 	icon_state = "techfloor_corners"
 	},
 /turf/simulated/floor/greengrid,
 /area/shuttle/abadoned_data_capsule)
 "hL" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4;
 	icon_state = "techfloor_edges"
 	},
@@ -3774,7 +3774,7 @@
 /turf/simulated/floor/reinforced/airmix,
 /area/shuttle/abadoned_data_capsule)
 "hN" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8;
 	icon_state = "techfloor_edges"
 	},
@@ -3785,7 +3785,7 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4;
 	icon_state = "techfloor_edges"
 	},
@@ -3807,23 +3807,23 @@
 /obj/structure/railing/mapped{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
 /turf/simulated/floor/greengrid,
 /area/shuttle/abadoned_data_capsule)
 "hR" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4;
 	icon_state = "techfloor_edges"
 	},
 /turf/simulated/floor/greengrid,
 /area/shuttle/abadoned_data_capsule)
 "hS" = (
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 4;
 	icon_state = "techfloor_corners"
 	},
@@ -3834,7 +3834,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1;
 	icon_state = "techfloor_edges"
 	},
@@ -3846,10 +3846,10 @@
 /turf/simulated/floor/greengrid,
 /area/shuttle/abadoned_data_capsule)
 "hU" = (
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 1
 	},
 /obj/structure/cable/yellow{
@@ -3860,7 +3860,7 @@
 /turf/simulated/floor/greengrid,
 /area/shuttle/abadoned_data_capsule)
 "hV" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4;
 	icon_state = "techfloor_edges"
 	},
@@ -3889,7 +3889,7 @@
 /turf/simulated/floor/greengrid,
 /area/shuttle/abadoned_data_capsule)
 "hW" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 10;
 	icon_state = "techfloor_edges"
 	},
@@ -3898,16 +3898,16 @@
 /turf/simulated/floor/greengrid,
 /area/shuttle/abadoned_data_capsule)
 "hX" = (
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /obj/structure/backup_server,
 /turf/simulated/floor/greengrid,
 /area/shuttle/abadoned_data_capsule)
 "hY" = (
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /turf/simulated/floor/greengrid,
 /area/shuttle/abadoned_data_capsule)
 "hZ" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 6;
 	icon_state = "techfloor_edges"
 	},
@@ -3917,8 +3917,8 @@
 /area/shuttle/abadoned_data_capsule)
 "ia" = (
 /obj/structure/fuel_port,
-/obj/effect/paint/merc,
-/obj/effect/paint_stripe/green,
+/obj/paint/merc,
+/obj/paint_stripe/green,
 /turf/simulated/wall/ocp_wall,
 /area/shuttle/abadoned_data_capsule)
 "ib" = (
@@ -3940,11 +3940,11 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/shuttle/abadoned_data_capsule)
 "if" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4;
 	icon_state = "techfloor_edges"
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
 /obj/machinery/light/small,
@@ -3959,8 +3959,8 @@
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 6
 	},
-/obj/effect/paint/merc,
-/obj/effect/paint_stripe/green,
+/obj/paint/merc,
+/obj/paint_stripe/green,
 /turf/simulated/wall/ocp_wall,
 /area/shuttle/abadoned_data_capsule)
 "ii" = (
@@ -3968,16 +3968,16 @@
 	dir = 1;
 	icon_state = "map"
 	},
-/obj/effect/paint/merc,
-/obj/effect/paint_stripe/green,
+/obj/paint/merc,
+/obj/paint_stripe/green,
 /turf/simulated/wall/ocp_wall,
 /area/shuttle/abadoned_data_capsule)
 "ij" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/black{
 	dir = 4
 	},
-/obj/effect/paint/merc,
-/obj/effect/paint_stripe/green,
+/obj/paint/merc,
+/obj/paint_stripe/green,
 /turf/simulated/wall/ocp_wall,
 /area/shuttle/abadoned_data_capsule)
 "ik" = (
@@ -4000,7 +4000,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning/cee,
+/obj/floor_decal/industrial/warning/cee,
 /turf/simulated/floor/plating,
 /area/outpost/mining)
 

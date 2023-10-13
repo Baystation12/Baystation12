@@ -90,7 +90,7 @@
 	update_nearby_tiles(need_rebuild=1)
 
 	for(var/ship in SSshuttle.ships)
-		var/obj/effect/overmap/visitable/ship/S = ship
+		var/obj/overmap/visitable/ship/S = ship
 		if(S.check_ownership(src))
 			S.engines |= controller
 			if(dir != S.fore_dir)
@@ -179,7 +179,7 @@
 	var/turf/T = get_step(src,exhaust_dir)
 	if(T)
 		T.assume_air(removed)
-		new/obj/effect/engine_exhaust(T, dir)
+		new/obj/engine_exhaust(T, dir)
 
 /obj/machinery/atmospherics/unary/engine/proc/calculate_thrust(datum/gas_mixture/propellant, used_part = 1)
 	return round(sqrt(propellant.get_mass() * used_part * air_contents.return_pressure()/100),0.1)
@@ -196,14 +196,14 @@
 	change_power_consumption(initial(idle_power_usage) / energy_upgrade, POWER_USE_IDLE)
 
 //Exhaust effect
-/obj/effect/engine_exhaust
+/obj/engine_exhaust
 	name = "engine exhaust"
 	icon = 'icons/obj/machines/ship_engine.dmi'
 	icon_state = "nozzle_burn"
 	light_color = "#00a2ff"
 	anchored = TRUE
 
-/obj/effect/engine_exhaust/New(turf/nloc, ndir)
+/obj/engine_exhaust/New(turf/nloc, ndir)
 	..(nloc)
 	nloc.hotspot_expose(1000,125)
 	set_light(4, 0.5)

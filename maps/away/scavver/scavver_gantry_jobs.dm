@@ -127,13 +127,13 @@
 	)
 	skill_points = 20
 
-/obj/effect/submap_landmark/spawnpoint/scavver_pilot
+/obj/submap_landmark/spawnpoint/scavver_pilot
 	name = "Salvage Pilot"
 
-/obj/effect/submap_landmark/spawnpoint/scavver_doctor
+/obj/submap_landmark/spawnpoint/scavver_doctor
 	name = "Salvage Doctor"
 
-/obj/effect/submap_landmark/spawnpoint/scavver_engineer
+/obj/submap_landmark/spawnpoint/scavver_engineer
 	name = "Salvage Engineer"
 
 /singleton/hierarchy/outfit/job/scavver

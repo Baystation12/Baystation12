@@ -26,7 +26,7 @@
 
 /mob/living/bot/remotebot/explode()
 	on = 0
-	new /obj/effect/decal/cleanable/blood/oil(get_turf(src.loc))
+	new /obj/decal/cleanable/blood/oil(get_turf(src.loc))
 	visible_message(SPAN_DANGER("[src] blows apart!"))
 	if(controller)
 		controller.bot = null
@@ -36,7 +36,7 @@
 		if(prob(50))
 			C.forceMove(get_step(src, pick(GLOB.alldirs)))
 
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 	s.set_up(3, 1, src)
 	s.start()
 	qdel(src)

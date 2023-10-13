@@ -76,7 +76,7 @@
  * Special item for wrapped mobs
  */
 
-/obj/effect/mobpresent
+/obj/mobpresent
 	name = "strange gift"
 	desc = "It's a ... gift?"
 	icon = 'icons/obj/parcels.dmi'
@@ -85,8 +85,8 @@
 	anchored = FALSE
 	var/package_type = "parcel"
 
-/obj/effect/mobpresent/Initialize(mapload, target, wrap_type)
-	..(mapload)
+/obj/mobpresent/Initialize(mapload, target, wrap_type)
+	. = ..(mapload)
 	if (!target || !ishuman(target) || !wrap_type)
 		return INITIALIZE_HINT_QDEL
 
@@ -100,16 +100,16 @@
 	package_type = wrap_type
 	update_icon()
 
-/obj/effect/mobpresent/on_update_icon()
+/obj/mobpresent/on_update_icon()
 	icon_state = "strange[package_type]"
 
-/obj/effect/mobpresent/relaymove(mob/user as mob)
+/obj/mobpresent/relaymove(mob/user)
 	if (user.stat)
 		return
 	to_chat(user, SPAN_WARNING("You can't move."))
 
 
-/obj/effect/mobpresent/use_tool(obj/item/tool, mob/user, list/click_params)
+/obj/mobpresent/use_tool(obj/item/tool, mob/user, list/click_params)
 	if (is_sharp(tool))
 		user.visible_message(
 			SPAN_NOTICE("\The [user] cuts open \the [src] with \a [tool]."),
@@ -124,8 +124,8 @@
 		return TRUE
 	return ..()
 
-/obj/effect/mobpresent/attack_hand(mob/living/user)
+/obj/mobpresent/attack_hand(mob/living/user)
 	to_chat(user, "You need a sharp tool to unwrap \the [src].")
 
-/obj/effect/mobpresent/attack_robot(mob/living/silicon/robot/user)
+/obj/mobpresent/attack_robot(mob/living/silicon/robot/user)
 	to_chat(user, "You need a sharp tool to unwrap \the [src].")

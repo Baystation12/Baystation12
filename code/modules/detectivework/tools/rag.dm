@@ -209,7 +209,7 @@
 	if(exposed_temperature >= 50 + T0C)
 		ignite()
 	if(exposed_temperature >= 900 + T0C)
-		new /obj/effect/decal/cleanable/ash(get_turf(src))
+		new /obj/decal/cleanable/ash(get_turf(src))
 		qdel(src)
 
 
@@ -231,7 +231,7 @@
 	//also copied from matches
 	if(reagents.get_reagent_amount(/datum/reagent/toxin/phoron)) // the phoron explodes when exposed to fire
 		visible_message(SPAN_DANGER("\The [src] conflagrates violently!"))
-		var/datum/effect/effect/system/reagents_explosion/e = new()
+		var/datum/effect/reagents_explosion/e = new()
 		e.set_up(round(reagents.get_reagent_amount(/datum/reagent/toxin/phoron) / 2.5, 1), get_turf(src), 0, 0)
 		e.start()
 		qdel(src)
@@ -252,7 +252,7 @@
 	//ensures players always have a few seconds of burn time left when they light their rag
 	if(burn_time <= 5)
 		visible_message(SPAN_WARNING("\The [src] falls apart!"))
-		new /obj/effect/decal/cleanable/ash(get_turf(src))
+		new /obj/decal/cleanable/ash(get_turf(src))
 		qdel(src)
 	update_name()
 	update_icon()
@@ -272,7 +272,7 @@
 
 	if(burn_time <= 0)
 		STOP_PROCESSING(SSobj, src)
-		new /obj/effect/decal/cleanable/ash(location)
+		new /obj/decal/cleanable/ash(location)
 		qdel(src)
 		return
 

@@ -1,14 +1,14 @@
-/obj/effect/manifest
+/obj/manifest
 	name = "manifest"
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
 	unacidable = TRUE
 
-/obj/effect/manifest/Initialize()
+/obj/manifest/Initialize()
 	. = ..()
 	invisibility = INVISIBILITY_ABSTRACT
 
-/obj/effect/manifest/proc/manifest()
+/obj/manifest/proc/manifest()
 	var/dat = "<B>Crew Manifest</B>:<BR>"
 	for(var/mob/living/carbon/human/M in SSmobs.mob_list)
 		dat += text("    <B>[]</B> -  []<BR>", M.name, M.get_assignment())

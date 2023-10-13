@@ -17,7 +17,7 @@
 	stat_immune = 0
 	base_type = /obj/machinery/power/fusion_core
 
-	var/obj/effect/fusion_em_field/owned_field
+	var/obj/fusion_em_field/owned_field
 	var/field_strength = 1//0.01
 	var/initial_id_tag
 

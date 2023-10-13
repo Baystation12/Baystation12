@@ -1,5 +1,5 @@
 //temporary visual effects
-/obj/effect/temp_visual
+/obj/temp_visual
 	icon_state = "nothing"
 	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER
@@ -7,19 +7,19 @@
 	simulated = FALSE
 	var/duration = 10 //in deciseconds
 
-/obj/effect/temp_visual/Initialize(mapload, set_dir)
+/obj/temp_visual/Initialize(mapload, set_dir)
 	if(set_dir)
 		set_dir(set_dir)
 	. = ..()
 	QDEL_IN(src, duration)
 
-/obj/effect/temp_visual/bloodsplatter
+/obj/temp_visual/bloodsplatter
 	icon = 'icons/effects/bloodspatter.dmi'
 	duration = 5
 	layer = LYING_HUMAN_LAYER
 	var/splatter_type = "splatter"
 
-/obj/effect/temp_visual/bloodsplatter/Initialize(mapload, set_dir, _color)
+/obj/temp_visual/bloodsplatter/Initialize(mapload, set_dir, _color)
 	if(set_dir in GLOB.cornerdirs)
 		icon_state = "[splatter_type][pick(1, 2, 6)]"
 	else
