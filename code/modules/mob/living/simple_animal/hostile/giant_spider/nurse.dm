@@ -56,7 +56,7 @@
 		var/obj/item/organ/external/O = H.get_organ(target_zone)
 		if(O)
 			var/eggcount = 0
-			for(var/obj/spider/eggcluster/E in O.implants)
+			for(var/obj/spider/eggcluster/small/E in O.implants)
 				eggcount++
 			if(!eggcount)
 				var/eggs = new egg_type(O, src)
