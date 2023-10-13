@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - tweak: Nurse spiders will only inject 1 - 3 spiderlings sometimes, instead of
-      6 - 12.
