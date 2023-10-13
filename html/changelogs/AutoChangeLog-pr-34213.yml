@@ -1,0 +1,5 @@
+author: Qlonever
+delete-after: true
+changes:
+  - bugfix: Fixed several icon-related issues.
+  - bugfix: Radial menus for organ regeneration surgery now have accurate text.
