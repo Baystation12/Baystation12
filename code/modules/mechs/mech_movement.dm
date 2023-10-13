@@ -15,20 +15,6 @@
 	if(Process_Spacemove()) //Handle here
 		return TRUE
 
-/mob/living/exosuit/Process_Spacemove()
-	. = ..()
-	if(.)
-		return
-
-	//Regardless of modules, emp prevents control
-	if(emp_damage >= EMP_MOVE_DISRUPT && prob(25))
-		return FALSE
-
-	var/obj/item/mech_equipment/ionjets/J = hardpoints[HARDPOINT_BACK]
-	if(istype(J))
-		if(J.allowSpaceMove())
-			return TRUE
-
 //Inertia drift making us face direction makes exosuit flight a bit difficult, plus newtonian flight model yo
 /mob/living/exosuit/set_dir(ndir)
 	if(inertia_dir && inertia_dir == ndir)
@@ -141,13 +127,21 @@
 /mob/living/exosuit/Check_Shoegrip()//mechs are always magbooting
 	return TRUE
 
-/mob/living/exosuit/Process_Spacemove()
+/mob/living/exosuit/Process_Spacemove(allow_movement)
 	if(has_gravity() || throwing || !isturf(loc) || length(grabbed_by) || check_space_footing() || locate(/obj/structure/lattice) in range(1, get_turf(src)))
 		anchored = TRUE
-		return 1
+		return TRUE
 
 	anchored = FALSE
-	return 0
+
+	//Regardless of modules, emp prevents control
+	if(emp_damage >= EMP_MOVE_DISRUPT && prob(25))
+		return FALSE
+
+	var/obj/item/mech_equipment/ionjets/J = hardpoints[HARDPOINT_BACK]
+	if(istype(J))
+		if(J.allowSpaceMove() && (allow_movement || J.stabilizers))
+			return TRUE
 
 /mob/living/exosuit/check_space_footing()//mechs can't push off things to move around in space, they stick to hull or float away
 	for(var/thing in trange(1,src))
