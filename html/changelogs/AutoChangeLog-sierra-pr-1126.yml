@@ -1,0 +1,13 @@
+author: emmanuelbassil
+delete-after: true
+changes:
+  - tweak: Now able to wrap crates/closets with gift wrapping paper; and to wrap humans
+      with regular parcel wrapping paper. Both have the same behavior.
+  - tweak: Can now destination tag and label gifts.
+  - tweak: You now require a sharp item to open any wrapped parcel
+  - tweak: No more instant wrapping. Time delay scales up the bigger the item you're
+      wrapping is. Also uses more wrap depending on item size.
+  - tweak: Can now clip foamclogs with any sharp item, not only wirecutters or the
+      scalpel.
+  - bugfix: Instant Tactical combat gift-wrapping is no longer possible. You need
+      a strong grab and a delay to gift-wrap someone else, like handcuffs.
