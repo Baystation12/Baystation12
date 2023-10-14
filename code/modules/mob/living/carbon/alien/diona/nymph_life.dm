@@ -1,6 +1,5 @@
 //Dionaea regenerate health and nutrition in light.
 /mob/living/carbon/alien/diona/handle_environment(datum/gas_mixture/environment)
-
 	if(health <= 0 || stat == DEAD)
 		return
 
@@ -27,6 +26,3 @@
 		adjustFireLoss(-1)
 		adjustToxLoss(-1)
 		adjustOxyLoss(-1)
-
-	if(!client)
-		handle_npc(src)

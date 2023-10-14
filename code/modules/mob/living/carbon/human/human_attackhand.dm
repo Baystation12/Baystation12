@@ -189,7 +189,10 @@
 			attack.apply_effects(H, src, real_damage, hit_zone)
 			apply_damage(real_damage, attack.get_damage_type(), hit_zone, damage_flags=attack.damage_flags())
 			if (attack.should_attack_log)
-				admin_attack_log(H, src, "Has [pick(attack.attack_verb)] their victim.", "was [pick(attack.attack_verb)]] by their attacker", "has [pick(attack.attack_verb)]")
+				admin_attack_log(H, src, "Has [pick(attack.attack_verb)] their victim.", "was [pick(attack.attack_verb)] by their attacker", "has [pick(attack.attack_verb)]")
+
+			if (ai_holder)
+				ai_holder.react_to_attack(H)
 
 		if (I_DISARM)
 			if (H.species)

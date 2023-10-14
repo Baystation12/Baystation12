@@ -56,9 +56,6 @@
 
 	ingest_amount = 6
 
-	var/list/no_touchie = list(/obj/item/mirror,
-							   /obj/item/storage/mirror)
-
 /datum/species/monkey/New()
 	equip_adjust = list(
 		slot_l_hand_str = list("[NORTH]" = list("x" = 1, "y" = 3), "[EAST]" = list("x" = -3, "y" = 2), "[SOUTH]" = list("x" = -1, "y" = 3), "[WEST]" = list("x" = 3, "y" = 2)),
@@ -69,53 +66,12 @@
 	)
 	..()
 
-/datum/species/monkey/handle_npc(mob/living/carbon/human/H)
-	if(H.stat != CONSCIOUS)
-		return
-	if(prob(33) && isturf(H.loc) && !H.pulledby) //won't move if being pulled
-		var/dir = pick(GLOB.cardinal)
-		var/turf/T = get_step(get_turf(H), dir)
-		if(T && (T.pathweight < INFINITY))
-			H.SelfMove(dir)
-
-	var/obj/held = H.get_active_hand()
-	if(held && prob(1))
-		var/turf/T = get_random_turf_in_range(H, 7, 2)
-		if(T)
-			if(istype(held, /obj/item/gun) && prob(80))
-				var/obj/item/gun/G = held
-				G.Fire(T, H)
-			else
-				H.throw_item(T)
-		else
-			H.unequip_item()
-	if(!held && !H.restrained() && prob(5))
-		var/list/touchables = list()
-		for(var/obj/O in range(1,get_turf(H)))
-			if(O.simulated && O.Adjacent(H) && !is_type_in_list(O, no_touchie))
-				touchables += O
-		if(length(touchables))
-			var/obj/touchy = pick(touchables)
-			touchy.attack_hand(H)
-
-	if(prob(1))
-		H.emote(pick("scratch","jump","roll","tail"))
-
-	if(H.get_shock() && H.shock_stage < 40 && prob(3))
-		H.custom_emote("chimpers pitifully")
-
-	if(H.shock_stage > 10 && prob(3))
-		H.emote(pick("cry","whimper"))
-
-	if(H.shock_stage >= 40 && prob(3))
-		H.emote("scream")
-
-	if(!H.restrained() && H.lying && H.shock_stage >= 60 && prob(3))
-		H.custom_emote("thrashes in agony")
-
 /datum/species/monkey/handle_post_spawn(mob/living/carbon/human/H)
 	..()
 	H.item_state = lowertext(name)
+	H.ai_holder = new /datum/ai_holder/human/monkey (H)
+	H.say_list_type = /datum/say_list/monkey
+	H.say_list = new /datum/say_list/monkey (H)
 
 /datum/species/monkey/alien
 	name = "Farwa"
@@ -176,3 +132,56 @@
 		/singleton/trait/boon/cast_iron_stomach = TRAIT_LEVEL_EXISTS,
 		/singleton/trait/malus/sugar = TRAIT_LEVEL_MAJOR
 	)
+
+/datum/say_list/monkey
+	emote_predef = list("scratch","jump","roll","tail")
+	emote_hear = list("hoots")
+
+/datum/ai_holder/human/monkey
+	base_wander_delay = 2
+	speak_chance = 2
+	wander_chance = 25
+	wander_when_pulled = TRUE
+	violent_breakthrough = FALSE
+	flee_from_allies = TRUE
+	lose_target_timeout = 30 SECONDS
+
+	var/list/no_touchie = list(/obj/item/mirror,
+							   /obj/item/storage/mirror)
+
+/datum/ai_holder/human/monkey/handle_special_strategical()
+	var/obj/held = holder.get_active_hand()
+	if(held && prob(5))
+		var/turf/T = get_random_turf_in_range(holder, 7, 2)
+		if(T)
+			if(istype(held, /obj/item/gun) && prob(80))
+				var/obj/item/gun/G = held
+				G.Fire(T, holder)
+			else
+				holder.throw_item(T)
+		else
+			holder.unequip_item()
+	if(!held && !holder.restrained() && prob(10))
+		var/list/touchables = list()
+		for(var/obj/O in range(1,get_turf(holder)))
+			if(O.simulated && O.Adjacent(holder) && !is_type_in_list(O, no_touchie))
+				touchables += O
+		if(length(touchables))
+			var/obj/touchy = pick(touchables)
+			touchy.attack_hand(holder)
+
+/datum/ai_holder/human/monkey/handle_idle_speaking()
+	if(!check_listeners())
+		return
+
+	var/mob/living/carbon/human/holder_human = holder
+	if(holder_human.get_shock() && holder_human.shock_stage < 40 && prob(3))
+		holder_human.audible_emote("chimpers pitifully")
+	else if(holder_human.shock_stage > 10 && prob(3))
+		holder_human.emote(pick("cry","whimper"))
+	else if(holder_human.shock_stage >= 40 && prob(3))
+		holder_human.emote("scream")
+	else if(!holder.restrained() && holder_human.lying && holder_human.shock_stage >= 60 && prob(3))
+		holder_human.visible_emote("thrashes in agony")
+	else
+		emote_random()

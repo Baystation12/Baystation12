@@ -480,7 +480,10 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	handle_limbs_setup(H)
 
 /datum/species/proc/handle_pre_spawn(mob/living/carbon/human/H)
-	return
+	// Changing species can change NPC behaviour, so delete the holder if there is one
+	if (H.ai_holder && istype(H.ai_holder, /datum))
+		GLOB.stat_set_event.unregister(H, H.ai_holder, /datum/ai_holder/proc/holder_stat_change)
+		QDEL_NULL(H.ai_holder)
 
 /datum/species/proc/handle_death(mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
 	return
@@ -553,10 +556,6 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 			return 1
 
 	return 0
-
-// Called in life() when the mob has no client.
-/datum/species/proc/handle_npc(mob/living/carbon/human/H)
-	return
 
 /datum/species/proc/handle_vision(mob/living/carbon/human/H)
 	var/list/vision = H.get_accumulated_vision_handlers()

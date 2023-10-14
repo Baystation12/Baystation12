@@ -11,7 +11,18 @@
 		else if (lose_target_time == world.time) // We last saw them next to us, so do a blind attack on that tile.
 			melee_on_tile(target_last_seen_turf)
 		else
-			find_target()
+			if (can_violently_breakthrough())
+				if(!breakthrough(target_last_seen_turf))
+					var/list/turf/search_turf_candidates = list()
+					for (var/turf/simulated/floor/search_turf in (range(vision_range, holder) + get_area_turfs(get_area(target_last_seen_turf))))
+						search_turf_candidates += search_turf
+
+					var/picked_turf = pick(search_turf_candidates)
+					ai_log("engage_unseen_enemy() : Searching for enemy at : [picked_turf]", AI_LOG_TRACE)
+					give_destination(picked_turf, 1, TRUE)
+					find_target()
+			else
+				find_target()
 	else
 		shoot_near_turf(target_last_seen_turf)
 

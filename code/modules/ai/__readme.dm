@@ -132,7 +132,7 @@ avoid infinite loops (I.E. Stance A switches to Stance B, which then
 switches to Stance A, and so on...), and the delay is very short so
 it should not be an issue.
 
-See code/__defines/mob.dm for a list of stance defines, and descriptions
+See code/__defines/ai.dm for a list of stance defines, and descriptions
 about their purpose. Generally, each stance has its own file in the AI
 module folder and are mostly self contained, however some files instead
 deal with general things that other stances may require, such as targeting
