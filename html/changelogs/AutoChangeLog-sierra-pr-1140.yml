@@ -1,0 +1,4 @@
+author: Mucker
+delete-after: true
+changes:
+  - bugfix: Objects will once again fall through openspace when affected by gravity.
