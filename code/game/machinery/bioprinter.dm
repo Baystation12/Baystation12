@@ -23,6 +23,10 @@
 	// These should be subtypes of /obj/item/organ
 	var/list/products = list()
 
+/obj/machinery/organ_printer/Initialize()
+	. = ..()
+	queue_icon_update()
+
 /obj/machinery/organ_printer/state_transition(singleton/machine_construction/default/new_state)
 	. = ..()
 	if(istype(new_state))
@@ -32,12 +36,12 @@
 	ClearOverlays()
 	if(panel_open)
 		AddOverlays("[icon_state]_panel")
-	if(is_powered())
-		AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
-		AddOverlays("[icon_state]_lights")
-	else if(printing)
+	if(printing)
 		AddOverlays(emissive_appearance(icon, "[icon_state]_lights_working"))
 		AddOverlays("[icon_state]_lights_working")
+	else if(is_powered())
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
+		AddOverlays("[icon_state]_lights")
 
 /obj/machinery/organ_printer/examine(mob/user)
 	. = ..()
