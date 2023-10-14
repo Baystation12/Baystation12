@@ -195,6 +195,8 @@
 
 #define DEFAULT_APPEARANCE_FLAGS (PIXEL_SCALE)
 
+#define DEFAULT_RENDERER_APPEARANCE_FLAGS (PLANE_MASTER | NO_CLIENT_COLOR)
+
 /atom/appearance_flags = DEFAULT_APPEARANCE_FLAGS
 /atom/movable/appearance_flags = DEFAULT_APPEARANCE_FLAGS | TILE_BOUND // Most AMs are not visibly bigger than a tile.
 /image/appearance_flags = DEFAULT_APPEARANCE_FLAGS
