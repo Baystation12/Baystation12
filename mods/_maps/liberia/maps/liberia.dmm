@@ -4037,7 +4037,7 @@
 /obj/item/device/eftpos{
 	eftpos_name = "Merchant EFTPOS scanner"
 	},
-/obj/item/stack/package_wrap/twenty_five,
+/obj/item/stack/package_wrap/cargo_wrap,
 /obj/item/hand_labeler,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1

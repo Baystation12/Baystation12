@@ -3486,7 +3486,7 @@
 	dir = 4
 	},
 /obj/item/reagent_containers/food/condiment/enzyme,
-/obj/item/stack/package_wrap/twenty_five,
+/obj/item/stack/package_wrap/cargo_wrap,
 /turf/simulated/floor/tiled/white,
 /area/ship/patrol/crew/kitchen)
 "gD" = (

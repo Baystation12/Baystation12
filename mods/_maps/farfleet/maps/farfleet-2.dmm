@@ -106,7 +106,7 @@
 /obj/structure/closet/walllocker{
 	pixel_y = 32
 	},
-/obj/item/stack/package_wrap/twenty_five,
+/obj/item/stack/package_wrap/cargo_wrap,
 /turf/simulated/floor/tiled/white,
 /area/ship/farfleet/crew/kitchen)
 "bg" = (
