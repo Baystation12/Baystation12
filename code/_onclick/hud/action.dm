@@ -67,7 +67,7 @@
 				item.ui_action_click(owner)
 		//if(AB_SPELL)
 		//	if(target)
-		//		var/obj/effect/proc_holder/spell = target
+		//		var/obj/proc_holder/spell = target
 		//		spell.Click()
 		if(AB_INNATE)
 			if(!active)

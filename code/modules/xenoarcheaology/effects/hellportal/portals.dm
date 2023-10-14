@@ -1,4 +1,4 @@
-/obj/effect/gateway/artifact
+/obj/gateway/artifact
 	name = "reality tear"
 	desc = "A piercing pain strikes your mind as you peer into the tear, witnessing horrors and suffering beyond comprehension."
 	light_range=5
@@ -20,12 +20,12 @@
 		'sound/effects/squelch2.ogg'
 	)
 
-/obj/effect/gateway/artifact/small/New(turf/T)
+/obj/gateway/artifact/small/New(turf/T)
 	..()
 
 	addtimer(new Callback(src, .proc/create_and_delete), rand(15, 30) SECONDS)
 
-/obj/effect/gateway/artifact/small/proc/create_and_delete()
+/obj/gateway/artifact/small/proc/create_and_delete()
 	var/mob/living/simple_animal/T = pickweight(spawnable)
 	T = new T(src.loc)
 	T.min_gas = null
@@ -42,7 +42,7 @@
 	qdel(src)
 
 //Spawns after the artifact is destroyed
-/obj/effect/gateway/artifact/big
+/obj/gateway/artifact/big
 	name = "interdimensional gateway"
 	desc = "A huge hole in reality with a strange, pulsing heartbeat. Faint, agonized screams can be heard from inside it..."
 	light_range = 10
@@ -61,7 +61,7 @@
 		'sound/hallucinations/veryfar_noise.ogg'
 	)
 
-/obj/effect/gateway/artifact/big/New(turf/T)
+/obj/gateway/artifact/big/New(turf/T)
 	..()
 
 	mob_limit = health * 2
@@ -69,7 +69,7 @@
 	addtimer(new Callback(src, .proc/spawn_monster), rand(30, 60) SECONDS)
 	GLOB.sound_player.PlayLoopingSound(src, "\ref[src]", 'sound/effects/Heart Beat.ogg', 70, 6)
 
-/obj/effect/gateway/artifact/big/proc/spawn_monster()
+/obj/gateway/artifact/big/proc/spawn_monster()
 	var/mob/living/simple_animal/T = pickweight(spawnable)
 	T = new T(src.loc)
 	T.min_gas = null

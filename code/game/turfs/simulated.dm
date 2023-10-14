@@ -39,7 +39,7 @@
 		wet_overlay = null
 
 /turf/simulated/clean_blood()
-	for(var/obj/effect/decal/cleanable/blood/B in contents)
+	for(var/obj/decal/cleanable/blood/B in contents)
 		B.clean_blood()
 	..()
 
@@ -50,17 +50,17 @@
 	levelupdate()
 
 /turf/simulated/proc/AddTracks(typepath,bloodDNA,comingdir,goingdir,bloodcolor=COLOR_BLOOD_HUMAN)
-	var/obj/effect/decal/cleanable/blood/tracks/tracks = locate(typepath) in src
+	var/obj/decal/cleanable/blood/tracks/tracks = locate(typepath) in src
 	if(!tracks)
 		tracks = new typepath(src)
 	tracks.AddTracks(bloodDNA,comingdir,goingdir,bloodcolor)
 
 /turf/simulated/proc/update_dirt()
 	dirt = min(dirt+0.5, 101)
-	var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
+	var/obj/decal/cleanable/dirt/dirtoverlay = locate(/obj/decal/cleanable/dirt, src)
 	if (dirt > 50)
 		if (!dirtoverlay)
-			dirtoverlay = new/obj/effect/decal/cleanable/dirt(src)
+			dirtoverlay = new/obj/decal/cleanable/dirt(src)
 		dirtoverlay.alpha = min((dirt - 50) * 5, 255)
 
 /turf/simulated/remove_cleanables()
@@ -138,7 +138,7 @@
 		return 0
 
 	if(istype(M))
-		for(var/obj/effect/decal/cleanable/blood/B in contents)
+		for(var/obj/decal/cleanable/blood/B in contents)
 			if(!B.blood_DNA)
 				B.blood_DNA = list()
 			if(!B.blood_DNA[M.dna.unique_enzymes])
@@ -151,10 +151,10 @@
 // Only adds blood on the floor -- Skie
 /turf/simulated/proc/add_blood_floor(mob/living/carbon/M as mob)
 	if( istype(M, /mob/living/carbon/alien ))
-		var/obj/effect/decal/cleanable/blood/xeno/this = new /obj/effect/decal/cleanable/blood/xeno(src)
+		var/obj/decal/cleanable/blood/xeno/this = new /obj/decal/cleanable/blood/xeno(src)
 		this.blood_DNA["UNKNOWN BLOOD"] = "X*"
 	else if( istype(M, /mob/living/silicon/robot ))
-		new /obj/effect/decal/cleanable/blood/oil(src)
+		new /obj/decal/cleanable/blood/oil(src)
 
 /turf/simulated/proc/can_build_cable(mob/user)
 	return 0

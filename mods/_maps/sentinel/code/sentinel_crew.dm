@@ -1,6 +1,6 @@
 #define WEBHOOK_SUBMAP_LOADED_SOL	"webhook_submap_sol"
 
-/obj/effect/submap_landmark/joinable_submap/away_scg_patrol
+/obj/submap_landmark/joinable_submap/away_scg_patrol
 	name = "Patrol Ship"
 	archetype = /singleton/submap_archetype/away_scg_patrol
 
@@ -17,23 +17,23 @@
 	)
 	call_webhook = WEBHOOK_SUBMAP_LOADED_SOL
 
-/obj/effect/submap_landmark/spawnpoint/away_patrol
+/obj/submap_landmark/spawnpoint/away_patrol
 	name = "Army SCGSO Trooper"
 	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 
-/obj/effect/submap_landmark/spawnpoint/away_patrol/captain
+/obj/submap_landmark/spawnpoint/away_patrol/captain
 	name = "Army SCGSO Leader"
 
-/obj/effect/submap_landmark/spawnpoint/away_patrol/commander
+/obj/submap_landmark/spawnpoint/away_patrol/commander
 	name = "Fleet Commander"
 
-/obj/effect/submap_landmark/spawnpoint/away_patrol/pilot1
+/obj/submap_landmark/spawnpoint/away_patrol/pilot1
 	name = "Fleet Pilot"
 
-/obj/effect/submap_landmark/spawnpoint/away_patrol/surgeon
+/obj/submap_landmark/spawnpoint/away_patrol/surgeon
 	name = "Fleet Corpsman"
 
-/obj/effect/submap_landmark/spawnpoint/away_patrol/engineer
+/obj/submap_landmark/spawnpoint/away_patrol/engineer
 	name = "Fleet Technician"
 
 /* ACCESS

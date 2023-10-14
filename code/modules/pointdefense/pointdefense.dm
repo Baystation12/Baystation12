@@ -143,7 +143,7 @@
 	return TRUE
 
 /obj/machinery/pointdefense/proc/Shoot(weakref/target)
-	var/obj/effect/meteor/M = target.resolve()
+	var/obj/meteor/M = target.resolve()
 	if(!istype(M))
 		return
 	engaging = TRUE
@@ -172,7 +172,7 @@
 
 	engaging = FALSE
 	last_shot = world.time
-	var/obj/effect/meteor/M = target.resolve()
+	var/obj/meteor/M = target.resolve()
 	if(!istype(M))
 		return
 	//We throw a laser but it doesnt have to hit for meteor to explode
@@ -207,10 +207,10 @@
 	if(!istype(PC))
 		return
 
-	for(var/obj/effect/meteor/M in GLOB.meteor_list)
+	for(var/obj/meteor/M in GLOB.meteor_list)
 		var/already_targeted = FALSE
 		for(var/weakref/WR in PC.targets)
-			var/obj/effect/meteor/m = WR.resolve()
+			var/obj/meteor/m = WR.resolve()
 			if(m == M)
 				already_targeted = TRUE
 				break

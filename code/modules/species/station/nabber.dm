@@ -78,7 +78,7 @@
 
 	breathing_organ = BP_TRACH
 
-	move_trail = /obj/effect/decal/cleanable/blood/tracks/snake
+	move_trail = /obj/decal/cleanable/blood/tracks/snake
 
 	has_organ = list(    // which required-organ checks are conducted.
 		BP_BRAIN =    /obj/item/organ/internal/brain/insectoid/nabber,

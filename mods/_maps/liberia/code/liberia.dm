@@ -21,7 +21,7 @@
 	area_usage_test_exempted_root_areas = list(/area/liberia)
 
 // Overmap objects
-/obj/effect/overmap/visitable/ship/liberia
+/obj/overmap/visitable/ship/liberia
 	name = "Liberia"
 	desc = "Vessel with Free Trade Union registration"
 	color = "#8a6642"
@@ -38,7 +38,7 @@
 		"nav_liberia_west"
 	)
 
-/obj/effect/submap_landmark/joinable_submap/liberia
+/obj/submap_landmark/joinable_submap/liberia
 	name = "Liberia"
 	archetype = /singleton/submap_archetype/liberia
 

@@ -105,7 +105,7 @@
 /datum/extension/interactive/ntos/proc/voltage_overload()
 	var/atom/A = holder
 	if(istype(A))
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 		s.set_up(10, 1, A.loc)
 		s.start()
 

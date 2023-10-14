@@ -42,7 +42,7 @@
 /obj/structure/table/rack,
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
-/obj/effect/floor_decal/corner/red/mono,
+/obj/floor_decal/corner/red/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/deepmaint)
 "iR" = (
@@ -113,7 +113,7 @@
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/cash,
-/obj/effect/floor_decal/corner/red/mono,
+/obj/floor_decal/corner/red/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/deepmaint)
 "pS" = (
@@ -127,7 +127,7 @@
 /obj/random/firstaid,
 /obj/random/firstaid,
 /obj/random/firstaid,
-/obj/effect/floor_decal/corner/red/mono,
+/obj/floor_decal/corner/red/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/deepmaint)
 "qP" = (
@@ -155,7 +155,7 @@
 /turf/simulated/floor/carpet/red,
 /area/map_template/deepmaint)
 "uP" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "wK" = (
@@ -220,7 +220,7 @@
 /area/map_template/deepmaint)
 "DI" = (
 /obj/machinery/door/airlock/highsecurity,
-/obj/effect/floor_decal/corner/red/diagonal,
+/obj/floor_decal/corner/red/diagonal,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/deepmaint)
 "DM" = (
@@ -256,14 +256,14 @@
 "Iz" = (
 /obj/structure/table/rack,
 /obj/random/backpack,
-/obj/effect/floor_decal/corner/red/mono,
+/obj/floor_decal/corner/red/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/deepmaint)
 "Jl" = (
 /turf/simulated/wall,
 /area/map_template/deepmaint)
 "Js" = (
-/obj/effect/floor_decal/corner/red/diagonal,
+/obj/floor_decal/corner/red/diagonal,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/deepmaint)
 "Jt" = (
@@ -276,7 +276,7 @@
 /obj/random/ammo,
 /obj/random/ammo,
 /obj/random/ammo,
-/obj/effect/floor_decal/corner/red/mono,
+/obj/floor_decal/corner/red/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/deepmaint)
 "Kn" = (
@@ -290,7 +290,7 @@
 /turf/simulated/floor/carpet/blue2,
 /area/map_template/deepmaint)
 "Mo" = (
-/obj/effect/wallframe_spawn/reinforced/bare,
+/obj/wallframe_spawn/reinforced/bare,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "Nj" = (
@@ -337,7 +337,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/deepmaint)
 "PV" = (
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/blood,
 /turf/simulated/floor/carpet/blue2,
 /area/map_template/deepmaint)
 "Rc" = (
@@ -359,7 +359,7 @@
 /obj/structure/bed/chair/comfy/blue{
 	dir = 4
 	},
-/obj/effect/landmark/corpse/commander,
+/obj/landmark/corpse/commander,
 /obj/machinery/light{
 	dir = 8
 	},
@@ -401,7 +401,7 @@
 	},
 /obj/random/energy,
 /obj/random/handgun,
-/obj/effect/floor_decal/corner/red/mono,
+/obj/floor_decal/corner/red/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/deepmaint)
 "ZG" = (

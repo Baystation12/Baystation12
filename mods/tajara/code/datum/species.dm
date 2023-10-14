@@ -71,7 +71,7 @@
 	blood_color = "#862a51"
 	organs_icon = 'mods/tajara/icons/tajara_body/organs.dmi'
 
-	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
+	move_trail = /obj/decal/cleanable/blood/tracks/paw
 /*
 	base_auras = list(
 		/obj/aura/speed/bio/tajaran

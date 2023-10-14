@@ -3,13 +3,13 @@
 	//OVERMAP//
 	///////////
 
-/obj/effect/overmap/visitable/ship/patrol
+/obj/overmap/visitable/ship/patrol
 	name = "SCGF Patrol Craft"
 	desc = "SCGF Cobra-class Patrol Craft. Seconded to Battlegroup Bravo of Fifth Fleet "
 	color = "#990000"
 	fore_dir = WEST
 	vessel_mass = 1000
-	known_ships = list(/obj/effect/overmap/visitable/ship/landable/reaper)
+	known_ships = list(/obj/overmap/visitable/ship/landable/reaper)
 	vessel_size = SHIP_SIZE_SMALL
 	start_x = 1
 	start_y = 1
@@ -28,7 +28,7 @@
 
 
 #define PATROL_SHIP_PREFIX pick("Sentinel","Cavalry","Scarabaeus","Heretic","Apocalypse","Calamatious","Terror","Pandemonium","Anubis","Hound","Stalker","Avatar","Ultimatum","Goliath","Tyrant","Nemesis","Hydra","Stormhawk","Manticore","Basilisk")
-/obj/effect/overmap/visitable/ship/patrol/New()
+/obj/overmap/visitable/ship/patrol/New()
 	name = "SFV [PATROL_SHIP_PREFIX], \a [name]"
 	for(var/area/ship/patrol/A)
 		A.name = "\improper [name] - [A.name]"
@@ -53,23 +53,23 @@
 		/area/turbolift/sentinel_second
 	)
 
-/obj/effect/shuttle_landmark/nav_patrol/nav1
+/obj/shuttle_landmark/nav_patrol/nav1
 	name = "Patrol Ship Fore"
 	landmark_tag = "nav_patrol_1"
 
-/obj/effect/shuttle_landmark/nav_patrol/nav2
+/obj/shuttle_landmark/nav_patrol/nav2
 	name = "Patrol Ship Aft"
 	landmark_tag = "nav_patrol_2"
 
-/obj/effect/shuttle_landmark/nav_patrol/nav3
+/obj/shuttle_landmark/nav_patrol/nav3
 	name = "Patrol Ship Port"
 	landmark_tag = "nav_patrol_3"
 
-/obj/effect/shuttle_landmark/nav_patrol/nav4
+/obj/shuttle_landmark/nav_patrol/nav4
 	name = "Patrol Ship Starboard"
 	landmark_tag = "nav_patrol_4"
 
-/obj/effect/submap_landmark/joinable_submap/patrol
+/obj/submap_landmark/joinable_submap/patrol
 	name = "Sol Patrol Ship"
 	archetype = /singleton/submap_archetype/away_scg_patrol
 

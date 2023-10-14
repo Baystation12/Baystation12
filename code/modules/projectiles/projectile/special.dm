@@ -139,7 +139,7 @@
 	nodamage = TRUE
 	damage_type = DAMAGE_PAIN
 	damage_flags = 0
-	muzzle_type = /obj/effect/projectile/bullet/muzzle
+	muzzle_type = /obj/projectile/bullet/muzzle
 
 /obj/item/projectile/bola
 	name = "bola"
@@ -170,10 +170,10 @@
 
 /obj/item/projectile/webball/on_hit(atom/target, blocked = 0)
 	if (isturf(target.loc))
-		var/obj/effect/spider/stickyweb/W = locate() in get_turf(target)
+		var/obj/spider/stickyweb/W = locate() in get_turf(target)
 		if (!W && prob(75))
 			visible_message(SPAN_DANGER("\The [src] splatters a layer of web on \the [target]!"))
-			new /obj/effect/spider/stickyweb(target.loc)
+			new /obj/spider/stickyweb(target.loc)
 
 			if (isliving(target))
 				var/mob/living/M = target

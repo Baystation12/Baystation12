@@ -1,4 +1,4 @@
-/obj/effect/overmap/visitable/sector/mininghome
+/obj/overmap/visitable/sector/mininghome
 	name = "Asteroid Mining Station"
 	desc = "A small mining station. No active lifesigns found on the station. Sensors indicate an abundance of valuable ore."
 	icon_state = "object"
@@ -18,19 +18,19 @@
 	spawn_cost = 0.5
 	generate_mining_by_z = TRUE
 
-/obj/effect/shuttle_landmark/nav_mininghome_1
+/obj/shuttle_landmark/nav_mininghome_1
 	name = "Navpoint #1"
 	landmark_tag = "nav_mininghome_1"
 
-/obj/effect/shuttle_landmark/nav_mininghome_2
+/obj/shuttle_landmark/nav_mininghome_2
 	name = "Navpoint #2"
 	landmark_tag = "nav_mininghome_2"
 
-/obj/effect/shuttle_landmark/nav_mininghome_3
+/obj/shuttle_landmark/nav_mininghome_3
 	name = "Navpoint #3"
 	landmark_tag = "nav_mininghome_3"
 
-/obj/effect/shuttle_landmark/nav_mininghome_4
+/obj/shuttle_landmark/nav_mininghome_4
 	name = "Hangar"
 	landmark_tag = "nav_mininghome_4"
 	base_area = /area/map_template/mininghome_hangar

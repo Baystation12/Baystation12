@@ -1,4 +1,4 @@
-/obj/effect/submap_landmark
+/obj/submap_landmark
 	icon = 'icons/misc/mark.dmi'
 	invisibility = INVISIBILITY_MAXIMUM
 	anchored = TRUE
@@ -6,12 +6,12 @@
 	density = FALSE
 	opacity = FALSE
 
-/obj/effect/submap_landmark/joinable_submap
+/obj/submap_landmark/joinable_submap
 	icon_state = "x4"
 	var/archetype
 	var/submap_datum_type = /datum/submap
 
-/obj/effect/submap_landmark/joinable_submap/Initialize(mapload)
+/obj/submap_landmark/joinable_submap/Initialize(mapload)
 	. = ..(mapload)
 	if(!SSmapping.submaps[name] && SSmapping.submap_archetypes[archetype])
 		var/datum/submap/submap = new submap_datum_type(z)
@@ -24,8 +24,8 @@
 			to_world_log( "Submap error - mapped landmark had invalid archetype.")
 	return INITIALIZE_HINT_QDEL
 
-/obj/effect/submap_landmark/spawnpoint
+/obj/submap_landmark/spawnpoint
 	icon_state = "x3"
 
-/obj/effect/submap_landmark/spawnpoint/survivor
+/obj/submap_landmark/spawnpoint/survivor
 	name = "Survivor"

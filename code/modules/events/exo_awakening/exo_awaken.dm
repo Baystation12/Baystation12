@@ -10,7 +10,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	///all possible exoplanet areas the event can take place on
 	var/list/exoplanet_areas
 	var/area/chosen_area
-	var/obj/effect/overmap/visitable/sector/chosen_planet
+	var/obj/overmap/visitable/sector/chosen_planet
 	///how many players we need present on the planet for the event to start
 	var/required_players_count = 4
 	var/list/players_on_site = list()
@@ -133,7 +133,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	else
 		announcement = "Anomalous biological activity detected on [location_name()]."
 
-	for (var/obj/effect/overmap/visitable/ship/S in range(chosen_planet,2)) //announce the event to ships in range of the planet
+	for (var/obj/overmap/visitable/ship/S in range(chosen_planet,2)) //announce the event to ships in range of the planet
 		command_announcement.Announce(announcement, "[S.name] Biological Sensor Array", zlevels = S.map_z)
 
 	chosen_planet.add_scan_data("exo_awaken", SPAN_COLOR(COLOR_RED, announcement), null, SKILL_SCIENCE, SKILL_TRAINED)
@@ -164,7 +164,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 				var/mob/M = pick(players_on_site[chosen_area])
 				var/turf/MT = get_turf(M)
 				if (MT)
-					if (istype(chosen_planet, /obj/effect/overmap/visitable/sector/exoplanet))
+					if (istype(chosen_planet, /obj/overmap/visitable/sector/exoplanet))
 						T = CircularRandomTurfAround(MT, Frand(3, 5))
 				else
 					T = pick(area_turfs)
@@ -195,8 +195,8 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 				GLOB.destroyed_event.register(M,src,/datum/event/exo_awakening/proc/reduce_mob_count)
 				LAZYADD(GLOB.exo_event_mob_count, M)
 
-				if (istype(chosen_planet, /obj/effect/overmap/visitable/sector/exoplanet))
-					var/obj/effect/overmap/visitable/sector/exoplanet/E = chosen_planet
+				if (istype(chosen_planet, /obj/overmap/visitable/sector/exoplanet))
+					var/obj/overmap/visitable/sector/exoplanet/E = chosen_planet
 					E.adapt_animal(M, FALSE)
 
 			spawned_mobs++

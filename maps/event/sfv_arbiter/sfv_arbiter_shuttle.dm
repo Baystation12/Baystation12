@@ -13,31 +13,31 @@
 /turf/simulated/floor/shuttle_ceiling/sfv_arbiter
 	color = COLOR_DARK_GUNMETAL
 
-/obj/effect/paint/sfv_arbiter
+/obj/paint/sfv_arbiter
 	color = COLOR_DARK_GUNMETAL
 
-/obj/effect/shuttle_landmark/sfv_arbiter/start
+/obj/shuttle_landmark/sfv_arbiter/start
 	landmark_tag = "nav_sfv_arbiter_start"
 	name = "Start Point"
 
-/obj/effect/shuttle_landmark/sfv_arbiter/nav1
+/obj/shuttle_landmark/sfv_arbiter/nav1
 	landmark_tag = "nav_sfv_arbiter_1"
 
-/obj/effect/shuttle_landmark/sfv_arbiter/nav2
+/obj/shuttle_landmark/sfv_arbiter/nav2
 	landmark_tag = "nav_sfv_arbiter_2"
 
-/obj/effect/shuttle_landmark/sfv_arbiter/nav3
+/obj/shuttle_landmark/sfv_arbiter/nav3
 	landmark_tag = "nav_sfv_arbiter_3"
 
-/obj/effect/shuttle_landmark/sfv_arbiter/nav4
+/obj/shuttle_landmark/sfv_arbiter/nav4
 	landmark_tag = "nav_sfv_arbiter_4"
 
-/obj/effect/shuttle_landmark/sfv_arbiter/dock
+/obj/shuttle_landmark/sfv_arbiter/dock
 	name = "4th Deck, Aft-Starboard (SFV Arbiter)"
 	landmark_tag = "nav_sfv_arbiter_dock"
 	docking_controller = "admin_shuttle_dock_airlock"
 
-/obj/effect/shuttle_landmark/transit/sfv_arbiter
+/obj/shuttle_landmark/transit/sfv_arbiter
 	name = "In transit"
 	landmark_tag = "nav_transit_arbiter"
 

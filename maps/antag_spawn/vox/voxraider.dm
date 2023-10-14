@@ -3,7 +3,7 @@
 	suffixes = list("vox/vox_raider.dmm")
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/vox_raider)
 
-/obj/effect/overmap/visitable/sector/vox_start
+/obj/overmap/visitable/sector/vox_start
 	name = "Empty Space"
 	desc = "Just some empty space, with an irregular sensor echo."
 
@@ -15,7 +15,7 @@
 		"nav_vox_raider_start"
 	)
 
-/obj/effect/overmap/visitable/ship/landable/vox_raider
+/obj/overmap/visitable/ship/landable/vox_raider
 	name = "Alien Interceptor"
 	desc = "An irregular, bulbous craft of unknown origin."
 	shuttle = "Alien Interceptor"
@@ -45,14 +45,14 @@
 /turf/simulated/floor/shuttle_ceiling/vox
 	color = COLOR_DARK_GUNMETAL
 
-/obj/effect/paint/vox
+/obj/paint/vox
 	color = COLOR_VOX
 
 /obj/machinery/computer/shuttle_control/explore/vox_raider
 	name = "shuttle control console"
 	shuttle_tag = "Alien Interceptor"
 
-/obj/effect/shuttle_landmark/vox_raider/start
+/obj/shuttle_landmark/vox_raider/start
 	landmark_tag = "nav_vox_raider_start"
 	name = "Echo Source"
 

@@ -7,14 +7,14 @@
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/sierra
 	warmup_time = 2
 
-/obj/effect/shuttle_landmark/escape_pod/start
+/obj/shuttle_landmark/escape_pod/start
 	name = "Docked"
 	base_turf = /turf/simulated/floor/reinforced
 
-/obj/effect/shuttle_landmark/escape_pod/transit
+/obj/shuttle_landmark/escape_pod/transit
 	name = "In transit"
 
-/obj/effect/shuttle_landmark/escape_pod/out
+/obj/shuttle_landmark/escape_pod/out
 	name = "Escaped"
 
 //Pods
@@ -28,14 +28,14 @@
 	landmark_transition = "escape_pod_"+ #NUMBER +"_internim"; \
 	waypoint_offsite = "escape_pod_"+ #NUMBER +"_out"; \
 } \
-/obj/effect/shuttle_landmark/escape_pod/start/pod##NUMBER { \
+/obj/shuttle_landmark/escape_pod/start/pod##NUMBER { \
 	landmark_tag = "escape_pod_"+ #NUMBER +"_start"; \
 	docking_controller = "escape_pod_"+ #NUMBER +"_berth"; \
 } \
-/obj/effect/shuttle_landmark/escape_pod/out/pod##NUMBER { \
+/obj/shuttle_landmark/escape_pod/out/pod##NUMBER { \
 	landmark_tag = "escape_pod_"+ #NUMBER +"_internim"; \
 } \
-/obj/effect/shuttle_landmark/escape_pod/transit/pod##NUMBER { \
+/obj/shuttle_landmark/escape_pod/transit/pod##NUMBER { \
 	landmark_tag = "escape_pod_"+ #NUMBER +"_out"; \
 }
 
@@ -60,16 +60,16 @@ SIERRA_ESCAPE_POD(8)
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/sierra
 	warmup_time = 7
 
-/datum/shuttle/autodock/ferry/petrov/New(_name, obj/effect/shuttle_landmark/initial_location)
+/datum/shuttle/autodock/ferry/petrov/New(_name, obj/shuttle_landmark/initial_location)
 	shuttle_area = subtypesof(/area/shuttle/petrov)
 	..()
 
-/obj/effect/shuttle_landmark/petrov/start
+/obj/shuttle_landmark/petrov/start
 	name = "First Deck"
 	landmark_tag = "nav_petrov_start"
 	docking_controller = "petrov_shuttle_dock"
 
-/obj/effect/shuttle_landmark/petrov/out
+/obj/shuttle_landmark/petrov/out
 	name = "Space near the vessel"
 	landmark_tag = "nav_petrov_out"
 
@@ -97,29 +97,29 @@ SIERRA_ESCAPE_POD(8)
 		"nav_liberia_antag"
 	)
 
-/obj/effect/shuttle_landmark/ninja/deck1
+/obj/shuttle_landmark/ninja/deck1
 	name = "West of Fourth Deck"
 	landmark_tag = "nav_ninja_deck1"
 
-/obj/effect/shuttle_landmark/ninja/deck2
+/obj/shuttle_landmark/ninja/deck2
 	name = "East of Third Deck"
 	landmark_tag = "nav_ninja_deck2"
 
-/obj/effect/shuttle_landmark/ninja/deck3
+/obj/shuttle_landmark/ninja/deck3
 	name = "Northeast of Second Deck"
 	landmark_tag = "nav_ninja_deck3"
 
-/obj/effect/shuttle_landmark/ninja/deck4
+/obj/shuttle_landmark/ninja/deck4
 	name = "South of First Deck"
 	landmark_tag = "nav_ninja_deck4"
 
-/obj/effect/shuttle_landmark/ninja/deck5
+/obj/shuttle_landmark/ninja/deck5
 	name = "Southeast of Bridge"
 	landmark_tag = "nav_ninja_deck5"
 
 //Merchant
 
-/obj/effect/shuttle_landmark/merchant/out
+/obj/shuttle_landmark/merchant/out
 	name = "Docking Bay"
 	landmark_tag = "nav_merchant_out"
 	docking_controller = "merchant_shuttle_station"
@@ -135,14 +135,14 @@ SIERRA_ESCAPE_POD(8)
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling
 	warmup_time = 7
 
-/obj/effect/shuttle_landmark/admin/start
+/obj/shuttle_landmark/admin/start
 	name = "Centcom"
 	landmark_tag = "nav_admin_start"
 	docking_controller = "admin_shuttle"
 	base_area = /area/centcom
 	base_turf = /turf/simulated/floor/plating
 
-/obj/effect/shuttle_landmark/admin/out
+/obj/shuttle_landmark/admin/out
 	name = "Docking Bay"
 	landmark_tag = "nav_admin_out"
 	docking_controller = "admin_shuttle_dock"
@@ -159,39 +159,39 @@ SIERRA_ESCAPE_POD(8)
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling
 	warmup_time = 7
 
-/obj/effect/shuttle_landmark/ferry/start
+/obj/shuttle_landmark/ferry/start
 	name = "Centcom"
 	landmark_tag = "nav_ferry_start"
 	docking_controller = "centcom_shuttle_bay"
 
-/obj/effect/shuttle_landmark/ferry/out
+/obj/shuttle_landmark/ferry/out
 	name = "Docking Bay"
 	landmark_tag = "nav_ferry_out"
 	docking_controller = "centcom_shuttle_dock"
 
 //Merc
 
-/obj/effect/shuttle_landmark/merc/deck1
+/obj/shuttle_landmark/merc/deck1
 	name = "Northwest of Fourth Deck"
 	landmark_tag = "nav_merc_deck1"
 
-/obj/effect/shuttle_landmark/merc/deck2
+/obj/shuttle_landmark/merc/deck2
 	name = "South of Third deck"
 	landmark_tag = "nav_merc_deck2"
 
-/obj/effect/shuttle_landmark/merc/deck3
+/obj/shuttle_landmark/merc/deck3
 	name = "Southeast of the Second deck"
 	landmark_tag = "nav_merc_deck3"
 
-/obj/effect/shuttle_landmark/merc/deck4
+/obj/shuttle_landmark/merc/deck4
 	name = "Northeast of First Deck"
 	landmark_tag = "nav_merc_deck4"
 
-/obj/effect/shuttle_landmark/merc/deck5
+/obj/shuttle_landmark/merc/deck5
 	name = "East of Bridge"
 	landmark_tag = "nav_merc_deck5"
 
-/obj/effect/shuttle_landmark/merc/dock
+/obj/shuttle_landmark/merc/dock
 	name = "Docking Port"
 	landmark_tag = "nav_merc_dock"
 	docking_controller = "nuke_shuttle_dock_airlock"
@@ -220,23 +220,23 @@ SIERRA_ESCAPE_POD(8)
 		"nav_mining_antag"
 		)
 
-/obj/effect/shuttle_landmark/skipjack/deck1
+/obj/shuttle_landmark/skipjack/deck1
 	name = "Northeast of Fourth Deck"
 	landmark_tag = "nav_skipjack_deck1"
 
-/obj/effect/shuttle_landmark/skipjack/deck2
+/obj/shuttle_landmark/skipjack/deck2
 	name = "Southeast of Third deck"
 	landmark_tag = "nav_skipjack_deck2"
 
-/obj/effect/shuttle_landmark/skipjack/deck3
+/obj/shuttle_landmark/skipjack/deck3
 	name = "Southwest of Second deck"
 	landmark_tag = "nav_skipjack_deck3"
 
-/obj/effect/shuttle_landmark/skipjack/deck4
+/obj/shuttle_landmark/skipjack/deck4
 	name = "Northwest of First Deck"
 	landmark_tag = "nav_skipjack_deck4"
 
-/obj/effect/shuttle_landmark/skipjack/deck5
+/obj/shuttle_landmark/skipjack/deck5
 	name = "South of Bridge"
 	landmark_tag = "nav_skipjack_deck5"
 
@@ -265,27 +265,27 @@ SIERRA_ESCAPE_POD(8)
 		)
 
 
-/obj/effect/shuttle_landmark/ert/merchant
+/obj/shuttle_landmark/ert/merchant
 	name = "Local Merchant Station"
 	landmark_tag = "nav_ert_merchant"
 
-/obj/effect/shuttle_landmark/ert/deck1
+/obj/shuttle_landmark/ert/deck1
 	name =  "Southwest of Fourth deck"
 	landmark_tag = "nav_ert_deck1"
 
-/obj/effect/shuttle_landmark/ert/deck2
+/obj/shuttle_landmark/ert/deck2
 	name = "Northwest of Third deck"
 	landmark_tag = "nav_ert_deck2"
 
-/obj/effect/shuttle_landmark/ert/deck3
+/obj/shuttle_landmark/ert/deck3
 	name = "Northwest of Second deck"
 	landmark_tag = "nav_ert_deck3"
 
-/obj/effect/shuttle_landmark/ert/deck4
+/obj/shuttle_landmark/ert/deck4
 	name = "Southwest of First Deck"
 	landmark_tag = "nav_ert_deck4"
 
-/obj/effect/shuttle_landmark/ert/deck5
+/obj/shuttle_landmark/ert/deck5
 	name = "West of Bridge"
 	landmark_tag = "nav_ert_deck5"
 
@@ -302,12 +302,12 @@ SIERRA_ESCAPE_POD(8)
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling
 	warmup_time = 7
 
-/obj/effect/shuttle_landmark/specops/start
+/obj/shuttle_landmark/specops/start
 	name = "Centcom"
 	landmark_tag = "nav_specops_start"
 	docking_controller = "specops_shuttle_cent"
 
-/obj/effect/shuttle_landmark/specops/out
+/obj/shuttle_landmark/specops/out
 	name = "Docking Bay"
 	landmark_tag = "nav_specops_out"
 	docking_controller = "specops_dock"
@@ -323,11 +323,11 @@ SIERRA_ESCAPE_POD(8)
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling
 	warmup_time = 7
 
-/obj/effect/shuttle_landmark/supply/centcom
+/obj/shuttle_landmark/supply/centcom
 	name = "Offsite"
 	landmark_tag = "nav_cargo_start"
 
-/obj/effect/shuttle_landmark/supply/station
+/obj/shuttle_landmark/supply/station
 	name = "Hangar"
 	landmark_tag = "nav_cargo_station"
 	base_area = /area/quartermaster/hangar
@@ -357,33 +357,33 @@ SIERRA_ESCAPE_POD(8)
 			if(apc.req_access)
 				apc.req_access = list(list(access_engine, access_field_eng))  // engineering OR field eng
 
-/obj/effect/shuttle_landmark/sierra/hangar/exploration_shuttle
+/obj/shuttle_landmark/sierra/hangar/exploration_shuttle
 	name = "Charon Hangar"
 	landmark_tag = "nav_hangar_calypso"
 	base_area = /area/quartermaster/hangar
 	base_turf = /turf/simulated/floor/plating
 
-/obj/effect/shuttle_landmark/sierra/deck1/exploration_shuttle
+/obj/shuttle_landmark/sierra/deck1/exploration_shuttle
 	name = "Space near Fourth Deck"
 	landmark_tag = "nav_deck1_calypso"
 
-/obj/effect/shuttle_landmark/sierra/deck2/exploration_shuttle
+/obj/shuttle_landmark/sierra/deck2/exploration_shuttle
 	name = "Space near Third Deck"
 	landmark_tag = "nav_deck2_calypso"
 
-/obj/effect/shuttle_landmark/sierra/deck3/exploration_shuttle
+/obj/shuttle_landmark/sierra/deck3/exploration_shuttle
 	name = "Space near Second Deck"
 	landmark_tag = "nav_deck3_calypso"
 
-/obj/effect/shuttle_landmark/sierra/deck4/exploration_shuttle
+/obj/shuttle_landmark/sierra/deck4/exploration_shuttle
 	name = "Space near First Deck"
 	landmark_tag = "nav_deck4_calypso"
 
-/obj/effect/shuttle_landmark/sierra/deck5/exploration_shuttle
+/obj/shuttle_landmark/sierra/deck5/exploration_shuttle
 	name = "Space near Bridge"
 	landmark_tag = "nav_bridge_calypso"
 
-/obj/effect/shuttle_landmark/sierra/transit/exploration_shuttle
+/obj/shuttle_landmark/sierra/transit/exploration_shuttle
 	name = "In transit"
 	landmark_tag = "nav_transit_calypso"
 
@@ -403,33 +403,33 @@ SIERRA_ESCAPE_POD(8)
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/sierra
 	warmup_time = 5
 
-/obj/effect/shuttle_landmark/sierra/hangar/guppy
+/obj/shuttle_landmark/sierra/hangar/guppy
 	name = "Guppy Hangar"
 	landmark_tag = "nav_hangar_guppy"
 	base_area = /area/quartermaster/hangar
 	base_turf = /turf/simulated/floor/plating
 
-/obj/effect/shuttle_landmark/sierra/deck1/guppy
+/obj/shuttle_landmark/sierra/deck1/guppy
 	name = "Space near Fourth Deck"
 	landmark_tag = "nav_deck1_guppy"
 
-/obj/effect/shuttle_landmark/sierra/deck2/guppy
+/obj/shuttle_landmark/sierra/deck2/guppy
 	name = "Space near Third Deck"
 	landmark_tag = "nav_deck2_guppy"
 
-/obj/effect/shuttle_landmark/sierra/deck3/guppy
+/obj/shuttle_landmark/sierra/deck3/guppy
 	name = "Space near Second Deck"
 	landmark_tag = "nav_deck3_guppy"
 
-/obj/effect/shuttle_landmark/sierra/deck4/guppy
+/obj/shuttle_landmark/sierra/deck4/guppy
 	name = "Space near First Deck"
 	landmark_tag = "nav_deck4_guppy"
 
-/obj/effect/shuttle_landmark/sierra/deck5/guppy
+/obj/shuttle_landmark/sierra/deck5/guppy
 	name = "Space near Bridge"
 	landmark_tag = "nav_bridge_guppy"
 
-/obj/effect/shuttle_landmark/sierra/transit/guppy
+/obj/shuttle_landmark/sierra/transit/guppy
 	name = "In transit"
 	landmark_tag = "nav_transit_guppy"
 
@@ -439,21 +439,21 @@ SIERRA_ESCAPE_POD(8)
 
 // away transit
 
-/obj/effect/shuttle_landmark/sierra/transit/blueriver_shuttle
+/obj/shuttle_landmark/sierra/transit/blueriver_shuttle
 	name = "In transit"
 	landmark_tag = "nav_transit_blueriver"
 
-/obj/effect/shuttle_landmark/sierra/deck3/patrol
+/obj/shuttle_landmark/sierra/deck3/patrol
 	name = "Third Deck Starboard Dock"
 	landmark_tag = "nav_deck3_patrol"
 	docking_controller = "admin_shuttle_dock"
 
-/obj/effect/shuttle_landmark/sierra/deck3/skrellshuttle
+/obj/shuttle_landmark/sierra/deck3/skrellshuttle
 	name = "Third Deck Starboard Dock"
 	landmark_tag = "nav_deck3_skrellshuttle"
 	docking_controller = "admin_shuttle_dock"
 
-/obj/effect/shuttle_landmark/sierra/deck1/skrellscout
+/obj/shuttle_landmark/sierra/deck1/skrellscout
 	name = "First Deck Auxillary Dock"
 	landmark_tag = "nav_deck1_skrellscout"
 	docking_controller = "fd_starboard"

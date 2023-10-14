@@ -273,35 +273,35 @@
 	icon = 'mods/_maps/farfleet/icons/iccg_flag.dmi'
 	icon_state = "pioneer_plaque"
 
-/obj/effect/floor_decal/iccglogo
+/obj/floor_decal/iccglogo
 	icon = 'mods/_maps/farfleet/icons/GCC-floor.dmi'
 	icon_state = "center"
 
-/obj/effect/floor_decal/iccglogo/center_left
+/obj/floor_decal/iccglogo/center_left
 	icon_state = "center_left"
 
-/obj/effect/floor_decal/iccglogo/center_right
+/obj/floor_decal/iccglogo/center_right
 	icon_state = "center_right"
 
-/obj/effect/floor_decal/iccglogo/top_center
+/obj/floor_decal/iccglogo/top_center
 	icon_state = "top_center"
 
-/obj/effect/floor_decal/iccglogo/top_left
+/obj/floor_decal/iccglogo/top_left
 	icon_state = "top_left"
 
-/obj/effect/floor_decal/iccglogo/top_right
+/obj/floor_decal/iccglogo/top_right
 	icon_state = "top_right"
 
-/obj/effect/floor_decal/iccglogo/bottom_center
+/obj/floor_decal/iccglogo/bottom_center
 	icon_state = "bottom_center"
 
-/obj/effect/floor_decal/iccglogo/bottom_left
+/obj/floor_decal/iccglogo/bottom_left
 	icon_state = "bottom_left"
 
-/obj/effect/floor_decal/iccglogo/bottom_right
+/obj/floor_decal/iccglogo/bottom_right
 	icon_state = "bottom_right"
 
-/obj/effect/floor_decal/iccglogo/corner
+/obj/floor_decal/iccglogo/corner
 	icon_state = "gcc_corner"
 
 /obj/structure/sign/iccg

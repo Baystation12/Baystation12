@@ -1,6 +1,6 @@
 // Submap shuttles.
 // Mule - Shuttle One, Port Side
-/obj/effect/overmap/visitable/ship/landable/mule
+/obj/overmap/visitable/ship/landable/mule
 	shuttle = "Mule"
 	name = "Mule"
 	desc = "Vessel with FTU designation. Dedicated to spaceship designated as Liberia"
@@ -16,7 +16,7 @@
 	name = "shuttle control console"
 	shuttle_tag = "Mule"
 
-/obj/effect/shuttle_landmark/mule/start
+/obj/shuttle_landmark/mule/start
 	name = "Mule Docked"
 	landmark_tag = "nav_mule_start"
 	docking_controller = "mule_port_dock"

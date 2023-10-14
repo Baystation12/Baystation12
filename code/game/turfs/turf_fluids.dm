@@ -11,21 +11,21 @@
 
 /turf/proc/add_fluid(amount, fluid)
 	if(!flooded)
-		var/obj/effect/fluid/F = locate() in src
+		var/obj/fluid/F = locate() in src
 		if(!F) F = new(src)
 		SET_FLUID_DEPTH(F, F.fluid_amount + amount)
 
 /turf/proc/remove_fluid(amount = 0)
-	var/obj/effect/fluid/F = locate() in src
+	var/obj/fluid/F = locate() in src
 	if(F) LOSE_FLUID(F, amount)
 
 /turf/return_fluid()
-	return (locate(/obj/effect/fluid) in contents)
+	return (locate(/obj/fluid) in contents)
 
 /turf/proc/make_flooded()
 	if(!flooded)
 		flooded = TRUE
-		for(var/obj/effect/fluid/F in src)
+		for(var/obj/fluid/F in src)
 			qdel(F)
 		update_icon()
 		fluid_update()
@@ -41,7 +41,7 @@
 	..()
 	if(is_flooded(absolute=1))
 		return FLUID_MAX_DEPTH
-	var/obj/effect/fluid/F = return_fluid()
+	var/obj/fluid/F = return_fluid()
 	return (istype(F) ? F.fluid_amount : 0 )
 
 /turf/proc/show_bubbles()
@@ -52,7 +52,7 @@
 			flick("ocean-bubbles", flood_object)
 		return
 
-	var/obj/effect/fluid/F = locate() in src
+	var/obj/fluid/F = locate() in src
 	if(istype(F))
 		flick("bubbles",F)
 
@@ -76,5 +76,5 @@
 			ADD_ACTIVE_FLUID_SOURCE(src)
 	else
 		REMOVE_ACTIVE_FLUID_SOURCE(src)
-		for(var/obj/effect/fluid/F in src)
+		for(var/obj/fluid/F in src)
 			ADD_ACTIVE_FLUID(F)

@@ -1,4 +1,4 @@
-/obj/effect/vine/HasProximity(atom/movable/AM)
+/obj/vine/HasProximity(atom/movable/AM)
 	if(!is_mature() || seed.get_trait(TRAIT_SPREAD) != 2)
 		return
 
@@ -13,20 +13,20 @@
 			if(prob(seed.get_trait(((TRAIT_POTENCY)/2)*3)))
 				entangle(M)
 
-/obj/effect/vine/attack_hand(mob/user)
+/obj/vine/attack_hand(mob/user)
 	manual_unbuckle(user)
 
-/obj/effect/vine/attack_generic(mob/user)
+/obj/vine/attack_generic(mob/user)
 	if (buckled_mob == user)
 		manual_unbuckle(user)
 		return
 	..()
 
-/obj/effect/vine/Crossed(atom/movable/O)
+/obj/vine/Crossed(atom/movable/O)
 	if(isliving(O))
 		trodden_on(O)
 
-/obj/effect/vine/proc/trodden_on(mob/living/victim)
+/obj/vine/proc/trodden_on(mob/living/victim)
 	wake_neighbors()
 	if(!is_mature())
 		return
@@ -38,7 +38,7 @@
 	seed.do_thorns(victim,src)
 	seed.do_sting(victim,src,pick(BP_R_FOOT,BP_L_FOOT,BP_R_LEG,BP_L_LEG))
 
-/obj/effect/vine/proc/manual_unbuckle(mob/user)
+/obj/vine/proc/manual_unbuckle(mob/user)
 	if (!can_unbuckle(user))
 		return
 	if(buckled_mob != user)
@@ -67,7 +67,7 @@
 					SPAN_NOTICE("You successfully escape [src]!")
 				)
 
-/obj/effect/vine/proc/entangle(mob/living/victim)
+/obj/vine/proc/entangle(mob/living/victim)
 	if(buckled_mob)
 		return
 
@@ -105,6 +105,6 @@
 		victim.set_dir(pick(GLOB.cardinal))
 		to_chat(victim, SPAN_DANGER("The tendrils [pick("wind", "tangle", "tighten", "coil", "knot", "snag", "twist", "constrict", "squeeze", "clench", "tense")] around you!"))
 
-/obj/effect/vine/buckle_mob()
+/obj/vine/buckle_mob()
 	. = ..()
 	if(.) START_PROCESSING(SSvines, src)

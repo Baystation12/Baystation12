@@ -1,5 +1,5 @@
-//making this separate from /obj/effect/landmark until that mess can be dealt with
-/obj/effect/shuttle_landmark
+//making this separate from /obj/landmark until that mess can be dealt with
+/obj/shuttle_landmark
 	name = "Nav Point"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "energynet"
@@ -23,7 +23,7 @@
 	var/shuttle_restricted
 	var/flags = 0
 
-/obj/effect/shuttle_landmark/Initialize()
+/obj/shuttle_landmark/Initialize()
 	. = ..()
 	if(docking_controller)
 		. = INITIALIZE_HINT_LATELOAD
@@ -39,7 +39,7 @@
 	SetName(name + " ([x],[y])")
 	SSshuttle.register_landmark(landmark_tag, src)
 
-/obj/effect/shuttle_landmark/LateInitialize(mapload)
+/obj/shuttle_landmark/LateInitialize(mapload)
 	if(!docking_controller)
 		return
 	var/docking_tag = docking_controller
@@ -47,14 +47,14 @@
 	if(!istype(docking_controller))
 		CRASH("Could not find docking controller for shuttle waypoint '[name]', docking tag was '[docking_tag]'.")
 	if(GLOB.using_map.use_overmap)
-		var/obj/effect/overmap/visitable/location = map_sectors["[z]"]
+		var/obj/overmap/visitable/location = map_sectors["[z]"]
 		if(location && location.docking_codes)
 			docking_controller.docking_codes = location.docking_codes
 
-/obj/effect/shuttle_landmark/forceMove()
-	var/obj/effect/overmap/visitable/map_origin = map_sectors["[z]"]
+/obj/shuttle_landmark/forceMove()
+	var/obj/overmap/visitable/map_origin = map_sectors["[z]"]
 	. = ..()
-	var/obj/effect/overmap/visitable/map_destination = map_sectors["[z]"]
+	var/obj/overmap/visitable/map_destination = map_sectors["[z]"]
 	if(map_origin != map_destination)
 		if(map_origin)
 			map_origin.remove_landmark(src, shuttle_restricted)
@@ -62,10 +62,10 @@
 			map_destination.add_landmark(src, shuttle_restricted)
 
 //Called when the landmark is added to an overmap sector.
-/obj/effect/shuttle_landmark/proc/sector_set(obj/effect/overmap/visitable/O, shuttle_name)
+/obj/shuttle_landmark/proc/sector_set(obj/overmap/visitable/O, shuttle_name)
 	shuttle_restricted = shuttle_name
 
-/obj/effect/shuttle_landmark/proc/is_valid(datum/shuttle/shuttle)
+/obj/shuttle_landmark/proc/is_valid(datum/shuttle/shuttle)
 	if(shuttle.current_location == src)
 		return FALSE
 	for(var/area/A in shuttle.shuttle_area)
@@ -78,10 +78,10 @@
 			return FALSE
 	return TRUE
 
-/obj/effect/shuttle_landmark/proc/cannot_depart(datum/shuttle/shuttle)
+/obj/shuttle_landmark/proc/cannot_depart(datum/shuttle/shuttle)
 	return FALSE
 
-/obj/effect/shuttle_landmark/proc/shuttle_arrived(datum/shuttle/shuttle)
+/obj/shuttle_landmark/proc/shuttle_arrived(datum/shuttle/shuttle)
 	return
 
 /proc/check_collision(area/target_area, list/target_turfs)
@@ -96,28 +96,28 @@
 	return FALSE
 
 //Self-naming/numbering ones.
-/obj/effect/shuttle_landmark/automatic
+/obj/shuttle_landmark/automatic
 	name = "Navpoint"
 	landmark_tag = "navpoint"
 	flags = SLANDMARK_FLAG_AUTOSET
 
-/obj/effect/shuttle_landmark/automatic/Initialize()
+/obj/shuttle_landmark/automatic/Initialize()
 	landmark_tag += "-[x]-[y]-[z]-[random_id("landmarks",1,9999)]"
 	return ..()
 
-/obj/effect/shuttle_landmark/automatic/sector_set(obj/effect/overmap/visitable/O)
+/obj/shuttle_landmark/automatic/sector_set(obj/overmap/visitable/O)
 	..()
 	SetName("[O.name] - [initial(name)] ([x],[y])")
 
 //Subtype that calls explosion on init to clear space for shuttles
-/obj/effect/shuttle_landmark/automatic/clearing
+/obj/shuttle_landmark/automatic/clearing
 	var/radius = LANDING_ZONE_RADIUS
 
-/obj/effect/shuttle_landmark/automatic/clearing/Initialize()
+/obj/shuttle_landmark/automatic/clearing/Initialize()
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/effect/shuttle_landmark/automatic/clearing/LateInitialize(mapload)
+/obj/shuttle_landmark/automatic/clearing/LateInitialize(mapload)
 	..()
 	for(var/turf/T in range(radius, src))
 		if(T.density)
@@ -133,7 +133,7 @@
 	/// Boolean. Whether or not the spaceflare has been activated.
 	var/active = FALSE
 	/// The shuttle landmark synced to this beacon. This is set when the beacon is activated.
-	var/obj/effect/shuttle_landmark/automatic/spaceflare/landmark
+	var/obj/shuttle_landmark/automatic/spaceflare/landmark
 
 
 /obj/item/device/spaceflare/attack_self(mob/user)
@@ -240,13 +240,13 @@
 	..()
 
 
-/obj/effect/shuttle_landmark/automatic/spaceflare
+/obj/shuttle_landmark/automatic/spaceflare
 	name = "Bluespace Beacon Signal"
 	/// The beacon object synced to this landmark. If this is ever null or qdeleted the landmark should delete itself.
 	var/obj/item/device/spaceflare/beacon
 
 
-/obj/effect/shuttle_landmark/automatic/spaceflare/Initialize(mapload, obj/item/device/spaceflare/beacon)
+/obj/shuttle_landmark/automatic/spaceflare/Initialize(mapload, obj/item/device/spaceflare/beacon)
 	. = ..()
 
 	if (!istype(beacon))
@@ -258,11 +258,11 @@
 		return INITIALIZE_HINT_QDEL
 
 	src.beacon = beacon
-	GLOB.moved_event.register(beacon, src, /obj/effect/shuttle_landmark/automatic/spaceflare/proc/update_beacon_moved)
+	GLOB.moved_event.register(beacon, src, /obj/shuttle_landmark/automatic/spaceflare/proc/update_beacon_moved)
 
 
-/obj/effect/shuttle_landmark/automatic/spaceflare/Destroy()
-	GLOB.moved_event.unregister(beacon, src, /obj/effect/shuttle_landmark/automatic/spaceflare/proc/update_beacon_moved)
+/obj/shuttle_landmark/automatic/spaceflare/Destroy()
+	GLOB.moved_event.unregister(beacon, src, /obj/shuttle_landmark/automatic/spaceflare/proc/update_beacon_moved)
 	if (beacon?.active)
 		log_debug(append_admin_tools("\A [src] was destroyed with a still active beacon.", location = get_turf(beacon)))
 		beacon.deactivate()
@@ -271,7 +271,7 @@
 
 
 /// Event handler for when the beacon moves. Theoretically possible with a beacon deployed on a shuttle turf, or with adminbus.
-/obj/effect/shuttle_landmark/automatic/spaceflare/proc/update_beacon_moved(atom/movable/moving_instance, atom/old_loc, atom/new_loc)
+/obj/shuttle_landmark/automatic/spaceflare/proc/update_beacon_moved(atom/movable/moving_instance, atom/old_loc, atom/new_loc)
 	if (!isturf(new_loc) || isspaceturf(new_loc) || isopenspace(new_loc))
 		log_debug(append_admin_tools("\A [src]'s beacon was moved to a non-turf or unacceptable location.", location = get_turf(new_loc)))
 		beacon.deactivate()
@@ -282,8 +282,8 @@
 
 
 /// Desynchronizes the effect from the beacon, rendering it a permanent landmark.
-/obj/effect/shuttle_landmark/automatic/spaceflare/proc/desync_flare()
-	GLOB.moved_event.unregister(beacon, src, /obj/effect/shuttle_landmark/automatic/spaceflare/proc/update_beacon_moved)
+/obj/shuttle_landmark/automatic/spaceflare/proc/desync_flare()
+	GLOB.moved_event.unregister(beacon, src, /obj/shuttle_landmark/automatic/spaceflare/proc/update_beacon_moved)
 	if (beacon?.active)
 		beacon.deactivate(TRUE, TRUE)
 	beacon = null

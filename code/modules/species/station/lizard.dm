@@ -57,7 +57,7 @@
 	blood_color = "#f24b2e"
 	organs_icon = 'icons/mob/human_races/species/unathi/organs.dmi'
 
-	move_trail = /obj/effect/decal/cleanable/blood/tracks/claw
+	move_trail = /obj/decal/cleanable/blood/tracks/claw
 
 	heat_discomfort_level = 320
 	heat_discomfort_strings = list(
@@ -160,7 +160,7 @@
 	)
 
 	footwear_trail_overrides = list(
-		/obj/item/clothing = /obj/effect/decal/cleanable/blood/tracks/claw // Needs to apply to both shoes and space suits.
+		/obj/item/clothing = /obj/decal/cleanable/blood/tracks/claw // Needs to apply to both shoes and space suits.
 	)
 
 /datum/species/unathi/equip_survival_gear(mob/living/carbon/human/H)

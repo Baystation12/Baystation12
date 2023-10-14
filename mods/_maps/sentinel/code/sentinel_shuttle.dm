@@ -15,7 +15,7 @@
 	req_access = list(access_away_cavalry)
 	shuttle_tag = "Reaper Gunboat"
 
-/obj/effect/overmap/visitable/ship/landable/reaper
+/obj/overmap/visitable/ship/landable/reaper
 	name = "Reaper-G"
 	desc = "A heavily modified military gunboat of particular design. More of the dropship now, scanner detects heavy alteration to the hull of the vessel and no designation"
 	shuttle = "Reaper Gunboat"
@@ -32,18 +32,18 @@
 	dynamic_lighting = 1
 	area_flags = AREA_FLAG_RAD_SHIELDED
 
-/obj/effect/shuttle_landmark/reaper/start
+/obj/shuttle_landmark/reaper/start
 	name = "Dock"
 	landmark_tag = "nav_hangar_reaper"
 	base_area = /area/ship/patrol/command/hangar
 	base_turf = /turf/simulated/floor/plating
 	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 
-/obj/effect/shuttle_landmark/reaper/altdock
+/obj/shuttle_landmark/reaper/altdock
 	name = "Docking Port"
 	landmark_tag = "nav_hangar_reaperalt"
 
-/obj/effect/shuttle_landmark/reaper/dock
+/obj/shuttle_landmark/reaper/dock
 	name = "NSV Sierra Dock"
 	landmark_tag = "nav_reaper_dock"
 	docking_controller = "nuke_shuttle_dock_airlock"

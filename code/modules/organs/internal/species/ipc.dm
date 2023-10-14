@@ -263,7 +263,7 @@
 				if (C && C.get_charge() > 25)
 					C.use(25)
 					to_chat(owner, SPAN_WARNING("Your chassis power routine fluctuates wildly."))
-					var/datum/effect/effect/system/spark_spread/S = new
+					var/datum/effect/spark_spread/S = new
 					S.set_up(2, 0, loc)
 					S.start()
 

@@ -298,7 +298,7 @@
 				return melee_attack(W)
 
 		// Kill hull shields in the way.
-		for(var/obj/effect/energy_field/shield in problem_turf)
+		for(var/obj/energy_field/shield in problem_turf)
 			if (shield.density) // Don't attack shields that are already down.
 				ai_log("destroy_surroundings() : Attacking hull shield.", AI_LOG_INFO)
 				return melee_attack(shield)

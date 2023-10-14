@@ -1,6 +1,6 @@
 #include "abandoned_hotel_areas.dm"
 
-/obj/effect/overmap/visitable/sector/abandoned_hotel
+/obj/overmap/visitable/sector/abandoned_hotel
 	name = "Cinnamon Resort"
 	desc = "Sensors detect a hotel with a low power profile."
 	icon_state = "object"
@@ -28,15 +28,15 @@
 
 // Landing Markers
 
-/obj/effect/shuttle_landmark/abandoned_hotel/one
+/obj/shuttle_landmark/abandoned_hotel/one
 	name = "Cinnamon Resort East"
 	landmark_tag = "nav_cinnamon_hotel_1"
 
-/obj/effect/shuttle_landmark/abandoned_hotel/two
+/obj/shuttle_landmark/abandoned_hotel/two
 	name = "Cinnamon Resort West"
 	landmark_tag = "nav_cinnamon_hotel_2"
 
-/obj/effect/shuttle_landmark/abandoned_hotel/three
+/obj/shuttle_landmark/abandoned_hotel/three
 	name = "Cinnamon Resort South"
 	landmark_tag = "nav_cinnamon_hotel_3"
 
@@ -68,7 +68,7 @@
 	info = "2/10 Annoying staff, nothing interesting nearby. Owner is a real idiot. You dont even have good NTnet connection here. Would not recommend. Though I did like the pool, was very great."
 
 // Blatant self referencing
-/obj/effect/decal/graffiti_bam
+/obj/decal/graffiti_bam
 	name = "graffiti"
 	desc = "Something scribbled on the wall. It reads: 'Bam wuz here' "
 	icon = 'maps/away/abandoned_hotel/abandoned_hotel_sprites.dmi'

@@ -1,64 +1,64 @@
 //Meteor groups, used for various random events and the Meteor gamemode.
 
 // Dust, used by space dust event and during earliest stages of meteor mode.
-var/global/list/meteors_dust = list(/obj/effect/meteor/dust)
+var/global/list/meteors_dust = list(/obj/meteor/dust)
 
 // Standard meteors, used during early stages of the meteor gamemode.
 var/global/list/meteors_normal = list(\
-		/obj/effect/meteor/medium=8,\
-		/obj/effect/meteor/dust=3,\
-		/obj/effect/meteor/irradiated=3,\
-		/obj/effect/meteor/big=3,\
-		/obj/effect/meteor/flaming=1,\
-		/obj/effect/meteor/golden=1,\
-		/obj/effect/meteor/silver=1\
+		/obj/meteor/medium=8,\
+		/obj/meteor/dust=3,\
+		/obj/meteor/irradiated=3,\
+		/obj/meteor/big=3,\
+		/obj/meteor/flaming=1,\
+		/obj/meteor/golden=1,\
+		/obj/meteor/silver=1\
 		)
 
 // Threatening meteors, used during the meteor gamemode.
 var/global/list/meteors_threatening = list(\
-		/obj/effect/meteor/big=10,\
-		/obj/effect/meteor/medium=5,\
-		/obj/effect/meteor/golden=3,\
-		/obj/effect/meteor/silver=3,\
-		/obj/effect/meteor/flaming=3,\
-		/obj/effect/meteor/irradiated=3,\
-		/obj/effect/meteor/emp=3\
+		/obj/meteor/big=10,\
+		/obj/meteor/medium=5,\
+		/obj/meteor/golden=3,\
+		/obj/meteor/silver=3,\
+		/obj/meteor/flaming=3,\
+		/obj/meteor/irradiated=3,\
+		/obj/meteor/emp=3\
 		)
 
 // Catastrophic meteors, pretty dangerous without shields and used during the meteor gamemode.
 var/global/list/meteors_catastrophic = list(\
-		/obj/effect/meteor/big=75,\
-		/obj/effect/meteor/flaming=10,\
-		/obj/effect/meteor/irradiated=10,\
-		/obj/effect/meteor/emp=10,\
-		/obj/effect/meteor/medium=5,\
-		/obj/effect/meteor/golden=4,\
-		/obj/effect/meteor/silver=4,\
-		/obj/effect/meteor/tunguska=1\
+		/obj/meteor/big=75,\
+		/obj/meteor/flaming=10,\
+		/obj/meteor/irradiated=10,\
+		/obj/meteor/emp=10,\
+		/obj/meteor/medium=5,\
+		/obj/meteor/golden=4,\
+		/obj/meteor/silver=4,\
+		/obj/meteor/tunguska=1\
 		)
 
 // Armageddon meteors, very dangerous, and currently used only during the meteor gamemode.
 var/global/list/meteors_armageddon = list(\
-		/obj/effect/meteor/big=25,\
-		/obj/effect/meteor/flaming=10,\
-		/obj/effect/meteor/irradiated=10,\
-		/obj/effect/meteor/emp=10,\
-		/obj/effect/meteor/medium=3,\
-		/obj/effect/meteor/tunguska=3,\
-		/obj/effect/meteor/golden=2,\
-		/obj/effect/meteor/silver=2\
+		/obj/meteor/big=25,\
+		/obj/meteor/flaming=10,\
+		/obj/meteor/irradiated=10,\
+		/obj/meteor/emp=10,\
+		/obj/meteor/medium=3,\
+		/obj/meteor/tunguska=3,\
+		/obj/meteor/golden=2,\
+		/obj/meteor/silver=2\
 		)
 
 // Cataclysm meteor selection. Very very dangerous and effective even against shields. Used in late game meteor gamemode only.
 var/global/list/meteors_cataclysm = list(\
-		/obj/effect/meteor/big=40,\
-		/obj/effect/meteor/emp=20,\
-		/obj/effect/meteor/tunguska=20,\
-		/obj/effect/meteor/irradiated=10,\
-		/obj/effect/meteor/golden=10,\
-		/obj/effect/meteor/silver=10,\
-		/obj/effect/meteor/flaming=10,\
-		/obj/effect/meteor/supermatter=1\
+		/obj/meteor/big=40,\
+		/obj/meteor/emp=20,\
+		/obj/meteor/tunguska=20,\
+		/obj/meteor/irradiated=10,\
+		/obj/meteor/golden=10,\
+		/obj/meteor/silver=10,\
+		/obj/meteor/flaming=10,\
+		/obj/meteor/supermatter=1\
 		)
 
 
@@ -76,7 +76,7 @@ var/global/list/meteors_cataclysm = list(\
 	var/turf/pickedgoal = spaceDebrisFinishLoc(startSide, zlevel)
 
 	var/Me = pickweight(meteortypes)
-	var/obj/effect/meteor/M = new Me(pickedstart)
+	var/obj/meteor/M = new Me(pickedstart)
 	M.dest = pickedgoal
 	spawn(0)
 		walk_towards(M, M.dest, 3)
@@ -126,7 +126,7 @@ var/global/list/meteors_cataclysm = list(\
 //The meteor effect
 //////////////////////
 
-/obj/effect/meteor
+/obj/meteor
 	name = "the concept of meteor"
 	desc = "You should probably run instead of gawking at this."
 	icon = 'icons/obj/meteor.dmi'
@@ -145,47 +145,47 @@ var/global/list/meteors_cataclysm = list(\
 
 	var/move_count = 0
 
-/obj/effect/meteor/proc/get_shield_damage()
+/obj/meteor/proc/get_shield_damage()
 	return max(((max(hits, 2)) * (heavy + 1) * rand(30, 60)) / hitpwr , 0)
 
-/obj/effect/meteor/New()
+/obj/meteor/New()
 	..()
 	z_original = z
 
-/obj/effect/meteor/Initialize()
+/obj/meteor/Initialize()
 	. = ..()
 	GLOB.meteor_list += src
 
-/obj/effect/meteor/Move()
+/obj/meteor/Move()
 	. = ..() //process movement...
 	move_count++
 	if(loc == dest)
 		qdel(src)
 
-/obj/effect/meteor/touch_map_edge()
+/obj/meteor/touch_map_edge()
 	if(move_count > TRANSITIONEDGE)
 		qdel(src)
 
-/obj/effect/meteor/Destroy()
+/obj/meteor/Destroy()
 	walk(src,0) //this cancels the walk_towards() proc
 	GLOB.meteor_list -= src
 	return ..()
 
-/obj/effect/meteor/Initialize()
+/obj/meteor/Initialize()
 	. = ..()
 	if (!ismissile)
 		SpinAnimation()
 
-/obj/effect/meteor/Bump(atom/A)
+/obj/meteor/Bump(atom/A)
 	..()
 	if(A && !QDELETED(src))	// Prevents explosions and other effects when we were deleted by whatever we Bumped() - currently used by shields.
 		ram_turf(get_turf(A))
 		get_hit() //should only get hit once per move attempt
 
-/obj/effect/meteor/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	return istype(mover, /obj/effect/meteor) ? 1 : ..()
+/obj/meteor/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	return istype(mover, /obj/meteor) ? 1 : ..()
 
-/obj/effect/meteor/proc/ram_turf(turf/T)
+/obj/meteor/proc/ram_turf(turf/T)
 	//first bust whatever is in the turf
 	for(var/atom/A in T)
 		if(A != src && !A.CanPass(src, src.loc, 0.5, 0)) //only ram stuff that would actually block us
@@ -197,18 +197,18 @@ var/global/list/meteors_cataclysm = list(\
 
 //process getting 'hit' by colliding with a dense object
 //or randomly when ramming turfs
-/obj/effect/meteor/proc/get_hit()
+/obj/meteor/proc/get_hit()
 	hits--
 	if(hits <= 0)
 		make_debris()
 		meteor_effect()
 		qdel(src)
 
-/obj/effect/meteor/ex_act()
+/obj/meteor/ex_act()
 	return
 
 
-/obj/effect/meteor/use_tool(obj/item/tool, mob/user, list/click_params)
+/obj/meteor/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Pickaxe - Delete meteor
 	if (istype(tool, /obj/item/pickaxe))
 		user.visible_message(
@@ -221,12 +221,12 @@ var/global/list/meteors_cataclysm = list(\
 	return ..()
 
 
-/obj/effect/meteor/proc/make_debris()
+/obj/meteor/proc/make_debris()
 	for(var/throws = dropamt, throws > 0, throws--)
 		var/obj/item/O = new meteordrop(get_turf(src))
 		O.throw_at(dest, 5, 10)
 
-/obj/effect/meteor/proc/meteor_effect()
+/obj/meteor/proc/meteor_effect()
 	if(heavy)
 		for(var/mob/M in GLOB.player_list)
 			var/turf/T = get_turf(M)
@@ -241,7 +241,7 @@ var/global/list/meteors_cataclysm = list(\
 ///////////////////////
 
 //Dust
-/obj/effect/meteor/dust
+/obj/meteor/dust
 	name = "space dust"
 	icon_state = "dust"
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
@@ -251,81 +251,81 @@ var/global/list/meteors_cataclysm = list(\
 	meteordrop = /obj/item/ore/glass
 
 //Medium-sized
-/obj/effect/meteor/medium
+/obj/meteor/medium
 	name = "meteor"
 	dropamt = 2
 
-/obj/effect/meteor/medium/meteor_effect()
+/obj/meteor/medium/meteor_effect()
 	..()
 	explosion(src.loc, 3, EX_ACT_HEAVY, 0, turf_breaker = TRUE)
 
 //Large-sized
-/obj/effect/meteor/big
+/obj/meteor/big
 	name = "large meteor"
 	icon_state = "large"
 	hits = 6
 	heavy = 1
 	dropamt = 3
 
-/obj/effect/meteor/big/meteor_effect()
+/obj/meteor/big/meteor_effect()
 	..()
 	explosion(src.loc, 6, adminlog = 0, turf_breaker = TRUE)
 
 //Flaming meteor
-/obj/effect/meteor/flaming
+/obj/meteor/flaming
 	name = "flaming meteor"
 	icon_state = "flaming"
 	hits = 5
 	heavy = 1
 	meteordrop = /obj/item/ore/phoron
 
-/obj/effect/meteor/flaming/meteor_effect()
+/obj/meteor/flaming/meteor_effect()
 	..()
 	explosion(src.loc, 6, adminlog = 0, z_transfer = 0, shaped = 5, turf_breaker = TRUE)
 
 //Radiation meteor
-/obj/effect/meteor/irradiated
+/obj/meteor/irradiated
 	name = "glowing meteor"
 	icon_state = "glowing"
 	heavy = 1
 	meteordrop = /obj/item/ore/uranium
 
-/obj/effect/meteor/irradiated/meteor_effect()
+/obj/meteor/irradiated/meteor_effect()
 	..()
 	explosion(src.loc, 4, EX_ACT_LIGHT, 0, turf_breaker = TRUE)
-	new /obj/effect/decal/cleanable/greenglow(get_turf(src))
+	new /obj/decal/cleanable/greenglow(get_turf(src))
 	SSradiation.radiate(src, 50)
 
-/obj/effect/meteor/golden
+/obj/meteor/golden
 	name = "golden meteor"
 	icon_state = "glowing"
 	desc = "Shiny! But also deadly."
 	meteordrop = /obj/item/ore/gold
 
-/obj/effect/meteor/silver
+/obj/meteor/silver
 	name = "silver meteor"
 	icon_state = "glowing_blue"
 	desc = "Shiny! But also deadly."
 	meteordrop = /obj/item/ore/silver
 
-/obj/effect/meteor/emp
+/obj/meteor/emp
 	name = "conducting meteor"
 	icon_state = "glowing_blue"
 	desc = "Hide your floppies!"
 	meteordrop = /obj/item/ore/osmium
 	dropamt = 2
 
-/obj/effect/meteor/emp/meteor_effect()
+/obj/meteor/emp/meteor_effect()
 	..()
 	// Best case scenario: Comparable to a low-yield EMP grenade.
 	// Worst case scenario: Comparable to a standard yield EMP grenade.
 	empulse(src, rand(2, 4), rand(4, 10))
 
-/obj/effect/meteor/emp/get_shield_damage()
+/obj/meteor/emp/get_shield_damage()
 	return ..() * rand(2,4)
 
 //Station buster Tunguska
-/obj/effect/meteor/tunguska
+/obj/meteor/tunguska
 	name = "tunguska meteor"
 	icon_state = "flaming"
 	desc = "Your life briefly passes before your eyes the moment you lay them on this monstrosity."
@@ -334,28 +334,28 @@ var/global/list/meteors_cataclysm = list(\
 	heavy = 1
 	meteordrop = /obj/item/ore/diamond	// Probably means why it penetrates the hull so easily before exploding.
 
-/obj/effect/meteor/tunguska/meteor_effect()
+/obj/meteor/tunguska/meteor_effect()
 	..()
 	explosion(src.loc, 18, adminlog = 0, turf_breaker = TRUE)
 
 // This is the final solution against shields - a single impact can bring down most shield generators.
-/obj/effect/meteor/supermatter
+/obj/meteor/supermatter
 	name = "supermatter shard"
 	desc = "Oh god, what will be next..?"
 	icon = 'icons/obj/machines/power/supermatter.dmi'
 	icon_state = "darkmatter_old"
 
-/obj/effect/meteor/supermatter/meteor_effect()
+/obj/meteor/supermatter/meteor_effect()
 	..()
 	explosion(src.loc, 6, adminlog = 0, turf_breaker = TRUE)
 	for(var/obj/machinery/power/apc/A in range(rand(12, 20), src))
 		A.energy_fail(round(10 * rand(8, 12)))
 
-/obj/effect/meteor/supermatter/get_shield_damage()
+/obj/meteor/supermatter/get_shield_damage()
 	return ..() * rand(80, 120)
 
 //Missiles, for events and so on
-/obj/effect/meteor/supermatter/missile
+/obj/meteor/supermatter/missile
 	name = "photon torpedo"
 	desc = "An advanded warhead designed to tactically destroy space installations."
 	icon = 'icons/obj/missile.dmi'
@@ -364,7 +364,7 @@ var/global/list/meteors_cataclysm = list(\
 	ismissile = TRUE
 	dropamt = 0
 
-/obj/effect/meteor/medium/missile
+/obj/meteor/medium/missile
 	name = "missile"
 	desc = "Some kind of missile."
 	icon = 'icons/obj/missile.dmi'
@@ -373,7 +373,7 @@ var/global/list/meteors_cataclysm = list(\
 	ismissile = TRUE
 	dropamt = 0
 
-/obj/effect/meteor/big/missile
+/obj/meteor/big/missile
 	name = "high-yield missile"
 	desc = "Some kind of missile."
 	icon = 'icons/obj/missile.dmi'
@@ -382,7 +382,7 @@ var/global/list/meteors_cataclysm = list(\
 	ismissile = TRUE
 	dropamt = 0
 
-/obj/effect/meteor/flaming/missile
+/obj/meteor/flaming/missile
 	name = "incendiary missile"
 	desc = "Some kind of missile."
 	icon = 'icons/obj/missile.dmi'
@@ -391,7 +391,7 @@ var/global/list/meteors_cataclysm = list(\
 	ismissile = TRUE
 	dropamt = 0
 
-/obj/effect/meteor/emp/missile
+/obj/meteor/emp/missile
 	name = "ion torpedo"
 	desc = "Some kind of missile."
 	icon = 'icons/obj/missile.dmi'
@@ -400,7 +400,7 @@ var/global/list/meteors_cataclysm = list(\
 	ismissile = TRUE
 	dropamt = 0
 
-/obj/effect/meteor/supermatter/missile/admin_missile
+/obj/meteor/supermatter/missile/admin_missile
 	name = "Hull Buster"
 	desc = "A highly advanced warhead capable of destroying even the most well-armoured space installations."
 	icon = 'icons/obj/missile.dmi'
@@ -410,11 +410,11 @@ var/global/list/meteors_cataclysm = list(\
 	hitpwr = EX_ACT_DEVASTATING
 	hits = 6
 
-/obj/effect/meteor/supermatter/missile/admin_missile/meteor_effect()
+/obj/meteor/supermatter/missile/admin_missile/meteor_effect()
 	explosion(loc, 7, adminlog = 0, shaped = get_dir(src, dest), turf_breaker = TRUE)
 
 
-/obj/effect/meteor/supermatter/missile/sabot_round
+/obj/meteor/supermatter/missile/sabot_round
 	name = "Sabot Round"
 	desc = "A warhead that penetrates the hull and detonates to send a secondary warhead further in before exploding for massive damage."
 	icon = 'icons/obj/missile.dmi'
@@ -424,14 +424,14 @@ var/global/list/meteors_cataclysm = list(\
 	hitpwr = EX_ACT_HEAVY
 	hits = 6
 
-/obj/effect/meteor/supermatter/missile/sabot_round/meteor_effect()
+/obj/meteor/supermatter/missile/sabot_round/meteor_effect()
 	explosion(loc, 5, EX_ACT_LIGHT, 0, shaped = TRUE, turf_breaker = TRUE)
-	var/obj/effect/meteor/supermatter/missile/sabot_secondary_round/M = new(get_turf(src))
+	var/obj/meteor/supermatter/missile/sabot_secondary_round/M = new(get_turf(src))
 	M.dest = dest
 	spawn(0)
 		walk_towards(M, dest, 3)
 
-/obj/effect/meteor/supermatter/missile/sabot_secondary_round
+/obj/meteor/supermatter/missile/sabot_secondary_round
 	name = "Sabot Round Secondary"
 	desc = "Secondary warhead of the Sabot Round, causes extreme damage."
 	icon = 'icons/obj/missile.dmi'
@@ -441,5 +441,5 @@ var/global/list/meteors_cataclysm = list(\
 	hitpwr = EX_ACT_DEVASTATING
 	hits = 4
 
-/obj/effect/meteor/supermatter/missile/sabot_secondary_round/meteor_effect()
+/obj/meteor/supermatter/missile/sabot_secondary_round/meteor_effect()
 	explosion(loc, 6, shaped = get_dir(src, dest), turf_breaker = TRUE)

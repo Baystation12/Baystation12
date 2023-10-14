@@ -180,17 +180,17 @@ var/global/const/access_voxship = "ACCESS_VOXSHIP"
 	l_pocket = /obj/item/crowbar/prybar
 	l_ear = /obj/item/device/radio/headset/map_preset/voxship
 
-/obj/effect/submap_landmark/spawnpoint/voxship_crew
+/obj/submap_landmark/spawnpoint/voxship_crew
 	name = "Shoal Scavenger"
 	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 
-/obj/effect/submap_landmark/spawnpoint/voxship_crew/doc
+/obj/submap_landmark/spawnpoint/voxship_crew/doc
 	name = "Shoal Biotechnician"
 
-/obj/effect/submap_landmark/spawnpoint/voxship_crew/engineer
+/obj/submap_landmark/spawnpoint/voxship_crew/engineer
 	name = "Shoal Technician"
 
-/obj/effect/submap_landmark/spawnpoint/voxship_crew/quill
+/obj/submap_landmark/spawnpoint/voxship_crew/quill
 	name = "Quill"
 
 #undef VOXSHIP_OUTFIT_JOB_NAME

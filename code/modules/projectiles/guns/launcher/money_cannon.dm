@@ -107,7 +107,7 @@
 	bling.update_icon()
 	update_release_force(bling.worth)
 	if(release_force >= 1)
-		var/datum/effect/effect/system/spark_spread/s = new()
+		var/datum/effect/spark_spread/s = new()
 		s.set_up(3, 1, src)
 		s.start()
 
@@ -189,7 +189,7 @@
 	if(!emagged)
 		emagged = TRUE
 		to_chat(user, SPAN_NOTICE("You slide the sequencer into [src]... only for it to spit it back out and emit a motorized squeal!"))
-		var/datum/effect/effect/system/spark_spread/s = new()
+		var/datum/effect/spark_spread/s = new()
 		s.set_up(3, 1, src)
 		s.start()
 	else

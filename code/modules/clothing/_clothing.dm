@@ -16,7 +16,7 @@
 	var/smell_state = SMELL_DEFAULT
 	var/volume_multiplier = 1
 
-	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
+	var/move_trail = /obj/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
 
 
 /obj/item/clothing/Initialize()

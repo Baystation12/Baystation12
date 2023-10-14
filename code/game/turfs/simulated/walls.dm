@@ -103,15 +103,15 @@
 
 	if(Proj.ricochet_sounds && prob(15))
 		playsound(src, pick(Proj.ricochet_sounds), 100, 1)
-		new /obj/effect/sparks(get_turf(Proj))
+		new /obj/sparks(get_turf(Proj))
 
 	create_bullethole(Proj)//Potentially infinite bullet holes but most walls don't last long enough for this to be a problem.
 	..()
 
 /turf/simulated/wall/proc/clear_plants()
-	for(var/obj/effect/overlay/wallrot/WR in src)
+	for(var/obj/overlay/wallrot/WR in src)
 		qdel(WR)
-	for(var/obj/effect/vine/plant in range(src, 1))
+	for(var/obj/vine/plant in range(src, 1))
 		if(!plant.floor) //shrooms drop to the floor
 			plant.floor = 1
 			plant.update_icon()
@@ -135,7 +135,7 @@
 
 	if(paint_color)
 		to_chat(user, SPAN_NOTICE("It has a coat of paint applied."))
-	if(locate(/obj/effect/overlay/wallrot) in src)
+	if(locate(/obj/overlay/wallrot) in src)
 		to_chat(user, SPAN_WARNING("There is fungus growing on [src]."))
 
 //Damage
@@ -163,7 +163,7 @@
 
 /turf/simulated/wall/get_max_health()
 	. = ..()
-	if (locate(/obj/effect/overlay/wallrot) in src)
+	if (locate(/obj/overlay/wallrot) in src)
 		. = round(. / 10)
 
 /turf/simulated/wall/post_health_change(damage, prior_health, damage_type)
@@ -213,11 +213,11 @@
 
 // Wall-rot effect, a nasty fungus that destroys walls.
 /turf/simulated/wall/proc/rot()
-	if(locate(/obj/effect/overlay/wallrot) in src)
+	if(locate(/obj/overlay/wallrot) in src)
 		return
 	var/number_rots = rand(2,3)
 	for(var/i=0, i<number_rots, i++)
-		new/obj/effect/overlay/wallrot(src)
+		new/obj/overlay/wallrot(src)
 
 /turf/simulated/wall/proc/can_melt()
 	if(material.flags & MATERIAL_UNMELTABLE)
@@ -227,7 +227,7 @@
 /turf/simulated/wall/proc/thermitemelt(mob/user as mob)
 	if(!can_melt())
 		return
-	var/obj/effect/overlay/O = new/obj/effect/overlay( src )
+	var/obj/overlay/O = new/obj/overlay( src )
 	O.SetName("Thermite")
 	O.desc = "Looks hot."
 	O.icon = 'icons/effects/fire.dmi'

@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "as" = (
-/obj/effect/floor_decal/industrial/warning/dust{
+/obj/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
 /turf/simulated/floor/asteroid{
@@ -8,13 +8,13 @@
 	},
 /area/map_template/deepmaint)
 "ca" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "dg" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
@@ -26,7 +26,7 @@
 /obj/structure/table/standard,
 /obj/random/snack,
 /obj/random/single/cola,
-/obj/effect/floor_decal/corner/brown/mono,
+/obj/floor_decal/corner/brown/mono,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -42,25 +42,25 @@
 	},
 /area/map_template/deepmaint)
 "iq" = (
-/obj/effect/floor_decal/corner/brown/bordercorner{
+/obj/floor_decal/corner/brown/bordercorner{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/brown/border{
+/obj/floor_decal/corner/brown/border{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "lu" = (
-/obj/effect/floor_decal/corner/brown/bordercorner{
+/obj/floor_decal/corner/brown/bordercorner{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/brown/border{
+/obj/floor_decal/corner/brown/border{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "mb" = (
-/obj/effect/floor_decal/industrial/warning/dust{
+/obj/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
 /obj/item/stack/material/steel/ten,
@@ -69,7 +69,7 @@
 	},
 /area/map_template/deepmaint)
 "mU" = (
-/obj/effect/floor_decal/asteroid,
+/obj/floor_decal/asteroid,
 /turf/simulated/floor/plating{
 	icon_state = "asteroidplating"
 	},
@@ -90,7 +90,7 @@
 	},
 /area/map_template/deepmaint)
 "nQ" = (
-/obj/effect/floor_decal/industrial/warning/dust{
+/obj/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
 /obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
@@ -102,7 +102,7 @@
 	},
 /area/map_template/deepmaint)
 "ov" = (
-/obj/effect/floor_decal/corner/brown/mono,
+/obj/floor_decal/corner/brown/mono,
 /obj/structure/table/rack,
 /obj/item/shovel,
 /obj/item/storage/ore,
@@ -110,53 +110,53 @@
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "ow" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "oR" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 9
 	},
 /mob/living/simple_animal/hostile/human/pirate,
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "oV" = (
-/obj/effect/floor_decal/corner/brown/bordercorner,
-/obj/effect/floor_decal/corner/brown/border{
+/obj/floor_decal/corner/brown/bordercorner,
+/obj/floor_decal/corner/brown/border{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "sH" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "sJ" = (
-/obj/effect/floor_decal/corner/brown/bordercorner{
+/obj/floor_decal/corner/brown/bordercorner{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/brown/border{
+/obj/floor_decal/corner/brown/border{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "tc" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "uI" = (
-/obj/effect/floor_decal/corner/brown/mono,
+/obj/floor_decal/corner/brown/mono,
 /obj/structure/closet/toolcloset/excavation/awaysite,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "vP" = (
-/obj/effect/floor_decal/industrial/warning/dust/corner{
+/obj/floor_decal/industrial/warning/dust/corner{
 	dir = 8
 	},
 /obj/machinery/light{
@@ -168,30 +168,30 @@
 /area/map_template/deepmaint)
 "xw" = (
 /obj/structure/closet/emcloset,
-/obj/effect/floor_decal/corner/brown/mono,
+/obj/floor_decal/corner/brown/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "zB" = (
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "AE" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/map_template/deepmaint)
 "AM" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 5
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "AP" = (
 /obj/random/drinkbottle,
-/obj/effect/floor_decal/corner/brown/mono,
+/obj/floor_decal/corner/brown/mono,
 /obj/structure/table/standard,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "Cq" = (
-/obj/effect/floor_decal/corner/brown/mono,
+/obj/floor_decal/corner/brown/mono,
 /obj/item/stack/material/rods,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
@@ -199,23 +199,23 @@
 /turf/simulated/floor/plating,
 /area/map_template/deepmaint)
 "FJ" = (
-/obj/effect/floor_decal/corner/brown/three_quarters{
+/obj/floor_decal/corner/brown/three_quarters{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "FT" = (
-/obj/effect/floor_decal/corner/brown,
+/obj/floor_decal/corner/brown,
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "Go" = (
-/obj/effect/floor_decal/corner/brown/border{
+/obj/floor_decal/corner/brown/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "IH" = (
-/obj/effect/floor_decal/corner/brown/mono,
+/obj/floor_decal/corner/brown/mono,
 /obj/structure/table/rack,
 /obj/item/clothing/glasses/meson,
 /obj/item/device/measuring_tape,
@@ -224,7 +224,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "Ji" = (
-/obj/effect/floor_decal/industrial/warning/dust/corner{
+/obj/floor_decal/industrial/warning/dust/corner{
 	dir = 1
 	},
 /obj/machinery/light{
@@ -239,7 +239,7 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/map_template/deepmaint)
 "Kd" = (
-/obj/effect/floor_decal/industrial/warning/dust{
+/obj/floor_decal/industrial/warning/dust{
 	dir = 4
 	},
 /obj/item/material/shard,
@@ -248,7 +248,7 @@
 	},
 /area/map_template/deepmaint)
 "Ld" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 5
 	},
 /mob/living/simple_animal/hostile/human/pirate/ranged,
@@ -258,7 +258,7 @@
 /turf/simulated/wall,
 /area/map_template/deepmaint)
 "MY" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 6
 	},
 /obj/machinery/light{
@@ -267,23 +267,23 @@
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "Nf" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 9
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "Nz" = (
-/obj/effect/floor_decal/corner/brown/border,
+/obj/floor_decal/corner/brown/border,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "ND" = (
-/obj/effect/floor_decal/corner/brown/three_quarters{
+/obj/floor_decal/corner/brown/three_quarters{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "Ow" = (
-/obj/effect/floor_decal/corner/brown/three_quarters,
+/obj/floor_decal/corner/brown/three_quarters,
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "QK" = (
@@ -297,25 +297,25 @@
 	},
 /area/map_template/deepmaint)
 "SQ" = (
-/obj/effect/floor_decal/corner/brown/border{
+/obj/floor_decal/corner/brown/border{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/brown/border{
+/obj/floor_decal/corner/brown/border{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "SV" = (
-/obj/effect/floor_decal/corner/brown/border{
+/obj/floor_decal/corner/brown/border{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/brown/border{
+/obj/floor_decal/corner/brown/border{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "SW" = (
-/obj/effect/floor_decal/corner/brown/mono,
+/obj/floor_decal/corner/brown/mono,
 /obj/machinery/light/small{
 	dir = 4
 	},
@@ -327,11 +327,11 @@
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "UU" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/map_template/deepmaint)
 "VH" = (
-/obj/effect/floor_decal/corner/brown/mono,
+/obj/floor_decal/corner/brown/mono,
 /obj/structure/closet/firecloset,
 /obj/machinery/light{
 	dir = 8
@@ -339,13 +339,13 @@
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "Wx" = (
-/obj/effect/floor_decal/corner/brown/three_quarters{
+/obj/floor_decal/corner/brown/three_quarters{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "Yp" = (
-/obj/effect/floor_decal/industrial/warning/dust{
+/obj/floor_decal/industrial/warning/dust{
 	dir = 4
 	},
 /turf/simulated/floor/asteroid{
@@ -359,8 +359,8 @@
 	},
 /area/map_template/deepmaint)
 "ZB" = (
-/obj/effect/floor_decal/corner/brown/borderfull,
-/obj/effect/floor_decal/plaque,
+/obj/floor_decal/corner/brown/borderfull,
+/obj/floor_decal/plaque,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 

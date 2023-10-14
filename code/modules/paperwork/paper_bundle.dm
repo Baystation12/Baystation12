@@ -89,7 +89,7 @@
 				if(user.get_inactive_hand() == src)
 					user.drop_from_inventory(src)
 
-				new /obj/effect/decal/cleanable/ash(src.loc)
+				new /obj/decal/cleanable/ash(src.loc)
 				qdel(src)
 
 			else

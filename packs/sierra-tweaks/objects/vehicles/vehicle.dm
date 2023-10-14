@@ -153,7 +153,7 @@
 /obj/vehicle/emp_act(severity)
 	var/was_on = on
 	stat |= MACHINE_STAT_EMPED
-	var/obj/effect/overlay/pulse2 = new /obj/effect/overlay(loc)
+	var/obj/overlay/pulse2 = new /obj/overlay(loc)
 	pulse2.icon = 'icons/effects/effects.dmi'
 	pulse2.icon_state = "empdisable"
 	pulse2.SetName("emp sparks")
@@ -225,8 +225,8 @@
 
 	unload()
 
-	new /obj/effect/gibspawner/robot(Tsec)
-	new /obj/effect/decal/cleanable/blood/oil(src.loc)
+	new /obj/gibspawner/robot(Tsec)
+	new /obj/decal/cleanable/blood/oil(src.loc)
 
 	qdel(src)
 
@@ -378,5 +378,5 @@
 		user.do_attack_animation(src)
 	adjust_health(-damage)
 	if(prob(10))
-		new /obj/effect/decal/cleanable/blood/oil(src.loc)
+		new /obj/decal/cleanable/blood/oil(src.loc)
 	return 1

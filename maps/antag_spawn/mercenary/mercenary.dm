@@ -3,7 +3,7 @@
 	suffixes = list("mercenary/mercenary_base.dmm")
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/merc_shuttle)
 
-/obj/effect/overmap/visitable/sector/merc_base
+/obj/overmap/visitable/sector/merc_base
 	name = "Tiny Asteroid"
 	desc = "Sensor array detects an small, insignificant asteroid. The core appears to be reflecting scans."
 	place_near_main = list(2, 4)
@@ -18,7 +18,7 @@
 		"nav_merc_4"
 	)
 
-/obj/effect/overmap/visitable/ship/landable/merc
+/obj/overmap/visitable/ship/landable/merc
 	name = "Cyclopes"
 	desc = "An older model cargo shuttle with a number of visible modifications. The hull plating is deflecting attempts at more thorough scans."
 	shuttle = "Cyclopes"
@@ -41,35 +41,35 @@
 /turf/simulated/floor/shuttle_ceiling/merc
 	color = COLOR_DARK_GUNMETAL
 
-/obj/effect/paint/merc
+/obj/paint/merc
 	color = COLOR_DARK_GUNMETAL
 
 /obj/machinery/computer/shuttle_control/explore/merc_shuttle
 	name = "shuttle control console"
 	shuttle_tag = "Cyclopes"
 
-/obj/effect/shuttle_landmark/merc/start
+/obj/shuttle_landmark/merc/start
 	landmark_tag = "nav_merc_start"
 	name = "Hidden Base"
 	docking_controller = "merc_shuttle_base"
 
-/obj/effect/shuttle_landmark/merc/nav1
+/obj/shuttle_landmark/merc/nav1
 	landmark_tag = "nav_merc_1"
 
-/obj/effect/shuttle_landmark/merc/nav2
+/obj/shuttle_landmark/merc/nav2
 	landmark_tag = "nav_merc_2"
 
-/obj/effect/shuttle_landmark/merc/nav3
+/obj/shuttle_landmark/merc/nav3
 	landmark_tag = "nav_merc_3"
 
-/obj/effect/shuttle_landmark/merc/nav4
+/obj/shuttle_landmark/merc/nav4
 	landmark_tag = "nav_merc_4"
 
-/obj/effect/shuttle_landmark/merc/dock
+/obj/shuttle_landmark/merc/dock
 	name = "4th Deck, Fore Airlock"
 	landmark_tag = "nav_merc_dock"
 
-/obj/effect/shuttle_landmark/transit/merc
+/obj/shuttle_landmark/transit/merc
 	name = "In transit"
 	landmark_tag = "nav_transit_merc"
 

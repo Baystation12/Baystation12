@@ -167,7 +167,7 @@
 	var/sound_id
 	var/damaged = FALSE
 	var/disabled
-	var/datum/effect/effect/system/spark_spread/sparks
+	var/datum/effect/spark_spread/sparks
 
 
 /obj/item/shield/energy/Destroy()
@@ -279,7 +279,7 @@
 		disabletime = 1 MINUTES
 
 	visible_message(SPAN_DANGER("\The [src] violently shudders!"))
-	new /obj/effect/overlay/self_deleting/emppulse(get_turf(src))
+	new /obj/overlay/self_deleting/emppulse(get_turf(src))
 
 	disabled = world.time + disabletime
 	damaged = TRUE

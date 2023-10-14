@@ -118,8 +118,8 @@
 
 /mob/living/carbon/escape_buckle()
 	var/unbuckle_time
-	if(src.handcuffed && istype(src.buckled, /obj/effect/energy_net))
-		var/obj/effect/energy_net/N = src.buckled
+	if(src.handcuffed && istype(src.buckled, /obj/energy_net))
+		var/obj/energy_net/N = src.buckled
 		N.escape_net(src) //super snowflake but is literally used NOWHERE ELSE.-Luke
 		return
 

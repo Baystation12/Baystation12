@@ -1,4 +1,4 @@
-/obj/effect/force_portal
+/obj/force_portal
 	name = "portal"
 	desc = "Like looking into a mirror."
 	icon = 'icons/obj/portals.dmi'
@@ -9,21 +9,21 @@
 	anchored = TRUE
 	var/boom_time = 1
 
-/obj/effect/force_portal/Initialize()
+/obj/force_portal/Initialize()
 	. = ..()
 	boom_time = world.time + 30 SECONDS
 	START_PROCESSING(SSobj, src)
 
-/obj/effect/force_portal/Destroy()
+/obj/force_portal/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/effect/force_portal/Process()
+/obj/force_portal/Process()
 	if(boom_time && boom_time < world.time)
 		boom()
 		boom_time = 0
 
-/obj/effect/force_portal/proc/boom()
+/obj/force_portal/proc/boom()
 	set waitfor = 0
 	var/list/possible_turfs = getcircle(get_turf(src), 5)
 	while(contents && length(contents))
@@ -41,7 +41,7 @@
 		sleep(1)
 	qdel(src)
 
-/obj/effect/force_portal/onDropInto(atom/movable/AM)
+/obj/force_portal/onDropInto(atom/movable/AM)
 	boom_time -= 1 SECOND
 	src.visible_message(SPAN_WARNING("\The [src] sucks in \the [AM]!"))
 	if(!ismob(AM))
@@ -51,10 +51,10 @@
 	playsound(src,'sound/effects/teleport.ogg',40,1)
 	return
 
-/obj/effect/force_portal/Bumped(atom/movable/AM)
+/obj/force_portal/Bumped(atom/movable/AM)
 	AM.dropInto(src)
 
-/obj/effect/force_portal/bullet_act(obj/item/projectile/P)
+/obj/force_portal/bullet_act(obj/item/projectile/P)
 	var/atom/movable/AM = new P.type()
 	if(istype(P, /obj/item/projectile/bullet/pellet))
 		var/obj/item/projectile/bullet/pellet/old_pellet = P

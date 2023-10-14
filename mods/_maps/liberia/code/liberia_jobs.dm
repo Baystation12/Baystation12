@@ -91,19 +91,19 @@
 	. = ..()
 
 // Spawn points.
-/obj/effect/submap_landmark/spawnpoint/liberia
+/obj/submap_landmark/spawnpoint/liberia
 	name = "Merchant"
 
-/obj/effect/submap_landmark/spawnpoint/liberia/trainee
+/obj/submap_landmark/spawnpoint/liberia/trainee
 	name = "Merchant Assistant"
 
-/obj/effect/submap_landmark/spawnpoint/liberia/security
+/obj/submap_landmark/spawnpoint/liberia/security
  	name = "Merchant Security"
 
-/obj/effect/submap_landmark/spawnpoint/liberia/engineer
+/obj/submap_landmark/spawnpoint/liberia/engineer
  	name = "Merchant Engineer"
 
-/obj/effect/submap_landmark/spawnpoint/liberia/doctor
+/obj/submap_landmark/spawnpoint/liberia/doctor
  	name = "Merchant Medical"
 
 /singleton/hierarchy/outfit/job/liberia/merchant

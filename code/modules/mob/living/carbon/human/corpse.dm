@@ -26,7 +26,7 @@
 #define CORPSE_SPAWNER_NO_RANDOMIZATION   ~(CORPSE_SPAWNER_RANDOM_NAME|CORPSE_SPAWNER_RANDOM_SKIN_TONE|CORPSE_SPAWNER_RANDOM_SKIN_COLOR|CORPSE_SPAWNER_RANDOM_HAIR_COLOR|CORPSE_SPAWNER_RANDOM_HAIR_STYLE|CORPSE_SPAWNER_RANDOM_FACIAL_STYLE|CORPSE_SPAWNER_RANDOM_EYE_COLOR|CORPSE_SPAWNER_RANDOM_PRONOUNS)
 
 
-/obj/effect/landmark/corpse
+/obj/landmark/corpse
 	name = "Unknown"
 	var/species = list(SPECIES_HUMAN)                 		// List of species to pick from.
 	var/corpse_outfits = list(/singleton/hierarchy/outfit) 	// List of outfits to pick from. Uses pickweight()
@@ -42,12 +42,12 @@
 	/// Custom pronouns, per species -type-, if any
 	var/pronouns_per_species	  = list()
 
-/obj/effect/landmark/corpse/Initialize()
+/obj/landmark/corpse/Initialize()
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
 
-/obj/effect/landmark/corpse/LateInitialize(mapload)
+/obj/landmark/corpse/LateInitialize(mapload)
 	var/new_species = pickweight(species)
 	var/mob/living/carbon/human/corpse = new (loc, new_species)
 	corpse.adjustOxyLoss(corpse.maxHealth)
@@ -63,7 +63,7 @@
 
 
 #define HEX_COLOR_TO_RGB_ARGS(X) arglist(GetHexColors(X))
-/obj/effect/landmark/corpse/proc/randomize_appearance(mob/living/carbon/human/M, species_choice)
+/obj/landmark/corpse/proc/randomize_appearance(mob/living/carbon/human/M, species_choice)
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_GENDER))
 		if(species_choice in genders_per_species)
 			var/choice = pick(genders_per_species[species_choice])
@@ -125,7 +125,7 @@
 
 #undef HEX_COLOR_TO_RGB_ARGS
 
-/obj/effect/landmark/corpse/proc/equip_outfit(mob/living/carbon/human/M)
+/obj/landmark/corpse/proc/equip_outfit(mob/living/carbon/human/M)
 	var/adjustments = 0
 	adjustments = (spawn_flags & CORPSE_SPAWNER_CUT_SURVIVAL)    ? (adjustments|OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR) : adjustments
 	adjustments = (spawn_flags & CORPSE_SPAWNER_CUT_ID_PDA)      ? (adjustments|OUTFIT_ADJUSTMENT_SKIP_ID_PDA)        : adjustments
@@ -137,67 +137,67 @@
 	var/singleton/hierarchy/outfit/corpse_outfit = outfit_by_type(pickweight(corpse_outfits))
 	corpse_outfit.equip(M, equip_adjustments = adjustments)
 
-/obj/effect/landmark/corpse/chef
+/obj/landmark/corpse/chef
 	name = "Chef"
 	corpse_outfits = list(/singleton/hierarchy/outfit/job/service/chef)
 
-/obj/effect/landmark/corpse/doctor
+/obj/landmark/corpse/doctor
 	name = "Doctor"
 	corpse_outfits = list(/singleton/hierarchy/outfit/job/medical/doctor)
 
-/obj/effect/landmark/corpse/engineer
+/obj/landmark/corpse/engineer
 	name = "Engineer"
 	corpse_outfits = list(/singleton/hierarchy/outfit/job/engineering/engineer)
 
-/obj/effect/landmark/corpse/scientist
+/obj/landmark/corpse/scientist
 	name = "Scientist"
 	corpse_outfits = list(/singleton/hierarchy/outfit/job/science/scientist)
 
-/obj/effect/landmark/corpse/engineer/rig
+/obj/landmark/corpse/engineer/rig
 	corpse_outfits = list(/singleton/hierarchy/outfit/job/engineering/engineer/void)
 
-/obj/effect/landmark/corpse/clown
+/obj/landmark/corpse/clown
 	name = "Clown"
 	corpse_outfits = list(/singleton/hierarchy/outfit/clown)
 
-/obj/effect/landmark/corpse/miner
+/obj/landmark/corpse/miner
 	name = "Miner"
 	corpse_outfits = list(/singleton/hierarchy/outfit/job/cargo/mining)
 
-/obj/effect/landmark/corpse/miner/rig
+/obj/landmark/corpse/miner/rig
 	corpse_outfits = list(/singleton/hierarchy/outfit/job/cargo/mining/void)
 
 
-/obj/effect/landmark/corpse/bridgeofficer
+/obj/landmark/corpse/bridgeofficer
 	name = "Bridge Officer"
 	corpse_outfits = list(/singleton/hierarchy/outfit/nanotrasen/officer)
 
-/obj/effect/landmark/corpse/commander
+/obj/landmark/corpse/commander
 	name = "Commander"
 	corpse_outfits = list(/singleton/hierarchy/outfit/nanotrasen/commander)
 
-/obj/effect/landmark/corpse/pirate
+/obj/landmark/corpse/pirate
 	name = "Pirate"
 	corpse_outfits = list(/singleton/hierarchy/outfit/pirate/norm)
 	spawn_flags = CORPSE_SPAWNER_NO_RANDOMIZATION
 
-/obj/effect/landmark/corpse/pirate/ranged
+/obj/landmark/corpse/pirate/ranged
 	name = "Pirate Gunner"
 	corpse_outfits = list(/singleton/hierarchy/outfit/pirate/space)
 
-/obj/effect/landmark/corpse/russian
+/obj/landmark/corpse/russian
 	name = "Russian"
 	corpse_outfits = list(/singleton/hierarchy/outfit/soviet_soldier)
 	spawn_flags = CORPSE_SPAWNER_NO_RANDOMIZATION
 
-/obj/effect/landmark/corpse/russian/ranged
+/obj/landmark/corpse/russian/ranged
 	corpse_outfits = list(/singleton/hierarchy/outfit/soviet_soldier)
 
-/obj/effect/landmark/corpse/syndicate
+/obj/landmark/corpse/syndicate
 	name = "Syndicate Operative"
 	corpse_outfits = list(/singleton/hierarchy/outfit/mercenary/syndicate)
 	spawn_flags = CORPSE_SPAWNER_NO_RANDOMIZATION
 
-/obj/effect/landmark/corpse/syndicate/commando
+/obj/landmark/corpse/syndicate/commando
 	name = "Syndicate Commando"
 	corpse_outfits = list(/singleton/hierarchy/outfit/mercenary/syndicate/commando)

@@ -1,11 +1,11 @@
-/obj/effect/overmap/visitable/ship/sierra
+/obj/overmap/visitable/ship/sierra
 	name = "NSV Sierra"
 	desc = "A space object with wide of 121.2 meters, length of 214.5 meters and high near 14.3 meters. A Self Indentification Signal classifices \
 	the target as NanoTrasen Science Vessel, a property of NanoTrasen Corporation."
 	fore_dir = WEST
 	vessel_mass = 63000
 	sector_flags = OVERMAP_SECTOR_KNOWN|OVERMAP_SECTOR_IN_SPACE|OVERMAP_SECTOR_BASE
-	known_ships = list(/obj/effect/overmap/visitable/ship/landable/exploration_shuttle, /obj/effect/overmap/visitable/ship/landable/guppy)
+	known_ships = list(/obj/overmap/visitable/ship/landable/exploration_shuttle, /obj/overmap/visitable/ship/landable/guppy)
 
 	icon = 'maps/sierra/icons/obj/overmap.dmi'
 	color = "#a97faa"
@@ -53,7 +53,7 @@
 		"nav_bridge_aquila"
 	)
 
-/obj/effect/overmap/visitable/ship/landable/exploration_shuttle
+/obj/overmap/visitable/ship/landable/exploration_shuttle
 	name = "Charon"
 	shuttle = "Charon"
 	max_speed = 1/(4 SECONDS)
@@ -62,7 +62,7 @@
 	fore_dir = NORTH
 	vessel_size = SHIP_SIZE_SMALL
 
-/obj/effect/overmap/visitable/ship/landable/guppy
+/obj/overmap/visitable/ship/landable/guppy
 	name = "Guppy"
 	shuttle = "Guppy"
 	max_speed = 1/(4 SECONDS) //was 1/(10 SECONDS)

@@ -444,11 +444,11 @@ GLOBAL_LIST_INIT(switch_small_sound, list(
 
 	explosion(src.loc, 1, 1, 1, rand(3, 4), 1)
 
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 	s.set_up(3, 1, src)
 	s.start()
 
-	new /obj/effect/decal/cleanable/blood/oil(src.loc)
+	new /obj/decal/cleanable/blood/oil(src.loc)
 	qdel(src)
 
 /obj/item/music_player/proc/break_act()

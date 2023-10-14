@@ -12,28 +12,28 @@
 	var/paint_color
 
 	var/list/decals = list(
-		"Quarter-turf" =      list("path" = /obj/effect/floor_decal/corner, "precise" = 1, "colored" = 1),
-		"Monotile full" =     list("path" = /obj/effect/floor_decal/corner/white/mono, "colored" = 1),
-		"Monotile halved" =   list("path" = /obj/effect/floor_decal/corner/white/half, "colored" = 1),
-		"Hazard stripes" =    list("path" = /obj/effect/floor_decal/industrial/warning/fulltile),
-		"Border, hazard" =    list("path" = /obj/effect/floor_decal/industrial/warning),
-		"Corner, hazard" =    list("path" = /obj/effect/floor_decal/industrial/warning/corner),
-		"Hatched marking" =   list("path" = /obj/effect/floor_decal/industrial/hatch, "colored" = 1),
-		"Dashed outline" =    list("path" = /obj/effect/floor_decal/industrial/outline, "colored" = 1),
-		"Loading sign" =      list("path" = /obj/effect/floor_decal/industrial/loading),
-		"Mosaic, large" =     list("path" = /obj/effect/floor_decal/chapel),
-		"1" =                 list("path" = /obj/effect/floor_decal/sign),
-		"2" =                 list("path" = /obj/effect/floor_decal/sign/two),
-		"A" =                 list("path" = /obj/effect/floor_decal/sign/a),
-		"B" =                 list("path" = /obj/effect/floor_decal/sign/b),
-		"C" =                 list("path" = /obj/effect/floor_decal/sign/c),
-		"D" =                 list("path" = /obj/effect/floor_decal/sign/d),
-		"M" =                 list("path" = /obj/effect/floor_decal/sign/m),
-		"V" =                 list("path" = /obj/effect/floor_decal/sign/v),
-		"CMO" =               list("path" = /obj/effect/floor_decal/sign/cmo),
-		"Ex" =                list("path" = /obj/effect/floor_decal/sign/ex),
-		"Psy" =               list("path" = /obj/effect/floor_decal/sign/p),
-		"Remove all decals" = list("path" = /obj/effect/floor_decal/reset),
+		"Quarter-turf" =      list("path" = /obj/floor_decal/corner, "precise" = 1, "colored" = 1),
+		"Monotile full" =     list("path" = /obj/floor_decal/corner/white/mono, "colored" = 1),
+		"Monotile halved" =   list("path" = /obj/floor_decal/corner/white/half, "colored" = 1),
+		"Hazard stripes" =    list("path" = /obj/floor_decal/industrial/warning/fulltile),
+		"Border, hazard" =    list("path" = /obj/floor_decal/industrial/warning),
+		"Corner, hazard" =    list("path" = /obj/floor_decal/industrial/warning/corner),
+		"Hatched marking" =   list("path" = /obj/floor_decal/industrial/hatch, "colored" = 1),
+		"Dashed outline" =    list("path" = /obj/floor_decal/industrial/outline, "colored" = 1),
+		"Loading sign" =      list("path" = /obj/floor_decal/industrial/loading),
+		"Mosaic, large" =     list("path" = /obj/floor_decal/chapel),
+		"1" =                 list("path" = /obj/floor_decal/sign),
+		"2" =                 list("path" = /obj/floor_decal/sign/two),
+		"A" =                 list("path" = /obj/floor_decal/sign/a),
+		"B" =                 list("path" = /obj/floor_decal/sign/b),
+		"C" =                 list("path" = /obj/floor_decal/sign/c),
+		"D" =                 list("path" = /obj/floor_decal/sign/d),
+		"M" =                 list("path" = /obj/floor_decal/sign/m),
+		"V" =                 list("path" = /obj/floor_decal/sign/v),
+		"CMO" =               list("path" = /obj/floor_decal/sign/cmo),
+		"Ex" =                list("path" = /obj/floor_decal/sign/ex),
+		"Psy" =               list("path" = /obj/floor_decal/sign/p),
+		"Remove all decals" = list("path" = /obj/floor_decal/reset),
 		)
 
 	var/list/paint_dirs = list(
@@ -210,7 +210,7 @@
 		to_chat(user, SPAN_WARNING("\The [src] flashes an error light. You might need to reconfigure it."))
 		return FALSE
 
-	if((F.decals && length(F.decals) > 5) && !ispath(painting_decal, /obj/effect/floor_decal/reset))
+	if((F.decals && length(F.decals) > 5) && !ispath(painting_decal, /obj/floor_decal/reset))
 		to_chat(user, SPAN_WARNING("\The [F] has been painted too much; you need to clear it off."))
 		return FALSE
 

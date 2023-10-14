@@ -198,11 +198,11 @@
 		user.visible_message(SPAN_WARNING("\The [shields.owner]'s shields flash and crackle."))
 		flick("shield_impact", src)
 		playsound(user,'sound/effects/basscannon.ogg',35,1)
-		new /obj/effect/effect/smoke/illumination(user.loc, 5, 4, 1, "#ffffff")
+		new /obj/effect/smoke/illumination(user.loc, 5, 4, 1, "#ffffff")
 		if (proj.damage <= 0)
 			return AURA_FALSE|AURA_CANCEL
 
-		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+		var/datum/effect/spark_spread/spark_system = new /datum/effect/spark_spread()
 		spark_system.set_up(5, 0, user)
 		spark_system.start()
 		playsound(loc, "sparks", 25, 1)

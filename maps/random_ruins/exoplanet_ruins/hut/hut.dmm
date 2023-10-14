@@ -31,12 +31,12 @@
 /area/template_noop)
 "i" = (
 /obj/structure/filingcabinet,
-/obj/effect/decal/cleanable/cobweb,
+/obj/decal/cleanable/cobweb,
 /turf/simulated/floor/tiled/dark,
 /area/template_noop)
 "j" = (
 /obj/structure/closet/crate/freezer/rations,
-/obj/effect/decal/cleanable/cobweb2,
+/obj/decal/cleanable/cobweb2,
 /turf/simulated/floor/tiled/dark,
 /area/template_noop)
 "k" = (
@@ -101,7 +101,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/template_noop)
 "K" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/template_noop)
 

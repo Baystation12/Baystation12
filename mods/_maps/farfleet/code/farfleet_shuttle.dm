@@ -16,7 +16,7 @@
 	req_access = list(access_away_iccgn)
 	shuttle_tag = "SNZ Speedboat"
 
-/obj/effect/overmap/visitable/ship/landable/snz
+/obj/overmap/visitable/ship/landable/snz
 	name = "SNZ Speedboat"
 	desc = "SNZ-350 Speedboat. Multipurpose shuttle, used for personnel and light venchles delivery. This one definetly belongs to ICCG."
 	shuttle = "SNZ Speedboat"
@@ -34,18 +34,18 @@
 	area_flags = AREA_FLAG_RAD_SHIELDED
 	req_access = list(access_away_iccgn)
 
-/obj/effect/shuttle_landmark/snz/start
+/obj/shuttle_landmark/snz/start
 	name = "SNZ Hangar"
 	landmark_tag = "nav_hangar_snz"
 	base_area = /area/ship/farfleet/command/snz_hangar
 	base_turf = /turf/simulated/floor/plating
 	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 
-/obj/effect/shuttle_landmark/snz/altdock
+/obj/shuttle_landmark/snz/altdock
 	name = "Docking Port"
 	landmark_tag = "nav_hangar_snzalt"
 
-/obj/effect/shuttle_landmark/snz/dock
+/obj/shuttle_landmark/snz/dock
 	name = "NSV Sierra Restricted Dock"
 	landmark_tag = "nav_snz_dock"
 	docking_controller = "rescue_shuttle_dock_airlock"

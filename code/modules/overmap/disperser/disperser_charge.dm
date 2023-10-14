@@ -18,10 +18,10 @@
 
 /obj/structure/ship_munition/disperser_charge/fire/fire(turf/target, strength, range)
 	for(var/turf/T in range(range, target))
-		var/obj/effect/fake_fire/bluespace/disperserf = new(T)
+		var/obj/fake_fire/bluespace/disperserf = new(T)
 		disperserf.lifetime = strength * 20
 
-/obj/effect/fake_fire/bluespace
+/obj/fake_fire/bluespace
 	name = "bluespace fire"
 	color = COLOR_BLUE
 	pressure = 1500

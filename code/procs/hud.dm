@@ -47,7 +47,7 @@ the HUD updates properly! */
 
 /proc/process_jani_hud(mob/M, mob/Alt)
 	var/datum/arranged_hud_process/P = arrange_hud_process(M, Alt, GLOB.jani_hud_users)
-	for (var/obj/effect/decal/cleanable/dirtyfloor in view(P.Mob))
+	for (var/obj/decal/cleanable/dirtyfloor in view(P.Mob))
 		if(P.Client)
 			P.Client.images += dirtyfloor.hud_overlay
 

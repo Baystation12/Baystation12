@@ -1,5 +1,5 @@
-//generic procs copied from obj/effect/alien
-/obj/effect/spider
+//generic procs copied from obj/alien
+/obj/spider
 	name = "web"
 	desc = "It's stringy and sticky."
 	icon = 'icons/effects/effects.dmi'
@@ -7,19 +7,19 @@
 	density = FALSE
 	health_max = 15
 
-/obj/effect/spider/on_death()
+/obj/spider/on_death()
 	visible_message(SPAN_WARNING("\The [src] breaks apart!"))
 	qdel(src)
 
-/obj/effect/spider/stickyweb
+/obj/spider/stickyweb
 	icon_state = "stickyweb1"
 
-/obj/effect/spider/stickyweb/Initialize()
+/obj/spider/stickyweb/Initialize()
 	. = ..()
 	if(prob(50))
 		icon_state = "stickyweb2"
 
-/obj/effect/spider/stickyweb/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+/obj/spider/stickyweb/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
 	if(istype(mover, /mob/living/simple_animal/hostile/giant_spider))
 		return 1
@@ -31,37 +31,37 @@
 		return prob(30)
 	return 1
 
-/obj/effect/spider/eggcluster
+/obj/spider/eggcluster
 	name = "egg cluster"
 	desc = "They seem to pulse slightly with an inner life."
 	icon_state = "eggs"
 	var/amount_grown = 0
 	var/spiders_min = 6
 	var/spiders_max = 12
-	var/spider_type = /obj/effect/spider/spiderling
+	var/spider_type = /obj/spider/spiderling
 
-/obj/effect/spider/eggcluster/Initialize(mapload, atom/parent)
+/obj/spider/eggcluster/Initialize(mapload, atom/parent)
 	. = ..()
 	get_light_and_color(parent)
 	pixel_x = rand(3,-3)
 	pixel_y = rand(3,-3)
 	START_PROCESSING(SSobj, src)
 
-/obj/effect/spider/eggcluster/Destroy()
+/obj/spider/eggcluster/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	if(istype(loc, /obj/item/organ/external))
 		var/obj/item/organ/external/O = loc
 		O.implants -= src
 	. = ..()
 
-/obj/effect/spider/eggcluster/on_death()
+/obj/spider/eggcluster/on_death()
 	if (isturf(loc))
 		var/amount_to_spawn = round(spiders_max * amount_grown / 100)
 		for (var/count = 1 to amount_to_spawn)
 			new spider_type(loc, src)
 	. = ..()
 
-/obj/effect/spider/eggcluster/Process()
+/obj/spider/eggcluster/Process()
 	if(prob(70))
 		amount_grown += rand(0,2)
 	if(amount_grown >= 100)
@@ -76,14 +76,14 @@
 				O.implants += spiderling
 		qdel(src)
 
-/obj/effect/spider/eggcluster/small
+/obj/spider/eggcluster/small
 	spiders_min = 1
 	spiders_max = 3
 
-/obj/effect/spider/eggcluster/small/frost
-	spider_type = /obj/effect/spider/spiderling/frost
+/obj/spider/eggcluster/small/frost
+	spider_type = /obj/spider/spiderling/frost
 
-/obj/effect/spider/spiderling
+/obj/spider/spiderling
 	name = "spiderling"
 	desc = "It never stays still for long."
 	icon_state = "green"
@@ -116,10 +116,10 @@
 						/mob/living/simple_animal/hostile/giant_spider/hunter = 1)
 
 
-/obj/effect/spider/spiderling/frost
+/obj/spider/spiderling/frost
 	castes = list(/mob/living/simple_animal/hostile/giant_spider/frost = 1)
 
-/obj/effect/spider/spiderling/Initialize(mapload, atom/parent)
+/obj/spider/spiderling/Initialize(mapload, atom/parent)
 	greater_form = pickweight(castes)
 	pixel_x = rand(-shift_range, shift_range)
 	pixel_y = rand(-shift_range, shift_range)
@@ -129,65 +129,65 @@
 		dormant = FALSE
 
 	if(dormant)
-		GLOB.moved_event.register(src, src, /obj/effect/spider/spiderling/proc/disturbed)
+		GLOB.moved_event.register(src, src, /obj/spider/spiderling/proc/disturbed)
 	else
 		START_PROCESSING(SSobj, src)
 
 	get_light_and_color(parent)
 	. = ..()
 
-/obj/effect/spider/spiderling/mundane
+/obj/spider/spiderling/mundane
 	growth_chance = 0 // Just a simple, non-mutant spider
 
-/obj/effect/spider/spiderling/mundane/dormant
+/obj/spider/spiderling/mundane/dormant
 	dormant = TRUE    // It lies in wait, hoping you will walk face first into its web
 
-/obj/effect/spider/spiderling/growing
+/obj/spider/spiderling/growing
 	growth_chance = 100
 
-/obj/effect/spider/spiderling/Destroy()
+/obj/spider/spiderling/Destroy()
 	if(dormant)
-		GLOB.moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
+		GLOB.moved_event.unregister(src, src, /obj/spider/spiderling/proc/disturbed)
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
 
-/obj/effect/spider/spiderling/post_use_item(obj/item/tool, mob/user, interaction_handled, use_call, click_params)
+/obj/spider/spiderling/post_use_item(obj/item/tool, mob/user, interaction_handled, use_call, click_params)
 	. = ..()
 	if (interaction_handled && !health_dead())
 		disturbed()
 
 
-/obj/effect/spider/spiderling/Crossed(mob/living/L)
+/obj/spider/spiderling/Crossed(mob/living/L)
 	if(dormant && istype(L) && L.mob_size > MOB_TINY)
 		disturbed()
 
-/obj/effect/spider/spiderling/proc/disturbed()
+/obj/spider/spiderling/proc/disturbed()
 	if(!dormant)
 		return
 	dormant = FALSE
 
-	GLOB.moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
+	GLOB.moved_event.unregister(src, src, /obj/spider/spiderling/proc/disturbed)
 	START_PROCESSING(SSobj, src)
 
-/obj/effect/spider/spiderling/Bump(atom/user)
+/obj/spider/spiderling/Bump(atom/user)
 	if(istype(user, /obj/structure/table))
 		forceMove(user.loc)
 	else
 		..()
 
-/obj/effect/spider/spiderling/on_death()
+/obj/spider/spiderling/on_death()
 	visible_message(SPAN_WARNING("\The [src] dies!"))
-	new /obj/effect/decal/cleanable/spiderling_remains(loc)
+	new /obj/decal/cleanable/spiderling_remains(loc)
 	qdel(src)
 
-/obj/effect/spider/spiderling/proc/check_vent(obj/machinery/atmospherics/unary/vent_pump/exit_vent)
+/obj/spider/spiderling/proc/check_vent(obj/machinery/atmospherics/unary/vent_pump/exit_vent)
 	if(QDELETED(exit_vent) || exit_vent.welded) // If it's qdeleted we probably were too, but in that case we won't be making this call due to timer cleanup.
 		forceMove(get_turf(entry_vent))
 		entry_vent = null
 		return TRUE
 
-/obj/effect/spider/spiderling/proc/start_vent_moving(obj/machinery/atmospherics/unary/vent_pump/exit_vent, travel_time)
+/obj/spider/spiderling/proc/start_vent_moving(obj/machinery/atmospherics/unary/vent_pump/exit_vent, travel_time)
 	if(check_vent(exit_vent))
 		return
 	if(prob(50))
@@ -195,14 +195,14 @@
 	forceMove(exit_vent)
 	addtimer(new Callback(src, .proc/end_vent_moving, exit_vent), travel_time)
 
-/obj/effect/spider/spiderling/proc/end_vent_moving(obj/machinery/atmospherics/unary/vent_pump/exit_vent)
+/obj/spider/spiderling/proc/end_vent_moving(obj/machinery/atmospherics/unary/vent_pump/exit_vent)
 	if(check_vent(exit_vent))
 		return
 	forceMove(get_turf(exit_vent))
 	travelling_in_vent = FALSE
 	entry_vent = null
 
-/obj/effect/spider/spiderling/Process()
+/obj/spider/spiderling/Process()
 
 	if(loc)
 		var/datum/gas_mixture/environment = loc.return_air()
@@ -286,7 +286,7 @@
 	if ((istype(loc, /turf) || istype(loc, /obj/item/organ/external)) && amount_grown > 0)
 		amount_grown += rand(0,2)
 
-/obj/effect/decal/cleanable/spiderling_remains
+/obj/decal/cleanable/spiderling_remains
 	name = "spiderling remains"
 	desc = "Green squishy mess."
 	icon = 'icons/effects/effects.dmi'
@@ -294,13 +294,13 @@
 	anchored = TRUE
 	layer = BLOOD_LAYER
 
-/obj/effect/spider/cocoon
+/obj/spider/cocoon
 	name = "cocoon"
 	desc = "Something wrapped in silky spider web."
 	icon_state = "cocoon1"
 	health_max = 60
 
-/obj/effect/spider/cocoon/Initialize()
+/obj/spider/cocoon/Initialize()
 	. = ..()
 	icon_state = pick("cocoon1","cocoon2","cocoon3")
 
@@ -314,7 +314,7 @@
 				if (!(L.status_flags & NOTARGET))
 					L.status_flags ^= NOTARGET
 
-/obj/effect/spider/cocoon/Destroy()
+/obj/spider/cocoon/Destroy()
 	src.visible_message(SPAN_WARNING("\The [src] splits open."))
 	for(var/atom/movable/A in contents)
 		A.dropInto(loc)

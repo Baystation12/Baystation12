@@ -1,6 +1,6 @@
 #include "lar_maria_areas.dm"
 
-/obj/effect/overmap/visitable/sector/lar_maria
+/obj/overmap/visitable/sector/lar_maria
 	name = "Lar Maria space station"
 	desc = "Sensors detect an orbital station with low energy profile and sporadic life signs."
 	icon_state = "object"
@@ -15,7 +15,7 @@
 	area_usage_test_exempted_root_areas = list(/area/lar_maria)
 
 ///////////////////////////////////crew and prisoners
-/obj/effect/landmark/corpse/lar_maria
+/obj/landmark/corpse/lar_maria
 	eye_colors_per_species = list(SPECIES_HUMAN = list(COLOR_RED))//red eyes
 	skin_tones_per_species = list(SPECIES_HUMAN = list(-15))
 	facial_styles_per_species = list(SPECIES_HUMAN = list("Shaved"))
@@ -36,7 +36,7 @@
 	speed = 8
 	can_escape = TRUE
 	natural_weapon = /obj/item/natural_weapon/punch
-	var/obj/effect/landmark/corpse/lar_maria/corpse = null
+	var/obj/landmark/corpse/lar_maria/corpse = null
 	var/weapon = null
 
 	ai_holder = /datum/ai_holder/simple_animal/lar_maria
@@ -60,9 +60,9 @@
 	maxHealth = 40
 	health = 40
 	harm_intent_damage = 5
-	corpse = /obj/effect/landmark/corpse/lar_maria/test_subject
+	corpse = /obj/landmark/corpse/lar_maria/test_subject
 
-/obj/effect/landmark/corpse/lar_maria/test_subject
+/obj/landmark/corpse/lar_maria/test_subject
 	name = "Dead test subject"
 	corpse_outfits = list(/singleton/hierarchy/outfit/corpse/test_subject)
 	spawn_flags = CORPSE_SPAWNER_NO_RANDOMIZATION//no name, no hairs etc.
@@ -72,12 +72,12 @@
 	uniform = /obj/item/clothing/under/color/orange
 	shoes = /obj/item/clothing/shoes/orange
 
-/obj/effect/landmark/corpse/lar_maria/zhp_guard
+/obj/landmark/corpse/lar_maria/zhp_guard
 	name = "dead guard"
 	corpse_outfits = list(/singleton/hierarchy/outfit/corpse/zhp_guard)
 	skin_tones_per_species = list(SPECIES_HUMAN = list(-15))
 
-/obj/effect/landmark/corpse/lar_maria/zhp_guard/dark
+/obj/landmark/corpse/lar_maria/zhp_guard/dark
 	skin_tones_per_species = list(SPECIES_HUMAN = list(-115))
 
 /singleton/hierarchy/outfit/corpse/zhp_guard
@@ -97,14 +97,14 @@
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/melee/baton
 	weapon = /obj/item/melee/baton
-	corpse = /obj/effect/landmark/corpse/lar_maria/zhp_guard
+	corpse = /obj/landmark/corpse/lar_maria/zhp_guard
 
 /mob/living/simple_animal/hostile/lar_maria/guard/Initialize()
 	. = ..()
 	var/skin_color = pick(list("light","dark"))
 	icon_state = "guard_[skin_color]"
 	if (skin_color == "dark")
-		corpse = /obj/effect/landmark/corpse/lar_maria/zhp_guard/dark
+		corpse = /obj/landmark/corpse/lar_maria/zhp_guard/dark
 
 /mob/living/simple_animal/hostile/lar_maria/guard/ranged
 	weapon = /obj/item/gun/projectile/shotgun/pump
@@ -129,9 +129,9 @@
 	maxHealth = 50
 	health = 50
 	harm_intent_damage = 5
-	corpse = /obj/effect/landmark/corpse/lar_maria/virologist
+	corpse = /obj/landmark/corpse/lar_maria/virologist
 
-/obj/effect/landmark/corpse/lar_maria/virologist
+/obj/landmark/corpse/lar_maria/virologist
 	name = "dead virologist"
 	corpse_outfits = list(/singleton/hierarchy/outfit/corpse/zhp_virologist)
 
@@ -148,9 +148,9 @@
 /mob/living/simple_animal/hostile/lar_maria/virologist/female
 	icon_state = "virologist_f"
 	weapon = /obj/item/scalpel/basic
-	corpse = /obj/effect/landmark/corpse/lar_maria/virologist_female
+	corpse = /obj/landmark/corpse/lar_maria/virologist_female
 
-/obj/effect/landmark/corpse/lar_maria/virologist_female
+/obj/landmark/corpse/lar_maria/virologist_female
 	name = "dead virologist"
 	corpse_outfits = list(/singleton/hierarchy/outfit/corpse/zhp_virologist_female)
 	hair_styles_per_species = list(SPECIES_HUMAN = list("Flaired Hair"))

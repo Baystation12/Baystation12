@@ -6,7 +6,7 @@
 /obj/structure/bed/chair/padded/brown{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /obj/machinery/light{
 	dir = 8
 	},
@@ -20,7 +20,7 @@
 /turf/simulated/floor/lino,
 /area/map_template/deepmaint)
 "d" = (
-/obj/effect/floor_decal/corner/lightgrey/diagonal,
+/obj/floor_decal/corner/lightgrey/diagonal,
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "e" = (
@@ -29,16 +29,16 @@
 /turf/simulated/floor/lino,
 /area/map_template/deepmaint)
 "f" = (
-/obj/effect/floor_decal/asteroid,
+/obj/floor_decal/asteroid,
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
 	},
 /area/map_template/deepmaint)
 "g" = (
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/floor_decal/corner/lightgrey{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/floor_decal/corner/lightgrey{
 	dir = 1
 	},
 /obj/machinery/light/small{
@@ -56,18 +56,18 @@
 /turf/simulated/floor/lino,
 /area/map_template/deepmaint)
 "j" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/map_template/deepmaint)
 "k" = (
 /obj/structure/bed/chair/padded/brown{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "l" = (
-/obj/effect/floor_decal/asteroid,
+/obj/floor_decal/asteroid,
 /turf/simulated/floor/plating{
 	icon_state = "asteroidplating"
 	},
@@ -76,11 +76,11 @@
 /obj/structure/bed/chair/padded/brown{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "o" = (
-/obj/effect/floor_decal/industrial/warning/dust/corner{
+/obj/floor_decal/industrial/warning/dust/corner{
 	dir = 8
 	},
 /obj/machinery/light/small,
@@ -90,12 +90,12 @@
 /area/map_template/deepmaint)
 "p" = (
 /obj/structure/table/standard,
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /obj/item/reagent_containers/food/drinks/cans/dr_gibb,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "q" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 6
 	},
 /obj/machinery/light/small{
@@ -110,7 +110,7 @@
 /turf/simulated/floor/lino,
 /area/map_template/deepmaint)
 "s" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/map_template/deepmaint)
 "t" = (
@@ -126,7 +126,7 @@
 /obj/structure/bed/chair/padded/brown{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "w" = (
@@ -135,7 +135,7 @@
 /turf/simulated/floor/lino,
 /area/map_template/deepmaint)
 "x" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 9
 	},
 /turf/simulated/floor/tiled,
@@ -151,7 +151,7 @@
 /turf/simulated/floor/lino,
 /area/map_template/deepmaint)
 "z" = (
-/obj/effect/floor_decal/industrial/warning/dust,
+/obj/floor_decal/industrial/warning/dust,
 /turf/simulated/floor/asteroid{
 	initial_gas = list("oxygen"=21.8366,"nitrogen"=82.1472)
 	},
@@ -171,7 +171,7 @@
 	},
 /area/map_template/deepmaint)
 "C" = (
-/obj/effect/floor_decal/industrial/warning/dust{
+/obj/floor_decal/industrial/warning/dust{
 	dir = 9
 	},
 /turf/simulated/floor/asteroid{
@@ -192,14 +192,14 @@
 /obj/structure/bed/chair/padded/brown{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /obj/machinery/light{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "G" = (
-/obj/effect/floor_decal/industrial/warning/dust,
+/obj/floor_decal/industrial/warning/dust,
 /obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
 	icon = 'icons/obj/flora/hydroponics_growing.dmi';
 	icon_state = null
@@ -222,10 +222,10 @@
 /turf/simulated/floor/lino,
 /area/map_template/deepmaint)
 "J" = (
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/floor_decal/corner/lightgrey{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/lightgrey,
+/obj/floor_decal/corner/lightgrey,
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "K" = (
@@ -233,18 +233,18 @@
 /turf/simulated/floor/lino,
 /area/map_template/deepmaint)
 "L" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "M" = (
 /obj/structure/bed/chair/padded/brown,
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "N" = (
-/obj/effect/floor_decal/industrial/warning/dust{
+/obj/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
 /turf/simulated/floor/asteroid{
@@ -252,13 +252,13 @@
 	},
 /area/map_template/deepmaint)
 "O" = (
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /obj/item/stool/bar/padded,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "P" = (
 /obj/structure/table/standard,
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /obj/random/drinkbottle,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
@@ -271,10 +271,10 @@
 	},
 /area/map_template/deepmaint)
 "S" = (
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/floor_decal/corner/lightgrey{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/floor_decal/corner/lightgrey{
 	dir = 1
 	},
 /obj/machinery/light{
@@ -284,7 +284,7 @@
 /area/map_template/deepmaint)
 "T" = (
 /obj/structure/table/standard,
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /obj/machinery/fabricator/micro/bartender,
 /obj/item/stack/material/steel/ten,
 /obj/item/stack/material/glass/ten,
@@ -293,21 +293,21 @@
 /area/map_template/deepmaint)
 "U" = (
 /obj/structure/table/standard,
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/floor_decal/corner/lightgrey/mono,
 /obj/item/reagent_containers/food/drinks/coffee,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "V" = (
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/floor_decal/corner/lightgrey{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/lightgrey{
+/obj/floor_decal/corner/lightgrey{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "W" = (
-/obj/effect/floor_decal/industrial/warning/dust{
+/obj/floor_decal/industrial/warning/dust{
 	dir = 4
 	},
 /turf/simulated/floor/asteroid{

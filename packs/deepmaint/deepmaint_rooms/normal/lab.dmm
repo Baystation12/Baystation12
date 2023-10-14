@@ -3,7 +3,7 @@
 /obj/structure/bed/chair/padded/green{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/lime/full,
+/obj/floor_decal/corner/lime/full,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "av" = (
@@ -25,33 +25,33 @@
 	pixel_x = 24;
 	master_tag = "deep_maint_viro"
 	},
-/obj/effect/floor_decal/corner/lime{
+/obj/floor_decal/corner/lime{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "bX" = (
 /obj/structure/virology/console_broken,
-/obj/effect/floor_decal/corner/lime/mono,
+/obj/floor_decal/corner/lime/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "co" = (
 /obj/structure/bed/chair,
-/obj/effect/gibspawner/human,
+/obj/gibspawner/human,
 /turf/simulated/floor/steel_dirty,
 /area/map_template/deepmaint)
 "dF" = (
 /obj/structure/bed/chair/padded/green{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/lime{
+/obj/floor_decal/corner/lime{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "el" = (
-/obj/effect/decal/cleanable/blood,
-/obj/effect/floor_decal/corner/purple{
+/obj/decal/cleanable/blood,
+/obj/floor_decal/corner/purple{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
@@ -70,7 +70,7 @@
 "fC" = (
 /obj/structure/table/standard,
 /obj/item/scalpel/basic,
-/obj/effect/floor_decal/corner/lime/mono,
+/obj/floor_decal/corner/lime/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "fM" = (
@@ -81,7 +81,7 @@
 /turf/simulated/floor/steel_dirty,
 /area/map_template/deepmaint)
 "fY" = (
-/obj/effect/floor_decal/corner/lime/three_quarters{
+/obj/floor_decal/corner/lime/three_quarters{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -94,7 +94,7 @@
 /obj/structure/table/rack,
 /obj/item/storage/box/masks,
 /obj/item/storage/box/latexgloves,
-/obj/effect/floor_decal/corner/lime/mono,
+/obj/floor_decal/corner/lime/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "hJ" = (
@@ -102,78 +102,78 @@
 	dir = 1;
 	pixel_y = 24
 	},
-/obj/effect/floor_decal/corner/lime{
+/obj/floor_decal/corner/lime{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "ij" = (
 /obj/structure/virology/centrifuge_broken,
-/obj/effect/floor_decal/corner/lime/mono,
+/obj/floor_decal/corner/lime/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "ix" = (
 /obj/structure/table/standard,
 /obj/item/pen/red,
 /obj/item/folder/red,
-/obj/effect/floor_decal/corner/lime/mono,
+/obj/floor_decal/corner/lime/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "jB" = (
 /obj/structure/bed/chair/padded/green{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/lime/full,
+/obj/floor_decal/corner/lime/full,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "kN" = (
 /mob/living/simple_animal/hostile/creature,
-/obj/effect/floor_decal/corner/lime{
+/obj/floor_decal/corner/lime{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "kU" = (
-/obj/effect/floor_decal/corner/lime{
+/obj/floor_decal/corner/lime{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "mC" = (
 /obj/machinery/light/spot,
-/obj/effect/floor_decal/corner/lime{
+/obj/floor_decal/corner/lime{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "mM" = (
 /obj/item/stool/padded,
-/obj/effect/floor_decal/corner/purple{
+/obj/floor_decal/corner/purple{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "nz" = (
 /obj/machinery/computer/arcade,
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/floor_decal/corner/purple/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "nL" = (
 /obj/structure/bed/chair,
-/obj/effect/decal/cleanable/vomit,
+/obj/decal/cleanable/vomit,
 /mob/living/carbon/human/monkey,
 /turf/simulated/floor/steel_dirty,
 /area/map_template/deepmaint)
 "nO" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/floor_decal/corner/red{
+/obj/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood/drip,
+/obj/floor_decal/corner/red{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "oe" = (
-/obj/effect/floor_decal/corner/lime{
+/obj/floor_decal/corner/lime{
 	dir = 10
 	},
 /obj/item/stool/padded,
@@ -183,14 +183,14 @@
 /obj/structure/table/standard,
 /obj/item/reagent_containers/glass/beaker/vial/random,
 /obj/item/reagent_containers/glass/beaker/vial/random,
-/obj/effect/floor_decal/corner/lime/mono,
+/obj/floor_decal/corner/lime/mono,
 /obj/item/device/flashlight/lamp,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "pm" = (
 /obj/structure/table/standard,
 /obj/random/junkfood,
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/floor_decal/corner/purple/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "qg" = (
@@ -209,7 +209,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/lime{
+/obj/floor_decal/corner/lime{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -224,39 +224,39 @@
 /obj/item/gun/projectile/revolver{
 	starts_loaded = 0
 	},
-/obj/effect/floor_decal/corner/red/mono,
+/obj/floor_decal/corner/red/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "ve" = (
 /obj/structure/virology/iso,
-/obj/effect/floor_decal/corner/lime/mono,
+/obj/floor_decal/corner/lime/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "vn" = (
-/obj/effect/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood/drip,
 /mob/living/simple_animal/hostile/creature,
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "vS" = (
-/obj/effect/decal/cleanable/generic,
+/obj/decal/cleanable/generic,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "vV" = (
 /obj/structure/closet/l3closet/virology,
-/obj/effect/floor_decal/corner/lime/mono,
+/obj/floor_decal/corner/lime/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "we" = (
 /obj/structure/table/standard,
 /obj/random/donkpocket_box,
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/floor_decal/corner/purple/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "wW" = (
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "xZ" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "ym" = (
@@ -270,25 +270,25 @@
 /obj/item/handcuffs,
 /obj/item/handcuffs,
 /obj/item/handcuffs,
-/obj/effect/floor_decal/corner/lime/mono,
+/obj/floor_decal/corner/lime/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "yK" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/floor_decal/corner/red{
+/obj/decal/cleanable/blood/drip,
+/obj/floor_decal/corner/red{
 	dir = 9
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "yM" = (
 /obj/random/trash,
-/obj/effect/floor_decal/corner/purple{
+/obj/floor_decal/corner/purple{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "yO" = (
-/obj/effect/floor_decal/corner/purple{
+/obj/floor_decal/corner/purple{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
@@ -297,7 +297,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/lime{
+/obj/floor_decal/corner/lime{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
@@ -305,12 +305,12 @@
 "BI" = (
 /obj/structure/table/standard,
 /obj/machinery/microwave,
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/floor_decal/corner/purple/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "BU" = (
 /obj/item/stool/padded,
-/obj/effect/floor_decal/corner/red{
+/obj/floor_decal/corner/red{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
@@ -318,18 +318,18 @@
 "CB" = (
 /obj/structure/table/standard,
 /obj/item/storage/box/freezer,
-/obj/effect/floor_decal/corner/lime/mono,
+/obj/floor_decal/corner/lime/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "CC" = (
 /obj/item/stool/padded,
 /obj/machinery/light/spot,
-/obj/effect/floor_decal/corner/purple/full,
+/obj/floor_decal/corner/purple/full,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "CH" = (
 /obj/item/stool/padded,
-/obj/effect/floor_decal/corner/purple{
+/obj/floor_decal/corner/purple{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
@@ -337,12 +337,12 @@
 "CP" = (
 /obj/structure/table/standard,
 /obj/item/material/clipboard/plastic,
-/obj/effect/floor_decal/corner/lime/mono,
+/obj/floor_decal/corner/lime/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "DB" = (
-/obj/effect/decal/cleanable/generic,
-/obj/effect/floor_decal/corner/purple/full,
+/obj/decal/cleanable/generic,
+/obj/floor_decal/corner/purple/full,
 /obj/structure/flora/pottedplant/large,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
@@ -352,23 +352,23 @@
 /obj/item/storage/box/monkeycubes,
 /obj/item/reagent_containers/food/drinks/cans/waterbottle,
 /obj/machinery/light/small,
-/obj/effect/floor_decal/corner/red/mono,
+/obj/floor_decal/corner/red/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "Em" = (
 /obj/structure/table/standard,
 /obj/item/storage/lockbox/vials,
-/obj/effect/floor_decal/corner/lime/mono,
+/obj/floor_decal/corner/lime/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "Eq" = (
-/obj/effect/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood/drip,
 /obj/item/ammo_casing/pistol/magnum/used,
 /turf/simulated/floor/tiled,
 /area/map_template/deepmaint)
 "EA" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/floor_decal/corner/lime{
+/obj/decal/cleanable/blood/drip,
+/obj/floor_decal/corner/lime{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -382,21 +382,21 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "Gd" = (
-/obj/effect/floor_decal/corner/lime{
+/obj/floor_decal/corner/lime{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "GB" = (
-/obj/effect/decal/cleanable/vomit,
-/obj/effect/floor_decal/corner/purple{
+/obj/decal/cleanable/vomit,
+/obj/floor_decal/corner/purple{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "GD" = (
 /mob/living/simple_animal/hostile/creature,
-/obj/effect/floor_decal/corner/purple{
+/obj/floor_decal/corner/purple{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
@@ -414,7 +414,7 @@
 	tag_exterior_door = "deep_maint_viro_outter";
 	tag_interior_door = "deep_maint_viro_inner"
 	},
-/obj/effect/floor_decal/corner/lime{
+/obj/floor_decal/corner/lime{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
@@ -423,7 +423,7 @@
 /obj/structure/hygiene/shower{
 	pixel_y = 28
 	},
-/obj/effect/floor_decal/corner/lime{
+/obj/floor_decal/corner/lime{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
@@ -431,7 +431,7 @@
 "Ms" = (
 /obj/structure/table/standard,
 /obj/random/junk,
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/floor_decal/corner/purple/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "MZ" = (
@@ -441,22 +441,22 @@
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/lime/mono,
+/obj/floor_decal/corner/lime/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "NQ" = (
 /obj/structure/virology/analyser_off,
-/obj/effect/floor_decal/corner/lime/mono,
+/obj/floor_decal/corner/lime/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "Og" = (
 /obj/structure/table/standard,
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/floor_decal/corner/purple/mono,
 /obj/random/junk,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "PQ" = (
-/obj/effect/floor_decal/corner/lime/three_quarters,
+/obj/floor_decal/corner/lime/three_quarters,
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "QF" = (
@@ -472,11 +472,11 @@
 /obj/structure/table/rack,
 /obj/item/storage/box/pillbottles,
 /obj/item/storage/box/beakers,
-/obj/effect/floor_decal/corner/lime/mono,
+/obj/floor_decal/corner/lime/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "SG" = (
-/obj/effect/floor_decal/corner/lime{
+/obj/floor_decal/corner/lime{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
@@ -484,11 +484,11 @@
 "Tg" = (
 /obj/structure/table/standard,
 /obj/item/device/radio/phone,
-/obj/effect/floor_decal/corner/lime/mono,
+/obj/floor_decal/corner/lime/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "Tw" = (
-/obj/effect/floor_decal/corner/lime{
+/obj/floor_decal/corner/lime{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
@@ -497,34 +497,34 @@
 /obj/structure/table/standard,
 /obj/item/dice/d100,
 /obj/machinery/light/spot,
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/floor_decal/corner/purple/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "Ui" = (
 /obj/item/stool/padded,
-/obj/effect/floor_decal/corner/purple/three_quarters{
+/obj/floor_decal/corner/purple/three_quarters{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "Vn" = (
-/obj/effect/floor_decal/corner/purple/mono,
+/obj/floor_decal/corner/purple/mono,
 /obj/structure/reagent_dispensers/water_cooler{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/deepmaint)
 "WE" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/floor_decal/corner/purple{
+/obj/decal/cleanable/blood/drip,
+/obj/floor_decal/corner/purple{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "WV" = (
 /obj/structure/closet/crate/secure/biohazard/alt,
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/decal/cleanable/blood,
+/obj/decal/cleanable/blood/drip,
+/obj/decal/cleanable/blood,
 /turf/simulated/floor/steel_dirty,
 /area/map_template/deepmaint)
 "Xe" = (
@@ -536,7 +536,7 @@
 	dir = 4;
 	icon_state = "bulb1"
 	},
-/obj/effect/floor_decal/corner/lime{
+/obj/floor_decal/corner/lime{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,

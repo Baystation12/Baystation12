@@ -15,7 +15,7 @@
 	harm_intent_damage = 5
 	can_escape = TRUE
 	a_intent = I_HURT
-	var/corpse = /obj/effect/landmark/corpse/russian
+	var/corpse = /obj/landmark/corpse/russian
 	var/dropped_weapon = /obj/item/material/knife/combat
 	natural_weapon = /obj/item/material/knife/combat
 	unsuitable_atmos_damage = 15
@@ -27,7 +27,7 @@
 /mob/living/simple_animal/hostile/russian/ranged
 	icon_state = "russianranged"
 	icon_living = "russianranged"
-	corpse = /obj/effect/landmark/corpse/russian/ranged
+	corpse = /obj/landmark/corpse/russian/ranged
 	dropped_weapon = /obj/item/gun/projectile/revolver
 	ranged = 1
 	projectiletype = /obj/item/projectile/bullet

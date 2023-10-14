@@ -75,7 +75,7 @@
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/item/folder/envelope/captain/LateInitialize(mapload)
-	var/obj/effect/overmap/visitable/torch = map_sectors["[z]"]
+	var/obj/overmap/visitable/torch = map_sectors["[z]"]
 	var/memo = {"
 	<tt><center><b>[SPAN_COLOR("red", "SECRET - CODE WORDS: TORCH")]</b>
 	<h3>SOL CENTRAL GOVERNMENT EXPEDITIONARY COMMAND</h3>

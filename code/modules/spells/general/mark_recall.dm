@@ -29,7 +29,7 @@
 		return 0
 	var/target = targets[1]
 	if(istext(target))
-		mark = new /obj/effect/cleanable/wizard_mark(get_turf(user),src)
+		mark = new /obj/cleanable/wizard_mark(get_turf(user),src)
 		return 1
 	if(!istype(target,/obj)) //something went wrong
 		return 0
@@ -47,7 +47,7 @@
 
 	return "You will always be able to cast this spell, even while unconscious or handcuffed."
 
-/obj/effect/cleanable/wizard_mark
+/obj/cleanable/wizard_mark
 	name = "\improper Mark of the Wizard"
 	desc = "A strange rune said to be made by wizards. Or its just some shmuck playing with crayons again."
 	icon = 'icons/obj/rune.dmi'
@@ -59,23 +59,23 @@
 
 	var/spell/mark_recall/spell
 
-/obj/effect/cleanable/wizard_mark/New(newloc,mrspell)
+/obj/cleanable/wizard_mark/New(newloc,mrspell)
 	..()
 	spell = mrspell
 
-/obj/effect/cleanable/wizard_mark/Destroy()
+/obj/cleanable/wizard_mark/Destroy()
 	spell.mark = null //dereference pls.
 	spell = null
 	..()
 
-/obj/effect/cleanable/wizard_mark/attack_hand(mob/user)
+/obj/cleanable/wizard_mark/attack_hand(mob/user)
 	if(user == spell.holder)
 		user.visible_message("\The [user] mutters an incantation and \the [src] disappears!")
 		qdel(src)
 	..()
 
 
-/obj/effect/cleanable/wizard_mark/use_tool(obj/item/tool, mob/user, list/click_params)
+/obj/cleanable/wizard_mark/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Null Rod or Spell Book - Remove mark
 	if (is_type_in_list(tool, list(/obj/item/nullrod, /obj/item/spellbook)))
 		user.visible_message(

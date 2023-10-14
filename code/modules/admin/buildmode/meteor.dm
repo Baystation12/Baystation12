@@ -22,14 +22,14 @@ When a meteor is spawned, its type is randomly chosen from the list. The list mu
 	var/choice = alert("Add or remove a meteor type from the list?", "Add/Remove", "Add", "Remove", "Cancel")
 
 	if (choice == "Add")
-		var/obj/effect/meteor/M = select_subpath(/obj/effect/meteor)
+		var/obj/meteor/M = select_subpath(/obj/meteor)
 
 		if (M)
 			meteors += M
 			to_chat(user, "Added [M] to the list of meteor types.")
 
 	if (choice == "Remove")
-		var/obj/effect/meteor/M = input("Choose a meteor type to remove", "Meteor List") as null | anything in meteors
+		var/obj/meteor/M = input("Choose a meteor type to remove", "Meteor List") as null | anything in meteors
 		if (M)
 			meteors -= M
 			to_chat(user, "Removed [M] from the list of meteor types.")
@@ -69,7 +69,7 @@ When a meteor is spawned, its type is randomly chosen from the list. The list mu
 	set waitfor = FALSE
 
 	var/Me = pickweight(meteors)
-	var/obj/effect/meteor/M = new Me(spawn_point)
+	var/obj/meteor/M = new Me(spawn_point)
 	var/turf/edge = get_edge_target_turf(spawn_point, direction)
 	M.dest = edge
 	walk_towards(M, edge, 3)

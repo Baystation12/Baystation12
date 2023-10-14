@@ -41,7 +41,7 @@
 /obj/item/device/assembly/prox_sensor/HasProximity(atom/movable/movable)
 	if (ismob(movable) && !isliving(movable))
 		return
-	if (istype(movable, /obj/effect/beam))
+	if (istype(movable, /obj/beam))
 		return
 	if (movable.move_speed < 12)
 		sense()

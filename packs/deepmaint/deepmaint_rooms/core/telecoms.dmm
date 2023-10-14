@@ -6,43 +6,43 @@
 /turf/simulated/wall/r_wall,
 /area/map_template/deepmaint)
 "ac" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/salvageable/computer,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "ag" = (
 /obj/item/trash/material/circuit,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/steel/bar_dance,
 /area/map_template/deepmaint)
 "ah" = (
 /obj/random/pack/tech_loot,
 /obj/item/trash/material/device,
 /obj/item/trash/broken_robot_part,
-/obj/effect/decal/cleanable/blood/oil,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/blood/oil,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "ai" = (
 /obj/machinery/constructable_frame/machine_frame,
 /obj/item/trash/material/device,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "al" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /mob/living/simple_animal/hostile/hivebot/range,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "an" = (
 /obj/machinery/light/floor/built,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /mob/living/simple_animal/hostile/hivebot,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
@@ -52,55 +52,55 @@
 /area/map_template/deepmaint)
 "ar" = (
 /obj/item/circuitboard/broken,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/salvageable/server,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "as" = (
 /obj/item/circuitboard/broken,
 /obj/item/trash/material/device,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/salvageable/computer,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "at" = (
 /obj/structure/foamedmetal,
-/obj/effect/decal/cleanable/blood/oil,
+/obj/decal/cleanable/blood/oil,
 /obj/item/mine_old,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "au" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/salvageable/computer,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "aw" = (
 /obj/structure/salvageable/server,
 /obj/item/trash/broken_robot_part,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "ay" = (
 /obj/item/trash/material/device,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "aB" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /mob/living/simple_animal/hostile/retaliate/malf_drone,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "aC" = (
 /obj/random/pack/tech_loot,
 /obj/item/trash/material/device,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/steel/bar_dance,
 /area/map_template/deepmaint)
 "aD" = (
@@ -110,14 +110,14 @@
 /area/map_template/deepmaint)
 "aE" = (
 /obj/machinery/light,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/salvageable/bliss,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "aF" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/salvageable/server,
 /turf/simulated/floor/tiled/steel/bar_dance,
 /area/map_template/deepmaint)
@@ -129,16 +129,16 @@
 	name = "Out Dated PDA Ad";
 	pixel_y = 32
 	},
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/steel/bar_dance,
 /area/map_template/deepmaint)
 "aI" = (
 /obj/machinery/constructable_frame/machine_frame,
 /obj/item/trash/material/circuit,
 /obj/item/trash/material/device,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "aJ" = (
@@ -146,8 +146,8 @@
 /obj/random/voidsuit/damaged,
 /obj/item/tool/multitool,
 /obj/item/remains/human,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/steel/bar_dance,
 /area/map_template/deepmaint)
 "aK" = (
@@ -155,8 +155,8 @@
 /obj/item/circuitboard/broken,
 /obj/item/trash/material/circuit,
 /obj/item/trash/material/device,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "aL" = (
@@ -164,43 +164,43 @@
 /obj/machinery/light/floor/built,
 /obj/item/trash/material/circuit,
 /obj/item/stack/cable_coil/blue,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/item/computer_hardware/network_card/wired,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "aM" = (
 /obj/item/trash/material/circuit,
 /obj/item/trash/material/device,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/salvageable/server,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "aN" = (
 /obj/random/pack/tech_loot,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "aO" = (
 /obj/item/stack/cable_coil,
 /obj/item/stack/material/plastic/random,
 /obj/random/pack/tech_loot,
-/obj/effect/decal/cleanable/blood/oil,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/blood/oil,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "aR" = (
 /obj/item/trash/material/circuit,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "aS" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "aU" = (
@@ -209,39 +209,39 @@
 /obj/random/pack/tech_loot,
 /obj/random/techpart,
 /obj/machinery/light/floor/built,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "aV" = (
-/obj/effect/decal/cleanable/blood/oil,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/blood/oil,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "aX" = (
 /obj/machinery/constructable_frame/machine_frame,
 /obj/item/trash/material/metal,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "aY" = (
 /obj/item/circuitboard/telecomms/server,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/item/storage/box/data_disk/basic,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "aZ" = (
 /obj/item/circuitboard/telecomms/server,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "ba" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/item/computer_hardware/network_card/wired,
 /obj/structure/salvageable/server,
 /turf/simulated/floor/bluegrid,
@@ -249,8 +249,8 @@
 "bb" = (
 /obj/item/circuitboard/telecomms/bus,
 /obj/item/stack/cable_coil/green,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/steel/bar_dance,
 /area/map_template/deepmaint)
 "bd" = (
@@ -262,74 +262,74 @@
 /obj/item/circuitboard/telecomms/processor,
 /obj/item/trash/material/circuit,
 /obj/item/trash/material/metal,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bg" = (
 /obj/item/circuitboard/broken,
 /obj/item/trash/material/device,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/salvageable/server,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bh" = (
 /obj/item/trash/material/device,
 /obj/item/trash/material/metal,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /mob/living/simple_animal/hostile/hivebot,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bi" = (
 /obj/machinery/constructable_frame/machine_frame,
 /obj/item/trash/material/circuit,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bk" = (
 /obj/structure/salvageable/server,
 /obj/item/trash/material/device,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bl" = (
 /obj/structure/salvageable/server,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bm" = (
 /obj/structure/salvageable/personal,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "bn" = (
 /obj/random/techpart,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bo" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bp" = (
 /obj/item/stack/material/plastic/random,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/salvageable/server,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bq" = (
 /obj/item/circuitboard/broken,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "br" = (
@@ -337,8 +337,8 @@
 /obj/item/circuitboard/broken,
 /obj/item/trash/material/metal,
 /obj/item/stack/cable_coil/orange,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/steel/bar_dance,
 /area/map_template/deepmaint)
 "bs" = (
@@ -350,14 +350,14 @@
 /obj/random/pack/tech_loot,
 /obj/item/trash/material/circuit,
 /obj/item/trash/broken_robot_part,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bu" = (
 /obj/random/pack/tech_loot,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "bv" = (
@@ -368,9 +368,9 @@
 "bw" = (
 /obj/item/stack/material/plastic/random,
 /obj/item/trash/material/circuit,
-/obj/effect/decal/cleanable/blood/oil,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/blood/oil,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/item/storage/box/data_disk/basic,
 /mob/living/simple_animal/hostile/hivebot,
 /turf/simulated/floor/bluegrid,
@@ -378,53 +378,53 @@
 "bx" = (
 /obj/structure/foamedmetal,
 /obj/machinery/door/blast/regular/open,
-/obj/effect/decal/cleanable/blood/oil,
+/obj/decal/cleanable/blood/oil,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "by" = (
-/obj/effect/decal/cleanable/blood/oil,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/blood/oil,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /mob/living/simple_animal/hostile/retaliate/malf_drone,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "bz" = (
 /obj/item/trash/material/metal,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/salvageable/computer,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bA" = (
 /obj/machinery/constructable_frame/machine_frame,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bB" = (
 /obj/item/trash/material/metal,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/salvageable/server,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bC" = (
 /obj/item/stack/cable_coil/yellow,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bD" = (
 /obj/structure/foamedmetal,
 /obj/machinery/light,
-/obj/effect/decal/cleanable/blood/oil,
+/obj/decal/cleanable/blood/oil,
 /obj/item/mine_old,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "bF" = (
 /obj/item/circuitboard/broken,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/item/computer_hardware/network_card/advanced,
 /obj/item/storage/box/data_disk/basic,
 /turf/simulated/floor/tiled/steel/bar_dance,
@@ -432,48 +432,48 @@
 "bG" = (
 /obj/random/closet_tech,
 /obj/machinery/light,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "bI" = (
 /obj/item/circuitboard/broken,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/steel/bar_dance,
 /area/map_template/deepmaint)
 "bJ" = (
 /obj/item/circuitboard/telecomms/server,
 /obj/machinery/light/floor/built,
 /obj/item/stack/cable_coil/white,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/steel/bar_dance,
 /area/map_template/deepmaint)
 "bK" = (
 /obj/item/stack/material/plastic/random,
 /obj/random/techpart,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/steel/bar_dance,
 /area/map_template/deepmaint)
 "bL" = (
 /obj/item/trash/material/circuit,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/salvageable/server,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bN" = (
 /obj/structure/salvageable/implant_container,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bO" = (
 /obj/item/trash/material/circuit,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/salvageable/computer,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
@@ -483,17 +483,17 @@
 /area/map_template/deepmaint)
 "bQ" = (
 /obj/random/closet_tech,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "bR" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/wall/r_wall,
 /area/map_template/deepmaint)
 "bS" = (
 /obj/structure/salvageable/personal,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/item/computer_hardware/printer,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
@@ -501,23 +501,23 @@
 /obj/item/stack/cable_coil,
 /obj/random/techpart,
 /obj/item/trash/material/circuit,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/salvageable/server,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bU" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/salvageable/autolathe,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "bV" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "bW" = (
 /obj/random/techpart,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "bX" = (
@@ -527,29 +527,29 @@
 /area/map_template/deepmaint)
 "bY" = (
 /obj/item/circuitboard/telecomms/bus,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bZ" = (
 /obj/random/pack/tech_loot,
 /obj/item/trash/material/metal,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "ca" = (
 /obj/machinery/light,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "cb" = (
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "cc" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/item/storage/box/data_disk,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
@@ -561,21 +561,21 @@
 /area/map_template/deepmaint)
 "ce" = (
 /obj/random/pack/tech_loot,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/item/computer_hardware/network_card/advanced,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "cf" = (
 /obj/structure/foamedmetal,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "cg" = (
 /obj/random/techpart,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "ch" = (
@@ -584,8 +584,8 @@
 /area/map_template/deepmaint)
 "ci" = (
 /obj/structure/firedoor_assembly,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "cj" = (
@@ -596,64 +596,64 @@
 /obj/random/techpart,
 /obj/item/circuitboard/broken,
 /obj/item/trash/material/device,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "cl" = (
 /obj/item/trash/material/circuit,
-/obj/effect/decal/cleanable/blood/oil,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/blood/oil,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "cm" = (
 /obj/item/stack/cable_coil,
 /obj/item/circuitboard/broken,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "cn" = (
 /obj/item/trash/material/metal,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /mob/living/simple_animal/hostile/hivebot/range,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "co" = (
 /obj/structure/foamedmetal,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/salvageable/computer,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "cp" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/steel,
 /area/map_template/deepmaint)
 "cq" = (
-/obj/effect/window_lwall_spawn/reinforced,
+/obj/window_lwall_spawn/reinforced,
 /turf/simulated/floor/tiled/steel,
 /area/map_template/deepmaint)
 "cr" = (
 /obj/structure/foamedmetal,
-/obj/effect/decal/cleanable/blood/oil,
+/obj/decal/cleanable/blood/oil,
 /obj/structure/salvageable/computer,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "cs" = (
 /obj/machinery/door/blast/regular/open,
-/obj/effect/decal/cleanable/blood/oil,
+/obj/decal/cleanable/blood/oil,
 /turf/simulated/floor/tiled/steel,
 /area/map_template/deepmaint)
 "eg" = (
 /obj/machinery/light/floor/built,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "gC" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/random/cluster/psi_monster,
 /turf/simulated/floor/tiled/steel,
 /area/map_template/deepmaint)
@@ -664,19 +664,19 @@
 "kS" = (
 /obj/random/techpart,
 /obj/item/trash/material/metal,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "lq" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/item/computer_hardware/card_slot,
 /mob/living/simple_animal/hostile/hivebot/range,
 /turf/simulated/floor/tiled/steel/bar_dance,
 /area/map_template/deepmaint)
 "nc" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /mob/living/simple_animal/hostile/hivebot/range,
 /turf/simulated/floor/tiled/steel/bar_dance,
 /area/map_template/deepmaint)
@@ -684,7 +684,7 @@
 /obj/random/pack/tech_loot,
 /obj/random/techpart,
 /obj/structure/table/reinforced,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "nu" = (
@@ -695,12 +695,12 @@
 /area/map_template/deepmaint)
 "ow" = (
 /obj/item/trash/material/metal,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/steel/bar_dance,
 /area/map_template/deepmaint)
 "px" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/random/lathe_disk,
 /obj/random/cluster/psi_monster/low_chance,
 /turf/simulated/floor/reinforced,
@@ -708,28 +708,28 @@
 "pZ" = (
 /obj/random/pack/tech_loot,
 /obj/structure/table/reinforced,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "qb" = (
-/obj/effect/decal/cleanable/blood/oil,
+/obj/decal/cleanable/blood/oil,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "rQ" = (
 /obj/structure/table/bench/wooden,
-/obj/effect/decal/cleanable/blood/oil,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/blood/oil,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "tC" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/salvageable/computer,
 /turf/simulated/floor/tiled/steel,
 /area/map_template/deepmaint)
 "ww" = (
 /obj/structure/foamedmetal,
 /obj/random/closet_tech,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "ya" = (
@@ -741,8 +741,8 @@
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "BF" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/AIcore,
 /obj/item/device/aicard,
 /obj/item/computer_hardware/hard_drive/portable/advanced/shady,
@@ -761,7 +761,7 @@
 /obj/random/pack/tech_loot,
 /obj/structure/table/reinforced,
 /obj/machinery/light,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "Hd" = (
@@ -770,21 +770,21 @@
 /area/map_template/deepmaint)
 "HK" = (
 /obj/item/circuitboard/broken,
-/obj/effect/decal/cleanable/blood/oil,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/blood/oil,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/item/computer_hardware/ai_slot,
 /turf/simulated/floor/tiled/steel/bar_dance,
 /area/map_template/deepmaint)
 "HW" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/random/lathe_disk,
 /obj/structure/salvageable/autolathe,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "HZ" = (
 /obj/item/remains/xeno,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "KH" = (
@@ -794,31 +794,31 @@
 /area/map_template/deepmaint)
 "Ma" = (
 /obj/random/techpart,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/steel/bar_dance,
 /area/map_template/deepmaint)
 "Pp" = (
 /obj/random/pack/tech_loot,
 /obj/random/techpart,
 /obj/structure/table/bench/wooden,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "PN" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /mob/living/simple_animal/hostile/retaliate/malf_drone,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "RN" = (
 /obj/item/trash/material/metal,
-/obj/effect/decal/cleanable/blood/oil,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/blood/oil,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "Ta" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/item/storage/box/data_disk/basic,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
@@ -828,12 +828,12 @@
 /area/map_template/deepmaint)
 "VS" = (
 /obj/item/trash/material/metal,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "Yy" = (
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/random/cluster/psi_monster/low_chance,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)

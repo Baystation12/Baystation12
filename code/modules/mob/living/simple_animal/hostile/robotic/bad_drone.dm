@@ -13,7 +13,7 @@
 	minbodytemp = 0
 	speed = 4
 	mob_size = MOB_TINY
-	var/corpse = /obj/effect/decal/cleanable/blood/gibs/robot
+	var/corpse = /obj/decal/cleanable/blood/gibs/robot
 
 	ai_holder = /datum/ai_holder/simple_animal/rogue_drone
 	say_list_type = /datum/say_list/rogue_drone

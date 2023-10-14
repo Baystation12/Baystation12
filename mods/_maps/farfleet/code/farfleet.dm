@@ -3,13 +3,13 @@
 	//OVERMAP//
 	///////////
 
-/obj/effect/overmap/visitable/ship/farfleet
+/obj/overmap/visitable/ship/farfleet
 	name = "Pioneer Corps Gunboat"
 	desc = "ICGNV Garibaldi-class Gunboat. This craft bears markings of Pioneer Corps"
 	color = "#fc7a00"
 	fore_dir = WEST
 	vessel_mass = 1000
-	known_ships = list(/obj/effect/overmap/visitable/ship/landable/snz)
+	known_ships = list(/obj/overmap/visitable/ship/landable/snz)
 	vessel_size = SHIP_SIZE_SMALL
 	hide_from_reports = TRUE
 	start_x = 39
@@ -28,7 +28,7 @@
 		)
 
 #define RECON_SHIP_PREFIX pick("Admiral Sobolev","Ivan Kozhedub","Sevastopol","Zirkel","Kurchatov","Gomel","Admiral Kolchak","Udaloi","Omsk","Krondstatt","Admiral Nakhimov","Iron Dmitry","Simbirsk","Apostle Peter","Admiral Chernavin","Proryv","Triumph","Besstrashnyi","Elisarov","Magnitogorsk")
-/obj/effect/overmap/visitable/ship/farfleet/New()
+/obj/overmap/visitable/ship/farfleet/New()
 	name = "ICCGN PC [RECON_SHIP_PREFIX], \a [name]"
 	for(var/area/ship/farfleet/A)
 		A.name = "\improper [name] - [A.name]"
@@ -52,23 +52,23 @@
 		/area/turbolift/farfleet_second
 	)
 
-/obj/effect/shuttle_landmark/nav_farfleet/nav1
+/obj/shuttle_landmark/nav_farfleet/nav1
 	name = "Pioneer Corps Ship Fore"
 	landmark_tag = "nav_farfleet_1"
 
-/obj/effect/shuttle_landmark/nav_farfleet/nav2
+/obj/shuttle_landmark/nav_farfleet/nav2
 	name = "Pioneer Corps Ship Aft"
 	landmark_tag = "nav_farfleet_2"
 
-/obj/effect/shuttle_landmark/nav_farfleet/nav3
+/obj/shuttle_landmark/nav_farfleet/nav3
 	name = "Pioneer Corps Ship Port"
 	landmark_tag = "nav_farfleet_3"
 
-/obj/effect/shuttle_landmark/nav_farfleet/nav4
+/obj/shuttle_landmark/nav_farfleet/nav4
 	name = "Pioneer Corps Ship Starboard"
 	landmark_tag = "nav_farfleet_4"
 
-/obj/effect/submap_landmark/joinable_submap/farfleet
+/obj/submap_landmark/joinable_submap/farfleet
 	name = "ICCGN PC Ship"
 	archetype = /singleton/submap_archetype/away_iccgn_farfleet
 

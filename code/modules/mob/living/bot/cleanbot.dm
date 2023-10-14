@@ -32,20 +32,20 @@
 
 	if(oddbutton && prob(5)) // Make a big mess
 		visible_message("Something flies out of [src]. He seems to be acting oddly.")
-		var/obj/effect/decal/cleanable/blood/gibs/gib = new /obj/effect/decal/cleanable/blood/gibs(loc)
+		var/obj/decal/cleanable/blood/gibs/gib = new /obj/decal/cleanable/blood/gibs(loc)
 		var/weakref/g = weakref(gib)
 		ignore_list += g
 		spawn(600)
 			ignore_list -= g
 
 /mob/living/bot/cleanbot/lookForTargets()
-	for(var/obj/effect/decal/cleanable/D in view(world.view + 1, src))
+	for(var/obj/decal/cleanable/D in view(world.view + 1, src))
 		if(confirmTarget(D))
 			target = D
 			playsound(src, 'sound/machines/boop1.ogg', 30)
 			return
 
-/mob/living/bot/cleanbot/confirmTarget(obj/effect/decal/cleanable/D)
+/mob/living/bot/cleanbot/confirmTarget(obj/decal/cleanable/D)
 	if(!..())
 		return 0
 	for(var/T in target_types)
@@ -57,7 +57,7 @@
 	if(get_turf(target) == src.loc)
 		UnarmedAttack(target)
 
-/mob/living/bot/cleanbot/UnarmedAttack(obj/effect/decal/cleanable/D, proximity)
+/mob/living/bot/cleanbot/UnarmedAttack(obj/decal/cleanable/D, proximity)
 	if(!..())
 		return
 
@@ -70,7 +70,7 @@
 	busy = 1
 	visible_message("\The [src] begins to clean up \the [D]")
 	update_icons()
-	var/cleantime = (istype(D, /obj/effect/decal/cleanable/dirt) ? 1 : 5) SECONDS
+	var/cleantime = (istype(D, /obj/decal/cleanable/dirt) ? 1 : 5) SECONDS
 	if(do_after(src, cleantime, D, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		if(istype(loc, /turf/simulated))
 			var/turf/simulated/f = loc
@@ -94,7 +94,7 @@
 	if(prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
 
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 	s.set_up(3, 1, src)
 	s.start()
 	qdel(src)
@@ -161,14 +161,14 @@
 /mob/living/bot/cleanbot/proc/get_targets()
 	target_types = list()
 
-	target_types += /obj/effect/decal/cleanable/blood/oil
-	target_types += /obj/effect/decal/cleanable/vomit
-	target_types += /obj/effect/decal/cleanable/crayon
-	target_types += /obj/effect/decal/cleanable/liquid_fuel
-	target_types += /obj/effect/decal/cleanable/mucus
-	target_types += /obj/effect/decal/cleanable/dirt
-	target_types += /obj/effect/decal/cleanable/filth
-	target_types += /obj/effect/decal/cleanable/spiderling_remains
+	target_types += /obj/decal/cleanable/blood/oil
+	target_types += /obj/decal/cleanable/vomit
+	target_types += /obj/decal/cleanable/crayon
+	target_types += /obj/decal/cleanable/liquid_fuel
+	target_types += /obj/decal/cleanable/mucus
+	target_types += /obj/decal/cleanable/dirt
+	target_types += /obj/decal/cleanable/filth
+	target_types += /obj/decal/cleanable/spiderling_remains
 
 	if(blood)
-		target_types += /obj/effect/decal/cleanable/blood
+		target_types += /obj/decal/cleanable/blood

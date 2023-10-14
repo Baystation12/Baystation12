@@ -1,4 +1,4 @@
-/obj/effect/overmap/visitable/sector/exoplanet/grass
+/obj/overmap/visitable/sector/exoplanet/grass
 	name = "lush exoplanet"
 	desc = "Planet with abundant flora and fauna."
 	color = "#407c40"
@@ -12,16 +12,16 @@
 	fauna_types = list(/mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/retaliate/jelly)
 	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna, /mob/living/simple_animal/hostile/retaliate/goose/dire)
 
-/obj/effect/overmap/visitable/sector/exoplanet/grass/generate_atmosphere()
+/obj/overmap/visitable/sector/exoplanet/grass/generate_atmosphere()
 	..()
 	if(atmosphere)
 		atmosphere.temperature = T20C + rand(10, 30)
 		atmosphere.update_values()
 
-/obj/effect/overmap/visitable/sector/exoplanet/grass/get_surface_color()
+/obj/overmap/visitable/sector/exoplanet/grass/get_surface_color()
 	return grass_color
 
-/obj/effect/overmap/visitable/sector/exoplanet/grass/adapt_seed(datum/seed/S)
+/obj/overmap/visitable/sector/exoplanet/grass/adapt_seed(datum/seed/S)
 	..()
 	var/carnivore_prob = rand(100)
 	if(carnivore_prob < 30)
@@ -63,7 +63,7 @@
 	grass_prob = 50
 	large_flora_prob = 30
 
-/obj/effect/overmap/visitable/sector/exoplanet/grass/terraformed
+/obj/overmap/visitable/sector/exoplanet/grass/terraformed
 	name = "life seeded exoplanet"
 	desc = "Planet with abundant flora and fauna. Shows signs of human terraformation."
 	color = "#58aa8b"
@@ -86,10 +86,10 @@
 					/mob/living/simple_animal/hostile/retaliate/goose = "goose",
 					/mob/living/simple_animal/passive/cow 					  = "wild cow")
 
-/obj/effect/overmap/visitable/sector/exoplanet/grass/terraformed/generate_habitability()
+/obj/overmap/visitable/sector/exoplanet/grass/terraformed/generate_habitability()
 	habitability_class = HABITABILITY_IDEAL
 
-/obj/effect/overmap/visitable/sector/exoplanet/grass/terraformed/generate_atmosphere()
+/obj/overmap/visitable/sector/exoplanet/grass/terraformed/generate_atmosphere()
 	..()
 	if(atmosphere)
 		atmosphere.temperature = T0C + rand(0, 50)

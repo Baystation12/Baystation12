@@ -32,10 +32,10 @@
 	pda_type = null
 	l_ear = /obj/item/device/radio/headset/map_preset/playablecolony2
 
-/obj/effect/submap_landmark/spawnpoint/colonist_spawn2
+/obj/submap_landmark/spawnpoint/colonist_spawn2
 	name = "Colonist"
 
-/obj/effect/submap_landmark/joinable_submap/colony2
+/obj/submap_landmark/joinable_submap/colony2
 	name = "Landed Colony Ship"
 	archetype = /singleton/submap_archetype/playablecolony2
 

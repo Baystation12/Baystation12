@@ -24,7 +24,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 
 /datum/antagonist/vox/add_antagonist(datum/mind/player, ignore_role, do_not_equip, move_to_spawn, do_not_announce, preserve_appearance)
 	if(pending_item_spawn)
-		for(var/obj/effect/voxartifactspawner/S as anything in GLOB.vox_artifact_spawners)
+		for(var/obj/voxartifactspawner/S as anything in GLOB.vox_artifact_spawners)
 			S.spawn_artifact()
 		pending_item_spawn = FALSE
 	..()
@@ -202,7 +202,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 	if (istype(stack))
 		if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER))
 			to_chat(user, SPAN_NOTICE("\The [src.name] disappears after a moment, leaving something behind.\nYou were able to send it back to arkship, but Apex did not appreciate your actions."))
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
 			activate()
@@ -210,7 +210,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 		if (do_after(user, 60 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER))
 			if(rand(open_chance))
 				to_chat(user, SPAN_NOTICE("After tinkering with [src.name] for some time, it suddenly disappears leaving something behind!"))
-				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+				var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 				s.set_up(10, 1, src)
 				s.start()
 				activate()
@@ -230,7 +230,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 	density = TRUE
 	var/favor_value = 12
 
-/obj/effect/voxartifactspawner
+/obj/voxartifactspawner
 	name = "landmark"
 	icon = 'icons/effects/landmarks.dmi'
 	icon_state = "x2"
@@ -239,15 +239,15 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 	simulated = FALSE
 	invisibility = INVISIBILITY_ABSTRACT
 
-/obj/effect/voxartifactspawner/Initialize(mapload)
+/obj/voxartifactspawner/Initialize(mapload)
 	GLOB.vox_artifact_spawners += src
 	return ..()
 
-/obj/effect/voxartifactspawner/Destroy()
+/obj/voxartifactspawner/Destroy()
 	GLOB.vox_artifact_spawners -= src
 	return ..()
 
-/obj/effect/voxartifactspawner/proc/spawn_artifact()
+/obj/voxartifactspawner/proc/spawn_artifact()
 	var/item_list = list(
 	/obj/item/voxartifact = 3,
 	/obj/structure/voxartifactbig = 1,
@@ -312,7 +312,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 	if(istype(I, /obj/item/bluecrystal))
 		if(!activated)
 			to_chat(user, SPAN_INFO("As soon as you bring [I] closer to [src] it powers up with shower of sparks!."))
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
 			activated = TRUE

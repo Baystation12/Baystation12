@@ -142,7 +142,7 @@
 		if(ismob(loc.loc))
 			M = loc.loc // This is about as terse as I can make my solution to the whole 'collar won't work when attached as accessory' thing.
 		to_chat(M, SPAN_DANGER("You feel a sharp shock!"))
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 		s.set_up(3, 1, M)
 		s.start()
 		M.Weaken(5)

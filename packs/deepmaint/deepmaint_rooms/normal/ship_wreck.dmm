@@ -4,13 +4,13 @@
 /area/map_template/deepmaint)
 "b" = (
 /obj/item/stack/cable_coil/single,
-/obj/effect/landmark/scorcher,
+/obj/landmark/scorcher,
 /turf/simulated/floor{
 	map_airless = 1
 	},
 /area/map_template/deepmaint)
 "c" = (
-/obj/effect/landmark/scorcher,
+/obj/landmark/scorcher,
 /obj/structure/closet/crate/plastic,
 /obj/item/material/twohanded/fireaxe,
 /turf/simulated/floor{
@@ -22,7 +22,7 @@
 /turf/space,
 /area/map_template/deepmaint)
 "e" = (
-/obj/effect/landmark/scorcher,
+/obj/landmark/scorcher,
 /obj/structure/closet/crate/plastic,
 /turf/simulated/floor{
 	map_airless = 1
@@ -30,7 +30,7 @@
 /area/map_template/deepmaint)
 "f" = (
 /obj/item/material/shard/shrapnel/titanium,
-/obj/effect/landmark/scorcher,
+/obj/landmark/scorcher,
 /turf/simulated/floor{
 	map_airless = 1
 	},
@@ -55,8 +55,8 @@
 /obj/structure/bed/chair/shuttle/white{
 	dir = 4
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/landmark/scorcher,
+/obj/decal/cleanable/liquid_fuel,
 /mob/living/simple_animal/hostile/carp,
 /turf/simulated/floor{
 	map_airless = 1
@@ -70,13 +70,13 @@
 /area/map_template/deepmaint)
 "l" = (
 /obj/machinery/door/airlock/external,
-/obj/effect/mech_shield,
+/obj/mech_shield,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "n" = (
 /obj/item/stack/material/rods,
-/obj/effect/landmark/scorcher,
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/landmark/scorcher,
+/obj/decal/cleanable/liquid_fuel,
 /turf/simulated/floor{
 	map_airless = 1
 	},
@@ -88,11 +88,11 @@
 	},
 /area/map_template/deepmaint)
 "q" = (
-/obj/effect/mech_shield,
+/obj/mech_shield,
 /turf/simulated/wall,
 /area/map_template/deepmaint)
 "r" = (
-/obj/effect/landmark/scorcher,
+/obj/landmark/scorcher,
 /obj/random/toolbox,
 /turf/simulated/floor{
 	map_airless = 1
@@ -102,8 +102,8 @@
 /obj/structure/bed/chair/shuttle/white{
 	dir = 4
 	},
-/obj/effect/gibspawner/robot,
-/obj/effect/landmark/scorcher,
+/obj/gibspawner/robot,
+/obj/landmark/scorcher,
 /turf/simulated/floor{
 	map_airless = 1
 	},
@@ -159,7 +159,7 @@
 	dir = 8
 	},
 /obj/machinery/suit_storage_unit/retro,
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "D" = (
@@ -175,7 +175,7 @@
 	dir = 4
 	},
 /obj/machinery/suit_storage_unit/retro,
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "G" = (
@@ -186,7 +186,7 @@
 /area/map_template/deepmaint)
 "K" = (
 /obj/structure/inflatable/door,
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor,
 /area/map_template/deepmaint)
 "L" = (
@@ -199,7 +199,7 @@
 /area/map_template/deepmaint)
 "M" = (
 /obj/item/stack/material/rods,
-/obj/effect/landmark/scorcher,
+/obj/landmark/scorcher,
 /turf/simulated/floor{
 	map_airless = 1
 	},
@@ -218,8 +218,8 @@
 /area/map_template/deepmaint)
 "P" = (
 /obj/item/material/shard,
-/obj/effect/landmark/scorcher,
-/obj/effect/decal/cleanable/liquid_fuel,
+/obj/landmark/scorcher,
+/obj/decal/cleanable/liquid_fuel,
 /turf/simulated/floor{
 	map_airless = 1
 	},
@@ -235,7 +235,7 @@
 /area/map_template/deepmaint)
 "S" = (
 /obj/item/material/shard/shrapnel/titanium,
-/obj/effect/landmark/scorcher,
+/obj/landmark/scorcher,
 /turf/simulated/floor{
 	icon_state = "dmg1"
 	},
@@ -247,7 +247,7 @@
 /obj/machinery/constructable_frame/computerframe/deconstruct{
 	dir = 8
 	},
-/obj/effect/landmark/scorcher,
+/obj/landmark/scorcher,
 /turf/simulated/floor{
 	map_airless = 1
 	},
@@ -260,13 +260,13 @@
 /turf/simulated/wall,
 /area/map_template/deepmaint)
 "X" = (
-/obj/effect/landmark/scorcher,
+/obj/landmark/scorcher,
 /turf/simulated/floor{
 	map_airless = 1
 	},
 /area/map_template/deepmaint)
 "Y" = (
-/obj/effect/landmark/scorcher,
+/obj/landmark/scorcher,
 /obj/item/stack/material/titanium,
 /turf/simulated/floor{
 	map_airless = 1

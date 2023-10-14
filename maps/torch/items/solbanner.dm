@@ -45,7 +45,7 @@
 	if(user.unEquip(src))
 		forceMove(T)
 		if(GLOB.using_map.use_overmap)
-			var/obj/effect/overmap/visitable/sector/exoplanet/P = map_sectors["[z]"]
+			var/obj/overmap/visitable/sector/exoplanet/P = map_sectors["[z]"]
 			if(istype(P))
 				GLOB.stat_flags_planted += 1
 		qdel(src)

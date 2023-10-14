@@ -1,4 +1,4 @@
-/obj/effect/decal/cleanable/filth
+/obj/decal/cleanable/filth
 	name = "filth"
 	desc = "Disgusting. Someone from last shift didn't do their job properly."
 	icon = 'icons/effects/blood.dmi'
@@ -8,6 +8,6 @@
 	persistent = TRUE
 	anchored = TRUE
 
-/obj/effect/decal/cleanable/filth/Initialize()
+/obj/decal/cleanable/filth/Initialize()
 	. = ..()
 	alpha = rand(180,220)

@@ -1,7 +1,7 @@
-/proc/gibs(atom/location, datum/dna/MobDNA, gibber_type = /obj/effect/gibspawner/generic, fleshcolor, bloodcolor)
+/proc/gibs(atom/location, datum/dna/MobDNA, gibber_type = /obj/gibspawner/generic, fleshcolor, bloodcolor)
 	new gibber_type(location,MobDNA,fleshcolor,bloodcolor)
 
-/obj/effect/gibspawner
+/obj/gibspawner
 	var/sparks = 0 //whether sparks spread on Gib()
 	var/list/gibtypes = list()
 	var/list/gibamounts = list()
@@ -11,7 +11,7 @@
 	var/datum/dna/MobDNA
 
 
-/obj/effect/gibspawner/New(location, datum/dna/_MobDNA, _fleshcolor, _bloodcolor)
+/obj/gibspawner/New(location, datum/dna/_MobDNA, _fleshcolor, _bloodcolor)
 	..()
 	if (_fleshcolor)
 		fleshcolor = _fleshcolor
@@ -21,23 +21,23 @@
 		MobDNA = _MobDNA
 
 
-/obj/effect/gibspawner/Initialize()
+/obj/gibspawner/Initialize()
 	..()
 	Gib(loc)
 	return INITIALIZE_HINT_QDEL
 
 
-/obj/effect/gibspawner/proc/Gib(atom/location)
+/obj/gibspawner/proc/Gib(atom/location)
 	if (length(gibtypes) != length(gibamounts) || length(gibamounts) != length(gibdirections))
 		log_error("Gib list length mismatch!")
 		return
 	if (sparks)
-		var/datum/effect/effect/system/spark_spread/s = new
+		var/datum/effect/spark_spread/s = new
 		s.set_up(2, 1, get_turf(location))
 		s.start()
 	var/spread = isturf(location)
-	var/humanGibs = istype(src, /obj/effect/gibspawner/human)
-	var/obj/effect/decal/cleanable/blood/gibs/gib
+	var/humanGibs = istype(src, /obj/gibspawner/human)
+	var/obj/decal/cleanable/blood/gibs/gib
 	for (var/i = length(gibtypes) to 1 step -1)
 		if (!gibamounts[i])
 			continue
@@ -58,5 +58,5 @@
 				continue
 			var/list/directions = gibdirections[i]
 			if (length(directions))
-				addtimer(new Callback(gib, /obj/effect/decal/cleanable/blood/gibs/proc/streak, directions), 0)
+				addtimer(new Callback(gib, /obj/decal/cleanable/blood/gibs/proc/streak, directions), 0)
 	qdel(src)

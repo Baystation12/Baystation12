@@ -250,7 +250,7 @@
 		activate_pin(2)
 		return
 
-	if(istype(OM,/obj/effect/vine) && check_target(OM) && get_pin_data(IC_INPUT, 2) == 2)
+	if(istype(OM,/obj/vine) && check_target(OM) && get_pin_data(IC_INPUT, 2) == 2)
 		qdel(OM)
 		push_data()
 		activate_pin(2)
@@ -582,7 +582,7 @@
 		step_dir = assembly.dir
 	depart = get_step(depart, step_dir) || depart
 
-	new /obj/effect/portal(depart, arrive, 30 SECONDS, 33)
+	new /obj/portal(depart, arrive, 30 SECONDS, 33)
 	playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
 
 

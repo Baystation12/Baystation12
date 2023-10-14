@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
-/obj/effect/step_trigger/teleporter/random{
+/obj/step_trigger/teleporter/random{
 	affect_ghosts = 0;
 	name = "escapeshuttle_leave";
 	teleport_x = 25;
@@ -15,7 +15,7 @@
 	},
 /area/space)
 "ab" = (
-/obj/effect/step_trigger/teleporter/random{
+/obj/step_trigger/teleporter/random{
 	affect_ghosts = 0;
 	name = "escapeshuttle_leave";
 	teleport_x = 25;
@@ -25,7 +25,7 @@
 	teleport_z = 9;
 	teleport_z_offset = 0
 	},
-/obj/effect/step_trigger/teleporter/random{
+/obj/step_trigger/teleporter/random{
 	affect_ghosts = 0;
 	name = "escapeshuttle_leave";
 	teleport_x = 25;
@@ -45,7 +45,7 @@
 	},
 /area/space)
 "af" = (
-/obj/effect/step_trigger/thrower{
+/obj/step_trigger/thrower{
 	affect_ghosts = 0;
 	direction = 8;
 	icon_state = "wb";
@@ -55,7 +55,7 @@
 /turf/space/transit/north,
 /area/space)
 "ag" = (
-/obj/effect/step_trigger/thrower{
+/obj/step_trigger/thrower{
 	affect_ghosts = 0;
 	direction = 2;
 	icon_state = "sb";
@@ -65,7 +65,7 @@
 /turf/space/transit/north,
 /area/space)
 "ah" = (
-/obj/effect/step_trigger/thrower{
+/obj/step_trigger/thrower{
 	affect_ghosts = 0;
 	direction = 4;
 	icon_state = "eb";
@@ -75,7 +75,7 @@
 /turf/space/transit/north,
 /area/space)
 "ai" = (
-/obj/effect/step_trigger/thrower{
+/obj/step_trigger/thrower{
 	affect_ghosts = 0;
 	direction = 2;
 	icon_state = "sb";
@@ -85,7 +85,7 @@
 /turf/space/transit/east,
 /area/space)
 "aj" = (
-/obj/effect/step_trigger/thrower{
+/obj/step_trigger/thrower{
 	affect_ghosts = 0;
 	direction = 1;
 	icon_state = "nb";
@@ -95,15 +95,15 @@
 /turf/space/transit/north,
 /area/space)
 "ak" = (
-/obj/effect/shuttle_landmark/escape_pod/transit/pod1,
+/obj/shuttle_landmark/escape_pod/transit/pod1,
 /turf/space/transit/north,
 /area/space)
 "al" = (
-/obj/effect/shuttle_landmark/escape_pod/transit/pod2,
+/obj/shuttle_landmark/escape_pod/transit/pod2,
 /turf/space/transit/north,
 /area/space)
 "am" = (
-/obj/effect/step_trigger/thrower{
+/obj/step_trigger/thrower{
 	affect_ghosts = 0;
 	direction = 2;
 	icon_state = "sb";
@@ -112,7 +112,7 @@
 	stopper = 1;
 	tiles = 12
 	},
-/obj/effect/step_trigger/thrower{
+/obj/step_trigger/thrower{
 	affect_ghosts = 0;
 	direction = 2;
 	icon_state = "sb";
@@ -124,14 +124,14 @@
 /turf/space/transit/north,
 /area/space)
 "an" = (
-/obj/effect/step_trigger/thrower{
+/obj/step_trigger/thrower{
 	affect_ghosts = 0;
 	direction = 4;
 	icon_state = "eb";
 	name = "thrower_right";
 	tiles = 12
 	},
-/obj/effect/step_trigger/thrower{
+/obj/step_trigger/thrower{
 	affect_ghosts = 0;
 	direction = 4;
 	icon_state = "eb";
@@ -141,30 +141,30 @@
 /turf/space/transit/north,
 /area/space)
 "ao" = (
-/obj/effect/shuttle_landmark/escape_pod/transit/pod6,
+/obj/shuttle_landmark/escape_pod/transit/pod6,
 /turf/space/transit/north,
 /area/space)
 "ap" = (
-/obj/effect/shuttle_landmark/escape_pod/transit/pod7,
+/obj/shuttle_landmark/escape_pod/transit/pod7,
 /turf/space/transit/north,
 /area/space)
 "aq" = (
-/obj/effect/shuttle_landmark/escape_pod/transit/pod8,
+/obj/shuttle_landmark/escape_pod/transit/pod8,
 /turf/space/transit/north,
 /area/space)
 "ar" = (
-/obj/effect/shuttle_landmark/sierra/transit/exploration_shuttle,
+/obj/shuttle_landmark/sierra/transit/exploration_shuttle,
 /turf/space/transit/north,
 /area/space)
 "as" = (
-/obj/effect/shuttle_landmark/ert/internim,
+/obj/shuttle_landmark/ert/internim,
 /turf/space/transit/north,
 /area/space)
 "at" = (
 /turf/space/transit/east,
 /area/space)
 "au" = (
-/obj/effect/step_trigger/thrower{
+/obj/step_trigger/thrower{
 	affect_ghosts = 0;
 	direction = 2;
 	icon_state = "sb";
@@ -176,11 +176,11 @@
 /turf/space/transit/north,
 /area/space)
 "av" = (
-/obj/effect/shuttle_landmark/sierra/transit/blueriver_shuttle,
+/obj/shuttle_landmark/sierra/transit/blueriver_shuttle,
 /turf/space/transit/north,
 /area/space)
 "ax" = (
-/obj/effect/step_trigger/thrower{
+/obj/step_trigger/thrower{
 	affect_ghosts = 0;
 	direction = 4;
 	icon_state = "eb";
@@ -190,7 +190,7 @@
 /turf/space,
 /area/space)
 "ay" = (
-/obj/effect/step_trigger/thrower{
+/obj/step_trigger/thrower{
 	affect_ghosts = 0;
 	direction = 8;
 	icon_state = "wb";
@@ -200,7 +200,7 @@
 /turf/space,
 /area/space)
 "az" = (
-/obj/effect/step_trigger/thrower{
+/obj/step_trigger/thrower{
 	affect_ghosts = 0;
 	direction = 8;
 	icon_state = "wb";
@@ -210,7 +210,7 @@
 /turf/space/transit/east,
 /area/space)
 "aA" = (
-/obj/effect/step_trigger/thrower{
+/obj/step_trigger/thrower{
 	direction = 1;
 	icon_state = "nb";
 	name = "thrower_up";
@@ -220,7 +220,7 @@
 /turf/space/transit/north,
 /area/space)
 "aB" = (
-/obj/effect/step_trigger/teleporter/random{
+/obj/step_trigger/teleporter/random{
 	affect_ghosts = 0;
 	name = "escapeshuttle_leave";
 	teleport_x = 25;
@@ -233,22 +233,22 @@
 /turf/space/transit/north,
 /area/space)
 "aC" = (
-/obj/effect/shuttle_landmark/ninja/internim,
+/obj/shuttle_landmark/ninja/internim,
 /turf/space/transit/north,
 /area/space)
 "aF" = (
 /turf/space/transit/north,
 /area/space)
 "aH" = (
-/obj/effect/shuttle_landmark/escape_pod/transit/pod3,
+/obj/shuttle_landmark/escape_pod/transit/pod3,
 /turf/space/transit/north,
 /area/space)
 "aI" = (
-/obj/effect/shuttle_landmark/escape_pod/transit/pod4,
+/obj/shuttle_landmark/escape_pod/transit/pod4,
 /turf/space/transit/north,
 /area/space)
 "aJ" = (
-/obj/effect/step_trigger/thrower{
+/obj/step_trigger/thrower{
 	direction = 1;
 	icon_state = "nb";
 	name = "thrower_up";
@@ -258,7 +258,7 @@
 /turf/space/transit/east,
 /area/space)
 "aK" = (
-/obj/effect/step_trigger/thrower{
+/obj/step_trigger/thrower{
 	affect_ghosts = 0;
 	direction = 2;
 	icon_state = "sb";
@@ -270,38 +270,38 @@
 /turf/space/transit/east,
 /area/space)
 "aN" = (
-/obj/effect/shuttle_landmark/skipjack/internim,
+/obj/shuttle_landmark/skipjack/internim,
 /turf/space/transit/north,
 /area/space)
 "aO" = (
-/obj/effect/shuttle_landmark/sierra/transit/guppy,
+/obj/shuttle_landmark/sierra/transit/guppy,
 /turf/space/transit/north,
 /area/space)
 "aP" = (
-/obj/effect/shuttle_landmark/escape_pod/transit/pod5,
+/obj/shuttle_landmark/escape_pod/transit/pod5,
 /turf/space/transit/east,
 /area/space)
 "aR" = (
-/obj/effect/shuttle_landmark/escape_pod/out/pod1,
+/obj/shuttle_landmark/escape_pod/out/pod1,
 /turf/space,
 /area/space)
 "aT" = (
-/obj/effect/shuttle_landmark/escape_pod/out/pod2,
+/obj/shuttle_landmark/escape_pod/out/pod2,
 /turf/space,
 /area/space)
 "aX" = (
-/obj/effect/shuttle_landmark/escape_pod/out/pod5,
+/obj/shuttle_landmark/escape_pod/out/pod5,
 /turf/space,
 /area/space)
 "ba" = (
 /turf/space,
 /area/space)
 "bb" = (
-/obj/effect/shuttle_landmark/escape_pod/out/pod3,
+/obj/shuttle_landmark/escape_pod/out/pod3,
 /turf/space,
 /area/space)
 "bc" = (
-/obj/effect/shuttle_landmark/escape_pod/out/pod4,
+/obj/shuttle_landmark/escape_pod/out/pod4,
 /turf/space,
 /area/space)
 

@@ -15,7 +15,7 @@
 	damage = 5
 	agony = 20
 	life_span = 15 //if the shell hasn't hit anything after travelling this far it just explodes.
-	muzzle_type = /obj/effect/projectile/bullet/muzzle
+	muzzle_type = /obj/projectile/bullet/muzzle
 	var/flash_range = 1
 	var/brightness = 7
 	var/light_colour = "#ffffff"
@@ -35,12 +35,12 @@
 	playsound(src, 'sound/effects/snap.ogg', 50, 1)
 	src.visible_message(SPAN_WARNING("\The [src] explodes in a bright flash!"))
 
-	var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
+	var/datum/effect/spark_spread/sparks = new /datum/effect/spark_spread()
 	sparks.set_up(2, 1, T)
 	sparks.start()
 
-	new /obj/effect/decal/cleanable/ash(src.loc) //always use src.loc so that ash doesn't end up inside windows
-	new /obj/effect/effect/smoke/illumination(T, 5, 4, 2, light_colour)
+	new /obj/decal/cleanable/ash(src.loc) //always use src.loc so that ash doesn't end up inside windows
+	new /obj/effect/smoke/illumination(T, 5, 4, 2, light_colour)
 
 //blinds people like the flash round, but in a larger area and can also be used for temporary illumination
 /obj/item/projectile/energy/flash/flare
@@ -64,7 +64,7 @@
 	..() //initial flash
 
 	//residual illumination
-	new /obj/effect/effect/smoke/illumination/flare(src.loc, rand(30 SECONDS,60 SECONDS), range=8, power=1, color=light_colour) //same lighting power as flare
+	new /obj/effect/smoke/illumination/flare(src.loc, rand(30 SECONDS,60 SECONDS), range=8, power=1, color=light_colour) //same lighting power as flare
 
 	var/turf/TO = get_turf(src)
 	var/area/AO = TO.loc

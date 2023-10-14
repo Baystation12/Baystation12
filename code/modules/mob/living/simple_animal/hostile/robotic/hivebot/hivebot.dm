@@ -56,8 +56,8 @@
 
 /mob/living/simple_animal/hostile/hivebot/death()
 	..(null, "blows apart!")
-	new /obj/effect/decal/cleanable/blood/gibs/robot(src.loc)
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	new /obj/decal/cleanable/blood/gibs/robot(src.loc)
+	var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 	s.set_up(3, 1, src)
 	s.start()
 	qdel(src)
@@ -86,7 +86,7 @@ Teleporter beacon, and its subtypes
 
 /mob/living/simple_animal/hostile/hivebot/tele/Initialize(mapload)
 	. = ..()
-	var/datum/effect/effect/system/smoke_spread/smoke = new
+	var/datum/effect/smoke_spread/smoke = new
 	smoke.set_up(5, 0, loc)
 	smoke.start()
 	visible_message(SPAN_DANGER("\The [src] warps in!"))

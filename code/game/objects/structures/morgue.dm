@@ -386,7 +386,7 @@
 		for(var/obj/O in contents) //obj instead of obj/item so that bodybags and ashes get destroyed. We dont want tons and tons of ash piling up
 			qdel(O)
 
-		new /obj/effect/decal/cleanable/ash(src)
+		new /obj/decal/cleanable/ash(src)
 		sleep(30)
 		cremating = initial(cremating)
 		locked = initial(locked)

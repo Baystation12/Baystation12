@@ -44,14 +44,14 @@
 /area/map_template/wizard_station)
 "ai" = (
 /obj/structure/table/woodentable,
-/obj/effect/landmark{
+/obj/landmark{
 	name = "Teleport-Scroll"
 	},
 /obj/item/toy/figure/ninja,
 /turf/simulated/floor/carpet,
 /area/map_template/wizard_station)
 "aj" = (
-/obj/effect/landmark/start{
+/obj/landmark/start{
 	name = "wizard"
 	},
 /turf/simulated/floor/carpet,
@@ -92,7 +92,7 @@
 /obj/structure/bookcase{
 	name = "Forbidden Knowledge"
 	},
-/obj/effect/decal/cleanable/cobweb,
+/obj/decal/cleanable/cobweb,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -168,7 +168,7 @@
 	},
 /area/map_template/wizard_station)
 "aB" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
 /obj/machinery/acting/changer/mirror{
@@ -280,7 +280,7 @@
 	},
 /area/map_template/wizard_station)
 "aN" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
 /turf/unsimulated/floor{
@@ -345,7 +345,7 @@
 	},
 /area/map_template/wizard_station)
 "aX" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
 /obj/item/device/radio/intercom/syndicate{
@@ -573,7 +573,7 @@
 	},
 /area/map_template/wizard_station)
 "by" = (
-/obj/effect/gateway/active/cult,
+/obj/gateway/active/cult,
 /turf/unsimulated/floor{
 	icon_state = "cult";
 	name = "plating"
@@ -624,7 +624,7 @@
 	},
 /area/map_template/wizard_station)
 "bF" = (
-/obj/effect/overlay/palmtree_r,
+/obj/overlay/palmtree_r,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -638,7 +638,7 @@
 	},
 /area/map_template/wizard_station)
 "bH" = (
-/obj/effect/overlay/coconut,
+/obj/overlay/coconut,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},

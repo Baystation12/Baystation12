@@ -19,22 +19,22 @@
 	)
 	spawn_weight = 0.67
 
-/obj/effect/overmap/visitable/sector/skrellscoutspace
+/obj/overmap/visitable/sector/skrellscoutspace
 	name = "Empty Sector"
 	desc = "Slight traces of a cloaking device are present. Unable to determine exact location."
 	icon_state = "event"
 	hide_from_reports = TRUE
 	sensor_visibility = 10
 
-/obj/effect/submap_landmark/joinable_submap/skrellscoutship
+/obj/submap_landmark/joinable_submap/skrellscoutship
 	name = "Xilvuxix"
 	archetype = /singleton/submap_archetype/skrellscoutship
 
-/obj/effect/submap_landmark/spawnpoint/skrellscoutship
+/obj/submap_landmark/spawnpoint/skrellscoutship
 	name = "Qrri-Zuumqix"
 	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 
-/obj/effect/submap_landmark/spawnpoint/skrellscoutship/leader
+/obj/submap_landmark/spawnpoint/skrellscoutship/leader
 	name = "Qrri-Vuxix"
 
 /singleton/webhook/submap_loaded/skrell

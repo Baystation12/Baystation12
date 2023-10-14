@@ -31,7 +31,7 @@
 	id = "auxsolarstarboard";
 	name = "Starboard Auxiliary Solar Array"
 	},
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /turf/simulated/floor,
 /area/space)
 "ag" = (
@@ -136,7 +136,7 @@
 	id = "auxsolarstarboard";
 	name = "Starboard Auxiliary Solar Array"
 	},
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /turf/simulated/floor,
 /area/space)
 "ao" = (
@@ -152,7 +152,7 @@
 	name = "Starboard Auxiliary Solar Array"
 	},
 /obj/structure/cable/yellow,
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /turf/simulated/floor,
 /area/space)
 "ar" = (
@@ -196,7 +196,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume,
-/obj/effect/floor_decal/industrial/hatch/blue,
+/obj/floor_decal/industrial/hatch/blue,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	pixel_x = 25
 	},
@@ -243,7 +243,7 @@
 /area/magshield/engine)
 "aF" = (
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
 	},
@@ -254,7 +254,7 @@
 /turf/simulated/floor,
 /area/magshield/engine)
 "aH" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/wingrille_spawn/reinforced_phoron/full,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
@@ -513,11 +513,11 @@
 /area/magshield/smes_storage)
 "br" = (
 /obj/machinery/portable_atmospherics/canister,
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor,
 /area/magshield/engine)
 "bs" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 6;
 	icon_state = "warning"
 	},
@@ -531,7 +531,7 @@
 /turf/simulated/floor,
 /area/magshield/engine)
 "bu" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/wingrille_spawn/reinforced_phoron/full,
 /obj/machinery/door/blast/regular/open{
 	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
@@ -540,7 +540,7 @@
 /turf/simulated/floor,
 /area/magshield/engine)
 "bv" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/wingrille_spawn/reinforced_phoron/full,
 /obj/machinery/door/blast/regular/open{
 	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
@@ -548,7 +548,7 @@
 /turf/simulated/floor,
 /area/magshield/engine)
 "bw" = (
-/obj/effect/shuttle_landmark/nav_magshield/nav2,
+/obj/shuttle_landmark/nav_magshield/nav2,
 /turf/space,
 /area/space)
 "bx" = (
@@ -763,7 +763,7 @@
 	name = "Engine Monitoring Room Blast Doors";
 	opacity = 0
 	},
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/magshield/engine)
 "cd" = (
@@ -829,7 +829,7 @@
 	name = "Engine Monitoring Room Blast Doors";
 	opacity = 0
 	},
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /obj/structure/cable/yellow{
 	d1 = 4;
 	d2 = 8;
@@ -1312,7 +1312,7 @@
 /turf/simulated/floor,
 /area/magshield/north)
 "dk" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
@@ -1347,7 +1347,7 @@
 /turf/simulated/floor,
 /area/magshield/north)
 "ds" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /turf/simulated/floor,
@@ -1440,7 +1440,7 @@
 /turf/simulated/floor,
 /area/magshield/north)
 "dL" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /obj/structure/largecrate,
@@ -1480,36 +1480,36 @@
 /turf/simulated/floor,
 /area/magshield/north)
 "dR" = (
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor,
 /area/magshield/north)
 "dS" = (
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /obj/random/loot,
 /turf/simulated/floor,
 /area/magshield/north)
 "dT" = (
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /obj/structure/largecrate,
 /turf/simulated/floor,
 /area/magshield/north)
 "dU" = (
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /obj/random/junk,
 /turf/simulated/floor,
 /area/magshield/north)
 "dV" = (
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /obj/item/flame/lighter/random,
 /turf/simulated/floor,
 /area/magshield/north)
 "dW" = (
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /obj/random/tank,
 /turf/simulated/floor,
 /area/magshield/north)
 "dX" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 6;
 	icon_state = "warning"
 	},
@@ -2010,7 +2010,7 @@
 	dir = 1;
 	id_tag = "centcom_shuttle_dock_pump"
 	},
-/obj/effect/floor_decal/industrial/hatch/blue,
+/obj/floor_decal/industrial/hatch/blue,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	pixel_x = 25
 	},
@@ -2103,7 +2103,7 @@
 /turf/simulated/floor,
 /area/magshield/east)
 "ft" = (
-/obj/effect/shuttle_landmark/nav_magshield/nav5,
+/obj/shuttle_landmark/nav_magshield/nav5,
 /turf/space,
 /area/space)
 "fu" = (
@@ -2186,7 +2186,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "fH" = (
-/obj/effect/overmap/visitable/sector/magshield,
+/obj/overmap/visitable/sector/magshield,
 /turf/simulated/floor,
 /area/magshield/north)
 "fI" = (
@@ -2333,7 +2333,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "gc" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
@@ -2361,14 +2361,14 @@
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "gh" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 1
 	},
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor,
 /area/magshield/east)
 "gi" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 5;
 	icon_state = "warning"
 	},
@@ -2423,7 +2423,7 @@
 /turf/simulated/floor,
 /area/space)
 "gr" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /turf/simulated/floor,
@@ -2463,7 +2463,7 @@
 /turf/simulated/floor,
 /area/magshield/east)
 "gy" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /obj/machinery/portable_atmospherics/canister/nitrogen,
@@ -2478,12 +2478,12 @@
 /turf/simulated/floor/carpet/blue,
 /area/magshield/west)
 "gB" = (
-/obj/effect/floor_decal/industrial/warning,
+/obj/floor_decal/industrial/warning,
 /obj/machinery/portable_atmospherics/canister,
 /turf/simulated/floor,
 /area/magshield/east)
 "gC" = (
-/obj/effect/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/warning{
 	dir = 6;
 	icon_state = "warning"
 	},
@@ -2667,7 +2667,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "hc" = (
-/obj/effect/shuttle_landmark/nav_magshield/nav1,
+/obj/shuttle_landmark/nav_magshield/nav1,
 /turf/space,
 /area/space)
 "hd" = (
@@ -3292,7 +3292,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "iS" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "iT" = (
@@ -3351,7 +3351,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jf" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
@@ -4140,7 +4140,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "lt" = (
-/obj/effect/shuttle_landmark/nav_magshield/nav4,
+/obj/shuttle_landmark/nav_magshield/nav4,
 /turf/space,
 /area/space)
 "lu" = (
@@ -4171,7 +4171,7 @@
 	id = "auxsolarsport";
 	name = "Port Auxiliary Solar Array"
 	},
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /turf/simulated/floor,
 /area/space)
 "lx" = (
@@ -4198,7 +4198,7 @@
 	id = "auxsolarsport";
 	name = "Port Auxiliary Solar Array"
 	},
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /turf/simulated/floor,
 /area/space)
 "lz" = (
@@ -4220,11 +4220,11 @@
 /turf/simulated/floor,
 /area/space)
 "lA" = (
-/obj/effect/shuttle_landmark/nav_magshield/nav3,
+/obj/shuttle_landmark/nav_magshield/nav3,
 /turf/space,
 /area/space)
 "uL" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "Eo" = (

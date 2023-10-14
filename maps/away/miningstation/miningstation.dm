@@ -1,7 +1,7 @@
 #include "miningstation_areas.dm"
 
 
-/obj/effect/overmap/visitable/sector/miningstation
+/obj/overmap/visitable/sector/miningstation
 	name = "Orbital Mining Station"
 	desc = "An orbital Mining Station bearing authentication codes from Grayson Mining Industries, sensors show inconsistant lifesigns aboard the station. It is emitting a weak signal on a public frequency, with no other discernible radio traffic."
 	icon_state = "object"
@@ -19,13 +19,13 @@
 	spawn_cost = 1
 	area_usage_test_exempted_root_areas = list(/area/miningstation)
 
-/obj/effect/shuttle_landmark/nav_miningstation/hangar
+/obj/shuttle_landmark/nav_miningstation/hangar
 	name = "Hangar"
 	landmark_tag = "nav_miningstation_hangar"
 	base_area = /area/miningstation/hangar
 	base_turf = /turf/simulated/floor/plating
 
-/obj/effect/shuttle_landmark/nav_miningstation/exterior
+/obj/shuttle_landmark/nav_miningstation/exterior
 	name = "Near the orbital station"
 	landmark_tag = "nav_miningstation_exterior"
 
@@ -37,7 +37,7 @@
 /singleton/hierarchy/outfit/corpse/miningstation
 	hierarchy_type = /singleton/hierarchy/outfit/corpse/miningstation
 
-/obj/effect/landmark/corpse/miningstation/deadminer
+/obj/landmark/corpse/miningstation/deadminer
 	name = "Dead miner"
 	corpse_outfits = list(/singleton/hierarchy/outfit/miningstation)
 	hair_styles_per_species = list(SPECIES_HUMAN = list("cia"))
@@ -54,14 +54,14 @@
 	mask = /obj/item/clothing/mask/gas
 	glasses = /obj/item/clothing/glasses/welding
 
-/obj/effect/landmark/corpse/miningstation/deadminerf
+/obj/landmark/corpse/miningstation/deadminerf
 	name = "Dead miner"
 	corpse_outfits = list(/singleton/hierarchy/outfit/miningstation)
 	hair_styles_per_species = list(SPECIES_HUMAN = list("Flaired Hair"))
 	hair_colors_per_species = list(SPECIES_HUMAN = list("#523d28"))
 	genders_per_species = list(SPECIES_HUMAN = list(FEMALE))
 
-/obj/effect/landmark/corpse/miningstation/deadminersuit
+/obj/landmark/corpse/miningstation/deadminersuit
 	name = "Dead miner suit"
 	corpse_outfits = list(/singleton/hierarchy/outfit/corpse/miningstation/deadminersuit)
 	hair_styles_per_species = list(SPECIES_HUMAN = list("cia"))
@@ -78,14 +78,14 @@
 	mask = /obj/item/clothing/mask/gas
 	glasses = /obj/item/clothing/glasses/welding
 
-/obj/effect/landmark/corpse/miningstation/deadmineroveralls
+/obj/landmark/corpse/miningstation/deadmineroveralls
 	name = "Dead Miner"
 	corpse_outfits = list(/singleton/hierarchy/outfit/corpse/miningstation/deadmineroveralls)
 	hair_styles_per_species = list(SPECIES_HUMAN = list("cia"))
 	hair_colors_per_species = list(SPECIES_HUMAN = list("#523d28"))
 	genders_per_species = list(SPECIES_HUMAN = list(MALE))
 
-/obj/effect/landmark/corpse/miningstation/deadmineroverallsf
+/obj/landmark/corpse/miningstation/deadmineroverallsf
 	name = "Dead miner"
 	corpse_outfits = list(/singleton/hierarchy/outfit/corpse/miningstation/deadmineroveralls)
 	hair_styles_per_species = list(SPECIES_HUMAN = list("Flaired Hair"))

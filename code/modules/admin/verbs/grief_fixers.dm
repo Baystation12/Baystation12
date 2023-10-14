@@ -40,7 +40,7 @@
 		T.air = null
 		T.CutOverlays(unsorted_overlays)
 		T.zone = null
-		for(var/obj/effect/gas_overlay/effect in T.vis_contents)
+		for(var/obj/gas_overlay/effect in T.vis_contents)
 			T.vis_contents -= effect
 
 	to_chat(usr, "\[4/5\] - All turfs reset to roundstart values.")

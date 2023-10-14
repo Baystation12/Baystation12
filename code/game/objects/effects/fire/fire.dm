@@ -17,7 +17,7 @@
 #define TURF_FIRE_STATE_LARGE 3
 #define TURF_FIRE_STATE_MAX 4
 
-/obj/effect/turf_fire
+/obj/turf_fire
 	icon = 'icons/effects/turf_fire.dmi'
 	icon_state = "red_small"
 	layer = BELOW_DOOR_LAYER
@@ -39,28 +39,28 @@
 	waterproof = FALSE
 
 ///All the subtypes are for adminbussery and or mapping
-/obj/effect/turf_fire/magical
+/obj/turf_fire/magical
 	interact_with_atmos = FALSE
 	passive_loss = FALSE
 	color = COLOR_LIGHT_CYAN
 
-/obj/effect/turf_fire/small
+/obj/turf_fire/small
 	fire_power = 10
 
-/obj/effect/turf_fire/small/magical
+/obj/turf_fire/small/magical
 	interact_with_atmos = FALSE
 	passive_loss = FALSE
 	color = COLOR_SABER_GREEN
 
-/obj/effect/turf_fire/inferno
+/obj/turf_fire/inferno
 	fire_power = 30
 
-/obj/effect/turf_fire/inferno/magical
+/obj/turf_fire/inferno/magical
 	interact_with_atmos = FALSE
 	passive_loss = FALSE
 	color = COLOR_VIOLET
 
-/obj/effect/turf_fire/Initialize(mapload, power, fire_color)
+/obj/turf_fire/Initialize(mapload, power, fire_color)
 	. = ..()
 	var/turf/open_turf = loc
 	if(open_turf.turf_fire)
@@ -77,14 +77,14 @@
 		fire_power = min(TURF_FIRE_MAX_POWER, power)
 	UpdateFireState()
 
-/obj/effect/turf_fire/Destroy()
+/obj/turf_fire/Destroy()
 	var/turf/T = loc
 	T.turf_fire = null
 	SSturf_fire.fires -= src
 	return ..()
 
 //Approximates colour. It will not change value or saturation, just hue.
-/obj/effect/turf_fire/set_color(_color)
+/obj/turf_fire/set_color(_color)
 	. = ..()
 	light_color = _color
 	var/base = rgb2num(COLOR_ORANGE, COLORSPACE_HSV) //Base sprite is red fire, but maybe other fires want to be different
@@ -100,7 +100,7 @@
 													  angle/360,0,0,0), space = FILTER_COLOR_HSV)
 	color = null //The actual colour should remain white so transform makes sense
 
-/obj/effect/turf_fire/proc/process_waste()
+/obj/turf_fire/proc/process_waste()
 	var/turf/T = loc
 	var/datum/gas_mixture/env = T.return_air()
 	var/oxy = env.get_gas(GAS_OXYGEN) //Todo, make this play with any oxidizer
@@ -119,7 +119,7 @@
 	SSair.mark_for_update(T)
 	return TRUE
 
-/obj/effect/turf_fire/Process()
+/obj/turf_fire/Process()
 	var/turf/simulated/T = get_turf(src)
 	if(!T || T.density)
 		qdel(src)
@@ -159,7 +159,7 @@
 			F.burn_tile(effective_temperature)
 		UpdateFireState()
 
-/obj/effect/turf_fire/Crossed(O)
+/obj/turf_fire/Crossed(O)
 	. = ..()
 	var/turf/T = loc
 	if(T.hotspot) //If we have an active hotspot, let it do the damage instead
@@ -169,16 +169,16 @@
 		crossing.fire_act(exposed_temperature = TURF_FIRE_TEMP_BASE + (TURF_FIRE_TEMP_INCREMENT_PER_POWER*fire_power), exposed_volume = TURF_FIRE_VOLUME)
 	return
 
-/obj/effect/turf_fire/water_act(depth)
+/obj/turf_fire/water_act(depth)
 	if (prob(depth*depth))
 		qdel(src)
 		return
 
-/obj/effect/turf_fire/proc/AddPower(power)
+/obj/turf_fire/proc/AddPower(power)
 	fire_power = min(TURF_FIRE_MAX_POWER, fire_power + power)
 	UpdateFireState()
 
-/obj/effect/turf_fire/proc/UpdateFireState()
+/obj/turf_fire/proc/UpdateFireState()
 	var/new_state
 	switch(fire_power)
 		if(0 to 10)

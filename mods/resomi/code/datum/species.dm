@@ -21,7 +21,7 @@
 	strength = STR_HIGH
 	breath_pressure = 12
 
-	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
+	move_trail = /obj/decal/cleanable/blood/tracks/paw
 
 	icobase = 			'packs/infinity/icons/mob/human_races/species/resomi/body.dmi'
 	deform = 			'packs/infinity/icons/mob/human_races/species/resomi/body.dmi'

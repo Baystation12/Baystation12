@@ -1,6 +1,6 @@
 #define WEBHOOK_SUBMAP_LOADED_ICCGN	"webhook_submap_ICCGN"
 
-/obj/effect/submap_landmark/joinable_submap/away_iccgn_farfleet
+/obj/submap_landmark/joinable_submap/away_iccgn_farfleet
 	name = "Pioneer Corps Recon Craft"
 	archetype = /singleton/submap_archetype/away_iccgn_farfleet
 
@@ -23,23 +23,23 @@
 	for(var/obj/machinery/photocopier/faxmachine/fax in SSmachines.machinery)
 		GLOB.admin_departments += "Lordania Pioneer Corps Relay"
 
-/obj/effect/submap_landmark/spawnpoint/away_iccgn_farfleet
+/obj/submap_landmark/spawnpoint/away_iccgn_farfleet
 	name = "ICCG Droptrooper"
 	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 
-/obj/effect/submap_landmark/spawnpoint/away_iccgn_farfleet/sergeant
+/obj/submap_landmark/spawnpoint/away_iccgn_farfleet/sergeant
 	name = "ICCG Droptrooper Sergeant"
 
-/obj/effect/submap_landmark/spawnpoint/away_iccgn_farfleet/captain
+/obj/submap_landmark/spawnpoint/away_iccgn_farfleet/captain
 	name = "Pioneer Corps Captain"
 
-/obj/effect/submap_landmark/spawnpoint/away_iccgn_farfleet/iccgn_pawn
+/obj/submap_landmark/spawnpoint/away_iccgn_farfleet/iccgn_pawn
 	name = "CSS Field Operative"
 
-/obj/effect/submap_landmark/spawnpoint/away_iccgn_farfleet/medic
+/obj/submap_landmark/spawnpoint/away_iccgn_farfleet/medic
 	name = "Pioneer Corpsman"
 
-/obj/effect/submap_landmark/spawnpoint/away_iccgn_farfleet/gunner
+/obj/submap_landmark/spawnpoint/away_iccgn_farfleet/gunner
 	name = "Senior Technician"
 
 /* ACCESS

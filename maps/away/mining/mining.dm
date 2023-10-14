@@ -2,7 +2,7 @@
 #include "mining_corporate.dm"
 
 //MINING-1 // CLUSTER
-/obj/effect/overmap/visitable/sector/cluster
+/obj/overmap/visitable/sector/cluster
 	name = "asteroid cluster"
 	desc = "Large group of asteroids. Mineral content detected."
 	icon_state = "sector"
@@ -17,12 +17,12 @@
 	)
 
 
-/obj/effect/overmap/visitable/sector/cluster/generate_skybox()
+/obj/overmap/visitable/sector/cluster/generate_skybox()
 	var/image/res = overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
 	res.blend_mode = BLEND_OVERLAY
 	return res
 
-/obj/effect/overmap/visitable/sector/cluster/get_skybox_representation()
+/obj/overmap/visitable/sector/cluster/get_skybox_representation()
 	var/image/res = overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
 	res.blend_mode = BLEND_OVERLAY
 	res.SetTransform(scale = 0.5)
@@ -45,38 +45,38 @@
 	area_usage_test_exempted_areas = list(/area/djstation)
 	area_coherency_test_exempt_areas =  list(/area/mine/explored, /area/mine/unexplored)
 
-/obj/effect/shuttle_landmark/cluster/nav1
+/obj/shuttle_landmark/cluster/nav1
 	name = "Asteroid Navpoint #1"
 	landmark_tag = "nav_cluster_1"
 
-/obj/effect/shuttle_landmark/cluster/nav2
+/obj/shuttle_landmark/cluster/nav2
 	name = "Asteroid Navpoint #2"
 	landmark_tag = "nav_cluster_2"
 
-/obj/effect/shuttle_landmark/cluster/nav3
+/obj/shuttle_landmark/cluster/nav3
 	name = "Asteroid Navpoint #3"
 	landmark_tag = "nav_cluster_3"
 
-/obj/effect/shuttle_landmark/cluster/nav4
+/obj/shuttle_landmark/cluster/nav4
 	name = "Asteroid Navpoint #4"
 	landmark_tag = "nav_cluster_4"
 
-/obj/effect/shuttle_landmark/cluster/nav5
+/obj/shuttle_landmark/cluster/nav5
 	name = "Asteroid Landing zone #1"
 	landmark_tag = "nav_cluster_5"
 	base_area = /area/mine/explored
 
-/obj/effect/shuttle_landmark/cluster/nav6
+/obj/shuttle_landmark/cluster/nav6
 	name = "Asteroid Navpoint #5"
 	landmark_tag = "nav_cluster_6"
 
-/obj/effect/shuttle_landmark/cluster/nav7
+/obj/shuttle_landmark/cluster/nav7
 	name = "Asteroid Landing zone #2"
 	landmark_tag = "nav_cluster_7"
 	base_area = /area/mine/explored
 
 //MINING-2 // SIGNAL
-/obj/effect/overmap/visitable/sector/away
+/obj/overmap/visitable/sector/away
 	name = "faint signal from an asteroid"
 	desc = "Faint signal detected, originating from the human-made structures on the site's surface."
 	icon_state = "sector"
@@ -91,10 +91,10 @@
 	)
 
 
-/obj/effect/overmap/visitable/sector/away/generate_skybox()
+/obj/overmap/visitable/sector/away/generate_skybox()
 	return overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
 
-/obj/effect/overmap/visitable/sector/away/get_skybox_representation()
+/obj/overmap/visitable/sector/away/get_skybox_representation()
 	var/image/res = overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
 	res.blend_mode = BLEND_OVERLAY
 	res.SetTransform(scale = 0.3)
@@ -115,39 +115,39 @@
 	)
 	area_coherency_test_exempt_areas =  list(/area/mine/explored, /area/mine/unexplored)
 
-/obj/effect/shuttle_landmark/away
+/obj/shuttle_landmark/away
 	base_area = /area/mine/explored
 
-/obj/effect/shuttle_landmark/away/nav1
+/obj/shuttle_landmark/away/nav1
 	name = "Away Landing zone #1"
 	landmark_tag = "nav_away_1"
 
-/obj/effect/shuttle_landmark/away/nav2
+/obj/shuttle_landmark/away/nav2
 	name = "Away Landing zone #2"
 	landmark_tag = "nav_away_2"
 
-/obj/effect/shuttle_landmark/away/nav3
+/obj/shuttle_landmark/away/nav3
 	name = "Away Landing zone #3"
 	landmark_tag = "nav_away_3"
 
-/obj/effect/shuttle_landmark/away/nav4
+/obj/shuttle_landmark/away/nav4
 	name = "Away Landing zone #4"
 	landmark_tag = "nav_away_4"
 
-/obj/effect/shuttle_landmark/away/nav5
+/obj/shuttle_landmark/away/nav5
 	name = "Away Landing zone #5"
 	landmark_tag = "nav_away_5"
 
-/obj/effect/shuttle_landmark/away/nav6
+/obj/shuttle_landmark/away/nav6
 	name = "Away Landing zone #6"
 	landmark_tag = "nav_away_6"
 
-/obj/effect/shuttle_landmark/away/nav7
+/obj/shuttle_landmark/away/nav7
 	name = "Away Landing zone #7"
 	landmark_tag = "nav_away_7"
 
 //MINING-3 // THE ORB
-/obj/effect/overmap/visitable/sector/orb
+/obj/overmap/visitable/sector/orb
 	name = "monolithic asteroid"
 	desc = "Substantial mineral resources detected."
 	icon_state = "sector"
@@ -162,7 +162,7 @@
 	)
 
 
-/obj/effect/overmap/visitable/sector/orb/get_skybox_representation()
+/obj/overmap/visitable/sector/orb/get_skybox_representation()
 	var/image/res = overlay_image('icons/skybox/skybox_rock_128.dmi', "bigrock", COLOR_ASTEROID_ROCK, RESET_COLOR)
 	res.blend_mode = BLEND_OVERLAY
 	res.pixel_x = rand(256,512)
@@ -186,31 +186,31 @@
 	)
 	area_coherency_test_exempt_areas =  list(/area/mine/explored, /area/mine/unexplored)
 
-/obj/effect/shuttle_landmark/orb/nav1
+/obj/shuttle_landmark/orb/nav1
 	name = "Anchor point A"
 	landmark_tag = "nav_orb_1"
 
-/obj/effect/shuttle_landmark/orb/nav2
+/obj/shuttle_landmark/orb/nav2
 	name = "Anchor point B"
 	landmark_tag = "nav_orb_2"
 
-/obj/effect/shuttle_landmark/orb/nav3
+/obj/shuttle_landmark/orb/nav3
 	name = "Anchor point C"
 	landmark_tag = "nav_orb_3"
 
-/obj/effect/shuttle_landmark/orb/nav4
+/obj/shuttle_landmark/orb/nav4
 	name = "Anchor point D"
 	landmark_tag = "nav_orb_4"
 
-/obj/effect/shuttle_landmark/orb/nav5
+/obj/shuttle_landmark/orb/nav5
 	name = "Anchor point E"
 	landmark_tag = "nav_orb_5"
 
-/obj/effect/shuttle_landmark/orb/nav6
+/obj/shuttle_landmark/orb/nav6
 	name = "Anchor point F"
 	landmark_tag = "nav_orb_6"
 
-/obj/effect/shuttle_landmark/orb/nav7
+/obj/shuttle_landmark/orb/nav7
 	name = "Landing zone A"
 	landmark_tag = "nav_orb_7"
 	base_area = /area/mine/explored

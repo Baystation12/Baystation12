@@ -31,8 +31,8 @@
 /obj/structure/bed/chair/comfy/captain{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue/mono,
-/obj/effect/submap_landmark/joinable_submap/liberia,
+/obj/floor_decal/corner/blue/mono,
+/obj/submap_landmark/joinable_submap/liberia,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/bridge)
 "ae" = (
@@ -48,7 +48,7 @@
 /obj/item/device/gps,
 /obj/structure/table/rack/dark,
 /obj/random/maintenance/clean,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/machinery/light{
 	dir = 8
 	},
@@ -61,7 +61,7 @@
 	pixel_x = 34
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/submap_landmark/spawnpoint/liberia,
+/obj/submap_landmark/spawnpoint/liberia,
 /turf/simulated/floor/carpet/red,
 /area/liberia/captain)
 "ag" = (
@@ -71,10 +71,10 @@
 	dir = 8;
 	pixel_x = 22
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 5
 	},
-/obj/effect/submap_landmark/spawnpoint/liberia/trainee,
+/obj/submap_landmark/spawnpoint/liberia/trainee,
 /turf/simulated/floor/carpet,
 /area/liberia/personellroom2)
 "ah" = (
@@ -88,17 +88,17 @@
 	dir = 8;
 	pixel_x = 25
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 6
 	},
-/obj/effect/submap_landmark/spawnpoint/liberia/trainee,
+/obj/submap_landmark/spawnpoint/liberia/trainee,
 /turf/simulated/floor/carpet,
 /area/liberia/personellroom2)
 "ak" = (
 /obj/machinery/power/terminal{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 9
 	},
 /obj/structure/cable{
@@ -111,11 +111,11 @@
 /obj/structure/closet/secure_closet{
 	name = "merchant's locker"
 	},
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "ao" = (
-/obj/effect/shuttle_landmark/nav_liberia/south,
+/obj/shuttle_landmark/nav_liberia/south,
 /turf/space,
 /area/space)
 "aq" = (
@@ -128,13 +128,13 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringreactor)
 "ar" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/disposalpipe/segment{
 	dir = 4;
 	icon_state = "pipe-c"
@@ -159,11 +159,11 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner_techfloor_grid,
-/obj/effect/floor_decal/techfloor/corner,
+/obj/floor_decal/corner_techfloor_grid,
+/obj/floor_decal/techfloor/corner,
 /obj/machinery/power/apc/liberia{
 	dir = 1;
 	name = "north bump";
@@ -178,15 +178,15 @@
 "at" = (
 /obj/structure/closet,
 /obj/random/clothing,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "au" = (
-/obj/effect/floor_decal/techfloor,
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/techfloor,
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -261,7 +261,7 @@
 	dir = 1
 	},
 /obj/structure/table/rack/dark,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "aD" = (
@@ -269,7 +269,7 @@
 	dir = 1;
 	pixel_y = -24
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 10
 	},
 /obj/structure/cable/blue{
@@ -280,7 +280,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/merchantstorage)
 "aE" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /obj/structure/table/standard,
@@ -293,10 +293,10 @@
 "aF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 10
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 8
 	},
 /obj/structure/cable/blue{
@@ -312,10 +312,10 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/merchantstorage)
 "aG" = (
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 10
 	},
-/obj/effect/floor_decal/techfloor/corner,
+/obj/floor_decal/techfloor/corner,
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
@@ -331,7 +331,7 @@
 	pixel_x = 24
 	},
 /obj/item/caution/cone,
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
 /obj/structure/cable/blue{
@@ -351,7 +351,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/liberia/merchantstorage)
 "aK" = (
@@ -361,7 +361,7 @@
 /turf/simulated/floor/airless,
 /area/liberia/engineeringengines)
 "aM" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 9
 	},
 /obj/structure/closet/emcloset{
@@ -371,7 +371,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringengines)
 "aN" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 5
 	},
 /obj/structure/table/standard,
@@ -391,7 +391,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/firedoor,
-/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/floor_decal/industrial/warning/fulltile,
 /obj/machinery/door/blast/shutters{
 	id_tag = "merchantwarehouse";
 	name = "Warehouse Shutters"
@@ -405,7 +405,7 @@
 /area/liberia/merchantstorage)
 "aQ" = (
 /obj/machinery/door/firedoor,
-/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/floor_decal/industrial/warning/fulltile,
 /obj/machinery/door/blast/shutters{
 	id_tag = "merchantwarehouse";
 	name = "Warehouse Shutters"
@@ -423,7 +423,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringreactor)
 "aU" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
 /obj/machinery/light/small{
@@ -436,10 +436,10 @@
 	name = "Maintenance";
 	req_access = newlist()
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -453,12 +453,12 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringreactor)
 "aW" = (
-/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/floor_decal/industrial/warning/fulltile,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/monotile,
 /area/liberia/hallway)
 "aX" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -467,7 +467,7 @@
 /obj/machinery/door/airlock/multi_tile/glass/maintenance{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/floor_decal/industrial/warning/fulltile,
 /obj/machinery/door/firedoor,
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -491,16 +491,16 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -515,11 +515,11 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringreactor)
 "bb" = (
-/obj/effect/paint/red,
+/obj/paint/red,
 /obj/structure/shuttle/engine/heater{
 	dir = 4
 	},
-/obj/effect/paint_stripe/red,
+/obj/paint_stripe/red,
 /turf/simulated/wall/r_titanium,
 /area/liberia/mule)
 "bc" = (
@@ -528,16 +528,16 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -555,12 +555,12 @@
 /area/liberia/engineeringreactor)
 "be" = (
 /obj/machinery/disposal,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 9
 	},
 /obj/structure/disposalpipe/trunk,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/effect/floor_decal/corner/green,
+/obj/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/corner/green,
 /turf/simulated/floor/tiled/monotile,
 /area/liberia/traidingroom)
 "bf" = (
@@ -570,11 +570,11 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/corner/green{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -588,11 +588,11 @@
 	pixel_x = 9;
 	pixel_y = 27
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/corner/green{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -600,7 +600,7 @@
 "bh" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 1;
 	d2 = 2;
@@ -610,10 +610,10 @@
 /area/liberia/traidingroom)
 "bj" = (
 /obj/machinery/vending/fashionvend,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -629,10 +629,10 @@
 	worth = 13000
 	},
 /obj/item/device/flashlight,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -640,10 +640,10 @@
 "bl" = (
 /obj/structure/table/rack,
 /obj/item/storage/bag/cash,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -653,21 +653,21 @@
 	dir = 4;
 	id_tag = "merch-ship_windows"
 	},
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/liberia/bridge)
 "bn" = (
 /obj/structure/bed/chair/wood/walnut,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 9
 	},
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "bo" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 2;
@@ -676,13 +676,13 @@
 	name = "Merchant Window Shutters";
 	opacity = 0
 	},
-/obj/effect/paint/silver,
-/obj/effect/paint_stripe/yellow,
+/obj/paint/silver,
+/obj/paint_stripe/yellow,
 /turf/simulated/floor/plating,
 /area/liberia/mule)
 "bp" = (
-/obj/effect/paint/silver,
-/obj/effect/paint_stripe/yellow,
+/obj/paint/silver,
+/obj/paint_stripe/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
 	dir = 6
 	},
@@ -697,7 +697,7 @@
 	use_power = 1
 	},
 /obj/structure/catwalk,
-/obj/effect/floor_decal/industrial/warning/full,
+/obj/floor_decal/industrial/warning/full,
 /turf/simulated/floor/airless,
 /area/liberia/mule)
 "br" = (
@@ -705,7 +705,7 @@
 	name = "merchant's locker";
 	req_access = list("ACCESS_MERCHANT")
 	},
-/obj/effect/floor_decal/corner/brown/half,
+/obj/floor_decal/corner/brown/half,
 /obj/item/storage/pill_bottle/methylphenidate,
 /obj/item/storage/pill_bottle/three_eye,
 /obj/item/plastique,
@@ -721,7 +721,7 @@
 	name = "merchant's locker";
 	req_access = list("ACCESS_MERCHANT")
 	},
-/obj/effect/floor_decal/corner/brown/half,
+/obj/floor_decal/corner/brown/half,
 /obj/item/storage/belt/holster/security/tactical,
 /obj/item/clothing/mask/balaclava,
 /obj/item/clothing/mask/balaclava,
@@ -734,7 +734,7 @@
 	name = "merchant's locker";
 	req_access = list("ACCESS_MERCHANT")
 	},
-/obj/effect/floor_decal/corner/brown/half,
+/obj/floor_decal/corner/brown/half,
 /obj/machinery/power/apc/liberia{
 	dir = 1;
 	name = "merchant north bump";
@@ -796,13 +796,13 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/mule)
 "bw" = (
-/obj/effect/paint/silver,
-/obj/effect/paint_stripe/yellow,
+/obj/paint/silver,
+/obj/paint_stripe/yellow,
 /turf/simulated/wall/titanium,
 /area/liberia/mule)
 "bx" = (
 /obj/structure/table/mag,
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 5
 	},
 /obj/random/hat,
@@ -810,10 +810,10 @@
 /area/liberia/mule)
 "by" = (
 /obj/structure/table/mag,
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -831,7 +831,7 @@
 /area/liberia/mule)
 "bA" = (
 /obj/machinery/atmospherics/portables_connector,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/structure/window/reinforced{
 	dir = 8
 	},
@@ -842,13 +842,13 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/mule)
 "bB" = (
-/obj/effect/paint/silver,
-/obj/effect/paint_stripe/yellow,
+/obj/paint/silver,
+/obj/paint_stripe/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/red,
 /turf/simulated/wall/r_titanium,
 /area/liberia/mule)
 "bC" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 4;
@@ -857,8 +857,8 @@
 	name = "Merchant Window Shutters";
 	opacity = 0
 	},
-/obj/effect/paint/silver,
-/obj/effect/paint_stripe/yellow,
+/obj/paint/silver,
+/obj/paint_stripe/yellow,
 /turf/simulated/floor/plating,
 /area/liberia/mule)
 "bD" = (
@@ -908,7 +908,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/floor_decal/industrial/warning/fulltile,
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
@@ -927,7 +927,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
@@ -942,7 +942,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
@@ -955,7 +955,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 1;
 	d2 = 8;
@@ -967,10 +967,10 @@
 /obj/machinery/computer/modular/preset/merchant{
 	dir = 8
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 9
 	},
 /obj/machinery/light{
@@ -1034,14 +1034,14 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/mule)
 "bS" = (
-/obj/effect/floor_decal/corner/green/three_quarters{
+/obj/floor_decal/corner/green/three_quarters{
 	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled,
 /area/liberia/mule)
 "bT" = (
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
@@ -1053,7 +1053,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
@@ -1062,7 +1062,7 @@
 /turf/simulated/floor/tiled,
 /area/liberia/mule)
 "bV" = (
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
@@ -1071,7 +1071,7 @@
 /turf/simulated/floor/tiled,
 /area/liberia/mule)
 "bW" = (
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
@@ -1081,15 +1081,15 @@
 /area/liberia/mule)
 "bX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 5
 	},
 /turf/simulated/floor/tiled,
 /area/liberia/mule)
 "bY" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/silver,
-/obj/effect/paint_stripe/yellow,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/silver,
+/obj/paint_stripe/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/red,
 /turf/simulated/floor/plating,
 /area/liberia/mule)
@@ -1120,7 +1120,7 @@
 	pixel_x = -6;
 	pixel_y = 28
 	},
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	id_tag = "merchant_ship_vent"
 	},
@@ -1144,18 +1144,18 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner_techfloor_grid,
-/obj/effect/floor_decal/techfloor/corner,
+/obj/floor_decal/corner_techfloor_grid,
+/obj/floor_decal/techfloor/corner,
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringreactor)
 "cc" = (
 /obj/machinery/computer/shuttle_control/explore/mule{
 	dir = 4
 	},
-/obj/effect/overmap/visitable/ship/landable/mule,
+/obj/overmap/visitable/ship/landable/mule,
 /turf/simulated/floor/carpet/blue2,
 /area/liberia/mule)
 "cd" = (
@@ -1224,14 +1224,14 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/cyan{
 	dir = 1
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/liberia/mule)
 "ci" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/liberia/hallway)
 "cj" = (
@@ -1239,14 +1239,14 @@
 /obj/machinery/door/airlock/multi_tile/glass/maintenance{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/floor_decal/industrial/warning/fulltile,
 /turf/simulated/floor/tiled/monotile,
 /area/liberia/traidingroom)
 "ck" = (
 /obj/random/loot,
 /obj/random/loot,
 /obj/structure/table/rack/dark,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "cl" = (
@@ -1257,10 +1257,10 @@
 /area/liberia/traidingroom)
 "cm" = (
 /obj/machinery/merchant_pad,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -1277,7 +1277,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
 	dir = 4
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/liberia/mule)
 "co" = (
@@ -1302,7 +1302,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/liberia/mule)
 "cp" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 4;
@@ -1311,7 +1311,7 @@
 	name = "Merchant Desk Shutters";
 	opacity = 0
 	},
-/obj/effect/paint/silver,
+/obj/paint/silver,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -1319,17 +1319,17 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/paint_stripe/yellow,
+/obj/paint_stripe/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/liberia/mule)
 "cq" = (
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
@@ -1345,11 +1345,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan{
 	dir = 9
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/liberia/mule)
 "cs" = (
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1359,20 +1359,20 @@
 /obj/item/gun/projectile/pistol/holdout,
 /obj/random/handgun,
 /obj/random/handgun,
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/mule)
 "ct" = (
 /obj/structure/table/mag,
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 10
 	},
 /obj/random/projectile,
@@ -1383,10 +1383,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -1396,10 +1396,10 @@
 	dir = 4
 	},
 /obj/structure/table/mag,
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -1408,11 +1408,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
 	dir = 4
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/liberia/mule)
 "cx" = (
-/obj/effect/floor_decal/industrial/loading{
+/obj/floor_decal/industrial/loading{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -1489,17 +1489,17 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringreactor)
 "cF" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /obj/machinery/power/apc/liberia{
@@ -1514,23 +1514,23 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringengines)
 "cG" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 9
 	},
 /obj/structure/bed/chair/rounded/black,
 /turf/simulated/floor/carpet/red,
 /area/liberia/traidingroom)
 "cI" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
 /turf/simulated/floor/carpet/red,
 /area/liberia/traidingroom)
 "cJ" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
-/obj/effect/floor_decal/spline/fancy/wood/corner,
+/obj/floor_decal/spline/fancy/wood/corner,
 /turf/simulated/floor/carpet/red,
 /area/liberia/traidingroom)
 "cK" = (
@@ -1542,10 +1542,10 @@
 	dir = 4;
 	pixel_x = 24
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 9
 	},
 /turf/simulated/floor/tiled,
@@ -1572,13 +1572,13 @@
 /turf/simulated/floor/wood/walnut,
 /area/liberia/mule)
 "cN" = (
-/obj/effect/paint/silver,
+/obj/paint/silver,
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/paint_stripe/yellow,
+/obj/paint_stripe/yellow,
 /turf/simulated/wall/r_titanium,
 /area/liberia/mule)
 "cO" = (
@@ -1621,7 +1621,7 @@
 	},
 /obj/structure/wall_frame/titanium,
 /obj/structure/table/wallf/steel,
-/obj/effect/paint/silver,
+/obj/paint/silver,
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 4;
@@ -1635,7 +1635,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/paint_stripe/yellow,
+/obj/paint_stripe/yellow,
 /obj/machinery/door/window/brigdoor/eastright{
 	dir = 8;
 	req_access = newlist()
@@ -1643,10 +1643,10 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/mule)
 "cS" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 10
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -1661,7 +1661,7 @@
 /area/liberia/mule)
 "cU" = (
 /obj/machinery/light,
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 10
 	},
 /obj/structure/cable/blue{
@@ -1672,7 +1672,7 @@
 /turf/simulated/floor/tiled,
 /area/liberia/mule)
 "cV" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 10
 	},
 /obj/structure/cable/blue{
@@ -1683,7 +1683,7 @@
 /turf/simulated/floor/tiled,
 /area/liberia/mule)
 "cW" = (
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 10
 	},
 /obj/structure/cable/blue{
@@ -1707,10 +1707,10 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -1728,7 +1728,7 @@
 /obj/machinery/chemical_dispenser/bar_coffee{
 	dir = 1
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 10
 	},
 /turf/simulated/floor/carpet/red,
@@ -1752,7 +1752,7 @@
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},
-/obj/effect/floor_decal/corner/blue/three_quarters{
+/obj/floor_decal/corner/blue/three_quarters{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -1786,13 +1786,13 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringstorage)
 "de" = (
-/obj/effect/wallframe_spawn/no_grille,
+/obj/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/liberia/traidingroom)
 "df" = (
@@ -1800,14 +1800,14 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringreactor)
 "dg" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/effect/paint/silver,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/silver,
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/paint_stripe/yellow,
+/obj/paint_stripe/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
 	dir = 9
 	},
@@ -1823,7 +1823,7 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/bridge)
 "di" = (
@@ -1898,7 +1898,7 @@
 	tag_exterior_door = "merchant_ship_exterior";
 	tag_interior_door = "merchant_ship_interior"
 	},
-/obj/effect/floor_decal/corner/brown/half{
+/obj/floor_decal/corner/brown/half{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
@@ -1911,7 +1911,7 @@
 	dir = 9
 	},
 /obj/structure/disposalpipe/segment,
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -1922,11 +1922,11 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 9
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/corner/green,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/corner/green,
 /turf/simulated/floor/tiled/monotile,
 /area/liberia/traidingroom)
 "dp" = (
@@ -1936,10 +1936,10 @@
 /obj/random/maintenance/clean,
 /obj/random/maintenance/clean,
 /obj/random/maintenance/clean,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -1955,16 +1955,16 @@
 	pixel_x = 7;
 	pixel_y = 32
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/liberia/traidingroom)
 "dr" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
 /obj/structure/cable/blue{
@@ -1979,13 +1979,13 @@
 	dir = 8;
 	pixel_x = 32
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/borderfloor/corner2{
+/obj/floor_decal/borderfloor/corner2{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 9
 	},
 /turf/simulated/floor/tiled,
@@ -1995,19 +1995,19 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/dark,
 /area/liberia/bridge)
 "dv" = (
 /obj/machinery/hologram/holopad/longrange,
-/obj/effect/floor_decal/corner/blue/mono,
-/obj/effect/overmap/visitable/ship/liberia,
+/obj/floor_decal/corner/blue/mono,
+/obj/overmap/visitable/ship/liberia,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/bridge)
 "dw" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/alarm/merchant{
 	pixel_y = 24
 	},
@@ -2028,10 +2028,10 @@
 	pixel_y = 24;
 	req_access = list("ACCESS_MERCHANT")
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10;
 	icon_state = "corner_white"
 	},
@@ -2042,11 +2042,11 @@
 	req_access = list("ACCESS_MERCHANT")
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/borderfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10;
 	icon_state = "corner_white"
 	},
@@ -2077,7 +2077,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -2091,7 +2091,7 @@
 	dir = 4
 	},
 /obj/structure/disposalpipe/segment,
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/liberia/hallway)
 "dC" = (
@@ -2099,7 +2099,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/floor_decal/industrial/warning/fulltile,
 /turf/simulated/floor/tiled/monotile,
 /area/liberia/hallway)
 "dD" = (
@@ -2112,7 +2112,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 2;
 	d2 = 4;
@@ -2124,7 +2124,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
@@ -2139,10 +2139,10 @@
 /obj/structure/table/steel,
 /obj/item/storage/box/lights/mixed,
 /obj/item/reagent_containers/spray/cleaner,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10;
 	icon_state = "corner_white"
 	},
@@ -2160,7 +2160,7 @@
 	name = "Wreckage Site";
 	req_access = newlist()
 	},
-/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/floor_decal/industrial/warning/fulltile,
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
@@ -2178,7 +2178,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/bridge)
 "dJ" = (
@@ -2197,10 +2197,10 @@
 /area/liberia/officeroom)
 "dK" = (
 /obj/structure/reagent_dispensers/fueltank,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10;
 	icon_state = "corner_white"
 	},
@@ -2209,7 +2209,7 @@
 "dL" = (
 /obj/structure/table/glass,
 /obj/item/folder/blue,
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/bridge)
 "dM" = (
@@ -2227,7 +2227,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/yellow/full,
+/obj/floor_decal/corner/yellow/full,
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/atmos)
 "dN" = (
@@ -2253,7 +2253,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/structure/cable/blue{
@@ -2280,7 +2280,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 6
 	},
 /obj/structure/cable/blue{
@@ -2292,13 +2292,13 @@
 	dir = 4;
 	pixel_x = 24
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/engineeringlobby)
 "dR" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 8
 	},
 /obj/structure/cable/blue{
@@ -2306,7 +2306,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
@@ -2318,7 +2318,7 @@
 /obj/structure/disposalpipe/junction{
 	dir = 8
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
@@ -2328,7 +2328,7 @@
 /area/liberia/hallway)
 "dT" = (
 /obj/machinery/cell_charger,
-/obj/effect/floor_decal/corner/brown/half{
+/obj/floor_decal/corner/brown/half{
 	dir = 1
 	},
 /obj/structure/table/steel_reinforced,
@@ -2339,7 +2339,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/mule)
 "dU" = (
-/obj/effect/floor_decal/corner/brown/half{
+/obj/floor_decal/corner/brown/half{
 	dir = 1
 	},
 /obj/structure/table/steel_reinforced,
@@ -2370,7 +2370,7 @@
 /obj/machinery/door/airlock/multi_tile/glass/maintenance{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/floor_decal/industrial/warning/fulltile,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -2392,7 +2392,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
@@ -2410,7 +2410,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 1;
 	d2 = 8;
@@ -2496,7 +2496,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/dark,
@@ -2506,7 +2506,7 @@
 /obj/random/snack,
 /obj/random/snack,
 /obj/random/snack,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -2536,10 +2536,10 @@
 /obj/item/wrench/power,
 /obj/item/device/flashlight/upgraded,
 /obj/item/marshalling_wand,
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 5
 	},
 /obj/item/device/binoculars,
@@ -2547,10 +2547,10 @@
 /area/liberia/mule)
 "eh" = (
 /obj/structure/table/mag,
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/brown{
+/obj/floor_decal/corner/brown{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -2575,7 +2575,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/emcloset{
 	anchored = 1;
 	name = "anchored emergency closet"
@@ -2587,7 +2587,7 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/disposalpipe/junction{
 	dir = 1
 	},
@@ -2606,7 +2606,7 @@
 /area/liberia/traidingroom)
 "eo" = (
 /obj/machinery/light,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 10;
 	icon_state = "corner_white"
 	},
@@ -2619,7 +2619,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/door/window/northleft{
 	autoclose = 1;
 	autoset_access = 0;
@@ -2634,25 +2634,25 @@
 "er" = (
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
-/obj/effect/floor_decal/borderfloor/corner{
+/obj/floor_decal/borderfloor/corner{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/yellow/three_quarters,
+/obj/floor_decal/corner/yellow/three_quarters,
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/atmos)
 "es" = (
 /obj/machinery/portable_atmospherics/canister/air/airlock,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/atmos)
 "et" = (
 /obj/structure/table/rack,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/item/card/id{
 	access = list("ACCESS_MERCHANT");
 	desc = "A visitor's access card, this one is for the Merchant's Station.";
@@ -2668,7 +2668,7 @@
 	desc = "A visitor's access card, this one is for the Merchant's Station.";
 	name = "Visitor's Card - Merchant's Station"
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/alarm/merchant{
 	dir = 4;
 	pixel_x = -25
@@ -2677,11 +2677,11 @@
 /area/liberia/hallway)
 "eu" = (
 /obj/structure/reagent_dispensers/watertank,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 10
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/corner/green{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -2692,9 +2692,9 @@
 /obj/random/maintenance/clean,
 /obj/random/maintenance/clean,
 /obj/random/maintenance/clean,
-/obj/effect/floor_decal/borderfloor,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/borderfloor,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/corner/green{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -2703,18 +2703,18 @@
 /obj/structure/largecrate,
 /obj/random/loot,
 /obj/random/plushie,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 6
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/corner/green{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/liberia/hallway)
 "ex" = (
-/obj/effect/paint/silver,
-/obj/effect/paint_stripe/yellow,
+/obj/paint/silver,
+/obj/paint_stripe/yellow,
 /turf/simulated/wall/r_titanium,
 /area/liberia/mule)
 "ey" = (
@@ -2737,7 +2737,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/shield_diffuser,
-/obj/effect/shuttle_landmark/mule/start,
+/obj/shuttle_landmark/mule/start,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/mule)
 "ez" = (
@@ -2747,7 +2747,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/borderfloor/corner{
+/obj/floor_decal/borderfloor/corner{
 	dir = 1
 	},
 /obj/structure/cable/blue{
@@ -2755,7 +2755,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/effect/floor_decal/corner/green/three_quarters{
+/obj/floor_decal/corner/green/three_quarters{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -2766,7 +2766,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/borderfloor/corner{
+/obj/floor_decal/borderfloor/corner{
 	dir = 8
 	},
 /obj/structure/disposalpipe/segment{
@@ -2781,14 +2781,14 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/effect/floor_decal/corner/green/three_quarters{
+/obj/floor_decal/corner/green/three_quarters{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "eB" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 8
 	},
 /obj/structure/cable/blue{
@@ -2796,7 +2796,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
@@ -2829,10 +2829,10 @@
 	dir = 4;
 	pixel_y = 8
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -2847,7 +2847,7 @@
 	pixel_x = -24;
 	pixel_y = 3
 	},
-/obj/effect/floor_decal/corner/blue/three_quarters{
+/obj/floor_decal/corner/blue/three_quarters{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -2855,14 +2855,14 @@
 "eH" = (
 /obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
 /obj/machinery/atmospherics/portables_connector,
-/obj/effect/floor_decal/corner/blue/three_quarters{
+/obj/floor_decal/corner/blue/three_quarters{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/liberia/medbay)
 "eI" = (
 /obj/machinery/recharge_station,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/liberia/hallway)
 "eJ" = (
@@ -2896,10 +2896,10 @@
 	},
 /obj/item/device/suit_cooling_unit,
 /obj/item/stack/material/aluminium/ten,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -2922,10 +2922,10 @@
 /obj/machinery/atmospherics/unary/tank/air{
 	dir = 8
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -2938,7 +2938,7 @@
 	dir = 4;
 	pixel_x = -25
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
@@ -2957,7 +2957,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
@@ -2968,7 +2968,7 @@
 	dir = 8;
 	icon_state = "railing0-1"
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringreactor)
 "eU" = (
@@ -2976,13 +2976,13 @@
 	dir = 4;
 	pixel_x = 26
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/borderfloor/corner2{
+/obj/floor_decal/borderfloor/corner2{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 9
 	},
 /turf/simulated/floor/tiled,
@@ -2995,7 +2995,7 @@
 	dir = 4;
 	pixel_x = -21
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 9
 	},
 /obj/machinery/firealarm{
@@ -3008,7 +3008,7 @@
 /obj/machinery/cryopod{
 	dir = 2
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /obj/machinery/computer/cryopod{
@@ -3020,7 +3020,7 @@
 /obj/machinery/cryopod{
 	dir = 2
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -3034,10 +3034,10 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/effect/floor_decal/borderfloor/corner{
+/obj/floor_decal/borderfloor/corner{
 	dir = 4
 	},
-/obj/effect/floor_decal/borderfloor/corner,
+/obj/floor_decal/borderfloor/corner,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -3047,15 +3047,15 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/engineeringlobby)
 "fa" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/cyan,
-/obj/effect/floor_decal/borderfloor/corner,
-/obj/effect/floor_decal/corner/yellow/three_quarters{
+/obj/floor_decal/borderfloor/corner,
+/obj/floor_decal/corner/yellow/three_quarters{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -3068,7 +3068,7 @@
 /area/liberia/atmos)
 "fd" = (
 /obj/machinery/vitals_monitor,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -3079,7 +3079,7 @@
 	name = "hacked Getmore Chocolate Corp";
 	prices = list()
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/liberia/hallway)
 "ff" = (
@@ -3089,7 +3089,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
@@ -3105,10 +3105,10 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /obj/machinery/door/airlock,
 /obj/structure/cable/blue{
 	d1 = 4;
@@ -3124,13 +3124,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 9
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 8
 	},
 /obj/structure/cable/blue{
@@ -3170,7 +3170,7 @@
 /area/liberia/mule)
 "fm" = (
 /obj/structure/closet/crate/uranium,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringreactor)
 "fn" = (
@@ -3179,7 +3179,7 @@
 	dir = 8;
 	pixel_x = -24
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 8
 	},
 /obj/structure/cable/blue{
@@ -3187,14 +3187,14 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "fo" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 8
 	},
 /obj/structure/sign/warning/airlock{
@@ -3211,7 +3211,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
@@ -3227,12 +3227,12 @@
 /area/liberia/atmos)
 "fq" = (
 /obj/machinery/atmospherics/binary/pump,
-/obj/effect/floor_decal/borderfloor/corner,
+/obj/floor_decal/borderfloor/corner,
 /obj/structure/disposalpipe/segment{
 	dir = 8;
 	icon_state = "pipe-c"
 	},
-/obj/effect/floor_decal/corner/yellow/three_quarters{
+/obj/floor_decal/corner/yellow/three_quarters{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -3244,8 +3244,8 @@
 	start_pressure = 740.5
 	},
 /obj/machinery/light/small,
-/obj/effect/floor_decal/borderfloor,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/borderfloor,
+/obj/floor_decal/corner/yellow{
 	dir = 5;
 	icon_state = "corner_white"
 	},
@@ -3257,10 +3257,10 @@
 	icon_state = "air_map";
 	start_pressure = 740.5
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -3272,7 +3272,7 @@
 	dir = 8;
 	pixel_x = -24
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -3285,7 +3285,7 @@
 /obj/item/reagent_containers/food/snacks/candy/donor,
 /obj/item/reagent_containers/food/snacks/candy/donor,
 /obj/item/reagent_containers/food/snacks/candy/donor,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /obj/structure/iv_stand,
@@ -3299,7 +3299,7 @@
 	name = "hacked Robust Softdrinks";
 	prices = list()
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/liberia/hallway)
 "fw" = (
@@ -3307,7 +3307,7 @@
 	dir = 1
 	},
 /obj/structure/table/standard,
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 10
 	},
 /obj/machinery/light/small{
@@ -3318,7 +3318,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/cryo)
 "fx" = (
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /obj/structure/table/standard,
 /obj/machinery/power/apc/liberia{
 	name = "south bump";
@@ -3338,7 +3338,7 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringreactor)
 "fz" = (
@@ -3346,13 +3346,13 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 10
 	},
-/obj/effect/floor_decal/borderfloor/corner2{
+/obj/floor_decal/borderfloor/corner2{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -3365,8 +3365,8 @@
 	dir = 1;
 	pixel_y = -20
 	},
-/obj/effect/floor_decal/borderfloor,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/borderfloor,
+/obj/floor_decal/corner/yellow{
 	dir = 5;
 	icon_state = "corner_white"
 	},
@@ -3376,8 +3376,8 @@
 /obj/machinery/light/small,
 /obj/machinery/portable_atmospherics/canister/nitrogen,
 /obj/item/tank/nitrogen,
-/obj/effect/floor_decal/borderfloor,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/borderfloor,
+/obj/floor_decal/corner/yellow{
 	dir = 5;
 	icon_state = "corner_white"
 	},
@@ -3388,17 +3388,17 @@
 	dir = 1
 	},
 /obj/machinery/portable_atmospherics/powered/pump/filled,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/atmos)
 "fD" = (
 /obj/machinery/disposal,
-/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/structure/disposalpipe/trunk{
 	dir = 4
 	},
@@ -3411,7 +3411,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 1;
 	d2 = 2;
@@ -3431,20 +3431,20 @@
 /turf/simulated/wall/prepainted,
 /area/liberia/bar)
 "fI" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/liberia/hallway)
 "fJ" = (
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/dark,
 /area/liberia/bridge)
 "fK" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 9
 	},
 /obj/machinery/firealarm{
@@ -3453,13 +3453,13 @@
 /obj/structure/table/reinforced,
 /obj/item/paper_bin,
 /obj/item/pen,
-/obj/effect/floor_decal/borderfloor/corner2{
+/obj/floor_decal/borderfloor/corner2{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/liberia/officeroom)
 "fL" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 1
 	},
 /obj/machinery/light{
@@ -3482,13 +3482,13 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/dark,
 /area/liberia/bridge)
 "fN" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 5
 	},
 /obj/structure/flora/pottedplant{
@@ -3502,7 +3502,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 9
 	},
 /turf/simulated/floor/carpet,
@@ -3511,14 +3511,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
 /obj/structure/bed/sofa/l/black,
 /turf/simulated/floor/carpet,
 /area/liberia/bar)
 "fQ" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 5
 	},
 /obj/machinery/firealarm{
@@ -3586,7 +3586,7 @@
 /turf/simulated/floor/wood/ebony,
 /area/liberia/bar)
 "fX" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
@@ -3603,7 +3603,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 1;
 	d2 = 2;
@@ -3623,7 +3623,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/alarm/merchant{
 	dir = 1;
 	pixel_y = -20
@@ -3642,7 +3642,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
@@ -3663,7 +3663,7 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
-/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/floor_decal/industrial/warning/fulltile,
 /obj/machinery/door/airlock/glass/command{
 	name = "Office";
 	req_access = newlist()
@@ -3694,7 +3694,7 @@
 /turf/simulated/floor/tiled,
 /area/liberia/officeroom)
 "ge" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3707,7 +3707,7 @@
 /obj/structure/bed/sofa/r/black{
 	dir = 4
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
 /turf/simulated/floor/carpet,
@@ -3720,7 +3720,7 @@
 /obj/structure/bed/sofa/r/black{
 	dir = 8
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
 /turf/simulated/floor/carpet,
@@ -3747,11 +3747,11 @@
 	pixel_x = -7;
 	pixel_y = 32
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/green,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/corner/green,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "gn" = (
@@ -3769,10 +3769,10 @@
 /turf/simulated/floor/tiled/freezer,
 /area/liberia/toiletroom1)
 "go" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/borderfloor/corner2{
+/obj/floor_decal/borderfloor/corner2{
 	dir = 8
 	},
 /obj/machinery/power/apc/liberia{
@@ -3792,7 +3792,7 @@
 /turf/simulated/floor/tiled,
 /area/liberia/officeroom)
 "gq" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -3807,7 +3807,7 @@
 	dir = 8;
 	pixel_x = -24
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 10
 	},
 /obj/structure/bed/sofa/l/black{
@@ -3817,12 +3817,12 @@
 /area/liberia/bar)
 "gs" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/spline/fancy/wood,
+/obj/floor_decal/spline/fancy/wood,
 /turf/simulated/floor/carpet,
 /area/liberia/bar)
 "gt" = (
 /obj/structure/flora/pottedplant/minitree,
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 6
 	},
 /turf/simulated/floor/carpet,
@@ -3834,7 +3834,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
-/obj/effect/floor_decal/spline/plain/brown,
+/obj/floor_decal/spline/plain/brown,
 /obj/structure/cable/blue{
 	d1 = 2;
 	d2 = 4;
@@ -3847,7 +3847,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/floor_decal/spline/plain/brown,
+/obj/floor_decal/spline/plain/brown,
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
@@ -3862,7 +3862,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
 	},
-/obj/effect/floor_decal/spline/plain/brown,
+/obj/floor_decal/spline/plain/brown,
 /obj/structure/cable/blue{
 	d1 = 2;
 	d2 = 8;
@@ -3924,7 +3924,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/effect/wallframe_spawn/no_grille,
+/obj/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/liberia/bar)
 "gC" = (
@@ -3937,7 +3937,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 2;
 	d2 = 4;
@@ -3947,13 +3947,13 @@
 /area/liberia/hallway)
 "gD" = (
 /obj/structure/closet/emcloset,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "gE" = (
@@ -4022,7 +4022,7 @@
 /obj/structure/table/reinforced,
 /obj/item/paper_bin,
 /obj/item/pen,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 10
 	},
 /obj/item/device/radio/intercom{
@@ -4033,7 +4033,7 @@
 /area/liberia/officeroom)
 "gJ" = (
 /obj/structure/table/reinforced,
-/obj/effect/floor_decal/borderfloor,
+/obj/floor_decal/borderfloor,
 /obj/item/device/eftpos{
 	eftpos_name = "Merchant EFTPOS scanner"
 	},
@@ -4045,7 +4045,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/liberia/officeroom)
 "gK" = (
-/obj/effect/floor_decal/borderfloor,
+/obj/floor_decal/borderfloor,
 /obj/machinery/computer/modular/preset/civilian{
 	dir = 1
 	},
@@ -4053,7 +4053,7 @@
 /area/liberia/officeroom)
 "gL" = (
 /obj/machinery/photocopier,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 6
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -4124,7 +4124,7 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
-/obj/effect/floor_decal/spline/plain/brown{
+/obj/floor_decal/spline/plain/brown{
 	dir = 4
 	},
 /obj/structure/cable/blue{
@@ -4205,18 +4205,18 @@
 /turf/simulated/floor/wood/walnut,
 /area/liberia/bar)
 "gX" = (
-/obj/effect/floor_decal/spline/plain/brown{
+/obj/floor_decal/spline/plain/brown{
 	dir = 10
 	},
 /turf/simulated/floor/wood/ebony,
 /area/liberia/bar)
 "gY" = (
-/obj/effect/floor_decal/spline/plain/brown,
+/obj/floor_decal/spline/plain/brown,
 /turf/simulated/floor/wood/ebony,
 /area/liberia/bar)
 "gZ" = (
 /obj/structure/disposalpipe/segment,
-/obj/effect/floor_decal/spline/plain/brown,
+/obj/floor_decal/spline/plain/brown,
 /turf/simulated/floor/wood/ebony,
 /area/liberia/bar)
 "ha" = (
@@ -4277,7 +4277,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/liberia/toiletroom1)
 "hf" = (
-/obj/effect/floor_decal/spline/plain/brown,
+/obj/floor_decal/spline/plain/brown,
 /obj/structure/closet/secure_closet{
 	name = "merchant's locker";
 	req_access = list("ACCESS_MERCHANT")
@@ -4287,7 +4287,7 @@
 /turf/simulated/floor/wood/ebony,
 /area/liberia/captain)
 "hh" = (
-/obj/effect/floor_decal/spline/plain/brown,
+/obj/floor_decal/spline/plain/brown,
 /turf/simulated/floor/wood/ebony,
 /area/liberia/captain)
 "hi" = (
@@ -4295,7 +4295,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/effect/floor_decal/spline/plain/brown,
+/obj/floor_decal/spline/plain/brown,
 /turf/simulated/floor/wood/ebony,
 /area/liberia/captain)
 "hj" = (
@@ -4355,7 +4355,7 @@
 /area/liberia/toiletroom1)
 "ho" = (
 /obj/structure/closet/radiation,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "hp" = (
@@ -4376,7 +4376,7 @@
 /area/liberia/captain)
 "hs" = (
 /obj/structure/undies_wardrobe,
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 9
 	},
 /obj/machinery/power/apc/liberia{
@@ -4393,7 +4393,7 @@
 "ht" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
 /obj/structure/cable/blue{
@@ -4504,7 +4504,7 @@
 /obj/item/clothing/shoes/black,
 /obj/item/clothing/under/overalls,
 /obj/item/clothing/under/skirt,
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
 /obj/item/crowbar/prybar,
@@ -4523,7 +4523,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
 /turf/simulated/floor/carpet,
@@ -4565,7 +4565,7 @@
 /obj/item/stock_parts/computer/tesla_link,
 /obj/item/stock_parts/computer/tesla_link,
 /obj/structure/table/rack/dark,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/machinery/alarm/merchant{
 	pixel_y = 24
 	},
@@ -4577,7 +4577,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 10
 	},
 /turf/simulated/floor/carpet,
@@ -4587,7 +4587,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/obj/effect/floor_decal/spline/fancy/wood,
+/obj/floor_decal/spline/fancy/wood,
 /turf/simulated/floor/carpet,
 /area/liberia/personellroom2)
 "hQ" = (
@@ -4606,7 +4606,7 @@
 /area/liberia/bar)
 "hS" = (
 /obj/structure/closet/fridge,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/item/reagent_containers/food/condiment/enzyme,
 /turf/simulated/floor/tiled/freezer,
 /area/liberia/bar)
@@ -4623,20 +4623,20 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "hU" = (
 /obj/structure/closet/radiation,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringreactor)
 "hW" = (
@@ -4669,7 +4669,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
 /obj/structure/table/standard,
@@ -4747,22 +4747,22 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/borderfloor/corner{
+/obj/floor_decal/borderfloor/corner{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/green/three_quarters{
+/obj/floor_decal/corner/green/three_quarters{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "ih" = (
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 6
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor/corner,
+/obj/floor_decal/techfloor/corner,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -4781,10 +4781,10 @@
 	name = "Maintenance";
 	req_access = newlist()
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -4800,13 +4800,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringengines)
 "ij" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringreactor)
 "ik" = (
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
@@ -4832,10 +4832,10 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringreactor)
 "ip" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
@@ -4845,14 +4845,14 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringstorage)
 "iv" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -4861,7 +4861,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 10
 	},
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringstorage)
 "ix" = (
@@ -4882,7 +4882,7 @@
 /obj/machinery/computer/ship/sensors{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/bridge)
 "iA" = (
@@ -4900,17 +4900,17 @@
 /obj/item/stack/nanopaste,
 /obj/structure/table/rack/dark,
 /obj/random/maintenance/clean,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "iD" = (
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
 /obj/structure/cable/blue{
@@ -4933,7 +4933,7 @@
 	req_access = newlist()
 	},
 /obj/machinery/door/firedoor,
-/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/floor_decal/industrial/warning/fulltile,
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
@@ -4948,7 +4948,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -4969,7 +4969,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -4981,7 +4981,7 @@
 /turf/simulated/floor/plating,
 /area/liberia/hallway)
 "iJ" = (
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/machinery/power/tracker,
 /obj/structure/cable/yellow{
 	d2 = 4;
@@ -4998,7 +4998,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 2;
 	d2 = 4;
@@ -5011,21 +5011,21 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/bridge)
 "iN" = (
 /obj/structure/bed/chair/comfy/blue{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/bridge)
 "iO" = (
 /obj/machinery/computer/ship/helm{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/bridge)
 "iP" = (
@@ -5097,7 +5097,7 @@
 	id_tag = "liberia_solar_north_pump"
 	},
 /obj/structure/catwalk,
-/obj/effect/floor_decal/industrial/warning/full,
+/obj/floor_decal/industrial/warning/full,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -5130,7 +5130,7 @@
 /obj/structure/largecrate,
 /obj/random/loot,
 /obj/random/plushie,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "iW" = (
@@ -5160,7 +5160,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 1;
 	d2 = 8;
@@ -5172,7 +5172,7 @@
 /obj/machinery/computer/ship/engines{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/bridge)
 "iZ" = (
@@ -5182,7 +5182,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -5204,7 +5204,7 @@
 /turf/simulated/floor/airless,
 /area/liberia/solar2)
 "jb" = (
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/machinery/power/solar{
 	id = "auxsolarsport";
 	name = "Aft Port Solar Array"
@@ -5249,13 +5249,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/borderfloor/corner2{
+/obj/floor_decal/borderfloor/corner2{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 9
 	},
 /obj/machinery/disposal,
@@ -5304,7 +5304,7 @@
 	},
 /obj/machinery/space_heater,
 /obj/structure/railing/mapped,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringreactor)
 "jq" = (
@@ -5316,7 +5316,7 @@
 	dir = 8
 	},
 /obj/machinery/power/port_gen/pacman/mrs,
-/obj/effect/floor_decal/industrial/warning/full,
+/obj/floor_decal/industrial/warning/full,
 /obj/structure/cable/blue{
 	d2 = 4;
 	icon_state = "0-4"
@@ -5325,7 +5325,7 @@
 /area/liberia/engineeringstorage)
 "js" = (
 /obj/structure/closet/crate/solar,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringstorage)
 "jt" = (
@@ -5340,7 +5340,7 @@
 "jv" = (
 /obj/structure/table/steel,
 /obj/random/advdevice,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -5348,7 +5348,7 @@
 /area/liberia/merchantstorage)
 "jw" = (
 /obj/structure/table/rack/dark,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/item/stack/tile/carpetred/fifty,
 /obj/item/stack/tile/carpetorange/fifty,
 /obj/item/stack/tile/carpetblue/fifty,
@@ -5359,7 +5359,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /obj/machinery/computer/modular/preset/cardslot/command{
 	dir = 8
 	},
@@ -5369,21 +5369,21 @@
 /obj/structure/closet,
 /obj/random/shoes,
 /obj/random/clothing,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "jz" = (
 /obj/structure/table/glass,
 /obj/item/paper_bin,
 /obj/item/pen,
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/bridge)
 "jA" = (
 /obj/structure/closet/crate,
 /obj/random/loot,
 /obj/random/loot,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "jB" = (
@@ -5392,7 +5392,7 @@
 	dir = 8
 	},
 /obj/structure/window/reinforced,
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/bridge)
 "jC" = (
@@ -5403,7 +5403,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/bridge)
 "jD" = (
@@ -5412,14 +5412,14 @@
 	department = "FTU Ship Liberia";
 	send_access = list("ACCESS_MERCHANT")
 	},
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/bridge)
 "jE" = (
 /obj/random/action_figure,
 /obj/random/plushie,
 /obj/structure/table/rack/dark,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "jF" = (
@@ -5434,7 +5434,7 @@
 "jG" = (
 /obj/structure/closet/cabinet,
 /obj/random/plushie,
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 9
 	},
 /obj/machinery/alarm/merchant{
@@ -5449,25 +5449,25 @@
 "jH" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/green,
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 5
 	},
-/obj/effect/submap_landmark/spawnpoint/liberia/engineer,
+/obj/submap_landmark/spawnpoint/liberia/engineer,
 /turf/simulated/floor/carpet/green,
 /area/liberia/guestroom1)
 "jI" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/rd,
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 9
 	},
-/obj/effect/submap_landmark/spawnpoint/liberia/engineer,
+/obj/submap_landmark/spawnpoint/liberia/engineer,
 /turf/simulated/floor/carpet/magenta,
 /area/liberia/guestroom2)
 "jJ" = (
 /obj/structure/closet/cabinet,
 /obj/random/plushie,
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 5
 	},
 /obj/machinery/alarm/merchant{
@@ -5489,7 +5489,7 @@
 /turf/simulated/floor/carpet,
 /area/liberia/library)
 "jL" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
 /obj/machinery/alarm/merchant{
@@ -5513,11 +5513,11 @@
 /turf/simulated/floor/wood/walnut,
 /area/liberia/library)
 "jP" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/liberia/guestroom1)
 "jQ" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 1
 	},
 /obj/structure/table/reinforced,
@@ -5525,13 +5525,13 @@
 /area/liberia/officeroom)
 "jR" = (
 /obj/structure/bed/chair/wood/walnut,
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
 /turf/simulated/floor/carpet/green,
 /area/liberia/guestroom1)
 "jS" = (
-/obj/effect/floor_decal/corner/blue/three_quarters{
+/obj/floor_decal/corner/blue/three_quarters{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
@@ -5546,12 +5546,12 @@
 	pixel_x = -24
 	},
 /obj/structure/cable/blue,
-/obj/effect/floor_decal/corner/blue/three_quarters,
+/obj/floor_decal/corner/blue/three_quarters,
 /turf/simulated/floor/tiled/dark,
 /area/liberia/bridge)
 "jU" = (
 /obj/structure/bed/chair/wood/walnut,
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
 /obj/machinery/power/apc/liberia{
@@ -5572,7 +5572,7 @@
 /obj/random/maintenance/clean,
 /obj/random/maintenance/clean,
 /obj/structure/table/rack/dark,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "jW" = (
@@ -5584,7 +5584,7 @@
 "jX" = (
 /obj/structure/table/woodentable/walnut,
 /obj/item/device/flashlight/lamp/lava/orange,
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
 /turf/simulated/floor/carpet,
@@ -5594,7 +5594,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 10
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -5609,7 +5609,7 @@
 	name = "Lock";
 	pixel_x = -24
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 10
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -5632,7 +5632,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 6
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -5641,8 +5641,8 @@
 /turf/simulated/floor/carpet/magenta,
 /area/liberia/guestroom2)
 "kb" = (
-/obj/effect/floor_decal/spline/fancy/wood,
-/obj/effect/submap_landmark/spawnpoint/liberia/doctor,
+/obj/floor_decal/spline/fancy/wood,
+/obj/submap_landmark/spawnpoint/liberia/doctor,
 /obj/structure/bed/sofa/l/black{
 	dir = 4
 	},
@@ -5651,7 +5651,7 @@
 "kc" = (
 /obj/structure/table/woodentable/walnut,
 /obj/item/storage/box/donut,
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 6
 	},
 /turf/simulated/floor/carpet,
@@ -5667,10 +5667,10 @@
 	id_tag = "merchdorm1";
 	name = "Room One"
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -5708,7 +5708,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/liberia/library)
 "kk" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 9
 	},
 /obj/machinery/firealarm{
@@ -5728,7 +5728,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -5750,11 +5750,11 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/dockinghall)
 "km" = (
-/obj/effect/floor_decal/corner_techfloor_grid,
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/corner_techfloor_grid,
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor/corner,
+/obj/floor_decal/techfloor/corner,
 /obj/machinery/alarm/merchant{
 	pixel_y = 24
 	},
@@ -5773,8 +5773,8 @@
 /area/liberia/dockinghall)
 "kn" = (
 /obj/machinery/door/airlock/civilian,
-/obj/effect/floor_decal/techfloor,
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor,
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -5792,7 +5792,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/library)
 "ko" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -5809,7 +5809,7 @@
 /turf/simulated/floor/carpet,
 /area/liberia/library)
 "kp" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -5831,7 +5831,7 @@
 /turf/simulated/floor/carpet,
 /area/liberia/library)
 "kq" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
 /obj/structure/cable/blue{
@@ -5849,17 +5849,17 @@
 /obj/item/modular_computer/laptop/preset/custom_loadout/standard{
 	dir = 8
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 5
 	},
 /turf/simulated/floor/carpet,
 /area/liberia/library)
 "ks" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner_techfloor_grid,
-/obj/effect/floor_decal/techfloor/corner,
+/obj/floor_decal/corner_techfloor_grid,
+/obj/floor_decal/techfloor/corner,
 /obj/structure/cable/blue{
 	d1 = 1;
 	d2 = 2;
@@ -5869,11 +5869,11 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/dockinghall)
 "kt" = (
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/merchantstorage)
 "ku" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -5882,7 +5882,7 @@
 /obj/machinery/vending/coffee{
 	dir = 1
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 10
 	},
 /turf/simulated/floor/carpet,
@@ -5891,12 +5891,12 @@
 /obj/machinery/vending/weeb{
 	dir = 1
 	},
-/obj/effect/floor_decal/spline/fancy/wood,
+/obj/floor_decal/spline/fancy/wood,
 /turf/simulated/floor/carpet,
 /area/liberia/library)
 "ky" = (
 /obj/structure/table/woodentable/walnut,
-/obj/effect/floor_decal/spline/fancy/wood,
+/obj/floor_decal/spline/fancy/wood,
 /obj/machinery/power/apc/liberia{
 	name = "south bump";
 	pixel_y = -24
@@ -5911,16 +5911,16 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 6
 	},
 /turf/simulated/floor/carpet,
 /area/liberia/library)
 "kB" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
 /obj/structure/cable/blue{
@@ -5935,18 +5935,18 @@
 /obj/structure/table/steel,
 /obj/item/storage/toolbox/mechanical,
 /obj/item/storage/belt/utility/full,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/yellow,
+/obj/floor_decal/corner/yellow,
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/atmos)
 "kF" = (
-/obj/effect/floor_decal/techfloor,
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/techfloor,
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -5971,10 +5971,10 @@
 /obj/machinery/vending/engivend{
 	req_access = list("ACCESS_MERCHANT")
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -5992,11 +5992,11 @@
 /area/liberia/atmos)
 "kK" = (
 /obj/machinery/light,
-/obj/effect/floor_decal/borderfloor,
+/obj/floor_decal/borderfloor,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 5
 	},
 /turf/simulated/floor/tiled,
@@ -6006,10 +6006,10 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 6
 	},
 /obj/machinery/power/smes/buildable/preset/liberia,
@@ -6028,14 +6028,14 @@
 /area/liberia/atmos)
 "kN" = (
 /obj/machinery/atmospherics/unary/cryo_cell,
-/obj/effect/floor_decal/corner/blue/full,
+/obj/floor_decal/corner/blue/full,
 /turf/simulated/floor/tiled/white/monotile,
 /area/liberia/medbay)
 "kO" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 1;
 	d2 = 2;
@@ -6050,7 +6050,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -6060,10 +6060,10 @@
 	dir = 1
 	},
 /obj/machinery/portable_atmospherics/powered/scrubber,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -6084,7 +6084,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 1;
 	d2 = 2;
@@ -6099,12 +6099,12 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/effect/submap_landmark/spawnpoint/liberia/doctor,
+/obj/submap_landmark/spawnpoint/liberia/doctor,
 /turf/simulated/floor/tiled/white,
 /area/liberia/medbay)
 "kV" = (
 /obj/machinery/bodyscanner,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -6117,7 +6117,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 1;
 	d2 = 2;
@@ -6131,20 +6131,20 @@
 /turf/simulated/floor/plating,
 /area/liberia/hallway)
 "kX" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/liberia/personellroom1)
 "kY" = (
 /obj/machinery/sleeper{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue/three_quarters{
+/obj/floor_decal/corner/blue/three_quarters{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/liberia/medbay)
 "kZ" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
@@ -6172,8 +6172,8 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/techfloor,
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor,
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /obj/machinery/access_button/airlock_interior{
@@ -6190,11 +6190,11 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/techfloor,
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/techfloor,
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 1
 	},
 /obj/structure/sign/warning/airlock{
@@ -6209,7 +6209,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringstorage)
 "le" = (
@@ -6240,7 +6240,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
@@ -6265,7 +6265,7 @@
 	pixel_x = -28;
 	pixel_y = -10
 	},
-/obj/effect/decal/cleanable/dirt,
+/obj/decal/cleanable/dirt,
 /obj/structure/catwalk,
 /obj/structure/cable/blue{
 	d1 = 1;
@@ -6317,13 +6317,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/dockinghall)
 "lj" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 1
 	},
 /obj/structure/cable/blue{
@@ -6343,10 +6343,10 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -6408,13 +6408,13 @@
 	},
 /obj/item/storage/firstaid/o2,
 /obj/item/storage/firstaid/toxin,
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/liberia/medbay)
 "lp" = (
-/obj/effect/floor_decal/corner/blue/three_quarters,
+/obj/floor_decal/corner/blue/three_quarters,
 /obj/machinery/sleeper/survival_pod{
 	dir = 4
 	},
@@ -6424,7 +6424,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 10;
 	icon_state = "corner_white"
 	},
@@ -6440,7 +6440,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 10;
 	icon_state = "corner_white"
 	},
@@ -6457,7 +6457,7 @@
 	dir = 4;
 	pixel_x = 22
 	},
-/obj/effect/floor_decal/corner/blue/three_quarters{
+/obj/floor_decal/corner/blue/three_quarters{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -6466,16 +6466,16 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "lu" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/liberia/bar)
 "lv" = (
@@ -6498,7 +6498,7 @@
 /turf/simulated/floor/tiled/white,
 /area/liberia/medbay)
 "lx" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
@@ -6514,7 +6514,7 @@
 /turf/simulated/floor/carpet/green,
 /area/liberia/guestroom1)
 "ly" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
@@ -6532,7 +6532,7 @@
 	name = "Lock";
 	pixel_x = 24
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -6550,13 +6550,13 @@
 /turf/simulated/floor/wood/walnut,
 /area/liberia/library)
 "lC" = (
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 5
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -6589,7 +6589,7 @@
 	name = "Bridge Sensors Blast Door";
 	pixel_x = -26
 	},
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/bridge)
 "lR" = (
@@ -6597,13 +6597,13 @@
 	pixel_x = 7;
 	pixel_y = 32
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/borderfloor/corner2{
+/obj/floor_decal/borderfloor/corner2{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
@@ -6611,16 +6611,16 @@
 "ml" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/merchantstorage)
 "mo" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -6645,15 +6645,15 @@
 /turf/simulated/floor/wood/walnut,
 /area/liberia/bar)
 "mt" = (
-/obj/effect/shuttle_landmark/nav_liberia/west,
+/obj/shuttle_landmark/nav_liberia/west,
 /turf/space,
 /area/space)
 "mu" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner_techfloor_grid,
-/obj/effect/floor_decal/techfloor/corner,
+/obj/floor_decal/corner_techfloor_grid,
+/obj/floor_decal/techfloor/corner,
 /obj/structure/cable/blue{
 	d1 = 1;
 	d2 = 2;
@@ -6667,7 +6667,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/machinery/portable_atmospherics/powered/pump/filled,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringreactor)
 "mO" = (
@@ -6685,7 +6685,7 @@
 /obj/item/bodybag/rescue/loaded,
 /obj/item/auto_cpr,
 /obj/item/storage/box/freezer,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
@@ -6695,10 +6695,10 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
@@ -6729,14 +6729,14 @@
 /turf/simulated/floor/tiled,
 /area/liberia/traidingroom)
 "nD" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 5
 	},
 /obj/machinery/recharge_station,
-/obj/effect/floor_decal/borderfloor/corner2{
+/obj/floor_decal/borderfloor/corner2{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -6764,23 +6764,23 @@
 /turf/simulated/floor/wood/walnut,
 /area/liberia/library)
 "oo" = (
-/obj/effect/shuttle_landmark/nav_liberia/antag,
+/obj/shuttle_landmark/nav_liberia/antag,
 /turf/space,
 /area/space)
 "op" = (
 /obj/structure/railing/mapped,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/structure/table/rack/dark,
 /obj/item/stack/material/wood/bamboo/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "os" = (
 /obj/structure/table/woodentable/walnut,
-/obj/effect/floor_decal/spline/fancy/wood,
+/obj/floor_decal/spline/fancy/wood,
 /turf/simulated/floor/carpet/red,
 /area/liberia/traidingroom)
 "oD" = (
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /obj/structure/table/standard,
 /obj/item/folder,
 /turf/simulated/floor/tiled/techfloor,
@@ -6789,19 +6789,19 @@
 /turf/simulated/floor/tiled,
 /area/liberia/officeroom)
 "oH" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/borderfloor/corner2{
+/obj/floor_decal/borderfloor/corner2{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 10
 	},
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "oM" = (
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/machinery/power/solar{
 	id = "auxsolarsport";
 	name = "Aft Port Solar Array"
@@ -6822,20 +6822,20 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringstorage)
 "oS" = (
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/cryo)
 "pa" = (
 /turf/simulated/wall/prepainted,
 /area/liberia/guestroom1)
 "pf" = (
-/obj/effect/floor_decal/borderfloor/corner{
+/obj/floor_decal/borderfloor/corner{
 	dir = 8
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/green/three_quarters{
+/obj/floor_decal/corner/green/three_quarters{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -6845,7 +6845,7 @@
 	dir = 2;
 	id_tag = "merch-ship_windows"
 	},
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/liberia/bridge)
 "pB" = (
@@ -6866,7 +6866,7 @@
 /obj/structure/fireaxecabinet{
 	pixel_x = -32
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -6880,7 +6880,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -6905,8 +6905,8 @@
 /turf/simulated/floor/airless,
 /area/liberia/solar2)
 "pV" = (
-/obj/effect/floor_decal/techfloor,
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor,
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -6923,7 +6923,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringreactor)
 "pX" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 5
 	},
 /obj/machinery/cryopod{
@@ -6939,7 +6939,7 @@
 /obj/machinery/fabricator/micro/bartender{
 	pixel_x = 4
 	},
-/obj/effect/floor_decal/spline/fancy/wood,
+/obj/floor_decal/spline/fancy/wood,
 /turf/simulated/floor/carpet/red,
 /area/liberia/traidingroom)
 "qg" = (
@@ -6949,8 +6949,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/effect/floor_decal/techfloor,
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor,
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -6959,7 +6959,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/liberia/personellroom1)
 "qm" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/disposalpipe/junction,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
@@ -6973,28 +6973,28 @@
 /turf/simulated/wall/prepainted,
 /area/liberia/hallway)
 "qA" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/merchantstorage)
 "qD" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/merchantstorage)
 "qI" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
 /obj/structure/cable/blue{
@@ -7009,13 +7009,13 @@
 /obj/structure/railing/mapped{
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/item/stack/material/glass/fifty,
 /obj/item/stack/material/glass/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "rc" = (
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
@@ -7028,7 +7028,7 @@
 /obj/item/device/radio,
 /obj/item/device/flashlight,
 /obj/item/crowbar/prybar,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/liberia/engineeringlobby)
 "ro" = (
@@ -7041,7 +7041,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
@@ -7062,7 +7062,7 @@
 /turf/simulated/floor/tiled,
 /area/liberia/traidingroom)
 "rE" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 6
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -7075,17 +7075,17 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringreactor)
 "rT" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/liberia/hallway)
 "rZ" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
 /obj/structure/closet/cabinet,
@@ -7103,7 +7103,7 @@
 	dir = 1;
 	pixel_y = -28
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/disposalpipe/segment{
 	dir = 8;
 	icon_state = "pipe-c"
@@ -7125,8 +7125,8 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor,
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor,
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -7136,10 +7136,10 @@
 	id_tag = "merchdorm2";
 	name = "Room One"
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -7153,10 +7153,10 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/guestroom2)
 "sJ" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
 /obj/machinery/power/apc/liberia{
@@ -7182,7 +7182,7 @@
 	dir = 4;
 	id_tag = "liberia_solar_south_pump"
 	},
-/obj/effect/floor_decal/industrial/warning/full,
+/obj/floor_decal/industrial/warning/full,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	dir = 1;
 	frequency = 1380;
@@ -7214,10 +7214,10 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/borderfloor/corner{
+/obj/floor_decal/borderfloor/corner{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/green/three_quarters{
+/obj/floor_decal/corner/green/three_quarters{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -7234,7 +7234,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/spline/fancy/wood,
+/obj/floor_decal/spline/fancy/wood,
 /turf/simulated/floor/carpet/blue,
 /area/liberia/personellroom1)
 "sY" = (
@@ -7250,7 +7250,7 @@
 	pixel_y = -4
 	},
 /obj/structure/table/woodentable/walnut,
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 6
 	},
 /turf/simulated/floor/carpet/red,
@@ -7264,14 +7264,14 @@
 "to" = (
 /obj/structure/table/rack/dark,
 /obj/random/loot,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "tz" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -7286,7 +7286,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/liberia/engineeringstorage)
 "tI" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/liberia/cryo)
 "tK" = (
@@ -7299,27 +7299,27 @@
 	},
 /area/liberia/solar2)
 "tL" = (
-/obj/effect/wallframe_spawn/no_grille,
+/obj/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/liberia/bar)
 "tR" = (
 /obj/machinery/atmospherics/pipe/simple/visible/universal,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/borderfloor/corner2{
+/obj/floor_decal/borderfloor/corner2{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/atmos)
 "tU" = (
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -7329,7 +7329,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/liberia/engineeringreactor)
 "uh" = (
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/machinery/power/solar{
 	id = "auxsolarsport";
 	name = "Aft Port Solar Array"
@@ -7340,10 +7340,10 @@
 	},
 /area/liberia/solar1)
 "uo" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/borderfloor/corner{
+/obj/floor_decal/borderfloor/corner{
 	dir = 4
 	},
 /obj/machinery/light/small{
@@ -7356,22 +7356,22 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/yellow,
+/obj/floor_decal/corner/yellow,
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/engineeringlobby)
 "ur" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/liberia/guestroom1)
 "uX" = (
-/obj/effect/shuttle_landmark/nav_liberia/north,
+/obj/shuttle_landmark/nav_liberia/north,
 /turf/space,
 /area/space)
 "vd" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor,
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor,
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -7380,7 +7380,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 10;
 	icon_state = "corner_white"
 	},
@@ -7390,7 +7390,7 @@
 /turf/space,
 /area/liberia/solar1)
 "vw" = (
-/obj/effect/shuttle_landmark/nav_liberia/east,
+/obj/shuttle_landmark/nav_liberia/east,
 /turf/space,
 /area/space)
 "vB" = (
@@ -7433,7 +7433,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/atmos)
 "wt" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk,
 /turf/simulated/floor/tiled/steel_ridged,
@@ -7443,7 +7443,7 @@
 /turf/space,
 /area/liberia/solar1)
 "wK" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 10;
 	icon_state = "corner_white"
 	},
@@ -7451,22 +7451,22 @@
 /area/liberia/bridge)
 "wM" = (
 /obj/machinery/floodlight,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringreactor)
 "wW" = (
-/obj/effect/floor_decal/techfloor,
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor,
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringreactor)
 "xc" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/liberia/captain)
 "xn" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /obj/machinery/atmospherics/portables_connector{
@@ -7477,10 +7477,10 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/dockinghall)
 "xr" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
 /obj/structure/cable/blue{
@@ -7502,7 +7502,7 @@
 /obj/structure/railing/mapped{
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/item/stack/material/plastic/fifty,
 /obj/item/stack/material/plastic/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -7520,16 +7520,16 @@
 	},
 /area/liberia/solar2)
 "yh" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 9
 	},
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "yC" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 6
 	},
 /obj/structure/table/standard,
@@ -7539,8 +7539,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringengines)
 "yL" = (
-/obj/effect/floor_decal/borderfloor/corner,
-/obj/effect/floor_decal/corner/green/three_quarters{
+/obj/floor_decal/borderfloor/corner,
+/obj/floor_decal/corner/green/three_quarters{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -7550,7 +7550,7 @@
 /obj/structure/railing/mapped{
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/item/stack/material/aluminium/fifty,
 /obj/item/stack/material/steel/fifty,
 /obj/item/stack/material/steel/fifty,
@@ -7558,34 +7558,34 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "yS" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringstorage)
 "yU" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/merchantstorage)
 "zd" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner_techfloor_grid,
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid,
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor/corner,
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner,
+/obj/floor_decal/techfloor/corner{
 	dir = 4
 	},
 /obj/structure/cable/blue{
@@ -7596,13 +7596,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/merchantstorage)
 "zl" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/liberia/bridge)
 "zn" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/liberia/officeroom)
 "zq" = (
@@ -7618,7 +7618,7 @@
 	},
 /area/liberia/merchantstorage)
 "zQ" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -7628,10 +7628,10 @@
 /area/liberia/captain)
 "Af" = (
 /obj/structure/table/woodentable/walnut,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -7640,25 +7640,25 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor,
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor,
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/merchantstorage)
 "Aq" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/merchantstorage)
 "Au" = (
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor,
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor,
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -7670,10 +7670,10 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/liberia/hallway)
 "AT" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 9
 	},
 /turf/simulated/floor/tiled,
@@ -7700,13 +7700,13 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/liberia/toiletroom2)
 "BE" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 6
 	},
-/obj/effect/floor_decal/borderfloor/corner2{
+/obj/floor_decal/borderfloor/corner2{
 	dir = 10
 	},
 /obj/machinery/power/solar_control/autostart{
@@ -7727,7 +7727,7 @@
 "BW" = (
 /obj/structure/table/rack/dark,
 /obj/structure/railing/mapped,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/item/stack/material/plasteel/fifty,
 /obj/item/stack/material/plasteel/fifty,
 /obj/item/stack/material/plasteel/fifty,
@@ -7740,14 +7740,14 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue/full,
+/obj/floor_decal/corner/blue/full,
 /turf/simulated/floor/tiled/dark,
 /area/liberia/bridge)
 "DL" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 1;
 	d2 = 8;
@@ -7764,11 +7764,11 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/effect/floor_decal/borderfloor/corner,
+/obj/floor_decal/borderfloor/corner,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/green/three_quarters{
+/obj/floor_decal/corner/green/three_quarters{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -7777,7 +7777,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
@@ -7804,11 +7804,11 @@
 /obj/item/storage/box/masks,
 /obj/item/storage/box/syringes,
 /obj/item/storage/box/bodybags,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "Eq" = (
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
@@ -7836,7 +7836,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/liberia/toiletroom2)
 "ED" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
 /obj/structure/table/standard,
@@ -7865,7 +7865,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/liberia/toiletroom2)
 "EZ" = (
-/obj/effect/wallframe_spawn/no_grille,
+/obj/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/liberia/officeroom)
 "Fc" = (
@@ -7880,23 +7880,23 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/liberia/personellroom2)
 "FZ" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 5
 	},
-/obj/effect/floor_decal/borderfloor/corner2{
+/obj/floor_decal/borderfloor/corner2{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "Gd" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 5
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -7911,10 +7911,10 @@
 	name = "Maintenance";
 	req_access = newlist()
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -7932,14 +7932,14 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/green/full,
+/obj/floor_decal/corner/green/full,
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "GE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/power/apc/liberia{
 	dir = 4;
 	name = "east bump";
@@ -7952,10 +7952,10 @@
 /turf/simulated/floor/plating,
 /area/liberia/hallway)
 "GG" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10;
 	icon_state = "corner_white"
 	},
@@ -7967,7 +7967,7 @@
 "GV" = (
 /obj/structure/janitorialcart,
 /obj/item/mop,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/power/apc/liberia{
 	dir = 1;
 	name = "north bump";
@@ -7993,7 +7993,7 @@
 /obj/item/stack/material/glass/reinforced/fifty,
 /obj/item/stack/material/aluminium/fifty,
 /obj/item/stack/material/plasteel/fifty,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/light/small,
 /obj/machinery/power/apc/liberia{
 	name = "south bump";
@@ -8010,14 +8010,14 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringstorage)
 "Hm" = (
 /obj/structure/railing/mapped,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/structure/largecrate,
 /obj/random/loot,
 /obj/random/loot,
@@ -8043,13 +8043,13 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/atmos)
 "HA" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 9
 	},
-/obj/effect/floor_decal/borderfloor/corner2{
+/obj/floor_decal/borderfloor/corner2{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/yellow,
+/obj/floor_decal/corner/yellow,
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "HG" = (
@@ -8057,7 +8057,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringreactor)
 "HM" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 9
 	},
 /obj/structure/bed/padded,
@@ -8066,7 +8066,7 @@
 	dir = 8;
 	pixel_x = -24
 	},
-/obj/effect/submap_landmark/spawnpoint/liberia/security,
+/obj/submap_landmark/spawnpoint/liberia/security,
 /turf/simulated/floor/carpet/blue,
 /area/liberia/personellroom1)
 "HQ" = (
@@ -8075,15 +8075,15 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner_techfloor_grid,
-/obj/effect/floor_decal/techfloor/corner,
+/obj/floor_decal/corner_techfloor_grid,
+/obj/floor_decal/techfloor/corner,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringstorage)
 "HT" = (
-/obj/effect/floor_decal/corner/blue/three_quarters{
+/obj/floor_decal/corner/blue/three_quarters{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
@@ -8094,7 +8094,7 @@
 "Ig" = (
 /obj/machinery/light,
 /obj/machinery/portable_atmospherics/powered/scrubber,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringreactor)
 "Io" = (
@@ -8109,8 +8109,8 @@
 /turf/simulated/wall/prepainted,
 /area/liberia/dockinghall)
 "Iy" = (
-/obj/effect/paint/silver,
-/obj/effect/paint_stripe/yellow,
+/obj/paint/silver,
+/obj/paint_stripe/yellow,
 /obj/structure/cable/blue{
 	d1 = 1;
 	d2 = 8;
@@ -8122,7 +8122,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/liberia/engineeringstorage)
 "IH" = (
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /obj/machinery/alarm/merchant{
 	dir = 1;
 	pixel_y = -20
@@ -8135,20 +8135,20 @@
 /area/liberia/bar)
 "Ja" = (
 /obj/structure/bed/chair/wood/walnut,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 8
 	},
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = -24
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "Jf" = (
-/obj/effect/floor_decal/corner/blue/mono,
+/obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/bridge)
 "JE" = (
@@ -8171,8 +8171,8 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/atmos)
 "JI" = (
-/obj/effect/floor_decal/borderfloor/corner,
-/obj/effect/floor_decal/corner/green/three_quarters{
+/obj/floor_decal/borderfloor/corner,
+/obj/floor_decal/corner/green/three_quarters{
 	dir = 8
 	},
 /obj/structure/disposalpipe/segment{
@@ -8191,7 +8191,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
 /obj/structure/table/woodentable/walnut,
@@ -8208,11 +8208,11 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor,
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor,
+/obj/floor_decal/techfloor/corner{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -8228,7 +8228,7 @@
 /obj/item/stack/material/phoron/ten,
 /obj/item/stack/material/phoron/ten,
 /obj/item/stack/material/phoron/ten,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "Kv" = (
@@ -8252,14 +8252,14 @@
 /turf/simulated/floor/airless,
 /area/liberia/solar2)
 "Lj" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 10
 	},
 /obj/structure/reagent_dispensers/coolanttank,
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringengines)
 "Lk" = (
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/machinery/power/tracker,
 /obj/structure/cable/yellow{
 	d2 = 4;
@@ -8276,10 +8276,10 @@
 /turf/simulated/wall/prepainted,
 /area/liberia/toiletroom2)
 "LJ" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 1
 	},
 /obj/machinery/radio_beacon,
@@ -8292,7 +8292,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
@@ -8306,10 +8306,10 @@
 "Ml" = (
 /obj/structure/table/woodentable/walnut,
 /obj/item/material/ashtray/glass,
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -8318,7 +8318,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 6
 	},
 /obj/structure/undies_wardrobe,
@@ -8332,14 +8332,14 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/atmos)
 "Nk" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 1;
 	icon_state = "spline_fancy"
 	},
 /turf/simulated/floor/carpet/blue,
 /area/liberia/personellroom1)
 "Nq" = (
-/obj/effect/floor_decal/spline/fancy/wood/cee{
+/obj/floor_decal/spline/fancy/wood/cee{
 	dir = 4
 	},
 /turf/simulated/floor/carpet/red,
@@ -8362,10 +8362,10 @@
 /turf/simulated/wall/prepainted,
 /area/liberia/traidingroom)
 "Nw" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -8416,7 +8416,7 @@
 	dir = 8;
 	pixel_x = 25
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 6
 	},
 /obj/structure/closet/emcloset{
@@ -8426,7 +8426,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/cryo)
 "Py" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -8435,16 +8435,16 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringstorage)
 "PG" = (
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 10
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 8
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor/corner,
+/obj/floor_decal/techfloor/corner,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
@@ -8462,13 +8462,13 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/liberia/library)
 "PU" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/borderfloor/corner2{
+/obj/floor_decal/borderfloor/corner2{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/corner/green{
 	dir = 9
 	},
 /turf/simulated/floor/tiled,
@@ -8479,12 +8479,12 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/effect/floor_decal/industrial/warning/full,
+/obj/floor_decal/industrial/warning/full,
 /obj/structure/catwalk,
 /turf/simulated/floor/airless,
 /area/liberia/mule)
 "Qi" = (
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/dark,
@@ -8495,7 +8495,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -8506,7 +8506,7 @@
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/random/single/color/cable_coil,
 /obj/random/bomb_supply,
 /turf/simulated/floor/tiled/steel_ridged,
@@ -8518,11 +8518,11 @@
 	icon_state = "railing0-1"
 	},
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringstorage)
 "QA" = (
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /obj/machinery/power/apc/liberia{
 	name = "south bump";
 	pixel_y = -24
@@ -8531,7 +8531,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/dockinghall)
 "QE" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 2;
@@ -8540,8 +8540,8 @@
 	name = "Merchant Window Shutters";
 	opacity = 0
 	},
-/obj/effect/paint/silver,
-/obj/effect/paint_stripe/yellow,
+/obj/paint/silver,
+/obj/paint_stripe/yellow,
 /obj/structure/cable/blue{
 	d1 = 2;
 	d2 = 4;
@@ -8550,19 +8550,19 @@
 /turf/simulated/floor/plating,
 /area/liberia/mule)
 "QH" = (
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/merchantstorage)
 "QK" = (
 /obj/structure/table/woodentable/walnut,
-/obj/effect/floor_decal/borderfloor,
-/obj/effect/floor_decal/corner/green{
+/obj/floor_decal/borderfloor,
+/obj/floor_decal/corner/green{
 	dir = 5
 	},
 /turf/simulated/floor/tiled,
@@ -8582,8 +8582,8 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/borderfloor,
-/obj/effect/floor_decal/borderfloor/corner{
+/obj/floor_decal/borderfloor,
+/obj/floor_decal/borderfloor/corner{
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -8592,7 +8592,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/steel_grid,
@@ -8601,7 +8601,7 @@
 /obj/structure/table/rack/dark,
 /obj/random/maintenance/clean,
 /obj/random/maintenance/clean,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "RO" = (
@@ -8640,16 +8640,16 @@
 /obj/machinery/atmospherics/unary/tank/air{
 	dir = 8
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/atmos)
 "SU" = (
-/obj/effect/floor_decal/techfloor,
+/obj/floor_decal/techfloor,
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
@@ -8658,13 +8658,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/merchantstorage)
 "SY" = (
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 5
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 1
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
@@ -8712,10 +8712,10 @@
 /turf/simulated/floor/tiled,
 /area/liberia/personellroom1)
 "TB" = (
-/obj/effect/floor_decal/borderfloor/corner{
+/obj/floor_decal/borderfloor/corner{
 	dir = 1
 	},
-/obj/effect/floor_decal/borderfloor/corner{
+/obj/floor_decal/borderfloor/corner{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -8725,7 +8725,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10;
 	icon_state = "corner_white"
 	},
@@ -8735,7 +8735,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/structure/cable/blue{
@@ -8751,8 +8751,8 @@
 /turf/simulated/floor/plating,
 /area/liberia/hallway)
 "TT" = (
-/obj/effect/floor_decal/corner_techfloor_grid,
-/obj/effect/floor_decal/techfloor/corner,
+/obj/floor_decal/corner_techfloor_grid,
+/obj/floor_decal/techfloor/corner,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
@@ -8765,7 +8765,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringreactor)
 "Uc" = (
-/obj/effect/floor_decal/corner/blue,
+/obj/floor_decal/corner/blue,
 /turf/simulated/floor/tiled/dark,
 /area/liberia/bridge)
 "Ue" = (
@@ -8788,13 +8788,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/blue{
+/obj/floor_decal/corner/blue{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/dark,
 /area/liberia/bridge)
 "Ut" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 5
 	},
 /obj/machinery/light{
@@ -8803,7 +8803,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/merchantstorage)
 "UV" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -8814,19 +8814,19 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/engineeringstorage)
 "Vk" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -8841,10 +8841,10 @@
 	},
 /area/liberia/solar2)
 "VP" = (
-/obj/effect/floor_decal/borderfloor/corner{
+/obj/floor_decal/borderfloor/corner{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/green/three_quarters,
+/obj/floor_decal/corner/green/three_quarters,
 /turf/simulated/floor/tiled,
 /area/liberia/traidingroom)
 "VS" = (
@@ -8854,7 +8854,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/door/window/northright{
 	autoclose = 1;
 	autoset_access = 0;
@@ -8863,7 +8863,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/mule)
 "VX" = (
-/obj/effect/floor_decal/solarpanel,
+/obj/floor_decal/solarpanel,
 /obj/machinery/power/solar{
 	id = "auxsolarsport";
 	name = "Aft Port Solar Array"
@@ -8904,19 +8904,19 @@
 /turf/simulated/floor/wood/walnut,
 /area/liberia/library)
 "Wn" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/borderfloor/corner2{
+/obj/floor_decal/borderfloor/corner2{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 6
 	},
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "Wr" = (
-/obj/effect/wallframe_spawn/reinforced,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/liberia/hallway)
 "Wx" = (
@@ -8925,18 +8925,18 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/borderfloor,
+/obj/floor_decal/borderfloor,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 5;
 	icon_state = "corner_white"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/liberia/engineeringlobby)
 "WC" = (
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/structure/table/rack/dark,
 /obj/structure/railing/mapped,
 /obj/item/stack/material/wood/yew/twentyfive,
@@ -8949,7 +8949,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "WM" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
@@ -8969,19 +8969,19 @@
 /turf/simulated/floor/airless,
 /area/liberia/captain)
 "WW" = (
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 5
 	},
 /obj/structure/bed/padded,
 /obj/item/bedsheet/hos,
-/obj/effect/submap_landmark/spawnpoint/liberia/security,
+/obj/submap_landmark/spawnpoint/liberia/security,
 /turf/simulated/floor/carpet/blue,
 /area/liberia/personellroom1)
 "Xe" = (
-/obj/effect/floor_decal/borderfloor{
+/obj/floor_decal/borderfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/yellow{
+/obj/floor_decal/corner/yellow{
 	dir = 10;
 	icon_state = "corner_white"
 	},
@@ -8995,10 +8995,10 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/liberia/captain)
 "XE" = (
-/obj/effect/floor_decal/borderfloor/corner{
+/obj/floor_decal/borderfloor/corner{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/green/three_quarters,
+/obj/floor_decal/corner/green/three_quarters,
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
 "XH" = (
@@ -9017,7 +9017,7 @@
 	dir = 4;
 	pixel_x = -25
 	},
-/obj/effect/floor_decal/spline/fancy/wood{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 10
 	},
 /obj/structure/table/woodentable/walnut,
@@ -9025,7 +9025,7 @@
 /turf/simulated/floor/carpet/blue,
 /area/liberia/personellroom1)
 "XS" = (
-/obj/effect/catwalk_plated,
+/obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
@@ -9035,19 +9035,19 @@
 /obj/structure/railing/mapped{
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /obj/item/stack/material/glass/reinforced/fifty,
 /obj/item/stack/material/glass/reinforced/fifty,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "Yy" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner_techfloor_grid{
+/obj/floor_decal/corner_techfloor_grid{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor/corner{
+/obj/floor_decal/techfloor/corner{
 	dir = 4
 	},
 /obj/structure/cable/blue{
@@ -9061,7 +9061,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 5
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
@@ -9071,7 +9071,7 @@
 /obj/structure/table/rack/dark,
 /obj/random/loot,
 /obj/random/loot,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/merchantstorage)
 "Zp" = (
@@ -9089,7 +9089,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/blue/full,
+/obj/floor_decal/corner/blue/full,
 /turf/simulated/floor/tiled/dark,
 /area/liberia/bridge)
 "ZN" = (
@@ -9117,7 +9117,7 @@
 /turf/simulated/floor/airless,
 /area/liberia/solar2)
 "ZP" = (
-/obj/effect/floor_decal/techfloor{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
 /obj/machinery/cryopod{

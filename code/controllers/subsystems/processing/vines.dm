@@ -4,7 +4,7 @@ PROCESSING_SUBSYSTEM_DEF(vines)
 	priority = SS_PRIORITY_VINES
 	wait = 80
 
-	process_proc = /obj/effect/vine/Process
+	process_proc = /obj/vine/Process
 
 	var/list/vine_list
 

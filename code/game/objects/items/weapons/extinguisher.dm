@@ -161,7 +161,7 @@
 	for(var/a = 1 to spray_particles)
 		if(!src || !reagents.total_volume) return
 
-		var/obj/effect/effect/water/W = new /obj/effect/effect/water(get_turf(src))
+		var/obj/effect/water/W = new /obj/effect/water(get_turf(src))
 		W.create_reagents(per_particle)
 		reagents.trans_to_obj(W, per_particle)
 		W.set_color()

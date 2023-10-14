@@ -681,8 +681,8 @@ default behaviour is:
 	if(buckled)
 		if(buckled.can_buckle)
 			buckled.user_unbuckle_mob(src)
-		else if (istype(buckled, /obj/effect/vine))
-			var/obj/effect/vine/V = buckled
+		else if (istype(buckled, /obj/vine))
+			var/obj/vine/V = buckled
 			spawn() V.manual_unbuckle(src)
 		else
 			to_chat(usr, SPAN_WARNING("You can't seem to escape from \the [buckled]!"))

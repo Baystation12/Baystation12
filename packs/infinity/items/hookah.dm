@@ -332,6 +332,6 @@
 			environment.remove_by_flag(XGM_GAS_OXIDIZER, parent.gas_consumption)
 			environment.adjust_gas(GAS_CO2, 0.5*parent.gas_consumption, 0)
 			environment.adjust_gas(GAS_STEAM, 0.5*parent.gas_consumption, 0)
-			var/datum/effect/effect/system/steam_spread/steam = new /datum/effect/effect/system/steam_spread()
+			var/datum/effect/steam_spread/steam = new /datum/effect/steam_spread()
 			steam.set_up(3, usr.dir, usr.loc)
 			steam.start()

@@ -77,7 +77,7 @@
 
 	if (stacks >= max_stacks && istype(user.loc, /turf))
 
-		var/obj/effect/spider/cocoon/C = new(user.loc)
+		var/obj/spider/cocoon/C = new(user.loc)
 		user.forceMove(C)
 		C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")
 

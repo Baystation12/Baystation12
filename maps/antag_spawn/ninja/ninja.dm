@@ -18,11 +18,11 @@
 	arrival_message = "Attention, anomalous sensor reading detected entering vessel proximity."
 	departure_message = "Attention, anomalous sensor reading detected leaving vessel proximity."
 
-/obj/effect/shuttle_landmark/ninja/start
+/obj/shuttle_landmark/ninja/start
 	name = "Operations Bunker"
 	landmark_tag = "nav_ninja_start"
 
-/obj/effect/shuttle_landmark/ninja/internim
+/obj/shuttle_landmark/ninja/internim
 	name = "In transit"
 	landmark_tag = "nav_ninja_transition"
 

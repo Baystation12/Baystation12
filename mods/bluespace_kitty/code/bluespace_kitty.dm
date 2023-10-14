@@ -18,12 +18,12 @@
 
 	return ..()
 
-/obj/effect/temp_visual/pulse
+/obj/temp_visual/pulse
 	icon ='icons/effects/effects.dmi'
 	icon_state = "emppulse"
 	duration = 10
 
-/obj/effect/temp_visual/sparkles
+/obj/temp_visual/sparkles
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shieldsparkles"
 	duration = 8
@@ -55,8 +55,8 @@ var/global/cat_number = 0
 	. = ..()
 	cat_number += 1
 	playsound(loc, 'sound/magic/blink.ogg', 50)
-	new /obj/effect/temp_visual/pulse(loc)
-	new /obj/effect/temp_visual/sparkles(loc)
+	new /obj/temp_visual/pulse(loc)
+	new /obj/temp_visual/sparkles(loc)
 
 	addtimer(new Callback(src, .proc/back_to_bluespace), cat_life_duration)
 	addtimer(new Callback(src, .proc/say_runtime, runtime_file, runtime_line), 5 SECONDS)
@@ -108,8 +108,8 @@ var/global/cat_number = 0
 
 /mob/living/simple_animal/passive/cat/real_runtime/proc/back_to_bluespace()
 	playsound(loc, 'sound/magic/blink.ogg', 50)
-	new /obj/effect/temp_visual/pulse(loc)
-	new /obj/effect/temp_visual/sparkles(loc)
+	new /obj/temp_visual/pulse(loc)
+	new /obj/temp_visual/sparkles(loc)
 	qdel(src)
 
 /mob/living/simple_animal/passive/cat/real_runtime/proc/strike_back(mob/living/target_mob)

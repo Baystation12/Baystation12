@@ -57,7 +57,7 @@
 	name = "SNZ-210 Shuttle control console"
 	shuttle_tag = "SNZ-210 Personnel Carrier"
 
-/obj/effect/overmap/visitable/ship/landable/old_snz
+/obj/overmap/visitable/ship/landable/old_snz
 	name = "SNZ-210 Personnel Carrier"
 	desc = "SNZ-210 Personnel Carrier. Multipurpose shuttle, used for personnel delivery. Was obsolete even before the Gaia Conflict."
 	shuttle = "SNZ-210 Personnel Carrier"
@@ -66,7 +66,7 @@
 	vessel_mass = 2500
 	vessel_size = SHIP_SIZE_TINY
 
-/obj/effect/shuttle_landmark/old_snz/start
+/obj/shuttle_landmark/old_snz/start
 	name = "Transshipment point Airstripe"
 	landmark_tag = "nav_oldsnz_start"
 	base_area = /area/map_template/transshipment/airstrip

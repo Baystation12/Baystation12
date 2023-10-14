@@ -29,7 +29,7 @@
 
 /mob/living/simple_animal/hostile/skeleton/death()
 	..(null, "collapses into a pile of bones!")
-	new /obj/effect/decal/cleanable/remains (loc)
+	new /obj/decal/cleanable/remains (loc)
 	new /obj/item/stack/material/generic/bone (loc, 5)
 	playsound(src.loc, 'sound/effects/bonerattle.ogg', 50, 1)
 	qdel(src)
@@ -45,7 +45,7 @@
 		holder.custom_emote(1, "rattles its bones at [.]!")
 		playsound(holder.loc, 'sound/effects/bonerattle.ogg', 50, 1)
 
-/obj/effect/decal/cleanable/remains
+/obj/decal/cleanable/remains
 	name = "bones"
 	desc = "A haphazard pile of bones."
 	icon = 'icons/effects/blood.dmi'
