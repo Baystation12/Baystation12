@@ -323,6 +323,7 @@
 /obj/particle_emitter/heat
 	particle_type = "heat"
 	render_target = HEAT_EFFECT_TARGET
+	appearance_flags = PIXEL_SCALE | NO_CLIENT_COLOR
 
 
 /obj/particle_emitter/heat/Initialize()
