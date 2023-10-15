@@ -56,3 +56,21 @@
 	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
 
 	welcome_sound = null
+
+/datum/map_template/ruin/torch
+	name = "SEV Torch"
+	id = "main_torch"
+	description = "An abandoned construction project."
+	prefix = "maps/torch/"
+	suffixes = list(
+		"torch1_deck5.dmm",
+		"torch2_deck4.dmm",
+		"torch3_deck3.dmm",
+		"torch4_deck2.dmm",
+		"torch5_deck1.dmm",
+		"torch6_bridge.dmm"
+	)
+	width = 200
+	height = 200
+	tallness = 6
+	template_flags = TEMPLATE_FLAG_RUIN_STARTS_DISALLOWED
