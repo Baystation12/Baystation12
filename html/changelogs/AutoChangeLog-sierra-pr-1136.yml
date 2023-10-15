@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Fixed an issue where maintenance spiderlings became big spiders when disturbed.
