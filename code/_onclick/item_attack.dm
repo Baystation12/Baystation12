@@ -186,7 +186,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return FALSE
 
 	// Target checks
-	if (!Adjacent(target))
+	if (isturf(target.loc) && !Adjacent(target))
 		if (!silent)
 			FEEDBACK_FAILURE(src, "You must remain next to \the [target].")
 		return FALSE
