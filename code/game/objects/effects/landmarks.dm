@@ -244,7 +244,7 @@
 	delete_me = 1
 
 /obj/landmark/ruin
-	var/datum/map_template/ruin/ruin_template
+	var/singleton/map_template/ruin/ruin_template
 
 /obj/landmark/ruin/New(loc, my_ruin_template)
 	name = "ruin_[sequential_id(/obj/landmark/ruin)]"

@@ -6,7 +6,7 @@
 #include "voxship_machines.dm"
 #include "voxship_antagonism.dm"
 
-/datum/map_template/ruin/away_site/scavship
+/singleton/map_template/ruin/away_site/scavship
 	name = "Vox Scavenger Ship"
 	id = "awaysite_voxship2"
 	description = "Vox Scavenger Ship."

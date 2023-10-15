@@ -1,4 +1,4 @@
-/datum/map_template/ruin/exoplanet/oldpod
+/singleton/map_template/ruin/exoplanet/oldpod
 	name = "old pod"
 	id = "oldpod"
 	description = "A now unused, crashed escape pod."

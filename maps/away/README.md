@@ -10,11 +10,11 @@ It's a kind of map template which:
 
 ### Er, what's a map template?
 
-It's a datum you can define in the code (`/datum/map_template`) which points at one or more .dmm map files, and allows the game (or admins) to spawn those map files when and where they please, whether that's into an existing zlevel (like decorating exoplanets with ruins), or on a totally fresh one (like an away site!).
+It's a datum you can define in the code (`/singleton/map_template`) which points at one or more .dmm map files, and allows the game (or admins) to spawn those map files when and where they please, whether that's into an existing zlevel (like decorating exoplanets with ruins), or on a totally fresh one (like an away site!).
 
 ## How do I make away sites?
 
-tl;dr you make your .dmm files, then you write a new map template datum (`/datum/map_template/ruin/away_site/insert_your_away_site_name_here`), then you include whatever file you defined that datum in into `torch.dm` and `away_sites_testing.dm`, and you're all set.
+tl;dr you make your .dmm files, then you write a new map template datum (`/singleton/map_template/ruin/away_site/insert_your_away_site_name_here`), then you include whatever file you defined that datum in into `torch.dm` and `away_sites_testing.dm`, and you're all set.
 
 BUT HEED MY RUMINATIONS
 

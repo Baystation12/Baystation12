@@ -1,4 +1,4 @@
-/datum/map_template/ruin/antag_spawn/heist
+/singleton/map_template/ruin/antag_spawn/heist
 	name = "Heist Base"
 	suffixes = list("heist/heist_base.dmm")
 	shuttles_to_initialise = list(/datum/shuttle/autodock/multi/antag/skipjack)

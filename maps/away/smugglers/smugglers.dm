@@ -12,7 +12,7 @@
 		"nav_smugglers_antag"
 	)
 
-/datum/map_template/ruin/away_site/smugglers
+/singleton/map_template/ruin/away_site/smugglers
 	name = "Smugglers' Base"
 	id = "awaysite_smugglers"
 	description = "Yarr."

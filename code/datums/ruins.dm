@@ -1,4 +1,5 @@
-/datum/map_template/ruin
+/singleton/map_template/ruin
+	abstract_type = /singleton/map_template/ruin
 	//name = "A Chest of Doubloons"
 	name = null
 	var/description = "In the middle of a clearing in the rockface, there's a chest filled with gold coins with Spanish engravings. \
@@ -18,7 +19,7 @@
 	var/list/allow_ruins // Listed ruins are added to the set of available spawns.
 	var/list/ban_ruins   // Listed ruins are removed from the set of available spawns. Beats allowed.
 
-/datum/map_template/ruin/New()
+/singleton/map_template/ruin/New()
 	if (suffixes)
 		mappaths = list()
 		for (var/suffix in suffixes)

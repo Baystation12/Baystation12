@@ -1,4 +1,4 @@
-/datum/map_template/ruin/exoplanet/hydrobase
+/singleton/map_template/ruin/exoplanet/hydrobase
 	name = "hydroponics base"
 	id = "exoplanet_hydrobase"
 	description = "hydroponics base with random plants and a lot of enemies"

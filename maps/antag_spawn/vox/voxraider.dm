@@ -1,4 +1,4 @@
-/datum/map_template/ruin/antag_spawn/vox_raider
+/singleton/map_template/ruin/antag_spawn/vox_raider
 	name = "Vox Raider"
 	suffixes = list("vox/vox_raider.dmm")
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/vox_raider)

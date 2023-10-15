@@ -11,7 +11,7 @@
 		"nav_miningstation_exterior",
 	)
 
-/datum/map_template/ruin/away_site/miningstation
+/singleton/map_template/ruin/away_site/miningstation
 	name = "Mining Station"
 	id = "awaysite_miningstation"
 	description = "An orbital Mining Station bearing authentication codes from Grayson Mining Industries, sensors show inconsistant lifesigns aboard the station."

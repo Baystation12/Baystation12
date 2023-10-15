@@ -1,4 +1,4 @@
-/datum/map_template/ruin/exoplanet/fountain
+/singleton/map_template/ruin/exoplanet/fountain
 	name = "Fountain of Youth"
 	id = "planetsite_fountain"
 	description = "The fountain of youth itself."

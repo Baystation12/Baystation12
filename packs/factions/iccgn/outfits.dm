@@ -1,7 +1,6 @@
 /singleton/hierarchy/outfit/iccgn
 	hierarchy_type = /singleton/hierarchy/outfit/iccgn
 	flags = OUTFIT_RESET_EQUIPMENT | OUTFIT_ADJUSTMENT_ALL_SKIPS
-	l_ear = /obj/item/device/radio/headset/iccgn
 	back = /obj/item/storage/backpack/satchel/pocketbook/gray
 	l_hand = /obj/item/storage/backpack/dufflebag/iccgn_accessories
 

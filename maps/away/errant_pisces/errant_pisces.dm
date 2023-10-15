@@ -8,7 +8,7 @@
 	burn_delay = 15 SECONDS
 	fore_dir = SOUTH
 
-/datum/map_template/ruin/away_site/errant_pisces
+/singleton/map_template/ruin/away_site/errant_pisces
 	name = "Errant Pisces"
 	id = "awaysite_errant_pisces"
 	description = "Xynergy carp trawler"

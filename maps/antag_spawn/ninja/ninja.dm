@@ -1,4 +1,4 @@
-/datum/map_template/ruin/antag_spawn/ninja
+/singleton/map_template/ruin/antag_spawn/ninja
 	name = "Operative Base"
 	suffixes = list("ninja/ninja_base.dmm")
 	shuttles_to_initialise = list(/datum/shuttle/autodock/multi/antag/ninja)

@@ -1,4 +1,4 @@
-/datum/map_template/ruin/exoplanet/spider_nest
+/singleton/map_template/ruin/exoplanet/spider_nest
 	name = "spider nest"
 	id = "spider_nest"
 	description = "A small buidling with a spider infestation."

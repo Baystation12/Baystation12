@@ -1,6 +1,6 @@
 #include "icgnv_hound_shuttle.dm"
 
-/datum/map_template/ruin/icgnv_hound
+/singleton/map_template/ruin/icgnv_hound
 	name = "ICGNV Hound"
 	id = "icgnv_hound"
 	description = "A standard ALFA-pattern, armed ICCGN transport shuttle. The transponder reads on open channels as ICCG and is broadcasting the designation 'ICGNV Hound' in Zurich Accord Common."

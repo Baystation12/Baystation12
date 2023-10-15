@@ -17,7 +17,7 @@
 		"nav_slavers_base_antag"
 	)
 
-/datum/map_template/ruin/away_site/slavers
+/singleton/map_template/ruin/away_site/slavers
 	name = "Slavers' Base"
 	id = "awaysite_slavers"
 	description = "Asteroid with slavers base inside."

@@ -1,6 +1,6 @@
 #include "playablecolony2_radio.dm"
 
-/datum/map_template/ruin/exoplanet/playablecolony2
+/singleton/map_template/ruin/exoplanet/playablecolony2
 	name = "Landed Colony Ship"
 	id = "playablecolony2"
 	description = "a recently landed colony ship"
@@ -9,7 +9,7 @@
 	player_cost = 4
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS | TEMPLATE_FLAG_NO_RADS
 	ruin_tags = RUIN_HUMAN|RUIN_HABITAT
-	ban_ruins = list(/datum/map_template/ruin/exoplanet/playablecolony)
+	ban_ruins = list(/singleton/map_template/ruin/exoplanet/playablecolony)
 	apc_test_exempt_areas = list(
 		/area/map_template/colony2/external = NO_SCRUBBER|NO_VENT
 	)

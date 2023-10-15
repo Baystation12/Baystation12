@@ -1,6 +1,6 @@
 #include "../../../torch/items/weapons.dm"
 
-/datum/map_template/ruin/exoplanet/icarus
+/singleton/map_template/ruin/exoplanet/icarus
 	name = "SEV Icarus"
 	id = "icarus"
 	description = "The crash of the infamous SEV Icarus."

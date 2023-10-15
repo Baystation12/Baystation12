@@ -1,6 +1,6 @@
 #include "playablecolony_radio.dm"
 
-/datum/map_template/ruin/exoplanet/playablecolony
+/singleton/map_template/ruin/exoplanet/playablecolony
 	name = "established colony"
 	id = "playablecolony"
 	description = "a fully functional colony on the frontier of settled space"
@@ -9,7 +9,7 @@
 	player_cost = 4
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS | TEMPLATE_FLAG_NO_RADS
 	ruin_tags = RUIN_HUMAN|RUIN_HABITAT
-	ban_ruins = list(/datum/map_template/ruin/exoplanet/playablecolony2)
+	ban_ruins = list(/singleton/map_template/ruin/exoplanet/playablecolony2)
 	apc_test_exempt_areas = list(
 		/area/map_template/colony/mineralprocessing = NO_SCRUBBER|NO_VENT
 	)

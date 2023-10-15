@@ -1,4 +1,4 @@
-/datum/map_template/ruin/exoplanet/monolith
+/singleton/map_template/ruin/exoplanet/monolith
 	name = "Monolith Ring"
 	id = "planetsite_monoliths"
 	description = "Bunch of monoliths surrounding an artifact."

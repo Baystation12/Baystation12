@@ -68,7 +68,7 @@
 	)
 
 
-/datum/map_template/ruin/away_site/spy_station
+/singleton/map_template/ruin/away_site/spy_station
 	name = "Spy Station"
 	id = "awaysite_spy_station"
 	description = "SCGDF station that investigates sensor contacts in deep space."

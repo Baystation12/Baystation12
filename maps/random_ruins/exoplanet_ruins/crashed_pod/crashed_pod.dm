@@ -1,6 +1,6 @@
 GLOBAL_LIST_EMPTY(crashed_pod_areas)
 
-/datum/map_template/ruin/exoplanet/crashed_pod
+/singleton/map_template/ruin/exoplanet/crashed_pod
 	name = "crashed survival pod"
 	id = "crashed_pod"
 	description = "A crashed survival pod from a destroyed ship."

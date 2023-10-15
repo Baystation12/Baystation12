@@ -14,7 +14,7 @@
 		"nav_magshield_antag"
 	)
 
-/datum/map_template/ruin/away_site/magshield
+/singleton/map_template/ruin/away_site/magshield
 	name = "Magshield"
 	id = "awaysite_magshield"
 	description = "It's an orbital shield station."

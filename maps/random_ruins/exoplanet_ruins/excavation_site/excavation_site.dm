@@ -1,4 +1,4 @@
-/datum/map_template/ruin/exoplanet/excavation_site
+/singleton/map_template/ruin/exoplanet/excavation_site
 	name = "excavation site"
 	id = "excavation_site"
 	description = "Abandoned archaeological site."

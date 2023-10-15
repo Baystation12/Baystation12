@@ -24,7 +24,7 @@ GLOBAL_TYPED_NEW(ert, /datum/antagonist/ert)
 	faction = "emergency"
 	no_prior_faction = TRUE
 
-	base_to_load = /datum/map_template/ruin/antag_spawn/ert
+	base_to_load = /singleton/map_template/ruin/antag_spawn/ert
 	/// If set to `TRUE` will prevent shuttle announcements and identifiable overmap icons.
 	var/is_secret = FALSE
 	var/arrived = FALSE

@@ -2,7 +2,7 @@
 #include "scavver_gantry_jobs.dm"
 #include "scavver_gantry_radio.dm"
 
-/datum/map_template/ruin/away_site/scavver_gantry
+/singleton/map_template/ruin/away_site/scavver_gantry
 	name =  "\improper Salvage Gantry"
 	id = "awaysite_gantry"
 	description = "Salvage Gantry turned Ship"

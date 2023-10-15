@@ -1,4 +1,4 @@
-/datum/map_template/ruin/antag_spawn/ert
+/singleton/map_template/ruin/antag_spawn/ert
 	name = "SFV Trident"
 	suffixes = list("ert/ert_ship.dmm")
 	shuttles_to_initialise = list(/datum/shuttle/autodock/multi/antag/ert)
@@ -6,7 +6,7 @@
 		/area/map_template/ert/ship = NO_APC
 	)
 
-/datum/map_template/ruin/antag_spawn/ert/after_load(zlevel)
+/singleton/map_template/ruin/antag_spawn/ert/after_load(zlevel)
 	..(zlevel)
 	if(zlevel)
 		GLOB.using_map.admin_levels |= GetConnectedZlevels(zlevel)

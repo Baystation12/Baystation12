@@ -11,7 +11,7 @@
 	return jointext(., "<br>")
 
 /datum/map/torch/send_welcome()
-	var/obj/overmap/visitable/ship/torch = SSshuttle.ship_by_type(/obj/overmap/visitable/ship/torch)
+	var/obj/overmap/visitable/ship/torch = SSshuttle.ship_by_type(overmap_entity)
 
 	var/welcome_text = "<center><img src = sollogo.png /><br />[FONT_LARGE("<b>SEV Torch</b> Sensor Readings:")]<br>"
 	welcome_text += "Report generated on [stationdate2text()] at [stationtime2text()]</center><br /><br />"

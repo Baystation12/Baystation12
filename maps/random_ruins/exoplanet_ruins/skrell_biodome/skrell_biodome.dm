@@ -1,4 +1,4 @@
-/datum/map_template/ruin/exoplanet/skrell_biodome
+/singleton/map_template/ruin/exoplanet/skrell_biodome
 	name = "Skrellian Biodome"
 	id = "skrell_biodome"
 	description = "Strange round structure."

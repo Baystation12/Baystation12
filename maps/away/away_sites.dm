@@ -1,11 +1,10 @@
-// Hey! Listen! Update \config\away_site_blacklist.txt with your new ruins!
-
-/datum/map_template/ruin/away_site
+/singleton/map_template/ruin/away_site
+	abstract_type = /singleton/map_template/ruin/away_site
 	var/list/generate_mining_by_z
 	prefix = "maps/away/"
 	skip_main_unit_tests = "Is an away site."
 
-/datum/map_template/ruin/away_site/after_load(z)
+/singleton/map_template/ruin/away_site/after_load(z)
 	if(islist(generate_mining_by_z))
 		for(var/i in generate_mining_by_z)
 			var/current_z = z + i - 1

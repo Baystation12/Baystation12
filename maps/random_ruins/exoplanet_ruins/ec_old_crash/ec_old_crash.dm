@@ -1,6 +1,6 @@
 #include "../../../../packs/factions/scgec/_pack.dm"
 
-/datum/map_template/ruin/exoplanet/ec_old_crash
+/singleton/map_template/ruin/exoplanet/ec_old_crash
 	name = "Expeditionary Ship"
 	id = "ec_old_wreck"
 	description = "An abandoned ancient STL exploration ship."

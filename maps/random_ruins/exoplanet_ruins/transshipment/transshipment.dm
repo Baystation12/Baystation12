@@ -1,4 +1,4 @@
-/datum/map_template/ruin/exoplanet/transshipment
+/singleton/map_template/ruin/exoplanet/transshipment
 	name = "Raided Transshipment point"
 	id = "transshipment"
 	description = "An abandoned warehouse and damaged CCG-produced shuttle."

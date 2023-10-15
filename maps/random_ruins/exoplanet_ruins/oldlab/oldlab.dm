@@ -1,5 +1,5 @@
 
-/datum/map_template/ruin/exoplanet/oldlab
+/singleton/map_template/ruin/exoplanet/oldlab
 	name = "Old Lab"
 	id = "exoplanet_oldlab"
 	description = "an abandoned lab"
@@ -7,7 +7,7 @@
 	spawn_cost = 1
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
 	ruin_tags = RUIN_HUMAN
-	ban_ruins = list(/datum/map_template/ruin/exoplanet/oldlab2)
+	ban_ruins = list(/singleton/map_template/ruin/exoplanet/oldlab2)
 
 	// Areas //
 

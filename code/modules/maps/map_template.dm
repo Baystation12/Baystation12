@@ -1,4 +1,5 @@
-/datum/map_template
+/singleton/map_template
+	abstract_type = /singleton/map_template
 	var/name = "Default Template Name"
 	var/id = null // All maps that should be loadable during runtime needs an id
 	var/width = 0
@@ -15,7 +16,7 @@
 	/// Null, or a string reason for this type to be skipped in unit testing.
 	var/skip_main_unit_tests
 
-/datum/map_template/New(list/paths = null, rename = null)
+/singleton/map_template/New(list/paths = null, rename = null)
 	if(paths && !islist(paths))
 		crash_with("Non-list paths passed into map template constructor.")
 	if(paths)
@@ -27,7 +28,7 @@
 	if(!name && id)
 		name = id
 
-/datum/map_template/proc/preload_size()
+/singleton/map_template/proc/preload_size()
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
 	var/z_offset = 1 // needed to calculate z-bounds correctly
 	for (var/mappath in mappaths)
@@ -42,7 +43,7 @@
 	tallness = bounds[MAP_MAXZ] - bounds[MAP_MINZ] + 1
 	return TRUE
 
-/datum/map_template/proc/init_atoms(list/atoms)
+/singleton/map_template/proc/init_atoms(list/atoms)
 	if (SSatoms.atom_init_stage == INITIALIZATION_INSSATOMS)
 		return // let proper initialisation handle it later
 
@@ -90,17 +91,17 @@
 			var/turf/simulated/sim = T
 			sim.update_air_properties()
 
-/datum/map_template/proc/pre_init_shuttles()
+/singleton/map_template/proc/pre_init_shuttles()
 	. = SSshuttle.block_queue
 	SSshuttle.block_queue = TRUE
 
-/datum/map_template/proc/init_shuttles(pre_init_state)
+/singleton/map_template/proc/init_shuttles(pre_init_state)
 	for (var/shuttle_type in shuttles_to_initialise)
 		LAZYADD(SSshuttle.shuttles_to_initialize, shuttle_type) // queue up for init.
 	SSshuttle.block_queue = pre_init_state
 	SSshuttle.clear_init_queue() // We will flush the queue unless there were other blockers, in which case they will do it.
 
-/datum/map_template/proc/load_new_z(no_changeturf = TRUE)
+/singleton/map_template/proc/load_new_z(no_changeturf = TRUE)
 
 	var/x = round((world.maxx - width)/2)
 	var/y = round((world.maxy - height)/2)
@@ -141,7 +142,7 @@
 
 	return locate(world.maxx/2, world.maxy/2, world.maxz)
 
-/datum/map_template/proc/load(turf/T, centered=FALSE)
+/singleton/map_template/proc/load(turf/T, centered=FALSE)
 	if(centered)
 		T = locate(T.x - round(width/2) , T.y - round(height/2) , T.z)
 	if(!T)
@@ -176,17 +177,17 @@
 
 	return TRUE
 
-/datum/map_template/proc/after_load(z)
+/singleton/map_template/proc/after_load(z)
 	for(var/obj/landmark/map_load_mark/mark in subtemplates_to_spawn)
 		subtemplates_to_spawn -= mark
 		if(LAZYLEN(mark.templates))
 			var/template = pick(mark.templates)
-			var/datum/map_template/M = new template()
+			var/singleton/map_template/M = new template()
 			M.load(get_turf(mark), TRUE)
 			qdel(mark)
 	LAZYCLEARLIST(subtemplates_to_spawn)
 
-/datum/map_template/proc/extend_bounds_if_needed(list/existing_bounds, list/new_bounds)
+/singleton/map_template/proc/extend_bounds_if_needed(list/existing_bounds, list/new_bounds)
 	var/list/bounds_to_combine = existing_bounds.Copy()
 	for (var/min_bound in list(MAP_MINX, MAP_MINY, MAP_MINZ))
 		bounds_to_combine[min_bound] = min(existing_bounds[min_bound], new_bounds[min_bound])
@@ -195,7 +196,7 @@
 	return bounds_to_combine
 
 
-/datum/map_template/proc/get_affected_turfs(turf/T, centered = FALSE)
+/singleton/map_template/proc/get_affected_turfs(turf/T, centered = FALSE)
 	var/turf/placement = T
 	if(centered)
 		var/turf/corner = locate(placement.x - round(width/2), placement.y - round(height/2), placement.z)
@@ -206,5 +207,5 @@
 //for your ever biggening badminnery kevinz000
 //? - Cyberboss
 /proc/load_new_z_level(file, name)
-	var/datum/map_template/template = new(file, name)
+	var/singleton/map_template/template = new(file, name)
 	template.load_new_z()
