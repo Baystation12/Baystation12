@@ -31,6 +31,10 @@
 	var/temperature_warning_threshhold = 170
 	var/temperature_danger_threshhold = T0C
 
+	var/fast_stasis_mult = 0.8
+	var/slow_stasis_mult = 1.25
+	var/current_stasis_mult = 1
+
 /obj/machinery/atmospherics/unary/cryo_cell/Initialize()
 	. = ..()
 	icon = 'icons/obj/machines/medical/cryogenics_split.dmi'
@@ -155,6 +159,10 @@
 		data["beakerLabel"] = beaker.name
 		data["beakerVolume"] = beaker.reagents.total_volume
 
+	data["fast_stasis_mult"] = fast_stasis_mult
+	data["slow_stasis_mult"] = slow_stasis_mult
+	data["current_stasis_mult"] = current_stasis_mult
+
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -194,6 +202,21 @@
 		if(!occupant || isslime(user) || ispAI(user))
 			return TOPIC_HANDLED // don't update UIs attached to this object
 		go_out()
+		return TOPIC_REFRESH
+
+	if(href_list["goFast"])
+		current_stasis_mult = fast_stasis_mult
+		update_icon()
+		return TOPIC_REFRESH
+
+	if(href_list["goRegular"])
+		current_stasis_mult = 1
+		update_icon()
+		return TOPIC_REFRESH
+
+	if(href_list["goSlow"])
+		current_stasis_mult = slow_stasis_mult
+		update_icon()
 		return TOPIC_REFRESH
 
 /obj/machinery/atmospherics/unary/cryo_cell/state_transition(singleton/machine_construction/default/new_state)
@@ -407,6 +430,12 @@
 		return loc.return_air()
 	else
 		return null
+
+/obj/machinery/atmospherics/unary/cryo_cell/RefreshParts()
+	..()
+	var/stasis_coeff = total_component_rating_of_type(/obj/item/stock_parts/manipulator)
+	fast_stasis_mult = max(1 - (stasis_coeff * 0.06), 0.66)
+	slow_stasis_mult = min(1 + (stasis_coeff * 0.08), 1.5)
 
 /datum/data/function/proc/reset()
 	return
