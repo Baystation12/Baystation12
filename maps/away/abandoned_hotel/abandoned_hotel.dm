@@ -10,7 +10,7 @@
 		"nav_cinnamon_hotel_3",
 	)
 
-/datum/map_template/ruin/away_site/abandoned_hotel
+/singleton/map_template/ruin/away_site/abandoned_hotel
 	name = "Cinnamon Resort"
 	id = "awaysite_abandoned_hotel"
 	description = "An abandoned hotel."

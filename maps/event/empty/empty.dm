@@ -14,7 +14,7 @@
 	)
 
 
-/datum/map_template/ruin/empty
+/singleton/map_template/ruin/empty
 	name = "Empty"
 	id = "empty_sector"
 	description = "An empty sector devoid of anthything interesting."

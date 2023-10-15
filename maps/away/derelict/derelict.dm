@@ -16,7 +16,7 @@
 		"nav_derelict_7"
 	)
 
-/datum/map_template/ruin/away_site/derelict
+/singleton/map_template/ruin/away_site/derelict
 	name = "Derelict Station"
 	id = "awaysite_derelict"
 	description = "An abandoned construction project."

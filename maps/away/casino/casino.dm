@@ -24,7 +24,7 @@
 	name = "IPV [pick("Fortuna","Gold Rush","Ebisu","Lucky Paw","Four Leaves")], \a [name]"
 	..()
 
-/datum/map_template/ruin/away_site/casino
+/singleton/map_template/ruin/away_site/casino
 	name = "Casino"
 	id = "awaysite_casino"
 	description = "A casino ship!"

@@ -1,6 +1,6 @@
 #include "sfv_arbiter_shuttle.dm"
 
-/datum/map_template/ruin/sfv_arbiter
+/singleton/map_template/ruin/sfv_arbiter
 	name = "SFV Arbiter"
 	id = "arbiter"
 	description = "A fairly standard armed transport shuttle belonging to the Sol Fleet. It's transponder reads 'SFV Arbiter'."

@@ -16,7 +16,7 @@
 	name = "[generate_planet_name()], \a [name]"
 	..()
 
-/datum/map_template/ruin/away_site/blueriver
+/singleton/map_template/ruin/away_site/blueriver
 	name = "Bluespace River"
 	id = "awaysite_blue"
 	spawn_cost = 2

@@ -1,4 +1,4 @@
-/datum/map_template/ruin/exoplanet/droppod
+/singleton/map_template/ruin/exoplanet/droppod
 	name = "droppod"
 	id = "droppod"
 	description = "A damaged capsule with some strange contents."
@@ -21,19 +21,19 @@
 
 /obj/landmark/map_load_mark/droppod
 	name = "random droppod contents"
-	templates = list(/datum/map_template/droppod_contents, /datum/map_template/droppod_contents/type2, /datum/map_template/droppod_contents/type3)
+	templates = list(/singleton/map_template/droppod_contents, /singleton/map_template/droppod_contents/type2, /singleton/map_template/droppod_contents/type3)
 
-/datum/map_template/droppod_contents
+/singleton/map_template/droppod_contents
 	name = "random droppod contents #1 (shipping)"
 	id = "droppod_1"
 	mappaths = list("maps/random_ruins/exoplanet_ruins/droppod/contents_1.dmm")
 
-/datum/map_template/droppod_contents/type2
+/singleton/map_template/droppod_contents/type2
 	name = "random droppod contents #2 (exosuit)"
 	id = "droppod_2"
 	mappaths = list("maps/random_ruins/exoplanet_ruins/droppod/contents_2.dmm")
 
-/datum/map_template/droppod_contents/type3
+/singleton/map_template/droppod_contents/type3
 	name = "random droppod contents #2 (robots)"
 	id = "droppod_3"
 	mappaths = list("maps/random_ruins/exoplanet_ruins/droppod/contents_3.dmm")

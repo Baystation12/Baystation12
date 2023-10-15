@@ -28,7 +28,7 @@
 	res.SetTransform(scale = 0.5)
 	return res
 
-/datum/map_template/ruin/away_site/mining_corporate
+/singleton/map_template/ruin/away_site/mining_corporate
 	name = "Mining - Corporate"
 	id = "awaysite_mining_corporate"
 	description = "A medium-sized asteroid full of minerals. Old mining facility detected at one of sides, owner - NanoTrasen."

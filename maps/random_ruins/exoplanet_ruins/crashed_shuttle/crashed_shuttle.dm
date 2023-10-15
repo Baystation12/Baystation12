@@ -1,4 +1,4 @@
-/datum/map_template/ruin/exoplanet/crashed_shuttle
+/singleton/map_template/ruin/exoplanet/crashed_shuttle
 	name = "Crushed shuttle"
 	id = "crashed_shuttle"
 	description = "Crushed corporate shuttle."

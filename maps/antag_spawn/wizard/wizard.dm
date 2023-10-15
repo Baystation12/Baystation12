@@ -1,4 +1,4 @@
-/datum/map_template/ruin/antag_spawn/wizard
+/singleton/map_template/ruin/antag_spawn/wizard
 	name = "Wizard Base"
 	suffixes = list("wizard/wizard_base.dmm")
 
