@@ -1,4 +1,4 @@
-/datum/map_template/ruin/exoplanet/trash_heap
+/singleton/map_template/ruin/exoplanet/trash_heap
 	name = "trash heap"
 	id = "trash_heap"
 	description = "A pile of trash and a few goodies."

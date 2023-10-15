@@ -17,7 +17,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 
 	id_type = /obj/item/card/id/syndicate
 
-	base_to_load = /datum/map_template/ruin/antag_spawn/vox_raider
+	base_to_load = /singleton/map_template/ruin/antag_spawn/vox_raider
 	var/pending_item_spawn = TRUE
 	faction = "vox raider"
 	no_prior_faction = TRUE

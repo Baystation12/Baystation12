@@ -202,7 +202,7 @@
 
 */
 /obj/procedural/jp_DungeonGenerator/proc/initializeSubmaps()
-	var/datum/map_template/init_template = new /datum/map_template/deepmaint_template/room
+	var/singleton/map_template/init_template = new /singleton/map_template/deepmaint_template/room
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
 	bounds[MAP_MINX] = 1
 	bounds[MAP_MINY] = world.maxy
@@ -1062,7 +1062,7 @@ want to create new jp_dungeonrooms. Consult the helpfile for more information
 	var/obj/procedural/jp_DungeonGenerator/gen
 
 	///The submap for this room
-	var/datum/map_template/my_map = null
+	var/singleton/map_template/my_map = null
 	///The list of turfs in this room. That should include internal walls.
 	var/list/turfs = list()
 	///The list of walls bordering this room. Anything in this list could be knocked down in order to make a path into the room

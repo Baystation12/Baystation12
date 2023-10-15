@@ -5,6 +5,8 @@
 	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
 	config_path = "config/torch_config.txt"
 
+	overmap_entity = /obj/overmap/visitable/ship/torch
+
 	admin_levels  = list(7)
 	escape_levels = list(8)
 	empty_levels  = list(9)
@@ -57,7 +59,7 @@
 
 	welcome_sound = null
 
-/datum/map_template/ruin/torch
+/singleton/map_template/ruin/torch
 	name = "SEV Torch"
 	id = "main_torch"
 	description = "An abandoned construction project."

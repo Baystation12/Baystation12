@@ -30,7 +30,7 @@
 	name = "[name], \a [initial(name)]"
 	..()
 
-/datum/map_template/ruin/away_site/bearcat_wreck
+/singleton/map_template/ruin/away_site/bearcat_wreck
 	name = "Bearcat Wreck"
 	id = "awaysite_bearcat_wreck"
 	description = "A wrecked light freighter."

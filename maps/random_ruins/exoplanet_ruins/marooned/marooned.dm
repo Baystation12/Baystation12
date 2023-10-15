@@ -1,4 +1,4 @@
-/datum/map_template/ruin/exoplanet/marooned
+/singleton/map_template/ruin/exoplanet/marooned
 	name = "Marooned"
 	id = "awaysite_marooned"
 	description = "crashed dropship with marooned Magnitka officer"

@@ -2,11 +2,12 @@
 	name = "Deep Dark Marvelous"
 	height = 1
 
-/datum/map_template/ruin/deepmaint
+/singleton/map_template/ruin/deepmaint
 	name = "Deepmaint"
 	id = "deepmaint"
 	description = "Somewhere inbetween. How did we get here? How do we leave?"
-	suffixes = list("packs/deepmaint/deepmaint-1.dmm")
+	prefix = "packs/deepmaint/"
+	suffixes = list("deepmaint-1.dmm")
 
 /area/map_template/deepmaint
 	name = "\improper Deep Maintenance"

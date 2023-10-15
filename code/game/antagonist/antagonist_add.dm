@@ -4,7 +4,7 @@
 		return
 
 	if(base_to_load)
-		var/datum/map_template/base = new base_to_load()
+		var/singleton/map_template/base = new base_to_load()
 		report_progress("Loading map template '[base]' for [role_text]...")
 		base_to_load = null
 		base.load_new_z()

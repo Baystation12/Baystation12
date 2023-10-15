@@ -10,7 +10,7 @@
 		"nav_mininghome_4"
 	)
 
-/datum/map_template/ruin/away_site/mininghome
+/singleton/map_template/ruin/away_site/mininghome
 	name = "mininghome"
 	id = "awaysite_mininghome"
 	description = "A chill asteroid mining station."
