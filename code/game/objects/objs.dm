@@ -243,8 +243,36 @@
 
 
 /obj/attack_hand(mob/living/user)
-	if(Adjacent(user))
+	if (Adjacent(user))
 		add_fingerprint(user)
+
+	if (ishuman(user) && !isitem(src) && user.a_intent == I_HURT && get_max_health())
+		var/mob/living/carbon/human/assailant = user
+		var/datum/unarmed_attack/attack = assailant.get_unarmed_attack(src)
+		if (!attack)
+			return ..()
+		var/damage = attack.damage + rand(1,5)
+		var/attack_verb = "[pick(attack.attack_verb)]"
+
+		if (!can_damage_health(damage, attack.get_damage_type()))
+			playsound(loc, attack.attack_sound, 25, TRUE, -1)
+			user.visible_message(
+				SPAN_WARNING("\The [user] hits \the [src], but doesn't even leave a dent!"),
+				SPAN_WARNING("You hit \the [src], but cause no visible damage and hurt yourself!")
+			)
+			user.apply_damage(3, DAMAGE_BRUTE, user.hand ? BP_L_HAND : BP_R_HAND)
+			return TRUE
+
+		playsound(loc, attack.attack_sound, 25, TRUE, -1)
+		assailant.visible_message(
+				SPAN_WARNING("\The [assailant] [attack_verb] \the [src]!"),
+				SPAN_WARNING("You [attack_verb] \the [src]!")
+				)
+		assailant.do_attack_animation(src)
+		assailant.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		damage_health(damage, attack.get_damage_type(), attack.damage_flags())
+		return
+
 	..()
 
 /obj/is_fluid_pushable(amt)
