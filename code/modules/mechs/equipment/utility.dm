@@ -336,11 +336,12 @@
 
 /obj/ebeam/warp
 	plane = WARP_EFFECT_PLANE
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | TILE_BOUND | NO_CLIENT_COLOR
 	z_flags = ZMM_IGNORE
 
 /obj/effect/warp/small
 	plane = WARP_EFFECT_PLANE
-	appearance_flags = PIXEL_SCALE
+	appearance_flags = PIXEL_SCALE | NO_CLIENT_COLOR
 	icon = 'icons/effects/96x96.dmi'
 	icon_state = "singularity_s3"
 	pixel_x = -32

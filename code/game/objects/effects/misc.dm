@@ -126,13 +126,14 @@
 /obj/heat
 	icon = 'icons/effects/fire.dmi'
 	icon_state = "3"
+	appearance_flags = PIXEL_SCALE | NO_CLIENT_COLOR
 	render_target = HEAT_EFFECT_TARGET
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 /// Example of a warp filter
 /obj/effect/warp
 	plane = WARP_EFFECT_PLANE
-	appearance_flags = PIXEL_SCALE
+	appearance_flags = PIXEL_SCALE | NO_CLIENT_COLOR
 	icon = 'icons/effects/352x352.dmi'
 	icon_state = "singularity_s11"
 	pixel_x = -176
