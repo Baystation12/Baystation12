@@ -30,6 +30,8 @@ var/global/datum/controller/master/Master = new
 	// Vars for keeping track of tick drift.
 	var/init_timeofday
 	var/init_time
+	var/drift_timeofday
+	var/drift_time
 	var/tickdrift = 0
 
 	var/sleep_delta = 1
@@ -202,6 +204,8 @@ var/global/datum/controller/master/Master = new
 	if (!current_runlevel)
 		sound_to(world, sound('sound/ui/lobby-notify.ogg', volume = 40))
 		callHook("game_ready")
+		drift_timeofday = Uptime()
+		drift_time = world.time
 		SetRunLevel(RUNLEVEL_LOBBY)
 
 	// Sort subsystems by display setting for easy access.
@@ -291,6 +295,8 @@ var/global/datum/controller/master/Master = new
 
 	init_timeofday = Uptime()
 	init_time = world.time
+	drift_timeofday = init_timeofday
+	drift_time = init_time
 
 	iteration = 1
 	var/error_level = 0
@@ -299,7 +305,7 @@ var/global/datum/controller/master/Master = new
 	//the actual loop.
 
 	while (1)
-		tickdrift = max(0, MC_AVERAGE_FAST(tickdrift, (((Uptime() - init_timeofday) - (world.time - init_time)) / world.tick_lag)))
+		tickdrift = max(0, MC_AVERAGE_FAST(tickdrift, (((Uptime() - drift_timeofday) - (world.time - drift_time)) / world.tick_lag)))
 		var/starting_tick_usage = world.tick_usage
 		if (processing <= 0)
 			current_ticklimit = tick_limit_default
