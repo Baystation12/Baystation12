@@ -108,6 +108,9 @@
 						connected_monitor.update_victim(H)
 					break
 	icon_state = (victim && victim.pulse()) ? "table2-active" : "table2-idle"
+	ClearOverlays()
+	if(victim && !suppressing)
+		AddOverlays("table2-warning")
 	if(victim)
 		if(suppressing && victim.sleeping < 3)
 			victim.Sleeping(3 - victim.sleeping)
