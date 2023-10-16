@@ -7,6 +7,9 @@
 	var/driving = 0
 	var/mob/living/pulling = null
 	var/bloodiness
+	var/next_selfmove = 0
+	var/selfmove_penalty_base = 3
+	var/selfmove_penalty_coeff = 12
 
 
 /obj/structure/bed/chair/wheelchair/Initialize()
@@ -59,6 +62,12 @@
 	if(pulling && buckled_mob && (buckled_mob == user))
 		to_chat(user, SPAN_WARNING("You cannot drive while being pushed."))
 		return
+
+	if (!pulling)
+		if (world.time < next_selfmove) // Slow the occupant down if they're driving; they're in a wheelchair after all
+			return
+		var/penalty_multiplier = (SKILL_MAX - buckled_mob.get_skill_value(SKILL_HAULING)) / SKILL_MAX // Penalty depends on athleticism
+		next_selfmove = world.time + selfmove_penalty_base + selfmove_penalty_coeff * penalty_multiplier
 
 	// Let's roll
 	driving = 1
