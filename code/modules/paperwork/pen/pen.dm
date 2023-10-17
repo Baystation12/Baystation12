@@ -55,7 +55,7 @@
 			head.write_on(user, color_description)
 			return TRUE
 
-	if (istype(A, /obj/item/organ/external/head) && user.a_intent != I_HELP) //Not on help intent to not break ghetto surgery.
+	if (istype(A, /obj/item/organ/external/head))
 		var/obj/item/organ/external/head/head = A
 		head.write_on(user, color_description)
 		return TRUE

@@ -38,9 +38,8 @@
 		UpdateReagents()
 
 
-/obj/item/storage/fancy/smokable/use_before(mob/living/carbon/target, mob/living/carbon/user)
-	. = FALSE
-	if (user != target || !istype(user) || user.a_intent != I_HELP)
+/obj/item/storage/fancy/smokable/use_after(mob/living/carbon/target, mob/living/carbon/user)
+	if (user != target || !istype(user))
 		return FALSE
 
 	if (!opened)

@@ -29,9 +29,9 @@
 		AddOverlays(overlay_image(icon, "[hardware_icon]", flags=RESET_COLOR))
 	. = ..()
 
-/obj/item/wirecutters/use_before(mob/living/carbon/C as mob, mob/user as mob)
+/obj/item/wirecutters/use_after(mob/living/carbon/C as mob, mob/user as mob)
 	. = FALSE
-	if (istype(C) && user.a_intent == I_HELP && (C.handcuffed) && (istype(C.handcuffed, /obj/item/handcuffs/cable)))
+	if (istype(C) && (C.handcuffed) && (istype(C.handcuffed, /obj/item/handcuffs/cable)))
 		usr.visible_message("\The [usr] cuts \the [C]'s restraints with \the [src]!",\
 		"You cut \the [C]'s restraints with \the [src]!",\
 		"You hear cable being cut.")

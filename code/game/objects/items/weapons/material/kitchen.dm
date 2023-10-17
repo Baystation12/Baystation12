@@ -26,9 +26,8 @@
 	create_reagents(5)
 	return
 
-/obj/item/material/kitchen/utensil/use_before(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	. = FALSE
-	if (!istype(M) || user.a_intent != I_HELP)
+/obj/item/material/kitchen/utensil/use_after(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	if (!istype(M))
 		return FALSE
 
 	if (reagents.total_volume > 0)

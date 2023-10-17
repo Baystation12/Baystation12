@@ -39,14 +39,15 @@
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 		return TRUE
 
-/obj/item/book/tome/afterattack(atom/A, mob/user, proximity)
-	if(!proximity || !iscultist(user))
-		return
+/obj/item/book/tome/use_after(atom/A, mob/user)
+	if(!iscultist(user))
+		return FALSE
 	if(A.reagents && A.reagents.has_reagent(/datum/reagent/water/holywater))
 		to_chat(user, SPAN_NOTICE("You unbless \the [A]."))
 		var/holy2water = A.reagents.get_reagent_amount(/datum/reagent/water/holywater)
 		A.reagents.del_reagent(/datum/reagent/water/holywater)
 		A.reagents.add_reagent(/datum/reagent/water, holy2water)
+		return TRUE
 
 /mob/proc/make_rune(rune, cost = 5, tome_required = 0)
 	var/has_tome = !!IsHolding(/obj/item/book/tome)

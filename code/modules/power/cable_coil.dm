@@ -87,16 +87,16 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 			SetName(initial(name))
 
 
-/obj/item/stack/cable_coil/use_before(mob/living/carbon/human/target, mob/living/user)
-	. = FALSE
-	if (user.a_intent != I_HELP || !istype(target))
+/obj/item/stack/cable_coil/use_after(mob/living/carbon/human/target, mob/living/user)
+	if (!istype(target))
 		return FALSE
 	var/obj/item/organ/external/organ = target.organs_by_name[user.zone_sel.selecting]
 	if (!organ)
 		to_chat(user, SPAN_WARNING("\The [target] is missing that organ."))
 		return TRUE
 	if (!BP_IS_ROBOTIC(organ))
-		return ..()
+		to_chat(user, SPAN_WARNING("\The [target]'s [organ.name] is not robotic. \The [src] is useless."))
+		return TRUE
 	if (BP_IS_BRITTLE(organ))
 		to_chat(user, SPAN_WARNING("\The [target]'s [organ.name] is hard and brittle - \the [src] cannot repair it."))
 		return TRUE
@@ -104,9 +104,10 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 	if (!can_use(use_amount))
 		to_chat(user, SPAN_WARNING("You don't have enough of \the [src] left to repair \the [target]'s [organ.name]."))
 		return TRUE
+
 	if (organ.robo_repair(3 * use_amount, DAMAGE_BURN, "some damaged wiring", src, user))
 		use(use_amount)
-	return TRUE
+		return TRUE
 
 
 /obj/item/stack/cable_coil/transfer_to(obj/item/stack/cable_coil/coil)

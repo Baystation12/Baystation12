@@ -90,11 +90,9 @@
 		set_dir(new_dir)
 		update_light()
 
-/obj/item/device/flashlight/attack(mob/living/M as mob, mob/living/user as mob)
-	. = FALSE
+/obj/item/device/flashlight/use_after(mob/living/M as mob, mob/living/user as mob)
 	if (istype(M) && on && user.zone_sel.selecting == BP_EYES)
-
-		if((MUTATION_CLUMSY in user.mutations) && prob(50) || user.a_intent == I_HURT)
+		if((MUTATION_CLUMSY in user.mutations) && prob(50))
 			return M.use_weapon(src, user)
 
 		var/mob/living/carbon/human/H = M

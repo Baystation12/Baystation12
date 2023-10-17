@@ -330,19 +330,17 @@
 		..()
 	return
 
-/obj/item/stack/attackby(obj/item/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/stack))
-		var/obj/item/stack/S = W
-		src.transfer_to(S)
+/obj/item/stack/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	if (istype(tool, /obj/item/stack))
+		var/obj/item/stack/new_stack = tool
+		transfer_to(new_stack)
 
 		spawn(0) //give the stacks a chance to delete themselves if necessary
-			if (S && usr.machine==S)
-				S.interact(usr)
-			if (src && usr.machine==src)
-				src.interact(usr)
-	else
-		return ..()
-
+			if (new_stack && user.machine == new_stack)
+				new_stack.interact(usr)
+			if (src && user.machine == src)
+				interact(user)
+		return TRUE
 
 /**
  * Returns a string forming a basic name of the stack. By default, this is `name`.

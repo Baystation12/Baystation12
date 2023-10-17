@@ -50,7 +50,7 @@
 		if (!istype(head))
 			return TRUE
 
-		if (user.a_intent == I_HELP && user.zone_sel.selecting == BP_HEAD)
+		if (user.zone_sel.selecting == BP_HEAD)
 			head.write_on(user, name)
 			return TRUE
 

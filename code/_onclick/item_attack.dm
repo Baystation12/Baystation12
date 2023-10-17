@@ -51,7 +51,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	atom.pre_use_item(src, user, click_params)
 	var/use_call
 
-	use_call = "before"
+	use_call = "use"
 	. = use_before(atom, user, click_params)
 	if (!. && user.a_intent == I_HURT)
 		use_call = "weapon"
@@ -63,7 +63,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		use_call = "attackby"
 		. = atom.attackby(src, user, click_params)
 	if (!.)
-		use_call = "after"
+		use_call = "use"
 		. = use_after(atom, user, click_params)
 	if (!.)
 		use_call = null

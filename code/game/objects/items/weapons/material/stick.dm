@@ -26,12 +26,9 @@
 	return ..()
 
 
-/obj/item/material/stick/use_before(mob/M, mob/user)
-	. = FALSE
+/obj/item/material/stick/use_after(mob/M, mob/user)
 	if(istype(M) && user != M && user.a_intent == I_HELP)
-		//Playful poking is its own thing
 		user.visible_message(SPAN_NOTICE("[user] pokes [M] with [src]."), SPAN_NOTICE("You poke [M] with [src]."))
-		//Consider adding a check to see if target is dead
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(M)
 		return TRUE

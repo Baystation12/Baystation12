@@ -4,11 +4,8 @@
 	icon_state = "stethoscope"
 	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
 
-/obj/item/clothing/accessory/stethoscope/use_before(mob/living/target, mob/living/user)
-	. = FALSE
+/obj/item/clothing/accessory/stethoscope/use_after(mob/living/target, mob/living/user)
 	if (!ishuman(target) || !istype(user))
-		return FALSE
-	if (user.a_intent != I_HELP)
 		return FALSE
 	var/mob/living/carbon/human/H = target
 	var/obj/item/organ/organ = H.get_organ(user.zone_sel.selecting)
