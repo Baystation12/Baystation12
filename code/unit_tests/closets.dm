@@ -38,7 +38,7 @@
 			for(var/thing in closet.decals)
 				if(isnull(closet.decals[thing]))
 					LAZYADD(bad_decal_colour, "[check_appearance] - [thing]")
-				if(!(thing in decal_states))
+				if(!(thing in decal_states) && !("[thing]_open" in decal_states) && !("[thing]_closed" in decal_states))
 					LAZYADD(bad_decal_state, "[check_appearance] - [thing] - [closet.decal_icon]")
 
 	if( \
