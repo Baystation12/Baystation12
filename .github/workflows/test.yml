@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - name: paths-filter
         uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50
         id: filter
@@ -30,7 +30,7 @@ jobs:
     needs: PreFlight
     if: needs.PreFlight.outputs.dm == 'true'
     steps:
-      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - name: Setup Cache
         uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
         with:
@@ -58,7 +58,7 @@ jobs:
     - DreamChecker
     if: needs.PreFlight.outputs.dm == 'true'
     steps:
-      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - name: Setup Cache
         uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
         with:
@@ -88,7 +88,7 @@ jobs:
     - DreamChecker
     if: needs.PreFlight.outputs.dm == 'true'
     steps:
-      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - name: Setup Cache
         uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
         with:
@@ -117,7 +117,7 @@ jobs:
     - DreamChecker
     if: needs.PreFlight.outputs.dm == 'true'
     steps:
-      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - name: Setup Cache
         uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
         with:
@@ -146,7 +146,7 @@ jobs:
     - DreamChecker
     if: needs.PreFlight.outputs.dm == 'true'
     steps:
-      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - name: Setup Cache
         uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
         with:
