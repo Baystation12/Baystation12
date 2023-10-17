@@ -2,9 +2,9 @@
 
 /datum/ai_holder
 	var/hostile = FALSE						// Do we try to hurt others?
-	var/retaliate = FALSE					// Attacks whatever struck it first. Mobs will still attack back if this is false but hostile is true.
+	var/retaliate = TRUE					// Attacks whatever struck it first. Mobs will still attack back if this is false but hostile is true.
 	var/mauling = FALSE						// Attacks unconscious mobs
-	var/handle_corpse = FALSE					// Allows AI to acknowledge corpses (e.g. nurse spiders)
+	var/handle_corpse = FALSE				// Allows AI to acknowledge corpses (e.g. nurse spiders)
 
 	var/atom/movable/target = null			// The thing (mob or object) we're trying to kill.
 	var/atom/movable/preferred_target = null// If set, and if given the chance, we will always prefer to target this over other options.
@@ -15,7 +15,7 @@
 	var/alpha_vision_threshold = FAKE_INVIS_ALPHA_THRESHOLD	// Targets with an alpha less or equal to this will be considered invisible. Requires above var to be true.
 
 	var/lose_target_time = 0				// world.time when a target was lost.
-	var/lose_target_timeout = 5 SECONDS		// How long until a mob 'times out' and stops trying to find the mob that disappeared.
+	var/lose_target_timeout = 15 SECONDS	// How long until a mob 'times out' and stops trying to find the mob that disappeared.
 
 	var/list/attackers = list()				// List of strings of names of people who attacked us before in our life.
 											// This uses strings and not refs to allow for disguises, and to avoid needing to use weakrefs.
@@ -28,15 +28,17 @@
 	. = ohearers(vision_range, holder)
 	. -= global.dview_mob // Not the dview mob!
 
-	var/static/hostile_machines = typecacheof(list(/obj/machinery/porta_turret, /mob/living/exosuit, /obj/blob))
-
-	for (var/HM in typecache_filter_list(range(vision_range, holder), hostile_machines))
+	for (var/HM in range(vision_range, holder))
+		if (!(istype(HM, /obj/machinery/porta_turret) || \
+			  istype(HM, /mob/living/exosuit) || \
+			  istype(HM, /obj/blob)))
+			continue
 		if (can_see(holder, HM, vision_range))
 			. += HM
 
 /// Step 2, filter down possible targets to things we actually care about.
 /datum/ai_holder/proc/find_target(list/possible_targets, has_targets_list = FALSE)
-	ai_log("find_target() : Entered.", AI_LOG_TRACE)
+	ai_log("find_target() : Entering.", AI_LOG_TRACE)
 	if (!hostile) // So retaliating mobs only attack the thing that hit it.
 		return null
 	. = list()
@@ -69,15 +71,17 @@
 /// Step 4, give us our selected target.
 /datum/ai_holder/proc/give_target(new_target, urgent = FALSE)
 	ai_log("give_target() : Given '[new_target]', urgent=[urgent].", AI_LOG_TRACE)
+	var/old_target = target
 	target = new_target
 
 	if (target != null)
 		lose_target_time = 0
 		track_target_position()
-		if (should_threaten() && !urgent)
-			set_stance(STANCE_ALERT)
-		else
-			set_stance(STANCE_FIGHT)
+		if (old_target != new_target)
+			if (should_threaten() && !urgent)
+				set_stance(STANCE_ALERT)
+			else
+				set_stance(STANCE_FIGHT)
 		last_target_time = world.time
 		return TRUE
 
@@ -109,18 +113,18 @@
 			closest_targets += A
 	return closest_targets
 
-/datum/ai_holder/proc/can_attack(atom/movable/the_target, vision_required = TRUE)
-	if (!can_see_target(the_target) && vision_required)
-		return FALSE
-
-	if (isliving(the_target))
-		var/mob/living/L = the_target
+// For checking "hard loss" of a target, or whether the target is still valid (e.g. leave SSD players alone)
+/datum/ai_holder/proc/can_pursue(atom/movable/target)
+	ai_log("can_pursue() : Entering.", AI_LOG_TRACE)
+	if (isliving(target))
+		var/mob/living/L = target
 		if (ishuman(L) || issilicon(L))
 			if (L.key && !L.client)	// SSD players get a pass
 				return FALSE
 
 			if (L.status_flags & NOTARGET)
 				return FALSE
+
 		if (L.stat)
 			if (L.stat == DEAD && !handle_corpse) // Leave dead things alone
 				return FALSE
@@ -129,31 +133,39 @@
 					return TRUE
 				else
 					return FALSE
+
 		if (holder.IIsAlly(L))
 			return FALSE
 		return TRUE
 
-	if (istype(the_target, /mob/living/exosuit))
-		var/mob/living/exosuit/M = the_target
+	if (istype(target, /mob/living/exosuit))
+		var/mob/living/exosuit/M = target
 		for (var/mob/pilot in M.pilots)
 			return can_attack(pilot)
 		return destructive // Empty mechs are 'neutral'.
 
-	if (istype(the_target, /obj/machinery/porta_turret))
-		var/obj/machinery/porta_turret/P = the_target
+	if (istype(target, /obj/machinery/porta_turret))
+		var/obj/machinery/porta_turret/P = target
 		if (MACHINE_IS_BROKEN(P))
 			return FALSE // Already dead.
 		if (!(P.assess_living(holder)))
 			return FALSE // Don't shoot allied turrets.
 		if (!P.raised && !P.raising)
 			return FALSE // Turrets won't get hurt if they're still in their cover.
-		return TRUE
-
 	return TRUE
+
+// For checking "soft loss" of a target. Some mobs can chase after a target if they cannot immediately see it.
+/datum/ai_holder/proc/can_attack(atom/movable/target, vision_required = TRUE)
+	ai_log("can_attack() : Entering.", AI_LOG_TRACE)
+	if (vision_required && !can_see_target(target))
+		return FALSE
+	return can_pursue(target)
 
 /// 'Soft' loss of target. They may still exist, we still have some info about them maybe.
 /datum/ai_holder/proc/lose_target()
 	ai_log("lose_target() : Entering.", AI_LOG_TRACE)
+
+	var/atom/movable/old_target = target
 	if (target)
 		ai_log("lose_target() : Had a target, setting to null and LTT.", AI_LOG_DEBUG)
 		target = null
@@ -161,7 +173,7 @@
 
 	give_up_movement()
 
-	if (target_last_seen_turf && intelligence_level >= AI_SMART)
+	if ((!old_target || !can_see_target(old_target)) && target_last_seen_turf && intelligence_level >= AI_NORMAL)
 		ai_log("lose_target() : Going into 'engage unseen enemy' mode.", AI_LOG_INFO)
 		engage_unseen_enemy()
 		return TRUE //We're still working on it
@@ -182,30 +194,30 @@
 	set_stance(STANCE_IDLE)
 
 /// Check if target is visible to us.
-/datum/ai_holder/proc/can_see_target(atom/movable/the_target, view_range = vision_range)
+/datum/ai_holder/proc/can_see_target(atom/movable/target, view_range = vision_range)
 	ai_log("can_see_target() : Entering.", AI_LOG_TRACE)
 
-	if (!the_target) // Nothing to target.
+	if (!target) // Nothing to target.
 		ai_log("can_see_target() : There is no target. Exiting.", AI_LOG_WARNING)
 		return FALSE
 
-	if (holder.see_invisible < the_target.invisibility) // Real invis.
-		ai_log("can_see_target() : Target ([the_target]) was invisible to holder. Exiting.", AI_LOG_TRACE)
+	if (holder.see_invisible < target.invisibility) // Real invis.
+		ai_log("can_see_target() : Target ([target]) was invisible to holder. Exiting.", AI_LOG_TRACE)
 		return FALSE
 
-	if (respect_alpha && the_target.alpha <= alpha_vision_threshold) // Fake invis.
-		ai_log("can_see_target() : Target ([the_target]) was sufficently transparent to holder and is hidden. Exiting.", AI_LOG_TRACE)
+	if (respect_alpha && target.alpha <= alpha_vision_threshold) // Fake invis.
+		ai_log("can_see_target() : Target ([target]) was sufficently transparent to holder and is hidden. Exiting.", AI_LOG_TRACE)
 		return FALSE
 
-	if (get_dist(holder, the_target) > view_range) // Too far away.
-		ai_log("can_see_target() : Target ([the_target]) was too far from holder. Exiting.", AI_LOG_TRACE)
+	if (get_dist(holder, target) > view_range) // Too far away.
+		ai_log("can_see_target() : Target ([target]) was too far from holder. Exiting.", AI_LOG_TRACE)
 		return FALSE
 
-	if (!can_see(holder, the_target, view_range))
-		ai_log("can_see_target() : Target ([the_target]) failed can_see(). Exiting.", AI_LOG_TRACE)
+	if (!can_see(holder, target, view_range))
+		ai_log("can_see_target() : Target ([target]) failed can_see(). Exiting.", AI_LOG_TRACE)
 		return FALSE
 
-	ai_log("can_see_target() : Target ([the_target]) can be seen. Exiting.", AI_LOG_TRACE)
+	ai_log("can_see_target() : Target ([target]) can be seen. Exiting.", AI_LOG_TRACE)
 	return TRUE
 
 /// Updates the last known position of the target.
@@ -233,10 +245,10 @@
 	if (holder.stat) // We're dead.
 		ai_log("react_to_attack() : Was attacked by [attacker], but we are dead/unconscious.", AI_LOG_TRACE)
 		return FALSE
-	if (!hostile && !retaliate) // Not allowed to defend ourselves.
+	if (!hostile && !retaliate && !can_flee) // Not allowed to defend ourselves.
 		ai_log("react_to_attack() : Was attacked by [attacker], but we are not allowed to attack back.", AI_LOG_TRACE)
 		return FALSE
-	if (holder.IIsAlly(attacker)) // I'll overlook it THIS time...
+	if (!flee_from_allies && holder.IIsAlly(attacker)) // I'll overlook it THIS time...
 		ai_log("react_to_attack() : Was attacked by [attacker], but they were an ally.", AI_LOG_TRACE)
 		return FALSE
 	if (target) // Already fighting someone. Switching every time we get hit would impact our combat performance.
@@ -260,6 +272,8 @@
 /// Sets a few vars so mobs that threaten will react faster to an attacker or someone who attacked them before.
 /datum/ai_holder/proc/on_attacked(atom/movable/AM)
 	last_conflict_time = world.time
+	if (retaliate)
+		preferred_target = AM
 	add_attacker(AM)
 
 /// Checks to see if an atom attacked us lately

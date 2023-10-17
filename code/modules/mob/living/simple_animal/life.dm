@@ -93,11 +93,5 @@
 /mob/living/simple_animal/gib(anim = icon_gib, do_gibs = TRUE)
 	..()
 
-/mob/living/simple_animal/proc/visible_emote(act_desc)
-	custom_emote(1, act_desc)
-
-/mob/living/simple_animal/proc/audible_emote(act_desc)
-	custom_emote(2, act_desc)
-
 /mob/living/simple_animal/proc/handle_special()
 	return

@@ -139,6 +139,10 @@
 	var/damage_flags = I.damage_flags()
 	return apply_damage(effective_force, I.damtype, hit_zone, damage_flags, used_weapon=I, armor_pen=I.armor_penetration)
 
+/mob/living/post_use_item(obj/item/tool, mob/living/user, interaction_handled, use_call)
+	if (interaction_handled && ai_holder && (use_call == "attack" || use_call == "weapon"))
+		ai_holder.react_to_attack(user)
+	..()
 
 //this proc handles being hit by a thrown atom
 /mob/living/hitby(atom/movable/AM, datum/thrownthing/TT)

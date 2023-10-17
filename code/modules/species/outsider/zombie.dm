@@ -45,11 +45,9 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 //// Zombie Types
 
-
 /datum/species/zombie
 	name = "Zombie"
 	name_plural = "Zombies"
-	slowdown = 15
 	blood_color = "#700f0f"
 	death_message = "writhes and twitches before falling motionless."
 	species_flags = SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN
@@ -71,32 +69,17 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	hidden_from_codex = TRUE
 	has_fine_manipulation = FALSE
 	unarmed_types = list(/datum/unarmed_attack/bite/sharp/zombie)
-	move_intents = list(/singleton/move_intent/creep)
+	move_intents = list(/singleton/move_intent/zombie)
 	var/heal_rate = 1 // Regen.
-	var/mob/living/carbon/human/target = null
-	var/list/obstacles = list(
-		/obj/structure/window,
-		/obj/structure/closet,
-		/obj/machinery/door/airlock,
-		/obj/structure/table,
-		/obj/structure/grille,
-		/obj/structure/barricade,
-		/obj/structure/wall_frame,
-		/obj/structure/railing,
-		/obj/structure/girder,
-		/turf/simulated/wall,
-		/obj/machinery/door/blast/shutters,
-		/obj/machinery/door
-	)
 
 /datum/species/zombie/handle_post_spawn(mob/living/carbon/human/H)
 	H.mutations |= MUTATION_CLUMSY
 	H.mutations |= MUTATION_FERAL
 	H.mutations |= mNobreath //Byond doesn't like adding them all in one OR statement :(
 	H.verbs += /mob/living/carbon/proc/consume
-	H.move_intents = list(/singleton/move_intent/creep) //Zooming days are over
 	H.a_intent = "harm"
-	H.move_intent = new /singleton/move_intent/creep
+	H.move_intents = list(new /singleton/move_intent/zombie) //Zooming days are over
+	H.move_intent = new /singleton/move_intent/zombie
 	H.default_run_intent = H.move_intent
 	H.default_walk_intent = H.move_intent
 
@@ -106,12 +89,16 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 	H.languages = list()
 	H.add_language(LANGUAGE_ZOMBIE)
+	H.faction = "zombies"
+
+	H.ai_holder = new /datum/ai_holder/human/zombie (H)
+	H.say_list_type = /datum/say_list/zombie
+	H.say_list = new /datum/say_list/zombie (H)
 
 	H.sleeping = 0
 	H.resting = 0
 	H.weakened = 0
 
-	H.move_intent.move_delay = 6
 	H.stat = CONSCIOUS
 
 	if (H.wear_id)
@@ -149,126 +136,134 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		return TRUE
 
 /datum/species/zombie/handle_death(mob/living/carbon/human/H)
-	H.stat = DEAD //Gotta confirm death for some odd reason
 	playsound(H, 'sound/hallucinations/wail.ogg', 30, 1)
 	return TRUE
 
-/datum/species/zombie/handle_npc(mob/living/carbon/human/H)
-	H.resting = FALSE
-	if (H.client || H.stat != CONSCIOUS)
-		walk(H, 0) //Stop dead-walking
-		return
+/singleton/move_intent/zombie
+	name = "Shuffle"
+	flags = MOVE_INTENT_DELIBERATE
+	hud_icon_state = "creeping"
+	move_delay = 10
 
-	if (prob(5))
-		H.custom_emote(AUDIBLE_MESSAGE,"wails!")
-	else if (prob(5))
-		H.custom_emote(AUDIBLE_MESSAGE,"groans!")
-	if (H.restrained() && prob(8))
-		H.custom_emote(AUDIBLE_MESSAGE,"thrashes and writhes!")
+/datum/say_list/zombie
+	emote_hear = list("wails!","groans!")
 
-	if (H.lying)
-		walk(H, 0)
-		return
+/datum/ai_holder/human/zombie
+	hostile = TRUE
+	destructive = TRUE
+	can_flee = FALSE
+	mauling = TRUE
+	handle_corpse = TRUE
+	use_astar = TRUE
+	wander_when_pulled = TRUE
+	base_wander_delay = 2
+	wander_chance = 50
+	vision_range = 15
+	speak_chance = 5
+	lose_target_timeout = 90 SECONDS
 
-	if (H.restrained() || H.buckled())
-		H.resist()
-		return
+	valid_obstacles_by_priority = list(
+		/obj/structure/closet,
+		/obj/structure/table,
+		/obj/structure/grille,
+		/obj/structure/barricade,
+		/obj/structure/wall_frame,
+		/obj/structure/railing,
+		/obj/structure/girder,
+		/turf/simulated/wall
+	)
 
-	addtimer(new Callback(src, .proc/handle_action, H), rand(10, 20))
-
-/datum/species/zombie/proc/is_valid_target(mob/living/T)
-	if (!istype(T, /mob/living/carbon/human)) //Ignore Diona and unconscious non-humans
-		if (istype(T, /mob/living/carbon/alien/diona))
-			return FALSE
-		if (T.stat != CONSCIOUS)
-			return FALSE
-
-	var/mob/living/carbon/human/H = T
-	if (H.is_species(SPECIES_ZOMBIE) || H.is_species(SPECIES_DIONA))
+/datum/ai_holder/human/zombie/can_pursue(atom/movable/target)
+	if (!istype(target, /mob/living))
 		return FALSE
 
-	if (H.isSynthetic() && H.stat != CONSCIOUS)
+	if (!..())
 		return FALSE
 
-	if (istype(T, /mob/living/exosuit))
-		var/mob/living/exosuit/X = T
-		if (!LAZYLEN(X.pilots))
-			return FALSE //Don't attack empty mechs
+	var/mob/living/target_living = target
+
+	if (!istype(target_living, /mob/living/carbon/human)) //Ignore Diona and unconscious non-humans
+		if (istype(target_living, /mob/living/carbon/alien/diona))
+			return FALSE
+		if (target_living.stat != CONSCIOUS)
+			return FALSE
+
+	var/mob/living/carbon/human/target_human = target
+	if (target_human.is_species(SPECIES_ZOMBIE) || target_human.is_species(SPECIES_DIONA))
+		return FALSE
+
+	if (target_human.stat != CONSCIOUS && target_human.isSynthetic())
+		return FALSE
+
+	if (is_being_consumed(target_human))
+		return FALSE
 
 	return TRUE
 
-/datum/species/zombie/proc/is_consumable(mob/living/T)
-	if (!istype(T, /mob/living/carbon/human))
+/datum/ai_holder/human/zombie/proc/is_consumable(mob/living/target_living)
+	if (!istype(target_living, /mob/living/carbon/human))
 		return FALSE
 
-	if (T.isSynthetic())
+	if (target_living.isSynthetic())
 		return FALSE
 
-	return is_valid_target(T)
+	return can_pursue(target_living)
 
-/datum/species/zombie/proc/is_being_consumed(mob/living/T, mob/living/carbon/human/H)
+/datum/ai_holder/human/zombie/proc/is_being_consumed(mob/living/target_living)
 	//Will exclude consumption candidates if there's another zombie on top of them
-	if (!is_consumable(T))
-		return FALSE
-	for (var/mob/living/carbon/human/M in T.loc.contents)
-		if (M != H && M.stat == CONSCIOUS && M.is_species(SPECIES_ZOMBIE))
+	var/turf/target_turf = get_turf(target_living)
+	for (var/mob/living/carbon/human/consumer in target_turf.contents)
+		if (consumer != holder && consumer.stat == CONSCIOUS && consumer.is_species(SPECIES_ZOMBIE))
 			return TRUE
 	return FALSE
 
-/datum/species/zombie/proc/handle_action(mob/living/carbon/human/H)
-	var/dist = 128
-	for (var/mob/living/M in hearers(H, 15))
-		if (is_valid_target(M)) //Don't attack fellow zombies, or diona
-			if (target && M.stat != CONSCIOUS)
-				continue //Only eat corpses when no living (and able) targets are around
-			if (is_being_consumed(M, H))
-				continue //Don't queue up to eat
-			var/D = get_dist(M, H)
-			if (D <= dist * 0.5) //Must be significantly closer to change targets
-				target = M //Switch to closest target
-				dist = D
+/datum/ai_holder/human/zombie/pick_target(list/targets)
+	// If there are any conscious mobs, pick them
+	// If not, pick the closest consumable mob, which isn't being consumed already
+	var/lowest_distance = 1e6 //fakely far
+	var/atom/movable/new_target = null
+	var/conscious_target = FALSE
+	for (var/atom/movable/possible_target in targets)
+		var/current_distance = get_dist(holder, possible_target)
+		if (current_distance < lowest_distance)
+			if (istype(possible_target, /mob/living))
+				var/mob/living/possible_target_living = possible_target
+				if (possible_target_living.stat != CONSCIOUS)
+					if (conscious_target || !is_consumable(possible_target_living))
+						continue
+				if (is_being_consumed(possible_target_living))
+					continue
+				conscious_target = TRUE
+			lowest_distance = current_distance
+			new_target = possible_target
+	return new_target
 
-	H.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2)
-	if (target)
-		if (!is_valid_target(target) || is_being_consumed(target, H))
-			target = null
-			return
-
-		if (!H.Adjacent(target))
-			var/turf/dir = get_step_towards(H, target)
-			for(var/type in obstacles) //Break obstacles
-				var/obj/obstacle = locate(type) in dir
-				if (obstacle)
-					H.face_atom(obstacle)
-					obstacle.attack_hand(H)
-					break
-
-			walk_to(H, target.loc, 1, H.move_intent.move_delay * 1.25)
-
-		else
-			if ((is_consumable(target) && target.lying)) //Eat the victim
-				walk_to(H, target.loc, 0, H.move_intent.move_delay * 2.5) //Move over them
-				if (H.Adjacent(target)) //Check we're still next to them
-					H.consume()
-
-			else //Otherwise subdue them
-				H.face_atom(target)
-				if (!H.zone_sel)
-					H.zone_sel = new /obj/screen/zone_sel(null)
-				H.zone_sel.selecting = BP_CHEST
-				target.attack_hand(H)
-
-		for(var/mob/living/M in hearers(H, 15))
-			if (target == M) //If our target is still nearby
+/datum/ai_holder/human/zombie/post_melee_attack()
+	if (istype(target, /mob/living))
+		var/mob/living/target_living = target
+		if (target_living.stat != CONSCIOUS && is_consumable(target_living))
+			if (find_target() != target) // In case we need to re-prioritize
 				return
-		target = null //Target lost
+			if (holder.loc == target.loc)
+				var/mob/living/carbon/human/holder_human = holder
+				holder_human.consume()
+			else
+				holder.IMove(get_step_towards(holder, target))
 
-	else
-		if (!H.lying)
-			walk(H, 0) //Clear walking
-			if (prob(33) && isturf(H.loc) && !H.pulledby)
-				H.SelfMove(pick(GLOB.cardinal))
+/datum/ai_holder/human/zombie/pry_door(obj/machinery/door/door)
+	if (!door.operable())
+		door.attack_hand(holder)
+		return TRUE
+	return FALSE
 
+/datum/ai_holder/human/zombie/handle_special_strategical()
+	if (!check_listeners())
+		return
+
+	if (holder.restrained() && prob(8))
+		holder.custom_emote(AUDIBLE_MESSAGE,"thrashes and writhes!")
+	else if (prob(speak_chance))
+		emote_random()
 
 /datum/language/zombie
 	name = LANGUAGE_ZOMBIE
@@ -289,6 +284,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 /datum/unarmed_attack/bite/sharp/zombie
 	attack_verb = list("slashed", "sunk their teeth into", "bit", "mauled")
 	damage = 3
+	delay = 16
 
 /datum/unarmed_attack/bite/sharp/zombie/is_usable(mob/living/carbon/human/user, mob/living/carbon/human/target, zone)
 	. = ..()
@@ -440,6 +436,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		skillset.skill_list[SKILL_COMBAT] = SKILL_TRAINED
 		skillset.on_levels_change()
 
+	species.handle_pre_spawn(src)
 	species = all_species[SPECIES_ZOMBIE]
 	species.handle_post_spawn(src)
 

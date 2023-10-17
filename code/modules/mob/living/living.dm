@@ -912,3 +912,9 @@ default behaviour is:
 /mob/living/proc/jump_layer_shift_end()
 	jumping = FALSE
 	reset_layer()
+
+/mob/living/proc/visible_emote(act_desc)
+	custom_emote(1, act_desc)
+
+/mob/living/proc/audible_emote(act_desc)
+	custom_emote(2, act_desc)

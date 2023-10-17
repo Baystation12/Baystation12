@@ -12,35 +12,12 @@
 	// Wandering.
 	var/wander = FALSE					// If true, the mob will randomly move in the four cardinal directions when idle.
 	var/wander_delay = 0				// How many ticks until the mob can move a tile in handle_wander_movement().
+	var/wander_chance = 100				// The chance that the mob wanders in a certain direction.
 	var/base_wander_delay = 2			// What the above var gets set to when it wanders. Note that a tick happens every half a second.
 	var/wander_when_pulled = FALSE		// If the mob will refrain from wandering if someone is pulling it.
 
 	// Breakthrough
 	var/failed_breakthroughs = 0		// How many times we've failed to breakthrough something lately
-
-/datum/ai_holder/proc/walk_to_destination()
-	ai_log("walk_to_destination() : Entering.",AI_LOG_TRACE)
-	if (!destination)
-		ai_log("walk_to_destination() : No destination.", AI_LOG_WARNING)
-		forget_path()
-		set_stance(stance == STANCE_REPOSITION ? STANCE_APPROACH : STANCE_IDLE)
-		ai_log("walk_to_destination() : Exiting.", AI_LOG_TRACE)
-		return
-
-	var/get_to = min_distance_to_destination
-	var/distance = get_dist(holder, destination)
-	ai_log("walk_to_destination() : get_to is [get_to].", AI_LOG_TRACE)
-
-	// We're here!
-	if (distance <= get_to)
-		give_up_movement()
-		set_stance(stance == STANCE_REPOSITION ? STANCE_APPROACH : STANCE_IDLE)
-		ai_log("walk_to_destination() : Destination reached. Exiting.", AI_LOG_INFO)
-		return
-
-	ai_log("walk_to_destination() : Walking.", AI_LOG_TRACE)
-	walk_path(destination, get_to)
-	ai_log("walk_to_destination() : Exiting.",AI_LOG_TRACE)
 
 /datum/ai_holder/proc/should_go_home()
 	if (stance != STANCE_IDLE)
@@ -77,10 +54,65 @@
 
 	ai_log("give_destination() : Exiting.", AI_LOG_DEBUG)
 
+/datum/ai_holder/proc/walk_to_destination()
+	ai_log("walk_to_destination() : Entering.",AI_LOG_TRACE)
+	if (!destination)
+		ai_log("walk_to_destination() : No destination.", AI_LOG_WARNING)
+		forget_path()
+		set_stance(stance == STANCE_REPOSITION ? STANCE_APPROACH : STANCE_IDLE)
+		ai_log("walk_to_destination() : Exiting.", AI_LOG_TRACE)
+		return
+
+	var/get_to = min_distance_to_destination
+	var/distance = get_dist(holder, destination)
+	ai_log("walk_to_destination() : get_to is [get_to].", AI_LOG_TRACE)
+
+	// We're here!
+	if (distance <= get_to)
+		give_up_movement()
+		set_stance(stance == STANCE_REPOSITION ? STANCE_APPROACH : STANCE_IDLE)
+		ai_log("walk_to_destination() : Destination reached. Exiting.", AI_LOG_INFO)
+		return
+
+	ai_log("walk_to_destination() : Walking.", AI_LOG_TRACE)
+	walk_path(destination, get_to)
+	ai_log("walk_to_destination() : Exiting.",AI_LOG_TRACE)
+
+// Goes to the target, to attack them.
+// Called when in STANCE_APPROACH.
+/datum/ai_holder/proc/walk_to_target()
+	ai_log("walk_to_target() : Entering.", AI_LOG_DEBUG)
+	// Make sure we can still chase/attack them.
+	if (!target || !can_attack(target))
+		ai_log("walk_to_target() : Lost target.", AI_LOG_INFO)
+		lose_target()
+		return
+
+	// Find out where we're going.
+	var/get_to = closest_distance(target)
+	var/distance = get_dist(holder, target)
+	ai_log("walk_to_target() : get_to is [get_to].", AI_LOG_TRACE)
+
+	// We're here!
+	// Special case: Our holder has a special attack that is ranged, but normally the holder uses melee.
+	// If that happens, we'll switch to STANCE_FIGHT so they can use it. If the special attack is limited, they'll likely switch back next tick.
+	if (distance <= get_to || holder.ICheckSpecialAttack(target))
+		ai_log("walk_to_target() : Within range.", AI_LOG_INFO)
+		forget_path()
+		set_stance(STANCE_FIGHT)
+		ai_log("walk_to_target() : Exiting.", AI_LOG_DEBUG)
+		return
+
+	// Otherwise keep walking.
+	if (!stand_ground)
+		walk_path(target, get_to)
+
+	ai_log("walk_to_target() : Exiting.", AI_LOG_DEBUG)
+
 
 /// Walk towards whatever.
 /datum/ai_holder/proc/walk_path(atom/A, get_to = 1)
-	ai_log("walk_path() : Entered.", AI_LOG_TRACE)
+	ai_log("walk_path() : Entering.", AI_LOG_TRACE)
 
 	if (use_astar)
 		if (!length(path)) // If we're missing a path, make a new one.
@@ -90,6 +122,8 @@
 		if (!length(path)) // If we still don't have one, then the target's probably somewhere inaccessible to us. Get as close as we can.
 			ai_log("walk_path() : Failed to obtain path to target. Using get_step_to() instead.", AI_LOG_INFO)
 			if (holder.IMove(get_step_to(holder, A)) == MOVEMENT_FAILED)
+				if (!holder.canClick())
+					return
 				ai_log("walk_path() : Failed to move, attempting breakthrough.", AI_LOG_INFO)
 				if (!breakthrough(A) && failed_breakthroughs++ >= 5) // We failed to move, time to smash things.
 					give_up_movement()
@@ -107,17 +141,19 @@
 	else
 		ai_log("walk_path() : Going to IMove().", AI_LOG_TRACE)
 		if (holder.IMove(get_step_to(holder, A)) == MOVEMENT_FAILED )
+			if (!holder.canClick())
+				return
 			ai_log("walk_path() : Failed to move, attempting breakthrough.", AI_LOG_INFO)
 			if (!breakthrough(A) && failed_breakthroughs++ >= 5) // We failed to move, time to smash things.
 				give_up_movement()
 				failed_breakthroughs = 0
 
-	ai_log("walk_path() : Exited.", AI_LOG_TRACE)
+	ai_log("walk_path() : Exiting.", AI_LOG_TRACE)
 
 
 ///Take one step along a path
 /datum/ai_holder/proc/move_once()
-	ai_log("move_once() : Entered.", AI_LOG_TRACE)
+	ai_log("move_once() : Entering.", AI_LOG_TRACE)
 	if (!length(path))
 		return
 
@@ -141,10 +177,10 @@
 
 /// Wanders randomly in cardinal directions.
 /datum/ai_holder/proc/handle_wander_movement()
-	ai_log("handle_wander_movement() : Entered.", AI_LOG_TRACE)
+	ai_log("handle_wander_movement() : Entering.", AI_LOG_TRACE)
 	if (isturf(holder.loc) && can_act())
 		wander_delay--
-		if (wander_delay <= 0)
+		if (wander_delay <= 0 && prob(wander_chance))
 			if (!wander_when_pulled && (holder.pulledby || length(holder.grabbed_by)))
 				ai_log("handle_wander_movement() : Being pulled and cannot wander. Exiting.", AI_LOG_DEBUG)
 				return
@@ -154,7 +190,7 @@
 			holder.set_dir(moving_to)
 			holder.IMove(get_step(holder, moving_to))
 			wander_delay = base_wander_delay
-	ai_log("handle_wander_movement() : Exited.", AI_LOG_TRACE)
+	ai_log("handle_wander_movement() : Exiting.", AI_LOG_TRACE)
 
 /mob/living/proc/set_wander_when_pulled(value)
 	if (ai_holder)

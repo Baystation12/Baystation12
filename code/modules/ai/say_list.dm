@@ -21,7 +21,8 @@
 
 /datum/say_list
 	var/list/speak = list()				// Things the mob might say if it talks while idle.
-	var/list/emote_hear = list()		// Hearable emotes it might perform
+	var/list/emote_predef = list()		// Preset emotes that use /singleton/emote/
+	var/list/emote_hear = list()		// Custom hearable emotes it might perform
 	var/list/emote_see = list()			// Unlike speak_emote, the list of things in this variable only show by themselves with no spoken text. IE: Ian barks, Ian yaps
 
 	var/list/say_understood = list()	// When accepting an order.
@@ -41,7 +42,7 @@
 
 
 
-// Subtypes.
+// Example Subtypes.
 
 // This one's pretty dumb, but pirates are dumb anyways and it makes for a good test.
 /datum/say_list/pirate

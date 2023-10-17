@@ -120,12 +120,6 @@
 
 	return ..()
 
-/mob/living/simple_animal/post_use_item(obj/item/tool, mob/living/user, interaction_handled, use_call)
-	if (interaction_handled && ai_holder && (use_call == "attack" || use_call == "weapon"))
-		ai_holder.react_to_attack(user)
-	..()
-
-
 /mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, effective_force, hit_zone)
 	if(O.force <= resistance)
 		to_chat(user, SPAN_DANGER("This weapon is ineffective; it does no damage."))

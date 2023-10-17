@@ -25,6 +25,7 @@
 *  Call on initialization or if something weird happened like the mob switched factions.
 */
 /datum/ai_holder/proc/build_faction_friends()
+	ai_log("build_faction_friends() : Entering.", AI_LOG_DEBUG)
 	if (length(faction_friends)) // Already have a list.
 		// Assume we're moving to a new faction.
 		faction_friends -= src   // Get us out of the current list shared by everyone else.
@@ -38,9 +39,11 @@
 			break
 
 	if (first_friend) // Joining an already established faction.
+		ai_log("build_faction_friends() : Joining existing faction of [length(first_friend.ai_holder.faction_friends)].", AI_LOG_DEBUG)
 		faction_friends = first_friend.ai_holder.faction_friends
 		faction_friends |= holder
 	else // We're the 'founder' (first and/or only member) of this faction.
+		ai_log("build_faction_friends() : Founding new faction.", AI_LOG_DEBUG)
 		faction_friends |= holder
 
 /// Requests help in combat from other mobs possessing ai_holders.
@@ -49,11 +52,9 @@
 	if (!cooperative || world.time < next_sent_help_request  || world.time < next_received_help_request)
 		return
 
-
-
 	ai_log("request_help() : Asking for help.", AI_LOG_INFO)
 	next_sent_help_request  = world.time + 10 SECONDS
-	if (!faction_friends)
+	if (!length(faction_friends))
 		build_faction_friends()
 	for (var/mob/living/L in faction_friends)
 		if (L == holder) // Lets not call ourselves.

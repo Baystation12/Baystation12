@@ -12,14 +12,15 @@
 
 	var/prying = FALSE                      // True when the mob is trying to force open a door.
 
-	var/list/valid_obstacles_by_priority = list(/obj/structure/window,
-												/obj/structure/closet,
-												/obj/machinery/door/window,
-												/obj/structure/table,
-												/obj/structure/grille,
-												/obj/structure/barricade,
-												/obj/structure/wall_frame,
-												/obj/structure/railing)
+	// Excludes doors, shutters and windows, which are processed separately
+	var/list/valid_obstacles_by_priority = list(
+		/obj/structure/closet,
+		/obj/structure/table,
+		/obj/structure/grille,
+		/obj/structure/barricade,
+		/obj/structure/wall_frame,
+		/obj/structure/railing
+	)
 
 // This does the actual attacking.
 /datum/ai_holder/proc/engage_target()
@@ -36,6 +37,26 @@
 	ai_log("engage_target() : Distance to target ([target]) is [distance].", AI_LOG_TRACE)
 	holder.face_atom(target)
 	last_conflict_time = world.time
+
+	// Break down tables or low walls first.
+	if (distance <= 1 && can_violently_breakthrough())
+		var/turf/target_turf = get_turf(target)
+		for (var/obj/obstacle_obj in target_turf.contents)
+			if (obstacle_obj.density)
+				ai_log("engage_target() : Target standing on an obstacle, attacking: [obstacle_obj]", AI_LOG_TRACE)
+				melee_attack(obstacle_obj)
+				return
+
+	// Break into closets if necessary.
+	if (distance <= 1 && istype(target.loc, /obj/structure/closet) && intelligence_level >= AI_NORMAL)
+		var/obj/structure/closet/closet = target.loc
+		if (closet.welded || closet.locked)
+			ai_log("engage_target() : Target hiding inside a secure locker, giving up.", AI_LOG_TRACE)
+			lose_target()
+		else
+			ai_log("engage_target() : Target hiding in a locker, opening.", AI_LOG_TRACE)
+			closet.open()
+		return
 
 	// Do a 'special' attack, if one is allowed.
 	if (holder.ICheckSpecialAttack(target))
@@ -90,6 +111,13 @@
 	if (. == ATTACK_SUCCESSFUL)
 		post_ranged_attack(A)
 
+// Attack selection for destroying obstacles.
+// If we have an indiscriminate ranged attack, use that. Otherwise use melee.
+/datum/ai_holder/proc/obstacle_attack(atom/A)
+	if (!conserve_ammo && holder.ICheckRangedAttack(target))
+		return ranged_attack(A)
+	return melee_attack(A)
+
 // Most mobs probably won't have this defined but we don't care.
 /datum/ai_holder/proc/special_attack(atom/movable/AM)
 	pre_special_attack(AM)
@@ -142,13 +170,14 @@
 	ai_log("test_projectile_safety() : Test projectile did[!would_hit_primary_target ? " NOT " : " "]hit \the [AM]", AI_LOG_DEBUG)
 
 	// Make sure we don't have a chance to shoot our friends.
-	var/atom/A = hit_thing
-	ai_log("test_projectile_safety() : Evaluating \the [A] ([A.type]).", AI_LOG_TRACE)
-	if (isliving(A)) // Don't shoot at our friends, even if they're behind the target, as RNG can make them get hit.
-		var/mob/living/L = A
-		if (holder.IIsAlly(L))
-			ai_log("test_projectile_safety() : Would threaten ally, exiting with FALSE.", AI_LOG_DEBUG)
-			return FALSE
+	if (hit_thing)
+		var/atom/A = hit_thing
+		ai_log("test_projectile_safety() : Evaluating \the [A] ([A.type]).", AI_LOG_TRACE)
+		if (isliving(A)) // Don't shoot at our friends, even if they're behind the target, as RNG can make them get hit.
+			var/mob/living/L = A
+			if (holder.IIsAlly(L))
+				ai_log("test_projectile_safety() : Would threaten ally, exiting with FALSE.", AI_LOG_DEBUG)
+				return FALSE
 
 	// Don't fire if we cannot hit the primary target, and we wish to be conservative with our projectiles.
 	// We make an exception for turf targets because manual commanded AIs targeting the floor are generally intending to fire blindly.
@@ -176,37 +205,6 @@
 /datum/ai_holder/proc/max_range(atom/movable/AM)
 	return holder.ICheckRangedAttack(AM) ? 7 : 1
 
-// Goes to the target, to attack them.
-// Called when in STANCE_APPROACH.
-/datum/ai_holder/proc/walk_to_target()
-	ai_log("walk_to_target() : Entering.", AI_LOG_DEBUG)
-	// Make sure we can still chase/attack them.
-	if (!target || !can_attack(target))
-		ai_log("walk_to_target() : Lost target.", AI_LOG_INFO)
-		lose_target()
-		return
-
-	// Find out where we're going.
-	var/get_to = closest_distance(target)
-	var/distance = get_dist(holder, target)
-	ai_log("walk_to_target() : get_to is [get_to].", AI_LOG_TRACE)
-
-	// We're here!
-	// Special case: Our holder has a special attack that is ranged, but normally the holder uses melee.
-	// If that happens, we'll switch to STANCE_FIGHT so they can use it. If the special attack is limited, they'll likely switch back next tick.
-	if (distance <= get_to || holder.ICheckSpecialAttack(target))
-		ai_log("walk_to_target() : Within range.", AI_LOG_INFO)
-		forget_path()
-		set_stance(STANCE_FIGHT)
-		ai_log("walk_to_target() : Exiting.", AI_LOG_DEBUG)
-		return
-
-	// Otherwise keep walking.
-	if (!stand_ground)
-		walk_path(target, get_to)
-
-	ai_log("walk_to_target() : Exiting.", AI_LOG_DEBUG)
-
 // Resists out of things.
 // Sometimes there are times you want your mob to be buckled to something, so override this for when that is needed.
 /datum/ai_holder/proc/handle_resist()
@@ -231,6 +229,7 @@
 	// Sometimes the mob will try to hit something diagonally, and generally this fails.
 	// So instead we will try two more times with some adjustments if the attack fails.
 	var/list/directions_to_try = list(
+		null, // Try our own turf first
 		dir_to_target,
 		turn(dir_to_target, 45),
 		turn(dir_to_target, -45)
@@ -257,63 +256,74 @@
 	ai_log("breakthrough() : Exiting with [result].", AI_LOG_TRACE)
 	return result
 
+// Pry open a door, if it's unpowered/broken
+/datum/ai_holder/proc/pry_door(obj/machinery/door/door)
+	return FALSE
+
 // Despite the name, this can also be used to help clear a path without any destruction.
 /datum/ai_holder/proc/destroy_surroundings(direction, violent = TRUE)
 	ai_log("destroy_surroundings() : Entering.", AI_LOG_TRACE)
-	if (!direction)
-		direction = pick(GLOB.cardinal) // FLAIL WILDLY
-		ai_log("destroy_surroundings() : No direction given, picked [direction] randomly.", AI_LOG_DEBUG)
 
-	var/turf/problem_turf = get_step(holder, direction)
+	// Follow a direction, otherwise destroy obstacles on our own tile.
+	var/turf/problem_turf = direction ? get_step(holder, direction) : get_turf(holder)
 
 	// First, give peace a chance.
 	if (!violent)
 		ai_log("destroy_surroundings() : Going to try to peacefully clear [problem_turf].", AI_LOG_DEBUG)
-		for(var/obj/machinery/door/D in problem_turf)
-			if (D.density && holder.Adjacent(D))
-
+		for(var/obj/machinery/door/door in problem_turf)
+			if (door.density && holder.Adjacent(door))
 				//Try to open the door if we're allowed too.
-				if (D.allowed(holder) && D.operable())
+				if (door.allowed(holder) && door.operable())
 					// First, try to open the door if possible without smashing it. We might have access.
 					ai_log("destroy_surroundings() : Opening closed door.", AI_LOG_INFO)
-					return D.Bumped(holder)
+					return door.Bumped(holder)
 
 				//Try to force the door if its broken/has no power
-				if (!prying && holder.can_pry && !D.operable())
-					prying = TRUE
-					var/pry_time_holder = (D.pry_mod * holder.pry_time)
-					holder.pry_door(holder, pry_time_holder, D)
+				return pry_door(door)
+
+		// Open any closets in the way.
+		for(var/obj/structure/closet/closet in problem_turf)
+			if (closet.density && !closet.locked && !closet.welded)
+				ai_log("destroy_surroundings() : Opening closed closet.", AI_LOG_INFO)
+				return closet.open()
 
 	// Peace has failed us, can we just smash the things in the way?
 	else
 		ai_log("destroy_surroundings() : Going to try to violently clear [problem_turf].", AI_LOG_DEBUG)
-		// First, kill windows in the way.
-		for(var/obj/structure/window/W in problem_turf)
-			if (W.dir == GLOB.reverse_dir[holder.dir]) // So that windows get smashed in the right order
-				ai_log("destroy_surroundings() : Attacking side window.", AI_LOG_INFO)
-				return melee_attack(W)
 
-			else if (W.is_fulltile())
-				ai_log("destroy_surroundings() : Attacking full tile window.", AI_LOG_INFO)
-				return melee_attack(W)
-
-		// Kill hull shields in the way.
+		// First, check for hull shields in the way.
 		for(var/obj/energy_field/shield in problem_turf)
 			if (shield.density) // Don't attack shields that are already down.
 				ai_log("destroy_surroundings() : Attacking hull shield.", AI_LOG_INFO)
-				return melee_attack(shield)
+				return obstacle_attack(shield)
 
-		// Kill common obstacle in the way like tables.
-		for(var/obstacle in valid_obstacles_by_priority)
-			obstacle = locate(obstacle) in problem_turf
-			if (obstacle)
-				ai_log("destroy_surroundings() : Attacking generic structure.", AI_LOG_INFO)
-				return melee_attack(obstacle)
+		for(var/obj/machinery/door/door in problem_turf)
+			if (door.density)
+				ai_log("destroy_surroundings() : Attacking closed door [door].", AI_LOG_INFO)
+				return obstacle_attack(door)
 
-		for(var/obj/machinery/door/D in problem_turf) // Required since firelocks take up the same turf.
-			if (D.density)
-				ai_log("destroy_surroundings() : Attacking closed door.", AI_LOG_INFO)
-				return melee_attack(D)
+		// Kill windows in the way.
+		for(var/obj/structure/window/window in problem_turf)
+			if (window.dir == GLOB.reverse_dir[holder.dir]) // So that windows get smashed in the right order
+				ai_log("destroy_surroundings() : Attacking side window.", AI_LOG_INFO)
+				return obstacle_attack(window)
+
+			else if (window.is_fulltile())
+				ai_log("destroy_surroundings() : Attacking full tile window.", AI_LOG_INFO)
+				return obstacle_attack(window)
+
+		// Kill common obstacles in the way like tables.
+		for(var/obstacle_type in valid_obstacles_by_priority)
+			for(var/atom/obstacle in problem_turf)
+				if (!istype(obstacle, obstacle_type))
+					continue
+				if (!obstacle.density)
+					continue
+				ai_log("destroy_surroundings() : Attacking obstacle [obstacle]", AI_LOG_INFO)
+				if (obstacle.throwpass) // If bullets would fly over it, default to melee.
+					return melee_attack(obstacle)
+				return obstacle_attack(obstacle) // Otherwise let us choose.
+
 
 	ai_log("destroy_surroundings() : Exiting due to nothing to attack.", AI_LOG_INFO)
 	return ATTACK_FAILED // Nothing to attack.
