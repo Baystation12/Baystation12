@@ -1,5 +1,0 @@
-author: Slywater
-delete-after: true
-changes:
-  - bugfix: You can once again buckle yourself while incapacitated, and interact with
-      items from a chair (assuming you're not in pain crit).
