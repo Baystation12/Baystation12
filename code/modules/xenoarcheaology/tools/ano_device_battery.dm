@@ -19,7 +19,6 @@
 	name = "Anomaly power utilizer"
 	icon = 'icons/obj/tools/xenoarcheology_anomaly_utilizer.dmi'
 	icon_state = "anodev"
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	var/activated = 0
 	var/duration = 0
 	var/interval = 0
@@ -204,7 +203,7 @@
 	STOP_PROCESSING(SSobj, src)
 	..()
 
-/obj/item/anodevice/attack(mob/living/M as mob, mob/living/user as mob)
+/obj/item/anodevice/use_before(mob/living/M as mob, mob/living/user as mob)
 	. = FALSE
 	if (!istype(M))
 		return FALSE

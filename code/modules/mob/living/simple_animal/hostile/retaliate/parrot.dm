@@ -262,7 +262,7 @@
 	..()
 
 	// React to being hit
-	if ((use_call == "weapon" || use_call == "attackby") && !stat && !client)
+	if ((use_call == "weapon" || use_call == "use") && !stat && !client)
 		if (parrot_state == PARROT_PERCH)
 			parrot_sleep_dur = parrot_sleep_max //Reset it's sleep timer if it was perched
 

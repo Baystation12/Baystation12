@@ -3,7 +3,6 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "labeler0"
 	item_state = "flight"
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	matter = list(MATERIAL_PLASTIC = 100)
 
 	/// If set, the label text this will apply.
@@ -22,7 +21,7 @@
 	icon_state = "labeler[!isnull(label)]"
 
 
-/obj/item/hand_labeler/attack(atom/target, mob/living/user)
+/obj/item/hand_labeler/use_before(atom/target, mob/living/user)
 	. = FALSE
 	if (label)
 		target.AddLabel(label, user)

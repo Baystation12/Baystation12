@@ -3,11 +3,9 @@
 	name = "data cable"
 	icon = 'icons/obj/machines/power/power_local.dmi'
 	icon_state = "wire1"
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	var/obj/machinery/machine
 
-
-/obj/item/pai_cable/attack(obj/machinery/M as obj, mob/user as mob)
+/obj/item/pai_cable/use_before(obj/machinery/M as obj, mob/user as mob)
 	. = FALSE
 	if (istype(M, /obj/machinery/door) || istype(M, /obj/machinery/camera))
 		if (!user.unEquip(src, M))

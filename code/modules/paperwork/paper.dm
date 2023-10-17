@@ -21,7 +21,6 @@
 	randpixel = 8
 	throwforce = 0
 	w_class = ITEM_SIZE_TINY
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	throw_range = 1
 	throw_speed = 1
 	layer = ABOVE_OBJ_LAYER
@@ -223,7 +222,7 @@
 /obj/item/paper/attack_ai(mob/living/silicon/ai/user)
 	show_content(user)
 
-/obj/item/paper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/paper/use_before(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	. = FALSE
 	if (!istype(M))
 		return FALSE

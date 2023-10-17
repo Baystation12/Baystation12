@@ -95,14 +95,6 @@
 
 	return ..()
 
-
-/obj/item/device/mmi/use_weapon(obj/item/weapon, mob/user, list/click_params)
-	if (brainmob && weapon.attack(brainmob, user))
-		return TRUE
-
-	return ..()
-
-
 	//TODO: ORGAN REMOVAL UPDATE. Make the brain remain in the MMI so it doesn't lose organ data.
 /obj/item/device/mmi/attack_self(mob/user as mob)
 	if(!brainmob)

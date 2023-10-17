@@ -11,7 +11,6 @@
 	icon = 'icons/obj/food/food.dmi'
 	icon_state = "emptycondiment"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	possible_transfer_amounts = "1;5;10"
 	center_of_mass = "x=16;y=6"
 	volume = 50
@@ -42,7 +41,7 @@
 /obj/item/reagent_containers/food/condiment/attack_self(mob/user as mob)
 	return
 
-/obj/item/reagent_containers/food/condiment/attack(mob/M as mob, mob/user as mob)
+/obj/item/reagent_containers/food/condiment/use_before(mob/M as mob, mob/user as mob)
 	. = FALSE
 	if (!istype(M))
 		return FALSE

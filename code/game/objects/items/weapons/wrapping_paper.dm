@@ -8,7 +8,6 @@
 	singular_name = "sheet"
 	amount = 25
 	max_amount = 25
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	icon = 'icons/obj/parcels.dmi'
 	var/package_type
 
@@ -70,8 +69,8 @@
 	return
 
 
-/obj/item/stack/package_wrap/use_on(obj/object, mob/user)
-	if (!isobj(object) || istype(object, src))
+/obj/item/stack/package_wrap/use_after(obj/object, mob/user)
+	if (!isobj(object))
 		return FALSE
 	if (istype(object, /obj/item/smallDelivery) || istype(object,/obj/structure/bigDelivery) || istype(object, /obj/item/evidencebag))
 		to_chat(user, SPAN_WARNING("\The [object] is already wrapped."))
@@ -111,8 +110,6 @@
 	if (istype(object, /obj/structure/closet/crate) || istype(object, /obj/structure/closet))
 		var/item_size
 		var/obj/structure/closet/target = object
-		if (target.opened)
-			return FALSE
 		if (istype(object, /obj/structure/closet/crate))
 			item_size = BASE_STORAGE_COST(ITEM_SIZE_NORMAL)
 		else
@@ -129,7 +126,7 @@
 		wrap_item(package_type, target, user)
 		return TRUE
 
-/obj/item/stack/package_wrap/attack(mob/living/target, mob/living/user)
+/obj/item/stack/package_wrap/use_before(mob/living/target, mob/living/user)
 	if (!istype(target, /mob/living/carbon/human))
 		return FALSE
 	var/mob/living/carbon/human/H = target

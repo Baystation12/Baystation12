@@ -4,7 +4,6 @@
 	icon = 'icons/obj/auto_cpr.dmi'
 	icon_state = "pumper"
 	w_class = ITEM_SIZE_NORMAL
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
 	slot_flags = SLOT_OCLOTHING
 	var/last_pump
@@ -19,7 +18,7 @@
 	else
 		return FALSE
 
-/obj/item/auto_cpr/attack(mob/living/carbon/human/M, mob/living/user)
+/obj/item/auto_cpr/use_before(mob/living/carbon/human/M, mob/living/user)
 	. = FALSE
 	if (istype(M) && user.a_intent == I_HELP)
 		if (M.wear_suit)

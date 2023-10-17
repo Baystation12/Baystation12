@@ -3,7 +3,6 @@
 	desc = "Yummy!"
 	icon = 'icons/obj/food/food.dmi'
 	center_of_mass = "x=16;y=16"
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	var/bitesize = 1
 	var/bitecount = 0
 	var/slice_path
@@ -56,7 +55,7 @@
 	return
 
 
-/obj/item/reagent_containers/food/snacks/attack(mob/M as mob, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/use_before(mob/M as mob, mob/user as mob)
 	. = FALSE
 	if (!istype(M, /mob/living/carbon))
 		return FALSE

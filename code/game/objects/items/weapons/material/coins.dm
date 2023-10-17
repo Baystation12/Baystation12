@@ -4,14 +4,12 @@
 	icon_state = "coin1"
 	applies_material_colour = TRUE
 	randpixel = 8
-	force = 1
 	throwforce = 1
 	max_force = 5
 	force_multiplier = 0.1
 	thrown_force_multiplier = 0.1
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	item_flags = ITEM_FLAG_TRY_ATTACK
 
 	/// The smallest interval allowed between coin flips.
 	var/const/FLIP_COOLDOWN = 5 SECONDS
@@ -40,14 +38,12 @@
 		ClearOverlays()
 
 
-/obj/item/material/coin/attack(atom/target, mob/living/user)
-	. = FALSE
+/obj/item/material/coin/use_after(atom/target, mob/living/user)
+
 	if (target == user)
 		attack_self(user)
 		return TRUE
 	if (ismob(target))
-		if (check_possible_surgeries(target, user))
-			return FALSE
 		if (user.a_intent == I_HURT)
 			user.visible_message(
 				SPAN_WARNING("\The [user] menaces \the [target] with \a [src]."),

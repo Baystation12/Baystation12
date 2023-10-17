@@ -9,7 +9,6 @@
 	desc = "A hand-held scanner able to diagnose robotic injuries."
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	throwforce = 3
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 5
@@ -114,7 +113,7 @@
 	playsound(user,'sound/effects/scanbeep.ogg', 30)
 	return
 
-/obj/item/device/robotanalyzer/attack(mob/living/M, mob/living/user)
+/obj/item/device/robotanalyzer/use_before(mob/living/M, mob/living/user)
 	. = FALSE
 	if (!istype(M))
 		return FALSE

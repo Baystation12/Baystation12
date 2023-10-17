@@ -7,13 +7,12 @@
 	edge = TRUE
 	sharp = TRUE
 	w_class = ITEM_SIZE_LARGE
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	force = 30
 	throwforce = 10
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "tore", "ripped", "diced", "cut")
 
-/obj/item/melee/cultblade/attack(mob/living/M, mob/living/user)
+/obj/item/melee/cultblade/use_before(mob/living/M, mob/living/user)
 	. = FALSE
 	if (iscultist(user))
 		return FALSE

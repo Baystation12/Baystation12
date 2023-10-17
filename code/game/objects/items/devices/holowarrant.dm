@@ -9,7 +9,6 @@
 	throw_speed = 4
 	throw_range = 10
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	slot_flags = SLOT_BELT
 	req_access = list(list(access_heads, access_security))
 	var/datum/computer_file/data/warrant/active
@@ -82,7 +81,7 @@
 
 
 //hit other people with it
-/obj/item/device/holowarrant/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/device/holowarrant/use_before(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	. = FALSE
 	if(istype(M))
 		user.visible_message(SPAN_NOTICE("[user] holds up a warrant projector and shows the contents to [M]."), \

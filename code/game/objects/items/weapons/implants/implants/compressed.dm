@@ -49,7 +49,7 @@
 		icon_state = "cimplanter0"
 	return
 
-/obj/item/implanter/compressed/attack(mob/M as mob, mob/user as mob)
+/obj/item/implanter/compressed/use_before(mob/M as mob, mob/user as mob)
 	var/obj/item/implant/compressed/c = imp
 	if (!c || !istype(M, /mob/living/carbon))
 		return FALSE

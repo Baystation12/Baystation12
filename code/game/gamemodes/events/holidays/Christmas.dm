@@ -4,12 +4,11 @@
 	icon_state = "cracker"
 	desc = "Directions for use: Requires two people, one to pull each end."
 	var/cracked = 0
-	item_flags = ITEM_FLAG_TRY_ATTACK
 
 /obj/item/toy/xmas_cracker/New()
 	..()
 
-/obj/item/toy/xmas_cracker/attack(mob/target, mob/user)
+/obj/item/toy/xmas_cracker/use_before(mob/target, mob/user)
 	. = FALSE
 	if (!cracked && istype(target,/mob/living/carbon/human) && (target.stat == CONSCIOUS) && !target.get_active_hand() )
 		target.visible_message(SPAN_NOTICE("[user] and [target] pop \an [src]! *pop*"), SPAN_NOTICE("You pull \an [src] with [target]! *pop*"), SPAN_NOTICE("You hear a *pop*."))

@@ -5,7 +5,6 @@ var/global/list/organ_cache = list()
 	icon = 'icons/obj/organs.dmi'
 	germ_level = 0
 	w_class = ITEM_SIZE_TINY
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	default_action_type = /datum/action/item_action/organ
 
 	// Strings.
@@ -304,7 +303,7 @@ var/global/list/organ_cache = list()
 		set_dna(owner.dna)
 	return 1
 
-/obj/item/organ/attack(mob/target, mob/user)
+/obj/item/organ/use_before(mob/target, mob/user)
 	. = FALSE
 	if (status & ORGAN_ROBOTIC || !istype(target) || !istype(user) || (user != target && user.a_intent == I_HELP))
 		return FALSE
