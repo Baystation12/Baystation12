@@ -1,0 +1,10 @@
+author: Slywater
+delete-after: true
+changes:
+  - rscadd: Diona, monkey, and zombie NPCs are now processed under the new AI subsystem.
+  - rscadd: Hostile NPCs will now search for prey upon losing sight of them. They'll
+      patrol the area and break into potential hiding spots.
+  - rscadd: Passive NPCs such as mice, cats, and monkeys will now flee from threats
+      if attacked.
+  - bugfix: Fixed NPC attack reactions, calls for backup & environment destruction
+      priorities.
