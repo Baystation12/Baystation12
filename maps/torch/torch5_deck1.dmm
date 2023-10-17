@@ -22417,7 +22417,8 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atm{
-	pixel_x = 32
+	dir = 8;
+	pixel_x = 24
 	},
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
@@ -29802,7 +29803,8 @@
 /obj/structure/bed/padded,
 /obj/item/bedsheet/orange,
 /obj/machinery/atm{
-	pixel_y = -32
+	dir = 1;
+	pixel_y = -23
 	},
 /turf/simulated/floor/tiled,
 /area/security/brig)

@@ -15463,7 +15463,8 @@
 	},
 /obj/floor_decal/industrial/warning/fulltile,
 /obj/machinery/atm{
-	pixel_x = 32
+	dir = 8;
+	pixel_x = 24
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)

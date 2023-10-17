@@ -8489,6 +8489,10 @@
 /obj/floor_decal/corner/green{
 	dir = 10
 	},
+/obj/machinery/atm{
+	dir = 1;
+	pixel_y = -25
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/center)
 "tK" = (
@@ -16262,12 +16266,12 @@
 	pixel_y = 10
 	},
 /obj/item/reagent_containers/glass/rag{
-	pixel_y = 4;
-	pixel_x = -3
+	pixel_x = -3;
+	pixel_y = 4
 	},
 /obj/item/reagent_containers/glass/rag{
-	pixel_y = 4;
-	pixel_x = 3
+	pixel_x = 3;
+	pixel_y = 4
 	},
 /obj/machinery/light{
 	dir = 8

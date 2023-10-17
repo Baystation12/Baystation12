@@ -35,7 +35,6 @@
 /obj/machinery/atm/Process()
 	if(!is_powered())
 		return
-
 	if(ticks_left_timeout > 0)
 		ticks_left_timeout--
 		if(ticks_left_timeout <= 0)
@@ -52,6 +51,12 @@
 		else
 			playsound(loc, 'sound/items/polaroid2.ogg', 50, 1)
 		break
+
+/obj/machinery/atm/on_update_icon()
+	if(!is_powered())
+		icon_state = "atm_off"
+	else
+		icon_state = "atm"
 
 /obj/machinery/atm/emag_act(remaining_charges, mob/user)
 	if(!emagged)
