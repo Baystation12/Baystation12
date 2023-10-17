@@ -28,13 +28,14 @@
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 
+	ai_holder = /datum/ai_holder/alien/passive/diona
+	say_list_type = /datum/say_list/diona
+
 	holder_type = /obj/item/holder/diona
 	possession_candidate = 1
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
 	hud_type = /datum/hud/diona_nymph
 
-	var/emote_prob = 1
-	var/wander_prob = 33
 	var/obj/item/hat
 	var/obj/item/holding_item
 	var/mob/living/carbon/alien/diona/next_nymph
@@ -58,8 +59,7 @@
 
 /mob/living/carbon/alien/diona/sterile
 	name = "sterile nymph"
-	emote_prob =  0
-	wander_prob = 0
+	ai_holder = /datum/ai_holder/alien/passive/diona/sterile
 
 /mob/living/carbon/alien/diona/sterile/Initialize(mapload)
 	. = ..(mapload, 0)
@@ -93,14 +93,6 @@
 
 /mob/living/carbon/alien/diona/IsAdvancedToolUser()
 	return FALSE
-
-/mob/living/carbon/alien/diona/proc/handle_npc(mob/living/carbon/alien/diona/D)
-	if(D.stat != CONSCIOUS)
-		return
-	if(prob(wander_prob) && isturf(D.loc) && !D.pulledby) //won't move if being pulled
-		SelfMove(pick(GLOB.cardinal))
-	if(prob(emote_prob))
-		D.emote(pick("scratch","jump","chirp","tail"))
 
 /proc/split_into_nymphs(mob/living/carbon/human/donor, dying)
 
@@ -151,3 +143,15 @@
 	donor.visible_message(SPAN_WARNING("\The [donor] quivers slightly, then splits apart with a wet slithering noise."))
 	if (!dying)
 		qdel(donor)
+
+/datum/say_list/diona
+	emote_predef = list("chirp","scratch","jump","tail")
+
+/datum/ai_holder/alien/passive/diona
+	speak_chance = 2
+	wander_chance = 33
+
+/datum/ai_holder/alien/passive/diona/sterile
+	can_flee = FALSE
+	speak_chance =  0
+	wander_chance = 0

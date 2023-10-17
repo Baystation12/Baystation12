@@ -27,6 +27,3 @@
 		handle_viruses()
 
 		. = 1
-
-		if(!client && (!mind || ghosted) && species)
-			species.handle_npc(src)

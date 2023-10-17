@@ -77,44 +77,53 @@
 
 // Temp defines to make the below code a bit more readable.
 #define COMM_SAY				"say"
+#define COMM_PREDEF_EMOTE		"predef emote"
 #define COMM_AUDIBLE_EMOTE		"audible emote"
 #define COMM_VISUAL_EMOTE		"visual emote"
 
+/datum/ai_holder/proc/check_listeners()
+	// Check if anyone is around to 'appreciate' what we say.
+	for(var/m in viewers(holder))
+		var/mob/M = m
+		if (M.client)
+			return TRUE
+	return FALSE // Forever alone. No point doing anything else.
+
+/datum/ai_holder/proc/emote_random()
+	var/list/comm_types = list() // What kinds of things can we do?
+	if (!holder.say_list)
+		return
+
+	if (length(holder.say_list?.speak))
+		comm_types += COMM_SAY
+	if (length(holder.say_list?.emote_predef))
+		comm_types += COMM_PREDEF_EMOTE
+	if (length(holder.say_list?.emote_hear))
+		comm_types += COMM_AUDIBLE_EMOTE
+	if (length(holder.say_list?.emote_see))
+		comm_types += COMM_VISUAL_EMOTE
+
+	if (!length(comm_types))
+		return // All the relevant lists are empty, so do nothing.
+
+	switch(pick(comm_types))
+		if (COMM_SAY)
+			holder.ISay(pick(holder.say_list.speak))
+		if (COMM_PREDEF_EMOTE)
+			holder.emote(pick(holder.say_list.emote_predef))
+		if (COMM_AUDIBLE_EMOTE)
+			holder.audible_emote(pick(holder.say_list.emote_hear))
+		if (COMM_VISUAL_EMOTE)
+			holder.visible_emote(pick(holder.say_list.emote_see))
+
+// Override this if you want non-standard idle emote behaviour. E.g., reactions to injury.
 /datum/ai_holder/proc/handle_idle_speaking()
-	if (rand(0,200) < speak_chance)
-		// Check if anyone is around to 'appreciate' what we say.
-		var/alone = TRUE
-		for(var/m in viewers(holder))
-			var/mob/M = m
-			if (M.client)
-				alone = FALSE
-				break
-		if (alone) // Forever alone. No point doing anything else.
-			return
-
-		var/list/comm_types = list() // What kinds of things can we do?
-		if (!holder.say_list)
-			return
-
-		if (length(holder.say_list?.speak))
-			comm_types += COMM_SAY
-		if (length(holder.say_list?.emote_hear))
-			comm_types += COMM_AUDIBLE_EMOTE
-		if (length(holder.say_list?.emote_see))
-			comm_types += COMM_VISUAL_EMOTE
-
-		if (!length(comm_types))
-			return // All the relevant lists are empty, so do nothing.
-
-		switch(pick(comm_types))
-			if (COMM_SAY)
-				holder.ISay(pick(holder.say_list.speak))
-			if (COMM_AUDIBLE_EMOTE)
-				holder.audible_emote(pick(holder.say_list.emote_hear))
-			if (COMM_VISUAL_EMOTE)
-				holder.visible_emote(pick(holder.say_list.emote_see))
+	if (!check_listeners())
+		return
+	emote_random()
 
 #undef COMM_SAY
+#undef COMM_PREDEF_EMOTE
 #undef COMM_AUDIBLE_EMOTE
 #undef COMM_VISUAL_EMOTE
 
