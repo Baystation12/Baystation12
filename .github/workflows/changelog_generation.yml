@@ -16,7 +16,7 @@ jobs:
     if: github.repository == 'Baystation12/Baystation12' # to prevent this running on forks
     steps:
       - name: Checkout
-        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
         with:
           fetch-depth: 0 # Otherwise, we will fail to push refs
           ref: dev
