@@ -1,5 +1,5 @@
 /obj/item/gun/projectile/pistol/m22f
-	name = "military pistol"
+	name = "heavy military pistol"
 	desc = "A Hephaestus Industries M22F. A large pistol issued as an SCGDF service weapon."
 	magazine_type = /obj/item/ammo_magazine/pistol/double
 	allowed_magazines = /obj/item/ammo_magazine/pistol/double
