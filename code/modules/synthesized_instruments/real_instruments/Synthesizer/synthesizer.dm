@@ -2,6 +2,8 @@
 
 /datum/sound_player/synthesizer
 	volume = 40
+	range = 10
+	falloff = 1
 
 /obj/structure/synthesized_instrument/synthesizer
 	name = "The Synthesizer 3.0"
