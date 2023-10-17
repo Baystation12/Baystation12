@@ -102,7 +102,7 @@
 			to_chat(user, SPAN_WARNING("\The [target] must be restrained to buckle them to \the [src]."))
 		return FALSE
 	if (user)
-		if (user.incapacitated())
+		if (user != target && user.incapacitated())
 			if (!silent)
 				to_chat(user, SPAN_WARNING("You're in no condition to buckle things right now."))
 			return FALSE
