@@ -1,0 +1,5 @@
+author: emmanuelbassil
+delete-after: true
+changes:
+  - tweak: Clicking on yourself with a pill bottle no matter the targeted area consumes
+      a pill. Previous behavior required targeting mouth.
