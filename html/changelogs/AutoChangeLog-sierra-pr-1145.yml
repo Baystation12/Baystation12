@@ -1,0 +1,4 @@
+author: cuddleandtea
+delete-after: true
+changes:
+  - bugfix: Corrected light build mode default power to 1.
