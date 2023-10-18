@@ -1,0 +1,8 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - balance: Radios can now be used while weakened, but are still blocked when paralyzed
+      or stunned.
+  - balance: Radios can no longer be used while under the voiceloss chemical effect
+      (The one that forces you to whisper). This applies to amaspores (Amatoxin poisoning)
+      and vecoronium bromide (Paralysis pen).
