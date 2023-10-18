@@ -355,7 +355,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 	// flush handle
 	if(flush)
-		AddOverlays(image('icons/obj/pipes/disposal.dmi', "dispover-handle"))
+		AddOverlays(image(icon, "dispover-handle"))
 
 	// only handle is shown if no power
 	if(!is_powered() || mode == -1)
@@ -363,13 +363,13 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 	// 	check for items/vomit in disposal - occupied light
 	if(length(contents) > LAZYLEN(component_parts) || reagents.total_volume)
-		AddOverlays(image('icons/obj/pipes/disposal.dmi', "dispover-full"))
+		AddOverlays(image(icon, "dispover-full"))
 
 	// charging and ready light
 	if(mode == 1)
-		AddOverlays(image('icons/obj/pipes/disposal.dmi', "dispover-charge"))
+		AddOverlays(image(icon, "dispover-charge"))
 	else if(mode == 2)
-		AddOverlays(image('icons/obj/pipes/disposal.dmi', "dispover-ready"))
+		AddOverlays(image(icon, "dispover-ready"))
 
 // timed process
 // charge the gas reservoir and perform flush if ready
