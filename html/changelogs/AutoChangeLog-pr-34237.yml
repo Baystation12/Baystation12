@@ -1,5 +1,0 @@
-author: Qlonever
-delete-after: true
-changes:
-  - bugfix: Open crates, large crates, closets, and wall closets now use correct decal
-      icons.
