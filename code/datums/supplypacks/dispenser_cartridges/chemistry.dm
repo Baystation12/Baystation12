@@ -205,3 +205,13 @@
 		/obj/item/reagent_containers/chem_disp_cartridge/tungsten = 2
 	)
 	cost = 15
+
+/singleton/hierarchy/supply_pack/dispenser_cartridges/oxygen
+	name = "Reagent refill - oxygen"
+	containername = "oxygen reagent cartridge crate"
+	containertype = /obj/structure/closet/crate/secure
+	access = list(access_chemistry)
+	contains = list(
+		/obj/item/reagent_containers/chem_disp_cartridge/oxygen = 2
+	)
+	cost = 15

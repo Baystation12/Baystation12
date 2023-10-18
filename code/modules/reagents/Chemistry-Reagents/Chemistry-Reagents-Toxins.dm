@@ -447,6 +447,14 @@
 /datum/reagent/toxin/fertilizer/robustharvest
 	name = "Robust Harvest"
 
+/datum/reagent/toxin/fertilizer/potash
+	name = "Potassium Nitrate"
+	description = "Also known as Saltpetre. Useful as a fertilizer."
+	taste_description = "sharp salt"
+	reagent_state = SOLID
+	color = "#c7beb9"
+	value = 0.9
+
 /datum/reagent/toxin/plantbgone
 	name = "Plant-B-Gone"
 	description = "A harmful toxic mixture to kill plantlife. Do not ingest!"
@@ -465,7 +473,7 @@
 			W.visible_message(SPAN_NOTICE("The fungi are completely dissolved by the solution!"))
 
 /datum/reagent/toxin/plantbgone/touch_obj(obj/O, volume)
-	if(istype(O, /obj/vine))
+	if(istype(O, /obj/effect/vine))
 		qdel(O)
 
 /datum/reagent/toxin/plantbgone/affect_blood(mob/living/carbon/M, removed)
@@ -1154,7 +1162,7 @@
 	if(istype(M))
 		for(var/obj/item/organ/external/E in M.organs)
 			if(LAZYLEN(E.implants))
-				for(var/obj/spider/spider in E.implants)
+				for(var/obj/effect/spider/spider in E.implants)
 					if(prob(25))
 						E.implants -= spider
 						M.visible_message(SPAN_NOTICE("The dying form of \a [spider] emerges from inside \the [M]'s [E.name]."))

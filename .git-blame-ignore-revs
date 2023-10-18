@@ -30,5 +30,5 @@ bca4aa1184eca550a6d9543a93d720ba6dc10b20
 # obj/effect/ -> obj/
 8cd28ed954d5873c1b20f35ce58aa5820803ec4c
 
-# datum/effect/effect/system & datum/effect/system -> datum/effect
+# datum/effect & datum/effect/system -> datum/effect
 96f09a4736ccdc33d9651aa9f162d27e3263b127

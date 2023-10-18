@@ -20,7 +20,8 @@
 			/obj/item/reagent_containers/chem_disp_cartridge/ethanol,
 			/obj/item/reagent_containers/chem_disp_cartridge/sugar,
 			/obj/item/reagent_containers/chem_disp_cartridge/acid,
-			/obj/item/reagent_containers/chem_disp_cartridge/tungsten
+			/obj/item/reagent_containers/chem_disp_cartridge/tungsten,
+			/obj/item/reagent_containers/chem_disp_cartridge/oxygen
 		)
 
 /obj/machinery/chemical_dispenser/ert
