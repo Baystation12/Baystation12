@@ -560,7 +560,6 @@
 			return
 		else if(target != locked)
 			if(locked in view(holder.wearer))
-				admin_attack_log(holder.wearer, holder.loc, "used [src] to throw their target at [target].")
 				endanimation() //End animation without waiting for delete, so throw won't be affected
 				locked.throw_at(target, 14, 1.5, holder.wearer)
 				locked = null
