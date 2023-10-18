@@ -7,7 +7,6 @@
 	amount_per_transfer_from_this = 5
 	volume = 30
 	possible_transfer_amounts = null
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	canremove = FALSE
 
 	/// Numeric index of the synthesizer in use, or 0 if dispensing from an external container
@@ -57,7 +56,7 @@
 					reagent_volumes[T] = min(reagent_volumes[T] + 5, volume)
 	return 1
 
-/obj/item/reagent_containers/borghypo/attack(mob/living/M, mob/user)
+/obj/item/reagent_containers/borghypo/use_before(mob/living/M, mob/user)
 	. = FALSE
 	if (!istype(M))
 		return FALSE
@@ -250,7 +249,7 @@
 		/datum/reagent/ethanol/coffee/kahlua
 		)
 
-/obj/item/reagent_containers/borghypo/service/attack(mob/M, mob/user)
+/obj/item/reagent_containers/borghypo/service/use_before(mob/M, mob/user)
 	return FALSE //We don't want the service borg to be able to inject alcohol into blood.
 
 /obj/item/reagent_containers/borghypo/service/afterattack(obj/target, mob/user, proximity)

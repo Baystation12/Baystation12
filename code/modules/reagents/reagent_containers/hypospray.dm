@@ -16,7 +16,6 @@
 	possible_transfer_amounts = null
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	slot_flags = SLOT_BELT
-	item_flags = ITEM_FLAG_TRY_ATTACK
 
 	// autoinjectors takes less time than a normal syringe (overriden for hypospray).
 	// This delay is only applied when injecting concious mobs, and is not applied for self-injection
@@ -29,7 +28,7 @@
 	var/time = (1 SECONDS) / 1.9
 	var/single_use = TRUE // autoinjectors are not refillable (overriden for hypospray)
 
-/obj/item/reagent_containers/hypospray/attack(mob/living/M, mob/user)
+/obj/item/reagent_containers/hypospray/use_before(mob/living/M, mob/user)
 	. = FALSE
 	if (!istype(M))
 		return FALSE

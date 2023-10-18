@@ -7,7 +7,6 @@
  */
 /obj/item/material/kitchen/utensil
 	w_class = ITEM_SIZE_TINY
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	thrown_force_multiplier = 1
 	origin_tech = list(TECH_MATERIAL = 1)
 	attack_verb = list("attacked", "stabbed", "poked")
@@ -16,7 +15,6 @@
 	thrown_force_multiplier = 0.25 // 5 when thrown with weight 20 (steel)
 	puncture = TRUE
 	default_material = MATERIAL_ALUMINIUM
-	item_flags = ITEM_FLAG_TRY_ATTACK
 
 	var/loaded      //Descriptive string for currently loaded food object.
 	var/scoop_food = 1
@@ -28,9 +26,8 @@
 	create_reagents(5)
 	return
 
-/obj/item/material/kitchen/utensil/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	. = FALSE
-	if (!istype(M) || user.a_intent != I_HELP)
+/obj/item/material/kitchen/utensil/use_after(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	if (!istype(M))
 		return FALSE
 
 	if (reagents.total_volume > 0)
@@ -127,7 +124,6 @@
 	icon_state = "rolling_pin"
 	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "whacked")
 	default_material = MATERIAL_WOOD
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	max_force = 15
 	force_multiplier = 0.7 // 10 when wielded with weight 15 (wood)
 	thrown_force_multiplier = 1 // as above
@@ -136,7 +132,7 @@
 /obj/item/material/kitchen/rollingpin/aluminium/default_material = MATERIAL_ALUMINIUM
 
 
-/obj/item/material/kitchen/rollingpin/attack(mob/living/target, mob/living/user)
+/obj/item/material/kitchen/rollingpin/use_before(mob/living/target, mob/living/user)
 	. = FALSE
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50) && user.unEquip(src))
 		user.visible_message(

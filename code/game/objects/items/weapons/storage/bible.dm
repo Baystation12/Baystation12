@@ -7,7 +7,6 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
 	max_w_class = ITEM_SIZE_SMALL
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	max_storage_space = 4
 	var/mob/affecting = null
 	var/deity_name = "Christ"
@@ -66,7 +65,7 @@
 	renamed = 1
 	icon_changed = 1
 
-/obj/item/storage/bible/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
+/obj/item/storage/bible/use_before(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	. = FALSE
 	if (user == M || !ishuman(user) || !ishuman(M))
 		return FALSE

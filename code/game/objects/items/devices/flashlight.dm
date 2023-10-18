@@ -10,7 +10,6 @@
 	item_state = "flashlight"
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	slot_flags = SLOT_BELT
 
 	matter = list(MATERIAL_PLASTIC = 50, MATERIAL_GLASS = 20)
@@ -91,11 +90,9 @@
 		set_dir(new_dir)
 		update_light()
 
-/obj/item/device/flashlight/attack(mob/living/M as mob, mob/living/user as mob)
-	. = FALSE
+/obj/item/device/flashlight/use_after(mob/living/M as mob, mob/living/user as mob)
 	if (istype(M) && on && user.zone_sel.selecting == BP_EYES)
-
-		if((MUTATION_CLUMSY in user.mutations) && prob(50) || user.a_intent == I_HURT)
+		if((MUTATION_CLUMSY in user.mutations) && prob(50))
 			return M.use_weapon(src, user)
 
 		var/mob/living/carbon/human/H = M

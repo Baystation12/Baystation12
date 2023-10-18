@@ -2,7 +2,6 @@
 	name = "psychic power"
 	icon = 'icons/obj/psychic_powers.dmi'
 	atom_flags = 0
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	anchored = TRUE
 	var/maintain_cost = 3
 	var/mob/living/owner
@@ -29,7 +28,7 @@
 	sound_to(owner, 'sound/effects/psi/power_fail.ogg')
 	user.drop_from_inventory(src)
 
-/obj/item/psychic_power/attack(mob/living/M, mob/living/user)
+/obj/item/psychic_power/use_before(mob/living/M, mob/living/user)
 	. = FALSE
 	if(M.do_psionics_check(max(force, maintain_cost), user))
 		to_chat(user, SPAN_DANGER("\The [src] flickers violently out of phase!"))

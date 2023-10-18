@@ -384,7 +384,7 @@
 // Aura type options for `/mob/living/proc/aura_check()`.
 /// Aura checks for projectile impacts. Generally called by `/obj/item/projectile/proc/attack_mob()`. Results in `/obj/aura/proc/aura_check_bullet()`.
 #define AURA_TYPE_BULLET "Bullet"
-/// Aura checks for physical weapon attacks. Generally called by `/obj/item/proc/attack()`. Results in `/obj/aura/proc/aura_check_weapon()`.
+/// Aura checks for physical weapon attacks. Generally called by `/obj/item/proc/use_weapon()`. Results in `/obj/aura/proc/aura_check_weapon()`.
 #define AURA_TYPE_WEAPON "Weapon"
 /// Aura checks for thrown atom impacts. Generally called by `/mob/living/hitby()`. Results in `/obj/aura/proc/aura_check_thrown()`.
 #define AURA_TYPE_THROWN "Thrown"

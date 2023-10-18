@@ -6,7 +6,6 @@
 	icon_state = "lipstick"
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	var/colour = "red"
 	var/open = 0
 
@@ -38,7 +37,7 @@
 	else
 		icon_state = initial(icon_state)
 
-/obj/item/lipstick/attack(atom/A, mob/living/user as mob)
+/obj/item/lipstick/use_before(atom/A, mob/living/user as mob)
 	. = FALSE
 	if (!open)
 		to_chat(user, SPAN_NOTICE("You need to uncap \the [src] first!"))
@@ -51,7 +50,7 @@
 		if (!istype(head))
 			return TRUE
 
-		if (user.a_intent == I_HELP && user.zone_sel.selecting == BP_HEAD)
+		if (user.zone_sel.selecting == BP_HEAD)
 			head.write_on(user, name)
 			return TRUE
 
@@ -82,7 +81,7 @@
 		return TRUE
 
 
-//you can wipe off lipstick with paper! see code/modules/paperwork/paper.dm, paper/attack()
+//you can wipe off lipstick with paper! see code/modules/paperwork/paper.dm, paper/use_before()
 
 
 /obj/item/haircomb //sparklysheep's comb

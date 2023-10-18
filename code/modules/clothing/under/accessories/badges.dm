@@ -5,7 +5,6 @@
 	slot_flags = SLOT_BELT | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
 	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	on_rolled_down = ACCESSORY_ROLLED_NONE
 	var/badge_string = "Detective"
 	var/stored_name
@@ -59,7 +58,7 @@
 			user.visible_message(SPAN_NOTICE("[user] displays their [src.name].\nIt reads: [badge_string]."),SPAN_NOTICE("You display your [src.name]. It reads: [badge_string]."))
 
 
-/obj/item/clothing/accessory/badge/attack(mob/living/carbon/human/M, mob/living/user)
+/obj/item/clothing/accessory/badge/use_before(mob/living/carbon/human/M, mob/living/user)
 	. = FALSE
 	if (isliving(user) && istype(M))
 		user.visible_message(SPAN_DANGER("[user] invades [M]'s personal space, thrusting \the [src] into their face insistently."),SPAN_DANGER("You invade [M]'s personal space, thrusting \the [src] into their face insistently."))

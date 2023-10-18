@@ -203,9 +203,8 @@
 	name = "heavy arms"
 	attack_verb = list("rammed")
 	force = 5
-	item_flags = ITEM_FLAG_TRY_ATTACK
 
-/obj/item/natural_weapon/cult_builder/attack(mob/living/M, mob/living/user)
+/obj/item/natural_weapon/cult_builder/use_before(mob/living/M, mob/living/user)
 	. = FALSE
 	if (istype(M, /mob/living/simple_animal/construct))
 		if (M.health < M.maxHealth)

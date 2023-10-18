@@ -258,10 +258,3 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 
 /obj/item/stack/handle_post_surgery()
 	use(1)
-
-/obj/item/proc/check_possible_surgeries(mob/living/carbon/M, mob/user)
-	var/list/all_surgeries = GET_SINGLETON_SUBTYPE_MAP(/singleton/surgery_step)
-	for (var/singleton in all_surgeries)
-		var/singleton/surgery_step/S = all_surgeries[singleton]
-		if (S.name && S.tool_quality(src) && S.can_use(user, M, user.zone_sel.selecting, src))
-			return TRUE

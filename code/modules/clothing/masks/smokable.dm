@@ -3,7 +3,6 @@
 	desc = "You're not sure what this is. You should probably ahelp it."
 	body_parts_covered = 0
 	waterproof = FALSE
-	item_flags = ITEM_FLAG_TRY_ATTACK
 
 	var/lit = 0
 	var/icon_on
@@ -162,7 +161,7 @@
 		text = replacetext(text, "FLAME", "[W.name]")
 		light(text)
 
-/obj/item/clothing/mask/smokable/attack(mob/living/M, mob/living/user)
+/obj/item/clothing/mask/smokable/use_before(mob/living/M, mob/living/user)
 	. = FALSE
 	if (istype(M) && M.on_fire)
 		user.do_attack_animation(M)
@@ -332,7 +331,7 @@
 
 	return
 
-/obj/item/clothing/mask/smokable/cigarette/attack(mob/living/carbon/human/H, mob/user)
+/obj/item/clothing/mask/smokable/cigarette/use_before(mob/living/carbon/human/H, mob/user)
 	if (lit && H == user && istype(H))
 		var/obj/item/blocked = H.check_mouth_coverage()
 		if (blocked)

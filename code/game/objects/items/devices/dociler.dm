@@ -2,7 +2,6 @@
 	name = "dociler"
 	desc = "A complex single use recharging injector that spreads a complex neurological serum that makes animals docile and friendly. Somewhat."
 	w_class = ITEM_SIZE_NORMAL
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	origin_tech = list(TECH_BIO = 5, TECH_MATERIAL = 2)
 	icon = 'icons/obj/tools/dociler.dmi'
 	icon_state = "animal_tagger1"
@@ -32,7 +31,7 @@
 	. = ..()
 	to_chat(user, SPAN_NOTICE("It is currently [loaded? "loaded": "recharging"]."))
 
-/obj/item/device/dociler/attack(mob/living/L, mob/user)
+/obj/item/device/dociler/use_before(mob/living/L, mob/user)
 	. = FALSE
 	if (!istype(L))
 		return FALSE

@@ -23,7 +23,7 @@
 	possible_transfer_amounts = "5"
 	volume = 10
 	can_be_placed_into = null
-	item_flags = ITEM_FLAG_NO_BLUDGEON | ITEM_FLAG_TRY_ATTACK
+	item_flags = ITEM_FLAG_NO_BLUDGEON
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = FALSE
 
@@ -114,75 +114,76 @@
 			else
 				A.clean_blood()
 
-/obj/item/reagent_containers/glass/rag/attack(atom/target as obj|turf|area, mob/user as mob , flag)
-	. = FALSE
-	if (isliving(target))
-		var/mob/living/M = target
-		if (on_fire)
-			if (user.a_intent == I_HELP)
-				return FALSE
-			user.visible_message(
-				SPAN_DANGER("\The [user] hits \the [target] with \the [src]!"),
-				SPAN_DANGER("You hit \the [target] with \the [src]!")
-			)
-			user.do_attack_animation(src)
-			admin_attack_log(user, M, "used \the [src] (ignited) to attack", "was attacked using \the [src] (ignited)", "attacked with \the [src] (ignited)")
-			M.IgniteMob()
-			return TRUE
-		else if (reagents.total_volume)
-			if (iscarbon(target) && user.a_intent == I_HELP && flag == BP_HEAD)
-				var/mob/living/carbon/C = target
-				var/obj/item/organ/external/head/H = C.organs_by_name[BP_HEAD]
-				if (istype(H) && H.forehead_graffiti)
-					var/datum/reagent/R = /datum/reagent/acetone
-					var/wash_amount = 5
-					if (reagents.has_reagent(R, wash_amount))
-						H.forehead_graffiti = null
-						reagents.remove_reagent(R, wash_amount)
-						if (user == target)
-							var/datum/pronouns/P = M.choose_from_pronouns()
-							user.visible_message(SPAN_NOTICE("\The [user] scrubs the ink off [P.his] forehead."), SPAN_NOTICE("You scrub the ink off your forehead."))
-						else
-							user.visible_message(SPAN_NOTICE("\The [user] scrubs the ink off \the [M]'s forehead."), SPAN_NOTICE("You scrub the ink off \the [M]'s forehead."))
+/obj/item/reagent_containers/glass/rag/use_before(mob/living/target, mob/user as mob , flag)
+	if (!istype(target))
+		return FALSE
+
+	var/mob/living/M = target
+	if (on_fire)
+		if (user.a_intent == I_HELP)
+			return FALSE
+		user.visible_message(
+			SPAN_DANGER("\The [user] hits \the [target] with \the [src]!"),
+			SPAN_DANGER("You hit \the [target] with \the [src]!")
+		)
+		user.do_attack_animation(src)
+		admin_attack_log(user, M, "used \the [src] (ignited) to attack", "was attacked using \the [src] (ignited)", "attacked with \the [src] (ignited)")
+		M.IgniteMob()
+		return TRUE
+	else if (reagents.total_volume)
+		if (iscarbon(target) && user.a_intent == I_HELP && flag == BP_HEAD)
+			var/mob/living/carbon/C = target
+			var/obj/item/organ/external/head/H = C.organs_by_name[BP_HEAD]
+			if (istype(H) && H.forehead_graffiti)
+				var/datum/reagent/R = /datum/reagent/acetone
+				var/wash_amount = 5
+				if (reagents.has_reagent(R, wash_amount))
+					H.forehead_graffiti = null
+					reagents.remove_reagent(R, wash_amount)
+					if (user == target)
+						var/datum/pronouns/P = M.choose_from_pronouns()
+						user.visible_message(SPAN_NOTICE("\The [user] scrubs the ink off [P.his] forehead."), SPAN_NOTICE("You scrub the ink off your forehead."))
 					else
-						to_chat(user, SPAN_WARNING("You need to wet the rag with [wash_amount] units of [initial(R.name)] to get the ink off!"))
-				return TRUE
-
-			if(user.zone_sel.selecting == BP_MOUTH)
-				if (!M.has_danger_grab(user))
-					to_chat(user, SPAN_WARNING("You need to have a firm grip on \the [target] before you can use \the [src] on them!"))
-					return TRUE
-
-				user.do_attack_animation(src)
-				user.visible_message(
-					SPAN_DANGER("\The [user] brings \the [src] up to \the [target]'s mouth!"),
-					SPAN_DANGER("You bring \the [src] up to \the [target]'s mouth!"),
-					SPAN_WARNING("You hear some struggling and muffled cries of surprise")
-				)
-
-				var/grab_time = 6 SECONDS
-				if (user.skill_check(SKILL_COMBAT, SKILL_TRAINED))
-					grab_time = 3 SECONDS
-				if (!do_after(user, grab_time, target, DO_PUBLIC_UNIQUE))
-					return TRUE
-
-				user.visible_message(
-					SPAN_DANGER("\The [user] smothers \the [target] with \the [src]!"),
-					SPAN_DANGER("You smother \the [target] with \the [src]!")
-				)
-				//it's inhaled, so... maybe CHEM_BLOOD doesn't make a whole lot of sense but it's the best we can do for now
-				var/trans_amt = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
-				if (reagents.should_admin_log())
-					var/contained_reagents = reagents.get_reagents()
-					admin_inject_log(user, M, src, contained_reagents, trans_amt)
-				update_name()
-				return TRUE
-			else
-				wipe_down(target, user)
-				return TRUE
-		if (user.zone_sel.selecting == BP_MOUTH)
-			to_chat(user, SPAN_WARNING("\The [src] is too dry to use on \the [target]!"))
+						user.visible_message(SPAN_NOTICE("\The [user] scrubs the ink off \the [M]'s forehead."), SPAN_NOTICE("You scrub the ink off \the [M]'s forehead."))
+				else
+					to_chat(user, SPAN_WARNING("You need to wet the rag with [wash_amount] units of [initial(R.name)] to get the ink off!"))
 			return TRUE
+
+		if (user.zone_sel.selecting == BP_MOUTH)
+			if (!M.has_danger_grab(user))
+				to_chat(user, SPAN_WARNING("You need to have a firm grip on \the [target] before you can use \the [src] on them!"))
+				return TRUE
+
+			user.do_attack_animation(src)
+			user.visible_message(
+				SPAN_DANGER("\The [user] brings \the [src] up to \the [target]'s mouth!"),
+				SPAN_DANGER("You bring \the [src] up to \the [target]'s mouth!"),
+				SPAN_WARNING("You hear some struggling and muffled cries of surprise")
+			)
+
+			var/grab_time = 6 SECONDS
+			if (user.skill_check(SKILL_COMBAT, SKILL_TRAINED))
+				grab_time = 3 SECONDS
+			if (!do_after(user, grab_time, target, DO_PUBLIC_UNIQUE))
+				return TRUE
+
+			user.visible_message(
+				SPAN_DANGER("\The [user] smothers \the [target] with \the [src]!"),
+				SPAN_DANGER("You smother \the [target] with \the [src]!")
+			)
+			//it's inhaled, so... maybe CHEM_BLOOD doesn't make a whole lot of sense but it's the best we can do for now
+			var/trans_amt = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
+			if (reagents.should_admin_log())
+				var/contained_reagents = reagents.get_reagents()
+				admin_inject_log(user, M, src, contained_reagents, trans_amt)
+			update_name()
+			return TRUE
+		else
+			wipe_down(target, user)
+			return TRUE
+	if (user.zone_sel.selecting == BP_MOUTH)
+		to_chat(user, SPAN_WARNING("\The [src] is too dry to use on \the [target]!"))
+		return TRUE
 
 /obj/item/reagent_containers/glass/rag/afterattack(atom/A as obj|turf|area, mob/user as mob, proximity)
 	if(!proximity)

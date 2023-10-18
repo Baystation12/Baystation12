@@ -5,7 +5,6 @@
 	icon = 'icons/obj/tools/handcuffs.dmi'
 	icon_state = "handcuff"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	slot_flags = SLOT_BELT
 	throwforce = 5
 	w_class = ITEM_SIZE_SMALL
@@ -26,7 +25,7 @@
 		return "legcuff1"
 	return ..()
 
-/obj/item/handcuffs/attack(mob/living/carbon/C, mob/living/user)
+/obj/item/handcuffs/use_before(mob/living/carbon/C, mob/living/user)
 	. = FALSE
 	if (!user.IsAdvancedToolUser())
 		return FALSE

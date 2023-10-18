@@ -10,7 +10,6 @@
 	desc = "A strange, ridged chunk of some glassy red material. Achingly cold to the touch."
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 4)
 
 	var/full = SOULSTONE_EMPTY
@@ -106,7 +105,7 @@
 	return ..()
 
 
-/obj/item/device/soulstone/attack(mob/living/simple_animal/M, mob/user)
+/obj/item/device/soulstone/use_before(mob/living/simple_animal/M, mob/user)
 	. = FALSE
 	if (!istype(M))
 		return FALSE

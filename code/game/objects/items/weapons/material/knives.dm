@@ -15,7 +15,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	sharp = TRUE
 	edge = TRUE
-	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES | ITEM_FLAG_TRY_ATTACK
+	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 
 //table knives
 /obj/item/material/knife/table

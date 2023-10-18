@@ -6,7 +6,6 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	matter = list(MATERIAL_ALUMINIUM = 1000, MATERIAL_GLASS = 1000)
 	var/obj/item/implant/imp = null
 
@@ -43,7 +42,7 @@
 	else
 		..()
 
-/obj/item/implanter/attack(mob/M as mob, mob/user as mob)
+/obj/item/implanter/use_before(mob/M as mob, mob/user as mob)
 	. = FALSE
 	if (!istype(M, /mob/living/carbon))
 		return FALSE

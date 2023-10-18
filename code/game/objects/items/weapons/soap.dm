@@ -5,7 +5,6 @@
 	icon = 'icons/obj/soap.dmi'
 	icon_state = "soap"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	w_class = ITEM_SIZE_SMALL
 	throwforce = 0
 	throw_speed = 4
@@ -159,7 +158,7 @@
 		user.update_personal_goal(/datum/goal/clean, 1)
 
 //attack_as_weapon
-/obj/item/soap/attack(mob/living/target, mob/living/user)
+/obj/item/soap/use_before(mob/living/target, mob/living/user)
 	. = FALSE
 	if (target && user && ishuman(target) && ishuman(user) && !target.stat && !user.stat && user.zone_sel.selecting == BP_MOUTH)
 		user.visible_message(SPAN_DANGER("\The [user] washes \the [target]'s mouth out with soap!"))

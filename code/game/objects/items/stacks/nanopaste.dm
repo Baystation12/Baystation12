@@ -5,12 +5,10 @@
 	icon = 'icons/obj/medical.dmi'
 	icon_state = "nanopaste"
 	origin_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 3)
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	amount = 10
 
 
-/obj/item/stack/nanopaste/attack(mob/living/M as mob, mob/user as mob)
-	. = FALSE
+/obj/item/stack/nanopaste/use_after(mob/living/M as mob, mob/user as mob)
 	if (!istype(M) || !istype(user))
 		return FALSE
 	if (istype(M,/mob/living/silicon/robot))	//Repairing cyborgs
@@ -30,8 +28,6 @@
 	if (istype(M,/mob/living/carbon/human))		//Repairing robolimbs
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/S = H.get_organ(user.zone_sel.selecting)
-		if (check_possible_surgeries(M, user))
-			return FALSE
 
 		if(!S)
 			to_chat(user, SPAN_WARNING("\The [M] is missing that body part."))

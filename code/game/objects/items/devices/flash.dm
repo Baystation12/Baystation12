@@ -9,7 +9,6 @@
 	throw_speed = 4
 	throw_range = 10
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	item_flags = ITEM_FLAG_TRY_ATTACK
 	origin_tech = list(TECH_MAGNET = 2, TECH_COMBAT = 1)
 
 	var/times_used = 0 //Number of times it's been used.
@@ -36,7 +35,7 @@
 	times_used = max(0,round(times_used)) //sanity
 
 //attack_as_weapon
-/obj/item/device/flash/attack(mob/living/M, mob/living/user)
+/obj/item/device/flash/use_before(mob/living/M, mob/living/user)
 	. = FALSE
 	if (!istype(M))
 		return FALSE

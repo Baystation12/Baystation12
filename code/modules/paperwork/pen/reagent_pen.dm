@@ -6,7 +6,8 @@
 	..()
 	create_reagents(30)
 
-/obj/item/pen/reagent/attack(mob/living/M, mob/user)
+/obj/item/pen/reagent/use_before(mob/living/M, mob/user)
+	. = FALSE
 	if (!istype(M))
 		return FALSE
 	if (!reagents.total_volume)
