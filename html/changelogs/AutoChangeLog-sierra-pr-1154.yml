@@ -1,0 +1,6 @@
+author: emmanuelbassil
+delete-after: true
+changes:
+  - bugfix: Fixes being unable to punch spiderlings to death
+  - tweak: Can now damage any object with health using your fists of justice; similar
+      to existing behavior with melee weapons.
