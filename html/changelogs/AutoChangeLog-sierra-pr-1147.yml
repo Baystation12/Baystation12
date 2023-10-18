@@ -1,5 +1,0 @@
-author: TheNightingale
-delete-after: true
-changes:
-  - tweak: Operating tables now have a visual indicator for if the suppressors are
-      off during surgery (the lights turn red).
