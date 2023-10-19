@@ -19658,6 +19658,10 @@
 /obj/floor_decal/techfloor{
 	dir = 9
 	},
+/obj/structure/closet/walllocker{
+	pixel_y = 20
+	},
+/obj/item/storage/box/trackimp,
 /turf/simulated/floor/tiled/dark,
 /area/security/secure_storage)
 "jhb" = (
@@ -23902,8 +23906,10 @@
 "ozG" = (
 /obj/structure/table/rack,
 /obj/floor_decal/industrial/outline/grey,
-/obj/item/gun/energy/laser/xenofauna,
-/obj/item/gun/energy/laser/xenofauna,
+/obj/item/storage/box/ammo/smg/rubber,
+/obj/item/storage/box/ammo/smg/rubber,
+/obj/item/storage/box/ammo/smg/rubber,
+/obj/item/storage/box/ammo/smg/rubber,
 /turf/simulated/floor/tiled/dark,
 /area/security/secure_storage)
 "oAp" = (
@@ -24273,12 +24279,11 @@
 /area/rnd/research)
 "oXv" = (
 /obj/structure/table/rack,
-/obj/item/storage/box/flashbangs,
-/obj/item/storage/box/flashbangs,
-/obj/item/storage/box/teargas,
-/obj/item/storage/box/teargas,
-/obj/item/gun/launcher/grenade,
 /obj/floor_decal/industrial/outline/grey,
+/obj/item/gun/projectile/automatic/sec_smg/empty,
+/obj/item/gun/projectile/automatic/sec_smg/empty,
+/obj/item/gun/projectile/automatic/sec_smg/empty,
+/obj/item/gun/projectile/automatic/sec_smg/empty,
 /turf/simulated/floor/tiled/dark,
 /area/security/secure_storage)
 "oXx" = (
@@ -24550,11 +24555,7 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "pud" = (
-/obj/structure/table/rack,
-/obj/item/gun/projectile/automatic/sec_smg/empty,
-/obj/item/gun/projectile/automatic/sec_smg/empty,
-/obj/item/gun/projectile/automatic/sec_smg/empty,
-/obj/item/gun/projectile/automatic/sec_smg/empty,
+/obj/structure/table/steel,
 /obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/security/armoury)
@@ -25988,6 +25989,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/machinery/mech_recharger,
 /turf/simulated/floor/tiled/dark,
 /area/security/armoury)
 "rcb" = (
@@ -30115,14 +30117,18 @@
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/firstdeck/centralstarboard)
 "xFx" = (
-/obj/structure/table/steel,
-/obj/item/storage/box/trackimp,
 /obj/floor_decal/industrial/outline/grey,
 /obj/machinery/power/apc{
 	name = "south bump";
 	pixel_y = -28
 	},
 /obj/structure/cable/green,
+/obj/structure/table/rack,
+/obj/item/gun/launcher/grenade,
+/obj/item/storage/box/teargas,
+/obj/item/storage/box/teargas,
+/obj/item/storage/box/flashbangs,
+/obj/item/storage/box/flashbangs,
 /turf/simulated/floor/tiled/dark,
 /area/security/secure_storage)
 "xFL" = (
