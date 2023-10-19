@@ -1,9 +1,7 @@
 /obj/item/clothing/mask/chewable
-	name = "chewable item master"
-	desc = "You're not sure what this is. You should probably ahelp it."
 	icon = 'icons/obj/clothing/obj_mask.dmi'
 	body_parts_covered = 0
-
+	abstract_type = /obj/item/clothing/mask/chewable
 	var/type_butt = null
 	var/chem_volume = 0
 	var/chewtime = 0
@@ -54,7 +52,7 @@
 /obj/item/clothing/mask/chewable/Process()
 	chew(1)
 	if(chewtime < 1)
-		extinguish()
+		spit_out()
 
 /obj/item/clothing/mask/chewable/tobacco
 	name = "wad"
@@ -73,19 +71,26 @@
 	desc = "A disgusting spitwad."
 	icon_state = "spit-chew"
 
-/obj/item/clothing/mask/chewable/proc/extinguish(mob/user, no_message)
+/obj/item/clothing/mask/chewable/proc/spit_out(no_message)
 	STOP_PROCESSING(SSobj, src)
+	var/mob/chewer
+	if (ismob(loc))
+		chewer = loc
+		if (!no_message)
+			to_chat(chewer, SPAN_NOTICE("You spit out \the [name]."))
+
 	if (type_butt)
-		var/obj/item/butt = new type_butt(get_turf(src))
+		var/obj/item/butt = new type_butt()
+		if (chewer)
+			chewer.put_in_hands(butt)
+		else
+			butt.forceMove(get_turf(src))
 		transfer_fingerprints_to(butt)
 		butt.color = color
 		if(brand)
 			butt.desc += " This one is \a [brand]."
-		if(ismob(loc))
-			var/mob/living/M = loc
-			if (!no_message)
-				to_chat(M, SPAN_NOTICE("You spit out the [name]."))
-		qdel(src)
+
+	qdel(src)
 
 /obj/item/clothing/mask/chewable/tobacco/lenni
 	name = "chewing tobacco"
