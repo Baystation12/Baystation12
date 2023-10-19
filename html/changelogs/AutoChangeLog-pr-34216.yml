@@ -1,0 +1,5 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - maptweak: Removes xenofauna carbines from BCArmoury.
+  - maptweak: Adds 4 empty SMGs with rubber SMG ammunition to BCArmoury.
