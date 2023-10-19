@@ -8,6 +8,7 @@
 	icon_state = "utilitybelt"
 	item_state = "utility"
 	storage_slots = 7
+	force = 2
 	item_flags = ITEM_FLAG_IS_BELT
 	max_w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT
@@ -106,7 +107,6 @@
 	item_state = "utility"
 	overlay_flags = BELT_OVERLAY_ITEMS
 	can_hold = list(
-		///obj/item/combitool,
 		/obj/item/crowbar,
 		/obj/item/screwdriver,
 		/obj/item/weldingtool,
@@ -132,7 +132,8 @@
 		/obj/item/tape_roll,
 		/obj/item/clothing/head/beret,
 		/obj/item/material/knife/folding,
-		/obj/item/swapper
+		/obj/item/swapper,
+		/obj/item/device/drone_designator
 		)
 
 
@@ -496,7 +497,8 @@
 		/obj/item/clothing/head/beret,
 		/obj/item/material/knife/folding,
 		/obj/item/storage/firstaid/light,
-		/obj/item/device/flash
+		/obj/item/device/flash,
+		/obj/item/device/drone_designator
 		)
 	can_holster = list(/obj/item/material/hatchet/machete)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
