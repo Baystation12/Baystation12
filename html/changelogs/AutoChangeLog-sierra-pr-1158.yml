@@ -1,0 +1,9 @@
+author: emmanuelbassil
+delete-after: true
+changes:
+  - tweak: The Torch learns some manners. Chewables like chewing tobacco and gum now
+      spit out into an empty hand first. If no available hand, then the floor like
+      current behavior.
+  - tweak: Can now place drone telemetry designator in tool belt and exploration machete
+      belt.
+  - tweak: Can now use belts to whip/lash when on harm intent.
