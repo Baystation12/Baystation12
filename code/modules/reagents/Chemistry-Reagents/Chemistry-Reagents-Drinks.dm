@@ -704,7 +704,7 @@
 	name = "Mountain Wind"
 	description = "Blows right through you like a space wind."
 	taste_description = "sweet citrus soda"
-	color = "#102000"
+	color = "#94c93d"
 	adj_drowsy = -7
 	adj_sleepy = -1
 	adj_temp = -5
