@@ -77,7 +77,12 @@
 		)
 	action_button_name = "Toggle Winter Hood"
 	hoodtype = /obj/item/clothing/head/winterhood
-	allowed = list (/obj/item/pen, /obj/item/paper, /obj/item/device/flashlight,/obj/item/storage/fancy/smokable, /obj/item/storage/fancy/matches, /obj/item/reagent_containers/food/drinks/flask)
+	allowed = list (
+		/obj/item/storage/fancy/smokable,
+		/obj/item/storage/fancy/matches,
+		/obj/item/reagent_containers/food/drinks/flask
+		)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency)
 	siemens_coefficient = 0.6
 
 /obj/item/clothing/head/winterhood

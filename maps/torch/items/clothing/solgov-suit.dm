@@ -2,6 +2,7 @@
 	abstract_type = /obj/item/clothing/suit/solgov
 	name = "master solgov suit"
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/bureaucracy)
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_solgov_unathi.dmi'
@@ -11,6 +12,7 @@
 /obj/item/clothing/suit/storage/solgov
 	abstract_type = /obj/item/clothing/suit/storage/solgov
 	name = "master solgov suit with pockets"
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/bureaucracy)
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 	sprite_sheets = list(
@@ -26,21 +28,6 @@
 	icon_state = "blackservice"
 	body_parts_covered = UPPER_TORSO|ARMS
 	siemens_coefficient = 0.9
-	allowed = list(
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
-		/obj/item/device/flashlight,
-		/obj/item/pen,
-		/obj/item/clothing/head/soft,
-		/obj/item/clothing/head/beret,
-		/obj/item/storage/fancy/smokable,
-		/obj/item/flame/lighter,
-		/obj/item/device/taperecorder,
-		/obj/item/device/scanner/gas,
-		/obj/item/device/radio,
-		/obj/item/taperoll
-	)
 	valid_accessory_slots = list(
 		ACCESSORY_SLOT_ARMBAND,
 		ACCESSORY_SLOT_MEDAL,
@@ -279,16 +266,7 @@
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 	body_parts_covered = UPPER_TORSO|ARMS
 	siemens_coefficient = 0.9
-	allowed = list(
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
-		/obj/item/device/flashlight,
-		/obj/item/clothing/head/soft,
-		/obj/item/clothing/head/beret,
-		/obj/item/device/radio,
-		/obj/item/pen
-	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/bureaucracy)
 	valid_accessory_slots = list(ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_INSIGNIA)
 
 /obj/item/clothing/suit/dress/solgov/fleet/sailor
@@ -306,6 +284,7 @@
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/bureaucracy)
 
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet
@@ -322,32 +301,10 @@
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
 	allowed = list (
-		/obj/item/pen,
-		/obj/item/clothing/head/soft,
-		/obj/item/clothing/head/beret,
-		/obj/item/storage/fancy/smokable,
-		/obj/item/flame/lighter,
-		/obj/item/device/taperecorder,
-		/obj/item/device/scanner/gas,
-		/obj/item/device/radio,
-		/obj/item/taperoll,
-		/obj/item/device/scanner/gas,
-		/obj/item/device/flashlight,
-		/obj/item/device/multitool,
-		/obj/item/device/radio,
-		/obj/item/device/t_scanner,
-		/obj/item/crowbar,
-		/obj/item/screwdriver,
-		/obj/item/weldingtool,
-		/obj/item/wirecutters,
-		/obj/item/wrench,
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
 		/obj/item/clothing/mask/gas,
-		/obj/item/taperoll/engineering,
 		/obj/item/clothing/head/hardhat
-	)
+		)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/bureaucracy, /singleton/shared_list/path/storage/engineering)
 
 /obj/item/clothing/suit/storage/jacket/solgov/fleet/medical
 	name = "fleet jacket"
@@ -355,122 +312,37 @@
 	icon_state = "navymedjacket"
 	item_state = "navymedjacket"
 	allowed = list (
-		/obj/item/pen,
-		/obj/item/clothing/head/soft,
-		/obj/item/clothing/head/beret,
-		/obj/item/storage/fancy/smokable,
-		/obj/item/flame/lighter,
-		/obj/item/device/taperecorder,
-		/obj/item/device/scanner/gas,
-		/obj/item/device/radio,
-		/obj/item/taperoll,
-		/obj/item/stack/medical,
-		/obj/item/reagent_containers/dropper,
-		/obj/item/reagent_containers/hypospray,
-		/obj/item/reagent_containers/syringe,
-		/obj/item/device/scanner/health,
-		/obj/item/device/flashlight,
-		/obj/item/device/radio,
 		/obj/item/clothing/head/hardhat,
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
-		/obj/item/reagent_containers/ivbag
-	)
+		)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/bureaucracy, /singleton/shared_list/path/storage/medical)
 
 /obj/item/clothing/suit/storage/jacket/solgov/fleet/security
 	name = "fleet jacket"
 	desc = "A jacket commonly issued by the fleet to its security staff. It sports some discrete red markings, and has elbow pads."
 	icon_state = "navysecjacket"
 	item_state = "navysecjacket"
-	allowed = list (
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
-		/obj/item/device/flashlight,
-		/obj/item/pen,
-		/obj/item/clothing/head/soft,
-		/obj/item/clothing/head/beret,
-		/obj/item/storage/fancy/smokable,
-		/obj/item/flame/lighter,
-		/obj/item/device/taperecorder,
-		/obj/item/device/scanner/gas,
-		/obj/item/device/radio,
-		/obj/item/taperoll,
-		/obj/item/gun/energy,
-		/obj/item/device/radio,
-		/obj/item/reagent_containers/spray/pepper,
-		/obj/item/gun/projectile,
-		/obj/item/ammo_magazine,
-		/obj/item/ammo_casing,
-		/obj/item/melee/baton,
-		/obj/item/handcuffs,
-		/obj/item/gun/magnetic,
-		/obj/item/clothing/head/helmet
-	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/bureaucracy, /singleton/shared_list/path/storage/security)
 
 /obj/item/clothing/suit/storage/jacket/solgov/fleet/service
 	name = "fleet jacket"
 	desc = "A jacket commonly issued by the fleet to its service staff. It sports some discrete green markings."
 	icon_state = "navysrvjacket"
 	item_state = "navysrvjacket"
-	allowed = list (
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
-		/obj/item/device/flashlight,
-		/obj/item/pen,
-		/obj/item/clothing/head/soft,
-		/obj/item/clothing/head/beret,
-		/obj/item/storage/fancy/smokable,
-		/obj/item/flame/lighter,
-		/obj/item/device/taperecorder,
-		/obj/item/device/scanner/gas,
-		/obj/item/device/radio,
-		/obj/item/taperoll
-	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/bureaucracy)
 
 /obj/item/clothing/suit/storage/jacket/solgov/fleet/supply
 	name = "fleet jacket"
 	desc = "A jacket commonly issued by the fleet to its deck staff. It sports some discrete brown markings, and has elbow pads."
 	icon_state = "navysupjacket"
 	item_state = "navysupjacket"
-	allowed = list (
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
-		/obj/item/device/flashlight,
-		/obj/item/pen,
-		/obj/item/clothing/head/soft,
-		/obj/item/clothing/head/beret,
-		/obj/item/storage/fancy/smokable,
-		/obj/item/flame/lighter,
-		/obj/item/device/taperecorder,
-		/obj/item/device/scanner/gas,
-		/obj/item/device/radio,
-		/obj/item/taperoll
-	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/bureaucracy)
 
 /obj/item/clothing/suit/storage/jacket/solgov/fleet/command
 	name = "fleet jacket"
 	desc = "A jacket commonly issued by the fleet to its command staff. It sports some gold markings."
 	icon_state = "navycomjacket"
 	item_state = "navycomjacket"
-	allowed = list (
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
-		/obj/item/device/flashlight,
-		/obj/item/pen,
-		/obj/item/clothing/head/soft,
-		/obj/item/clothing/head/beret,
-		/obj/item/storage/fancy/smokable,
-		/obj/item/flame/lighter,
-		/obj/item/device/taperecorder,
-		/obj/item/device/scanner/gas,
-		/obj/item/device/radio,
-		/obj/item/taperoll
-	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/bureaucracy)
 
 //SolGov Hardsuits
 
@@ -557,7 +429,6 @@
 		SPECIES_UNATHI = 'maps/torch/icons/obj/unathi/obj_suit_solgov_unathi.dmi',
 		SPECIES_SKRELL = 'maps/torch/icons/obj/skrell/obj_suit_solgov_skrell.dmi',
 		)
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/briefcase/inflatable)
 
 /obj/item/clothing/suit/space/void/command/Initialize()
 	. = ..()
@@ -592,7 +463,12 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_RESISTANT
 		)
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/device/scanner/health,/obj/item/device/gps,/obj/item/pinpointer/radio,/obj/item/material/hatchet/machete,/obj/item/shovel)
+	allowed = list(
+		/obj/item/stack/flag,
+		/obj/item/material/hatchet/machete,
+		/obj/item/shovel
+		)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/eva, /singleton/shared_list/path/storage/science)
 
 /obj/item/clothing/suit/space/void/exploration/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/exploration

@@ -39,7 +39,13 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_RESISTANT
 		)
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/device/t_scanner,/obj/item/rcd,/obj/item/rpd)
+	allowed = list(
+		/obj/item/storage/toolbox,
+		/obj/item/storage/briefcase/inflatable,
+		/obj/item/rcd,
+		/obj/item/rpd
+		)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/eva, /singleton/shared_list/path/storage/engineering)
 
 /obj/item/clothing/suit/space/void/engineering/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/engineering
@@ -84,7 +90,14 @@
 		rad = ARMOR_RAD_MINOR
 		)
 	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/stack/flag,/obj/item/device/suit_cooling_unit,/obj/item/storage/ore,/obj/item/device/t_scanner,/obj/item/pickaxe, /obj/item/rcd,/obj/item/rpd)
+	allowed = list(
+		/obj/item/stack/flag,
+		/obj/item/storage/ore,
+		/obj/item/device/t_scanner,
+		/obj/item/pickaxe,
+		/obj/item/rcd,
+		/obj/item/rpd
+		)
 
 /obj/item/clothing/suit/space/void/mining/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/mining
@@ -116,7 +129,11 @@
 		slot_l_hand_str = "medical_voidsuit",
 		slot_r_hand_str = "medical_voidsuit",
 	)
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/device/scanner/health,/obj/item/stack/medical)
+	allowed = list(
+		/obj/item/storage/firstaid,
+		/obj/item/roller_bed
+		)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/eva, /singleton/shared_list/path/storage/medical)
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
 		laser = ARMOR_LASER_MINOR,
@@ -167,7 +184,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
-	allowed = list(/obj/item/gun,/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/melee/baton)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/eva, /singleton/shared_list/path/storage/combat)
 	siemens_coefficient = 0.3
 
 /obj/item/clothing/suit/space/void/security/prepared
@@ -215,7 +232,13 @@
 		)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/device/t_scanner,/obj/item/rcd,/obj/item/rpd)
+	allowed = list(
+		/obj/item/storage/toolbox,
+		/obj/item/storage/briefcase/inflatable,
+		/obj/item/rcd,
+		/obj/item/rpd
+		)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/eva, /singleton/shared_list/path/storage/engineering)
 
 /obj/item/clothing/suit/space/void/atmos/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/atmos
@@ -297,7 +320,6 @@
 	name = "streamlined medical voidsuit"
 	icon_state = "rig-medicalalt"
 	desc = "A more recent and stylish model of Vey-Med voidsuit, with a minor upgrade to radiation shielding."
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/device/scanner/health,/obj/item/stack/medical)
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
 		laser = ARMOR_LASER_MINOR,
@@ -341,7 +363,6 @@
 		bomb = ARMOR_BOMB_PADDED,
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR)
-	allowed = list(/obj/item/gun,/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/melee/baton)
 
 /obj/item/clothing/suit/space/void/security/alt/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/security/alt
@@ -421,7 +442,6 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_RESISTANT
 		)
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/device/t_scanner,/obj/item/rcd,/obj/item/rpd)
 
 /obj/item/clothing/suit/space/void/engineering/salvage/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/engineering/salvage
@@ -454,7 +474,13 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
 		)
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/device/t_scanner,/obj/item/rcd,/obj/item/rpd)
+	allowed = list(
+		/obj/item/storage/toolbox,
+		/obj/item/storage/briefcase/inflatable,
+		/obj/item/device/t_scanner,
+		/obj/item/rcd,
+		/obj/item/rpd
+		)
 
 /obj/item/clothing/suit/space/void/pilot/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/pilot
@@ -477,7 +503,9 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 	)
-	allowed = list(/obj/item/gun,/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit)
+	allowed = list(
+		/obj/item/gun
+		)
 
 /obj/item/clothing/head/helmet/space/void/retro
 	name = "retro voidsuit helmet"

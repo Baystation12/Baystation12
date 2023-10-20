@@ -11,7 +11,13 @@
 	blood_overlay_type = "armor"
 	body_parts_covered = 0
 	species_restricted = null
-	allowed = list (/obj/item/reagent_containers/spray/plantbgone,/obj/item/device/scanner/plant,/obj/item/seeds,/obj/item/reagent_containers/glass/bottle,/obj/item/material/minihoe)
+	allowed = list (
+		/obj/item/reagent_containers/spray/plantbgone,
+		/obj/item/device/scanner/plant,
+		/obj/item/seeds,
+		/obj/item/reagent_containers/glass/bottle,
+		/obj/item/material/minihoe
+		)
 
 //Captain
 /obj/item/clothing/suit/captunic
@@ -51,7 +57,9 @@
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
-	allowed = list (/obj/item/material/knife)
+	allowed = list (
+		/obj/item/material/knife
+		)
 
 //Chef
 /obj/item/clothing/suit/chef/classic
@@ -90,20 +98,10 @@
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|ARMS
 	allowed = list(
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
-		/obj/item/device/flashlight,
-		/obj/item/gun/energy,
-		/obj/item/gun/projectile,
-		/obj/item/ammo_magazine,
-		/obj/item/ammo_casing,
-		/obj/item/melee/baton,
-		/obj/item/handcuffs,
 		/obj/item/storage/fancy/smokable,
-		/obj/item/flame/lighter,
-		/obj/item/device/taperecorder
+		/obj/item/flame/lighter
 	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/bureaucracy,  /singleton/shared_list/path/storage/security, /singleton/shared_list/path/storage/combat)
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
 		bullet = ARMOR_BALLISTIC_SMALL,
@@ -124,19 +122,7 @@
 	name = "jacket"
 	desc = "A forensics technician jacket."
 	body_parts_covered = UPPER_TORSO|ARMS
-	allowed = list(
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
-		/obj/item/device/flashlight,
-		/obj/item/gun/energy,
-		/obj/item/gun/projectile,
-		/obj/item/ammo_magazine,
-		/obj/item/ammo_casing,
-		/obj/item/melee/baton,
-		/obj/item/handcuffs,
-		/obj/item/device/taperecorder
-	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/bureaucracy,  /singleton/shared_list/path/storage/security, /singleton/shared_list/path/storage/combat)
 	armor = list(
 		melee = ARMOR_MELEE_SMALL,
 		bullet = ARMOR_BALLISTIC_MINOR,
@@ -162,22 +148,9 @@
 	blood_overlay_type = "armor"
 	species_restricted = null
 	allowed = list (
-		/obj/item/device/scanner/gas,
-		/obj/item/device/flashlight,
-		/obj/item/device/multitool,
-		/obj/item/device/radio,
-		/obj/item/device/t_scanner,
-		/obj/item/crowbar,
-		/obj/item/screwdriver,
-		/obj/item/weldingtool,
-		/obj/item/wirecutters,
-		/obj/item/wrench,
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
-		/obj/item/clothing/mask/gas,
-		/obj/item/taperoll/engineering
-	)
+		/obj/item/clothing/mask/gas
+		)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/engineering)
 	body_parts_covered = UPPER_TORSO
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 
@@ -215,6 +188,7 @@
 	name = "medical hazard vest"
 	desc = "A high-visibility vest used in work zones. This one is has a blue cross!"
 	icon_state = "hazard_med"
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/medical)
 
 /obj/item/clothing/suit/storage/toggle/highvis
 	name = "high visibility jacket"
@@ -232,6 +206,7 @@
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|ARMS
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/bureaucracy)
 
 /obj/item/clothing/suit/storage/toggle/suit_double
 	name = "double-breasted suit jacket"
@@ -240,6 +215,7 @@
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|ARMS
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/bureaucracy)
 
 /obj/item/clothing/suit/storage/toggle/suit/blue
 	name = "blue suit jacket"
@@ -259,19 +235,7 @@
 	desc = "A high-visibility jacket worn by medical first responders."
 	icon_state = "fr_jacket"
 	blood_overlay_type = "armor"
-	allowed = list(
-		/obj/item/stack/medical,
-		/obj/item/reagent_containers/dropper,
-		/obj/item/reagent_containers/hypospray,
-		/obj/item/reagent_containers/syringe,
-		/obj/item/device/scanner/health,
-		/obj/item/device/flashlight,
-		/obj/item/device/radio,
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
-		/obj/item/reagent_containers/ivbag
-	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/medical)
 	body_parts_covered = UPPER_TORSO|ARMS
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 
@@ -291,19 +255,10 @@
 	icon_state = "chest-rig"
 	blood_overlay_type = "armor"
 	allowed = list(
-		/obj/item/device/flashlight,
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
 		/obj/item/clothing/mask/gas,
-		/obj/item/device/radio,
-		/obj/item/taperoll,
-		/obj/item/clothing/head/hardhat,
-		/obj/item/handcuffs,
-		/obj/item/melee/baton,
-		/obj/item/grenade,
-		/obj/item/gun
+		/obj/item/clothing/head/hardhat
 	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/security)
 
 	body_parts_covered = UPPER_TORSO
 
@@ -313,24 +268,10 @@
 	icon_state = "engi-chest-rig"
 	blood_overlay_type = "armor"
 	allowed = list (
-		/obj/item/device/flashlight,
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
 		/obj/item/clothing/mask/gas,
-		/obj/item/device/radio,
-		/obj/item/taperoll,
-		/obj/item/clothing/head/hardhat,
-		/obj/item/device/scanner/gas,
-		/obj/item/device/multitool,
-		/obj/item/device/t_scanner,
-		/obj/item/crowbar,
-		/obj/item/screwdriver,
-		/obj/item/weldingtool,
-		/obj/item/wirecutters,
-		/obj/item/wrench,
-		/obj/item/gun
+		/obj/item/clothing/head/hardhat
 	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/engineering)
 
 /obj/item/clothing/suit/storage/medical_chest_rig
 	name = "\improper MT chest-rig"
@@ -338,22 +279,10 @@
 	icon_state = "med-chest-rig"
 	blood_overlay_type = "armor"
 	allowed = list(
-		/obj/item/device/flashlight,
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
 		/obj/item/clothing/mask/gas,
-		/obj/item/device/radio,
-		/obj/item/taperoll,
 		/obj/item/clothing/head/hardhat,
-		/obj/item/stack/medical,
-		/obj/item/reagent_containers/dropper,
-		/obj/item/reagent_containers/hypospray,
-		/obj/item/reagent_containers/syringe,
-		/obj/item/device/scanner/health,
-		/obj/item/reagent_containers/ivbag,
-		/obj/item/gun
 	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/medical)
 
 /obj/item/clothing/suit/surgicalapron
 	name = "surgical apron"
@@ -362,20 +291,21 @@
 	blood_overlay_type = "armor"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	allowed = list(
-		/obj/item/stack/medical,
-		/obj/item/reagent_containers/dropper,
-		/obj/item/reagent_containers/hypospray,
-		/obj/item/reagent_containers/syringe,
-		/obj/item/device/scanner/health,
-		/obj/item/device/flashlight,
-		/obj/item/device/radio,
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
-		/obj/item/scalpel,
-		/obj/item/retractor,
-		/obj/item/hemostat,
+		/obj/item/storage/firstaid/surgery,
+		/obj/item/bonesetter,
 		/obj/item/cautery,
+		/obj/item/circular_saw,
+		/obj/item/hemostat,
+		/obj/item/retractor,
+		/obj/item/scalpel,
+		/obj/item/surgicaldrill,
 		/obj/item/bonegel,
-		/obj/item/FixOVein
+		/obj/item/FixOVein,
+		/obj/item/stack/medical/advanced/bruise_pack,
+		/obj/item/stack/nanopaste,
+		/obj/item/clothing/mask/surgical,
+		/obj/item/clothing/head/surgery,
+		/obj/item/clothing/gloves/latex,
+		/obj/item/reagent_containers/dropper
 	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/medical)

@@ -30,16 +30,10 @@
 	permeability_coefficient = 0
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	allowed = list(
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
-		/obj/item/pen,
-		/obj/item/device/flashlight/pen,
-		/obj/item/device/scanner/health,
-		/obj/item/device/ano_scanner,
 		/obj/item/clothing/head/bio_hood,
 		/obj/item/clothing/mask/gas
 	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/science)
 	armor = list(
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR

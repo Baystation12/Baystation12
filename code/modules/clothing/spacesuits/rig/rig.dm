@@ -212,6 +212,8 @@
 		chest = new chest_type(src)
 		if(allowed)
 			chest.allowed = allowed
+		if(storage)
+			chest.storage = storage
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
 		if(!istype(piece))

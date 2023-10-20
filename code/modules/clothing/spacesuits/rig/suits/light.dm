@@ -30,15 +30,9 @@
 	breach_threshold = 18 //comparable to voidsuits
 	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
 	allowed = list(
-		/obj/item/gun,
-		/obj/item/ammo_magazine,
-		/obj/item/ammo_casing,
-		/obj/item/melee/baton,
-		/obj/item/handcuffs,
-		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
 		/obj/item/cell
 	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/eva, /singleton/shared_list/path/storage/combat)
 	max_w_class = ITEM_SIZE_SMALL
 	slots = 3 STORAGE_FREEFORM
 

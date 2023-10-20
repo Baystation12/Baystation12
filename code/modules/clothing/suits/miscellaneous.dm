@@ -36,16 +36,7 @@
 	desc = "Yarr."
 	icon_state = "pirate"
 	w_class = ITEM_SIZE_NORMAL
-	allowed = list(
-		/obj/item/gun,
-		/obj/item/ammo_magazine,
-		/obj/item/ammo_casing,
-		/obj/item/melee/baton,
-		/obj/item/handcuffs,
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency
-	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/combat)
 	armor = list(
 		melee = ARMOR_MELEE_MAJOR,
 		bullet = ARMOR_BALLISTIC_PISTOL,
@@ -105,12 +96,8 @@
 	w_class = ITEM_SIZE_NORMAL
 	item_flags = null
 	allowed = list(
-		/obj/item/device/flashlight,
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
 		/obj/item/toy
-	)
+		)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS|LEGS|FEET
 
@@ -484,6 +471,7 @@
 	icon_state = "hospitalgown"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	allowed = null
+	singleton/shared_list/path/storage = null
 
 /obj/item/clothing/suit/hospital/blue
 	color = "#99ccff"

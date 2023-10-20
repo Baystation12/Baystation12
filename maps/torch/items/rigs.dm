@@ -42,13 +42,9 @@
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
 	allowed = list(
-		/obj/item/gun,
-		/obj/item/ammo_magazine,
-		/obj/item/device/flashlight,
-		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
 		/obj/item/storage/secure/briefcase
-	)
+		)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/eva, /singleton/shared_list/path/storage/combat, /singleton/shared_list/path/storage/bureaucracy)
 
 /obj/item/clothing/shoes/magboots/rig/command
 	icon = 'maps/torch/icons/obj/obj_feet_solgov.dmi'
@@ -179,16 +175,10 @@
 /obj/item/clothing/suit/space/rig/command/medical
 	icon_state = "command_med_rig"
 	allowed = list(
-		/obj/item/gun,
-		/obj/item/ammo_magazine,
-		/obj/item/device/flashlight,
-		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
 		/obj/item/storage/firstaid,
-		/obj/item/device/scanner/health,
-		/obj/item/stack/medical,
 		/obj/item/roller_bed
 	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/eva, /singleton/shared_list/path/storage/combat, /singleton/shared_list/path/storage/medical)
 /obj/item/clothing/shoes/magboots/rig/command/medical
 /obj/item/clothing/gloves/rig/command/medical
 
@@ -231,15 +221,7 @@
 	icon_state = "command_sec_rig"
 /obj/item/clothing/suit/space/rig/command/security
 	icon_state = "command_sec_rig"
-	allowed = list(
-		/obj/item/gun,
-		/obj/item/ammo_magazine,
-		/obj/item/handcuffs,
-		/obj/item/device/flashlight,
-		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
-		/obj/item/melee/baton
-	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/eva, /singleton/shared_list/path/storage/security, /singleton/shared_list/path/storage/combat)
 /obj/item/clothing/shoes/magboots/rig/command/security
 /obj/item/clothing/gloves/rig/command/security
 
@@ -283,23 +265,10 @@
 /obj/item/clothing/suit/space/rig/command/science
 	icon_state = "command_sci_rig"
 	allowed = list(
-		/obj/item/gun,
-		/obj/item/ammo_magazine,
-		/obj/item/device/flashlight,
-		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
 		/obj/item/stack/flag,
-		/obj/item/storage/excavation,
-		/obj/item/device/scanner/health,
-		/obj/item/device/measuring_tape,
-		/obj/item/device/ano_scanner,
-		/obj/item/device/depth_scanner,
-		/obj/item/device/core_sampler,
-		/obj/item/device/gps,
-		/obj/item/pinpointer/radio,
-		/obj/item/pickaxe,
-		/obj/item/storage/bag/fossils
-	)
+		/obj/item/pickaxe
+		)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/eva, /singleton/shared_list/path/storage/combat, /singleton/shared_list/path/storage/science)
 
 /obj/item/clothing/shoes/magboots/rig/command/science
 /obj/item/clothing/gloves/rig/command/science
@@ -356,19 +325,10 @@
 /obj/item/clothing/suit/space/rig/command/exploration
 	icon_state = "command_exp_rig"
 	allowed = list(
-		/obj/item/gun,
-		/obj/item/ammo_magazine,
-		/obj/item/device/flashlight,
-		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
 		/obj/item/stack/flag,
-		/obj/item/storage/excavation,
-		/obj/item/device/scanner,
-		/obj/item/device/depth_scanner,
-		/obj/item/device/gps,
-		/obj/item/pinpointer/radio,
-		/obj/item/storage/plants
-	)
+		/obj/item/pickaxe
+		)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/eva, /singleton/shared_list/path/storage/combat, /singleton/shared_list/path/storage/science)
 
 /obj/item/rig/exploration/equipped
 	initial_modules = list(

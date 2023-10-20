@@ -48,6 +48,10 @@
 	name = "emergency softsuit"
 	icon_state = "space_emergency"
 	desc = "A thin, ungainly softsuit colored in blaze orange for rescuers to easily locate. Looks pretty fragile."
+	allowed = list(
+		/obj/item/device/suit_cooling_unit
+		)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency) //No large tanks/jetpacks
 
 /obj/item/clothing/suit/space/emergency/Initialize()
 	. = ..()

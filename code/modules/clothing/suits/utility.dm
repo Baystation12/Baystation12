@@ -22,14 +22,11 @@
 	body_parts_covered = UPPER_TORSO | LOWER_TORSO| ARMS
 	armor = list(laser = ARMOR_LASER_MINOR, energy = ARMOR_ENERGY_MINOR, bomb = ARMOR_BOMB_MINOR)
 	allowed = list(
-		/obj/item/device/flashlight,
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
 		/obj/item/extinguisher,
 		/obj/item/crowbar/emergency_forcing_tool,
 		/obj/item/clothing/head
-	)
+		)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency)
 
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
@@ -101,6 +98,9 @@
 	item_flags = null
 	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0
+	allowed = list(
+		/obj/item/clothing/head/bomb_hood
+		)
 
 /obj/item/clothing/suit/bomb_suit/Initialize()
 	. = ..()
@@ -112,8 +112,8 @@
 
 /obj/item/clothing/suit/bomb_suit/security
 	icon_state = "bombsuitsec"
-	allowed = list(/obj/item/gun/energy,/obj/item/melee/baton,/obj/item/handcuffs)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/security)
 
 /*
  * Radiation protection
@@ -141,14 +141,10 @@
 	permeability_coefficient = 0.50
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS|FEET
 	allowed = list(
-		/obj/item/device/flashlight,
-		/obj/item/tank/oxygen_emergency,
-		/obj/item/tank/oxygen_emergency_extended,
-		/obj/item/tank/nitrogen_emergency,
 		/obj/item/clothing/head/radiation,
-		/obj/item/clothing/mask/gas,
-		/obj/item/device/geiger
-	)
+		/obj/item/clothing/mask/gas
+		)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/engineering)
 	armor = list(
 		bio = ARMOR_BIO_RESISTANT,
 		rad = ARMOR_RAD_SHIELDED

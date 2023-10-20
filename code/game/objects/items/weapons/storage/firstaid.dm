@@ -185,7 +185,11 @@
 		/obj/item/bonegel,
 		/obj/item/FixOVein,
 		/obj/item/stack/medical/advanced/bruise_pack,
-		/obj/item/stack/nanopaste
+		/obj/item/stack/nanopaste,
+		/obj/item/clothing/mask/surgical,
+		/obj/item/clothing/head/surgery,
+		/obj/item/clothing/gloves/latex,
+		/obj/item/reagent_containers/dropper
 	)
 	startswith = list(
 		/obj/item/bonesetter,

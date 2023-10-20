@@ -103,7 +103,6 @@
 	icon = 'icons/obj/weapons/ammo.dmi'
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
-	item_state = "syringe_kit"
 	matter = list(MATERIAL_STEEL = 500)
 	throwforce = 5
 	w_class = ITEM_SIZE_SMALL

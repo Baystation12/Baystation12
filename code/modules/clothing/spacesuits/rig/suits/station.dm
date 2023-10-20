@@ -20,9 +20,6 @@
 /obj/item/clothing/suit/space/rig/industrial
 	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
 	allowed = list(
-		/obj/item/device/flashlight,
-		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
 		/obj/item/storage/briefcase,
 		/obj/item/storage/secure/briefcase
 	)
@@ -71,9 +68,6 @@
 /obj/item/clothing/suit/space/rig/industrial
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
 	allowed = list(
-		/obj/item/device/flashlight,
-		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
 		/obj/item/stack/flag,
 		/obj/item/storage/ore,
 		/obj/item/device/t_scanner,
@@ -144,9 +138,6 @@
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi'
 		)
 	allowed = list(
-		/obj/item/device/flashlight,
-		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
 		/obj/item/storage/toolbox,
 		/obj/item/storage/briefcase/inflatable,
 		/obj/item/inflatable_dispenser,
@@ -233,18 +224,15 @@
 	)
 	allowed = list(
 		/obj/item/gun,
-		/obj/item/device/flashlight,
-		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
 		/obj/item/storage/ore,
 		/obj/item/storage/toolbox,
 		/obj/item/storage/briefcase/inflatable,
 		/obj/item/inflatable_dispenser,
-		/obj/item/device/t_scanner,
 		/obj/item/pickaxe,
 		/obj/item/rcd,
 		/obj/item/rpd
 	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/eva, /singleton/shared_list/path/storage/engineering)
 /obj/item/clothing/shoes/magboots/rig/ce
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
 	sprite_sheets = list(
@@ -284,22 +272,10 @@
 /obj/item/clothing/suit/space/rig/hazmat
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
 	allowed = list(
-		/obj/item/device/flashlight,
-		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
 		/obj/item/stack/flag,
-		/obj/item/storage/excavation,
 		/obj/item/pickaxe,
-		/obj/item/device/scanner/health,
-		/obj/item/device/measuring_tape,
-		/obj/item/device/ano_scanner,
-		/obj/item/device/depth_scanner,
-		/obj/item/device/core_sampler,
-		/obj/item/device/gps,
-		/obj/item/pinpointer/radio,
-		/obj/item/pickaxe/xeno,
-		/obj/item/storage/bag/fossils
 	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/eva, /singleton/shared_list/path/storage/science)
 
 /obj/item/clothing/shoes/magboots/rig/hazmat
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
@@ -352,16 +328,12 @@
 /obj/item/clothing/suit/space/rig/medical
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_IPC)
 	allowed = list(
-		/obj/item/device/flashlight,
-		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
 		/obj/item/storage/firstaid,
-		/obj/item/device/scanner/health,
-		/obj/item/stack/medical,
 		/obj/item/roller_bed,
 		/obj/item/auto_cpr,
 		/obj/item/inflatable_dispenser
 	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/eva, /singleton/shared_list/path/storage/medical)
 
 /obj/item/clothing/shoes/magboots/rig/medical
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_IPC)
@@ -414,16 +386,8 @@
 
 /obj/item/clothing/suit/space/rig/hazard
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI, SPECIES_IPC)
-	allowed = list(
-		/obj/item/gun,
-		/obj/item/ammo_magazine,
-		/obj/item/ammo_casing,
-		/obj/item/handcuffs,
-		/obj/item/device/flashlight,
-		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
-		/obj/item/melee/baton
-	)
+	allowed = list()
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/eva, /singleton/shared_list/path/storage/combat)
 
 /obj/item/clothing/shoes/magboots/rig/hazard
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI, SPECIES_IPC)
@@ -484,11 +448,7 @@
 	)
 	breach_threshold = 18
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	allowed = list(
-		/obj/item/device/flashlight,
-		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit
-	)
+	allowed = list()
 	max_w_class = null
 	slots = null
 

@@ -37,17 +37,9 @@
 /obj/item/clothing/suit/space/rig/vox_rig
 	species_restricted = list(SPECIES_VOX)
 	allowed = list(
-		/obj/item/device/flashlight,
-		/obj/item/tank,
-		/obj/item/ammo_magazine,
-		/obj/item/ammo_casing,
-		/obj/item/ammo_magazine/shotholder,
-		/obj/item/handcuffs,
-		/obj/item/device/radio,
-		/obj/item/melee/baton,
-		/obj/item/gun,
 		/obj/item/pickaxe
 	)
+	singleton/shared_list/path/storage = list(/singleton/shared_list/path/storage/emergency, /singleton/shared_list/path/storage/eva, /singleton/shared_list/path/storage/combat)
 
 /obj/item/clothing/shoes/magboots/rig/vox_rig
 	species_restricted = list(SPECIES_VOX)

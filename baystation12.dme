@@ -437,6 +437,7 @@
 #include "code\datums\singletons\shared_list\_shared_list.dm"
 #include "code\datums\singletons\shared_list\path.dm"
 #include "code\datums\singletons\shared_list\sound.dm"
+#include "code\datums\singletons\shared_list\storage.dm"
 #include "code\datums\state_machine\paper_fortune_fsm.dm"
 #include "code\datums\state_machine\state.dm"
 #include "code\datums\state_machine\transition.dm"
