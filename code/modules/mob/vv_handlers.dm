@@ -6,4 +6,4 @@
 
 /singleton/vv_set_handler/mob_confused/handle_set_var(datum/O, variable, var_value, client)
 	var/mob/mob = O
-	mob.set_confused(var_value)
+	mob.set_confused(var_value, var_value)
