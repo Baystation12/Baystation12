@@ -10,6 +10,19 @@
 		return typesof(thing) - thing.type
 	return list()
 
+
+/// `typesof()` without abstract types included.
+/proc/types_of_real_objects(datum/thing)
+	RETURN_TYPE(/list)
+	return filter_list_predicates(typesof(thing), /proc/is_not_abstract_predicate)
+
+
+/// `subtypesof()` without abstract types included.
+/proc/subtypes_of_real_objects(datum/thing)
+	RETURN_TYPE(/list)
+	return filter_list_predicates(subtypesof(thing), /proc/is_not_abstract_predicate)
+
+
 //Checks if all high bits in req_mask are set in bitfield
 #define BIT_TEST_ALL(bitfield, req_mask) ((~(bitfield) & (req_mask)) == 0)
 
