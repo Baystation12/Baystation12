@@ -555,10 +555,6 @@
 		return TRUE
 	return ..()
 
-/obj/structure/closet/CtrlAltClick(mob/user)
-	verb_toggleopen()
-	return TRUE
-
 /obj/structure/closet/emp_act(severity)
 	for (var/atom/A as anything in src)
 		A.emp_act(severity)
