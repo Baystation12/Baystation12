@@ -693,6 +693,24 @@ Checks if a list has the same entries and values as an element of big.
 		if(istype(entry, type))
 			. += entry
 
+
+/**
+ * Filters a list, returning only entries that match all of the provided predicates.
+ *
+ * **Parameters**:
+ * - `to_filter` (list) - List to filter.
+ * - `predicates` (list) - Predicate procs to filter against.
+ *
+ * Returns list.
+ */
+/proc/filter_list_predicates(list/to_filter, list/predicates)
+	RETURN_TYPE(/list)
+	. = list()
+	for (var/entry in to_filter)
+		if (all_predicates_true(entry, predicates))
+			. += entry
+
+
 /proc/group_by(list/group_list, key, value)
 	var/values = group_list[key]
 	if(!values)
