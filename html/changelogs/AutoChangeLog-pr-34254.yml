@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: Altering the confused var with view variables is no longer limited to a
-      value of 15.
