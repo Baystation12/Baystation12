@@ -57,26 +57,6 @@
 /datum/uplink_item/item/badassery/random_one/can_buy(obj/item/device/uplink/U)
 	return U.uses
 
-/datum/uplink_item/item/badassery/random_many
-	name = "Random Items"
-	desc = "Buys you as many random items as you can afford. Convenient packaging NOT included!"
-
-/datum/uplink_item/item/badassery/random_many/cost(telecrystals, obj/item/device/uplink/U)
-	return max(1, telecrystals)
-
-/datum/uplink_item/item/badassery/random_many/get_goods(obj/item/device/uplink/U, loc)
-	var/list/bought_items = list()
-	for(var/datum/uplink_item/UI in get_random_uplink_items(U, U.uses, loc))
-		UI.purchase_log(U)
-		var/obj/item/I = UI.get_goods(U, loc)
-		if(istype(I))
-			bought_items += I
-
-	return bought_items
-
-/datum/uplink_item/item/badassery/random_many/purchase_log(obj/item/device/uplink/U)
-	log_and_message_admins("used \the [U.loc] to buy \a [src]")
-
 /****************
 * Surplus Crate *
 ****************/
