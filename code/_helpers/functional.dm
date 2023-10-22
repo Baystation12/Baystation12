@@ -77,6 +77,13 @@
 	if (!. && feedback_receiver)
 		to_chat(feedback_receiver, SPAN_WARNING("Value must be a boolean (Strict)."))
 
+
+/proc/is_not_abstract_predicate(datum/thing, feedback_receiver)
+	. = !is_abstract(thing)
+	if (!. && feedback_receiver)
+		to_chat(feedback_receiver, SPAN_WARNING("Datum must not be abstract."))
+
+
 /proc/can_locate(atom/container, container_thing)
 	return (locate(container_thing) in container)
 
