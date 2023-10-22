@@ -341,6 +341,7 @@
 			if (src && user.machine == src)
 				interact(user)
 		return TRUE
+	return ..()
 
 /**
  * Returns a string forming a basic name of the stack. By default, this is `name`.

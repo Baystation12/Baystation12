@@ -352,6 +352,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
  * resolve chain will be called.
  */
 /atom/proc/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	SHOULD_CALL_PARENT(TRUE)
 	return FALSE
 
 

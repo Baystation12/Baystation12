@@ -281,10 +281,9 @@
 	update_icon()
 
 //This proc is called when you want to place an item into the storage item.
-/obj/item/storage/attackby(obj/item/W as obj, mob/user as mob)
-	. = ..()
-	if (.) //if the item was used as a crafting component, just return
-		return
+/obj/item/storage/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if ((. = ..())) //if the item was used as a crafting component, just return
+		return TRUE
 
 	if(isrobot(user) && (W == user.get_active_hand()))
 		return //Robots can't store their modules.
@@ -293,7 +292,23 @@
 		return
 
 	W.add_fingerprint(user)
-	return handle_item_insertion(W)
+	handle_item_insertion(W)
+	return TRUE
+
+///Eventually should be deleted in favor of use_tool; keeping duplicate until downstream attackbys are replaced.
+/obj/item/storage/attackby(obj/item/W, mob/living/user, click_params)
+	if ((. = ..())) //if the item was used as a crafting component, just return
+		return TRUE
+
+	if(isrobot(user) && (W == user.get_active_hand()))
+		return //Robots can't store their modules.
+
+	if(!can_be_inserted(W, user))
+		return
+
+	W.add_fingerprint(user)
+	handle_item_insertion(W)
+	return TRUE
 
 /obj/item/storage/attack_hand(mob/user as mob)
 	if(ishuman(user))

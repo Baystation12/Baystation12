@@ -28,6 +28,7 @@ LINEN BINS
 				new /obj/item/reagent_containers/glass/rag(get_turf(src))
 			qdel(src)
 		return TRUE
+	return ..()
 
 /obj/item/bedsheet/blue
 	icon_state = "sheetblue"

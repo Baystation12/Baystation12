@@ -111,7 +111,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 
 /obj/machinery/message_server/use_tool(obj/item/tool, mob/living/user, list/click_params)
 	if (!istype(tool, /obj/item/stock_parts/circuitboard/message_monitor))
-		return
+		return ..()
 	if (spamfilter_limit >= initial(spamfilter_limit) * 2)
 		to_chat(user, SPAN_WARNING("\The [src] already has as many boards as it can hold."))
 		return TRUE
