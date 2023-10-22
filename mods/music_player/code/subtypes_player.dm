@@ -72,3 +72,6 @@
 	name = "typ3n4m3-cl4ss: CRUSH/ZER0"
 	icon_state = "console"
 	tape = /obj/item/music_tape/custom
+	max_volume = 100
+	break_chance = 0
+	power_usage = 1
