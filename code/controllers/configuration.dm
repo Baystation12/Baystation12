@@ -430,6 +430,10 @@
 
 	var/static/deletion_starts_paused = TRUE
 
+	// [SIERRA-ADD]
+	var/static/shutdown_on_reboot = FALSE
+	// [/SIERRA-ADD]
+
 
 /datum/configuration/New()
 	load_config()
@@ -845,6 +849,10 @@
 				warn_if_staff_same_ip = TRUE
 			if ("deletion_starts_paused")
 				deletion_starts_paused = TRUE
+			// [SIERRA-ADD]
+			if ("shutdown_on_reboot")
+				shutdown_on_reboot = TRUE
+			// [/SIERRA-ADD]
 			// [SIERRA-ADD] - EX666_ECOSYSTEM
 			if ("overflow_server_url")
 				overflow_server_url = value

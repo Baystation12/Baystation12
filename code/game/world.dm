@@ -520,6 +520,12 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		to_world(SPAN_DANGER("World reboot waiting for external scripts. Please be patient."))
 		return
 
+	// [SIERRA-ADD]
+	if(config.shutdown_on_reboot)
+		sleep(0)
+		del(world)
+		return
+	// [/SIERRA-ADD]
 	..(reason)
 
 
