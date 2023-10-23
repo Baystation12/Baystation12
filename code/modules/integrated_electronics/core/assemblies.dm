@@ -157,7 +157,8 @@
 
 	if(opened)
 		open_interact(user)
-	closed_interact(user)
+	else
+		closed_interact(user)
 
 /obj/item/device/electronic_assembly/proc/closed_interact(mob/user)
 	var/HTML = list()
