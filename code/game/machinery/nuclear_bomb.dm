@@ -280,7 +280,7 @@ var/global/bomb_set
 				if(!timing && !safety)
 					start_bomb()
 				else
-					check_cutoff()
+					secure_device()
 			if(href_list["safety"])
 				if (wires.IsIndexCut(NUCLEARBOMB_WIRE_SAFETY))
 					to_chat(usr, SPAN_WARNING("Nothing happens, something might be wrong with the wiring."))
@@ -314,9 +314,6 @@ var/global/bomb_set
 	original_level = security_state.current_security_level
 	security_state.set_security_level(security_state.severe_security_level, TRUE)
 	update_icon()
-
-/obj/machinery/nuclearbomb/proc/check_cutoff()
-	secure_device()
 
 /obj/machinery/nuclearbomb/proc/secure_device()
 	if(timing <= 0)
@@ -491,14 +488,24 @@ var/global/bomb_set
 		if(!istype(sd) || !sd.armed)
 			to_chat(usr, SPAN_WARNING("An inserter has not been armed or is damaged."))
 			return
-	visible_message(SPAN_WARNING("Warning. The self-destruct sequence override will be disabled [self_destruct_cutoff] seconds before detonation."))
 	..()
+	visible_message(SPAN_WARNING("Warning. The self-destruct sequence override will be disabled [self_destruct_cutoff] seconds before detonation."))
+	if(!evacuation_controller)
+		visible_message(SPAN_DANGER("Warning. Unable to initiate evacuation procedures."))
+		return
+	for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
+		if(EO.abandon_ship)
+			evacuation_controller.new_evac_prep_delay(timeleft SECONDS - 1 MINUTE)
+			evacuation_controller.handle_evac_option(EO.option_target, usr)
 
-/obj/machinery/nuclearbomb/station/check_cutoff()
+/obj/machinery/nuclearbomb/station/secure_device()
 	if(timeleft <= self_destruct_cutoff)
 		visible_message(SPAN_WARNING("Self-Destruct abort is no longer possible."))
 		return
 	..()
+	for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
+		if(EO.option_target == "cancel_abandon_ship")
+			evacuation_controller.handle_evac_option(EO.option_target, usr)
 
 /obj/machinery/nuclearbomb/station/Process()
 	..()

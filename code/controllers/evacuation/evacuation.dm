@@ -39,6 +39,9 @@ var/global/datum/evacuation_controller/evacuation_controller
 	var/datum/announcement/priority/evac_called =   new(0)
 	var/datum/announcement/priority/evac_recalled = new(0)
 
+/datum/evacuation_controller/proc/new_evac_prep_delay(new_delay_time)
+	evac_prep_delay = new_delay_time
+
 /datum/evacuation_controller/proc/auto_recall(_recall)
 	recall = _recall
 
@@ -104,8 +107,9 @@ var/global/datum/evacuation_controller/evacuation_controller
 
 	if(!can_cancel())
 		return 0
+	if(!emergency_evacuation)
+		evac_cooldown_time = world.time + (world.time - evac_called_at)
 
-	evac_cooldown_time = world.time + (world.time - evac_called_at)
 	state = EVAC_COOLDOWN
 
 	evac_ready_time =   null
@@ -131,7 +135,7 @@ var/global/datum/evacuation_controller/evacuation_controller
 
 	var/estimated_time = round(get_eta()/60,1)
 	if (emergency_evacuation)
-		evac_waiting.Announce(replacetext(GLOB.using_map.emergency_shuttle_docked_message, "%ETD%", "[estimated_time] minute\s"), new_sound = sound('sound/effects/Evacuation.ogg', volume = 35))
+		evac_waiting.Announce(replacetext(GLOB.using_map.emergency_shuttle_docked_message, "%ETD%", "[estimated_time] minute\s"), new_sound = sound('sound/effects/Evacuation.ogg', volume = 30))
 	else
 		priority_announcement.Announce(replacetext(replacetext(GLOB.using_map.shuttle_docked_message, "%dock_name%", "[GLOB.using_map.dock_name]"),  "%ETD%", "[estimated_time] minute\s"))
 	if(config.announce_evac_to_irc)
