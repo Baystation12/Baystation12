@@ -216,7 +216,7 @@
 				HTML += "<a href='?src=\ref[src];component=\ref[circuit];remove=1'>\[-\]</a> | "
 			else
 				HTML += "\[-\] | "
-			HTML += "<a href='?src=\ref[circuit];examine=1'>[circuit.displayed_name]</a>"
+			HTML += "<a href='?src=\ref[src];component=\ref[circuit];examine_component=1'>[circuit.displayed_name]</a>"
 			HTML += "<br>"
 
 		if(length(assembly_components) > components_per_page)
@@ -288,6 +288,10 @@
 
 				assembly_components.Remove(component)
 				assembly_components.Insert(selected_slot, component)
+
+			else if (href_list["examine_component"])
+				component.interact(usr)
+				return
 
 
 	interact(usr) // To refresh the UI.
