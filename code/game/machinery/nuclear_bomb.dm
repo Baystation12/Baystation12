@@ -11,6 +11,7 @@ var/global/bomb_set
 	unacidable = TRUE
 	interact_offline = TRUE
 
+	var/evacuate = FALSE
 	var/deployable = 0
 	var/extended = 0
 	var/lighthack = 0
@@ -165,9 +166,10 @@ var/global/bomb_set
 
 /obj/machinery/nuclearbomb/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/data[0]
+	data["evacuate"] = evacuate
 	data["hacking"] = 0
 	data["auth"] = is_auth(user)
-	data["moveable_anchor"] = !istype(src, /obj/machinery/nuclearbomb/station)
+	data["is_regular_nuke"] = !istype(src, /obj/machinery/nuclearbomb/station)
 	if(is_auth(user))
 		if(yes_code)
 			data["authstatus"] = timing ? "Functional/Set" : "Functional"
@@ -289,6 +291,8 @@ var/global/bomb_set
 				if(safety)
 					secure_device()
 				update_icon()
+			if(href_list["evacuate"])
+				evacuate = !evacuate
 			if(href_list["anchor"])
 				if(removal_stage == 5)
 					anchored = FALSE
@@ -490,13 +494,14 @@ var/global/bomb_set
 			return
 	..()
 	visible_message(SPAN_WARNING("Warning. The self-destruct sequence override will be disabled [self_destruct_cutoff] seconds before detonation."))
-	if(!evacuation_controller)
-		visible_message(SPAN_DANGER("Warning. Unable to initiate evacuation procedures."))
-		return
-	for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
-		if(EO.abandon_ship)
-			evacuation_controller.new_evac_prep_delay(timeleft SECONDS - 1 MINUTE)
-			evacuation_controller.handle_evac_option(EO.option_target, usr)
+	if(evacuate)
+		if(!evacuation_controller)
+			visible_message(SPAN_DANGER("Warning. Unable to initiate evacuation procedures."))
+			return
+		for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
+			if(EO.abandon_ship)
+				evacuation_controller.new_evac_prep_delay(timeleft SECONDS - 1 MINUTE)
+				evacuation_controller.handle_evac_option(EO.option_target, usr)
 
 /obj/machinery/nuclearbomb/station/secure_device()
 	if(timeleft <= self_destruct_cutoff)
