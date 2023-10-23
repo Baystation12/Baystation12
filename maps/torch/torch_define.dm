@@ -32,7 +32,7 @@
 		"SFP Territory Support",
 		"SFP Special Investigations",
 		"SFP Fugitive Recovery",
-		"Sol Fleet Mars Commmand",
+		"Sol Fleet Mars Command",
 		"Bureau of Diplomatic Affairs",
 		"Emergency Management Bureau",
 		"Secure Routing Service"
