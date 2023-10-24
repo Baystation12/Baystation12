@@ -145,7 +145,7 @@
 	if (!do_after(user, ITEM_SIZE_LARGE SECONDS, target, DO_PUBLIC_UNIQUE) || !H.has_danger_grab(user) || !user.use_sanity_check(H, src))
 		return TRUE
 
-	var/obj/mobpresent/present = new (H.loc, H, package_type)
+	var/obj/structure/mobpresent/present = new (H.loc, H, package_type)
 	use(a_used)
 
 	if (user == target)

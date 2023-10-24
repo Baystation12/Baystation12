@@ -9,6 +9,7 @@
 	var/buckle_require_restraints = FALSE //require people to be handcuffed before being able to buckle. eg: pipes
 	var/mob/living/buckled_mob
 	var/buckle_sound = 'sound/effects/buckle.ogg'
+	var/breakout_time
 
 	/**
 	*  A list of (x, y, z) to offset buckled_mob by, or null.

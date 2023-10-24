@@ -12,6 +12,7 @@
 	var/material/material = null
 	var/footstep_type
 	var/mob_offset = 0 //used for on_structure_offset mob animation
+	var/breakout //if someone is currently breaking out
 
 /obj/structure/damage_health(damage, damage_type, damage_flags, severity, skip_can_damage_check)
 	if (damage && HAS_FLAGS(damage_flags, DAMAGE_FLAG_TURF_BREAKER))
