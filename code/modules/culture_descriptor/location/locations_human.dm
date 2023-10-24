@@ -98,8 +98,8 @@
 	all, although places are competitive and preference is given to natives to the Tau Ceti system.<br><br> Being from a \
 	near-Sol colony with a focus on the cutting edge, most Episoloners are tech-savvy at the very least and are usually \
 	well educated, with a focus on the sciences."
-	capital = "Verlize"
-	economic_power = 1.4
+	capital = "Icon"
+	economic_power = 1.2
 
 /singleton/cultural_info/location/human/eos
 	name = HOME_SYSTEM_HELIOS
