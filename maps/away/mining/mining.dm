@@ -101,9 +101,9 @@
 	return res
 
 /datum/map_template/ruin/away_site/mining_signal
-	name = "Mining - Planetoid"
+	name = "Mining - Dwarf Planet"
 	id = "awaysite_mining_signal"
-	description = "A mineral-rich, formerly-volcanic site on a planetoid."
+	description = "A mineral-rich, formerly-volcanic site on a dwarf planet."
 	suffixes = list("mining/mining-signal.dmm")
 	spawn_cost = 1
 	generate_mining_by_z = 1
