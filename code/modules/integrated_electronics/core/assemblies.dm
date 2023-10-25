@@ -157,7 +157,8 @@
 
 	if(opened)
 		open_interact(user)
-	closed_interact(user)
+	else
+		closed_interact(user)
 
 /obj/item/device/electronic_assembly/proc/closed_interact(mob/user)
 	var/HTML = list()
@@ -210,12 +211,12 @@
 		for(var/i = start_index to min(length(assembly_components), start_index + (components_per_page - 1)))
 			var/obj/item/integrated_circuit/circuit = assembly_components[i]
 			HTML += "\[ <a href='?src=\ref[src];component=\ref[circuit];set_slot=1'>[i]</a> \] | "
-			HTML += "<a href='?src=\ref[circuit];component=\ref[circuit];rename=1'>\[R\]</a> | "
+			HTML += "<a href='?src=\ref[src];component=\ref[circuit];rename_component=1'>\[R\]</a> | "
 			if(circuit.removable)
 				HTML += "<a href='?src=\ref[src];component=\ref[circuit];remove=1'>\[-\]</a> | "
 			else
 				HTML += "\[-\] | "
-			HTML += "<a href='?src=\ref[circuit];examine=1'>[circuit.displayed_name]</a>"
+			HTML += "<a href='?src=\ref[src];component=\ref[circuit];examine_component=1'>[circuit.displayed_name]</a>"
 			HTML += "<br>"
 
 		if(length(assembly_components) > components_per_page)
@@ -275,17 +276,22 @@
 			if(href_list["remove"])
 				try_remove_component(component, usr)
 
-			else
-				// Adjust the position
-				if(href_list["set_slot"])
-					var/selected_slot = input("Select a new slot", "Select slot", current_pos) as null|num
-					if(!check_interactivity(usr))
-						return 0
-					if(selected_slot < 1 || selected_slot > length(assembly_components))
-						return 0
+			else if (href_list["rename_component"])
+				component.rename_component()
 
-					assembly_components.Remove(component)
-					assembly_components.Insert(selected_slot, component)
+			else if(href_list["set_slot"])
+				var/selected_slot = input("Select a new slot", "Select slot", current_pos) as null|num
+				if(!check_interactivity(usr))
+					return 0
+				if(selected_slot < 1 || selected_slot > length(assembly_components))
+					return 0
+
+				assembly_components.Remove(component)
+				assembly_components.Insert(selected_slot, component)
+
+			else if (href_list["examine_component"])
+				component.interact(usr)
+				return
 
 
 	interact(usr) // To refresh the UI.
