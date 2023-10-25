@@ -290,7 +290,7 @@
 
 /obj/item/clothing/head/beret/solgov/fleet/branch/second
 	name = "second fleet beret"
-	desc = "An SCG Fleet beret carrying the insignia of the Second Fleet, the Home Guard, tasked with defense of Sol territories. For personnel that are more inclined towards style than safety."
+	desc = "An SCG Fleet beret carrying the insignia of the Second Fleet, the Home Defense Group, tasked with defense of Sol territories. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_navy_second"
 
 /obj/item/clothing/head/beret/solgov/fleet/branch/third

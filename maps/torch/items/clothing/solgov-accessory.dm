@@ -121,7 +121,7 @@ patches
 
 /obj/item/clothing/accessory/solgov/fleet_patch/second
 	name = "\improper Second Fleet patch"
-	desc = "A well-worn shoulder patch carrying insignia of Second Fleet, the Home Guard, tasked with defense of Sol territories."
+	desc = "A well-worn shoulder patch carrying insignia of Second Fleet, the Home Defense Group, tasked with defense of Sol territories."
 	icon_state = "fleetpatch2"
 
 /obj/item/clothing/accessory/solgov/fleet_patch/third
