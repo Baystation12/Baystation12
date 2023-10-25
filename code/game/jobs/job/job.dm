@@ -56,6 +56,9 @@
 
 	var/faction = MOB_FACTION_CREW
 
+	/// Character saves with this culture selected won't be able to play this role.
+	var/culture_blacklist = list()
+
 /datum/job/New()
 
 	if(prob(100-availablity_chance))	//Close positions, blah blah.

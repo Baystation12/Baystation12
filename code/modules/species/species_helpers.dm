@@ -59,7 +59,17 @@ var/global/list/stored_shock_by_ref = list()
 	return TRUE
 
 /datum/species/proc/check_background(datum/job/job, datum/preferences/prefs)
-	. = TRUE
+	var/whitelisted = TRUE
+
+	for(var/token in prefs.cultural_info)
+		if(prefs.cultural_info[token] in job.culture_blacklist)
+			whitelisted = FALSE
+			break
+		else
+			continue
+
+	return whitelisted
+
 
 /datum/species/proc/get_digestion_product()
 	return /datum/reagent/nutriment
