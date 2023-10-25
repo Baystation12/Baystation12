@@ -3,14 +3,14 @@
 	///////////////
 
 /obj/structure/closet/secure_closet/guncabinet/farfleet
-	name = "droptrops cabinet"
+	name = "heavy armory cabinet"
 	req_access = list(access_away_iccgn_droptroops)
 
 /obj/structure/closet/secure_closet/guncabinet/farfleet/antitank/WillContain()
 	return list(
-		/obj/item/gun/magnetic/railgun  = 2,
+		/obj/item/gun/magnetic/railgun  = 1,
 		/obj/item/gun/energy/ionrifle/small/stupor = 2,
-		/obj/item/rcd_ammo = 10
+		/obj/item/rcd_ammo = 5
 	)
 
 /obj/structure/closet/secure_closet/guncabinet/farfleet/ballistics/WillContain()
@@ -56,7 +56,7 @@
 	)
 
 /obj/structure/closet/secure_closet/farfleet
-	name = "trooper locker"
+	name = "pioneer locker"
 	closet_appearance = /singleton/closet_appearance/secure_closet/farfleet/two
 	req_access = list(access_away_iccgn_droptroops)
 
@@ -80,7 +80,7 @@
 
 
 /obj/structure/closet/secure_closet/farfleet/sergeant
-	name = "droptroops sergeant locker"
+	name = "pioneer sergeant locker"
 	closet_appearance = /singleton/closet_appearance/secure_closet/farfleet/two
 	req_access = list(access_away_iccgn_sergeant)
 
@@ -108,7 +108,7 @@
 	)
 
 /obj/structure/closet/secure_closet/farfleet/fleet
-	name = "fleet cabinet"
+	name = "crew cabinet"
 	closet_appearance = /singleton/closet_appearance/secure_closet/farfleet
 	req_access = list(access_away_iccgn)
 
@@ -123,7 +123,7 @@
 	)
 
 /obj/structure/closet/secure_closet/farfleet/fleet/engi
-	name = "fleet technician cabinet"
+	name = "corps technician cabinet"
 	closet_appearance = /singleton/closet_appearance/secure_closet/farfleet
 	req_access = list(access_away_iccgn)
 
@@ -233,39 +233,15 @@
  * ====
  */
 
-/*
-/obj/machinery/suit_storage_unit/away_iccgn_med
-	name = "Pioneer Corpsman Voidsuit Storage Unit"
-	suit= /obj/item/clothing/suit/space/void/pioneer/prepared
+/obj/machinery/suit_storage_unit/pioneer
+	name = "pioneer corps voidsuit storage unit"
+	suit= /obj/item/clothing/suit/space/void/pioneer
+	helmet = /obj/item/clothing/head/helmet/space/void/pioneer
 	boots = /obj/item/clothing/shoes/magboots
 	tank = /obj/item/tank/oxygen
+	mask = /obj/item/clothing/mask/breath
 	req_access = list(access_away_iccgn)
 	islocked = 1
-
-/obj/machinery/suit_storage_unit/away_iccgn_eng
-	name = "Senior Technician Voidsuit Storage Unit"
-	suit= /obj/item/clothing/suit/space/void/pioneer/prepared
-	boots = /obj/item/clothing/shoes/magboots
-	tank = /obj/item/tank/oxygen
-	req_access = list(access_away_iccgn)
-	islocked = 1
-
-/obj/machinery/suit_storage_unit/away_iccgn_pawn
-	name = "CSS Voidsuit Storage Unit"
-	suit= /obj/item/clothing/suit/space/void/pioneer/prepared
-	boots = /obj/item/clothing/shoes/magboots
-	tank = /obj/item/tank/oxygen
-	req_access = list(access_away_iccgn)
-	islocked = 1
-
-/obj/machinery/suit_storage_unit/away_iccgn_com
-	name = "Captain Voidsuit Storage Unit"
-	suit= /obj/item/clothing/suit/space/void/pioneer/command/prepared
-	boots = /obj/item/clothing/shoes/magboots
-	tank = /obj/item/tank/oxygen
-	req_access = list(access_away_iccgn, access_away_iccgn_captain)
-	islocked = 1
- */
 
 /obj/structure/sign/farfleetplaque
 	name = "\improper Pioneer Corps Plaque"

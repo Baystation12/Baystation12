@@ -63,7 +63,7 @@
 /obj/item/gun/projectile/automatic/assault_rifle/heltek
 	name = "LA-700"
 	desc = "HelTek LA-700 is a standart equipment of ICCG Space-assault Forces. Looks very similiar to STS-35."
-	icon = 'mods/_maps/farfleet/icons/iccg_rifle.dmi'
+	icon = 'mods/_maps/farfleet/icons/obj/iccg_rifle.dmi'
 	icon_state = "iccg_rifle"
 
 /obj/item/gun/projectile/automatic/assault_rifle/heltek/on_update_icon()
@@ -78,12 +78,12 @@
 /obj/item/gun/projectile/automatic/mr735
 	name = "MR-735"
 	desc = "A cheap rifle for close quarters combat, with an auto-firing mode available. HelTek MR-735 is a standard rifle for ICCG Space-assault Forces, designed without a stock for easier storage and combat in closed spaces. Perfect weapon for some ship's crew."
-	icon = 'mods/_maps/farfleet/icons/mr735.dmi'
+	icon = 'mods/_maps/farfleet/icons/obj/mr735.dmi'
 	icon_state = "nostockrifle"
 	item_state = "nostockrifle"
 	item_icons = list(
-		slot_r_hand_str = 'mods/_maps/farfleet/icons/righthand.dmi',
-		slot_l_hand_str = 'mods/_maps/farfleet/icons/lefthand.dmi',
+		slot_r_hand_str = 'mods/_maps/farfleet/icons/mob/righthand.dmi',
+		slot_l_hand_str = 'mods/_maps/farfleet/icons/mob/lefthand.dmi',
 		)
 	wielded_item_state = "nostockrifle_wielded"
 	force = 10
@@ -117,12 +117,12 @@
 /obj/item/gun/projectile/automatic/mbr
 	name = "MBR"
 	desc = "A shabby bullpup carbine. Despite its size, it looks a little uncomfortable, but it is robust. HelTek MBR is a standart equipment of ICCG Space-assault Forces, designed in a bullpup layout. Possesses autofire and is perfect for the ship's crew."
-	icon = 'mods/_maps/farfleet/icons/mbr_bullpup.dmi'
+	icon = 'mods/_maps/farfleet/icons/obj/mbr_bullpup.dmi'
 	icon_state = "mbr_bullpup"
 	item_state = "mbr_bullpup"
 	item_icons = list(
-		slot_r_hand_str = 'mods/_maps/farfleet/icons/righthand.dmi',
-		slot_l_hand_str = 'mods/_maps/farfleet/icons/lefthand.dmi',
+		slot_r_hand_str = 'mods/_maps/farfleet/icons/mob/righthand.dmi',
+		slot_l_hand_str = 'mods/_maps/farfleet/icons/mob/lefthand.dmi',
 		)
 	wielded_item_state = "mbr_bullpup-wielded"
 	force = 10
@@ -157,12 +157,12 @@
 /obj/item/gun/energy/laser/bonfire
 	name = "Bonfire Carbine"
 	desc = "Strange construction: laser carbine with underslung grenade launcher and very capable internal battery. HelTek Bonfire-75 is a weapon designed for suppressive fire in close quarters, where usage of ballistic weaponry will be uneffective or simply hazardous."
-	icon = 'mods/_maps/farfleet/icons/bonfire.dmi'
+	icon = 'mods/_maps/farfleet/icons/obj/bonfire.dmi'
 	icon_state = "bonfire"
 	item_state = "bonfire"
 	item_icons = list(
-		slot_r_hand_str = 'mods/_maps/farfleet/icons/righthand.dmi',
-		slot_l_hand_str = 'mods/_maps/farfleet/icons/lefthand.dmi',
+		slot_r_hand_str = 'mods/_maps/farfleet/icons/mob/righthand.dmi',
+		slot_l_hand_str = 'mods/_maps/farfleet/icons/mob/lefthand.dmi',
 		)
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = ITEM_SIZE_LARGE
@@ -213,12 +213,12 @@
 /obj/item/gun/energy/ionrifle/small/stupor
 	name = "Stupor ion pistol"
 	desc = "The HelTek Stupor-45 is a compact anti-drone weapon. Due to their small output of EMP, you need be marksman to disable human-sized synthetic. But it's still better, than nothing."
-	icon = 'mods/_maps/farfleet/icons/stupor.dmi'
+	icon = 'mods/_maps/farfleet/icons/obj/stupor.dmi'
 	icon_state = "stupor"
 	item_state = "stupor"
 	item_icons = list(
-		slot_r_hand_str = 'mods/_maps/farfleet/icons/righthand.dmi',
-		slot_l_hand_str = 'mods/_maps/farfleet/icons/lefthand.dmi',
+		slot_r_hand_str = 'mods/_maps/farfleet/icons/mob/righthand.dmi',
+		slot_l_hand_str = 'mods/_maps/farfleet/icons/mob/lefthand.dmi',
 		)
 	fire_delay = 40
 	one_hand_penalty = 0
@@ -238,10 +238,119 @@
 	ammo_type = /obj/item/ammo_casing/pistol/nullglass
 
 /* VOIDSUITS AND RIGS
- * ======== TODO: Make any suits instead of plaseholder
+ * ========
  */
 
+/obj/item/clothing/head/helmet/space/void/pioneer
+	name = "pioneer corps voidsuit helmet"
+	desc = "A somewhat old-fashioned helmet in bright colors. On the forehead you can see the inscription PC ICCG. This one has radiation shielding."
+	icon = 'mods/_maps/farfleet/icons/obj/obj_head.dmi'
+	icon_state = "pioneer"
+	item_state = "pioneer"
+	item_icons = list(slot_head_str = 'mods/_maps/farfleet/icons/mob/onmob_head.dmi')
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_MINOR,
+		laser = ARMOR_LASER_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
+		rad = ARMOR_RAD_RESISTANT
+		)
+	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
+	siemens_coefficient = 0.3
 
+/obj/item/clothing/suit/space/void/pioneer
+	name = "pioneer corps voidsuit"
+	desc = "A somewhat old-fashioned voidsuit in bright colors. On the shoulder you can see the inscription PC ICCG. This one has radiation shielding."
+	icon = 'mods/_maps/farfleet/icons/obj/obj_suit.dmi'
+	icon_state = "pioneer"
+	item_state = "pioneer"
+	item_icons = list(slot_wear_suit_str = 'mods/_maps/farfleet/icons/mob/onmob_suit.dmi')
+	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
+	siemens_coefficient = 0.3
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_MINOR,
+		laser = ARMOR_LASER_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
+		rad = ARMOR_RAD_RESISTANT
+		)
+	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/briefcase/inflatable,/obj/item/rcd,/obj/item/rpd, /obj/item/gun)
+
+/obj/item/clothing/suit/space/void/pioneer/prepared
+	helmet = /obj/item/clothing/head/helmet/space/void/pioneer
+	boots = /obj/item/clothing/shoes/magboots
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
+
+/obj/item/rig/pioneer
+	name = "pioneer corps suit control module"
+	desc = "A ridiculously bulky military hardsuit with PC-13AA inscription and a small ICCG crest on its control module. This suit's armor plates mostly replaced with anomaly and radiation shielding."
+	suit_type = "heavy"
+	icon_state = "gcc_rig"
+	online_slowdown = 2 ///chunky
+	offline_slowdown = 4
+	armor = list(
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
+		laser = ARMOR_LASER_MAJOR,
+		energy = ARMOR_ENERGY_STRONG,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
+		rad = ARMOR_RAD_SHIELDED
+		)
+	initial_modules = list(
+		/obj/item/rig_module/vision/meson,
+		/obj/item/rig_module/chem_dispenser,
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/device/anomaly_scanner,
+		/obj/item/rig_module/power_sink,
+		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/maneuvering_jets
+		)
+
+	chest_type = /obj/item/clothing/suit/space/rig/pioneer
+	helm_type =  /obj/item/clothing/head/helmet/space/rig/pioneer
+	boot_type =  /obj/item/clothing/shoes/magboots/rig/pioneer
+	glove_type = /obj/item/clothing/gloves/rig/pioneer
+
+/obj/item/clothing/head/helmet/space/rig/pioneer
+	light_overlay = "helmet_light_dual_alt"
+
+/obj/item/clothing/suit/space/rig/pioneer
+	breach_threshold = 40
+	species_restricted = list(SPECIES_HUMAN, SPECIES_IPC)
+	allowed = list(
+		/obj/item/gun,
+		/obj/item/ammo_magazine,
+		/obj/item/ammo_casing,
+		/obj/item/handcuffs,
+		/obj/item/device/flashlight,
+		/obj/item/tank,
+		/obj/item/device/suit_cooling_unit,
+		/obj/item/melee/baton
+	)
+
+/obj/item/clothing/gloves/rig/pioneer
+	siemens_coefficient = 0
+
+/obj/item/clothing/shoes/magboots/rig/pioneer
+
+/obj/item/rig/pioneer/sergeant
+	name = "pioneer corps sergeant suit control module"
+	desc = "A ridiculously bulky military hardsuit with PC-13AS inscription and a small ICCG crest on its control module. This suit's armor plates mostly replaced with anomaly and radiation shielding."
+	suit_type = "heavy"
+
+	initial_modules = list(
+		/obj/item/rig_module/vision/meson,
+		/obj/item/rig_module/chem_dispenser,
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/mounted/ballistic/minigun,
+		/obj/item/rig_module/device/anomaly_scanner,
+		/obj/item/rig_module/power_sink,
+		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/maneuvering_jets
+		)
 
 /* MISC
  * ========

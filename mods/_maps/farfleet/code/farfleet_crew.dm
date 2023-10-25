@@ -99,13 +99,13 @@ var/global/const/access_away_iccgn_captain = "ACCESS_ICCGN_CAPTAIN"
  */
 
 /datum/job/submap/away_iccgn_farfleet
-	title = "ICCG Droptrooper"
+	title = "Pioneer Corps Trooper"
 	total_positions = 2
 	outfit_type = /singleton/hierarchy/outfit/job/iccgn/iccgn_droptroops
-	branch = /datum/mil_branch/pioneer
-	rank = /datum/mil_rank/pioneer/or3
-	allowed_branches = list(/datum/mil_branch/pioneer)
-	allowed_ranks = list(/datum/mil_rank/pioneer/or3)
+	branch = /datum/mil_rank/iccgn
+	rank = /datum/mil_rank/iccgn/or3
+	allowed_branches = list(/datum/mil_branch/iccgn)
+	allowed_ranks = list(/datum/mil_rank/iccgn/or3)
 	supervisors = "sergeant"
 	loadout_allowed = TRUE
 	is_semi_antagonist = TRUE
@@ -126,14 +126,14 @@ var/global/const/access_away_iccgn_captain = "ACCESS_ICCGN_CAPTAIN"
 	access = list(access_away_iccgn, access_away_iccgn_droptroops, access_engine_equip)
 
 /datum/job/submap/away_iccgn_farfleet/iccgn_sergeant
-	title = "ICCG Droptrooper Sergeant"
+	title = "Pioneer Corps Sergeant"
 	total_positions = 1
 	outfit_type = /singleton/hierarchy/outfit/job/iccgn/iccgn_sergeant
 	supervisors = "Recon captain, Command of the Pioneer Corps , ICCGN"
-	branch = /datum/mil_branch/pioneer
-	rank = /datum/mil_rank/pioneer/or5
-	allowed_branches = list(/datum/mil_branch/pioneer)
-	allowed_ranks = list(/datum/mil_rank/pioneer/or5)
+	branch = /datum/mil_rank/iccgn
+	rank = /datum/mil_rank/iccgn/or5
+	allowed_branches = list(/datum/mil_rank/iccgn)
+	allowed_ranks = list(/datum/mil_rank/iccgn/or5)
 	loadout_allowed = TRUE
 	is_semi_antagonist = TRUE
 	info = "Вы просыпаетесь и выходите из криосна, ощущая прохладный воздух на своём лице, а также лёгкую тошноту. \
@@ -158,10 +158,10 @@ var/global/const/access_away_iccgn_captain = "ACCESS_ICCGN_CAPTAIN"
 	title = "Pioneer Corps Captain"
 	total_positions = 1
 	outfit_type = /singleton/hierarchy/outfit/job/iccgn/iccgn_captain
-	branch = /datum/mil_branch/pioneer
-	rank = /datum/mil_rank/pioneer/of5
-	allowed_branches = list(/datum/mil_branch/pioneer)
-	allowed_ranks = list(/datum/mil_rank/pioneer/of5)
+	branch = /datum/mil_rank/iccgn
+	rank = /datum/mil_rank/iccgn/of5
+	allowed_branches = list(/datum/mil_rank/iccgn)
+	allowed_ranks = list(/datum/mil_rank/iccgn/of5)
 	supervisors = "command of the Pioneer Corps , ICCGN"
 	loadout_allowed = TRUE
 	is_semi_antagonist = TRUE
@@ -187,12 +187,12 @@ var/global/const/access_away_iccgn_captain = "ACCESS_ICCGN_CAPTAIN"
 	title = "Pioneer Corpsman"
 	total_positions = 1
 	outfit_type = /singleton/hierarchy/outfit/job/iccgn/iccgn_medic
-	branch = /datum/mil_branch/pioneer
-	rank = /datum/mil_rank/pioneer/of5
-	allowed_branches = list(/datum/mil_branch/pioneer)
+	branch = /datum/mil_rank/iccgn
+	rank = /datum/mil_rank/iccgn/of5
+	allowed_branches = list(/datum/mil_rank/iccgn)
 	allowed_ranks = list(
-		/datum/mil_rank/pioneer/of1,
-		/datum/mil_rank/pioneer/of3
+		/datum/mil_rank/iccgn/of1,
+		/datum/mil_rank/iccgn/of3
 	)
 	loadout_allowed = TRUE
 	info = "Вы просыпаетесь и выходите из криосна, ощущая прохладный воздух на своём лице, а также лёгкую тошноту. \
@@ -216,13 +216,13 @@ var/global/const/access_away_iccgn_captain = "ACCESS_ICCGN_CAPTAIN"
 	access = list(access_away_iccgn, access_engine_equip)
 
 /datum/job/submap/away_iccgn_farfleet/iccgn_gunner
-	title = "Senior Technician"
+	title = "Pioneer Corps Technician"
 	total_positions = 1
 	outfit_type = /singleton/hierarchy/outfit/job/iccgn/iccgn_gunner
-	branch = /datum/mil_branch/pioneer
-	rank = /datum/mil_rank/pioneer/of3
-	allowed_branches = list(/datum/mil_branch/pioneer)
-	allowed_ranks = list(/datum/mil_rank/pioneer/of3)
+	branch = /datum/mil_rank/iccgn
+	rank = /datum/mil_rank/iccgn/of3
+	allowed_branches = list(/datum/mil_rank/iccgn)
+	allowed_ranks = list(/datum/mil_rank/iccgn/of3)
 	supervisors = "captain"
 	loadout_allowed = TRUE
 	info = "Вы просыпаетесь и выходите из криосна, ощущая прохладный воздух на своём лице, а также лёгкую тошноту. \
@@ -256,6 +256,7 @@ var/global/const/access_away_iccgn_captain = "ACCESS_ICCGN_CAPTAIN"
 	allowed_branches = list(/datum/mil_branch/css)
 	allowed_ranks = list(/datum/mil_rank/css/fa7)
 	supervisors = "chief of 'P' Department, Confederate Security Service"
+	psi_faculties = list(PSI_COERCION = PSI_RANK_MASTER)
 	loadout_allowed = TRUE
 	info = "Вы просыпаетесь и выходите из криосна, ощущая прохладный воздух на своём лице, а также лёгкую тошноту. \
 	Вы - сотрдник отдела 'П' Конфедеративной Службы Безопасности, приписанный к кораблю Пионерского Корпуса. \
@@ -276,6 +277,7 @@ var/global/const/access_away_iccgn_captain = "ACCESS_ICCGN_CAPTAIN"
 					 SKILL_EVA = SKILL_BASIC)
 
 	access = list(access_away_iccgn, access_away_iccgn_droptroops, access_away_iccgn_sergeant, access_away_iccgn_captain, access_engine_equip)
+
 
 /* OUTFITS
  * =======

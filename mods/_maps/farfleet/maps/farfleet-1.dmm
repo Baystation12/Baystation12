@@ -117,7 +117,6 @@
 	},
 /obj/machinery/alarm{
 	dir = 4;
-	icon_state = "alarm0";
 	pixel_x = -22;
 	req_access = list("ACCESS_ICCGN")
 	},
@@ -132,7 +131,6 @@
 /obj/machinery/fusion_fuel_injector/mapped{
 	anchored = 0;
 	dir = 4;
-	icon_state = "injector0";
 	id_tag = "fusion_injector_farfleet";
 	req_access = list("ACCESS_ICCGN");
 	initial_id_tag = "fusion_injector_farfleet"
@@ -452,7 +450,6 @@
 	},
 /obj/machinery/alarm{
 	dir = 4;
-	icon_state = "alarm0";
 	pixel_x = -22;
 	req_access = list("ACCESS_ICCGN")
 	},
@@ -1261,10 +1258,10 @@
 /turf/simulated/floor/tiled,
 /area/ship/farfleet/crew/hallway/lower)
 "ec" = (
-/obj/structure/sign/double/iccgflag/left{
+/obj/floor_decal/industrial/outline/yellow,
+/obj/structure/sign/double/iccgflag/right{
 	pixel_y = 32
 	},
-/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/dock)
 "eg" = (
@@ -1996,9 +1993,7 @@
 	dir = 4;
 	pixel_x = 26
 	},
-/obj/machinery/suit_storage_unit/security/alt{
-	req_access = list("ACCESS_ICCGN")
-	},
+/obj/machinery/suit_storage_unit/pioneer,
 /turf/simulated/floor/tiled,
 /area/ship/farfleet/command/eva)
 "hp" = (
@@ -2956,6 +2951,12 @@
 /obj/structure/sign/iccg{
 	pixel_y = 32
 	},
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/corner/darkblue/border{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/farfleet/command/bridge)
 "ma" = (
@@ -2973,8 +2974,19 @@
 /turf/simulated/floor/tiled,
 /area/ship/farfleet/engineering/equipment)
 "me" = (
-/obj/machinery/suit_storage_unit/standard_unit,
 /obj/floor_decal/industrial/outline/yellow,
+/obj/structure/table/rack,
+/obj/structure/window/reinforced,
+/obj/item/clothing/suit/space/emergency{
+	pixel_x = 6
+	},
+/obj/item/clothing/suit/space/emergency,
+/obj/item/clothing/suit/space/emergency{
+	pixel_x = -6
+	},
+/obj/machinery/door/window{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/dock)
 "mf" = (
@@ -3138,28 +3150,6 @@
 /obj/paint/dark_gunmetal,
 /turf/simulated/floor,
 /area/ship/farfleet/engineering/atmos_equipment)
-"mN" = (
-/obj/structure/closet/secure_closet/guncabinet{
-	req_access = list("ACCESS_ICCGN")
-	},
-/obj/item/ammo_magazine/rifle,
-/obj/item/ammo_magazine/rifle,
-/obj/item/ammo_magazine/rifle,
-/obj/item/ammo_magazine/rifle,
-/obj/item/ammo_magazine/rifle,
-/obj/item/ammo_magazine/rifle,
-/obj/item/ammo_magazine/rifle,
-/obj/item/ammo_magazine/rifle,
-/obj/item/ammo_magazine/rifle,
-/obj/item/ammo_magazine/rifle,
-/obj/item/ammo_magazine/rifle,
-/obj/item/ammo_magazine/rifle,
-/obj/item/gun/projectile/automatic/mbr,
-/obj/item/gun/projectile/automatic/mbr,
-/obj/item/gun/projectile/automatic/mbr,
-/obj/item/gun/projectile/automatic/mbr,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/ship/farfleet/crew/brig/emergency_armory)
 "mO" = (
 /obj/machinery/power/shield_generator,
 /obj/structure/cable/yellow{
@@ -3307,25 +3297,21 @@
 /obj/structure/closet/secure_closet/guncabinet{
 	req_access = list("ACCESS_ICCGN")
 	},
-/obj/item/storage/box/ammo/flashshells,
-/obj/item/storage/box/ammo/flashshells,
-/obj/item/storage/box/ammo/shotgunshells,
-/obj/item/storage/box/ammo/shotgunshells,
-/obj/item/storage/box/ammo/stunshells,
-/obj/item/storage/box/ammo/stunshells,
-/obj/item/storage/box/ammo/shotgunammo,
-/obj/item/storage/box/ammo/shotgunammo,
-/obj/item/clothing/accessory/storage/bandolier,
-/obj/item/clothing/accessory/storage/bandolier,
-/obj/item/clothing/accessory/storage/bandolier,
-/obj/item/clothing/accessory/storage/bandolier,
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/gun/projectile/shotgun/pump/sawn,
-/obj/item/gun/projectile/shotgun/pump/sawn,
-/obj/item/gun/projectile/shotgun/pump/sawn,
-/obj/item/gun/projectile/shotgun/pump/sawn,
+/obj/item/gun/projectile/automatic/merc_smg,
+/obj/item/gun/projectile/automatic/merc_smg,
+/obj/item/gun/projectile/automatic/merc_smg,
+/obj/item/gun/projectile/automatic/merc_smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/crew/brig/emergency_armory)
 "nC" = (
@@ -3550,6 +3536,12 @@
 /area/ship/farfleet/dock)
 "ox" = (
 /obj/structure/table/steel_reinforced,
+/obj/floor_decal/borderfloorblack{
+	dir = 9
+	},
+/obj/floor_decal/corner/darkblue/border{
+	dir = 9
+	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/farfleet/command/bridge)
 "oz" = (
@@ -3695,6 +3687,7 @@
 /obj/item/airlock_brace,
 /obj/item/airlock_brace,
 /obj/item/airlock_brace,
+/obj/item/material/twohanded/jack/titanium,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/crew/brig/emergency_armory)
 "pw" = (
@@ -3786,7 +3779,8 @@
 /obj/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/multi_tile/glass/terran{
-	name = "Bridge"
+	name = "Bridge";
+	dir = 8
 	},
 /obj/machinery/door/blast/regular/open{
 	id_tag = "pcbridge";
@@ -3977,6 +3971,12 @@
 "rM" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/light{
+	dir = 8
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 8
+	},
+/obj/floor_decal/corner/darkblue/border{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -4183,7 +4183,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/alarm{
 	dir = 4;
-	icon_state = "alarm0";
 	pixel_x = -22;
 	req_access = list("ACCESS_ICCGN")
 	},
@@ -4366,6 +4365,12 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/floor_decal/borderfloorblack{
+	dir = 4
+	},
+/obj/floor_decal/corner/darkblue/border{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/farfleet/command/bridge)
 "uM" = (
@@ -4509,7 +4514,6 @@
 /obj/structure/iv_stand,
 /obj/machinery/alarm{
 	dir = 4;
-	icon_state = "alarm0";
 	pixel_x = -22;
 	req_access = list("ACCESS_ICCGN")
 	},
@@ -4532,7 +4536,6 @@
 /obj/machinery/fusion_fuel_injector/mapped{
 	anchored = 0;
 	dir = 4;
-	icon_state = "injector0";
 	id_tag = "fusion_injector_farfleet";
 	req_access = list("ACCESS_ICCGN");
 	initial_id_tag = "fusion_injector_farfleet"
@@ -4843,6 +4846,9 @@
 	pixel_y = 0
 	},
 /obj/floor_decal/industrial/outline/yellow,
+/obj/structure/sign/double/iccgflag/left{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/dock)
 "zJ" = (
@@ -5064,10 +5070,10 @@
 /turf/simulated/wall,
 /area/ship/farfleet/engineering/atmos_equipment)
 "Cd" = (
-/obj/structure/sign/double/iccgflag/right{
+/obj/floor_decal/industrial/outline/yellow,
+/obj/structure/sign/warning/vacuum{
 	pixel_y = 32
 	},
-/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/dock)
 "Cg" = (
@@ -5968,11 +5974,24 @@
 /turf/simulated/floor/tiled/dark,
 /area/ship/farfleet/crew/brig/emergency_armory)
 "JX" = (
-/obj/machinery/suit_storage_unit/standard_unit,
 /obj/machinery/light{
 	dir = 4
 	},
 /obj/floor_decal/industrial/outline/yellow,
+/obj/structure/table/rack,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/item/clothing/head/helmet/space/emergency{
+	pixel_x = 7
+	},
+/obj/item/clothing/head/helmet/space/emergency,
+/obj/item/clothing/head/helmet/space/emergency{
+	pixel_x = -7
+	},
+/obj/machinery/door/window/northright{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/dock)
 "JY" = (
@@ -6094,9 +6113,7 @@
 "Ls" = (
 /obj/floor_decal/corner_steel_grid/diagonal,
 /obj/floor_decal/industrial/outline/yellow,
-/obj/machinery/suit_storage_unit/security/alt{
-	req_access = list("ACCESS_ICCGN")
-	},
+/obj/machinery/suit_storage_unit/pioneer,
 /turf/simulated/floor/tiled,
 /area/ship/farfleet/command/eva)
 "Lu" = (
@@ -6152,12 +6169,12 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/farfleet/engineering/atmospherics)
 "Mr" = (
-/obj/structure/closet/walllocker{
-	pixel_x = -32
-	},
 /obj/item/gun/launcher/grenade,
 /obj/item/storage/box/fragshells,
 /obj/item/storage/box/fragshells,
+/obj/structure/closet/secure_closet/guncabinet{
+	req_access = list("ACCESS_ICCGN")
+	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/farfleet/crew/brig/emergency_armory)
 "Ms" = (
@@ -7525,6 +7542,16 @@
 /obj/paint/dark_gunmetal,
 /turf/simulated/wall/r_wall,
 /area/ship/farfleet/maintenance)
+"Ye" = (
+/obj/structure/table/steel_reinforced,
+/obj/floor_decal/borderfloorblack{
+	dir = 5
+	},
+/obj/floor_decal/corner/darkblue/border{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/dark,
+/area/ship/farfleet/command/bridge)
 "Yi" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -7689,7 +7716,6 @@
 /obj/item/device/suit_cooling_unit,
 /obj/machinery/alarm{
 	dir = 4;
-	icon_state = "alarm0";
 	pixel_x = -22;
 	req_access = list("ACCESS_ICCGN")
 	},
@@ -13533,7 +13559,7 @@ ky
 nA
 hD
 Mr
-mN
+qr
 ky
 cn
 cn
@@ -13655,7 +13681,7 @@ ky
 dU
 dU
 dU
-qr
+dU
 ky
 ky
 cn
@@ -15104,7 +15130,7 @@ aa
 Cp
 eV
 eV
-ox
+Ye
 uL
 sI
 Ou

@@ -43,6 +43,7 @@
 	description = "Cobra-class Patrol Craft."
 	prefix = "mods/_maps/sentinel/maps/"
 	suffixes = list("sentinel-1.dmm", "sentinel-2.dmm")
+	ban_ruins = list(/datum/map_template/ruin/away_site/farfleet)
 	spawn_cost = 0.5
 	player_cost = 7
 	spawn_weight = 1

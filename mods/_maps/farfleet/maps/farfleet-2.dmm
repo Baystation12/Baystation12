@@ -566,7 +566,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/ship/farfleet/barracks/armory)
 "fN" = (
-/obj/structure/table/steel_reinforced,
+/obj/machinery/photocopier,
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/farfleet/maintenance/anomaly)
 "fS" = (
@@ -657,6 +657,7 @@
 	icon_state = "4-8"
 	},
 /obj/floor_decal/industrial/outline/grey,
+/obj/machinery/suspension_gen,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/snz)
 "gJ" = (
@@ -727,10 +728,7 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/farfleet/crew/kitchen)
 "hj" = (
-/obj/machinery/firealarm{
-	pixel_y = 24
-	},
-/obj/machinery/photocopier,
+/obj/structure/closet/radiation,
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/farfleet/maintenance/anomaly)
 "hn" = (
@@ -1480,11 +1478,9 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/farfleet/maintenance/anomaly)
 "oX" = (
-/obj/machinery/alarm{
-	dir = 4;
-	icon_state = "alarm0";
-	pixel_x = -22;
-	req_access = list("ACCESS_ICCGN")
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/farfleet/maintenance/anomaly)
@@ -1808,7 +1804,8 @@
 /obj/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/multi_tile/terran{
-	name = "Droptroops Armory"
+	name = "Droptroops Armory";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/barracks/armory)
@@ -1823,6 +1820,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/machinery/portable_atmospherics/powered/scrubber,
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/farfleet/maintenance/anomaly)
 "rD" = (
@@ -1859,6 +1857,7 @@
 	dir = 4
 	},
 /obj/floor_decal/industrial/outline/grey,
+/obj/machinery/stasis_cage,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/snz)
 "rS" = (
@@ -2475,6 +2474,7 @@
 	icon_state = "4-8"
 	},
 /obj/floor_decal/industrial/outline/grey,
+/obj/structure/closet/toolcloset/excavation/awaysite,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/snz)
 "xO" = (
@@ -2555,7 +2555,8 @@
 /obj/machinery/door/firedoor,
 /obj/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/airlock/multi_tile/glass/terran{
-	name = "Canteen"
+	name = "Canteen";
+	dir = 8
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -2587,6 +2588,16 @@
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/item/anodevice,
+/obj/item/anobattery{
+	pixel_x = 6;
+	pixel_y = 6
+	},
+/obj/item/anobattery{
+	pixel_x = 2;
+	pixel_y = 2
+	},
+/obj/item/device/scanner/health,
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/farfleet/maintenance/anomaly)
 "yK" = (
@@ -2778,6 +2789,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/ship/farfleet/crew/canteen)
+"AE" = (
+/obj/machinery/portable_atmospherics/powered/pump,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/ship/farfleet/maintenance/storage)
 "AJ" = (
 /obj/floor_decal/corner/grey_alt/diagonal{
 	dir = 8
@@ -2924,7 +2939,8 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/multi_tile/terran{
-	name = "Hangar"
+	name = "Hangar";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/ship/farfleet/command/snz_hangar)
@@ -3228,19 +3244,15 @@
 "Eh" = (
 /obj/floor_decal/industrial/outline/yellow,
 /obj/structure/table/rack,
-/obj/item/rig_module/maneuvering_jets,
-/obj/item/rig_module/maneuvering_jets,
-/obj/item/rig_module/maneuvering_jets,
 /obj/item/rig_module/electrowarfare_suite,
 /obj/item/rig_module/electrowarfare_suite,
 /obj/item/rig_module/electrowarfare_suite,
-/obj/item/rig_module/device/healthscanner,
-/obj/item/rig_module/chem_dispenser/combat,
-/obj/item/rig_module/chem_dispenser/combat,
-/obj/item/rig_module/chem_dispenser/combat,
 /obj/structure/sign/double/iccgflag/left{
 	pixel_y = 32
 	},
+/obj/item/rig_module/grenade_launcher/light,
+/obj/item/rig_module/grenade_launcher/light,
+/obj/item/rig_module/grenade_launcher/light,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/barracks/armory)
 "En" = (
@@ -3415,18 +3427,10 @@
 /obj/floor_decal/industrial/outline/yellow,
 /obj/structure/table/rack,
 /obj/item/rig_module/device/rcd,
-/obj/item/rig_module/grenade_launcher/light,
-/obj/item/rig_module/grenade_launcher/light,
-/obj/item/rig_module/grenade_launcher/light,
-/obj/item/rig_module/power_sink,
-/obj/item/rig_module/power_sink,
-/obj/item/rig_module/power_sink,
-/obj/item/rig_module/self_destruct/small,
-/obj/item/rig_module/self_destruct/small,
-/obj/item/rig_module/self_destruct/small,
 /obj/item/rig_module/vision/multi,
 /obj/item/rig_module/vision/nvg,
 /obj/item/rig_module/vision/nvg,
+/obj/item/rig_module/device/healthscanner,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/barracks/armory)
 "Gq" = (
@@ -3725,6 +3729,7 @@
 	dir = 4
 	},
 /obj/floor_decal/industrial/outline/grey,
+/obj/machinery/anomaly_container,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/snz)
 "Kr" = (
@@ -3753,8 +3758,13 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/snz)
 "KE" = (
+/obj/machinery/alarm{
+	dir = 4;
+	pixel_x = -22;
+	req_access = list("ACCESS_ICCGN")
+	},
 /obj/structure/table/steel_reinforced,
-/obj/machinery/microscope,
+/obj/item/reagent_containers/glass/bucket,
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/farfleet/maintenance/anomaly)
 "KF" = (
@@ -4279,9 +4289,13 @@
 "QR" = (
 /obj/floor_decal/industrial/outline/yellow,
 /obj/structure/table/rack,
-/obj/item/rig/combat,
-/obj/item/rig/combat,
-/obj/item/rig/combat,
+/obj/item/rig/pioneer{
+	pixel_y = 6
+	},
+/obj/item/rig/pioneer,
+/obj/item/rig/pioneer/sergeant{
+	pixel_y = -5
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/barracks/armory)
 "QU" = (
@@ -4977,6 +4991,25 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/ship/farfleet/crew/canteen)
+"Wj" = (
+/obj/machinery/alarm{
+	dir = 4;
+	pixel_x = -22;
+	req_access = list("ACCESS_ICCGN")
+	},
+/turf/simulated/floor/carpet/purple,
+/area/ship/farfleet/crew/brig/css)
+"Wx" = (
+/obj/floor_decal/corner/red{
+	dir = 9
+	},
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 24;
+	req_access = list("ACCESS_ICCGN")
+	},
+/turf/simulated/floor/tiled/dark,
+/area/ship/farfleet/crew/brig)
 "Wy" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -5326,7 +5359,8 @@
 /obj/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/multi_tile/terran{
-	name = "Droptroops Locker"
+	name = "Droptroops Locker";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/barracks)
@@ -13207,7 +13241,7 @@ st
 UH
 yf
 en
-Ep
+Wx
 Bi
 bF
 EK
@@ -13450,7 +13484,7 @@ DT
 DT
 dw
 lT
-BA
+Wj
 Lf
 DT
 OQ
@@ -14442,7 +14476,7 @@ AY
 ns
 ME
 zR
-hj
+px
 oX
 yB
 KE
@@ -14686,7 +14720,7 @@ AY
 ns
 VB
 zR
-px
+hj
 sg
 sg
 sg
@@ -15788,7 +15822,7 @@ xD
 Rv
 dZ
 MY
-xD
+AE
 SV
 Ud
 ab

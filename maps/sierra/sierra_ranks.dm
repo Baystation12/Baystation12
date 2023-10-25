@@ -13,7 +13,6 @@
 		/datum/mil_branch/skrell_fleet,
 		/datum/mil_branch/iccgn,
 		/datum/mil_branch/css,
-		/datum/mil_branch/pioneer,
 		/datum/mil_branch/fleet,
 		/datum/mil_branch/scga
 	)
@@ -26,7 +25,6 @@
 		/datum/mil_branch/skrell_fleet,
 		/datum/mil_branch/iccgn,
 		/datum/mil_branch/css,
-		/datum/mil_branch/pioneer,
 		/datum/mil_branch/fleet,
 		/datum/mil_branch/scga
 	)
