@@ -70,8 +70,9 @@ else:
 
 write_cl['delete-after'] = True
 
+yaml = yaml.YAML(type='safe',pure=True)
 with open(Path.cwd().joinpath("tools/changelog/tags.yml")) as file:
-    tags = yaml.safe_load(file)
+    tags = yaml.load(file)
 
 write_cl['changes'] = []
 
@@ -83,7 +84,6 @@ for k, v in cl_list:
 
 if write_cl['changes']:
     with io.StringIO() as cl_contents:
-        yaml = yaml.YAML()
         yaml.indent(sequence=4, offset=2)
         yaml.dump(write_cl, cl_contents)
         cl_contents.seek(0)
