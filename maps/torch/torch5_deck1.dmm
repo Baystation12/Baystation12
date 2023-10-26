@@ -17200,12 +17200,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
-"fDm" = (
-/obj/structure/sign/science_1{
-	dir = 1
-	},
-/turf/simulated/wall/prepainted,
-/area/rnd/entry)
 "fDJ" = (
 /obj/floor_decal/corner/blue{
 	dir = 5
@@ -52255,7 +52249,7 @@ pzZ
 axw
 iTC
 rvY
-fDm
+aBP
 lkb
 nLb
 nLb
