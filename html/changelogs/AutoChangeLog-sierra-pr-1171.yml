@@ -1,0 +1,5 @@
+author: SierraKomodo
+changes:
+  - {balance: Arterial bleeds no longer cause confusion or blurred vision when they
+      trigger.}
+delete-after: true
