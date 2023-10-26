@@ -41,6 +41,7 @@
 	visible_message(SPAN_WARNING("\The [src] breaks!"))
 
 /obj/machinery/computer/on_update_icon()
+	update_glow()
 	ClearOverlays()
 	icon = initial(icon)
 	icon_state = initial(icon_state)
@@ -62,7 +63,6 @@
 
 
 	if(reason_broken & MACHINE_BROKEN_NO_PARTS)
-		set_light(0)
 		icon = 'icons/obj/machines/computer.dmi'
 		icon_state = "wired"
 		var/screen = get_component_of_type(/obj/item/stock_parts/console_screen)
