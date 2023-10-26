@@ -70,7 +70,7 @@ else:
 
 write_cl['delete-after'] = True
 
-yaml = yaml.YAML(type='safe',pure=True)
+yaml = yaml.YAML(typ='safe',pure=True)
 with open(Path.cwd().joinpath("tools/changelog/tags.yml")) as file:
     tags = yaml.load(file)
 
