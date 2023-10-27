@@ -1,4 +1,0 @@
-author: SuhEugene
-changes:
-  - {bugfix: Пофиксил двойные шлюзы новой карты.}
-delete-after: true
