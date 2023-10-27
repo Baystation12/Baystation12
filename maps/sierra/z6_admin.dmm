@@ -12116,7 +12116,9 @@
 	},
 /area/centcom/living)
 "kTF" = (
-/obj/machinery/door/airlock/multi_tile,
+/obj/machinery/door/airlock/multi_tile{
+	dir = 8
+	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},

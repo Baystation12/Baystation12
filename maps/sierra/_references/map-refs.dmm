@@ -155,6 +155,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/multi_tile/glass/research{
+	dir = 8;
 	icon_state = "closed";
 	id_tag = "PetrovAccess";
 	name = "Petrov Access"
