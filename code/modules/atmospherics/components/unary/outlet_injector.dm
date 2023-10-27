@@ -4,7 +4,7 @@
 
 /obj/machinery/atmospherics/unary/outlet_injector
 	icon = 'icons/atmos/injector.dmi'
-	icon_state = "off"
+	icon_state = "map_injector"
 
 	name = "injector"
 	desc = "Passively injects air into its surroundings. Has a valve attached to it that can control flow rate."
@@ -34,10 +34,9 @@
 	//Give it a small reservoir for injecting. Also allows it to have a higher flow rate limit than vent pumps, to differentiate injectors a bit more.
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500
 
-/obj/machinery/atmospherics/unary/outlet_injector/Initialize()
-	. = ..()
 	set_frequency(frequency)
 	broadcast_status()
+	update_icon()
 
 /obj/machinery/atmospherics/unary/outlet_injector/Destroy()
 	unregister_radio(src, frequency)
