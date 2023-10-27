@@ -8,7 +8,7 @@
 	var/volume_max = 50
 	var/volume_step = 10
 	var/frequency = 1
-	var/range = 7
+	var/range = 10
 	var/falloff = 1
 	var/template
 	var/ui_title
