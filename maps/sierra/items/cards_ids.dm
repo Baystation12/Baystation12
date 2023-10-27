@@ -118,11 +118,18 @@
 	desc = "An identification card issued to service personnel aboard the NSV Sierra."
 	detail_color = COLOR_CIVIE_GREEN
 
+/obj/item/card/id/sierra/crew/service/chief_steward
+	job_access_type = /datum/job/chief_steward
+	extra_details = list("onegoldstripe")
+
 /obj/item/card/id/sierra/crew/service/janitor
 	job_access_type = /datum/job/janitor
 
-/obj/item/card/id/sierra/crew/service/chef
-	job_access_type = /datum/job/chef
+/obj/item/card/id/sierra/crew/service/cook
+	job_access_type = /datum/job/cook
+
+/obj/item/card/id/sierra/crew/service/steward
+	job_access_type = /datum/job/steward
 
 /obj/item/card/id/sierra/crew/service/bartender
 	job_access_type = /datum/job/bartender

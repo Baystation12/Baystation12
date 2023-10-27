@@ -57,6 +57,11 @@
 	icon_state = "com_cypherkey"
 	channels = list("Exploration" = 1, "Command" = 1, "Science" = 1)
 
+/obj/item/device/encryptionkey/sierra_chief_steward
+	name = "chief steward's encryption key"
+	icon_state = "srv_cypherkey"
+	channels = list("Service" = 1, "Command" = 1, "Hailing" = 1)
+
 /obj/item/storage/box/radiokeys
 	name = "box of radio encryption keys"
 	desc = "A box full of assorted encryption keys."

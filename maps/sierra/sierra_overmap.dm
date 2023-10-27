@@ -13,13 +13,13 @@
 	initial_restricted_waypoints = list(
 		"Charon" = list("nav_hangar_calypso"),
 		"Guppy" = list("nav_hangar_guppy"),
+		"Crucian" = list("nav_hangar_crucian"),
 		"Mule" = list("nav_merchant_out"), //../mods/maps/liberia/_map_liberia.dme shuttle,
 		"Desperado" = list("nav_merc_dock"), //antag_spawn/mercenary/mercenary_inf.dmm shuttle,
 		"Reaper Gunboat" = list("nav_reaper_dock"), //../mods/maps/sentinel/_map_sentinel.dme shuttle,
 		"SNZ Speedboat" = list("nav_snz_dock"), //../../mods/maps/farfleet/_map_farfleet.dme shuttle,
-		// "Sol Patrol Shuttle" = list("nav_deck3_patrol"), //away_inf/patrol/patrol.dmm shuttle,
-		// "Skrellian Shuttle" = list("nav_deck3_skrellshuttle"), //away_inf/skrellscoutship.dm shuttle,
-		// "Skrellian Scout" = list("nav_deck1_skrellscout"), //away_inf/skrellscoutship.dm shuttle,
+		"Skrellian Shuttle" = list("nav_deck3_skrellshuttle"), //away/skrellscoutship.dm shuttle,
+		"Skrellian Scout" = list("nav_deck1_skrellscout"), //away/skrellscoutship.dm shuttle,
 		"SRV Venerable Catfish" = list("nav_deck3_catfish"), //away/verne shuttle,
 	)
 
@@ -72,6 +72,16 @@
 	vessel_size = SHIP_SIZE_TINY
 	skill_needed = SKILL_BASIC //was trained
 
+/obj/overmap/visitable/ship/landable/crucian
+	name = "Crucian"
+	shuttle = "Crucian"
+	max_speed = 1/(4 SECONDS)
+	burn_delay = 1 SECONDS
+	vessel_mass = 1000
+	fore_dir = SOUTH
+	vessel_size = SHIP_SIZE_TINY
+	skill_needed = SKILL_BASIC
+
 /obj/machinery/computer/shuttle_control/explore/exploration_shuttle
 	name = "charon control console"
 	shuttle_tag = "Charon"
@@ -81,3 +91,7 @@
 	name = "guppy control console"
 	shuttle_tag = "Guppy"
 	req_access = list(access_guppy_helm)
+
+/obj/machinery/computer/shuttle_control/explore/crucian
+	name = "crucian control console"
+	shuttle_tag = "Crucian"

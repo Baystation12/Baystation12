@@ -5,7 +5,7 @@
 	allowed_roles = STERILE_ROLES
 
 /datum/gear/gloves/botany
-	allowed_roles = list(/datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/chef, /datum/job/bartender, /datum/job/assistant,     )
+	allowed_roles = list(/datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/chief_steward, /datum/job/cook, /datum/job/bartender, /datum/job/steward, /datum/job/assistant,     )
 
 /datum/gear/gloves/dress
 	display_name = "gloves, dress"

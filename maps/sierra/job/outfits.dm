@@ -368,15 +368,27 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 //	pda_type = /obj/item/modular_computer/pda
 	hierarchy_type = /singleton/hierarchy/outfit/job/sierra/crew/service
 
+/singleton/hierarchy/outfit/job/sierra/crew/service/chief_steward
+	name = OUTFIT_JOB_NAME("Chief Steward - Sierra")
+	l_ear = /obj/item/device/radio/headset/sierra_chief_steward
+	uniform = /obj/item/clothing/under/rank/chef
+	id_types = list(/obj/item/card/id/sierra/crew/service/chief_steward)
+	backpack_contents = list(/obj/item/music_tape/custom = 1)
+
 /singleton/hierarchy/outfit/job/sierra/crew/service/janitor
 	name = OUTFIT_JOB_NAME("Janitor - Sierra")
 	uniform = /obj/item/clothing/under/rank/janitor
 	id_types = list(/obj/item/card/id/sierra/crew/service/janitor)
 
 /singleton/hierarchy/outfit/job/sierra/crew/service/cook
-	name = OUTFIT_JOB_NAME("Chef - Sierra")
+	name = OUTFIT_JOB_NAME("Cook - Sierra")
 	uniform = /obj/item/clothing/under/rank/chef
-	id_types = list(/obj/item/card/id/sierra/crew/service/chef)
+	id_types = list(/obj/item/card/id/sierra/crew/service/cook)
+
+/singleton/hierarchy/outfit/job/sierra/crew/service/steward
+	name = OUTFIT_JOB_NAME("Steward - Sierra")
+	uniform = /obj/item/clothing/under/waiter
+	id_types = list(/obj/item/card/id/sierra/crew/service/steward)
 
 /singleton/hierarchy/outfit/job/sierra/crew/service/bartender
 	name = OUTFIT_JOB_NAME("Bartender - Sierra")

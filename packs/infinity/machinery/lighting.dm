@@ -9,7 +9,7 @@
 	base_state = "big_tape"
 	item_state = null
 
-	b_range = 2
+	b_range = 4
 	b_colour = LIGHT_DEFAULT_LED_NEON
 
 	random_tone = FALSE
@@ -46,7 +46,7 @@
 /obj/item/light/led_neon/large
 	base_state = "big_tape"
 	icon_state = "big_tape_preset"
-	b_range = 4
+	b_range = 7
 
 /obj/item/light/led_neon/small
 	base_state = "small_tape"

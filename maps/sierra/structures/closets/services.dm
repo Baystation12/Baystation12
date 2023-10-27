@@ -122,3 +122,32 @@
 		/obj/item/material/urn,
 		/obj/item/device/taperecorder
 	)
+
+/obj/structure/closet/secure_closet/chief_steward_sierra
+	name = "chief steward's locker"
+	req_access = list(access_chief_steward)
+	closet_appearance = /singleton/closet_appearance/cabinet/secure
+
+/obj/structure/closet/secure_closet/chief_steward_sierra/WillContain()
+	return list(
+		/obj/item/storage/belt/general,
+		/obj/item/clothing/head/chefhat,
+		/obj/item/clothing/suit/chef/classic,
+		/obj/item/clothing/suit/chef,
+		/obj/item/clothing/gloves/latex,
+		/obj/item/reagent_containers/glass/rag,
+		/obj/item/clothing/glasses/science,
+		/obj/item/storage/box/glasses,
+		/obj/item/storage/plants,
+		/obj/item/device/scanner/plant,
+		/obj/item/clothing/accessory/armband/hydro,
+		/obj/item/reagent_containers/spray/cleaner,
+		/obj/item/device/megaphone,
+		/obj/item/device/flashlight/upgraded,
+		/obj/item/device/taperecorder,
+		/obj/item/device/tape/random = 3,
+		/obj/item/device/camera,
+		/obj/item/device/camera_film = 2,
+		/obj/item/device/radio/headset/sierra_chief_steward,
+		/obj/item/device/radio/headset/sierra_chief_steward/alt,
+	)

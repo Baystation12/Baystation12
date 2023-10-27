@@ -47,6 +47,9 @@ SIERRA_ESCAPE_POD(5)
 SIERRA_ESCAPE_POD(6)
 SIERRA_ESCAPE_POD(7)
 SIERRA_ESCAPE_POD(8)
+SIERRA_ESCAPE_POD(9)
+SIERRA_ESCAPE_POD(10)
+SIERRA_ESCAPE_POD(11)
 
 //Petrov
 
@@ -433,6 +436,52 @@ SIERRA_ESCAPE_POD(8)
 	name = "In transit"
 	landmark_tag = "nav_transit_guppy"
 
+/datum/shuttle/autodock/overmap/crucian
+	name = "Crucian"
+	move_time = 40
+	shuttle_area = /area/crucian_hangar/start
+	dock_target ="crucian_shuttle"
+	current_location = "nav_hangar_crucian"
+	landmark_transition = "nav_transit_crucian"
+	sound_takeoff = 'sound/effects/rocket.ogg'
+	sound_landing = 'sound/effects/rocket_backwards.ogg'
+	fuel_consumption = 3
+	logging_home_tag = "nav_hangar_crucian"
+	logging_access = access_guppy_helm
+	skill_needed = SKILL_UNSKILLED
+	ceiling_type = /turf/simulated/floor/shuttle_ceiling/sierra
+	warmup_time = 6
+
+/obj/shuttle_landmark/sierra/hangar/crucian
+	name = "Auxiliary Hangar"
+	landmark_tag = "nav_hangar_crucian"
+	base_area = /area/maintenance/seconddeck/hangar
+	base_turf = /turf/simulated/floor/plating
+
+/obj/shuttle_landmark/sierra/deck1/crucian
+	name = "Space near Fourth Deck"
+	landmark_tag = "nav_deck1_crucian"
+
+/obj/shuttle_landmark/sierra/deck2/crucian
+	name = "Space near Third Deck"
+	landmark_tag = "nav_deck2_crucian"
+
+/obj/shuttle_landmark/sierra/deck3/crucian
+	name = "Space near Second Deck"
+	landmark_tag = "nav_deck3_crucian"
+
+/obj/shuttle_landmark/sierra/deck4/crucian
+	name = "Space near First Deck"
+	landmark_tag = "nav_deck4_crucian"
+
+/obj/shuttle_landmark/sierra/deck5/crucian
+	name = "Space near Bridge"
+	landmark_tag = "nav_bridge_crucian"
+
+/obj/shuttle_landmark/sierra/transit/crucian
+	name = "In transit"
+	landmark_tag = "nav_transit_crucian"
+
 //Makes the deck management program use hangar access
 /datum/nano_module/deck_management
 	default_access = list(access_hangar, access_cargo, access_heads)
@@ -454,6 +503,6 @@ SIERRA_ESCAPE_POD(8)
 	docking_controller = "admin_shuttle_dock"
 
 /obj/shuttle_landmark/sierra/deck1/skrellscout
-	name = "First Deck Auxillary Dock"
+	name = "Fourth Deck Auxillary Dock"
 	landmark_tag = "nav_deck1_skrellscout"
-	docking_controller = "fd_starboard"
+	docking_controller = "rescue_shuttle_dock_airlock"

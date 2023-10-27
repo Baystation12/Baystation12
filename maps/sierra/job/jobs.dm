@@ -35,7 +35,7 @@
 		/datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/security_assistant,
 		/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_trainee, /datum/job/chemist, /datum/job/psychiatrist,
 		/datum/job/qm, /datum/job/cargo_tech,  /datum/job/cargo_assistant, /datum/job/mining,
-		/datum/job/janitor, /datum/job/chef, /datum/job/bartender, /datum/job/chaplain, /datum/job/actor,
+		/datum/job/chief_steward, /datum/job/janitor, /datum/job/cook, /datum/job/bartender, /datum/job/steward, /datum/job/chaplain, /datum/job/actor,
 		/datum/job/senior_scientist, /datum/job/scientist, /datum/job/roboticist, /datum/job/scientist_assistant,
 		/datum/job/ai, /datum/job/cyborg,
 		/datum/job/assistant
@@ -81,13 +81,13 @@
 
 /singleton/cultural_info/culture/nabber/b
 	valid_jobs = list(/datum/job/janitor,    /datum/job/cargo_assistant,
-					  /datum/job/bartender,  /datum/job/chef,
+					  /datum/job/bartender,  /datum/job/cook, /datum/job/steward,
 					  /datum/job/scientist_assistant)
 
 
 /singleton/cultural_info/culture/nabber/b/plus
 	valid_jobs = list(/datum/job/janitor,    /datum/job/cargo_assistant,
-					  /datum/job/bartender,  /datum/job/chef,
+					  /datum/job/bartender,  /datum/job/cook, /datum/job/steward,
 					  /datum/job/scientist_assistant)
 
 
@@ -98,7 +98,7 @@
 
 /singleton/cultural_info/culture/nabber/a
 	valid_jobs = list(/datum/job/cargo_assistant,
-					  /datum/job/bartender,  /datum/job/chef,
+					  /datum/job/bartender,  /datum/job/cook, /datum/job/steward,
 					  /datum/job/chemist,    /datum/job/doctor_trainee,
 					  /datum/job/roboticist, /datum/job/engineer_trainee,
 					  /datum/job/scientist_assistant)
@@ -107,7 +107,7 @@
 
 /singleton/cultural_info/culture/nabber/a/plus
 	valid_jobs = list(/datum/job/cargo_assistant,
-					  /datum/job/bartender,  /datum/job/chef,
+					  /datum/job/bartender,  /datum/job/cook, /datum/job/steward,
 					  /datum/job/chemist,    /datum/job/doctor_trainee,
 					  /datum/job/roboticist, /datum/job/engineer_trainee,
 					  /datum/job/scientist_assistant)

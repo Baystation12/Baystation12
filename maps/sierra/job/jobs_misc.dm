@@ -10,7 +10,6 @@
 	alt_titles = list(
 		"Journalist" = /singleton/hierarchy/outfit/job/sierra/passenger/passenger/journalist,
 		"Historian",
-		"Botanist",
 		"Naturalist",
 		"Ecologist",
 		"Sociologist",
