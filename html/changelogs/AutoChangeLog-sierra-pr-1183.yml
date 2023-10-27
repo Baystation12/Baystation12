@@ -1,0 +1,4 @@
+author: SuhEugene
+changes:
+  - {bugfix: Fixed airlock control terminal icon.}
+delete-after: true
