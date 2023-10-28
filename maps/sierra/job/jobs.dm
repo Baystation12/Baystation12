@@ -9,6 +9,7 @@
 	species_to_job_blacklist = list(
 		/datum/species/unathi = list(HUMAN_ONLY_JOBS),
 		/datum/species/unathi/yeosa = list(HUMAN_ONLY_JOBS),
+		/datum/species/tajaran = list(HUMAN_ONLY_JOBS),
 		/datum/species/skrell = list(SKRELL_BLACKLISTED_JOBS),
 		/datum/species/machine = list(MACHINE_BLACKLISTED_JOBS),
 		/datum/species/diona = list(

@@ -8,8 +8,10 @@
 	supervisors = "Директору Исследований"
 	selection_color = "#633d63"
 	economic_power = 12
+
 	minimal_player_age = 10
-	ideal_character_age = 50
+	minimum_character_age = list(SPECIES_HUMAN = 27)
+	ideal_character_age = 30
 	alt_titles = list(
 			"Research Supervisor"
 		)
@@ -58,7 +60,8 @@
 	spawn_positions = 6
 	supervisors = "Директору Исследований и Старшему Исследователю"
 	economic_power = 10
-	ideal_character_age = 45
+	minimum_character_age = list(SPECIES_HUMAN = 25)
+	ideal_character_age = 27
 	alt_titles = list(
 			"Xenoarcheologist",
 			"Anomalist",
@@ -114,6 +117,8 @@
 	supervisors = "Директору Исследований и Старшему Исследователю"
 	selection_color = "#633d63"
 	economic_power = 6
+	minimum_character_age = list(SPECIES_HUMAN = 25)
+	ideal_character_age = 27
 	alt_titles = list(
 			"Biomechanical Engineer",
 			"Exosuit Technician",
@@ -170,6 +175,8 @@
 	supervisors = "Директору Исследований и остальному научному персоналу"
 	selection_color = "#633d63"
 	economic_power = 3
+	minimum_character_age = list(SPECIES_HUMAN = 18)
+	ideal_character_age = 24
 	ideal_character_age = 30
 	alt_titles = list(
 			"Testing Assistant" = /singleton/hierarchy/outfit/job/sierra/crew/research/assist/testsubject,

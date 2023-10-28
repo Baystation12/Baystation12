@@ -7,7 +7,8 @@
 	supervisors = "Главе Персонала"
 	economic_power = 8
 	minimal_player_age = 7
-	ideal_character_age = 35
+	minimum_character_age = list(SPECIES_HUMAN = 23)
+	ideal_character_age = 25
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/supply/quartermaster
 	allowed_branches = list(/datum/mil_branch/employee)
 	allowed_ranks = list(/datum/mil_rank/civ/nt)
@@ -43,6 +44,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "Квартирмейстеру и Главе Персонала"
+	minimum_character_age = list(SPECIES_HUMAN = 22)
 	ideal_character_age = 24
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/supply/tech
 	allowed_branches = list(/datum/mil_branch/employee, /datum/mil_branch/contractor)
@@ -77,7 +79,8 @@
 	supervisors = "Квартирмейстеру и Главе Персонала"
 	selection_color = "#515151"
 	economic_power = 7
-	ideal_character_age = 25
+	minimum_character_age = list(SPECIES_HUMAN = 22)
+	ideal_character_age = 24
 	alt_titles = list(
 		"Drill Technician",
 		"Shaft Miner",
@@ -110,6 +113,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "Квартирмейстеру и Главе Персонала"
+	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 20
 	selection_color = "#515151"
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/supply/assistant

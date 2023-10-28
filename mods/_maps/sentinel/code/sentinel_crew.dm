@@ -75,10 +75,12 @@ var/global/const/access_away_cavalry_commander = "ACCESS_CAVALRY_COMMANDER"
 	title = "Army SCGSO Trooper"
 	total_positions = 2
 	outfit_type = /singleton/hierarchy/outfit/job/patrol/army_ops
-	branch = /datum/mil_branch/scga
-	rank = /datum/mil_rank/scga/e5
+	minimum_character_age = list(SPECIES_HUMAN = 23)
+	ideal_character_age = 25
 	allowed_branches = list(/datum/mil_branch/scga)
-	allowed_ranks = list(/datum/mil_rank/scga/e5)
+	allowed_ranks = list(
+		/datum/mil_rank/scga/e5
+		)
 	supervisors = "Army Captain"
 	loadout_allowed = TRUE
 	is_semi_antagonist = TRUE
@@ -101,8 +103,8 @@ var/global/const/access_away_cavalry_commander = "ACCESS_CAVALRY_COMMANDER"
 	title = "Army SCGSO Leader"
 	total_positions = 1
 	outfit_type = /singleton/hierarchy/outfit/job/patrol/captain
-	branch = /datum/mil_branch/scga
-	rank = /datum/mil_rank/scga/o3
+	minimum_character_age = list(SPECIES_HUMAN = 25)
+	ideal_character_age = 27
 	allowed_branches = list(/datum/mil_branch/scga)
 	allowed_ranks = list(/datum/mil_rank/scga/o3)
 	supervisors = "Lieutenant Commander, Command of the Battle Group Bravo of the 5th fleet, SCGDF"
@@ -129,8 +131,8 @@ var/global/const/access_away_cavalry_commander = "ACCESS_CAVALRY_COMMANDER"
 	title = "Fleet Commander"
 	total_positions = 1
 	outfit_type = /singleton/hierarchy/outfit/job/patrol/commander
-	branch = /datum/mil_branch/fleet
-	rank = /datum/mil_rank/fleet/o4
+	minimum_character_age = list(SPECIES_HUMAN = 30)
+	ideal_character_age = 33
 	allowed_branches = list(/datum/mil_branch/fleet)
 	allowed_ranks = list(/datum/mil_rank/fleet/o4)
 	supervisors = "Command of the Battle Group Bravo of the 5th fleet, SCGDF"
@@ -155,8 +157,8 @@ var/global/const/access_away_cavalry_commander = "ACCESS_CAVALRY_COMMANDER"
 	title = "Fleet Pilot"
 	total_positions = 1
 	outfit_type = /singleton/hierarchy/outfit/job/patrol/pilot1
-	branch = /datum/mil_branch/fleet
-	rank = /datum/mil_rank/fleet/o2
+	minimum_character_age = list(SPECIES_HUMAN = 23)
+	ideal_character_age = 25
 	allowed_branches = list(/datum/mil_branch/fleet)
 	allowed_ranks = list(/datum/mil_rank/fleet/o2)
 	supervisors = "Lieutenant Commander"
@@ -181,8 +183,8 @@ var/global/const/access_away_cavalry_commander = "ACCESS_CAVALRY_COMMANDER"
 	title = "Fleet Corpsman"
 	total_positions = 1
 	outfit_type = /singleton/hierarchy/outfit/job/patrol/surgeon
-	branch = /datum/mil_branch/fleet
-	rank = /datum/mil_rank/fleet/o1
+	minimum_character_age = list(SPECIES_HUMAN = 26)
+	ideal_character_age = 30
 	allowed_branches = list(/datum/mil_branch/fleet)
 	allowed_ranks = list(/datum/mil_rank/fleet/o1)
 	supervisors = "Sub-Lieutenant, Lieutenant Commander"
@@ -209,8 +211,8 @@ var/global/const/access_away_cavalry_commander = "ACCESS_CAVALRY_COMMANDER"
 	title = "Fleet Technician"
 	total_positions = 1
 	outfit_type = /singleton/hierarchy/outfit/job/patrol/engineer
-	branch = /datum/mil_branch/fleet
-	rank = /datum/mil_rank/fleet/e6
+	minimum_character_age = list(SPECIES_HUMAN = 26)
+	ideal_character_age = 28
 	allowed_branches = list(/datum/mil_branch/fleet)
 	allowed_ranks = list(/datum/mil_rank/fleet/e6)
 	supervisors = "Sub-Lieutenant, Lieutenant Commander"

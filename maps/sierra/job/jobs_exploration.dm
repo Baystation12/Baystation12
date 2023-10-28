@@ -9,7 +9,9 @@
 	selection_color = "#68099e"
 
 	minimal_player_age = 14
-	ideal_character_age = 35
+
+	minimum_character_age = list(SPECIES_HUMAN = 26)
+	ideal_character_age = 29
 	economic_power = 9
 	skill_points = 22
 
@@ -67,7 +69,9 @@
 	selection_color = "#68099e"
 
 	minimal_player_age = 4
-	ideal_character_age = 20
+
+	minimum_character_age = list(SPECIES_HUMAN = 22)
+	ideal_character_age = 24
 	economic_power = 6
 
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/exploration/explorer
@@ -120,7 +124,9 @@
 	selection_color = "#68099e"
 
 	minimal_player_age = 14
-	ideal_character_age = 24
+
+	minimum_character_age = list(SPECIES_HUMAN = 24)
+	ideal_character_age = 26
 	economic_power = 7
 
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/exploration/pilot
@@ -177,7 +183,9 @@
 	allowed_ranks = list(/datum/mil_rank/civ/nt, /datum/mil_rank/civ/contractor)
 
 	minimal_player_age = 8
-	ideal_character_age = 34
+
+	minimum_character_age = list(SPECIES_HUMAN = 24)
+	ideal_character_age = 26
 	economic_power = 8
 	skill_points = 26
 
@@ -226,7 +234,9 @@
 	selection_color = "#68099e"
 
 	minimal_player_age = 8
-	ideal_character_age = 28
+
+	minimum_character_age = list(SPECIES_HUMAN = 24)
+	ideal_character_age = 26
 	economic_power = 7
 	skill_points = 20
 

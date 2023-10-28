@@ -6,7 +6,9 @@
 	head_position = 1
 
 	minimal_player_age = 21
-	ideal_character_age = 50
+
+	minimum_character_age = list(SPECIES_HUMAN = 38)
+	ideal_character_age = 42
 	economic_power = 20
 	skill_points = 25
 
@@ -39,53 +41,6 @@
 	Его обязанность заключается в том, чтобы убедиться, что ИКН Сьерра выполняет свою миссию и вернется обратно в порт СолПрава в целостности и сохранности.\
 	От капитана ожидают проявления эффективных управленческих навыков, чтобы обеспечить бесперебойную работу всех отделов. Он является высшим авторитетом на Сьерре и имеет доступ к любому отсеку на борту, а также возможность выносить приказы практически без ограничений."
 
-/datum/job/hop
-	title = "Head of Personnel"
-	supervisors = "Капитану"
-	department = "Командный"
-	department_flag = COM|SRV
-
-	minimal_player_age = 21
-	ideal_character_age = 45
-	economic_power = 12
-	skill_points = 20
-
-	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/command/hop
-	allowed_branches = list(
-		/datum/mil_branch/employee
-	)
-	allowed_ranks = list(
-		/datum/mil_rank/civ/nt
-	)
-	min_skill = list(
-		SKILL_BUREAUCRACY	=	SKILL_TRAINED,
-		SKILL_PILOT			=	SKILL_BASIC
-
-	)
-	max_skill = list(SKILL_PILOT = SKILL_MAX)
-	access = list(
-		access_seceva, access_guard, access_security, access_brig, access_armory,
-		access_forensics_lockers, access_heads, access_medical, access_morgue,
-		access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks,
-		access_emergency_storage, access_change_ids, access_ai_upload, access_teleporter,
-		access_eva, access_bridge, access_all_personal_lockers, access_chapel_office,
-		access_tech_storage, access_atmospherics, access_janitor, access_crematorium,
-		access_robotics, access_kitchen, access_cargo, access_construction, access_chemistry,
-		access_cargo_bot, access_hydroponics, access_library, access_virology, access_cmo,
-		access_qm, access_network, access_surgery, access_mailsorting, access_heads_vault,
-		access_ce, access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat,
-		access_gateway, access_sec_doors, access_psychiatrist, access_medical_equip, access_gun,
-		access_expedition_shuttle, access_guppy, access_seneng, access_senmed, access_hangar,
-		access_guppy_helm, access_expedition_shuttle_helm, access_explorer, access_el, access_tox,
-		access_tox_storage, access_research, access_mining, access_mining_office, access_mining_station,
-		access_xenobiology, access_xenoarch, access_petrov, access_petrov_helm, access_actor
-	)
-	software_on_spawn = list(
-		/datum/computer_file/program/comm,
-		/datum/computer_file/program/card_mod,
-		/datum/computer_file/program/camera_monitor,
-		/datum/computer_file/program/reports
-	)
 
 /datum/job/hop
 	title = "Head of Personnel"
@@ -98,7 +53,8 @@
 	economic_power = 14
 	skill_points = 30
 
-	minimum_character_age = list(SPECIES_HUMAN = 35)
+	minimum_character_age = list(SPECIES_HUMAN = 28)
+	ideal_character_age = 45
 	head_position = 1
 	total_positions = 1
 	spawn_positions = 1
@@ -165,7 +121,9 @@
 	req_admin_notify = 1
 
 	minimal_player_age = 14
-	ideal_character_age = 60
+
+	minimum_character_age = list(SPECIES_HUMAN = 37)
+	ideal_character_age = 42
 	economic_power = 20
 	skill_points = 36
 
@@ -229,8 +187,11 @@
 	spawn_positions = 1
 	req_admin_notify = 1
 	economic_power = 10
+
 	minimal_player_age = 21
-	ideal_character_age = 48
+
+	minimum_character_age = list(SPECIES_HUMAN = 34)
+	ideal_character_age = 36
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/command/cmo
 	allowed_branches = list(
 		/datum/mil_branch/employee
@@ -294,8 +255,11 @@
 	spawn_positions = 1
 	req_admin_notify = 1
 	economic_power = 10
-	ideal_character_age = 40
+
 	minimal_player_age = 21
+
+	minimum_character_age = list(SPECIES_HUMAN = 30)
+	ideal_character_age = 32
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/command/chief_engineer
 	allowed_branches = list(
 		/datum/mil_branch/employee
@@ -369,8 +333,11 @@
 	spawn_positions = 1
 	req_admin_notify = 1
 	economic_power = 10
+
 	minimal_player_age = 21
-	ideal_character_age = 35
+
+	minimum_character_age = list(SPECIES_HUMAN = 34)
+	ideal_character_age = 40
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/command/hos
 	allowed_branches = list(/datum/mil_branch/employee)
 	allowed_ranks = list(/datum/mil_rank/civ/nt)
@@ -430,7 +397,11 @@
 	supervisors = "Центральному Командованию"
 	selection_color = "#2f2f7f"
 	economic_power = 15
+
 	minimal_player_age = 10
+
+	minimum_character_age = list(SPECIES_HUMAN = 30)
+	ideal_character_age = 40
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/research/iaa
 	allowed_branches = list(
 		/datum/mil_branch/employee
@@ -478,7 +449,9 @@
 	selection_color = "#2f2f7f"
 
 	minimal_player_age = 18
-	ideal_character_age = 24
+
+	minimum_character_age = list(SPECIES_HUMAN = 24)
+	ideal_character_age = 26
 	economic_power = 7
 	skill_points = 20
 

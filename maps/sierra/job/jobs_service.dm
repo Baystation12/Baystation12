@@ -51,6 +51,7 @@
 
 	total_positions = 1
 	spawn_positions = 1
+	minimum_character_age = list(SPECIES_HUMAN = 28)
 	ideal_character_age = 40
 	economic_power = 4
 	minimal_player_age = 0
@@ -79,6 +80,7 @@
 
 	total_positions = 2
 	spawn_positions = 2
+	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 20
 	alt_titles = list("Sanitation Technician")
 	supervisors = "Главному Стюарду и Главе Персонала"
@@ -108,6 +110,7 @@
 
 	total_positions = 1
 	spawn_positions = 1
+	ideal_character_age = 24
 	alt_titles = list("Culinary Specialist")
 	supervisors = "Главному Стюарду и Главе Персонала"
 	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/service/cook
@@ -140,6 +143,7 @@
 
 	total_positions = 2
 	spawn_positions = 2
+	ideal_character_age = 20
 	alt_titles = list(
 		"Bar-Steward",
 		"Waiter",
