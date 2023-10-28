@@ -1,0 +1,4 @@
+author: LordNest
+changes:
+  - {maptweak: 'Убрал окно между РД и СМО, добавил цветы в церковь'}
+delete-after: true
