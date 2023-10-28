@@ -49,7 +49,7 @@
 	name = "Bridge - Command - Captain's Recreation Facility"
 	icon_state = "heads_cap"
 	sound_env = PLAIN
-	req_access = list()
+	req_access = list("ACCESS_BRIDGE")
 
 /area/bridge
 	name = "Bridge Deck - Bridge"
@@ -181,7 +181,7 @@
 
 // Solars
 
-/area/maintenance/bridge_port
+/area/maintenance/solar/bridge_port
 	name = "Bridge - Solar - Port"
 	icon_state = "SolarcontrolP"
 

@@ -256,6 +256,19 @@
 	icon_state = "detective"
 	req_access = list(list(access_forensics_lockers, access_security))
 
+/area/security/sierra/brig
+	name = "First Deck - Security - Brig"
+	icon_state = "brig"
+	req_access = list(access_security)
+	area_flags = AREA_FLAG_RAD_SHIELDED
+
+/area/security/sierra/prison
+	name = "First Deck - Security - Prison Wing"
+	icon_state = "sec_prison"
+	req_access = list(access_security)
+	area_flags = AREA_FLAG_RAD_SHIELDED
+
+
 /area/security/range
 	name = "First Deck - Security - Cadets"
 	icon_state = "security"
