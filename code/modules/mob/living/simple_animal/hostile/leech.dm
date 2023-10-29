@@ -20,6 +20,8 @@ Tiny, weak, and mostly harmless alone. dangerous in groups.
 	flash_vulnerability = 0 // We dont have eyes, why should we care about light?
 	bleed_colour = COLOR_VIOLET
 	color = COLOR_GRAY
+	min_gas = null
+	max_gas = null
 
 	ai_holder = /datum/ai_holder/simple_animal/melee/leech
 
