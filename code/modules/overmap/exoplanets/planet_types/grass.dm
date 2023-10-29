@@ -6,17 +6,23 @@
 	rock_colors = list(COLOR_ASTEROID_ROCK, COLOR_GRAY80, COLOR_BROWN)
 	plant_colors = list("#0e1e14","#1a3e38","#5a7467","#9eab88","#6e7248", "RANDOM")
 	map_generators = list(/datum/random_map/noise/exoplanet/grass)
-	habitability_distribution = list(HABITABILITY_IDEAL = 70, HABITABILITY_OKAY = 20, HABITABILITY_BAD = 5)
-	has_trees = TRUE
 	flora_diversity = 7
-	fauna_types = list(/mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/retaliate/jelly)
-	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna, /mob/living/simple_animal/hostile/retaliate/goose/dire)
+	fauna_types = list(
+		/mob/living/simple_animal/yithian,
+		/mob/living/simple_animal/tindalos,
+		/mob/living/simple_animal/hostile/retaliate/jelly
+	)
+	megafauna_types = list(
+		/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna,
+		/mob/living/simple_animal/hostile/retaliate/goose/dire
+	)
 
 /obj/overmap/visitable/sector/exoplanet/grass/generate_atmosphere()
 	..()
-	if(atmosphere)
-		atmosphere.temperature = T20C + rand(10, 30)
-		atmosphere.update_values()
+	var/datum/species/H = all_species[SPECIES_HUMAN]
+	var/generator/new_temp = generator("num", T0C, H.heat_level_1 - 10, UNIFORM_RAND)
+	atmosphere.temperature = new_temp.Rand()
+	atmosphere.update_values()
 
 /obj/overmap/visitable/sector/exoplanet/grass/get_surface_color()
 	return grass_color
@@ -74,8 +80,20 @@
 	sun_brightness_modifier = 0.8 //Fairly bright
 	has_trees = TRUE
 	flora_diversity = 8
-	fauna_types = list(/mob/living/simple_animal/passive/cat, /mob/living/simple_animal/passive/chicken, /mob/living/simple_animal/passive/mouse, /mob/living/simple_animal/passive/opossum, /mob/living/simple_animal/hostile/retaliate/goat, /mob/living/simple_animal/hostile/retaliate/goose, /mob/living/simple_animal/passive/cow)
-	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna, /mob/living/simple_animal/hostile/retaliate/goose/dire)
+	fauna_types = list(
+		/mob/living/simple_animal/passive/cat,
+		/mob/living/simple_animal/passive/chicken,
+		/mob/living/simple_animal/passive/mouse,
+		/mob/living/simple_animal/passive/opossum,
+		/mob/living/simple_animal/hostile/retaliate/goat,
+		/mob/living/simple_animal/hostile/retaliate/goose,
+		/mob/living/simple_animal/passive/cow
+	)
+	megafauna_types = list(
+		/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna,
+		/mob/living/simple_animal/hostile/retaliate/goose/dire
+	)
+	habitability_weight = HABITABILITY_LOCKED
 
 	//Animals being named alien creature is a bit odd as these would just be earth transplants
 	species = list( /mob/living/simple_animal/passive/cat 					  = "wild cat",
@@ -86,14 +104,12 @@
 					/mob/living/simple_animal/hostile/retaliate/goose = "goose",
 					/mob/living/simple_animal/passive/cow 					  = "wild cow")
 
-/obj/overmap/visitable/sector/exoplanet/grass/terraformed/generate_habitability()
-	habitability_class = HABITABILITY_IDEAL
-
 /obj/overmap/visitable/sector/exoplanet/grass/terraformed/generate_atmosphere()
 	..()
-	if(atmosphere)
-		atmosphere.temperature = T0C + rand(0, 50)
-		atmosphere.update_values()
+	var/datum/species/H = all_species[SPECIES_HUMAN]
+	var/generator/new_temp = generator("num", T20C, H.heat_level_1 - 15)
+	atmosphere.temperature = new_temp.Rand()
+	atmosphere.update_values()
 
 /datum/random_map/noise/exoplanet/grass/terraformed
 	descriptor = "terraformed grass exoplanet"

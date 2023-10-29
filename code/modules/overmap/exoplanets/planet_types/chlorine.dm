@@ -9,7 +9,7 @@
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 	surface_color = "#a3b879"
 	water_color = COLOR_BOTTLE_GREEN
-	habitability_distribution = HABITABILITY_BAD
+	habitability_weight = HABITABILITY_BAD
 	has_trees = FALSE
 	flora_diversity = 5
 	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/hostile/retaliate/beast/samak/alt, /mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/retaliate/jelly)
@@ -17,14 +17,19 @@
 	sun_brightness_modifier = 0.5 //The dense atmosphere makes it all dark
 
 /obj/overmap/visitable/sector/exoplanet/chlorine/get_atmosphere_color()
-	return "#e5f2bd"
+	var/air_color = ..()
+	return MixColors("#e5f2bd", air_color)
 
 /obj/overmap/visitable/sector/exoplanet/chlorine/generate_atmosphere()
 	..()
-	if(atmosphere)
-		atmosphere.adjust_gas(GAS_CHLORINE, MOLES_O2STANDARD)
-		atmosphere.temperature = T100C - rand(0, 100)
-		atmosphere.update_values()
+	var/chlor_moles = (rand(1, 6) / 10) * (atmosphere.total_moles)
+	atmosphere = atmosphere.remove(chlor_moles )
+	atmosphere.adjust_gas(GAS_CHLORINE, chlor_moles )
+
+	var/datum/species/H = all_species[SPECIES_HUMAN]
+	var/generator/new_temp = generator("num", H.cold_level_1 + 40, H.heat_level_1 + 10, UNIFORM_RAND)
+	atmosphere.temperature = new_temp.Rand()
+	atmosphere.update_values()
 
 /datum/random_map/noise/exoplanet/chlorine
 	descriptor = "chlorine exoplanet"
