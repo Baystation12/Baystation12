@@ -1,0 +1,6 @@
+author: emmanuelbassil
+changes:
+  - {bugfix: Can now point at closets/crates again}
+  - {tweak: Ctrl + Alt + Click no longer opens and closes closets. Alt + Click still
+      locks/unlocks as before.}
+delete-after: true
