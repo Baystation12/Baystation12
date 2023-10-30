@@ -68,7 +68,7 @@
 			if (MOB_SPAWNING_EVENT_SPACE)
 				var/turf/T = get_random_edge_turf(dir, TRANSITIONEDGE + 2, Z)
 				spawned_mob.forceMove(T)
-				spawned_mob.throw_at(get_random_edge_turf(GLOB.reverse_dir[dir], TRANSITIONEDGE + 2, Z), 5, speed)
+				spawned_mob.throw_at(get_random_edge_turf(GLOB.reverse_dir[dir], TRANSITIONEDGE + 2, Z), 65, speed)
 
 
 /**
