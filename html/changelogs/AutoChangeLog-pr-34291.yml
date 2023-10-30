@@ -1,0 +1,4 @@
+author: Spookerton
+changes:
+  - {bugfix: Mapped injectors don't turn themselves off during game setup.}
+delete-after: true
