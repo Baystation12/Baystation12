@@ -36,7 +36,7 @@
 
 	set_frequency(frequency)
 	broadcast_status()
-	update_icon()
+
 
 /obj/machinery/atmospherics/unary/outlet_injector/Destroy()
 	unregister_radio(src, frequency)
