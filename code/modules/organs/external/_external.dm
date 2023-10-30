@@ -831,7 +831,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 					"You hear a crackling sound[gore]."
 					)
 			if(DROPLIMB_BLUNT)
-				var/gore = "[BP_IS_ROBOTIC(src) ? "": " in shower of gore"]"
+				var/gore = "[BP_IS_ROBOTIC(src) ? "": " in a shower of gore"]"
 				var/gore_sound = "[BP_IS_ROBOTIC(src) ? "rending sound of tortured metal" : "sickening splatter of gore"]"
 				return list(
 					"\The [owner]'s [src.name] explodes[gore]!",
@@ -870,6 +870,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			I.removed()
 			if(!QDELETED(I) && isturf(I.loc))
 				I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),5)
+			I.take_general_damage(I.max_damage * Frand(0.5, 1.0))
 
 	removed(null, ignore_children)
 	if(QDELETED(src))
