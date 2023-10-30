@@ -1,0 +1,6 @@
+author: SierraKomodo
+changes:
+  - {rscadd: Organs now take 50-100% of their maximum damage when their holding body
+      part is gibbed. This primarily effects brain damage from exploding heads.}
+  - {spellcheck: Fixed a typo in the organic body part gibbing message.}
+delete-after: true
