@@ -39,9 +39,6 @@ var/global/datum/evacuation_controller/evacuation_controller
 	var/datum/announcement/priority/evac_called =   new(0)
 	var/datum/announcement/priority/evac_recalled = new(0)
 
-/datum/evacuation_controller/proc/new_evac_prep_delay(new_delay_time)
-	evac_prep_delay = new_delay_time
-
 /datum/evacuation_controller/proc/auto_recall(_recall)
 	recall = _recall
 

@@ -503,7 +503,8 @@ var/global/bomb_set
 			return
 		for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
 			if(EO.abandon_ship)
-				evacuation_controller.new_evac_prep_delay(timeleft SECONDS - 1 MINUTE)
+				evacuation_controller.evac_prep_delay = timeleft SECONDS - 2 MINUTES
+				evacuation_controller.evac_launch_delay = timeleft SECONDS - 0.5 MINUTES
 				evacuation_controller.handle_evac_option(EO.option_target, usr)
 
 /obj/machinery/nuclearbomb/station/secure_device()
@@ -514,6 +515,8 @@ var/global/bomb_set
 	for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
 		if(EO.option_target == "cancel_abandon_ship")
 			evacuation_controller.handle_evac_option(EO.option_target, usr)
+			evacuation_controller.evac_prep_delay = 5 MINUTES
+			evacuation_controller.evac_launch_delay = 3 MINUTES
 
 /obj/machinery/nuclearbomb/station/Process()
 	..()
