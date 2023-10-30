@@ -15,6 +15,7 @@
 	var/list/input_info = list()
 	var/list/output_info = list()
 	var/list/sensor_info = list()
+	var/injecting
 	var/input_tag
 	var/output_tag
 	var/sensor_tag
@@ -33,6 +34,20 @@
 /obj/machinery/computer/air_control/Initialize()
 	. = ..()
 	set_frequency(frequency)
+
+	var/datum/signal/signal = new
+
+	signal.transmission_method = 1 //radio signal
+	signal.source = src
+
+	if(injecting == 1)
+		signal.data = list ("tag" = input_tag, "power_toggle" = 1)
+	else
+		signal.data = list ("tag" = input_tag, "power_toggle" = 0)
+
+	signal.data["sigtype"] = "command"
+	signal.data["status"] = TRUE
+	radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 
 /obj/machinery/computer/air_control/Destroy()
 	if(radio_controller)

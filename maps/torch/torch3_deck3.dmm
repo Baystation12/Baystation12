@@ -648,7 +648,8 @@
 	name = "Oxygen Supply Control";
 	output_tag = "d3so2_out";
 	sensor_name = "Oxygen Supply Tank";
-	sensor_tag = "d3so2_sensor"
+	sensor_tag = "d3so2_sensor";
+	injecting = 1
 	},
 /obj/floor_decal/industrial/outline/blue,
 /obj/machinery/alarm{
@@ -14848,7 +14849,8 @@
 	name = "Oxygen Supply Control";
 	output_tag = "d3po2_out";
 	sensor_name = "Oxygen Supply Tank";
-	sensor_tag = "d3po2_sensor"
+	sensor_tag = "d3po2_sensor";
+	injecting = 1
 	},
 /obj/floor_decal/industrial/outline/blue,
 /obj/machinery/alarm{
@@ -15311,7 +15313,8 @@
 	name = "Hydrogen Supply Control";
 	output_tag = "d3sh_out";
 	sensor_name = "Hydrogen Supply Tank";
-	sensor_tag = "d3sh_sensor"
+	sensor_tag = "d3sh_sensor";
+	injecting = 1
 	},
 /obj/floor_decal/industrial/outline/orange,
 /turf/simulated/floor/tiled/techfloor,
@@ -19307,7 +19310,8 @@
 	name = "Hydrogen Supply Control";
 	output_tag = "d3ph_out";
 	sensor_name = "Hydrogen Supply Tank";
-	sensor_tag = "d3ph_sensor"
+	sensor_tag = "d3ph_sensor";
+	injecting = 1
 	},
 /obj/floor_decal/industrial/outline/orange,
 /turf/simulated/floor/tiled/techfloor,

@@ -6770,7 +6770,8 @@
 	output_tag = "cooling_out";
 	pressure_setting = 100;
 	sensor_name = "Engine Core";
-	sensor_tag = "engine_sensor"
+	sensor_tag = "engine_sensor";
+	injecting = 1
 	},
 /obj/structure/cable/cyan{
 	d1 = 2;
@@ -11927,7 +11928,8 @@
 	name = "Waste Tank Control";
 	output_tag = "waste_out";
 	sensor_name = "Waste Tank";
-	sensor_tag = "waste_sensor"
+	sensor_tag = "waste_sensor";
+	injecting = 1
 	},
 /obj/machinery/light{
 	dir = 8;
@@ -12632,7 +12634,8 @@
 	name = "Fuel Supply Control";
 	output_tag = "fuel_out";
 	sensor_name = "Fuel Tank";
-	sensor_tag = "fuel_sensor"
+	sensor_tag = "fuel_sensor";
+	injecting = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/fuelbay)
@@ -17151,7 +17154,8 @@
 	input_tag = "rust_injector";
 	name = "R-UST Gas Injection Controls";
 	sensor_name = "Fusion Chamber";
-	sensor_tag = "rust_sensor"
+	sensor_tag = "rust_sensor";
+	injecting = 1
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/vacant/prototype/control)
