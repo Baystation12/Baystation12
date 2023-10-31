@@ -1,0 +1,5 @@
+author: TheNightingale
+changes:
+  - {tweak: Embed removal surgery uses normal surgery success rates but takes a little
+      longer.}
+delete-after: true
