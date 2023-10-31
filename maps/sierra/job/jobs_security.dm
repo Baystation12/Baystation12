@@ -56,7 +56,8 @@
 	supervisors = "Главе Службы безопасности"
 	economic_power = 5
 	minimal_player_age = 7
-	ideal_character_age = 35
+	minimum_character_age = list(SPECIES_HUMAN = 25)
+	ideal_character_age = 30
 	skill_points = 14
 	alt_titles = list(
 		"Forensic Technician"
@@ -98,6 +99,7 @@
 	supervisors = "Главе Службы безопасности и Смотрителю (сержанту)"
 	economic_power = 6
 	minimal_player_age = 10
+	minimum_character_age = list(SPECIES_HUMAN = 22)
 	ideal_character_age = 25
 	alt_titles = list("Junior Guard")
 
@@ -139,6 +141,7 @@
 	spawn_positions = 2
 	supervisors = "Главе Службы безопасности и остальному охранному персоналу"
 	economic_power = 3
+	minimum_character_age = list(SPECIES_HUMAN = 20)
 	ideal_character_age = 21
 	selection_color = "#601c1c"
 	alt_titles = list("Security Recruit")
