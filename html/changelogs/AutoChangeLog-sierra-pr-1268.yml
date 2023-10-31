@@ -1,0 +1,4 @@
+author: SierraKomodo
+changes:
+  - {bugfix: Combat boots now have a sprite.}
+delete-after: true
