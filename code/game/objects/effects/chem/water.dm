@@ -37,8 +37,10 @@
 			if(reagents.total_volume < 1)
 				break
 			if(T == get_turf(target))
-				for(var/atom/A in splash_others)
-					reagents.splash(A, reagents.total_volume/length(splash_others)) //splash anything left
+				var/list/splash_targets = splash_others + splash_mobs
+				var/splash_amount = reagents.total_volume / length(splash_targets)
+				for(var/atom/atom in splash_targets)
+					reagents.splash(atom, splash_amount)
 				break
 
 		sleep(delay)

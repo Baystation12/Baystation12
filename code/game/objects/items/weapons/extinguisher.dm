@@ -15,7 +15,6 @@
 	matter = list(MATERIAL_STEEL = 90)
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
 
-	var/spray_particles = 3
 	var/spray_amount = 120	//units of liquid per spray - 120 -> same as splashing them with a bucket per spray
 	var/starting_water = 2000
 	var/max_water = 2000
@@ -62,23 +61,6 @@
 	to_chat(user, "The safety is [safety ? "on" : "off"].")
 	return
 
-/obj/item/extinguisher/use_before(mob/living/M, mob/user)
-	. = FALSE
-	if (user.a_intent == I_HELP && !safety)
-		if (world.time < last_use + 20)
-			return TRUE
-		if (reagents.total_volume < 1)
-			to_chat(user, SPAN_NOTICE("\The [src] is empty."))
-			return TRUE
-
-		last_use = world.time
-		reagents.splash(M, min(reagents.total_volume, spray_amount))
-
-		user.visible_message(SPAN_NOTICE("\The [user] sprays \the [M] with \the [src]."))
-		playsound(src.loc, 'sound/effects/extinguish.ogg', 75, 1, -3)
-
-		return TRUE
-
 /obj/item/extinguisher/proc/propel_object(obj/O, mob/user, movementdirection)
 	if(O.anchored) return
 
@@ -101,7 +83,6 @@
 	if (istype(target, /obj/structure/hygiene/sink) && reagents.get_free_space() > 0) // fill first, wash if full
 		return FALSE
 	return ..()
-
 
 /obj/item/extinguisher/afterattack(atom/target, mob/user, flag)
 	var/issink = istype(target, /obj/structure/hygiene/sink)
@@ -145,6 +126,7 @@
 		if(user.buckled && isobj(user.buckled))
 			addtimer(new Callback(src, .proc/propel_object, user.buckled, user, direction), 0)
 
+		visible_message(SPAN_NOTICE("\The [user] sprays towards \the [target] with \the [src]."))
 		addtimer(new Callback(src, .proc/do_spray, target), 0)
 
 		if(!user.check_space_footing())
@@ -156,12 +138,12 @@
 
 /obj/item/extinguisher/proc/do_spray(atom/Target)
 	var/turf/T = get_turf(Target)
-	var/per_particle = min(spray_amount, reagents.total_volume)/spray_particles
-	for(var/a = 1 to spray_particles)
-		if(!src || !reagents.total_volume) return
+	var/available_spray = min(spray_amount, reagents.total_volume)
+	if(!src || !reagents.total_volume)
+		return
 
-		var/obj/effect/water/W = new /obj/effect/water(get_turf(src))
-		W.create_reagents(per_particle)
-		reagents.trans_to_obj(W, per_particle)
-		W.set_color()
-		W.set_up(T)
+	var/obj/effect/water/W = new /obj/effect/water(get_turf(src))
+	W.create_reagents(available_spray)
+	reagents.trans_to_holder(W.reagents, available_spray, safety = 1)
+	W.set_color()
+	W.set_up(T)
