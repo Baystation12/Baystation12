@@ -1,0 +1,5 @@
+author: orelbon
+changes:
+  - {bugfix: Fire extinguisher spray should now act as expected without having to
+      directly click on target.}
+delete-after: true
