@@ -15,6 +15,7 @@
 	icon_state = "cellconsole"
 	density = FALSE
 	interact_offline = 1
+	stat_immune = MACHINE_STAT_NOSCREEN | MACHINE_STAT_NOINPUT | MACHINE_STAT_NOPOWER
 	var/mode = null
 
 	//Used for logging people entering cryosleep and important items they are carrying.
