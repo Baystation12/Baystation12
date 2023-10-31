@@ -209,13 +209,12 @@
 	damage = 45
 	armor_penetration = 25
 	penetrating = 1
-	distance_falloff = 1.5
+	distance_falloff = 1
 
 /obj/item/projectile/bullet/rifle/military
 	fire_sound = 'sound/weapons/gunshot/gunshot2.ogg'
 	damage = 40
 	armor_penetration = 35
-	distance_falloff = 1
 
 /obj/item/projectile/bullet/rifle/shell
 	fire_sound = 'sound/weapons/gunshot/sniper.ogg'
