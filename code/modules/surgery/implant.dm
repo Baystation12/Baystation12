@@ -150,8 +150,8 @@
 		/obj/item/wirecutters = 75,
 		/obj/item/material/kitchen/utensil/fork = 20
 	)
-	min_duration = 80
-	max_duration = 100
+	min_duration = 120
+	max_duration = 150
 
 /singleton/surgery_step/cavity/implant_removal/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
@@ -177,7 +177,6 @@
 	if(BP_IS_ROBOTIC(affected) && affected.hatch_state == HATCH_OPENED)
 		exposed = 1
 
-	var/find_prob = 0
 	var/list/loot = list()
 	if(exposed)
 		loot = affected.implants
@@ -185,41 +184,27 @@
 		for(var/datum/wound/wound in affected.wounds)
 			if(LAZYLEN(wound.embedded_objects))
 				loot |= wound.embedded_objects
-			find_prob += 50
 
 	if (length(loot))
 
 		var/obj/item/obj = pick(loot)
 
-		if(istype(obj,/obj/item/implant))
-			var/obj/item/implant/imp = obj
-			if (imp.islegal())
-				find_prob +=60
-			else
-				find_prob +=40
-		else
-			find_prob +=50
+		user.visible_message(SPAN_NOTICE("[user] takes something out of incision on [target]'s [affected.name] with \the [tool]."), \
+		SPAN_NOTICE("You take \the [obj] out of incision on \the [target]'s [affected.name] with \the [tool].") )
+		target.remove_implant(obj, TRUE, affected)
 
-		if (prob(find_prob))
-			user.visible_message(SPAN_NOTICE("[user] takes something out of incision on [target]'s [affected.name] with \the [tool]."), \
-			SPAN_NOTICE("You take \the [obj] out of incision on \the [target]'s [affected.name] with \the [tool].") )
-			target.remove_implant(obj, TRUE, affected)
+		SET_BIT(target.hud_updateflag, IMPLOYAL_HUD)
 
-			SET_BIT(target.hud_updateflag, IMPLOYAL_HUD)
-
-			//Handle possessive brain borers.
-			if(istype(obj,/mob/living/simple_animal/borer))
-				var/mob/living/simple_animal/borer/worm = obj
-				if(worm.controlling)
-					target.release_control()
-				worm.detatch()
-				worm.leave_host()
+		//Handle possessive brain borers.
+		if(istype(obj,/mob/living/simple_animal/borer))
+			var/mob/living/simple_animal/borer/worm = obj
+			if(worm.controlling)
+				target.release_control()
+			worm.detatch()
+			worm.leave_host()
 
 
 			playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
-		else
-			user.visible_message(SPAN_NOTICE("[user] removes \the [tool] from [target]'s [affected.name]."), \
-			SPAN_NOTICE("There's something inside [target]'s [affected.name], but you just missed it this time.") )
 	else
 		user.visible_message(SPAN_NOTICE("[user] could not find anything inside [target]'s [affected.name], and pulls \the [tool] out."), \
 		SPAN_NOTICE("You could not find anything inside [target]'s [affected.name].") )
