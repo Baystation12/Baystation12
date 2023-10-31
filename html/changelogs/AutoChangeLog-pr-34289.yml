@@ -1,4 +1,0 @@
-author: Mucker
-changes:
-  - {bugfix: Space carp will now actually make it to the ship during carp events again.}
-delete-after: true
