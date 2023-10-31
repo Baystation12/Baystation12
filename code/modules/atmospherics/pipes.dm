@@ -631,6 +631,9 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel
 	name = "Fuel pipe manifold"
 	color = PIPE_COLOR_ORANGE
+	maximum_pressure = 420*ONE_ATMOSPHERE
+	fatigue_pressure = 350*ONE_ATMOSPHERE
+	alert_pressure = 350*ONE_ATMOSPHERE
 	connect_types = CONNECT_TYPE_FUEL
 
 /obj/machinery/atmospherics/pipe/manifold/hidden
@@ -674,6 +677,9 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/fuel
 	name = "Fuel pipe manifold"
 	color = PIPE_COLOR_ORANGE
+	maximum_pressure = 420*ONE_ATMOSPHERE
+	fatigue_pressure = 350*ONE_ATMOSPHERE
+	alert_pressure = 350*ONE_ATMOSPHERE
 	connect_types = CONNECT_TYPE_FUEL
 
 /obj/machinery/atmospherics/pipe/manifold4w
@@ -899,6 +905,9 @@
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel
 	name = "4-way fuel pipe manifold"
 	color = PIPE_COLOR_ORANGE
+	maximum_pressure = 420*ONE_ATMOSPHERE
+	fatigue_pressure = 350*ONE_ATMOSPHERE
+	alert_pressure = 350*ONE_ATMOSPHERE
 	connect_types = CONNECT_TYPE_FUEL
 
 /obj/machinery/atmospherics/pipe/manifold4w/hidden
@@ -942,6 +951,9 @@
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/fuel
 	name = "4-way fuel pipe manifold"
 	color = PIPE_COLOR_ORANGE
+	maximum_pressure = 420*ONE_ATMOSPHERE
+	fatigue_pressure = 350*ONE_ATMOSPHERE
+	alert_pressure = 350*ONE_ATMOSPHERE
 	connect_types = CONNECT_TYPE_FUEL
 
 /obj/machinery/atmospherics/pipe/cap
@@ -1037,6 +1049,9 @@
 	name = "fuel pipe endcap"
 	desc = "An endcap for fuel pipes."
 	color = PIPE_COLOR_ORANGE
+	maximum_pressure = 420*ONE_ATMOSPHERE
+	fatigue_pressure = 350*ONE_ATMOSPHERE
+	alert_pressure = 350*ONE_ATMOSPHERE
 	connect_types = CONNECT_TYPE_FUEL
 
 /obj/machinery/atmospherics/pipe/cap/hidden
@@ -1064,6 +1079,9 @@
 	name = "fuel pipe endcap"
 	desc = "An endcap for fuel pipes."
 	color = PIPE_COLOR_ORANGE
+	maximum_pressure = 420*ONE_ATMOSPHERE
+	fatigue_pressure = 350*ONE_ATMOSPHERE
+	alert_pressure = 350*ONE_ATMOSPHERE
 	connect_types = CONNECT_TYPE_FUEL
 
 /obj/machinery/atmospherics/pipe/vent
