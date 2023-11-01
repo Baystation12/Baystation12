@@ -1,6 +1,0 @@
-author: SierraKomodo
-changes:
-  - {bugfix: 'Fuel pipe manifolds, corners, caps, etc now have the same pressure resistances
-      as straight line fuel pipes. Among other things, this means the vox ship fuel
-      pipes will no longer explode when you ignite the chamber.'}
-delete-after: true
