@@ -24,10 +24,11 @@ Used In File(s): \code\game\gamemodes\nuclear\nuclearbomb.dm
 				<b>Timer:</b> {{:helper.link('On', 'play', null, 'disabled')}}{{:helper.link('Off', 'pause', null, 'disabled')}}
 			</div>
 			<div class="item">
-				<b>Time:</b> {{:helper.link('-', '', null, 'disabled')}}{{:helper.link('-', '', null, 'disabled')}} {{:data.time}} {{:helper.link('+', '', null, 'disabled')}}{{:helper.link('++', '', null, 'disabled')}}
+				<b>Time:</b> {{:helper.link('--', '', null, 'disabled')}}{{:helper.link('-', '', null, 'disabled')}} {{:data.time}} {{:helper.link('+', '', null, 'disabled')}}{{:helper.link('++', '', null, 'disabled')}}
 			</div>
 		{{/if}}
 	</div>
+	<hr>
 	<div class="item">
 		{{if data.auth && data.yescode}}
 			{{if data.is_regular_nuke}}

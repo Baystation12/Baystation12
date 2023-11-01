@@ -15,9 +15,9 @@ var/global/bomb_set
 	var/deployable = 0
 	var/extended = 0
 	var/lighthack = 0
-	var/timeleft = 120
-	var/minTime = 120
-	var/maxTime = 600
+	var/timeleft = 120 SECONDS
+	var/minTime = 120 SECONDS
+	var/maxTime = 600 SECONDS
 	var/timing = 0
 	var/r_code = "ADMIN"
 	var/code = ""
@@ -39,11 +39,10 @@ var/global/bomb_set
 	auth = null
 	return ..()
 
-/obj/machinery/nuclearbomb/Process(wait)
+/obj/machinery/nuclearbomb/Process()
 	if(timing)
-		timeleft = max(timeleft - (wait / 10), 0)
-		playsound(loc, 'sound/items/timer.ogg', 50)
-		if(timeleft <= 0)
+		playsound(loc, 'sound/items/timer.ogg',50)
+		if(world.time > timeleft)
 			addtimer(new Callback(src, .proc/explode), 0)
 		SSnano.update_uis(src)
 
@@ -181,7 +180,7 @@ var/global/bomb_set
 		else
 			data["authstatus"] = "Auth. S1"
 	data["safe"] = safety ? "Safe" : "Engaged"
-	data["time"] = timeleft
+	data["time"] = timing ? round((timeleft - world.time)/10, 1) : round(timeleft/10, 1)
 	data["timer"] = timing
 	data["safety"] = safety
 	data["anchored"] = anchored
@@ -264,7 +263,7 @@ var/global/bomb_set
 					to_chat(usr, SPAN_WARNING("Cannot alter the timing during countdown."))
 					return
 
-				var/time = text2num(href_list["time"])
+				var/time = text2num(href_list["time"]) SECONDS
 				timeleft += time
 				timeleft = clamp(timeleft, minTime, maxTime)
 			if(href_list["timer"])
@@ -314,6 +313,7 @@ var/global/bomb_set
 	return 1
 
 /obj/machinery/nuclearbomb/proc/start_bomb()
+	timeleft += world.time
 	timing = 1
 	log_and_message_admins("activated the detonation countdown of \the [src]")
 	bomb_set++ //There can still be issues with this resetting when there are multiple bombs. Not a big deal though for Nuke/N
@@ -330,7 +330,7 @@ var/global/bomb_set
 	bomb_set--
 	safety = TRUE
 	timing = 0
-	timeleft = clamp(timeleft, minTime, maxTime)
+	timeleft = clamp(timeleft - world.time, minTime, maxTime)
 	update_icon()
 
 /obj/machinery/nuclearbomb/ex_act(severity)
@@ -458,12 +458,12 @@ var/global/bomb_set
 	var/list/inserters = list()
 	var/last_turf_state
 
-	var/announced = 0
+	var/announced = FALSE
 	var/time_to_explosion = 0
-	var/self_destruct_cutoff = 60 //Seconds
-	timeleft = 300
-	minTime = 300
-	maxTime = 900
+	var/self_destruct_cutoff = 60 SECONDS
+	timeleft = 300 SECONDS
+	minTime = 300 SECONDS
+	maxTime = 900 SECONDS
 
 /obj/machinery/nuclearbomb/station/Initialize()
 	..()
@@ -496,22 +496,23 @@ var/global/bomb_set
 			to_chat(usr, SPAN_WARNING("An inserter has not been armed or is damaged."))
 			return
 	..()
-	visible_message(SPAN_WARNING("Warning. The self-destruct sequence override will be disabled [self_destruct_cutoff] seconds before detonation."))
+	visible_message(SPAN_WARNING("Warning. The self-destruct sequence override will be disabled [self_destruct_cutoff/10] seconds before detonation."))
 	if(evacuate)
 		if(!evacuation_controller)
 			visible_message(SPAN_DANGER("Warning. Unable to initiate evacuation procedures."))
 			return
 		for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
 			if(EO.abandon_ship)
-				evacuation_controller.evac_prep_delay = timeleft SECONDS - 2 MINUTES
-				evacuation_controller.evac_launch_delay = timeleft SECONDS - 0.5 MINUTES
+				evacuation_controller.evac_prep_delay = timeleft - world.time - 2 MINUTES
+				evacuation_controller.evac_launch_delay = 1.75 MINUTES //Escape pods take time to arm and eject appart from this delay. Take into account.
 				evacuation_controller.handle_evac_option(EO.option_target, usr)
 
 /obj/machinery/nuclearbomb/station/secure_device()
-	if(timeleft <= self_destruct_cutoff)
+	if(timing && timeleft - world.time <= self_destruct_cutoff)
 		visible_message(SPAN_WARNING("Self-Destruct abort is no longer possible."))
 		return
 	..()
+	announced = FALSE
 	for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
 		if(EO.option_target == "cancel_abandon_ship")
 			evacuation_controller.handle_evac_option(EO.option_target, usr)
@@ -520,14 +521,14 @@ var/global/bomb_set
 
 /obj/machinery/nuclearbomb/station/Process()
 	..()
-	if(timeleft > 0 && GAME_STATE < RUNLEVEL_POSTGAME)
-		if(timeleft <= self_destruct_cutoff)
+	if(timing && timeleft - world.time > 0 && GAME_STATE < RUNLEVEL_POSTGAME)
+		if(timeleft - world.time <= self_destruct_cutoff)
 			if(!announced)
 				priority_announcement.Announce("The self-destruct sequence has reached terminal countdown, abort systems have been disabled.", "Self-Destruct Control Computer")
-				announced = 1
+				announced = TRUE
 			if(world.time >= time_to_explosion)
 				var/range
-				if(timeleft <= (self_destruct_cutoff/2))
+				if(timeleft - world.time <= (self_destruct_cutoff/2))
 					range = rand(14, 21)
 					time_to_explosion = world.time + 2 SECONDS
 				else
@@ -535,10 +536,6 @@ var/global/bomb_set
 					time_to_explosion = world.time + 5 SECONDS
 				var/turf/T = pick_area_and_turf(GLOB.is_station_but_not_space_or_shuttle_area)
 				explosion(T, range)
-
-/obj/machinery/nuclearbomb/station/secure_device()
-	..()
-	announced = 0
 
 /obj/machinery/nuclearbomb/station/on_update_icon()
 	var/target_icon_state
