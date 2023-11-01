@@ -13,13 +13,11 @@
 	display_name = "gloves, latex"
 	path = /obj/item/clothing/gloves/latex
 	cost = 3
-	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/gloves/nitrile
 	display_name = "gloves, nitrile"
 	path = /obj/item/clothing/gloves/latex/nitrile
 	cost = 3
-	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/gloves/rainbow
 	display_name = "gloves, rainbow"

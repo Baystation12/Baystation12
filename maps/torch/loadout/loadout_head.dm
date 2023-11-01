@@ -139,7 +139,6 @@
 /datum/gear/tactical/armor_tag_flag
 	display_name = "Armor Tag Selection - Flags"
 	path = /obj/item/clothing/accessory/armor_tag
-	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/tactical/armor_tag_flag/New()
@@ -154,7 +153,6 @@
 /datum/gear/tactical/armor_tag_blood
 	display_name = "Armor Tag Selection - Blood Type"
 	path = /obj/item/clothing/accessory/armor_tag
-	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/tactical/armor_tag_blood/New()
@@ -174,7 +172,6 @@
 /datum/gear/tactical/armor_tag_corporate
 	display_name = "Armor Tag Selection - Corporate Insignia"
 	path = /obj/item/clothing/accessory/armor_tag
-	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/tactical/armor_tag_corporate/New()

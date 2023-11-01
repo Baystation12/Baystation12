@@ -135,7 +135,6 @@
 		/datum/job/doctor,
 		/datum/job/medical_trainee
 	)
-	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/accessory/armband_corpsman
 	display_name = "medical armband"
@@ -147,7 +146,6 @@
 		/datum/job/doctor,
 		/datum/job/medical_trainee
 	)
-	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/accessory/armband_engineering
 	allowed_roles = ENGINEERING_ROLES
@@ -159,7 +157,6 @@
 		/datum/job/scientist_assistant,
 		/datum/job/assistant
 	)
-	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/accessory/armband_nt
 	allowed_branches = CIVILIAN_BRANCHES

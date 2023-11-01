@@ -25,7 +25,6 @@
 	display_name = "Science Eyewear"
 	description = "Provides research and chemical assessments."
 	path = /obj/item/clothing/glasses
-	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/eyes/science/New()
@@ -64,7 +63,6 @@
 	display_name = "Medical Eyewear"
 	description = "Provides medical vision overlays."
 	path = /obj/item/clothing/glasses
-	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/eyes/medical/New()
@@ -82,7 +80,6 @@
 	display_name = "Meson Eyewear"
 	description = "Provides meson-vision."
 	path = /obj/item/clothing/glasses
-	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/eyes/meson/New()
@@ -98,7 +95,6 @@
 	display_name = "Sanitation Eyewear"
 	description = "Provides filth-vision."
 	path = /obj/item/clothing/glasses
-	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/eyes/janitor/New()
@@ -161,7 +157,6 @@
 /datum/gear/eyes/material
 	display_name = "Material Eyewear"
 	path = /obj/item/clothing/glasses
-	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/eyes/material/New()
