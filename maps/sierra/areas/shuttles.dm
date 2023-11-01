@@ -247,8 +247,8 @@
 	lift_announce_str = "Палуба 3 - Инженерная."
 
 /area/turbolift/sierra_ground
-	name = "Elevator - Third Deck"
-	lift_floor_label = "3 Палуба"
+	name = "Elevator - Fourth Deck"
+	lift_floor_label = "4 Палуба"
 	lift_floor_name = "Лётная палуба"
 	lift_announce_str = "Палуба 4 - Лётная."
 	base_turf = /turf/simulated/floor
