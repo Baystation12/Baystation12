@@ -1,0 +1,4 @@
+author: Vuradu
+changes:
+  - {bugfix: Изменил палубу в имени зоны с 3-ей на 4-ю.}
+delete-after: true
