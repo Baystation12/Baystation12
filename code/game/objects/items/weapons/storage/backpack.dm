@@ -28,9 +28,9 @@
 	/// Can this backpack be opened while worn on the back?
 	var/worn_access = TRUE
 
-/obj/item/storage/backpack/attackby(obj/item/W as obj, mob/user as mob)
-	if (src.use_sound)
-		playsound(src.loc, src.use_sound, 50, 1, -5)
+/obj/item/storage/backpack/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	if (use_sound)
+		playsound(loc, use_sound, 50, 1, -5)
 	return ..()
 
 /obj/item/storage/backpack/equipped(mob/user, slot)
@@ -73,11 +73,11 @@
 	..()
 	return
 
-/obj/item/storage/backpack/holding/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/backpack/holding/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/storage/backpack/holding) || istype(W, /obj/item/storage/bag/trash/bluespace))
 		to_chat(user, SPAN_WARNING("The Bluespace interfaces of the two devices conflict and malfunction."))
 		qdel(W)
-		return 1
+		return TRUE
 	return ..()
 
 	//Please don't clutter the parent storage item with stupid hacks.

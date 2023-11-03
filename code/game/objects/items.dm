@@ -275,9 +275,9 @@
 		R.activate_module(src)
 		R.hud_used.update_robot_modules_display()
 
-/obj/item/attackby(obj/item/W, mob/user)
-	if((. = SSfabrication.try_craft_with(src, W, user)))
-		return
+/obj/item/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if(SSfabrication.try_craft_with(src, W, user))
+		return TRUE
 
 	if(istype(W, /obj/item/storage))
 		var/obj/item/storage/S = W
@@ -285,8 +285,28 @@
 			if(S.collection_mode) //Mode is set to collect all items
 				if(isturf(src.loc))
 					S.gather_all(src.loc, user)
+					return TRUE
 			else if (S.can_be_inserted(src, user))
 				S.handle_item_insertion(src)
+				return TRUE
+	return ..()
+
+///Eventually should be deleted in favor of use_tool; keeping duplicate until downstream attackbys are replaced.
+/obj/item/attackby(obj/item/W, mob/living/user, list/click_params)
+	if(SSfabrication.try_craft_with(src, W, user))
+		return TRUE
+
+	if(istype(W, /obj/item/storage))
+		var/obj/item/storage/S = W
+		if(S.use_to_pickup)
+			if(S.collection_mode) //Mode is set to collect all items
+				if(isturf(src.loc))
+					S.gather_all(src.loc, user)
+					return TRUE
+			else if (S.can_be_inserted(src, user))
+				S.handle_item_insertion(src)
+				return TRUE
+	return ..()
 
 /obj/item/can_embed()
 	if (!canremove)

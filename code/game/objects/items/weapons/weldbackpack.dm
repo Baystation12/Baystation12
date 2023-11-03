@@ -17,15 +17,15 @@
 
 	. = ..()
 
-/obj/item/storage/backpack/weldpack/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/backpack/weldpack/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isWelder(W))
 		var/obj/item/weldingtool/T = W
 		if (!T.tank)
 			to_chat(user, SPAN_WARNING("\The [T] has no tank attached!"))
-			return
+			return TRUE
 		if (!T.tank.can_refuel)
 			to_chat(user, SPAN_WARNING("\The [T]'s [T.tank.name] does not have a refuelling port."))
-			return
+			return TRUE
 		if (T.welding)
 			if (user.a_intent == I_HURT)
 				user.visible_message(
@@ -36,30 +36,30 @@
 				explosion(get_turf(src), 4, EX_ACT_HEAVY)
 				if (!QDELETED(src))
 					qdel(src)
-				return
+				return TRUE
 			else
 				to_chat(user, SPAN_WARNING("You need to turn \the [T] off before you can refuel it. Or use harm intent if you're suicidal."))
-				return
+				return TRUE
 		if (!reagents.trans_to_obj(T.tank, T.tank.max_fuel))
 			to_chat(user, SPAN_WARNING("\The [T]'s [T.tank.name] is already full."))
-			return
+			return TRUE
 		to_chat(user, SPAN_NOTICE("You refill \the [T] with \the [src]."))
 		playsound(src, 'sound/effects/refill.ogg', 50, 1, -6)
-		return
+		return TRUE
 
 	else if(istype(W, /obj/item/welder_tank))
 		var/obj/item/welder_tank/tank = W
 		if (!tank.can_refuel)
 			to_chat(user, SPAN_WARNING("\The [tank] does not have a refuelling port."))
-			return
+			return TRUE
 		if (!reagents.trans_to_obj(tank, tank.max_fuel))
 			to_chat(user, SPAN_WARNING("\The [tank] is already full."))
-			return
+			return TRUE
 		to_chat(user, SPAN_NOTICE("You refuel \the [tank] with \the [src]."))
 		playsound(loc, 'sound/effects/refill.ogg', 50, 1, -6)
-		return
+		return TRUE
 
-	..()
+	else return ..()
 
 /obj/item/storage/backpack/weldpack/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if(!proximity) // this replaces and improves the get_dist(src,O) <= 1 checks used previously
