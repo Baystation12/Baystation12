@@ -113,6 +113,11 @@ GLOBAL_LIST_EMPTY(runechat_image_cache)
 	message = null
 	return ..()
 
+/datum/chatmessage/proc/unregister_and_qdel_self()
+	GLOB.destroyed_event.unregister(owned_by, src, .proc/unregister_and_qdel_self)
+	qdel_self()
+
+
 /**
   * Generates a chat message image representation
   *
@@ -126,7 +131,6 @@ GLOBAL_LIST_EMPTY(runechat_image_cache)
 /datum/chatmessage/proc/generate_image(text, atom/target, mob/owner, list/extra_classes, lifespan)
 	// Register client who owns this message
 	owned_by = owner.client
-	GLOB.destroyed_event.register(owned_by, src, .proc/qdel_self)
 
 	// Remove spans in the message from things like the recorder
 	var/static/regex/span_check = new(@"<\/?span[^>]*>", "gi")
@@ -154,6 +158,9 @@ GLOBAL_LIST_EMPTY(runechat_image_cache)
 	if (whitespace.Find(text))
 		qdel(src)
 		return
+
+	// If haven't been deleted, watch for the owner
+	GLOB.destroyed_event.register(owned_by, src, .proc/unregister_and_qdel_self)
 
 	// Non mobs speakers can be small
 	if (!ismob(target))
@@ -252,7 +259,7 @@ GLOBAL_LIST_EMPTY(runechat_image_cache)
 	animate(alpha = 0, time = CHAT_MESSAGE_EOL_FADE)
 
 	// Desctruct yourself
-	addtimer(new Callback(src, .proc/qdel_self), lifespan + CHAT_MESSAGE_GRACE_PERIOD, TIMER_UNIQUE|TIMER_OVERRIDE)
+	addtimer(new Callback(src, .proc/unregister_and_qdel_self), lifespan + CHAT_MESSAGE_GRACE_PERIOD, TIMER_UNIQUE|TIMER_OVERRIDE)
 
 /datum/chatmessage/proc/get_current_alpha(time_spent)
 	if(time_spent < CHAT_MESSAGE_SPAWN_TIME)
