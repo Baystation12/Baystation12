@@ -1,5 +1,0 @@
-author: KandJX
-changes:
-  - {tweak: Голокарты теперь корректно отображают цвета зон}
-  - {maptweak: Мелкофиксы то тут то там}
-delete-after: true
