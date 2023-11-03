@@ -32,3 +32,19 @@
 						to_chat(Player, "<font color='red'><b>Вы не пережили события на [station_name()]...</b></font>")
 				else
 					to_chat(Player, "<font color='red'><b>Вы не пережили события на [station_name()]...</b></font>")
+
+/datum/map/bolt_saferooms()
+	for(var/atype in typesof(/area/crew_quarters/safe_room))
+		var/area/A = locate(atype)
+		if(istype(A))
+			for(var/obj/machinery/door/airlock/vault/bolted/V in A.contents)
+				if(!V.locked)
+					V.lock()
+
+/datum/map/unbolt_saferooms()
+	for(var/atype in typesof(/area/crew_quarters/safe_room))
+		var/area/A = locate(atype)
+		if(istype(A))
+			for(var/obj/machinery/door/airlock/vault/bolted/V in A.contents)
+				if(V.locked)
+					V.unlock()
