@@ -321,6 +321,7 @@
 				SPAN_NOTICE("You label \the [src]: \"[examtext]\""),\
 				"You hear someone scribbling a note.")
 				return TRUE
+	return ..()
 
 /obj/item/smallDelivery/on_update_icon()
 	ClearOverlays()
