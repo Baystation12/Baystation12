@@ -24,11 +24,11 @@
 		GLOB.admin_departments += "Lordania Pioneer Corps Relay"
 
 /obj/submap_landmark/spawnpoint/away_iccgn_farfleet
-	name = "ICCG Droptrooper"
+	name = "Pioneer Corps Trooper"
 	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 
 /obj/submap_landmark/spawnpoint/away_iccgn_farfleet/sergeant
-	name = "ICCG Droptrooper Sergeant"
+	name = "Pioneer Corps Starszy Bosman"
 
 /obj/submap_landmark/spawnpoint/away_iccgn_farfleet/captain
 	name = "Pioneer Corps Captain"
@@ -40,7 +40,7 @@
 	name = "Pioneer Corpsman"
 
 /obj/submap_landmark/spawnpoint/away_iccgn_farfleet/gunner
-	name = "Senior Technician"
+	name = "Pioneer Corps Technician"
 
 /* ACCESS
  * =======
