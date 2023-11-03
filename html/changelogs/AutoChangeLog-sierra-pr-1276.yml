@@ -1,0 +1,4 @@
+author: SierraKomodo
+changes:
+  - {bugfix: Cryopods can now be used to leave the round even if there's no power.}
+delete-after: true
