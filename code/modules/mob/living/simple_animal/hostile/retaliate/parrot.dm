@@ -664,7 +664,7 @@
 		return -1
 
 	if(!held_item)
-		to_chat(usr, SPAN_WARNING("You have nothing to drop!"))
+		to_chat(src, SPAN_WARNING("You have nothing to drop!"))
 		return 0
 
 	if(!drop_gently)
