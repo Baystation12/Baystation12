@@ -360,7 +360,6 @@
 	operating = DOOR_OPERATING_YES
 
 	do_animate("opening")
-	icon_state = "door0"
 	set_opacity(0)
 	if(width > 1)
 		set_fillers_opacity(0)
