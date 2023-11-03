@@ -181,10 +181,8 @@
 	name = "First Deck - Living - Library"
 	holomap_color = HOLOMAP_AREACOLOR_CREW
 
-/area/crew_quarters/safe_room
+/area/crew_quarters/safe_room/firstdeck
 	name = "First Deck - Citadel"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
 
 /* SECURITY AREAS
  * ==============

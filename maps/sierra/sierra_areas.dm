@@ -65,6 +65,10 @@
 	icon_state = "thruster"
 	req_access = list(access_engine)
 
+/area/crew_quarters/safe_room
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
+
 #include "areas/shuttles.dm"
 #include "areas/z1_sierra_deck4.dm"
 #include "areas/z2_sierra_deck3.dm"

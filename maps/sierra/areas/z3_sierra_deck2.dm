@@ -61,8 +61,6 @@
 
 /area/crew_quarters/safe_room/seconddeck
 	name = "Second Deck - Safe Room"
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
 
 /area/maintenance/substation/seconddeck
 	name = "Second Deck - Substation"

@@ -129,7 +129,6 @@
 
 /area/crew_quarters/safe_room/bridge
 	name = "Bridge - Safe Room"
-	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
 
 /area/crew_quarters/heads/office/rd/cobed
 	icon_state = "heads_rd"
