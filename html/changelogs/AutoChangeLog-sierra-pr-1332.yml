@@ -1,0 +1,4 @@
+author: SuhEugene
+changes:
+  - {bugfix: Починил кодировку тикет-панели (в очередной раз).}
+delete-after: true
