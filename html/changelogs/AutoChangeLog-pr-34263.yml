@@ -1,0 +1,4 @@
+author: emmanuelbassil
+changes:
+  - {bugfix: Gas scanner no longer scans the inside of your backpack on storage}
+delete-after: true
