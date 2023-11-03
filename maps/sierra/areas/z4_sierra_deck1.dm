@@ -37,22 +37,27 @@
 /area/hallway/primary/firstdeck/fore
 	name = "First Deck - Hallway - Fore"
 	icon_state = "hallF"
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 /area/hallway/primary/firstdeck/center
 	name = "First Deck - Hallway - Central"
 	icon_state = "hallC1"
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 /area/hallway/primary/firstdeck/aft
 	name = "First Deck - Hallway - Aft"
 	icon_state = "hallA"
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 /area/hallway/primary/firstdeck/central_stairwell
 	name = "First Deck - Stairwell - Central"
 	icon_state = "hallC2"
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 /area/hallway/primary/firstdeck/aft_stairwell
 	name = "First Deck - Stairwell - Fore"
 	icon_state = "hallA"
+	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 /area/maintenance/substation/firstdeck
 	name = "First Deck - Substation"
@@ -65,22 +70,26 @@
 	icon_state = "heads_rd"
 	name = "First Deck - Command - RD's Office"
 	req_access = list(access_rd)
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/crew_quarters/heads/office/cmo
 	icon_state = "heads_cmo"
 	name = "First Deck - Command - CMO's Office"
 	req_access = list(access_cmo)
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/crew_quarters/heads/office/hos
 	icon_state = "heads_hos"
-	name = "First Deck - Command - HoS' Office"
+	name = "Bridge - Command - HoS' Office"
 	req_access = list(access_hos)
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/command/bsa
-	name = "Fourth Deck - Obstruction Field Disperser"
+	name = "First Deck - Obstruction Field Disperser"
 	icon = 'maps/sierra/icons/turf/areas.dmi'
 	icon_state = "bridge_gun"
 	req_access = list(access_gun)
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /* ENGINEERING AREAS
  * =================
@@ -89,42 +98,16 @@
 	name = "First Deck - Engineering - Auxiliary Power Storage"
 	icon_state = "engine_smes"
 	sound_env = SMALL_ENCLOSED
-
-// Tcomm
-/area/tcommsat/
-	ambience = list(
-		'sound/ambience/ambisin2.ogg',
-		'sound/ambience/signal.ogg',
-		'sound/ambience/ambigen10.ogg',
-		'maps/sierra/sound/ambience/aiservers.wav'
-	)
-	req_access = list(access_tcomsat)
-
-/area/tcommsat/chamber
-	name = "First Deck - Telecoms"
-	icon_state = "tcomsatcham"
-
-/area/tcommsat/computer
-	name = "First Deck - Telecoms - Monitoring"
-	icon_state = "tcomsatcomp"
-
-/area/tcommsat/storage
-	name = "First Deck - Telecoms - Storage"
-	icon_state = "tcomsatstore"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 // Thusters
 /area/thruster/d1port
 	name = "First Deck - Nacelle - Port "
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/thruster/d1starboard
 	name = "First Deck - Nacelle - Starboard"
-
-/area/storage/eva
-	name = "First Deck - EVA"
-	icon_state = "eva"
-	req_access = list(access_eva)
-
-
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /* RND AREAS
  * =========
@@ -187,17 +170,21 @@
 /area/crew_quarters/sleep/cryo/firstdeck
 	name = "First Deck - Living - Cryogenic Storage"
 	icon_state = "cryo_up"
+	holomap_color = HOLOMAP_AREACOLOR_CREW
 
 /area/crew_quarters/dungeon_master_lounge
 	name = "First Deck - Living Room"
 	sound_env = MEDIUM_SOFTFLOOR
+	holomap_color = HOLOMAP_AREACOLOR_CREW
 
 /area/crew_quarters/lounge/upper
 	name = "First Deck - Living - Library"
+	holomap_color = HOLOMAP_AREACOLOR_CREW
 
 /area/crew_quarters/safe_room
 	name = "First Deck - Citadel"
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
+	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
 
 /* SECURITY AREAS
  * ==============
@@ -292,6 +279,7 @@
 /area/hallway/infirmary
 	name = "First Deck - Infirmary - Hallway"
 	icon_state = "medbay"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/medical/infirmreception
 	name = "First Deck - Infirmary - Reception"
