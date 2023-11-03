@@ -1,0 +1,4 @@
+author: LordNest
+changes:
+  - {bugfix: 'Пофиксил спавнпоинты пионеров, сержанта и инженера Пионерского Корпуса'}
+delete-after: true
