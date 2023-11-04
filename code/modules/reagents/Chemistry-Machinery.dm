@@ -71,29 +71,31 @@
 				qdel(src)
 				return
 
-/obj/machinery/chem_master/attackby(obj/item/B as obj, mob/user as mob)
-
+/obj/machinery/chem_master/use_tool(obj/item/B, mob/living/user, list/click_params)
 	if(istype(B, /obj/item/reagent_containers/glass) || istype(B, /obj/item/reagent_containers/ivbag))
-
 		if(beaker)
 			to_chat(user, "A container is already loaded into the machine.")
-			return
+			return TRUE
 		if(!user.unEquip(B, src))
-			return
+			return TRUE
 		beaker = B
-		to_chat(user, "You add the container to the machine!")
+		to_chat(user, SPAN_NOTICE("You add \the [B] to \the [src]!"))
 		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+		update_icon()
+		return TRUE
 
-	else if(istype(B, /obj/item/storage/pill_bottle))
-
+	if (istype(B, /obj/item/storage/pill_bottle))
 		if(loaded_pill_bottle)
-			to_chat(user, "A pill bottle is already loaded into the machine.")
-			return
+			to_chat(user, "A pill bottle is already loaded into \the [src].")
+			return TRUE
 		if(!user.unEquip(B, src))
-			return
+			return TRUE
 		loaded_pill_bottle = B
-		to_chat(user, "You add the pill bottle into the dispenser slot!")
-	update_icon()
+		to_chat(user, SPAN_NOTICE("You add \the [B] into \the [src]'s dispenser slot!"))
+		update_icon()
+		return TRUE
+
+	return ..()
 
 /obj/machinery/chem_master/proc/eject_beaker(mob/user)
 	if(!beaker)

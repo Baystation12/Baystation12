@@ -131,29 +131,26 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	SyncRDevices()
 	. = ..()
 
-/obj/machinery/computer/rdconsole/attackby(obj/item/D as obj, mob/user as mob)
-	//Loading a disk into it.
+/obj/machinery/computer/rdconsole/use_tool(obj/item/D, mob/living/user, list/click_params)
 	if(istype(D, /obj/item/disk))
 		if(t_disk || d_disk)
 			to_chat(user, "A disk is already loaded into the machine.")
-			return
+			return TRUE
 		if(!user.canUnEquip(D))
-			return
+			return TRUE
 		if(istype(D, /obj/item/disk/tech_disk))
 			t_disk = D
 		else if (istype(D, /obj/item/disk/design_disk))
 			d_disk = D
 		else
 			to_chat(user, SPAN_NOTICE("Machine cannot accept disks in that format."))
-			return
+			return TRUE
 		user.drop_from_inventory(D, src)
 		to_chat(user, SPAN_NOTICE("You add \the [D] to the machine."))
-	else
-		//The construction/deconstruction of the console code.
-		..()
+		updateUsrDialog()
+		return TRUE
 
-	src.updateUsrDialog()
-	return
+	return ..()
 
 /obj/machinery/computer/rdconsole/emag_act(remaining_charges, mob/user)
 	if(!emagged)

@@ -9,63 +9,62 @@
 	var/list/authorized = list(  )
 
 
-/obj/machinery/computer/shuttle/attackby(obj/item/card/W as obj, mob/user as mob)
-	if(inoperable())	return
+/obj/machinery/computer/shuttle/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if(inoperable() || evacuation_controller.has_evacuated())
+		return ..()
 
 	var/datum/evacuation_controller/shuttle/evac_control = evacuation_controller
 	if(!istype(evac_control))
 		to_chat(user, SPAN_DANGER("This console should not in use on this map. Please report this to a developer."))
-		return
+		return TRUE
 
-	if ((!( istype(W, /obj/item/card) ) || evacuation_controller.has_evacuated() || !( user )))
-		return
-
-	if (istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
+	if (isid(W) || istype(W, /obj/item/modular_computer))
 		if (istype(W, /obj/item/modular_computer))
 			W = W.GetIdCard()
 		if (!W:access) //no access
 			to_chat(user, "The access level of [W:registered_name]\'s card is not high enough. ")
-			return
+			return TRUE
 
 		var/list/cardaccess = W:access
 		if(!istype(cardaccess, /list) || !length(cardaccess)) //no access
 			to_chat(user, "The access level of [W:registered_name]\'s card is not high enough. ")
-			return
+			return TRUE
 
 		if(!(access_bridge in W:access)) //doesn't have this access
 			to_chat(user, "The access level of [W:registered_name]\'s card is not high enough. ")
-			return 0
+			return TRUE
 
 		var/choice = alert(user, text("Would you like to (un)authorize a shortened launch time? [] authorization\s are still needed. Use abort to cancel all authorizations.", src.auth_need - length(src.authorized)), "Shuttle Launch", "Authorize", "Repeal", "Abort")
 		if(evacuation_controller.is_prepared() && user.get_active_hand() != W)
-			return 0
+			return TRUE
 		switch(choice)
 			if("Authorize")
-				src.authorized -= W:registered_name
-				src.authorized += W:registered_name
-				if (src.auth_need - length(src.authorized) > 0)
+				authorized -= W:registered_name
+				authorized += W:registered_name
+				if (auth_need - length(authorized) > 0)
 					message_admins("[key_name_admin(user)] has authorized early shuttle launch")
 					log_game("[user.ckey] has authorized early shuttle launch")
-					to_world(SPAN_NOTICE("<b>Alert: [src.auth_need - length(src.authorized)] authorizations needed until shuttle is launched early</b>"))
+					to_world(SPAN_NOTICE("<b>Alert: [auth_need - length(authorized)] authorizations needed until shuttle is launched early</b>"))
 				else
 					message_admins("[key_name_admin(user)] has launched the shuttle")
 					log_game("[user.ckey] has launched the shuttle early")
 					to_world(SPAN_NOTICE("<b>Alert: Shuttle launch time shortened to 10 seconds!</b>"))
 					evacuation_controller.set_launch_time(world.time+100)
 					//src.authorized = null
-					qdel(src.authorized)
-					src.authorized = list(  )
+					qdel(authorized)
+					authorized = list(  )
 
 			if("Repeal")
-				src.authorized -= W:registered_name
-				to_world(SPAN_NOTICE("<b>Alert: [src.auth_need - length(src.authorized)] authorizations needed until shuttle is launched early</b>"))
+				authorized -= W:registered_name
+				to_world(SPAN_NOTICE("<b>Alert: [auth_need - length(authorized)] authorizations needed until shuttle is launched early</b>"))
 
 			if("Abort")
 				to_world(SPAN_NOTICE("<b>All authorizations to shortening time for shuttle launch have been revoked!</b>"))
-				src.authorized.Cut()
-				src.authorized = list(  )
+				authorized.Cut()
+				authorized = list(  )
+		return TRUE
 
-	else if (istype(W, /obj/item/card/emag) && !emagged)
+	if (istype(W, /obj/item/card/emag) && !emagged)
 		var/choice = alert(user, "Would you like to launch the shuttle?","Shuttle control", "Launch", "Cancel")
 
 		if(!emagged && !evacuation_controller.is_prepared() && user.get_active_hand() == W)
@@ -75,5 +74,7 @@
 					evacuation_controller.set_launch_time(world.time+100)
 					emagged = TRUE
 				if("Cancel")
-					return
-	return
+					return TRUE
+		return TRUE
+
+	return ..()

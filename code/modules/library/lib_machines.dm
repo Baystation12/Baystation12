@@ -67,19 +67,30 @@
 	icon_state = "binder"
 	anchored = TRUE
 	density = TRUE
+	var/binding
 
-/obj/machinery/bookbinder/attackby(obj/O as obj, mob/user as mob)
+/obj/machinery/bookbinder/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(istype(O, /obj/item/paper))
 		if(!user.unEquip(O, src))
-			return
-		user.visible_message("[user] loads some paper into [src].", "You load some paper into [src].")
-		src.visible_message("[src] begins to hum as it warms up its printing drums.")
+			return TRUE
+		if (binding)
+			to_chat(user, SPAN_WARNING("\The [src] is currently busy printing a book."))
+			return TRUE
+
+		user.visible_message(
+			SPAN_NOTICE("\The [user] loads some paper into \the [src]."),
+			SPAN_NOTICE("You load some paper into \the [src].")
+		)
+		visible_message(SPAN_NOTICE("\The [src] begins to hum as it warms up its printing drums."))
+		binding = TRUE
 		sleep(rand(200,400))
-		src.visible_message("[src] whirs as it prints and binds a new book.")
-		var/obj/item/book/b = new(src.loc)
+		visible_message(SPAN_NOTICE("\The [src] whirs as it prints and binds a new book."))
+		binding = FALSE
+		var/obj/item/book/b = new(loc)
 		b.dat = O:info
 		b.SetName("Print Job #" + "[rand(100, 999)]")
 		b.icon_state = "book[rand(1,7)]"
 		qdel(O)
-	else
-		..()
+		return TRUE
+
+	return ..()

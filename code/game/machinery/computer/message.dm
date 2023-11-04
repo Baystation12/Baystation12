@@ -24,19 +24,16 @@
 	var/message = "<span class='notice'>System bootup complete. Please select an option.</span>"	// The message that shows on the main menu.
 	var/auth = 0 // Are they authenticated?
 
-/obj/machinery/computer/message_monitor/attackby(obj/item/O as obj, mob/living/user as mob)
+/obj/machinery/computer/message_monitor/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(inoperable())
-		..()
-		return
-	if(!istype(user))
-		return
+		return ..()
+
 	if(isScrewdriver(O) && emag)
 		//Stops people from just unscrewing the monitor and putting it back to get the console working again.
 		to_chat(user, SPAN_WARNING("It is too hot to mess with!"))
-		return
+		return TRUE
 
-	..()
-	return
+	return ..()
 
 /obj/machinery/computer/message_monitor/emag_act(remaining_charges, mob/user)
 	// Will create sparks and print out the console's password. You will then have to wait a while for the console to be back online.

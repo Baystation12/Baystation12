@@ -68,7 +68,7 @@
 		return 1
 
 /obj/machinery/atm/use_tool(obj/item/I, mob/living/user, list/click_params)
-	if(istype(I, /obj/item/card/id))
+	if(isid(I))
 		if (emagged)
 			to_chat(user, "[icon2html(src, user)] [SPAN_WARNING("CARD READER ERROR. This system has been compromised!")]")
 			return TRUE

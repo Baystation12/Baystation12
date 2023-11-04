@@ -66,10 +66,13 @@
 		set_state(!on)
 		return TRUE
 
-/obj/machinery/light_switch/attackby(obj/item/tool as obj, mob/user as mob)
+/obj/machinery/light_switch/use_tool(obj/item/tool, mob/living/user, list/click_params)
 	if (isScrewdriver(tool))
-		new /obj/item/frame/light_switch(user.loc, 1)
+		var/obj/item/frame/light_switch/frame = new /obj/item/frame/light_switch(user.loc, 1)
+		transfer_fingerprints_to(frame)
 		qdel(src)
+		return TRUE
+	return ..()
 
 
 /obj/machinery/light_switch/powered()

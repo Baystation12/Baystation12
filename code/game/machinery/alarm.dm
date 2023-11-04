@@ -825,7 +825,7 @@
 				update_icon()
 				return TRUE
 
-			if (istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer))
+			if (isid(W) || istype(W, /obj/item/modular_computer))
 				if(inoperable())
 					to_chat(user, "It does nothing")
 					return TRUE
@@ -871,7 +871,8 @@
 
 			if (isWrench(W))
 				to_chat(user, "You remove the fire alarm assembly from the wall!")
-				new /obj/item/frame/air_alarm(get_turf(user))
+				var/obj/item/frame/air_alarm/frame = new /obj/item/frame/air_alarm(get_turf(user))
+				transfer_fingerprints_to(frame)
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 				qdel(src)
 				return TRUE
