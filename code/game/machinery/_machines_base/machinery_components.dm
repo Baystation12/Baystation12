@@ -236,8 +236,8 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 /// Called whenever an attached component updates it's status. Override to handle updates to the machine.
 /obj/machinery/proc/component_stat_change(obj/item/stock_parts/part, old_stat, flag)
 
-/obj/machinery/attackby(obj/item/I, mob/user)
-	if(component_attackby(I, user))
+/obj/machinery/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	if (component_attackby(tool, user))
 		return TRUE
 	return ..()
 

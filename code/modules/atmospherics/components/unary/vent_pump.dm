@@ -262,43 +262,6 @@
 	. = ..()
 	toggle_input_toggle()
 
-/obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W, mob/user)
-	if(isWelder(W))
-
-		var/obj/item/weldingtool/WT = W
-
-		if(!WT.isOn())
-			to_chat(user, SPAN_NOTICE("The welding tool needs to be on to start this task."))
-			return 1
-
-		if(!WT.can_use(1,user))
-			to_chat(user, SPAN_WARNING("You need more welding fuel to complete this task."))
-			return 1
-
-		to_chat(user, SPAN_NOTICE("Now welding \the [src]."))
-		playsound(src, 'sound/items/Welder.ogg', 50, 1)
-
-		if(!do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
-			to_chat(user, SPAN_NOTICE("You must remain close to finish this task."))
-			return 1
-
-		if(!src)
-			return 1
-
-		if(!WT.remove_fuel(1, user))
-			return 1
-
-		welded = !welded
-		update_icon()
-		playsound(src, 'sound/items/Welder2.ogg', 50, 1)
-		user.visible_message(SPAN_NOTICE("\The [user] [welded ? "welds \the [src] shut" : "unwelds \the [src]"]."), \
-			SPAN_NOTICE("You [welded ? "weld \the [src] shut" : "unweld \the [src]"]."), \
-			"You hear welding.")
-		return 1
-
-	else
-		..()
-
 /obj/machinery/atmospherics/unary/vent_pump/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
@@ -308,37 +271,63 @@
 	if(welded)
 		to_chat(user, "It seems welded shut.")
 
-/obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/atmospherics/unary/vent_pump/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isWrench(W))
 		if (is_powered() && use_power)
 			to_chat(user, SPAN_WARNING("You cannot unwrench \the [src], turn it off first."))
-			return 1
+			return TRUE
 		var/turf/T = src.loc
 		if (node && node.level==ATOM_LEVEL_UNDER_TILE && isturf(T) && !T.is_plating())
 			to_chat(user, SPAN_WARNING("You must remove the plating first."))
-			return 1
+			return TRUE
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()
 		if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
 			to_chat(user, SPAN_WARNING("You cannot unwrench \the [src], it is too exerted due to internal pressure."))
-			add_fingerprint(user)
-			return 1
+			return TRUE
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("You begin to unfasten \the [src]..."))
-		if (do_after(user, (W.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT))
-			user.visible_message( \
-				SPAN_NOTICE("\The [user] unfastens \the [src]."), \
-				SPAN_NOTICE("You have unfastened \the [src]."), \
-				"You hear a ratchet.")
-			new /obj/item/pipe(loc, src)
-			qdel(src)
+		if (!do_after(user, (W.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT))
+			return TRUE
+		user.visible_message( \
+			SPAN_NOTICE("\The [user] unfastens \the [src]."), \
+			SPAN_NOTICE("You have unfastened \the [src]."), \
+			"You hear a ratchet.")
+		new /obj/item/pipe(loc, src)
+		qdel(src)
+		return TRUE
+
 	if(isMultitool(W))
 		var/datum/browser/popup = new(user, "Vent Configuration Utility", "[src] Configuration Panel", 600, 200)
 		popup.set_content(jointext(get_console_data(),"<br>"))
 		popup.open()
-		return
-	else
-		return ..()
+		return TRUE
+
+	if (isWelder(W))
+		var/obj/item/weldingtool/WT = W
+
+		if(!WT.can_use(1,user))
+			return TRUE
+
+		to_chat(user, SPAN_NOTICE("Now welding \the [src]."))
+		playsound(src, 'sound/items/Welder.ogg', 50, 1)
+
+		if(!do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT) && !WT.remove_fuel(1, user))
+			return TRUE
+
+		if(!src)
+			return TRUE
+
+		welded = !welded
+		update_icon()
+		playsound(src, 'sound/items/Welder2.ogg', 50, 1)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [welded ? "welds \the [src] shut" : "unwelds \the [src]"]."), \
+			SPAN_NOTICE("You [welded ? "weld \the [src] shut" : "unweld \the [src]"]."), \
+			"You hear welding.")
+		return TRUE
+
+	return ..()
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/get_console_data()
 	. = list()

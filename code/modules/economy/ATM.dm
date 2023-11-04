@@ -67,41 +67,42 @@
 		to_chat(user, "[icon2html(src, user)] [SPAN_WARNING("[src] beeps: \"[response]\"")]")
 		return 1
 
-/obj/machinery/atm/attackby(obj/item/I as obj, mob/user as mob)
+/obj/machinery/atm/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I, /obj/item/card/id))
-		if(emagged > 0)
-			//prevent inserting id into an emagged ATM
+		if (emagged)
 			to_chat(user, "[icon2html(src, user)] [SPAN_WARNING("CARD READER ERROR. This system has been compromised!")]")
-			return
+			return TRUE
 		if(!is_powered())
 			to_chat(user, "You try to insert your card into [src], but nothing happens.")
-			return
+			return TRUE
+		if (held_card)
+			to_chat(user, "\The [src] already contains a card in the reader.")
+			return TRUE
 
 		var/obj/item/card/id/idcard = I
-		if(!held_card)
-			if(!user.unEquip(idcard, src))
-				return
-			held_card = idcard
-			if(authenticated_account && held_card.associated_account_number != authenticated_account.account_number)
-				authenticated_account = null
-			attack_hand(user)
+		if(!user.unEquip(idcard, src))
+			return TRUE
+		held_card = idcard
+		if(authenticated_account && held_card.associated_account_number != authenticated_account.account_number)
+			authenticated_account = null
+		attack_hand(user)
+		return TRUE
 
-	else if(authenticated_account)
+	if (authenticated_account)
 		if(istype(I,/obj/item/spacecash))
 			var/obj/item/spacecash/dolla = I
-
-			//deposit the cash
 			if(authenticated_account.deposit(dolla.worth, "Credit deposit", machine_id))
 				if(prob(50))
 					playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)
 				else
 					playsound(loc, 'sound/items/polaroid2.ogg', 50, 1)
 
-				to_chat(user, SPAN_INFO("You insert [I] into [src]."))
-				src.attack_hand(user)
+				to_chat(user, SPAN_INFO("You insert \the [I] into \the [src]."))
+				attack_hand(user)
 				qdel(I)
-	else
-		..()
+				return TRUE
+	return ..()
+
 
 /obj/machinery/atm/interface_interact(mob/user)
 	interact(user)

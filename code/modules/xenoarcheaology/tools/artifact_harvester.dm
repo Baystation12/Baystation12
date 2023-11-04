@@ -19,18 +19,19 @@
 	if(!owned_scanner)
 		owned_scanner = locate(/obj/machinery/artifact_scanpad) in orange(1, src)
 
-/obj/machinery/artifact_harvester/attackby(obj/I as obj, mob/user as mob)
+/obj/machinery/artifact_harvester/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I,/obj/item/anobattery))
 		if(!inserted_battery)
 			if(!user.unEquip(I, src))
-				return
+				return TRUE
 			to_chat(user, SPAN_NOTICE("You insert [I] into [src]."))
 			src.inserted_battery = I
 			updateDialog()
+			return TRUE
 		else
 			to_chat(user, SPAN_WARNING("There is already a battery in [src]."))
-	else
-		return..()
+			return TRUE
+	return..()
 
 /obj/machinery/artifact_harvester/attack_hand(mob/user as mob)
 	..()

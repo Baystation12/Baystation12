@@ -155,12 +155,12 @@
 	GLOB.empd_event.raise_event(src, severity)
 
 
-/obj/machinery/anomaly_container/attackby(obj/item/P, mob/user)
+/obj/machinery/anomaly_container/use_tool(obj/item/P, mob/living/user, list/click_params)
 	if (istype(P, /obj/item/paper))
 		if(attached_paper)
 			to_chat(user, SPAN_NOTICE("You swap the reports on \the [src]."))
-			P.forceMove(src.loc)
-			P.add_fingerprint(usr)
+			P.forceMove(loc)
+			P.add_fingerprint(user)
 			user.drop_item(P, loc, 1)
 			P.forceMove(src)
 			user.put_in_hands(P)
@@ -170,53 +170,66 @@
 			user.drop_item(P, loc, 1)
 			attached_paper = P
 			P.forceMove(src)
+		update_icon()
+		return TRUE
 
-	else if(istype(P, /obj/item/stack/material))
+	if (istype(P, /obj/item/stack/material))
 		if (!health_dead)
 			to_chat(user, SPAN_NOTICE("\The [src] doesn't require repairs."))
-		else
-			if (contained)
-				user.visible_message(
-					SPAN_WARNING("\The [src] must be emptied before repairs can be done!")
-				)
-				return
-			var/obj/item/stack/material/M = P
-			if(istype(M, /obj/item/stack/material/glass/boron))
-				to_chat(user, SPAN_WARNING("\The [M] needs to be reinforced first."))
-			if(istype(P, /obj/item/stack/material/glass/boron_reinforced))
-				if(M.get_amount() < 10)
-					to_chat(user, SPAN_WARNING("You need at least ten sheets to repair \the [src]."))
-				else
-					user.visible_message(
-						SPAN_NOTICE("[user] begins to repair \the [src]'s containment with \the [M]."),
-						SPAN_NOTICE("You being to repair \the [src]'s containment with \the [M].")
-					)
-					if(!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
-						return
-					user.visible_message(
-						SPAN_NOTICE("[user] repairs \the [src]'s containment with \the [M]."),
-						SPAN_NOTICE("You repair \the [src]'s containment with \the [M].")
-					)
-					M.use(10)
-					revive_health()
-					icon_state = "anomaly_container"
+			return TRUE
+		if (contained)
+			user.visible_message(
+				SPAN_WARNING("\The [src] must be emptied before repairs can be done!")
+			)
+			return TRUE
 
+		var/obj/item/stack/material/M = P
+		if (!istype(M, /obj/item/stack/material/glass/boron_reinforced))
+			to_chat(user, SPAN_WARNING("You can only repair \the [src] with reinforced boron."))
+			return TRUE
+		if (M.get_amount() < 10)
+			to_chat(user, SPAN_WARNING("You need at least ten sheets to repair \the [src]."))
+			return TRUE
 
-	else if (isWrench(P))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] begins to repair \the [src]'s containment with \the [M]."),
+			SPAN_NOTICE("You being to repair \the [src]'s containment with \the [M].")
+		)
+
+		if(!do_after(user, (M.toolspeed * 4) SECONDS, src, DO_PUBLIC_UNIQUE))
+			return TRUE
+
+		user.visible_message(
+			SPAN_NOTICE("\The [user] repairs \the [src]'s containment with \the [M]."),
+			SPAN_NOTICE("You repair \the [src]'s containment with \the [M].")
+		)
+
+		M.use(10)
+		revive_health()
+		icon_state = "anomaly_container"
+		update_icon()
+		return TRUE
+
+	if (isWrench(P))
 		if (!health_dead)
-			return
+			return TRUE
+
 		user.visible_message(
 			SPAN_NOTICE("\The [user] begins to wrench apart the bolts on \the [src]..."),
 			SPAN_NOTICE("You begin to wrench apart the bolts on \the [src]...")
 		)
-		if(!do_after(user, 8 SECONDS, src, DO_PUBLIC_UNIQUE))
-			return
+
+		if(!do_after(user, (P.toolspeed * 8) SECONDS, src, DO_PUBLIC_UNIQUE))
+			return TRUE
+
 		user.visible_message(
-			SPAN_NOTICE("\The [user] carefully loosens off \the [src]'s dented panel with \the [P], freeing its contents."))
+			SPAN_NOTICE("\The [user] carefully loosens off \the [src]'s dented panel with \the [P], freeing its contents.")
+		)
+
 		playsound(loc, 'sound/items/Ratchet.ogg', 80, 1)
 		release()
-	add_fingerprint(user)
-	update_icon()
+		update_icon()
+		return TRUE
 	return ..()
 
 /obj/machinery/anomaly_container/on_update_icon()

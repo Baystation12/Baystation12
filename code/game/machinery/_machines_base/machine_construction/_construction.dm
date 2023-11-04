@@ -81,7 +81,7 @@
 /singleton/machine_construction/proc/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if(!validate_state(machine))
 		crash_with("Machine [log_info_line(machine)] violated the state assumptions of the construction state [type]!")
-		machine.attackby(I, user)
+		machine.use_tool(I, user)
 		return TRUE
 
 /singleton/machine_construction/proc/mechanics_info()
