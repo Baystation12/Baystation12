@@ -284,6 +284,9 @@ GLOBAL_LIST_EMPTY(runechat_image_cache)
 	if(!client)
 		return
 
+	if (!config.runechat_enabled)
+		return
+
 	// Doesn't want to hear
 	if(ismob(speaker) && client.get_preference_value(/datum/client_preference/runechat_mob) != GLOB.PREF_YES)
 		return

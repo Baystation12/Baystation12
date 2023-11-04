@@ -458,3 +458,6 @@ RADIATION_LOWER_LIMIT 0.15
 ## Uncomment this to bypass empty z-level checks in certain subsystems. For testing and development purposes only.
 ## Not recommended for live use.
 #RUN_EMPTY_LEVELS
+
+## Uncomment this to disable floating IC-chat text above players heads
+# DISABLE_RUNECHAT

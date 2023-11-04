@@ -430,6 +430,9 @@
 
 	var/static/deletion_starts_paused = TRUE
 
+	/// If the runechat is enabled on the server
+	var/static/runechat_enabled = TRUE
+
 
 /datum/configuration/New()
 	load_config()
@@ -845,6 +848,8 @@
 				warn_if_staff_same_ip = TRUE
 			if ("deletion_starts_paused")
 				deletion_starts_paused = TRUE
+			if ("disable_runechat")
+				runechat_enabled = FALSE
 			else
 				log_misc("Unknown setting in config/config.txt: '[name]'")
 
