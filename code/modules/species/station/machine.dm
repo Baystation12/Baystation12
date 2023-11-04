@@ -102,6 +102,12 @@
 
 	bodyfall_sound = 'sound/effects/bodyfall_machine.ogg'
 
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/MachineChangeScreen,
+		/mob/living/carbon/human/proc/MachineDisableScreen,
+		/mob/living/carbon/human/proc/MachineShowText
+	)
+
 /datum/species/machine/handle_death(mob/living/carbon/human/H)
 	..()
 	if(istype(H.wear_mask,/obj/item/clothing/mask/monitor))

@@ -158,6 +158,9 @@
 				msg += E.species.disfigure_msg(src)
 			else //Just in case they lack a species for whatever reason.
 				msg += "[SPAN_WARNING("[P.His] face is horribly mangled!")]\n"
+		var/datum/robolimb/robohead = all_robolimbs[E.model]
+		if(length(robohead.display_text) && facial_hair_style == "Text")
+			msg += "The message \"[robohead.display_text]\" is displayed on its screen.\n"
 
 	//splints
 	for(var/organ in list(BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM))
