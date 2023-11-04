@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
-/turf/space,
+/turf/space/open,
 /area/space)
 "ab" = (
 /obj/structure/disposalpipe/segment{
@@ -57,11 +57,11 @@
 "af" = (
 /obj/structure/lattice,
 /obj/structure/grille,
-/turf/space,
+/turf/space/open,
 /area/space)
 "ag" = (
 /obj/structure/lattice,
-/turf/space,
+/turf/space/open,
 /area/space)
 "ah" = (
 /obj/machinery/power/tracker,
@@ -2135,7 +2135,7 @@
 	dir = 4;
 	icon_state = "pipe-c"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "eh" = (
 /obj/machinery/power/fusion_core/mapped{
@@ -3458,7 +3458,7 @@
 /obj/shuttle_landmark/merc/deck3{
 	name = "2nd Deck, Aft"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "gY" = (
 /obj/floor_decal/industrial/warning/corner,
@@ -3506,7 +3506,7 @@
 	pixel_x = 32;
 	pixel_y = 32
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "hg" = (
 /obj/structure/catwalk,
@@ -3878,21 +3878,21 @@
 	dir = 4
 	},
 /obj/structure/lattice,
-/turf/space,
+/turf/space/open,
 /area/space)
 "ik" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 4
 	},
 /obj/structure/lattice,
-/turf/space,
+/turf/space/open,
 /area/space)
 "il" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 10
 	},
 /obj/structure/lattice,
-/turf/space,
+/turf/space/open,
 /area/space)
 "io" = (
 /obj/machinery/light/small,
@@ -4239,20 +4239,20 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
 	dir = 4
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "ji" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 4
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "jj" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 9
 	},
 /obj/structure/lattice,
-/turf/space,
+/turf/space/open,
 /area/space)
 "jk" = (
 /obj/machinery/door/airlock/external{
@@ -4313,7 +4313,7 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 8
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "jw" = (
 /obj/machinery/disposal,
@@ -4502,7 +4502,7 @@
 /obj/structure/lattice,
 /obj/structure/grille,
 /obj/structure/disposalpipe/segment,
-/turf/space,
+/turf/space/open,
 /area/space)
 "jX" = (
 /obj/item/device/radio/intercom{
@@ -4972,7 +4972,7 @@
 	dir = 4;
 	icon_state = "pipe-c"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "kW" = (
 /obj/structure/closet/emcloset,
@@ -5111,7 +5111,7 @@
 	dir = 8;
 	icon_state = "pipe-c"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "lo" = (
 /obj/structure/sign/directions/supply{
@@ -6327,7 +6327,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "oN" = (
 /obj/floor_decal/techfloor{
@@ -6411,7 +6411,7 @@
 	dir = 8;
 	icon_state = "pipe-c"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "pg" = (
 /obj/structure/cable{
@@ -6448,7 +6448,7 @@
 "pl" = (
 /obj/structure/lattice,
 /obj/structure/disposalpipe/segment,
-/turf/space,
+/turf/space/open,
 /area/space)
 "po" = (
 /obj/structure/table/rack,
@@ -6996,7 +6996,7 @@
 /obj/shuttle_landmark/torch/deck3/aquila{
 	name = "2nd Deck, Aft Port"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "qv" = (
 /obj/structure/catwalk,
@@ -9099,7 +9099,7 @@
 	pixel_x = 32;
 	pixel_y = -32
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "wc" = (
 /obj/machinery/atmospherics/binary/pump{
@@ -12682,13 +12682,13 @@
 /obj/shuttle_landmark/skipjack/deck3{
 	name = "2nd Deck, Fore Port"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "FT" = (
 /obj/shuttle_landmark/torch/deck3/exploration_shuttle{
 	name = "2nd Deck, Port"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "FV" = (
 /obj/machinery/computer/teleporter{
@@ -12706,7 +12706,7 @@
 /obj/shuttle_landmark/torch/deck3/guppy{
 	name = "2nd Deck, Fore"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "Gd" = (
 /obj/structure/cable/cyan{
@@ -13004,7 +13004,7 @@
 /area/maintenance/seconddeck/aftport)
 "Hb" = (
 /obj/shuttle_landmark/petrov/out,
-/turf/space,
+/turf/space/open,
 /area/space)
 "Hc" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green,
@@ -13988,7 +13988,7 @@
 /obj/shuttle_landmark/ert/deck3{
 	name = "2nd Deck, Fore Starboard"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "Kc" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/black{
@@ -14212,7 +14212,7 @@
 /obj/shuttle_landmark/ninja/deck3{
 	name = "2nd Deck, Aft Starboard"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "Lc" = (
 /obj/floor_decal/industrial/warning,
@@ -16657,7 +16657,7 @@
 /obj/structure/sign/solgov{
 	pixel_y = -32
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "Tg" = (
 /obj/structure/cable/green{
@@ -18246,7 +18246,7 @@
 	dir = 4;
 	pixel_x = -32
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "YQ" = (
 /turf/simulated/wall/prepainted,
@@ -18405,7 +18405,7 @@
 /obj/structure/sign/solgov{
 	pixel_y = 32
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "Zl" = (
 /obj/structure/cable/green{

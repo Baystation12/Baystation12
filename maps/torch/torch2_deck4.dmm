@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
-/turf/space,
+/turf/space/open,
 /area/space)
 "ab" = (
 /obj/structure/table/standard,
@@ -13,19 +13,19 @@
 /obj/shuttle_landmark/skipjack/deck5{
 	name = "4th Deck, Aft Starboard"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "ad" = (
 /obj/shuttle_landmark/torch/deck5/guppy{
 	name = "4th Deck, Starboard"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "ae" = (
 /obj/shuttle_landmark/merc/deck5{
 	name = "4th Deck, Fore Starboard"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "af" = (
 /turf/simulated/wall/prepainted,
@@ -41,7 +41,7 @@
 /area/maintenance/fourthdeck/aft)
 "ai" = (
 /obj/shuttle_landmark/scavver_gantry/torch/three,
-/turf/space,
+/turf/space/open,
 /area/space)
 "aj" = (
 /obj/structure/sign/warning/docking_area,
@@ -366,7 +366,7 @@
 /obj/shuttle_landmark/torch/deck5/aquila{
 	name = "4th Deck, Aft"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "bo" = (
 /turf/simulated/wall/prepainted,
@@ -528,11 +528,11 @@
 "bK" = (
 /obj/shuttle_landmark/icgnv_hound/dock,
 /obj/shuttle_landmark/sfv_arbiter/dock,
-/turf/space,
+/turf/space/open,
 /area/space)
 "bM" = (
 /obj/shuttle_landmark/merchant/out,
-/turf/space,
+/turf/space/open,
 /area/space)
 "bN" = (
 /turf/simulated/floor/plating,
@@ -7049,7 +7049,7 @@
 /area/hallway/primary/fourthdeck/aft)
 "xO" = (
 /obj/shuttle_landmark/vox_raider/dock,
-/turf/space,
+/turf/space/open,
 /area/space)
 "xP" = (
 /obj/machinery/door/airlock/glass/command{
@@ -7311,7 +7311,7 @@
 /area/quartermaster/hangar/catwalks_port)
 "yr" = (
 /obj/shuttle_landmark/merc/dock,
-/turf/space,
+/turf/space/open,
 /area/space)
 "yu" = (
 /obj/floor_decal/techfloor{
@@ -9444,7 +9444,7 @@
 /area/crew_quarters/lounge)
 "Gt" = (
 /obj/shuttle_landmark/scavver_gantry/torch,
-/turf/space,
+/turf/space/open,
 /area/space)
 "Gu" = (
 /obj/floor_decal/industrial/warning{
@@ -10536,22 +10536,22 @@
 /area/maintenance/fourthdeck/port)
 "Kn" = (
 /obj/shuttle_landmark/skipjack/dock,
-/turf/space,
+/turf/space/open,
 /area/space)
 "Ko" = (
 /obj/shuttle_landmark/ert/dock,
 /obj/shuttle_landmark/skrellscout/dock,
-/turf/space,
+/turf/space/open,
 /area/space)
 "Kp" = (
 /obj/shuttle_landmark/ert/deck5{
 	name = "4th Deck, Fore Port"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "Kq" = (
 /obj/landmark/test/space_turf,
-/turf/space,
+/turf/space/open,
 /area/space)
 "Kt" = (
 /obj/structure/railing/mapped,
@@ -12715,7 +12715,7 @@
 	pixel_y = -22;
 	req_access = list("ACCESS_MAINT")
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "QC" = (
 /obj/floor_decal/corner/brown{
@@ -14988,7 +14988,7 @@
 /area/maintenance/fourthdeck/port)
 "WB" = (
 /obj/shuttle_landmark/admin/out,
-/turf/space,
+/turf/space/open,
 /area/space)
 "WC" = (
 /obj/floor_decal/corner/mauve{

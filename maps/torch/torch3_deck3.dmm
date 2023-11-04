@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
-/turf/space,
+/turf/space/open,
 /area/space)
 "ab" = (
 /obj/structure/cable{
@@ -267,7 +267,7 @@
 "aV" = (
 /obj/structure/lattice,
 /obj/structure/grille,
-/turf/space,
+/turf/space/open,
 /area/space)
 "aW" = (
 /turf/simulated/wall/r_wall/hull,
@@ -295,7 +295,7 @@
 /area/maintenance/thirddeck/starboard)
 "bb" = (
 /obj/structure/lattice,
-/turf/space,
+/turf/space/open,
 /area/space)
 "bc" = (
 /obj/floor_decal/corner/yellow{
@@ -2435,7 +2435,7 @@
 "fI" = (
 /obj/structure/grille,
 /obj/structure/lattice,
-/turf/space,
+/turf/space/open,
 /area/space)
 "fJ" = (
 /turf/simulated/floor/wood/walnut,
@@ -2872,7 +2872,7 @@
 /obj/shuttle_landmark/ninja/deck4{
 	name = "3rd Deck, Aft"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "gF" = (
 /obj/structure/cable/green{
@@ -8888,7 +8888,7 @@
 /obj/shuttle_landmark/torch/deck4/exploration_shuttle{
 	name = "3rd Deck, Fore Port"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "uP" = (
 /obj/floor_decal/corner/grey/diagonal{
@@ -15415,7 +15415,7 @@
 /obj/shuttle_landmark/skipjack/deck4{
 	name = "3rd Deck, Aft Port"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "LO" = (
 /obj/machinery/sparker{
@@ -15554,7 +15554,7 @@
 /obj/shuttle_landmark/ert/deck4{
 	name = "3rd Deck, Starboard"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "Mc" = (
 /obj/structure/table/woodentable/walnut,
@@ -15912,7 +15912,7 @@
 /obj/shuttle_landmark/merc/deck4{
 	name = "3rd Deck, Port"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "Nc" = (
 /obj/floor_decal/industrial/warning/corner{
@@ -16265,7 +16265,7 @@
 /obj/shuttle_landmark/torch/deck4/aquila{
 	name = "3rd Deck, Fore"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "Oc" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{

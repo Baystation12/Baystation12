@@ -1,24 +1,24 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aaa" = (
-/turf/space,
+/turf/space/open,
 /area/space)
 "aab" = (
 /obj/shuttle_landmark/merc/deck2{
 	name = "1st Deck, Aft Starboard"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "aac" = (
 /obj/shuttle_landmark/torch/deck2/exploration_shuttle{
 	name = "1st Deck, Fore Starboard"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "aad" = (
 /obj/shuttle_landmark/torch/deck2/guppy{
 	name = "1st Deck, Aft"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "aae" = (
 /obj/structure/closet/firecloset,
@@ -125,7 +125,7 @@
 /obj/shuttle_landmark/skipjack/deck2{
 	name = "1st Deck, Fore"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "aas" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
@@ -195,7 +195,7 @@
 /obj/structure/disposaloutlet{
 	dir = 4
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "aaC" = (
 /obj/machinery/atmospherics/valve{
@@ -871,7 +871,7 @@
 "abM" = (
 /obj/structure/lattice,
 /obj/structure/grille,
-/turf/space,
+/turf/space/open,
 /area/space)
 "abN" = (
 /turf/simulated/wall/r_wall/hull,
@@ -1839,7 +1839,7 @@
 /area/maintenance/firstdeck/aftstarboard)
 "adA" = (
 /obj/structure/lattice,
-/turf/space,
+/turf/space/open,
 /area/space)
 "adB" = (
 /obj/floor_decal/corner/paleblue/three_quarters{
@@ -8263,7 +8263,7 @@
 /obj/shuttle_landmark/ert/deck2{
 	name = "1st Deck, Fore Port"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "aAb" = (
 /obj/structure/bed/chair/padded/red{
@@ -14006,13 +14006,13 @@
 /obj/shuttle_landmark/ninja/deck2{
 	name = "1st Deck, Aft Port"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "aWo" = (
 /obj/shuttle_landmark/torch/deck2/aquila{
 	name = "1st Deck, Port"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "aWQ" = (
 /obj/structure/closet/secure_closet/guncabinet/sidearm,
@@ -14028,7 +14028,7 @@
 /obj/structure/sign/solgov{
 	pixel_y = -32
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "aXh" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
@@ -14437,7 +14437,7 @@
 /obj/structure/sign/solgov{
 	pixel_y = 32
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "bBm" = (
 /obj/floor_decal/industrial/warning/fulltile,

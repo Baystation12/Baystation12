@@ -17,7 +17,8 @@
 	. = ..()
 	update_starlight()
 
-	appearance = SSskybox.space_appearance_cache[(((x + y) ^ ~(x * y) + z) % 25) + 1]
+	if (z_eventually_space)
+		appearance = SSskybox.space_appearance_cache[(((x + y) ^ ~(x * y) + z) % 25) + 1]
 
 	if(!HasBelow(z))
 		return
@@ -57,7 +58,7 @@
 
 /turf/space/proc/remove_starlight()
 	if(starlit)
-		replace_ambient_light(SSskybox.background_color, null, config.starlight, 0)
+		replace_ambient_light(SSskybox.starlight_color, null, config.starlight, 0)
 		starlit = FALSE
 
 /turf/space/proc/update_starlight()
@@ -68,8 +69,7 @@
 	for (var/turf/T in RANGE_TURFS(src, 1))
 		if (!isloc(T.loc) || !TURF_IS_DYNAMICALLY_LIT_UNSAFE(T))
 			continue
-
-		add_ambient_light(SSskybox.background_color, config.starlight)
+		add_ambient_light(SSskybox.starlight_color, config.starlight)
 		starlit = TRUE
 		return
 
@@ -131,3 +131,24 @@
 /turf/space/bluespace
 	name = "bluespace"
 	icon_state = "bluespace"
+
+
+// Turfs for the non-bottom layers of multi-z space areas
+/turf/space/open
+	icon_state = ""
+	z_flags = ZM_MIMIC_DEFAULTS | ZM_MIMIC_OVERWRITE | ZM_MIMIC_NO_AO
+	z_eventually_space = null
+
+
+/turf/space/open/Initialize()
+	for (var/level in GetBelowZlevels(z))
+		var/turf/below = locate(x, y, level)
+		if (!istype(below, /turf/space))
+			z_eventually_space = FALSE
+			break
+		if (below.z_eventually_space != null)
+			z_eventually_space = below.z_eventually_space
+			break
+	if (z_eventually_space == null)
+		z_eventually_space = TRUE
+	return ..()

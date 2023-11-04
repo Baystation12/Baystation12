@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
-/turf/space,
+/turf/space/open,
 /area/space)
 "ab" = (
 /obj/wallframe_spawn/reinforced/polarized{
@@ -28,7 +28,7 @@
 /area/space)
 "ae" = (
 /obj/structure/lattice,
-/turf/space,
+/turf/space/open,
 /area/space)
 "af" = (
 /turf/simulated/wall/r_wall/hull,
@@ -3382,7 +3382,7 @@
 /obj/shuttle_landmark/torch/deck1/exploration_shuttle{
 	name = "B-Deck, Fore Port"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "gm" = (
 /turf/unsimulated/mask,
@@ -4680,7 +4680,7 @@
 "kE" = (
 /obj/structure/lattice,
 /obj/machinery/nav_light/starboard,
-/turf/space,
+/turf/space/open,
 /area/space)
 "kH" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
@@ -6161,7 +6161,7 @@
 "pe" = (
 /obj/structure/lattice,
 /obj/machinery/nav_light,
-/turf/space,
+/turf/space/open,
 /area/space)
 "pf" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
@@ -6731,7 +6731,7 @@
 "qN" = (
 /obj/structure/lattice,
 /obj/machinery/nav_light/port,
-/turf/space,
+/turf/space/open,
 /area/space)
 "qO" = (
 /turf/simulated/wall/r_wall/prepainted,
@@ -9403,7 +9403,7 @@
 /obj/landmark/map_data{
 	height = 6
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "xQ" = (
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
@@ -9623,13 +9623,13 @@
 /obj/shuttle_landmark/skipjack/deck1{
 	name = "B-Deck, Port"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "yB" = (
 /obj/shuttle_landmark/torch/deck1/guppy{
 	name = "B-Deck, Aft Starboard"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "yD" = (
 /turf/simulated/floor/tiled/dark,
@@ -9706,7 +9706,7 @@
 /obj/shuttle_landmark/merc/deck1{
 	name = "B-Deck, Aft"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "zf" = (
 /obj/structure/bed/chair/comfy/blue{
@@ -9927,7 +9927,7 @@
 /obj/shuttle_landmark/ninja/deck1{
 	name = "B-Deck, Aft Port"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "Ac" = (
 /obj/machinery/optable,
@@ -10420,7 +10420,7 @@
 /obj/shuttle_landmark/torch/deck1/aquila{
 	name = "B-Deck, Fore Starboard"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "Cc" = (
 /obj/structure/closet/medical_wall{
@@ -14763,7 +14763,7 @@
 /obj/shuttle_landmark/ert/deck1{
 	name = "B-Deck, Fore"
 	},
-/turf/space,
+/turf/space/open,
 /area/space)
 "UW" = (
 /obj/paint/red,
