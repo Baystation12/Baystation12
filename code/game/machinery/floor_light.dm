@@ -37,32 +37,38 @@ var/global/list/floor_light_cache = list()
 	use_power = POWER_USE_ACTIVE
 
 
-/obj/machinery/floor_light/attackby(obj/item/W, mob/user)
-	if(isScrewdriver(W))
+/obj/machinery/floor_light/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if (isScrewdriver(W))
 		anchored = !anchored
 		if(use_power)
 			update_use_power(POWER_USE_OFF)
 			queue_icon_update()
 		visible_message(SPAN_NOTICE("\The [user] has [anchored ? "attached" : "detached"] \the [src]."))
-	else if(isWelder(W) && (health_damaged() || MACHINE_IS_BROKEN(src)))
+		return TRUE
+
+	if (isWelder(W) && (health_damaged() || MACHINE_IS_BROKEN(src)))
 		var/obj/item/weldingtool/WT = W
 		if(!WT.can_use(1, user))
-			return
+			return TRUE
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 		if(!do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
-			return
+			return TRUE
 		if(!src || !WT.remove_fuel(1, user))
-			return
+			return TRUE
 		visible_message(SPAN_NOTICE("\The [user] has repaired \the [src]."))
 		set_broken(FALSE)
 		revive_health()
-	else if(isWrench(W))
+		return TRUE
+
+	if (isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		to_chat(user, SPAN_NOTICE("You dismantle the floor light."))
 		new /obj/item/stack/material/steel(src.loc, 1)
 		new /obj/item/stack/material/glass(src.loc, 1)
 		qdel(src)
-	return
+		return TRUE
+
+	return ..()
 
 /obj/machinery/floor_light/on_death()
 	..()

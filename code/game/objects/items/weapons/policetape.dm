@@ -286,18 +286,17 @@ var/global/list/tape_roll_applications = list()
 		to_chat(usr, SPAN_NOTICE("You finish placing \the [src]."))
 		return
 
-/obj/item/taperoll/use_after(atom/A, mob/living/user, click_parameters)
+/obj/item/taperoll/use_before(atom/A, mob/living/user, click_parameters)
 	if (istype(A, /obj/machinery/door/airlock))
 		var/turf/T = get_turf(A)
 		var/obj/item/tape/P = new tape_type(T)
+		P.add_fingerprint(user)
 		P.update_icon()
 		P.layer = ABOVE_DOOR_LAYER
-		if (user)
-			to_chat(user, SPAN_NOTICE("You finish placing \the [src]."))
-			P.add_fingerprint(user)
+		to_chat(user, SPAN_NOTICE("You finish placing \the [src]."))
 		return TRUE
 
-	if (istype(A, /turf/simulated/floor) ||istype(A, /turf/unsimulated/floor))
+	if (istype(A, /turf/simulated/floor) || istype(A, /turf/unsimulated/floor))
 		var/turf/F = A
 		var/direction = user.loc == F ? user.dir : turn(user.dir, 180)
 		var/hazard_overlay = GLOB.hazard_overlays["[direction]"]
@@ -313,6 +312,8 @@ var/global/list/tape_roll_applications = list()
 			F.AddOverlays(hazard_overlay)
 			tape_roll_applications[F] |= direction
 		return TRUE
+
+	return ..()
 
 /obj/item/tape/proc/crumple()
 	if(!crumpled)

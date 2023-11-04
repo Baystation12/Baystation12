@@ -992,6 +992,9 @@ FIRE ALARM
 	..()
 
 /obj/machinery/firealarm/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if ((. = ..()))
+		return
+
 	if(isScrewdriver(W) && buildstage == 2)
 		wiresexposed = !wiresexposed
 		update_icon()
@@ -1059,7 +1062,7 @@ FIRE ALARM
 
 	to_chat(user, SPAN_WARNING("You fumble with \the [W] and trigger the alarm!"))
 	alarm()
-	return ..()
+	return TRUE
 
 /obj/machinery/firealarm/Process()//Note: this processing was mostly phased out due to other code, and only runs when needed
 	if(inoperable())

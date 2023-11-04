@@ -192,10 +192,9 @@
 	if(needs_to_close)
 		addtimer(new Callback(src, .proc/attempt_autoclose), 10 SECONDS) //Just in case a fire alarm is turned off while the firedoor is going through an autoclose cycle
 
-/obj/machinery/door/firedoor/attackby(obj/item/C, mob/user)
-	add_fingerprint(user, 0, C)
+/obj/machinery/door/firedoor/use_tool(obj/item/C, mob/living/user, list/click_params)
 	if(operating)
-		return //Already doing something.
+		return TRUE
 
 	if(isWelder(C) && !repairing)
 		var/obj/item/weldingtool/W = C
@@ -208,7 +207,7 @@
 			playsound(loc, 'sound/items/Welder.ogg', 50, TRUE)
 			if(do_after(user, (C.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
 				if(!W.remove_fuel(2, user))
-					return
+					return TRUE
 				blocked = !blocked
 				user.visible_message(
 					SPAN_DANGER("\The [user] [blocked ? "welds \the [src] shut" : "cuts open \the [src]"]."),
@@ -217,7 +216,7 @@
 				)
 				playsound(loc, 'sound/items/Welder2.ogg', 50, TRUE)
 				update_icon()
-				return
+			return TRUE
 
 	if(density && isScrewdriver(C))
 		hatch_open = !hatch_open
@@ -228,7 +227,7 @@
 		)
 		playsound(loc, 'sound/items/Screwdriver.ogg', 25, TRUE)
 		update_icon()
-		return
+		return TRUE
 
 	if(blocked && isCrowbar(C) && !repairing)
 		if(!hatch_open)
@@ -249,15 +248,15 @@
 						SPAN_ITALIC("You hear metal coming loose and clattering.")
 					)
 					deconstruct(user)
-		return
+		return TRUE
 
 	if(blocked)
 		to_chat(user, SPAN_DANGER("\The [src] is welded shut!"))
-		return
+		return TRUE
 
 	if(isCrowbar(C) || istype(C,/obj/item/material/twohanded/fireaxe))
 		if(operating)
-			return
+			return TRUE
 
 		if(blocked && isCrowbar(C))
 			user.visible_message(
@@ -265,12 +264,13 @@
 				SPAN_WARNING("You try to pry \the [src] [density ? "open" : "closed"], but it's been welded in place!"),
 				SPAN_WARNING("You hear the unhappy sound of metal straining and groaning.")
 			)
-			return
+			return TRUE
 
 		if(istype(C,/obj/item/material/twohanded/fireaxe))
 			var/obj/item/material/twohanded/fireaxe/F = C
 			if(!F.wielded)
-				return
+				to_chat(user, SPAN_WARNING("You need to wield \the [C]!"))
+				return TRUE
 
 		user.visible_message(
 			SPAN_WARNING("\The [user] wedges \the [C] into \the [src] and starts forcing it [density ? "open" : "closed"]!"),
@@ -301,7 +301,8 @@
 				spawn(0)
 					locked = FALSE
 					close()
-			return
+		return TRUE
+
 	return ..()
 
 /obj/machinery/door/firedoor/deconstruct(mob/user, moved = FALSE)

@@ -264,9 +264,9 @@
 			to_chat(user, SPAN_NOTICE("\The [tool] was synchronized with the [transport.id_tag] network."))
 			designator.network = transport.id_tag
 			playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1, -3)
+		update_icon()
 		return TRUE
 
-	update_icon()
 	return ..()
 
 /obj/machinery/drone_pad/RefreshParts()
