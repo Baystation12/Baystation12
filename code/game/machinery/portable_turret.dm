@@ -692,10 +692,7 @@ var/global/list/turret_icons
 
 			else if(isWelder(I))
 				var/obj/item/weldingtool/WT = I
-				if(!WT.isOn())
-					return
-				if(WT.get_fuel() < 5) //uses up 5 fuel.
-					to_chat(user, SPAN_NOTICE("You need more fuel to complete this task."))
+				if(!WT.can_use(5, user))
 					return
 
 				playsound(loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
@@ -771,9 +768,8 @@ var/global/list/turret_icons
 		if(7)
 			if(isWelder(I))
 				var/obj/item/weldingtool/WT = I
-				if(!WT.isOn()) return
-				if(WT.get_fuel() < 5)
-					to_chat(user, SPAN_NOTICE("You need more fuel to complete this task."))
+				if(!WT.can_use(5, user))
+					return
 
 				playsound(loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
 				if(do_after(user, (I.toolspeed * 3) SECONDS, src, DO_REPAIR_CONSTRUCT))

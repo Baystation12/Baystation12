@@ -85,12 +85,12 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 				to_chat(user, "Eject the items first!")
 				return
 			var/obj/item/weldingtool/W = I
-			if(W.remove_fuel(0,user))
+			if(W.can_use(1,user))
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				to_chat(user, "You start slicing the floorweld off the disposal unit.")
 
 				if(do_after(user, (I.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
-					if(!src || !W.isOn()) return
+					if(!src || !W.remove_fuel(1, user)) return
 					to_chat(user, "You sliced the floorweld off the disposal unit.")
 					var/obj/structure/disposalconstruct/machine/C = new (loc, src)
 					src.transfer_fingerprints_to(C)

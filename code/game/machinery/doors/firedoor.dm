@@ -199,7 +199,7 @@
 
 	if(isWelder(C) && !repairing)
 		var/obj/item/weldingtool/W = C
-		if(W.remove_fuel(0, user))
+		if(W.can_use(2, user))
 			user.visible_message(
 				SPAN_WARNING("\The [user] starts [!blocked ? "welding \the [src] shut" : "cutting open \the [src]"]."),
 				SPAN_DANGER("You start [!blocked ? "welding \the [src] closed" : "cutting open \the [src]"]."),
@@ -207,7 +207,7 @@
 			)
 			playsound(loc, 'sound/items/Welder.ogg', 50, TRUE)
 			if(do_after(user, (C.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
-				if(!W.isOn())
+				if(!W.remove_fuel(2, user))
 					return
 				blocked = !blocked
 				user.visible_message(

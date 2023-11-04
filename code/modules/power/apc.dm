@@ -551,8 +551,7 @@
 			to_chat(user, SPAN_WARNING("The wire connection is in the way."))
 			return TRUE
 		var/obj/item/weldingtool/WT = W
-		if (WT.get_fuel() < 3)
-			to_chat(user, SPAN_WARNING("You need more welding fuel to complete this task."))
+		if (WT.can_use(3, user))
 			return
 		user.visible_message(SPAN_WARNING("\The [user] begins to weld \the [src]."), \
 							"You start welding the APC frame...", \

@@ -114,13 +114,13 @@
 			to_chat(user, SPAN_NOTICE("\The [src] does not require repairs."))
 			return TRUE
 		var/obj/item/weldingtool/welder = item
-		if (welder.remove_fuel(1, user))
+		if (welder.can_use(1, user))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			user.visible_message(
 				SPAN_ITALIC("\The [user] begins repairing damage on \a [src]."),
 				SPAN_ITALIC("You begin repairing damage on the [src].")
 			)
-			if (do_after(user, (item.toolspeed * 3) SECONDS, airlock, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+			if (do_after(user, (item.toolspeed * 3) SECONDS, airlock, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && welder.remove_fuel(1, user))
 				user.visible_message(
 					SPAN_ITALIC("\The [user] repairs damage on \a [src]."),
 					SPAN_ITALIC("You repair damage on the [src].")

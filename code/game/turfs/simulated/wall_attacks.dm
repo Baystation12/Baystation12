@@ -178,7 +178,7 @@
 	if(locate(/obj/overlay/wallrot) in src)
 		if(isWelder(W))
 			var/obj/item/weldingtool/WT = W
-			if( WT.remove_fuel(0,user) )
+			if( WT.remove_fuel(1,user) )
 				to_chat(user, SPAN_NOTICE("You burn away the fungi with \the [WT]."))
 				playsound(src, 'sound/items/Welder.ogg', 10, 1)
 				for(var/obj/overlay/wallrot/WR in src)
@@ -193,7 +193,7 @@
 	if(thermite)
 		if(isWelder(W))
 			var/obj/item/weldingtool/WT = W
-			if( WT.remove_fuel(0,user) )
+			if( WT.remove_fuel(1,user) )
 				thermitemelt(user)
 				return
 
@@ -219,10 +219,10 @@
 
 		var/obj/item/weldingtool/WT = W
 
-		if(WT.remove_fuel(0,user))
+		if(WT.can_use(2, user))
 			to_chat(user, SPAN_NOTICE("You start repairing the damage to [src]."))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, max(5, damage / 5), src, DO_REPAIR_CONSTRUCT) && WT && WT.isOn())
+			if(do_after(user, max(5, damage / 5), src, DO_REPAIR_CONSTRUCT) && WT.remove_fuel(2, user))
 				to_chat(user, SPAN_NOTICE("You finish repairing the damage to [src]."))
 				restore_health(damage)
 		return
@@ -237,7 +237,7 @@
 
 		if(istype(W,/obj/item/weldingtool))
 			var/obj/item/weldingtool/WT = W
-			if(!WT.remove_fuel(0,user))
+			if(!WT.remove_fuel(1,user))
 				return
 			dismantle_verb = "cutting"
 			dismantle_sound = 'sound/items/Welder.ogg'
@@ -322,7 +322,7 @@
 				var/strict_timer_flags = FALSE
 				if(istype(W,/obj/item/weldingtool))
 					var/obj/item/weldingtool/WT = W
-					if(WT.remove_fuel(0,user))
+					if(WT.remove_fuel(1,user))
 						cut_cover=1
 					else
 						return
@@ -367,7 +367,7 @@
 				var/strict_timer_flags = FALSE
 				if(istype(W, /obj/item/weldingtool))
 					var/obj/item/weldingtool/WT = W
-					if( WT.remove_fuel(0,user) )
+					if(WT.remove_fuel(1,user))
 						cut_cover=1
 					else
 						return

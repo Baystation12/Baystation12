@@ -157,11 +157,11 @@
 	if(busy)
 		return 0
 
-	if(WT.remove_fuel(0, user))
+	if(WT.can_use(1, user))
 		to_chat(user, SPAN_NOTICE("You start to weld \the [src].."))
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 		busy = 1
-		if(do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) && WT.isOn())
+		if(do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) && WT.remove_fuel(1, user))
 			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 			busy = 0
 			return 1

@@ -129,25 +129,25 @@ field_generator power level display
 				to_chat(user, SPAN_WARNING("The [src.name] needs to be wrenched to the floor."))
 				return
 			if(1)
-				if (WT.remove_fuel(0,user))
+				if (WT.can_use(1,user))
 					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 					user.visible_message("[user.name] starts to weld the [src.name] to the floor.", \
 						"You start to weld the [src] to the floor.", \
 						"You hear welding")
 					if (do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
-						if(!src || !WT.isOn()) return
+						if(!src || !WT.remove_fuel(1, user)) return
 						state = 2
 						to_chat(user, "You weld the field generator to the floor.")
 				else
 					return
 			if(2)
-				if (WT.remove_fuel(0,user))
+				if (WT.can_use(1,user))
 					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 					user.visible_message("[user.name] starts to cut the [src.name] free from the floor.", \
 						"You start to cut the [src] free from the floor.", \
 						"You hear welding")
 					if (do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
-						if(!src || !WT.isOn()) return
+						if(!src || !WT.remove_fuel(1, user)) return
 						state = 1
 						to_chat(user, "You cut the [src] free from the floor.")
 				else
