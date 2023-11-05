@@ -46,9 +46,8 @@ var/global/bomb_set
 			addtimer(new Callback(src, .proc/explode), 0)
 		SSnano.update_uis(src)
 
-/obj/machinery/nuclearbomb/attackby(obj/item/O as obj, mob/user as mob, params)
+/obj/machinery/nuclearbomb/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(isScrewdriver(O))
-		add_fingerprint(user)
 		ClearOverlays()
 		if(auth)
 			if(panel_open == 0)
@@ -68,7 +67,7 @@ var/global/bomb_set
 				to_chat(user, "You screw the control panel of \the [src] back on.")
 				playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 			flick("lock", src)
-		return
+		return TRUE
 
 	if(panel_open && isMultitool(O) || isWirecutter(O))
 		return attack_hand(user)
@@ -76,9 +75,8 @@ var/global/bomb_set
 	if(extended)
 		if(istype(O, /obj/item/disk/nuclear))
 			if(!user.unEquip(O, src))
-				return
+				return TRUE
 			auth = O
-			add_fingerprint(user)
 			return attack_hand(user)
 
 	if(anchored)
@@ -87,57 +85,86 @@ var/global/bomb_set
 				if(isWelder(O))
 					var/obj/item/weldingtool/WT = O
 					if(!WT.can_use(5, user))
-						return
+						return TRUE
 
-					user.visible_message("[user] starts cutting loose the anchoring bolt covers on [src].", "You start cutting loose the anchoring bolt covers with [O]...")
+					user.visible_message(
+						SPAN_NOTICE("\The [user] starts cutting loose the anchoring bolt covers on \the [src]."),
+						SPAN_NOTICE("You start cutting loose the anchoring bolt covers on \the [src] with \the [O].")
+					)
+
 					if(do_after(user, (O.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT))
-						if(!src || !user || !WT.remove_fuel(5, user)) return
-						user.visible_message("\The [user] cuts through the bolt covers on \the [src].", "You cut through the bolt cover.")
+						if(!src || !user || !WT.remove_fuel(5, user)) return TRUE
+						user.visible_message(
+							SPAN_NOTICE("\The [user] cuts through the bolt covers on \the [src]."),
+							SPAN_NOTICE("You cut through the bolt covers on \the [src].")
+						)
 						removal_stage = 1
-				return
+					return TRUE
 
 			if(1)
 				if(isCrowbar(O))
-					user.visible_message("[user] starts forcing open the bolt covers on [src].", "You start forcing open the anchoring bolt covers with [O]...")
+					user.visible_message(
+						SPAN_NOTICE("\The [user] starts forcing open the bolt covers on \the [src]."),
+						SPAN_NOTICE("You start forcing open the anchoring bolt covers on \the [src] with \the [O].")
+					)
 
 					if(do_after(user, (O.toolspeed * 1.5) SECONDS, src, DO_REPAIR_CONSTRUCT))
-						if(!src || !user) return
-						user.visible_message("\The [user] forces open the bolt covers on \the [src].", "You force open the bolt covers.")
+						if(!src || !user) return TRUE
+						user.visible_message(
+							SPAN_NOTICE("\The [user] forces open the bolt covers on \the [src]."),
+							SPAN_NOTICE("You force open the bolt covers.")
+						)
 						removal_stage = 2
-				return
+					return TRUE
 
 			if(2)
 				if(isWelder(O))
 					var/obj/item/weldingtool/WT = O
 					if(!WT.can_use(5, user))
-						return
+						return TRUE
 
-					user.visible_message("[user] starts cutting apart the anchoring system sealant on [src].", "You start cutting apart the anchoring system's sealant with [O]...")
+					user.visible_message(
+						SPAN_NOTICE("\The [user] starts cutting apart the anchoring system sealant on \the [src]."),
+						SPAN_NOTICE("You start cutting apart the anchoring system's sealant on \the [src] with \the [O].")
+					)
+
 					if(do_after(user, (O.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT))
-						if(!src || !user || !WT.remove_fuel(5, user)) return
-						user.visible_message("\The [user] cuts apart the anchoring system sealant on \the [src].", "You cut apart the anchoring system's sealant.")
+						if(!src || !user || !WT.remove_fuel(5, user)) return TRUE
+						user.visible_message(
+							SPAN_NOTICE("\The [user] cuts apart the anchoring system sealant on \the [src]."),
+							SPAN_NOTICE("You cut apart the anchoring system's sealant.")
+						)
 						removal_stage = 3
-				return
+					return TRUE
 
 			if(3)
 				if(isWrench(O))
-					user.visible_message("[user] begins unwrenching the anchoring bolts on [src].", "You begin unwrenching the anchoring bolts...")
+					user.visible_message(
+						SPAN_NOTICE("\The [user] begins unwrenching the anchoring bolts on \the [src]."),
+						SPAN_NOTICE("You begin unwrenching the anchoring bolts on \the [src].")
+					)
 					if(do_after(user, (O.toolspeed * 5) SECONDS, src, DO_REPAIR_CONSTRUCT))
-						if(!src || !user) return
+						if(!src || !user) return TRUE
 						user.visible_message("[user] unwrenches the anchoring bolts on [src].", "You unwrench the anchoring bolts.")
 						removal_stage = 4
-				return
+					return TRUE
 
 			if(4)
 				if(isCrowbar(O))
-					user.visible_message("[user] begins lifting [src] off of the anchors.", "You begin lifting the device off the anchors...")
+					user.visible_message(
+						SPAN_NOTICE("\The [user] begins lifting \the [src] off of its anchors."),
+						SPAN_NOTICE("You begin lifting \the [src] off its anchors.")
+						)
 					if(do_after(user, (O.toolspeed * 8) SECONDS, src, DO_REPAIR_CONSTRUCT))
-						if(!src || !user) return
-						user.visible_message("\The [user] crowbars \the [src] off of the anchors. It can now be moved.", "You jam the crowbar under the nuclear device and lift it off its anchors. You can now move it!")
+						if(!src || !user) return TRUE
+						user.visible_message(
+							SPAN_NOTICE("\The [user] crowbars \the [src] off of the anchors. It can now be moved."),
+							SPAN_NOTICE("You jam the crowbar under \the [src] and lift it off its anchors. You can now move it!")
+						)
 						anchored = FALSE
 						removal_stage = 5
-				return
-	..()
+					return TRUE
+	return ..()
 
 /obj/machinery/nuclearbomb/physical_attack_hand(mob/user)
 	if(!extended && deployable)
@@ -470,11 +497,6 @@ var/global/bomb_set
 /obj/machinery/nuclearbomb/station/LateInitialize(mapload, ...)
 	// Relies on turfs to have their `flooring` var set, which is done during init.
 	queue_icon_update()
-
-
-/obj/machinery/nuclearbomb/station/attackby(obj/item/O as obj, mob/user as mob)
-	if(isWrench(O))
-		return
 
 /obj/machinery/nuclearbomb/station/Topic(href, href_list)
 	if((. = ..()))

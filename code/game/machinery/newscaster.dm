@@ -117,6 +117,10 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 	desc = "A standard newsfeed handler. All the news you absolutely have no use for, in one place!"
 	icon = 'icons/obj/machines/terminals.dmi'
 	icon_state = "newscaster_normal"
+	health_max = 50
+	health_min_damage = 10
+	use_weapon_hitsound = FALSE
+	damage_hitsound = 'sound/effects/Glassbr3.ogg'
 	//var/list/datum/feed_channel/channel_list = list() //This list will contain the names of the feed channels. Each name will refer to a data region where the messages of the feed channels are stored.
 	var/screen = 0
 		// 0 = welcome screen - main menu
@@ -150,7 +154,6 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 	var/datum/news_photo/photo_data = null
 	var/channel_name = ""; //the feed channel which will be receiving the feed, or being created
 	var/c_locked=0;        //Will our new channel be locked to public submissions?
-	var/hitstaken = 0      //Death at 3 hits from an item with force>=15
 	var/datum/feed_channel/viewing_channel = null
 	var/datum/feed_network/connected_group
 	light_range = 0
@@ -206,7 +209,16 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 	if(alert) //new message alert overlay
 		AddOverlays("newscaster_alert")
 
-	if(hitstaken > 0) //Cosmetic damage overlay
+	var/health = get_current_health()
+	if(health < health_max) //Cosmetic damage overlay
+		var/hitstaken
+		switch ((health/health_max) * 100)
+			if (0 to 33)
+				hitstaken = 3
+			if (34 to 66)
+				hitstaken = 2
+			if (67 to 100)
+				hitstaken = 1
 		AddOverlays("crack[hitstaken]")
 
 	icon_state = "newscaster_normal"
@@ -728,25 +740,15 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 
 
 
-/obj/machinery/newscaster/attackby(obj/item/I, mob/user)
-	if (user.a_intent == I_HURT)
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if (I.force < 15)
-			visible_message(SPAN_WARNING("\The [user] uselessly bops \the [src] with \an [I]."))
-		else if (MACHINE_IS_BROKEN(src))
-			visible_message(SPAN_WARNING("\The [user] further abuses the shattered [name]."))
-			playsound(src, 'sound/effects/hit_on_shattered_glass.ogg', 100, 1)
-		else if (++hitstaken < 3)
-			visible_message(SPAN_DANGER("\The [user] slams \the [src] with \an [I], cracking it!"))
-			playsound(src, 'sound/effects/Glassbr3.ogg', 100, 1)
-		else
-			visible_message(SPAN_DANGER("\The [user] smashes \the [src] with \an [I]!"))
-			playsound(src, 'sound/effects/Glasshit.ogg', 100, 1)
-			set_broken(TRUE)
-			update_icon()
+/obj/machinery/newscaster/use_weapon(obj/item/weapon, mob/living/user, list/click_params)
+	if (MACHINE_IS_BROKEN(src))
+		visible_message(SPAN_WARNING("\The [user] further abuses the shattered [name]."))
+		playsound(src, 'sound/effects/hit_on_shattered_glass.ogg', 100, 1)
 		return TRUE
-	else
-		. = ..()
+
+	if ((. = ..()))
+		queue_icon_update()
+		return
 
 /datum/news_photo
 	var/is_synth = 0

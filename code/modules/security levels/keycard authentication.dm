@@ -23,11 +23,12 @@
 	to_chat(user, SPAN_WARNING("A firewall prevents you from interfacing with this device!"))
 	return
 
-/obj/machinery/keycard_auth/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/keycard_auth/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(inoperable())
 		to_chat(user, "This device is not powered.")
-		return
-	if(istype(W,/obj/item/card/id))
+		return TRUE
+
+	if (isid(W))
 		var/obj/item/card/id/ID = W
 		if(access_keycard_auth in ID.access)
 			if(active == 1)
@@ -40,6 +41,9 @@
 			else if(screen == 2)
 				event_triggered_by = usr
 				broadcast_request() //This is the device making the initial event request. It needs to broadcast to other devices
+		return TRUE
+
+	return ..()
 
 //icon_state gets set everwhere besides here, that needs to be fixed sometime
 /obj/machinery/keycard_auth/on_update_icon()

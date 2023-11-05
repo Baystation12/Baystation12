@@ -269,8 +269,10 @@
 		ui.set_auto_update(1)
 
 
-/obj/machinery/lapvend/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/lapvend/use_tool(obj/item/W, mob/living/user, list/click_params)
 	var/obj/item/card/id/I = W.GetIdCard()
+	if (!I)
+		return ..()
 	// Awaiting payment state
 	if(state == 2)
 		if(process_payment(I,W))
@@ -293,8 +295,8 @@
 				fabricated_tablet = null
 			ping("Enjoy your new product!")
 			state = 3
-			return 1
-		return 0
+			return TRUE
+
 	return ..()
 
 

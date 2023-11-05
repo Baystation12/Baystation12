@@ -263,7 +263,7 @@
 	name = "mining drill brace"
 	desc = "A machinery brace for an industrial drill. It looks easily two feet thick."
 	icon_state = "mining_brace"
-	obj_flags = OBJ_FLAG_ROTATABLE
+	obj_flags = OBJ_FLAG_ROTATABLE | OBJ_FLAG_ANCHORABLE
 	interact_offline = 1
 
 	machine_name = "mining drill brace"
@@ -276,26 +276,20 @@
 		return SPAN_NOTICE("You can't work with the brace of a running drill!")
 	return ..()
 
-/obj/machinery/mining/brace/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/mining/brace/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(connected && connected.active)
 		to_chat(user, SPAN_NOTICE("You can't work with the brace of a running drill!"))
 		return TRUE
-	if(component_attackby(W, user))
-		return TRUE
-	if(isWrench(W))
 
-		if(istype(get_turf(src), /turf/space))
-			to_chat(user, SPAN_NOTICE("You can't anchor something to empty space. Idiot."))
-			return
+	return ..()
 
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-		to_chat(user, SPAN_NOTICE("You [anchored ? "un" : ""]anchor the brace."))
+/obj/machinery/mining/brace/post_anchor_change()
+	if (anchored)
+		connect()
+	else
+		disconnect()
 
-		anchored = !anchored
-		if(anchored)
-			connect()
-		else
-			disconnect()
+	..()
 
 /obj/machinery/mining/brace/proc/connect()
 

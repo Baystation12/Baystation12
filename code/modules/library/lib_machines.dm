@@ -16,10 +16,12 @@
 	density = TRUE
 	var/obj/item/book/cache		// Last scanned book
 
-/obj/machinery/libraryscanner/attackby(obj/O as obj, mob/user as mob)
+/obj/machinery/libraryscanner/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(istype(O, /obj/item/book))
-		if(!user.unEquip(O, src))
-			return
+		user.unEquip(O, src)
+		return TRUE
+
+	return ..()
 
 /obj/machinery/libraryscanner/interface_interact(mob/user)
 	interact(user)

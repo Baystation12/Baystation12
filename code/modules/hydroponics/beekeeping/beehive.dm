@@ -209,17 +209,16 @@
 		return SPAN_NOTICE("You must wait for \the [src] to finish first!")
 	return ..()
 
-/obj/machinery/honey_extractor/attackby(obj/item/I, mob/user)
+/obj/machinery/honey_extractor/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(processing)
 		to_chat(user, SPAN_NOTICE("\The [src] is currently spinning, wait until it's finished."))
-		return
-	if((. = component_attackby(I, user)))
-		return
+		return TRUE
+
 	if(istype(I, /obj/item/honey_frame))
 		var/obj/item/honey_frame/H = I
 		if(!H.honey)
 			to_chat(user, SPAN_NOTICE("\The [H] is empty, put it into a beehive."))
-			return
+			return TRUE
 		user.visible_message(SPAN_NOTICE("\The [user] loads \the [H] into \the [src] and turns it on."), SPAN_NOTICE("You load \the [H] into \the [src] and turn it on."))
 		processing = H.honey
 		icon_state = "centrifuge_moving"
@@ -230,16 +229,20 @@
 			honey += processing
 			processing = 0
 			icon_state = "centrifuge"
-	else if(istype(I, /obj/item/reagent_containers/glass))
+		return TRUE
+
+	if (istype(I, /obj/item/reagent_containers/glass))
 		if(!honey)
 			to_chat(user, SPAN_NOTICE("There is no honey in \the [src]."))
-			return
+			return TRUE
 		var/obj/item/reagent_containers/glass/G = I
 		var/transferred = min(G.reagents.maximum_volume - G.reagents.total_volume, honey)
 		G.reagents.add_reagent(/datum/reagent/nutriment/honey, transferred)
 		honey -= transferred
 		user.visible_message(SPAN_NOTICE("\The [user] collects honey from \the [src] into \the [G]."), SPAN_NOTICE("You collect [transferred] units of honey from \the [src] into \the [G]."))
-		return 1
+		return TRUE
+
+	return ..()
 
 /obj/item/bee_smoker
 	name = "bee smoker"
