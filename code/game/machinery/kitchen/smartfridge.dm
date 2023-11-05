@@ -256,29 +256,30 @@
 *   Item Adding
 ********************/
 
-/obj/machinery/smartfridge/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/smartfridge/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(isScrewdriver(O))
 		panel_open = !panel_open
 		user.visible_message("[user] [panel_open ? "opens" : "closes"] the maintenance panel of \the [src].", "You [panel_open ? "open" : "close"] the maintenance panel of \the [src].")
 		update_icon()
 		SSnano.update_uis(src)
-		return
+		return TRUE
 
 	if(isMultitool(O) || isWirecutter(O))
 		if(panel_open)
 			attack_hand(user)
-		return
+		return TRUE
 
 	if(!is_powered())
 		to_chat(user, SPAN_NOTICE("\The [src] is unpowered and useless."))
-		return
+		return TRUE
 
 	if(accept_check(O))
 		if(!user.unEquip(O))
-			return
+			return TRUE
 		stock_item(O)
 		user.visible_message(SPAN_NOTICE("\The [user] has added \the [O] to \the [src]."), SPAN_NOTICE("You add \the [O] to \the [src]."))
 		update_icon()
+		return TRUE
 
 	else if(istype(O, /obj/item/storage))
 		var/obj/item/storage/bag/P = O
@@ -293,13 +294,8 @@
 			user.visible_message(SPAN_NOTICE("\The [user] loads \the [src] with the contents of \the [P]."), SPAN_NOTICE("You load \the [src] with the contents of \the [P]."))
 			if(length(P.contents) > 0)
 				to_chat(user, SPAN_NOTICE("Some items were refused."))
-
-	else if ((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(O))
-		return ..()
-
-	else
-		to_chat(user, SPAN_NOTICE("\The [src] smartly refuses [O]."))
-	return 1
+		return TRUE
+	return ..()
 
 /obj/machinery/smartfridge/secure/emag_act(remaining_charges, mob/user)
 	if(!emagged)

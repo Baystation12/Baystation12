@@ -99,31 +99,32 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
 	return ..()
 
-/obj/machinery/r_n_d/circuit_imprinter/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/r_n_d/circuit_imprinter/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(busy)
 		to_chat(user, SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation."))
-		return 1
-	if(component_attackby(O, user))
 		return TRUE
+	if ((. = ..()))
+		return
 	if(panel_open)
 		to_chat(user, SPAN_NOTICE("You can't load \the [src] while it's opened."))
-		return 1
+		return TRUE
 	if(!linked_console)
 		to_chat(user, "\The [src] must be linked to an R&D console first.")
-		return 1
+		return TRUE
 	if(O.is_open_container())
-		return 0
+		return FALSE
 	if(is_robot_module(O))
-		return 0
+		return FALSE
 	if(!istype(O, /obj/item/stack/material))
-		to_chat(user, SPAN_NOTICE("You cannot insert this item into \the [src]!"))
-		return 0
+		to_chat(user, SPAN_WARNING("You cannot insert this item into \the [src]!"))
+		return TRUE
 	if(inoperable())
-		return 1
+		to_chat(user, SPAN_WARNING("\The [src] is not working properly."))
+		return TRUE
 
 	if(TotalMaterials() + SHEET_MATERIAL_AMOUNT > max_material_storage)
-		to_chat(user, SPAN_NOTICE("\The [src]'s material bin is full. Please remove material before adding more."))
-		return 1
+		to_chat(user, SPAN_WARNING("\The [src]'s material bin is full. Please remove material before adding more."))
+		return TRUE
 
 	var/obj/item/stack/material/stack = O
 	var/amount = min(stack.get_amount(), round((max_material_storage - TotalMaterials()) / SHEET_MATERIAL_AMOUNT))
@@ -139,6 +140,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 				materials[t] += amount * SHEET_MATERIAL_AMOUNT
 	busy = 0
 	updateUsrDialog()
+	return TRUE
 
 /obj/machinery/r_n_d/circuit_imprinter/proc/addToQueue(datum/design/D)
 	queue += D

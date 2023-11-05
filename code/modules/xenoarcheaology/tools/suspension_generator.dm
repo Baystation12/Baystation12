@@ -11,6 +11,7 @@
 	machine_name = "suspension generator"
 	machine_desc = "Projects a pacifying energy field, used to hold xenofauna (among other things) for safe study."
 	var/obj/suspension_field/suspension_field
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
 /obj/machinery/suspension_gen/Process()
 	if(suspension_field)
@@ -90,23 +91,20 @@
 		return SPAN_NOTICE("Turn \the [src] off first.")
 	return ..()
 
-/obj/machinery/suspension_gen/attackby(obj/item/W, mob/user)
-	if(component_attackby(W, user))
-		return TRUE
-	else if(isWrench(W))
-		if(!suspension_field)
-			anchored = !anchored
-			to_chat(user, SPAN_INFO("You wrench the stabilising bolts [anchored ? "into place" : "loose"]."))
-			if(anchored)
-				desc = "Its tracks are securely held in place with securing bolts."
-				icon_state = "suspension_wrenched"
-			else
-				desc = "It has stubby bolts bolted up against its tracks for stabilizing."
-				icon_state = "suspension"
-			playsound(loc, 'sound/items/Ratchet.ogg', 40)
-			update_icon()
-		else
-			to_chat(user, SPAN_WARNING("You are unable to secure [src] while it is active!"))
+/obj/machinery/suspension_gen/can_anchor(obj/item/tool, mob/user, silent)
+	if (suspension_field)
+		to_chat(user, SPAN_WARNING("You are unable to wrench \the [src] while it is active!"))
+		return FALSE
+	return ..()
+
+/obj/machinery/suspension_gen/post_anchor_change()
+	if (anchored)
+		desc = "Its tracks are securely held in place with securing bolts."
+		icon_state = "suspension_wrenched"
+	else
+		desc = "It has stubby bolts bolted up against its tracks for stabilizing."
+		icon_state = "suspension"
+	..()
 
 //checks for whether the machine can be activated or not should already have occurred by this point
 /obj/machinery/suspension_gen/proc/activate()

@@ -173,17 +173,17 @@
 		updateUsrDialog()
 		go_out()
 
-/obj/machinery/sleeper/attackby(obj/item/I, mob/user)
+/obj/machinery/sleeper/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I, /obj/item/reagent_containers/glass))
-		add_fingerprint(user)
-		if(!beaker)
-			if(!user.unEquip(I, src))
-				return
-			beaker = I
-			user.visible_message(SPAN_NOTICE("\The [user] adds \a [I] to \the [src]."), SPAN_NOTICE("You add \a [I] to \the [src]."))
-		else
-			to_chat(user, SPAN_WARNING("\The [src] has a beaker already."))
+		if(beaker)
+			to_chat(user, SPAN_WARNING("There is already a beaker loaded in \the [src]."))
+			return TRUE
+		if(!user.unEquip(I, src))
+			return TRUE
+		beaker = I
+		user.visible_message(SPAN_NOTICE("\The [user] adds \a [I] to \the [src]."), SPAN_NOTICE("You add \a [I] to \the [src]."))
 		return TRUE
+
 	return ..()
 
 /obj/machinery/sleeper/user_can_move_target_inside(mob/target, mob/user)

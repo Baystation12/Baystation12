@@ -104,17 +104,17 @@
 		icon_state = "migniter-p"
 //		src.sd_SetLuminosity(0)
 
-/obj/machinery/sparker/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/sparker/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isScrewdriver(W))
-		add_fingerprint(user)
 		disable = !disable
 		if(disable)
 			user.visible_message(SPAN_WARNING("[user] has disabled the [src]!"), SPAN_WARNING("You disable the connection to the [src]."))
 		else if(!disable)
 			user.visible_message(SPAN_WARNING("[user] has reconnected the [src]!"), SPAN_WARNING("You fix the connection to the [src]."))
 		update_icon()
-	else
-		..()
+		return TRUE
+
+	return ..()
 
 /obj/machinery/sparker/attack_ai()
 	if (anchored)

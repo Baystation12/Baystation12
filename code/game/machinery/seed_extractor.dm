@@ -14,13 +14,13 @@
 	machine_name = "seed extractor"
 	machine_desc = "Extracts a number of growable seed packets from a provided plant sample. The sample is destroyed in the process."
 
-/obj/machinery/seed_extractor/attackby(obj/item/O, mob/user)
-	if((. = component_attackby(O, user)))
+/obj/machinery/seed_extractor/use_tool(obj/item/O, mob/living/user, list/click_params)
+	if ((. = ..()))
 		return
 	// Fruits and vegetables.
 	if(istype(O, /obj/item/reagent_containers/food/snacks/grown))
 		if(!user.unEquip(O))
-			return
+			return TRUE
 
 		var/obj/item/reagent_containers/food/snacks/grown/F = O
 		var/datum/seed/new_seed_type = SSplants.seeds[F.plantname]
@@ -36,17 +36,18 @@
 			to_chat(user, "[O] doesn't seem to have any usable seeds inside it.")
 
 		qdel(O)
+		return TRUE
 
 	//Grass.
-	else if(istype(O, /obj/item/stack/tile/grass))
+	if (istype(O, /obj/item/stack/tile/grass))
 		var/obj/item/stack/tile/grass/S = O
 		if (S.use(1))
 			to_chat(user, SPAN_NOTICE("You extract some seeds from the grass tile."))
 			new /obj/item/seeds/grassseed(loc)
+		return TRUE
 
-	else if(istype(O, /obj/item/fossil/plant)) // Fossils
+	if (istype(O, /obj/item/fossil/plant)) // Fossils
 		var/obj/item/seeds/random/R = new(get_turf(src))
 		to_chat(user, "\The [src] scans \the [O] and spits out \a [R].")
 		qdel(O)
-
-	return
+		return TRUE

@@ -252,8 +252,9 @@
 
 
 /obj/machinery/post_anchor_change()
-	..()
+	update_use_power(anchored)
 	power_change()
+	..()
 
 /**
  * Called by machines that can hold a mob (sleeper, suit cycler, etc.), checking if mob can be moved before doing so.

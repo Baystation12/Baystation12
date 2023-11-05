@@ -13,6 +13,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 	active_power_usage = 50
 	anchored = TRUE
 	level = ATOM_LEVEL_UNDER_TILE
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
 	machine_name = "teleporter beacon"
 	machine_desc = "Teleporter beacons allow teleporter systems to target them, for accurate, instantaneous transport of objects and people."
@@ -43,64 +44,44 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 	disconnect_computers()
 	. = ..()
 
+/obj/machinery/tele_beacon/can_anchor(obj/item/tool, mob/user, silent)
+	var/turf/T = get_turf(src)
+	if (!T.is_plating())
+		to_chat(user, SPAN_WARNING("You cannot anchor \the [src] to \the [T]. You must connect it to the underplating."))
+		return FALSE
+	return ..()
 
-/obj/machinery/tele_beacon/attackby(obj/item/I, mob/user)
-	if (!panel_open)
-		if (isWrench(I))
-			var/turf/T = get_turf(src)
-			if (is_space_turf(T) || istype(T, /turf/simulated/open))
-				to_chat(user, SPAN_WARNING("You cannot anchor \the [src] to \the [T]. It requires solid plating."))
-				return FALSE
-			if (!T.is_plating())
-				to_chat(user, SPAN_WARNING("You cannot anchor \the [src] to \the [T]. You must connect it to the underplating."))
-				return FALSE
+/obj/machinery/tele_beacon/post_anchor_change()
+	if (!anchored)
+		disconnect_computers()
+	else
+		generate_name()
 
-			user.visible_message(
-				SPAN_NOTICE("\The [user] starts to [anchored ? "disconnect" : "connect"] \the [src] [anchored ? "to" : "from"] \the [T]."),
-				SPAN_NOTICE("You start to [anchored ? "disconnect" : "connect"] \the [src] [anchored ? "to" : "from"] \the [T].")
-			)
+	level = anchored ? ATOM_LEVEL_UNDER_TILE : ATOM_LEVEL_OVER_TILE
+	..()
 
-			if (!do_after(user, (I.toolspeed * 3) SECONDS, src, DO_REPAIR_CONSTRUCT))
-				return TRUE
-
-			anchored = !anchored
-			level = anchored ? ATOM_LEVEL_UNDER_TILE : ATOM_LEVEL_OVER_TILE
-			user.visible_message(
-				SPAN_NOTICE("\The [user] [anchored ? "connects" : "disconnects"] \the [src] [anchored ? "to" : "from"] \the [T] with \the [I]."),
-				SPAN_NOTICE("You [anchored ? "connect" : "disconnect"] \the [src] [anchored ? "to" : "from"] \the [T] with \the [I].")
-			)
-			playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
-			update_icon()
-			update_use_power(anchored ? POWER_USE_IDLE : POWER_USE_OFF)
-			if (!anchored)
-				disconnect_computers()
-			else
-				generate_name()
-
+/obj/machinery/tele_beacon/use_tool(obj/item/I, mob/living/user, list/click_params)
+	if (!panel_open && isMultitool(I))
+		var/new_name = input(user, "What label would you like to set this beacon to? Leave empty to enable automatic naming based on area.", "Set Beacon Label", beacon_name) as text|null
+		if (QDELETED(src))
 			return TRUE
+		if (new_name == null)
+			autoset_name = TRUE
+			generate_name()
+			user.visible_message(
+				SPAN_NOTICE("\The [user] reconfigures \the [src] with \the [I]."),
+				SPAN_NOTICE("You enable \the [src]'s automatic labeling with \the [I].")
+			)
+		else
+			beacon_name = new_name
+			autoset_name = FALSE
+			user.visible_message(
+				SPAN_NOTICE("\The [user] reconfigures \the [src] with \the [I]."),
+				SPAN_NOTICE("You reconfigure \the [src]'s relay label to \"[beacon_name]\" with \the [I].")
+			)
+		return TRUE
 
-		if (isMultitool(I))
-			var/new_name = input(user, "What label would you like to set this beacon to? Leave empty to enable automatic naming based on area.", "Set Beacon Label", beacon_name) as text|null
-			if (QDELETED(src))
-				return TRUE
-			if (new_name == null)
-				autoset_name = TRUE
-				generate_name()
-				user.visible_message(
-					SPAN_NOTICE("\The [user] reconfigures \the [src] with \the [I]."),
-					SPAN_NOTICE("You enable \the [src]'s automatic labeling with \the [I].")
-				)
-			else
-				beacon_name = new_name
-				autoset_name = FALSE
-				user.visible_message(
-					SPAN_NOTICE("\The [user] reconfigures \the [src] with \the [I]."),
-					SPAN_NOTICE("You reconfigure \the [src]'s relay label to \"[beacon_name]\" with \the [I].")
-				)
-			return TRUE
-
-	. = ..()
-
+	return ..()
 
 /obj/machinery/tele_beacon/emp_act(severity)
 	..()

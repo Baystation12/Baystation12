@@ -201,7 +201,7 @@
 	return 1
 
 
-/obj/machinery/vending/attackby(obj/item/item, mob/living/user)
+/obj/machinery/vending/use_tool(obj/item/item, mob/living/user, list/click_params)
 	var/obj/item/card/id/id = item.GetIdCard()
 	var/static/list/simple_coins = subtypesof(/obj/item/material/coin) - typesof(/obj/item/material/coin/challenge)
 	if (currently_vending && vendor_account && !vendor_account.suspended)
@@ -222,6 +222,7 @@
 		else if (handled)
 			SSnano.update_uis(src)
 			return TRUE
+
 	if (id || istype(item, /obj/item/spacecash))
 		attack_hand(user)
 		return TRUE
@@ -240,6 +241,7 @@
 		to_chat(user, SPAN_NOTICE("You insert \the [item] into \the [src]."))
 		SSnano.update_uis(src)
 		return TRUE
+
 	if (istype(item, /obj/item/material/coin/challenge/syndie))
 		if (!LAZYLEN(antag))
 			to_chat(user, SPAN_WARNING("\The [src] does not have a secret compartment installed."))
@@ -252,10 +254,10 @@
 			return TRUE
 		ProcessAntag(item, user)
 		return TRUE
+
 	if ((user.a_intent == I_HELP) && attempt_to_stock(item, user))
 		return TRUE
-	if ((. = component_attackby(item, user)))
-		return
+
 	return ..()
 
 ///Proc that enables hidden antag items and replaces slogan list with anti-Sol slogans if any.
