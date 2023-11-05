@@ -279,11 +279,12 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 				to_chat(user, "\The [src] is assembled")
 
 
-/obj/machinery/particle_accelerator/attackby(obj/item/I, mob/user)
-	if (I?.istool())
+/obj/machinery/particle_accelerator/use_tool(obj/item/I, mob/living/user, list/click_params)
+	if (I.istool())
 		if (process_tool_hit(I, user))
-			return
-	..()
+			return TRUE
+
+	return ..()
 
 
 /obj/machinery/particle_accelerator/ex_act(severity)

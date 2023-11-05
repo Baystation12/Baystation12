@@ -20,34 +20,35 @@
 		/obj/item/sample/print = 1
 		)
 
-/obj/machinery/papershredder/attackby(obj/item/W, mob/user)
-
+/obj/machinery/papershredder/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/storage))
 		empty_bin(user, W)
-		return
+		return TRUE
+
+	var/paper_result
+	for(var/shred_type in shred_amounts)
+		if(istype(W, shred_type))
+			paper_result = shred_amounts[shred_type]
+
+	if(paper_result)
+		if(paperamount == max_paper)
+			to_chat(user, SPAN_WARNING("\The [src] is full; please empty it before you continue."))
+			return TRUE
+		paperamount += paper_result
+		qdel(W)
+		playsound(src.loc, 'sound/items/pshred.ogg', 75, 1)
+		if(paperamount > max_paper)
+			to_chat(user, SPAN_DANGER("\The [src] was too full, and shredded paper goes everywhere!"))
+			for(var/i=(paperamount-max_paper);i>0;i--)
+				var/obj/item/shreddedp/SP = get_shredded_paper()
+				SP.dropInto(loc)
+				SP.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),1,5)
+			paperamount = max_paper
+		update_icon()
+		return TRUE
 	else
-		var/paper_result
-		for(var/shred_type in shred_amounts)
-			if(istype(W, shred_type))
-				paper_result = shred_amounts[shred_type]
-		if(paper_result)
-			if(paperamount == max_paper)
-				to_chat(user, SPAN_WARNING("\The [src] is full; please empty it before you continue."))
-				return
-			paperamount += paper_result
-			qdel(W)
-			playsound(src.loc, 'sound/items/pshred.ogg', 75, 1)
-			if(paperamount > max_paper)
-				to_chat(user, SPAN_DANGER("\The [src] was too full, and shredded paper goes everywhere!"))
-				for(var/i=(paperamount-max_paper);i>0;i--)
-					var/obj/item/shreddedp/SP = get_shredded_paper()
-					SP.dropInto(loc)
-					SP.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),1,5)
-				paperamount = max_paper
-			update_icon()
-			return
-	..()
-	return
+		return ..()
+
 
 /obj/machinery/papershredder/verb/empty_contents()
 	set name = "Empty bin"

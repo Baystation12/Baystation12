@@ -16,6 +16,7 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	base_type = /obj/machinery/power/fusion_core
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
 	var/obj/fusion_em_field/owned_field
 	var/field_strength = 1//0.01
@@ -88,29 +89,15 @@
 		Shutdown()
 	return TRUE
 
-/obj/machinery/power/fusion_core/attackby(obj/item/W, mob/user)
-
+/obj/machinery/power/fusion_core/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(owned_field)
 		to_chat(user,SPAN_WARNING("Shut \the [src] off first!"))
-		return
+		return TRUE
 
 	if(isMultitool(W))
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.get_new_tag(user)
-		return
-
-	else if(isWrench(W))
-		anchored = !anchored
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-		if(anchored)
-			user.visible_message("[user.name] secures [src.name] to the floor.", \
-				"You secure the [src.name] to the floor.", \
-				"You hear a ratchet")
-		else
-			user.visible_message("[user.name] unsecures [src.name] from the floor.", \
-				"You unsecure the [src.name] from the floor.", \
-				"You hear a ratchet")
-		return
+		return TRUE
 
 	return ..()
 

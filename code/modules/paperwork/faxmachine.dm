@@ -51,47 +51,50 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	. = ..()
 
 
-/obj/machinery/photocopier/faxmachine/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/photocopier/faxmachine/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(istype(O, /obj/item/paper))
 		var/obj/item/paper/P = O
 		if(!P.readable)
 			to_chat(user, SPAN_NOTICE("\The [src] beeps. Error, invalid document detected."))
-			return
-	if(istype(O, /obj/item/card/id))
+			return TRUE
+
+	if(isid(O))
 		if(!user.unEquip(O, src))
-			return
+			return TRUE
 		scan = O
 		to_chat(user, SPAN_NOTICE("You insert \the [O] into \the [src]."))
+		return TRUE
+
 	if (isMultitool(O))
 		to_chat(user, SPAN_NOTICE("\The [src]'s department tag is set to [department]."))
 		if (!emagged)
 			to_chat(user, SPAN_WARNING("\The [src]'s department configuration is vendor locked."))
-			return
+			return TRUE
 		var/list/option_list = GLOB.alldepartments.Copy() + GLOB.admin_departments.Copy() + "(Custom)" + "(Cancel)"
 		var/new_department = input(user, "Which department do you want to tag this fax machine as? Choose '(Custom)' to enter a custom department or '(Cancel) to cancel.", "Fax Machine Department Tag") as null|anything in option_list
 		if (!new_department || new_department == department || new_department == "(Cancel)" || !CanUseTopic(user) || !Adjacent(user))
-			return
+			return TRUE
 		if (new_department == "(Custom)")
 			new_department = input(user, "Which department do you want to tag this fax machine as?", "Fax Machine Department Tag", department) as text|null
 			if (!new_department || new_department == department || !CanUseTopic(user) || !Adjacent(user))
-				return
+				return TRUE
 		if (new_department == "Unknown" || new_department == "(Custom)" || new_department == "(Cancel)")
 			to_chat(user, SPAN_WARNING("Invalid department tag selected."))
-			return
+			return TRUE
 		department = new_department
 		to_chat(user, SPAN_NOTICE("You reconfigure \the [src]'s department tag to [department]."))
-		return
+		return TRUE
 
 	if (istype(O, /obj/item/modular_computer/pda))
 		if (LAZYISIN(linked_pdas, O))
 			unlink_pda(O)
 			to_chat(user, SPAN_NOTICE("You remove \the [O] from \the [src]'s notifications list."))
-			return
+			return TRUE
 		link_pda(O)
 		to_chat(user, SPAN_NOTICE("You add \the [O] to \the [src]'s notifications list. It will now be pinged whenever a fax is received."))
-		return
+		return TRUE
 
-	..()
+	return ..()
 
 /obj/machinery/photocopier/faxmachine/get_mechanics_info()
 	. = "<p>The fax machine can be used to transmit paper faxes to other fax machines on the map, or to off-ship organizations handled by server administration. To use the fax machine, you'll need to insert both a paper and your ID card, authenticate, select a destination, the transmit the fax.</p>"

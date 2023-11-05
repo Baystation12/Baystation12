@@ -10,6 +10,7 @@ var/global/list/rad_collectors = list()
 	density = TRUE
 	req_access = list(access_engine_equip)
 	var/obj/item/tank/phoron/P = null
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
 	var/health = 100
 	var/max_safe_temp = 1000 + T0C
@@ -88,52 +89,46 @@ var/global/list/rad_collectors = list()
 	else
 		to_chat(user, SPAN_WARNING("The controls are locked!"))
 
-/obj/machinery/power/rad_collector/attackby(obj/item/W, mob/user)
+/obj/machinery/power/rad_collector/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/tank/phoron))
-		if(!src.anchored)
+		if(!anchored)
 			to_chat(user, SPAN_WARNING("The [src] needs to be secured to the floor first."))
-			return 1
-		if(src.P)
+			return TRUE
+		if(P)
 			to_chat(user, SPAN_WARNING("There's already a phoron tank loaded."))
-			return 1
+			return TRUE
 		if(!user.unEquip(W, src))
-			return
-		src.P = W
+			return TRUE
+		P = W
 		update_icon()
-		return 1
-	else if(isCrowbar(W))
-		if(P && !src.locked)
+		return TRUE
+
+	if (isCrowbar(W))
+		if(P && !locked)
 			eject()
-			return 1
-	else if(isWrench(W))
+			return TRUE
+
+	if (isWrench(W))
 		if(P)
 			to_chat(user, SPAN_NOTICE("Remove the phoron tank first."))
-			return 1
+			return TRUE
 		for(var/obj/machinery/power/rad_collector/R in get_turf(src))
 			if(R != src)
 				to_chat(user, SPAN_WARNING("You cannot install more than one collector on the same spot."))
-				return 1
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-		src.anchored = !src.anchored
-		user.visible_message("[user.name] [anchored? "secures":"unsecures"] the [src.name].", \
-			"You [anchored? "secure":"undo"] the external bolts.", \
-			"You hear a ratchet")
-		if(anchored && !MACHINE_IS_BROKEN(src))
-			connect_to_network()
-		else
-			disconnect_from_network()
-		return 1
-	else if(istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
-		if (src.allowed(user))
+				return TRUE
+
+	if (istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
+		if (allowed(user))
 			if(active)
-				src.locked = !src.locked
-				to_chat(user, "The controls are now [src.locked ? "locked." : "unlocked."]")
+				locked = !locked
+				to_chat(user, "The controls are now [locked ? "locked." : "unlocked."]")
 			else
-				src.locked = 0 //just in case it somehow gets locked
+				locked = 0 //just in case it somehow gets locked
 				to_chat(user, SPAN_WARNING("The controls can only be locked when the [src] is active"))
 		else
 			to_chat(user, SPAN_WARNING("Access denied!"))
-		return 1
+		return TRUE
+
 	return ..()
 
 /obj/machinery/power/rad_collector/examine(mob/user, distance)

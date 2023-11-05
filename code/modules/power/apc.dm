@@ -421,13 +421,13 @@
 
 //attack with an item - open/close cover, insert cell, or (un)lock interface
 
-/obj/machinery/power/apc/attackby(obj/item/W, mob/user)
+/obj/machinery/power/apc/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if (istype(user, /mob/living/silicon) && get_dist(src,user)>1)
 		return attack_robot(user)
 	if(istype(W, /obj/item/inducer))
 		return FALSE // inducer.dm use_after handles this
 
-	if(isCrowbar(W) && user.a_intent != I_HURT)//bypass when on harm intend to actually make use of the cover hammer off check further down.
+	if(isCrowbar(W))//bypass when on harm intend to actually make use of the cover hammer off check further down.
 		if(opened) // Closes or removes board.
 			if (has_electronics == 1)
 				if (terminal())
@@ -538,6 +538,7 @@
 			reboot() //completely new electronics
 			to_chat(user, SPAN_NOTICE("You place the power control board inside the frame."))
 			qdel(W)
+		return TRUE
 
 	// Deconstruction
 	if(isWelder(W))
@@ -611,6 +612,7 @@
 				if (opened==2)
 					opened = 1
 				queue_icon_update()
+			return TRUE
 
 	if((. = ..())) // Further interactions are low priority attack stuff.
 		return
@@ -625,29 +627,39 @@
 			SPAN_DANGER("You knock down the APC cover with your [W.name]!"), \
 			"You hear a bang")
 		update_icon()
-	else
-		if (istype(user, /mob/living/silicon))
-			return attack_robot(user)
-		if (!opened && wiresexposed && (isMultitool(W) || isWirecutter(W) || istype(W, /obj/item/device/assembly/signaler)))
-			return wires.Interact(user)
+		return TRUE
 
-		user.visible_message(SPAN_DANGER("The [src.name] has been hit with the [W.name] by [user.name]!"), \
-			SPAN_DANGER("You hit the [src.name] with your [W.name]!"), \
-			"You hear a bang")
-		if(W.force >= 5 && W.w_class >= ITEM_SIZE_NORMAL && prob(W.force))
-			var/roulette = rand(1,100)
-			switch(roulette)
-				if(1 to 10)
-					locked = FALSE
-					to_chat(user, SPAN_NOTICE("You manage to disable the lock on \the [src]!"))
-				if(50 to 70)
-					to_chat(user, SPAN_NOTICE("You manage to bash the lid open!"))
-					opened = 1
-				if(90 to 100)
-					to_chat(user, SPAN_WARNING("There's a nasty sound and \the [src] goes cold..."))
-					set_broken(TRUE)
-			queue_icon_update()
-	playsound(get_turf(src), 'sound/weapons/smash.ogg', 75, 1)
+	if (istype(user, /mob/living/silicon))
+		return attack_robot(user)
+	if (!opened && wiresexposed && (isMultitool(W) || isWirecutter(W) || istype(W, /obj/item/device/assembly/signaler)))
+		return wires.Interact(user)
+
+	return ..()
+
+/obj/machinery/power/apc/use_weapon(obj/item/W, mob/living/user, list/click_params)
+	if(W.force >= 5 && W.w_class >= ITEM_SIZE_NORMAL && prob(W.force))
+		user.setClickCooldown(user.get_attack_speed(W))
+		user.do_attack_animation(src)
+		user.visible_message(
+			SPAN_DANGER("The [name] has been hit with the [W.name] by [user.name]!"), \
+			SPAN_DANGER("You hit the [name] with your [W.name]!"), \
+			"You hear a bang"
+		)
+		var/roulette = rand(1,100)
+		switch(roulette)
+			if(1 to 10)
+				locked = FALSE
+				to_chat(user, SPAN_NOTICE("You manage to disable the lock on \the [src]!"))
+			if(50 to 70)
+				to_chat(user, SPAN_NOTICE("You manage to bash the lid open!"))
+				opened = 1
+			if(90 to 100)
+				to_chat(user, SPAN_WARNING("There's a nasty sound and \the [src] goes cold..."))
+				set_broken(TRUE)
+		queue_icon_update()
+		playsound(get_turf(src), 'sound/weapons/smash.ogg', 75, 1)
+
+	return ..()
 
 // attack with hand - remove cell (if cover open) or interact with the APC
 

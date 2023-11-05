@@ -62,7 +62,7 @@ var/global/solar_gen_rate = 1500
 
 
 
-/obj/machinery/power/solar/attackby(obj/item/W, mob/user)
+/obj/machinery/power/solar/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isCrowbar(W))
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		user.visible_message(SPAN_NOTICE("[user] begins to take the glass off the solar panel."))
@@ -76,7 +76,7 @@ var/global/solar_gen_rate = 1500
 			qdel(src)
 		return TRUE
 
-	. = ..()
+	return ..()
 
 /obj/machinery/power/solar/on_update_icon()
 	..()

@@ -159,7 +159,7 @@
 		icon_state = initial(icon_state)
 	else
 		spawn(rand(0, 15))
-			icon_state = "[initial(icon_state)]-off"
+		icon_state = "[initial(icon_state)]-off"
 	if (panel_open || IsShowingAntag())
 		AddOverlays(image(icon, "[initial(icon_state)]-panel"))
 	if (IsShowingAntag() && is_powered())

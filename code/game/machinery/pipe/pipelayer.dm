@@ -40,13 +40,12 @@
 	)
 	return TRUE
 
-/obj/machinery/pipelayer/attackby(obj/item/W as obj, mob/user as mob)
-
+/obj/machinery/pipelayer/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isWrench(W))
 		P_type_t = input("Choose pipe type", "Pipe type") as null|anything in Pipes
 		P_type = Pipes[P_type_t]
 		user.visible_message(SPAN_NOTICE("[user] has set \the [src] to manufacture [P_type_t]."), SPAN_NOTICE("You set \the [src] to manufacture [P_type_t]."))
-		return
+		return TRUE
 
 	if(isCrowbar(W))
 		a_dis=!a_dis
@@ -54,10 +53,9 @@
 			SPAN_NOTICE("[user] has [!a_dis?"de":""]activated auto-dismantling."),
 			SPAN_NOTICE("You [!a_dis?"de":""]activate auto-dismantling.")
 		)
-		return
+		return TRUE
 
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == MATERIAL_STEEL)
-
 		var/result = load_metal(W)
 		if(isnull(result))
 			to_chat(user, SPAN_WARNING("Unable to load [W] - no metal found."))
@@ -65,8 +63,7 @@
 			to_chat(user, SPAN_NOTICE("\The [src] is full."))
 		else
 			user.visible_message(SPAN_NOTICE("[user] has loaded metal into \the [src]."), SPAN_NOTICE("You load metal into \the [src]"))
-
-		return
+		return TRUE
 
 	if(isScrewdriver(W))
 		if(metal)
@@ -81,8 +78,9 @@
 				user.visible_message(SPAN_NOTICE("[user] removes [m] sheet\s of metal from the \the [src]."), SPAN_NOTICE("You remove [m] sheet\s of metal from \the [src]"))
 		else
 			to_chat(user, "\The [src] is empty.")
-		return
-	..()
+		return TRUE
+
+	return ..()
 
 /obj/machinery/pipelayer/examine(mob/user)
 	. = ..()
