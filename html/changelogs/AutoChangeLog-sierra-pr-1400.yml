@@ -1,5 +1,0 @@
-author: LordNest
-changes:
-  - {bugfix: Пофиксил невозможность захода на патрули}
-  - {maptweak: Различные исправления авей-карт}
-delete-after: true
