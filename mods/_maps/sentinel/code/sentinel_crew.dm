@@ -75,8 +75,6 @@ var/global/const/access_away_cavalry_commander = "ACCESS_CAVALRY_COMMANDER"
 	title = "Army SCGSO Trooper"
 	total_positions = 2
 	outfit_type = /singleton/hierarchy/outfit/job/patrol/army_ops
-	minimum_character_age = list(SPECIES_HUMAN = 23)
-	ideal_character_age = 25
 	allowed_branches = list(/datum/mil_branch/scga)
 	allowed_ranks = list(
 		/datum/mil_rank/scga/e4,
@@ -135,8 +133,6 @@ var/global/const/access_away_cavalry_commander = "ACCESS_CAVALRY_COMMANDER"
 	title = "Fleet Commander"
 	total_positions = 1
 	outfit_type = /singleton/hierarchy/outfit/job/patrol/commander
-	minimum_character_age = list(SPECIES_HUMAN = 30)
-	ideal_character_age = 33
 	allowed_branches = list(/datum/mil_branch/fleet)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/o3,
@@ -164,8 +160,6 @@ var/global/const/access_away_cavalry_commander = "ACCESS_CAVALRY_COMMANDER"
 	title = "Fleet Pilot"
 	total_positions = 1
 	outfit_type = /singleton/hierarchy/outfit/job/patrol/pilot1
-	minimum_character_age = list(SPECIES_HUMAN = 23)
-	ideal_character_age = 25
 	allowed_branches = list(/datum/mil_branch/fleet)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/o1,
@@ -193,8 +187,6 @@ var/global/const/access_away_cavalry_commander = "ACCESS_CAVALRY_COMMANDER"
 	title = "Fleet Corpsman"
 	total_positions = 1
 	outfit_type = /singleton/hierarchy/outfit/job/patrol/surgeon
-	minimum_character_age = list(SPECIES_HUMAN = 26)
-	ideal_character_age = 30
 	allowed_branches = list(/datum/mil_branch/fleet)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/o1,
@@ -224,8 +216,6 @@ var/global/const/access_away_cavalry_commander = "ACCESS_CAVALRY_COMMANDER"
 	title = "Fleet Technician"
 	total_positions = 1
 	outfit_type = /singleton/hierarchy/outfit/job/patrol/engineer
-	minimum_character_age = list(SPECIES_HUMAN = 26)
-	ideal_character_age = 28
 	allowed_branches = list(/datum/mil_branch/fleet)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e4,

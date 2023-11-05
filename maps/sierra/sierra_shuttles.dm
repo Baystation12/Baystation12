@@ -55,7 +55,7 @@ SIERRA_ESCAPE_POD(11)
 
 /datum/shuttle/autodock/ferry/petrov
 	name = "Petrov"
-	dock_target = "petrov_shuttle"
+	dock_target = "petrov_shuttle_airlock"
 	waypoint_station = "nav_petrov_start"
 	waypoint_offsite = "nav_petrov_out"
 	logging_home_tag = "nav_petrov_start"
@@ -68,7 +68,7 @@ SIERRA_ESCAPE_POD(11)
 	..()
 
 /obj/shuttle_landmark/petrov/start
-	name = "First Deck"
+	name = "Fourth Deck"
 	landmark_tag = "nav_petrov_start"
 	docking_controller = "petrov_shuttle_dock"
 

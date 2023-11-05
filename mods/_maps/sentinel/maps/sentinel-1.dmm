@@ -1631,7 +1631,8 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/multi_tile/glass/sol{
-	name = "Main Hallway"
+	name = "Main Hallway";
+	dir = 8
 	},
 /obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
@@ -2859,7 +2860,8 @@
 	icon_state = "1-4"
 	},
 /obj/machinery/door/airlock/multi_tile/glass/command{
-	name = "Bridge"
+	name = "Bridge";
+	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -4252,7 +4254,8 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/multi_tile/glass/sol{
-	name = "Main Hallway"
+	name = "Main Hallway";
+	dir = 8
 	},
 /obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
@@ -4339,7 +4342,8 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/multi_tile/glass/sol{
-	name = "Main Hallway"
+	name = "Main Hallway";
+	dir = 8
 	},
 /obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
@@ -4550,7 +4554,8 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/multi_tile/sol{
-	name = "Dropship Hangar"
+	name = "Dropship Hangar";
+	dir = 8
 	},
 /obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
@@ -6654,7 +6659,8 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/multi_tile/glass/sol{
-	name = "Troops Section"
+	name = "Troops Section";
+	dir = 8
 	},
 /obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -6785,7 +6791,6 @@
 /area/ship/patrol/engineering/fussion/control)
 "mH" = (
 /obj/machinery/door/airlock/hatch{
-	icon_state = "door_locked";
 	id_tag = "prototype_access_hatch";
 	locked = 1
 	},
@@ -7071,7 +7076,7 @@
 	dir = 4;
 	id_tag = "prototype_chamber_blast_patrol"
 	},
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor,
 /area/ship/patrol/engineering/fussion/control)
 "ni" = (
@@ -8134,7 +8139,6 @@
 	dir = 4;
 	id_tag = "fusion_observation_patrol"
 	},
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
 /obj/paint/dark_gunmetal,
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -8351,7 +8355,6 @@
 	dir = 4;
 	id_tag = "fusion_observation_patrol"
 	},
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
 /obj/paint/dark_gunmetal,
 /turf/simulated/floor,
 /area/ship/patrol/engineering/fussion/control)
@@ -9456,7 +9459,6 @@
 	dir = 4;
 	id_tag = "fusion_observation_patrol"
 	},
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
 /obj/paint/dark_gunmetal,
 /obj/structure/cable/green{
 	d1 = 4;

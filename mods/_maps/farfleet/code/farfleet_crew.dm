@@ -128,8 +128,6 @@ var/global/const/access_away_iccgn_captain = "ACCESS_ICCGN_CAPTAIN"
 	total_positions = 1
 	outfit_type = /singleton/hierarchy/outfit/job/iccgn/iccgn_sergeant
 	supervisors = "Recon captain, Command of the Pioneer Corps , ICCGN"
-	minimum_character_age = list(SPECIES_HUMAN = 23)
-	ideal_character_age = 25
 	allowed_branches = list(/datum/mil_branch/iccgn)
 	allowed_ranks = list(/datum/mil_rank/iccgn/or5)
 	loadout_allowed = TRUE
@@ -156,8 +154,6 @@ var/global/const/access_away_iccgn_captain = "ACCESS_ICCGN_CAPTAIN"
 	title = "Pioneer Corps Captain"
 	total_positions = 1
 	outfit_type = /singleton/hierarchy/outfit/job/iccgn/iccgn_captain
-	minimum_character_age = list(SPECIES_HUMAN = 36)
-	ideal_character_age = 40
 	allowed_branches = list(/datum/mil_branch/iccgn)
 	allowed_ranks = list(
 		/datum/mil_rank/iccgn/of4,
@@ -188,8 +184,6 @@ var/global/const/access_away_iccgn_captain = "ACCESS_ICCGN_CAPTAIN"
 	title = "Pioneer Corpsman"
 	total_positions = 1
 	outfit_type = /singleton/hierarchy/outfit/job/iccgn/iccgn_medic
-	minimum_character_age = list(SPECIES_HUMAN = 26)
-	ideal_character_age = 30
 	allowed_branches = list(/datum/mil_branch/iccgn)
 	allowed_ranks = list(
 		/datum/mil_rank/iccgn/of1,
@@ -225,8 +219,6 @@ var/global/const/access_away_iccgn_captain = "ACCESS_ICCGN_CAPTAIN"
 		/datum/mil_rank/iccgn/of1,
 		/datum/mil_rank/iccgn/of3
 	)
-	minimum_character_age = list(SPECIES_HUMAN = 23)
-	ideal_character_age = 27
 	supervisors = "captain"
 	loadout_allowed = TRUE
 	info = "Вы просыпаетесь и выходите из криосна, ощущая прохладный воздух на своём лице, а также лёгкую тошноту. \
@@ -255,8 +247,6 @@ var/global/const/access_away_iccgn_captain = "ACCESS_ICCGN_CAPTAIN"
 	title = "CSS Field Operative"
 	total_positions = 1
 	outfit_type = /singleton/hierarchy/outfit/job/iccgn/iccgn_pawn
-	minimum_character_age = list(SPECIES_HUMAN = 31)
-	ideal_character_age = 40
 	allowed_branches = list(/datum/mil_branch/css)
 	allowed_ranks = list(/datum/mil_rank/css/fa7)
 	supervisors = "chief of 'P' Department, Confederate Security Service"

@@ -1159,7 +1159,8 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/multi_tile/sol{
-	name = "Crew Section"
+	name = "Crew Section";
+	dir = 8
 	},
 /obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
@@ -3099,7 +3100,8 @@
 "fO" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/multi_tile/glass/sol{
-	name = "Mess Hall"
+	name = "Mess Hall";
+	dir = 8
 	},
 /obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/white/monotile,
@@ -4391,7 +4393,6 @@
 	dir = 1
 	},
 /obj/random/coin,
-/obj/item/clothing/head/beret/solgov/diplomatic,
 /turf/simulated/floor/plating,
 /area/ship/patrol/maintenance/upper/starboard)
 "qM" = (
@@ -4560,7 +4561,6 @@
 /obj/structure/cable,
 /obj/structure/closet/crate/trashcart,
 /obj/floor_decal/industrial/outline/yellow,
-/obj/item/clothing/head/solgov/service/army/campaign,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/patrol/maintenance/upper/waste)
 "vg" = (
@@ -5606,7 +5606,9 @@
 /turf/simulated/wall/r_wall,
 /area/ship/patrol/maintenance/upper)
 "YI" = (
-/obj/machinery/door/airlock/multi_tile/glass/maintenance,
+/obj/machinery/door/airlock/multi_tile/glass/maintenance{
+	dir = 8
+	},
 /obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/patrol/maintenance/upper/aft)

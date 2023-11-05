@@ -433,7 +433,7 @@
 /area/liberia/engineeringengines)
 "aV" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Maintenance";
+	name = "Nuclear Reactor";
 	req_access = newlist()
 	},
 /obj/floor_decal/techfloor{
@@ -465,7 +465,8 @@
 /area/liberia/cryo)
 "aY" = (
 /obj/machinery/door/airlock/multi_tile/glass/maintenance{
-	dir = 8
+	dir = 8;
+	name = "Meeting Room"
 	},
 /obj/floor_decal/industrial/warning/fulltile,
 /obj/machinery/door/firedoor,
@@ -1237,7 +1238,8 @@
 "cj" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/multi_tile/glass/maintenance{
-	dir = 8
+	dir = 8;
+	name = "Trading Office"
 	},
 /obj/floor_decal/industrial/warning/fulltile,
 /turf/simulated/floor/tiled/monotile,
@@ -1481,7 +1483,7 @@
 /area/liberia/mule)
 "cE" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Maintenance";
+	name = "Nuclear Reactor";
 	req_access = newlist()
 	},
 /obj/structure/cable/blue{
@@ -2054,7 +2056,7 @@
 /area/liberia/atmos)
 "dz" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Maintenance";
+	name = "Engineering Wing";
 	req_access = newlist()
 	},
 /obj/structure/cable/blue{
@@ -2157,7 +2159,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/glass/command{
-	name = "Wreckage Site";
+	name = "Bridge";
 	req_access = newlist()
 	},
 /obj/floor_decal/industrial/warning/fulltile,
@@ -2368,7 +2370,8 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/multi_tile/glass/maintenance{
-	dir = 8
+	dir = 8;
+	name = "Trading Office"
 	},
 /obj/floor_decal/industrial/warning/fulltile,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3109,7 +3112,9 @@
 	dir = 1
 	},
 /obj/floor_decal/techfloor,
-/obj/machinery/door/airlock,
+/obj/machinery/door/airlock{
+	name = "Cryo Storage"
+	},
 /obj/structure/cable/blue{
 	d1 = 4;
 	d2 = 8;
@@ -3240,7 +3245,6 @@
 "fr" = (
 /obj/machinery/atmospherics/unary/tank/air{
 	dir = 1;
-	icon_state = "air_map";
 	start_pressure = 740.5
 	},
 /obj/machinery/light/small,
@@ -3254,7 +3258,6 @@
 "fs" = (
 /obj/machinery/atmospherics/unary/tank/air{
 	dir = 1;
-	icon_state = "air_map";
 	start_pressure = 740.5
 	},
 /obj/floor_decal/borderfloor{
@@ -3912,6 +3915,7 @@
 	dir = 4;
 	icon_state = "pipe-c"
 	},
+/obj/item/storage/fancy/matches/matchbox,
 /turf/simulated/floor/wood/ebony,
 /area/liberia/bar)
 "gA" = (
@@ -4467,7 +4471,6 @@
 "hC" = (
 /obj/structure/table/woodentable/walnut,
 /obj/item/material/ashtray,
-/obj/item/storage/box/matches,
 /obj/random/smokes,
 /turf/simulated/floor/carpet/red,
 /area/liberia/captain)
@@ -4778,7 +4781,7 @@
 /area/liberia/engineeringengines)
 "ii" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Maintenance";
+	name = "Storage";
 	req_access = newlist()
 	},
 /obj/floor_decal/techfloor{
@@ -5772,7 +5775,9 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/liberia/dockinghall)
 "kn" = (
-/obj/machinery/door/airlock/civilian,
+/obj/machinery/door/airlock/civilian{
+	name = "Shuttle Dock"
+	},
 /obj/floor_decal/techfloor,
 /obj/floor_decal/techfloor{
 	dir = 1
@@ -6487,7 +6492,9 @@
 /area/liberia/medbay)
 "lw" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/glass/medical,
+/obj/machinery/door/airlock/glass/medical{
+	name = "Medical Compartment"
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/blue{
@@ -7908,7 +7915,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/maintenance{
-	name = "Maintenance";
+	name = "EVA Storage";
 	req_access = newlist()
 	},
 /obj/floor_decal/techfloor{
@@ -8700,7 +8707,9 @@
 /turf/simulated/floor/wood/walnut,
 /area/liberia/library)
 "Tz" = (
-/obj/machinery/door/airlock,
+/obj/machinery/door/airlock{
+	name = "Personnel"
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/blue{
@@ -8875,7 +8884,8 @@
 /area/liberia/solar2)
 "VZ" = (
 /obj/machinery/door/airlock{
-	name = "Toilet"
+	name = "Toilet";
+	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
