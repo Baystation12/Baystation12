@@ -576,3 +576,11 @@
 
 /datum/reagent/colored_hair_dye/chaos/affect_touch(mob/living/carbon/human/H, removed)
 	apply_dye_color(H, Frand(1, 254), Frand(1, 254), Frand(1, 254))
+
+/datum/reagent/gunpowder
+	name = "Gunpowder"
+	description = "The earliest chemical explosive known to mankind."
+	taste_description = "spicy toasted beans"
+	reagent_state = SOLID
+	color = "#161414"
+	value = 7
