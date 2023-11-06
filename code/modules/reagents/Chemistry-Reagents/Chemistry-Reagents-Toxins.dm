@@ -447,6 +447,14 @@
 /datum/reagent/toxin/fertilizer/robustharvest
 	name = "Robust Harvest"
 
+/datum/reagent/toxin/fertilizer/potash
+	name = "Potassium Nitrate"
+	description = "Also known as Saltpetre. Useful as a fertilizer."
+	taste_description = "sharp salt"
+	reagent_state = SOLID
+	color = "#c7beb9"
+	value = 0.9
+
 /datum/reagent/toxin/plantbgone
 	name = "Plant-B-Gone"
 	description = "A harmful toxic mixture to kill plantlife. Do not ingest!"

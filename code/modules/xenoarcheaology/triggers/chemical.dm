@@ -45,7 +45,8 @@
 		/datum/reagent/napalm,
 		/datum/reagent/napalm/b,
 		/datum/reagent/nitroglycerin,
-		/datum/reagent/toxin/phoron/oxygen
+		/datum/reagent/toxin/phoron/oxygen,
+		/datum/reagent/gunpowder
 	)
 	trigger_type = TRIGGER_COMPLEX
 

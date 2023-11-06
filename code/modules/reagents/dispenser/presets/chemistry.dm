@@ -81,6 +81,5 @@
 /obj/item/reagent_containers/chem_disp_cartridge/tungsten
 	spawn_reagent = /datum/reagent/tungsten
 
-
 /obj/item/reagent_containers/chem_disp_cartridge/boron
 	spawn_reagent = /datum/reagent/toxin/boron
