@@ -75,6 +75,8 @@
 	new_human.pronouns = H.pronouns
 	new_human.gender = H.gender
 
+	transfer_languages(H, new_human)
+
 	H.update_body()
 	H.updatehealth()
 	H.UpdateDamageIcon()
