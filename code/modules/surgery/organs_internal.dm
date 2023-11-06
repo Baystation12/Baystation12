@@ -46,9 +46,9 @@
 			"You start treating damage to [target]'s [I.name] with [tool_name]." )
 		else if(I && !(I.status & ORGAN_CUT_AWAY) && (I.status & ORGAN_DEAD) && I.parent_organ == affected.organ_tag && !BP_IS_ROBOTIC(I))
 			if (!I.can_recover())
-				to_chat(user, SPAN_WARNING("[target]'s [I.name] is fully necrotic; [tool_name] won't help here."))
+				to_chat(user, SPAN_WARNING("\The [target]'s [I.name] is fully necrotic; [tool_name] won't help here."))
 			else
-				to_chat(user, SPAN_WARNING("[target]'s [I.name] is decaying; you'll need more than just [tool_name] here."))
+				to_chat(user, SPAN_WARNING("\The [target]'s [I.name] is decaying; you'll need more than just [tool_name] here."))
 	target.custom_pain("The pain in your [affected.name] is living hell!",100,affecting = affected)
 	playsound(target.loc, 'sound/items/bonegel.ogg', 50, TRUE)
 	..()
