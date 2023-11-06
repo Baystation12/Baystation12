@@ -12,6 +12,9 @@
 		melee = ARMOR_MELEE_MINOR,
 		energy = ARMOR_BALLISTIC_MINOR
 	)
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'packs/factions/scga/species/clothing_unathi.dmi'
+	)
 
 
 /obj/item/clothing/under/scga/pt

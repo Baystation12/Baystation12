@@ -11,7 +11,9 @@
 	on_rolled_down = ACCESSORY_ROLLED_NONE
 	w_class = ITEM_SIZE_TINY
 	slot = ACCESSORY_SLOT_INSIGNIA
-
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'packs/factions/scga/species/badges_unathi.dmi'
+	)
 
 /obj/item/clothing/accessory/scga_badge/get_fibers()
 	return null
