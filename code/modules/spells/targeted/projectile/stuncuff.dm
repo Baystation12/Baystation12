@@ -37,8 +37,7 @@
 /obj/item/handcuffs/wizard
 	name = "beams of light"
 	desc = "Undescribable and unpenetrable. Or so they say."
-
-	breakouttime = 300 //30 seconds
+	breakout_time = 30 SECONDS
 
 /obj/item/handcuffs/wizard/dropped(mob/user)
 	..()
