@@ -239,7 +239,6 @@ GLOBAL_LIST_EMPTY(zmimic_renderers)
 	group = RENDER_GROUP_FINAL
 	plane = RENDER_GROUP_SCENE
 
-
 /// Render group for stuff OUTSIDE the typical game context - UI, full screen effects, etc.
 /atom/movable/renderer/screen_group
 	name = "Screen Group"
@@ -281,6 +280,7 @@ GLOBAL_LIST_EMPTY(zmimic_renderers)
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 
 	var/obj/gas_heat_object = null
+	var/obj/gas_cold_object = null // Not strictly a heat effect but similar setup so may as well
 
 /atom/movable/renderer/heat/proc/Setup()
 	var/mob/M = owner
@@ -291,17 +291,27 @@ GLOBAL_LIST_EMPTY(zmimic_renderers)
 		if(gas_heat_object)
 			vis_contents -= gas_heat_object
 
+		if(gas_cold_object)
+			vis_contents -= gas_cold_object
+
 		if (quality == GLOB.PREF_LOW)
 			QDEL_NULL(gas_heat_object)
 			gas_heat_object = new /obj/heat(null)
+
+			QDEL_NULL(gas_cold_object)
+			gas_cold_object = new /obj/effect/cold_mist_gas(null)
 		else
 			QDEL_NULL(gas_heat_object)
+			QDEL_NULL(gas_cold_object)
+			gas_cold_object = new /obj/particle_emitter/mist/gas(null)
 			if (quality == GLOB.PREF_MED)
 				gas_heat_object = new /obj/particle_emitter/heat(null)
 			else if (quality == GLOB.PREF_HIGH)
 				gas_heat_object = new /obj/particle_emitter/heat/high(null)
 
 		vis_contents += gas_heat_object
+		if(config.enable_cold_mist)
+			vis_contents += gas_cold_object
 
 
 /atom/movable/renderer/heat/Initialize()

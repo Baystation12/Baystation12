@@ -349,6 +349,8 @@
 	for(var/obj/gas_overlay/O in graphic)
 		if(istype(O, /obj/gas_overlay/heat))
 			continue
+		if(istype(O, /obj/gas_overlay/cold))
+			continue
 		if(gas[O.gas_id] <= gas_data.overlay_limit[O.gas_id])
 			LAZYADD(graphic_remove, O)
 	for(var/g in gas_data.overlay_limit)
@@ -359,13 +361,20 @@
 				LAZYADD(graphic_add, tile_overlay)
 	. = 0
 
-	var/tile_overlay = get_tile_overlay(GAS_HEAT)
+	var/heat_overlay = get_tile_overlay(GAS_HEAT)
 	//If it's hot add something
 	if(temperature >= CARBON_LIFEFORM_FIRE_RESISTANCE)
-		if(!(tile_overlay in graphic))
-			LAZYADD(graphic_add, tile_overlay)
-	else if (tile_overlay in graphic)
-		LAZYADD(graphic_remove, tile_overlay)
+		if(!(heat_overlay in graphic))
+			LAZYADD(graphic_add, heat_overlay)
+	else if (heat_overlay in graphic)
+		LAZYADD(graphic_remove, heat_overlay)
+
+	var/cold_overlay = get_tile_overlay(GAS_COLD)
+	if(temperature <= FOGGING_TEMPERATURE && (return_pressure() >= (ONE_ATMOSPHERE / 4)))
+		if(!(cold_overlay in graphic))
+			LAZYADD(graphic_add, cold_overlay)
+	else if (cold_overlay in graphic)
+		LAZYADD(graphic_remove, cold_overlay)
 
 	//Apply changes
 	if(graphic_add && length(graphic_add))
@@ -382,6 +391,11 @@
 				if(new_alpha != O.alpha)
 					O.update_alpha_animation(new_alpha)
 				continue
+			if(istype(O, /obj/gas_overlay/cold))
+				var/new_alpha = clamp(max(125, 200 * (1 - ((temperature - MAX_FOG_TEMPERATURE) / (FOGGING_TEMPERATURE - MAX_FOG_TEMPERATURE)))), 125, 200)
+				if(new_alpha != O.alpha)
+					O.update_alpha_animation(new_alpha)
+				continue
 			var/concentration_mod = clamp(gas[O.gas_id] / total_moles, 0.1, 1)
 			var/new_alpha = min(230, round(pressure_mod * concentration_mod * 180, 5))
 			if(new_alpha != O.alpha)
@@ -391,6 +405,8 @@
 	if(!LAZYACCESS(tile_overlay_cache, gas_id))
 		if(gas_id == GAS_HEAT) //Not a real gas but functionally same thing
 			LAZYSET(tile_overlay_cache, gas_id, new/obj/gas_overlay/heat(null, GAS_HEAT))
+		if(gas_id == GAS_COLD) //Not a real gas but functionally same thing
+			LAZYSET(tile_overlay_cache, gas_id, new/obj/gas_overlay/cold(null, GAS_COLD))
 		else
 			LAZYSET(tile_overlay_cache, gas_id, new/obj/gas_overlay(null, gas_id))
 	return tile_overlay_cache[gas_id]
