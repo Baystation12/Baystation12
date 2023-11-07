@@ -1,4 +1,0 @@
-author: Mucker
-changes:
-  - {bugfix: The human-making artifact now transfers languages when transforming synthetics.}
-delete-after: true
