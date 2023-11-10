@@ -168,26 +168,13 @@
 	reagents.add_reagent(/datum/reagent/water, 10)
 
 /obj/item/reagent_containers/spray/chemsprayer
-	name = "chem sprayer"
-	desc = "A utility used to spray large amounts of reagent in a given area."
-	icon = 'icons/obj/weapons/other.dmi'
-	icon_state = "chemsprayer"
-	item_state = "chemsprayer"
-	throwforce = 3
-	w_class = ITEM_SIZE_LARGE
-	possible_transfer_amounts = null
-	volume = 600
-	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
-	step_delay = 8
-
-/obj/item/reagent_containers/spray/chemsprayer
 	name = "industrial chemical sprayer"
 	desc = "A utility used to spray large amounts of reagent in a given area."
 	icon = 'icons/obj/weapons/other.dmi'
 	icon_state = "chemsprayer"
 	item_icons = list(
 					slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns.dmi',
-					slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns.dmi',
+					slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns.dmi'
 					)
 	item_state = "chemsprayer"
 	throwforce = 3
