@@ -41,17 +41,17 @@
 	throwforce = round(0.25*material.get_edge_damage())
 	force = round(0.5*material.get_blunt_damage())
 
-/obj/item/stack/material/rods/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/stack/material/rods/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isWelder(W))
 		var/obj/item/weldingtool/WT = W
 
 		if(material.ignition_point)
 			to_chat(user, SPAN_WARNING("You can't weld this material into sheets."))
-			return
+			return TRUE
 
 		if(!can_use(2))
 			to_chat(user, SPAN_WARNING("You need at least two rods to do this."))
-			return
+			return TRUE
 
 		if(WT.remove_fuel(0,user))
 			var/obj/item/stack/material/new_item = material.place_sheet(usr.loc)
@@ -66,8 +66,9 @@
 			R.use(2)
 			if (!R && replace)
 				user.put_in_hands(new_item)
-		return
-	..()
+			return TRUE
+
+	return ..()
 
 /obj/item/stack/material/rods/attack_self(mob/user as mob)
 	src.add_fingerprint(user)
