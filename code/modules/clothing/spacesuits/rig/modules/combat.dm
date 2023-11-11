@@ -11,6 +11,8 @@
  * /obj/item/rig_module/mounted/energy_blade
  * /obj/item/rig_module/fabricator
  * /obj/item/rig_module/fabricator/wf_sign
+ * /obj/item/rig_module/mounted/arm_blade
+ * /obj/item/rig_module/mounted/power_fist
  */
 
 /obj/item/rig_module/device/flash
@@ -589,4 +591,60 @@
 		return
 
 	for(var/obj/item/material/armblade/mounted/blade in M.contents)
+		qdel(blade)
+
+/obj/item/rig_module/mounted/power_fist
+
+	name = "hand-mounted powerfists"
+	desc = "A pair of heavy powerfists to be installed into a hardsuit gauntlets."
+	icon_state = "module"
+
+	suit_overlay_active = null
+
+	activate_string = "Power up Fist"
+	deactivate_string = "Power off Fist"
+
+	interface_name = "hand-mounted powerfists"
+	interface_desc = "A pair of heavy powerfists to be installed into a hardsuit gauntlets."
+
+	usable = 0
+	selectable = 0
+	toggleable = 1
+	use_power_cost = 10 KILOWATTS
+	active_power_cost = 5 KILOWATTS
+	passive_power_cost = 0
+
+/obj/item/rig_module/mounted/power_fist/Process()
+
+	if(holder && holder.wearer)
+		if(!(locate(/obj/item/melee/powerfist/mounted) in holder.wearer))
+			deactivate()
+			return 0
+
+	return ..()
+
+/obj/item/rig_module/mounted/power_fist/activate()
+	var/mob/living/M = holder.wearer
+
+	if (!M.HasFreeHand())
+		to_chat(M, SPAN_DANGER("Your hands are full."))
+		deactivate()
+		return
+
+	var/obj/item/melee/powerfist/mounted/blade = new(M)
+	M.put_in_hands(blade)
+
+	if(!..())
+		return 0
+
+/obj/item/rig_module/mounted/power_fist/deactivate()
+
+	..()
+
+	var/mob/living/M = holder.wearer
+
+	if(!M)
+		return
+
+	for(var/obj/item/melee/powerfist/mounted/blade in M.contents)
 		qdel(blade)
