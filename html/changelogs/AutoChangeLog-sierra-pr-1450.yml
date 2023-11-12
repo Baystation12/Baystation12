@@ -1,0 +1,9 @@
+author: emmanuelbassil
+changes:
+  - {bugfix: Can now resist out of the human-sized gift.}
+  - {tweak: 'Added more feedback to chewing self out of cuffs. Did not change behavior,
+      need to target mouth on harm intent and click on self to do so.'}
+  - {tweak: Added more feedback to resisting out of closets; giving you progress towards
+      success.}
+  - {bugfix: Fixed being unable to break out of welded closets.}
+delete-after: true
