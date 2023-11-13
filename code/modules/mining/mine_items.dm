@@ -192,10 +192,10 @@
 	. = ..()
 	update_icon()
 
-/obj/item/stack/flag/attackby(obj/item/W, mob/user)
+/obj/item/stack/flag/use_tool(obj/item/tool, mob/living/user, list/click_params)
 	if(upright)
 		attack_hand(user)
-		return
+		return TRUE
 	return ..()
 
 /obj/item/stack/flag/attack_hand(mob/user)

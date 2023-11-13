@@ -77,25 +77,26 @@
 	var/drying_threshold_temperature = 500 //Kelvin to start drying
 
 //Step one - dehairing.
-/obj/item/stack/animalhide/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/material/knife) || isHatchet(W))
-
-		//visible message on mobs is defined as visible_message(var/message, var/self_message, var/blind_message)
-		usr.visible_message(SPAN_NOTICE("\The [usr] starts cutting hair off \the [src]"), SPAN_NOTICE("You start cutting the hair off \the [src]"), "You hear the sound of a knife rubbing against flesh")
-		if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			to_chat(usr, SPAN_NOTICE("You cut the hair from [get_exact_name(1)]"))
-			//Try locating an exisitng stack on the tile and add to there if possible
-			for(var/obj/item/stack/hairlesshide/HS in usr.loc)
+/obj/item/stack/animalhide/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if (is_sharp(W))
+		visible_message(
+			SPAN_NOTICE("\The [user] starts cutting hair off \the [src]"),
+			SPAN_NOTICE("You start cutting the hair off \the [src]"),
+			SPAN_NOTICE("You hear the sound of a knife rubbing against flesh.")
+			)
+		if (do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
+			to_chat(user, SPAN_NOTICE("You cut the hair from \the [get_exact_name(1)]"))
+			for (var/obj/item/stack/hairlesshide/HS in user.loc)
 				if(HS.amount < 50)
 					HS.amount++
 					src.use(1)
-					break
-			//If it gets to here it means it did not find a suitable stack on the tile.
+					return TRUE
 			var/obj/item/stack/hairlesshide/HS = new(usr.loc)
 			HS.amount = 1
-			src.use(1)
+			use(1)
+		return TRUE
 	else
-		..()
+		return ..()
 
 
 //Step two - washing..... it's actually in washing machine code.
