@@ -1,0 +1,5 @@
+author: TheNightingale
+changes:
+  - {tweak: 'Adds fast-mode and slow-mode to cryo cells. By upgrading the manipulators,
+      you can make it heal up to 50% faster or 50% slower.'}
+delete-after: true
