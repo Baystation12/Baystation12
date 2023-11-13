@@ -1,0 +1,5 @@
+author: TheNightingale
+changes:
+  - {tweak: Surgeons are now given feedback when they're trying to perform standard
+      organ repair surgery on a decaying/dead organ.}
+delete-after: true
