@@ -1,0 +1,7 @@
+author: rootoo807
+changes:
+  - {tweak: Human subspecies sprites no longer have random floating pixels and don't
+      clip out of clothing.}
+  - {tweak: 'Adds larger icons for the Species Info tab, rewrites some species descriptions
+      to better reflect current setting.'}
+delete-after: true
