@@ -11,6 +11,7 @@
 	damage_overlays = 'icons/mob/human_races/species/monkey/damage_overlays.dmi'
 	damage_mask =     'icons/mob/human_races/species/monkey/damage_mask.dmi'
 	blood_mask =      'icons/mob/human_races/species/monkey/blood_mask.dmi'
+	preview_icon = null
 
 	greater_form = SPECIES_HUMAN
 	mob_size = MOB_SMALL

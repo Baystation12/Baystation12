@@ -4,6 +4,7 @@
 	description = "A being of pure darkness, hates the light and all that comes with it."
 	icobase = 'icons/mob/human_races/species/shadow/body.dmi'
 	deform = 'icons/mob/human_races/species/shadow/body.dmi'
+	preview_icon = null
 
 	meat_type = null
 	bone_material = null

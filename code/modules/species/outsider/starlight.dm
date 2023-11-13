@@ -1,5 +1,6 @@
 /datum/species/starlight
 	name = "Starlight Base"
+	preview_icon = null
 
 	meat_type = null
 	bone_material = null

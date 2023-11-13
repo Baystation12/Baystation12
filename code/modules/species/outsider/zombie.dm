@@ -49,6 +49,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	name = "Zombie"
 	name_plural = "Zombies"
 	blood_color = "#700f0f"
+	preview_icon = null
 	death_message = "writhes and twitches before falling motionless."
 	species_flags = SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN
 	spawn_flags = SPECIES_IS_RESTRICTED
