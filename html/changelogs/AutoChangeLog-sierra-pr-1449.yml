@@ -1,0 +1,5 @@
+author: Lamasmaster
+changes:
+  - {rscadd: Introduce gunpowder as an explosive chemical. Inbetween potassium/water
+      and other higher grade explosives.}
+delete-after: true
