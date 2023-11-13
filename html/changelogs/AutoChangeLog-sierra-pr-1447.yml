@@ -1,5 +1,0 @@
-author: Reishi42
-changes:
-  - {bugfix: Tools from the engineering toolset implant could be dropped (for various
-      reasons). Now it's impossible.}
-delete-after: true
