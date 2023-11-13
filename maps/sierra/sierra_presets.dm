@@ -4,6 +4,8 @@ var/global/const/NETWORK_POD         = "General Utility Pod"
 var/global/const/NETWORK_FIRST_DECK  = "First Deck"
 var/global/const/NETWORK_SECOND_DECK = "Second Deck"
 var/global/const/NETWORK_THIRD_DECK  = "Third Deck"
+var/global/const/NETWORK_FOURTH_DECK = "Fourth Deck"
+var/global/const/NETWORK_BRIDGE_DECK = "Bridge Deck"
 var/global/const/NETWORK_SUPPLY      = "Supply"
 var/global/const/NETWORK_HANGAR      = "Hangar"
 var/global/const/NETWORK_PETROV      = "Petrov"
@@ -36,6 +38,8 @@ var/global/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
 		NETWORK_FIRST_DECK,
 		NETWORK_SECOND_DECK,
 		NETWORK_THIRD_DECK,
+		NETWORK_FOURTH_DECK,
+		NETWORK_BRIDGE_DECK,
 		NETWORK_COMMAND,
 		NETWORK_ENGINEERING,
 		NETWORK_ENGINE,
@@ -43,6 +47,7 @@ var/global/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
 		NETWORK_RESEARCH,
 		NETWORK_SECURITY,
 		NETWORK_SUPPLY,
+		NETWORK_MINE,
 		NETWORK_EXPEDITION,
 		NETWORK_HANGAR,
 		NETWORK_CALYPSO,
@@ -95,6 +100,12 @@ var/global/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
 
 /obj/machinery/camera/network/third_deck
 	network = list(NETWORK_THIRD_DECK)
+
+/obj/machinery/camera/network/fourth_deck
+	network = list(NETWORK_FOURTH_DECK)
+
+/obj/machinery/camera/network/bridge_deck
+	network = list(NETWORK_BRIDGE_DECK)
 
 /obj/machinery/camera/network/pod
 	network = list(NETWORK_POD)
