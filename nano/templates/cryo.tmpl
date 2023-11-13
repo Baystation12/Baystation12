@@ -51,3 +51,15 @@ Used In File(s): \code\game\machinery\cryo.dm
 		{{:helper.link('Eject Beaker', 'eject', {'ejectBeaker' : 1}, data.isBeakerLoaded ? null : 'disabled')}}
 	</div>
 </div>
+<div class="item">&nbsp;</div>
+<div class="item">
+	<div class="itemLabel">
+		Cryostasis Speed:
+	</div>
+	<div class="itemContent" style="width: 40%;">
+		{{:helper.link('Fast', null, {'goFast' : 1}, data.current_stasis_mult === data.fast_stasis_mult ? 'selected' : null)}}
+		{{:helper.link('Regular', null, {'goRegular' : 1}, data.current_stasis_mult === 1 ? 'selected' : null)}}
+		{{:helper.link('Slow', null, {'goSlow' : 1}, data.current_stasis_mult === data.slow_stasis_mult ? 'selected' : null)}}
+	</div>
+</div>
+</div>
