@@ -1,0 +1,4 @@
+author: LordNest
+changes:
+  - {maptweak: Добавил камеры и восстановил сети камер. Минорные мапфиксы}
+delete-after: true
