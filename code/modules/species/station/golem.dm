@@ -5,6 +5,7 @@
 	icobase = 'icons/mob/human_races/species/golem/body.dmi'
 	deform = 'icons/mob/human_races/species/golem/body.dmi'
 	husk_icon = 'icons/mob/human_races/species/golem/husk.dmi'
+	preview_icon = null
 
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch)
 	species_flags = SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON
