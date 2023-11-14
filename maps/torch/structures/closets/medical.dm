@@ -43,6 +43,7 @@
 		/obj/item/device/megaphone,
 		/obj/item/reagent_containers/hypospray/vial,
 		/obj/item/storage/fancy/vials,
+		/obj/item/device/medigel,
 		/obj/item/device/scanner/health,
 		/obj/item/clothing/accessory/stethoscope,
 		/obj/item/device/flashlight/pen,

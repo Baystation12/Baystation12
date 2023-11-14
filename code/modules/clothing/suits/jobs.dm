@@ -265,6 +265,7 @@
 		/obj/item/reagent_containers/hypospray,
 		/obj/item/reagent_containers/syringe,
 		/obj/item/device/scanner/health,
+		/obj/item/device/medigel,
 		/obj/item/device/flashlight,
 		/obj/item/device/radio,
 		/obj/item/tank/oxygen_emergency,
@@ -352,6 +353,7 @@
 		/obj/item/reagent_containers/syringe,
 		/obj/item/device/scanner/health,
 		/obj/item/reagent_containers/ivbag,
+		/obj/item/device/medigel,
 		/obj/item/gun
 	)
 
@@ -366,6 +368,7 @@
 		/obj/item/reagent_containers/dropper,
 		/obj/item/reagent_containers/hypospray,
 		/obj/item/reagent_containers/syringe,
+		/obj/item/device/medigel,
 		/obj/item/device/scanner/health,
 		/obj/item/device/flashlight,
 		/obj/item/device/radio,

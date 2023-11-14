@@ -120,47 +120,44 @@
 	if (mode == MEDIGEL_SALVE)
 		if (istype(target, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = target
-			var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
-
-			if(affecting.is_bandaged() && affecting.is_disinfected() && affecting.is_salved())
-				to_chat(user, SPAN_WARNING("The wounds on \the [H]'s [affecting.name] have already been treated."))
-			else
-				if(!LAZYLEN(affecting.wounds))
-					return
-				owner.visible_message(SPAN_NOTICE("\The [owner] extends \the [src] towards \the [H]'s [affecting.name]."))
-				var/large_wound = FALSE
-				for (var/datum/wound/W as anything in affecting.wounds)
+			var/treated = 0
+			var/large_wound = FALSE
+			for (var/obj/item/organ/external/organ in H.organs)
+				if (BP_IS_ROBOTIC(organ))
+					continue
+				for (var/datum/wound/W as anything in organ.wounds)
 					if (W.bandaged && W.disinfected && W.salved)
 						continue
-					var/delay = (W.damage / 4) * user.skill_delay_mult(SKILL_MEDICAL, 0.8)
-					owner.setClickCooldown(delay)
-					if(!do_after(user, delay, target))
+					if (!do_after(user, W.damage / 5, H, DO_MEDICAL))
 						break
-
 					var/obj/item/cell/C = owner.get_cell()
-					if(istype(C))
-						C.use(0.01 KILOWATTS) //Does cost power, so not a freebie, specially with large amount of wounds
+					if (istype(C))
+						C.use(0.01 KILOWATTS)
+						treated = 1
+						if (W.current_stage <= W.max_bleeding_stage)
+							owner.visible_message(SPAN_NOTICE("\The [owner] covers \a [W.desc] on \the [H]'s [organ.name] with large globs of medigel."))
+							large_wound = TRUE
+						else if (W.damage_type == INJURY_TYPE_BRUISE)
+							owner.visible_message(SPAN_NOTICE("\The [owner] sprays \a [W.desc] on \the [H]'s [organ.name] with a fine layer of medigel."))
+						else
+							owner.visible_message(SPAN_NOTICE("\The [owner] drizzles some medigel over \a [W.desc] on \the [H]'s [organ.name]."))
+						playsound(user, pick(apply_sounds), 20)
+						if (large_wound)
+							owner.visible_message(SPAN_NOTICE("\The [src]'s UV matrix glows faintly as it cures the medigel."))
+							playsound(owner, 'sound/items/Welder2.ogg', 10)
+						visible_message(SPAN_NOTICE("\The [user] sprays \a [W.desc] on \the [H]'s [organ.name] with a fine layer of medigel."))
+						if (H.stat == UNCONSCIOUS && prob(25))
+							to_chat(H, SPAN_NOTICE(SPAN_BOLD("... [pick("feels better", "hurts less")] ...")))
+						W.bandage()
+						W.disinfect()
+						W.salve()
+						organ.update_damages()
+						H.update_bandages(TRUE)
+						update_icon()
 					else
-						return //Early out, cell is gone
-
-					if (W.current_stage <= W.max_bleeding_stage)
-						owner.visible_message(SPAN_NOTICE("\The [owner] covers \a [W.desc] on \the [H]'s [affecting.name] with large globs of medigel."))
-						large_wound = TRUE
-					else if (W.damage_type == INJURY_TYPE_BRUISE)
-						owner.visible_message(SPAN_NOTICE("\The [owner] sprays \a [W.desc] on \the [H]'s [affecting.name] with a fine layer of medigel."))
-					else
-						owner.visible_message(SPAN_NOTICE("\The [owner] drizzles some medigel over \a [W.desc] on \the [H]'s [affecting.name]."))
-					playsound(owner, pick(apply_sounds), 20)
-					W.bandage()
-					W.disinfect()
-					W.salve()
-					if (H.stat == UNCONSCIOUS && prob(25))
-						to_chat(H, SPAN_NOTICE(SPAN_BOLD("... [pick("feels better", "hurts less")] ...")))
-				if(large_wound)
-					owner.visible_message(SPAN_NOTICE("\The [src]'s UV matrix glows faintly as it cures the medigel."))
-					playsound(owner, 'sound/items/Welder2.ogg', 10)
-				affecting.update_damages()
-				H.update_bandages(TRUE)
+						return
+			if (treated == 0)
+				to_chat(user, SPAN_NOTICE("\The [H] has no injuries in need of medigel."))
 	else if(mode == MEDIGEL_SCAN)
 		if (istype(target, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = target

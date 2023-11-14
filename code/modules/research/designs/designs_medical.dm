@@ -82,3 +82,11 @@
 	materials = list(MATERIAL_PLASTIC = 15000, MATERIAL_GLASS = 15000, MATERIAL_SILVER = 5000, MATERIAL_GOLD = 1000)
 	build_path = /obj/item/bodybag/cryobag
 	sort_string = "MAGAA"
+
+/datum/design/item/medical/medigel
+	desc = "A  handheld medigel spray to quickly seal wounds even through thick clothing."
+	id = "medigel"
+	req_tech = list(TECH_MATERIAL = 4, TECH_BIO = 5, TECH_ENGINEERING = 4)
+	materials = list(MATERIAL_PLASTIC = 5000, MATERIAL_SILVER = 1500, MATERIAL_PHORON = 500)
+	build_path = /obj/item/device/medigel
+	sort_string = "MAHAA"
