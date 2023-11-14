@@ -1,5 +1,0 @@
-author: emmanuelbassil
-changes:
-  - {bugfix: Fixes being able to create reinforced glass with rods + glass}
-  - {bugfix: Fixes being unable to use fingerprint cards or put them on tables}
-delete-after: true
