@@ -1,0 +1,6 @@
+author: orelbon
+changes:
+  - {tweak: The self-destruct now has the option to trigger evacuation procedures.}
+  - {tweak: Lowers volume of delta siren.}
+  - {tweak: Lowers volume of evacuation siren.}
+delete-after: true
