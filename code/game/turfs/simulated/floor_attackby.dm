@@ -160,9 +160,9 @@
 			return
 		else if(isWelder(C))
 			var/obj/item/weldingtool/welder = C
-			if(welder.isOn() && (is_plating()))
+			if(welder.can_use(2, user) && (is_plating()))
 				if(broken || burnt)
-					if(welder.remove_fuel(0, user))
+					if(welder.remove_fuel(2, user))
 						to_chat(user, SPAN_NOTICE("You fix some dents on the broken plating."))
 						playsound(src, 'sound/items/Welder.ogg', 80, 1)
 						icon_state = "plating"
@@ -170,7 +170,7 @@
 						broken = null
 					return
 				else
-					if(welder.remove_fuel(0, user))
+					if(welder.remove_fuel(2, user))
 						playsound(src, 'sound/items/Welder.ogg', 80, 1)
 						visible_message(SPAN_NOTICE("[user] has started melting the plating's reinforcements!"))
 						if(do_after(user, (C.toolspeed * 5) SECONDS, src, DO_REPAIR_CONSTRUCT) && welder.isOn() && welder_melt())

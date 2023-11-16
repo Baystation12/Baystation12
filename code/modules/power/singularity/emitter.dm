@@ -224,7 +224,7 @@
 			if (EMITTER_LOOSE)
 				to_chat(user, SPAN_WARNING("\The [src] needs to be wrenched to the floor."))
 			if (EMITTER_WRENCHED)
-				if (WT.remove_fuel(0, user))
+				if (WT.can_use(1, user))
 					playsound(loc, 'sound/items/Welder.ogg', 50, TRUE)
 					user.visible_message(
 						SPAN_NOTICE("\The [user] starts to weld \the [src] to the floor."),
@@ -232,7 +232,7 @@
 						SPAN_ITALIC("You hear welding.")
 					)
 					if (do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
-						if (!WT.isOn())
+						if (!WT.remove_fuel(1, user))
 							return
 						state = EMITTER_WELDED
 						playsound(loc, 'sound/items/Welder2.ogg', 50, TRUE)
@@ -242,10 +242,8 @@
 							SPAN_ITALIC("You hear welding.")
 						)
 						connect_to_network()
-				else
-					to_chat(user, SPAN_WARNING("You need more welding fuel to complete this task."))
 			if (EMITTER_WELDED)
-				if (WT.remove_fuel(0, user))
+				if (WT.can_use(1, user))
 					playsound(loc, 'sound/items/Welder.ogg', 50, TRUE)
 					user.visible_message(
 						SPAN_NOTICE("\The [user] starts to cut \the [src] free from the floor."),
@@ -253,7 +251,7 @@
 						SPAN_ITALIC("You hear welding.")
 					)
 					if (do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
-						if (!WT.isOn())
+						if (!WT.remove_fuel(1, user))
 							return
 						state = EMITTER_WRENCHED
 						playsound(loc, 'sound/items/Welder2.ogg', 50, TRUE)
@@ -263,8 +261,6 @@
 							SPAN_ITALIC("You hear welding.")
 						)
 						disconnect_from_network()
-				else
-					to_chat(user, SPAN_WARNING("You need more welding fuel to complete this task."))
 		return
 
 	if (istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer))

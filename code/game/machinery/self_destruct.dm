@@ -11,15 +11,15 @@
 
 /obj/machinery/self_destruct/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWelder(W))
-		if(damaged)
-			user.visible_message("[user] begins to repair [src].", "You begin repairing [src].")
-			if(do_after(usr, (W.toolspeed * 10) SECONDS, src, DO_REPAIR_CONSTRUCT))
-				var/obj/item/weldingtool/w
-				if(w.burn_fuel(10))
-					damaged = 0
-					user.visible_message("[user] repairs [src].", "You repair [src].")
-				else
-					to_chat(user, SPAN_WARNING("There is not enough fuel to repair [src]."))
+		var/obj/item/weldingtool/WT = W
+		if(damaged && WT.can_use(5, user))
+			user.visible_message(
+				SPAN_NOTICE("\The [user] begins to repair \the [src]."),
+				SPAN_NOTICE("You begin repairing [src].")
+			)
+			if(do_after(usr, (W.toolspeed * 10) SECONDS, src, DO_REPAIR_CONSTRUCT) && WT.remove_fuel(10, user))
+				damaged = 0
+				user.visible_message("[user] repairs [src].", "You repair [src].")
 				return
 	if(istype(W, /obj/item/nuclear_cylinder))
 		if(damaged)

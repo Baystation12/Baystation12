@@ -134,7 +134,6 @@
 		return
 
 	if(welding)
-		remove_fuel(1)
 		var/turf/location = get_turf(user)
 		if(isliving(O))
 			var/mob/living/L = O
@@ -292,12 +291,11 @@
 			to_chat(user, SPAN_WARNING("\The [M]'s [S.name] is hard and brittle - \the [src]  cannot repair it."))
 			return TRUE
 
-		if (!welding)
-			to_chat(user, SPAN_WARNING("You'll need to turn [src] on to patch the damage on [M]'s [S.name]!"))
+		if (!can_use(2, user, "to patch the damage on [M]'s [S.name]"))
 			return TRUE
 
 		if (S.robo_repair(15, DAMAGE_BRUTE, "some dents", src, user))
-			remove_fuel(1, user)
+			remove_fuel(2, user)
 			return TRUE
 	else return FALSE
 
