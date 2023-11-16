@@ -96,7 +96,7 @@ SUBSYSTEM_DEF(experience)
 
 	for (var/client/client as anything in clients_to_process)
 		// If a client logs out in the middle of this or has no mob or mind
-		if(!client || !client.mob || !client.mob.mind)
+		if(!client || !client.mob || !client.mob.mind || !select_queries[client.ckey])
 			clients_to_process.Remove(client)
 			continue
 

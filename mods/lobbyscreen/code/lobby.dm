@@ -6,6 +6,9 @@
 		update_titlescreen(player.client)
 
 /datum/map/proc/update_titlescreen(client/C)
+	if (isnull(C))
+		return
+
 	var/state = Master.current_runlevel || 0
 	var/mob/new_player/player = C.mob
 	send_output(C, "[state]-[player.ready]", "lobbybrowser:setStatus")
