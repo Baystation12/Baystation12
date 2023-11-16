@@ -86,13 +86,10 @@ var/global/bomb_set
 			if(0)
 				if(isWelder(O))
 					var/obj/item/weldingtool/WT = O
-					if(!WT.isOn()) return
-					if(WT.get_fuel() < 5) // uses up 5 fuel.
-						to_chat(user, SPAN_WARNING("You need more fuel to complete this task."))
+					if(!WT.can_use(5, user))
 						return
 
 					user.visible_message("[user] starts cutting loose the anchoring bolt covers on [src].", "You start cutting loose the anchoring bolt covers with [O]...")
-
 					if(do_after(user, (O.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT))
 						if(!src || !user || !WT.remove_fuel(5, user)) return
 						user.visible_message("\The [user] cuts through the bolt covers on \the [src].", "You cut through the bolt cover.")
@@ -112,13 +109,10 @@ var/global/bomb_set
 			if(2)
 				if(isWelder(O))
 					var/obj/item/weldingtool/WT = O
-					if(!WT.isOn()) return
-					if (WT.get_fuel() < 5) // uses up 5 fuel.
-						to_chat(user, SPAN_WARNING("You need more fuel to complete this task."))
+					if(!WT.can_use(5, user))
 						return
 
 					user.visible_message("[user] starts cutting apart the anchoring system sealant on [src].", "You start cutting apart the anchoring system's sealant with [O]...")
-
 					if(do_after(user, (O.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT))
 						if(!src || !user || !WT.remove_fuel(5, user)) return
 						user.visible_message("\The [user] cuts apart the anchoring system sealant on \the [src].", "You cut apart the anchoring system's sealant.")

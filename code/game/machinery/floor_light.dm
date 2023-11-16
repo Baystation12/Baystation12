@@ -44,13 +44,12 @@ var/global/list/floor_light_cache = list()
 		visible_message(SPAN_NOTICE("\The [user] has [anchored ? "attached" : "detached"] \the [src]."))
 	else if(isWelder(W) && (damaged || MACHINE_IS_BROKEN(src)))
 		var/obj/item/weldingtool/WT = W
-		if(!WT.remove_fuel(0, user))
-			to_chat(user, SPAN_WARNING("\The [src] must be on to complete this task."))
+		if(!WT.can_use(1, user))
 			return
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 		if(!do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
 			return
-		if(!src || !WT.isOn())
+		if(!src || !WT.remove_fuel(1, user))
 			return
 		visible_message(SPAN_NOTICE("\The [user] has repaired \the [src]."))
 		set_broken(FALSE)

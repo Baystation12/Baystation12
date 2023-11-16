@@ -215,7 +215,7 @@
 			return FALSE
 		if(isWelder(tool))
 			var/obj/item/weldingtool/welder = tool
-			if(!welder.isOn() || !welder.remove_fuel(1,user))
+			if(!welder.remove_fuel(1,user))
 				return FALSE
 		if(istype(tool, /obj/item/gun/energy/plasmacutter))
 			var/obj/item/gun/energy/plasmacutter/cutter = tool

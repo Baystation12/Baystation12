@@ -53,7 +53,7 @@
 			to_chat(user, SPAN_WARNING("You need at least two rods to do this."))
 			return TRUE
 
-		if(WT.remove_fuel(0,user))
+		if(WT.remove_fuel(1,user))
 			var/obj/item/stack/material/new_item = material.place_sheet(usr.loc)
 			new_item.add_to_stacks(usr)
 			user.visible_message(

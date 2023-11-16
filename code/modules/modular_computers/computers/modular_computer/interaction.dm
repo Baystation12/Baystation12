@@ -167,8 +167,8 @@
 		return
 	if(isWelder(W))
 		var/obj/item/weldingtool/WT = W
-		if(!WT.isOn())
-			to_chat(user, "\The [W] is off.")
+		var/damage = get_damage_value()
+		if(!WT.can_use(round(damage/75), user))
 			return
 
 		if(!get_damage_value())
@@ -176,8 +176,7 @@
 			return
 
 		to_chat(user, "You begin repairing damage to \the [src]...")
-		var/damage = get_damage_value()
-		if(WT.remove_fuel(round(damage / 75)) && do_after(user, damage / 10, src, DO_REPAIR_CONSTRUCT))
+		if(do_after(user, damage / 10, src, DO_REPAIR_CONSTRUCT) && WT.remove_fuel(round(damage / 75)))
 			revive_health()
 			to_chat(user, "You repair \the [src].")
 		return

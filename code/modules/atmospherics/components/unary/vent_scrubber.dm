@@ -212,7 +212,7 @@
 			to_chat(user, SPAN_NOTICE("The welding tool needs to be on to start this task."))
 			return 1
 
-		if(!WT.remove_fuel(0,user))
+		if(!WT.can_use(1,user))
 			to_chat(user, SPAN_WARNING("You need more welding fuel to complete this task."))
 			return 1
 
@@ -226,8 +226,7 @@
 		if(!src)
 			return 1
 
-		if(!WT.isOn())
-			to_chat(user, SPAN_NOTICE("The welding tool needs to be on to finish this task."))
+		if(!WT.remove_fuel(1, user))
 			return 1
 
 		welded = !welded

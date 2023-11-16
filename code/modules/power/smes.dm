@@ -251,13 +251,12 @@
 
 	if(isWelder(W))
 		var/obj/item/weldingtool/WT = W
-		if(!WT.isOn())
-			to_chat(user, "Turn on \the [WT] first!")
+		if(!WT.can_use(5, user))
 			return TRUE
 		if(!damage)
 			to_chat(user, "\The [src] is already fully repaired.")
 			return TRUE
-		if(WT.remove_fuel(0,user) && do_after(user, damage, src, DO_REPAIR_CONSTRUCT))
+		if(do_after(user, damage, src, DO_REPAIR_CONSTRUCT) && WT.remove_fuel(5 ,user))
 			to_chat(user, "You repair all structural damage to \the [src]")
 			damage = 0
 		return TRUE

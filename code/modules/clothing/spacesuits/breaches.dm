@@ -224,7 +224,6 @@
 
 		var/obj/item/weldingtool/WT = W
 		if(!WT.remove_fuel(5))
-			to_chat(user, SPAN_WARNING("You need more welding fuel to repair this suit."))
 			return
 
 		repair_breaches(DAMAGE_BRUTE, 3, user)
