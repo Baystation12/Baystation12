@@ -103,14 +103,28 @@
 	a content folk who see themselves as close to nature and keepers of the heritage of humanity."
 	economic_power = 1.1
 
-/singleton/cultural_info/culture/human/ceti
-	name = CULTURE_HUMAN_CETI
-	description = "You are from Ceti Epsilon, the technical hub of the SCG. As a Cetite you are no stranger to the cutting edge of technology present in Sol space. \
-	Putting education and the latest tech at the forefront of their priorities the people of Ceti are some of the brightest or tech savvy around. \
-	This has afforded those from the system or planet a reputation as being a cut above the rest in technical matters, with those who attended the Ceti Institute of Technology \
-	being considered some of the best qualified technical specialists in humanity. Recently there has been a rising transhumanist element in Ceti society resulting in a large \
-	cybernetics culture; it is not uncommon to see many Cetites sporting some chrome."
-	economic_power = 1.1
+/singleton/cultural_info/culture/human/ceti_north
+	name = CULTURE_HUMAN_CETIN
+	description = "You are from the northern pole of Ceti Epsilon. Likely living in one of the claustrophobic concrete jungles like the city of Icon, \
+	Solar citizens hailing from the North generally enjoy higher opportunities for better jobs, and lead a more comfortable lifestyle \
+	compared to those from the Interstates and South. \
+	Icon is also the technological capital of Ceti Epsilon, with education and the latest tech easily available to Northern Cetites."
+	economic_power = 1.3
+
+/singleton/cultural_info/culture/human/ceti_south
+	name = CULTURE_HUMAN_CETIS
+	description = "You are from the southern pole of Ceti Epsilon. Likely living in one of the smog-ridden cities like the region's capital, Scadde, or in one of the outer townships. \
+	Solar citizens hailing from the South live a less comfortable and connected lifestyle compared to those from the North, but still have plenty of opportunities to make something of their lives. \
+	Scadde is a hub for specialised and unspecialised blue collar labour, and the site for the Tau Ceti system's Hephaestus Industries headquarters."
+	economic_power = 1.2
+
+/singleton/cultural_info/culture/human/ceti_interstate
+	name = CULTURE_HUMAN_CETII
+	description = "The stretch between the north and south poles of Ceti Epsilon is collectively referred to as the Ceti Interstate Municipal Region. Those living across this sweltering desert usually do so out of necessity rather than choice. \
+	The majority of industry in the region is made up of mining operations, hydroponic farms, and independent businesses \
+	between the two poles. \
+	The region is sparsely populated both by hopeful entrepreneurs and those who benefit from the lack of coverage by settlement police authorities or planetary defense forces."
+	economic_power = 1.0
 
 /singleton/cultural_info/culture/human/spacer_core
 	name = CULTURE_HUMAN_SPACER
