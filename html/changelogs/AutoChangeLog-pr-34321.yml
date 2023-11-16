@@ -1,4 +1,0 @@
-author: LordNest
-changes:
-  - {rscadd: Added queue for autolathe UI. Can hold up to four items in it + one processing.}
-delete-after: true
