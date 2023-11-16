@@ -37,8 +37,7 @@
 	else
 		icon_state = initial(icon_state)
 
-/obj/item/lipstick/use_before(atom/A, mob/living/user as mob)
-	. = FALSE
+/obj/item/lipstick/use_after(atom/A, mob/living/user, click_parameters)
 	if (!open)
 		to_chat(user, SPAN_NOTICE("You need to uncap \the [src] first!"))
 		return TRUE
