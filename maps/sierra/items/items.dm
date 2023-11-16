@@ -18,6 +18,49 @@ sierra specific items
 	desc = "A rugged backpack worn over one shoulder."
 	icon_state = "courierbagsci"
 
+/obj/item/storage/firstaid/security
+	name = "Tactical first-aid kit"
+	desc = "It's a small emergency medical kit. Dark and lightweight."
+	use_sound = 'sound/effects/storage/pillbottle.ogg'
+	icon = 'maps/sierra/icons/obj/medical.dmi'
+	icon_state = "fak-sec"
+	matter = list(MATERIAL_PLASTIC = 600)
+	storage_slots = 7
+	w_class = ITEM_SIZE_SMALL
+	max_w_class = ITEM_SIZE_SMALL
+	startswith = list(
+		/obj/item/reagent_containers/hypospray/autoinjector/inaprovaline,
+		/obj/item/reagent_containers/hypospray/autoinjector/antirad,
+		/obj/item/reagent_containers/hypospray/autoinjector/detox,
+		/obj/item/reagent_containers/hypospray/autoinjector/dexalin,
+		/obj/item/reagent_containers/hypospray/autoinjector/kelotane,
+		/obj/item/reagent_containers/hypospray/autoinjector/pain,
+		/obj/item/stack/medical/bruise_pack
+	)
+	can_hold = list(
+		/obj/item/reagent_containers/hypospray/autoinjector,
+		/obj/item/stack/medical/bruise_pack
+	)
+
+/obj/item/reagent_containers/hypospray/autoinjector/dexalin
+	name ="autoinjector (dexalin plus)"
+	starts_with = list(/datum/reagent/dexalin = 5)
+
+/obj/item/reagent_containers/hypospray/autoinjector/kelotane
+	name = "autoinjector (antiburn)"
+	starts_with = list(/datum/reagent/kelotane = 5)
+
+/obj/item/reagent_containers/hypospray/autoinjector/kelotane
+	name = "autoinjector (antiburn)"
+	starts_with = list(/datum/reagent/kelotane = 5)
+
+// Containers
+
+/obj/item/storage/backpack/dufflebag/syndie_kit/plastique
+	startswith = list(
+		/obj/item/plastique = 6
+		)
+
 /***********
 Unique items
 ***********/

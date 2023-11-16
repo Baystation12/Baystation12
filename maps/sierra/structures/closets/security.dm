@@ -22,7 +22,9 @@
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
 		/obj/item/melee/baton/loaded,
-		/obj/item/gun/energy/gun/secure,
+		/obj/item/gun/projectile/pistol/sec,
+		/obj/item/ammo_magazine/pistol/rubber,
+		/obj/item/ammo_magazine/pistol,
 		/obj/item/melee/telebaton,
 		/obj/item/device/taperecorder,
 		/obj/item/reagent_containers/spray/pepper,
@@ -35,7 +37,7 @@
 		/obj/item/crowbar/prybar,
 		/obj/item/device/radio/off,
 		/obj/item/clothing/mask/gas/half,
-		/obj/item/storage/firstaid/combat
+		/obj/item/storage/firstaid/security
 	)
 
 /obj/structure/closet/secure_closet/warden/sierra
@@ -59,7 +61,9 @@
 		/obj/item/storage/belt/holster/security,
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/melee/baton/loaded,
-		/obj/item/gun/energy/gun/secure,
+		/obj/item/gun/projectile/pistol/sec,
+		/obj/item/ammo_magazine/pistol/rubber,
+		/obj/item/ammo_magazine/pistol,
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/gun/energy/taser,
 		/obj/item/handcuffs,
@@ -73,7 +77,7 @@
 		/obj/item/crowbar/prybar,
 		/obj/item/device/radio/off,
 		/obj/item/clothing/mask/gas/half,
-		/obj/item/storage/firstaid/regular
+		/obj/item/storage/firstaid/security
 	)
 
 /obj/structure/closet/secure_closet/cabinet/forensics
@@ -92,7 +96,8 @@
 		/obj/item/device/radio/headset/headset_sec,
 		/obj/item/device/radio/headset/headset_sec/alt,
 		/obj/item/clothing/suit/armor/pcarrier/medium/nt,
-		/obj/item/gun/energy/gun/small/secure,
+		/obj/item/gun/projectile/pistol/sec,
+		/obj/item/ammo_magazine/pistol/rubber,
 		/obj/item/device/flash,
 		/obj/item/melee/baton/loaded,
 		/obj/item/reagent_containers/spray/pepper,
@@ -107,7 +112,7 @@
 		/obj/item/crowbar/prybar,
 		/obj/item/device/radio/off,
 		/obj/item/clothing/mask/gas/half,
-		/obj/item/storage/firstaid/regular
+		/obj/item/storage/firstaid/security
 	)
 
 /obj/structure/closet/secure_closet/security/sierra
@@ -130,7 +135,9 @@
 		/obj/item/taperoll/police,
 		/obj/item/device/hailer,
 		/obj/item/clothing/accessory/storage/black_vest,
-		/obj/item/gun/energy/gun/secure,
+		/obj/item/gun/projectile/pistol/sec,
+		/obj/item/ammo_magazine/pistol/rubber,
+		/obj/item/ammo_magazine/pistol,
 		/obj/item/device/megaphone,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/device/holowarrant,
@@ -138,7 +145,7 @@
 		/obj/item/crowbar/prybar,
 		/obj/item/device/radio/off,
 		/obj/item/clothing/mask/gas/half,
-		/obj/item/storage/firstaid/regular
+		/obj/item/storage/firstaid/security
 	)
 
 /obj/structure/closet/secure_closet/security/sierra/cadet

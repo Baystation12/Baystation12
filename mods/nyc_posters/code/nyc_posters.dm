@@ -2,6 +2,7 @@
 //  SS220 2023 New Year contest  //
 //  ---------------------------  //
 
+/*
 /singleton/poster/nyc_adme_midala
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
 	// by KandJX
@@ -12,6 +13,7 @@
 	От неё веет одновременно и изящностью, и решительностью. \
 	Текст на постере гласит \"Stop the Martians\"."
 
+
 /singleton/poster/nyc_evening_before_12
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
 	// by Den10901
@@ -21,6 +23,7 @@
 	and red can be seen. Is it tajaran? Old man? Santa? \"Died Moroz\"? There's \
 	no answer on poster."
 
+
 /singleton/poster/nyc_know_the_enemy
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
 	// by NAKAII
@@ -29,7 +32,7 @@
 	desc = "A foreboding poster depicting the mask of a blood-red hardsuit. The caption \
 	reads \"Know the enemy!\". There is also a tiny marking at the bottom of the poster, \
 	it reads: \"Beware the frontier pirates!\""
-
+*/
 /singleton/poster/nyc_mine
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
 	// by Скавен-крыс
@@ -76,7 +79,7 @@
 	icon_state = "gas_advertisement"
 	name = "Giant Armoured Serpentid"
 	desc = "Buy them today - they'll work whole their life without salary because they LOVE working!"
-
+/*
 /singleton/poster/nyc_the_goushque
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
 	// by tomatik
@@ -108,6 +111,7 @@
 	desc = "You see a slightly battered poster, which shows a RED toolbox and the \
 	inscription \"Danger, very robust!\", some people say that this red paint on \
 	the poster is made of real blood."
+*/
 
 /singleton/poster/nyc_obey
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
@@ -117,6 +121,7 @@
 	desc = "There is something more powerful than your weapon here, bureaucracy, \
 	just accept it and obey."
 
+/*
 /singleton/poster/nyc_imperium_we_see
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
 	// by Derp
@@ -125,6 +130,7 @@
 	desc = "A hastily made poster on cheap paper. Someone really dislikes Resomi, \
 	since he decided to make this poster. Everyone knows that the Imperials won't \
 	come here. Isn't that right?"
+*/
 
 /singleton/poster/nyc_xeno_inferiority
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
@@ -134,7 +140,6 @@
 	desc = "Propaganda poster sponsored by Rage of Humanity. Aimed at reminding a \
 	REAL HUMAN about the importance of preserving jobs and living space for \
 	new generations."
-
 
 /singleton/poster/nyc_multipassport
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
@@ -212,13 +217,14 @@
 	name = "Wanted!"
 	desc = "On the poster you can see: a bald, black-eyed woman, age 30, and she is wanted in \
 	the vastness of the entire SCG space. What did she do to be so wanted..."
-
+/*
 /singleton/poster/nyc_big_brother
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
 	// by Semonic_
 	icon_state = "big_brother"
 	name = "BIG BROTHER"
 	desc = "Never forget that you can be followed at any moment. Even when you enjoy privacy and tranquility."
+*/
 
 /singleton/poster/nyc_wild_cargo
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
@@ -244,12 +250,14 @@
 	name = "Dr. Griefsey"
 	desc = "Doctor Griefsey states: \"Drinking is redundant expenses of your corporate salary for treating your liver!\""
 
+/*
 /singleton/poster/nyc_equality
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
 	// by God Damn Turkey
 	icon_state = "equality"
 	name = "EQUALITY"
 	desc = "A ripped of poster, that was showing a tajaran in HoS uniform. Nothing besides the title can be read."
+*/
 
 /singleton/poster/nyc_report
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
@@ -258,6 +266,7 @@
 	name = "Report"
 	desc = "Always remember to report your superiors"
 
+/*
 /singleton/poster/nyc_do_not_disturb
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
 	// by Derp
@@ -268,6 +277,7 @@
 	table from someone with his hand. You can also see an empty drip, drops of blood on \
 	the floor, a flat pulse line... Hell, there is a body bag on the table. Glory to the \
 	free medicine of NanoTrasen!"
+*/
 
 /singleton/poster/nyc_cabbage_tray
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
@@ -299,6 +309,7 @@
 	an old poster from the Human Resources Department, aimed at making employees more attentive \
 	and willing to read every instruction they see."
 
+/*
 /singleton/poster/nyc_shirisai
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
 	// by Derp
@@ -316,6 +327,7 @@
 	Сверху - большой текст с вызывающим вопросом: \"Засадил бы?\", маленьким текстом пояснённый: \
 	\"Гидропонические лотки позволяют быстро и эффективно выращивать абсолютно любые культуры, а \
 	индикаторы подскажут, когда за растением нужен уход! И как в такой не засадить?\""
+*/
 
 /singleton/poster/nyc_unexplored_species
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
@@ -326,7 +338,7 @@
 	wild-looking creature, a little bit similar to Unathi, but clearly not the same. Behind you \
 	can see a rocky world with rivers of lava. Small note in the corner reads: \"The galaxy is \
 	so big and how much there is to explore!\""
-
+/*
 /singleton/poster/nyc_imperium_calls
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
 	// by Derp
@@ -342,6 +354,7 @@
 	icon_state = "xmas_gas"
 	name = "Xmas GAS"
 	desc = "The poster depicts the GAS that is dressed up like a Xmas tree, wish you a Merry Xmas and a happy New Year!"
+*/
 
 /singleton/poster/nyc_future_is_us
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
@@ -352,6 +365,7 @@
 	his hand. The poster says \"Future is us\". There is an outer space on a background. Isn't it \
 	worth wearing a helmet in space?"
 
+/*
 /singleton/poster/nyc_together
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
 	// by TiranShot
@@ -359,6 +373,7 @@
 	name = "Together"
 	desc = "A handmade poster. The poster depicts the coat of arms of the new Resomi union in the form \
 	of three multi-colored feathers. The poster says \"Unite, feathers\", \"Let's build a new house\"."
+
 
 /singleton/poster/nyc_zeng_hu_pharmaceuticals
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
@@ -369,6 +384,7 @@
 	with a blue substance and a simple DNA picture. Also there are an unknown scientist in a white \
 	labcoat. You can see some text in the bottom. \"The largest pharmaceutical company is ready to \
 	provide you with any medical products for an extremely favorable price. All research is LEGAL!\""
+*/
 
 /singleton/poster/nyc_keep_clean
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
@@ -379,6 +395,7 @@
 	shiny. The poster reminds of the importance of keeping surgical instruments sterile. The NT logo is \
 	visible at the bottom left."
 
+/*
 /singleton/poster/nyc_good_mood_sponsor
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
 	// by Dobre Pachantok / pudge_xxl
@@ -395,6 +412,7 @@
 	desc = "Shabby, hand-painted paper torn from the sides. It looks like it used to be a label either \
 	on a barrel or on a container. The poster shows a janitor in a darkened room, it looks like he came \
 	there to change lights. Below you can see the postscript: \"True hero\"."
+*/
 
 /singleton/poster/nyc_forge
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
@@ -406,6 +424,7 @@
 	forge their own destiny, for it is in their hands!\" \
 	A small tag at the bottom indicates that this poster is sponsored by Grayson Manufactories - HRM"
 
+/*
 /singleton/poster/nyc_space_dwarf
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
 	// by Скавен-крыс
@@ -422,10 +441,12 @@
 	icon_state = "good_old_times"
 	name = "Good Old Times"
 	desc = "A poster with a character from the old days, no one remembers his name, but they usually talk about him in a good way"
+*/
 
 /obj/structure/sign/poster/nyc
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
 
+/*
 /obj/structure/sign/poster/nyc/adme_midala
 	icon_state = "adme_midala"
 	poster_type = /singleton/poster/nyc_adme_midala
@@ -437,6 +458,7 @@
 /obj/structure/sign/poster/nyc/know_the_enemy
 	icon_state = "know_the_enemy"
 	poster_type = /singleton/poster/nyc_know_the_enemy
+*/
 
 /obj/structure/sign/poster/nyc/mine
 	icon_state = "mine"
@@ -458,6 +480,7 @@
 	icon_state = "gas_advertisement"
 	poster_type = /singleton/poster/nyc_gas_advertisement
 
+/*
 /obj/structure/sign/poster/nyc/the_goushque
 	icon_state = "the_goushque"
 	poster_type = /singleton/poster/nyc_the_goushque
@@ -473,14 +496,17 @@
 /obj/structure/sign/poster/nyc/toolbox
 	icon_state = "toolbox"
 	poster_type = /singleton/poster/nyc_toolbox
+*/
 
 /obj/structure/sign/poster/nyc/obey
 	icon_state = "obey"
 	poster_type = /singleton/poster/nyc_obey
 
+/*
 /obj/structure/sign/poster/nyc/imperium_we_see
 	icon_state = "imperium_we_see"
 	poster_type = /singleton/poster/nyc_imperium_we_see
+*/
 
 /obj/structure/sign/poster/nyc/xeno_inferiority
 	icon_state = "xeno_inferiority"
@@ -518,9 +544,11 @@
 	icon_state = "wanted"
 	poster_type = /singleton/poster/nyc_wanted
 
+/*
 /obj/structure/sign/poster/nyc/big_brother
 	icon_state = "big_brother"
 	poster_type = /singleton/poster/nyc_big_brother
+*/
 
 /obj/structure/sign/poster/nyc/wild_cargo
 	icon_state = "wild_cargo"
@@ -530,17 +558,21 @@
 	icon_state = "doctor_griefsey"
 	poster_type = /singleton/poster/nyc_doctor_griefsey
 
+/*
 /obj/structure/sign/poster/nyc/equality
 	icon_state = "equality"
 	poster_type = /singleton/poster/nyc_equality
+*/
 
 /obj/structure/sign/poster/nyc/report
 	icon_state = "report"
 	poster_type = /singleton/poster/nyc_report
 
+/*
 /obj/structure/sign/poster/nyc/do_not_disturb
 	icon_state = "do_not_disturb"
 	poster_type = /singleton/poster/nyc_do_not_disturb
+*/
 
 /obj/structure/sign/poster/nyc/cabbage_tray
 	icon_state = "cabbage_tray"
@@ -554,6 +586,7 @@
 	icon_state = "attention"
 	poster_type = /singleton/poster/nyc_attention
 
+/*
 /obj/structure/sign/poster/nyc/shirisai
 	icon_state = "shirisai"
 	poster_type = /singleton/poster/nyc_shirisai
@@ -561,11 +594,13 @@
 /obj/structure/sign/poster/nyc/would_you_plant
 	icon_state = "would_you_plant"
 	poster_type = /singleton/poster/nyc_would_you_plant
+*/
 
 /obj/structure/sign/poster/nyc/unexplored_species
 	icon_state = "unexplored_species"
 	poster_type = /singleton/poster/nyc_unexplored_species
 
+/*
 /obj/structure/sign/poster/nyc/imperium_calls
 	icon_state = "imperium_calls"
 	poster_type = /singleton/poster/nyc_imperium_calls
@@ -573,11 +608,13 @@
 /obj/structure/sign/poster/nyc/xmas_gas
 	icon_state = "xmas_gas"
 	poster_type = /singleton/poster/nyc_xmas_gas
+*/
 
 /obj/structure/sign/poster/nyc/future_is_us
 	icon_state = "future_is_us"
 	poster_type = /singleton/poster/nyc_future_is_us
 
+/*
 /obj/structure/sign/poster/nyc/together
 	icon_state = "together"
 	poster_type = /singleton/poster/nyc_together
@@ -585,11 +622,13 @@
 /obj/structure/sign/poster/nyc/zeng_hu_pharmaceuticals
 	icon_state = "zeng_hu_pharmaceuticals"
 	poster_type = /singleton/poster/nyc_zeng_hu_pharmaceuticals
+*/
 
 /obj/structure/sign/poster/nyc/keep_clean
 	icon_state = "keep_clean"
 	poster_type = /singleton/poster/nyc_keep_clean
 
+/*
 /obj/structure/sign/poster/nyc/good_mood_sponsor
 	icon_state = "good_mood_sponsor"
 	poster_type = /singleton/poster/nyc_good_mood_sponsor
@@ -597,11 +636,13 @@
 /obj/structure/sign/poster/nyc/true_hero
 	icon_state = "true_hero"
 	poster_type = /singleton/poster/nyc_true_hero
+*/
 
 /obj/structure/sign/poster/forge
 	icon_state = "keep_clean"
 	poster_type = /singleton/poster/nyc_forge
 
+/*
 /obj/structure/sign/poster/space_dwarf
 	icon_state = "good_mood_sponsor"
 	poster_type = /singleton/poster/nyc_space_dwarf
@@ -609,3 +650,4 @@
 /obj/structure/sign/poster/good_old_times
 	icon_state = "true_hero"
 	poster_type = /singleton/poster/nyc_good_old_times
+*/

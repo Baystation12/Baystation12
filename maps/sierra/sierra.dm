@@ -48,6 +48,7 @@
 	#include "game/lockdown.dm"
 
 	// --- ITEMS --- //
+	#include "items/ammo.dm"
 	#include "items/cards_ids.dm"
 	#include "items/documents.dm"
 	#include "items/encryption_keys.dm"

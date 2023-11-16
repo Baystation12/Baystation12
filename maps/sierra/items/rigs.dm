@@ -323,6 +323,7 @@
 	name = "heavy exploration HCM"
 	suit_type = "heavy exploration hardsuit"
 	desc = "Expeditionary Corps' Exoplanet Exploration Armored Unit, A-Unit for short. Built for more hostile (and hungry) environments, it features additional armor and powered exoskeleton."
+	icon = 'maps/sierra/icons/obj/uniques.dmi'
 	icon_state = "command_exp_rig"
 	armor = list(
 		melee = ARMOR_MELEE_MAJOR,
