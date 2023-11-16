@@ -50,6 +50,7 @@
 		/obj/item/storage/backpack/satchel/com,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
+		/obj/item/ammo_magazine/speedloader/magnum
 	)
 
 /obj/structure/closet/secure_closet/XO
