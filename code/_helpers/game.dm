@@ -497,14 +497,23 @@
 	return mixedcolor
 
 /**
-* Gets the highest and lowest pressures from the tiles in cardinal directions
+* Gets the highest and lowest pressures from the tiles in cardinal directions (including up/down)
 * around us, then checks the difference.
 */
 /proc/getOPressureDifferential(turf/loc)
 	var/minp=16777216;
 	var/maxp=0;
-	for(var/dir in GLOB.cardinal)
-		var/turf/simulated/T=get_turf(get_step(loc,dir))
+	for(var/dir in GLOB.cardinalz)
+		var/turf/simulated/T
+		var/turf/simulated/up = get_turf_above(loc)
+		var/turf/simulated/down = get_turf_below(loc)
+		if (dir == UP && istype(up, /turf/simulated/open))
+			T = up
+		else if (dir == DOWN && istype(down, /turf/simulated/open))
+			T = down
+		else
+			T=get_turf(get_step(loc,dir))
+
 		var/cp=0
 		if(T && istype(T) && T.zone)
 			var/datum/gas_mixture/environment = T.return_air()
@@ -514,6 +523,7 @@
 				continue
 		if(cp<minp)minp=cp
 		if(cp>maxp)maxp=cp
+
 	return abs(minp-maxp)
 
 /proc/convert_k2c(temp)
@@ -524,8 +534,8 @@
 
 /proc/getCardinalAirInfo(turf/loc, list/stats=list("temperature"))
 	RETURN_TYPE(/list)
-	var/list/temps = new(4)
-	for(var/dir in GLOB.cardinal)
+	var/list/temps = new(6)
+	for(var/dir in GLOB.cardinalz)
 		var/direction
 		switch(dir)
 			if(NORTH)
@@ -536,7 +546,21 @@
 				direction = 3
 			if(WEST)
 				direction = 4
-		var/turf/simulated/T=get_turf(get_step(loc,dir))
+			if (UP)
+				direction = 5
+			if (DOWN)
+				direction = 6
+
+		var/turf/simulated/T
+		if (direction >= 5)
+			if (dir == UP)
+				var/turf/simulated/up = get_turf_above(loc)
+				T = up
+			else if (dir == DOWN)
+				var/turf/simulated/down = get_turf_below(loc)
+				T = down
+		else
+			T = get_turf(get_step(loc,dir))
 		var/list/rstats = new(length(stats))
 		if(T && istype(T) && T.zone)
 			var/datum/gas_mixture/environment = T.return_air()

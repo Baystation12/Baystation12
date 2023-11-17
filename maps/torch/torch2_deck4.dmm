@@ -1234,6 +1234,7 @@
 	dir = 8;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/fourthdeck/starboard)
 "ec" = (
@@ -2043,6 +2044,7 @@
 /obj/machinery/atmospherics/pipe/zpipe/up/cyan{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/fourthdeck/port)
 "gY" = (
@@ -2334,6 +2336,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/structure/lattice,
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/fourthdeck/starboard)
 "hE" = (
@@ -11192,6 +11195,7 @@
 	dir = 8;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/fourthdeck/port)
 "Mr" = (
@@ -11501,6 +11505,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped,
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/hallway/primary/fourthdeck/fore)
 "Ng" = (
@@ -12046,6 +12051,7 @@
 	dir = 8;
 	pixel_x = 32
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/hallway/primary/fourthdeck/fore)
 "OI" = (

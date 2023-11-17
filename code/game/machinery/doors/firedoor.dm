@@ -48,8 +48,8 @@
 	power_channel = ENVIRON
 	idle_power_usage = 5
 
-	var/list/tile_info[4]
-	var/list/dir_alerts[4] // 4 dirs, bitflags
+	var/list/tile_info[6]
+	var/list/dir_alerts[6] // 4 dirs, bitflags
 
 	turf_hand_priority = 2 //Lower priority than normal doors to prevent interference
 
@@ -113,6 +113,10 @@
 				o += "EAST: "
 			if(4)
 				o += "WEST: "
+			if (5)
+				o += "UP: "
+			if (6)
+				o += "DOWN: "
 		if(tile_info[index] == null)
 			o += SPAN_WARNING("DATA UNAVAILABLE")
 			to_chat(user, o)
@@ -340,7 +344,7 @@
 
 		tile_info = getCardinalAirInfo(loc,list("temperature", "pressure"))
 		var/old_alerts = dir_alerts
-		for(var/index = 1; index <= 4; index++)
+		for(var/index = 1; index <= 6; index++)
 			var/list/tileinfo = tile_info[index]
 			if(tileinfo == null)
 				continue // Bad data.

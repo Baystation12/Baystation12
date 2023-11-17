@@ -236,3 +236,16 @@
 			continue
 		result += locate(x, y, z)
 	return result
+
+/proc/get_turf_above(turf/T)
+	var/turf/target = locate(T.x, T.y, (T.z + 1))
+	if (target)
+		return target
+
+/proc/get_turf_below(turf/T)
+	if ((T.z - 1) < 0)
+		return
+
+	var/turf/target = locate(T.x, T.y, (T.z - 1))
+	if (target)
+		return target

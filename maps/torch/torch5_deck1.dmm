@@ -5909,6 +5909,7 @@
 /turf/simulated/open,
 /area/maintenance/firstdeck/centralstarboard)
 "ann" = (
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/firstdeck/centralstarboard)
 "anp" = (
@@ -5916,6 +5917,7 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/firstdeck/centralstarboard)
 "anq" = (
@@ -6075,6 +6077,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/structure/lattice,
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/firstdeck/centralstarboard)
 "aom" = (
@@ -12029,6 +12032,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 6
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/firstdeck/aftport)
 "aRf" = (
@@ -12498,6 +12502,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/machinery/atmospherics/valve/shutoff/fuel,
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/firstdeck/aftport)
 "aSf" = (
@@ -12505,6 +12510,7 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/firstdeck/aftport)
 "aSh" = (
@@ -16081,6 +16087,7 @@
 /obj/machinery/atmospherics/valve/shutoff/fuel{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/firstdeck/aftport)
 "dJb" = (
@@ -16634,6 +16641,11 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
+"etk" = (
+/obj/structure/lattice,
+/obj/machinery/door/firedoor,
+/turf/simulated/open,
+/area/maintenance/firstdeck/centralstarboard)
 "etI" = (
 /obj/floor_decal/techfloor{
 	dir = 6
@@ -28012,6 +28024,7 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 8
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/firstdeck/aftport)
 "tgT" = (
@@ -28861,6 +28874,7 @@
 /obj/machinery/atmospherics/pipe/zpipe/down/fuel{
 	dir = 8
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/firstdeck/aftport)
 "uJd" = (
@@ -44965,7 +44979,7 @@ rhO
 wNX
 aeg
 amn
-anm
+etk
 anm
 auN
 aqn

@@ -857,6 +857,7 @@
 /area/maintenance/thirddeck/starboard)
 "ck" = (
 /obj/structure/railing/mapped,
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/thirddeck/starboard)
 "cl" = (
@@ -3425,6 +3426,7 @@
 /obj/structure/railing/mapped,
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan,
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/thirddeck/port)
 "hK" = (
@@ -3436,6 +3438,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/hallway/primary/thirddeck/fore)
 "hL" = (
@@ -4147,20 +4150,9 @@
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "jk" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/structure/catwalk,
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
-/area/maintenance/thirddeck/port)
+/area/hallway/primary/thirddeck/fore)
 "jl" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -5597,6 +5589,7 @@
 /area/maintenance/thirddeck/forestarboard)
 "mG" = (
 /obj/structure/railing/mapped,
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/thirddeck/aftstarboard)
 "mH" = (
@@ -6341,6 +6334,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/thirddeck/starboard)
 "oI" = (
@@ -6419,6 +6413,7 @@
 /obj/machinery/rotating_alarm/security_alarm{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/hallway/primary/thirddeck/fore)
 "oU" = (
@@ -14467,6 +14462,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/thirddeck/port)
 "JM" = (
@@ -15911,6 +15907,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/thirddeck/aftport)
 "Nf" = (
@@ -16659,6 +16656,7 @@
 	dir = 8;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/thirddeck/port)
 "Pl" = (
@@ -17428,6 +17426,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 9
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/thirddeck/aftport)
 "Rs" = (
@@ -17793,6 +17792,7 @@
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/zpipe/down/supply,
 /obj/machinery/atmospherics/pipe/zpipe/down/scrubbers,
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/thirddeck/aftstarboard)
 "Su" = (
@@ -17904,6 +17904,7 @@
 	dir = 1
 	},
 /obj/structure/lattice,
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/thirddeck/port)
 "SJ" = (
@@ -18208,7 +18209,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan,
 /obj/structure/catwalk,
-/turf/simulated/open,
+/turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
 "TC" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
@@ -18510,6 +18511,7 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/thirddeck/starboard)
 "Uw" = (
@@ -19290,6 +19292,7 @@
 /obj/machinery/atmospherics/valve/shutoff/fuel{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/thirddeck/aftport)
 "Ws" = (
@@ -19415,6 +19418,7 @@
 "WL" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan,
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/thirddeck/port)
 "WN" = (
@@ -19512,6 +19516,7 @@
 	},
 /obj/structure/lattice,
 /obj/structure/railing/mapped,
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/thirddeck/starboard)
 "Xa" = (
@@ -19980,6 +19985,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped,
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/thirddeck/port)
 "Yk" = (
@@ -33848,7 +33854,7 @@ mi
 MD
 VU
 hK
-pO
+jk
 SE
 sc
 tp
@@ -39119,7 +39125,7 @@ UZ
 Hd
 Pj
 Yj
-jk
+CE
 JL
 Hf
 Hf

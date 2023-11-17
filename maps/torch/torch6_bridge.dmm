@@ -8008,6 +8008,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/lattice,
 /obj/structure/railing/mapped,
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/bridge/aftport)
 "ut" = (
@@ -8696,6 +8697,7 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/bridge/aftport)
 "wl" = (
@@ -9073,6 +9075,7 @@
 	pixel_x = -23
 	},
 /obj/structure/railing/mapped,
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/bridge/aftport)
 "xb" = (
@@ -9272,6 +9275,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/structure/lattice,
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/bridge/foreport)
 "xs" = (
@@ -9296,6 +9300,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/structure/lattice,
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/bridge/aftport)
 "xx" = (
@@ -9389,6 +9394,7 @@
 	dir = 8;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/bridge/foreport)
 "xN" = (
@@ -9396,6 +9402,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/bridge/forestarboard)
 "xP" = (
@@ -9616,6 +9623,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/bridge/aftport)
 "yA" = (
@@ -9881,6 +9889,7 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/bridge/aftport)
 "zT" = (
@@ -10333,6 +10342,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/structure/lattice,
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/bridge/foreport)
 "BI" = (
@@ -11401,6 +11411,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/bridge/foreport)
 "GU" = (
@@ -11997,6 +12008,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/cobed)
+"Iw" = (
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/obj/structure/grille,
+/turf/simulated/floor/plating,
+/area/maintenance/bridge/forestarboard)
 "Ix" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -12736,6 +12755,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/bridge/foreport)
 "Mb" = (
@@ -13004,6 +13024,7 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/bridge/aftport)
 "Nr" = (
@@ -15539,6 +15560,7 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/open,
 /area/maintenance/bridge/forestarboard)
 "YN" = (
@@ -25167,7 +25189,7 @@ af
 af
 YI
 VB
-JF
+Iw
 aO
 Zs
 co
