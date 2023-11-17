@@ -843,7 +843,7 @@
 		else
 			var/is_bad_door = FALSE
 			for(var/L in D.locs)
-				if(istype(L, /turf/simulated/open) || isspaceturf(L))
+				if(isspaceturf(L))
 					is_bad_door = TRUE
 					log_bad("Invalid door turf: [log_info_line(L)]]")
 			if(is_bad_door)
