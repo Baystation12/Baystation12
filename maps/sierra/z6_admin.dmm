@@ -4225,7 +4225,7 @@
 	pixel_y = 3
 	},
 /obj/item/bonesetter,
-/obj/item/scalpel,
+/obj/item/scalpel/basic,
 /obj/item/retractor{
 	pixel_y = 6
 	},
