@@ -1,4 +1,0 @@
-author: emmanuelbassil
-changes:
-  - {bugfix: Fixes being unable to place lipstick in storage}
-delete-after: true
