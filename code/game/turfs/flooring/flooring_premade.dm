@@ -78,6 +78,16 @@
 	icon_state = "grass0"
 	initial_flooring = /singleton/flooring/grass
 
+/turf/simulated/floor/grass/use_tool(obj/item/I, mob/user)
+	if(I.IsWirecutter())
+		user.visible_message(SPAN_NOTICE("\The [user] trims \the [src] with \the [I]."), SPAN_NOTICE("You trim \the [src] with \the [I]."))
+		ChangeTurf(/turf/simulated/floor/grass/cut)
+		return TRUE
+	return ..()
+
+/turf/simulated/floor/grass/cut
+	initial_flooring = /singleton/flooring/grass/cut
+
 /turf/simulated/floor/carpet
 	name = "brown carpet"
 	icon = 'icons/turf/flooring/carpet.dmi'
