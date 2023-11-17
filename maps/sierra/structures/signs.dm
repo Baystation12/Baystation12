@@ -25,7 +25,7 @@
 /obj/structure/sign/memorial/sierra/Initialize()
 	. = ..()
 
-	levitation_sound = GLOB.sound_player.PlayLoopingSound(src, "\ref[src]", 'maps/sierra/structures/memorial/levitation_sound.ogg', 35, 6)
+	levitation_sound = GLOB.sound_player.PlayLoopingSound(src, "\ref[src]", 'maps/sierra/structures/memorial/levitation_sound.ogg', 25, 3)
 
 	set_light(2, 0.8, COLOR_TEAL)
 
