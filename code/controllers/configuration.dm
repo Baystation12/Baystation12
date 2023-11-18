@@ -434,6 +434,8 @@
 	var/static/shutdown_on_reboot = FALSE
 	// [/SIERRA-ADD]
 
+	var/static/enable_cold_mist = FALSE
+
 
 /datum/configuration/New()
 	load_config()
@@ -861,6 +863,8 @@
 			if("minimum_byondacc_age")
 				minimum_byondacc_age = text2num(value)
 			// [/SIERRA-ADD]
+			if ("enable_cold_mist")
+				enable_cold_mist = TRUE
 			else
 				log_misc("Unknown setting in config/config.txt: '[name]'")
 
