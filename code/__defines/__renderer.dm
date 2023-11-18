@@ -40,6 +40,8 @@
 
 #define HEAT_EFFECT_PLANE -4
 #define HEAT_EFFECT_TARGET    "*heat"
+#define COLD_EFFECT_TARGET    "*cold"
+#define COLD_EFFECT_BACK_TARGET "*coldb"
 #define HEAT_COMPOSITE_TARGET "*heatc"
 #define WARP_EFFECT_PLANE -3
 
