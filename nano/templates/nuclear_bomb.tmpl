@@ -32,15 +32,6 @@ Used In File(s): \code\game\gamemodes\nuclear\nuclearbomb.dm
 	<div class="item">
 		{{if data.auth && data.yescode}}
 			{{if data.is_regular_nuke}}
-<<<<<<< ours
-			<div class="item">
-				<b>Anchor:</b> {{:helper.link('Engaged', 'locked', {'anchor' : 1}, data.anchored ? 'selected' : '')}}{{:helper.link('Disengaged', 'unlocked', {'anchor' : 0}, data.anchored ? '' : 'selected')}}
-			</div>
-			{{else}}
-			<div class="item">
-				<b>Evacuate:</b> {{:helper.link('Yes', '', {'evacuate' : 1}, data.evacuate ? 'selected' : '')}}{{:helper.link('No', 'alert', 'evacuate' : 1, data.evacuate ? '' : 'redButton')}}
-			</div>
-=======
 				<div class="item">
 					<b>Anchor:</b> {{:helper.link('Engaged', 'locked', {'anchor' : 1}, data.anchored ? 'selected' : '')}}{{:helper.link('Disengaged', 'unlocked', {'anchor' : 0}, data.anchored ? '' : 'selected')}}
 				</div>
@@ -48,22 +39,12 @@ Used In File(s): \code\game\gamemodes\nuclear\nuclearbomb.dm
 				<div class="item">
 					<b>Evacuate:</b> {{:helper.link('Yes', '', {'evacuate' : 1}, data.evacuate ? 'selected' : '')}}{{:helper.link('No', 'alert', {'evacuate' : 1}, data.evacuate ? '' : 'redButton')}}
 				</div>
->>>>>>> theirs
 			{{/if}}
 			<div class="item">
 				<b>Safety:</b> {{:helper.link('Engaged', 'info', {'safety' : 1}, data.safety ? 'selected' : '')}}{{:helper.link('Disengaged', 'alert', {'safety' : 0}, data.safety ? '' : 'redButton')}}
 			</div>
 		{{else}}
 			{{if data.is_regular_nuke}}
-<<<<<<< ours
-			<div class="item">
-                <b>Anchor:</b> {{:helper.link('Engaged', 'locked', null, 'disabled')}}{{:helper.link('Disengaged', 'unlocked', null, 'disabled')}}
-			</div>
-			{{else}}
-			<div class="item">
-				<b>Evacuate:</b> {{:helper.link('Yes', '', null, 'disabled')}}{{:helper.link('No', 'alert', null, 'disabled')}}
-			</div>
-=======
 				<div class="item">
 					<b>Anchor:</b> {{:helper.link('Engaged', 'locked', null, 'disabled')}}{{:helper.link('Disengaged', 'unlocked', null, 'disabled')}}
 				</div>
@@ -71,7 +52,6 @@ Used In File(s): \code\game\gamemodes\nuclear\nuclearbomb.dm
 				<div class="item">
 					<b>Evacuate:</b> {{:helper.link('Yes', '', null, 'disabled')}}{{:helper.link('No', 'alert', null, 'disabled')}}
 				</div>
->>>>>>> theirs
 			{{/if}}
 			<div class="item">
 				<b>Safety:</b> {{:helper.link('Engaged', 'info', null, 'disabled')}}{{:helper.link('Disengaged', 'alert', null, 'disabled')}}
