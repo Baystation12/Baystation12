@@ -11,9 +11,6 @@
 // Client
 #include "client\spawnpoints.dm"
 
-// Gamemodes
-#include "gamemodes\revolutionary.dm"
-
 // Mob
 #include "mob\say.dm"
 #include "mob\stat.dm"

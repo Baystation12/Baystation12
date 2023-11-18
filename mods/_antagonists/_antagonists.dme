@@ -1,0 +1,12 @@
+#ifndef MODPACK_ANTAGONISTS
+#define MODPACK_ANTAGONISTS
+
+#include "_antagonists.dm"
+
+
+#include "code/revolutionary.dm"
+#include "code/operative.dm"
+#include "code/traitor.dm"
+#include "code/teleportation.dm"
+
+#endif
