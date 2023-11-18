@@ -838,15 +838,13 @@
 
 // shatter light, unless it was an attempt to put it in a light socket
 // now only shatter if the intent was harm
-/obj/item/light/afterattack(atom/target, mob/user, proximity)
-	if(!proximity)
-		return
+/obj/item/light/use_after(atom/target, mob/living/user, click_parameters)
 	if(istype(target, /obj/machinery/light))
-		return
+		return FALSE
 	if(user.a_intent != I_HURT)
-		return
-
+		return FALSE
 	shatter()
+	return TRUE
 
 /// Handles updating the light's `status`.
 /obj/item/light/proc/set_status(new_status)

@@ -252,22 +252,21 @@
 /obj/item/reagent_containers/borghypo/service/use_before(mob/M, mob/user)
 	return FALSE //We don't want the service borg to be able to inject alcohol into blood.
 
-/obj/item/reagent_containers/borghypo/service/afterattack(obj/target, mob/user, proximity)
-	if(!proximity)
-		return
-
-	if(!target.is_open_container() || !target.reagents)
-		return
-
+/obj/item/reagent_containers/borghypo/service/use_after(obj/target, mob/living/user, click_parameters)
+	if (!target.reagents)
+		return FALSE
+	if(!target.is_open_container())
+		to_chat(user, SPAN_WARNING("\The [target] is capped."))
+		return TRUE
 	if(!target.reagents.get_free_space())
-		to_chat(user, SPAN_WARNING("[target] is full."))
-		return
+		to_chat(user, SPAN_WARNING("\The [target] is full."))
+		return TRUE
 
 	if (mode)
 		var/datum/reagent/R = reagent_ids[mode]
 		if(!reagent_volumes[R])
-			to_chat(user, SPAN_WARNING("[src] is out of this reagent, give it some time to refill."))
-			return
+			to_chat(user, SPAN_WARNING("\The [src] is out of this reagent, give it some time to refill."))
+			return TRUE
 		var/transferred = min(amount_per_transfer_from_this, reagent_volumes[R])
 		target.reagents.add_reagent(R, transferred)
 		reagent_volumes[R] -= transferred
@@ -276,12 +275,13 @@
 		var/obj/item/reagent_containers/container = dispense.resolve()
 		if (!valid_container(user, container))
 			to_chat(user, SPAN_WARNING("Can't find the container to dispense from."))
-			return
+			return TRUE
 		var/datum/reagents/R = container.reagents
 		if (!R || !R.total_volume)
 			to_chat(user, SPAN_WARNING("\The [container] is empty."))
 		var/transferred = R.trans_to_holder(target.reagents, amount_per_transfer_from_this)
 		to_chat(user, "You transfer [transferred] units of the solution to [target].")
+	return TRUE
 
 
 /obj/item/robot_rack/bottle

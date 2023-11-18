@@ -343,22 +343,22 @@
 		return TRUE
 	return ..()
 
-/obj/item/clothing/mask/smokable/cigarette/afterattack(obj/item/reagent_containers/glass/glass, mob/user, proximity)
-	..()
-	if(!proximity)
-		return
-	if(istype(glass)) //you can dip cigarettes into beakers
-		if(!glass.is_open_container())
-			to_chat(user, SPAN_NOTICE("You need to take the lid off first."))
-			return
-		var/transfered = glass.reagents.trans_to_obj(src, chem_volume)
-		if(transfered)	//if reagents were transfered, show the message
-			to_chat(user, SPAN_NOTICE("You dip \the [src] into \the [glass]."))
-		else			//if not, either the beaker was empty, or the cigarette was full
-			if(!glass.reagents.total_volume)
-				to_chat(user, SPAN_NOTICE("[glass] is empty."))
-			else
-				to_chat(user, SPAN_NOTICE("[src] is full."))
+/obj/item/clothing/mask/smokable/cigarette/use_after(obj/item/reagent_containers/glass/glass, mob/living/user, click_parameters)
+	if(!istype(glass))
+		return FALSE
+	if(!glass.is_open_container())
+		to_chat(user, SPAN_NOTICE("You need to take the lid off first."))
+		return TRUE
+
+	var/transfered = glass.reagents.trans_to_obj(src, chem_volume)
+	if(transfered)
+		to_chat(user, SPAN_NOTICE("You dip \the [src] into \the [glass]."))
+	else
+		if(!glass.reagents.total_volume)
+			to_chat(user, SPAN_NOTICE("[glass] is empty."))
+		else
+			to_chat(user, SPAN_NOTICE("[src] is full."))
+	return TRUE
 
 /obj/item/clothing/mask/smokable/cigarette/attack_self(mob/user)
 	if(lit == 1)

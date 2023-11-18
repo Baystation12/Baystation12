@@ -39,9 +39,6 @@
 /obj/item/reagent_containers/attack_self(mob/user as mob)
 	return
 
-/obj/item/reagent_containers/afterattack(obj/target, mob/user, flag)
-	return
-
 /obj/item/reagent_containers/proc/reagentlist() // For attack logs
 	if(reagents)
 		return reagents.get_reagents()
@@ -65,7 +62,7 @@
 	else
 		SetName("[initial(name)] ([label_text])")
 
-/obj/item/reagent_containers/proc/standard_dispenser_refill(mob/user, obj/structure/reagent_dispensers/target) // This goes into afterattack
+/obj/item/reagent_containers/proc/standard_dispenser_refill(mob/user, obj/structure/reagent_dispensers/target) // This goes into use_after()
 	if(!istype(target))
 		return 0
 
@@ -81,7 +78,7 @@
 	to_chat(user, SPAN_NOTICE("You fill [src] with [trans] units of the contents of [target]."))
 	return 1
 
-/obj/item/reagent_containers/proc/standard_splash_mob(mob/user, mob/target) // This goes into afterattack
+/obj/item/reagent_containers/proc/standard_splash_mob(mob/user, mob/target) // This goes into use_after()
 	if(!istype(target))
 		return
 
@@ -172,7 +169,7 @@
 	return TRUE
 
 
-/obj/item/reagent_containers/proc/standard_pour_into(mob/user, atom/target) // This goes into afterattack and yes, it's atom-level
+/obj/item/reagent_containers/proc/standard_pour_into(mob/user, atom/target) // This goes into use_after() and yes, it's atom-level
 	if(!target.reagents)
 		return 0
 

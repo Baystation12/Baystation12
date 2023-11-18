@@ -37,14 +37,14 @@
 			data_to_write = null
 			to_chat(user, SPAN_NOTICE("You set \the [src]'s memory to absolutely nothing."))
 
-/obj/item/device/integrated_electronics/debugger/afterattack(atom/target, mob/living/user, proximity)
-	. = ..()
-	if(accepting_refs && proximity)
+/obj/item/device/integrated_electronics/debugger/use_after(atom/target, mob/living/user, click_parameters)
+	if (accepting_refs)
 		data_to_write = weakref(target)
 		visible_message(SPAN_NOTICE("[user] slides \a [src]'s over \the [target]."))
 		to_chat(user, SPAN_NOTICE("You set \the [src]'s memory to a reference to [target.name] \[Ref\].  The ref scanner is \
 		now off."))
 		accepting_refs = FALSE
+		return TRUE
 
 /obj/item/device/integrated_electronics/debugger/proc/write_data(datum/integrated_io/io, mob/user)
 	if(io.io_type == DATA_CHANNEL)

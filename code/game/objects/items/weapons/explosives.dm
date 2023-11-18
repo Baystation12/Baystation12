@@ -40,18 +40,17 @@
 		timer = newtime
 		to_chat(user, "Timer set for [timer] seconds.")
 
-/obj/item/plastique/afterattack(atom/movable/target, mob/user, flag)
-	if (!flag)
-		return
+/obj/item/plastique/use_after(atom/target, mob/living/user, click_parameters)
 	if (ismob(target) || istype(target, /turf/unsimulated) || istype(target, /turf/simulated/shuttle) || istype(target, /obj/item/storage) || istype(target, /obj/item/clothing/accessory/storage) || istype(target, /obj/item/clothing/under))
-		return
+		return FALSE
+
 	to_chat(user, "Planting explosives...")
 	user.do_attack_animation(target)
 
 	if(do_after(user, 5 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT) && in_range(user, target))
 		if(!user.unequip_item())
-			return
-		src.target = target
+			return TRUE
+		target = target
 		forceMove(null)
 
 		if (ismob(target))
@@ -65,6 +64,7 @@
 		target.AddOverlays(image_overlay)
 		to_chat(user, "Bomb has been planted. Timer counting down from [timer].")
 		run_timer()
+	return TRUE
 
 /obj/item/plastique/proc/explode(location)
 	if(!target)

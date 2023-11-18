@@ -39,14 +39,9 @@
 	if(standard_feed_mob(user, M))
 		return TRUE
 
-/obj/item/reagent_containers/food/drinks/afterattack(obj/target, mob/user, proximity)
-	if(!proximity) return
-
-	if(standard_dispenser_refill(user, target))
-		return
-	if(standard_pour_into(user, target))
-		return
-	return ..()
+/obj/item/reagent_containers/food/drinks/use_after(obj/target, mob/living/user, click_parameters)
+	if (standard_dispenser_refill(user, target) || standard_pour_into(user, target))
+		return TRUE
 
 /obj/item/reagent_containers/food/drinks/standard_feed_mob(mob/user, mob/target)
 	if(!is_open_container())

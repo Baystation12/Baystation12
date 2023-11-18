@@ -231,22 +231,22 @@
 			something.dropInto(loc)
 	. = ..()
 
-/obj/item/reagent_containers/food/snacks/afterattack(obj/item/reagent_containers/food/drinks/glass2/glass, mob/user, proximity)
-	..()
-	if(!proximity)
-		return
-	if(istype(glass))
-		if(w_class != ITEM_SIZE_TINY)
-			to_chat(user, SPAN_NOTICE("\The [src] is too big to properly dip in \the [glass]."))
-			return
-		var/transfered = glass.reagents.trans_to_obj(src, volume)
-		if(transfered)	//if reagents were transfered, show the message
-			to_chat(user, SPAN_NOTICE("You dip \the [src] into \the [glass]."))
-		else			//if not, either the glass was empty, or the food was full
-			if(!glass.reagents.total_volume)
-				to_chat(user, SPAN_NOTICE("\The [glass] is empty."))
-			else
-				to_chat(user, SPAN_NOTICE("\The [src] is full."))
+/obj/item/reagent_containers/food/snacks/use_after(obj/item/reagent_containers/food/drinks/glass2/glass, mob/user)
+	if(!istype(glass))
+		return FALSE
+	if(w_class != ITEM_SIZE_TINY)
+		to_chat(user, SPAN_NOTICE("\The [src] is too big to properly dip in \the [glass]."))
+		return TRUE
+
+	var/transfered = glass.reagents.trans_to_obj(src, volume)
+	if(transfered)	//if reagents were transfered, show the message
+		to_chat(user, SPAN_NOTICE("You dip \the [src] into \the [glass]."))
+	else			//if not, either the glass was empty, or the food was full
+		if(!glass.reagents.total_volume)
+			to_chat(user, SPAN_NOTICE("\The [glass] is empty."))
+		else
+			to_chat(user, SPAN_NOTICE("\The [src] is full."))
+	return TRUE
 
 ////////////////////////////////////////////////////////////////////////////////
 /// FOOD END
@@ -322,14 +322,15 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein/egg, 3)
 
-/obj/item/reagent_containers/food/snacks/egg/afterattack(obj/O as obj, mob/user as mob, proximity)
+/obj/item/reagent_containers/food/snacks/egg/use_after(obj/O, mob/living/user, click_parameters)
 	if(istype(O,/obj/machinery/microwave))
-		return ..()
-	if(!(proximity && O.is_open_container()))
-		return
+		return FALSE
+	if(!O.is_open_container())
+		return TRUE
 	to_chat(user, "You crack \the [src] into \the [O].")
 	reagents.trans_to(O, reagents.total_volume)
 	qdel(src)
+	return TRUE
 
 /obj/item/reagent_containers/food/snacks/egg/throw_impact(atom/hit_atom)
 	if(QDELETED(src))

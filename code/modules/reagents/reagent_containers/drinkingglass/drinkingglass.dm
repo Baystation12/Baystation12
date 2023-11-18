@@ -207,10 +207,11 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 		else continue
 		side = "right"
 
-/obj/item/reagent_containers/food/drinks/glass2/afterattack(obj/target, mob/user, proximity)
-	if (!proximity || standard_dispenser_refill(user, target) || standard_pour_into(user, target))
+/obj/item/reagent_containers/food/drinks/glass2/use_after(obj/target, mob/living/user, click_parameters)
+	if (standard_dispenser_refill(user, target) || standard_pour_into(user, target))
 		return TRUE
 	splashtarget(target, user)
+	return TRUE
 
 /obj/item/reagent_containers/food/drinks/glass2/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/material/kitchen/utensil/spoon))

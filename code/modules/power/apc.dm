@@ -425,7 +425,7 @@
 	if (istype(user, /mob/living/silicon) && get_dist(src,user)>1)
 		return attack_robot(user)
 	if(istype(W, /obj/item/inducer))
-		return FALSE // inducer.dm afterattack handles this
+		return FALSE // inducer.dm use_after handles this
 
 	if(isCrowbar(W) && user.a_intent != I_HURT)//bypass when on harm intend to actually make use of the cover hammer off check further down.
 		if(opened) // Closes or removes board.

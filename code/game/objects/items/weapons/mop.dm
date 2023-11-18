@@ -22,10 +22,7 @@
 	. = ..()
 	create_reagents(30)
 
-/obj/item/mop/afterattack(atom/A, mob/user, proximity)
-	if(!proximity)
-		return
-
+/obj/item/mop/use_after(atom/A, mob/living/user, click_parameters)
 	var/moppable
 	if(istype(A, /turf))
 		var/turf/T = A
@@ -41,7 +38,7 @@
 					else
 						qdel(F)
 						to_chat(user, SPAN_NOTICE("You have finished mopping!"))
-			return
+			return TRUE
 		moppable = TRUE
 
 	else if(is_type_in_list(A,moppable_types))
@@ -50,10 +47,10 @@
 	if(moppable)
 		if(reagents.total_volume < 1)
 			to_chat(user, SPAN_NOTICE("Your mop is dry!"))
-			return
+			return TRUE
 		var/turf/T = get_turf(A)
 		if(!T)
-			return
+			return TRUE
 
 		user.visible_message(SPAN_WARNING("\The [user] begins to clean \the [T]."))
 
@@ -61,6 +58,7 @@
 			if(T)
 				T.clean(src, user)
 			to_chat(user, SPAN_NOTICE("You have finished mopping!"))
+		return TRUE
 
 
 /obj/item/mop/advanced

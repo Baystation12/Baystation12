@@ -31,27 +31,22 @@
 	return ..()
 
 //Places the poster on a wall
-/obj/item/contraband/poster/afterattack(atom/A, mob/user, adjacent, clickparams)
-	if (!adjacent)
-		return
-
-	//must place on a wall and user must not be inside a closet/exosuit/whatever
-	var/turf/W = A
+/obj/item/contraband/poster/use_after(turf/W, mob/living/user, click_parameters)
 	if(!isturf(W))
-		return
+		return FALSE
 
 	if (!W.is_wall() || !isturf(user.loc))
 		to_chat(user, SPAN_WARNING("You can't place this here!"))
-		return
+		return TRUE
 
 	var/placement_dir = get_dir(user, W)
 	if (!(placement_dir in GLOB.cardinal))
 		to_chat(user, SPAN_WARNING("You must stand directly in front of the wall you wish to place that on."))
-		return
+		return TRUE
 
 	if (ArePostersOnWall(W))
 		to_chat(user, SPAN_NOTICE("There is already a poster there!"))
-		return
+		return TRUE
 
 	user.visible_message(SPAN_NOTICE("\The [user] starts placing a poster on \the [W]."),SPAN_NOTICE("You start placing the poster on \the [W]."))
 
@@ -64,6 +59,7 @@
 	else
 		// We cannot rely on user being on the appropriate turf when placement fails
 		P.roll_and_drop(get_step(W, turn(placement_dir, 180)))
+	return TRUE
 
 /obj/item/contraband/poster/proc/ArePostersOnWall(turf/W, placed_poster)
 	//just check if there is a poster on or adjacent to the wall

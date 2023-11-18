@@ -112,10 +112,9 @@
 		GLOB.module_deselected_event.unregister(user, src, /obj/item/device/paint_sprayer/proc/remove_click_handler)
 		GLOB.module_deactivated_event.unregister(user, src, /obj/item/device/paint_sprayer/proc/remove_click_handler)
 
-/obj/item/device/paint_sprayer/afterattack(atom/A, mob/user, proximity, params)
-	if (!proximity)
-		return
-	apply_paint(A, user, params)
+/obj/item/device/paint_sprayer/use_after(atom/target, mob/living/user, click_parameters)
+	apply_paint(target, user, click_parameters)
+	return TRUE
 
 /obj/item/device/paint_sprayer/proc/pick_color(atom/A, mob/user)
 	if (!user.Adjacent(A) || user.incapacitated())
