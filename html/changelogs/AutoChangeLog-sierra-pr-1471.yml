@@ -1,0 +1,5 @@
+author: SuhEugene
+changes:
+  - {bugfix: Пофиксил не появлявшиеся ранее на карте некоторые аптечки и ещё пару
+      предметов.}
+delete-after: true
