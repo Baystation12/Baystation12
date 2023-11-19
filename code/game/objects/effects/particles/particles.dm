@@ -86,28 +86,6 @@
 	color = "white"
 
 
-/particles/mist
-	name = "mist"
-	icon = 'icons/effects/particles.dmi'
-	icon_state = list("steam_1" = 1, "steam_2" = 1, "steam_3" = 1)
-	count = 500
-	spawning = 4
-	lifespan = 5 SECONDS
-	fade = 1 SECOND
-	fadein = 1 SECOND
-	velocity = generator("box", list(-0.5, -0.25, 0), list(0.5, 0.25, 0), NORMAL_RAND)
-	position = generator("box", list(-20, -16), list(20, -2), UNIFORM_RAND)
-	friction = 0.2
-	grow = 0.0015
-
-
-/particles/mist/back
-	name = "mist_back"
-	spawning = 7
-	position = generator("box", list(-20, -1), list(20, 20), UNIFORM_RAND)
-	lifespan = 6 SECONDS
-	fadein = 1.5 SECONDS
-
 /particles/fire_sparks
 	name = "fire sparks"
 	width = 500
@@ -355,31 +333,3 @@
 
 /obj/particle_emitter/heat/high
 	particle_type = "high heat"
-
-
-/obj/particle_emitter/mist
-	particle_type = "mist"
-	layer = FIRE_LAYER
-
-/obj/particle_emitter/mist/back
-	particle_type = "mist_back"
-	layer = BELOW_OBJ_LAYER
-
-
-/obj/particle_emitter/mist/back/gas
-	render_target = COLD_EFFECT_BACK_TARGET
-
-/obj/particle_emitter/mist/back/gas/Initialize(mapload, time, _color)
-	. = ..()
-	filters += filter(type="alpha", render_source = COLD_EFFECT_TARGET, flags = MASK_INVERSE)
-
-
-//for cold gas effect
-/obj/particle_emitter/mist/gas
-	render_target = COLD_EFFECT_TARGET
-	var/obj/particle_emitter/mist/back/b = /obj/particle_emitter/mist/back/gas
-
-/obj/particle_emitter/mist/gas/Initialize(mapload, time, _color)
-	. = ..()
-	b = new b(null)
-	vis_contents += b
