@@ -189,7 +189,7 @@
 
 /obj/item/storage/pill_bottle/sugariron
 	name = "pill bottle (Sugar-Iron)"
-	desc = "A fifty-fifty mix of iron and sugar, used for encouraging the body's natural blood regeneration."
+	desc = "A fifty-fifty mix of iron and glucose, used for encouraging the body's natural blood regeneration."
 	startswith = list(/obj/item/reagent_containers/pill/sugariron = 14)
 	wrapper_color = COLOR_RED_GRAY
 

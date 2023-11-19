@@ -346,7 +346,7 @@
 /obj/item/reagent_containers/pill/sugariron/New()
 	..()
 	reagents.add_reagent(/datum/reagent/iron, 5)
-	reagents.add_reagent(/datum/reagent/sugar, 5)
+	reagents.add_reagent(/datum/reagent/nutriment/glucose, 5)
 	color = reagents.get_color()
 
 /obj/item/reagent_containers/pill/detergent
