@@ -88,6 +88,10 @@
 	name = "heliodor surgical cap"
 	color = "#aad539"
 
+/obj/item/clothing/head/surgery/lavender
+	name = "lavender surgical cap"
+	color = "#bebbee"
+
 //Berets
 /obj/item/clothing/head/beret
 	name = "beret"

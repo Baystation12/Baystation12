@@ -175,6 +175,10 @@
 	name = "heliodor scrubs"
 	color = "#aad539"
 
+/obj/item/clothing/under/rank/medical/scrubs/lavender
+	name = "lavender scrubs"
+	color = "#bebbee"
+
 /obj/item/clothing/under/rank/psych
 	desc = "A basic white jumpsuit. It has turqouise markings that denote the wearer as a psychiatrist."
 	name = "psychiatrist's jumpsuit"
