@@ -54,22 +54,22 @@
 		qdel(src)
 		return TRUE
 
-/obj/item/reagent_containers/pill/afterattack(obj/target, mob/user, proximity)
-	if(!proximity) return
+/obj/item/reagent_containers/pill/use_after(atom/target, mob/living/user, click_parameters)
+	if (target.is_open_container() && target.reagents)
+		if (!target.reagents.total_volume)
+			to_chat(user, SPAN_NOTICE("\The [target] is empty. Can't dissolve \the [src]."))
+			return TRUE
 
-	if(target.is_open_container() && target.reagents)
-		if(!target.reagents.total_volume)
-			to_chat(user, SPAN_NOTICE("[target] is empty. Can't dissolve \the [src]."))
-			return
-		to_chat(user, SPAN_NOTICE("You dissolve \the [src] in [target]."))
+		to_chat(user, SPAN_NOTICE("You dissolve \the [src] in \the [target]."))
 
 		if (reagents.should_admin_log())
 			admin_attacker_log(user, "spiked \a [target] with a pill. Reagents: [reagentlist()]")
 		reagents.trans_to(target, reagents.total_volume)
 		for(var/mob/O in viewers(2, user))
-			O.show_message(SPAN_WARNING("[user] puts something in \the [target]."), 1)
+			O.show_message(SPAN_WARNING("\The [user] puts something in \the [target]."), 1)
 		qdel(src)
-	return
+		return TRUE
+	else return FALSE
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Pills. END

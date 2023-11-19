@@ -18,8 +18,7 @@ var/global/list/cached_icons = list()
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	var/paint_hex = "#fe191a"
 
-/obj/item/reagent_containers/glass/paint/afterattack(turf/simulated/target, mob/user, proximity)
-	if(!proximity) return
+/obj/item/reagent_containers/glass/paint/use_after(turf/simulated/target, mob/living/user, click_parameters)
 	if(istype(target) && reagents.total_volume > 5)
 		if (reagents.should_admin_log())
 			var/contained = reagentlist()
@@ -29,8 +28,7 @@ var/global/list/cached_icons = list()
 				admin_attacker_log(user, "Used \the [name] containing [contained] to splash \the [target]")
 		user.visible_message(SPAN_WARNING("\The [target] has been splashed with something by [user]!"))
 		reagents.trans_to_turf(target, 5)
-	else
-		return ..()
+		return TRUE
 
 /obj/item/reagent_containers/glass/paint/Initialize()
 	. = ..()

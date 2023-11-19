@@ -85,18 +85,23 @@
 	worth_multiplier = 31
 	base_parry_chance = 15
 
-/obj/item/material/twohanded/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
-	if(!proximity) return
-	..()
-	if(A && wielded)
-		if(istype(A,/obj/structure/window))
-			var/obj/structure/window/W = A
-			W.shatter()
-		else if(istype(A,/obj/structure/grille))
-			qdel(A)
-		else if(istype(A,/obj/vine))
-			var/obj/vine/P = A
-			P.kill_health()
+/obj/item/material/twohanded/fireaxe/use_before(atom/A, mob/living/user, click_parameters)
+	if(!wielded || user.a_intent == I_HELP || !isobj(A))
+		return FALSE
+
+	if(istype(A,/obj/structure/window))
+		var/obj/structure/window/W = A
+		W.shatter()
+		return TRUE
+
+	if(istype(A,/obj/structure/grille))
+		qdel(A)
+		return TRUE
+
+	if(istype(A,/obj/vine))
+		var/obj/vine/P = A
+		P.kill_health()
+		return TRUE
 
 /obj/item/material/twohanded/fireaxe/IsHatchet()
 	return TRUE
@@ -184,21 +189,22 @@
 	else
 		return ..()
 
-/obj/item/material/twohanded/baseballbat/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
-	. = ..()
-	var/obj/O = target
-	if(istype(O))
-		if(is_held_twohanded(user) && !O.anchored && proximity_flag && isturf(O.loc) && O.w_class <= ITEM_SIZE_SMALL)
-			if(!prob(user.skill_fail_chance(SKILL_HAULING, 20, SKILL_EXPERIENCED)))
-				var/skill = 0.25 + (user.get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)
-				var/dist = O.throw_range * skill
-				O.throw_at(get_ranged_target_turf(user, user.dir, dist), dist, O.throw_speed * skill, user, TRUE)
-				visible_message(SPAN_NOTICE("\The [user] hits \the [O], sending it flying!"))
-				playsound(src, pick('sound/items/baseball/baseball_hit_01.wav', 'sound/items/baseball/baseball_hit_02.wav'), 75, 1)
-			else
-				playsound(src, 'sound/items/baseball/swing_woosh.wav', 75, 1)
-				visible_message(SPAN_NOTICE("\The [user] tries to bat \the [O] but misses!"))
-			user.do_attack_animation(target)
+/obj/item/material/twohanded/baseballbat/use_before(obj/O, mob/living/user, click_parameters)
+	if(!istype(O))
+		return FALSE
+
+	if(is_held_twohanded(user) && !O.anchored && isturf(O.loc) && O.w_class <= ITEM_SIZE_SMALL)
+		if(!prob(user.skill_fail_chance(SKILL_HAULING, 20, SKILL_EXPERIENCED)))
+			var/skill = 0.25 + (user.get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)
+			var/dist = O.throw_range * skill
+			O.throw_at(get_ranged_target_turf(user, user.dir, dist), dist, O.throw_speed * skill, user, TRUE)
+			visible_message(SPAN_NOTICE("\The [user] hits \the [O], sending it flying!"))
+			playsound(src, pick('sound/items/baseball/baseball_hit_01.wav', 'sound/items/baseball/baseball_hit_02.wav'), 75, 1)
+		else
+			playsound(src, 'sound/items/baseball/swing_woosh.wav', 75, 1)
+			visible_message(SPAN_NOTICE("\The [user] tries to bat \the [O] but misses!"))
+		user.do_attack_animation(O)
+		return TRUE
 
 //Predefined materials go here.
 /obj/item/material/twohanded/baseballbat/metal/New(newloc)

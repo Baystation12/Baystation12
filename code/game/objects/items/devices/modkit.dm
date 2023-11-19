@@ -15,17 +15,14 @@
 		/obj/item/clothing/suit/space/void
 		)
 
-/obj/item/device/modkit/afterattack(obj/O, mob/user as mob, proximity)
-	if(!proximity)
-		return
-
+/obj/item/device/modkit/use_after(obj/O, mob/living/user, click_parameters)
 	if (!target_species)
-		return	//it shouldn't be null, okay?
+		return	FALSE
 
 	if(!parts)
 		to_chat(user, SPAN_WARNING("This kit has no parts for this modification left."))
 		qdel(src)
-		return
+		return TRUE
 
 	var/allowed = 0
 	for (var/permitted_type in permitted_types)
@@ -35,22 +32,23 @@
 	var/obj/item/clothing/I = O
 	if (!istype(I) || !allowed)
 		to_chat(user, SPAN_NOTICE("[src] is unable to modify that."))
-		return
+		return TRUE
 
 	var/excluding = ("exclude" in I.species_restricted)
 	var/in_list = (target_species in I.species_restricted)
 	if (excluding ^ in_list)
 		to_chat(user, SPAN_NOTICE("[I] is already modified."))
-		return
+		return TRUE
 
 	if(!isturf(O.loc))
 		to_chat(user, SPAN_WARNING("[O] must be safely placed on the ground for modification."))
-		return
+		return TRUE
 
 	playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-
-	user.visible_message(SPAN_NOTICE("\The [user] opens \the [src] and modifies \the [O]."),SPAN_NOTICE("You open \the [src] and modify \the [O]."))
-
+	user.visible_message(
+		SPAN_NOTICE("\The [user] opens \the [src] and modifies \the [O]."),
+		SPAN_NOTICE("You open \the [src] and modify \the [O].")
+	)
 	I.refit_for_species(target_species)
 
 	if (istype(I, /obj/item/clothing/head/helmet))
@@ -60,6 +58,7 @@
 
 	if(!parts)
 		qdel(src)
+	return TRUE
 
 /obj/item/device/modkit/examine(mob/user)
 	. = ..(user)

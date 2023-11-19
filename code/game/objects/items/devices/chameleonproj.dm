@@ -28,8 +28,7 @@
 /obj/item/device/chameleon/attack_self()
 	toggle()
 
-/obj/item/device/chameleon/afterattack(atom/target, mob/user , proximity)
-	if(!proximity) return
+/obj/item/device/chameleon/use_after(atom/target, mob/living/user, click_parameters)
 	if(!active_dummy)
 		if(istype(target,/obj/item) && !istype(target, /obj/item/disk/nuclear))
 			playsound(get_turf(src), 'sound/weapons/flash.ogg', 100, 1, -6)
@@ -38,6 +37,7 @@
 			saved_icon = target.icon
 			saved_icon_state = target.icon_state
 			saved_overlays = target.overlays.Copy()
+			return TRUE
 
 /obj/item/device/chameleon/proc/toggle()
 	if(!can_use || !saved_item) return

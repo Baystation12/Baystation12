@@ -82,8 +82,7 @@
 	shadeColour = input(user, "Please select the shade colour.", "Crayon colour") as color
 	return
 
-/obj/item/pen/crayon/afterattack(atom/target, mob/user as mob, proximity)
-	if(!proximity) return
+/obj/item/pen/crayon/use_after(atom/target, mob/user)
 	if(istype(target,/turf/simulated/floor))
 		var/drawtype = input("Choose what you'd like to draw.", "Crayon scribbles") in list("graffiti","rune","letter","arrow", "defector graffiti")
 		switch(drawtype)
@@ -108,7 +107,7 @@
 				if(!uses)
 					to_chat(user, SPAN_WARNING("You used up your crayon!"))
 					qdel(src)
-	return
+		return TRUE
 
 /obj/item/pen/crayon/use_before(mob/living/carbon/M as mob, mob/user as mob)
 	if(istype(M) && M == user)

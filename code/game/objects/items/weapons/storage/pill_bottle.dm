@@ -40,7 +40,7 @@
 		if (length(peelz))
 			var/obj/item/reagent_containers/pill/P = pick(peelz)
 			remove_from_storage(P)
-			P.afterattack(target, user, TRUE)
+			P.use_after(target, user)
 			return TRUE
 
 

@@ -73,18 +73,13 @@
 		list(mode_name="induce specific mutations", projectile_type=/obj/item/projectile/energy/floramut/gene, modifystate="floramut"),
 		)
 
-/obj/item/gun/energy/floragun/resolve_attackby(atom/A)
-	if(istype(A,/obj/machinery/portable_atmospherics/hydroponics))
-		return FALSE // do afterattack, i.e. fire, at pointblank at trays.
-	return ..()
+/obj/item/gun/energy/floragun/use_before(atom/target, mob/living/user, click_parameters)
+	if (!istype(target, /obj/machinery/portable_atmospherics/hydroponics))
+		return FALSE
 
-/obj/item/gun/energy/floragun/afterattack(obj/target, mob/user, adjacent_flag)
-	//allow shooting into adjacent hydrotrays regardless of intent
-	if(adjacent_flag && istype(target,/obj/machinery/portable_atmospherics/hydroponics))
-		user.visible_message(SPAN_DANGER("\The [user] fires \the [src] into \the [target]!"))
-		Fire(target,user)
-		return
-	..()
+	user.visible_message(SPAN_DANGER("\The [user] fires \the [src] into \the [target]!"))
+	Fire(target,user)
+	return TRUE
 
 /obj/item/gun/energy/floragun/verb/select_gene()
 	set name = "Select Gene"

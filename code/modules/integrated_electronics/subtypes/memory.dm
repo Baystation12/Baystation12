@@ -129,12 +129,12 @@
 			O.data = null
 			to_chat(user, SPAN_NOTICE("You set \the [src]'s memory to absolutely nothing."))
 
-/obj/item/integrated_circuit/memory/constant/afterattack(atom/target, mob/living/user, proximity)
-	. = ..()
-	if(accepting_refs && proximity)
+/obj/item/integrated_circuit/memory/constant/use_after(atom/target, mob/living/user, click_parameters)
+	if (accepting_refs)
 		var/datum/integrated_io/O = outputs[1]
 		O.data = weakref(target)
 		visible_message(SPAN_NOTICE("[user] slides \a [src]'s over \the [target]."))
 		to_chat(user, SPAN_NOTICE("You set \the [src]'s memory to a reference to [O.display_data(O.data)].  The ref scanner is \
 		now off."))
 		accepting_refs = FALSE
+		return TRUE

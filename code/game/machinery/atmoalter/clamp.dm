@@ -148,25 +148,24 @@
 	icon_state = "pclamp0"
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_MAGNET = 4)
 
-/obj/item/clamp/afterattack(atom/A, mob/user as mob, proximity)
-	if(!proximity)
-		return
-
+/obj/item/clamp/use_after(atom/A, mob/living/user, click_parameters)
 	if (istype(A, /obj/machinery/atmospherics/pipe/simple))
 		var/obj/machinery/atmospherics/pipe/simple/P = A
 		if (P.clamp)
 			to_chat(user, SPAN_WARNING("There is already \a [P.clamp] attached to \the [P]."))
-			return
+			return TRUE
 
 		to_chat(user, SPAN_NOTICE("You begin to attach \the [src] to \the [A]..."))
 		if (do_after(user, 3 SECONDS, A, DO_REPAIR_CONSTRUCT))
 			if (QDELETED(P))
-				return
+				return TRUE
 			if (P.clamp)
 				to_chat(user, SPAN_WARNING("There is already \a [P.clamp] attached to \the [P]."))
-				return
+				return TRUE
 			if(!user.unEquip(src))
-				return
+				return TRUE
 			to_chat(user, SPAN_NOTICE("You have attached \the [src] to \the [A]."))
 			new/obj/machinery/clamp(A.loc, A)
 			qdel(src)
+		return TRUE
+	else return FALSE

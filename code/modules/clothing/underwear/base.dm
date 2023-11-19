@@ -4,10 +4,9 @@
 	var/required_slot_flags
 	var/required_free_body_parts
 
-/obj/item/underwear/afterattack(atom/target, mob/user, proximity)
-	if(!proximity)
-		return // Might as well check
+/obj/item/underwear/use_after(atom/target, mob/living/user, click_parameters)
 	DelayedEquipUnderwear(user, target)
+	return TRUE
 
 /obj/item/underwear/MouseDrop(atom/target)
 	DelayedEquipUnderwear(usr, target)

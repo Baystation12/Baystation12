@@ -185,26 +185,24 @@
 		to_chat(user, SPAN_WARNING("\The [src] is too dry to use on \the [target]!"))
 		return TRUE
 
-/obj/item/reagent_containers/glass/rag/afterattack(atom/A as obj|turf|area, mob/user as mob, proximity)
-	if(!proximity)
-		return
-
+/obj/item/reagent_containers/glass/rag/use_after(atom/A, mob/living/user, click_parameters)
 	if(istype(A, /obj/structure/reagent_dispensers))
 		if(!reagents.get_free_space())
 			to_chat(user, SPAN_WARNING("\The [src] is already soaked."))
-			return
+			return TRUE
 
 		if(A.reagents && A.reagents.trans_to_obj(src, reagents.maximum_volume))
 			user.visible_message(SPAN_NOTICE("\The [user] soaks [src] using [A]."), SPAN_NOTICE("You soak [src] using [A]."))
 			update_name()
-		return
+			return TRUE
 
 	if(!on_fire && istype(A) && (src in user))
 		if(A.is_open_container() && !(A in user))
 			remove_contents(user, A)
+			return TRUE
 		else if(!ismob(A)) //mobs are handled in attack() - this prevents us from wiping down people while smothering them.
 			wipe_down(A, user)
-		return
+			return TRUE
 
 /obj/item/reagent_containers/glass/rag/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature >= 50 + T0C)

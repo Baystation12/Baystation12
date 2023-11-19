@@ -20,10 +20,10 @@
 	..()
 	update_icon()
 
-/obj/item/device/oxycandle/afterattack(obj/O, mob/user, proximity)
-	if(proximity && istype(O) && on)
+/obj/item/device/oxycandle/use_after(obj/O, mob/living/user, click_parameters)
+	if(istype(O) && on)
 		O.HandleObjectHeating(src, user, 500)
-	..()
+		return TRUE
 
 /obj/item/device/oxycandle/attack_self(mob/user)
 	if(!on)

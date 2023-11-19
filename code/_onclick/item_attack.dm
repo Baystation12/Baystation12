@@ -398,8 +398,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 /**
  * Called when the item is in the active hand and another atom is clicked and `resolve_attackby()` returns FALSE. This is generally called by `ClickOn()`.
- * Use this similar to how attack() is used; but for non-mob targets. Whenever you want specific behavior at the item level.
- * Also works on ranged targets, unlike attack()
+ * Works on ranged targets, unlike resolve_attackby()
  *
  * **Parameters**:
  * - `target` - The atom that was clicked on.

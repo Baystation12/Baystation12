@@ -321,10 +321,11 @@
 		update_icon()
 		START_PROCESSING(SSobj, src)
 
-/obj/item/device/flashlight/flare/afterattack(obj/O, mob/user, proximity)
-	if(proximity && istype(O) && on)
+/obj/item/device/flashlight/flare/use_after(obj/O, mob/living/user)
+	if(istype(O) && on)
 		O.HandleObjectHeating(src, user, 500)
-	..()
+		return TRUE
+	return ..()
 
 /obj/item/device/flashlight/flare/proc/activate(mob/user)
 	if(istype(user))
