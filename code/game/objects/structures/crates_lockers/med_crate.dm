@@ -7,7 +7,7 @@
 	return list(
 		/obj/item/stack/medical/splint = 2,
 		/obj/item/stack/medical/advanced/bruise_pack = 10,
-		/obj/item/reagent_containers/pill/sugariron = 6,
+		/obj/item/storage/pill_bottle/sugariron = 1,
 		/obj/item/storage/pill_bottle/paracetamol = 2,
 		/obj/item/storage/pill_bottle/inaprovaline
 		)
@@ -46,5 +46,5 @@
 	return list(
 		/obj/item/storage/firstaid/surgery,
 		/obj/item/storage/pill_bottle/dylovene = 2,
-		/obj/item/reagent_containers/pill/hyronalin = 12
+		/obj/item/storage/pill_bottle/hyronalin = 1
 			)
