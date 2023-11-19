@@ -1,6 +1,0 @@
-author: TheNightingale
-changes:
-  - {tweak: Previously loose pills in medical storage are now in bottles.}
-  - {bugfix: Replaced legacy antitox pill bottles with dylovene in random medical
-      clutter.}
-delete-after: true
