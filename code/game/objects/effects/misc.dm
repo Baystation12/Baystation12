@@ -139,33 +139,3 @@
 	pixel_x = -176
 	pixel_y = -176
 	z_flags = ZMM_IGNORE
-
-/obj/effect/cold_mist
-	icon = 'icons/effects/tile_effects.dmi'
-	icon_state = "frontfog"
-	layer = FIRE_LAYER
-	alpha = 170
-
-/obj/effect/cold_mist/Initialize()
-	. = ..()
-	AddOverlays(image(icon = 'icons/effects/tile_effects.dmi', icon_state = "backfog", layer = BELOW_OBJ_LAYER))
-
-//Handling it as an overlay is not layering properly with render targets
-/obj/effect/cold_mist_gas_back
-	icon = 'icons/effects/tile_effects.dmi'
-	icon_state = "backfog"
-	layer = BELOW_OBJ_LAYER
-	render_target = COLD_EFFECT_BACK_TARGET
-
-/obj/effect/cold_mist_gas
-	icon = 'icons/effects/tile_effects.dmi'
-	icon_state = "frontfog"
-	render_target = COLD_EFFECT_TARGET
-	layer = FIRE_LAYER
-	appearance_flags = DEFAULT_APPEARANCE_FLAGS | KEEP_TOGETHER
-	var/obj/effect/cold_mist_gas_back/b = null
-
-/obj/effect/cold_mist_gas/Initialize()
-	. = ..()
-	b = new()
-	vis_contents += b

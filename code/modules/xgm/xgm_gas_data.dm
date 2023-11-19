@@ -117,22 +117,3 @@ var/global/datum/xgm_gas_data/gas_data
 	. = ..()
 	icon = null
 	icon_state = null
-
-/obj/effect/gas_cold_back
-	render_source = COLD_EFFECT_BACK_TARGET
-	plane = DEFAULT_PLANE
-	layer = BELOW_OBJ_LAYER
-
-/obj/gas_overlay/cold
-	name = "gas"
-	desc = "You shouldn't be clicking this."
-	gas_id = GAS_COLD
-	render_source = COLD_EFFECT_TARGET
-	var/obj/effect/gas_cold_back/b = null
-
-/obj/gas_overlay/cold/Initialize(mapload, gas)
-	. = ..()
-	icon = null
-	icon_state = null
-	b = new()
-	vis_contents += b
