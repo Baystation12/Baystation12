@@ -1,0 +1,4 @@
+author: cuddleandtea
+changes:
+  - {rscadd: players ghost mob now can be hidden for your screen}
+delete-after: true
