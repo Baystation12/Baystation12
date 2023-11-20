@@ -2,9 +2,10 @@
 	base_type = /datum/extension/chameleon
 	expected_type = /obj/item
 	flags = EXTENSION_FLAG_IMMEDIATE
+	var/emp_amount = 0
 	var/static/list/chameleon_choices_by_type
 	var/chameleon_choices
-	var/atom/atom_holder
+	var/obj/item/item_holder
 	var/static/chameleon_verbs = list(
 		/obj/item/proc/ChameleonFlexibleAppearance,
 		/obj/item/proc/ChameleonOutfitAppearanceSingle,
@@ -19,36 +20,39 @@
 		if (!chameleon_choices)
 			chameleon_choices = GenerateChameleonChoices(chameleon_type)
 
-	atom_holder = holder
-	atom_holder.verbs += chameleon_verbs
+	item_holder = holder
+	item_holder.verbs += chameleon_verbs
+	GLOB.empd_event.register(item_holder, src, /datum/extension/chameleon/proc/OnEMP)
 
 /datum/extension/chameleon/Destroy()
-	. = ..()
-	atom_holder.verbs -= chameleon_verbs
-	atom_holder = null
+	if (emp_amount)
+		STOP_PROCESSING(SSobj, src)
+	GLOB.empd_event.unregister(item_holder)
+	item_holder.verbs -= chameleon_verbs
+	item_holder = null
+	return ..()
 
-/datum/extension/chameleon/proc/Disguise(newtype, mob/user, newname, newdesc)
+/datum/extension/chameleon/proc/Disguise(newtype, newname, newdesc)
 	SHOULD_NOT_OVERRIDE(TRUE) // Subtypes should override OnDisguise
 
 	var/obj/item/copy = new newtype(null) // initial() does not handle lists well
-	var/obj/item/C = atom_holder
-	C.name = newname || copy.name
-	C.desc = newdesc || copy.desc
-	C.icon = copy.icon
-	C.color = copy.color
-	C.icon_state = copy.icon_state
-	C.flags_inv = copy.flags_inv
-	C.item_state = copy.item_state
-	C.body_parts_covered = copy.body_parts_covered
+	item_holder.name = newname || copy.name
+	item_holder.desc = newdesc || copy.desc
+	item_holder.icon = copy.icon
+	item_holder.color = copy.color
+	item_holder.icon_state = copy.icon_state
+	item_holder.flags_inv = copy.flags_inv
+	item_holder.item_state = copy.item_state
+	item_holder.body_parts_covered = copy.body_parts_covered
 
-	C.item_icons = copy.item_icons
-	C.item_state_slots = copy.item_state_slots
-	C.sprite_sheets = copy.sprite_sheets
+	item_holder.item_icons = copy.item_icons
+	item_holder.item_state_slots = copy.item_state_slots
+	item_holder.sprite_sheets = copy.sprite_sheets
 
-	OnDisguise(user, holder, copy)
+	OnDisguise(item_holder, copy)
 	qdel(copy)
 
-/datum/extension/chameleon/proc/OnDisguise(mob/user, obj/item/holder, obj/item/copy)
+/datum/extension/chameleon/proc/OnDisguise(obj/item/holder, obj/item/copy)
 	return
 
 /datum/extension/chameleon/proc/GetItemDisguiseType(singleton/hierarchy/outfit/outfit)
@@ -74,6 +78,39 @@
 			target["[name] [snowflake]"] = path
 		else
 			target[name] = path
+
+/datum/extension/chameleon/proc/OnEMP(holder, severity)
+	if(!prob(50/severity))
+		return
+
+	if (emp_amount == 0)
+		START_PROCESSING(SSobj, src)
+
+	emp_amount += rand((30 SECONDS)/severity, (1 MINUTE)/severity)
+	emp_amount = min(2 MINUTES, emp_amount) // Cap EMP duration to 2 minutes
+	Malfunction()
+
+/datum/extension/chameleon/Process(wait)
+	var/trigger = FALSE
+	// For each second, check if a malfunction is triggered
+	for (var/i = 1 to ceil(wait / (1 SECOND)))
+		// There's a (EMP seconds left / 2) probability of another malfunction triggering
+		if (!trigger && prob(emp_amount / 2 / 1 SECOND))
+			trigger = TRUE
+			emp_amount -= 10 SECONDS // If a malfunction did trigger, we're kind and reduce the remaining time by 10 seconds
+		else // Otherwise we only reduce it by 1 second
+			emp_amount -= 1 SECOND
+
+	if (trigger)
+		Malfunction()
+
+	if (emp_amount <= 0)
+		emp_amount = 0
+		STOP_PROCESSING(SSobj, src)
+
+/datum/extension/chameleon/proc/Malfunction()
+	playsound(item_holder.loc, "sparks", 75, 1, -1)
+	Disguise(chameleon_choices[pick(chameleon_choices)])
 
 /**
  * Verbs to handle changing the appearance of atoms that have the chameleon extension.
@@ -102,10 +139,10 @@
 	if(!CanPhysicallyInteractWith(user, holder))
 		to_chat(user, SPAN_WARNING("You can't reach \the [holder]."))
 		return
-	Disguise(chameleon_choices[choice], user, newname, newdesc)
+	Disguise(chameleon_choices[choice], newname, newdesc)
 
 /obj/item/proc/ChameleonOutfitAppearanceSingle()
-	set name = "Change Appearance - Outfit (Single)"
+	set name = "Change Appearance - Outfit (Selected Only)"
 	set desc = "Activate the holographic appearance changing module."
 	set category = "Object"
 
@@ -128,7 +165,7 @@
 	SetOutfitAppearance(user, list(src), choice)
 
 /obj/item/proc/ChameleonOutfitAppearanceAll()
-	set name = "Change Appearance - Outfit (All)"
+	set name = "Change Appearance - Outfit (All Equipped)"
 	set desc = "Activate the holographic appearance changing module."
 	set category = "Object"
 
@@ -178,12 +215,16 @@
 		M.update_inv_back()
 
 /datum/extension/chameleon/backpack/GetItemDisguiseType(singleton/hierarchy/outfit/outfit)
-	return outfit.back
+	if (ispath(outfit.back, expected_type))
+		return outfit.back
+	for (var/potential_backpack_type in list_values(outfit.backpack_overrides))
+		if (ispath(potential_backpack_type, expected_type))
+			return potential_backpack_type
 
 /datum/extension/chameleon/clothing
 	expected_type = /obj/item/clothing
 
-/datum/extension/chameleon/clothing/OnDisguise(mob/user, obj/item/clothing/holder, obj/item/copy)
+/datum/extension/chameleon/clothing/OnDisguise(obj/item/clothing/holder, obj/item/copy)
 	SHOULD_CALL_PARENT(TRUE)
 	..()
 	if (istype(holder))
@@ -192,7 +233,7 @@
 /datum/extension/chameleon/clothing/accessory
 	expected_type = /obj/item/clothing/accessory
 
-/datum/extension/chameleon/clothing/accessory/OnDisguise(mob/user, obj/item/clothing/accessory/holder, obj/item/clothing/accessory/copy)
+/datum/extension/chameleon/clothing/accessory/OnDisguise(obj/item/clothing/accessory/holder, obj/item/clothing/accessory/copy)
 	holder.slot = copy.slot
 	holder.parent = copy.parent
 	holder.inv_overlay = copy.inv_overlay
@@ -274,7 +315,7 @@
 /datum/extension/chameleon/gun
 	expected_type = /obj/item/gun
 
-/datum/extension/chameleon/gun/OnDisguise(mob/user, obj/item/gun/holder, obj/item/gun/copy)
+/datum/extension/chameleon/gun/OnDisguise(obj/item/gun/holder, obj/item/gun/copy)
 	holder.flags_inv = copy.flags_inv
 	holder.fire_sound = copy.fire_sound
 	holder.fire_sound_text = copy.fire_sound_text
@@ -287,7 +328,7 @@
 /datum/extension/chameleon/headset
 	expected_type = /obj/item/device/radio/headset
 
-/datum/extension/chameleon/headset/OnDisguise(mob/user, obj/item/holder, obj/item/copy)
+/datum/extension/chameleon/headset/OnDisguise(obj/item/holder, obj/item/copy)
 	if (ismob(holder.loc))
 		var/mob/M = holder.loc
 		M.update_inv_ears()
