@@ -1,0 +1,5 @@
+author: Lamasmaster
+changes:
+  - {rscadd: New on-mob and obj sprite for the chem sprayer.}
+  - {rscadd: Sprayer now does the funny squeek.}
+delete-after: true
