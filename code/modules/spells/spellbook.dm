@@ -29,7 +29,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 	var/uses = 1
 	var/temp = null
 	var/datum/spellbook/spellbook
-	var/spellbook_type = /datum/spellbook/ //for spawning specific spellbooks.
+	var/spellbook_type = /datum/spellbook //for spawning specific spellbooks.
 	var/investing_time = 0 //what time we target forr a return on our spell investment.
 	var/has_sacrificed = 0 //whether we have already got our sacrifice bonus for the current investment.
 
