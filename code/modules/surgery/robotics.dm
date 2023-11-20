@@ -735,6 +735,7 @@
 /singleton/surgery_step/robone/realign_support
 	name = "Realign support"
 	allowed_tools = list(
+		/obj/item/swapper/power_drill = 100,
 		/obj/item/wrench = 70,
 		/obj/item/bonesetter = 50
 	)

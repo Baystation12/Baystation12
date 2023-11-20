@@ -278,25 +278,34 @@
 		playsound(src, 'sound/items/welderdeactivate.ogg', 10, 1)
 		update_icon()
 
-/obj/item/weldingtool/use_after(mob/living/M, mob/living/user)
-	if (ishuman(M))
-		var/target_zone = user.zone_sel.selecting
-		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/S = H.organs_by_name[target_zone]
+/obj/item/weldingtool/use_before(mob/living/target, mob/living/user, click_parameters)
+	if (!ishuman(target))
+		return FALSE
 
-		if (!S || !BP_IS_ROBOTIC(S) || user.a_intent != I_HELP)
+	var/target_zone = user.zone_sel.selecting
+	var/mob/living/carbon/human/H = target
+	var/obj/item/organ/external/S = H.organs_by_name[target_zone]
+
+	if (!S || !BP_IS_ROBOTIC(S) || user.a_intent != I_HELP)
+		return FALSE
+
+	var/list/all_surgeries = GET_SINGLETON_SUBTYPE_MAP(/singleton/surgery_step)
+	for (var/singleton in all_surgeries)
+		var/singleton/surgery_step/step = all_surgeries[singleton]
+		if (step.name && step.tool_quality(src) && step.can_use(user, H, target_zone, src))
 			return FALSE
 
-		if (BP_IS_BRITTLE(S))
-			to_chat(user, SPAN_WARNING("\The [M]'s [S.name] is hard and brittle - \the [src]  cannot repair it."))
-			return TRUE
+	if (BP_IS_BRITTLE(S))
+		to_chat(user, SPAN_WARNING("\The [target]'s [S.name] is hard and brittle - \the [src] cannot repair it."))
+		return TRUE
 
-		if (!can_use(2, user, "to patch the damage on [M]'s [S.name]"))
-			return TRUE
+	if (!can_use(2, user, silent = TRUE)) //The surgery check above already returns can_use's feedback.
+		return TRUE
 
-		if (S.robo_repair(15, DAMAGE_BRUTE, "some dents", src, user))
-			remove_fuel(2, user)
-			return TRUE
+	if (S.robo_repair(15, DAMAGE_BRUTE, "some dents", src, user))
+		remove_fuel(2, user)
+		return TRUE
+
 	else return FALSE
 
 /obj/item/weldingtool/IsFlameSource()
