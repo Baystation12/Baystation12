@@ -21,6 +21,10 @@
 	var/list/loaded = list()	//stored ammo
 	var/starts_loaded = 1		//whether the gun starts loaded or not, can be overridden for guns crafted in-game
 	var/load_sound = 'sound/weapons/guns/interaction/bullet_insert.ogg'
+	var/recentload = 0		// artificially limits how fast a gun can be loaded
+
+	//For CYCLE_CASING guns
+	var/chamber_offset = 0 //how many empty chambers in the cylinder until you hit a round
 
 	//For MAGAZINE guns
 	var/magazine_type = null	//the type of magazine that the gun comes preloaded with
@@ -133,7 +137,25 @@
 	if(istype(A, /obj/item/ammo_magazine))
 		. = TRUE
 		var/obj/item/ammo_magazine/AM = A
-		if(!(load_method & AM.mag_type) || ((istext(caliber) && caliber != AM.caliber) && (islist(caliber) && !is_type_in_list(AM.caliber, caliber))))
+		if (((istext(caliber) && caliber != AM.caliber) || (islist(caliber) && !is_type_in_list(AM.caliber, caliber))))
+			return //incompatible
+		else if (load_method == SINGLE_CASING && AM.mag_type == SPEEDLOADER && world.time >= recentload)
+			if (length(AM.stored_ammo))
+				var/C = AM.stored_ammo[1]
+				if (length(loaded) >= max_shells)
+					to_chat(user, SPAN_WARNING("[src] is full!"))
+					return
+				if (!user.unEquip(C, src))
+					return
+				loaded.Insert(1, C) //add to the head of the list
+				AM.stored_ammo -= C
+				user.visible_message("[user] inserts \a [C] into [src].", SPAN_NOTICE("You insert \a [C] into [src]."))
+				playsound(loc, load_sound, 50, 1)
+				recentload = world.time + 0.5 SECONDS
+			AM.update_icon()
+			update_icon()
+			return
+		else if (!(load_method & AM.mag_type))
 			return //incompatible
 
 		switch(AM.mag_type)
@@ -313,6 +335,8 @@
 		to_chat(user, "It has \a [ammo_magazine] loaded.")
 	if(user.skill_check(SKILL_WEAPONS, SKILL_TRAINED))
 		to_chat(user, "Has [getAmmo()] round\s remaining.")
+	if (user.skill_check(SKILL_WEAPONS, SKILL_EXPERIENCED))
+		to_chat(user, "[src.DrawChamber()]")
 
 /obj/item/gun/projectile/proc/getAmmo()
 	var/bullets = 0
@@ -323,6 +347,26 @@
 	if(chambered)
 		bullets += 1
 	return bullets
+
+/obj/item/gun/projectile/proc/DrawChamber()
+	if (handle_casings == CYCLE_CASINGS)
+		var/chambers = list()
+		var/empty_chambers = 0
+		while (chamber_offset > empty_chambers)
+			chambers += "🌣"
+			empty_chambers ++
+		for (var/obj/item/ammo_casing/casing in loaded)
+			if (casing.BB)
+				chambers += "◉"
+			else
+				chambers += "◎"
+		while (max_shells > length(chambers))
+			chambers += "🌣"
+			empty_chambers ++
+		var/chamberlist = ""
+		for (var/chamber in chambers)
+			chamberlist += chamber
+		return chamberlist
 
 /* Unneeded -- so far.
 //in case the weapon has firemodes and can't unload using attack_hand()
