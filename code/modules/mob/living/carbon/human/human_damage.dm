@@ -153,7 +153,7 @@
 /mob/living/carbon/human/setOxyLoss(amount)
 	if (!need_breathe())
 		return
-	amount = clamp(amount, 0, 100) / 100
+	amount = (clamp(amount, 0, 100) - getOxyLoss()) / 100
 	adjustOxyLoss(amount * species.total_health)
 
 /mob/living/carbon/human/adjustOxyLoss(amount)
