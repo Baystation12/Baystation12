@@ -66,6 +66,9 @@
 	wall_smooth = SMOOTH_ALL
 	space_smooth = SMOOTH_NONE
 
+/singleton/flooring/grass/cut
+	floor_smooth = SMOOTH_ALL
+
 /singleton/flooring/dirt
 	name = "dirt"
 	desc = "Extra dirty."
