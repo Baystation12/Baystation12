@@ -31,12 +31,17 @@
 	atom_holder.verbs -= chameleon_verb
 	atom_holder = null
 
-/datum/extension/chameleon/proc/disguise(newtype, mob/user)
+/datum/extension/chameleon/proc/disguise(newtype, mob/user, newname, newdesc)
 	var/obj/item/copy = new newtype(null) //initial() does not handle lists well
 	var/obj/item/C = atom_holder
-
-	C.name = copy.name
-	C.desc = copy.desc
+	if (newname)
+		C.name = newname
+	else
+		C.name = copy.name
+	if (newdesc)
+		C.desc = newdesc
+	else
+		C.desc = copy.desc
 	C.icon = copy.icon
 	C.color = copy.color
 	C.icon_state = copy.icon_state
@@ -113,12 +118,14 @@
 /datum/extension/chameleon/proc/change(mob/user)
 	var/choice = input(user, "Select a new appearance", "Select appearance") as null|anything in chameleon_choices
 	if (choice)
+		var/newname = input(user, "Choose a new name, or leave blank to use the default", "Choose item name") as null|text
+		var/newdesc = input(user, "Choose a new description, or leave blank to use the default", "Choose item description") as null|text
 		if (QDELETED(user) || QDELETED(holder))
 			return
 		if(user.incapacitated() || !(holder in user))
 			to_chat(user, SPAN_WARNING("You can't reach \the [holder]."))
 			return
-		disguise(chameleon_choices[choice], user)
+		disguise(chameleon_choices[choice], user, newname, newdesc)
 		OnChange(user,holder)
 
 /datum/extension/chameleon/proc/OnChange(mob/user, obj/item/clothing/C) //contains icon updates
