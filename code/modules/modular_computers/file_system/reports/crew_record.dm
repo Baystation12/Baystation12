@@ -131,8 +131,14 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 // Used by character creation to create a record for new arrivals.
 /proc/CreateModularRecord(mob/living/carbon/human/H)
 	var/datum/computer_file/report/crew_record/CR = new/datum/computer_file/report/crew_record()
-	GLOB.all_crew_records.Add(CR)
 	CR.load_from_mob(H)
+
+	//ensure we don't get duplicated records
+	for (var/datum/computer_file/report/crew_record/record as anything in GLOB.all_crew_records)
+		if ((CR.get_name() == record.get_name()))
+			qdel(record)
+
+	GLOB.all_crew_records.Add(CR)
 	return CR
 
 // Gets crew records filtered by set of positions
