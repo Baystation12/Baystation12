@@ -1,5 +1,0 @@
-author: Mucker
-changes:
-  - {admin: Added a command for removing crew records permanently.}
-  - {tweak: Crew records (should) no longer duplicate under certain circumstances.}
-delete-after: true
