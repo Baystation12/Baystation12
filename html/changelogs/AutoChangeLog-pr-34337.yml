@@ -1,0 +1,5 @@
+author: TheNightingale
+changes:
+  - {tweak: You can now adjust the names and descriptions of chameleon gear when you
+      adjust the appearance.}
+delete-after: true
