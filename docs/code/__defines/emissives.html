@@ -14,7 +14,7 @@
  &mdash; <a href="code/__defines/emissives.html#define">Define Details</a></header>
 <main>
 <h1>code/__defines/emissives.dm 
-            <a href="https://github.com/Baystation12/Baystation12/blob/085bb79c0a64b78c43f35aa2d2423040f2444dc7/code/__defines/emissives.dm">
+            <a href="https://github.com/Baystation12/Baystation12/blob/7af77a42423a375d621bd8a32e0cefae40d39c86/code/__defines/emissives.dm">
         <img src="git.png" width="16" height="16" title="code&#x2F;__defines&#x2F;emissives.dm"/></a></h1>
 
 <table class="summary" cellspacing="0">
@@ -26,37 +26,37 @@
         <tr><th><a href="code/__defines/emissives.html#define/EM_MASK_MATRIX">EM_MASK_MATRIX</a></th><td>The color matrix used to mask out emissive blockers on the emissive plane. Alpha should default to zero, be solely dependent on the RGB value of <a href="code/__defines/emissives.html#define/EMISSIVE_COLOR" title="EMISSIVE_COLOR">EMISSIVE_COLOR</a>, and be independant of the RGB value of <a href="code/__defines/emissives.html#define/EM_BLOCK_COLOR" title="EM_BLOCK_COLOR">EM_BLOCK_COLOR</a>.</td></tr>
         <tr><th><a href="code/__defines/emissives.html#define/EMISSIVE_APPEARANCE_FLAGS">EMISSIVE_APPEARANCE_FLAGS</a></th><td>A set of appearance flags applied to all emissive and emissive blocker overlays.</td></tr></table><h2 id="define">Define Details</h2>
 <h3 id="define/EMISSIVE_APPEARANCE_FLAGS"><aside class="declaration">#define </aside>EMISSIVE_APPEARANCE_FLAGS
-            <a href="https://github.com/Baystation12/Baystation12/blob/085bb79c0a64b78c43f35aa2d2423040f2444dc7/code/__defines/emissives.dm#L23">
+            <a href="https://github.com/Baystation12/Baystation12/blob/7af77a42423a375d621bd8a32e0cefae40d39c86/code/__defines/emissives.dm#L23">
         <img src="git.png" width="16" height="16" title="code&#x2F;__defines&#x2F;emissives.dm 23"/></a>
     </h3>
     <p>A set of appearance flags applied to all emissive and emissive blocker overlays.</p><h3 id="define/EMISSIVE_BLOCK_GENERIC"><aside class="declaration">#define </aside>EMISSIVE_BLOCK_GENERIC
-            <a href="https://github.com/Baystation12/Baystation12/blob/085bb79c0a64b78c43f35aa2d2423040f2444dc7/code/__defines/emissives.dm#L5">
+            <a href="https://github.com/Baystation12/Baystation12/blob/7af77a42423a375d621bd8a32e0cefae40d39c86/code/__defines/emissives.dm#L5">
         <img src="git.png" width="16" height="16" title="code&#x2F;__defines&#x2F;emissives.dm 5"/></a>
     </h3>
     <p>For anything that doesn't change outline or opaque area much or at all.</p><h3 id="define/EMISSIVE_BLOCK_NONE"><aside class="declaration">#define </aside>EMISSIVE_BLOCK_NONE
-            <a href="https://github.com/Baystation12/Baystation12/blob/085bb79c0a64b78c43f35aa2d2423040f2444dc7/code/__defines/emissives.dm#L3">
+            <a href="https://github.com/Baystation12/Baystation12/blob/7af77a42423a375d621bd8a32e0cefae40d39c86/code/__defines/emissives.dm#L3">
         <img src="git.png" width="16" height="16" title="code&#x2F;__defines&#x2F;emissives.dm 3"/></a>
     </h3>
     <p>For anything that shouldn't block emissives. Small objects or translucent objects primarily</p><h3 id="define/EMISSIVE_BLOCK_UNIQUE"><aside class="declaration">#define </aside>EMISSIVE_BLOCK_UNIQUE
-            <a href="https://github.com/Baystation12/Baystation12/blob/085bb79c0a64b78c43f35aa2d2423040f2444dc7/code/__defines/emissives.dm#L7">
+            <a href="https://github.com/Baystation12/Baystation12/blob/7af77a42423a375d621bd8a32e0cefae40d39c86/code/__defines/emissives.dm#L7">
         <img src="git.png" width="16" height="16" title="code&#x2F;__defines&#x2F;emissives.dm 7"/></a>
     </h3>
     <p>Uses a dedicated render_target object to copy the entire appearance in real time to the blocking layer. For things that can change in appearance a lot from the base state, like humans.</p><h3 id="define/EMISSIVE_COLOR"><aside class="declaration">#define </aside>EMISSIVE_COLOR
-            <a href="https://github.com/Baystation12/Baystation12/blob/085bb79c0a64b78c43f35aa2d2423040f2444dc7/code/__defines/emissives.dm#L10">
+            <a href="https://github.com/Baystation12/Baystation12/blob/7af77a42423a375d621bd8a32e0cefae40d39c86/code/__defines/emissives.dm#L10">
         <img src="git.png" width="16" height="16" title="code&#x2F;__defines&#x2F;emissives.dm 10"/></a>
     </h3>
     <p>The color matrix applied to all emissive overlays. Should be solely dependent on alpha and not have RGB overlap with <a href="code/__defines/emissives.html#define/EM_BLOCK_COLOR" title="EM_BLOCK_COLOR">EM_BLOCK_COLOR</a>.</p><h3 id="define/EM_BLOCK_COLOR"><aside class="declaration">#define </aside>EM_BLOCK_COLOR
-            <a href="https://github.com/Baystation12/Baystation12/blob/085bb79c0a64b78c43f35aa2d2423040f2444dc7/code/__defines/emissives.dm#L14">
+            <a href="https://github.com/Baystation12/Baystation12/blob/7af77a42423a375d621bd8a32e0cefae40d39c86/code/__defines/emissives.dm#L14">
         <img src="git.png" width="16" height="16" title="code&#x2F;__defines&#x2F;emissives.dm 14"/></a>
     </h3>
     <p>The color matrix applied to all emissive blockers. Should be solely dependent on alpha and not have RGB overlap with <a href="code/__defines/emissives.html#define/EMISSIVE_COLOR" title="EMISSIVE_COLOR">EMISSIVE_COLOR</a>.</p><h3 id="define/EM_MASK_MATRIX"><aside class="declaration">#define </aside>EM_MASK_MATRIX
-            <a href="https://github.com/Baystation12/Baystation12/blob/085bb79c0a64b78c43f35aa2d2423040f2444dc7/code/__defines/emissives.dm#L18">
+            <a href="https://github.com/Baystation12/Baystation12/blob/7af77a42423a375d621bd8a32e0cefae40d39c86/code/__defines/emissives.dm#L18">
         <img src="git.png" width="16" height="16" title="code&#x2F;__defines&#x2F;emissives.dm 18"/></a>
     </h3>
     <p>The color matrix used to mask out emissive blockers on the emissive plane. Alpha should default to zero, be solely dependent on the RGB value of <a href="code/__defines/emissives.html#define/EMISSIVE_COLOR" title="EMISSIVE_COLOR">EMISSIVE_COLOR</a>, and be independant of the RGB value of <a href="code/__defines/emissives.html#define/EM_BLOCK_COLOR" title="EM_BLOCK_COLOR">EM_BLOCK_COLOR</a>.</p></main>
 <footer>
     baystation12.dme
-    <a href="https://github.com/Baystation12/Baystation12/tree/085bb79c0a64b78c43f35aa2d2423040f2444dc7">085bb79</a>
+    <a href="https://github.com/Baystation12/Baystation12/tree/7af77a42423a375d621bd8a32e0cefae40d39c86">7af77a4</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.7.3</a></footer>
 </body>
 </html>

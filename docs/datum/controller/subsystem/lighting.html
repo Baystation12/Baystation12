@@ -16,7 +16,7 @@
 <h1>lighting <aside>/<a href="datum.html">datum</a>/<a href="datum/controller.html">controller</a>/<a href="datum/controller/subsystem.html">subsystem</a>/<a href="datum/controller/subsystem/lighting.html">lighting</a></aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/085bb79c0a64b78c43f35aa2d2423040f2444dc7/code/controllers/subsystems/lighting.dm#L1">
+            <a href="https://github.com/Baystation12/Baystation12/blob/7af77a42423a375d621bd8a32e0cefae40d39c86/code/controllers/subsystems/lighting.dm#L1">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;lighting.dm 1"/></a></h1>
 
 <table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
@@ -33,36 +33,36 @@ Go over overlay queue and update as needed</td></tr></table>
             <aside>&ndash; /list</aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/085bb79c0a64b78c43f35aa2d2423040f2444dc7/code/controllers/subsystems/lighting.dm#L17">
+            <a href="https://github.com/Baystation12/Baystation12/blob/7af77a42423a375d621bd8a32e0cefae40d39c86/code/controllers/subsystems/lighting.dm#L17">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;lighting.dm 17"/></a></h3>
         <p>lighting corners  queued for update.</p><h3 id="var/light_queue"><aside class="declaration">var </aside>light_queue
             <aside>&ndash; /list</aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/085bb79c0a64b78c43f35aa2d2423040f2444dc7/code/controllers/subsystems/lighting.dm#L14">
+            <a href="https://github.com/Baystation12/Baystation12/blob/7af77a42423a375d621bd8a32e0cefae40d39c86/code/controllers/subsystems/lighting.dm#L14">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;lighting.dm 14"/></a></h3>
         <p>lighting sources  queued for update.</p><h3 id="var/overlay_queue"><aside class="declaration">var </aside>overlay_queue
             <aside>&ndash; /list</aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/085bb79c0a64b78c43f35aa2d2423040f2444dc7/code/controllers/subsystems/lighting.dm#L20">
+            <a href="https://github.com/Baystation12/Baystation12/blob/7af77a42423a375d621bd8a32e0cefae40d39c86/code/controllers/subsystems/lighting.dm#L20">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;lighting.dm 20"/></a></h3>
         <p>lighting overlays queued for update.</p><h2 id="proc">Proc Details</h2><h3 id="proc/Initialize"><aside class="parent"><a title="/datum/controller/subsystem" href="datum/controller/subsystem.html#proc/Initialize">&uarr;</a></aside>Initialize<aside>(timeofday) 
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/085bb79c0a64b78c43f35aa2d2423040f2444dc7/code/controllers/subsystems/lighting.dm#L60">
+            <a href="https://github.com/Baystation12/Baystation12/blob/7af77a42423a375d621bd8a32e0cefae40d39c86/code/controllers/subsystems/lighting.dm#L60">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;lighting.dm 60"/></a></aside>
         </h3>
         <p>Generate overlays for all Zlevels and then fire normally</p><h3 id="proc/InitializeTurfs"><aside class="declaration">proc </aside>InitializeTurfs<aside>(/list/targets) 
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/085bb79c0a64b78c43f35aa2d2423040f2444dc7/code/controllers/subsystems/lighting.dm#L101">
+            <a href="https://github.com/Baystation12/Baystation12/blob/7af77a42423a375d621bd8a32e0cefae40d39c86/code/controllers/subsystems/lighting.dm#L101">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;lighting.dm 101"/></a></aside>
         </h3>
         <p>Initialize a set of turfs (for example as part of loading a map template) It's safe to pass a list of non-turfs to this list - it'll only check turfs.</p><h3 id="proc/InitializeZlev"><aside class="declaration">proc </aside>InitializeZlev<aside>(zlev) 
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/085bb79c0a64b78c43f35aa2d2423040f2444dc7/code/controllers/subsystems/lighting.dm#L89">
+            <a href="https://github.com/Baystation12/Baystation12/blob/7af77a42423a375d621bd8a32e0cefae40d39c86/code/controllers/subsystems/lighting.dm#L89">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;lighting.dm 89"/></a></aside>
         </h3>
         <p>Go over turfs thay may be dynamically lit and add a lighting overlay if they don't have one. Then do the same for turfs that may be ambient lit.</p>
@@ -72,7 +72,7 @@ Go over overlay queue and update as needed</td></tr></table>
 </ul><h3 id="proc/fire">fire<aside>(resumed, no_mc_tick) 
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/085bb79c0a64b78c43f35aa2d2423040f2444dc7/code/controllers/subsystems/lighting.dm#L114">
+            <a href="https://github.com/Baystation12/Baystation12/blob/7af77a42423a375d621bd8a32e0cefae40d39c86/code/controllers/subsystems/lighting.dm#L114">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;lighting.dm 114"/></a></aside>
         </h3>
         <p>Go over light queue and update corners as needed
@@ -80,7 +80,7 @@ Go over light corner queue and update overlays as needed
 Go over overlay queue and update as needed</p></main>
 <footer>
     baystation12.dme
-    <a href="https://github.com/Baystation12/Baystation12/tree/085bb79c0a64b78c43f35aa2d2423040f2444dc7">085bb79</a>
+    <a href="https://github.com/Baystation12/Baystation12/tree/7af77a42423a375d621bd8a32e0cefae40d39c86">7af77a4</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.7.3</a></footer>
 </body>
 </html>
