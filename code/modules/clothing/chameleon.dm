@@ -9,7 +9,7 @@
 
 /obj/item/clothing/under/chameleon/Initialize()
 	. = ..()
-	set_extension(src,/datum/extension/chameleon/clothing)
+	set_extension(src,/datum/extension/chameleon/clothing/under)
 
 /obj/item/clothing/head/chameleon
 	name = "cap"
@@ -21,7 +21,7 @@
 
 /obj/item/clothing/head/chameleon/Initialize()
 	. = ..()
-	set_extension(src,/datum/extension/chameleon/clothing)
+	set_extension(src, /datum/extension/chameleon/clothing/head)
 
 /obj/item/clothing/suit/chameleon
 	name = "armor"
@@ -33,7 +33,7 @@
 
 /obj/item/clothing/suit/chameleon/Initialize()
 	. = ..()
-	set_extension(src,/datum/extension/chameleon/clothing)
+	set_extension(src, /datum/extension/chameleon/clothing/suit)
 
 /obj/item/clothing/shoes/chameleon
 	name = "shoes"
@@ -45,7 +45,7 @@
 
 /obj/item/clothing/shoes/chameleon/Initialize()
 	. = ..()
-	set_extension(src,/datum/extension/chameleon/clothing)
+	set_extension(src, /datum/extension/chameleon/clothing/shoes)
 
 /obj/item/storage/backpack/chameleon
 	name = "backpack"
@@ -69,7 +69,7 @@
 
 /obj/item/clothing/gloves/chameleon/Initialize()
 	. = ..()
-	set_extension(src,/datum/extension/chameleon/clothing)
+	set_extension(src, /datum/extension/chameleon/clothing/gloves)
 
 /obj/item/clothing/mask/chameleon
 	name = "mask"
@@ -81,7 +81,7 @@
 
 /obj/item/clothing/mask/chameleon/Initialize()
 	. = ..()
-	set_extension(src,/datum/extension/chameleon/clothing,/obj/item/clothing/mask)
+	set_extension(src, /datum/extension/chameleon/clothing/mask)
 
 /obj/item/clothing/glasses/chameleon
 	name = "goggles"
@@ -93,7 +93,7 @@
 
 /obj/item/clothing/glasses/chameleon/Initialize()
 	. = ..()
-	set_extension(src,/datum/extension/chameleon/clothing)
+	set_extension(src, /datum/extension/chameleon/clothing/glasses)
 
 /obj/item/device/radio/headset/chameleon
 	name = "radio headset"
