@@ -128,12 +128,31 @@
 
 	return ..()
 
+/obj/item/gun/projectile/shotgun/pump/DrawChamber()
+	var/chamberlist = ""
+	if (chambered)
+		if (chambered.BB)
+			chamberlist += "◉|"
+		else
+			chamberlist += "◎|"
+	else
+		chamberlist += "🌣|"
+	if (length(loaded) > 0)
+		var/obj/item/ammo_casing/casinglist = loaded
+		if (casinglist[1].BB)
+			chamberlist += "◉"
+		else
+			chamberlist += "◎"
+	else
+		chamberlist += "🌣"
+	return chamberlist
+
 /obj/item/gun/projectile/shotgun/pump/empty
 	starts_loaded = FALSE
 
 /obj/item/gun/projectile/shotgun/pump/sawn
 	name = "riot shotgun"
-	desc = "A mass-produced shotgun by Mars Security Industries. The rugged ZX-870 'Bulldog' is common throughout most frontier worlds. This one has had it's stock cut off..."
+	desc = "A mass-produced shotgun by Mars Security Industries. The rugged ZX-870 'Bulldog' is common throughout most frontier worlds. This one has had its stock cut off..."
 	icon = 'icons/obj/guns/shotguns.dmi'
 	icon_state = "rshotgun"
 	item_state = "rshotgun"
