@@ -1,6 +1,0 @@
-author: TheNightingale
-changes:
-  - {bugfix: Voice changers now work to fool tape recorders.}
-  - {tweak: 'Tapes now have a maximum length of twenty minutes, up from ten.'}
-  - {tweak: Lowered the cooldown for printing transcripts on tape recorders.}
-delete-after: true
