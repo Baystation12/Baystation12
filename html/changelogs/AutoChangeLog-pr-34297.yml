@@ -1,0 +1,9 @@
+author: Karl Johansson
+changes:
+  - {rscadd: You can see what's currently in the chamber of a gun on examine.}
+  - {rscadd: You can load non-magazine weapons by booping them with an appropriate
+      loader.}
+  - {tweak: 'Opening the bolt on bolt-action weapons unloads anything inside, not
+      just empties.'}
+  - {tweak: 5mmR weapons are more accurate at long range.}
+delete-after: true
