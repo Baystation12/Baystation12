@@ -158,6 +158,7 @@ field_generator power level display
 
 
 /obj/machinery/field_generator/emp_act()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/machinery/field_generator/bullet_act(obj/item/projectile/Proj)

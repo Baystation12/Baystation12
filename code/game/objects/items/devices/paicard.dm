@@ -323,8 +323,10 @@
 		M.show_message(SPAN_NOTICE("\The [src] flashes a message across its screen, \"Additional personalities available for download.\""), 3, SPAN_NOTICE("\The [src] bleeps electronically."), 2)
 
 /obj/item/device/paicard/emp_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
 	for(var/mob/M in src)
 		M.emp_act(severity)
+	GLOB.empd_event.raise_event(src, severity)
 
 /obj/item/device/paicard/ex_act(severity)
 	if(pai)

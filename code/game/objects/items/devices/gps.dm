@@ -180,6 +180,7 @@ var/global/list/all_gps_units = list()
 	update_icon()
 
 /obj/item/device/gps/emp_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
 	if(emped) // Without a fancy callback system, this will have to do.
 		return
 	if(tracking)
@@ -190,6 +191,7 @@ var/global/list/all_gps_units = list()
 	emped = TRUE
 	update_icon()
 	addtimer(new Callback(src, .proc/reset_emp), duration)
+	GLOB.empd_event.raise_event(src, severity)
 
 /obj/item/device/gps/proc/reset_emp()
 	emped = FALSE

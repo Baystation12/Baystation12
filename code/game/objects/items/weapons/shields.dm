@@ -270,6 +270,7 @@
 
 
 /obj/item/shield/energy/emp_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
 	if (!active)
 		return
 	if (damaged)
@@ -289,6 +290,7 @@
 	else
 		deactivate()
 	update_icon()
+	GLOB.empd_event.raise_event(src, severity)
 
 
 /obj/item/shield/energy/proc/UpdateSoundLoop()
