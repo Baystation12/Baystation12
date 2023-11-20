@@ -21,7 +21,7 @@
 /area/abandoned_hotel/buffet)
 "ak" = (
 /obj/structure/window/reinforced,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/pool)
 "al" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -62,7 +62,7 @@
 /area/abandoned_hotel/lobby)
 "aB" = (
 /obj/structure/flora/ausbushes/ywflowers,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/pool)
 "aD" = (
 /obj/structure/window/reinforced{
@@ -100,7 +100,7 @@
 "aS" = (
 /obj/structure/window/reinforced,
 /obj/structure/flora/ausbushes/genericbush,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/pool)
 "aV" = (
 /turf/simulated/floor/plating,
@@ -113,7 +113,7 @@
 /area/abandoned_hotel/pool)
 "aX" = (
 /obj/structure/flora/ausbushes/grassybush,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/pool)
 "bd" = (
 /obj/structure/cable{
@@ -215,7 +215,7 @@
 "bI" = (
 /obj/structure/window/reinforced,
 /obj/structure/flora/ausbushes/ywflowers,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/pool)
 "bK" = (
 /obj/decal/cleanable/cobweb2{
@@ -469,12 +469,12 @@
 "eV" = (
 /obj/structure/window/reinforced,
 /obj/structure/flora/ausbushes/ywflowers,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/buffet)
 "eX" = (
 /obj/structure/window/reinforced,
 /obj/structure/flora/ausbushes/genericbush,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/buffet)
 "fq" = (
 /obj/structure/bed/chair/comfy/green{
@@ -500,16 +500,16 @@
 "fB" = (
 /obj/structure/window/reinforced,
 /obj/structure/flora/ausbushes/grassybush,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/buffet)
 "fD" = (
 /obj/structure/window/reinforced,
 /obj/structure/flora/ausbushes/fullgrass,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/buffet)
 "fE" = (
 /obj/structure/flora/ausbushes/ywflowers,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/buffet)
 "fF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -562,7 +562,7 @@
 	dir = 4
 	},
 /obj/structure/flora/ausbushes/fullgrass,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/buffet)
 "gf" = (
 /turf/simulated/floor/tiled/old_tile,
@@ -671,7 +671,7 @@
 /area/abandoned_hotel/lobby)
 "gZ" = (
 /obj/structure/flora/ausbushes/fullgrass,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/buffet)
 "ha" = (
 /obj/machinery/smartfridge/foods,
@@ -700,7 +700,7 @@
 "hg" = (
 /obj/structure/flora/ausbushes/reedbush,
 /obj/structure/window/reinforced,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/lobby)
 "hh" = (
 /obj/decal/cleanable/cobweb{
@@ -827,21 +827,21 @@
 	dir = 1
 	},
 /obj/structure/flora/ausbushes/genericbush,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/buffet)
 "hP" = (
 /obj/structure/window/reinforced{
 	dir = 1
 	},
 /obj/structure/flora/bush,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/buffet)
 "hQ" = (
 /obj/structure/window/reinforced{
 	dir = 1
 	},
 /obj/structure/flora/ausbushes/ywflowers,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/buffet)
 "hR" = (
 /obj/floor_decal/spline/fancy/black{
@@ -876,12 +876,12 @@
 "io" = (
 /obj/structure/flora/ausbushes/genericbush,
 /obj/structure/window/reinforced,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/lobby)
 "ip" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/window/reinforced,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/lobby)
 "iu" = (
 /obj/structure/firedoor_assembly,
@@ -890,29 +890,29 @@
 "ix" = (
 /obj/structure/flora/ausbushes/pointybush,
 /obj/structure/window/reinforced,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/lobby)
 "iF" = (
 /obj/structure/window/reinforced{
 	dir = 4
 	},
 /obj/structure/flora/ausbushes/ywflowers,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/pool)
 "iG" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /obj/structure/window/reinforced,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/lobby)
 "iH" = (
 /obj/structure/flora/bush,
 /obj/structure/window/reinforced,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/lobby)
 "iI" = (
 /obj/structure/flora/ausbushes/grassybush,
 /obj/structure/window/reinforced,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/lobby)
 "iJ" = (
 /obj/floor_decal/spline/fancy/black{
@@ -925,14 +925,14 @@
 	dir = 1
 	},
 /obj/structure/flora/ausbushes/grassybush,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/lobby)
 "iL" = (
 /obj/structure/window/reinforced{
 	dir = 1
 	},
 /obj/structure/flora/ausbushes/lavendergrass,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/lobby)
 "iN" = (
 /obj/structure/flora/pottedplant/orientaltree,
@@ -999,7 +999,7 @@
 	},
 /obj/structure/window/reinforced,
 /obj/structure/flora/ausbushes/fullgrass,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/lobby)
 "jV" = (
 /obj/structure/safe,
@@ -1504,7 +1504,7 @@
 "qt" = (
 /obj/structure/window/reinforced,
 /obj/structure/flora/ausbushes/fullgrass,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/pool)
 "qB" = (
 /obj/structure/cable{
@@ -1597,7 +1597,7 @@
 	},
 /obj/structure/window/reinforced,
 /obj/structure/flora/ausbushes/ywflowers,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/lobby)
 "rV" = (
 /obj/structure/bed/chair/comfy/green{
@@ -1819,7 +1819,7 @@
 	dir = 4
 	},
 /obj/structure/flora/ausbushes/genericbush,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/lobby)
 "vB" = (
 /obj/structure/closet/crate/freezer{
@@ -2315,7 +2315,7 @@
 "Dv" = (
 /obj/structure/window/reinforced,
 /obj/structure/flora/ausbushes/grassybush,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/pool)
 "Dw" = (
 /obj/decal/cleanable/dirt,
@@ -2473,7 +2473,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/pool)
 "FQ" = (
 /obj/structure/table/woodentable/walnut,
@@ -2591,7 +2591,7 @@
 	dir = 8
 	},
 /obj/structure/flora/ausbushes/genericbush,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/lobby)
 "Hr" = (
 /obj/decal/cleanable/dirt,
@@ -2621,7 +2621,7 @@
 	dir = 4
 	},
 /obj/structure/flora/ausbushes/sparsegrass,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/lobby)
 "It" = (
 /obj/machinery/light,
@@ -2781,7 +2781,7 @@
 	dir = 8
 	},
 /obj/structure/flora/ausbushes/fullgrass,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/buffet)
 "KE" = (
 /obj/machinery/washing_machine,
@@ -2862,7 +2862,7 @@
 	dir = 4
 	},
 /obj/structure/flora/ausbushes/fullgrass,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/pool)
 "Lv" = (
 /obj/structure/table/standard,
@@ -2965,7 +2965,7 @@
 	dir = 1
 	},
 /obj/structure/flora/ausbushes/sparsegrass,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/lobby)
 "MA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -3051,7 +3051,7 @@
 	dir = 4
 	},
 /obj/structure/flora/ausbushes/ywflowers,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/lobby)
 "Ol" = (
 /obj/structure/largecrate,
@@ -3117,7 +3117,7 @@
 	dir = 1
 	},
 /obj/structure/flora/ausbushes/genericbush,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/pool)
 "Pn" = (
 /obj/decal/cleanable/dirt,
@@ -3178,7 +3178,7 @@
 	dir = 4
 	},
 /obj/structure/flora/ausbushes/grassybush,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/pool)
 "Qk" = (
 /obj/structure/cable{
@@ -3245,7 +3245,7 @@
 	dir = 1
 	},
 /obj/structure/flora/ausbushes/ywflowers,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/pool)
 "Ru" = (
 /obj/floor_decal/corner/black/diagonal,
@@ -3378,7 +3378,7 @@
 	dir = 4
 	},
 /obj/structure/flora/ausbushes/genericbush,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/pool)
 "Tk" = (
 /obj/structure/cable{
@@ -3406,7 +3406,7 @@
 	dir = 8
 	},
 /obj/structure/flora/ausbushes/grassybush,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/pool)
 "TX" = (
 /obj/machinery/door/airlock,
@@ -3522,7 +3522,7 @@
 	dir = 8
 	},
 /obj/structure/flora/ausbushes/ywflowers,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/pool)
 "VI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -3539,7 +3539,7 @@
 	dir = 8
 	},
 /obj/structure/flora/ausbushes/genericbush,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/pool)
 "VL" = (
 /turf/simulated/floor/tiled/old_cargo,
@@ -3644,7 +3644,7 @@
 	dir = 1
 	},
 /obj/structure/flora/ausbushes/fullgrass,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/buffet)
 "Xg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -3674,7 +3674,7 @@
 	dir = 1
 	},
 /obj/structure/flora/ausbushes/fullgrass,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/lobby)
 "Xs" = (
 /obj/machinery/atmospherics/pipe/zpipe/up/scrubbers{
@@ -3745,7 +3745,7 @@
 	dir = 8
 	},
 /obj/structure/flora/ausbushes/fullgrass,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/grass/cut,
 /area/abandoned_hotel/pool)
 "Yc" = (
 /obj/machinery/power/apc{
