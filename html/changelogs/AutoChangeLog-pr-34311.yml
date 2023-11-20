@@ -1,0 +1,7 @@
+author: emmanuelbassil
+changes:
+  - {bugfix: Can now use welders to fix external dents on IPCs on an operating table}
+  - {bugfix: Fixed oversight where you could not use swappers for surgical steps.}
+  - {bugfix: Fixed oversight where welding tool lit up and damage your  eyes even
+      if no actual surgical step occured.}
+delete-after: true
