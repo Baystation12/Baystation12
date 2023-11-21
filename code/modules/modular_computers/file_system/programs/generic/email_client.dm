@@ -5,7 +5,8 @@
 	program_icon_state = "generic"
 	program_key_state = "generic_key"
 	program_menu_icon = "mail-closed"
-	size = 7
+	size = 1
+	processing_size = 0 //It's the only way to ensure people actually have it on.
 	requires_ntnet = TRUE
 	available_on_ntnet = TRUE
 	var/stored_login = ""

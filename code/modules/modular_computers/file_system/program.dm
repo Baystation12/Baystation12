@@ -51,6 +51,9 @@
 	/// Holder for skill value of current/recent operator for programs that tick.
 	var/operator_skill = SKILL_MIN
 
+	/// How much processing size the program should take up.
+	var/processing_size = 1
+
 /datum/computer_file/program/Destroy()
 	if(computer && computer.active_program == src)
 		computer.kill_program(src)
