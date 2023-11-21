@@ -154,11 +154,16 @@
 		return
 
 	var/burn_damage = 0
+	var/rand_modifier = rand(1,3)
 	switch (severity)
 		if (EMP_ACT_HEAVY)
-			burn_damage = 30
+			burn_damage = 10 * rand_modifier
 		if (EMP_ACT_LIGHT)
-			burn_damage = 15
+			burn_damage = 4 * rand_modifier
+
+	/// Ions can't be aimed like conventional weaponry. This way damage is more even between center mass and limbs based on their total health relative to each other.
+	if(!(src.body_part & FULL_TORSO))
+		burn_damage *= 0.5
 
 	var/mult = 1 + !!(BP_IS_ASSISTED(src)) // This macro returns (large) bitflags.
 	burn_damage *= mult/species.get_burn_mod(owner) //ignore burn mod for EMP damage
@@ -174,9 +179,6 @@
 
 	if(owner && limb_flags & ORGAN_FLAG_CAN_GRASP)
 		owner.grasp_damage_disarm(src)
-
-	if(owner && limb_flags & ORGAN_FLAG_CAN_STAND)
-		owner.stance_damage_prone(src)
 
 	..()
 
