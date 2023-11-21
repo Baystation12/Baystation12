@@ -133,7 +133,9 @@
 		/obj/item/clothing/head/beret,
 		/obj/item/material/knife/folding,
 		/obj/item/swapper,
-		/obj/item/device/drone_designator
+		/obj/item/device/drone_designator,
+		/obj/item/modular_computer/tablet,
+		/obj/item/modular_computer/pda
 		)
 
 
@@ -179,6 +181,7 @@
 		/obj/item/reagent_containers/glass/bottle,
 		/obj/item/reagent_containers/pill,
 		/obj/item/reagent_containers/syringe,
+		/obj/item/reagent_containers/ivbag,
 		/obj/item/flame/lighter/zippo,
 		/obj/item/storage/fancy/smokable,
 		/obj/item/storage/pill_bottle,
@@ -195,9 +198,12 @@
 		/obj/item/extinguisher/mini,
 		/obj/item/storage/med_pouch,
 		/obj/item/bodybag,
+		/obj/item/taperoll/medical,
 		/obj/item/clothing/gloves,
 		/obj/item/clothing/head/beret,
-		/obj/item/material/knife/folding
+		/obj/item/material/knife/folding,
+		/obj/item/modular_computer/tablet,
+		/obj/item/modular_computer/pda
 		)
 
 /obj/item/storage/belt/medical/emt
@@ -227,6 +233,7 @@
 		/obj/item/melee/telebaton,
 		/obj/item/flame/lighter,
 		/obj/item/device/flashlight,
+		/obj/item/modular_computer/tablet,
 		/obj/item/modular_computer/pda,
 		/obj/item/device/radio/headset,
 		/obj/item/device/hailer,
@@ -269,6 +276,7 @@
 		/obj/item/melee/telebaton,
 		/obj/item/flame/lighter,
 		/obj/item/device/flashlight,
+		/obj/item/modular_computer/tablet,
 		/obj/item/modular_computer/pda,
 		/obj/item/device/radio/headset,
 		/obj/item/device/hailer,
@@ -355,7 +363,9 @@
 		/obj/item/crowbar/prybar,
 		/obj/item/clothing/mask/plunger,
 		/obj/item/clothing/head/beret,
-		/obj/item/material/knife/folding
+		/obj/item/material/knife/folding,
+		/obj/item/modular_computer/tablet,
+		/obj/item/modular_computer/pda
 		)
 
 /obj/item/storage/belt/holster/general
@@ -432,7 +442,12 @@
 		/obj/item/device/scanner,
 		/obj/item/clothing/head/beret,
 		/obj/item/material/knife/folding,
-		/obj/item/modular_computer/tablet
+		/obj/item/modular_computer/tablet,
+		/obj/item/modular_computer/pda,
+		/obj/item/taperoll/police,
+		/obj/item/clothing/glasses,
+		/obj/item/reagent_containers/spray/pepper,
+		/obj/item/device/flash
 		)
 
 /obj/item/storage/belt/forensic
@@ -463,7 +478,12 @@
 		/obj/item/device/scanner,
 		/obj/item/clothing/head/beret,
 		/obj/item/material/knife/folding,
-		/obj/item/modular_computer/tablet
+		/obj/item/modular_computer/tablet,
+		/obj/item/modular_computer/pda,
+		/obj/item/taperoll/police,
+		/obj/item/clothing/glasses,
+		/obj/item/reagent_containers/spray/pepper,
+		/obj/item/device/flash
 		)
 
 /obj/item/storage/belt/holster/machete
@@ -498,7 +518,9 @@
 		/obj/item/material/knife/folding,
 		/obj/item/storage/firstaid/light,
 		/obj/item/device/flash,
-		/obj/item/device/drone_designator
+		/obj/item/device/drone_designator,
+		/obj/item/modular_computer/tablet,
+		/obj/item/modular_computer/pda
 		)
 	can_holster = list(/obj/item/material/hatchet/machete)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
