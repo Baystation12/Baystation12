@@ -1,0 +1,5 @@
+author: emmanuelbassil
+changes:
+  - {bugfix: Fixes being unable to place pills into beakers placed on a table/turf}
+  - {bugfix: Fixes duct-taped and sticky papers not properly offsetting}
+delete-after: true
