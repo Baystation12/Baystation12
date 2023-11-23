@@ -66,36 +66,32 @@
 		to_chat(usr, SPAN_NOTICE("You take the cap off \the [src]."))
 		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
-/obj/item/reagent_containers/chem_disp_cartridge/afterattack(obj/target, mob/user , flag)
-	if (!is_open_container() || !flag)
-		return
+/obj/item/reagent_containers/chem_disp_cartridge/use_after(atom/target, mob/living/user, click_parameters)
+	if (!is_open_container())
+		to_chat(user, SPAN_WARNING("\The [src] is covered with a cap."))
+		return TRUE
 
-	else if(istype(target, /obj/structure/reagent_dispensers)) //A dispenser. Transfer FROM it TO us.
-		target.add_fingerprint(user)
-
+	if(istype(target, /obj/structure/reagent_dispensers)) //A dispenser. Transfer FROM it TO us.
 		if(!target.reagents.total_volume && target.reagents)
 			to_chat(user, SPAN_WARNING("\The [target] is empty."))
-			return
+			return TRUE
 
 		if(reagents.total_volume >= reagents.maximum_volume)
 			to_chat(user, SPAN_WARNING("\The [src] is full."))
-			return
+			return TRUE
 
 		var/trans = target.reagents.trans_to(src, target:amount_per_transfer_from_this)
 		to_chat(user, SPAN_NOTICE("You fill \the [src] with [trans] units of the contents of \the [target]."))
+		return TRUE
 
-	else if(target.is_open_container() && target.reagents) //Something like a glass. Player probably wants to transfer TO it.
-
+	if(target.is_open_container() && target.reagents) //Something like a glass. Player probably wants to transfer TO it.
 		if(!reagents.total_volume)
 			to_chat(user, SPAN_WARNING("\The [src] is empty."))
-			return
-
+			return TRUE
 		if(target.reagents.total_volume >= target.reagents.maximum_volume)
 			to_chat(user, SPAN_WARNING("\The [target] is full."))
-			return
+			return TRUE
 
 		var/trans = src.reagents.trans_to(target, amount_per_transfer_from_this)
 		to_chat(user, SPAN_NOTICE("You transfer [trans] units of the solution to \the [target]."))
-
-	else
-		return ..()
+		return TRUE

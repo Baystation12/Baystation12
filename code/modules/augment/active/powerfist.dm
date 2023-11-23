@@ -151,43 +151,50 @@
 		update_force()
 
 
-/obj/item/powerfist/afterattack(atom/target, mob/living/user, inrange, params)
-	if (!inrange || user.a_intent == I_HELP)
-		return
-	if (tank && tank.air_contents.return_pressure() > 210 && pressure_setting > 20 && inrange)
+/obj/item/powerfist/use_before(atom/target, mob/living/user, click_parameters)
+	if (user.a_intent == I_HELP || !istype(target, /obj/machinery/door/airlock))
+		return FALSE
+
+	var/obj/machinery/door/airlock/A = target
+
+	if (A.operating)
+		return FALSE
+
+	if (A.locked)
+		to_chat(user, SPAN_WARNING("The airlock's bolts prevent it from being forced."))
+		return TRUE
+
+	if (tank && tank.air_contents.return_pressure() > 210 && pressure_setting > 20)
 		playsound(user, 'sound/effects/bamf.ogg', pressure_setting*2, 1) //louder the more pressure is used
 		gas_loss()
 		no_pressure()
-		if (istype(target, /obj/machinery/door/airlock) && pressure_setting > 30) //tearing open airlocks
-			var/obj/machinery/door/airlock/A = target
-			if (!A.operating && !A.locked)
-				if (A.welded)
-					A.visible_message(SPAN_DANGER("\The [user] forces the fingers of \the [src] in through the welded metal, beginning to pry \the [A] open!"))
-					if (do_after(user, 13 SECONDS, A, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && !A.locked)
-						A.welded = FALSE
-						A.update_icon()
-						playsound(A, 'sound/effects/meteorimpact.ogg', 100, 1)
-						playsound(A, 'sound/machines/airlock_creaking.ogg', 100, 1)
-						A.visible_message(SPAN_DANGER("\The [user] tears \the [A] open with \a [src]!"))
+		if (pressure_setting > 30) //tearing open airlocks
+			if (A.welded)
+				A.visible_message(SPAN_DANGER("\The [user] forces the fingers of \the [src] in through the welded metal, beginning to pry \the [A] open!"))
+				if (do_after(user, 13 SECONDS, A, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && !A.locked)
+					A.welded = FALSE
+					A.update_icon()
+					playsound(A, 'sound/effects/meteorimpact.ogg', 100, 1)
+					playsound(A, 'sound/machines/airlock_creaking.ogg', 100, 1)
+					A.visible_message(SPAN_DANGER("\The [user] tears \the [A] open with \a [src]!"))
+					addtimer(new Callback(A, /obj/machinery/door/airlock/.proc/open, TRUE), 0)
+					A.set_broken(TRUE)
+				return TRUE
+			else
+				A.visible_message(SPAN_DANGER("\The [user] pries the fingers of \a [src] in, beginning to force \the [A]!"))
+				if ((MACHINE_IS_BROKEN(A) || !A.is_powered() || do_after(user, 10 SECONDS, A, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)) && !(A.operating || A.welded || A.locked))
+					playsound(A, 'sound/machines/airlock_creaking.ogg', 100, 1)
+					if (A.density)
 						addtimer(new Callback(A, /obj/machinery/door/airlock/.proc/open, TRUE), 0)
-						A.set_broken(TRUE)
-						return
-				else
-					A.visible_message(SPAN_DANGER("\The [user] pries the fingers of \a [src] in, beginning to force \the [A]!"))
-					if ((MACHINE_IS_BROKEN(A) || !A.is_powered() || do_after(user, 10 SECONDS, A, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)) && !(A.operating || A.welded || A.locked))
-						playsound(A, 'sound/machines/airlock_creaking.ogg', 100, 1)
-						if (A.density)
-							addtimer(new Callback(A, /obj/machinery/door/airlock/.proc/open, TRUE), 0)
-							if(!MACHINE_IS_BROKEN(A) && A.is_powered())
-								A.set_broken(TRUE)
-							A.visible_message(SPAN_DANGER("\The [user] forces \the [A] open with \a [src]!"))
-						else
-							addtimer(new Callback(A, /obj/machinery/door/airlock/.proc/close, TRUE), 0)
-							if (!MACHINE_IS_BROKEN(A) && A.is_powered())
-								A.set_broken(TRUE)
-							A.visible_message(SPAN_DANGER("\The [user] forces \the [A] closed with \a [src]!"))
-			if (A.locked)
-				to_chat(user, SPAN_WARNING("The airlock's bolts prevent it from being forced."))
+						if(!MACHINE_IS_BROKEN(A) && A.is_powered())
+							A.set_broken(TRUE)
+						A.visible_message(SPAN_DANGER("\The [user] forces \the [A] open with \a [src]!"))
+					else
+						addtimer(new Callback(A, /obj/machinery/door/airlock/.proc/close, TRUE), 0)
+						if (!MACHINE_IS_BROKEN(A) && A.is_powered())
+							A.set_broken(TRUE)
+						A.visible_message(SPAN_DANGER("\The [user] forces \the [A] closed with \a [src]!"))
+				return TRUE
 
 
 /obj/item/powerfist/apply_hit_effect(atom/target, mob/living/user)

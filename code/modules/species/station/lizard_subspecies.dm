@@ -1,6 +1,7 @@
 /datum/species/unathi/yeosa
 	name = SPECIES_YEOSA
 	name_plural = SPECIES_YEOSA
+	preview_icon = 'icons/mob/human_races/species/unathi/yeosa_preview.dmi'
 
 	genders = list(MALE, FEMALE, PLURAL)
 

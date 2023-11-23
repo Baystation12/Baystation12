@@ -76,25 +76,24 @@
 			to_chat(user, "The [src] is already empty.")
 
 
-/obj/item/portable_destructive_analyzer/afterattack(atom/target, mob/living/user, proximity)
-	if(!target)
-		return
-	if(!proximity)
-		return
+/obj/item/portable_destructive_analyzer/use_after(atom/target, mob/living/user, click_parameters)
+	if(!isitem(target))
+		return FALSE
 	if(!isturf(target.loc)) // Don't load up stuff if it's inside a container or mob!
-		return
-	if(istype(target,/obj/item))
-		if(loaded_item)
-			to_chat(user, "Your [src] already has something inside.  Analyze or eject it first.")
-			return
-		var/obj/item/I = target
-		I.forceMove(src)
-		loaded_item = I
-		for(var/mob/M in viewers())
-			M.show_message(text(SPAN_NOTICE("[user] adds the [I] to the [src].")), 1)
-		desc = initial(desc) + "<br>It is holding \the [loaded_item]."
-		flick("portable_analyzer_load", src)
-		icon_state = "portable_analyzer_full"
+		return FALSE
+	if(loaded_item)
+		to_chat(user, SPAN_WARNING("\The [src] already has something inside.  Analyze or eject it first."))
+		return TRUE
+
+	var/obj/item/I = target
+	I.forceMove(src)
+	loaded_item = I
+	for(var/mob/M in viewers())
+		M.show_message(text(SPAN_NOTICE("[user] adds the [I] to the [src].")), 1)
+	desc = initial(desc) + "<br>It is holding \the [loaded_item]."
+	flick("portable_analyzer_load", src)
+	icon_state = "portable_analyzer_full"
+	return TRUE
 
 /obj/item/party_light
 	name = "party light"
@@ -173,19 +172,17 @@
 	icon = 'icons/obj/weapons/other.dmi'
 	icon_state = "autoharvester"
 
-/obj/item/robot_harvester/afterattack(atom/target, mob/living/user, proximity)
-	if(!target)
-		return
-	if(!proximity)
-		return
-	if(istype(target,/obj/machinery/portable_atmospherics/hydroponics))
-		var/obj/machinery/portable_atmospherics/hydroponics/T = target
-		if(T.harvest) //Try to harvest, assuming it's alive.
-			T.harvest(user)
-		else if(T.dead) //It's probably dead otherwise.
-			T.remove_dead(user)
-	else
-		to_chat(user, "Harvesting \a [target] is not the purpose of this tool. \The [src] is for plants being grown.")
+/obj/item/robot_harvester/use_after(atom/target, mob/living/user, click_parameters)
+	if(!istype(target,/obj/machinery/portable_atmospherics/hydroponics))
+		to_chat(user, SPAN_WARNING("Harvesting \a [target] is not the purpose of this tool. \The [src] is for plants being grown."))
+		return TRUE
+
+	var/obj/machinery/portable_atmospherics/hydroponics/T = target
+	if(T.harvest) //Try to harvest, assuming it's alive.
+		T.harvest(user)
+	else if(T.dead) //It's probably dead otherwise.
+		T.remove_dead(user)
+	return TRUE
 
 // A special tray for the service droid. Allow droid to pick up and drop items as if they were using the tray normally
 // Click on table to unload, click on item to load. Otherwise works identically to a tray.
@@ -256,13 +253,10 @@
 	icon_state = "paper_bin1"
 	item_state = "sheet-metal"
 
-/obj/item/form_printer/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
-
-	if(!target || !flag)
-		return
-
+/obj/item/form_printer/use_after(atom/target, mob/living/user, click_parameters)
 	if(istype(target,/obj/structure/table))
 		deploy_paper(get_turf(target))
+		return TRUE
 
 /obj/item/form_printer/attack_self(mob/user as mob)
 	deploy_paper(get_turf(src))
@@ -325,9 +319,7 @@
 	mode = !mode
 	to_chat(usr, "You set \the [src] to deploy [mode ? "doors" : "walls"].")
 
-/obj/item/inflatable_dispenser/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
-	if (!user)
-		return
+/obj/item/inflatable_dispenser/use_after(atom/target, mob/living/user, click_parameters)
 	if (loc != user)
 		return
 	var/turf/T = get_turf(target)
@@ -336,7 +328,7 @@
 
 	if (istype(target, /obj/structure/inflatable))
 		if (!do_after(user, 0.5 SECONDS, target, DO_PUBLIC_UNIQUE))
-			return
+			return TRUE
 		playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
 		var/obj/item/inflatable/I
 		if (istype(target, /obj/structure/inflatable/door))
@@ -359,6 +351,7 @@
 			var/obj/structure/inflatable/S = target
 			copy_health(S, I)
 		qdel(target)
+		return TRUE
 
 	else if (istype(target, /obj/item/inflatable))
 		var/collected = FALSE
@@ -379,22 +372,23 @@
 			qdel(target)
 		else
 			to_chat(user, SPAN_WARNING("\The [src] is already full of those."))
+		return TRUE
 
 	else
 		var/active_mode = mode
 		if (active_mode ? (!stored_doors) : (!stored_walls))
 			to_chat(user, SPAN_WARNING("\The [src] is out of [active_mode ? "doors" : "walls"]."))
-			return
+			return TRUE
 		var/obstruction = T.get_obstruction()
 		if (obstruction)
 			to_chat(user, SPAN_WARNING("\The [english_list(obstruction)] is blocking that spot."))
-			return
+			return TRUE
 		if (!do_after(user, 0.5 SECONDS, T, DO_PUBLIC_UNIQUE))
-			return
+			return TRUE
 		obstruction = T.get_obstruction()
 		if (obstruction)
 			to_chat(user, SPAN_WARNING("\The [english_list(obstruction)] is blocking that spot."))
-			return
+			return TRUE
 		var/placed
 		if (active_mode)
 			placed = new /obj/structure/inflatable/door(T)
@@ -408,7 +402,7 @@
 			range = 5
 		)
 		playsound(loc, 'sound/items/zip.ogg', 75, 1)
-
+		return TRUE
 /obj/item/reagent_containers/spray/cleaner/drone
 	name = "space cleaner"
 	desc = "BLAM!-brand non-foaming space cleaner!"
@@ -490,22 +484,23 @@
 	else
 		to_chat(user, SPAN_WARNING("There is nothing loaded into \the [src]."))
 
-/obj/item/bioreactor/afterattack(atom/movable/target, mob/user, proximity_flag, click_parameters)
-	if(!proximity_flag || !istype(target))
-		return
+/obj/item/bioreactor/use_after(atom/movable/target, mob/living/user, click_parameters)
+	if(!istype(target))
+		return FALSE
 
 	var/is_fuel = istype(target, /obj/item/reagent_containers/food/snacks/grown)
 	is_fuel = is_fuel || is_type_in_list(target, fuel_types)
 
 	if(!is_fuel)
 		to_chat(user, SPAN_WARNING("\The [target] cannot be used as fuel by \the [src]."))
-		return
-
+		return TRUE
 	if(length(contents) >= max_fuel_items)
 		to_chat(user, SPAN_WARNING("\The [src] can fit no more fuel inside."))
-		return
+		return TRUE
+
 	target.forceMove(src)
 	to_chat(user, SPAN_NOTICE("You load \the [target] into \the [src]."))
+	return TRUE
 
 /obj/item/bioreactor/Initialize()
 	. = ..()

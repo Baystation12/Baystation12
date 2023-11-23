@@ -159,6 +159,11 @@
 	else
 		. = 80 * (1 - bodytemperature / species.cold_level_3)
 		. = max(20, .)
+	if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
+		var/obj/machinery/atmospherics/unary/cryo_cell/cryo = loc
+		if(cryo.current_stasis_mult)
+			var/gcf_stasis_mult = cryo.current_stasis_mult
+			. = . * gcf_stasis_mult
 	return round(.)
 
 /mob/living/carbon/human

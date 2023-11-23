@@ -10,7 +10,9 @@
 	on_rolled_down = ACCESSORY_ROLLED_NONE
 	w_class = ITEM_SIZE_TINY
 	slot = ACCESSORY_SLOT_MEDAL
-
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_accessories_frontier_unathi.dmi'
+	)
 
 /obj/item/clothing/accessory/medal/fa/get_fibers()
 	return null

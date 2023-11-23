@@ -11,7 +11,7 @@
 	size = 5								// Size in GQ. Integers only. Smaller sizes should be used for utility/low use programs (like this one), while large sizes are for important programs.
 	requires_ntnet = FALSE						// This particular program does not require NTNet network conectivity...
 	available_on_ntnet = TRUE					// ... but we want it to be available for download.
-	nanomodule_path = /datum/nano_module/arcade_classic/	// Path of relevant nano module. The nano module is defined further in the file.
+	nanomodule_path = /datum/nano_module/arcade_classic // Path of relevant nano module. The nano module is defined further in the file.
 	var/picked_enemy_name
 	usage_flags = PROGRAM_ALL
 

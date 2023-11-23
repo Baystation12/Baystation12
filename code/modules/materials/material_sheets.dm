@@ -152,23 +152,25 @@
 		reinf_material = other.reinf_material
 		update_materials()
 
-/obj/item/stack/material/attackby(obj/item/W, mob/user)
+/obj/item/stack/material/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isCoil(W))
 		material.build_wired_product(user, W, src)
-		return
-	else if(istype(W, /obj/item/stack/material))
+		return TRUE
+
+	if (istype(W, /obj/item/stack/material))
 		if(is_same(W))
-			..()
+			return ..()
 		else if(!reinf_material)
 			material.reinforce(user, W, src)
-		return
-	else if(reinf_material && reinf_material.stack_type && isWelder(W))
+			return TRUE
+
+	if(reinf_material && reinf_material.stack_type && isWelder(W))
 		var/obj/item/weldingtool/WT = W
-		if(WT.isOn() && WT.get_fuel() > 2 && use(2))
-			WT.remove_fuel(2, user)
+		if(WT.remove_fuel(2, user) && use(2))
 			to_chat(user,SPAN_NOTICE("You recover some [reinf_material.use_name] from \the [src]."))
 			reinf_material.place_sheet(get_turf(user), 1)
-			return
+		return TRUE
+
 	return ..()
 
 /obj/item/stack/material/on_update_icon()

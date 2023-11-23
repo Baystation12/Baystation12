@@ -430,6 +430,8 @@
 
 	var/static/deletion_starts_paused = TRUE
 
+	var/static/enable_cold_mist = FALSE
+
 	/// If the runechat is enabled on the server
 	var/static/runechat_enabled = TRUE
 
@@ -848,6 +850,8 @@
 				warn_if_staff_same_ip = TRUE
 			if ("deletion_starts_paused")
 				deletion_starts_paused = TRUE
+			if ("enable_cold_mist")
+				enable_cold_mist = TRUE
 			if ("disable_runechat")
 				runechat_enabled = FALSE
 			else

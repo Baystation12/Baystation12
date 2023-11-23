@@ -40,7 +40,7 @@
 		if (length(peelz))
 			var/obj/item/reagent_containers/pill/P = pick(peelz)
 			remove_from_storage(P)
-			P.afterattack(target, user, TRUE)
+			P.use_after(target, user)
 			return TRUE
 
 
@@ -179,8 +179,19 @@
 	name = "pill bottle (Paracetamol)"
 	desc = "Mild painkiller, also known as Tylenol. Won't fix the cause of your headache (unlike cyanide), but might make it bearable."
 	startswith = list(/obj/item/reagent_containers/pill/paracetamol = 21)
-	wrapper_color = "#a2819e"
+	wrapper_color = "#c8a5dc"
 
+/obj/item/storage/pill_bottle/hyronalin
+	name = "pill bottle (Hyronalin)"
+	desc = "Moderate-strength anti-radiation pills. Take one and see if your hair falls out in the morning."
+	startswith = list(/obj/item/reagent_containers/pill/hyronalin = 14)
+	wrapper_color = COLOR_GREEN_GRAY
+
+/obj/item/storage/pill_bottle/sugariron
+	name = "pill bottle (Sugar-Iron)"
+	desc = "A fifty-fifty mix of iron and sugar, used for encouraging the body's natural blood regeneration."
+	startswith = list(/obj/item/reagent_containers/pill/sugariron = 14)
+	wrapper_color = COLOR_RED_GRAY
 
 /obj/item/storage/pill_bottle/assorted
 	name = "pill bottle (assorted)"

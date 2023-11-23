@@ -64,18 +64,16 @@
 /datum/species/human/vatgrown
 	name = SPECIES_VATGROWN
 	name_plural = "Vat-Grown Humans"
-	description = "With cloning on the forefront of human scientific advancement, mass production \
-	of bodies is a very real and rather ethically grey industry. Although slavery, indentured servitude \
-	and flash-cloning are all illegal in SCG space, there still exists a margin for those legitimate \
-	corporations able to take up contracts for growing and raising vat-grown humans to populate new \
-	colonies or installations. Many vat-grown humans come from one of these projects, making up the \
-	majority of those referred to as the nonborn - those with singular names and an identifier, such as \
-	ID-John, BQ1-Bob or Thomas-582 - while others, bearing more human-sounding names, are created for \
-	and raised as members of regular human families. Still others are the lab-created designer progeny \
-	of the SCG's rich elite.<br/><br/>Vat-grown humans tend to be paler than baseline, though those \
-	with darker skin better display the dull, greenish hue resulting from their artificial growth. \
-	Vat-grown humans have no appendix and fewer inherited genetic disabilities but have a weakened \
-	metabolism."
+	description = "With cloning technology having become commercially viable in the late 21st century, \
+	vat-grown humans have become commonplace throughout human space. Some vat-grown humans trace their \
+	origins to colonization projects - prior to the advent of mainstream bluespace travel, cloning was \
+	often used alongside sleeper ships to populate distant new colonies and installations. While modern \
+	spaceflight has made these colonization practices less necessary, they still persist in some parts of \
+	human space. Most vat-grown humans today come from families who could not or chose not to have children \
+	naturally, however. This is an expensive process, and most families that can afford it are well-off. \
+	<br/><br/>Vat-grown humans tend to be paler than baseline, though those with darker skin better display \
+	the dull, greenish hue resulting from their artificial growth. Vat-grown humans have no appendix and \
+	fewer inherited genetic disabilities but have a weakened metabolism."
 	icobase =     'icons/mob/human_races/species/human/subspecies/vatgrown_body.dmi'
 	preview_icon= 'icons/mob/human_races/species/human/subspecies/vatgrown_preview.dmi'
 
@@ -148,12 +146,12 @@
 /datum/species/human/mule
 	name = SPECIES_MULE
 	name_plural = "Mules"
-	description = "There are a huge number of 'uncurated' genetic lines in human space, many of which fall under the \
-	general header of baseline humanity. One recently discovered genotype is remarkable for both being deeply feral, \
-	in the sense that it still has many of the inherited diseases and weaknesses that plagued pre-expansion humanity, \
-	and for a strange affinity for psionic operancy. The Mules, as they are called, are born on the very edges of \
-	civilization, and are physically diminutive and unimposing, with scrawny, often deformed bodies. Their physiology \
-	rejects prosthetics and synthetic organs, and their lifespans are short, but their raw psionic potential is unmatched."
+	description = "Psionics are a relatively new phenomenon, theorized to be linked to long-term exposure to deep, \
+	uninhabited space. Sometimes, rarely, spacers and frontier colonists inhabiting the very fringes of civilization \
+	develop a strange affinity for psionic operancy. Derogatorily known as \"mules\", these individuals are often \
+	frail and prone to physical illness. Their physiology rejects prosthetics and synthetic organs, and their lifespans \
+	are short, but their raw psionic potential is unmatched."
+	preview_icon= 'icons/mob/human_races/species/human/subspecies/mule_preview.dmi'
 
 	spawn_flags =   SPECIES_CAN_JOIN | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_ROBOTIC_INTERNAL_ORGANS
 	brute_mod =     1.25

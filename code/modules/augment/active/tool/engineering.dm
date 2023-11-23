@@ -17,6 +17,7 @@
 	desc = "A precise, high quality welding tool."
 	icon_state = "welder_finger"
 	icon = 'icons/obj/augment_tools.dmi'
+	canremove = FALSE
 
 
 /obj/item/weldingtool/finger/on_update_icon()
@@ -29,6 +30,7 @@
 	icon_state = "wirecutter_finger"
 	icon = 'icons/obj/augment_tools.dmi'
 	build_from_parts = FALSE
+	canremove = FALSE
 
 
 /obj/item/wirecutters/finger/Initialize()
@@ -43,6 +45,7 @@
 	icon_state = "screwdriver_finger"
 	icon = 'icons/obj/augment_tools.dmi'
 	build_from_parts = FALSE
+	canremove = FALSE
 
 
 /obj/item/screwdriver/finger/Initialize()
@@ -56,6 +59,7 @@
 	desc = "A somewhat awkward to use prybar. It doubles as bottle opener."
 	icon_state = "prybar_finger"
 	icon = 'icons/obj/augment_tools.dmi'
+	canremove = FALSE
 
 
 /obj/item/crowbar/finger/Initialize()
@@ -69,6 +73,7 @@
 	desc = "A rotating wrench. Don't get your hair caught in it."
 	icon_state = "wrench_finger"
 	icon = 'icons/obj/augment_tools.dmi'
+	canremove = FALSE
 
 
 /obj/item/wrench/finger/Initialize()
@@ -82,3 +87,4 @@
 	desc = "A multitool inside of a multitool. Doubletool?"
 	icon_state = "multitool_finger"
 	icon = 'icons/obj/augment_tools.dmi'
+	canremove = FALSE

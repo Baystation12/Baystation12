@@ -106,10 +106,9 @@
 /obj/item/paper/sticky/can_bundle()
 	return FALSE // Would otherwise lead to buggy interaction
 
-/obj/item/paper/sticky/afterattack(A, mob/user, flag, params)
-
-	if(!in_range(user, A) || istype(A, /obj/machinery/door) || istype(A, /obj/item/storage) || icon_state == "scrap")
-		return
+/obj/item/paper/sticky/use_after(atom/A, mob/living/user, click_parameters)
+	if(!in_range(user, A) || istype(A, /obj/machinery/door) || icon_state == "scrap")
+		return FALSE
 
 	var/turf/target_turf = get_turf(A)
 	var/turf/source_turf = get_turf(user)
@@ -119,21 +118,21 @@
 		dir_offset = get_dir(source_turf, target_turf)
 		if(!(dir_offset in GLOB.cardinal))
 			to_chat(user, SPAN_WARNING("You cannot reach that from here."))
-			return
+			return TRUE
 
 	if(user.unEquip(src, source_turf))
 		SSpersistence.track_value(src, /datum/persistent/paper/sticky)
-		if(params)
-			var/list/mouse_control = params2list(params)
-			if(mouse_control["icon-x"])
-				pixel_x = text2num(mouse_control["icon-x"]) - 16
+		if(click_parameters)
+			if(click_parameters["icon-x"])
+				pixel_x = text2num(click_parameters["icon-x"]) - 16
 				if(dir_offset & EAST)
 					pixel_x += 32
 				else if(dir_offset & WEST)
 					pixel_x -= 32
-			if(mouse_control["icon-y"])
-				pixel_y = text2num(mouse_control["icon-y"]) - 16
+			if(click_parameters["icon-y"])
+				pixel_y = text2num(click_parameters["icon-y"]) - 16
 				if(dir_offset & NORTH)
 					pixel_y += 32
 				else if(dir_offset & SOUTH)
 					pixel_y -= 32
+		return TRUE

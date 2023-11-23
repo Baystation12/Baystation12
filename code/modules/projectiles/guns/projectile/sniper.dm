@@ -56,6 +56,10 @@
 			to_chat(user, SPAN_NOTICE("You work the bolt open."))
 	else
 		to_chat(user, SPAN_NOTICE("You work the bolt closed."))
+		if (length(loaded))
+			chambered = loaded[1]
+		else
+			chambered = null
 		playsound(src.loc, 'sound/weapons/guns/interaction/rifle_boltforward.ogg', 50, 1)
 		bolt_open = 0
 	add_fingerprint(user)
@@ -77,6 +81,22 @@
 		return
 	..()
 
+/obj/item/gun/projectile/heavysniper/getAmmo()
+	var/bullets = 0
+	if (loaded)
+		bullets += length(loaded)
+	if (ammo_magazine && ammo_magazine.stored_ammo)
+		bullets += length(ammo_magazine.stored_ammo)
+	return bullets
+
+/obj/item/gun/projectile/heavysniper/DrawChamber()
+	if (chambered)
+		if (chambered.BB)
+			return "◉"
+		else
+			return "◎"
+	else
+		return "🌣"
 
 /obj/item/gun/projectile/heavysniper/boltaction
 	name = "bolt action rifle"

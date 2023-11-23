@@ -87,9 +87,8 @@
 		if(print)
 			return print
 
-/obj/item/organ/external/afterattack(atom/A, mob/user, proximity)
-	..()
-	if(proximity && get_fingerprint())
+/obj/item/organ/external/use_after(atom/A, mob/living/user, click_parameters)
+	if(get_fingerprint())
 		A.add_partial_print(get_fingerprint())
 
 /obj/item/organ/external/New(mob/living/carbon/holder)

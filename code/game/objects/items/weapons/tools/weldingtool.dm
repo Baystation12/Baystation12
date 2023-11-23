@@ -117,24 +117,20 @@
 		if((!waterproof && submerged()) || !remove_fuel(0.05))
 			setWelding(0)
 
-/obj/item/weldingtool/afterattack(obj/O, mob/user, proximity)
-	if(!proximity)
-		return
-
+/obj/item/weldingtool/use_after(obj/O, mob/living/user)
 	if(istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && !welding)
 		if(!tank)
 			to_chat(user, SPAN_WARNING("\The [src] has no tank attached!"))
-			return
+			return TRUE
 		if (!tank.can_refuel)
 			to_chat(user, SPAN_WARNING("\The [tank] does not have a refuelling port."))
-			return
+			return TRUE
 		O.reagents.trans_to_obj(tank, tank.max_fuel)
 		to_chat(user, SPAN_NOTICE("You refuel \the [tank]."))
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
-		return
+		return TRUE
 
 	if(welding)
-		remove_fuel(1)
 		var/turf/location = get_turf(user)
 		if(isliving(O))
 			var/mob/living/L = O
@@ -279,26 +275,34 @@
 		playsound(src, 'sound/items/welderdeactivate.ogg', 10, 1)
 		update_icon()
 
-/obj/item/weldingtool/use_after(mob/living/M, mob/living/user)
-	if (ishuman(M))
-		var/target_zone = user.zone_sel.selecting
-		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/S = H.organs_by_name[target_zone]
+/obj/item/weldingtool/use_before(mob/living/target, mob/living/user, click_parameters)
+	if (!ishuman(target))
+		return FALSE
 
-		if (!S || !BP_IS_ROBOTIC(S) || user.a_intent != I_HELP)
+	var/target_zone = user.zone_sel.selecting
+	var/mob/living/carbon/human/H = target
+	var/obj/item/organ/external/S = H.organs_by_name[target_zone]
+
+	if (!S || !BP_IS_ROBOTIC(S) || user.a_intent != I_HELP)
+		return FALSE
+
+	var/list/all_surgeries = GET_SINGLETON_SUBTYPE_MAP(/singleton/surgery_step)
+	for (var/singleton in all_surgeries)
+		var/singleton/surgery_step/step = all_surgeries[singleton]
+		if (step.name && step.tool_quality(src) && step.can_use(user, H, target_zone, src))
 			return FALSE
 
-		if (BP_IS_BRITTLE(S))
-			to_chat(user, SPAN_WARNING("\The [M]'s [S.name] is hard and brittle - \the [src]  cannot repair it."))
-			return TRUE
+	if (BP_IS_BRITTLE(S))
+		to_chat(user, SPAN_WARNING("\The [target]'s [S.name] is hard and brittle - \the [src] cannot repair it."))
+		return TRUE
 
-		if (!welding)
-			to_chat(user, SPAN_WARNING("You'll need to turn [src] on to patch the damage on [M]'s [S.name]!"))
-			return TRUE
+	if (!can_use(2, user, silent = TRUE)) //The surgery check above already returns can_use's feedback.
+		return TRUE
 
-		if (S.robo_repair(15, DAMAGE_BRUTE, "some dents", src, user))
-			remove_fuel(1, user)
-			return TRUE
+	if (S.robo_repair(15, DAMAGE_BRUTE, "some dents", src, user))
+		remove_fuel(2, user)
+		return TRUE
+
 	else return FALSE
 
 /obj/item/weldingtool/IsFlameSource()
@@ -343,16 +347,15 @@
 	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
 	. = ..()
 
-/obj/item/welder_tank/afterattack(obj/O as obj, mob/user as mob, proximity)
-	if (!proximity)
-		return
+/obj/item/welder_tank/use_after(obj/O, mob/living/user, click_parameters)
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src, O) <= 1)
 		if (!can_refuel)
 			to_chat(user, SPAN_DANGER("\The [src] does not have a refuelling port."))
-			return
+			return TRUE
 		O.reagents.trans_to_obj(src, max_fuel)
 		to_chat(user, SPAN_NOTICE("You refuel \the [src]."))
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
+		return TRUE
 
 /obj/item/welder_tank/mini
 	name = "small welding fuel tank"

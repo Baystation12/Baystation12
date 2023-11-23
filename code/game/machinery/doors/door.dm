@@ -236,10 +236,10 @@
 			return
 
 		var/obj/item/weldingtool/welder = I
-		if(welder.remove_fuel(0,user))
+		if(welder.can_use(2, user))
 			to_chat(user, SPAN_NOTICE("You start to fix dents and weld \the [repairing] into place."))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, (0.5 * repairing.amount) SECONDS, src, DO_REPAIR_CONSTRUCT) && welder && welder.isOn())
+			if(do_after(user, (0.5 * repairing.amount) SECONDS, src, DO_REPAIR_CONSTRUCT) && welder.remove_fuel(2, user))
 				if (!repairing)
 					return //the materials in the door have been removed before welding was finished.
 

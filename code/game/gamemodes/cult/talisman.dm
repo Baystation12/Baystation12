@@ -53,9 +53,9 @@
 		to_chat(user, "You see strange symbols on the paper. Are they supposed to mean something?")
 
 
-/obj/item/paper/talisman/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+/obj/item/paper/talisman/use_after(atom/target, mob/living/user, click_parameters)
 	if (!can_invoke(target, user))
-		return
+		return TRUE
 
 	// Null rods block the talisman's effect but still consume it
 	var/obj/item/nullrod/nullrod = locate() in target
@@ -77,6 +77,7 @@
 	if (talisman_sound)
 		playsound(src, talisman_sound, 100, 1)
 	qdel(src)
+	return TRUE
 
 
 /**

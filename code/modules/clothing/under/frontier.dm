@@ -9,6 +9,9 @@
 	icon_state = "vacsuit"
 	worn_state = "vacsuit"
 	item_state = "vacsuit"
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_frontier_unathi.dmi'
+	)
 
 /obj/item/clothing/under/alliance/vacsuit
 	name = "copernican VAC-suit"

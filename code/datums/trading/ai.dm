@@ -27,7 +27,7 @@ They sell generic supplies and ask for generic supplies.
 
 				TRADER_BRIBE_FAILURE     = "You have given me money to stay, however, I am a station. I do not leave.",
 				)
-	possible_wanted_items = list(/obj/item/device/                       = TRADER_SUBTYPES_ONLY,
+	possible_wanted_items = list(/obj/item/device                       = TRADER_SUBTYPES_ONLY,
 								/obj/item/device/assembly                = TRADER_BLACKLIST_ALL,
 								/obj/item/device/assembly_holder         = TRADER_BLACKLIST_ALL,
 								/obj/item/device/encryptionkey/syndicate = TRADER_BLACKLIST,

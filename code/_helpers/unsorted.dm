@@ -1,15 +1,3 @@
-/*
- * A large number of misc global procs.
- */
-
-/proc/subtypesof(datum/thing)
-	RETURN_TYPE(/list)
-	if (ispath(thing))
-		return typesof(thing) - thing
-	if (istype(thing))
-		return typesof(thing) - thing.type
-	return list()
-
 //Checks if all high bits in req_mask are set in bitfield
 #define BIT_TEST_ALL(bitfield, req_mask) ((~(bitfield) & (req_mask)) == 0)
 

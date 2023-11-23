@@ -425,7 +425,7 @@
 	if (istype(user, /mob/living/silicon) && get_dist(src,user)>1)
 		return attack_robot(user)
 	if(istype(W, /obj/item/inducer))
-		return FALSE // inducer.dm afterattack handles this
+		return FALSE // inducer.dm use_after handles this
 
 	if(isCrowbar(W) && user.a_intent != I_HURT)//bypass when on harm intend to actually make use of the cover hammer off check further down.
 		if(opened) // Closes or removes board.
@@ -551,8 +551,7 @@
 			to_chat(user, SPAN_WARNING("The wire connection is in the way."))
 			return TRUE
 		var/obj/item/weldingtool/WT = W
-		if (WT.get_fuel() < 3)
-			to_chat(user, SPAN_WARNING("You need more welding fuel to complete this task."))
+		if (WT.can_use(3, user))
 			return
 		user.visible_message(SPAN_WARNING("\The [user] begins to weld \the [src]."), \
 							"You start welding the APC frame...", \

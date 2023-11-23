@@ -131,6 +131,7 @@
 #include "code\_helpers\tools.dm"
 #include "code\_helpers\turfs.dm"
 #include "code\_helpers\type2type.dm"
+#include "code\_helpers\types.dm"
 #include "code\_helpers\unsorted.dm"
 #include "code\_helpers\vector.dm"
 #include "code\_helpers\washing.dm"

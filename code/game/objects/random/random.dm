@@ -202,7 +202,7 @@
 				/obj/item/stack/medical/splint = 1,
 				/obj/item/reagent_containers/hypospray/autoinjector/inaprovaline = 3,
 				/obj/item/storage/pill_bottle/kelotane = 2,
-				/obj/item/storage/pill_bottle/antitox = 2,
+				/obj/item/storage/pill_bottle/dylovene = 2,
 				/obj/item/storage/med_pouch/trauma = 2,
 				/obj/item/storage/med_pouch/burn = 2,
 				/obj/item/storage/med_pouch/toxin = 2,

@@ -11,12 +11,13 @@ var/global/bomb_set
 	unacidable = TRUE
 	interact_offline = TRUE
 
+	var/evacuate = FALSE
 	var/deployable = 0
 	var/extended = 0
 	var/lighthack = 0
-	var/timeleft = 120
-	var/minTime = 120
-	var/maxTime = 600
+	var/timeleft = 120 SECONDS
+	var/minTime = 120 SECONDS
+	var/maxTime = 600 SECONDS
 	var/timing = 0
 	var/r_code = "ADMIN"
 	var/code = ""
@@ -38,11 +39,10 @@ var/global/bomb_set
 	auth = null
 	return ..()
 
-/obj/machinery/nuclearbomb/Process(wait)
+/obj/machinery/nuclearbomb/Process()
 	if(timing)
-		timeleft = max(timeleft - (wait / 10), 0)
-		playsound(loc, 'sound/items/timer.ogg', 50)
-		if(timeleft <= 0)
+		playsound(loc, 'sound/items/timer.ogg',50)
+		if(world.time > timeleft)
 			addtimer(new Callback(src, .proc/explode), 0)
 		SSnano.update_uis(src)
 
@@ -86,13 +86,10 @@ var/global/bomb_set
 			if(0)
 				if(isWelder(O))
 					var/obj/item/weldingtool/WT = O
-					if(!WT.isOn()) return
-					if(WT.get_fuel() < 5) // uses up 5 fuel.
-						to_chat(user, SPAN_WARNING("You need more fuel to complete this task."))
+					if(!WT.can_use(5, user))
 						return
 
 					user.visible_message("[user] starts cutting loose the anchoring bolt covers on [src].", "You start cutting loose the anchoring bolt covers with [O]...")
-
 					if(do_after(user, (O.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT))
 						if(!src || !user || !WT.remove_fuel(5, user)) return
 						user.visible_message("\The [user] cuts through the bolt covers on \the [src].", "You cut through the bolt cover.")
@@ -112,13 +109,10 @@ var/global/bomb_set
 			if(2)
 				if(isWelder(O))
 					var/obj/item/weldingtool/WT = O
-					if(!WT.isOn()) return
-					if (WT.get_fuel() < 5) // uses up 5 fuel.
-						to_chat(user, SPAN_WARNING("You need more fuel to complete this task."))
+					if(!WT.can_use(5, user))
 						return
 
 					user.visible_message("[user] starts cutting apart the anchoring system sealant on [src].", "You start cutting apart the anchoring system's sealant with [O]...")
-
 					if(do_after(user, (O.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT))
 						if(!src || !user || !WT.remove_fuel(5, user)) return
 						user.visible_message("\The [user] cuts apart the anchoring system sealant on \the [src].", "You cut apart the anchoring system's sealant.")
@@ -165,9 +159,10 @@ var/global/bomb_set
 
 /obj/machinery/nuclearbomb/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/data[0]
+	data["evacuate"] = evacuate
 	data["hacking"] = 0
 	data["auth"] = is_auth(user)
-	data["moveable_anchor"] = !istype(src, /obj/machinery/nuclearbomb/station)
+	data["is_regular_nuke"] = !istype(src, /obj/machinery/nuclearbomb/station)
 	if(is_auth(user))
 		if(yes_code)
 			data["authstatus"] = timing ? "Functional/Set" : "Functional"
@@ -179,7 +174,7 @@ var/global/bomb_set
 		else
 			data["authstatus"] = "Auth. S1"
 	data["safe"] = safety ? "Safe" : "Engaged"
-	data["time"] = timeleft
+	data["time"] = timing ? round((timeleft - world.time)/10, 1) : round(timeleft/10, 1)
 	data["timer"] = timing
 	data["safety"] = safety
 	data["anchored"] = anchored
@@ -262,7 +257,7 @@ var/global/bomb_set
 					to_chat(usr, SPAN_WARNING("Cannot alter the timing during countdown."))
 					return
 
-				var/time = text2num(href_list["time"])
+				var/time = text2num(href_list["time"]) SECONDS
 				timeleft += time
 				timeleft = clamp(timeleft, minTime, maxTime)
 			if(href_list["timer"])
@@ -280,7 +275,7 @@ var/global/bomb_set
 				if(!timing && !safety)
 					start_bomb()
 				else
-					check_cutoff()
+					secure_device()
 			if(href_list["safety"])
 				if (wires.IsIndexCut(NUCLEARBOMB_WIRE_SAFETY))
 					to_chat(usr, SPAN_WARNING("Nothing happens, something might be wrong with the wiring."))
@@ -289,6 +284,11 @@ var/global/bomb_set
 				if(safety)
 					secure_device()
 				update_icon()
+			if(href_list["evacuate"])
+				if(timing)
+					to_chat(usr, SPAN_WARNING("Cannot alter evacuation during countdown."))
+					return
+				evacuate = !evacuate
 			if(href_list["anchor"])
 				if(removal_stage == 5)
 					anchored = FALSE
@@ -307,6 +307,7 @@ var/global/bomb_set
 	return 1
 
 /obj/machinery/nuclearbomb/proc/start_bomb()
+	timeleft += world.time
 	timing = 1
 	log_and_message_admins("activated the detonation countdown of \the [src]")
 	bomb_set++ //There can still be issues with this resetting when there are multiple bombs. Not a big deal though for Nuke/N
@@ -314,9 +315,6 @@ var/global/bomb_set
 	original_level = security_state.current_security_level
 	security_state.set_security_level(security_state.severe_security_level, TRUE)
 	update_icon()
-
-/obj/machinery/nuclearbomb/proc/check_cutoff()
-	secure_device()
 
 /obj/machinery/nuclearbomb/proc/secure_device()
 	if(timing <= 0)
@@ -326,7 +324,7 @@ var/global/bomb_set
 	bomb_set--
 	safety = TRUE
 	timing = 0
-	timeleft = clamp(timeleft, minTime, maxTime)
+	timeleft = clamp(timeleft - world.time, minTime, maxTime)
 	update_icon()
 
 /obj/machinery/nuclearbomb/ex_act(severity)
@@ -454,12 +452,12 @@ var/global/bomb_set
 	var/list/inserters = list()
 	var/last_turf_state
 
-	var/announced = 0
+	var/announced = FALSE
 	var/time_to_explosion = 0
-	var/self_destruct_cutoff = 60 //Seconds
-	timeleft = 300
-	minTime = 300
-	maxTime = 900
+	var/self_destruct_cutoff = 60 SECONDS
+	timeleft = 300 SECONDS
+	minTime = 300 SECONDS
+	maxTime = 900 SECONDS
 
 /obj/machinery/nuclearbomb/station/Initialize()
 	..()
@@ -491,25 +489,40 @@ var/global/bomb_set
 		if(!istype(sd) || !sd.armed)
 			to_chat(usr, SPAN_WARNING("An inserter has not been armed or is damaged."))
 			return
-	visible_message(SPAN_WARNING("Warning. The self-destruct sequence override will be disabled [self_destruct_cutoff] seconds before detonation."))
 	..()
+	visible_message(SPAN_WARNING("Warning. The self-destruct sequence override will be disabled [self_destruct_cutoff/10] seconds before detonation."))
+	if(evacuate)
+		if(!evacuation_controller)
+			visible_message(SPAN_DANGER("Warning. Unable to initiate evacuation procedures."))
+			return
+		for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
+			if(EO.abandon_ship)
+				evacuation_controller.evac_prep_delay = timeleft - world.time - 2 MINUTES
+				evacuation_controller.evac_launch_delay = 1.75 MINUTES //Escape pods take time to arm and eject appart from this delay. Take into account.
+				evacuation_controller.handle_evac_option(EO.option_target, usr)
 
-/obj/machinery/nuclearbomb/station/check_cutoff()
-	if(timeleft <= self_destruct_cutoff)
+/obj/machinery/nuclearbomb/station/secure_device()
+	if(timing && timeleft - world.time <= self_destruct_cutoff)
 		visible_message(SPAN_WARNING("Self-Destruct abort is no longer possible."))
 		return
 	..()
+	announced = FALSE
+	for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
+		if(EO.option_target == "cancel_abandon_ship")
+			evacuation_controller.handle_evac_option(EO.option_target, usr)
+			evacuation_controller.evac_prep_delay = 5 MINUTES
+			evacuation_controller.evac_launch_delay = 3 MINUTES
 
 /obj/machinery/nuclearbomb/station/Process()
 	..()
-	if(timeleft > 0 && GAME_STATE < RUNLEVEL_POSTGAME)
-		if(timeleft <= self_destruct_cutoff)
+	if(timing && timeleft - world.time > 0 && GAME_STATE < RUNLEVEL_POSTGAME)
+		if(timeleft - world.time <= self_destruct_cutoff)
 			if(!announced)
 				priority_announcement.Announce("The self-destruct sequence has reached terminal countdown, abort systems have been disabled.", "Self-Destruct Control Computer")
-				announced = 1
+				announced = TRUE
 			if(world.time >= time_to_explosion)
 				var/range
-				if(timeleft <= (self_destruct_cutoff/2))
+				if(timeleft - world.time <= (self_destruct_cutoff/2))
 					range = rand(14, 21)
 					time_to_explosion = world.time + 2 SECONDS
 				else
@@ -517,10 +530,6 @@ var/global/bomb_set
 					time_to_explosion = world.time + 5 SECONDS
 				var/turf/T = pick_area_and_turf(GLOB.is_station_but_not_space_or_shuttle_area)
 				explosion(T, range)
-
-/obj/machinery/nuclearbomb/station/secure_device()
-	..()
-	announced = 0
 
 /obj/machinery/nuclearbomb/station/on_update_icon()
 	var/target_icon_state

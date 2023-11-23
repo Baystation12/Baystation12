@@ -99,7 +99,8 @@ var/global/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_notarget,
 	/datum/admins/proc/setroundlength,
 	/datum/admins/proc/toggleroundendvote,
-	/datum/admins/proc/togglemoderequirementchecks
+	/datum/admins/proc/togglemoderequirementchecks,
+	/client/proc/delete_crew_record
 )
 var/global/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
@@ -901,3 +902,28 @@ var/global/list/admin_verbs_mod = list(
 	if(!S) return
 	T.add_spell(new S)
 	log_and_message_admins("gave [key_name(T)] the spell [S].")
+
+/client/proc/delete_crew_record()
+	set category = "Admin"
+	set name = "Delete Crew Record"
+	set desc = "Delete a crew record from the global crew list."
+
+	var/list/entries = list()
+
+	for (var/datum/computer_file/report/crew_record/entry in GLOB.all_crew_records)
+		entries["[entry.get_name()], [entry.get_job()]"] = entry
+
+	if (!length(entries))
+		return
+
+	var/choice = input("Pick a record to delete:", "Delete Crew Record") as null | anything in entries
+
+	if (!choice)
+		return
+
+	var/check = alert("Are you sure you want to delete [choice]?", "Delete Record?", "Yes", "No")
+	var/datum/computer_file/report/crew_record/record = entries[choice]
+
+	if (check == "Yes")
+		GLOB.all_crew_records.Remove(record)
+		log_and_message_admins("has removed [record.get_name()], [record.get_job()]'s crew record.")

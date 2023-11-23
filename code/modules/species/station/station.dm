@@ -3,11 +3,12 @@
 	name_plural = "Humans"
 	primitive_form = "Monkey"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
-	description = "Humanity originated in the Sol system, and over the last five centuries has spread \
+	description = "Humanity originated in the Sol system, and over the last three centuries has spread \
 	colonies across a wide swathe of space. They hold a wide range of forms and creeds.<br/><br/> \
-	While the central Sol government maintains control of its far-flung people, powerful corporate \
-	interests, rampant cyber and bio-augmentation and secretive factions make life on most human \
-	worlds tumultous at best."
+	The two largest human governments are the Sol Central Government and the Gilgamesh Colonial Confederation, \
+	which are currently locked in a cold war. Many other human states exist, however - these include the Frontier \
+	Alliance, a loose collection of planets which has recently seceded from the Sol Central Government; \
+	Magnitka, an independent authoritarian planet; and many other minor colonies."
 	assisted_langs = list(LANGUAGE_NABBER)
 	min_age = 18
 	max_age = 100
