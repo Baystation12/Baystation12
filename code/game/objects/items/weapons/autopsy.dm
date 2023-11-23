@@ -174,14 +174,13 @@
 		timeofdeath = null
 		to_chat(user, SPAN_NOTICE("A new patient has been registered. Purging data for previous patient."))
 
-/obj/item/autopsy_scanner/afterattack(obj/item/organ/external/target, mob/user, proximity_flag, click_parameters)
-	if(!proximity_flag)
-		return
+/obj/item/autopsy_scanner/use_after(obj/item/organ/external/target, mob/living/user, click_parameters)
 	if(!istype(target))
-		return
+		return FALSE
 
 	set_target(target, user)
 	add_data(target)
+	return TRUE
 
 /obj/item/autopsy_scanner/attack_self(mob/user)
 	print_data(user)

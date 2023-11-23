@@ -6,7 +6,7 @@
 	health_min_damage = 10
 	var/deploy_path = null
 
-/obj/item/inflatable/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+/obj/item/inflatable/use_after(atom/target, mob/living/user, click_parameters)
 	if(!deploy_path)
 		return
 	if (loc != user)
@@ -16,11 +16,11 @@
 		return
 	if (isspaceturf(T) || isopenspace(T))
 		to_chat(user, SPAN_WARNING("You cannot use \the [src] in open space."))
-		return
+		return TRUE
 	var/obstruction = T.get_obstruction()
 	if (obstruction)
 		to_chat(user, SPAN_WARNING("\The [english_list(obstruction)] is blocking that spot."))
-		return
+		return TRUE
 	user.visible_message(
 		SPAN_ITALIC("\The [user] starts inflating \an [src]."),
 		SPAN_ITALIC("You start inflating \the [src]."),
@@ -28,11 +28,11 @@
 		range = 5
 	)
 	if (!do_after(user, 1 SECOND, target, DO_PUBLIC_UNIQUE) || QDELETED(src))
-		return
+		return TRUE
 	obstruction = T.get_obstruction()
 	if (obstruction)
 		to_chat(user, SPAN_WARNING("\The [english_list(obstruction)] is blocking that spot."))
-		return
+		return TRUE
 	user.visible_message(
 		SPAN_ITALIC("\The [user] finishes inflating \an [src]."),
 		SPAN_NOTICE("You inflate \the [src]."),
@@ -44,6 +44,7 @@
 	R.add_fingerprint(user)
 	copy_health(src, R)
 	qdel(src)
+	return TRUE
 
 /obj/item/inflatable/wall
 	name = "inflatable wall"

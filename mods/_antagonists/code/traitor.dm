@@ -14,17 +14,17 @@
 	origin_tech = list(TECH_ESOTERIC = 4)
 	var/ready = 0
 
-/obj/item/door_charge/afterattack(atom/movable/target, mob/user, flag)
-	if (!flag)
-		return
+/obj/item/door_charge/use_after(atom/movable/target, mob/user)
 	if (ismob(target) || !istype(target, /obj/machinery/door/airlock))
-		return
+		return FALSE
+
 	to_chat(user, "Planting explosives...")
 	user.do_attack_animation(target)
 
 	if(do_after(user, 50, target) && in_range(user, target))
 		if(!user.unequip_item())
-			return
+			return TRUE
+
 		forceMove(target)
 
 		log_and_message_admins("planted \a [src] on \the [target].")
@@ -32,6 +32,8 @@
 		to_chat(user, "Bomb has been planted.")
 
 		GLOB.density_set_event.register(target, src, .proc/explode)
+
+	return TRUE
 
 
 /obj/item/door_charge/proc/explode(obj/machinery/door/airlock/airlock)
@@ -97,8 +99,7 @@
 	usable = max(usable - 1, 0)
 	update_icon()
 
-/obj/item/device/syndiejaunter/afterattack(atom/target, mob/user , proximity)
-	if(!proximity) return
+/obj/item/device/syndiejaunter/use_after(atom/target, mob/user)
 	if(istype(target,/obj/item/device/syndietele))
 		beacon = target
 		to_chat(user, "You succesfully linked [src] to [target]!")

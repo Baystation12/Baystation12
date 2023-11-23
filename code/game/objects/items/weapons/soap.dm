@@ -118,8 +118,7 @@
 			return
 		AM.slip("the [src.name]",3)
 
-/obj/item/soap/afterattack(atom/target, mob/user as mob, proximity)
-	if(!proximity) return
+/obj/item/soap/use_after(atom/target, mob/living/user, click_parameters)
 	//I couldn't feasibly  fix the overlay bugs caused by cleaning items we are wearing.
 	//So this is a workaround. This also makes more sense from an IC standpoint. ~Carn
 	var/cleaned = FALSE
@@ -136,7 +135,7 @@
 	else if(istype(target,/turf) || istype(target, /obj/structure/catwalk))
 		var/turf/T = get_turf(target)
 		if(!T)
-			return
+			return TRUE
 		user.visible_message(SPAN_WARNING("[user] starts scrubbing \the [T]."))
 		T.clean(src, user, 80, SPAN_NOTICE("You scrub \the [target.name] clean."))
 		cleaned = TRUE
@@ -156,6 +155,7 @@
 
 	if(cleaned)
 		user.update_personal_goal(/datum/goal/clean, 1)
+	return TRUE
 
 //attack_as_weapon
 /obj/item/soap/use_before(mob/living/target, mob/living/user)

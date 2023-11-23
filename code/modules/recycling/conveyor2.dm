@@ -270,21 +270,22 @@
 		var/obj/item/conveyor_switch_construct/C = I
 		id = C.id
 
-/obj/item/conveyor_construct/afterattack(atom/A, mob/user, proximity)
-	if(!proximity || !istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated())
-		return
+/obj/item/conveyor_construct/use_after(atom/A, mob/living/user, click_parameters)
+	if(!istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated())
+		return FALSE
 	var/cdir = get_dir(A, user)
 	if(!(cdir in GLOB.cardinal) || A == user.loc)
-		return
+		return TRUE
 	for(var/obj/machinery/conveyor/CB in A)
 		if(CB.dir == cdir || CB.dir == turn(cdir,180))
-			return
+			return TRUE
 		cdir |= CB.dir
 		qdel(CB)
 	var/obj/machinery/conveyor/C = new/obj/machinery/conveyor(A,cdir)
 	C.id = id
 	transfer_fingerprints_to(C)
 	qdel(src)
+	return TRUE
 
 /obj/item/conveyor_switch_construct
 	name = "conveyor switch assembly"
@@ -300,9 +301,9 @@
 	..()
 	id = rand() //this couldn't possibly go wrong
 
-/obj/item/conveyor_switch_construct/afterattack(atom/A, mob/user, proximity)
-	if(!proximity || !istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated())
-		return
+/obj/item/conveyor_switch_construct/use_after(atom/A, mob/living/user, click_parameters)
+	if(!istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated())
+		return FALSE
 	var/found = 0
 	for(var/obj/machinery/conveyor/C in view())
 		if(C.id == src.id)
@@ -310,18 +311,19 @@
 			break
 	if(!found)
 		to_chat(user, "[icon2html(src, user)][SPAN_NOTICE("The conveyor switch did not detect any linked conveyor belts in range.")]")
-		return
+		return TRUE
 	var/obj/machinery/conveyor_switch/NC = new /obj/machinery/conveyor_switch(A, id)
 	transfer_fingerprints_to(NC)
 	qdel(src)
+	return TRUE
 
 /obj/item/conveyor_switch_construct/oneway
 	name = "one-way conveyor switch assembly"
 	desc = "An one-way conveyor control switch assembly."
 
-/obj/item/conveyor_switch_construct/oneway/afterattack(atom/A, mob/user, proximity)
-	if(!proximity || !istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated())
-		return
+/obj/item/conveyor_switch_construct/oneway/use_after(atom/A, mob/living/user, click_parameters)
+	if(!istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated())
+		return FALSE
 	var/found = 0
 	for(var/obj/machinery/conveyor/C in view())
 		if(C.id == src.id)
@@ -329,7 +331,8 @@
 			break
 	if(!found)
 		to_chat(user, "[icon2html(src, user)][SPAN_NOTICE("The conveyor switch did not detect any linked conveyor belts in range.")]")
-		return
+		return TRUE
 	var/obj/machinery/conveyor_switch/oneway/NC = new /obj/machinery/conveyor_switch/oneway(A, id)
 	transfer_fingerprints_to(NC)
 	qdel(src)
+	return TRUE

@@ -117,21 +117,18 @@
 		if((!waterproof && submerged()) || !remove_fuel(0.05))
 			setWelding(0)
 
-/obj/item/weldingtool/afterattack(obj/O, mob/user, proximity)
-	if(!proximity)
-		return
-
+/obj/item/weldingtool/use_after(obj/O, mob/living/user)
 	if(istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && !welding)
 		if(!tank)
 			to_chat(user, SPAN_WARNING("\The [src] has no tank attached!"))
-			return
+			return TRUE
 		if (!tank.can_refuel)
 			to_chat(user, SPAN_WARNING("\The [tank] does not have a refuelling port."))
-			return
+			return TRUE
 		O.reagents.trans_to_obj(tank, tank.max_fuel)
 		to_chat(user, SPAN_NOTICE("You refuel \the [tank]."))
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
-		return
+		return TRUE
 
 	if(welding)
 		var/turf/location = get_turf(user)
@@ -350,16 +347,15 @@
 	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
 	. = ..()
 
-/obj/item/welder_tank/afterattack(obj/O as obj, mob/user as mob, proximity)
-	if (!proximity)
-		return
+/obj/item/welder_tank/use_after(obj/O, mob/living/user, click_parameters)
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src, O) <= 1)
 		if (!can_refuel)
 			to_chat(user, SPAN_DANGER("\The [src] does not have a refuelling port."))
-			return
+			return TRUE
 		O.reagents.trans_to_obj(src, max_fuel)
 		to_chat(user, SPAN_NOTICE("You refuel \the [src]."))
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
+		return TRUE
 
 /obj/item/welder_tank/mini
 	name = "small welding fuel tank"

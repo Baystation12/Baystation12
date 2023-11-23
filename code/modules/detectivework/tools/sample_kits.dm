@@ -157,19 +157,16 @@
 
 	. = ..()
 
-/obj/item/forensics/sample_kit/afterattack(atom/A, mob/user, proximity)
-	if(!proximity)
-		return
+/obj/item/forensics/sample_kit/use_after(atom/A, mob/living/user, click_parameters)
 	if(user.skill_check(SKILL_FORENSICS, SKILL_TRAINED) && can_take_sample(user, A))
 		take_sample(user,A)
-		. = 1
 	else
 		to_chat(user, SPAN_WARNING("You are unable to locate any [evidence_type]s on \the [A]."))
-		. = ..()
+	return TRUE
 
 /obj/item/forensics/sample_kit/MouseDrop(atom/over)
-	if(ismob(src.loc) && CanMouseDrop(over))
-		afterattack(over, usr, TRUE)
+	if(ismob(loc) && CanMouseDrop(over))
+		use_after(over, usr)
 
 /obj/item/forensics/sample_kit/powder
 	name = "fingerprint powder"

@@ -27,7 +27,7 @@ GLOBAL_LIST(hazard_overlays)
 			return
 		var/obj/machinery/door/airlock/airlock = locate(/obj/machinery/door/airlock) in T
 		if(airlock)
-			afterattack(airlock, null, TRUE)
+			use_after(airlock, null)
 		return INITIALIZE_HINT_QDEL
 
 var/global/list/tape_roll_applications = list()
@@ -286,17 +286,16 @@ var/global/list/tape_roll_applications = list()
 		to_chat(usr, SPAN_NOTICE("You finish placing \the [src]."))
 		return
 
-/obj/item/taperoll/afterattack(atom/A, mob/user as mob, proximity)
-	if(!proximity)
-		return
-
+/obj/item/taperoll/use_after(atom/A, mob/living/user, click_parameters)
 	if (istype(A, /obj/machinery/door/airlock))
 		var/turf/T = get_turf(A)
 		var/obj/item/tape/P = new tape_type(T)
-		P.add_fingerprint(user)
 		P.update_icon()
 		P.layer = ABOVE_DOOR_LAYER
-		to_chat(user, SPAN_NOTICE("You finish placing \the [src]."))
+		if (user)
+			to_chat(user, SPAN_NOTICE("You finish placing \the [src]."))
+			P.add_fingerprint(user)
+		return TRUE
 
 	if (istype(A, /turf/simulated/floor) ||istype(A, /turf/unsimulated/floor))
 		var/turf/F = A
@@ -313,7 +312,7 @@ var/global/list/tape_roll_applications = list()
 			user.visible_message("\The [user] applied \the [src] on \the [F] to create area markings.", "You apply \the [src] on \the [F] to create area markings.")
 			F.AddOverlays(hazard_overlay)
 			tape_roll_applications[F] |= direction
-		return
+		return TRUE
 
 /obj/item/tape/proc/crumple()
 	if(!crumpled)

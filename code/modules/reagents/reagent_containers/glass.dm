@@ -122,10 +122,11 @@
 			)
 		playsound(src.loc, "sound/effects/Glasshit.ogg", 50)
 
-/obj/item/reagent_containers/glass/afterattack(obj/target, mob/user, proximity)
-	if (!proximity || (target.type in can_be_placed_into) || standard_dispenser_refill(user, target) || standard_pour_into(user, target))
+/obj/item/reagent_containers/glass/use_after(obj/target, mob/living/user, click_parameters)
+	if ((target.type in can_be_placed_into) || standard_dispenser_refill(user, target) || standard_pour_into(user, target))
 		return TRUE
 	splashtarget(target, user)
+	return TRUE
 
 
 /obj/item/reagent_containers/glass/beaker

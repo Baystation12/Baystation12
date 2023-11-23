@@ -56,7 +56,7 @@
 	The most common are:
 	* mob/UnarmedAttack(atom,adjacent) - used here only when adjacent, with no item in hand; in the case of humans, checks gloves
 	* atom/resolve_attackby(item,user) - used only when adjacent
-	* item/afterattack(atom,user,adjacent,params) - used both ranged and adjacent
+	* item/afterattack(atom,user,adjacent,params) - used for ranged; called when resolve_attackby returns FALSE.
 	* mob/RangedAttack(atom,params) - used only ranged, only used for tk and laser eyes but could be changed
 */
 /mob/proc/ClickOn(atom/A, params)

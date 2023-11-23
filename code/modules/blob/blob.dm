@@ -425,9 +425,7 @@ regen() will cover update_icon() for this proc
 				color = COLOR_AMBER
 				origin_tech = list(TECH_POWER = 2)
 
-/obj/item/blob_tendril/afterattack(obj/O, mob/user, proximity)
-	if(!proximity)
-		return
+/obj/item/blob_tendril/use_after(obj/O, mob/living/user, click_parameters)
 	if(is_tendril && prob(50))
 		force--
 		if(force <= 0)
@@ -435,6 +433,7 @@ regen() will cover update_icon() for this proc
 			user.drop_from_inventory(src)
 			new /obj/decal/cleanable/ash(src.loc)
 			qdel(src)
+		return TRUE
 
 
 /obj/item/blob_tendril/IsHeatSource()

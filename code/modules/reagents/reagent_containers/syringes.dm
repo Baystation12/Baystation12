@@ -54,26 +54,24 @@
 	..()
 	update_icon()
 
-/obj/item/reagent_containers/syringe/afterattack(obj/target, mob/user, proximity)
-	if(!proximity)
-		return
-
+/obj/item/reagent_containers/syringe/use_after(obj/target, mob/living/user, click_parameters)
 	if(mode == SYRINGE_BROKEN)
 		to_chat(user, SPAN_WARNING("This syringe is broken."))
-		return
+		return TRUE
 
 	if(istype(target, /obj/structure/closet/body_bag))
 		handleBodyBag(target, user)
-		return
+		return TRUE
 
 	if(!target.reagents)
-		return
+		return FALSE
 
 	if((user.a_intent == I_HURT) && ismob(target))
 		syringestab(target, user)
-		return
+		return TRUE
 
 	handleTarget(target, user)
+	return TRUE
 
 /obj/item/reagent_containers/syringe/on_update_icon()
 	ClearOverlays()

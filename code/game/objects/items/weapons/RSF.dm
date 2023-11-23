@@ -59,20 +59,19 @@ RSF
 		to_chat(user, "Changed dispensing mode to 'Cigarette'")
 		return
 
-/obj/item/rsf/afterattack(atom/A, mob/user as mob, proximity)
-
-	if(!proximity) return
-
+/obj/item/rsf/use_after(atom/A, mob/living/user, click_parameters)
 	if(istype(user,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = user
 		if(R.stat || !R.cell || R.cell.charge <= 0)
-			return
+			to_chat(user, SPAN_WARNING("You are unable to use \the [src]."))
+			return TRUE
 	else
 		if(stored_matter <= 0)
-			return
+			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
+			return TRUE
 
 	if(!istype(A, /obj/structure/table) && !istype(A, /turf/simulated/floor))
-		return
+		return FALSE
 
 	playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
 	var/used_energy = 0
@@ -105,3 +104,4 @@ RSF
 	else
 		stored_matter--
 		to_chat(user, "The RSF now holds [stored_matter]/30 fabrication-units.")
+	return TRUE

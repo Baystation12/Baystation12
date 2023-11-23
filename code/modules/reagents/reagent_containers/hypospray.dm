@@ -141,9 +141,7 @@
 		return
 	..()
 
-/obj/item/reagent_containers/hypospray/vial/afterattack(obj/target, mob/user, proximity) // hyposprays can be dumped into, why not out? uses standard_pour_into helper checks.
-	if(!proximity)
-		return
+/obj/item/reagent_containers/hypospray/vial/use_after(obj/target, mob/living/user, click_parameters) // hyposprays can be dumped into, why not out? uses standard_pour_into helper checks.
 	if (!reagents.total_volume && istype(target, /obj/item/reagent_containers/glass))
 		var/good_target = is_type_in_list(target, list(
 			/obj/item/reagent_containers/glass/beaker,
@@ -153,14 +151,16 @@
 			return
 		if (!target.is_open_container())
 			to_chat(user, SPAN_ITALIC("\The [target] is closed."))
-			return
+			return TRUE
 		if (!target.reagents?.total_volume)
 			to_chat(user, SPAN_ITALIC("\The [target] is empty."))
-			return
+			return TRUE
 		var/trans = target.reagents.trans_to_obj(src, amount_per_transfer_from_this)
 		to_chat(user, SPAN_NOTICE("You fill \the [src] with [trans] units of the solution."))
-		return
-	standard_pour_into(user, target)
+		return TRUE
+	else
+		standard_pour_into(user, target)
+		return TRUE
 
 /obj/item/reagent_containers/hypospray/autoinjector
 	name = "autoinjector"

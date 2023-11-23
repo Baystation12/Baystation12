@@ -56,11 +56,9 @@
 		user.drop_item()
 		qdel(src)
 
-/obj/item/ladder_mobile/afterattack(atom/A, mob/user,proximity)
-	if(!proximity)
-		return
-
-	place_ladder(A,user)
+/obj/item/ladder_mobile/use_after(atom/A, mob/user)
+	place_ladder(A, user)
+	return TRUE
 
 /obj/item/ladder_mobile/proc/handle_action(atom/A, mob/user)
 	if(!do_after(user, 30, src))

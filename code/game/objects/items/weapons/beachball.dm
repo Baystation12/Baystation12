@@ -14,4 +14,4 @@
 
 /obj/item/beach_ball/afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
 	if(user.unequip_item())
-		src.throw_at(target, throw_range, throw_speed, user)
+		throw_at(target, throw_range, throw_speed, user)

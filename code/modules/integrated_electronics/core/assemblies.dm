@@ -785,9 +785,10 @@
 	max_complexity = IC_COMPLEXITY_BASE * 2
 	health_max = 40
 
-/obj/item/device/electronic_assembly/wallmount/afterattack(atom/a, mob/user, proximity)
-	if(proximity && istype(a ,/turf) && a.density)
-		mount_assembly(a,user)
+/obj/item/device/electronic_assembly/wallmount/use_after(atom/target, mob/living/user, click_parameters)
+	if(istype(target ,/turf) && target.density)
+		mount_assembly(target,user)
+		return TRUE
 
 /obj/item/device/electronic_assembly/wallmount/heavy
 	name = "heavy wall-mounted electronic assembly"

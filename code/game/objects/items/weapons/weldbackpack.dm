@@ -61,17 +61,15 @@
 
 	else return ..()
 
-/obj/item/storage/backpack/weldpack/afterattack(obj/O as obj, mob/user as mob, proximity)
-	if(!proximity) // this replaces and improves the get_dist(src,O) <= 1 checks used previously
-		return
+/obj/item/storage/backpack/weldpack/use_after(obj/O, mob/living/user, click_parameters)
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && src.reagents.total_volume < max_fuel)
 		O.reagents.trans_to_obj(src, max_fuel)
 		to_chat(user, SPAN_NOTICE("You crack the cap off the top of \the [src] and fill it back up again from the tank."))
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
-		return
+		return TRUE
 	else if (istype(O, /obj/structure/reagent_dispensers/fueltank) && src.reagents.total_volume == max_fuel)
 		to_chat(user, SPAN_WARNING("The pack is already full!"))
-		return
+		return TRUE
 
 /obj/item/storage/backpack/weldpack/examine(mob/user)
 	. = ..()

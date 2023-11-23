@@ -121,14 +121,14 @@
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
 	if(prob(20)) src.spark_system.start()
 
-/obj/item/rcd/afterattack(atom/A, mob/user, proximity)
-	if(!proximity) return
+/obj/item/rcd/use_after(atom/A, mob/living/user, click_parameters)
 	if(disabled && !isrobot(user))
-		return 0
+		return FALSE
 	if(istype(get_area(A),/area/shuttle)||istype(get_area(A),/turf/space/transit))
-		return 0
+		return FALSE
 	work_id++
 	work_mode.do_work(src, A, user)
+	return TRUE
 
 /obj/item/rcd/proc/useResource(amount, mob/user)
 	if(stored_matter < amount)

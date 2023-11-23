@@ -169,7 +169,7 @@
 		return FALSE
 
 	// Don't allow insertion of unsafed compressed matter implants
-	// Since they are sucking something up now, their afterattack will delete the storage
+	// Since they are sucking something up now, their use_after will delete the storage
 	if(istype(W, /obj/item/implanter/compressed))
 		var/obj/item/implanter/compressed/impr = W
 		if(!impr.safe)

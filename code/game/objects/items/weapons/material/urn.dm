@@ -8,15 +8,16 @@
 	w_class = ITEM_SIZE_SMALL
 	default_material = MATERIAL_WOOD
 
-/obj/item/material/urn/afterattack(obj/A, mob/user, proximity)
+/obj/item/material/urn/use_after(obj/A, mob/living/user, click_parameters)
 	if(!istype(A, /obj/decal/cleanable/ash))
-		return ..()
-	else if(proximity)
-		if(length(contents))
-			to_chat(user, SPAN_WARNING("\The [src] is already full!"))
-			return
-		user.visible_message("\The [user] scoops \the [A] into \the [src], securing the lid.", "You scoop \the [A] into \the [src], securing the lid.")
-		A.forceMove(src)
+		return FALSE
+	if(length(contents))
+		to_chat(user, SPAN_WARNING("\The [src] is already full!"))
+		return TRUE
+
+	user.visible_message("\The [user] scoops \the [A] into \the [src], securing the lid.", "You scoop \the [A] into \the [src], securing the lid.")
+	A.forceMove(src)
+	return TRUE
 
 /obj/item/material/urn/attack_self(mob/user)
 	if(!length(contents))

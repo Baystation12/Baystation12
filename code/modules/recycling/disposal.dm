@@ -562,9 +562,9 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	else
 		id_tag = "ds[sequential_id(/obj/item/disposal_switch_construct)]"
 
-/obj/item/disposal_switch_construct/afterattack(atom/A, mob/user, proximity)
-	if(!proximity || !istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated() || !id_tag)
-		return
+/obj/item/disposal_switch_construct/use_after(atom/A, mob/living/user, click_parameters)
+	if(!istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated() || !id_tag)
+		return FALSE
 	var/found = 0
 	for(var/obj/structure/disposalpipe/diversion_junction/D in world)
 		if(D.id_tag == src.id_tag)
@@ -572,10 +572,11 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 			break
 	if(!found)
 		to_chat(user, "[icon2html(src, user)][SPAN_NOTICE("\The [src] is not linked to any junctions!")]")
-		return
+		return TRUE
 	var/obj/machinery/disposal_switch/NC = new/obj/machinery/disposal_switch(A, id_tag)
 	transfer_fingerprints_to(NC)
 	qdel(src)
+	return TRUE
 
 // the disposal outlet machine
 
