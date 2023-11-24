@@ -12,6 +12,16 @@
 	name = "Centcom Living Quarters"
 	req_access = list(access_cent_living)
 
+/* FLEET CENTCOM AREAS
+ * =============
+ */
+
+/area/centcom/scgf
+	name = "SFV Stinger"
+
+/area/centcom/iccgn
+	name = "ICGNV Konigsberg"
+
 /* HOLODECK AREAS
  * ==============
  */

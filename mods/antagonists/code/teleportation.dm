@@ -1,14 +1,14 @@
 /proc/animated_teleportation(atom/movable/target, atom/anchor)
 	if(ismob(target))
 		to_chat(target, SPAN_WARNING("You feel like something pulling you in bluespace."))
-	var/obj/temporary/A = new(get_turf(target), 24.5, 'mods/_antagonists/icons/effects/bs_silk.dmi', "silc_teleport_back")
+	var/obj/temporary/A = new(get_turf(target), 24.5, 'mods/antagonists/icons/effects/bs_silk.dmi', "silc_teleport_back")
 	target.set_dir(2)
 	target.forceMove(A)
 	addtimer(new Callback(GLOBAL_PROC, .proc/animated_teleportation_ending, target, anchor), 23)
 
 /proc/animated_teleportation_ending(atom/movable/target, atom/anchor)
 	target.set_dir(2)
-	target.forceMove(new /obj/temporary(get_turf(anchor), 26.5, 'mods/_antagonists/icons/effects/bs_silk.dmi', "silc_get_hub"))
+	target.forceMove(new /obj/temporary(get_turf(anchor), 26.5, 'mods/antagonists/icons/effects/bs_silk.dmi', "silc_get_hub"))
 	addtimer(new Callback(GLOBAL_PROC, .proc/finalize_animated_teleportation, target, anchor), 24)
 
 /proc/finalize_animated_teleportation(atom/movable/target, atom/anchor)

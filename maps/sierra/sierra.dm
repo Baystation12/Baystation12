@@ -166,10 +166,11 @@
 	// USED MODS
 	// Keep them in ascending alphabetical order, please
 
-	#include "../../mods/_antagonists/_antagonists.dme"
 	#include "../../mods/_maps/liberia/_map_liberia.dme"
 	#include "../../mods/_maps/sentinel/_map_sentinel.dme"
 	#include "../../mods/_maps/farfleet/_map_farfleet.dme"
+
+	#include "../../mods/antagonists/_antagonists.dme"
 	#include "../../mods/bluespace_kitty/_bluespace_kitty.dme"
 	#include "../../mods/fancy_sofas/_fancy_sofas.dme"
 	#include "../../mods/jukebox_tapes/_jukebox_tapes.dme"

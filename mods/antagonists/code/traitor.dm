@@ -6,7 +6,7 @@
 	name = "door charge"
 	desc = "This is a booby trap, planted on doors. When door opens, it will explode!."
 	gender = PLURAL
-	icon = 'mods/_antagonists/icons/obj/door_charge.dmi'
+	icon = 'mods/antagonists/icons/obj/door_charge.dmi'
 	icon_state = "door_charge"
 	item_state = "door_charge"
 	item_flags = ITEM_FLAG_NO_BLUDGEON
@@ -59,7 +59,7 @@
 /obj/item/device/syndietele
 	name = "strange sensor"
 	desc = "Looks like regular powernet sensor, but this one almost black and have spooky red light blinking"
-	icon = 'mods/_antagonists/icons/obj/syndiejaunter.dmi'
+	icon = 'mods/antagonists/icons/obj/syndiejaunter.dmi'
 	icon_state = "beacon"
 	item_state = "signaler"
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_ESOTERIC = 3)
@@ -69,7 +69,7 @@
 /obj/item/device/syndiejaunter
 	name = "strange device"
 	desc = "This thing looks like remote. Almost black, with red button and status display."
-	icon = 'mods/_antagonists/icons/obj/syndiejaunter.dmi'
+	icon = 'mods/antagonists/icons/obj/syndiejaunter.dmi'
 	icon_state = "jaunter"
 	item_state = "jaunter"
 	w_class = ITEM_SIZE_SMALL

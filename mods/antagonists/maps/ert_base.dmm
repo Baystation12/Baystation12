@@ -1,0 +1,6267 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ab" = (
+/obj/machinery/mech_recharger,
+/mob/living/exosuit/premade/light,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"ac" = (
+/obj/structure/window/reinforced/crescent{
+	dir = 4
+	},
+/obj/structure/window/reinforced/crescent,
+/obj/structure/table/rack,
+/obj/item/rig/ert/janitor,
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"ad" = (
+/turf/unsimulated/wall,
+/area/map_template/rescue_base/base)
+"ae" = (
+/obj/machinery/computer/teleporter,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"af" = (
+/obj/machinery/pipedispenser,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"ag" = (
+/obj/machinery/tele_pad,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"ah" = (
+/turf/unsimulated/wall{
+	icon = 'icons/obj/doors/rapid_pdoor.dmi';
+	icon_state = "pdoor1";
+	name = "Restricted Access"
+	},
+/area/map_template/rescue_base/base)
+"ai" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/clothing/shoes/magboots/rig/combat,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"aj" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/storage/firstaid/regular,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"ak" = (
+/obj/machinery/floodlight,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"al" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/storage/box/bodybags,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"am" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/storage/firstaid/surgery,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"an" = (
+/obj/item/clothing/accessory/solgov/department/engineering/fleet,
+/obj/item/clothing/accessory/solgov/department/engineering/fleet,
+/obj/item/clothing/accessory/solgov/department/engineering/fleet,
+/obj/item/clothing/accessory/solgov/department/engineering/fleet,
+/obj/item/clothing/head/beret/solgov/fleet/engineering,
+/obj/item/clothing/head/beret/solgov/fleet/engineering,
+/obj/item/clothing/head/beret/solgov/fleet/engineering,
+/obj/item/clothing/head/beret/solgov/fleet/engineering,
+/obj/structure/closet/walllocker{
+	pixel_x = -28
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"ao" = (
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"ap" = (
+/obj/structure/window/reinforced/crescent,
+/obj/structure/table/rack,
+/obj/item/rig/ert/engineer,
+/obj/structure/window/reinforced/crescent{
+	dir = 4
+	},
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"aq" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/device/taperecorder,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"ar" = (
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"as" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/bikehorn/rubberducky,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"au" = (
+/obj/structure/hygiene/toilet{
+	pixel_y = 16
+	},
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor"
+	},
+/area/map_template/rescue_base/base)
+"av" = (
+/obj/structure/hygiene/shower{
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor"
+	},
+/area/map_template/rescue_base/base)
+"aw" = (
+/obj/item/soap,
+/obj/structure/hygiene/shower{
+	pixel_y = 32
+	},
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor"
+	},
+/area/map_template/rescue_base/base)
+"ax" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/device/assembly/mousetrap,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"ay" = (
+/obj/structure/bed/chair,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"az" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/material/twohanded/baseballbat/metal,
+/obj/item/material/hatchet,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"aA" = (
+/obj/machinery/door/blast/regular{
+	id_tag = "rescuegarage";
+	name = "Garage Exit";
+	dir = 4;
+	health_max = 50000
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"aB" = (
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor"
+	},
+/area/map_template/rescue_base/base)
+"aC" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Security Armory";
+	icon_state = "closed";
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"aD" = (
+/obj/structure/bed/chair/comfy/brown{
+	dir = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "wood";
+	name = "plating"
+	},
+/area/map_template/rescue_base/base)
+"aE" = (
+/turf/unsimulated/wall{
+	desc = "A secure airlock. Doesn't look like you can get through easily.";
+	icon = 'icons/obj/doors/centcomm/door.dmi';
+	icon_state = "closed";
+	name = "Bluespace Drive Compartment"
+	},
+/area/map_template/rescue_base/base)
+"aF" = (
+/obj/item/ammo_magazine/n10mm,
+/obj/item/ammo_magazine/n10mm,
+/obj/item/ammo_magazine/n10mm,
+/obj/structure/table/rack,
+/obj/item/ammo_magazine/n10mm,
+/obj/item/ammo_magazine/n10mm,
+/obj/item/ammo_magazine/n10mm,
+/turf/unsimulated/floor/techfloor{
+	icon_state = "techfloor_grid"
+	},
+/area/map_template/rescue_base/base)
+"aG" = (
+/obj/structure/table/rack,
+/obj/item/mech_equipment/mounted_system/extinguisher{
+	pixel_y = -2
+	},
+/obj/item/mech_equipment/mounted_system/rcd{
+	pixel_y = 11
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"aH" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/reagent_containers/syringe/drugs{
+	pixel_x = 3;
+	pixel_y = -1
+	},
+/obj/item/reagent_containers/syringe/drugs{
+	pixel_x = 3;
+	pixel_y = 4
+	},
+/obj/item/reagent_containers/syringe/drugs{
+	pixel_x = 3;
+	pixel_y = 9
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"aI" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/storage/belt/utility/full,
+/obj/item/device/assembly/igniter,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"aJ" = (
+/obj/structure/table/rack,
+/obj/item/rig_module/mounted/energy/taser,
+/obj/item/rig_module/vision/nvg,
+/obj/item/rig_module/device/flash,
+/obj/structure/window/reinforced/crescent{
+	dir = 4
+	},
+/obj/structure/window/reinforced/crescent{
+	dir = 1
+	},
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"aK" = (
+/obj/structure/mopbucket,
+/obj/item/mop,
+/obj/floor_decal/corner/blue/diagonal,
+/obj/structure/hygiene/sink/kitchen{
+	pixel_y = 21
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"aL" = (
+/obj/structure/reagent_dispensers/watertank,
+/obj/floor_decal/corner/blue/diagonal,
+/obj/item/device/radio/intercom/specops{
+	pixel_y = 22
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"aM" = (
+/obj/structure/table/reinforced,
+/obj/machinery/chemical_dispenser/bar_soft/full,
+/obj/floor_decal/corner/blue/diagonal,
+/obj/item/device/radio/intercom/specops{
+	pixel_y = 22
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"aN" = (
+/obj/structure/table/reinforced,
+/obj/machinery/chemical_dispenser/bar_alc/full,
+/obj/floor_decal/corner/blue/diagonal,
+/obj/machinery/vending/boozeomat{
+	pixel_y = 32
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"aO" = (
+/obj/structure/closet/fridge,
+/obj/floor_decal/corner/blue/diagonal,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"aP" = (
+/obj/floor_decal/corner/blue/diagonal,
+/obj/structure/closet/fridge/meat,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"aQ" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Stall"
+	},
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor"
+	},
+/area/map_template/rescue_base/base)
+"aR" = (
+/obj/item/storage/mirror,
+/turf/unsimulated/wall,
+/area/map_template/rescue_base/base)
+"aS" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Showers"
+	},
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor"
+	},
+/area/map_template/rescue_base/base)
+"aT" = (
+/obj/machinery/door/blast/regular{
+	id_tag = "standardrescue";
+	name = "Heavy Equipment";
+	dir = 4;
+	health_max = 50000
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"aU" = (
+/obj/item/device/radio/intercom/specops{
+	dir = 2;
+	pixel_y = 22
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"aV" = (
+/obj/structure/table/rack,
+/obj/item/mech_equipment/light,
+/obj/item/mech_equipment/light{
+	pixel_y = 12
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"aX" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Processing"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"aY" = (
+/obj/structure/table/rack,
+/obj/item/gun/energy/pulse_rifle{
+	pixel_y = -11
+	},
+/obj/item/gun/energy/pulse_rifle{
+	pixel_y = -5
+	},
+/obj/item/gun/energy/pulse_rifle,
+/obj/item/gun/energy/pulse_rifle{
+	pixel_y = 5
+	},
+/obj/item/gun/energy/pulse_rifle{
+	pixel_y = 10
+	},
+/turf/unsimulated/floor/techfloor{
+	icon_state = "techfloor_grid"
+	},
+/area/map_template/rescue_base/base)
+"aZ" = (
+/obj/floor_decal/corner/blue/diagonal,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"ba" = (
+/obj/structure/table/rack,
+/obj/item/mech_equipment/sleeper,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"bb" = (
+/turf/unsimulated/wall{
+	desc = "A secure airlock. Doesn't look like you can get through easily.";
+	icon = 'icons/obj/doors/centcomm/door.dmi';
+	icon_state = "closed";
+	name = "Commanding Officer";
+	dir = 4
+	},
+/area/map_template/rescue_base/base)
+"bc" = (
+/obj/structure/hygiene/sink{
+	dir = 1;
+	pixel_y = 16
+	},
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor"
+	},
+/area/map_template/rescue_base/base)
+"bd" = (
+/obj/structure/table/steel,
+/obj/item/storage/fancy/smokable/cigar,
+/turf/unsimulated/floor{
+	icon_state = "wood";
+	name = "plating"
+	},
+/area/map_template/rescue_base/base)
+"be" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Brig";
+	icon_state = "closed";
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"bg" = (
+/obj/wingrille_spawn/reinforced/crescent,
+/turf/unsimulated/floor{
+	icon_state = "plating";
+	name = "plating"
+	},
+/area/map_template/rescue_base/base)
+"bh" = (
+/obj/machinery/suit_storage_unit/medical,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"bj" = (
+/obj/structure/bed,
+/obj/item/bedsheet/orange,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"bk" = (
+/obj/structure/hygiene/toilet{
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"bl" = (
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/door/airlock/external{
+	frequency = 1331;
+	id_tag = "rescue_base_hatch"
+	},
+/turf/unsimulated/floor/techfloor{
+	icon_state = "techfloor_grid"
+	},
+/area/map_template/rescue_base/base)
+"bm" = (
+/obj/machinery/vending/dinnerware,
+/obj/floor_decal/corner/blue/diagonal,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"bp" = (
+/obj/floor_decal/industrial/warning{
+	dir = 5
+	},
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"bq" = (
+/obj/structure/table/rack,
+/obj/item/storage/secure/briefcase,
+/obj/item/clothing/head/beret/centcom/captain,
+/turf/unsimulated/floor{
+	icon_state = "wood";
+	name = "plating"
+	},
+/area/map_template/rescue_base/base)
+"br" = (
+/obj/structure/window/reinforced/crescent{
+	dir = 4
+	},
+/obj/structure/window/reinforced/crescent{
+	dir = 1
+	},
+/obj/structure/table/rack,
+/obj/item/rig/ert/janitor,
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"bs" = (
+/turf/unsimulated/floor{
+	dir = 9;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"bt" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Cell 2"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"bu" = (
+/obj/structure/table/rack,
+/obj/item/device/lightreplacer,
+/obj/item/device/lightreplacer,
+/obj/floor_decal/corner/blue/diagonal,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"bv" = (
+/obj/structure/table/rack,
+/obj/item/clothing/shoes/galoshes,
+/obj/item/clothing/head/bio_hood/janitor,
+/obj/item/clothing/suit/bio_suit/janitor,
+/obj/item/clothing/glasses/science,
+/obj/item/clothing/shoes/galoshes,
+/obj/item/clothing/head/bio_hood/janitor,
+/obj/item/clothing/suit/bio_suit/janitor,
+/obj/item/clothing/glasses/science,
+/obj/item/reagent_containers/spray/plantbgone,
+/obj/item/reagent_containers/spray/plantbgone,
+/obj/item/storage/box/lights/mixed,
+/obj/item/storage/box/lights/mixed,
+/obj/item/grenade/chem_grenade/cleaner,
+/obj/item/grenade/chem_grenade/cleaner,
+/obj/item/grenade/chem_grenade/cleaner,
+/obj/floor_decal/corner/blue/diagonal,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"bw" = (
+/obj/structure/table/reinforced,
+/obj/floor_decal/corner/blue/diagonal,
+/obj/machinery/microwave,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"bx" = (
+/obj/structure/table/reinforced,
+/obj/floor_decal/corner/blue/diagonal,
+/obj/item/reagent_containers/food/condiment/small/saltshaker{
+	pixel_x = -3
+	},
+/obj/item/reagent_containers/food/condiment/small/peppermill{
+	pixel_x = 3
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"by" = (
+/obj/structure/table/reinforced,
+/obj/floor_decal/corner/blue/diagonal,
+/obj/random/donkpocket_box,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"bz" = (
+/obj/floor_decal/corner/blue/diagonal,
+/obj/item/storage/box/donkpocket_premium,
+/obj/structure/closet/kitchen,
+/obj/item/reagent_containers/food/condiment/enzyme,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"bA" = (
+/obj/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"bB" = (
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"bC" = (
+/obj/floor_decal/industrial/warning{
+	dir = 8
+	},
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"bF" = (
+/obj/machinery/door/blast/regular{
+	id_tag = "heavyrescue";
+	name = "Combat Exosuit";
+	dir = 4;
+	health_max = 100000
+	},
+/turf/unsimulated/floor/techfloor{
+	icon_state = "techfloor_grid"
+	},
+/area/map_template/rescue_base/base)
+"bG" = (
+/obj/structure/table/rack,
+/obj/item/ammo_magazine/box/machinegun,
+/obj/item/ammo_magazine/box/machinegun,
+/obj/item/ammo_magazine/box/machinegun,
+/obj/item/ammo_magazine/box/machinegun,
+/turf/unsimulated/floor/techfloor{
+	icon_state = "techfloor_grid"
+	},
+/area/map_template/rescue_base/base)
+"bH" = (
+/obj/item/stool,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"bI" = (
+/obj/structure/table/standard,
+/obj/item/paper,
+/obj/item/pen,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"bJ" = (
+/obj/structure/table/rack,
+/obj/item/gun/projectile/automatic/bullpup_rifle,
+/obj/item/gun/projectile/automatic/bullpup_rifle{
+	pixel_y = 10
+	},
+/turf/unsimulated/floor/techfloor{
+	icon_state = "techfloor_grid"
+	},
+/area/map_template/rescue_base/base)
+"bK" = (
+/obj/structure/table/rack,
+/obj/item/rig/ert/security,
+/obj/structure/window/reinforced/crescent{
+	dir = 1
+	},
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"bM" = (
+/obj/structure/bed,
+/turf/unsimulated/floor{
+	icon_state = "wood";
+	name = "plating"
+	},
+/area/map_template/rescue_base/base)
+"bN" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Engineering Supplies";
+	icon_state = "closed"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"bO" = (
+/obj/structure/bed/chair{
+	dir = 1
+	},
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"bP" = (
+/obj/structure/table/rack,
+/obj/item/plastique,
+/obj/item/plastique,
+/obj/item/plastique,
+/obj/item/plastique,
+/obj/item/plastique,
+/obj/item/plastique,
+/obj/item/plastique,
+/obj/item/plastique,
+/obj/item/plastique,
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"bQ" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Spec Ops Cryo Storage";
+	icon_state = "closed";
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"bR" = (
+/obj/machinery/tele_projector{
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"bS" = (
+/turf/unsimulated/wall{
+	desc = "A secure airlock. Doesn't look like you can get through easily.";
+	icon = 'icons/obj/doors/centcomm/door.dmi';
+	icon_state = "closed";
+	name = "Bridge Access"
+	},
+/area/map_template/rescue_base/base)
+"bT" = (
+/obj/machinery/door/blast/regular{
+	id_tag = "heavyrescue";
+	name = "Restricted Equipment";
+	dir = 4;
+	health_max = 100000
+	},
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/base)
+"bU" = (
+/obj/machinery/acting/changer,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"bV" = (
+/obj/landmark{
+	name = "Response Team"
+	},
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"bW" = (
+/obj/machinery/door/airlock/centcom{
+	name = "EVA";
+	icon_state = "closed";
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"bX" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Cell 1"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"bY" = (
+/obj/structure/undies_wardrobe,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"bZ" = (
+/obj/item/clothing/shoes/orange,
+/obj/item/clothing/under/color/orange,
+/obj/structure/closet{
+	name = "Prisoner's Locker"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"ca" = (
+/obj/structure/table/reinforced,
+/obj/machinery/recharger{
+	pixel_y = 4
+	},
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cc" = (
+/obj/structure/table/rack,
+/obj/item/storage/box/handcuffs,
+/obj/item/storage/box/handcuffs,
+/obj/item/storage/box/teargas,
+/obj/item/storage/box/teargas,
+/obj/item/storage/box/flashbangs,
+/obj/item/storage/box/flashbangs,
+/obj/item/device/flash,
+/obj/item/device/flash,
+/obj/item/melee/baton/loaded,
+/obj/item/melee/baton/loaded,
+/obj/item/reagent_containers/spray/pepper,
+/obj/item/reagent_containers/spray/pepper,
+/obj/item/melee/telebaton,
+/obj/item/melee/telebaton,
+/obj/machinery/recharger/wallcharger{
+	pixel_x = 4;
+	pixel_y = 32
+	},
+/obj/item/taperoll/police,
+/obj/item/taperoll/police,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cd" = (
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/glasses/night,
+/obj/item/clothing/glasses/night,
+/obj/item/clothing/glasses/tacgoggles,
+/obj/item/clothing/glasses/tacgoggles,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"ce" = (
+/obj/structure/table/rack,
+/obj/item/storage/backpack/ert/security,
+/obj/item/storage/backpack/ert/security,
+/obj/item/storage/belt/holster/security/tactical,
+/obj/item/storage/belt/holster/security/tactical,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cf" = (
+/obj/structure/table/rack,
+/obj/item/gun/energy/gun/nuclear,
+/obj/item/gun/energy/gun/nuclear,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cg" = (
+/obj/structure/table/rack,
+/obj/machinery/recharger/wallcharger{
+	pixel_x = 4;
+	pixel_y = 32
+	},
+/obj/item/clothing/suit/armor/vest/ert/security,
+/obj/item/clothing/suit/armor/vest/ert/security,
+/obj/item/clothing/head/helmet/ert/security,
+/obj/item/clothing/head/helmet/ert/security,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"ch" = (
+/obj/structure/table/rack,
+/obj/item/clothing/suit/armor/vest/ert/engineer,
+/obj/item/clothing/suit/armor/vest/ert/engineer,
+/obj/item/clothing/head/helmet/ert/engineer,
+/obj/item/clothing/head/helmet/ert/engineer,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"ci" = (
+/obj/structure/table/rack,
+/obj/item/gun/energy/gun,
+/obj/item/gun/energy/gun,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cj" = (
+/obj/structure/table/rack,
+/obj/item/storage/backpack/ert/medical,
+/obj/item/storage/backpack/ert/medical,
+/obj/item/storage/belt/medical,
+/obj/item/storage/belt/medical,
+/obj/item/storage/belt/medical/emt,
+/obj/item/storage/belt/medical/emt,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"ck" = (
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/glasses/hud/health,
+/obj/item/clothing/glasses/hud/health,
+/obj/item/storage/box/latexgloves,
+/obj/item/storage/box/nitrilegloves,
+/obj/item/storage/box/masks,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cl" = (
+/obj/structure/table/rack,
+/obj/item/device/flash,
+/obj/item/device/flash,
+/obj/item/melee/baton/loaded,
+/obj/item/melee/baton/loaded,
+/obj/item/storage/box/syringes,
+/obj/item/storage/box/syringes,
+/obj/item/storage/box/autoinjectors,
+/obj/item/storage/box/autoinjectors,
+/obj/item/storage/box/beakers,
+/obj/item/storage/box/beakers,
+/obj/item/storage/box/pillbottles,
+/obj/item/storage/box/pillbottles,
+/obj/item/storage/box/bodybags,
+/obj/item/storage/box/bodybags,
+/obj/item/storage/box/syringegun,
+/obj/item/storage/box/syringegun,
+/obj/item/storage/box/syringegun,
+/obj/item/storage/box/syringegun,
+/obj/item/gun/launcher/syringe/rapid,
+/obj/item/gun/launcher/syringe/rapid,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cm" = (
+/obj/structure/table/reinforced,
+/obj/item/reagent_containers/hypospray,
+/obj/item/reagent_containers/hypospray,
+/obj/item/reagent_containers/hypospray,
+/obj/item/reagent_containers/hypospray,
+/obj/item/reagent_containers/hypospray,
+/obj/item/reagent_containers/hypospray,
+/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/glass/bottle/inaprovaline,
+/obj/item/reagent_containers/glass/bottle/inaprovaline,
+/obj/item/reagent_containers/glass/bottle/inaprovaline,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cn" = (
+/obj/structure/table/reinforced,
+/obj/item/aicard,
+/obj/item/pinpointer/advpinpointer,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"co" = (
+/obj/structure/table/rack,
+/obj/item/mech_equipment/clamp,
+/obj/item/mech_equipment/clamp{
+	pixel_y = 9
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"cp" = (
+/obj/structure/table/rack,
+/obj/item/clothing/head/helmet/ballistic,
+/obj/item/clothing/head/helmet/ballistic,
+/obj/item/clothing/head/helmet/ballistic,
+/obj/item/clothing/head/helmet/ballistic,
+/obj/item/clothing/head/helmet/ballistic,
+/obj/item/clothing/head/helmet/ballistic,
+/obj/item/clothing/suit/armor/bulletproof,
+/obj/item/clothing/suit/armor/bulletproof,
+/obj/item/clothing/suit/armor/bulletproof,
+/obj/item/clothing/suit/armor/bulletproof,
+/obj/item/clothing/suit/armor/bulletproof,
+/obj/item/clothing/suit/armor/bulletproof,
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"cq" = (
+/obj/machinery/button/blast_door{
+	id_tag = "rescuegarage";
+	name = "Garage";
+	pixel_x = -24;
+	pixel_y = -4
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"cr" = (
+/obj/structure/table/steel,
+/obj/item/device/radio/intercom/specops,
+/turf/unsimulated/floor{
+	icon_state = "wood";
+	name = "plating"
+	},
+/area/map_template/rescue_base/base)
+"cs" = (
+/obj/structure/table/rack,
+/obj/item/rig/ert/assetprotection,
+/turf/unsimulated/floor/techfloor{
+	icon_state = "techfloor_grid"
+	},
+/area/map_template/rescue_base/base)
+"cu" = (
+/obj/item/device/radio/intercom/specops{
+	dir = 1;
+	pixel_y = -22
+	},
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cv" = (
+/obj/machinery/cryopod{
+	dir = 2
+	},
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cw" = (
+/obj/structure/table/rack,
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/obj/item/stack/material/steel{
+	amount = 50;
+	pixel_x = 2;
+	pixel_y = 2
+	},
+/obj/item/stack/material/steel{
+	amount = 50;
+	pixel_x = 2;
+	pixel_y = 2
+	},
+/obj/item/stack/material/steel{
+	amount = 50;
+	pixel_x = 2;
+	pixel_y = 2
+	},
+/obj/item/stack/material/steel{
+	amount = 50;
+	pixel_x = 2;
+	pixel_y = 2
+	},
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cx" = (
+/obj/structure/table/rack,
+/obj/item/gun/energy/laser,
+/obj/item/gun/energy/laser,
+/obj/item/gun/energy/laser,
+/obj/item/gun/energy/laser,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cy" = (
+/obj/machinery/chemical_dispenser/ert,
+/obj/item/reagent_containers/glass/beaker/large,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cz" = (
+/obj/structure/table/rack,
+/obj/item/rig_module/mounted/energy/taser,
+/obj/item/rig_module/mounted/energy/taser,
+/obj/item/rig_module/maneuvering_jets,
+/obj/item/rig_module/maneuvering_jets,
+/obj/item/rig_module/chem_dispenser/injector,
+/obj/item/rig_module/chem_dispenser/injector,
+/obj/item/rig_module/device/healthscanner,
+/obj/item/rig_module/device/healthscanner,
+/obj/item/rig_module/vision/medhud,
+/obj/item/rig_module/vision/medhud,
+/obj/structure/window/reinforced/crescent{
+	dir = 1
+	},
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"cA" = (
+/obj/structure/table/reinforced,
+/obj/item/paper_bin,
+/obj/item/pen,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"cB" = (
+/obj/structure/table/reinforced,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"cC" = (
+/obj/structure/table/reinforced,
+/obj/item/tableflag,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"cD" = (
+/obj/machinery/fabricator/hacked,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cE" = (
+/obj/structure/table/rack,
+/obj/item/gun/energy/ionrifle,
+/obj/item/gun/energy/ionrifle,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cF" = (
+/obj/structure/table/rack,
+/obj/item/clothing/head/helmet/riot,
+/obj/item/clothing/head/helmet/riot,
+/obj/item/clothing/head/helmet/riot,
+/obj/item/clothing/head/helmet/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/shield/riot,
+/obj/item/shield/riot,
+/obj/item/shield/riot,
+/obj/item/shield/riot,
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cG" = (
+/obj/structure/table/reinforced,
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/unathi/oneg,
+/obj/item/reagent_containers/ivbag/blood/unathi/oneg,
+/obj/item/bodybag/cryobag,
+/obj/item/bodybag/cryobag,
+/obj/item/bodybag/cryobag,
+/obj/item/bodybag/cryobag,
+/obj/item/bodybag/cryobag,
+/obj/item/bodybag/cryobag,
+/obj/item/bodybag/cryobag,
+/obj/item/defibrillator/compact/loaded,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cH" = (
+/obj/structure/table/reinforced,
+/obj/item/roller_bed,
+/obj/item/roller_bed,
+/obj/item/roller_bed,
+/obj/item/roller_bed,
+/obj/item/roller_bed,
+/obj/item/roller_bed,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cI" = (
+/obj/item/clothing/accessory/solgov/department/medical/fleet,
+/obj/item/clothing/accessory/solgov/department/medical/fleet,
+/obj/item/clothing/accessory/solgov/department/medical/fleet,
+/obj/item/clothing/accessory/solgov/department/medical/fleet,
+/obj/item/clothing/head/beret/solgov/fleet/medical,
+/obj/item/clothing/head/beret/solgov/fleet/medical,
+/obj/item/clothing/head/beret/solgov/fleet/medical,
+/obj/item/clothing/head/beret/solgov/fleet/medical,
+/obj/structure/closet/walllocker{
+	pixel_x = -28
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"cJ" = (
+/obj/machinery/chem_master,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cK" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1331;
+	id_tag = "rescue_base_hatch";
+	name = "Landing Pad"
+	},
+/turf/unsimulated/floor/techfloor{
+	icon_state = "techfloor_grid"
+	},
+/area/map_template/rescue_base/base)
+"cL" = (
+/obj/structure/table/reinforced,
+/obj/item/device/paicard,
+/obj/item/device/paicard,
+/obj/item/device/paicard,
+/obj/item/device/paicard,
+/obj/item/device/paicard,
+/obj/item/device/paicard,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cM" = (
+/obj/structure/table/rack,
+/obj/item/gun/energy/gun,
+/obj/item/gun/energy/gun,
+/obj/item/gun/energy/gun,
+/obj/item/gun/energy/gun,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cN" = (
+/obj/structure/table/rack,
+/obj/item/shield/riot/metal,
+/obj/item/shield/riot/metal,
+/obj/item/shield/riot/metal,
+/obj/item/shield/riot/metal,
+/turf/unsimulated/floor{
+	dir = 8;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cO" = (
+/obj/machinery/reagentgrinder,
+/obj/item/reagent_containers/glass/beaker/large,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cP" = (
+/obj/machinery/cryopod{
+	dir = 1
+	},
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cQ" = (
+/obj/structure/table/reinforced,
+/obj/item/device/megaphone,
+/obj/item/device/megaphone,
+/obj/item/device/megaphone,
+/obj/item/device/megaphone,
+/obj/item/device/megaphone,
+/obj/item/device/megaphone,
+/obj/structure/noticeboard{
+	pixel_x = 32
+	},
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cR" = (
+/obj/structure/table/rack,
+/obj/item/gun/energy/stunrevolver/rifle,
+/obj/item/gun/energy/stunrevolver/rifle,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"cS" = (
+/obj/structure/iv_stand,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cT" = (
+/obj/structure/table/reinforced,
+/obj/item/reagent_containers/spray/cleaner,
+/obj/item/reagent_containers/spray/cleaner,
+/obj/item/reagent_containers/spray/sterilizine,
+/obj/item/reagent_containers/spray/sterilizine,
+/obj/item/storage/box/bloodpacks,
+/obj/item/tape/medical,
+/obj/item/tape/medical,
+/obj/item/device/flashlight/pen,
+/obj/item/device/flashlight/pen,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cU" = (
+/obj/structure/table/reinforced,
+/obj/item/storage/firstaid/fire,
+/obj/item/storage/firstaid/fire,
+/obj/item/storage/firstaid/fire,
+/obj/item/storage/firstaid/toxin,
+/obj/item/storage/firstaid/toxin,
+/obj/item/storage/firstaid/toxin,
+/obj/item/storage/firstaid/o2,
+/obj/item/storage/firstaid/o2,
+/obj/item/storage/firstaid/o2,
+/obj/item/storage/firstaid/radiation,
+/obj/item/storage/firstaid/radiation,
+/obj/item/storage/firstaid/radiation,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cV" = (
+/obj/structure/table/reinforced,
+/obj/item/storage/firstaid/regular,
+/obj/item/storage/firstaid/regular,
+/obj/item/storage/firstaid/regular,
+/obj/item/storage/firstaid/adv,
+/obj/item/storage/firstaid/adv,
+/obj/item/storage/firstaid/adv,
+/obj/item/storage/firstaid/combat,
+/obj/item/storage/firstaid/combat,
+/obj/item/storage/firstaid/combat,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cW" = (
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"cX" = (
+/obj/floor_decal/corner/blue/diagonal,
+/obj/machinery/door/airlock/centcom{
+	name = "Galley";
+	icon_state = "closed";
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"cZ" = (
+/obj/structure/table/rack,
+/obj/item/storage/box/ammo/stunshells,
+/obj/item/storage/box/ammo/stunshells,
+/obj/item/storage/box/ammo/beanbags,
+/obj/item/storage/box/ammo/beanbags,
+/obj/item/storage/box/ammo/shotgunammo,
+/obj/item/storage/box/ammo/shotgunammo,
+/obj/item/storage/box/ammo/shotgunshells,
+/obj/item/storage/box/ammo/shotgunshells,
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"dc" = (
+/obj/machinery/acting/changer,
+/turf/unsimulated/floor{
+	icon_state = "wood";
+	name = "plating"
+	},
+/area/map_template/rescue_base/base)
+"dd" = (
+/obj/floor_decal/industrial/outline/yellow,
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"de" = (
+/turf/unsimulated/floor{
+	icon_state = "wood";
+	name = "plating"
+	},
+/area/map_template/rescue_base/base)
+"df" = (
+/obj/machinery/vending/security,
+/turf/unsimulated/wall,
+/area/map_template/rescue_base/base)
+"dg" = (
+/obj/structure/table/rack,
+/obj/item/rig/ert/security,
+/obj/structure/window/reinforced/crescent{
+	dir = 1
+	},
+/obj/structure/window/reinforced/crescent{
+	dir = 8
+	},
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"dh" = (
+/obj/machinery/mech_recharger,
+/mob/living/exosuit/premade/powerloader,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"di" = (
+/obj/machinery/vending/medical,
+/turf/unsimulated/wall,
+/area/map_template/rescue_base/base)
+"dj" = (
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"dm" = (
+/obj/machinery/door/airlock/centcom{
+	name = "ERT Leader";
+	icon_state = "closed";
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"do" = (
+/obj/machinery/door/blast/regular{
+	id_tag = "teleporter";
+	name = "Emergency Insertion";
+	dir = 4;
+	health_max = 50000
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"dq" = (
+/obj/structure/table/reinforced,
+/obj/item/modular_computer/tablet/lease/preset/command,
+/obj/item/modular_computer/tablet/lease/preset/command,
+/obj/item/modular_computer/tablet/lease/preset/command,
+/obj/item/modular_computer/tablet/lease/preset/command,
+/obj/item/modular_computer/tablet/lease/preset/command,
+/obj/item/modular_computer/tablet/lease/preset/command,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"dr" = (
+/obj/machinery/recharge_station,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"ds" = (
+/obj/structure/table/rack,
+/obj/item/clothing/accessory/storage/white_vest,
+/obj/item/clothing/accessory/storage/white_vest,
+/obj/item/clothing/accessory/storage/white_vest,
+/obj/item/clothing/accessory/storage/white_vest,
+/obj/item/clothing/accessory/storage/white_vest,
+/obj/item/clothing/accessory/storage/white_vest,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"dt" = (
+/obj/structure/table/rack,
+/obj/item/clothing/accessory/storage/black_vest,
+/obj/item/clothing/accessory/storage/black_vest,
+/obj/item/clothing/accessory/storage/black_vest,
+/obj/item/clothing/accessory/storage/black_vest,
+/obj/item/clothing/accessory/storage/black_vest,
+/obj/item/clothing/accessory/storage/black_vest,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"du" = (
+/obj/structure/table/rack,
+/obj/item/clothing/accessory/storage/brown_vest,
+/obj/item/clothing/accessory/storage/brown_vest,
+/obj/item/clothing/accessory/storage/brown_vest,
+/obj/item/clothing/accessory/storage/brown_vest,
+/obj/item/clothing/accessory/storage/brown_vest,
+/obj/item/clothing/accessory/storage/brown_vest,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"dv" = (
+/obj/structure/table/rack,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"dx" = (
+/obj/structure/table/rack,
+/obj/item/rig/ert,
+/obj/structure/window/reinforced/crescent{
+	dir = 8
+	},
+/obj/structure/window/reinforced/crescent{
+	dir = 1
+	},
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"dy" = (
+/obj/structure/table/reinforced,
+/obj/machinery/cell_charger,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"dA" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Infirmary";
+	icon_state = "closed";
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"dB" = (
+/obj/structure/table/rack,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"dC" = (
+/obj/floor_decal/industrial/warning{
+	dir = 10
+	},
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"dD" = (
+/obj/structure/table/reinforced,
+/obj/item/storage/box/trackimp,
+/obj/item/storage/box/cdeathalarm_kit,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"dE" = (
+/obj/structure/table/reinforced,
+/obj/prefab/hand_teleporter,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"dF" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Engineering Supplies";
+	icon_state = "closed";
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"dG" = (
+/obj/structure/table/reinforced,
+/obj/machinery/cell_charger,
+/obj/item/cell/hyper,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"dH" = (
+/obj/machinery/vending/engivend,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"dI" = (
+/obj/machinery/vending/tool,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"dJ" = (
+/obj/machinery/vending/generic,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"dK" = (
+/turf/unsimulated/wall{
+	icon = 'icons/obj/doors/rapid_pdoor.dmi';
+	icon_state = "pdoor1";
+	name = "Hangar Blastdoor"
+	},
+/area/map_template/rescue_base/base)
+"dL" = (
+/obj/machinery/pipedispenser/disposal,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"dM" = (
+/obj/machinery/vending/engineering,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"dN" = (
+/obj/floor_decal/industrial/warning{
+	dir = 6
+	},
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"dO" = (
+/obj/machinery/computer/modular/preset/full/ert{
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "wood";
+	name = "plating"
+	},
+/area/map_template/rescue_base/base)
+"dP" = (
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"dR" = (
+/obj/machinery/door/blast/regular{
+	id_tag = "rescuegarage";
+	name = "Garage Exit"
+	},
+/obj/floor_decal/industrial/hatch/yellow,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"dS" = (
+/obj/machinery/door/airlock/centcom{
+	name = "ERT Leader";
+	icon_state = "closed"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"dT" = (
+/obj/structure/table/glass,
+/obj/item/storage/firstaid/surgery,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/rescue_base/start)
+"dU" = (
+/obj/structure/table/rack,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"dV" = (
+/obj/structure/window/reinforced/crescent,
+/obj/structure/table/rack,
+/obj/item/rig_module/mounted/energy/taser,
+/obj/item/rig_module/mounted/energy/taser,
+/obj/item/rig_module/maneuvering_jets,
+/obj/item/rig_module/maneuvering_jets,
+/obj/item/rig_module/device/drill,
+/obj/item/rig_module/device/drill,
+/obj/item/rig_module/mounted/energy/plasmacutter,
+/obj/item/rig_module/mounted/energy/plasmacutter,
+/obj/item/rig_module/device/rcd,
+/obj/item/rig_module/device/rcd,
+/obj/item/rig_module/vision/meson,
+/obj/item/rig_module/vision/meson,
+/obj/structure/window/reinforced/crescent{
+	dir = 8
+	},
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"dW" = (
+/obj/structure/reagent_dispensers/watertank,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"dX" = (
+/obj/machinery/portable_atmospherics/powered/pump/filled,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"dY" = (
+/obj/machinery/shieldgen,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"dZ" = (
+/obj/item/aiModule/reset,
+/obj/item/aiModule/freeformcore,
+/obj/item/aiModule/protectStation,
+/obj/item/aiModule/quarantine,
+/obj/item/aiModule/safeguard,
+/obj/structure/table/rack,
+/obj/item/aiModule/nanotrasen,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"eb" = (
+/obj/structure/bed/chair/office/dark,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"ed" = (
+/obj/structure/table/rack,
+/obj/item/gun/projectile/automatic/l6_saw,
+/turf/unsimulated/floor/techfloor{
+	icon_state = "techfloor_grid"
+	},
+/area/map_template/rescue_base/base)
+"ee" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Storage";
+	icon_state = "closed"
+	},
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor"
+	},
+/area/map_template/rescue_base/base)
+"ef" = (
+/obj/floor_decal/industrial/warning{
+	dir = 9
+	},
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"eg" = (
+/obj/floor_decal/corner/blue/diagonal,
+/obj/machinery/door/airlock/centcom{
+	name = "Storage";
+	icon_state = "closed"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"eh" = (
+/obj/structure/table/rack,
+/obj/item/storage/box/flashbangs,
+/obj/item/storage/box/teargas,
+/obj/item/storage/box/handcuffs,
+/obj/item/melee/baton/loaded,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"ei" = (
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/glasses/tacgoggles,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"ej" = (
+/obj/structure/table/rack,
+/obj/item/storage/backpack/ert/commander,
+/obj/item/storage/belt/holster/security/tactical,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"ek" = (
+/obj/structure/table/rack,
+/obj/item/gun/energy/gun,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"el" = (
+/obj/structure/table/rack,
+/obj/item/clothing/suit/armor/vest/ert,
+/obj/item/clothing/head/helmet/ert,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"em" = (
+/obj/structure/reagent_dispensers/fueltank,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"en" = (
+/obj/machinery/portable_atmospherics/powered/scrubber,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"ep" = (
+/obj/floor_decal/industrial/hatch/yellow,
+/turf/unsimulated/floor/techfloor{
+	icon_state = "techfloor_grid"
+	},
+/area/map_template/rescue_base/base)
+"et" = (
+/obj/structure/table/rack,
+/obj/item/rig/ert/medical,
+/obj/structure/window/reinforced/crescent{
+	dir = 1
+	},
+/obj/structure/window/reinforced/crescent{
+	dir = 8
+	},
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"eu" = (
+/obj/machinery/power/emitter,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"ev" = (
+/obj/structure/table/steel,
+/obj/machinery/button/blast_door{
+	id_tag = "standardrescue";
+	name = "Standard Gear";
+	pixel_x = 5;
+	pixel_y = 4
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "teleporter";
+	name = "Teleporter";
+	pixel_y = -4;
+	req_access = list("ACCESS_CENT_CAPTAIN")
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "heavyrescue";
+	name = "Heavy Gear";
+	pixel_x = -5;
+	pixel_y = 4
+	},
+/turf/unsimulated/floor{
+	icon_state = "wood";
+	name = "plating"
+	},
+/area/map_template/rescue_base/base)
+"ew" = (
+/turf/unsimulated/floor/plating,
+/area/map_template/rescue_base/base)
+"ex" = (
+/obj/machinery/door/blast/regular{
+	id_tag = "rescueengi";
+	name = "Engineering Supplies"
+	},
+/obj/floor_decal/industrial/hatch/yellow,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"ey" = (
+/obj/structure/table/rack,
+/obj/item/storage/backpack/ert/engineer,
+/obj/item/storage/backpack/ert/engineer,
+/obj/item/storage/belt/utility/full,
+/obj/item/storage/belt/utility/full,
+/obj/item/clothing/gloves/insulated,
+/obj/item/clothing/gloves/insulated,
+/obj/item/clothing/gloves/insulated,
+/obj/item/clothing/gloves/insulated,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"ez" = (
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/glasses/meson,
+/obj/item/clothing/glasses/meson,
+/obj/item/clothing/glasses/welding/superior,
+/obj/item/clothing/glasses/welding/superior,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"eA" = (
+/obj/structure/table/rack,
+/obj/item/device/flash,
+/obj/item/device/flash,
+/obj/item/melee/baton/loaded,
+/obj/item/melee/baton/loaded,
+/obj/item/grenade/chem_grenade/metalfoam,
+/obj/item/grenade/chem_grenade/metalfoam,
+/obj/item/grenade/chem_grenade/metalfoam,
+/obj/item/grenade/chem_grenade/metalfoam,
+/obj/item/grenade/chem_grenade/metalfoam,
+/obj/item/grenade/chem_grenade/metalfoam,
+/obj/item/grenade/chem_grenade/metalfoam,
+/obj/item/grenade/chem_grenade/metalfoam,
+/obj/item/inflatable_dispenser,
+/obj/item/inflatable_dispenser,
+/obj/item/pickaxe/diamonddrill,
+/obj/item/pickaxe/diamonddrill,
+/obj/item/storage/briefcase/inflatable{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/obj/item/storage/briefcase/inflatable{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/obj/item/storage/briefcase/inflatable{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/obj/item/storage/briefcase/inflatable{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"eB" = (
+/obj/structure/table/reinforced,
+/obj/item/taperoll/engineering,
+/obj/item/taperoll/engineering,
+/obj/item/taperoll/atmos,
+/obj/item/taperoll/atmos,
+/obj/item/device/multitool,
+/obj/item/device/multitool,
+/obj/item/tape_roll,
+/obj/item/tape_roll,
+/obj/item/tape_roll,
+/obj/item/tape_roll,
+/obj/item/cell/high,
+/obj/item/cell/high,
+/obj/item/cell/high,
+/obj/item/cell/high,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"eC" = (
+/obj/structure/table/reinforced,
+/obj/item/rcd_ammo,
+/obj/item/rcd_ammo,
+/obj/item/rcd_ammo,
+/obj/item/rcd_ammo,
+/obj/item/rcd_ammo,
+/obj/item/rcd_ammo,
+/obj/item/rcd_ammo,
+/obj/item/rcd_ammo,
+/obj/item/rcd_ammo,
+/obj/item/rcd_ammo,
+/obj/item/rcd_ammo,
+/obj/item/rcd_ammo,
+/obj/item/rcd,
+/obj/item/rcd,
+/obj/item/rcd,
+/obj/item/rcd,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"eD" = (
+/obj/structure/table/reinforced,
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/obj/item/stack/material/steel{
+	amount = 50;
+	pixel_x = 2;
+	pixel_y = 2
+	},
+/obj/item/stack/material/steel{
+	amount = 50;
+	pixel_x = 2;
+	pixel_y = 2
+	},
+/obj/item/stack/material/steel{
+	amount = 50;
+	pixel_x = 2;
+	pixel_y = 2
+	},
+/obj/item/stack/material/steel{
+	amount = 50;
+	pixel_x = 2;
+	pixel_y = 2
+	},
+/obj/item/stack/material/plasteel{
+	amount = 50
+	},
+/obj/item/stack/material/plasteel{
+	amount = 50
+	},
+/obj/item/stack/material/plasteel{
+	amount = 50
+	},
+/obj/item/stack/material/plasteel{
+	amount = 50
+	},
+/obj/item/stack/material/glass/reinforced{
+	amount = 50
+	},
+/obj/item/stack/material/glass/reinforced{
+	amount = 50
+	},
+/obj/item/stack/material/glass/reinforced{
+	amount = 50
+	},
+/obj/item/stack/material/glass/reinforced{
+	amount = 50
+	},
+/obj/item/stack/material/plastic{
+	amount = 50
+	},
+/obj/item/stack/material/plastic{
+	amount = 50
+	},
+/obj/item/stack/material/plastic{
+	amount = 50
+	},
+/obj/item/stack/material/plastic{
+	amount = 50
+	},
+/obj/item/stack/material/glass/boron_reinforced{
+	amount = 20
+	},
+/obj/item/stack/material/glass/boron_reinforced{
+	amount = 20
+	},
+/obj/item/stack/material/glass/boron_reinforced{
+	amount = 20
+	},
+/obj/item/stack/material/glass/boron_reinforced{
+	amount = 20
+	},
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"eE" = (
+/obj/structure/table/reinforced,
+/obj/item/stock_parts/circuitboard/smes,
+/obj/item/stock_parts/circuitboard/smes,
+/obj/item/stock_parts/smes_coil,
+/obj/item/stock_parts/smes_coil,
+/obj/item/stock_parts/smes_coil/super_capacity,
+/obj/item/stock_parts/smes_coil/super_capacity,
+/obj/item/stock_parts/smes_coil/super_io,
+/obj/item/stock_parts/smes_coil/super_io,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"eF" = (
+/obj/machinery/portable_atmospherics/canister/air,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"eH" = (
+/obj/machinery/suit_storage_unit/security,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"eI" = (
+/obj/machinery/hologram/holopad/longrange,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"eK" = (
+/mob/living/exosuit/premade/heavy,
+/obj/machinery/mech_recharger,
+/turf/unsimulated/floor/techfloor{
+	icon_state = "techfloor_grid"
+	},
+/area/map_template/rescue_base/base)
+"eM" = (
+/obj/machinery/suit_storage_unit/engineering,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"eN" = (
+/obj/floor_decal/industrial/loading,
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"eO" = (
+/obj/structure/table/rack,
+/obj/item/mech_equipment/catapult,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"eP" = (
+/obj/floor_decal/industrial/warning,
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"eQ" = (
+/obj/structure/table/rack,
+/obj/item/gun/projectile/shotgun/pump/combat,
+/obj/item/gun/projectile/shotgun/pump/combat,
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"eR" = (
+/obj/floor_decal/industrial/hatch/yellow,
+/obj/machinery/porta_turret/crescent,
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"eS" = (
+/obj/structure/table/rack,
+/obj/item/rig/ert/medical,
+/obj/structure/window/reinforced/crescent{
+	dir = 1
+	},
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"eT" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/structure/closet/crate/secure{
+	req_access = list("ACCESS_CENT_SPECOPS")
+	},
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"eU" = (
+/obj/paint/hull,
+/turf/simulated/wall/titanium,
+/area/map_template/rescue_base/start)
+"eW" = (
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "rescuedock";
+	name = "Blast Shutters";
+	opacity = 0
+	},
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/hull,
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"eX" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1331;
+	id_tag = "rescue_shuttle_outer";
+	name = "Ship External Access"
+	},
+/obj/shuttle_landmark/ert/start,
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"eY" = (
+/obj/machinery/computer/prisoner{
+	name = "Implant Management";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"eZ" = (
+/obj/machinery/atmospherics/pipe/manifold/visible{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"fa" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Infirmary";
+	icon_state = "closed"
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"fb" = (
+/obj/item/device/radio/intercom/specops{
+	dir = 8;
+	pixel_x = 22
+	},
+/obj/structure/table/steel_reinforced,
+/obj/item/storage/fancy/smokable/dromedaryco,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fc" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
+	dir = 4;
+	id_tag = "rescue_shuttle_pump"
+	},
+/obj/machinery/airlock_sensor{
+	frequency = 1331;
+	id_tag = "rescue_shuttle_sensor";
+	pixel_x = 8;
+	pixel_y = 25
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/structure/closet/emcloset,
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"fd" = (
+/obj/machinery/atmospherics/pipe/manifold/visible{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"fe" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
+	dir = 8;
+	id_tag = "rescue_shuttle_pump"
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	frequency = 1331;
+	id_tag = "rescue_shuttle";
+	pixel_x = -8;
+	pixel_y = 24
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "rescuedock";
+	name = "Window Shutters Control";
+	pixel_x = 4;
+	pixel_y = 24
+	},
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"ff" = (
+/obj/structure/table/steel_reinforced,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fg" = (
+/obj/floor_decal/corner/paleblue{
+	dir = 4
+	},
+/obj/floor_decal/floordetail/edgedrain{
+	dir = 10
+	},
+/obj/structure/closet/medical_wall{
+	pixel_y = -24
+	},
+/obj/item/reagent_containers/glass/bottle/stoxin,
+/obj/item/reagent_containers/glass/bottle/stoxin,
+/obj/item/reagent_containers/syringe,
+/obj/item/tank/anesthetic,
+/obj/item/clothing/mask/breath/medical,
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"fh" = (
+/obj/machinery/atmospherics/unary/freezer{
+	icon_state = "freezer"
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"fi" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/device/radio/intercom/specops{
+	dir = 8;
+	pixel_x = 22
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fj" = (
+/obj/machinery/sleeper{
+	dir = 8
+	},
+/obj/structure/closet/medical_wall{
+	pixel_x = 32
+	},
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/reagent_containers/syringe,
+/obj/item/reagent_containers/glass/bottle/antitoxin{
+	pixel_x = -4;
+	pixel_y = 8
+	},
+/obj/item/reagent_containers/glass/bottle/inaprovaline{
+	pixel_x = 4;
+	pixel_y = 7
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"fk" = (
+/obj/machinery/atmospherics/pipe/simple/visible,
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"fl" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1331;
+	id_tag = "rescue_shuttle_outer";
+	name = "Ship External Access"
+	},
+/obj/shuttle_landmark/ert/start,
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "ert_starboard_airlock_blast_door"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"fn" = (
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fo" = (
+/obj/machinery/hologram/holopad/longrange,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fp" = (
+/obj/machinery/body_scanconsole{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"fq" = (
+/obj/item/device/radio/intercom/specops{
+	dir = 8;
+	pixel_x = 22;
+	pixel_y = -10
+	},
+/obj/structure/handrail{
+	dir = 8
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "ert_starboard_airlock_blast_door";
+	name = "Port Exit Shutters Control";
+	pixel_x = 24;
+	pixel_y = 8;
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"fs" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/structure/bed/chair{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"ft" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
+	dir = 4;
+	id_tag = "rescue_shuttle_pump"
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"fu" = (
+/obj/machinery/atmospherics/pipe/manifold4w/visible,
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"fv" = (
+/obj/machinery/atmospherics/pipe/manifold4w/visible,
+/obj/machinery/meter,
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"fw" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
+	dir = 8;
+	id_tag = "rescue_shuttle_pump"
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"fx" = (
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/hull,
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"fy" = (
+/obj/structure/bed/chair/office/dark{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fz" = (
+/obj/machinery/atmospherics/pipe/simple/visible,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/hull,
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"fA" = (
+/obj/machinery/atmospherics/pipe/simple/visible,
+/obj/machinery/door/airlock/external{
+	frequency = 1331;
+	id_tag = "rescue_shuttle_inner";
+	name = "Ship External Access"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"fB" = (
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"fC" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/clothing/head/solgov/dress/fleet/command,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fD" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/structure/closet/radiation,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fE" = (
+/obj/machinery/computer/modular/preset/medical{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fF" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fG" = (
+/obj/machinery/atmospherics/pipe/manifold/visible,
+/obj/machinery/meter,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fH" = (
+/obj/machinery/atmospherics/pipe/manifold/visible,
+/obj/machinery/access_button{
+	command = "cycle_interior";
+	frequency = 1331;
+	master_tag = "rescue_shuttle";
+	name = "interior access button";
+	pixel_x = 25;
+	pixel_y = 25;
+	req_access = list("ACCESS_CENT_SPECOPS")
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fI" = (
+/obj/machinery/atmospherics/unary/tank/air{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fJ" = (
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "rescueeva";
+	name = "Blast Shutters";
+	opacity = 0
+	},
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/hull,
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"fL" = (
+/obj/structure/closet/bombclosetsecurity,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fM" = (
+/obj/structure/table/rack,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/mask/gas/half,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fN" = (
+/obj/machinery/suit_storage_unit/standard_unit,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fO" = (
+/obj/structure/closet,
+/obj/item/device/flashlight/flare,
+/obj/item/device/flashlight/flare,
+/obj/item/device/flashlight/flare,
+/obj/item/device/flashlight/flare,
+/obj/item/device/flashlight/flare,
+/obj/item/device/flashlight/flare,
+/obj/item/device/flashlight,
+/obj/item/device/flashlight,
+/obj/item/device/flashlight,
+/obj/item/device/flashlight,
+/obj/item/device/flashlight,
+/obj/item/device/flashlight,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fP" = (
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 5
+	},
+/obj/item/device/radio/intercom/specops{
+	pixel_x = -22;
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"fQ" = (
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fS" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Cell";
+	icon_state = "closed"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fT" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Storage";
+	icon_state = "closed"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"fU" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Flight Deck";
+	icon_state = "closed"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fV" = (
+/obj/structure/closet/l3closet/general,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fW" = (
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fX" = (
+/obj/item/device/radio/intercom/specops{
+	dir = 1;
+	pixel_y = -22
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fY" = (
+/obj/structure/table/rack,
+/obj/machinery/light,
+/obj/item/tank/jetpack/carbondioxide,
+/obj/item/tank/jetpack/carbondioxide,
+/obj/machinery/button/blast_door{
+	id_tag = "rescueeva";
+	name = "Window Shutters Control";
+	pixel_x = 24;
+	pixel_y = -4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"fZ" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Brig";
+	icon_state = "closed"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"ga" = (
+/obj/structure/shuttle/engine/heater,
+/obj/paint/sun,
+/turf/simulated/wall/titanium,
+/area/map_template/rescue_base/start)
+"gb" = (
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"gc" = (
+/obj/floor_decal/corner/red{
+	dir = 6
+	},
+/obj/floor_decal/floordetail/edgedrain{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"gd" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Passageway";
+	icon_state = "closed"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"ge" = (
+/obj/structure/handrail,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gf" = (
+/obj/structure/closet,
+/obj/item/storage/box/donkpocket_premium,
+/obj/item/storage/box/donkpocket_premium,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gh" = (
+/obj/structure/bed,
+/obj/item/bedsheet/orange,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gi" = (
+/obj/machinery/flasher{
+	id_tag = "rescueflash";
+	pixel_y = 28
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gj" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gk" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/recharger{
+	pixel_y = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gl" = (
+/obj/floor_decal/corner/paleblue,
+/obj/floor_decal/floordetail/edgedrain{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"gm" = (
+/obj/machinery/atmospherics/unary/cryo_cell,
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"gn" = (
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"go" = (
+/obj/item/device/radio/intercom/specops{
+	dir = 8;
+	pixel_x = 22
+	},
+/obj/machinery/bodyscanner{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"gp" = (
+/obj/item/stool,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gq" = (
+/obj/structure/hygiene/toilet{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gr" = (
+/obj/structure/table/rack,
+/obj/random/solgov,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gs" = (
+/obj/structure/closet/crate/freezer/rations,
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"gt" = (
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"gu" = (
+/obj/machinery/shieldwallgen,
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"gv" = (
+/obj/structure/closet/secure_closet/chemical,
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"gw" = (
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"gx" = (
+/obj/machinery/suit_storage_unit/standard_unit,
+/obj/machinery/light,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gy" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/button/blast_door{
+	id_tag = "rescuebridge";
+	name = "Window Shutters Control";
+	pixel_y = -4
+	},
+/obj/item/device/radio/intercom/hailing{
+	dir = 8;
+	pixel_x = 24
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gz" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1331;
+	id_tag = "rescue_shuttle_outer";
+	name = "Ship External Access"
+	},
+/obj/shuttle_landmark/ert/start,
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "ert_port_airlock_blast_door"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"gA" = (
+/obj/structure/table/glass,
+/obj/item/defibrillator/loaded,
+/obj/item/reagent_containers/glass/beaker/cryoxadone,
+/obj/machinery/atmospherics/binary/pump/on,
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"gB" = (
+/obj/structure/closet/secure_closet/medical1,
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"gD" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/vending/wallmed1{
+	name = "Emergency NanoMed";
+	pixel_x = 28;
+	req_access = newlist()
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gE" = (
+/obj/structure/table/rack,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gF" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/iv_stand,
+/obj/floor_decal/corner/red{
+	dir = 10
+	},
+/obj/floor_decal/floordetail/edgedrain{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"gG" = (
+/obj/machinery/recharger/wallcharger{
+	pixel_x = -25
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gJ" = (
+/obj/machinery/recharge_station,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gK" = (
+/obj/structure/bed/chair,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gL" = (
+/obj/machinery/vending/wallmed1{
+	name = "Emergency NanoMed";
+	pixel_x = 28;
+	req_access = newlist()
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/structure/handrail{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gM" = (
+/obj/structure/handrail{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gN" = (
+/obj/structure/handrail{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gO" = (
+/obj/machinery/optable,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"gP" = (
+/obj/machinery/button/flasher{
+	id_tag = "rescueflash";
+	name = "Flasher";
+	pixel_x = 27
+	},
+/obj/structure/bed/chair{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gQ" = (
+/obj/machinery/portable_atmospherics/canister/air,
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"gR" = (
+/obj/structure/table/glass,
+/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/stack/medical/advanced/bruise_pack,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/rescue_base/start)
+"gS" = (
+/obj/machinery/button/blast_door{
+	id_tag = "rescueinfirm";
+	name = "Window Shutters Control";
+	pixel_x = 4;
+	pixel_y = -24;
+	dir = 1
+	},
+/obj/floor_decal/corner/red{
+	dir = 5
+	},
+/obj/floor_decal/floordetail/edgedrain,
+/obj/structure/hygiene/sink{
+	dir = 4;
+	pixel_x = 22
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/rescue_base/start)
+"gT" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Garage"
+	},
+/obj/machinery/door/blast/regular{
+	id_tag = "standardrescue";
+	name = "Garage";
+	health_max = 50000
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"gU" = (
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "rescuebridge";
+	name = "Blast Shutters";
+	opacity = 0
+	},
+/obj/paint/hull,
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"gV" = (
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gW" = (
+/obj/structure/closet{
+	name = "Prisoner's Locker"
+	},
+/obj/item/clothing/shoes/orange,
+/obj/item/clothing/under/color/orange,
+/obj/item/device/radio/intercom/specops{
+	dir = 8;
+	pixel_x = 22
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gX" = (
+/obj/paint/sun,
+/turf/simulated/wall/titanium,
+/area/map_template/rescue_base/start)
+"gY" = (
+/obj/structure/bed/chair/shuttle{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"gZ" = (
+/obj/structure/table/rack,
+/turf/unsimulated/floor/techfloor{
+	icon_state = "techfloor_grid"
+	},
+/area/map_template/rescue_base/base)
+"ha" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/table/glass,
+/obj/item/reagent_containers/spray/cleaner{
+	pixel_x = 6
+	},
+/obj/item/reagent_containers/spray/sterilizine{
+	pixel_x = -6;
+	pixel_y = 3
+	},
+/obj/item/clothing/gloves/latex,
+/obj/item/clothing/mask/surgical,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/rescue_base/start)
+"hb" = (
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "rescueinfirm";
+	name = "Blast Shutters";
+	opacity = 0
+	},
+/obj/paint/hull,
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"hd" = (
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"he" = (
+/obj/structure/closet{
+	name = "Prisoner's Locker"
+	},
+/obj/item/clothing/shoes/orange,
+/obj/item/clothing/under/color/orange,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"hf" = (
+/obj/structure/shuttle/engine/propulsion,
+/turf/simulated/floor/reinforced,
+/area/map_template/rescue_base/start)
+"hg" = (
+/obj/machinery/computer/shuttle_control/multi/rescue,
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"hh" = (
+/obj/machinery/computer/modular/preset/engineering,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"hi" = (
+/obj/machinery/computer/modular/preset/security,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"hj" = (
+/obj/floor_decal/industrial/warning{
+	dir = 4
+	},
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"hk" = (
+/obj/machinery/embedded_controller/radio/simple_docking_controller{
+	frequency = 1331;
+	id_tag = "rescue_base";
+	pixel_x = 5;
+	pixel_y = -25
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"hl" = (
+/obj/machinery/computer/cryopod{
+	pixel_y = 32
+	},
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"iC" = (
+/obj/structure/table/rack,
+/obj/item/gun/energy/taser/carbine,
+/obj/item/gun/energy/taser/carbine,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"iP" = (
+/obj/structure/table/rack,
+/obj/item/gun/projectile/automatic/sec_smg,
+/obj/item/gun/projectile/automatic/sec_smg,
+/obj/item/gun/projectile/automatic/sec_smg,
+/obj/item/gun/projectile/automatic/sec_smg,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"lE" = (
+/obj/structure/shuttle/engine/propulsion,
+/turf/space,
+/area/map_template/rescue_base/start)
+"nZ" = (
+/turf/unsimulated/floor/techfloor{
+	icon_state = "techfloor_grid"
+	},
+/area/map_template/rescue_base/base)
+"oT" = (
+/obj/structure/table/rack,
+/obj/item/ammo_magazine/mil_rifle/heavy,
+/obj/item/ammo_magazine/mil_rifle/heavy,
+/obj/item/ammo_magazine/mil_rifle/heavy,
+/obj/item/ammo_magazine/mil_rifle/heavy,
+/obj/item/ammo_magazine/mil_rifle/heavy,
+/obj/item/ammo_magazine/mil_rifle/heavy,
+/turf/unsimulated/floor/techfloor{
+	icon_state = "techfloor_grid"
+	},
+/area/map_template/rescue_base/base)
+"qQ" = (
+/obj/structure/shuttle/engine/propulsion,
+/turf/unsimulated/floor/techfloor{
+	icon_state = "techfloor_grid"
+	},
+/area/map_template/rescue_base/base)
+"si" = (
+/obj/item/clothing/accessory/solgov/department/security/fleet,
+/obj/item/clothing/accessory/solgov/department/security/fleet,
+/obj/item/clothing/accessory/solgov/department/security/fleet,
+/obj/item/clothing/accessory/solgov/department/security/fleet,
+/obj/item/clothing/head/beret/solgov/fleet/security,
+/obj/item/clothing/head/beret/solgov/fleet/security,
+/obj/item/clothing/head/beret/solgov/fleet/security,
+/obj/item/clothing/head/beret/solgov/fleet/security,
+/obj/structure/closet/walllocker{
+	pixel_x = -28
+	},
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"ua" = (
+/obj/structure/table/rack,
+/obj/item/tank/oxygen_emergency_double,
+/obj/item/tank/oxygen_emergency_double,
+/obj/machinery/light,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"uV" = (
+/obj/structure/window/reinforced/crescent,
+/obj/structure/table/rack,
+/obj/item/rig/ert/engineer,
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"xK" = (
+/obj/structure/table/rack,
+/obj/item/clothing/suit/armor/vest/ert/medical,
+/obj/item/clothing/suit/armor/vest/ert/medical,
+/obj/item/clothing/head/helmet/ert/medical,
+/obj/item/clothing/head/helmet/ert/medical,
+/turf/unsimulated/floor{
+	dir = 1;
+	icon_state = "vault"
+	},
+/area/map_template/rescue_base/base)
+"yR" = (
+/obj/structure/table/rack,
+/obj/item/clothing/head/helmet/ablative,
+/obj/item/clothing/head/helmet/ablative,
+/obj/item/clothing/head/helmet/ablative,
+/obj/item/clothing/head/helmet/ablative,
+/obj/item/clothing/head/helmet/ablative,
+/obj/item/clothing/head/helmet/ablative,
+/obj/item/clothing/suit/armor/laserproof,
+/obj/item/clothing/suit/armor/laserproof,
+/obj/item/clothing/suit/armor/laserproof,
+/obj/item/clothing/suit/armor/laserproof,
+/obj/item/clothing/suit/armor/laserproof,
+/obj/item/clothing/suit/armor/laserproof,
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"zS" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Infirmary";
+	icon_state = "closed"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"Bh" = (
+/obj/structure/handrail{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"Cc" = (
+/obj/structure/table/rack,
+/obj/item/rig_module/mounted/energy/taser,
+/obj/item/rig_module/mounted/energy/taser,
+/obj/item/rig_module/maneuvering_jets,
+/obj/item/rig_module/maneuvering_jets,
+/obj/item/rig_module/mounted/energy/egun,
+/obj/item/rig_module/mounted/energy/egun,
+/obj/item/rig_module/chem_dispenser/combat,
+/obj/item/rig_module/chem_dispenser/combat,
+/obj/item/rig_module/grenade_launcher,
+/obj/item/rig_module/vision/sechud,
+/obj/item/rig_module/vision/sechud,
+/obj/item/rig_module/device/flash,
+/obj/item/rig_module/device/flash,
+/obj/structure/window/reinforced/crescent{
+	dir = 1
+	},
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"Cm" = (
+/obj/structure/table/rack,
+/obj/item/gun/energy/sniperrifle,
+/turf/unsimulated/floor/techfloor{
+	icon_state = "techfloor_grid"
+	},
+/area/map_template/rescue_base/base)
+"Cz" = (
+/obj/item/gun/projectile/automatic/nt41,
+/obj/item/gun/projectile/automatic/nt41{
+	pixel_y = 8
+	},
+/obj/structure/table/rack,
+/turf/unsimulated/floor/techfloor{
+	icon_state = "techfloor_grid"
+	},
+/area/map_template/rescue_base/base)
+"DF" = (
+/obj/structure/handrail{
+	dir = 4
+	},
+/obj/item/device/radio/intercom/hailing{
+	dir = 4;
+	pixel_x = -24;
+	pixel_y = -10
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "ert_port_airlock_blast_door";
+	name = "Port Exit Shutters Control";
+	pixel_x = -24;
+	dir = 4;
+	pixel_y = 8
+	},
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"DH" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Briefing Room";
+	icon_state = "closed";
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"Es" = (
+/obj/machinery/telecomms/allinone/ert,
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
+"GI" = (
+/obj/structure/table/rack,
+/obj/item/cell/high,
+/obj/item/cell/high,
+/obj/item/cell/high,
+/obj/item/cell/high,
+/obj/item/cell/high,
+/obj/item/cell/high,
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"JH" = (
+/obj/machinery/door/airlock/centcom{
+	name = "EVA";
+	icon_state = "closed"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/rescue_base/base)
+"Wi" = (
+/obj/structure/table/rack,
+/obj/item/storage/box/smokes,
+/obj/item/storage/box/smokes,
+/obj/item/storage/box/frags,
+/obj/item/storage/box/emps,
+/obj/item/storage/box/emps,
+/obj/item/gun/launcher/grenade,
+/turf/unsimulated/floor/techfloor,
+/area/map_template/rescue_base/base)
+"ZT" = (
+/obj/machinery/atmospherics/unary/tank/air{
+	dir = 4;
+	start_pressure = 740.5
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/rescue_base/start)
+"ZX" = (
+/obj/structure/shuttle/engine/propulsion,
+/turf/unsimulated/floor/plating,
+/area/map_template/rescue_base/base)
+
+(1,1,1) = {"
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+"}
+(2,1,1) = {"
+ad
+bd
+de
+de
+de
+de
+de
+ad
+au
+aB
+aQ
+aB
+ad
+aN
+aZ
+bm
+bw
+bx
+ad
+aK
+aZ
+ad
+ew
+ew
+ew
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ad
+"}
+(3,1,1) = {"
+ad
+cr
+aD
+de
+de
+de
+bM
+ad
+ad
+ad
+aR
+bc
+ad
+aM
+aZ
+aZ
+aZ
+by
+ad
+aL
+aZ
+ad
+ew
+ew
+ew
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ad
+"}
+(4,1,1) = {"
+ad
+ev
+dO
+de
+de
+de
+bq
+ad
+av
+av
+aR
+bc
+ee
+aZ
+aZ
+aZ
+aZ
+aZ
+eg
+aZ
+aZ
+ad
+ew
+ew
+ew
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ad
+"}
+(5,1,1) = {"
+ad
+de
+de
+de
+de
+de
+dc
+ad
+aw
+aB
+aS
+aB
+ad
+aP
+aO
+aZ
+aZ
+bz
+ad
+bv
+bu
+ad
+ew
+ew
+ew
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ad
+"}
+(6,1,1) = {"
+ad
+ad
+bb
+bb
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+cX
+cX
+ad
+ad
+ad
+ad
+ad
+ew
+ew
+ew
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+"}
+(7,1,1) = {"
+ad
+eh
+ar
+ar
+dD
+bg
+ar
+ar
+an
+cI
+si
+ar
+dq
+ad
+bY
+ao
+ao
+bU
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+ad
+qQ
+"}
+(8,1,1) = {"
+ad
+ei
+ar
+ar
+dE
+bg
+ar
+cA
+ar
+bO
+bO
+ar
+ds
+ad
+cv
+bV
+bV
+cP
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ad
+ZX
+"}
+(9,1,1) = {"
+ad
+ej
+ar
+ar
+cn
+bg
+eI
+cB
+ar
+bO
+bO
+ar
+dt
+ad
+cv
+bV
+bV
+cP
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ad
+ZX
+"}
+(10,1,1) = {"
+ad
+ek
+ar
+ar
+ar
+dS
+ar
+cC
+ar
+bO
+bO
+ar
+du
+ad
+cv
+bV
+bV
+cP
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ad
+ZX
+"}
+(11,1,1) = {"
+ad
+el
+ar
+ar
+cQ
+bg
+ar
+ar
+ar
+ar
+ar
+ar
+dv
+ad
+hl
+ao
+ao
+cu
+ad
+ad
+dM
+ci
+ch
+dJ
+dI
+dH
+dG
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+"}
+(12,1,1) = {"
+ad
+ad
+dm
+dm
+ad
+ad
+bg
+bg
+bg
+DH
+DH
+bg
+ad
+ad
+ad
+bQ
+bQ
+ad
+ad
+dL
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+dZ
+ad
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ad
+"}
+(13,1,1) = {"
+aE
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+dr
+ad
+af
+ar
+ar
+dY
+ar
+dY
+ar
+ar
+ey
+bg
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ad
+"}
+(14,1,1) = {"
+aE
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+dr
+ad
+eu
+ar
+ar
+dX
+ar
+en
+ar
+ar
+ez
+bg
+ar
+ar
+ef
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+dC
+ar
+ar
+ad
+"}
+(15,1,1) = {"
+ad
+bg
+dA
+dA
+bg
+bg
+bg
+bg
+bg
+ad
+bg
+bW
+bW
+bg
+ad
+ao
+ao
+cL
+bg
+eE
+ar
+ar
+dX
+ar
+en
+ar
+ar
+eA
+bg
+ar
+ar
+bA
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+eP
+ar
+ar
+ad
+"}
+(16,1,1) = {"
+ad
+xK
+ao
+ao
+cj
+cl
+ck
+cS
+cG
+bg
+cW
+ao
+ao
+eM
+bg
+ao
+ao
+cm
+bg
+eF
+ar
+ar
+dX
+ar
+en
+ar
+ar
+eB
+bg
+ar
+ar
+bA
+bB
+eR
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+eU
+eU
+eU
+eU
+eU
+eU
+gU
+eU
+eU
+eU
+eU
+eU
+eU
+gX
+gX
+bB
+eP
+ar
+ar
+dK
+"}
+(17,1,1) = {"
+ad
+ci
+ao
+ao
+ar
+ar
+ar
+ar
+ar
+di
+dP
+ao
+ao
+eM
+bg
+ao
+ao
+cm
+bg
+cw
+ar
+ar
+dX
+ar
+en
+ar
+ar
+eC
+bg
+ar
+ar
+bA
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+eU
+eU
+gh
+gp
+fx
+gG
+gG
+gV
+hd
+eU
+gu
+gu
+eT
+Es
+ga
+hf
+bB
+eP
+ar
+ar
+dK
+"}
+(18,1,1) = {"
+ad
+cB
+ao
+ao
+ar
+ar
+ar
+ar
+ar
+zS
+ar
+ao
+ao
+ar
+JH
+ao
+ao
+ca
+bg
+cD
+ar
+ar
+dW
+ar
+em
+ar
+ar
+eD
+ad
+ar
+ar
+bA
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+eU
+fJ
+eU
+eU
+gi
+fn
+fS
+fn
+fn
+fn
+fn
+eU
+gQ
+gt
+gt
+gt
+ga
+hf
+bB
+eP
+ar
+ar
+dK
+"}
+(19,1,1) = {"
+ad
+cU
+ao
+ao
+ar
+ar
+ar
+ar
+ar
+bg
+eH
+ao
+ao
+bh
+bg
+ao
+ao
+ao
+bN
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ex
+ar
+ar
+bA
+bB
+bB
+bB
+bB
+bB
+eU
+eU
+eU
+fM
+ua
+eU
+gj
+gq
+fx
+fn
+gP
+gW
+he
+eU
+gQ
+gt
+gt
+gs
+ga
+hf
+bB
+eP
+ar
+ar
+dK
+"}
+(20,1,1) = {"
+ad
+cV
+ao
+ao
+cy
+cJ
+cO
+cT
+cH
+bg
+eH
+ao
+ao
+bh
+bg
+ao
+ao
+ao
+bN
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+dR
+ar
+ar
+bA
+bB
+eU
+eU
+gz
+eU
+eU
+eU
+ZT
+fn
+Bh
+eU
+eU
+eU
+eU
+fZ
+eU
+eU
+eU
+eU
+eU
+eU
+fT
+eU
+gX
+gX
+gX
+eP
+ar
+ar
+dK
+"}
+(21,1,1) = {"
+ad
+bg
+dA
+dA
+bg
+bg
+bg
+bg
+bg
+ad
+bg
+bW
+bW
+bg
+ad
+ao
+ao
+ar
+ad
+ad
+ad
+dF
+dF
+ad
+ad
+ad
+ad
+ad
+ad
+ar
+ar
+bA
+bB
+eU
+fc
+gt
+DF
+ft
+eU
+fF
+fn
+fn
+fW
+fx
+gN
+gN
+fn
+gr
+gr
+gJ
+gE
+fx
+fL
+fn
+fV
+fD
+ga
+hf
+eP
+ar
+ar
+dK
+"}
+(22,1,1) = {"
+bS
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+cK
+ep
+ep
+bl
+ao
+ao
+dd
+eN
+eW
+fd
+fk
+fk
+fu
+fz
+fG
+fn
+fn
+fn
+gd
+fn
+fn
+fn
+fn
+fn
+fn
+fn
+fU
+fn
+fn
+fn
+fn
+ga
+hf
+eP
+ar
+ar
+dK
+"}
+(23,1,1) = {"
+bS
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+cK
+ep
+ep
+bl
+ao
+ao
+dd
+eN
+eX
+fd
+fk
+fk
+fv
+fA
+fH
+fn
+fn
+fX
+eU
+ge
+fn
+fn
+fn
+gV
+gV
+fn
+fx
+fO
+fn
+fy
+ff
+ga
+hf
+eP
+ar
+ar
+dK
+"}
+(24,1,1) = {"
+ad
+df
+aC
+aC
+bg
+bg
+bg
+ad
+ao
+ao
+ad
+ad
+aT
+aT
+aT
+aT
+aT
+ad
+ad
+ar
+bs
+bs
+bs
+bs
+hk
+ad
+ad
+ad
+ad
+ar
+ar
+bA
+bB
+eU
+fe
+gt
+fq
+fw
+eU
+fQ
+fn
+fn
+fY
+eU
+gL
+gM
+fn
+gK
+gD
+fb
+fs
+fx
+gf
+fn
+eY
+fE
+ga
+hf
+eP
+ar
+ar
+dK
+"}
+(25,1,1) = {"
+ad
+cc
+ao
+ao
+cN
+iC
+cR
+bg
+ao
+ao
+ad
+et
+bB
+bB
+bB
+bB
+bB
+cZ
+ad
+ad
+aA
+aA
+aA
+aA
+ad
+ad
+dy
+dy
+ad
+ar
+ar
+bA
+bB
+eU
+eU
+fl
+eU
+eU
+eU
+fI
+fn
+Bh
+eU
+eU
+eU
+fx
+fa
+eU
+eU
+eU
+eU
+eU
+eU
+fU
+eU
+gX
+gX
+gX
+eP
+ar
+ar
+dK
+"}
+(26,1,1) = {"
+ad
+cd
+ao
+ao
+ar
+ar
+cf
+bg
+ao
+ao
+ad
+eS
+bB
+bB
+GI
+bB
+bB
+eQ
+ad
+cq
+ao
+ao
+ao
+ao
+ar
+ar
+ar
+ar
+ad
+ar
+ar
+bA
+bB
+bB
+bB
+bB
+bB
+eU
+eU
+eU
+fN
+gx
+eU
+gm
+fP
+gw
+gw
+gB
+ha
+dT
+gR
+eU
+hg
+fo
+gk
+ga
+lE
+bB
+eP
+ar
+ar
+dK
+"}
+(27,1,1) = {"
+ad
+ce
+ao
+ao
+ar
+ar
+cx
+bg
+ao
+ao
+ad
+cz
+bB
+bB
+dV
+bB
+bB
+aF
+ad
+dh
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+gT
+ar
+ar
+bA
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+eU
+fJ
+eU
+eU
+fh
+eZ
+gb
+fp
+gw
+gl
+gc
+fg
+eU
+hh
+gY
+fC
+ga
+hf
+bB
+eP
+ar
+ar
+dK
+"}
+(28,1,1) = {"
+ad
+cF
+ao
+ao
+ar
+ar
+cE
+bg
+ao
+ao
+ad
+dg
+bB
+bB
+uV
+bB
+bB
+Cz
+ad
+ab
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+gT
+ar
+ar
+bA
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+eU
+eU
+gn
+gA
+fj
+go
+gv
+gF
+gO
+gS
+eU
+hi
+fi
+gy
+ga
+hf
+bB
+eP
+ar
+ar
+dK
+"}
+(29,1,1) = {"
+ad
+cg
+ao
+ao
+iP
+dB
+cM
+bg
+ao
+ao
+ad
+bK
+bB
+bB
+ap
+bB
+bB
+Wi
+ad
+aU
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ad
+ar
+ar
+bA
+bB
+eR
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+eU
+eU
+eU
+eU
+eU
+eU
+hb
+eU
+eU
+eU
+eU
+eU
+eU
+gX
+gX
+bB
+eP
+ar
+ar
+dK
+"}
+(30,1,1) = {"
+ad
+ad
+aC
+aC
+ad
+ad
+bg
+ad
+ao
+ao
+ad
+Cc
+bB
+bB
+bB
+bB
+bB
+bP
+ad
+ar
+ar
+ar
+ba
+eO
+aG
+aV
+co
+dU
+ad
+ar
+ar
+bA
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+bB
+eP
+ar
+ar
+ad
+"}
+(31,1,1) = {"
+ah
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ad
+dx
+bB
+bB
+bB
+bB
+bB
+bB
+ad
+ad
+ad
+bF
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ar
+ar
+bp
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+hj
+dN
+ar
+ar
+ad
+"}
+(32,1,1) = {"
+ah
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ao
+ad
+aJ
+bB
+br
+ac
+fB
+yR
+cp
+ad
+eK
+nZ
+nZ
+nZ
+ad
+ew
+ew
+ew
+ew
+ad
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ad
+"}
+(33,1,1) = {"
+ad
+ad
+do
+do
+ad
+ad
+ad
+be
+be
+ad
+ad
+ad
+bT
+ad
+ad
+ad
+ad
+ad
+ad
+gZ
+nZ
+nZ
+nZ
+ad
+ew
+ew
+ew
+ew
+ad
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ad
+"}
+(34,1,1) = {"
+ad
+ae
+ao
+ao
+ad
+ar
+ar
+ar
+ar
+ar
+ad
+Cm
+nZ
+bG
+ed
+oT
+bJ
+aY
+ad
+ad
+ad
+ad
+ad
+ad
+ew
+ew
+ew
+ew
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+"}
+(35,1,1) = {"
+ad
+bR
+ao
+ao
+ad
+eb
+cB
+ar
+ar
+ar
+ad
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+ad
+qQ
+"}
+(36,1,1) = {"
+ad
+ag
+ao
+ao
+ad
+cB
+cB
+ar
+ar
+ar
+ad
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+ad
+qQ
+"}
+(37,1,1) = {"
+ad
+ad
+ad
+ad
+ad
+ad
+ar
+ar
+ar
+ar
+ad
+cs
+cs
+cs
+nZ
+cs
+cs
+cs
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+ad
+qQ
+"}
+(38,1,1) = {"
+ad
+ai
+aq
+ax
+aH
+ad
+ar
+ar
+ar
+ar
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ew
+ew
+ew
+ad
+ad
+ad
+ad
+ad
+ad
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+nZ
+ad
+qQ
+"}
+(39,1,1) = {"
+ad
+aj
+ar
+ar
+ar
+ad
+ar
+ar
+ar
+dj
+dj
+bZ
+bZ
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ad
+ew
+ew
+ew
+ew
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+"}
+(40,1,1) = {"
+ad
+ak
+ar
+ay
+ar
+aX
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ad
+"}
+(41,1,1) = {"
+ad
+al
+ar
+ar
+ar
+ad
+ar
+bs
+ar
+ar
+ar
+bs
+ar
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ad
+"}
+(42,1,1) = {"
+ad
+am
+as
+az
+aI
+ad
+bg
+bt
+bg
+ad
+bg
+bX
+bg
+ad
+ew
+ew
+ew
+ad
+ad
+ad
+ad
+ad
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ad
+"}
+(43,1,1) = {"
+ad
+ad
+ad
+ad
+ad
+ad
+bj
+ar
+bH
+ad
+bH
+ar
+bj
+ad
+ew
+ew
+ew
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ad
+"}
+(44,1,1) = {"
+ad
+ew
+ew
+ew
+ew
+ad
+bk
+ar
+bI
+ad
+bI
+ar
+bk
+ad
+ew
+ew
+ew
+ad
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ew
+ad
+"}
+(45,1,1) = {"
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+"}

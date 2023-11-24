@@ -3894,9 +3894,6 @@
 /obj/item/clothing/suit/armor/pcarrier,
 /obj/item/clothing/suit/armor/pcarrier,
 /obj/item/clothing/suit/armor/pcarrier,
-/obj/item/clothing/accessory/armguards,
-/obj/item/clothing/accessory/armguards,
-/obj/item/clothing/accessory/armguards,
 /obj/item/clothing/accessory/storage/pouches,
 /obj/item/clothing/accessory/storage/pouches,
 /obj/item/clothing/accessory/storage/pouches,
@@ -3907,6 +3904,9 @@
 /obj/item/clothing/accessory/ubac,
 /obj/item/clothing/accessory/ubac,
 /obj/item/clothing/accessory/ubac,
+/obj/item/clothing/accessory/arm_guards/tactical,
+/obj/item/clothing/accessory/arm_guards/tactical,
+/obj/item/clothing/accessory/arm_guards/tactical,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/barracks/armory)
 "LT" = (
@@ -4068,6 +4068,9 @@
 /obj/item/clothing/accessory/ubac/tan,
 /obj/item/clothing/accessory/ubac/tan,
 /obj/item/clothing/accessory/ubac/tan,
+/obj/item/clothing/accessory/arm_guards/tan,
+/obj/item/clothing/accessory/arm_guards/tan,
+/obj/item/clothing/accessory/arm_guards/tan,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/barracks/armory)
 "NV" = (
@@ -4253,6 +4256,9 @@
 /obj/item/clothing/accessory/ubac/green,
 /obj/item/clothing/accessory/ubac/green,
 /obj/item/clothing/accessory/ubac/green,
+/obj/item/clothing/accessory/arm_guards/green,
+/obj/item/clothing/accessory/arm_guards/green,
+/obj/item/clothing/accessory/arm_guards/green,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/barracks/armory)
 "Qk" = (
