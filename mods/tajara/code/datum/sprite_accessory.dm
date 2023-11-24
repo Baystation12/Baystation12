@@ -191,29 +191,29 @@
 
 // FACIAL
 
-/datum/sprite_accessory/facial_hair/taj
+/datum/sprite_accessory/facial_hair/species_tajara
 	name = "Tajara Sideburns"
 	icon_state = "facial_sideburns"
 	species_allowed = list(SPECIES_TAJARA)
 	icon = 'mods/tajara/icons/tajara_body/sprite_accessory/facial.dmi'
 
-/datum/sprite_accessory/facial_hair/taj/mutton
+/datum/sprite_accessory/facial_hair/species_tajara/mutton
 	name = "Tajara Mutton"
 	icon_state = "facial_mutton"
 
-/datum/sprite_accessory/facial_hair/taj/pencilstache
+/datum/sprite_accessory/facial_hair/species_tajara/pencilstache
 	name = "Tajara Pencilstache"
 	icon_state = "facial_pencilstache"
 
-/datum/sprite_accessory/facial_hair/taj/moustache
+/datum/sprite_accessory/facial_hair/species_tajara/moustache
 	name = "Tajara Moustache"
 	icon_state = "facial_moustache"
 
-/datum/sprite_accessory/facial_hair/taj/goatee
+/datum/sprite_accessory/facial_hair/species_tajara/goatee
 	name = "Tajara Goatee"
 	icon_state = "facial_goatee"
 
-/datum/sprite_accessory/facial_hair/taj/smallstache
+/datum/sprite_accessory/facial_hair/species_tajara/smallstache
 	name = "Tajara Smallsatche"
 	icon_state = "facial_smallstache"
 
