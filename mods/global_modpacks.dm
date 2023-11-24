@@ -8,6 +8,7 @@
 #include "expanded_culture_descriptor/_expanded_culture_descriptor.dme"
 #include "gliding/_gliding.dme"
 #include "gravity_generator/_gravity_generator.dme"
+#include "hairs_ports/_hairs_ports.dme"
 #include "sprite_accessories/_sprite_accessories.dme"
 #include "jukebox_tapes/_jukebox_tapes.dme"
 #include "lobbyscreen/_lobbyscreen.dme"
@@ -16,5 +17,6 @@
 #include "ssinput/_ssinput.dme"
 #include "statusbar/_statusbar.dme"
 #include "utf8/_utf8.dme"
+
 
 #include "../packs/sierra-tweaks/_pack.dm"
