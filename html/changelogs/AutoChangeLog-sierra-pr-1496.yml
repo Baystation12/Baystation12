@@ -1,0 +1,4 @@
+author: UEDHighCommand
+changes:
+  - {imageadd: Добавлены недостающие спрайты Facial hair для унати}
+delete-after: true
