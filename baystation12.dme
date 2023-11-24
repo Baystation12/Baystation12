@@ -88,6 +88,7 @@
 #include "code\__defines\xenoarcheaology.dm"
 #include "code\__defines\ZAS.dm"
 #include "code\__defines\zmimic.dm"
+#include "code\__defines\~mods\rust_g.dm"
 #include "code\__defines\~mods\expanded_culture_descriptor.dm"
 #include "code\__defines\~mods\~master_defines.dm"
 #include "code\_global_vars\edible.dm"

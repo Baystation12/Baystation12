@@ -11,6 +11,8 @@ env:
   BYOND_MAJOR: "514"
   BYOND_MINOR: "1589"
   SPACEMAN_DMM_VERSION: suite-1.7.3
+  RUST_G_REPO: "ss220-space/rust-g-tg"
+  RUST_G_VERSION: "2.0.0-ss220"
 
 jobs:
   PreFlight:
@@ -94,6 +96,16 @@ jobs:
         with:
           path: ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
+      - name: Install rust_g dependencies
+        run: ./scripts/install-rust_g-dependencies.sh
+      - name: Setup rust_g cache
+        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
+        with:
+          path: ~/.byond/bin/librust_g.so
+          key: "rust_g-${{ env.RUST_G_REPO }}-${{ env.RUST_G_VERSION }}"
+      - name: Install rust_g
+        if: steps.Setup-rust_g-cache.outputs.cache-hit != 'true'
+        run: ./scripts/install-rust_g.sh
       - name: Run Tests
         env:
           TEST: MAP
@@ -123,6 +135,16 @@ jobs:
         with:
           path: ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
+      - name: Install rust_g dependencies
+        run: ./scripts/install-rust_g-dependencies.sh
+      - name: Setup rust_g cache
+        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
+        with:
+          path: ~/.byond/bin/librust_g.so
+          key: "rust_g-${{ env.RUST_G_REPO }}-${{ env.RUST_G_VERSION }}"
+      - name: Install rust_g
+        if: steps.Setup-rust_g-cache.outputs.cache-hit != 'true'
+        run: ./scripts/install-rust_g.sh
       - name: Run Tests
         env:
           TEST: MAP
@@ -152,6 +174,16 @@ jobs:
         with:
           path: ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
+      - name: Install rust_g dependencies
+        run: ./scripts/install-rust_g-dependencies.sh
+      - name: Setup rust_g cache
+        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
+        with:
+          path: ~/.byond/bin/librust_g.so
+          key: "rust_g-${{ env.RUST_G_REPO }}-${{ env.RUST_G_VERSION }}"
+      - name: Install rust_g
+        if: steps.Setup-rust_g-cache.outputs.cache-hit != 'true'
+        run: ./scripts/install-rust_g.sh
       - name: Run Tests
         env:
           TEST: MAP

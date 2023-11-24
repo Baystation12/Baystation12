@@ -66,8 +66,12 @@ var/global/datum/controller/master/Master = new
 
 /datum/controller/master/New()
 	Uptime() //Uptime as close to boot as possible to set its statics
+	// [SIERRA-REMOVE] - RUST_G
+	/*
 	if (!global.diary)
 		global.diary = file("data/logs/[time2text(world.timeofday, "YYYY/MM/DD", -world.timezone)].log")
+	*/
+	// [/SIERRA-REMOVE]
 	if (!config)
 		config = new
 	total_run_times = list()

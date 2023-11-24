@@ -65,8 +65,11 @@ SUBSYSTEM_DEF(garbage)
 			qdel_log += "\tSleeps: [details.slept_destroy]"
 		if (details.no_hint)
 			qdel_log += "\tNo hint: [details.no_hint] times"
-	var/log_file = file("[GLOB.log_directory]/qdel.log")
-	to_file(log_file, jointext(qdel_log, "\n"))
+	// [SIERRA-EDIT] - RUST_G
+	// var/log_file = file("[GLOB.log_directory]/qdel.log") // SIERRA-EDIT - ORIGINAL
+	// to_file(log_file, jointext(qdel_log, "\n")) // SIERRA-EDIT - ORIGINAL
+	rustg_log_write_formatted("[GLOB.log_directory]/qdel.log", jointext(qdel_log, "\n"))
+	// [/SIERRA-EDIT]
 
 
 /datum/controller/subsystem/garbage/Initialize(start_uptime)
