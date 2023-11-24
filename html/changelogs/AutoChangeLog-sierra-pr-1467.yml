@@ -1,0 +1,4 @@
+author: SuhEugene
+changes:
+  - {tweak: 'Ускорил логгирование в файл. Не знаю станет ли играться плавнее, но должно.'}
+delete-after: true
