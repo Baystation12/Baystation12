@@ -1,5 +1,0 @@
-author: Qlonever
-changes:
-  - {bugfix: Rescuscitating an asystolic suffocation victim won't cause their oxygenation
-      to plummet.}
-delete-after: true

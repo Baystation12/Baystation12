@@ -1,5 +1,0 @@
-author: SierraKomodo
-changes:
-  - {bugfix: Merchant traders should no longer include invalid/inaccessible abstract
-      types in their pools.}
-delete-after: true

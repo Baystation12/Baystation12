@@ -1,6 +1,0 @@
-author: TheNightingale
-changes:
-  - {tweak: All belts can now hold PDAs and tablets.}
-  - {tweak: Medical belts can hold IV bags and medical tape.}
-  - {tweak: 'Forensics belts can now hold security tape, glasses, flashes and pepperspray.'}
-delete-after: true
