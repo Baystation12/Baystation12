@@ -1,6 +1,0 @@
-author: Kam_Survivor
-changes:
-  - {bugfix: Фиксит репорты по пропавшим прическам}
-  - {rscadd: Пара десятков "новых" причесок с соседних билдов}
-  - {imageadd: Спрайты причесок}
-delete-after: true
