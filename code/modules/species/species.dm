@@ -330,6 +330,11 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		else if(!LAZYLEN(available_cultural_info[token]))
 			var/list/map_systems = GLOB.using_map.available_cultural_info[token]
 			available_cultural_info[token] = map_systems.Copy()
+			
+		// [SIERRA-ADD] - EXPANDED_CULTURE_DESCRIPTOR - Вносит культуры из мода в список культур после всех возможных альтераций, чтобы предотвратить конфликты при добавлении оффами новых культур
+		if(extended_cultural_info[token])
+			available_cultural_info[token] |= extended_cultural_info[token]
+		// [/SIERRA-ADD]
 
 		if(LAZYLEN(available_cultural_info[token]) && !default_cultural_info[token])
 			var/list/avail_systems = available_cultural_info[token]

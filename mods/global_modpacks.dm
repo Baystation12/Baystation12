@@ -5,6 +5,7 @@
 #include "eris_announcer/_eris_announcer.dme"
 #include "emote_panel/_emote_panel.dme"
 #include "ex666_ecosystem/_ex666_ecosystem.dme"
+#include "expanded_culture_descriptor/_expanded_culture_descriptor.dme"
 #include "gliding/_gliding.dme"
 #include "gravity_generator/_gravity_generator.dme"
 #include "sprite_accessories/_sprite_accessories.dme"

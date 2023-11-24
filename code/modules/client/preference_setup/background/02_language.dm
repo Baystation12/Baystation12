@@ -20,13 +20,19 @@
 
 /datum/category_item/player_setup_item/background/languages/content()
 	. = list()
-	. += "<b>Languages</b><br>"
+	// [SIERRA-EDIT] - EXPANDED_CULTURE_DESCRIPTOR - Перевод
+	// . += "<b>Languages</b><br>" // SIERRA-EDIT - ORIGINAL
+	. += "<b>Языки</b><br>"
+	// [/SIERRA-EDIT]
 	var/list/show_langs = get_language_text()
 	if(LAZYLEN(show_langs))
 		for(var/lang in show_langs)
 			. += lang
 	else
-		. += "Your current species, faction or home system selection does not allow you to choose additional languages.<br>"
+		// [SIERRA-EDIT] - EXPANDED_CULTURE_DESCRIPTOR - Перевод
+		// . += "Your current species, faction or home system selection does not allow you to choose additional languages.<br>" // SIERRA-EDIT - ORIGINAL
+		. += "Ваша фракция, раса или место проживания не позволяют вам выбрать дополнительные языки.<br>"
+		// [/SIERRA-EDIT]
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/background/languages/OnTopic(href,list/href_list, mob/user)
@@ -39,15 +45,24 @@
 	else if(href_list["add_language"])
 
 		if(length(pref.alternate_languages) >= MAX_LANGUAGES)
-			alert(user, "You have already selected the maximum number of languages!")
+			// [SIERRA-EDIT] - EXPANDED_CULTURE_DESCRIPTOR - Перевод
+			// alert(user, "You have already selected the maximum number of languages!") // SIERRA-EDIT - ORIGINAL
+			alert(user, "Вы уже выбрали максимальное количество языков!")
+			// [/SIERRA-EDIT]
 			return
 
 		sanitize_alt_languages()
 		var/list/available_languages = allowed_languages - free_languages
 		if(!LAZYLEN(available_languages))
-			alert(user, "There are no additional languages available to select.")
+			// [SIERRA-EDIT] - EXPANDED_CULTURE_DESCRIPTOR - Перевод
+			// alert(user, "There are no additional languages available to select.") // SIERRA-EDIT - ORIGINAL
+			alert(user, "Вы уже выбрали все доступные языки.")
+			// [/SIERRA-EDIT]
 		else
-			var/new_lang = input(user, "Select an additional language", "Character Generation", null) as null|anything in available_languages
+			// [SIERRA-EDIT] - EXPANDED_CULTURE_DESCRIPTOR - Перевод
+			// var/new_lang = input(user, "Select an additional language", "Character Generation", null) as null|anything in available_languages // SIERRA-EDIT - ORIGINAL
+			var/new_lang = input(user, "Выберите дополнительный язык", "Character Generation", null) as null|anything in available_languages
+			// [/SIERRA-EDIT]
 			if(new_lang)
 				pref.alternate_languages |= new_lang
 				return TOPIC_REFRESH
@@ -109,9 +124,18 @@
 		for(var/i = 1 to length(pref.alternate_languages))
 			var/lang = pref.alternate_languages[i]
 			if(free_languages[lang])
-				LAZYADD(., "- [lang] (required).<br>")
+				// [SIERRA-EDIT] - EXPANDED_CULTURE_DESCRIPTOR - Перевод
+				// LAZYADD(., "- [lang] (required).<br>") // SIERRA-EDIT - ORIGINAL
+				LAZYADD(., "- [lang] (обязательный).<br>")
+				// [/SIERRA-EDIT]
 			else
-				LAZYADD(., "- [lang] <a href='?src=\ref[src];remove_language=[i]'>Remove.</a> <span style='color:#ff0000;font-style:italic;'>[all_languages[lang].warning]</span><br>")
+				// [SIERRA-EDIT] - EXPANDED_CULTURE_DESCRIPTOR - Перевод
+				// LAZYADD(., "- [lang] <a href='?src=\ref[src];remove_language=[i]'>Remove.</a> <span style='color:#ff0000;font-style:italic;'>[all_languages[lang].warning]</span><br>") // SIERRA-EDIT - ORIGINAL
+				LAZYADD(., "- [lang] <a href='?src=\ref[src];remove_language=[i]'>Убрать.</a> <span style='color:#ff0000;font-style:italic;'>[all_languages[lang].warning]</span><br>")
+				// [/SIERRA-EDIT]
 	if(length(pref.alternate_languages) < MAX_LANGUAGES)
 		var/remaining_langs = MAX_LANGUAGES - length(pref.alternate_languages)
-		LAZYADD(., "- <a href='?src=\ref[src];add_language=1'>add</a> ([remaining_langs] remaining)<br>")
+		// [SIERRA-EDIT] - EXPANDED_CULTURE_DESCRIPTOR - Перевод
+		// LAZYADD(., "- <a href='?src=\ref[src];add_language=1'>add</a> ([remaining_langs] remaining)<br>") // SIERRA-EDIT - ORIGINAL
+		LAZYADD(., "- <a href='?src=\ref[src];add_language=1'>Добавить</a> ([remaining_langs] осталось)<br>")
+		// [/SIERRA-EDIT]

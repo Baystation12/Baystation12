@@ -56,8 +56,12 @@
 	. = list()
 	for(var/token in tokens)
 		var/singleton/cultural_info/culture = SSculture.get_culture(pref.cultural_info[token])
-		var/title = "<a href='?src=\ref[src];expand_options_[token]=1'>[tokens[token]]</a><b>- </b>[pref.cultural_info[token]]"
-		var/append_text = "<a href='?src=\ref[src];toggle_verbose_[token]=1'>[hidden[token] ? "Expand" : "Collapse"]</a>"
+		// [SIERRA-EDIT] - EXPANDED_CULTURE_DESCRIPTOR - Сокращение html-строки для нормальной работы переопределения get_description; перевод буков
+		// var/title = "<a href='?src=\ref[src];expand_options_[token]=1'>[tokens[token]]</a><b>- </b>[pref.cultural_info[token]]" // SIERRA-EDIT - ORIGINAL
+		// var/append_text = "<a href='?src=\ref[src];toggle_verbose_[token]=1'>[hidden[token] ? "Expand" : "Collapse"]</a>" // SIERRA-EDIT - ORIGINAL
+		var/title = "<a href='?src=\ref[src];expand_options_[token]=1'>[tokens[token]]</a><b>- </b>"
+		var/append_text = "<a href='?src=\ref[src];toggle_verbose_[token]=1'>[hidden[token] ? "Расширить" : "Скрыть"]</a>"
+		// [SIERRA-EDIT]
 		. += culture.get_description(title, append_text, verbose = !hidden[token])
 		if (expanded[token])
 			var/list/valid_values
@@ -70,11 +74,19 @@
 				// html_encode() doesn't properly sanitize + symbols, otherwise we could just use that
 				// instead, we manually rip out the plus symbol and then replace it on OnTopic
 				var/sanitized_value = html_encode(replacetext(V, "+", "PLUS"))
-
-				if (pref.cultural_info[token] == V)
-					. += "[SPAN_CLASS("linkOn", "[V]")] "
-				else
-					. += "<a href='?src=\ref[src];set_token_entry_[token]=[sanitized_value]'>[V]</a> "
+				
+				// [SIERRA-EDIT] - EXPANDED_CULTURE_DESCRIPTOR - Изменение схемы получения названия культуры, чтобы поддерживать возможность их перевода без переработки всей сабсистемы культур
+				// if (pref.cultural_info[token] == V) // SIERRA-EDIT - ORIGINAL
+				// 	. += "[SPAN_CLASS("linkOn", "[V]")] " // SIERRA-EDIT - ORIGINAL
+				// else // SIERRA-EDIT - ORIGINAL
+				// 	. += "<a href='?src=\ref[src];set_token_entry_[token]=[sanitized_value]'>[V]</a> " // SIERRA-EDIT - ORIGINAL
+				var/singleton/cultural_info/VCulture = SSculture.get_culture(V)
+				if(VCulture)
+					if (pref.cultural_info[token] == V)
+						. += "[SPAN_CLASS("linkOn", "[VCulture.get_nickname()]")] "
+					else
+						. += "<a href='?src=\ref[src];set_token_entry_[token]=[sanitized_value]'>[VCulture.get_nickname()]</a> "
+				// [SIERRA-EDIT]
 			. += "</table>"
 		. += "<hr>"
 	. = jointext(.,null)

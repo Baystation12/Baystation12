@@ -1,0 +1,5 @@
+/datum/language/human/euro/New()
+	. = ..()
+	partial_understanding += list(LANGUAGE_HUMAN_AVALON = 35)
+	partial_understanding += list(LANGUAGE_HUMAN_MIRANIAN = 30)
+	partial_understanding += list(LANGUAGE_HUMAN_LORRIMAN = 75)
