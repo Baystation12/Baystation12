@@ -13,8 +13,7 @@
 /obj/structure/cart/Move()
 	. = ..()
 	if(load && !istype(load, /datum/vehicle_dummy_load))
-		// SIERRA TODO: Wait till SSInput
-		// load.set_glide_size(src.glide_size)
+		load.set_glide_size(src.glide_size)
 		load.forceMove(src.loc)
 		var/todir = src.dir
 		if(istype(load, /obj/structure/closet/crate))
