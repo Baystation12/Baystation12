@@ -4,10 +4,6 @@
 	else
 		glide_size = max(min, glide_size_override)
 
-	for (var/atom/movable/AM in contents)
-		AM.set_glide_size(glide_size, min, max)
-
-
 /proc/step_glide(atom/movable/am, dir, glide_size_override)
 	am.set_glide_size(glide_size_override)
 	return step(am, dir)
