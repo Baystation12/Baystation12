@@ -43,7 +43,8 @@
 		access_expedition_shuttle,
 		access_expedition_shuttle_helm,
 		access_guppy,
-		access_hangar
+		access_hangar,
+		access_research
 	)
 	software_on_spawn = list(
 		/datum/computer_file/program/deck_management,
@@ -102,7 +103,8 @@
 		access_guppy_helm,
 		access_expedition_shuttle,
 		access_guppy,
-		access_hangar
+		access_hangar,
+		access_research
 	)
 	software_on_spawn = list(/datum/computer_file/program/deck_management)
 
@@ -158,7 +160,8 @@
 		access_expedition_shuttle,
 		access_guppy,
 		access_hangar,
-		access_expedition_shuttle_helm
+		access_expedition_shuttle_helm,
+		access_research
 	)
 	software_on_spawn = list(/datum/computer_file/program/deck_management)
 
@@ -212,7 +215,8 @@
 		access_guppy_helm,
 		access_expedition_shuttle,
 		access_guppy,
-		access_hangar
+		access_hangar,
+		access_research
 	)
 	software_on_spawn = list(/datum/computer_file/program/deck_management)
 
@@ -277,7 +281,8 @@
 		access_guppy_helm,
 		access_expedition_shuttle,
 		access_guppy,
-		access_hangar
+		access_hangar,
+		access_research
 	)
 	software_on_spawn = list(/datum/computer_file/program/deck_management)
 

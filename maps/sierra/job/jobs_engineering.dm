@@ -184,7 +184,7 @@
 	max_skill = list(   SKILL_ELECTRICAL   = SKILL_MAX,
 	                    SKILL_COMPUTER	   = SKILL_MAX)
 
-	access = list(	access_maint_tunnels, access_network,
+	access = list(	access_maint_tunnels, access_network, access_external_airlocks,
 			       	access_tech_storage, access_emergency_storage, access_tcomsat)
 
 

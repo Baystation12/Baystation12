@@ -5325,8 +5325,11 @@
 	},
 /area/centcom/holding)
 "aQf" = (
-/obj/floor_decal/spline/fancy/wood,
-/turf/simulated/floor/holofloor/wood,
+/obj/floor_decal/carpet{
+	dir = 4
+	},
+/obj/structure/holostool,
+/turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)
 "aQj" = (
 /obj/decal/cleanable/filth,
@@ -5467,9 +5470,11 @@
 	},
 /area/centcom/living)
 "aSi" = (
-/obj/structure/table/holo_woodentable,
-/obj/floor_decal/spline/fancy/wood,
-/turf/simulated/floor/holofloor/wood,
+/obj/floor_decal/carpet{
+	dir = 8
+	},
+/obj/structure/holostool,
+/turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)
 "aSq" = (
 /obj/floor_decal/spline/fancy/wood{
@@ -5513,25 +5518,16 @@
 /area/holodeck/source_meetinghall)
 "aSG" = (
 /obj/floor_decal/spline/fancy/wood{
-	dir = 1
+	dir = 4
 	},
-/turf/simulated/floor/holofloor/tiled/dark,
+/turf/simulated/floor/holofloor/lino,
 /area/holodeck/source_meetinghall)
 "aSH" = (
-/obj/floor_decal/carpet{
-	dir = 5
+/obj/floor_decal/spline/plain{
+	dir = 1
 	},
-/obj/floor_decal/carpet{
-	dir = 6
-	},
-/obj/floor_decal/carpet{
-	dir = 9
-	},
-/obj/floor_decal/carpet{
-	dir = 10
-	},
-/turf/simulated/floor/holofloor/carpet,
-/area/holodeck/source_meetinghall)
+/turf/simulated/floor/holofloor/tiled,
+/area/space)
 "aSI" = (
 /turf/unsimulated/floor/techfloor,
 /area/centcom)
@@ -5618,37 +5614,19 @@
 /turf/simulated/floor/exoplanet/concrete,
 /area/holodeck/source_military)
 "aSX" = (
-/obj/structure/holostool,
-/obj/floor_decal/carpet{
+/turf/simulated/floor/holofloor/tiled,
+/area/space)
+"aSZ" = (
+/obj/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
-/obj/floor_decal/carpet{
-	dir = 1
-	},
-/obj/floor_decal/carpet{
-	dir = 9
-	},
-/turf/simulated/floor/holofloor/carpet,
-/area/holodeck/source_meetinghall)
-"aSZ" = (
-/obj/structure/holostool,
-/obj/floor_decal/carpet{
-	dir = 1
-	},
-/turf/simulated/floor/holofloor/carpet,
+/turf/simulated/floor/holofloor/lino,
 /area/holodeck/source_meetinghall)
 "aTa" = (
-/obj/structure/holostool,
-/obj/floor_decal/carpet{
-	dir = 4
+/obj/floor_decal/spline/fancy/wood{
+	dir = 9
 	},
-/obj/floor_decal/carpet{
-	dir = 1
-	},
-/obj/floor_decal/carpet{
-	dir = 5
-	},
-/turf/simulated/floor/holofloor/carpet,
+/turf/simulated/floor/holofloor/lino,
 /area/holodeck/source_meetinghall)
 "aTB" = (
 /obj/floor_decal/spline/plain/grey{
@@ -6160,27 +6138,12 @@
 /turf/simulated/floor/holofloor/grass,
 /area/holodeck/source_picnicarea)
 "aYS" = (
-/obj/floor_decal/spline/plain{
-	dir = 1
-	},
-/turf/simulated/floor/holofloor/tiled,
-/area/holodeck/source_theatre)
-"aYT" = (
-/obj/floor_decal/carpet{
-	dir = 8
-	},
 /obj/floor_decal/carpet{
 	dir = 4
 	},
-/obj/floor_decal/carpet{
-	dir = 1
-	},
-/obj/floor_decal/carpet{
-	dir = 5
-	},
-/obj/floor_decal/carpet{
-	dir = 9
-	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/source_theatre)
+"aYT" = (
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_theatre)
 "aYU" = (
@@ -6282,6 +6245,7 @@
 /obj/floor_decal/carpet{
 	dir = 1
 	},
+/obj/structure/holostool,
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_theatre)
 "aZA" = (
@@ -6297,13 +6261,10 @@
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_theatre)
 "aZB" = (
-/obj/floor_decal/carpet{
-	dir = 8
+/obj/structure/window/reinforced/holowindow{
+	dir = 1
 	},
-/obj/floor_decal/carpet{
-	dir = 4
-	},
-/turf/simulated/floor/holofloor/carpet,
+/turf/simulated/floor/holofloor/tiled/dark,
 /area/holodeck/source_theatre)
 "aZC" = (
 /obj/floor_decal/carpet{
@@ -6543,21 +6504,8 @@
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_theatre)
 "bbH" = (
-/obj/floor_decal/carpet{
-	dir = 8
-	},
-/obj/floor_decal/carpet{
-	dir = 4
-	},
-/obj/floor_decal/carpet,
-/obj/floor_decal/carpet{
-	dir = 6
-	},
-/obj/floor_decal/carpet{
-	dir = 10
-	},
-/turf/simulated/floor/holofloor/carpet,
-/area/holodeck/source_theatre)
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/space)
 "bbI" = (
 /obj/structure/bed/chair/holochair{
 	dir = 8
@@ -6613,20 +6561,11 @@
 /turf/simulated/floor/holofloor/tiled,
 /area/holodeck/source_theatre)
 "bce" = (
-/obj/floor_decal/carpet{
-	dir = 5
-	},
-/obj/floor_decal/carpet{
-	dir = 6
-	},
-/obj/floor_decal/carpet{
+/obj/floor_decal/spline/fancy/wood{
 	dir = 10
 	},
-/obj/floor_decal/carpet{
-	dir = 9
-	},
-/turf/simulated/floor/holofloor/carpet,
-/area/holodeck/source_theatre)
+/turf/simulated/floor/holofloor/lino,
+/area/holodeck/source_meetinghall)
 "bcf" = (
 /obj/structure/bed/chair/holochair{
 	dir = 1
@@ -6859,42 +6798,32 @@
 /turf/simulated/floor/holofloor/snow,
 /area/holodeck/source_snowfield)
 "bdJ" = (
+/obj/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/obj/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/lino,
+/area/holodeck/source_meetinghall)
+"bdK" = (
 /obj/floor_decal/carpet{
 	dir = 8
 	},
-/obj/floor_decal/carpet,
 /obj/floor_decal/carpet{
 	dir = 1
 	},
 /obj/floor_decal/carpet{
 	dir = 9
 	},
-/obj/floor_decal/carpet{
-	dir = 10
-	},
-/turf/simulated/floor/holofloor/carpet,
-/area/holodeck/source_meetinghall)
-"bdK" = (
-/obj/floor_decal/carpet,
-/obj/floor_decal/carpet{
-	dir = 1
-	},
+/obj/structure/holostool,
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)
 "bdL" = (
 /obj/floor_decal/carpet{
-	dir = 4
-	},
-/obj/floor_decal/carpet,
-/obj/floor_decal/carpet{
 	dir = 1
 	},
-/obj/floor_decal/carpet{
-	dir = 5
-	},
-/obj/floor_decal/carpet{
-	dir = 6
-	},
+/obj/structure/holostool,
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)
 "bdM" = (
@@ -7077,6 +7006,7 @@
 /turf/simulated/floor/holofloor/snow,
 /area/holodeck/source_snowfield)
 "beW" = (
+/obj/floor_decal/spline/fancy/wood,
 /turf/simulated/floor/holofloor/lino,
 /area/holodeck/source_meetinghall)
 "beX" = (
@@ -7257,21 +7187,16 @@
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_cafe)
 "bgu" = (
-/obj/structure/holostool,
-/obj/floor_decal/carpet{
-	dir = 8
-	},
-/turf/simulated/floor/holofloor/carpet,
+/obj/floor_decal/stairs,
+/turf/simulated/floor/holofloor/wood,
 /area/holodeck/source_meetinghall)
 "bgv" = (
 /obj/structure/holostool,
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)
 "bgw" = (
+/obj/floor_decal/carpet,
 /obj/structure/holostool,
-/obj/floor_decal/carpet{
-	dir = 4
-	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)
 "bgx" = (
@@ -7426,13 +7351,11 @@
 /turf/simulated/floor/holofloor/snow,
 /area/holodeck/source_snowfield)
 "bhu" = (
-/obj/structure/holostool,
-/obj/floor_decal/carpet{
-	dir = 4
+/obj/structure/table/holo_woodentable,
+/obj/floor_decal/spline/fancy/wood{
+	dir = 1
 	},
-/turf/simulated/floor/holofloor/carpet{
-	dir = 8
-	},
+/turf/simulated/floor/holofloor/wood,
 /area/holodeck/source_meetinghall)
 "bhv" = (
 /obj/machinery/door/window/holowindoor{
@@ -7482,28 +7405,34 @@
 /area/holodeck/source_boxingcourt)
 "bhQ" = (
 /obj/structure/holostool,
+/obj/floor_decal/carpet,
 /obj/floor_decal/carpet{
 	dir = 8
 	},
-/obj/floor_decal/carpet,
+/obj/floor_decal/carpet{
+	dir = 1
+	},
 /obj/floor_decal/carpet{
 	dir = 10
+	},
+/obj/floor_decal/carpet{
+	dir = 9
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)
 "bhR" = (
 /obj/structure/holostool,
 /obj/floor_decal/carpet,
+/obj/floor_decal/carpet{
+	dir = 1
+	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)
 "bhS" = (
-/obj/structure/holostool,
 /obj/floor_decal/carpet,
+/obj/structure/holostool,
 /obj/floor_decal/carpet{
-	dir = 4
-	},
-/obj/floor_decal/carpet{
-	dir = 6
+	dir = 1
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_meetinghall)
@@ -8141,6 +8070,15 @@
 	icon_state = "techfloor_grid"
 	},
 /area/centcom/iccgn)
+"cdB" = (
+/obj/floor_decal/spline/fancy/wood{
+	dir = 1
+	},
+/obj/structure/window/reinforced/holowindow{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/source_meetinghall)
 "ceK" = (
 /obj/structure/table/standard,
 /obj/floor_decal/corner/paleblue{
@@ -8160,6 +8098,17 @@
 /obj/paint_stripe/red,
 /turf/simulated/wall/r_titanium,
 /area/shuttle/transport1/centcom)
+"che" = (
+/obj/floor_decal/carpet{
+	dir = 4
+	},
+/obj/floor_decal/carpet,
+/obj/floor_decal/carpet{
+	dir = 6
+	},
+/obj/structure/holostool,
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/source_meetinghall)
 "cjY" = (
 /obj/floor_decal/borderfloor/corner{
 	dir = 8
@@ -8320,6 +8269,19 @@
 	icon = 'icons/turf/flooring/grass.dmi'
 	},
 /area/centcom)
+"cGp" = (
+/obj/floor_decal/carpet{
+	dir = 4
+	},
+/obj/floor_decal/carpet{
+	dir = 1
+	},
+/obj/floor_decal/carpet{
+	dir = 5
+	},
+/obj/structure/holostool,
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/source_meetinghall)
 "cHb" = (
 /obj/structure/flora/pottedplant/floorleaf,
 /obj/floor_decal/corner/black/mono,
@@ -10603,6 +10565,15 @@
 	icon_state = "vault"
 	},
 /area/tdome/testing)
+"gZH" = (
+/obj/structure/flora/pottedplant{
+	icon_state = "plant-06"
+	},
+/obj/floor_decal/spline/fancy/wood{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/lino,
+/area/holodeck/source_meetinghall)
 "hbe" = (
 /obj/floor_decal/spline/fancy/wood{
 	dir = 9
@@ -12446,6 +12417,12 @@
 	icon_state = "techfloor_grid"
 	},
 /area/centcom/iccgn)
+"kFk" = (
+/obj/floor_decal/spline/fancy/wood{
+	dir = 6
+	},
+/turf/simulated/floor/holofloor/lino,
+/area/holodeck/source_meetinghall)
 "kFF" = (
 /obj/structure/table/rack/dark,
 /obj/floor_decal/industrial/outline/grey,
@@ -12457,6 +12434,17 @@
 /obj/item/stack/tile/carpetblue/fifty,
 /turf/unsimulated/floor/techfloor,
 /area/centcom/holding)
+"kGv" = (
+/obj/floor_decal/carpet{
+	dir = 8
+	},
+/obj/floor_decal/carpet,
+/obj/floor_decal/carpet{
+	dir = 10
+	},
+/obj/structure/holostool,
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/source_meetinghall)
 "kHi" = (
 /obj/structure/closet/medical_wall{
 	pixel_y = 32
@@ -12900,6 +12888,12 @@
 	icon = 'icons/turf/flooring/tiles.dmi'
 	},
 /area/centcom/iccgn)
+"lcr" = (
+/obj/floor_decal/carpet{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/source_theatre)
 "lcM" = (
 /obj/floor_decal/spline/fancy/wood{
 	dir = 4
@@ -13238,6 +13232,19 @@
 /obj/decal/cleanable/filth,
 /turf/unsimulated/floor/techfloor,
 /area/centcom/control)
+"lKG" = (
+/obj/floor_decal/carpet{
+	dir = 8
+	},
+/obj/floor_decal/carpet{
+	dir = 1
+	},
+/obj/floor_decal/carpet{
+	dir = 9
+	},
+/obj/structure/holostool,
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/source_theatre)
 "lLo" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/red,
@@ -13293,6 +13300,15 @@
 	name = "carpet"
 	},
 /area/centcom/living)
+"lRl" = (
+/obj/structure/window/reinforced/holowindow{
+	dir = 1
+	},
+/obj/structure/window/reinforced/holowindow{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/source_theatre)
 "lUz" = (
 /obj/floor_decal/borderfloorblack{
 	dir = 1
@@ -13973,6 +13989,19 @@
 /obj/item/stack/cable_coil/yellow,
 /turf/simulated/floor,
 /area/tdome/testing/engineering)
+"nzP" = (
+/obj/floor_decal/carpet{
+	dir = 4
+	},
+/obj/floor_decal/carpet{
+	dir = 1
+	},
+/obj/floor_decal/carpet{
+	dir = 5
+	},
+/obj/structure/holostool,
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/source_theatre)
 "nAl" = (
 /obj/floor_decal/borderfloorwhite{
 	dir = 8
@@ -16150,6 +16179,10 @@
 	name = "carpet"
 	},
 /area/centcom/living)
+"rut" = (
+/obj/floor_decal/stairs,
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/source_theatre)
 "rva" = (
 /obj/floor_decal/industrial/warning{
 	dir = 8
@@ -16162,6 +16195,24 @@
 	icon_state = "steel"
 	},
 /area/centcom)
+"rwD" = (
+/obj/floor_decal/carpet,
+/obj/floor_decal/carpet{
+	dir = 4
+	},
+/obj/floor_decal/carpet{
+	dir = 6
+	},
+/obj/structure/holostool,
+/obj/structure/holostool,
+/obj/floor_decal/carpet{
+	dir = 1
+	},
+/obj/floor_decal/carpet{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/source_meetinghall)
 "rwG" = (
 /obj/floor_decal/corner/red/diagonal,
 /obj/floor_decal/borderfloorblack{
@@ -16390,6 +16441,18 @@
 	icon_state = "dark"
 	},
 /area/centcom/specops)
+"rVo" = (
+/obj/floor_decal/spline/fancy/wood{
+	dir = 1
+	},
+/obj/structure/window/reinforced/holowindow{
+	dir = 1
+	},
+/obj/structure/window/reinforced/holowindow{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/source_meetinghall)
 "rWr" = (
 /obj/structure/table/woodentable/walnut,
 /obj/floor_decal/carpet{
@@ -17151,6 +17214,12 @@
 	icon = 'icons/turf/flooring/tiles.dmi'
 	},
 /area/centcom)
+"tmt" = (
+/obj/structure/flora/pottedplant{
+	icon_state = "plant-06"
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/space)
 "tnR" = (
 /obj/structure/bed/chair/wood/wings/walnut{
 	dir = 8;
@@ -26684,38 +26753,38 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+bbH
+bbH
+aSH
+aSX
+aSX
+aSX
+aSX
+aSX
+tmt
 aab
 asI
+aZy
+lcr
+lcr
+lcr
+lcr
+lcr
+aYT
+rut
+aXC
 aWW
-aXC
-aXC
-aYS
-aZx
-aZx
-aZx
-aZx
-aZx
-bcd
 aWd
+beX
+beX
+beX
+beX
+beX
+beX
+beX
+bgu
 bda
-bda
-aQf
-aSE
-aSH
-aSH
-beW
-beW
-beW
-beW
+bdb
 aWe
 "}
 (36,1,1) = {"
@@ -26886,38 +26955,38 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+bbH
+bbH
+aSH
+aSX
+aSX
+aSX
+aSX
+aSX
+aSX
 aab
 asI
-aWW
-aXC
-aXC
+aZA
 aYS
-aZx
-aZx
-aZx
-aZx
-aZx
-aZx
+aYS
+aYS
+aYS
+aYS
+aYT
+rut
+aXC
+aWW
 aWd
+beX
+beX
+beX
+beX
+beX
+beX
+beX
+bgu
 bda
 bda
-aQf
-aSE
-aSX
-bgu
-bgu
-bgu
-bhQ
-beW
 aWe
 "}
 (37,1,1) = {"
@@ -27088,9 +27157,9 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
+bbH
+bbH
+aSH
 aab
 aab
 aab
@@ -27099,27 +27168,27 @@ aab
 aab
 aab
 asI
-aWW
-aXC
-aXC
-aYS
-aZy
-bad
-bad
-bad
-bbE
 aZx
+aZx
+aZx
+aZx
+aZx
+aZx
+aZx
+lRl
+aXC
+aWW
 aWd
-bda
+aTa
 bdJ
-aSi
-aSE
 aSZ
-bgv
-bgv
-bgv
-bhR
-beW
+aSZ
+aSZ
+aSZ
+bce
+rVo
+bda
+bda
 aWe
 "}
 (38,1,1) = {"
@@ -27290,9 +27359,9 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
+bbH
+bbH
+aSH
 aab
 aab
 aab
@@ -27301,27 +27370,27 @@ aab
 aab
 aab
 asI
-aWW
-aXC
-aXC
-aYS
-aZz
-bae
-bae
-bae
-bbF
 aZx
+aZx
+lKG
+bad
+bad
+bbE
+aZx
+aXC
+aXC
+aWW
 aWd
-bda
+aSE
 bdK
 aSi
-aSE
-aSZ
-bgv
-bgv
-bgv
-bhR
+aSi
+aSi
+kGv
 beW
+bhu
+bhQ
+bda
 aWe
 "}
 (39,1,1) = {"
@@ -27492,9 +27561,9 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
+bbH
+bbH
+aSH
 aab
 aab
 aab
@@ -27503,27 +27572,27 @@ aab
 aab
 aab
 asI
-aWW
-aXC
-aXC
-aYS
+aZx
+aZx
 aZz
-bae
 bae
 bae
 bbF
 aZx
+aXC
+aXC
+aWW
 aWd
-bda
-bdK
-aSi
 aSE
-aSZ
+bdL
 bgv
 bgv
 bgv
-bhR
+bgw
 beW
+bhu
+bhR
+bda
 aWe
 "}
 (40,1,1) = {"
@@ -27694,9 +27763,9 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
+bbH
+bbH
+aSH
 aab
 aab
 aab
@@ -27705,27 +27774,27 @@ aab
 aab
 aab
 asI
-aWW
-aXC
-aXC
-aYS
+aZx
+aZx
 aZz
-bae
 bae
 bae
 bbF
 aZx
+aXC
+aXC
+aWW
 aWd
-bda
-bdK
-aSi
 aSE
-aSZ
+bdL
 bgv
 bgv
 bgv
-bhR
+bgw
 beW
+bhu
+bhR
+bda
 aWe
 "}
 (41,1,1) = {"
@@ -27896,9 +27965,9 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
+bbH
+bbH
+aSH
 aab
 aab
 aab
@@ -27907,27 +27976,27 @@ aab
 aab
 aab
 asI
-aWW
-aXC
-aXC
-aYS
+aZx
+aZx
 aZz
-bae
 bae
 bae
 bbF
 aZx
+aXC
+aXC
+aWW
 aWd
-bda
-bdL
-aSi
 aSE
-aSZ
+bdL
 bgv
 bgv
 bgv
-bhR
+bgw
 beW
+bhu
+bhR
+bda
 aWe
 "}
 (42,1,1) = {"
@@ -28098,9 +28167,9 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
+bbH
+bbH
+aSH
 aab
 aab
 aab
@@ -28109,27 +28178,27 @@ aab
 aab
 aab
 asI
-aWW
-aXC
-aXC
-aYS
-aZA
-baf
-baf
-baf
-bbG
 aZx
+aZx
+aZz
+bae
+bae
+bbF
+aZx
+aXC
+aXC
+aWW
 aWd
-bda
-bda
-aQf
 aSE
-aTa
+bdL
+bgv
+bgv
+bgv
 bgw
-bgw
+beW
 bhu
 bhS
-beW
+bda
 aWe
 "}
 (43,1,1) = {"
@@ -28300,38 +28369,38 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+bbH
+bbH
+aSH
+aSX
+aSX
+aSX
+aSX
+aSX
+aSX
 aab
 asI
+aZx
+aZx
+nzP
+baf
+baf
+bbG
+aZx
+aXC
+aXC
 aWW
-aXC
-aXC
-aYS
-aZx
-aZx
-aZx
-aZx
-aZx
-aZx
 aWd
-bda
-bda
-aQf
 aSE
+cGp
+aQf
+aQf
+aQf
+che
 beW
-beW
-beW
-beW
-beW
-beW
+bhu
+rwD
+bda
 aWe
 "}
 (44,1,1) = {"
@@ -28502,8 +28571,8 @@ aab
 aab
 aab
 aab
-aab
-aab
+bbH
+bbH
 aab
 aab
 aab
@@ -28513,27 +28582,27 @@ aab
 aab
 aab
 asI
+bcd
+aZx
+aZx
+aZx
+aZx
+aZx
+aZx
+aZB
+aXC
 aWW
-aXC
-aXC
-aYT
-aZB
-aZB
-aZB
-aZB
-bbH
-bce
 aWd
-bdb
-bda
-aQf
+gZH
 aSG
-beX
-beX
-beX
-beX
-beX
-beX
+aSG
+aSG
+aSG
+aSG
+kFk
+cdB
+bda
+bdb
 aWe
 "}
 (45,1,1) = {"

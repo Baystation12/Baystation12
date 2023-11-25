@@ -1,7 +1,7 @@
 /area/hallway/primary/fourthdeck/fore
 	name = "Fourth Deck - Hallway - Fore"
 	icon_state = "hallF"
-	req_access = list(access_external_airlocks)
+	req_access = list(list(access_engine, access_medical, access_security))
 	holomap_color = HOLOMAP_AREACOLOR_HALLWAYS
 
 /area/hallway/primary/fourthdeck/center

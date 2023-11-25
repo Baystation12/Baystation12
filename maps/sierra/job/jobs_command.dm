@@ -89,12 +89,13 @@
 		access_robotics, access_kitchen, access_cargo, access_construction, access_chemistry,
 		access_cargo_bot, access_hydroponics, access_library, access_virology, access_cmo,
 		access_qm, access_network, access_surgery, access_mailsorting, access_heads_vault,
-		access_ce, access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat,
+		access_ce, access_rd, access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat,
 		access_gateway, access_sec_doors, access_psychiatrist, access_medical_equip, access_gun,
 		access_expedition_shuttle, access_guppy, access_seneng, access_senmed, access_hangar,
 		access_guppy_helm, access_expedition_shuttle_helm, access_explorer, access_el, access_tox,
 		access_tox_storage, access_research, access_mining, access_mining_office, access_mining_station,
-		access_xenobiology, access_xenoarch, access_petrov, access_petrov_helm, access_actor
+		access_xenobiology, access_xenoarch, access_petrov, access_petrov_helm, access_actor, access_chief_steward,
+		access_bar, access_commissary, access_pilot, access_field_eng, access_field_med, access_network_admin, access_research_storage
 	)
 	software_on_spawn = list(
 		/datum/computer_file/program/comm,

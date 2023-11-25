@@ -143,10 +143,12 @@
 /area/rnd/locker
 	name = "First Deck - RND - Locker Room"
 	icon_state = "locker"
+	req_access = list(access_research_storage)
 
 /area/rnd/office
 	name = "First Deck - RND - Research Office"
 	icon_state = "locker"
+	req_access = list(access_research_storage)
 
 /area/rnd/servers
 	name = "First Deck - RND - Servers"
