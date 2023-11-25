@@ -278,6 +278,14 @@
 	name = "Widowmaker"
 	icon_state = "hair_widowmaker"
 
+/datum/sprite_accessory/hair/modpack_hairs_port/inf_travolta_tied
+	name = "Ponytail 7 (alt)"
+	icon_state = "hair_ponytail7alt"
+/datum/sprite_accessory/hair/modpack_hairs_port/inf_widowmaker
+	name = "Swept Back (alt)"
+	icon_state = "hair_swept_backalt"
+
+
 
 
 
