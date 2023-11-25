@@ -63,6 +63,8 @@
 	boot_type = /obj/item/clothing/shoes/magboots/rig/industrial
 	glove_type = /obj/item/clothing/gloves/rig/industrial
 
+	req_access = list(access_mining)
+
 /obj/item/clothing/head/helmet/space/rig/industrial
 	light_overlay = "helmet_light_wide"
 	camera = /obj/machinery/camera/network/helmet
