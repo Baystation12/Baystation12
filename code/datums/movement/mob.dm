@@ -140,9 +140,13 @@
 /datum/movement_handler/mob/delay/DoMove(direction, mover, is_external)
 	if(is_external)
 		return
-	next_move = world.time + max(1, mob.movement_delay())
-	// [SIERRA-ADD] - GLIDING
+	// [SIERRA-EDIT] - SSINPUT
+	// next_move = world.time + max(1, mob.movement_delay()) // SIERRA-EDIT - ORIGINAL
 	delay = max(1, mob.movement_delay())
+	if((direction & (direction - 1))) // moved diagonally
+		delay *= sqrt(2)
+
+	next_move = world.time + delay
 	UpdateGlideSize()
 	// [/SIERRA-ADD]
 
