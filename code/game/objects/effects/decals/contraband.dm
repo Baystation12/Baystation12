@@ -20,7 +20,7 @@
 
 	poster_type = given_poster_type || poster_type
 	if(!poster_type)
-		poster_type = pick(subtypesof(/singleton/poster))
+		poster_type = pick(subtypesof(/singleton/poster) - list(/singleton/poster/torch, /singleton/poster/contraband_only))
 	..()
 
 /obj/item/contraband/poster/Initialize()
@@ -108,7 +108,7 @@
 		if(give_poster_type)
 			poster_type = give_poster_type
 		else
-			poster_type = pick(subtypesof(/singleton/poster) - typesof(/singleton/poster/torch))
+			poster_type = pick(subtypesof(/singleton/poster) - typesof(/singleton/poster/torch) - typesof(/singleton/poster/contraband_only))
 	if(torch_poster)
 		poster_type = pick(subtypesof(/singleton/poster/torch))
 	set_poster(poster_type)
