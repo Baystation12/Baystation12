@@ -56,6 +56,7 @@
 	if(!checked_use(cost) && owner.isSynthetic())
 		if(!owner.lying && !owner.buckled)
 			to_chat(owner, SPAN_WARNING("You don't have enough energy to function!"))
+		owner.Weaken(3)
 		owner.Paralyse(3)
 	if(percent() < 10 && prob(1))
 		to_chat(owner, SPAN_WARNING("Your internal battery beeps an alert code, it is low on charge!"))
