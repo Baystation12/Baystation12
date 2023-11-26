@@ -106,9 +106,14 @@
 	for(var/thing in SSpersistence.tracking_values[type])
 		if(IsValidEntry(thing))
 			entries += list(CompileEntry(thing))
-	if(fexists(filename))
-		fdel(filename)
-	to_file(file(filename), json_encode(entries))
+	// [SIERRA-EDIT] - RUST_G
+	// if(fexists(filename)) // SIERRA-EDIT - ORIGINAL
+	// 	fdel(filename) // SIERRA-EDIT - ORIGINAL
+	// to_file(file(filename), json_encode(entries)) // SIERRA-EDIT - ORIGINAL
+	var/error = rustg_file_write(json_encode(entries), filename)
+	if (error)
+		crash_with(error)
+	// [/SIERRA-EDIT]
 
 /datum/persistent/proc/RemoveValue(atom/value)
 	qdel(value)
