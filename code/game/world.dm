@@ -92,9 +92,13 @@ GLOBAL_VAR(href_logfile)
 		if (config.server_name)
 			name = "[config.server_name]"
 		if (config.log_runtime)
-			var/runtime_log = file("data/logs/runtime/[date_string]_[time2text(world.timeofday, "hh:mm")]_[game_id].log")
-			to_file(runtime_log, "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]")
-			log = runtime_log
+			// [SIERRA-EDIT] - RUST_G
+			// var/runtime_log = file("data/logs/runtime/[date_string]_[time2text(world.timeofday, "hh:mm")]_[game_id].log") // SIERRA-EDIT - ORIGINAL
+			// to_file(runtime_log, "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]") // SIERRA-EDIT - ORIGINAL
+			// log = runtime_log // SIERRA-EDIT - ORIGINAL
+			log = "data/logs/runtime/[date_string]_[time2text(world.timeofday, "hh:mm")]_[game_id].log"
+			to_world_log("Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]")
+			// [/SIERRA-EDIT]
 		if (config.log_hrefs)
 			GLOB.href_logfile = file("data/logs/[date_string] hrefs.htm")
 

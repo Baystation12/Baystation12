@@ -123,7 +123,10 @@
 /// Common use
 #define legacy_chat(target, message)          to_target(target, message)
 #define to_world(message)                     to_chat(world, message)
-#define to_world_log(message)                 to_target(world.log, message)
+// [SIERRA-EDIT] - RUST_G
+// #define to_world_log(message)                 to_target(world.log, message) // SIERRA-EDIT - ORIGINAL
+#define to_world_log(message) if (istext(world.log)) { rustg_log_write_formatted(world.log, message) } else { to_target(world.log, message) }
+// [/SIERRA-EDIT]
 #define sound_to(target, sound)               to_target(target, sound)
 #define image_to(target, image)               to_target(target, image)
 #define show_browser(target, content, title)  to_target(target, browse(content, title))

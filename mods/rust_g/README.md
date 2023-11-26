@@ -28,6 +28,7 @@ ID мода: RUST_G
 
 ### Изменения *кор кода*
 
+- `code/_macros.dm`: `#define to_world_log`
 - `code/_helpers/logging.dm`: `/proc/game_log()`
 - `code/controllers/master.dm`: `/datum/controller/master/New()`
 - `code/controllers/subsystems/garbage.dm`: `/datum/controller/subsystem/garbage/Shutdown()`
