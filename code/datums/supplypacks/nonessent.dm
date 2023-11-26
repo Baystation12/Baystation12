@@ -187,7 +187,7 @@
 					/obj/item/clothing/head/pirate,
 					/obj/item/clothing/head/hasturhood,
 					/obj/item/clothing/head/powdered_wig,
-					/obj/item/clothing/head/hairflower,
+					/obj/item/clothing/head/hairflower/red,
 					/obj/item/clothing/head/hairflower/yellow,
 					/obj/item/clothing/head/hairflower/blue,
 					/obj/item/clothing/head/hairflower/pink,
