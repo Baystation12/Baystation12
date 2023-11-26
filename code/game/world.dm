@@ -83,7 +83,8 @@ GLOBAL_VAR(href_logfile)
 	var/date_string = time2text(world.realtime, "YYYY/MM/DD")
 	// [SIERRA-EDIT] - RUST_G
 	// to_file(global.diary, "[log_end]\n[log_end]\nStarting up. (ID: [game_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]") // SIERRA-EDIT - ORIGINAL
-	rustg_log_write_formatted("[GLOB.log_directory]/game.log", "Starting up. (ID: [game_id])\n---------------------------")
+	rustg_log_write_formatted("[GLOB.log_directory]/game.log", "Starting up. (ID: [game_id])")
+	rustg_log_write_formatted("[GLOB.log_directory]/game.log", "---------------------------")
 	// [/SIERRA-EDIT]
 
 
