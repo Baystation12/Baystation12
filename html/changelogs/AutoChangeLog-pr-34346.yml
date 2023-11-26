@@ -1,0 +1,12 @@
+author: BurpleBineapple
+changes:
+  - {tweak: EMP damage is now calculated with a 1 to 3 multiplicative modifier with
+      3 being the pre-change damage.}
+  - {tweak: The ion pistol now has half the fire delay it had before to differentiate
+      it from the ion rifle.}
+  - {tweak: EMP damage to limbs has been reduced by 50%. Torso damage remains the
+      same.}
+  - {tweak: EMP damage to robotic legs and feet no longer immediately weaken the victim.}
+  - {tweak: FBPs and IPCs first fall over before being paralyzed when their battery
+      is dead or destroyed.}
+delete-after: true
