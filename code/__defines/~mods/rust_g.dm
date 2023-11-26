@@ -124,6 +124,7 @@
 #ifdef RUSTG_OVERRIDE_BUILTINS
 	#define file2text(fname) rustg_file_read("[fname]")
 	#define text2file(text, fname) rustg_file_append(text, "[fname]")
+	#define fexists(fname) (rustg_file_exists("[fname]") == "true")
 #endif
 
 #define rustg_git_revparse(rev) RUSTG_CALL(RUST_G, "rg_git_revparse")(rev)
