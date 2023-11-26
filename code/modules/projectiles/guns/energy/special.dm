@@ -30,6 +30,7 @@
 	one_hand_penalty = 0
 	charge_cost = 40
 	max_shots = 3
+	fire_delay = 30
 	projectile_type = /obj/item/projectile/ion/small
 
 /obj/item/gun/energy/ionrifle/mounted

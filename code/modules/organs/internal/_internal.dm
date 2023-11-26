@@ -191,9 +191,10 @@
 /obj/item/organ/internal/emp_act(severity)
 	if(!BP_IS_ROBOTIC(src))
 		return
+	var/rand_modifier = rand(1, 3)
 	switch (severity)
 		if (EMP_ACT_HEAVY)
-			take_internal_damage(16)
+			take_internal_damage(5 * rand_modifier)
 		if (EMP_ACT_LIGHT)
-			take_internal_damage(9)
+			take_internal_damage(2 * rand_modifier)
 	..()
