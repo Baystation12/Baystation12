@@ -14,18 +14,21 @@
 /obj/item/clothing/head/hairflower
 	name = "hair flower pin"
 	icon_state = "hairflower"
-	desc = "Smells nice."
+	desc = "A floral pin with a clip on the back to attach to hair."
 	slot_flags = SLOT_HEAD | SLOT_EARS
 	body_parts_covered = 0
 
+/obj/item/clothing/head/hairflower/red
+	color = COLOR_RED
+
 /obj/item/clothing/head/hairflower/blue
-	icon_state = "hairflower_blue"
+	color = COLOR_BLUE
 
 /obj/item/clothing/head/hairflower/pink
-	icon_state = "hairflower_pink"
+	color = COLOR_PINK
 
 /obj/item/clothing/head/hairflower/yellow
-	icon_state = "hairflower_yellow"
+	color = COLOR_YELLOW
 
 /obj/item/clothing/head/hairflower/bow
 	icon_state = "bow"

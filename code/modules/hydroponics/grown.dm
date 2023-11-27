@@ -169,14 +169,32 @@
 /obj/item/reagent_containers/food/snacks/grown/attackby(obj/item/W, mob/user)
 
 	if(seed)
-		if(seed.get_trait(TRAIT_PRODUCES_POWER) && isCoil(W))
+		if(isCoil(W))
 			var/obj/item/stack/cable_coil/C = W
-			if(C.use(5))
-				//TODO: generalize this.
+			if(seed.get_trait(TRAIT_PRODUCT_ICON) in list("flower2","flower3","flower4","flower5","flower6"))
+				if(!C.can_use(1))
+					USE_FEEDBACK_STACK_NOT_ENOUGH(C, 1, "to make a pin out of \the [src.name].")
+					return
+				C.use(1)
+				to_chat(user, SPAN_NOTICE("You add some wire to the [src.name] and make a pin."))
+				var/obj/item/clothing/head/hairflower/pin = new /obj/item/clothing/head/hairflower(get_turf(src))
+				pin.name = "[src.name] pin"
+				pin.icon = 'icons/obj/flora/hydroponics_products.dmi'
+				pin.icon_state = "[seed.get_trait(TRAIT_PRODUCT_ICON)]-product"
+				if("[seed.get_trait(TRAIT_PRODUCT_ICON)]-leaf" in icon_states('icons/obj/flora/hydroponics_products.dmi'))
+					var/image/fruit_leaves = image('icons/obj/flora/hydroponics_products.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]-leaf")
+					fruit_leaves.color = seed.get_trait(TRAIT_PLANT_COLOUR)
+					pin.AddOverlays(fruit_leaves)
+				pin.item_state = "hairflower"
+				pin.color = src.color
+				qdel(src)
+				return
+			else if(seed.get_trait(TRAIT_PRODUCES_POWER))
+				if(!C.can_use(5))
+					USE_FEEDBACK_STACK_NOT_ENOUGH(C, 5, "to wire \the [src.name].")
+					return
 				to_chat(user, SPAN_NOTICE("You add some cable to the [src.name] and slide it inside the battery casing."))
-				var/obj/item/cell/potato/pocell = new /obj/item/cell/potato(get_turf(user))
-				if(src.loc == user && user.HasFreeHand() && istype(user,/mob/living/carbon/human))
-					user.put_in_hands(pocell)
+				var/obj/item/cell/potato/pocell = new /obj/item/cell/potato(get_turf(src))
 				pocell.maxcharge = src.potency * 10
 				pocell.charge = pocell.maxcharge
 				qdel(src)
