@@ -145,12 +145,14 @@
 	..()
 
 /obj/machinery/anomaly_container/emp_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
 	if(health_dead)
 		return
 	if(contained)
 		visible_message(SPAN_DANGER("\The [src]'s latches break loose, freeing the contents!"))
 		playsound(loc, 'sound/mecha/hydraulic.ogg', 40)
 		release()
+	GLOB.empd_event.raise_event(src, severity)
 
 
 /obj/machinery/anomaly_container/attackby(obj/item/P, mob/user)

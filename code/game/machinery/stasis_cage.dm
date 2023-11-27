@@ -260,6 +260,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 
 
 /obj/machinery/stasis_cage/emp_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
 	if (health_dead())
 		return
 	if (inoperable())
@@ -280,7 +281,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 		cell.emp_act(severity)
 
 	update_icon()
-
+	GLOB.empd_event.raise_event(src, severity)
 
 /obj/machinery/stasis_cage/on_update_icon()
 	ClearOverlays()

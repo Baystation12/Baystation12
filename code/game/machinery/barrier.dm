@@ -86,6 +86,7 @@
 	return 1
 
 /obj/machinery/barrier/emp_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
 	if (severity > EMP_ACT_LIGHT)
 		return
 	locked = FALSE
@@ -94,6 +95,7 @@
 	if (severity > EMP_ACT_HEAVY)
 		return
 	sparks(3, 1, src)
+	GLOB.empd_event.raise_event(src, severity)
 	emag_act()
 
 /obj/machinery/barrier/on_death()

@@ -83,6 +83,7 @@
 	else
 		to_chat(usr, SPAN_NOTICE("The generator is off."))
 /obj/machinery/power/port_gen/emp_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
 	if(!active)
 		return
 	var/duration
@@ -95,6 +96,7 @@
 			if(prob(25)) set_broken(TRUE)
 			if(prob(10)) explode()
 			else duration = 30 SECONDS
+	GLOB.empd_event.raise_event(src, severity)
 
 	if(duration)
 		set_stat(MACHINE_STAT_EMPED, TRUE)

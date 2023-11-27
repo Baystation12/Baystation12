@@ -105,6 +105,7 @@
 
 
 /obj/item/melee/energy/emp_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
 	if (!active)
 		return
 	if (damaged)
@@ -124,6 +125,7 @@
 		deactivate()
 	update_icon()
 	damaged = TRUE
+	GLOB.empd_event.raise_event(src, severity)
 
 
 /obj/item/melee/energy/get_storage_cost()

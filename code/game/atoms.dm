@@ -246,7 +246,6 @@
 /atom/proc/HasProximity(atom/movable/AM as mob|obj)
 	return
 
-
 /**
  * Called when the atom is affected by an EMP.
  *
@@ -254,10 +253,12 @@
  * - `severity` Integer. The strength of the EMP, ranging from 1 to 3. NOTE: Lower numbers are stronger.
  */
 /atom/proc/emp_act(severity)
+	SHOULD_CALL_PARENT(TRUE)
 	if (get_max_health())
 		// No hitsound here - Doesn't make sense for EMPs.
 		// Generalized - 75-125 damage at max, 38-63 at medium, 25-42 at minimum severities.
 		damage_health(rand(75, 125) / severity, DAMAGE_EMP, severity = severity)
+	GLOB.empd_event.raise_event(src, severity)
 
 
 /**

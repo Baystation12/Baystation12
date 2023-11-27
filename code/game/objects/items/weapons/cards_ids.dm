@@ -179,7 +179,7 @@ var/global/const/NO_EMAG_ACT = -50
 
 /obj/item/card/emag/Initialize()
 	. = ..()
-	set_extension(src,/datum/extension/chameleon/emag)
+	set_extension(src, /datum/extension/chameleon/emag)
 
 /obj/item/card/emag/get_antag_info()
 	. = ..()
