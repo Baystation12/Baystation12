@@ -6,6 +6,7 @@
 	program_key_state = "generic_key"
 	program_menu_icon = "folder-collapsed"
 	size = 8
+	processing_size = 0.5
 	requires_ntnet = FALSE
 	available_on_ntnet = FALSE
 	undeletable = TRUE

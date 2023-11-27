@@ -8,6 +8,7 @@
 	unsendable = TRUE
 	undeletable = TRUE
 	size = 4
+	processing_size = 0.5
 	requires_ntnet = TRUE
 	requires_ntnet_feature = NTNET_SOFTWAREDOWNLOAD
 	available_on_ntnet = FALSE
