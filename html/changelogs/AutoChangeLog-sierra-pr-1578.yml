@@ -1,0 +1,4 @@
+author: BurpleBineapple
+changes:
+  - {bugfix: Prosthetic bone repair now checks for Complex Devices instead of Medicine/Anatomy}
+delete-after: true
