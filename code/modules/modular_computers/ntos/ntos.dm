@@ -7,8 +7,10 @@
 	var/on = FALSE
 	/// A currently active program running on the computer.
 	var/datum/computer_file/program/active_program = null
-	/// All programms currently running, background or active.
+	/// All programs currently running, background or active, including small programs.
 	var/list/running_programs = list()
+	/// The processing size being used by all programs.
+	var/processing_size = 0
 
 	/// dmi where the screen overlays are kept, defaults to holder's icon if unset
 	var/screen_icon_file
@@ -140,22 +142,26 @@
 /datum/extension/interactive/ntos/proc/run_program_remote(filename, mob/user = null, loud = 0)
 	var/datum/computer_file/program/P = get_file(filename)
 
-	if(!istype(P))
+	if (!istype(P))
 		loud && show_error(user, "I/O ERROR - Unable to run [filename]")
 		return
-	if(!P.is_supported_by_hardware(get_hardware_flag()))
+	if (!P.is_supported_by_hardware(get_hardware_flag()))
 		loud && show_error(user, "Hardware Error - Incompatible software")
 		return
-	if(P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature))
+	if (P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature))
 		loud && show_error(user, "Unable to establish a working network connection. Please try again later. If problem persists, please contact your system administrator.")
 		return
 
-	if(P in running_programs)
+	if (P in running_programs)
 		return P
-	if(length(running_programs) >= get_program_capacity())
+
+	var/processing_total = 0
+	for (var/datum/computer_file/program/program in running_programs)
+		processing_total += program.processing_size
+	if ((processing_total + P.processing_size) > get_program_capacity() && P.processing_size)
 		loud && show_error(user, "Kernel Error - Insufficient CPU resources available to allocate.")
 		return
-	if(!P.can_run(user, loud))
+	if (!P.can_run(user, loud))
 		return
 
 	P.on_startup(user, src)
