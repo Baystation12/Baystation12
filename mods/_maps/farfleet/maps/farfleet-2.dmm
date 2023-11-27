@@ -757,18 +757,7 @@
 /area/ship/farfleet/crew/canteen)
 "hJ" = (
 /obj/floor_decal/industrial/warning{
-	dir = 4;
-	icon_state = "warning"
-	},
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_y = 24;
-	req_access = list("ACCESS_ICCGN")
-	},
-/obj/structure/cable{
-	d2 = 8;
-	icon_state = "0-8"
+	dir = 4
 	},
 /obj/submap_landmark/spawnpoint/away_iccgn_farfleet/iccgn_pawn,
 /turf/simulated/floor/tiled/white,
@@ -1126,14 +1115,12 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/snz)
 "lp" = (
-/obj/floor_decal/industrial/outline/red,
-/obj/structure/closet/secure_closet/farfleet,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled/dark/monotile,
+/turf/simulated/floor/tiled/dark,
 /area/ship/farfleet/barracks)
 "lz" = (
 /obj/structure/bed/chair/shuttle/blue,
@@ -1287,10 +1274,8 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/farfleet/crew/canteen)
 "mQ" = (
-/obj/submap_landmark/spawnpoint/away_iccgn_farfleet,
-/obj/machinery/firealarm{
-	dir = 1;
-	pixel_y = -24
+/obj/structure/bed/chair/padded/red{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/farfleet/barracks)
@@ -1499,22 +1484,13 @@
 /area/ship/snz)
 "pf" = (
 /obj/floor_decal/industrial/warning{
-	dir = 8;
-	icon_state = "warning"
-	},
-/obj/machinery/computer/cryopod{
-	pixel_y = 32
+	dir = 8
 	},
 /obj/submap_landmark/spawnpoint/away_iccgn_farfleet/medic,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
-	},
-/obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled/white,
 /area/ship/farfleet/crew/cryo)
@@ -1694,15 +1670,15 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/ship/farfleet/crew/cryo)
 "qx" = (
-/obj/floor_decal/industrial/outline/yellow,
-/obj/machinery/cryopod,
-/obj/machinery/alarm{
-	dir = 8;
-	pixel_x = 24;
-	req_access = list("ACCESS_ICCGN")
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -24
 	},
-/turf/simulated/floor/tiled/white,
-/area/ship/farfleet/crew/cryo)
+/obj/structure/bed/chair/padded/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/ship/farfleet/barracks)
 "qA" = (
 /obj/machinery/body_scanconsole{
 	dir = 4
@@ -1767,21 +1743,21 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/snz)
 "rb" = (
-/obj/submap_landmark/spawnpoint/away_iccgn_farfleet,
-/turf/simulated/floor/tiled/dark,
+/obj/floor_decal/industrial/outline/red,
+/obj/structure/closet/secure_closet/farfleet,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/barracks)
 "rg" = (
 /obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
 	},
 /obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
-/obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/dark,
 /area/ship/farfleet/barracks)
 "rh" = (
@@ -1869,6 +1845,13 @@
 	},
 /turf/simulated/wall,
 /area/ship/farfleet/crew/toilet)
+"rV" = (
+/obj/floor_decal/corner_steel_grid/diagonal,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/ship/farfleet/crew/hydroponics)
 "sa" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/railing/mapped,
@@ -2076,6 +2059,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/submap_landmark/spawnpoint/away_iccgn_farfleet,
 /turf/simulated/floor/tiled/white,
 /area/ship/farfleet/crew/cryo)
 "uq" = (
@@ -2284,12 +2268,12 @@
 /turf/simulated/floor/tiled/white,
 /area/ship/snz)
 "wi" = (
-/obj/machinery/cryopod{
-	dir = 4
-	},
 /obj/machinery/light{
 	dir = 8;
 	icon_state = "tube_map"
+	},
+/obj/structure/bed/chair/padded/red{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/farfleet/barracks)
@@ -2305,13 +2289,15 @@
 /obj/floor_decal/industrial/warning{
 	dir = 6
 	},
+/obj/submap_landmark/spawnpoint/away_iccgn_farfleet,
 /turf/simulated/floor/tiled/white,
 /area/ship/farfleet/crew/cryo)
 "wt" = (
-/obj/floor_decal/industrial/outline/green,
+/obj/floor_decal/industrial/outline/red,
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/structure/closet/secure_closet/farfleet,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/barracks)
 "wA" = (
@@ -2335,7 +2321,8 @@
 /turf/simulated/floor/tiled,
 /area/ship/farfleet/crew/hydroponics)
 "wD" = (
-/obj/floor_decal/industrial/outline/green,
+/obj/structure/closet/secure_closet/farfleet/sergeant,
+/obj/floor_decal/industrial/outline/red,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/barracks)
 "wG" = (
@@ -2654,9 +2641,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/ship/farfleet/barracks/armory)
 "zi" = (
-/obj/floor_decal/industrial/outline/red,
-/obj/structure/closet/secure_closet/farfleet/sergeant,
-/turf/simulated/floor/tiled/dark/monotile,
+/obj/structure/reagent_dispensers/water_cooler,
+/turf/simulated/floor/tiled/dark,
 /area/ship/farfleet/barracks)
 "zk" = (
 /obj/machinery/recharge_station,
@@ -2982,8 +2968,7 @@
 /area/ship/farfleet/crew/freezer)
 "CI" = (
 /obj/floor_decal/industrial/warning{
-	dir = 8;
-	icon_state = "warning"
+	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/submap_landmark/spawnpoint/away_iccgn_farfleet/captain,
@@ -3034,8 +3019,13 @@
 /turf/simulated/wall/r_wall,
 /area/ship/farfleet/barracks)
 "Db" = (
-/obj/machinery/cryopod{
-	dir = 4
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -25;
+	req_access = list("ACCESS_ICCGN")
+	},
+/obj/structure/bed/chair/padded/red{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/farfleet/barracks)
@@ -3371,6 +3361,7 @@
 	pixel_y = 24;
 	req_access = list("ACCESS_ICCGN")
 	},
+/obj/structure/bed/chair/comfy/red,
 /turf/simulated/floor/tiled/dark,
 /area/ship/farfleet/barracks)
 "Fw" = (
@@ -4074,10 +4065,22 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/barracks/armory)
 "NV" = (
-/obj/paint/dark_gunmetal,
-/obj/paint/dark_gunmetal,
-/turf/simulated/wall/r_wall,
-/area/ship/farfleet/crew/brig/css)
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_y = 24;
+	req_access = list("ACCESS_ICCGN")
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 5
+	},
+/obj/submap_landmark/spawnpoint/away_iccgn_farfleet/sergeant,
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/tiled/white,
+/area/ship/farfleet/crew/cryo)
 "NW" = (
 /obj/structure/closet/fridge/meat,
 /obj/machinery/light/small{
@@ -4305,12 +4308,11 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/barracks/armory)
 "QU" = (
-/obj/floor_decal/industrial/outline/red,
-/obj/structure/closet/secure_closet/farfleet,
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/dark/monotile,
+/obj/structure/table/reinforced,
+/turf/simulated/floor/tiled/dark,
 /area/ship/farfleet/barracks)
 "QZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -4382,9 +4384,28 @@
 /turf/simulated/floor/tiled/freezer,
 /area/ship/farfleet/crew/freezer)
 "RC" = (
-/obj/submap_landmark/spawnpoint/away_iccgn_farfleet/sergeant,
-/turf/simulated/floor/tiled/dark,
-/area/ship/farfleet/barracks)
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/computer/cryopod{
+	pixel_x = -32
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 9
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/alarm{
+	pixel_y = 24;
+	req_access = list("ACCESS_ICCGN")
+	},
+/turf/simulated/floor/tiled/white,
+/area/ship/farfleet/crew/cryo)
 "RH" = (
 /obj/machinery/portable_atmospherics/canister/air,
 /obj/machinery/atmospherics/portables_connector{
@@ -4429,14 +4450,12 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/farfleet/barracks/armory)
 "RW" = (
-/obj/structure/reagent_dispensers/water_cooler{
-	dir = 8
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
 	},
-/obj/machinery/alarm{
-	dir = 1;
-	pixel_y = -25;
-	req_access = list("ACCESS_ICCGN")
-	},
+/obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/dark,
 /area/ship/farfleet/barracks)
 "RX" = (
@@ -4711,8 +4730,8 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/plating,
 /area/ship/farfleet/command/snz_hangar)
 "Uu" = (
@@ -4777,8 +4796,7 @@
 /area/ship/farfleet/command/snz_hangar)
 "UU" = (
 /obj/floor_decal/industrial/warning{
-	dir = 4;
-	icon_state = "warning"
+	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/submap_landmark/spawnpoint/away_iccgn_farfleet/gunner,
@@ -12149,7 +12167,7 @@ ab
 HA
 SD
 Cm
-Cm
+RC
 pf
 CI
 uo
@@ -12271,7 +12289,7 @@ ab
 Hj
 Hj
 uf
-uf
+NV
 hJ
 UU
 wr
@@ -12393,10 +12411,10 @@ ab
 Hj
 uf
 uf
-uf
+Ui
 Ui
 DX
-qx
+Ui
 uf
 LT
 pT
@@ -13628,7 +13646,7 @@ dI
 Su
 bn
 wG
-eD
+rV
 eD
 bn
 Su
@@ -13979,7 +13997,7 @@ DT
 DT
 DT
 DT
-NV
+DT
 ME
 ns
 ns
@@ -14096,8 +14114,8 @@ wb
 Ab
 Ll
 Ll
+Uu
 uA
-Db
 wi
 Db
 Ll
@@ -14219,8 +14237,8 @@ Ab
 Ll
 Ll
 Fr
-RC
-rb
+uA
+mQ
 mQ
 Ll
 VP
@@ -14341,11 +14359,11 @@ CZ
 gL
 lp
 rg
-mm
-Qb
-Qb
-vp
-Um
+uA
+mQ
+qx
+Ll
+VP
 ve
 ns
 Sz
@@ -14462,12 +14480,12 @@ ab
 Ab
 Ll
 QU
-aj
-nD
-Uu
-Uu
-wJ
-ME
+RW
+mm
+Qb
+Qb
+vp
+Um
 ns
 LH
 ec
@@ -14584,11 +14602,11 @@ ab
 Ab
 Ll
 zi
+aj
+nD
 Uu
-ju
 Uu
-RW
-Ll
+wJ
 ME
 Ms
 aW
@@ -14827,7 +14845,7 @@ ab
 ab
 Ab
 Ll
-wD
+rb
 Uu
 ju
 Uu

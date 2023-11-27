@@ -5318,7 +5318,9 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/machinery/power/port_gen/pacman/mrs,
+/obj/machinery/power/port_gen/pacman/mrs{
+	sheets = 5
+	},
 /obj/floor_decal/industrial/warning/full,
 /obj/structure/cable/blue{
 	d2 = 4;
