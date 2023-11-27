@@ -5011,7 +5011,9 @@
 	},
 /obj/structure/window/reinforced,
 /obj/machinery/door/window/northright{
-	name = "suit storage"
+	name = "suit storage";
+	req_access = list("ACCESS_MINING");
+	autoset_access = 0
 	},
 /obj/item/rig/industrial/equipped,
 /obj/structure/window/reinforced{
