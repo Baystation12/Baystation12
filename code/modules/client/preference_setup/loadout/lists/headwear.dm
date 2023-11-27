@@ -66,15 +66,7 @@
 /datum/gear/head/hairflower
 	display_name = "hair flower pin"
 	path = /obj/item/clothing/head/hairflower
-
-/datum/gear/head/hairflower/New()
-	..()
-	var/pins = list()
-	pins["blue pin"] = /obj/item/clothing/head/hairflower/blue
-	pins["pink pin"] = /obj/item/clothing/head/hairflower/pink
-	pins["red pin"] = /obj/item/clothing/head/hairflower
-	pins["yellow pin"] = /obj/item/clothing/head/hairflower/yellow
-	gear_tweaks += new/datum/gear_tweak/path(pins)
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/hardhat
 	display_name = "hardhat selection"

@@ -17,7 +17,7 @@
 	return list(
 		/obj/item/clothing/head/that = 2,
 		/obj/item/device/radio/headset/headset_service = 2,
-		/obj/item/clothing/head/hairflower,
+		/obj/item/clothing/head/hairflower/red,
 		/obj/item/clothing/head/hairflower/pink,
 		/obj/item/clothing/head/hairflower/yellow,
 		/obj/item/clothing/head/hairflower/blue,

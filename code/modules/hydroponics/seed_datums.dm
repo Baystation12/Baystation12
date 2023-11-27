@@ -1601,7 +1601,7 @@
 
 /datum/seed/ximikoa
 	name = "ximikoa"
-	seed_name = "ximi'koa stalks"
+	seed_name = "ximi'koa"
 	display_name = "ximi'koa patch"
 	chems = list(/datum/reagent/nutriment = list(1,2), /datum/reagent/sugar = list(4,5))
 	fruit_size = ITEM_SIZE_TINY
