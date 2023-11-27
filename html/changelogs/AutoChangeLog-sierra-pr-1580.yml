@@ -1,0 +1,6 @@
+author: rootoo807
+changes:
+  - {tweak: Flowers grown in hydroponics can be made into wearable hair pins by adding
+      a piece of cable.}
+  - {tweak: Hairflowers are now color select in loadout.}
+delete-after: true
