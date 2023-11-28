@@ -1,4 +1,0 @@
-author: Sbotkin
-changes:
-  - {tweak: The industrial RIG is locked behind the mining access.}
-delete-after: true
