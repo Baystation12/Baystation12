@@ -1,7 +1,0 @@
-author: TheNightingale
-changes:
-  - {tweak: 'Certain programs - computer config, email, file browser and download
-      tool - now require less processing power to run, allowing more programs to be
-      run consecutively.'}
-  - {tweak: Email now requires 1 GB instead of _7_.}
-delete-after: true
