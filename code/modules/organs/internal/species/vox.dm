@@ -193,6 +193,7 @@
 		to_chat(user, SPAN_NOTICE("The integrity light on [src] is off. It is empty and lifeless."))
 
 /obj/item/organ/internal/voxstack/emp_act()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/item/organ/internal/voxstack/getToxLoss()

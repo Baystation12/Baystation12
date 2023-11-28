@@ -124,4 +124,5 @@
 	return
 
 /obj/machinery/computer/shuttle_control/emp_act()
+	SHOULD_CALL_PARENT(FALSE)
 	return

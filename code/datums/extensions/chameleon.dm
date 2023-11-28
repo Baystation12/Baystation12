@@ -2,10 +2,14 @@
 	base_type = /datum/extension/chameleon
 	expected_type = /obj/item
 	flags = EXTENSION_FLAG_IMMEDIATE
-	var/list/chameleon_choices
+	var/emp_amount = 0
 	var/static/list/chameleon_choices_by_type
-	var/atom/atom_holder
-	var/chameleon_verb
+	var/chameleon_choices
+	var/obj/item/item_holder
+	var/static/chameleon_verbs = list(
+		/obj/item/proc/ChameleonFlexibleAppearance,
+		/obj/item/proc/ChameleonOutfitAppearanceSingle,
+		/obj/item/proc/ChameleonOutfitAppearanceAll)
 
 /datum/extension/chameleon/New(datum/holder, base_type)
 	..()
@@ -13,72 +17,55 @@
 	if (!chameleon_choices)
 		var/chameleon_type = base_type || holder.parent_type
 		chameleon_choices = LAZYACCESS(chameleon_choices_by_type, chameleon_type)
-		if(!chameleon_choices)
-			chameleon_choices = generate_chameleon_choices(chameleon_type)
-			LAZYSET(chameleon_choices_by_type, chameleon_type, chameleon_choices)
-	else
-		var/list/choices = list()
-		for(var/path in chameleon_choices)
-			add_chameleon_choice(choices, path)
-		chameleon_choices = sortAssoc(choices)
+		if (!chameleon_choices)
+			chameleon_choices = GenerateChameleonChoices(chameleon_type)
 
-	atom_holder = holder
-	chameleon_verb = /atom/proc/chameleon_appearance
-	atom_holder.verbs += chameleon_verb
+	item_holder = holder
+	item_holder.verbs += chameleon_verbs
+	GLOB.empd_event.register(item_holder, src, /datum/extension/chameleon/proc/OnEMP)
 
 /datum/extension/chameleon/Destroy()
-	. = ..()
-	atom_holder.verbs -= chameleon_verb
-	atom_holder = null
+	if (emp_amount)
+		STOP_PROCESSING(SSobj, src)
+	GLOB.empd_event.unregister(item_holder)
+	item_holder.verbs -= chameleon_verbs
+	item_holder = null
+	return ..()
 
-/datum/extension/chameleon/proc/disguise(newtype, mob/user, newname, newdesc)
-	var/obj/item/copy = new newtype(null) //initial() does not handle lists well
-	var/obj/item/C = atom_holder
-	if (newname)
-		C.name = newname
-	else
-		C.name = copy.name
-	if (newdesc)
-		C.desc = newdesc
-	else
-		C.desc = copy.desc
-	C.icon = copy.icon
-	C.color = copy.color
-	C.icon_state = copy.icon_state
-	C.flags_inv = copy.flags_inv
-	C.item_state = copy.item_state
-	C.body_parts_covered = copy.body_parts_covered
+/datum/extension/chameleon/proc/Disguise(newtype, newname, newdesc)
+	SHOULD_NOT_OVERRIDE(TRUE) // Subtypes should override OnDisguise
 
-	C.item_icons = copy.item_icons
-	C.item_state_slots = copy.item_state_slots
-	C.sprite_sheets = copy.sprite_sheets
+	var/obj/item/copy = new newtype(null) // initial() does not handle lists well
+	item_holder.name = newname || copy.name
+	item_holder.desc = newdesc || copy.desc
+	item_holder.icon = copy.icon
+	item_holder.color = copy.color
+	item_holder.icon_state = copy.icon_state
+	item_holder.flags_inv = copy.flags_inv
+	item_holder.item_state = copy.item_state
+	item_holder.body_parts_covered = copy.body_parts_covered
 
-	OnDisguise(copy)
+	item_holder.item_icons = copy.item_icons
+	item_holder.item_state_slots = copy.item_state_slots
+	item_holder.sprite_sheets = copy.sprite_sheets
+
+	OnDisguise(item_holder, copy)
 	qdel(copy)
 
-/datum/extension/chameleon/proc/OnDisguise(obj/item/copy)
+/datum/extension/chameleon/proc/OnDisguise(obj/item/holder, obj/item/copy)
+	return
 
-/datum/extension/chameleon/clothing
-	expected_type = /obj/item/clothing
+/datum/extension/chameleon/proc/GetItemDisguiseType(singleton/hierarchy/outfit/outfit)
+	return null
 
-/datum/extension/chameleon/clothing/accessory
-	expected_type = /obj/item/clothing/accessory
+/datum/extension/chameleon/proc/GenerateChameleonChoices(basetype)
+	var/choices = list()
+	var/types = islist(basetype) ? basetype : typesof(basetype)
+	for (var/path in types)
+		AddChameleonChoice(choices, path)
+	return sortAssoc(choices)
 
-/datum/extension/chameleon/clothing/accessory/OnDisguise(obj/item/clothing/accessory/copy)
-	..()
-	var/obj/item/clothing/accessory/A = holder
-
-	A.slot = copy.slot
-	A.parent = copy.parent
-	A.inv_overlay = copy.inv_overlay
-	A.mob_overlay = copy.mob_overlay
-	A.overlay_state = copy.overlay_state
-	A.accessory_icons = copy.accessory_icons
-	A.on_rolled_down = copy.on_rolled_down
-	A.on_rolled_sleeves = copy.on_rolled_sleeves
-	A.accessory_flags = copy.accessory_flags
-
-/datum/extension/chameleon/proc/add_chameleon_choice(list/target, path)
+/datum/extension/chameleon/proc/AddChameleonChoice(list/target, path)
 	var/obj/item/I = path
 	if (initial(I.icon) && initial(I.icon_state) && !(initial(I.item_flags) & ITEM_FLAG_INVALID_FOR_CHAMELEON))
 		var/name = initial(I.name)
@@ -92,78 +79,221 @@
 		else
 			target[name] = path
 
-/datum/extension/chameleon/proc/generate_chameleon_choices(basetype)
-	var/choices = list()
-	var/types = islist(basetype) ? basetype : typesof(basetype)
-	for (var/path in types)
-		add_chameleon_choice(choices, path)
-	return sortAssoc(choices)
+/datum/extension/chameleon/proc/OnEMP(holder, severity)
+	if(!prob(50/severity))
+		return
+
+	if (emp_amount == 0)
+		START_PROCESSING(SSobj, src)
+
+	emp_amount += rand((30 SECONDS)/severity, (1 MINUTE)/severity)
+	emp_amount = min(2 MINUTES, emp_amount) // Cap EMP duration to 2 minutes
+	Malfunction()
+
+/datum/extension/chameleon/Process(wait)
+	var/trigger = FALSE
+	// For each second, check if a malfunction is triggered
+	for (var/i = 1 to ceil(wait / (1 SECOND)))
+		// There's a (EMP seconds left / 2) probability of another malfunction triggering
+		if (!trigger && prob(emp_amount / 2 / 1 SECOND))
+			trigger = TRUE
+			emp_amount -= 10 SECONDS // If a malfunction did trigger, we're kind and reduce the remaining time by 10 seconds
+		else // Otherwise we only reduce it by 1 second
+			emp_amount -= 1 SECOND
+
+	if (trigger)
+		Malfunction()
+
+	if (emp_amount <= 0)
+		emp_amount = 0
+		STOP_PROCESSING(SSobj, src)
+
+/datum/extension/chameleon/proc/Malfunction()
+	playsound(item_holder.loc, "sparks", 75, 1, -1)
+	Disguise(chameleon_choices[pick(chameleon_choices)])
 
 /**
- * Verb to handle changing the appearance of atoms that have the chameleon extension.
+ * Verbs to handle changing the appearance of atoms that have the chameleon extension.
  */
-/atom/proc/chameleon_appearance()
-	set name = "Change Appearance"
+/obj/item/proc/ChameleonFlexibleAppearance()
+	set name = "Change Appearance - Flexible"
 	set desc = "Activate the holographic appearance changing module."
 	set category = "Object"
 
-	if (!CanPhysicallyInteract(usr))
+	if (!CanPhysicallyInteractWith(usr, src))
 		return
-	if (has_extension(src,/datum/extension/chameleon))
-		var/datum/extension/chameleon/C = get_extension(src, /datum/extension/chameleon)
-		C.change(usr)
+
+	var/datum/extension/chameleon/C = get_extension(src, /datum/extension/chameleon)
+	if (C)
+		C.ChangeGeneral(usr)
 	else
-		src.verbs -= /atom/proc/chameleon_appearance
+		src.verbs -= C.chameleon_verbs
 
-/datum/extension/chameleon/proc/change(mob/user)
+/datum/extension/chameleon/proc/ChangeGeneral(mob/user)
 	var/choice = input(user, "Select a new appearance", "Select appearance") as null|anything in chameleon_choices
-	if (choice)
-		var/newname = input(user, "Choose a new name, or leave blank to use the default", "Choose item name") as null|text
-		var/newdesc = input(user, "Choose a new description, or leave blank to use the default", "Choose item description") as null|text
-		if (QDELETED(user) || QDELETED(holder))
-			return
-		if(user.incapacitated() || !(holder in user))
-			to_chat(user, SPAN_WARNING("You can't reach \the [holder]."))
-			return
-		disguise(chameleon_choices[choice], user, newname, newdesc)
-		OnChange(user,holder)
+	if (!choice)
+		return
 
-/datum/extension/chameleon/proc/OnChange(mob/user, obj/item/clothing/C) //contains icon updates
-	if (istype(C))
-		C.update_clothing_icon()
+	var/newname = input(user, "Choose a new name, or leave blank to use the default", "Choose item name") as null|text
+	var/newdesc = input(user, "Choose a new description, or leave blank to use the default", "Choose item description") as null|text
+	if(!CanPhysicallyInteractWith(user, holder))
+		to_chat(user, SPAN_WARNING("You can't reach \the [holder]."))
+		return
+	Disguise(chameleon_choices[choice], newname, newdesc)
 
+/obj/item/proc/ChameleonOutfitAppearanceSingle()
+	set name = "Change Appearance - Outfit (Selected Only)"
+	set desc = "Activate the holographic appearance changing module."
+	set category = "Object"
+
+	if (!CanPhysicallyInteractWith(usr, src))
+		return
+
+	var/datum/extension/chameleon/C = get_extension(src, /datum/extension/chameleon)
+	if (C)
+		C.ChangeOutfitSingle(usr)
+	else
+		src.verbs -= C.chameleon_verbs
+
+/datum/extension/chameleon/proc/ChangeOutfitSingle(mob/user)
+	var/choice = input(user, "Select a new appearance for the selected chameleon item", "Select appearance") as null|anything in outfits()
+	if (!choice)
+		return
+	if(!CanPhysicallyInteractWith(user, holder))
+		to_chat(user, SPAN_WARNING("You can't reach \the [holder]."))
+		return
+	SetOutfitAppearance(user, list(src), choice)
+
+/obj/item/proc/ChameleonOutfitAppearanceAll()
+	set name = "Change Appearance - Outfit (All Equipped)"
+	set desc = "Activate the holographic appearance changing module."
+	set category = "Object"
+
+	if (!CanPhysicallyInteractWith(usr, src))
+		return
+
+	var/datum/extension/chameleon/C = get_extension(src, /datum/extension/chameleon)
+	if (C)
+		C.ChangeOutfitAll(usr)
+	else
+		src.verbs -= C.chameleon_verbs
+
+/datum/extension/chameleon/proc/ChangeOutfitAll(mob/user)
+	var/choice = input(usr, "Select a new appearance for the selected chameleon item", "Select appearance") as null|anything in outfits()
+	if (!choice)
+		return
+	if(!CanPhysicallyInteractWith(user, holder))
+		to_chat(usr, SPAN_WARNING("You can't reach \the [holder]."))
+		return
+
+	var/list/extensions = list()
+	for (var/obj/item/I as anything in user.get_equipped_items(TRUE))
+		var/extension = get_extension(I, /datum/extension/chameleon)
+		if (extension)
+			extensions += extension
+	extensions |= src
+	SetOutfitAppearance(user, extensions, choice)
+
+/datum/extension/chameleon/proc/SetOutfitAppearance(mob/user, list/chameleon_extensions, singleton/hierarchy/outfit/outfit)
+	for (var/datum/extension/chameleon/chameleon_extension as anything in chameleon_extensions)
+		var/outfit_type = chameleon_extension.GetItemDisguiseType(outfit)
+		if (outfit_type)
+			to_chat(user, SPAN_NOTICE("The outfit '[outfit]' appearance was applied to \the [chameleon_extension.holder]."));
+			chameleon_extension.Disguise(outfit_type)
+		else
+			to_chat(user, SPAN_WARNING("The outfit '[outfit]' had no suitable appearance for \the [chameleon_extension.holder]."));
+
+/********************
+* Subtype overrides *
+********************/
 /datum/extension/chameleon/backpack
 	expected_type = /obj/item/storage/backpack
 
-/datum/extension/chameleon/backpack/OnChange(mob/user, obj/item/storage/backpack/C)
-	if (ismob(C.loc))
-		var/mob/M = C.loc
+/datum/extension/chameleon/backpack/OnDisguise(obj/item/storage/backpack/holder, obj/item/copy)
+	if (ismob(holder.loc))
+		var/mob/M = holder.loc
 		M.update_inv_back()
 
-/datum/extension/chameleon/headset
-	expected_type = /obj/item/device/radio/headset
+/datum/extension/chameleon/backpack/GetItemDisguiseType(singleton/hierarchy/outfit/outfit)
+	if (ispath(outfit.back, expected_type))
+		return outfit.back
+	for (var/potential_backpack_type in list_values(outfit.backpack_overrides))
+		if (ispath(potential_backpack_type, expected_type))
+			return potential_backpack_type
 
-/datum/extension/chameleon/headset/OnChange(mob/user, obj/item/device/radio/headset/C)
-	if (ismob(C.loc))
-		var/mob/M = C.loc
-		M.update_inv_ears()
+/datum/extension/chameleon/clothing
+	expected_type = /obj/item/clothing
 
-/datum/extension/chameleon/gun
-	expected_type = /obj/item/gun
+/datum/extension/chameleon/clothing/OnDisguise(obj/item/clothing/holder, obj/item/copy)
+	SHOULD_CALL_PARENT(TRUE)
+	..()
+	if (istype(holder))
+		holder.update_clothing_icon()
 
-/datum/extension/chameleon/gun/OnChange(mob/user, obj/item/gun/C)
-	if (ismob(C.loc))
-		var/mob/M = C.loc
-		M.update_inv_r_hand()
-		M.update_inv_l_hand()
+/datum/extension/chameleon/clothing/accessory
+	expected_type = /obj/item/clothing/accessory
 
-/datum/extension/chameleon/gun/OnDisguise(obj/item/gun/copy)
-	var/obj/item/gun/G = atom_holder
+/datum/extension/chameleon/clothing/accessory/OnDisguise(obj/item/clothing/accessory/holder, obj/item/clothing/accessory/copy)
+	holder.slot = copy.slot
+	holder.parent = copy.parent
+	holder.inv_overlay = copy.inv_overlay
+	holder.mob_overlay = copy.mob_overlay
+	holder.overlay_state = copy.overlay_state
+	holder.accessory_icons = copy.accessory_icons
+	holder.on_rolled_down = copy.on_rolled_down
+	holder.on_rolled_sleeves = copy.on_rolled_sleeves
+	holder.accessory_flags = copy.accessory_flags
+	..()
 
-	G.flags_inv = copy.flags_inv
-	G.fire_sound = copy.fire_sound
-	G.fire_sound_text = copy.fire_sound_text
-	G.icon = copy.icon
+/datum/extension/chameleon/clothing/glasses
+	expected_type = /obj/item/clothing/glasses
+
+/datum/extension/chameleon/clothing/glasses/GetItemDisguiseType(singleton/hierarchy/outfit/outfit)
+	if (ispath(outfit.glasses, expected_type))
+		return outfit.glasses
+
+/datum/extension/chameleon/clothing/gloves
+	expected_type = /obj/item/clothing/gloves
+
+/datum/extension/chameleon/clothing/gloves/GetItemDisguiseType(singleton/hierarchy/outfit/outfit)
+	if (ispath(outfit.gloves, expected_type))
+		return outfit.gloves
+
+/datum/extension/chameleon/clothing/head
+	expected_type = /obj/item/clothing/head
+
+/datum/extension/chameleon/clothing/head/GetItemDisguiseType(singleton/hierarchy/outfit/outfit)
+	if (ispath(outfit.head, expected_type))
+		return outfit.head
+
+/datum/extension/chameleon/clothing/mask
+	expected_type = /obj/item/clothing/mask
+
+/datum/extension/chameleon/clothing/mask/GetItemDisguiseType(singleton/hierarchy/outfit/outfit)
+	if (ispath(outfit.mask, expected_type))
+		return outfit.mask
+
+/datum/extension/chameleon/clothing/shoes
+	expected_type = /obj/item/clothing/shoes
+
+/datum/extension/chameleon/clothing/shoes/GetItemDisguiseType(singleton/hierarchy/outfit/outfit)
+	..()
+	if (ispath(outfit.shoes, expected_type))
+		return outfit.shoes
+
+/datum/extension/chameleon/clothing/suit
+	expected_type = /obj/item/clothing/suit
+
+/datum/extension/chameleon/clothing/suit/GetItemDisguiseType(singleton/hierarchy/outfit/outfit)
+	if (ispath(outfit.suit, expected_type))
+		return outfit.suit
+
+/datum/extension/chameleon/clothing/under
+	expected_type = /obj/item/clothing/under
+
+/datum/extension/chameleon/clothing/under/GetItemDisguiseType(singleton/hierarchy/outfit/outfit)
+	if (ispath(outfit.uniform, expected_type))
+		return outfit.uniform
 
 /datum/extension/chameleon/emag
 	expected_type = /obj/item/card
@@ -175,3 +305,36 @@
 		/obj/item/card/data/disk,
 		/obj/item/card/id
 	)
+
+/datum/extension/chameleon/emag/GetItemDisguiseType(singleton/hierarchy/outfit/outfit)
+	if (length(outfit.id_types) > 0)
+		var/id_path = outfit.id_types[0]
+		if (ispath(id_path, expected_type))
+			return id_path
+
+/datum/extension/chameleon/gun
+	expected_type = /obj/item/gun
+
+/datum/extension/chameleon/gun/OnDisguise(obj/item/gun/holder, obj/item/gun/copy)
+	holder.flags_inv = copy.flags_inv
+	holder.fire_sound = copy.fire_sound
+	holder.fire_sound_text = copy.fire_sound_text
+
+	if (ismob(holder.loc))
+		var/mob/M = holder.loc
+		M.update_inv_r_hand()
+		M.update_inv_l_hand()
+
+/datum/extension/chameleon/headset
+	expected_type = /obj/item/device/radio/headset
+
+/datum/extension/chameleon/headset/OnDisguise(obj/item/holder, obj/item/copy)
+	if (ismob(holder.loc))
+		var/mob/M = holder.loc
+		M.update_inv_ears()
+
+/datum/extension/chameleon/headset/GetItemDisguiseType(singleton/hierarchy/outfit/outfit)
+	if (ispath(outfit.l_ear, expected_type))
+		return outfit.l_ear
+	if (ispath(outfit.r_ear, expected_type))
+		return outfit.r_ear

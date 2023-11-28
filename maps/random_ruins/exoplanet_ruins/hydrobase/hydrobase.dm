@@ -116,6 +116,7 @@
 
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/emp_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
 	if (status_flags & GODMODE)
 		return
 	health -= rand(5, 10) * (severity + 1)
@@ -125,6 +126,7 @@
 	destroy_surroundings = TRUE
 	projectiletype = initial(projectiletype)
 	walk(src, 0)
+	GLOB.empd_event.raise_event(src, severity)
 
 
 /datum/say_list/malf_drone/hydro/speak = list(

@@ -41,8 +41,10 @@
 	activators = list("on toggle" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 
-/obj/item/integrated_circuit/input/toggle_button/emp_act()
-	return // This is a mainly physical thing, not affected by electricity
+// This is a mainly physical thing, not affected by electricity
+/obj/item/integrated_circuit/input/toggle_button/emp_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
+	GLOB.empd_event.raise_event(src, severity)
 
 /obj/item/integrated_circuit/input/toggle_button/get_topic_data(mob/user)
 	return list("Toggle [get_pin_data(IC_OUTPUT, 1) ? "Off" : "On"]" = "toggle=1")

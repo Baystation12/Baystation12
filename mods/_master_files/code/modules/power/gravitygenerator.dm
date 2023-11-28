@@ -7,6 +7,7 @@
 	return
 
 /obj/machinery/gravity_generator/emp_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/machinery/gravity_generator/bullet_act(obj/item/projectile/P, def_zone)

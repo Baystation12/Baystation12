@@ -151,6 +151,7 @@
 	return
 
 /obj/vehicle/emp_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
 	var/was_on = on
 	stat |= MACHINE_STAT_EMPED
 	var/obj/overlay/pulse2 = new /obj/overlay(loc)
