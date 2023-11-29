@@ -44,7 +44,7 @@
 // This is a mainly physical thing, not affected by electricity
 /obj/item/integrated_circuit/input/toggle_button/emp_act(severity)
 	SHOULD_CALL_PARENT(FALSE)
-	GLOB.empd_event.raise_event(src, severity)
+	return
 
 /obj/item/integrated_circuit/input/toggle_button/get_topic_data(mob/user)
 	return list("Toggle [get_pin_data(IC_OUTPUT, 1) ? "Off" : "On"]" = "toggle=1")
