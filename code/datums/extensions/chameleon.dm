@@ -27,7 +27,7 @@
 /datum/extension/chameleon/Destroy()
 	if (emp_amount)
 		STOP_PROCESSING(SSobj, src)
-	GLOB.empd_event.unregister(item_holder)
+	GLOB.empd_event.unregister(item_holder, src)
 	item_holder.verbs -= chameleon_verbs
 	item_holder = null
 	return ..()
