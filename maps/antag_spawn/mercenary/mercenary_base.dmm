@@ -467,7 +467,6 @@
 /obj/machinery/disperser/back{
 	dir = 1
 	},
-/obj/structure/ship_munition/disperser_charge/emp,
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle)
 "eR" = (
@@ -1922,11 +1921,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle)
-"vZ" = (
-/obj/machinery/portable_atmospherics/canister/oxygen,
-/obj/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/map_template/merc_shuttle)
 "wd" = (
 /obj/machinery/sleeper{
 	dir = 4
@@ -2295,11 +2289,11 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle)
 "Bj" = (
-/obj/floor_decal/industrial/outline/red,
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/structure/ship_munition/disperser_charge/explosive,
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle)
 "Bn" = (
@@ -5646,7 +5640,7 @@ tY
 kZ
 BA
 ew
-vZ
+uq
 qA
 AF
 xc

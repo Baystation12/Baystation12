@@ -509,6 +509,7 @@
 #include "code\datums\uplink\services.dm"
 #include "code\datums\uplink\stealth_and_camouflage_items.dm"
 #include "code\datums\uplink\stealthy_and_inconspicuous_weapons.dm"
+#include "code\datums\uplink\structures_and_vehicles.dm"
 #include "code\datums\uplink\telecrystals.dm"
 #include "code\datums\uplink\uplink_categories.dm"
 #include "code\datums\uplink\uplink_items.dm"
