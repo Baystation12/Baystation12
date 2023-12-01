@@ -10,6 +10,11 @@
 		slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi')
 	item_icons = list(
 		slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi')
+		
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi',
+		SPECIES_NABBER = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi'
+	)
 
 	var/fire_resist = T0C+100
 	allowed = list(/obj/item/tank/oxygen_emergency)

@@ -41,3 +41,7 @@
 // GLIDING - Start
 #define DELAY2GLIDESIZE(delay) (world.icon_size / max(ceil(delay / world.tick_lag), 1))
 // GLIDING - End
+
+// LOADOUT_ITEMS - Start
+#define ACCESSORY_SLOT_OVER     "Over"
+// LOADOUT_ITEMS - End

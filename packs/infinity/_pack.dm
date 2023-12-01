@@ -2,7 +2,6 @@
 #define CONTENT_PACK_INFINITY
 
 // DEFINES
-#include "__defines\clothing.dm"
 #include "__defines\guns.dm"
 
 // DATUMS
@@ -23,7 +22,6 @@
 #include "clothing\accessories\accessory_hand.dm"
 #include "clothing\accessories\armor.dm"
 #include "clothing\accessories\badge.dm"
-#include "clothing\accessories\cloak.dm"
 #include "clothing\accessories\collar.dm"
 #include "clothing\accessories\locket_custom.dm"
 #include "clothing\accessories\other.dm"
@@ -84,4 +82,5 @@
 #include "structures\ladder_mobile.dm"
 #include "structures\signs.dm"
 #include "structures\table_presets.dm"
+
 #endif

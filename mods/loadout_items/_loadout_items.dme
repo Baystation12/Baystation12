@@ -1,0 +1,10 @@
+#ifndef MODPACK_LOADOUT_ITEMS
+#define MODPACK_LOADOUT_ITEMS
+
+#include "_loadout_items.dm"
+#include "code/cloak.dm"
+#include "code/shoes.dm"
+#include "code/lists/cloaks.dm"
+#include "code/lists/xenowear.dm"
+
+#endif
