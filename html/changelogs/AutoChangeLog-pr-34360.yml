@@ -1,6 +1,0 @@
-author: Spookerton
-changes:
-  - {maptweak: Removed the free OFD charges from the mercenary ship.}
-  - {tweak: 'Added the "Structures & Vehicles" uplink category, containing 80tc OFD
-      charges for mercenaries.'}
-delete-after: true
