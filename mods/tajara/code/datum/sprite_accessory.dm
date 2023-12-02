@@ -217,6 +217,10 @@
 	name = "Tajara Smallsatche"
 	icon_state = "facial_smallstache"
 
+/datum/sprite_accessory/facial_hair/species_tajara/shaved
+	name = "Tajara Shaved"
+	icon_state = "facial_shaved"
+
 // MARKINGS
 
 /datum/sprite_accessory/marking/taj

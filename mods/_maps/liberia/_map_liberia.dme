@@ -7,6 +7,7 @@
 #include "code/liberia_areas.dm"
 #include "code/liberia_jobs.dm"
 #include "code/liberia_shuttles.dm"
+#include "code/liberia_structures.dm"
 #include "code/liberia_navpoints.dm"
 
 #endif

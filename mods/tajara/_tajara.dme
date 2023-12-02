@@ -5,9 +5,12 @@
 
 #include "code/gears.dm"
 #include "code/language.dm"
+#include "code/robolimbs.dm"
+#include "code/posters.dm"
 #include "code/unit_tests.dm"
 #include "code/clothing/accessories.dm"
 #include "code/clothing/clothing.dm"
+
 /*
 SIERRA TODO: Это бля что?
 #include "clothing/glasses.dm"

@@ -28,7 +28,7 @@
 	prescription = 5
 	body_parts_covered = EYES
 
-/obj/item/clothing/glasses/sunglasses/sechud/tajblind
+/obj/item/clothing/glasses/hud/security/prot/sunglasses/tajblind
 	name = "sleek veil"
 	desc = "An classic Ahdominian made veil that allows the user to see while obscuring their eyes. This one has an in-built security HUD."
 	item_icons = list(slot_glasses_str = 'mods/tajara/icons/onmob_eyes.dmi')
@@ -68,7 +68,7 @@
 	off_state = "tajvisor_sci"
 	body_parts_covered = EYES
 
-/obj/item/clothing/glasses/sunglasses/sechud/tajvisor
+/obj/item/clothing/glasses/hud/security/prot/sunglasses/tajvisor
 	name = "sleek visor"
 	desc = "A modern Ahdominian made visor that allows the user to see while obscuring their eyes. This one has an in-built security HUD."
 	item_icons = list(slot_glasses_str = 'mods/tajara/icons/onmob_eyes.dmi')
@@ -340,6 +340,8 @@
 /datum/gear/suit/tajara
 	display_name = "(Tajara) vintage tajaran overcoat"
 	path = /obj/item/clothing/suit/storage/taj_overcoat
+	whitelisted = list(SPECIES_TAJARA)
+	sort_category = "Xenowear"
 
 /datum/gear/shoes/tajara
 	display_name = "(Tajara) vintage boots"
@@ -463,7 +465,7 @@
 
 /datum/gear/eyes/security/tajblind
 	display_name = "(Tajara) veil, sleek"
-	path = /obj/item/clothing/glasses/sunglasses/sechud/tajblind
+	path = /obj/item/clothing/glasses/hud/security/prot/sunglasses/tajblind
 	whitelisted = list(SPECIES_TAJARA)
 	sort_category = "Xenowear"
 	cost = 1
@@ -509,7 +511,7 @@
 
 /datum/gear/eyes/security/tajvisor
 	display_name = "(Tajara) visor, security"
-	path = /obj/item/clothing/glasses/sunglasses/sechud/tajvisor
+	path = /obj/item/clothing/glasses/hud/security/prot/sunglasses/tajvisor
 	whitelisted = list(SPECIES_TAJARA)
 	sort_category = "Xenowear"
 	cost = 1

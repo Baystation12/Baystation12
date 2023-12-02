@@ -1,7 +1,7 @@
 /obj/structure/table/mag
 	name = "Magnetic Table"
 	desc = "It is simple magnetic table. Good for merchants."
-	icon = 'packs/infinity/icons/obj/mag_tables.dmi'
+	icon = 'mods/_maps/liberia/icons/mag_tables.dmi'
 	icon_state = "magnetic_table_disabled"
 	var/icon_state_open = "magnetic_table_disabled"
 	var/icon_state_closed = "magnetic_table_enabled"

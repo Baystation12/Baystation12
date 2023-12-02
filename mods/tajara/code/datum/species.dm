@@ -25,7 +25,7 @@
 	health_hud_intensity = 1.75
 
 	min_age = 19
-	max_age = 140 //good medicine?
+	max_age = 120
 
 	description = "The Tajaran are a species of furred mammalian bipeds hailing from the chilly planet of Ahdomai \
 	in the Zamsiin-lr system. They are a naturally superstitious species, with the new generations growing up with tales \

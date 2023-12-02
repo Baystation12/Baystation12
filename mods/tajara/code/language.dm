@@ -12,6 +12,7 @@
 	"ka","aasi","far","wa","baq","ara","qara","zir","sam","mak","hrar","nja","rir","khan","jun","dar","rik","kah",
 	"hal","ket","jurl","mah","tul","cresh","azu","ragh","mro","mra","mrro","mrra")
 	shorthand = "TJ"
+	has_written_form = TRUE
 
 /datum/language/tajaran/get_random_name(gender)
 
