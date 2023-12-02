@@ -4142,7 +4142,9 @@
 /area/quartermaster/exploration)
 "jG" = (
 /obj/structure/table/steel,
-/obj/machinery/chemical_dispenser/bar_soft/full,
+/obj/machinery/chemical_dispenser/bar_soft/full{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/pilot)
 "jH" = (
