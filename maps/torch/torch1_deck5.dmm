@@ -6741,7 +6741,7 @@
 	dir = 6
 	},
 /obj/machinery/vending/cola{
-	dir = 4
+	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fifthdeck/aft)
