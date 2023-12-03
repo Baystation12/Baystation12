@@ -127,6 +127,10 @@
 /obj/structure/sign/warning/caution
 	name = "\improper CAUTION"
 
+/obj/structure/sign/warning/toxic_material
+	name = "\improper TOXIC MATERIAL"
+	icon_state = "toxic_material"
+
 /obj/structure/sign/warning/compressed_gas
 	name = "\improper COMPRESSED GAS"
 	icon_state = "hikpa"
