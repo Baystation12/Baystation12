@@ -3086,14 +3086,10 @@
 /area/maintenance/fifthdeck/aftstarboard)
 "hc" = (
 /obj/machinery/portable_atmospherics/canister/sleeping_agent,
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 4;
-	pixel_x = -32
-	},
-/obj/machinery/light/small{
-	dir = 1
-	},
 /obj/floor_decal/industrial/outline/grey,
+/obj/structure/sign/warning/nosmoking_2{
+	pixel_y = 30
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/rnd/canister)
 "hd" = (
@@ -3137,16 +3133,15 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/fuel)
 "hf" = (
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 8;
-	pixel_x = 32
-	},
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/structure/catwalk,
+/obj/structure/sign/warning/toxic_material{
+	pixel_x = 32
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "hg" = (
@@ -3351,10 +3346,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "hP" = (
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 4;
-	pixel_x = -32
-	},
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 4;
@@ -3363,6 +3354,9 @@
 /obj/structure/railing/mapped,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
+	},
+/obj/structure/sign/warning/toxic_material{
+	pixel_x = -32
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
@@ -8666,13 +8660,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/vacant/infirmary)
-"sW" = (
-/obj/structure/sign/warning/biohazard,
-/turf/simulated/wall/prepainted,
-/area/rnd/canister)
 "sX" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /obj/floor_decal/industrial/outline/grey,
+/obj/machinery/light/small{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/rnd/canister)
 "sY" = (
@@ -8685,15 +8678,11 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/rnd/canister)
 "sZ" = (
-/obj/machinery/portable_atmospherics/canister/empty,
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 8;
-	pixel_x = 32
-	},
-/obj/machinery/light/small{
-	dir = 1
-	},
 /obj/floor_decal/industrial/outline/grey,
+/obj/machinery/portable_atmospherics/canister/chlorine,
+/obj/structure/sign/warning/toxic_material{
+	pixel_y = 30
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/rnd/canister)
 "tb" = (
@@ -8722,6 +8711,7 @@
 	dir = 8;
 	pixel_x = 32
 	},
+/obj/machinery/light/small,
 /turf/simulated/floor/tiled/techfloor,
 /area/rnd/canister)
 "tf" = (
@@ -8732,7 +8722,9 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/research{
-	name = "Canister Storage"
+	name = "Canister Storage";
+	autoset_access = 0;
+	req_access = list("ACCESS_TOX_STORAGE")
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -8791,7 +8783,9 @@
 "tj" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/research{
-	name = "Canister Storage"
+	name = "Canister Storage";
+	autoset_access = 0;
+	req_access = list("ACCESS_TOX_STORAGE")
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
@@ -8830,6 +8824,7 @@
 	pixel_x = -23
 	},
 /obj/floor_decal/industrial/outline/grey,
+/obj/machinery/light/small,
 /turf/simulated/floor/tiled/techfloor,
 /area/rnd/canister)
 "to" = (
@@ -40994,7 +40989,7 @@ aa
 ZG
 ZG
 GQ
-sW
+ZA
 hc
 tg
 tn
@@ -41802,7 +41797,7 @@ aa
 ZG
 ZG
 GQ
-sW
+ZA
 sZ
 ti
 te
