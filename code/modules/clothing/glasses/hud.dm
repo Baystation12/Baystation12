@@ -44,6 +44,13 @@
 	off_state = "healthhudpresc_off"
 	item_state = "healthhudpresc"
 
+/obj/item/clothing/glasses/hud/health/aviators
+	name = "HUD aviators"
+	desc = "A medical HUD integrated into a pair of aviator sunglasses. It does little to protect against the sun, but it sure looks cool."
+	icon_state = "health_avi_on"
+	off_state = "avi_off"
+	item_state = "health_avi_on"
+
 /obj/item/clothing/glasses/hud/health/goggle
 	name = "medical HUD visor"
 	desc = "A medical HUD integrated with a wide visor."
@@ -138,6 +145,13 @@
 	desc = "A janitor HUD integrated with a set of prescription glasses."
 	prescription = 5
 
+/obj/item/clothing/glasses/hud/janitor/aviators
+	name = "HUD aviators"
+	desc = "A janitorial HUD integrated into a pair of aviator sunglasses. It does little to protect against the sun, but it sure looks cool."
+	icon_state = "jani_avi_on"
+	off_state = "avi_off"
+	item_state = "jani_avi_on"
+
 /obj/item/clothing/glasses/hud/janitor/process_hud(mob/M)
 	process_jani_hud(M)
 
@@ -156,3 +170,10 @@
 	item_state = "scihudpresc"
 	desc = "A science HUD integrated with a set of prescription glasses."
 	prescription = 5
+
+/obj/item/clothing/glasses/hud/science/aviators
+	name = "HUD aviators"
+	desc = "A scientific HUD integrated into a pair of aviator sunglasses. It does little to protect against the sun, but it sure looks cool."
+	icon_state = "sci_avi_on"
+	off_state = "avi_off"
+	item_state = "sci_avi_on"
