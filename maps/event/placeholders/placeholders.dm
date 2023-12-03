@@ -222,9 +222,18 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 
 /obj/overmap/visitable/placeholder/scg_lexington
 	name = "Lexington-Class Corvette"
-	desc = "A small, fairly modern missile carrying warship built for the Solar Assembly Fleets."
+	desc = "A small hunter-killer and picketing warship built for the Solar Assembly Fleets."
 	icon = 'scg-64.dmi'
 	icon_state = "cv-lexington"
+	pixel_x = -16
+	pixel_y = -16
+
+
+/obj/overmap/visitable/placeholder/scg_scorpion
+	name = "Scorpion-Class Corvette"
+	desc = "A small, fairly modern missile-carrying warship built for the Solar Assembly Fleets."
+	icon = 'scg-64.dmi'
+	icon_state = "cv-scorpion"
 	pixel_x = -16
 	pixel_y = -16
 
