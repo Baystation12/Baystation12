@@ -62,6 +62,7 @@
 	#include "items/cards_ids.dm"
 	#include "items/coins.dm"
 	#include "items/encryption_keys.dm"
+	#include "items/selection.dm"
 	#include "items/headsets.dm"
 	#include "items/items.dm"
 	#include "items/machinery.dm"
