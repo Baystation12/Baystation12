@@ -1,0 +1,6 @@
+author: LordNest
+changes:
+  - {tweak: Исправил отсутствие некоторых вещей в лодауте}
+  - {rscadd: Голобомбы вернул}
+  - {maptweak: Исправил ряд мелких ошибок карты}
+delete-after: true
