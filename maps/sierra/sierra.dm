@@ -58,6 +58,7 @@
 	#include "items/items.dm"
 	#include "items/lighting.dm"
 	#include "items/machinery.dm"
+	#include "items/modular_computer.dm"
 	#include "items/manuals.dm"
 	#include "items/mech.dm"
 	#include "items/papers.dm"

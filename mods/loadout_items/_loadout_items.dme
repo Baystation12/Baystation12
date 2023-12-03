@@ -3,8 +3,11 @@
 
 #include "_loadout_items.dm"
 #include "code/cloak.dm"
+#include "code/gloves.dm"
 #include "code/shoes.dm"
+#include "code/uniforms.dm"
 #include "code/lists/cloaks.dm"
+#include "code/lists/uniforms.dm"
 #include "code/lists/xenowear.dm"
 
 #endif

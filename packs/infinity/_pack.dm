@@ -5,7 +5,6 @@
 #include "__defines\guns.dm"
 
 // DATUMS
-#include "_datums\loadout\gears.dm"
 #include "_datums\reagents\experimental.dm"
 
 // HELPERS
@@ -38,7 +37,6 @@
 #include "items\chairs.dm"
 #include "items\chemistry.dm"
 #include "items\grown.dm"
-#include "items\modular_computer.dm"
 #include "items\multimeter.dm"
 #include "items\powertools.dm"
 #include "items\towels.dm"

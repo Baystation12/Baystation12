@@ -7,12 +7,6 @@
 					/obj/item/device/radio/off = 1,
 					/obj/item/reagent_containers/food/snacks/liquidfood = 2)
 
-/obj/item/storage/box/holobombs
-	name = "box of holobombs"
-	desc = "A box containing 5 experimental holobombs."
-	icon_state = "flashbang"
-	startswith = list(/obj/item/device/holobomb = 5, /obj/item/paper/holobomb = 1)
-
 /obj/item/storage/box/smokeshells
 	name = "box of smoke shells"
 	desc = "A box containing 5 military grade smoke shells."

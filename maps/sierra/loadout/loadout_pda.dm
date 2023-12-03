@@ -41,7 +41,6 @@
 		. = item
 
 
-/* SIERRA TODO:
 /datum/gear/utility/wrist_computer
 	display_name = "Wrist computer selection"
 	path = /obj/item/modular_computer/pda/wrist
@@ -82,6 +81,5 @@
 		if(os && os.active_program && os.active_program.NM && istype(os.active_program, /datum/computer_file/program/email_client))
 			var/datum/nano_module/email_client/NME = os.active_program.NM
 			NME.log_in()
-	if(H.equip_to_slot_if_possible(item, slot, del_on_fail = 1))
+	if(H.equip_to_slot_if_possible(item, slot, equip_flags = TRYEQUIP_REDRAW))
 		. = item
-		*/

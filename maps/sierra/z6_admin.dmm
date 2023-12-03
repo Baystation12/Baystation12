@@ -7845,8 +7845,9 @@
 	},
 /obj/structure/showcase{
 	desc = "A self-contained autopilot that controls supply drones.";
-	icon_state = "comm_server";
-	name = "Supply Drone Virtual Intelligence"
+	name = "Supply Drone Virtual Intelligence";
+	icon = 'icons/obj/machines/telecomms.dmi';
+	icon_state = "comm_server"
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/supply/dock)
