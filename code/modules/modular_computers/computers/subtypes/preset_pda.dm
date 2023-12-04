@@ -13,6 +13,7 @@
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
 		os.create_file(new/datum/computer_file/program/email_client())
+		os.create_file(new/datum/computer_file/program/chatclient())
 		os.create_file(new/datum/computer_file/program/crew_manifest())
 		os.create_file(new/datum/computer_file/program/wordprocessor())
 		os.create_file(new/datum/computer_file/program/records())
