@@ -2231,6 +2231,7 @@
 #include "code\modules\mob\living\carbon\human\descriptors\descriptors_nabber.dm"
 #include "code\modules\mob\living\carbon\human\descriptors\descriptors_skrell.dm"
 #include "code\modules\mob\living\carbon\human\descriptors\descriptors_vox.dm"
+#include "code\modules\mob\living\carbon\human\machine\screen_abilities.dm"
 #include "code\modules\mob\living\carbon\xenobiological\death.dm"
 #include "code\modules\mob\living\carbon\xenobiological\examine.dm"
 #include "code\modules\mob\living\carbon\xenobiological\hud.dm"
