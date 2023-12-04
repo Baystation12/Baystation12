@@ -23,10 +23,11 @@
 	emag_gear = list(
 		/obj/item/melee/baton/robot/electrified_arm,
 		/obj/item/device/flash,
-		/obj/item/gun/energy/gun,
 		/obj/item/reagent_containers/spray,
 		/obj/item/flamethrower/full/loaded
 	)
+
+	var/flamethrower_recharge_modifier = 20
 
 /obj/item/robot_module/janitor/finalize_emag()
 	. = ..()
@@ -44,8 +45,8 @@
 	if (R.emagged)
 		var/obj/item/reagent_containers/spray/S = locate() in equipment
 		if (S)
-			S.reagents.add_reagent(/datum/reagent/fuel, 30 * amount)
+			S.reagents.add_reagent(/datum/reagent/fuel, flamethrower_recharge_modifier * amount)
 
 		var/obj/item/flamethrower/full/loaded/flamethrower = locate() in equipment
 		if (flamethrower)
-			flamethrower.beaker.reagents.add_reagent(/datum/reagent/napalm, 30 * amount)
+			flamethrower.beaker.reagents.add_reagent(/datum/reagent/napalm, flamethrower_recharge_modifier * amount)

@@ -33,7 +33,6 @@
 	)
 	emag_gear = list(
 		/obj/item/melee/baton/robot/electrified_arm,
-		/obj/item/gun/energy/gun,
 		/obj/item/rcd/borg
 	)
 
