@@ -100,7 +100,7 @@ var/global/list/string_slot_flags = list(
 	paths = typesof(/datum/sprite_accessory/hair) - /datum/sprite_accessory/hair
 	for(var/path in paths)
 		var/datum/sprite_accessory/hair/H = path
-		if (!initial(H.name))
+		if (is_abstract(H) || !initial(H.name))
 			continue
 		H = new path()
 		GLOB.hair_styles_list[H.name] = H
@@ -109,7 +109,7 @@ var/global/list/string_slot_flags = list(
 	paths = typesof(/datum/sprite_accessory/facial_hair) - /datum/sprite_accessory/facial_hair
 	for(var/path in paths)
 		var/datum/sprite_accessory/facial_hair/H = path
-		if (!initial(H.name))
+		if (is_abstract(H) || !initial(H.name))
 			continue
 		H = new path()
 		GLOB.facial_hair_styles_list[H.name] = H

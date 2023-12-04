@@ -55,7 +55,8 @@
 		for(var/sprite_accessory_type in subtypesof(sprite_accessory_main_type))
 			var/failed = FALSE
 			var/datum/sprite_accessory/sat = sprite_accessory_type
-
+			if (is_abstract(sat))
+				continue
 			var/sat_name = initial(sat.name)
 			if(sat_name)
 				group_by(sprite_accessories_by_name, sat_name, sat)
