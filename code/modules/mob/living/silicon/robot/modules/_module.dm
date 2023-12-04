@@ -56,7 +56,7 @@
 	/// Whether or not to include the map's defined `synth_access` list.
 	var/use_map_synth_access = TRUE
 	/// Whether or not to apply get_all_station_access() to the access flags.
-	var/use_all_station_access = FALSE
+	var/use_all_station_access = TRUE
 
 
 /obj/item/robot_module/Initialize()
