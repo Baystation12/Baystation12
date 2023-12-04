@@ -1,0 +1,6 @@
+author: BurpleBineapple
+changes:
+  - {rscadd: 'Added toggleable NRC notifications for join, leave, and message events.'}
+  - {tweak: The NRC program is 2GQ and installed on PDAs by default.}
+  - {bugfix: Held computers can connect to NRC channels properly.}
+delete-after: true
