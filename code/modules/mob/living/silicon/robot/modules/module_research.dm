@@ -34,7 +34,6 @@
 	emag_gear = list(
 		/obj/item/melee/baton/robot/electrified_arm,
 		/obj/item/device/flash,
-		/obj/item/gun/energy/gun,
 		/obj/prefab/hand_teleporter,
 		/obj/item/gun/energy/decloner
 	)

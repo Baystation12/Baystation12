@@ -53,7 +53,6 @@
 		SKILL_CONSTRUCTION = SKILL_EXPERIENCED,
 		SKILL_ELECTRICAL   = SKILL_EXPERIENCED
 	)
-	use_all_station_access = TRUE
 
 /obj/item/robot_module/drone/finalize_equipment(mob/living/silicon/robot/R)
 	. = ..()

@@ -46,8 +46,6 @@
 	)
 	emag_gear = list(
 		/obj/item/melee/baton/robot/electrified_arm,
-		/obj/item/gun/energy/gun,
-		/obj/item/gun/projectile/automatic/sec_smg,
 		/obj/item/gun/energy/plasmacutter,
 		/obj/item/borg/combat/shield
 	)
