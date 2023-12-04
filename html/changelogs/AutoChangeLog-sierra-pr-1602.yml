@@ -1,0 +1,6 @@
+author: Lexanx
+changes:
+  - {tweak: IPC parts are colorable by using markings.}
+  - {rscadd: IPCs have some head accessories as hair.}
+  - {rscadd: IPCs using heads with screens can display text on the screen.}
+delete-after: true
