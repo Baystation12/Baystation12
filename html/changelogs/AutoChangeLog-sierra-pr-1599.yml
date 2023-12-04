@@ -1,0 +1,6 @@
+author: Sbotkin
+changes:
+  - {maptweak: The canister storage now can be accessed by scientists via the Petrov's
+      maints.}
+  - {maptweak: Scientists now have access to Chlorine!}
+delete-after: true
