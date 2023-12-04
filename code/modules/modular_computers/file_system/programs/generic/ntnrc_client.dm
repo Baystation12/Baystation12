@@ -5,7 +5,8 @@
 	program_key_state = "med_key"
 	program_menu_icon = "comment"
 	extended_desc = "This program allows communication over NTNRC network"
-	size = 8
+	size = 2
+	processing_size = 0
 	requires_ntnet = TRUE
 	requires_ntnet_feature = NTNET_COMMUNICATION
 	network_destination = "NTNRC server"
@@ -20,6 +21,8 @@
 	var/operator_mode = FALSE
 	/// Administrator mode (invisible to other users + bypasses passwords)
 	var/netadmin_mode = FALSE
+	/// Mutes notifications
+	var/muted = FALSE
 	usage_flags = PROGRAM_ALL
 
 /datum/computer_file/program/chatclient/New()
@@ -38,6 +41,7 @@
 		if(!message || !channel)
 			return
 		channel.add_message(message, username)
+		ntnrc_alert("[username] sent an NTNRC message.")
 
 	if(href_list["PRG_joinchannel"])
 		. = TOPIC_HANDLED
@@ -60,13 +64,16 @@
 			if(C && (password == C.password))
 				C.add_client(src)
 				channel = C
+				ntnrc_alert("A user has joined your channel.")
 			return TOPIC_HANDLED
 		C.add_client(src)
 		channel = C
+		ntnrc_alert("A user has joined your channel.")
 	if(href_list["PRG_leavechannel"])
 		. = TOPIC_HANDLED
 		if(channel)
 			channel.remove_client(src)
+			ntnrc_alert("A user has left your channel.")
 		channel = null
 	if(href_list["PRG_newchannel"])
 		. = TOPIC_HANDLED
@@ -74,12 +81,12 @@
 		var/channel_title = sanitizeSafe(input(user,"Enter channel name or leave blank to cancel:"), 64)
 		if(!channel_title)
 			return
-		var/atom/A = computer.get_physical_host()
-		var/datum/ntnet_conversation/C = new/datum/ntnet_conversation(A.z)
-		C.add_client(src)
-		C.operator = src
-		channel = C
-		C.title = channel_title
+		var/turf/turf = get_turf(computer.get_physical_host())
+		var/datum/ntnet_conversation/conversation = new/datum/ntnet_conversation(turf.z)
+		conversation.add_client(src)
+		conversation.operator = src
+		channel = conversation
+		conversation.title = channel_title
 	if(href_list["PRG_toggleadmin"])
 		. = TOPIC_HANDLED
 		if(netadmin_mode)
@@ -95,6 +102,7 @@
 				if(response == "Yes")
 					if(channel)
 						channel.remove_client(src)
+						ntnrc_alert("A user has left your channel.")
 						channel = null
 				else
 					return
@@ -108,6 +116,14 @@
 		if(channel)
 			channel.add_status_message("[username] is now known as [newname].")
 		username = newname
+
+	if (href_list["PRG_mutenotif"])
+		. = TOPIC_HANDLED
+		muted = !muted
+		if (muted)
+			computer.visible_notification(SPAN_NOTICE("Channel notifications have been disabled."))
+			return
+		computer.visible_notification(SPAN_NOTICE("Channel notifications have been enabled."))
 
 	if(href_list["PRG_savelog"])
 		. = TOPIC_HANDLED
@@ -157,9 +173,10 @@
 
 /datum/computer_file/program/chatclient/process_tick()
 	..()
-	var/atom/A = computer.get_physical_host()
-	if(channel && !(channel.source_z in GetConnectedZlevels(A.z)))
+	var/turf/turf = get_turf(computer.get_physical_host())
+	if (channel && !(channel.source_z in GetConnectedZlevels(turf.z)))
 		channel.remove_client(src)
+		ntnrc_alert("A user has left your channel.")
 		channel = null
 
 	if(program_state != PROGRAM_STATE_KILLED)
@@ -179,8 +196,18 @@
 /datum/computer_file/program/chatclient/on_shutdown(forced = FALSE)
 	if(channel)
 		channel.remove_client(src)
+		src.ntnrc_alert("A user has left your channel.")
 		channel = null
 	..(forced)
+
+/datum/computer_file/program/chatclient/proc/ntnrc_alert(message)
+	if (!istype(src))
+		return
+	for (var/datum/computer_file/program/chatclient/client in channel.clients)
+		if (client == src || client.muted)
+			continue
+		client.computer.visible_notification(SPAN_NOTICE(message))
+		client.computer.audible_notification("sound/machines/ping.ogg")
 
 /datum/nano_module/program/computer_chatclient
 	name = "NTNet Relay Chat Client"
@@ -217,8 +244,8 @@
 
 	else // Channel selection screen
 		var/list/all_channels[0]
-		var/atom/A = C.computer.get_physical_host()
-		var/list/connected_zs = GetConnectedZlevels(A.z)
+		var/turf/turf = get_turf(C.computer.get_physical_host())
+		var/list/connected_zs = GetConnectedZlevels(turf.z)
 		for(var/datum/ntnet_conversation/conv in ntnet_global.chat_channels)
 			if(conv && conv.title && (conv.source_z in connected_zs))
 				all_channels.Add(list(list(
