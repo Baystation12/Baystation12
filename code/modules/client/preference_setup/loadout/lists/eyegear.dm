@@ -35,6 +35,7 @@
 	options["Goggles, corrective"] = /obj/item/clothing/glasses/science/prescription
 	options["HUD"] = /obj/item/clothing/glasses/hud/science
 	options["HUD, corrective"] = /obj/item/clothing/glasses/hud/science/prescription
+	options["Aviators"] = /obj/item/clothing/glasses/hud/science/aviators
 	gear_tweaks += new /datum/gear_tweak/path (options)
 
 
@@ -75,6 +76,7 @@
 	options["Goggles"] = /obj/item/clothing/glasses/hud/health/goggle
 	options["Goggles, corrective"] = /obj/item/clothing/glasses/hud/health/goggle/prescription
 	options["Eyepatch"] = /obj/item/clothing/glasses/eyepatch/hud/medical
+	options["Aviators"] = /obj/item/clothing/glasses/hud/health/aviators
 	gear_tweaks += new /datum/gear_tweak/path (options)
 
 
@@ -91,6 +93,7 @@
 	options["Goggles"] = /obj/item/clothing/glasses/meson
 	options["Goggles, corrective"] = /obj/item/clothing/glasses/meson/prescription
 	options["Eyepatch"] = /obj/item/clothing/glasses/eyepatch/hud/meson
+	options["Aviators"] = /obj/item/clothing/glasses/meson/aviators
 	gear_tweaks += new /datum/gear_tweak/path (options)
 
 
@@ -106,6 +109,7 @@
 	var/list/options = list()
 	options["HUD"] = /obj/item/clothing/glasses/hud/janitor
 	options["HUD, corrective"] = /obj/item/clothing/glasses/hud/janitor/prescription
+	options["Aviators"] = /obj/item/clothing/glasses/hud/janitor/aviators
 	gear_tweaks += new /datum/gear_tweak/path (options)
 
 
