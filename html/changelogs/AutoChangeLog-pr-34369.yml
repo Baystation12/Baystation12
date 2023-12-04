@@ -1,4 +1,0 @@
-author: gy1ta23
-changes:
-  - {tweak: Torch pilot helmets are a selection box instead of all pre-spawned.}
-delete-after: true
