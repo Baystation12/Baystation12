@@ -1,6 +1,0 @@
-author: Mucker
-changes:
-  - {rscadd: Re-added borg all access.}
-  - {rscdel: Removed e-guns from traitor borgs.}
-  - {tweak: Slightly lowered the regen rate of flamer fuel for traitor borgs.}
-delete-after: true
