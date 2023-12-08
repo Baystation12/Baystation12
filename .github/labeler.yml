@@ -1,30 +1,56 @@
 ':open_file_folder: Репозиторий':
-- .github/**/*
-- .vscode/**/*
-- docs/**/*
-- scripts/**/*
-- test/**/*
-- tools/**/*
-- .codebeatignore
-- .editorconfig
-- .git*
-- LICENSE
-- README.md
-- SpacemanDMM.toml
+- changed-files:
+  - any-glob-to-any-file:
+    - '.github/**/*'
+    - '.vscode/**/*'
+    - 'docs/**/*'
+    - 'scripts/**/*'
+    - 'test/**/*'
+    - 'tools/**/*'
+    - '.codebeatignore'
+    - '.codebeatsettings'
+    - '.editorconfig'
+    - '.git*'
+    - 'biome.json'
+    - 'libmysql.dll'
+    - 'LICENSE'
+    - 'README.md'
+    - 'SpacemanDMM.toml'
 
 ':world_map: Карты':
-- '**/*.dmm'
+- changed-files:
+  - any-glob-to-any-file:
+    - '**/*.dmm'
 
 ':mountain: Спрайты':
-- '**/*.dmi'
+- changed-files:
+  - any-glob-to-any-file:
+    - '**/*.dmi'
 
 ':sound: Звуки':
-- '**/*.ogg'
-- '**/*.wav'
-- '**/*.mp3'
+- changed-files:
+  - any-glob-to-any-file:
+    - '**/*.aif'
+    - '**/*.aiff'
+    - '**/*.it'
+    - '**/*.mid'
+    - '**/*.midi'
+    - '**/*.mod'
+    - '**/*.mp3'
+    - '**/*.ogg'
+    - '**/*.oxm'
+    - '**/*.raw'
+    - '**/*.s3m'
+    - '**/*.wma'
+    - '**/*.wav'
+    - '**/*.xm'
 
 ':page_facing_up: Конфиги':
-- config/example/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - 'config/example/**/*'
 
 ':floppy_disk: База данных':
-- sql/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - 'sql/**/*'
