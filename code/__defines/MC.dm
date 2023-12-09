@@ -169,9 +169,3 @@ if(Datum.is_processing) {\
 ****/
 
 #define addtimer(args...) _addtimer(args, source ="[__FILE__]#[__LINE__]")
-
-/****
- *  Helper for waits
- ****/
-
-#define UNTIL(X) while(!(X)) stoplag()

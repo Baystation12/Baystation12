@@ -119,7 +119,3 @@
 #define LIGHT_NARROW 45
 
 #define DARKSIGHT_GRADIENT_SIZE 480
-// Max number of ambient groups, amount over this value will simply not be created
-#define AMBIENT_GROUP_MAX_BITS 24
-// Ambient group used for exterior turfs not on planets - Could also replace Space turf legacy starlight implementation
-#define SPACE_AMBIENT_GROUP 1
