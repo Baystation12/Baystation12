@@ -1,0 +1,4 @@
+author: SuhEugene
+changes:
+  - {bugfix: Закрытие фуллскрина больше не показывает белый статусбар бьёнда.}
+delete-after: true
