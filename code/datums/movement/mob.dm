@@ -271,8 +271,18 @@
 		return
 
 	// Something with pulling things
-	var/extra_delay = HandleGrabs(direction, old_turf)
+	// [SIERRA-EDIT] - SSINPUT
+	// var/extra_delay = HandleGrabs(direction, old_turf) // SIERRA-EDIT - ORIGINAL
+	// mob.ExtraMoveCooldown(extra_delay) // SIERRA-EDIT - ORIGINAL
+	var/extra_delay = 0
+	for (var/obj/item/grab/G in mob)
+		if(G.assailant == G.affecting)
+			return
+		extra_delay = max(extra_delay, G.grab_slowdown())
+
 	mob.ExtraMoveCooldown(extra_delay)
+	HandleGrabs(direction, old_turf)
+	// [/SIERRA-EDIT]
 
 	for (var/obj/item/grab/G in mob)
 		if (G.assailant_reverse_facing())

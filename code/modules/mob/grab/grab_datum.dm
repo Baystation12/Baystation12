@@ -177,6 +177,9 @@
 	var/adir = get_dir(assailant, affecting)
 
 	if(same_tile)
+		// [SIERRA-ADD] - SSINPUT
+		affecting.set_glide_size(assailant.glide_size)
+		// [/SIERRA-ADD]
 		affecting.forceMove(assailant.loc)
 		adir = assailant.dir
 		affecting.set_dir(assailant.dir)
