@@ -34,10 +34,16 @@
 	var/can_badmin = !is_stealthed && can_select_ooc_color(C) && (C.prefs.ooccolor != initial(C.prefs.ooccolor))
 	var/ooc_color = C.prefs.ooccolor
 
+	// [SIERRA-ADD] - DON_LOADOUT
+	var/ckey_prefix = C.donator_info.get_decorated_message(C, "<EM>[C.key]:</EM>")
+	// [/SIERRA-ADD]
 	for(var/client/target in GLOB.clients)
 		if(target.is_key_ignored(C.key)) // If we're ignored by this person, then do nothing.
 			continue
-		var/sent_message = "[create_text_tag("ooc", "OOC:", target)] <EM>[C.key]:</EM> [SPAN_CLASS("message linkify", "[message]")]"
+		// [SIERRA-EDIT] - DON_LOADOUT
+		// var/sent_message = "[create_text_tag("ooc", "OOC:", target)] <EM>[C.key]:</EM> [SPAN_CLASS("message linkify", "[message]")]" // SIERRA-EDIT - ORIGINAL
+		var/sent_message = "[create_text_tag("ooc", "OOC:", target)] [ckey_prefix] [SPAN_CLASS("message linkify", "[message]")]"
+		// [/SIERRA-EDIT]
 		if(can_badmin)
 			receive_communication(C, target, SPAN_COLOR(ooc_color, SPAN_CLASS("ooc", sent_message)))
 		else

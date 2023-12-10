@@ -30,6 +30,7 @@ ID мода: DON_LOADOUT
 ### Изменения *кор кода*
 
 - `code/modules/client/preference_setup/general/05_preview.dm`: `/datum/preferences/proc/dress_preview_mob()`
+- `code/datums/communication/ooc.dm`: `/singleton/communication_channel/ooc/do_communicate()`
 <!--
   Если вы редактировали какие-либо процедуры или переменные в кор коде,
   они должны быть указаны здесь.
