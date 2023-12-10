@@ -32,7 +32,7 @@ ID мода: SSINPUT
 - `code/_onclick/click.dm`: `/mob/proc/MiddleClickOn()`
 - `code/game/verbs/ooc.dm`: `/client/verb/ooc()`, `/client/verb/looc()`
 - `code/modules/admin/callproc/callproc.dm`: `/client/Click()`
-- `code/modules/client/client_procs.dm`: `/client/New()`
+- `code/modules/client/client_procs.dm`: `/client/New()`, `/client/verb/toggle_fullscreen()`
 - `code/modules/goonchat/browserOutput.dm`: `/datum/chatOutput/Topic()`
 - `code/modules/mob/living/silicon/robot/login.dm`: `/mob/living/silicon/robot/Login()`
 - `code/modules/mob/observer/ghost/ghost.dm`: `/mob/observer/ghost/appearance_flags`
