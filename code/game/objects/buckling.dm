@@ -373,6 +373,9 @@
 	if (!buckled_mob)
 		return
 	if (loc)
+		// [SIERRA-ADD] - SSINPUT
+		buckled_mob.set_glide_size(glide_size)
+		// [/SIERRA-ADD]
 		buckled_mob.forceMove(loc)
 	else
 		unbuckle_mob()
@@ -383,6 +386,9 @@
 	if (!buckled_mob)
 		return
 	if (loc)
+		// [SIERRA-ADD] - SSINPUT
+		buckled_mob.set_glide_size(glide_size)
+		// [/SIERRA-ADD]
 		buckled_mob.forceMove(loc)
 	else
 		unbuckle_mob()

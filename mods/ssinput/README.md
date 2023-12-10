@@ -30,6 +30,7 @@ ID мода: SSINPUT
 - `code/__defines/subsystem-priority.dm`: `#define SS_PRIORITY_INPUT`
 - `code/__defines/subsystems.dm`: `#define SS_INIT_INPUT`
 - `code/_onclick/click.dm`: `/mob/proc/MiddleClickOn()`
+- `code/game/objects/buckling.dm`: `/obj/Move()`, `/obj/forceMove()`
 - `code/game/verbs/ooc.dm`: `/client/verb/ooc()`, `/client/verb/looc()`
 - `code/modules/admin/callproc/callproc.dm`: `/client/Click()`
 - `code/modules/client/client_procs.dm`: `/client/New()`, `/client/verb/toggle_fullscreen()`
