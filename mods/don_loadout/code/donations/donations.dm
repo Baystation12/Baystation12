@@ -29,7 +29,7 @@
 
 	var/DBQuery/query = dbcon.NewQuery({"
 		SELECT CAST(SUM(amount) as UNSIGNED INTEGER)
-		FROM budget
+		FROM `[sqlfdbkdbutil]`.`budget`
 		WHERE
 			ckey = '[player.ckey]' AND
 			is_valid = TRUE AND
