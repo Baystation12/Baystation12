@@ -1,0 +1,4 @@
+author: Mucker
+changes:
+  - {bugfix: Fixed shortwaves having no 'power' button}
+delete-after: true
