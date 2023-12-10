@@ -423,23 +423,29 @@ a.gray.selected {	box-shadow: inset 0 0 0 1px #ebebeb; }
 a.linkOn.selected { box-shadow: inset 0 0 0 1px #aeebae; }
 a.linkOff.selected { box-shadow: inset 0 0 0 1px #ebebeb; }
 
+/**************
+   SierraBay
+**************/
+
+/* DON_LOADOUT */
+
 .dt_1 {
 	font-weight: bold;
 	color: rgb(83, 107, 189);
-	text-shadow: 0 0 8px rgba(83, 107, 189, .4);
+	text-shadow: 0 0 8px rgba(83, 107, 189, .6);
 }
 .dt_2 {
 	font-weight: bold;
 	color: rgb(91, 16, 212);
-	text-shadow: 0 0 8px rgba(91, 16, 212, .4);
+	text-shadow: 0 0 8px rgba(91, 16, 212, .6);
 }
 .dt_3 {
 	font-weight: bold;
 	color: rgb(175, 48, 207);
-	text-shadow: 0 0 8px rgba(175, 48, 207, .4);
+	text-shadow: 0 0 8px rgba(175, 48, 207, .6);
 }
 .dt_4 {
 	font-weight: bold;
 	color: rgb(229, 25, 219);
-	text-shadow: 0 0 8px rgba(229, 25, 219, .4);
+	text-shadow: 0 0 8px rgba(229, 25, 219, .6);
 }
