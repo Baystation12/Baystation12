@@ -37,7 +37,6 @@
 /datum/donator_info
 	var/donator = FALSE
 	var/donation_type = DONATION_TIER_NONE
-	var/list/items = new
 
 /datum/donator_info/proc/on_donation_tier_loaded(client/C)
 	return
@@ -65,6 +64,3 @@
 			return FALSE
 
 	CRASH("This code should not be accessible")
-
-/datum/donator_info/proc/has_item(type)
-	return "[type]" in items
