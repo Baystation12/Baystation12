@@ -24,7 +24,9 @@
 
 
 /obj/item/clothing/accessory/wristwatch/proc/CheckTime(mob/user)
-	to_chat(user, "You check \the [src]. The time is [stationtime2text()] on the [time2text(world.timeofday, "DD")]\th of [time2text(world.timeofday, "Month")], [GLOB.using_map.game_year].")
+	var/extra_days = round(station_time_in_ticks / (1 DAY)) DAYS
+	var/timeofday = world.timeofday + extra_days
+	to_chat(user, "You check \the [src]. The time is [stationtime2text()] on the [time2text(timeofday, "DD")]\th of [time2text(timeofday, "Month")], [GLOB.using_map.game_year].")
 
 
 /obj/item/clothing/accessory/wristwatch/OnTopic(mob/user, list/href_list)
