@@ -112,13 +112,13 @@ var/global/list/tape_roll_applications = list()
 	name = "research tape"
 	desc = "A roll of research tape used to block off working areas from the public."
 	tape_type = /obj/item/tape/research
-	color = COLOR_WHITE
+	color = COLOR_RESEARCH
 
 /obj/item/tape/research
 	name = "research tape"
 	desc = "A length of research tape. Better not cross it."
 	req_access = list(access_research)
-	color = COLOR_WHITE
+	color = COLOR_RESEARCH
 
 /obj/item/taperoll/medical
 	name = "medical tape"
