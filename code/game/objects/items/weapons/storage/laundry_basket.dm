@@ -14,10 +14,9 @@
 	max_w_class = ITEM_SIZE_HUGE
 	max_storage_space = DEFAULT_BACKPACK_STORAGE //20 for clothes + a bit of additional space for non-clothing items that were worn on body
 	storage_slots = 14
-	use_to_pickup = 1
-	allow_quick_empty = 1
-	allow_quick_gather = 1
-	collection_mode = 1
+	allow_quick_empty = TRUE
+	allow_quick_gather = TRUE
+	collection_mode = TRUE
 	var/linked
 
 
@@ -79,7 +78,8 @@
 	icon = 'icons/obj/weapons/other.dmi'
 	icon_state = "offhand"
 	name = "second hand"
-	use_to_pickup = 0
+	collection_mode = FALSE
+	allow_quick_gather = FALSE
 
 /obj/item/storage/laundry_basket/offhand/dropped(mob/user as mob)
 	..()

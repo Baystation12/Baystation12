@@ -281,14 +281,10 @@
 
 	if(istype(W, /obj/item/storage))
 		var/obj/item/storage/S = W
-		if(S.use_to_pickup)
-			if(S.collection_mode) //Mode is set to collect all items
-				if(isturf(src.loc))
-					S.gather_all(src.loc, user)
-					return TRUE
-			else if (S.can_be_inserted(src, user))
-				S.handle_item_insertion(src)
-				return TRUE
+		if (S.collection_mode && isturf(loc)) //Mode is set to collect all items
+			S.gather_all(loc, user)
+			return TRUE
+
 	return ..()
 
 ///Eventually should be deleted in favor of use_tool; keeping duplicate until downstream attackbys are replaced.
@@ -298,14 +294,10 @@
 
 	if(istype(W, /obj/item/storage))
 		var/obj/item/storage/S = W
-		if(S.use_to_pickup)
-			if(S.collection_mode) //Mode is set to collect all items
-				if(isturf(src.loc))
-					S.gather_all(src.loc, user)
-					return TRUE
-			else if (S.can_be_inserted(src, user))
-				S.handle_item_insertion(src)
-				return TRUE
+		if (S.collection_mode && isturf(loc)) //Mode is set to collect all items
+			S.gather_all(loc, user)
+			return TRUE
+
 	return ..()
 
 /obj/item/can_embed()

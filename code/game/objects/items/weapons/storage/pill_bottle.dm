@@ -8,20 +8,21 @@
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 21
 	can_hold = list(/obj/item/reagent_containers/pill,/obj/item/dice,/obj/item/paper)
-	allow_quick_gather = 1
-	use_to_pickup = 1
+	allow_quick_gather = TRUE
+	allow_quick_empty = TRUE
+	collection_mode = TRUE
 	use_sound = 'sound/effects/storage/pillbottle.ogg'
 	matter = list(MATERIAL_PLASTIC = 250)
 	var/wrapper_color
 	var/label
 
 
-/obj/item/storage/pill_bottle/use_after(atom/target, mob/living/user)
-	if (!length(contents))
-		to_chat(user, SPAN_WARNING("It's empty!"))
-		return TRUE
-
+/obj/item/storage/pill_bottle/use_before(atom/target, mob/living/user)
 	if (istype(user) && target == user && user.can_eat())
+		if (!length(contents))
+			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
+			return TRUE
+
 		user.visible_message(SPAN_NOTICE("[user] pops a pill from \the [src]."))
 		playsound(get_turf(src), 'sound/effects/peelz.ogg', 50)
 		var/list/peelz = filter_list(contents,/obj/item/reagent_containers/pill)
@@ -32,6 +33,9 @@
 			return TRUE
 
 	if (isobj(target) && target.is_open_container() && target.reagents)
+		if (!length(contents))
+			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
+			return TRUE
 		if (!target.reagents.total_volume)
 			to_chat(user, SPAN_NOTICE("[target] is empty. Can't dissolve a pill."))
 			return TRUE
@@ -42,6 +46,8 @@
 			remove_from_storage(P)
 			P.use_after(target, user)
 			return TRUE
+
+	else return FALSE
 
 
 /obj/item/storage/pill_bottle/attack_self(mob/living/user)

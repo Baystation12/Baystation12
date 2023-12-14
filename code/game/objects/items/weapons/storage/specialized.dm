@@ -12,7 +12,7 @@
 	)
 	allow_quick_gather = TRUE
 	allow_quick_empty = TRUE
-	use_to_pickup = TRUE
+	collection_mode = TRUE
 
 
 /obj/item/storage/evidence
@@ -33,7 +33,7 @@
 	)
 	allow_quick_gather = TRUE
 	allow_quick_empty = TRUE
-	use_to_pickup = TRUE
+	collection_mode = TRUE
 
 
 /obj/item/storage/plants
@@ -52,7 +52,7 @@
 	)
 	allow_quick_gather = TRUE
 	allow_quick_empty = TRUE
-	use_to_pickup = TRUE
+	collection_mode = TRUE
 
 
 /obj/item/storage/sheetsnatcher
@@ -63,7 +63,8 @@
 	storage_ui = /datum/storage_ui/default/sheetsnatcher
 	w_class = ITEM_SIZE_NORMAL
 	storage_slots = 7
-	use_to_pickup = TRUE
+	collection_mode = TRUE
+	allow_quick_gather = TRUE
 	virtual = TRUE
 	var/max_sheets = 300
 	var/cur_sheets = 0
