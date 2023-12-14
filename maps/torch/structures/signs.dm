@@ -49,12 +49,12 @@
 /obj/structure/sign/memorial/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Dog Tags - Add dog tag
 	if (istype(tool, /obj/item/clothing/accessory/badge/solgov/tags))
-		if (!user.unEquip(tool, src))
-			FEEDBACK_UNEQUIP_FAILURE(user, tool)
-			return TRUE
 		var/obj/item/clothing/accessory/badge/solgov/tags/dog_tags = tool
 		if (!(dog_tags.owner_branch in accepted_branches))
 			USE_FEEDBACK_FAILURE("\The [src] only accepts dog tags from the [english_list(accepted_branches, and_text = " or ")] branches.")
+			return TRUE
+		if (!user.unEquip(tool, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, tool)
 			return TRUE
 		fallen += "[dog_tags.owner_rank] [dog_tags.owner_name] | [dog_tags.owner_branch]"
 		user.visible_message(
