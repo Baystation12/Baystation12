@@ -1,0 +1,6 @@
+author: ''
+changes:
+  - {bugfix: Fixes memorial stone causing dogtags from other branches to disappear}
+  - {bugfix: Fixes helm and sensor consoles not deleting properly}
+  - {bugfix: Fixes welding step of APC deconstruction}
+delete-after: true
