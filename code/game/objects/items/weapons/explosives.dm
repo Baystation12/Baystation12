@@ -35,22 +35,27 @@
 
 /obj/item/plastique/attack_self(mob/user as mob)
 	var/newtime = input(usr, "Please set the timer.", "Timer", 10) as num
-	if(user.get_active_hand() == src)
+	if (newtime < 10)
+		to_chat(user, SPAN_WARNING("You cannot set the timer to be less than 10 seconds."))
+		return
+
+	if (user.get_active_hand() == src)
 		newtime = clamp(newtime, 10, 60000)
 		timer = newtime
 		to_chat(user, "Timer set for [timer] seconds.")
 
-/obj/item/plastique/use_after(atom/target, mob/living/user, click_parameters)
-	if (ismob(target) || istype(target, /turf/unsimulated) || istype(target, /turf/simulated/shuttle) || istype(target, /obj/item/storage) || istype(target, /obj/item/clothing/accessory/storage) || istype(target, /obj/item/clothing/under))
+/obj/item/plastique/use_after(atom/clicked, mob/living/user, click_parameters)
+	if (ismob(clicked) || istype(clicked, /turf/unsimulated) || istype(clicked, /turf/simulated/shuttle) || istype(clicked, /obj/item/clothing/accessory/storage) || istype(clicked, /obj/item/clothing/under))
 		return FALSE
 
 	to_chat(user, "Planting explosives...")
-	user.do_attack_animation(target)
+	user.do_attack_animation(clicked)
 
-	if(do_after(user, 5 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT) && in_range(user, target))
+	if(do_after(user, 5 SECONDS, clicked, DO_DEFAULT | DO_USER_UNIQUE_ACT) && in_range(user, clicked))
 		if(!user.unequip_item())
+			FEEDBACK_UNEQUIP_FAILURE(user, src)
 			return TRUE
-		target = target
+		target = clicked
 		forceMove(null)
 
 		if (ismob(target))
