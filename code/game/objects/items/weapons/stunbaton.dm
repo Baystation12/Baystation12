@@ -105,8 +105,7 @@
 /obj/item/melee/baton/throw_impact(atom/hit_atom, datum/thrownthing/TT)
 	if(istype(hit_atom,/mob/living))
 		apply_hit_effect(hit_atom, hit_zone = ran_zone(TT.target_zone, 30))//more likely to hit the zone you target!
-	else
-		..()
+	..()
 
 /obj/item/melee/baton/proc/set_status(newstatus, mob/user)
 	if(bcell && bcell.charge >= hitcost)
