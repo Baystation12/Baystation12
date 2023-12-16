@@ -2860,6 +2860,13 @@
 	result_amount = 4
 	mix_message = "The liquid blends together smoothly"
 
+/datum/chemical_reaction/avalon
+	name = "Avalon"
+	result = /datum/reagent/drink/avalon
+	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/drink/affelerin = 1)
+	result_amount = 3
+	mix_message = "The mixture begins to fizz"
+
 /datum/chemical_reaction/pork_soda
 	name = "Pork Soda"
 	result = /datum/reagent/drink/porksoda
