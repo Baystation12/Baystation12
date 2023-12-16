@@ -616,7 +616,6 @@
 	taste_description = "thick, syrupy soda!"
 	color = "#1F8860"
 	adj_temp = -5
-
 	glass_name = "Avalon"
 	glass_desc = "A spacer classic."
 	glass_special = list(DRINK_FIZZ)
