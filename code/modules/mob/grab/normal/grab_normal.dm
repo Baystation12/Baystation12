@@ -273,7 +273,7 @@
 
 	var/total_damage = 0
 	for(var/i in 1 to 3)
-		var/damage = min(W.force*2.5, 30)*damage_mod
+		var/damage = min(W.force*2, 30)*damage_mod
 		affecting.apply_damage(damage, W.damtype, BP_HEAD, damage_flags, armor_pen = 100, used_weapon=W)
 		total_damage += damage
 
