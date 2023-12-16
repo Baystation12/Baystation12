@@ -13,7 +13,7 @@
 	origin_tech = list(TECH_BIO = 3)
 	attack_verb = list("attacked", "slapped", "whacked")
 	relative_size = 85
-	damage_reduction = 0
+	damage_reduction = -1 //being hit in the brain is generally pretty bad for you, so deal extra damage
 	can_be_printed = FALSE
 
 	var/can_use_mmi = TRUE

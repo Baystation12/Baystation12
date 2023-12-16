@@ -167,7 +167,7 @@
 	organ_hit_chance = min(organ_hit_chance, 100)
 	if(prob(organ_hit_chance))
 		var/obj/item/organ/internal/victim = pickweight(victims)
-		damage_amt -= max(damage_amt*victim.damage_reduction, 0)
+		damage_amt -= damage_amt*victim.damage_reduction
 		victim.take_internal_damage(damage_amt)
 		return TRUE
 
