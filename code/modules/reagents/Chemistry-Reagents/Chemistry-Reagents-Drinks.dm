@@ -610,6 +610,17 @@
 	glass_desc = "Attractive and alliterative."
 	glass_special = list(DRINK_FIZZ)
 
+/datum/reagent/drink/avalon
+	name = "Avalon"
+	description = "Soda made with the affelerin plant."
+	taste_description = "thick, syrupy soda!"
+	color = "#1F8860"
+	adj_temp = -5
+
+	glass_name = "Avalon"
+	glass_desc = "A spacer classic."
+	glass_special = list(DRINK_FIZZ)
+
 /datum/reagent/drink/porksoda
 	name = "Pork Soda"
 	description = "Soda made from straight up pork."
