@@ -2574,6 +2574,7 @@
 	result = /datum/reagent/ethanol/vodkacola
 	required_reagents = list(/datum/reagent/drink/space_cola = 1, /datum/reagent/ethanol/vodka = 2)
 	result_amount = 3
+	mix_message = "The vodka slowly begins to fizz"
 
 /datum/chemical_reaction/red_whiskey
 	name = "Red Whiskey"
@@ -2602,12 +2603,14 @@
 	result = /datum/reagent/ethanol/blackstrap
 	required_reagents = list(/datum/reagent/ethanol/whiskey = 1, /datum/reagent/ethanol/rum = 2)
 	result_amount = 3
+	mix_message = "The whiskey swirls into a darker tone"
 
 /datum/chemical_reaction/stag
 	name = "Stag"
 	result = /datum/reagent/ethanol/stag
 	required_reagents = list(/datum/reagent/drink/tea = 2, /datum/reagent/ethanol/rum = 1)
 	result_amount = 3
+	mix_message = "The tea and rum blend together smoothly"
 
 /datum/chemical_reaction/tadmorwine
 	name = "Tadmoran Wine"
@@ -2615,6 +2618,7 @@
 	required_reagents = list(/datum/reagent/ethanol/wine = 2, /datum/reagent/drink/grenadine = 1)
 	catalysts = list(/datum/reagent/nutriment/mint)
 	result_amount = 3
+	mix_message = "The residue in the mixture sinks to the bottom"
 
 /datum/chemical_reaction/jagerbomb
 	name = "Jagerbomb"
@@ -2634,6 +2638,7 @@
 	result = /datum/reagent/ethanol/lonestarmule
 	required_reagents = list(/datum/reagent/ethanol/whiskey = 2, /datum/reagent/drink/gingerbeer = 1, /datum/reagent/drink/juice/lime = 1)
 	result_amount = 4
+	mix_message = "The aroma of ginger and lime assaults the room"
 
 /datum/chemical_reaction/llanbrydewhiskey
 	name = "Llanbryde Whiskey"
@@ -2641,6 +2646,7 @@
 	required_reagents = list(/datum/reagent/ethanol/specialwhiskey= 2, /datum/reagent/ethanol/gin = 1)
 	catalysts = list(/datum/reagent/sugar)
 	result_amount = 3
+	mix_message = "The gin slowly mixes with the whiskey"
 
 /datum/chemical_reaction/kvass
 	name = "Kvass"
@@ -2648,66 +2654,77 @@
 	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/ethanol/beer = 1)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 3
+	mix_message = "The faint smell of rye bread wafts from the container"
 
 /datum/chemical_reaction/gargled
 	name = "Gargled"
 	result = /datum/reagent/ethanol/coffee/gargled
 	required_reagents = list(/datum/reagent/ethanol/blackstrap = 1, /datum/reagent/drink/coffee = 2)
 	result_amount = 3
+	mix_message = "The mixture begins to pale"
 
 /datum/chemical_reaction/bogus
 	name = "Bogus"
 	result = /datum/reagent/ethanol/bogus
 	required_reagents = list(/datum/reagent/ethanol/gin = 1, /datum/reagent/ethanol/blackstrap = 2)
 	result_amount = 3
+	mix_message = "The gin and rum swirl together smoothly"
 
 /datum/chemical_reaction/moscowmule
 	name = "Moscow Mule"
 	result = /datum/reagent/ethanol/moscowmule
 	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/drink/gingerbeer = 1, /datum/reagent/drink/juice/lime = 1)
 	result_amount = 4
+	mix_message = "The aroma of ginger and juice rises from the mixture"
 
 /datum/chemical_reaction/springpunch
 	name = "Gilgamesh Spring Punch"
 	result = /datum/reagent/ethanol/springpunch
 	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/drink/juice/lemon = 1,  /datum/reagent/sugar = 1)
 	result_amount = 4
+	mix_message = "The aroma of sweet lemon rises from the mixture"
 
 /datum/chemical_reaction/jimmygideon
 	name = "Jimmy Gideon"
 	result = /datum/reagent/ethanol/jimmygideon
 	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/ethanol/cognac = 1, /datum/reagent/drink/hot_coco = 1)
 	result_amount = 3
+	mix_message = "The liquid swirls into the color of Martian sand"
 
 /datum/chemical_reaction/kamikaze
 	name = "Kamikaze"
 	result = /datum/reagent/ethanol/kamikaze
 	required_reagents = list(/datum/reagent/ethanol/vodka = 1, /datum/reagent/ethanol/triple_sec = 1, /datum/reagent/drink/juice/lime = 1)
 	result_amount = 3
+	mix_message = "The mixture begins to fizz and pop"
 
 /datum/chemical_reaction/grasshopper
 	name = "Grasshopper"
 	result = /datum/reagent/ethanol/grasshopper
 	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/ethanol/creme_de_menthe = 1, /datum/reagent/ethanol/creme_de_cacao = 1)
 	result_amount = 3
+	mix_message = "The aroma of mint and chocolate seeps from the mixture"
 
 /datum/chemical_reaction/stinger
 	name = "Stinger"
 	result = /datum/reagent/ethanol/stinger
 	required_reagents = list(/datum/reagent/ethanol/creme_de_menthe = 1, /datum/reagent/ethanol/cognac = 2)
 	result_amount = 3
+	mix_message = "A gust of fresh mint wafts from the mixture"
 
 /datum/chemical_reaction/alexander
 	name = "Alexander"
 	result = /datum/reagent/ethanol/alexander
 	required_reagents = list(/datum/reagent/ethanol/creme_de_cacao = 1, /datum/reagent/ethanol/cognac = 1, /datum/reagent/drink/milk/cream = 1)
 	result_amount = 3
+	mix_message = "The smell of chocolate wafts from the mixture"
 
 /datum/chemical_reaction/drifter
 	name = "Drifter"
 	result = /datum/reagent/ethanol/drifter
 	required_reagents = list(/datum/reagent/ethanol/rum = 1, /datum/reagent/ethanol/cognac = 2, /datum/reagent/ethanol/triple_sec = 1, /datum/reagent/drink/juice/lemon = 1)
 	result_amount = 5
+	mix_message = "The liquid swirls into a bright yellow"
 
 /datum/chemical_reaction/forget_me_shot
 	name = "Forget-me-shot"
@@ -2721,24 +2738,28 @@
 	result = /datum/reagent/ethanol/bad_touch
 	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/ethanol/rum = 2, /datum/reagent/ethanol/absinthe = 1, /datum/reagent/drink/lemon_lime = 1)
 	result_amount = 6
+	mix_message = "The liquid turns a sour green."
 
 /datum/chemical_reaction/sugar_rush
 	name = "Sugar Rush"
 	result = /datum/reagent/ethanol/sugar_rush
 	required_reagents = list(/datum/reagent/drink/spacemountainwind = 4, /datum/reagent/drink/grenadine = 1, /datum/reagent/ethanol/vodka = 1)
 	result_amount = 6
+	mix_message = "The mixture begins to violently fizz."
 
 /datum/chemical_reaction/cobalt_velvet
 	name = "Cobalt Velvet"
 	result = /datum/reagent/ethanol/cobalt_velvet
 	required_reagents = list(/datum/reagent/ethanol/champagne = 3, /datum/reagent/drink/space_cola = 1, /datum/reagent/ethanol/bluecuracao = 2)
 	result_amount = 6
+	mix_message = "The cola sinks to the bottom of the glass"
 
 /datum/chemical_reaction/fringe_weaver
 	name = "Fringe Weaver"
 	result = /datum/reagent/ethanol/fringe_weaver
 	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/ethanol = 2, /datum/reagent/water= 1)
 	result_amount = 4
+	mix_message = "The mixture swirls with pink foam"
 
 // Non-Alcoholic Drinks
 
@@ -2851,56 +2872,56 @@
 	result = /datum/reagent/drink/apple_soda
 	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/drink/juice/apple = 1)
 	result_amount = 3
-	mix_message = "The liquid blends together smoothly"
+	mix_message = "The apple juice begins to fizz"
 
 /datum/chemical_reaction/orange_soda
 	name = "Fizzy Orange"
 	result = /datum/reagent/drink/orange_soda
 	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/drink/juice/orange = 1, /datum/reagent/sugar = 1)
 	result_amount = 4
-	mix_message = "The liquid blends together smoothly"
+	mix_message = "The orange juice begins to fizz"
 
 /datum/chemical_reaction/pork_soda
 	name = "Pork Soda"
 	result = /datum/reagent/drink/porksoda
 	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/nutriment/protein = 1)
 	result_amount = 3
-	mix_message = "The liquid blends together smoothly"
+	mix_message = "The disgusting aroma of meat and sugar fills the air"
 
 /datum/chemical_reaction/strawberry_soda
 	name = "Strawberry Soda"
 	result = /datum/reagent/drink/strawberry_soda
 	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/drink/juice/berry = 1)
 	result_amount = 3
-	mix_message = "The liquid blends together smoothly"
+	mix_message = "The strawberry juice begins to fizz"
 
 /datum/chemical_reaction/vanilla_cola
 	name = "Vanilla Cola"
 	result = /datum/reagent/drink/vanilla_cola
 	required_reagents = list(/datum/reagent/drink/space_cola = 2, /datum/reagent/drink/syrup_vanilla = 1)
 	result_amount = 3
-	mix_message = "The liquid blends together smoothly"
+	mix_message = "The vanilla syrup begins to fizz"
 
 /datum/chemical_reaction/orange_cola
 	name = "Orange Cola"
 	result = /datum/reagent/drink/orange_cola
 	required_reagents = list(/datum/reagent/drink/space_cola = 2, /datum/reagent/drink/juice/orange = 1)
 	result_amount = 3
-	mix_message = "The liquid blends together smoothly"
+	mix_message = "The mixture swirls into a bright orange"
 
 /datum/chemical_reaction/cherry_cola
 	name = "Cherry Cola"
 	result = /datum/reagent/drink/cherry_cola
 	required_reagents = list(/datum/reagent/drink/space_cola = 2, /datum/reagent/nutriment/cherryjelly = 1)
 	result_amount = 3
-	mix_message = "The liquid blends together smoothly"
+	mix_message = "The mixture swirls into a deep crimson"
 
 /datum/chemical_reaction/coffee_cola
 	name = "Coffee Cola"
 	result = /datum/reagent/drink/coffee/coffee_cola
 	required_reagents = list(/datum/reagent/drink/space_cola = 2, /datum/reagent/drink/coffee = 1)
 	result_amount = 3
-	mix_message = "The liquid blends together smoothly"
+	mix_message = "The coffee and cola blend together smoothly"
 
 /datum/chemical_reaction/diet_cola
 	name = "Diet Cola"
