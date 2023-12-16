@@ -1,0 +1,5 @@
+author: emmanuelbassil
+changes:
+  - {bugfix: Fixes C4/Plastique. It now explodes again.}
+  - {bugfix: Fixes runtime when blob attacks people}
+delete-after: true
