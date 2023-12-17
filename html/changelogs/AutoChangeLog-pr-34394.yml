@@ -1,0 +1,4 @@
+author: BurpleBineapple
+changes:
+  - {tweak: Updates the description blurb for Magnitka to use the wiki's updated information.}
+delete-after: true
