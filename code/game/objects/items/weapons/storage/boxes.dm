@@ -465,7 +465,8 @@
 	icon_state = "light"
 	desc = "This box is shaped on the inside so that only light tubes and bulbs fit."
 	item_state = "syringe_kit"
-	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
+	allow_quick_gather = TRUE
+	collection_mode = TRUE
 
 
 /obj/item/storage/box/lights/Initialize()
