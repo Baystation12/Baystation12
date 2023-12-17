@@ -1,0 +1,10 @@
+author: emmanuelbassil
+changes:
+  - {bugfix: Fixes oversight where some storage items that could collect all items
+      off a turf could not have that mode toggled off.}
+  - {bugfix: Fixes being unable to use pill bottles on a storage object or reagent
+      container}
+  - {tweak: Removed behavior where clicking on a storage item on the floor with another
+      storage item sometimes led to picking up the item off the floor.}
+  - {tweak: Can now quickly empty pill bottles and the excavation pick set.}
+delete-after: true
