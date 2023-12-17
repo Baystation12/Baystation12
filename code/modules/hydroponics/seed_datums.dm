@@ -1548,7 +1548,7 @@
 	set_trait(TRAIT_PRODUCTION,5)
 	set_trait(TRAIT_YIELD,4)
 	set_trait(TRAIT_POTENCY,10)
-	set_trait(TRAIT_PRODUCT_ICON,"vine2")
+	set_trait(TRAIT_PRODUCT_ICON,"vine3")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#e93e1c")
 	set_trait(TRAIT_PLANT_COLOUR,"#6d9c6b")
 	set_trait(TRAIT_PLANT_ICON,"algae")
