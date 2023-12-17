@@ -211,7 +211,8 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	w_class = ITEM_SIZE_LARGE
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE
-	use_to_pickup = TRUE
+	allow_quick_gather = TRUE
+	collection_mode = TRUE
 	temperature = -16 CELSIUS
 	matter = list(MATERIAL_PLASTIC = 350)
 	origin_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2)

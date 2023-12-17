@@ -7,10 +7,9 @@
 	w_class = ITEM_SIZE_HUGE
 	can_hold = list(/obj/item/stock_parts)
 	storage_slots = 50
-	use_to_pickup = 1
-	allow_quick_gather = 1
-	allow_quick_empty = 1
-	collection_mode = 1
+	allow_quick_gather = TRUE
+	allow_quick_empty = TRUE
+	collection_mode = TRUE
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 100
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 3)

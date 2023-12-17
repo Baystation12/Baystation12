@@ -2,9 +2,9 @@
 	Represents flexible bags that expand based on the size of their contents.
 */
 /obj/item/storage/bag
-	allow_quick_gather = 1
-	allow_quick_empty = 1
-	use_to_pickup = 1
+	allow_quick_gather = TRUE
+	allow_quick_empty = TRUE
+	collection_mode = TRUE
 	slot_flags = SLOT_BELT
 
 /obj/item/storage/bag/handle_item_insertion(obj/item/W as obj, prevent_warning = 0)

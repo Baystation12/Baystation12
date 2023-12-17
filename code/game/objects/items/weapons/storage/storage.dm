@@ -1,5 +1,5 @@
 // To clarify:
-// For use_to_pickup and allow_quick_gather functionality,
+// For allow_quick_gather functionality,
 // see item/attackby() (/game/objects/items.dm)
 // Do not remove this functionality without good reason, cough reagent_containers cough.
 // -Sayu
@@ -16,12 +16,11 @@
 	var/max_storage_space = null //Total storage cost of items this can hold. Will be autoset based on storage_slots if left null.
 	var/storage_slots = null //The number of storage slots in this container.
 
-	var/use_to_pickup	//Set this to make it possible to use this item in an inverse way, so you can have the item in your hand and click items on the floor to pick them up.
 	var/allow_quick_empty	//Set this variable to allow the object to have the 'empty' verb, which dumps all the contents on the floor.
 	var/allow_quick_gather	//Set this variable to allow the object to have the 'toggle mode' verb, which quickly collects all items from a tile.
 	///Allows dumping the contents of storage after a duration
 	var/allow_slow_dump
-	var/collection_mode = 1;  //0 = pick one at a time, 1 = pick all on tile
+	var/collection_mode //0 = pick one at a time, 1 = pick all on tile
 	var/use_sound = "rustle"	//sound played when used. null for no sound.
 
 	///If true, will not permit use of the storage UI
@@ -282,33 +281,35 @@
 
 //This proc is called when you want to place an item into the storage item.
 /obj/item/storage/use_tool(obj/item/W, mob/living/user, list/click_params)
-	if ((. = ..())) //if the item was used as a crafting component, just return
+	if (SSfabrication.try_craft_with(src, W, user))
 		return TRUE
 
-	if(isrobot(user) && (W == user.get_active_hand()))
+	if (isrobot(user) && (W == user.get_active_hand()))
 		return //Robots can't store their modules.
 
-	if(!can_be_inserted(W, user))
-		return
+	if (!can_be_inserted(W, user))
+		return TRUE
 
-	W.add_fingerprint(user)
-	handle_item_insertion(W)
-	return TRUE
+	if (handle_item_insertion(W))
+		return TRUE
+
+	return ..()
 
 ///Eventually should be deleted in favor of use_tool; keeping duplicate until downstream attackbys are replaced.
 /obj/item/storage/attackby(obj/item/W, mob/living/user, click_params)
-	if ((. = ..())) //if the item was used as a crafting component, just return
+	if (SSfabrication.try_craft_with(src, W, user))
 		return TRUE
 
-	if(isrobot(user) && (W == user.get_active_hand()))
+	if (isrobot(user) && (W == user.get_active_hand()))
 		return //Robots can't store their modules.
 
-	if(!can_be_inserted(W, user))
-		return
+	if (!can_be_inserted(W, user))
+		return TRUE
 
-	W.add_fingerprint(user)
-	handle_item_insertion(W)
-	return TRUE
+	if (handle_item_insertion(W))
+		return TRUE
+
+	return ..()
 
 /obj/item/storage/attack_hand(mob/user as mob)
 	if(ishuman(user))
