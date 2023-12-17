@@ -256,7 +256,7 @@
 		var/attack_verb = "[pick(attack.attack_verb)]"
 
 		if (!can_damage_health(damage, attack.get_damage_type()))
-			playsound(loc, attack.attack_sound, 25, TRUE, -1)
+			playsound(loc, use_weapon_hitsound? attack.attack_sound : damage_hitsound, 25, TRUE, -1)
 			user.visible_message(
 				SPAN_WARNING("\The [user] hits \the [src], but doesn't even leave a dent!"),
 				SPAN_WARNING("You hit \the [src], but cause no visible damage and hurt yourself!")
@@ -264,13 +264,13 @@
 			user.apply_damage(3, DAMAGE_BRUTE, user.hand ? BP_L_HAND : BP_R_HAND)
 			return TRUE
 
-		playsound(loc, attack.attack_sound, 25, TRUE, -1)
+		playsound(loc, use_weapon_hitsound? attack.attack_sound : damage_hitsound, 25, TRUE, -1)
 		assailant.visible_message(
 				SPAN_WARNING("\The [assailant] [attack_verb] \the [src]!"),
 				SPAN_WARNING("You [attack_verb] \the [src]!")
 				)
 		damage_health(damage, attack.get_damage_type(), attack.damage_flags())
-		return
+		return TRUE
 	..()
 
 /obj/is_fluid_pushable(amt)
