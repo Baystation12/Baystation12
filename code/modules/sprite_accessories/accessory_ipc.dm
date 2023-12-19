@@ -386,6 +386,10 @@
 	gender = NEUTER
 	do_coloration = FALSE
 
+/datum/sprite_accessory/hair/ipc/ipc_bald
+	name = "None"
+	icon_state = "null"
+
 /datum/sprite_accessory/hair/ipc/ipc_antennae
 	name = "Antennae"
 	icon_state = "antennae"
