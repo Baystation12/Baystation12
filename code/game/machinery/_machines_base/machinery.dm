@@ -225,7 +225,7 @@
 // If you don't call parent in this proc, you must make all appropriate checks yourself.
 // If you do, you must respect the return value.
 /obj/machinery/attack_hand(mob/user)
-	if((. = ..())) // Buckling, climbers; unlikely to return true.
+	if((. = ..())) // Buckling, climbers, punching on harm; unlikely to return true.
 		return
 	if(MUTATION_FERAL in user.mutations)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2)
