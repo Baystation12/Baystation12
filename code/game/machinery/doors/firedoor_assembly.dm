@@ -59,6 +59,7 @@
 		if (!cable.can_use(1))
 			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 1, "to wire \the [src].")
 			return TRUE
+		wired = TRUE
 		user.visible_message(
 			SPAN_NOTICE("\The [user] wires \the [src] with [cable.get_vague_name(FALSE)]."),
 			SPAN_NOTICE("You wire \the [src] with [cable.get_exact_name(1)].")
