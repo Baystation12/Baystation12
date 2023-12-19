@@ -1,0 +1,6 @@
+author: emmanuelbassil
+changes:
+  - {tweak: Adds broken glass overlay for destroyed floor light}
+  - {bugfix: Unanchored floor light no longer spawns with light on}
+  - {bugfix: Floorlight is now destroyed properly when affected by an explosion}
+delete-after: true
