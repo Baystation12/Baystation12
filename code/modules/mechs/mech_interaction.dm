@@ -448,18 +448,6 @@
 		)
 		return TRUE
 
-	// Robot Analyzer - Scan mech
-	if (istype(tool, /obj/item/device/robotanalyzer))
-		user.visible_message(
-			SPAN_NOTICE("\The [user] scans \the [src] with \a [tool]."),
-			SPAN_NOTICE("You scan \the [src] with \the [tool].")
-		)
-		to_chat(user, SPAN_INFO("Diagnostic Report for \the [src]:"))
-		for (var/obj/item/mech_component/component in list(arms, legs, body, head))
-			if (component)
-				component.return_diagnostics(user)
-		return TRUE
-
 	// Screwdriver - Remove cell
 	if (isScrewdriver(tool))
 		if (!maintenance_protocols)
