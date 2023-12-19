@@ -383,12 +383,11 @@
 	abstract_type = /datum/sprite_accessory/hair/ipc
 	icon = 'icons/mob/human_races/species/ipc/hair.dmi'
 	species_allowed = list(SPECIES_IPC)
-	gender = NEUTER
-	do_coloration = FALSE
 
 /datum/sprite_accessory/hair/ipc/ipc_bald
 	name = "None"
 	icon_state = "null"
+	do_coloration = FALSE
 
 /datum/sprite_accessory/hair/ipc/ipc_antennae
 	name = "Antennae"
