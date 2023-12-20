@@ -33,6 +33,8 @@
 		scan_type = "robot"
 	else if(istype(M, /mob/living/carbon/human))
 		scan_type = "prosthetics"
+	else if (istype(M, /mob/living/exosuit))
+		scan_type = "exosuit"
 	else
 		to_chat(user, SPAN_WARNING("You can't analyze non-robotic things!"))
 		return
@@ -109,6 +111,13 @@
 				to_chat(user, "[O.name]: [SPAN_COLOR("red", "[(O.status & ORGAN_DEAD) ? "DESTROYED" : O.damage]")]")
 			if(!organ_found)
 				to_chat(user, "No prosthetics located.")
+
+		if ("exosuit")
+			var/mob/living/exosuit/mech = M
+			to_chat(user, SPAN_INFO("Diagnostic Report for \the [M]:"))
+			for (var/obj/item/mech_component/component in list(mech.arms, mech.legs, mech.body, mech.head))
+				if (component)
+					component.return_diagnostics(user)
 
 	playsound(user,'sound/effects/scanbeep.ogg', 30)
 	return
