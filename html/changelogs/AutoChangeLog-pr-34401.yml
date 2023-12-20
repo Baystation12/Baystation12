@@ -1,0 +1,4 @@
+author: SierraKomodo
+changes:
+  - {bugfix: Fixes robot analyzers not working on mechs.}
+delete-after: true
