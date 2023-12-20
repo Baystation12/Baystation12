@@ -1,3 +1,4 @@
+///Parent object and procs to /obj/structure/bigDelivery/package and /obj/structure/bigDelivery/mobpresent
 /obj/structure/bigDelivery
 	desc = "A big wrapped package."
 	name = "large parcel"
@@ -15,29 +16,14 @@
 	var/tag_x
 	var/package_type = "parcel"
 
-/obj/structure/bigDelivery/Initialize(mapload, obj/structure/closet/parcel, wrap_type)
-	..(mapload)
-	if (!parcel || !istype(parcel) || !wrap_type)
-		return INITIALIZE_HINT_QDEL
-
-	wrapped = parcel
-	wrapped.forceMove(src)
-	package_type = wrap_type
-	SetName("large [package_type]")
-	desc = name
-	update_icon()
-
-/obj/structure/bigDelivery/Destroy()
-	QDEL_NULL(wrapped)
-	return ..()
-
-
 /obj/structure/bigDelivery/damage_health(damage, damage_type, damage_flags, severity, skip_can_damage_check)
+	. = ..()
 	// It's only paper. No protection for anything inside.
+	if (!length(contents))
+		return
 	var/content_damage = damage / length(contents)
 	for (var/atom/victim as anything in contents)
 		victim.damage_health(content_damage, damage_type, damage_flags, severity, skip_can_damage_check)
-	return ..()
 
 
 /obj/structure/bigDelivery/on_death()
@@ -53,10 +39,22 @@
 	qdel_self()
 
 /obj/structure/bigDelivery/attack_hand(mob/user as mob)
-	to_chat(user, "You need a sharp tool to unwrap \the [src].")
+	if (user.a_intent != I_HURT)
+		to_chat(user, "You need a sharp tool to unwrap \the [src].")
+		return
+	return ..()
 
 /obj/structure/bigDelivery/attack_robot(mob/user)
-	to_chat(user, "You need a sharp tool to unwrap \the [src].")
+	if (user.a_intent != I_HURT)
+		to_chat(user, "You need a sharp tool to unwrap \the [src].")
+		return
+	return ..()
+
+/obj/structure/bigDelivery/AddLabel(label, mob/user)
+	..()
+	if (!nameset)
+		nameset = TRUE
+		update_icon()
 
 /obj/structure/bigDelivery/proc/unwrap(mob/user)
 	if(Adjacent(user))
@@ -123,8 +121,28 @@
 
 	return ..()
 
+/obj/structure/bigDelivery/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 4)
+		if(sortTag)
+			to_chat(user, SPAN_NOTICE("It is labeled \"[sortTag]\""))
+		if(examtext)
+			to_chat(user, SPAN_NOTICE("It has a note attached which reads, \"[examtext]\""))
 
-/obj/structure/bigDelivery/on_update_icon()
+///Procs exclusive to the package subtype.
+/obj/structure/bigDelivery/package/Initialize(mapload, obj/structure/closet/parcel, wrap_type)
+	..(mapload)
+	if (!parcel || !istype(parcel) || !wrap_type)
+		return INITIALIZE_HINT_QDEL
+
+	wrapped = parcel
+	wrapped.forceMove(src)
+	package_type = wrap_type
+	SetName("large [package_type]")
+	desc = name
+	update_icon()
+
+/obj/structure/bigDelivery/package/on_update_icon()
 	ClearOverlays()
 	if (istype(wrapped, /obj/structure/closet/crate))
 		icon_state = "[package_type]crate"
@@ -158,14 +176,6 @@
 			I.pixel_y = -3
 		AddOverlays(I)
 
-/obj/structure/bigDelivery/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 4)
-		if(sortTag)
-			to_chat(user, SPAN_NOTICE("It is labeled \"[sortTag]\""))
-		if(examtext)
-			to_chat(user, SPAN_NOTICE("It has a note attached which reads, \"[examtext]\""))
-
 /obj/structure/bigDelivery/Destroy()
 	if(wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
 		wrapped.dropInto(loc)
@@ -176,7 +186,93 @@
 	var/turf/T = get_turf(src)
 	for(var/atom/movable/AM in contents)
 		AM.forceMove(T)
+	playsound(loc, 'sound/effects/wrap_tear.ogg', 65, 1)
 	return ..()
+
+///Procs exclusive to mopresent subtype.
+/obj/structure/bigDelivery/mobpresent
+	name = "strange gift"
+	desc = "It's a ... gift?"
+	icon_state = "strangegift"
+	breakout_time = 30 SECONDS
+
+/obj/structure/bigDelivery/mobpresent/Initialize(mapload, mob/living/carbon/human/parcel, wrap_type)
+	..(mapload)
+	if (!parcel || !istype(parcel) || !wrap_type)
+		return INITIALIZE_HINT_QDEL
+
+	wrapped = parcel
+	wrapped.forceMove(src)
+	package_type = wrap_type
+	if (parcel.client)
+		parcel.client.perspective = EYE_PERSPECTIVE
+		parcel.client.eye = src
+
+	SetName("strange [package_type]")
+	desc = "It's a ... [package_type]?"
+	update_icon()
+
+/obj/structure/bigDelivery/mobpresent/on_update_icon()
+	ClearOverlays()
+	icon_state = "strange[package_type]"
+	if (nameset || examtext)
+		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_label")
+		I.pixel_x = 2
+		if (label_y == null)
+			label_y = rand (2,5)
+		I.pixel_y = label_y
+		AddOverlays(I)
+
+	if (sortTag)
+		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_tag")
+		if (tag_x == null)
+			tag_x = 0
+		I.pixel_x = tag_x
+		I.pixel_y = 0
+		AddOverlays(I)
+
+/obj/structure/bigDelivery/mobpresent/relaymove(mob/user)
+	if (user.stat)
+		return
+	to_chat(user, SPAN_WARNING("You can't move!"))
+
+/obj/structure/bigDelivery/mobpresent/on_death()
+	. = ..()
+	for (var/mob/M in src) //Should only be one but whatever.
+		if (M.client)
+			M.client.eye = M.client.mob
+			M.client.perspective = MOB_PERSPECTIVE
+
+/obj/structure/bigDelivery/mobpresent/mob_breakout(mob/living/escapee)
+	. = ..()
+	if (!breakout_time)
+		breakout_time = 30 SECONDS
+	if (breakout)
+		return FALSE
+
+	. = TRUE
+	escapee.setClickCooldown(100)
+
+	to_chat(escapee, SPAN_WARNING("You start squirming inside \the [src] and start weakening the wrapping paper. (this will take about [breakout_time/(1 SECOND)] second\s)"))
+	visible_message(SPAN_DANGER("\The [src] begins to shake violently!"))
+	shake_animation()
+
+	var/stages = 3
+	breakout = TRUE
+	for (var/i = 1 to stages)
+		if (do_after(escapee, breakout_time*(1/stages), do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
+			to_chat(escapee, SPAN_WARNING("You try to slip free of \the [src] ([i*100/stages]% done)."))
+		else
+			to_chat(escapee, SPAN_WARNING("You stop trying to slip free of \the [src]."))
+			breakout = FALSE
+			return
+		shake_animation()
+
+	//Well then break it!
+	breakout = FALSE
+	to_chat(escapee, SPAN_WARNING("You successfully break out!"))
+	visible_message(SPAN_DANGER("\The [escapee] successfully broke out of \the [src]!"))
+	unwrap()
 
 /obj/item/smallDelivery
 	name = "small parcel"
@@ -210,6 +306,7 @@
 	update_icon()
 
 /obj/item/smallDelivery/Destroy()
+	playsound(loc, 'sound/effects/wrap_tear.ogg', 65, 1)
 	QDEL_NULL(wrapped)
 	return ..()
 
@@ -349,6 +446,12 @@
 			if(ITEM_SIZE_HUGE)
 				I.pixel_y = -3
 		AddOverlays(I)
+
+/obj/item/smallDelivery/AddLabel(label, mob/user)
+	..()
+	if (!nameset)
+		nameset = TRUE
+		update_icon()
 
 /obj/item/smallDelivery/examine(mob/user, distance)
 	. = ..()

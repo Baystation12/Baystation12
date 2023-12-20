@@ -46,7 +46,7 @@
 		return
 
 	if (istype(target, /obj/structure/closet))
-		var/obj/structure/bigDelivery/parcel = new /obj/structure/bigDelivery(get_turf(target.loc), target, package_type)
+		var/obj/structure/bigDelivery/package/parcel = new /obj/structure/bigDelivery/package(get_turf(target.loc), target, package_type)
 		parcel.add_fingerprint(user)
 		amount_used = istype(target, /obj/structure/closet/crate) ? BASE_STORAGE_COST(ITEM_SIZE_NORMAL) : BASE_STORAGE_COST(ITEM_SIZE_LARGE)
 	else if (istype(target, /obj/item))
@@ -62,6 +62,7 @@
 	user.visible_message("\The [user] wraps \the [target] with [get_vague_name(TRUE)]].",
 		SPAN_NOTICE("You wrap \the [target] with [get_exact_name(amount_used)]"),
 		"You hear someone taping paper around an object.")
+	playsound(user.loc, 'sound/effects/wrap.ogg', 65, 1)
 
 	if (get_amount() <= 0)
 		new /obj/item/c_tube(loc)
@@ -145,7 +146,7 @@
 	if (!do_after(user, ITEM_SIZE_LARGE SECONDS, target, DO_PUBLIC_UNIQUE) || !H.has_danger_grab(user) || !user.use_sanity_check(H, src))
 		return TRUE
 
-	var/obj/structure/mobpresent/present = new (H.loc, H, package_type)
+	var/obj/structure/bigDelivery/mobpresent/present = new (H.loc, H, package_type)
 	use(a_used)
 
 	if (user == target)
@@ -159,7 +160,8 @@
 			SPAN_DANGER("You wrap \the [target] with [get_exact_name(a_used)].")
 		)
 
-	H.forceMove(present)
+	playsound(user.loc, 'sound/effects/wrap.ogg', 65, 1)
+	present.add_fingerprint(user)
 	H.remove_grabs_and_pulls()
 	admin_attack_log(user, H, "Used \a [src] to wrap their victim", "Was wrapepd with \a [src]", "used \the [src] to wrap")
 	return TRUE
