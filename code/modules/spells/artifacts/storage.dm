@@ -5,7 +5,7 @@
 
 /obj/structure/closet/wizard/New()
 	..()
-	var/obj/structure/bigDelivery/package = new /obj/structure/bigDelivery(get_turf(src))
+	var/obj/structure/bigDelivery/package/package = new /obj/structure/bigDelivery/package(get_turf(src))
 	package.wrapped = src
 	package.examtext = "Imported straight from the Wizard Acadamy. Do not lose the contents or suffer a demerit."
 	src.forceMove(package)
