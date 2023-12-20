@@ -78,11 +78,14 @@
 		machine.attack_hand(user)
 		return TRUE
 
+/*
+This returning FALSE means if component_attackby under use_tool called this it will also return FALSE; which means the use_tool call will proceed.
+In that same vein, the attackby() children of this proc will also continue the rest of its code if this crashes; since this check is called at the beginning.
+*/
 /singleton/machine_construction/proc/attackby(obj/item/I, mob/user, obj/machinery/machine)
 	if(!validate_state(machine))
 		crash_with("Machine [log_info_line(machine)] violated the state assumptions of the construction state [type]!")
-		machine.use_tool(I, user)
-		return TRUE
+		return FALSE
 
 /singleton/machine_construction/proc/mechanics_info()
 

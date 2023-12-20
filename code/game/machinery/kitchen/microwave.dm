@@ -156,8 +156,9 @@
 			return TRUE
 		for (var/datum/reagent/R in O.reagents.reagent_list)
 			if (!(R.type in GLOB.microwave_accepts_reagents))
-				to_chat(user, SPAN_WARNING("\The [O] contains components unsuitable for cookery."))
-		return TRUE
+				to_chat(user, SPAN_WARNING("\The [O] contains \the [R] which is unsuitable for cookery."))
+				return TRUE
+		return FALSE //This will call reagent_container's use_after which handles transferring reagents.
 
 	if (istype(O, /obj/item/storage))
 		if (length(ingredients) >= GLOB.microwave_maximum_item_storage)

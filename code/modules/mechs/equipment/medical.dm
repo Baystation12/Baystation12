@@ -31,7 +31,7 @@
 
 /obj/item/mech_equipment/sleeper/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/reagent_containers/glass))
-		sleeper.attackby(I, user)
+		sleeper.use_tool(I, user)
 	else return ..()
 
 /obj/item/mech_equipment/sleeper/afterattack(atom/target, mob/living/user, inrange, params)

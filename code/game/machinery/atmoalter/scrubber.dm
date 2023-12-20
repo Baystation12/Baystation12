@@ -203,7 +203,7 @@
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
 	machine_name = "large stationary portable scrubber"
 	machine_desc = "This is simply a large portable scrubber that can't be moved once it's bolted into place, and is otherwise identical."
-	obj_flags = null
+	obj_flags = EMPTY_BITFIELD
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(isWrench(I))
