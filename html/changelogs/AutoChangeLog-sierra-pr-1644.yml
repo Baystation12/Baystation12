@@ -1,0 +1,4 @@
+author: SierraKomodo
+changes:
+  - {bugfix: Holster belts now properly holster items when clicked.}
+delete-after: true
