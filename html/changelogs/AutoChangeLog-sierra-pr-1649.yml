@@ -1,0 +1,6 @@
+author: SierraKomodo
+changes:
+  - {bugfix: Fixes IPC antennae rendering full-black instead of having their intended
+      colors.}
+  - {rscadd: Adds a `None` option to IPC hairs.}
+delete-after: true
