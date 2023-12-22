@@ -1,4 +1,0 @@
-author: SierraKomodo
-changes:
-  - {bugfix: Emergency shutter assemblies now properly accept wires and can be completed.}
-delete-after: true
