@@ -295,6 +295,21 @@
 					. += SPAN_COLOR("#808080", "[S.levels[skills_required[skill]]] [skill]")
 			. += "</i>"
 			. += "<br>"
+			
+		if(length(selected_gear.allowed_factions))
+			. += "<b>Has faction restrictions:</b>"
+			. += "<br>"
+			. += "<i>"
+			var/singleton/cultural_info/faction = SSculture.get_culture(pref.cultural_info[TAG_FACTION])
+			var/facname = faction ? faction.name : "Unset"
+			
+			if(facname in selected_gear.allowed_factions)
+				. += SPAN_COLOR("#55cc55", facname)
+			else
+				. += SPAN_COLOR("#808080", facname)
+			
+			. += "</i>"
+			. += "<br>"
 
 		if(selected_gear.whitelisted)
 			. += "<b>Has species restrictions:</b>"
@@ -523,6 +538,13 @@
 
 			if (!branch_ok)
 				return FALSE
+				
+	if (length(G.allowed_factions))
+		var/singleton/cultural_info/faction = SSculture.get_culture(pref.cultural_info[TAG_FACTION])
+		var/facname = faction ? faction.name : "Unset"
+		if(!(facname in G.allowed_factions))
+			return FALSE
+				
 
 	if(G.whitelisted && !(pref.species in G.whitelisted))
 		return FALSE

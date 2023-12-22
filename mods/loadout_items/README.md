@@ -2,6 +2,7 @@
 #### Список PRов:
 
 - https://github.com/SierraBay/SierraBay12/pull/1562
+- https://github.com/SierraBay/SierraBay12/pull/1643
 <!--
   Ссылки на PRы, связанные с модом:
   - Создание
@@ -27,7 +28,8 @@ ID мода: LOADOUT_ITEMS
 
 ### Изменения *кор кода*
 
-- Отсутствуют
+- `code/controllers/subsystems/jobs.dm`:
+  - `/datum/controller/subsystem/jobs/proc/equip_custom_loadout`
 <!--
   Если вы редактировали какие-либо процедуры или переменные в кор коде,
   они должны быть указаны здесь.
@@ -62,6 +64,9 @@ ID мода: LOADOUT_ITEMS
 ### Используемые файлы, не содержащиеся в модпаке
 
 - `maps\sierra\loadout\loadout_gloves.dm`
+- `maps\torch\icons\obj\obj_accessories_solgov.dmi`
+- `maps\torch\icons\mob\unathi\onmob_accessories_solgov_unathi.dmi`
+- `maps\torch\icons\mob\onmob_accessories_solgov.dmi`
 
 <!--
   Будь то немодульный файл или модульный файл, который не содержится в папке,
