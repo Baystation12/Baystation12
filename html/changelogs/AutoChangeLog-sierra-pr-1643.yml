@@ -1,0 +1,5 @@
+author: UEDHighCommand
+changes:
+  - {rscadd: Введен функционал для фракционных предметов в лодауте.}
+  - {rscadd: Портированы ранговые патчи ЭК ЦПСС.}
+delete-after: true
