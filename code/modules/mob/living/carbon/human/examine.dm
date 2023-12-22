@@ -107,7 +107,7 @@
 	//shoes
 	if(shoes && !skipshoes)
 		msg += "[P.He] [P.is] wearing [shoes.get_examine_line()] on [P.his] feet.\n"
-	else if(feet_blood_DNA)
+	else if(feet_blood_color)
 		msg += "[SPAN_WARNING("[P.He] [P.has] [(feet_blood_color != SYNTH_BLOOD_COLOUR) ? "blood" : "oil"]-stained feet!")]\n"
 
 	//mask

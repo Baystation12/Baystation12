@@ -128,7 +128,7 @@ var/global/list/image/splatter_cache=list()
 
 	else if (hasfeet)//Or feet
 		perp.feet_blood_color = basecolor
-		perp.track_blood = max(amount,perp.track_blood)
+		perp.track_blood = max(amount, perp.track_blood)
 		if(!perp.feet_blood_DNA)
 			perp.feet_blood_DNA = list()
 		perp.feet_blood_DNA |= blood_DNA.Copy()
