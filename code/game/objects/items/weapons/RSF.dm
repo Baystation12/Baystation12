@@ -1,7 +1,6 @@
 /*
 CONTAINS:
 RSF
-
 */
 
 /obj/item/rsf
@@ -13,8 +12,13 @@ RSF
 	density = FALSE
 	anchored = FALSE
 	var/stored_matter = 30
-	var/mode = 1
+	var/mode = MODE_CIGARETTE
 	w_class = ITEM_SIZE_NORMAL
+	var/const/MODE_CIGARETTE = "Cigarette"
+	var/const/MODE_GLASS = "Drinking Glass"
+	var/const/MODE_PAPER = "Paper"
+	var/const/MODE_PEN = "Pen"
+	var/const/MODE_DICE = "Dice Pack"
 
 /obj/item/rsf/examine(mob/user, distance)
 	. = ..()
@@ -37,29 +41,22 @@ RSF
 		return
 
 /obj/item/rsf/attack_self(mob/user as mob)
-	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
-	if (mode == 1)
-		mode = 2
-		to_chat(user, "Changed dispensing mode to 'Drinking Glass'")
-		return
-	if (mode == 2)
-		mode = 3
-		to_chat(user, "Changed dispensing mode to 'Paper'")
-		return
-	if (mode == 3)
-		mode = 4
-		to_chat(user, "Changed dispensing mode to 'Pen'")
-		return
-	if (mode == 4)
-		mode = 5
-		to_chat(user, "Changed dispensing mode to 'Dice Pack'")
-		return
-	if (mode == 5)
-		mode = 1
-		to_chat(user, "Changed dispensing mode to 'Cigarette'")
+	var/list/options = list(
+		"Cigarette" = mutable_appearance('icons/screen/radial.dmi', "cigarette"),
+		"Drinking Glass" = mutable_appearance('icons/screen/radial.dmi', "glass"),
+		"Paper" = mutable_appearance('icons/screen/radial.dmi', "paper"),
+		"Pen" = mutable_appearance('icons/screen/radial.dmi', "pen"),
+		"Dice Pack" = mutable_appearance('icons/screen/radial.dmi', "dicebag")
+	)
+	var/choice = show_radial_menu(user, user, options, require_near = TRUE, radius = 42, tooltips = TRUE, check_locs = list(src))
+	if (!choice || !user.use_sanity_check(src))
 		return
 
-/obj/item/rsf/use_after(atom/A, mob/living/user, click_parameters)
+	mode = choice
+	to_chat(user, SPAN_NOTICE("Changed dispending mode to \the [choice]."))
+	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
+
+/obj/item/rsf/use_before(atom/A, mob/living/user, click_parameters)
 	if(istype(user,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = user
 		if(R.stat || !R.cell || R.cell.charge <= 0)
@@ -78,24 +75,27 @@ RSF
 	var/obj/product
 
 	switch(mode)
-		if(1)
+		if(MODE_CIGARETTE)
 			product = new /obj/item/clothing/mask/smokable/cigarette()
 			used_energy = 10
-		if(2)
+		if(MODE_GLASS)
 			product = new /obj/item/reagent_containers/food/drinks/glass2()
 			used_energy = 50
-		if(3)
+		if(MODE_PAPER)
 			product = new /obj/item/paper()
 			used_energy = 10
-		if(4)
+		if(MODE_PEN)
 			product = new /obj/item/pen()
 			used_energy = 50
-		if(5)
+		if(MODE_DICE)
 			product = new /obj/item/storage/pill_bottle/dice()
 			used_energy = 200
 
 	to_chat(user, "Dispensing [product ? product : "product"]...")
-	product.dropInto(A.loc)
+	if (isturf(A))
+		product.dropInto(A)
+	else
+		product.dropInto(A.loc)
 
 	if(isrobot(user))
 		var/mob/living/silicon/robot/R = user
