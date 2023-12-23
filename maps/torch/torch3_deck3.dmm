@@ -17343,13 +17343,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
-"Rl" = (
-/obj/floor_decal/industrial/hatch,
-/obj/structure/closet/crate{
-	name = "hermes crate"
-	},
-/turf/simulated/floor/tiled/dark,
-/area/command/disperser)
 "Rm" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -42765,11 +42758,11 @@ aI
 aa
 Qq
 Qq
-Rl
 Pp
 Pp
 Pp
-Rl
+Pp
+Pp
 Qq
 Qq
 aa
