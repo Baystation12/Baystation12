@@ -1,0 +1,5 @@
+author: emmanuelbassil
+changes:
+  - {tweak: Rapid service fabricator now uses radial menus}
+  - {bugfix: Rapid service fabricator properly creates items now.}
+delete-after: true
