@@ -181,11 +181,13 @@
 	..()
 
 /obj/machinery/door/attack_hand(mob/user)
+	if ((. = ..()))
+		return
+
 	if (MUTATION_FERAL in user.mutations)
 		attack_generic(user, 15)
 		return
 
-	..()
 	if (allowed(user) && operable())
 		if (density)
 			open()
