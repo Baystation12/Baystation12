@@ -75,18 +75,11 @@
 	handle_beam(start, direction)
 	handle_overbeam()
 
-	if (chargetype != OVERMAP_WEAKNESS_DROPPOD)
-		qdel(atomcharge)
+	qdel(atomcharge)
 
 	if(prob(cool_failchance()))
 		explosion(middle, rand(6, 9))
 	next_shot = coolinterval + world.time
-
-	if(prob(100 - accuracy))
-		if(chargetype == OVERMAP_WEAKNESS_DROPPOD)
-			// Remove it in case it's a droppod.
-			atomcharge.forceMove(locate(rand(1,world.maxx),rand(1,world.maxy), GLOB.using_map.get_empty_zlevel()))
-		return TRUE
 
 	reset_calibration()
 
@@ -161,44 +154,8 @@
 		targetturf = areaturf
 
 	log_and_message_admins("Disperser beam hit sector at [targetturf.loc.name].", location=targetturf)
-	if(chargetype == OVERMAP_WEAKNESS_DROPPOD)
-		if(targetturf.density)
-			targetturf.ex_act(EX_ACT_DEVASTATING)
-		for(var/atom/A in targetturf)
-			A.ex_act(EX_ACT_LIGHT)
-
-		for(var/mob/M in GLOB.player_list)
-			if(!AreConnectedZLevels(get_z(M), get_z(targetturf)))
-				continue
-			shake_camera(M, 25)
-			if(!isdeaf(M))
-				sound_to(M, sound('sound/effects/explosionfar.ogg', volume=10))
-
-			if(M.can_be_floored())
-				var/shouldstumble = FALSE
-				var/sincelastmove = world.time - M.l_move_time
-
-				if(sincelastmove > QUICK_TO_STANDING SECONDS)
-					shouldstumble = prob(STANDING_FALL_PROB)
-				else if(sincelastmove > DELIBERATE_TO_STANDING)
-					shouldstumble = MOVING_QUICKLY(M) ? prob(RUNNING_FALL_PROB) : prob(STANDING_FALL_PROB)
-				else
-					shouldstumble = MOVING_QUICKLY(M) ? prob(RUNNING_FALL_PROB) : prob(WALKING_FALL_PROB)
-
-				if(shouldstumble)
-					to_chat(M, SPAN_DANGER("You stumble onto the floor from the shaking!"))
-					M.AdjustStunned(2)
-					M.AdjustWeakened(2)
-
-		charge.forceMove(targetturf)
-		// The disperser is not a taxi
-		for(var/mob/living/L in charge)
-			to_chat(L, SPAN_DANGER("Your body shakes violently, immense and agonising forces tearing it apart."))
-			L.forceMove(targetturf)
-			L.ex_act(EX_ACT_DEVASTATING)
-	else
-		charge.fire(targetturf, strength, range)
-		qdel(charge)
+	charge.fire(targetturf, strength, range)
+	qdel(charge)
 
 /obj/machinery/computer/ship/disperser/proc/handle_beam(turf/start, direction)
 	set waitfor = FALSE

@@ -141,21 +141,13 @@
 	return get_next_shot_seconds() * 1000 / coolinterval
 
 /obj/machinery/computer/ship/disperser/proc/get_charge_type()
-	var/obj/structure/ship_munition/disperser_charge/B = locate() in get_turf(back)
-	if(B)
-		return B.chargetype
-	var/obj/structure/closet/C = locate() in get_turf(back)
-	if(C)
-		return OVERMAP_WEAKNESS_DROPPOD
+	var/obj/structure/ship_munition/disperser_charge/charge = get_charge()
+	if (charge)
+		return charge.chargetype
 	return OVERMAP_WEAKNESS_NONE
 
 /obj/machinery/computer/ship/disperser/proc/get_charge()
-	var/obj/structure/ship_munition/disperser_charge/B = locate() in get_turf(back)
-	if(B)
-		return B
-
-	var/obj/structure/closet/C = locate() in get_turf(back)
-	return C
+	return locate(/obj/structure/ship_munition/disperser_charge) in get_turf(back)
 
 /obj/machinery/computer/ship/disperser/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = TRUE)
 	if(!linked)
@@ -184,8 +176,6 @@
 		switch(get_charge_type())
 			if(OVERMAP_WEAKNESS_NONE)
 				charge = "[SPAN_BOLD("ERROR")]: No valid charge detected."
-			if(OVERMAP_WEAKNESS_DROPPOD)
-				charge = "HERMES"
 			else
 				var/obj/structure/ship_munition/disperser_charge/B = get_charge()
 				charge = B.chargedesc
