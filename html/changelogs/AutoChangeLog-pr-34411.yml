@@ -1,0 +1,4 @@
+author: Spookerton
+changes:
+  - {tweak: Rapid service fabricators get correct unit amounts from RCD cartridges.}
+delete-after: true
