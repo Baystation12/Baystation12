@@ -69,3 +69,23 @@
 	shirts += /obj/item/clothing/under/suit_jacket/burgundy
 	shirts += /obj/item/clothing/under/suit_jacket/checkered
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(shirts)
+
+/datum/gear/uniform/retro_security
+	display_name = "retro security officer's uniform"
+	allowed_roles = SECURITY_ROLES
+	path = /obj/item/clothing/under/retro/security
+
+/datum/gear/uniform/retro_medical
+	display_name = "retro medical officer's uniform"
+	allowed_roles = STERILE_ROLES
+	path = /obj/item/clothing/under/retro/medical
+
+/datum/gear/uniform/retro_engineering
+	display_name = "retro engineering uniform"
+	allowed_roles = TECHNICAL_ROLES
+	path = /obj/item/clothing/under/retro/engineering
+
+/datum/gear/uniform/retro_science
+	display_name = "retro science officer's uniform"
+	allowed_roles = RESEARCH_ROLES
+	path = /obj/item/clothing/under/retro/science

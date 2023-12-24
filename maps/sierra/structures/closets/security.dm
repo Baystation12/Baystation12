@@ -170,6 +170,35 @@
 		/obj/item/clothing/glasses/hud/security
 	)
 
+/obj/structure/closet/secure_closet/security/sierra/science
+	name = "research guard locker"
+	req_access = list(access_security)
+	closet_appearance = /singleton/closet_appearance/secure_closet/sierra/security
+
+/obj/structure/closet/secure_closet/security/sierra/science/WillContain()
+	return list(
+		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack, /obj/item/storage/backpack/satchel)),
+		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag, 50),
+		/obj/item/clothing/suit/armor/vest/blueshift,
+		/obj/item/clothing/head/helmet/nt/blueshift,
+		/obj/item/device/radio/headset/headset_sec,
+		/obj/item/storage/belt/holster/security,
+		/obj/item/device/flash,
+		/obj/item/reagent_containers/spray/pepper,
+		/obj/item/grenade/chem_grenade/teargas,
+		/obj/item/melee/baton/loaded,
+		/obj/item/clothing/glasses/hud/security/prot/sunglasses,
+		/obj/item/taperoll/police,
+		/obj/item/device/hailer,
+		/obj/item/clothing/accessory/storage/black_vest,
+		/obj/item/clothing/under/blueshift_uniform,
+		/obj/item/gun/energy/taser,
+		/obj/item/device/holowarrant,
+	)
+
+/obj/structure/closet/secure_closet/security/sierra/science/WillContain()
+	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(/obj/item/device/encryptionkey/headset_sci))
+
 /obj/structure/closet/secure_closet/brig/WillContain()
 	return list(
 		/obj/item/clothing/under/color/orange,

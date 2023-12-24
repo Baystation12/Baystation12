@@ -3,6 +3,7 @@
 
 #include "_loadout_items.dm"
 #include "code/accessory.dm"
+#include "code/armor.dm"
 #include "code/cloak.dm"
 #include "code/gloves.dm"
 #include "code/shoes.dm"

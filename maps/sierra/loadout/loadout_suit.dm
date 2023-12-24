@@ -59,7 +59,7 @@
 	allowed_roles = STERILE_ROLES
 
 /datum/gear/suit/labcoat_corp_si
-	display_name = "labcoat, NT or Hephaestus"
+	display_name = "Corporate labcoat"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/science
 	allowed_roles = RESEARCH_ROLES
 	allowed_branches = list(/datum/mil_branch/employee, /datum/mil_branch/contractor)
@@ -69,6 +69,7 @@
 	var/labcoatsi = list()
 	labcoatsi += /obj/item/clothing/suit/storage/toggle/labcoat/science/nanotrasen
 	labcoatsi += /obj/item/clothing/suit/storage/toggle/labcoat/science/heph
+	labcoatsi += /obj/item/clothing/suit/storage/toggle/labcoat/science/xynergy
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(labcoatsi)
 
 /datum/gear/suit/labcoat_dais

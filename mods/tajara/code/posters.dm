@@ -92,6 +92,7 @@
 	poster_type = /singleton/poster/tjpost/tposter_22
 
 /singleton/poster/tjpost
+	icon = 'mods/tajara/icons/posters.dmi'
 	icon_state = "tposter"
 	name = "Liberation day"
 	desc = "A memorable photo, which depicted how the soldiers of the Kaytam clan raise their flag \

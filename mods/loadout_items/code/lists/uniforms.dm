@@ -13,3 +13,9 @@
 	pmc["SCP utility uniform"]	= /obj/item/clothing/under/scp_uniform
 	pmc["ZPCI utility uniform"]	= /obj/item/clothing/under/zpci_uniform
 	gear_tweaks += new/datum/gear_tweak/path(pmc)
+
+/datum/gear/tactical/colorable_camo
+	display_name = "camo uniform - colorable"
+	path = /obj/item/clothing/under/gray_camo
+	slot = slot_w_uniform
+	flags = GEAR_HAS_COLOR_SELECTION
