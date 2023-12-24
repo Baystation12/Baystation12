@@ -1,5 +1,0 @@
-author: emmanuelbassil
-changes:
-  - {bugfix: Using wirecutters/multitool on a door with an exposed panel no longer
-      opens the door.}
-delete-after: true
