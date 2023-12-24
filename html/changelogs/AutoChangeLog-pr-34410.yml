@@ -1,4 +1,0 @@
-author: TobyThorne
-changes:
-  - {bugfix: Bloodied shoeless feet overlays use the correct colors.}
-delete-after: true

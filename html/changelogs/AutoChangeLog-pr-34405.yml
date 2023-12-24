@@ -1,4 +1,0 @@
-author: Spookerton
-changes:
-  - {rscdel: The OFD can't launch closets.}
-delete-after: true
