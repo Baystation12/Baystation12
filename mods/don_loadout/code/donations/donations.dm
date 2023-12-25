@@ -38,6 +38,8 @@
 		GROUP BY ckey
 	"})
 
+	query.Execute()
+
 	if(query.NextRow())
 		var/total = query.item[1]
 		var/donator_level = DONATION_TIER_NONE
