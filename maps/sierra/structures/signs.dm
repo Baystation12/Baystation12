@@ -54,3 +54,32 @@
 		to_chat(usr, description)
 		return TOPIC_HANDLED
 	. = ..()
+
+
+/obj/structure/sign/poster/annoyed_gas
+	icon_state = "annoyed_gas"
+	poster_type = /singleton/poster/annoyed_gas
+
+/obj/structure/sign/poster/healthy_hugs
+	icon_state = "healthy_hugs"
+	poster_type = /singleton/poster/healthy_hugs
+
+/obj/structure/sign/poster/no_alcohol
+	icon_state = "no_alcohol"
+	poster_type = /singleton/poster/no_alcohol
+
+/obj/structure/sign/poster/pizza_for_captain
+	icon_state = "pizza_for_captain"
+	poster_type = /singleton/poster/pizza_for_captain
+
+/obj/structure/sign/poster/would_you_plant
+	icon_state = "would_you_plant"
+	poster_type = /singleton/poster/would_you_plant
+
+/obj/structure/sign/poster/cabbage_tray
+	icon_state = "cabbage_tray"
+	poster_type = /singleton/poster/cabbage_tray
+
+/obj/structure/sign/poster/unusual_gas
+	icon_state = "unusual_gas"
+	poster_type = /singleton/poster/contraband_only/unusual_gas

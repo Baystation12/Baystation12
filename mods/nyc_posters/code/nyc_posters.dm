@@ -158,47 +158,6 @@
 	desc = "A poster advertising a space escort service on high-speed shuttles. It says \
 	\"We will will bring our client to any location - quickly, safely and comfortably!\""
 
-/singleton/poster/nyc_annoyed_gas
-	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
-	// by SuhEugene
-	icon_state = "annoyed_gas"
-	name = "Annoyed GAS"
-	desc = "The poster shows a chittering Giant Armored Serpentid with its scythe arms \
-	raised and ready to attack. \"Run!\" is written in big red letters, and at the very \
-	bottom there is a small text: \"If during the communication process the GAS began to \
-	actively chitter, buzz, raised sickles or strikes in the air with them - you must turn \
-	around and leave him alone.\""
-
-/singleton/poster/nyc_healthy_hugs
-	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
-	// by SuhEugene
-	icon_state = "healthy_hugs"
-	name = "Healthy hugs"
-	desc = "The poster shows a Giant Armored Serpentid holding a girl with a yellow flower \
-	in her hair with sickles. On the left - a large inscription \"HUGS\" in green letters, \
-	under which it is written in small letters: \"Hugs are useful both morally and physically: \
-	for example, the human race lowers blood pressure and produces oxytocin. Almost any crew \
-	will increase confidence and feel good. The main thing is - be sure to ask permission.\""
-
-/singleton/poster/nyc_pizza_for_captain
-	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
-	// by SuhEugene
-	icon_state = "pizza_for_captain"
-	name = "Pizza for Captain"
-	desc = "On fairly cheap thick paper, the red inscription reads: \"Pizza for Captain\". \
-	The slice of pizza itself is also drawn... with pineapples? Wouldn't eat this for anything! \
-	Someone apparently doesn't like the captain very much..."
-
-/singleton/poster/nyc_unusual_gas
-	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
-	// by SuhEugene
-	icon_state = "unusual_gas"
-	name = "Unusual GAS"
-	desc = "The poster shows a Giant Armored Serpentid. On his tail is what appears to be a large \
-	black gaiter with purple stripes. GAS sickles are dressed in cute little mitts of the same \
-	color. The entire lower right corner of the poster is occupied by a large inscription \"uwu\", \
-	and in the lower left it says: \"More on our site - WetSkrell.nt\"."
-
 /singleton/poster/nyc_unathi_mercenaries
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
 	// by Wastelander41
@@ -279,27 +238,6 @@
 	free medicine of NanoTrasen!"
 */
 
-/singleton/poster/nyc_cabbage_tray
-	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
-	// by SuhEugene
-	icon_state = "cabbage_tray"
-	name = "Cabbage tray"
-	desc = "The poster shows a Giant Armored Serpentid with a hydroponic tray of ripe cabbage \
-	in front of it, indicated by a green indicator on it. On the left side of the poster it \
-	says: \"Most GAS don't know how to cut existing plantings. Please don't plant all the \
-	trays and leave a few free ones. In order for the serpentid to eat, it only needs literally \
-	a couple of empty trays.\""
-
-/singleton/poster/nyc_no_alcohol
-	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
-	// by SuhEugene
-	icon_state = "no_alcohol"
-	name = "СП * РТ"
-	desc = "At the very top of the poster is a word, where one of the letters is replaced by an \
-	asterisk: \"СП * РТ\", and below - two signatures. The first: \"o - сила\", the second \
-	\"и - могила\". The poster is clean and without small text, which makes it clear the \
-	seriousness of the statement."
-
 /singleton/poster/nyc_attention
 	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
 	// by Derp
@@ -317,16 +255,6 @@
 	name = "Shirisai"
 	desc = "Shirisai - the home planet of Resomi. A cold and snowy world, mostly covered in tundra. \
 	And why do many resomi flee from there?"
-
-/singleton/poster/nyc_would_you_plant
-	icon = 'mods/nyc_posters/icons/nyc_posters.dmi'
-	// by SuhEugene
-	icon_state = "would_you_plant"
-	name = "Засадил бы?"
-	desc = "Большой зелёный постер, на котором изображён совершенно новый гидропонический лоток. \
-	Сверху - большой текст с вызывающим вопросом: \"Засадил бы?\", маленьким текстом пояснённый: \
-	\"Гидропонические лотки позволяют быстро и эффективно выращивать абсолютно любые культуры, а \
-	индикаторы подскажут, когда за растением нужен уход! И как в такой не засадить?\""
 */
 
 /singleton/poster/nyc_unexplored_species
@@ -520,22 +448,6 @@
 	icon_state = "space_escort"
 	poster_type = /singleton/poster/nyc_space_escort
 
-/obj/structure/sign/poster/nyc/annoyed_gas
-	icon_state = "annoyed_gas"
-	poster_type = /singleton/poster/nyc_annoyed_gas
-
-/obj/structure/sign/poster/nyc/healthy_hugs
-	icon_state = "healthy_hugs"
-	poster_type = /singleton/poster/nyc_healthy_hugs
-
-/obj/structure/sign/poster/nyc/pizza_for_captain
-	icon_state = "pizza_for_captain"
-	poster_type = /singleton/poster/nyc_pizza_for_captain
-
-/obj/structure/sign/poster/nyc/unusual_gas
-	icon_state = "unusual_gas"
-	poster_type = /singleton/poster/nyc_unusual_gas
-
 /obj/structure/sign/poster/nyc/unathi_mercenaries
 	icon_state = "unathi_mercenaries"
 	poster_type = /singleton/poster/nyc_unathi_mercenaries
@@ -574,14 +486,6 @@
 	poster_type = /singleton/poster/nyc_do_not_disturb
 */
 
-/obj/structure/sign/poster/nyc/cabbage_tray
-	icon_state = "cabbage_tray"
-	poster_type = /singleton/poster/nyc_cabbage_tray
-
-/obj/structure/sign/poster/nyc/no_alcohol
-	icon_state = "no_alcohol"
-	poster_type = /singleton/poster/nyc_no_alcohol
-
 /obj/structure/sign/poster/nyc/attention
 	icon_state = "attention"
 	poster_type = /singleton/poster/nyc_attention
@@ -590,10 +494,6 @@
 /obj/structure/sign/poster/nyc/shirisai
 	icon_state = "shirisai"
 	poster_type = /singleton/poster/nyc_shirisai
-
-/obj/structure/sign/poster/nyc/would_you_plant
-	icon_state = "would_you_plant"
-	poster_type = /singleton/poster/nyc_would_you_plant
 */
 
 /obj/structure/sign/poster/nyc/unexplored_species

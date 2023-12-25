@@ -26269,7 +26269,7 @@
 /obj/floor_decal/corner/green/border{
 	dir = 4
 	},
-/obj/structure/sign/poster/nyc/would_you_plant{
+/obj/structure/sign/poster/would_you_plant{
 	pixel_x = 32
 	},
 /turf/simulated/floor/tiled,
@@ -49352,7 +49352,7 @@
 /obj/floor_decal/techfloor{
 	dir = 9
 	},
-/obj/structure/sign/poster/nyc/unusual_gas{
+/obj/structure/sign/poster/unusual_gas{
 	pixel_x = -32
 	},
 /obj/structure/closet/shipping_wall/filled{

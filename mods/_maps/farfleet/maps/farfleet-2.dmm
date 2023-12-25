@@ -5194,7 +5194,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/structure/sign/poster/nyc/no_alcohol{
+/obj/structure/sign/poster/no_alcohol{
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/white,
