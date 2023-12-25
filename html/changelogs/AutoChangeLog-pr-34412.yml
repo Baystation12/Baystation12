@@ -1,0 +1,5 @@
+author: emmanuelbassil
+changes:
+  - {bugfix: 'Fixes mounted hardsuit scanners, RCD, and defibrillator. They now work
+      when you click on target using your preferred key combination'}
+delete-after: true
