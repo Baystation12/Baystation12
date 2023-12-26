@@ -15,26 +15,28 @@
 		sample.dropInto(loc)
 	..()
 
-/obj/machinery/microscope/attackby(obj/item/W, mob/user)
-
+/obj/machinery/microscope/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(sample)
 		to_chat(user, SPAN_WARNING("There is already a slide in the microscope."))
-		return
+		return ..()
 
-	if(istype(W))
-		if(istype(W, /obj/item/evidencebag))
-			var/obj/item/evidencebag/B = W
-			if(B.stored_item)
-				to_chat(user, SPAN_NOTICE("You insert \the [B.stored_item] from \the [B] into the microscope."))
-				B.stored_item.forceMove(src)
-				sample = B.stored_item
-				B.empty()
-				return
-		if(!user.unEquip(W, src))
-			return
-		to_chat(user, SPAN_NOTICE("You insert \the [W] into the microscope."))
-		sample = W
-		update_icon()
+	if (istype(W, /obj/item/evidencebag))
+		var/obj/item/evidencebag/B = W
+		if (B.stored_item)
+			to_chat(user, SPAN_NOTICE("You insert \the [B.stored_item] from \the [B] into the microscope."))
+			B.stored_item.forceMove(src)
+			sample = B.stored_item
+			B.empty()
+		else
+			to_chat(user, SPAN_WARNING("\The [B] is empty!"))
+		return TRUE
+
+	if(!user.unEquip(W, src))
+		return TRUE
+	to_chat(user, SPAN_NOTICE("You insert \the [W] into the microscope."))
+	sample = W
+	update_icon()
+	return TRUE
 
 /obj/machinery/microscope/physical_attack_hand(mob/user)
 	. = TRUE

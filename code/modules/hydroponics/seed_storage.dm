@@ -25,6 +25,7 @@
 	density = TRUE
 	anchored = TRUE
 	idle_power_usage = 100
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
 	var/list/datum/seed_pile/piles = list()
 	var/list/starting_seeds = list(
@@ -293,13 +294,14 @@
 			break
 	updateUsrDialog()
 
-/obj/machinery/seed_storage/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/seed_storage/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if (istype(O, /obj/item/seeds))
 		add(O)
 		sort_piles()
 		user.visible_message("[user] puts \the [O.name] into \the [src].", "You put \the [O] into \the [src].")
-		return
-	else if (istype(O, /obj/item/storage/plants))
+		return TRUE
+
+	if (istype(O, /obj/item/storage/plants))
 		var/obj/item/storage/P = O
 		var/loaded = 0
 		for(var/obj/item/seeds/G in P.contents)
@@ -312,11 +314,8 @@
 			user.visible_message("[user] puts the seeds from \the [O.name] into \the [src].", "You put the seeds from \the [O.name] into \the [src].")
 		else
 			to_chat(user, SPAN_NOTICE("There are no seeds in \the [O.name]."))
-		return
-	else if(isWrench(O))
-		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-		anchored = !anchored
-		to_chat(user, "You [anchored ? "wrench" : "unwrench"] \the [src].")
+		return TRUE
+	return ..()
 
 /obj/machinery/seed_storage/proc/add(obj/item/seeds/O, bypass_removal = 0)
 	if(!bypass_removal)

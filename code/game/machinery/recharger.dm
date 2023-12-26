@@ -16,7 +16,7 @@
 	var/icon_state_idle = "recharger0" //also when unpowered
 	var/portable = 1
 
-/obj/machinery/recharger/attackby(obj/item/G as obj, mob/user as mob)
+/obj/machinery/recharger/use_tool(obj/item/G, mob/living/user, list/click_params)
 	var/allowed = 0
 	for (var/allowed_type in allowed_devices)
 		if (istype(G, allowed_type)) allowed = 1
@@ -24,31 +24,36 @@
 	if(allowed)
 		if(charging)
 			to_chat(user, SPAN_WARNING("\A [charging] is already charging here."))
-			return
+			return TRUE
 		// Checks to make sure he's not in space doing it, and that the area got proper power.
 		if(!powered())
-			to_chat(user, SPAN_WARNING("The [name] blinks red as you try to insert the item!"))
-			return
+			to_chat(user, SPAN_WARNING("\The [name] blinks red as you try to insert the item!"))
+			return TRUE
 		if (istype(G, /obj/item/gun/energy))
 			var/obj/item/gun/energy/E = G
 			if(E.self_recharge)
 				to_chat(user, SPAN_NOTICE("You can't find a charging port on \the [E]."))
-				return
+				return TRUE
 		if(!G.get_cell())
 			to_chat(user, "This device does not have a battery installed.")
-			return
+			return TRUE
 
 		if(user.unEquip(G))
 			G.forceMove(src)
 			charging = G
 			update_icon()
-	else if(portable && isWrench(G))
+			return TRUE
+
+	if (portable && isWrench(G))
 		if(charging)
 			to_chat(user, SPAN_WARNING("Remove [charging] first!"))
-			return
+			return TRUE
 		anchored = !anchored
 		to_chat(user, "You [anchored ? "attached" : "detached"] the recharger.")
 		playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
+		return TRUE
+
+	return ..()
 
 /obj/machinery/recharger/physical_attack_hand(mob/user)
 	if(charging)

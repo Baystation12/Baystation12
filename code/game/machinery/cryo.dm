@@ -224,18 +224,19 @@
 	if(istype(new_state))
 		updateUsrDialog()
 
-/obj/machinery/atmospherics/unary/cryo_cell/attackby(obj/G, mob/user as mob)
-	if(component_attackby(G, user))
+/obj/machinery/atmospherics/unary/cryo_cell/use_tool(obj/item/G, mob/living/user, list/click_params)
+	if (!istype(G, /obj/item/reagent_containers/glass))
+		return ..()
+
+	if (beaker)
+		to_chat(user, SPAN_WARNING("A beaker is already loaded into the machine."))
 		return TRUE
-	if(istype(G, /obj/item/reagent_containers/glass))
-		if(beaker)
-			to_chat(user, SPAN_WARNING("A beaker is already loaded into the machine."))
-			return
-		if(!user.unEquip(G, src))
-			return // Temperature will be adjusted on Entered()
-		beaker =  G
-		user.visible_message("[user] adds \a [G] to \the [src]!", "You add \a [G] to \the [src]!")
-	return
+	if (!user.unEquip(G, src))
+		return TRUE
+
+	beaker =  G
+	user.visible_message("\The [user] adds \a [G] to \the [src]!", "You add \a [G] to \the [src]!")
+	return TRUE
 
 /obj/machinery/atmospherics/unary/cryo_cell/on_update_icon()
 	ClearOverlays()

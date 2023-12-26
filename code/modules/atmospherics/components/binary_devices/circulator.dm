@@ -93,7 +93,7 @@
 
 	return 1
 
-/obj/machinery/atmospherics/binary/circulator/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/atmospherics/binary/circulator/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		anchored = !anchored
@@ -127,9 +127,8 @@
 			node1 = null
 			node2 = null
 		update_icon()
-
-	else
-		..()
+		return TRUE
+	return ..()
 
 /obj/machinery/atmospherics/binary/circulator/verb/rotate_clockwise()
 	set category = "Object"

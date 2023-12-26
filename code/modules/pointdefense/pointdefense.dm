@@ -82,7 +82,7 @@
 	data["turrets"] = turrets
 	return data
 
-/obj/machinery/pointdefense_control/attackby(obj/item/thing, mob/user)
+/obj/machinery/pointdefense_control/use_tool(obj/item/thing, mob/living/user, list/click_params)
 	if(isMultitool(thing))
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.get_new_tag(user)
@@ -92,7 +92,7 @@
 			var/list/pointdefense_controllers = lan.get_devices(/obj/machinery/pointdefense_control)
 			if(pointdefense_controllers && length(pointdefense_controllers) > 1)
 				lan.remove_device(src)
-		return
+		return TRUE
 	else
 		return ..()
 
@@ -128,11 +128,12 @@
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.set_tag(null, initial_id_tag)
 
-/obj/machinery/pointdefense/attackby(obj/item/thing, mob/user)
+/obj/machinery/pointdefense/use_tool(obj/item/thing, mob/living/user, list/click_params)
 	if(isMultitool(thing))
 		var/datum/extension/local_network_member/pointdefense = get_extension(src, /datum/extension/local_network_member)
 		pointdefense.get_new_tag(user)
 		return TRUE
+
 	return ..()
 
 //Guns cannot shoot through hull or generally dense turfs.

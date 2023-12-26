@@ -134,6 +134,7 @@
 	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	obj_flags = OBJ_FLAG_ANCHORABLE
 	var/max_power_output = 5	//The maximum power setting without emagging.
 	var/max_safe_output = 4		// For UI use, maximal output that won't cause overheat.
 	var/time_per_sheet = 96		//fuel efficiency - how long 1 sheet lasts at power level 1
@@ -292,29 +293,24 @@
 		return SPAN_WARNING("You cannot do this while \the [src] is running!")
 	return ..()
 
-/obj/machinery/power/port_gen/pacman/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/power/port_gen/pacman/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(istype(O, sheet_path))
 		var/obj/item/stack/addstack = O
 		var/amount = min((max_sheets - sheets), addstack.amount)
 		if(amount < 1)
 			to_chat(user, SPAN_NOTICE("The [src.name] is full!"))
-			return
+			return TRUE
 		to_chat(user, SPAN_NOTICE("You add [amount] sheet\s to the [src.name]."))
 		sheets += amount
 		addstack.use(amount)
 		updateUsrDialog()
-		return
-	if(isWrench(O) && !active)
-		if(!anchored)
-			connect_to_network()
-			to_chat(user, SPAN_NOTICE("You secure the generator to the floor."))
-		else
-			disconnect_from_network()
-			to_chat(user, SPAN_NOTICE("You unsecure the generator from the floor."))
+		return TRUE
 
-		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		anchored = !anchored
-	return component_attackby(O, user)
+	if(isWrench(O) && active)
+		to_chat(SPAN_WARNING("Turn off \the [src] before wrenching its bolts."))
+		return TRUE
+
+	return ..()
 
 /obj/machinery/power/port_gen/pacman/dismantle()
 	while (sheets > 0)
@@ -507,7 +503,7 @@
 	if(power_output > max_safe_output)
 		icon_state = "potatodanger"
 
-/obj/machinery/power/port_gen/pacman/super/potato/attackby(obj/item/O, mob/user)
+/obj/machinery/power/port_gen/pacman/super/potato/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(istype(O, /obj/item/reagent_containers))
 		var/obj/item/reagent_containers/R = O
 		if(R.standard_pour_into(src,user))
@@ -517,8 +513,8 @@
 			else
 				audible_message(SPAN_WARNING("[src] blips in disappointment"))
 				playsound(get_turf(src), 'sound/machines/synth_no.ogg', 50, 0)
-		return
-	..()
+		return TRUE
+	return ..()
 
 /obj/machinery/power/port_gen/pacman/super/potato/reactor
 	name = "nuclear reactor"

@@ -244,7 +244,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 		to_chat(user, SPAN_NOTICE("You add \the [O] to \the [src]'s notifications list. It will now be pinged whenever a call is received."))
 		return TRUE
 
-	..()
+	return ..()
 
 /**
  * Proc to link/unlink PDAs

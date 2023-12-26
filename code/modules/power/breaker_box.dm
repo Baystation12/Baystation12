@@ -81,16 +81,15 @@
 	busy = 0
 	return TRUE
 
-/obj/machinery/power/breakerbox/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/power/breakerbox/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isMultitool(W))
 		var/newtag = input(user, "Enter new RCON tag. Use \"NO_TAG\" to disable RCON or leave empty to cancel.", "SMES RCON system") as text
 		if(newtag)
 			RCon_tag = newtag
 			to_chat(user, SPAN_NOTICE("You changed the RCON tag to: [newtag]"))
+		return TRUE
 
-
-
-
+	return ..()
 
 /obj/machinery/power/breakerbox/proc/set_state(state)
 	on = state

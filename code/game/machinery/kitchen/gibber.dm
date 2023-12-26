@@ -74,16 +74,18 @@
 		return SPAN_NOTICE("You must wait for \the [src] to finish operating first!")
 	return ..()
 
-/obj/machinery/gibber/attackby(obj/item/W, mob/user)
+/obj/machinery/gibber/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(!operating)
-		return
-	else if(istype(W, /obj/item/organ))
+		return TRUE
+
+	if (istype(W, /obj/item/organ))
 		if(!user.unEquip(W))
-			return
+			return TRUE
 		qdel(W)
 		user.visible_message(SPAN_DANGER("\The [user] feeds \the [W] into \the [src], obliterating it."))
-	else
-		return ..()
+		return TRUE
+
+	return ..()
 
 /obj/machinery/gibber/user_can_move_target_inside(mob/target, mob/user)
 	if (occupant)

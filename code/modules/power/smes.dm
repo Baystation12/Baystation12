@@ -241,9 +241,9 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/power/smes/attackby(obj/item/W as obj, mob/user as mob)
-	if(component_attackby(W, user))
-		return TRUE
+/obj/machinery/power/smes/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if((.= ..()))
+		return
 
 	if (!panel_open)
 		to_chat(user, SPAN_WARNING("You need to open the access hatch on \the [src] first!"))

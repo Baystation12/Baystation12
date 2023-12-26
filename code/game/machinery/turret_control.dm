@@ -85,18 +85,19 @@
 
 	return ..()
 
-/obj/machinery/turretid/attackby(obj/item/W, mob/user)
+/obj/machinery/turretid/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(MACHINE_IS_BROKEN(src))
-		return
+		return FALSE
 
 	if(istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
-		if(src.allowed(usr))
+		if(allowed(usr))
 			if(emagged)
 				to_chat(user, SPAN_NOTICE("The turret control is unresponsive."))
 			else
 				locked = !locked
 				to_chat(user, SPAN_NOTICE("You [ locked ? "lock" : "unlock"] the panel."))
-		return
+		return TRUE
+
 	return ..()
 
 /obj/machinery/turretid/emag_act(remaining_charges, mob/user)

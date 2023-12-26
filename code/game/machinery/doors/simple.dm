@@ -108,18 +108,15 @@
 			return attack_hand(user)
 
 
-/obj/machinery/door/unpowered/simple/attackby(obj/item/I as obj, mob/user as mob)
-	src.add_fingerprint(user, 0, I)
-	if (user.a_intent == I_HURT)
-		return ..()
-
+/obj/machinery/door/unpowered/simple/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I, /obj/item/key) && lock)
 		var/obj/item/key/K = I
 		if(!lock.toggle(I))
 			to_chat(user, SPAN_WARNING("\The [K] does not fit in the lock!"))
-		return
+		return TRUE
+
 	if(lock && lock.pick_lock(I,user))
-		return
+		return TRUE
 
 	if(istype(I,/obj/item/material/lock_construct))
 		if(lock)
@@ -127,18 +124,18 @@
 		else
 			var/obj/item/material/lock_construct/L = I
 			lock = L.create_lock(src,user)
-		return
+		return TRUE
 
 	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
 		if(MACHINE_IS_BROKEN(src))
 			to_chat(user, SPAN_NOTICE("It looks like \the [src] is pretty busted. It's going to need more than just patching up now."))
-			return
+			return TRUE
 		if (!get_damage_value())
 			to_chat(user, SPAN_NOTICE("Nothing to fix!"))
-			return
+			return TRUE
 		if(!density)
 			to_chat(user, SPAN_WARNING("\The [src] must be closed before you can repair it."))
-			return
+			return TRUE
 
 		//figure out how much metal we need
 		var/obj/item/stack/stack = I
@@ -148,21 +145,25 @@
 			to_chat(user, SPAN_NOTICE("You fit [stack.get_exact_name(used)] to damaged and broken parts on \the [src]."))
 			stack.use(used)
 			restore_health(used * DOOR_REPAIR_AMOUNT)
-		return
+		return TRUE
 
-	if(src.operating) return
+	if(operating)
+		return TRUE
+
+	if ((. = ..()))
+		return
 
 	if(lock && lock.isLocked())
 		to_chat(user, "\The [src] is locked!")
+		return TRUE
 
 	if(operable())
 		if(src.density)
 			open()
 		else
 			close()
-		return
+		return TRUE
 
-	return
 
 /obj/machinery/door/unpowered/simple/examine(mob/user, distance)
 	. = ..()

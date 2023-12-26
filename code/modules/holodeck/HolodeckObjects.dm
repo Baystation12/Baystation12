@@ -356,10 +356,6 @@
 /obj/machinery/readybutton/New()
 	..()
 
-
-/obj/machinery/readybutton/attackby(obj/item/W as obj, mob/user as mob)
-	to_chat(user, "The device is a solid button, there's nothing you can do with it!")
-
 /obj/machinery/readybutton/physical_attack_hand(mob/user)
 	currentarea = get_area(src)
 	if(!currentarea)

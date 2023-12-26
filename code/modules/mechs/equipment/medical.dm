@@ -31,7 +31,7 @@
 
 /obj/item/mech_equipment/sleeper/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/reagent_containers/glass))
-		sleeper.attackby(I, user)
+		sleeper.use_tool(I, user)
 	else return ..()
 
 /obj/item/mech_equipment/sleeper/afterattack(atom/target, mob/living/user, inrange, params)
@@ -80,16 +80,19 @@
 		S.passive_power_use = 0 //No passive power drain when the sleeper is empty. Set to 1.5 KW when patient is inside.
 
 //You cannot modify these, it'd probably end with something in nullspace. In any case basic meds are plenty for an ambulance
-/obj/machinery/sleeper/mounted/attackby(obj/item/I, mob/user)
+/obj/machinery/sleeper/mounted/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I, /obj/item/reagent_containers/glass))
 		if(!user.unEquip(I, src))
-			return
+			return TRUE
 
 		if(beaker)
 			beaker.forceMove(get_turf(src))
 			user.visible_message(SPAN_NOTICE("\The [user] removes \the [beaker] from \the [src]."), SPAN_NOTICE("You remove \the [beaker] from \the [src]."))
 		beaker = I
 		user.visible_message(SPAN_NOTICE("\The [user] adds \a [I] to \the [src]."), SPAN_NOTICE("You add \a [I] to \the [src]."))
+		return TRUE
+
+	return ..()
 
 #define MEDIGEL_SALVE 1
 #define MEDIGEL_SCAN  2

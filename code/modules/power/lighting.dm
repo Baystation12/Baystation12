@@ -63,16 +63,14 @@
 		if(LIGHT_STAGE_WIRED) to_chat(user, "It's wired.")
 		if(LIGHT_STAGE_COMPLETE) to_chat(user, "The casing is closed.")
 
-/obj/machinery/light_construct/attackby(obj/item/W, mob/living/user)
-	add_fingerprint(user)
+/obj/machinery/light_construct/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isWrench(W))
-
 		switch(stage)
 			if (LIGHT_STAGE_EMPTY)
 				playsound(loc, 'sound/items/Ratchet.ogg', 50, TRUE)
 				to_chat(user, SPAN_NOTICE("You begin deconstructing \the [src]."))
 				if (!user.do_skilled((W.toolspeed * 3) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT))
-					return
+					return TRUE
 				new /obj/item/stack/material/steel( get_turf(loc), sheets_refunded )
 				user.visible_message(
 					SPAN_NOTICE("\The [user] deconstructs \the [src]."),
@@ -81,19 +79,20 @@
 				)
 				playsound(loc, 'sound/items/Deconstruct.ogg', 75, TRUE)
 				qdel(src)
-				return
+				return TRUE
 
 			if (LIGHT_STAGE_WIRED)
 				to_chat(user, SPAN_WARNING("You have to remove the wires first."))
-				return
+				return TRUE
 
 			if (LIGHT_STAGE_COMPLETE)
 				to_chat(user, SPAN_WARNING("You have to unscrew the case first."))
-				return
+				return TRUE
 
 	if(isWirecutter(W))
 		if (stage != LIGHT_STAGE_WIRED)
-			return
+			to_chat(user, SPAN_WARNING("There are no exposed wires to cut!"))
+			return TRUE
 		stage = LIGHT_STAGE_EMPTY
 		update_icon()
 		new /obj/item/stack/cable_coil(get_turf(loc), 1, "red")
@@ -103,11 +102,12 @@
 			SPAN_ITALIC("You hear snipping and cables being cut.")
 		)
 		playsound(loc, 'sound/items/Wirecutter.ogg', 50, TRUE)
-		return
+		return TRUE
 
 	if(istype(W, /obj/item/stack/cable_coil))
 		if (stage != LIGHT_STAGE_EMPTY)
-			return
+			to_chat(user, SPAN_WARNING("There is no exposed, empty area to wire!"))
+			return TRUE
 		var/obj/item/stack/cable_coil/coil = W
 		if (coil.use(1))
 			stage = LIGHT_STAGE_WIRED
@@ -117,7 +117,7 @@
 				SPAN_NOTICE("You add wires to \the [src].")
 			)
 			playsound(loc, 'sound/items/Deconstruct.ogg', 50, TRUE)
-		return
+		return TRUE
 
 	if(isScrewdriver(W))
 		if (stage == LIGHT_STAGE_WIRED)
@@ -135,8 +135,9 @@
 
 			transfer_fingerprints_to(newlight)
 			qdel(src)
-			return
-	..()
+			return TRUE
+
+	return ..()
 
 /obj/machinery/light_construct/small
 	name = "small light fixture frame"
@@ -419,39 +420,20 @@
 	seton(FALSE)
 	update_icon()
 
-/obj/machinery/light/attackby(obj/item/W, mob/user)
-
-	// attempt to insert light
-	if(istype(W, /obj/item/light))
-		if(lightbulb)
-			to_chat(user, SPAN_WARNING("There is a [get_fitting_name()] already inserted."))
-			return
-		if(!istype(W, light_type))
-			to_chat(user, SPAN_WARNING("This type of light requires a [get_fitting_name()]."))
-			return
-		if(!user.unEquip(W, src))
-			return
-		user.visible_message(
-			SPAN_NOTICE("\The [user] inserts \a [W] into \the [src]."),
-			SPAN_NOTICE("You insert \the [W] into \the [src]."),
-			SPAN_ITALIC("You hear something being screwed in.")
-		)
-		insert_bulb(W)
-		add_fingerprint(user)
-
-	// attempt to break the light
-	else if(lightbulb && (lightbulb.status != LIGHT_BROKEN) && user.a_intent != I_HELP)
-		if(prob(1 + W.force * 5))
+/obj/machinery/light/use_weapon(obj/item/weapon, mob/living/user, list/click_params)
+	if (lightbulb && (lightbulb.status != LIGHT_BROKEN) && weapon.force > 0)
+		user.setClickCooldown(user.get_attack_speed(weapon))
+		user.do_attack_animation(src)
+		if(prob(1 + weapon.force * 5))
 			user.visible_message(
 				SPAN_WARNING("\The [user] smashes \the [src]!"),
 				SPAN_WARNING("You smash \the [src]!"),
 				SPAN_WARNING("You hear a small glass object shatter.")
 			)
-			if(on && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
+			if(on && (weapon.obj_flags & OBJ_FLAG_CONDUCTIBLE))
 				if (prob(12))
 					electrocute_mob(user, get_area(src), src, 0.3)
 			broken()
-
 		else
 			user.visible_message(
 				SPAN_WARNING("\The [user] hits \the [src]!"),
@@ -459,10 +441,29 @@
 				SPAN_WARNING("You hear glass cracking.")
 			)
 			playsound(loc, "glasscrack", 40, TRUE)
-		attack_animation(user)
+		return TRUE
 
-	// attempt to stick weapon into light socket
-	else if(!lightbulb)
+	return ..()
+
+/obj/machinery/light/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if (istype(W, /obj/item/light))
+		if(lightbulb)
+			to_chat(user, SPAN_WARNING("There is a [get_fitting_name()] already inserted."))
+			return TRUE
+		if(!istype(W, light_type))
+			to_chat(user, SPAN_WARNING("This type of light requires a [get_fitting_name()]."))
+			return TRUE
+		if(!user.unEquip(W, src))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] inserts \a [W] into \the [src]."),
+			SPAN_NOTICE("You insert \the [W] into \the [src]."),
+			SPAN_ITALIC("You hear something being screwed in.")
+		)
+		insert_bulb(W)
+		return TRUE
+
+	if (!lightbulb)
 		if (isScrewdriver(W)) //If it's a screwdriver open it.
 			playsound(loc, 'sound/items/Screwdriver.ogg', 50, TRUE)
 			user.visible_message(
@@ -473,8 +474,9 @@
 			var/obj/machinery/light_construct/C = new construct_type(loc, dir, src)
 			C.stage = LIGHT_STAGE_WIRED
 			C.update_icon()
+			transfer_fingerprints_to(C)
 			qdel(src)
-			return
+			return TRUE
 
 		user.visible_message(
 			SPAN_WARNING("\The [user] shoves \a [W] into \the [src]!"),
@@ -486,6 +488,9 @@
 			s.start()
 			if (prob(75))
 				electrocute_mob(user, get_area(src), src, rand(0.7,1.0))
+		return TRUE
+
+	return ..()
 
 
 // returns whether this light has power

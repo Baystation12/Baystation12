@@ -65,6 +65,13 @@
 	else
 		return 0
 
+/obj/machinery/power/post_anchor_change()
+	if(anchored && !MACHINE_IS_BROKEN(src)) // Powernet connection stuff.
+		connect_to_network()
+	else
+		disconnect_from_network()
+	..()
+
 // connect the machine to a powernet if a node cable is present on the turf
 /obj/machinery/power/proc/connect_to_network()
 	var/turf/T = src.loc
@@ -87,14 +94,12 @@
 
 // attach a wire to a power machine - leads from the turf you are standing on
 //almost never called, overwritten by all power machines but terminal and generator
-/obj/machinery/power/attackby(obj/item/W, mob/user)
+/obj/machinery/power/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if((. = ..()))
 		return
 
 	if(isCoil(W))
-
 		var/obj/item/stack/cable_coil/coil = W
-
 		var/turf/T = user.loc
 
 		if(!T.is_plating() || !istype(T, /turf/simulated/floor))
@@ -105,6 +110,8 @@
 
 		coil.PlaceCableOnTurf(T, user)
 		return TRUE
+
+	return ..()
 
 ///////////////////////////////////////////
 // Powernet handling helpers

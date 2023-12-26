@@ -186,30 +186,32 @@
 
 	if (MUTATION_FERAL in user.mutations)
 		attack_generic(user, 15)
-		return
+		return TRUE
 
-	if (allowed(user) && operable())
+	if (!operating)
+		if (allowed(user) && operable())
+			if(density)
+				open()
+			else
+				close()
+			return TRUE
+
 		if (density)
-			open()
-		else
-			close()
+			do_animate("deny")
+		update_icon()
+		return TRUE
 
-/obj/machinery/door/attackby(obj/item/I as obj, mob/user as mob)
-	src.add_fingerprint(user, 0, I)
-
-	if (user.a_intent == I_HURT)
-		return ..()
-
-	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
+/obj/machinery/door/use_tool(obj/item/I, mob/living/user, list/click_params)
+	if(istype(I, /obj/item/stack/material) && I.get_material_name() == get_material_name())
 		if(MACHINE_IS_BROKEN(src))
 			to_chat(user, SPAN_NOTICE("It looks like \the [src] is pretty busted. It's going to need more than just patching up now."))
-			return
+			return TRUE
 		if (!get_damage_value())
 			to_chat(user, SPAN_NOTICE("Nothing to fix!"))
-			return
+			return TRUE
 		if(!density)
 			to_chat(user, SPAN_WARNING("\The [src] must be closed before you can repair it."))
-			return
+			return TRUE
 
 		//figure out how much metal we need
 		var/amount_needed = get_damage_value() / DOOR_REPAIR_AMOUNT
@@ -221,6 +223,7 @@
 			transfer = stack.transfer_to(repairing, amount_needed - repairing.amount)
 			if (!transfer)
 				to_chat(user, SPAN_WARNING("You must weld or remove \the [repairing] from \the [src] before you can add anything else."))
+				return TRUE
 		else
 			repairing = stack.split(amount_needed)
 			if (repairing)
@@ -230,12 +233,12 @@
 		if (transfer)
 			to_chat(user, SPAN_NOTICE("You fit [stack.get_exact_name(transfer)] to damaged and broken parts on \the [src]."))
 
-		return
+		return TRUE
 
 	if(repairing && isWelder(I))
 		if(!density)
 			to_chat(user, SPAN_WARNING("\The [src] must be closed before you can repair it."))
-			return
+			return TRUE
 
 		var/obj/item/weldingtool/welder = I
 		if(welder.can_use(2, user))
@@ -243,35 +246,36 @@
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			if(do_after(user, (0.5 * repairing.amount) SECONDS, src, DO_REPAIR_CONSTRUCT) && welder.remove_fuel(2, user))
 				if (!repairing)
-					return //the materials in the door have been removed before welding was finished.
+					return TRUE//the materials in the door have been removed before welding was finished.
 
 				to_chat(user, SPAN_NOTICE("You finish repairing the damage to \the [src]."))
 				restore_health(repairing.amount * DOOR_REPAIR_AMOUNT)
 				update_icon()
 				qdel(repairing)
 				repairing = null
-		return
+		return TRUE
 
 	if(repairing && isCrowbar(I))
 		to_chat(user, SPAN_NOTICE("You remove \the [repairing]."))
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		repairing.dropInto(user.loc)
 		repairing = null
-		return
+		return TRUE
 
-	if(src.operating) return
+	if (!operating)
+		if (allowed(user) && operable())
+			if(density)
+				open()
+			else
+				close()
+			return TRUE
 
-	if(src.allowed(user) && operable())
-		if(src.density)
-			open()
-		else
-			close()
-		return
+		if (density)
+			do_animate("deny")
+		update_icon()
+		return TRUE
 
-	if(src.density)
-		do_animate("deny")
-	update_icon()
-	return
+	return ..()
 
 /obj/machinery/door/emag_act(remaining_charges)
 	if(density && operable())

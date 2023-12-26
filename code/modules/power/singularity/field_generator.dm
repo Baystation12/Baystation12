@@ -21,6 +21,7 @@ field_generator power level display
 	anchored = FALSE
 	density = TRUE
 	use_power = POWER_USE_OFF
+	obj_flags = OBJ_FLAG_ANCHORABLE
 	var/const/num_power_levels = 6	// Total number of power level icon has
 	var/Varedit_start = 0
 	var/Varpower = 0
@@ -99,35 +100,29 @@ field_generator power level display
 		to_chat(user, "The [src] needs to be firmly secured to the floor first.")
 		return TRUE
 
-/obj/machinery/field_generator/attackby(obj/item/W, mob/user)
+/obj/machinery/field_generator/post_anchor_change()
+	if (anchored)
+		state = 1
+	else
+		state = 0
+
+	..()
+
+/obj/machinery/field_generator/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(active)
 		to_chat(user, "The [src] needs to be off.")
-		return
-	else if(isWrench(W))
-		switch(state)
-			if(0)
-				state = 1
-				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-				user.visible_message("[user.name] secures [src.name] to the floor.", \
-					"You secure the external reinforcing bolts to the floor.", \
-					"You hear ratchet")
-				src.anchored = TRUE
-			if(1)
-				state = 0
-				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-				user.visible_message("[user.name] unsecures [src.name] reinforcing bolts from the floor.", \
-					"You undo the external reinforcing bolts.", \
-					"You hear ratchet")
-				src.anchored = FALSE
-			if(2)
-				to_chat(user, SPAN_WARNING(" The [src.name] needs to be unwelded from the floor."))
-				return
-	else if(isWelder(W))
+		return TRUE
+
+	if (isWrench(W) && state == 2) //Anchoring code handled at level of obj/use_tool()
+		to_chat(user, SPAN_WARNING(" The [src.name] needs to be unwelded from the floor."))
+		return TRUE
+
+	if (isWelder(W))
 		var/obj/item/weldingtool/WT = W
 		switch(state)
 			if(0)
 				to_chat(user, SPAN_WARNING("The [src.name] needs to be wrenched to the floor."))
-				return
+				return TRUE
 			if(1)
 				if (WT.can_use(1,user))
 					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
@@ -135,11 +130,10 @@ field_generator power level display
 						"You start to weld the [src] to the floor.", \
 						"You hear welding")
 					if (do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
-						if(!src || !WT.remove_fuel(1, user)) return
+						if(!src || !WT.remove_fuel(1, user)) return TRUE
 						state = 2
 						to_chat(user, "You weld the field generator to the floor.")
-				else
-					return
+				return TRUE
 			if(2)
 				if (WT.can_use(1,user))
 					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
@@ -147,14 +141,11 @@ field_generator power level display
 						"You start to cut the [src] free from the floor.", \
 						"You hear welding")
 					if (do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
-						if(!src || !WT.remove_fuel(1, user)) return
+						if(!src || !WT.remove_fuel(1, user)) return TRUE
 						state = 1
 						to_chat(user, "You cut the [src] free from the floor.")
-				else
-					return
-	else
-		..()
-		return
+				return TRUE
+	return ..()
 
 
 /obj/machinery/field_generator/emp_act()

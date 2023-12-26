@@ -134,31 +134,31 @@
 			to_chat(user, "The contents of \the [src] will now be [cook_modes[mode]["desc"]].")
 
 
-/obj/machinery/cooker/attackby(obj/item/I, mob/user)
+/obj/machinery/cooker/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if (is_processing)
 		to_chat(user, SPAN_WARNING("Turn off \the [src] first."))
-		return
-	. = component_attackby(I, user)
-	if (.)
+		return TRUE
+	if ((. = ..()))
 		return
 	if (stat)
 		to_chat(user, SPAN_WARNING("\The [src] is in no condition to operate."))
-		return
+		return TRUE
 	if (!istype(I, /obj/item/reagent_containers/food/snacks))
 		to_chat(user, SPAN_WARNING("Cooking \a [I] wouldn't be very tasty."))
-		return
+		return TRUE
 	var/obj/item/reagent_containers/food/snacks/F = I
 	if (!F.can_use_cooker)
 		to_chat(user, SPAN_WARNING("Cooking \a [I] wouldn't be very tasty."))
-		return
+		return TRUE
 	if (length(cooking) >= capacity)
 		to_chat(user, SPAN_WARNING("\The [src] is already full up."))
-		return
+		return TRUE
 	if (!user.unEquip(I))
-		return
+		return TRUE
 	user.visible_message("\The [user] puts \the [I] into \the [src].")
 	I.forceMove(src)
 	cooking += I
+	return TRUE
 
 
 /obj/machinery/cooker/Process()

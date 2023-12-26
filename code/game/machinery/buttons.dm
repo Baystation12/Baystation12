@@ -25,8 +25,10 @@
 	. = ..()
 	update_icon()
 
-/obj/machinery/button/attackby(obj/item/W, mob/user as mob)
-	return attack_hand(user)
+/obj/machinery/button/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	if (attack_hand(user))
+		return TRUE
+	return ..()
 
 /obj/machinery/button/interface_interact(user)
 	if(!CanInteract(user, DefaultTopicState()))

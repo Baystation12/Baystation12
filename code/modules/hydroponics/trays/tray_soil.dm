@@ -8,11 +8,11 @@
 	mechanical = 0
 	tray_light = 0
 
-/obj/machinery/portable_atmospherics/hydroponics/soil/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/portable_atmospherics/hydroponics/soil/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(istype(O,/obj/item/tank))
-		return
+		return FALSE
 	else
-		..()
+		return ..()
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/New()
 	..()

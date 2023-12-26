@@ -65,51 +65,50 @@
 			visible_message("[icon2html(src, viewers(get_turf(src)))] [src] beeps and spits out [loaded_disk].")
 			loaded_disk = null
 
-/obj/machinery/botany/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/botany/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W,/obj/item/seeds))
 		if(seed)
 			to_chat(user, "There is already a seed loaded.")
-			return
+			return TRUE
 		var/obj/item/seeds/S =W
 		if(S.seed && S.seed.get_trait(TRAIT_IMMUTABLE) > 0)
 			to_chat(user, "That seed is not compatible with our genetics technology.")
 		else if(user.unEquip(W, src))
 			seed = W
 			to_chat(user, "You load [W] into [src].")
-		return
+		return TRUE
 
 	if(isScrewdriver(W))
 		open = !open
 		to_chat(user, SPAN_NOTICE("You [open ? "open" : "close"] the maintenance panel."))
-		return
+		return TRUE
 
-	if(open)
-		if(isCrowbar(W))
-			dismantle()
-			return
+	if(open && isCrowbar(W))
+		dismantle()
+		return TRUE
 
 	if(istype(W,/obj/item/disk/botany))
 		if(loaded_disk)
 			to_chat(user, "There is already a data disk loaded.")
-			return
+			return TRUE
+
+		var/obj/item/disk/botany/B = W
+		if (B.genes && length(B.genes))
+			if (!disk_needs_genes)
+				to_chat(user, "That disk already has gene data loaded.")
+				return TRUE
 		else
-			var/obj/item/disk/botany/B = W
+			if(disk_needs_genes)
+				to_chat(user, "That disk does not have any gene data loaded.")
+				return TRUE
 
-			if(B.genes && length(B.genes))
-				if(!disk_needs_genes)
-					to_chat(user, "That disk already has gene data loaded.")
-					return
-			else
-				if(disk_needs_genes)
-					to_chat(user, "That disk does not have any gene data loaded.")
-					return
-			if(!user.unEquip(W, src))
-				return
-			loaded_disk = W
-			to_chat(user, "You load [W] into [src].")
+		if(!user.unEquip(W, src))
+			return TRUE
+		loaded_disk = W
+		to_chat(user, "You load \the [W] into \the [src].")
+		return TRUE
 
-		return
-	..()
+	return ..()
 
 // Allows for a trait to be extracted from a seed packet, destroying that seed.
 /obj/machinery/botany/extractor

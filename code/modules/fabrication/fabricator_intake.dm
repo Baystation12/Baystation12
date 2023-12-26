@@ -70,8 +70,11 @@
 	else
 		to_chat(user, SPAN_WARNING("\The [src] cannot process \the [thing]."))
 
-/obj/machinery/fabricator/attackby(obj/item/O, mob/user)
-	if(component_attackby(O, user) || stat)
+/obj/machinery/fabricator/use_tool(obj/item/O, mob/living/user, list/click_params)
+	if ((. = ..()))
+		return
+	if(stat)
+		to_chat(user, SPAN_WARNING("\The [src] is not operating."))
 		return TRUE
 	if(panel_open && (isMultitool(O) || isWirecutter(O)))
 		attack_hand(user)
@@ -97,7 +100,6 @@
 			qdel(O)
 		updateUsrDialog()
 		return TRUE
-	. = ..()
 
 /obj/machinery/fabricator/physical_attack_hand(mob/user)
 	if(fab_status_flags & FAB_SHOCKED)

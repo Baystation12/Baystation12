@@ -236,14 +236,23 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 /// Called whenever an attached component updates it's status. Override to handle updates to the machine.
 /obj/machinery/proc/component_stat_change(obj/item/stock_parts/part, old_stat, flag)
 
-/obj/machinery/attackby(obj/item/I, mob/user)
-	if(component_attackby(I, user))
+/obj/machinery/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	if (component_attackby(tool, user))
 		return TRUE
 	return ..()
 
-/obj/machinery/post_anchor_change()
-	power_change()
+/obj/machinery/can_anchor(obj/item/tool, mob/user, silent)
+	if (use_power == POWER_USE_ACTIVE)
+		if (!silent)
+			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
+		return FALSE
 	return ..()
+
+
+/obj/machinery/post_anchor_change()
+	update_use_power(anchored)
+	power_change()
+	..()
 
 /// Passes `attackby()` calls through to components within the machine, if they are accessible.
 /obj/machinery/proc/component_attackby(obj/item/I, mob/user)

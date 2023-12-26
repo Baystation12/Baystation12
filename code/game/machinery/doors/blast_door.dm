@@ -138,12 +138,10 @@
 /obj/machinery/door/blast/get_material_melting_point()
 	return 10000 // Blast doors are implicitly heavily fire resistant and are used for containing high-temperature areas like burn chambers.
 
-// Proc: attackby()
-// Parameters: 2 (C - Item this object was clicked with, user - Mob which clicked this object)
-// Description: If we are clicked with crowbar or wielded fire axe, try to manually open the door.
-// This only works on broken doors or doors without power. Also allows repair with Plasteel.
-/obj/machinery/door/blast/attackby(obj/item/C as obj, mob/user as mob)
-	add_fingerprint(user, 0, C)
+
+///If we are clicked with crowbar or wielded fire axe, try to manually open the door.
+///This only works on broken doors or doors without power. Also allows repair with Plasteel.
+/obj/machinery/door/blast/use_tool(obj/item/C, mob/living/user, list/click_params)
 	if(isCrowbar(C) || (istype(C, /obj/item/material/twohanded/fireaxe) && C:wielded == 1))
 		if(((!is_powered()) || MACHINE_IS_BROKEN(src)) && !( operating ))
 			to_chat(user, SPAN_NOTICE("You begin prying at \the [src]..."))
@@ -151,16 +149,17 @@
 				force_toggle()
 		else
 			to_chat(user, SPAN_NOTICE("[src]'s motors resist your effort."))
-		return
+		return TRUE
+
 	if(istype(C, /obj/item/stack/material) && C.get_material_name() == MATERIAL_PLASTEEL)
 		var/amt = ceil(get_damage_value() / 150)
 		if(!amt)
 			to_chat(user, SPAN_NOTICE("\The [src] is already fully functional."))
-			return
+			return TRUE
 		var/obj/item/stack/P = C
 		if(!P.can_use(amt))
 			to_chat(user, SPAN_WARNING("You don't have enough sheets to repair this! You need at least [amt] sheets."))
-			return
+			return TRUE
 		to_chat(user, SPAN_NOTICE("You begin repairing \the [src]..."))
 		if(do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
 			if(P.use(amt))
@@ -170,7 +169,7 @@
 				to_chat(user, SPAN_WARNING("You don't have enough sheets to repair this! You need at least [amt] sheets."))
 		else
 			to_chat(user, SPAN_WARNING("You must remain still while working on \the [src]."))
-		return
+		return TRUE
 
 	return ..()
 

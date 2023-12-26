@@ -96,15 +96,17 @@
 		verbs -= verb
 	update_icon()
 
+/obj/machinery/bluespacedrive/use_grab(obj/item/grab/grab, list/click_params)
+	to_chat(grab.assailant, SPAN_WARNING("\The [src] pulls at \the [grab.affecting] but they're too heavy."))
+	return TRUE
 
-/obj/machinery/bluespacedrive/attackby(obj/item/item, mob/user)
-	if (istype(item, /obj/item/grab))
-		var/obj/item/grab/grab = item
-		to_chat(user, SPAN_WARNING("\The [src] pulls at \the [grab.affecting] but they're too heavy."))
+/obj/machinery/bluespacedrive/use_tool(obj/item/item, mob/living/user, list/click_params)
+	if ((. = ..()))
 		return
+
 	if (issilicon(user) || !user.unEquip(item, src))
 		to_chat(user, SPAN_WARNING("\The [src] pulls at \the [item] but it's attached to you."))
-		return
+		return TRUE
 	user.visible_message(
 		SPAN_WARNING("\The [user] reaches out \a [item] to \the [src], warping briefly as it disappears in a flash of blue light, scintillating motes left behind."),
 		SPAN_DANGER("You touch \the [src] with \the [item], the field buckling around it before retracting with a crackle as it leaves small, blue scintillas on your hand as you flinch away."),
@@ -112,9 +114,10 @@
 	)
 	qdel(item)
 	if (prob(5))
-		playsound(loc, 'sound/items/eatfood.ogg', 40)		//Yum
+		playsound(loc, 'sound/items/eatfood.ogg', 40)
 	else
 		playsound(loc, 'sound/machines/BSD_interact.ogg', 40)
+	return TRUE
 
 
 /obj/machinery/bluespacedrive/examine_damage_state(mob/user)
