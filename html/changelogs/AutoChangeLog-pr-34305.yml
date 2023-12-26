@@ -1,6 +1,0 @@
-author: emmanuelbassil
-changes:
-  - {tweak: Microwaves no longer accept solutions that contain forbidden ingredients.
-      Feedback now given on which ingredient is incompatible.}
-  - {bugfix: Un/Re-Anchoring a machine now properly updates machine's power usage.}
-delete-after: true
