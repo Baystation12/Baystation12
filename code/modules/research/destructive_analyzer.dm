@@ -54,32 +54,32 @@ Note: Must be placed within 3 tiles of the R&D Console
 		return SPAN_NOTICE("There is something already loaded into \the [src]. You must remove it first.")
 	return ..()
 
-/obj/machinery/r_n_d/destructive_analyzer/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/r_n_d/destructive_analyzer/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(busy)
 		to_chat(user, SPAN_NOTICE("\The [src] is busy right now."))
-		return
-	if(component_attackby(O, user))
 		return TRUE
+	if((. = ..()))
+		return
 	if(loaded_item)
 		to_chat(user, SPAN_NOTICE("There is something already loaded into \the [src]."))
-		return 1
+		return TRUE
 	if(panel_open)
 		to_chat(user, SPAN_NOTICE("You can't load \the [src] while it's opened."))
-		return 1
+		return TRUE
 	if(!linked_console)
 		to_chat(user, SPAN_NOTICE("\The [src] must be linked to an R&D console first."))
-		return
+		return TRUE
 	if(!loaded_item)
 		if(isrobot(user)) //Don't put your module items in there!
-			return
+			return FALSE
 		if(!O.origin_tech)
 			to_chat(user, SPAN_NOTICE("This doesn't seem to have a tech origin."))
-			return
+			return TRUE
 		if(length(O.origin_tech) == 0 || O.holographic)
 			to_chat(user, SPAN_NOTICE("You cannot deconstruct this item."))
-			return
+			return TRUE
 		if(!user.unEquip(O, src))
-			return
+			return TRUE
 		busy = 1
 		loaded_item = O
 		to_chat(user, SPAN_NOTICE("You add \the [O] to \the [src]."))
@@ -91,5 +91,4 @@ Note: Must be placed within 3 tiles of the R&D Console
 			if (linked_console.quick_deconstruct)
 				linked_console.deconstruct(weakref(user))
 
-		return 1
-	return
+		return TRUE

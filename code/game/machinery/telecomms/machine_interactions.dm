@@ -17,8 +17,7 @@
 	stat_immune = 0
 	maximum_component_parts = list(/obj/item/stock_parts = 15)
 
-/obj/machinery/telecomms/attackby(obj/item/P as obj, mob/user as mob)
-
+/obj/machinery/telecomms/use_tool(obj/item/P, mob/living/user, list/click_params)
 	// Using a multitool lets you access the receiver's interface
 	if(isMultitool(P))
 		interface_interact(user)
@@ -27,15 +26,15 @@
 	// REPAIRING: Use Nanopaste to repair 10-20 integrity points.
 	if(istype(P, /obj/item/stack/nanopaste))
 		var/obj/item/stack/nanopaste/T = P
-		if (integrity < 100)               								//Damaged, let's repair!
+		if (integrity < 100)
 			if (T.use(1))
 				integrity = clamp(integrity + rand(10, 20), 0, 100)
 				to_chat(usr, "You apply the Nanopaste to [src], repairing some of the damage.")
 		else
 			to_chat(usr, "This machine is already in perfect condition.")
-		return
+		return TRUE
 
-	return component_attackby(P, user)
+	return ..()
 
 /obj/machinery/telecomms/cannot_transition_to(state_path, mob/user)
 	. = ..()

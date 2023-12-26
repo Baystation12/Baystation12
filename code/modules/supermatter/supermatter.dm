@@ -511,7 +511,7 @@
 		ui.set_auto_update(1)
 
 
-/obj/machinery/power/supermatter/attackby(obj/item/W as obj, mob/living/user as mob)
+/obj/machinery/power/supermatter/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/tape_roll))
 		to_chat(user, SPAN_NOTICE("You repair some of the damage to \the [src] with \the [W]."))
 		damage = max(damage - 10, 0)
@@ -523,10 +523,11 @@
 		SPAN_WARNING("For a brief moment, you hear an oppressive, unnatural silence.")
 	)
 
+	user.apply_damage(150, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 	if (user.drop_from_inventory(W))
 		Consume(W)
-
-	user.apply_damage(150, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
+		return TRUE
+	else return ..()
 
 
 /obj/machinery/power/supermatter/Bumped(atom/AM as mob|obj)

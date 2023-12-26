@@ -15,25 +15,28 @@
 	var/last_process_worldtime = 0
 	var/report_num = 0
 
-/obj/machinery/dnaforensics/attackby(obj/item/W, mob/user as mob)
+/obj/machinery/dnaforensics/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if(!istype(W, /obj/item/forensics/swab))
+		return .. ()
 
+	var/obj/item/forensics/swab/swab = W
 	if(bloodsamp)
 		to_chat(user, SPAN_WARNING("There is already a sample in the machine."))
-		return
+		return TRUE
 
 	if(closed)
 		to_chat(user, SPAN_WARNING("Open the cover before inserting the sample."))
-		return
+		return TRUE
 
-	var/obj/item/forensics/swab/swab = W
 	if(istype(swab) && swab.is_used())
 		if(!user.unEquip(W, src))
-			return
-		src.bloodsamp = swab
+			return TRUE
+		bloodsamp = swab
 		to_chat(user, SPAN_NOTICE("You insert \the [W] into \the [src]."))
+		return TRUE
 	else
 		to_chat(user, SPAN_WARNING("\The [src] only accepts used swabs."))
-		return
+		return TRUE
 
 /obj/machinery/dnaforensics/ui_interact(mob/user, ui_key = "main",datum/nanoui/ui = null)
 	if(!is_powered()) return

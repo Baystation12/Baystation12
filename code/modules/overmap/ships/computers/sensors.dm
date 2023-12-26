@@ -270,26 +270,6 @@
 	..()
 	sensor_strength = clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 5) * SENSORS_STRENGTH_COEFFICIENT
 
-
-/obj/machinery/shipsensors/attackby(obj/item/W, mob/user)
-	if (isWelder(W) && user.a_intent != I_HURT)
-		var/damage = get_damage_value()
-		var/obj/item/weldingtool/WT = W
-		if (!damage)
-			to_chat(user, SPAN_WARNING("\The [src] doesn't need any repairs."))
-			return TRUE
-		if (!WT.can_use(3,user))
-			return TRUE
-		to_chat(user, SPAN_NOTICE("You start repairing the damage to [src]."))
-		playsound(src, 'sound/items/Welder.ogg', 100, 1)
-		if (do_after(user, max(5, damage / 5), src, DO_REPAIR_CONSTRUCT) && WT.remove_fuel(3, user))
-			to_chat(user, SPAN_NOTICE("You finish repairing the damage to [src]."))
-			revive_health()
-		return TRUE
-
-	return ..()
-
-
 /obj/machinery/shipsensors/proc/in_vacuum()
 	var/turf/T=get_turf(src)
 	if (istype(T))

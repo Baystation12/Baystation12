@@ -83,12 +83,17 @@
 		return SPAN_NOTICE("You must turn \the [src] off first.")
 	return ..()
 
-/obj/machinery/biogenerator/attackby(obj/item/O, mob/user)
-	if((. = component_attackby(O, user)))
-		return
-	if(processing)
+/obj/machinery/biogenerator/examine(mob/user)
+	. = ..()
+	if (processing)
 		to_chat(user, SPAN_NOTICE("\The [src] is currently processing."))
-	if(istype(O, /obj/item/reagent_containers/glass))
+	if (ingredients >= capacity)
+		to_chat(user, SPAN_NOTICE("\The [src] is full!"))
+
+/obj/machinery/biogenerator/use_tool(obj/item/O, mob/living/user, list/click_params)
+	if((. = ..()))
+		return
+	if (istype(O, /obj/item/reagent_containers/glass))
 		if(beaker)
 			to_chat(user, SPAN_NOTICE("The [src] is already loaded."))
 			return TRUE
@@ -98,9 +103,7 @@
 			updateUsrDialog()
 			return TRUE
 
-	if(ingredients >= capacity)
-		to_chat(user, SPAN_NOTICE("\The [src] is already full! Activate it."))
-	else if(istype(O, /obj/item/storage/plants))
+	if (istype(O, /obj/item/storage/plants))
 		var/obj/item/storage/plants/P = O
 		var/hadPlants = 0
 		for(var/obj/item/reagent_containers/food/snacks/grown/G in P.contents)
@@ -113,16 +116,19 @@
 		P.finish_bulk_removal() //Now do the UI stuff once.
 		if(!hadPlants)
 			to_chat(user, SPAN_NOTICE("\The [P] has no produce inside."))
-		else if(ingredients < capacity)
+		if (ingredients < capacity)
 			to_chat(user, SPAN_NOTICE("You empty \the [P] into \the [src]."))
+		return TRUE
 
-
-	else if(!istype(O, /obj/item/reagent_containers/food/snacks/grown))
+	if (!istype(O, /obj/item/reagent_containers/food/snacks/grown))
 		to_chat(user, SPAN_NOTICE("You cannot put this in \the [src]."))
-	else if(user.unEquip(O, src))
+		return TRUE
+
+	if(user.unEquip(O, src))
 		ingredients++
 		to_chat(user, SPAN_NOTICE("You put \the [O] in \the [src]"))
 	update_icon()
+	return TRUE
 
 /**
  *  Display the NanoUI window for the vending machine.

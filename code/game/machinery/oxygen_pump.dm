@@ -145,7 +145,7 @@
 		return
 	return 1
 
-/obj/machinery/oxygen_pump/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/oxygen_pump/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isScrewdriver(W))
 		toggle_stat(MACHINE_STAT_MAINT)
 		user.visible_message(
@@ -156,18 +156,24 @@
 			icon_state = icon_state_open
 		if(!stat)
 			icon_state = icon_state_closed
-		//TO-DO: Open icon
+		return TRUE
+
 	if(istype(W, /obj/item/tank) && (GET_FLAGS(stat, MACHINE_STAT_MAINT)))
 		if(tank)
 			to_chat(user, SPAN_WARNING("\The [src] already has a tank installed!"))
-		else
-			if(!user.unEquip(W, src))
-				return
-			tank = W
-			user.visible_message(SPAN_NOTICE("\The [user] installs \the [tank] into \the [src]."), SPAN_NOTICE("You install \the [tank] into \the [src]."))
-			src.add_fingerprint(user)
+			return TRUE
+
+		if(!user.unEquip(W, src))
+			return TRUE
+		tank = W
+		user.visible_message(SPAN_NOTICE("\The [user] installs \the [tank] into \the [src]."), SPAN_NOTICE("You install \the [tank] into \the [src]."))
+		return TRUE
+
 	if(istype(W, /obj/item/tank) && !stat)
-		to_chat(user, SPAN_WARNING("Please open the maintenance hatch first."))
+		to_chat(user, SPAN_WARNING("You need to open the maintenance hatch first."))
+		return TRUE
+
+	return ..()
 
 /obj/machinery/oxygen_pump/examine(mob/user)
 	. = ..()

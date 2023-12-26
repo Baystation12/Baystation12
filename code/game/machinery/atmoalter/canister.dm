@@ -205,7 +205,7 @@
 		return GM.return_pressure()
 	return 0
 
-/obj/machinery/portable_atmospherics/canister/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/portable_atmospherics/canister/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(user, /mob/living/silicon/robot) && istype(W, /obj/item/tank/jetpack))
 		var/datum/gas_mixture/thejetpack = W:air_contents
 		var/env_pressure = thejetpack.return_pressure()

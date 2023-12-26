@@ -58,20 +58,24 @@
 /obj/machinery/atmospherics/unary/tank/return_air()
 	return air_contents
 
-/obj/machinery/atmospherics/unary/tank/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWrench(W))
-		if (air_contents.return_pressure() > 2*ONE_ATMOSPHERE)
-			to_chat(user, SPAN_WARNING("You cannot unwrench \the [src], it is too exerted due to internal pressure."))
-			add_fingerprint(user)
-			return 1
+/obj/machinery/atmospherics/unary/tank/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if(!isWrench(W))
+		return ..()
 
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		to_chat(user, SPAN_NOTICE("You begin to unfasten \the [src]..."))
+	if (air_contents.return_pressure() > 2*ONE_ATMOSPHERE)
+		to_chat(user, SPAN_WARNING("You cannot unwrench \the [src], it is too exerted due to internal pressure."))
+		return TRUE
 
-		if (do_after(user, (W.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT))
-			user.visible_message(SPAN_NOTICE("\The [user] unfastens \the [src]."), SPAN_NOTICE("You have unfastened \the [src]."), "You hear a ratchet.")
-			new /obj/item/pipe/tank(loc, src)
-			qdel(src)
+	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+	to_chat(user, SPAN_NOTICE("You begin to unfasten \the [src]..."))
+
+	if (!do_after(user, (W.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT))
+		return TRUE
+
+	user.visible_message(SPAN_NOTICE("\The [user] unfastens \the [src]."), SPAN_NOTICE("You have unfastened \the [src]."), "You hear a ratchet.")
+	new /obj/item/pipe/tank(loc, src)
+	qdel(src)
+	return TRUE
 
 /obj/machinery/atmospherics/unary/tank/air
 	name = "Pressure Tank (Air)"

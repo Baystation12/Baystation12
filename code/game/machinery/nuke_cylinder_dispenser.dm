@@ -35,21 +35,27 @@
 		add_fingerprint(user)
 	return TRUE
 
-/obj/machinery/nuke_cylinder_dispenser/attackby(obj/item/O, mob/user)
+/obj/machinery/nuke_cylinder_dispenser/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(!open && is_powered() && isid(O))
 		var/obj/item/card/id/id = O
 		if(check_access(id))
 			locked = !locked
 			user.visible_message("[user] [locked ? "locks" : "unlocks"] \the [src].", "You [locked ? "lock" : "unlock"] \the [src].")
 			update_icon()
-		return
+		return TRUE
+
 	if(open && istype(O, /obj/item/nuclear_cylinder) && (length(cylinders) < 6))
-		user.visible_message("[user] begins inserting \the [O] into storage.", "You begin inserting \the [O] into storage.")
+		user.visible_message(
+			SPAN_NOTICE("\The [user] begins inserting \the [O] into storage."),
+			SPAN_NOTICE("You begin inserting \the [O] into storage.")
+		)
 		if(do_after(user, 8 SECONDS, src, DO_PUBLIC_UNIQUE) && open && (length(cylinders) < 6) && user.unEquip(O, src))
 			user.visible_message("[user] places \the [O] into storage.", "You place \the [O] into storage.")
 			cylinders.Add(O)
 			update_icon()
-		add_fingerprint(user)
+		return TRUE
+
+	return ..()
 
 /obj/machinery/nuke_cylinder_dispenser/MouseDrop(atom/over)
 	if(!CanMouseDrop(over, usr))

@@ -100,10 +100,12 @@
 	update_icon()
 	return TRUE
 
-/obj/machinery/portable_atmospherics/reagent_sublimator/attackby(obj/item/thing, mob/user)
+/obj/machinery/portable_atmospherics/reagent_sublimator/use_tool(obj/item/thing, mob/living/user, list/click_params)
 	if(istype(thing, /obj/item/tank))
 		to_chat(user, SPAN_WARNING("\The [src] has no socket for a gas tank."))
-	else if(istype(thing, /obj/item/reagent_containers))
+		return TRUE
+
+	if (istype(thing, /obj/item/reagent_containers))
 		if(container)
 			to_chat(user, SPAN_WARNING("\The [src] is already loaded with \the [container]."))
 		else if(user.unEquip(thing, src))
@@ -111,8 +113,9 @@
 			user.visible_message(SPAN_NOTICE("\The [user] loads \the [thing] into \the [src]."))
 			verbs |= /obj/machinery/portable_atmospherics/reagent_sublimator/proc/remove_container
 		update_icon()
-	else
-		. = ..()
+		return TRUE
+
+	return ..()
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/Process()
 

@@ -107,7 +107,7 @@
 	visible_message("[user] touches \the [src].")
 	check_triggers(/datum/artifact_trigger/proc/on_touch, user)
 
-/obj/machinery/artifact/attackby(obj/item/W, mob/living/user)
+/obj/machinery/artifact/use_tool(obj/item/W, mob/living/user, list/click_params)
 	. = ..()
 	check_triggers(/datum/artifact_trigger/proc/on_hit, W, user)
 

@@ -101,46 +101,46 @@
 
 	. = ..()
 
-/obj/machinery/atmospherics/pipe/attackby(obj/item/W as obj, mob/user as mob)
-	if (istype(src, /obj/machinery/atmospherics/unary/tank))
-		return ..()
-	if (istype(src, /obj/machinery/atmospherics/pipe/vent))
+/obj/machinery/atmospherics/pipe/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if (!isWrench(W))
 		return ..()
 
-	if(isWrench(W))
-		var/turf/T = src.loc
-		if (level==ATOM_LEVEL_UNDER_TILE && isturf(T) && !T.is_plating())
-			to_chat(user, SPAN_WARNING("You must remove the plating first."))
-			return 1
+	var/turf/T = src.loc
+	if (level==ATOM_LEVEL_UNDER_TILE && isturf(T) && !T.is_plating())
+		to_chat(user, SPAN_WARNING("You must remove the plating first."))
+		return TRUE
+	if (clamp)
+		to_chat(user, SPAN_WARNING("You must remove \the [clamp] first."))
+		return TRUE
 
-		if (clamp)
-			to_chat(user, SPAN_WARNING("You must remove \the [clamp] first."))
-			return TRUE
+	var/datum/gas_mixture/int_air = return_air()
+	var/datum/gas_mixture/env_air = loc.return_air()
 
-		var/datum/gas_mixture/int_air = return_air()
-		var/datum/gas_mixture/env_air = loc.return_air()
+	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+		to_chat(user, SPAN_WARNING("You cannot unwrench \the [src], it is too exerted due to internal pressure."))
+		return TRUE
 
-		if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-			to_chat(user, SPAN_WARNING("You cannot unwrench \the [src], it is too exerted due to internal pressure."))
-			add_fingerprint(user)
-			return 1
+	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+	to_chat(user, SPAN_NOTICE("You begin to unfasten \the [src]..."))
 
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		to_chat(user, SPAN_NOTICE("You begin to unfasten \the [src]..."))
+	if (!do_after(user, (W.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT))
+		return TRUE
 
-		if (do_after(user, (W.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT))
-			if (clamp)
-				to_chat(user, SPAN_WARNING("You must remove \the [clamp] first."))
-				return TRUE
+	if (clamp)
+		to_chat(user, SPAN_WARNING("You must remove \the [clamp] first."))
+		return TRUE
 
-			user.visible_message(SPAN_NOTICE("\The [user] unfastens \the [src]."), SPAN_NOTICE("You have unfastened \the [src]."), "You hear a ratchet.")
+	user.visible_message(
+		SPAN_NOTICE("\The [user] unfastens \the [src]."),
+		SPAN_NOTICE("You have unfastened \the [src]."),
+		"You hear a ratchet.")
 
-			new /obj/item/pipe(loc, src)
-
-			for (var/obj/machinery/meter/meter in T)
-				if (meter.target == src)
-					meter.dismantle()
-			qdel(src)
+	new /obj/item/pipe(loc, src)
+	for (var/obj/machinery/meter/meter in T)
+		if (meter.target == src)
+			meter.dismantle()
+	qdel(src)
+	return TRUE
 
 /obj/machinery/atmospherics/get_color()
 	return pipe_color

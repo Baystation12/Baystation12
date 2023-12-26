@@ -164,24 +164,24 @@
 		kill_health()
 		return TRUE
 
-/obj/machinery/camera/attackby(obj/item/W as obj, mob/living/user as mob)
+/obj/machinery/camera/use_tool(obj/item/W, mob/living/user, list/click_params)
 	update_coverage()
 	var/datum/wires/camera/camera_wires = wires
-	// DECONSTRUCTION
+
 	if(isScrewdriver(W))
-//		to_chat(user, SPAN_NOTICE("You start to [panel_open ? "close" : "open"] the camera's panel."))
-		//if(toggle_panel(user)) // No delay because no one likes screwdrivers trying to be hip and have a duration cooldown
 		panel_open = !panel_open
 		user.visible_message(
-			SPAN_WARNING("[user] screws the camera's panel [panel_open ? "open" : "closed"]!"),
-			SPAN_NOTICE("You screw the camera's panel [panel_open ? "open" : "closed"].")
+			SPAN_WARNING("\The [user] screws \the [src]'s panel [panel_open ? "open" : "closed"]!"),
+			SPAN_NOTICE("You screw \the [src]'s panel [panel_open ? "open" : "closed"].")
 		)
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+		return TRUE
 
-	else if((isWirecutter(W) || isMultitool(W)) && panel_open)
-		return wires.Interact(user)
+	if ((isWirecutter(W) || isMultitool(W)) && panel_open)
+		wires.Interact(user)
+		return TRUE
 
-	else if(isWelder(W) && (camera_wires.CanDeconstruct() || (MACHINE_IS_BROKEN(src))))
+	if (isWelder(W) && (camera_wires.CanDeconstruct() || (MACHINE_IS_BROKEN(src))))
 		if(weld(W, user))
 			if(assembly)
 				assembly.dropInto(loc)
@@ -189,7 +189,7 @@
 				assembly.camera_name = c_tag
 				assembly.camera_network = english_list(network, "Exodus", ",", ",")
 				assembly.update_icon()
-				assembly.dir = src.dir
+				assembly.dir = dir
 				if(MACHINE_IS_BROKEN(src))
 					assembly.state = 2
 					to_chat(user, SPAN_NOTICE("You repaired \the [src] frame."))
@@ -200,10 +200,9 @@
 					new /obj/item/stack/cable_coil(loc, 2)
 				assembly = null //so qdel doesn't eat it.
 			qdel(src)
-			return
+			return TRUE
 
-	// OTHER
-	else if (can_use() && istype(W, /obj/item/paper) && isliving(user))
+	if (can_use() && istype(W, /obj/item/paper) && isliving(user))
 		var/mob/living/U = user
 		var/obj/item/paper/X = W
 		var/itemname = X.name
@@ -214,9 +213,9 @@
 			if(U.name == "Unknown") to_chat(O, "<b>[U]</b> holds \a [itemname] up to one of your cameras ...")
 			else to_chat(O, "<b><a href='byond://?src=\ref[O];track2=\ref[O];track=\ref[U];trackname=[U.name]'>[U]</a></b> holds \a [itemname] up to one of your cameras ...")
 			show_browser(O, text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", itemname, info), text("window=[]", itemname))
+		return TRUE
 
-	else
-		..()
+	return ..()
 
 
 /**

@@ -237,14 +237,16 @@
 		internal_cells -= C
 	return ..()
 
-/obj/machinery/power/smes/batteryrack/attackby(obj/item/W as obj, mob/user as mob)
-	if(..())
-		return TRUE
+/obj/machinery/power/smes/batteryrack/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if((. = ..()))
+		return
+
 	if(istype(W, /obj/item/cell)) // ID Card, try to insert it.
 		if(insert_cell(W, user))
 			to_chat(user, "You insert \the [W] into \the [src].")
 		else
 			to_chat(user, "\The [src] has no empty slot for \the [W]")
+		return TRUE
 
 /obj/machinery/power/smes/batteryrack/interface_interact(mob/user)
 	ui_interact(user)

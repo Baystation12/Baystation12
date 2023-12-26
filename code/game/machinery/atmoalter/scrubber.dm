@@ -156,6 +156,7 @@
 	volume = 50000
 	volume_rate = 5000
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
 	uncreated_component_parts = list(/obj/item/stock_parts/power/apc)
 	maximum_component_parts = list(/obj/item/stock_parts = 15)
@@ -190,21 +191,10 @@
 	else
 		icon_state = "scrubber:0"
 
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/attackby(obj/item/I as obj, mob/user as mob)
-	if(isWrench(I))
-		if(use_power == POWER_USE_ACTIVE)
-			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
-			return
-
-		anchored = !anchored
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		to_chat(user, SPAN_NOTICE("You [anchored ? "wrench" : "unwrench"] \the [src]."))
-
-		return
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/use_tool(obj/item/I, mob/living/user, list/click_params)
 	//doesn't hold tanks
 	if(istype(I, /obj/item/tank))
-		return
-
+		return FALSE
 	return ..()
 
 
@@ -213,10 +203,11 @@
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
 	machine_name = "large stationary portable scrubber"
 	machine_desc = "This is simply a large portable scrubber that can't be moved once it's bolted into place, and is otherwise identical."
+	obj_flags = EMPTY_BITFIELD
 
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(obj/item/I as obj, mob/user as mob)
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(isWrench(I))
 		to_chat(user, SPAN_WARNING("The bolts are too tight for you to unscrew!"))
-		return
+		return TRUE
 
 	return ..()

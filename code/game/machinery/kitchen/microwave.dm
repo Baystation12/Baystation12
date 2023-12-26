@@ -10,7 +10,7 @@
 	idle_power_usage = 5
 	active_power_usage = 100
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT | ATOM_FLAG_OPEN_CONTAINER
-	obj_flags = OBJ_FLAG_CAN_TABLE
+	obj_flags = OBJ_FLAG_CAN_TABLE | OBJ_FLAG_ANCHORABLE
 	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
@@ -55,8 +55,8 @@
 *   Item Adding
 ********************/
 
-/obj/machinery/microwave/attackby(obj/item/O as obj, mob/user as mob)
-	if(broken > 0)
+/obj/machinery/microwave/use_tool(obj/item/O, mob/living/user, list/click_params)
+	if (broken > 0)
 		// Start repairs by using a screwdriver
 		if(broken == 2 && isScrewdriver(O))
 			user.visible_message( \
@@ -69,9 +69,10 @@
 					SPAN_NOTICE("You have fixed part of the microwave.") \
 				)
 				broken = 1 // Fix it a bit
+			return TRUE
 
 		// Finish repairs using a wrench
-		else if(broken == 1 && isWrench(O))
+		if (broken == 1 && isWrench(O))
 			user.visible_message( \
 				SPAN_NOTICE("\The [user] starts to fix part of the microwave."), \
 				SPAN_NOTICE("You start to fix part of the microwave.") \
@@ -85,23 +86,17 @@
 				dirtiness = 0 // just to be sure
 				update_icon()
 				atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
+			return TRUE
 
 		// Otherwise, we can't add anything to the micrwoave
 		else
 			to_chat(user, SPAN_WARNING("It's broken, and this isn't the right way to fix it!"))
-		return
+			return TRUE
 
-	else if((. = component_attackby(O, user)))
-		dispose()
-		return
-
-	else if(dirtiness == 100) // The microwave is all dirty, so it can't be used!
+	if(dirtiness == 100) // The microwave is all dirty, so it can't be used!
 		var/has_rag = istype(O, /obj/item/reagent_containers/glass/rag)
 		var/has_cleaner = O.reagents != null && O.reagents.has_reagent(/datum/reagent/space_cleaner, 5)
-
-		// If they're trying to clean it, let them
 		if (has_rag || has_cleaner)
-
 			user.visible_message( \
 				SPAN_NOTICE("\The [user] starts to clean the microwave."), \
 				SPAN_NOTICE("You start to clean the microwave.") \
@@ -125,15 +120,15 @@
 
 		// Otherwise, bad luck!
 		else
-			to_chat(user, SPAN_WARNING("You need to clean [src] before you use it!"))
-			return
+			to_chat(user, SPAN_WARNING("You need to clean \the [src] before you use it!"))
+			return TRUE
 
-	else if(is_type_in_list(O, GLOB.microwave_accepts_items))
-
+	if (is_type_in_list(O, GLOB.microwave_accepts_items))
 		if (length(ingredients) >= GLOB.microwave_maximum_item_storage)
 			to_chat(user, SPAN_WARNING("This [src] is full of ingredients - you can't fit any more."))
+			return TRUE
 
-		else if(istype(O, /obj/item/stack)) // This is bad, but I can't think of how to change it
+		if (istype(O, /obj/item/stack)) // This is bad, but I can't think of how to change it
 			var/obj/item/stack/S = O
 			if(S.use(1))
 				var/stack_item = new O.type (src)
@@ -145,30 +140,30 @@
 
 		else
 			if (!user.unEquip(O, src))
-				return
+				return TRUE
 			LAZYADD(ingredients, O)
 			user.visible_message( \
 				SPAN_NOTICE("\The [user] has added \the [O] to \the [src]."), \
 				SPAN_NOTICE("You add \the [O] to \the [src]."))
 			return TRUE
 
-		return
-
-	else if(istype(O,/obj/item/reagent_containers/glass) || \
+	if (istype(O,/obj/item/reagent_containers/glass) || \
 	        istype(O,/obj/item/reagent_containers/food/drinks) || \
 	        istype(O,/obj/item/reagent_containers/food/condiment) \
 		)
 		if (!O.reagents)
-			return
+			to_chat(user, SPAN_WARNING("\The [O] is empty!"))
+			return TRUE
 		for (var/datum/reagent/R in O.reagents.reagent_list)
 			if (!(R.type in GLOB.microwave_accepts_reagents))
-				to_chat(user, SPAN_WARNING("Your [O] contains components unsuitable for cookery."))
-		return
+				to_chat(user, SPAN_WARNING("\The [O] contains \the [R] which is unsuitable for cookery."))
+				return TRUE
+		return FALSE //This will call reagent_container's use_after which handles transferring reagents.
 
-	else if(istype(O, /obj/item/storage))
+	if (istype(O, /obj/item/storage))
 		if (length(ingredients) >= GLOB.microwave_maximum_item_storage)
-			to_chat(user, SPAN_WARNING("[src] is completely full!"))
-			return
+			to_chat(user, SPAN_WARNING("\The [src] is completely full!"))
+			return TRUE
 
 		var/obj/item/storage/bag/P = O
 		var/objects_loaded = 0
@@ -190,29 +185,14 @@
 		else
 			to_chat(user, SPAN_WARNING("\The [P] doesn't contain any compatible items to put into \the [src]!"))
 
-		return
-
-	else if(istype(O, /obj/item/grab))
-		var/obj/item/grab/G = O
-		to_chat(user, SPAN_WARNING("This is ridiculous. You can't fit \the [G.affecting] in \the [src]."))
-		return
-
-	else if(isWrench(O))
-		user.visible_message( \
-			SPAN_NOTICE("\The [user] begins [anchored ? "unsecuring" : "securing"] the microwave."), \
-			SPAN_NOTICE("You attempt to [anchored ? "unsecure" : "secure"] the microwave.")
-			)
-		if (do_after(user, (O.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
-			anchored = !anchored
-			user.visible_message( \
-			SPAN_NOTICE("\The [user] [anchored ? "secures" : "unsecures"] the microwave."), \
-			SPAN_NOTICE("You [anchored ? "secure" : "unsecure"] the microwave.")
-			)
-
-	else
-		to_chat(user, SPAN_WARNING("You have no idea what you can cook with this [O]."))
+		return TRUE
 
 	updateUsrDialog()
+	return ..()
+
+/obj/machinery/microwave/use_grab(obj/item/grab/grab, list/click_params)
+	to_chat(grab.assailant, SPAN_WARNING("This is ridiculous. You can't fit \the [grab.affecting] in \the [src]."))
+	return TRUE
 
 /obj/machinery/microwave/components_are_accessible(path)
 	return (broken == 0) && ..()

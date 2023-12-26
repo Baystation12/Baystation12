@@ -71,42 +71,43 @@
 	cartridges -= label
 	SSnano.update_uis(src)
 
-/obj/machinery/chemical_dispenser/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/reagent_containers/chem_disp_cartridge))
+/obj/machinery/chemical_dispenser/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if (istype(W, /obj/item/reagent_containers/chem_disp_cartridge))
 		add_cartridge(W, user)
+		return TRUE
 
-	else if(isScrewdriver(W))
+	if (isScrewdriver(W))
 		var/label = input(user, "Which cartridge would you like to remove?", "Chemical Dispenser") as null|anything in cartridges
-		if(!label) return
+		if(!label) return TRUE
 		var/obj/item/reagent_containers/chem_disp_cartridge/C = remove_cartridge(label)
 		if(C)
 			to_chat(user, SPAN_NOTICE("You remove \the [C] from \the [src]."))
 			C.dropInto(loc)
+		return TRUE
 
-	else if(istype(W, /obj/item/reagent_containers/glass) || istype(W, /obj/item/reagent_containers/food) || istype(W, /obj/item/reagent_containers/ivbag))
+	if (istype(W, /obj/item/reagent_containers/glass) || istype(W, /obj/item/reagent_containers/food) || istype(W, /obj/item/reagent_containers/ivbag))
 		if(container)
 			to_chat(user, SPAN_WARNING("There is already \a [container] on \the [src]!"))
-			return
+			return TRUE
 
 		var/obj/item/reagent_containers/RC = W
 
 		if(!accept_drinking && istype(RC,/obj/item/reagent_containers/food))
 			to_chat(user, SPAN_WARNING("This machine only accepts beakers and IV bags!"))
-			return
+			return TRUE
 
 		if(!RC.is_open_container())
 			to_chat(user, SPAN_WARNING("You don't see how \the [src] could dispense reagents into \the [RC]."))
-			return
+			return TRUE
 		if(!user.unEquip(RC, src))
-			return
+			return TRUE
 		container =  RC
 		update_icon()
 		to_chat(user, SPAN_NOTICE("You set \the [RC] on \the [src]."))
 		SSnano.update_uis(src) // update all UIs attached to src
+		return TRUE
 
-	else
-		..()
-	return
+	return ..()
 
 /obj/machinery/chemical_dispenser/proc/eject_beaker(mob/user)
 	if(!container)

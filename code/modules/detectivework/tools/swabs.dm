@@ -5,9 +5,12 @@
 	icon_state = "swab"
 
 // This is pretty nasty but is a damn sight easier than trying to make swabs a stack item.
-/obj/item/swabber/use_after(atom/A, mob/living/user, click_parameters)
+/obj/item/swabber/use_before(atom/target, mob/living/user, click_parameters)
+	if (user.a_intent == I_HELP) // Prevents putting sample kits in bags, on racks/tables, etc when trying to take samples
+		return ..()
+
 	var/obj/item/forensics/swab/swab = new(user)
-	swab.resolve_attackby(A, user, click_parameters)
+	swab.resolve_attackby(target, user, click_parameters)
 	if(swab.is_used())
 		swab.dropInto(user.loc)
 	else

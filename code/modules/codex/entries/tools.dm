@@ -98,3 +98,7 @@
 	associated_paths = list(/obj/item/device/drone_designator)
 	mechanics_text = "This device is used to retrieve items such as crates from away sites. You can use it on a drone pad to synchronize with its network. Use it while in an exterior area to mark an object for pickup."
 	lore_text = "Common throughout human space, short range transport drones are used for courier roles and to retrieve material shipments from remote areas. This designator can send telemetry data beyond orbit through the use of a compact subspace beacon."
+
+/datum/codex_entry/sample_kit
+	associated_paths = list(/obj/item/forensics/sample_kit, /obj/item/forensics/sample_kit/powder, /obj/item/swabber)
+	mechanics_text = "Used to collect fibers or fingerprints from any surface. Must be on a non-help intent to collect evidence."

@@ -203,39 +203,31 @@
 			return SPAN_WARNING("You cannot take this [src] apart, it too exerted due to internal pressure.")
 	return ..()
 
-/obj/machinery/atmospherics/unary/vent_scrubber/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weldingtool))
-
+/obj/machinery/atmospherics/unary/vent_scrubber/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if(isWelder(W))
 		var/obj/item/weldingtool/WT = W
 
-		if(!WT.isOn())
-			to_chat(user, SPAN_NOTICE("The welding tool needs to be on to start this task."))
-			return 1
 
 		if(!WT.can_use(1,user))
-			to_chat(user, SPAN_WARNING("You need more welding fuel to complete this task."))
-			return 1
+			return TRUE
 
 		to_chat(user, SPAN_NOTICE("Now welding \the [src]."))
 		playsound(src, 'sound/items/Welder.ogg', 50, 1)
 
 		if(!do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
-			to_chat(user, SPAN_NOTICE("You must remain close to finish this task."))
-			return 1
+			return TRUE
 
-		if(!src)
-			return 1
-
-		if(!WT.remove_fuel(1, user))
-			return 1
+		if(!src || !WT.remove_fuel(1, user))
+			return TRUE
 
 		welded = !welded
 		update_icon()
 		playsound(src, 'sound/items/Welder2.ogg', 50, 1)
-		user.visible_message(SPAN_NOTICE("\The [user] [welded ? "welds \the [src] shut" : "unwelds \the [src]"]."), \
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [welded ? "welds \the [src] shut" : "unwelds \the [src]"]."), \
 			SPAN_NOTICE("You [welded ? "weld \the [src] shut" : "unweld \the [src]"]."), \
 			"You hear welding.")
-		return 1
+		return TRUE
 
 	return ..()
 

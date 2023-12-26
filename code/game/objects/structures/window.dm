@@ -758,23 +758,29 @@
 		/obj/item/stock_parts/power/apc
 	)
 
-/obj/machinery/button/windowtint/attackby(obj/item/device/W as obj, mob/user as mob)
+/obj/machinery/button/windowtint/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isMultitool(W))
-		var/t = sanitizeSafe(input(user, "Enter the ID for the button.", src.name, id), MAX_NAME_LEN)
+		var/t = sanitizeSafe(input(user, "Enter the ID for the button.", name, id), MAX_NAME_LEN)
 		if(user.incapacitated() && !user.Adjacent(src))
-			return
+			return TRUE
 		if (user.get_active_hand() != W)
-			return
+			to_chat(SPAN_WARNING("\The [W] needs to be in your active hand."))
+			return TRUE
 		if (!in_range(src, user) && src.loc != user)
-			return
+			return TRUE
 		t = sanitizeSafe(t, MAX_NAME_LEN)
 		if (t)
 			src.id = t
 			to_chat(user, SPAN_NOTICE("The new ID of the button is [id]"))
-		return
+		return TRUE
+
 	if(isScrewdriver(W))
-		new /obj/item/frame/light_switch/windowtint(user.loc, 1)
+		var/obj/item/frame/light_switch/windowtint/frame = new /obj/item/frame/light_switch/windowtint(user.loc, 1)
+		transfer_fingerprints_to(frame)
 		qdel(src)
+		return TRUE
+
+	return ..()
 
 /obj/machinery/button/windowtint/activate()
 	if(operating)

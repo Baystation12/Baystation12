@@ -4,7 +4,7 @@
 	icon = 'icons/obj/machines/power/cell_charger.dmi'
 	icon_state = "ccharger0"
 	anchored = TRUE
-	obj_flags = OBJ_FLAG_CAN_TABLE
+	obj_flags = OBJ_FLAG_CAN_TABLE | OBJ_FLAG_ANCHORABLE
 	idle_power_usage = 5
 	active_power_usage = 60 KILOWATTS	//This is the power drawn when charging
 	power_channel = EQUIP
@@ -30,36 +30,40 @@
 		if(charging)
 			to_chat(user, "Current charge: [charging.charge]")
 
-/obj/machinery/cell_charger/attackby(obj/item/W, mob/user)
+/obj/machinery/cell_charger/post_anchor_change()
+	..()
+	set_power()
+
+/obj/machinery/cell_charger/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(MACHINE_IS_BROKEN(src))
-		return
+		return TRUE
 
 	if(istype(W, /obj/item/cell) && anchored)
 		if(charging)
 			to_chat(user, SPAN_WARNING("There is already a cell in the charger."))
-			return
-		else
-			var/area/a = get_area(loc)
-			if(a.power_equip == 0) // There's no APC in this area, don't try to cheat power!
-				to_chat(user, SPAN_WARNING("The [name] blinks red as you try to insert the cell!"))
-				return
-			if(!user.unEquip(W, src))
-				return
-			charging = W
-			set_power()
-			START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
-			user.visible_message("[user] inserts a cell into the charger.", "You insert a cell into the charger.")
-			chargelevel = -1
+			return TRUE
+
+		var/area/a = get_area(loc)
+		if(a.power_equip == 0) // There's no APC in this area, don't try to cheat power!
+			to_chat(user, SPAN_WARNING("The [name] blinks red as you try to insert the cell!"))
+			return TRUE
+		if(!user.unEquip(W, src))
+			return TRUE
+		charging = W
+		set_power()
+		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
+		user.visible_message("[user] inserts a cell into the charger.", "You insert a cell into the charger.")
+		chargelevel = -1
 		queue_icon_update()
-	else if(isWrench(W))
+		return TRUE
+
+	//Anchoring is handled by obj/use_tool() if OBJ_ANCHORABLE flag is set.
+	if (isWrench(W))
 		if(charging)
 			to_chat(user, SPAN_WARNING("Remove the cell first!"))
-			return
+			return TRUE
 
-		anchored = !anchored
-		set_power()
-		to_chat(user, "You [anchored ? "attach" : "detach"] the cell charger [anchored ? "to" : "from"] the ground")
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+	return ..()
 
 /obj/machinery/cell_charger/physical_attack_hand(mob/user)
 	if(charging)

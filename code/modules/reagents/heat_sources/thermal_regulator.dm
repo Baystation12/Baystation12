@@ -8,7 +8,7 @@
 	icon = 'icons/obj/machines/medical/thermal_regulator.dmi'
 	icon_state = "regulator"
 	atom_flags = ATOM_FLAG_CLIMBABLE
-	obj_flags = OBJ_FLAG_CAN_TABLE
+	obj_flags = OBJ_FLAG_CAN_TABLE | OBJ_FLAG_ANCHORABLE
 	anchored = TRUE
 	idle_power_usage = 0
 	active_power_usage = 1.2 KILOWATTS
@@ -89,14 +89,9 @@
 		return TRUE // Don't kill this processing loop unless we're not powered.
 	. = ..()
 
-/obj/machinery/reagent_temperature/attackby(obj/item/thing, mob/user)
-	if(isWrench(thing))
-		if(use_power == POWER_USE_ACTIVE)
-			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
-		else
-			anchored = !anchored
-			visible_message(SPAN_NOTICE("\The [user] [anchored ? "secured" : "unsecured"] \the [src]."))
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+/obj/machinery/reagent_temperature/use_tool(obj/item/thing, mob/living/user, list/click_params)
+	if(isWrench(thing) && use_power == POWER_USE_ACTIVE)
+		to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
 		return TRUE
 
 	if(thing.reagents)
@@ -111,6 +106,8 @@
 					update_icon()
 				return TRUE
 		to_chat(user, SPAN_WARNING("\The [src] cannot accept \the [thing]."))
+		return TRUE
+
 	return ..()
 
 /obj/machinery/reagent_temperature/on_update_icon()

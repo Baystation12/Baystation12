@@ -193,22 +193,39 @@
 		addtimer(new Callback(record, .proc/ping), time_delay)
 
 /obj/machinery/shipsensors/use_tool(obj/item/tool, mob/living/user, list/click_params)
-	if (!isMultitool(tool))
-		return ..()
+	if (isMultitool(tool))
+		var/obj/item/device/multitool/mtool = tool
+		var/obj/item/ship_tracker/tracker = mtool.get_buffer()
+		if (!tracker || !istype(tracker))
+			return FALSE
 
-	var/obj/item/device/multitool/mtool = tool
-	var/obj/item/ship_tracker/tracker = mtool.get_buffer()
-	if (!tracker || !istype(tracker))
-		return
+		if (tracker in trackers)
+			trackers -= tracker
+			GLOB.destroyed_event.unregister(tracker, src, .proc/remove_tracker)
+			to_chat(user, SPAN_NOTICE("You unlink the tracker in \the [mtool]'s buffer from \the [src]"))
+			return TRUE
 
-	if (tracker in trackers)
-		trackers -= tracker
-		GLOB.destroyed_event.unregister(tracker, src, .proc/remove_tracker)
-		to_chat(user, SPAN_NOTICE("You unlink the tracker in \the [mtool]'s buffer from \the [src]"))
-		return
-	trackers += tracker
-	GLOB.destroyed_event.register(tracker, src, .proc/remove_tracker)
-	to_chat(user, SPAN_NOTICE("You link the tracker in \the [mtool]'s buffer to \the [src]"))
+		trackers += tracker
+		GLOB.destroyed_event.register(tracker, src, .proc/remove_tracker)
+		to_chat(user, SPAN_NOTICE("You link the tracker in \the [mtool]'s buffer to \the [src]"))
+		return TRUE
+
+	if (isWelder(tool))
+		var/damage = get_damage_value()
+		var/obj/item/weldingtool/WT = tool
+		if (!damage)
+			to_chat(user, SPAN_WARNING("\The [src] doesn't need any repairs."))
+			return TRUE
+		if (!WT.can_use(1, user))
+			return TRUE
+		to_chat(user, SPAN_NOTICE("You start repairing the damage to [src]."))
+		playsound(src, 'sound/items/Welder.ogg', 100, 1)
+		if (do_after(user, max(5, damage / 5), src, DO_REPAIR_CONSTRUCT) && WT.remove_fuel(1, user))
+			to_chat(user, SPAN_NOTICE("You finish repairing the damage to [src]."))
+			revive_health()
+		return TRUE
+
+	return ..()
 
 /obj/machinery/shipsensors/proc/remove_tracker(obj/item/ship_tracker/tracker)
 	trackers -= tracker

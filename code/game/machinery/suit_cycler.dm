@@ -71,67 +71,62 @@
 	DROP_NULL(helmet)
 	return ..()
 
-/obj/machinery/suit_cycler/attackby(obj/item/I as obj, mob/user as mob)
-
+/obj/machinery/suit_cycler/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(electrified != 0)
 		if(shock(user, 100))
-			return
+			return TRUE
 
 	//Hacking init.
 	if(isMultitool(I) || isWirecutter(I))
 		if(panel_open)
 			attack_hand(user)
-		return
+		return TRUE
 	//Other interface stuff.
-	else if(isScrewdriver(I))
-
+	if (isScrewdriver(I))
 		panel_open = !panel_open
 		to_chat(user, "You [panel_open ?  "open" : "close"] the maintenance panel.")
 		updateUsrDialog()
-		return
+		return TRUE
 
-	else if(istype(I,/obj/item/clothing/head/helmet/space) && !istype(I, /obj/item/clothing/head/helmet/space/rig))
-
+	if (istype(I,/obj/item/clothing/head/helmet/space) && !istype(I, /obj/item/clothing/head/helmet/space/rig))
 		if(locked)
 			to_chat(user, SPAN_DANGER("The suit cycler is locked."))
-			return
+			return TRUE
 
 		if(helmet)
 			to_chat(user, SPAN_DANGER("The cycler already contains a helmet."))
-			return
+			return TRUE
 
 		if(I.icon_override == CUSTOM_ITEM_MOB)
 			to_chat(user, "You cannot refit a customised voidsuit.")
-			return
+			return TRUE
 		if(!user.unEquip(I, src))
-			return
+			return TRUE
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		helmet = I
-
 		updateUsrDialog()
-		return
+		return TRUE
 
-	else if(istype(I,/obj/item/clothing/suit/space/void))
-
+	if (istype(I,/obj/item/clothing/suit/space/void))
 		if(locked)
 			to_chat(user, SPAN_DANGER("The suit cycler is locked."))
-			return
+			return TRUE
 
 		if(suit)
 			to_chat(user, SPAN_DANGER("The cycler already contains a voidsuit."))
-			return
+			return TRUE
 
 		if(I.icon_override == CUSTOM_ITEM_MOB)
 			to_chat(user, "You cannot refit a customised voidsuit.")
-			return
+			return TRUE
 		if(!user.unEquip(I, src))
-			return
+			return TRUE
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		suit = I
-
 		updateUsrDialog()
-		return
-	..()
+		return TRUE
+
+	return ..()
 
 /obj/machinery/suit_cycler/proc/move_target_inside(mob/target, mob/user)
 	visible_message(SPAN_NOTICE("\The [user] starts putting \the [target] into \the [src]."), range = 3)

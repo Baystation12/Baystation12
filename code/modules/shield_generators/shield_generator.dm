@@ -210,11 +210,11 @@
 		return SPAN_NOTICE("Wait until \the [src] cools down from emergency shutdown first!")
 	return ..()
 
-/obj/machinery/power/shield_generator/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/power/shield_generator/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(panel_open && (isMultitool(O) || isWirecutter(O)))
 		attack_hand(user)
 		return TRUE
-	return component_attackby(O, user)
+	return ..()
 
 /obj/machinery/power/shield_generator/proc/energy_failure()
 	if(running == SHIELD_DISCHARGING)

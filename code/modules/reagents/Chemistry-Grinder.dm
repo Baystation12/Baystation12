@@ -119,20 +119,22 @@
 		icon_state = "[initial(icon_state)]"
 
 
-/obj/machinery/reagentgrinder/attackby(obj/item/I, mob/user)
-	if((. = component_attackby(I, user)))
+/obj/machinery/reagentgrinder/use_tool(obj/item/I, mob/living/user, list/click_params)
+	if((. = ..()))
 		detach()
 		eject()
+		return
 
-	else if (is_type_in_list(I, allowed_containers) && !is_type_in_list(I, banned_containers))
+	if (is_type_in_list(I, allowed_containers) && !is_type_in_list(I, banned_containers))
 		if (container)
 			to_chat(user, SPAN_WARNING("\The [src] already has \a [container]."))
 		else if (user.unEquip(I, src))
 			container = I
 			update_icon()
 			updateDialog()
+		return TRUE
 
-	else if (is_type_in_list(I, storage_types))
+	if (is_type_in_list(I, storage_types))
 		var/obj/item/storage/S = I
 		if (!length(S.contents))
 			to_chat(user, SPAN_WARNING("\The [S] is empty."))
@@ -160,22 +162,24 @@
 				updateDialog()
 			else
 				to_chat(user, SPAN_WARNING("Nothing more in \the [S] will go into \the [src]."))
+		return TRUE
 
-	else if (I.w_class > max_item_size)
+	if (I.w_class > max_item_size)
 		to_chat(user, SPAN_WARNING("\The [I] is too large for \the [src]."))
+		return TRUE
 
-	else if (length(items) >= max_items)
+	if (length(items) >= max_items)
 		to_chat(user, SPAN_WARNING("\The [src] is full."))
+		return TRUE
 
-	else if (is_type_in_list(I, banned_items) || !grindable(I))
+	if (is_type_in_list(I, banned_items) || !grindable(I))
 		to_chat(user, SPAN_WARNING("\The [src] cannot grind \the [I]."))
+		return TRUE
 
-	else if (user.unEquip(I, src))
+	if (user.unEquip(I, src))
 		items += I
 		updateUsrDialog()
-
-	return TRUE
-
+		return TRUE
 
 /obj/machinery/reagentgrinder/interface_interact(mob/user)
 	interact(user)

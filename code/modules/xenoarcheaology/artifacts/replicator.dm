@@ -123,11 +123,15 @@
 
 	show_browser(user, dat, "window=alien_replicator")
 
-/obj/machinery/replicator/attackby(obj/item/W as obj, mob/living/user as mob)
-	if(!user.unEquip(W, src))
+/obj/machinery/replicator/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if ((. = ..()))
 		return
+
+	if(!user.unEquip(W, src))
+		return TRUE
 	stored_materials.Add(W)
-	src.visible_message(SPAN_NOTICE("\The [user] inserts \the [W] into \the [src]."))
+	visible_message(SPAN_NOTICE("\The [user] inserts \the [W] into \the [src]."))
+	return TRUE
 
 /obj/machinery/replicator/OnTopic(user, href_list)
 	if(href_list["activate"])

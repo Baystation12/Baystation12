@@ -128,26 +128,26 @@
 	else
 		to_chat(user, SPAN_DANGER("You need to screw the beacon to the floor first!"))
 
-/obj/machinery/power/singularity_beacon/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/power/singularity_beacon/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isScrewdriver(W))
 		if(active)
 			to_chat(user, SPAN_DANGER("You need to deactivate the beacon first!"))
-			return
+			return TRUE
 
 		if(anchored)
 			anchored = FALSE
 			to_chat(user, SPAN_NOTICE("You unscrew the beacon from the floor."))
 			disconnect_from_network()
-			return
+			return TRUE
 		else
 			if(!connect_to_network())
 				to_chat(user, "This device must be placed over an exposed cable.")
-				return
+				return TRUE
 			anchored = TRUE
 			to_chat(user, SPAN_NOTICE("You screw the beacon to the floor and attach the cable."))
-			return
-	..()
-	return
+			return TRUE
+
+	return ..()
 
 
 /obj/machinery/power/singularity_beacon/Destroy()

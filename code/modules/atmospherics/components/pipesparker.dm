@@ -73,32 +73,25 @@
 	)
 	ignite()
 
-/obj/machinery/atmospherics/pipe/cap/sparker/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/atmospherics/pipe/cap/sparker/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if (isScrewdriver(W) && !signaler)
-		add_fingerprint(user)
 		disabled = !disabled
-		if (disabled)
-			user.visible_message(
-				SPAN_WARNING("\The [user] has disabled \the [src]!"),
-				SPAN_WARNING("You disable the connection to \the [src].")
-			)
-		else if (!disabled)
-			user.visible_message(
-				SPAN_NOTICE("\The [user] has reconnected wiring on \the [src]!"),
-				SPAN_NOTICE("You fix the wire connection on \the [src].")
-			)
+		user.visible_message(
+			SPAN_WARNING("\The [user] has [disabled ? "disabled" : "reconnected wiring on"] \the [src]."),
+			SPAN_WARNING("You [disabled ? "disable" : "fix"] the connection on \the [src].")
+		)
 		update_icon()
-		return
+		return TRUE
 
 	if (istype(W, /obj/item/device/assembly/signaler) && signaler == null)
 		if (disabled)
 			to_chat(user, SPAN_WARNING("\The [src] is disabled!"))
-			return
+			return TRUE
 		signaler = W
 		if (signaler.secured)
 			to_chat(user, SPAN_WARNING("\The [signaler] is secured!"))
 			signaler = null
-			return
+			return TRUE
 		signaler.mholder = src
 		user.unEquip(signaler)
 		signaler.forceMove(src)
@@ -107,7 +100,7 @@
 			SPAN_NOTICE("You connect \the [signaler] to \the [src].")
 		)
 		update_icon()
-		return
+		return TRUE
 
 	if (isScrewdriver(W) && signaler)
 		signaler.mholder = null
@@ -118,12 +111,13 @@
 		)
 		signaler = null
 		update_icon()
-		return
+		return TRUE
 
 	if (isWrench(W) && (signaler || disabled))
 		to_chat(user, SPAN_NOTICE("Remove signalers and check the wiring before unwrenching \the [src]."))
-		return
-	..()
+		return TRUE
+
+	return ..()
 
 /obj/machinery/atmospherics/pipe/cap/sparker/proc/process_activation()//the signaler calls this
 	ignite()

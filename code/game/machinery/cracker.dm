@@ -36,19 +36,20 @@
 	update_icon()
 	return TRUE
 
-/obj/machinery/portable_atmospherics/cracker/attackby(obj/item/thing, mob/user)
+/obj/machinery/portable_atmospherics/cracker/use_tool(obj/item/thing, mob/living/user, list/click_params)
 	// remove deuterium as a reagent
 	if(thing.is_open_container() && thing.reagents)
 		if(!reagent_buffer[MATERIAL_DEUTERIUM] || reagent_buffer[MATERIAL_DEUTERIUM] <= 0)
 			to_chat(user, SPAN_WARNING("There is no deuterium stored in \the [src]."))
-			return
+			return TRUE
 		var/transfer_amt = min(thing.reagents.maximum_volume, reagent_buffer[MATERIAL_DEUTERIUM])
 		thing.reagents.add_reagent(MATERIAL_DEUTERIUM, transfer_amt)
 		thing.update_icon()
 		reagent_buffer[MATERIAL_DEUTERIUM] -= transfer_amt
 		user.visible_message(SPAN_NOTICE("\The [user] siphons [transfer_amt] unit\s of deuterium from \the [src] into \the [thing]."))
-		return
-	. = ..()
+		return TRUE
+
+	return ..()
 
 /obj/machinery/portable_atmospherics/cracker/power_change()
 	. = ..()

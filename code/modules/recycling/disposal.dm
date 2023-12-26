@@ -59,31 +59,52 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		trunk.linked = null
 	return ..()
 
-// attack by item places it in to disposal
-/obj/machinery/disposal/attackby(obj/item/I, mob/user)
-	if(MACHINE_IS_BROKEN(src) || !I || !user)
+/obj/machinery/disposal/use_grab(obj/item/grab/G, list/click_params)
+	if (MACHINE_IS_BROKEN(src))
+		return ..()
+
+	if (ismob(G.affecting))
+		var/mob/GM = G.affecting
+		var/mob/user = G.assailant
+		user.visible_message(SPAN_DANGER("\The [user] starts putting \the [GM.name] into the disposal."))
+		if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
+			if (GM.client)
+				GM.client.perspective = EYE_PERSPECTIVE
+				GM.client.eye = src
+			GM.forceMove(src)
+			user.visible_message(SPAN_DANGER("\The [GM] has been placed in \the [src] by \the [user]."))
+			GM.remove_grabs_and_pulls()
+			admin_attack_log(user, GM, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
+		return TRUE
+
+	return ..()
+
+/obj/machinery/disposal/use_tool(obj/item/I, mob/living/user, list/click_params)
+	if(MACHINE_IS_BROKEN(src))
+		return ..()
+
+	if ((. = ..()))
 		return
 
-	add_fingerprint(user, 0, I)
 	if(mode<=0) // It's off
-		if(isScrewdriver(I))
+		if (isScrewdriver(I))
 			if(length(contents) > LAZYLEN(component_parts))
 				to_chat(user, "Eject the items first!")
-				return
+				return TRUE
 			if(mode==0) // It's off but still not unscrewed
 				mode=-1 // Set it to doubleoff l0l
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				to_chat(user, "You remove the screws around the power connection.")
-				return
+				return TRUE
 			else if(mode==-1)
 				mode=0
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				to_chat(user, "You attach the screws around the power connection.")
-				return
-		else if(isWelder(I) && mode==-1)
+				return TRUE
+		if (isWelder(I) && mode==-1)
 			if(length(contents) > LAZYLEN(component_parts))
 				to_chat(user, "Eject the items first!")
-				return
+				return TRUE
 			var/obj/item/weldingtool/W = I
 			if(W.can_use(1,user))
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
@@ -96,50 +117,32 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 					src.transfer_fingerprints_to(C)
 					C.update()
 					qdel(src)
-				return
+				return TRUE
 			else
 				to_chat(user, "You need more welding fuel to complete this task.")
-				return
+				return TRUE
 
-	if(istype(I, /obj/item/melee/energy/blade))
-		to_chat(user, "You can't place that item inside the disposal unit.")
-		return
-
-	if(istype(I, /obj/item/storage/bag/trash))
+	if (istype(I, /obj/item/storage/bag/trash))
 		var/obj/item/storage/bag/trash/T = I
 		to_chat(user, SPAN_NOTICE("You empty the bag."))
 		for(var/obj/item/O in T.contents)
 			T.remove_from_storage(O,src, 1)
 		T.finish_bulk_removal()
 		update_icon()
-		return
-
-	var/obj/item/grab/G = I
-	if(istype(G))	// handle grabbed mob
-		if(ismob(G.affecting))
-			var/mob/GM = G.affecting
-			usr.visible_message(SPAN_DANGER("\The [usr] starts putting [GM.name] into the disposal."))
-			if(do_after(usr, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
-				if (GM.client)
-					GM.client.perspective = EYE_PERSPECTIVE
-					GM.client.eye = src
-				GM.forceMove(src)
-				usr.visible_message(SPAN_DANGER("\The [GM] has been placed in the [src] by \the [user]."))
-				GM.remove_grabs_and_pulls()
-				admin_attack_log(usr, GM, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
-		return
+		return TRUE
 
 	if(isrobot(user))
-		return
-	if(!I)
-		return
+		return FALSE
 
 	if(!user.unEquip(I, src))
-		return
+		return TRUE
 
-	user.visible_message("\The [user] places \the [I] into \the [src].", "You place \the [I] into \the [src].")
-
+	user.visible_message(
+		SPAN_NOTICE("\The [user] places \the [I] into \the [src]."),
+		SPAN_NOTICE("You place \the [I] into \the [src].")
+	)
 	update_icon()
+	return TRUE
 
 /obj/machinery/disposal/MouseDrop_T(atom/movable/AM, mob/user)
 	if(!istype(AM)) // Could be dragging in a turf.
@@ -163,7 +166,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		if(M.buckled)
 			return
 	else if(istype(AM, /obj/item))
-		attackby(AM, user)
+		use_tool(AM, user)
 		return
 	else if(!is_type_in_list(AM, allowed_objects))
 		USE_FEEDBACK_FAILURE("\The [AM] doesn't fit in \the [src].")
@@ -525,14 +528,15 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	junctions.Cut()
 	return ..()
 
-/obj/machinery/disposal_switch/attackby(obj/item/I, mob/user, params)
+/obj/machinery/disposal_switch/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(isCrowbar(I))
 		var/obj/item/disposal_switch_construct/C = new/obj/item/disposal_switch_construct(src.loc, id_tag)
 		transfer_fingerprints_to(C)
-		user.visible_message(SPAN_NOTICE("\The [user] deattaches \the [src]"))
+		user.visible_message(SPAN_NOTICE("\The [user] deattaches \the [src]."))
 		qdel(src)
-	else
-		. = ..()
+		return TRUE
+
+	return ..()
 
 /obj/machinery/disposal_switch/interface_interact(mob/user)
 	if(!CanInteract(user, DefaultTopicState()))

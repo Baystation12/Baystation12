@@ -5,6 +5,7 @@
 	icon_state = "teg-unassembled"
 	density = TRUE
 	anchored = FALSE
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
 	use_power = POWER_USE_IDLE
 	idle_power_usage = 100 //Watts, I hope.  Just enough to do the computer and display things.
@@ -156,21 +157,9 @@
 		update_icon()
 	add_avail(effective_gen)
 
-/obj/machinery/power/generator/attackby(obj/item/W as obj, mob/user as mob)
-	if (isWrench(W))
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-		anchored = !anchored
-		user.visible_message("[user.name] [anchored ? "secures" : "unsecures"] the bolts holding [src.name] to the floor.", \
-					"You [anchored ? "secure" : "unsecure"] the bolts holding [src] to the floor.", \
-					"You hear a ratchet")
-		update_use_power(anchored)
-		if(anchored) // Powernet connection stuff.
-			connect_to_network()
-		else
-			disconnect_from_network()
-		reconnect()
-	else
-		..()
+/obj/machinery/power/generator/post_anchor_change()
+	reconnect()
+	..()
 
 /obj/machinery/power/generator/CanUseTopic(mob/user)
 	if(!anchored)

@@ -31,18 +31,18 @@
 	machine_id = "[station_name()] Acc. DB #[num_financial_terminals++]"
 	..()
 
-/obj/machinery/computer/account_database/attackby(obj/O, mob/user)
-	if(!istype(O, /obj/item/card/id))
+/obj/machinery/computer/account_database/use_tool(obj/item/O, mob/living/user, list/click_params)
+	if(!isid(O))
 		return ..()
 
 	if(!held_card)
 		if(!user.unEquip(O, src))
-			return
+			return TRUE
 		held_card = O
-
 		SSnano.update_uis(src)
 
 	attack_hand(user)
+	return TRUE
 
 /obj/machinery/computer/account_database/interface_interact(mob/user)
 	ui_interact(user)

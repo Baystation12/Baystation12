@@ -5,6 +5,7 @@
 	density = TRUE
 	anchored = FALSE
 	stat_immune = MACHINE_STAT_NOSCREEN//Doesn't need screen, just input for the parts wanted
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
 	construct_state = /singleton/machine_construction/default/panel_closed
 	uncreated_component_parts = null
@@ -65,47 +66,32 @@
 	interact(user)
 	return TRUE
 
+/obj/machinery/pipedispenser/CanUseTopic(mob/user)
+	if (!anchored)
+		to_chat(user, "You need to anchor \the [src] to be able to operate it.")
+		return STATUS_CLOSE
+	return ..()
+
 /obj/machinery/pipedispenser/interact(mob/user)
 	var/datum/browser/popup = new (user, "Pipe List", "[src] Control Panel")
 	popup.set_content(get_console_data(GLOB.all_pipe_datums_by_category, TRUE))
 	popup.open()
 
-/obj/machinery/pipedispenser/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/pipedispenser/post_anchor_change()
+	if (anchored)
+		set_stat(MACHINE_STAT_MAINT, FALSE)
+	else
+		set_stat(MACHINE_STAT_MAINT, TRUE)
+	..()
+
+/obj/machinery/pipedispenser/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/machine_chassis))
 		if(!user.unEquip(W))
-			return
+			return TRUE
 		to_chat(user, SPAN_NOTICE("You put \the [W] back into \the [src]."))
-		add_fingerprint(user)
 		qdel(W)
-		return
-	if(!panel_open)
-		if(isWrench(W))
-			add_fingerprint(user)
-			if(anchored)
-				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-				to_chat(user, SPAN_NOTICE("You begin to unfasten \the [src] from the floor..."))
-				if (do_after(user, (W.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT))
-					user.visible_message( \
-						SPAN_NOTICE("\The [user] unfastens \the [src]."), \
-						SPAN_NOTICE("You have unfastened \the [src]. Now it can be pulled somewhere else."), \
-						"You hear ratchet.")
-					anchored = FALSE
-					set_stat(MACHINE_STAT_MAINT, TRUE)
-					update_use_power(POWER_USE_OFF)
-					if(user.machine==src)
-						close_browser(user, "window=pipedispenser")
-			else
-				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-				to_chat(user, SPAN_NOTICE("You begin to fasten \the [src] to the floor..."))
-				if (do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
-					user.visible_message( \
-						SPAN_NOTICE("\The [user] fastens \the [src]."), \
-						SPAN_NOTICE("You have fastened \the [src]. Now it can dispense pipes."), \
-						"You hear ratchet.")
-					anchored = TRUE
-					set_stat(MACHINE_STAT_MAINT, FALSE)
-					update_use_power(POWER_USE_IDLE)
-			return
+		return TRUE
+
 	return ..()
 
 /obj/machinery/pipedispenser/disposal

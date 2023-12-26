@@ -112,9 +112,11 @@
 		GLOB.module_deselected_event.unregister(user, src, /obj/item/device/paint_sprayer/proc/remove_click_handler)
 		GLOB.module_deactivated_event.unregister(user, src, /obj/item/device/paint_sprayer/proc/remove_click_handler)
 
-/obj/item/device/paint_sprayer/use_after(atom/target, mob/living/user, click_parameters)
-	apply_paint(target, user, click_parameters)
-	return TRUE
+/obj/item/device/paint_sprayer/use_before(atom/target, mob/living/user, click_parameters)
+	if (apply_paint(target, user, click_parameters))
+		return TRUE
+
+	return ..()
 
 /obj/item/device/paint_sprayer/proc/pick_color(atom/A, mob/user)
 	if (!user.Adjacent(A) || user.incapacitated())
@@ -145,7 +147,6 @@
 		to_chat(user, SPAN_WARNING("\The [src] can only be used on floors, windows, walls, exosuits or certain airlocks."))
 		. = FALSE
 	if (.)
-		add_fingerprint(user)
 		playsound(get_turf(src), 'sound/effects/spray3.ogg', 30, 1, -6)
 	return .
 

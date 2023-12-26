@@ -9,11 +9,10 @@
 	..()
 	return
 
-/obj/machinery/door/unpowered/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/melee/energy/blade))	return
-	if(src.locked)	return
-	..()
-	return
+/obj/machinery/door/unpowered/use_tool(obj/item/I, mob/living/user, list/click_params)
+	if(locked)
+		return TRUE
+	return ..()
 
 /obj/machinery/door/unpowered/emag_act()
 	return -1
