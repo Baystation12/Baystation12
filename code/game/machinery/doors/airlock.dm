@@ -779,6 +779,10 @@ About the new airlock wires panel:
 	data["electrified"] 		= round(electrified_until		> 0 ? max(electrified_until - world.time, 	0) / 10 	: electrified_until,		1)
 	data["open"] = !density
 
+	// [SIERRA-ADD] - NTNet gimmics
+	data["airlock_ntnet_id"]	= NTNet_id
+	// [/SIERRA-ADD]
+
 	var/commands[0]
 	commands[LIST_PRE_INC(commands)] = list("name" = "IdScan",					"command"= "idscan",				"active" = !aiDisabledIdScanner,	"enabled" = "Enabled",	"disabled" = "Disable",		"danger" = 0, "act" = 1)
 	commands[LIST_PRE_INC(commands)] = list("name" = "Bolts",					"command"= "bolts",					"active" = !locked,					"enabled" = "Raised ",	"disabled" = "Dropped",		"danger" = 0, "act" = 0)

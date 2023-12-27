@@ -2,6 +2,7 @@
 #### Список PRов:
 
 - https://github.com/SierraBay/SierraBay12/pull/1474
+- https://github.com/SierraBay/SierraBay12/pull/1683
 <!--
   Ссылки на PRы, связанные с модом:
   - Создание

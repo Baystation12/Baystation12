@@ -183,8 +183,8 @@
 #define  FIRESUIT_MAX_PRESSURE 		100 * ONE_ATMOSPHERE   // Firesuis and atmos voidsuits
 #define  RIG_MAX_PRESSURE 			50 * ONE_ATMOSPHERE   // Rigs
 #define  LIGHT_RIG_MAX_PRESSURE 	25 * ONE_ATMOSPHERE   // Rigs
-#define  ENG_VOIDSUIT_MAX_PRESSURE 	50 * ONE_ATMOSPHERE 
-#define  VOIDSUIT_MAX_PRESSURE 		25 * ONE_ATMOSPHERE 
+#define  ENG_VOIDSUIT_MAX_PRESSURE 	50 * ONE_ATMOSPHERE
+#define  VOIDSUIT_MAX_PRESSURE 		25 * ONE_ATMOSPHERE
 #define  SPACE_SUIT_MAX_PRESSURE 	5 * ONE_ATMOSPHERE
 
 // Fire.
@@ -218,7 +218,9 @@
 #define HUD_SECURITY FLAG(1)
 #define HUD_MEDICAL FLAG(2)
 #define HUD_JANITOR FLAG(3)
-
+// [SIERRA-ADD] - NTNET - NTNet gimmics
+#define HUD_IT FLAG(4)
+// [/SIERRA-ADD]
 
 /**
 * flags for /mob/proc/equip_to_slot_if_possible

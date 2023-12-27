@@ -32,7 +32,7 @@
 
 	access = list(	access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			        access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
-			        access_tcomsat, access_seneng, access_hangar)
+			        access_tcomsat, access_seneng, access_hangar, access_network)
 
 
 	software_on_spawn = list(/datum/computer_file/program/power_monitor,
@@ -184,7 +184,7 @@
 	max_skill = list(   SKILL_ELECTRICAL   = SKILL_MAX,
 	                    SKILL_COMPUTER	   = SKILL_MAX)
 
-	access = list(	access_maint_tunnels, access_network, access_external_airlocks,
+	access = list(	access_maint_tunnels, access_network, access_network_admin, access_external_airlocks,
 			       	access_tech_storage, access_emergency_storage, access_tcomsat)
 
 

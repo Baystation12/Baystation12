@@ -2,13 +2,11 @@
 /datum/map/sierra
 	loadout_blacklist = list(
 		/datum/gear/union_card,
-		/datum/gear/eyes/security,
 		/datum/gear/suit/labcoat_corp,
 		/datum/gear/uniform/corp_exec,
 		/datum/gear/uniform/corp_overalls,
 		/datum/gear/uniform/corp_flight,
 		/datum/gear/uniform/corp_exec_jacket,
-		/datum/gear/uniform/corporate
 	)
 
 //For all exploration crew

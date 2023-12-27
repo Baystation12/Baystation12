@@ -14,7 +14,7 @@
 	create_record = FALSE
 	outfit_type = /singleton/hierarchy/outfit/job/liberia/merchant/leader
 	whitelisted_species = null
-	blacklisted_species = list(SPECIES_VOX, SPECIES_ALIEN, SPECIES_GOLEM, ) // SPECIES_MANTID_GYNE, SPECIES_MANTID_ALATE, SPECIES_MONARCH_WORKER, SPECIES_MONARCH_QUEEN Not yet... not yet...
+	blacklisted_species = list(SPECIES_VOX, SPECIES_ALIEN, SPECIES_GOLEM, SPECIES_ADHERENT, SPECIES_NABBER) // SPECIES_MANTID_GYNE, SPECIES_MANTID_ALATE, SPECIES_MONARCH_WORKER, SPECIES_MONARCH_QUEEN Not yet... not yet...
 
 	latejoin_at_spawnpoints = TRUE
 

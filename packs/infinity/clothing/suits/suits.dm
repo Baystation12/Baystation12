@@ -18,15 +18,6 @@
 	//icon_open = "black_jacket_o"
 	//icon_closed = "black_jacket_c"
 
-/obj/item/clothing/suit/storage/toggle/longjacket
-	name = "long jacket"
-	desc = "A long gray jacket"
-	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
-	item_icons = list(slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
-	icon_state = "longjacket_o"
-	//icon_open = "longjacket_o"
-	//icon_closed = "longjacket_c"
-
 /obj/item/clothing/suit/officerdnavyjacket
 	name = "officer navy jacket"
 	desc = "The utility jacket of the SCG Fleet, made from an insulated materials."
@@ -43,16 +34,6 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 	siemens_coefficient = 0.6
 	allowed = list(/obj/item/gun/energy,/obj/item/device/radio,/obj/item/reagent_containers/spray/pepper,/obj/item/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/handcuffs,/obj/item/gun/magnetic)
-
-/obj/item/clothing/suit/storage/tgbomber
-	name = "modern bomber jacket"
-	desc = "A leather bomber jacket."
-	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
-	item_icons = list(slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
-	icon_state = "bomberjacket"
-	body_parts_covered = UPPER_TORSO|ARMS
-	cold_protection = UPPER_TORSO|ARMS
-	min_cold_protection_temperature = T0C - 20
 
 /obj/item/clothing/suit/storage/janjacket
 	name = "janitor jacket"

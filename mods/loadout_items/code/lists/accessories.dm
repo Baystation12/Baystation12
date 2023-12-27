@@ -15,3 +15,27 @@
 	solgovranks["ranks (O-1 ensign)"] = /obj/item/clothing/accessory/solgov/rank/ec/officer
 	solgovranks["ranks (O-3 lieutenant)"] = /obj/item/clothing/accessory/solgov/rank/ec/officer/o3
 	gear_tweaks += new/datum/gear_tweak/path(solgovranks)
+
+// Cosmetics
+
+/datum/gear/brush
+	display_name = "hairbrush"
+	path = /obj/item/haircomb/brush
+	sort_category = "Cosmetics"
+
+/datum/gear/deodorant
+	display_name = "deodorant"
+	path = /obj/item/reagent_containers/spray/cleaner/deodorant
+	sort_category = "Cosmetics"
+
+/datum/gear/lipstick
+	display_name = "lipstick selection"
+	path = /obj/item/lipstick
+	sort_category = "Cosmetics"
+	flags = GEAR_HAS_TYPE_SELECTION
+
+/datum/gear/comb
+	display_name = "plastic comb"
+	path = /obj/item/haircomb
+	sort_category = "Cosmetics"
+	flags = GEAR_HAS_COLOR_SELECTION

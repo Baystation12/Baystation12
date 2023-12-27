@@ -138,6 +138,7 @@
 		/obj/item/gun/projectile/pistol/sec,
 		/obj/item/ammo_magazine/pistol/rubber,
 		/obj/item/ammo_magazine/pistol,
+		/obj/item/gun/energy/taser,
 		/obj/item/device/megaphone,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/device/holowarrant,
@@ -173,7 +174,7 @@
 /obj/structure/closet/secure_closet/security/sierra/science
 	name = "research guard locker"
 	req_access = list(access_security)
-	closet_appearance = /singleton/closet_appearance/secure_closet/sierra/security
+	closet_appearance = /singleton/closet_appearance/secure_closet/security
 
 /obj/structure/closet/secure_closet/security/sierra/science/WillContain()
 	return list(
