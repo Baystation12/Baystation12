@@ -125,7 +125,6 @@
 
 	#include "robot/module_flying_surveyor.dm"
 
-	#include "structures/signs.dm"
 	#include "structures/closets.dm"
 	#include "structures/closets/closet_appearances.dm"
 	#include "structures/closets/command.dm"
@@ -138,6 +137,8 @@
 	#include "structures/closets/supply.dm"
 	#include "structures/closets/exploration.dm"
 	#include "structures/memorabilia.dm"
+	#include "structures/posters.dm"
+	#include "structures/signs.dm"
 
 	#include "loadout/_defines.dm"
 	#include "loadout/loadout_accessories.dm"
