@@ -1,5 +1,9 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
+#define IS_SUBTYPE(child_type, parent_type) (child_type != parent_type && istype(child_type, parent_type))
+
+#define IS_SUBPATH(child_path, parent_path) (child_path != parent_path && ispath(child_path, parent_path))
+
 /proc/is_on_same_plane_or_station(z1, z2)
 	if(z1 == z2)
 		return 1

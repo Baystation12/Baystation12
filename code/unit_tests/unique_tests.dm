@@ -151,6 +151,24 @@
 		pass("All space suit modifiers have unique names.")
 	return 1
 
+// Purpose: /proc/SetupChameleonExtension() attempts to find the best chameleon extension for a given type
+// Having multiple extensions expect the same type can technically lead to inconsistencies between compilations (if the types are moved around, etc.)
+// Can be worked around by, for example, adding a flag that adds/removes a given extension from the list of possible extensions in the proc above
+/datum/unit_test/chameleon_extensions_shall_have_unique_expected_types
+	name = "UNIQUENESS: Chameleon Extensions Shall Have Unique Expected Types"
+
+/datum/unit_test/chameleon_extensions_shall_have_unique_expected_types/start_test()
+	var/list/expected_types_by_extension = list()
+	for (var/datum/extension/chameleon/chameleon_extension_type as anything in typesof(/datum/extension/chameleon))
+		group_by(expected_types_by_extension, initial(chameleon_extension_type.expected_type), chameleon_extension_type)
+
+	var/number_of_issues = number_of_issues(expected_types_by_extension, "Chameleon Extensions - Expected Types")
+	if(number_of_issues)
+		fail("[number_of_issues] duplicate expected type\s found.")
+	else
+		pass("All chameleon extensions have unique expected types.")
+	return 1
+
 /datum/unit_test/proc/number_of_issues(list/entries, type, feedback = /singleton/noi_feedback)
 	var/issues = 0
 	for(var/key in entries)
