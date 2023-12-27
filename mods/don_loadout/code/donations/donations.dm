@@ -41,7 +41,7 @@
 	query.Execute()
 
 	if(query.NextRow())
-		var/total = query.item[1]
+		var/total = text2num(query.item[1])
 		var/donator_level = DONATION_TIER_NONE
 		if(total >= DONATION_TIER_ONE_SUM)
 			donator_level = DONATION_TIER_ONE
