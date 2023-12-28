@@ -1,0 +1,4 @@
+author: SuhEugene
+changes:
+  - {bugfix: Донаты однозначно теперь должны заработать.}
+delete-after: true
