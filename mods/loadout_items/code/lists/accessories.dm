@@ -11,9 +11,7 @@
 	solgovranks["ranks (E-1 apprentice explorer)"] = /obj/item/clothing/accessory/solgov/rank/ec/enlisted
 	solgovranks["ranks (E-3 explorer)"] = /obj/item/clothing/accessory/solgov/rank/ec/enlisted/e3
 	solgovranks["ranks (E-5 senior explorer)"] = /obj/item/clothing/accessory/solgov/rank/ec/enlisted/e5
-	solgovranks["ranks (E-7 chief explorer)"] = /obj/item/clothing/accessory/solgov/rank/ec/enlisted/e7
 	solgovranks["ranks (O-1 ensign)"] = /obj/item/clothing/accessory/solgov/rank/ec/officer
-	solgovranks["ranks (O-3 lieutenant)"] = /obj/item/clothing/accessory/solgov/rank/ec/officer/o3
 	gear_tweaks += new/datum/gear_tweak/path(solgovranks)
 
 // Cosmetics

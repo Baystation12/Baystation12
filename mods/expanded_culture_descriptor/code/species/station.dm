@@ -71,7 +71,6 @@
 	extended_cultural_info = list(
 		TAG_FACTION = list(
 			FACTION_SKRELL_MED,
-			FACTION_SKRELL_AIR,
 			FACTION_SKRELL_FOOD
 		)
 	)
