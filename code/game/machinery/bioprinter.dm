@@ -169,7 +169,7 @@
 				S.use(sheets_to_take)
 		else
 			to_chat(user, SPAN_WARNING("\The [src] is too full."))
-		return TRUE
+			return TRUE
 
 	if(istype(W,/obj/item/organ))
 		var/obj/item/organ/O = W
