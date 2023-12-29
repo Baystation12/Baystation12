@@ -53,7 +53,7 @@
 			donator_level = DONATION_TIER_FOUR
 		player.donator_info.donation_type = donator_level
 
-	if(player.holder?.rights & R_FUN)
+	if(player.holder?.rights & R_ADMIN)
 		player.donator_info.donation_type = DONATION_TIER_ADMIN
 
 	if(!was_donator)
