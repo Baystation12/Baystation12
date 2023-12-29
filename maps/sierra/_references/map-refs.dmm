@@ -440,6 +440,27 @@
 /obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white,
 /area/space)
+"aM" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 10
+	},
+/obj/floor_decal/borderfloor/corner{
+	dir = 1
+	},
+/obj/item/storage/firstaid/regular,
+/obj/item/storage/med_pouch/oxyloss,
+/obj/item/storage/med_pouch/oxyloss,
+/obj/machinery/sleeper/survival_pod{
+	dir = 8
+	},
+/obj/structure/closet/medical_wall{
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/space)
 "aN" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 5
@@ -4618,6 +4639,12 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/space)
+"in" = (
+/obj/structure/fuel_port,
+/obj/paint/red,
+/obj/paint_stripe/white,
+/turf/simulated/wall/titanium,
+/area/space)
 "io" = (
 /obj/item/reagent_containers/food/snacks/candy/donor{
 	pixel_y = 5
@@ -8716,6 +8743,19 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/space)
+"pw" = (
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 24
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/obj/machinery/sleeper/survival_pod{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/space)
 "py" = (
 /obj/machinery/door/blast/shutters/open{
 	id_tag = "s_chem_window";
@@ -10337,6 +10377,28 @@
 /obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white,
 /area/space)
+"sm" = (
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 6
+	},
+/obj/machinery/airlock_sensor{
+	frequency = 1331;
+	id_tag = "guppy_shuttle_sensor";
+	master_tag = "guppy_shuttle";
+	pixel_y = 26
+	},
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/structure/handrail,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
 "sn" = (
 /obj/structure/closet/emcloset,
 /obj/floor_decal/techfloor{
@@ -10500,6 +10562,7 @@
 "sz" = (
 /obj/paint/dark_gunmetal,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/obj/paint_stripe/yellow,
 /turf/simulated/wall/r_titanium,
 /area/space)
 "sA" = (
@@ -12765,20 +12828,30 @@
 /turf/simulated/floor/plating,
 /area/space)
 "wA" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle,
-/obj/floor_decal/techfloor/orange{
-	dir = 8
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	cycle_to_external_air = 1;
-	dir = 1;
+/obj/machinery/airlock_sensor/airlock_interior{
 	frequency = 1331;
-	id_tag = "guppy_shuttle";
-	pixel_x = -32;
-	pixel_y = -20;
+	id_tag = "guppy_shuttle_interior_sensor";
+	master_tag = "guppy_shuttle";
+	name = "interior access button";
+	pixel_x = -22;
+	pixel_y = 32;
 	req_access = list("ACCESS_GUPPY")
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5
+	},
+/obj/floor_decal/borderfloor{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
 /area/space)
 "wB" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle,
@@ -12790,6 +12863,15 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	cycle_to_external_air = 1;
+	dir = 1;
+	frequency = 1331;
+	id_tag = "guppy_shuttle";
+	pixel_x = 32;
+	pixel_y = -20;
+	req_access = list("ACCESS_GUPPY")
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/space)
@@ -13982,6 +14064,22 @@
 /obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white/monotile,
 /area/space)
+"yT" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
+	dir = 8;
+	id_tag = "guppy_shuttle_pump_out_internal"
+	},
+/obj/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/structure/handrail,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
 "yU" = (
 /obj/structure/bed/chair/office/light{
 	dir = 4
@@ -14829,6 +14927,16 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/space)
+"AG" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 1
+	},
+/obj/structure/shuttle/engine/heater{
+	dir = 1;
+	pixel_y = -32
+	},
+/turf/simulated/floor/plating,
+/area/space)
 "AH" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
@@ -14980,6 +15088,22 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
+/area/space)
+"AX" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/shuttle_landmark/sierra/hangar/guppy,
+/obj/machinery/atmospherics/pipe/simple/visible/universal,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/structure/bed/chair/shuttle/blue{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
 /area/space)
 "AY" = (
 /obj/structure/table/reinforced,
@@ -16472,6 +16596,17 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/space)
+"DM" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
+	dir = 8;
+	id_tag = "guppy_shuttle_pump"
+	},
+/obj/floor_decal/techfloor/orange,
+/obj/floor_decal/techfloor/orange/corner{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
 "DN" = (
 /obj/structure/table/standard,
 /obj/floor_decal/corner/darkblue/diagonal,
@@ -17191,6 +17326,11 @@
 "EY" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible,
 /turf/simulated/floor/plating,
+/area/space)
+"EZ" = (
+/obj/paint/dark_gunmetal,
+/obj/paint_stripe/yellow,
+/turf/simulated/wall/r_titanium,
 /area/space)
 "Fb" = (
 /obj/machinery/light{
@@ -18242,9 +18382,7 @@
 /turf/simulated/floor/tiled/white,
 /area/space)
 "GW" = (
-/obj/machinery/sleeper/survival_pod{
-	dir = 8
-	},
+/obj/machinery/radio_beacon,
 /obj/floor_decal/industrial/outline/blue,
 /obj/machinery/light{
 	dir = 4
@@ -19997,6 +20135,30 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/space)
+"Kc" = (
+/obj/machinery/door/airlock/external{
+	autoset_access = 0;
+	frequency = 1331;
+	id_tag = "guppy_shuttle_inner";
+	name = "Guppy External Access";
+	req_access = list("ACCESS_GUPPY")
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/floor_decal/techfloor/orange{
+	dir = 4
+	},
+/obj/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
 "Kd" = (
 /obj/structure/bed,
 /turf/simulated/floor/reinforced,
@@ -20869,6 +21031,23 @@
 /obj/floor_decal/borderfloorwhite/corner2,
 /obj/floor_decal/corner/beige/bordercorner2,
 /turf/simulated/floor/tiled/white,
+/area/space)
+"LF" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
+	dir = 8;
+	id_tag = "guppy_shuttle_pump"
+	},
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/random/tool,
+/obj/structure/closet/crate,
+/obj/random/tool,
+/obj/item/deck/cards,
+/obj/floor_decal/techfloor/orange{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/space)
 "LI" = (
 /obj/structure/railing/mapped{
@@ -22070,6 +22249,32 @@
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/plating,
+/area/space)
+"NM" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	cycle_to_external_air = 1;
+	dir = 1;
+	frequency = 1331;
+	id_tag = "guppy_shuttle";
+	pixel_x = -32;
+	pixel_y = -20;
+	req_access = list("ACCESS_GUPPY")
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/floor_decal/techfloor/orange/corner,
+/obj/floor_decal/techfloor/orange/corner{
+	dir = 8
+	},
+/obj/machinery/tele_beacon,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/space)
 "NN" = (
 /obj/structure/table/rack,
@@ -32523,7 +32728,7 @@ wi
 YG
 EH
 IC
-wA
+jv
 eF
 sL
 nY
@@ -33128,8 +33333,8 @@ wi
 wi
 oI
 ZA
-qu
-qu
+EZ
+EZ
 qa
 qa
 qa
@@ -33947,17 +34152,17 @@ qO
 qa
 wi
 wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
+oI
+Bf
+vR
+lV
+ys
+zI
+zI
+zI
+qa
+qa
+qa
 wi
 wi
 wi
@@ -34149,17 +34354,17 @@ xP
 Qg
 wi
 wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
+oI
+ZA
+Ib
+Gw
+qa
+jG
+ja
+ZC
+UC
+cr
+qa
 wi
 wi
 wi
@@ -34351,17 +34556,17 @@ ia
 qa
 wi
 wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
+AG
+ZA
+yT
+xs
+qa
+ZW
+BG
+be
+rj
+qO
+qa
 wi
 wi
 wi
@@ -34553,17 +34758,17 @@ qa
 qa
 wi
 wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
+nU
+oz
+sm
+NM
+Kc
+wA
+AX
+ai
+oj
+xP
+Qg
 wi
 wi
 wi
@@ -34755,17 +34960,17 @@ wi
 wi
 wi
 wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
+AG
+ZA
+LF
+DM
+qa
+aM
+pw
+PI
+FR
+ia
+qa
 wi
 wi
 wi
@@ -34957,17 +35162,17 @@ zT
 wi
 wi
 wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
-wi
+in
+ZA
+qa
+pK
+qa
+qa
+qa
+qa
+qa
+qa
+qa
 wi
 wi
 wi
