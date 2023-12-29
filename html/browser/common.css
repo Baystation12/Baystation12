@@ -449,3 +449,8 @@ a.linkOff.selected { box-shadow: inset 0 0 0 1px #ebebeb; }
 	color: rgb(229, 25, 219);
 	text-shadow: 0 0 8px rgba(229, 25, 219, .6);
 }
+.dt_a {
+	font-weight: bold;
+	color: rgb(229, 25, 69);
+	text-shadow: 0 0 8px rgba(229, 25, 42, 0.6);
+}

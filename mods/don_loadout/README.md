@@ -2,6 +2,7 @@
 #### Список PRов:
 
 - https://github.com/SierraBay/SierraBay12/pull/892
+- https://github.com/SierraBay/SierraBay12/pull/1738
 <!--
   Ссылки на PRы, связанные с модом:
   - Создание
@@ -57,6 +58,7 @@ ID мода: DON_LOADOUT
   - `DONATION_TIER_TWO`
   - `DONATION_TIER_THREE`
   - `DONATION_TIER_FOUR`
+  - `DONATION_TIER_ADMIN`
   - `DONATION_TIER_ONE_SUM`
   - `DONATION_TIER_TWO_SUM`
   - `DONATION_TIER_THREE_SUM`

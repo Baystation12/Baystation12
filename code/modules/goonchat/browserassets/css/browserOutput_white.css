@@ -437,3 +437,4 @@ h1.alert, h2.alert		{color: #000080;}
 	color: rgb(229, 25, 219);
 	text-shadow: 0 0 8px rgba(229, 25, 219, .6);
 }
+.dt_a { /* Nothing in the chat for admins, sorry */}

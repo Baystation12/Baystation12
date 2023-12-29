@@ -5,6 +5,7 @@
 		if(DONATION_TIER_TWO)   return "dt_2"
 		if(DONATION_TIER_THREE) return "dt_3"
 		if(DONATION_TIER_FOUR)  return "dt_4"
+		if(DONATION_TIER_ADMIN) return "dt_a"
 
 /proc/donation_tier_decorated(tier)
 	if(tier == DONATION_TIER_NONE)
@@ -15,6 +16,7 @@
 		if(DONATION_TIER_TWO)   . = "Tier II"
 		if(DONATION_TIER_THREE) . = "Tier III"
 		if(DONATION_TIER_FOUR)  . = "Tier IV"
+		if(DONATION_TIER_ADMIN) . = "Admin"
 
 	return SPAN_CLASS(donation_tier_to_css_class(tier), .)
 
