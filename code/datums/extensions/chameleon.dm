@@ -338,3 +338,25 @@
 		return outfit.l_ear
 	if (ispath(outfit.r_ear, expected_type))
 		return outfit.r_ear
+
+/***************
+* Setup Helper *
+****************/
+/obj/proc/SetupChameleonExtension(throw_runtime)
+	var/best_found_expected_type
+	var/best_found_extension
+	for (var/datum/extension/chameleon/chameleon_extension_type as anything in typesof(/datum/extension/chameleon))
+		var/expected_type = initial(chameleon_extension_type.expected_type)
+
+		if (istype(src, expected_type)) // If the type of src is a type expected by the extension then..
+			// Check if the expected type is a better match than the previously found best expected type (if any)
+			if (!best_found_expected_type || IS_SUBPATH(expected_type, best_found_expected_type))
+				best_found_expected_type = expected_type
+				best_found_extension = chameleon_extension_type
+
+	if (best_found_extension)
+		set_extension(src, best_found_extension)
+		return
+
+	if (throw_runtime)
+		CRASH("The type [type] does not have a compatible chameleon extension.")

@@ -114,6 +114,8 @@
 			if(armor[type]) // Don't set it if it gives no armor anyway, which is many items.
 				set_extension(src, armor_type, armor, armor_degradation_speed)
 				break
+	if (item_flags & ITEM_FLAG_IS_CHAMELEON_ITEM)
+		SetupChameleonExtension(TRUE)
 
 /obj/item/Destroy()
 	QDEL_NULL(hidden_uplink)
