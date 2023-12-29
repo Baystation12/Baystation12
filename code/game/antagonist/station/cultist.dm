@@ -51,6 +51,8 @@ GLOBAL_DATUM_INIT(cult, /datum/antagonist/cultist, new)
 	var/list/cult_rating_bounds = list(CULT_RUNES_1, CULT_RUNES_2, CULT_RUNES_3, CULT_GHOSTS_1, CULT_GHOSTS_2, CULT_GHOSTS_3)
 	var/max_cult_rating = 0
 	var/conversion_blurb = "You catch a glimpse of the Realm of Nar-Sie, the Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of That Which Waits. Assist your new compatriots in their dark dealings. Their goals are yours, and yours are theirs. You serve the Dark One above all else. Bring It back."
+	var/station_summon_only = TRUE
+	var/no_shuttle_summon = TRUE
 
 	faction = "cult"
 

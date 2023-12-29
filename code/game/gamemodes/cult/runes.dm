@@ -781,6 +781,12 @@
 /obj/rune/tearreality/cast(mob/living/user)
 	if(!GLOB.cult.allow_narsie)
 		return
+	if (GLOB.cult.station_summon_only && !(get_z(user) in GLOB.using_map.station_levels))
+		to_chat(user, SPAN_OCCULT("Nar-Sie cannot be summoned here."))
+		return
+	if (GLOB.cult.no_shuttle_summon && istype(get_area(user), /area/shuttle))
+		to_chat(user, SPAN_OCCULT("Nar-Sie cannot be summoned on a shuttle."))
+		return
 	if(the_end_comes)
 		to_chat(user, SPAN_OCCULT("You are already summoning! Be patient!"))
 		return
