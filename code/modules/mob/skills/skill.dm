@@ -17,12 +17,14 @@ GLOBAL_LIST_EMPTY(skills)
 
 /singleton/hierarchy/skill/proc/get_cost(level)
 	switch(level)
-		if(SKILL_BASIC, SKILL_TRAINED)
+		if(SKILL_UNSKILLED)
+			return 0
+		if(SKILL_BASIC)
 			return 1
-		if(SKILL_EXPERIENCED, SKILL_MASTER)
+		if(SKILL_TRAINED, SKILL_EXPERIENCED)
 			return 2
 		else
-			return 0
+			return 3
 
 /singleton/hierarchy/skill/proc/update_special_effects(mob/mob, level)
 
