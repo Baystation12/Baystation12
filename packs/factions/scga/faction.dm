@@ -3,10 +3,10 @@
 	name_short = "SCGA"
 	email_domain = "army.mil.scg"
 	assistant_job = null
-	min_skill = list( // 6 points
-		SKILL_HAULING = SKILL_TRAINED, // 2 points
-		SKILL_WEAPONS = SKILL_BASIC, // 2 points
-		SKILL_COMBAT = SKILL_BASIC // 2 points
+	min_skill = list(
+		SKILL_HAULING = SKILL_TRAINED,
+		SKILL_WEAPONS = SKILL_BASIC,
+		SKILL_COMBAT = SKILL_BASIC
 	)
 
 	rank_types = list(

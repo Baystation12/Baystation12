@@ -11,29 +11,34 @@
 	available_by_default = FALSE
 	allowed_ranks = null
 	allowed_branches = null
-	skill_points = 25
 	give_psionic_implant_on_join = FALSE
-	max_skill = list(   SKILL_BUREAUCRACY = SKILL_MAX,
-	                    SKILL_FINANCE = SKILL_MAX,
-	                    SKILL_EVA = SKILL_MAX,
-	                    SKILL_MECH = SKILL_MAX,
-	                    SKILL_PILOT = SKILL_MAX,
-	                    SKILL_HAULING = SKILL_MAX,
-	                    SKILL_COMPUTER = SKILL_MAX,
-	                    SKILL_BOTANY = SKILL_MAX,
-	                    SKILL_COOKING = SKILL_MAX,
-	                    SKILL_COMBAT = SKILL_MAX,
-	                    SKILL_WEAPONS = SKILL_MAX,
-	                    SKILL_FORENSICS = SKILL_MAX,
-	                    SKILL_CONSTRUCTION = SKILL_MAX,
-	                    SKILL_ELECTRICAL = SKILL_MAX,
-	                    SKILL_ATMOS = SKILL_MAX,
-	                    SKILL_ENGINES = SKILL_MAX,
-	                    SKILL_DEVICES = SKILL_MAX,
-	                    SKILL_SCIENCE = SKILL_MAX,
-	                    SKILL_MEDICAL = SKILL_MAX,
-	                    SKILL_ANATOMY = SKILL_MAX,
-	                    SKILL_CHEMISTRY = SKILL_MAX)
+
+	skill_points = 11
+	min_skill = list(
+		SKILL_HAULING = SKILL_TRAINED,
+		SKILL_EVA = SKILL_TRAINED,
+		SKILL_CONSTRUCTION = SKILL_BASIC,
+		SKILL_ELECTRICAL = SKILL_BASIC,
+		SKILL_MEDICAL = SKILL_BASIC,
+		SKILL_WEAPONS = SKILL_BASIC,
+		SKILL_COMBAT = SKILL_BASIC,
+	)
+
+	max_skill = list(
+		SKILL_PILOT = SKILL_MAX,
+		SKILL_COMBAT = SKILL_MAX,
+		SKILL_WEAPONS = SKILL_MAX,
+		SKILL_FORENSICS = SKILL_MAX,
+		SKILL_CONSTRUCTION = SKILL_MAX,
+		SKILL_ELECTRICAL = SKILL_MAX,
+		SKILL_ATMOS = SKILL_MAX,
+		SKILL_ENGINES = SKILL_MAX,
+		SKILL_DEVICES = SKILL_MAX,
+		SKILL_SCIENCE = SKILL_MAX,
+		SKILL_MEDICAL = SKILL_MAX,
+		SKILL_ANATOMY = SKILL_MAX,
+		SKILL_CHEMISTRY = SKILL_MAX
+	)
 
 	var/info = "You have survived a terrible disaster. Make the best of things that you can."
 	var/rank
