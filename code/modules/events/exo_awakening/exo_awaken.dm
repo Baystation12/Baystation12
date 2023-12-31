@@ -24,16 +24,18 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	var/spawning = FALSE
 	///Set to TRUE when the event fails one or more of the start conditions
 	var/failed = FALSE
+	///Severity of the event. Used to calculate spawn rates and event length.
+	var/event_severity
 
 /datum/event/exo_awakening/setup()
 	announceWhen = rand(15, 45)
 	affecting_z = list()
 	if (prob(25))
-		severity = EVENT_LEVEL_MAJOR
+		event_severity = EVENT_LEVEL_MAJOR
 
 		chosen_mob_list = pick(typesof(/datum/mob_list/major) - /datum/mob_list/major)
 	else
-		severity = EVENT_LEVEL_MODERATE
+		event_severity = EVENT_LEVEL_MODERATE
 		chosen_mob_list = pick(typesof(/datum/mob_list/moderate) - /datum/mob_list/moderate)
 
 	for (var/area/A in world)
@@ -43,15 +45,15 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	chosen_mob_list = new chosen_mob_list
 	target_mob_count = chosen_mob_list.limit
 	endWhen = chosen_mob_list.length
-	endWhen += severity*25
+	endWhen += event_severity*25
 
 	apply_spawn_delay()
 
 /datum/event/exo_awakening/proc/apply_spawn_delay()
 	delay_time = chosen_mob_list.delay_time
 	var/delay_mod = delay_time / 6
-	var/delay_max = (EVENT_LEVEL_MAJOR - severity) * delay_mod
-	var/delay_min = -1 * severity * delay_mod
+	var/delay_max = (EVENT_LEVEL_MAJOR - event_severity) * delay_mod
+	var/delay_min = -1 * event_severity * delay_mod
 	delay_mod = max(rand(delay_min, delay_max), 0)
 	delay_time += delay_mod
 	endWhen += delay_time
@@ -113,7 +115,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 //Notify all players on the planet that the event is beginning.
 /datum/event/exo_awakening/proc/notify_players()
 	for (var/mob/M in players_on_site[chosen_area])
-		if (severity > EVENT_LEVEL_MODERATE)
+		if (event_severity > EVENT_LEVEL_MODERATE)
 			to_chat(M, SPAN_DANGER(chosen_mob_list.arrival_message))
 		else
 			to_chat(M, SPAN_WARNING(chosen_mob_list.arrival_message))
@@ -128,7 +130,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 /datum/event/exo_awakening/announce()
 	var/announcement = ""
-	if (severity > EVENT_LEVEL_MODERATE)
+	if (event_severity > EVENT_LEVEL_MODERATE)
 		announcement = "Extreme biological activity spike detected on [location_name()]."
 	else
 		announcement = "Anomalous biological activity detected on [location_name()]."
@@ -154,7 +156,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 		return
 
 	var/list/area_turfs = get_area_turfs(chosen_area)
-	var/n = rand(severity-1, severity*2)
+	var/n = rand(event_severity-1, event_severity*2)
 	var/I = 0
 	while (I < n)
 		var/turf/T
@@ -220,7 +222,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	chosen_planet.add_scan_data("exo_awaken_aftermath", SPAN_COLOR(COLOR_GREEN, "Biological and geological activity within tolerance, trace unknown lifeforms detected."), null, SKILL_SCIENCE, SKILL_TRAINED)
 
 	QDEL_NULL(chosen_mob_list)
-	log_debug("Exoplanet Awakening event spawned [spawned_mobs] mobs. It was a level [severity] out of 3 severity.")
+	log_debug("Exoplanet Awakening event spawned [spawned_mobs] mobs. It was a level [event_severity] out of 3 severity.")
 
 	if (!failed)
 		for (var/mob/M in GLOB.player_list)
