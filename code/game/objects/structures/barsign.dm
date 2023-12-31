@@ -1,7 +1,7 @@
 /obj/structure/sign/double/barsign
 	desc = "A jumbo-sized LED sign. This one seems to be showing its age."
 	icon = 'icons/obj/structures/barsigns.dmi'
-	icon_state = "empty"
+	icon_state = "on"
 	appearance_flags = DEFAULT_APPEARANCE_FLAGS
 	anchored = TRUE
 	var/cult = 0
