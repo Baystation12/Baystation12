@@ -18,18 +18,21 @@
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e8,
 	)
-	skill_points = 26
-	min_skill = list( // 15 points
-		SKILL_BUREAUCRACY = SKILL_TRAINED, // 2 points
-		SKILL_EVA = SKILL_BASIC, // 1 point
-		SKILL_COMBAT = SKILL_BASIC, // 2 points
-		SKILL_WEAPONS = SKILL_TRAINED, // 6 points
-		SKILL_FORENSICS = SKILL_BASIC // 4 points
+
+	skill_points = 3
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_EVA = SKILL_TRAINED,
+		SKILL_COMBAT = SKILL_EXPERIENCED,
+		SKILL_WEAPONS = SKILL_TRAINED,
+		SKILL_FORENSICS = SKILL_BASIC,
+		SKILL_HAULING = SKILL_TRAINED
 	)
 
-	max_skill = list(   SKILL_COMBAT      = SKILL_MAX,
-	                    SKILL_WEAPONS     = SKILL_MAX,
-	                    SKILL_FORENSICS   = SKILL_MAX)
+	max_skill = list(
+		SKILL_COMBAT = SKILL_MAX,
+		SKILL_WEAPONS = SKILL_MAX
+	)
 
 	access = list(
 		access_security, access_brig, access_armory, access_forensics_lockers,
@@ -69,19 +72,20 @@
 		/datum/mil_rank/civ/contractor,
 		/datum/mil_rank/sol/agent
 	)
-	skill_points = 26
-	min_skill = list( // 11 points
-		SKILL_BUREAUCRACY = SKILL_BASIC, // 1 point
-		SKILL_COMPUTER = SKILL_BASIC, // 1 point
-		SKILL_EVA = SKILL_BASIC, // 1 point
-		SKILL_COMBAT = SKILL_BASIC, // 2 points
-		SKILL_WEAPONS = SKILL_BASIC, // 2 points
-		SKILL_FORENSICS = SKILL_TRAINED // 4 points
+
+	skill_points = 5
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_COMPUTER = SKILL_BASIC,
+		SKILL_WEAPONS = SKILL_BASIC,
+		SKILL_FORENSICS = SKILL_EXPERIENCED,
+		SKILL_HAULING = SKILL_TRAINED
 	)
 
-	max_skill = list(   SKILL_COMBAT      = SKILL_EXPERIENCED,
-	                    SKILL_WEAPONS     = SKILL_EXPERIENCED,
-	                    SKILL_FORENSICS   = SKILL_MAX)
+	max_skill = list(
+		SKILL_WEAPONS     = SKILL_EXPERIENCED,
+		SKILL_FORENSICS   = SKILL_MAX
+	)
 
 	access = list(
 		access_security, access_brig, access_forensics_lockers,
@@ -114,17 +118,20 @@
 		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/fleet/e5
 	)
-	min_skill = list( // 14 points
-		SKILL_BUREAUCRACY = SKILL_BASIC, // 1 point
-		SKILL_EVA = SKILL_BASIC, // 1 point
-		SKILL_COMBAT = SKILL_BASIC, // 2 points
-		SKILL_WEAPONS = SKILL_TRAINED, // 6 points
-		SKILL_FORENSICS = SKILL_BASIC // 4 points
+
+	skill_points = 5
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_BASIC,
+		SKILL_EVA = SKILL_TRAINED,
+		SKILL_COMBAT = SKILL_TRAINED,
+		SKILL_WEAPONS = SKILL_TRAINED,
+		SKILL_HAULING = SKILL_TRAINED
 	)
 
-	max_skill = list(   SKILL_COMBAT      = SKILL_MAX,
-	                    SKILL_WEAPONS     = SKILL_MAX,
-	                    SKILL_FORENSICS   = SKILL_EXPERIENCED)
+	max_skill = list(
+		SKILL_COMBAT = SKILL_MAX,
+		SKILL_WEAPONS = SKILL_MAX
+	)
 
 	access = list(
 		access_security, access_brig, access_maint_tunnels,

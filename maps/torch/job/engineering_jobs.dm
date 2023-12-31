@@ -21,20 +21,24 @@
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e8,
 	)
-	skill_points = 26
-	min_skill = list( // 22 points
-		SKILL_COMPUTER = SKILL_TRAINED, // 2 points
-		SKILL_EVA = SKILL_TRAINED, // 2 points
-		SKILL_CONSTRUCTION = SKILL_TRAINED, // 2 points
-		SKILL_ELECTRICAL = SKILL_TRAINED, // 4 points
-		SKILL_ATMOS = SKILL_TRAINED, // 4 points
-		SKILL_ENGINES = SKILL_TRAINED // 8 points
+	skill_points = 3
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_COMPUTER = SKILL_TRAINED,
+		SKILL_EVA = SKILL_TRAINED,
+		SKILL_CONSTRUCTION = SKILL_EXPERIENCED,
+		SKILL_ELECTRICAL = SKILL_EXPERIENCED,
+		SKILL_ATMOS = SKILL_EXPERIENCED,
+		SKILL_ENGINES = SKILL_TRAINED,
+		SKILL_MECH = HAS_PERK
 	)
 
-	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
-						SKILL_ELECTRICAL   = SKILL_MAX,
-						SKILL_ATMOS        = SKILL_MAX,
-						SKILL_ENGINES      = SKILL_MAX)
+	max_skill = list(
+		SKILL_CONSTRUCTION = SKILL_MAX,
+		SKILL_ELECTRICAL = SKILL_MAX,
+		SKILL_ATMOS = SKILL_MAX,
+		SKILL_ENGINES = SKILL_MAX
+	)
 
 	access = list(
 		access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
@@ -82,20 +86,23 @@
 		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/civ/contractor
 	)
-	skill_points = 26
-	min_skill = list( // 12 points
-		SKILL_COMPUTER = SKILL_BASIC, // 1 point
-		SKILL_EVA = SKILL_BASIC, // 1 point
-		SKILL_CONSTRUCTION = SKILL_TRAINED, // 2 points
-		SKILL_ELECTRICAL = SKILL_BASIC, // 2 points
-		SKILL_ATMOS = SKILL_BASIC, // 2 points
-		SKILL_ENGINES = SKILL_BASIC // 4 points
+	skill_points = 5
+	min_skill = list(
+		SKILL_COMPUTER = SKILL_BASIC,
+		SKILL_EVA = SKILL_TRAINED,
+		SKILL_CONSTRUCTION = SKILL_TRAINED,
+		SKILL_ELECTRICAL = SKILL_TRAINED,
+		SKILL_ATMOS = SKILL_TRAINED,
+		SKILL_ENGINES = SKILL_TRAINED,
+		SKILL_HAULING = SKILL_TRAINED
 	)
 
-	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
-	                    SKILL_ELECTRICAL   = SKILL_MAX,
-	                    SKILL_ATMOS        = SKILL_MAX,
-	                    SKILL_ENGINES      = SKILL_MAX)
+	max_skill = list(
+		SKILL_CONSTRUCTION = SKILL_MAX,
+		SKILL_ELECTRICAL = SKILL_MAX,
+		SKILL_ATMOS = SKILL_MAX,
+		SKILL_ENGINES = SKILL_MAX
+	)
 
 	access = list(
 		access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
@@ -135,21 +142,23 @@
 		/datum/mil_rank/fleet/e2
 	)
 
-	skill_points = 10
-	min_skill = list( // 23 points
-		SKILL_COMPUTER = SKILL_BASIC, // 1 point
-		SKILL_HAULING = SKILL_TRAINED, // 2 points
-		SKILL_EVA = SKILL_TRAINED, // 2 points
-		SKILL_CONSTRUCTION = SKILL_TRAINED, // 2 points
-		SKILL_ELECTRICAL = SKILL_TRAINED, // 4 points
-		SKILL_ATMOS = SKILL_TRAINED, // 4 points
-		SKILL_ENGINES = SKILL_TRAINED // 8 points
+	skill_points = 2
+	min_skill = list(
+		SKILL_EVA = SKILL_TRAINED,
+		SKILL_CONSTRUCTION = SKILL_TRAINED,
+		SKILL_ELECTRICAL = SKILL_TRAINED,
+		SKILL_ATMOS = SKILL_TRAINED,
+		SKILL_ENGINES = SKILL_EXPERIENCED,
+		SKILL_HAULING = SKILL_TRAINED,
+		SKILL_MECH = HAS_PERK
 	)
 
-	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
-	                    SKILL_ELECTRICAL   = SKILL_MAX,
-	                    SKILL_ATMOS        = SKILL_MAX,
-	                    SKILL_ENGINES      = SKILL_MAX)
+	max_skill = list(
+		SKILL_CONSTRUCTION = SKILL_MAX,
+		SKILL_ELECTRICAL = SKILL_MAX,
+		SKILL_ATMOS = SKILL_MAX,
+		SKILL_ENGINES = SKILL_MAX
+	)
 
 	access = list(
 		access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
@@ -166,7 +175,7 @@
 							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/engineer_trainee/get_description_blurb()
-	return "You are an Engineer Trainee. You are learning how to operate the various onboard engineering systems from senior engineering staff. You are subordinate to all of the other engineers aboard. The role is only for players new to the engineering system and department."
+	return "You are an Engineer Trainee. This role is only for players new to the engineering system and department. You are learning how to operate the various onboard engineering systems from senior engineering staff. You are subordinate to all of the other engineers aboard."
 
 /datum/job/roboticist
 	title = "Roboticist"
@@ -193,24 +202,22 @@
 		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/civ/contractor
 	)
-	skill_points = 26
-	min_skill = list( // 22 points
-		SKILL_COMPUTER = SKILL_TRAINED, // 2 points
-		SKILL_DEVICES = SKILL_EXPERIENCED, // 4 points
-		SKILL_EVA = SKILL_TRAINED, // 2 points
-		SKILL_ANATOMY = SKILL_TRAINED, // 8 points
-		SKILL_CONSTRUCTION = SKILL_BASIC, // 2 points
-		SKILL_ELECTRICAL = SKILL_BASIC, // 2 points
-		SKILL_MECH = HAS_PERK // 2 points
+	skill_points = 3
+	min_skill = list(
+		SKILL_COMPUTER = SKILL_TRAINED,
+		SKILL_DEVICES = SKILL_EXPERIENCED,
+		SKILL_ANATOMY = SKILL_TRAINED,
+		SKILL_MEDICAL = SKILL_BASIC,
+		SKILL_CONSTRUCTION = SKILL_BASIC,
+		SKILL_ELECTRICAL = SKILL_BASIC,
+		SKILL_MECH = HAS_PERK
 	)
 
-	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
-	                    SKILL_ELECTRICAL   = SKILL_MAX,
-	                    SKILL_ATMOS        = SKILL_EXPERIENCED,
-	                    SKILL_ENGINES      = SKILL_EXPERIENCED,
-	                    SKILL_DEVICES      = SKILL_MAX,
-	                    SKILL_MEDICAL      = SKILL_EXPERIENCED,
-	                    SKILL_ANATOMY      = SKILL_EXPERIENCED)
+	max_skill = list(
+		SKILL_DEVICES = SKILL_MAX,
+		SKILL_MEDICAL = SKILL_EXPERIENCED,
+		SKILL_ANATOMY = SKILL_EXPERIENCED
+	)
 
 	access = list(
 		access_robotics, access_engine, access_solgov_crew, access_network, access_radio_eng

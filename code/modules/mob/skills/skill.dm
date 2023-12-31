@@ -12,16 +12,15 @@ GLOBAL_LIST_EMPTY(skills)
 							"Trained"			= "Trained Description",
 							"Experienced"		= "Experienced Description",
 							"Master"		= "Professional Description")
-	var/difficulty = SKILL_AVERAGE         //Used to compute how expensive the skill is
 	var/default_max = SKILL_TRAINED          //Makes the skill capped at this value in selection unless overriden at job level.
 	var/prerequisites                      // A list of skill prerequisites, if needed.
 
 /singleton/hierarchy/skill/proc/get_cost(level)
 	switch(level)
 		if(SKILL_BASIC, SKILL_TRAINED)
-			return difficulty
+			return 1
 		if(SKILL_EXPERIENCED, SKILL_MASTER)
-			return 2*difficulty
+			return 2
 		else
 			return 0
 
@@ -42,19 +41,16 @@ GLOBAL_LIST_EMPTY(skills)
 /singleton/hierarchy/skill/organizational
 	name = "Organizational"
 	ID	 = "1"
-	difficulty = SKILL_EASY
 	default_max = SKILL_MAX
 
 /singleton/hierarchy/skill/general
 	name = "General"
 	ID	 = "2"
-	difficulty = SKILL_EASY
 	default_max = SKILL_MAX
 
 /singleton/hierarchy/skill/service
 	name = "Service"
 	ID	 = "service"
-	difficulty = SKILL_EASY
 	default_max = SKILL_MAX
 
 /singleton/hierarchy/skill/security
@@ -72,7 +68,6 @@ GLOBAL_LIST_EMPTY(skills)
 /singleton/hierarchy/skill/medical
 	name = "Medical"
 	ID	 = "medical"
-	difficulty = SKILL_HARD
 
 // ONLY SKILL DEFINITIONS BELOW THIS LINE
 // Category: Organizational
@@ -115,9 +110,7 @@ GLOBAL_LIST_EMPTY(skills)
 	desc = "Allows you to operate exosuits well."
 	levels = list("Untrained" = "You are unfamiliar with exosuit controls, and if you attempt to use them you are liable to make mistakes.",
 		"Trained" = "You are proficient in exosuit operation and safety, and can use them without penalties.")
-	prerequisites = list(SKILL_EVA = SKILL_TRAINED)
 	default_max = SKILL_BASIC
-	difficulty = SKILL_AVERAGE
 
 /singleton/hierarchy/skill/general/pilot
 	ID = "pilot"
@@ -128,7 +121,6 @@ GLOBAL_LIST_EMPTY(skills)
 						"Trained"			= "You are a trained pilot, and can safely operate anything from a small craft to a corvette. You can spend extended periods of time piloting a spacecraft, and you're versed in the abilities of different ships, and what makes them function. You can do basic maintenance on smaller vessels, and perform most basic maneuvers. You can use armed spacecraft. You can make basic calculations relating to piloting. Skills of this level are typical for newer pilots. You have probably received formal piloting training.<br>- You can operate large ships without error.<br>- You can mostly avoid meteors on slow speed using any shuttlecrafts.",
 						"Experienced"		= "You are an experienced pilot, and can safely take the helm of many types of craft. You could probably live in a spacecraft, and you're very well versed in essentially everything related to space-faring vessels. Not only can you fly a ship, but you can perform difficult maneuvers, and make most calculations related to piloting a spacecraft. You can maintain a ship. Skills of this level are typical for very experienced pilots. You have received formal piloting training.<br>- You can somewhat avoid meteors on normal speed while using tiny shuttlecrafts.",
 						"Master"		= "Not only are you an exceptional pilot, but you have mastered peripheral functions such as stellar navigation and bluespace jump plotting. You have experience performing complex maneuvers, managing squadrons of small craft, and operating in hostile environments.<br>- You can mostly avoid meteors on normal speed using any shuttlecrafts.<br>- Less meteors will hit the ship while passing through meteor fields.")
-	difficulty = SKILL_AVERAGE
 	default_max = SKILL_TRAINED
 
 /singleton/hierarchy/skill/general/hauling
@@ -185,16 +177,6 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "You're good at hand-to-hand combat. You've trained explicitly in a martial art or as a close combatant as part of a military or police unit. You can use weaponry competently and you can think strategically and quickly in a melee. You're in good shape and you spend time training.",
 						"Master"		= "You specialize in hand-to-hand combat. You're well-trained in a practical martial art, and in good shape. You spend a lot of time practicing. You can take on just about anyone, use just about any weapon, and usually come out on top. You may be a professional athlete or special forces member.")
 
-/singleton/hierarchy/skill/security/combat/get_cost(level)
-	switch(level)
-		if(SKILL_BASIC)
-			return difficulty
-		if(SKILL_TRAINED, SKILL_EXPERIENCED)
-			return 2*difficulty
-		if(SKILL_MASTER)
-			return 4*difficulty
-		else
-			return 0
 
 /singleton/hierarchy/skill/security/weapons
 	ID = "weapons"
@@ -206,18 +188,6 @@ GLOBAL_LIST_EMPTY(skills)
 						"Experienced"		= "You've used firearms and other ranged weapons in high-stress situations, and your skills have become automatic. Your aim is good.<br>-You will automatically unsafety a gun when firing it on harm intent.<br>-You can perform tactical and speed reloads. The time taken decreases with level.",
 						"Master"		= "You are an exceptional shot with a variety of weapons, from simple to exotic. You use a weapon as naturally as though it were a part of your own body. You may be a sniper or special forces operator of some kind.<br>- You get extra accuracy for sniper rifles.<br>- You automatically eject shells from bolt-action firearms.")
 
-/singleton/hierarchy/skill/security/weapons/get_cost(level)
-	switch(level)
-		if(SKILL_BASIC)
-			return difficulty
-		if(SKILL_TRAINED)
-			return 2*difficulty
-		if(SKILL_EXPERIENCED)
-			return 3*difficulty
-		if(SKILL_MASTER)
-			return 4*difficulty
-		else
-			return 0
 
 /singleton/hierarchy/skill/security/forensics
 	ID = "forensics"
@@ -230,15 +200,6 @@ GLOBAL_LIST_EMPTY(skills)
 						"Master"		= "You're a big name in forensic science. You might be an investigator who cracked a famous case, or you published papers on new methods of forensics. Either way, if there's a forensic trail, you will find it, period.<br>- You can notice traces of wiped off blood.")
 
 
-/singleton/hierarchy/skill/security/forensics/get_cost(level)
-	switch(level)
-		if(SKILL_BASIC, SKILL_TRAINED, SKILL_EXPERIENCED)
-			return difficulty * 2
-		if(SKILL_MASTER)
-			return 3 * difficulty
-		else
-			return 0
-
 // Category: Engineering
 
 /singleton/hierarchy/skill/engineering/construction
@@ -250,7 +211,6 @@ GLOBAL_LIST_EMPTY(skills)
 						"Trained"			= "You can build, repair, or dismantle most things, but will occasionally make mistakes and have things not come out the way you expected.<br>- You can construct items from Bronze, Gold, Osmium, Plasteel, Platinum, Reinforced Glass, Sandstone, Silver, Deuterium, Metallic Hydrogen, Phoron, Phoron Glass, Tritium, and Uranium.<br>- You can construct furnitures.<br>- You can construct simple objects such as light fixtures, crude weapons, and wall-mounted frames.<br>- You can safely use the plasmacutter to deconstruct structures.<br>- You can examine machines to learn more about them.<br>- You can examine machine circuit boards to see a list of parts needed to build that machine.",
 						"Experienced"		= "You know how to seal a breach, rebuild broken piping, and repair major damage. You know the basics of structural engineering.<br>- You can construct items from Osmium-Carbide Plasteel, Titanium, Diamond and make complex objects such as machine and weapon frames.",
 						"Master"		= "You are a construction worker or engineer. You could pretty much rebuild the installation or ship from the ground up, given supplies, and you're efficient and skilled at repairing damage.")
-	difficulty = SKILL_EASY
 
 /singleton/hierarchy/skill/engineering/electrical
 	ID = "electrical"
@@ -281,7 +241,6 @@ GLOBAL_LIST_EMPTY(skills)
 						"Trained"			= "You can set up the engine, and you probably won't botch it up too badly. You know how to protect yourself from radiation in the engine room. You can read the engine monitors and keep the engine going. An engine malfunction may stump you, but you can probably work out how to fix it... let's just hope you do so quickly enough to prevent serious damage.<br>- You can fully read the SM monitor readings.",
 						"Experienced"		= "You have years of experience with engines, and can set them up quickly and reliably. You're familiar with engine types other than the one you work with.<br>- You can examine the SM directly for its integrity.",
 						"Master"		= "Your engine is your baby and you know every minute detail of its workings. You can optimize the engine and you probably have your own favorite custom setup. You could build an engine from the ground up. When things go wrong, you know exactly what has happened and how to fix the problem. You can safely handle singularities and supermatter.<br>- You can examine the SM directly for an approximate number of its EER.")
-	difficulty = SKILL_HARD
 
 // Category: Research
 

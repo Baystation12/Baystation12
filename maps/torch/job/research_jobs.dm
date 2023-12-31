@@ -29,20 +29,24 @@
 		access_petrov_maint, access_torch_fax, access_radio_sci, access_radio_exp, access_research_storage
 	)
 
-	skill_points = 26
-	min_skill = list( // 16 points
-		SKILL_BUREAUCRACY = SKILL_BASIC, // 1 point
-		SKILL_COMPUTER = SKILL_BASIC, // 1 point
-		SKILL_FINANCE = SKILL_BASIC, // 1 point
-		SKILL_BOTANY = SKILL_BASIC, // 1 point
-		SKILL_ANATOMY = SKILL_BASIC, // 4 points
-		SKILL_DEVICES = SKILL_TRAINED, // 4 points
-		SKILL_SCIENCE = SKILL_TRAINED // 4 points
+	skill_points = 3
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_COMPUTER = SKILL_BASIC,
+		SKILL_BOTANY = SKILL_TRAINED,
+		SKILL_ANATOMY = SKILL_BASIC,
+		SKILL_DEVICES = SKILL_TRAINED,
+		SKILL_SCIENCE = SKILL_EXPERIENCED,
+		SKILL_EVA = SKILL_BASIC,
+		SKILL_PILOT = SKILL_BASIC
 	)
 
-	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
-	                    SKILL_DEVICES     = SKILL_MAX,
-	                    SKILL_SCIENCE     = SKILL_MAX)
+	max_skill = list(
+		SKILL_ANATOMY = SKILL_EXPERIENCED,
+		SKILL_DEVICES = SKILL_MAX,
+		SKILL_SCIENCE = SKILL_MAX
+	)
+
 	possible_goals = list(/datum/goal/achievement/notslimefodder)
 
 /datum/job/scientist
@@ -61,17 +65,23 @@
 		"Xenobiologist",
 		"Xenobotanist"
 	)
-	skill_points = 26
-	min_skill = list( // 6 points
-		SKILL_BUREAUCRACY = SKILL_BASIC, // 1 point
-		SKILL_COMPUTER = SKILL_BASIC, // 1 point
-		SKILL_DEVICES = SKILL_BASIC, // 2 points
-		SKILL_SCIENCE = SKILL_TRAINED // 2 points
+
+	skill_points = 3
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_BASIC,
+		SKILL_BOTANY = SKILL_TRAINED,
+		SKILL_ANATOMY = SKILL_BASIC,
+		SKILL_DEVICES = SKILL_TRAINED,
+		SKILL_SCIENCE = SKILL_TRAINED,
+		SKILL_EVA = SKILL_BASIC,
+		SKILL_PILOT = SKILL_BASIC
 	)
 
-	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
-	                    SKILL_DEVICES     = SKILL_MAX,
-	                    SKILL_SCIENCE     = SKILL_MAX)
+	max_skill = list(
+		SKILL_ANATOMY = SKILL_EXPERIENCED,
+		SKILL_DEVICES = SKILL_MAX,
+		SKILL_SCIENCE = SKILL_MAX
+	)
 
 	outfit_type = /singleton/hierarchy/outfit/job/torch/crew/research/scientist
 	allowed_branches = list(
@@ -123,9 +133,22 @@
 		/datum/mil_rank/civ/contractor = /singleton/hierarchy/outfit/job/torch/passenger/research/assist,
 		/datum/mil_rank/sol/scientist = /singleton/hierarchy/outfit/job/torch/passenger/research/assist/solgov
 	)
-	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
-	                    SKILL_DEVICES     = SKILL_MAX,
-	                    SKILL_SCIENCE     = SKILL_MAX)
+
+	skill_points = 5
+	min_skill = list(
+		SKILL_BOTANY = SKILL_TRAINED,
+		SKILL_ANATOMY = SKILL_BASIC,
+		SKILL_DEVICES = SKILL_TRAINED,
+		SKILL_SCIENCE = SKILL_BASIC,
+		SKILL_EVA = SKILL_BASIC,
+		SKILL_HAULING = SKILL_TRAINED
+	)
+
+	max_skill = list(
+		SKILL_ANATOMY = SKILL_MAX,
+		SKILL_DEVICES = SKILL_MAX,
+		SKILL_SCIENCE = SKILL_MAX
+	)
 
 	access = list(
 		access_tox, access_tox_storage, access_research, access_petrov,

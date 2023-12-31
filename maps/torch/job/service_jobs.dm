@@ -19,12 +19,15 @@
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e6
 	)
-	min_skill = list( // 9 points
-		SKILL_BUREAUCRACY = SKILL_TRAINED, // 2 points
-		SKILL_COOKING = SKILL_TRAINED, // 2 points
-		SKILL_BOTANY = SKILL_BASIC, // 1 point
-		SKILL_CHEMISTRY = SKILL_BASIC // 4 points
+
+	skill_points = 5
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_COOKING = SKILL_TRAINED,
+		SKILL_BOTANY = SKILL_TRAINED,
+		SKILL_CHEMISTRY = SKILL_BASIC
 	)
+
 	access = list(
 		access_bridge,
 		access_torch_fax,
@@ -61,8 +64,10 @@
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/ec/o1)
-	min_skill = list( // 1 point
-		SKILL_BUREAUCRACY = SKILL_BASIC // 1 point
+
+	skill_points = 5
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_BASIC
 	)
 
 	access = list(
@@ -96,8 +101,13 @@
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/fleet/e4
 	)
-	min_skill = list( // 1 point
-		SKILL_HAULING = SKILL_BASIC // 1 point
+
+	skill_points = 5
+	min_skill = list(
+		SKILL_HAULING = SKILL_TRAINED,
+		SKILL_DEVICES = SKILL_BASIC,
+		SKILL_CONSTRUCTION = SKILL_BASIC,
+		SKILL_ELECTRICAL = SKILL_BASIC
 	)
 
 	access = list(
@@ -135,11 +145,14 @@
 		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/fleet/e5
 	)
-	min_skill = list( // 7 points
-		SKILL_BOTANY = SKILL_BASIC, // 1 point
-		SKILL_CHEMISTRY = SKILL_BASIC, // 4 points
-		SKILL_COOKING = SKILL_TRAINED // 2 points
+
+	skill_points = 5
+	min_skill = list(
+		SKILL_BOTANY = SKILL_TRAINED,
+		SKILL_CHEMISTRY = SKILL_BASIC,
+		SKILL_COOKING = SKILL_TRAINED
 	)
+
 	access = list(
 		access_commissary,
 		access_hydroponics,
@@ -169,6 +182,12 @@
 		/datum/mil_rank/fleet/e2,
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/fleet/e4
+	)
+
+	skill_points = 5
+	min_skill = list(
+		SKILL_HAULING = SKILL_TRAINED,
+		SKILL_EVA = SKILL_BASIC
 	)
 
 	access = list(

@@ -12,15 +12,20 @@
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o6
 	)
-	skill_points = 36
-	min_skill = list( // 9 points
-		SKILL_BUREAUCRACY = SKILL_BASIC, // 1 point
-		SKILL_SCIENCE = SKILL_TRAINED, // 4 point
-		SKILL_PILOT = SKILL_TRAINED // 4 points
+	skill_points = 5
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_EXPERIENCED,
+		SKILL_FINANCE = SKILL_TRAINED,
+		SKILL_SCIENCE = SKILL_EXPERIENCED,
+		SKILL_PILOT = SKILL_TRAINED,
+		SKILL_WEAPONS = SKILL_BASIC,
+		SKILL_EVA = SKILL_BASIC
 	)
 
-	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
-	                    SKILL_SCIENCE     = SKILL_MAX)
+	max_skill = list(
+		SKILL_PILOT = SKILL_MAX,
+		SKILL_SCIENCE = SKILL_MAX
+	)
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/card_mod,
@@ -54,15 +59,20 @@
 		/datum/mil_rank/fleet/o4,
 		/datum/mil_rank/fleet/o5
 	)
-	skill_points = 36
-	min_skill = list( // 5 points
-		SKILL_BUREAUCRACY = SKILL_TRAINED, // 2 points
-		SKILL_COMPUTER = SKILL_BASIC, // 1 point
-		SKILL_PILOT = SKILL_BASIC // 2 points
+	skill_points = 3
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_FINANCE = SKILL_TRAINED,
+		SKILL_COMPUTER = SKILL_BASIC,
+		SKILL_PILOT = SKILL_TRAINED,
+		SKILL_WEAPONS = SKILL_BASIC,
+		SKILL_EVA = SKILL_BASIC
 	)
 
-	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
-	                    SKILL_SCIENCE     = SKILL_MAX)
+	max_skill = list(
+		SKILL_PILOT = SKILL_MAX,
+		SKILL_SCIENCE = SKILL_EXPERIENCED
+	)
 
 	access = list(
 		access_security, access_brig, access_armory, access_forensics_lockers, access_heads, access_medical, access_morgue, access_tox, access_tox_storage,
@@ -103,20 +113,22 @@
 		/datum/mil_rank/ec/o3
 	)
 
-	skill_points = 36
-	min_skill = list( // 16 points
-		SKILL_BUREAUCRACY = SKILL_TRAINED, // 2 points
-		SKILL_COMPUTER = SKILL_BASIC, // 1 point
-		SKILL_FINANCE = SKILL_TRAINED, // 2 points
-		SKILL_BOTANY = SKILL_BASIC, // 1 point
-		SKILL_ANATOMY = SKILL_BASIC, // 4 points
-		SKILL_DEVICES = SKILL_BASIC, // 2 points
-		SKILL_SCIENCE = SKILL_TRAINED // 4 points
+	skill_points = 3
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_COMPUTER = SKILL_TRAINED,
+		SKILL_BOTANY = SKILL_TRAINED,
+		SKILL_ANATOMY = SKILL_BASIC,
+		SKILL_DEVICES = SKILL_TRAINED,
+		SKILL_SCIENCE = SKILL_MASTER,
+		SKILL_EVA = SKILL_BASIC
 	)
 
-	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
-	                    SKILL_DEVICES     = SKILL_MAX,
-	                    SKILL_SCIENCE     = SKILL_MAX)
+	max_skill = list(
+		SKILL_ANATOMY = SKILL_EXPERIENCED,
+		SKILL_DEVICES = SKILL_MAX,
+		SKILL_SCIENCE = SKILL_MAX
+	)
 
 	access = list(
 		access_tox, access_tox_storage, access_emergency_storage, access_teleporter, access_bridge, access_rd,
@@ -154,18 +166,21 @@
 		/datum/mil_rank/fleet/o4,
 		/datum/mil_rank/ec/o3
 	)
-	skill_points = 32
-	min_skill = list( // 41 points
-		SKILL_BUREAUCRACY = SKILL_BASIC, // 1 point
-		SKILL_MEDICAL = SKILL_EXPERIENCED, // 16 points
-		SKILL_ANATOMY = SKILL_EXPERIENCED, // 16 points
-		SKILL_CHEMISTRY = SKILL_BASIC, // 4 points
-		SKILL_DEVICES = SKILL_TRAINED // 4 points
+	skill_points = 3
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_MEDICAL = SKILL_EXPERIENCED,
+		SKILL_ANATOMY = SKILL_EXPERIENCED,
+		SKILL_CHEMISTRY = SKILL_TRAINED,
+		SKILL_DEVICES = SKILL_TRAINED,
+		SKILL_EVA = SKILL_BASIC
 	)
 
-	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
-	                    SKILL_ANATOMY     = SKILL_MAX,
-	                    SKILL_CHEMISTRY   = SKILL_MAX)
+	max_skill = list(
+		SKILL_MEDICAL = SKILL_MAX,
+		SKILL_ANATOMY = SKILL_MAX,
+		SKILL_CHEMISTRY = SKILL_MAX
+	)
 
 	access = list(
 		access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
@@ -201,21 +216,23 @@
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o3
 	)
-	skill_points = 36
+	skill_points = 3
 	min_skill = list( // 31 points
-		SKILL_BUREAUCRACY  = SKILL_BASIC, // 1 point
-		SKILL_COMPUTER = SKILL_TRAINED, // 2 points
+		SKILL_BUREAUCRACY = SKILL_TRAINED, // 1 point
+		SKILL_COMPUTER = SKILL_EXPERIENCED, // 2 points
 		SKILL_EVA = SKILL_TRAINED, // 2 points
-		SKILL_CONSTRUCTION = SKILL_TRAINED, // 2 points
-		SKILL_ELECTRICAL = SKILL_TRAINED, // 4 points
-		SKILL_ATMOS = SKILL_TRAINED, // 4 points
+		SKILL_CONSTRUCTION = SKILL_EXPERIENCED, // 2 points
+		SKILL_ELECTRICAL = SKILL_EXPERIENCED, // 4 points
+		SKILL_ATMOS = SKILL_EXPERIENCED, // 4 points
 		SKILL_ENGINES = SKILL_EXPERIENCED // 16 points
 	)
 
-	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
-	                    SKILL_ELECTRICAL   = SKILL_MAX,
-	                    SKILL_ATMOS        = SKILL_MAX,
-	                    SKILL_ENGINES      = SKILL_MAX)
+	max_skill = list(
+		SKILL_CONSTRUCTION = SKILL_MAX,
+		SKILL_ELECTRICAL = SKILL_MAX,
+		SKILL_ATMOS = SKILL_MAX,
+		SKILL_ENGINES = SKILL_MAX,
+	)
 
 	access = list(
 		access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
@@ -257,18 +274,21 @@
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o3
 	)
-	skill_points = 34
-	min_skill = list( // 15 points
-		SKILL_BUREAUCRACY = SKILL_TRAINED, // 2 points
-		SKILL_EVA = SKILL_BASIC, // 1 point
-		SKILL_COMBAT = SKILL_BASIC, // 2 points
-		SKILL_WEAPONS = SKILL_TRAINED, // 6 points
-		SKILL_FORENSICS = SKILL_BASIC // 4 points
+
+	skill_points = 3
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_EVA = SKILL_TRAINED,
+		SKILL_COMBAT = SKILL_TRAINED,
+		SKILL_WEAPONS = SKILL_EXPERIENCED,
+		SKILL_FORENSICS = SKILL_TRAINED
 	)
 
-	max_skill = list(   SKILL_COMBAT      = SKILL_MAX,
-	                    SKILL_WEAPONS     = SKILL_MAX,
-	                    SKILL_FORENSICS   = SKILL_MAX)
+	max_skill = list(
+		SKILL_COMBAT = SKILL_MAX,
+		SKILL_WEAPONS = SKILL_MAX,
+		SKILL_FORENSICS = SKILL_MAX
+	)
 
 	access = list(
 		access_security, access_brig, access_armory, access_forensics_lockers,
@@ -300,10 +320,10 @@
 	outfit_type = /singleton/hierarchy/outfit/job/torch/crew/representative
 	allowed_branches = list(/datum/mil_branch/solgov)
 	allowed_ranks = list(/datum/mil_rank/sol/gov)
-	skill_points = 26
+	skill_points = 5
 	min_skill = list( // 5 points
 		SKILL_BUREAUCRACY = SKILL_EXPERIENCED, // 4 points
-		SKILL_FINANCE = SKILL_BASIC // 1 point
+		SKILL_FINANCE = SKILL_TRAINED // 1 point
 	)
 	minimum_character_age = list(SPECIES_HUMAN = 27)
 
@@ -339,20 +359,13 @@
 		/datum/mil_rank/fleet/e9_alt1,
 		/datum/mil_rank/fleet/e9
 	)
-	skill_points = 34
+	skill_points = 3
 	min_skill = list( // 5 points
-		SKILL_EVA = SKILL_BASIC, // 1 point
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_HAULING = SKILL_TRAINED,
 		SKILL_COMBAT = SKILL_BASIC, // 2 points
 		SKILL_WEAPONS = SKILL_BASIC // 2 points
 	)
-
-	max_skill = list(	SKILL_PILOT        = SKILL_TRAINED,
-	                    SKILL_COMBAT       = SKILL_EXPERIENCED,
-	                    SKILL_WEAPONS      = SKILL_EXPERIENCED,
-	                    SKILL_CONSTRUCTION = SKILL_MAX,
-	                    SKILL_ELECTRICAL   = SKILL_MAX,
-	                    SKILL_ENGINES      = SKILL_MAX,
-	                    SKILL_ATMOS        = SKILL_MAX)
 
 
 	access = list(
@@ -390,13 +403,15 @@
 		/datum/mil_rank/ec/o1,
 		/datum/mil_rank/fleet/o1
 	)
-	skill_points = 26
-	min_skill = list( // 5 points
-		SKILL_BUREAUCRACY = SKILL_BASIC, // 1 point
-		SKILL_PILOT = SKILL_TRAINED // 4 points
+	skill_points = 3
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_PILOT = SKILL_TRAINED,
+		SKILL_EVA = SKILL_TRAINED,
+		SKILL_SCIENCE = SKILL_TRAINED
 	)
 
-	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
+	max_skill = list(SKILL_PILOT = SKILL_MAX)
 
 
 	access = list(
@@ -419,3 +434,40 @@
 
 /datum/job/bridgeofficer/get_description_blurb()
 	return "You are a Bridge Officer. You are a very junior officer. You do not give orders of your own. You are subordinate to all of command. You handle matters on the bridge and report directly to the CO and XO. You take the Torch's helm and pilot the Aquila if needed. You monitor bridge computer programs and communications and report relevant information to command."
+
+/datum/job/liaison
+	title = "Workplace Liaison"
+	department = "Support"
+	department_flag = SPT
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "Corporate Regulations, the Union Charter, and the Expeditionary Corps Organisation"
+	selection_color = "#2f2f7f"
+	economic_power = 18
+	minimal_player_age = 0
+	minimum_character_age = list(SPECIES_HUMAN = 25)
+	alt_titles = list(
+		"Corporate Liaison",
+		"Union Representative",
+		"Corporate Representative",
+		"Corporate Executive"
+		)
+	outfit_type = /singleton/hierarchy/outfit/job/torch/passenger/workplace_liaison
+	allowed_branches = list(/datum/mil_branch/civilian)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	skill_points = 5
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_FINANCE = SKILL_EXPERIENCED
+	)
+
+	access = list(
+		access_liaison, access_bridge, access_solgov_crew,
+		access_nanotrasen, access_commissary, access_torch_fax,
+		access_radio_comm, access_radio_serv
+	)
+
+	software_on_spawn = list(/datum/computer_file/program/reports)
+
+/datum/job/liaison/get_description_blurb()
+	return "You are the Workplace Liaison. You are a civilian employee of EXO, the Expeditionary Corps Organisation, the government-owned corporate conglomerate that partially funds the Torch. You are on board the vessel to promote corporate interests and protect the rights of the contractors on board as their union leader. You are not internal affairs. You advise command on corporate and union matters and contractors on their rights and obligations. Maximise profit. Be the shady corporate shill you always wanted to be."

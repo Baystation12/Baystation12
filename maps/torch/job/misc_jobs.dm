@@ -50,6 +50,12 @@ Civilian
 	min_goals = 2
 	max_goals = 7
 
+	skill_points = 7
+	max_skill = list(
+		SKILL_COMBAT = SKILL_TRAINED,
+		SKILL_WEAPONS = SKILL_TRAINED
+	)
+
 /datum/job/merchant
 	title = "Merchant"
 	department = "Civilian"
@@ -73,12 +79,18 @@ Civilian
 	latejoin_at_spawnpoints = 1
 	access = list(access_merchant)
 	announced = FALSE
-	skill_points = 24
-	min_skill = list( // 4 points
-		SKILL_FINANCE = SKILL_TRAINED, // 2 points
-		SKILL_PILOT = SKILL_BASIC // 2 points
+
+	skill_points = 5
+	min_skill = list(
+		SKILL_FINANCE = SKILL_EXPERIENCED,
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_DEVICES = SKILL_TRAINED,
+		SKILL_CONSTRUCTION = SKILL_TRAINED,
+		SKILL_ELECTRICAL = SKILL_BASIC,
+		SKILL_ATMOS = SKILL_BASIC,
+		SKILL_PILOT = SKILL_BASIC
 	)
 
-	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
+	max_skill = list(SKILL_PILOT = SKILL_MAX)
 	required_language = null
 	give_psionic_implant_on_join = FALSE

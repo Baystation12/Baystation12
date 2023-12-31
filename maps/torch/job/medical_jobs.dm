@@ -24,18 +24,20 @@
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/civ/contractor
 	)
-	skill_points = 26
-	min_skill = list( // 41 points
-		SKILL_BUREAUCRACY = SKILL_BASIC, // 1 point
-		SKILL_MEDICAL = SKILL_EXPERIENCED, // 16 points
-		SKILL_ANATOMY = SKILL_EXPERIENCED, // 16 points
-		SKILL_CHEMISTRY = SKILL_BASIC, // 4 points
-		SKILL_DEVICES = SKILL_TRAINED // 4 points
+	skill_points = 3
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_BASIC,
+		SKILL_MEDICAL = SKILL_EXPERIENCED,
+		SKILL_ANATOMY = SKILL_EXPERIENCED,
+		SKILL_CHEMISTRY = SKILL_TRAINED,
+		SKILL_DEVICES = SKILL_BASIC
 	)
 
-	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
-	                    SKILL_ANATOMY     = SKILL_MAX,
-	                    SKILL_CHEMISTRY   = SKILL_MAX)
+	max_skill = list(
+		SKILL_MEDICAL = SKILL_MAX,
+		SKILL_ANATOMY = SKILL_MAX,
+		SKILL_CHEMISTRY = SKILL_EXPERIENCED
+	)
 
 	access = list(
 		access_medical, access_morgue, access_virology, access_maint_tunnels, access_emergency_storage,
@@ -69,18 +71,21 @@
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/civ/contractor
 	)
-	skill_points = 22
-	min_skill = list( // 41 points
-		SKILL_BUREAUCRACY = SKILL_BASIC, // 1 point
-		SKILL_MEDICAL = SKILL_EXPERIENCED, // 16 points
-		SKILL_ANATOMY = SKILL_EXPERIENCED, // 16 points
-		SKILL_CHEMISTRY = SKILL_BASIC, // 4 points
-		SKILL_DEVICES = SKILL_TRAINED // 4 points
+
+	skill_points = 0
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_BASIC,
+		SKILL_MEDICAL = SKILL_EXPERIENCED,
+		SKILL_ANATOMY = SKILL_EXPERIENCED,
+		SKILL_CHEMISTRY = SKILL_TRAINED,
+		SKILL_DEVICES = SKILL_TRAINED
 	)
 
-	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
-	                    SKILL_ANATOMY     = SKILL_MAX,
-	                    SKILL_CHEMISTRY   = SKILL_MAX)
+	max_skill = list(
+		SKILL_MEDICAL = SKILL_MAX,
+		SKILL_ANATOMY = SKILL_MAX,
+		SKILL_CHEMISTRY = SKILL_EXPERIENCED
+	)
 
 	access = list(
 		access_medical, access_morgue, access_virology, access_maint_tunnels, access_emergency_storage,
@@ -90,6 +95,10 @@
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
+
+/datum/job/junior_doctor/get_description_blurb()
+	return "You are a Medical Resident. This role is only for players new to the medical system and department. You are learning how to perform surgery, prepare meds, and prioritize patients. You are subordinate to all of the medical doctors aboard."
+
 
 /datum/job/doctor
 	title = "Medical Technician"
@@ -118,15 +127,20 @@
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/civ/contractor
 	)
-	skill_points = 28
-	min_skill = list( // 9 points
-		SKILL_EVA = SKILL_BASIC, // 1 point
-		SKILL_MEDICAL = SKILL_BASIC, // 4 points
-		SKILL_ANATOMY = SKILL_BASIC // 4 points
+
+	skill_points = 5
+	min_skill = list(
+		SKILL_EVA = SKILL_TRAINED,
+		SKILL_MEDICAL = SKILL_TRAINED,
+		SKILL_ANATOMY = SKILL_TRAINED,
+		SKILL_HAULING = SKILL_TRAINED,
+		SKILL_MECH = HAS_PERK
 	)
 
-	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
-	                    SKILL_CHEMISTRY   = SKILL_MAX)
+	max_skill = list(
+		SKILL_MEDICAL = SKILL_MAX,
+		SKILL_ANATOMY = SKILL_MAX
+	)
 
 	access = list(
 		access_medical, access_morgue, access_maint_tunnels,
@@ -161,17 +175,19 @@
 		/datum/mil_rank/fleet/e2
 	)
 
-	skill_points = 10
-	min_skill = list( // 24 points
-		SKILL_EVA = SKILL_TRAINED, // 2 points
-		SKILL_HAULING = SKILL_TRAINED, // 2 points
-		SKILL_MEDICAL = SKILL_EXPERIENCED, // 16 points
-		SKILL_ANATOMY = SKILL_BASIC // 4 points
+	skill_points = 0
+	min_skill = list(
+		SKILL_EVA = SKILL_TRAINED,
+		SKILL_MEDICAL = SKILL_EXPERIENCED,
+		SKILL_ANATOMY = SKILL_EXPERIENCED,
+		SKILL_HAULING = SKILL_TRAINED,
+		SKILL_MECH = HAS_PERK
 	)
 
-	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
-	                    SKILL_ANATOMY     = SKILL_MAX,
-	                    SKILL_CHEMISTRY   = SKILL_MAX)
+	max_skill = list(
+		SKILL_MEDICAL = SKILL_MAX,
+		SKILL_ANATOMY = SKILL_MAX
+	)
 
 	access = list(
 		access_medical, access_morgue, access_maint_tunnels,
@@ -184,7 +200,7 @@
 							 /datum/computer_file/program/camera_monitor)
 
 /datum/job/medical_trainee/get_description_blurb()
-	return "You are a Trainee Medical Technician. You are learning how to treat and recover wounded crew from the more experienced medical personnel aboard. You are subordinate to the rest of the medical team. The role is only for players new to the medical system and department."
+	return "You are a Trainee Medical Technician. This role is only for players new to the medical system and department. You are learning how to treat and recover wounded crew from the more experienced medical personnel aboard. You are subordinate to the rest of the medical team."
 
 /datum/job/chemist
 	title = "Pharmacist"
@@ -204,15 +220,19 @@
 	outfit_type = /singleton/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
-	skill_points = 21
-	min_skill = list( // 12 points
-		SKILL_MEDICAL = SKILL_BASIC, // 4 points
-		SKILL_CHEMISTRY = SKILL_TRAINED // 8 points
+
+	skill_points = 3
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_MEDICAL = SKILL_BASIC,
+		SKILL_CHEMISTRY = SKILL_EXPERIENCED
 	)
 
-	max_skill = list(   SKILL_MEDICAL     = SKILL_BASIC,
-						SKILL_ANATOMY	  = SKILL_BASIC,
-	                    SKILL_CHEMISTRY   = SKILL_MAX)
+	max_skill = list(
+		SKILL_MEDICAL = SKILL_BASIC,
+		SKILL_ANATOMY = SKILL_BASIC,
+		SKILL_CHEMISTRY = SKILL_MAX
+	)
 
 	access = list(
 		access_medical, access_maint_tunnels, access_emergency_storage,
@@ -247,14 +267,13 @@
 		/datum/mil_rank/civ/contractor,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/ec/o1)
+
+	skill_points = 5
 	min_skill = list( // 6 points
 		SKILL_BUREAUCRACY = SKILL_TRAINED, // 2 points
 		SKILL_MEDICAL = SKILL_BASIC // 4 points
 	)
-	max_skill = list(
-		SKILL_MEDICAL = SKILL_TRAINED,
-		SKILL_ANATOMY = SKILL_TRAINED
-	)
+
 	access = list(
 		access_medical, access_psychiatrist,
 		access_solgov_crew, access_medical_equip, access_radio_med

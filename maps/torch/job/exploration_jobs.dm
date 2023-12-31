@@ -15,18 +15,21 @@
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o1
 	)
-	skill_points = 28
-	min_skill = list( // 9 points
-		SKILL_BUREAUCRACY = SKILL_BASIC, // 1 point
-		SKILL_EVA = SKILL_TRAINED, // 2 points
-		SKILL_SCIENCE = SKILL_TRAINED, // 4 points
-		SKILL_PILOT = SKILL_BASIC // 2 points
+	skill_points = 3
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_BOTANY = SKILL_TRAINED,
+		SKILL_SCIENCE = SKILL_EXPERIENCED,
+		SKILL_EVA = SKILL_EXPERIENCED,
+		SKILL_WEAPONS = SKILL_BASIC,
+		SKILL_MECH = HAS_PERK,
+		SKILL_HAULING = SKILL_TRAINED
 	)
 
-	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
-	                    SKILL_SCIENCE     = SKILL_MAX,
-	                    SKILL_COMBAT      = SKILL_EXPERIENCED,
-	                    SKILL_WEAPONS     = SKILL_EXPERIENCED)
+	max_skill = list(
+		SKILL_PILOT = SKILL_MAX,
+		SKILL_SCIENCE = SKILL_MAX
+	)
 
 	access = list(
 		access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_bridge, access_emergency_storage,
@@ -73,9 +76,15 @@
 		access_mining, access_pilot, access_solgov_crew, access_eva, access_explorer, access_research,
 		access_radio_exp, access_radio_sci, access_radio_sup, access_maint_tunnels, access_emergency_storage
 	)
-	min_skill = list( // 5 points
-		SKILL_EVA = SKILL_BASIC, // 1 point
-		SKILL_PILOT = SKILL_TRAINED // 4 points
+
+	skill_points = 3
+	min_skill = list(
+		SKILL_EVA = SKILL_BASIC,
+		SKILL_PILOT = SKILL_TRAINED,
+		SKILL_HAULING = SKILL_TRAINED,
+		SKILL_CONSTRUCTION = SKILL_BASIC,
+		SKILL_ELECTRICAL = SKILL_BASIC,
+		SKILL_SCIENCE = SKILL_TRAINED
 	)
 
 	max_skill = list(
@@ -100,14 +109,21 @@
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/ec/e5
 	)
-	min_skill = list( // 1 point
-		SKILL_EVA = SKILL_BASIC // 1 point
+
+	skill_points = 5
+	min_skill = list(
+		SKILL_BOTANY = SKILL_TRAINED,
+		SKILL_SCIENCE = SKILL_BASIC,
+		SKILL_EVA = SKILL_TRAINED,
+		SKILL_WEAPONS = SKILL_BASIC,
+		SKILL_MECH = HAS_PERK,
+		SKILL_HAULING = SKILL_TRAINED
 	)
 
-	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
-	                    SKILL_SCIENCE     = SKILL_MAX,
-	                    SKILL_COMBAT      = SKILL_EXPERIENCED,
-	                    SKILL_WEAPONS     = SKILL_EXPERIENCED)
+	max_skill = list(
+		SKILL_PILOT = SKILL_MAX,
+		SKILL_SCIENCE = SKILL_MAX
+	)
 
 	access = list(
 		access_explorer, access_maint_tunnels, access_eva, access_emergency_storage,
