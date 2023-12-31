@@ -2514,6 +2514,8 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/item/rcd_ammo,
+/obj/item/rcd_ammo,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/storage)
 "eI" = (

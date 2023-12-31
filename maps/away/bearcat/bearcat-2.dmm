@@ -146,7 +146,6 @@
 "av" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/hologram/holopad/longrange/remoteship,
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 8;
@@ -174,8 +173,7 @@
 "ay" = (
 /obj/machinery/light,
 /obj/machinery/computer/modular/preset/engineering{
-	dir = 1;
-	icon_state = "console"
+	dir = 1
 	},
 /obj/item/device/radio/intercom/map_preset/bearcat{
 	dir = 4;
@@ -196,8 +194,7 @@
 "aA" = (
 /obj/machinery/light,
 /obj/machinery/computer/modular/preset/cardslot/command{
-	dir = 1;
-	icon_state = "console"
+	dir = 1
 	},
 /obj/machinery/alarm{
 	dir = 8;
@@ -5081,6 +5078,7 @@
 	},
 /obj/floor_decal/corner/red/diagonal,
 /obj/structure/window/reinforced,
+/obj/item/rcd,
 /turf/simulated/floor/reinforced,
 /area/ship/scrap/maintenance/atmos)
 "je" = (
@@ -5693,9 +5691,9 @@
 /turf/simulated/floor,
 /area/ship/scrap/hidden)
 "PZ" = (
-/obj/machinery/radio_beacon,
-/turf/simulated/floor/bluegrid,
-/area/ship/scrap/comms)
+/obj/item/stock_parts/circuitboard/radio_beacon,
+/turf/simulated/floor,
+/area/ship/scrap/maintenance/engine/aft)
 "Qd" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -12419,7 +12417,7 @@ Yv
 Yv
 ed
 ar
-PZ
+aH
 aO
 aX
 Yv
@@ -12704,7 +12702,7 @@ iV
 jg
 jt
 jG
-jF
+PZ
 jV
 jX
 jU
