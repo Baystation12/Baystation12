@@ -677,7 +677,8 @@ GLOBAL_LIST_INIT(duplicate_object_disallowed_vars, list(
 	"key",
 	"group",
 	"ai_holder",
-	"natural_weapon"
+	"natural_weapon",
+	"extensions"
 ))
 
 
