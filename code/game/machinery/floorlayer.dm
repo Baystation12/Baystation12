@@ -105,7 +105,7 @@
 	if(!T)
 		if(!TakeNewStack())
 			return 0
-	w_turf.attackby(T , src)
+	w_turf.use_tool(T , src)
 	return 1
 
 /obj/machinery/floorlayer/proc/TakeTile(obj/item/stack/tile/tile)

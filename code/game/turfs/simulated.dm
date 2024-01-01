@@ -159,11 +159,11 @@
 /turf/simulated/proc/can_build_cable(mob/user)
 	return 0
 
-/turf/simulated/attackby(obj/item/thing, mob/user)
+/turf/simulated/use_tool(obj/item/thing, mob/living/user, list/click_params)
 	if(isCoil(thing) && can_build_cable(user))
 		var/obj/item/stack/cable_coil/coil = thing
 		coil.PlaceCableOnTurf(src, user)
-		return
+		return TRUE
 	return ..()
 
 /turf/simulated/Initialize()
