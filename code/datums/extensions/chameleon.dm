@@ -11,24 +11,34 @@
 		/obj/item/proc/ChameleonOutfitAppearanceSingle,
 		/obj/item/proc/ChameleonOutfitAppearanceAll)
 
-/datum/extension/chameleon/New(datum/holder, base_type)
+/**
+ * **Parameters**:
+ * - `holder` - The instance which is granted the chameleon verbs.
+ * - `chameleon_base_type` - The base type from which to generate the list of valid chameleon options. Defaults to the holder's `parent_type` if unset.
+ * - `exclude_outfits` - Whether to exclude the chameleon outfit verbs.
+ */
+/datum/extension/chameleon/New(datum/holder, chameleon_base_type, exclude_outfits)
 	..()
 
 	if (!chameleon_choices)
-		var/chameleon_type = base_type || holder.parent_type
+		var/chameleon_type = chameleon_base_type || holder.parent_type
 		chameleon_choices = LAZYACCESS(chameleon_choices_by_type, chameleon_type)
 		if (!chameleon_choices)
 			chameleon_choices = GenerateChameleonChoices(chameleon_type)
+			LAZYSET(chameleon_choices_by_type, chameleon_type, chameleon_choices)
 
 	item_holder = holder
-	item_holder.verbs += chameleon_verbs
+	if (exclude_outfits)
+		item_holder.verbs += /obj/item/proc/ChameleonFlexibleAppearance
+	else
+		item_holder.verbs += chameleon_verbs
 	GLOB.empd_event.register(item_holder, src, /datum/extension/chameleon/proc/OnEMP)
 
 /datum/extension/chameleon/Destroy()
 	if (emp_amount)
 		STOP_PROCESSING(SSobj, src)
 	GLOB.empd_event.unregister(item_holder, src)
-	item_holder.verbs -= chameleon_verbs
+	item_holder.verbs -= chameleon_verbs // We don't complicate things, remove all the verbs every time no matter the initial setup
 	item_holder = null
 	return ..()
 
@@ -339,13 +349,36 @@
 	if (ispath(outfit.r_ear, expected_type))
 		return outfit.r_ear
 
-/***************
-* Setup Helper *
-****************/
-/obj/proc/SetupChameleonExtension(throw_runtime)
+/// Grants the full set of chameleon selection options available to the extension.
+var/global/const/CHAMELEON_FLEXIBLE_OPTIONS_EXTENSION = 1 // Not flags
+/// Grants a (potential) subset of chameleon options available to the extension, based on the instance's `parent_type`. Falls back to `type` if not a valid type for the extension.
+var/global/const/CHAMELEON_FLEXIBLE_OPTIONS_PARENT_TYPE   = 2
+/// Grants a (potential) subset of chameleon options available to the extension, based on the instance's `type`.
+var/global/const/CHAMELEON_FLEXIBLE_OPTIONS_TYPE          = 3
+
+/**
+ * Call this proc to automatically setup the best suited chameleon extension for the instance, if one exists.
+ *
+ * Exceptions:
+ * - If the instance only matches the base /datum/extension/chameleon type it is not set for performance reasons. For these `set_extension()` has to be called explicitly.
+ * - If the instance already has the /datum/extension/chameleon extension it is not overriden, but the proc still returns `TRUE`.
+ *
+ * **Parameters**:
+ * - `chamelon_options` - Based on the relevant CHAMELEON_FLEXIBLE_OPTION_* argument
+ * - `exclude_outfits` - Whether to exclude the chameleon outfit verbs.
+ * - `throw_runtime` - Whether to throw a runtime exception if no matching extension was found. This includes cases when /datum/extension/chameleon would've been a match had it not been for its exclusion.
+ *
+ * Returns boolean - Whether or not a matching extension was found
+ */
+/obj/proc/SetupChameleonExtension(chamelon_options, exclude_outfits, throw_runtime)
+	if (has_extension(src, /datum/extension/chameleon))
+		return TRUE
+
 	var/best_found_expected_type
 	var/best_found_extension
-	for (var/datum/extension/chameleon/chameleon_extension_type as anything in typesof(/datum/extension/chameleon))
+
+	// Most items matching only /obj/item have a tendency to generate huge cache lists (and also lag spikes), hence the exclusion of the base extension type
+	for (var/datum/extension/chameleon/chameleon_extension_type as anything in subtypesof(/datum/extension/chameleon))
 		var/expected_type = initial(chameleon_extension_type.expected_type)
 
 		if (istype(src, expected_type)) // If the type of src is a type expected by the extension then..
@@ -354,9 +387,16 @@
 				best_found_expected_type = expected_type
 				best_found_extension = chameleon_extension_type
 
-	if (best_found_extension)
-		set_extension(src, best_found_extension)
-		return
+	var/chameleon_base_type
+	switch (chamelon_options)
+		if (CHAMELEON_FLEXIBLE_OPTIONS_EXTENSION) chameleon_base_type = best_found_expected_type
+		if (CHAMELEON_FLEXIBLE_OPTIONS_PARENT_TYPE) chameleon_base_type = ispath(parent_type, best_found_expected_type) ? parent_type : type
+		if (CHAMELEON_FLEXIBLE_OPTIONS_TYPE) chameleon_base_type = type
+		else CRASH("Invalid chameleon flexible option: [chamelon_options]")
 
-	if (throw_runtime)
+	if (best_found_extension)
+		set_extension(src, best_found_extension, chameleon_base_type, exclude_outfits)
+		return TRUE
+	else if (throw_runtime)
 		CRASH("The type [type] does not have a compatible chameleon extension.")
+	return FALSE
