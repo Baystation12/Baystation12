@@ -17,6 +17,8 @@
 	anchored = TRUE
 	density = FALSE
 	idle_power_usage = 10
+	health_max = 10
+	damage_hitsound = 'sound/effects/Glasshit.ogg'
 	var/mode = 1	// 0 = Blank
 					// 1 = Shuttle timer
 					// 2 = Arbitrary message(s)
@@ -54,6 +56,38 @@
 		radio_controller.remove_object(src,frequency)
 	return ..()
 
+/obj/machinery/status_display/on_death()
+	..()
+	playsound(src, "shatter", 70, 1)
+	visible_message(SPAN_DANGER("\The [src] is smashed into many pieces!"))
+	remove_display()
+	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
+
+/obj/machinery/status_display/on_revive()
+	..()
+	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
+
+/obj/machinery/status_display/on_update_icon()
+	. = ..()
+	if (MACHINE_IS_BROKEN(src))
+		icon_state = "[initial(icon_state)]_broken"
+	else
+		icon_state = "[initial(icon_state)]"
+
+/obj/machinery/status_display/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	if (istype(tool, /obj/item/stack/material) && tool.get_material_name() == MATERIAL_GLASS && health_damaged())
+		var/obj/item/stack/mats = tool
+		if (!mats.can_use(2))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(mats, 2, "repair \the [src].")
+			return TRUE
+		if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		mats.use(2)
+		to_chat(user, SPAN_NOTICE("You repair the broken glass on \the [src]."))
+		revive_health()
+		return TRUE
+	return ..()
+
 // register for radio system
 /obj/machinery/status_display/Initialize()
 	. = ..()
@@ -62,6 +96,8 @@
 
 // timed process
 /obj/machinery/status_display/Process()
+	if (MACHINE_IS_BROKEN(src))
+		return PROCESS_KILL
 	if(!is_powered())
 		remove_display()
 		return
@@ -77,6 +113,8 @@
 // set what is displayed
 /obj/machinery/status_display/proc/update()
 	remove_display()
+	if (MACHINE_IS_BROKEN(src))
+		return
 	if(friendc && !ignore_friendc)
 		set_picture("ai_friend")
 		if(status_display_show_alert_border)
