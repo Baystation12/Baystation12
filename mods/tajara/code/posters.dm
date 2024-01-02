@@ -1,11 +1,11 @@
 /obj/structure/sign/poster/tjpost
 	icon = 'mods/tajara/icons/posters.dmi'
 	icon_state = "tposter"
+	random_poster_base_type = /singleton/poster/tjpost
 
-/obj/structure/sign/poster/tjpost/New()
-	if(!poster_type)
-		poster_type = pick(typesof(/singleton/poster/tjpost))
-	..()
+/obj/structure/sign/poster/tjpost/tposter
+	icon_state = "tposter"
+	poster_type = /singleton/poster/tjpost/tposter
 
 /obj/structure/sign/poster/tjpost/tposter_2
 	icon_state = "tposter_2"
@@ -93,6 +93,11 @@
 
 /singleton/poster/tjpost
 	icon = 'mods/tajara/icons/posters.dmi'
+	name = "Tajara Poster"
+	desc = "You probably shouldn't be seeing this."
+	abstract_type = /singleton/poster/tjpost
+
+/singleton/poster/tjpost/tposter
 	icon_state = "tposter"
 	name = "Liberation day"
 	desc = "A memorable photo, which depicted how the soldiers of the Kaytam clan raise their flag \

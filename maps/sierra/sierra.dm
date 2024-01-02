@@ -177,7 +177,6 @@
 	#include "../../mods/fancy_sofas/_fancy_sofas.dme"
 	#include "../../mods/jukebox_tapes/_jukebox_tapes.dme"
 	#include "../../mods/legalese_language/_legalese.dme"
-	#include "../../mods/nyc_posters/_nyc_posters.dme"
 	#include "../../mods/leroy_beasts/_leroy_beasts.dme"
 	#include "../../mods/screentips/_screentips.dme"
 	#include "../../mods/tajara/_tajara.dme"

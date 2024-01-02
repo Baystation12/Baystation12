@@ -112,6 +112,8 @@
 	var/list/invalid_posters = list()
 
 	for(var/poster_type in subtypesof(/singleton/poster))
+		if (is_abstract(poster_type))
+			continue
 		var/singleton/poster/P = GET_SINGLETON(poster_type)
 		// [SIERRA-EDIT] - NYC_POSTERS - TAJARA
 		// if(!(P.icon_state in contraband_icons)) // SIERRA-EDIT - ORIGINAL
