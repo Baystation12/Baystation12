@@ -1,0 +1,49 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/closet/crate/medical,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical/lite,
+/obj/random/medical/lite,
+/obj/random/medical/lite,
+/obj/random/medical/lite,
+/obj/random/firstaid,
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/turf/template_noop,
+/area/template_noop)
+"d" = (
+/obj/structure/closet/crate/secure/weapon,
+/obj/item/crowbar/red,
+/obj/item/inducer,
+/obj/random/powercell,
+/obj/random/powercell,
+/turf/template_noop,
+/area/template_noop)
+"e" = (
+/obj/structure/closet/crate/secure/weapon,
+/obj/random/energy,
+/obj/random/energy,
+/turf/template_noop,
+/area/template_noop)
+"g" = (
+/obj/structure/closet/crate/freezer/rations,
+/turf/template_noop,
+/area/template_noop)
+
+(1,1,1) = {"
+d
+b
+a
+"}
+(2,1,1) = {"
+b
+b
+b
+"}
+(3,1,1) = {"
+e
+b
+g
+"}
