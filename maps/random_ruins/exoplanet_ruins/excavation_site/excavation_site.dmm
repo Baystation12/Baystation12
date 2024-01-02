@@ -1,0 +1,224 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/obj/structure/pit,
+/obj/landmark/clear,
+/turf/simulated/floor/exoplanet/barren,
+/area/template_noop)
+"d" = (
+/obj/machinery/suspension_gen{
+	dir = 4
+	},
+/obj/landmark/clear,
+/turf/simulated/floor/exoplanet/barren,
+/area/template_noop)
+"e" = (
+/obj/random/powercell,
+/obj/landmark/clear,
+/turf/simulated/floor/exoplanet/barren,
+/area/template_noop)
+"f" = (
+/obj/structure/closet/crate,
+/obj/item/archaeological_find/shell,
+/obj/item/archaeological_find/fossil,
+/obj/random/loot,
+/obj/random/loot,
+/obj/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"g" = (
+/obj/item/archaeological_find/shell,
+/obj/landmark/clear,
+/turf/simulated/floor/exoplanet/barren,
+/area/template_noop)
+"h" = (
+/obj/landmark/clear,
+/turf/simulated/floor/exoplanet/barren,
+/area/template_noop)
+"j" = (
+/obj/random/trash,
+/obj/landmark/clear,
+/turf/simulated/floor/exoplanet/barren,
+/area/template_noop)
+"k" = (
+/obj/machinery/anomaly_container,
+/obj/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"l" = (
+/obj/item/pickaxe/xeno/hand,
+/obj/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"n" = (
+/obj/machinery/floodlight{
+	dir = 8
+	},
+/obj/landmark/clear,
+/turf/simulated/floor/exoplanet/barren,
+/area/template_noop)
+"s" = (
+/obj/random/junk,
+/obj/landmark/clear,
+/turf/simulated/floor/exoplanet/barren,
+/area/template_noop)
+"u" = (
+/obj/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"y" = (
+/obj/item/device/ano_scanner,
+/obj/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"A" = (
+/obj/random/toolbox,
+/obj/landmark/clear,
+/turf/simulated/floor/exoplanet/barren,
+/area/template_noop)
+"C" = (
+/obj/structure/table/standard,
+/obj/random/tool,
+/obj/item/taperoll/research,
+/obj/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"H" = (
+/turf/simulated/mineral,
+/area/template_noop)
+"O" = (
+/obj/structure/table/standard,
+/obj/random/medical,
+/obj/random/medical,
+/obj/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"R" = (
+/obj/structure/table/standard,
+/obj/item/device/gps,
+/obj/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+a
+a
+a
+H
+u
+R
+O
+a
+a
+"}
+(3,1,1) = {"
+a
+a
+a
+s
+h
+u
+y
+u
+a
+a
+"}
+(4,1,1) = {"
+a
+a
+h
+h
+e
+d
+h
+l
+f
+a
+"}
+(5,1,1) = {"
+a
+a
+h
+H
+H
+g
+A
+u
+u
+a
+"}
+(6,1,1) = {"
+a
+a
+s
+h
+H
+H
+h
+h
+C
+a
+"}
+(7,1,1) = {"
+a
+a
+u
+h
+h
+h
+b
+n
+a
+a
+"}
+(8,1,1) = {"
+a
+a
+u
+u
+u
+j
+h
+H
+a
+a
+"}
+(9,1,1) = {"
+a
+a
+k
+u
+a
+a
+a
+a
+a
+a
+"}
+(10,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}

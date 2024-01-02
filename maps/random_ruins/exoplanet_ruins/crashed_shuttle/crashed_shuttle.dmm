@@ -1,0 +1,105 @@
+"aT" = (/obj/item/stack/material/rods,/obj/machinery/computer/shuttle_control/explore/graysontug{dir = 8},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"db" = (/obj/decal/cleanable/liquid_fuel,/obj/machinery/atmospherics/pipe/manifold/visible/fuel{dir = 4},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"dR" = (/obj/structure/wall_frame/titanium,/obj/item/material/shard,/obj/item/stack/material/rods,/obj/machinery/door/firedoor,/obj/machinery/door/firedoor,/obj/paint/black,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"fD" = (/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/door/airlock/external{id_tag = "graysontug_shuttle_outer"; frequency = 1380},/obj/machinery/atmospherics/pipe/manifold/hidden{dir = 8},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"gt" = (/obj/decal/cleanable/generic,/obj/structure/handrail{dir = 8; icon_state = "handrail"},/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{dir = 1; id_tag = "graysontugrear_shuttle_pump"},/obj/machinery/embedded_controller/radio/airlock/docking_port{cycle_to_external_air = 1; dir = 4; frequency = 1380; id_tag = "graysontugrear_shuttle"; pixel_x = -22; pixel_y = 4; tag_exterior_door = "graysontugrear_shuttle_outer"; tag_interior_door = "graysontugrear_shuttle_inner"; tag_exterior_sensor = "graysontugrear_shuttle_exterior_sensor"; tag_chamber_sensor = "graysontugrear_shuttle_sensor"; tag_airpump = "graysontugrear_shuttle_pump"; tag_interior_sensor = "graysontugrear_shuttle_interior_sensor"},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"gC" = (/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/decal/cleanable/generic,/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{id_tag = "graysontug_shuttle_pump_out_internal"},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"gD" = (/obj/decal/cleanable/generic,/turf/template_noop,/area/map_template/crashed_shuttle/crash)
+"gR" = (/obj/paint/black,/turf/simulated/wall/titanium,/area/map_template/crashed_shuttle/graysontug)
+"hm" = (/obj/decal/cleanable/liquid_fuel,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"hJ" = (/obj/machinery/atmospherics/pipe/simple/hidden,/obj/machinery/door/airlock/external{id_tag = "graysontugrear_shuttle_inner"; frequency = 1380},/obj/machinery/access_button/airlock_exterior{frequency = 1380; master_tag = "graysontugrear_shuttle"; pixel_x = -25},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"hW" = (/obj/decal/cleanable/generic,/turf/simulated/floor/exoplanet/barren,/area/map_template/crashed_shuttle/crash)
+"in" = (/obj/machinery/atmospherics/pipe/manifold/hidden{dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/obj/machinery/constructable_frame/machine_frame,/obj/item/stock_parts/circuitboard/sleeper,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"jJ" = (/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/pipe/manifold/hidden,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"jS" = (/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 10},/obj/paint/sun,/turf/simulated/wall/titanium,/area/map_template/crashed_shuttle/graysontug)
+"kc" = (/obj/structure/cargopile,/turf/template_noop,/area/map_template/crashed_shuttle/crash)
+"kQ" = (/obj/decal/cleanable/liquid_fuel,/turf/simulated/floor/exoplanet/barren,/area/map_template/crashed_shuttle/crash)
+"kW" = (/obj/machinery/atmospherics/pipe/simple/hidden,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/closet/hydrant{pixel_x = -32},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"la" = (/turf/simulated/floor/exoplanet/barren,/area/map_template/crashed_shuttle/crash)
+"lE" = (/obj/structure/cable,/obj/machinery/power/apc/critical{dir = 4; name = "east bump"; pixel_x = 24; req_access = list("ACCESS_SKRELLSCOUT")},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"ng" = (/obj/machinery/atmospherics/unary/tank/air{start_pressure = 8000; dir = 1},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"np" = (/obj/machinery/power/port_gen/pacman{anchored = 1; sheets = 25},/obj/structure/cable/yellow{d2 = 8; icon_state = "0-8"},/obj/machinery/alarm{req_access = list(); dir = 8; pixel_x = 24},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"nY" = (/obj/machinery/portable_atmospherics/canister/empty/oxygen,/turf/template_noop,/area/map_template/crashed_shuttle/crash)
+"pl" = (/obj/structure/wall_frame/titanium,/obj/item/material/shard,/obj/item/stack/material/rods,/obj/machinery/door/firedoor,/obj/paint/black,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"ri" = (/obj/item/stack/material/rods,/obj/machinery/door/firedoor,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"rV" = (/obj/structure/largecrate,/turf/template_noop,/area/map_template/crashed_shuttle/crash)
+"sj" = (/obj/random/toolbox,/turf/simulated/floor/exoplanet/barren,/area/map_template/crashed_shuttle/crash)
+"sx" = (/obj/machinery/constructable_frame/computerframe{dir = 4},/obj/item/stock_parts/circuitboard/engine,/obj/item/material/shard,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"tl" = (/obj/structure/closet/crate,/turf/template_noop,/area/map_template/crashed_shuttle/crash)
+"ts" = (/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 10; icon_state = "intact"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/access_button/airlock_exterior{frequency = 1380; master_tag = "graysontug_shuttle"; pixel_x = -25; pixel_y = 30},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"tv" = (/obj/item/material/shard/shrapnel/titanium,/turf/template_noop,/area/map_template/crashed_shuttle/crash)
+"tA" = (/obj/item/stack/material/rods,/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 6},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"vl" = (/obj/structure/girder,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"vU" = (/obj/decal/cleanable/liquid_fuel,/obj/machinery/atmospherics/binary/pump{dir = 1},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"wh" = (/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"xr" = (/obj/decal/cleanable/liquid_fuel,/obj/item/stack/material/rods,/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup{start_pressure = 7498},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"xC" = (/obj/structure/cable/yellow{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"xU" = (/obj/structure/table/steel,/obj/random/contraband,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"yK" = (/obj/structure/cable/yellow{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/item/stack/material/rods,/obj/machinery/atmospherics/pipe/simple/hidden{dir = 5; icon_state = "intact"},/obj/random/masks,/obj/machinery/airlock_sensor{frequency = 1380; id_tag = "graysontug_shuttle_sensor"; pixel_x = -24; pixel_y = -7},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"za" = (/obj/decal/cleanable/liquid_fuel,/obj/machinery/atmospherics/pipe/simple/visible/universal{dir = 4},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"zl" = (/obj/machinery/constructable_frame/computerframe{dir = 8},/obj/item/stock_parts/circuitboard/sensors,/obj/item/material/shard,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"zp" = (/turf/template_noop,/area/template_noop)
+"zL" = (/obj/decal/cleanable/generic,/obj/machinery/atmospherics/binary/passive_gate{unlocked = 1; dir = 1},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"zP" = (/obj/decal/cleanable/liquid_fuel,/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 9; icon_state = "intact"},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"AB" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 10; icon_state = "intact"},/obj/random/handgun,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"AR" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{id_tag = "graysontug_shuttle_pump_out_internal"},/obj/structure/handrail{dir = 8; icon_state = "handrail"},/obj/machinery/embedded_controller/radio/airlock/docking_port{cycle_to_external_air = 1; dir = 8; frequency = 1380; id_tag = "graysontug_shuttle"; pixel_x = 22; pixel_y = 4; tag_exterior_door = "graysontug_shuttle_outer"; tag_interior_door = "graysontug_shuttle_inner"; tag_exterior_sensor = "graysontug_shuttle_exterior_sensor"; tag_chamber_sensor = "graysontug_shuttle_sensor"; tag_airpump = "graysontug_shuttle_pump"; tag_interior_sensor = "graysontug_shuttle_interior_sensor"},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"AZ" = (/obj/decal/cleanable/liquid_fuel,/obj/decal/cleanable/generic,/obj/machinery/door/airlock/external{id_tag = "graysontug_shuttle_outer"; frequency = 1380},/obj/machinery/atmospherics/pipe/manifold/hidden{dir = 4; icon_state = "map"},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"BB" = (/obj/decal/cleanable/liquid_fuel,/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 6},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"BT" = (/obj/item/stack/material/rods,/turf/template_noop,/area/map_template/crashed_shuttle/crash)
+"Ds" = (/obj/decal/cleanable/liquid_fuel,/obj/structure/railing/mapped{dir = 8; icon_state = "railing0-1"},/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 6},/obj/random/tool,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"DB" = (/obj/structure/girder/displaced,/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{id_tag = "graysontug_shuttle_pump"},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"Ep" = (/obj/machinery/door/airlock/external{id_tag = "graysontugrear_shuttle_outer"; frequency = 1380},/obj/machinery/access_button/airlock_exterior{frequency = 1380; master_tag = "graysontugrear_shuttle"; pixel_x = -25},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"EF" = (/obj/machinery/atmospherics/unary/engine{dir = 1},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"Fx" = (/obj/item/material/shard,/obj/machinery/atmospherics/pipe/simple/hidden,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/table/steel,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"Go" = (/obj/item/stack/material/rods,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/door/firedoor,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"Gx" = (/obj/structure/cargopile,/turf/simulated/floor/exoplanet/barren,/area/map_template/crashed_shuttle/crash)
+"Hy" = (/obj/machinery/power/terminal{dir = 4},/obj/structure/cable/yellow,/obj/machinery/atmospherics/pipe/simple/visible/universal,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"IB" = (/obj/structure/railing/mapped{dir = 8; icon_state = "railing0-1"},/obj/structure/largecrate,/obj/random/contraband,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"IO" = (/obj/decal/cleanable/liquid_fuel,/obj/structure/fuel_port{pixel_x = 32},/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{dir = 1; id_tag = "graysontug_shuttle_pump_out_external"},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"Js" = (/obj/item/stack/material/rods,/obj/machinery/atmospherics/pipe/manifold/hidden{dir = 8},/obj/machinery/sleeper{dir = 4},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"JQ" = (/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/door/airlock/external{id_tag = "graysontug_shuttle_inner"; frequency = 1380},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"JU" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"Kv" = (/obj/decal/cleanable/liquid_fuel,/obj/machinery/atmospherics/pipe/simple/visible/red,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"Lp" = (/obj/structure/bed/chair/shuttle/blue{dir = 1; icon_state = "shuttle_chair_preview"},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/obj/overmap/visitable/ship/landable/graysontug,/obj/shuttle_landmark/graysontug/start,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"Oc" = (/obj/paint/sun,/turf/simulated/wall/titanium,/area/map_template/crashed_shuttle/graysontug)
+"OY" = (/obj/machinery/computer/ship/helm{dir = 8},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"Pa" = (/obj/item/material/shard,/obj/structure/firedoor_assembly,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"PB" = (/turf/template_noop,/area/map_template/crashed_shuttle/crash)
+"QQ" = (/obj/decal/cleanable/liquid_fuel,/obj/structure/railing/mapped,/obj/machinery/atmospherics/portables_connector{dir = 1},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"Sn" = (/obj/machinery/shipsensors,/obj/machinery/atmospherics/pipe/simple/visible/fuel,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"SG" = (/obj/machinery/portable_atmospherics/canister/empty/carbon_dioxide,/turf/template_noop,/area/map_template/crashed_shuttle/crash)
+"SQ" = (/obj/machinery/atmospherics/pipe/manifold/visible/fuel{dir = 1},/obj/paint/sun,/turf/simulated/wall/titanium,/area/map_template/crashed_shuttle/graysontug)
+"SS" = (/obj/structure/cable/yellow{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/item/material/shard/shrapnel/titanium,/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"Vl" = (/obj/machinery/atmospherics/pipe/simple/hidden,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/closet/medical_wall/filled{pixel_x = -32},/obj/structure/bed/chair/shuttle/blue{dir = 4; icon_state = "shuttle_chair_preview"},/obj/item/storage/briefcase/inflatable,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"Xi" = (/obj/machinery/power/smes/buildable/power_shuttle,/obj/structure/cable{d2 = 2; icon_state = "0-2"},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"Xz" = (/obj/decal/cleanable/generic,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"XG" = (/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 10},/obj/random/loot,/obj/structure/largecrate,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"Ya" = (/obj/decal/cleanable/liquid_fuel,/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{dir = 1; id_tag = "graysontug_shuttle_pump_out_external"},/obj/machinery/access_button/airlock_exterior{frequency = 1380; master_tag = "graysontug_shuttle"; pixel_x = -25; pixel_y = 30},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"Yz" = (/obj/decal/cleanable/liquid_fuel,/obj/structure/railing/mapped{dir = 8; icon_state = "railing0-1"},/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/empty,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"YO" = (/obj/item/material/shard/shrapnel/titanium,/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{id_tag = "graysontug_shuttle_pump"},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"Zl" = (/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 5},/obj/paint/sun,/turf/simulated/wall/titanium,/area/map_template/crashed_shuttle/graysontug)
+"ZJ" = (/obj/structure/wall_frame/titanium,/obj/item/material/shard,/obj/machinery/door/firedoor,/obj/paint/black,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"ZS" = (/obj/machinery/radio_beacon,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+
+(1,1,1) = {"
+PBPBPBPBPBPBPBPBPBPBPBPBzpzpzp
+PBPBPBPBPBXzvlplrivlPBPBzpzpzp
+PBPBwhwhXzvlZSxUaTPatvPBzpzpzp
+PBgDvlYODBgRsxLpOYdRPBPBzpzpzp
+PBPBgRyKjJJQtsSSzlgRPBPBzpzpzp
+PBPBwhgCARgRkWxCnpgRPBPBzpzpzp
+PBtvgRfDAZgRVlHyXigRBTPBzpzpzp
+PBPBIBYaIOgRFxzLlEgRPBPBzpzpzp
+PBPBtAzahmGoinzPwhvlPBPBzpzpzp
+tvkQKvBBXGZJJsJUABvlPBPBzpzpzp
+PBkQYzvUSngRnggRhJgRlaPBzpzpzp
+PBkQDsdbZlSQjSOcgtgRlaPBzpzpzp
+kQkQQQxrvlEFEFOcEpgRhWPBzpzpzp
+BTkQkQkQkQkQlalalalalaPBzpzpzp
+PBkckQkQkQlahWlaGxlalahWPBzpzp
+PBSGPBPBPBPBPBPBlalasjlanYPBzp
+zpzpzpzpzpzprVPBPBPBkcPBPBPBzp
+zpzpzpzpzpzpzpzpzpPBPBPBtlPBzp
+zpzpzpzpzpzpzpzpzpzpPBPBPBPBzp
+zpzpzpzpzpzpzpzpzpzpzpzpzpzpzp
+"}

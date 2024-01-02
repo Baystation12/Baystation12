@@ -133,7 +133,7 @@
 /turf/simulated/wall/silvergold/New(newloc)
 	..(newloc,MATERIAL_SILVER,MATERIAL_GOLD)
 
-/turf/simulated/wall/sandstonediamond/New(newloc)
+/turf/simulated/wall/sandstone/diamond/New(newloc)
 	..(newloc,MATERIAL_SANDSTONE,MATERIAL_DIAMOND)
 
 /turf/simulated/wall/crystal/New(newloc)
