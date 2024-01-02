@@ -95,6 +95,7 @@
 	#include "machinery/navbeacons.dm"
 	#include "machinery/power.dm"
 	#include "machinery/random.dm"
+	#include "machinery/suit_storage.dm"
 	#include "machinery/tcomms.dm"
 	#include "machinery/thrusters.dm"
 	#include "machinery/uniform_vendor.dm"

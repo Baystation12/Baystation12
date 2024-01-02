@@ -49,6 +49,52 @@
 /obj/machinery/suit_cycler/pilot
 	req_access = list(access_explorer) //because unathi version of expeditonary suit it shit
 
+// Overrides
+
+/obj/machinery/suit_storage_unit/security
+	name = "security voidsuit storage unit"
+	suit= /obj/item/clothing/suit/space/void/security
+	helmet = /obj/item/clothing/head/helmet/space/void/security
+	boots = /obj/item/clothing/shoes/magboots
+	tank = /obj/item/tank/oxygen
+	mask = /obj/item/clothing/mask/breath
+	req_access = list(access_security)
+	islocked = 1
+	ssu_color = "#cc0000"
+
+/obj/machinery/suit_storage_unit/medical
+	name = "medical voidsuit storage unit"
+	suit= /obj/item/clothing/suit/space/void/medical
+	helmet = /obj/item/clothing/head/helmet/space/void/medical
+	boots = /obj/item/clothing/shoes/magboots
+	tank = /obj/item/tank/oxygen
+	mask = /obj/item/clothing/mask/breath
+	req_access = list(access_medical)
+	islocked = 1
+	ssu_color = "#55aaaa"
+
+/obj/machinery/suit_storage_unit/mining/Initialize()
+	. = ..()
+	ssu_color = "#b88a3b"
+
+/obj/machinery/suit_storage_unit/engineering/Initialize()
+	. = ..()
+	ssu_color = "#ffbf00"
+
+/obj/machinery/suit_storage_unit/atmos/Initialize()
+	. = ..()
+	ssu_color = "#00cccc"
+
+/obj/machinery/suit_storage_unit/science/Initialize()
+	. = ..()
+	ssu_color = "#990000"
+
+/obj/machinery/suit_storage_unit/security/sapper
+	name = "Sapper Voidsuit Storage Unit"
+	suit = /obj/item/clothing/suit/space/void/sapper
+	helmet = /obj/item/clothing/head/helmet/space/void/sapper
+	ssu_color = "#54654c"
+
 /obj/machinery/suit_storage_unit/explorer
 	name = "Exploration Voidsuit Storage Unit"
 	suit = /obj/item/clothing/suit/space/void/exploration
@@ -58,7 +104,7 @@
 	mask = /obj/item/clothing/mask/gas/half
 	req_access = list(access_explorer)
 	islocked = 1
-
+	ssu_color = "#9966ff"
 
 /obj/machinery/suit_storage_unit/pilot
 	name = "Expeditionary Pilot Voidsuit Storage Unit"
@@ -69,9 +115,11 @@
 	mask = /obj/item/clothing/mask/breath
 	req_access = list(access_explorer, access_expedition_shuttle_helm)
 	islocked = 1
-
+	ssu_color = "#990000"
 
 /obj/machinery/suit_storage_unit/standard_unit
+	icon_state = "industrial"
+	base_icon_state = "industrial"
 	islocked = 0
 
 /obj/machinery/photocopier/faxmachine/centcomm
@@ -192,3 +240,25 @@
 	check_weapons = 1	//checks if it can shoot people that have a weapon they aren't authorized to have
 	check_access = 1	//if this is active, the turret shoots everything that does not meet the access requirements
 	req_access = list(access_bridge)
+
+// Fabricator overrides
+
+/datum/fabricator_recipe/medical/beaker
+	path = /obj/item/reagent_containers/glass/beaker
+	fabricator_types = list(FABRICATOR_CLASS_MICRO,FABRICATOR_CLASS_GENERAL)
+
+/datum/fabricator_recipe/medical/beaker_large
+	path = /obj/item/reagent_containers/glass/beaker/large
+	fabricator_types = list(FABRICATOR_CLASS_MICRO,FABRICATOR_CLASS_GENERAL)
+
+/datum/fabricator_recipe/medical/beaker_insul
+	path = /obj/item/reagent_containers/glass/beaker/insulated
+	fabricator_types = list(FABRICATOR_CLASS_MICRO,FABRICATOR_CLASS_GENERAL)
+
+/datum/fabricator_recipe/medical/beaker_insul_large
+	path = /obj/item/reagent_containers/glass/beaker/insulated/large
+	fabricator_types = list(FABRICATOR_CLASS_MICRO,FABRICATOR_CLASS_GENERAL)
+
+/datum/fabricator_recipe/medical/vial
+	path = /obj/item/reagent_containers/glass/beaker/vial
+	fabricator_types = list(FABRICATOR_CLASS_MICRO,FABRICATOR_CLASS_GENERAL)

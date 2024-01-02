@@ -1,0 +1,84 @@
+<h3>Crusher Management</h3>
+{{if data.piston_count == 0}}
+	<div class="item">
+		<div class="itemLabel">
+			Intialize Crusher:
+		</div>
+		<div class="itemContent">
+			{{:helper.link('Initialize', 'refresh', { 'initialize' : '1' })}}
+		</div>
+	</div>
+{{/if}}
+{{if data.airlock_count > 0}}
+<div>
+	<div class="itemLabel">
+		Airlock Control:
+	</div>
+	<div class="itemContent">
+		{{:helper.link('Open', 'refresh', { 'hatch_open' : '1' })}}
+		{{:helper.link('Close', 'refresh', { 'hatch_close' : '1' })}}
+	</div>
+</div>
+{{/if}}
+{{if data.piston_count > 0}}
+<div>
+	<div class="itemLabel">
+		Activate:
+	</div>
+	<div class="itemContent">
+		{{if data.extending == 1}}
+			{{:helper.link('Start', 'alert', { 'crush' : '1' }, 'active')}}
+			{{:helper.link('Abort', 'alert', { 'abort' : '1' })}}
+		{{else}}
+			{{:helper.link('Start', 'alert', { 'crush' : '1' })}}
+			{{:helper.link('Abort', 'alert', { 'abort' : '1' }, 'disabled')}}
+		{{/if}}
+	</div>
+</div>
+{{/if}}
+
+<h3>Crusher Monitoring</h3>
+<div>
+	<div class="itemLabel">
+		Linked Pistons:
+	</div>
+	<div class="itemContent">
+		{{:data.piston_count}}
+	</div>
+</div>
+{{if data.piston_count > 0}}
+	<table>
+		{{for data.status_pistons}}
+			<tr>
+			<td>Piston {{:value.piston}}</td>
+			{{if value.blocked == 0}}
+				{{if value.action == "extend"}}
+					<td>{{:helper.displayBar(value.progress, 0, 100, 'good')}}</td>
+				{{else}}
+					<td>{{:helper.displayBar(value.progress, 0, 100, 'average')}}</td>
+				{{/if}}
+			{{else}}
+				<td>{{:helper.displayBar(value.progress, 0, 100, 'bad')}}</td>
+			{{/if}}
+			</tr>
+		{{/for}}
+	</table>
+{{/if}}
+<div>
+	<div class="itemLabel">
+		Linked Airlocks:
+	</div>
+	<div class="itemContent">
+		{{:data.airlock_count}}
+	</div>
+</div>
+{{if data.message }}
+<div>
+	<div class="itemLabel">
+		Message:
+	</div>
+	<div class="itemContent">
+		{{:data.message}}{{:helper.link('', 'close', { 'close' : '1' })}}
+	</div>
+</div>
+{{/if}}

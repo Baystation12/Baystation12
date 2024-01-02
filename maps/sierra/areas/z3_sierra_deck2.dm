@@ -244,11 +244,13 @@
 	name = "Second Deck - Living - Cryogenic Storage"
 	icon = 'maps/sierra/icons/turf/areas.dmi'
 	icon_state = "cryo"
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 	holomap_color = HOLOMAP_AREACOLOR_CREW
 
 /area/crew_quarters/sleep/cryo/south
 	name = "Second Deck - Living - Cryogenic Storage - South"
 	icon_state = "cryo_south"
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 	holomap_color = HOLOMAP_AREACOLOR_CREW
 
 /area/crew_quarters/adherent

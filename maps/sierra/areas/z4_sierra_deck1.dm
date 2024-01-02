@@ -172,6 +172,7 @@
 /area/crew_quarters/sleep/cryo/firstdeck
 	name = "First Deck - Living - Cryogenic Storage"
 	icon_state = "cryo_up"
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 	holomap_color = HOLOMAP_AREACOLOR_CREW
 
 /area/crew_quarters/dungeon_master_lounge
@@ -268,6 +269,7 @@
 /area/security/opscheck
 	name = "First Deck - RND - Security Checkpoint"
 	icon_state = "checkpoint"
+	req_access = list(access_security)
 
 /* MEDBAY AREAS
  * ============

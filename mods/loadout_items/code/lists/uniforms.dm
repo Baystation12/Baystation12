@@ -19,3 +19,144 @@
 	path = /obj/item/clothing/under/gray_camo
 	slot = slot_w_uniform
 	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/uniform/avalon
+	display_name = "avalon outfit selection"
+	path = /obj/item/clothing/under/avalon
+
+/datum/gear/uniform/avalon/New()
+	..()
+	var/avalon = list()
+	avalon["avalon skirt"] = /obj/item/clothing/under/avalon
+	avalon["avalon noble suit"] = /obj/item/clothing/under/avalon/noble
+	gear_tweaks += new/datum/gear_tweak/path(avalon)
+
+/datum/gear/uniform/sport
+	display_name = "sportive outfit selection"
+	path = /obj/item/clothing/under/sport
+
+/datum/gear/uniform/sport/New()
+	..()
+	var/sport = list()
+	sport["faln trousers"] = /obj/item/clothing/under/sport
+	sport["olympic clothes"] = /obj/item/clothing/under/sport/olympic
+	gear_tweaks += new/datum/gear_tweak/path(sport)
+
+/datum/gear/uniform/maid
+	display_name = "maid dress"
+	path = /obj/item/clothing/under/maid
+
+/datum/gear/uniform/mafia
+	display_name = "mafia outfit selection"
+	path = /obj/item/clothing/under/mafia
+
+/datum/gear/uniform/mafia/New()
+	..()
+	var/mafia = list()
+	mafia["mafia outfit"] = /obj/item/clothing/under/mafia
+	mafia["mafia vest"] = /obj/item/clothing/under/mafia/vest
+	mafia["white mafia outfit"] = /obj/item/clothing/under/mafia/white
+	gear_tweaks += new/datum/gear_tweak/path(mafia)
+
+/datum/gear/uniform/blackservice
+	display_name = "service uniform selection"
+	path = /obj/item/clothing/under/service
+
+/datum/gear/uniform/blackservice/New()
+	..()
+	var/service = list()
+	service["dark service uniform"] = /obj/item/clothing/under/service
+	service["brown service uniform"] = /obj/item/clothing/under/service/brown
+	service["fleet service uniform"] = /obj/item/clothing/under/service/milsim
+	service["white service uniform"] = /obj/item/clothing/under/service/white
+	service["white female service uniform"] = /obj/item/clothing/under/service/female
+	gear_tweaks += new/datum/gear_tweak/path(service)
+
+/datum/gear/uniform/cuttop
+	display_name = "cuttop uniform selection (female)"
+	path = /obj/item/clothing/under/cuttop
+
+/datum/gear/uniform/cuttop/New()
+	..()
+	var/cuttop = list()
+	cuttop["cuttop uniform"] = /obj/item/clothing/under/cuttop
+	cuttop["red cuttop uniform"] = /obj/item/clothing/under/cuttop/red
+	gear_tweaks += new/datum/gear_tweak/path(cuttop)
+
+/datum/gear/uniform/checkered
+	display_name = "checkered shirt selection"
+	path = /obj/item/clothing/under/checkered
+
+/datum/gear/uniform/checkered/New()
+	..()
+	var/checkered = list()
+	checkered["pinstripe"] = /obj/item/clothing/under/checkered
+	checkered["red checkered shirt"] = /obj/item/clothing/under/checkered/red
+	gear_tweaks += new/datum/gear_tweak/path(checkered)
+
+/datum/gear/uniform/gotsis
+	display_name = "gotsis dress selection"
+	path = /obj/item/clothing/under/dress
+
+/datum/gear/uniform/gotsis/New()
+	..()
+	var/gdress = list()
+	gdress["red gotsis dress"] = /obj/item/clothing/under/dress/gotsis_red
+	gdress["orange gotsis dress"] = /obj/item/clothing/under/dress/gotsis_orange
+	gear_tweaks += new/datum/gear_tweak/path(gdress)
+
+/datum/gear/uniform/victdress
+	display_name = "victorian dress selection"
+	path = /obj/item/clothing/under/dress/victorian
+
+/datum/gear/uniform/victdress/New()
+	..()
+	var/dress = list()
+	dress["black victorian dress"] = /obj/item/clothing/under/dress/victorian
+	dress["red victorian dresst"] = /obj/item/clothing/under/dress/victorian/red
+	gear_tweaks += new/datum/gear_tweak/path(dress)
+
+/datum/gear/uniform/victsuit
+	display_name = "victorian suit selection"
+	path = /obj/item/clothing/under/formal/victorian
+
+/datum/gear/uniform/victsuit/New()
+	..()
+	var/victsuit = list()
+	victsuit["victorian suit"] = /obj/item/clothing/under/formal/victorian
+	victsuit["red and black victorian suit"] = /obj/item/clothing/under/formal/victorian/black_red
+	victsuit["red victorian suit"] = /obj/item/clothing/under/formal/victorian/red
+	victsuit["dark victorian suit"] = /obj/item/clothing/under/formal/victorian/twilight
+	gear_tweaks += new/datum/gear_tweak/path(victsuit)
+
+/datum/gear/uniform/formal
+	display_name = "formal uniform selection"
+	path = /obj/item/clothing/under/formal
+
+/datum/gear/uniform/formal/New()
+	..()
+	var/formal = list()
+	formal["white black"] = /obj/item/clothing/under/formal
+	formal["formal vest"] = /obj/item/clothing/under/formal/vest
+	formal["classic suit"] = /obj/item/clothing/under/formal/classic_suit
+	formal["black and white with style"] = /obj/item/clothing/under/formal/chain_with_shirt
+	formal["aristo uniform"] = /obj/item/clothing/under/formal/aristo
+	formal["callum vest"] = /obj/item/clothing/under/formal/callum
+	formal["charcoal vest"] = /obj/item/clothing/under/formal/hm_suit
+	formal["red 'n black suit"] = /obj/item/clothing/under/formal/red_n_black
+	formal["rubywhite uniform"] = /obj/item/clothing/under/formal/rubywhite
+	gear_tweaks += new/datum/gear_tweak/path(formal)
+
+/datum/gear/uniform/informal
+	display_name = "informal uniform selection"
+	path = /obj/item/clothing/under/informal
+
+/datum/gear/uniform/informal/New()
+	..()
+	var/informal = list()
+	informal["harper uniform"] = /obj/item/clothing/under/informal
+	informal["vice uniform"] = /obj/item/clothing/under/informal/vice
+	informal["lify suit"] = /obj/item/clothing/under/informal/lify
+	informal["denim vest"] = /obj/item/clothing/under/informal/denimvest
+	informal["rhumba outfit"] = /obj/item/clothing/under/informal/cuban_suit
+	gear_tweaks += new/datum/gear_tweak/path(informal)

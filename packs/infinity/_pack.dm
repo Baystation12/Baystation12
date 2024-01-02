@@ -20,7 +20,6 @@
 #include "clothing\head\helmet.dm"
 #include "clothing\accessories\armor.dm"
 #include "clothing\accessories\badge.dm"
-#include "clothing\accessories\collar.dm"
 #include "clothing\accessories\other.dm"
 #include "clothing\accessories\pins.dm"
 #include "clothing\gloves\gloves.dm"
@@ -39,9 +38,7 @@
 #include "items\grown.dm"
 #include "items\multimeter.dm"
 #include "items\powertools.dm"
-#include "items\towels.dm"
 #include "items\toys.dm"
-#include "items\wheelchair_kit.dm"
 
 // Guns
 #include "items\projectile\ammunition\boxes.dm"
@@ -58,7 +55,6 @@
 #include "machinery\machines.dm"
 #include "machinery\rack.dm"
 #include "machinery\lighting.dm"
-#include "machinery\suit_storage.dm"
 #include "machinery\survival_pod.dm"
 #include "machinery\scrap_compactor\scrap_compactor.dm"
 

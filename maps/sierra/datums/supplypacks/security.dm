@@ -68,7 +68,7 @@
 
 /singleton/hierarchy/supply_pack/security/armory/pdw
 	name = "Weapons - Ballistic NT41"
-	contains = list(/obj/item/gun/projectile/automatic = 2)
+	contains = list(/obj/item/gun/projectile/automatic/nt41 = 2)
 	cost = 60
 	containername = "\improper Ballistic PDW crate"
 	security_level = SUPPLY_SECURITY_HIGH
@@ -123,4 +123,20 @@
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "pistol ammunition crate"
 	access = access_security
+	security_level = SUPPLY_SECURITY_ELEVATED
+
+/singleton/hierarchy/supply_pack/security/tacticalarmor
+	name = "Armor - Tactical"
+	contains = list(/obj/item/clothing/under/tactical,
+					/obj/item/clothing/suit/armor/pcarrier/tan/tactical,
+					/obj/item/clothing/head/helmet/tactical,
+					/obj/item/clothing/mask/balaclava/tactical,
+					/obj/item/clothing/glasses/tacgoggles,
+					/obj/item/storage/belt/holster/security/tactical,
+					/obj/item/clothing/shoes/tactical,
+					/obj/item/clothing/gloves/tactical)
+	cost = 45
+	containertype = /obj/structure/closet/crate/secure
+	containername = "tactical armor crate"
+	access = access_armory
 	security_level = SUPPLY_SECURITY_ELEVATED

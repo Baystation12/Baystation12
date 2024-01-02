@@ -12,26 +12,3 @@
 	accessory_icons = list(slot_w_uniform_str = CUSTOM_ITEM_MOB, slot_wear_suit_str = CUSTOM_ITEM_MOB)
 	item_icons = list(slot_wear_mask_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi')
 	icon_state = "talisman-4"
-
-/obj/item/clothing/accessory/scarf/inf
-	name = "red striped scarf"
-	icon = 'packs/infinity/icons/obj/clothing/obj_accessories.dmi'
-	icon_state = "stripedredscarf"
-	accessory_icons = list(slot_w_uniform_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi', slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi')
-	item_icons = list(slot_wear_mask_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi')
-
-/obj/item/clothing/accessory/scarf/inf/green
-	name = "green striped scarf"
-	icon_state = "stripedgreenscarf"
-
-/obj/item/clothing/accessory/scarf/inf/blue
-	name = "blue striped scarf"
-	icon_state = "stripedbluescarf"
-
-/obj/item/clothing/accessory/scarf/inf/zebra
-	name = "zebra scarf"
-	icon_state = "zebrascarf"
-
-/obj/item/clothing/accessory/scarf/inf/christmas
-	name = "christmas scarf"
-	icon_state = "christmasscarf"

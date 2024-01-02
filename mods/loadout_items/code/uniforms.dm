@@ -40,6 +40,8 @@
 	item_state = "gray_camo"
 	worn_state = "gray_camo"
 
+// Retro
+
 /obj/item/clothing/under/retro/security
 	desc = "A retro corporate security jumpsuit. Although it provides same protection as modern jumpsuits do, wearing this almost feels like being wrapped in tarp."
 	name = "retro security officer's uniform"
@@ -93,3 +95,315 @@
 	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
 	icon_state = "blueshift"
 	item_state = "blueshift"
+
+// Avalon
+
+/obj/item/clothing/under/avalon
+	name = "antiquated skirt"
+	desc = "Some really old fashioned skirt. Presumably a piece of Avalonian craftsmanship."
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "antiquated_skirt"
+	item_state = "antiquated_skirt"
+
+/obj/item/clothing/under/avalon/noble
+	name = "artsy suit"
+	desc = "A piece of exceptional work, for Avalonian artisan. Nobles from up there tend to be fond of wearing this."
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "noble"
+	item_state = "noble"
+
+// Expencive
+
+/* SIERRA TODO: Переспрайтить и сделать отдельный розовый жакет + шлем Для костюма Джекета то же самое
+/obj/item/clothing/under/biker
+	name = "biker"
+	desc = "For when you craving for some dead meat."
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "biker"
+	item_state = "biker"
+
+/obj/item/clothing/under/jacket
+	name = "old style jacket"
+	desc = "You know it damn well here."
+	desc = "For when you craving for some dead meat."
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "jacket"
+	item_state = "jacket"
+
+*/
+
+// Cuttop
+
+/obj/item/clothing/under/cuttop
+	name = "grey cuttop"
+	desc = "Loose fitting grey shirt with a broad neckline, accompained with some skinny jeans. Obviously worn by women."
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "cuttop"
+	item_state = "cuttop"
+	worn_state = "cuttop"
+
+/obj/item/clothing/under/cuttop/red
+	name = "red cuttop"
+	desc = "Loose fitting red shirt with a broad neckline, accompained with some skinny jeans. Obviously worn by women."
+	icon_state = "cuttop_red"
+	item_state = "cuttop_red"
+	worn_state = "cuttop_red"
+
+// Checkered
+
+/obj/item/clothing/under/checkered
+	name = "pinstripe"
+	desc = "You ain't one to be afraid of 18 karat of bad luck."
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "pinstripe"
+	item_state = "pinstripe"
+
+/obj/item/clothing/under/checkered/red
+	name = "red checkered shirt"
+	desc = "Incredibly comfy and warm flannel shirt in red checkered pattern."
+	icon_state = "stripped_shirt"
+	item_state = "stripped_shirt"
+	worn_state = "stripped_shirt"
+
+// Gotsis?
+
+/obj/item/clothing/under/dress/gotsis_red
+	name = "red gotsis dress"
+	desc = "Welcome to cabaret, lolly jolly~~"
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "gotsis_dress_1"
+	item_state = "gotsis_dress_1"
+
+/obj/item/clothing/under/dress/gotsis_orange
+	name = "orange gotsis dress"
+	desc = "Welcome to cabaret, lolly jolly~~"
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "gotsis_dress_2"
+	item_state = "gotsis_dress_2"
+
+// Spotrs
+
+/obj/item/clothing/under/sport
+	name = "faln trousers"
+	desc = "These athletic pants are truly a masterpiece as they perfectly fit for any type of figure."
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "papaleroy_faln_trousers"
+	item_state = "papaleroy_faln_trousers"
+
+/obj/item/clothing/under/sport/olympic
+	name = "olympic clothes"
+	desc = "A set of tracksuit and trackpants in gaudy coloration. Incredibly comfy for wearing and exercising, but this contrast of colors make your eyes melt."
+	icon_state = "olympic"
+	item_state = "olympic"
+
+// Formal
+
+/obj/item/clothing/under/formal
+	name = "white black"
+	desc = "White top, dark bottom. Too default."
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "white_black"
+	item_state = "white_black"
+
+/obj/item/clothing/under/formal/vest
+	name = "formal vest"
+	desc = "A standard set with a beige necktie."
+	icon_state = "formalvest"
+	item_state = "formalvest"
+
+/obj/item/clothing/under/formal/classic_suit
+	name = "classic suit"
+	desc = "Classic suit for really special occasions. It demands for regard, so treat it accordingly."
+	icon_state = "classic_suit"
+	item_state = "classic_suit"
+
+/obj/item/clothing/under/formal/chain_with_shirt
+	name = "black and white with style"
+	desc = "Some weird combination of starched shirt and studded jeans with a chain hanging off the belt."
+	icon_state = "chain_with_shirt"
+	item_state = "chain_with_shirt"
+	worn_state = "chain_with_shirt"
+
+/obj/item/clothing/under/formal/aristo
+	name = "aristo uniform"
+	desc = "Delicately sewn, this suit is magnificently fine and very expensive. Not for just any bourgeois."
+	icon_state = "papaleroy_aristo_suit"
+	item_state = "papaleroy_aristo_suit"
+
+/obj/item/clothing/under/formal/callum
+	name = "callum vest"
+	desc = "A quite sleek vest."
+	icon_state = "callum"
+	item_state = "callum"
+
+/obj/item/clothing/under/formal/hm_suit
+	name = "charcoal vest"
+	desc = "A woven charcoal suit and an azure necktie."
+	icon_state = "hm_suit"
+	item_state = "hm_suit"
+
+/obj/item/clothing/under/formal/red_n_black
+	name = "red 'n black suit"
+	desc = "A set of black slacks and red shirt."
+	icon_state = "detective"
+	item_state = "detective"
+	worn_state = "detective"
+
+/obj/item/clothing/under/formal/rubywhite
+	name = "rubywhite uniform"
+	desc = "Scarlet shirt accompained with white slacks held with suspenders."
+	icon_state = "papaleroy_rubywhite"
+	item_state = "papaleroy_rubywhite"
+	worn_state = "papaleroy_rubywhite"
+	gender_icons = 1
+
+// Informal
+
+/obj/item/clothing/under/informal
+	name = "harper uniform"
+	desc = "A maggy tank top and denim cargo pants with some knee protection sewn onto them. Seems like a perfect outfit for some garage dweller."
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "harper_uniform"
+	item_state = "harper_uniform"
+
+/obj/item/clothing/under/informal/vice
+	name = "vice uniform"
+	desc = "Casual set of black suit and red t-shirt."
+	icon_state = "vice2"
+	item_state = "vice2"
+
+/obj/item/clothing/under/informal/lify
+	name = "lify"
+	desc = "Here's some childish style, I dunno. Like who the hell would wear tank top with buttons?."
+	icon_state = "lify"
+	item_state = "lify"
+
+/obj/item/clothing/under/informal/denimvest
+	name = "denim vest"
+	desc = "Slightly bleached out denim vest with rebellic emblems drawn on its back."
+	icon_state = "denimvest"
+	item_state = "denimvest"
+
+/obj/item/clothing/under/informal/cuban_suit
+	name = "rhumba outfit"
+	desc = "A satin shirt and high-waisted pants, worn by dancers in the Rhumba style. It smells oddly like... sulfur?"
+	icon_state = "cuban_suit"
+	item_state = "cuban_suit"
+
+// Mafia
+
+/obj/item/clothing/under/mafia
+	name = "mafia outfit"
+	desc = "The business of the mafia is business."
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "mafia_suit"
+	item_state = "mafia_suit"
+
+/obj/item/clothing/under/mafia/vest
+	name = "mafia vest"
+	desc = "Extreme problems often require extreme solutions."
+	icon_state = "mafia_vest"
+	item_state = "mafia_vest"
+
+/obj/item/clothing/under/mafia/white
+	name = "white mafia outfit"
+	desc = "The best defense against the treacherous is treachery."
+	icon_state = "mafia_white"
+	item_state = "mafia_white"
+
+// Cursed
+
+/obj/item/clothing/under/maid
+	name = "maid dress"
+	desc = "Cliche product of Japan."
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "meido"
+	item_state = "meido"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
+// Service uniforms
+
+/obj/item/clothing/under/service
+	name = "dark service uniform"
+	desc = "A set of service clothes in military style. Largely available in many of surplus stores."
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "blackservice"
+	item_state = "blackservice"
+
+/obj/item/clothing/under/service/brown
+	name = "brown service uniform"
+	desc = "A set of service clothes in military style. Largely available in many of surplus stores."
+	icon_state = "blackserviceof"
+	item_state = "blackserviceof"
+
+/obj/item/clothing/under/service/white
+	name = "white service uniform"
+	desc = "A set of service clothes in military style. This one is purposed for special occasions."
+	icon_state = "whiteservice"
+	item_state = "whiteservice"
+
+/obj/item/clothing/under/service/female
+	name = "white female service uniform"
+	desc = "A set of service clothes in military style. This one is purposed for special occasions."
+	icon_state = "whiteservicefem"
+	item_state = "whiteservicefem"
+
+/obj/item/clothing/under/service/milsim
+	name = "milsim uniform"
+	desc = "Set of milsim navy fatigues which is very common in many of surplus stores."
+	icon_state = "papaleroy_milsim"
+	item_state = "papaleroy_milsim"
+
+// Victorian Dresses. We're still a research vessel...
+
+/obj/item/clothing/under/dress/victorian
+	name = "black victorian dress"
+	desc = "A victorian style dress, fancy!"
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "victorian_dress"
+	item_state = "victorian_dress"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
+/obj/item/clothing/under/dress/victorian/red
+	name = "red victorian dress"
+	desc = "A victorian style dress, fancy!"
+	icon_state = "victorian_reddress"
+	item_state = "victorian_reddress"
+
+// Victorian Suits. Vampire fangs not included
+
+/obj/item/clothing/under/formal/victorian
+	name = "victorian suit"
+	desc = "A victorian style suit, fancy!"
+	icon_state = "victorian_black"
+	item_state = "victorian_black"
+
+/obj/item/clothing/under/formal/victorian/black_red
+	name = "red and black victorian suit"
+	icon_state = "victorian_redblack"
+	item_state = "victorian_redblack"
+
+/obj/item/clothing/under/formal/victorian/red
+	name = "red victorian suit"
+	icon_state = "victorian_redvest"
+	item_state = "victorian_redvest"
+
+/obj/item/clothing/under/formal/victorian/twilight
+	name = "dark victorian suit"
+	icon_state = "victorian_twilight"
+	item_state = "victorian_twilight"

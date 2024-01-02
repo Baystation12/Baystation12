@@ -60,6 +60,7 @@
 
 /area/crew_quarters/sleep/cryo/thirddeck
 	name = "Third Deck - Living - Cryogenic Storage"
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 	holomap_color = HOLOMAP_AREACOLOR_CREW
 
 /area/crew_quarters/head/deck3

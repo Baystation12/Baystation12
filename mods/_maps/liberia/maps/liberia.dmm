@@ -728,6 +728,8 @@
 /obj/item/clothing/mask/balaclava,
 /obj/item/clothing/glasses/tacgoggles,
 /obj/item/clothing/under/syndicate,
+/obj/item/clothing/gloves/insulated/black,
+/obj/item/clothing/suit/armor/pcarrier/tactical,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/liberia/mule)
 "bt" = (
@@ -2013,6 +2015,7 @@
 /obj/machinery/alarm/merchant{
 	pixel_y = 24
 	},
+/obj/structure/closet/secure_closet/engineering_electrical/bearcat,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/liberia/engineeringreactor)
 "dx" = (
@@ -7522,7 +7525,7 @@
 	dir = 8
 	},
 /obj/structure/disposalpipe/trunk{
-	dir = 4
+	dir = 1
 	},
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/reinforced{
@@ -9000,13 +9003,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/liberia/hallway)
-"Xw" = (
-/obj/structure/disposalpipe/segment{
-	dir = 8;
-	icon_state = "pipe-c"
-	},
-/turf/simulated/wall/r_wall/prepainted,
-/area/liberia/captain)
 "XE" = (
 /obj/floor_decal/borderfloor/corner{
 	dir = 4
@@ -25412,7 +25408,7 @@ ZO
 oM
 pS
 VX
-Sm
+nO
 ya
 aa
 aa
@@ -25614,8 +25610,8 @@ ZO
 oM
 pS
 VX
-nO
-Xw
+Fc
+Aa
 WS
 WS
 WS

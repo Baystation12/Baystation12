@@ -9,3 +9,16 @@
 
 /datum/gear/eyes/material
 	allowed_roles = TECHNICAL_ROLES
+
+/datum/gear/eyes/fashionglasses
+	display_name = "non-prescription glasses"
+	path = /obj/item/clothing/glasses
+
+/datum/gear/eyes/fashionglasses/New()
+	..()
+	var/glasses = list()
+	glasses["green glasses"] = /obj/item/clothing/glasses/green
+	glasses["hipster glasses"] = /obj/item/clothing/glasses/hipster
+	glasses["monocle"] = /obj/item/clothing/glasses/monocle
+	glasses["scanning goggles"] = /obj/item/clothing/glasses/scanners
+	gear_tweaks += new/datum/gear_tweak/path(glasses)

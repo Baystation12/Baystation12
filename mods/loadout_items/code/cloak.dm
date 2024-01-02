@@ -1,19 +1,19 @@
 /obj/item/clothing/accessory/cloak // A colorable cloak
 	name = "blank cloak"
 	desc = "A simple, bland cloak."
-	icon = 'packs/infinity/icons/obj/clothing/obj_accessories.dmi'
+	icon = 'mods/loadout_items/icons/obj_accessory.dmi'
 	icon_state = "colorcloak"
 
 	accessory_icons = list(
-		slot_w_uniform_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi', \
-		slot_tie_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi', \
-		slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi')
+		slot_w_uniform_str = 'mods/loadout_items/icons/onmob_accessory.dmi', \
+		slot_tie_str = 'mods/loadout_items/icons/onmob_accessory.dmi', \
+		slot_wear_suit_str = 'mods/loadout_items/icons/onmob_accessory.dmi')
 	item_icons = list(
-		slot_wear_suit_str = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi')
-		
+		slot_wear_suit_str = 'mods/loadout_items/icons/onmob_accessory.dmi')
+
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi',
-		SPECIES_NABBER = 'packs/infinity/icons/mob/onmob/onmob_accessories.dmi'
+		SPECIES_UNATHI = 'mods/loadout_items/icons/onmob_accessory.dmi',
+		SPECIES_NABBER = 'mods/loadout_items/icons/onmob_accessory.dmi'
 	)
 
 	var/fire_resist = T0C+100
