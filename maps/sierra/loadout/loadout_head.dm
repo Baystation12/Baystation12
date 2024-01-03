@@ -28,3 +28,5 @@
 	beret_selection_type["ZPCI beret"] = /obj/item/clothing/head/beret/sec/corporate/zpci
 	gear_tweaks += new/datum/gear_tweak/path(beret_selection_type)
 
+/datum/gear/suit/unathi/security_cap
+	allowed_roles = SECURITY_ROLES

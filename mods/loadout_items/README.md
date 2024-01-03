@@ -4,6 +4,7 @@
 - https://github.com/SierraBay/SierraBay12/pull/1562
 - https://github.com/SierraBay/SierraBay12/pull/1643
 - https://github.com/SierraBay/SierraBay12/pull/1650
+- https://github.com/SierraBay/SierraBay12/pull/1761
 <!--
   Ссылки на PRы, связанные с модом:
   - Создание
@@ -68,6 +69,9 @@ ID мода: LOADOUT_ITEMS
 - `maps\torch\icons\obj\obj_accessories_solgov.dmi`
 - `maps\torch\icons\mob\unathi\onmob_accessories_solgov_unathi.dmi`
 - `maps\torch\icons\mob\onmob_accessories_solgov.dmi`
+- `maps\torch\icons\obj\obj_under_solgov.dmi`
+- `maps\torch\icons\mob\onmob_under_solgov.dmi`
+- `maps\torch\icons\mob\unathi\onmob_under_solgov_unathi.dmi`
 
 <!--
   Будь то немодульный файл или модульный файл, который не содержится в папке,

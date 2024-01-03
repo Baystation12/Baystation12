@@ -20,6 +20,19 @@
 	slot = slot_w_uniform
 	flags = GEAR_HAS_COLOR_SELECTION
 
+/datum/gear/uniform/sierra_scg
+	display_name = "SCG uniform selection"
+	allowed_branches = list(/datum/mil_branch/contractor)
+	allowed_factions = list(FACTION_EXPEDITIONARY, FACTION_CORPORATE)
+	path = /obj/item/clothing/under
+
+/datum/gear/uniform/sierra_scg/New()
+	..()
+	var/scg = list()
+	scg += /obj/item/clothing/under/scg_expeditonary
+	scg += /obj/item/clothing/under/scg_expeditonary/officer
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(scg)
+
 /datum/gear/uniform/avalon
 	display_name = "avalon outfit selection"
 	path = /obj/item/clothing/under/avalon

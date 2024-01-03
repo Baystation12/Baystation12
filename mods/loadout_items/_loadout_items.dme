@@ -6,6 +6,7 @@
 #include "code/armor.dm"
 #include "code/cloak.dm"
 #include "code/gloves.dm"
+#include "code/head.dm"
 #include "code/shoes.dm"
 #include "code/general.dm"
 #include "code/suits.dm"

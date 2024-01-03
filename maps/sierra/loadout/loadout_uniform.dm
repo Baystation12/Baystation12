@@ -89,3 +89,6 @@
 	display_name = "retro science officer's uniform"
 	allowed_roles = RESEARCH_ROLES
 	path = /obj/item/clothing/under/retro/science
+
+/datum/gear/suit/unathi/officer_uniform
+	allowed_roles = SECURITY_ROLES

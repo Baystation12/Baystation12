@@ -161,3 +161,44 @@
 	item_icons = list(slot_head_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
 	icon_state = "black_kimono"
 	item_state = "black_kimono"
+
+// First responder jacket
+	
+/obj/item/clothing/suit/storage/toggle/fr_jacket/highvis
+	name = "first responder jacket"
+	icon = 'mods/loadout_items/icons/obj_suit.dmi'
+	item_icons = list(slot_wear_suit_str = 'mods/loadout_items/icons/onmob_suit.dmi')
+
+/obj/item/clothing/suit/storage/toggle/fr_jacket/highvis/New()
+	. = ..()
+	sprite_sheets[SPECIES_UNATHI] = 'mods/loadout_items/icons/unathi/onmob_suit_unathi.dmi'
+	
+// Unathi garments
+
+/obj/item/clothing/suit/storage/security
+	name = "Big Security Jacket"
+	desc = "A pretty big jacket with deep pockets, favored by unathi mercenaries. It's too big to fit anyone, but unathi."
+	icon = 'mods/loadout_items/icons/obj_suit.dmi'
+	item_icons = list(slot_wear_suit_str = 'mods/loadout_items/icons/onmob_suit.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'mods/loadout_items/icons/onmob_suit.dmi'
+	)
+	icon_state = "unathi_secjacket"
+	item_state = "unsecjacket"
+
+	species_restricted = list(SPECIES_UNATHI)
+	w_class = ITEM_SIZE_NORMAL
+	allowed = list(
+		/obj/item/gun,
+		/obj/item/ammo_magazine,
+		/obj/item/ammo_casing,
+		/obj/item/melee/baton,
+		/obj/item/handcuffs,
+		/obj/item/tank/oxygen_emergency,
+		/obj/item/tank/oxygen_emergency_extended,
+		/obj/item/tank/nitrogen_emergency
+	)
+	siemens_coefficient = 0.9
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	
+

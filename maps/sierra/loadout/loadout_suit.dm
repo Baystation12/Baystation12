@@ -1,6 +1,9 @@
 /datum/gear/suit/medcoat
 	allowed_roles = MEDICAL_ROLES
 
+/datum/gear/suit/sierra_medcoat
+	allowed_roles = MEDICAL_ROLES
+
 /datum/gear/suit/poncho
 	display_name = "poncho selection"
 	path = /obj/item/clothing/suit/poncho/colored
@@ -85,3 +88,6 @@
 /datum/gear/suit/snakeskin
 	display_name = "snakeskin coat"
 	path = /obj/item/clothing/suit/snakeskin
+
+/datum/gear/suit/unathi/security_jacket
+	allowed_roles = SECURITY_ROLES

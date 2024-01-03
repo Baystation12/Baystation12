@@ -45,3 +45,18 @@
 	kim += /obj/item/clothing/suit/storage/kimono/red_short
 	kim += /obj/item/clothing/suit/storage/kimono/black
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(kim)
+
+/datum/gear/suit/sierra_medcoat
+	display_name = "medical suit selection"
+	path = /obj/item/clothing/suit
+	flags = GEAR_HAS_NO_CUSTOMIZATION
+
+/datum/gear/suit/sierra_medcoat/New()
+	..()
+	var/medicoats = list()
+	medicoats["first responder jacket"] = /obj/item/clothing/suit/storage/toggle/fr_jacket
+	medicoats["first responder jacket (high-visibility)"] = /obj/item/clothing/suit/storage/toggle/fr_jacket/highvis
+	medicoats["EMS jacket"] = /obj/item/clothing/suit/storage/toggle/fr_jacket/ems
+	medicoats["surgical apron"] = /obj/item/clothing/suit/surgicalapron
+	medicoats["medical jacket"] = /obj/item/clothing/suit/storage/toggle/fr_jacket/emrs
+	gear_tweaks += new/datum/gear_tweak/path(medicoats)
