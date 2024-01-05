@@ -281,7 +281,7 @@
 	for(var/obj/holo_obj in holographic_objs)
 		holo_obj.alpha *= 0.8 //give holodeck objs a slight transparency
 		holo_obj.holographic = TRUE
-		holo_obj.SetupChameleonExtension()
+		holo_obj.SetupChameleonExtension(CHAMELEON_FLEXIBLE_OPTIONS_PARENT_TYPE, TRUE, FALSE)
 
 	if(HP.ambience)
 		linkedholodeck.forced_ambience = HP.ambience.Copy()
