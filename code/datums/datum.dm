@@ -26,8 +26,7 @@
 				qdel(extension)
 		extensions = null
 	GLOB.destroyed_event && GLOB.destroyed_event.raise_event(src)
-	if (!isturf(src))
-		cleanup_events(src)
+	cleanup_events(src)
 	var/list/machines = global.state_machines["\ref[src]"]
 	if (length(machines))
 		for (var/base_type in machines)
