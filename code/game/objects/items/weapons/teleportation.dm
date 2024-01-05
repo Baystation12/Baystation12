@@ -11,7 +11,7 @@
 	name = "locator"
 	desc = "Used to track those with locater implants."
 	icon = 'icons/obj/tools/pinpointer.dmi'
-	icon_state = "locator"
+	icon_state = "pinoff"
 	var/temp = null
 	var/frequency = 1451
 	var/broadcasting = null

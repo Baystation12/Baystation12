@@ -4676,7 +4676,6 @@
 "na" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "door_locked";
 	id_tag = "escape_pod";
 	locked = 1;
 	name = "Escape Pod"
@@ -5321,7 +5320,6 @@
 "Kb" = (
 /obj/machinery/computer/modular{
 	dir = 8;
-	icon_state = "console";
 	name = "Cameras console"
 	},
 /turf/simulated/floor/tiled,

@@ -5,7 +5,7 @@
 	anchored = TRUE
 	use_power = POWER_USE_IDLE
 	icon = 'icons/obj/machines/kinetic_harvester.dmi'
-	icon_state = "off"
+	icon_state = "harvester"
 	var/initial_id_tag
 	var/list/stored =     list()
 	var/list/harvesting = list()

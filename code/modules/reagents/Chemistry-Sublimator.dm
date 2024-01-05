@@ -41,7 +41,7 @@
 	machine_name = "reagent sublimator"
 	machine_desc = "Sublimators draw reagents from a provided container and converts them into gases."
 
-	var/icon_set = "subliminator"
+	var/icon_set = "sublimator"
 	var/sublimated_units_per_tick = 20
 	var/obj/item/reagent_containers/container
 	var/list/reagent_whitelist //if this is set, the subliminator will only work with the listed reagents
