@@ -1,0 +1,4 @@
+author: LordNest
+changes:
+  - {bugfix: Fixed some missing sprites}
+delete-after: true
