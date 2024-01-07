@@ -27,7 +27,7 @@
 	ClearOverlays()
 	if(panel_open)
 		AddOverlays("[icon_state]_panel")
-	if(!connected.inoperable())
+	if(!connected?.inoperable())
 		AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
 		AddOverlays("[icon_state]_lights")
 
