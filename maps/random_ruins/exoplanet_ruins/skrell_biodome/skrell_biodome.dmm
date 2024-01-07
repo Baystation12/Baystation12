@@ -1,0 +1,2449 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aq" = (
+/obj/machinery/atmospherics/unary/tank/air{
+	start_pressure = 4559.63
+	},
+/obj/floor_decal/industrial/outline/blue,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/atmos)
+"ar" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/engineering)
+"au" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"aQ" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"ba" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/cyan{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/engineering)
+"bg" = (
+/obj/structure/table/glass,
+/obj/item/storage/box/nitrilegloves,
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"bB" = (
+/turf/simulated/floor/pool,
+/area/map_template/biodome/living)
+"ci" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/closet/crate/hydroponics,
+/turf/simulated/floor/tiled/skrell/green,
+/area/map_template/biodome/living)
+"cn" = (
+/obj/machinery/button/blast_door{
+	dir = 8;
+	pixel_x = 26;
+	id_tag = "sk_bd_south";
+	req_access = list("ACCESS_SKRELLSCOUT")
+	},
+/obj/structure/flora/pottedplant,
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"co" = (
+/turf/simulated/floor/tiled/skrell/green,
+/area/map_template/biodome/living)
+"cJ" = (
+/obj/paint/black,
+/turf/simulated/wall/r_wall,
+/area/map_template/biodome/medbay)
+"cY" = (
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/template_noop)
+"da" = (
+/obj/machinery/power/terminal{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/engineering)
+"dm" = (
+/obj/machinery/light/skrell{
+	dir = 8
+	},
+/obj/machinery/light_switch{
+	pixel_x = -24;
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/skrell/green,
+/area/map_template/biodome/living)
+"dF" = (
+/obj/structure/hygiene/faucet,
+/turf/simulated/floor/pool,
+/area/map_template/biodome/living)
+"dK" = (
+/obj/machinery/atmospherics/binary/pump/on{
+	dir = 4
+	},
+/obj/machinery/light/skrell,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/atmos)
+"ee" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/engineering)
+"es" = (
+/obj/machinery/optable,
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"eB" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
+	dir = 8;
+	id_tag = "skrellbd_pump_out_external"
+	},
+/turf/simulated/floor/tiled/skrell/red,
+/area/map_template/biodome/engineering)
+"eD" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
+	dir = 1;
+	id_tag = "skrellbd_pump_out_internal"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/light/skrell{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/skrell/red,
+/area/map_template/biodome/engineering)
+"fe" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/skrell/green,
+/area/map_template/biodome/living)
+"fz" = (
+/obj/machinery/bodyscanner{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"gj" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/black{
+	dir = 1
+	},
+/obj/machinery/door/airlock/external/bolted{
+	req_access = list("ACCESS_SKRELLSCOUT");
+	id_tag = "skrellbd_outer";
+	autoset_access = 0
+	},
+/obj/machinery/door/blast/regular{
+	id_tag = "sk_bd_north";
+	name = "Biodome protective shutters";
+	dir = 2
+	},
+/obj/machinery/button/blast_door{
+	pixel_x = 26;
+	id_tag = "sk_bd_north";
+	req_access = list("ACCESS_SKRELLSCOUT")
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/skrell/red,
+/area/map_template/biodome/engineering)
+"gl" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/engineering)
+"go" = (
+/obj/machinery/door/airlock/multi_tile/glass/atmos{
+	dir = 8;
+	name = "Atmospherics Storage"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	dir = 4
+	},
+/obj/machinery/door/firedoor,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/atmos)
+"gw" = (
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/medbay)
+"gC" = (
+/obj/structure/bed/chair/comfy/red{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"gE" = (
+/obj/machinery/door/airlock/multi_tile/glass/engineering{
+	dir = 8;
+	name = "Power Supply"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/engineering)
+"hn" = (
+/obj/machinery/reagentgrinder,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"hq" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"hQ" = (
+/obj/machinery/sleeper{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"in" = (
+/obj/machinery/atmospherics/portables_connector,
+/obj/floor_decal/industrial/outline/blue,
+/obj/machinery/alarm/skrell{
+	pixel_y = 14
+	},
+/obj/machinery/portable_atmospherics/canister/air/airlock,
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/engineering)
+"iG" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/biodome/engineering)
+"iL" = (
+/obj/structure/table/standard,
+/turf/simulated/floor/tiled/skrell/green,
+/area/map_template/biodome/living)
+"jM" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/ce,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"ke" = (
+/obj/structure/table/glass,
+/obj/item/bodybag/rescue/loaded,
+/obj/item/bodybag/rescue/loaded,
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"kI" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/skrell/green,
+/area/map_template/biodome/living)
+"kK" = (
+/obj/machinery/button/blast_door{
+	dir = 4;
+	pixel_x = -26;
+	id_tag = "sk_bd_east";
+	req_access = list("ACCESS_SKRELLSCOUT")
+	},
+/turf/simulated/floor/tiled/skrell/green,
+/area/map_template/biodome/living)
+"kM" = (
+/obj/machinery/atmospherics/pipe/simple/visible/cyan{
+	dir = 9
+	},
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/engineering)
+"kP" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"lx" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/power/apc/critical{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24;
+	req_access = list("ACCESS_SKRELLSCOUT")
+	},
+/obj/structure/cable,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"mc" = (
+/obj/structure/table/woodentable/walnut,
+/obj/item/storage/box/glasses/wine{
+	pixel_y = 8
+	},
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"mg" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/skrell/green,
+/area/map_template/biodome/living)
+"nJ" = (
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/portable_atmospherics/canister/empty,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/atmos)
+"nT" = (
+/obj/item/stool,
+/obj/structure/curtain/open/shower,
+/turf/simulated/floor/tiled/skrell/green,
+/area/map_template/biodome/living)
+"oa" = (
+/obj/machinery/chemical_dispenser,
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"oZ" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/obj/machinery/light/skrell{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"pa" = (
+/obj/machinery/light/skrell,
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"pi" = (
+/obj/machinery/atmospherics/unary/tank/air{
+	dir = 4;
+	start_pressure = 4559.63
+	},
+/obj/floor_decal/industrial/outline/blue,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/atmos)
+"pv" = (
+/obj/machinery/space_heater/skrell,
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/living)
+"pA" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
+	dir = 1;
+	id_tag = "skrellbd_pump_out_internal"
+	},
+/obj/machinery/airlock_sensor{
+	frequency = 1380;
+	id_tag = "skrellbd_sensor";
+	pixel_x = -24;
+	pixel_y = -7
+	},
+/turf/simulated/floor/tiled/skrell/red,
+/area/map_template/biodome/engineering)
+"pE" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/machinery/light/skrell{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/living)
+"qz" = (
+/obj/paint/black,
+/turf/simulated/wall/r_wall,
+/area/map_template/biodome/engineering)
+"qG" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/living)
+"rg" = (
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/atmos)
+"rh" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/light/skrell{
+	dir = 4;
+	icon_state = "tube1"
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"rw" = (
+/obj/machinery/portable_atmospherics/hydroponics,
+/turf/simulated/floor/tiled/skrell/green,
+/area/map_template/biodome/living)
+"rE" = (
+/obj/machinery/door/airlock/multi_tile/glass/civilian{
+	dir = 8;
+	name = "Medbay"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/door/firedoor,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/medbay)
+"rI" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"rO" = (
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/power/apc/critical{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24;
+	req_access = list("ACCESS_SKRELLSCOUT")
+	},
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/atmos)
+"rW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"sk" = (
+/obj/machinery/power/solar_control{
+	dir = 8;
+	id_tag = "skbiodome"
+	},
+/obj/structure/cable/yellow{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/engineering)
+"so" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/red{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/atmos)
+"ss" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"tF" = (
+/obj/wallframe_spawn/reinforced_phoron/hull,
+/obj/machinery/door/blast/regular{
+	id_tag = "sk_bd_east";
+	name = "Biodome protective shutters";
+	dir = 4
+	},
+/obj/machinery/door/firedoor,
+/obj/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/biodome/living)
+"tQ" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
+	dir = 4;
+	id_tag = "skrellbd_pump_out_external"
+	},
+/turf/simulated/floor/tiled/skrell/red,
+/area/map_template/biodome/engineering)
+"tU" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/skrell/green,
+/area/map_template/biodome/living)
+"tW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"uK" = (
+/obj/structure/table/glass,
+/obj/item/reagent_containers/glass/beaker/large{
+	pixel_x = -6;
+	pixel_y = 11
+	},
+/obj/item/reagent_containers/glass/beaker/large{
+	pixel_x = -6
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"uT" = (
+/obj/wallframe_spawn/reinforced_phoron/hull,
+/obj/machinery/door/firedoor,
+/obj/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/biodome/medbay)
+"uV" = (
+/obj/machinery/atmospherics/pipe/simple/visible/cyan{
+	dir = 4
+	},
+/obj/machinery/alarm/skrell{
+	dir = 1;
+	pixel_y = -22
+	},
+/obj/machinery/light_switch{
+	pixel_x = -22;
+	pixel_y = -22
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/atmos)
+"vh" = (
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/biodome/engineering)
+"vz" = (
+/turf/template_noop,
+/area/template_noop)
+"vI" = (
+/obj/structure/table/woodentable/walnut,
+/obj/item/tape_roll/skrell,
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"xj" = (
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/biodome/engineering)
+"xm" = (
+/obj/machinery/atmospherics/binary/pump/on{
+	dir = 8
+	},
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/engineering)
+"xG" = (
+/obj/machinery/portable_atmospherics/powered/scrubber,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/living)
+"yc" = (
+/obj/structure/hygiene/sink{
+	dir = 1;
+	pixel_y = 16
+	},
+/turf/simulated/floor/tiled/skrell/green,
+/area/map_template/biodome/living)
+"yI" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"zq" = (
+/obj/structure/roller_bed,
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"AH" = (
+/obj/machinery/power/smes/buildable/max_cap_in_out,
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/engineering)
+"AL" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/biodome/engineering)
+"Bu" = (
+/obj/machinery/door/airlock/multi_tile/glass/civilian{
+	dir = 8;
+	name = "Hydration Area"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"Bv" = (
+/obj/structure/bed/chair/comfy/red{
+	dir = 8
+	},
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"Cr" = (
+/obj/machinery/button/blast_door{
+	dir = 1;
+	pixel_y = -26;
+	id_tag = "sk_bd_west";
+	req_access = list("ACCESS_SKRELLSCOUT")
+	},
+/obj/structure/table/glass,
+/obj/item/storage/firstaid/surgery,
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"CL" = (
+/obj/structure/cable/yellow,
+/obj/machinery/power/solar/improved{
+	id_tag = "skbiodome"
+	},
+/obj/floor_decal/solarpanel,
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/biodome/engineering)
+"CP" = (
+/obj/structure/hygiene/shower{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/living)
+"DW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/civilian,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"EJ" = (
+/obj/machinery/body_scanconsole{
+	dir = 4
+	},
+/obj/machinery/light/skrell{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"Gj" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/engineering)
+"Gr" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/light_switch{
+	pixel_x = 6;
+	pixel_y = 24
+	},
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"Gt" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/biodome/engineering)
+"Gu" = (
+/obj/machinery/light/skrell{
+	dir = 1
+	},
+/obj/machinery/portable_atmospherics/canister/air,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/atmos)
+"GB" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/machinery/door/airlock/external/bolted{
+	req_access = list("ACCESS_SKRELLSCOUT");
+	id_tag = "skrellbd_inner";
+	autoset_access = 0
+	},
+/obj/machinery/access_button/airlock_exterior{
+	frequency = 1380;
+	master_tag = "transshipment_hangar";
+	pixel_x = -25
+	},
+/turf/simulated/floor/tiled/skrell/red,
+/area/map_template/biodome/engineering)
+"GW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	dir = 4
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/atmos)
+"Hy" = (
+/obj/structure/hygiene/sink{
+	dir = 4;
+	pixel_x = 11;
+	pixel_y = 5
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/living)
+"HL" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/living)
+"HX" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"Ia" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable,
+/obj/machinery/power/apc/critical{
+	name = "south bump";
+	pixel_y = -24;
+	req_access = list("ACCESS_SKRELLSCOUT")
+	},
+/obj/machinery/light_switch{
+	pixel_x = -22;
+	pixel_y = -22
+	},
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/engineering)
+"Ih" = (
+/obj/wallframe_spawn/reinforced_phoron/hull,
+/obj/machinery/door/blast/regular{
+	id_tag = "sk_bd_west";
+	name = "Biodome protective shutters";
+	dir = 4
+	},
+/obj/machinery/door/firedoor,
+/obj/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/biodome/medbay)
+"Iy" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"IA" = (
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"II" = (
+/obj/machinery/atmospherics/portables_connector,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/atmos)
+"IP" = (
+/obj/structure/hygiene/drain/bath,
+/obj/machinery/light/skrell,
+/turf/simulated/floor/pool,
+/area/map_template/biodome/living)
+"IV" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/engineering)
+"Jg" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/table/standard,
+/obj/item/mop/advanced,
+/turf/simulated/floor/tiled/skrell/green,
+/area/map_template/biodome/living)
+"Jt" = (
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"Jy" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"JG" = (
+/obj/machinery/portable_atmospherics/powered/pump/filled,
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/living)
+"JM" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/biodome/engineering)
+"Ke" = (
+/obj/machinery/vending/medical/skrell,
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"Ko" = (
+/obj/structure/table/glass,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/item/reagent_containers/spray/cleaner{
+	pixel_x = -5
+	},
+/obj/item/reagent_containers/spray/sterilizine,
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"Ky" = (
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/biodome/engineering)
+"KB" = (
+/obj/machinery/atmospherics/pipe/simple/visible/cyan{
+	dir = 5
+	},
+/obj/machinery/portable_atmospherics/powered/scrubber,
+/obj/machinery/light/skrell{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/engineering)
+"KD" = (
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"KP" = (
+/obj/structure/hygiene/toilet{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/living)
+"Lc" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/door/airlock/external/bolted{
+	req_access = list("ACCESS_SKRELLSCOUT");
+	id_tag = "skrellbd_inner";
+	autoset_access = 0
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/skrell/red,
+/area/map_template/biodome/engineering)
+"Ln" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/table/glass,
+/obj/item/storage/firstaid/adv{
+	pixel_x = -9;
+	pixel_y = -2
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"Lr" = (
+/obj/machinery/light/skrell{
+	dir = 4
+	},
+/obj/machinery/vending/engineering{
+	req_access = list("ACCESS_SKRELLSCOUT");
+	dir = 8
+	},
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/engineering)
+"LY" = (
+/obj/structure/table/standard,
+/obj/machinery/light/skrell{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/skrell/green,
+/area/map_template/biodome/living)
+"Ma" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/civilian,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"Me" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/skrell/green,
+/area/map_template/biodome/living)
+"Mi" = (
+/obj/structure/closet/crate,
+/obj/item/seeds/ximikoa,
+/obj/item/seeds/ximikoa,
+/obj/item/seeds/ximikoa,
+/obj/item/seeds/okrri,
+/obj/item/seeds/okrri,
+/obj/item/seeds/okrri,
+/obj/item/seeds/qokkloa,
+/obj/item/seeds/qokkloa,
+/obj/item/seeds/qokkloa,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"MA" = (
+/obj/machinery/computer/operating{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"ML" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"Nn" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/engineering)
+"ND" = (
+/obj/machinery/door/airlock/civilian{
+	name = "Dormintories"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"NE" = (
+/obj/structure/table/woodentable/walnut,
+/obj/item/toy/plushie/thoom,
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"NG" = (
+/obj/wallframe_spawn/reinforced_phoron/hull,
+/obj/machinery/door/blast/regular{
+	id_tag = "sk_bd_south";
+	name = "Biodome protective shutters"
+	},
+/obj/machinery/door/firedoor,
+/obj/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/biodome/living)
+"NP" = (
+/obj/machinery/atmospherics/binary/pump/on{
+	dir = 8
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/atmos)
+"NU" = (
+/obj/structure/closet/cabinet,
+/obj/item/device/radio/hailing,
+/obj/item/device/radio/hailing,
+/obj/item/gun/energy/gun/skrell,
+/obj/item/device/spaceflare,
+/obj/machinery/light/skrell{
+	dir = 8
+	},
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"Oa" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/biodome/engineering)
+"Oe" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/civilian,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"Ow" = (
+/obj/machinery/chem_master,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"OM" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/alarm/skrell{
+	pixel_y = 14
+	},
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"OT" = (
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"OU" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
+	id_tag = "skrellbd_pump"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/skrell/red,
+/area/map_template/biodome/engineering)
+"OX" = (
+/obj/machinery/atmospherics/portables_connector{
+	dir = 4
+	},
+/obj/machinery/portable_atmospherics/canister/empty,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/atmos)
+"Py" = (
+/obj/structure/reagent_dispensers/water_cooler{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"PH" = (
+/obj/machinery/door/airlock{
+	name = "Head"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"PR" = (
+/obj/structure/cable/yellow,
+/obj/machinery/power/solar{
+	id_tag = "skbiodome"
+	},
+/obj/floor_decal/solarpanel,
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/biodome/engineering)
+"PU" = (
+/obj/machinery/power/tracker,
+/obj/structure/cable/yellow,
+/obj/floor_decal/solarpanel,
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/biodome/engineering)
+"PZ" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"Qv" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"QI" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"QK" = (
+/obj/machinery/alarm/skrell{
+	pixel_y = 14
+	},
+/turf/simulated/floor/tiled/skrell/green,
+/area/map_template/biodome/living)
+"QX" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"Rg" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/engineering)
+"RC" = (
+/obj/item/reagent_containers/food/snacks/skrellsnacks,
+/obj/item/reagent_containers/food/snacks/skrellsnacks,
+/obj/item/reagent_containers/food/snacks/skrellsnacks,
+/obj/item/reagent_containers/food/snacks/skrellsnacks,
+/obj/item/reagent_containers/food/snacks/skrellsnacks,
+/obj/item/reagent_containers/food/snacks/skrellsnacks,
+/obj/item/reagent_containers/food/snacks/skrellsnacks,
+/obj/item/reagent_containers/food/snacks/skrellsnacks,
+/obj/structure/closet/crate/freezer,
+/obj/item/reagent_containers/food/drinks/bottle/thoom,
+/obj/item/reagent_containers/food/drinks/bottle/thoom,
+/obj/item/reagent_containers/food/drinks/bottle/thoom,
+/obj/machinery/power/apc/critical{
+	name = "south bump";
+	pixel_y = -24;
+	req_access = list("ACCESS_SKRELLSCOUT")
+	},
+/obj/structure/cable,
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"Tr" = (
+/obj/machinery/light/skrell{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"Uc" = (
+/obj/machinery/smartfridge/chemistry,
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"Ut" = (
+/obj/paint/black,
+/turf/simulated/wall/r_wall,
+/area/map_template/biodome/living)
+"UW" = (
+/obj/machinery/atmospherics/unary/tank/air{
+	start_pressure = 4559.63
+	},
+/obj/floor_decal/industrial/outline/blue,
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/engineering)
+"Vz" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/obj/structure/roller_bed,
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"Wo" = (
+/obj/structure/cable/yellow{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/power/solar/improved{
+	id_tag = "skbiodome"
+	},
+/obj/floor_decal/solarpanel,
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/biodome/engineering)
+"WS" = (
+/obj/machinery/space_heater/skrell,
+/obj/machinery/light/skrell{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/skrell/orange,
+/area/map_template/biodome/living)
+"WU" = (
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/biodome/engineering)
+"Xj" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/cyan,
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/atmos)
+"XK" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/light/skrell{
+	dir = 4;
+	icon_state = "tube1"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/living)
+"Yl" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/black{
+	dir = 1
+	},
+/obj/machinery/door/airlock/external/bolted{
+	req_access = list("ACCESS_SKRELLSCOUT");
+	id_tag = "skrellbd_outer";
+	autoset_access = 0
+	},
+/obj/machinery/door/blast/regular{
+	id_tag = "sk_bd_north";
+	name = "Biodome protective shutters";
+	dir = 2
+	},
+/obj/machinery/access_button/airlock_exterior{
+	frequency = 1380;
+	master_tag = "transshipment_hangar";
+	pixel_x = -25
+	},
+/turf/simulated/floor/tiled/skrell/red,
+/area/map_template/biodome/engineering)
+"YI" = (
+/obj/paint/black,
+/turf/simulated/wall/r_wall,
+/area/map_template/biodome/atmos)
+"YK" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/black{
+	dir = 4
+	},
+/obj/paint/black,
+/turf/simulated/wall/r_wall,
+/area/map_template/biodome/engineering)
+"YU" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
+	id_tag = "skrellbd_pump"
+	},
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	tag_exterior_door = "transshipment_hangar_outer";
+	tag_interior_door = "transshipment_hangar_inner";
+	tag_airpump = "transshipment_hangar_pump";
+	tag_chamber_sensor = "transshipment_hangar_sensor_chamber";
+	id_tag = "skrellbd";
+	frequency = 1380;
+	dir = 4;
+	pixel_x = -24
+	},
+/turf/simulated/floor/tiled/skrell/red,
+/area/map_template/biodome/engineering)
+"Zo" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"Zu" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/biodome/engineering)
+"ZC" = (
+/obj/structure/table/woodentable/walnut,
+/turf/simulated/floor/carpet/blue,
+/area/map_template/biodome/living)
+"ZR" = (
+/obj/machinery/alarm/skrell{
+	pixel_y = 14
+	},
+/obj/machinery/light_switch{
+	pixel_x = -22;
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/map_template/biodome/medbay)
+"ZW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/skrell/blue,
+/area/map_template/biodome/engineering)
+
+(1,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(2,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(3,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(4,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(5,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+Wo
+vh
+AL
+PU
+cY
+cY
+cY
+cY
+cY
+cY
+cY
+cY
+cY
+cY
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(6,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+Wo
+vh
+JM
+CL
+xj
+cY
+cJ
+Ih
+Ih
+Ih
+Ih
+Ih
+Ih
+cJ
+cY
+cY
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(7,1,1) = {"
+vz
+vz
+vz
+vz
+Wo
+vh
+JM
+CL
+xj
+xj
+YI
+cJ
+Uc
+KD
+bg
+Ko
+uK
+oa
+cJ
+Ut
+cY
+cY
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(8,1,1) = {"
+vz
+vz
+vz
+Wo
+vh
+JM
+CL
+xj
+xj
+YI
+YI
+cJ
+Ke
+KD
+KD
+KD
+KD
+pa
+cJ
+Ut
+Ut
+cY
+cY
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(9,1,1) = {"
+vz
+vz
+Wo
+vh
+JM
+CL
+xj
+xj
+YI
+YI
+pi
+cJ
+ke
+KD
+KD
+Ln
+hn
+Ow
+cJ
+jM
+Ut
+Ut
+cY
+cY
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(10,1,1) = {"
+vz
+Wo
+vh
+JM
+CL
+xj
+xj
+YI
+YI
+aq
+Xj
+cJ
+EJ
+KD
+KD
+MA
+es
+Cr
+cJ
+oZ
+jM
+Ut
+Ut
+cY
+cY
+vz
+vz
+vz
+vz
+vz
+"}
+(11,1,1) = {"
+vz
+xj
+Oa
+CL
+xj
+xj
+YI
+YI
+OX
+II
+Xj
+cJ
+fz
+KD
+KD
+KD
+KD
+pa
+cJ
+Jy
+ss
+jM
+Ut
+Ut
+cY
+cY
+vz
+vz
+vz
+vz
+"}
+(12,1,1) = {"
+vz
+xj
+iG
+xj
+xj
+qz
+YI
+nJ
+so
+rg
+uV
+cJ
+ZR
+QX
+kP
+tW
+Vz
+zq
+cJ
+ND
+Ut
+Ut
+Ut
+Ut
+Ut
+cY
+vz
+vz
+vz
+vz
+"}
+(13,1,1) = {"
+vz
+xj
+iG
+xj
+xj
+tQ
+YI
+Gu
+rO
+NP
+dK
+cJ
+hQ
+hQ
+KD
+Qv
+Mi
+RC
+cJ
+OM
+OT
+NU
+OT
+Py
+NG
+cY
+vz
+vz
+vz
+vz
+"}
+(14,1,1) = {"
+vz
+xj
+iG
+xj
+xj
+YK
+YI
+YI
+YI
+GW
+go
+cJ
+uT
+uT
+gw
+rE
+uT
+uT
+cJ
+Iy
+rI
+gC
+gC
+OT
+NG
+cY
+vz
+vz
+vz
+vz
+"}
+(15,1,1) = {"
+vz
+xj
+iG
+xj
+xj
+Yl
+pA
+YU
+GB
+IV
+ZW
+Oe
+Jt
+PZ
+Jt
+rW
+hq
+Jt
+Oe
+QI
+ML
+mc
+NE
+OT
+NG
+cY
+vz
+vz
+vz
+vz
+"}
+(16,1,1) = {"
+vz
+xj
+WU
+AL
+AL
+gj
+eD
+OU
+Lc
+ee
+Nn
+Ma
+au
+rh
+au
+yI
+XK
+lx
+DW
+aQ
+HX
+ZC
+vI
+OT
+NG
+cY
+vz
+vz
+vz
+vz
+"}
+(17,1,1) = {"
+vz
+xj
+iG
+xj
+xj
+YK
+qz
+qz
+qz
+gl
+gE
+Ut
+Ut
+Ut
+IA
+Bu
+Ut
+Ut
+Ut
+Gr
+Zo
+Bv
+Bv
+OT
+NG
+cY
+vz
+vz
+vz
+vz
+"}
+(18,1,1) = {"
+vz
+xj
+iG
+xj
+xj
+eB
+qz
+UW
+KB
+xm
+ar
+WS
+pv
+Ut
+yc
+fe
+dm
+rw
+Ut
+Iy
+OT
+Tr
+OT
+cn
+NG
+cY
+vz
+vz
+vz
+vz
+"}
+(19,1,1) = {"
+vz
+xj
+iG
+xj
+xj
+qz
+qz
+in
+ba
+kM
+Gj
+xG
+JG
+Ut
+QK
+mg
+Me
+rw
+Ut
+PH
+Ut
+Ut
+Ut
+Ut
+Ut
+cY
+vz
+vz
+vz
+vz
+"}
+(20,1,1) = {"
+vz
+xj
+Zu
+CL
+xj
+xj
+qz
+qz
+sk
+da
+Rg
+Ut
+Ut
+Ut
+co
+kI
+tU
+rw
+Ut
+HL
+qG
+CP
+Ut
+Ut
+cY
+cY
+vz
+vz
+vz
+vz
+"}
+(21,1,1) = {"
+vz
+Wo
+Ky
+Gt
+PR
+xj
+xj
+qz
+qz
+AH
+Ia
+Ut
+iL
+kK
+co
+co
+ci
+Jg
+Ut
+pE
+Hy
+Ut
+Ut
+cY
+cY
+vz
+vz
+vz
+vz
+vz
+"}
+(22,1,1) = {"
+vz
+vz
+Wo
+Ky
+Gt
+CL
+xj
+xj
+qz
+qz
+Lr
+Ut
+nT
+co
+bB
+bB
+bB
+bB
+Ut
+KP
+Ut
+Ut
+cY
+cY
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(23,1,1) = {"
+vz
+vz
+vz
+Wo
+Ky
+Gt
+CL
+xj
+xj
+qz
+qz
+Ut
+LY
+co
+dF
+bB
+bB
+IP
+Ut
+Ut
+Ut
+cY
+cY
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(24,1,1) = {"
+vz
+vz
+vz
+vz
+Wo
+Ky
+Gt
+CL
+xj
+xj
+qz
+Ut
+nT
+co
+bB
+bB
+bB
+bB
+Ut
+Ut
+cY
+cY
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(25,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+Wo
+Ky
+Gt
+CL
+xj
+cY
+Ut
+tF
+tF
+tF
+tF
+tF
+tF
+Ut
+cY
+cY
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(26,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+Wo
+Ky
+AL
+CL
+cY
+cY
+cY
+cY
+cY
+cY
+cY
+cY
+cY
+cY
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(27,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(28,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(29,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}
+(30,1,1) = {"
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+vz
+"}

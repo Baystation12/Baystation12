@@ -3,7 +3,7 @@
 /turf/template_noop,
 /area/template_noop)
 "b" = (
-/turf/simulated/wall/sandstonediamond,
+/turf/simulated/wall/sandstone/diamond,
 /area/template_noop)
 "c" = (
 /turf/simulated/floor/fixed/alium,

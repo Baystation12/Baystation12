@@ -1,0 +1,145 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/obj/structure/droppod_door{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/droppod)
+"c" = (
+/obj/landmark/scorcher,
+/turf/template_noop,
+/area/template_noop)
+"d" = (
+/turf/simulated/wall/r_titanium,
+/area/map_template/droppod)
+"f" = (
+/obj/structure/droppod_door,
+/turf/simulated/floor/reinforced,
+/area/map_template/droppod)
+"g" = (
+/turf/simulated/floor/reinforced,
+/area/map_template/droppod)
+"j" = (
+/obj/structure/droppod_door{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/droppod)
+"q" = (
+/obj/structure/droppod_door{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/droppod)
+"u" = (
+/obj/landmark/map_load_mark/droppod,
+/turf/simulated/floor/reinforced,
+/area/map_template/droppod)
+"O" = (
+/obj/landmark/scorcher,
+/obj/landmark/scorcher,
+/turf/template_noop,
+/area/template_noop)
+
+(1,1,1) = {"
+a
+a
+c
+c
+c
+c
+c
+a
+a
+"}
+(2,1,1) = {"
+a
+c
+c
+d
+c
+d
+c
+c
+a
+"}
+(3,1,1) = {"
+c
+c
+d
+d
+j
+d
+d
+c
+c
+"}
+(4,1,1) = {"
+c
+d
+d
+g
+g
+g
+d
+d
+c
+"}
+(5,1,1) = {"
+c
+c
+q
+g
+u
+g
+f
+c
+c
+"}
+(6,1,1) = {"
+c
+d
+d
+g
+g
+g
+d
+d
+c
+"}
+(7,1,1) = {"
+c
+c
+d
+d
+b
+d
+d
+c
+c
+"}
+(8,1,1) = {"
+a
+c
+c
+d
+c
+d
+c
+O
+a
+"}
+(9,1,1) = {"
+a
+a
+c
+c
+c
+c
+c
+a
+a
+"}
