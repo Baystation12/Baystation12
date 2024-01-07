@@ -25,8 +25,8 @@ Civilian
 
 /datum/job/assistant
 	title = "Passenger"
-	total_positions = 12
-	spawn_positions = 12
+	total_positions = -1
+	spawn_positions = -1
 	supervisors = "the Executive Officer"
 	economic_power = 6
 	announced = FALSE
