@@ -1,0 +1,4 @@
+author: SierraKomodo
+changes:
+  - {tweak: The passenger role now has unlimited slots.}
+delete-after: true
