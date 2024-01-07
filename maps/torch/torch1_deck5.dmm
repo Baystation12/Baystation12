@@ -5007,9 +5007,9 @@
 	},
 /obj/structure/window/reinforced,
 /obj/machinery/door/window/northright{
+	autoset_access = 0;
 	name = "suit storage";
-	req_access = list("ACCESS_MINING");
-	autoset_access = 0
+	req_access = list("ACCESS_MINING")
 	},
 /obj/item/rig/industrial/equipped,
 /obj/structure/window/reinforced{
@@ -8724,8 +8724,8 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/research{
-	name = "Canister Storage";
 	autoset_access = 0;
+	name = "Canister Storage";
 	req_access = list("ACCESS_TOX_STORAGE")
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -8785,8 +8785,8 @@
 "tj" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/research{
-	name = "Canister Storage";
 	autoset_access = 0;
+	name = "Canister Storage";
 	req_access = list("ACCESS_TOX_STORAGE")
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{

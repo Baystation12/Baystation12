@@ -2736,7 +2736,6 @@
 /area/maintenance/seconddeck/forestarboard)
 "fw" = (
 /obj/floor_decal/corner/yellow/diagonal,
-/obj/random_multi/single_item/punitelly,
 /turf/simulated/floor/tiled/freezer,
 /area/maintenance/seconddeck/forestarboard)
 "fx" = (
@@ -12289,10 +12288,6 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/foyer)
-"EQ" = (
-/obj/random_multi/single_item/punitelly,
-/turf/simulated/floor/plating,
-/area/vacant/chapel)
 "ES" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/cyan{
 	dir = 4
@@ -15648,15 +15643,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck)
-"PO" = (
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/random_multi/single_item/punitelly,
-/turf/simulated/floor/tiled/techfloor,
-/area/maintenance/seconddeck/forestarboard)
 "PP" = (
 /obj/machinery/door/blast/regular/escape_pod{
 	dir = 4
@@ -15983,10 +15969,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics)
-"QR" = (
-/obj/random_multi/single_item/punitelly,
-/turf/simulated/floor/plating,
-/area/maintenance/seconddeck/forestarboard)
 "QT" = (
 /obj/structure/sign/warning/vent_port{
 	dir = 1
@@ -30804,7 +30786,7 @@ JX
 fd
 bd
 bd
-QR
+bd
 bd
 GY
 Gs
@@ -31609,7 +31591,7 @@ JX
 JX
 dO
 dq
-EQ
+dq
 dq
 dr
 dq
@@ -34027,7 +34009,7 @@ JX
 JX
 JX
 bc
-PO
+vH
 ch
 cL
 cN

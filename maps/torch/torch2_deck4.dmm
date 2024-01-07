@@ -1093,6 +1093,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
+/obj/random_multi/single_item/punitelli,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/deck4)
 "dI" = (
@@ -4100,6 +4101,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
+/obj/random_multi/single_item/punitelli,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/laundry)
 "nZ" = (
@@ -4390,6 +4392,11 @@
 /obj/random/soap,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/laundry)
+"pj" = (
+/obj/structure/table/standard,
+/obj/random_multi/single_item/punitelli,
+/turf/simulated/floor/tiled,
+/area/crew_quarters/diplomatic_office)
 "pl" = (
 /obj/floor_decal/industrial/outline/grey,
 /obj/machinery/suit_storage_unit/standard_unit,
@@ -5213,6 +5220,7 @@
 	},
 /obj/floor_decal/industrial/outline/yellow,
 /obj/catwalk_plated,
+/obj/random_multi/single_item/punitelli,
 /turf/simulated/floor/plating,
 /area/storage/primary)
 "sw" = (
@@ -7327,8 +7335,8 @@
 	},
 /obj/structure/table/woodentable/walnut,
 /obj/item/storage/box/silverware{
-	pixel_y = 10;
-	pixel_x = -3
+	pixel_x = -3;
+	pixel_y = 10
 	},
 /obj/item/storage/box/silverware{
 	pixel_x = -3;
@@ -16326,12 +16334,12 @@
 	},
 /obj/structure/table/woodentable/walnut,
 /obj/item/reagent_containers/food/drinks/bottle/premiumwine{
-	pixel_y = 15;
-	pixel_x = -6
+	pixel_x = -6;
+	pixel_y = 15
 	},
 /obj/item/reagent_containers/food/drinks/bottle/tadmorwine{
-	pixel_y = 15;
-	pixel_x = 3
+	pixel_x = 3;
+	pixel_y = 15
 	},
 /obj/item/reagent_containers/food/drinks/bottle/champagne{
 	pixel_x = -6;
@@ -29173,7 +29181,7 @@ tv
 tv
 LZ
 PY
-PY
+pj
 PY
 Ct
 Oh
