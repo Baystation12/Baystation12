@@ -102,6 +102,10 @@
 	. = ..()
 
 /obj/machinery/atmospherics/pipe/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if (istype(W, /obj/item/pipe))
+		user.unEquip(W, loc)
+		return TRUE
+
 	if (!isWrench(W))
 		return ..()
 
