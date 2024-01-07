@@ -1,7 +1,0 @@
-author: Mucker
-changes:
-  - {tweak: Removed Bearcat's holopad and distress beacon. Added a radio beacon circuit
-      board and a RCD.}
-  - {tweak: Reduced Survival Pod's spawn rate so Exploration isn't constantly stuck
-      doing rescues.}
-delete-after: true
