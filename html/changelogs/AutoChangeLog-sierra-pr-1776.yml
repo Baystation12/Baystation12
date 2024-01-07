@@ -1,0 +1,5 @@
+author: SierraKomodo
+changes:
+  - {bugfix: On-mob sprites for energy shields now properly update when the shield
+      turns off.}
+delete-after: true
