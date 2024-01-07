@@ -12,7 +12,6 @@
 	var/on = 0
 	var/area/connected_area = null
 	var/other_area = null
-	var/image/overlay
 
 /obj/machinery/light_switch/Initialize()
 	. = ..()
@@ -28,20 +27,18 @@
 	update_icon()
 
 /obj/machinery/light_switch/on_update_icon()
-	if(!overlay)
-		overlay = image(icon, "light1-overlay")
-		overlay.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		overlay.layer = ABOVE_LIGHTING_LAYER
-
 	ClearOverlays()
 	if(inoperable())
 		icon_state = "light-p"
 		set_light(0)
 	else
 		icon_state = "light[on]"
-		overlay.icon_state = "light[on]-overlay"
-		AddOverlays(overlay)
-		set_light(2, 0.25, on ? "#82ff4c" : "#f86060")
+		var/color = on ? "#82ff4c" : "#f86060"
+		AddOverlays(list(
+			emissive_appearance(icon, "light[on]-overlay"),
+			overlay_image(icon, "light[on]-overlay", color)
+		))
+		set_light(2, 0.25, color)
 
 /obj/machinery/light_switch/examine(mob/user, distance)
 	. = ..()
