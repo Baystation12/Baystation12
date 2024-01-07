@@ -235,12 +235,13 @@
 		force = initial(force)
 		w_class = initial(w_class)
 
+	update_icon()
+
 	if (istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		H.update_inv_l_hand()
 		H.update_inv_r_hand()
 
-	update_icon()
 	addtimer(new Callback(src, /obj/item/shield/energy/proc/UpdateSoundLoop), 0.1 SECONDS)
 
 
