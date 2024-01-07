@@ -1,0 +1,5 @@
+author: emmanuelbassil
+changes:
+  - {bugfix: Fixes in-hand pipes disappearing when clicking on anchored down pipes.}
+  - {bugfix: Hardsuit mounted flash works properly again}
+delete-after: true
