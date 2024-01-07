@@ -41,7 +41,7 @@ Buildable meters
 
 //called when a turf is attacked with a pipe item
 /obj/item/pipe/use_after(atom/target, mob/living/user, click_parameters)
-	if (istype(target))
+	if (istype(target, /turf/simulated/floor))
 		user.unEquip(src, target)
 		return TRUE
 

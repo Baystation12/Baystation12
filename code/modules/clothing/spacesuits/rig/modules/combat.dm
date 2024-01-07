@@ -67,7 +67,7 @@
 	if(!target.Adjacent(holder.wearer) || !ismob(target))
 		return 0
 
-	var/resolved = target.attackby(device,holder.wearer)
+	var/resolved = device.resolve_attackby(target,holder.wearer)
 	if(resolved)
 		holder.cell.use(use_power_cost * CELLRATE)
 	return resolved
