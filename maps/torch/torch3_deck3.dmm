@@ -405,6 +405,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
+/obj/random_multi/single_item/punitelli,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/gym)
 "bx" = (
@@ -5164,6 +5165,7 @@
 	},
 /obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/hologram/holopad,
+/obj/random_multi/single_item/punitelli,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/thirddeck)
 "lE" = (
@@ -8106,6 +8108,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
+/obj/random_multi/single_item/punitelli,
 /turf/simulated/floor/lino,
 /area/crew_quarters/office)
 "sI" = (
@@ -9607,6 +9610,7 @@
 	dir = 8;
 	pixel_x = 21
 	},
+/obj/random_multi/single_item/punitelli,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/sleep/bunk)
 "wY" = (
@@ -12076,6 +12080,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/random_multi/single_item/punitelli,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/service_break_room)
 "DU" = (
@@ -13869,34 +13874,52 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/hallway/primary/thirddeck/fore)
 "ID" = (
-/obj/random_multi/single_item/punitelly,
+/obj/structure/disposalpipe/segment,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/random_multi/single_item/punitelli,
 /turf/simulated/floor/tiled,
-/area/vacant/brig)
+/area/crew_quarters/gym)
 "IE" = (
-/obj/random_multi/single_item/punitelly,
-/turf/simulated/floor/plating,
-/area/maintenance/thirddeck/starboard)
+/obj/random_multi/single_item/punitelli,
+/turf/simulated/floor/carpet,
+/area/crew_quarters/recreation)
 "IF" = (
 /obj/structure/sign/poster/torch,
 /turf/simulated/wall/prepainted,
 /area/crew_quarters/recreation)
 "IH" = (
-/obj/structure/table/steel,
-/obj/random_multi/single_item/punitelly,
-/turf/simulated/floor/tiled/dark,
-/area/vacant/cabin)
+/obj/random_multi/single_item/punitelli,
+/turf/simulated/floor/tiled/freezer,
+/area/crew_quarters/head)
 "II" = (
-/obj/random_multi/single_item/punitelly,
-/turf/simulated/floor/tiled/dark,
-/area/vacant/cabin)
-"IJ" = (
-/obj/random_multi/single_item/punitelly,
-/obj/structure/railing/mapped{
-	dir = 4;
-	icon_state = "railing0-1"
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
-/area/maintenance/thirddeck/aftport)
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/random_multi/single_item/punitelli,
+/turf/simulated/floor/tiled/dark,
+/area/chapel/main)
+"IJ" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/disposalpipe/segment,
+/obj/random_multi/single_item/punitelli,
+/turf/simulated/floor/tiled/white,
+/area/crew_quarters/sleep/cryo)
 "IK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -16149,7 +16172,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "NO" = (
-/obj/random_multi/single_item/punitelly,
 /obj/decal/cleanable/dirt,
 /turf/simulated/floor/plating,
 /area/vacant/mess)
@@ -16262,12 +16284,12 @@
 	pixel_y = 10
 	},
 /obj/item/reagent_containers/glass/rag{
-	pixel_y = 4;
-	pixel_x = -3
+	pixel_x = -3;
+	pixel_y = 4
 	},
 /obj/item/reagent_containers/glass/rag{
-	pixel_y = 4;
-	pixel_x = 3
+	pixel_x = 3;
+	pixel_y = 4
 	},
 /obj/machinery/light{
 	dir = 8
@@ -16325,6 +16347,7 @@
 	},
 /obj/structure/table/standard,
 /obj/random_multi/single_item/runtime,
+/obj/random_multi/single_item/punitelli,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "Om" = (
@@ -17133,7 +17156,6 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/obj/random_multi/single_item/punitelly,
 /obj/machinery/portable_atmospherics/powered/scrubber,
 /obj/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
@@ -18388,6 +18410,7 @@
 	dir = 4
 	},
 /obj/random/date_based/christmas/tree/fountain,
+/obj/random_multi/single_item/punitelli,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/observation)
 "Ui" = (
@@ -31203,7 +31226,7 @@ mS
 pF
 zj
 pH
-jb
+ID
 Wb
 jb
 ur
@@ -32631,7 +32654,7 @@ CF
 CF
 My
 qu
-qu
+IE
 qu
 uC
 IF
@@ -37487,7 +37510,7 @@ vW
 yd
 yW
 vW
-vW
+IJ
 vW
 vW
 Dd
@@ -39706,7 +39729,7 @@ cV
 uU
 fo
 YK
-YK
+IH
 gK
 TZ
 hL
@@ -41492,18 +41515,18 @@ ae
 aq
 ao
 We
-ID
+ae
 ag
 az
 ag
 ag
 aE
-IE
+aY
 aY
 PP
 cl
 dd
-IE
+aY
 cl
 da
 dD
@@ -42141,7 +42164,7 @@ Ov
 JV
 ub
 ED
-II
+Fj
 FN
 ub
 ko
@@ -43958,7 +43981,7 @@ Do
 DZ
 ub
 Fk
-IH
+FN
 Gm
 GO
 ub
@@ -44567,7 +44590,7 @@ ED
 ub
 ub
 ub
-IJ
+Tk
 Tk
 jZ
 jZ
@@ -44757,7 +44780,7 @@ vn
 Eh
 Mj
 uq
-Mj
+II
 XY
 WA
 ZW

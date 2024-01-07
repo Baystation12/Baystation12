@@ -14032,6 +14032,7 @@
 /area/space)
 "aXh" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/obj/random_multi/single_item/punitelli,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/firstdeck)
 "aYj" = (
@@ -15422,6 +15423,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
+/obj/random_multi/single_item/punitelli,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/medical)
 "cHj" = (
@@ -16974,6 +16976,7 @@
 /obj/floor_decal/scglogo{
 	dir = 8
 	},
+/obj/random_multi/single_item/punitelli,
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "eVQ" = (
@@ -17921,6 +17924,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/exam_room)
+"gSl" = (
+/obj/random_multi/single_item/punitelli,
+/turf/simulated/floor/tiled/freezer,
+/area/crew_quarters/head/deck1)
 "gVR" = (
 /obj/floor_decal/corner/blue{
 	dir = 6
@@ -19488,6 +19495,10 @@
 /obj/floor_decal/corner/research/half,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/center)
+"iUs" = (
+/obj/random_multi/single_item/punitelli,
+/turf/simulated/floor/tiled/white,
+/area/crew_quarters/sleep/cryo/aux)
 "iVb" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
@@ -22556,6 +22567,7 @@
 	dir = 4
 	},
 /obj/random_multi/single_item/poppy,
+/obj/random_multi/single_item/punitelli,
 /turf/simulated/floor/selfestructgrid,
 /area/security/nuke_storage)
 "mOb" = (
@@ -44980,7 +44992,7 @@ adx
 aAm
 aaL
 abR
-riD
+gSl
 riD
 ado
 ltt
@@ -47610,7 +47622,7 @@ aDY
 aDY
 aDY
 aHe
-aDY
+iUs
 aJP
 aDY
 aDY
