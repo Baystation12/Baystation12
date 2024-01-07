@@ -68,7 +68,6 @@
 	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
 /obj/machinery/status_display/on_update_icon()
-	. = ..()
 	if (MACHINE_IS_BROKEN(src))
 		icon_state = "[initial(icon_state)]_broken"
 	else
