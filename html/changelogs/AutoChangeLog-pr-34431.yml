@@ -1,0 +1,5 @@
+author: LordNest
+changes:
+  - {maptweak: Added some new templates for exoplanets}
+  - {bugfix: Fixed skrellian pistol sprite and sandstone wall sprite}
+delete-after: true
