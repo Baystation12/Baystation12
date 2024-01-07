@@ -1,0 +1,5 @@
+author: SierraKomodo
+changes:
+  - {tweak: 'The passenger role now has unlimited slots. (Это на Торче, так что не
+      расслабляйтесь, Сьерровцы)'}
+delete-after: true
