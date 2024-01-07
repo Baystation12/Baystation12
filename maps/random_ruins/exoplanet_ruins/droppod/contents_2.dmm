@@ -1,0 +1,24 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"c" = (
+/mob/living/exosuit/premade/random/boring,
+/turf/template_noop,
+/area/template_noop)
+"h" = (
+/turf/template_noop,
+/area/template_noop)
+
+(1,1,1) = {"
+h
+h
+h
+"}
+(2,1,1) = {"
+h
+c
+h
+"}
+(3,1,1) = {"
+h
+h
+h
+"}
