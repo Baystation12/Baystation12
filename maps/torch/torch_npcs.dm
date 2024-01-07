@@ -1,4 +1,4 @@
-/obj/random_multi/single_item/punitelly
+/obj/random_multi/single_item/punitelli
 	name = "Multi Point - Warrant Officer Punitelli"
 	id = "Punitelli"
 	item_path = /mob/living/carbon/human/monkey/punitelli

@@ -2127,6 +2127,7 @@
 /obj/random_multi/single_item/memo_scgr,
 /obj/random_multi/single_item/memo_command,
 /obj/random_multi/single_item/memo_corporate,
+/obj/random_multi/single_item/punitelli,
 /turf/simulated/floor/carpet/blue2,
 /area/bridge/meeting_room)
 "dQ" = (
@@ -13643,6 +13644,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/random_multi/single_item/punitelli,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
 "Qh" = (
