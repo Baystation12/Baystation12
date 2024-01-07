@@ -297,12 +297,9 @@
 			on = FALSE
 
 	if(istype(lightbulb, /obj/item/light))
-		var/image/I = image(icon, src, _state)
-		I.color = get_mode_color()
 		if (on)
-			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-			I.layer = ABOVE_LIGHTING_LAYER
-		AddOverlays(I)
+			AddOverlays(emissive_appearance(icon, _state))
+		AddOverlays(overlay_image(icon, _state, color))
 
 	if(on)
 

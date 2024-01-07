@@ -355,7 +355,10 @@
 			new_color = COLOR_SUN
 		if (2)
 			new_color = COLOR_RED_LIGHT
-	AddOverlays(overlay_image(icon, "alarm[icon_level]", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
+	AddOverlays(list(
+		emissive_appearance(icon, "alarm[icon_level]"),
+		image(icon, "alarm[icon_level]")
+	))
 
 	pixel_x = 0
 	pixel_y = 0
