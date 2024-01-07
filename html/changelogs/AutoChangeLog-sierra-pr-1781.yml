@@ -1,0 +1,5 @@
+author: emmanuelbassil
+changes:
+  - {tweak: Status displays are now destructible.}
+  - {tweak: Can repair destroyed status displays with two sheets of glass.}
+delete-after: true
