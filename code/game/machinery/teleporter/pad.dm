@@ -13,6 +13,8 @@
 
 	///Has a high chance to teleport the user to a semi random location when TRUE.
 	var/interference = FALSE
+	///Chance (0 - 100%) to send a teleported object to The Interlude.
+	var/interlude_chance = 0
 
 /obj/machinery/tele_pad/Destroy()
 	if (computer)
@@ -51,9 +53,16 @@
 	if (istype(computer.target, /obj/machinery/tele_beacon))
 		var/obj/machinery/tele_beacon = computer.target
 		tele_beacon.use_power_oneoff(1 KILOWATTS)
+
+	if (prob(interlude_chance))
+		GLOB.using_map.do_interlude_teleport(AM, T, rand(30, 120))
+		computer.set_timer()
+		return
+
 	if (interference && prob(75))
 		do_unstable_teleport_safe(AM)
-	do_teleport(AM, T)
+	else
+		do_teleport(AM, T)
 	computer.set_timer()
 
 

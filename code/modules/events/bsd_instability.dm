@@ -45,6 +45,7 @@
 			continue
 		pads += pad
 		pad.interference = TRUE
+		pad.interlude_chance = 30 * severity
 	for (var/obj/machinery/bluespacedrive/drive in SSmachines.machinery)
 		if (!(drive.z in affecting_z))
 			continue
@@ -105,6 +106,7 @@
 /datum/event/bsd_instability/end()
 	for (var/obj/machinery/tele_pad/pad in pads)
 		pad.interference = FALSE
+		pad.interlude_chance = 0
 	for (var/obj/machinery/bluespacedrive/drive in drives)
 		drive.instability_event_active = FALSE
 		drive.set_light(1, 5, 15, 10, COLOR_CYAN)
