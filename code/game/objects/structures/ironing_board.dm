@@ -186,8 +186,9 @@
 			)
 			if (!do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
 				return TRUE
-			if (!iron.iron_enabled)
-				USE_FEEDBACK_FAILURE("\The [src] wasn't turned on!")
+			var/obj/item/ironing_iron/used_iron = tool
+			if (!used_iron.iron_enabled)
+				USE_FEEDBACK_FAILURE("\The [used_iron] wasn't turned on!")
 				return TRUE
 			clothing.ironed_state = WRINKLES_NONE
 			user.visible_message(
