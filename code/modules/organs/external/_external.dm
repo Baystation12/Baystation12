@@ -240,8 +240,9 @@
 					var/obj/item/removing = pick(organs)
 					var/obj/item/organ/external/current_child = removing.loc
 
-					current_child.implants.Remove(removing)
-					current_child.internal_organs.Remove(removing)
+					if (istype(current_child))
+						current_child.implants.Remove(removing)
+						current_child.internal_organs.Remove(removing)
 
 					status |= ORGAN_CUT_AWAY
 					if(istype(removing, /obj/item/organ/internal/mmi_holder))
