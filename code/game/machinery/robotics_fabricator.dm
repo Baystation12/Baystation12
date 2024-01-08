@@ -53,11 +53,12 @@
 	if(panel_open)
 		AddOverlays("[icon_state]_panel")
 	if(is_powered())
-		AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
-		AddOverlays("[icon_state]_lights")
-	else if(busy)
-		AddOverlays(emissive_appearance(icon, "[icon_state]_lights_working"))
-		AddOverlays("[icon_state]_lights_working")
+		if (busy)
+			AddOverlays(emissive_appearance(icon, "[icon_state]_lights_working"))
+			AddOverlays("[icon_state]_lights_working")
+		else
+			AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
+			AddOverlays("[icon_state]_lights")
 
 /obj/machinery/robotics_fabricator/dismantle()
 	for(var/f in materials)
