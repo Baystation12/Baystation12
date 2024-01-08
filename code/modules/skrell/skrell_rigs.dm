@@ -262,16 +262,16 @@
 	selectable = TRUE
 
 /obj/item/rig_module/device/clustertool/IsWrench()
-	return device.IsWrench(device)
+	return isWrench(device)
 
 /obj/item/rig_module/device/clustertool/IsWirecutter()
-	return device.IsWirecutter(device)
+	return isWirecutter(device)
 
 /obj/item/rig_module/device/clustertool/IsScrewdriver()
-	return device.IsScrewdriver(device)
+	return isScrewdriver(device)
 
 /obj/item/rig_module/device/clustertool/IsCrowbar()
-	return device.IsCrowbar(device)
+	return isCrowbar(device)
 
 // Self-charging power cell.
 /obj/item/cell/skrell
