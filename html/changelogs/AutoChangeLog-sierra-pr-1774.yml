@@ -1,5 +1,0 @@
-author: SierraKomodo
-changes:
-  - {tweak: Punitelli now spawns in various random rooms instead of in maintenance
-      and other dangerous places.}
-delete-after: true
