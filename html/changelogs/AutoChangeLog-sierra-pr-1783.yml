@@ -1,0 +1,5 @@
+author: SierraKomodo
+changes:
+  - {bugfix: Fixes borgs having broken and weirdly cached/synchronized eye overlays
+      that had no color.}
+delete-after: true
