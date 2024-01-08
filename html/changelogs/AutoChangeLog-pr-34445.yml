@@ -1,0 +1,5 @@
+author: SierraKomodo
+changes:
+  - {bugfix: Fixed cases where decapitated heads couldn't be opened or have their
+      internal parts removed using tools.}
+delete-after: true
