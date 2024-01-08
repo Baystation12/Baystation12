@@ -1,4 +1,0 @@
-author: SierraKomodo
-changes:
-  - {tweak: 'Lights, switches, and air alarms now use emissive overlays.'}
-delete-after: true
