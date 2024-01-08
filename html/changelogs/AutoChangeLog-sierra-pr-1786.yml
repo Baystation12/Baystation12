@@ -1,0 +1,4 @@
+author: SierraKomodo
+changes:
+  - {bugfix: Fixes robotics fabricator machines not properly animating while printing.}
+delete-after: true
