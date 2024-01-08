@@ -1,0 +1,4 @@
+author: SierraKomodo
+changes:
+  - {bugfix: Fixes ironing boards and irons not de-wrinkling clothing.}
+delete-after: true
