@@ -208,15 +208,6 @@
 	..()
 	queue_icon_update()
 	if (health_mod < 0)
-		var/initial_damage_percentage = round((prior_health / get_max_health()) * 100)
-		var/damage_percentage = get_damage_percentage()
-		if (damage_percentage >= 75 && initial_damage_percentage < 75)
-			visible_message("\The [src] looks like it's about to break!")
-		else if (damage_percentage >= 50 && initial_damage_percentage < 50)
-			visible_message("\The [src] looks seriously damaged!" )
-		else if (damage_percentage >= 25 && initial_damage_percentage < 25)
-			visible_message("\The [src] shows signs of damage!" )
-
 		for (var/datum/artifact_effect/A in list(my_effect, secondary_effect))
 			A.holder_damaged(get_current_health(), abs(health_mod))
 

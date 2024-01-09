@@ -17,6 +17,7 @@
 	machine_desc = "Holds an internal stock of items that can be dispensed on-demand or when a charged ID card is swiped, depending on the brand."
 	idle_power_usage = 10
 	wires = /datum/wires/vending
+	health_max = 80
 
 	/// The machine's wires, but typed.
 	var/datum/wires/vending/vendor_wires
@@ -84,7 +85,7 @@
 	var/vend_reply //Thank you for shopping!
 	var/last_reply = 0
 	var/last_slogan = 0 //When did we last pitch?
-	var/slogan_delay = 10 MINUTES //How long until we can pitch again?
+	var/slogan_delay = 2 MINUTES //How long until we can pitch again?
 	var/seconds_electrified = 0 //Shock customers like an airlock.
 	var/shoot_inventory = FALSE //Fire items at customers! We're broken!
 	var/shooting_chance = 2 //The chance that items are being shot per tick
@@ -135,6 +136,18 @@
 	if (shoot_inventory && prob(shooting_chance))
 		throw_item()
 
+/obj/machinery/vending/post_health_change(health_mod, prior_health, damage_type)
+	. = ..()
+	queue_icon_update()
+	if (health_mod < 0 && !health_dead())
+		var/initial_damage_percentage = Percent(get_max_health() - prior_health, get_max_health(), 0)
+		var/damage_percentage = get_damage_percentage()
+		if (damage_percentage >= 25 && initial_damage_percentage < 25 && prob(75))
+			shut_up = FALSE
+		else if (damage_percentage >= 50 && initial_damage_percentage < 50)
+			vendor_wires.RandomCut()
+		else if (damage_percentage >= 75 && initial_damage_percentage < 75 && prob(10))
+			malfunction()
 
 /obj/machinery/vending/powered()
 	return anchored && ..()
@@ -162,25 +175,11 @@
 		icon_state = "[initial(icon_state)]-off"
 	if (panel_open || IsShowingAntag())
 		AddOverlays(image(icon, "[initial(icon_state)]-panel"))
-	if (IsShowingAntag() && is_powered())
+	if ((IsShowingAntag() || get_damage_percentage() >= 50) && is_powered())
 		AddOverlays(image(icon, "sparks"))
 		AddOverlays(emissive_appearance(icon, "sparks"))
 	if (!vend_ready)
 		AddOverlays(image(icon, "[initial(icon_state)]-shelf[rand(max_overlays)]"))
-
-
-/obj/machinery/vending/ex_act(severity)
-	switch(severity)
-		if (EX_ACT_DEVASTATING)
-			qdel(src)
-		if (EX_ACT_HEAVY)
-			if (prob(50))
-				qdel(src)
-		if (EX_ACT_LIGHT)
-			if (prob(25))
-				spawn(0)
-					malfunction()
-
 
 /obj/machinery/vending/emag_act(remaining_charges, mob/living/user)
 	if (emagged)
@@ -189,7 +188,6 @@
 	req_access.Cut()
 	if (antag_slogans)
 		shut_up = FALSE
-		slogan_delay = 2 MINUTES
 		slogan_list.Cut()
 		slogan_list += splittext(antag_slogans, ";")
 		last_slogan = world.time + rand(0, slogan_delay)
@@ -272,7 +270,6 @@
 	var/obj/item/material/coin/challenge/syndie/antagcoin = item
 	if (antag_slogans)
 		shut_up = FALSE
-		slogan_delay = 2 MINUTES
 		slogan_list.Cut()
 		slogan_list += splittext(antag_slogans, ";")
 		last_slogan = world.time + rand(0, slogan_delay)
@@ -549,7 +546,9 @@
 
 
 /obj/machinery/vending/proc/malfunction()
-	for (var/datum/stored_items/vending_products/product in product_records)
+	for (var/datum/stored_items/vending_products/product in shuffle(product_records))
+		if (product.category == VENDOR_CATEGORY_ANTAG)
+			continue
 		while (product.get_amount() > 0)
 			product.get_product(loc)
 		break
