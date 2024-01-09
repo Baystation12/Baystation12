@@ -56,3 +56,79 @@
 	desc = "A polished cutlass issued to chief petty officers of the fleet."
 	icon_state = "pettyofficersword"
 	item_state = "pettyofficersword"
+
+/obj/item/melee/powerfist/mounted
+	icon_state = "powerfist"
+	item_state = "powerfist"
+	name = "hardsuit powerfist"
+	icon = 'icons/obj/augment.dmi'
+	desc = "Hardsuit gauntlet powered-up by servomotors. Capable of prying airlock open, but can't make people fly."
+	base_parry_chance = 12
+	force = 15
+	attack_cooldown = SLOW_WEAPON_COOLDOWN
+	hitsound = 'sound/effects/bang.ogg'
+	attack_verb = list("smashed", "bludgeoned", "hammered", "battered")
+	var/mob/living/creator
+
+/obj/item/melee/powerfist/mounted/dropped()
+	..()
+	QDEL_IN(src, 0)
+
+
+/obj/item/melee/powerfist/mounted/get_storage_cost()
+	return ITEM_SIZE_NO_CONTAINER
+
+
+/obj/item/melee/powerfist/mounted/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
+
+
+/obj/item/melee/powerfist/mounted/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
+
+
+/obj/item/melee/powerfist/mounted/attack_self(mob/user as mob)
+	user.drop_from_inventory(src)
+
+
+/obj/item/melee/powerfist/mounted/use_before(atom/target, mob/living/user, click_parameters)
+	if (user.a_intent == I_HELP || !istype(target, /obj/machinery/door/airlock))
+		return FALSE
+
+	var/obj/machinery/door/airlock/A = target
+
+	if (A.operating)
+		return FALSE
+
+	if (A.locked)
+		to_chat(user, SPAN_WARNING("The airlock's bolts prevent it from being forced."))
+		return TRUE
+
+	if (A.welded)
+		A.visible_message(SPAN_DANGER("\The [user] forces the fingers of \the [src] in through the welded metal, beginning to pry \the [A] open!"))
+		if (do_after(user, 11 SECONDS, A, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && !A.locked)
+			A.welded = FALSE
+			A.update_icon()
+			playsound(A, 'sound/effects/bang.ogg', 100, 1)
+			playsound(A, 'sound/machines/airlock_creaking.ogg', 100, 1)
+			A.visible_message(SPAN_DANGER("\The [user] tears \the [A] open with \a [src]!"))
+			addtimer(new Callback(A, /obj/machinery/door/airlock/.proc/open, TRUE), 0)
+			A.set_broken(TRUE)
+		return TRUE
+	else
+		A.visible_message(SPAN_DANGER("\The [user] pries the fingers of \a [src] in, beginning to force \the [A]!"))
+		if ((MACHINE_IS_BROKEN(A) || !A.is_powered() || do_after(user, 8 SECONDS, A, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)) && !(A.operating || A.welded || A.locked))
+			playsound(A, 'sound/machines/airlock_creaking.ogg', 100, 1)
+			if (A.density)
+				addtimer(new Callback(A, /obj/machinery/door/airlock/.proc/open, TRUE), 0)
+				if(!MACHINE_IS_BROKEN(A) && A.is_powered())
+					A.set_broken(TRUE)
+				A.visible_message(SPAN_DANGER("\The [user] forces \the [A] open with \a [src]!"))
+			else
+				addtimer(new Callback(A, /obj/machinery/door/airlock/.proc/close, TRUE), 0)
+				if (!MACHINE_IS_BROKEN(A) && A.is_powered())
+					A.set_broken(TRUE)
+				A.visible_message(SPAN_DANGER("\The [user] forces \the [A] closed with \a [src]!"))
+		return TRUE
