@@ -4,6 +4,7 @@
 	description = "Strange round structure."
 	suffixes = list("skrell_biodome/skrell_biodome.dmm")
 	spawn_cost = 0.5
+	apc_test_exempt_areas = list(/area/map_template/biodome/atmos = NO_SCRUBBER|NO_VENT)
 	ruin_tags = RUIN_HUMAN
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
 

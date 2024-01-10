@@ -405,7 +405,7 @@
 "pv" = (
 /obj/machinery/space_heater/skrell,
 /turf/simulated/floor/tiled/skrell/orange,
-/area/map_template/biodome/living)
+/area/map_template/biodome/engineering)
 "pA" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 1;
@@ -645,7 +645,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/skrell/orange,
-/area/map_template/biodome/living)
+/area/map_template/biodome/engineering)
 "yc" = (
 /obj/structure/hygiene/sink{
 	dir = 1;
@@ -925,7 +925,7 @@
 "JG" = (
 /obj/machinery/portable_atmospherics/powered/pump/filled,
 /turf/simulated/floor/tiled/skrell/orange,
-/area/map_template/biodome/living)
+/area/map_template/biodome/engineering)
 "JM" = (
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -1360,7 +1360,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/skrell/orange,
-/area/map_template/biodome/living)
+/area/map_template/biodome/engineering)
 "WU" = (
 /obj/structure/cable/yellow{
 	d1 = 2;
