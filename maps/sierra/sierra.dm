@@ -44,6 +44,8 @@
 	#include "datums/supplypacks/security.dm"
 	#include "datums/supplypacks/science.dm"
 
+	#include "datums/species/species_overrides.dm"
+
 	#include "game/languages.dm"
 	#include "game/lockdown.dm"
 

@@ -69,7 +69,7 @@
 /singleton/hierarchy/supply_pack/security/armory/pdw
 	name = "Weapons - Ballistic NT41"
 	contains = list(/obj/item/gun/projectile/automatic/nt41 = 2)
-	cost = 60
+	cost = 120
 	containername = "\improper Ballistic PDW crate"
 	security_level = SUPPLY_SECURITY_HIGH
 

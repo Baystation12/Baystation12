@@ -262,3 +262,8 @@
 /datum/fabricator_recipe/medical/vial
 	path = /obj/item/reagent_containers/glass/beaker/vial
 	fabricator_types = list(FABRICATOR_CLASS_MICRO,FABRICATOR_CLASS_GENERAL)
+
+// Shieldgen
+
+/obj/machinery/power/shield_generator
+	icon = 'maps/sierra/icons/obj/shielding.dmi'

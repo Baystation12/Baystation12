@@ -13,6 +13,10 @@
 #define LANGUAGE_SIIK_TAJR		"Siik'tajr"
 // TAJARA - End
 
+// LEGALESE - Start
+#define LANGUAGE_LEGALESE		"Legalese"
+// LEGALESE - End
+
 // UTF8 - Start
 #undef show_browser
 #define show_browser(target, content, title)  to_target(target, browse(utf_8_html(content), title))

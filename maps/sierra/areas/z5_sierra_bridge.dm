@@ -118,12 +118,16 @@
 	name = "AI Chamber"
 	icon_state = "ai_chamber"
 
+/area/turret_protected/ai_maint
+	name = "AI Chamber - Maintenance"
+	icon_state = "ai_chamber"
+
 /area/turret_protected/ai_teleport
-	name = "First Deck - AI Upload"
+	name = "AI Chamber - Teleporter"
 	icon_state = "ai_upload"
 
 /area/turret_protected/ai_upload
-	name = "First Deck - AI Upload"
+	name = "Third Deck - AI Upload"
 	icon_state = "ai_upload"
 
 // Heads Quarters

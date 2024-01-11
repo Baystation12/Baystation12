@@ -23,6 +23,9 @@
 	var/image/obfuscation = obfuscation_images[T]
 	if(!obfuscation)
 		obfuscation = image(icon, T, icon_state)
+		// [SIERRA-ADD] - AI
+		obfuscation.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+		// [/SIERRA-ADD]
 		obfuscation.layer = OBFUSCATION_LAYER
 		if(!obfuscation_underlay)
 			// Creating a new icon of a fairly common icon state, adding some random color to prevent address searching, and hoping being static kills memory locality

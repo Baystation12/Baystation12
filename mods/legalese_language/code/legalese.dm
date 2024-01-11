@@ -1,4 +1,3 @@
-#define LANGUAGE_LEGALESE       "Legalese"
 /datum/language/legal
 	name = LANGUAGE_LEGALESE
 	desc = "A cryptic language used by interstellar bureaucrats and lawyers."

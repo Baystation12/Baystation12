@@ -1,0 +1,10 @@
+#ifndef MODPACK_AI
+#define MODPACK_AI
+
+#include "_ai.dm"
+
+#include "code/ai.dm"
+#include "code/ai_hud.dm"
+#include "code/ai_screen_objects.dm"
+
+#endif

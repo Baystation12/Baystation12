@@ -12,6 +12,7 @@
 		/area/maintenance/cistern = 0,
 		/area/turret_protected/ai_cyborg_station = 0,
 		/area/turret_protected/ai = NO_SCRUBBER|NO_VENT,
+		/area/turret_protected/ai_maint = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/fourthdeck/aft = 0,
 		/area/maintenance/waterstore = 0,
 		/area/maintenance/abandoned_hydroponics = 0,
