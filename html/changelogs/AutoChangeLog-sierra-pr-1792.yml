@@ -1,0 +1,4 @@
+author: Mucker
+changes:
+  - {rscdel: Removed the e-gun from the flying borg module's emag/antag tools.}
+delete-after: true
