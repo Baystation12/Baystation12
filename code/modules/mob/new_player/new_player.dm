@@ -76,8 +76,8 @@
 			stat("Game Mode:", PUBLIC_GAME_MODE)
 		var/extra_antags = list2params(additional_antag_types)
 		stat("Added Antagonists:", extra_antags ? extra_antags : "None")
-		stat("Initial Continue Vote:", "[round(config.vote_autotransfer_initial / 600, 1)] minutes")
-		stat("Additional Vote Every:", "[round(config.vote_autotransfer_interval / 600, 1)] minutes")
+		stat("Initial Continue Vote:", "[config.vote_autotransfer_initial] minutes")
+		stat("Additional Vote Every:", "[config.vote_autotransfer_interval] minutes")
 
 		if(GAME_STATE <= RUNLEVEL_LOBBY)
 			stat("Time To Start:", "[round(SSticker.pregame_timeleft/10)][SSticker.round_progressing ? "" : " (DELAYED)"]")
@@ -104,7 +104,7 @@
 				totalPlayers++
 				if(player.ready)totalPlayersReady++
 		else
-			stat("Next Continue Vote:", "[max(round(transfer_controller.time_till_transfer_vote() / 600, 1), 0)] minutes")
+			stat("Next Continue Vote:", "[SSroundend.vote_cache] minutes")
 
 /mob/new_player/Topic(href, href_list) // This is a full override; does not call parent.
 	if (usr != src)

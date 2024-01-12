@@ -33,8 +33,6 @@
 			debug_variables(paiController)
 		if("Cameras")
 			debug_variables(cameranet)
-		if("Transfer Controller")
-			debug_variables(transfer_controller)
 		if("Gas Data")
 			debug_variables(gas_data)
 		if("Alt Appearance Manager")
