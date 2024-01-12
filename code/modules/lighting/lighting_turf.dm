@@ -108,7 +108,7 @@
 		C.update_ambient_lumcount(lr, lg, lb, !update)
 
 /turf/proc/clear_ambient_light()
-	if (ambient_light == null)
+	if (isnull(ambient_light))
 		return
 
 	ambient_light = null

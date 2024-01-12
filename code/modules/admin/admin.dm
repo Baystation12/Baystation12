@@ -1318,7 +1318,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		else
 			to_chat(usr, "<b>SOMETHING SILICON [key_name(S, usr)]'s laws:</b>")
 
-		if (S.laws == null)
+		if (isnull(S.laws))
 			to_chat(usr, "[key_name(S, usr)]'s laws are null?? Contact a coder.")
 		else
 			S.laws.show_laws(usr)

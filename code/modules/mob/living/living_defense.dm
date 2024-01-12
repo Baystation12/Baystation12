@@ -364,7 +364,7 @@
 	var/button_number = 0
 	for(var/datum/action/A in actions)
 		button_number++
-		if(A.button == null)
+		if(isnull(A.button))
 			var/obj/screen/movable/action_button/N = new(hud_used, A)
 			A.button = N
 

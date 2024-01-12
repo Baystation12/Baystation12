@@ -21,7 +21,7 @@
 	. = ..()
 
 /datum/radiation_source/proc/update_rad_power(new_power = null)
-	if(new_power == null || new_power == rad_power)
+	if(isnull(new_power) || new_power == rad_power)
 		return // No change
 	else if(new_power <= config.radiation_lower_limit)
 		qdel(src) // Decayed to nothing

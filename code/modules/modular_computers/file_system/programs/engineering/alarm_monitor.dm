@@ -123,7 +123,7 @@
 
 			categories[length(categories)]["alarms"] += list(list(
 					"name" = sanitize(A.alarm_name()),
-					"origin_lost" = A.origin == null,
+					"origin_lost" = isnull(A.origin),
 					"has_cameras" = length(cameras),
 					"cameras" = cameras,
 					"lost_sources" = length(lost_sources) ? sanitize(english_list(lost_sources, nothing_text = "", and_text = ", ")) : ""))

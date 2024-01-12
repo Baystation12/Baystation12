@@ -30,7 +30,7 @@ GLOBAL_VAR_INIT(actual_error_file_line, new/regex("^%% (.*?),(.*?) %% "))
 	var/last_seen = error_last_seen[erroruid]
 	var/cooldown = error_cooldown[erroruid] || 0
 
-	if(last_seen == null)
+	if(isnull(last_seen))
 		error_last_seen[erroruid] = world.time
 		last_seen = world.time
 

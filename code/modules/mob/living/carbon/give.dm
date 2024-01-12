@@ -4,7 +4,7 @@
 
 	if(incapacitated())
 		return
-	if(!istype(target) || target.incapacitated() || target.client == null)
+	if(!istype(target) || target.incapacitated() || isnull(target.client))
 		return
 
 	var/obj/item/I = usr.get_active_hand()

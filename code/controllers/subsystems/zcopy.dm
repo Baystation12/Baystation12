@@ -261,7 +261,7 @@ SUBSYSTEM_DEF(zcopy)
 			TO.plane = t_target
 			TO.mouse_opacity = initial(TO.mouse_opacity)
 
-		T.queue_ao(T.ao_neighbors_mimic == null)	// If ao_neighbors hasn't been set yet, we need to do a rebuild
+		T.queue_ao(isnull(T.ao_neighbors_mimic))	// If ao_neighbors hasn't been set yet, we need to do a rebuild
 
 		// Explicitly copy turf delegates so they show up properly on below levels.
 		//   I think it's possible to get this to work without discrete delegate copy objects, but I'd rather this just work.
@@ -538,7 +538,7 @@ SUBSYSTEM_DEF(zcopy)
 
 	return MA
 
-#define FMT_DEPTH(X) (X == null ? "(null)" : X)
+#define FMT_DEPTH(X) (isnull(X) ? "(null)" : X)
 
 // This is a dummy object used so overlays can be shown in the analyzer.
 /atom/movable/openspace/debug

@@ -153,11 +153,11 @@
 		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_label")
 		if (icon_state == "[package_type]closet")
 			I.pixel_x = 2
-			if(label_y == null)
+			if(isnull(label_y))
 				label_y = rand(-6, 11)
 			I.pixel_y = label_y
 		else if (icon_state == "[package_type]crate")
-			if(label_x == null)
+			if(isnull(label_x))
 				label_x = rand(-8, 6)
 			I.pixel_x = label_x
 			I.pixel_y = -3
@@ -165,12 +165,12 @@
 	if(src.sortTag)
 		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_tag")
 		if (icon_state == "[package_type]closet")
-			if(tag_x == null)
+			if(isnull(tag_x))
 				tag_x = rand(-2, 3)
 			I.pixel_x = tag_x
 			I.pixel_y = 9
 		else if (icon_state == "[package_type]crate")
-			if(tag_x == null)
+			if(isnull(tag_x))
 				tag_x = rand(-8, 6)
 			I.pixel_x = tag_x
 			I.pixel_y = -3
@@ -218,14 +218,14 @@
 	if (nameset || examtext)
 		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_label")
 		I.pixel_x = 2
-		if (label_y == null)
+		if (isnull(label_y))
 			label_y = rand (2,5)
 		I.pixel_y = label_y
 		AddOverlays(I)
 
 	if (sortTag)
 		var/image/I = new/image('icons/obj/parcels.dmi',"delivery_tag")
-		if (tag_x == null)
+		if (isnull(tag_x))
 			tag_x = 0
 		I.pixel_x = tag_x
 		I.pixel_y = 0
@@ -439,7 +439,7 @@
 			if(ITEM_SIZE_NORMAL)
 				I.pixel_y = 0
 			if(ITEM_SIZE_LARGE)
-				if(tag_x == null)
+				if(isnull(tag_x))
 					tag_x = rand(0,5)
 				I.pixel_x = tag_x
 				I.pixel_y = 3

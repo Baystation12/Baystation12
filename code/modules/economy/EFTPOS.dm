@@ -249,7 +249,7 @@
 /obj/item/device/eftpos/proc/scan_card(obj/item/card/I, obj/item/ID_container)
 	if (istype(I, /obj/item/card/id))
 		var/obj/item/card/id/C = I
-		if(I==ID_container || ID_container == null)
+		if(I==ID_container || isnull(ID_container))
 			usr.visible_message(SPAN_INFO("\The [usr] swipes a card through \the [src]."))
 		else
 			usr.visible_message(SPAN_INFO("\The [usr] swipes \the [ID_container] through \the [src]."))

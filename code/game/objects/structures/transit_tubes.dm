@@ -93,7 +93,7 @@
 /obj/structure/transit_tube/New(loc)
 	..(loc)
 
-	if(tube_dirs == null)
+	if(isnull(tube_dirs))
 		init_dirs()
 
 
@@ -314,7 +314,7 @@
 					current_tube = tube
 					break
 
-			if(current_tube == null)
+			if(isnull(current_tube))
 				set_dir(next_dir)
 				Move(get_step(loc, dir)) // Allow collisions when leaving the tubes.
 				break

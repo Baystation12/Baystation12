@@ -134,7 +134,7 @@
 /obj/machinery/power/smes/batteryrack/proc/get_most_charged_cell()
 	var/obj/item/cell/CL = null
 	for(var/obj/item/cell/C in internal_cells)
-		if(CL == null)
+		if(isnull(CL))
 			CL = C
 		else if(CL.percent() < C.percent())
 			CL = C
@@ -142,7 +142,7 @@
 /obj/machinery/power/smes/batteryrack/proc/get_least_charged_cell()
 	var/obj/item/cell/CL = null
 	for(var/obj/item/cell/C in internal_cells)
-		if(CL == null)
+		if(isnull(CL))
 			CL = C
 		else if(CL.percent() > C.percent())
 			CL = C

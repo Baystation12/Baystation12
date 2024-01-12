@@ -65,7 +65,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 		var/new_name = input(user, "What label would you like to set this beacon to? Leave empty to enable automatic naming based on area.", "Set Beacon Label", beacon_name) as text|null
 		if (QDELETED(src))
 			return TRUE
-		if (new_name == null)
+		if (isnull(new_name))
 			autoset_name = TRUE
 			generate_name()
 			user.visible_message(

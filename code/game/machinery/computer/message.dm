@@ -286,7 +286,7 @@
 
 	//Request Console Logs - KEY REQUIRED
 	if(href_list["viewr"])
-		if(src.linkedServer == null || (src.linkedServer.inoperable()))
+		if(isnull(src.linkedServer) || (src.linkedServer.inoperable()))
 			message = noserver
 		else
 			if(auth)

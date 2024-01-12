@@ -27,9 +27,9 @@
 /datum/random_map/automata/cave_system/mountains/New(seed, tx, ty, tz, tlx, tly, do_not_apply, do_not_announce, never_be_priority = 0, used_area, _rock_color)
 	if (_rock_color)
 		rock_color = _rock_color
-	if (target_turf_type == null)
+	if (isnull(target_turf_type))
 		target_turf_type = world.turf
-	if (floor_type == null)
+	if (isnull(floor_type))
 		floor_type = world.turf
 	..()
 
