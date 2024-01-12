@@ -28,7 +28,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	var/sun_brightness_modifier = 0.5
 
 	/// Sun control
-	var/ambient_group_index = -1
+	var/ambient_group_index
 
 	var/maxx
 	var/maxy
@@ -251,11 +251,12 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	//We do a gradient instead of linear interpolation because linear interpolations of colours are unintuitive
 	var/new_color = UNLINT(gradient(low_color, high_color, space = COLORSPACE_HSV, index=interpolate_weight))
 
-	if(ambient_group_index > 0)
-		var/datum/ambient_group/A = SSambient_lighting.ambient_groups[ambient_group_index]
-		A.set_color(new_color, new_brightness)
-	else
+	if (isnull(ambient_group_index))
 		ambient_group_index = SSambient_lighting.create_ambient_group(new_color, new_brightness)
+	else if (ambient_group_index)
+		var/datum/ambient_group/group = SSambient_lighting.ambient_groups[ambient_group_index]
+		group.set_color(new_color, new_brightness)
+
 
 /obj/overmap/visitable/sector/exoplanet/proc/generate_map()
 	var/list/grasscolors = plant_colors.Copy()

@@ -6,6 +6,9 @@ SUBSYSTEM_DEF(skybox)
 	/// The background color of space in the current round
 	var/static/background_color
 
+	/// The same hue as background_color, but with a low saturation and high value
+	var/static/starlight_color
+
 	/// The skybox icon file to use for backgrounds. Expects to be 736x736
 	var/static/skybox_icon = 'icons/skybox/skybox.dmi'
 
@@ -44,7 +47,9 @@ SUBSYSTEM_DEF(skybox)
 		space.icon_state = "white"
 		space.AddOverlays(dust)
 		space_appearance_cache[index] = space.appearance
-	background_color = RANDOM_RGB
+	var/hue = rand(0, 359)
+	background_color = rgb(hue, rand(25, 80), rand(25, 80), space=COLORSPACE_HSV)
+	starlight_color = rgb(hue, 25, 90, space=COLORSPACE_HSV)
 
 
 /datum/controller/subsystem/skybox/proc/get_skybox(z)
