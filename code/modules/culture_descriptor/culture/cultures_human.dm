@@ -126,32 +126,97 @@
 	The region is sparsely populated both by hopeful entrepreneurs and those who benefit from the lack of coverage by settlement police authorities or planetary defense forces."
 	economic_power = 1.0
 
-/singleton/cultural_info/culture/human/spacer_core
+/singleton/cultural_info/culture/human/foster
+	name = CULTURE_HUMAN_FOSTER
+	description = "Foster's World was once considered too cold and desolate for habitation, but decades of inhabitence by the Fostermen has turned it into a productive and popular destination. \
+	Fostermen are traditionally noted for their resourcefulness and motivation, as well as a preference for being in colder environments. \
+	Snow is second nature to people from Foster's World, and they've made a name for themselves exploring and fishing it's thermal oceans. "
+	economic_power = 1.1
+
+/singleton/cultural_info/culture/human/tadmor
+	name = CULTURE_HUMAN_TADMOR
+	description = "Tadmor is one of the SCG's more successful colonial projects, and it's culture is rich and dignified as a result. \
+	Mostly living in the fissures of the desert world, Tadmorians are most famous for their cultural Pacifism, with their aversion to participation in \
+	the Gaia Conflict being seen by all residents as either a proud moment or a stain in the planets rich, Mars-Rooted history. "
+	economic_power = 1.2
+
+/singleton/cultural_info/culture/human/iolaus
+	name = CULTURE_HUMAN_IOLAUS
+	description = "An old colonial project of the Terran Commonwealth that survived a period of forced isolation, Iolaus has declared itself the capital of the fledgeling and jingoistic Frontier Alliance. \
+	Many Iolan refugees are now trapped outside the Copernican Blockade, but whether they are loyal or treasonous all Iolans share a long history of self reliance, \
+	a strong sense of personal work ethic, and the cultural notion that individuals are cogs in a machine that serves a greater and protective purpose. "
+	economic_power = 0.7
+
+/singleton/cultural_info/culture/human/brahe
+	name = CULTURE_HUMAN_BRAHE
+	description = "Hailing from the ocean world of Brahe, Brahite culture is one of corporate dominance and academic prowess. Valuing research and education as well as  \
+	an exploratory spirit, Brahites find themselves cut off from their homeworld by the Copernican Blockade, and their relationship to the fledgeling Frontier Alliance  \
+	is equal parts strained and symbiotic."
+	economic_power = 1.0
+
+/singleton/cultural_info/culture/human/eos
+	name = CULTURE_HUMAN_EOS
+	description = "The largest population center in the Helios system, Eosic people have had their culture dominated by the history of the Gaia Conflict for the last   \
+	several decades. The destruction of the Helios Gateway is a well ingrained cultural memory, and as such many Eosics are raised with a strong sense of nationalism and an  \
+	intimate connection with the Sol Defense Forces."
+	economic_power = 0.8
+
+/singleton/cultural_info/culture/human/pirx_high
+	name = CULTURE_HUMAN_PIRXL
+	description = "The owning classes of the Yuodu City Administrative District are often called 'the Lords of Pirx' due to their domination of the cities property, government, utilities \
+	and institutions. Disconnect from the Solar Core and years of unchallenged ownership has led them to become largely conservative and reactionary, with emphasis placed on \
+	traditional ways of life and family legacy."
+	economic_power = 1.1
+
+/singleton/cultural_info/culture/human/pirx_bug
+	name = CULTURE_HUMAN_PIRXB
+	description = "The Bugeaters, named for the prevalence of insect protien within the Yuodu City Administrative District, make up the majority of the population of Pirx Prime. \
+	Renting and working the real estate within the tented canyon, they are known for speaking in a slurred, exotic dialect that makes them incredibly distinct. Their domestic diets and \
+	fashion make them recognizable as outsiders to the majority of Solar citizens."
+	economic_power = 0.8
+
+/singleton/cultural_info/culture/human/pirx_frontier
+	name = CULTURE_HUMAN_PIRXF
+	description = "The Pirx Frontier Coalition is often considered the last frontier of Sol space. Known for a rugged sense of adventure and a connection to nature, the people who inhabit \
+	the uncharted jungles of Pirx Prime are often considered backwater in terms of technology, education, and customs. Their existence is shaped by the warm air of the Basking Tree rainforest that \
+	dominates the green planet, and the myriad of exotic life found in its freshwater system."
+	economic_power = 0.7
+
+/singleton/cultural_info/culture/human/spacer
 	name = CULTURE_HUMAN_SPACER
-	description = "You are from the void between worlds, though close to home. You are from one of the myriad space stations, orbital platforms, long haul freighters, \
-	gateway installations or other facilities that occupy the vastness of space. Spacers near the core worlds are accustomed to life in the fast lane, constantly moving between \
-	places, meeting a myriad of people and experiencing many of the cultures and worlds close to humanity's home. As such, Spacers of the core systems tend to be busy, sociable and \
+	description = "Across all political lines in human space, there are people who are born and raised in the void between worlds. You are from one of the myriad space stations, orbital platforms, long haul freighters, \
+	gateway installations or other facilities that occupy the vastness of space. Spacers are accustomed to life in the fast lane, constantly moving between \
+	places, meeting a myriad of people and experiencing many of the cultures and worlds humanity calls home. As such, Spacers tend to be busy, sociable and \
 	mobile, rarely satisfied with settled life. They almost universally know how to live and work in the void and take to such jobs more readily than their planet-bound counterparts."
 	economic_power = 1
 	language = LANGUAGE_SPACER
 
-/singleton/cultural_info/culture/human/spacer_frontier
-	name = CULTURE_HUMAN_SPAFRO
-	description =  "You are from the void between worlds, though you are in the distant, vast frontier of SCG space and beyond. Out here things like national identity and culture mean less; \
-	those who live so far from anything only look to their close family and friends rather than any larger group. Raised on one of the long haul freighters that move between frontier worlds delivering \
-	vital goods, a lonely outpost on the edge of a dreary backwater, such people are raised in small, confined environments with few others, and tend to be most familiar with older, reliable but outdated \
-	technology. An independent sort, people on the frontier are more likely to be isolationist and self-driven."
+/singleton/cultural_info/culture/human/offworld
+	name = CULTURE_HUMAN_OFFWORLD
+	description =  "You are from one of many far flung and outlying settlements that aren't notable enough to be on standard Solar maps. Raised out of touch and out of connection with the galaxyat large, \
+	those who live so far from anything only look to their close family and friends rather than any larger group. Whether it's a fueling station, an agriculutral dome, or a planet that is far removed from \
+	the luxuries of the gateway network, such people are raised in small, confined environments with few others, and tend to be most familiar with older, reliable but outdated \
+	technology. An independent sort, Offworlders are more likely to be isolationist and self-driven."
 	economic_power = 0.9
 	language = LANGUAGE_SPACER
 
 /singleton/cultural_info/culture/human/confederate
-	name = CULTURE_HUMAN_CONFED
-	description = "You are from Terra (not Earth), in the Gilgamesh system. The capital world of the Gilgamesh Colonial Confederation, your people embody what it means to be a part of the GCC. \
+	name = CULTURE_HUMAN_CONFEDC
+	description = "You are from the core of the Gilgamesh Colonial Confederation. Largely influenced by the planet Terra(not Earth), the Confederation's capital, your people embody what it means to be a part of the GCC. \
 	Unfortunately, the years since the war have not been easy on Terra and the long period of economic recovery has not made life easy. The people of Terra are typically employed \
-	in the military, industrial, government or service sectors, with an emphasis being placed on military service. Terrans today are generally poor, bitter and a somewhat broken people angry and \
-	resentful about their loss in the Gaia Conflict. An upbringing on Terra emphasises an odd mix of service to the state, liberalism and militarism."
+	in the military, industrial, government or service sectors, with an emphasis being placed on mandatory military service. Terrans today are generally poor, bitter and a somewhat broken people angry and \
+	resentful about their loss in the Gaia Conflict. An upbringing from Terra emphasises an odd mix of service to the state, liberalism and militarism."
 	language = LANGUAGE_HUMAN_RUSSIAN
 	economic_power = 0.9
+
+/singleton/cultural_info/culture/human/confederate_colony
+	name = CULTURE_HUMAN_CONFEDO
+	description = "You are from the outskirts of the Gilgamesh Colonial Confederation. Terran Colonists have a mixed view of their nation state, raging from strong nationalism to resentment for the state, but \
+	they all have the legacy of resource extraction and mandatory conscription in common. Being from a nation of conscripts means that Terran Colonists are often resourceful and experienced, \
+	having grown to cope with the horrors of dysfunctional economics and mandatory military service. Terrans today are generally poor, bitter and a somewhat broken people angry and \
+	resentful about their loss in the Gaia Conflict. Colonial Confederation education emphasizes service to the state, liberalism and militarism."
+	language = LANGUAGE_HUMAN_RUSSIAN
+	economic_power = 0.7
 
 /singleton/cultural_info/culture/human/gaia
 	name = CULTURE_HUMAN_GAIAN
