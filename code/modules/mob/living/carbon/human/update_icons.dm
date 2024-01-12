@@ -292,7 +292,7 @@ var/global/list/damage_icon_parts = list()
 		var/icon/DI
 		var/use_colour = (BP_IS_ROBOTIC(O) ? SYNTH_BLOOD_COLOUR : O.species.get_blood_colour(src))
 		var/cache_index = "[O.damage_state]/[O.icon_name]/[use_colour]/[species.get_bodytype(src)]"
-		if(damage_icon_parts[cache_index] == null)
+		if(isnull(damage_icon_parts[cache_index]))
 			DI = new /icon(species.get_damage_overlays(src), O.damage_state)			// the damage icon for whole human
 			DI.Blend(new /icon(species.get_damage_mask(src), O.icon_name), ICON_MULTIPLY)	// mask with this organ's pixels
 			DI.Blend(use_colour, ICON_MULTIPLY)

@@ -446,7 +446,7 @@
 	for(var/direction in tube_dir_list)
 		var/location = get_step(loc, direction)
 		for(var/obj/structure/transit_tube/tube in location)
-			if(tube.directions() == null && tube.icon_state == "auto")
+			if(isnull(tube.directions()) && tube.icon_state == "auto")
 				connected_auto += direction
 				break
 

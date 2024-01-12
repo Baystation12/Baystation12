@@ -113,7 +113,7 @@
 				o += "EAST: "
 			if(4)
 				o += "WEST: "
-		if(tile_info[index] == null)
+		if(isnull(tile_info[index]))
 			o += SPAN_WARNING("DATA UNAVAILABLE")
 			to_chat(user, o)
 			continue

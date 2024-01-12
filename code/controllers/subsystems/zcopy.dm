@@ -495,7 +495,7 @@ SUBSYSTEM_DEF(zcopy)
 
 		if (mutated)
 			for (var/i in 1 to length(fixed_overlays))
-				if (fixed_overlays[i] == null)
+				if (isnull(fixed_overlays[i]))
 					fixed_overlays[i] = appearance:overlays[i]
 
 	// Scan & fix underlays
@@ -512,7 +512,7 @@ SUBSYSTEM_DEF(zcopy)
 
 		if (mutated)
 			for (var/i in 1 to  length(fixed_overlays))
-				if (fixed_underlays[i] == null)
+				if (isnull(fixed_underlays[i]))
 					fixed_underlays[i] = appearance:underlays[i]
 
 	// If we did nothing (no violations), don't bother creating a new appearance
