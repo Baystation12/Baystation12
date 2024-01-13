@@ -110,7 +110,7 @@ var/global/photo_count = 0
 	item_state = "briefcase"
 	w_class = ITEM_SIZE_NORMAL //same as book
 	storage_slots = DEFAULT_BOX_STORAGE //yes, that's storage_slots. Photos are w_class 1 so this has as many slots equal to the number of photos you could put in a box
-	can_hold = list(/obj/item/photo)
+	contents_allowed = list(/obj/item/photo)
 
 /obj/item/storage/photo_album/MouseDrop(obj/over_object as obj)
 

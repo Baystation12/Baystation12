@@ -1,6 +1,6 @@
 /obj/item/storage/wallet/Initialize()
 	. = ..()
-	can_hold |= list(
+	contents_allowed |= list(
 		/obj/item/clothing/accessory/solgov,
 		/obj/item/clothing/accessory/ribbon
 	)

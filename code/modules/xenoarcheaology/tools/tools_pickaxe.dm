@@ -176,12 +176,11 @@
 	storage_slots = 7
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_NORMAL
-	can_hold = list(/obj/item/pickaxe/xeno)
+	contents_allowed = list(/obj/item/pickaxe/xeno)
 	max_storage_space = 18
 	max_w_class = ITEM_SIZE_NORMAL
 	allow_quick_gather = TRUE
 	allow_quick_empty = TRUE
-	collection_mode = TRUE
 	startswith = list(
 		/obj/item/pickaxe/xeno/brush,
 		/obj/item/pickaxe/xeno/one_pick,

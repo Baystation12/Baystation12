@@ -17,7 +17,7 @@
 	storage_slots = 50
 	max_storage_space = 200
 	max_w_class = ITEM_SIZE_NORMAL
-	can_hold = list(/obj/item/fossil)
+	contents_allowed = list(/obj/item/fossil)
 
 /obj/item/storage/box/samplebags
 	name = "sample bag box"

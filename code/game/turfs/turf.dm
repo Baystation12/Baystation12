@@ -134,12 +134,15 @@
 	if(Adjacent(user))
 		attack_hand(user)
 
-/turf/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/storage))
-		var/obj/item/storage/S = W
-		if(S.collection_mode)
-			S.gather_all(src, user)
+
+/turf/use_tool(obj/item/item, mob/living/user, list/click_params)
+	if (istype(item, /obj/item/storage))
+		var/obj/item/storage/storage = item
+		if (storage.allow_quick_gather && !storage.quick_gather_single)
+			storage.gather_all(src, user)
+			return TRUE
 	return ..()
+
 
 /turf/Enter(atom/movable/mover as mob|obj, atom/forget as mob|obj|turf|area)
 

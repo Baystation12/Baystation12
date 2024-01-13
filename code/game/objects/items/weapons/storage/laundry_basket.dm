@@ -16,7 +16,6 @@
 	storage_slots = 14
 	allow_quick_empty = TRUE
 	allow_quick_gather = TRUE
-	collection_mode = TRUE
 	var/linked
 
 
@@ -78,8 +77,8 @@
 	icon = 'icons/obj/weapons/other.dmi'
 	icon_state = "offhand"
 	name = "second hand"
-	collection_mode = FALSE
 	allow_quick_gather = FALSE
+	quick_gather_single = TRUE
 
 /obj/item/storage/laundry_basket/offhand/dropped(mob/user as mob)
 	..()
