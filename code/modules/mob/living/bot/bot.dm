@@ -413,7 +413,7 @@
 // Movement through doors allowed if ID has access
 /proc/LinkBlockedWithAccess(turf/A, turf/B, obj/item/card/id/ID)
 
-	if(A == null || B == null) return 1
+	if(isnull(A) || isnull(B)) return 1
 	var/adir = get_dir(A,B)
 	var/rdir = get_dir(B,A)
 	if((adir & (NORTH|SOUTH)) && (adir & (EAST|WEST)))	//	diagonal

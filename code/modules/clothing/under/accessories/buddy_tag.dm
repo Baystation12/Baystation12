@@ -37,7 +37,7 @@
 		return TOPIC_REFRESH
 	if (href_list["setcode"])
 		var/newcode = input("Set new buddy ID number.", "Buddy Tag ID", "") as null | num
-		if (newcode == null || !CanInteract(user, state))
+		if (isnull(newcode) || !CanInteract(user, state))
 			return
 		id = newcode
 		return TOPIC_REFRESH

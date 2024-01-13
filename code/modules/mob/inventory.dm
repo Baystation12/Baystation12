@@ -212,12 +212,12 @@
 
 /// Whether or not the mob's hands or other holding slots are empty. Returns boolean.
 /mob/proc/HandsEmpty()
-	return l_hand == null && r_hand == null
+	return isnull(l_hand) && isnull(r_hand)
 
 
 /// Whether or not the mob has any free hands/holding slots.
 /mob/proc/HasFreeHand()
-	return l_hand == null || r_hand == null
+	return isnull(l_hand) || isnull(r_hand)
 
 
 // Removes an item from inventory and places it in the target atom.

@@ -93,7 +93,7 @@
 /obj/structure/transit_tube/New(loc)
 	..(loc)
 
-	if(tube_dirs == null)
+	if(isnull(tube_dirs))
 		init_dirs()
 
 
@@ -314,7 +314,7 @@
 					current_tube = tube
 					break
 
-			if(current_tube == null)
+			if(isnull(current_tube))
 				set_dir(next_dir)
 				Move(get_step(loc, dir)) // Allow collisions when leaving the tubes.
 				break
@@ -446,7 +446,7 @@
 	for(var/direction in tube_dir_list)
 		var/location = get_step(loc, direction)
 		for(var/obj/structure/transit_tube/tube in location)
-			if(tube.directions() == null && tube.icon_state == "auto")
+			if(isnull(tube.directions()) && tube.icon_state == "auto")
 				connected_auto += direction
 				break
 

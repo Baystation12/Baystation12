@@ -66,7 +66,7 @@
 	if(open_turf.turf_fire)
 		return INITIALIZE_HINT_QDEL
 
-	if(fire_color && ((color != fire_color) && color == null)) //Take colour from proc unless base colour was already custom
+	if(fire_color && ((color != fire_color) && isnull(color))) //Take colour from proc unless base colour was already custom
 		color = fire_color
 	if(color != null)
 		set_color(color)

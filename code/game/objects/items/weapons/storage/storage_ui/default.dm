@@ -132,7 +132,7 @@
 //Creates the storage UI
 /datum/storage_ui/default/prepare_ui()
 	//if storage slots is null then use the storage space UI, otherwise use the slots UI
-	if(storage.storage_slots == null)
+	if(isnull(storage.storage_slots))
 		space_orient_objs()
 	else
 		slot_orient_objs()

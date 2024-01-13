@@ -31,7 +31,7 @@
 		if(det_time > 1)
 			to_chat(user, "The timer is set to [det_time/10] seconds.")
 			return
-		if(det_time == null)
+		if(isnull(det_time))
 			return
 		to_chat(user, "\The [src] is set for instant detonation.")
 

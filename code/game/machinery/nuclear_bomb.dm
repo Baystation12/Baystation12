@@ -272,7 +272,7 @@ var/global/bomb_set
 					code = null
 				else
 					lastentered = text("[]", href_list["type"])
-					if(text2num(lastentered) == null)
+					if(isnull(text2num_or_default(lastentered)))
 						log_and_message_admins("tried to exploit a nuclear bomb by entering non-numerical codes")
 					else
 						code += lastentered

@@ -167,7 +167,7 @@ SUBSYSTEM_DEF(ambient_lighting) //A simple SS that handles updating ambient ligh
  */
 /datum/controller/subsystem/ambient_lighting/proc/create_ambient_group(color, multiplier)
 
-	if(ambient_groups[SPACE_AMBIENT_GROUP] == null) //Something (probably a planet) wants to add an ambient group, add space first
+	if(isnull(ambient_groups[SPACE_AMBIENT_GROUP])) //Something (probably a planet) wants to add an ambient group, add space first
 		add_space_ambient_group()
 
 	// Find the first free index in the bitmap.
@@ -196,7 +196,7 @@ SUBSYSTEM_DEF(ambient_lighting) //A simple SS that handles updating ambient ligh
 
 /datum/controller/subsystem/ambient_lighting/Initialize(start_timeofday)
 	//Create space ambient group if nothing created it until now.
-	if(ambient_groups[SPACE_AMBIENT_GROUP] == null)
+	if(isnull(ambient_groups[SPACE_AMBIENT_GROUP]))
 		add_space_ambient_group()
 
 	fire(FALSE, TRUE)

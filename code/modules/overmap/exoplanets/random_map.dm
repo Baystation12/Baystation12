@@ -24,7 +24,7 @@
 	var/list/grass_cache
 
 /datum/random_map/noise/exoplanet/New(seed, tx, ty, tz, tlx, tly, do_not_apply, do_not_announce, never_be_priority = 0, used_area, list/_plant_colors)
-	if (target_turf_type == null)
+	if (isnull(target_turf_type))
 		target_turf_type = world.turf
 	water_level = rand(water_level_min,water_level_max)
 	//automagically adjust probs for bigger maps to help with lag

@@ -445,7 +445,7 @@
 	if(robolimb_count)
 		bodytemperature += round(robolimb_count/2)
 
-	if (species.body_temperature == null || isSynthetic())
+	if (isnull(species.body_temperature) || isSynthetic())
 		return //this species doesn't have metabolic thermoregulation
 
 	var/body_temperature_difference = species.body_temperature - bodytemperature
@@ -827,7 +827,7 @@
 			else
 				//TODO: precalculate all of this stuff when the species datum is created
 				var/base_temperature = species.body_temperature
-				if(base_temperature == null) //some species don't have a set metabolic temperature
+				if(isnull(base_temperature)) //some species don't have a set metabolic temperature
 					base_temperature = (getSpeciesOrSynthTemp(HEAT_LEVEL_1) + getSpeciesOrSynthTemp(COLD_LEVEL_1))/2
 
 				var/temp_step

@@ -115,13 +115,13 @@
 	var/obj/spawner/newbomb/proto = /obj/spawner/newbomb/radio/custom
 
 	var/p = input("Enter phoron amount (mol):","Phoron", initial(proto.phoron_amt)) as num|null
-	if(p == null) return
+	if(isnull(p)) return
 
 	var/o = input("Enter oxygen amount (mol):","Oxygen", initial(proto.oxygen_amt)) as num|null
-	if(o == null) return
+	if(isnull(o)) return
 
 	var/c = input("Enter carbon dioxide amount (mol):","Carbon Dioxide", initial(proto.carbon_amt)) as num|null
-	if(c == null) return
+	if(isnull(c)) return
 
 	new /obj/spawner/newbomb/radio/custom(get_turf(mob), p, o, c)
 

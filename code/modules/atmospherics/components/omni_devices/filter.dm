@@ -237,7 +237,7 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 	switch_mode(dir, mode)
 
 /obj/machinery/atmospherics/omni/filter/proc/switch_mode(port, mode)
-	if(mode == null || !port)
+	if(isnull(mode) || !port)
 		return
 	var/datum/omni_port/target_port = null
 	var/list/other_ports = new()
