@@ -906,10 +906,7 @@
 	dir = 4
 	},
 /obj/floor_decal/industrial/outline/yellow,
-/obj/machinery/portable_atmospherics/canister/oxygen{
-	maximum_pressure = 15000.00;
-	start_pressure = 12000.00
-	},
+/obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
 "OU" = (
