@@ -34,7 +34,7 @@
 		if(body && body.pilot_coverage >= 100)
 			additional_hud_elements += /obj/screen/exosuit/toggle/air
 		i = 0
-		var/pos = 7
+		var/pos = 8
 		for(var/additional_hud in additional_hud_elements)
 			var/obj/screen/exosuit/M = new additional_hud(src)
 			M.screen_loc = "1:6,[pos]:[i]"
