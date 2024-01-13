@@ -83,7 +83,7 @@
 		update_icon()
 		return TRUE
 
-	if (istype(W, /obj/item/device/assembly/signaler) && signaler == null)
+	if (istype(W, /obj/item/device/assembly/signaler) && isnull(signaler))
 		if (disabled)
 			to_chat(user, SPAN_WARNING("\The [src] is disabled!"))
 			return TRUE

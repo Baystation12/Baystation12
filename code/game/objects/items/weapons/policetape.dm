@@ -300,7 +300,7 @@ var/global/list/tape_roll_applications = list()
 		var/turf/F = A
 		var/direction = user.loc == F ? user.dir : turn(user.dir, 180)
 		var/hazard_overlay = GLOB.hazard_overlays["[direction]"]
-		if(tape_roll_applications[F] == null)
+		if(isnull(tape_roll_applications[F]))
 			tape_roll_applications[F] = 0
 
 		if(tape_roll_applications[F] & direction)

@@ -185,7 +185,7 @@
 		var/datum/gas_mixture/air_sample = return_air()
 		var/pressure = round(air_sample.return_pressure(),0.1)
 
-		if(abs(pressure - previousPressure) > 0.001 || previousPressure == null)
+		if(abs(pressure - previousPressure) > 0.001 || isnull(previousPressure))
 			var/datum/signal/signal = new
 			signal.transmission_method = 1 //radio signal
 			signal.data["tag"] = id_tag

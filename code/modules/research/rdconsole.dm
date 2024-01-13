@@ -106,15 +106,15 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(D.linked_console != null || D.panel_open)
 			continue
 		if(istype(D, /obj/machinery/r_n_d/destructive_analyzer) && can_analyze == TRUE) // Only science R&D consoles can do research
-			if(linked_destroy == null)
+			if(isnull(linked_destroy))
 				linked_destroy = D
 				D.linked_console = src
 		else if(istype(D, /obj/machinery/r_n_d/protolathe))
-			if(linked_lathe == null)
+			if(isnull(linked_lathe))
 				linked_lathe = D
 				D.linked_console = src
 		else if(istype(D, /obj/machinery/r_n_d/circuit_imprinter))
-			if(linked_imprinter == null)
+			if(isnull(linked_imprinter))
 				linked_imprinter = D
 				D.linked_console = src
 	return
@@ -556,17 +556,17 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	files.RefreshResearch()
 	switch(screen) //A quick check to make sure you get the right screen when a device is disconnected.
 		if(2 to 2.9)
-			if(linked_destroy == null)
+			if(isnull(linked_destroy))
 				screen = 2.0
-			else if(linked_destroy.loaded_item == null)
+			else if(isnull(linked_destroy.loaded_item))
 				screen = 2.1
 			else
 				screen = 2.2
 		if(3 to 3.9)
-			if(linked_lathe == null)
+			if(isnull(linked_lathe))
 				screen = 3.0
 		if(4 to 4.9)
-			if(linked_imprinter == null)
+			if(isnull(linked_imprinter))
 				screen = 4.0
 
 	switch(screen)
@@ -626,7 +626,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				return
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A><HR>"
 			dat += "Disk Contents: (Technology Data Disk)<BR><BR>"
-			if(t_disk.stored == null)
+			if(isnull(t_disk.stored))
 				dat += "The disk has no data stored on it.<HR>"
 				dat += "Operations: "
 				dat += "<A href='?src=\ref[src];menu=1.3'>Load Tech to Disk</A> || "
@@ -657,7 +657,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				screen = 1
 				return
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A><HR>"
-			if(d_disk.blueprint == null)
+			if(isnull(d_disk.blueprint))
 				dat += "The disk has no data stored on it.<HR>"
 				dat += "Operations: "
 				dat += "<A href='?src=\ref[src];menu=1.5'>Load Design to Disk</A> || "

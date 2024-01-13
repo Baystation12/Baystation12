@@ -439,7 +439,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	return text2num(pickweight(candidates))
 
 /datum/map/proc/get_empty_zlevel()
-	if(empty_levels == null)
+	if(isnull(empty_levels))
 		INCREMENT_WORLD_Z_SIZE
 		empty_levels = list(world.maxz)
 	return pick(empty_levels)

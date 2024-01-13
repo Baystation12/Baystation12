@@ -200,7 +200,7 @@
 //so that they do not occupy regular job slots. All other antag roles should be spawned after jobs are
 //assigned, so that job restrictions can be respected.
 /datum/antagonist/proc/attempt_spawn(spawn_target = null)
-	if(spawn_target == null)
+	if(isnull(spawn_target))
 		spawn_target = initial_spawn_target
 
 	// Update our boundaries.

@@ -701,9 +701,9 @@ Ccomp's first proc.
 	if(!check_rights(R_DEBUG|R_FUN))	return
 
 	var/heavy = input("Range of heavy pulse.", text("Input"))  as num|null
-	if(heavy == null) return
+	if(isnull(heavy)) return
 	var/light = input("Range of light pulse.", text("Input"))  as num|null
-	if(light == null) return
+	if(isnull(light)) return
 
 	if (heavy || light)
 

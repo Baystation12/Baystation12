@@ -249,7 +249,7 @@
 /material/proc/place_dismantled_product(turf/target,is_devastated)
 	if (is_devastated)
 		var/return_count = rand(1, 2)
-		if (place_shard(target, return_count) == null)
+		if (isnull(place_shard(target, return_count)))
 			place_sheet(target, return_count)
 	else
 		place_sheet(target, 2)

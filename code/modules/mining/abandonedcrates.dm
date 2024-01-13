@@ -149,7 +149,7 @@
 	if(!Adjacent(user))
 		return
 
-	if(input == null || length(input) != codelen)
+	if(isnull(input) || length(input) != codelen)
 		to_chat(user, SPAN_NOTICE("You leave the crate alone."))
 	else if(check_input(input) && locked)
 		to_chat(user, SPAN_NOTICE("The crate unlocks!"))

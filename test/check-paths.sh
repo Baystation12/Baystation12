@@ -25,7 +25,7 @@ exactly() { # exactly N name search [mode] [filter]
 	fi
 }
 
-# With the potential exception of << if you increase any of these numbers you're probably doing it wrong
+# If you increase any of these numbers you're probably doing it wrong
 exactly 0 "escapes" '\\\\(red|blue|green|black|b|i[^mc])'
 exactly 4 "Del()s" '\WDel\('
 exactly 2 "/atom text paths" '"/atom'
@@ -61,7 +61,8 @@ exactly 210 "attackby() override" '\/attackby\((.*)\)'  -P
 exactly 15 "uses of examine()" '[.|\s]examine\(' -P # If this fails it's likely because you used '/atom/proc/examine(mob)' instead of '/proc/examinate(mob, atom)' - Exception: An examine()-proc may call other examine()-procs
 exactly 7 "direct modifications of overlays list" '\boverlays((\s*[|^=+&-])|(\.(Cut)|(Add)|(Copy)|(Remove)|(Remove)))' -P
 exactly 0 "new/list list instantiations" 'new\s*/list' -P
-# With the potential exception of << if you increase any of these numbers you're probably doing it wrong
+exactly 0 "== null tests" '(==\s*null\b)|(\bnull\s*==)' -P #Use isnull() instead
+# If you increase any of these numbers you're probably doing it wrong
 
 num=`find ./html/changelogs -not -name "*.yml" | wc -l`
 echo "$num non-yml files (expecting exactly 2)"

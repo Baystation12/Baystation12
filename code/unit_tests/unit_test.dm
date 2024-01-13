@@ -133,7 +133,7 @@ var/global/ascii_reset = "[ascii_esc]\[0m"
 	if(world.time > end_time)
 		test.fail("Unit Tests Ran out of time")   // This should never happen, and if it does either fix your unit tests to be faster or if you can make them async checks.
 		return
-	if (test.start_test() == null)	// Runtimed.
+	if (isnull(test.start_test()))	// Runtimed.
 		test.fail("Test Runtimed")
 	return 1
 

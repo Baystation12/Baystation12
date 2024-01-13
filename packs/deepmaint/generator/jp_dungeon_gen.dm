@@ -569,7 +569,7 @@
 
 	var/timer = world.timeofday
 
-	if(seed==null)
+	if(isnull(seed))
 		out_seed = rand(-65535, 65535)
 		rand_seed(out_seed)
 	else

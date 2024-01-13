@@ -169,7 +169,7 @@
 
 		if("text")
 			var/new_value = input("Enter new text:","Text",O.vars[variable]) as text|null//todo: sanitize ???
-			if(new_value == null) return
+			if(isnull(new_value)) return
 			O.vars[variable] = new_value
 
 			if(method)
@@ -206,7 +206,7 @@
 		if("num")
 			var/new_value = input("Enter new number:","Num",\
 					O.vars[variable]) as num|null
-			if(new_value == null) return
+			if(isnull(new_value)) return
 			O.vars[variable] = new_value
 
 			if(method)
@@ -244,7 +244,7 @@
 		if("type")
 			var/new_value
 			new_value = select_subpath(within_scope = /datum)
-			if(new_value == null) return
+			if(isnull(new_value)) return
 			O.vars[variable] = new_value
 			if(method)
 				if(istype(O, /mob))
@@ -279,7 +279,7 @@
 
 		if("file")
 			var/new_value = input("Pick file:","File",O.vars[variable]) as null|file
-			if(new_value == null) return
+			if(isnull(new_value)) return
 			O.vars[variable] = new_value
 
 			if(method)
@@ -315,7 +315,7 @@
 
 		if("icon")
 			var/new_value = input("Pick icon:","Icon",O.vars[variable]) as null|icon
-			if(new_value == null) return
+			if(isnull(new_value)) return
 			O.vars[variable] = new_value
 			if(method)
 				if(istype(O, /mob))

@@ -218,7 +218,7 @@
 /obj/machinery/computer/HolodeckControl/proc/derez(obj/obj , silent = 1)
 	holographic_objs.Remove(obj)
 
-	if(obj == null)
+	if(isnull(obj))
 		return
 
 	if(!silent)

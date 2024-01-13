@@ -24,7 +24,7 @@ GLOBAL_LIST(end_titles)
 
 		if(mob.get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_YES)
 			sound_to(mob, sound(null, channel = GLOB.lobby_sound_channel))
-			if(GLOB.end_credits_song == null)
+			if(isnull(GLOB.end_credits_song))
 				var/title_song = pick('sound/music/THUNDERDOME.ogg', 'sound/music/europa/Chronox_-_03_-_In_Orbit.ogg', 'sound/music/europa/asfarasitgets.ogg')
 				sound_to(mob, sound(title_song, wait = 0, volume = 40, channel = GLOB.lobby_sound_channel))
 			else if(get_preference_value(/datum/client_preference/play_admin_midis) == GLOB.PREF_YES)
@@ -118,7 +118,7 @@ GLOBAL_LIST(end_titles)
 			continue
 		if(H.is_species(SPECIES_MONKEY) && findtext(H.real_name,"[lowertext(H.species.name)]")) //no monki
 			continue
-		if(H.last_ckey == null) //don't mention these losers (prespawned corpses mostly)
+		if(isnull(H.last_ckey)) //don't mention these losers (prespawned corpses mostly)
 			continue
 		if(!length(cast) && !chunksize)
 			chunk += "CAST:"
@@ -159,7 +159,7 @@ GLOBAL_LIST(end_titles)
 	var/list/corpses = list()
 	var/list/monkies = list()
 	for(var/mob/living/carbon/human/H in GLOB.dead_mobs)
-		if(H.last_ckey == null) //no prespawned corpses
+		if(isnull(H.last_ckey)) //no prespawned corpses
 			continue
 		if(H.is_species(SPECIES_MONKEY) && findtext(H.real_name,"[lowertext(H.species.name)]"))
 			monkies[H.species.name] += 1

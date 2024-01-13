@@ -113,7 +113,7 @@
 				o += "EAST: "
 			if(4)
 				o += "WEST: "
-		if(tile_info[index] == null)
+		if(isnull(tile_info[index]))
 			o += SPAN_WARNING("DATA UNAVAILABLE")
 			to_chat(user, o)
 			continue
@@ -343,7 +343,7 @@
 		var/old_alerts = dir_alerts
 		for(var/index = 1; index <= 4; index++)
 			var/list/tileinfo = tile_info[index]
-			if(tileinfo == null)
+			if(isnull(tileinfo))
 				continue // Bad data.
 			var/celsius = convert_k2c(tileinfo[1])
 

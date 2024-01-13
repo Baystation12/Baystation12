@@ -8,7 +8,7 @@
 	var/list/contract_spells = list(/spell/contract/reward,/spell/contract/punish,/spell/contract/return_master)
 
 /obj/item/contract/attack_self(mob/user as mob)
-	if(contract_master == null)
+	if(isnull(contract_master))
 		to_chat(user, SPAN_NOTICE("You bind the contract to your soul, making you the recipient of whatever poor fool's soul that decides to contract with you."))
 		contract_master = user
 		return

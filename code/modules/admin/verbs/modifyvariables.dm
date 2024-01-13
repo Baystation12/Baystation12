@@ -501,13 +501,13 @@
 
 		if("text")
 			var/var_new = input("Enter new text:","Text",O.get_variable_value(variable)) as null|text
-			if(var_new==null) return
+			if(isnull(var_new)) return
 			var_value = var_new
 
 		if("num")
 			if(variable=="stat")
 				var/var_new = input("Enter new number:","Num",O.get_variable_value(variable)) as null|num
-				if(var_new == null) return
+				if(isnull(var_new)) return
 				if((O.get_variable_value(variable) == 2) && (var_new < 2))//Bringing the dead back to life
 					var/mob/M = O
 					M.switch_from_dead_to_living_mob_list()
@@ -517,7 +517,7 @@
 				var_value = var_new
 			else
 				var/var_new =  input("Enter new number:","Num",O.get_variable_value(variable)) as null|num
-				if(var_new==null) return
+				if(isnull(var_new)) return
 				var_value = var_new
 
 		if("type")
@@ -528,22 +528,22 @@
 
 		if("reference")
 			var/var_new = input("Select reference:","Reference",O.get_variable_value(variable)) as null|mob|obj|turf|area in world
-			if(var_new==null) return
+			if(isnull(var_new)) return
 			var_value = var_new
 
 		if("mob reference")
 			var/var_new = input("Select reference:","Reference",O.get_variable_value(variable)) as null|mob in world
-			if(var_new==null) return
+			if(isnull(var_new)) return
 			var_value = var_new
 
 		if("file")
 			var/var_new = input("Pick file:","File",O.get_variable_value(variable)) as null|file
-			if(var_new==null) return
+			if(isnull(var_new)) return
 			var_value = var_new
 
 		if("icon")
 			var/var_new = input("Pick icon:","Icon",O.get_variable_value(variable)) as null|icon
-			if(var_new==null) return
+			if(isnull(var_new)) return
 			var_value = var_new
 
 		if("color")

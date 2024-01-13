@@ -397,7 +397,7 @@
 			return TRUE
 		var/free_hardpoints = list()
 		for (var/hardpoint in hardpoints)
-			if (hardpoints[hardpoint] == null && (!length(mech_equipment.restricted_hardpoints) || (hardpoint in mech_equipment.restricted_hardpoints)))
+			if (isnull(hardpoints[hardpoint]) && (!length(mech_equipment.restricted_hardpoints) || (hardpoint in mech_equipment.restricted_hardpoints)))
 				free_hardpoints += hardpoint
 		if (!length(free_hardpoints))
 			USE_FEEDBACK_FAILURE("\The [src] has no free hardpoints for \the [tool].")
@@ -423,7 +423,7 @@
 		var/input = input(user, "Which component would you like to remove?", "\The [src] - Remove Hardpoint") as null|anything in parts
 		if (!input || !user.use_sanity_check(src, tool))
 			return TRUE
-		if (hardpoints[input] == null)
+		if (isnull(hardpoints[input]))
 			USE_FEEDBACK_FAILURE("\The [src] not longer has a component in the [input] slot.")
 			return TRUE
 		remove_system(input, user)
