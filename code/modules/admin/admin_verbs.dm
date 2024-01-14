@@ -100,8 +100,8 @@ var/global/list/admin_verbs_admin = list(
 	/datum/admins/proc/sendFax,
 	/client/proc/check_fax_history,
 	/client/proc/cmd_admin_notarget,
-	/datum/admins/proc/setroundlength,
-	/datum/admins/proc/toggleroundendvote,
+	/datum/admins/proc/SetRoundLength,
+	/datum/admins/proc/ToggleContinueVote,
 	/datum/admins/proc/togglemoderequirementchecks,
 	/client/proc/delete_crew_record
 )

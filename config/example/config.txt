@@ -135,6 +135,13 @@ VOTE_DELAY 6000
 ## time period (deciseconds) which voting session will last (default 1 minute)
 VOTE_PERIOD 600
 
+## Maximum time a round can last for (in minutes). If this time is exceeded, the round
+# will autotransfer without a vote at the next continue vote. Leave disabled for no limit.
+#MAXIMUM_ROUND_LENGTH 120
+
+## If set, the time in minutes between checks for ending empty rounds. Default off.
+#EMPTY_ROUND_CHECK_INTERVAL 15
+
 ## autovote initial delay in minutes before first automatic transfer vote call (default 120)
 # using seven semicolon (;) separated values allows for different weekday-based values
 VOTE_AUTOTRANSFER_INITIAL 120
@@ -143,6 +150,9 @@ VOTE_AUTOTRANSFER_INITIAL 120
 # using seven semicolon (;) separated values allows for different weekday-based values
 VOTE_AUTOTRANSFER_INTERVAL 30
 
+## Time in minutes leading up to the next autotransfer vote in which antagonists cannot
+# automatically be created. Default 20.
+#TRANSFER_VOTE_BLOCK_ANTAG_TIME 20
 
 ## Time left (seconds) before round start when automatic gamemote vote is called (default 160).
 VOTE_AUTOGAMEMODE_TIMELEFT 160
@@ -440,10 +450,6 @@ RADIATION_LOWER_LIMIT 0.15
 ## Add lines of 'DISALLOW_VOTABLE_MODE config_tag' to prevent a normally votable mode from being votable, eg:
 ## DISALLOW_VOTABLE_MODE changeling
 ## DISALLOW_VOTABLE_MODE malfunction
-
-## Maximum time a round can last for (in minutes). If this time is exceeded,
-## the round will autotransfer without a vote at the next continue vote. Leave disabled for no limit.
-#MAXIMUM_ROUND_LENGTH 120
 
 ## The delay in deciseconds between stat() updates.
 ## Lower can be more responsive to scene changes and updates but has a higher client/server overhead.

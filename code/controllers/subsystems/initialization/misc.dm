@@ -18,7 +18,6 @@ SUBSYSTEM_DEF(init_misc)
 	initialize_pipe_datum_category_list()
 	populate_robolimb_list()
 	setupgenetics()
-	transfer_controller = new
 
 
 /datum/controller/subsystem/init_misc/proc/init_antags()

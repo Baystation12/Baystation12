@@ -1615,34 +1615,45 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		faxreply = null
 	return
 
-/datum/admins/proc/setroundlength()
+
+/datum/admins/proc/SetRoundLength()
 	set category = "Server"
-	set desc = "Set the time the round-end vote will start in minutes."
 	set name = "Set Round Length"
-
-	if (GAME_STATE > RUNLEVEL_LOBBY)
-		to_chat(usr, SPAN_WARNING("You cannot change the round length after the game has started!"))
-		return
-
-	var/time = input("Set the time until the round-end vote occurs (IN MINUTES). Default is [config.vote_autotransfer_initial / 600]", "Set Round Length", 0) as null | num
-
-	if (!time || !isnum(time) || time < 0)
-		return
-
-	transfer_controller.timerbuffer = time MINUTES
-	log_and_message_admins("set the initial round-end vote time to [time] minutes after round-start.")
-
-/datum/admins/proc/toggleroundendvote()
-	set category = "Server"
-	set desc = "Toggle the continue vote on/off. Toggling off will cause round-end to occur when the next continue vote time would be."
-	set name = "Toggle Continue Vote"
-
+	set desc = "Set the maximum length of a round in minutes."
 	if (GAME_STATE > RUNLEVEL_GAME)
 		to_chat(usr, SPAN_WARNING("The game is already ending!"))
 		return
+	var/current = round(round_duration_in_ticks / 600, 0.1)
+	var/response = input(usr, "Time in minutes when the round will end, or 0 to disable.\nCurrent time: [current]m") as null | num
+	if (!isnum(response))
+		return
+	if (!response)
+		log_and_message_admins("disabled max round length.")
+		config.maximum_round_length = response
+	else if (response > current)
+		log_and_message_admins("set max round length to [response] minutes.")
+		config.maximum_round_length = response
+	else
+		to_chat(usr, SPAN_WARNING("You cannot set a max round length in the past."))
 
-	transfer_controller.do_continue_vote = !transfer_controller.do_continue_vote
-	log_and_message_admins("toggled the continue vote [transfer_controller.do_continue_vote ? "ON" : "OFF"]")
+
+/datum/admins/proc/ToggleContinueVote()
+	set category = "Server"
+	set name = "Toggle Continue Vote"
+	set desc = "Toggle the continue vote on/off. Toggling off will cause round-end to occur when the next continue vote time would be."
+	if (GAME_STATE > RUNLEVEL_GAME)
+		to_chat(usr, SPAN_WARNING("The game is already ending!"))
+		return
+	SSroundend.vote_check = !SSroundend.vote_check
+	if (SSroundend.vote_check)
+		var/interval = config.vote_autotransfer_interval
+		if (!interval)
+			to_chat(usr, SPAN_WARNING("Continue votes not configured."))
+			SSroundend.vote_check = 0
+			return
+		SSroundend.vote_check = (round_duration_in_ticks / 600) + interval
+	log_and_message_admins("toggled continue votes [SSroundend.vote_check ? "ON" : "OFF"]")
+
 
 /datum/admins/proc/togglemoderequirementchecks()
 	set category = "Server"
