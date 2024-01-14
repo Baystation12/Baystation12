@@ -336,5 +336,5 @@
 	item_state = "case"
 	w_class = ITEM_SIZE_LARGE
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE
-	can_hold = list(/obj/item/inflatable)
+	contents_allowed = list(/obj/item/inflatable)
 	startswith = list(/obj/item/inflatable/door = 2, /obj/item/inflatable/wall = 3)

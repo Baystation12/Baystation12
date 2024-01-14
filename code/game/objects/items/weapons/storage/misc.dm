@@ -30,7 +30,7 @@
 	icon = 'icons/obj/food/food.dmi'
 	icon_state = "donutbox"
 	name = "donut box"
-	can_hold = list(/obj/item/reagent_containers/food/snacks/donut)
+	contents_allowed = list(/obj/item/reagent_containers/food/snacks/donut)
 	foldable = /obj/item/stack/material/cardboard
 
 	startswith = list(/obj/item/reagent_containers/food/snacks/donut/normal = 6)
@@ -61,7 +61,7 @@
 	throwforce = 2
 	slot_flags = SLOT_BELT
 	startswith = list(/obj/item/paper/cig = 10)
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/paper/cig,
 		/obj/item/clothing/mask/smokable/cigarette,
 		/obj/item/storage/cigpaper/filters

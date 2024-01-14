@@ -1,44 +1,88 @@
-// To clarify:
-// For allow_quick_gather functionality,
-// see item/attackby() (/game/objects/items.dm)
-// Do not remove this functionality without good reason, cough reagent_containers cough.
-// -Sayu
-
-
 /obj/item/storage
 	name = "storage"
 	icon = 'icons/obj/boxes.dmi'
 	w_class = ITEM_SIZE_NORMAL
-	var/list/can_hold = list() //List of objects which this item can store (if set, it can't store anything else)
-	var/list/cant_hold = list() //List of objects which this item can't store (in effect only if can_hold isn't set)
 
-	var/max_w_class = ITEM_SIZE_SMALL //Max size of objects that this object can store (in effect only if can_hold isn't set)
-	var/max_storage_space = null //Total storage cost of items this can hold. Will be autoset based on storage_slots if left null.
-	var/storage_slots = null //The number of storage slots in this container.
+	/** If set, a list of paths this item can hold, disallowing all others.
+		May be associative, in which case the value is a limit per path. */
+	var/list/contents_allowed
 
-	var/allow_quick_empty	//Set this variable to allow the object to have the 'empty' verb, which dumps all the contents on the floor.
-	var/allow_quick_gather	//Set this variable to allow the object to have the 'toggle mode' verb, which quickly collects all items from a tile.
-	///Allows dumping the contents of storage after a duration
+	/** If set, a list of paths this item cannot hold, allowing all others.
+		Ignored when contents_allowed is set. */
+	var/list/contents_banned
+
+	/// The largest item size that can be stored. Ignored if contents_allowed is set.
+	var/max_w_class = ITEM_SIZE_SMALL
+
+	/// The space available in this item. If unset, calculate from storage_slots.
+	var/max_storage_space
+
+	/// If set, the number of storage slots available.
+	var/storage_slots
+
+	/// If set, this item can use the empty verb to dump its contents.
+	var/allow_quick_empty
+
+	/// If set, this item can attempt to collect all items on a turf with a click.
+	var/allow_quick_gather
+
+	/// When quick gathering, falsy collects all valid items, truthy collects only one.
+	var/quick_gather_single
+
+	///Allows dumping the contents of storage after a duration.
 	var/allow_slow_dump
-	var/collection_mode //0 = pick one at a time, 1 = pick all on tile
-	var/use_sound = "rustle"	//sound played when used. null for no sound.
 
-	///If true, will not permit use of the storage UI
+	/// If set, a sound to play when accessing the storage item's UI.
+	var/use_sound = "rustle"
+
+	/// If truthy, disallows use of the storage UI.
 	var/virtual
 
-	//initializes the contents of the storage with some items based on an assoc list. The assoc key must be an item path,
-	//the assoc value can either be the quantity, or a list whose first value is the quantity and the rest are args.
+	/** An optional map of (path = config) to create on initialize. Config may be a count to
+		create or a sublist of (count, ...args), where args is passed to each new instance */
 	var/list/startswith
-	var/datum/storage_ui/storage_ui = /datum/storage_ui/default
-	var/opened = null
-	var/open_sound = null
 
-	///This is to prevent open sound and use sound playing on the same click if you're opening a closed box.
-	var/open_sound_played = FALSE
+
+	var/datum/storage_ui/storage_ui = /datum/storage_ui/default
+
+	/// True when this storage item has been opened. Used by storage/fancy.
+	var/opened
+
+	/// If set, a sound to play when opening the storage item.
+	var/open_sound
+
 
 /obj/item/storage/Destroy()
 	QDEL_NULL(storage_ui)
+	return ..()
+
+
+/obj/item/storage/Initialize()
 	. = ..()
+	if (!allow_quick_empty)
+		verbs -= /obj/item/storage/verb/quick_empty
+	if (!allow_quick_gather)
+		verbs -= /obj/item/storage/verb/toggle_gathering_mode
+	if (!allow_slow_dump)
+		verbs -= /obj/item/storage/verb/dump_contents
+	if (isnull(max_storage_space) && !isnull(storage_slots))
+		max_storage_space = storage_slots*BASE_STORAGE_COST(max_w_class)
+	storage_ui = new storage_ui(src)
+	prepare_ui()
+	if (length(startswith))
+		for (var/item_path in startswith)
+			var/list/data = startswith[item_path]
+			if (islist(data))
+				var/qty = data[1]
+				var/list/argsl = data.Copy()
+				argsl[1] = src
+				for (var/i in 1 to qty)
+					new item_path (arglist(argsl))
+			else
+				for (var/i in 1 to data || 1)
+					new item_path (src)
+		update_icon()
+
 
 /obj/item/storage/MouseDrop(obj/over_object as obj)
 	if(!canremove)
@@ -100,19 +144,19 @@
 /obj/item/storage/proc/open(mob/user as mob)
 	if (virtual)
 		return
-	if(!opened && src.open_sound)
-		playsound(src.loc, src.open_sound, 50, 0, -5)
-		open_sound_played = TRUE
+	if (!opened)
+		var/sound = open_sound || use_sound
+		if (sound)
+			playsound(src, open_sound, 50, FALSE, -5)
 		to_chat(user, "You open \the [src].")
 		queue_icon_update()
-	if (src.use_sound && !open_sound_played)
-		playsound(src.loc, src.use_sound, 50, 0, -5)
+		opened = TRUE
+	else if (use_sound)
+		playsound(src, use_sound, 50, FALSE, -5)
 	if (isrobot(user) && user.hud_used)
 		var/mob/living/silicon/robot/robot = user
-		if(robot.shown_robot_modules) //The robot's inventory is open, need to close it first.
+		if (robot.shown_robot_modules)
 			robot.hud_used.toggle_show_robot_modules()
-	open_sound_played = FALSE
-	opened = TRUE //Regular boxes don't open and close; need opened set True to once. Fancy boxes do; code handled in _fancy.dm
 	prepare_ui()
 	storage_ui.on_open(user)
 	storage_ui.show_to(user)
@@ -152,14 +196,14 @@
 	if(W.anchored)
 		return 0
 
-	if(length(can_hold))
-		if(!is_type_in_list(W, can_hold))
-			if(!stop_messages && ! istype(W, /obj/item/hand_labeler))
+	if (length(contents_allowed))
+		if (!is_type_in_list(W, contents_allowed))
+			if (!stop_messages && ! istype(W, /obj/item/hand_labeler))
 				to_chat(user, SPAN_NOTICE("\The [src] cannot hold \the [W]."))
 			return 0
-		var/max_instances = can_hold[W.type]
-		if(max_instances && instances_of_type_in_list(W, contents) >= max_instances)
-			if(!stop_messages && !istype(W, /obj/item/hand_labeler))
+		var/max_instances = contents_allowed[W.type]
+		if (max_instances && instances_of_type_in_list(W, contents) >= max_instances)
+			if (!stop_messages && !istype(W, /obj/item/hand_labeler))
 				to_chat(user, SPAN_NOTICE("\The [src] has no more space specifically for \the [W]."))
 			return 0
 
@@ -175,7 +219,7 @@
 			stop_messages = 1
 			return 0
 
-	if(length(cant_hold) && is_type_in_list(W, cant_hold))
+	if(length(contents_banned) && is_type_in_list(W, contents_banned))
 		if(!stop_messages)
 			to_chat(user, SPAN_NOTICE("\The [src] cannot hold \the [W]."))
 		return 0
@@ -351,16 +395,16 @@
 	else
 		to_chat(user, SPAN_NOTICE("You fail to pick anything up with \the [src]."))
 
+
 /obj/item/storage/verb/toggle_gathering_mode()
 	set name = "Switch Gathering Method"
 	set category = "Object"
-
-	collection_mode = !collection_mode
-	switch (collection_mode)
-		if(1)
-			to_chat(usr, "\The [src] now picks up all items in a tile at once.")
-		if(0)
-			to_chat(usr, "\The [src] now picks up one item at a time.")
+	set src in usr
+	quick_gather_single = !quick_gather_single
+	if (quick_gather_single)
+		to_chat(usr, "\The [src] now picks up one item at a time.")
+	else
+		to_chat(usr, "\The [src] now picks up all items in a tile.")
 
 
 /obj/item/storage/proc/DoQuickEmpty()
@@ -406,42 +450,6 @@
 	else
 		to_chat(usr, SPAN_WARNING("You need to be holding \the [src] and have an empty hand to dump its contents!"))
 
-/obj/item/storage/Initialize()
-	. = ..()
-	if(allow_quick_empty)
-		verbs += /obj/item/storage/verb/quick_empty
-	else
-		verbs -= /obj/item/storage/verb/quick_empty
-
-	if(allow_quick_gather)
-		verbs += /obj/item/storage/verb/toggle_gathering_mode
-	else
-		verbs -= /obj/item/storage/verb/toggle_gathering_mode
-
-	if (allow_slow_dump)
-		verbs += /obj/item/storage/verb/dump_contents
-	else
-		verbs -= /obj/item/storage/verb/dump_contents
-
-	if(isnull(max_storage_space) && !isnull(storage_slots))
-		max_storage_space = storage_slots*BASE_STORAGE_COST(max_w_class)
-
-	storage_ui = new storage_ui(src)
-	prepare_ui()
-
-	if(startswith)
-		for(var/item_path in startswith)
-			var/list/data = startswith[item_path]
-			if(islist(data))
-				var/qty = data[1]
-				var/list/argsl = data.Copy()
-				argsl[1] = src
-				for(var/i in 1 to qty)
-					new item_path(arglist(argsl))
-			else
-				for(var/i in 1 to (isnull(data)? 1 : data))
-					new item_path(src)
-		update_icon()
 
 /obj/item/storage/get_mechanics_info()
 	. = ..()
@@ -476,14 +484,14 @@
 
 /obj/item/storage/proc/make_exact_fit()
 	storage_slots = length(contents)
-
-	can_hold.Cut()
+	contents_allowed = list()
 	max_w_class = 0
 	max_storage_space = 0
 	for(var/obj/item/I in src)
-		can_hold[I.type]++
+		contents_allowed[I.type]++
 		max_w_class = max(I.w_class, max_w_class)
 		max_storage_space += I.get_storage_cost()
+
 
 /**
  * Determines the storage depth of an atom. This is the number of storage items (`/obj/item/storage`) the atom is

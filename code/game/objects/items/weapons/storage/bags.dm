@@ -4,7 +4,6 @@
 /obj/item/storage/bag
 	allow_quick_gather = TRUE
 	allow_quick_empty = TRUE
-	collection_mode = TRUE
 	slot_flags = SLOT_BELT
 
 /obj/item/storage/bag/handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
@@ -49,7 +48,6 @@
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_HUGE //can fit a backpack inside a trash bag, seems right
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
-	can_hold = list() // any
 
 /obj/item/storage/bag/trash/update_w_class()
 	..()
@@ -89,7 +87,6 @@
 	w_class = ITEM_SIZE_TINY
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_BOX_STORAGE
-	can_hold = list() // any
 
 // -----------------------------
 //           Cash Bag
@@ -103,4 +100,7 @@
 	max_storage_space = 100
 	max_w_class = ITEM_SIZE_HUGE
 	w_class = ITEM_SIZE_SMALL
-	can_hold = list(/obj/item/material/coin,/obj/item/spacecash)
+	contents_allowed = list(
+		/obj/item/material/coin,
+		/obj/item/spacecash
+	)

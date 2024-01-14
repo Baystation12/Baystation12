@@ -1,7 +1,7 @@
 /obj/item/storage/box/mixedglasses
 	name = "glassware box"
 	desc = "A box of assorted glassware."
-	can_hold = list(/obj/item/reagent_containers/food/drinks/glass2)
+	contents_allowed = list(/obj/item/reagent_containers/food/drinks/glass2)
 
 	startswith = list(
 		/obj/item/reagent_containers/food/drinks/glass2/square,
@@ -21,7 +21,7 @@
 /obj/item/storage/box/glasses
 	name = "box of glasses"
 	var/glass_type = /obj/item/reagent_containers/food/drinks/glass2
-	can_hold = list(/obj/item/reagent_containers/food/drinks/glass2)
+	contents_allowed = list(/obj/item/reagent_containers/food/drinks/glass2)
 
 /obj/item/storage/box/glasses/Initialize()
 	. = ..()
@@ -65,7 +65,7 @@
 /obj/item/storage/box/glass_extras
 	name = "box of cocktail garnishings"
 	var/extra_type = /obj/item/glass_extra
-	can_hold = list(/obj/item/glass_extra)
+	contents_allowed = list(/obj/item/glass_extra)
 	storage_slots = 14
 
 /obj/item/storage/box/glass_extras/Initialize()

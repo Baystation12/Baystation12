@@ -7,12 +7,11 @@
 	max_storage_space = 200
 	max_w_class = ITEM_SIZE_NORMAL
 	w_class = ITEM_SIZE_LARGE
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/ore
 	)
 	allow_quick_gather = TRUE
 	allow_quick_empty = TRUE
-	collection_mode = TRUE
 
 
 /obj/item/storage/evidence
@@ -23,7 +22,7 @@
 	max_storage_space = 100
 	max_w_class = ITEM_SIZE_SMALL
 	w_class = ITEM_SIZE_NORMAL
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/sample,
 		/obj/item/evidencebag,
 		/obj/item/forensics,
@@ -33,7 +32,6 @@
 	)
 	allow_quick_gather = TRUE
 	allow_quick_empty = TRUE
-	collection_mode = TRUE
 
 
 /obj/item/storage/plants
@@ -45,14 +43,13 @@
 	max_storage_space = 100
 	max_w_class = ITEM_SIZE_NORMAL
 	w_class = ITEM_SIZE_NORMAL
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/reagent_containers/food/snacks/grown,
 		/obj/item/seeds,
 		/obj/item/shellfish
 	)
 	allow_quick_gather = TRUE
 	allow_quick_empty = TRUE
-	collection_mode = TRUE
 
 
 /obj/item/storage/sheetsnatcher
@@ -63,7 +60,6 @@
 	storage_ui = /datum/storage_ui/default/sheetsnatcher
 	w_class = ITEM_SIZE_NORMAL
 	storage_slots = 7
-	collection_mode = TRUE
 	allow_quick_gather = TRUE
 	virtual = TRUE
 	var/max_sheets = 300

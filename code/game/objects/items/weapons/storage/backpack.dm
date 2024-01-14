@@ -459,7 +459,7 @@
 	storage_slots = 5
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 15
-	cant_hold = list(/obj/item/storage/backpack/satchel/flat) //muh recursive backpacks
+	contents_banned = list(/obj/item/storage/backpack/satchel/flat)
 	startswith = list(
 		/obj/item/stack/tile/floor,
 		/obj/item/crowbar

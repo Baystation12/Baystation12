@@ -7,10 +7,13 @@
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_TINY
 	max_storage_space = 21
-	can_hold = list(/obj/item/reagent_containers/pill,/obj/item/dice,/obj/item/paper)
+	contents_allowed = list(
+		/obj/item/reagent_containers/pill,
+		/obj/item/dice,
+		/obj/item/paper
+	)
 	allow_quick_gather = TRUE
 	allow_quick_empty = TRUE
-	collection_mode = TRUE
 	use_sound = 'sound/effects/storage/pillbottle.ogg'
 	matter = list(MATERIAL_PLASTIC = 250)
 	var/wrapper_color
