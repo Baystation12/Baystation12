@@ -1,0 +1,8 @@
+author: LordNest
+changes:
+  - {bugfix: Tacticool turtleneck rolled sleeves now have their own sprite.}
+  - {bugfix: Flamethrower now have normal sprite}
+  - {bugfix: 'Exosuit interface now slightly upper and you can see your glasses, while
+      piloting mecha'}
+  - {tweak: Disposals now have nano-ui styled interface}
+delete-after: true
