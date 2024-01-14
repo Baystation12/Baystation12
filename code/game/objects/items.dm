@@ -277,30 +277,37 @@
 		R.activate_module(src)
 		R.hud_used.update_robot_modules_display()
 
-/obj/item/use_tool(obj/item/W, mob/living/user, list/click_params)
-	if(SSfabrication.try_craft_with(src, W, user))
+
+/obj/item/use_tool(obj/item/item, mob/living/user, list/click_params)
+	if (SSfabrication.try_craft_with(src, item, user))
 		return TRUE
-
-	if(istype(W, /obj/item/storage))
-		var/obj/item/storage/S = W
-		if (S.collection_mode && isturf(loc)) //Mode is set to collect all items
-			S.gather_all(loc, user)
-			return TRUE
-
+	if (istype(item, /obj/item/storage) && isturf(loc))
+		var/obj/item/storage/storage = item
+		if (!storage.allow_quick_gather)
+			return ..()
+		if (!storage.quick_gather_single)
+			storage.gather_all(loc, user)
+		else if (storage.can_be_inserted(src, user))
+			storage.handle_item_insertion(src)
+		return TRUE
 	return ..()
+
 
 ///Eventually should be deleted in favor of use_tool; keeping duplicate until downstream attackbys are replaced.
-/obj/item/attackby(obj/item/W, mob/living/user, list/click_params)
-	if(SSfabrication.try_craft_with(src, W, user))
+/obj/item/attackby(obj/item/item, mob/living/user, list/click_params)
+	if (SSfabrication.try_craft_with(src, item, user))
 		return TRUE
-
-	if(istype(W, /obj/item/storage))
-		var/obj/item/storage/S = W
-		if (S.collection_mode && isturf(loc)) //Mode is set to collect all items
-			S.gather_all(loc, user)
-			return TRUE
-
+	if (istype(item, /obj/item/storage) && isturf(loc))
+		var/obj/item/storage/storage = item
+		if (!storage.allow_quick_gather)
+			return ..()
+		if (!storage.quick_gather_single)
+			storage.gather_all(loc, user)
+		else if (storage.can_be_inserted(src, user))
+			storage.handle_item_insertion(src)
+		return TRUE
 	return ..()
+
 
 /obj/item/can_embed()
 	if (!canremove)

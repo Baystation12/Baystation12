@@ -7,7 +7,7 @@
 	max_w_class = ITEM_SIZE_TINY
 	w_class = ITEM_SIZE_SMALL
 	key_type = list(/obj/item/reagent_containers/food/snacks/cracker)
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/reagent_containers/food/snacks/cracker
 	)
 	startswith = list(

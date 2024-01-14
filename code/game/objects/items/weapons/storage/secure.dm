@@ -166,7 +166,7 @@
 	max_storage_space = 56
 	anchored = TRUE
 	density = FALSE
-	cant_hold = list(/obj/item/storage/secure/briefcase)
+	contents_banned = list(/obj/item/storage/secure/briefcase)
 	startswith = list(
 		/obj/item/paper = 1,
 		/obj/item/pen = 1

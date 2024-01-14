@@ -13,8 +13,8 @@
 		/obj/item/forensics/sample_kit,
 		/obj/item/forensics/sample_kit/powder,
 		/obj/item/storage/csi_markers
-		)
-	can_hold = list(
+	)
+	contents_allowed = list(
 		/obj/item/storage/box/swabs,
 		/obj/item/storage/box/fingerprints,
 		/obj/item/storage/box/evidence,
@@ -40,4 +40,4 @@
 		/obj/item/device/scanner,
 		/obj/item/modular_computer/tablet,
 		/obj/item/evidencebag
-		)
+	)

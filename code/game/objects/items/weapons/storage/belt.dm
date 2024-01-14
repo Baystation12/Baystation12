@@ -56,7 +56,7 @@
 	var/list/can_holster //List of objects which this item can store in the designated holster slot(if unset, it will default to any holsterable items)
 	var/sound_in = 'sound/effects/holster/holsterin.ogg'
 	var/sound_out = 'sound/effects/holster/holsterout.ogg'
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/melee/baton,
 		/obj/item/melee/telebaton
 		)
@@ -107,7 +107,7 @@
 	icon_state = "utilitybelt"
 	item_state = "utility"
 	overlay_flags = BELT_OVERLAY_ITEMS
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/crowbar,
 		/obj/item/screwdriver,
 		/obj/item/weldingtool,
@@ -175,7 +175,7 @@
 	desc = "Can hold various medical equipment."
 	icon_state = "medicalbelt"
 	item_state = "medical"
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/device/scanner/health,
 		/obj/item/reagent_containers/dropper,
 		/obj/item/reagent_containers/glass/beaker,
@@ -220,7 +220,7 @@
 	item_state = "security"
 	storage_slots = 8
 	overlay_flags = BELT_OVERLAY_ITEMS|BELT_OVERLAY_HOLSTER
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/crowbar,
 		/obj/item/grenade,
 		/obj/item/reagent_containers/spray/pepper,
@@ -263,7 +263,7 @@
 	icon_state = "basicsecuritybelt"
 	item_state = "basicsecurity"
 	overlay_flags = BELT_OVERLAY_ITEMS
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/crowbar,
 		/obj/item/grenade,
 		/obj/item/reagent_containers/spray/pepper,
@@ -298,7 +298,7 @@
 	icon_state = "gearbelt"
 	item_state = "gear"
 	overlay_flags = BELT_OVERLAY_ITEMS
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/device/flash,
 		/obj/item/melee/telebaton,
 		/obj/item/device/taperecorder,
@@ -351,7 +351,7 @@
 	desc = "A belt used to hold most janitorial supplies."
 	icon_state = "janibelt"
 	item_state = "janibelt"
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/grenade/chem_grenade,
 		/obj/item/device/lightreplacer,
 		/obj/item/device/flashlight,
@@ -367,7 +367,7 @@
 		/obj/item/material/knife/folding,
 		/obj/item/modular_computer/tablet,
 		/obj/item/modular_computer/pda
-		)
+	)
 
 /obj/item/storage/belt/holster/general
 	name = "holster belt"
@@ -376,7 +376,7 @@
 	item_state = "command"
 	storage_slots = 7
 	overlay_flags = BELT_OVERLAY_ITEMS|BELT_OVERLAY_HOLSTER
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/device/flash,
 		/obj/item/melee/telebaton,
 		/obj/item/device/taperecorder,
@@ -412,7 +412,7 @@
 		/obj/item/clothing/head/beret,
 		/obj/item/material/knife/folding,
 		/obj/item/device/tape
-		)
+	)
 
 /obj/item/storage/belt/holster/forensic
 	name = "forensic holster belt"
@@ -421,7 +421,7 @@
 	item_state = "forensic"
 	storage_slots = 8
 	overlay_flags = BELT_OVERLAY_HOLSTER
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/reagent_containers/spray/luminol,
 		/obj/item/device/uv_light,
 		/obj/item/reagent_containers/syringe,
@@ -449,7 +449,7 @@
 		/obj/item/clothing/glasses,
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/device/flash
-		)
+	)
 
 /obj/item/storage/belt/forensic
 	name = "forensic belt"
@@ -457,7 +457,7 @@
 	icon_state = "basicforensicbelt"
 	item_state = "basicforensic"
 	storage_slots = 8
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/reagent_containers/spray/luminol,
 		/obj/item/device/uv_light,
 		/obj/item/reagent_containers/syringe,
@@ -485,7 +485,7 @@
 		/obj/item/clothing/glasses,
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/device/flash
-		)
+	)
 
 /obj/item/storage/belt/holster/machete
 	name = "machete belt"
@@ -494,7 +494,7 @@
 	item_state = "machetebelt"
 	storage_slots = 8
 	overlay_flags = BELT_OVERLAY_HOLSTER
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/device/binoculars,
 		/obj/item/device/camera,
 		/obj/item/stack/flag,
@@ -522,7 +522,7 @@
 		/obj/item/device/drone_designator,
 		/obj/item/modular_computer/tablet,
 		/obj/item/modular_computer/pda
-		)
+	)
 	can_holster = list(/obj/item/material/hatchet/machete)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
 	sound_out = 'sound/effects/holster/sheathout.ogg'
@@ -532,9 +532,7 @@
 	desc = "Designed for ease of access to the shards during a fight, as to not let a single enemy spirit slip away."
 	icon_state = "soulstonebelt"
 	item_state = "soulstonebelt"
-	can_hold = list(
-		/obj/item/device/soulstone
-		)
+	contents_allowed = list(/obj/item/device/soulstone)
 
 /obj/item/storage/belt/soulstone/full/New()
 	..()
@@ -554,9 +552,7 @@
 	item_state = "champion"
 	storage_slots = null
 	max_storage_space = ITEM_SIZE_SMALL
-	can_hold = list(
-		/obj/item/clothing/mask/luchador
-		)
+	contents_allowed = list(/obj/item/clothing/mask/luchador)
 
 /obj/item/storage/belt/holster/security/tactical
 	name = "combat belt"
@@ -583,12 +579,12 @@
 	item_state = "gear"
 	storage_slots = 5
 	overlay_flags = BELT_OVERLAY_ITEMS
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/grenade/chem_grenade/water,
 		/obj/item/crowbar/emergency_forcing_tool,
 		/obj/item/extinguisher/mini,
 		/obj/item/inflatable/door
-		)
+	)
 
 
 /obj/item/storage/belt/fire_belt/full

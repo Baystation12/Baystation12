@@ -149,7 +149,7 @@
 /obj/item/clothing/accessory/storage/knifeharness/Initialize()
 	. = ..()
 	if (container)
-		container.can_hold = list(
+		container.contents_allowed = list(
 			/obj/item/material/hatchet,
 			/obj/item/material/knife
 		)
@@ -168,7 +168,7 @@
 /obj/item/clothing/accessory/storage/bandolier/Initialize()
 	. = ..()
 	if (container)
-		container.can_hold = list(
+		container.contents_allowed = list(
 			/obj/item/ammo_casing,
 			/obj/item/grenade,
 			/obj/item/material/knife,
