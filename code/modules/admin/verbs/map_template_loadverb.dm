@@ -9,7 +9,7 @@
 	if(!map)
 		return
 
-	var/datum/map_template/template = SSmapping.map_templates[map]
+	var/singleton/map_template/template = SSmapping.map_templates[map]
 
 	var/turf/T = get_turf(usr)
 	if(!T)
@@ -46,7 +46,7 @@
 	if(!map)
 		return
 
-	var/datum/map_template/template = SSmapping.map_templates[map]
+	var/singleton/map_template/template = SSmapping.map_templates[map]
 	var/log_name = "([template.name]) on a new zlevel"
 
 	if (template.loaded && !(template.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
@@ -79,7 +79,7 @@
 		to_chat(usr, "Bad map file: [map]")
 		return
 
-	var/datum/map_template/M = new(list(map), "[map]")
+	var/singleton/map_template/M = new(list(map), "[map]")
 
 	log_and_message_admins("is attempting to upload a map template '[map]''.")
 	to_chat(usr, "Attempting to upload map template '[map]''.")

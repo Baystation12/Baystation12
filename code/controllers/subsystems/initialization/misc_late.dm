@@ -11,8 +11,10 @@ SUBSYSTEM_DEF(init_misc_late)
 
 
 /datum/controller/subsystem/init_misc_late/Initialize(start_uptime)
-	GLOB.using_map.build_away_sites()
+	var/singleton/map_template/ruin/torch/torch = new
+	torch.load_new_z()
 	GLOB.using_map.build_exoplanets()
+	GLOB.using_map.build_away_sites()
 	var/singleton/asset_cache/asset_cache = GET_SINGLETON(/singleton/asset_cache)
 	asset_cache.load()
 	init_recipes()

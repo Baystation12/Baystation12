@@ -5,7 +5,7 @@
 #include "skrellscoutship_radio.dm"
 #include "skrellscoutship_machines.dm"
 
-/datum/map_template/ruin/away_site/skrellscoutship
+/singleton/map_template/ruin/away_site/skrellscoutship
 	name = "Skrellian Scout Ship"
 	id = "awaysite_skrell_scout"
 	description = "A Skrellian SDTF scouting vessel."

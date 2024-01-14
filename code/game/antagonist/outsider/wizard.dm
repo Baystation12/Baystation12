@@ -17,7 +17,7 @@ GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
 
 	faction = "wizard"
 	no_prior_faction = TRUE
-	base_to_load = /datum/map_template/ruin/antag_spawn/wizard
+	base_to_load = /singleton/map_template/ruin/antag_spawn/wizard
 
 /datum/antagonist/wizard/create_objectives(datum/mind/wizard)
 

@@ -235,6 +235,10 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/maint_all_access = FALSE
 
+		/// The type of this map's overmap entity, if any
+	var/obj/overmap/overmap_entity
+
+
 /datum/map/New()
 	if(!map_levels)
 		map_levels = station_levels.Copy()
@@ -322,7 +326,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 
 /* It is perfectly possible to create loops with TEMPLATE_FLAG_ALLOW_DUPLICATES and force/allow. Don't. */
-/proc/resolve_site_selection(datum/map_template/ruin/away_site/site, list/selected, list/available, list/unavailable, list/by_type)
+/proc/resolve_site_selection(singleton/map_template/ruin/away_site/site, list/selected, list/available, list/unavailable, list/by_type)
 	RETURN_TYPE(/list)
 	var/spawn_cost = 0
 	var/player_cost = 0
@@ -341,14 +345,14 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		player_cost += costs[2]
 
 	for (var/banned_type in site.ban_ruins)
-		var/datum/map_template/ruin/away_site/banned = by_type[banned_type]
+		var/singleton/map_template/ruin/away_site/banned = by_type[banned_type]
 		if (banned in unavailable)
 			continue
 		unavailable += banned
 		available -= banned
 
 	for (var/allowed_type in site.allow_ruins)
-		var/datum/map_template/ruin/away_site/allowed = by_type[allowed_type]
+		var/singleton/map_template/ruin/away_site/allowed = by_type[allowed_type]
 		if (allowed in available)
 			continue
 		if (allowed in unavailable)
@@ -375,7 +379,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/by_type = list()
 
 	for (var/site_name in SSmapping.away_sites_templates)
-		var/datum/map_template/ruin/away_site/site = SSmapping.away_sites_templates[site_name]
+		var/singleton/map_template/ruin/away_site/site = SSmapping.away_sites_templates[site_name]
 		if (site.template_flags & TEMPLATE_FLAG_SPAWN_GUARANTEED)
 			guaranteed += site
 			if ((site.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES) && !(site.template_flags & TEMPLATE_FLAG_RUIN_STARTS_DISALLOWED))
@@ -389,13 +393,13 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	for (var/client/C)
 		++players
 
-	for (var/datum/map_template/ruin/away_site/site in guaranteed)
+	for (var/singleton/map_template/ruin/away_site/site in guaranteed)
 		var/list/costs = resolve_site_selection(site, selected, available, unavailable, by_type)
 		points -= costs[1]
 		players -= costs[2]
 
 	while (points > 0 && length(available))
-		var/datum/map_template/ruin/away_site/site = pickweight(available)
+		var/singleton/map_template/ruin/away_site/site = pickweight(available)
 		if (site.spawn_cost && site.spawn_cost > points || site.player_cost && site.player_cost > players)
 			unavailable += site
 			available -= site
@@ -406,7 +410,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	report_progress("Finished selecting away sites ([english_list(selected)]) for [away_site_budget - points] cost of [away_site_budget] budget.")
 
-	for (var/datum/map_template/template in selected)
+	for (var/singleton/map_template/template in selected)
 		if (template.load_new_z())
 			report_progress("Loaded away site [template]!")
 		else

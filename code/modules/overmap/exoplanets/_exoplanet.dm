@@ -101,8 +101,8 @@ GLOBAL_VAR(planet_repopulation_disabled)
 		if (T.ruin_tags_blacklist)
 			ruin_tags_blacklist |= T.ruin_tags_blacklist
 
-	for (var/T in subtypesof(/datum/map_template/ruin/exoplanet))
-		var/datum/map_template/ruin/exoplanet/ruin = T
+	for (var/T in subtypesof(/singleton/map_template/ruin/exoplanet))
+		var/singleton/map_template/ruin/exoplanet/ruin = T
 		if (initial(ruin.template_flags) & TEMPLATE_FLAG_RUIN_STARTS_DISALLOWED)
 			continue
 		if (ruin_tags_whitelist && !(ruin_tags_whitelist & initial(ruin.ruin_tags)))
@@ -353,7 +353,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 
 	if (LAZYLEN(spawned_features) && user.skill_check(SKILL_SCIENCE, SKILL_TRAINED))
 		var/ruin_num = 0
-		for (var/datum/map_template/ruin/exoplanet/R in spawned_features)
+		for (var/singleton/map_template/ruin/exoplanet/R in spawned_features)
 			if (!(R.ruin_tags & RUIN_NATURAL))
 				ruin_num++
 		if (ruin_num)

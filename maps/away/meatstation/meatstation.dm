@@ -13,7 +13,7 @@
 		"nav_meatstation_antag"
 	)
 
-/datum/map_template/ruin/away_site/meatstation
+/singleton/map_template/ruin/away_site/meatstation
 	name = "Meatstation"
 	id = "awaysite_meatstation"
 	description = "It's a research station full of baddies and some unique loot."

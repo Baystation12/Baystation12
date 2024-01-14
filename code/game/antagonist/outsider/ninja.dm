@@ -17,7 +17,7 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 	id_type = /obj/item/card/id/syndicate
 	faction = "ninja"
 	no_prior_faction = TRUE
-	base_to_load = /datum/map_template/ruin/antag_spawn/ninja
+	base_to_load = /singleton/map_template/ruin/antag_spawn/ninja
 
 
 /datum/antagonist/ninja/create_objectives(datum/mind/ninja)
