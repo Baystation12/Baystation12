@@ -48,7 +48,7 @@
 	desc = "A box with coals for a hookah."
 	icon_state = "largebox"
 	startswith = list(/obj/item/coal = 10)
-	can_hold = list(/obj/item/coal)
+	contents_allowed = list(/obj/item/coal)
 	w_class = ITEM_SIZE_LARGE
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE

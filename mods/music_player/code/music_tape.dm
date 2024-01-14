@@ -97,9 +97,9 @@
 	icon = 'mods/music_player/icons/object.dmi'
 	icon_state = "tape_holder"
 	w_class = ITEM_SIZE_SMALL
-	max_w_class = ITEM_SIZE_SMALL //Don't worry, see can_hold[]
+	max_w_class = ITEM_SIZE_SMALL //Don't worry, see contents_allowed[]
 	max_storage_space = 5
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/music_tape,
 		/obj/item/device/flashlight/pen,
 		/obj/item/device/tape,

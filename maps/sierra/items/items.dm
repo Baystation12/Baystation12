@@ -37,7 +37,7 @@ sierra specific items
 		/obj/item/reagent_containers/hypospray/autoinjector/pain,
 		/obj/item/stack/medical/bruise_pack
 	)
-	can_hold = list(
+	contents_allowed = list(
 		/obj/item/reagent_containers/hypospray/autoinjector,
 		/obj/item/stack/medical/bruise_pack
 	)
