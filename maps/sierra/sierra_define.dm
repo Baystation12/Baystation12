@@ -9,6 +9,8 @@
 	// https://clips.twitch.tv/MildIgnorantJayGivePLZ-CvZlfeclHBx4Ye1l
 	welcome_sound = 'maps/sierra/sound/welcome.ogg'
 
+	use_bluespace_interlude = TRUE
+
 	load_legacy_saves = TRUE
 
 	station_levels = list(1,2,3,4,5)
