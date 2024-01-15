@@ -1,3 +1,8 @@
+///Maximum distance (on the overmap) a teleporter can target with a less than 100% chance of getting an Interlude.
+GLOBAL_VAR_INIT(maximum_safe_teleport_distance, 15)
+///Minimum distance (on the overmap) a teleporter can send people to without risking a stop in the Interlude.
+GLOBAL_VAR_INIT(minimum_safe_teleport_distance, 5)
+
 /singleton/teleport
 	var/static/list/teleport_blacklist = list(/obj/item/disk/nuclear, /obj/item/storage/backpack/holding, /obj/sparks) //Items that cannot be teleported, or be in the contents of someone who is teleporting.
 

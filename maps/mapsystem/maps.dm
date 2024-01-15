@@ -120,6 +120,9 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/local_currency_name_singular = "thaler"
 	var/local_currency_name_short = "T"
 
+	//Whether or not the map should include the Interlude in teleports and the BSD event as a possibility.
+	var/use_bluespace_interlude = FALSE
+
 	var/game_year
 
 	var/list/available_cultural_info = list(
@@ -611,5 +614,8 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		desc += "There were <b>no survivors</b>, <b>[data["offship_players"]] off-ship player(s)</b>, (<b>[data["ghosts"]] ghosts</b>)."
 
 	return desc
+
+/datum/map/proc/do_interlude_teleport(atom/movable/target, atom/destination, duration, precision, type)
+	return
 
 #undef DEFAULT_GAME_YEAR_OFFSET

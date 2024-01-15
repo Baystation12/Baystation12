@@ -78,7 +78,10 @@
 		/area/turbolift/seconddeck,
 		/area/turbolift/thirddeck,
 		/area/turbolift/fourthdeck,
-		/area/template_noop
+		/area/template_noop,
+		/area/bluespace_interlude,
+		/area/bluespace_interlude/platform,
+		/area/bluespace_interlude/surroundings
 	)
 
 /datum/unit_test/zas_area_test/cargo_bay

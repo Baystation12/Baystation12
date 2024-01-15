@@ -56,3 +56,5 @@
 	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
 
 	welcome_sound = null
+
+	use_bluespace_interlude = TRUE

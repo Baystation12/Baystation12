@@ -13,7 +13,7 @@
 	maxHealth = 65
 	health = 65
 	ai_holder = /datum/ai_holder/simple_animal/melee/bluespace
-	say_list = /datum/say_list/bluespace
+	say_list_type = /datum/say_list/bluespace
 	natural_weapon = /obj/item/natural_weapon/bluespace
 	light_color = "#4da6ff"
 	light_range = 2
@@ -38,12 +38,18 @@
 	return
 
 /datum/ai_holder/simple_animal/melee/bluespace
-	speak_chance = 5
+	speak_chance = 15
 	wander = TRUE
 
 /datum/say_list/bluespace
-	emote_hear = list("wails","screeches")
-	emote_see = list("warps in an out of reality", "flickers", "stops suddenly")
+	speak = list(
+		"Help me... Somebody...",
+		"Is - is someone there...?",
+		"It's so cold...",
+		"I - I can't get warm...",
+		"Where is everyone? Why does everything hurt!?")
+	emote_hear = list("wails","screeches", "cries", "lets out an agonized scream")
+	emote_see = list("warps in and out of reality", "flickers", "stops suddenly", "twitches unaturally")
 
 //passive variant
 /mob/living/simple_animal/hostile/bluespace/neutral

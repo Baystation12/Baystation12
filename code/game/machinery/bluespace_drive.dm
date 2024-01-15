@@ -211,6 +211,11 @@
 		for (var/mob/living/mob as anything in mobs_to_switch)
 			if (!(mob.z in zlevels))
 				continue
+
+			if (GLOB.using_map.use_bluespace_interlude && prob(100))
+				addtimer(new Callback(GLOBAL_PROC, /proc/do_unstable_teleport_safe, mob, GetConnectedZlevels(mob.z)), rand(1, 2) MINUTES)
+				GLOB.using_map.do_interlude_teleport(mob, duration = rand(1, 2.5) MINUTES)
+				return
 			if (mob != being)
 				var/source_position = being.loc
 				var/other_position = mob.loc
