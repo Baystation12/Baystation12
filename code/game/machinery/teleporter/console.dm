@@ -14,7 +14,6 @@
 	/// The timer ID for any active online timers, for stopping the timer if the teleporter is manually shut off, or dies before the timer ends.
 	var/active_timer
 
-
 /obj/machinery/computer/teleporter/Destroy()
 	clear_target()
 	if (projector)
@@ -121,6 +120,22 @@
 		if (!beacon.connect_computer(src))
 			return FALSE
 	target = _target
+
+	if (GLOB.using_map.use_overmap && GLOB.using_map.use_bluespace_interlude)
+		var/obj/overmap/overmap_target = map_sectors["[get_z(target)]"]
+		var/obj/overmap/overmap_source = map_sectors["[get_z(src)]"]
+		if (overmap_target && overmap_source)
+			var/distance = get_dist(overmap_target, overmap_source)
+			if (distance > GLOB.minimum_safe_teleport_distance)
+				var/interlude_prob = max(100, (distance / GLOB.maximum_safe_teleport_distance) * 100)
+				playsound(loc, 'sound/machines/twobeep.ogg', 75, 1)
+				if (interlude_prob > 80)
+					visible_message(SPAN_WARNING("WARNING! Maximum range reached! Interference exceeds safe limits!"))
+				else
+					visible_message(SPAN_WARNING("Warning: Safe range limit exceeded. Interference probability: [interlude_prob]%."))
+
+				pad.interlude_chance = interlude_prob
+
 	GLOB.destroyed_event.register(target, src, /obj/machinery/computer/teleporter/proc/lost_target)
 	return TRUE
 
@@ -130,6 +145,8 @@
 	if (active == effective)
 		return
 	active = effective
+	if (!active && !locate(/datum/event/bsd_instability) in SSevent.active_events)
+		pad.interlude_chance = initial(pad.interlude_chance)
 	set_timer(!active)
 	if (notify && effective)
 		if (active)

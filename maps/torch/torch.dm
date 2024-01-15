@@ -189,6 +189,9 @@
 	#include "../event/placeholders/placeholders.dm"
 	#include "../event/empty/empty.dm"
 
+	#include "../bluespace_interlude/bluespace_interlude.dm"
+	#include "../bluespace_interlude/bluespace_interlude.dmm"
+
 
 	#define using_map_DATUM /datum/map/torch
 
