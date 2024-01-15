@@ -1,0 +1,6 @@
+author: Mucker
+changes:
+  - {rscadd: Added an 'Interlude' that can happen when doing long-range teleports.
+      Or if you're just in the wrong place at the wrong time.}
+  - {rscadd: Added more emotes for bluespace entities.}
+delete-after: true
