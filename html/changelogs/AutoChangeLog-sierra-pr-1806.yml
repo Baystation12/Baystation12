@@ -1,0 +1,4 @@
+author: Mucker
+changes:
+  - {bugfix: Fixed Hullbreaker lasers not penetrating solid turfs.}
+delete-after: true
