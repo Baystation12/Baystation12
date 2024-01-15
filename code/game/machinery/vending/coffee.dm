@@ -71,7 +71,5 @@
 
 /obj/machinery/vending/coffee/on_update_icon()
 	..()
-	if (MACHINE_IS_BROKEN(src) && prob(20))
-		icon_state = "[initial(icon_state)]-hellfire"
-	else if (is_powered())
+	if (is_powered())
 		AddOverlays(image(icon, "[initial(icon_state)]-screen"))
