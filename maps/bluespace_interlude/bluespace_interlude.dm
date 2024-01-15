@@ -32,7 +32,7 @@
 /turf/simulated/floor/bluespace/interlude/Process()
 	for(var/weakref/W in victims)
 		var/atom/movable/AM = W.resolve()
-		if (AM == null || get_turf(AM) != src)
+		if (isnull(AM) || get_turf(AM) != src)
 			victims -= W
 			continue
 		if (istype(AM, /mob/living/carbon/human))
