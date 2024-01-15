@@ -1,0 +1,4 @@
+author: SuhEugene
+changes:
+  - {balance: Bullets no longer reach hostage when its grabber is turned away.}
+delete-after: true
