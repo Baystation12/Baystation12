@@ -103,7 +103,7 @@
 	icon_state = "u_laser"
 	fire_sound = 'sound/weapons/marauder.ogg'
 	damage = 90
-	penetrating = 3
+	penetrating = 6
 	armor_penetration = 50
 	distance_falloff = 0
 	damage_falloff_list = list(
@@ -115,6 +115,21 @@
 	muzzle_type = /obj/projectile/laser/pulse/muzzle
 	tracer_type = /obj/projectile/laser/pulse/tracer
 	impact_type = /obj/projectile/laser/pulse/impact
+	penetration_modifier = 1.5
+
+/obj/item/projectile/beam/bunkerbuster/check_penetrate(atom/A)
+	..()
+
+	var/chance = damage
+	var/datum/extension/penetration/P = get_extension(A, /datum/extension/penetration)
+	if(P)
+		chance = min(100, P.PenetrationProbability(chance, damage, damage_type) * penetration_modifier)
+
+	if(prob(chance))
+		if(A.opacity)
+			A.visible_message(SPAN_WARNING("\The [src] pierces through \the [A]!"))
+		return TRUE
+	return FALSE
 
 /mob/living/simple_animal/hostile/fleet_heavy
 	name = "\improper hullbreaker monitor"
@@ -160,17 +175,17 @@
 		)
 
 	var/exploded = FALSE
-	var/explosion_radius = 7
+	var/explosion_radius = 5
 	var/explosion_max_power = EX_ACT_DEVASTATING
 
 	/// Lower bound for explosion delay.
-	var/explosion_delay_lower	= 3 SECONDS
+	var/explosion_delay_lower	= 4 SECONDS
 	/// Upper bound for explosion delay.
-	var/explosion_delay_upper	= 5 SECONDS
+	var/explosion_delay_upper	= 6 SECONDS
 
 	ai_holder = /datum/ai_holder/simple_animal/ranged/kiting/threatening/fleet_heavy
 
-	ranged_attack_delay = 1 SECOND //How much time we wait before really shooting
+	ranged_attack_delay = 2 SECOND //How much time we wait before really shooting
 
 /datum/ai_holder/simple_animal/ranged/kiting/threatening/fleet_heavy
 	firing_lanes = FALSE        // Lets you use others as shields
