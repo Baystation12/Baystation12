@@ -4,6 +4,7 @@
 #include "_antagonists.dm"
 
 #include "code/ert.dm"
+#include "code/mercenary.dm"
 #include "code/revolutionary.dm"
 #include "code/operative.dm"
 #include "code/traitor.dm"

@@ -403,7 +403,7 @@
 
 	minimum_character_age = list(SPECIES_HUMAN = 30)
 	ideal_character_age = 40
-	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/research/iaa
+	outfit_type = /singleton/hierarchy/outfit/job/sierra/crew/command/iaa
 	allowed_branches = list(
 		/datum/mil_branch/employee
 	)

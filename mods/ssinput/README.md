@@ -42,6 +42,7 @@ ID мода: SSINPUT
 - `code/modules/mob/login.dm`: `/mob/Login()`
 - `code/modules/mob/mob_defines.dm`: `/mob/appearance_flags`
 - `code/modules/mob/mob_helpers.dm`: `/mob/verb/a_intent_change()`
+- `code/modules/mob/living/carbon/human/inventory.dm`: `/mob/living/carbon/human/verb/quick_equip()`
 
 <!--
   Если вы редактировали какие-либо процедуры или переменные в кор коде,

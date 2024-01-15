@@ -141,6 +141,14 @@
 		"atmos" = COLOR_COMMAND_BLUE
 	)
 
+/singleton/closet_appearance/secure_closet/sierra/engineering/infotech
+	color = COLOR_GUNMETAL
+	extra_decals = list(
+		"stripe_vertical_mid_partial"   = COLOR_PALE_ORANGE,
+		"stripe_vertical_right_partial" = COLOR_PALE_ORANGE,
+		"eng_narrow" = COLOR_PALE_ORANGE
+	)
+
 /singleton/closet_appearance/secure_closet/sierra/engineering/ce
 	color = COLOR_OFF_WHITE
 	extra_decals = list(

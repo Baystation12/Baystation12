@@ -2,6 +2,7 @@
 #### Список PRов:
 
 - https://github.com/SierraBay/SierraBay12/pull/1103
+- https://github.com/SierraBay/SierraBay12/pull/1798
 <!--
   Ссылки на PRы, связанные с модом:
   - Создание
@@ -27,7 +28,7 @@ ID мода: CLIENT_VERBS
 
 ### Изменения *кор кода*
 
-- Отсутствуют
+- `code/modules/admin/admin_verbs.dm`: `var/global/list/admin_verbs_spawn`
 <!--
   Если вы редактировали какие-либо процедуры или переменные в кор коде,
   они должны быть указаны здесь.

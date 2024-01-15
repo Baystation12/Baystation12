@@ -27,6 +27,16 @@
 	if(hasHUD(user, HUD_IT) && arePowerSystemsOn())
 		to_chat(user, SPAN_INFO(SPAN_ITALIC("You may notice a small hologram that says: [NTNet_id]")))
 
+/obj/machinery/power/apc/examine(mob/user)
+	. = ..()
+	if(hasHUD(user, HUD_IT) && has_electronics && terminal())
+		to_chat(user, SPAN_INFO(SPAN_ITALIC("You may notice a small hologram that says: [NTNet_id]")))
+
+/obj/machinery/firealarm/examine(mob/user)
+	. = ..()
+	if(hasHUD(user, HUD_IT))
+		to_chat(user, SPAN_INFO(SPAN_ITALIC("You may notice a small hologram that says: [NTNet_id]")))
+
 /obj/item/modular_computer/examine(mob/user)
 	. = ..()
 	if(hasHUD(user, HUD_IT))

@@ -5,6 +5,7 @@
 
 #include "code/gears.dm"
 #include "code/language.dm"
+#include "code/misc.dm"
 #include "code/robolimbs.dm"
 #include "code/posters.dm"
 #include "code/unit_tests.dm"

@@ -119,7 +119,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	..()
 	BACKPACK_OVERRIDE_SECURITY
 
-/singleton/hierarchy/outfit/job/sierra/crew/research/iaa
+/singleton/hierarchy/outfit/job/sierra/crew/command/iaa
 	name = OUTFIT_JOB_NAME("Internal Affairs Agent - Sierra")
 	l_ear = /obj/item/device/radio/headset/ia
 	uniform = /obj/item/clothing/under/rank/internalaffairs/plain/nt

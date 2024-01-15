@@ -52,7 +52,7 @@ GLOBAL_LIST_INIT(recomended_holoplants_colors, list(COLOR_PALE_RED_GRAY,COLOR_BL
 
 	if(enabled)
 		AddOverlays(plant)
-	set_light(1, brightness_on, plant_color)
+	set_light(3, brightness_on, plant_color)
 
 /obj/structure/holoplant/proc/change_plant(state)
 	plant = prepare_icon(state)
@@ -122,7 +122,7 @@ GLOBAL_LIST_INIT(recomended_holoplants_colors, list(COLOR_PALE_RED_GRAY,COLOR_BL
 		return
 
 	AddOverlays(plant)
-	set_light(1, brightness_on, l_color = plant_color)
+	set_light(2, 0.5, brightness_on, l_color = plant_color)
 	sleep(3)
 	if(QDELETED(src))
 		return

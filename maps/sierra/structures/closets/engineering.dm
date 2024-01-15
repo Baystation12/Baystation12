@@ -131,3 +131,24 @@
 		/obj/item/taperoll/atmos,
 		/obj/item/device/scanner/gas
 	)
+
+/obj/structure/closet/secure_closet/infotech_sierra
+	name = "information technician locker"
+	req_access = list(access_network_admin)
+	closet_appearance = /singleton/closet_appearance/secure_closet/sierra/engineering/infotech
+
+/obj/structure/closet/secure_closet/infotech_sierra/WillContain()
+	return list(
+		/obj/item/storage/box/PDAs,
+		/obj/item/modular_computer/laptop/preset/custom_loadout/standard,
+		/obj/item/modular_computer/tablet/preset/custom_loadout/standard,
+		/obj/item/clothing/glasses/hud/it,
+		/obj/item/device/multitool,
+		/obj/item/clothing/gloves/insulated,
+		/obj/item/device/flashlight/upgraded,
+		/obj/item/storage/belt/utility/full,
+		/obj/item/clothing/head/beret/engineering,
+		/obj/item/device/radio/headset/headset_eng,
+		/obj/item/device/radio/headset/headset_eng/alt,
+		/obj/item/stack/cable_coil = 2
+	)

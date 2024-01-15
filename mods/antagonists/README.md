@@ -3,6 +3,7 @@
 
 - https://github.com/SierraBay/SierraBay12/pull/1474
 - https://github.com/SierraBay/SierraBay12/pull/1683
+- https://github.com/SierraBay/SierraBay12/pull/1798
 <!--
   Ссылки на PRы, связанные с модом:
   - Создание
@@ -68,6 +69,8 @@ ID мода: ANTAGONISTS
 ### Используемые файлы, не содержащиеся в модпаке
 
 - `icons/obj/augment.dmi`
+- `mods/ntnet/code/NTNet-items.dm`
+
 <!--
   Будь то немодульный файл или модульный файл, который не содержится в папке,
   принадлежащей этому конкретному моду, он должен быть упомянут здесь.

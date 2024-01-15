@@ -292,3 +292,15 @@ ranks - ec
 	show_browser(user, dat, "window=radio")
 	onclose(user, "radio")
 	return
+
+// Overrides
+
+/obj/item/clothing/accessory/badge/holo
+	icon = 'mods/loadout_items/icons/obj_accessory.dmi'
+	accessory_icons = list(
+		slot_w_uniform_str = 'mods/loadout_items/icons/onmob_accessory.dmi',
+		slot_wear_suit_str = 'mods/loadout_items/icons/onmob_accessory.dmi'
+	)
+	item_icons = list(
+		slot_wear_mask_str = 'mods/loadout_items/icons/onmob_accessory.dmi'
+	)

@@ -1,12 +1,12 @@
-/client/proc/respawn_as_human()
-	set name = "Respawn as Human"
+/client/proc/respawn_as_self()
+	set name = "Respawn as Current Character"
 	set desc = "Respawn instantly with currenly loaded character on place."
 	set category = "Special Verbs"
 
 	if(!check_rights(R_SPAWN))
 		return
 
-	var/input = ckey(input(src, "Specify which key will be respawned as human.", "Respawn as Human", "[usr.ckey]") as text)
+	var/input = ckey(input(src, "Specify which key will be respawned as their character.", "Respawn as Current Character", "[usr.ckey]") as text)
 	if(!input || input == "Cancel")
 		return
 
