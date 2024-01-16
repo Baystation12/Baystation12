@@ -1,8 +1,0 @@
-author: emmanuelbassil
-changes:
-  - {tweak: 'Vending machines are now destructible. They have a chance to start speaking,
-      randomly have wires cut, or completely malfunction as they are more and more
-      damaged.'}
-  - {tweak: Vending machines with the speaker enabled speak a slogan every two minutes
-      instead of 10. Speaker disabled by default.}
-delete-after: true
