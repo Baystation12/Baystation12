@@ -26,7 +26,7 @@
 		/obj/item/storage/fancy/crayons,
 		/obj/item/storage/backpack/holding,
 		/obj/item/storage/belt/champion,
-		/obj/item/pickaxe/silver,
+		/obj/item/pickaxe/hand/silver,
 		/obj/item/pen/invisible,
 		/obj/item/lipstick/random,
 		/obj/item/grenade/smokebomb,
