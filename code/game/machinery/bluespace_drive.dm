@@ -27,6 +27,9 @@
 	///Whether or not the BSD Instability event is active
 	var/instability_event_active = FALSE
 
+	///Chance to teleport someone to the interlude during a pulse.
+	var/interlude_chance = 55
+
 
 /obj/machinery/bluespacedrive/Destroy()
 	QDEL_NULL(drive_sound)
@@ -143,7 +146,7 @@
 	playsound(src, 'sound/effects/EMPulse.ogg', 100, TRUE)
 	var/datum/bubble_effect/bluespace_pulse/parent
 	for (var/level in GetConnectedZlevels(z))
-		parent = new (x, y, level, 1, 1, parent)
+		parent = new (x, y, level, 1, 1, parent, interlude_teleport_chance = interlude_chance)
 
 
 /// Creates a blinding flash of light that will blind and deafen those in range, and change turfs to bluespace
@@ -171,9 +174,11 @@
 /datum/bubble_effect/bluespace_pulse
 	///List of mobs that can be swapped around when the pulse hits
 	var/list/mob/living/mobs_to_switch = list()
+	var/interlude_teleport_chance = 0
 
-/datum/bubble_effect/bluespace_pulse/New()
+/datum/bubble_effect/bluespace_pulse/New(interlude_teleport_chance = 50)
 	..()
+	src.interlude_teleport_chance = interlude_teleport_chance
 	START_PROCESSING(SSfastprocess, src)
 	var/list/zlevels = GetConnectedZlevels(z)
 	for (var/mob/living/L as anything in GLOB.alive_mobs)
@@ -212,7 +217,7 @@
 			if (!(mob.z in zlevels))
 				continue
 
-			if (GLOB.using_map.use_bluespace_interlude && prob(100))
+			if (GLOB.using_map.use_bluespace_interlude && prob(interlude_teleport_chance))
 				addtimer(new Callback(GLOBAL_PROC, /proc/do_unstable_teleport_safe, mob, GetConnectedZlevels(mob.z)), rand(1, 2) MINUTES)
 				GLOB.using_map.do_interlude_teleport(mob, duration = rand(1, 2.5) MINUTES)
 				return
