@@ -110,6 +110,7 @@
 	var/obj/item/device/scanner/health/scanner = null
 
 /obj/item/mech_equipment/mender/attack_self(mob/user)
+	. = ..()
 	if(!.)
 		return
 	mode = mode == MEDIGEL_SALVE ? MEDIGEL_SCAN : MEDIGEL_SALVE
