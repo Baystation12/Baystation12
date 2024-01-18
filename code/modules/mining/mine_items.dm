@@ -47,13 +47,6 @@
 	var/build_from_parts = FALSE
 	var/hardware_color
 
-/obj/item/pickaxe/Initialize()
-	if(build_from_parts)
-		icon_state = "pick_hardware"
-		color = hardware_color
-		AddOverlays(overlay_image(icon, "pick_handle", flags=RESET_COLOR))
-	. = ..()
-
 /obj/item/pickaxe/hammer
 	name = "sledgehammer"
 	desc = "A mining hammer made of reinforced metal. You feel like smashing your boss in the face with this."
@@ -96,40 +89,45 @@
 	drill_verb = "drilling"
 
 //****************************actual pickaxes***********************
-/obj/item/pickaxe/silver
+
+/obj/item/pickaxe/hand
+	name = "steel pickaxe"
+	desc = "Time-tested miner's tool."
+	icon = 'icons/obj/tools/pickaxe.dmi'
+	icon_state = "pick_preview"
+	item_state = "pickaxe"
+	origin_tech = list(TECH_MATERIAL = 1)
+	drill_verb = "picking"
+	sharp = TRUE
+	build_from_parts = TRUE
+	hardware_color = COLOR_STEEL
+
+/obj/item/pickaxe/hand/Initialize()
+	if(build_from_parts)
+		icon_state = "pick_hardware"
+		color = hardware_color
+		AddOverlays(overlay_image(icon, "pick_handle", flags=RESET_COLOR))
+	. = ..()
+
+/obj/item/pickaxe/hand/silver
 	name = "silver pickaxe"
 	desc = "This makes no metallurgic sense."
-	icon_state = "pick_preview"
-	item_state = "pickaxe"
 	digspeed = 30
 	origin_tech = list(TECH_MATERIAL = 3)
-	drill_verb = "picking"
-	sharp = TRUE
-	build_from_parts = TRUE
 	hardware_color = COLOR_SILVER
 
-/obj/item/pickaxe/gold
+/obj/item/pickaxe/hand/gold
 	name = "golden pickaxe"
 	desc = "This makes no metallurgic sense."
-	icon_state = "pick_preview"
-	item_state = "pickaxe"
 	digspeed = 20
 	origin_tech = list(TECH_MATERIAL = 4)
-	drill_verb = "picking"
-	sharp = TRUE
-	build_from_parts = TRUE
 	hardware_color = COLOR_GOLD
 
-/obj/item/pickaxe/diamond
+/obj/item/pickaxe/hand/diamond
 	name = "diamond pickaxe"
 	desc = "A pickaxe with a diamond pick head."
-	icon_state = "pick_preview"
-	item_state = "pickaxe"
 	digspeed = 10
 	origin_tech = list(TECH_MATERIAL = 6, TECH_ENGINEERING = 4)
-	drill_verb = "picking"
-	sharp = TRUE
-	build_from_parts = TRUE
 	hardware_color = COLOR_DIAMOND
 
 /*****************************Shovel********************************/
