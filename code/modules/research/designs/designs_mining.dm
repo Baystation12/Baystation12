@@ -27,7 +27,7 @@
 	id = "pick_diamond"
 	req_tech = list(TECH_MATERIAL = 6)
 	materials = list(MATERIAL_DIAMOND = 3000)
-	build_path = /obj/item/pickaxe/diamond
+	build_path = /obj/item/pickaxe/hand/diamond
 	sort_string = "KAAAD"
 
 /datum/design/item/mining/drill_diamond
