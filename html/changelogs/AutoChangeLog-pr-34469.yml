@@ -1,0 +1,5 @@
+author: emmanuelbassil
+changes:
+  - {bugfix: Fixes switching medigel scanner modes on mechs.}
+  - {bugfix: Fixes being able to place item into locked briefcases}
+delete-after: true
