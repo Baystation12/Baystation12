@@ -15,23 +15,25 @@
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = DEFAULT_BOX_STORAGE
 
-
-/obj/item/storage/secure/attackby(obj/item/W, mob/user)
+/obj/item/storage/secure/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if (!locked)
 		return ..()
+
 	if (istype(W, /obj/item/melee/energy/blade) && emag_act(INFINITY, user, "You slice through the lock of \the [src]"))
 		var/datum/effect/spark_spread/spark_system = new /datum/effect/spark_spread()
 		spark_system.set_up(5, 0, loc)
 		spark_system.start()
 		playsound(loc, 'sound/weapons/blade1.ogg', 50, 1)
 		playsound(loc, "sparks", 50, 1)
-		return
-	if (isScrewdriver(W))
+		return TRUE
+
+	else if (isScrewdriver(W))
 		if (do_after(user, (W.toolspeed * 2) SECONDS, src, DO_REPAIR_CONSTRUCT))
 			open = ! open
 			user.show_message(SPAN_NOTICE("You [open ? "open" : "close"] the service panel."))
-		return
-	if (isMultitool(W) && (open == 1)&& (!l_hacking))
+		return TRUE
+
+	else if (isMultitool(W) && (open == 1)&& (!l_hacking))
 		user.show_message(SPAN_NOTICE("Now attempting to reset internal memory, please hold."), 1)
 		l_hacking = 1
 		if (do_after(usr, (W.toolspeed * 10) SECONDS, src, DO_REPAIR_CONSTRUCT))
@@ -47,6 +49,11 @@
 				l_hacking = 0
 		else
 			l_hacking = 0
+		return TRUE
+
+	else
+		to_chat(user, SPAN_WARNING("\The [src] is locked and cannot be opened!"))
+		return TRUE
 
 
 /obj/item/storage/secure/MouseDrop(over_object, src_location, over_location)
