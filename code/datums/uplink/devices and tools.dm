@@ -115,6 +115,13 @@
 			While in hacking mode, this device will grant full access to any airlock in 20 to 40 seconds. \
 			This device will be able to continuously reaccess the last 6 to 8  airlocks it was used on."
 
+/datum/uplink_item/item/tools/radio_jammer
+	name = "Portable Radio Jammer"
+	item_cost = 24
+	path = /obj/item/device/radio_jammer
+	desc = "A pocket sized portable radio jammer that can intercept outgoing radio signals in a given distance. \
+			However, radios attempting to send outgoing transmissions will emit a faint buzzing noise. \
+			The jammer can be signaled remotely using assembly signalers."
 
 /datum/uplink_item/item/tools/space_suit
 	name = "Voidsuit and Tactical Mask"
