@@ -110,8 +110,10 @@
 			work_mode = GET_SINGLETON(/singleton/hierarchy/rcd_mode/floor_and_walls)
 		if ("Wall Frames")
 			work_mode = GET_SINGLETON(/singleton/hierarchy/rcd_mode/wall_frame)
-		if ("Machine & Computer Frame")
+		if ("Machine Frame")
 			work_mode = GET_SINGLETON(/singleton/hierarchy/rcd_mode/machine_frame)
+		if ("Computer Frame")
+			work_mode = GET_SINGLETON(/singleton/hierarchy/rcd_mode/computer_frame)
 		if ("Deconstruction")
 			work_mode = GET_SINGLETON(/singleton/hierarchy/rcd_mode/deconstruction)
 
