@@ -1,0 +1,4 @@
+author: emmanuelbassil
+changes:
+  - {bugfix: RCD now properly builds machine/computer frames}
+delete-after: true
