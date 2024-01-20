@@ -173,7 +173,10 @@
 	new_turf.transport_properties_from(source)
 
 	for(var/obj/O in source)
-		if(O.simulated)
+		if (QDELETED(O))
+			testing("Failed to translate [O] to new turf as it was qdel'd.")
+			continue
+		if(O.simulated || istype(O, /obj/shuttle_landmark) || istype(O, /obj/submap_landmark))
 			O.forceMove(new_turf)
 		else if(istype(O,/obj/effect))
 			var/obj/E = O
