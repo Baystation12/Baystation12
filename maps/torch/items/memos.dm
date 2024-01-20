@@ -169,6 +169,9 @@
 	name = "offical guides"
 	info = {"Some "internal use only" reports on inter-departmental communications, reminding personnel that unless the document specifies it is from and issued by EXO or Expeditionary Command, it is not offical policy and should not be referenced as a definitive reasoning for any action."}
 
+/obj/item/paper/memo/generic/sexplorer
+	name = "explorer rank abbreviations"
+	info = {"Some "internal use only" reports on proper and improper ways of abbreviating explorer ranks and roles, including emphasis that "sexplorer" is NOT an authorized way, shorthand or otherwise, to refer to senior explorers."}
 
 
 // scgr memos
