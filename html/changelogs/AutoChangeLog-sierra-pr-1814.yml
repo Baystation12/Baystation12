@@ -1,7 +1,0 @@
-author: Mucker
-changes:
-  - {bugfix: The shuttles on the Skrell and Vox ships are no longer broken and can
-      jump again.}
-  - {bugfix: Fixed players being put in space sometimes when joining the Skrell or
-      Vox submap.}
-delete-after: true
