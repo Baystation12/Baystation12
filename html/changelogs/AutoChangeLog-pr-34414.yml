@@ -1,0 +1,5 @@
+author: emmanuelbassil
+changes:
+  - {bugfix: Using a sharp tool to engrave graffiti on floors/walls now properly leaves
+      fingerprints.}
+delete-after: true
