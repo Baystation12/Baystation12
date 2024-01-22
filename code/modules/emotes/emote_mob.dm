@@ -44,7 +44,8 @@
 
 	var/singleton/emote/use_emote = usable_emotes[act]
 	if(!use_emote)
-		to_chat(src, SPAN_WARNING("Unknown emote '[act]'. Type <b>say *help</b> for a list of usable emotes."))
+		var/emote_prefix = get_prefix_key(/singleton/prefix/custom_emote)
+		to_chat(src, SPAN_WARNING("Unknown emote '[act]'. Type <b>say [emote_prefix]help</b> for a list of usable emotes."))
 		return
 
 	if(m_type != use_emote.message_type && use_emote.conscious && stat != CONSCIOUS)
