@@ -63,40 +63,47 @@
 /turf/simulated/open/is_open()
 	return TRUE
 
-/turf/simulated/open/attackby(obj/item/C, mob/user)
+/turf/simulated/open/use_tool(obj/item/C, mob/living/user, list/click_params)
 	if (istype(C, /obj/item/stack/material/rods))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
-			return L.attackby(C, user)
+			return L.use_tool(C, user)
 		var/obj/item/stack/material/rods/R = C
-		if (R.use(1))
-			to_chat(user, SPAN_NOTICE("You lay down the support lattice."))
-			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			new /obj/structure/lattice(locate(src.x, src.y, src.z), R.material.name)
-		return
+		if (!R.can_use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(R, 1, "to lay down support lattice.")
+			return TRUE
+		to_chat(user, SPAN_NOTICE("You lay down the support lattice."))
+		playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+		new /obj/structure/lattice(locate(src.x, src.y, src.z), R.material.name)
+		return TRUE
 
 	if (istype(C, /obj/item/stack/tile))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-		if(L)
-			var/obj/item/stack/tile/floor/S = C
-			if (!S.use(1))
-				return
-			qdel(L)
-			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			ChangeTurf(/turf/simulated/floor/plating, keep_air = TRUE)
-			return
-		else
+		if(!L)
 			to_chat(user, SPAN_WARNING("The plating is going to need some support."))
+			return TRUE
+
+		var/obj/item/stack/tile/floor/S = C
+		if (!S.can_use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(S, 1, "to plate the lattice.")
+			return TRUE
+
+		qdel(L)
+		playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+		ChangeTurf(/turf/simulated/floor/plating, keep_air = TRUE)
+		return TRUE
 
 	//To lay cable.
 	if(isCoil(C))
 		var/obj/item/stack/cable_coil/coil = C
 		coil.PlaceCableOnTurf(src, user)
-		return
+		return TRUE
 
 	for(var/atom/movable/M in below)
 		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
-			return M.attackby(C, user)
+			return C.resolve_attackby(M, user)
+
+	return ..()
 
 /turf/simulated/open/attack_hand(mob/user)
 	for(var/atom/movable/M in below)

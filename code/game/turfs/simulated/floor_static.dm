@@ -8,7 +8,7 @@
 	initial_flooring = null
 	footstep_type = /singleton/footsteps/plating
 
-/turf/simulated/floor/fixed/attackby(obj/item/C, mob/user)
+/turf/simulated/floor/fixed/use_tool(obj/item/C, mob/living/user, list/click_params)
 	if(istype(C, /obj/item/stack) && !isCoil(C))
 		return
 	return ..()
@@ -28,10 +28,10 @@
 	icon = 'icons/turf/flooring/alium.dmi'
 	icon_state = "jaggy"
 
-/turf/simulated/floor/fixed/alium/attackby(obj/item/C, mob/user)
+/turf/simulated/floor/fixed/alium/use_tool(obj/item/C, mob/living/user, list/click_params)
 	if(isCrowbar(C))
 		to_chat(user, SPAN_NOTICE("There aren't any openings big enough to pry it away..."))
-		return
+		return TRUE
 	return ..()
 
 /turf/simulated/floor/fixed/alium/New()

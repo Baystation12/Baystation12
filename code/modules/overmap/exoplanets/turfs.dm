@@ -25,7 +25,7 @@
 				ChangeArea(src, E.planetary_area)
 	..()
 
-/turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)
+/turf/simulated/floor/exoplanet/use_tool(obj/item/C, mob/living/user, list/click_params)
 	if(diggable && istype(C,/obj/item/shovel))
 		visible_message(SPAN_NOTICE("\The [user] starts digging \the [src]"))
 		if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
@@ -34,15 +34,22 @@
 			diggable = 0
 		else
 			to_chat(user,SPAN_NOTICE("You stop shoveling."))
+		return TRUE
+
 	else if(istype(C, /obj/item/stack/tile))
 		var/obj/item/stack/tile/T = C
-		if(T.use(1))
-			playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
-			ChangeTurf(/turf/simulated/floor, FALSE, FALSE, TRUE)
+		if(!T.can_use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(T, 1, "to place a tile.")
+			return TRUE
+		T.use(1)
+		playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
+		ChangeTurf(/turf/simulated/floor, FALSE, FALSE, TRUE)
+		return TRUE
+
 	else if (isCrowbar(C) || isWelder(C) || istype(C, /obj/item/gun/energy/plasmacutter))
 		return
 	else
-		..()
+		return ..()
 
 /turf/simulated/floor/exoplanet/ex_act(severity)
 	switch(severity)
@@ -93,11 +100,12 @@
 	footstep_type = /singleton/footsteps/water
 	var/reagent_type = /datum/reagent/water
 
-/turf/simulated/floor/exoplanet/water/shallow/attackby(obj/item/O, mob/living/user)
+/turf/simulated/floor/exoplanet/water/shallow/use_tool(obj/item/O, mob/living/user, list/click_params)
 	var/obj/item/reagent_containers/RG = O
 	if (reagent_type && istype(RG) && RG.is_open_container() && RG.reagents)
 		RG.reagents.add_reagent(reagent_type, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
 		user.visible_message(SPAN_NOTICE("[user] fills \the [RG] from \the [src]."),SPAN_NOTICE("You fill \the [RG] from \the [src]."))
+		return TRUE
 	else
 		return ..()
 
