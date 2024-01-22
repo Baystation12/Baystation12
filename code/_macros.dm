@@ -185,8 +185,6 @@
 
 #define SPAN_WARNING(X) SPAN_CLASS("warning", "[X]")
 
-#define SPAN_SUCCESS(X) SPAN_CLASS("success", "[X]")
-
 #define SPAN_GOOD(X) SPAN_CLASS("good", "[X]")
 
 #define SPAN_BAD(X) SPAN_CLASS("bad", "[X]")
