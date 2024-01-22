@@ -21,6 +21,7 @@
 
 /datum/antagonist/traitor
 	blacklisted_jobs = list(/datum/job/merchant, /datum/job/captain, /datum/job/hop, /datum/job/ai, /datum/job/submap, /datum/job/hos, /datum/job/medical_trainee, /datum/job/engineer_trainee, /datum/job/junior_doctor)
+	restricted_jobs = list(/datum/job/lawyer, /datum/job/cyborg)
 
 /datum/antagonist/ert
 	var/sic //Second-In-Command
