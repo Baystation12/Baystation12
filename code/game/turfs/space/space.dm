@@ -76,31 +76,37 @@
 	if(TURF_IS_AMBIENT_LIT_UNSAFE(src))
 		remove_starlight()
 
-/turf/space/attackby(obj/item/C as obj, mob/user as mob)
-
+/turf/space/use_tool(obj/item/C, mob/living/user, list/click_params)
 	if (istype(C, /obj/item/stack/material/rods))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
-			return L.attackby(C, user)
+			return L.use_tool(C, user)
 		var/obj/item/stack/material/rods/R = C
-		if (R.use(1))
-			to_chat(user, SPAN_NOTICE("You lay down the support lattice."))
-			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			ReplaceWithLattice(R.material.name)
-		return
+		if (!R.can_use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(R, 1, "to lay down support lattice.")
+			return TRUE
+
+		to_chat(user, SPAN_NOTICE("You lay down the support lattice."))
+		playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+		ReplaceWithLattice(R.material.name)
+		R.use(1)
+		return TRUE
 
 	if (istype(C, /obj/item/stack/tile))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-		if(L)
-			var/obj/item/stack/tile/floor/S = C
-			if (!S.use(1))
-				return
-			qdel(L)
-			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			ChangeTurf(/turf/simulated/floor/plating, keep_air = TRUE)
-			return
-		else
+		if(!L)
 			to_chat(user, SPAN_WARNING("The plating is going to need some support."))
+			return TRUE
+		var/obj/item/stack/tile/floor/S = C
+		if (!S.can_use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(S, 1, "to place the plating.")
+			return TRUE
+
+		qdel(L)
+		playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+		ChangeTurf(/turf/simulated/floor/plating, keep_air = TRUE)
+		S.use(1)
+		return TRUE
 
 	//Checking if the user attacked with a cable coil
 	if(isCoil(C))
@@ -108,12 +114,12 @@
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
 			coil.PlaceCableOnTurf(src, user)
-			return
+			return TRUE
 		else
 			to_chat(user, SPAN_WARNING("The cable needs something to be secured to."))
-			return
+			return TRUE
 
-	return
+	return ..()
 
 
 // Ported from unstable r355
