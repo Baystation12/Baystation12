@@ -44,7 +44,7 @@
 	name = "Exploration suit cycler"
 	model_text = "Exploration"
 	req_access = list(access_explorer)
-	available_modifications = list(/singleton/item_modifier/space_suit/sol/explorer)
+	available_modifications = list(/singleton/item_modifier/space_suit/sol/sierra/exploration)
 
 /obj/machinery/suit_cycler/pilot
 	req_access = list(access_explorer) //because unathi version of expeditonary suit it shit

@@ -10,6 +10,7 @@
 #include "gliding/_gliding.dme"
 #include "gravity_generator/_gravity_generator.dme"
 #include "hairs_ports/_hairs_ports.dme"
+#include "hardsuits/_hardsuits.dme"
 #include "sprite_accessories/_sprite_accessories.dme"
 #include "jukebox_tapes/_jukebox_tapes.dme"
 #include "loadout_items/_loadout_items.dme"

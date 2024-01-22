@@ -2,7 +2,10 @@
 	name = "engineering suit cycler"
 	model_text = "Engineering"
 	req_access = list(access_construction)
-	available_modifications = list(/singleton/item_modifier/space_suit/engineering, /singleton/item_modifier/space_suit/atmos)
+	 // [SIERRA-EDIT] - HARDSUITS - Костюмы со спрайтами Инфинити
+	 // available_modifications = list(/singleton/item_modifier/space_suit/engineering, /singleton/item_modifier/space_suit/atmos) // SIERRA-EDIT - ORIGINAL
+	available_modifications = list(/singleton/item_modifier/space_suit/sierra/engineering, /singleton/item_modifier/space_suit/sierra/atmos)
+	 // [/SIERRA-EDIT]
 	species = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/mining
@@ -30,6 +33,10 @@
 	model_text = "Security"
 	req_access = list(access_security)
 	available_modifications = list(/singleton/item_modifier/space_suit/security)
+	 // [SIERRA-EDIT] - HARDSUITS - Костюмы со спрайтами Инфинити
+	 // available_modifications = list(/singleton/item_modifier/space_suit/security) // SIERRA-EDIT - ORIGINAL
+	available_modifications = list(/singleton/item_modifier/space_suit/sierra/security, /singleton/item_modifier/space_suit/sierra/security/alt)
+	 // [/SIERRA-EDIT]
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/security/alt
@@ -54,5 +61,8 @@
 	name = "pilot suit cycler"
 	model_text = "Pilot"
 	req_access = list(access_mining_office)
-	available_modifications = list(/singleton/item_modifier/space_suit/pilot)
+	 // [SIERRA-EDIT] - HARDSUITS - Костюмы со спрайтами Инфинити
+	 // available_modifications = list(/singleton/item_modifier/space_suit/pilot) // SIERRA-EDIT - ORIGINAL
+	available_modifications = list(/singleton/item_modifier/space_suit/sierra/pilot)
+	 // [/SIERRA-EDIT]
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
