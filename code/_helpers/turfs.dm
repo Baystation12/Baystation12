@@ -176,7 +176,7 @@
 		if (QDELETED(O))
 			testing("Failed to translate [O] to new turf as it was qdel'd.")
 			continue
-		if(O.simulated || istype(O, /obj/shuttle_landmark) || istype(O, /obj/submap_landmark))
+		if(O.simulated || HAS_FLAGS(O.movable_flags, MOVABLE_FLAG_EFFECTMOVE))
 			O.forceMove(new_turf)
 		else if(istype(O,/obj/effect))
 			var/obj/E = O
