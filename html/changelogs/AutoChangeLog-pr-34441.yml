@@ -1,0 +1,4 @@
+author: Mucker
+changes:
+  - {rscdel: Robots can no longer roll traitor.}
+delete-after: true
