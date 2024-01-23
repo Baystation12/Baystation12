@@ -343,7 +343,7 @@
 		laser.Fire(target,holder.wearer)
 		return 1
 	else
-		var/resolved = target.attackby(laser,holder.wearer)
+		var/resolved = laser.resolve_attackby(target, holder.wearer)
 		if(!resolved && laser && target)
 			laser.afterattack(target,holder.wearer,1)
 			return 1

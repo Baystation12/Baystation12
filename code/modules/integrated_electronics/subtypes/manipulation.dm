@@ -34,14 +34,15 @@
 	QDEL_NULL(installed_gun)
 	return ..()
 
-/obj/item/integrated_circuit/manipulation/weapon_firing/attackby(obj/O, mob/user)
+/obj/item/integrated_circuit/manipulation/weapon_firing/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(istype(O, /obj/item/gun/energy))
 		var/obj/item/gun/energy/gun = O
 		if(installed_gun)
 			to_chat(user, SPAN_WARNING("There's already a weapon installed."))
-			return
+			return TRUE
 		if(!user.unEquip(gun,src))
-			return
+			FEEDBACK_UNEQUIP_FAILURE(user, gun)
+			return TRUE
 		installed_gun = gun
 		to_chat(user, SPAN_NOTICE("You slide \the [gun] into the firing mechanism."))
 		playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
@@ -56,8 +57,9 @@
 			var/datum/firemode/fm = installed_gun.firemodes[installed_gun.sel_mode]
 			set_pin_data(IC_OUTPUT, 2, fm.name)
 		push_data()
-	else
-		..()
+		return TRUE
+
+	return ..()
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/attack_self(mob/user)
 	if(installed_gun)
@@ -180,16 +182,20 @@
 	detach_grenade()
 	return ..()
 
-/obj/item/integrated_circuit/manipulation/grenade/attackby(obj/item/grenade/G, mob/user)
-	if(istype(G))
+/obj/item/integrated_circuit/manipulation/grenade/use_tool(obj/item/G, mob/living/user, list/click_params)
+	if(istype(G, /obj/item/grenade))
 		if(attached_grenade)
 			to_chat(user, SPAN_WARNING("There is already a grenade attached!"))
-		else if(user.unEquip(G,src))
-			user.visible_message(SPAN_WARNING("\The [user] attaches \a [G] to \the [src]!"), SPAN_NOTICE("You attach \the [G] to \the [src]."))
-			attach_grenade(G)
-			G.forceMove(src)
-	else
-		return ..()
+			return TRUE
+		if (!user.unEquip(G,src))
+			FEEDBACK_UNEQUIP_FAILURE(user, G)
+			return TRUE
+		user.visible_message(SPAN_WARNING("\The [user] attaches \a [G] to \the [src]!"), SPAN_NOTICE("You attach \the [G] to \the [src]."))
+		attach_grenade(G)
+		G.forceMove(src)
+		return TRUE
+
+	return ..()
 
 /obj/item/integrated_circuit/manipulation/grenade/attack_self(mob/user)
 	if(attached_grenade)
@@ -645,10 +651,11 @@
 	controlling = null
 
 
-/obj/item/integrated_circuit/manipulation/ai/attackby(obj/item/I, mob/user)
-	if(is_type_in_list(I, list(/obj/item/aicard, /obj/item/device/paicard, /obj/item/device/mmi)))
-		load_ai(user, I)
-	else return ..()
+/obj/item/integrated_circuit/manipulation/ai/use_tool(obj/item/item, mob/living/user, list/click_params)
+	if(is_type_in_list(item, list(/obj/item/aicard, /obj/item/device/paicard, /obj/item/device/mmi)))
+		load_ai(user, item)
+		return TRUE
+	return ..()
 
 /obj/item/integrated_circuit/manipulation/ai/attack_self(user)
 	unload_ai()
