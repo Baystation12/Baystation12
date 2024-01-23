@@ -425,13 +425,17 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	return ..()
 
-/mob/observer/ghost/proc/try_possession(mob/living/M)
-	if(!config.ghosts_can_possess_animals)
+/mob/observer/ghost/proc/try_possession(mob/living/target)
+	if(target.is_zombie())
+		if(!config.ghosts_can_possess_zombies)
+			to_chat(src, SPAN_WARNING("Ghosts are not permitted to possess zombies."))
+			return 0
+	else if(!config.ghosts_can_possess_animals)
 		to_chat(src, SPAN_WARNING("Ghosts are not permitted to possess animals."))
 		return 0
-	if(!M.can_be_possessed_by(src))
+	if(!target.can_be_possessed_by(src))
 		return 0
-	return M.do_possession(src)
+	return target.do_possession(src)
 
 /mob/observer/ghost/pointed(atom/A as mob|obj|turf in view())
 	if(!..())

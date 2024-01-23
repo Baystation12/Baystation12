@@ -29,7 +29,7 @@
 	var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
 	if (H.hand)
 		temp = H.organs_by_name[BP_L_HAND]
-	if (!temp || !temp.is_usable())
+	if (H.a_intent != I_HURT && (!temp || !temp.is_usable())) //Usability for harm is handled at the level of the attack datum's proc on get_attack_hand.
 		to_chat(H, SPAN_WARNING("You can't use your hand."))
 		return
 
@@ -46,9 +46,6 @@
 			return
 
 		var/obj/item/organ/external/affecting = get_organ(hit_zone)
-
-		if (MUTATION_HULK in H.mutations)
-			damage += 5
 
 		playsound(loc, "punch", 25, 1, -1)
 
@@ -180,8 +177,6 @@
 
 			var/real_damage = rand_damage
 			real_damage += attack.get_unarmed_damage(H)
-			if (MUTATION_HULK in H.mutations)
-				real_damage *= 2
 			real_damage = max(1, real_damage)
 
 			attack.show_attack(H, src, hit_zone, real_damage)

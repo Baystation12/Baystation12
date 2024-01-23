@@ -33,7 +33,7 @@
 	// Standard muts, imported from older code above.
 	GLOB.BLINDBLOCK         = getAssignedBlock("BLINDED",         numsToAssign)
 	GLOB.DEAFBLOCK          = getAssignedBlock("DEAFENED",          numsToAssign)
-	GLOB.HULKBLOCK          = getAssignedBlock("HULK",          numsToAssign, DNA_HARD_BOUNDS)
+	GLOB.FERALBLOCK         = getAssignedBlock("FERAL",         numsToAssign, DNA_HARD_BOUNDS)
 	GLOB.TELEBLOCK          = getAssignedBlock("TELE",          numsToAssign, DNA_HARD_BOUNDS)
 	GLOB.FIREBLOCK          = getAssignedBlock("FIRE",          numsToAssign, DNA_HARDER_BOUNDS)
 	GLOB.XRAYBLOCK          = getAssignedBlock("XRAY",          numsToAssign, DNA_HARDER_BOUNDS)

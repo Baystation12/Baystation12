@@ -83,8 +83,6 @@ var/global/list/limb_icon_cache = list()
 		. += "skeleton"
 	else if (owner && (MUTATION_HUSK in owner.mutations))
 		. += "husk"
-	else if (owner && (MUTATION_HULK in owner.mutations))
-		. += "hulk"
 
 	//Colour, maybe simplify this one day and actually calculate it once
 	if(status & ORGAN_DEAD)
@@ -118,10 +116,7 @@ var/global/list/limb_icon_cache = list()
 	mob_overlays = list()
 
 	var/husk_color_mod = rgb(96,88,80)
-	var/hulk_color_mod = rgb(48,224,40)
-
 	var/husk = owner && (MUTATION_HUSK in owner.mutations)
-	var/hulk = owner && (MUTATION_HULK in owner.mutations)
 
 	var/gender = "_m"
 	if(!(limb_flags & ORGAN_FLAG_GENDERED_ICON))
@@ -156,9 +151,6 @@ var/global/list/limb_icon_cache = list()
 
 	if (husk)
 		mob_icon.ColorTone(husk_color_mod)
-	if (hulk)
-		var/list/tone = ReadRGB(hulk_color_mod)
-		mob_icon.MapColors(rgb(tone[1],0,0),rgb(0,tone[2],0),rgb(0,0,tone[3]))
 
 	//Handle husk overlay.
 	if(husk)

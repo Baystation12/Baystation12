@@ -20,6 +20,9 @@
 	/// What *percentage* of this is made of sugar
 	var/sugar_amount
 
+	var/filter_mod = 1.0	// How effectively the chem can be filtered (i.e. through sleeper dialysis)
+							// 1.0 is as fast as the filtration mechanism can handle, 0.0 is unfilterable
+
 	// If TRUE, this reagent transfers changes to its 'color' var when moving to other containers
 	// Of note: Mixing two reagents of the same type with this var that have different colors
 	// will cause them both to take on the color of the form being added into the holder.

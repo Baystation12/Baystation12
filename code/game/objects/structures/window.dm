@@ -6,6 +6,7 @@
 	w_class = ITEM_SIZE_NORMAL
 
 	damage_hitsound = 'sound/effects/Glasshit.ogg'
+	attacked_verb = "bangs"
 
 	layer = SIDE_WINDOW_LAYER
 	anchored = TRUE
@@ -218,35 +219,14 @@
 	return 1
 
 /obj/structure/window/attack_hand(mob/user as mob)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(MUTATION_HULK in user.mutations)
-		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
-		user.visible_message(SPAN_DANGER("[user] smashes through [src]!"))
-		user.do_attack_animation(src)
-		shatter()
-	else if(MUTATION_FERAL in user.mutations)
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2) //Additional cooldown
-		attack_generic(user, 10, "smashes")
+	if ((. = ..()))
+		return
 
-	else if (user.a_intent && user.a_intent == I_HURT)
-
-		if (istype(user,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = user
-			if(H.species.can_shred(H))
-				attack_generic(H,25)
-				return
-
-		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
-		user.do_attack_animation(src)
-		user.visible_message(SPAN_DANGER("\The [user] bangs against \the [src]!"),
-							SPAN_DANGER("You bang against \the [src]!"),
-							"You hear a banging sound.")
-	else
-		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
-		user.visible_message("[user.name] knocks on the [src.name].",
-							"You knock on the [src.name].",
-							"You hear a knocking sound.")
-	return
+	playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
+	user.visible_message("[user.name] knocks on the [src.name].",
+						"You knock on the [src.name].",
+						"You hear a knocking sound.")
+	return TRUE
 
 /obj/structure/window/do_simple_ranged_interaction(mob/user)
 	visible_message(SPAN_NOTICE("Something knocks on \the [src]."))

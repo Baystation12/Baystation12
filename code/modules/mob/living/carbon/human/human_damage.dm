@@ -100,19 +100,19 @@
 
 /mob/living/carbon/human/Stun(amount)
 	amount *= species.stun_mod
-	if(amount <= 0 || (MUTATION_HULK in mutations)) return
+	if(amount <= 0) return
 	..()
 
 /mob/living/carbon/human/Weaken(amount)
 	amount *= species.weaken_mod
-	if(amount <= 0 || (MUTATION_HULK in mutations)) return
+	if(amount <= 0) return
 	if (!lying && species?.bodyfall_sound)
 		playsound(loc, species.bodyfall_sound, 50, TRUE, -1)
 	..(amount)
 
 /mob/living/carbon/human/Paralyse(amount)
 	amount *= species.paralysis_mod
-	if(amount <= 0 || (MUTATION_HULK in mutations)) return
+	if(amount <= 0) return
 	// Notify our AI if they can now control the suit.
 	if(wearing_rig && !stat && paralysis < amount) //We are passing out right this second.
 		wearing_rig.notify_ai(SPAN_DANGER("Warning: user consciousness failure. Mobility control passed to integrated intelligence system."))

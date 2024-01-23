@@ -174,7 +174,7 @@
 
 /obj/energy_net/attack_hand(mob/user)
 	if (user.a_intent != I_HURT)
-		return
+		return ..()
 
 	user.visible_message(
 		SPAN_WARNING("\The [user] claws at \the [src]!"),
@@ -182,14 +182,11 @@
 	)
 	var/mob/living/carbon/human/H = user
 	if(istype(H))
-		if(H.species.can_shred(H))
+		if(MUTATION_FERAL in H.mutations || H.species.can_shred(H))
 			playsound(src.loc, 'sound/weapons/slash.ogg', 80, 1)
 			damage_health(rand(10, 20))
 		else
 			damage_health(rand(1, 3))
-
-	else if (MUTATION_HULK in user.mutations)
-		kill_health()
 	else
 		damage_health(rand(5, 8))
 

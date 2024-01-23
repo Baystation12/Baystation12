@@ -87,7 +87,7 @@
 	. = (psi && psi.can_use() && psi.get_rank(PSI_PSYCHOKINESIS) >= 5)
 
 /mob/living/carbon/can_break_cuffs()
-	. = ..() || (MUTATION_HULK in mutations)
+	. = ..() || (MUTATION_FERAL in mutations)
 
 /mob/living/carbon/proc/break_handcuffs()
 	visible_message(
@@ -104,9 +104,6 @@
 		SPAN_DANGER("[src] manages to break \the [handcuffed]!"),
 		SPAN_WARNING("You successfully break your [handcuffed.name].")
 		)
-
-	if (MUTATION_HULK in mutations)
-		say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 
 	qdel(handcuffed)
 	handcuffed = null

@@ -62,12 +62,6 @@
 		updateUsrDialog()
 
 /obj/machinery/optable/physical_attack_hand(mob/user)
-	if(MUTATION_HULK in user.mutations)
-		visible_message(SPAN_DANGER("\The [usr] destroys \the [src]!"))
-		src.set_density(0)
-		qdel(src)
-		return TRUE
-
 	if(!victim)
 		to_chat(user, SPAN_WARNING("There is nobody on \the [src]. It would be pointless to turn the suppressor on."))
 		return TRUE

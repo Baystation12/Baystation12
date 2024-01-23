@@ -5,7 +5,7 @@
  * - `user` - The attacking mob.
  * - `damage` (int) - The damage value.
  * - `attack_verb` (string) - The verb/string used for attack messages.
- * - `wallbreaker` (boolean) - Whether or not the attack is considered a 'wallbreaker' attack - I.e., hulk.
+ * - `wallbreaker` (boolean) - Whether or not the attack is considered a 'wallbreaker' attack.
  * - `damtype` (string, one of `DAMAGE_*`) - The attack's damage type.
  * - `armorcheck` (string) - TODO: Unused. Remove.
  * - `dam_flags` (bitfield, any of `DAMAGE_FLAG_*`) - Damage flags associated with the attack.
@@ -17,7 +17,7 @@
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 		if (!can_damage_health(damage, damtype))
-			playsound(src, damage_hitsound, 50)
+			playsound(src, damage_hitsound, 50, TRUE)
 			user.visible_message(
 				SPAN_WARNING("\The [user] bonks \the [src] harmlessly!"),
 				SPAN_WARNING("You bonk \the [src] harmlessly!")
@@ -26,14 +26,12 @@
 		var/damage_flags = EMPTY_BITFIELD
 		if (wallbreaker)
 			SET_FLAGS(damage_flags, DAMAGE_FLAG_TURF_BREAKER)
-		playsound(src, damage_hitsound, 75)
+		playsound(src, damage_hitsound, 75, TRUE)
 		if (damage_health(damage, damtype, damage_flags, skip_can_damage_check = TRUE))
 			user.visible_message(
 				SPAN_DANGER("\The [user] smashes through \the [src]!"),
 				SPAN_DANGER("You smash through \the [src]!")
 			)
-			if (MUTATION_FERAL in user.mutations)
-				qdel(src)
 		else
 			user.visible_message(
 				SPAN_DANGER("\The [user] [attack_verb] \the [src]!"),
