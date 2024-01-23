@@ -1,5 +1,3 @@
-var/global/ntnet_card_uid = 1
-
 /obj/item/stock_parts/computer/network_card
 	name = "basic NTNet network card"
 	desc = "A basic network card for usage with standard NTNet frequencies."
@@ -53,8 +51,7 @@ var/global/ntnet_card_uid = 1
 
 /obj/item/stock_parts/computer/network_card/Initialize()
 	. = ..()
-	identification_id = ntnet_card_uid
-	ntnet_card_uid++
+	identification_id = random_id("network_card_id", 1, 999)
 
 /obj/item/stock_parts/computer/network_card/Destroy()
 	ntnet_global.unregister(identification_id)
