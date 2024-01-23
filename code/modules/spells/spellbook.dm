@@ -78,14 +78,14 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 	investing_time = max(investing_time - 6000,1) //subtract 10 minutes. Make sure it doesn't act funky at the beginning of the game.
 
 
-/obj/item/spellbook/attackby(obj/item/I as obj, mob/user as mob)
+/obj/item/spellbook/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(investing_time)
 		var/list/objects = spellbook.sacrifice_objects
 		if(objects && length(objects))
 			for(var/type in objects)
 				if(istype(I,type))
 					make_sacrifice(I,user)
-					return
+					return TRUE
 		if(I.reagents)
 			var/datum/reagents/R = I.reagents
 			var/list/reagent_list = spellbook.sacrifice_reagents
@@ -93,8 +93,8 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 				for(var/id in reagent_list)
 					if(R.has_reagent(id,5))
 						make_sacrifice(I,user, id)
-						return 1
-	..()
+						return TRUE
+	return ..()
 
 /obj/item/spellbook/interact(mob/user as mob)
 	var/dat = null

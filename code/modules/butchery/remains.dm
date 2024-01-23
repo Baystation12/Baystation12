@@ -8,14 +8,14 @@
 	if (carve_product && is_sharp(tool))
 		if (!isturf(loc))
 			to_chat(user, SPAN_WARNING("You must put \the [src] down before carving it."))
-			return
+			return TRUE
 		user.visible_message(
 			SPAN_ITALIC("\The [user] begins carving \a [src] with \a [tool]."),
 			SPAN_ITALIC("You begin carving \the [src] into \a [initial(carve_product.name)] with \the [tool]."),
 			range = 5
 		)
 		if (!do_after(user, 10 SECONDS, src))
-			return
+			return TRUE
 		user.visible_message(
 			SPAN_ITALIC("\The [user] finishes carving \a [src] into \a [initial(carve_product.name)]."),
 			SPAN_ITALIC("You finish carving \the [src]."),
@@ -23,6 +23,8 @@
 		)
 		new carve_product (loc)
 		qdel(src)
+		return TRUE
+
 	return ..()
 
 

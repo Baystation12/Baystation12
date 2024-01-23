@@ -15,7 +15,7 @@
 	var/icon_broken = "lockbox+b"
 
 
-/obj/item/storage/lockbox/attackby(obj/item/I, mob/user)
+/obj/item/storage/lockbox/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if (istype(I, /obj/item/card/id))
 		if (broken)
 			to_chat(user, SPAN_WARNING("It seems to be broken!"))
@@ -27,8 +27,9 @@
 		else
 			icon_state = icon_closed
 			to_chat(user, SPAN_NOTICE("You lock \the [src]!"))
-		return
-	else if (!broken && istype(I, /obj/item/melee/energy/blade))
+		return TRUE
+
+	if (!broken && istype(I, /obj/item/melee/energy/blade))
 		var/success = emag_act(INFINITY, user, I, null, "You hear metal being sliced and sparks flying.")
 		if (success)
 			var/datum/effect/spark_spread/spark_system = new
@@ -36,10 +37,12 @@
 			spark_system.start()
 			playsound(loc, 'sound/weapons/blade1.ogg', 50, 1)
 			playsound(loc, "sparks", 50, 1)
+			return TRUE
+
 	if (locked)
 		to_chat(user, SPAN_WARNING("It's locked!"))
-		return
-	..()
+		return TRUE
+	return ..()
 
 
 /obj/item/storage/lockbox/show_to(mob/user)
@@ -113,6 +116,6 @@
 		AddOverlays(image(icon, src, "ledb"))
 	return
 
-/obj/item/storage/lockbox/vials/attackby(obj/item/item, mob/living/user)
+/obj/item/storage/lockbox/vials/use_tool(obj/item/W, mob/living/user, list/click_params)
 	. = ..()
 	update_icon()

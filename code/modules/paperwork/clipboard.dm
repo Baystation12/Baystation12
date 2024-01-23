@@ -50,21 +50,23 @@
 	AddOverlays(overlay_image(icon, "clipboard_over", flags=RESET_COLOR))
 	return
 
-/obj/item/material/clipboard/attackby(obj/item/W as obj, mob/user as mob)
-
+/obj/item/material/clipboard/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo))
 		if(!user.unEquip(W, src))
-			return
+			FEEDBACK_UNEQUIP_FAILURE(user, W)
+			return TRUE
 		if(istype(W, /obj/item/paper))
 			toppaper = W
 		to_chat(user, SPAN_NOTICE("You clip the [W] onto \the [src]."))
 		update_icon()
+		return TRUE
 
 	else if(istype(toppaper) && istype(W, /obj/item/pen))
-		toppaper.attackby(W, usr)
+		toppaper.use_tool(W, user)
 		update_icon()
+		return TRUE
 
-	return
+	return ..()
 
 /obj/item/material/clipboard/attack_self(mob/user as mob)
 	var/dat = "<title>Clipboard</title>"
@@ -113,7 +115,7 @@
 
 				if(istype(I, /obj/item/pen))
 
-					P.attackby(I, usr)
+					P.use_tool(I, usr)
 
 		else if(href_list["remove"])
 			var/obj/item/P = locate(href_list["remove"])

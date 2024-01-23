@@ -167,15 +167,17 @@
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //prevent spam
 		return TRUE
 
-/obj/item/soap/attackby(obj/item/I, mob/user)
+/obj/item/soap/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I, /obj/item/key))
 		if(!key_data)
 			to_chat(user, SPAN_NOTICE("You imprint \the [I] into \the [src]."))
 			var/obj/item/key/K = I
 			key_data = K.key_data
 			update_icon()
-		return
-	..()
+		else
+			USE_FEEDBACK_FAILURE("\The [src] already has a key imprint!")
+		return TRUE
+	return ..()
 
 /obj/item/soap/on_update_icon()
 	ClearOverlays()

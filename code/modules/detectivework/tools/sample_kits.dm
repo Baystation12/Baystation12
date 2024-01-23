@@ -54,11 +54,11 @@
 	update_icon()
 	return 1
 
-/obj/item/sample/attackby(obj/O, mob/user)
-	if(O.type == src.type)
-		if(user.unEquip(O) && merge_evidence(O, user))
-			qdel(O)
-		return 1
+/obj/item/sample/use_tool(obj/item/item, mob/living/user, list/click_params)
+	if(item.type == type)
+		if(user.unEquip(item) && merge_evidence(item, user))
+			qdel(item)
+		return TRUE
 	return ..()
 
 /obj/item/sample/fibers

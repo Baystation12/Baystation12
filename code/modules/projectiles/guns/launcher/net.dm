@@ -14,12 +14,16 @@
 	icon = 'icons/obj/weapons/ammo.dmi'
 	icon_state = "netshell"
 
-/obj/item/net_shell/attackby(obj/item/gun/launcher/net/I, mob/user)
-	if(istype(I) && I.can_load(src, user))
-		I.load(src, user)
-		to_chat(usr, "You load \the [src] into \the [I].")
+/obj/item/net_shell/use_tool(obj/item/item, mob/living/user, list/click_params)
+	if(istype(item, /obj/item/gun/launcher/net))
+		var/obj/item/gun/launcher/net/launcher = item
+		if (!launcher.can_load(src, user))
+			return TRUE
+		launcher.load(src, user)
+		to_chat(usr, "You load \the [src] into \the [launcher].")
+		return TRUE
 	else
-		..()
+		return ..()
 
 /obj/item/gun/launcher/net/examine(mob/user, distance)
 	. = ..()

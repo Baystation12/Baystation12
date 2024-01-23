@@ -166,15 +166,14 @@
 	if(seed) seed.thrown_at(src,hit_atom)
 	..()
 
-/obj/item/reagent_containers/food/snacks/grown/attackby(obj/item/W, mob/user)
-
+/obj/item/reagent_containers/food/snacks/grown/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(seed)
 		if(isCoil(W))
 			var/obj/item/stack/cable_coil/C = W
 			if(seed.get_trait(TRAIT_PRODUCT_ICON) in list("flower2","flower3","flower4","flower5","flower6"))
 				if(!C.can_use(1))
 					USE_FEEDBACK_STACK_NOT_ENOUGH(C, 1, "to make a pin out of \the [src.name].")
-					return
+					return TRUE
 				C.use(1)
 				to_chat(user, SPAN_NOTICE("You add some wire to the [src.name] and make a pin."))
 				var/obj/item/clothing/head/hairflower/pin = new /obj/item/clothing/head/hairflower(get_turf(src))
@@ -188,23 +187,23 @@
 				pin.item_state = "hairflower"
 				pin.color = src.color
 				qdel(src)
-				return
+				return TRUE
 			else if(seed.get_trait(TRAIT_PRODUCES_POWER))
 				if(!C.can_use(5))
 					USE_FEEDBACK_STACK_NOT_ENOUGH(C, 5, "to wire \the [src.name].")
-					return
+					return TRUE
 				to_chat(user, SPAN_NOTICE("You add some cable to the [src.name] and slide it inside the battery casing."))
 				var/obj/item/cell/potato/pocell = new /obj/item/cell/potato(get_turf(src))
 				pocell.maxcharge = src.potency * 10
 				pocell.charge = pocell.maxcharge
 				qdel(src)
-				return
+				return TRUE
 		else if(W.sharp)
 			if(seed.kitchen_tag == "pumpkin") // Ugggh these checks are awful.
 				user.show_message(SPAN_NOTICE("You carve a face into [src]!"), 1)
 				new /obj/item/clothing/head/pumpkinhead (user.loc)
 				qdel(src)
-				return
+				return TRUE
 			else if(seed.chems)
 				if(isHatchet(W))
 					if(!isnull(seed.chems[/datum/reagent/woodpulp]))
@@ -219,22 +218,22 @@
 						user.visible_message(SPAN_NOTICE("\The [user] makes resin slabs out of \the [src]."))
 						new /obj/item/stack/material/wood/vox(user.loc)
 						qdel(src)
-					return
+					return TRUE
 				else if(!isnull(seed.chems[/datum/reagent/drink/juice/potato]))
 					to_chat(user, "You slice \the [src] into sticks.")
 					new /obj/item/reagent_containers/food/snacks/rawsticks(get_turf(src))
 					qdel(src)
-					return
+					return TRUE
 				else if(!isnull(seed.chems[/datum/reagent/drink/juice/carrot]))
 					to_chat(user, "You slice \the [src] into sticks.")
 					new /obj/item/reagent_containers/food/snacks/carrotfries(get_turf(src))
 					qdel(src)
-					return
+					return TRUE
 				else if(!isnull(seed.chems[/datum/reagent/drink/milk/soymilk]))
 					to_chat(user, "You roughly chop up \the [src].")
 					new /obj/item/reagent_containers/food/snacks/soydope(get_turf(src))
 					qdel(src)
-					return
+					return TRUE
 				else if(seed.get_trait(TRAIT_FLESH_COLOUR))
 					to_chat(user, "You slice up \the [src].")
 					var/slices = rand(3,5)
@@ -243,8 +242,8 @@
 						var/obj/item/reagent_containers/food/snacks/fruit_slice/F = new(get_turf(src),seed)
 						if(reagents_to_transfer) reagents.trans_to_obj(F,reagents_to_transfer)
 					qdel(src)
-					return
-	..()
+					return TRUE
+	return ..()
 
 /obj/item/reagent_containers/food/snacks/grown/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	. = ..()
@@ -289,7 +288,7 @@
 					continue
 				if(NG.amount>=NG.max_amount)
 					continue
-				NG.attackby(G, user)
+				NG.use_tool(G, user)
 			to_chat(user, "You add the newly-formed grass to the stack. It now contains [G.amount] tiles.")
 		qdel(src)
 		return

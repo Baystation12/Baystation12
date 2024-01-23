@@ -86,10 +86,10 @@
 		owner.empty_stomach()
 		refresh_action_button()
 
-/obj/item/organ/internal/stomach/attackby(obj/item/item, mob/living/user)
+/obj/item/organ/internal/stomach/use_tool(obj/item/item, mob/living/user, list/click_params)
 	if (!is_sharp(item))
 		return ..()
-	. = TRUE
+
 	user.visible_message(
 		SPAN_ITALIC("\The [user] begins cutting into \a [src] with \a [item]."),
 		SPAN_ITALIC("You start to cut open \the [src] with \the [item]."),
@@ -97,9 +97,9 @@
 	)
 	take_internal_damage(5)
 	if (!user.do_skilled(5 SECONDS, SKILL_ANATOMY, src) || QDELETED(src))
-		return
+		return TRUE
 	if (!Adjacent(user) || user.incapacitated())
-		return
+		return TRUE
 	var/removed_message
 	var/length = length(contents)
 	switch (length)
@@ -117,6 +117,7 @@
 	take_internal_damage(5)
 	for (var/atom/movable/movable as anything in contents)
 		movable.dropInto(loc)
+	return TRUE
 
 /obj/item/organ/internal/stomach/return_air()
 	return null

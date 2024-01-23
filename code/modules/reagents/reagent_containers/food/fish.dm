@@ -18,7 +18,7 @@
 	name = "[fish_type] fillet"
 
 
-/obj/item/reagent_containers/food/snacks/fish/attackby(obj/item/item, mob/living/user)
+/obj/item/reagent_containers/food/snacks/fish/use_tool(obj/item/item, mob/living/user, list/click_params)
 	if (istype(item, /obj/item/reagent_containers/syringe) || !item.sharp)
 		return ..()
 	var/turf/turf = get_turf(src)

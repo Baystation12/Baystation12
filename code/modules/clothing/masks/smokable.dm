@@ -140,8 +140,7 @@
 	set_light(0)
 	update_icon()
 
-/obj/item/clothing/mask/smokable/attackby(obj/item/W, mob/user)
-	..()
+/obj/item/clothing/mask/smokable/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if (isFlameOrHeatSource(W))
 		var/text = matchmes
 		if(istype(W, /obj/item/flame/match))
@@ -160,6 +159,7 @@
 		text = replacetext(text, "NAME", "[name]")
 		text = replacetext(text, "FLAME", "[W.name]")
 		light(text)
+	return ..()
 
 /obj/item/clothing/mask/smokable/use_before(mob/living/M, mob/living/user)
 	. = FALSE
@@ -321,15 +321,14 @@
 	icon_state = "woodbutt"
 	matter = list(MATERIAL_WOOD = 1)
 
-/obj/item/clothing/mask/smokable/cigarette/attackby(obj/item/W, mob/user)
-	..()
-
+/obj/item/clothing/mask/smokable/cigarette/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/melee/energy/sword))
 		var/obj/item/melee/energy/sword/S = W
 		if(S.active)
 			light(SPAN_WARNING("[user] swings their [W], barely missing their nose. They light their [name] in the process."))
+			return TRUE
 
-	return
+	return ..()
 
 /obj/item/clothing/mask/smokable/cigarette/use_before(mob/living/carbon/human/H, mob/user)
 	if (lit && H == user && istype(H))
@@ -435,12 +434,11 @@
 	desc = "A manky old cigar butt."
 	icon_state = "cigarbutt"
 
-/obj/item/clothing/mask/smokable/cigarette/cigar/attackby(obj/item/W, mob/user)
-	..()
-
+/obj/item/clothing/mask/smokable/cigarette/cigar/use_tool(obj/item/W, mob/living/user, list/click_params)
 	user.update_inv_wear_mask(0)
 	user.update_inv_l_hand(0)
 	user.update_inv_r_hand(1)
+	return ..()
 
 //Bizarre
 /obj/item/clothing/mask/smokable/cigarette/rolled/sausage
@@ -526,43 +524,54 @@
 		reagents.clear_reagents()
 		SetName("empty [initial(name)]")
 
-/obj/item/clothing/mask/smokable/pipe/attackby(obj/item/W, mob/user)
+/obj/item/clothing/mask/smokable/pipe/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/melee/energy/sword))
-		return
-
-	..()
+		return ..()
 
 	if (istype(W, /obj/item/reagent_containers/food/snacks))
 		var/obj/item/reagent_containers/food/snacks/grown/G = W
 		if (!G.dry)
-			to_chat(user, SPAN_NOTICE("[G] must be dried before you stuff it into [src]."))
-			return
+			to_chat(user, SPAN_WARNING("\The [G] must be dried before you stuff it into \the [src]."))
+			return TRUE
 		if (smoketime)
-			to_chat(user, SPAN_NOTICE("[src] is already packed."))
-			return
+			to_chat(user, SPAN_WARNING("\The [src] is already packed."))
+			return TRUE
 		smoketime = 1000
 		if(G.reagents)
 			G.reagents.trans_to_obj(src, G.reagents.total_volume)
 		SetName("[G.name]-packed [initial(name)]")
 		qdel(G)
+		user.update_inv_wear_mask(0)
+		user.update_inv_l_hand(0)
+		user.update_inv_r_hand(1)
+		return TRUE
 
 	else if(istype(W, /obj/item/flame/lighter))
 		var/obj/item/flame/lighter/L = W
 		if(L.lit)
-			light(SPAN_NOTICE("[user] manages to light their [name] with [W]."))
+			light(SPAN_NOTICE("\The [user] manages to light their \the [name] with \the [W]."))
+			user.update_inv_wear_mask(0)
+			user.update_inv_l_hand(0)
+			user.update_inv_r_hand(1)
+			return TRUE
 
 	else if(istype(W, /obj/item/flame/match))
 		var/obj/item/flame/match/M = W
 		if(M.lit)
-			light(SPAN_NOTICE("[user] lights their [name] with their [W]."))
+			light(SPAN_NOTICE("\The [user] lights their \the [name] with their \the [W]."))
+			user.update_inv_wear_mask(0)
+			user.update_inv_l_hand(0)
+			user.update_inv_r_hand(1)
+			return TRUE
 
 	else if(istype(W, /obj/item/device/assembly/igniter))
-		light(SPAN_NOTICE("[user] fiddles with [W], and manages to light their [name] with the power of science."))
+		light(SPAN_NOTICE("\The [user] fiddles with \the [W], and manages to light their \the [name] with the power of science."))
+		user.update_inv_wear_mask(0)
+		user.update_inv_l_hand(0)
+		user.update_inv_r_hand(1)
+		return TRUE
 
-	user.update_inv_wear_mask(0)
-	user.update_inv_l_hand(0)
-	user.update_inv_r_hand(1)
-
+	return ..()
 
 /obj/item/clothing/mask/smokable/pipe/IsFlameSource()
 	return FALSE

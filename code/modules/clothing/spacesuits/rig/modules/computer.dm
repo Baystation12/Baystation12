@@ -96,7 +96,7 @@
 			return 0
 
 		// Since we've explicitly checked for three types, this should be safe.
-		input_device.attackby(card,user)
+		input_device.use_tool(card,user)
 
 		// If the transfer failed we can delete the card.
 		if(locate(/mob/living/silicon/ai) in card)
@@ -110,7 +110,7 @@
 	if(istype(input_device,/obj/item/aicard))
 		// We are carding the AI in our suit.
 		if(integrated_ai)
-			integrated_ai.attackby(input_device,user)
+			integrated_ai.use_tool(input_device,user)
 			// If the transfer was successful, we can clear out our vars.
 			if(integrated_ai.loc != src)
 				integrated_ai = null
@@ -125,7 +125,7 @@
 	// Okay, it wasn't a terminal being touched, check for all the simple insertions.
 	if(input_device.type in list(/obj/item/device/paicard, /obj/item/device/mmi, /obj/item/organ/internal/posibrain))
 		if(integrated_ai)
-			integrated_ai.attackby(input_device,user)
+			integrated_ai.use_tool(input_device,user)
 			// If the transfer was successful, we can clear out our vars.
 			if(integrated_ai.loc != src)
 				integrated_ai = null

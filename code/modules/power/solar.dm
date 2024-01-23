@@ -221,52 +221,50 @@ var/global/solar_gen_rate = 1500
 		glass_type = null
 
 
-/obj/item/solar_assembly/attackby(obj/item/W, mob/user)
-
+/obj/item/solar_assembly/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(!anchored && isturf(loc))
 		if(isWrench(W))
 			anchored = TRUE
 			pixel_x = 0
 			pixel_y = 0
 			pixel_z = 0
-			user.visible_message(SPAN_NOTICE("[user] wrenches the solar assembly into place."))
+			user.visible_message(SPAN_NOTICE("\The [user] wrenches \the [src] into place."))
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-			return 1
+			return TRUE
 	else
 		if(isWrench(W))
 			anchored = FALSE
-			user.visible_message(SPAN_NOTICE("[user] unwrenches the solar assembly from it's place."))
+			user.visible_message(SPAN_NOTICE("\The [user] unwrenches \the [src] from it's place."))
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-			return 1
+			return TRUE
 
 		if(istype(W, /obj/item/stack/material) && W.get_material_name() == MATERIAL_GLASS)
 			var/obj/item/stack/material/S = W
 			if(S.use(2))
 				glass_type = W.type
 				playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
-				user.visible_message(SPAN_NOTICE("[user] places the glass on the solar assembly."))
+				user.visible_message(SPAN_NOTICE("\The [user] places the glass on \the [src]."))
 				if(tracker)
 					new /obj/machinery/power/tracker(get_turf(src), src)
 				else
 					new /obj/machinery/power/solar(get_turf(src), src)
 			else
 				to_chat(user, SPAN_WARNING("You need two sheets of glass to put them into a solar panel."))
-				return
-			return 1
+			return TRUE
 
 	if(!tracker)
 		if(istype(W, /obj/item/tracker_electronics))
 			tracker = 1
 			qdel(W)
-			user.visible_message(SPAN_NOTICE("[user] inserts the electronics into the solar assembly."))
-			return 1
+			user.visible_message(SPAN_NOTICE("\The [user] inserts the electronics into \the [src]."))
+			return TRUE
 	else
 		if(isCrowbar(W))
-			new /obj/item/tracker_electronics(src.loc)
+			new /obj/item/tracker_electronics(loc)
 			tracker = 0
-			user.visible_message(SPAN_NOTICE("[user] takes out the electronics from the solar assembly."))
-			return 1
-	..()
+			user.visible_message(SPAN_NOTICE("\The [user] takes out the electronics from \the [src]."))
+			return TRUE
+	return ..()
 
 //
 // Solar Control Computer

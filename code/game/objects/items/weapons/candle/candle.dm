@@ -35,10 +35,10 @@
 		if(lit)
 			AddOverlays(overlay_image(icon, "[icon_state]_lit", flags=RESET_COLOR))
 
-/obj/item/flame/candle/attackby(obj/item/W as obj, mob/user as mob)
-	..()
+/obj/item/flame/candle/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if (isFlameOrHeatSource(W))
 		light(user)
+	return ..()
 
 /obj/item/flame/candle/resolve_attackby(atom/A, mob/user)
 	. = ..()

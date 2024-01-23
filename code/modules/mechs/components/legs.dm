@@ -25,12 +25,14 @@
 /obj/item/mech_component/propulsion/update_components()
 	motivator = locate() in src
 
-/obj/item/mech_component/propulsion/attackby(obj/item/thing, mob/user)
+/obj/item/mech_component/propulsion/use_tool(obj/item/thing, mob/living/user, list/click_params)
 	if(istype(thing,/obj/item/robot_parts/robot_component/actuator))
 		if(motivator)
 			to_chat(user, SPAN_WARNING("\The [src] already has an actuator installed."))
-			return
-		if(install_component(thing, user)) motivator = thing
+			return TRUE
+		if(install_component(thing, user))
+			motivator = thing
+			return TRUE
 	else
 		return ..()
 

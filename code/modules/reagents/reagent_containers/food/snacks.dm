@@ -139,13 +139,12 @@
 	else
 		to_chat(user, SPAN_NOTICE("\The [src] was bitten multiple times!"))
 
-/obj/item/reagent_containers/food/snacks/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W,/obj/item/storage))
-		..()// -> item/attackby()
-		return
+		return ..()
 	if(!is_open_container())
-		to_chat(user, SPAN_NOTICE("\The [src] isn't open!"))
-		return 0
+		to_chat(user, SPAN_WARNING("\The [src] isn't open!"))
+		return TRUE
 	// Eating with forks
 	if(istype(W,/obj/item/material/kitchen/utensil))
 		var/obj/item/material/kitchen/utensil/U = W
@@ -154,12 +153,12 @@
 				U.create_reagents(5)
 
 			if (U.reagents.total_volume > 0)
-				to_chat(user, SPAN_WARNING("You already have something on your [U]."))
-				return
+				to_chat(user, SPAN_WARNING("You already have something on \the [U]."))
+				return TRUE
 
-			to_chat(user, SPAN_NOTICE("You scoop up some [src] with \the [U]!"))
+			to_chat(user, SPAN_NOTICE("You scoop up some \the [src] with \the [U]!"))
 
-			src.bitecount++
+			bitecount++
 			U.ClearOverlays()
 			U.loaded = "[src]"
 			var/image/I = new(U.icon, "loadedfood")
@@ -177,7 +176,7 @@
 						trash.dropInto(loc)
 						trash = null
 					qdel(src)
-			return
+			return TRUE
 
 	if (is_sliceable())
 		//these are used to allow hiding edge items in food that is not on a table/tray
@@ -186,19 +185,19 @@
 
 		if (hide_item)
 			if (W.w_class >= src.w_class || is_robot_module(W) || istype(W,/obj/item/reagent_containers/food/condiment))
-				return
+				return ..()
 			if(!user.unEquip(W, src))
-				return
+				FEEDBACK_UNEQUIP_FAILURE(user, W)
+				return TRUE
 
 			to_chat(user, SPAN_WARNING("You slip \the [W] inside \the [src]."))
-			add_fingerprint(user)
 			W.forceMove(src)
-			return
+			return TRUE
 
 		if (has_edge(W))
 			if (!can_slice_here)
 				to_chat(user, SPAN_WARNING("You cannot slice \the [src] here! You need a table or at least a tray to do it."))
-				return
+				return TRUE
 
 			var/slices_lost = 0
 			if (W.w_class > 3)
@@ -220,7 +219,9 @@
 					S.AddOverlays(I)
 
 			qdel(src)
-			return
+			return TRUE
+
+	return ..()
 
 /obj/item/reagent_containers/food/snacks/proc/is_sliceable()
 	return (slices_num && slice_path && slices_num > 0)
@@ -341,19 +342,20 @@
 	..()
 	qdel(src)
 
-/obj/item/reagent_containers/food/snacks/egg/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype( W, /obj/item/pen/crayon ))
+/obj/item/reagent_containers/food/snacks/egg/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if(istype(W, /obj/item/pen/crayon))
 		var/obj/item/pen/crayon/C = W
 		var/clr = C.colourName
 
 		if(!(clr in list("blue","green","mime","orange","purple","rainbow","red","yellow")))
 			to_chat(usr, SPAN_NOTICE("The egg refuses to take on this color!"))
-			return
+			return TRUE
 
 		to_chat(usr, SPAN_NOTICE("You color \the [src] [clr]"))
 		icon_state = "egg-[clr]"
+		return TRUE
 	else
-		..()
+		return ..()
 
 /obj/item/reagent_containers/food/snacks/egg/blue
 	icon_state = "egg-blue"
@@ -2857,11 +2859,11 @@
 
 	update_icon()
 
-/obj/item/pizzabox/attackby( obj/item/I as obj, mob/user as mob )
+/obj/item/pizzabox/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I, /obj/item/pizzabox))
 		var/obj/item/pizzabox/box = I
 
-		if(!box.open && !src.open)
+		if(!box.open && !open)
 			// make a list of all boxes to be added
 			var/list/boxestoadd = list()
 			boxestoadd += box
@@ -2870,10 +2872,10 @@
 
 			if((length(boxes)+1) + length(boxestoadd) <= 5)
 				if(!user.unEquip(box, src))
-					return
+					FEEDBACK_UNEQUIP_FAILURE(user, box)
+					return TRUE
 				box.boxes = list()// clear the box boxes so we don't have boxes inside boxes. - Xzibit
-				src.boxes.Add( boxestoadd )
-
+				boxes.Add( boxestoadd )
 				box.update_icon()
 				update_icon()
 
@@ -2882,14 +2884,14 @@
 				to_chat(user, SPAN_WARNING("The stack is too high!"))
 		else
 			to_chat(user, SPAN_WARNING("Close \the [box] first!"))
+		return TRUE
 
-		return
-
-	if(istype(I, /obj/item/reagent_containers/food/snacks/sliceable/pizza) || istype(I, /obj/item/reagent_containers/food/snacks/sliceable/variable/pizza))
-		if(open)
+	if (istype(I, /obj/item/reagent_containers/food/snacks/sliceable/pizza) || istype(I, /obj/item/reagent_containers/food/snacks/sliceable/variable/pizza))
+		if (open)
 			if (!pizza)
 				if(!user.unEquip(I, src))
-					return
+					FEEDBACK_UNEQUIP_FAILURE(user, I)
+					return TRUE
 				pizza = I
 				update_icon()
 				to_chat(user, SPAN_WARNING("You put \the [I] in \the [src]!"))
@@ -2897,12 +2899,13 @@
 				to_chat(user, SPAN_WARNING("There is already \a [pizza] in \the [src]!"))
 		else
 			to_chat(user, SPAN_WARNING("You try to push \the [I] through the lid but it doesn't work!"))
-		return
+		return TRUE
 
-	if( istype(I, /obj/item/pen) )
+	if (istype(I, /obj/item/pen))
 
-		if( src.open )
-			return
+		if (open)
+			USE_FEEDBACK_FAILURE("You need to close \the [src].")
+			return TRUE
 
 		var/t = sanitize(input("Enter what you want to add to the tag:", "Write", null, null) as text, 30)
 
@@ -2913,8 +2916,9 @@
 		boxtotagto.boxtag = copytext("[boxtotagto.boxtag][t]", 1, 30)
 
 		update_icon()
-		return
-	..()
+		return TRUE
+
+	return ..()
 
 /obj/item/pizzabox/margherita/Initialize()
 	. = ..()
@@ -2980,11 +2984,13 @@
 //	reagents.add_reagent(/datum/reagent/nutriment/protein, 1)
 
 // Dough + rolling pin = flat dough
-/obj/item/reagent_containers/food/snacks/dough/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/dough/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W,/obj/item/material/kitchen/rollingpin))
 		new /obj/item/reagent_containers/food/snacks/sliceable/flatdough(src)
-		to_chat(user, "You flatten the dough.")
+		to_chat(user, SPAN_NOTICE("You flatten the dough."))
 		qdel(src)
+		return TRUE
+	return ..()
 
 // slicable into 3x doughslices
 /obj/item/reagent_containers/food/snacks/sliceable/flatdough
@@ -3231,13 +3237,14 @@
 	nutriment_amt = 3
 
 // potato + knife = raw sticks
-/obj/item/reagent_containers/food/snacks/grown/potato/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/grown/potato/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W,/obj/item/material/knife))
 		new /obj/item/reagent_containers/food/snacks/rawsticks(src)
-		to_chat(user, "You cut the potato.")
+		to_chat(user, SPAN_NOTICE("You cut the potato."))
 		qdel(src)
+		return TRUE
 	else
-		..()
+		return ..()
 
 /obj/item/reagent_containers/food/snacks/rawsticks
 	name = "raw potato sticks"

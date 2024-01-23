@@ -23,20 +23,18 @@
 				4 = Screwdriver panel closed and is fully built (you cannot attach upgrades)
 	*/
 
-/obj/item/camera_assembly/attackby(obj/item/W as obj, mob/living/user as mob)
-
+/obj/item/camera_assembly/use_tool(obj/item/W, mob/living/user, list/click_params)
 	switch(state)
-
 		if(0)
 			// State 0
-			if(isWrench(W) && isturf(src.loc))
+			if(isWrench(W) && isturf(loc))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 				to_chat(user, "You wrench the assembly into place.")
 				anchored = TRUE
 				state = 1
 				update_icon()
 				auto_turn()
-				return
+				return TRUE
 
 		if(1)
 			// State 1
@@ -45,7 +43,7 @@
 					to_chat(user, "You weld the assembly securely into place.")
 					anchored = TRUE
 					state = 2
-				return
+				return TRUE
 
 			else if(isWrench(W))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
@@ -53,7 +51,7 @@
 				anchored = FALSE
 				update_icon()
 				state = 0
-				return
+				return TRUE
 
 		if(2)
 			// State 2
@@ -64,16 +62,14 @@
 					state = 3
 				else
 					to_chat(user, SPAN_WARNING("You need 2 coils of wire to wire the assembly."))
-				return
+				return TRUE
 
 			else if(isWelder(W))
-
 				if(weld(W, user))
 					to_chat(user, "You unweld the assembly from its place.")
 					state = 1
 					anchored = TRUE
-				return
-
+				return TRUE
 
 		if(3)
 			// State 3
@@ -83,12 +79,12 @@
 				var/input = sanitize(input(usr, "Which networks would you like to connect this camera to? Separate networks with a comma. No Spaces!\nFor example: Exodus,Security,Secret", "Set Network", camera_network ? camera_network : NETWORK_EXODUS))
 				if(!input)
 					to_chat(usr, "No input found please hang up and try your call again.")
-					return
+					return TRUE
 
 				var/list/tempnetwork = splittext(input, ",")
 				if(length(tempnetwork) < 1)
 					to_chat(usr, "No network found please hang up and try your call again.")
-					return
+					return TRUE
 
 				var/area/camera_area = get_area(src)
 				var/temptag = "[sanitize(camera_area.name)] ([rand(1, 999)])"
@@ -114,33 +110,32 @@
 						if(confirm == "Yes")
 							C.update_icon()
 							break
-				return
+				return TRUE
 
 			else if(isWirecutter(W))
-
 				new/obj/item/stack/cable_coil(get_turf(src), 2)
 				playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 				to_chat(user, "You cut the wires from the circuits.")
 				state = 2
-				return
+				return TRUE
 
 	// Upgrades!
 	if(is_type_in_list(W, possible_upgrades) && !is_type_in_list(W, upgrades) && user.unEquip(W, src)) // Is a possible upgrade and isn't in the camera already.
 		to_chat(user, "You attach \the [W] into the assembly inner circuits.")
 		upgrades += W
-		return
+		return TRUE
 
 	// Taking out upgrades
-	else if(isCrowbar(W) && length(upgrades))
+	if (isCrowbar(W) && length(upgrades))
 		var/obj/U = locate(/obj) in upgrades
 		if(U)
 			to_chat(user, "You unattach an upgrade from the assembly.")
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 			U.dropInto(loc)
 			upgrades -= U
-		return
+		return TRUE
 
-	..()
+	return ..()
 
 /obj/item/camera_assembly/on_update_icon()
 	if(anchored)

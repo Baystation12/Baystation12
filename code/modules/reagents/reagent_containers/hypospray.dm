@@ -117,13 +117,14 @@
 		return
 	return ..()
 
-/obj/item/reagent_containers/hypospray/vial/attackby(obj/item/W, mob/user)
+/obj/item/reagent_containers/hypospray/vial/use_tool(obj/item/W, mob/living/user, list/click_params)
 	var/usermessage = ""
 	if(istype(W, /obj/item/reagent_containers/glass/beaker/vial))
 		if(!do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE) || !(W in user))
-			return 0
+			return TRUE
 		if(!user.unEquip(W, src))
-			return
+			FEEDBACK_UNEQUIP_FAILURE(user, W)
+			return TRUE
 		if(loaded_vial)
 			remove_vial(user, "swap")
 			usermessage = "You load \the [W] into \the [src] as you remove the old one."
@@ -138,8 +139,8 @@
 		user.visible_message(SPAN_NOTICE("[user] has loaded [W] into \the [src]."),SPAN_NOTICE("[usermessage]"))
 		update_icon()
 		playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
-		return
-	..()
+		return TRUE
+	return ..()
 
 /obj/item/reagent_containers/hypospray/vial/use_after(obj/target, mob/living/user, click_parameters) // hyposprays can be dumped into, why not out? uses standard_pour_into helper checks.
 	if (!reagents.total_volume && istype(target, /obj/item/reagent_containers/glass))

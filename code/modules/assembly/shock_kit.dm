@@ -14,7 +14,7 @@
 	..()
 	return
 
-/obj/item/assembly/shock_kit/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/assembly/shock_kit/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isWrench(W) && !status)
 		part1.dropInto(loc)
 		part2.dropInto(loc)
@@ -23,12 +23,12 @@
 		part1 = null
 		part2 = null
 		qdel(src)
-		return
+		return TRUE
 	if(isScrewdriver(W))
 		status = !status
 		to_chat(user, SPAN_NOTICE("[src] is now [status ? "secured" : "unsecured"]!"))
-	add_fingerprint(user)
-	return
+		return TRUE
+	return ..()
 
 /obj/item/assembly/shock_kit/attack_self(mob/user as mob)
 	part1.attack_self(user, status)

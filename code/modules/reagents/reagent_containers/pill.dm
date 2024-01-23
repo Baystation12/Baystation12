@@ -398,7 +398,7 @@
 
 // Chopping up pills
 
-/obj/item/reagent_containers/pill/attackby(obj/item/W, mob/user)
+/obj/item/reagent_containers/pill/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(is_sharp(W) || istype(W, /obj/item/card/id))
 		user.visible_message(
 			SPAN_WARNING("\The [user] starts to gently cut up \the [src] with \a [W]!"),
@@ -420,5 +420,6 @@
 			reagents.trans_to_obj(J, reagents.total_volume)
 		J.get_appearance()
 		qdel(src)
+		return TRUE
 
 	return ..()

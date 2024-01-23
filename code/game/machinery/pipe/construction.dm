@@ -129,11 +129,9 @@ Buildable meters
 		P.node4.build_network()
 	return 0
 
-/obj/item/pipe/attackby(obj/item/W as obj, mob/user as mob)
-	if(!isWrench(W))
+/obj/item/pipe/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if(!isWrench(W) || !isturf(loc))
 		return ..()
-	if (!isturf(loc))
-		return 1
 
 	sanitize_dir()
 	var/obj/machinery/atmospherics/fake_machine = constructed_path
@@ -142,7 +140,7 @@ Buildable meters
 	for(var/obj/machinery/atmospherics/M in loc)
 		if((M.initialize_directions & pipe_dir) && M.check_connect_types_construction(M,src))	// matches at least one direction on either type of pipe & same connection type
 			to_chat(user, SPAN_WARNING("There is already a pipe of the same type at this location."))
-			return 1
+			return TRUE
 	// no conflicts found
 
 	var/pipefailtext = SPAN_WARNING("There's nothing to connect this pipe section to!") //(with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
@@ -158,19 +156,19 @@ Buildable meters
 
 	if(P.pipe_class == PIPE_CLASS_UNARY)
 		if(build_unary(P, pipefailtext))
-			return 1
+			return TRUE
 
 	if(P.pipe_class == PIPE_CLASS_BINARY)
 		if(build_binary(P, pipefailtext))
-			return 1
+			return TRUE
 
 	if(P.pipe_class == PIPE_CLASS_TRINARY)
 		if(build_trinary(P, pipefailtext))
-			return 1
+			return TRUE
 
 	if(P.pipe_class == PIPE_CLASS_QUATERNARY)
 		if(build_quaternary(P, pipefailtext))
-			return 1
+			return TRUE
 
 	if(P.pipe_class == PIPE_CLASS_OMNI)
 		P.atmos_init()
@@ -182,6 +180,7 @@ Buildable meters
 		SPAN_NOTICE("You have fastened the [src]."), \
 		"You hear ratchet.")
 	qdel(src)	// remove the pipe item
+	return TRUE
 
 /obj/item/pipe/injector
 	name = "injector"
@@ -210,17 +209,19 @@ Buildable meters
 /obj/item/machine_chassis
 	var/build_type
 
-/obj/item/machine_chassis/attackby(obj/item/W, mob/user)
-	if(!isWrench(W))
-		return ..()
-	var/obj/machinery/machine = new build_type(get_turf(src), dir, FALSE)
-	machine.apply_component_presets()
-	machine.RefreshParts()
-	if(machine.construct_state)
-		machine.construct_state.post_construct(machine)
-	playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-	to_chat(user, SPAN_NOTICE("You have fastened the [src]."))
-	qdel(src)
+/obj/item/machine_chassis/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if(isWrench(W))
+		var/obj/machinery/machine = new build_type(get_turf(src), dir, FALSE)
+		machine.apply_component_presets()
+		machine.RefreshParts()
+		if(machine.construct_state)
+			machine.construct_state.post_construct(machine)
+		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+		to_chat(user, SPAN_NOTICE("You have fastened the [src]."))
+		qdel(src)
+		return TRUE
+
+	return ..()
 
 /obj/item/machine_chassis/air_sensor
 	name = "gas sensor"

@@ -298,9 +298,10 @@
 /obj/item/grab/proc/force_stand()
 	return current_grab.force_stand
 
-/obj/item/grab/attackby(obj/W, mob/user)
+/obj/item/grab/use_tool(obj/item/item, mob/living/user, list/click_params)
 	if(user == assailant)
-		current_grab.item_attack(src, W)
+		current_grab.item_attack(src, item)
+	return ..()
 
 /obj/item/grab/proc/can_absorb()
 	return current_grab.can_absorb

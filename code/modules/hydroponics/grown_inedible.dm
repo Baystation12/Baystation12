@@ -24,8 +24,7 @@
 	var/carve_time = 5 SECONDS
 	var/result_type = null
 
-/obj/item/carvable/attackby(obj/item/W, mob/user)
-	..()
+/obj/item/carvable/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if (result_type && is_type_in_list(W, allow_tool_types))
 		user.visible_message(
 			SPAN_ITALIC("\The [user] starts to carve \the [src] with \a [W]."),
@@ -34,7 +33,7 @@
 		)
 		if (!do_after(user, carve_time, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, SPAN_ITALIC("You stop carving \the [src]."))
-			return
+			return TRUE
 		var/result = new result_type()
 		user.put_in_hands(result)
 		user.visible_message(
@@ -42,6 +41,9 @@
 			range = 5
 		)
 		qdel(src)
+		return TRUE
+
+	return ..()
 
 /obj/item/carvable/corncob
 	name = "corn cob"

@@ -550,11 +550,11 @@
 	drill_head = DH
 
 
-/obj/item/mech_equipment/drill/attackby(obj/item/I, mob/user)
+/obj/item/mech_equipment/drill/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if (istype(I, /obj/item/material/drill_head))
 		attach_head(I, user)
 		return TRUE
-	. = ..()
+	return ..()
 
 /obj/item/mech_equipment/drill/proc/scoop_ore(at_turf)
 	if (!owner)
@@ -886,9 +886,7 @@
 	passive_power_use = 0
 	. = ..()
 
-/obj/item/mech_equipment/camera/attackby(obj/item/W, mob/user)
-	. = ..()
-
+/obj/item/mech_equipment/camera/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isScrewdriver(W))
 		var/list/all_networks = list()
 		for(var/network in GLOB.using_map.station_networks)
@@ -900,11 +898,15 @@
 		var/network = input("Which network would you like to configure it for?") as null|anything in (all_networks)
 		if(!network)
 			to_chat(user, SPAN_WARNING("You cannot connect to any camera network!."))
+			return TRUE
 		var/delay = 2 SECONDS * user.skill_delay_mult(SKILL_DEVICES)
 		if(do_after(user, delay, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT) && network)
 			camera.network = list(network)
 			camera.update_coverage(TRUE)
 			to_chat(user, SPAN_NOTICE("You configure the camera for \the [network] network."))
+		return TRUE
+
+	return ..()
 
 /obj/item/mech_equipment/camera/attack_self(mob/user)
 	. = ..()
