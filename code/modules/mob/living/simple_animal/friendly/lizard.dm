@@ -14,7 +14,7 @@
 	response_harm   = "stomps on"
 	holder_type = /obj/item/holder/small
 	mob_size = MOB_MINISCULE
-	possession_candidate = 1
+	possession_candidate = TRUE
 	can_escape = TRUE
 	pass_flags = PASS_FLAG_TABLE
 	density = FALSE

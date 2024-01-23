@@ -11,6 +11,9 @@
 	var/buckle_sound = 'sound/effects/buckle.ogg'
 	var/breakout_time
 
+	///Verb used when the object is punched. If defined, overrides the punch's usual verb
+	var/attacked_verb
+
 	/**
 	*  A list of (x, y, z) to offset buckled_mob by, or null.
 	*  Best assigned to reference a static list, eg:

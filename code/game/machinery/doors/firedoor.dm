@@ -144,13 +144,15 @@
 	return FALSE
 
 /obj/machinery/door/firedoor/attack_hand(mob/user)
-	add_fingerprint(user)
+	if ((. = ..()))
+		return
 	if(operating)
 		return//Already doing something.
 
 	if(blocked)
 		to_chat(user, SPAN_WARNING("\The [src] is welded shut!"))
 		return
+
 	if(density && (inoperable())) //can still close without power
 		to_chat(user, "\The [src] is not functioning - you'll have to force it open manually.")
 		return

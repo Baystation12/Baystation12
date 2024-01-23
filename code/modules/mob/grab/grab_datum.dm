@@ -306,6 +306,8 @@
 	if(shock >= 50)
 		break_strength--
 
+	if((MUTATION_FERAL in affecting.mutations))
+		break_strength++
 	if(assailant.is_confused())
 		break_strength++
 	if(assailant.eye_blind)

@@ -12,7 +12,7 @@
 	response_disarm = "gently pushes aside"
 	response_harm = "stomps"
 	friendly = "pinches"
-	possession_candidate = 1
+	possession_candidate = TRUE
 	can_escape = TRUE //snip snip
 	pass_flags = PASS_FLAG_TABLE
 	natural_armor = list(

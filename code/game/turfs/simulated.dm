@@ -166,6 +166,45 @@
 		return TRUE
 	return ..()
 
+/turf/simulated/attack_hand(mob/living/user)
+	. = ..()
+
+	if (Adjacent(user))
+		add_fingerprint(user)
+
+	if (!get_max_health() || !ishuman(user) || user.a_intent != I_HURT)
+		return
+
+	var/mob/living/carbon/human/assailant = user
+	var/datum/unarmed_attack/attack = assailant.get_unarmed_attack(src)
+	if (!attack)
+		return
+	assailant.do_attack_animation(src)
+	assailant.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	var/damage = attack.damage + rand(1,5)
+	var/attack_verb = "[pick(attack.attack_verb)]"
+
+	if (MUTATION_FERAL in user.mutations)
+		attack_verb = "smashes"
+		damage = 15
+
+	playsound(src, damage_hitsound, 25, TRUE, -1)
+	if (!can_damage_health(damage, attack.get_damage_type()))
+		user.visible_message(
+			SPAN_WARNING("\The [user] [attack_verb] \the [src], but doesn't even leave a dent!"),
+			SPAN_WARNING("You [attack_verb] \the [src], but cause no visible damage and hurt yourself!")
+		)
+		if (!(MUTATION_FERAL in user.mutations))
+			user.apply_damage(3, DAMAGE_BRUTE, user.hand ? BP_L_HAND : BP_R_HAND)
+		return TRUE
+
+	assailant.visible_message(
+			SPAN_WARNING("\The [assailant] [attack_verb] \the [src]!"),
+			SPAN_WARNING("You [attack_verb] \the [src]!")
+			)
+	damage_health(damage, attack.get_damage_type(), attack.damage_flags())
+	return TRUE
+
 /turf/simulated/Initialize()
 	if(GAME_STATE >= RUNLEVEL_GAME)
 		fluid_update()

@@ -1657,17 +1657,19 @@
 		affecting = organs_by_name[BP_GROIN]
 
 	if(affecting && BP_IS_ROBOTIC(affecting))
-		return 0
+		return FALSE
 	return (species && species.has_organ[organ_check])
 
 /mob/living/carbon/human/can_feel_pain(obj/item/organ/check_organ)
 	if(isSynthetic())
-		return 0
+		return FALSE
+	if (species.species_flags & SPECIES_FLAG_NO_PAIN)
+		return FALSE
 	if(check_organ)
 		if(!istype(check_organ))
-			return 0
+			return FALSE
 		return check_organ.can_feel_pain()
-	return !(species.species_flags & SPECIES_FLAG_NO_PAIN)
+	return TRUE
 
 /mob/living/carbon/human/get_breath_volume()
 	. = ..()

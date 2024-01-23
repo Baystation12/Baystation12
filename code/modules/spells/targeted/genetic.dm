@@ -1,9 +1,3 @@
-/*
-Other mutation or disability spells can be found in
-code\game\dna\genes\vg_powers.dm //hulk is in this file
-code\game\dna\genes\goon_disabilities.dm
-code\game\dna\genes\goon_powers.dm
-*/
 /spell/targeted/genetic
 	name = "Genetic modifier"
 	desc = "This spell inflicts a set of mutations and disabilities upon the target."
@@ -62,7 +56,7 @@ code\game\dna\genes\goon_powers.dm
 
 /spell/targeted/genetic/mutate
 	name = "Mutate"
-	desc = "This spell causes you to turn into a hulk and gain laser vision for a short while."
+	desc = "This spell causes you to turn feral and gain laser vision for a short while."
 	feedback = "MU"
 	school = "transmutation"
 	charge_max = 400
@@ -73,7 +67,7 @@ code\game\dna\genes\goon_powers.dm
 	range = 0
 	max_targets = 1
 
-	mutations = list(MUTATION_LASER, MUTATION_HULK)
+	mutations = list(MUTATION_LASER, MUTATION_FERAL)
 	duration = 300
 
 	level_max = list(Sp_TOTAL = 1, Sp_SPEED = 1, Sp_POWER = 0)

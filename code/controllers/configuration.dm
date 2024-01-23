@@ -352,6 +352,8 @@
 
 	var/static/ghosts_can_possess_animals = FALSE
 
+	var/static/ghosts_can_possess_zombies = TRUE
+
 	var/static/delist_when_no_admins = FALSE
 
 	/// Whether map switching is allowed

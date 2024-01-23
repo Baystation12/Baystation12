@@ -533,8 +533,8 @@
 				eject(pilot, silent=1)
 		else if(hatch_closed)
 			if(MUTATION_FERAL in user.mutations)
-				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-				attack_generic(user, 5)
+				attack_generic(user, 5, "slams")
+				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2)
 		return
 
 	// Otherwise toggle the hatch.

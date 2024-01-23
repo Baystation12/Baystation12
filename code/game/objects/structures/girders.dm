@@ -307,13 +307,6 @@
 	new /obj/item/stack/material/steel(get_turf(src))
 	qdel(src)
 
-/obj/structure/girder/attack_hand(mob/user as mob)
-	if (MUTATION_HULK in user.mutations)
-		visible_message(SPAN_DANGER("[user] smashes [src] apart!"))
-		dismantle()
-		return
-	return ..()
-
 /obj/structure/girder/cult
 	icon= 'icons/obj/cult.dmi'
 	icon_state= "cultgirder"

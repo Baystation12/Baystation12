@@ -6,6 +6,13 @@
 /datum/dna/gene/basic/nobreath/New()
 	block = GLOB.NOBREATHBLOCK
 
+/datum/dna/gene/basic/feral
+	name = "Feral"
+	activation_messages = list("You feel feral.")
+	mutation = MUTATION_FERAL
+
+/datum/dna/gene/basic/feral/New()
+	block = GLOB.FERALBLOCK
 
 /datum/dna/gene/basic/remoteview
 	name = "Remote Viewing"
@@ -122,12 +129,6 @@
 	block = GLOB.SMALLSIZEBLOCK
 
 
-/datum/dna/gene/basic/midget/can_activate(mob/M,flags)
-	if(MUTATION_HULK in M.mutations)
-		return FALSE
-	return ..(M,flags)
-
-
 /datum/dna/gene/basic/midget/activate(mob/M, connected, flags)
 	..(M,connected, flags)
 	M.pass_flags |= PASS_FLAG_TABLE
@@ -136,38 +137,6 @@
 /datum/dna/gene/basic/midget/deactivate(mob/M, connected, flags)
 	..(M,connected, flags)
 	M.pass_flags &= ~PASS_FLAG_TABLE
-
-
-/datum/dna/gene/basic/hulk
-	name = "Hulk"
-	activation_messages = list("Your muscles hurt.")
-	mutation = MUTATION_HULK
-
-
-/datum/dna/gene/basic/hulk/New()
-	block = GLOB.HULKBLOCK
-
-
-/datum/dna/gene/basic/hulk/can_activate(mob/M, flags)
-	if (mSmallsize in M.mutations)
-		return FALSE
-	return ..(M, flags)
-
-
-/datum/dna/gene/basic/hulk/OnDrawUnderlays(mob/M, g, fat)
-	return "hulk_[fat ? fat : g]_s"
-
-
-/datum/dna/gene/basic/hulk/OnMobLife(mob/living/carbon/human/M)
-	if(!istype(M))
-		return
-	if (M.health > 25)
-		return
-	M.mutations.Remove(MUTATION_HULK)
-	M.update_mutations()
-	to_chat(M, SPAN_WARNING("You suddenly feel very weak."))
-	M.emote("collapse")
-	M.Weaken(3)
 
 
 /datum/dna/gene/basic/xray

@@ -227,14 +227,15 @@
 		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
 		if (user.hand)
 			temp = H.organs_by_name[BP_L_HAND]
-		if(MUTATION_FERAL in user.mutations)
-			return
+		if((MUTATION_FERAL in user.mutations) && (MUTATION_CLUMSY in user.mutations))
+			to_chat(user, SPAN_WARNING("You don't have the dexterity to pick up \the [src]!"))
+			return TRUE
 		if(temp && !temp.is_usable())
 			to_chat(user, SPAN_NOTICE("You try to move your [temp.name], but cannot!"))
-			return
+			return TRUE
 		if(!temp)
 			to_chat(user, SPAN_NOTICE("You try to use your hand, but realize it is no longer attached!"))
-			return
+			return TRUE
 
 	var/old_loc = loc
 

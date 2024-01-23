@@ -38,8 +38,8 @@
 		charges--
 		insisting = 0
 
-		if (!(MUTATION_HULK in user.mutations))
-			user.mutations.Add(MUTATION_HULK)
+		if (!(MUTATION_FERAL in user.mutations))
+			user.mutations.Add(MUTATION_FERAL)
 
 		if (!(MUTATION_LASER in user.mutations))
 			user.mutations.Add(MUTATION_LASER)

@@ -36,8 +36,6 @@
 		if(ishuman(M))
 			if(M.get_sound_volume_multiplier() < 0.2)
 				ear_safety += 2
-			if(MUTATION_HULK in M.mutations)
-				ear_safety += 1
 			var/mob/living/carbon/human/H = M
 			if(istype(H.head, /obj/item/clothing/head/helmet))
 				ear_safety += 1
