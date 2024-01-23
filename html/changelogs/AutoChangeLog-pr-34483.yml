@@ -1,0 +1,4 @@
+author: Sbotkin
+changes:
+  - {tweak: NTNet IDs are randomized on the mapped NTNet devices.}
+delete-after: true
