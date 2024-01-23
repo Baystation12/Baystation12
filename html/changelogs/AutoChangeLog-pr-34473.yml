@@ -1,5 +1,0 @@
-author: Mucker
-changes:
-  - {bugfix: Fixed projector slides requiring you to be next to them to properly examine
-      what they're projecting.}
-delete-after: true
