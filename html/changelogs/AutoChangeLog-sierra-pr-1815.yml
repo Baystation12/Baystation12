@@ -1,0 +1,5 @@
+author: LordNest
+changes:
+  - {tweak: Сделал новые эмоуты (портировал с Пары) ящерам}
+  - {soundadd: Портировал звуки Нелли для ящеров}
+delete-after: true
