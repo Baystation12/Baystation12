@@ -2,6 +2,7 @@
 #### Список PRов:
 
 - https://github.com/SierraBay/SierraBay12/pull/1087
+- https://github.com/SierraBay/SierraBay12/pull/1815
 <!--
   Ссылки на PRы, связанные с модом:
   - Создание
@@ -69,7 +70,7 @@ ID мода: EMOTE_PANEL
 
 ### Авторы:
 
-SuhEugene
+SuhEugene, LordNest
 <!--
   Здесь находится твой никнейм
   Если работал совместно - никнеймы тех, кто помогал.

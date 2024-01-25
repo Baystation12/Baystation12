@@ -96,9 +96,12 @@ Used for quick dress-up. Also comes with several discount
 
 /obj/structure/closet/crate/mercenary/bioterror/WillContain()
 	return list(
+		/obj/item/clothing/suit/armor/pcarrier/merc,
+		/obj/item/clothing/head/helmet/merc,
 		/obj/item/clothing/mask/gas/syndicate,
 		/obj/item/tank/oxygen_emergency_double,
 		/obj/item/reagent_containers/spray/chemsprayer/bioterror,
+		/obj/item/reagent_containers/glass/beaker/insulated/large/bioterror = 3,
 		/obj/item/grenade/chem_grenade/bioterror,
 		/obj/item/gun/projectile/pistol/optimus
 		)
@@ -226,13 +229,10 @@ Used for quick dress-up. Also comes with several discount
 	. = ..()
 	reagents.add_reagent(/datum/reagent/napalm, 120)
 
-// Bioterror Chem sprayer
 
-/obj/item/reagent_containers/spray/chemsprayer/bioterror
-	name = "bioterror chem sprayer"
-	desc = "This chem sprayer is filled with mix, that will melt, mutate and irradiate everything."
+/obj/item/reagent_containers/glass/beaker/insulated/large/bioterror
 
-/obj/item/reagent_containers/spray/chemsprayer/bioterror/Initialize()
+/obj/item/reagent_containers/glass/beaker/insulated/large/bioterror/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drugs/hextro, volume / 10)
 	reagents.add_reagent(/datum/reagent/drugs/mindbreaker, volume / 10)
@@ -244,6 +244,25 @@ Used for quick dress-up. Also comes with several discount
 	reagents.add_reagent(/datum/reagent/toxin/potassium_chlorophoride, volume / 10)
 	reagents.add_reagent(/datum/reagent/acid/polyacid, volume / 10)
 	reagents.add_reagent(/datum/reagent/radium, volume / 10)
+
+// Bioterror Chem sprayer
+
+/obj/item/reagent_containers/spray/chemsprayer/bioterror
+	name = "bioterror chem sprayer"
+	desc = "This chem sprayer is filled with mix, that will melt, mutate and irradiate everything."
+
+/obj/item/reagent_containers/spray/chemsprayer/bioterror/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drugs/hextro, volume / 60)
+	reagents.add_reagent(/datum/reagent/drugs/mindbreaker, volume / 60)
+	reagents.add_reagent(/datum/reagent/toxin/carpotoxin, volume / 60)
+	reagents.add_reagent(/datum/reagent/mutagen, volume / 60)
+	reagents.add_reagent(/datum/reagent/toxin/amatoxin, volume / 60)
+	reagents.add_reagent(/datum/reagent/toxin/phoron, volume / 60)
+	reagents.add_reagent(/datum/reagent/impedrezene, volume / 60)
+	reagents.add_reagent(/datum/reagent/toxin/potassium_chlorophoride, volume / 60)
+	reagents.add_reagent(/datum/reagent/acid/polyacid, volume / 60)
+	reagents.add_reagent(/datum/reagent/radium, volume / 60)
 
 // Grenades
 

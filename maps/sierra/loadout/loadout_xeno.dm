@@ -27,3 +27,10 @@
 
 /datum/gear/suit/lab_xyn_machine
 	allowed_branches = list(/datum/mil_branch/contractor)
+
+/datum/gear/gloves/nabber
+	display_name = "(GAS) Three-fingered insulated gloves"
+	path = /obj/item/clothing/gloves/nabber
+	sort_category = "Xenowear"
+	whitelisted = list(SPECIES_NABBER)
+	cost = 3

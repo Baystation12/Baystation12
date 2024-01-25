@@ -5,10 +5,7 @@
 /datum/gear/accessory/pilot_pin
 	display_name = "pilot's qualification pin"
 	path = /obj/item/clothing/accessory/solgov/specialty/pilot
-	// [INF]
-	// allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/adjutant, /datum/job/exploration_leader, /datum/job/explorer_pilot)
 	allowed_skills = list(SKILL_PILOT = SKILL_EXPERIENCED)
-	// [INF/] by hacso
 
 /datum/gear/accessory/armband_security
 	allowed_roles = SECURITY_ROLES
@@ -57,6 +54,18 @@
 	path = /obj/item/passport/independent
 	flags = GEAR_HAS_SUBTYPE_SELECTION
 	custom_setup_proc = /obj/item/passport/proc/set_info
+	cost = 0
+
+/datum/gear/workvisa
+	display_name = "work visa"
+	description = "A work visa issued by the Sol Central Government for the purpose of work."
+	path = /obj/item/paper/workvisa
+	cost = 0
+
+/datum/gear/travelvisa
+	display_name = "travel visa"
+	description = "A travel visa issued by the Sol Central Government for the purpose of recreation."
+	path = /obj/item/paper/travelvisa
 	cost = 0
 
 /datum/gear/utility/holster_belt
