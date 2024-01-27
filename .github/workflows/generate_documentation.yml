@@ -19,7 +19,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - name: paths-filter
-        uses: dorny/paths-filter@4512585405083f25c027a35db413c2b3b9006d50
+        uses: dorny/paths-filter@0bc4621a3135347011ad047f9ecf449bf72ce2bd
         id: filter
         with:
           filters: .github/workflow-config/preflight-filters.yml
