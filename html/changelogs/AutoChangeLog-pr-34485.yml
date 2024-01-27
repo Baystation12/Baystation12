@@ -1,0 +1,4 @@
+author: Sbotkin
+changes:
+  - {maptweak: The "Status of the Fleets" is moved to the Bridge storage.}
+delete-after: true
