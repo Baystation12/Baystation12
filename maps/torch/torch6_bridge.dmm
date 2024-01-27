@@ -2201,7 +2201,6 @@
 /obj/floor_decal/corner/blue{
 	dir = 10
 	},
-/obj/item/folder/envelope/declassified1,
 /obj/machinery/camera/network/bridge{
 	c_tag = "Bridge";
 	dir = 1
@@ -11492,6 +11491,7 @@
 /obj/item/folder/yellow,
 /obj/item/folder/white,
 /obj/floor_decal/industrial/outline/yellow,
+/obj/item/paper/dclassreport1,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "Hg" = (
