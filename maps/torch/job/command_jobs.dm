@@ -202,15 +202,14 @@
 		/datum/mil_rank/fleet/o3
 	)
 	skill_points = 36
-	min_skill = list( // 35 points
+	min_skill = list( // 31 points
 		SKILL_BUREAUCRACY  = SKILL_BASIC, // 1 point
 		SKILL_COMPUTER = SKILL_TRAINED, // 2 points
 		SKILL_EVA = SKILL_TRAINED, // 2 points
 		SKILL_CONSTRUCTION = SKILL_TRAINED, // 2 points
 		SKILL_ELECTRICAL = SKILL_TRAINED, // 4 points
 		SKILL_ATMOS = SKILL_TRAINED, // 4 points
-		SKILL_ENGINES = SKILL_EXPERIENCED, // 16 points
-		SKILL_DEVICES = SKILL_TRAINED // 4 points
+		SKILL_ENGINES = SKILL_EXPERIENCED // 16 points
 	)
 
 	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
