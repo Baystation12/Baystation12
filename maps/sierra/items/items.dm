@@ -453,6 +453,34 @@ Passports
 	icon_state = "gangtool-white"
 	region_access = ACCESS_REGION_GENERAL
 
+// Overrides
+
+/obj/item/melee/baton
+	icon = 'maps/sierra/icons/obj/baton.dmi'
+	icon_state = "stunbaton"
+	item_state = "baton"
+	item_icons = list(
+		slot_r_hand_str = 'maps/sierra/icons/mob/onmob/item/righthand.dmi',
+		slot_l_hand_str = 'maps/sierra/icons/mob/onmob/item/lefthand.dmi',
+		)
+
+/obj/item/melee/baton/on_update_icon()
+	if(status)
+		icon_state = "[initial(icon_state)]_active"
+		item_state = "[initial(item_state)]_active"
+	else if(!bcell)
+		icon_state = "[initial(icon_state)]_nocell"
+		item_state = "[initial(item_state)]"
+	else
+		icon_state = "[initial(icon_state)]"
+		item_state = "[initial(item_state)]"
+
+	if(icon_state == "[initial(item_state)]_active")
+		set_light(1.5, 2, "#75acff")
+	else
+		set_light(0)
+	loc.update_icon()
+
 #undef REMOTE_OPEN
 #undef REMOTE_BOLT
 #undef REMOTE_ELECT

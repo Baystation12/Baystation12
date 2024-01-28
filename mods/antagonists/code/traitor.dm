@@ -43,16 +43,6 @@
 		qdel(src)
 
 //
-//        Uplink part
-//
-
-/datum/uplink_item/item/tools/door_charge
-	name = "Door Charge"
-	desc = "Special explosive, which can be planted on doors and will explode when somebody will open this door."
-	item_cost = 14
-	path = /obj/item/door_charge
-
-//
 //        BLUESPACE JAUNTER
 //
 
@@ -107,30 +97,9 @@
 		to_chat(user, "You can't link [src] to [target]!")
 	update_icon()
 
-//
-//        Uplink part
-//
-
 /obj/item/storage/box/syndie_kit/jaunter
 	startswith = list(/obj/item/device/syndietele,
 					  /obj/item/device/syndiejaunter)
-
-/datum/uplink_item/item/tools/jaunter
-	name = "Bluespace Jaunter"
-	item_cost = 42
-	path = /obj/item/storage/box/syndie_kit/jaunter
-	desc = "Disposable one way teleportation device. Use with care. Don't forget to link jaunter to the beacon!"
-
-
-//
-//        Psi Amp - Uplink part (Here because turned off by Bay12)
-//
-
-/datum/uplink_item/item/visible_weapons/psi_amp
-	name = "Cerebroenergetic Psionic Amplifier"
-	item_cost = 50
-	path = /obj/item/clothing/head/helmet/space/psi_amp/lesser
-	desc = "A powerful, illegal psi-amp. Boosts latent psi-faculties to extremely high levels."
 
 //
 //        HOLOBOMBS
@@ -215,12 +184,88 @@
 	startswith = list(/obj/item/device/holobomb = 5, /obj/item/paper/holobomb = 1)
 
 //
-//        Holobombs - Uplink part
+//        Poison
 //
 
-/datum/uplink_item/item/tools/holobomb
-	name = "Box of holobombs"
-	item_cost = 32
-	path =/obj/item/storage/box/syndie_kit/holobombs
-	desc = "Contains 5 holobomb and instruction. \
-			A bomb that changes appearance, and can destroy some hands."
+/obj/item/storage/box/syndie_kit/bioterror
+	startswith = list(
+		/obj/item/reagent_containers/glass/beaker/vial/random/toxin/bioterror = 7
+	)
+
+/obj/item/reagent_containers/glass/beaker/vial/random/toxin/bioterror
+	random_reagent_list = list(
+		list(/datum/reagent/drugs/mindbreaker = 10, /datum/reagent/drugs/hextro = 20) = 2,
+		list(/datum/reagent/toxin/carpotoxin = 30)                                    = 2,
+		list(/datum/reagent/impedrezene = 30)                                         = 2,
+		list(/datum/reagent/mutagen = 30)                                             = 2,
+		list(/datum/reagent/toxin/amatoxin = 30)                                      = 2,
+		list(/datum/reagent/drugs/cryptobiolin = 30)                                  = 2,
+		list(/datum/reagent/impedrezene = 30)                                         = 2,
+		list(/datum/reagent/toxin/potassium_chlorophoride = 30)                       = 2,
+		list(/datum/reagent/acid/polyacid = 30)                                       = 2,
+		list(/datum/reagent/radium = 30)                                              = 2,
+		list(/datum/reagent/toxin/zombiepowder = 30)                                  = 1)
+
+// Key
+
+/obj/item/device/encryptionkey/syndie_full
+	icon_state = "cypherkey"
+	channels = list("Mercenary" = 1, "Command" = 1, "Security" = 1, "Engineering" = 1, "Exploration" = 1, "Science" = 1, "Medical" = 1, "Supply" = 1, "Service" = 1)
+	origin_tech = list(TECH_ESOTERIC = 3)
+	syndie = 1
+
+// Stimm
+
+/obj/item/reagent_containers/hypospray/autoinjector/stimpack
+	name = "stimpack"
+	band_color = COLOR_PINK //inf //was: COLOR_DARK_GRAY
+	starts_with = list(/datum/reagent/nitritozadole = 5)
+
+/datum/reagent/nitritozadole
+	name = "Nitritozadole"
+	description = "Nitritozadole is a very dangerous mix, which can increase your speed temporarly."
+	taste_description = "metal"
+	reagent_state = LIQUID
+	color = "#ff2681"
+	metabolism = REM * 0.20
+	overdose = REAGENTS_OVERDOSE / 3
+	value = 4.5
+
+/datum/reagent/nitritozadole/affect_blood(mob/living/carbon/M, alien, removed)
+	if(alien == SPECIES_DIONA)
+		return
+
+	if(prob(2))
+		to_chat(M, SPAN_DANGER("My heart gonna break out from the chest!"))
+		M.stun_effect_act(0, 15, BP_CHEST, "heart damage") //a small pain without damage
+		if(prob(15))
+			for(var/obj/item/organ/internal/heart/H in M.internal_organs)
+				H.damage += 1
+
+	if(prob(5))
+		M.emote(pick("twitch", "blink_r", "shiver"))
+	M.add_chemical_effect(CE_SPEEDBOOST, 1.5)
+	M.add_chemical_effect(CE_PULSE, 3)
+
+
+// Radlaser
+
+/obj/item/device/scanner/health/syndie
+	name = "health analyzer"
+	desc = "A hand-held body scanner able to distinguish vital signs of the subject."
+	item_flags = ITEM_FLAG_NO_BLUDGEON
+	matter = list(MATERIAL_ALUMINIUM = 200)
+	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 2, TECH_ESOTERIC = 2)
+
+/obj/item/device/scanner/health/syndie/scan(mob/living/carbon/human/A, mob/user)
+	playsound(src, 'sound/effects/fastbeep.ogg', 20)
+	if(!istype(A))
+		return
+
+	A.apply_damage(30, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
+
+/obj/item/device/scanner/health/syndie/examine(mob/user)
+	. = ..()
+	if (isobserver(user) || (user.mind && user.mind.special_role != null) || user.skill_check(SKILL_DEVICES, SKILL_MASTER) || user.skill_check(SKILL_MEDICAL, SKILL_MASTER))
+		to_chat(user, "The scanner contacts do not look as they should. ")
+		return

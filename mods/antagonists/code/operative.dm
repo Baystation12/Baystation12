@@ -59,6 +59,6 @@
 		/obj/item/clothing/mask/gas/syndicate,
 		/obj/item/storage/backpack/dufflebag/syndie_kit/plastique,
 		/obj/item/storage/box/anti_photons,
-		/obj/item/device/encryptionkey/syndicate,
+		/obj/item/device/encryptionkey/syndie_full,
 		/obj/item/card/emag
 	)

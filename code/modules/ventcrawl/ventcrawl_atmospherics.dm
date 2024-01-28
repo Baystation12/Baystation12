@@ -20,6 +20,9 @@
 /obj/machinery/atmospherics/relaymove(mob/living/user, direction)
 	if(user.loc != src || !(direction & initialize_directions)) //can't go in a way we aren't connecting to
 		return
+	// [SIERRA-ADD] - SSINPUT
+	direction &= ~(direction & ~initialize_directions)
+	// [SIERRA-ADD]
 	ventcrawl_to(user,findConnecting(direction),direction)
 
 /obj/machinery/atmospherics/proc/ventcrawl_to(mob/living/user, obj/machinery/atmospherics/target_move, direction)

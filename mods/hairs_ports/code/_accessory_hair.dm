@@ -41,9 +41,6 @@
 /datum/sprite_accessory/hair/modpack_hairs_port/aurora_belenko
 	name = "Belenko"
 	icon_state = "hair_belenko"
-/datum/sprite_accessory/hair/modpack_hairs_port/aurora_braid_grande
-	name = "Braid Grande"
-	icon_state = "hair_braid_grande"
 /datum/sprite_accessory/hair/modpack_hairs_port/aurora_afrobig
 	name = "Afro Big"
 	icon_state = "hair_afrobig"
@@ -51,9 +48,6 @@
 /datum/sprite_accessory/hair/modpack_hairs_port/aurora_bangshort
 	name = "Bang Short"
 	icon_state = "hair_bangshort"
-/datum/sprite_accessory/hair/modpack_hairs_port/aurora_braid_medium
-	name = "Braid Medium"
-	icon_state = "hair_braid_medium"
 /datum/sprite_accessory/hair/modpack_hairs_port/aurora_bun_casual
 	name = "Bun Casual"
 	icon_state = "hair_bun_casual"
@@ -116,9 +110,6 @@
 /datum/sprite_accessory/hair/modpack_hairs_port/inf_pigtails_kagami
 	name = "Pigtails Kagami"
 	icon_state = "hair_pigtails_kagami"
-/datum/sprite_accessory/hair/modpack_hairs_port/inf_ponytail_hayasaka
-	name = "Ponytail Hayasaka"
-	icon_state = "hair_ponytail_hayasaka"
 /datum/sprite_accessory/hair/modpack_hairs_port/inf_roxy
 	name = "Roxy"
 	icon_state = "hair_roxy"
@@ -167,9 +158,6 @@
 /datum/sprite_accessory/hair/modpack_hairs_port/inf_pigtails_low
 	name = "Pigtail Slow"
 	icon_state = "hair_pigtails_low"
-/datum/sprite_accessory/hair/modpack_hairs_port/inf_ponytailpiky
-	name = "Ponytail Spiky"
-	icon_state = "hair_ponytailpiky"
 /datum/sprite_accessory/hair/modpack_hairs_port/inf_toph
 	name = "Toph"
 	icon_state = "hair_toph"

@@ -58,11 +58,6 @@
 #include "machinery\survival_pod.dm"
 #include "machinery\scrap_compactor\scrap_compactor.dm"
 
-// Mobs
-#include "mobs\simple\fox.dm"
-#include "mobs\simple\koala.dm"
-#include "mobs\simple\rabbit.dm"
-
 // Structures
 #include "structures\barrier.dm"
 #include "structures\chairs.dm"
