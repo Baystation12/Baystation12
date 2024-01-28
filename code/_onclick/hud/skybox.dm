@@ -23,9 +23,14 @@
 			screen |= skybox
 		skybox.screen_loc = "CENTER:[-224 - T.x],CENTER:[-224 - T.y]"
 
+/client/proc/deferred_update_skybox(rebuild)
+	set waitfor = FALSE
+	sleep(1)
+	update_skybox(rebuild)
+
 /mob/Login()
 	..()
-	client.update_skybox(1)
+	client.deferred_update_skybox(1)
 
 /mob/Move()
 	var/old_z = get_z(src)
