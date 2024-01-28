@@ -1,0 +1,4 @@
+author: emmanuelbassil
+changes:
+  - {bugfix: Radial menus now properly work when inside an exosuit}
+delete-after: true
