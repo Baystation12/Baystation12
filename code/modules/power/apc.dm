@@ -91,6 +91,9 @@
 	req_access = list(access_engine_equip)
 	clicksound = "switch"
 	layer = ABOVE_WINDOW_LAYER
+	health_max = 80
+	health_min_damage = 5
+	damage_hitsound = 'sound/weapons/smash.ogg'
 	var/needs_powerdown_sound
 	var/area/area
 	var/areastring = null
@@ -234,9 +237,6 @@
 /obj/machinery/power/apc/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		if(MACHINE_IS_BROKEN(src))
-			to_chat(user, "Looks broken.")
-			return
 		var/terminal = terminal()
 		if(opened)
 			if(has_electronics && terminal)
@@ -369,7 +369,7 @@
 	update_overlay = 0
 	if(get_cell())
 		update_state |= UPDATE_CELL_IN
-	if(MACHINE_IS_BROKEN(src))
+	if(health_dead() || MACHINE_IS_BROKEN(src))
 		update_state |= UPDATE_BROKE
 	if(GET_FLAGS(stat, MACHINE_STAT_MAINT))
 		update_state |= UPDATE_MAINT
@@ -456,8 +456,11 @@
 				update_icon()
 				return TRUE
 
-		if(MACHINE_IS_BROKEN(src) || (hacker && !hacker.hacked_apcs_hidden))
-			to_chat(user, SPAN_WARNING("The cover appears broken or stuck."))
+		if(MACHINE_IS_BROKEN(src) || hacker && !hacker.hacked_apcs_hidden)
+			if (opened == 2)
+				to_chat(user, SPAN_WARNING("The cover of \the [src] is broken!"))
+			else
+				to_chat(user, SPAN_WARNING("The cover  of \the [src] appears stuck. You need to bash it off!"))
 			return TRUE
 		if(coverlocked && !(GET_FLAGS(stat, MACHINE_STAT_MAINT)))
 			to_chat(user, SPAN_WARNING("The cover is locked and cannot be opened."))
@@ -604,6 +607,7 @@
 					SPAN_NOTICE("[user.name] has replaced the damaged APC frame with new one."),\
 					"You replace the damaged APC frame with new one.")
 				qdel(W)
+				revive_health()
 				set_broken(FALSE)
 				// Malf AI, removes the APC from AI's hacked APCs list.
 				if(hacker && hacker.hacked_apcs && (src in hacker.hacked_apcs))
@@ -617,18 +621,6 @@
 	if((. = ..())) // Further interactions are low priority attack stuff.
 		return
 
-	if ((MACHINE_IS_BROKEN(src) || (hacker && !hacker.hacked_apcs_hidden)) \
-			&& !opened \
-			&& W.force >= 5 \
-			&& W.w_class >= 3.0 \
-			&& prob(W.force) )
-		opened = 2
-		user.visible_message(SPAN_DANGER("The APC cover was knocked down with the [W.name] by [user.name]!"), \
-			SPAN_DANGER("You knock down the APC cover with your [W.name]!"), \
-			"You hear a bang")
-		update_icon()
-		return TRUE
-
 	if (istype(user, /mob/living/silicon))
 		return attack_robot(user)
 	if (!opened && wiresexposed && (isMultitool(W) || isWirecutter(W) || istype(W, /obj/item/device/assembly/signaler)))
@@ -636,32 +628,25 @@
 
 	return ..()
 
-/obj/machinery/power/apc/use_weapon(obj/item/W, mob/living/user, list/click_params)
-	if(W.force >= 5 && W.w_class >= ITEM_SIZE_NORMAL && prob(W.force))
-		user.setClickCooldown(user.get_attack_speed(W))
-		user.do_attack_animation(src)
-		user.visible_message(
-			SPAN_DANGER("The [name] has been hit with the [W.name] by [user.name]!"), \
-			SPAN_DANGER("You hit the [name] with your [W.name]!"), \
-			"You hear a bang"
-		)
-		var/roulette = rand(1,100)
-		switch(roulette)
-			if(1 to 10)
-				locked = FALSE
-				to_chat(user, SPAN_NOTICE("You manage to disable the lock on \the [src]!"))
-			if(50 to 70)
-				to_chat(user, SPAN_NOTICE("You manage to bash the lid open!"))
-				opened = 1
-			if(90 to 100)
-				to_chat(user, SPAN_WARNING("There's a nasty sound and \the [src] goes cold..."))
-				set_broken(TRUE)
+/obj/machinery/power/apc/post_health_change(health_mod, prior_health, damage_type)
+	. = ..()
+	var/damage_percentage = get_damage_percentage()
+	if (health_mod >= 0)
+		return
+	//Runs even if APC is broken. Returns to avoid two events running.
+	if ((damage_percentage >= 50 || (hacker && !hacker.hacked_apcs_hidden)) && opened != 2 && prob(20))
+		visible_message(SPAN_DANGER("The lid on \the [src] is knocked down"))
+		coverlocked = FALSE
+		opened = 2
 		queue_icon_update()
-		playsound(get_turf(src), 'sound/weapons/smash.ogg', 75, 1)
+		return
 
-	return ..()
-
-// attack with hand - remove cell (if cover open) or interact with the APC
+	if (!health_dead())
+		if (damage_percentage >= 25 && locked && prob(20))
+			locked = FALSE
+			visible_message(SPAN_DANGER("The interface lock on \the [src] malfunctions!"), range = 1)
+		if (damage_percentage >= 75 && prob(20))
+			kill_health()
 
 /obj/machinery/power/apc/emag_act(remaining_charges, mob/user)
 	if (!(emagged || (hacker && !hacker.hacked_apcs_hidden)))		// trying to unlock with an emag card
@@ -1053,34 +1038,33 @@
 	..()
 
 /obj/machinery/power/apc/ex_act(severity)
-	var/obj/item/cell/C = get_cell()
+	var/obj/item/cell/cell = get_cell()
+	if (!cell)
+		..()
+		return
+
 	switch(severity)
-		if(EX_ACT_DEVASTATING)
-			qdel(src)
-			if (C)
-				C.ex_act(EX_ACT_DEVASTATING) // more lags woohoo
-			return
-		if(EX_ACT_HEAVY)
+		if (EX_ACT_DEVASTATING)
+			cell.ex_act(EX_ACT_DEVASTATING)
+		if (EX_ACT_HEAVY)
 			if (prob(50))
-				set_broken(TRUE)
-				if (C && prob(50))
-					C.ex_act(EX_ACT_HEAVY)
-		if(EX_ACT_LIGHT)
+				cell.ex_act(EX_ACT_HEAVY)
+		if (EX_ACT_LIGHT)
 			if (prob(25))
-				set_broken(TRUE)
-				if (C && prob(25))
-					C.ex_act(EX_ACT_LIGHT)
+				cell.ex_act(EX_ACT_LIGHT)
+	..()
 
 /obj/machinery/power/apc/set_broken(new_state)
 	if(!new_state || MACHINE_IS_BROKEN(src))
 		return ..()
-	visible_message(SPAN_NOTICE("[src]'s screen flickers with warnings briefly!"))
+	visible_message(SPAN_WARNING("\The [src]'s screen flickers with warnings briefly!"))
 	GLOB.power_alarm.triggerAlarm(loc, src)
 	spawn(rand(2,5))
 		..()
-		visible_message(SPAN_NOTICE("[src]'s screen suddenly explodes in rain of sparks and small debris!"))
+		visible_message(SPAN_DANGER("\The [src]'s screen suddenly explodes in rain of sparks and small debris!"))
 		operating = 0
 		update()
+	queue_icon_update()
 	return TRUE
 
 /obj/machinery/power/apc/proc/reboot()
