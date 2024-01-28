@@ -307,6 +307,8 @@ var/global/list/radial_menus = list()
 /proc/show_radial_menu(mob/user, atom/anchor, list/choices, uniqueid, radius, datum/callback/custom_check, require_near = FALSE, tooltips = FALSE, no_repeat_close = FALSE, list/check_locs, use_labels = FALSE)
 	if(!user || !anchor || !length(choices))
 		return
+	if (istype(user.loc, /mob/living/exosuit))
+		anchor = user.loc
 	if(!uniqueid)
 		uniqueid = "defmenu_[any2ref(user)]_[any2ref(anchor)]"
 
