@@ -127,7 +127,6 @@
 	var/is_critical = 0
 	var/static/status_overlays = 0
 	var/failure_timer = 0               // Cooldown thing for apc outage event
-	var/force_update = 0
 	var/emp_hardened = 0
 	var/static/list/status_overlays_lock
 	var/static/list/status_overlays_charging
@@ -216,6 +215,8 @@
 		return
 	failure_timer = max(failure_timer, round(duration))
 	playsound(src, 'sound/machines/apc_nopower.ogg', 75, 0)
+	update()
+	queue_icon_update()
 
 /obj/machinery/power/apc/proc/init_round_start()
 	has_electronics = 2 //installed and secured
@@ -923,11 +924,11 @@
 		return
 
 	if(failure_timer)
-		update()
-		queue_icon_update()
 		failure_timer--
-		force_update = 1
-		return
+		if (!failure_timer)
+			update()
+			queue_icon_update()
+		else return
 
 	lastused_light = (lighting >= POWERCHAN_ON) ? area.usage(LIGHT) : 0
 	lastused_equip = (equipment >= POWERCHAN_ON) ? area.usage(EQUIP) : 0
@@ -976,8 +977,7 @@
 	update_channels()
 
 	// update icon & area power if anything changed
-	if(last_lt != lighting || last_eq != equipment || last_en != environ || force_update)
-		force_update = 0
+	if(last_lt != lighting || last_eq != equipment || last_en != environ)
 		queue_icon_update()
 		update()
 	else if (last_ch != charging)
