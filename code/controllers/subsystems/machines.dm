@@ -182,9 +182,8 @@ SUBSYSTEM_DEF(machines)
 			continue
 
 		if(machine.processing_flags & MACHINERY_PROCESS_COMPONENTS)
-			for(var/thing in machine.processing_parts)
-				var/obj/item/stock_parts/part = thing
-				if(part.machine_process(machine) == PROCESS_KILL)
+			for(var/obj/item/stock_parts/part as anything in machine.processing_parts)
+				if(istype(part) && part.machine_process(machine) == PROCESS_KILL)
 					part.stop_processing()
 
 		if((machine.processing_flags & MACHINERY_PROCESS_SELF) && machine.Process(wait) == PROCESS_KILL)

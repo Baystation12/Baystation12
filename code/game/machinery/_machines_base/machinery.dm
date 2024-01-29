@@ -89,6 +89,10 @@
 	RefreshParts()
 	power_change()
 
+	var/area/A = get_area(src)
+	if(A)
+		LAZYADD(A.machinery_list, src)
+
 /obj/machinery/post_health_change(health_mod, prior_health, damage_type)
 	if (health_mod < 0 && !health_dead())
 		var/initial_damage_percentage = Percent(get_max_health() - prior_health, get_max_health(), 0)
@@ -106,6 +110,9 @@
 	SSmachines.machinery -= src
 	QDEL_NULL_LIST(component_parts) // Further handling is done via destroyed events.
 	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_ALL)
+	var/area/A = get_area(src)
+	if(A)
+		LAZYREMOVE(A.machinery_list, src)
 	. = ..()
 
 /obj/machinery/on_death()
@@ -515,3 +522,11 @@
 /// Called by `/mob/Login()` if the mob has an associated `machine`.
 /obj/machinery/proc/on_user_login(mob/M)
 	return
+
+/obj/machinery/wrench_floor_bolts(mob/user, delay)
+	. = ..()
+	var/area/A = get_area(src)
+	if(anchored)
+		A.machinery_list |= src
+	else
+		A.machinery_list -= src
