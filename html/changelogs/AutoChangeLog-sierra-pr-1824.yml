@@ -1,8 +1,0 @@
-author: LordNest
-changes:
-  - {bugfix: Мыши больше не вываливаются из труб}
-  - {tweak: Автохисс починил}
-  - {imageadd: Станбатону иконки синие приделал}
-  - {imagedel: Удалил дубли причёсок}
-  - {maptweak: Вернул Рекса}
-delete-after: true
