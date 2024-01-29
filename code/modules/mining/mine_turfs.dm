@@ -545,3 +545,7 @@ var/global/list/mining_floors = list()
 		var/mob/living/silicon/robot/R = M
 		for (var/obj/item/item as anything in R.GetAllHeld(/obj/item/storage/ore))
 			attackby(item, R)
+
+/turf/simulated/floor/asteroid/air
+	initial_gas = list(GAS_OXYGEN = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)
+	temperature = T20C
