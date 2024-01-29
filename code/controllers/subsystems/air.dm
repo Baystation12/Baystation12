@@ -87,6 +87,9 @@ SUBSYSTEM_DEF(air)
 	var/active_zones = 0
 	var/next_id = 1
 
+	var/active_edges_firelimit = 20
+	var/times_failed_to_calc_firelevel = 0
+
 /datum/controller/subsystem/air/proc/reboot()
 	// Stop processing while we rebuild.
 	can_fire = FALSE
@@ -235,9 +238,25 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 		else if (MC_TICK_CHECK)
 			return
 
+	var/halt_firelevel_calculations = FALSE
+	if(tick_usage * world.tick_lag > Master.current_ticklimit || length(processing_edges) > active_edges_firelimit)
+		halt_firelevel_calculations = TRUE
+		times_failed_to_calc_firelevel++
+		if(times_failed_to_calc_firelevel > 60)
+			active_edges_firelimit += 5
+			times_failed_to_calc_firelevel = 0
+	else
+		times_failed_to_calc_firelevel = 0
+
 	while (length(curr_fire))
 		var/zone/Z = curr_fire[length(curr_fire)]
 		LIST_DEC(curr_fire)
+
+		if(halt_firelevel_calculations)
+			if(length(Z.fire_tiles) && !Z.firelevel)
+				Z.firelevel = vsc.fire_firelevel_multiplier
+		else
+			Z.calculate_fire_level()
 
 		Z.process_fire()
 

@@ -38,17 +38,17 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 		create_fire(exposed_temperature)
 	return igniting
 
-/zone/proc/process_fire()
+/zone/proc/calculate_fire_level()
 	var/datum/gas_mixture/burn_gas = air.remove_ratio(vsc.fire_consuption_rate, length(fire_tiles))
 
-	var/firelevel = burn_gas.react(src, fire_tiles, force_burn = 1, no_check = 1)
-
+	firelevel = burn_gas.react(src, fire_tiles, force_burn = 1, no_check = 1)
 	air.merge(burn_gas)
 
+/zone/proc/process_fire()
 	if(firelevel)
 		for(var/turf/T in fire_tiles)
 			if(T.hotspot)
-				T.hotspot.firelevel = firelevel
+				T.hotspot.update_firelevel(firelevel)
 			else
 				fire_tiles -= T
 	else
@@ -69,7 +69,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 		return 1
 
 	if(hotspot)
-		hotspot.firelevel = max(fl, hotspot.firelevel)
+		hotspot.update_firelevel(max(fl, hotspot.firelevel))
 		return 1
 
 	if(!zone)
@@ -110,21 +110,10 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	var/datum/gas_mixture/air_contents = my_tile.return_air()
 
-	if(firelevel > 6)
-		icon_state = "3"
-		set_light(7, 1)
-	else if(firelevel > 2.5)
-		icon_state = "2"
-		set_light(5, 0.7)
-	else
-		icon_state = "1"
-		set_light(3, 0.5)
-
 	for(var/mob/living/L in loc)
 		L.FireBurn(firelevel, air_contents.temperature, air_contents.return_pressure())  //Burn the mobs!
 
-	loc.fire_act(air_contents, air_contents.temperature, air_contents.volume)
-	for(var/atom/A in loc)
+	for(var/atom/A in (loc.contents + loc))
 		A.fire_act(air_contents, air_contents.temperature, air_contents.volume)
 
 	//spread
@@ -136,15 +125,15 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 				if(!enemy_tile.zone || enemy_tile.hotspot)
 					continue
 
-				//if(!length(enemy_tile.zone.fire_tiles)) TODO - optimize
-				var/datum/gas_mixture/acs = enemy_tile.return_air()
-				if(!acs || !acs.check_combustability())
-					continue
-
 				//If extinguisher mist passed over the turf it's trying to spread to, don't spread and
 				//reduce firelevel.
 				if(enemy_tile.fire_protection > world.time-30)
-					firelevel -= 1.5
+					update_firelevel(firelevel - 1.5)
+					continue
+
+				//if(!length(enemy_tile.zone.fire_tiles)) TODO - optimize
+				var/datum/gas_mixture/acs = enemy_tile.return_air()
+				if(!acs || !acs.check_combustability())
 					continue
 
 				//Spread the fire.
@@ -155,7 +144,6 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 				enemy_tile.adjacent_fire_act(loc, air_contents, air_contents.temperature, air_contents.volume)
 
 	animate(src, color = fire_color(air_contents.temperature), 5)
-	set_light(l_color = color)
 
 /obj/hotspot/New(newLoc,fl)
 	..()
@@ -168,9 +156,8 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 
 	var/datum/gas_mixture/air_contents = loc.return_air()
 	color = fire_color(air_contents.temperature)
-	set_light(3, 0.5, l_color = color)
 
-	firelevel = fl
+	update_firelevel(fl)
 	SSair.active_hotspots.Add(src)
 
 	//If this is a turf and it can burn maybe it should be ignited too - Lingering fire effect of sorts
@@ -178,6 +165,21 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	if(istype(F) && F.flooring && F.flooring.flags & TURF_CAN_BURN)
 		if(prob(30))
 			F.IgniteTurf(rand(8,22))
+
+/obj/hotspot/proc/update_firelevel(new_firelevel)
+	var/old_firelevel = firelevel
+
+	if(new_firelevel <= 2.5 && old_firelevel > 2.5)
+		icon_state = "1"
+		set_light(3, 0.5, l_color = color)
+	else if(new_firelevel <= 6 && old_firelevel > 6)
+		icon_state = "2"
+		set_light(5, 0.7, l_color = color)
+	else if(new_firelevel > 6 && old_firelevel <= 6)
+		icon_state = "3"
+		set_light(7, 1, l_color = color)
+
+	firelevel = new_firelevel
 
 /obj/hotspot/proc/fire_color(env_temperature)
 	var/temperature = max(4000*sqrt(firelevel/vsc.fire_firelevel_multiplier), env_temperature)
