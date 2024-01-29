@@ -306,3 +306,11 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	icon = 'gen-32.dmi'
 	icon_state = "sf-mantaray"
 	speed = 0.2
+
+/obj/overmap/visitable/placeholder/ec_komarov
+	name = "SEV Komarov"
+	desc = "A hulking mass of redundant systems and extensive electromagnetic shielding. The hull is tattered with a myriad of warped and charred paneling, this ship looks like it just tore out from hell itself, most likely because it has. The Transponder reads, 'SEV Komarov, HSC-2-07-X'"
+	icon = 'scg-64.dmi'
+	icon_state = "ec-komarov"
+	pixel_x = -17
+	pixel_y = -12
