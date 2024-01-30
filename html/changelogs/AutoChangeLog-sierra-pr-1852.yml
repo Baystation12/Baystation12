@@ -1,0 +1,4 @@
+author: emmanuelbassil
+changes:
+  - {bugfix: Unathi no longer get as much nutrition from non-meat items}
+delete-after: true
