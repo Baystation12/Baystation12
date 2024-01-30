@@ -93,7 +93,6 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 	desc = "A pulsating mass of flesh and steel."
 	icon = 'maps/antag_spawn/vox/vox.dmi'
 	icon_state = "printer"
-	breakable = FALSE
 	anchored = TRUE
 	density = TRUE
 	var/favors = 0
@@ -269,7 +268,6 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 	desc = "An old, dusty machine meant to analyze various bluespace anomalies and send research data directly to SCGEC Observatory."
 	icon = 'icons/obj/machines/research/xenoarcheology_scanner.dmi'
 	icon_state = "scanner"
-	breakable = FALSE
 	anchored = FALSE
 	density = TRUE
 	var/points = 0
