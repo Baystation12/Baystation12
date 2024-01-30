@@ -218,8 +218,15 @@
 				continue
 
 			if (GLOB.using_map.use_bluespace_interlude && prob(interlude_teleport_chance))
-				addtimer(new Callback(GLOBAL_PROC, /proc/do_unstable_teleport_safe, mob, GetConnectedZlevels(mob.z)), rand(1, 2) MINUTES)
-				GLOB.using_map.do_interlude_teleport(mob, duration = rand(1, 2.5) MINUTES)
+				if (istype(mob, /mob/living/simple_animal) && prob(80))
+					return
+				var/turf/T = pick_area_turf_in_connected_z_levels(
+					list(/proc/is_not_space_area),
+					list(/proc/not_turf_contains_dense_objects, /proc/IsTurfAtmosSafe),
+					zlevels[1])
+				if (!T)
+					return
+				GLOB.using_map.do_interlude_teleport(mob, T, rand(1, 2.5) MINUTES)
 				return
 			if (mob != being)
 				var/source_position = being.loc
