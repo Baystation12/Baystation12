@@ -564,6 +564,44 @@
 		var/mob/living/L = locate(href_list["debug_mob_ai"])
 		log_debug("AI Debugging toggled [L.ai_holder.debug() ? "ON" : "OFF"] for \the [L]")
 
+	else if (href_list["settrait"])
+		if (!check_rights(R_DEBUG|R_ADMIN|R_FUN))	return
+		var/mob/living/target = locate(href_list["settrait"])
+		if (!istype(target))
+			to_chat(usr, SPAN_WARNING("This can only be done to instances of /mob/living."))
+			return
+		var/list/possible_traits = GET_SINGLETON_SUBTYPE_LIST(/singleton/trait)
+		var/singleton/trait/selected = input("Select a trait to apply to \the [target].", "Add Trait") as null | anything in possible_traits
+		if (!selected || !istype(selected) || QDELETED(target))
+			return
+
+		var/list/possible_levels = selected.get_levels()
+		var/selected_level = input("Select the trait's level to apply to \the [target].", "Select Level") as null | anything in possible_levels
+		if (QDELETED(target))
+			return
+
+		if (target.SetTrait(selected.type, selected_level))
+			to_chat(usr, SPAN_NOTICE("Successfuly set \the [selected.name] in \the [target]."))
+		else
+			to_chat(usr, SPAN_WARNING("Failed to set \the [selected.name] in \the [target]."))
+		return
+
+	else if (href_list["removetrait"])
+		if (!check_rights(R_DEBUG|R_ADMIN|R_FUN))	return
+		var/mob/living/target = locate(href_list["removetrait"])
+		if (!istype(target))
+			to_chat(usr, SPAN_WARNING("This can only be done to instances of /mob/living."))
+			return
+		var/input = input("Select a trait to remove from \the [target].", "Remove Trait") as null | anything in target.traits
+		var/singleton/trait/selected = GET_SINGLETON(input)
+		if (!selected || !istype(selected) || QDELETED(target))
+			return
+
+		target.RemoveTrait(selected.type)
+		to_chat(usr, SPAN_NOTICE("Successfuly removed \the [selected.name] in \the [target]."))
+		return
+
+
 	else if (href_list["addmovementhandler"])
 		if (!check_rights(R_DEBUG))
 			return

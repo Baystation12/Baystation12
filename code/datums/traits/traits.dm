@@ -79,3 +79,6 @@
 	SHOULD_BE_PURE(TRUE)
 
 	return (level in levels)
+
+/singleton/trait/proc/get_levels()
+	return levels
