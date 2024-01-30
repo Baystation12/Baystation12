@@ -580,7 +580,11 @@
 		if (QDELETED(target))
 			return
 
-		if (target.SetTrait(selected.type, selected_level))
+		var/additional_data
+		if (length(selected.additional_list))
+			additional_data = input("[selected.addprompt]", "Select Option") as null | anything in selected.additional_list
+
+		if (target.SetTrait(selected.type, selected_level, additional_data))
 			to_chat(usr, SPAN_NOTICE("Successfuly set \the [selected.name] in \the [target]."))
 		else
 			to_chat(usr, SPAN_WARNING("Failed to set \the [selected.name] in \the [target]."))
@@ -597,7 +601,11 @@
 		if (!selected || !istype(selected) || QDELETED(target))
 			return
 
-		target.RemoveTrait(selected.type)
+		var/additional_option
+		if (length(selected.additional_list))
+			var/list/interim = target.traits[selected.type]
+			additional_option = input("[selected.remprompt]", "Select Option") as null | anything in interim
+		target.RemoveTrait(selected.type, additional_option)
 		to_chat(usr, SPAN_NOTICE("Successfuly removed \the [selected.name] in \the [target]."))
 		return
 
