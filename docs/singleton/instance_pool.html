@@ -16,7 +16,7 @@
 <h1>instance_pool <aside>/<a href="singleton/instance_pool.html">singleton/instance_pool</a></aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/06594b09b2ada22bed50ea3ff4f5599abdb55545/code/datums/singletons/pools/instance_pool.dm#L1">
+            <a href="https://github.com/Baystation12/Baystation12/blob/dd1329bb15f240a5606eb18c4eff15c92f8b0d71/code/datums/singletons/pools/instance_pool.dm#L1">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;singletons&#x2F;pools&#x2F;instance_pool.dm 1"/></a></h1>
 
 <table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
@@ -34,66 +34,66 @@
             <aside>&ndash; /list/datum</aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/06594b09b2ada22bed50ea3ff4f5599abdb55545/code/datums/singletons/pools/instance_pool.dm#L20">
+            <a href="https://github.com/Baystation12/Baystation12/blob/dd1329bb15f240a5606eb18c4eff15c92f8b0d71/code/datums/singletons/pools/instance_pool.dm#L20">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;singletons&#x2F;pools&#x2F;instance_pool.dm 20"/></a></h3>
         <p>Internal. A fixed size sparse list of instances ready to be checked out.</p><h3 id="var/configurators"><aside class="declaration">var </aside>configurators
             <aside>&ndash; /list/singleton/instance_configurator</aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/06594b09b2ada22bed50ea3ff4f5599abdb55545/code/datums/singletons/pools/instance_pool.dm#L17">
+            <a href="https://github.com/Baystation12/Baystation12/blob/dd1329bb15f240a5606eb18c4eff15c92f8b0d71/code/datums/singletons/pools/instance_pool.dm#L17">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;singletons&#x2F;pools&#x2F;instance_pool.dm 17"/></a></h3>
         <p>Configurable. List of paths. If set, becomes (path =&gt; instance).</p><h3 id="var/instance_path"><aside class="declaration">var </aside>instance_path
             <aside>&ndash; /<a href="datum.html">datum</a></aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/06594b09b2ada22bed50ea3ff4f5599abdb55545/code/datums/singletons/pools/instance_pool.dm#L11">
+            <a href="https://github.com/Baystation12/Baystation12/blob/dd1329bb15f240a5606eb18c4eff15c92f8b0d71/code/datums/singletons/pools/instance_pool.dm#L11">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;singletons&#x2F;pools&#x2F;instance_pool.dm 11"/></a></h3>
         <p>Configurable. Path. The path of the instances this pool manages.</p><h3 id="var/instance_pool_flags"><aside class="declaration">var </aside>instance_pool_flags
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/06594b09b2ada22bed50ea3ff4f5599abdb55545/code/datums/singletons/pools/instance_pool.dm#L5">
+            <a href="https://github.com/Baystation12/Baystation12/blob/dd1329bb15f240a5606eb18c4eff15c92f8b0d71/code/datums/singletons/pools/instance_pool.dm#L5">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;singletons&#x2F;pools&#x2F;instance_pool.dm 5"/></a></h3>
         <p>Configurable. A field of the constants below.</p><h3 id="var/next_instance"><aside class="declaration">var </aside>next_instance
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/06594b09b2ada22bed50ea3ff4f5599abdb55545/code/datums/singletons/pools/instance_pool.dm#L26">
+            <a href="https://github.com/Baystation12/Baystation12/blob/dd1329bb15f240a5606eb18c4eff15c92f8b0d71/code/datums/singletons/pools/instance_pool.dm#L26">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;singletons&#x2F;pools&#x2F;instance_pool.dm 26"/></a></h3>
         <p>Internal. The index to check out next. If 0, we start creating new ones.</p><h3 id="var/pool_size"><aside class="declaration">var </aside>pool_size
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/06594b09b2ada22bed50ea3ff4f5599abdb55545/code/datums/singletons/pools/instance_pool.dm#L14">
+            <a href="https://github.com/Baystation12/Baystation12/blob/dd1329bb15f240a5606eb18c4eff15c92f8b0d71/code/datums/singletons/pools/instance_pool.dm#L14">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;singletons&#x2F;pools&#x2F;instance_pool.dm 14"/></a></h3>
         <p>Configurable. Natural. The maximum number of instances this pool will retain.</p><h2 id="proc">Proc Details</h2><h3 id="proc/GetInstance"><aside class="declaration">proc </aside>GetInstance<aside>(/<a href="singleton/instance_configurator.html">singleton/instance_configurator</a>/configurator) 
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/06594b09b2ada22bed50ea3ff4f5599abdb55545/code/datums/singletons/pools/instance_pool.dm#L57">
+            <a href="https://github.com/Baystation12/Baystation12/blob/dd1329bb15f240a5606eb18c4eff15c92f8b0d71/code/datums/singletons/pools/instance_pool.dm#L57">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;singletons&#x2F;pools&#x2F;instance_pool.dm 57"/></a></aside>
         </h3>
         <p>Sealed. Get an instance from the pool, creating a new one if needed, applying configurator if supplied.</p><h3 id="proc/OnGetInstance"><aside class="declaration">proc </aside>OnGetInstance<aside>(/<a href="datum.html">datum</a>/instance) 
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/06594b09b2ada22bed50ea3ff4f5599abdb55545/code/datums/singletons/pools/instance_pool.dm#L75">
+            <a href="https://github.com/Baystation12/Baystation12/blob/dd1329bb15f240a5606eb18c4eff15c92f8b0d71/code/datums/singletons/pools/instance_pool.dm#L75">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;singletons&#x2F;pools&#x2F;instance_pool.dm 75"/></a></aside>
         </h3>
         <p>Virtual. Manipulate a newly checked out instance in a common way.</p><h3 id="proc/OnReturnInstance"><aside class="declaration">proc </aside>OnReturnInstance<aside>(/<a href="datum.html">datum</a>/instance) 
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/06594b09b2ada22bed50ea3ff4f5599abdb55545/code/datums/singletons/pools/instance_pool.dm#L50">
+            <a href="https://github.com/Baystation12/Baystation12/blob/dd1329bb15f240a5606eb18c4eff15c92f8b0d71/code/datums/singletons/pools/instance_pool.dm#L50">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;singletons&#x2F;pools&#x2F;instance_pool.dm 50"/></a></aside>
         </h3>
         <p>Virtual. Manipulate a newly returned instance in a common way, such as to clean it of timers.</p><h3 id="proc/ReturnInstance"><aside class="declaration">proc </aside>ReturnInstance<aside>(/<a href="datum.html">datum</a>/instance) 
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/06594b09b2ada22bed50ea3ff4f5599abdb55545/code/datums/singletons/pools/instance_pool.dm#L38">
+            <a href="https://github.com/Baystation12/Baystation12/blob/dd1329bb15f240a5606eb18c4eff15c92f8b0d71/code/datums/singletons/pools/instance_pool.dm#L38">
         <img src="git.png" width="16" height="16" title="code&#x2F;datums&#x2F;singletons&#x2F;pools&#x2F;instance_pool.dm 38"/></a></aside>
         </h3>
         <p>Sealed. Re-add instance to the pool if it's not full. Only one use, below, in datum/Destroy.</p></main>
 <footer>
     baystation12.dme
-    <a href="https://github.com/Baystation12/Baystation12/tree/06594b09b2ada22bed50ea3ff4f5599abdb55545">06594b0</a>
+    <a href="https://github.com/Baystation12/Baystation12/tree/dd1329bb15f240a5606eb18c4eff15c92f8b0d71">dd1329b</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.7.3</a></footer>
 </body>
 </html>
