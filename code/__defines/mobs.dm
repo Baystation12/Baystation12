@@ -494,3 +494,7 @@
 
 /// Integer (~ticks * SSMobs/wait fire rate). The default maximum value a mob's confused var can be set to.
 #define CONFUSED_MAX 15
+
+///Flags assigned to carbon mobs trait_flags when they're actively having an allergy.
+#define MILD_ALLERGY FLAG(0)
+#define SEVERE_ALLERGY FLAG(1)
