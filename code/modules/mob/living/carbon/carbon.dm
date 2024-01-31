@@ -491,6 +491,23 @@
 		stasis_value += stasis_sources[source]
 	stasis_sources.Cut()
 
+///This starts an allergy. Dosage/drug are handled at process_allergy proc, if you call this proc directly you must do your own checks.
+/mob/living/carbon/proc/start_allergy(allergy_severity)
+	if (trait_flags & SEVERE_ALLERGY)
+		return
+	if ((trait_flags & MILD_ALLERGY) && allergy_severity <= TRAIT_LEVEL_MINOR)
+		return
+
+	switch (allergy_severity)
+		if (TRAIT_LEVEL_MINOR)
+			trait_flags |= MILD_ALLERGY
+
+		if (TRAIT_LEVEL_MAJOR)
+			trait_flags |= SEVERE_ALLERGY
+
+		else
+			crash_with("Allergy called with incorrect severity of [allergy_severity].")
+
 /mob/living/carbon/has_chem_effect(chem, threshold)
 	return (chem_effects[chem] >= threshold)
 

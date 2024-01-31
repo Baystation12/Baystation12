@@ -68,3 +68,5 @@
 
 	/// An associative list of /singleton/trait and trait level - See individual traits for valid levels
 	var/list/traits
+	/// Flags set by traits triggering behavior; currently used for allergies.
+	var/trait_flags
