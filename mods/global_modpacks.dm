@@ -2,7 +2,7 @@
 #include "ai/_ai.dme"
 #include "body_markings/_body_markings.dme"
 #include "client_verbs/_client_verbs.dme"
-#include "don_loadout/_don_loadout.dme"
+// #include "don_loadout/_don_loadout.dme" // Не открывать до Рождества
 #include "eris_announcer/_eris_announcer.dme"
 #include "emote_panel/_emote_panel.dme"
 #include "ex666_ecosystem/_ex666_ecosystem.dme"
