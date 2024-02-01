@@ -1,0 +1,4 @@
+author: Mucker
+changes:
+  - {bugfix: Brought back the good skybox.}
+delete-after: true
