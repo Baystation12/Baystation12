@@ -42,7 +42,6 @@ SUBSYSTEM_DEF(skybox)
 		dust.blend_mode = BLEND_ADD
 		var/mutable_appearance/space = new /mutable_appearance(/turf/space)
 		space.icon_state = "white"
-		space.plane = SKYBOX_PLANE
 		space.AddOverlays(dust)
 		space_appearance_cache[index] = space.appearance
 	background_color = RANDOM_RGB
