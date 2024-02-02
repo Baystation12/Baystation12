@@ -205,7 +205,7 @@
 	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/fleet/combat/medical
-	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/fleet, /obj/item/clothing/accessory/armband/medblue)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/fleet)
 	item_flags = ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/solgov/utility/fleet/combat/command
