@@ -40,3 +40,5 @@
 	var/stasis_value
 
 	var/player_triggered_sleeping = 0
+	///Reagents towards which there is an active allergy.
+	var/list/active_allergies = list()

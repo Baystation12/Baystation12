@@ -3,18 +3,22 @@
 	SHOULD_NOT_SLEEP(TRUE)
 	return (trait_type in GetTraits())
 
-///Gets severity level with associated trait. Does not work for traits that have an additional_list set.
-/mob/living/proc/GetTraitLevel(trait_type)
+///Gets severity level with associated trait. Does not work for traits that have an metaoptions set.
+/mob/living/proc/GetTraitLevel(trait_type, meta_option = FALSE)
 	SHOULD_NOT_OVERRIDE(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
 	var/singleton/trait/trait = GET_SINGLETON(trait_type)
-	if (length(trait.additional_list))
-		crash_with("Tried to check severity level on trait ([trait]) with additional_list.")
-		return
 	var/traits = GetTraits()
 	if(!traits)
 		return null
-	return traits[trait_type]
+
+	if (length(trait.metaoptions))
+		if (!meta_option)
+			return
+		var/list/interim = traits[trait_type]
+		return interim[meta_option]
+
+	else return traits[trait_type]
 
 /mob/living/proc/GetTraits()
 	SHOULD_NOT_SLEEP(TRUE)
@@ -26,10 +30,10 @@
 		return traits
 	return species.traits
 
-/mob/living/proc/SetTrait(trait_type, trait_level, additional_option)
+/mob/living/proc/SetTrait(trait_type, trait_level, meta_option)
 	SHOULD_NOT_SLEEP(TRUE)
 	var/singleton/trait/trait = GET_SINGLETON(trait_type)
-	if(!trait.Validate(trait_level, additional_option))
+	if(!trait.Validate(trait_level, meta_option))
 		return FALSE
 
 	if (!LAZYISIN(traits, trait_type))
@@ -38,16 +42,16 @@
 			if (trait_type in existing.incompatible_traits)
 				return FALSE
 
-	if (length(trait.additional_list))
+	if (length(trait.metaoptions))
 		var/list/interim = list()
 		if (!LAZYISIN(traits, trait_type))
 			LAZYSET(traits, trait_type, interim)
 
-		var/list/existing_additional_options = traits[trait_type]
-		if (existing_additional_options[additional_option] == trait_level)
+		var/list/existing_meta_options = traits[trait_type]
+		if (existing_meta_options[meta_option] == trait_level)
 			return FALSE
-		LAZYSET(existing_additional_options, additional_option, trait_level)
-		LAZYSET(traits, trait_type, existing_additional_options)
+		LAZYSET(existing_meta_options, meta_option, trait_level)
+		LAZYSET(traits, trait_type, existing_meta_options)
 	else
 		LAZYSET(traits, trait_type, trait_level)
 	return TRUE
@@ -88,8 +92,8 @@
 	/// Should either only contain TRAIT_LEVEL_EXISTS or a set of the other TRAIT_LEVEL_* levels
 	var/list/levels = list(TRAIT_LEVEL_EXISTS)
 	/// Additional list with unique paths to associate singleton with. if needed. Currently used for reagents in allergies only.
-	var/list/additional_list = list()
-	///Prompts seen when adding/removing additional traits; only for traits with additional_list set
+	var/list/metaoptions = list()
+	///Prompts seen when adding/removing additional traits; only for traits with metaoptions set
 	var/addprompt = "Select a property to add."
 	var/remprompt = "Select a property to remove."
 
@@ -101,15 +105,12 @@
 	if(type == abstract_type)
 		CRASH("Invalid initialization")
 
-/singleton/trait/proc/Validate(level, additional_option)
+/singleton/trait/proc/Validate(level, meta_option)
 	SHOULD_NOT_OVERRIDE(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
 	SHOULD_BE_PURE(TRUE)
 
-	if (length(additional_list))
-		return (level in levels) && (additional_option in additional_list)
+	if (length(metaoptions))
+		return (level in levels) && (meta_option in metaoptions)
 	else
 		return (level in levels)
-
-/singleton/trait/proc/get_levels()
-	return levels

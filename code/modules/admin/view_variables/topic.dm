@@ -575,14 +575,14 @@
 		if (!selected || !istype(selected) || QDELETED(target))
 			return
 
-		var/list/possible_levels = selected.get_levels()
+		var/list/possible_levels = selected.levels
 		var/selected_level = input("Select the trait's level to apply to \the [target].", "Select Level") as null | anything in possible_levels
 		if (QDELETED(target))
 			return
 
 		var/additional_data
-		if (length(selected.additional_list))
-			additional_data = input("[selected.addprompt]", "Select Option") as null | anything in selected.additional_list
+		if (length(selected.metaoptions))
+			additional_data = input("[selected.addprompt]", "Select Option") as null | anything in selected.metaoptions
 
 		if (target.SetTrait(selected.type, selected_level, additional_data))
 			to_chat(usr, SPAN_NOTICE("Successfuly set \the [selected.name] in \the [target]."))
@@ -602,7 +602,7 @@
 			return
 
 		var/additional_option
-		if (length(selected.additional_list))
+		if (length(selected.metaoptions))
 			var/list/interim = target.traits[selected.type]
 			additional_option = input("[selected.remprompt]", "Select Option") as null | anything in interim
 		target.RemoveTrait(selected.type, additional_option)
