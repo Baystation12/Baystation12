@@ -1,5 +1,5 @@
-#define CHOICE_TRANSFER "Initiate crew transfer"
-#define CHOICE_EXTEND "Extend the round ([config.vote_autotransfer_interval / 600] minutes)"
+#define CHOICE_TRANSFER "Initiate bluespace jump"
+#define CHOICE_EXTEND "Extend the round ([config.vote_autotransfer_interval] minutes)"
 #define CHOICE_ADD_ANTAG "Add antagonist"
 
 /datum/vote/transfer
@@ -17,10 +17,10 @@
 		return //Mods bypass further checks.
 	var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 	if (!automatic && security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
-		to_chat(creator, "The current alert status is too high to call for a crew transfer!")
+		to_chat(creator, "The current alert status is too high to call for a bluespace jump!")
 		return FALSE
 	if(GAME_STATE <= RUNLEVEL_SETUP)
-		to_chat(creator, "The crew transfer button has been disabled!")
+		to_chat(creator, "The bluespace jump button has been disabled!")
 		return FALSE
 
 /datum/vote/transfer/setup_vote(mob/creator, automatic)
@@ -45,7 +45,7 @@
 		else
 			factor = 1.4
 	choices[CHOICE_TRANSFER] = round(choices[CHOICE_TRANSFER] * factor)
-	to_world(SPAN_COLOR("purple", "Crew Transfer Factor: [factor]"))
+	to_world(SPAN_COLOR("purple", "Bluespace Jump Factor: [factor]"))
 
 /datum/vote/transfer/report_result()
 	if(..())
