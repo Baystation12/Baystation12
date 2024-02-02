@@ -127,7 +127,6 @@
 		effective *= (MOB_MEDIUM/M.mob_size)
 
 	M.chem_doses[type] = M.chem_doses[type] + effective
-	process_allergy(M)
 	if(effective >= (metabolism * 0.1) || effective >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
 		switch(location)
 			if(CHEM_BLOOD)
@@ -139,23 +138,6 @@
 
 	if(volume)
 		remove_self(removed)
-
-///Checks if allergy will be triggered. Returns null if maximal possible allergy is already happening.
-/datum/reagent/proc/process_allergy(mob/living/carbon/target)
-	if (!istype(target))
-		return
-	if (!HAS_TRAIT(target, /singleton/trait/malus/allergy))
-		return
-
-	var/list/allergy_list = target.traits[/singleton/trait/malus/allergy]
-	if (!(type in allergy_list))
-		return
-	var/current_level = target.chem_doses[type]
-	var/allergy_severity = allergy_list[type]
-	var/threshold = 1/allergy_severity //For Medium sized mobs; threshold of 1 for minor allergies and 0.33 for major allergies.
-	if (current_level < threshold)
-		return
-	target.start_allergy(allergy_severity)
 
 /datum/reagent/proc/affect_blood(mob/living/carbon/M, removed)
 	return
