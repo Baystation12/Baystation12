@@ -1,4 +1,0 @@
-author: SuhEugene
-changes:
-  - {rscdel: 'Отключил Onyx лодаут, который возможно и создавал большие лаги сервера.'}
-delete-after: true
