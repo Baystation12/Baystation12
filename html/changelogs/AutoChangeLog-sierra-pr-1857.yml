@@ -1,0 +1,5 @@
+author: Sbotkin
+changes:
+  - {bugfix: Fleet medical fatigues no longer spawn with an armband.}
+  - {bugfix: The end-of-round vote now correctly displays extend time.}
+delete-after: true
