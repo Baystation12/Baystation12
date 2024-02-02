@@ -2153,6 +2153,7 @@
 #include "code\modules\mob\living\bot\mulebot.dm"
 #include "code\modules\mob\living\bot\remotebot.dm"
 #include "code\modules\mob\living\bot\secbot.dm"
+#include "code\modules\mob\living\carbon\allergy.dm"
 #include "code\modules\mob\living\carbon\breathe.dm"
 #include "code\modules\mob\living\carbon\carbon.dm"
 #include "code\modules\mob\living\carbon\carbon_defense.dm"
