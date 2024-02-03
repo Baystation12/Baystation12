@@ -842,7 +842,12 @@
 				/obj/item/clothing/glasses/hud/security/prot = 2,
 				/obj/item/clothing/glasses/hud/security/prot/sunglasses = 3,
 				/obj/item/clothing/glasses/hud/security/prot/aviators = 1,
-				/obj/item/clothing/glasses/tacgoggles = 1)
+				/obj/item/clothing/glasses/tacgoggles = 1,
+				/obj/item/clothing/glasses/ballistic/security = 1,
+				/obj/item/clothing/glasses/ballistic = 2,
+				/obj/item/clothing/glasses/ballistic/prescription = 1,
+				/obj/item/clothing/glasses/ballistic/fake = 3
+				)
 
 /obj/random/hat
 	name = "random headgear"
@@ -851,16 +856,19 @@
 	icon_state = "tophat"
 
 /obj/random/hat/spawn_choices()
-	return list(/obj/item/clothing/head/helmet = 2,
-				/obj/item/clothing/head/helmet/tactical = 1,
-				/obj/item/clothing/head/helmet/space/emergency = 1,
-				/obj/item/clothing/head/bio_hood/general = 1,
-				/obj/item/clothing/head/hardhat = 4,
-				/obj/item/clothing/head/hardhat/orange = 4,
-				/obj/item/clothing/head/hardhat/red = 4,
-				/obj/item/clothing/head/hardhat/blue = 4,
-				/obj/item/clothing/head/ushanka = 3,
-				/obj/item/clothing/head/welding = 2)
+	return list(/obj/item/clothing/head/helmet = 4,
+				/obj/item/clothing/head/helmet/tactical = 2,
+				/obj/item/clothing/head/helmet/old_commonwealth = 1,
+				/obj/item/clothing/head/helmet/old_confederation = 1,
+				/obj/item/clothing/head/helmet/space/emergency = 2,
+				/obj/item/clothing/head/bio_hood/general = 2,
+				/obj/item/clothing/head/hardhat = 8,
+				/obj/item/clothing/head/hardhat/orange = 8,
+				/obj/item/clothing/head/hardhat/red = 8,
+				/obj/item/clothing/head/hardhat/blue = 8,
+				/obj/item/clothing/head/ushanka = 8,
+				/obj/item/clothing/head/welding = 8
+				)
 
 /obj/random/suit
 	name = "random suit"
@@ -923,7 +931,9 @@
 				/obj/item/clothing/accessory/storage/holster/waist = 1,
 				/obj/item/clothing/accessory/storage/holster/armpit = 1,
 				/obj/item/clothing/accessory/kneepads = 3,
-				/obj/item/clothing/accessory/stethoscope = 2)
+				/obj/item/clothing/accessory/stethoscope = 2,
+				/obj/item/clothing/accessory/glassesmod/nvg = 1
+				)
 
 GLOBAL_LIST_INIT(random_backpacks, list(
 	/obj/item/storage/backpack/cultpack,

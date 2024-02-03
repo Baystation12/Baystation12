@@ -152,6 +152,20 @@
 	path = /obj/item/clothing/glasses/thermal/syndi/aviators
 	antag_roles = list(MODE_TRAITOR)
 
+/datum/uplink_item/item/tools/thermal_goggles
+	name = "Helmet-Attached Thermal Sights"
+	desc = "A set of thermal sights that can attach to combat or voidsuit helmets. Range is limited, along with the color palette, and it will be obvious what you are wearing."
+	item_cost = 12
+	path = /obj/item/clothing/head/helmet/nvgmount/thermal
+	antag_roles = list(MODE_TRAITOR)
+
+/datum/uplink_item/item/tools/night_goggles
+	name = "Helmet-Attached Light-Enhancing Sights"
+	desc = "A set of light-enhancing sights for seeing in the dark. They can attach to combat or voidsuit helmets. Range is slightly limited, along with your perceptible range of colors. It will be obvious what you are wearing."
+	item_cost = 12
+	path = /obj/item/clothing/head/helmet/nvgmount/nvg
+	antag_roles = list(MODE_MERCENARY, MODE_TRAITOR) //don't give mercs extra thermals but NVGs are okay
+
 /datum/uplink_item/item/tools/flashdark
 	name = "Flashdark"
 	desc = "A device similar to a flash light that absorbs the surrounding light, casting a shadowy, black mass."
