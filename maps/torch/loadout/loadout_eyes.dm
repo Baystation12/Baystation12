@@ -32,3 +32,7 @@
 
 
 /datum/gear/eyes/blindfold/allowed_branches = CIVILIAN_BRANCHES
+
+/datum/gear/eyes/ballistics
+	allowed_branches = CIVILIAN_BRANCHES
+	allowed_roles = CASUAL_ROLES

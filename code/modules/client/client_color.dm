@@ -3,7 +3,8 @@
 	var/priority = 1 //Since only one client.color can be rendered on screen, we take the one with the highest priority value:
 	//eg: "Bloody screen" > "goggles color" as the former is much more important
 	var/override = FALSE //If set to override we will stop multiplying the moment we get here. NOTE: Priority remains, if your override is on position 4, the other 3 will still have a say.
-
+	/// Whether this client color should affect the color of blood.
+	var/normal_blood = TRUE
 
 /mob
 	var/list/client_colors = list()
@@ -60,9 +61,15 @@
 	if(!client)
 		return
 	client.color = null
+	var/list/c = list(
+		1,0,0,
+		0,1,0,
+		0,0,1
+	)
 	if(!length(client_colors))
+		animate(renderers[10], color = initial(c))
+		animate(client, color = initial(c))
 		return
-	var/list/c = list(1,0,0, 0,1,0, 0,0,1) //Star at normal
 	for(var/datum/client_color/CC in client_colors)
 		//Matrix multiplication newcolor * current
 		var/list/current = c.Copy()
@@ -77,21 +84,51 @@
 
 		if(CC.override)
 			break
-
-	animate(client, color = c)
+	//check if we need to go straight to renderer
+	var/straight_render = FALSE
+	for (var/datum/client_color/CC in client_colors)
+		if (CC.normal_blood) //does this one want to go straight to render?
+			straight_render = TRUE
+			for (var/datum/client_color/CD in client_colors) //but is it highest priority?
+				if (CD.priority > CC.priority)
+					straight_render = FALSE
+	if(straight_render)
+		animate(renderers[10], color = c)
+		animate(client, color = list(
+			1,0,0,
+			0,1,0,
+			0,0,1
+		))
+	else
+		animate(client, color = c)
+		animate(renderers[10], color = list(
+			1,0,0,
+			0,1,0,
+			0,0,1
+		))
 
 /datum/client_color/monochrome
 	client_color = list(0.33,0.33,0.33, 0.33,0.33,0.33, 0.33,0.33,0.33)
-	priority = 100
+	priority = 199
 
 //Similar to monochrome but shouldn't look as flat, same priority
 /datum/client_color/noir
 	client_color = list(0.299,0.299,0.299, 0.587,0.587,0.587, 0.114,0.114,0.114)
 	priority = 200
+	normal_blood = FALSE
 
 /datum/client_color/thirdeye
 	client_color = list(0.1, 0.1, 0.1, 0.3, 0.3, 0.3, 0.3, 0.3, 0.7)
 	priority = 300
+	normal_blood = FALSE
+
+/datum/client_color/nvg
+	client_color = list(
+		0.2, 0.2, 0.2,
+		0.2, 0.5, 0.5,
+		0.2, 0.3, 0.5
+	)
+	priority = 199
 
 //Disabilities, could be hooked to brain damage or chargen if so desired.
 /datum/client_color/deuteranopia
@@ -110,3 +147,4 @@
 	client_color = "#af111c"
 	priority = INFINITY //This effect sort of exists on its own you /have/ to be seeing RED
 	override = TRUE //Because multiplying this will inevitably fail
+	normal_blood = FALSE

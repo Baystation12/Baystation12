@@ -65,6 +65,8 @@
 			add_clothing_protection(head)
 		if(istype(src.glasses, /obj/item/clothing/glasses))
 			process_glasses(glasses)
+		if ((istype(glasses, /obj/item/clothing/glasses)) || (istype(head, /obj/item/clothing/head)))
+			process_visor(head, glasses)
 		if(istype(src.wear_mask, /obj/item/clothing/mask))
 			add_clothing_protection(wear_mask)
 		if(istype(back,/obj/item/rig))
@@ -89,6 +91,53 @@
 
 		add_clothing_protection(G)
 		G.process_hud(src)
+
+/mob/living/carbon/human/proc/process_visor(obj/item/clothing/head/hat, obj/item/clothing/glasses/eyewear)
+	remove_client_color(/datum/client_color/monochrome)
+	remove_client_color(/datum/client_color/nvg)
+	if (hat)
+		for(var/obj/item/clothing/accessory/glassesmod/mod in hat.accessories)
+			if (mod?.active)
+				equipment_darkness_modifier += mod.darkness_view
+				equipment_vision_flags |= mod.vision_flags
+				equipment_light_protection += mod.light_protection
+				if (mod.overlay)
+					equipment_overlays |= mod.overlay
+				if (mod.see_invisible >= 0)
+					if (equipment_see_invis)
+						equipment_see_invis = min(equipment_see_invis, mod.see_invisible)
+					else
+						equipment_see_invis = mod.see_invisible
+				if (mod.thermals)
+					//this breaks if more than one thermal accessory is worn at once
+					add_client_color(/datum/client_color/monochrome)
+				if (mod.nvg)
+					//this breaks if more than one nvg accessory is worn at once
+					add_client_color(/datum/client_color/nvg)
+				add_clothing_protection(mod)
+				mod.process_hud(src)
+	if (eyewear)
+		for(var/obj/item/clothing/accessory/glassesmod/mod in eyewear.accessories)
+			if (mod?.active)
+				equipment_darkness_modifier += mod.darkness_view
+				equipment_vision_flags |= mod.vision_flags
+				equipment_light_protection += mod.light_protection
+				if (mod.overlay)
+					equipment_overlays |= mod.overlay
+				if (mod.see_invisible >= 0)
+					if (equipment_see_invis)
+						equipment_see_invis = min(equipment_see_invis, mod.see_invisible)
+					else
+						equipment_see_invis = mod.see_invisible
+				if (mod.thermals)
+					//this breaks if more than one thermal accessory is worn at once
+					add_client_color(/datum/client_color/monochrome)
+				if (mod.nvg)
+					//this breaks if more than one nvg accessory is worn at once
+					add_client_color(/datum/client_color/nvg)
+				add_clothing_protection(mod)
+				mod.process_hud(src)
+	src.update_client_color()
 
 /mob/living/carbon/human/proc/process_rig(obj/item/rig/O)
 	if(O.visor && O.visor.active && O.visor.vision && O.visor.vision.glasses && (!O.helmet || (head && O.helmet == head)))
