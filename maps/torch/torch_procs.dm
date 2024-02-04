@@ -92,6 +92,6 @@
 
 	if (isliving(target))
 		to_chat(target, FONT_LARGE(SPAN_WARNING("Your vision goes blurry and nausea strikes your stomach. Where are you...?")))
-		do_teleport(target, T, precision, type)
-		if (destination)
-			addtimer(new Callback(GLOBAL_PROC, /proc/do_teleport, target, destination), duration)
+	do_teleport(target, T, precision, type)
+	if (destination)
+		addtimer(new Callback(GLOBAL_PROC, /proc/do_teleport, target, destination), duration)
