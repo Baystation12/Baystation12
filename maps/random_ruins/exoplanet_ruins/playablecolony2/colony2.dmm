@@ -1825,8 +1825,8 @@
 /obj/floor_decal/industrial/outline/yellow,
 /obj/item/wrench,
 /obj/item/wrench,
-/obj/item/device/spaceflare,
-/obj/item/device/spaceflare,
+/obj/item/shuttle_beacon,
+/obj/item/shuttle_beacon,
 /turf/simulated/floor/reinforced{
 	map_airless = 1
 	},
