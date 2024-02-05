@@ -1147,7 +1147,7 @@
 /obj/item/device/radio/hailing,
 /obj/item/device/radio/hailing,
 /obj/item/gun/energy/gun/skrell,
-/obj/item/device/spaceflare,
+/obj/item/shuttle_beacon,
 /obj/machinery/light/skrell{
 	dir = 8
 	},

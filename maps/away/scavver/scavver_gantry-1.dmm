@@ -504,7 +504,7 @@
 /obj/item/storage/briefcase/inflatable,
 /obj/item/storage/briefcase/inflatable,
 /obj/item/storage/briefcase/inflatable,
-/obj/item/device/spaceflare,
+/obj/item/shuttle_beacon,
 /turf/simulated/floor,
 /area/scavver/gantry/down1)
 "iB" = (
