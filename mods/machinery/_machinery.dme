@@ -1,0 +1,11 @@
+#ifndef MODPACK_MACHINERY
+#define MODPACK_MACHINERY
+
+#include "_machinery.dm"
+
+#include "code/gravity_generator/base.dm"
+#include "code/gravity_generator/main.dm"
+#include "code/gravity_generator/wires.dm"
+#include "code/sealing_generator.dm"
+
+#endif

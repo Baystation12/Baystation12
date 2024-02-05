@@ -312,7 +312,7 @@
 	products = list(
 		/obj/item/device/flashlight = 3,
 		/obj/item/device/multitool = 3,
-		// /obj/item/device/multitool/multimeter = 3, // SIERRA TODO: multimeter,
+		/obj/item/device/multitool/multimeter = 3,
 		/obj/item/device/geiger = 3,
 		/obj/item/device/scanner/gas = 3,
 		/obj/item/device/t_scanner = 3,
@@ -320,14 +320,15 @@
 		/obj/item/clamp = 4,
 		/obj/item/tape_roll = 6,
 		/obj/item/device/paint_sprayer = 2,
-		/obj/item/grenade/chem_grenade/metalfoam = 5
+		/obj/item/grenade/chem_grenade/metalfoam = 5,
+		/obj/item/sealgen_case = 2
 	)
 	contraband = list(
 		/obj/item/cell/potato = 5
 	)
 	premium = list(
-		/obj/item/wrench/power = 1,
-		/obj/item/wirecutters/power = 1
+		/obj/item/swapper/power_drill = 1,
+		/obj/item/swapper/jaws_of_life = 1
 	)
 
 /obj/machinery/vending/wallbartender

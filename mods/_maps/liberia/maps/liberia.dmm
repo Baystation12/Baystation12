@@ -2538,8 +2538,8 @@
 /area/liberia/mule)
 "eg" = (
 /obj/structure/table/mag,
-/obj/item/wirecutters/power,
-/obj/item/wrench/power,
+/obj/item/swapper/jaws_of_life,
+/obj/item/swapper/power_drill,
 /obj/item/device/flashlight/upgraded,
 /obj/item/marshalling_wand,
 /obj/floor_decal/corner/brown{

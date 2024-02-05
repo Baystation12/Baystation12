@@ -8,7 +8,7 @@
 #include "ex666_ecosystem/_ex666_ecosystem.dme"
 #include "expanded_culture_descriptor/_expanded_culture_descriptor.dme"
 #include "gliding/_gliding.dme"
-#include "gravity_generator/_gravity_generator.dme"
+#include "machinery/_machinery.dme"
 #include "hairs_ports/_hairs_ports.dme"
 #include "hardsuits/_hardsuits.dme"
 #include "sprite_accessories/_sprite_accessories.dme"
@@ -21,5 +21,6 @@
 #include "ssinput/_ssinput.dme"
 #include "statusbar/_statusbar.dme"
 #include "utf8/_utf8.dme"
+#include "utility_items/_utility_items.dme"
 
 #include "../packs/sierra-tweaks/_pack.dm"

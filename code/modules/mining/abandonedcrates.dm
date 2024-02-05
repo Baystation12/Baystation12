@@ -5,7 +5,10 @@
 	var/list/code = list()
 	var/list/lastattempt = list()
 	var/attempts = 10
-	var/codelen = 4
+	// [SIERRA-EDIT] - UTILITY_ITEMS - Multimeter Avoiding redeclare of var "codelen"
+	// var/codelen = 4 // SIERRA-EDIT - ORIGINAL
+	codelen = 4
+	// [/SIERRA-EDIT] - UTILITY_ITEMS
 	locked = 1
 
 /obj/structure/closet/crate/secure/loot/New()
