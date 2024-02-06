@@ -135,6 +135,7 @@
 	/singleton/emote/visible/shrug,
 	/singleton/emote/visible/smile,
 	/singleton/emote/visible/pale,
+	/singleton/emote/audible/choke,
 	/singleton/emote/visible/tremble,
 	/singleton/emote/visible/wink,
 	/singleton/emote/visible/hug,
