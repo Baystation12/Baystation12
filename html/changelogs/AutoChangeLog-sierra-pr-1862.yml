@@ -1,0 +1,7 @@
+author: emmanuelbassil
+changes:
+  - {tweak: 'As part of the damage standardization, can now damage closets/crates
+      with melee attacks.'}
+  - {tweak: Damaging a closet also relays some damage to whatever's inside.}
+  - {tweak: Secure closets/crates are tougher than regular closets/crates.}
+delete-after: true
