@@ -475,7 +475,7 @@
 	machine_desc = "This nuclear generator uses a combination of uranium and, strangely, vodka. Rated for 150 kW max safe output."
 	var/coolant_volume = 120
 	var/coolant_use = 1
-	var/coolant_reagent = /datum/reagent/ethanol/vodka
+	var/datum/reagent/coolant_reagent = /datum/reagent/ethanol/vodka
 
 /obj/machinery/power/port_gen/pacman/super/potato/New()
 	create_reagents(coolant_volume)
@@ -503,18 +503,28 @@
 	if(power_output > max_safe_output)
 		icon_state = "potatodanger"
 
-/obj/machinery/power/port_gen/pacman/super/potato/use_tool(obj/item/O, mob/living/user, list/click_params)
-	if(istype(O, /obj/item/reagent_containers))
-		var/obj/item/reagent_containers/R = O
-		if(R.standard_pour_into(src,user))
-			if(reagents.has_reagent("vodka"))
-				audible_message(SPAN_NOTICE("[src] blips happily"))
-				playsound(get_turf(src),'sound/machines/synth_yes.ogg', 50, 0)
-			else
-				audible_message(SPAN_WARNING("[src] blips in disappointment"))
-				playsound(get_turf(src), 'sound/machines/synth_no.ogg', 50, 0)
-		return TRUE
-	return ..()
+/obj/machinery/power/port_gen/pacman/super/potato/use_tool(obj/item/item, mob/living/user, list/click_params)
+	if (!istype(item, /obj/item/reagent_containers))
+		return ..()
+	var/datum/reagents/item_reagents = item.reagents
+	if (!HAS_FLAGS(item.atom_flags, ATOM_FLAG_OPEN_CONTAINER))
+		to_chat(user, SPAN_WARNING("\The [item] is closed."))
+	else if (!item_reagents.has_reagent(coolant_reagent))
+		to_chat(user, SPAN_WARNING("\The [src] needs [initial(coolant_reagent.name)] to run."))
+	else if (length(item_reagents.reagent_list) > 1)
+		to_chat(user, SPAN_WARNING("The contents of \the [item] is impure."))
+	else
+		var/obj/item/reagent_containers/container = item
+		var/transferred = item_reagents.trans_to_holder(reagents, container.amount_per_transfer_from_this)
+		if (transferred)
+			user.visible_message(
+				SPAN_ITALIC("\The [user] pours something from \the [item] into \the [src]."),
+				SPAN_ITALIC("You pour [transferred]u from \the [item] into \the [src]."),
+				SPAN_ITALIC("You hear a liquid gurgling.")
+			)
+		else
+			to_chat(user, SPAN_WARNING("The [src] is full."))
+	return TRUE
 
 /obj/machinery/power/port_gen/pacman/super/potato/reactor
 	name = "nuclear reactor"
