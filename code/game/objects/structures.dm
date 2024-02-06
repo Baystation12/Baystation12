@@ -3,7 +3,7 @@
 	w_class = ITEM_SIZE_NO_CONTAINER
 	layer = STRUCTURE_LAYER
 
-	var/breakable
+	var/fragile
 	var/parts
 	var/list/connections = list("0", "0", "0", "0")
 	var/list/other_connections = list("0", "0", "0", "0")
@@ -16,7 +16,7 @@
 
 /obj/structure/damage_health(damage, damage_type, damage_flags, severity, skip_can_damage_check)
 	if (damage && HAS_FLAGS(damage_flags, DAMAGE_FLAG_TURF_BREAKER))
-		if (breakable)
+		if (fragile)
 			return kill_health()
 		damage = max(damage, 10)
 	..()
@@ -117,6 +117,15 @@
 
 	return ..()
 
+/obj/structure/proc/dump_contents()
+	for(var/mob/M in src)
+		M.dropInto(loc)
+		if(M.client)
+			M.client.eye = M.client.mob
+			M.client.perspective = MOB_PERSPECTIVE
+
+	for(var/atom/movable/AM in src)
+		AM.dropInto(loc)
 
 /obj/structure/proc/can_visually_connect()
 	return anchored

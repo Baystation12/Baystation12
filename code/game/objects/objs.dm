@@ -242,6 +242,9 @@
 
 
 /obj/attack_hand(mob/living/user)
+	. = ..()
+	if (.)
+		return
 	if (Adjacent(user))
 		add_fingerprint(user)
 
@@ -276,7 +279,6 @@
 				)
 		damage_health(damage, attack.get_damage_type(), attack.damage_flags())
 		return TRUE
-	..()
 
 /obj/is_fluid_pushable(amt)
 	return ..() && w_class <= round(amt/20)

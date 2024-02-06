@@ -6,6 +6,7 @@
 	setup = CLOSET_HAS_LOCK | CLOSET_CAN_BE_WELDED
 	locked = TRUE
 	health_max = 200
+	health_min_damage = 5
 
 /obj/structure/closet/secure_closet/slice_into_parts(obj/item/weldingtool/WT, mob/user)
 	to_chat(user, SPAN_NOTICE("\The [src] is too strong to be taken apart."))

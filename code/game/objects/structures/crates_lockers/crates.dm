@@ -90,6 +90,8 @@
 	closet_appearance = /singleton/closet_appearance/crate/secure
 	setup = CLOSET_HAS_LOCK
 	locked = TRUE
+	health_max = 200
+	health_min_damage = 5
 
 /obj/structure/closet/crate/secure/Initialize()
 	. = ..()
