@@ -6,6 +6,7 @@
 	density = TRUE
 	w_class = ITEM_SIZE_NO_CONTAINER
 	health_max = 100
+	health_min_damage = 3
 
 	var/welded = 0
 	var/large = 1
@@ -71,6 +72,14 @@
 		else
 			to_chat(user, "It is full.")
 
+/obj/structure/closet/damage_health(damage, damage_type, damage_flags, severity, skip_can_damage_check)
+	. = ..()
+	if (!length(contents))
+		return
+	var/content_damage = damage / length(contents)
+	for (var/atom/victim as anything in contents)
+		victim.damage_health(content_damage, damage_type, damage_flags, severity, skip_can_damage_check)
+
 /obj/structure/closet/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0 || wall_mounted)) return 1
 	return (!density)
@@ -91,16 +100,6 @@
 			if (L.mob_size >= MOB_LARGE)
 				return FALSE
 	return TRUE
-
-/obj/structure/closet/proc/dump_contents()
-	for(var/mob/M in src)
-		M.dropInto(loc)
-		if(M.client)
-			M.client.eye = M.client.mob
-			M.client.perspective = MOB_PERSPECTIVE
-
-	for(var/atom/movable/AM in src)
-		AM.dropInto(loc)
 
 /obj/structure/closet/proc/store_contents()
 	var/stored_units = 0
@@ -402,8 +401,10 @@
 		to_chat(user, SPAN_NOTICE("It won't budge!"))
 
 /obj/structure/closet/attack_hand(mob/user as mob)
-	src.add_fingerprint(user)
-	src.toggle(user)
+	if (user.a_intent == I_HURT)
+		return ..()
+	add_fingerprint(user)
+	toggle(user)
 
 /obj/structure/closet/attack_ghost(mob/ghost)
 	if(ghost.client && ghost.client.inquisitive_ghost)

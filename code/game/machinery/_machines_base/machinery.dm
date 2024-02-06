@@ -236,7 +236,7 @@
 // If you don't call parent in this proc, you must make all appropriate checks yourself.
 // If you do, you must respect the return value.
 /obj/machinery/attack_hand(mob/user)
-	if((. = ..())) // Buckling, climbers, punching on harm; unlikely to return true.
+	if((. = ..())) // Buckling, climbers; unlikely to return true unless on harm intent and damage is dealt.
 		return
 	if(!CanPhysicallyInteract(user))
 		return FALSE // The interactions below all assume physical access to the machine. If this is not the case, we let the machine take further action.
