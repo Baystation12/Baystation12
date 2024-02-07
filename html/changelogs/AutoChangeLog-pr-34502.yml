@@ -1,5 +1,0 @@
-author: Spookerton
-changes:
-  - {bugfix: The potato reactor and reactor reactor correctly accept vodka and coolant
-      as coolants respectively.}
-delete-after: true

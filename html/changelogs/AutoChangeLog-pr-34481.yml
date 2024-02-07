@@ -1,4 +1,0 @@
-author: LordNest
-changes:
-  - {bugfix: Humans can choke (use emote) now properly.}
-delete-after: true
