@@ -38,6 +38,7 @@ GLOBAL_LIST_EMPTY(facial_hair_styles_list) //stores /datum/sprite_accessory/faci
 
 var/global/list/skin_styles_female_list = list()		//unused
 GLOBAL_LIST_EMPTY(body_marking_styles_list)		//stores /datum/sprite_accessory/marking indexed by name
+GLOBAL_LIST_EMPTY(trait_list) //Stores paths of all traits indexed by name
 
 GLOBAL_DATUM_INIT(underwear, /datum/category_collection/underwear, new())
 
@@ -122,6 +123,15 @@ var/global/list/string_slot_flags = list(
 			continue
 		M = new path()
 		GLOB.body_marking_styles_list[M.name] = M
+
+	//Traits
+	paths = subtypesof(/singleton/trait)
+	for (var/path in paths)
+		var/singleton/trait/trait = path
+		if (!initial(trait.name))
+			continue
+		trait = new path()
+		GLOB.trait_list[trait.name] = trait
 
 	//Languages and species.
 	paths = typesof(/datum/language)-/datum/language

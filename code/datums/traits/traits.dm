@@ -101,6 +101,11 @@
 	var/list/incompatible_traits
 	abstract_type = /singleton/trait
 
+	///List of species in which this trait is forbidden.
+	var/list/forbidden_species = list()
+	///Determines if trait can be selected in character setup
+	var/selectable = FALSE
+
 /singleton/trait/New()
 	if(type == abstract_type)
 		CRASH("Invalid initialization")

@@ -576,7 +576,12 @@
 			return
 
 		var/list/possible_levels = selected.levels
-		var/selected_level = input("Select the trait's level to apply to \the [target].", "Select Level") as null | anything in possible_levels
+		var/selected_level
+		if (length(possible_levels) > 1)
+			selected_level = input("Select the trait's level to apply to \the [target].", "Select Level") as null | anything in possible_levels
+		else
+			selected_level = possible_levels[1]
+
 		if (QDELETED(target))
 			return
 
