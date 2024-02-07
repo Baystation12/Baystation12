@@ -1,0 +1,536 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aG" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 6
+	},
+/obj/structure/lattice,
+/obj/landmark/clear,
+/turf/template_noop,
+/area/space)
+"bo" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"dh" = (
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/power/smes/buildable/preset/on_full,
+/turf/simulated/floor/airless,
+/area/space)
+"ef" = (
+/obj/structure/lattice,
+/obj/structure/grille,
+/obj/landmark/clear,
+/obj/landmark/clear,
+/turf/template_noop,
+/area/space)
+"fg" = (
+/obj/structure/lattice,
+/obj/landmark/clear,
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
+	dir = 4
+	},
+/turf/template_noop,
+/area/space)
+"fh" = (
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup,
+/turf/simulated/floor/airless,
+/area/space)
+"ia" = (
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/power/tracker,
+/turf/simulated/floor/airless,
+/area/space)
+"iL" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"ks" = (
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/power/solar/improved,
+/obj/floor_decal/solarpanel,
+/turf/simulated/floor/airless,
+/area/space)
+"kH" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"kJ" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 4
+	},
+/obj/landmark/clear,
+/turf/template_noop,
+/area/space)
+"kZ" = (
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/portable_atmospherics/canister/air,
+/turf/simulated/floor/airless,
+/area/space)
+"or" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"oS" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"pz" = (
+/obj/machinery/power/solar_control/autostart,
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"rU" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 9
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"tw" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 6
+	},
+/obj/machinery/alarm/server{
+	dir = 4;
+	locked = 0;
+	pixel_x = -21;
+	req_access = newlist()
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"uu" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 5
+	},
+/obj/structure/lattice,
+/obj/landmark/clear,
+/turf/template_noop,
+/area/space)
+"wY" = (
+/turf/simulated/wall/r_wall,
+/area/space)
+"xc" = (
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/power/apc{
+	dir = 1;
+	locked = 0;
+	name = "north bump";
+	pixel_y = 24;
+	req_access = newlist()
+	},
+/obj/machinery/computer/ship/sensors,
+/turf/simulated/floor/airless,
+/area/space)
+"yP" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 9
+	},
+/obj/structure/lattice,
+/obj/landmark/clear,
+/turf/template_noop,
+/area/space)
+"zF" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 6
+	},
+/obj/landmark/clear,
+/turf/template_noop,
+/area/space)
+"zQ" = (
+/obj/machinery/atmospherics/pipe/manifold/visible{
+	dir = 1
+	},
+/turf/simulated/wall/r_wall,
+/area/space)
+"AL" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"AP" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 10
+	},
+/obj/structure/lattice,
+/obj/landmark/clear,
+/turf/template_noop,
+/area/space)
+"Bk" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"Cn" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 10
+	},
+/obj/landmark/clear,
+/turf/template_noop,
+/area/space)
+"CA" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"FM" = (
+/obj/wallframe_spawn/reinforced,
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 4
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"Gz" = (
+/obj/structure/lattice,
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 4
+	},
+/turf/simulated/wall/r_wall,
+/area/space)
+"HR" = (
+/obj/structure/lattice,
+/obj/structure/grille,
+/obj/landmark/clear,
+/turf/template_noop,
+/area/space)
+"Ia" = (
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/power/solar/improved,
+/obj/floor_decal/solarpanel,
+/turf/simulated/floor/airless,
+/area/space)
+"Jl" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"Kb" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"Mm" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 9
+	},
+/obj/landmark/clear,
+/turf/template_noop,
+/area/space)
+"NV" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 10
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"OZ" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 5
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"QX" = (
+/obj/machinery/shipsensors,
+/turf/simulated/floor/airless,
+/area/space)
+"Rf" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
+	dir = 8
+	},
+/obj/structure/lattice,
+/obj/landmark/clear,
+/turf/template_noop,
+/area/space)
+"TF" = (
+/obj/machinery/power/terminal{
+	dir = 1
+	},
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"VQ" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 5
+	},
+/obj/landmark/clear,
+/turf/template_noop,
+/area/space)
+"Xk" = (
+/obj/structure/cable,
+/obj/machinery/power/solar/improved,
+/obj/floor_decal/solarpanel,
+/turf/simulated/floor/airless,
+/area/space)
+"YS" = (
+/obj/machinery/atmospherics/pipe/simple/visible,
+/obj/wallframe_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/space)
+"ZO" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/visible,
+/turf/simulated/floor/plating,
+/area/space)
+
+(1,1,1) = {"
+HR
+HR
+HR
+HR
+HR
+HR
+HR
+HR
+HR
+HR
+HR
+"}
+(2,1,1) = {"
+HR
+HR
+aG
+uu
+aG
+uu
+ks
+ks
+ks
+HR
+HR
+"}
+(3,1,1) = {"
+HR
+aG
+Mm
+Cn
+Mm
+kJ
+AL
+bo
+kH
+Xk
+HR
+"}
+(4,1,1) = {"
+HR
+Rf
+wY
+wY
+wY
+FM
+wY
+wY
+iL
+Xk
+HR
+"}
+(5,1,1) = {"
+HR
+zQ
+fh
+wY
+tw
+rU
+wY
+pz
+CA
+Xk
+HR
+"}
+(6,1,1) = {"
+HR
+Gz
+kZ
+YS
+ZO
+Jl
+wY
+dh
+TF
+Xk
+ef
+"}
+(7,1,1) = {"
+HR
+Gz
+QX
+wY
+NV
+OZ
+wY
+xc
+Bk
+Xk
+HR
+"}
+(8,1,1) = {"
+HR
+fg
+wY
+wY
+wY
+FM
+wY
+wY
+Bk
+Xk
+HR
+"}
+(9,1,1) = {"
+HR
+AP
+VQ
+zF
+VQ
+kJ
+oS
+or
+Kb
+Xk
+HR
+"}
+(10,1,1) = {"
+HR
+HR
+AP
+yP
+AP
+yP
+ia
+Ia
+Ia
+HR
+HR
+"}
+(11,1,1) = {"
+HR
+HR
+HR
+HR
+HR
+HR
+HR
+HR
+HR
+HR
+HR
+"}
