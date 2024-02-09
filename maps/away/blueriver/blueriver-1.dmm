@@ -80,7 +80,7 @@
 	alpha = 130;
 	color = "BLUE";
 	desc = "This looks like an alien power cell. You can make out both of the connections relatively clearly though.";
-	icon = 'icons/obj/grenade.dmi';
+	icon = 'icons/obj/weapons/grenade.dmi';
 	icon_state = "delivery";
 	name = "alien power cell"
 	},

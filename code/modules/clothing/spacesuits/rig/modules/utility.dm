@@ -476,6 +476,7 @@
 
 /obj/item/rig_module/cooling_unit
 	name = "mounted cooling unit"
+	icon_state = "cooling"
 	toggleable = 1
 	origin_tech = list(TECH_MAGNET = 2, TECH_MATERIAL = 2, TECH_ENGINEERING = 5)
 	interface_name = "mounted cooling unit"
