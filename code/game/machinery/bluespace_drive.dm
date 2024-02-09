@@ -145,7 +145,7 @@
 /obj/machinery/bluespacedrive/proc/do_pulse()
 	playsound(src, 'sound/effects/EMPulse.ogg', 100, TRUE)
 	var/datum/bubble_effect/bluespace_pulse/parent
-	for (var/level in GetConnectedZlevels(z))
+	for (var/level in GetConnectedZlevelsSet(z))
 		parent = new (x, y, level, 1, 1, parent, interlude_teleport_chance = interlude_chance)
 
 
@@ -180,7 +180,7 @@
 	..()
 	src.interlude_teleport_chance = interlude_teleport_chance
 	START_PROCESSING(SSfastprocess, src)
-	var/list/zlevels = GetConnectedZlevels(z)
+	var/list/zlevels = GetConnectedZlevelsSet(z)
 	for (var/mob/living/L as anything in GLOB.alive_mobs)
 		if (!(L.z in zlevels))
 			continue
@@ -212,7 +212,7 @@
 	var/mob/living/being = locate() in turf
 	if (being && prob(50))
 		//swap places with another mob
-		var/list/zlevels = GetConnectedZlevels(being.z)
+		var/list/zlevels = GetConnectedZlevelsSet(being.z)
 		for (var/mob/living/mob as anything in mobs_to_switch)
 			if (!(mob.z in zlevels))
 				continue

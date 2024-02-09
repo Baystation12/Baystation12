@@ -197,6 +197,6 @@
 
 /obj/overmap/radio/distress/Initialize()
 	..()
-	for(var/obj/machinery/computer/ship/helm/H in SSmachines.machinery)
+	for(var/obj/machinery/computer/ship/helm/H as anything in SSmachines.get_machinery_of_type(/obj/machinery/computer/ship/helm))
 		H.visible_message(SPAN_WARNING("\the [H] pings uneasily as it detects a distress signal."))
 		playsound(H, 'sound/machines/sensors/newcontact.ogg', 50, 3, 3)

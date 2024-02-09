@@ -126,7 +126,7 @@ var/global/list/all_gps_units = list()
 	if(long_range)
 		adding_sites = (GLOB.using_map.station_levels|GLOB.using_map.contact_levels|GLOB.using_map.player_levels)
 	else
-		adding_sites = GetConnectedZlevels(origin.z)
+		adding_sites = GetConnectedZlevelsSet(origin.z)
 
 	if(LAZYLEN(adding_sites))
 		LAZYDISTINCTADD(reachable_z_levels, adding_sites)
@@ -229,7 +229,7 @@ var/global/list/all_gps_units = list()
 	if(long_range)
 		z_level_detection = (GLOB.using_map.station_levels|GLOB.using_map.contact_levels|GLOB.using_map.player_levels)
 	else
-		z_level_detection = GetConnectedZlevels(curr.z)
+		z_level_detection = GetConnectedZlevelsSet(curr.z)
 	.["z_level_detection"] = z_level_detection
 
 	var/list/gps_list = list()

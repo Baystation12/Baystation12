@@ -96,7 +96,7 @@
 
 		var/list/z_levels = list(chosen_z)
 		if (region == "Connected Zs")
-			z_levels = GetConnectedZlevels(chosen_z)
+			z_levels = GetConnectedZlevelsSet(chosen_z)
 
 		var/result = cmd_admin_narrate_helper(src)
 		if (!result)
@@ -893,7 +893,7 @@ Ccomp's first proc.
 	if (!turf)
 		to_chat(user, SPAN_WARNING("You must be in the game world to use this command."))
 		return
-	var/list/levels = GetConnectedZlevels(turf.z)
+	var/list/levels = GetConnectedZlevelsSet(turf.z)
 	if (!length(levels))
 		to_chat(user, SPAN_WARNING("No levels connected to this z-group."))
 		return
@@ -1031,7 +1031,7 @@ Ccomp's first proc.
 					SL.landmark.shuttle_name = name
 					SL.shuttle = name
 
-	for (var/obj/machinery/computer/shuttle_control/S in SSmachines.machinery)
+	for (var/obj/machinery/computer/shuttle_control/S as anything in SSmachines.get_machinery_of_type(/obj/machinery/computer/shuttle_control))
 		if (S.shuttle_tag == original_name)
 			S.shuttle_tag = name
 			S.name = "[name] Control Console"

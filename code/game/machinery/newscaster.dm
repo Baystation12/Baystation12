@@ -177,7 +177,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 	if (!connected_group)
 		var/datum/feed_network/G = new /datum/feed_network
 		G.newscasters += src
-		G.z_levels = GetConnectedZlevels(src.z)
+		G.z_levels = GetConnectedZlevelsSet(src.z)
 
 		connected_group = G
 		LAZYADD(news_network, G)

@@ -42,7 +42,7 @@ var/global/datum/ntnet/ntnet_global = new()
 /datum/ntnet/New()
 	if(ntnet_global && (ntnet_global != src))
 		ntnet_global = src // There can be only one.
-	for(var/obj/machinery/ntnet_relay/R in SSmachines.machinery)
+	for(var/obj/machinery/ntnet_relay/R as anything in SSmachines.get_machinery_of_type(/obj/machinery/ntnet_relay))
 		relays += R
 	build_software_lists()
 	build_emails_list()

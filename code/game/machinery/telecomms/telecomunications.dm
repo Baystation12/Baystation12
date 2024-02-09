@@ -128,7 +128,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	if(!listening_levels)
 		//Defaults to our Z level!
 		var/turf/position = get_turf(src)
-		listening_levels = GetConnectedZlevels(position.z)
+		listening_levels = GetConnectedZlevelsSet(position.z)
 
 	if(length(autolinkers))
 		// Links nearby machines
@@ -170,12 +170,12 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 /obj/machinery/telecomms/Move()
 	. = ..()
-	listening_levels = GetConnectedZlevels(z)
+	listening_levels = GetConnectedZlevelsSet(z)
 	update_power()
 
 /obj/machinery/telecomms/forceMove(newloc)
 	. = ..(newloc)
-	listening_levels = GetConnectedZlevels(z)
+	listening_levels = GetConnectedZlevelsSet(z)
 	update_power()
 
 /obj/machinery/telecomms/proc/update_power()

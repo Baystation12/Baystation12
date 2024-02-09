@@ -144,7 +144,7 @@
 				var/input = input(usr, "Please write a message to announce to the [station_name()].", "Priority Announcement") as null|message
 				if(!input || !can_still_topic())
 					return
-				var/affected_zlevels = GetConnectedZlevels(get_host_z())
+				var/affected_zlevels = GetConnectedZlevelsSet(get_host_z())
 				crew_announcement.Announce(input, zlevels = affected_zlevels)
 				announcment_cooldown = 1
 				spawn(600)//One minute cooldown
@@ -330,7 +330,7 @@ var/global/last_message_id = 0
 
 
 /proc/is_relay_online()
-	for(var/obj/machinery/bluespacerelay/M in SSmachines.machinery)
+	for(var/obj/machinery/bluespacerelay/M as anything in SSmachines.get_machinery_of_type(/obj/machinery/bluespacerelay))
 		if(M.stat == EMPTY_BITFIELD)
 			return 1
 	return 0

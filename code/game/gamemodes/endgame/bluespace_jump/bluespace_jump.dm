@@ -10,7 +10,7 @@
 	affected_levels = zlevels
 
 /datum/universal_state/bluespace_jump/OnEnter()
-	var/obj/machinery/bluespacedrive/drive = locate(/obj/machinery/bluespacedrive) in SSmachines.machinery
+	var/obj/machinery/bluespacedrive/drive = locate() in SSmachines.get_machinery_of_type(/obj/machinery/bluespacedrive)
 
 	if (!drive || !(drive.z in affected_levels))
 		return

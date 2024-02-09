@@ -91,7 +91,7 @@
 		AddOverlays(image(icon,"pin_here"))
 		return
 
-	if(!(there.z in GetConnectedZlevels(here.z)))
+	if(!(there.z in GetConnectedZlevelsSet(here.z)))
 		AddOverlays(image(icon,"pin_invalid"))
 		return
 	if(here.z > there.z)

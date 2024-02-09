@@ -116,7 +116,7 @@
 		return
 	if (bluespace_affected && prob(displacement_chance))
 		var/list/obj/structure/ladder/other_ladders= list()
-		var/list/zlevels = GetConnectedZlevels(z)
+		var/list/zlevels = GetConnectedZlevelsSet(z)
 		for (var/obj/structure/ladder/ladder)
 			if (src != ladder && (ladder.z in zlevels))
 				other_ladders += ladder
@@ -268,7 +268,7 @@
 			if (bluespace_affected)
 				var/list/obj/structure/other_stairs= list()
 				for (var/obj/structure/stairs/stair)
-					if (src != stair && (stair.z in GetConnectedZlevels(above.z)))
+					if (src != stair && (stair.z in GetConnectedZlevelsSet(above.z)))
 						other_stairs += stair
 				var/obj/structure/stairs/other_stair = pick(other_stairs)
 				if (prob(displacement_chance))

@@ -221,7 +221,7 @@
 		if(already_targeted)
 			continue
 
-		if(!(M.z in GetConnectedZlevels(z)))
+		if(!(M.z in GetConnectedZlevelsSet(z)))
 			continue
 		if(get_dist(M, src) > kill_range)
 			continue

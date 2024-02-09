@@ -227,7 +227,7 @@
 
 
 /obj/item/device/uplink_service/fake_command_report/enable(mob/user)
-	var/z_levels = GetConnectedZlevels(get_z(user))
+	var/z_levels = GetConnectedZlevelsSet(get_z(user))
 	post_comm_message(title, message)
 	if (public_announce)
 		command_announcement.Announce(message, title, GLOB.using_map.command_report_sound, msg_sanitized = TRUE, zlevels = z_levels)
@@ -243,7 +243,7 @@
 	service_label = "Ion Storm Announcement"
 
 /obj/item/device/uplink_service/fake_ion_storm/enable(mob/user = usr)
-	ion_storm_announcement(GetConnectedZlevels(get_z(src)))
+	ion_storm_announcement(GetConnectedZlevelsSet(get_z(src)))
 	. = ..()
 
 /*****************
@@ -273,7 +273,7 @@
 
 	if(CanUseTopic(user, GLOB.hands_state) != STATUS_INTERACTIVE)
 		return FALSE
-	command_announcement.Announce(message, title, msg_sanitized = 1, zlevels = GetConnectedZlevels(get_z(src)))
+	command_announcement.Announce(message, title, msg_sanitized = 1, zlevels = GetConnectedZlevelsSet(get_z(src)))
 	return TRUE
 
 /*********************************

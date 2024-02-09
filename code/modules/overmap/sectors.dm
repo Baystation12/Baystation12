@@ -85,7 +85,7 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 	return get_filtered_areas(list(/proc/area_belongs_to_zlevels = map_z))
 
 /obj/overmap/visitable/proc/find_z_levels()
-	map_z = GetConnectedZlevels(z)
+	map_z = GetConnectedZlevelsSet(z)
 
 /obj/overmap/visitable/proc/register_z_levels()
 	for(var/zlevel in map_z)
@@ -162,7 +162,7 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 /obj/overmap/visitable/sector/update_known_connections(notify = FALSE)
 	. = ..()
 
-	for(var/obj/machinery/computer/ship/helm/H in SSmachines.machinery)
+	for(var/obj/machinery/computer/ship/helm/H as anything in SSmachines.get_machinery_of_type(/obj/machinery/computer/ship/helm))
 		H.add_known_sector(src, notify)
 
 

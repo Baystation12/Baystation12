@@ -228,7 +228,7 @@
 
 /obj/item/pinpointer/radio/acquire_target()
 	var/turf/T = get_turf(src)
-	var/zlevels = GetConnectedZlevels(T.z)
+	var/zlevels = GetConnectedZlevelsSet(T.z)
 	var/cur_dist = world.maxx+world.maxy
 	for(var/obj/machinery/tele_beacon/R in world)
 		if(!R.functioning())

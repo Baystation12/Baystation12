@@ -24,7 +24,7 @@
 	var/atom/movable/AM = nano_host()
 	if(!istype(AM))
 		return
-	var/list/zlevels = GetConnectedZlevels(AM.z)
+	var/list/zlevels = GetConnectedZlevelsSet(AM.z)
 	for(var/obj/item/gun/G in GLOB.secure_weapons)
 		var/out_of_range = FALSE
 		var/area_name = "OUT OF RANGE"

@@ -72,6 +72,6 @@ GLOBAL_LIST_INIT(multilevel_local_networks, new)
 /datum/local_network/multilevel/within_radius(atom/checking)
 	for(var/entity_list in network_entities)
 		for(var/atom/entity in entity_list)
-			if(!(get_z(entity) in GetConnectedZlevels(get_z(checking))))
+			if(!(get_z(entity) in GetConnectedZlevelsSet(get_z(checking))))
 				return FALSE
 	return TRUE

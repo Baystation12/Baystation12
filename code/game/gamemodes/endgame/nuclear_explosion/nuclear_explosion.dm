@@ -25,12 +25,12 @@
 	if(isStationLevel(T.z))
 		to_world(SPAN_DANGER("The [station_name()] was destoyed by the nuclear blast!"))
 
-		dust_mobs(GetConnectedZlevels(T.z))
+		dust_mobs(GetConnectedZlevelsSet(T.z))
 		play_cinematic_station_destroyed()
 	else
 		to_world(SPAN_DANGER("A nuclear device was set off, but the explosion was out of reach of the [station_name()]!"))
 
-		dust_mobs(GetConnectedZlevels(T.z))
+		dust_mobs(GetConnectedZlevelsSet(T.z))
 		play_cinematic_station_unaffected()
 
 	sleep(100)

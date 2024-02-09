@@ -53,7 +53,7 @@
 /datum/alarm_handler/proc/alarms(z_level)
 	if(z_level)
 		. = list()
-		for(var/z in GetConnectedZlevels(z_level))
+		for(var/z in GetConnectedZlevelsSet(z_level))
 			. += SANITIZE_LIST(alarms_by_z["[z]"])
 	else
 		return alarms

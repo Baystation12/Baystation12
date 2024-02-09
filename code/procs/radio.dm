@@ -41,7 +41,7 @@
 	if(message_servers)
 		var/list/zlevels = GLOB.using_map.contact_levels
 		if(z)
-			zlevels = GetConnectedZlevels(z)
+			zlevels = GetConnectedZlevelsSet(z)
 		for (var/obj/machinery/message_server/MS in message_servers)
 			if(MS.active && (MS.z in zlevels))
 				return MS

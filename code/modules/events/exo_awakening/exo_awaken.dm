@@ -87,11 +87,11 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	for (var/area/A in exoplanet_areas)
 		var/list/players = list()
 		for (var/mob/M in GLOB.player_list)
-			if (M.stat != DEAD && (get_z(M) in GetConnectedZlevels(A.z)))
+			if (M.stat != DEAD && (get_z(M) in GetConnectedZlevelsSet(A.z)))
 				players += M
 				chosen_area = A
 				chosen_planet = map_sectors["[A.z]"]
-				affecting_z = GetConnectedZlevels(A.z)
+				affecting_z = GetConnectedZlevelsSet(A.z)
 
 		if (length(players) >= required_players_count)
 			sites += A
@@ -105,7 +105,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 	chosen_area = pick(sites)
 	chosen_planet = map_sectors["[chosen_area.z]"]
-	affecting_z = GetConnectedZlevels(chosen_area.z)
+	affecting_z = GetConnectedZlevelsSet(chosen_area.z)
 
 	if (!chosen_area)
 		log_debug("Exoplanet Awakening failed to start, could not find a planetary area.")

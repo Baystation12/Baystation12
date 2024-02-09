@@ -362,7 +362,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 /proc/get_valid_silicon_zs(z)
 	RETURN_TYPE(/list)
 	if(z)
-		return GetConnectedZlevels(z)
+		return GetConnectedZlevelsSet(z)
 	return list() //We return an empty list, because we are apparently in nullspace
 
 /proc/get_sorted_mobs()

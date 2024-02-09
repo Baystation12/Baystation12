@@ -174,7 +174,7 @@
 /datum/computer_file/program/chatclient/process_tick()
 	..()
 	var/turf/turf = get_turf(computer.get_physical_host())
-	if (channel && !(channel.source_z in GetConnectedZlevels(turf.z)))
+	if (channel && !(channel.source_z in GetConnectedZlevelsSet(turf.z)))
 		channel.remove_client(src)
 		ntnrc_alert("A user has left your channel.")
 		channel = null
@@ -245,7 +245,7 @@
 	else // Channel selection screen
 		var/list/all_channels[0]
 		var/turf/turf = get_turf(C.computer.get_physical_host())
-		var/list/connected_zs = GetConnectedZlevels(turf.z)
+		var/list/connected_zs = GetConnectedZlevelsSet(turf.z)
 		for(var/datum/ntnet_conversation/conv in ntnet_global.chat_channels)
 			if(conv && conv.title && (conv.source_z in connected_zs))
 				all_channels.Add(list(list(

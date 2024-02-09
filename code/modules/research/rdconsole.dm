@@ -123,7 +123,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	..()
 	files = new
 	if(!id)
-		for(var/obj/machinery/r_n_d/server/centcom/S in SSmachines.machinery)
+		for(var/obj/machinery/r_n_d/server/centcom/S as anything in SSmachines.get_machinery_of_type(/obj/machinery/r_n_d/server/centcom))
 			S.update_connections()
 			break
 
@@ -288,7 +288,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			. = TOPIC_HANDLED
 			spawn(30)
 				if(src)
-					for(var/obj/machinery/r_n_d/server/S in SSmachines.machinery)
+					for(var/obj/machinery/r_n_d/server/S as anything in SSmachines.get_machinery_of_type(/obj/machinery/r_n_d/server))
 						var/server_processed = 0
 						if((id in S.id_with_upload) || istype(S, /obj/machinery/r_n_d/server/centcom))
 							for(var/datum/tech/T in files.known_tech)

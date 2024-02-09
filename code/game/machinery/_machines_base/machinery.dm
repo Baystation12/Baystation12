@@ -82,7 +82,8 @@
 		set_dir(d)
 	if (init_flags & INIT_MACHINERY_START_PROCESSING)
 		START_PROCESSING_MACHINE(src, INIT_MACHINERY_START_PROCESSING)
-	SSmachines.machinery += src // All machines should remain in this list, always.
+
+	SSmachines.register_machinery(src) // All machines should be registered this way, always.
 	if(ispath(wires))
 		wires = new wires(src)
 	populate_parts(populate_parts)
@@ -103,7 +104,7 @@
 /obj/machinery/Destroy()
 	if(istype(wires))
 		QDEL_NULL(wires)
-	SSmachines.machinery -= src
+	SSmachines.unregister_machinery(src)
 	QDEL_NULL_LIST(component_parts) // Further handling is done via destroyed events.
 	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_ALL)
 	. = ..()

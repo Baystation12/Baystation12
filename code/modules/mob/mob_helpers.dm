@@ -400,7 +400,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 /proc/broadcast_hud_message(message, broadcast_source, list/targets, icon)
 	var/turf/sourceturf = get_turf(broadcast_source)
 	for(var/mob/M in targets)
-		if(!sourceturf || (get_z(M) in GetConnectedZlevels(sourceturf.z)))
+		if(!sourceturf || (get_z(M) in GetConnectedZlevelsSet(sourceturf.z)))
 			M.show_message(SPAN_INFO("[icon2html(icon, M)] [message]"), 1)
 
 /proc/mobs_in_area(area/A)
