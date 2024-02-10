@@ -343,7 +343,7 @@ var/global/datum/controller/master/Master = new
 				//now we'll go through all the subsystems we want to offset and give them a next_fire
 				for(var/datum/controller/subsystem/SS as anything in current_runlevel_subsystems)
 					//we only want to offset it if it's new and also behind
-					if(SS.next_fire > world.time || (SS in old_subsystems))
+					if(SS.next_fire <= world.time || (SS in old_subsystems))
 						continue
 					SS.next_fire = world.time + world.tick_lag * rand(0, min(SS.wait, 2 SECONDS) / world.tick_lag)
 
