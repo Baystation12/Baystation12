@@ -345,7 +345,7 @@ var/global/datum/controller/master/Master = new
 					//we only want to offset it if it's new and also behind
 					if(SS.next_fire <= world.time || (SS in old_subsystems))
 						continue
-					SS.next_fire = world.time + world.tick_lag * rand(0, min(SS.wait, 2 SECONDS) / world.tick_lag)
+					SS.next_fire = world.time + world.tick_lag * rand(1, 5 / world.tick_lag)
 
 			subsystems_to_check = current_runlevel_subsystems
 		else
