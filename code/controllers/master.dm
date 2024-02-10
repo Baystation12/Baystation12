@@ -339,12 +339,11 @@ var/global/datum/controller/master/Master = new
 				//resechedule subsystems
 				cached_runlevel = checking_runlevel
 				current_runlevel_subsystems = runlevel_sorted_subsystems[cached_runlevel]
-				//now we'll go through all the subsystems we want to offset and give them a next_fire
+				var/stagger = world.time
 				for(var/datum/controller/subsystem/SS as anything in current_runlevel_subsystems)
-					//we only want to offset it if it's new and also behind
-					if(SS.next_fire > world.time)
-						continue
-					SS.next_fire = world.time + world.tick_lag * rand(0, min(SS.wait, 2 SECONDS) / world.tick_lag)
+					if(SS.next_fire <= world.time)
+						stagger += world.tick_lag * rand(1, 5)
+						SS.next_fire = stagger
 
 			subsystems_to_check = current_runlevel_subsystems
 		else
