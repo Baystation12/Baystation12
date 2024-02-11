@@ -1,4 +1,0 @@
-author: LordNest
-changes:
-  - {bugfix: Fixed absence of capitalized cyrillic prefixes for radio usage.}
-delete-after: true
