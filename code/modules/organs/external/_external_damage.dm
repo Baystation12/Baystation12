@@ -323,29 +323,33 @@
 	return FALSE
 
 /obj/item/organ/external/proc/get_brute_mod(damage_flags)
-	var/obj/item/organ/internal/augment/armor/A = owner && owner.internal_organs_by_name["[BP_CHEST]_aug_armor"]
-	var/B = 1
-	if(A && istype(A))
-		B = A.brute_mult
+	var/reduction = 1
+	for(var/obj/item/organ/internal/augment/armor/armor_aug in owner.internal_organs)
+		reduction = reduction * armor_aug.brute_mult
+	var/base_armor = 1
+	if(reduction != 1)
+		base_armor = reduction
 	if(!BP_IS_ROBOTIC(src))
-		B *= species.get_brute_mod(owner)
+		base_armor *= species.get_brute_mod(owner)
 	var/blunt = !(damage_flags & DAMAGE_FLAG_EDGE|DAMAGE_FLAG_SHARP)
 	if(blunt && BP_IS_BRITTLE(src))
-		B *= 1.5
+		base_armor *= 1.5
 	if(BP_IS_CRYSTAL(src))
-		B *= 0.8
-	return B + (0.2 * burn_dam/max_damage) //burns make you take more brute damage
+		base_armor *= 0.8
+	return base_armor + (0.2 * burn_dam/max_damage) //burns make you take more brute damage
 
 /obj/item/organ/external/proc/get_burn_mod(damage_flags)
-	var/obj/item/organ/internal/augment/armor/A = owner && owner.internal_organs_by_name["[BP_CHEST]_aug_armor"]
-	var/B = 1
-	if(A && istype(A))
-		B = A.burn_mult
+	var/reduction = 1
+	for(var/obj/item/organ/internal/augment/armor/armor_aug in owner.internal_organs)
+		reduction = reduction * armor_aug.burn_mult
+	var/base_armor = 1
+	if(reduction != 1)
+		base_armor = reduction
 	if(!BP_IS_ROBOTIC(src))
-		B *= species.get_burn_mod(owner)
+		base_armor *= species.get_burn_mod(owner)
 	if(BP_IS_CRYSTAL(src))
-		B *= 0.1
-	return B
+		base_armor *= 0.1
+	return base_armor
 
 //organs can come off in three cases
 //1. If the damage source is edge_eligible and the brute damage dealt exceeds the edge threshold, then the organ is cut off.
