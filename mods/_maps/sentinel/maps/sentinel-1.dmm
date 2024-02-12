@@ -5252,8 +5252,8 @@
 /obj/structure/table/rack,
 /obj/item/storage/briefcase/inflatable,
 /obj/item/storage/briefcase/inflatable,
-/obj/item/device/spaceflare,
-/obj/item/device/spaceflare,
+/obj/item/shuttle_beacon,
+/obj/item/shuttle_beacon,
 /obj/item/clothing/head/helmet/solgov/pilot/fleet,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/reaper)

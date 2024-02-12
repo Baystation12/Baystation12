@@ -25,7 +25,7 @@
 		/obj/item/storage/bag/fossils,
 		/obj/item/hand_labeler,
 		/obj/item/taperoll/research,
-		/obj/item/device/spaceflare
+		/obj/item/shuttle_beacon
 	)
 
 /obj/structure/closet/wardrobe/ptgear

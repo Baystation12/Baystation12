@@ -11319,8 +11319,8 @@
 	dir = 4
 	},
 /obj/item/storage/box/glowsticks,
-/obj/item/device/spaceflare,
-/obj/item/device/spaceflare,
+/obj/item/shuttle_beacon,
+/obj/item/shuttle_beacon,
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
 "cyA" = (
@@ -54856,7 +54856,7 @@
 /obj/floor_decal/borderfloor/corner2,
 /obj/floor_decal/corner/brown/bordercorner2,
 /obj/floor_decal/industrial/outline/yellow,
-/obj/item/device/spaceflare,
+/obj/item/shuttle_beacon,
 /obj/item/device/radio,
 /obj/item/storage/belt/utility/full,
 /turf/simulated/floor/tiled,
@@ -65731,8 +65731,8 @@
 /obj/random/maintenance,
 /obj/random/maintenance,
 /obj/floor_decal/industrial/outline/grey,
-/obj/item/device/spaceflare,
-/obj/item/device/spaceflare,
+/obj/item/shuttle_beacon,
+/obj/item/shuttle_beacon,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/quartermaster/storage)
 "ogT" = (
@@ -111561,7 +111561,7 @@
 	dir = 6
 	},
 /obj/floor_decal/industrial/outline/yellow,
-/obj/item/device/spaceflare,
+/obj/item/shuttle_beacon,
 /obj/item/device/radio,
 /obj/item/storage/belt/utility/full,
 /turf/simulated/floor/tiled,

@@ -1659,8 +1659,8 @@
 /obj/item/device/radio,
 /obj/item/device/radio,
 /obj/item/device/radio,
-/obj/item/device/spaceflare,
-/obj/item/device/spaceflare,
+/obj/item/shuttle_beacon,
+/obj/item/shuttle_beacon,
 /obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/medical)
@@ -4352,14 +4352,14 @@
 	pixel_x = -10;
 	pixel_y = 8
 	},
-/obj/item/device/spaceflare{
+/obj/item/shuttle_beacon{
 	pixel_x = 5;
 	pixel_y = -3
 	},
-/obj/item/device/spaceflare{
+/obj/item/shuttle_beacon{
 	pixel_y = -2
 	},
-/obj/item/device/spaceflare{
+/obj/item/shuttle_beacon{
 	pixel_x = -5;
 	pixel_y = -1
 	},

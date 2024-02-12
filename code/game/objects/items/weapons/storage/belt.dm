@@ -508,7 +508,7 @@
 		/obj/item/folder,
 		/obj/item/paper,
 		/obj/item/pen,
-		/obj/item/device/spaceflare,
+		/obj/item/shuttle_beacon,
 		/obj/item/pinpointer/radio,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape,

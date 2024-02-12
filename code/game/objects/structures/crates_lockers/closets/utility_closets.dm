@@ -208,7 +208,7 @@
 		/obj/item/pickaxe/xeno/hand,
 		/obj/item/storage/bag/fossils,
 		/obj/item/hand_labeler,
-		/obj/item/device/spaceflare
+		/obj/item/shuttle_beacon
 	)
 
 /obj/structure/closet/shipping_wall

@@ -5098,8 +5098,8 @@
 /obj/item/storage/briefcase/inflatable,
 /obj/item/storage/briefcase/inflatable,
 /obj/item/storage/briefcase/inflatable,
-/obj/item/device/spaceflare,
-/obj/item/device/spaceflare,
+/obj/item/shuttle_beacon,
+/obj/item/shuttle_beacon,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/snz)
 "WY" = (
