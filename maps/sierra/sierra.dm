@@ -67,6 +67,7 @@
 	#include "items/rigs.dm"
 	#include "items/stamps.dm"
 	#include "items/pouches.dm"
+	#include "items/backpack.dm"
 
 	#include "items/clothing/clothing.dm"
 	#include "items/clothing/exploration.dm"
