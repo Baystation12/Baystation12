@@ -178,6 +178,7 @@
 	#include "../../mods/_maps/liberia/_map_liberia.dme"
 	#include "../../mods/_maps/sentinel/_map_sentinel.dme"
 	#include "../../mods/_maps/farfleet/_map_farfleet.dme"
+	#include "../../mods/_maps/miningpirate/_map_miningpirate.dme"
 
 	#include "../../mods/antagonists/_antagonists.dme"
 	#include "../../mods/bluespace_kitty/_bluespace_kitty.dme"
@@ -187,6 +188,7 @@
 	#include "../../mods/petting_zoo/_petting_zoo.dme"
 	#include "../../mods/screentips/_screentips.dme"
 	#include "../../mods/tajara/_tajara.dme"
+	#include "../../mods/sauna_props/_sauna_props.dme"
 
 	// UNUSED MODS
 	// Keep them in ascending alphabetical order too, please

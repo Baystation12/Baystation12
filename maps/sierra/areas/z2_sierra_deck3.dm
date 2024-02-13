@@ -66,6 +66,7 @@
 /area/crew_quarters/head/deck3
 	name = "Third Deck - Head"
 	holomap_color = HOLOMAP_AREACOLOR_CREW
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 /area/crew_quarters/bar
 	name = "Third Deck - Service - Bar"

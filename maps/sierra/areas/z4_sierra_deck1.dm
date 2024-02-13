@@ -219,6 +219,7 @@
 
 /area/security/sierra/breakroom
 	name = "First Deck - Security - Break Room"
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 /area/security/sierra/forensic
 	name = "First Deck - Security - Forensic"

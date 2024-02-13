@@ -102,6 +102,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 //	pda_type = /obj/item/modular_computer/pda/heads/ce
 	pda_slot = slot_l_store
 	flags = OUTFIT_FLAGS_JOB_DEFAULT | OUTFIT_EXTENDED_SURVIVAL
+	belt = /obj/item/storage/belt/utility/chief
 
 /singleton/hierarchy/outfit/job/sierra/crew/command/chief_engineer/New()
 	..()

@@ -205,6 +205,7 @@
 	name = "Second Deck - Living - Restroom"
 	icon_state = "toilet"
 	sound_env = SMALL_ENCLOSED
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 	holomap_color = HOLOMAP_AREACOLOR_CREW
 
 /area/crew_quarters/garden_room
@@ -248,8 +249,9 @@
 	holomap_color = HOLOMAP_AREACOLOR_CREW
 
 /area/crew_quarters/sleep/cryo/south
-	name = "Second Deck - Living - Cryogenic Storage - South"
-	icon_state = "cryo_south"
+	name = "Second Deck - Living - Dormitory - South"
+	icon_state = "Sleep"
+	sound_env = SMALL_SOFTFLOOR
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 	holomap_color = HOLOMAP_AREACOLOR_CREW
 
@@ -291,10 +293,12 @@
 /area/medical/ward
 	name = "Second Deck - Patient Ward - Patients"
 	icon_state = "patients"
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 /area/medical/wardhallway
 	name = "Second Deck - Patient Ward - Hallway"
 	icon_state = "medbay2"
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 /area/medical/maintenance_equipstorage
 	name = "Second Deck - Infirmary - Lower Storage"

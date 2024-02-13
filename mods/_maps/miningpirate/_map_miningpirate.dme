@@ -1,0 +1,9 @@
+#ifndef MODPACK_MAP_MININGPIRATE
+#define MODPACK_MAP_MININGPIRATE
+
+#include "_map_miningpirate.dm"
+
+#include "code/miningpirate.dm"
+#include "code/miningpirate_areas.dm"
+
+#endif

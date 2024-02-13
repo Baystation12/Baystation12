@@ -105,6 +105,22 @@ Unique items
 			/obj/item/paper/sierrau/liason_note
 	)
 
+/obj/item/storage/belt/utility/chief/New()
+	..()
+	new /obj/item/swapper/power_drill(src)
+	new /obj/item/weldingtool/largetank(src)
+	new /obj/item/swapper/jaws_of_life(src)
+	new /obj/random/single/color/cable_coil(src, 30)
+	new /obj/item/device/multitool/multimeter(src)
+	update_icon()
+
+/obj/item/storage/secure/safe/captain_sierra
+	startswith = list(
+		/obj/item/paper = 1,
+		/obj/item/pen = 1,
+		/obj/item/card/id/captains_spare = 1
+	)
+
 /obj/paint/hull
 	color = "#436b8e"
 
@@ -490,3 +506,40 @@ Passports
 #undef REMOTE_OPEN
 #undef REMOTE_BOLT
 #undef REMOTE_ELECT
+
+/obj/item/storage/belt/utility
+	contents_allowed = list(
+		/obj/item/crowbar,
+		/obj/item/screwdriver,
+		/obj/item/weldingtool,
+		/obj/item/wirecutters,
+		/obj/item/wrench,
+		/obj/item/device/multitool,
+		/obj/item/device/flashlight,
+		/obj/item/stack/cable_coil,
+		/obj/item/device/t_scanner,
+		/obj/item/device/scanner/gas,
+		/obj/item/taperoll/engineering,
+		/obj/item/inducer,
+		/obj/item/device/robotanalyzer,
+		/obj/item/material/minihoe,
+		/obj/item/material/hatchet,
+		/obj/item/device/scanner/plant,
+		/obj/item/taperoll,
+		/obj/item/extinguisher/mini,
+		/obj/item/marshalling_wand,
+		/obj/item/device/geiger,
+		/obj/item/hand_labeler,
+		/obj/item/clothing/gloves,
+		/obj/item/tape_roll,
+		/obj/item/clothing/head/beret,
+		/obj/item/material/knife/folding,
+		/obj/item/swapper,
+		/obj/item/device/drone_designator,
+		/obj/item/modular_computer/tablet,
+		/obj/item/modular_computer/pda,
+		/obj/item/welder_tank,
+		/obj/item/device/paint_sprayer,
+		/obj/item/rcd,
+		/obj/item/rcd_ammo
+	)
