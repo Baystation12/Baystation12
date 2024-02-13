@@ -277,7 +277,7 @@
 	var/extra_delay = 0
 	for (var/obj/item/grab/G in mob)
 		if(G.assailant == G.affecting)
-			return
+			continue
 		extra_delay = max(extra_delay, G.grab_slowdown())
 
 	mob.ExtraMoveCooldown(extra_delay)
