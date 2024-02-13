@@ -1,0 +1,4 @@
+author: PapiSmirnov
+changes:
+  - {bugfix: subdermal armor will now actually apply it's damage resistances.}
+delete-after: true
