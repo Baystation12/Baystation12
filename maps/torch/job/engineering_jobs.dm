@@ -31,17 +31,8 @@
 	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
 						SKILL_ELECTRICAL   = SKILL_MAX,
 						SKILL_ATMOS        = SKILL_MAX,
-<<<<<<< ours
-<<<<<<< ours
 						SKILL_ENGINES      = SKILL_MAX)
 	skill_points = 20
-=======
-						SKILL_ENGINES      = SKILL_MAX,
-						SKILL_DEVICES = SKILL_EXPERIENCED)
->>>>>>> theirs
-=======
-						SKILL_ENGINES      = SKILL_MAX)
->>>>>>> theirs
 
 	access = list(
 		access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
