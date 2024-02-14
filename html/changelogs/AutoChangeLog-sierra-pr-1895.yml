@@ -1,4 +1,0 @@
-author: LordNest
-changes:
-  - {bugfix: Портировал с даунстрима фикс граба самого себя от larentoun}
-delete-after: true
