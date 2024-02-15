@@ -1,0 +1,5 @@
+author: LordNest
+changes:
+  - {bugfix: Fixed missing icon for alien power cell}
+  - {imageadd: 'Added new sprites for rig modules: cooling unit and powerfist by Hawwar'}
+delete-after: true
