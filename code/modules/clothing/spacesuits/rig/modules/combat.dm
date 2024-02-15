@@ -597,7 +597,7 @@
 
 	name = "hand-mounted powerfists"
 	desc = "A pair of heavy powerfists to be installed into a hardsuit gauntlets."
-	icon_state = "module"
+	icon_state = "powerfist"
 
 	suit_overlay_active = null
 
