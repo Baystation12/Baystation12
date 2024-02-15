@@ -1,0 +1,8 @@
+author: emmanuelbassil
+changes:
+  - {tweak: Can now fill fire extinguishers using beakers. Can effectively fill them
+      with any liquid.}
+  - {tweak: Fire extinguishers have a chance to break when firing any liquid that
+      isn't water. They cannot be repaired.}
+  - {tweak: Borgs can repair broken fire extinguishers at the recharging station.}
+delete-after: true
