@@ -1,5 +1,0 @@
-author: KandJX
-changes:
-  - {bugfix: Пофикшенно оторбражение горящих газов при низком количестве молей. Решение
-      портировано с WyccBay.}
-delete-after: true
