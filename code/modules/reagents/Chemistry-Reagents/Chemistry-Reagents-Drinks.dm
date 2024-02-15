@@ -1053,7 +1053,7 @@
 /datum/reagent/drink/dandelionburdock
 	name = "Dandelion and Burdock"
 	description = "Does not contain any Taraxacum officinale, or Arctium lappa."
-	taste_description = "sassafras"
+	taste_description = "fruit and aniseed"
 	reagent_state = LIQUID
 	color = "#ff8cff"
 	nutrition = 1
