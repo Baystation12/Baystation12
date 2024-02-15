@@ -246,6 +246,14 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 				missing--
 	return !missing
 
+///Returns True if holder has a reagent that is not on the supplied list. Useful to check for forbidden reagents.
+/datum/reagents/proc/has_other_reagent(list/check_reagents)
+	for (var/datum/reagent/current in reagent_list)
+		if (!(current.type in check_reagents))
+			return TRUE
+
+	return FALSE
+
 /datum/reagents/proc/clear_reagents()
 	for(var/datum/reagent/current in reagent_list)
 		del_reagent(current.type)

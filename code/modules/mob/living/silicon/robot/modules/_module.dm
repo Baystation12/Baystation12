@@ -205,6 +205,12 @@
 			if (length(P.loaded) <= P.max_shells)
 				P.loaded += new P.ammo_type(src)
 
+	var/obj/item/extinguisher/extinguisher = locate() in equipment
+	if (extinguisher?.broken)
+		var/remaining_volume = extinguisher.reagents.total_volume
+		extinguisher.broken = FALSE
+		extinguisher.reagents.remove_any(remaining_volume)
+
 	for (var/obj/gear in equipment)
 		gear.update_icon()
 
