@@ -991,6 +991,7 @@
 #include "code\game\objects\items\devices\paint_sprayer.dm"
 #include "code\game\objects\items\devices\personal_shield.dm"
 #include "code\game\objects\items\devices\powersink.dm"
+#include "code\game\objects\items\devices\radio_jammer.dm"
 #include "code\game\objects\items\devices\slide_projector.dm"
 #include "code\game\objects\items\devices\spy_bug.dm"
 #include "code\game\objects\items\devices\suit_cooling.dm"
