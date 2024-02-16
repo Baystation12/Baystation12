@@ -17,7 +17,7 @@
 	machine_desc = "Holds an internal stock of items that can be dispensed on-demand or when a charged ID card is swiped, depending on the brand."
 	idle_power_usage = 10
 	wires = /datum/wires/vending
-	health_max = 80
+	health_max = 100
 
 	/// The machine's wires, but typed.
 	var/datum/wires/vending/vendor_wires
