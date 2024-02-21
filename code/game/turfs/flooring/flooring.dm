@@ -141,6 +141,11 @@
 	icon_base = "red"
 	build_type = /obj/item/stack/tile/carpetred
 
+/singleton/flooring/carpet/black
+	name = "black carpet"
+	icon_base = "black"
+	build_type = /obj/item/stack/tile/carpetblack
+
 /singleton/flooring/linoleum
 	name = "linoleum"
 	desc = "It's like the 2090's all over again."
