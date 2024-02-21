@@ -316,6 +316,16 @@
 /obj/item/stack/tile/carpetred/fifty
 	amount = 50
 
+/obj/item/stack/tile/carpetblack
+	name = "black carpet"
+	desc = "A piece of black carpet."
+	singular_name = "black carpet"
+	icon_state = "tile_carpetblack"
+	build_type = /obj/item/stack/tile/carpetblack
+
+/obj/item/stack/tile/carpetblack/fifty
+	amount = 50
+
 /obj/item/stack/tile/pool
 	name = "pool tiling"
 	desc = "A set of tiles designed to build fluid pools."

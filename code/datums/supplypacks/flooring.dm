@@ -55,6 +55,12 @@
 	cost = 15
 	containername = "red carpet crate"
 
+/singleton/hierarchy/supply_pack/flooring/carpetblack
+	name = "Black carpet"
+	contains = list(/obj/item/stack/tile/carpetblack/fifty)
+	cost = 15
+	containername = "black carpet crate"
+
 /singleton/hierarchy/supply_pack/flooring/linoleum
 	name = "Linoleum"
 	contains = list(/obj/item/stack/tile/linoleum/fifty)
