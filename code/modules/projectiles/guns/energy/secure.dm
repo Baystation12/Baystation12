@@ -4,7 +4,7 @@
 	icon = 'icons/obj/guns/small_egun_secure.dmi'
 	item_icons = list(
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns_secure.dmi',
-		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi',
+		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi'
 		)
 	req_access = list(list(access_brig, access_bridge))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
@@ -17,7 +17,7 @@
 	modifystate= "revolverstun"
 	item_icons = list(
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns_secure.dmi',
-		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi',
+		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi'
 		)
 	item_state = null
 	req_access = list(list(access_brig, access_bridge))
@@ -28,7 +28,7 @@
 	icon = 'icons/obj/guns/energy_gun_secure.dmi'
 	item_icons = list(
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns_secure.dmi',
-		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi',
+		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi'
 		)
 	item_state = null	//so the human update icon uses the icon_state instead.
 	req_access = list(list(access_brig, access_bridge))
@@ -44,7 +44,7 @@
 	icon_state = "energyrevolverstun100"
 	item_icons = list(
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns_secure.dmi',
-		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi',
+		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi'
 		)
 	modifystate = "energyrevolverstun"
 	item_state = null
@@ -52,7 +52,7 @@
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="energyrevolverstun"),
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="energyrevolvershock"),
-		list(mode_name="kill", projectile_type=/obj/item/projectile/beam, modifystate="energyrevolverkill"),
+		list(mode_name="kill", projectile_type=/obj/item/projectile/beam, modifystate="energyrevolverkill")
 		)
 	req_access = list(list(access_brig, access_heads))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)

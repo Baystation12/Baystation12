@@ -167,7 +167,7 @@
 		/obj/item/storage/belt/holster/security,
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/crowbar/prybar,
-		/obj/item/gun/energy/confuseray,
+		/obj/item/gun/energy/confuseray/secure,
 		/obj/item/clothing/glasses/hud/security
 	)
 

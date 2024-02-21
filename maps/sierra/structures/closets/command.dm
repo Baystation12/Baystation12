@@ -14,7 +14,7 @@
 		/obj/item/clothing/head/helmet,
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/clothing/accessory/storage/holster/thigh,
-		/obj/item/gun/energy/gun/secure,
+		/obj/item/gun/energy/stunrevolver/secure,
 		/obj/item/device/radio/headset/heads/sierra_captain,
 		/obj/item/device/radio/headset/heads/sierra_captain/alt,
 		/obj/item/storage/belt/general,

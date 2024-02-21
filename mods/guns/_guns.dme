@@ -1,0 +1,19 @@
+#ifndef MODPACK_GUNS
+#define MODPACK_GUNS
+
+#include "_guns.dm"
+
+#include "code/energy.dm"
+#include "code/projectile.dm"
+#include "code/xenos.dm"
+
+#endif
+// BEGIN_INTERNALS
+// END_INTERNALS
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+// BEGIN_PREFERENCES
+// END_PREFERENCES
+// BEGIN_INCLUDE
+// END_INCLUDE

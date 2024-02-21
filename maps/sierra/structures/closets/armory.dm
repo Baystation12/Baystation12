@@ -38,7 +38,7 @@
 
 /obj/structure/closet/secure_closet/guncabinet/sierra_armory/ion/WillContain()
 	return list(/obj/item/gun/energy/ionrifle = 2,
-	/obj/item/gun/energy/ionrifle/small = 1)
+	/obj/item/gun/energy/ionrifle/small/sec = 1)
 
 /obj/structure/closet/secure_closet/guncabinet/sierra_armory/egun
 	name = "energy guncabinet"
