@@ -70,21 +70,3 @@
 	id_types = list(/obj/item/card/id/syndicate)
 	id_pda_assignment = "Scavenger"
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_RESET_EQUIPMENT
-
-
-/singleton/hierarchy/outfit/earhart
-	name = "FPE Standard Equipment"
-	uniform = /obj/item/clothing/under/earhart
-	gloves = /obj/item/clothing/gloves/thick
-	shoes = /obj/item/clothing/shoes/jackboots/medievalboots
-	belt = /obj/item/storage/belt/holster
-	l_hand = /obj/item/clothing/accessory/patch/earhart
-
-
-/singleton/hierarchy/outfit/commonwealth_sailor
-	name = "Terran Commonwealth Sailor"
-	uniform = /obj/item/clothing/under/commonwealth
-	head = /obj/item/clothing/head/commonwealthhat
-	gloves = /obj/item/clothing/gloves/thick
-	shoes = /obj/item/clothing/shoes/dutyboots
-	belt = /obj/item/storage/belt/holster
