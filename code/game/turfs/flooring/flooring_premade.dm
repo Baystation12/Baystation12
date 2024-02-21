@@ -134,6 +134,11 @@
 	icon_state = "red"
 	initial_flooring = /singleton/flooring/carpet/red
 
+/turf/simulated/floor/carpet/black
+	name = "black carpet"
+	icon_state = "black"
+	initial_flooring = /singleton/flooring/carpet/black
+
 /turf/simulated/floor/reinforced
 	name = "reinforced floor"
 	icon = 'icons/turf/flooring/tiles.dmi'
