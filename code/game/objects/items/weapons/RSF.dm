@@ -4,14 +4,17 @@
 	icon = 'icons/obj/tools/rcd.dmi'
 	icon_state = "rcd"
 
-	var/const/MODE_CIGARETTE = "Cigarette"
-	var/const/MODE_GLASS = "Drinking Glass"
-	var/const/MODE_PAPER = "Paper"
-	var/const/MODE_PEN = "Pen"
-	var/const/MODE_DICE = "Dice Pack"
+	/// The things an RSF can create as a map of {"name" = [radial icon, energy cost, path]}.
+	var/static/list/modes = list(
+		"Cigarette" = list("cigarette", 10, /obj/item/clothing/mask/smokable/cigarette),
+		"Drinking Glass" = list("glass", 50, /obj/item/reagent_containers/food/drinks/glass2),
+		"Paper" = list("paper", 10, /obj/item/paper),
+		"Pen" = list("pen", 50, /obj/item/pen),
+		"Dice Pack" = list("dicebag", 200, /obj/item/storage/pill_bottle/dice)
+	)
 
-	/// The current mode of the RSF. One of the MODE_* constants.
-	var/mode = MODE_CIGARETTE
+	/// The current mode of the RSF. One of the keys in the modes list.
+	var/mode
 
 	/// The maximum amount of matter the RSF can hold when not a robot RSF.
 	var/max_stored_matter = 30
@@ -20,18 +23,57 @@
 	var/stored_matter
 
 
-/obj/item/rsf/Initialize()
-	. = ..()
-	stored_matter = max_stored_matter
-
-
 /obj/item/rsf/examine(mob/user, distance)
 	. = ..()
 	if (distance <= 0)
 		to_chat(user, "It currently holds [stored_matter]/[max_stored_matter] fabrication units.")
 
 
-/obj/item/rsf/attackby(obj/item/item, mob/living/user)
+/obj/item/rsf/attack_self(mob/living/user)
+	var/radial = list()
+	for (var/key in modes)
+		radial[key] = mutable_appearance('icons/screen/radial.dmi', modes[key][1])
+	var/choice = show_radial_menu(user, user, radial, require_near = TRUE, radius = 42, tooltips = TRUE, check_locs = list(src))
+	if (!choice || !user.use_sanity_check(src))
+		return
+	mode = choice
+	to_chat(user, SPAN_NOTICE("Changed dispensing mode to \"[choice]\"."))
+	playsound(src, 'sound/effects/pop.ogg', 50, FALSE)
+
+
+/obj/item/rsf/use_before(atom/target, mob/living/user, list/click_parameters)
+	if (!istype(target, /obj/structure/table) && !istype(target, /turf/simulated/floor))
+		return FALSE
+	var/turf/into = get_turf(target)
+	if (!into)
+		return FALSE
+	if (!(mode in modes))
+		to_chat(user, SPAN_WARNING("\The [src] is not set to dispense anything."))
+		return TRUE
+	var/details = modes[mode]
+	if (isrobot(user))
+		var/mob/living/silicon/robot/robot = user
+		if (robot.stat || !robot.cell)
+			to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+			return TRUE
+		var/cost = details[2]
+		if (!robot.cell.checked_use(cost))
+			to_chat(user, SPAN_WARNING("You don't have enough energy to do that."))
+			return TRUE
+	else if (stored_matter < 1)
+		to_chat(user, SPAN_WARNING("\The [src] is empty."))
+		return TRUE
+	else
+		stored_matter--
+	playsound(loc, 'sound/machines/click.ogg', 10, TRUE)
+	var/obj/product = details[3]
+	product = new product
+	to_chat(user, "Dispensing \a [product]...")
+	product.dropInto(into)
+	return TRUE
+
+
+/obj/item/rsf/use_tool(obj/item/item, mob/living/user, list/click_params)
 	if (istype(item, /obj/item/rcd_ammo))
 		var/obj/item/rcd_ammo/ammo = item
 		if (stored_matter >= max_stored_matter)
@@ -48,59 +90,6 @@
 	return ..()
 
 
-/obj/item/rsf/attack_self(mob/living/user)
-	var/list/options = list()
-	options[MODE_CIGARETTE] = mutable_appearance('icons/screen/radial.dmi', "cigarette")
-	options[MODE_GLASS] = mutable_appearance('icons/screen/radial.dmi', "glass")
-	options[MODE_PAPER] = mutable_appearance('icons/screen/radial.dmi', "paper")
-	options[MODE_PEN] = mutable_appearance('icons/screen/radial.dmi', "pen")
-	options[MODE_DICE] = mutable_appearance('icons/screen/radial.dmi', "dicebag")
-	var/choice = show_radial_menu(user, user, options, require_near = TRUE, radius = 42, tooltips = TRUE, check_locs = list(src))
-	if (!choice || !user.use_sanity_check(src))
-		return
-	mode = choice
-	to_chat(user, SPAN_NOTICE("Changed dispending mode to \the [choice]."))
-	playsound(loc, 'sound/effects/pop.ogg', 50, FALSE)
-
-
-/obj/item/rsf/use_before(atom/target, mob/living/user, list/click_parameters)
-	if (!istype(target, /obj/structure/table) && !istype(target, /turf/simulated/floor))
-		return FALSE
-	var/turf/into = get_turf(target)
-	if (!into)
-		return FALSE
-	var/required_energy
-	var/obj/product
-	switch (mode)
-		if (MODE_CIGARETTE)
-			product = new /obj/item/clothing/mask/smokable/cigarette
-			required_energy = 10
-		if (MODE_GLASS)
-			product = new /obj/item/reagent_containers/food/drinks/glass2
-			required_energy = 50
-		if (MODE_PAPER)
-			product = new /obj/item/paper
-			required_energy = 10
-		if (MODE_PEN)
-			product = new /obj/item/pen
-			required_energy = 50
-		if (MODE_DICE)
-			product = new /obj/item/storage/pill_bottle/dice
-			required_energy = 200
-	if (isrobot(user))
-		var/mob/living/silicon/robot/robot = user
-		if (robot.stat || !robot.cell)
-			to_chat(user, SPAN_WARNING("You're in no condition to do that."))
-			return TRUE
-		if (!robot.cell.checked_use(required_energy))
-			to_chat(user, SPAN_WARNING("You don't have enough energy to do that."))
-			return TRUE
-	else if (stored_matter < 1)
-		to_chat(user, SPAN_WARNING("\The [src] is empty."))
-		return TRUE
-	else
-		stored_matter--
-	playsound(loc, 'sound/machines/click.ogg', 10, TRUE)
-	to_chat(user, "Dispensing [product ? product : "product"]...")
-	product.dropInto(into)
-	return TRUE
+/obj/item/rsf/loaded/Initialize()
+	. = ..()
+	stored_matter = max_stored_matter
