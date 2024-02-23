@@ -1,9 +1,9 @@
-/obj/item/clothing/accessory/tc_badge
-	abstract_type = /obj/item/clothing/accessory/tc_badge
-	icon = 'packs/factions/tc/badges.dmi'
+/obj/item/clothing/accessory/commonwealth_badge
+	abstract_type = /obj/item/clothing/accessory/commonwealth_badge
+	icon = 'packs/factions/commonwealth/badges.dmi'
 	accessory_icons = list(
-		slot_w_uniform_str = 'packs/factions/tc/badges.dmi',
-		slot_wear_suit_str = 'packs/factions/tc/badges.dmi'
+		slot_w_uniform_str = 'packs/factions/commonwealth/badges.dmi',
+		slot_wear_suit_str = 'packs/factions/commonwealth/badges.dmi'
 	)
 	icon_state = null
 	on_rolled_down = ACCESSORY_ROLLED_NONE
@@ -12,11 +12,11 @@
 	sprite_sheets = list()
 
 
-/obj/item/clothing/accessory/tc_badge/get_fibers()
+/obj/item/clothing/accessory/commonwealth_badge/get_fibers()
 	return null
 
 
-/obj/item/clothing/accessory/tc_badge/navy
+/obj/item/clothing/accessory/commonwealth_badge/navy
 	name = "commonwealth navy patch"
 	desc = {"\
 		A shield shaped blue and green patch with a red star, signifying service in \
@@ -26,7 +26,7 @@
 	overlay_state = "navy_worn"
 
 
-/obj/item/clothing/accessory/tc_badge/army
+/obj/item/clothing/accessory/commonwealth_badge/army
 	name = "commonwealth army patch"
 	desc = {"\
 		A shield shaped blue and green patch with a golden sun, signifying service in \
@@ -36,7 +36,7 @@
 	overlay_state = "army_worn"
 
 
-/obj/item/clothing/accessory/tc_badge/explorer
+/obj/item/clothing/accessory/commonwealth_badge/explorer
 	name = "ancient Expeditionary Corps patch"
 	desc = {"\
 		A shield shaped blue and green patch with a purple chevron, signifying service \
@@ -46,7 +46,7 @@
 	overlay_state = "explorer_worn"
 
 
-/obj/item/clothing/accessory/tc_badge/shield
+/obj/item/clothing/accessory/commonwealth_badge/shield
 	name = "commonwealth shield"
 	desc = {"\
 		The pin worn by all agents of the Terran Commonwealth to symbolize their \
@@ -57,7 +57,7 @@
 	slot = ACCESSORY_SLOT_MEDAL
 
 
-/obj/item/clothing/accessory/tc_badge/earhart
+/obj/item/clothing/accessory/commonwealth_badge/earhart
 	name = "mission patch, COL Earhart"
 	desc = {"\
 		A reproduction of the symbology for the Terran Commonwealth colony ship COL \
