@@ -1,8 +1,8 @@
-/obj/item/clothing/under/tc
-	abstract_type = /obj/item/clothing/under/tc
-	icon = 'packs/factions/tc/clothing.dmi'
+/obj/item/clothing/under/commonwealth
+	abstract_type = /obj/item/clothing/under/commonwealth
+	icon = 'packs/factions/commonwealth/clothing.dmi'
 	item_icons = list(
-		slot_w_uniform_str = 'packs/factions/tc/clothing.dmi'
+		slot_w_uniform_str = 'packs/factions/commonwealth/clothing.dmi'
 	)
 	sprite_sheets = list()
 	body_parts_covered = FULL_TORSO | ARMS | FULL_LEGS
@@ -13,7 +13,7 @@
 	)
 
 
-/obj/item/clothing/under/tc/utility
+/obj/item/clothing/under/commonwealth/utility
 	name = "commonwealth fatigues"
 	desc = {"\
 		The classic chocolate-brown fatigues of the explorers and soldiers of the \
@@ -24,27 +24,29 @@
 	item_state_slots = list(
 		slot_w_uniform_str = "utility"
 	)
+	rolled_down = FALSE
+	rolled_sleeves = FALSE
 
 
-/obj/item/clothing/under/tc/utility/army
+/obj/item/clothing/under/commonwealth/utility/army
 	accessories = list(
-		/obj/item/clothing/accessory/tc_badge/army
+		/obj/item/clothing/accessory/commonwealth_badge/army
 	)
 
 
-/obj/item/clothing/under/tc/utility/navy
+/obj/item/clothing/under/commonwealth/utility/navy
 	accessories = list(
-		/obj/item/clothing/accessory/tc_badge/navy
+		/obj/item/clothing/accessory/commonwealth_badge/navy
 	)
 
 
-/obj/item/clothing/under/tc/utility/explorer
+/obj/item/clothing/under/commonwealth/utility/explorer
 	accessories = list(
-		/obj/item/clothing/accessory/tc_badge/explorer
+		/obj/item/clothing/accessory/commonwealth_badge/explorer
 	)
 
 
-/obj/item/clothing/under/tc/earhart
+/obj/item/clothing/under/commonwealth/earhart
 	name = "earhart fatigues"
 	desc = {"\
 		Faded and greying fatigues that resemble old Commonwealth designs, \
@@ -55,15 +57,17 @@
 		slot_w_uniform_str = "earhart"
 	)
 	accessories = list(
-		/obj/item/clothing/accessory/tc_badge/earhart
+		/obj/item/clothing/accessory/commonwealth_badge/earhart
 	)
+	rolled_down = FALSE
+	rolled_sleeves = FALSE
 
 
-/obj/item/clothing/suit/tc
-	abstract_type = /obj/item/clothing/suit/tc
-	icon = 'packs/factions/tc/clothing.dmi'
+/obj/item/clothing/suit/commonwealth
+	abstract_type = /obj/item/clothing/suit/commonwealth
+	icon = 'packs/factions/commonwealth/clothing.dmi'
 	item_icons = list(
-		slot_wear_suit_str = 'packs/factions/tc/clothing.dmi'
+		slot_wear_suit_str = 'packs/factions/commonwealth/clothing.dmi'
 	)
 	sprite_sheets = list()
 	body_parts_covered = FULL_TORSO | ARMS
@@ -76,7 +80,7 @@
 	allowed = list()
 
 
-/obj/item/clothing/suit/tc/pilot
+/obj/item/clothing/suit/commonwealth/pilot
 	name = "commonwealth pilot's jacket"
 	desc = {"\
 		A stylish brown jacket with blue and green Terran Commonwealth insignia. \
@@ -91,16 +95,16 @@
 	)
 
 
-/obj/item/clothing/head/tc
-	abstract_type = /obj/item/clothing/head/tc
-	icon = 'packs/factions/tc/clothing.dmi'
+/obj/item/clothing/head/commonwealth
+	abstract_type = /obj/item/clothing/head/commonwealth
+	icon = 'packs/factions/commonwealth/clothing.dmi'
 	item_icons = list(
-		slot_head_str = 'packs/factions/tc/clothing.dmi'
+		slot_head_str = 'packs/factions/commonwealth/clothing.dmi'
 	)
 	sprite_sheets = list()
 
 
-/obj/item/clothing/head/tc/pilotka
+/obj/item/clothing/head/commonwealth/pilotka
 	name = "commonwealth pilotka"
 	desc = "The folded service cap of the bygone Terran Commonwealth."
 	icon_state = "pilotka"
