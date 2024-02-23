@@ -27,3 +27,5 @@
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'packs/factions/fa/clothing_unathi.dmi'
 	)
+	rolled_down = FALSE
+	rolled_sleeves = FALSE
