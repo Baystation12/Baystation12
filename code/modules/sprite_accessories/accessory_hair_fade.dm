@@ -5,6 +5,7 @@
 	draw_target = MARKING_TARGET_HAIR
 	draw_order = 50 //before ears & horns
 	disallows = list(/datum/sprite_accessory/marking/hair_fade)
+	blend = ICON_MULTIPLY
 
 /datum/sprite_accessory/marking/hair_fade/fade_up_short
 	name = "Fade (Up, Short)"
