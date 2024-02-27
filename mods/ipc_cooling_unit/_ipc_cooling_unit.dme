@@ -1,0 +1,9 @@
+#ifndef MODPACK_IPC_COOLING_UNIT
+#define MODPACK_IPC_COOLING_UNIT
+
+#include "_ipc_cooling_unit.dm"
+#include "code/cooling_system.dm"
+#include "code/external_cooling_device.dm"
+#include "code/machine.dm"
+
+#endif
