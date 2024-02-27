@@ -50,7 +50,7 @@
 	..()
 	var/wcomp = list()
 	slot = slot_wear_id
-	wcomp["black"]                   = /obj/item/modular_computer/pda/wrist/
+	wcomp["black"]                   = /obj/item/modular_computer/pda/wrist
 	wcomp["lightgrey"]               = /obj/item/modular_computer/pda/wrist/grey
 	wcomp["black-red (sec)"]         = /obj/item/modular_computer/pda/wrist/security
 	wcomp["brown (sup)"]             = /obj/item/modular_computer/pda/wrist/cargo

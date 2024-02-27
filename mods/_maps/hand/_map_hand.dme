@@ -1,0 +1,12 @@
+#ifndef MODPACK_MAP_HAND
+#define MODPACK_MAP_HAND
+
+#include "_map_hand.dm"
+#include "code/hand.dm"
+#include "code/hand_areas.dm"
+#include "code/hand_crew.dm"
+#include "code/hand_items.dm"
+#include "code/hand_shuttles.dm"
+#include "code/hand_structures.dm"
+
+#endif

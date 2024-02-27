@@ -78,8 +78,6 @@
 		SKILL_COMBAT  = SKILL_MAX,
 	    SKILL_WEAPONS = SKILL_MAX
 	)
-	// SIERRA TODO: required_role
-	// required_role = list("Merchant")
 
 	give_psionic_implant_on_join = FALSE
 

@@ -21,7 +21,7 @@
 	shuttle = "Reaper Gunboat"
 	fore_dir = WEST
 	color = "#000000"
-	vessel_mass = 250
+	vessel_mass = 500
 	vessel_size = SHIP_SIZE_TINY
 
 /area/ship/reaper

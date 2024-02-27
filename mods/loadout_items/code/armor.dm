@@ -24,7 +24,7 @@ Armor Patches, covers, ect
 	icon_state = "scp_cover"
 	accessory_icons = list(slot_tie_str = 'mods/loadout_items/icons/onmob_accessory.dmi', slot_head_str = 'mods/loadout_items/icons/onmob_accessory.dmi')
 
-/obj/item/clothing/accessory/armor/tag/scp
+/obj/item/clothing/accessory/armor_tag/scp
 	name = "SCP tag"
 	desc = "An armor tag with the words SECURITY CORPORATE PERSONAL printed in red lettering on it."
 	icon_override = 'mods/loadout_items/icons/onmob_accessory.dmi'
@@ -32,7 +32,7 @@ Armor Patches, covers, ect
 	icon_state = "scp_tag"
 	accessory_icons = list(slot_tie_str = 'mods/loadout_items/icons/onmob_accessory.dmi', slot_wear_suit_str = 'mods/loadout_items/icons/onmob_accessory.dmi')
 
-/obj/item/clothing/accessory/armor/tag/zpci
+/obj/item/clothing/accessory/armor_tag/zpci
 	name = "\improper ZPCI tag"
 	desc = "An armor tag with the words ZONE PROTECTION CONTROL INCORPORATED printed in cyan lettering on it."
 	icon_state = "pcrctag"
