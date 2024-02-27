@@ -1,0 +1,109 @@
+<style type="text/css">
+	.link, .linkOn, .linkOff, .selected, .disabled, .yellowButton, .redButton {
+		min-width: 70px;
+		margin: 0px 2px 0px 0px;
+	}
+</style>
+
+{{if data}}
+	{{if data.disabled}}
+		<div class='notice'><center><h2><span class="bad">Вайтлист на ксеносов отключен в конфигурации сервера.</span></h2></center></div><br>
+	{{/if}}
+	{{if data.SQL == -1}}
+		<div class='notice'><center><h3><span class="average">Вайтлист работает в файловом режиме.<br>Использование БД отключено конфигурацией сервера.</span></h3></center></div><br>
+	{{else data.SQL == -2}}
+		<div class='notice'><center><h3><span class="average">Вайтлист работает в файловом режиме.<br>Использование БД отключено конфигурацией сервера.</span></h3></center></div><br>
+		<div class='notice'><center><span class="bad">Не удалось установить подключение к Базе Данных.</span></div><br>
+		{{:helper.link('Переподключение к БД.', null, {'DBreconnect' : 1})}}</center></div>
+	{{else data.SQL == 0}}
+		<div class='notice'><center><h3><span class="bad">Не удалось установить подключение к Базе Данных.</span></h3><br>
+		{{:helper.link('Переподключение к БД.', null, {'DBreconnect' : 1})}}</center></div>
+	{{else data.SQL == 1}}
+		<div class='notice'><center><h3><span class="good">База Данных готова.</span></h3></center></div><br>
+	{{else}}
+		<div class='notice'><center><h3><span class="bad">Неожиданный код статуса Базы Данных: {{:data.SQL}}</span></h3><br>
+		{{:helper.link('Переподключение к БД.', null, {'DBreconnect' : 1})}}</center></div>
+	{{/if}}
+	{{if data.debug}}
+	<div class='notice'><center><span class="bad">===== High-risk zone =====<br>Не трогайте эти кнопки, если не знааете что они делают!</span>
+	<table style="width:100%", align="center">
+	<tr>
+		<th>
+			{{:helper.link('СИНХРОНИЗИРОВАТЬ КОНФИГ --> БД', 'alert', {'synch': 'CDB'}, null, 'redButton')}}
+		<th>
+			{{:helper.link('СИНХРОНИЗИРОВАТЬ БД --> КОНФИГ', 'alert', {'synch': 'DBC'}, null, 'redButton')}}
+	</table>
+	<span class="bad">===== End of high-risk zone =====</span></center></div><br>
+	{{/if}}
+	<table style="width:100%", align="center">
+	<tr>
+		<th>
+			{{:helper.link('<span class="bad">ПРИМЕНИТЬ ИЗМЕНЕНИЯ</span>', 'arrowstop-1-n', {'send': 1}, null, 'yellowButton')}}
+		<th>
+			{{:helper.link('Получить ВЛ | Сбросить изменения', 'refresh', {'refresh': 1}, null)}}
+	<tr>
+	{{if data.SQL == -1}}
+		<th>
+			{{:helper.link('База Данных', null, {'mode': 1}, data.debug ? data.mode ? 'selected' : null : data.mode ? 'selected' : 'disabled')}}
+		<th>
+			{{:helper.link('Конфиг-Файл', null, {'mode': 0}, data.debug ? data.mode ? null : 'selected' : data.mode ? 'disabled' : 'selected')}}
+	{{else data.SQL == -2}}
+		<th>
+			{{:helper.link('База Данных', null, {'mode': 1}, data.debug ? data.mode ? 'selected' : null : data.mode ? 'selected' : 'disabled')}}
+		<th>
+			{{:helper.link('Конфиг-Файл', null, {'mode': 0}, data.debug ? data.mode ? null : 'selected' : data.mode ? 'disabled' : 'selected')}}
+	{{else}}
+		<th>
+			{{:helper.link('База Данных', null, {'mode': 0}, data.debug ? data.mode ? null : 'selected' : data.mode ? 'disabled' : 'selected')}}
+		<th>
+			{{:helper.link('Конфиг-Файл', null, {'mode': 1}, data.debug ? data.mode ? 'selected' : null : data.mode ? 'selected' : 'disabled')}}
+	{{/if}}
+	</table>
+	<br>
+	<center>{{:data.searchbox}}</center>
+	<hr>
+	<table style="width:100%", align="center", border="1", rules="rows">
+	<tr>
+	{{if data.currentlist}}
+		<th>
+			{{:helper.link("Ckey", "search", {'sorting' : "ckey"}, data.sorting ? data.sorting == "ckey" ? 'selected' : null : null)}}
+		{{for data.lowerallxenos :name_value:name_key}}
+			<th>
+				{{:helper.link(name_value, "search", {'sorting' : name_value}, data.sorting ? data.sorting == name_value ? 'selected' : null : null)}}
+		{{/for}}
+	{{/if}}
+	{{for data.currentlist}}
+		<tr>
+		<th>
+			{{:value.ckey}}
+		{{for data.lowerallxenos :name_value:name_key}}
+			<td>
+			{{for value.YES :xenos_value:xenos_key}}
+				{{if xenos_value == name_value}}
+					{{:helper.link(name_value, "check", {'ckey' : value.ckey, 'race' : name_value}, null, 'selected')}}
+				{{/if}}
+			{{/for}}
+			{{for value.NO :xenos_value:xenos_key}}
+				{{if xenos_value == name_value}}
+					{{:helper.link(name_value, "close", {'ckey' : value.ckey, 'race' : name_value}, null)}}
+				{{/if}}
+			{{/for}}
+			{{for value.GRANT :xenos_value:xenos_key}}
+				{{if xenos_value == name_value}}
+					{{:helper.link(name_value, "plus", {'ckey' : value.ckey, 'race' : name_value}, null, 'yellowButton')}}
+				{{/if}}
+			{{/for}}
+			{{for value.REVOKE :xenos_value:xenos_key}}
+				{{if xenos_value == name_value}}
+					{{:helper.link(name_value, "cancel", {'ckey' : value.ckey, 'race' : name_value}, null, 'redButton')}}
+				{{/if}}
+			{{/for}}
+		{{/for}}
+	{{empty}}
+		<tr>
+			<center><h1><span class="average">Список пуст. Внесите новый ckey.</span></h1><br>Или используйте другой способ синхронизации вайтлиста.</center>
+	{{/for}}
+	</table>
+{{else}}
+	<center><h2><span class="bad">Интерфейс не получил никаких данных.<br>Перезагрузите окно.</span></h2></center>
+{{/if}}

@@ -31,7 +31,11 @@
 #define R_SOUNDS         FLAG(11)
 #define R_SPAWN          FLAG(12)
 #define R_MOD            FLAG(13)
-#define R_HOST           FLAG(14)
+// [SIERRA-EDIT] - XENO WHITELIST
+//#define R_HOST           FLAG(14) // SIERRA-EDIT - ORIGINAL
+#define R_XENO           FLAG(14)
+#define R_HOST           FLAG(15)
+// [SIERRA-EDIT]
 #define R_INVESTIGATE    (R_ADMIN | R_MOD)
 #define R_MAXPERMISSION  R_HOST
 

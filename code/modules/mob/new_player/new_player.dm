@@ -206,6 +206,13 @@
 		if(!check_species_allowed(S))
 			return 0
 
+		//[SIERRA-ADD] - XENO WHITELIST
+		if(client.prefs.organ_data[BP_CHEST] == "cyborg")
+			if(!whitelist_lookup(SPECIES_FBP, client.ckey) && client.prefs.species != SPECIES_IPC)
+				to_chat(usr, "Нельзя зайти за ППТ без вайтлиста.")
+				return FALSE
+		//[/SIERRA-ADD]
+
 		AttemptLateSpawn(job, client.prefs.spawnpoint)
 		return
 
@@ -461,6 +468,13 @@
 
 /mob/new_player/proc/create_character(turf/spawn_turf)
 	spawning = 1
+	//[SIERRA-ADD] - XENO WHITELIST
+	if(client.prefs.organ_data[BP_CHEST] == "cyborg")
+		if(!whitelist_lookup(SPECIES_FBP, client.ckey) && client.prefs.species != SPECIES_IPC)
+			to_chat(src, "Нельзя зайти за ППТ без вайтлиста.")
+			spawning = 0
+			return null
+	//[/SIERRA-ADD]
 	close_spawn_windows()
 
 	var/mob/living/carbon/human/new_character

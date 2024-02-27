@@ -12,5 +12,8 @@
 #include "code/experience/exp_species.dm"
 #include "code/experience/subsystem.dm"
 #include "code/experience/_undefines.dm" // Чтоб всё работало, он должен быть последним
+#include "code/xeno_whitelist/_defines.dm"
+#include "code/xeno_whitelist/xeno_whitelist.dm"
+#include "code/xeno_whitelist/xeno_webhook.dm"
 
 #endif
