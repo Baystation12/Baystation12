@@ -1,0 +1,4 @@
+author: Mucker
+changes:
+  - {bugfix: Fixed not being able to teleport objects at or over max range.}
+delete-after: true
