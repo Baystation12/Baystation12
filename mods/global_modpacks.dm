@@ -1,5 +1,6 @@
 // SIERRA TODO: GET RID OF IT!!!
 #include "ai/_ai.dme"
+#include "adherent_discharge/_adherent_discharge.dme"
 #include "body_markings/_body_markings.dme"
 #include "client_verbs/_client_verbs.dme"
 // #include "don_loadout/_don_loadout.dme" // Не открывать до Рождества

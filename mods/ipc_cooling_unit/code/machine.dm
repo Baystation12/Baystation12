@@ -19,7 +19,7 @@
 	if(statpanel("Status"))
 		var/obj/item/organ/internal/cell/potato = internal_organs_by_name[BP_CELL]
 		var/obj/item/organ/internal/cooling_system/coolant = internal_organs_by_name[BP_COOLING]
-		if(potato && potato.cell)
+		if(potato && potato.cell && src.is_species(SPECIES_IPC))
 			stat("Coolant remaining:","[coolant.get_coolant_remaining()]/[coolant.refrigerant_max]")
 
 /obj/item/organ/internal/cell/Process()
