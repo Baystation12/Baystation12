@@ -1,4 +1,0 @@
-author: Dimach
-changes:
-  - {admin: 'Add xeno whitelist panel, add FBP whitelist'}
-delete-after: true

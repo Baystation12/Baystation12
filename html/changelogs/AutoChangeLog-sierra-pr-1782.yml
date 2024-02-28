@@ -1,5 +1,0 @@
-author: Lexanx
-changes:
-  - {rscadd: Орган Охлаждения для ИПС}
-  - {rscadd: Добавлен внешний охладитель для ИПС}
-delete-after: true
