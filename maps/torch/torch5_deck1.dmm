@@ -663,8 +663,10 @@
 /obj/floor_decal/corner/beige{
 	dir = 5
 	},
-/obj/machinery/light{
-	dir = 1
+/obj/structure/hygiene/sink{
+	icon_state = "sink_alt";
+	pixel_y = 26;
+	desc = "A laboratory sink used for washing one's hands and equipment."
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
@@ -21626,8 +21628,7 @@
 "lym" = (
 /obj/structure/table/glass,
 /obj/machinery/light{
-	dir = 1;
-	icon_state = "tube1"
+	dir = 1
 	},
 /obj/machinery/microscope,
 /turf/simulated/floor/tiled/white,
@@ -29431,6 +29432,9 @@
 	name = "Chemistry Cleaner"
 	},
 /obj/item/storage/box/autoinjectors,
+/obj/machinery/light{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
 "vMm" = (
