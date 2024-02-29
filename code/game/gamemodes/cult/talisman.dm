@@ -71,7 +71,7 @@
 		)
 		admin_attack_log(user, target, "Used a talisman ([type]).", "Was victim of a talisman ([type]).", "used a talisman ([type]) on")
 		invoke(target, user)
-	user.say("Talisman {talisman_name}!", all_languages[LANGUAGE_CULT])
+	user.say("Talisman [talisman_name]!", all_languages[LANGUAGE_CULT])
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(target)
 	if (talisman_sound)
