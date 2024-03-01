@@ -1388,6 +1388,7 @@
 
 /obj/item/reagent_containers/food/snacks/monkeycube/OnConsume(mob/living/consumer, mob/living/feeder)
 	set waitfor = FALSE
+	..()
 	if (ishuman(consumer))
 		var/mob/living/carbon/human/human = consumer
 		to_chat(human, FONT_LARGE(SPAN_DANGER("Something is very wrong ...")))
@@ -1405,7 +1406,8 @@
 		human.AdjustStunned(5)
 	else
 		consumer.kill_health()
-	Expand()
+	var/mob/monkey = new monkey_type
+	monkey.dropInto(consumer.loc)
 
 /obj/item/reagent_containers/food/snacks/monkeycube/on_reagent_change()
 	if(reagents.has_reagent(/datum/reagent/water))
@@ -1531,14 +1533,17 @@
 
 /obj/item/reagent_containers/food/snacks/corpse_cube/OnConsume(mob/living/consumer, mob/living/feeder)
 	set waitfor = FALSE
+	..()
 	if (ishuman(consumer))
 		var/mob/living/carbon/human/human = consumer
 		to_chat(human, FONT_LARGE(SPAN_DANGER("You feel something shifting and slithering throughout your body ...")))
 		var/obj/item/organ/external/organ = human.get_organ(BP_CHEST)
 		var/obj/item/organ/external/unluckylimb1 = human.get_organ(pick(BP_ALL_LIMBS))
 		var/obj/item/organ/external/unluckylimb2 = human.get_organ(pick(BP_ALL_LIMBS))
+		sleep(3 SECONDS)
 		organ.add_pain(30)
 		organ.fracture()
+		sleep(3 SECONDS)
 		unluckylimb1.add_pain(50)
 		unluckylimb1.fracture()
 		unluckylimb2.add_pain(50)
@@ -2755,7 +2760,7 @@
 
 	var/open = 0 // Is the box open?
 	var/ismessy = 0 // Fancy mess on the lid
-	var/obj/item/reagent_containers/food/snacks/sliceable/pizza/pizza // content pizza
+	var/obj/item/reagent_containers/food/snacks/sliceable/pizza // content pizza
 	var/list/boxes = list()// If the boxes are stacked, they come here
 	var/boxtag = ""
 
@@ -2764,30 +2769,35 @@
 	ClearOverlays()
 
 	// Set appropriate description
-	if( open && pizza )
+	if(open && pizza)
 		desc = "A box suited for pizzas. It appears to have a [pizza.name] inside."
-	else if( length(boxes) > 0 )
+	else if(length(boxes) > 0)
 		desc = "A pile of boxes suited for pizzas. There appears to be [length(boxes) + 1] boxes in the pile."
 
 		var/obj/item/pizzabox/topbox = boxes[length(boxes)]
 		var/toptag = topbox.boxtag
-		if( toptag != "" )
+		if(toptag != "")
 			desc = "[desc] The box on top has a tag, it reads: '[toptag]'."
 	else
 		desc = "A box suited for pizzas."
 
-		if( boxtag != "" )
+		if(boxtag != "")
 			desc = "[desc] The box has a tag, it reads: '[boxtag]'."
 
 	// Icon states and overlays
-	if( open )
-		if( ismessy )
+	if(open)
+		if(ismessy)
 			icon_state = "pizzabox_messy"
 		else
 			icon_state = "pizzabox_open"
 
-		if( pizza )
-			var/image/pizzaimg = image("food.dmi", icon_state = pizza.icon_state)
+		if(pizza)
+			var/image/pizzaimg = image(pizza.icon, icon_state = pizza.icon_state)
+			if (istype(pizza, /obj/item/reagent_containers/food/snacks/sliceable/variable/pizza))
+				var/image/filling = image("food_custom.dmi", icon_state = "pizza_filling")
+				filling.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
+				filling.color = pizza.filling_color
+				pizzaimg.AddOverlays(filling)
 			pizzaimg.pixel_y = -3
 			AddOverlays(pizzaimg)
 
@@ -2795,70 +2805,70 @@
 	else
 		// Stupid code because byondcode sucks
 		var/doimgtag = 0
-		if( length(boxes) > 0 )
+		if(length(boxes) > 0)
 			var/obj/item/pizzabox/topbox = boxes[length(boxes)]
-			if( topbox.boxtag != "" )
+			if(topbox.boxtag != "")
 				doimgtag = 1
 		else
-			if( boxtag != "" )
+			if(boxtag != "")
 				doimgtag = 1
 
-		if( doimgtag )
+		if(doimgtag)
 			var/image/tagimg = image("food.dmi", icon_state = "pizzabox_tag")
 			tagimg.pixel_y = length(boxes) * 3
 			AddOverlays(tagimg)
 
 	icon_state = "pizzabox[length(boxes)+1]"
 
-/obj/item/pizzabox/attack_hand( mob/user as mob )
+/obj/item/pizzabox/attack_hand(mob/user as mob)
 
-	if( open && pizza )
-		user.put_in_hands( pizza )
+	if(open && pizza)
+		user.put_in_hands(pizza)
 
-		to_chat(user, SPAN_WARNING("You take \the [src.pizza] out of \the [src]."))
+		to_chat(user, SPAN_WARNING("You take \the [pizza] out of \the [src]."))
 		src.pizza = null
 		update_icon()
 		return
 
-	if( length(boxes) > 0 )
-		if( user.get_inactive_hand() != src )
+	if(length(boxes) > 0)
+		if(user.get_inactive_hand() != src)
 			..()
 			return
 
 		var/obj/item/pizzabox/box = boxes[length(boxes)]
 		boxes -= box
 
-		user.put_in_hands( box )
+		user.put_in_hands(box)
 		to_chat(user, SPAN_WARNING("You remove the topmost [src] from your hand."))
 		box.update_icon()
 		update_icon()
 		return
 	..()
 
-/obj/item/pizzabox/attack_self( mob/user as mob )
+/obj/item/pizzabox/attack_self(mob/user as mob)
 
-	if( length(boxes) > 0 )
+	if(length(boxes) > 0)
 		return
 
 	open = !open
 
-	if( open && pizza )
+	if(open && pizza)
 		ismessy = 1
 
 	update_icon()
 
 /obj/item/pizzabox/attackby( obj/item/I as obj, mob/user as mob )
-	if( istype(I, /obj/item/pizzabox) )
+	if(istype(I, /obj/item/pizzabox))
 		var/obj/item/pizzabox/box = I
 
-		if( !box.open && !src.open )
+		if(!box.open && !src.open)
 			// make a list of all boxes to be added
 			var/list/boxestoadd = list()
 			boxestoadd += box
 			for(var/obj/item/pizzabox/i in box.boxes)
 				boxestoadd += i
 
-			if( (length(boxes)+1) + length(boxestoadd) <= 5 )
+			if((length(boxes)+1) + length(boxestoadd) <= 5)
 				if(!user.unEquip(box, src))
 					return
 				box.boxes = list()// clear the box boxes so we don't have boxes inside boxes. - Xzibit
@@ -2875,16 +2885,16 @@
 
 		return
 
-	if( istype(I, /obj/item/reagent_containers/food/snacks/sliceable/pizza) )
-
-		if( src.open )
-			if(!user.unEquip(I, src))
-				return
-			src.pizza = I
-
-			update_icon()
-
-			to_chat(user, SPAN_WARNING("You put \the [I] in \the [src]!"))
+	if(istype(I, /obj/item/reagent_containers/food/snacks/sliceable/pizza) || istype(I, /obj/item/reagent_containers/food/snacks/sliceable/variable/pizza))
+		if(open)
+			if (!pizza)
+				if(!user.unEquip(I, src))
+					return
+				pizza = I
+				update_icon()
+				to_chat(user, SPAN_WARNING("You put \the [I] in \the [src]!"))
+			else
+				to_chat(user, SPAN_WARNING("There is already \a [pizza] in \the [src]!"))
 		else
 			to_chat(user, SPAN_WARNING("You try to push \the [I] through the lid but it doesn't work!"))
 		return
