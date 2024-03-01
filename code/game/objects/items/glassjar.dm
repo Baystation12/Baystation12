@@ -96,7 +96,7 @@
 			for(var/obj/item/spacecash/S in src)
 				var/list/moneyImages = S.getMoneyImages()
 				for(var/A in moneyImages)
-					var/image/money = image('icons/obj/jars.dmi', A)
+					var/image/money = image('icons/obj/money.dmi', A)
 					money.pixel_x = rand(-2, 3)
 					money.pixel_y = rand(-6, 6)
 					money.SetTransform(scale = 0.6)
