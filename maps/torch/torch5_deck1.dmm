@@ -631,6 +631,9 @@
 /obj/item/stack/material/phoron{
 	amount = 6
 	},
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
 "abt" = (
