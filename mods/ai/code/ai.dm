@@ -102,12 +102,7 @@
 	return
 /obj/machinery/shieldgen/attack_ai(mob/user)
 	return
-//
-/obj/machinery/door/attack_ai(mob/user)
-	return attack_hand(user)
-//
-/obj/machinery/organ_printer/attack_ai(mob/user)
-	return physical_attack_hand(user)
+
 
 /obj/machinery/fabricator/attack_ai(mob/user)
 	return physical_attack_hand(user)
