@@ -28,7 +28,7 @@ ID мода: EMOTE_PANEL
 
 ### Изменения *кор кода*
 
-- Отсутствуют
+- `code\modules\species\species.dm` : `/datum/species/proc/hug(mob/living/carbon/human/H,mob/living/target)`
 <!--
   Если вы редактировали какие-либо процедуры или переменные в кор коде,
   они должны быть указаны здесь.
