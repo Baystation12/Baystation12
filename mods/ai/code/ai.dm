@@ -98,11 +98,18 @@
 
 /obj/machinery/portable_atmospherics/attack_ai(mob/user)
 	return
+
 /obj/machinery/floodlight/attack_ai(mob/user)
 	return
+
 /obj/machinery/shieldgen/attack_ai(mob/user)
 	return
 
-//
 /obj/machinery/door/attack_ai(mob/user)
 	return attack_hand(user)
+
+/obj/machinery/suspension_gen/attack_ai(mob/user)
+	return
+
+/obj/machinery/icecream_vat/attack_ai(mob/user)
+	return
