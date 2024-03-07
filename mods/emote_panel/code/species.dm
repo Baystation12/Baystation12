@@ -10,6 +10,8 @@
 				t_him = "him"
 			if(FEMALE)
 				t_him = "her"
+			if(NEUTER)
+				t_him = "it"
 	if(H.zone_sel.selecting == "head")
 		H.visible_message( \
 			"<span class='notice'>[H] pats [target] on the head.</span>", \
