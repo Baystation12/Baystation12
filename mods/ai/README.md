@@ -2,6 +2,7 @@
 #### Список PRов:
 
 - https://github.com/SierraBay/SierraBay12/pull/1773
+- https://github.com/SierraBay/SierraBay12/pull/1925
 <!--
   Ссылки на PRы, связанные с модом:
   - Создание
@@ -29,6 +30,7 @@ ID мода: AI
 
 - `code/modules/mob/living/silicon/ai/ai.dm`: `var/global/list/ai_verbs_default`
 - `code/modules/mob/observer/freelook/chunk.dm`: `/datum/obfuscation/proc/get_obfuscation()`
+- `code/modules/modular_computers/computers/modular_computer/interaction.dm` : `/obj/item/modular_computer/attack_ai`
 <!--
   Если вы редактировали какие-либо процедуры или переменные в кор коде,
   они должны быть указаны здесь.
@@ -70,7 +72,7 @@ ID мода: AI
 
 ### Авторы:
 
-LordNest
+LordNest, Lexanx
 <!--
   Здесь находится твой никнейм
   Если работал совместно - никнеймы тех, кто помогал.

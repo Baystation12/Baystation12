@@ -94,9 +94,10 @@
 		var/response = alert(user, "This computer is turned off. Would you like to turn it on?", "Admin Override", "Yes", "No")
 		if(response == "Yes")
 			turn_on(user)
-
-/obj/item/modular_computer/attack_ai(mob/user)
+/*
+/obj/item/modular_computer/attack_ai(mob/user)   -------> mods\ai\code\ai.dm
 	return attack_self(user)
+*/
 
 /obj/item/modular_computer/attack_hand(mob/user)
 	if(anchored)

@@ -68,3 +68,48 @@
 	set name = "Show Crew Records"
 
 	open_subsystem(/datum/nano_module/records)
+
+
+
+//Кнопка для открытия терминала на компьютерах для ИИ
+
+/obj/item/modular_computer/attack_ai(mob/user)
+	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	if(!enabled && screen_on)
+		return attack_self(user)
+	switch(alert("Open Terminal or interact with it?", "Open Terminal or interact with it?", "Interact", "Terminal"))
+		if("Interact")
+			return attack_self(user)
+		if("Terminal")
+			return os.open_terminal(user)
+
+
+/obj/machinery/computer/modular/attack_ai(mob/user)
+	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	switch(alert("Open Terminal or interact with it?", "Open Terminal or interact with it?", "Interact", "Terminal"))
+		if("Interact")
+			return interface_interact(user)
+		if("Terminal")
+			os.system_boot()
+			return os.open_terminal(user)
+
+
+/// Тут мы перечисляем все, к чему к ИИ не должно быть доступа.
+
+/obj/machinery/portable_atmospherics/attack_ai(mob/user)
+	return
+
+/obj/machinery/floodlight/attack_ai(mob/user)
+	return
+
+/obj/machinery/shieldgen/attack_ai(mob/user)
+	return
+
+/obj/machinery/door/attack_ai(mob/user)
+	return attack_hand(user)
+
+/obj/machinery/suspension_gen/attack_ai(mob/user)
+	return
+
+/obj/machinery/icecream_vat/attack_ai(mob/user)
+	return
