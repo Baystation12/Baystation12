@@ -7,6 +7,7 @@
 #include "code/overrides.dm"
 // #include "code/pain.dm" // SIERRA TODO: Use it
 #include "code/silicon.dm"
+#include "code\species.dm"
 #include "code/unathi.dm"
 
 #endif
