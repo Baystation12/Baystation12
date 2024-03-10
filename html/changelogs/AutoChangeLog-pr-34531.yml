@@ -1,0 +1,7 @@
+author: rootoo807
+changes:
+  - {rscadd: 'Adds Skrell markings, more Unathi tattoos, enables Tiger head tattoo
+      for humans and other tattoo users.'}
+  - {rscdel: Removes (broken) Unathi plating options. Chest and full body plating
+      are still there.}
+delete-after: true
