@@ -110,6 +110,7 @@
 /datum/sprite_accessory/marking/unathi/body
 	icon = 'icons/mob/human_races/species/unathi/body.dmi'
 	draw_order = 50
+	use_organ_tag = FALSE
 
 
 /datum/sprite_accessory/marking/unathi/body/head
@@ -191,26 +192,6 @@
 	icon_state = "plating_f_chest"
 
 
-/datum/sprite_accessory/marking/unathi/body/arm_left/plating_female
-	name = "Plating (L. Arm, Female)"
-	icon_state = "plating_f_l_arm"
-
-
-/datum/sprite_accessory/marking/unathi/body/arm_right/plating_female
-	name = "Plating (R. Arm, Female)"
-	icon_state = "plating_f_r_arm"
-
-
-/datum/sprite_accessory/marking/unathi/body/leg_left/plating_female
-	name = "Plating (L. Leg, Female)"
-	icon_state = "plating_f_l_leg"
-
-
-/datum/sprite_accessory/marking/unathi/body/leg_right/plating_female
-	name = "Plating (R. Leg, Female)"
-	icon_state = "plating_f_r_leg"
-
-
 /datum/sprite_accessory/marking/unathi/body/plating_male_full
 	name = "Plating (Full, Male)"
 	icon_state = "plating_m_full"
@@ -235,26 +216,6 @@
 	icon_state = "plating_m_chest"
 
 
-/datum/sprite_accessory/marking/unathi/body/arm_left/plating_male
-	name = "Plating (L. Arm, Male)"
-	icon_state = "plating_m_l_arm"
-
-
-/datum/sprite_accessory/marking/unathi/body/arm_right/plating_male
-	name = "Plating (R. Arm, Male)"
-	icon_state = "plating_m_r_arm"
-
-
-/datum/sprite_accessory/marking/unathi/body/leg_left/plating_male
-	name = "Plating (L. Leg, Male)"
-	icon_state = "plating_m_l_leg"
-
-
-/datum/sprite_accessory/marking/unathi/body/leg_right/plating_male
-	name = "Plating (R. Leg, Male)"
-	icon_state = "plating_m_r_leg"
-
-
 /datum/sprite_accessory/marking/unathi/tattoo
 	icon = 'icons/mob/human_races/species/unathi/tattoo.dmi'
 	draw_order = 60
@@ -262,57 +223,90 @@
 
 
 /datum/sprite_accessory/marking/unathi/tattoo/head
-	disallows = list(/datum/sprite_accessory/marking/tattoo/head)
+	disallows = list(
+		/datum/sprite_accessory/marking/tattoo/head,
+		/datum/sprite_accessory/marking/unathi/tattoo/head
+		)
 	body_parts = list(BP_HEAD)
 
 
 /datum/sprite_accessory/marking/unathi/tattoo/chest
-	disallows = list(/datum/sprite_accessory/marking/tattoo/chest)
+	disallows = list(
+		/datum/sprite_accessory/marking/tattoo/chest,
+		/datum/sprite_accessory/marking/unathi/tattoo/chest
+		)
 	body_parts = list(BP_CHEST)
 
 
 /datum/sprite_accessory/marking/unathi/tattoo/groin
-	disallows = list(/datum/sprite_accessory/marking/tattoo/groin)
+	disallows = list(
+		/datum/sprite_accessory/marking/tattoo/groin,
+		/datum/sprite_accessory/marking/unathi/tattoo/groin
+		)
 	body_parts = list(BP_GROIN)
 
 
 /datum/sprite_accessory/marking/unathi/tattoo/arm_left
-	disallows = list(/datum/sprite_accessory/marking/tattoo/arm_left)
+	disallows = list(
+		/datum/sprite_accessory/marking/tattoo/arm_left,
+		/datum/sprite_accessory/marking/unathi/tattoo/arm_left
+		)
 	body_parts = list(BP_L_ARM)
 
 
 /datum/sprite_accessory/marking/unathi/tattoo/arm_right
-	disallows = list(/datum/sprite_accessory/marking/tattoo/arm_right)
+	disallows = list(
+		/datum/sprite_accessory/marking/tattoo/arm_right,
+		/datum/sprite_accessory/marking/unathi/tattoo/arm_right
+		)
 	body_parts = list(BP_R_ARM)
 
 
 /datum/sprite_accessory/marking/unathi/tattoo/hand_left
-	disallows = list(/datum/sprite_accessory/marking/tattoo/hand_left)
+	disallows = list(
+		/datum/sprite_accessory/marking/tattoo/hand_left,
+		/datum/sprite_accessory/marking/unathi/tattoo/hand_left
+		)
 	body_parts = list(BP_L_HAND)
 
 
 /datum/sprite_accessory/marking/unathi/tattoo/hand_right
-	disallows = list(/datum/sprite_accessory/marking/tattoo/hand_right)
+	disallows = list(
+		/datum/sprite_accessory/marking/tattoo/hand_right,
+		/datum/sprite_accessory/marking/unathi/tattoo/hand_right
+		)
 	body_parts = list(BP_R_HAND)
 
 
 /datum/sprite_accessory/marking/unathi/tattoo/leg_left
-	disallows = list(/datum/sprite_accessory/marking/tattoo/leg_left)
+	disallows = list(
+		/datum/sprite_accessory/marking/tattoo/leg_left,
+		/datum/sprite_accessory/marking/unathi/tattoo/leg_left
+		)
 	body_parts = list(BP_L_LEG)
 
 
 /datum/sprite_accessory/marking/unathi/tattoo/leg_right
-	disallows = list(/datum/sprite_accessory/marking/tattoo/leg_right)
+	disallows = list(
+		/datum/sprite_accessory/marking/tattoo/leg_right,
+		/datum/sprite_accessory/marking/unathi/tattoo/leg_right
+		)
 	body_parts = list(BP_R_LEG)
 
 
 /datum/sprite_accessory/marking/unathi/tattoo/foot_left
-	disallows = list(/datum/sprite_accessory/marking/tattoo/foot_left)
+	disallows = list(
+		/datum/sprite_accessory/marking/tattoo/foot_left,
+		/datum/sprite_accessory/marking/unathi/tattoo/foot_left
+		)
 	body_parts = list(BP_L_FOOT)
 
 
-/datum/sprite_accessory/marking/unathi/tattoo/leg_right
-	disallows = list(/datum/sprite_accessory/marking/tattoo/leg_right)
+/datum/sprite_accessory/marking/unathi/tattoo/foot_right
+	disallows = list(
+		/datum/sprite_accessory/marking/tattoo/foot_right,
+		/datum/sprite_accessory/marking/unathi/tattoo/foot_right
+		)
 	body_parts = list(BP_R_FOOT)
 
 
@@ -321,11 +315,96 @@
 	icon_state = "hive-chest"
 
 
+/datum/sprite_accessory/marking/unathi/tattoo/arm_left/campbell
+	name = "Tattoo (Campbell, Left Arm, Unathi)"
+	icon_state = "campbell-arm-left"
+
+
+/datum/sprite_accessory/marking/unathi/tattoo/arm_right/campbell
+	name = "Tattoo (Campbell, Right Arm, Unathi)"
+	icon_state = "campbell-arm-right"
+
+
+/datum/sprite_accessory/marking/unathi/tattoo/head/tiger
+	name = "Tattoo (Tiger Stripes, Head, Unathi)"
+	icon_state = "tiger-head"
+
+
 /datum/sprite_accessory/marking/unathi/tattoo/chest/tiger
-	name = "Tattoo (Tiger Stripes, Unathi)"
+	name = "Tattoo (Tiger Stripes, Body, Unathi)"
 	icon_state = "tiger-chest"
+
+
+/datum/sprite_accessory/marking/unathi/tattoo/arm_left/tiger
+	name = "Tattoo (Tiger Stripes, Left Arm, Unathi)"
+	icon_state = "tiger-arm-left"
+
+
+/datum/sprite_accessory/marking/unathi/tattoo/arm_right/tiger
+	name = "Tattoo (Tiger Stripes, Right Arm, Unathi)"
+	icon_state = "tiger-arm-right"
+
+
+/datum/sprite_accessory/marking/unathi/tattoo/leg_left/tiger
+	name = "Tattoo (Tiger Stripes, Left Leg, Unathi)"
+	icon_state = "tiger-leg-left"
+
+
+/datum/sprite_accessory/marking/unathi/tattoo/leg_right/tiger
+	name = "Tattoo (Tiger Stripes, Right Leg, Unathi)"
+	icon_state = "tiger-leg-right"
+
+
+/datum/sprite_accessory/marking/unathi/tattoo/foot_left/tiger
+	name = "Tattoo (Tiger Stripes, Left Foot, Unathi)"
+	icon_state = "tiger-foot-left"
+
+
+/datum/sprite_accessory/marking/unathi/tattoo/foot_right/tiger
+	name = "Tattoo (Tiger Stripes, Right Foot, Unathi)"
+	icon_state = "tiger-foot-right"
 
 
 /datum/sprite_accessory/marking/unathi/tattoo/chest/bands
 	name = "Tattoo (Bands, Body, Unathi)"
 	icon_state = "bands-chest"
+
+
+/datum/sprite_accessory/marking/unathi/tattoo/arm_left/bands
+	name = "Tattoo (Bands, Left Arm, Unathi)"
+	icon_state = "bands-arm-left"
+
+
+/datum/sprite_accessory/marking/unathi/tattoo/arm_right/bands
+	name = "Tattoo (Bands, Right Arm, Unathi)"
+	icon_state = "bands-arm-right"
+
+
+/datum/sprite_accessory/marking/unathi/tattoo/hand_left/bands
+	name = "Tattoo (Bands, Left Hand, Unathi)"
+	icon_state = "bands-hand-left"
+
+
+/datum/sprite_accessory/marking/unathi/tattoo/hand_right/bands
+	name = "Tattoo (Bands, Right Hand, Unathi)"
+	icon_state = "bands-hand-right"
+
+
+/datum/sprite_accessory/marking/unathi/tattoo/leg_left/bands
+	name = "Tattoo (Bands, Left Leg, Unathi)"
+	icon_state = "bands-leg-left"
+
+
+/datum/sprite_accessory/marking/unathi/tattoo/leg_right/bands
+	name = "Tattoo (Bands, Right Leg, Unathi)"
+	icon_state = "bands-leg-right"
+
+
+/datum/sprite_accessory/marking/unathi/tattoo/foot_left/bands
+	name = "Tattoo (Bands, Left Foot, Unathi)"
+	icon_state = "bands-foot-left"
+
+
+/datum/sprite_accessory/marking/unathi/tattoo/foot_right/bands
+	name = "Tattoo (Bands, Right Foot, Unathi)"
+	icon_state = "bands-foot-right"
