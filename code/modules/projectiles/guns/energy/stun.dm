@@ -123,7 +123,7 @@
 /obj/item/gun/energy/confuseray
 	name = "disorientator"
 	desc = "The W-T Mk. 4 Disorientator is a small, low capacity, and short-ranged energy projector intended for personal defense with minimal risk of permanent damage or cross-fire."
-	icon = 'icons/obj/guns/confuseray.dmi'
+	icon = 'icons/obj/guns/confuseraysec.dmi'
 	icon_state = "confuseray"
 	safety_icon = "safety"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_POWER = 2)
