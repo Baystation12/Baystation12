@@ -1,5 +1,0 @@
-author: SierraKomodo
-changes:
-  - {bugfix: "Fax machines no longer run out of toner, which they don't actually have
-      or use, when receiving bundled faxes."}
-delete-after: true
