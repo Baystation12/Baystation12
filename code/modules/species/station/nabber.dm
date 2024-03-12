@@ -287,11 +287,7 @@
 
 			var/image/threat_image = skin_overlays[image_key]
 			if(!threat_image)
-				var/icon/base_icon = icon(H.stand_icon)
-				var/icon/I = new('icons/mob/human_races/species/nabber/threat.dmi', "threat")
-				base_icon.Blend(COLOR_BLACK, ICON_MULTIPLY)
-				base_icon.Blend(I, ICON_ADD)
-				threat_image  = image(base_icon)
+				threat_image = image('icons/mob/human_races/species/nabber/threat.dmi', "threat")
 				skin_overlays[image_key] = threat_image
 
 			return(threat_image)
