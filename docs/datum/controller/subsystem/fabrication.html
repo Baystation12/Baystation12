@@ -16,7 +16,7 @@
 <h1>fabrication <aside>/<a href="datum.html">datum</a>/<a href="datum/controller.html">controller</a>/<a href="datum/controller/subsystem.html">subsystem</a>/<a href="datum/controller/subsystem/fabrication.html">fabrication</a></aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/0d19c7f5887144ad3b25fb5eaaf94e14639934e1/code/controllers/subsystems/initialization/fabrication.dm#L1">
+            <a href="https://github.com/Baystation12/Baystation12/blob/a8cdcdfae573508f5dc10c67eb15dd47c1300f08/code/controllers/subsystems/initialization/fabrication.dm#L1">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;initialization&#x2F;fabrication.dm 1"/></a></h1>
 
 <table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
@@ -31,7 +31,7 @@
             <aside>&ndash; /static/list</aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/0d19c7f5887144ad3b25fb5eaaf94e14639934e1/code/controllers/subsystems/initialization/fabrication.dm#L42">
+            <a href="https://github.com/Baystation12/Baystation12/blob/a8cdcdfae573508f5dc10c67eb15dd47c1300f08/code/controllers/subsystems/initialization/fabrication.dm#L42">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;initialization&#x2F;fabrication.dm 42"/></a></h3>
         <p>List of lists (Strings =&gt; Strings). Global list of recipe categories. These are pulled from the recipes provided in <code>recipes</code>. Set during <code>Initialize()</code>.</p>
 <p>Example formatting:</p>
@@ -49,7 +49,7 @@
             <aside>&ndash; /static/list</aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/0d19c7f5887144ad3b25fb5eaaf94e14639934e1/code/controllers/subsystems/initialization/fabrication.dm#L23">
+            <a href="https://github.com/Baystation12/Baystation12/blob/a8cdcdfae573508f5dc10c67eb15dd47c1300f08/code/controllers/subsystems/initialization/fabrication.dm#L23">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;initialization&#x2F;fabrication.dm 23"/></a></h3>
         <p>List of lists(Strings =&gt; Paths - Subtypes of <code>/datum/fabricator_recipe</code>). Global list of fabricator recipes. Set during <code>Initialize()</code>.</p>
 <p>Example formatting:</p>
@@ -67,12 +67,12 @@
             <aside>&ndash; /static/list</aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/0d19c7f5887144ad3b25fb5eaaf94e14639934e1/code/controllers/subsystems/initialization/fabrication.dm#L47">
+            <a href="https://github.com/Baystation12/Baystation12/blob/a8cdcdfae573508f5dc10c67eb15dd47c1300f08/code/controllers/subsystems/initialization/fabrication.dm#L47">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;initialization&#x2F;fabrication.dm 47"/></a></h3>
         <p>List of lists (Paths (<code>/obj/item</code>) =&gt; Paths (<code>/singleting/crafting_stage</code>)). Global list of crafting stages. These are pulled from each crafting stage's <code>begins_with_object_type</code> var. Set during <code>Initialize()</code>.</p><h2 id="proc">Proc Details</h2><h3 id="proc/find_crafting_recipes"><aside class="declaration">proc </aside>find_crafting_recipes<aside>(type) 
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/0d19c7f5887144ad3b25fb5eaaf94e14639934e1/code/controllers/subsystems/initialization/fabrication.dm#L109">
+            <a href="https://github.com/Baystation12/Baystation12/blob/a8cdcdfae573508f5dc10c67eb15dd47c1300f08/code/controllers/subsystems/initialization/fabrication.dm#L109">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;initialization&#x2F;fabrication.dm 109"/></a></aside>
         </h3>
         <p>Retrieves a list of crafting stages for the given type path.</p>
@@ -83,7 +83,7 @@
 <p>Returns list of paths (<code>/singleton/crafting_stage</code>). The initial crafting stages with the given type set as their <code>begins_with_object_type</code>.</p><h3 id="proc/get_categories"><aside class="declaration">proc </aside>get_categories<aside>(type) 
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/0d19c7f5887144ad3b25fb5eaaf94e14639934e1/code/controllers/subsystems/initialization/fabrication.dm#L85">
+            <a href="https://github.com/Baystation12/Baystation12/blob/a8cdcdfae573508f5dc10c67eb15dd47c1300f08/code/controllers/subsystems/initialization/fabrication.dm#L85">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;initialization&#x2F;fabrication.dm 85"/></a></aside>
         </h3>
         <p>Retrieves a list of categories for the given root type.</p>
@@ -94,7 +94,7 @@
 <p>Returns list of strings. The categories associated with the given root type.</p><h3 id="proc/get_recipes"><aside class="declaration">proc </aside>get_recipes<aside>(type) 
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/0d19c7f5887144ad3b25fb5eaaf94e14639934e1/code/controllers/subsystems/initialization/fabrication.dm#L97">
+            <a href="https://github.com/Baystation12/Baystation12/blob/a8cdcdfae573508f5dc10c67eb15dd47c1300f08/code/controllers/subsystems/initialization/fabrication.dm#L97">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;initialization&#x2F;fabrication.dm 97"/></a></aside>
         </h3>
         <p>Retrieves a list of recipes for the given root type.</p>
@@ -105,7 +105,7 @@
 <p>Returns list of paths (<code>/datum/fabricator_recipe</code>). The recipes associated with the given root type.</p><h3 id="proc/try_craft_with"><aside class="declaration">proc </aside>try_craft_with<aside>(/<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/target, /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/tool, /<a href="mob.html">mob</a>/user) 
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/0d19c7f5887144ad3b25fb5eaaf94e14639934e1/code/controllers/subsystems/initialization/fabrication.dm#L129">
+            <a href="https://github.com/Baystation12/Baystation12/blob/a8cdcdfae573508f5dc10c67eb15dd47c1300f08/code/controllers/subsystems/initialization/fabrication.dm#L129">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;initialization&#x2F;fabrication.dm 129"/></a></aside>
         </h3>
         <p>Attempts to start a crafting stage using the target and tool.</p>
@@ -118,7 +118,7 @@
 <p>Has no return value.</p></main>
 <footer>
     baystation12.dme
-    <a href="https://github.com/Baystation12/Baystation12/tree/0d19c7f5887144ad3b25fb5eaaf94e14639934e1">0d19c7f</a>
+    <a href="https://github.com/Baystation12/Baystation12/tree/a8cdcdfae573508f5dc10c67eb15dd47c1300f08">a8cdcdf</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.7.3</a></footer>
 </body>
 </html>
