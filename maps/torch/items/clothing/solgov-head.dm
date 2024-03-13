@@ -465,3 +465,5 @@
 		)
 	light_overlay = "helmet_light_dual_alt"
 	tinted = FALSE
+	valid_accessory_slots = null
+	restricted_accessory_slots = null

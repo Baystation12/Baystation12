@@ -35,7 +35,9 @@
 #define ACCESSORY_SLOT_ARMOR_M  "Misc armor"
 #define ACCESSORY_SLOT_HELM_C	"Helmet cover"
 #define ACCESSORY_SLOT_HELM_D   "Helmet decor"
-
+#define ACCESSORY_SLOT_VISOR    "Helmet visor"
+#define ACCESSORY_SLOT_VISION   "Vision modification"
+#define ACCESSORY_SLOT_HUD      "HUD modification"
 
 #define ACCESSORY_REMOVABLE FLAG(0)
 #define ACCESSORY_HIDDEN FLAG(1)

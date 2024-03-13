@@ -209,13 +209,12 @@ The Appraise verb. Used on objects to estimate their value.
 	set category = "IC"
 	set name = "Detective instinct"
 	set src = usr
-	set popup_menu = 0
-
-	if(incapacitated())
+	set popup_menu = FALSE
+	if (incapacitated())
 		return
-
-	if(!remove_client_color(/datum/client_color/noir))
-		to_chat(src, "You clear your mind and focus on the scene before you.")
-		add_client_color(/datum/client_color/noir)
-	else
+	if (has_client_color(/datum/client_color/noir))
+		remove_client_color(/datum/client_color/noir)
 		to_chat(src, "You stop looking for clues.")
+	else
+		add_client_color(/datum/client_color/noir)
+		to_chat(src, "You clear your mind and focus on the scene before you.")
