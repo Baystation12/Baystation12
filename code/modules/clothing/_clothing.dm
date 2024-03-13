@@ -995,16 +995,17 @@ BLIND     // can't see anything
 		return
 	sensor_mode = SUIT_SENSOR_MODES[switchMode]
 
+	var/datum/pronouns/pronouns = user.choose_from_pronouns()
 	if (src.loc == user)
 		switch(sensor_mode)
 			if(SUIT_SENSOR_OFF)
-				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "You disable your suit's remote sensing equipment.")
+				user.visible_message("[user] adjusts the tracking sensor on [pronouns.his] [src.name].", "You disable your suit's remote sensing equipment.")
 			if(SUIT_SENSOR_BINARY)
-				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "Your suit will now report whether you are live or dead.")
+				user.visible_message("[user] adjusts the tracking sensor on [pronouns.his] [src.name].", "Your suit will now report whether you are live or dead.")
 			if(SUIT_SENSOR_VITAL)
-				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "Your suit will now report your vital lifesigns.")
+				user.visible_message("[user] adjusts the tracking sensor on [pronouns.his] [src.name].", "Your suit will now report your vital lifesigns.")
 			if(SUIT_SENSOR_TRACKING)
-				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "Your suit will now report your vital lifesigns as well as your coordinate position.")
+				user.visible_message("[user] adjusts the tracking sensor on [pronouns.his] [src.name].", "Your suit will now report your vital lifesigns as well as your coordinate position.")
 
 	else if (ismob(src.loc))
 		if(sensor_mode == SUIT_SENSOR_OFF)

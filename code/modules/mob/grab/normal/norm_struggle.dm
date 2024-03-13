@@ -27,20 +27,22 @@
 /datum/grab/normal/struggle/process_effect(obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
+	var/datum/pronouns/pronouns = assailant.choose_from_pronouns()
 
 	if (assailant.incapacitated(INCAPACITATION_ALL))
-		affecting.visible_message(SPAN_WARNING("[assailant] lets go of \his grab!"))
+		affecting.visible_message(SPAN_WARNING("\The [assailant] lets go of [pronouns.his] grab!"))
 		qdel(G)
 		return
 
 	if(affecting.incapacitated(INCAPACITATION_UNRESISTING) || affecting.a_intent == I_HELP)
-		affecting.visible_message(SPAN_WARNING("[affecting] isn't prepared to fight back as [assailant] tightens \his grip!"))
+		affecting.visible_message(SPAN_WARNING("\The [affecting] isn't prepared to fight back as \the [assailant] tightens [pronouns.his] grip!"))
 		G.done_struggle = TRUE
 		G.upgrade(TRUE)
 
 /datum/grab/normal/struggle/enter_as_up(obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
+	var/datum/pronouns/pronouns = assailant.choose_from_pronouns()
 
 	if(affecting == assailant)
 		G.done_struggle = TRUE
@@ -48,11 +50,11 @@
 		return
 
 	if(affecting.incapacitated(INCAPACITATION_UNRESISTING) || affecting.a_intent == I_HELP)
-		affecting.visible_message(SPAN_WARNING("[affecting] isn't prepared to fight back as [assailant] tightens \his grip!"))
+		affecting.visible_message(SPAN_WARNING("\The [affecting] isn't prepared to fight back as \the [assailant] tightens [pronouns.his] grip!"))
 		G.done_struggle = TRUE
 		G.upgrade(TRUE)
 	else
-		affecting.visible_message(SPAN_WARNING("[affecting] struggles against [assailant]!"))
+		affecting.visible_message(SPAN_WARNING("\The [affecting] struggles against \the [assailant]!"))
 		G.done_struggle = FALSE
 		addtimer(new Callback(G, .proc/handle_resist), 1 SECOND)
 		resolve_struggle(G)

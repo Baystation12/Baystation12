@@ -120,7 +120,7 @@
 	if(!P.lit)
 		to_chat(user, SPAN_WARNING("\The [P] is not lit."))
 		return
-	user.visible_message(SPAN_WARNING("\The [user] holds \the [P] up to \the [src]. It looks like \he's trying to burn it!"), \
+	user.visible_message(SPAN_WARNING("\The [user] holds \the [P] up to \the [src], trying to burn it!"), \
 		SPAN_WARNING("You hold \the [P] up to \the [src], burning it slowly."))
 	if(!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 		return

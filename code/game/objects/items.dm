@@ -592,7 +592,8 @@ var/global/list/slot_flags_enumeration = list(
 	if(!istype(attacker))
 		return 0
 	attacker.apply_damage(force, damtype, attacker.hand ? BP_L_HAND : BP_R_HAND, used_weapon = src)
-	attacker.visible_message(SPAN_DANGER("[attacker] hurts \his hand on [src]!"))
+	var/datum/pronouns/pronouns = attacker.choose_from_pronouns()
+	attacker.visible_message(SPAN_DANGER("[attacker] hurts [pronouns.his] hand on \the [src]!"))
 	admin_attack_log(attacker, target, "Attempted to disarm but was blocked", "Was targeted with a disarm but blocked the attack", "attmpted to disarm but was blocked by")
 	playsound(target, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 	playsound(target, hitsound, 50, 1, -1)
