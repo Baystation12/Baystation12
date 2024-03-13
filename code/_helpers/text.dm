@@ -436,6 +436,7 @@
 	t = replacetext(t, "\[fleetlogo\]", "<img src = fleetlogo.png>")
 	t = replacetext(t, "\[sfplogo\]", "<img src = sfplogo.png>")
 	t = replacetext(t, "\[falogo\]", "<img src = falogo.png>")
+	t = replacetext(t, "\[zhlogo\]", "<img src = zhlogo.png>")
 	t = replacetext(t, "\[editorbr\]", "")
 	return t
 
@@ -493,6 +494,7 @@
 	t = replacetext(t, "<img src = xynlogo.png>", "\[xynlogo\]")
 	t = replacetext(t, "<img src = sfplogo.png>", "\[sfplogo\]")
 	t = replacetext(t, "<img src = falogo.png>", "\[falogo\]")
+	t = replacetext(t, "<img src = zhlogo.png", "\[zhlogo\]")
 	t = replacetext(t, "<span class=\"paper_field\"></span>", "\[field\]")
 	t = replacetext(t, "<span class=\"redacted\">R E D A C T E D</span>", "\[redacted\]")
 	t = strip_html_properly(t)
