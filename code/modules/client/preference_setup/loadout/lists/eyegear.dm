@@ -185,3 +185,14 @@
 	display_name = "Blindfold"
 	path = /obj/item/clothing/glasses/blindfold
 	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/eyes/ballistics
+	display_name = "Replica Ballistic Goggles"
+	path = /obj/item/clothing/glasses/ballistic/fake
+
+/datum/gear/eyes/ballistics/New()
+	..()
+	var/list/options = list()
+	options["Replica Ballistic Goggles"] = /obj/item/clothing/glasses/ballistic/fake
+	options["Replica Ballistic Goggles, corrective"] = /obj/item/clothing/glasses/ballistic/fake/prescription
+	gear_tweaks += new /datum/gear_tweak/path (options)

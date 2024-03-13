@@ -492,6 +492,8 @@
 		rad = ARMOR_RAD_SHIELDED
 	)
 	light_overlay = "helmet_light_alt"
+	valid_accessory_slots = null
+	restricted_accessory_slots = null
 
 /obj/item/clothing/suit/space/void/retro/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/retro

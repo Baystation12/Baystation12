@@ -31,6 +31,8 @@
 		)
 
 	light_overlay = "helmet_light"
+	valid_accessory_slots = list(ACCESSORY_SLOT_VISOR)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_VISOR)
 
 /obj/item/clothing/suit/space/void
 	name = "voidsuit"

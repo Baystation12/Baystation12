@@ -31,6 +31,8 @@
 		rad = ARMOR_RAD_SHIELDED
 		)
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	valid_accessory_slots = null
+	restricted_accessory_slots = null
 	species_restricted = list(SPECIES_SKRELL,SPECIES_HUMAN)
 
 /obj/item/clothing/head/helmet/space/void/skrell/white
