@@ -360,10 +360,11 @@
 				AUG = A
 				break
 
-		for (var/obj/item/clothing/accessory/glassesmod/hud/C in G.accessories) // Check for HUD accessories on worn eyewear
-			if (C.hud_type & hudtype)
-				ACC = C
-				break
+		if (G)
+			for (var/obj/item/clothing/accessory/glassesmod/hud/C in G.accessories) // Check for HUD accessories on worn eyewear
+				if (C.hud_type & hudtype)
+					ACC = C
+					break
 
 		return ((istype(G) && ((G.hud_type & hudtype) || (G.hud && (G.hud.hud_type & hudtype)))) && G.check_access(ID)) || AUG?.active && AUG.check_access(ID) || ACC?.active
 	else if(istype(M, /mob/living/silicon/robot))
