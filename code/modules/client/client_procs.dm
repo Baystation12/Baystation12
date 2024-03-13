@@ -389,7 +389,8 @@
 		'html/images/eclogo.png',
 		'html/images/FleetLogo.png',
 		'html/images/sfplogo.png',
-		'html/images/falogo.png'
+		'html/images/falogo.png',
+		'html/images/zhlogo.png'
 		)
 	addtimer(new Callback(src, .proc/after_send_resources), 1 SECOND)
 
