@@ -925,7 +925,8 @@
 		custom_pain("[pick("It hurts so much", "You really need some painkillers", "Dear god, the pain")]!", 10, nohalloss = TRUE)
 
 	if(shock_stage >= 30)
-		if(shock_stage == 30) visible_message("<b>[src]</b> is having trouble keeping \his eyes open.")
+		var/datum/pronouns/pronouns = choose_from_pronouns()
+		if(shock_stage == 30) visible_message("<b>[src]</b> is having trouble keeping [pronouns.his] eyes open.")
 		if(prob(30))
 			eye_blurry = max(2, eye_blurry)
 			stuttering = max(stuttering, 5)
