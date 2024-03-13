@@ -401,6 +401,7 @@
 		'html/images/FleetLogo.png',
 		'html/images/sfplogo.png',
 		'html/images/falogo.png',
+<<<<<<< ours
 		// [SIERRA-ADD] ,
 		'html/images/ofbluelogo.png',
 		'html/images/ofntlogo.png',
@@ -408,6 +409,9 @@
 		'html/images/ccalogo.png',
 		'html/images/sierralogo.png',
 		// [/SIERRA-ADD]
+=======
+		'html/images/zhlogo.png'
+>>>>>>> theirs
 		)
 	addtimer(new Callback(src, .proc/after_send_resources), 1 SECOND)
 
