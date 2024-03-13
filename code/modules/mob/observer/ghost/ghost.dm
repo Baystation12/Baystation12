@@ -139,8 +139,7 @@ Works together with spawning an observer, noted above.
 
 /mob/proc/ghostize(can_reenter_corpse = CORPSE_CAN_REENTER)
 	//remove color filters
-	for(var/datum/client_color/colors in client_colors)
-		remove_client_color(colors)
+	clear_client_colors()
 	// Are we the body of an aghosted admin? If so, don't make a ghost.
 	if(teleop && istype(teleop, /mob/observer/ghost))
 		var/mob/observer/ghost/G = teleop
@@ -168,12 +167,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if (admin_paralyzed)
 		to_chat(usr, SPAN_DEBUG("You cannot ghost while admin paralyzed."))
 		return
-
-		//remove color filters
-	for(var/datum/client_color/colors in client_colors)
-		remove_client_color(colors)
-
-
+	clear_client_colors()
 	if(stat == DEAD)
 		announce_ghost_joinleave(ghostize(1))
 	else
@@ -198,8 +192,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			announce_ghost_joinleave(ghost)
 		ghost.update_client_color()
 
-/mob/observer/ghost/can_use_hands()	return 0
-/mob/observer/ghost/is_active()		return 0
+
+/mob/observer/ghost/can_use_hands()
+	return FALSE
+
+
+/mob/observer/ghost/is_active()
+	return FALSE
+
 
 /mob/observer/ghost/Stat()
 	. = ..()
