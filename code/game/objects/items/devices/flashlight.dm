@@ -247,8 +247,6 @@
 	flashlight_range = 5
 	light_wedge = LIGHT_OMNI
 
-	on = 1
-
 // green-shaded desk lamp
 /obj/item/device/flashlight/lamp/green
 	desc = "A classic green-shaded desk lamp."
