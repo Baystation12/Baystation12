@@ -299,7 +299,7 @@
 	if(istype(lightbulb, /obj/item/light))
 		if (on)
 			AddOverlays(emissive_appearance(icon, _state))
-		AddOverlays(overlay_image(icon, _state, color))
+		AddOverlays(overlay_image(icon, _state, lightbulb.color))
 
 	if(on)
 
