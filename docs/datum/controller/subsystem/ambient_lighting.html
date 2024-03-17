@@ -16,7 +16,7 @@
 <h1>ambient_lighting <aside>/<a href="datum.html">datum</a>/<a href="datum/controller.html">controller</a>/<a href="datum/controller/subsystem.html">subsystem</a>/<a href="datum/controller/subsystem/ambient_lighting.html">ambient_lighting</a></aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/258fbb8a24e255e27ff1c9f2134a04dedc8c8166/code/controllers/subsystems/ambient_lighting.dm#L1">
+            <a href="https://github.com/Baystation12/Baystation12/blob/5dc56aaa7e8aadd29363dfeece2a0210b1918cd6/code/controllers/subsystems/ambient_lighting.dm#L1">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;ambient_lighting.dm 1"/></a></h1>
 
 <table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
@@ -32,37 +32,37 @@
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/258fbb8a24e255e27ff1c9f2134a04dedc8c8166/code/controllers/subsystems/ambient_lighting.dm#L12">
+            <a href="https://github.com/Baystation12/Baystation12/blob/5dc56aaa7e8aadd29363dfeece2a0210b1918cd6/code/controllers/subsystems/ambient_lighting.dm#L12">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;ambient_lighting.dm 12"/></a></h3>
         <p>A bitmap of free ambience group indexes.</p><h3 id="var/ambient_groups"><aside class="declaration">var </aside>ambient_groups
             <aside>&ndash; /list/list</aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/258fbb8a24e255e27ff1c9f2134a04dedc8c8166/code/controllers/subsystems/ambient_lighting.dm#L16">
+            <a href="https://github.com/Baystation12/Baystation12/blob/5dc56aaa7e8aadd29363dfeece2a0210b1918cd6/code/controllers/subsystems/ambient_lighting.dm#L16">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;ambient_lighting.dm 16"/></a></h3>
         <p>map of ambiient groups</p><h3 id="var/queued"><aside class="declaration">var </aside>queued
             <aside>&ndash; /list</aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/258fbb8a24e255e27ff1c9f2134a04dedc8c8166/code/controllers/subsystems/ambient_lighting.dm#L9">
+            <a href="https://github.com/Baystation12/Baystation12/blob/5dc56aaa7e8aadd29363dfeece2a0210b1918cd6/code/controllers/subsystems/ambient_lighting.dm#L9">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;ambient_lighting.dm 9"/></a></h3>
         <p>List of turfs queued for ambient light evaluation</p><h2 id="proc">Proc Details</h2><h3 id="proc/add_space_ambient_group"><aside class="declaration">proc </aside>add_space_ambient_group<aside>() 
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/258fbb8a24e255e27ff1c9f2134a04dedc8c8166/code/controllers/subsystems/ambient_lighting.dm#L152">
+            <a href="https://github.com/Baystation12/Baystation12/blob/5dc56aaa7e8aadd29363dfeece2a0210b1918cd6/code/controllers/subsystems/ambient_lighting.dm#L152">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;ambient_lighting.dm 152"/></a></aside>
         </h3>
         <p>Adds the space ambient group if it doesn't currently exist</p><h3 id="proc/allocate_index"><aside class="declaration">proc </aside>allocate_index<aside>() 
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/258fbb8a24e255e27ff1c9f2134a04dedc8c8166/code/controllers/subsystems/ambient_lighting.dm#L136">
+            <a href="https://github.com/Baystation12/Baystation12/blob/5dc56aaa7e8aadd29363dfeece2a0210b1918cd6/code/controllers/subsystems/ambient_lighting.dm#L136">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;ambient_lighting.dm 136"/></a></aside>
         </h3>
         <p>Find a valid index in the ambient group map for a new group</p>
 <p>Returns index or -1 if no indices are left</p><h3 id="proc/clean_turf"><aside class="declaration">proc </aside>clean_turf<aside>(/<a href="turf.html">turf</a>/target) 
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/258fbb8a24e255e27ff1c9f2134a04dedc8c8166/code/controllers/subsystems/ambient_lighting.dm#L189">
+            <a href="https://github.com/Baystation12/Baystation12/blob/5dc56aaa7e8aadd29363dfeece2a0210b1918cd6/code/controllers/subsystems/ambient_lighting.dm#L189">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;ambient_lighting.dm 189"/></a></aside>
         </h3>
         <p>Removes turf from all ambient groups it is part of (if any)</p>
@@ -72,7 +72,7 @@
 </ul><h3 id="proc/create_ambient_group"><aside class="declaration">proc </aside>create_ambient_group<aside>(color, multiplier) 
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/258fbb8a24e255e27ff1c9f2134a04dedc8c8166/code/controllers/subsystems/ambient_lighting.dm#L168">
+            <a href="https://github.com/Baystation12/Baystation12/blob/5dc56aaa7e8aadd29363dfeece2a0210b1918cd6/code/controllers/subsystems/ambient_lighting.dm#L168">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;ambient_lighting.dm 168"/></a></aside>
         </h3>
         <p>Removes turf from ambient group if it is part of it. Removes group's ambient light and flag from turf</p>
@@ -84,13 +84,13 @@
 <p>Returns index or -1 if no indices are left</p><h3 id="proc/fire">fire<aside>(resumed, no_mc_tick) 
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/258fbb8a24e255e27ff1c9f2134a04dedc8c8166/code/controllers/subsystems/ambient_lighting.dm#L206">
+            <a href="https://github.com/Baystation12/Baystation12/blob/5dc56aaa7e8aadd29363dfeece2a0210b1918cd6/code/controllers/subsystems/ambient_lighting.dm#L206">
         <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;subsystems&#x2F;ambient_lighting.dm 206"/></a></aside>
         </h3>
         <p>Go over turfs in queue, add them to space or planet ambient groups if valid, else remove them from all ambient groups</p></main>
 <footer>
     baystation12.dme
-    <a href="https://github.com/Baystation12/Baystation12/tree/258fbb8a24e255e27ff1c9f2134a04dedc8c8166">258fbb8</a>
+    <a href="https://github.com/Baystation12/Baystation12/tree/5dc56aaa7e8aadd29363dfeece2a0210b1918cd6">5dc56aa</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.7.3</a></footer>
 </body>
 </html>
