@@ -1,5 +1,0 @@
-author: SierraKomodo
-changes:
-  - {bugfix: Fixes the sprite color of lights not matching the actual color of the
-      light itself.}
-delete-after: true
