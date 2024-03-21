@@ -173,18 +173,13 @@
 			fire_delay = get_rand_burst_delay()
 			shot_number = 0
 
-		//need to calculate the power per shot as the emitter doesn't fire continuously.
-		var/burst_time = (min_burst_delay + max_burst_delay) / 2 + 2 * (burst_shots - 1)
-		var/power_per_shot = (active_power_usage * efficiency) * (burst_time / 10) / burst_shots
-
 		if (prob(35))
 			var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 			s.set_up(5, 1, src)
 			s.start()
 
-		var/obj/item/projectile/beam/emitter/A = get_emitter_beam()
+		var/obj/item/projectile/A = get_emitter_beam()
 		playsound(loc, A.fire_sound, 25, TRUE)
-		A.damage = round (power_per_shot / EMITTER_DAMAGE_POWER_TRANSFER)
 		A.launch( get_step(loc, dir) )
 
 /obj/machinery/power/emitter/post_anchor_change()
@@ -288,7 +283,12 @@
 	return 0.2 SECONDS // This value doesn't really affect normal emitters, but *does* affect subtypes like the gyrotron that can have very long delays
 
 /obj/machinery/power/emitter/proc/get_emitter_beam()
-	return new /obj/item/projectile/beam/emitter(get_turf(src))
+	var/obj/item/projectile/beam/emitter/proj = new /obj/item/projectile/beam/emitter(get_turf(src))
+	//need to calculate the power per shot as the emitter doesn't fire continuously.
+	var/burst_time = (min_burst_delay + max_burst_delay) / 2 + 2 * (burst_shots - 1)
+	var/power_per_shot = (active_power_usage * efficiency) * (burst_time / 10) / burst_shots
+	proj.damage = round(power_per_shot / EMITTER_DAMAGE_POWER_TRANSFER)
+	return proj
 
 /singleton/public_access/public_method/toggle_emitter
 	name = "toggle emitter"

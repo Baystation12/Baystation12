@@ -161,7 +161,7 @@
 	name = "emitter beam"
 	icon_state = "emitter"
 	fire_sound = 'sound/weapons/emitter.ogg'
-	damage = 0 // The actual damage is computed in /code/modules/power/singularity/emitter.dm
+	damage = 0 // The actual damage is computed in `/obj/machinery/power/emitter/proc/get_emitter_beam()`
 
 	muzzle_type = /obj/projectile/laser/emitter/muzzle
 	tracer_type = /obj/projectile/laser/emitter/tracer
