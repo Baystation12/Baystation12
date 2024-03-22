@@ -1,0 +1,468 @@
+"aa" = (/obj/machinery/alarm{dir = 4; pixel_x = -24; req_access = newlist()},/obj/structure/bed/padded,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"ac" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{id_tag = "tcmining_pump_out_external3"},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"af" = (/obj/structure/table/steel{flipped = 1},/obj/structure/table/steel{flipped = 1; dir = 4},/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"az" = (/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/concrete/reinforced/damaged,/area/template_noop)
+"aE" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"aL" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/empty/oxygen,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"aO" = (/obj/machinery/light/small{dir = 1},/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"aP" = (/obj/random/ore,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"aW" = (/obj/decal/cleanable/dirt,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"aY" = (/obj/machinery/mining/brace{dir = 8; anchored = 1},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"bB" = (/mob/living/simple_animal/hostile/scarybat,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"bF" = (/obj/machinery/fabricator,/obj/machinery/light/small,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"bL" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{icon_state = "map-scrubbers"; dir = 4},/obj/decal/cleanable/dirt,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"bM" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"bN" = (/obj/random/trash,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"ca" = (/obj/structure/table/steel,/obj/machinery/fabricator/micro/bartender,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"cb" = (/obj/machinery/constructable_frame/machine_frame/deconstruct,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"cq" = (/obj/machinery/access_button/airlock_interior{frequency = 1380; master_tag = "tcmining2"; pixel_y = -20},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"cs" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"cz" = (/obj/structure/table/steel,/obj/machinery/light/small{dir = 1},/obj/item/reagent_containers/food/snacks/liquidfood,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"cG" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"cI" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"cL" = (/obj/structure/table/steel,/obj/structure/reagent_dispensers/beerkeg,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"dd" = (/obj/structure/table/steel,/obj/random/advdevice,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"de" = (/obj/machinery/seed_storage/garden,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"df" = (/obj/structure/table/steel{flipped = 1; dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"dh" = (/obj/structure/pit,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"dw" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{icon_state = "map-scrubbers"; dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"dL" = (/obj/structure/iv_stand,/obj/decal/cleanable/dirt,/obj/decal/cleanable/cobweb,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"dM" = (/obj/random/ore,/obj/machinery/atmospherics/pipe/simple/visible,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"et" = (/obj/paint/merc,/turf/simulated/wall,/area/map_template/commonwealthwoes/mining)
+"eK" = (/obj/item/wrench,/obj/item/device/scanner/mining,/obj/structure/table/steel,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"eP" = (/obj/machinery/atmospherics/unary/tank/air{start_pressure = 4559.63},/obj/machinery/light/small{dir = 1},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"eV" = (/obj/machinery/door/airlock/external{frequency = 1380; id_tag = "tcmining_exterior_door3"; locked = 1},/obj/machinery/atmospherics/pipe/simple/visible,/obj/machinery/meter,/obj/item/taperoll/engineering/applied,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"fm" = (/obj/machinery/atmospherics/pipe/simple/visible,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"fr" = (/turf/simulated/floor/exoplanet/concrete,/area/template_noop)
+"fA" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{dir = 1; id_tag = "tcmining_pump2"; power_rating = 25000},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"fB" = (/obj/random/tool,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"fC" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"fE" = (/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"fN" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9; pixel_y = 0},/obj/machinery/atmospherics/pipe/simple/visible/red,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"fO" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9},/obj/machinery/meter,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"fP" = (/obj/item/ore/slag,/obj/decal/cleanable/dirt,/turf/template_noop,/area/template_noop)
+"fZ" = (/obj/decal/cleanable/dirt,/obj/decal/cleanable/generic,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"ga" = (/obj/decal/cleanable/dirt,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"gd" = (/obj/item/stack/cable_coil/single,/obj/floor_decal/industrial/warning/fulltile,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"ge" = (/obj/machinery/portable_atmospherics/hydroponics,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"gf" = (/obj/item/reagent_containers/food/snacks/candy_corn,/obj/item/beartrap{deployed = 1},/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"gg" = (/obj/machinery/atmospherics/pipe/manifold/visible{dir = 8},/obj/machinery/atmospherics/pipe/manifold/hidden/supply,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"gl" = (/obj/decal/cleanable/dirt,/obj/item/material/shard,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"gm" = (/obj/machinery/atmospherics/pipe/simple/visible,/obj/machinery/door/airlock/external{frequency = 1380; id_tag = "tcmining_interior_door3"},/obj/machinery/meter,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"gy" = (/obj/item/remains/human,/obj/item/clothing/head/rastacap{name = "curious hat"},/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"gA" = (/obj/structure/table/rack,/obj/random/medical,/obj/random/medical,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"gJ" = (/obj/structure/table/steel,/obj/item/clothing/glasses/meson,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"gK" = (/obj/structure/barricade,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"gZ" = (/turf/simulated/mineral/volcanic,/area/template_noop)
+"hh" = (/obj/floor_decal/industrial/loading,/obj/random/ore,/obj/random/ore,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"hk" = (/obj/structure/table/steel{flipped = 1},/turf/simulated/floor/exoplanet/concrete,/area/map_template/commonwealthwoes/mining)
+"hq" = (/obj/structure/pit,/obj/decal/cleanable/dirt,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"hI" = (/obj/machinery/atmospherics/portables_connector,/obj/machinery/portable_atmospherics/canister/nitrogen,/obj/decal/cleanable/dirt,/obj/decal/cleanable/cobweb,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"hS" = (/obj/item/ammo_casing/pistol/used,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"ib" = (/obj/structure/hygiene/sink{dir = 1; pixel_y = 16},/obj/item/reagent_containers/glass/bucket,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"io" = (/obj/decal/cleanable/dirt,/obj/decal/cleanable/generic,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"ir" = (/obj/decal/cleanable/dirt,/obj/random/junk,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"iB" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{dir = 1; id_tag = "tcmining_pump_out_external2"},/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/concrete,/area/map_template/commonwealthwoes/mining)
+"iS" = (/obj/structure/table/rack,/obj/random/tool,/obj/random/tool,/obj/item/storage/box/lights/bulbs,/obj/item/storage/briefcase/inflatable,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"iW" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/obj/decal/cleanable/cobweb2,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"jc" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/decal/cleanable/dirt,/mob/living/simple_animal/hostile/scarybat,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"jd" = (/obj/random/junk,/obj/random/junkfood,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"jh" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"ju" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 10},/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 6},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"jF" = (/obj/decal/cleanable/dirt,/obj/item/stack/material/rods,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"jW" = (/obj/structure/table/rack,/obj/random/gloves,/obj/random/glasses,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"jX" = (/obj/item/toy/plushie/kitten,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"kf" = (/obj/item/ammo_casing/pistol/used,/obj/random/junk,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"kh" = (/obj/decal/cleanable/dirt,/turf/template_noop,/area/template_noop)
+"kl" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 9},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"kv" = (/obj/machinery/light/small,/obj/random/ore,/obj/decal/cleanable/dirt,/obj/decal/cleanable/generic,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"kz" = (/obj/item/gun/energy/plasmacutter,/obj/item/grenade/frag/makeshift,/obj/item/grenade/frag/makeshift,/obj/structure/table/rack,/obj/item/grenade/frag/makeshift,/obj/random/contraband,/obj/random/contraband,/obj/random/contraband,/obj/item/reagent_containers/syringe/drugs,/obj/item/reagent_containers/syringe/drugs,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"kJ" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"kT" = (/obj/item/material/minihoe,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{icon_state = "map-scrubbers"; dir = 1},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"kV" = (/obj/structure/table/steel,/obj/machinery/cell_charger,/obj/random/powercell,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"lb" = (/obj/decal/cleanable/dirt,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{icon_state = "map-scrubbers"; dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"lh" = (/obj/wallframe_spawn,/obj/paint/merc,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"lk" = (/obj/random/ore,/turf/template_noop,/area/template_noop)
+"lx" = (/mob/living/simple_animal/hostile/scarybat,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"lS" = (/obj/structure/closet/crate/trashcart,/obj/random/trash,/obj/random/trash,/obj/random/trash,/obj/random/junk,/obj/random/junk,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"mp" = (/mob/living/simple_animal/hostile/scarybat,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"mq" = (/obj/structure/table/steel,/obj/random/toolbox,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"mv" = (/obj/decal/cleanable/dirt,/obj/item/bone/skull/deer,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"mx" = (/obj/machinery/door/airlock/mining{name = "Dining Hall"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"my" = (/obj/machinery/light/spot{dir = 4},/obj/machinery/portable_atmospherics/hydroponics,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"mG" = (/obj/decal/cleanable/dirt,/obj/decal/cleanable/dirt,/obj/structure/closet/crate/trashcart{opened = 1},/obj/random/junk,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"mL" = (/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"mN" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"ne" = (/obj/structure/table/steel{flipped = 1},/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"nf" = (/obj/machinery/door/airlock/external{frequency = 1380; id_tag = "tcmining_interior_door"},/obj/machinery/atmospherics/pipe/simple/visible,/obj/machinery/meter,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"ng" = (/obj/machinery/constructable_frame/machine_frame/deconstruct,/obj/floor_decal/industrial/warning/fulltile,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"ni" = (/obj/machinery/light/small{dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"nq" = (/obj/random/junk,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"nv" = (/obj/machinery/atmospherics/pipe/manifold/visible{dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/alarm{dir = 4; pixel_x = -24; req_access = newlist()},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"nA" = (/obj/structure/bed/padded,/obj/item/bedsheet/brown,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/obj/machinery/alarm{dir = 4; pixel_x = -24; req_access = newlist()},/obj/machinery/light/small,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"nD" = (/obj/machinery/atmospherics/binary/passive_gate{dir = 8},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"nE" = (/obj/structure/rubble,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"nF" = (/obj/random/ore,/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"oe" = (/obj/machinery/atmospherics/pipe/simple/visible,/obj/machinery/door/airlock/external{frequency = 1380; id_tag = "tcmining_interior_door2"},/obj/machinery/meter,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"oi" = (/obj/structure/table/steel,/obj/machinery/microwave,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"oP" = (/obj/machinery/portable_atmospherics/canister/hydrogen,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"oQ" = (/obj/machinery/atmospherics/pipe/simple/visible/universal{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"pd" = (/obj/item/shreddedp,/obj/random/junk,/obj/structure/closet/crate/trashcart,/obj/item/ammo_casing/pistol/used,/obj/item/ammo_casing/pistol/used,/obj/item/ammo_casing/pistol/used,/obj/item/ammo_casing/pistol/used,/obj/random/junk,/obj/random/junk,/obj/random/junk,/obj/random/junk,/obj/random/trash,/obj/item/ammo_magazine/machine_pistol/empty,/obj/item/ammo_magazine/machine_pistol/empty,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"pe" = (/obj/decal/cleanable/liquid_fuel,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"ph" = (/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 9},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"pk" = (/obj/decal/cleanable/dirt,/obj/item/material/shard/shrapnel/steel,/turf/template_noop,/area/template_noop)
+"pn" = (/obj/random/trash,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"pr" = (/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"pv" = (/obj/item/stack/material/rods,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"pw" = (/obj/random/junk,/turf/simulated/floor/exoplanet/concrete,/area/template_noop)
+"py" = (/obj/item/ore/slag,/obj/decal/cleanable/dirt,/mob/living/simple_animal/hostile/scarybat,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"pA" = (/obj/machinery/atmospherics/omni/mixer,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"pB" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 5},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"pE" = (/obj/paint/merc,/turf/simulated/wall/r_wall,/area/map_template/commonwealthwoes/mining)
+"pM" = (/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/concrete,/area/map_template/commonwealthwoes/mining)
+"pQ" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{dir = 1; id_tag = "tcmining_pump"; power_rating = 25000},/obj/decal/cleanable/cobweb2,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"pS" = (/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"qe" = (/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/door/airlock/mining,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"qB" = (/obj/random/trash,/obj/decal/cleanable/molten_item,/obj/decal/cleanable/dirt,/obj/item/material/shard/shrapnel/steel,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"qC" = (/obj/structure/hygiene/drain,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"qF" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"qQ" = (/obj/structure/table/steel{flipped = 1; dir = 4},/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"qX" = (/obj/structure/bed/chair/padded/blue{dir = 4},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"ra" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"rc" = (/obj/decal/cleanable/dirt,/obj/decal/cleanable/generic,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"rd" = (/obj/machinery/door/airlock/mining{name = "Ore Silo #1"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/decal/cleanable/dirt,/obj/item/taperoll/engineering/applied,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"rD" = (/obj/item/ore/slag,/obj/random/ore,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"rF" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 9},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 10},/obj/decal/cleanable/dirt,/obj/decal/cleanable/liquid_fuel,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"rG" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"rL" = (/obj/item/device/flashlight/lantern,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"rM" = (/obj/decal/cleanable/dirt,/obj/item/reagent_containers/food/snacks/candy_corn,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"rS" = (/obj/random/trash,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"rY" = (/obj/machinery/door/unpowered/simple/iron{dir = 8},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"si" = (/obj/structure/barricade/spike{dir = 4},/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"sj" = (/obj/machinery/atmospherics/pipe/simple/visible,/obj/machinery/alarm{dir = 4; pixel_x = -24; req_access = newlist()},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"sl" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"ss" = (/obj/item/ammo_magazine/machine_pistol,/obj/item/ammo_magazine/machine_pistol,/obj/structure/table/rack,/obj/item/ammo_magazine/machine_pistol,/obj/item/gun/projectile/automatic/machine_pistol,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"sJ" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply,/obj/random/trash,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"sX" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/door/airlock/mining{name = "Ore Silo #2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"sZ" = (/obj/decal/cleanable/dirt,/obj/machinery/door/unpowered/simple/iron,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"tc" = (/obj/item/stool,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"tp" = (/obj/machinery/access_button/airlock_exterior{frequency = 1380; master_tag = "tcmining"; pixel_y = 22},/obj/item/ammo_casing/pistol/used,/turf/simulated/floor/exoplanet/concrete,/area/map_template/commonwealthwoes/mining)
+"tB" = (/obj/decal/cleanable/dirt,/obj/structure/rubble/war,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"tO" = (/obj/machinery/mineral/stacking_machine{input_turf = 8; output_turf = 4},/obj/floor_decal/industrial/warning/fulltile,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"tP" = (/obj/machinery/atmospherics/portables_connector{dir = 8},/obj/machinery/portable_atmospherics/canister/empty/nitrogen,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"uo" = (/obj/random/ore,/obj/decal/cleanable/dirt,/mob/living/simple_animal/hostile/creature{desc = "A sure sign you've dug too greedily and too deep."; faction = "nameless deep creature"},/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"uv" = (/obj/structure/ore_box,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"uB" = (/obj/random/junk,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"uD" = (/obj/random/ore,/obj/decal/cleanable/dirt,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"uO" = (/obj/machinery/light/small{dir = 1},/obj/random/trash,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"uQ" = (/obj/item/stool,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"uV" = (/obj/decal/cleanable/spiderling_remains,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"vk" = (/obj/machinery/atmospherics/unary/vent_scrubber/on,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"vp" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"vq" = (/obj/machinery/atmospherics/portables_connector,/obj/machinery/portable_atmospherics/canister/air,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"vv" = (/obj/random/junkfood,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"vy" = (/obj/structure/table/steel{flipped = 1; dir = 8},/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"vC" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/obj/decal/cleanable/dirt,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"vD" = (/obj/machinery/vending/hydronutrients,/obj/decal/cleanable/cobweb,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"vH" = (/obj/structure/hygiene/toilet{dir = 4},/obj/decal/cleanable/cobweb,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"wa" = (/obj/random/ore,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"wf" = (/obj/decal/cleanable/greenglow,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"wk" = (/obj/structure/rubble/war,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"wC" = (/obj/decal/cleanable/dirt,/obj/decal/cleanable/dirt,/turf/template_noop,/area/template_noop)
+"wE" = (/obj/item/stool,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 10},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"wU" = (/obj/random/ore,/obj/decal/cleanable/dirt,/turf/template_noop,/area/template_noop)
+"wY" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/door/airlock/mining{name = "Ore Processing"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"xn" = (/obj/machinery/light/small{dir = 8},/obj/machinery/atmospherics/pipe/simple/visible,/obj/machinery/access_button/airlock_interior{frequency = 1380; master_tag = "tcmining3"; pixel_x = 22},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"xB" = (/obj/machinery/light/small{dir = 8},/obj/machinery/atmospherics/pipe/simple/visible{dir = 5},/obj/machinery/portable_atmospherics/canister/nitrogen,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"xN" = (/obj/random/junk,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/decal/cleanable/dirt,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"xS" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{id_tag = "tcmining_pump_out_internal3"; power_rating = 25000; dir = 1},/obj/machinery/embedded_controller/radio/airlock/airlock_controller{cycle_to_external_air = 1; dir = 4; frequency = 1380; id_tag = "tcmining"; pixel_x = -22; tag_airpump = "tcmining_pump"; tag_chamber_sensor = "tcmining_sensor_chamber"; tag_exterior_door = "tcmining_exterior_door"; tag_interior_door = "tcmining_interior_door"},/obj/machinery/airlock_sensor{frequency = 1380; id_tag = "tcmining_sensor_chamber2"; pixel_x = -22; pixel_y = 12},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"xT" = (/obj/random/junk,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"yf" = (/turf/template_noop,/area/template_noop)
+"yg" = (/obj/machinery/light/small,/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"yu" = (/obj/random/junk,/turf/template_noop,/area/template_noop)
+"yy" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"zs" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"zz" = (/obj/machinery/atmospherics/pipe/simple/visible,/obj/machinery/door/airlock/external{frequency = 1380; id_tag = "tcmining_exterior_door2"; locked = 1},/obj/item/taperoll/engineering/applied,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"zH" = (/obj/item/ore/slag,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"zL" = (/obj/structure/table/steel{flipped = 1},/obj/structure/table/steel{flipped = 1; dir = 8},/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"zW" = (/obj/machinery/seed_extractor,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"zX" = (/obj/structure/cable/yellow,/obj/machinery/power/terminal{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Ag" = (/obj/structure/bed/chair/padded/blue{dir = 8},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Aj" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Am" = (/obj/item/shovel,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"An" = (/obj/structure/barricade/spike{dir = 4},/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"At" = (/obj/machinery/mining/brace{anchored = 1},/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"AC" = (/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"AJ" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/door/airlock/mining,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"AK" = (/obj/random/soap,/obj/random/trash,/obj/structure/hygiene/shower,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"AP" = (/obj/machinery/atmospherics/pipe/manifold4w/visible,/obj/machinery/meter,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"AQ" = (/obj/item/ammo_magazine/machine_pistol/empty,/turf/simulated/floor/exoplanet/concrete,/area/map_template/commonwealthwoes/mining)
+"AU" = (/obj/machinery/portable_atmospherics/hydroponics,/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Bt" = (/obj/item/stack/cable_coil/cut,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"Bz" = (/obj/floor_decal/industrial/warning/fulltile,/obj/item/storage/ore,/obj/random/ore,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"BB" = (/obj/structure/bed/padded,/obj/item/bedsheet/brown,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/obj/machinery/alarm{dir = 8; pixel_x = 24; req_access = newlist()},/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"BK" = (/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"BM" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/door/airlock/mining{name = "Dorm"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Cb" = (/obj/random/junkfood,/obj/decal/cleanable/dirt,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"Ch" = (/obj/decal/cleanable/dirt,/obj/item/pickaxe/hand,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"Cj" = (/obj/structure/closet/crate{opened = 1},/obj/item/stack/material/plastic/fifty,/obj/item/stack/material/glass{amount = 20; pixel_x = -3; pixel_y = 3},/obj/item/stack/material/steel{amount = 50},/obj/item/stack/material/steel{amount = 50},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Ct" = (/obj/item/shovel{pixel_x = -5},/obj/structure/table/rack,/obj/item/storage/ore,/obj/item/device/flashlight/lantern,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Cz" = (/obj/machinery/portable_atmospherics/hydroponics,/obj/machinery/light/spot{dir = 4},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"CL" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{dir = 1; id_tag = "tcmining_pump2"; power_rating = 25000},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"CW" = (/obj/structure/reagent_dispensers/watertank,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"Dh" = (/obj/structure/bed/chair/padded/blue{dir = 8},/obj/machinery/alarm{dir = 8; pixel_x = 24; req_access = newlist()},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Dy" = (/obj/item/ammo_casing/pistol/used,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"DL" = (/obj/structure/table/steel,/obj/item/material/kitchen/utensil/spork/silver,/obj/random/snack,/obj/random/snack,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"DO" = (/obj/decal/cleanable/dirt,/obj/random/junk,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"DY" = (/obj/decal/cleanable/dirt,/obj/decal/cleanable/greenglow,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"Ei" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 6},/obj/machinery/meter,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Ek" = (/obj/machinery/light/small{dir = 8},/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{id_tag = "tcmining_pump3"; power_rating = 25000},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Ep" = (/obj/machinery/light/small{dir = 8},/obj/structure/table/steel,/obj/random/donkpocket_box,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Es" = (/obj/structure/closet/crate/hydroponics/prespawned,/obj/item/reagent_containers/glass/bucket,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Ex" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 6},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"ED" = (/obj/shuttle_landmark/automatic/beacon,/turf/simulated/floor/exoplanet/concrete/reinforced/damaged,/area/template_noop)
+"EF" = (/obj/machinery/light/small{dir = 8},/obj/decal/cleanable/dirt,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{icon_state = "map-scrubbers"; dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"EJ" = (/obj/random/junk,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"EW" = (/obj/machinery/portable_atmospherics/canister/oxygen,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"EY" = (/obj/machinery/light/small,/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"EZ" = (/obj/paint/merc,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/wallframe_spawn,/obj/machinery/atmospherics/pipe/simple/visible/red,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Fb" = (/obj/machinery/atmospherics/unary/vent_pump/on,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Fd" = (/obj/random/trash,/turf/template_noop,/area/template_noop)
+"Ff" = (/obj/machinery/portable_atmospherics/hydroponics,/obj/machinery/alarm{dir = 4; pixel_x = -24; req_access = newlist()},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Fj" = (/turf/simulated/floor/exoplanet/concrete/reinforced/damaged,/area/template_noop)
+"Fr" = (/obj/decal/cleanable/dirt,/obj/decal/cleanable/greenglow,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"Ft" = (/obj/structure/table/rack,/obj/random/technology_scanner,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Fy" = (/obj/decal/cleanable/dirt,/obj/random/trash,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"FD" = (/obj/item/ore/slag,/obj/decal/cleanable/dirt,/obj/random/junk,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"FK" = (/obj/item/stock_parts/circuitboard/mineral_processing,/obj/structure/railing/mapped,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"FM" = (/obj/random/ore,/obj/decal/cleanable/dirt,/obj/decal/cleanable/liquid_fuel,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"FS" = (/obj/decal/cleanable/dirt,/obj/decal/cleanable/remains,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"FU" = (/obj/decal/cleanable/dirt,/turf/simulated/mineral/volcanic,/area/map_template/commonwealthwoes/mining)
+"FV" = (/obj/item/stock_parts/circuitboard/broken,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"FX" = (/obj/machinery/mining/brace{dir = 8; anchored = 1},/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"Gh" = (/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Gk" = (/obj/item/device/flashlight/lantern,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Gn" = (/obj/decal/cleanable/dirt,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/concrete,/area/template_noop)
+"Gz" = (/obj/structure/cable/yellow{d2 = 2; icon_state = "0-2"},/obj/machinery/power/smes/buildable/max_cap_in_out,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"GK" = (/obj/item/device/scanner/mining,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"GY" = (/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Hg" = (/obj/item/ore/slag,/obj/item/device/flashlight/lantern,/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/obj/decal/cleanable/liquid_fuel,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Hs" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 6},/obj/machinery/meter,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/decal/cleanable/dirt,/obj/decal/cleanable/cobweb,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Hw" = (/obj/machinery/access_button/airlock_interior{frequency = 1380; master_tag = "tcmining2"; pixel_y = -20},/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Hy" = (/obj/random/ore,/obj/machinery/atmospherics/pipe/manifold/visible{dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"HA" = (/obj/machinery/atmospherics/portables_connector{dir = 8},/obj/machinery/portable_atmospherics/canister/air/airlock,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Ib" = (/obj/decal/cleanable/dirt,/obj/random/junk,/turf/simulated/floor/exoplanet/concrete,/area/template_noop)
+"Ic" = (/obj/machinery/light/small{dir = 8},/obj/machinery/constructable_frame/machine_frame/deconstruct,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Ir" = (/obj/random/junk,/obj/machinery/atmospherics/pipe/simple/visible,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"It" = (/obj/random/ore,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"Iw" = (/obj/structure/table/steel,/obj/structure/extinguisher_cabinet{pixel_x = -32},/obj/item/stock_parts/circuitboard/mechfab,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Iz" = (/obj/item/device/flashlight/lantern,/obj/decal/cleanable/dirt,/obj/decal/cleanable/dirt,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 8},/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"IE" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"IH" = (/obj/decal/cleanable/dirt,/obj/item/stack/material/rods,/turf/template_noop,/area/template_noop)
+"Jf" = (/obj/machinery/mining/drill,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"Jk" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Jy" = (/obj/item/ore/slag,/obj/structure/ore_box,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Jz" = (/obj/machinery/mining/drill,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"JP" = (/obj/decal/cleanable/dirt,/obj/item/ore/slag,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"JU" = (/obj/machinery/power/port_gen/pacman/super{anchored = 1; sheets = 5},/obj/structure/cable/yellow{d2 = 8; icon_state = "0-8"},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"JZ" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 10},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Kh" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/door/airlock/mining{name = "Dorm"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Km" = (/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/concrete,/area/template_noop)
+"Ko" = (/obj/machinery/light/small,/obj/structure/bed/padded,/obj/item/bedsheet/brown,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/obj/machinery/alarm{dir = 8; pixel_x = 24; req_access = newlist()},/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Kr" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Ky" = (/obj/machinery/atmospherics/pipe/simple/visible,/obj/machinery/door/airlock/external{frequency = 1380; id_tag = "tcmining_exterior_door"; locked = 1},/obj/machinery/meter,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"KE" = (/obj/machinery/portable_atmospherics/hydroponics,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"KS" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{dir = 1; id_tag = "tcmining_pump_out_external"},/turf/simulated/floor/exoplanet/concrete,/area/map_template/commonwealthwoes/mining)
+"KX" = (/obj/machinery/atmospherics/pipe/simple/visible/universal,/obj/machinery/meter,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"LH" = (/obj/decal/cleanable/dirt,/mob/living/simple_animal/hostile/scarybat,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"LJ" = (/obj/machinery/mining/brace{dir = 4},/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"LM" = (/obj/machinery/power/apc/inactive{dir = 4; pixel_x = 24},/obj/structure/cable/yellow,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"LU" = (/obj/structure/table/steel{flipped = 1},/obj/decal/cleanable/dirt,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"Mc" = (/obj/item/reagent_containers/food/drinks/bottle/melonliquor{name = "Lyra Melon Liqueur"; desc = "A bog-green liquid greets you past dusty glass and a faded neon label depicting a constellation. You're not sure how long this has been here..."},/obj/structure/table/steel,/obj/item/reagent_containers/food/drinks/glass2/shot,/obj/item/reagent_containers/food/drinks/glass2/shot,/obj/machinery/light/small{dir = 8},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Ml" = (/obj/random/junkfood,/obj/machinery/atmospherics/pipe/manifold/visible{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,/obj/decal/cleanable/generic,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Mv" = (/obj/random/junk,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"ME" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{id_tag = "tcmining_pump_out_internal2"; power_rating = 25000},/obj/machinery/embedded_controller/radio/airlock/airlock_controller{cycle_to_external_air = 1; dir = 4; frequency = 1380; id_tag = "tcmining3"; pixel_x = -22; tag_airpump = "tcmining_pump3"; tag_chamber_sensor = "tcmining_sensor_chamber3"; tag_exterior_door = "tcmining_exterior_door3"; tag_interior_door = "tcmining_interior_door3"},/obj/machinery/airlock_sensor{frequency = 1380; id_tag = "tcmining_sensor_chamber3"; pixel_x = -22; pixel_y = 12},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"MF" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 1},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"MX" = (/obj/floor_decal/industrial/loading{dir = 4},/obj/item/ore/slag,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Nb" = (/obj/machinery/mining/brace{anchored = 1; dir = 1},/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"Ne" = (/obj/random/junk,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Ng" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 6},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Nm" = (/obj/structure/table/steel,/obj/machinery/cell_charger,/obj/random/powercell,/obj/machinery/recharger/wallcharger{dir = 4; pixel_x = -22},/obj/random/powercell,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Nz" = (/obj/paint/merc,/obj/decal/cleanable/lichen,/turf/simulated/wall,/area/map_template/commonwealthwoes/mining)
+"ND" = (/obj/item/ammo_casing/pistol/used,/turf/simulated/floor/exoplanet/concrete,/area/map_template/commonwealthwoes/mining)
+"NI" = (/obj/decal/cleanable/dirt,/obj/random/junkfood,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"NJ" = (/obj/structure/barricade/spike,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"NN" = (/obj/structure/bed/padded,/obj/item/bedsheet/brown,/obj/machinery/alarm{dir = 8; pixel_x = 24; req_access = newlist()},/obj/decal/cleanable/cobweb2,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Ob" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"OZ" = (/obj/structure/cable/yellow{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 10},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Pn" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Pq" = (/obj/structure/table/standard,/obj/random/firstaid,/obj/random/firstaid,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Pu" = (/obj/machinery/atmospherics/pipe/simple/visible,/obj/machinery/door/airlock/external{frequency = 1380; id_tag = "tcmining_exterior_door2"; locked = 1},/obj/machinery/meter,/obj/item/taperoll/engineering/applied,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Pw" = (/obj/item/ore/slag,/obj/item/ore/slag,/obj/item/ore/slag,/obj/item/ore/slag,/obj/item/ore/slag,/obj/item/ore/slag,/obj/item/ore/slag,/obj/item/ore/slag,/obj/item/ore/slag,/obj/item/ore/slag,/obj/item/ore/slag,/obj/random/ore,/obj/random/plushie,/obj/item/usedcryobag,/obj/item/paper/crumpled,/obj/decal/cleanable/dirt,/obj/structure/closet/crate/trashcart,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"PF" = (/obj/structure/closet/crate/trashcart,/obj/random/junk,/obj/random/junk,/obj/random/junk,/obj/random/junk,/obj/random/trash,/obj/item/shreddedp,/obj/random/contraband,/obj/item/ammo_casing/pistol/used,/obj/item/ammo_casing/pistol/used,/obj/item/paper/crumpled,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"PQ" = (/obj/random/junkfood,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"PT" = (/obj/machinery/atmospherics/portables_connector,/obj/machinery/portable_atmospherics/canister/empty,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"PY" = (/turf/simulated/mineral/volcanic,/area/map_template/commonwealthwoes/mining)
+"Qe" = (/obj/decal/cleanable/dirt,/obj/item/swapper/jaws_of_life,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"Qm" = (/obj/machinery/atmospherics/unary/freezer{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Qx" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/obj/decal/cleanable/generic,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"QI" = (/obj/structure/table/rack,/obj/item/pickaxe,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"QN" = (/obj/structure/table/steel{flipped = 1; dir = 8},/turf/simulated/floor/exoplanet/concrete,/area/map_template/commonwealthwoes/mining)
+"QT" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{dir = 4},/obj/machinery/meter,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"QU" = (/obj/structure/table/standard,/obj/item/bodybag,/obj/random/medical/lite,/obj/random/medical/lite,/obj/item/reagent_containers/syringe/drugs,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"QV" = (/obj/structure/bed/chair/padded/blue{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 10},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Rc" = (/obj/machinery/door/airlock/mining{name = "Dorm"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Rd" = (/obj/item/ammo_casing/pistol/used,/obj/item/ammo_casing/pistol/used,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"RI" = (/obj/machinery/atmospherics/portables_connector,/obj/machinery/portable_atmospherics/canister/oxygen,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Sl" = (/obj/random/trash,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"Sw" = (/obj/structure/girder/displaced,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Sy" = (/obj/structure/bed/padded,/obj/item/bedsheet/brown,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"SH" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{id_tag = "tcmining_pump_out_internal"; power_rating = 25000},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"SJ" = (/obj/item/material/shard,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"SK" = (/obj/machinery/light_switch{pixel_y = 22},/obj/item/storage/med_pouch/radiation,/obj/structure/table/rack,/obj/item/device/geiger,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"SW" = (/obj/item/pickaxe/hand,/obj/item/trash/candy,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"Te" = (/obj/random/trash,/obj/machinery/atmospherics/pipe/simple/visible,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Tj" = (/obj/random/ore,/obj/machinery/atmospherics/pipe/manifold/visible,/obj/machinery/atmospherics/pipe/manifold/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Tu" = (/obj/structure/bed/padded,/obj/item/bedsheet/brown,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Tx" = (/obj/machinery/portable_atmospherics/canister/hydrogen,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"TA" = (/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"TD" = (/obj/structure/table/steel{flipped = 1},/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"TE" = (/obj/machinery/light/small,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"TK" = (/obj/structure/table/steel_reinforced,/obj/machinery/reagentgrinder/juicer,/obj/item/reagent_containers/glass/beaker/large,/obj/machinery/alarm{dir = 4; pixel_x = -24; req_access = newlist()},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"TY" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"TZ" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/obj/decal/cleanable/dirt,/mob/living/simple_animal/passive/mouse,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Um" = (/obj/machinery/atmospherics/unary/vent_scrubber/on,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Up" = (/obj/decal/cleanable/remains,/obj/decal/cleanable/dirt,/obj/random/junkfood,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"Us" = (/obj/machinery/atmospherics/pipe/manifold/visible{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"UI" = (/obj/structure/hygiene/drain,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"UV" = (/obj/machinery/access_button/airlock_exterior{frequency = 1380; master_tag = "tcmining2"; pixel_y = 22},/obj/structure/table/steel{flipped = 1; dir = 4},/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"Vp" = (/obj/random/trash,/obj/item/paper/crumpled,/obj/decal/cleanable/dirt,/obj/item/xenos_claw,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"Vv" = (/obj/decal/cleanable/dirt,/obj/item/weldingtool/electric,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"VH" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{dir = 1; id_tag = "tcmining_pump_out_external2"},/obj/item/ammo_casing/pistol/used,/turf/simulated/floor/exoplanet/concrete,/area/map_template/commonwealthwoes/mining)
+"VJ" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 9},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"VW" = (/obj/machinery/mech_recharger,/obj/floor_decal/industrial/outline/yellow,/obj/structure/girder/displaced,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Wq" = (/obj/decal/cleanable/dirt,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Wr" = (/obj/random/trash,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Wz" = (/obj/decal/cleanable/dirt,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"WA" = (/obj/item/device/flashlight/lantern,/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{id_tag = "tcmining_pump_out_internal"; power_rating = 25000},/obj/machinery/embedded_controller/radio/airlock/airlock_controller{cycle_to_external_air = 1; dir = 4; frequency = 1380; id_tag = "tcmining2"; pixel_x = -22; tag_airpump = "tcmining_pump2"; tag_chamber_sensor = "tcmining_sensor_chamber2"; tag_exterior_door = "tcmining_exterior_door2"; tag_interior_door = "tcmining_interior_door2"},/obj/machinery/airlock_sensor{frequency = 1380; id_tag = "tcmining_sensor_chamber"; pixel_x = -22; pixel_y = 12},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"WD" = (/obj/machinery/atmospherics/pipe/simple/visible,/obj/machinery/door/airlock/external{frequency = 1380; id_tag = "tcmining_interior_door2"},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"WJ" = (/obj/item/device/flashlight/lantern,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"WY" = (/obj/machinery/portable_atmospherics/canister/nitrogen,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"Xc" = (/obj/item/ore/slag,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"Xl" = (/obj/item/ore/slag,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"Xt" = (/obj/machinery/atmospherics/pipe/simple/visible,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"XO" = (/obj/decal/cleanable/dirt,/obj/decal/cleanable/generic,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Yb" = (/obj/machinery/mining/brace{dir = 8; anchored = 1},/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"Yc" = (/obj/decal/cleanable/remains,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"Yt" = (/obj/machinery/light/small{dir = 8},/obj/item/device/flashlight/lantern,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"YD" = (/obj/machinery/atmospherics/portables_connector{dir = 4; icon_state = "map_connector"},/obj/machinery/portable_atmospherics/canister/hydrogen,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Zb" = (/obj/item/stack/material/rods,/turf/simulated/floor/exoplanet/volcanic,/area/template_noop)
+"Zi" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"Zl" = (/obj/machinery/atmospherics/omni/filter,/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"Zr" = (/obj/item/ammo_magazine/machine_pistol/empty,/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+"ZG" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/map_template/commonwealthwoes/mining)
+"ZR" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/obj/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/map_template/commonwealthwoes/mining)
+"ZU" = (/obj/machinery/access_button/airlock_exterior{frequency = 1380; master_tag = "tcmining3"; pixel_y = -22},/obj/decal/cleanable/dirt,/turf/simulated/floor/exoplanet/volcanic,/area/map_template/commonwealthwoes/mining)
+
+(1,1,1) = {"
+yfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfpSyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfpSyfyfyfyfyfpSpSpSpSpSpSpSpSyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZpSpSgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfpSpSyfyfyfyfyfyfyfyfpSpSpSyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZpSgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfgZyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfpSpSyfyfyfyfyfyfyfyfpSpSyfyfyfyfyfyfyfyfyfgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZyfyfyfyfyfyfyfyfyfgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZyfgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+pSpSyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZyfyfyfyfyfyfyfyfyfgZgZgZyfyfyfyfyfyfyfyfgZyfgZgZgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+pSpSpSyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZyfyfgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZyfyfgZgZpSgZpSpSgZgZgZyfyfyfyfyfyfyfgZgZgZgZgZyfyfgZgZyfyfyfyf
+yfyfyfyfyfyfyfgZgZyfyfyfyfyfyfyfyfyfyfyfyfgZyfyfyfyfyfyfyfyfgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZyfyfgZgZpSpSpSgZyfyfgZyfyfyfyfyfgZgZgZgZgZgZgZgZgZgZgZgZyfyfyf
+yfyfyfyfyfgZgZgZgZyfyfyfyfyfyfyfyfyfyfgZgZgZyfyfyfyfyfgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZyfyfyfgZgZgZgZgZgZyfyfyfyfyfyfyfgZgZgZgZgZgZgZgZgZgZgZgZyfyfyf
+yfyfyfyfyfgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZgZgZgZyfyfyfyfgZgZgZgZgZgZgZgZgZgZgZgZgZyfyfyf
+yfyfyfyfyfgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfgZgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfyfyfyfyfyfyfyfyfyfyfgZyfgZgZgZgZgZgZgZgZyfyfyfyfyfgZgZgZTATAgZgZgZgZgZgZyfyfyfyf
+yfyfyfyfyfgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfgZyfyfyfgZyfgZgZyfyfyfyfyfgZgZjXaPTATAgZgZgZgZgZyfyfyfyf
+yfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZgZgZgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfgZgZgZgZgZgZgZyfyfyfpSyfyfyfyfyfyfyfyfyfyfgZyfyfgZyfyfyfyfyfgZgZgZwfgZgZChItFrzHgZgZgZyfyfyf
+yfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZyfyfyfgZgZgZgZgZgZgZgZgZgZyfyfyfyfyfyfpSyfgZgZgZyfgZyfyfgZgZgZgZgZgZgZgZgZgZgZgZpSyfyfyfyfyfyfyfyfyfyfyfyfyfgZyfyfyfyfyfyfgZgZgZpSgZgZgZgZgZuogZgZgZyfyfyf
+yfyfyfyfyfyfyfyfyfyfyfyfyfpSyfyfyfyfyfyfyfyfgZgZgZgZgZgZgZPYPYAKPYPYPYgZgZgZyfgZpSpSpSgZgZgZgZgZgZgZgZgZgZgZgZgZgZgZgZgZgZpSpSyfyfyfyfyfpSpSyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZgfpSMvgZgZgZFSTAgZgZgZyfyf
+yfyfyfyfyfyfyfyfyfyfpSyfpSpSyfyfyfyfyfyfyfyfyfgZgZgZgZgZPYPYPYsZetPYPYPYPYgZpSpSpSgZgZgZgZgZgZgZgZgZgZgZgZgZgZgZgZgZpSpSpSpSgZyfyfyfyfpSpSpSyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZgZgZpSwfgZFDganqgZgZgZyfyf
+yfyfyfyfyfyfyfyfyfyfpSpSpSpSyfyfyfyfyfyfyfgZyfyfgZPYPYPYPYvHrYWzKhJZKrfEPYPYgZgZgZgZPYPYPYPYPYPYPYPYPYPYPYPYBKBKgKAnpSpSpSgZgZgZyfyfyfpSpSpSyfyfyfyfyfyfyfyfyfyfyfpSpSpSgZgZgZgZgZrMgZgZFSuDzHFyMvgZyfyf
+yfyfyfyfyfyfyfyfyfyfyfpSpSyfyfyfyfyfyfyfyfgZyfgZgZPYPYPYPYetetjcetnAGhTuPYPYPYPYPYPYPYPYPYPYPYPYBKprprprprprprprPYPYgZgZgZgZyfyfyfyfyfpSpSyfyfyfyfyfyfyfyfyfyfyfyfpSgZgZgZgZgZgZTATAgZFrmvNIUpQenqgZgZyf
+yfyfyfyfyfyfyfyfyfyfpSpSyfyfyfyfyfyfyfyfyfgZgZgZgZPYPYfEqFObKhEFetetPYPYPYPYPYPYPYPYPYPYBKBKXlBKBKlxBKBKPYPYPYprprFUPYgZgZyfgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfpSpSyfgZgZgZgZNITAgZgZJfFShqFXgZgZgZgZyf
+yfyfyfgZyfyfyfyfyfpSpSyfyfyfyfyfyfyfyfyfyfgZgZgZPYPYPYSyjWKoetIzBMwEaENNetPYPYPYPYPYBKBKBKXlXlPYPYPYPYPYPYPYPYPYBKBKprPYgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfpSYcyfyfyfyfyfTATAgZgZgZgZjdNbgZgZgZgZgZyf
+yfyfgZgZyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfpSpSgZgZgZPYPYPYPYetetetxNetMctcSyetPYPYPYBKBKBKBKPYPYPYPYPYPYpEpEPYPYPYPYPYPYprgKAnpSgZyfyfyfyfyfyfyfyfyfgZyfyfyfyfyfyfkhyfyfyfyfyfyfirgZgZgZgZgZgZgZgZgZgZgZyfyf
+yfpSpSpSpSyfyfyfyfyfyfyfyfyfyfyfyfgZyfgZpSpSpSgZPYPYPYfEZRuORclbetPYetlhetBKprprBKPYPYPYPYPYQmcGAjAjOZJUPYPYPYPYPYPYprgKAnpSyfyfyfyfyfyfyfyfgZgZyuyfyfyfyfkhgaTAgagaTAyfpSTATAyfgZgZgZgZgZgZgZgZgZyfyfyf
+yfyfgZgZpSpSyfyfyfyfyfyfyfyfgZyfyfyfyfgZgZgZpSgZPYPYPYSyFtBBetvpetPYBKSJBKJPprPYPYPYPYPYPYPYYDQTAjAjphACpEPYTxmNPYprprgKAnpSyfyfyfyfyfyfyfyfgZgZyfyfyfyfyfPQTAgZgZgZgaCbgawCkhyfgZyfyfyfyfgZyfgZyfyfyfyf
+yfyfgZyfgZyfyfyfyfyfyfyfyfyfgZgZgZgZyfgZgZgZgZgZPYPYPYetlhetetvplhBKBKBKBKPYPYPYPYPYPYPYPYPYpEpEpEpEqepEpEWYTxEWaWjFBKgKAnpSyfyfyfyfyfyfyfyfyfgZyfyfyfyfpSTAgZgZgZgZyfTAyfyfyfyfyfyfyfyfyfyfgZgZyfyfyfyf
+yfyfgZyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZgZPYPYPYPYPYPYPYPYBKBKXllhvplhXlprprPYPYkzPYPYPYPYPYPYhIRIvqePSKzXGzpEWYoPEWBKBKBKgKAnpSyfyfyfyfyfyfyfyfyfgZyfyfyfkhTAgZgZyfgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZPYPYPYPYPYXlBKBKBKXlBKetvpetPYPYprpretetssPYPYPYPYetxBpAAPklACACLMpEWYprBKBKPYpvPYpSyfgZyfyfyfyfyfyfyfyfyfyfyfyfTApSgZgZgZyfgZyfyfyfyfyfyfpSpSpSyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZgZPYPYPYBKBKBKBKBKBKPYPYPYslPYPYPYPYpraOprPYPYPYPYPYPYNgnDklPTACWqBKBKprBKBKPYPYPYPYyfgZgZgZyfyfyfyfyfyfyfyfyfyfirTAgZgZgZgZgZyfyfyfyfyfyfyfpSpSpSpSyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZgZBKBKXlBKBKPYPYPYBKpvPYPnrLPYPYPYPYPYBKBKBKPYPYPYPYPYpBoQjuZltPWqbNBKprXlPYPYPYPYPYyfgZgZgZgZgZyfyfyfyfyfyfyfyfTAyfgZgZgZgZgZyfyfyfyfyfyfyfpSpSyfyfyfyfyfyfgZgZyfyf
+yfyfyfyfyfyfyfyfyfyfyfyfgZgZPYPYBKBKBKBKPYetlhlhetetetlhBKPYPYEJPYPYPYetetetetBKBKPYPYPYetetetEZaLACacZUCWaWBKPYPYPYPYPYgZgZgZgZgZyfyfyfyfyfyfyfyfkhpSyfgZgZgZgZyfyfyfyfyfyfyfyfyfpSyfyfyfyfyfyfgZgZyfyf
+yfyfyfyfyfyfyfyfpSpSZbpSgZgZPYBKBKBKBKPYPYetEpoiqXczAglhBKBKPYcsPYPYetgegegegeetBKSlPYetvDdeibfNetetKyetetBKBKPYPYPYPYPYgZgZgZgZgZyfyfyfyfyfyfyfyfkhpSpSgZgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfyfyfyfyfpSpSAngKBKBKPYPYPYPYPYPYcazsQVDLDhetlhlhetniPYetAUfEmLfEACCzetpretAUqFMFfOKXmyetxSAClhBKBKPYPYPYPYPYgZgZgZgZgZyfyfgZgZgZyfyfTApSpSYcpSpSgZgZgZgZyfyfgZyfgZgZyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfyfyfyfyfgZgZgZgZgZgZgZgZgZPYPYPYcLTZuBQxraWJjhiWmxbLPYetgeGhWrXOLHgelhprlhgeGhGkrGrSKEetEkACetBKBKPYPYPYPYPYgZgZgZgZgZyfyfgZgZyfkhTAPQpSgZgZpSpSpSgZgZgZgZgZgZgZgZgZyfgZgZgZyfyfyfyfyfyfyfyf
+yfyfyfgZgZyfyfyfyfgZgZgZyfgZgZgZgZgZgZPYPYPYPYPYPYPYPYPYPYPYetslPYetgeLHFbUIGhgelhBKlhgefCkTqCXOgeetgmetetBKPYPYPYPYPYPYgZgZgZgZyfgZgZyfTATATAgZpSgZgZgZgZgZpSpSgZgZgZgZgZgZgZgZgZgZgZgZgZyfyfyfyfyfyfyf
+yfyfgZgZgZgZyfyfgZgZyfyfyfgZgZgZgZyfgZgZgZgZgZgZPYPYPYPYPYPYPYvvPYetAUfEbMZGGhCzetSletAUACslNefEmyetxnetPYBKPYPYPYPYPYPYgZgZgZgZpSNITATATAgZgZgZyfgZgZgZgZgZpSpSgZgZgZgZgZgZgZgZgZgZgZgZgZgZyfyfyfyfyfyf
+yfyfyfgZgZgZyfyfyfyfyfyfgZyfyfyfyfyfyfgZgZgZgZyfgZPYdLPqQUVWPYslPYPYetTKslEskJetglDYPFetFfslzWgeetPYTePYPYBKprxTPYPYPYPYgZpSFrTATAyfyfyfgZyfyfyfyfyfyfyfyfgZgZpSpSgZgZgZgZgZgZgZgZgZgZgZgZgZyfyfyfyfyfyf
+yfyfgZgZyfyfyfyfyfyfyfyfgZgZyfyfyfyfgZgZgZyfyfyfgZPYuQGhpngAPYcsuVCjPYetrdetetPYbNjFpdVpetsXetetPYPYfmlSPYPYprprPYPYPYpSpSPQTAgZyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZpSpSgZgZgZgZpSpSpSgZgZgZgZgZyfyfyfyfyfyf
+yfyfyfgZyfyfyfyfyfyfyfyfgZyfyfyfyfyfyfgZyfyfyfgZPYetaaDOGhiSPYslPnPYPYetHsHAetPYwkqBPwwketEiHAetPYPYdMPYPYPYPYprBKPYgKAnpSgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZpSpSgZgZpSpSgZpSgZgZgZgZgZyfyfyfyfyfyf
+yfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZPYetIcGhioUmPYslPYetNzetnvHAetetetetetetetHyHAetetetsjPYPYetetprprPYprgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZgZgZpSpSpSpSgZgZpSgZgZgZgZgZyfyfyfyfyfyf
+yfyfyfyfyfyfyfyfyfyfyfyfyfyfyfpSyfyfyfyfyfyfgZgZgZetNmWrvCIEAJdwGYQICtZiIrvkuveKLJJzaYkVgJXtJkExwYyyrFHgpeuvlhBKprprjFPYgZgZyfyfgZyfyfyuyfyfyfyfyfyfgZgZgZgZgZgZgZgZpSpSgZgZgZgZpSgZgZgZgZgZyfyfyfgZgZyf
+yfyfyfyfpSyfyfyfyfyfyfyfyfyfyfpSpSyfyfyfyfyfgZgZgZetIwddmqbFetYtsJraTEcqggMlcIUsHwygcIcInFTjEYVJethhTYFMkvJyetPYxTBKprPYgZgZgZgZgZyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZgZpSpSgZgZgZgZgZpSpSgZgZgZyfyfyfyfgZgZyf
+yfyfyfyfpSpSyfgZyfyfyfyfyfyfyfpSpSpSyfpSyfgZgZgZgZPYPYPYPYetetetetetetetWDoeetnfetetetetPYetetetetngSwFKetwaPYPYXlBKprgKgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZVvTApyItTAgZgZgZgZgZgZpSpSgZgZyfyfyfyfyfyfyf
+yfyfyfyfgZpSgZgZyfgZgZgZyfyfyfyfpSpSyfpSgZgZgZgZgZgZgZgZPYPYPYPYPYPYPYetCLfAetpQetPYPYPYPYPYPYPYPYBznggdtOMXetBKBKPYPYAnpSpSyfyfyfyfyfyfyfgZgZyfyfyfyfgZgZTAYbdhgZgZzHgZgZgZgZgZgZgZgZgZgZyfyfyfyfyfyfyf
+yfyfyfgZgZpSgZgZgZgZgZgZyfyfyfyfyfpSpSpSgZgZgZgZgZpSgZgZPYPYPYPYPYPYPYetWASHetMEetPYPYPYPYPYPYPYPYPYetetlhlhetBKPYPYPYPYgZpSyfyfyfyfyfyfgZgZyfyfyfyfyfgZgZgZgZgZgZpSzHpSgZgZgZgZgZgZgZgZgZyfyfyfyfyfyfyf
+yfyfyfgZgZpSpSgZgZgZgZgZgZyfyfyfpSpSpSgZgZyfgZgZpSpSgZgZPYBKBKBKPYPYPYpEzzPupEeVpEPYBKPYPYPYPYPYPYPYPYPYBKBKBKBKPYPYPYPYgZyfyfyfyfyfyfyfgZgZgZyfyfyfyfgZgZgZgZgZgZpSItpSpSgZgZgZgZgZgZgZyfyfyfyfyfyfyfyf
+yfyfyfgZgZgZpSpSgZgZpSgZyfgZyfyfyfpSpSpSyfyfgZpSpSgZgZgZyfyfBKBKsivyAQtpVHiBpMKSUVDyBKPYgZgZgZgZgZgZPYBKprXcXcprprPYPYPYgZgZyfyfyfyfyfyfgZgZyfyfyfyfgZgZgZgZgZgZpSpSpSgZpSpSpSpSpSgZgZgZyfyfyfyfyfyfyfyf
+yfyfyfyfgZgZgZpSpSpSpSgZyfgZyfyfyfyfpSpSyfyfgZpSgZgZyfyfyfyfyfBKsivyDyNDprhkhkTDTDDyqQsiyfyfyfgZgZgZPYPYgKPYPYPYprprFUPYgZgZyfyfyfyfyfyfyfgZgZyfyfyfgZgZgZgZgZpSpSpSgZgZgZgZgZgZgZgZgZgZgZyfyfyfyfyfyfyf
+yfyfyfyfgZgZgZgZpSpSgZgZgZyfyfyfyfpSpSyfyfyfpSpSgZgZyfyfyfyfyfyfsiQNRdDyprprDykfDyDyqQsiyfyfyfgZgZgZPYNJNJPYPYPYPYBKprPYgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZpSrDpSgZgZgZgZgZgZgZgZgZgZgZgZyfyfyfyfyfyfyf
+yfyfyfyfgZgZgZgZpSgZgZgZyfyfyfyfyfyfyfyfyfpSyfgZgZyfyfyfyfyfyfyfsiQNDyTDTDhSDyDyfZZrdfsiyfyfyfyfgZyfpSpSgZgZgZgZPYPYprprgZgZyfyfyfyfyfyuyfyfyfyfyfyfyfyfyfgZpSpSpSgZgZgZgZgZgZgZgZgZgZgZyfyfyfyfyfyfyfyf
+yfyfyfyfgZgZgZpSpSpSgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfpSsizLhkTDaWLUneneTDTDafsiyfyfyfyfyfyfpSgZgZyfgZgZPYPYPYgKAnpSgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfgZpSpSgZgZgZgZgZgZgZgZgZgZgZgZyfyfyfyfgZgZyfyf
+yfyfyfgZgZgZpSpSgZpSgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfpSTApSNJNJBKprNJNJNJNJNJNJyfyfyfyfyfyfyfyfyfyfyfgZyfyfgZgZgZgZpSgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfpSgZgZgZgZgZgZgZgZgZgZgZgZgZyfyfyfyfgZgZyfyf
+yfyfyfyfgZgZpSpSgZgZgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfTApSpSpSpSTATATATATATATAKmKmKmkhkhyfyfyfyfyfyfyfyfyfyfyfyfgZgZpSgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfpSgZgZgZyfgZgZgZyfyfgZgZyfyfyfyfyfgZgZyfyfyf
+yfyfyfgZgZgZpSgZgZgZgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyffrfrTATATAMvpSyfpSpSZbyfyffrfrKmKmKmKmKmKmyfyfyfyfyfyfyfyfpSpSgZyfyfyfyuyfyfyfyfyfyfyfyfyfyfpSyfyfgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZyfyf
+yfyfgZgZgZpSpSgZgZgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyffrKmKmpSpSpSyfyfpSpSyfyfyfyfyfyfyfyfyffrKmKmfrfryfyfyfyfyfyfyfgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZyfyfyf
+yfyfgZgZgZpSgZgZgZgZgZgZyfyfyfgZgZyfyfyfyfyfyfyfyfyfyfkhyfyfyffrKmyfyfyfpSyfyfpSyfyfyfyfyfyfyfyfyfyfyfyfyfkhKmKmKmKmKmyfFdyfyfyfMvkhyfyfyfyfpSyfgZyfyfyfgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZyfyfyf
+yfyfyfgZgZpSgZyfyfgZgZgZyfyfyfgZgZgZyfyfyfyfyfyfyfyfyfTATAyffrKmfryfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfyfyfyfyfyfyfyfyffrKmGnpkkhTATAIHyfyfyfyfpSpSgZgZgZyfgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfyfyfyf
+yfyfyfyfpSgZyfyfyfgZyfyfyfyfgZgZgZgZgZgZyfyfyfyfyfyfyfyfTApSfrKmfryfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZyfgZgZyfyfyfyfyfyfyfkhKmTATAFyTAkhyfyfyfyfgZpSpSgZgZgZgZgZgZyfyfyfyfpSpSyfyfyfgZgZyfyfyfyfyfgZyfyfyfyf
+yfyfyfpSyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZgZyfyfyfyfgZgZyfyfyffrKmyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZyfgZgZgZyfyfyfyfyfyfyfkhyftBmGgakhkhyfyfyfyfgZgZpSgZgZgZgZgZgZyfyfyfpSpSpSyfyfgZgZgZyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfyfpSyfyfyfyfyfyfyfyfgZgZgZgZgZyfyfyfgZgZgZgZyfyffrKmyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZgZgZgZyfyfyfyfyfyfyfyfkhyfnqTATAkhyfyfyfgZgZgZgZpSpSgZpSpSgZgZgZyfyfpSpSpSyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfpSpSpSpSpSpSpSyfyfyfgZgZgZgZgZyfyfyfgZgZgZgZgZgZpSTAgZgZyfyfyfyfyfyfyfyfyfgZgZgZgZgZgZgZgZyfyfyfyfyfyfgZgZgZkhkhkhyfFdyfyfgZgZgZgZgZgZpSpSpSgZgZgZyfyfyfpSyfpSyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfpSpSpSyfpSyfyfyfyfyfgZgZgZgZgZyfyfyfgZgZgZgZgZgZpSrcgZgZyfyfyfyfyfyfyfyfgZgZgZgZgZgZgZgZyfyfyfyfyfyfgZgZgZyfyfyfyfyuyfyfyfgZgZgZgZgZgZpSpSgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfyfyfyfyfgZgZyfyfgZgZpSpSgZyfyfyfyfyfyfyfyfyfgZgZgZgZgZgZgZgZyfyfyfyfyfyfyfyfgZgZyfyfyfyfyfyfyfgZgZgZgZgZpSpSpSgZgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfyfyfyffrKmyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZpSpSgZgZgZyfyfyfyfyfyfyfpSyfyfgZgZgZyfyfyfyfyfyfyfyf
+yfyfyfyfyfgZyfyfyfyfyfgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyffrKmpwyfyfyfyfyfyfyfItTAItyfgZgZgZgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZpSpSgZgZyfyfyfyfyfpSpSpSyfyfgZgZgZgZgZgZyfyfyfyfyf
+yfyfyfyfgZgZyfyfyfyfgZgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyffrKmfryfyfyfyfyfItTAAtTAwUyfyfgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZpSgZgZgZyfyfyfyfpSpSpSyfyfgZgZgZgZgZgZgZyfyfyfyf
+yfyfyfyfgZgZgZyfyfgZgZgZgZgZgZyfyfyfyfyfyfyfgZgZyfyfyfyfyffrKmyfyfyfgZyfyfTAFVdhYbwUyfgZgZgZgZyfyfyfyfyfyfyfgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZgZpSgZgZgZyfyfyfyfyfyfpSpSpSyfgZgZyfgZgZgZyfyfyfyf
+yfyfyfyfyfgZgZyfyfyfgZgZgZgZgZyfyfyfyfyfgZgZgZgZyfyfyfyfpSpSTAgZgZgZgZgZgZItTABtfBkhfPyfyfyfyfyfyfyfyfyfyfyfgZgZyfyfyfyfyfgZgZgZgZyfyfyfyfyfyfgZgZgZgZgZpSpSyfyfyfyfyfyfyfyfyfpSyfyfyfyfyfgZgZgZyfyfyfyf
+yfyfyfyfyfyfyfyfyfyfgZgZgZgZgZyfyfyfyfgZgZgZgZyfyfyfyfgZpSpSTAgZgZgZgZgZgZBtkhcbzHItkhkhyfyfyfyfyfyfyfyfyfyfgZyfyfyfyfyfyfpSgZgZgZgZyfyfyfyfyfyfyfyfgZgZyfpSyfyfyfyfyfyfpSyfyfyfyfyfyfyfyfyfgZgZyfyfyfyf
+yfyfyfyfyfyfyfyfyfyfgZyfgZyfyfyfyfyfyfyfgZgZyfyfyfyfgZgZpSKmKmyfgZyfyfyfkhTAkhyfyfkhkhkhyfyfyfyfyfyfyfyfyfyfyfgZyfyfyfyfgZpSpSgZgZgZgZyfyfyfyfyfyfyfgZyfyfyfyfyfyfgZyfpSpSyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfyfyfyfgZgZfrKmfryfyfyfyfyfkhkhkhyfyfyfyfyfyfyfyfyfyfyfgZyfyfyfyfyfyfyfyfyfgZpSpSgZgZgZgZyfyfyfyfyfyfyfyfyfgZyfgZyfgZgZpSpSyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfyfyfyfyfyfKmKmyfyfyfyfgZyfyfyflkyfyfpSpSyfyfyfyfyfyfyfgZgZyfyfyfyfyfyfyfgZgZgZpSpSgZgZyfyfyfyfyfyfyfyfgZyfyfyfgZgZgZgZgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfgZgZyfyfyfyfyfyfyfyfyfyfyfpSpSpSyfpSyfyfyfyfyfyffrKmfrpSpSyfgZgZgZgZyfyfyfyfpSpSpSyfyfyfyfyfyfgZgZgZyfyfyfyfyfyfgZgZgZgZpSgZgZyfyfyfyfyfyfyfgZgZgZgZgZgZgZgZTAgZgZgZgZyfyfyfyfyfyfyfgZyfyfyfyfyfyf
+yfyfyfyfgZyfyfyfyfyfyfyfyfyfyfyfpSpSyfpSpSyfyfyfyfyfyfIbKmpSpSyfyfgZgZgZyfyfyfyfyfyfyfpSyfyfyfyfyfyfyfgZgZyfyfyfyfyfyfgZgZgZgZpSgZgZyfyfyfyfyfyfyfgZgZgZgZgZgZgZTATAgZgZgZyfyfyfyfyfyfyfgZgZgZyfyfyfyfyf
+yfyfyfyfgZyfyfyfyfyfgZgZyfyfyfyfyfpSpSyfyfyfyfyfyfyfyfKmfrpSyfyfgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZpSgZgZyfyfyfyfyfyfgZgZgZgZgZgZgZgZnEgZgZgZyfyfyfyfyfyfyfyfyfgZyfyfyfyfyfyf
+yfyfyfgZgZyfyfyfyfgZgZgZgZgZyfyfyfyfyfyfyfyfyfyffrfrfrKmfrfrfrfrfrpSpSfrfrfrfrfrfryfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZpSgZgZgZyfyfyfyfyfgZgZgZgZgZgZgZTAbBgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfgZgZyfyfyfyfgZgZgZgZgZyfyfyfyfyfyfyfyfyfyfKmazazFjFjFjFjFjpSpSFjFjFjFjFjFjfryfyfyfyfgZyfgZyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZpSpSgZyfyfyfyfyfyfgZgZgZgZgZgZgZGKgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfyfyfyfgZgZgZgZgZyfyfyfyfyfyfyfyfyfyfKmFjazazFjFjFjFjFjFjFjFjFjFjFjFjfryfyfyfyfgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZpSpSyfyfyfyfyfyfgZgZgZgZgZgZAmgygZgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfgZgZyfgZgZgZgZgZgZgZpSyfyfyfyfyfyfkhKmFjFjazazazFjFjFjFjFjFjFjFjFjFjfryfyfyfyfgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZyfyfyfyfyfyfyfgZgZgZgZgZgZnESWgZgZgZgZgZgZgZyfgZyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfgZgZgZgZgZgZgZgZpSpSpSgZgZgZyfyfyfyfKmFjFjFjFjFjazazazazFjFjFjFjFjFjfryfyfyfyfyfgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfyfyfyfyfyfyfyfgZgZTATATATAgZgZgZgZgZgZgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfgZgZgZgZgZgZpSpSpSpSgZgZgZgZgZyfyfyfKmFjFjFjFjFjFjFjFjazFjFjFjFjFjFjfryfyfyfyfyfgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfTATATATATATAgZgZgZgZgZgZgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfyfgZgZgZgZpSpSgZgZgZgZgZgZgZgZgZyfkhKmFjFjFjFjFjFjFjFjazazFjazazazazfryfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfkhTATAgZgZgZgZgZgZgZgZgZgZgZgZgZgZyfyfyfyfyfyfyfyfgZgZyfyfyfyfyf
+yfyfyfyfyfyfgZgZgZgZpSpSgZgZgZgZgZgZgZgZgZgZyfkhKmFjFjFjFjFjFjFjazFjazazazFjFjazfryfpSpSyfyfyfyfyfyfyfyfgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfkhkhyfgZgZgZgZgZgZgZgZgZgZgZgZgZgZyfyfyfyfyfyfyfyfyfgZgZyfyfyfyfyf
+yfyfyfyfyfyfgZgZgZpSmpgZgZgZgZgZgZgZgZgZgZgZyfkhGnazFjFjFjFjFjazFjFjFjFjFjFjFjazfryfpSpSyfyfyfyfyfyfyfgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfkhwUyfyfgZgZgZgZgZgZgZgZgZyfgZgZyfyfyfyfyfyfyfyfyfyfyfyfgZyfyfyfyfyf
+yfyfyfyfyfyfgZgZgZgZpSpSgZgZgZgZgZgZgZgZgZgZyfyfKmFjFjFjFjFjazFjFjFjFjFjFjFjFjFjfryfpSpSyfyfyfyfyfyfyfgZgZgZyfyfyfyfyfyfyfyfgZgZyfyfkhkhkhyfyfgZgZgZyfgZgZyfgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfyfyfyfyf
+yfyfyfyfyfyfgZgZgZgZgZpSpSgZgZgZgZgZgZgZgZyfyfyfGnFjFjFjFjazazFjFjFjFjFjFjFjazazfryfyfpSyfyfyfyfyfyfyfgZgZyfyfyfyfyfyfgZgZgZgZgZyfyfkhkhTAyfkhyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZyfyfyfyfyfyfyf
+yfyfyfyfyfyfyfgZgZgZgZgZpSpSgZgZgZgZgZgZgZgZyfyfGnazazFjFjazazEDFjFjFjFjFjFjazFjfryfyfyfyfyfyfyfyfyfyfgZyfyfyfyfyfyfyfyfgZgZgZyfyfyfkhfBdhTAwUyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfgZgZyfyfgZgZgZgZgZgZgZpSgZgZgZgZgZgZgZgZyfyfKmazFjazazFjazFjFjFjFjFjFjFjazFjfryfyfyfyfyfyfyfyfyfyfgZyfyfyfyfyfyfyfyfgZgZyfyfyfyfTAItkhkhyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfgZgZyfgZyfgZgZgZgZgZpSpSpSpSgZgZgZgZyfgZyfyfKmFjazFjazazFjFjFjFjFjFjFjFjFjazfryfpSyfgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfkhkhItyfyfwUyfyfyfyfyfpSyfyfyfyfyfyfyfyfyfgZyfyfyfyfyfyfyfyfyfyfyfgZgZyf
+yfyfgZgZyfyfgZgZgZgZgZpSpSgZgZpSpSpSpSpSpSyfpSyfKmFjazazFjFjFjFjFjFjFjFjFjazFjFjfrpSpSyfgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfkhkhyfyfyfyfyfyfyfyfyfpSpSyfyfyfyfyfgZgZgZgZgZgZyfyfyfyfyfyfyfyfgZgZyfyf
+yfyfgZyfyfyfgZgZgZgZgZpSgZgZgZgZgZgZgZyfyfyfpSpSfrazFjFjazFjazazFjFjFjFjFjazFjFjfrpSyfyfyfgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfkhkhkhyfyfyfyfyfyfpSpSpSyfyfyfyfyfgZyfgZgZgZgZgZyfyfyfyfyfyfyfgZyfyfyf
+yfyfyfyfyfgZgZgZgZgZgZgZgZgZgZgZgZgZgZgZgZyfyfpSfrazFjFjFjFjFjFjazazazazazazFjFjfryfyfyfyfyfyfyfyfyfyfyfyfyfpSpSyfyfyfyfyfyfyfyfyfyfyfkhyfyfgZyfyfyfpSpSyfyfyfyfyfyfyfyfyfgZgZgZgZyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfgZgZgZgZgZgZgZgZgZgZgZgZgZgZyfyfyfyfyffrFjFjFjFjFjFjFjFjFjFjFjFjazFjFjfryfyfyfyfyfyfyfyfyfyfyfyfyfpSpSpSyfyfyfyfyfyfyfyfyfyfyfgZgZyfyfyfyfpSyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfgZyfyfgZgZgZgZgZgZgZyfyfgZgZgZgZyfyfyfyfyfyffrFjFjFjFjFjFjFjFjFjFjFjFjazFjFjfrgZgZgZyfyfyfyfyfgZgZyfyfyfyfyfyfyfyfyfgZgZgZyfyfyfyfyfgZgZyfyfyfyfpSyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfgZyfyfgZgZgZgZyfgZgZyfyfgZgZyfyfyfyfyfyfyfyffrFjFjFjazFjFjFjFjFjFjFjFjFjFjFjpSgZgZgZyfyfyfyfgZgZyfyfyfyfyfyfyfyfyfgZgZgZgZyfyfyfyfyfgZyfyfyfyfyfyfgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfyfyfyfyfyf
+yfyfgZgZyfyfgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyffrFjFjFjFjazFjFjFjFjFjFjFjFjFjpSpSgZgZyfyfyfgZgZgZgZgZyfyfyfyfyfyfyfyfgZyfgZgZyfyfyfyfyfyfyfyfyfyfyfgZgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZyfyfyfyfyfyf
+yfyfgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyffrFjFjFjFjFjazFjFjFjFjFjazFjFjpSpSgZgZyfyfyfgZpSpSgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZyfyfyfyfyfyfyf
+yfyfgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZyfyfyffrFjFjFjFjFjFjazazFjFjazazFjFjpSpSgZyfyfyfyfpSpSgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfyfyfyfgZyfyfyfyfyfyfyfgZgZgZyfyfyfyffrFjFjFjFjFjFjFjazazazFjFjFjpSpSpSgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfpSpSyfyfyfyfyfyfyfyfyfyfyfyfpSpSpSpSyfpSyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfyfgZgZgZgZyfyfyfyfyfyfyfgZgZyfyfyfyffrfrfrfrfrfrfrfrfrfrfrfrfrfrpSpSpSgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfpSpSpSpSpSpSyfyfyfyfyfyfyfyfyfyfpSpSpSpSyfpSyfyfyfyfyfyfyfyfyfyfyfyf
+yfyfyfyfyfyfyfyfyfyfgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfgZgZgZyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyfyf
+"}
