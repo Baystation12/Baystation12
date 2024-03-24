@@ -22,8 +22,13 @@
 /obj/item/clothing/accessory/glassesmod/proc/process_hud(mob/M)
 	return
 
+/obj/item/clothing/accessory/glassesmod/get_mob_overlay(mob/user_mob, slot)
+	if (slot == "slot_s_store")
+		return null
+	return ..()
+
 /obj/item/clothing/accessory/glassesmod/activate()
-	. = ..()
+	..()
 	parent.CutOverlays(inv_overlay)
 	inv_overlay = null
 	inv_overlay = get_inv_overlay()
@@ -31,7 +36,7 @@
 	parent.update_vision()
 
 /obj/item/clothing/accessory/glassesmod/deactivate()
-	. = ..()
+	..()
 	parent.CutOverlays(inv_overlay)
 	inv_overlay = null
 	inv_overlay = get_inv_overlay()
