@@ -113,39 +113,43 @@
 	else if(!enabled && screen_on)
 		turn_on(user)
 
-/obj/item/modular_computer/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/modular_computer/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/card/id)) // ID Card, try to insert it.
 		var/obj/item/card/id/I = W
 		if(!card_slot)
-			to_chat(user, "You try to insert [I] into [src], but it does not have an ID card slot installed.")
-			return
+			to_chat(user, SPAN_WARNING("You try to insert \the [I] into \the [src], but it does not have an ID card slot installed."))
+			return TRUE
 
 		if(card_slot.insert_id(I, user))
 			update_verbs()
-		return
+		return TRUE
 
 	if(istype(W, /obj/item/pen) && stores_pen)
 		if(istype(stored_pen))
-			to_chat(user, SPAN_NOTICE("There is already a pen in [src]."))
-			return
+			to_chat(user, SPAN_WARNING("There is already a pen in \the [src]."))
+			return TRUE
 		if(!user.unEquip(W, src))
-			return
+			FEEDBACK_UNEQUIP_FAILURE(user, W)
+			return TRUE
 		stored_pen = W
 		update_verbs()
-		to_chat(user, SPAN_NOTICE("You insert [W] into [src]."))
-		return
+		to_chat(user, SPAN_NOTICE("You insert \the [W] into \the [src]."))
+		return TRUE
+
 	if(istype(W, /obj/item/paper))
 		var/obj/item/paper/paper = W
 		if(scanner && paper.info)
 			scanner.do_on_attackby(user, W)
-			return
+			return TRUE
+
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/paper_bundle))
 		if(nano_printer)
-			nano_printer.attackby(W, user)
+			nano_printer.use_tool(W, user)
 	if(istype(W, /obj/item/aicard))
 		if(!ai_slot)
-			return
-		ai_slot.attackby(W, user)
+			return ..()
+		ai_slot.use_tool(W, user)
+		return TRUE
 
 	if(!modifiable)
 		return ..()
@@ -155,37 +159,40 @@
 		if(C.hardware_size <= max_hardware_size)
 			try_install_component(user, C)
 		else
-			to_chat(user, "This component is too large for \the [src].")
+			to_chat(user, SPAN_WARNING("This component is too large for \the [src]."))
+		return TRUE
+
 	if(isWrench(W))
 		var/list/components = get_all_components()
 		if(length(components))
-			to_chat(user, "Remove all components from \the [src] before disassembling it.")
-			return
-		new /obj/item/stack/material/steel( get_turf(src.loc), steel_sheet_cost )
-		src.visible_message("\The [src] has been disassembled by [user].")
+			to_chat(user, SPAN_WARNING("Remove all components from \the [src] before disassembling it."))
+			return TRUE
+		new /obj/item/stack/material/steel( get_turf(loc), steel_sheet_cost )
+		visible_message("\The [src] has been disassembled by \the [user].")
 		qdel(src)
-		return
+		return TRUE
+
 	if(isWelder(W))
 		var/obj/item/weldingtool/WT = W
 		var/damage = get_damage_value()
 		if(!WT.can_use(round(damage/75), user))
-			return
+			return TRUE
 
 		if(!get_damage_value())
-			to_chat(user, "\The [src] does not require repairs.")
-			return
+			to_chat(user, SPAN_WARNING("\The [src] does not require repairs."))
+			return TRUE
 
 		to_chat(user, "You begin repairing damage to \the [src]...")
 		if(do_after(user, damage / 10, src, DO_REPAIR_CONSTRUCT) && WT.remove_fuel(round(damage / 75)))
 			revive_health()
 			to_chat(user, "You repair \the [src].")
-		return
+		return TRUE
 
 	if(isScrewdriver(W))
 		var/list/all_components = get_all_components()
 		if(!length(all_components))
-			to_chat(user, "This device doesn't have any components installed.")
-			return
+			to_chat(user, SPAN_WARNING("This device doesn't have any components installed."))
+			return TRUE
 		var/list/component_names = list()
 		for(var/obj/item/stock_parts/computer/H in all_components)
 			component_names.Add(H.name)
@@ -193,21 +200,19 @@
 		var/choice = input(usr, "Which component do you want to uninstall?", "Computer maintenance", null) as null|anything in component_names
 
 		if(!choice)
-			return
+			return TRUE
 
 		if(!Adjacent(usr))
-			return
+			return TRUE
 
 		var/obj/item/stock_parts/computer/H = find_hardware_by_name(choice)
 
 		if(!H)
-			return
+			return TRUE
 
 		uninstall_component(user, H)
-
-		return
-
-	..()
+		return TRUE
+	return ..()
 
 /obj/item/modular_computer/examine(mob/user)
 	. = ..()

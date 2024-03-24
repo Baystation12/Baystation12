@@ -17,16 +17,18 @@
 	desc = "A ring made from [material.display_name]."
 	color = material.icon_colour
 
-/obj/item/clothing/ring/material/attackby(obj/item/S, mob/user)
+/obj/item/clothing/ring/material/use_tool(obj/item/S, mob/living/user, list/click_params)
 	if(S.sharp)
 		var/inscription = sanitize(input("Enter an inscription to engrave.", "Inscription") as null|text)
 
 		if(!user.stat && !user.incapacitated() && user.Adjacent(src) && S.loc == user)
 			if(!inscription)
-				return
+				return TRUE
 			desc = "A ring made from [material.display_name]."
 			to_chat(user, SPAN_WARNING("You carve \"[inscription]\" into \the [src]."))
 			desc += "<br>Written on \the [src] is the inscription \"[inscription]\""
+			return TRUE
+	return ..()
 
 /obj/item/clothing/ring/material/OnTopic(mob/user, list/href_list)
 	if(href_list["examine"])

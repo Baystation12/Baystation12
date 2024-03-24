@@ -168,28 +168,24 @@
 /obj/machinery/door/window/holowindoor/Destroy()
 	..()
 
-/obj/machinery/door/window/holowindoor/attackby(obj/item/I as obj, mob/user as mob)
-
+/obj/machinery/door/window/holowindoor/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if (operating == DOOR_OPERATING_YES)
-		return
-
-	if (user.a_intent == I_HURT)
 		return ..()
 
-	src.add_fingerprint(user)
-	if (!src.requiresID())
+	if (!requiresID())
 		user = null
 
-	if (src.allowed(user))
-		if (src.density)
+	if (allowed(user))
+		if (density)
 			open()
 		else
 			close()
 
-	else if (src.density)
-		flick(text("[]deny", src.base_state), src)
+	else if (density)
+		flick(text("[]deny", base_state), src)
+		return TRUE
 
-	return
+	return ..()
 
 /obj/machinery/door/window/holowindoor/shatter(display_message = 1)
 	src.set_density(0)

@@ -52,22 +52,24 @@
 		update_icon()
 		return TRUE
 
-/obj/item/toy/water_balloon/attackby(obj/O as obj, mob/user as mob)
+/obj/item/toy/water_balloon/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(istype(O, /obj/item/reagent_containers/glass))
 		if(O.reagents)
 			if(O.reagents.total_volume < 1)
-				to_chat(user, "The [O] is empty.")
-			else if(O.reagents.total_volume >= 1)
-				if(O.reagents.has_reagent(/datum/reagent/acid/polyacid, 1))
-					to_chat(user, "The acid chews through the balloon!")
-					O.reagents.splash(user, reagents.total_volume)
-					qdel(src)
-				else
-					src.desc = "A translucent balloon with some form of liquid sloshing around in it."
-					to_chat(user, SPAN_NOTICE("You fill the balloon with the contents of [O]."))
-					O.reagents.trans_to_obj(src, 10)
-	src.update_icon()
-	return
+				to_chat(user, SPAN_WARNING("\The [O] is empty."))
+				return TRUE
+
+			if (O.reagents.has_reagent(/datum/reagent/acid/polyacid, 1))
+				to_chat(user, "The acid chews through the balloon!")
+				O.reagents.splash(user, reagents.total_volume)
+				qdel(src)
+			else
+				desc = "A translucent balloon with some form of liquid sloshing around in it."
+				to_chat(user, SPAN_NOTICE("You fill the balloon with the contents of [O]."))
+				O.reagents.trans_to_obj(src, 10)
+			update_icon()
+			return TRUE
+	return ..()
 
 /obj/item/toy/water_balloon/throw_impact(atom/hit_atom)
 	if(reagents && reagents.total_volume >= 1)
@@ -148,16 +150,20 @@
 	attack_verb = list("attacked", "struck", "hit")
 	var/bullets = 5
 
-/obj/item/toy/crossbow/attackby(obj/item/I as obj, mob/user as mob)
+/obj/item/toy/crossbow/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I, /obj/item/toy/ammo/crossbow))
 		if(bullets <= 4)
 			if(!user.unEquip(I))
-				return
+				FEEDBACK_UNEQUIP_FAILURE(user, I)
+				return TRUE
 			qdel(I)
 			bullets++
 			to_chat(user, SPAN_NOTICE("You load the foam dart into the crossbow."))
 		else
 			to_chat(usr, SPAN_WARNING("It's already fully loaded."))
+		return TRUE
+
+	return ..()
 
 
 /obj/item/toy/crossbow/use_after(atom/target, mob/living/user, click_parameters)

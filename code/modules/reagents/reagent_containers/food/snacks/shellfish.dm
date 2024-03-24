@@ -13,7 +13,7 @@
 	var/snack_path
 
 
-/obj/item/shellfish/attackby(obj/item/item, mob/living/user)
+/obj/item/shellfish/use_tool(obj/item/item, mob/living/user, list/click_params)
 	if (!item.sharp)
 		return ..()
 	to_chat(user, SPAN_NOTICE("You start to pry open \the [src]."))

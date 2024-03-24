@@ -45,7 +45,7 @@
 	else
 		remove_contents(user)
 
-/obj/item/reagent_containers/glass/rag/attackby(obj/item/W, mob/user)
+/obj/item/reagent_containers/glass/rag/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if (!on_fire && W.IsFlameSource())
 		ignite()
 		if(on_fire)
@@ -55,9 +55,11 @@
 			)
 		else
 			to_chat(user, SPAN_WARNING("You manage to singe \the [src], but it won't burn on its own.")) // Give a hint about needing fuel
+		update_name()
+		return TRUE
 
-	. = ..()
-	update_name()
+	return ..()
+
 
 /obj/item/reagent_containers/glass/rag/proc/update_name()
 	if(on_fire)

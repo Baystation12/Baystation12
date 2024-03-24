@@ -188,60 +188,68 @@
 	else
 		to_chat(user, "This book is completely blank!")
 
-/obj/item/book/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/book/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(carved == 1)
 		if(!store)
 			if(W.w_class < ITEM_SIZE_NORMAL)
 				if(!user.unEquip(W, src))
-					return
+					FEEDBACK_UNEQUIP_FAILURE(user, W)
+					return TRUE
 				store = W
-				to_chat(user, SPAN_NOTICE("You put [W] in [title]."))
-				return
+				to_chat(user, SPAN_NOTICE("You put \the [W] in \the [title]."))
+				return TRUE
 			else
-				to_chat(user, SPAN_NOTICE("[W] won't fit in [title]."))
-				return
+				to_chat(user, SPAN_WARNING("\The [W] won't fit in \the [title]."))
+				return TRUE
 		else
-			to_chat(user, SPAN_NOTICE("There's already something in [title]!"))
-			return
-	if(istype(W, /obj/item/pen))
+			to_chat(user, SPAN_WARNING("There's already something in [title]!"))
+			return TRUE
+
+	else if(istype(W, /obj/item/pen))
 		if(unique)
-			to_chat(user, "These pages don't seem to take the ink well. Looks like you can't modify it.")
-			return
+			to_chat(user, SPAN_WARNING("These pages don't seem to take the ink well. Looks like you can't modify it."))
+			return TRUE
 		var/choice = input("What would you like to change?") in list("Title", "Contents", "Author", "Cancel")
 		switch(choice)
 			if("Title")
 				var/newtitle = reject_bad_text(sanitizeSafe(input("Write a new title:")))
 				if(!newtitle)
-					to_chat(usr, "The title is invalid.")
-					return
+					to_chat(user, SPAN_WARNING("The title is invalid."))
+					return TRUE
 				else
-					src.SetName(newtitle)
-					src.title = newtitle
+					SetName(newtitle)
+					title = newtitle
+					return TRUE
 			if("Contents")
 				var/content = sanitize(input("Write your book's contents (HTML NOT allowed):") as message|null, MAX_BOOK_MESSAGE_LEN)
 				if(!content)
-					to_chat(usr, "The content is invalid.")
-					return
+					to_chat(user, SPAN_WARNING("The content is invalid."))
+					return TRUE
 				else
-					src.dat += content
+					dat += content
+					return TRUE
 			if("Author")
 				var/newauthor = sanitize(input(usr, "Write the author's name:"))
 				if(!newauthor)
-					to_chat(usr, "The name is invalid.")
-					return
+					to_chat(user, SPAN_WARNING("The name is invalid."))
+					return TRUE
 				else
-					src.author = newauthor
+					author = newauthor
+					return TRUE
 			else
-				return
+				return TRUE
+
 	else if(istype(W, /obj/item/material/knife) || isWirecutter(W))
-		if(carved)	return
-		to_chat(user, SPAN_NOTICE("You begin to carve out [title]."))
+		if(carved)
+			to_chat(user, SPAN_WARNING("\The [src] already has something carved in it."))
+			return TRUE
+		to_chat(user, SPAN_NOTICE("You begin to carve out \the [title]."))
 		if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
-			to_chat(user, SPAN_NOTICE("You carve out the pages from [title]! You didn't want to read it anyway."))
+			to_chat(user, SPAN_NOTICE("You carve out the pages from \the [title]! You didn't want to read it anyway."))
 			carved = 1
-			return
-	else
-		..()
+		return TRUE
+
+	return ..()
 
 /obj/item/book/use_before(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	. = FALSE

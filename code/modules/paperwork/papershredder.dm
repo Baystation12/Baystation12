@@ -108,11 +108,12 @@
 /obj/machinery/papershredder/on_update_icon()
 	icon_state = "papershredder[max(0,min(5,floor(paperamount/2)))]"
 
-/obj/item/shreddedp/attackby(obj/item/W as obj, mob/user)
+/obj/item/shreddedp/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/flame/lighter))
 		burnpaper(W, user)
+		return TRUE
 	else
-		..()
+		return ..()
 
 /obj/item/shreddedp/proc/burnpaper(obj/item/flame/lighter/P, mob/user)
 	if(user.restrained())

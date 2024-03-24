@@ -131,10 +131,11 @@
 	det_time = rand(5,100) // Fuse is randomized.
 	. = ..()
 
-/obj/item/grenade/frag/makeshift/attackby(obj/item/W, mob/user)
+/obj/item/grenade/frag/makeshift/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isScrewdriver(W)) //overrides the act to screwdrive a grenade to set its fuse.
 		to_chat(user, SPAN_WARNING("You can't adjust the timer on \the [src]!"))
 		return TRUE
+
 	if (is_type_in_list(W, possible_reinforcements))
 		if(shrapnel_reinforced<10) //you can only add 10 items inside the can
 			user.visible_message(
@@ -148,4 +149,5 @@
 		else
 			to_chat(user, SPAN_WARNING("You can't add any more items to \the [src]!"))
 		return TRUE
+
 	return ..()

@@ -122,7 +122,7 @@ var/global/list/mining_floors = list()
 		var/mob/mob = AM
 		var/obj/item/pickaxe/pickaxe = mob.IsHolding(/obj/item/pickaxe)
 		if (pickaxe)
-			attackby(pickaxe, mob)
+			use_tool(pickaxe, mob)
 
 /turf/simulated/mineral/proc/MineralSpread()
 	if(istype(mineral) && mineral.ore_spread_chance > 0)
@@ -491,7 +491,7 @@ var/global/list/mining_floors = list()
 		var/obj/item/storage/bag/fossils/S = W
 		if(!S.quick_gather_single)
 			for(var/obj/item/fossil/F in contents)
-				F.use_tool(W,user)
+				F.use_tool(W, user)
 				return TRUE
 	else
 		return ..()
@@ -544,4 +544,4 @@ var/global/list/mining_floors = list()
 	if(istype(M,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = M
 		for (var/obj/item/item as anything in R.GetAllHeld(/obj/item/storage/ore))
-			attackby(item, R)
+			use_tool(item, R)

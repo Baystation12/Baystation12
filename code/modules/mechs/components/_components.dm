@@ -93,8 +93,8 @@
 		qdel(RC)
 		update_components()
 
-/obj/item/mech_component/attackby(obj/item/thing, mob/user)
-	if(isScrewdriver(thing))
+/obj/item/mech_component/use_tool(obj/item/thing, mob/living/user, list/click_params)
+	if (isScrewdriver(thing))
 		if(length(contents))
 			//Filter non movables
 			var/list/valid_contents = list()
@@ -102,27 +102,30 @@
 				if(!A.anchored)
 					valid_contents += A
 			if(!length(valid_contents))
-				return
+				return TRUE
 			var/obj/item/removed = pick(valid_contents)
 			if(!(removed in contents))
-				return
+				return TRUE
 			user.visible_message(SPAN_NOTICE("\The [user] removes \the [removed] from \the [src]."))
 			removed.forceMove(user.loc)
 			playsound(user.loc, 'sound/effects/pop.ogg', 50, 0)
 			update_components()
 		else
 			to_chat(user, SPAN_WARNING("There is nothing to remove."))
-		return
-	if(isWelder(thing))
+		return TRUE
+
+	if (isWelder(thing))
 		repair_brute_generic(thing, user)
-		return
-	if(isCoil(thing))
+		return TRUE
+
+	if (isCoil(thing))
 		repair_burn_generic(thing, user)
-		return
-	if(istype(thing, /obj/item/device/robotanalyzer))
+		return TRUE
+
+	if (istype(thing, /obj/item/device/robotanalyzer))
 		to_chat(user, SPAN_NOTICE("Diagnostic Report for \the [src]:"))
 		return_diagnostics(user)
-		return
+		return TRUE
 
 	return ..()
 

@@ -32,17 +32,19 @@
 	else
 		to_chat(user, "It has a blank space for a signature.")
 
-/obj/item/card/union/attackby(obj/item/thing, mob/user)
+/obj/item/card/union/use_tool(obj/item/thing, mob/living/user, list/click_params)
 	if(istype(thing, /obj/item/pen))
 		if(signed_by)
 			to_chat(user, SPAN_WARNING("\The [src] has already been signed."))
+			return TRUE
 		else
 			var/signature = sanitizeSafe(input("What do you want to sign the card as?", "Union Card") as text, MAX_NAME_LEN)
 			if(signature && !signed_by && !user.incapacitated() && Adjacent(user))
 				signed_by = signature
 				user.visible_message(SPAN_NOTICE("\The [user] signs \the [src] with a flourish."))
-		return
-	..()
+			return TRUE
+
+	return ..()
 
 /obj/item/card/operant_card
 	name = "operant registration card"
@@ -114,11 +116,12 @@
 	detail_overlay.color = detail_color
 	AddOverlays(detail_overlay)
 
-/obj/item/card/data/attackby(obj/item/I, mob/living/user)
-	if(istype(I, /obj/item/device/integrated_electronics/detailer))
-		var/obj/item/device/integrated_electronics/detailer/D = I
-		detail_color = D.detail_color
+/obj/item/card/data/use_tool(obj/item/item, mob/living/user, list/click_params)
+	if (istype(item, /obj/item/device/integrated_electronics/detailer))
+		var/obj/item/device/integrated_electronics/detailer/Det = item
+		detail_color = Det.detail_color
 		update_icon()
+		return TRUE
 	return ..()
 
 /obj/item/card/data/full_color

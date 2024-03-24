@@ -909,21 +909,22 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 			src.attack_self(src.loc)
 
 
-/obj/item/newspaper/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/newspaper/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/pen))
-		if(src.scribble_page == src.curr_page)
+		if(scribble_page == curr_page)
 			to_chat(user, SPAN_COLOR("blue", "There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?"))
 		else
 			var/s = sanitize(input(user, "Write something", "Newspaper", ""))
 			s = sanitize(s)
 			if (!s)
-				return
-			if (!in_range(src, usr) && src.loc != usr)
-				return
-			src.scribble_page = src.curr_page
-			src.scribble = s
-			src.attack_self(user)
-		return
+				return TRUE
+			if (!in_range(src, usr) && loc != usr)
+				return TRUE
+			scribble_page = curr_page
+			scribble = s
+			attack_self(user)
+		return TRUE
+	return ..()
 
 
 ////////////////////////////////////helper procs

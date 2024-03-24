@@ -37,16 +37,20 @@
 /obj/item/fossil/skull/horned
 	icon_state = "hskull"
 
-/obj/item/fossil/skull/attackby(obj/item/W, mob/user)
+/obj/item/fossil/skull/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W,/obj/item/fossil/bone))
 		if(!user.canUnEquip(W))
-			return
+			FEEDBACK_UNEQUIP_FAILURE(user, W)
+			return TRUE
 		var/mob/M = get_holder_of_type(src, /mob)
 		if(M && !M.unEquip(src))
-			return
+			FEEDBACK_UNEQUIP_FAILURE(M, src)
+			return TRUE
 		var/obj/o = new /obj/skeleton(get_turf(src))
 		user.unEquip(W, o)
 		forceMove(o)
+		return TRUE
+	return ..()
 
 /obj/skeleton
 	name = "Incomplete skeleton"
@@ -63,7 +67,7 @@
 	src.breq = rand(6)+3
 	src.desc = "An incomplete skeleton, looks like it could use [src.breq-src.bnum] more bones."
 
-/obj/skeleton/attackby(obj/item/W, mob/user)
+/obj/skeleton/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W,/obj/item/fossil/bone))
 		if(!bstate && user.unEquip(W, src))
 			bnum++
@@ -80,17 +84,18 @@
 			else
 				src.desc = "Incomplete skeleton, looks like it could use [src.breq-src.bnum] more bones."
 				to_chat(user, "Looks like it could use [src.breq-src.bnum] more bones.")
-		else
-			..()
-	else if(istype(W,/obj/item/pen))
+			return TRUE
+
+	if (istype(W,/obj/item/pen))
 		plaque_contents = sanitize(input("What would you like to write on the plaque:","Skeleton plaque",""))
 		user.visible_message("[user] writes something on the base of [icon2html(src, viewers(get_turf(src)))] [src].","You relabel the plaque on the base of [icon2html(src, user)] [src].")
 		if(src.contents.Find(/obj/item/fossil/skull/horned))
 			src.desc = "A creature made of [length(src.contents)-1] assorted bones and a horned skull. The plaque reads \'[plaque_contents]\'."
 		else
 			src.desc = "A creature made of [length(src.contents)-1] assorted bones and a skull. The plaque reads \'[plaque_contents]\'."
-	else
-		..()
+		return TRUE
+
+	return ..()
 
 //shells and plants do not make skeletons
 /obj/item/fossil/shell

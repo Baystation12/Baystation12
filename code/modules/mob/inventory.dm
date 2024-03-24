@@ -4,7 +4,7 @@
 	var/obj/item/in_slot = get_equipped_item(slot)
 	if (istype(in_slot))
 		if (istype(in_hand))
-			in_slot.attackby(in_hand, src)
+			in_slot.use_tool(in_hand, src)
 		else
 			in_slot.attack_hand(src)
 	else

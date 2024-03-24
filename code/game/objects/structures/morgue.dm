@@ -90,7 +90,7 @@
 /obj/structure/morgue/attack_robot(mob/user)
 	if(Adjacent(user))
 		return attack_hand(user)
-	else return ..()
+	return ..()
 
 
 /obj/structure/morgue/use_tool(obj/item/tool, mob/user, list/click_params)

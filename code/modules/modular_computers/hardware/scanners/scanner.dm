@@ -54,7 +54,7 @@
 
 /obj/item/stock_parts/computer/scanner/proc/do_on_afterattack(mob/user, atom/target, proximity)
 
-/obj/item/stock_parts/computer/scanner/attackby(obj/W, mob/living/user)
+/obj/item/stock_parts/computer/scanner/use_tool(obj/item/W, mob/living/user, list/click_params)
 	do_on_attackby(user, W)
 	// Nanopaste. Repair all damage if present for a single unit.
 	var/obj/item/stack/S = W

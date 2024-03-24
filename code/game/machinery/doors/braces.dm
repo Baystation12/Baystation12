@@ -69,7 +69,7 @@
 	electronics.attack_self(user)
 
 
-/obj/item/airlock_brace/attackby(obj/item/item, mob/living/user)
+/obj/item/airlock_brace/use_tool(obj/item/item, mob/living/user, list/click_params)
 	if (istype(item.GetIdCard(), /obj/item/card/id))
 		if (airlock)
 			update_access()
@@ -85,14 +85,17 @@
 					airlock.update_icon()
 					airlock = null
 					update_icon()
+				return TRUE
 			else
 				to_chat(user, "You swipe \the [item] through \the [src], but it does not react.")
+				return TRUE
 		else
 			attack_self(user)
-	if (user.a_intent == I_HURT)
-		return ..()
+			return TRUE
+
 	if (istype(item, /obj/item/material/twohanded/jack))
 		if (!airlock)
+			to_chat(user, SPAN_WARNING("\The [src] is not attached to an airlock!"))
 			return TRUE
 		user.visible_message(
 			SPAN_ITALIC("\The [user] begins removing \a [src] with \a [item]."),
@@ -109,7 +112,8 @@
 			airlock = null
 			update_icon()
 		return TRUE
-	if (isWelder(item) && user.a_intent != I_HURT)
+
+	if (isWelder(item))
 		if (!health_damaged())
 			to_chat(user, SPAN_NOTICE("\The [src] does not require repairs."))
 			return TRUE

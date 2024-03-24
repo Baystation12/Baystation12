@@ -70,14 +70,14 @@
 	return B
 
 
-/obj/item/reagent_containers/food/drinks/bottle/attackby(obj/item/W, mob/user)
+/obj/item/reagent_containers/food/drinks/bottle/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if (!rag && istype(W, /obj/item/reagent_containers/glass/rag))
 		insert_rag(W, user)
-		return
+		return TRUE
 	if (rag && W.IsFlameSource())
-		rag.attackby(W, user)
-		return
-	..()
+		rag.use_tool(W, user)
+		return TRUE
+	return ..()
 
 
 /obj/item/reagent_containers/food/drinks/bottle/attack_self(mob/user)

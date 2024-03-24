@@ -126,18 +126,18 @@
 		if(length(has_signed))
 			to_chat(user, SPAN_NOTICE("It has been signed by: [english_list(has_signed)]."))
 
-/obj/item/paperwork/attackby(obj/item/W, mob/user)
+/obj/item/paperwork/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/pen))
 		if(user.real_name in has_signed)
 			to_chat(user, SPAN_WARNING("You have already signed \the [src]."))
-			return
+			return TRUE
 		if(!(user.real_name in needs_signed))
 			to_chat(user, SPAN_WARNING("You can't see anywhere on \the [src] for you to sign; it doesn't need your signature."))
-			return
+			return TRUE
 		LAZYADD(has_signed, user.real_name)
 		LAZYREMOVE(needs_signed, user.real_name)
 		user.visible_message(SPAN_NOTICE("\The [user] signs \the [src] with \the [W]."))
 		associated_goal?.update_strings()
 		update_icon()
 		return TRUE
-	. = ..()
+	return ..()

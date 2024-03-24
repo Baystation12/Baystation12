@@ -47,14 +47,14 @@
 
 
 // Bash a rolling pin against a tray like a true knight!
-/obj/item/tray/attackby(obj/item/W, mob/living/user)
-	if(istype(W, /obj/item/material/kitchen/rollingpin) && user.a_intent == I_HURT)
+/obj/item/tray/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if(istype(W, /obj/item/material/kitchen/rollingpin))
 		if(bash_cooldown < world.time)
 			user.visible_message(SPAN_WARNING("[user] bashes [src] with [W]!"))
 			playsound(user.loc, 'sound/effects/shieldbash.ogg', 50, 1)
 			bash_cooldown = world.time + 25
 		return TRUE
-	else if (user.a_intent != I_HURT && !istype(W, /obj/item/projectile) && !istype(W, /obj/item/clothing))
+	if (!istype(W, /obj/item/projectile) && !istype(W, /obj/item/clothing))
 		if (calc_carry() + storage_cost_for_item(W) > max_carry)
 			to_chat(user, SPAN_WARNING("\The [src] can't fit \the [W]!"))
 		else if (!can_add_item(W))
@@ -64,8 +64,8 @@
 			user.drop_item()
 			pickup_item(W)
 		return TRUE
-	else
-		. = ..()
+
+	return ..()
 
 
 // Returns the space an object takes up on the tray. Non-food takes up double!

@@ -64,7 +64,7 @@
 	to_chat(user, SPAN_ITALIC(message))
 
 
-/obj/item/boombox/attackby(obj/item/item, mob/user)
+/obj/item/boombox/use_tool(obj/item/item, mob/living/user, list/click_params)
 	set waitfor = FALSE
 	if(isScrewdriver(item))
 		var/item_loc = item.loc

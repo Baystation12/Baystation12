@@ -8,7 +8,7 @@
 	matter = list(MATERIAL_PLASTIC = 300)
 
 
-/obj/item/serving_bowl/attackby(obj/item/item, mob/living/user)
+/obj/item/serving_bowl/use_tool(obj/item/item, mob/living/user, list/click_params)
 	if (!istype(item, /obj/item/reagent_containers/food/snacks))
 		return ..()
 	if (is_path_in_list(item.type, list(/obj/item/reagent_containers/food/snacks/custombowl, /obj/item/reagent_containers/food/snacks/csandwich)))
@@ -16,7 +16,7 @@
 	var/allowed = isturf(loc) | SHIFTL(src == user.l_hand, 1) | SHIFTL(src == user.r_hand, 2)
 	if (!allowed)
 		to_chat(user, SPAN_WARNING("Put down or hold the bowl first."))
-		return
+		return TRUE
 	var/obj/item/reagent_containers/food/snacks/custombowl/bowl = new (get_turf(src), item)
 	bowl.pixel_x = pixel_x
 	bowl.pixel_y = pixel_y
@@ -26,6 +26,7 @@
 			user.put_in_l_hand(bowl)
 		if (4)
 			user.put_in_r_hand(bowl)
+	return TRUE
 
 
 /obj/item/reagent_containers/food/snacks/custombowl
@@ -71,23 +72,24 @@
 	renamed = TRUE
 
 
-/obj/item/reagent_containers/food/snacks/custombowl/attackby(obj/item/item, mob/living/user)
+/obj/item/reagent_containers/food/snacks/custombowl/use_tool(obj/item/item, mob/living/user, list/click_params)
 	if (!istype(item, /obj/item/reagent_containers/food/snacks))
 		return ..()
 	if (is_path_in_list(item.type, list(/obj/item/reagent_containers/food/snacks/custombowl, /obj/item/reagent_containers/food/snacks/csandwich)))
 		return ..()
 	if (ingredients_left < 1)
 		to_chat(user, SPAN_WARNING("There's no room for any more ingredients in \the [src]."))
-		return
+		return TRUE
 	if (!user.unEquip(item, src))
-		return
+		FEEDBACK_UNEQUIP_FAILURE(user, item)
+		return TRUE
 	user.visible_message(
 		SPAN_ITALIC("\The [user] adds \a [item] to \the [src]."),
 		SPAN_NOTICE("You add \the [item] to \the [src]."),
 		range = 3
 	)
 	UpdateIngredients(item, user)
-
+	return TRUE
 
 /obj/item/reagent_containers/food/snacks/custombowl/proc/UpdateIngredients(obj/item/reagent_containers/food/snacks/snack)
 	snack.reagents.trans_to_obj(src, snack.reagents.total_volume)

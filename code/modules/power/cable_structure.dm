@@ -101,7 +101,6 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/structure/cable/attack_ghost(mob/user)
 	if(user.client && user.client.inquisitive_ghost)
 		examinate(user, src)
-		// following code taken from attackby (multitool)
 		if(powernet && (powernet.avail > 0))
 			to_chat(user, SPAN_WARNING("[get_wattage()] in power network."))
 		else

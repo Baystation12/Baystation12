@@ -702,12 +702,13 @@
 /obj/item/material/chopping_board/bamboo/default_material = MATERIAL_BAMBOO
 
 
-/obj/item/material/chopping_board/attackby(obj/item/item, mob/living/user)
+/obj/item/material/chopping_board/use_tool(obj/item/item, mob/living/user, list/click_params)
 	if (istype(item, /obj/item/reagent_containers/food/snacks))
 		if (istype(item, /obj/item/reagent_containers/food/snacks/variable))
 			to_chat(user, SPAN_WARNING("\The [item] is already combinable."))
 			return TRUE
 		if (!user.unEquip(item, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, item)
 			return TRUE
 		var/obj/item/reagent_containers/food/snacks/source = item
 		var/obj/item/reagent_containers/food/snacks/variable/result = new (get_turf(src))
@@ -725,10 +726,11 @@
 		result.desc = source.desc
 		qdel(source)
 		return TRUE
+
 	return ..()
 
 
-/obj/item/reagent_containers/food/snacks/variable/attackby(obj/item/I, mob/living/user)
+/obj/item/reagent_containers/food/snacks/variable/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if (istype(I, /obj/item/reagent_containers/food/snacks))
 		combine(I, user)
 		return TRUE

@@ -58,13 +58,12 @@
 	spark_system = null
 	return ..()
 
-/obj/item/rcd/attackby(obj/item/W, mob/user)
-
+/obj/item/rcd/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/rcd_ammo))
 		var/obj/item/rcd_ammo/cartridge = W
 		if(stored_matter >= max_stored_matter)
-			to_chat(user, SPAN_NOTICE("The RCD is at maximum capacity."))
-			return
+			to_chat(user, SPAN_WARNING("The RCD is at maximum capacity."))
+			return TRUE
 		var/matter_exchange = min(cartridge.remaining,max_stored_matter - stored_matter)
 		stored_matter += matter_exchange
 		cartridge.remaining -= matter_exchange
@@ -74,7 +73,7 @@
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("The RCD now holds [stored_matter]/[max_stored_matter] matter-units."))
 		update_icon()
-		return
+		return TRUE
 
 	if(isScrewdriver(W))
 		crafting = !crafting
@@ -82,10 +81,9 @@
 			to_chat(user, SPAN_NOTICE("You reassemble the RCD"))
 		else
 			to_chat(user, SPAN_NOTICE("The RCD can now be modified."))
-		src.add_fingerprint(user)
-		return
+		return TRUE
 
-	..()
+	return ..()
 
 /obj/item/rcd/attack_self(mob/user)
 	//Change the mode

@@ -339,22 +339,6 @@
 
 	return ..()
 
-///Eventually should be deleted in favor of use_tool; keeping duplicate until downstream attackbys are replaced.
-/obj/item/storage/attackby(obj/item/W, mob/living/user, click_params)
-	if (SSfabrication.try_craft_with(src, W, user))
-		return TRUE
-
-	if (isrobot(user) && (W == user.get_active_hand()))
-		return //Robots can't store their modules.
-
-	if (!can_be_inserted(W, user))
-		return TRUE
-
-	if (handle_item_insertion(W))
-		return TRUE
-
-	return ..()
-
 /obj/item/storage/attack_hand(mob/user as mob)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user

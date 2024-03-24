@@ -46,17 +46,18 @@
 			C.throw_mode_on()
 
 
-/obj/item/grenade/chem_grenade/attackby(obj/item/W, mob/user)
+/obj/item/grenade/chem_grenade/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W,/obj/item/device/assembly_holder) && (!stage || stage==1) && path != 2)
 		var/obj/item/device/assembly_holder/det = W
 		if(istype(det.a_left,det.a_right.type) || (!isigniter(det.a_left) && !isigniter(det.a_right)))
 			to_chat(user, SPAN_WARNING("Assembly must contain one igniter."))
-			return
+			return TRUE
 		if(!det.secured)
 			to_chat(user, SPAN_WARNING("Assembly must be secured with screwdriver."))
-			return
+			return TRUE
 		if(!user.unEquip(det, src))
-			return
+			FEEDBACK_UNEQUIP_FAILURE(user, det)
+			return TRUE
 		path = 1
 		log_and_message_admins("has attached \a [W] to \the [src].")
 		to_chat(user, SPAN_NOTICE("You add [W] to the metal casing."))
@@ -71,6 +72,8 @@
 		icon_state = initial(icon_state) +"_ass"
 		SetName("unsecured grenade with [length(beakers)] containers[detonator?" and detonator":""]")
 		stage = 1
+		return TRUE
+
 	else if(isScrewdriver(W) && path != 2)
 		if(stage == 1)
 			path = 1
@@ -78,17 +81,18 @@
 				to_chat(user, SPAN_NOTICE("You lock the assembly."))
 				SetName("grenade")
 			else
-//					to_chat(user, SPAN_WARNING("You need to add at least one beaker before locking the assembly."))
 				to_chat(user, SPAN_NOTICE("You lock the empty assembly."))
 				SetName("fake grenade")
 			playsound(loc, 'sound/items/Screwdriver.ogg', 25, -3)
 			icon_state = initial(icon_state) +"_locked"
 			stage = 2
+			return TRUE
+
 		else if(stage == 2)
 			if(active && prob(95))
 				to_chat(user, SPAN_WARNING("You trigger the assembly!"))
 				detonate()
-				return
+				return TRUE
 			else
 				to_chat(user, SPAN_NOTICE("You unlock the assembly."))
 				playsound(loc, 'sound/items/Screwdriver.ogg', 25, -3)
@@ -96,21 +100,28 @@
 				icon_state = initial(icon_state) + (detonator?"_ass":"")
 				stage = 1
 				active = 0
+				return TRUE
+
 	else if(is_type_in_list(W, allowed_containers) && (!stage || stage==1) && path != 2)
 		path = 1
 		if(length(beakers) == 2)
 			to_chat(user, SPAN_WARNING("The grenade can not hold more containers."))
-			return
+			return TRUE
 		else
 			if(W.reagents.total_volume)
 				if(!user.unEquip(W, src))
-					return
+					FEEDBACK_UNEQUIP_FAILURE(user, W)
+					return TRUE
 				to_chat(user, SPAN_NOTICE("You add \the [W] to the assembly."))
 				beakers += W
 				stage = 1
 				SetName("unsecured grenade with [length(beakers)] containers[detonator?" and detonator":""]")
+				return TRUE
 			else
 				to_chat(user, SPAN_WARNING("\The [W] is empty."))
+				return TRUE
+
+	return ..()
 
 
 /obj/item/grenade/chem_grenade/activate(mob/user)

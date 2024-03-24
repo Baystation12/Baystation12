@@ -13,18 +13,20 @@
 	var/enhanced = 0 //has it been enhanced before?
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
-/obj/item/slime_extract/attackby(obj/item/O as obj, mob/user as mob)
+/obj/item/slime_extract/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(istype(O, /obj/item/slimesteroid2))
 		if(enhanced == 1)
 			to_chat(user, SPAN_WARNING(" This extract has already been enhanced!"))
-			return ..()
+			return TRUE
 		if(Uses == 0)
 			to_chat(user, SPAN_WARNING(" You can't enhance a used extract!"))
-			return ..()
+			return TRUE
 		to_chat(user, "You apply the enhancer. It now has triple the amount of uses.")
 		Uses = 3
 		enhanced = 1
 		qdel(O)
+		return TRUE
+	return ..()
 
 /obj/item/slime_extract/New()
 	GLOB.extracted_slime_cores_amount += 1
