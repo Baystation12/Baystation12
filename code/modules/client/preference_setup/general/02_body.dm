@@ -21,6 +21,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	var/list/organ_data
 	var/list/rlimb_data
 	var/disabilities = 0
+	var/list/picked_traits = list()
 
 
 /datum/category_item/player_setup_item/physical/body
@@ -65,6 +66,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.rlimb_data = R.read("rlimb_data")
 	pref.body_markings = R.read("body_markings")
 	pref.body_descriptors = R.read("body_descriptors")
+	pref.picked_traits = R.read("traits")
 
 
 /datum/category_item/player_setup_item/physical/body/save_character(datum/pref_record_writer/W)
@@ -86,6 +88,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	W.write("rlimb_data", pref.rlimb_data)
 	W.write("body_markings", pref.body_markings)
 	W.write("body_descriptors", pref.body_descriptors)
+	W.write("traits", pref.picked_traits)
 
 
 /datum/category_item/player_setup_item/physical/body/sanitize_character()
@@ -114,6 +117,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.disabilities	= sanitize_integer(pref.disabilities, 0, 65535, initial(pref.disabilities))
 	if(!istype(pref.organ_data)) pref.organ_data = list()
 	if(!istype(pref.rlimb_data)) pref.rlimb_data = list()
+	if (!istype(pref.picked_traits)) pref.picked_traits = list()
 	if(!istype(pref.body_markings))
 		pref.body_markings = list()
 	else
@@ -238,6 +242,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		alt_organs += "(No differences from baseline)"
 	. += "<br />[alt_organs.Join(", ")]"
 	. = jointext(., null)
+	. += "<br />[TBTN("add_trait", "Add Trait", "Traits")]"
+	//for (var/name in pref.picked_traits)
 
 
 /datum/category_item/player_setup_item/physical/body/proc/HasAppearanceFlag(datum/species/mob_species, flag)
@@ -636,6 +642,49 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		var/disability_flag = text2num(href_list["disabilities"])
 		pref.disabilities ^= disability_flag
 		return TOPIC_REFRESH_UPDATE_PREVIEW
+
+	else if (href_list["add_trait"])
+		if (!mob_species)
+			return
+		var/list/possible_traits = mob_species.get_allowed_traits()
+		var/picked = input(user, "Select a trait to apply.", "Add Trait") as null | anything in possible_traits
+		var/singleton/trait/selected = possible_traits[picked]
+
+		if (!selected || !istype(selected))
+			return
+		var/list/possible_levels = selected.levels
+		var/selected_level
+		if (length(possible_levels) > 1)
+			selected_level = input(user, "Select the trait's level to apply.", "Select Level") as null | anything in possible_levels
+		else
+			selected_level = possible_levels[1]
+
+		var/additional_data
+		if (length(selected.metaoptions))
+			additional_data = input(user, "[selected.addprompt]", "Select Option") as null | anything in selected.metaoptions
+
+		if(!selected.Validate(selected_level, additional_data))
+			return
+
+		if (!LAZYISIN(pref.picked_traits, selected))
+			for (var/singleton/trait/existing in pref.picked_traits)
+				if (selected in existing.incompatible_traits)
+					return
+
+		if (additional_data)
+			var/list/interim = list()
+			if (!LAZYISIN(pref.picked_traits, selected))
+				LAZYSET(pref.picked_traits, selected, interim)
+
+			var/list/existing_meta_options = pref.picked_traits[selected]
+			if (existing_meta_options[additional_data] == selected_level)
+				return
+			LAZYSET(existing_meta_options, additional_data, selected_level)
+			LAZYSET(pref.picked_traits, selected, existing_meta_options)
+		else
+			LAZYSET(pref.picked_traits, selected, selected_level)
+
+		return TOPIC_REFRESH
 
 	return ..()
 
