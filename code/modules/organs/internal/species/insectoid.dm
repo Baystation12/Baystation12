@@ -19,6 +19,7 @@
 /obj/item/organ/internal/brain/insectoid
 	name = "ganglial junction"
 	icon_state = "brain-distributed"
+	can_use_mmi = FALSE
 
 /obj/item/organ/internal/eyes/insectoid
 	name = "compound ocelli"
