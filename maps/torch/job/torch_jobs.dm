@@ -14,7 +14,7 @@
 		/datum/species/unathi  = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/warden), //Other jobs unavailable via branch restrictions,
 		/datum/species/unathi/yeosa = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/warden),
 		/datum/species/skrell  = list(HUMAN_ONLY_JOBS),
-		/datum/species/machine = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/psychiatrist, /datum/job/bridgeofficer, /datum/job/senior_engineer, /datum/job/warden, /datum/job/qm, /datum/job/senior_scientist),
+		/datum/species/machine = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/psychiatrist, /datum/job/bridgeofficer, /datum/job/senior_engineer, /datum/job/warden, /datum/job/qm, /datum/job/senior_scientist, /datum/job/chief_steward),
 		/datum/species/diona   = list(HUMAN_ONLY_JOBS, /datum/job/officer, /datum/job/liaison, /datum/job/warden, /datum/job/doctor, /datum/job/medical_trainee),	//Other jobs unavailable via branch restrictions,
 	)
 #undef HUMAN_ONLY_JOBS
