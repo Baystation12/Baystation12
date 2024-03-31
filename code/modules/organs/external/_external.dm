@@ -312,10 +312,6 @@
 				return
 		owner.verbs -= /mob/living/carbon/human/proc/undislocate
 
-/obj/item/organ/external/update_health()
-	damage = min(max_damage, (brute_dam + burn_dam))
-	return
-
 
 /obj/item/organ/external/replaced(mob/living/carbon/human/target)
 	..()

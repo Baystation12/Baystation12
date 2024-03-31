@@ -43,9 +43,6 @@ var/global/list/organ_cache = list()
 /obj/item/organ/attack_self(mob/user)
 	return (owner && loc == owner && owner == user)
 
-/obj/item/organ/proc/update_health()
-	return
-
 /obj/item/organ/proc/is_broken()
 	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN))
 
