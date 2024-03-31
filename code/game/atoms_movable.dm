@@ -372,9 +372,10 @@
 		return master.use_tool(tool, user, click_params)
 	return FALSE
 
-/atom/movable/fake_overlay/attackby(obj/item/I, mob/user)
+/atom/movable/fake_overlay/use_tool(obj/item/tool, mob/user, list/click_params)
 	if (master)
-		return master.attackby(I, user)
+		return master.use_tool(tool, user)
+	return ..()
 
 /atom/movable/fake_overlay/attack_hand(mob/user)
 	if (master)

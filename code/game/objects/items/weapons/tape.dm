@@ -71,7 +71,7 @@
 
 		else if (user.zone_sel.selecting == BP_CHEST)
 			if (H.wear_suit && istype(H.wear_suit, /obj/item/clothing/suit/space))
-				H.wear_suit.attackby(src, user)//everything is handled by attackby
+				H.wear_suit.use_tool(src, user)
 			else
 				to_chat(user, SPAN_WARNING("\The [H] isn't wearing a spacesuit for you to reseal."))
 			return TRUE

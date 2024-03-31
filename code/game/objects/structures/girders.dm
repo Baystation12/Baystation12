@@ -255,7 +255,7 @@
 	to_chat(user, SPAN_NOTICE("You begin adding the plating..."))
 
 	if(!do_after(user,4 SECONDS, src, DO_REPAIR_CONSTRUCT) || !S.use(2))
-		return 1 //once we've gotten this far don't call parent attackby()
+		return TRUE
 
 	if(anchored)
 		to_chat(user, SPAN_NOTICE("You added the plating!"))
@@ -289,7 +289,7 @@
 
 	to_chat(user, SPAN_NOTICE("Now reinforcing..."))
 	if (!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT) || !S.use(2))
-		return 1 //don't call parent attackby() past this point
+		return TRUE
 	to_chat(user, SPAN_NOTICE("You added reinforcement!"))
 
 	reinf_material = M

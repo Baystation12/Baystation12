@@ -63,7 +63,7 @@
 	if(T)
 		T.hotspot_expose(700,125)
 
-/obj/item/grenade/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/grenade/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isScrewdriver(W))
 		switch(det_time)
 			if (1)
@@ -78,8 +78,8 @@
 			if (50)
 				det_time = 1
 				to_chat(user, SPAN_NOTICE("You set the [name] for instant detonation."))
-		add_fingerprint(user)
-	..()
+		return TRUE
+	return ..()
 
 /obj/item/grenade/attack_hand()
 	walk(src, null, null)

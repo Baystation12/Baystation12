@@ -31,13 +31,12 @@
 			return FALSE
 	return TRUE
 
-/obj/item/robot_parts/robot_suit/attackby(obj/item/W as obj, mob/user as mob)
-
+/obj/item/robot_parts/robot_suit/use_tool(obj/item/W, mob/living/user, list/click_params)
 	// Uninstall a robotic part.
 	if(isCrowbar(W))
 		if(!length(parts))
 			to_chat(user, SPAN_WARNING("\The [src] has no parts to remove."))
-			return
+			return TRUE
 		var/removing = pick(parts)
 		var/obj/item/robot_parts/part = parts[removing]
 		part.forceMove(get_turf(src))
@@ -45,30 +44,32 @@
 		parts -= removing
 		to_chat(user, SPAN_WARNING("You lever \the [part] off \the [src]."))
 		update_icon()
+		return TRUE
 
 	// Install a robotic part.
 	else if (istype(W, /obj/item/robot_parts))
 		var/obj/item/robot_parts/part = W
 		if(!required_parts[part.bp_tag] || !istype(W, required_parts[part.bp_tag]))
 			to_chat(user, SPAN_WARNING("\The [src] is not compatible with \the [W]."))
-			return
+			return TRUE
 		if(parts[part.bp_tag])
 			to_chat(user, SPAN_WARNING("\The [src] already has \a [W] installed."))
-			return
+			return TRUE
 		if(part.can_install(user) && user.unEquip(W, src))
 			parts[part.bp_tag] = part
 			update_icon()
+		return TRUE
 
 	// Install an MMI/brain.
 	else if(istype(W, /obj/item/device/mmi) || istype(W, /obj/item/organ/internal/posibrain))
 
 		if(!istype(loc,/turf))
 			to_chat(user, SPAN_WARNING("You can't put \the [W] in without the frame being on the ground."))
-			return
+			return TRUE
 
 		if(!check_completion())
 			to_chat(user, SPAN_WARNING("The frame is not ready for the central processor to be installed."))
-			return
+			return TRUE
 
 		var/mob/living/carbon/brain/B
 		if(istype(W, /obj/item/device/mmi))
@@ -80,15 +81,15 @@
 
 		if(!B)
 			to_chat(user, SPAN_WARNING("Sticking an empty [W.name] into the frame would sort of defeat the purpose."))
-			return
+			return TRUE
 
 		if(jobban_isbanned(B, "Robot"))
 			to_chat(user, SPAN_WARNING("\The [W] does not seem to fit."))
-			return
+			return TRUE
 
 		if(B.stat == DEAD)
 			to_chat(user, SPAN_WARNING("Sticking a dead [W.name] into the frame would sort of defeat the purpose."))
-			return
+			return TRUE
 
 		var/ghost_can_reenter = 0
 		if(B.mind)
@@ -101,13 +102,14 @@
 				ghost_can_reenter = 1
 		if(!ghost_can_reenter)
 			to_chat(user, SPAN_WARNING("\The [W] is completely unresponsive; there's no point."))
-			return
+			return TRUE
 
 		if(!user.unEquip(W))
-			return
+			FEEDBACK_UNEQUIP_FAILURE(user, W)
+			return TRUE
 		var/mob/living/silicon/robot/O = new product(get_turf(loc))
 		if(!O)
-			return
+			return TRUE
 
 		O.mmi = W
 		O.set_invisibility(0)
@@ -136,13 +138,15 @@
 		callHook("borgify", list(O))
 		O.Namepick()
 		qdel(src)
+		return TRUE
 
 	else if(istype(W, /obj/item/pen))
 		var/t = sanitizeSafe(input(user, "Enter new robot name", src.name, src.created_name), MAX_NAME_LEN)
 		if(t && (in_range(src, user) || loc == user))
 			created_name = t
-	else
-		..()
+		return TRUE
+
+	return ..()
 
 /obj/item/robot_parts/robot_suit/Destroy()
 	parts.Cut()
