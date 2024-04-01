@@ -1,4 +1,0 @@
-author: emmanuelbassil
-changes:
-  - {bugfix: Fixes lighting matches on matchboxes.}
-delete-after: true
