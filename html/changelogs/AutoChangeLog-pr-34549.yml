@@ -1,4 +1,0 @@
-author: SierraKomodo
-changes:
-  - {bugfix: Gyrotron beams now cause damage.}
-delete-after: true

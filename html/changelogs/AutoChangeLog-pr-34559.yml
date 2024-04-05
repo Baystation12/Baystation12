@@ -1,4 +1,0 @@
-author: emmanuelbassil
-changes:
-  - {bugfix: Emergency Shield generators can be fastened to the floor again}
-delete-after: true
