@@ -478,7 +478,7 @@
 
 //All in one suit
 /obj/item/clothing/suit/space/rig/zero
-	icon_state = "null_rig"
+	icon_state = "null_rig_sealed"
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_IPC)
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi'
