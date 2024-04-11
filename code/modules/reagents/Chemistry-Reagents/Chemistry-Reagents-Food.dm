@@ -82,6 +82,10 @@
 	taste_description = "egg"
 	color = "#ffffaa"
 
+	condiment_icon_state = "eggyolk"
+	condiment_name = "egg yolk carton"
+	condiment_desc = "A carton full of egg yolk."
+
 //vegetamarian alternative that is safe for skrell to ingest//rewired it from its intended nutriment/protein/egg/softtofu because it would not actually work, going with plan B, more recipes.
 
 /datum/reagent/nutriment/softtofu
@@ -98,6 +102,10 @@
 	color = "#ffff00"
 	sugar_amount = 1
 
+	condiment_icon_state = "honey"
+	condiment_name = "honey"
+	condiment_desc = "A jar of sweet and viscous honey."
+
 /datum/reagent/nutriment/flour
 	name = "flour"
 	description = "This is what you rub all over yourself to pretend to be a ghost."
@@ -105,6 +113,10 @@
 	reagent_state = SOLID
 	nutriment_factor = 1
 	color = "#ffffff"
+
+	condiment_icon_state = "flour"
+	condiment_name = "flour sack"
+	condiment_desc = "A big bag of flour. Good for baking!"
 
 /datum/reagent/nutriment/flour/touch_turf(turf/simulated/T)
 	if(istype(T))
@@ -123,6 +135,10 @@
 	color = "#ffd592"
 	protein_amount = 0.4
 
+	condiment_icon_state = "batter"
+	condiment_name = "batter mix"
+	condiment_desc = "A gooey mixture of eggs and flour in a vat. Delicious!"
+
 /datum/reagent/nutriment/batter/touch_turf(turf/simulated/T)
 	if(!istype(T, /turf/space))
 		new /obj/decal/cleanable/pie_smudge(T)
@@ -133,10 +149,12 @@
 
 /datum/reagent/nutriment/batter/cakebatter
 	name = "Cake Batter"
-	description = "A gooey mixture of eggs, flour and sugar, a important precursor to cake!"
+	description = "A gooey mixture of eggs, flour and sugar, an important precursor to cake!"
 	taste_description = "sweetness"
 	color = "#ffe992"
 	protein_amount = 0.3
+
+	condiment_name = "cake batter mix"
 
 /datum/reagent/nutriment/coffee
 	name = "Coffee Powder"
@@ -146,9 +164,15 @@
 	nutriment_factor = 1
 	color = "#482000"
 
+	condiment_icon_state = "coffee"
+	condiment_name = "coffee powder"
+
 /datum/reagent/nutriment/coffee/instant
 	name = "Instant Coffee Powder"
 	description = "A bitter powder made by processing coffee beans."
+
+	condiment_name = "instant coffee powder"
+	condiment_desc = "A sack of instant coffee powder, now 50% more caffeinated!"
 
 /datum/reagent/nutriment/tea
 	name = "Tea Powder"
@@ -158,17 +182,27 @@
 	nutriment_factor = 1
 	color = "#101000"
 
+	condiment_icon_state = "tea"
+	condiment_name = "tea powder"
+
 /datum/reagent/nutriment/tea/instant
 	name = "Instant Tea Powder"
 
+	condiment_name = "instant tea powder"
+	condiment_desc = "A sack of instant tea powder, now 50% less caffeinated!"
+
 /datum/reagent/nutriment/coco
-	name = "Coco Powder"
-	description = "A fatty, bitter paste made from coco beans."
+	name = "Cocoa Powder"
+	description = "A fatty, bitter paste made from cocoa beans."
 	taste_description = "bitterness"
 	taste_mult = 1.3
 	reagent_state = SOLID
 	nutriment_factor = 5
 	color = "#302000"
+
+	condiment_icon_state = "cocoapowder"
+	condiment_name = "cocoa powder"
+	condiment_desc = "A can full of chocolately powder. Not very tasty by itself."
 
 /datum/reagent/nutriment/instantjuice
 	name = "Juice Powder"
@@ -207,7 +241,11 @@
 	taste_mult = 1.1
 	reagent_state = LIQUID
 	nutriment_factor = 2
+
 	color = "#792300"
+	condiment_icon_state = "soysauce"
+	condiment_name = "soy sauce"
+	condiment_desc = "A dark, salty, savoury flavoring."
 
 /datum/reagent/nutriment/ketchup
 	name = "Ketchup"
@@ -217,6 +255,10 @@
 	nutriment_factor = 5
 	color = "#731008"
 
+	condiment_icon_state = "ketchup"
+	condiment_name = "ketchup"
+	condiment_desc = "Tomato, but more liquid, stronger, better."
+
 /datum/reagent/nutriment/barbecue
 	name = "Barbecue Sauce"
 	description = "Barbecue sauce for barbecues and long shifts."
@@ -224,6 +266,10 @@
 	reagent_state = LIQUID
 	nutriment_factor = 5
 	color = "#4f330f"
+
+	condiment_icon_state = "barbecue"
+	condiment_name = "barbecue sauce"
+	condiment_desc = "A bottle of barbecue sauce. It's labeled 'sweet and spicy'."
 
 /datum/reagent/nutriment/garlicsauce
 	name = "Garlic Sauce"
@@ -233,6 +279,10 @@
 	nutriment_factor = 4
 	color = "#d8c045"
 
+	condiment_icon_state = "garlic_sauce"
+	condiment_name = "garlic sauce"
+	condiment_desc = "Perfect for repelling vampires and/or potential dates."
+
 /datum/reagent/nutriment/rice
 	name = "Rice"
 	description = "Enjoy the great taste of nothing."
@@ -241,6 +291,10 @@
 	reagent_state = SOLID
 	nutriment_factor = 1
 	color = "#ffffff"
+
+	condiment_icon_state = "rice"
+	condiment_name = "rice sack"
+	condiment_desc = "A big bag of rice for cooking."
 
 /datum/reagent/nutriment/rice/chazuke
 	name = "Chazuke"
@@ -260,6 +314,10 @@
 	nutriment_factor = 1
 	color = "#801e28"
 
+	condiment_icon_state = "jellyjar"
+	condiment_name = "cherry jelly jar"
+	condiment_desc = "Great with peanut butter!"
+
 /datum/reagent/nutriment/cornoil
 	name = "Corn Oil"
 	description = "An oil derived from various types of corn."
@@ -267,7 +325,11 @@
 	taste_mult = 0.1
 	reagent_state = LIQUID
 	nutriment_factor = 20
-	color = "#302000"
+	color = "#c9bb1e"
+
+	condiment_icon_state = "cooking_oil"
+	condiment_name = "corn oil"
+	condiment_desc = "A delicious oil used in cooking. Made from corn."
 
 /datum/reagent/nutriment/cornoil/touch_turf(turf/simulated/T)
 	if(!istype(T))
@@ -291,12 +353,19 @@
 	nutriment_factor = 1
 	color = "#ff00ff"
 
+	condiment_icon_state = "sprinklesbottle"
+	condiment_name = "bottle of sprinkles"
+
 /datum/reagent/nutriment/mint
 	name = "Mint"
 	description = "Also known as Mentha."
 	taste_description = "sweet mint"
 	reagent_state = LIQUID
 	color = "#07aab2"
+
+	condiment_icon_state = "mint_syrup"
+	condiment_name = "mint essential oil"
+	condiment_desc = "A small bottle of the essential oil of some kind of mint plant."
 
 /datum/reagent/lipozine // The anti-nutriment.
 	name = "Lipozine"
@@ -321,6 +390,10 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 0.11
 
+	condiment_icon_state = "saltshaker"
+	condiment_name = "salt shaker"
+	condiment_desc = "Salt. From space oceans, presumably."
+
 /datum/reagent/blackpepper
 	name = "Black Pepper"
 	description = "A powder ground from peppercorns. *AAAACHOOO*"
@@ -328,6 +401,10 @@
 	reagent_state = SOLID
 	color = "#000000"
 	value = 0.1
+
+	condiment_icon_state = "peppermill"
+	condiment_name = "pepper shaker"
+	condiment_desc = "Often used to flavor food or make people sneeze."
 
 /datum/reagent/enzyme
 	name = "Universal Enzyme"
@@ -339,6 +416,10 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 0.2
 
+	condiment_icon_state = "enzyme"
+	condiment_name = "universal enzyme"
+	condiment_desc = "Used in cooking various dishes."
+
 /datum/reagent/frostoil
 	name = "Chilly Oil"
 	description = "An oil harvested from a mutant form of chili peppers, it has a chilling effect on the body."
@@ -347,6 +428,10 @@
 	reagent_state = LIQUID
 	color = "#07aab2"
 	value = 0.2
+
+	condiment_icon_state = "coldsauce"
+	condiment_name = "cold sauce"
+	condiment_desc = "Leaves the tongue numb in its passage."
 
 /datum/reagent/frostoil/affect_blood(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
@@ -370,6 +455,10 @@
 	var/discomfort_message = "<span class='danger'>Your insides feel uncomfortably hot!</span>"
 	var/slime_temp_adj = 10
 	value = 0.2
+
+	condiment_icon_state= "hotsauce"
+	condiment_name = "hot sauce"
+	condiment_desc = "You can almost TASTE the stomach ulcers now!"
 
 /datum/reagent/capsaicin/affect_blood(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
@@ -501,3 +590,53 @@
 	color = "#efede8"
 	taste_mult = 2
 	protein_amount = 0.7
+
+	condiment_icon_state = "mayonnaise"
+	condiment_name = "mayonnaise"
+	condiment_desc = "Mayonnaise, used for centuries to make things edible."
+
+/datum/reagent/nutriment/groundpeanuts
+	name = "Ground Peanuts"
+	description = "Roughly ground peanuts."
+	taste_description = "peanut"
+	reagent_state = SOLID
+	color = "#ad7937"
+	taste_mult = 2
+
+	condiment_icon_state = "peanut"
+	condiment_name = "sack of ground peanuts"
+	condiment_desc = "A sack full of crunchy ground peanuts."
+
+/datum/reagent/nutriment/peanutbutter
+	name = "Peanut Butter"
+	description = "Clearer the better spread, exception for those who are deathly allergic."
+	taste_description = "peanut butter"
+	reagent_state = LIQUID
+	color = "#ad7937"
+	taste_mult = 2
+	sugar_amount = 0.1
+
+	condiment_icon_state = "pbjar"
+	condiment_name = "peanut butter jar"
+	condiment_desc = "Great with jelly!"
+
+/datum/reagent/nutriment/almondmeal
+	name = "Almond Meal"
+	description = "Finely ground almonds."
+	taste_description = "nuts"
+	reagent_state = SOLID
+	color = "#c9a275"
+	taste_mult = 2
+
+/datum/reagent/nutriment/choconutspread
+	name = "Choco-Nut Spread"
+	description = "Creamy chocolate spread with a nutty undertone."
+	taste_description = "nutty chocolate"
+	reagent_state = LIQUID
+	color = "#2c1000"
+	taste_mult = 2
+	sugar_amount = 0.5
+
+	condiment_name = "NTella jar"
+	condiment_desc = "Originally called 'Entella', it was rebranded after being bought by NanoTrasen. Some humans insist this nutty chocolate spread might be the best thing they've ever created."
+	condiment_icon_state = "NTellajar"

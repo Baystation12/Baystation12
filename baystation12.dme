@@ -2942,7 +2942,6 @@
 #include "code\modules\reagents\reagent_containers\food\snacks.dm"
 #include "code\modules\reagents\reagent_containers\food\sushi.dm"
 #include "code\modules\reagents\reagent_containers\food\drinks\bottle.dm"
-#include "code\modules\reagents\reagent_containers\food\drinks\jar.dm"
 #include "code\modules\reagents\reagent_containers\food\snacks\bugmeat.dm"
 #include "code\modules\reagents\reagent_containers\food\snacks\cheese.dm"
 #include "code\modules\reagents\reagent_containers\food\snacks\donkpocket.dm"
