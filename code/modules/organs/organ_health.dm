@@ -1,3 +1,8 @@
+/obj/item/organ/health_max = 30
+/obj/item/organ/health_resistances = DAMAGE_RESIST_BIOLOGICAL
+/obj/item/organ/damage_hitsound = 'sound/weapons/bladeslice.ogg'
+
+
 // Legacy damage properties
 /// Current damage to the organ
 /obj/item/organ/var/damage = 0
