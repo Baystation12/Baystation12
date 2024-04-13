@@ -140,7 +140,6 @@
 	accessories = list(/obj/item/clothing/accessory/glassesmod/vision/welding)
 
 /obj/item/clothing/glasses/meson/prescription
-	name = "meson goggles"
 	desc = "Used for seeing walls, floors, and stuff through anything. This set has corrective lenses."
 	prescription = 5
 
@@ -150,6 +149,10 @@
 	icon_state = "meson_avi_on"
 	off_state = "avi_off"
 	item_state = "meson_avi_on"
+
+/obj/item/clothing/glasses/meson/aviators/prescription
+	prescription = 5
+	desc = "A meson HUD integrated into a pair of aviator sunglasses. These ones have eyesight-correcting lenses."
 
 /obj/item/clothing/glasses/science
 	name = "science goggles"
