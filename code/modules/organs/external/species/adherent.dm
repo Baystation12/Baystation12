@@ -8,7 +8,6 @@
 	parent_organ =            BP_CHEST
 	dislocated =              -1
 	max_damage =              50
-	min_broken_damage =       25
 	arterial_bleed_severity = 0
 	encased = "ceramic hull"
 	force_icon = 'icons/mob/human_races/species/adherent/body.dmi'
@@ -21,7 +20,6 @@
 	arterial_bleed_severity = 0
 	dislocated =              -1
 	max_damage =              50
-	min_broken_damage =       25
 	encased = "ceramic hull"
 	force_icon = 'icons/mob/human_races/species/adherent/body.dmi'
 	status = ORGAN_ROBOTIC
@@ -35,7 +33,6 @@
 	arterial_bleed_severity = 0
 	dislocated =              -1
 	max_damage =              50
-	min_broken_damage =       25
 	cavity_max_w_class =      ITEM_SIZE_NORMAL // Apparently their brains change w_class to this.
 	encased = "ceramic hull"
 	force_icon = 'icons/mob/human_races/species/adherent/body.dmi'
@@ -49,7 +46,6 @@
 	arterial_bleed_severity = 0
 	dislocated =              -1
 	max_damage =              20
-	min_broken_damage =       10
 	force_icon = 'icons/mob/human_races/species/adherent/body.dmi'
 	status = ORGAN_ROBOTIC
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
@@ -61,7 +57,6 @@
 	arterial_bleed_severity = 0
 	dislocated =              -1
 	max_damage =              20
-	min_broken_damage =       10
 	force_icon = 'icons/mob/human_races/species/adherent/body.dmi'
 	status = ORGAN_ROBOTIC
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
@@ -73,7 +68,6 @@
 	arterial_bleed_severity = 0
 	dislocated =              -1
 	max_damage =              20
-	min_broken_damage =       10
 	force_icon = 'icons/mob/human_races/species/adherent/body.dmi'
 	status = ORGAN_ROBOTIC
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
@@ -85,7 +79,6 @@
 	arterial_bleed_severity = 0
 	dislocated =              -1
 	max_damage =              20
-	min_broken_damage =       10
 	force_icon = 'icons/mob/human_races/species/adherent/body.dmi'
 	status = ORGAN_ROBOTIC
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK
@@ -100,7 +93,6 @@
 	arterial_bleed_severity = 0
 	dislocated =              -1
 	max_damage =              20
-	min_broken_damage =       10
 	force_icon = 'icons/mob/human_races/species/adherent/body.dmi'
 	status = ORGAN_ROBOTIC
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_CAN_BREAK

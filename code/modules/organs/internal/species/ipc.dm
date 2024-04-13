@@ -16,7 +16,6 @@
 	attack_verb = list("attacked", "slapped", "whacked")
 	max_damage = 90
 	min_bruised_damage = 30
-	min_broken_damage = 60
 	relative_size = 60
 
 	var/mob/living/silicon/sil_brainmob/brainmob = null

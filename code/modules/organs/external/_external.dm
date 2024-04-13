@@ -4,7 +4,6 @@
 
 /obj/item/organ/external
 	name = "external"
-	min_broken_damage = 30
 	dir = SOUTH
 	organ_tag = "limb"
 	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
