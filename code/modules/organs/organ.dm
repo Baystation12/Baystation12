@@ -20,14 +20,7 @@ var/global/list/organ_cache = list()
 	var/datum/dna/dna                 // Original DNA.
 	var/datum/species/species         // Original species.
 
-	// Damage vars.
-	var/damage = 0                    // Current damage to the organ
-	var/min_broken_damage = 30        // Damage before becoming broken
-	var/max_damage = 30               // Damage cap
 	var/rejecting                     // Is this organ already being rejected?
-
-	var/death_time
-
 	// Bioprinter stats
 	var/can_be_printed = TRUE
 	var/print_cost
@@ -43,19 +36,11 @@ var/global/list/organ_cache = list()
 /obj/item/organ/attack_self(mob/user)
 	return (owner && loc == owner && owner == user)
 
-/obj/item/organ/proc/is_broken()
-	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN))
-
 //Second argument may be a dna datum; if null will be set to holder's dna.
 /obj/item/organ/New(mob/living/carbon/holder, datum/dna/given_dna)
 	..(holder)
 	if(!istype(given_dna))
 		given_dna = null
-
-	if(max_damage)
-		min_broken_damage = floor(max_damage / 2)
-	else
-		max_damage = min_broken_damage * 2
 
 	if(istype(holder))
 		owner = holder
@@ -73,8 +58,6 @@ var/global/list/organ_cache = list()
 	create_reagents(5 * (w_class-1)**2)
 	reagents.add_reagent(/datum/reagent/nutriment/protein, reagents.maximum_volume)
 
-	update_icon()
-
 /obj/item/organ/proc/set_dna(datum/dna/new_dna)
 	if(new_dna)
 		dna = new_dna.Clone()
@@ -85,14 +68,6 @@ var/global/list/organ_cache = list()
 		species = all_species[dna.species]
 		if (!species)
 			crash_with("Invalid DNA species. Expected a valid species name as string, was: [log_info_line(dna.species)]")
-
-/obj/item/organ/proc/die()
-	damage = max_damage
-	status |= ORGAN_DEAD
-	STOP_PROCESSING(SSobj, src)
-	death_time = world.time
-	if(owner && vital)
-		owner.death()
 
 /obj/item/organ/Process()
 
@@ -146,14 +121,6 @@ var/global/list/organ_cache = list()
 /obj/item/organ/examine(mob/user)
 	. = ..(user)
 	show_decay_status(user)
-
-/obj/item/organ/proc/show_decay_status(mob/user)
-	if(BP_IS_ROBOTIC(src))
-		if(status & ORGAN_DEAD)
-			to_chat(user, SPAN_NOTICE("\The [src] looks completely spent."))
-	else
-		if(status & ORGAN_DEAD)
-			to_chat(user, SPAN_NOTICE("The decay has set into \the [src]."))
 
 /obj/item/organ/proc/handle_germ_effects()
 	//** Handle the effects of infections
@@ -246,13 +213,6 @@ var/global/list/organ_cache = list()
 		germ_level -= 2
 	germ_level = max(0, germ_level)
 
-/obj/item/organ/proc/take_general_damage(amount, silent = FALSE)
-	CRASH("Not Implemented")
-
-/obj/item/organ/proc/heal_damage(amount)
-	if (can_recover())
-		damage = clamp(damage - round(amount, 0.1), 0, max_damage)
-
 
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
 	status = ORGAN_ROBOTIC
@@ -326,9 +286,6 @@ var/global/list/organ_cache = list()
 
 /obj/item/organ/proc/is_usable()
 	return !(status & (ORGAN_CUT_AWAY|ORGAN_MUTATED|ORGAN_DEAD))
-
-/obj/item/organ/proc/can_recover()
-	return (max_damage > 0) && !(status & ORGAN_DEAD) || death_time >= world.time - ORGAN_RECOVERY_THRESHOLD
 
 /obj/item/organ/proc/get_scan_results(tag = FALSE)
 	. = list()
