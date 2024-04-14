@@ -1,5 +1,0 @@
-author: Nl208
-changes:
-  - {bugfix: Unathi now process glucose properly again - no more starving to death
-      on the operating table!}
-delete-after: true
