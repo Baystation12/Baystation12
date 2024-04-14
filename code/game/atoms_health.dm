@@ -4,8 +4,8 @@
 /// Maximum health for simple health processing. Use `get_max_health()` or `set_max_health()` to reference/modify.
 /atom/var/health_max
 
-/// Boolean. Whether or not the atom is dead. Toggled by death state changes in standardized health and provided as a simple way to check for death without additional proc call overhead from `is_alive()`.
-/atom/var/health_dead
+/// Bitflag (Any of `HEALTH_STATUS_*`). Various health-related status flags for the atom. See `code\__defines\health.dm` for details.
+/atom/var/health_status = EMPTY_BITFIELD
 
 /**
  * LAZY List of damage type resistance or weakness multipliers, decimal form. Only applied to health reduction. Use `set_damage_resistance()`, `remove_damage_resistance()`, and `get_damage_resistance()` to reference/modify.
@@ -48,9 +48,11 @@
 
 /**
  * Whether or not the atom is currently dead.
+ *
+ * Returns boolean.
  */
 /atom/proc/health_dead()
-	return health_dead
+	return HAS_FLAGS(health_status, HEALTH_STATUS_DEAD)
 
 
 /**
@@ -111,15 +113,18 @@
 		return FALSE
 	health_mod = round(health_mod)
 	var/prior_health = get_current_health()
-	var/death_state = health_dead
+	var/death_state = health_dead()
 	health_current = round(clamp(health_current + health_mod, 0, get_max_health()))
 	post_health_change(health_mod, prior_health, damage_type)
 	var/new_death_state = health_current > 0 ? FALSE : TRUE
 	if (death_state == new_death_state)
 		return FALSE
-	health_dead = new_death_state
+	if (new_death_state)
+		SET_FLAGS(health_status, HEALTH_STATUS_DEAD)
+	else
+		CLEAR_FLAGS(health_status, HEALTH_STATUS_DEAD)
 	if (!skip_death_state_change)
-		if (health_dead)
+		if (new_death_state)
 			on_death()
 		else
 			on_revive()
@@ -292,4 +297,4 @@
 	target_atom.health_max = source_atom.health_max
 	target_atom.health_resistances = source_atom.health_resistances
 	target_atom.health_min_damage = source_atom.health_min_damage
-	target_atom.health_dead = source_atom.health_dead
+	target_atom.health_status = source_atom.health_status

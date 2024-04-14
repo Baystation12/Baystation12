@@ -41,7 +41,7 @@
 		if(!src.allowed(user))
 			to_chat(user, SPAN_WARNING("\The [src] blinks red, notifying you of your incorrect access."))
 			return
-		if(!src.health_dead)
+		if(!src.health_dead())
 			user.visible_message(
 				SPAN_NOTICE("\The [user] begins undoing the locks and latches on \the [src]..."),
 				SPAN_NOTICE("You begin undoing the locks and latches on \the [src]...")
@@ -71,7 +71,7 @@
 		if(!src.allowed(user))
 			to_chat(user, SPAN_WARNING("\The [src] blinks red, notifying you of your incorrect access."))
 			return
-		if(!src.health_dead)
+		if(!src.health_dead())
 			user.visible_message(
 				SPAN_NOTICE("\The [user] begins undoing the locks and latches on \the [src]..."),
 				SPAN_NOTICE("You begin undoing the locks and latches on \the [src]...")
@@ -95,7 +95,7 @@
 	if (attached_paper)
 		to_chat(usr, SPAN_NOTICE("There's a paper clipped on the side."))
 		attached_paper.examine(user, distance)
-	if (health_dead)
+	if (health_dead())
 		to_chat(usr, SPAN_DANGER("The borosilicate panels are completely shattered."))
 
 /obj/machinery/anomaly_container/proc/contain(obj/machinery/artifact)
@@ -146,7 +146,7 @@
 
 /obj/machinery/anomaly_container/emp_act(severity)
 	SHOULD_CALL_PARENT(FALSE)
-	if(health_dead)
+	if(health_dead())
 		return
 	if(contained)
 		visible_message(SPAN_DANGER("\The [src]'s latches break loose, freeing the contents!"))
@@ -174,7 +174,7 @@
 		return TRUE
 
 	if (istype(P, /obj/item/stack/material))
-		if (!health_dead)
+		if (!health_dead())
 			to_chat(user, SPAN_NOTICE("\The [src] doesn't require repairs."))
 			return TRUE
 		if (contained)
@@ -211,7 +211,7 @@
 		return TRUE
 
 	if (isWrench(P))
-		if (!health_dead)
+		if (!health_dead())
 			return TRUE
 
 		user.visible_message(
@@ -234,7 +234,7 @@
 
 /obj/machinery/anomaly_container/on_update_icon()
 	ClearOverlays()
-	if(health_dead)
+	if(health_dead())
 		icon_state = "anomaly_container_broken"
 	if(attached_paper)
 		AddOverlays("anomaly_container_paper")

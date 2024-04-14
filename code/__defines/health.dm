@@ -85,3 +85,8 @@
 #define DAMAGE_FLAG_DISPERSED               FLAG(7)
 /// Toxin damage that should be mitigated by biological (i.e. sterile) armor
 #define DAMAGE_FLAG_BIO                     FLAG(8)
+
+
+/// Health Status flags for `/atom/var/health_status`.
+/// The atom is currently dead.
+#define HEALTH_STATUS_DEAD FLAG(0)

@@ -25,7 +25,7 @@
 	ClearOverlays()
 	if(fireaxe)
 		AddOverlays(image(icon, "fireaxe_item"))
-	if(health_dead)
+	if(health_dead())
 		AddOverlays(image(icon, "fireaxe_window_broken"))
 	else if(!open)
 		AddOverlays(image(icon, "fireaxe_window"))
@@ -93,7 +93,7 @@
 		var/obj/item/stack/material/stack = tool
 		if (stack.material.name != MATERIAL_GLASS)
 			return ..()
-		if (!health_dead && !health_damaged())
+		if (!health_dead() && !health_damaged())
 			USE_FEEDBACK_FAILURE("\The [src] doesn't need repair.")
 			return TRUE
 		if (!stack.reinf_material)
@@ -114,7 +114,7 @@
 		if (open)
 			USE_FEEDBACK_FAILURE("\The [src] must be closed before you can lock it.")
 			return TRUE
-		if (health_dead)
+		if (health_dead())
 			USE_FEEDBACK_FAILURE("\The [src] is shattered and the lock doesn't function.")
 			return TRUE
 		user.visible_message(
@@ -136,7 +136,7 @@
 
 
 /obj/structure/fireaxecabinet/proc/toggle_open(mob/user)
-	if(health_dead)
+	if(health_dead())
 		open = 1
 		unlocked = 1
 	else

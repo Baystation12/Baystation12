@@ -145,7 +145,7 @@
 	predicates = list(/proc/is_strict_bool_predicate)
 
 /singleton/vv_set_handler/health_dead_handler/handle_set_var(atom/target, variable, var_value, client)
-	if (var_value == target.health_dead)
+	if (var_value == target.health_dead())
 		return
 	switch (var_value)
 		if (TRUE)
