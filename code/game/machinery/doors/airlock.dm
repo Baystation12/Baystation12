@@ -16,6 +16,8 @@
 	power_channel = ENVIRON
 	interact_offline = FALSE
 
+	health_flags = HEALTH_FLAG_BREAKABLE
+
 	explosion_resistance = 10
 	/// Boolean. Whether or not the AI control mechanism is disabled.
 	var/ai_control_disabled = FALSE
@@ -644,6 +646,28 @@ About the new airlock wires panel:
 			icon_state = "blank"
 
 	set_airlock_overlays(state)
+
+
+/obj/machinery/door/airlock/on_broken()
+	if (health_dead())
+		return // Anything here is redundant since it's going to qdel anyway
+	set_broken(TRUE, MACHINE_BROKEN_HEALTH)
+	health_min_damage = floor(initial(health_min_damage) * 3.5) // The frame is beefier than the control panel.
+	update_icon()
+
+
+/obj/machinery/door/airlock/on_unbroken()
+	set_broken(FALSE, MACHINE_BROKEN_HEALTH)
+	health_min_damage = initial(health_min_damage)
+	update_icon()
+
+
+/obj/machinery/door/airlock/on_death()
+	visible_message(SPAN_DANGER("\The [src] completely breaks apart!"))
+	var/obj/structure/broken_door/broken_door = new(loc)
+	transfer_fingerprints_to(broken_door)
+	broken_door.dir = dir
+	qdel_self()
 
 
 /obj/machinery/door/airlock/proc/set_airlock_overlays(state)
@@ -1363,6 +1387,8 @@ About the new airlock wires panel:
 		to_chat(user, "The bolt cover has been cut open.")
 	if (lock_cut_state == BOLTS_CUT)
 		to_chat(user, "The door bolts have been cut.")
+	if (health_broken())
+		to_chat(user, SPAN_WARNING("The control panel is broken open."))
 	if(brace)
 		to_chat(user, "\The [brace] is installed on \the [src], preventing it from opening.")
 		brace.examine_damage_state(user)

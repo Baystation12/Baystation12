@@ -797,6 +797,7 @@
 #include "code\game\machinery\doors\blast_door.dm"
 #include "code\game\machinery\doors\braces.dm"
 #include "code\game\machinery\doors\brigdoors.dm"
+#include "code\game\machinery\doors\broken_door.dm"
 #include "code\game\machinery\doors\checkForMultipleDoors.dm"
 #include "code\game\machinery\doors\door.dm"
 #include "code\game\machinery\doors\firedoor.dm"
