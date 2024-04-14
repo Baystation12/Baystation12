@@ -7,6 +7,9 @@
 /// Bitflag (Any of `HEALTH_STATUS_*`). Various health-related status flags for the atom. See `code\__defines\health.dm` for details.
 /atom/var/health_status = EMPTY_BITFIELD
 
+/// Bitflag (Any of `HEALTH_FLAG_*`). Various health-related config flags for the atom. See `code\__defines\health.dm` for details.
+/atom/var/health_flags = EMPTY_BITFIELD
+
 /**
  * LAZY List of damage type resistance or weakness multipliers, decimal form. Only applied to health reduction. Use `set_damage_resistance()`, `remove_damage_resistance()`, and `get_damage_resistance()` to reference/modify.
  *
@@ -53,6 +56,15 @@
  */
 /atom/proc/health_dead()
 	return HAS_FLAGS(health_status, HEALTH_STATUS_DEAD)
+
+
+/**
+ * Whether or not the atom is currently broken. Does not consider death as broken, to minimize on recursive proc calls.
+ *
+ * Returns boolean.
+ */
+/atom/proc/health_broken()
+	return HAS_FLAGS(health_status, HEALTH_STATUS_BROKEN)
 
 
 /**
@@ -114,8 +126,24 @@
 	health_mod = round(health_mod)
 	var/prior_health = get_current_health()
 	var/death_state = health_dead()
+	var/broken_state = health_broken()
+
 	health_current = round(clamp(health_current + health_mod, 0, get_max_health()))
 	post_health_change(health_mod, prior_health, damage_type)
+
+	if (HAS_FLAGS(health_flags, HEALTH_FLAG_BREAKABLE))
+		var/new_broken_state = health_current > floor(health_max / 2) ? FALSE : TRUE
+		if (new_broken_state != broken_state)
+			if (new_broken_state)
+				SET_FLAGS(health_status, HEALTH_STATUS_BROKEN)
+			else
+				CLEAR_FLAGS(health_status, HEALTH_STATUS_BROKEN)
+			if (!skip_death_state_change)
+				if (new_broken_state)
+					on_broken()
+				else
+					on_unbroken()
+
 	var/new_death_state = health_current > 0 ? FALSE : TRUE
 	if (death_state == new_death_state)
 		return FALSE
@@ -195,6 +223,14 @@
 
 /// Proc called when the atom transitions from dead to alive.
 /atom/proc/on_revive()
+	return
+
+/// Proc called when the atom transitions from unbroken to broken. Only used if `HEALTH_FLAG_BREAKABLE` is set.
+/atom/proc/on_broken()
+	return
+
+/// Proc called when the atom transitions from broken to unbroken. Only used if `HEALTH_FLAG_BREAKABLE` is set.
+/atom/proc/on_unbroken()
 	return
 
 /**
