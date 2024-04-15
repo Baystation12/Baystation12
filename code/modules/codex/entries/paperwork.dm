@@ -33,7 +33,7 @@
 \[fleetlogo\] - Inserts the logo of the SCG Fleet.<br>
 \[sfplogo\] - Inserts the logo of the Sol Federal Police.<br>
 \[falogo\] - Inserts the logo of the Frontier Alliance.<br>
-\[zhlogo\] - Inserts the logo of the Frontier Alliance.<br><br>
+\[zhlogo\] - Inserts the logo of Zeng-Hu Pharmaceuticals.<br><br>
 <b>Digital exclusive commands (NanoWord, emails, reports, text files, etc):</b><br>
 \[pre\] - \[/pre\] : Adds preformatted text, forcing the text to be fixed width.<br>
 \[fontred\] - \[/font\] : Makes the text red.<br>
