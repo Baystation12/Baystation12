@@ -287,9 +287,9 @@
 	var/tag_x
 	var/package_type = "parcel"
 
-/obj/item/smallDelivery/Initialize(mapload, obj/item/parcel, wrap_type)
+/obj/item/smallDelivery/Initialize(mapload, obj/item/parcel, wrap_type = "parcel")
 	. = ..()
-	if (!parcel || !isitem(parcel) || !wrap_type)
+	if (!parcel || !isitem(parcel))
 		return INITIALIZE_HINT_QDEL
 
 	wrapped = parcel
