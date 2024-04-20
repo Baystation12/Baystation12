@@ -77,13 +77,32 @@
 	economic_power = 1
 
 
-/singleton/cultural_info/culture/human/plutonian
-	name = CULTURE_HUMAN_PLUTO
-	description = "You are from Pluto, one of many denizens of this cruel and unforgiving world. For centuries Pluto has been in a slow state of decay and decline, resulting in \
-	much of the planet's infrastructure being unstable or outright falling apart. This, coupled with rampant corruption and the large influence of criminal organisations across much of \
-	the planet has led to the people of Pluto having something of a seedy reputation, its citizens being viewed with disrepute. The people themselves, however, are usually \
-	just happy to get off the rock and to healthier locales. Unfortunately, despite the efforts of the wider SCG, many Plutonians tend to maintain criminal ties, even offworld."
+/singleton/cultural_info/culture/human/kuiper_insider
+	name = CULTURE_HUMAN_KUIPERI
+	description = "You are from one of many habitations of the Kuiper belt. The eventual economic and social decay of Pluto, and its surroundings, has resulted in much of the zone's infrastructure \
+	being unstable or outright falling apart. Coupled with rampant corruption and the growing mold of organised (and unorganised) crime across much of the region has left the people of the \
+	Kuiper belt with something of a seedy reputation, with citizens often being viewed with disrepute. The people themselves, too, may not be unanimous at all times with a core community centered around \
+	the descendents of the original colonists. While having a stronger foothold due to their lengthy ties to the SEZ's society and economy, they are often less diverse than the 'Outsiders'. \
+	More often than not being able to trace their lineage directly back to Earth. This can often cause caustic, dissonant ideals, as compared to the rest of their Solar comrades. \
+	While some may monotonously belong to the zone's stagnant class, other 'Insiders' may have roots to corporate backgrounds, owing to the initial colonisation and exploitation of Kuiper."
 	economic_power = 0.8
+	secondary_langs = list (LANGUAGE_HUMAN_EURO,
+		LANGUAGE_HUMAN_CHINESE,
+		LANGUAGE_HUMAN_ARABIC,
+		LANGUAGE_HUMAN_INDIAN,
+		LANGUAGE_HUMAN_IBERIAN,
+		LANGUAGE_HUMAN_RUSSIAN,
+		LANGUAGE_SPACER,
+		LANGUAGE_GUTTER,
+		LANGUAGE_SIGN)
+
+/singleton/cultural_info/culture/human/kuiper_outsider
+	name = CULTURE_HUMAN_KUIPERO
+	description = "You are from one of the many habitations of the Kuiper belt. While you were not a part of the initial collapse of the Zone, the effects of it are still felt all the same. \
+	The stagnancy and neglect of the Zone has brought with it many opportunities for cheaper housing, and has made for an excellent haven for refugees looking for work. \
+	Outsiders tend to be a more diverse demographic as compared to the Insiders, with many of them being descendents of employees on long-term tenures, or of families looking for cheap residence. \
+	Most Outsiders tend to have a similar outlook of their home as that of the Insiders - with the Expeditionary Corps and Fleet being lucrative and comparitively easy ways to source a life outside the Kuiper belt."
+	economic_power = 0.7
 	secondary_langs = list (LANGUAGE_HUMAN_EURO,
 		LANGUAGE_HUMAN_CHINESE,
 		LANGUAGE_HUMAN_ARABIC,
@@ -181,6 +200,14 @@
 	the uncharted jungles of Pirx Prime are often considered backwater in terms of technology, education, and customs. Their existence is shaped by the warm air of the Basking Tree rainforest that \
 	dominates the green planet, and the myriad of exotic life found in its freshwater system."
 	economic_power = 0.7
+
+/singleton/cultural_info/culture/human/magnitka
+	name = CULTURE_HUMAN_MAGNITKA
+	description = "Magnitka often gives birth to rough-hewn, sturdy citizens with its austere political and environmental climate, and many are often well-sought for the \
+	independent (and government) economic and production sectors of the two larger human nations. While it is difficult to acquire residency for a Magnitkan in Solar space due to the hazy political environment, \
+	those who have been a part of the volunteer military force have no chance at all. Employees with Magnitkan blood may belong to the planet's Spacer culture, often at the lower rung of the social ladder - or the more \
+	well connected, upper rung, with outsourcing and in-house job opportunities varying in quality and quantity for both."
+	economic_power = 0.8
 
 /singleton/cultural_info/culture/human/spacer
 	name = CULTURE_HUMAN_SPACER
