@@ -184,6 +184,9 @@ var/global/list/limb_icon_cache = list()
 		if(!limb_icon_cache[cache_key])
 			var/icon/I = icon(species.get_icobase(owner), "[icon_name]_[body_hair]")
 			I.Blend(rgb(h_col[1],h_col[2],h_col[3]), ICON_ADD)
+// [SIERRA-ADD] - RESOMI - BUGFIX FOR UPSTREAM
+			limb_icon_cache[cache_key] = I
+// [/SIERRA-ADD]
 		mob_icon.Blend(limb_icon_cache[cache_key], ICON_OVERLAY)
 
 	//Fix leg layering here
