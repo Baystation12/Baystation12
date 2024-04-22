@@ -407,6 +407,14 @@
 		'html/images/foundlogo.png',
 		'html/images/ccalogo.png',
 		'html/images/sierralogo.png',
+		'html/images/saarelogo.png',
+		'html/images/pcrclogo.png',
+		'html/images/zpcilogo.png',
+		'html/images/heglogo.png',
+		'html/images/convlogo.png',
+		'html/images/leaguelogo.png',
+		'html/images/ouerelogo.png',
+		'html/images/terstenlogo.png',
 		// [/SIERRA-ADD]
 		)
 	addtimer(new Callback(src, .proc/after_send_resources), 1 SECOND)
