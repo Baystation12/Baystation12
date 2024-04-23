@@ -1,8 +1,0 @@
-author: UEDHighCommand
-changes:
-  - {imageadd: 'Добавлены логотипы ЧВК SAARE ([saarelogo]), PCRC ([pcrclogo]), ZPCI
-      ([zpcilogo])'}
-  - {imageadd: 'Добавлена символика фракций унати - Гегемонии ([hegemonylogo]), Конвента
-      ([conventlogo]), Лиги ([leaguelogo]), Оуэра ([ouerelogo]), Терстенских кланов
-      ([terstenlogo])'}
-delete-after: true
