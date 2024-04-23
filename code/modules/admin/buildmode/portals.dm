@@ -1,5 +1,5 @@
 /datum/build_mode/portals
-	name = "Portals"
+	name = "Teleportals (Wormhole)"
 	icon_state = "buildmode12"
 	var/turf/entrance = null
 	var/turf/exit = null
