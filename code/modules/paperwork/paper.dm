@@ -222,34 +222,58 @@
 /obj/item/paper/attack_ai(mob/living/silicon/ai/user)
 	show_content(user)
 
-/obj/item/paper/use_before(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	. = FALSE
-	if (!istype(M))
-		return FALSE
-	if (user.zone_sel.selecting == BP_EYES)
-		user.visible_message(SPAN_NOTICE("You show the paper to [M]. "), \
-			SPAN_NOTICE(" [user] holds up a paper and shows it to [M]. "))
-		examinate(M, src)
-		return TRUE
 
-	if (user.zone_sel.selecting == BP_MOUTH) // lipstick wiping
-		if (ishuman(M))
-			var/mob/living/carbon/human/H = M
-			if (H == user)
-				to_chat(user, SPAN_NOTICE("You wipe off the lipstick with [src]."))
-				H.makeup_style = null
-				H.update_body()
-				return TRUE
-			else
-				user.visible_message(SPAN_WARNING("[user] begins to wipe [H]'s lipstick off with \the [src]."), \
-								 	 SPAN_NOTICE("You begin to wipe off [H]'s lipstick."))
-				if (!do_after(user, 2 SECONDS, H, (DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) & ~DO_BOTH_CAN_TURN))
-					return TRUE
-				user.visible_message(SPAN_NOTICE("[user] wipes [H]'s lipstick off with \the [src]."), \
-									 SPAN_NOTICE("You wipe off [H]'s lipstick."))
-				H.makeup_style = null
-				H.update_body()
-				return TRUE
+/obj/item/paper/use_before(atom/target, mob/living/user)
+	if (!isliving(target))
+		return FALSE
+	var/mob/living/carbon/human/human = target
+	var/zone = user.zone_sel.selecting
+	if (zone == BP_EYES)
+		var/action = "looks at \a [initial(name)]"
+		var/action_self = "look at \the [src]"
+		if (user != target)
+			action = "shows \a [initial(name)] to \the [target]"
+			action_self = "show \a [initial(name)] to \the [target]"
+		user.visible_message(
+			SPAN_ITALIC("\The [user] [action]."),
+			SPAN_ITALIC("You [action_self].")
+		)
+		if (human.client)
+			examinate(target, src)
+		return TRUE
+	if (!istype(human))
+		return FALSE
+	if (zone != BP_MOUTH && zone != BP_HEAD)
+		return FALSE
+	var/obj/item/organ/external/head/head = human.organs_by_name[BP_HEAD]
+	if (!istype(head))
+		to_chat(user, SPAN_WARNING("\The [target] has no head!"))
+		return TRUE
+	var/target_name = "their"
+	var/target_name_self = "your"
+	if (user != target)
+		target_name = "[target]'s"
+		target_name_self = target_name
+	var/part_name = "head"
+	if (zone == BP_MOUTH)
+		part_name = "mouth"
+	user.visible_message(
+		SPAN_ITALIC("\The [user] starts wiping [target_name] [part_name] with \a [initial(name)]."),
+		SPAN_ITALIC("You start to wipe [target_name_self] [part_name] with \the [src].")
+	)
+	if (!do_after(user, 2 SECONDS, target, DO_EQUIP & ~DO_BOTH_CAN_TURN))
+		return TRUE
+	user.visible_message(
+		SPAN_NOTICE("\The [user] finishes cleaning [target_name] [part_name]."),
+		SPAN_NOTICE("You finish cleaning [target_name_self] [part_name]."),
+	)
+	if (zone == BP_MOUTH)
+		human.makeup_style = null
+		human.update_body()
+	else
+		head.forehead_graffiti = null
+	return TRUE
+
 
 /obj/item/paper/proc/addtofield(id, text, links = 0)
 	var/locid = 0

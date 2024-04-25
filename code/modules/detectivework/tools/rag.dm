@@ -133,7 +133,7 @@
 		M.IgniteMob()
 		return TRUE
 	else if (reagents.total_volume)
-		if (iscarbon(target) && user.a_intent == I_HELP && flag == BP_HEAD)
+		if (iscarbon(target) && user.a_intent == I_HELP && user.zone_sel.selecting == BP_HEAD)
 			var/mob/living/carbon/C = target
 			var/obj/item/organ/external/head/H = C.organs_by_name[BP_HEAD]
 			if (istype(H) && H.forehead_graffiti)
