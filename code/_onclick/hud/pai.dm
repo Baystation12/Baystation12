@@ -22,6 +22,16 @@
 	using.SetName("Toggle Light")
 	adding += using
 
+	//Intent
+	using = new /obj/screen()
+	using.SetName("act_intent")
+	using.set_dir(SOUTHWEST)
+	using.icon = 'icons/mob/screen1_robot.dmi'
+	using.icon_state = mymob.a_intent
+	using.screen_loc = ui_acti
+	adding += using
+	action_intent = using
+
 	mymob.client.screen = list()
 	mymob.client.screen += adding
 	inventory_shown = 0
