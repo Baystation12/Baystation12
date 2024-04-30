@@ -212,8 +212,11 @@
 				Fire(atom, user, pointblank = TRUE)
 		return TRUE
 	if (user.a_intent == I_HURT && !user.isEquipped(atom)) //point blank shooting
-		Fire(atom, user, pointblank = TRUE)
-		return TRUE
+		if (safety())
+			return ..()
+		else
+			Fire(atom, user, pointblank = TRUE)
+			return TRUE
 	return ..()
 
 
