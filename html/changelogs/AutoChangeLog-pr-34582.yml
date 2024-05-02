@@ -1,0 +1,5 @@
+author: Mucker
+changes:
+  - {rscadd: "Added the resync button to the protolathe, circuit printer and deconstructor
+      tabs when they aren't connected."}
+delete-after: true
