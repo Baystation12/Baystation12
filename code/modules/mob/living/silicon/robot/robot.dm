@@ -872,6 +872,7 @@
 	return req_access
 
 /mob/living/silicon/robot/on_update_icon()
+	. = ..()
 	ClearOverlays()
 	if(stat == CONSCIOUS)
 		var/eye_icon_state = "eyes-[module_sprites[icontype]]"

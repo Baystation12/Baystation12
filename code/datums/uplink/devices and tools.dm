@@ -141,30 +141,37 @@
 /datum/uplink_item/item/tools/thermal
 	name = "Thermal Imaging Glasses (Goggles)"
 	desc = "A pair of meson goggles that have been modified to instead show synthetics or living creatures, through thermal imaging."
-	item_cost = 24
+	item_cost = 16
 	path = /obj/item/clothing/glasses/thermal/syndi
-	antag_roles = list(MODE_TRAITOR)
+	antag_roles = list(MODE_MERCENARY, MODE_TRAITOR)
 
 /datum/uplink_item/item/tools/thermal_avi
 	name = "Thermal Imaging Glasses (Aviators)"
 	desc = "A pair of aviator sunglasses that have been modified to instead show synthetics or living creatures, through thermal imaging."
-	item_cost = 24
+	item_cost = 16
 	path = /obj/item/clothing/glasses/thermal/syndi/aviators
-	antag_roles = list(MODE_TRAITOR)
+	antag_roles = list(MODE_MERCENARY, MODE_TRAITOR)
 
 /datum/uplink_item/item/tools/thermal_goggles
 	name = "Helmet-Attached Thermal Sights"
 	desc = "A set of thermal sights that can attach to combat or voidsuit helmets. Range is limited, along with the color palette, and it will be obvious what you are wearing."
-	item_cost = 12
+	item_cost = 8
 	path = /obj/item/clothing/head/helmet/nvgmount/thermal
-	antag_roles = list(MODE_TRAITOR)
+	antag_roles = list(MODE_MERCENARY, MODE_TRAITOR)
 
 /datum/uplink_item/item/tools/night_goggles
 	name = "Helmet-Attached Light-Enhancing Sights"
 	desc = "A set of light-enhancing sights for seeing in the dark. They can attach to combat or voidsuit helmets. Range is slightly limited, along with your perceptible range of colors. It will be obvious what you are wearing."
 	item_cost = 12
 	path = /obj/item/clothing/head/helmet/nvgmount/nvg
-	antag_roles = list(MODE_MERCENARY, MODE_TRAITOR) //don't give mercs extra thermals but NVGs are okay
+	antag_roles = list(MODE_MERCENARY, MODE_TRAITOR)
+
+/datum/uplink_item/item/tools/life_scanner
+	name = "Lifesigns tracker"
+	desc = "A device that uses a more powerful but less precise version of the medical HUD to track living creatures through solid materials. Unfortunately, it is limited in range and doesn't give any information about the creature's health status."
+	item_cost = 24
+	path = /obj/item/device/life_scanner
+	antag_roles = list(MODE_TRAITOR)
 
 /datum/uplink_item/item/tools/flashdark
 	name = "Flashdark"

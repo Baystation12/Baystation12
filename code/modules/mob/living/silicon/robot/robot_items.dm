@@ -111,6 +111,7 @@
 		activate_strobe()
 
 /obj/item/party_light/on_update_icon()
+	. = ..()
 	if (activated)
 		icon_state = "partylight-on"
 		set_light(7, 1)

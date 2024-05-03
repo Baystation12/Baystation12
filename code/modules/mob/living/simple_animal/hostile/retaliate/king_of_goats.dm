@@ -220,6 +220,7 @@
 	visible_message(SPAN_CLASS("cultannounce", "\The [src]' wounds close with a flash, and when he emerges, he's even larger than before!"))
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/on_update_icon()
+	. = ..()
 	SetTransform(scale = phase3 ? 1.5 : 1.25)
 	if (phase3)
 		icon_state = "king_goat3"

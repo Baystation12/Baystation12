@@ -6,14 +6,14 @@
 	item_state = "glasses"
 	action_button_name = "Toggle Goggles"
 	origin_tech = list(TECH_MAGNET = 3)
+	vision_flags = SEE_INFRA
 	toggleable = TRUE
-	vision_flags = SEE_MOBS
-	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	electric = TRUE
 
 /obj/item/clothing/glasses/thermal/Initialize()
 	. = ..()
 	overlay = GLOB.global_hud.thermal
+	renderer = new /atom/movable/renderer/thermals
 
 /obj/item/clothing/glasses/thermal/syndi	//These are now a traitor item, concealed as mesons.	-Pete
 	name = "optical meson scanner"

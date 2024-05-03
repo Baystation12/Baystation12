@@ -318,6 +318,7 @@
 
 
 /obj/item/gripper/on_update_icon()
+	. = ..()
 	underlays.Cut()
 	SetName(initial(name))
 	if (wrapped)

@@ -5,6 +5,7 @@
 	var/load = 0				// the current load on the powernet, increased by each machine at processing
 	var/newavail = 0			// what available power was gathered last tick, then becomes...
 	var/avail = 0				//...the current available power in the powernet
+	var/old_wattage
 	var/viewload = 0			// the load as it appears on the power console (gradually updated)
 	var/number = 0				// Unused //TODEL
 

@@ -30,11 +30,15 @@
 	. = ..(gibbed, deathmessage, show_dead_message)
 	if(.)
 		stop_aiming(no_message=1)
+	if(thermal_image)
+		thermal_image.process_appearance()
 
 /mob/living/UpdateLyingBuckledAndVerbStatus()
 	..()
 	if(lying)
 		stop_aiming(no_message=1)
+
+
 
 /mob/living/Weaken(amount)
 	stop_aiming(no_message=1)

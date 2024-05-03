@@ -13,6 +13,7 @@
  * /obj/item/rig_module/device/paperdispenser
  * /obj/item/rig_module/device/pen
  * /obj/item/rig_module/device/stamp
+ * /obj/item/rig_module/device/
  */
 
 /obj/item/rig_module/device
@@ -569,3 +570,25 @@
 
 			else
 				deactivate()
+
+/obj/item/rig_module/device/life_scanner
+	name = "biotracker module"
+	desc = "An integrated biotracker for viewing life signatures through solid materials."
+	icon = 'icons/obj/tools/life_scanner.dmi'
+	icon_state = "motion-0"
+	interface_name = "mounted biotracker"
+	interface_desc = "Displays life signatures, even through solid materials."
+	origin_tech = list(TECH_BIO = 5)
+	device = /obj/item/device/life_scanner
+	selectable = 0
+	toggleable = 1
+
+/obj/item/rig_module/device/life_scanner/activate()
+	if(istype(device, /obj/item/device/life_scanner))
+		var/obj/item/device/life_scanner/biotracker = device
+		biotracker.set_active(TRUE)
+
+/obj/item/rig_module/device/life_scanner/deactivate()
+	if(istype(device, /obj/item/device/life_scanner))
+		var/obj/item/device/life_scanner/biotracker = device
+		biotracker.set_active(FALSE)

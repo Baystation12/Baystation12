@@ -28,6 +28,7 @@
 	var/render_target_name = TRUE
 
 	var/mob/owner = null
+	var/temporary = FALSE //temporary renderers aren't given on login and are instead temporarily granted by other things
 
 
 /atom/movable/renderer/Destroy()
@@ -95,9 +96,10 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 			continue
 		renderer = new renderer (null, src)
 		renderers[renderer] = renderer.plane // (renderer = plane) format for visual debugging
-		if (renderer.relay)
-			my_client.screen += renderer.relay
-		my_client.screen += renderer
+		if(!(renderer.temporary)) //this one needs to be skipped if it is temporary
+			if (renderer.relay)
+				my_client.screen += renderer.relay
+			my_client.screen += renderer
 
 	for (var/atom/movable/renderer/zrenderer as anything in GLOB.zmimic_renderers)
 		if (zrenderer.relay)
@@ -134,6 +136,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 	plane = BLACKNESS_PLANE
 	blend_mode = BLEND_MULTIPLY
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
+	temporary = FALSE
 
 /atom/movable/renderer/space
 	name = "Space"
@@ -350,4 +353,26 @@ GLOBAL_LIST_EMPTY(zmimic_renderers)
 	filters += filter(
 		type = "color",
 		color = GLOB.em_mask_matrix
+	)
+
+//horrible thermals code ahead
+
+/atom/movable/renderer/thermals
+	name = "Thermal Layer"
+	group = RENDER_GROUP_SIGHTS
+	plane = THERMALS_PLANE
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
+	render_target_name = TEMPERATURE_TARGET
+	temporary = TRUE
+	color = list(
+		1, 0, 0,
+		1, 0, 0,
+		1, 0, 0
+	)
+
+/atom/movable/renderer/thermals/Initialize(mapload, mob/owner)
+	. = ..()
+	filters += filter(
+		type = "blur",
+		size = 1
 	)

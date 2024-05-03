@@ -195,3 +195,6 @@
 	var/pronouns = null
 
 	var/list/additional_vision_handlers = list() //Basically a list of atoms from which additional vision data is retrieved
+
+	var/obj/effect/visionoverlay/thermal/thermal_image //Essentially an image of the mob that can be seen by thermal imaging, e.g. thermal sights
+	var/obj/effect/visionoverlay/wallhax/lifesigns //Big dot that shows when a mob is alive

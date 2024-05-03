@@ -32,6 +32,8 @@ By design, d1 is the smallest direction and d2 is the highest
 	layer = EXPOSED_WIRE_LAYER
 	color = COLOR_MAROON
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CAN_BE_PAINTED
+	var/obj/effect/visionoverlay/thermal/thermal_image
+	var/warmth = 293 //how hot is this cable supposed to be?
 
 	var/d1 = 0
 	var/d2 = 1
@@ -60,6 +62,9 @@ By design, d1 is the smallest direction and d2 is the highest
 	GLOB.cable_list += src
 	if (_color)
 		color = _color
+	thermal_image = new /obj/effect/visionoverlay/thermal
+	var/self = src
+	thermal_image.linkup(self)
 
 
 /obj/structure/cable/drain_power(drain_check, surge, amount = 0)
@@ -450,3 +455,7 @@ By design, d1 is the smallest direction and d2 is the highest
 				P.disconnect_from_network() //remove from current network
 
 	powernet = null // And finally null the powernet var.
+
+// Used by thermal effects. Probabaly not that useful elsewhere
+/obj/structure/cable/get_warmth()
+	return warmth

@@ -156,6 +156,7 @@
 	return 1
 
 /mob/living/bot/mulebot/on_update_icon()
+	. = ..()
 	if(open)
 		icon_state = "mulebot-hatch"
 		return

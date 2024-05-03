@@ -22,6 +22,7 @@
 	initial_modules = list(
 		/obj/item/rig_module/mounted/energy/lcannon,
 		/obj/item/rig_module/vision/thermal,
+		/obj/item/rig_module/device/life_scanner,
 		/obj/item/rig_module/grenade_launcher,
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/power_sink,
@@ -54,6 +55,7 @@
 		/obj/item/rig_module/datajack,
 		/obj/item/rig_module/self_destruct,
 		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/device/life_scanner,
 		/obj/item/rig_module/maneuvering_jets
 	)
 

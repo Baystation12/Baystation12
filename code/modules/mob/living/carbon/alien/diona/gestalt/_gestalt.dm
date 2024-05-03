@@ -28,6 +28,7 @@
 	. = ..(mapload)
 
 /obj/structure/diona_gestalt/on_update_icon()
+	. = ..()
 	SetOverlays(eyes_overlay)
 	if (length(nymphs))
 		SetTransform(scale = clamp(length(nymphs) * 0.1, 1, 2))

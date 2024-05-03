@@ -1045,3 +1045,7 @@
 /atom/proc/clear_bulletholes()
 	for(var/obj/overlay/bmark/bullet_mark in src)
 		qdel(bullet_mark)
+
+//this is for thermal imaging, anything that gets called with this should have its own special definition
+/atom/proc/get_warmth()
+	return //if this gets called without proper definition, it should runtime because you're not supposed to do this.

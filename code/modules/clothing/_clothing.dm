@@ -63,13 +63,11 @@
 /obj/item/clothing/proc/update_clothing_icon()
 	return
 
-
-// Updates the vision of the mob wearing the clothing item, if any
+// Updates the vision of the mob wearing the item.
 /obj/item/clothing/proc/update_vision()
 	if(isliving(src.loc))
 		var/mob/living/L = src.loc
 		L.handle_vision()
-
 
 // Checked when equipped, returns true when the wearing mob's vision should be updated
 /obj/item/clothing/proc/needs_vision_update()

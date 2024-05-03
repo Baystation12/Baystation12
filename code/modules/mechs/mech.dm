@@ -14,6 +14,7 @@
 	mob_size =     MOB_LARGE
 	mob_push_flags = ALLMOBS
 	mob_flags = MOB_FLAG_UNPINNABLE
+	var/running_temp_gain = 6 //the amount it tries to heat up by per tick while running
 
 	meat_type = null
 	meat_amount = 0
@@ -87,6 +88,9 @@
 
 /mob/living/exosuit/is_flooded(lying_mob, absolute)
 	. = (body && body.pilot_coverage >= 100 && hatch_closed) ? FALSE : ..()
+
+/mob/living/exosuit/isSynthetic()
+	return TRUE
 
 /mob/living/exosuit/Initialize(mapload, obj/structure/heavy_vehicle_frame/source_frame)
 	. = ..()

@@ -38,6 +38,7 @@ Pipelines + Other Objects -> Pipe network
 
 	var/pipe_class = PIPE_CLASS_OTHER //If somehow something isn't set properly, handle it as something with zero connections. This will prevent runtimes.
 	var/rotate_class = PIPE_ROTATE_STANDARD
+	var/obj/effect/visionoverlay/thermal/thermal_image
 
 /obj/machinery/atmospherics/Initialize()
 	if(!icon_manager)
@@ -51,6 +52,9 @@ Pipelines + Other Objects -> Pipe network
 		pipe_color = null
 
 	set_dir(dir) // Does full dir init.
+	thermal_image = new /obj/effect/visionoverlay/thermal
+	var/self = src
+	thermal_image.linkup(self)
 	. = ..()
 
 /obj/machinery/atmospherics/proc/atmos_init()
@@ -104,6 +108,8 @@ Pipelines + Other Objects -> Pipe network
 	last_power_draw = 0
 
 	build_network()
+
+
 
 /obj/machinery/atmospherics/proc/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 	// Check to see if should be added to network. Add self if so and adjust variables appropriately.
@@ -165,3 +171,8 @@ Pipelines + Other Objects -> Pipe network
 	var/turf/T = get_turf(src)
 	if(T)
 		level = (!T.is_plating() ? ATOM_LEVEL_OVER_TILE : ATOM_LEVEL_UNDER_TILE)
+
+/// Used by thermal effects. Probably not much use elsewhere.
+/obj/machinery/atmospherics/get_warmth()
+	var/datum/gas_mixture/contents = return_air()
+	return contents.temperature

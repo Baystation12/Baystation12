@@ -164,12 +164,12 @@ Please contact me on #coderbus IRC. ~Carn x
 
 	var/list/visible_overlays
 	if(is_cloaked())
-		icon = 'icons/mob/human.dmi'
-		icon_state = "blank"
-		visible_overlays = list(overlays_standing[HO_R_HAND_LAYER], overlays_standing[HO_L_HAND_LAYER])
+		alpha = 25
+		visible_overlays = overlays_standing
 	else
 		icon = stand_icon
 		icon_state = null
+		alpha = 255
 		visible_overlays = overlays_standing
 
 	for(var/i = 1 to LAZYLEN(visible_overlays))
@@ -641,8 +641,6 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_inv_r_hand(update_icons=1)
 	if(r_hand)
 		var/image/standing = r_hand.get_mob_overlay(src,slot_r_hand_str)
-		if(standing)
-			standing.appearance_flags |= RESET_ALPHA
 		overlays_standing[HO_R_HAND_LAYER] = standing
 
 		if (handcuffed) drop_r_hand() //this should be moved out of icon code
@@ -655,8 +653,6 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_inv_l_hand(update_icons=1)
 	if(l_hand)
 		var/image/standing = l_hand.get_mob_overlay(src,slot_l_hand_str)
-		if(standing)
-			standing.appearance_flags |= RESET_ALPHA
 		overlays_standing[HO_L_HAND_LAYER] = standing
 
 		if (handcuffed) drop_l_hand() //This probably should not be here

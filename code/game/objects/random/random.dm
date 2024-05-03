@@ -843,6 +843,7 @@
 				/obj/item/clothing/glasses/hud/security/prot/sunglasses = 3,
 				/obj/item/clothing/glasses/hud/security/prot/aviators = 1,
 				/obj/item/clothing/glasses/tacgoggles = 1,
+				/obj/item/clothing/glasses/thermal = 1,
 				/obj/item/clothing/glasses/ballistic/security = 1,
 				/obj/item/clothing/glasses/ballistic = 2,
 				/obj/item/clothing/glasses/ballistic/prescription = 1,
@@ -932,7 +933,8 @@
 				/obj/item/clothing/accessory/storage/holster/armpit = 1,
 				/obj/item/clothing/accessory/kneepads = 3,
 				/obj/item/clothing/accessory/stethoscope = 2,
-				/obj/item/clothing/accessory/glassesmod/nvg = 1
+				/obj/item/clothing/accessory/glassesmod/nvg = 1,
+				/obj/item/clothing/accessory/glassesmod/thermal = 1,
 				)
 
 GLOBAL_LIST_INIT(random_backpacks, list(
@@ -1054,7 +1056,7 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/clothing/mask/gas/vox = 8,
 				/obj/item/clothing/mask/gas/syndicate = 10,
 				/obj/item/clothing/glasses/night = 3,
-				/obj/item/clothing/glasses/thermal = 1,
+				/obj/item/clothing/glasses/thermal = 2,
 				/obj/item/clothing/glasses/welding/superior = 7,
 				/obj/item/clothing/head/collectable/petehat = 4,
 				/obj/item/clothing/suit/storage/vest/merc = 3,
@@ -1090,7 +1092,8 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/circular_saw = 7,
 				/obj/item/scalpel/basic = 7,
 				/obj/item/melee/baton/loaded = 9,
-				/obj/item/device/radio/headset/syndicate = 6)
+				/obj/item/device/radio/headset/syndicate = 6,
+				/obj/item/device/life_scanner = 1)
 
 /obj/random/voidhelmet
 	name = "Random Voidsuit Helmet"

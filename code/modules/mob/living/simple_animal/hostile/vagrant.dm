@@ -103,6 +103,7 @@
 		return
 
 /mob/living/simple_animal/hostile/vagrant/on_update_icon()
+	. = ..()
 	if(cloaked) //It's fun time
 		alpha = 75
 		set_light(0)

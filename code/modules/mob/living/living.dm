@@ -6,6 +6,9 @@
 		add_to_living_mob_list()
 
 	selected_image = image(icon('icons/misc/buildmode.dmi'), loc = src, icon_state = "ai_sel")
+	thermal_image = new /obj/effect/visionoverlay/thermal(src.loc)
+	thermal_image.linkup(virtual_mob)
+	update_icon()
 
 /mob/living/examine(mob/user, distance, is_adjacent, infix, suffix)
 	. = ..()
@@ -806,10 +809,6 @@ default behaviour is:
 	else
 		..()
 
-/mob/living/update_icons()
-	if(auras)
-		AddOverlays(auras)
-
 /mob/living/proc/add_aura(obj/aura/aura)
 	LAZYDISTINCTADD(auras,aura)
 	update_icons()
@@ -916,3 +915,16 @@ default behaviour is:
 
 /mob/living/proc/audible_emote(act_desc)
 	custom_emote(2, act_desc)
+
+/mob/living/on_update_icon()
+	if(auras)
+		AddOverlays(auras)
+	if (thermal_image)
+		thermal_image.process_appearance()
+
+
+
+/mob/living/UpdateAppearance(list/UI)
+
+
+	. = ..()

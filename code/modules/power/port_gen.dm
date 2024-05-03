@@ -59,6 +59,7 @@
 		active = 0
 		handleInactive()
 	update_icon()
+
 	update_sound()
 
 /obj/machinery/power/port_gen/on_update_icon()
@@ -147,11 +148,15 @@
 	var/operating_temperature = 0		//The current temperature
 	var/overheating = 0		//if this gets high enough the generator explodes
 	var/max_overheat = 150
+	var/obj/effect/visionoverlay/thermal/thermal_image
 
 /obj/machinery/power/port_gen/pacman/Initialize()
 	. = ..()
 	if(anchored)
 		connect_to_network()
+	thermal_image = new /obj/effect/visionoverlay/thermal
+	var/self = src
+	thermal_image.linkup(self)
 
 /obj/machinery/power/port_gen/pacman/Destroy()
 	DropFuel()
@@ -172,6 +177,15 @@
 	to_chat(user, "There [sheets == 1 ? "is" : "are"] [sheets] sheet\s left in the hopper.")
 	if(IsBroken()) to_chat(user, SPAN_WARNING("\The [src] seems to have broken down."))
 	if(overheating) to_chat(user, SPAN_DANGER("\The [src] is overheating!"))
+
+/obj/machinery/power/port_gen/pacman/Process()
+	..()
+	if(thermal_image)
+		thermal_image.process_appearance()
+
+//Used by thermal imaging, not much use elsewhere.
+/obj/machinery/power/port_gen/pacman/get_warmth()
+	return operating_temperature + 273.15
 
 /obj/machinery/power/port_gen/pacman/proc/process_exhaust()
 	var/datum/gas_mixture/environment = loc?.return_air()

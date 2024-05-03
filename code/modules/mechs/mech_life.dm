@@ -32,6 +32,7 @@
 				M.deactivate()
 
 
+
 	updatehealth()
 	if(health <= 0 && stat != DEAD)
 		death()
@@ -71,10 +72,11 @@
 
 /mob/living/exosuit/handle_environment(datum/gas_mixture/environment)
 	if(!environment) return
-	//Mechs and vehicles in general can be assumed to just tend to whatever ambient temperature
+	//Mechs and vehicles in general can be assumed to just tend to whatever ambient temperature (provided they're not currently running)
 	if(abs(environment.temperature - bodytemperature) > 0 )
 		bodytemperature += ((environment.temperature - bodytemperature) / 6)
-
+	if (power && health > 0) //if we're running and we're alive, we should try and heat up
+		bodytemperature += running_temp_gain
 	if(bodytemperature > material.melting_point * 1.45 ) //A bit higher because I like to assume there's a difference between a mech and a wall
 		var/damage = 5
 		if(bodytemperature > material.melting_point * 1.75 )

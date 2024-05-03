@@ -175,3 +175,7 @@
 
 /obj/machinery/portable_atmospherics/MouseDrop_T(mob/living/M, mob/living/user)
 	do_climb(user, FALSE)
+
+/obj/machinery/portable_atmospherics/get_warmth()
+	var/datum/gas_mixture/contents = return_air()
+	return contents.temperature

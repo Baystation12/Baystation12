@@ -38,6 +38,8 @@
 
 	waterproof = FALSE
 
+	var/obj/effect/visionoverlay/thermal/thermal_image
+
 ///All the subtypes are for adminbussery and or mapping
 /obj/turf_fire/magical
 	interact_with_atmos = FALSE
@@ -76,6 +78,9 @@
 	if(power)
 		fire_power = min(TURF_FIRE_MAX_POWER, power)
 	UpdateFireState()
+	thermal_image = new /obj/effect/visionoverlay/thermal
+	var/self = src
+	thermal_image.linkup(self)
 
 /obj/turf_fire/Destroy()
 	var/turf/T = loc
@@ -158,6 +163,8 @@
 			var/turf/simulated/floor/F = T
 			F.burn_tile(effective_temperature)
 		UpdateFireState()
+	if(thermal_image)
+		thermal_image.process_appearance()
 
 /obj/turf_fire/Crossed(O)
 	. = ..()
@@ -207,6 +214,9 @@
 		if(TURF_FIRE_STATE_MAX)
 			icon_state = "max"
 			set_light(3, 0.7)
+
+/obj/turf_fire/get_warmth()
+	return TURF_FIRE_TEMP_BASE + (TURF_FIRE_TEMP_INCREMENT_PER_POWER*fire_power)
 
 #undef TURF_FIRE_REQUIRED_TEMP
 #undef TURF_FIRE_TEMP_BASE

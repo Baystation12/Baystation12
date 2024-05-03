@@ -703,6 +703,7 @@ var/global/list/ai_verbs_default = list(
 	to_chat(src, SPAN_NOTICE("Integrated radio encryption keys have been reset."))
 
 /mob/living/silicon/ai/on_update_icon()
+	. = ..()
 	if(!selected_sprite || !(selected_sprite in available_icons()))
 		selected_sprite = new default_ai_icon()
 

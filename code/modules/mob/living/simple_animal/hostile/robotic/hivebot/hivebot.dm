@@ -192,6 +192,7 @@ The megabot
 	deactivate()
 
 /mob/living/simple_animal/hostile/hivebot/mega/on_update_icon()
+	. = ..()
 	if(stat != DEAD)
 		if(deactivated)
 			icon_state = "megabot_standby"

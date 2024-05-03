@@ -20,3 +20,5 @@ GLOBAL_DATUM_INIT(universe, /datum/universal_state, new)
 GLOBAL_LIST_INIT(full_alphabet, list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"))
 
 GLOBAL_LIST_EMPTY(meteor_list)
+
+GLOBAL_LIST_EMPTY(lifesigns_objs)           // List of all the life sign overlays currently in existence, used by life sensors.

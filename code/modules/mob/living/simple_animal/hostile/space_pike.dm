@@ -26,4 +26,5 @@
 	return
 
 /mob/living/simple_animal/hostile/carp/pike/on_update_icon()
+	. = ..()
 	return

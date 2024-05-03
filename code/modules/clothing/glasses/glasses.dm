@@ -12,6 +12,7 @@
 	var/obj/screen/overlay = null
 	var/obj/item/clothing/glasses/hud/hud = null	// Hud glasses, if any
 	electric = FALSE //if the glasses should be disrupted by EMP
+	var/atom/movable/renderer/renderer
 
 
 /obj/item/clothing/glasses/Initialize()

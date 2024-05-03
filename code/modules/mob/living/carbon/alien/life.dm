@@ -14,6 +14,7 @@
 	//Status updates, death etc.
 	update_icons()
 
+
 /mob/living/carbon/alien/handle_mutations_and_radiation()
 
 	// Currently both Dionaea and larvae like to eat radiation, so I'm defining the

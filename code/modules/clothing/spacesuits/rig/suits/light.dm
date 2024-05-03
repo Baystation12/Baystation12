@@ -134,6 +134,7 @@
 		/obj/item/rig_module/datajack,
 		/obj/item/rig_module/self_destruct,
 		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/device/life_scanner,
 		/obj/item/rig_module/maneuvering_jets
 		)
 
@@ -195,6 +196,7 @@
 		/obj/item/rig_module/datajack,
 		/obj/item/rig_module/self_destruct,
 		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/device/life_scanner,
 		/obj/item/rig_module/maneuvering_jets
 		)
 
@@ -225,6 +227,7 @@
 		/obj/item/rig_module/mounted/ballistic/minigun,
 		/obj/item/rig_module/mounted/power_fist,
 		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/device/life_scanner,
 		/obj/item/rig_module/maneuvering_jets
 		)
 
@@ -259,6 +262,7 @@
 		/obj/item/rig_module/datajack,
 		/obj/item/rig_module/self_destruct,
 		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/device/life_scanner,
 		/obj/item/rig_module/maneuvering_jets
 		)
 

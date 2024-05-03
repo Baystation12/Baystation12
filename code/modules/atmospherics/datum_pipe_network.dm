@@ -7,6 +7,8 @@
 		//membership roster to go through for updates and what not
 	var/list/leaks = list()
 	var/update = 1
+	var/old_temperature //used for update checking
+	var/average_temperature
 
 /datum/pipe_network/Destroy()
 	STOP_PROCESSING_PIPENET(src)
@@ -29,6 +31,9 @@
 	//Give pipelines their process call for pressure checking and what not. Have to remove pressure checks for the time being as pipes don't radiate heat - Mport
 	//for(var/datum/pipeline/line_member in line_members)
 	//	line_member.process()
+	for(var/obj/machinery/atmospherics/atmos_machine in line_members)
+		if(atmos_machine.thermal_image)
+			atmos_machine.thermal_image.process_appearance()
 
 /datum/pipe_network/proc/build_network(obj/machinery/atmospherics/start_normal, obj/machinery/atmospherics/reference)
 	//Purpose: Generate membership roster

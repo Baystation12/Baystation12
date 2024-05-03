@@ -163,6 +163,7 @@ var/global/list/mob_hat_cache = list()
 	SetName(real_name)
 
 /mob/living/silicon/robot/drone/on_update_icon()
+	. = ..()
 
 	ClearOverlays()
 	if(stat == 0)

@@ -1611,7 +1611,7 @@
 "dN" = (
 /obj/structure/table/steel,
 /obj/random/maintenance,
-/obj/item/clothing/glasses/thermal,
+/obj/item/device/life_scanner,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "dO" = (

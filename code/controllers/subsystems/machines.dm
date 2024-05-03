@@ -201,6 +201,7 @@ SUBSYSTEM_DEF(machines)
 	if (!resumed)
 		queue = powernets.Copy()
 	var/datum/powernet/network
+	var/wattage
 	for (var/i = length(queue) to 1 step -1)
 		network = queue[i]
 		if (QDELETED(network))
@@ -214,6 +215,16 @@ SUBSYSTEM_DEF(machines)
 		else if (MC_TICK_CHECK)
 			queue.Cut(i)
 			return
+		if(network.avail)
+			wattage = network.avail
+		else
+			wattage = 0
+		if (wattage != network.old_wattage) //check if we actually need to do this
+			network.old_wattage = wattage
+			for (var/obj/structure/cable/cable in network.cables)
+				cable.warmth = 293 + wattage/150000
+				if(cable.thermal_image)
+					cable.thermal_image.process_appearance()
 
 
 /datum/controller/subsystem/machines/proc/process_power_objects(resumed, no_mc_tick)

@@ -50,16 +50,20 @@
 	equipment_light_protection = 0
 	equipment_darkness_modifier = 0
 	equipment_overlays.Cut()
+	if(client)
+		for (var/atom/movable/renderer/render in client.screen)
+			if (render.temporary)
+				if(client)
+					client.screen -= render
 
 	if(istype(glasses, /obj/item/clothing/glasses))
 		process_prescription(glasses)
-
+	see_infrared = 0
 	var/binoc_check
 	if(client)
 		binoc_check = client.view == world.view
 	else
 		binoc_check = TRUE
-
 	if ((!client || client.eye == src || client.eye == loc || client.eye == z_eye) && binoc_check) // !client is so the unit tests function
 		if(istype(src.head, /obj/item/clothing/head))
 			add_clothing_protection(head)
@@ -87,6 +91,9 @@
 				equipment_see_invis = min(equipment_see_invis, G.see_invisible)
 			else
 				equipment_see_invis = G.see_invisible
+		if (G.renderer)
+			if (client)
+				addrenderer(client, G.renderer)
 
 		add_clothing_protection(G)
 		G.process_hud(src)
@@ -107,6 +114,9 @@
 						equipment_see_invis = min(equipment_see_invis, mod.see_invisible)
 					else
 						equipment_see_invis = mod.see_invisible
+				if (mod.renderer)
+					if (client)
+						addrenderer(client, mod.renderer)
 				if (mod.thermals)
 					//this breaks if more than one thermal accessory is worn at once
 					add_client_color(/datum/client_color/monochrome)
@@ -128,6 +138,9 @@
 						equipment_see_invis = min(equipment_see_invis, mod.see_invisible)
 					else
 						equipment_see_invis = mod.see_invisible
+				if (mod.renderer)
+					if (client)
+						addrenderer(client, mod.renderer)
 				if (mod.thermals)
 					//this breaks if more than one thermal accessory is worn at once
 					add_client_color(/datum/client_color/monochrome)
@@ -141,6 +154,14 @@
 /mob/living/carbon/human/proc/process_rig(obj/item/rig/O)
 	if(O.visor && O.visor.active && O.visor.vision && O.visor.vision.glasses && (!O.helmet || (head && O.helmet == head)))
 		process_glasses(O.visor.vision.glasses)
+
+/mob/living/carbon/human/proc/addrenderer(tmp/client/client, atom/movable/renderer/renderer)
+	if(eye_blind <= 0 && health > 0)
+		if (istype(renderer, /atom/movable/renderer/thermals))
+			see_infrared = 1
+		if (renderer.relay)
+			client.screen += renderer.relay
+		client.screen += renderer
 
 /mob/living/carbon/human/fully_replace_character_name(new_name, in_depth = TRUE)
 	var/old_name = real_name
