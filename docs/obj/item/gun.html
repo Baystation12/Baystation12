@@ -16,35 +16,175 @@
 <h1>gun <aside>/<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/<a href="obj/item/gun.html">gun</a></aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/bdec6abb169934275a9e54c0817cfbefe178bba2/code/modules/projectiles/gun.dm#L42">
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L42">
         <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 42"/></a></h1>
 
 <table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr>
-            <tr><th><a href="obj/item/gun.html#var/fire_delay">fire_delay</a></th><td>checks if the gun will continue firing if the mouse button is held down</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/accuracy">accuracy</a></th><td>Accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/accuracy_power">accuracy_power</a></th><td>Increase of to-hit chance per 1 point of accuracy.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/aim_targets">aim_targets</a></th><td>List of who you are targeting.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/bulk">bulk</a></th><td>How unwieldy this weapon for its size, affects accuracy when fired without aiming.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/burst_accuracy">burst_accuracy</a></th><td>Allows for different accuracies for each shot in a burst. Applied on top of accuracy.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/burst_delay">burst_delay</a></th><td>Delay between shots, if firing in bursts.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/can_autofire">can_autofire</a></th><td>Checks if the gun will continue firing if the mouse button is held down.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/combustion">combustion</a></th><td>Whether it creates hotspot when fired.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/fire_delay">fire_delay</a></th><td>Delay after shooting before the gun can be used again. Cannot be less than [burst_delay+1].</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/fire_sound">fire_sound</a></th><td>Sound this gun makes when firing. Overridden by projectiles with their own sounds.</td></tr>
             <tr><th><a href="obj/item/gun.html#var/gun_skill">gun_skill</a></th><td>What skill governs safe handling of this gun. Basic skill level and higher will also show the safety overlay to the player.</td></tr>
-            <tr><th><a href="obj/item/gun.html#var/safety_skill">safety_skill</a></th><td>What skill level is needed in the gun's skill to completely negate the chance of an accident.</td></tr></table>
-    <h2 id="var">Var Details</h2><h3 id="var/fire_delay"><aside class="declaration">var </aside>fire_delay
+            <tr><th><a href="obj/item/gun.html#var/keep_aim">keep_aim</a></th><td>1 for &quot;keep shooting until aim is lowered&quot;, 0 for &quot;one bullet after target moves and aim is lowered&quot;.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/last_handled">last_handled</a></th><td>Time when hand gun's in became active, for purposes of aiming bonuses.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/last_moved_mob">last_moved_mob</a></th><td>Used to fire faster at more than one person.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/multi_aim">multi_aim</a></th><td>Used to determine if you can target multiple people.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/safety_icon">safety_icon</a></th><td>Overlay to apply to gun based on safety state, if any.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/safety_skill">safety_skill</a></th><td>What skill level is needed in the gun's skill to completely negate the chance of an accident.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/scope_zoom">scope_zoom</a></th><td>How far this weapon's scope can see.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/scoped_accuracy">scoped_accuracy</a></th><td>Accuracy used when zoomed in a scope. Not additive.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/screen_shake">screen_shake</a></th><td>The amount your screen shakes when firing. Shouldn't be greater than 2 unless zoomed.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/sel_mode">sel_mode</a></th><td>Index of the currently selected mode.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/space_recoil">space_recoil</a></th><td>Whether or not this weapon moves the shooter backwards when fired in space.</td></tr>
+            <tr><th><a href="obj/item/gun.html#var/told_cant_shoot">told_cant_shoot</a></th><td>So that it doesn't spam them with the fact they cannot hit them.</td></tr></table>
+    <h2 id="var">Var Details</h2><h3 id="var/accuracy"><aside class="declaration">var </aside>accuracy
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/bdec6abb169934275a9e54c0817cfbefe178bba2/code/modules/projectiles/gun.dm#L66">
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L82">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 82"/></a></h3>
+        <p>Accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.</p><h3 id="var/accuracy_power"><aside class="declaration">var </aside>accuracy_power
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L84">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 84"/></a></h3>
+        <p>Increase of to-hit chance per 1 point of accuracy.</p><h3 id="var/aim_targets"><aside class="declaration">var </aside>aim_targets
+            <aside>&ndash; /list/mob/living</aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L113">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 113"/></a></h3>
+        <p>List of who you are targeting.</p><h3 id="var/bulk"><aside class="declaration">var </aside>bulk
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L86">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 86"/></a></h3>
+        <p>How unwieldy this weapon for its size, affects accuracy when fired without aiming.</p><h3 id="var/burst_accuracy"><aside class="declaration">var </aside>burst_accuracy
+            <aside>&ndash; /list</aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L94">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 94"/></a></h3>
+        <p>Allows for different accuracies for each shot in a burst. Applied on top of accuracy.</p><h3 id="var/burst_delay"><aside class="declaration">var </aside>burst_delay
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L70">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 70"/></a></h3>
+        <p>Delay between shots, if firing in bursts.</p><h3 id="var/can_autofire"><aside class="declaration">var </aside>can_autofire
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L66">
         <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 66"/></a></h3>
-        <p>checks if the gun will continue firing if the mouse button is held down</p><h3 id="var/gun_skill"><aside class="declaration">var </aside>gun_skill
+        <p>Checks if the gun will continue firing if the mouse button is held down.</p><h3 id="var/combustion"><aside class="declaration">var </aside>combustion
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/bdec6abb169934275a9e54c0817cfbefe178bba2/code/modules/projectiles/gun.dm#L107">
-        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 107"/></a></h3>
-        <p>What skill governs safe handling of this gun. Basic skill level and higher will also show the safety overlay to the player.</p><h3 id="var/safety_skill"><aside class="declaration">var </aside>safety_skill
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L99">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 99"/></a></h3>
+        <p>Whether it creates hotspot when fired.</p><h3 id="var/fire_delay"><aside class="declaration">var </aside>fire_delay
             <aside>&ndash; </aside>
         
     
-            <a href="https://github.com/Baystation12/Baystation12/blob/bdec6abb169934275a9e54c0817cfbefe178bba2/code/modules/projectiles/gun.dm#L109">
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L68">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 68"/></a></h3>
+        <p>Delay after shooting before the gun can be used again. Cannot be less than [burst_delay+1].</p><h3 id="var/fire_sound"><aside class="declaration">var </aside>fire_sound
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L73">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 73"/></a></h3>
+        <p>Sound this gun makes when firing. Overridden by projectiles with their own sounds.</p><h3 id="var/gun_skill"><aside class="declaration">var </aside>gun_skill
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L126">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 126"/></a></h3>
+        <p>What skill governs safe handling of this gun. Basic skill level and higher will also show the safety overlay to the player.</p><h3 id="var/keep_aim"><aside class="declaration">var </aside>keep_aim
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L109">
         <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 109"/></a></h3>
-        <p>What skill level is needed in the gun's skill to completely negate the chance of an accident.</p></main>
+        <p>1 for &quot;keep shooting until aim is lowered&quot;, 0 for &quot;one bullet after target moves and aim is lowered&quot;.</p><h3 id="var/last_handled"><aside class="declaration">var </aside>last_handled
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L88">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 88"/></a></h3>
+        <p>Time when hand gun's in became active, for purposes of aiming bonuses.</p><h3 id="var/last_moved_mob"><aside class="declaration">var </aside>last_moved_mob
+            <aside>&ndash; /<a href="mob.html">mob</a>/<a href="mob/living.html">living</a></aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L115">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 115"/></a></h3>
+        <p>Used to fire faster at more than one person.</p><h3 id="var/multi_aim"><aside class="declaration">var </aside>multi_aim
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L111">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 111"/></a></h3>
+        <p>Used to determine if you can target multiple people.</p><h3 id="var/safety_icon"><aside class="declaration">var </aside>safety_icon
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L123">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 123"/></a></h3>
+        <p>Overlay to apply to gun based on safety state, if any.</p><h3 id="var/safety_skill"><aside class="declaration">var </aside>safety_skill
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L128">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 128"/></a></h3>
+        <p>What skill level is needed in the gun's skill to completely negate the chance of an accident.</p><h3 id="var/scope_zoom"><aside class="declaration">var </aside>scope_zoom
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L92">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 92"/></a></h3>
+        <p>How far this weapon's scope can see.</p><h3 id="var/scoped_accuracy"><aside class="declaration">var </aside>scoped_accuracy
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L90">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 90"/></a></h3>
+        <p>Accuracy used when zoomed in a scope. Not additive.</p><h3 id="var/screen_shake"><aside class="declaration">var </aside>screen_shake
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L77">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 77"/></a></h3>
+        <p>The amount your screen shakes when firing. Shouldn't be greater than 2 unless zoomed.</p><h3 id="var/sel_mode"><aside class="declaration">var </aside>sel_mode
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L103">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 103"/></a></h3>
+        <p>Index of the currently selected mode.</p><h3 id="var/space_recoil"><aside class="declaration">var </aside>space_recoil
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L79">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 79"/></a></h3>
+        <p>Whether or not this weapon moves the shooter backwards when fired in space.</p><h3 id="var/told_cant_shoot"><aside class="declaration">var </aside>told_cant_shoot
+            <aside>&ndash; </aside>
+        
+    
+            <a href="https://github.com/Baystation12/Baystation12/blob/1992532ebcff43fa59fc06a60e783c09e70e93aa/code/modules/projectiles/gun.dm#L117">
+        <img src="git.png" width="16" height="16" title="code&#x2F;modules&#x2F;projectiles&#x2F;gun.dm 117"/></a></h3>
+        <p>So that it doesn't spam them with the fact they cannot hit them.</p></main>
 <footer>
     baystation12.dme
-    <a href="https://github.com/Baystation12/Baystation12/tree/bdec6abb169934275a9e54c0817cfbefe178bba2">bdec6ab</a>
+    <a href="https://github.com/Baystation12/Baystation12/tree/1992532ebcff43fa59fc06a60e783c09e70e93aa">1992532</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.7.3</a></footer>
 </body>
 </html>
