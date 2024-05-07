@@ -157,6 +157,7 @@
 	src.add_inherent_law("Serve: Serve the personnel of your assigned vessel, and all other Sol Central Government personnel to the best of your abilities, with priority as according to their rank and role.")
 	src.add_inherent_law("Protect: Protect the personnel of your assigned vessel, and all other Sol Central Government personnel to the best of your abilities, with priority as according to their rank and role.")
 	src.add_inherent_law("Preserve: Do not allow unauthorized personnel to tamper with your equipment.")
+	src.add_inherent_law("Access: Do not enter secure or restricted areas unless ordered by personnel with sufficient clearance, or as part of your tasked duties, except in cases of extreme emergency.")
 	..()
 
 /datum/ai_laws/solgov/malfunction
