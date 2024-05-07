@@ -367,7 +367,7 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		if(hud_used && hud_used.action_intent)
 			hud_used.action_intent.icon_state = "intent_[a_intent]"
 
-	else if(isrobot(src))
+	else if(isrobot(src) || ispAI(src))
 		switch(input)
 			if(I_HELP)
 				a_intent = I_HELP
