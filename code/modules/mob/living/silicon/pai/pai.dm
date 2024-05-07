@@ -76,6 +76,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	var/flashlight_power = 0.5 //brightness of light when on, must be no greater than 1.
 	var/flashlight_range = 3 //outer range of light when on, can be negative
 	var/light_on = FALSE
+	light_wedge = LIGHT_OMNI
 
 	hud_type = /datum/hud/pai
 
@@ -219,6 +220,10 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 		return
 	last_special = world.time + 100
 
+	//Turn off light, we're not a flashlight (unless we remain deployed)
+	if (light_on)
+		toggle_integrated_light()
+
 	// Move us into the card and move the card to the ground.
 	stop_pulling()
 	resting = FALSE
@@ -325,7 +330,16 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 /mob/living/silicon/pai/proc/toggle_integrated_light()
 	if(!light_on)
-		set_light(flashlight_range, flashlight_power, 2)
+		if (light_wedge == LIGHT_OMNI)
+			light_wedge = LIGHT_VERY_WIDE
+			flashlight_power = 1
+			flashlight_range = 4
+		else
+			light_wedge = LIGHT_OMNI
+			flashlight_power = initial(flashlight_power)
+			flashlight_range = initial(flashlight_range)
+
+		set_light(flashlight_range, flashlight_power)
 		to_chat(src, SPAN_NOTICE("You enable your integrated light."))
 		light_on = TRUE
 	else

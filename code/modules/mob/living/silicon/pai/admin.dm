@@ -12,8 +12,14 @@
 		pai_key = C.key
 
 	log_and_message_admins("made a pAI with key=[pai_key] at ([t.x],[t.y],[t.z])")
+<<<<<<< ours
 	var/obj/item/device/paicard/card = new(t)
+=======
+	var/obj/item/device/paicard/card = new(t, t)
+	var/mob/living/silicon/pai/pai = new(card, card)
+	pai.key = pai_key
+	card.setPersonality(pai)
+>>>>>>> theirs
 	card.pai.key = pai_key
-	card.setPersonality(card.pai)
 	if (name)
 		card.pai.fully_replace_character_name(name)
