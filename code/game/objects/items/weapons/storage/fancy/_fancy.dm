@@ -81,9 +81,17 @@
 
 /obj/item/storage/fancy/open(mob/user as mob)
 	if(sealed)
-		to_chat(user, "You need to unseal \the [src] first!")
+		to_chat(user, SPAN_WARNING("You need to unseal \the [src] first!"))
 		return
 	..()
+
+/obj/item/storage/fancy/can_be_inserted(obj/item/item, mob/user, stop_messages)
+	if (!istype(item))
+		return FALSE
+	if (sealed)
+		to_chat(user, SPAN_WARNING("You need to unseal \the [src] first!"))
+		return FALSE
+	return ..()
 
 
 /obj/item/storage/fancy/proc/UpdateTypeCounts()
