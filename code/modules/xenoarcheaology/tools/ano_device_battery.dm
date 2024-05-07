@@ -207,8 +207,11 @@
 	. = FALSE
 	if (!istype(M))
 		return FALSE
+	if(!inserted_battery)
+		user.visible_message(SPAN_NOTICE("[user] taps [M] with [src], but with no battery inserted, nothing happens."))
+		return FALSE
 
-	if (activated && inserted_battery.battery_effect.effect == EFFECT_TOUCH && !isnull(inserted_battery))
+	if (inserted_battery.battery_effect.effect == EFFECT_TOUCH  && ((inserted_battery.stored_charge - energy_consumed_on_touch) > 0))
 		inserted_battery.battery_effect.DoEffectTouch(M)
 		inserted_battery.use_power(energy_consumed_on_touch)
 		user.visible_message(SPAN_NOTICE("[user] taps [M] with [src], and it shudders on contact."))
