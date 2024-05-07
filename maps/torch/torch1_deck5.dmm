@@ -2489,6 +2489,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/artifact_analyser,
+/obj/structure/table/standard,
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/isolation)
 "fE" = (
@@ -10895,9 +10897,7 @@
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/rnd)
 "zm" = (
-/obj/structure/table/standard,
 /obj/machinery/atmospherics/pipe/simple/visible/red,
-/obj/random/tool,
 /obj/machinery/button/blast_door{
 	id_tag = "petrovcell1";
 	name = "Test Chamber Vent";
@@ -10909,6 +10909,8 @@
 	pixel_x = -36;
 	pixel_y = -25
 	},
+/obj/machinery/artifact_harvester,
+/obj/structure/table/standard,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/isolation)
 "zn" = (
@@ -11333,7 +11335,6 @@
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "Bn" = (
-/obj/machinery/artifact_analyser,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
@@ -12606,7 +12607,6 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/eva)
 "GG" = (
-/obj/machinery/artifact_scanpad,
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/cell1)
 "GI" = (
@@ -13705,6 +13705,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/machinery/artifact_scanpad,
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/cell1)
 "KQ" = (
