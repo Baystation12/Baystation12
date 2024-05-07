@@ -76,7 +76,7 @@
 /obj/item/stack/package_wrap/use_before(atom/target, mob/living/user)
 	if (isobj(target))
 		var/obj/wrapped_object = target
-		if (istype(wrapped_object, /obj/item/stack/package_wrap) || istype(wrapped_object, /obj/item/storage/backpack) || istype(wrapped_object, /obj/item/storage/belt) || istype(wrapped_object,/obj/item/storage/bag || istype(wrapped_object, /obj/item/storage/briefcase)))
+		if (istype(wrapped_object, /obj/item/stack/package_wrap) || istype(wrapped_object, /obj/item/storage/backpack) || istype(wrapped_object, /obj/item/storage/belt) || istype(wrapped_object,/obj/item/storage/bag) || istype(wrapped_object, /obj/item/storage/briefcase)|| istype(wrapped_object, /obj/structure/table))
 			return FALSE
 		if (istype(wrapped_object, /obj/item/smallDelivery) || istype(wrapped_object, /obj/structure/bigDelivery) || istype(wrapped_object, /obj/item/evidencebag))
 			to_chat(user, SPAN_WARNING("\The [wrapped_object] is already wrapped."))
