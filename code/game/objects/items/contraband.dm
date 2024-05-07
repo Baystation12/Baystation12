@@ -28,6 +28,7 @@
 		list(/datum/reagent/drugs/mindbreaker = 10, /datum/reagent/drugs/hextro = 20) = 3,
 		list(/datum/reagent/toxin/carpotoxin = 15)                             = 2,
 		list(/datum/reagent/impedrezene = 15)                                  = 2,
+		list(/datum/reagent/toxin/amatoxin = 15)							   = 2,
 		list(/datum/reagent/toxin/zombiepowder = 10)                           = 1)
 
 /obj/item/reagent_containers/glass/beaker/vial/random/New()
