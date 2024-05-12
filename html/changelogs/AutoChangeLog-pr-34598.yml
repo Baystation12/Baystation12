@@ -1,5 +1,0 @@
-author: SierraKomodo
-changes:
-  - {bugfix: Blank announcements are no longer sent if your message exceeds the character
-      limits.}
-delete-after: true
