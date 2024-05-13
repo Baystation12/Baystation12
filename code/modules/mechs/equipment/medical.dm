@@ -125,7 +125,7 @@
 	if (mode == MEDIGEL_SALVE)
 		if (istype(target, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = target
-			var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
+			var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel ? user.zone_sel.selecting : ran_zone())
 
 			if(affecting.is_bandaged() && affecting.is_disinfected() && affecting.is_salved())
 				to_chat(user, SPAN_WARNING("The wounds on \the [H]'s [affecting.name] have already been treated."))

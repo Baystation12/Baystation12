@@ -32,8 +32,15 @@
 	adding += using
 	action_intent = using
 
+	// Limb Targeting
+	mymob.zone_sel = new /obj/screen/zone_sel()
+	mymob.zone_sel.icon = 'icons/mob/screen1_robot.dmi'
+	mymob.zone_sel.ClearOverlays()
+	mymob.zone_sel.AddOverlays(image('icons/mob/zone_sel.dmi', "[mymob.zone_sel.selecting]"))
+
 	mymob.client.screen = list()
 	mymob.client.screen += adding
+	mymob.client.screen += mymob.zone_sel
 	inventory_shown = 0
 
 /obj/screen/pai
@@ -42,7 +49,7 @@
 /obj/screen/pai/Click()
 	if(!isobserver(usr) && (!usr.incapacitated() || usr.resting))
 		OnClick()
-	
+
 /obj/screen/pai/proc/OnClick()
 
 /obj/screen/pai/software
