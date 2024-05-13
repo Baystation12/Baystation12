@@ -1,9 +1,12 @@
 /// Produces a mutable appearance glued to the [EMISSIVE_PLANE] dyed to be the [EMISSIVE_COLOR].
 /proc/emissive_appearance(icon, icon_state = "", layer = FLOAT_LAYER, alpha = 255, appearance_flags = EMPTY_BITFIELD)
 	var/mutable_appearance/appearance = mutable_appearance(icon = icon, icon_state = icon_state, layer = layer, plane = EMISSIVE_PLANE, flags = appearance_flags|EMISSIVE_APPEARANCE_FLAGS)
-	appearance.alpha = alpha
-	appearance.blend_mode = BLEND_OVERLAY
-	appearance.color = GLOB.emissive_color
+	if(alpha == 255)
+		appearance.color = GLOB.emissive_color
+	else
+		var/alpha_ratio = alpha/255
+		appearance.color = _EMISSIVE_COLOR(alpha_ratio)
+//	appearance.blend_mode = BLEND_OVERLAY
 	return appearance
 
 /// Produces a mutable appearance glued to the [EMISSIVE_PLANE] dyed to be the [EM_BLOCK_COLOR].
