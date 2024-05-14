@@ -226,7 +226,8 @@
 
 /obj/item/clothing/suit/storage/toggle/highvis/get_mob_overlay(mob/user_mob, slot)
 	var/image/res = ..()
-	res.overlays += emissive_appearance(res.icon, "highvis_emis", -12, alpha = src.alpha)
+	var/highvis = emissive_appearance(res.icon, "highvis_emis", -12, alpha = alpha)
+	res.AddOverlays(highvis)
 	user_mob.z_flags |= ZMM_MANGLE_PLANES
 	return res
 
