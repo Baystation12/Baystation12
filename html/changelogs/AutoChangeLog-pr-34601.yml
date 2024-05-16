@@ -1,6 +1,0 @@
-author: Spookerton
-changes:
-  - {soundadd: Added new airlock audio.}
-  - {sounddel: Removed old airlock audio.}
-  - {bugfix: Access denied audio plays for all airlocks.}
-delete-after: true
