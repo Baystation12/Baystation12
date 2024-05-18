@@ -1456,6 +1456,7 @@
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
+/obj/item/storage/pill_bottle/tacks,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
