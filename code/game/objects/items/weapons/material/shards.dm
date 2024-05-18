@@ -82,6 +82,8 @@
 	if (human.buckled)
 		return
 	playsound(src, step_sound, 50, TRUE)
+	if (human.ignore_hazard_flags & HAZARD_FLAG_SHARD)
+		return
 	if (!istype(human))
 		to_chat(human, SPAN_WARNING("\A [src] cuts you!"))
 		human.take_overall_damage(force * 0.75, 0)
@@ -170,7 +172,7 @@
 	max_force = 12
 	thrown_force_multiplier = 0.3
 	step_sound = 'sound/obj/item/material/shard/caltrop.ogg'
-	embed_chance = 65
+	embed_chance = 50
 	pierce_thin_footwear = TRUE
 	applies_material_details = FALSE
 

@@ -13,6 +13,8 @@
 	bone_material = null
 	bone_amount = 0
 
+	ignore_hazard_flags = HAZARD_FLAG_SHARD
+
 	var/obj/item/card/id/botcard = null
 	var/list/botcard_access = list()
 	var/on = 1
