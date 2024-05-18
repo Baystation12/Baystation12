@@ -752,7 +752,7 @@ About the new airlock wires panel:
 				flick("deny", src)
 				if(world.time > next_clicksound)
 					next_clicksound = world.time + CLICKSOUND_INTERVAL
-					playsound(src, open_failure_access_denied, 50)
+					playsound(src, open_failure_access_denied, 40)
 			update_icon(AIRLOCK_CLOSED)
 		if("emag")
 			set_airlock_overlays(AIRLOCK_EMAG)
@@ -1161,9 +1161,9 @@ About the new airlock wires panel:
 
 	//if the door is unpowered then it doesn't make sense to hear the woosh of a pneumatic actuator
 	if(arePowerSystemsOn())
-		playsound(src, open_sound_powered, 65, TRUE)
+		playsound(src, open_sound_powered, 50, TRUE)
 	else
-		playsound(src, open_sound_unpowered, 65, TRUE)
+		playsound(src, open_sound_unpowered, 50, TRUE)
 
 	return ..()
 
@@ -1213,9 +1213,9 @@ About the new airlock wires panel:
 
 	use_power_oneoff(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	if(arePowerSystemsOn())
-		playsound(src, close_sound_powered, 65, TRUE)
+		playsound(src, close_sound_powered, 50, TRUE)
 	else
-		playsound(src, close_sound_unpowered, 65, TRUE)
+		playsound(src, close_sound_unpowered, 50, TRUE)
 
 	..()
 
