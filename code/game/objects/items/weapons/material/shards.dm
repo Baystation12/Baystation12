@@ -61,8 +61,70 @@
 	if(isliving(AM))
 		var/mob/M = AM
 
+<<<<<<< ours
 		if(M.buckled) //wheelchairs, office chairs, rollerbeds
 			return
+=======
+/obj/item/material/shard/Crossed(atom/movable/movable)
+	if (!isliving(movable))
+		return
+	var/mob/living/carbon/human/human = movable
+	if (human.buckled)
+		return
+	playsound(src, step_sound, 50, TRUE)
+	if (human.ignore_hazard_flags & HAZARD_FLAG_SHARD)
+		return
+	if (!istype(human))
+		to_chat(human, SPAN_WARNING("\A [src] cuts you!"))
+		human.take_overall_damage(force * 0.75, 0)
+		return
+	if (human.species.siemens_coefficient < 0.5)
+		return
+	if (human.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT))
+		return
+	var/list/check
+	if (!human.lying)
+		if (human.shoes)
+			if (human.shoes.item_flags & ITEM_FLAG_THICKMATERIAL)
+				return
+			if (!pierce_thin_footwear)
+				return
+		if (human.wear_suit?.body_parts_covered & FEET)
+			if (human.wear_suit.item_flags & ITEM_FLAG_THICKMATERIAL)
+				return
+		check = list(BP_L_FOOT, BP_R_FOOT)
+	else
+		check = BP_ALL_LIMBS
+	for (var/tag in shuffle(check, TRUE))
+		var/obj/item/organ/external/external = human.get_organ(tag)
+		if (!external)
+			continue
+		if (human.lying)
+			var/obj/item/clothing/clothing = human.get_clothing_coverage(tag)
+			if (clothing?.item_flags & ITEM_FLAG_THICKMATERIAL)
+				return
+		var/damage_text = "slices"
+		if (BP_IS_ROBOTIC(external) || BP_IS_CRYSTAL(external))
+			external.take_external_damage(force * 0.5, 0)
+			damage_text = "gouges"
+		else
+			var/damage_flags = DAMAGE_FLAG_SHARP
+			if (prob(embed_chance))
+				damage_flags |= DAMAGE_FLAG_EDGE
+				damage_text = "pierces into"
+			var/wound = external.take_external_damage(force * 0.75, 0, damage_flags)
+			if (damage_flags & DAMAGE_FLAG_EDGE)
+				external.embed(src, TRUE, null, wound)
+			if (weaken_amount && external.can_feel_pain())
+				human.Weaken(weaken_amount)
+		to_chat(human, SPAN_DANGER("\A [src] [damage_text] your [external.name]!"))
+		human.updatehealth()
+		return
+
+
+/obj/item/material/shard/phoron
+	default_material = MATERIAL_PHORON
+>>>>>>> theirs
 
 		playsound(src.loc, 'sound/effects/glass_step.ogg', 50, 1) // not sure how to handle metal shards with sounds
 		if(ishuman(M))
@@ -100,7 +162,22 @@
 /obj/item/material/shard/shrapnel/item_flags = EMPTY_BITFIELD
 
 
+<<<<<<< ours
 /obj/item/material/shard/shrapnel/steel/default_material = MATERIAL_STEEL
+=======
+/obj/item/material/shard/caltrop
+	name = "caltrop"
+	desc = "A savage area denial weapon designed to puncture tire and boot alike."
+	icon_state = "caltrop"
+	default_material = MATERIAL_STEEL
+	item_flags = EMPTY_BITFIELD
+	max_force = 12
+	thrown_force_multiplier = 0.3
+	step_sound = 'sound/obj/item/material/shard/caltrop.ogg'
+	embed_chance = 50
+	pierce_thin_footwear = TRUE
+	applies_material_details = FALSE
+>>>>>>> theirs
 
 
 /obj/item/material/shard/shrapnel/titanium/default_material = MATERIAL_TITANIUM
