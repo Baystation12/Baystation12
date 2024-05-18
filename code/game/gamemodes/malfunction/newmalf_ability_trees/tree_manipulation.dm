@@ -167,7 +167,7 @@
 	// Trigger a powernet alarm. Careful engineers will probably notice something is going on.
 	var/area/temp_area = get_area(M)
 	if(temp_area)
-		var/obj/machinery/power/apc/temp_apc = temp_area.get_apc()
+		var/obj/machinery/power/apc/temp_apc = temp_area.apc
 		var/obj/machinery/power/terminal/terminal = temp_apc && temp_apc.terminal()
 		if(terminal && terminal.powernet)
 			terminal.powernet.trigger_warning(50) // Long alarm

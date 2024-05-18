@@ -44,11 +44,9 @@
 /datum/event/prison_break/tick()
 	if (activeFor >= warning * endWhen)
 		if (areas && length(areas) > 0)
-			var/obj/machinery/power/apc/theAPC = null
-			for (var/area/A in areas)
-				theAPC = A.get_apc()
-				if (theAPC && theAPC.operating)
-					theAPC.flicker_lighting()
+			for (var/area/area in areas)
+				if (area.apc?.operating)
+					area.apc.flicker_lighting()
 
 
 /datum/event/prison_break/end()
