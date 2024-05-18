@@ -1,4 +1,0 @@
-author: Spookerton
-changes:
-  - {tweak: There are 6 tacks per pot instead of 16.}
-delete-after: true

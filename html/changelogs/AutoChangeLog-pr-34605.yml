@@ -1,6 +1,0 @@
-author: Spookerton
-changes:
-  - {bugfix: Pill bottles can hold tacks.}
-  - {tweak: 'Some mob types (mechs, silicons, bots) are not damaged by shards.'}
-  - {tweak: Caltrops are less good.}
-delete-after: true
