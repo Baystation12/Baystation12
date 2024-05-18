@@ -14,6 +14,26 @@
 	desc = "It's a small bag with gaming dice inside."
 	icon = 'icons/obj/dice.dmi'
 	icon_state = "magicdicebag"
+<<<<<<< ours
+=======
+	startswith = list(
+		/obj/item/dice/d4 = 1,
+		/obj/item/dice = 1,
+		/obj/item/dice/d8 = 1,
+		/obj/item/dice/d10 = 1,
+		/obj/item/dice/d12 = 1,
+		/obj/item/dice/d20 = 1,
+		/obj/item/dice/d100 = 1
+	)
+
+
+/obj/item/storage/pill_bottle/tacks
+	name = "pot of thumbtacks"
+	desc = "What sort of monster would unleash these on the world?"
+	startswith = list(
+		/obj/item/material/shard/caltrop/tack = 6
+	)
+>>>>>>> theirs
 
 /obj/item/storage/pill_bottle/dice_nerd/New()
 	..()
