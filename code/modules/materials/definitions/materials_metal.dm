@@ -249,6 +249,7 @@
 	sale_price = 3
 	ore_smelts_to = MATERIAL_OSMIUM
 	value = 30
+	weight = 29
 
 /material/tritium
 	name = MATERIAL_TRITIUM
