@@ -3,8 +3,20 @@ SUBSYSTEM_DEF(aifast)
 	init_order = SS_INIT_AIFAST
 	priority = SS_PRIORITY_AI
 	wait = 0.5 SECONDS
+#ifdef UNIT_TEST
+	flags = SS_NO_INIT | SS_NO_FIRE
+#else
+	flags = SS_NO_INIT
+#endif
+
+	/// The set of all ai_holders currently being updated
 	var/static/list/datum/ai_holder/ai_holders = list()
+
+	/// The current queue of ai_holder instances to update
 	var/static/list/datum/ai_holder/queue = list()
+
+	/// If the queue was not finished, the index to read from on the next run
+	var/static/saved_index
 
 
 /datum/controller/subsystem/aifast/UpdateStat(time)
@@ -16,17 +28,17 @@ SUBSYSTEM_DEF(aifast)
 	"})
 
 
-/datum/controller/subsystem/aifast/fire(resume, no_mc_tick)
-	if (!resume)
+/datum/controller/subsystem/aifast/fire(resumed, no_mc_tick)
+	if (!resumed)
 		queue = ai_holders.Copy()
-		if (!length(queue))
-			return
-	var/cut_until = 1
-	for (var/datum/ai_holder/ai as anything in queue)
-		++cut_until
-		if (QDELETED(ai) || ai.busy)
-			continue
-		if (!ai.holder)
+		saved_index = 1
+	var/queue_length = length(queue)
+	if (!queue_length)
+		return
+	var/datum/ai_holder/ai
+	for (var/i = saved_index to queue_length)
+		ai = queue[i]
+		if (QDELETED(ai) || ai.busy || !ai.holder)
 			continue
 		if (!config.run_empty_levels && !SSpresence.population(get_z(ai.holder)))
 			continue
@@ -34,13 +46,6 @@ SUBSYSTEM_DEF(aifast)
 		if (no_mc_tick)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
-			queue.Cut(1, cut_until)
+			saved_index = i + 1
 			return
 	queue.Cut()
-
-
-#ifdef UNIT_TEST
-/datum/controller/subsystem/aifast/flags = SS_NO_INIT | SS_NO_FIRE
-#else
-/datum/controller/subsystem/aifast/flags = SS_NO_INIT
-#endif
