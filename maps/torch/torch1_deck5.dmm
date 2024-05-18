@@ -11167,6 +11167,7 @@
 /obj/structure/noticeboard{
 	pixel_y = 32
 	},
+/obj/item/storage/pill_bottle/tacks,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -16411,6 +16412,7 @@
 /obj/structure/noticeboard{
 	pixel_y = 32
 	},
+/obj/item/storage/pill_bottle/tacks,
 /obj/machinery/light{
 	dir = 8
 	},
