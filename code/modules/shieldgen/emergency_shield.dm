@@ -41,7 +41,7 @@
 		return
 	if (health_mod < -1) // To prevent slow degradation proccing this constantly
 		set_opacity(TRUE)
-		addtimer(new Callback(src, /atom/proc/set_opacity, FALSE), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
+		addtimer(new Callback(src, TYPE_PROC_REF(/atom, set_opacity), FALSE), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
 
 /obj/machinery/shield/on_death()
 	visible_message(SPAN_NOTICE("\The [src] dissipates!"))

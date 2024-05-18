@@ -32,7 +32,7 @@
 	if(cell)
 		return
 	cell = new_cell
-	GLOB.destroyed_event.register(cell, src, .proc/remove_cell)
+	GLOB.destroyed_event.register(cell, src, PROC_REF(remove_cell))
 	if(!machine)
 		machine = loc
 	if(istype(machine))

@@ -31,7 +31,7 @@ var/global/repository/follow/follow_repository = new()
 	followed_objects_assoc[AM] = follow_holder
 	followed_objects.Add(follow_holder)
 
-	GLOB.destroyed_event.register(AM, src, /repository/follow/proc/remove_subject)
+	GLOB.destroyed_event.register(AM, src, TYPE_PROC_REF(/repository/follow, remove_subject))
 
 /repository/follow/proc/remove_subject(atom/movable/AM)
 	cache = null
@@ -41,7 +41,7 @@ var/global/repository/follow/follow_repository = new()
 	followed_objects_assoc -= AM
 	followed_objects.Remove(follow_holder)
 
-	GLOB.destroyed_event.unregister(AM, src, /repository/follow/proc/remove_subject)
+	GLOB.destroyed_event.unregister(AM, src, TYPE_PROC_REF(/repository/follow, remove_subject))
 
 	qdel(follow_holder)
 
@@ -69,13 +69,13 @@ var/global/repository/follow/follow_repository = new()
 	for(var/followed_name in followed_by_name)
 		var/list/followed_things = followed_by_name[followed_name]
 		if(length(followed_things) == 1)
-			ADD_SORTED(L, followed_things[1], /proc/cmp_follow_holder)
+			ADD_SORTED(L, followed_things[1], GLOBAL_PROC_REF(cmp_follow_holder))
 		else
 			for(var/i = 1 to length(followed_things))
 				var/datum/follow_holder/followed_thing = followed_things[i]
 				followed_thing.instance = i
 				followed_thing.get_name(TRUE)
-				ADD_SORTED(L, followed_thing, /proc/cmp_follow_holder)
+				ADD_SORTED(L, followed_thing, GLOBAL_PROC_REF(cmp_follow_holder))
 
 	cache.data = L
 	return L

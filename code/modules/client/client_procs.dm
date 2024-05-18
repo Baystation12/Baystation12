@@ -182,6 +182,8 @@
 
 	. = ..()	//calls mob.Login()
 
+	view = get_preference_value(/datum/client_preference/client_view)
+
 	GLOB.using_map.map_info(src)
 
 	if (config.event)
@@ -417,7 +419,7 @@
 		'html/images/terstenlogo.png',
 		// [/SIERRA-ADD]
 		)
-	addtimer(new Callback(src, .proc/after_send_resources), 1 SECOND)
+	addtimer(new Callback(src, PROC_REF(after_send_resources)), 1 SECOND)
 
 
 /client/proc/after_send_resources()

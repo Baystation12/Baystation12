@@ -76,7 +76,7 @@
 	unset_registered_user()
 	registered_user = user
 	user.set_id_info(src)
-	GLOB.destroyed_event.register(user, src, /obj/item/card/id/syndicate/proc/unset_registered_user)
+	GLOB.destroyed_event.register(user, src, TYPE_PROC_REF(/obj/item/card/id/syndicate, unset_registered_user))
 	return TRUE
 
 /obj/item/card/id/syndicate/proc/unset_registered_user(mob/user)

@@ -96,12 +96,11 @@
 			gravity_generator.on = 0
 
 			for(var/area/A in gravity_generator.localareas)
-				var/obj/machinery/gravity_generator/G
-				for(G in SSmachines.machinery)
+				for(var/obj/machinery/gravity_generator/G as anything in SSmachines.get_machinery_of_type(/obj/machinery/gravity_generator))
 					if((A in G.localareas) && (G.on))
+						A.gravitychange(0)
 						break
-				if(!G)
-					A.gravitychange(0)
+
 		else
 			for(var/area/A in gravity_generator.localareas)
 				gravity_generator.on = 1

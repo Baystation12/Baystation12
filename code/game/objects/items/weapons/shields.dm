@@ -221,7 +221,7 @@
 		H.update_inv_r_hand()
 
 	update_icon()
-	addtimer(new Callback(src, /obj/item/shield/energy/proc/UpdateSoundLoop), 0.25 SECONDS)
+	addtimer(new Callback(src, TYPE_PROC_REF(/obj/item/shield/energy, UpdateSoundLoop)), 0.25 SECONDS)
 
 
 /obj/item/shield/energy/proc/deactivate(mob/living/user)
@@ -242,7 +242,7 @@
 		H.update_inv_l_hand()
 		H.update_inv_r_hand()
 
-	addtimer(new Callback(src, /obj/item/shield/energy/proc/UpdateSoundLoop), 0.1 SECONDS)
+	addtimer(new Callback(src, TYPE_PROC_REF(/obj/item/shield/energy, UpdateSoundLoop)), 0.1 SECONDS)
 
 
 /obj/item/shield/energy/attack_self(mob/living/user)

@@ -74,15 +74,15 @@
 		unset_terminal(machine, terminal)
 	terminal = new_terminal
 	terminal.master = src
-	GLOB.destroyed_event.register(terminal, src, .proc/unset_terminal)
+	GLOB.destroyed_event.register(terminal, src, PROC_REF(unset_terminal))
 
-	set_extension(src, /datum/extension/event_registration/shuttle_stationary, GLOB.moved_event, machine, .proc/machine_moved, get_area(src))
+	set_extension(src, /datum/extension/event_registration/shuttle_stationary, GLOB.moved_event, machine, PROC_REF(machine_moved), get_area(src))
 	set_status(machine, PART_STAT_CONNECTED)
 	start_processing(machine)
 
 /obj/item/stock_parts/power/terminal/proc/machine_moved(obj/machinery/machine, turf/old_loc, turf/new_loc)
 	if(!terminal)
-		GLOB.moved_event.unregister(machine, src, .proc/machine_moved)
+		GLOB.moved_event.unregister(machine, src, PROC_REF(machine_moved))
 		return
 	if(istype(new_loc) && (terminal.loc == get_step(new_loc, terminal_dir)))
 		return     // This location is fine

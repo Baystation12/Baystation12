@@ -51,7 +51,7 @@ GLOBAL_LIST_INIT(skill_verbs, init_subtypes(/datum/skill_verb))
 		return
 	cooling_down = 1
 	update_verb()
-	addtimer(new Callback(src, .proc/remove_cooldown), cooldown)
+	addtimer(new Callback(src, PROC_REF(remove_cooldown)), cooldown)
 /*
 The Instruct verb. buffs untrained -> basic and requires skill in the skill training as well as leadership.
 Robots and antags can instruct.

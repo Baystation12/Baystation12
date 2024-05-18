@@ -31,8 +31,8 @@
 /singleton/vv_set_handler/meteor_severity_handler
 	handled_type = /datum/game_mode/meteor
 	handled_vars = list(
-		"meteor_severity" = /datum/game_mode/meteor/proc/set_meteor_severity,
-		"meteor_wave_delay" = /datum/game_mode/meteor/proc/set_meteor_wave_delay
+		"meteor_severity" = TYPE_PROC_REF(/datum/game_mode/meteor, set_meteor_severity),
+		"meteor_wave_delay" = TYPE_PROC_REF(/datum/game_mode/meteor, set_meteor_wave_delay)
 	)
 
 /datum/game_mode/meteor/proc/set_meteor_severity(value)
@@ -58,7 +58,7 @@
 /datum/game_mode/meteor/proc/on_enter_field()
 	alert_sent = 2
 	command_announcement.Announce(start_text, alert_title)
-	for(var/obj/machinery/shield_diffuser/SD in SSmachines.machinery)
+	for(var/obj/machinery/shield_diffuser/SD as anything in SSmachines.get_machinery_of_type(/obj/machinery/shield_diffuser))
 		SD.meteor_alarm(INFINITY)
 	if(GLOB.using_map.use_overmap)
 		var/area/map = locate(/area/overmap)

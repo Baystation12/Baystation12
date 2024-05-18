@@ -171,8 +171,8 @@
 	<br><br>---END OF TRANSMISSION---")
 
 /obj/overmap/radio/proc/set_origin(obj/overmap/origin)
-	GLOB.moved_event.register(origin, src, /obj/overmap/radio/proc/follow)
-	GLOB.destroyed_event.register(origin, src, /datum/proc/qdel_self)
+	GLOB.moved_event.register(origin, src, TYPE_PROC_REF(/obj/overmap/radio, follow))
+	GLOB.destroyed_event.register(origin, src, TYPE_PROC_REF(/datum, qdel_self))
 	forceMove(origin.loc)
 	source = origin
 	pixel_x = -(origin.bound_width - 6)
@@ -197,6 +197,6 @@
 
 /obj/overmap/radio/distress/Initialize()
 	..()
-	for(var/obj/machinery/computer/ship/helm/H in SSmachines.machinery)
+	for(var/obj/machinery/computer/ship/helm/H as anything in SSmachines.get_machinery_of_type(/obj/machinery/computer/ship/helm))
 		H.visible_message(SPAN_WARNING("\the [H] pings uneasily as it detects a distress signal."))
 		playsound(H, 'sound/machines/sensors/newcontact.ogg', 50, 3, 3)

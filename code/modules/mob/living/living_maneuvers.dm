@@ -15,7 +15,7 @@
 			if(!can_fall(location_override = check))
 				break
 		if(check && check != loc)
-			addtimer(new Callback(src, /mob/living/proc/reflexive_maneuver_callback, lastloc, check), 0)
+			addtimer(new Callback(src, TYPE_PROC_REF(/mob/living, reflexive_maneuver_callback), lastloc, check), 0)
 		return
 	. = ..()
 

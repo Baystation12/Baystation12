@@ -881,7 +881,7 @@
 			log_and_message_admins("Rigged light explosion, last touched by [fingerprintslast]")
 			var/turf/T = get_turf(loc)
 			set_status(LIGHT_BROKEN)
-			addtimer(new Callback(GLOBAL_PROC, /proc/explosion, T, 3, EX_ACT_LIGHT), 0.5 SECONDS)
+			addtimer(new Callback(GLOBAL_PROC, GLOBAL_PROC_REF(explosion), T, 3, EX_ACT_LIGHT), 0.5 SECONDS)
 		else
 			visible_message(SPAN_WARNING("\The [src] short-circuits as something burns out its filament!"))
 			set_status(LIGHT_BURNED)

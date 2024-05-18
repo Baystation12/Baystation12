@@ -84,7 +84,7 @@
 			affecting += AM
 			items_moved++
 	if(length(affecting))
-		addtimer(new Callback(src, .proc/post_process, affecting), 1) // slight delay to prevent infinite propagation due to map order
+		addtimer(new Callback(src, PROC_REF(post_process), affecting), 1) // slight delay to prevent infinite propagation due to map order
 
 /obj/machinery/conveyor/proc/post_process(list/affecting)
 	for(var/A in affecting)

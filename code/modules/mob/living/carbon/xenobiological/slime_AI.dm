@@ -23,7 +23,7 @@
 
 	handle_targets()
 	if (!AIproc)
-		addtimer(new Callback(src, .proc/handle_AI), 0)
+		addtimer(new Callback(src, PROC_REF(handle_AI)), 0)
 	handle_speech_and_mood()
 
 /mob/living/carbon/slime/proc/handle_targets()
@@ -179,7 +179,7 @@
 			UnarmedAttack(frenemy)
 
 	var/sleeptime = max(movement_delay(), 5) + addedDelay // Maximum one action per half a second
-	addtimer(new Callback(src, .proc/handle_AI), sleeptime)
+	addtimer(new Callback(src, PROC_REF(handle_AI)), sleeptime)
 
 
 /mob/living/carbon/slime/proc/UpdateFace()

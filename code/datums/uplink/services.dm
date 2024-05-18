@@ -90,7 +90,7 @@
 	log_and_message_admins("has activated the service '[service_label]'", user)
 
 	if(service_duration)
-		addtimer(new Callback(src,/obj/item/device/uplink_service/proc/deactivate), service_duration)
+		addtimer(new Callback(src, TYPE_PROC_REF(/obj/item/device/uplink_service, deactivate)), service_duration)
 	else
 		deactivate()
 

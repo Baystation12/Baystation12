@@ -17,12 +17,12 @@ var/global/list/ticket_panels = list()
 	tickets |= src
 	id = length(tickets)
 	opened_time = world.time
-	addtimer(new Callback(src, .proc/timeoutcheck), 5 MINUTES, TIMER_STOPPABLE)
+	addtimer(new Callback(src, PROC_REF(timeoutcheck)), 5 MINUTES, TIMER_STOPPABLE)
 
 /datum/ticket/proc/timeoutcheck()
 	if(status == TICKET_OPEN)
 		message_staff(SPAN_DANGER("[owner.key_name(0)] has not received a reply to their initial ahelp after 5 minutes!"))
-		addtimer(new Callback(src, .proc/timeoutchecklast), 5 MINUTES, TIMER_STOPPABLE)
+		addtimer(new Callback(src, PROC_REF(timeoutchecklast)), 5 MINUTES, TIMER_STOPPABLE)
 
 
 /datum/ticket/proc/timeoutchecklast()
@@ -34,7 +34,7 @@ var/global/list/ticket_panels = list()
 /datum/ticket/proc/timeoutchecktaken()
 	if (status == TICKET_ASSIGNED)
 		if (is_active())
-			addtimer(new Callback(src, .proc/timeoutchecktaken), 30 MINUTES, TIMER_STOPPABLE)
+			addtimer(new Callback(src, PROC_REF(timeoutchecktaken)), 30 MINUTES, TIMER_STOPPABLE)
 			return
 		for (var/datum/client_lite/C in assigned_admins)
 			to_chat(client_by_ckey(C.ckey), SPAN_NOTICE(SPAN_BOLD("Your ticket with [client_by_ckey(owner.ckey)] has timed out and auto-closed.")))
@@ -84,7 +84,7 @@ var/global/list/ticket_panels = list()
 	to_chat(client_by_ckey(src.owner.ckey), SPAN_NOTICE("<b>[assigned_admin.key] has added themself to your ticket and should respond shortly. Thanks for your patience!</b>"))
 
 	update_ticket_panels()
-	addtimer(new Callback(src, .proc/timeoutchecktaken), 30 MINUTES, TIMER_STOPPABLE)
+	addtimer(new Callback(src, PROC_REF(timeoutchecktaken)), 30 MINUTES, TIMER_STOPPABLE)
 
 	return 1
 

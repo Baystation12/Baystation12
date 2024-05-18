@@ -28,7 +28,7 @@
 		return
 	audible_message(SPAN_WARNING("\The [src] emits a long, harsh tone!"))
 	playsound(loc, 'sound/weapons/bombwhine.ogg', 100, 0, -3)
-	addtimer(new Callback(src, .proc/harpoon_detonate), 4 SECONDS) //for suspense
+	addtimer(new Callback(src, PROC_REF(harpoon_detonate)), 4 SECONDS) //for suspense
 
 /obj/item/material/harpoon/bomb/proc/harpoon_detonate()
 	audible_message(SPAN_DANGER("\The [src] detonates!")) //an actual sound will be handled by explosion()

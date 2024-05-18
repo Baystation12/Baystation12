@@ -557,6 +557,7 @@
 	else if(istype(AM, /mob))
 		var/mob/M = AM
 		M.forceMove(src)
+
 	src.flush()
 
 /obj/machinery/disposal/deliveryChute/flush()

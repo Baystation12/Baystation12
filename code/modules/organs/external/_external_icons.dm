@@ -51,7 +51,7 @@ var/global/list/limb_icon_cache = list()
 	update_icon(1)
 	if(owner)
 		SetName("[owner.real_name]'s head")
-		addtimer(new Callback(owner, /mob/living/carbon/human/proc/update_hair), 1, TIMER_UNIQUE)
+		addtimer(new Callback(owner, TYPE_PROC_REF(/mob/living/carbon/human, update_hair)), 1, TIMER_UNIQUE)
 	..()
 
 /obj/item/organ/external/proc/get_icon_key()
@@ -174,7 +174,7 @@ var/global/list/limb_icon_cache = list()
 				state = "[state]-[organ_tag]"
 			var/icon/I = icon(M.icon, state)
 			I.Blend(color, M.blend)
-			ADD_SORTED(sorted, list(list(M.draw_order, I, M)), /proc/cmp_marking_order)
+			ADD_SORTED(sorted, list(list(M.draw_order, I, M)), GLOBAL_PROC_REF(cmp_marking_order))
 
 	for (var/entry in sorted) //Revisit this with blendmodes
 		mob_icon.Blend(entry[2], entry[3]["layer_blend"])
