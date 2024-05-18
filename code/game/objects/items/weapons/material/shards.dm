@@ -172,7 +172,7 @@
 	max_force = 12
 	thrown_force_multiplier = 0.3
 	step_sound = 'sound/obj/item/material/shard/caltrop.ogg'
-	embed_chance = 65
+	embed_chance = 50
 	pierce_thin_footwear = TRUE
 	applies_material_details = FALSE
 
