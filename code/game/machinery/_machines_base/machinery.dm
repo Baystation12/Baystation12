@@ -355,9 +355,8 @@
 		var/area/temp_area = get_area(src)
 		if(temp_area)
 			var/obj/machinery/power/apc/temp_apc = temp_area.apc
-			var/obj/machinery/power/terminal/terminal = temp_apc && temp_apc.terminal()
-
-			if(terminal && terminal.powernet)
+			var/obj/machinery/power/terminal/terminal = temp_apc?.terminal()
+			if(terminal?.powernet)
 				terminal.powernet.trigger_warning()
 		if(user.stunned)
 			return TRUE
