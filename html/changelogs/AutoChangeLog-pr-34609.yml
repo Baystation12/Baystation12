@@ -1,0 +1,7 @@
+author: Spookerton
+changes:
+  - {tweak: Removed mapped tack pots.}
+  - {tweak: Added single tacks to junk spawns.}
+  - {tweak: Added single tack pots to office supply crates.}
+  - {tweak: Shards can only embed on body parts with less than two existing embeds.}
+delete-after: true
