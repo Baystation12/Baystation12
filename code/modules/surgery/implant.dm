@@ -169,45 +169,46 @@
 	playsound(target.loc, 'sound/items/hemostat.ogg', 50, TRUE)
 	..()
 
+
 /singleton/surgery_step/cavity/implant_removal/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
-	var/exposed = 0
+	var/exposed
 	if(affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED))
-		exposed = 1
+		exposed = TRUE
 	if(BP_IS_ROBOTIC(affected) && affected.hatch_state == HATCH_OPENED)
-		exposed = 1
-
+		exposed = TRUE
 	var/list/loot = list()
-	if(exposed)
+	if (exposed)
 		loot = affected.implants
 	else
-		for(var/datum/wound/wound in affected.wounds)
-			if(LAZYLEN(wound.embedded_objects))
+		for (var/datum/wound/wound in affected.wounds)
+			if (length(wound.embedded_objects))
 				loot |= wound.embedded_objects
-
-	if (length(loot))
-
-		var/obj/item/obj = pick(loot)
-
-		user.visible_message(SPAN_NOTICE("[user] takes something out of incision on [target]'s [affected.name] with \the [tool]."), \
-		SPAN_NOTICE("You take \the [obj] out of incision on \the [target]'s [affected.name] with \the [tool].") )
+	if (!length(loot))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] could not find anything inside \the [target]'s [affected.name], and pulls their [tool] out."),
+			SPAN_NOTICE("You could not find anything inside \the [target]'s [affected.name].")
+		)
+		return
+	shuffle(loot, TRUE)
+	for (var/i = length(loot) to 1 step -1)
+		var/obj/item/obj = loot[i]
+		user.visible_message(
+			SPAN_NOTICE("\The [user] takes something out of incision on \the [target]'s [affected.name] with \a [tool]."),
+			SPAN_NOTICE("You take \a [obj] out of the incision on \the [target]'s [affected.name] with \the [tool].")
+		)
 		target.remove_implant(obj, TRUE, affected)
-
 		SET_BIT(target.hud_updateflag, IMPLOYAL_HUD)
-
-		//Handle possessive brain borers.
-		if(istype(obj,/mob/living/simple_animal/borer))
+		if (istype(obj, /mob/living/simple_animal/borer))
 			var/mob/living/simple_animal/borer/worm = obj
-			if(worm.controlling)
+			if (worm.controlling)
 				target.release_control()
 			worm.detatch()
 			worm.leave_host()
+		playsound(target.loc, 'sound/effects/squelch1.ogg', 15, TRUE)
+		if (i == 1 || !user.do_skilled(3 SECONDS, SKILL_ANATOMY, target, 0.3, DO_SURGERY) || !user.use_sanity_check(target, tool))
+			break
 
-
-			playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
-	else
-		user.visible_message(SPAN_NOTICE("[user] could not find anything inside [target]'s [affected.name], and pulls \the [tool] out."), \
-		SPAN_NOTICE("You could not find anything inside [target]'s [affected.name].") )
 
 /singleton/surgery_step/cavity/implant_removal/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	..()
