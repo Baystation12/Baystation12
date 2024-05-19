@@ -40,7 +40,7 @@
 			// step 3 tries to locate an APC. It tries up to three times before failing, relying on external influence to restore power only.
 			if(AI_RESTOREPOWER_CONNECTED)
 				var/area/A = get_area(src)
-				theAPC = A.get_apc()
+				theAPC = A.apc
 
 				if(!istype(theAPC))
 					to_chat(src, SPAN_NOTICE("Error processing connection to APC: Attempt [connection_failures+1]/[AI_POWER_RESTORE_MAX_ATTEMPTS]"))
