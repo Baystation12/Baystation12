@@ -75,19 +75,22 @@
 	access = access_brig
 
 /singleton/hierarchy/supply_pack/operations/bureaucracy
-	contains = list(/obj/item/material/clipboard,
-					 /obj/item/material/clipboard,
-					 /obj/item/pen/retractable/red,
-					 /obj/item/pen/retractable/blue,
-					 /obj/item/pen/green,
-					 /obj/item/device/camera_film,
-					 /obj/item/folder/blue,
-					 /obj/item/folder/red,
-					 /obj/item/folder/yellow,
-					 /obj/item/hand_labeler,
-					 /obj/item/tape_roll,
-					 /obj/structure/filingcabinet/chestdrawer{anchored = FALSE},
-					 /obj/item/paper_bin)
+	contains = list(
+		/obj/item/material/clipboard,
+		/obj/item/material/clipboard,
+		/obj/item/pen/retractable/red,
+		/obj/item/pen/retractable/blue,
+		/obj/item/pen/green,
+		/obj/item/device/camera_film,
+		/obj/item/folder/blue,
+		/obj/item/folder/red,
+		/obj/item/folder/yellow,
+		/obj/item/hand_labeler,
+		/obj/item/tape_roll,
+		/obj/structure/filingcabinet/chestdrawer{anchored = FALSE},
+		/obj/item/paper_bin,
+		/obj/item/storage/pill_bottle/tacks
+	)
 	name = "Office supplies"
 	cost = 15
 	containertype = /obj/structure/closet/crate/large

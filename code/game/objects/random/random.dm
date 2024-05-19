@@ -445,19 +445,22 @@
 	icon_state = "greenglow"
 
 /obj/random/trash/spawn_choices()
-	return list(/obj/item/remains/lizard,
-				/obj/decal/cleanable/blood/gibs/robot,
-				/obj/decal/cleanable/blood/oil,
-				/obj/decal/cleanable/blood/oil/streak,
-				/obj/decal/cleanable/spiderling_remains,
-				/obj/item/remains/mouse,
-				/obj/decal/cleanable/vomit,
-				/obj/decal/cleanable/blood/splatter,
-				/obj/decal/cleanable/ash,
-				/obj/decal/cleanable/generic,
-				/obj/decal/cleanable/flour,
-				/obj/decal/cleanable/dirt,
-				/obj/item/remains/robot)
+	return list(
+		/obj/item/remains/lizard,
+		/obj/decal/cleanable/blood/gibs/robot,
+		/obj/decal/cleanable/blood/oil,
+		/obj/decal/cleanable/blood/oil/streak,
+		/obj/decal/cleanable/spiderling_remains,
+		/obj/item/remains/mouse,
+		/obj/decal/cleanable/vomit,
+		/obj/decal/cleanable/blood/splatter,
+		/obj/decal/cleanable/ash,
+		/obj/decal/cleanable/generic,
+		/obj/decal/cleanable/flour,
+		/obj/decal/cleanable/dirt,
+		/obj/item/remains/robot,
+		/obj/item/material/shard/caltrop/tack
+	)
 
 
 /obj/random/closet //A couple of random closets to spice up maint
