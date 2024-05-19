@@ -119,7 +119,7 @@
 			damage_text = "gouges"
 		else
 			var/damage_flags = DAMAGE_FLAG_SHARP
-			if (prob(embed_chance))
+			if (prob(embed_chance) && length(external.implants) < 2)
 				damage_flags |= DAMAGE_FLAG_EDGE
 				damage_text = "pierces into"
 			var/wound = external.take_external_damage(force * 0.75, 0, damage_flags)
@@ -189,7 +189,7 @@
 	icon_state = "tack0"
 	w_class = ITEM_SIZE_TINY
 	default_material = MATERIAL_ALUMINIUM
-	max_force = 3
+	max_force = 2
 	step_sound = 'sound/obj/item/material/shard/tack.ogg'
 	embed_chance = 100
 	pierce_thin_footwear = FALSE

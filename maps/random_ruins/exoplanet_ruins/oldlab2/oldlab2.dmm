@@ -6424,7 +6424,6 @@
 /obj/structure/noticeboard{
 	pixel_y = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab2/office)
 "Hq" = (
