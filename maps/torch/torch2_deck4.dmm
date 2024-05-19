@@ -2809,7 +2809,6 @@
 /obj/structure/noticeboard{
 	pixel_y = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /obj/machinery/button/blast_door{
 	id_tag = "sup_office";
 	name = "Desk Shutter Control";
@@ -13427,7 +13426,6 @@
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /obj/random_multi/single_item/memo_supply,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/deckchief)

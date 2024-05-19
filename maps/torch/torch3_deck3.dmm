@@ -4970,7 +4970,6 @@
 /obj/structure/noticeboard{
 	pixel_y = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/center)
 "lf" = (
@@ -7375,7 +7374,6 @@
 	dir = 4;
 	pixel_x = -31
 	},
-/obj/item/storage/pill_bottle/tacks,
 /obj/machinery/microwave{
 	pixel_x = -1;
 	pixel_y = 6

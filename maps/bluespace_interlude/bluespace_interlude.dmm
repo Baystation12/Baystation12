@@ -18,7 +18,6 @@
 /obj/structure/noticeboard/anomaly{
 	pixel_x = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /obj/decal/cleanable/cobweb2,
 /obj/item/paper/bluespace_interlude/note1,
 /turf/simulated/floor/tiled/white,

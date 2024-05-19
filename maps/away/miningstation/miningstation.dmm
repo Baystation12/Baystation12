@@ -2554,7 +2554,6 @@
 /area/miningstation/bridge)
 "gj" = (
 /obj/structure/noticeboard,
-/obj/item/storage/pill_bottle/tacks,
 /obj/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/bridge)

@@ -883,7 +883,6 @@
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /turf/simulated/floor,
 /area/constructionsite/bridge)
 "cS" = (

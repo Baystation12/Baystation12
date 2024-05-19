@@ -4309,7 +4309,6 @@
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /turf/simulated/floor/carpet,
 /area/medical/counselor/therapy)
 "ahK" = (
@@ -17410,7 +17409,6 @@
 /obj/structure/noticeboard{
 	pixel_y = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /turf/simulated/floor/tiled/white,
 /area/medical/foyer)
 "fVw" = (
@@ -19012,7 +19010,6 @@
 /obj/structure/noticeboard{
 	pixel_y = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /obj/floor_decal/corner/paleblue/mono,
 /obj/machinery/recharger,
 /obj/structure/table/glass,
@@ -19892,7 +19889,6 @@
 /obj/structure/noticeboard{
 	pixel_y = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /turf/simulated/floor/tiled/monotile,
 /area/security/detectives_office)
 "jrH" = (
@@ -22143,7 +22139,6 @@
 /obj/structure/noticeboard{
 	pixel_y = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "mpq" = (
@@ -22876,7 +22871,6 @@
 /obj/structure/noticeboard{
 	pixel_y = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/locker)
 "nkh" = (
@@ -29188,7 +29182,6 @@
 /obj/structure/noticeboard{
 	pixel_y = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/conference)
 "vii" = (

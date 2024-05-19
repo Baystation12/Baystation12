@@ -1318,7 +1318,6 @@
 /obj/structure/noticeboard{
 	pixel_y = 30
 	},
-/obj/item/storage/pill_bottle/tacks,
 /obj/item/storage/toolbox/emergency,
 /obj/item/device/flashlight,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -2138,7 +2137,6 @@
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/meeting_room)
 "dR" = (
@@ -3979,7 +3977,6 @@
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /obj/machinery/button/alternate/door/bolts{
 	desc = "A remote control-switch for the office door.";
 	id_tag = "liaisondoor2";
@@ -5659,7 +5656,6 @@
 /obj/structure/noticeboard{
 	pixel_y = -30
 	},
-/obj/item/storage/pill_bottle/tacks,
 /obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
@@ -7709,7 +7705,6 @@
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/sgr)
 "tC" = (
@@ -8082,7 +8077,6 @@
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/sgr)
 "uB" = (
@@ -8417,7 +8411,6 @@
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /obj/item/reagent_containers/food/drinks/glass2/rocks,
 /obj/item/reagent_containers/food/drinks/glass2/rocks,
 /obj/item/reagent_containers/food/drinks/glass2/rocks,
@@ -8880,7 +8873,6 @@
 /obj/structure/noticeboard{
 	pixel_x = -32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /obj/machinery/keycard_auth/torch{
 	pixel_y = -24
 	},
@@ -10584,7 +10576,6 @@
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /obj/machinery/newscaster{
 	pixel_y = -32
 	},
@@ -11167,7 +11158,6 @@
 /obj/structure/noticeboard{
 	pixel_y = 30
 	},
-/obj/item/storage/pill_bottle/tacks,
 /obj/structure/table/woodentable_reinforced/walnut,
 /obj/machinery/newscaster{
 	pixel_x = 32
@@ -11465,7 +11455,6 @@
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /obj/machinery/computer/modular/preset/aislot/sysadmin,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
@@ -12137,7 +12126,6 @@
 /obj/structure/noticeboard{
 	pixel_y = 30
 	},
-/obj/item/storage/pill_bottle/tacks,
 /obj/item/sticky_pad/random,
 /obj/machinery/button/alternate/door{
 	desc = "A remote control-switch for the office door.";
@@ -12386,7 +12374,6 @@
 /obj/structure/noticeboard{
 	pixel_y = 30
 	},
-/obj/item/storage/pill_bottle/tacks,
 /obj/item/aiModule/freeform,
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/cobed)
@@ -14361,7 +14348,6 @@
 /obj/structure/noticeboard{
 	pixel_x = -32
 	},
-/obj/item/storage/pill_bottle/tacks,
 /obj/floor_decal/corner/blue/three_quarters{
 	dir = 8
 	},
@@ -15704,7 +15690,6 @@
 /obj/structure/noticeboard{
 	pixel_y = 30
 	},
-/obj/item/storage/pill_bottle/tacks,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/cos)
 "Zx" = (
