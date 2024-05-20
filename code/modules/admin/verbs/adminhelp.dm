@@ -71,7 +71,7 @@ var/global/list/adminhelp_ignored_words = list("unknown","the","a","an","of","mo
 		to_chat(src, SPAN_COLOR("red", "Error: Admin-PM: You cannot send adminhelps (Muted)."))
 		return
 
-	adminhelped = 1 //Determines if they get the message to reply by clicking the name.
+	adminhelped = TRUE
 
 
 	//clean the input msg

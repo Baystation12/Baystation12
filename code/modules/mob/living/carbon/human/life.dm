@@ -1146,7 +1146,7 @@
 		else if((mRemote in mutations) && remoteview_target)
 			if(remoteview_target.stat == CONSCIOUS)
 				isRemoteObserve = 1
-		if(!isRemoteObserve && client && !client.adminobs)
+		if(!isRemoteObserve && client)
 			remoteview_target = null
 			reset_view(null, 0)
 

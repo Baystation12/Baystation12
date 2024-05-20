@@ -188,7 +188,7 @@
 	else if(eyeobj)
 		if(eyeobj.owner != src)
 			reset_view(null)
-	else if(!client?.adminobs)
+	else
 		reset_view(null)
 
 /mob/living/proc/update_sight()
