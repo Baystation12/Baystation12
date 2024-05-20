@@ -188,6 +188,7 @@ if (!(datum.process_flags & AI_FASTPROCESSING)) { \
 
 /// 'Tactical' processes such as moving a step, meleeing an enemy, firing a projectile, and other fairly cheap actions that need to happen quickly.
 /datum/ai_holder/proc/handle_tactics()
+	set background = TRUE
 	if (holder.key && !autopilot)
 		return
 	if (!is_disabled())
@@ -196,6 +197,7 @@ if (!(datum.process_flags & AI_FASTPROCESSING)) { \
 
 /// 'Strategical' processes that are more expensive on the CPU and so don't get run as often as the above proc, such as A* pathfinding or robust targeting.
 /datum/ai_holder/proc/handle_strategicals()
+	set background = TRUE
 	if (holder.key && !autopilot)
 		return
 	if (!is_disabled())
