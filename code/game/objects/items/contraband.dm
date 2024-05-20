@@ -75,7 +75,7 @@
 
 // Proc to shove them up your nose
 
-/obj/item/reagent_containers/powder/attackby(obj/item/W, mob/living/user)
+/obj/item/reagent_containers/powder/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/glass_extra/straw) || istype(W, /obj/item/paper/cig) || istype(W, /obj/item/spacecash))
 		if(!user.check_has_mouth()) // We dont want dionae or adherents doing lines of cocaine. Probably.
 			to_chat(SPAN_WARNING("Without a nose, you seem unable to snort from \the [src]."))

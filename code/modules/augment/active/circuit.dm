@@ -7,7 +7,7 @@
 	desc = "A DIY modular assembly, courtesy of Xion Industrial. Circuitry not included."
 
 
-/obj/item/organ/internal/augment/active/item/circuit/attackby(obj/item/I, mob/user)
+/obj/item/organ/internal/augment/active/item/circuit/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if (isCrowbar(I))
 		if (item)
 			item.canremove = TRUE
@@ -17,7 +17,8 @@
 			playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 		else
 			to_chat(user, SPAN_WARNING("The augment is empty!"))
-		return
+		return TRUE
+
 	if (istype(I, /obj/item/device/electronic_assembly/augment))
 		if (item)
 			to_chat(user, SPAN_WARNING("There's already an assembly in there."))
@@ -25,5 +26,5 @@
 			item = I
 			item.canremove = FALSE
 			playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-		return
-	..()
+		return TRUE
+	return ..()

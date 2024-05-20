@@ -85,15 +85,15 @@
 		P.card_icon = "joker"
 		cards += P
 
-/obj/item/deck/attackby(obj/O, mob/user)
+/obj/item/deck/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(istype(O,/obj/item/hand))
 		var/obj/item/hand/H = O
 		for(var/datum/playingcard/P in H.cards)
 			cards += P
 		qdel(O)
 		to_chat(user, "You place your cards on the bottom of \the [src].")
-		return
-	..()
+		return TRUE
+	return ..()
 
 /obj/item/deck/verb/draw_card()
 
@@ -164,7 +164,7 @@
 		user.visible_message("\The [user] deals a card to \the [target].")
 	H.throw_at(get_step(target,target.dir),10,1,user)
 
-/obj/item/hand/attackby(obj/O, mob/user)
+/obj/item/hand/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(istype(O,/obj/item/hand))
 		var/obj/item/hand/H = O
 		for(var/datum/playingcard/P in cards)
@@ -172,8 +172,8 @@
 		H.concealed = src.concealed
 		qdel(src)
 		H.update_icon()
-		return
-	..()
+		return TRUE
+	return ..()
 
 /obj/item/deck/attack_self(mob/user)
 

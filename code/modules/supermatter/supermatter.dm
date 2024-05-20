@@ -527,7 +527,7 @@
 	if (user.drop_from_inventory(W))
 		Consume(W)
 		return TRUE
-	else return ..()
+	return ..()
 
 
 /obj/machinery/power/supermatter/Bumped(atom/AM as mob|obj)

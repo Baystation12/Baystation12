@@ -25,12 +25,14 @@
 /obj/item/mech_component/manipulators/prebuild()
 	motivator = new(src)
 
-/obj/item/mech_component/manipulators/attackby(obj/item/thing, mob/user)
+/obj/item/mech_component/manipulators/use_tool(obj/item/thing, mob/living/user, list/click_params)
 	if(istype(thing,/obj/item/robot_parts/robot_component/actuator))
 		if(motivator)
 			to_chat(user, SPAN_WARNING("\The [src] already has an actuator installed."))
-			return
-		if(install_component(thing, user)) motivator = thing
+			return TRUE
+		if(install_component(thing, user))
+			motivator = thing
+			return TRUE
 	else
 		return ..()
 
@@ -84,4 +86,3 @@
 	icon_state = "combat_arms"
 	action_delay = 10
 	power_use = 50
-

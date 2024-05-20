@@ -62,12 +62,12 @@
 		color = "#ffffff"
 		alpha = 255
 
-/obj/item/material/shard/use_tool(obj/item/item, mob/living/user, list/click_params)
-	if(isWelder(item) && material.shard_can_repair)
-		var/obj/item/weldingtool/welder = item
-		if (!welder.can_use(1, user))
+/obj/item/material/shard/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if(isWelder(W) && material.shard_can_repair)
+		var/obj/item/weldingtool/WT = W
+		if (!WT.can_use(1, user))
 			return TRUE
-		welder.remove_fuel(1, user)
+		WT.remove_fuel(1, user)
 		material.place_sheet(get_turf(src))
 		qdel(src)
 		return TRUE

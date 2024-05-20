@@ -221,7 +221,7 @@
 			break
 
 	if(wrapped) //Already have an item.
-		//Temporary put wrapped into user so target's attackby() checks pass.
+		//Temporary put wrapped into user so target's use_tool() checks pass.
 		wrapped.forceMove(user)
 
 		if (istype(target, /obj/structure/table))
