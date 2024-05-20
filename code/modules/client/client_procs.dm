@@ -64,9 +64,6 @@
 		if(!holder && received_irc_pm < world.time - 6000) //Worse they can do is spam IRC for 10 minutes
 			to_chat(usr, SPAN_WARNING("You are no longer able to use this, it's been more then 10 minutes since an admin on IRC has responded to you"))
 			return
-		if(mute_irc)
-			to_chat(usr, SPAN_WARNING("You cannot use this as your client has been muted from sending messages to the admins on IRC"))
-			return
 		cmd_admin_irc_pm(href_list["irc_msg"])
 		return
 
@@ -151,9 +148,10 @@
 			break
 
 	// Change the way they should download resources.
-	if(config.resource_urls && length(config.resource_urls))
-		src.preload_rsc = pick(config.resource_urls)
-	else src.preload_rsc = 1 // If config.resource_urls is not set, preload like normal.
+	if (length(config.resource_urls))
+		preload_rsc = pick(config.resource_urls)
+	else
+		preload_rsc = TRUE
 
 	if(byond_version < DM_VERSION)
 		to_chat(src, SPAN_WARNING("You are running an older version of BYOND than the server and may experience issues."))

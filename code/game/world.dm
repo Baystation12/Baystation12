@@ -402,7 +402,6 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		var/amessage =  SPAN_CLASS("staff_pm", "[rank] PM from <a href='?irc_msg=[input["sender"]]'>[input["sender"]]</a> to <b>[key_name(C)]</b> : [input["msg"]]")
 
 		C.received_irc_pm = world.time
-		C.irc_admin = input["sender"]
 
 		sound_to(C, sound('sound/ui/pm-notify.ogg', volume = 40))
 		to_chat(C, message)

@@ -105,7 +105,7 @@
 		recieve_message = "[SPAN_CLASS("pm", "[SPAN_CLASS("howto", "<b>-- Click the [recieve_pm_type]'s name to reply --</b>")]")]\n"
 		if(C.adminhelped)
 			to_chat(C, recieve_message)
-			C.adminhelped = 0
+			C.adminhelped = FALSE
 
 	var/sender_message = "[create_text_tag("pm_out_alt", "PM", src)] to [SPAN_CLASS("name", get_options_bar(C, holder ? 1 : 0, holder ? 1 : 0, 1))]"
 	if(holder)
