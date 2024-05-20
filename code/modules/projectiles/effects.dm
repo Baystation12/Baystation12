@@ -176,7 +176,7 @@
 //----------------------------
 // Bullet
 //----------------------------
-/obj/projectile/bullet/muzzle
+/obj/projectile/bullet
 	icon_state = "muzzle_bullet"
 	light_range = 5
 	light_power = 1

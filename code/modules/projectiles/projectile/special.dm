@@ -140,7 +140,7 @@
 	nodamage = TRUE
 	damage_type = DAMAGE_PAIN
 	damage_flags = 0
-	muzzle_type = /obj/projectile/bullet/muzzle
+	muzzle_type = /obj/projectile/bullet
 
 /obj/item/projectile/bola
 	name = "bola"
