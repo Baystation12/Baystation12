@@ -57,3 +57,8 @@
 // IPC_COOLING_UNIT - Start
 #define BP_COOLING "cooling system"
 // IPC_COOLING_UNIT - End
+
+// RESOMI - Start
+#define SPECIES_RESOMI  "Resomi"
+#define LANGUAGE_RESOMI "Schechi"
+// RESOMI - End

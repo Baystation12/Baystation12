@@ -19,7 +19,7 @@ var/global/repository/images/image_repository = new()
 	if(!atom_cache_list)
 		atom_cache_list = list()
 		image_cache_for_atoms[holder] = atom_cache_list
-		GLOB.destroyed_event.register(holder, src, /repository/images/proc/atom_destroyed)
+		GLOB.destroyed_event.register(holder, src, TYPE_PROC_REF(/repository/images, atom_destroyed))
 
 	var/cache_key = "[icon]-[icon_state]-[plane]-[layer]"
 	. = atom_cache_list[cache_key]
@@ -37,7 +37,7 @@ var/global/repository/images/image_repository = new()
 	atom_cache_list.Cut()
 	image_cache_for_atoms -= destroyed
 
-	GLOB.destroyed_event.unregister(destroyed, src, /repository/images/proc/atom_destroyed)
+	GLOB.destroyed_event.unregister(destroyed, src, TYPE_PROC_REF(/repository/images, atom_destroyed))
 
 // Returns an image not bound to anything and which is typically applied as an overlay/underlay.
 /repository/images/proc/overlay_image(icon, icon_state, alpha, appearance_flags, color, dir, plane = FLOAT_PLANE, layer = FLOAT_LAYER)

@@ -63,11 +63,11 @@
 		LAZYDISTINCTADD(A.gunshot_residue, caliber)
 
 
-/obj/item/ammo_casing/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/ammo_casing/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isScrewdriver(W))
 		if(!BB)
-			to_chat(user, SPAN_NOTICE("There is no bullet in the casing to inscribe anything into."))
-			return
+			to_chat(user, SPAN_WARNING("There is no bullet in the casing to inscribe anything into."))
+			return TRUE
 
 		var/tmp_label = ""
 		var/label_text = sanitizeSafe(input(user, "Inscribe some text into \the [initial(BB.name)]","Inscription",tmp_label), MAX_NAME_LEN)
@@ -79,7 +79,9 @@
 		else
 			to_chat(user, SPAN_NOTICE("You inscribe \"[label_text]\" into \the [initial(BB.name)]."))
 			BB.SetName("[initial(BB.name)] (\"[label_text]\")")
-	else ..()
+		return TRUE
+
+	return ..()
 
 
 /obj/item/ammo_casing/on_update_icon()
@@ -147,20 +149,22 @@
 	update_icon()
 
 
-/obj/item/ammo_magazine/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/ammo_magazine/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/ammo_casing))
 		var/obj/item/ammo_casing/C = W
 		if(C.caliber != caliber)
-			to_chat(user, SPAN_WARNING("[C] does not fit into [src]."))
-			return
+			to_chat(user, SPAN_WARNING("\The [C] does not fit into \the [src]."))
+			return TRUE
 		if(length(stored_ammo) >= max_ammo)
-			to_chat(user, SPAN_WARNING("[src] is full!"))
-			return
+			to_chat(user, SPAN_WARNING("\The [src] is full!"))
+			return TRUE
 		if(!user.unEquip(C, src))
-			return
+			FEEDBACK_UNEQUIP_FAILURE(user, C)
+			return TRUE
 		stored_ammo.Add(C)
 		update_icon()
-	else ..()
+		return TRUE
+	return ..()
 
 
 /obj/item/ammo_magazine/attack_self(mob/user)

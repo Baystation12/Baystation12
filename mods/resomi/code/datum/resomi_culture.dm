@@ -1,33 +1,3 @@
-// Resomi cultures.
-
-//#define CULTURE_RESOMI_BIRDCAGE   		"Birdcage, \"Born in the void\""
-#define CULTURE_RESOMI_EREMUS     		"Eremus, Eremusianin"
-#define CULTURE_RESOMI_ASRANDA    		"Asranda, Randian"
-//#define CULTURE_RESOMI_SAVEEL     		"Saveel, Sav"
-#define CULTURE_RESOMI_REFUGEE 			"Imperial refugee"
-#define CULTURE_RESOMI_NEWGENERATION	"New generation"
-#define CULTURE_RESOMI_LOSTCOLONYRICH  "A native of a thriving lost colony"
-#define CULTURE_RESOMI_LOSTCOLONYPOOR  "A native of a impoverished lost colony"
-
-//#define FACTION_RESOMI     |There are no fractions, as well as the soil for their appearance.
-
-#define HOME_SYSTEM_RESOMI_BIRDCAGE      	"Birdcage (Colchis Habitat)"
-#define HOME_SYSTEM_RESOMI_EREMUS        	"Eremus"
-//#define HOME_SYSTEM_RESOMI_TIAMATH       "Tiamat"
-#define HOME_SYSTEM_RESOMI_ASRANDA      	"Asranda"
-#define HOME_SYSTEM_RESOMI_SAVEEL           "Zer'een (Saveel)"
-#define HOME_SYSTEM_RESOMI_LOST_COLONY      "Unknown independent colony"
-#define HOME_SYSTEM_RESOMI_REFUGEE_COLONY   "Unknown Independent Refugee Colony"
-#define HOME_SYSTEM_RESOMI_HOMELESS 		"None"
-#define HOME_SYSTEM_RESOMI_IMPER_COLONY  "Unknown Imperial colony"
-
-#define RELIGION_RESOMI_CHOSEN    "Faith of the Chosen"
-#define RELIGION_RESOMI_EMPEROR   "Cult of the Emperor"
-#define RELIGION_RESOMI_MOUNTAIN  "Echos of the Mountain"
-#define RELIGION_RESOMI_SKIES     "Lights of the Skies"
-
-
-
 /singleton/cultural_info/culture/resomi
 	language = LANGUAGE_RESOMI
 	name_language = LANGUAGE_RESOMI
@@ -39,6 +9,7 @@
 
 /singleton/cultural_info/culture/resomi/eremus
 	name = CULTURE_RESOMI_EREMUS
+	nickname = "Эремусианин"
 	description = "Вы с Эремуса - пустынной планеты с отсутствующим каким-либо центральным правительством. \
 	Эремус расположен наиболее близко к имперскому пространству, \
 	чем большинство других колоний. Вновь прибывшие <font color=\"#a50aff\">Резоми</font>, если они не привыкли к \
@@ -49,6 +20,7 @@
 
 /singleton/cultural_info/culture/resomi/asranda
 	name = CULTURE_RESOMI_ASRANDA
+	nickname = "Рандианин"
 	description = "Вы рандианин, с планеты А’шранда.  Культура жителей данного мира похожа на культуру старой \
 	Республики.  Общество,  в отличии от имперских собратьев, здесь свободно, и несмотря на коррумпированную \
 	политическую систему, каждый  рандианин имеет куда более высокий уровень социальной мобильности, чем большинство \
@@ -63,6 +35,7 @@
 
 /*singleton/cultural_info/culture/resomi/saveel
 	name = CULTURE_RESOMI_SAVEEL
+	nickname = "Савиилец"
 	description = "Вы один из представителей cавиильцев, племеного общества <font color=\"#a50aff\">Резоми</font> на планете \
 	\
 	 <br><br><p><font color="red">OOC Notes:Постарайтесь хорошо изучить весь доступный лор по Савилю, а так же хорошо продумать свою предысторию попадания на корабль (желательно не забыв про заполнение записей), \
@@ -71,6 +44,7 @@
 
 /singleton/cultural_info/culture/resomi/refugee
 	name = CULTURE_RESOMI_REFUGEE
+	nickname = "Имперский беженец"
 	description = "	Вы родились в одном из миров, принадлежащих Империи Сирисай. Но еперь не важно, где вы родились, кем вы были и какую ступень в иерархии вы занимали.\
 	 Вы предали Империю и имперские идеалы, а так же свой народ, свою величественную расу. Империя уже никогда не простит ваше предательство, \
 	 как и остальные <font color=\"#a50aff\">Резоми</font>, жертвующие свои жизни ради выживания Империи, ради светлого будущего своих потомков, ради безопасности всей галактики, \
@@ -85,6 +59,7 @@
 
 /singleton/cultural_info/culture/resomi/newgeneration
 	name = CULTURE_RESOMI_NEWGENERATION
+	nickname = "Ребёнок изгнанников"
 	description = "Вы новое поколение, произошедшее от недавних имперских беженцев. Вы могли родится в одном из многочисленных гетто, основанной беженцами колоний или пародий на среду обитания. \
 	 Условия жизни сильно разнятся от места к месту, поэтому вы могли успеть прожить за это время как спокойную, так и неспокойную и тяжёлую жизнь. Сильно разнится и поведение, \
 	 оно сильно зависит от условий и окружения, вы могли стать как и более агрессивным и нетерпимым к ксеносам, так и куда более дружелюбными по отношению к другим расам, \
@@ -94,6 +69,7 @@
 
 /singleton/cultural_info/culture/resomi/lost_colony_rich
 	name = CULTURE_RESOMI_LOSTCOLONYRICH
+	nickname = "Уроженец процветающей потерянной колонии"
 	description = "Вы выходец с одной из \"потерянных\" колоний. К счастью \"Падение\" не так сильно затронуло вашу колонию,\
 	 а так же благодаря удачному стечению обстоятельств и удалённому расположению нет намёков о том, что Империя знает о вашей колонии.\
 	 Благодаря всему этому вашим предкам удалось относительно спокойно пережить кризис, обрести автономию и сохранить небольшую часть технологий и даже манеры Республики,\
@@ -102,6 +78,7 @@
 
 /singleton/cultural_info/culture/resomi/lost_colony_poor
 	name = CULTURE_RESOMI_LOSTCOLONYPOOR
+	nickname = "Уроженец упадочной потерянной колонии"
 	description = "Вы выходец с одной из \"потерянных\" колоний, к сожалению ваша колония сильно пострадала в результате \"Падения\",\
 	 неизвестно почему Империя оставила колонию на произвол судьбы. Возможно она даже не догадывается, что колония всё ещё подаёт признаки жизни,\
 	 возможно всё куда проще, и Империя пока занята своими внутренними проблемами, и не готова взять под свой контроль ещё один голодный и разорёный мир.\
@@ -109,10 +86,19 @@
 	 Колонисты таких миров не живут, они каждый день ведут борьбу за выживание."
 	economic_power = 0.65
 
+/singleton/cultural_info/culture/resomi/skrell
+	name = CULTURE_RESOMI_SKRELL
+	nickname = "Скрелльский приемыш"
+	description = "Первая крупная волна резоми-беженцев, частично осевшая у скреллов, прошла еще в 2243 году.\
+		Скреллы оценили развитие и профессионализм некоторых беженцев, оставив их у себя, а менее достойных оставили на попечение ЦПСС. \
+		Резоми, ассимилировавшиеся со скреллами, часто менее эмоциональны и склонны соблюдать многие обычаи Кверрбалака."
+	economic_power = 1.2
+
 
 
 /singleton/cultural_info/location/birdcage
 	name = HOME_SYSTEM_RESOMI_BIRDCAGE
+	nickname = "\"Бирдкейдж\" (Среда обитания \"Колхис\")"
 	description = "Жилой модуль \"Бирдкейдж\" искуственной среды обитания \"Колхис\", расположенной на орбите вокруг Джикамы. \
 	\"Колхис\" некоторое время являлся пунктом приема для некоторых беженцев-<font color=\"#a50aff\">резоми</font> в 2275 году. \
 	После уменьшения финансирования и закрытия лагеря беженцев для новых приезжих контроль над безопасностью среды обитания  был передан её администрации. \
@@ -128,6 +114,7 @@
 
 /singleton/cultural_info/location/eremus
 	name = HOME_SYSTEM_RESOMI_EREMUS
+	nickname = "Эремус"
 	description = "Эремус - планета расположенная в системе Голгенна, имеет суперконтинент с двумя огромными морями, соединёнными между собой сетью рек. \
 	 Имеет как и наполненные жизнью биомы возле морей, рек и оазисов, так и неблагоприятные для жизни обширные территории пустынь. \
 	 Помимо людей на планете так же проживают и <font color=\"#a50aff\">Резоми</font>, в основном предпочитающие проживать в Варсе. Варс - это общество, основанное беженцами из Империи, \
@@ -138,14 +125,15 @@
 	 Вне стен городов понятие \"экономики\" теряется в песках великих пустынь, уступая место \"понятию\" выживания. Рабство и организованная преступность распространены,\
 	 и уже давно стали обыденностью для жителей данной планеты.<br><br>\
 	<a href=\"https://wiki.infinity-ss13.info/index.php?title=%D0%AD%D1%80%D0%B5%D0%BC%D1%83%D1%81\" target=\"_blank\" >Дополнительна&#1103 информаци&#1103;</a> "
-	capital = "None"
-	ruling_body = "Varies from settlement to settlement"
-	distance = "UNDEFINED DISTANCE"
+	capital = "Отсутствует"
+	ruling_body = "Зависит от поселения"
+	distance = "Неизвестно"
 	economic_power = 0.85
 	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN, LANGUAGE_GUTTER, LANGUAGE_RESOMI, LANGUAGE_HUMAN_EURO)
 
 /singleton/cultural_info/location/asranda
 	name = HOME_SYSTEM_RESOMI_ASRANDA
+	nickname = "А’шранда"
 	description = " А’шранда - одна из колонизированных планет ещё со времён Республики. Планета почти полностью покрыта горами, имеет один океан который проходит почти от полюса до полюса. \
 	 Так же планета обладает мощным магнитным полем (которое сильно мешает удалённому изучению планеты) и внушительными запасами полезных ископаемых. \
 	 Климат имеет четыре сезона в году с минимальными вариациями. Прозрачная вода редко встречается на поверхности, и более крупная растительность встречается лишь в умеренных экваториальных регионах. \
@@ -157,75 +145,95 @@
 	language = LANGUAGE_RESOMI
 	capital = "Ацер'на"
 	ruling_body = "Демократическая олигархия"
-	distance = "UNDEFINED DISTANCE"
+	distance = "Неизвестно"
 	economic_power = 1.15
 	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN, LANGUAGE_HUMAN_EURO)
 
 /singleton/cultural_info/location/saveel
 	name = HOME_SYSTEM_RESOMI_SAVEEL
+	nickname = "Зер`ин (Савииль)"
 	description = "Савииль - технологически слаборазвитая  колония, расположенная на планете Зер`ин.  Планета находится далеко от торговых путей \
 	и звездных скоплений, что делает её малопосещаемым местом. Так же Зер`ин ничем непримечателен с точки зрения добычи минералов, полезные \
 	ископаемые присутствуют, но их достаточно мало. <br><br>Савиильцы, как правило, являются дикими и грубыми по сравнению с другими <font color=\"#a50aff\">Резоми</font>. \
 	Покинувший свою родную планету савиилец, является крайне редким явлением, особенно учитывая редкую посещаемость Зер`ина.<br><br>\
 	<a href=\"https://wiki.infinity-ss13.info/index.php?title=%D0%A1%D0%B0%D0%B2%D0%B8%D0%B8%D0%BB%D1%8C\" target=\"_blank\" >Дополнительна&#1103 информаци&#1103;</a>"
 	language = LANGUAGE_RESOMI
-	capital = "None"
+	capital = "Отсутствует"
 	ruling_body = "Племенная олигархия"
-	distance = "UNDEFINED DISTANCE"
+	distance = "Неизвестно"
 	economic_power = 0.45
 	secondary_langs = list(LANGUAGE_SIGN)
 
 /singleton/cultural_info/location/r_lost_colony
 	name = HOME_SYSTEM_RESOMI_LOST_COLONY
+	nickname = "Потерянная колония"
 	description = "Одна из множества \"потерянных\" колоний, основанных во времена Республики. К счастью или к сожалению, по итогу войны с \"восставшей\" синтетикой Империя потеряла контроль \
 	 над множеством миров <font color=\"#a50aff\">Резоми</font>, и до сих пор считает, что многие из колоний полностью разорёны или аннигилированы в ходе войны, либо на \
 	 данный момент не проявляет интереса к ним. Уроженцы некоторых так называемых \"потерянных\" колонии часто имеют манеры \"Республики\", такие как семейное ученичество \
 	 , демократическое управление и даже сотрудничество с ИИ. Другие же \"потерянные\" миры, сильно разоренные в результате Падения,\
 	  могут относиться ещё более яростно и более чуждо по отношению к синтетике и некоторым технологиям. Часто таким колониям приходится прибегать к экстремальным поступкам и решениям, чтобы выжить."
 	language = LANGUAGE_RESOMI
-	capital = "Various"
-	ruling_body = "Various"
-	distance = "Various"
+	capital = "Различается"
+	ruling_body = "Различается"
+	distance = "Различается"
 	economic_power = 1
 	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN, LANGUAGE_GUTTER, LANGUAGE_HUMAN_EURO)
 
 /singleton/cultural_info/location/r_refuge_colony
 	name = HOME_SYSTEM_RESOMI_REFUGEE_COLONY
+	nickname = "Колония беженцев"
 	description = "Малоизвестная  колония  имперских беженцев, одна из бесчисленного множества подобных.<br><br> <font color=\"#a50aff\">Резоми</font>, покидающие Империю с большим запасом снабжения и ресурсов, \
 	 и те некоторые, кому удается заработать немало денег в человеческом пространстве, нередко создают свои собственные колонии и места обитания. \
 	 Такие колонии порой  распологаются далеко от обитаемого и изученного пространства. Население колоний редко превышает черту и в тысячу колонистов, \
 	 но так или иначе некоторые из них имеют достаточное влияние, дабы \"спасать\" других <font color=\"#a50aff\">Резоми</font>, живущих в куда более худших условиях."
 	language = LANGUAGE_RESOMI
-	capital = "Various"
-	ruling_body = "Various"
-	distance = "Various"
+	capital = "Различается"
+	ruling_body = "Различается"
+	distance = "Различается"
 	economic_power = 0.8
 	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN, LANGUAGE_GUTTER, LANGUAGE_HUMAN_EURO)
 
 /singleton/cultural_info/location/r_homeless
 	name = HOME_SYSTEM_RESOMI_HOMELESS
+	nickname = "Не указано"
 	description = "Судя по всему, обстоятельства сложились так что вам не удалось найти свой новый дом вне границ Империи. Но скорее всего вы смогли найти работу, \
 	 и сохранить часть \"средств\" на дальнейшее существование, правда?"
 	language = LANGUAGE_RESOMI
-	capital = "none"
-	ruling_body = "none"
-	distance = "none"
+	capital = "Отсутствует"
+	ruling_body = "Отсутствует"
+	distance = "Отсутствует"
 	economic_power = 0.55
 	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN, LANGUAGE_GUTTER, LANGUAGE_HUMAN_EURO)
 
-/singleton/cultural_info/location/imperial_colony
+/*/singleton/cultural_info/location/imperial_colony
 	name = HOME_SYSTEM_RESOMI_IMPER_COLONY
+	nickname = "Имперская колония"
 	description = "Одна из множества колоний нахоядщихся во власти Империи, как и остальные страдающая от недостатка нормальной пищи, припасов и низкого уровня жизни в большей или чуть меньшей степени."
 	language = LANGUAGE_RESOMI
-	capital = "Various"
-	ruling_body = "Various"
-	distance = "Various"
+	capital = "Различается"
+	ruling_body = "Различается"
+	distance = "Различается"
 	economic_power = 0.4
-	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN)
+	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN)*/
+
+/singleton/cultural_info/location/resobalak
+	name = HOME_SYSTEM_RESOMI_RESOBALAK
+	nickname = "Скреллианская Империя"
+	description = "Со времени первой крупной волны резоми-беженцев, осевших у скреллов, успело смениться уже три поколения, и вы - представитель резоми, родившихся на территории Скреллианской Империи. \
+	 Об Империи вы знаете только из исторических книг и рассказов своих родителей. \
+	 Пусть традиции резоми и не обошли вас полностью, вы являетесь частью культуры скреллов."
+	language = LANGUAGE_RESOMI
+	additional_langs = list(LANGUAGE_SKRELLIAN)
+	capital = "Кверр'балак"
+	ruling_body = "Скреллианская Империя"
+	distance = "67 световых лет"
+	economic_power = 1.4
+	secondary_langs = list(LANGUAGE_SPACER, LANGUAGE_SIGN, LANGUAGE_HUMAN_EURO)
 
 
 /singleton/cultural_info/religion/chosen
 	name = RELIGION_RESOMI_CHOSEN
+	nickname = "Вера Избранных"
 	description = "Некогда преобладавшая религия до падения Республики. \"Вера Избранных\" - политеистическая религия, состоящая из четырнадцати божеств, в\
 	 которой каждый из богов управляет каким-либо аспектом жизни. Прежде всего, это Мать и Отец. Мать является создательницей звезд и неба, которая в паре\
 	  с Отцом вылупила остальных Богов. Отец - это прародитель всех <font color=\"#a50aff\">Резоми</font>, который поместил Сирисай на небеса и <font color=\"#a50aff\">Резоми</font> на него. Согласно Вере, святая\
@@ -233,15 +241,18 @@
 
 /singleton/cultural_info/religion/emperor
 	name = RELIGION_RESOMI_EMPEROR
+	nickname = "Культ Императора"
 	description = "Претерпевшая изменения во время падения \"Вера Избранных\", теперь ключевую роль в религии занимает бог-император - сын великих Матери и Отца,\
 	 посланный провести великий народ сквозь тёмное время."
 
 /singleton/cultural_info/religion/mountain
 	name = RELIGION_RESOMI_MOUNTAIN
+	nickname = "Эхо Гор"
 	description = "Образовавшаяся из поверий шахтёров, религия \"Эхо Гор\" стала популярна среди множества укрывшихся в шахтах и пещерах <font color=\"#a50aff\">Резоми</font>. Она говорит\
 	 о святости Гор, и возможности через медитацию стать единым с ними, подобным их несокрушимости и вечности, и обрести общую судьбу."
 
 /singleton/cultural_info/religion/skies
 	name = RELIGION_RESOMI_SKIES
+	nickname = "Свет Небес"
 	description = "Прозрачные небеса пропускают свет бессмертных и прекрасных звёзд, некогда потрясших своей красотой вышедших на поверхность после восстания \
 	машин <font color=\"#a50aff\">Резоми</font>. Религия \"Свет Небес\" гласит, что каждая звезда святая, и что именно из их божественного света и произошли <font color=\"#a50aff\">Резоми</font>,поэтому они обязаны воссоединиться с ними."

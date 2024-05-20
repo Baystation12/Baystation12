@@ -221,7 +221,7 @@
 			break
 
 	if(wrapped) //Already have an item.
-		//Temporary put wrapped into user so target's attackby() checks pass.
+		//Temporary put wrapped into user so target's use_tool() checks pass.
 		wrapped.forceMove(user)
 
 		if (istype(target, /obj/structure/table))
@@ -240,7 +240,7 @@
 		var/resolved = wrapped.resolve_attackby(target,user,params)
 
 		//If resolve_attackby forces waiting before taking wrapped, we need to let it finish before doing the rest.
-		addtimer(new Callback(src, .proc/finish_using, target, user, params, force_holder, resolved), 0)
+		addtimer(new Callback(src, PROC_REF(finish_using), target, user, params, force_holder, resolved), 0)
 
 	else if(istype(target,/obj/item)) //Check that we're not pocketing a mob.
 		var/obj/item/I = target

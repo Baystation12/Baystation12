@@ -87,7 +87,7 @@
 		T.check_exited()
 
 /obj/item/tube/dropped(mob/user)
-	GLOB.moved_event.unregister(user, src, /obj/item/tube/proc/check_exited)
+	GLOB.moved_event.unregister(user, src, TYPE_PROC_REF(/obj/item/tube, check_exited))
 	. = ..()
 	check_exited()
 
@@ -174,7 +174,7 @@
 			return TRUE
 		tubes.Add(T)
 		user.unEquip(T, src)
-		GLOB.moved_event.unregister(user, T, /obj/item/tube/proc/check_exited)
+		GLOB.moved_event.unregister(user, T, TYPE_PROC_REF(/obj/item/tube, check_exited))
 		to_chat(user, SPAN_INFO("You put the tube back in the hookah."))
 		return TRUE
 
@@ -235,14 +235,14 @@
 	if(!user.put_in_active_hand(T))
 		to_chat(user, SPAN_WARNING("Your active hand must be empty!"))
 		return TRUE
-	GLOB.moved_event.register(user, T, /obj/item/tube/proc/check_exited)
+	GLOB.moved_event.register(user, T, TYPE_PROC_REF(/obj/item/tube, check_exited))
 	tubes.Remove(T)
 	to_chat(user, SPAN_INFO("You take the smoking tube."))
 
 /obj/item/tube/attack_hand(mob/user)
 	. = ..()
 	if(!check_exited())
-		GLOB.moved_event.register(user, src, /obj/item/tube/proc/check_exited)
+		GLOB.moved_event.register(user, src, TYPE_PROC_REF(/obj/item/tube, check_exited))
 
 /obj/item/tube/use_before(mob/living/carbon/human/H, mob/user, def_zone)
 	if (!istype(H) || H != user || !H.check_has_mouth())
@@ -293,7 +293,7 @@
 
 /obj/item/tube/Destroy()
 	if(istype(loc, /mob/living))
-		GLOB.moved_event.unregister(loc, src, /obj/item/tube/proc/check_exited)
+		GLOB.moved_event.unregister(loc, src, TYPE_PROC_REF(/obj/item/tube, check_exited))
 	. = ..()
 
 /obj/item/hookah/water_act(depth)
@@ -310,7 +310,7 @@
 			var/mob/living/carbon/M = loc
 			visible_message(SPAN_WARNING("The tube was placed back to the hookah by [loc] as they were walking away."))
 			M.unEquip(src, parent)
-			GLOB.moved_event.unregister(loc, src, /obj/item/tube/proc/check_exited)
+			GLOB.moved_event.unregister(loc, src, TYPE_PROC_REF(/obj/item/tube, check_exited))
 		else
 			visible_message(SPAN_WARNING("The tube magically flies back to the hookah. Woah."))
 			parent.contents.Add(src)

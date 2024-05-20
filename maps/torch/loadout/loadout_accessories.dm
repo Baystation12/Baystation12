@@ -69,7 +69,7 @@
 /datum/gear/accessory/tags
 	display_name = "dog tags"
 	path = /obj/item/clothing/accessory/badge/solgov/tags
-	custom_setup_proc = /obj/item/clothing/accessory/badge/solgov/tags/proc/loadout_setup
+	custom_setup_proc = TYPE_PROC_REF(/obj/item/clothing/accessory/badge/solgov/tags, loadout_setup)
 
 /datum/gear/accessory/ec_scarf
 	display_name = "Expeditionary Corps scarf"

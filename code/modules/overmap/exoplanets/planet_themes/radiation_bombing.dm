@@ -14,7 +14,7 @@
 	var/radiation_power = rand(10, 37.5)
 	var/num_craters = round(min(0.04, rand()) * 0.02 * E.maxx * E.maxy)
 	for (var/i = 1 to num_craters)
-		var/turf/simulated/T = pick_area_turf(E.planetary_area, list(/proc/not_turf_contains_dense_objects))
+		var/turf/simulated/T = pick_area_turf(E.planetary_area, list(GLOBAL_PROC_REF(not_turf_contains_dense_objects)))
 		if (!T) // ran out of space somehow
 			return
 		new/obj/structure/rubble/war(T)

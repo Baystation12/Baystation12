@@ -95,9 +95,9 @@
 		var/mob/living/carbon/human/H = AM
 		var/obj/item/pickaxe/P = H.get_inactive_hand()
 		if(istype(P))
-			src.attackby(P, H)
+			use_tool(P, H)
 
 	else if(istype(AM,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = AM
 		if(istype(R.module_active,/obj/item/pickaxe))
-			attackby(R.module_active,R)
+			use_tool(R.module_active,R)

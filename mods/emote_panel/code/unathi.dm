@@ -14,6 +14,22 @@
 	/singleton/emote/audible/lizard_threat
 )
 
+/datum/species/unathi/yeosa/default_emotes = list(
+	/singleton/emote/human/swish,
+	/singleton/emote/human/wag,
+	/singleton/emote/human/sway,
+	/singleton/emote/human/qwag,
+	/singleton/emote/human/fastsway,
+	/singleton/emote/human/swag,
+	/singleton/emote/human/stopsway,
+	/singleton/emote/audible/lizard_bellow,
+	/singleton/emote/audible/lizard_squeal,
+	/singleton/emote/audible/lizard_scream,
+	/singleton/emote/audible/lizard_roar,
+	/singleton/emote/audible/lizard_rumble,
+	/singleton/emote/audible/lizard_threat
+)
+
 /singleton/emote/audible/lizard_bellow
 	key = "bellow"
 	emote_message_3p_target = "USER утробно рычит на TARGET!"

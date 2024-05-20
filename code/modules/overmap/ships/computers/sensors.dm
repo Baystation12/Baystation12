@@ -91,7 +91,7 @@
 /obj/machinery/computer/ship/sensors/proc/find_sensors()
 	if (!linked)
 		return
-	for (var/obj/machinery/shipsensors/S in SSmachines.machinery)
+	for (var/obj/machinery/shipsensors/S as anything in SSmachines.get_machinery_of_type(/obj/machinery/shipsensors))
 		if (linked.check_ownership(S))
 			LAZYADD(S.linked_consoles, src)
 			S.link_ship(linked)

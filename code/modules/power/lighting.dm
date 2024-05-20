@@ -400,7 +400,7 @@
 	var/obj/item/light/L = light_type
 	return initial(L.name)
 
-/// Attempts to insert a given light bulb. Called by `attackby()`.
+/// Attempts to insert a given light bulb. Called by `use_tool()`.
 /obj/machinery/light/proc/insert_bulb(obj/item/light/L)
 	L.forceMove(src)
 	lightbulb = L
@@ -822,7 +822,7 @@
 	update_icon()
 
 // if a syringe, can inject phoron to make it explode
-/obj/item/light/attackby(obj/item/I, mob/user)
+/obj/item/light/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I, /obj/item/reagent_containers/syringe) && status == LIGHT_OK)
 		var/obj/item/reagent_containers/syringe/S = I
 
@@ -833,10 +833,11 @@
 				to_chat(user, SPAN_WARNING("You inject the solution into \the [src]."))
 				if (reagents.get_reagent_amount(/datum/reagent/toxin/phoron) >= LIGHT_PHORON_EXPLODE_THRESHOLD)
 					log_and_message_admins("injected a light with phoron, rigging it to explode.", user)
-				return
+				return TRUE
 			else
 				to_chat(user, SPAN_WARNING("\The [src] is already filled with fluid!"))
-	. = ..()
+				return TRUE
+	return ..()
 
 // shatter light, unless it was an attempt to put it in a light socket
 // now only shatter if the intent was harm
@@ -881,7 +882,7 @@
 			log_and_message_admins("Rigged light explosion, last touched by [fingerprintslast]")
 			var/turf/T = get_turf(loc)
 			set_status(LIGHT_BROKEN)
-			addtimer(new Callback(GLOBAL_PROC, /proc/explosion, T, 3, EX_ACT_LIGHT), 0.5 SECONDS)
+			addtimer(new Callback(GLOBAL_PROC, GLOBAL_PROC_REF(explosion), T, 3, EX_ACT_LIGHT), 0.5 SECONDS)
 		else
 			visible_message(SPAN_WARNING("\The [src] short-circuits as something burns out its filament!"))
 			set_status(LIGHT_BURNED)

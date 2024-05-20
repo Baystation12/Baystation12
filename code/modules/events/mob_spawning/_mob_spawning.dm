@@ -59,7 +59,7 @@
 			continue
 		var/mob/spawned_mob = new mob_to_spawn()
 		if (delete_on_end)
-			GLOB.destroyed_event.register(spawned_mob, src, .proc/mob_destroyed)
+			GLOB.destroyed_event.register(spawned_mob, src, PROC_REF(mob_destroyed))
 			LAZYADD(mobs, spawned_mob)
 		remaining_to_spawn--
 		total_spawned++
@@ -76,7 +76,7 @@
  */
 /datum/event/mob_spawning/proc/mob_destroyed(mob/destroyed_mob)
 	LAZYREMOVE(mobs, destroyed_mob)
-	GLOB.destroyed_event.unregister(destroyed_mob, src, .proc/mob_destroyed)
+	GLOB.destroyed_event.unregister(destroyed_mob, src, PROC_REF(mob_destroyed))
 
 
 /**

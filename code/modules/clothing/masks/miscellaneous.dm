@@ -241,6 +241,9 @@
 			icon_state = initial(icon_state)
 			sprite_sheets = list(
 				SPECIES_VOX = 'icons/mob/species/vox/onmob_mask_vox.dmi',
+				// [SIERRA-ADD] - RESOMI
+				SPECIES_RESOMI = 'mods/resomi/icons/clothing/onmob_mask_resomi.dmi',
+				// [/SIERRA-ADD]
 				SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_mask_unathi.dmi'
 				)
 		if(slot_head)
@@ -249,6 +252,9 @@
 			icon_state = "[initial(icon_state)]_up"
 			sprite_sheets = list(
 				SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi',
+				// [SIERRA-ADD] - RESOMI
+				SPECIES_RESOMI = 'mods/resomi/icons/clothing/onmob_head_resomi.dmi',
+				// [/SIERRA-ADD]
 				SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi'
 				)
 

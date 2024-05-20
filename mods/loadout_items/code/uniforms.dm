@@ -18,6 +18,9 @@
 	item_state = "zpci_uniform"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0) //it's security uniform's stats
 	siemens_coefficient = 0.9
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'mods/loadout_items/icons/unathi/onmob_under_unathi.dmi'
+	)
 
 /obj/item/clothing/under/rank/security/saarecombat
 	name = "\improper SAARE combat uniform"
@@ -28,6 +31,9 @@
 	item_state = "saarecombat"
 	worn_state = "saarecombat"
 	gender_icons = 1
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'mods/loadout_items/icons/unathi/onmob_under_unathi.dmi'
+	)
 
 // SIERRA TO DO: Cleanup icons from unused loadout
 
@@ -243,6 +249,10 @@
 	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
 	icon_state = "gotsis_dress_1"
 	item_state = "gotsis_dress_1"
+	worn_state = "gotsis_dress_1"
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'mods/loadout_items/icons/unathi/onmob_under_unathi.dmi'
+	)
 
 /obj/item/clothing/under/dress/gotsis_orange
 	name = "orange gotsis dress"
@@ -251,6 +261,10 @@
 	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
 	icon_state = "gotsis_dress_2"
 	item_state = "gotsis_dress_2"
+	worn_state = "gotsis_dress_2"
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'mods/loadout_items/icons/unathi/onmob_under_unathi.dmi'
+	)
 
 // Spotrs
 
@@ -440,13 +454,18 @@
 	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
 	icon_state = "victorian_dress"
 	item_state = "victorian_dress"
+	worn_state = "victorian_dress"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'mods/loadout_items/icons/unathi/onmob_under_unathi.dmi'
+	)
 
 /obj/item/clothing/under/dress/victorian/red
 	name = "red victorian dress"
 	desc = "A victorian style dress, fancy!"
 	icon_state = "victorian_reddress"
 	item_state = "victorian_reddress"
+	worn_state = "victorian_reddress"
 
 // Victorian Suits. Vampire fangs not included
 
@@ -470,3 +489,8 @@
 	name = "dark victorian suit"
 	icon_state = "victorian_twilight"
 	item_state = "victorian_twilight"
+
+/obj/item/clothing/under/rank/adjutant
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'mods/loadout_items/icons/unathi/onmob_under_unathi.dmi'
+	)

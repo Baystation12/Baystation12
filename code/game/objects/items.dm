@@ -22,7 +22,7 @@
 //	causeerrorheresoifixthis
 	var/obj/item/master = null
 	var/list/origin_tech = null	//Used by R&D to determine what research bonuses it grants.
-	///Used in use_weapon() and attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
+	///Used in use_weapon() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
 	var/list/attack_verb = list("attacked")
 	var/lock_picking_level = 0 //used to determine whether something can pick a lock, and how well.
 	var/force = 0
@@ -293,23 +293,6 @@
 		return TRUE
 	return ..()
 
-
-///Eventually should be deleted in favor of use_tool; keeping duplicate until downstream attackbys are replaced.
-/obj/item/attackby(obj/item/item, mob/living/user, list/click_params)
-	if (SSfabrication.try_craft_with(src, item, user))
-		return TRUE
-	if (istype(item, /obj/item/storage) && isturf(loc))
-		var/obj/item/storage/storage = item
-		if (!storage.allow_quick_gather)
-			return ..()
-		if (!storage.quick_gather_single)
-			storage.gather_all(loc, user)
-		else if (storage.can_be_inserted(src, user))
-			storage.handle_item_insertion(src)
-		return TRUE
-	return ..()
-
-
 /obj/item/can_embed()
 	if (!canremove)
 		return FALSE
@@ -334,7 +317,7 @@
 	GLOB.item_unequipped_event.raise_event(src, user)
 
 	if(user && (z_flags & ZMM_MANGLE_PLANES))
-		addtimer(new Callback(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
+		addtimer(new Callback(user, TYPE_PROC_REF(/mob, check_emissive_equipment)), 0, TIMER_UNIQUE)
 
 
 // called just as an item is picked up (loc is not yet changed)
@@ -375,7 +358,7 @@ note this isn't called during the initial dressing of a player
 	GLOB.item_equipped_event.raise_event(src, user, slot)
 
 	if(user && (z_flags & ZMM_MANGLE_PLANES))
-		addtimer(new Callback(user, /mob/proc/check_emissive_equipment), 0, TIMER_UNIQUE)
+		addtimer(new Callback(user, TYPE_PROC_REF(/mob, check_emissive_equipment)), 0, TIMER_UNIQUE)
 
 
 /obj/item/proc/equipped_robot(mob/user)
@@ -792,12 +775,12 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	user.client.view = viewsize
 	zoom = 1
 
-	GLOB.destroyed_event.register(src, src, /obj/item/proc/unzoom)
-	GLOB.moved_event.register(user, src, /obj/item/proc/unzoom)
-	GLOB.dir_set_event.register(user, src, /obj/item/proc/unzoom)
-	GLOB.item_unequipped_event.register(src, user, /mob/living/proc/unzoom)
+	GLOB.destroyed_event.register(src, src, TYPE_PROC_REF(/obj/item, unzoom))
+	GLOB.moved_event.register(user, src, TYPE_PROC_REF(/obj/item, unzoom))
+	GLOB.dir_set_event.register(user, src, TYPE_PROC_REF(/obj/item, unzoom))
+	GLOB.item_unequipped_event.register(src, user, TYPE_PROC_REF(/mob/living, unzoom))
 
-	GLOB.stat_set_event.register(user, src, /obj/item/proc/unzoom)
+	GLOB.stat_set_event.register(user, src, TYPE_PROC_REF(/obj/item, unzoom))
 
 	user.visible_message("\The [user] peers through [zoomdevicename ? "the [zoomdevicename] of [src]" : "[src]"].")
 
@@ -810,22 +793,22 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		return
 	zoom = 0
 
-	GLOB.destroyed_event.unregister(src, src, /obj/item/proc/unzoom)
-	GLOB.moved_event.unregister(user, src, /obj/item/proc/unzoom)
-	GLOB.dir_set_event.unregister(user, src, /obj/item/proc/unzoom)
-	GLOB.item_unequipped_event.unregister(src, user, /mob/living/proc/unzoom)
+	GLOB.destroyed_event.unregister(src, src, TYPE_PROC_REF(/obj/item, unzoom))
+	GLOB.moved_event.unregister(user, src, TYPE_PROC_REF(/obj/item, unzoom))
+	GLOB.dir_set_event.unregister(user, src, TYPE_PROC_REF(/obj/item, unzoom))
+	GLOB.item_unequipped_event.unregister(src, user, TYPE_PROC_REF(/mob/living, unzoom))
 
 	user = user == src ? loc : (user || loc)
 	if(!istype(user))
 		crash_with("[log_info_line(src)]: Zoom user lost]")
 		return
 
-	GLOB.stat_set_event.unregister(user, src, /obj/item/proc/unzoom)
+	GLOB.stat_set_event.unregister(user, src, TYPE_PROC_REF(/obj/item, unzoom))
 
 	if(!user.client)
 		return
 
-	user.client.view = world.view
+	user.client.view = user.get_preference_value(/datum/client_preference/client_view)
 	if(!user.hud_used.hud_shown)
 		user.toggle_zoom_hud()
 

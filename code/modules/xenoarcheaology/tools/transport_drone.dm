@@ -201,7 +201,7 @@
 
 /obj/machinery/drone_pad/proc/finish_moving()
 	landing_animation(current_flight.payload, src.loc)
-	addtimer(new Callback(current_flight.payload, /atom/movable/proc/forceMove, src.loc), 3 SECONDS)
+	addtimer(new Callback(current_flight.payload, TYPE_PROC_REF(/atom/movable, forceMove), src.loc), 3 SECONDS)
 	QDEL_NULL(current_flight)
 	update_icon()
 
@@ -232,7 +232,7 @@
 		audible_message(SPAN_NOTICE("<b>\The [src]</b> pings, Incoming payload. Delivery expected in T - [(flight_time) / (1 SECOND)] seconds."))
 
 
-		active_timer = addtimer(new Callback(src, .proc/finish_moving), flight_time, TIMER_UNIQUE | TIMER_OVERRIDE | TIMER_STOPPABLE)
+		active_timer = addtimer(new Callback(src, PROC_REF(finish_moving)), flight_time, TIMER_UNIQUE | TIMER_OVERRIDE | TIMER_STOPPABLE)
 		update_icon()
 		return TRUE
 

@@ -164,7 +164,7 @@
 	say("Down on the floor, [suspect_name]! You have [SECBOT_WAIT_TIME] seconds to comply.")
 	if (length(preparing_arrest_sounds))
 		playsound(src.loc, pick(preparing_arrest_sounds), 50)
-	GLOB.moved_event.register(target, src, /mob/living/bot/secbot/proc/target_moved)
+	GLOB.moved_event.register(target, src, TYPE_PROC_REF(/mob/living/bot/secbot, target_moved))
 
 /mob/living/bot/secbot/proc/target_moved(atom/movable/moving_instance, atom/old_loc, atom/new_loc)
 	if(get_dist(get_turf(src), get_turf(target)) >= 1)

@@ -104,6 +104,7 @@ Class Procs:
 		#ifdef ZASDBG
 		T.dbg(merged)
 		#endif
+		CHECK_TICK
 
 	//rebuild the old zone's edges so that they will be possessed by the new zone
 	for(var/connection_edge/E in edges)

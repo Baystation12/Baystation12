@@ -10,7 +10,7 @@
 	affected_levels = zlevels
 
 /datum/universal_state/bluespace_jump/OnEnter()
-	var/obj/machinery/bluespacedrive/drive = locate(/obj/machinery/bluespacedrive) in SSmachines.machinery
+	var/obj/machinery/bluespacedrive/drive = locate() in SSmachines.get_machinery_of_type(/obj/machinery/bluespacedrive)
 
 	if (!drive || !(drive.z in affected_levels))
 		return
@@ -102,9 +102,9 @@
 	daddy = ndaddy
 	set_dir(daddy.dir)
 	appearance = daddy.appearance
-	GLOB.moved_event.register(daddy, src, /obj/bluegoast/proc/mirror)
-	GLOB.dir_set_event.register(daddy, src, /obj/bluegoast/proc/mirror_dir)
-	GLOB.destroyed_event.register(daddy, src, /datum/proc/qdel_self)
+	GLOB.moved_event.register(daddy, src, TYPE_PROC_REF(/obj/bluegoast, mirror))
+	GLOB.dir_set_event.register(daddy, src, TYPE_PROC_REF(/obj/bluegoast, mirror_dir))
+	GLOB.destroyed_event.register(daddy, src, TYPE_PROC_REF(/datum, qdel_self))
 
 
 /obj/bluegoast/Destroy()

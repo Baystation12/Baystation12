@@ -98,19 +98,21 @@
 	if(.)
 		attack_hand(user)
 
-/obj/machinery/uniform_vendor/attackby(obj/item/W, mob/user)
+/obj/machinery/uniform_vendor/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/clothingbag))
 		if(length(W.contents))
-			to_chat(user, SPAN_NOTICE("You must empty \the [W] before you can put it in \the [src]."))
-			return
+			to_chat(user, SPAN_WARNING("You must empty \the [W] before you can put it in \the [src]."))
+			return TRUE
 		to_chat(user, SPAN_NOTICE("You put \the [W] into \the [src]'s recycling slot."))
 		qdel(W)
-	else if(istype(W, /obj/item/card/id) && !ID && user.unEquip(W, src))
+		return TRUE
+
+	if (istype(W, /obj/item/card/id) && !ID && user.unEquip(W, src))
 		to_chat(user, SPAN_NOTICE("You slide \the [W] into \the [src]!"))
 		ID = W
 		attack_hand(user)
-	else
-		..()
+		return TRUE
+	return ..()
 
 /*	Outfit structures
 	branch
