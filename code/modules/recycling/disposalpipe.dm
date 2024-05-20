@@ -778,6 +778,16 @@
 	update()
 	return
 
+/obj/structure/disposalpipe/trunk/Destroy()
+	if (linked)
+		if (istype(linked, /obj/machinery/disposal))
+			var/obj/machinery/disposal/linked_disposal = linked
+			if (linked_disposal.trunk == src)
+				linked_disposal.trunk = null
+		linked = null
+
+	. = ..()
+
 /obj/structure/disposalpipe/trunk/proc/getlinked()
 	linked = null
 	var/obj/machinery/disposal/D = locate() in src.loc
