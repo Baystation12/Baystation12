@@ -62,16 +62,6 @@
 		color = "#ffffff"
 		alpha = 255
 
-<<<<<<< ours
-/obj/item/material/shard/attackby(obj/item/W as obj, mob/user as mob)
-	if(isWelder(W) && material.shard_can_repair)
-		var/obj/item/weldingtool/WT = W
-		if(WT.remove_fuel(1, user))
-			material.place_sheet(get_turf(src))
-			qdel(src)
-			return
-=======
-
 /obj/item/material/shard/use_tool(obj/item/item, mob/living/user, list/click_params)
 	if(isWelder(item) && material.shard_can_repair)
 		var/obj/item/weldingtool/welder = item
@@ -81,9 +71,7 @@
 		material.place_sheet(get_turf(src))
 		qdel(src)
 		return TRUE
->>>>>>> theirs
 	return ..()
-
 
 /obj/item/material/shard/Crossed(atom/movable/movable)
 	if (!isliving(movable))
