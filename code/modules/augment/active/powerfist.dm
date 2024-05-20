@@ -36,12 +36,8 @@
 	augment_flags = AUGMENT_MECHANICAL | AUGMENT_SCANNABLE
 
 
-<<<<<<< ours
-/obj/item/powerfist/attackby(obj/item/item, mob/user)
-=======
 /obj/item/powerfist/use_tool(obj/item/item, mob/living/user, list/click_params)
 	var/datum/pronouns/pronouns = user.choose_from_pronouns()
->>>>>>> theirs
 	if (!istype(item, /obj/item/tank))
 		return ..()
 	var/obj/item/tank/other = item
