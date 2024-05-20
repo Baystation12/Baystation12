@@ -1,3 +1,5 @@
+#include "../../../packs/factions/iccgn/_pack.dm"
+
 /singleton/map_template/ruin/antag_spawn/mercenary
 	name = "Mercenary Base"
 	suffixes = list("mercenary/mercenary_base.dmm")

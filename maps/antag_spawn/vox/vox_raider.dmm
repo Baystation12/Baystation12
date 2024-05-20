@@ -868,7 +868,7 @@
 /obj/wallframe_spawn/reinforced/titanium,
 /obj/paint/vox,
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
-	dir = 8
+	dir = 4
 	},
 /turf/simulated/floor/plating/vox,
 /area/map_template/vox_raider)
@@ -928,7 +928,7 @@
 "UC" = (
 /obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
-	dir = 8
+	dir = 4
 	},
 /obj/paint/vox,
 /turf/simulated/floor/plating/vox,
