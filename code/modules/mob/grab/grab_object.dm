@@ -44,8 +44,8 @@
 
 	var/obj/item/organ/O = get_targeted_organ()
 	SetName("[initial(name)] ([O.name])")
-	GLOB.dismembered_event.register(affecting, src, .proc/on_organ_loss)
-	GLOB.zone_selected_event.register(assailant.zone_sel, src, .proc/on_target_change)
+	GLOB.dismembered_event.register(affecting, src, PROC_REF(on_organ_loss))
+	GLOB.zone_selected_event.register(assailant.zone_sel, src, PROC_REF(on_target_change))
 
 /obj/item/grab/examine(mob/user)
 	. = ..()

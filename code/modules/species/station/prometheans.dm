@@ -85,7 +85,7 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 	H.apply_stored_shock_to(target)
 
 /datum/species/shapeshifter/promethean/handle_death(mob/living/carbon/human/H)
-	addtimer(new Callback(H, /mob/proc/gib),0)
+	addtimer(new Callback(H, TYPE_PROC_REF(/mob, gib)),0)
 
 /datum/species/shapeshifter/promethean/handle_environment_special(mob/living/carbon/human/H)
 

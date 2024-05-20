@@ -132,7 +132,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 						var/obj/overmap/visitable/O = map_sectors["[zlevel]"]
 						if(!isnull(O))
 							zlevels_long |= O.map_z
-				for(var/obj/machinery/hologram/holopad/H in SSmachines.machinery)
+				for(var/obj/machinery/hologram/holopad/H as anything in SSmachines.get_machinery_of_type(/obj/machinery/hologram/holopad))
 					if (H.operable())
 						if(H.z in zlevels)
 							holopadlist["[H.loc.loc.name]"] = H	//Define a list and fill it with the area of every holopad in the world
@@ -254,12 +254,12 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 	if (!istype(pda))
 		return
 	LAZYADD(linked_pdas, pda)
-	GLOB.destroyed_event.register(pda, src, .proc/unlink_pda)
+	GLOB.destroyed_event.register(pda, src, PROC_REF(unlink_pda))
 
 
 /obj/machinery/hologram/holopad/proc/unlink_pda(obj/item/modular_computer/pda/pda)
 	LAZYREMOVE(linked_pdas, pda)
-	GLOB.destroyed_event.unregister(pda, src, .proc/unlink_pda)
+	GLOB.destroyed_event.unregister(pda, src, PROC_REF(unlink_pda))
 
 /*This is the proc for special two-way communication between AI and holopad/people talking near holopad.
 For the other part of the code, check silicon say.dm. Particularly robot talk.*/

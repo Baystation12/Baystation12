@@ -80,7 +80,7 @@
 
 /obj/item/paper/sticky/Initialize()
 	. = ..()
-	GLOB.moved_event.register(src, src, /obj/item/paper/sticky/proc/reset_persistence_tracking)
+	GLOB.moved_event.register(src, src, TYPE_PROC_REF(/obj/item/paper/sticky, reset_persistence_tracking))
 
 /obj/item/paper/sticky/proc/reset_persistence_tracking()
 	SSpersistence.forget_value(src, /datum/persistent/paper/sticky)

@@ -237,7 +237,7 @@
 	M.UpdateLyingBuckledAndVerbStatus()
 	M.update_floating()
 	buckled_mob = M
-	GLOB.destroyed_event.register(buckled_mob, src, /obj/proc/clear_buckle)
+	GLOB.destroyed_event.register(buckled_mob, src, TYPE_PROC_REF(/obj, clear_buckle))
 	if (buckle_sound)
 		playsound(src, buckle_sound, 20)
 	post_buckle_mob(M)
@@ -254,7 +254,7 @@
 		if (buckled_mob.buckled != src)
 			log_debug(append_admin_tools("A buckled mob ([buckled_mob.name] ([buckled_mob.type])) is buckled to multiple objects at once. This has been auto-corrected.", buckled_mob, get_turf(src)))
 			buckled_mob = null
-			GLOB.destroyed_event.unregister(., src, /obj/proc/clear_buckle)
+			GLOB.destroyed_event.unregister(., src, TYPE_PROC_REF(/obj, clear_buckle))
 			return
 		. = buckled_mob
 		buckled_mob.buckled = null
@@ -263,7 +263,7 @@
 		buckled_mob.update_floating()
 		buckled_mob = null
 
-		GLOB.destroyed_event.unregister(., src, /obj/proc/clear_buckle)
+		GLOB.destroyed_event.unregister(., src, TYPE_PROC_REF(/obj, clear_buckle))
 		post_buckle_mob(.)
 
 
@@ -278,7 +278,7 @@
 		buckled_mob = null // In case unbuckle failed
 	if (_buckled_mob.buckled == src)
 		_buckled_mob.buckled = null
-	GLOB.destroyed_event.unregister(., src, /obj/proc/clear_buckle)
+	GLOB.destroyed_event.unregister(., src, TYPE_PROC_REF(/obj, clear_buckle))
 
 /obj/proc/post_buckle_mob(mob/living/M)
 	if (buckle_pixel_shift)

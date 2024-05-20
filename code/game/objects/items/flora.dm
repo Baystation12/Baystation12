@@ -25,9 +25,9 @@
 		visible_message(SPAN_NOTICE("\The [user] starts trimming the [src] with \the [S]."))
 		if (do_after(user, (S.toolspeed * 6) SECONDS, src, DO_PUBLIC_UNIQUE))
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
-			to_chat (user, SPAN_NOTICE("You trim \the [src] with \the [S]. You probably should've used a pair of scissors."))
+			to_chat(user, SPAN_NOTICE("You trim \the [src] with \the [S]. You probably should've used a pair of scissors."))
 			trimmed = TRUE
-			addtimer(new Callback(src, .proc/grow), 90 MINUTES, TIMER_UNIQUE|TIMER_OVERRIDE)
+			addtimer(new Callback(src, PROC_REF(grow)), 90 MINUTES, TIMER_UNIQUE|TIMER_OVERRIDE)
 			update_icon()
 		return TRUE
 	return ..()

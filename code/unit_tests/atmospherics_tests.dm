@@ -298,7 +298,7 @@
 
 /datum/unit_test/atmos_machinery_shall_not_have_conflicting_connections/start_test()
 	var/fail = FALSE
-	for(var/obj/machinery/atmospherics/machine in SSmachines.machinery)
+	for(var/obj/machinery/atmospherics/machine as anything in SSmachines.get_machinery_of_type(/obj/machinery/atmospherics))
 		for(var/obj/machinery/atmospherics/M in machine.loc)
 			if(M == machine)
 				continue

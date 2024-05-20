@@ -8,7 +8,7 @@
 	command_announcement.Announce("Energy readings indicate a minor shift in engine crystalline hyperstructure. Closer monitoring of crystal stability and power output is recommended.", "[location_name()] Supermatter Monitoring System", zlevels = affecting_z)
 
 /datum/event/power_surge/start()
-	for (var/obj/machinery/power/supermatter/S in SSmachines.machinery)
+	for (var/obj/machinery/power/supermatter/S as anything in SSmachines.get_machinery_of_type(/obj/machinery/power/supermatter))
 		if (!(S.z in affecting_z))
 			return
 		S.reaction_power_modifier += 0.2
@@ -16,7 +16,7 @@
 		S.thermal_release_modifier += 1500
 
 /datum/event/power_surge/end()
-	for (var/obj/machinery/power/supermatter/S in SSmachines.machinery)
+	for (var/obj/machinery/power/supermatter/S as anything in SSmachines.get_machinery_of_type(/obj/machinery/power/supermatter))
 		if (!(S.z in affecting_z))
 			return
 		S.reaction_power_modifier = initial(S.reaction_power_modifier)

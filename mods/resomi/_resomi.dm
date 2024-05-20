@@ -1,2 +1,2 @@
 /singleton/modpack/resomi
-	name = "Resomi"
+	name = "Resomi Content"

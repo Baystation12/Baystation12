@@ -1,0 +1,15 @@
+author: PapiSmirnov
+changes:
+  - {rscadd: 'Anomaly harvesters will now accept technology disks that can have data
+      from anomaly harvesting copied to them for techlevels, providing levels based
+      on the type of anomaly.'}
+  - {tweak: 'The anomaly utiliser and harvester no longer need to be right next to
+      the scanner pad to work, and can be resynced with any scanner pad nearby.'}
+  - {tweak: Moved the anomaly scanner and harvester outside of the chamber so it's
+      actually possible to scan and harvest hazardous anomalies now without flooding
+      a lab with toxic gas/destroying the entire lab.}
+  - {bugfix: The anomaly utiliser's on-touch method will actually work as intended
+      now and can be activated without using the AOE effect}
+  - {bugfix: The anomaly harvester can now actually recharge anomaly batteries that
+      have been depleted.}
+delete-after: true

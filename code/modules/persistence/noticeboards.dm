@@ -87,6 +87,17 @@
 
 
 /obj/structure/noticeboard/use_tool(obj/item/tool, mob/user, list/click_params)
+	if (istype(tool, /obj/item/material/shard/caltrop/tack))
+		user.unEquip(tool, loc)
+		var/click_x = text2num_or_default(click_params["icon-x"], 16)
+		var/click_y = text2num_or_default(click_params["icon-y"], 16)
+		tool.pixel_x = pixel_x + click_x - 16
+		tool.pixel_y = pixel_y + click_y - 16
+		user.visible_message(
+			SPAN_ITALIC("\The [user] pushes \a [tool] into \a [src]."),
+			SPAN_ITALIC("You push \the [tool] into \the [src].")
+		)
+		return TRUE
 	// Paper, Photo - Attach
 	if (is_type_in_list(tool, list(/obj/item/paper, /obj/item/photo)))
 		if (jobban_isbanned(user, "Graffitiy"))

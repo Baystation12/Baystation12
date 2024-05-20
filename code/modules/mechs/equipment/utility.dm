@@ -100,7 +100,7 @@
 							playsound(FD, 'sound/effects/meteorimpact.ogg', 100, 1)
 							playsound(FD, 'sound/machines/airlock_creaking.ogg', 100, 1)
 							FD.blocked = FALSE
-							addtimer(new Callback(FD, /obj/machinery/door/firedoor/.proc/open, TRUE), 0)
+							addtimer(new Callback(FD, TYPE_PROC_REF(/obj/machinery/door/firedoor, open), TRUE), 0)
 							FD.set_broken(TRUE)
 							FD.visible_message(SPAN_WARNING("\The [owner] tears \the [FD] open!"))
 					else
@@ -109,10 +109,10 @@
 							playsound(FD, 'sound/machines/airlock_creaking.ogg', 100, 1)
 							if(FD.density)
 								FD.visible_message(SPAN_DANGER("\The [owner] forces \the [FD] open!"))
-								addtimer(new Callback(FD, /obj/machinery/door/firedoor/.proc/open, TRUE), 0)
+								addtimer(new Callback(FD, TYPE_PROC_REF(/obj/machinery/door/firedoor, open), TRUE), 0)
 							else
 								FD.visible_message(SPAN_WARNING("\The [owner] forces \the [FD] closed!"))
-								addtimer(new Callback(FD, /obj/machinery/door/firedoor/.proc/close, TRUE), 0)
+								addtimer(new Callback(FD, TYPE_PROC_REF(/obj/machinery/door/firedoor, close), TRUE), 0)
 					return
 				else if(istype(O, /obj/machinery/door/airlock))
 					var/obj/machinery/door/airlock/AD = O
@@ -125,7 +125,7 @@
 								playsound(AD, 'sound/effects/meteorimpact.ogg', 100, 1)
 								playsound(AD, 'sound/machines/airlock_creaking.ogg', 100, 1)
 								AD.visible_message(SPAN_DANGER("\The [owner] tears \the [AD] open!"))
-								addtimer(new Callback(AD, /obj/machinery/door/airlock/.proc/open, TRUE), 0)
+								addtimer(new Callback(AD, TYPE_PROC_REF(/obj/machinery/door/airlock, open), TRUE), 0)
 								AD.set_broken(TRUE)
 								return
 						else
@@ -133,12 +133,12 @@
 							if((MACHINE_IS_BROKEN(AD) || !AD.is_powered() || do_after(owner, 5 SECONDS, AD, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)) && !(AD.operating || AD.welded || AD.locked))
 								playsound(AD, 'sound/machines/airlock_creaking.ogg', 100, 1)
 								if(AD.density)
-									addtimer(new Callback(AD, /obj/machinery/door/airlock/.proc/open, TRUE), 0)
+									addtimer(new Callback(AD, TYPE_PROC_REF(/obj/machinery/door/airlock, open), TRUE), 0)
 									if(!MACHINE_IS_BROKEN(AD) && AD.is_powered())
 										AD.set_broken(TRUE)
 									AD.visible_message(SPAN_DANGER("\The [owner] forces \the [AD] open!"))
 								else
-									addtimer(new Callback(AD, /obj/machinery/door/airlock/.proc/close, TRUE), 0)
+									addtimer(new Callback(AD, TYPE_PROC_REF(/obj/machinery/door/airlock, close), TRUE), 0)
 									if(!MACHINE_IS_BROKEN(AD) && AD.is_powered())
 										AD.set_broken(TRUE)
 									AD.visible_message(SPAN_DANGER("\The [owner] forces \the [AD] closed!"))
@@ -350,7 +350,7 @@
 
 /obj/item/mech_equipment/catapult/proc/beamdestroyed()
 	if(beam)
-		GLOB.destroyed_event.unregister(beam, src, .proc/beamdestroyed)
+		GLOB.destroyed_event.unregister(beam, src, PROC_REF(beamdestroyed))
 		beam = null
 	if(locked)
 		if(owner)
@@ -403,7 +403,7 @@
 						return
 					locked = AM
 					beam = owner.Beam(BeamTarget = target, icon_state = "r_beam", maxdistance = max_dist, beam_type = /obj/ebeam/warp)
-					GLOB.destroyed_event.register(beam, src, .proc/beamdestroyed)
+					GLOB.destroyed_event.register(beam, src, PROC_REF(beamdestroyed))
 
 					animate(target,pixel_y= initial(target.pixel_y) - 2,time=1 SECOND, easing = SINE_EASING, flags = ANIMATION_PARALLEL, loop = -1)
 					animate(pixel_y= initial(target.pixel_y) + 2,time=1 SECOND)
@@ -440,7 +440,7 @@
 					alpha = 0,
 					time = 1.25 SECONDS
 				)
-				addtimer(new Callback(warpeffect, /atom/movable/proc/forceMove, null), 1.25 SECONDS)
+				addtimer(new Callback(warpeffect, TYPE_PROC_REF(/atom/movable, forceMove), null), 1.25 SECONDS)
 				playsound(warpeffect, 'sound/effects/heavy_cannon_blast.ogg', 50, 1)
 
 				var/list/atoms = list()

@@ -17,6 +17,7 @@
 	load_method = SINGLE_CASING|SPEEDLOADER
 	max_shells = 1
 	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
+	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
 
 /obj/item/gun/projectile/flare/loaded
 	ammo_type = /obj/item/ammo_casing/shotgun/flash

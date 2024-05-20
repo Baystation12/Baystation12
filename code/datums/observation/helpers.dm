@@ -32,9 +32,9 @@
 	qdel(src)
 
 /proc/register_all_movement(event_source, listener)
-	GLOB.moved_event.register(event_source, listener, /atom/movable/proc/recursive_move)
-	GLOB.dir_set_event.register(event_source, listener, /atom/proc/recursive_dir_set)
+	GLOB.moved_event.register(event_source, listener, TYPE_PROC_REF(/atom/movable, recursive_move))
+	GLOB.dir_set_event.register(event_source, listener, TYPE_PROC_REF(/atom, recursive_dir_set))
 
 /proc/unregister_all_movement(event_source, listener)
-	GLOB.moved_event.unregister(event_source, listener, /atom/movable/proc/recursive_move)
-	GLOB.dir_set_event.unregister(event_source, listener, /atom/proc/recursive_dir_set)
+	GLOB.moved_event.unregister(event_source, listener, TYPE_PROC_REF(/atom/movable, recursive_move))
+	GLOB.dir_set_event.unregister(event_source, listener, TYPE_PROC_REF(/atom, recursive_dir_set))

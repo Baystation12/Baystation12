@@ -610,7 +610,7 @@
 			adjustHalLoss(-3)
 			if(sleeping)
 				if (!dream_timer && client)
-					dream_timer = addtimer(new Callback(src, .proc/dream), 10 SECONDS, TIMER_STOPPABLE)
+					dream_timer = addtimer(new Callback(src, PROC_REF(dream)), 10 SECONDS, TIMER_STOPPABLE)
 				if (mind || ai_holder)
 					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
 					if (client || ai_holder || sleeping > 3)
@@ -727,7 +727,7 @@
 				if(55 to 70)		severity = 4
 				if(70 to 85)		severity = 5
 				if(85 to INFINITY)	severity = 6
-			overlay_fullscreen("brute", /obj/screen/fullscreen/brute, severity)
+			overlay_fullscreen("brute", /obj/screen/fullscreen/brute, severity, TRUE)
 		else
 			clear_fullscreen("brute")
 

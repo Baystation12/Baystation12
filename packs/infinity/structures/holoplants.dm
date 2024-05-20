@@ -139,7 +139,7 @@ GLOBAL_LIST_INIT(recomended_holoplants_colors, list(COLOR_PALE_RED_GRAY,COLOR_BL
 
 /obj/structure/holoplant/proc/doInterference()
 	if(!interference && enabled)
-		addtimer(new Callback(src, .proc/Interference), 0, TIMER_UNIQUE)
+		addtimer(new Callback(src, PROC_REF(Interference)), 0, TIMER_UNIQUE)
 
 /obj/structure/holoplant/Crossed(mob/living/L)
 	if(istype(L))

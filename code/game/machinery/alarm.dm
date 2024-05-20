@@ -321,7 +321,7 @@
 //disables breach detection temporarily
 /obj/machinery/alarm/proc/breach_start_cooldown()
 	breach_cooldown = TRUE
-	addtimer(new Callback(src,/obj/machinery/alarm/proc/breach_end_cooldown), 10 MINUTES, TIMER_UNIQUE | TIMER_OVERRIDE)
+	addtimer(new Callback(src, TYPE_PROC_REF(/obj/machinery/alarm, breach_end_cooldown)), 10 MINUTES, TIMER_UNIQUE | TIMER_OVERRIDE)
 	return
 
 /obj/machinery/alarm/proc/get_danger_level(current_value, list/danger_levels)

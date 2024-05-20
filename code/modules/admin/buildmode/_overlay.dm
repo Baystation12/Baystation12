@@ -51,6 +51,6 @@
 			var/turf/T = locate(user.x + x, user.y + y, user.z)
 			if (T)
 				M.alpha = 255
-				invoke_async(buildmode, /datum/build_mode/.proc/UpdateOverlay, M, T)
+				invoke_async(buildmode, TYPE_PROC_REF(/datum/build_mode, UpdateOverlay), M, T)
 			else
 				M.alpha = 0

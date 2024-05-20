@@ -33,7 +33,7 @@
 		var/number_of_underwear = LAZYACCESS(amount_of_underwear_by_id_card, id) - 1
 		if (number_of_underwear)
 			LAZYSET(amount_of_underwear_by_id_card, id, number_of_underwear)
-			GLOB.destroyed_event.register(id, src, /obj/structure/undies_wardrobe/proc/remove_id_card)
+			GLOB.destroyed_event.register(id, src, TYPE_PROC_REF(/obj/structure/undies_wardrobe, remove_id_card))
 		else
 			remove_id_card(id)
 		return TRUE
@@ -43,7 +43,7 @@
 
 /obj/structure/undies_wardrobe/proc/remove_id_card(id_card)
 	LAZYREMOVE(amount_of_underwear_by_id_card, id_card)
-	GLOB.destroyed_event.unregister(id_card, src, /obj/structure/undies_wardrobe/proc/remove_id_card)
+	GLOB.destroyed_event.unregister(id_card, src, TYPE_PROC_REF(/obj/structure/undies_wardrobe, remove_id_card))
 
 /obj/structure/undies_wardrobe/attack_hand(mob/user)
 	if(!human_who_can_use_underwear(user))

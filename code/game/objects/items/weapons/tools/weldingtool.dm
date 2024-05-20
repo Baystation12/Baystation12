@@ -174,7 +174,7 @@
 	if(M)
 		M.welding_eyecheck()//located in mob_helpers.dm
 		set_light(5, 0.7, COLOR_LIGHT_CYAN)
-		addtimer(new Callback(src, /atom/proc/update_icon), 5)
+		addtimer(new Callback(src, TYPE_PROC_REF(/atom, update_icon)), 5)
 	return 1
 
 /obj/item/weldingtool/proc/burn_fuel(amount)

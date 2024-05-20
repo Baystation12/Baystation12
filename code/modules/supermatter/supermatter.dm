@@ -219,7 +219,7 @@
 		to_chat(mob, SPAN_DANGER("An invisible force slams you against the ground!"))
 
 	// Effect 2: Z-level wide electrical pulse
-	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
+	for(var/obj/machinery/power/apc/A as anything in SSmachines.get_machinery_of_type(/obj/machinery/power/apc))
 		if(!(A.z in affected_z))
 			continue
 
@@ -233,7 +233,7 @@
 		else
 			A.energy_fail(round(DETONATION_SHUTDOWN_APC * random_change))
 
-	for(var/obj/machinery/power/smes/buildable/S in SSmachines.machinery)
+	for(var/obj/machinery/power/smes/buildable/S as anything in SSmachines.get_machinery_of_type(/obj/machinery/power/smes/buildable))
 		if(!(S.z in affected_z))
 			continue
 		// Causes SMESes to shut down for a bit
@@ -242,7 +242,7 @@
 
 	// Effect 3: Break solar arrays
 
-	for(var/obj/machinery/power/solar/S in SSmachines.machinery)
+	for(var/obj/machinery/power/solar/S as anything in SSmachines.get_machinery_of_type(/obj/machinery/power/solar))
 		if(!(S.z in affected_z))
 			continue
 		if(prob(DETONATION_SOLAR_BREAK_CHANCE))
@@ -683,10 +683,10 @@
 
 /obj/machinery/rotating_alarm/supermatter/Initialize()
 	. = ..()
-	GLOB.supermatter_status.register_global(src, .proc/check_supermatter)
+	GLOB.supermatter_status.register_global(src, PROC_REF(check_supermatter))
 
 /obj/machinery/rotating_alarm/supermatter/Destroy()
-	GLOB.supermatter_status.unregister_global(src, .proc/check_supermatter)
+	GLOB.supermatter_status.unregister_global(src, PROC_REF(check_supermatter))
 	. = ..()
 
 /obj/machinery/rotating_alarm/supermatter/proc/check_supermatter(obj/machinery/power/supermatter/SM, danger)
