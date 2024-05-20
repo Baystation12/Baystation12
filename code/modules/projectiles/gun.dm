@@ -72,6 +72,7 @@
 	/// Sound this gun makes when firing. Overridden by projectiles with their own sounds.
 	var/fire_sound = 'sound/weapons/gunshot/gunshot.ogg'
 	var/fire_sound_text = "gunshot"
+	var/fire_sound_vary = TRUE
 	var/fire_anim = null
 	/// The amount your screen shakes when firing. Shouldn't be greater than 2 unless zoomed.
 	var/screen_shake = 0
@@ -484,12 +485,18 @@
 
 	return launched
 
-/obj/item/gun/proc/play_fire_sound(mob/user, obj/item/projectile/P)
-	var/shot_sound = (istype(P) && P.fire_sound)? P.fire_sound : fire_sound
-	if(silenced)
-		playsound(user, shot_sound, 10, 1)
-	else
-		playsound(user, shot_sound, 50, 1)
+
+/obj/item/gun/proc/play_fire_sound(mob/user, obj/item/projectile/projectile)
+	var/sound = fire_sound
+	if (istype(projectile) && projectile.fire_sound)
+		sound = projectile.fire_sound
+	if (islist(sound))
+		sound = pick(sound)
+	var/volume = 50
+	if (silenced)
+		volume = 10
+	playsound(src, sound, volume, fire_sound_vary)
+
 
 //Suicide handling.
 /obj/item/gun/proc/handle_suicide(mob/living/user)
