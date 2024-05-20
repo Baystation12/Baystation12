@@ -4,6 +4,7 @@
 	caliber = CALIBER_PISTOL
 	magazine_type = /obj/item/ammo_magazine/pistol
 	allowed_magazines = /obj/item/ammo_magazine/pistol
+	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	accuracy_power = 7
 	var/empty_icon = TRUE  //If it should change icon when empty
 	var/ammo_indicator = FALSE
@@ -55,6 +56,7 @@
 	allowed_magazines = /obj/item/ammo_magazine/magnum
 	mag_insert_sound = 'sound/weapons/guns/interaction/hpistol_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/hpistol_magout.ogg'
+	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
 	accuracy = 2
 	one_hand_penalty = 2
 	bulk = 3
