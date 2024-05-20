@@ -37,7 +37,6 @@
 
 
 /obj/item/powerfist/use_tool(obj/item/item, mob/living/user, list/click_params)
-	var/datum/pronouns/pronouns = user.choose_from_pronouns()
 	if (!istype(item, /obj/item/tank))
 		return ..()
 	var/obj/item/tank/other = item
