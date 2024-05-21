@@ -1,5 +1,0 @@
-author: SierraKomodo
-changes:
-  - {bugfix: Deleted disposal trunks no longer break their attached chutes/bins and
-      delete everything disposed.}
-delete-after: true

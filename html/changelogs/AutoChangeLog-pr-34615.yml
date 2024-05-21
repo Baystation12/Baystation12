@@ -1,6 +1,0 @@
-author: SingingSpock
-changes:
-  - {tweak: 'Using the toggle-gun-safety verb will no longer bring up a dialogue box
-      and will instead toggle safety for a gun in your hands, preferring the active
-      hand.'}
-delete-after: true
