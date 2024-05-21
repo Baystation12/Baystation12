@@ -1,4 +1,0 @@
-author: Mucker
-changes:
-  - {bugfix: Fixed the mail event.}
-delete-after: true
