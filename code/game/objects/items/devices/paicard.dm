@@ -22,11 +22,6 @@
 /obj/item/device/paicard/Initialize()
 	. = ..()
 	AddOverlays("pai-off")
-	if (!pai)
-		pai = new /mob/living/silicon/pai(src)
-		pai.card = src
-		pai.CreateRadio()
-
 
 /obj/item/device/paicard/Destroy()
 	//Will stop people throwing friend pAIs into the singularity so they can respawn
