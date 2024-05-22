@@ -304,12 +304,7 @@ var/global/const/NO_EMAG_ACT = -50
 				id_card.formal_name_suffix = "[id_card.formal_name_suffix][culture.get_formal_name_suffix()]"
 
 	id_card.registered_name = real_name
-
-	var/pronouns = "Unset"
-	var/datum/pronouns/P = choose_from_pronouns()
-	if(P)
-		pronouns = P.formal_term
-	id_card.sex = pronouns
+	id_card.sex = get_formal_pronouns()
 	id_card.set_id_photo(src)
 
 	if(dna)
