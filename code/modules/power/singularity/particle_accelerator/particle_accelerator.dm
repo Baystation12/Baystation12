@@ -62,7 +62,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	icon_state = "none"
 	anchored = FALSE
 	density = TRUE
-	obj_flags = OBJ_FLAG_ROTATABLE
+	obj_flags = OBJ_FLAG_ROTATABLE | OBJ_FLAG_ANCHORABLE
 
 	var/obj/machinery/particle_accelerator/control_box/master = null
 	var/const/CONSTRUCT_STATE_UNANCHORED = 0
