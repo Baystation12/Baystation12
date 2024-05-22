@@ -359,21 +359,16 @@
 			if (A.hud_type & hudtype)
 				AUG = A
 				break
-<<<<<<< ours
-		// [SIERRA-EDIT] - NTNET
-		// return ((istype(G) && ((G.hud_type & hudtype) || (G.hud && (G.hud.hud_type & hudtype)))) && G.check_access(ID)) || AUG?.active && AUG.check_access(ID) // SIERRA-EDIT - ORIGINAL
-		return ((istype(G) && ((G.hud_type & hudtype) || (G.hud && (G.hud.hud_type & hudtype)))) && G.check_access(ID) && (G.toggleable ? G.active : TRUE)) || AUG?.active && AUG.check_access(ID)
-		// [/SIERRA-EDIT]
-=======
-
 		if (G)
 			for (var/obj/item/clothing/accessory/glassesmod/hud/C in G.accessories) // Check for HUD accessories on worn eyewear
 				if (C.hud_type & hudtype)
 					ACC = C
 					break
 
-		return ((istype(G) && ((G.hud_type & hudtype) || (G.hud && (G.hud.hud_type & hudtype)))) && G.check_access(ID)) || AUG?.active && AUG.check_access(ID) || ACC?.active
->>>>>>> theirs
+		// [SIERRA-EDIT] - NTNET
+		// return ((istype(G) && ((G.hud_type & hudtype) || (G.hud && (G.hud.hud_type & hudtype)))) && G.check_access(ID)) || AUG?.active && AUG.check_access(ID) || ACC?.active // SIERRA-EDIT - ORIGINAL
+		return ((istype(G) && ((G.hud_type & hudtype) || (G.hud && (G.hud.hud_type & hudtype)))) && G.check_access(ID) && (G.toggleable ? G.active : TRUE)) || AUG?.active && AUG.check_access(ID) || ACC?.active
+		// [/SIERRA-EDIT]
 	else if(istype(M, /mob/living/silicon/robot))
 		for (var/obj/item/borg/sight/sight as anything in M.GetAllHeld(/obj/item/borg/sight))
 			if (sight.hud_type & hudtype)
