@@ -75,19 +75,27 @@
 	and some of the best engineers Humanity has to offer."
 	capital = "Government Zone, Ceres Station"
 
-/singleton/cultural_info/location/human/pluto
-	name = HOME_SYSTEM_PLUTO
+/singleton/cultural_info/location/human/kuiper_belt
+	name = HOME_SYSTEM_KUIPERB
 	distance = "45AU"
-	description = "Pluto, nominally a Democratic Republic, is a small planet in the Sol system. Pluto has a fairly small population compared \
-	to many other planets in the SCG, with much of it being centred around only two cities, both of which are in desperate need of modernisation \
-	and repair, with much infrastructure long since collapsed. Pluto is dominated by criminal elements and corruption is rampant. Those who live on \
-	Pluto either work a desperate, tough existence trying to escape the planet or are part of or under the thumbs of one of the many local crime \
-	syndicates. In spite of a number of modernisation efforts the Pluto of today has seen very little in the way of improvement.<br><br>The people \
-	of Pluto are, surprisingly, some of the worst off in the SCG. Downtrodden, poor, and from a locale that is so infested with crime it has become \
-	part of the local culture. Most of the people of Pluto are very rough around the edges, hardened by years of poverty or criminality. Those that \
-	manage to escape rarely wish to return, though often possess a looser set of morales as a result of their time on the planet."
-	capital = "New Santa Domingo"
+	description = "The Kuiper Special Economic Zone used to be at the forefront of human exploration before the advent of proper FTL travel. With the emergence \
+	of Alden-Saraspova drives for long-range transit, and eventually gateways, the Zone saw a sharp decline in utility. Nowadays treated as an economic afterthought with little more than a defensive station in Sol, it is home to a diverse cast of residents. \
+	Most inhabitants of the inner Belt tend to live on orbitals surrounding the capital, Pluto, and its moon - Charon. \
+	Pluto is often dotted with water-ice and gas extraction plants, as many abandoned as there are operational. Many can often find traces of abandoned gas refineries, worker hovels and labyrinthine \
+	networks of pump-houses and causeways; sometimes repurposed for more nefarious needs. Orbitals carry most of the economic and residential brunt, \
+	with administrative services being concentrated around Pluto, primarily."
+	capital = "Kuiper Administrative Zone, Pluto"
 	economic_power = 0.8
+	secondary_langs = list(LANGUAGE_GUTTER)
+
+/singleton/cultural_info/location/human/kuiper_interdust
+	name = HOME_SYSTEM_KUIPERD
+	distance = "45AU"
+	description = "The Kuiper Special Economic Zone's region beyond the confines of administration's population centers contains the Interdust, with a variety of industrial, military and economic \
+	infrastructure still kept in function. While residential slots are lesser than those in the Belt, a fair amount of inhabitants call it their home in isolated asteroid settlements. \
+	With policing actions a far less stringent ordeal in this sector of the SEZ, crime has found much success in certain hotspots of the interdust regions of the Kuiper belt."
+	capital = "Kuiper Administrative Zone, Pluto"
+	economic_power = 0.7
 	secondary_langs = list(LANGUAGE_GUTTER)
 
 /singleton/cultural_info/location/human/cetiepsilon
@@ -193,15 +201,16 @@
 /singleton/cultural_info/location/human/magnitka
 	name = HOME_SYSTEM_MAGNITKA
 	distance = "24 light years"
-	description = "Magnitka is an independent, industrialized mining and ore processing colony located in the Ursa system. \
-	Ruled by an oligarchy with politicians often being freshly retired service members, Magnitka's recent history \
-	is marked by civil war. Even today, a number of rebel groups populate the planet. Founded by corporations in the 2200s, the overwhelming majority of Magnitka's population \
-	is descended from the settlers of a joint-corporate colonization effort from Earth. Unfortunately, Magnitka's economy is in a decline as its principle export, iron, grows \
-	cheaper. The primary careers available to Magnitkans are military service, mining, or colonial labor. Though historically isolationist, and more recently associated \
-	with the ICCG, recently a new uniquely Magnitkan identity has arisen; severe, pragmatic, and unified in their newfound independence."
-	capital = "Labortown"
-	economic_power = 0.8
-	ruling_body = "Magnitka"
+	description = "Once an independent, industrialized mining and ore processing colony located in the Ursa system, Magnitka is now its own nation-state with various (albeit limited) sectors of economy and product. \
+	Ruled by an oligarchic administrative body with politicians often being freshly retired service members, Magnitka's history \
+	is marked by civil war, up until the 2260s, wherein the civil environment has stabilized for the sake of the planet's cohesion. Even today, a number of rebel groups populate the planet. \
+	Founded by corporations in the 2200s, the overwhelming majority of Magnitka's population is descended from the settlers of a joint-corporate colonization effort from Earth. \
+	Having been on a recovering spiral from its economy downturn, Magnitka tends to have a strict domestic economy \
+	specializing in ore processing, arms manufacturing and skilled outsourced labour. While Magnitka has been historically isolationist, with a tendency towards the culture of the Gilgameshi - \
+	more recently a new, uniquely Magnitkan identity has arisen; severe, pragmatic, and unified in their newfound independence."
+	capital = "Neueifel"
+	economic_power = 0.9
+	ruling_body = "Magnitkan Independence Coalition"
 
 /singleton/cultural_info/location/human/castilla
 	name = HOME_SYSTEM_CASTILLA
