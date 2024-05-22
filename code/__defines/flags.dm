@@ -24,7 +24,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define ATOM_AWAITING_OVERLAY_UPDATE     FLAG(10)
 
 #define MOVABLE_FLAG_PROXMOVE       FLAG(0)  // Does this object require proximity checking in Enter()?
-#define MOVABLE_FLAG_Z_INTERACT     FLAG(1)  // Should attackby and attack_hand be relayed through ladders and open spaces?
+#define MOVABLE_FLAG_Z_INTERACT     FLAG(1)  // Should use_tool and attack_hand be relayed through ladders and open spaces?
 #define MOVABLE_FLAG_EFFECTMOVE     FLAG(2)  // Is this an effect that should move?
 
 #define OBJ_FLAG_ANCHORABLE     FLAG(0)  // This object can be stuck in place with a tool
@@ -81,3 +81,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define OVERMAP_SECTOR_IN_SPACE     FLAG(2)
 /// If the sector is untargetable by missiles.
 #define OVERMAP_SECTOR_UNTARGETABLE FLAG(3)
+
+
+/// For mob/living/ignore_hazard_flags. When set, shards do not damage the mob.
+var/global/const/HAZARD_FLAG_SHARD = FLAG(0)

@@ -68,8 +68,9 @@
 	if (deploy_sound)
 		playsound(owner, deploy_sound, 30)
 	if (as_owner)
+		var/datum/pronouns/pronouns = owner.choose_from_pronouns()
 		owner.visible_message(
-			SPAN_WARNING("\The [owner] extends \his [item.name] from \his [limb.name]."),
+			SPAN_WARNING("\The [owner] extends [pronouns.his] [item.name] from [pronouns.his] [limb.name]."),
 			SPAN_NOTICE("You extend your [item.name] from your [limb.name].")
 		)
 	else
@@ -91,8 +92,9 @@
 	if (retract_sound)
 		playsound(owner, retract_sound, 30)
 	if (as_owner)
+		var/datum/pronouns/pronouns = M.choose_from_pronouns()
 		M.visible_message(
-			SPAN_WARNING("\The [M] retracts \his [item.name] into \his [limb.name]."),
+			SPAN_WARNING("\The [M] retracts [pronouns.his] [item.name] into [pronouns.his] [limb.name]."),
 			SPAN_NOTICE("You retract your [item.name] into your [limb.name].")
 		)
 	else

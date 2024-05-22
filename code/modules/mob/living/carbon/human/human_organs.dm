@@ -217,7 +217,8 @@
 		return
 
 	if(BP_IS_ROBOTIC(affected))
-		visible_message("<B>\The [src]</B> drops what they were holding, \his [affected.name] malfunctioning!")
+		var/datum/pronouns/pronouns = choose_from_pronouns()
+		visible_message("<B>\The [src]</B> drops what they were holding, [pronouns.his] [affected.name] malfunctioning!")
 
 		var/datum/effect/spark_spread/spark_system = new /datum/effect/spark_spread()
 		spark_system.set_up(5, 0, src)

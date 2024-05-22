@@ -1,0 +1,4 @@
+author: Nyvrem
+changes:
+  - {tweak: IPCs can no longer be the Chief Steward. (they can still be regular Stewards)}
+delete-after: true

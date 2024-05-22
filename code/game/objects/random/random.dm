@@ -264,7 +264,7 @@
 /obj/random/drinkbottle
 	name = "random drink"
 	desc = "This is a random drink."
-	icon = 'icons/obj/food/drinks.dmi'
+	icon = 'icons/obj/food/drinks/bottles.dmi'
 	icon_state = "whiskeybottle"
 
 /obj/random/drinkbottle/spawn_choices()
@@ -842,7 +842,12 @@
 				/obj/item/clothing/glasses/hud/security/prot = 2,
 				/obj/item/clothing/glasses/hud/security/prot/sunglasses = 3,
 				/obj/item/clothing/glasses/hud/security/prot/aviators = 1,
-				/obj/item/clothing/glasses/tacgoggles = 1)
+				/obj/item/clothing/glasses/tacgoggles = 1,
+				/obj/item/clothing/glasses/ballistic/security = 1,
+				/obj/item/clothing/glasses/ballistic = 2,
+				/obj/item/clothing/glasses/ballistic/prescription = 1,
+				/obj/item/clothing/glasses/ballistic/fake = 3
+				)
 
 /obj/random/hat
 	name = "random headgear"
@@ -851,16 +856,19 @@
 	icon_state = "tophat"
 
 /obj/random/hat/spawn_choices()
-	return list(/obj/item/clothing/head/helmet = 2,
-				/obj/item/clothing/head/helmet/tactical = 1,
-				/obj/item/clothing/head/helmet/space/emergency = 1,
-				/obj/item/clothing/head/bio_hood/general = 1,
-				/obj/item/clothing/head/hardhat = 4,
-				/obj/item/clothing/head/hardhat/orange = 4,
-				/obj/item/clothing/head/hardhat/red = 4,
-				/obj/item/clothing/head/hardhat/blue = 4,
-				/obj/item/clothing/head/ushanka = 3,
-				/obj/item/clothing/head/welding = 2)
+	return list(/obj/item/clothing/head/helmet = 4,
+				/obj/item/clothing/head/helmet/tactical = 2,
+				/obj/item/clothing/head/helmet/old_commonwealth = 1,
+				/obj/item/clothing/head/helmet/old_confederation = 1,
+				/obj/item/clothing/head/helmet/space/emergency = 2,
+				/obj/item/clothing/head/bio_hood/general = 2,
+				/obj/item/clothing/head/hardhat = 8,
+				/obj/item/clothing/head/hardhat/orange = 8,
+				/obj/item/clothing/head/hardhat/red = 8,
+				/obj/item/clothing/head/hardhat/blue = 8,
+				/obj/item/clothing/head/ushanka = 8,
+				/obj/item/clothing/head/welding = 8
+				)
 
 /obj/random/suit
 	name = "random suit"
@@ -923,7 +931,9 @@
 				/obj/item/clothing/accessory/storage/holster/waist = 1,
 				/obj/item/clothing/accessory/storage/holster/armpit = 1,
 				/obj/item/clothing/accessory/kneepads = 3,
-				/obj/item/clothing/accessory/stethoscope = 2)
+				/obj/item/clothing/accessory/stethoscope = 2,
+				/obj/item/clothing/accessory/glassesmod/nvg = 1
+				)
 
 GLOBAL_LIST_INIT(random_backpacks, list(
 	/obj/item/storage/backpack/cultpack,
@@ -1285,7 +1295,7 @@ var/global/list/multi_point_spawns
 /obj/random/mre
 	name = "random MRE"
 	desc = "This is a random single MRE."
-	icon = 'icons/obj/food/food.dmi'
+	icon = 'icons/obj/food/mre.dmi'
 	icon_state = "mre"
 
 /obj/random/mre/spawn_choices()
@@ -1344,6 +1354,7 @@ var/global/list/multi_point_spawns
 /obj/random/mre/drink
 	name = "random MRE drink"
 	desc = "This is a random drink for MREs."
+	icon = 'icons/obj/food/condiment.dmi'
 	icon_state = "packet_small"
 
 /obj/random/mre/drink/spawn_choices()
@@ -1358,22 +1369,28 @@ var/global/list/multi_point_spawns
 /obj/random/mre/spread
 	name = "random MRE spread"
 	desc = "This is a random spread packet for MREs."
+	icon = 'icons/obj/food/condiment.dmi'
 	icon_state = "packet_small"
 
 /obj/random/mre/spread/spawn_choices()
 	return list(/obj/item/reagent_containers/food/condiment/small/packet/jelly,
-				/obj/item/reagent_containers/food/condiment/small/packet/honey)
+				/obj/item/reagent_containers/food/condiment/small/packet/honey,
+				/obj/item/reagent_containers/food/condiment/small/packet/peanutbutter,
+				/obj/item/reagent_containers/food/condiment/small/packet/choconutspread)
 
 /obj/random/mre/spread/vegan
 	name = "random vegan MRE spread"
 	desc = "This is a random vegan spread packet for MREs."
 
 /obj/random/mre/spread/vegan/spawn_choices()
-	return list(/obj/item/reagent_containers/food/condiment/small/packet/jelly)
+	return list(/obj/item/reagent_containers/food/condiment/small/packet/jelly,
+				/obj/item/reagent_containers/food/condiment/small/packet/peanutbutter,
+				/obj/item/reagent_containers/food/condiment/small/packet/choconutspread)
 
 /obj/random/mre/sauce
 	name = "random MRE sauce"
 	desc = "This is a random sauce packet for MREs."
+	icon = 'icons/obj/food/condiment.dmi'
 	icon_state = "packet_small"
 
 /obj/random/mre/sauce/spawn_choices()
@@ -1437,7 +1454,7 @@ var/global/list/multi_point_spawns
 
 /obj/random/single/cola
 	name = "randomly spawned cola"
-	icon = 'icons/obj/food/drinks.dmi'
+	icon = 'icons/obj/food/drinks/cans.dmi'
 	icon_state = "cola"
 	spawn_object = /obj/item/reagent_containers/food/drinks/cans/cola
 

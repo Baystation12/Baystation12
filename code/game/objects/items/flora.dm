@@ -19,10 +19,8 @@
 	item_state = "plant-27"
 	var/trimmed = FALSE
 
-/obj/item/flora/pottedplantsmall/fern/attackby(obj/item/S, mob/user)
-	if (!isWirecutter(S))
-		return ..()
-	else
+/obj/item/flora/pottedplantsmall/fern/use_tool(obj/item/S, mob/living/user, list/click_params)
+	if (isWirecutter(S))
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 		visible_message(SPAN_NOTICE("\The [user] starts trimming the [src] with \the [S]."))
 		if (do_after(user, (S.toolspeed * 6) SECONDS, src, DO_PUBLIC_UNIQUE))
@@ -31,6 +29,8 @@
 			trimmed = TRUE
 			addtimer(new Callback(src, PROC_REF(grow)), 90 MINUTES, TIMER_UNIQUE|TIMER_OVERRIDE)
 			update_icon()
+		return TRUE
+	return ..()
 
 /obj/item/flora/pottedplantsmall/fern/on_update_icon()
 	. = ..()

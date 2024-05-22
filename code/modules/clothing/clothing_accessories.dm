@@ -97,6 +97,7 @@
 		src.verbs |= /obj/item/clothing/proc/remove_all_accessories
 	update_accessory_slowdown()
 	update_clothing_icon()
+	update_vision()
 	GLOB.destroyed_event.register(A, src, PROC_REF(accessory_deleted))
 
 /obj/item/clothing/proc/accessory_deleted(obj/item/clothing/accessory/A)
@@ -110,6 +111,7 @@
 	accessories -= A
 	update_accessory_slowdown()
 	update_clothing_icon()
+	update_vision()
 	GLOB.destroyed_event.unregister(A, src, PROC_REF(accessory_deleted))
 
 

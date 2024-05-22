@@ -72,7 +72,8 @@
 	if (user.mind && istype(user.mind.assigned_job, /datum/job/chaplain))
 		user.visible_message(SPAN_NOTICE("\The [user] places \the [src] on \the [M]'s forehead, reciting a prayer..."))
 		if (do_after(user, 5 SECONDS, M, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && user.Adjacent(M))
-			user.visible_message("\The [user] finishes reciting \his prayer, removing \the [src] from \the [M]'s forehead.", "You finish reciting your prayer, removing \the [src] from \the [M]'s forehead.")
+			var/datum/pronouns/pronouns = user.choose_from_pronouns()
+			user.visible_message("\The [user] finishes reciting [pronouns.his] prayer, removing \the [src] from \the [M]'s forehead.", "You finish reciting your prayer, removing \the [src] from \the [M]'s forehead.")
 			if (user.get_cultural_value(TAG_RELIGION) == M.get_cultural_value(TAG_RELIGION))
 				to_chat(M, SPAN_NOTICE("You feel calm and relaxed, at one with the universe."))
 			else
@@ -88,9 +89,9 @@
 			A.reagents.add_reagent(/datum/reagent/water/holywater,water2holy)
 			return TRUE
 
-/obj/item/storage/bible/attackby(obj/item/W as obj, mob/user as mob)
-	if (src.use_sound)
-		playsound(src.loc, src.use_sound, 50, 1, -5)
+/obj/item/storage/bible/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if (use_sound)
+		playsound(loc, use_sound, 50, 1, -5)
 	return ..()
 
 /obj/item/storage/bible/attack_self(mob/living/carbon/human/user)

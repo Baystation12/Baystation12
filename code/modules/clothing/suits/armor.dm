@@ -96,7 +96,7 @@
 /obj/item/clothing/suit/armor/reactive
 	name = "reactive teleport armor"
 	desc = "Someone separated our Chief Science Officer from their own head!"
-	var/active = 0.0
+	active = 0.0
 	icon_state = "reactiveoff"
 	blood_overlay_type = "armor"
 	armor = null

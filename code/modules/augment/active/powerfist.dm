@@ -36,27 +36,29 @@
 	augment_flags = AUGMENT_MECHANICAL | AUGMENT_SCANNABLE
 
 
-/obj/item/powerfist/attackby(obj/item/item, mob/user)
+/obj/item/powerfist/use_tool(obj/item/item, mob/living/user, list/click_params)
+	var/datum/pronouns/pronouns = user.choose_from_pronouns()
 	if (!istype(item, /obj/item/tank))
-		return
+		return ..()
 	var/obj/item/tank/other = item
 	if (other.tank_size > TANK_SIZE_SMALL)
 		to_chat(user, SPAN_WARNING("\The [other] is too big. Find a smaller tank."))
-		return
+		return TRUE
 	if (tank)
 		to_chat(user, SPAN_WARNING("\The [src] already has \a [tank] installed."))
-		return
+		return TRUE
 	user.visible_message(
-		SPAN_ITALIC("\The [user] starts connecting \a [item] to \his [src]."),
+		SPAN_ITALIC("\The [user] starts connecting \a [item] to [pronouns.his] [src]."),
 		SPAN_ITALIC("You start connecting \the [item] to \the [src]."),
 		range = 5
 	)
 	if (!do_after(user, 3 SECONDS, item, DO_PUBLIC_UNIQUE))
-		return
+		return TRUE
 	if (!user.unEquip(item, src))
-		return
+		FEEDBACK_UNEQUIP_FAILURE(user, item)
+		return TRUE
 	user.visible_message(
-		SPAN_ITALIC("\The [user] finishes connecting \a [item] to \his [src]."),
+		SPAN_ITALIC("\The [user] finishes connecting \a [item] to [pronouns.his] [src]."),
 		SPAN_NOTICE("You finish connecting \the [item] to \the [src]."),
 		range = 5
 	)
@@ -64,6 +66,7 @@
 	tank = item
 	update_force()
 	update_icon()
+	return TRUE
 
 
 /obj/item/powerfist/proc/update_force()
@@ -96,18 +99,19 @@
 
 
 /obj/item/powerfist/attack_hand(mob/living/user)
+	var/datum/pronouns/pronouns = user.choose_from_pronouns()
 	if (!tank)
 		to_chat(user, SPAN_WARNING("There's no tank in \the [src]."))
 		return
 	user.visible_message(
-		SPAN_ITALIC("\The [user] starts disconnecting \a [tank] from \his [src]."),
+		SPAN_ITALIC("\The [user] starts disconnecting \a [tank] from [pronouns.his] [src]."),
 		SPAN_ITALIC("You start disconnecting \the [tank] from \the [src]."),
 		range = 5
 	)
 	if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 		return
 	user.visible_message(
-		SPAN_ITALIC("\The [user] finishes disconnecting \a [tank] from \his [src]."),
+		SPAN_ITALIC("\The [user] finishes disconnecting \a [tank] from [pronouns.his] [src]."),
 		SPAN_NOTICE("You finish disconnecting \the [tank] from \the [src]."),
 		range = 5
 	)

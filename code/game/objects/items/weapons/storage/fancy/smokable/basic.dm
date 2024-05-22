@@ -150,6 +150,7 @@
 	max_storage_space = null
 	storage_slots = 7
 	slot_flags = SLOT_BELT
+	sealed = FALSE
 	key_type = list(/obj/item/clothing/mask/smokable/cigarette/cigar)
 	startswith = list(
 		/obj/item/clothing/mask/smokable/cigarette/cigar = 6

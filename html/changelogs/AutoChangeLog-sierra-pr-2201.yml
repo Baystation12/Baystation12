@@ -1,0 +1,6 @@
+author: CrimsonShrike
+changes:
+  - {rscadd: Pais now have 2 modes of light}
+  - {rscadd: 'Pais now have intents, fixing certain interactions.'}
+  - {bugfix: PAI lights didnt work}
+delete-after: true

@@ -30,17 +30,19 @@
 		icon_state = "[base_icon]"
 
 
-/obj/item/clothing/accessory/locket/attackby(obj/item/I, mob/user)
+/obj/item/clothing/accessory/locket/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if (!open)
-		to_chat(user, "You have to open it first.")
-		return
+		to_chat(user, "You have to open \the [src] before modifying it.")
+		return TRUE
+
 	if (istype(I, /obj/item/paper) || istype(I, /obj/item/photo))
 		if (held)
 			to_chat(usr, "\The [src] already has something inside it.")
 		else
 			if (!user.unEquip(I, src))
-				return
-			to_chat(usr, "You slip [I] into [src].")
+				FEEDBACK_UNEQUIP_FAILURE(user, I)
+				return TRUE
+			to_chat(usr, "You slip \the [I] into [src].")
 			held = I
-		return
-	..()
+		return TRUE
+	else return..()

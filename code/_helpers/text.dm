@@ -451,6 +451,7 @@
 	t = replacetext(t, "\[ouerelogo\]", "<img src = ouerelogo.png>")
 	t = replacetext(t, "\[terstenlogo\]", "<img src = terstenlogo.png>")
 	// [/SIERRA-ADD]
+	t = replacetext(t, "\[zhlogo\]", "<img src = zhlogo.png>")
 	t = replacetext(t, "\[editorbr\]", "")
 	return t
 
@@ -523,6 +524,7 @@
 	t = replacetext(t, "<img src = ouerelogo.png>", "\[ouerelogo\]")
 	t = replacetext(t, "<img src = terstenlogo.png>", "\[terstenlogo\]")
 	// [/SIERRA-ADD]
+	t = replacetext(t, "<img src = zhlogo.png", "\[zhlogo\]")
 	t = replacetext(t, "<span class=\"paper_field\"></span>", "\[field\]")
 	t = replacetext(t, "<span class=\"redacted\">R E D A C T E D</span>", "\[redacted\]")
 	t = strip_html_properly(t)

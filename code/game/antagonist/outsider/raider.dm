@@ -46,6 +46,8 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		/obj/item/clothing/head/pirate,
 		/obj/item/clothing/mask/bandana/red,
 		/obj/item/clothing/head/hgpiratecap,
+		/obj/item/clothing/head/helmet/nvgmount/nvg,
+		/obj/item/clothing/head/helmet/nvgmount/thermal // raiders can have a little nvg, as a treat
 		)
 
 	var/list/raider_suits = list(
@@ -212,7 +214,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	if(holster)
 		var/obj/item/clothing/under/uniform = player.w_uniform
 		if(istype(uniform) && uniform.can_attach_accessory(holster))
-			uniform.attackby(holster, player)
+			uniform.use_tool(holster, player)
 		else
 			player.put_in_any_hand_if_possible(holster)
 
@@ -246,7 +248,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	if(holster)
 		var/obj/item/clothing/under/uniform = vox.w_uniform
 		if(istype(uniform) && uniform.can_attach_accessory(holster))
-			uniform.attackby(holster, vox)
+			uniform.use_tool(holster, vox)
 		else
 			vox.put_in_any_hand_if_possible(holster)
 

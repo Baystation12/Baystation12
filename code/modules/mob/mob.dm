@@ -655,6 +655,13 @@
 	return P
 
 
+/mob/proc/get_formal_pronouns()
+	var/datum/pronouns/P = GLOB.pronouns_from_gender[gender]
+	if (pronouns)
+		P = GLOB.pronouns.by_key[pronouns]
+	return P.formal_term
+
+
 /mob/proc/see(message)
 	if(!is_active())
 		return 0

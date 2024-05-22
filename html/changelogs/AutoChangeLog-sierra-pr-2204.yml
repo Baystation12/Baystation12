@@ -1,0 +1,7 @@
+author: emmanuelbassil
+changes:
+  - {bugfix: Fix being able to store items in sealed storage containers}
+  - {tweak: Cigar cases now start the round unsealed; like cigarette cases already
+      behave.}
+  - {bugfix: Fixes being able to drag taped papers around on a wall.}
+delete-after: true

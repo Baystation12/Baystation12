@@ -160,8 +160,9 @@
 				if (M.draw_target == MARKING_TARGET_HAIR)
 					var/color = markings[E]
 					var/icon/I = icon(M.icon, M.icon_state)
-					I.Blend(HI, ICON_AND)
-					I.Blend(color, ICON_MULTIPLY)
+					if(istype(M, /datum/sprite_accessory/marking/hair_fade))
+						I.Blend(HI, ICON_AND)
+					I.Blend(color, M.blend)
 					ADD_SORTED(sorted_hair_markings, list(list(M.draw_order, I)), GLOBAL_PROC_REF(cmp_marking_order))
 			for (var/entry in sorted_hair_markings)
 				HI.Blend(entry[2], ICON_OVERLAY)

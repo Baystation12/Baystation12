@@ -3,18 +3,16 @@
 	desc = "It's a small bag with dice inside."
 	icon = 'icons/obj/dice.dmi'
 	icon_state = "dicebag"
+	startswith = list(
+		/obj/item/dice = 6
+	)
 
-/obj/item/storage/pill_bottle/dice/New()
-	..()
-	for(var/i = 1 to 7)
-		new /obj/item/dice( src )
 
 /obj/item/storage/pill_bottle/dice_nerd	//DnD dice
 	name = "bag of gaming dice"
 	desc = "It's a small bag with gaming dice inside."
 	icon = 'icons/obj/dice.dmi'
 	icon_state = "magicdicebag"
-
 	startswith = list(
 		/obj/item/dice/d4 = 1,
 		/obj/item/dice = 1,
@@ -33,19 +31,8 @@
 		/obj/item/material/shard/caltrop/tack = 6
 	)
 
-/obj/item/storage/pill_bottle/dice_nerd/New()
-	..()
-	new /obj/item/dice/d4( src )
-	new /obj/item/dice( src )
-	new /obj/item/dice/d8( src )
-	new /obj/item/dice/d10( src )
-	new /obj/item/dice/d12( src )
-	new /obj/item/dice/d20( src )
-	new /obj/item/dice/d100( src )
-
-
 /obj/item/storage/box/donut
-	icon = 'icons/obj/food/food.dmi'
+	icon = 'icons/obj/food/food_storage.dmi'
 	icon_state = "donutbox"
 	name = "donut box"
 	contents_allowed = list(/obj/item/reagent_containers/food/snacks/donut)
@@ -57,7 +44,7 @@
 	ClearOverlays()
 	var/i = 0
 	for(var/obj/item/reagent_containers/food/snacks/donut/D in contents)
-		var/image/I = image('icons/obj/food/food.dmi', "[i][D.overlay_state]")
+		var/image/I = image('icons/obj/food/food_storage.dmi', "[i][D.overlay_state]")
 		if(D.overlay_state == "box-donut1")
 			I.color = D.filling_color
 		AddOverlays(I)

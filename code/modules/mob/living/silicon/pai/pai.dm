@@ -76,6 +76,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	var/flashlight_power = 0.5 //brightness of light when on, must be no greater than 1.
 	var/flashlight_range = 3 //outer range of light when on, can be negative
 	var/light_on = FALSE
+	light_wedge = LIGHT_OMNI
 
 	hud_type = /datum/hud/pai
 
@@ -86,12 +87,18 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	return ..()
 
 
-/mob/living/silicon/pai/Initialize()
+/mob/living/silicon/pai/Initialize(mapload, obj/item/device/paicard)
 	. = ..()
 	status_flags |= NO_ANTAG
 	add_language(LANGUAGE_HUMAN_EURO, TRUE)
 	verbs -= /mob/living/verb/ghost
 	software = default_pai_software.Copy()
+	card = paicard
+	if (card)
+		//Radio is inside us, but needs to match waht the card says correct type is
+		CreateRadio()
+	else
+		CRASH("PAI was created without card - This may be an error or require special handling")
 
 
 /mob/living/silicon/pai/proc/CreateRadio()
@@ -219,6 +226,10 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 		return
 	last_special = world.time + 100
 
+	//Turn off light, we're not a flashlight (unless we remain deployed)
+	if (light_on)
+		toggle_integrated_light()
+
 	// Move us into the card and move the card to the ground.
 	stop_pulling()
 	resting = FALSE
@@ -277,13 +288,14 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 /mob/living/silicon/pai/use_tool(obj/item/tool, mob/user, list/click_params)
 	// ID Card - Set pAI access
 	var/obj/item/card/id/id = tool.GetIdCard()
+	var/datum/pronouns/pronouns = user.choose_from_pronouns()
 	if (istype(id))
 		var/id_name = GET_ID_NAME(id, tool)
 		var/list/new_access = id.GetAccess()
 		idcard.access = new_access
 		user.visible_message(
-			SPAN_NOTICE("\The [user] scans \a [tool] over \the [src], updating \his access."),
-			SPAN_NOTICE("You scan [id_name] over \the [src], updating \his access.")
+			SPAN_NOTICE("\The [user] scans \a [tool] over \the [src], updating [pronouns.his] access."),
+			SPAN_NOTICE("You scan [id_name] over \the [src], updating [pronouns.his] access.")
 		)
 		return TRUE
 
@@ -325,7 +337,16 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 /mob/living/silicon/pai/proc/toggle_integrated_light()
 	if(!light_on)
-		set_light(flashlight_range, flashlight_power, 2)
+		if (light_wedge == LIGHT_OMNI)
+			light_wedge = LIGHT_VERY_WIDE
+			flashlight_power = 1
+			flashlight_range = 4
+		else
+			light_wedge = LIGHT_OMNI
+			flashlight_power = initial(flashlight_power)
+			flashlight_range = initial(flashlight_range)
+
+		set_light(flashlight_range, flashlight_power)
 		to_chat(src, SPAN_NOTICE("You enable your integrated light."))
 		light_on = TRUE
 	else
