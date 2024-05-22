@@ -77,6 +77,7 @@
 	options["Goggles, corrective"] = /obj/item/clothing/glasses/hud/health/goggle/prescription
 	options["Eyepatch"] = /obj/item/clothing/glasses/eyepatch/hud/medical
 	options["Aviators"] = /obj/item/clothing/glasses/hud/health/aviators
+	options["Aviators, corrective"] = /obj/item/clothing/glasses/hud/health/aviators/prescription
 	gear_tweaks += new /datum/gear_tweak/path (options)
 
 
@@ -94,6 +95,7 @@
 	options["Goggles, corrective"] = /obj/item/clothing/glasses/meson/prescription
 	options["Eyepatch"] = /obj/item/clothing/glasses/eyepatch/hud/meson
 	options["Aviators"] = /obj/item/clothing/glasses/meson/aviators
+	options["Aviators, corrective"] = /obj/item/clothing/glasses/meson/aviators/prescription
 	gear_tweaks += new /datum/gear_tweak/path (options)
 
 
@@ -110,6 +112,7 @@
 	options["HUD"] = /obj/item/clothing/glasses/hud/janitor
 	options["HUD, corrective"] = /obj/item/clothing/glasses/hud/janitor/prescription
 	options["Aviators"] = /obj/item/clothing/glasses/hud/janitor/aviators
+	options["Aviators, corrective"] = /obj/item/clothing/glasses/hud/janitor/aviators/prescription
 	gear_tweaks += new /datum/gear_tweak/path (options)
 
 
@@ -185,3 +188,14 @@
 	display_name = "Blindfold"
 	path = /obj/item/clothing/glasses/blindfold
 	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/eyes/ballistics
+	display_name = "Replica Ballistic Goggles"
+	path = /obj/item/clothing/glasses/ballistic/fake
+
+/datum/gear/eyes/ballistics/New()
+	..()
+	var/list/options = list()
+	options["Replica Ballistic Goggles"] = /obj/item/clothing/glasses/ballistic/fake
+	options["Replica Ballistic Goggles, corrective"] = /obj/item/clothing/glasses/ballistic/fake/prescription
+	gear_tweaks += new /datum/gear_tweak/path (options)

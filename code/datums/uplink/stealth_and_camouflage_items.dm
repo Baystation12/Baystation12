@@ -91,12 +91,9 @@
 	great for stashing your stolen goods. Comes with a crowbar and a floor tile."
 	item_cost = 20
 	path = /obj/item/storage/backpack/satchel/flat
-<<<<<<< ours
-=======
 
 /datum/uplink_item/item/stealth_items/caltrops
 	name = "Box of Caltrops"
 	desc = "A set of 4 steel caltrops, cunningly hidden in an innocent lunchbox."
 	item_cost = 20
 	path = /obj/item/storage/lunchbox/caltrops
->>>>>>> theirs

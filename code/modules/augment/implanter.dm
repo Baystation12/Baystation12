@@ -102,10 +102,11 @@
 		if (loc != old_loc)
 			return
 	var/success = instant
+	var/datum/pronouns/pronouns = user.choose_from_pronouns()
 	if (!instant)
 		working = TRUE
 		to_chat(user, SPAN_WARNING("\icon[src] Commencing procedure. " + SPAN_DANGER("Please remain calm.")))
-		user.visible_message(SPAN_WARNING("\The [user] places \his [parent.name] against \the [src]."))
+		user.visible_message(SPAN_WARNING("\The [user] places [pronouns.his] [parent.name] against \the [src]."))
 		if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			goto FailedAugmentImplant
 		user.visible_message(SPAN_DANGER("\The [src] purrs maliciously and unfurls its armatures with frightening speed!"))
@@ -147,7 +148,7 @@
 	FailedAugmentImplant:
 	working = FALSE
 	if (!success)
-		user.visible_message(SPAN_DANGER("\The [src] falls away from \the [user], leaving \his [parent.name] a mangled mess!"))
+		user.visible_message(SPAN_DANGER("\The [src] falls away from \the [user], leaving [pronouns.his] [parent.name] a mangled mess!"))
 		parent.take_general_damage(15)
 		return
 	to_chat(user, SPAN_WARNING("\icon[src] Procedure complete. ") + SPAN_NOTICE("Have a nice day."))

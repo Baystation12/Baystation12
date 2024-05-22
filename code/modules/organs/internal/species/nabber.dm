@@ -168,6 +168,7 @@
 	var/lowblood_tally = 0
 	name = "distributed nervous system"
 	parent_organ = BP_CHEST
+	can_use_mmi = FALSE
 
 /obj/item/organ/internal/brain/insectoid/nabber/Process()
 	if(!owner || !owner.should_have_organ(BP_HEART))

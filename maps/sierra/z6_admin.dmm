@@ -72,7 +72,7 @@
 /obj/floor_decal/corner/red/border{
 	dir = 1
 	},
-/obj/item/reagent_containers/food/drinks/bottle/cola,
+/obj/item/reagent_containers/food/drinks/bottle/small/cola,
 /turf/unsimulated/floor/techfloor{
 	icon_state = "dark";
 	icon = 'icons/turf/flooring/tiles.dmi'
@@ -3430,7 +3430,7 @@
 /obj/floor_decal/carpet{
 	dir = 8
 	},
-/obj/item/reagent_containers/food/condiment/small/oliveoil{
+/obj/item/reagent_containers/food/condiment/oliveoil{
 	name = "vaseline";
 	pixel_y = 17
 	},
@@ -16218,7 +16218,7 @@
 /area/centcom/holding)
 "rgh" = (
 /obj/structure/table/woodentable_reinforced/walnut,
-/obj/item/reagent_containers/food/drinks/bottle/cola,
+/obj/item/reagent_containers/food/drinks/bottle/small/cola,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/carpet.dmi';
 	icon_state = "purple";

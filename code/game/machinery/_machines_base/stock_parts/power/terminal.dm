@@ -115,7 +115,7 @@
 			to_chat(user, SPAN_NOTICE("There is already a terminal here."))
 			return TRUE
 
-/obj/item/stock_parts/power/terminal/attackby(obj/item/I, mob/user)
+/obj/item/stock_parts/power/terminal/use_tool(obj/item/I, mob/living/user, list/click_params)
 	var/obj/machinery/machine = loc
 	if(!istype(machine))
 		return ..()
@@ -176,6 +176,7 @@
 				to_chat(user, SPAN_NOTICE("You cut the cables and dismantle the power terminal."))
 				qdel(terminal)
 		return TRUE
+	return ..()
 
 /obj/item/stock_parts/power/terminal/buildable
 	part_flags = PART_FLAG_HAND_REMOVE

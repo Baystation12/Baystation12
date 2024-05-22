@@ -476,8 +476,9 @@
 	ui_interact(user)
 
 /obj/machinery/power/supermatter/attack_hand(mob/user as mob)
+	var/datum/pronouns/pronouns = user.choose_from_pronouns()
 	user.visible_message(
-		SPAN_WARNING("\The [user] reaches out and touches \the [src], inducing a resonance. For a brief instant, \his body glows brilliantly, then flashes into ash."),
+		SPAN_WARNING("\The [user] reaches out and touches \the [src], inducing a resonance. For a brief instant, [pronouns.his] body glows brilliantly, then flashes into ash."),
 		SPAN_DANGER(FONT_LARGE("You reach out and touch \the [src]. Instantly, you feel a curious sensation as your body turns into new and exciting forms of plasma. That was not a wise decision.")),
 		SPAN_WARNING("You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.")
 	)
@@ -527,15 +528,17 @@
 	if (user.drop_from_inventory(W))
 		Consume(W)
 		return TRUE
-	else return ..()
+	return ..()
 
 
 /obj/machinery/power/supermatter/Bumped(atom/AM as mob|obj)
 	if(istype(AM, /obj/effect))
 		return
 	if(istype(AM, /mob/living))
+		var/mob/victim = AM
+		var/datum/pronouns/pronouns = victim.choose_from_pronouns()
 		AM.visible_message(
-			SPAN_WARNING("\The [AM] slams into \the [src], inducing a resonance. For a brief instant, \his body glows brilliantly, then flashes into ash."),
+			SPAN_WARNING("\The [AM] slams into \the [src], inducing a resonance. For a brief instant, [pronouns.his] body glows brilliantly, then flashes into ash."),
 			SPAN_DANGER(FONT_LARGE("You slam into \the [src], and your mind fills with unearthly shrieking. Your vision floods with light as your body instantly dissolves into dust.")),
 			SPAN_WARNING("You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.")
 		)

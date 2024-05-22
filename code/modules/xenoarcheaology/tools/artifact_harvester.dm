@@ -2,24 +2,34 @@
 	name = "Exotic Particle Harvester"
 	icon = 'icons/obj/machines/research/virology.dmi'
 	icon_state = "incubator"	//incubator_on
+
 	anchored = TRUE
 	density = TRUE
 	idle_power_usage = 50
 	active_power_usage = 750
 	var/harvesting = 0
+	var/obj/item/disk/tech_disk/inserted_disk
 	var/obj/item/anobattery/inserted_battery
 	var/obj/machinery/artifact/cur_artifact
 	var/obj/machinery/artifact_scanpad/owned_scanner = null
 	var/last_process = 0
-
+	var/list/data = list("screen" = 1)
 /obj/machinery/artifact_harvester/New()
 	..()
-	//connect to a nearby scanner pad
-	owned_scanner = locate(/obj/machinery/artifact_scanpad) in get_step(src, dir)
-	if(!owned_scanner)
-		owned_scanner = locate(/obj/machinery/artifact_scanpad) in orange(1, src)
+	sync_with_pad()
 
 /obj/machinery/artifact_harvester/use_tool(obj/item/I, mob/living/user, list/click_params)
+	if(istype(I,/obj/item/disk/tech_disk))
+		if(!inserted_disk)
+			if(!user.unEquip(I, src))
+				return TRUE
+			to_chat(user, SPAN_NOTICE("You insert [I] into [src]."))
+			src.inserted_disk = I
+			updateDialog()
+			return TRUE
+		else
+			to_chat(user, SPAN_WARNING("There is already a technology disk in [src]."))
+			return TRUE
 	if(istype(I,/obj/item/anobattery))
 		if(!inserted_battery)
 			if(!user.unEquip(I, src))
@@ -32,7 +42,13 @@
 			to_chat(user, SPAN_WARNING("There is already a battery in [src]."))
 			return TRUE
 	return..()
-
+/obj/machinery/artifact_harvester/proc/sync_with_pad()
+	for(var/obj/machinery/artifact_scanpad/scanner in range(5, src))
+		owned_scanner = scanner
+		src.visible_message("<b>[name]</b> states, \"Pad located, commencing sync.\"")
+		return
+	src.visible_message("<b>[name]</b> states, \"Scan unsuccessful, could not locate pad.\"")
+	return
 /obj/machinery/artifact_harvester/attack_hand(mob/user as mob)
 	..()
 	interact(user)
@@ -58,17 +74,26 @@
 				dat += "<A href='?src=\ref[src];ejectbattery=1'>Eject battery</a><BR>"
 				dat += "<A href='?src=\ref[src];drainbattery=1'>Drain battery of all charge</a><BR>"
 				dat += "<A href='?src=\ref[src];harvest=1'>Begin harvesting</a><BR>"
-
-			else
+			if(inserted_disk)
+				dat += "[inserted_disk.name] inserted.<BR>"
+				dat += "<A href='?src=\ref[src];loaddisk=1'>Copy data to disk</a><BR>"
+				dat += "<A href='?src=\ref[src];ejectdisk=1'>Eject technology disk</a><BR>"
+			if(!inserted_disk)
+				dat += "No technology disk inserted.<BR>"
+			if(!inserted_battery)
 				dat += "No battery inserted.<BR>"
+			else
+
 	else
 		dat += "<B>[SPAN_COLOR("red", "Unable to locate analysis pad.")]<BR></b>"
+	dat += "<A href='?src=\ref[src];syncpads=1'>Sync with nearby pad</a><BR>"
 	dat += "<A href='?src=\ref[src];close=1'>Close</a><BR>"
 	dat += "<HR>"
 	var/datum/browser/popup = new(user, "artifact_harvester", "Artifact Power Harvester", 450, 500)
 	popup.set_content(dat)
 	popup.open()
-
+	user.set_machine(src)
+	onclose(user, "artifactharvester")
 /obj/machinery/artifact_harvester/Process()
 	if(inoperable())
 		return
@@ -118,7 +143,7 @@
 	if (href_list["harvest"])
 		if(!inserted_battery)
 			src.visible_message("<b>[src]</b> states, \"Cannot harvest. No battery inserted.\"")
-
+			return TOPIC_REFRESH
 		else if(inserted_battery.stored_charge >= inserted_battery.capacity)
 			src.visible_message("<b>[src]</b> states, \"Cannot harvest. battery is full.\"")
 
@@ -136,7 +161,7 @@
 				var/message = "<b>[src]</b> states, \"Cannot harvest. No noteworthy energy signature isolated.\""
 				src.visible_message(message)
 
-			else if(analysed && analysed.being_used)
+			else if(analysed && analysed.being_used )
 				src.visible_message("<b>[src]</b> states, \"Cannot harvest. Source already being harvested.\"")
 
 			else
@@ -170,7 +195,7 @@
 								source_effect = cur_artifact.my_effect
 
 							var/battery_matches_secondary_id = 0
-							if(inserted_battery.battery_effect && inserted_battery.battery_effect.artifact_id == cur_artifact.secondary_effect.artifact_id)
+							if(inserted_battery.battery_effect && inserted_battery.battery_effect.artifact_id == cur_artifact.secondary_effect?.artifact_id)
 								battery_matches_secondary_id = 1
 							if(battery_matches_secondary_id && cur_artifact.secondary_effect.activated)
 								//we're good to recharge the secondary effect!
@@ -249,9 +274,46 @@
 			var/message = "<b>[src]</b> states, \"Cannot dump energy. No battery inserted.\""
 			src.visible_message(message)
 		. = TOPIC_REFRESH
+	else if (href_list["loaddisk"])
+		if(!inserted_battery)
+			src.visible_message("<b>[src]</b> states, \"Cannot conduct analysis. No battery inserted.\"")
 
+		else if(inserted_battery.battery_effect && inserted_battery.stored_charge > 0)
+			var/effect_type = inserted_battery.battery_effect.effect_type
+			//horrifying copypasta but unfortunately think it might be necessary
+			if(effect_type == EFFECT_BLUESPACE)
+				var/datum/tech/anomaly_tech = new /datum/tech/bluespace
+				anomaly_tech.level = 8
+				src.inserted_disk.stored = anomaly_tech
+			else if(effect_type == EFFECT_ORGANIC)
+				var/datum/tech/anomaly_tech = new /datum/tech/biotech
+				anomaly_tech.level = 8
+				src.inserted_disk.stored = anomaly_tech
+			else if(effect_type == EFFECT_ELECTRO)
+				var/datum/tech/anomaly_tech = new /datum/tech/powerstorage
+				anomaly_tech.level = 8
+				src.inserted_disk.stored = anomaly_tech
+			else if(effect_type == EFFECT_ENERGY)
+				var/datum/tech/anomaly_tech = new /datum/tech/magnets
+				anomaly_tech.level = 8
+				src.inserted_disk.stored = anomaly_tech
+			else if(effect_type == EFFECT_PARTICLE)
+				var/datum/tech/anomaly_tech = new /datum/tech/materials
+				anomaly_tech.level = 8
+				src.inserted_disk.stored = anomaly_tech
+			. = TOPIC_REFRESH
+		else
+			var/message = "<b>[src]</b> states, \"No energy signature detected from battery, analysis inconclusive.\""
+			src.visible_message(message)
+	else if (href_list["ejectdisk"])
+		src.inserted_disk.dropInto(loc)
+		src.inserted_disk = null
+		. = TOPIC_REFRESH
+	else if(href_list["syncpads"])
+		sync_with_pad()
+		. = TOPIC_REFRESH
 	else if(href_list["close"])
-		close_browser(user, "window=artharvester")
+		close_browser(user, "window=artifact_harvester")
 		return TOPIC_HANDLED
 
 	if(. == TOPIC_REFRESH)

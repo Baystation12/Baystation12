@@ -403,7 +403,7 @@
 		'html/images/FleetLogo.png',
 		'html/images/sfplogo.png',
 		'html/images/falogo.png',
-		// [SIERRA-ADD] ,
+		// [SIERRA-ADD]
 		'html/images/ofbluelogo.png',
 		'html/images/ofntlogo.png',
 		'html/images/foundlogo.png',
@@ -418,6 +418,7 @@
 		'html/images/ouerelogo.png',
 		'html/images/terstenlogo.png',
 		// [/SIERRA-ADD]
+		'html/images/zhlogo.png'
 		)
 	addtimer(new Callback(src, PROC_REF(after_send_resources)), 1 SECOND)
 

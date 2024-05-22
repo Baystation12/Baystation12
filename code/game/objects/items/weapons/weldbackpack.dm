@@ -59,7 +59,7 @@
 		playsound(loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return TRUE
 
-	else return ..()
+	return ..()
 
 /obj/item/storage/backpack/weldpack/use_after(obj/O, mob/living/user, click_parameters)
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && src.reagents.total_volume < max_fuel)

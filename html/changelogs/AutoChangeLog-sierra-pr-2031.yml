@@ -1,0 +1,4 @@
+author: SierraKomodo
+changes:
+  - {tweak: The bar sign now always starts the round showing 'Closed'.}
+delete-after: true

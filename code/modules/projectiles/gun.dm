@@ -62,46 +62,65 @@
 	waterproof = FALSE
 
 	var/burst = 1
-	var/can_autofire = FALSE /// checks if the gun will continue firing if the mouse button is held down
-	var/fire_delay = 6 	//delay after shooting before the gun can be used again. Cannot be less than [burst_delay+1]
-	var/burst_delay = 2	//delay between shots, if firing in bursts
+	/// Checks if the gun will continue firing if the mouse button is held down.
+	var/can_autofire = FALSE
+	/// Delay after shooting before the gun can be used again. Cannot be less than [burst_delay+1].
+	var/fire_delay = 6
+	/// Delay between shots, if firing in bursts.
+	var/burst_delay = 2
 	var/move_delay = 1
+	/// Sound this gun makes when firing. Overridden by projectiles with their own sounds.
 	var/fire_sound = 'sound/weapons/gunshot/gunshot.ogg'
 	var/fire_sound_text = "gunshot"
 	var/fire_anim = null
-	var/screen_shake = 0 //shouldn't be greater than 2 unless zoomed
-	var/space_recoil = 0 //knocks back in space
+	/// The amount your screen shakes when firing. Shouldn't be greater than 2 unless zoomed.
+	var/screen_shake = 0
+	/// Whether or not this weapon moves the shooter backwards when fired in space.
+	var/space_recoil = 0
 	var/silenced = FALSE
-	var/accuracy = 0   //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
-	var/accuracy_power = 5  //increase of to-hit chance per 1 point of accuracy
-	var/bulk = 0			//how unwieldy this weapon for its size, affects accuracy when fired without aiming
-	var/last_handled		//time when hand gun's in became active, for purposes of aiming bonuses
-	var/scoped_accuracy = null  //accuracy used when zoomed in a scope
+	/// Accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
+	var/accuracy = 0
+	/// Increase of to-hit chance per 1 point of accuracy.
+	var/accuracy_power = 5
+	/// How unwieldy this weapon for its size, affects accuracy when fired without aiming.
+	var/bulk = 0
+	/// Time when hand gun's in became active, for purposes of aiming bonuses.
+	var/last_handled
+	/// Accuracy used when zoomed in a scope. Not additive.
+	var/scoped_accuracy = null
+	/// How far this weapon's scope can see.
 	var/scope_zoom = 0
-	var/list/burst_accuracy = list(0) //allows for different accuracies for each shot in a burst. Applied on top of accuracy
+	/// Allows for different accuracies for each shot in a burst. Applied on top of accuracy.
+	var/list/burst_accuracy = list(0)
 	var/list/dispersion = list(0)
 	var/one_hand_penalty
 	var/wielded_item_state
-	var/combustion	//whether it creates hotspot when fired
-
+	/// Whether it creates hotspot when fired.
+	var/combustion
 	var/next_fire_time = 0
 
-	var/sel_mode = 1 //index of the currently selected mode
+	/// Index of the currently selected mode.
+	var/sel_mode = 1
 	var/list/firemodes = list()
 	var/selector_sound = 'sound/weapons/guns/selector.ogg'
 
-	//aiming system stuff
-	var/keep_aim = 1 	//1 for keep shooting until aim is lowered
-						//0 for one bullet after tarrget moves and aim is lowered
-	var/multi_aim = 0 //Used to determine if you can target multiple people.
-	var/list/mob/living/aim_targets //List of who yer targeting.
-	var/mob/living/last_moved_mob //Used to fire faster at more than one person.
-	var/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
+	//Aiming system stuff
+	/// 1 for "keep shooting until aim is lowered", 0 for "one bullet after target moves and aim is lowered".
+	var/keep_aim = 1
+	/// Used to determine if you can target multiple people.
+	var/multi_aim = 0
+	/// List of who you are targeting.
+	var/list/mob/living/aim_targets
+	/// Used to fire faster at more than one person.
+	var/mob/living/last_moved_mob
+	/// So that it doesn't spam them with the fact they cannot hit them.
+	var/told_cant_shoot = 0
 	var/lock_time = -100
 	var/last_safety_check = -INFINITY
 	var/safety_state = 1
 	var/has_safety = TRUE
-	var/safety_icon 	   //overlay to apply to gun based on safety state, if any
+	/// Overlay to apply to gun based on safety state, if any.
+	var/safety_icon
 
 	/// What skill governs safe handling of this gun. Basic skill level and higher will also show the safety overlay to the player.
 	var/gun_skill = SKILL_WEAPONS
@@ -160,8 +179,9 @@
 		if(P)
 			if(process_projectile(P, user, user, pick(BP_L_FOOT, BP_R_FOOT)))
 				handle_post_fire(user, user)
+				var/datum/pronouns/pronouns = user.choose_from_pronouns()
 				user.visible_message(
-					SPAN_DANGER("\The [user] shoots \himself in the foot with \the [src]!"),
+					SPAN_DANGER("\The [user] shoots [pronouns.self] in the foot with \the [src]!"),
 					SPAN_DANGER("You shoot yourself in the foot with \the [src]!")
 					)
 				M.unequip_item()
@@ -211,8 +231,11 @@
 				Fire(atom, user, pointblank = TRUE)
 		return TRUE
 	if (user.a_intent == I_HURT && !user.isEquipped(atom)) //point blank shooting
-		Fire(atom, user, pointblank = TRUE)
-		return TRUE
+		if (safety())
+			return ..()
+		else
+			Fire(atom, user, pointblank = TRUE)
+			return TRUE
 	return ..()
 
 

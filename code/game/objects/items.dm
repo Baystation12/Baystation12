@@ -22,7 +22,7 @@
 //	causeerrorheresoifixthis
 	var/obj/item/master = null
 	var/list/origin_tech = null	//Used by R&D to determine what research bonuses it grants.
-	///Used in use_weapon() and attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
+	///Used in use_weapon() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
 	var/list/attack_verb = list("attacked")
 	var/lock_picking_level = 0 //used to determine whether something can pick a lock, and how well.
 	var/force = 0
@@ -292,23 +292,6 @@
 			storage.handle_item_insertion(src)
 		return TRUE
 	return ..()
-
-
-///Eventually should be deleted in favor of use_tool; keeping duplicate until downstream attackbys are replaced.
-/obj/item/attackby(obj/item/item, mob/living/user, list/click_params)
-	if (SSfabrication.try_craft_with(src, item, user))
-		return TRUE
-	if (istype(item, /obj/item/storage) && isturf(loc))
-		var/obj/item/storage/storage = item
-		if (!storage.allow_quick_gather)
-			return ..()
-		if (!storage.quick_gather_single)
-			storage.gather_all(loc, user)
-		else if (storage.can_be_inserted(src, user))
-			storage.handle_item_insertion(src)
-		return TRUE
-	return ..()
-
 
 /obj/item/can_embed()
 	if (!canremove)
@@ -592,7 +575,8 @@ var/global/list/slot_flags_enumeration = list(
 	if(!istype(attacker))
 		return 0
 	attacker.apply_damage(force, damtype, attacker.hand ? BP_L_HAND : BP_R_HAND, used_weapon = src)
-	attacker.visible_message(SPAN_DANGER("[attacker] hurts \his hand on [src]!"))
+	var/datum/pronouns/pronouns = attacker.choose_from_pronouns()
+	attacker.visible_message(SPAN_DANGER("[attacker] hurts [pronouns.his] hand on \the [src]!"))
 	admin_attack_log(attacker, target, "Attempted to disarm but was blocked", "Was targeted with a disarm but blocked the attack", "attmpted to disarm but was blocked by")
 	playsound(target, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 	playsound(target, hitsound, 50, 1, -1)

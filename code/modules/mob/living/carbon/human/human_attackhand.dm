@@ -164,7 +164,8 @@
 
 			if (hit_zone != H.zone_sel.selecting) //If resolve_hand_attack returned a different zone, that means you're not as accurate.
 				if (prob(15) && hit_zone != BP_CHEST && lying)
-					H.visible_message(SPAN_DANGER("\The [H] attempted to strike \the [src], but \he rolled out of the way!"))
+					var/datum/pronouns/pronouns = choose_from_pronouns()
+					H.visible_message(SPAN_DANGER("\The [H] attempted to strike \the [src], but [pronouns.he] rolled out of the way!"))
 					set_dir(pick(GLOB.cardinal))
 					playsound(loc, attack.miss_sound, 25, 1, -1)
 					return
@@ -237,6 +238,7 @@
 */
 /mob/living/carbon/human/proc/apply_pressure(mob/living/user, target_zone)
 	var/obj/item/organ/external/organ = get_organ(target_zone)
+	var/datum/pronouns/pronouns = user.choose_from_pronouns()
 	if(!organ || !(organ.status & ORGAN_BLEEDING) || BP_IS_ROBOTIC(organ))
 		return 0
 
@@ -246,7 +248,7 @@
 		return 0
 
 	if(user == src)
-		user.visible_message("\The [user] starts applying pressure to \his [organ.name]!", "You start applying pressure to your [organ.name]!")
+		user.visible_message("\The [user] starts applying pressure to [pronouns.his] [organ.name]!", "You start applying pressure to your [organ.name]!")
 	else
 		user.visible_message("\The [user] starts applying pressure to [src]'s [organ.name]!", "You start applying pressure to [src]'s [organ.name]!")
 	spawn(0)
@@ -258,7 +260,7 @@
 		organ.applied_pressure = null
 
 		if(user == src)
-			user.visible_message("\The [user] stops applying pressure to \his [organ.name]!", "You stop applying pressure to your [organ.name]!")
+			user.visible_message("\The [user] stops applying pressure to [pronouns.his] [organ.name]!", "You stop applying pressure to your [organ.name]!")
 		else
 			user.visible_message("\The [user] stops applying pressure to [src]'s [organ.name]!", "You stop applying pressure to [src]'s [organ.name]!")
 

@@ -1,0 +1,4 @@
+author: Sbotkin
+changes:
+  - {tweak: Desk lamps start turned off by default.}
+delete-after: true
