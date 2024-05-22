@@ -63,6 +63,9 @@
 
 	var/use_3p
 	var/use_1p
+
+
+	var/runemessage = -1
 	if(emote_message_1p)
 		if(target && emote_message_1p_target)
 			use_1p = get_emote_message_1p(user, target, extra_params)
@@ -86,6 +89,9 @@
 		use_3p = replacetext(use_3p, "USER_THEM", user_pronouns.him)
 		use_3p = replacetext(use_3p, "USER_THEIR", user_pronouns.his)
 		use_3p = replacetext(use_3p, "USER_SELF", user_pronouns.self)
+
+		runemessage = replacetext(use_3p, "USER", "")
+
 		use_3p = replacetext(use_3p, "USER", "<b>\the [user]</b>")
 		use_3p = capitalize(use_3p)
 
@@ -96,9 +102,9 @@
 	if(ismob(user))
 		var/mob/M = user
 		if(message_type == AUDIBLE_MESSAGE)
-			M.audible_message(message = use_3p, self_message = use_1p, deaf_message = emote_message_impaired, hearing_distance = use_range, checkghosts = /datum/client_preference/ghost_sight)
+			M.audible_message(message = use_3p, self_message = use_1p, deaf_message = emote_message_impaired, hearing_distance = use_range, checkghosts = /datum/client_preference/ghost_sight, runemessage = runemessage)
 		else
-			M.visible_message(message = use_3p, self_message = use_1p, blind_message = emote_message_impaired, range = use_range, checkghosts = /datum/client_preference/ghost_sight)
+			M.visible_message(message = use_3p, self_message = use_1p, blind_message = emote_message_impaired, range = use_range, checkghosts = /datum/client_preference/ghost_sight, runemessage = runemessage)
 
 	do_extra(user, target)
 

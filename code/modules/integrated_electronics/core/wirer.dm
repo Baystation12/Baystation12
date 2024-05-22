@@ -81,7 +81,7 @@
 	if(selected_io)
 		unselect_io(selected_io)
 	selected_io = io
-	GLOB.destroyed_event.register(selected_io, src, .proc/unselect_io)
+	GLOB.destroyed_event.register(selected_io, src, PROC_REF(unselect_io))
 	switch(mode)
 		if(UNWIRE)
 			mode = UNWIRING

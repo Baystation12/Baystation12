@@ -124,11 +124,11 @@
 // Description: Refreshes local list of known devices.
 /datum/nano_module/rcon/proc/FindDevices()
 	known_SMESs = list()
-	for(var/obj/machinery/power/smes/buildable/SMES in SSmachines.machinery)
+	for(var/obj/machinery/power/smes/buildable/SMES as anything in SSmachines.get_machinery_of_type(/obj/machinery/power/smes/buildable))
 		if(AreConnectedZLevels(get_host_z(), get_z(SMES)) && SMES.RCon_tag && (SMES.RCon_tag != "NO_TAG") && SMES.RCon)
 			known_SMESs.Add(SMES)
 
 	known_breakers = list()
-	for(var/obj/machinery/power/breakerbox/breaker in SSmachines.machinery)
+	for(var/obj/machinery/power/breakerbox/breaker as anything in SSmachines.get_machinery_of_type(/obj/machinery/power/breakerbox))
 		if(AreConnectedZLevels(get_host_z(), get_z(breaker)) && breaker.RCon_tag != "NO_TAG")
 			known_breakers.Add(breaker)

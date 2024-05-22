@@ -1,0 +1,6 @@
+author: BurpleBineapple
+changes:
+  - {bugfix: Firedoor prompts now display correctly again.}
+  - {tweak: Firedoors can be opened without the prompt by people with engineering
+      access.}
+delete-after: true

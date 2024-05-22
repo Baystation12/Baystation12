@@ -387,7 +387,7 @@
 			rogue_entries += W
 
 	if(length(rogue_entries)) // These entries did not cleanup after themselves before being destroyed
-		var/rogue_entries_as_string = jointext(map(rogue_entries, /proc/log_info_line), ", ")
+		var/rogue_entries_as_string = jointext(map(rogue_entries, GLOBAL_PROC_REF(log_info_line)), ", ")
 		crash_with("[log_info_line(src)] - Following cloaking entries were removed during cleanup: [rogue_entries_as_string]")
 
 	UNSETEMPTY(cloaking_sources)

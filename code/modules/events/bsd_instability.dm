@@ -40,13 +40,13 @@
 
 
 /datum/event/bsd_instability/start()
-	for (var/obj/machinery/tele_pad/pad in SSmachines.machinery)
+	for (var/obj/machinery/tele_pad/pad as anything in SSmachines.get_machinery_of_type(/obj/machinery/tele_pad))
 		if (!(pad.z in affecting_z))
 			continue
 		pads += pad
 		pad.interference = TRUE
 		pad.interlude_chance = 30 * severity
-	for (var/obj/machinery/bluespacedrive/drive in SSmachines.machinery)
+	for (var/obj/machinery/bluespacedrive/drive as anything in SSmachines.get_machinery_of_type(/obj/machinery/bluespacedrive))
 		if (!(drive.z in affecting_z))
 			continue
 		drives += drive
@@ -54,7 +54,7 @@
 		drive.set_light(1, 8, 25, 15, COLOR_CYAN_BLUE)
 		if (severity <= EVENT_LEVEL_MODERATE)
 			continue
-		addtimer(new Callback(drive, /obj/machinery/bluespacedrive/proc/create_flash, TRUE, turf_conversion_range), 2 SECONDS)
+		addtimer(new Callback(drive, TYPE_PROC_REF(/obj/machinery/bluespacedrive, create_flash), TRUE, turf_conversion_range), 2 SECONDS)
 	if (severity <= EVENT_LEVEL_MODERATE)
 		return
 	for (var/obj/structure/stairs/stair in world)
@@ -73,7 +73,7 @@
 	if (severity > EVENT_LEVEL_MODERATE)
 		for (var/i = 1 to effects_per_tick)
 			var/turf/turf = pick_area_turf_in_single_z_level(
-				list(/proc/is_not_space_area),
+				list(GLOBAL_PROC_REF(is_not_space_area)),
 				z_level = pick(affecting_z)
 			)
 			var/effect_state = pick("cyan_sparkles", "blue_electricity_constant", "shieldsparkles", "empdisabled")
@@ -92,7 +92,7 @@
 		zlevels = affecting_z
 	)
 	for (var/obj/machinery/bluespacedrive/drive in drives)
-		addtimer(new Callback(drive, /obj/machinery/bluespacedrive/proc/do_pulse), 20 SECONDS)
+		addtimer(new Callback(drive, TYPE_PROC_REF(/obj/machinery/bluespacedrive, do_pulse)), 20 SECONDS)
 	for (var/mob/mob in GLOB.player_list)
 		if (istype(mob, /mob/new_player))
 			continue

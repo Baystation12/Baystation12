@@ -304,7 +304,7 @@ var/global/const/enterloopsanity = 100
 
 			if(M.pinned)
 				return
-		addtimer(new Callback(src, /turf/proc/bounce_off, AM, TT.init_dir), 2)
+		addtimer(new Callback(src, TYPE_PROC_REF(/turf, bounce_off), AM, TT.init_dir), 2)
 
 	..()
 

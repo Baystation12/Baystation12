@@ -41,21 +41,23 @@
 		return FALSE
 	return TRUE
 
-/obj/item/stock_parts/computer/nano_printer/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/stock_parts/computer/nano_printer/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/paper))
 		if(stored_paper >= max_paper)
 			to_chat(user, "You try to add \the [W] into \the [src], but its paper bin is full.")
-			return
+			return TRUE
 
 		to_chat(user, "You insert \the [W] into [src].")
 		qdel(W)
 		stored_paper++
-	else if(istype(W, /obj/item/paper_bundle))
+		return TRUE
+
+	if (istype(W, /obj/item/paper_bundle))
 		var/obj/item/paper_bundle/B = W
 		var/num_of_pages_added = 0
 		if(stored_paper >= max_paper)
 			to_chat(user, "You try to add \the [W] into \the [src], but its paper bin is full.")
-			return
+			return TRUE
 		for(var/obj/item/bundleitem in B) //loop through items in bundle
 			if(istype(bundleitem, /obj/item/paper)) //if item is paper (and not photo), add into the bin
 				B.pages.Remove(bundleitem)
@@ -74,4 +76,5 @@
 		else //if at least two items remain, just update the bundle icon
 			B.update_icon()
 		to_chat(user, "You add [num_of_pages_added] papers from \the [W] into \the [src].")
-	return
+		return TRUE
+	return ..()

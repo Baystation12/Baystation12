@@ -10,7 +10,7 @@
 	if(source in appearance_sources)
 		return FALSE
 	appearance_sources[source] = new/datum/appearance_data(images, viewers, priority)
-	GLOB.destroyed_event.register(source, src, /singleton/appearance_handler/proc/RemoveAltAppearance)
+	GLOB.destroyed_event.register(source, src, TYPE_PROC_REF(/singleton/appearance_handler, RemoveAltAppearance))
 
 /singleton/appearance_handler/proc/RemoveAltAppearance(source)
 	var/datum/appearance_data/ad = appearance_sources[source]

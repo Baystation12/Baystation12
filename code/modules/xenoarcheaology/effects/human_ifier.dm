@@ -47,7 +47,7 @@
 			)
 			H.Paralyse(20)
 			H.make_jittery(100)
-			addtimer(new Callback(src, .proc/create_new_human, H), rand(5, 10) SECONDS)
+			addtimer(new Callback(src, PROC_REF(create_new_human), H), rand(5, 10) SECONDS)
 			return
 
 		for (var/obj/item/organ/external/organ in H.organs)

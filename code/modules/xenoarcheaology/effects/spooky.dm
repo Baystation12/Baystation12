@@ -10,7 +10,7 @@
 				return
 			var/weakness = GetAnomalySusceptibility(H)
 			if (prob(weakness * 100))
-				if (!addtimer(new Callback(H, /mob/living/carbon/human/proc/ChangeToSkeleton), rand(30 SECONDS, 2 MINUTES), TIMER_UNIQUE | TIMER_NO_HASH_WAIT))
+				if (!addtimer(new Callback(H, TYPE_PROC_REF(/mob/living/carbon/human, ChangeToSkeleton)), rand(30 SECONDS, 2 MINUTES), TIMER_UNIQUE | TIMER_NO_HASH_WAIT))
 					return
 				to_chat(H, SPAN_WARNING("You suddenly feel a deep chill in your bones..."))
 				var/datum/gas_mixture/env = H.loc.return_air()
@@ -25,7 +25,7 @@
 				return
 			var/weakness = GetAnomalySusceptibility(H)
 			if (prob(weakness * 100))
-				if (!addtimer(new Callback(H, /mob/living/carbon/human/proc/ChangeToSkeleton), rand(30 SECONDS, 2 MINUTES), TIMER_UNIQUE | TIMER_NO_HASH_WAIT))
+				if (!addtimer(new Callback(H, TYPE_PROC_REF(/mob/living/carbon/human, ChangeToSkeleton)), rand(30 SECONDS, 2 MINUTES), TIMER_UNIQUE | TIMER_NO_HASH_WAIT))
 					return
 				to_chat(H, SPAN_WARNING("You suddenly feel a deep chill in your bones..."))
 				var/datum/gas_mixture/env = H.loc.return_air()
@@ -40,7 +40,7 @@
 				return
 			var/weakness = GetAnomalySusceptibility(H)
 			if (prob(weakness * 100))
-				if (!addtimer(new Callback(H, /mob/living/carbon/human/proc/ChangeToSkeleton), rand(30 SECONDS, 2 MINUTES), TIMER_UNIQUE | TIMER_NO_HASH_WAIT))
+				if (!addtimer(new Callback(H, TYPE_PROC_REF(/mob/living/carbon/human, ChangeToSkeleton)), rand(30 SECONDS, 2 MINUTES), TIMER_UNIQUE | TIMER_NO_HASH_WAIT))
 					return
 				to_chat(H, SPAN_WARNING("You suddenly feel a deep chill in your bones..."))
 				var/datum/gas_mixture/env = H.loc.return_air()

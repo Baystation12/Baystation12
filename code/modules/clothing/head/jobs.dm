@@ -99,17 +99,29 @@
 	icon_state = "beret"
 	slot_flags = SLOT_HEAD | SLOT_BELT
 	body_parts_covered = 0
+	// [SIERRA-ADD] - RESOMI
+	var/base_sprite_sheets = list()
+	// [/SIERRA-ADD]
+
+// [SIERRA-ADD] - RESOMI
+/obj/item/clothing/head/beret/Initialize()
+	. = ..()
+	base_sprite_sheets = sprite_sheets
+// [/SIERRA-ADD]
 
 /obj/item/clothing/head/beret/equipped(mob/user, slot)
 	switch(slot)
 		if(slot_belt)
 			sprite_sheets = list()
 		if(slot_head)
-			sprite_sheets = list(
-				SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi',
-				SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi',
-				SPECIES_NABBER = 'icons/mob/species/nabber/onmob_head_gas.dmi'
-				)
+			// [SIERRA-EDIT] - RESOMI
+			//sprite_sheets = list( // SIERRA-EDIT - ORIGINAL
+			//	SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi', // SIERRA-EDIT - ORIGINAL
+			//	SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi', // SIERRA-EDIT - ORIGINAL
+			//	SPECIES_NABBER = 'icons/mob/species/nabber/onmob_head_gas.dmi' // SIERRA-EDIT - ORIGINAL
+			//	) // SIERRA-EDIT - ORIGINAL
+			sprite_sheets = base_sprite_sheets
+			// [/SIERRA-EDIT]
 	return ..()
 
 /obj/item/clothing/head/beret/sec

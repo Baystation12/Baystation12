@@ -110,7 +110,8 @@
 			vision = H.internal_organs_by_name[H.species.vision_organ]
 			if(!vision)
 				vision = H.species.has_organ[H.species.vision_organ]
-				to_chat(user, SPAN_WARNING("\The [H] is missing \his [initial(vision.name)]!"))
+				var/datum/pronouns/pronouns = H.choose_from_pronouns()
+				to_chat(user, SPAN_WARNING("\The [H] is missing [pronouns.his] [initial(vision.name)]!"))
 				return TRUE
 
 			user.visible_message(SPAN_NOTICE("\The [user] directs [src] into [M]'s [vision.name]."), \
@@ -245,8 +246,6 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	flashlight_range = 5
 	light_wedge = LIGHT_OMNI
-
-	on = 1
 
 // green-shaded desk lamp
 /obj/item/device/flashlight/lamp/green

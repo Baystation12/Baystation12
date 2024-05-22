@@ -109,7 +109,7 @@
 
 /obj/fusion_em_field/Initialize()
 	. = ..()
-	addtimer(new Callback(src, .proc/update_light_colors), 10 SECONDS, TIMER_LOOP)
+	addtimer(new Callback(src, PROC_REF(update_light_colors)), 10 SECONDS, TIMER_LOOP)
 
 /obj/fusion_em_field/proc/update_light_colors()
 	var/use_range
@@ -276,7 +276,7 @@
 		animate(filters[1], time = 0, loop = 1, radius = 0, flags=ANIMATION_PARALLEL)
 		animate(time = 2 SECONDS, radius = _radius)
 		animating_ripple = TRUE
-		addtimer(new Callback(src, .proc/ResetRipple), 2 SECONDS)
+		addtimer(new Callback(src, PROC_REF(ResetRipple)), 2 SECONDS)
 
 /obj/fusion_em_field/proc/ResetRipple()
 	animating_ripple = FALSE
@@ -444,7 +444,7 @@
 				continue
 
 			/// Sort based on reaction priority to avoid deut-deut eating all the deut before deut-trit can run etc.
-			sortTim(possible_reactions, /proc/cmp_fusion_reaction_des)
+			sortTim(possible_reactions, GLOBAL_PROC_REF(cmp_fusion_reaction_des))
 
 			//split up the reacting atoms between the possible reactions
 			while(length(possible_reactions))

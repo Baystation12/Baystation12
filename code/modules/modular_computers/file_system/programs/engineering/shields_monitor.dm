@@ -23,7 +23,7 @@
 /datum/nano_module/shields_monitor/proc/get_shields()
 	var/list/shields = list()
 	var/connected_z_levels = GetConnectedZlevels(get_host_z())
-	for(var/obj/machinery/power/shield_generator/S in SSmachines.machinery)
+	for(var/obj/machinery/power/shield_generator/S as anything in SSmachines.get_machinery_of_type(/obj/machinery/power/shield_generator))
 		if(!(S.z in connected_z_levels))
 			continue
 		shields.Add(S)
@@ -98,7 +98,7 @@
 		var/obj/machinery/power/shield_generator/S = locate(href_list["ref"]) in shields
 		if(S)
 			deselect_shield()
-			GLOB.destroyed_event.register(S, src, /datum/nano_module/shields_monitor/proc/deselect_shield)
+			GLOB.destroyed_event.register(S, src, TYPE_PROC_REF(/datum/nano_module/shields_monitor, deselect_shield))
 			active = S
 		return 1
 

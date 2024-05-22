@@ -53,7 +53,7 @@
 			to_chat(user, "The [src] is empty.  Put something inside it first.")
 	if(response == "Sync")
 		var/success = 0
-		for(var/obj/machinery/r_n_d/server/S in SSmachines.machinery)
+		for(var/obj/machinery/r_n_d/server/S as anything in SSmachines.get_machinery_of_type(/obj/machinery/r_n_d/server))
 			for(var/datum/tech/T in files.known_tech) //Uploading
 				S.files.AddTech2Known(T)
 			for(var/datum/tech/T in S.files.known_tech) //Downloading
@@ -127,7 +127,7 @@
 	strobe_effect = L
 
 	// Make the light effect follow this party light object.
-	GLOB.moved_event.register(src, L, /atom/movable/proc/move_to_turf_or_null)
+	GLOB.moved_event.register(src, L, TYPE_PROC_REF(/atom/movable, move_to_turf_or_null))
 
 	update_icon()
 
@@ -135,7 +135,7 @@
 	activated = 0
 
 	// Cause the party light effect to stop following this object, and then delete it.
-	GLOB.moved_event.unregister(src, strobe_effect, /atom/movable/proc/move_to_turf_or_null)
+	GLOB.moved_event.unregister(src, strobe_effect, TYPE_PROC_REF(/atom/movable, move_to_turf_or_null))
 	QDEL_NULL(strobe_effect)
 
 	update_icon()

@@ -124,4 +124,4 @@
 		if(H)
 			H.color = "#a03b3b"
 			animate(H, color = COLOR_WHITE, time = timeout, easing = CUBIC_EASING | EASE_IN)
-	addtimer(new Callback(src, .proc/reset_hardpoint_color), timeout)
+	addtimer(new Callback(src, PROC_REF(reset_hardpoint_color)), timeout)

@@ -1,0 +1,5 @@
+author: Mucker
+changes:
+  - {rscadd: Adds a new law to robots to discourage them from entering restricted
+      areas whenever they want.}
+delete-after: true

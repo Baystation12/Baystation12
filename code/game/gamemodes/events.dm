@@ -74,7 +74,7 @@ var/global/hadevent    = 0
 				apc.overload_lighting()
 
 	else
-		for(var/obj/machinery/power/apc/apc in SSmachines.machinery)
+		for(var/obj/machinery/power/apc/apc as anything in SSmachines.get_machinery_of_type(/obj/machinery/power/apc))
 			apc.overload_lighting()
 
 	return

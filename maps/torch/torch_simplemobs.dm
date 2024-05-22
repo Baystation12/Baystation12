@@ -169,7 +169,7 @@
 	deactivated = TRUE
 	visible_message(SPAN_MFAUNA("\The [src]'s rigsuit flashes hastily, locking into place!"))
 	update_icon()
-	addtimer(new Callback(src, .proc/reactivate), 6 SECONDS)
+	addtimer(new Callback(src, PROC_REF(reactivate)), 6 SECONDS)
 
 /mob/living/simple_animal/hostile/human/fleet/space/proc/reactivate()
 	set_AI_busy(FALSE)

@@ -31,7 +31,7 @@
 		/obj/item/reagent_containers/food/drinks/cans/artbru = 0,
 		/obj/item/reagent_containers/food/drinks/glass2/square/boda = 0,
 		/obj/item/reagent_containers/food/drinks/glass2/square/bodaplus = 0,
-		/obj/item/reagent_containers/food/drinks/bottle/space_up = 0
+		/obj/item/reagent_containers/food/drinks/bottle/small/space_up = 0
 	)
 	contraband = list(
 		/obj/item/clothing/under/soviet = 1,
@@ -39,7 +39,7 @@
 
 	)
 	rare_products = list(
-		/obj/item/reagent_containers/food/drinks/bottle/space_up = 50,
+		/obj/item/reagent_containers/food/drinks/bottle/small/space_up = 50,
 		/obj/item/card/id/syndicate = 25,
 		/obj/item/storage/box/syndie_kit/spy = 50
 	)

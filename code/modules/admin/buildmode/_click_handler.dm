@@ -36,7 +36,7 @@
 	. = ..()
 
 /datum/click_handler/build_mode/proc/StartTimer()
-	timer_handle = addtimer(new Callback(src, .proc/TimerEvent), 1 SECOND, TIMER_UNIQUE | TIMER_STOPPABLE | TIMER_LOOP)
+	timer_handle = addtimer(new Callback(src, PROC_REF(TimerEvent)), 1 SECOND, TIMER_UNIQUE | TIMER_STOPPABLE | TIMER_LOOP)
 
 /datum/click_handler/build_mode/proc/StopTimer()
 	deltimer(timer_handle)

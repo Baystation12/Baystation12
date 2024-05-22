@@ -649,8 +649,9 @@
 	return species.name
 
 /mob/living/carbon/human/proc/play_xylophone()
+	var/datum/pronouns/pronouns = choose_from_pronouns()
 	if(!src.xylophone)
-		visible_message(SPAN_WARNING("\The [src] begins playing \his ribcage like a xylophone. It's quite spooky."),SPAN_NOTICE("You begin to play a spooky refrain on your ribcage."),SPAN_WARNING("You hear a spooky xylophone melody."))
+		visible_message(SPAN_WARNING("\The [src] begins playing [pronouns.his] ribcage like a xylophone. It's quite spooky."),SPAN_NOTICE("You begin to play a spooky refrain on your ribcage."),SPAN_WARNING("You hear a spooky xylophone melody."))
 		var/song = pick('sound/effects/xylophone1.ogg','sound/effects/xylophone2.ogg','sound/effects/xylophone3.ogg')
 		playsound(loc, song, 50, 1, -1)
 		xylophone = 1
@@ -1073,27 +1074,28 @@
 	set desc = "Approximately count somebody's pulse. Requires you to stand still at least 6 seconds."
 	set src in view(1)
 	var/self = 0
+	var/datum/pronouns/pronouns = usr.choose_from_pronouns()
 
 	if(usr.stat || usr.restrained() || !isliving(usr)) return
 
 	if(usr == src)
 		self = 1
 	if(!self)
-		usr.visible_message(SPAN_NOTICE("[usr] kneels down, puts \his hand on [src]'s wrist and begins counting their pulse."),\
-		"You begin counting [src]'s pulse")
+		usr.visible_message(SPAN_NOTICE("\The [usr] kneels down, puts [pronouns.his] hand on \the [src]'s wrist and begins counting their pulse."),\
+		"You begin counting \the [src]'s pulse")
 	else
-		usr.visible_message(SPAN_NOTICE("[usr] begins counting their pulse."),\
+		usr.visible_message(SPAN_NOTICE("\The [usr] begins counting [pronouns.his] pulse."),\
 		"You begin counting your pulse.")
 
 	if (!pulse() || status_flags & FAKEDEATH)
-		to_chat(usr, SPAN_DANGER("[src] has no pulse!"))
+		to_chat(usr, SPAN_DANGER("\The [src] has no pulse!"))
 		return
 	else
-		to_chat(usr, SPAN_NOTICE("[self ? "You have a" : "[src] has a"] pulse! Counting..."))
+		to_chat(usr, SPAN_NOTICE("[self ? "You have a" : "\The [src] has a"] pulse! Counting..."))
 
 	to_chat(usr, "You must[self ? "" : " both"] remain still until counting is finished.")
 	if(do_after(usr, 6 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
-		var/message = SPAN_NOTICE("[self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)].")
+		var/message = SPAN_NOTICE("[self ? "Your" : "\The [src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)].")
 		to_chat(usr, message)
 	else
 		to_chat(usr, SPAN_WARNING("You failed to check the pulse. Try again."))
@@ -1576,26 +1578,67 @@
 	set category = "IC"
 	species.toggle_stance(src)
 
+// [SIERRA-ADD] - RESOMI
+#define PULSE_NUMBER_NONE 0
+#define PULSE_NUMBER_SLOW 50
+#define PULSE_NUMBER_NORM 75
+#define PULSE_NUMBER_FAST 105
+#define PULSE_NUMBER_2FAST 140
+#define PULSE_NUMBER_THREADY PULSE_MAX_BPM
+// [/SIERRA-ADD]
+
 // Similar to get_pulse, but returns only integer numbers instead of text.
 /mob/living/carbon/human/proc/get_pulse_as_number()
 	var/obj/item/organ/internal/heart/heart_organ = internal_organs_by_name[BP_HEART]
-	if(!heart_organ)
-		return 0
 
+	// [SIERRA-EDIT] - RESOMI
+
+	//if(!heart_organ) // SIERRA-EDIT - ORIGINAL
+	//	return 0 // SIERRA-EDIT - ORIGINAL
+	//switch(pulse()) // SIERRA-EDIT - ORIGINAL
+	//	if(PULSE_NONE) // SIERRA-EDIT - ORIGINAL
+	//		return 0 // SIERRA-EDIT - ORIGINAL
+	//	if(PULSE_SLOW) // SIERRA-EDIT - ORIGINAL
+	//		return rand(40, 60) // SIERRA-EDIT - ORIGINAL
+	//	if(PULSE_NORM) // SIERRA-EDIT - ORIGINAL
+	//		return rand(60, 90) // SIERRA-EDIT - ORIGINAL
+	//	if(PULSE_FAST) // SIERRA-EDIT - ORIGINAL
+	//		return rand(90, 120) // SIERRA-EDIT - ORIGINAL
+	//	if(PULSE_2FAST) // SIERRA-EDIT - ORIGINAL
+	//		return rand(120, 160) // SIERRA-EDIT - ORIGINAL
+	//	if(PULSE_THREADY) // SIERRA-EDIT - ORIGINAL
+	//		return PULSE_MAX_BPM // SIERRA-EDIT - ORIGINAL
+	//return 0 // SIERRA-EDIT - ORIGINAL
+
+	if(!heart_organ)
+		return PULSE_NUMBER_NONE
+
+	var/raw_pulse_number
 	switch(pulse())
 		if(PULSE_NONE)
-			return 0
+			return PULSE_NUMBER_NONE
 		if(PULSE_SLOW)
-			return rand(40, 60)
+			raw_pulse_number = PULSE_NUMBER_SLOW
 		if(PULSE_NORM)
-			return rand(60, 90)
+			raw_pulse_number = PULSE_NUMBER_NORM
 		if(PULSE_FAST)
-			return rand(90, 120)
+			raw_pulse_number = PULSE_NUMBER_FAST
 		if(PULSE_2FAST)
-			return rand(120, 160)
+			raw_pulse_number = PULSE_NUMBER_2FAST
 		if(PULSE_THREADY)
-			return PULSE_MAX_BPM
-	return 0
+			return PULSE_NUMBER_THREADY
+	return ((raw_pulse_number * (2 - species.blood_volume / SPECIES_BLOOD_DEFAULT)) + (raw_pulse_number * rand(-0.2, 0.2)))
+
+	// [/SIERRA-EDIT]
+
+// [SIERRA-ADD] - RESOMI
+#undef PULSE_NUMBER_NONE
+#undef PULSE_NUMBER_SLOW
+#undef PULSE_NUMBER_NORM
+#undef PULSE_NUMBER_FAST
+#undef PULSE_NUMBER_2FAST
+#undef PULSE_NUMBER_THREADY
+// [/SIERRA-ADD]
 
 //generates realistic-ish pulse output based on preset levels as text
 /mob/living/carbon/human/proc/get_pulse(method)	//method 0 is for hands, 1 is for machines, more accurate
@@ -1756,7 +1799,8 @@
 		if(!nervous_system_failure() && active_breaths)
 			visible_message("\The [src] jerks and gasps for breath!")
 		else
-			visible_message("\The [src] twitches a bit as \his heart restarts!")
+			var/datum/pronouns/pronouns = choose_from_pronouns()
+			visible_message("\The [src] twitches a bit as [pronouns.his] heart restarts!")
 		shock_stage = min(shock_stage, 100) // 120 is the point at which the heart stops.
 		if(getOxyLoss() >= 75)
 			setOxyLoss(75)

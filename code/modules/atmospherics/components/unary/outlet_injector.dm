@@ -194,10 +194,10 @@
 		volume_rate = clamp(number, 0, air_contents.volume)
 
 	if(signal.data["status"])
-		addtimer(new Callback(src, .proc/broadcast_status), 2, TIMER_UNIQUE)
+		addtimer(new Callback(src, PROC_REF(broadcast_status)), 2, TIMER_UNIQUE)
 		return
 
-	addtimer(new Callback(src, .proc/broadcast_status), 2, TIMER_UNIQUE)
+	addtimer(new Callback(src, PROC_REF(broadcast_status)), 2, TIMER_UNIQUE)
 
 /obj/machinery/atmospherics/unary/outlet_injector/hide(i)
 	update_underlays()

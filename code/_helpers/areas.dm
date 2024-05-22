@@ -1,7 +1,7 @@
 /*
 	List generation helpers
 */
-/proc/get_filtered_areas(list/predicates = list(/proc/is_area_with_turf))
+/proc/get_filtered_areas(list/predicates = list(GLOBAL_PROC_REF(is_area_with_turf)))
 	RETURN_TYPE(/list)
 	. = list()
 	if(!predicates)
@@ -80,13 +80,13 @@
 	area_predicates = area_predicates.Copy()
 
 	var/z_levels = GetConnectedZlevels(z_level)
-	area_predicates[/proc/area_belongs_to_zlevels] = z_levels
+	area_predicates[GLOBAL_PROC_REF(area_belongs_to_zlevels)] = z_levels
 	return pick_area_and_turf(area_predicates, turf_predicates)
 
 /proc/pick_area_turf_in_single_z_level(list/area_predicates, list/turf_predicates, z_level)
 	RETURN_TYPE(/turf)
 	area_predicates = area_predicates.Copy()
-	area_predicates[/proc/area_belongs_to_zlevels] = list(z_level)
+	area_predicates[GLOBAL_PROC_REF(area_belongs_to_zlevels)] = list(z_level)
 	return pick_area_and_turf(area_predicates, turf_predicates)
 
 /*
@@ -125,17 +125,17 @@
 /proc/is_coherent_area(area/A)
 	return !is_type_in_list(A, GLOB.using_map.area_coherency_test_exempt_areas)
 
-GLOBAL_LIST_INIT(is_station_but_not_space_or_shuttle_area, list(/proc/is_station_area, /proc/is_not_space_area, /proc/is_not_shuttle_area))
+GLOBAL_LIST_INIT(is_station_but_not_space_or_shuttle_area, list(GLOBAL_PROC_REF(is_station_area), GLOBAL_PROC_REF(is_not_space_area), GLOBAL_PROC_REF(is_not_shuttle_area)))
 
-GLOBAL_LIST_INIT(is_contact_but_not_space_or_shuttle_area, list(/proc/is_contact_area, /proc/is_not_space_area, /proc/is_not_shuttle_area))
+GLOBAL_LIST_INIT(is_contact_but_not_space_or_shuttle_area, list(GLOBAL_PROC_REF(is_contact_area), GLOBAL_PROC_REF(is_not_space_area), GLOBAL_PROC_REF(is_not_shuttle_area)))
 
-GLOBAL_LIST_INIT(is_player_but_not_space_or_shuttle_area, list(/proc/is_player_area, /proc/is_not_space_area, /proc/is_not_shuttle_area))
+GLOBAL_LIST_INIT(is_player_but_not_space_or_shuttle_area, list(GLOBAL_PROC_REF(is_player_area), GLOBAL_PROC_REF(is_not_space_area), GLOBAL_PROC_REF(is_not_shuttle_area)))
 
-GLOBAL_LIST_INIT(is_station_area, list(/proc/is_station_area))
+GLOBAL_LIST_INIT(is_station_area, list(GLOBAL_PROC_REF(is_station_area)))
 
-GLOBAL_LIST_INIT(is_station_and_maint_area, list(/proc/is_station_area, /proc/is_maint_area))
+GLOBAL_LIST_INIT(is_station_and_maint_area, list(GLOBAL_PROC_REF(is_station_area), GLOBAL_PROC_REF(is_maint_area)))
 
-GLOBAL_LIST_INIT(is_station_but_not_maint_area, list(/proc/is_station_area, /proc/is_not_maint_area))
+GLOBAL_LIST_INIT(is_station_but_not_maint_area, list(GLOBAL_PROC_REF(is_station_area), GLOBAL_PROC_REF(is_not_maint_area)))
 
 /*
 	Misc Helpers

@@ -41,7 +41,7 @@
 		return
 	if (health_mod < -1) // To prevent slow degradation proccing this constantly
 		set_opacity(TRUE)
-		addtimer(new Callback(src, /atom/proc/set_opacity, FALSE), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
+		addtimer(new Callback(src, TYPE_PROC_REF(/atom, set_opacity), FALSE), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
 
 /obj/machinery/shield/on_death()
 	visible_message(SPAN_NOTICE("\The [src] dissipates!"))
@@ -66,6 +66,7 @@
 	var/check_delay = 60	//periodically recheck if we need to rebuild a shield
 	use_power = POWER_USE_OFF
 	idle_power_usage = 0
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
 /obj/machinery/shieldgen/Destroy()
 	collapse_shields()

@@ -17,7 +17,7 @@
 	power_draw_per_use = 2
 
 /obj/item/integrated_circuit/time/delay/do_work()
-	addtimer(new Callback(src, .proc/activate_pin, 2), delay)
+	addtimer(new Callback(src, PROC_REF(activate_pin), 2), delay)
 
 /obj/item/integrated_circuit/time/delay/five_sec
 	name = "five-sec delay circuit"
@@ -98,7 +98,7 @@
 
 /obj/item/integrated_circuit/time/ticker/proc/tick()
 	if(is_running)
-		addtimer(new Callback(src, .proc/tick), delay)
+		addtimer(new Callback(src, PROC_REF(tick)), delay)
 		if(world.time > next_fire)
 			next_fire = world.time + delay
 			activate_pin(1)

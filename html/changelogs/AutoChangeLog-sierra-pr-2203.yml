@@ -1,0 +1,5 @@
+author: misstake
+changes:
+  - {bugfix: Rags filled with acetone can be used to wipe forehead graffiti off again.}
+  - {tweak: You can now wipe forehead graffiti off using a sheet of paper.}
+delete-after: true

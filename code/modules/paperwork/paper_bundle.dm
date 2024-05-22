@@ -15,29 +15,30 @@
 	var/list/pages = list()  // Ordered list of pages as they are to be displayed. Can be different order than src.contents.
 
 
-/obj/item/paper_bundle/attackby(obj/item/W as obj, mob/user as mob)
-	..()
-	if(!istype(W))
-		return
-	var/obj/item/paper/paper = W
-	if(istype(paper) && !paper.can_bundle())
-		return //non-paper or bundlable paper only
+/obj/item/paper_bundle/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if(istype(W, /obj/item/paper))
+		var/obj/item/paper/paper = W
+		if(!paper.can_bundle())
+			USE_FEEDBACK_FAILURE("You cannot bundle these together!")
+			return TRUE
+
 	if (istype(W, /obj/item/paper/carbon))
 		var/obj/item/paper/carbon/C = W
 		if (!C.iscopy && !C.copied)
 			to_chat(user, SPAN_NOTICE("Take off the carbon copy first."))
-			add_fingerprint(user)
-			return
+			return TRUE
 	// adding sheets
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo))
 		insert_sheet_at(user, length(pages)+1, W)
+		return TRUE
 
 	// burning
-	else if(istype(W, /obj/item/flame))
+	if (istype(W, /obj/item/flame))
 		burnpaper(W, user)
+		return TRUE
 
 	// merging bundles
-	else if(istype(W, /obj/item/paper_bundle))
+	if (istype(W, /obj/item/paper_bundle))
 		for(var/obj/O in W)
 			O.forceMove(src)
 			O.add_fingerprint(user)
@@ -45,18 +46,16 @@
 
 		to_chat(user, SPAN_NOTICE("You add \the [W.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name]."))
 		qdel(W)
-	else
-		if(istype(W, /obj/item/tape_roll))
-			return 0
-		if(istype(W, /obj/item/pen))
-			show_browser(user, "", "window=[name]") //Closes the dialog
-		var/obj/P = pages[page]
-		P.attackby(W, user)
+		return TRUE
 
-	update_icon()
-	attack_self(user) //Update the browsed page.
-	add_fingerprint(user)
-	return
+	if (istype(W, /obj/item/pen))
+		show_browser(user, "", "window=[name]") //Closes the dialog
+		var/obj/P = pages[page]
+		P.use_tool(W, user)
+		update_icon()
+		attack_self(user) //Update the browsed page.
+
+	return ..()
 
 /obj/item/paper_bundle/proc/insert_sheet_at(mob/user, index, obj/item/sheet)
 	if (!user.unEquip(sheet, src))
@@ -78,7 +77,7 @@
 		if(istype(P, /obj/item/flame/lighter/zippo))
 			class = "rose>"
 
-		user.visible_message(SPAN_CLASS("[class]", "[user] holds \the [P] up to \the [src], it looks like \he's trying to burn it!"), \
+		user.visible_message(SPAN_CLASS("[class]", "[user] holds \the [P] up to \the [src], trying to burn it!"), \
 		SPAN_CLASS("[class]", "You hold \the [P] up to \the [src], burning it slowly."))
 
 		spawn(20)

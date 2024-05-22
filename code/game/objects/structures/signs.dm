@@ -55,10 +55,10 @@
 	w_class = ITEM_SIZE_NORMAL		//big
 	var/sign_state = ""
 
-/obj/item/sign/attackby(obj/item/tool as obj, mob/user as mob)	//construction
+/obj/item/sign/use_tool(obj/item/tool, mob/living/user, list/click_params)
 	if (isScrewdriver(tool) && isturf(user.loc))
 		var/direction = input("In which direction?", "Select direction.") in list("North", "East", "South", "West", "Cancel")
-		if(direction == "Cancel") return
+		if(direction == "Cancel") return TRUE
 		var/obj/structure/sign/S = new(user.loc)
 		switch(direction)
 			if("North")
@@ -69,13 +69,14 @@
 				S.pixel_y = -32
 			if("West")
 				S.pixel_x = -32
-			else return
+			else return TRUE
 		S.SetName(name)
 		S.desc = desc
 		S.icon_state = sign_state
 		to_chat(user, "You fasten \the [S] with your [tool].")
 		qdel(src)
-	else ..()
+		return TRUE
+	return ..()
 
 /obj/structure/sign/double/map
 	name = "map"

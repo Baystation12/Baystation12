@@ -1,0 +1,4 @@
+author: rootoo807
+changes:
+  - {bugfix: Fixes missing sprites.}
+delete-after: true

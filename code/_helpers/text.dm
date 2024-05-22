@@ -442,7 +442,16 @@
 	t = replacetext(t, "\[foundlogo\]", "<img src = foundlogo.png>")
 	t = replacetext(t, "\[ccalogo\]", "<img src = ccalogo.png>")
 	t = replacetext(t, "\[sierralogo\]", "<img src = sierralogo.png>")
+	t = replacetext(t, "\[saarelogo\]", "<img src = saarelogo.png>")
+	t = replacetext(t, "\[pcrclogo\]", "<img src = pcrclogo.png>")
+	t = replacetext(t, "\[zpcilogo\]", "<img src = zpcilogo.png>")
+	t = replacetext(t, "\[hegemonylogo\]", "<img src = heglogo.png>")
+	t = replacetext(t, "\[conventlogo\]", "<img src = convlogo.png>")
+	t = replacetext(t, "\[leaguelogo\]", "<img src = leaguelogo.png>")
+	t = replacetext(t, "\[ouerelogo\]", "<img src = ouerelogo.png>")
+	t = replacetext(t, "\[terstenlogo\]", "<img src = terstenlogo.png>")
 	// [/SIERRA-ADD]
+	t = replacetext(t, "\[zhlogo\]", "<img src = zhlogo.png>")
 	t = replacetext(t, "\[editorbr\]", "")
 	return t
 
@@ -506,7 +515,16 @@
 	t = replacetext(t, "<img src = foundlogo.png>", "\[foundlogo\]" )
 	t = replacetext(t, "<img src = ccalogo.png>", "\[ccalogo\]" )
 	t = replacetext(t, "<img src = sierralogo.png>", "\[sierralogo\]" )
+	t = replacetext(t, "<img src = saarelogo.png>", "\[saarelogo\]")
+	t = replacetext(t, "<img src = pcrclogo.png>", "\[pcrclogo\]")
+	t = replacetext(t, "<img src = zpcilogo.png>", "\[zpcilogo\]")
+	t = replacetext(t, "<img src = heglogo.png>", "\[hegemonylogo\]")
+	t = replacetext(t, "<img src = convlogo.png>", "\[conventlogo\]")
+	t = replacetext(t, "<img src = leaguelogo.png>", "\[leaguelogo\]")
+	t = replacetext(t, "<img src = ouerelogo.png>", "\[ouerelogo\]")
+	t = replacetext(t, "<img src = terstenlogo.png>", "\[terstenlogo\]")
 	// [/SIERRA-ADD]
+	t = replacetext(t, "<img src = zhlogo.png", "\[zhlogo\]")
 	t = replacetext(t, "<span class=\"paper_field\"></span>", "\[field\]")
 	t = replacetext(t, "<span class=\"redacted\">R E D A C T E D</span>", "\[redacted\]")
 	t = strip_html_properly(t)

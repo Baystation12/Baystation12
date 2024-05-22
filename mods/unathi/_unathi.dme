@@ -1,0 +1,11 @@
+#ifndef MODPACK_UNATHI
+#define MODPACK_UNATHI
+
+
+#include "_unathi.dm"
+
+#include "code/reagents.dm"
+#include "code/species.dm"
+#include "code/species_attack.dm"
+
+#endif

@@ -99,14 +99,18 @@
 						highjob = " as [player.client.prefs.job_high]"
 					if (!player.is_stealthed())
 						var/can_see_hidden = check_rights(R_INVESTIGATE, 0)
-						var/datum/game_mode/mode = SSticker.pick_mode(SSticker.master_mode)
-						var/list/readied_antag_roles = list()
-						if (mode && can_see_hidden)
-							for (var/role in player.client.prefs.be_special_role)
-								if (role in mode.antag_tags)
-									readied_antag_roles += role
+						var/datum/game_mode/mode = SSticker.mode
+						var/antag_role_text = ""
+						if(mode)
+							var/list/readied_antag_roles = list()
+							if (can_see_hidden)
+								for (var/role in player.client.prefs.be_special_role)
+									if (role in mode.antag_tags)
+										readied_antag_roles += role
 
-						var/antag_role_text = "[length(readied_antag_roles) ? "Readied for ([english_list(readied_antag_roles)])" : ""]"
+							if(length(readied_antag_roles))
+								antag_role_text = "Readied for ([english_list(readied_antag_roles)])"
+
 						stat("[player.key]", (player.ready && (show_ready || can_see_hidden)?("(Playing[highjob]) [(can_see_hidden && !show_ready) ? "(Hidden)" : ""] [antag_role_text]"):(null)))
 				totalPlayers++
 				if(player.ready)totalPlayersReady++
