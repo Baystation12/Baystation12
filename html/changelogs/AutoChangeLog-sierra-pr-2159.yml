@@ -1,0 +1,7 @@
+author: Reen062
+changes:
+  - {tweak: Seperates Pluto Culture into Kuiper Insider/Outsider.}
+  - {tweak: Seperates Pluto Residence into Kuiper Belt/Interdust.}
+  - {tweak: Changes Terran Cultures to Confederate.}
+  - {tweak: Updates Magnitka residence and adds a Magnitka culture.}
+delete-after: true
