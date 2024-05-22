@@ -1578,26 +1578,67 @@
 	set category = "IC"
 	species.toggle_stance(src)
 
+// [SIERRA-ADD] - RESOMI
+#define PULSE_NUMBER_NONE 0
+#define PULSE_NUMBER_SLOW 50
+#define PULSE_NUMBER_NORM 75
+#define PULSE_NUMBER_FAST 105
+#define PULSE_NUMBER_2FAST 140
+#define PULSE_NUMBER_THREADY PULSE_MAX_BPM
+// [/SIERRA-ADD]
+
 // Similar to get_pulse, but returns only integer numbers instead of text.
 /mob/living/carbon/human/proc/get_pulse_as_number()
 	var/obj/item/organ/internal/heart/heart_organ = internal_organs_by_name[BP_HEART]
-	if(!heart_organ)
-		return 0
 
+	// [SIERRA-EDIT] - RESOMI
+
+	//if(!heart_organ) // SIERRA-EDIT - ORIGINAL
+	//	return 0 // SIERRA-EDIT - ORIGINAL
+	//switch(pulse()) // SIERRA-EDIT - ORIGINAL
+	//	if(PULSE_NONE) // SIERRA-EDIT - ORIGINAL
+	//		return 0 // SIERRA-EDIT - ORIGINAL
+	//	if(PULSE_SLOW) // SIERRA-EDIT - ORIGINAL
+	//		return rand(40, 60) // SIERRA-EDIT - ORIGINAL
+	//	if(PULSE_NORM) // SIERRA-EDIT - ORIGINAL
+	//		return rand(60, 90) // SIERRA-EDIT - ORIGINAL
+	//	if(PULSE_FAST) // SIERRA-EDIT - ORIGINAL
+	//		return rand(90, 120) // SIERRA-EDIT - ORIGINAL
+	//	if(PULSE_2FAST) // SIERRA-EDIT - ORIGINAL
+	//		return rand(120, 160) // SIERRA-EDIT - ORIGINAL
+	//	if(PULSE_THREADY) // SIERRA-EDIT - ORIGINAL
+	//		return PULSE_MAX_BPM // SIERRA-EDIT - ORIGINAL
+	//return 0 // SIERRA-EDIT - ORIGINAL
+
+	if(!heart_organ)
+		return PULSE_NUMBER_NONE
+
+	var/raw_pulse_number
 	switch(pulse())
 		if(PULSE_NONE)
-			return 0
+			return PULSE_NUMBER_NONE
 		if(PULSE_SLOW)
-			return rand(40, 60)
+			raw_pulse_number = PULSE_NUMBER_SLOW
 		if(PULSE_NORM)
-			return rand(60, 90)
+			raw_pulse_number = PULSE_NUMBER_NORM
 		if(PULSE_FAST)
-			return rand(90, 120)
+			raw_pulse_number = PULSE_NUMBER_FAST
 		if(PULSE_2FAST)
-			return rand(120, 160)
+			raw_pulse_number = PULSE_NUMBER_2FAST
 		if(PULSE_THREADY)
-			return PULSE_MAX_BPM
-	return 0
+			return PULSE_NUMBER_THREADY
+	return ((raw_pulse_number * (2 - species.blood_volume / SPECIES_BLOOD_DEFAULT)) + (raw_pulse_number * rand(-0.2, 0.2)))
+
+	// [/SIERRA-EDIT]
+
+// [SIERRA-ADD] - RESOMI
+#undef PULSE_NUMBER_NONE
+#undef PULSE_NUMBER_SLOW
+#undef PULSE_NUMBER_NORM
+#undef PULSE_NUMBER_FAST
+#undef PULSE_NUMBER_2FAST
+#undef PULSE_NUMBER_THREADY
+// [/SIERRA-ADD]
 
 //generates realistic-ish pulse output based on preset levels as text
 /mob/living/carbon/human/proc/get_pulse(method)	//method 0 is for hands, 1 is for machines, more accurate

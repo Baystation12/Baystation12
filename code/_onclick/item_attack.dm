@@ -5,7 +5,7 @@ These are the default click code call sequences used when clicking on stuff with
 Atoms:
 
 mob/ClickOn() calls the item's resolve_attackby() proc.
-item/resolve_attackby() calls the target atom's attackby() proc.
+item/resolve_attackby() calls the target atom's use_tool() proc.
 
 Mobs:
 
@@ -34,7 +34,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /**
  * Called when the item is in the active hand and another atom is clicked. This is generally called by `ClickOn()`.
  *
- * This passes down to `use_before()`, `use_weapon()`, `use_tool()`, `attackby()`, and then use_after() in that order,
+ * This passes down to `use_before()`, `use_weapon()`, `use_tool()`, and then use_after() in that order,
  * depending on item flags and user's intent.
  * use_grab() is run in an override of resolve_attackby() processed at the grab's level, and is not part of this chain.
  *
@@ -59,9 +59,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if (!.)
 		use_call = "tool"
 		. = atom.use_tool(src, user, click_params)
-	if (!.)
-		use_call = "attackby"
-		. = atom.attackby(src, user, click_params)
 	if (!.)
 		use_call = "use"
 		. = use_after(atom, user, click_params)
@@ -379,22 +376,6 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return TRUE
 
 	return ..()
-
-
-/**
- * DEPRECATED - USE THE `use_*()` PROCS INSTEAD.
- *
- * Called when this atom is clicked on while another item is in the active hand. This is generally called by this item's `resolve_attackby()` proc.
- *
- * **Parameters**:
- * - `item` - The item that was in the active hand when `src` was clicked.
- * - `user` - The mob using the item.
- * - `click_params` - List of click parameters. See BYOND's `CLick()` documentation.
- *
- * Returns boolean to indicate whether the attack call was handled or not.
- */
-/atom/proc/attackby(obj/item/item, mob/living/user, click_params)
-	return FALSE
 
 /**
  * Called when the item is in the active hand and another atom is clicked and `resolve_attackby()` returns FALSE. This is generally called by `ClickOn()`.

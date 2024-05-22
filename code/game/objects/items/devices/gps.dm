@@ -39,7 +39,7 @@ var/global/list/all_gps_units = list()
 	global.all_gps_units += src
 	. = ..()
 	name = "[initial(name)] ([gps_tag])"
-	GLOB.moved_event.register(holder, src, .proc/update_holder)
+	GLOB.moved_event.register(holder, src, PROC_REF(update_holder))
 	compass = new(src)
 	update_holder()
 	update_icon()
@@ -66,8 +66,8 @@ var/global/list/all_gps_units = list()
 
 	if(!force_clear && istype(loc, /mob))
 		holder = loc
-		GLOB.moved_event.register(holder, src, .proc/update_compass)
-		GLOB.dir_set_event.register(holder, src, .proc/update_compass)
+		GLOB.moved_event.register(holder, src, PROC_REF(update_compass))
+		GLOB.dir_set_event.register(holder, src, PROC_REF(update_compass))
 
 	if(!force_clear && holder && tracking)
 		if(!is_in_processing_list)
@@ -104,7 +104,7 @@ var/global/list/all_gps_units = list()
 	STOP_PROCESSING(SSobj, src)
 	is_in_processing_list = FALSE
 	global.all_gps_units -= src
-	GLOB.moved_event.unregister(holder, src, .proc/update_holder)
+	GLOB.moved_event.unregister(holder, src, PROC_REF(update_holder))
 	update_holder(force_clear = TRUE)
 	QDEL_NULL(compass)
 	return ..()
@@ -190,7 +190,7 @@ var/global/list/all_gps_units = list()
 	var/duration = 5 MINUTES / severity_modifier
 	emped = TRUE
 	update_icon()
-	addtimer(new Callback(src, .proc/reset_emp), duration)
+	addtimer(new Callback(src, PROC_REF(reset_emp)), duration)
 	GLOB.empd_event.raise_event(src, severity)
 
 /obj/item/device/gps/proc/reset_emp()

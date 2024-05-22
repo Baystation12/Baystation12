@@ -29,6 +29,6 @@
 				playsound(owner.loc, 'sound/effects/angrybug.ogg', 60, 0)
 				owner.skin_state = SKIN_THREAT
 				owner.update_skin()
-				addtimer(new Callback(owner, /mob/living/carbon/human/proc/reset_skin), 10 SECONDS, TIMER_UNIQUE)
+				addtimer(new Callback(owner, TYPE_PROC_REF(/mob/living/carbon/human, reset_skin)), 10 SECONDS, TIMER_UNIQUE)
 		else if(owner.skin_state == SKIN_THREAT)
 			owner.reset_skin()

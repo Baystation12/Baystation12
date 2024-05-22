@@ -93,7 +93,7 @@
 		crash_with("Attempted to pair an airlock filler with no parent airlock specified!")
 
 	filled_airlock = parent_airlock
-	GLOB.destroyed_event.register(filled_airlock, src, .proc/no_airlock)
+	GLOB.destroyed_event.register(filled_airlock, src, PROC_REF(no_airlock))
 
 /obj/airlock_filler_object/proc/no_airlock()
 	GLOB.destroyed_event.unregister(filled_airlock, src)

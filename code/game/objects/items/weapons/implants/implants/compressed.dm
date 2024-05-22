@@ -56,7 +56,7 @@
 	if (isnull(c.scanned))
 		to_chat(user, "Please compress an object with the implanter first.")
 		return TRUE
-	else return ..()
+	return ..()
 
 /obj/item/implanter/compressed/use_after(obj/item/A, mob/living/user, click_parameters)
 	if(istype(A) && imp)

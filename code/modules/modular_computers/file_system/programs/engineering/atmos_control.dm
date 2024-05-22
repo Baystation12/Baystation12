@@ -30,7 +30,7 @@
 		log_debug("\The [src] was given an unexpected req_access: [req_access]")
 
 	if(monitored_alarm_ids)
-		for(var/obj/machinery/alarm/alarm in SSmachines.machinery)
+		for(var/obj/machinery/alarm/alarm as anything in SSmachines.get_machinery_of_type(/obj/machinery/alarm))
 			if(alarm.alarm_id && (alarm.alarm_id in monitored_alarm_ids))
 				monitored_alarms += alarm
 		// machines may not yet be ordered at this point

@@ -78,7 +78,7 @@
 	var/turf/target = get_step(start, NORTH)
 	var/obj/O = get_named_instance(/obj, start)
 
-	GLOB.moved_event.register_global(src, /datum/unit_test/observation/proc/receive_move)
+	GLOB.moved_event.register_global(src, TYPE_PROC_REF(/datum/unit_test/observation, receive_move))
 	O.forceMove(target)
 
 	if(length(received_moves) != 1)
@@ -220,7 +220,7 @@
 
 	exosuit.occupant = holding_mob
 
-	GLOB.moved_event.register(held_item, src, /datum/unit_test/observation/proc/receive_move)
+	GLOB.moved_event.register(held_item, src, TYPE_PROC_REF(/datum/unit_test/observation, receive_move)
 	holding_mob.drop_from_inventory(held_item)
 
 	if(length(received_moves) != 1)
@@ -300,7 +300,7 @@
 	var/turf/T = get_safe_turf()
 	var/obj/O = get_named_instance(/obj, T)
 
-	GLOB.moved_event.register_global(O, /atom/movable/proc/move_to_turf)
+	GLOB.moved_event.register_global(O, TYPE_PROC_REF(/atom/movable, move_to_turf))
 	qdel(O)
 
 	if(null in GLOB.moved_event.global_listeners)
@@ -318,7 +318,7 @@
 	var/mob/event_source = get_named_instance(/mob, T, "Event Source")
 	var/mob/listener = get_named_instance(/mob, T, "Event Listener")
 
-	GLOB.moved_event.register(event_source, listener, /atom/movable/proc/recursive_move)
+	GLOB.moved_event.register(event_source, listener, TYPE_PROC_REF(/atom/movable, recursive_move))
 	qdel(event_source)
 
 	if(null in GLOB.moved_event.event_sources)
@@ -337,7 +337,7 @@
 	var/mob/event_source = get_named_instance(/mob, T, "Event Source")
 	var/mob/listener = get_named_instance(/mob, T, "Event Listener")
 
-	GLOB.moved_event.register(event_source, listener, /atom/movable/proc/recursive_move)
+	GLOB.moved_event.register(event_source, listener, TYPE_PROC_REF(/atom/movable, recursive_move))
 	qdel(listener)
 
 	var/listeners = GLOB.moved_event.event_sources[event_source]

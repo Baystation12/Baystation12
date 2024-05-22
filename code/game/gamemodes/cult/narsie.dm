@@ -257,7 +257,7 @@ var/global/list/narsie_list = list()
 				if (INVISIBILITY_ABSTRACT == AM2.invisibility)
 					continue
 
-				addtimer(new Callback(AM2, /atom/proc/singularity_pull, src, current_size), 0)
+				addtimer(new Callback(AM2, TYPE_PROC_REF(/atom, singularity_pull), src, current_size), 0)
 
 		if (dist <= consume_range && !istype(A, get_base_turf_by_area(A)))
 			var/turf/T2 = A

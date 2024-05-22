@@ -56,7 +56,7 @@
 	else
 		affecting.visible_message(SPAN_WARNING("\The [affecting] struggles against \the [assailant]!"))
 		G.done_struggle = FALSE
-		addtimer(new Callback(G, .proc/handle_resist), 1 SECOND)
+		addtimer(new Callback(G, PROC_REF(handle_resist)), 1 SECOND)
 		resolve_struggle(G)
 
 /datum/grab/normal/struggle/proc/resolve_struggle(obj/item/grab/G)

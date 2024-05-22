@@ -146,7 +146,7 @@
 /obj/item/storage/wallet/poly/emp_act(severity)
 	icon_state = "wallet-emp"
 	update_icon()
-	addtimer(new Callback(src, .proc/resolve_emp_timer), 5 SECONDS)
+	addtimer(new Callback(src, PROC_REF(resolve_emp_timer)), 5 SECONDS)
 	..()
 
 

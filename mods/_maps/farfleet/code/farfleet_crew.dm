@@ -20,7 +20,7 @@
 /decl/submap_archetype/away_iccgn_farfleet/New()
 	. = ..()
 	GLOB.using_map.map_admin_faxes.Add("Lordania Pioneer Corps Relay")
-	for(var/obj/machinery/photocopier/faxmachine/fax in SSmachines.machinery)
+	for(var/obj/machinery/photocopier/faxmachine/fax as anything in SSmachines.get_machinery_of_type(/obj/machinery/photocopier/faxmachine))
 		GLOB.admin_departments += "Lordania Pioneer Corps Relay"
 
 /obj/submap_landmark/spawnpoint/away_iccgn_farfleet

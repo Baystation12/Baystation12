@@ -430,7 +430,7 @@
 /obj/machinery/door/airlock/phoron/proc/PhoronBurn(temperature)
 	for(var/turf/simulated/floor/target_tile in range(2,loc))
 		target_tile.assume_gas(GAS_PHORON, 35, 400+T0C)
-		addtimer(new Callback(target_tile, /turf/proc/hotspot_expose, 400), 0)
+		addtimer(new Callback(target_tile, TYPE_PROC_REF(/turf, hotspot_expose), 400), 0)
 	for(var/turf/simulated/wall/W in range(3,src))
 		W.burn((temperature/4))//Added so that you can't set off a massive chain reaction with a small flame
 	for(var/obj/machinery/door/airlock/phoron/D in range(3,src))
@@ -977,7 +977,7 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/use_tool(obj/item/C, mob/living/user, list/click_params)
 	// Brace is considered installed on the airlock, so interacting with it is protected from electrification.
 	if(brace && C && (istype(C.GetIdCard(), /obj/item/card/id) || istype(C, /obj/item/material/twohanded/jack)))
-		return brace.attackby(C, user)
+		return brace.use_tool(C, user)
 
 	if(!brace && istype(C, /obj/item/airlock_brace))
 		var/obj/item/airlock_brace/A = C
@@ -1400,7 +1400,7 @@ About the new airlock wires panel:
 /singleton/public_access/public_method/airlock_toggle_bolts
 	name = "toggle bolts"
 	desc = "Toggles whether the airlock is bolted or not, if possible."
-	call_proc = /obj/machinery/door/airlock/proc/toggle_lock
+	call_proc = TYPE_PROC_REF(/obj/machinery/door/airlock, toggle_lock)
 
 /singleton/stock_part_preset/radio/receiver/airlock
 	frequency = AIRLOCK_FREQ

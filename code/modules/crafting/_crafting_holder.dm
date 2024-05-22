@@ -33,22 +33,21 @@
 		qdel(thing)
 	. = ..()
 
-/obj/item/crafting_holder/attackby(obj/item/W, mob/user)
-
+/obj/item/crafting_holder/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/pen))
 		var/new_label = sanitizeSafe(input(user, "What do you wish to label this assembly?", "Assembly Labelling", label_name), MAX_NAME_LEN)
 		if(new_label && !user.incapacitated() && W.loc == user && user.Adjacent(src) && !QDELETED(src))
 			to_chat(user, SPAN_NOTICE("You label \the [src] with '[new_label]'."))
 			label_name = new_label
-		return
+		return TRUE
 
 	if(current_crafting_stage)
 		var/singleton/crafting_stage/next_stage = current_crafting_stage.get_next_stage(W)
 		if(next_stage && next_stage.progress_to(W, user, src))
 			advance_to(next_stage, user, W)
-			return
+			return TRUE
 
-	. = ..()
+	return ..()
 
 
 /**

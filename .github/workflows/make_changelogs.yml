@@ -16,7 +16,7 @@ jobs:
     if: github.repository == 'SierraBay/SierraBay12' # to prevent this running on forks
     steps:
       - name: Checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29
         with:
           fetch-depth: 25
       - name: Python setup

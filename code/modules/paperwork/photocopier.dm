@@ -223,9 +223,9 @@
 			break
 
 		if(istype(W, /obj/item/paper))
-			W = copy(W)
+			W = copy(W, need_toner)
 		else if(istype(W, /obj/item/photo))
-			W = photocopy(W)
+			W = photocopy(W, need_toner)
 		W.forceMove(p)
 		p.pages += W
 

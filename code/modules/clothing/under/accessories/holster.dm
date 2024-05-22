@@ -16,13 +16,11 @@
 	set_extension(src, /datum/extension/holster, container, sound_in, sound_out, can_holster)
 
 
-/obj/item/clothing/accessory/storage/holster/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/clothing/accessory/storage/holster/use_tool(obj/item/W, mob/living/user, list/click_params)
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	if (H.holster(W, user))
-		return
-	else
-		. = ..(W, user)
-
+		return TRUE
+	return ..()
 
 /obj/item/clothing/accessory/storage/holster/attack_hand(mob/user as mob)
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)

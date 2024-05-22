@@ -176,9 +176,9 @@
 		to_chat(usr, SPAN_WARNING("Inventory hiding is currently only supported for human mobs, sorry."))
 		return
 
-	if(!client) return
-	if(client.view != world.view)
+	if(!client)
 		return
+
 	if(hud_used.hud_shown)
 		hud_used.hud_shown = 0
 		if(src.hud_used.adding)
@@ -232,8 +232,6 @@
 	if(!ishuman(src))
 		return
 	if(!client)
-		return
-	if(client.view != world.view)
 		return
 
 	if(hud_used.hud_shown)

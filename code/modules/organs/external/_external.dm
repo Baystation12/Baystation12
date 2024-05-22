@@ -221,18 +221,18 @@
 	for(var/obj/item/organ/external/child in children)
 		child.show_decay_status(user)
 
-/obj/item/organ/external/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/organ/external/use_tool(obj/item/W, mob/living/user, list/click_params)
 	switch(stage)
 		if(0)
 			if(W.sharp)
 				user.visible_message(SPAN_DANGER("<b>[user]</b> cuts [src] open with [W]!"))
 				stage++
-				return
+				return TRUE
 		if(1)
 			if(istype(W))
 				user.visible_message(SPAN_DANGER("<b>[user]</b> cracks [src] open like an egg with [W]!"))
 				stage++
-				return
+				return TRUE
 		if(2)
 			if(W.sharp || istype(W,/obj/item/hemostat) || isWirecutter(W))
 				var/list/organs = get_contents_recursive()
@@ -256,8 +256,8 @@
 					user.visible_message(SPAN_DANGER("<b>[user]</b> extracts [removing] from [src] with [W]!"))
 				else
 					user.visible_message(SPAN_DANGER("<b>[user]</b> fishes around fruitlessly in [src] with [W]."))
-				return
-	..()
+				return TRUE
+	return ..()
 
 
 /**
