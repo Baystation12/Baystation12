@@ -24,6 +24,8 @@
 
 	can_be_buckled = FALSE
 
+	ignore_hazard_flags = HAZARD_FLAG_SHARD
+
 	var/emp_damage = 0
 
 	var/obj/item/device/radio/exosuit/radio

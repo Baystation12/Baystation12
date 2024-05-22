@@ -81,3 +81,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define OVERMAP_SECTOR_IN_SPACE     FLAG(2)
 /// If the sector is untargetable by missiles.
 #define OVERMAP_SECTOR_UNTARGETABLE FLAG(3)
+
+
+/// For mob/living/ignore_hazard_flags. When set, shards do not damage the mob.
+var/global/const/HAZARD_FLAG_SHARD = FLAG(0)

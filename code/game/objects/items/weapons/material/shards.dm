@@ -80,6 +80,8 @@
 	if (human.buckled)
 		return
 	playsound(src, step_sound, 50, TRUE)
+	if (human.ignore_hazard_flags & HAZARD_FLAG_SHARD)
+		return
 	if (!istype(human))
 		to_chat(human, SPAN_WARNING("\A [src] cuts you!"))
 		human.take_overall_damage(force * 0.75, 0)
@@ -157,7 +159,6 @@
 
 /obj/item/material/shard/shrapnel/copper
 	default_material = MATERIAL_COPPER
-
 
 /obj/item/material/shard/caltrop
 	name = "caltrop"

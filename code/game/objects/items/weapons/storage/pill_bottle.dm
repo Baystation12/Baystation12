@@ -10,7 +10,8 @@
 	contents_allowed = list(
 		/obj/item/reagent_containers/pill,
 		/obj/item/dice,
-		/obj/item/paper
+		/obj/item/paper,
+		/obj/item/material/shard/caltrop/tack
 	)
 	allow_quick_gather = TRUE
 	allow_quick_empty = TRUE
