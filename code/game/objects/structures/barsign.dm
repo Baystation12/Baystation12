@@ -1,19 +1,9 @@
 /obj/structure/sign/double/barsign
 	desc = "A jumbo-sized LED sign. This one seems to be showing its age."
 	icon = 'icons/obj/structures/barsigns.dmi'
-	icon_state = "on"
+	icon_state = "Closed"
 	appearance_flags = DEFAULT_APPEARANCE_FLAGS
 	anchored = TRUE
-	var/cult = 0
-
-/obj/structure/sign/double/barsign/proc/get_valid_states(initial=1)
-	. = icon_states(icon)
-	. -= ""
-	. -= "on"
-	. -= "narsiebistro"
-	. -= "empty"
-	if(initial)
-		. -= "Off"
 
 /obj/structure/sign/double/barsign/examine(mob/user)
 	. = ..()
@@ -57,23 +47,15 @@
 		else
 			to_chat(user, "It says '[icon_state]'")
 
-/obj/structure/sign/double/barsign/New()
-	..()
-	icon_state = pick(get_valid_states())
-
 
 /obj/structure/sign/double/barsign/use_tool(obj/item/tool, mob/user, list/click_params)
-	// ID Card - Change barsign
 	var/obj/item/card/id/id = tool.GetIdCard()
 	if (istype(id))
 		var/id_name = GET_ID_NAME(id, tool)
 		if (!check_access(id))
 			USE_FEEDBACK_ID_CARD_DENIED(src, id_name)
 			return TRUE
-		if (cult)
-			USE_FEEDBACK_FAILURE("\The [src]'s display can't be changed.")
-			return TRUE
-		var/input = input(user, "What would you like to change the barsign to?") as null|anything in get_valid_states(FALSE)
+		var/input = input(user, "What would you like to change the barsign to?") as null|anything in get_valid_states()
 		if (!input || input == icon_state || !user.use_sanity_check(src, tool))
 			return TRUE
 		icon_state = input
@@ -82,5 +64,12 @@
 			SPAN_NOTICE("You update \the [src]'s display with [id_name].")
 		)
 		return TRUE
-
 	return ..()
+
+
+/obj/structure/sign/double/barsign/proc/get_valid_states()
+	return icon_states(icon) - list(
+		"empty",
+		"narsiebistro",
+		"on"
+	)
