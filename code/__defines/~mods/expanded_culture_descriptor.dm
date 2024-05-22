@@ -24,6 +24,7 @@
 #define CULTURE_HUMAN_MIRANIAN "Miranian"
 #define CULTURE_HUMAN_NYXIAN "Nyxian"
 
+#define HOME_SYSTEM_PLUTO      "Pluto"
 #define HOME_SYSTEM_TERSTEN                 "Tersten"
 #define HOME_SYSTEM_AVALON               	"Avalon"
 #define HOME_SYSTEM_MIRANIA              	"Mirania"
