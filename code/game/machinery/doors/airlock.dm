@@ -53,19 +53,19 @@
 	var/secured_wires = FALSE
 
 	/// Soundfile. The sound played when opening the door while powered.
-	var/open_sound_powered = 'sound/machines/airlock_open.ogg'
+	var/open_sound_powered = 'sound/obj/machinery/door/airlock/open.ogg'
 	/// Soundfile. The sound played when opening the door while unpowered.
-	var/open_sound_unpowered = 'sound/machines/airlock_open_force.ogg'
+	var/open_sound_unpowered = 'sound/obj/machinery/door/airlock/open_force.ogg'
 	/// Soundfile. The sound played when the door refuses to open due to access.
-	var/open_failure_access_denied = 'sound/machines/buzz-two.ogg'
+	var/open_failure_access_denied = 'sound/obj/machinery/door/airlock/access.ogg'
 	/// Soundfile. The sound played when the door closes while powered.
-	var/close_sound_powered = 'sound/machines/airlock_close.ogg'
+	var/close_sound_powered = 'sound/obj/machinery/door/airlock/close.ogg'
 	/// Soundfile. The sound played when the door closes while unpowered.
-	var/close_sound_unpowered = 'sound/machines/airlock_close_force.ogg'
+	var/close_sound_unpowered = 'sound/obj/machinery/door/airlock/close_force.ogg'
 	/// Soundfile. The sound played when the door is unlocked/unbolted.
-	var/bolts_rising = 'sound/machines/bolts_up.ogg'
+	var/bolts_rising = 'sound/obj/machinery/door/airlock/bolts_up.ogg'
 	/// Soundfile. The sound played when the door is locked/bolted.
-	var/bolts_dropping = 'sound/machines/bolts_down.ogg'
+	var/bolts_dropping = 'sound/obj/machinery/door/airlock/bolts_down.ogg'
 
 	/// Integer. The amount of damage dealt by the door when it closes on someone or something.
 	var/door_crush_damage = DOOR_CRUSH_DAMAGE
@@ -750,9 +750,9 @@ About the new airlock wires panel:
 			set_airlock_overlays(AIRLOCK_DENY)
 			if(density && arePowerSystemsOn())
 				flick("deny", src)
-				if(secured_wires && world.time > next_clicksound)
+				if(world.time > next_clicksound)
 					next_clicksound = world.time + CLICKSOUND_INTERVAL
-					playsound(loc, open_failure_access_denied, 50, 0)
+					playsound(src, open_failure_access_denied, 50)
 			update_icon(AIRLOCK_CLOSED)
 		if("emag")
 			set_airlock_overlays(AIRLOCK_EMAG)
