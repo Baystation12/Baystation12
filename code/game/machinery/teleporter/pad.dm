@@ -26,7 +26,7 @@
 /obj/machinery/tele_pad/proc/clear_computer()
 	if (!computer)
 		return
-	GLOB.destroyed_event.unregister(computer, src, /obj/machinery/tele_pad/proc/lost_computer)
+	GLOB.destroyed_event.unregister(computer, src, TYPE_PROC_REF(/obj/machinery/tele_pad, lost_computer))
 	computer = null
 
 
@@ -40,7 +40,7 @@
 		return
 	clear_computer()
 	computer = _computer
-	GLOB.destroyed_event.register(computer, src, /obj/machinery/tele_pad/proc/lost_computer)
+	GLOB.destroyed_event.register(computer, src, TYPE_PROC_REF(/obj/machinery/tele_pad, lost_computer))
 
 
 /obj/machinery/tele_pad/Bumped(atom/movable/AM)

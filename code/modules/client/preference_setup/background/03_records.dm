@@ -49,7 +49,7 @@
 		// .+= TBTN("set_memory", TextPreview(pref.memory, 40), "Memory") // SIERRA-EDIT - ORIGINAL
 	// . += "<br><b>Other</b>:" // SIERRA-EDIT - ORIGINAL	
 	// var/set_addr_button = TBTN("set_email_addr", pref.email_addr ? pref.email_addr : "(default)", "Email Address") // SIERRA-EDIT - ORIGINAL
-	// var/list/branches = pref.for_each_selected_branch(new Callback(src, .proc/allow_email_branch_check)) // SIERRA-EDIT - ORIGINAL
+	// var/list/branches = pref.for_each_selected_branch(new Callback(src, PROC_REF(allow_email_branch_check)) // SIERRA-EDIT - ORIGINAL
 	// for (var/name in branches) // SIERRA-EDIT - ORIGINAL
 		// set_addr_button += "  " + (branches[name] ? UI_FONT_GOOD(name) : UI_FONT_BAD(name)) // SIERRA-EDIT - ORIGINAL
 	// . += set_addr_button // SIERRA-EDIT - ORIGINAL
@@ -62,7 +62,7 @@
 		.+= TBTN("set_memory", TextPreview(pref.memory, 40), "Воспоминания")
 	. += "<br><b>Другое</b>:"
 	var/set_addr_button = TBTN("set_email_addr", pref.email_addr ? pref.email_addr : "(стандартный)", "Почтовый адрес")
-	var/list/branches = pref.for_each_selected_branch(new Callback(src, .proc/allow_email_branch_check))
+	var/list/branches = pref.for_each_selected_branch(new Callback(src, PROC_REF(allow_email_branch_check)))
 	for (var/name in branches)
 		set_addr_button += "  " + (branches[name] ? UI_FONT_GOOD(name) : UI_FONT_BAD(name))
 	. += set_addr_button

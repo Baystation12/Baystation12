@@ -28,9 +28,9 @@
 	src.actual_instrument = where
 	src.echo = GLOB.musical_config.echo_default.Copy()
 	src.env = GLOB.musical_config.env_default.Copy()
-	src.proxy_listener = new(src.actual_instrument, /datum/sound_player/proc/on_turf_entered_relay, /datum/sound_player/proc/on_turfs_changed_relay, range, proc_owner = src)
+	src.proxy_listener = new(src.actual_instrument, TYPE_PROC_REF(/datum/sound_player, on_turf_entered_relay), TYPE_PROC_REF(/datum/sound_player, on_turfs_changed_relay), range, proc_owner = src)
 	proxy_listener.register_turfs()
-	GLOB.instrument_synchronizer.register_global(src, .proc/check_wait)
+	GLOB.instrument_synchronizer.register_global(src, PROC_REF(check_wait))
 
 /datum/sound_player/Destroy()
 	src.song.playing = 0
@@ -41,7 +41,7 @@
 	QDEL_NULL(proxy_listener)
 	seen_turfs.Cut()
 	tokens.Cut()
-	GLOB.instrument_synchronizer.unregister_global(src, .proc/check_wait)
+	GLOB.instrument_synchronizer.unregister_global(src, PROC_REF(check_wait))
 	wait = null
 	. = ..()
 

@@ -176,8 +176,8 @@ var/global/list/string_slot_flags = list(
 //*** params cache
 var/global/list/paramslist_cache = list()
 
-#define cached_key_number_decode(key_number_data) cached_params_decode(key_number_data, /proc/key_number_decode)
-#define cached_number_list_decode(number_list_data) cached_params_decode(number_list_data, /proc/number_list_decode)
+#define cached_key_number_decode(key_number_data) cached_params_decode(key_number_data, GLOBAL_PROC_REF(key_number_decode))
+#define cached_number_list_decode(number_list_data) cached_params_decode(number_list_data, GLOBAL_PROC_REF(number_list_decode))
 
 /proc/cached_params_decode(params_data, decode_proc)
 	. = paramslist_cache[params_data]

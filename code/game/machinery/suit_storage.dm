@@ -341,11 +341,11 @@
 	update_icon()
 	SSnano.update_uis(src)
 
-	var/datum/callback/uvburn = new Callback(src, .proc/uv_burn)
+	var/datum/callback/uvburn = new Callback(src, PROC_REF(uv_burn))
 	addtimer(uvburn, 5 SECONDS)
 	addtimer(uvburn, 10 SECONDS)
 	addtimer(uvburn, 15 SECONDS)
-	addtimer(new Callback(src, .proc/uv_finish), 20 SECONDS)
+	addtimer(new Callback(src, PROC_REF(uv_finish)), 20 SECONDS)
 
 /obj/machinery/suit_storage_unit/proc/uv_burn()
 	if(occupant)

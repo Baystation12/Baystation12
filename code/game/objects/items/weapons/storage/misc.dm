@@ -3,31 +3,38 @@
 	desc = "It's a small bag with dice inside."
 	icon = 'icons/obj/dice.dmi'
 	icon_state = "dicebag"
+	startswith = list(
+		/obj/item/dice = 6
+	)
 
-/obj/item/storage/pill_bottle/dice/New()
-	..()
-	for(var/i = 1 to 7)
-		new /obj/item/dice( src )
 
 /obj/item/storage/pill_bottle/dice_nerd	//DnD dice
 	name = "bag of gaming dice"
 	desc = "It's a small bag with gaming dice inside."
 	icon = 'icons/obj/dice.dmi'
 	icon_state = "magicdicebag"
+	startswith = list(
+		/obj/item/dice/d4 = 1,
+		/obj/item/dice = 1,
+		/obj/item/dice/d8 = 1,
+		/obj/item/dice/d10 = 1,
+		/obj/item/dice/d12 = 1,
+		/obj/item/dice/d20 = 1,
+		/obj/item/dice/d100 = 1
+	)
 
-/obj/item/storage/pill_bottle/dice_nerd/New()
-	..()
-	new /obj/item/dice/d4( src )
-	new /obj/item/dice( src )
-	new /obj/item/dice/d8( src )
-	new /obj/item/dice/d10( src )
-	new /obj/item/dice/d12( src )
-	new /obj/item/dice/d20( src )
-	new /obj/item/dice/d100( src )
+
+/obj/item/storage/pill_bottle/tacks
+	name = "pot of thumbtacks"
+	desc = "What sort of monster would unleash these on the world?"
+	startswith = list(
+		/obj/item/material/shard/caltrop/tack = 16
+	)
+
 
 
 /obj/item/storage/box/donut
-	icon = 'icons/obj/food/food.dmi'
+	icon = 'icons/obj/food/food_storage.dmi'
 	icon_state = "donutbox"
 	name = "donut box"
 	contents_allowed = list(/obj/item/reagent_containers/food/snacks/donut)

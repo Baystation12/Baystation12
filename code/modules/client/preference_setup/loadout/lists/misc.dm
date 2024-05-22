@@ -94,13 +94,17 @@
 
 /datum/gear/lunchbox/New()
 	..()
-	var/list/lunchboxes = list()
-	for(var/lunchbox_type in typesof(/obj/item/storage/lunchbox))
-		var/obj/item/storage/lunchbox/lunchbox = lunchbox_type
-		if(!initial(lunchbox.filled))
-			lunchboxes[initial(lunchbox.name)] = lunchbox_type
-	gear_tweaks += new/datum/gear_tweak/path(lunchboxes)
-	gear_tweaks += new/datum/gear_tweak/contents(lunchables_lunches(), lunchables_snacks(), lunchables_drinks())
+	var/list/types = subtypesof(/obj/item/storage/lunchbox) - /obj/item/storage/lunchbox/caltrops
+	var/list/options = list()
+	for (var/obj/item/storage/lunchbox/lunchbox as anything in types)
+		if (!initial(lunchbox.filled))
+			options[initial(lunchbox.name)] = lunchbox
+	gear_tweaks += new/datum/gear_tweak/path(options)
+	gear_tweaks += new/datum/gear_tweak/contents(
+		lunchables_lunches(),
+		lunchables_snacks(),
+		lunchables_drinks()
+	)
 
 /datum/gear/towel
 	display_name = "towel"

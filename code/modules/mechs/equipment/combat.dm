@@ -156,7 +156,7 @@
 	. = ..()
 	target.vis_contents += src
 	set_dir()
-	GLOB.dir_set_event.register(user, src, /obj/aura/mechshield/proc/update_dir)
+	GLOB.dir_set_event.register(user, src, TYPE_PROC_REF(/obj/aura/mechshield, update_dir))
 
 /obj/aura/mechshield/proc/update_dir(user, old_dir, dir)
 	set_dir(dir)
@@ -169,7 +169,7 @@
 
 /obj/aura/mechshield/Destroy()
 	if(user)
-		GLOB.dir_set_event.unregister(user, src, /obj/aura/mechshield/proc/update_dir)
+		GLOB.dir_set_event.unregister(user, src, TYPE_PROC_REF(/obj/aura/mechshield, update_dir))
 		user.vis_contents -= src
 	shields = null
 	. = ..()
@@ -397,14 +397,14 @@
 	. = ..()
 	target.vis_contents += src
 	set_dir()
-	GLOB.dir_set_event.register(user, src, /obj/aura/mech_ballistic/proc/update_dir)
+	GLOB.dir_set_event.register(user, src, TYPE_PROC_REF(/obj/aura/mech_ballistic, update_dir))
 
 /obj/aura/mech_ballistic/proc/update_dir(user, old_dir, dir)
 	set_dir(dir)
 
 /obj/aura/mech_ballistic/Destroy()
 	if (user)
-		GLOB.dir_set_event.unregister(user, src, /obj/aura/mech_ballistic/proc/update_dir)
+		GLOB.dir_set_event.unregister(user, src, TYPE_PROC_REF(/obj/aura/mech_ballistic, update_dir))
 		user.vis_contents -= src
 	shield = null
 	. = ..()
@@ -558,8 +558,8 @@
 	if(owner && holding)
 		update_icon()
 
-/obj/item/mech_equipment/mounted_system/flamethrower/attackby(obj/item/W as obj, mob/user as mob)
-	if(!CanPhysicallyInteract(user))	return
+/obj/item/mech_equipment/mounted_system/flamethrower/use_tool(obj/item/W, mob/living/user, list/click_params)
+	if(!CanPhysicallyInteract(user))	return ..()
 
 	var/obj/item/flamethrower/full/mech/FM = holding
 	if(istype(FM))
@@ -568,17 +568,17 @@
 				user.visible_message(SPAN_NOTICE("\The [user] pries out \the [FM.beaker] using \the [W]."))
 				FM.beaker.dropInto(get_turf(user))
 				FM.beaker = null
-			return
+				return TRUE
 
 		if (istype(W, /obj/item/reagent_containers) && W.is_open_container() && (W.w_class <= FM.max_beaker))
 			if(FM.beaker)
 				to_chat(user, SPAN_NOTICE("There is already a tank inserted!"))
-				return
+				return TRUE
 			if(user.unEquip(W, FM))
 				user.visible_message(SPAN_NOTICE("\The [user] inserts \the [W] inside \the [src]."))
 				FM.beaker = W
-			return
-	..()
+			return TRUE
+	return ..()
 
 /obj/item/mech_equipment/mounted_system/flamethrower/on_update_icon()
 	. = ..()

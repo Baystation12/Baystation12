@@ -100,7 +100,7 @@
 				if(prob(80))
 					to_chat(user, SPAN_WARNING("You slip and fail to get out!"))
 					return
-				user.visible_message(SPAN_NOTICE("\The [buckled_mob] pulls himself out of \the [src]."))
+				user.visible_message(SPAN_NOTICE("\The [buckled_mob] pulls themselves out of \the [src]."))
 			else
 				user.visible_message(SPAN_NOTICE("\The [buckled_mob] has been freed from \the [src] by \the [user]."))
 			unbuckle_mob()

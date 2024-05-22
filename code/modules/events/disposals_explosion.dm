@@ -24,7 +24,7 @@
 
 // Event listener for the marked pipe's destruction
 /datum/event/disposals_explosion/proc/pipe_destroyed()
-	GLOB.destroyed_event.unregister(bursting_pipe, src, .proc/pipe_destroyed)
+	GLOB.destroyed_event.unregister(bursting_pipe, src, PROC_REF(pipe_destroyed))
 
 	bursting_pipe = null
 	kill()
@@ -33,7 +33,7 @@
 	var/list/area_predicates = GLOB.is_station_but_not_maint_area.Copy()
 	area_predicates += /proc/area_has_disposals_pipe
 
-	var/turf/containing_turf = pick_area_and_turf(area_predicates, list(/proc/has_disposals_pipe))
+	var/turf/containing_turf = pick_area_and_turf(area_predicates, list(GLOBAL_PROC_REF(has_disposals_pipe)))
 	if(isnull(containing_turf))
 		log_debug("Couldn't find a turf containing a disposals pipe. Aborting.")
 		kill()
@@ -43,7 +43,7 @@
 		if(istype(A, /obj/structure/disposalpipe/segment))
 			bursting_pipe = A
 			// Subscribe to pipe destruction facts
-			GLOB.destroyed_event.register(A, src, .proc/pipe_destroyed)
+			GLOB.destroyed_event.register(A, src, PROC_REF(pipe_destroyed))
 			break
 
 	if(isnull(bursting_pipe))
@@ -70,7 +70,7 @@
 	if(isnull(bursting_pipe))
 		return
 
-	GLOB.destroyed_event.unregister(bursting_pipe, src, .proc/pipe_destroyed)
+	GLOB.destroyed_event.unregister(bursting_pipe, src, PROC_REF(pipe_destroyed))
 
 	if(bursting_pipe.get_current_health() < 5)
 		// Make a disposals holder for the trash

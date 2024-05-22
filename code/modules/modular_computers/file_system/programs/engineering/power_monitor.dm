@@ -87,13 +87,13 @@
 /datum/nano_module/power_monitor/proc/refresh_sensors()
 	grid_sensors = list()
 	var/connected_z_levels = GetConnectedZlevels(get_host_z())
-	for(var/obj/machinery/power/sensor/S in SSmachines.machinery)
+	for(var/obj/machinery/power/sensor/S as anything in SSmachines.get_machinery_of_type(/obj/machinery/power/sensor))
 		if((S.long_range) || (S.loc.z in connected_z_levels)) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
 			if(S.name_tag == "#UNKN#") // Default name. Shouldn't happen!
 				warning("Powernet sensor with unset ID Tag! [S.x]X [S.y]Y [S.z]Z")
 			else
 				grid_sensors += S
-				GLOB.destroyed_event.register(S, src, /datum/nano_module/power_monitor/proc/remove_sensor)
+				GLOB.destroyed_event.register(S, src, TYPE_PROC_REF(/datum/nano_module/power_monitor, remove_sensor))
 
 /datum/nano_module/power_monitor/proc/remove_sensor(removed_sensor, update_ui = TRUE)
 	if(active_sensor == removed_sensor)
@@ -101,7 +101,7 @@
 		if(update_ui)
 			SSnano.update_uis(src)
 	grid_sensors -= removed_sensor
-	GLOB.destroyed_event.unregister(removed_sensor, src, /datum/nano_module/power_monitor/proc/remove_sensor)
+	GLOB.destroyed_event.unregister(removed_sensor, src, TYPE_PROC_REF(/datum/nano_module/power_monitor, remove_sensor))
 
 // Allows us to process UI clicks, which are relayed in form of hrefs.
 /datum/nano_module/power_monitor/Topic(href, href_list)

@@ -207,7 +207,7 @@
 /obj/item/reagent_containers/borghypo/service
 	name = "cyborg drink synthesizer"
 	desc = "A portable drink dispencer."
-	icon = 'icons/obj/food/drinks.dmi'
+	icon = 'icons/obj/food/drinks/misc.dmi'
 	icon_state = "shaker"
 	charge_cost = 5
 	recharge_time = 3

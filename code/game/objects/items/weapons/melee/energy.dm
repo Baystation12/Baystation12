@@ -93,7 +93,8 @@
 /obj/item/melee/energy/attack_self(mob/living/user as mob)
 	if (active)
 		if ((MUTATION_CLUMSY in user.mutations) && prob(50))
-			user.visible_message(SPAN_DANGER("\The [user] accidentally cuts \himself with \the [src]."),\
+			var/datum/pronouns/pronouns = user.choose_from_pronouns()
+			user.visible_message(SPAN_DANGER("\The [user] accidentally cuts [pronouns.self] with \the [src]."),\
 			SPAN_DANGER("You accidentally cut yourself with \the [src]."))
 			user.take_organ_damage(5,5)
 		deactivate(user)

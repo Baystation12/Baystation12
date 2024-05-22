@@ -75,7 +75,7 @@
 		set_extension(src, /datum/extension/turf_hand, turf_hand_priority)
 
 /obj/machinery/door/Initialize()
-	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
+	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, PROC_REF(CheckPenetration))
 	. = ..()
 
 	update_connections(1)
@@ -580,9 +580,9 @@
 /singleton/public_access/public_method/open_door
 	name = "open door"
 	desc = "Opens the door if possible."
-	call_proc = /obj/machinery/door/proc/open
+	call_proc = TYPE_PROC_REF(/obj/machinery/door, open)
 
 /singleton/public_access/public_method/toggle_door
 	name = "toggle door"
 	desc = "Toggles whether the door is open or not, if possible."
-	call_proc = /obj/machinery/door/proc/toggle
+	call_proc = TYPE_PROC_REF(/obj/machinery/door, toggle)

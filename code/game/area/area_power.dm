@@ -3,6 +3,8 @@
 #define LIGHT 2
 #define ENVIRON 3
 */
+/area
+	var/list/machinery_list
 
 /// Returns boolean. Whether or not the area is considered to have power for the given power channel. See `requires_power` and `always_unpowered` for some area-level overrides.
 /area/proc/powered(chan)
@@ -24,7 +26,7 @@
 
 /// Called whenever the area's power or power usage state should change.
 /area/proc/power_change()
-	for(var/obj/machinery/M in src)	// for each machine in the area
+	for(var/obj/machinery/M as anything in machinery_list)	// for each machine in the area
 		M.power_change()			// reverify power status (to update icons etc.)
 	if (fire || eject || party)
 		update_icon()

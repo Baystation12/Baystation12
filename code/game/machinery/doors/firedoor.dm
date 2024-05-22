@@ -144,7 +144,8 @@
 	return FALSE
 
 /obj/machinery/door/firedoor/attack_hand(mob/user)
-	if ((. = ..()))
+	if(user.a_intent != I_HELP)
+		..()
 		return
 	if(operating)
 		return//Already doing something.
@@ -160,10 +161,11 @@
 	var/alarmed = lockdown
 	alarmed = get_alarm()
 
-	var/answer = alert(user, "Would you like to [density ? "open" : "close"] this [name]?[ alarmed && density ? "\nNote that by doing so, you acknowledge any damages from opening this\n[name] as being your own fault, and you will be held accountable under the law." : ""]",\
-	"\The [src]", "Yes, [density ? "open" : "close"]", "No")
-	if(answer == "No")
-		return
+	if(!allowed(user))
+		var/answer = alert(user, "Would you like to [density ? "open" : "close"] this [name]?[ alarmed && density ? "\nNote that by doing so, you acknowledge any damages from opening this\n[name] as being your own fault, and you will be held accountable under the law." : ""]",\
+		"\The [src]", "Yes, [density ? "open" : "close"]", "No")
+		if(answer == "No")
+			return
 	if(user.incapacitated() || !user.Adjacent(src) && !issilicon(user))
 		to_chat(user, SPAN_WARNING("You must remain able-bodied and close to \the [src] in order to use it."))
 		return
@@ -192,7 +194,7 @@
 			close()
 
 	if(needs_to_close)
-		addtimer(new Callback(src, .proc/attempt_autoclose), 10 SECONDS) //Just in case a fire alarm is turned off while the firedoor is going through an autoclose cycle
+		addtimer(new Callback(src, PROC_REF(attempt_autoclose)), 10 SECONDS) //Just in case a fire alarm is turned off while the firedoor is going through an autoclose cycle
 
 /obj/machinery/door/firedoor/use_tool(obj/item/C, mob/living/user, list/click_params)
 	if(operating)

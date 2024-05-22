@@ -2115,12 +2115,12 @@
 			if (!istype(M.loc, /obj/machinery/cryopod))
 				var/obj/machinery/cryopod/C
 				if (isrobot(M))
-					for (var/obj/machinery/cryopod/robot/CP in SSmachines.machinery)
+					for (var/obj/machinery/cryopod/robot/CP as anything in SSmachines.get_machinery_of_type(/obj/machinery/cryopod/robot))
 						if (CP.occupant || !(CP.z in GLOB.using_map.station_levels))
 							continue
 						C = CP
 				else
-					for (var/obj/machinery/cryopod/CP in SSmachines.machinery)
+					for (var/obj/machinery/cryopod/CP as anything in SSmachines.get_machinery_of_type(/obj/machinery/cryopod))
 						if (CP.occupant || !(CP.z in GLOB.using_map.station_levels))
 							continue
 						C = CP

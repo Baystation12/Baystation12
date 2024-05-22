@@ -25,9 +25,10 @@
 /datum/grab/normal/aggressive/process_effect(obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
+	var/datum/pronouns/pronouns = assailant.choose_from_pronouns()
 
 	if (assailant.incapacitated(INCAPACITATION_ALL))
-		affecting.visible_message(SPAN_WARNING("[assailant] lets go of \his grab!"))
+		affecting.visible_message(SPAN_WARNING("\The [assailant] lets go of [pronouns.his] grab!"))
 		qdel(G)
 		return
 

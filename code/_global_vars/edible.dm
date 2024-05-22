@@ -4,7 +4,10 @@ GLOBAL_LIST_INIT(proteinbar_flavors, list(
 		/datum/reagent/drink/juice/apple,
 		/datum/reagent/drink/juice/pear
 	),
-	"banana nut" = /datum/reagent/drink/juice/banana,
+	"banana nut" = list(
+		/datum/reagent/drink/juice/banana,
+		/datum/reagent/nutriment/almondmeal
+	),
 	"cappuccino" = list(
 		/datum/reagent/nutriment/coffee,
 		/datum/reagent/drink/milk
@@ -34,5 +37,9 @@ GLOBAL_LIST_INIT(proteinbar_flavors, list(
 	"magical melons" = list(
 		/datum/reagent/drink/juice/melon
 	),
-	"mixed berry" = /datum/reagent/drink/juice/berry
+	"mixed berry" = /datum/reagent/drink/juice/berry,
+	"peanut crunch" = list(
+		/datum/reagent/nutriment/peanutbutter,
+		/datum/reagent/nutriment/groundpeanuts
+	)
 ))

@@ -355,7 +355,8 @@
 /mob/observer/ghost/TurfAdjacent(turf/T)
 	if(!isturf(loc) || !client)
 		return FALSE
-	return z == T.z && (get_dist(loc, T) <= client.view)
+
+	return z == T.z && (get_dist(loc, T) <= get_view_size_x(client.view))
 
 /**
  * Called when the mob ctrl+shift+clicks on an atom. By default, calls the atom's `CtrlShiftClick()` proc.

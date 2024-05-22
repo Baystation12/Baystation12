@@ -104,12 +104,14 @@
 		mannequin.ImmediateOverlayUpdate()
 		last_built_icon = icon('icons/effects/128x48.dmi', bgstate)
 		last_built_icon.Scale(48+32, 16+32)
-		mannequin.dir = WEST
-		last_built_icon.Blend(getFlatIcon(mannequin, WEST, always_use_defdir = TRUE), ICON_OVERLAY, 1, 9)
-		mannequin.dir = NORTH
-		last_built_icon.Blend(getFlatIcon(mannequin, NORTH, always_use_defdir = TRUE), ICON_OVERLAY, 25, 17)
+		// mannequin.dir = WEST
+		// last_built_icon.Blend(getFlatIcon(mannequin, WEST, always_use_defdir = TRUE), ICON_OVERLAY, 1, 9)
+		// CHECK_TICK
+		// mannequin.dir = NORTH
+		// last_built_icon.Blend(getFlatIcon(mannequin, NORTH, always_use_defdir = TRUE), ICON_OVERLAY, 25, 17)
+		// CHECK_TICK
 		mannequin.dir = SOUTH
-		last_built_icon.Blend(getFlatIcon(mannequin, SOUTH, always_use_defdir = TRUE), ICON_OVERLAY, 49, 1)
+		last_built_icon.Blend(getFlatIcon(mannequin, SOUTH, always_use_defdir = TRUE), ICON_OVERLAY, 25, 17)
 	preview_icon = new (last_built_icon)
 	var/scale = client.get_preference_value(/datum/client_preference/preview_scale)
 	switch (scale)

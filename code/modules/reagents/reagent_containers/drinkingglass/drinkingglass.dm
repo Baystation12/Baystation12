@@ -213,7 +213,7 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	splashtarget(target, user)
 	return TRUE
 
-/obj/item/reagent_containers/food/drinks/glass2/attackby(obj/item/W, mob/user)
+/obj/item/reagent_containers/food/drinks/glass2/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/material/kitchen/utensil/spoon))
 		if(user.a_intent == I_HURT)
 			user.visible_message(SPAN_WARNING("[user] bashes \the [src] with a spoon, shattering it to pieces! What a rube."))
@@ -222,10 +222,11 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 				user.visible_message(SPAN_NOTICE("The contents of \the [src] splash all over [user]!"))
 				reagents.splash(user, reagents.total_volume)
 			qdel(src)
-			return
+			return TRUE
 		user.visible_message(SPAN_NOTICE("[user] gently strikes \the [src] with a spoon, calling the room to attention."))
 		playsound(src, "sound/items/wineglass.ogg", 65, 1)
-	else return ..()
+		return TRUE
+	return ..()
 
 /obj/item/reagent_containers/food/drinks/glass2/ProcessAtomTemperature()
 	var/old_temp = temperature

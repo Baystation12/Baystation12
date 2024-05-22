@@ -12,7 +12,7 @@
 	throwforce = 0
 	lock_data = generateRandomString(round(material.integrity/50))
 
-/obj/item/material/lock_construct/attackby(obj/item/I, mob/user)
+/obj/item/material/lock_construct/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I,/obj/item/key))
 		var/obj/item/key/K = I
 		if(!K.key_data)
@@ -20,13 +20,15 @@
 			K.key_data = lock_data
 		else
 			to_chat(user, SPAN_WARNING("\The [I] already unlocks something..."))
-		return
+		return TRUE
+
 	if(istype(I,/obj/item/material/lock_construct))
 		var/obj/item/material/lock_construct/L = I
 		src.lock_data = L.lock_data
 		to_chat(user, SPAN_NOTICE("You copy the lock from \the [L] to \the [src], making them identical."))
-		return
-	..()
+		return TRUE
+
+	return ..()
 
 /obj/item/material/lock_construct/proc/create_lock(atom/target, mob/user)
 	. = new /datum/lock(target,lock_data)

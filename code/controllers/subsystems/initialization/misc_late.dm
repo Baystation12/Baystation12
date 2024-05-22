@@ -50,7 +50,7 @@ GLOBAL_LIST_EMPTY(microwave_accepts_items)
 		GLOB.microwave_accepts_reagents += type
 	for (var/type in items)
 		GLOB.microwave_accepts_items += type
-	sortTim(GLOB.microwave_recipes, /proc/cmp_microwave_recipes_by_weight_dsc)
+	sortTim(GLOB.microwave_recipes, GLOBAL_PROC_REF(cmp_microwave_recipes_by_weight_dsc))
 
 /proc/cmp_microwave_recipes_by_weight_dsc(datum/microwave_recipe/a, datum/microwave_recipe/b)
 	return a.weight - b.weight

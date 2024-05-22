@@ -885,6 +885,26 @@
 	result_path = /obj/item/reagent_containers/food/snacks/jelliedtoast/cherry
 
 
+/datum/microwave_recipe/pbtoast
+	required_reagents = list(
+		/datum/reagent/nutriment/peanutbutter = 5
+	)
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/slice/bread
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/pbtoast
+
+
+/datum/microwave_recipe/ntella_bread
+	required_reagents = list(
+		/datum/reagent/nutriment/choconutspread = 5
+	)
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/slice/bread
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/ntella_bread
+
+
 /datum/microwave_recipe/milosoup
 	required_reagents = list(
 		/datum/reagent/water = 10
@@ -1118,6 +1138,30 @@
 		/obj/item/reagent_containers/food/snacks/slice/bread
 	)
 	result_path = /obj/item/reagent_containers/food/snacks/jellysandwich/cherry
+
+
+/datum/microwave_recipe/pbjsandwich_cherry
+	required_reagents = list(
+		/datum/reagent/nutriment/cherryjelly = 5,
+		/datum/reagent/nutriment/peanutbutter = 5
+	)
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/slice/bread,
+		/obj/item/reagent_containers/food/snacks/slice/bread
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/pbjsandwich/cherry
+
+
+/datum/microwave_recipe/pbjsandwich_slime
+	required_reagents = list(
+		/datum/reagent/slimejelly = 5,
+		/datum/reagent/nutriment/peanutbutter = 5
+	)
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/slice/bread,
+		/obj/item/reagent_containers/food/snacks/slice/bread
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/pbjsandwich/slime
 
 
 /datum/microwave_recipe/bloodsoup
@@ -1429,6 +1473,17 @@
 		/obj/item/reagent_containers/food/snacks/cheesewedge
 	)
 	result_path = /obj/item/reagent_containers/food/snacks/sliceable/cheesecake
+
+
+/datum/microwave_recipe/cake/ntella_cheesecake
+	required_reagents = list(/datum/reagent/drink/milk = 5, /datum/reagent/nutriment/choconutspread = 15, /datum/reagent/sugar = 10)
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/cheesewedge,
+		/obj/item/reagent_containers/food/snacks/cookie,
+		/obj/item/reagent_containers/food/snacks/cookie,
+		/obj/item/reagent_containers/food/snacks/cookie
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/sliceable/ntella_cheesecake
 
 
 /datum/microwave_recipe/cake/orange

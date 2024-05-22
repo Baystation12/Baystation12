@@ -9,7 +9,7 @@
 
 	load_item_visible = 1
 	load_offset_x = 0
-	buckle_pixel_shift = "x=0;y=0;z=7"
+	buckle_pixel_shift = list(0, 0, 7)
 
 	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	charge_use = 1 KILOWATTS
@@ -34,7 +34,7 @@
 	load_item_visible = 1
 	load_offset_x = 0
 	load_offset_y = 4
-	buckle_pixel_shift = "x=0;y=0;z=8"
+	buckle_pixel_shift = list(0, 0, 8)
 
 //-------------------------------------------
 // Standard procs
