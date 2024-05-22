@@ -10,7 +10,7 @@
 	maxHealth = 80
 	health = 80
 
-	poison_per_bite = 5
+	poison_per_bite = 1
 	poison_type = /datum/reagent/toxin/cryotoxin
 
 	special_attack_min_range = 2
