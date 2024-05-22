@@ -66,19 +66,21 @@
 				return FALSE
 			M = M.loc
 			count++
-		var/answer = input(M, "[P] is requesting a DNA sample from you. Will you allow it to confirm your identity?", "[P] Check DNA", "No") in list("Yes", "No")
+		var/answer = input(M, "\The [P] is requesting a DNA sample from you. Will you allow it to confirm your identity?", "[P] Check DNA", "No") in list("Yes", "No")
 		if (answer == "Yes")
 			var/turf/T = get_turf_or_move(P.loc)
+			var/datum/pronouns/pronouns = M.choose_from_pronouns()
 			for (var/mob/v in viewers(T))
-				v.show_message(SPAN_NOTICE("[M] presses \his thumb against [P]."), 3, SPAN_NOTICE("[P] makes a sharp clicking sound as it extracts DNA material from [M]."), 2)
+				v.show_message(SPAN_NOTICE("\The [M] presses [pronouns.his] thumb against \the [P]."), 3, SPAN_NOTICE("\The [P] makes a sharp clicking sound as it extracts DNA material from \the [M]."), 2)
 			var/datum/dna/dna = M.dna
-			to_chat(P, "<h3 style='font-color: red'>[M]'s UE string : [dna.unique_enzymes]</h3>")
+			to_chat(P, "<h3 style='font-color: red'>\The [M]'s UE string : [dna.unique_enzymes]</h3>")
 			if (dna.unique_enzymes == P.master_dna)
 				to_chat(P, "<b>DNA is a match to stored Master DNA.</b>")
 			else
 				to_chat(P, "<b>DNA does not match stored Master DNA.</b>")
 		else
-			to_chat(P, "[M] does not seem like \he is going to provide a DNA sample willingly.")
+			var/datum/pronouns/pronouns = M.choose_from_pronouns()
+			to_chat(P, "\The [M] does not seem like [pronouns.he] is going to provide a DNA sample willingly.")
 		return TRUE
 
 
@@ -151,7 +153,7 @@
 		P.hack_aborted = 0
 		P.cable = new (T)
 		P.visible_message(
-			SPAN_ITALIC("A port on [P] opens to reveal \a [P.cable], which promptly falls to the floor."),
+			SPAN_ITALIC("A port on \the [P] opens to reveal \a [P.cable], which promptly falls to the floor."),
 			SPAN_ITALIC("You open a port to reveal your [P.cable] and unspool it to the floor."),
 			SPAN_ITALIC("You hear the soft click something falling to the floor.")
 		)

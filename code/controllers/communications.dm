@@ -372,15 +372,15 @@ var/global/datum/controller/radio/radio_controller
 /datum/radio_frequency/proc/send_to_filter(obj/source, datum/signal/signal, radio_filter, turf/start_point = null, range = null)
 	var/list/z_levels
 	if(start_point)
-		z_levels = GetConnectedZlevels(start_point.z)
+		z_levels = GetConnectedZlevelsSet(start_point.z)
 
-	for(var/obj/device in devices[radio_filter])
+	for(var/obj/device as anything in devices[radio_filter])
 		if(device == source)
 			continue
 		var/turf/end_point = get_turf(device)
 		if(!end_point)
 			continue
-		if(z_levels && !(end_point.z in z_levels))
+		if(z_levels && !(z_levels["[end_point.z]"]))
 			continue
 		if(range && get_dist(start_point, end_point) > range)
 			continue

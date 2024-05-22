@@ -22,12 +22,14 @@
 	for(var/R in starting_reagents)
 		reagents.add_reagent(R, starting_reagents[R])
 
-/obj/item/reagent_containers/food/condiment/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/condiment/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/pen) || istype(W, /obj/item/device/flashlight/pen))
 		var/label = sanitizeSafe(input(user, "Enter a label for \the [name]", "Label", label_text), MAX_NAME_LEN)
 		if (!label)
-			return
+			return TRUE
 		AddLabel(label, user)
+		return TRUE
+	return ..()
 
 /obj/item/reagent_containers/food/condiment/attack_self(mob/user as mob)
 	return

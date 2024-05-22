@@ -47,7 +47,7 @@
 /datum/nano_module/supermatter_monitor/proc/refresh()
 	supermatters = list()
 	var/valid_z_levels = GetConnectedZlevels(get_host_z())
-	for(var/obj/machinery/power/supermatter/S in SSmachines.machinery)
+	for(var/obj/machinery/power/supermatter/S as anything in SSmachines.get_machinery_of_type(/obj/machinery/power/supermatter))
 		// Delaminating, not within coverage, not on a tile.
 		if(S.grav_pulling || S.exploded || !(S.z in valid_z_levels) || !isturf(S.loc))
 			continue

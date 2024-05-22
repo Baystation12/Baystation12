@@ -408,7 +408,7 @@
 	log_and_message_admins("[key_name(occupant)] ([role_alt_title]) entered cryostorage.")
 
 	if(announce_despawn)
-		invoke_async(announce, /obj/item/device/radio/proc/autosay, "[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
+		invoke_async(announce, TYPE_PROC_REF(/obj/item/device/radio, autosay), "[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
 
 	var/despawnmessage = replacetext(on_store_visible_message, "$occupant$", occupant.real_name)
 	visible_message(SPAN_NOTICE("\The [initial(name)] " + despawnmessage), range = 3)

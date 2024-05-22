@@ -225,7 +225,7 @@
 /singleton/public_access/public_method/close_door_delayed
 	name = "delayed close door"
 	desc = "Closes the door if possible, after a short delay."
-	call_proc = /obj/machinery/door/blast/proc/delayed_close
+	call_proc = TYPE_PROC_REF(/obj/machinery/door/blast, delayed_close)
 
 /singleton/stock_part_preset/radio/receiver/blast_door
 	frequency = BLAST_DOORS_FREQ

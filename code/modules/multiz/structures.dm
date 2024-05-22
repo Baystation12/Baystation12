@@ -205,7 +205,7 @@
 				if(isnull(I))
 					M.attack_hand(user)
 				else
-					M.attackby(I, user)
+					M.use_tool(I, user)
 
 			return FALSE
 

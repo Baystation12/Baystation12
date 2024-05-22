@@ -226,8 +226,8 @@
 	var/mob/living/L = targets[1]
 
 	vision.possess(L)
-	GLOB.destroyed_event.register(L, src, /spell/camera_connection/proc/release)
-	GLOB.logged_out_event.register(L, src, /spell/camera_connection/proc/release)
+	GLOB.destroyed_event.register(L, src, TYPE_PROC_REF(/spell/camera_connection, release))
+	GLOB.logged_out_event.register(L, src, TYPE_PROC_REF(/spell/camera_connection, release))
 	L.verbs += /mob/living/proc/release_eye
 
 /spell/camera_connection/proc/release(mob/living/L)

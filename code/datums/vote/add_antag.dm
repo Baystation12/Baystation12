@@ -43,7 +43,7 @@
 		additional_antag_types |= antag_type
 		return
 
-	invoke_async(src, .proc/spawn_antags) //There is a sleep in this proc.
+	invoke_async(src, PROC_REF(spawn_antags)) //There is a sleep in this proc.
 
 /datum/vote/add_antagonist/proc/spawn_antags()
 	var/list/antag_choices = list()

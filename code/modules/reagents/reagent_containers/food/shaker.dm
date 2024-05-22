@@ -33,7 +33,7 @@
 	if(reagents && reagents.total_volume)
 		atom_flags &= ~ATOM_FLAG_NO_REACT
 		HANDLE_REACTIONS(reagents)
-		addtimer(new Callback(src, .proc/stop_react), SSchemistry.wait)
+		addtimer(new Callback(src, PROC_REF(stop_react)), SSchemistry.wait)
 
 /obj/item/reagent_containers/food/drinks/shaker/proc/stop_react()
 	atom_flags |= ATOM_FLAG_NO_REACT

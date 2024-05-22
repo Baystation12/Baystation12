@@ -22,20 +22,19 @@
 	if(written_text)
 		icon_state = "[icon_state]_writing"
 
-/obj/item/sticky_pad/attackby(obj/item/thing, mob/user)
+/obj/item/sticky_pad/use_tool(obj/item/thing, mob/living/user, list/click_params)
 	if(istype(thing, /obj/item/pen))
-
 		if(jobban_isbanned(user, "Graffiti"))
 			to_chat(user, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
-			return
+			return TRUE
 
 		var/writing_space = MAX_MESSAGE_LEN - length(written_text)
 		if(writing_space <= 0)
 			to_chat(user, SPAN_WARNING("There is no room left on \the [src]."))
-			return
+			return TRUE
 		var/text = sanitizeSafe(input("What would you like to write?") as text, writing_space)
 		if(!text || thing.loc != user || (!Adjacent(user) && loc != user) || user.incapacitated())
-			return
+			return TRUE
 		user.visible_message(SPAN_NOTICE("\The [user] jots a note down on \the [src]."))
 		written_by = user.ckey
 		if(written_text)
@@ -43,8 +42,8 @@
 		else
 			written_text = text
 		update_icon()
-		return
-	..()
+		return TRUE
+	return ..()
 
 /obj/item/sticky_pad/examine(mob/user)
 	. = ..()
@@ -81,7 +80,7 @@
 
 /obj/item/paper/sticky/Initialize()
 	. = ..()
-	GLOB.moved_event.register(src, src, /obj/item/paper/sticky/proc/reset_persistence_tracking)
+	GLOB.moved_event.register(src, src, TYPE_PROC_REF(/obj/item/paper/sticky, reset_persistence_tracking))
 
 /obj/item/paper/sticky/proc/reset_persistence_tracking()
 	SSpersistence.forget_value(src, /datum/persistent/paper/sticky)

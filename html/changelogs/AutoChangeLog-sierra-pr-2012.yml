@@ -1,0 +1,4 @@
+author: Merlin1230
+changes:
+  - {rscadd: 'Adds a Zeng-Hu logo to pencode! Use it with the tag [zhlogo]'}
+delete-after: true

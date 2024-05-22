@@ -32,7 +32,7 @@
 /obj/machinery/meter/proc/set_target(atom/new_target)
 	clear_target()
 	target = new_target
-	GLOB.destroyed_event.register(target, src, .proc/clear_target)
+	GLOB.destroyed_event.register(target, src, PROC_REF(clear_target))
 
 /obj/machinery/meter/proc/clear_target()
 	if(target)

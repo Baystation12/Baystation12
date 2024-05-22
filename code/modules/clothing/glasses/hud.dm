@@ -51,6 +51,10 @@
 	off_state = "avi_off"
 	item_state = "health_avi_on"
 
+/obj/item/clothing/glasses/hud/health/aviators/prescription
+	prescription = 5
+	desc = "A medical HUD integrated into a pair of aviator sunglasses. These ones have eyesight-correcting lenses."
+
 /obj/item/clothing/glasses/hud/health/goggle
 	name = "medical HUD visor"
 	desc = "A medical HUD integrated with a wide visor."
@@ -152,6 +156,10 @@
 	off_state = "avi_off"
 	item_state = "jani_avi_on"
 
+/obj/item/clothing/glasses/hud/janitor/aviators/prescription
+	prescription = 5
+	desc = "A janitorial HUD integrated into a pair of aviator sunglasses. These ones have eyesight-correcting lenses."
+
 /obj/item/clothing/glasses/hud/janitor/process_hud(mob/M)
 	process_jani_hud(M)
 
@@ -177,3 +185,7 @@
 	icon_state = "sci_avi_on"
 	off_state = "avi_off"
 	item_state = "sci_avi_on"
+
+/obj/item/clothing/glasses/hud/science/aviators/prescription
+	prescription = 5
+	desc = "A scientific HUD integrated into a pair of aviator sunglasses. These ones have eyesight-correcting lenses."

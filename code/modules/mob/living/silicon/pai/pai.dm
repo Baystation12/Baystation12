@@ -86,12 +86,18 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	return ..()
 
 
-/mob/living/silicon/pai/Initialize()
+/mob/living/silicon/pai/Initialize(mapload, obj/item/device/paicard)
 	. = ..()
 	status_flags |= NO_ANTAG
 	add_language(LANGUAGE_HUMAN_EURO, TRUE)
 	verbs -= /mob/living/verb/ghost
 	software = default_pai_software.Copy()
+	card = paicard
+	if (card)
+		//Radio is inside us, but needs to match waht the card says correct type is
+		CreateRadio()
+	else
+		CRASH("PAI was created without card - This may be an error or require special handling")
 
 
 /mob/living/silicon/pai/proc/CreateRadio()
@@ -277,13 +283,14 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 /mob/living/silicon/pai/use_tool(obj/item/tool, mob/user, list/click_params)
 	// ID Card - Set pAI access
 	var/obj/item/card/id/id = tool.GetIdCard()
+	var/datum/pronouns/pronouns = user.choose_from_pronouns()
 	if (istype(id))
 		var/id_name = GET_ID_NAME(id, tool)
 		var/list/new_access = id.GetAccess()
 		idcard.access = new_access
 		user.visible_message(
-			SPAN_NOTICE("\The [user] scans \a [tool] over \the [src], updating \his access."),
-			SPAN_NOTICE("You scan [id_name] over \the [src], updating \his access.")
+			SPAN_NOTICE("\The [user] scans \a [tool] over \the [src], updating [pronouns.his] access."),
+			SPAN_NOTICE("You scan [id_name] over \the [src], updating [pronouns.his] access.")
 		)
 		return TRUE
 

@@ -41,7 +41,7 @@ var/global/list/ai_status_emotions = list(
 /proc/set_ai_status_displays(mob/user as mob)
 	var/list/ai_emotions = get_ai_emotions(user.ckey)
 	var/emote = input("Please, select a status!", "AI Status", null, null) in ai_emotions
-	for (var/obj/machinery/M in SSmachines.machinery) //change status
+	for (var/obj/machinery/M as anything in SSmachines.get_all_machinery()) //change status
 		if(istype(M, /obj/machinery/ai_status_display))
 			var/obj/machinery/ai_status_display/AISD = M
 			AISD.emotion = emote

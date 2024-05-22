@@ -125,7 +125,8 @@ var/global/last_chew = 0
 	var/obj/item/organ/external/O = H.organs_by_name[(H.hand ? BP_L_HAND : BP_R_HAND)]
 	if (!O) return
 
-	H.visible_message(SPAN_DANGER("\The [H] chews on \his [O.name]!"), SPAN_DANGER("You chew on your [O.name]!"))
+	var/datum/pronouns/pronouns = H.choose_from_pronouns()
+	H.visible_message(SPAN_DANGER("\The [H] chews on [pronouns.his] [O.name]!"), SPAN_DANGER("You chew on your [O.name]!"))
 	admin_attacker_log(H, "chewed on their [O.name]!")
 
 	O.take_external_damage(3,0, DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE ,"teeth marks")

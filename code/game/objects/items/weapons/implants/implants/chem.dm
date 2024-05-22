@@ -33,16 +33,18 @@
 	reagents.trans_to_mob(R, amount, CHEM_BLOOD)
 	to_chat(R, SPAN_NOTICE("You hear a faint *beep*."))
 
-/obj/item/implant/chem/attackby(obj/item/I, mob/user)
+/obj/item/implant/chem/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I, /obj/item/reagent_containers/syringe))
 		if(reagents.total_volume >= reagents.maximum_volume)
 			to_chat(user, SPAN_WARNING("\The [src] is full."))
+			return TRUE
 		else
 			if(do_after(user, 0.5 SECONDS, src, DO_MEDICAL))
 				I.reagents.trans_to_obj(src, 5)
 				to_chat(user, SPAN_NOTICE("You inject 5 units of the solution. The syringe now contains [I.reagents.total_volume] units."))
-	else
-		..()
+			return TRUE
+
+	return ..()
 
 /obj/item/implantcase/chem
 	name = "glass case - 'chem'"

@@ -116,7 +116,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	else if (parameters["middle"] || modifier)
 		new /obj/ftl (get_turf(selected))
 		new /obj/ftl (get_turf(atom))
-		addtimer(new Callback(src, .proc/RevealShip, selected, atom.x, atom.y), 2 SECONDS)
+		addtimer(new Callback(src, PROC_REF(RevealShip), selected, atom.x, atom.y), 2 SECONDS)
 		animate(selected, time = 0.5 SECONDS)
 		animate(alpha = 0, time = 0.5 SECONDS)
 		selected = null

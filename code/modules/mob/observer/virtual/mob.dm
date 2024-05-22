@@ -5,17 +5,17 @@
 /mob/observer/virtual/mob/Initialize(mapload, mob/host)
 	. = ..()
 
-	GLOB.sight_set_event.register(host, src, /mob/observer/virtual/mob/proc/sync_sight)
-	GLOB.see_invisible_set_event.register(host, src, /mob/observer/virtual/mob/proc/sync_sight)
-	GLOB.see_in_dark_set_event.register(host, src, /mob/observer/virtual/mob/proc/sync_sight)
+	GLOB.sight_set_event.register(host, src, TYPE_PROC_REF(/mob/observer/virtual/mob, sync_sight))
+	GLOB.see_invisible_set_event.register(host, src, TYPE_PROC_REF(/mob/observer/virtual/mob, sync_sight))
+	GLOB.see_in_dark_set_event.register(host, src, TYPE_PROC_REF(/mob/observer/virtual/mob, sync_sight))
 
 	sync_sight(host)
 
 
 /mob/observer/virtual/mob/Destroy()
-	GLOB.sight_set_event.unregister(host, src, /mob/observer/virtual/mob/proc/sync_sight)
-	GLOB.see_invisible_set_event.unregister(host, src, /mob/observer/virtual/mob/proc/sync_sight)
-	GLOB.see_in_dark_set_event.unregister(host, src, /mob/observer/virtual/mob/proc/sync_sight)
+	GLOB.sight_set_event.unregister(host, src, TYPE_PROC_REF(/mob/observer/virtual/mob, sync_sight))
+	GLOB.see_invisible_set_event.unregister(host, src, TYPE_PROC_REF(/mob/observer/virtual/mob, sync_sight))
+	GLOB.see_in_dark_set_event.unregister(host, src, TYPE_PROC_REF(/mob/observer/virtual/mob, sync_sight))
 	. = ..()
 
 /mob/observer/virtual/mob/proc/sync_sight(mob/mob_host)

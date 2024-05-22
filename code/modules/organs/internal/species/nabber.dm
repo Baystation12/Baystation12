@@ -53,7 +53,7 @@
 		else
 			to_chat(owner, SPAN_NOTICE("Your protective lenses retract out of the way."))
 			innate_flash_protection = FLASH_PROTECTION_VULNERABLE
-			addtimer(new Callback(src, .proc/remove_shield), 1 SECONDS)
+			addtimer(new Callback(src, PROC_REF(remove_shield)), 1 SECONDS)
 			owner.update_icons()
 		refresh_action_button()
 
@@ -168,6 +168,7 @@
 	var/lowblood_tally = 0
 	name = "distributed nervous system"
 	parent_organ = BP_CHEST
+	can_use_mmi = FALSE
 
 /obj/item/organ/internal/brain/insectoid/nabber/Process()
 	if(!owner || !owner.should_have_organ(BP_HEART))

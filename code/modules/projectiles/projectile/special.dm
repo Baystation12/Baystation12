@@ -73,12 +73,13 @@
 	var/mob/living/M = target
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = M
+		var/datum/pronouns/pronouns = M.choose_from_pronouns()
 		if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
 			if(prob(15))
 				H.apply_damage((rand(30,80)), DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 				H.Weaken(5)
 				for (var/mob/V in viewers(src))
-					V.show_message(SPAN_WARNING("[M] writhes in pain as \his vacuoles boil."), 3, SPAN_WARNING("You hear the crunching of leaves."), 2)
+					V.show_message(SPAN_WARNING("\The [M] writhes in pain as [pronouns.his] vacuoles boil."), 3, SPAN_WARNING("You hear the crunching of leaves."), 2)
 			if(prob(35))
 				if(prob(80))
 					randmutb(M)
