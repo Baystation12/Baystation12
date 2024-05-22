@@ -4,7 +4,7 @@
 /obj/item/reagent_containers/food/drinks
 	name = "drink"
 	desc = "Yummy!"
-	icon = 'icons/obj/food/drinks.dmi'
+	icon = 'icons/obj/food/drinks/misc.dmi'
 	icon_state = null
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	amount_per_transfer_from_this = 5
@@ -12,6 +12,9 @@
 	var/filling_states   // List of percentages full that have icons
 	var/base_name = null // Name to put in front of drinks, i.e. "[base_name] of [contents]"
 	var/base_icon = null // Base icon name for fill states
+	var/drink_offset_x = 0
+	var/drink_offset_y = 0
+	var/shaken = FALSE
 
 /obj/item/reagent_containers/food/drinks/on_reagent_change()
 	update_icon()
@@ -20,14 +23,25 @@
 /obj/item/reagent_containers/food/drinks/on_color_transfer_reagent_change()
 	return
 
+
 /obj/item/reagent_containers/food/drinks/attack_self(mob/user as mob)
 	if(!is_open_container())
+		if(user.a_intent == I_HURT)
+			shaken = TRUE
+			user.visible_message("\The [user] shakes \the [src]!", "You shake \the [src]!")
+			playsound(loc,'sound/items/soda_shaking.ogg', rand(10,50), 1)
+			shake_animation(20)
+			return
+		if(shaken)
+			for(var/datum/reagent/R in reagents.reagent_list)
+				if("fizz" in R.glass_special)
+					boom(user)
+					return
 		open(user)
 
 /obj/item/reagent_containers/food/drinks/proc/open(mob/user)
 	playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
 	to_chat(user, SPAN_NOTICE("You open \the [src] with an audible pop!"))
-	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/reagent_containers/food/drinks/proc/boom(mob/user as mob)
 	user.visible_message(
@@ -35,6 +49,33 @@
 				SPAN_DANGER("\The [src] explodes all over you as you open it!")
 			)
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+	make_froth(drink_offset_x, drink_offset_y, 2)
+	playsound(loc,'sound/items/soda_burst.ogg', rand(20,50), 1)
+	reagents.splash(user, reagents.total_volume)
+	shaken = FALSE
+
+
+/obj/item/reagent_containers/food/drinks/proc/make_froth(intensity)
+	if(!intensity)
+		return
+
+	if(!reagents.total_volume)
+		return
+
+	var/intensity_state = null
+	switch(intensity)
+		if(1)
+			intensity_state = "low"
+		if(2)
+			intensity_state = "medium"
+		if(3)
+			intensity_state = "high"
+	var/mutable_appearance/froth = mutable_appearance('icons/obj/food/drinks/drink_effects.dmi', "froth_[intensity_state]")
+	froth.pixel_x = drink_offset_x
+	froth.pixel_y = drink_offset_y
+	AddOverlays(froth)
+	spawn(2 SECONDS)
+	CutOverlays(froth)
 
 /obj/item/reagent_containers/food/drinks/use_before(mob/M as mob, mob/user as mob)
 	. = FALSE
@@ -114,7 +155,7 @@
 		desc = initial(desc)
 
 
-////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 /// Drinks. END
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -189,7 +230,7 @@
 /obj/item/reagent_containers/food/drinks/small_milk_choc
 	name = "small chocolate milk carton"
 	desc = "It's milk! This one is in delicious chocolate flavour."
-	icon_state = "mini-milk"
+	icon_state = "mini-milk_choco"
 	item_state = "carton"
 	center_of_mass = "x=16;y=9"
 	volume = 30
@@ -214,6 +255,9 @@
 	desc = "Careful, cold ice, do not chew."
 	icon_state = "coffee"
 	center_of_mass = "x=15;y=10"
+	filling_states = "100"
+	base_name = "cup"
+	base_icon = "cup"
 
 /obj/item/reagent_containers/food/drinks/ice/Initialize()
 	. = ..()
@@ -225,6 +269,9 @@
 	icon_state = "coffee"
 	item_state = "coffee"
 	center_of_mass = "x=15;y=13"
+	filling_states = "100"
+	base_name = "cup"
+	base_icon = "cup"
 
 /obj/item/reagent_containers/food/drinks/h_chocolate/Initialize()
 	. = ..()
@@ -236,25 +283,38 @@
 	desc = "Just add 10ml water, self heats! A taste that reminds you of your school years."
 	icon_state = "ramen"
 	center_of_mass = "x=16;y=11"
+	atom_flags = 0 //starts closed
+	filling_states = "100"
+	base_icon = "cup"
 
 /obj/item/reagent_containers/food/drinks/dry_ramen/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/dry_ramen, 30)
 
+/obj/item/reagent_containers/food/drinks/dry_ramen/on_update_icon()
+	ClearOverlays()
+	if(length(reagents.reagent_list) > 0)
+		if(filling_states && HAS_FLAGS(atom_flags, ATOM_FLAG_OPEN_CONTAINER))
+			var/image/filling = image(icon, src, "[base_icon][get_filling_state()]")
+			filling.color = reagents.get_color()
+			AddOverlays(filling)
+
+/obj/item/reagent_containers/food/drinks/dry_ramen/open(mob/user)
+	playsound(loc,'sound/effects/rip1.ogg', rand(10,50), 1)
+	to_chat(user, SPAN_NOTICE("You tear open \the [src], breaking the seal."))
+	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+	icon_state = "ramen_open"
+	update_icon()
 
 /obj/item/reagent_containers/food/drinks/sillycup
 	name = "paper cup"
 	desc = "A paper water cup."
-	icon_state = "water_cup_e"
+	icon_state = "water_cup"
 	possible_transfer_amounts = null
 	volume = 10
 	center_of_mass = "x=16;y=12"
-
-/obj/item/reagent_containers/food/drinks/sillycup/on_reagent_change()
-	if(reagents.total_volume)
-		icon_state = "water_cup"
-	else
-		icon_state = "water_cup_e"
+	filling_states = "100"
+	base_icon = "water_cup"
 
 
 //////////////////////////pitchers, pots, flasks and cups //
@@ -284,6 +344,7 @@
 /obj/item/reagent_containers/food/drinks/flask
 	name = "\improper Captain's flask"
 	desc = "A metal flask belonging to the captain."
+	icon = 'icons/obj/food/drinks/flasks.dmi'
 	icon_state = "flask"
 	volume = 60
 	center_of_mass = "x=17;y=7"
@@ -292,11 +353,6 @@
 	name = "shiny flask"
 	desc = "A shiny metal flask. It appears to have a Greek symbol inscribed on it."
 	icon_state = "shinyflask"
-
-/obj/item/reagent_containers/food/drinks/flask/lithium
-	name = "lithium flask"
-	desc = "A flask with a Lithium Atom symbol on it."
-	icon_state = "lithiumflask"
 
 /obj/item/reagent_containers/food/drinks/flask/detflask
 	name = "\improper Detective's flask"
@@ -318,6 +374,48 @@
 	icon_state = "vacuumflask"
 	volume = 60
 	center_of_mass = "x=15;y=4"
+	var/obj/item/reagent_containers/food/drinks/flask/flask_cup/cup = /obj/item/reagent_containers/food/drinks/flask/flask_cup
+
+/obj/item/reagent_containers/food/drinks/flask/vacuumflask/Initialize()
+	. = ..()
+	cup = new cup(src)
+	atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
+
+/obj/item/reagent_containers/food/drinks/flask/vacuumflask/attack_self(mob/user)
+	if(cup)
+		to_chat(user, SPAN_NOTICE("You remove \the [src]'s cap."))
+		user.put_in_hands(cup)
+		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
+		cup = null
+		update_icon()
+
+/obj/item/reagent_containers/food/drinks/flask/vacuumflask/use_tool(obj/item/attacking_item, mob/user)
+	if(istype(attacking_item, /obj/item/reagent_containers/food/drinks/flask/flask_cup))
+		if(cup)
+			to_chat(user, SPAN_WARNING("\The [src] already has a cap."))
+			return TRUE
+		if(attacking_item.reagents.total_volume + reagents.total_volume > volume)
+			to_chat(user, SPAN_WARNING("There's too much fluid in both the cap and \the [src]!"))
+			return TRUE
+		to_chat(user, SPAN_NOTICE("You put the cap onto \the [src]."))
+		user.unEquip(attacking_item, src)
+		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
+		cup = attacking_item
+		cup.reagents.trans_to_holder(reagents, cup.reagents.total_volume)
+		update_icon()
+		return TRUE
+	return ..()
+
+/obj/item/reagent_containers/food/drinks/flask/vacuumflask/on_update_icon()
+	icon_state = cup ? initial(icon_state) : "[initial(icon_state)]-nobrim"
+
+/obj/item/reagent_containers/food/drinks/flask/flask_cup
+	name = "vacuum flask cup"
+	desc = "The cup that appears in your hands after you unscrew the cap of the flask and turn it over. Magic!"
+	icon_state = "vacuumflask-brim"
+	volume = 10
+	center_of_mass = "x=16;y=6"
+
 
 //tea and tea accessories
 /obj/item/reagent_containers/food/drinks/tea
@@ -326,7 +424,7 @@
 	icon_state = "coffee"
 	item_state = "coffee"
 	center_of_mass = "x=16;y=14"
-	//filling_states = "100"
+	filling_states = "100"
 	base_name = "cup"
 	base_icon = "cup"
 
@@ -360,7 +458,7 @@
 	icon_state = "coffee"
 	item_state = "coffee"
 	center_of_mass = "x=16;y=14"
-	//filling_states = "100"
+	filling_states = "100"
 	base_name = "cup"
 	base_icon = "cup"
 

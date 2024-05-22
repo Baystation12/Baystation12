@@ -431,6 +431,10 @@
 	glass_icon = DRINK_ICON_NOISY
 	value = DISPENSER_REAGENT_VALUE
 
+	condiment_name = "sugar sack"
+	condiment_desc = "Cavities in a bag."
+	condiment_icon_state = "sugar"
+
 /datum/reagent/sugar/affect_blood(mob/living/carbon/human/M, removed)
 	handle_sugar(M, src)
 	M.adjust_nutrition(removed * 3)

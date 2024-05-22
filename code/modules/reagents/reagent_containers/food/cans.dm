@@ -1,8 +1,10 @@
 /obj/item/reagent_containers/food/drinks/cans
+	icon = 'icons/obj/food/drinks/cans.dmi'
 	volume = 40 //just over one and a half cups
 	amount_per_transfer_from_this = 5
 	atom_flags = 0 //starts closed
 	matter = list(MATERIAL_ALUMINIUM = 30)
+	drink_offset_y = 10
 
 //DRINKS
 
@@ -22,6 +24,9 @@
 	icon_state = "waterbottle"
 	center_of_mass = "x=15;y=8"
 	matter = list(MATERIAL_PLASTIC = 40)
+	filling_states = "-10;10;25;50;75;80;90;100"
+	base_name = "bottle"
+	base_icon = "waterbottle"
 
 /obj/item/reagent_containers/food/drinks/cans/waterbottle/Initialize()
 	. = ..()
@@ -224,7 +229,7 @@
 /obj/item/reagent_containers/food/drinks/cans/cola_diet
 	name = "diet space cola"
 	desc = "Cola... in space! Now with extra self-confidence."
-	icon_state = "cola-blue"
+	icon_state = "cola-diet"
 
 /obj/item/reagent_containers/food/drinks/cans/cola_diet/Initialize()
 	. = ..()
@@ -298,7 +303,7 @@
 /obj/item/reagent_containers/food/drinks/cans/vanillacola
 	name = "vanilla cola"
 	desc = "Delicious vanilla cola in a can."
-	icon_state = "vcola"
+	icon_state = "v-cola"
 	center_of_mass = "x=16;y=6"
 
 /obj/item/reagent_containers/food/drinks/cans/vanillacola/Initialize()
@@ -308,7 +313,7 @@
 /obj/item/reagent_containers/food/drinks/cans/cherrycola
 	name = "cherry cola"
 	desc = "Delicious cherry cola in a can."
-	icon_state = "ccola"
+	icon_state = "ch-cola"
 	center_of_mass = "x=16;y=6"
 
 /obj/item/reagent_containers/food/drinks/cans/cherrycola/Initialize()
@@ -318,7 +323,7 @@
 /obj/item/reagent_containers/food/drinks/cans/orangecola
 	name = "orange cola"
 	desc = "Delicious orange cola in a can."
-	icon_state = "ocola"
+	icon_state = "o-cola"
 	center_of_mass = "x=16;y=6"
 
 /obj/item/reagent_containers/food/drinks/cans/orangecola/Initialize()
@@ -328,7 +333,7 @@
 /obj/item/reagent_containers/food/drinks/cans/coffeecola
 	name = "coffee cola"
 	desc = "Delicious coffee cola in a can."
-	icon_state = "ccola"
+	icon_state = "c-cola"
 	center_of_mass = "x=16;y=6"
 
 /obj/item/reagent_containers/food/drinks/cans/coffeecola/Initialize()

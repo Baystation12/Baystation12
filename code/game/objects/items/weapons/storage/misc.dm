@@ -34,7 +34,7 @@
 
 
 /obj/item/storage/box/donut
-	icon = 'icons/obj/food/food.dmi'
+	icon = 'icons/obj/food/food_storage.dmi'
 	icon_state = "donutbox"
 	name = "donut box"
 	contents_allowed = list(/obj/item/reagent_containers/food/snacks/donut)

@@ -801,7 +801,7 @@
 /obj/item/reagent_containers/food/snacks/pancakesblu
 	name = "blueberry pancakes"
 	desc = "Pancakes with blueberries, delicious."
-	icon_state = "pancakes"
+	icon_state = "pancakes_berry"
 	trash = /obj/item/trash/plate
 	center_of_mass = "x=15;y=11"
 	nutriment_desc = list("pancake" = 8)
@@ -1733,6 +1733,34 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/slimejelly, 5)
 
+/obj/item/reagent_containers/food/snacks/pbtoast
+	name = "peanut butter toast"
+	desc = "A slice of bread covered with peanut butter."
+	icon_state = "pbtoast"
+	filling_color = "#b572ab"
+	center_of_mass = "x=16;y=8"
+	nutriment_desc = list("toasted bread" = 2)
+	nutriment_amt = 1
+	bitesize = 3
+
+/obj/item/reagent_containers/food/snacks/pbtoast/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/peanutbutter, 5)
+
+/obj/item/reagent_containers/food/snacks/ntella_bread
+	name = "NTella bread slice"
+	desc = "A slice of bread covered with delicious chocolate-nut spread."
+	icon_state = "chocobread"
+	filling_color = "#4b270f"
+	center_of_mass = "x=16;y=8"
+	nutriment_desc = list("bread" = 2)
+	nutriment_amt = 1
+	bitesize = 3
+
+/obj/item/reagent_containers/food/snacks/ntella_bread/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/choconutspread, 5)
+
 /obj/item/reagent_containers/food/snacks/jellyburger
 	name = "jelly burger"
 	desc = "Culinary delight..?"
@@ -1989,6 +2017,31 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/cherryjelly, 5)
 
+/obj/item/reagent_containers/food/snacks/pbjsandwich
+	name = "pbj sandwich"
+	desc = "A staple classic lunch of gooey jelly and peanut butter."
+	icon_state = "pbjsandwich"
+	trash = /obj/item/trash/plate
+	filling_color = "#bb6a54"
+	center_of_mass = "x=16;y=8"
+	nutriment_desc = list("bread" = 2)
+	nutriment_amt = 2
+	bitesize = 3
+
+/obj/item/reagent_containers/food/snacks/pbjsandwich/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/peanutbutter, 5)
+
+/obj/item/reagent_containers/food/snacks/pbjsandwich/slime
+/obj/item/reagent_containers/food/snacks/pbjsandwich/slime/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/slimejelly, 5)
+
+/obj/item/reagent_containers/food/snacks/pbjsandwich/cherry
+/obj/item/reagent_containers/food/snacks/pbjsandwich/cherry/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/cherryjelly, 5)
+
 /obj/item/reagent_containers/food/snacks/boiledslimecore
 	name = "boiled slime core"
 	desc = "A boiled red thing."
@@ -2201,7 +2254,7 @@
 	filled = TRUE
 
 /obj/item/reagent_containers/food/snacks/sliceable/bananabread
-	name = "banana-nut bread"
+	name = "banana bread"
 	desc = "A heavenly and filling treat."
 	icon_state = "bananabread"
 	slice_path = /obj/item/reagent_containers/food/snacks/slice/bananabread
@@ -2216,7 +2269,7 @@
 	reagents.add_reagent(/datum/reagent/drink/juice/banana, 20)
 
 /obj/item/reagent_containers/food/snacks/slice/bananabread
-	name = "banana-nut bread slice"
+	name = "banana bread slice"
 	desc = "A slice of delicious banana bread."
 	icon_state = "bananabreadslice"
 	filling_color = "#ede5ad"
@@ -2334,6 +2387,34 @@
 	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/cheesecake
 
 /obj/item/reagent_containers/food/snacks/slice/cheesecake/filled
+	filled = TRUE
+
+/obj/item/reagent_containers/food/snacks/sliceable/ntella_cheesecake
+	name = "NTella cheesecake"
+	desc = "An elaborate layered cheesecake made with chocolate hazelnut spread. You gain calories just by looking at it for too long."
+	icon_state = "NTellacheesecake"
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/ntella_cheesecake
+	slices_num = 5
+	filling_color = "#331c03"
+	center_of_mass = "x=16;y=10"
+	nutriment_desc = list("hazelnut chocolate" = 15, "creamy cheese" = 10, "crunchy cookie base" = 5)
+	nutriment_amt = 20
+	bitesize = 2
+/obj/item/reagent_containers/food/snacks/sliceable/ntella_cheesecake/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/choconutspread, 15)
+
+/obj/item/reagent_containers/food/snacks/slice/ntella_cheesecake
+	name = "NTella cheesecake slice"
+	desc = "A slice of cake marrying the chocolate taste of NTella with the creamy smoothness of cheesecake, all on a cookie crumble base."
+	icon_state = "NTellacheesecake_slice"
+	trash = /obj/item/trash/plate
+	filling_color = "#331c03"
+	bitesize = 2
+	center_of_mass = "x=16;y=14"
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/ntella_cheesecake
+
+/obj/item/reagent_containers/food/snacks/slice/ntella_cheesecake/filled
 	filled = TRUE
 
 /obj/item/reagent_containers/food/snacks/sliceable/plaincake
@@ -2757,7 +2838,7 @@
 /obj/item/pizzabox
 	name = "pizza box"
 	desc = "A box suited for pizzas."
-	icon = 'icons/obj/food/food.dmi'
+	icon = 'icons/obj/food/food_storage.dmi'
 	icon_state = "pizzabox1"
 
 	var/open = 0 // Is the box open?
@@ -3467,9 +3548,10 @@
 	trash = /obj/item/trash/pistachios
 	filling_color = "#825d26"
 	center_of_mass = "x=15;y=9"
-	nutriment_desc = list("nuts" = 1)
-	nutriment_amt = 3
 	bitesize = 0.5
+/obj/item/reagent_containers/food/snacks/pistachios/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/almondmeal, 3)
 
 /obj/item/reagent_containers/food/snacks/semki
 	name = "semki"
@@ -4075,9 +4157,14 @@
 	trash = /obj/item/trash/saturno
 	filling_color = "#dca319"
 	center_of_mass = "x=15;y=9"
-	nutriment_desc = list("salt" = 4, "peanut" = 2,  "wood?" = 1)
-	nutriment_amt = 5
+	nutriment_desc = list("salt" = 4, "wood?" = 1)
+	nutriment_amt = 3
 	bitesize = 2
+
+/obj/item/reagent_containers/food/snacks/saturn/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment/groundpeanuts, 3)
+
 
 /obj/item/reagent_containers/food/snacks/jupiter
 	name = "jove gello"
@@ -4163,12 +4250,13 @@
 	icon_state = "weebonuts"
 	trash = /obj/item/trash/weebonuts
 	desc = "A bag of Red Alert! brand spicy nuts. Goes well with your beer!"
-	nutriment_desc = list("nuts" = 4, "spicy!" = 1)
-	nutriment_amt = 5
+	nutriment_desc = list("spicy!" = 1)
+	nutriment_amt = 2
 	bitesize = 2
 /obj/item/reagent_containers/food/snacks/weebonuts/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/capsaicin = 1)
+	reagents.add_reagent(/datum/reagent/nutriment/groundpeanuts, 4)
 
 /obj/item/reagent_containers/food/snacks/chocobanana
 	name = "choco banang"
