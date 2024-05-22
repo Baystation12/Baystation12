@@ -27,8 +27,6 @@
 /obj/item/reagent_containers/food/drinks/proc/open(mob/user)
 	playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
 	to_chat(user, SPAN_NOTICE("You open \the [src] with an audible pop!"))
-<<<<<<< ours
-=======
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/reagent_containers/food/drinks/proc/boom(mob/user as mob)
@@ -36,7 +34,6 @@
 				SPAN_DANGER("\The [src] explodes all over \the [user] as they open it!"),
 				SPAN_DANGER("\The [src] explodes all over you as you open it!")
 			)
->>>>>>> theirs
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/reagent_containers/food/drinks/use_before(mob/M as mob, mob/user as mob)
