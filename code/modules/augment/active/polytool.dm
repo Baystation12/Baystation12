@@ -42,9 +42,10 @@
 				to_chat(owner, "\the [I] fails to retract.")
 				return
 			items += I
+			var/datum/pronouns/pronouns = owner.choose_from_pronouns()
 			owner.visible_message(
-				SPAN_WARNING("[owner] retracts \his [I] into [limb]."),
-				SPAN_NOTICE("You retract your [I] into [limb].")
+				SPAN_WARNING("[owner] retracts [pronouns.his] [I] into [pronouns.his] [limb]."),
+				SPAN_NOTICE("You retract your [I] into your [limb].")
 			)
 		else
 			to_chat(owner, SPAN_WARNING("You must drop [I] before tool can be extend."))
@@ -56,7 +57,8 @@
 			items -= item
 			//Keep track of it, make sure it returns
 			GLOB.item_unequipped_event.register(item, src, TYPE_PROC_REF(/obj/item/organ/internal/augment/active/polytool, holding_dropped))
+			var/datum/pronouns/pronouns = owner.choose_from_pronouns()
 			owner.visible_message(
-				SPAN_WARNING("[owner] extends \his [item.name] from [limb]."),
-				SPAN_NOTICE("You extend your [item.name] from [limb].")
+				SPAN_WARNING("[owner] extends [pronouns.his] [item.name] from [pronouns.his] [limb]."),
+				SPAN_NOTICE("You extend your [item.name] from your [limb].")
 			)

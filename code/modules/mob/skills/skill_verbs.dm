@@ -90,7 +90,7 @@ Robots and antags can instruct.
 		return
 
 	if(target.too_many_buffs(/datum/skill_buff/instruct))
-		to_chat(src, SPAN_NOTICE("\The [target] exhausted from all the training \he recieved."))
+		to_chat(src, SPAN_NOTICE("\The [target] has had too many lessons and can't receive any more training today."))
 		return
 
 	var/options = list()
@@ -110,7 +110,7 @@ Robots and antags can instruct.
 		to_chat(src, SPAN_NOTICE("[incapacitated() ? "You are in no state to teach right now!" : "\the [target] is in no state to be taught right now!"]"))
 		return
 	if(target.too_many_buffs(/datum/skill_buff/instruct))
-		to_chat(src, SPAN_NOTICE("\The [target] exhausted from all the training \he recieved."))
+		to_chat(src, SPAN_NOTICE("\The [target] has had too many lessons and can't receive any more training today."))
 		return
 	if(target.skill_check(skill.type, SKILL_BASIC))
 		to_chat(src, SPAN_NOTICE("\The [target] is too skilled to gain any benefit from a short lesson."))
