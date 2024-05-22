@@ -16,6 +16,7 @@
 #define FACTION_ZPCI            "Zone Protection Control Inc."
 #define FACTION_SEPTENERGO      "SeptEnergo"
 
+#define CULTURE_HUMAN_PLUTO    "Plutonian"
 #define CULTURE_HUMAN_LORRIMAN "Lorrimanian"
 #define CULTURE_HUMAN_AVANOBLE "Avalon Noble"
 #define CULTURE_HUMAN_AVACOMMON "Avalon Commoner"
