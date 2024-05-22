@@ -4,8 +4,7 @@
 /datum/unit_test/machines_shall_obey_part_maximum/start_test()
 	var/failed = list()
 	var/passed = list()
-	for(var/thing in SSmachines.machinery)
-		var/obj/machinery/machine = thing
+	for(var/obj/machinery/machine as anything in SSmachines.get_all_machinery())
 		if(passed[machine.type] || failed[machine.type])
 			continue
 		for(var/path in machine.maximum_component_parts)
@@ -27,8 +26,7 @@
 /datum/unit_test/machines_with_circuits_shall_have_construct_states/start_test()
 	var/failed = list()
 	var/passed = list()
-	for(var/thing in SSmachines.machinery)
-		var/obj/machinery/machine = thing
+	for(var/obj/machinery/machine in SSmachines.get_all_machinery())
 		if(passed[machine.type] || failed[machine.type])
 			continue
 		var/path = machine.base_type || machine.type
@@ -50,8 +48,7 @@
 
 /datum/unit_test/machine_construct_states_shall_be_valid/start_test()
 	var/failed = list()
-	for(var/thing in SSmachines.machinery)
-		var/obj/machinery/machine = thing
+	for(var/obj/machinery/machine as anything in SSmachines.get_all_machinery())
 		if(failed[machine.type])
 			continue
 		if(!machine.construct_state)

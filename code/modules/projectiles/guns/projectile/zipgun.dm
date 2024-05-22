@@ -32,6 +32,12 @@
 	var/obj/item/ammo_casing/ammo = pick(ammo_types)
 	caliber = initial(ammo.caliber)
 	desc += " Uses [caliber] rounds."
+	if(caliber == CALIBER_SHOTGUN)
+		fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
+	if(caliber == CALIBER_PISTOL)
+		fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
+	if(caliber == CALIBER_RIFLE || caliber == CALIBER_RIFLE_MILITARY)
+		fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
 	. = ..()
 
 /obj/item/gun/projectile/pirate/unloaded

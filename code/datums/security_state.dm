@@ -193,10 +193,10 @@
 	notify_station()
 
 /singleton/security_level/default/proc/notify_station()
-	for(var/obj/machinery/firealarm/FA in SSmachines.machinery)
+	for(var/obj/machinery/firealarm/FA as anything in SSmachines.get_machinery_of_type(/obj/machinery/firealarm))
 		if(FA.z in GLOB.using_map.contact_levels)
 			FA.update_icon()
-	for (var/obj/machinery/rotating_alarm/security_alarm/SA in SSmachines.machinery)
+	for (var/obj/machinery/rotating_alarm/security_alarm/SA as anything in SSmachines.get_machinery_of_type(/obj/machinery/rotating_alarm/security_alarm))
 		if (SA.z in GLOB.using_map.contact_levels)
 			SA.set_alert(name, alarm_level, light_color_alarm)
 	post_status("alert")

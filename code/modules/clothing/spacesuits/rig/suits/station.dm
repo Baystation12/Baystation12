@@ -503,4 +503,3 @@
 	//Do not further append if current state already indicates gender
 	if(user.gender == FEMALE && !findtext(chest.icon_state,"_f", -2))
 		chest.icon_state = "[chest.icon_state]_f"
-	chest.update_icon(1)

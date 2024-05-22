@@ -27,7 +27,6 @@
 			return TRUE
 	return FALSE
 
-
 /// Adds an instance of color_type to the mob's client_colors list if one doesn't already exist.
 /mob/proc/add_client_color(datum/client_color/color_type)
 	if (has_client_color(color_type))
@@ -35,7 +34,7 @@
 	if (!length(client_colors))
 		client_colors = list()
 	client_colors |= new color_type
-	sortTim(client_colors, /proc/cmp_clientcolor_order)
+	sortTim(client_colors, GLOBAL_PROC_REF(cmp_clientcolor_order))
 	update_client_color()
 
 

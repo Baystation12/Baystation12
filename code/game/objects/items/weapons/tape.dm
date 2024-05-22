@@ -71,7 +71,7 @@
 
 		else if (user.zone_sel.selecting == BP_CHEST)
 			if (H.wear_suit && istype(H.wear_suit, /obj/item/clothing/suit/space))
-				H.wear_suit.attackby(src, user)//everything is handled by attackby
+				H.wear_suit.use_tool(src, user)
 			else
 				to_chat(user, SPAN_WARNING("\The [H] isn't wearing a spacesuit for you to reseal."))
 			return TRUE
@@ -106,7 +106,6 @@
 
 /obj/item/ducttape/proc/attach(obj/item/W)
 	stuck = W
-	anchored = TRUE
 	W.forceMove(src)
 	icon_state = W.icon_state + "_taped"
 	name = W.name + " (taped)"
@@ -141,6 +140,7 @@
 
 	playsound(src, 'sound/effects/tape.ogg',25)
 	layer = ABOVE_WINDOW_LAYER
+	anchored = TRUE
 
 	if(click_parameters)
 		if(click_parameters["icon-x"])

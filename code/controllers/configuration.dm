@@ -440,6 +440,10 @@
 
 	var/static/enable_cold_mist = FALSE
 
+
+	/// If the runechat is enabled on the server
+	var/static/runechat_enabled = TRUE
+
 	// [SIERRA-ADD]
 	var/static/shutdown_on_reboot = FALSE
 	// [/SIERRA-ADD]
@@ -882,6 +886,8 @@
 				deletion_starts_paused = TRUE
 			if ("enable_cold_mist")
 				enable_cold_mist = TRUE
+			if ("disable_runechat")
+				runechat_enabled = FALSE
 			// [SIERRA-ADD]
 			if ("shutdown_on_reboot")
 				shutdown_on_reboot = TRUE

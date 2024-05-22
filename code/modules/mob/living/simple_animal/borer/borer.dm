@@ -254,7 +254,7 @@
 	last_special = world.time + amt
 	for(var/obj/thing in hud_elements)
 		thing.color = COLOR_BORER_RED
-	addtimer(new Callback(src, /mob/living/simple_animal/borer/proc/reset_ui_callback), amt)
+	addtimer(new Callback(src, TYPE_PROC_REF(/mob/living/simple_animal/borer, reset_ui_callback)), amt)
 #undef COLOR_BORER_RED
 
 /mob/living/simple_animal/borer/proc/leave_host()

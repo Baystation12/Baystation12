@@ -135,7 +135,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	if(istype(part))
 		LAZYADD(component_parts, part)
 		part.on_install(src)
-		GLOB.destroyed_event.register(part, src, .proc/component_destroyed)
+		GLOB.destroyed_event.register(part, src, PROC_REF(component_destroyed))
 	else if(ispath(part))
 		LAZYINITLIST(uncreated_component_parts)
 		uncreated_component_parts[part] += 1
@@ -254,12 +254,12 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	power_change()
 	..()
 
-/// Passes `attackby()` calls through to components within the machine, if they are accessible.
+/// Passes `use_tool()` calls through to components within the machine, if they are accessible.
 /obj/machinery/proc/component_attackby(obj/item/I, mob/user)
 	for(var/obj/item/stock_parts/part in component_parts)
 		if(!components_are_accessible(part.type))
 			continue
-		if((. = part.attackby(I, user)))
+		if((. = part.use_tool(I, user)))
 			return
 	return construct_state && construct_state.attackby(I, user, src)
 

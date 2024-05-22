@@ -84,7 +84,7 @@
 		if (istype(M.wear_mask, /obj/item/clothing/mask/smokable/cigarette) && user.zone_sel.selecting == BP_MOUTH)
 			var/obj/item/clothing/mask/smokable/cigarette/cig = M.wear_mask
 			if (M == user)
-				cig.attackby(src, user)
+				cig.use_tool(src, user)
 			else
 				cig.light(SPAN_NOTICE("[user] holds the [name] out for [M], and lights the [cig.name]."))
 			return TRUE
@@ -94,7 +94,7 @@
 		if(ismob(loc) && prob(10) && reagents.get_reagent_amount(/datum/reagent/fuel) < 1)
 			to_chat(loc, SPAN_WARNING("\The [src]'s flame flickers."))
 			set_light(0)
-			addtimer(new Callback(src, .atom/proc/set_light, 2), 4)
+			addtimer(new Callback(src, TYPE_PROC_REF(/atom, set_light), 2), 4)
 		reagents.remove_reagent(/datum/reagent/fuel, 0.05)
 	else
 		extinguish()

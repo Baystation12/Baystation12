@@ -18,13 +18,15 @@
 		underlays += image(syringe.icon, src, syringe.icon_state)
 		underlays += syringe.filling
 
-/obj/item/syringe_cartridge/attackby(obj/item/I, mob/user)
+/obj/item/syringe_cartridge/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I, /obj/item/reagent_containers/syringe) && user.unEquip(I, src))
 		syringe = I
 		to_chat(user, SPAN_NOTICE("You carefully insert [syringe] into [src]."))
 		sharp = TRUE
 		name = "syringe dart"
 		update_icon()
+		return TRUE
+	return ..()
 
 /obj/item/syringe_cartridge/attack_self(mob/user)
 	if(syringe)

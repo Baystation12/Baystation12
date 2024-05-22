@@ -77,7 +77,7 @@
 	if (delete_time <= 0)
 		log_debug(append_admin_tools("A self deleting overlay ([src]) was spawned with a negative or zero delete time ([delete_time]) and was instantly deleted.", location = get_turf(src)))
 		return INITIALIZE_HINT_QDEL
-	addtimer(new Callback(src, .proc/self_delete), delete_time)
+	addtimer(new Callback(src, PROC_REF(self_delete)), delete_time)
 
 
 /obj/overlay/self_deleting/proc/self_delete()

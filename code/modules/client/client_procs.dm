@@ -182,6 +182,8 @@
 
 	. = ..()	//calls mob.Login()
 
+	view = get_preference_value(/datum/client_preference/client_view)
+
 	GLOB.using_map.map_info(src)
 
 	if (config.event)
@@ -401,15 +403,24 @@
 		'html/images/FleetLogo.png',
 		'html/images/sfplogo.png',
 		'html/images/falogo.png',
-		// [SIERRA-ADD] ,
+		// [SIERRA-ADD]
 		'html/images/ofbluelogo.png',
 		'html/images/ofntlogo.png',
 		'html/images/foundlogo.png',
 		'html/images/ccalogo.png',
 		'html/images/sierralogo.png',
+		'html/images/saarelogo.png',
+		'html/images/pcrclogo.png',
+		'html/images/zpcilogo.png',
+		'html/images/heglogo.png',
+		'html/images/convlogo.png',
+		'html/images/leaguelogo.png',
+		'html/images/ouerelogo.png',
+		'html/images/terstenlogo.png',
 		// [/SIERRA-ADD]
+		'html/images/zhlogo.png'
 		)
-	addtimer(new Callback(src, .proc/after_send_resources), 1 SECOND)
+	addtimer(new Callback(src, PROC_REF(after_send_resources)), 1 SECOND)
 
 
 /client/proc/after_send_resources()

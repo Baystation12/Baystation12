@@ -31,17 +31,22 @@
 		AddOverlays("folder_paper")
 	return
 
-/obj/item/folder/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/folder/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo) || istype(W, /obj/item/paper_bundle))
 		if(!user.unEquip(W, src))
-			return
-		to_chat(user, SPAN_NOTICE("You put the [W] into \the [src]."))
+			FEEDBACK_UNEQUIP_FAILURE(user, W)
+			return TRUE
+		to_chat(user, SPAN_NOTICE("You put \the [W] into \the [src]."))
 		update_icon()
+		return TRUE
+
 	else if(istype(W, /obj/item/pen))
 		var/n_name = sanitizeSafe(input(usr, "What would you like to label the folder?", "Folder Labelling", null)  as text, MAX_NAME_LEN)
 		if((loc == usr && usr.stat == 0))
 			SetName("folder[(n_name ? text("- '[n_name]'") : null)]")
-	return
+		return TRUE
+
+	return ..()
 
 /obj/item/folder/attack_self(mob/user as mob)
 	var/dat = "<title>[name]</title>"
@@ -138,9 +143,9 @@
 	else
 		..()
 
-/obj/item/folder/envelope/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/folder/envelope/use_tool(obj/item/item, mob/living/user, list/click_params)
 	if(sealed)
 		sealcheck(user)
-		return
+		return TRUE
 	else
-		..()
+		return ..()

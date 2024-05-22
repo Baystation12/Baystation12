@@ -279,17 +279,19 @@ Checks if a list has the same entries and values as an element of big.
 			output += L[i]
 	return output
 
-//Randomize: Return the list in a random order
-/proc/shuffle(list/L)
+
+/// Returns a Fisher-Yates shuffled copy of list, or list itself if in_place.
+/proc/shuffle(list/list, in_place)
 	RETURN_TYPE(/list)
-	if(!L)
+	if (!islist(list))
 		return
+	if (!in_place)
+		list = list.Copy()
+	var/size = length(list)
+	for (var/i = 1 to size)
+		list.Swap(i, rand(i, size))
+	return list
 
-	L = L.Copy()
-
-	for(var/i=1; i<length(L); i++)
-		L.Swap(i, rand(i,length(L)))
-	return L
 
 //Return a list with no duplicate entries
 /proc/uniquelist(list/L)

@@ -17,10 +17,10 @@ var/global/singleton/appearance_manager/appearance_manager = new()
 /singleton/appearance_manager/proc/add_appearance(mob/viewer, datum/appearance_data/ad)
 	var/PriorityQueue/pq = appearances_[viewer]
 	if(!pq)
-		pq = new/PriorityQueue(/proc/cmp_appearance_data)
+		pq = new/PriorityQueue(GLOBAL_PROC_REF(cmp_appearance_data))
 		appearances_[viewer] = pq
-		GLOB.logged_in_event.register(viewer, src, /singleton/appearance_manager/proc/apply_appearance_images)
-		GLOB.destroyed_event.register(viewer, src, /singleton/appearance_manager/proc/remove_appearances)
+		GLOB.logged_in_event.register(viewer, src, TYPE_PROC_REF(/singleton/appearance_manager, apply_appearance_images))
+		GLOB.destroyed_event.register(viewer, src, TYPE_PROC_REF(/singleton/appearance_manager, remove_appearances))
 	pq.Enqueue(ad)
 	reset_appearance_images(viewer)
 
@@ -30,8 +30,8 @@ var/global/singleton/appearance_manager/appearance_manager = new()
 	if(viewer.client)
 		viewer.client.images -= ad.images
 	if(!pq.Length())
-		GLOB.logged_in_event.unregister(viewer, src, /singleton/appearance_manager/proc/apply_appearance_images)
-		GLOB.destroyed_event.register(viewer, src, /singleton/appearance_manager/proc/remove_appearances)
+		GLOB.logged_in_event.unregister(viewer, src, TYPE_PROC_REF(/singleton/appearance_manager, apply_appearance_images))
+		GLOB.destroyed_event.register(viewer, src, TYPE_PROC_REF(/singleton/appearance_manager, remove_appearances))
 		appearances_ -= viewer
 
 /singleton/appearance_manager/proc/remove_appearances(mob/viewer)

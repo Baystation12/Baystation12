@@ -50,6 +50,14 @@ var/global/list/z_levels = list()// Each bit re... haha just kidding this is a l
 	for(var/level = z, HasAbove(level), level++)
 		. |= level+1
 
+/proc/GetConnectedZlevelsSet(z)
+	RETURN_TYPE(/list)
+	. = list("[z]" = TRUE)
+	for(var/level = z, HasBelow(level), level--)
+		.["[level-1]"] = TRUE
+	for(var/level = z, HasAbove(level), level++)
+		.["[level+1]"] = TRUE
+
 /proc/AreConnectedZLevels(zA, zB)
 	return zA == zB || (zB in GetConnectedZlevels(zA))
 

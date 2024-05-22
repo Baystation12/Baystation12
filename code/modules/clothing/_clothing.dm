@@ -425,7 +425,7 @@ BLIND     // can't see anything
 /obj/item/clothing/gloves/proc/Touch(atom/A, proximity)
 	return 0 // return 1 to cancel attack_hand()
 
-/obj/item/clothing/gloves/attackby(obj/item/W, mob/user)
+/obj/item/clothing/gloves/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if (isWirecutter(W) || istype(W, /obj/item/scalpel))
 		if (clipped)
 			to_chat(user, SPAN_NOTICE("\The [src] have already been modified!"))
@@ -746,13 +746,16 @@ BLIND     // can't see anything
 	..()
 
 
-/obj/item/clothing/shoes/attackby(obj/item/item, mob/living/user)
+/obj/item/clothing/shoes/use_tool(obj/item/item, mob/living/user, list/click_params)
 	if (istype(item, /obj/item/handcuffs))
 		add_cuffs(item, user)
+		return TRUE
 	else if (istype(item, /obj/item/clothing/shoes/magboots))
 		user.equip_to_slot_if_possible(item, slot_shoes)
-	else
-		add_hidden(item, user)
+		return TRUE
+	else if(add_hidden(item, user))
+		return TRUE
+	return ..()
 
 
 /obj/item/clothing/shoes/proc/add_cuffs(obj/item/handcuffs/cuffs, mob/user)
@@ -796,22 +799,24 @@ BLIND     // can't see anything
 /obj/item/clothing/shoes/proc/add_hidden(obj/item/I, mob/user)
 	if (!can_add_hidden_item)
 		to_chat(user, SPAN_WARNING("\The [src] can't hold anything."))
-		return
+		return TRUE
 	if (hidden_item)
 		to_chat(user, SPAN_WARNING("\The [src] already holds \an [hidden_item]."))
-		return
+		return TRUE
 	if (!(I.item_flags & ITEM_FLAG_CAN_HIDE_IN_SHOES) || (I.slot_flags & SLOT_DENYPOCKET))
 		to_chat(user, SPAN_WARNING("\The [src] can't hold the [I]."))
-		return
+		return TRUE
 	if (I.w_class > hidden_item_max_w_class)
 		to_chat(user, SPAN_WARNING("\The [I] is too large to fit in the [src]."))
-		return
+		return TRUE
 	if (do_after(user, 1 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if(!user.unEquip(I, src))
-			return
+			FEEDBACK_UNEQUIP_FAILURE(user, I)
+			return TRUE
 		user.visible_message(SPAN_ITALIC("\The [user] shoves \the [I] into \the [src]."), range = 1)
 		verbs |= /obj/item/clothing/shoes/proc/remove_hidden
 		hidden_item = I
+		return TRUE
 
 /obj/item/clothing/shoes/proc/remove_hidden(mob/user)
 	set name = "Remove Shoe Item"
@@ -1081,16 +1086,17 @@ BLIND     // can't see anything
 		return
 	sensor_mode = SUIT_SENSOR_MODES[switchMode]
 
+	var/datum/pronouns/pronouns = user.choose_from_pronouns()
 	if (src.loc == user)
 		switch(sensor_mode)
 			if(SUIT_SENSOR_OFF)
-				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "You disable your suit's remote sensing equipment.")
+				user.visible_message("[user] adjusts the tracking sensor on [pronouns.his] [src.name].", "You disable your suit's remote sensing equipment.")
 			if(SUIT_SENSOR_BINARY)
-				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "Your suit will now report whether you are live or dead.")
+				user.visible_message("[user] adjusts the tracking sensor on [pronouns.his] [src.name].", "Your suit will now report whether you are live or dead.")
 			if(SUIT_SENSOR_VITAL)
-				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "Your suit will now report your vital lifesigns.")
+				user.visible_message("[user] adjusts the tracking sensor on [pronouns.his] [src.name].", "Your suit will now report your vital lifesigns.")
 			if(SUIT_SENSOR_TRACKING)
-				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "Your suit will now report your vital lifesigns as well as your coordinate position.")
+				user.visible_message("[user] adjusts the tracking sensor on [pronouns.his] [src.name].", "Your suit will now report your vital lifesigns as well as your coordinate position.")
 
 	else if (ismob(src.loc))
 		if(sensor_mode == SUIT_SENSOR_OFF)
