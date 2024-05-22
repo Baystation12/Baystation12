@@ -861,6 +861,7 @@
 /obj/structure/noticeboard{
 	pixel_y = 30
 	},
+/obj/item/storage/pill_bottle/tacks,
 /obj/decal/cleanable/dirt,
 /obj/structure/table/standard,
 /obj/machinery/microwave{

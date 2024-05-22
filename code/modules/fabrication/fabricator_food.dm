@@ -18,15 +18,15 @@
 		return ..()
 	var/true_text = lowertext(html_decode(text))
 	if(findtext(true_text, "status"))
-		addtimer(new Callback(src, /obj/machinery/fabricator/replicator/proc/state_status), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
+		addtimer(new Callback(src, TYPE_PROC_REF(/obj/machinery/fabricator/replicator, state_status)), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
 	else if(findtext(true_text, "menu"))
-		addtimer(new Callback(src, /obj/machinery/fabricator/replicator/proc/state_menu), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
+		addtimer(new Callback(src, TYPE_PROC_REF(/obj/machinery/fabricator/replicator, state_menu)), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
 	else
 		for(var/datum/fabricator_recipe/recipe in SSfabrication.get_recipes(fabricator_class))
 			if(recipe.hidden && !(fab_status_flags & FAB_HACKED))
 				continue
 			if(findtext(true_text, lowertext(recipe.name)))
-				addtimer(new Callback(src, /obj/machinery/fabricator/proc/try_queue_build, recipe, 1), 2 SECONDS)
+				addtimer(new Callback(src, TYPE_PROC_REF(/obj/machinery/fabricator, try_queue_build), recipe, 1), 2 SECONDS)
 				break
 	..()
 

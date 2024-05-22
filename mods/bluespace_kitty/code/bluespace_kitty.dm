@@ -58,8 +58,8 @@ var/global/cat_number = 0
 	new /obj/temp_visual/pulse(loc)
 	new /obj/temp_visual/sparkles(loc)
 
-	addtimer(new Callback(src, .proc/back_to_bluespace), cat_life_duration)
-	addtimer(new Callback(src, .proc/say_runtime, runtime_file, runtime_line), 5 SECONDS)
+	addtimer(new Callback(src, PROC_REF(back_to_bluespace)), cat_life_duration)
+	addtimer(new Callback(src, PROC_REF(say_runtime), runtime_file, runtime_line), 5 SECONDS)
 
 	for(var/i in rand(1, 3))
 		step(src, pick(GLOB.alldirs))

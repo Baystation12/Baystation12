@@ -132,6 +132,6 @@
 
 	var/obj/item/pipe/P = new(w_turf)
 	P.set_dir(p_dir)
-	P.attackby(W , src)
+	P.use_tool(W , src)
 
 	return 1

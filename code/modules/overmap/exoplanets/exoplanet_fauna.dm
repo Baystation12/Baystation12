@@ -29,7 +29,7 @@
 /obj/overmap/visitable/sector/exoplanet/proc/handle_repopulation()
 	for (var/i = 1 to round(max_animal_count - length(animals)))
 		if (prob(10))
-			var/turf/simulated/T = pick_area_turf(planetary_area, list(/proc/not_turf_contains_dense_objects))
+			var/turf/simulated/T = pick_area_turf(planetary_area, list(GLOBAL_PROC_REF(not_turf_contains_dense_objects)))
 			var/mob_type = pick(repopulate_types)
 			var/mob/S = new mob_type(T)
 			track_animal(S)
@@ -39,8 +39,8 @@
 
 /obj/overmap/visitable/sector/exoplanet/proc/track_animal(mob/A)
 	animals += A
-	GLOB.death_event.register(A, src, /obj/overmap/visitable/sector/exoplanet/proc/remove_animal)
-	GLOB.destroyed_event.register(A, src, /obj/overmap/visitable/sector/exoplanet/proc/remove_animal)
+	GLOB.death_event.register(A, src, TYPE_PROC_REF(/obj/overmap/visitable/sector/exoplanet, remove_animal))
+	GLOB.destroyed_event.register(A, src, TYPE_PROC_REF(/obj/overmap/visitable/sector/exoplanet, remove_animal))
 
 /obj/overmap/visitable/sector/exoplanet/proc/get_random_species_name()
 	return pick("nol","shan","can","fel","xor")+pick("a","e","o","t","ar")+pick("ian","oid","ac","ese","inian","rd")

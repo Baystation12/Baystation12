@@ -157,7 +157,7 @@
 	var/list/station_apcs = list()
 	var/list/offstation_apcs = list()
 
-	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
+	for(var/obj/machinery/power/apc/A as anything in SSmachines.get_machinery_of_type(/obj/machinery/power/apc))
 		if(A.hacker && A.hacker == user)
 			continue
 		if(A.z in GLOB.using_map.station_levels)

@@ -12,6 +12,7 @@
 	ammo_type = /obj/item/ammo_casing/pistol/magnum
 	mag_insert_sound = 'sound/weapons/guns/interaction/rev_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/rev_magout.ogg'
+	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
 	accuracy = 2
 	accuracy_power = 8
 	one_hand_penalty = 2
@@ -52,6 +53,7 @@
 	safety_icon = "medium_safety"
 	caliber = CALIBER_PISTOL
 	ammo_type = /obj/item/ammo_casing/pistol
+	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	desc = "The Lumoco Arms' Solid is a rugged revolver for people who don't keep their guns well-maintained."
 	accuracy = 1
 	bulk = 0
@@ -64,6 +66,7 @@
 	item_state = "pistol"
 	caliber = CALIBER_PISTOL_SMALL
 	ammo_type = /obj/item/ammo_casing/pistol/small
+	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	w_class = ITEM_SIZE_SMALL
 	accuracy = 1
 	one_hand_penalty = 0
@@ -74,6 +77,7 @@
 	name = "cap gun"
 	desc = "Looks almost like the real thing! Ages 8 and up."
 	icon_state = "revolver-toy"
+	fire_sound = 'sound/weapons/gunshot/gunshot.ogg'
 	caliber = CALIBER_CAPS
 	origin_tech = list(TECH_COMBAT = 1, TECH_MATERIAL = 1)
 	ammo_type = /obj/item/ammo_casing/cap

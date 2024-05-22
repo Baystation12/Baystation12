@@ -21,7 +21,7 @@
 	// Allows us to create "north bump" "south bump" etc. named objects, for more comfortable mapping.
 	name = "telescreen"
 
-/obj/item/modular_computer/telescreen/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/modular_computer/telescreen/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isCrowbar(W))
 		if(anchored)
 			shutdown_computer()
@@ -30,6 +30,7 @@
 			pixel_x = 0
 			pixel_y = 0
 			to_chat(user, "You unsecure \the [src].")
+			return TRUE
 		else
 			var/choice = input(user, "Where do you want to place \the [src]?", "Offset selection") in list("North", "South", "West", "East", "This tile", "Cancel")
 			var/valid = FALSE
@@ -53,5 +54,5 @@
 				anchored = TRUE
 				screen_on = TRUE
 				to_chat(user, "You secure \the [src].")
-			return
-	..()
+			return TRUE
+	return ..()

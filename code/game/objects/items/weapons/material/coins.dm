@@ -80,7 +80,7 @@
 	)
 
 
-/obj/item/material/coin/attackby(obj/item/item, mob/living/user)
+/obj/item/material/coin/use_tool(obj/item/item, mob/living/user, list/click_params)
 	if (isCoil(item) && isnull(string_color))
 		var/obj/item/stack/cable_coil/coil = item
 		if (!coil.use(1))
@@ -94,6 +94,7 @@
 		string_color = coil.color
 		update_icon()
 		return TRUE
+
 	if (isWirecutter(item) && !isnull(string_color))
 		new /obj/item/stack/cable_coil (get_turf(user), 1, string_color)
 		user.visible_message(
@@ -104,7 +105,7 @@
 		string_color = null
 		update_icon()
 		return TRUE
-	..()
+	return ..()
 
 /// Non-craftable coins intented to display specific imagery.
 /obj/item/material/coin/challenge

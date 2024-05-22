@@ -431,7 +431,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		drop_from_inventory(held_r)
 	sleep(150)
 
-	addtimer(new Callback(src, .proc/transform_zombie), 20)
+	addtimer(new Callback(src, PROC_REF(transform_zombie)), 20)
 
 /mob/living/carbon/human/proc/transform_zombie()
 	if (QDELETED(src))

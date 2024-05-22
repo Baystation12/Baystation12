@@ -327,10 +327,11 @@
 
 /obj/rune/ajorney/cast(mob/living/user)
 	var/tmpkey = user.key
+	var/datum/pronouns/pronouns = user.choose_from_pronouns()
 	if(user.loc != get_turf(src))
 		return
 	speak_incantation(user, "Fwe[pick("'","`")]sh mah erl nyag r'ya!")
-	user.visible_message(SPAN_WARNING("\The [user]'s eyes glow blue as \he freezes in place, absolutely motionless."), SPAN_WARNING("The shadow that is your spirit separates itself from your body. You are now in the realm beyond. While this is a great sight, being here strains your mind and body. Hurry..."), "You hear only complete silence for a moment.")
+	user.visible_message(SPAN_WARNING("\The [user]'s eyes glow blue as [pronouns.he] freezes in place, absolutely motionless."), SPAN_WARNING("The shadow that is your spirit separates itself from your body. You are now in the realm beyond. While this is a great sight, being here strains your mind and body. Hurry..."), "You hear only complete silence for a moment.")
 	announce_ghost_joinleave(user.ghostize(1), 1, "You feel that they had to use some [pick("dark", "black", "blood", "forgotten", "forbidden")] magic to [pick("invade", "disturb", "disrupt", "infest", "taint", "spoil", "blight")] this place!")
 	var/mob/observer/ghost/soul
 	for(var/mob/observer/ghost/O in GLOB.ghost_mobs)
@@ -717,6 +718,7 @@
 /obj/rune/revive/cast(mob/living/user)
 	var/mob/living/carbon/human/target
 	var/obj/item/device/soulstone/source
+	var/datum/pronouns/pronouns = user.choose_from_pronouns()
 	for(var/mob/living/carbon/human/M in get_turf(src))
 		if(M.stat == DEAD)
 			if(iscultist(M))
@@ -734,7 +736,7 @@
 	target.rejuvenate()
 	source.set_full(0)
 	speak_incantation(user, "Pasnar val'keriam usinar. Savrae ines amutan. Yam'toth remium il'tarat!")
-	target.visible_message(SPAN_WARNING("\The [target]'s eyes glow with a faint red as \he stands up, slowly starting to breathe again."), SPAN_WARNING("Life... I'm alive again..."), "You hear liquid flow.")
+	target.visible_message(SPAN_WARNING("\The [target]'s eyes glow with a faint red as [pronouns.he] stands up, slowly starting to breathe again."), SPAN_WARNING("Life... I'm alive again..."), "You hear liquid flow.")
 
 /obj/rune/blood_boil
 	cultname = "blood boil"

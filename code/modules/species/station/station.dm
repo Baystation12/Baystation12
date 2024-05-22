@@ -350,7 +350,7 @@
 	var/mob/living/carbon/alien/diona/nymph = new (target)
 	var/datum/ghosttrap/trap = get_ghost_trap("living plant")
 	trap.request_player(nymph, "A diona nymph has split from its gestalt.", 30 SECONDS)
-	addtimer(new Callback(nymph, /mob/living/carbon/alien/diona/proc/check_spawn_death), 30 SECONDS)
+	addtimer(new Callback(nymph, TYPE_PROC_REF(/mob/living/carbon/alien/diona, check_spawn_death)), 30 SECONDS)
 
 /mob/living/carbon/alien/diona/proc/check_spawn_death()
 	if (QDELETED(src))
@@ -393,7 +393,7 @@
 /datum/species/diona/handle_post_spawn(mob/living/carbon/human/H)
 	H.gender = NEUTER
 	. = ..()
-	addtimer(new Callback(src, .proc/fill_with_nymphs, H), 0)
+	addtimer(new Callback(src, PROC_REF(fill_with_nymphs), H), 0)
 
 /datum/species/diona/proc/fill_with_nymphs(mob/living/carbon/human/H)
 

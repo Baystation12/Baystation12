@@ -41,12 +41,12 @@
 		lockdown = FALSE
 
 	if(!lockdown)
-		for(var/obj/machinery/door/blast/regular/lockdown/door in SSmachines.machinery)
+		for(var/obj/machinery/door/blast/regular/lockdown/door as anything in SSmachines.get_machinery_of_type(/obj/machinery/door/blast/regular/lockdown))
 			door.autoclose = FALSE
-			invoke_async(door, /obj/machinery/door/proc/open)
+			invoke_async(door, TYPE_PROC_REF(/obj/machinery/door, open))
 	else
-		for(var/obj/machinery/door/blast/regular/lockdown/door in SSmachines.machinery)
+		for(var/obj/machinery/door/blast/regular/lockdown/door as anything in SSmachines.get_machinery_of_type(/obj/machinery/door/blast/regular/lockdown))
 			door.autoclose = TRUE
-			invoke_async(door, /obj/machinery/door/blast/proc/delayed_close)
+			invoke_async(door, TYPE_PROC_REF(/obj/machinery/door/blast, delayed_close))
 
 	return lockdown

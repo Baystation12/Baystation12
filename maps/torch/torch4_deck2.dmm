@@ -11051,6 +11051,7 @@
 /obj/structure/noticeboard{
 	pixel_y = 32
 	},
+/obj/item/storage/pill_bottle/tacks,
 /turf/simulated/floor/tiled/techfloor,
 /area/vacant/cargo)
 "BS" = (
@@ -15224,6 +15225,7 @@
 /obj/structure/noticeboard{
 	pixel_y = 32
 	},
+/obj/item/storage/pill_bottle/tacks,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engineering_bay)
 "Ou" = (

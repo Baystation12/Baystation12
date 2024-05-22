@@ -17,6 +17,7 @@
 	burst_delay = 2
 	mag_insert_sound = 'sound/weapons/guns/interaction/smg_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/smg_magout.ogg'
+	fire_sound = 'sound/weapons/gunshot/gunshot_4mm.ogg'
 
 	//machine pistol, easier to one-hand with
 	firemodes = list(
@@ -37,6 +38,7 @@
 	ammo_type = /obj/item/ammo_casing/pistol
 	magazine_type = /obj/item/ammo_magazine/machine_pistol
 	allowed_magazines = /obj/item/ammo_magazine/machine_pistol //more damage compared to the wt550, smaller mag size
+	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	one_hand_penalty = 2
 
 	firemodes = list(
@@ -115,6 +117,7 @@
 	wielded_item_state = "arifle-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/ltrifle_magout.ogg'
+	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
 
 	//Assault rifle, burst fire degrades quicker than SMG, worse one-handing penalty, slightly increased move delay
 	firemodes = list(
@@ -149,6 +152,7 @@
 	allowed_magazines = /obj/item/ammo_magazine/smg_top
 	accuracy_power = 7
 	one_hand_penalty = 3
+	fire_sound = 'sound/weapons/gunshot/gunshot_smg.ogg'
 
 	//machine pistol, like SMG but easier to one-hand with
 	firemodes = list(
@@ -193,6 +197,7 @@
 	wielded_item_state = "z8carbine-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/batrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/batrifle_magout.ogg'
+	fire_sound = 'sound/weapons/gunshot/gunshot2.ogg'
 	firemodes = list(
 		list(mode_name="semi auto",       burst=1,    fire_delay=null,    move_delay=null, use_launcher=null, one_hand_penalty=8, burst_accuracy=null, dispersion=null),
 		list(mode_name="3-round bursts", burst=3,    fire_delay=null, move_delay=6,    use_launcher=null, one_hand_penalty=9, burst_accuracy=list(0,-1,-1), dispersion=list(0.0, 0.6, 1.0)),
@@ -294,6 +299,7 @@
 	one_hand_penalty = 10
 	mag_insert_sound = 'sound/weapons/guns/interaction/lmg_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/lmg_magout.ogg'
+	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
 	can_special_reload = FALSE
 
 	//LMG, better sustained fire accuracy than assault rifles (comparable to SMG), higer move delay and one-handing penalty
@@ -390,6 +396,7 @@
 	wielded_item_state = "battlerifle-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/ltrifle_magout.ogg'
+	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
 
 	//Battle Rifle is only accurate in semi-automatic fire.
 	firemodes = list(
@@ -424,6 +431,7 @@
 	one_hand_penalty = 20
 	mag_insert_sound = 'sound/weapons/guns/interaction/lmg_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/lmg_magout.ogg'
+	fire_sound = 'sound/weapons/gunshot/minigun.ogg'
 	can_special_reload = FALSE
 
 	firemodes = list(

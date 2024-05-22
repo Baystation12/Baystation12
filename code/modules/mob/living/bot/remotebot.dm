@@ -56,7 +56,7 @@
 		var/obj/item/device/bot_controller/bot_controller = tool
 		bot_controller.bot = src
 		controller = bot_controller
-		GLOB.destroyed_event.register(bot_controller, src, .proc/controller_deleted)
+		GLOB.destroyed_event.register(bot_controller, src, PROC_REF(controller_deleted))
 		user.visible_message(
 			SPAN_NOTICE("\The [user] syncs \a [tool] to \the [src]."),
 			SPAN_NOTICE("You sync \the [tool] to \the [src].")
@@ -69,7 +69,7 @@
 /mob/living/bot/remotebot/proc/controller_deleted(obj/item/device/bot_controller/bot_controller)
 	if (controller == bot_controller)
 		controller = null
-	GLOB.destroyed_event.unregister(bot_controller, src, .proc/controller_deleted)
+	GLOB.destroyed_event.unregister(bot_controller, src, PROC_REF(controller_deleted))
 
 
 /mob/living/bot/remotebot/update_icons()

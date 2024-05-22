@@ -75,39 +75,60 @@
 
 /datum/reagent/toxin/amaspores
 	name = "Amaspores"
-	description = "The secondary component to amatoxin poisoning, remaining dormant for a time before causing rapid organ and tissue decay."
+	description = "The secondary component to amatoxin poisoning, remaining dormant for a time before causing the victim to rapidly vomit blood from the mouth, causing massive blood loss."
 	taste_description = "dusty dirt"
 	reagent_state = LIQUID
-	metabolism = REM * 4 // Extremely quick to act once the amatoxin has left the body
+	var/next_symptom = 10
+	metabolism = REM
 	color = "#330e00"
 	strength = 30
 
 /datum/reagent/toxin/amaspores/affect_blood(mob/living/carbon/M, removed)
+	var/mob/living/carbon/human/target = M
 	if (IS_METABOLICALLY_INERT(M))
 		return
 
 	if(M.chem_doses[/datum/reagent/toxin/amatoxin] > 0)
 		M.reagents.add_reagent(/datum/reagent/toxin/amaspores, metabolism) // The spores lay dormant for as long as any traces of amatoxin remain
-		if (prob(5))
-			to_chat(M, SPAN_DANGER("Everything itches, how uncomfortable!"))
-		if (prob(10))
-			to_chat(M, SPAN_WARNING("Your eyes are watering, it's hard to see!"))
-			M.eye_blurry = max(M.eye_blurry, 10)
-		if (prob(10))
-			to_chat(M, SPAN_DANGER("Your throat itches uncomfortably!"))
-			M.custom_emote(2, "coughs!")
+		next_symptom -= 1
+		//completely reworks symptoms to be much less obvious and in your face, and not happen every single second.
+		if(next_symptom == 0)
+			//mimics symptoms of high exertion.
+			if(prob(25))
+				M.add_chemical_effect(CE_PULSE, 3)
+			//mimics random pains that can easily be brushed off.
+			if(prob(20))
+				var/obj/item/organ/external/pained_limb = target.get_organ(pick(BP_CHEST))
+				pained_limb.add_pain(10)
+			//mimics symptoms of smoking.
+			if(prob(25))
+				to_chat(M, SPAN_NOTICE("You feel faintly sore in the throat."))
+			next_symptom = 10
 		return
-
+	//this is the stage that kicks in faster, victim starts to rapidly vomit blood and the spores tear their chest open from the inside.
 	M.add_chemical_effect(CE_SLOWDOWN, 1)
-
+	next_symptom -= 1
+	if(next_symptom < 1)
+		var/obj/item/organ/external/organ = target.get_organ(BP_CHEST)
+		organ.take_external_damage(rand(5,10), 0, EMPTY_BITFIELD, "Amaspore Growth")
+		if(target.get_blood_volume() == 0)
+			return
+		target.remove_blood(rand(20,30))
+		to_chat(M, SPAN_DANGER("You can taste blood in your mouth."))
+		M.Stun(1)
+		M.visible_message(SPAN_DANGER("\The [M] violently vomits blood!"))
+		playsound(M.loc, 'sound/effects/splat.ogg', 50, 1)
+		if(istype(M.loc, /turf/simulated))
+			var/obj/decal/cleanable/blood/blood_vomit = new /obj/decal/cleanable/blood(M.loc)
+			blood_vomit.update_icon()
+		next_symptom = 5
 	if (prob(15))
 		M.Weaken(5)
 		M.add_chemical_effect(CE_VOICELOSS, 5)
 	if (prob(30))
 		M.eye_blurry = max(M.eye_blurry, 10)
 
-	M.take_organ_damage(3 * removed, 0, ORGAN_DAMAGE_FLESH_ONLY)
-	M.adjustToxLoss(5 * removed, 0, ORGAN_DAMAGE_FLESH_ONLY)
+
 
 /datum/reagent/toxin/carpotoxin
 	name = "Carpotoxin"

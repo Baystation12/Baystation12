@@ -10,7 +10,7 @@
 	if (!target_url)
 		return -1
 
-	var/result = call_ext(HTTP_POST_DLL_LOCATION, "send_post_request")(target_url, payload, json_encode(list("Content-Type" = "application/json")))
+	var/result = CALL_EXT(HTTP_POST_DLL_LOCATION, "send_post_request")(target_url, payload, json_encode(list("Content-Type" = "application/json")))
 
 	result = json_decode(result)
 	if (result["error_code"])

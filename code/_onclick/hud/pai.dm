@@ -22,8 +22,6 @@
 	using.SetName("Toggle Light")
 	adding += using
 
-<<<<<<< ours
-=======
 	//Intent
 	using = new /obj/screen()
 	using.SetName("act_intent")
@@ -39,8 +37,6 @@
 	mymob.zone_sel.icon = 'icons/mob/screen1_robot.dmi'
 	mymob.zone_sel.ClearOverlays()
 	mymob.zone_sel.AddOverlays(image('icons/mob/zone_sel.dmi', "[mymob.zone_sel.selecting]"))
-
->>>>>>> theirs
 	mymob.client.screen = list()
 	mymob.client.screen += adding
 	mymob.client.screen += mymob.zone_sel

@@ -92,7 +92,6 @@
 
 /client/proc/set_preference(preference, set_preference)
 	var/datum/client_preference/cp = get_client_preference(preference)
-
 	if(!cp)
 		return FALSE
 

@@ -1,0 +1,5 @@
+author: Rootoo807
+changes:
+  - {bugfix: Corrects several messages that were referrencing the outdated var for
+      pronouns.}
+delete-after: true

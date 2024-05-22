@@ -16,7 +16,7 @@
 /obj/machinery/dummy_airlock_controller/Initialize()
 	. = ..()
 	if(id_tag)
-		for(var/obj/machinery/embedded_controller/radio/airlock/_master in SSmachines.machinery)
+		for(var/obj/machinery/embedded_controller/radio/airlock/_master as anything in SSmachines.get_machinery_of_type(/obj/machinery/embedded_controller/radio/airlock))
 			if(_master.id_tag == id_tag)
 				master_controller = _master
 				master_controller.dummy_terminals += src
