@@ -61,8 +61,11 @@
 	name = "Glucose"
 	color = "#ffffff"
 	scannable = 1
-
 	injectable = 1
+
+/datum/reagent/nutriment/glucose/adjust_nutrition(mob/living/carbon/M, removed)
+	M.adjust_nutrition(nutriment_factor * removed)
+	M.adjust_hydration(hydration_factor * removed)
 
 /datum/reagent/nutriment/protein // Bad for Skrell!
 	name = "Animal Protein"
