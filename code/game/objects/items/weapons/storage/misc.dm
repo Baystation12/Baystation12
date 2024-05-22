@@ -14,8 +14,7 @@
 	desc = "It's a small bag with gaming dice inside."
 	icon = 'icons/obj/dice.dmi'
 	icon_state = "magicdicebag"
-<<<<<<< ours
-=======
+
 	startswith = list(
 		/obj/item/dice/d4 = 1,
 		/obj/item/dice = 1,
@@ -33,7 +32,6 @@
 	startswith = list(
 		/obj/item/material/shard/caltrop/tack = 6
 	)
->>>>>>> theirs
 
 /obj/item/storage/pill_bottle/dice_nerd/New()
 	..()
