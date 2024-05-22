@@ -77,14 +77,6 @@
 	spawn(2 SECONDS)
 	CutOverlays(froth)
 
-
-/obj/item/reagent_containers/food/drinks/proc/boom(mob/user as mob)
-	user.visible_message(
-				SPAN_DANGER("\The [src] explodes all over \the [user] as they open it!"),
-				SPAN_DANGER("\The [src] explodes all over you as you open it!")
-			)
-	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
-
 /obj/item/reagent_containers/food/drinks/use_before(mob/M as mob, mob/user as mob)
 	. = FALSE
 	if (!istype(M))
