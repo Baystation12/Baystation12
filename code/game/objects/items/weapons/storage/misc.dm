@@ -46,7 +46,7 @@
 	ClearOverlays()
 	var/i = 0
 	for(var/obj/item/reagent_containers/food/snacks/donut/D in contents)
-		var/image/I = image('icons/obj/food/food.dmi', "[i][D.overlay_state]")
+		var/image/I = image('icons/obj/food/food_storage.dmi', "[i][D.overlay_state]")
 		if(D.overlay_state == "box-donut1")
 			I.color = D.filling_color
 		AddOverlays(I)
