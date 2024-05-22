@@ -28,10 +28,8 @@
 	name = "pot of thumbtacks"
 	desc = "What sort of monster would unleash these on the world?"
 	startswith = list(
-		/obj/item/material/shard/caltrop/tack = 16
+		/obj/item/material/shard/caltrop/tack = 6
 	)
-
-
 
 /obj/item/storage/box/donut
 	icon = 'icons/obj/food/food_storage.dmi'
