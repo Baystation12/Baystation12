@@ -17,7 +17,7 @@
 	M.pixel_x = initial(M.pixel_x)
 	M.pixel_y = initial(M.pixel_y)
 	buckled_mob = M
-	GLOB.destroyed_event.register(buckled_mob, src, /obj/proc/clear_buckle)
+	GLOB.destroyed_event.register(buckled_mob, src, TYPE_PROC_REF(/obj, clear_buckle))
 	if (buckle_sound)
 		playsound(src, buckle_sound, 20)
 	post_buckle_mob(M)

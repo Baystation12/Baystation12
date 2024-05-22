@@ -92,15 +92,15 @@
 		H.update_inv_l_hand()
 
 /* Assembly by a roboticist */
-/obj/item/robot_parts/head/attackby(obj/item/device/assembly/S, mob/user as mob)
+/obj/item/robot_parts/head/use_tool(obj/item/S, mob/living/user, list/click_params)
 	if ((!istype(S, /obj/item/device/assembly/infra)))
-		..()
-		return
+		return ..()
 	var/obj/item/TVAssembly/A = new(user)
 	qdel(S)
 	user.put_in_hands(A)
 	to_chat(user, SPAN_NOTICE("You add the infrared sensor to the robot head."))
 	qdel(src)
+	return TRUE
 
 /* Using camcorder icon as I can't sprite.
 Using robohead because of restricting to roboticist */
@@ -113,7 +113,7 @@ Using robohead because of restricting to roboticist */
 	var/buildstep = 0
 	w_class = ITEM_SIZE_LARGE
 
-/obj/item/TVAssembly/attackby(obj/item/W, mob/user)
+/obj/item/TVAssembly/use_tool(obj/item/W, mob/living/user, list/click_params)
 	switch(buildstep)
 		if(0)
 			if(istype(W, /obj/item/robot_parts/robot_component/camera))
@@ -121,30 +121,32 @@ Using robohead because of restricting to roboticist */
 				qdel(W)
 				desc = "This TV camera assembly has a camera module."
 				buildstep++
+				return TRUE
 		if(1)
 			if(istype(W, /obj/item/device/taperecorder))
 				qdel(W)
 				buildstep++
 				to_chat(user, SPAN_NOTICE("You add the tape recorder to [src]"))
 				desc = "This TV camera assembly has a camera and audio module."
-				return
+				return TRUE
 		if(2)
 			if(isCoil(W))
 				var/obj/item/stack/cable_coil/C = W
-				if(!C.use(3))
-					to_chat(user, SPAN_NOTICE("You need three cable coils to wire the devices."))
+				if(!C.can_use(3))
+					to_chat(user, SPAN_WARNING("You need three cable coils to wire the devices."))
 					..()
-					return
+					return TRUE
+				C.use(3)
 				buildstep++
 				to_chat(user, SPAN_NOTICE("You wire the assembly"))
 				desc = "This TV camera assembly has wires sticking out."
-				return
+				return TRUE
 		if(3)
 			if(isWirecutter(W))
 				to_chat(user, SPAN_NOTICE(" You trim the wires."))
 				buildstep++
 				desc = "This TV camera assembly needs casing."
-				return
+				return TRUE
 		if(4)
 			if(istype(W, /obj/item/stack/material/steel))
 				var/obj/item/stack/material/steel/S = W
@@ -154,5 +156,5 @@ Using robohead because of restricting to roboticist */
 					var/turf/T = get_turf(src)
 					new /obj/item/device/camera/tvcamera(T)
 					qdel(src)
-					return
-	..()
+					return TRUE
+	return ..()

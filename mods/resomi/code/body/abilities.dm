@@ -31,7 +31,7 @@
 			ping_image.pixel_x = (T.x - src.x) * WORLD_ICON_SIZE
 			ping_image.pixel_y = (T.y - src.y) * WORLD_ICON_SIZE
 			image_to(src, ping_image)
-			addtimer(new Callback(src, .proc/clear_sonar_effect, src.client, ping_image), 8)
+			addtimer(new Callback(src, PROC_REF(clear_sonar_effect), src.client, ping_image), 8)
 			var/feedback = list("There are noises of movement ")
 			var/direction = get_dir(src, L)
 			if(direction)

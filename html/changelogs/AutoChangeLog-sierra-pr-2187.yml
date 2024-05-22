@@ -1,0 +1,4 @@
+author: Mucker
+changes:
+  - {tweak: Calamity now has no antag type limit.}
+delete-after: true

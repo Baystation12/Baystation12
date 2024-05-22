@@ -23,6 +23,14 @@
 
 	screens[category] = screen
 	if(client && (stat != DEAD || screen.allstate))
+		if(screen.scale_to_view)
+			var/list/viewsize = getviewsize(client.view)
+			var/scale_x = viewsize[1] / (480 / world.icon_size)
+			var/scale_y = viewsize[2] / (480 / world.icon_size)
+			var/matrix/M = matrix()
+			M.Scale(scale_x, scale_y)
+			screen.transform = M
+
 		client.screen += screen
 	return screen
 
@@ -68,6 +76,8 @@
 	mouse_opacity = 0
 	var/severity = 0
 	var/allstate = 0 //shows if it should show up for dead people too
+	/// If the fullscreen image should be scaled client view wise
+	var/scale_to_view = FALSE
 
 /obj/screen/fullscreen/Destroy()
 	severity = 0
@@ -76,18 +86,22 @@
 /obj/screen/fullscreen/brute
 	icon_state = "brutedamageoverlay"
 	layer = DAMAGE_LAYER
+	scale_to_view = TRUE
 
 /obj/screen/fullscreen/oxy
 	icon_state = "oxydamageoverlay"
 	layer = DAMAGE_LAYER
+	scale_to_view = TRUE
 
 /obj/screen/fullscreen/crit
 	icon_state = "passage"
 	layer = CRIT_LAYER
+	scale_to_view = TRUE
 
 /obj/screen/fullscreen/blind
 	icon_state = "blackimageoverlay"
 	layer = BLIND_LAYER
+	scale_to_view = TRUE
 
 /obj/screen/fullscreen/blackout
 	icon = 'icons/mob/screen1.dmi'
@@ -98,6 +112,7 @@
 /obj/screen/fullscreen/impaired
 	icon_state = "impairedoverlay"
 	layer = IMPAIRED_LAYER
+	scale_to_view = TRUE
 
 /obj/screen/fullscreen/blurry
 	icon = 'icons/mob/screen1.dmi'
@@ -144,7 +159,9 @@
 /obj/screen/fullscreen/fishbed
 	icon_state = "fishbed"
 	allstate = 1
+	scale_to_view = TRUE
 
 /obj/screen/fullscreen/pain
 	icon_state = "brutedamageoverlay6"
 	alpha = 0
+	scale_to_view = TRUE

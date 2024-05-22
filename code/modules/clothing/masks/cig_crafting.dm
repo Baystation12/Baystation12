@@ -56,14 +56,14 @@
 /obj/item/reagent_containers/food/snacks/grown/dried_tobacco/fine
 	plantname = "finetobacco"
 
-/obj/item/clothing/mask/smokable/cigarette/rolled/attackby(obj/item/I, mob/user)
+/obj/item/clothing/mask/smokable/cigarette/rolled/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I, /obj/item/paper/cig/filter))
 		if(filter)
-			to_chat(user, SPAN_WARNING("[src] already has a filter!"))
-			return
+			to_chat(user, SPAN_WARNING("\The [src] already has a filter!"))
+			return TRUE
 		if(lit)
-			to_chat(user, SPAN_WARNING("[src] is lit already!"))
-			return
+			to_chat(user, SPAN_WARNING("\The [src] is already lit!"))
+			return TRUE
 		if(user.unEquip(I))
 			to_chat(user, SPAN_NOTICE("You stick [I] onto \the [src]."))
 			filter = 1
@@ -71,14 +71,14 @@
 			brand = "[brand] with a filter"
 			update_icon()
 			qdel(I)
-			return
-	..()
+			return TRUE
+	return ..()
 
-/obj/item/reagent_containers/food/snacks/grown/attackby(obj/item/I, mob/user)
+/obj/item/reagent_containers/food/snacks/grown/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(is_type_in_list(I, list(/obj/item/paper/cig, /obj/item/paper, /obj/item/teleportation_scroll)))
 		if(!dry)
-			to_chat(user, SPAN_WARNING("You need to dry [src] first!"))
-			return
+			to_chat(user, SPAN_WARNING("You need to dry \the [src] first!"))
+			return TRUE
 		if(user.unEquip(I))
 			var/obj/item/clothing/mask/smokable/cigarette/rolled/R = new(get_turf(src))
 			R.chem_volume = reagents.total_volume
@@ -88,5 +88,5 @@
 			user.put_in_active_hand(R)
 			qdel(I)
 			qdel(src)
-			return
-	..()
+			return TRUE
+	return ..()

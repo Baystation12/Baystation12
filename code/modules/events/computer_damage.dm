@@ -8,7 +8,7 @@
 		if(EVENT_LEVEL_MAJOR)
 			number_of_victims = 16
 	var/list/victims = list()
-	for(var/obj/machinery/computer/modular/C in SSmachines.machinery)
+	for(var/obj/machinery/computer/modular/C as anything in SSmachines.get_machinery_of_type(/obj/machinery/computer/modular))
 		if((C.z in affecting_z) && C.use_power == POWER_USE_ACTIVE && C.get_component_of_type(/obj/item/stock_parts/computer/hard_drive))
 			victims += C
 	while(number_of_victims && length(victims))

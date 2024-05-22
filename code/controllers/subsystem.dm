@@ -273,7 +273,7 @@
 /singleton/vv_set_handler/subsystem_handler
 	handled_type = /datum/controller/subsystem
 	handled_vars = list("can_fire")
-	predicates = list(/proc/is_num_predicate)
+	predicates = list(GLOBAL_PROC_REF(is_num_predicate))
 
 /singleton/vv_set_handler/subsystem_handler/handle_set_var(datum/controller/subsystem/SS, variable, var_value, client)
 	if (var_value)

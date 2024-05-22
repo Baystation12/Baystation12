@@ -678,10 +678,10 @@ var/global/list/admin_verbs_mod = list(
 
 	switch(alert("Do you wish for [H] to be allowed to select non-whitelisted races?","Alter Mob Appearance","Yes","No","Cancel"))
 		if("Yes")
-			log_and_message_admins("has allowed [H] to change \his appearance, ignoring allow lists.")
+			log_and_message_admins("has allowed [H] to change their appearance, ignoring allow lists.")
 			H.change_appearance(APPEARANCE_COMMON | APPEARANCE_SKIP_ALLOW_LIST_CHECK)
 		if("No")
-			log_and_message_admins("has allowed [H] to change \his appearance, respecting allow lists.")
+			log_and_message_admins("has allowed [H] to change their appearance, respecting allow lists.")
 			H.change_appearance(APPEARANCE_COMMON)
 
 /client/proc/change_security_level()

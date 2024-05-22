@@ -12,7 +12,7 @@
 
 /obj/item/stock_parts/power/on_install(obj/machinery/machine)
 	..()
-	ADD_SORTED(machine.power_components, src, /proc/cmp_power_component_priority)
+	ADD_SORTED(machine.power_components, src, GLOBAL_PROC_REF(cmp_power_component_priority))
 	machine.power_change() // Makes the machine recompute its power status.
 	cached_channel = initial(machine.power_channel)
 

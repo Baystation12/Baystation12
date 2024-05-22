@@ -33,13 +33,13 @@
 		icon_state = "implantcase-0"
 	return
 
-/obj/item/implantcase/attackby(obj/item/I, mob/user)
+/obj/item/implantcase/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if (istype(I, /obj/item/pen))
 		var/t = input(user, "What would you like the label to be?", src.name, null)
 		if (user.get_active_hand() != I)
-			return
+			return TRUE
 		if((!in_range(src, usr) && loc != user))
-			return
+			return TRUE
 		t = sanitizeSafe(t, MAX_NAME_LEN)
 		if(t)
 			SetName("glass case - '[t]'")
@@ -47,9 +47,13 @@
 		else
 			SetName(initial(name))
 			desc = "A case containing an implant."
+		return TRUE
+
 	else if(istype(I, /obj/item/reagent_containers/syringe))
 		if(istype(imp,/obj/item/implant/chem))
-			imp.attackby(I,user)
+			imp.use_tool(I,user)
+			return TRUE
+
 	else if (istype(I, /obj/item/implanter))
 		var/obj/item/implanter/M = I
 		if (M.imp && !imp && !M.imp.implanted)
@@ -63,10 +67,13 @@
 		update_description()
 		update_icon()
 		M.update_icon()
+		return TRUE
+
 	else if (istype(I, /obj/item/implant) && user.unEquip(I, src))
 		to_chat(usr, SPAN_NOTICE("You slide \the [I] into \the [src]."))
 		imp = I
 		update_description()
 		update_icon()
-	else
-		return ..()
+		return TRUE
+
+	return ..()

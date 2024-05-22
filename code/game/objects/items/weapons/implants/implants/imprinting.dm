@@ -51,7 +51,7 @@
 		M.StoreMemory(msg, /singleton/memory_options/system)
 	if(brainwashing)
 		log_and_message_admins("was implanted with a brainwashing implant holding following laws: [jointext(instructions, ";")].", M)
-	addtimer(new Callback(src,.proc/activate),3000,(TIMER_UNIQUE|TIMER_OVERRIDE))
+	addtimer(new Callback(src, PROC_REF(activate)),3000,(TIMER_UNIQUE|TIMER_OVERRIDE))
 	return TRUE
 
 /obj/item/implant/imprinting/proc/get_instructions()
@@ -83,7 +83,7 @@
 	else
 		instruction = SPAN_NOTICE("You remember suddenly: \"[instruction]\"")
 	to_chat(imp_in, instruction)
-	addtimer(new Callback(src,.proc/activate),3000,(TIMER_UNIQUE|TIMER_OVERRIDE))
+	addtimer(new Callback(src, PROC_REF(activate)), 3000, (TIMER_UNIQUE|TIMER_OVERRIDE))
 
 /obj/item/implant/imprinting/removed()
 	if(brainwashing && !malfunction)

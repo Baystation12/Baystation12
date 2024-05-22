@@ -4,7 +4,7 @@
 	icon_state = "brown"
 	item_state = "brown"
 	permeability_coefficient = 0.05
-	item_flags = ITEM_FLAG_NOSLIP
+	item_flags = ITEM_FLAG_NOSLIP | ITEM_FLAG_THICKMATERIAL
 	origin_tech = list(TECH_ESOTERIC = 3)
 	var/list/clothing_choices = list()
 	siemens_coefficient = 0.8
@@ -31,7 +31,7 @@
 	item_flags = ITEM_FLAG_NOSLIP | ITEM_FLAG_WASHER_ALLOWED
 	siemens_coefficient = 0.6
 
-/obj/item/clothing/shoes/combat //Basically SWAT shoes combined with galoshes.
+/obj/item/clothing/shoes/combat
 	name = "combat boots"
 	desc = "When you REALLY want to turn up the heat."
 	icon_state = "swat"
@@ -44,7 +44,7 @@
 		bomb = ARMOR_BOMB_RESISTANT,
 		bio = ARMOR_BIO_MINOR
 		)
-	item_flags = ITEM_FLAG_NOSLIP | ITEM_FLAG_WASHER_ALLOWED
+	item_flags = ITEM_FLAG_NOSLIP | ITEM_FLAG_WASHER_ALLOWED | ITEM_FLAG_THICKMATERIAL
 	siemens_coefficient = 0.6
 
 	cold_protection = FEET

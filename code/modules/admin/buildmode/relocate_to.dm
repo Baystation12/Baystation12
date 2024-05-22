@@ -34,14 +34,14 @@
 	ClearRelocator()
 
 	to_relocate = new_relocator
-	GLOB.destroyed_event.register(to_relocate, src, /datum/build_mode/relocate_to/proc/ClearRelocator)
+	GLOB.destroyed_event.register(to_relocate, src, TYPE_PROC_REF(/datum/build_mode/relocate_to, ClearRelocator))
 	to_chat(user, SPAN_NOTICE("Will now be relocating \the [to_relocate]."))
 
 /datum/build_mode/relocate_to/proc/ClearRelocator(feedback)
 	if(!to_relocate)
 		return
 
-	GLOB.destroyed_event.unregister(to_relocate, src, /datum/build_mode/relocate_to/proc/ClearRelocator)
+	GLOB.destroyed_event.unregister(to_relocate, src, TYPE_PROC_REF(/datum/build_mode/relocate_to, ClearRelocator))
 	to_relocate = null
 	if(feedback)
 		Warn("The selected relocation object was deleted.")

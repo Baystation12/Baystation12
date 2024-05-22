@@ -168,7 +168,7 @@
 
 	if (A && yes)
 		A.last_bumped = world.time
-		invoke_async(A, /atom/proc/Bumped, src) // Avoids bad actors sleeping or unexpected side effects, as the legacy behavior was to spawn here
+		invoke_async(A, TYPE_PROC_REF(/atom, Bumped), src) // Avoids bad actors sleeping or unexpected side effects, as the legacy behavior was to spawn here
 	..()
 
 /atom/movable/proc/forceMove(atom/destination)
@@ -323,7 +323,7 @@
 //Overlays
 /atom/movable/fake_overlay
 	var/atom/master = null
-	var/follow_proc = /atom/movable/proc/move_to_loc_or_null
+	var/follow_proc = TYPE_PROC_REF(/atom/movable, move_to_loc_or_null)
 	anchored = TRUE
 	simulated = FALSE
 
@@ -339,8 +339,8 @@
 		GLOB.moved_event.register(master, src, follow_proc)
 		SetInitLoc()
 
-	GLOB.destroyed_event.register(master, src, /datum/proc/qdel_self)
-	GLOB.dir_set_event.register(master, src, /atom/proc/recursive_dir_set)
+	GLOB.destroyed_event.register(master, src, TYPE_PROC_REF(/datum, qdel_self))
+	GLOB.dir_set_event.register(master, src, TYPE_PROC_REF(/atom, recursive_dir_set))
 
 	. = ..()
 
@@ -372,9 +372,10 @@
 		return master.use_tool(tool, user, click_params)
 	return FALSE
 
-/atom/movable/fake_overlay/attackby(obj/item/I, mob/user)
+/atom/movable/fake_overlay/use_tool(obj/item/tool, mob/user, list/click_params)
 	if (master)
-		return master.attackby(I, user)
+		return master.use_tool(tool, user)
+	return ..()
 
 /atom/movable/fake_overlay/attack_hand(mob/user)
 	if (master)

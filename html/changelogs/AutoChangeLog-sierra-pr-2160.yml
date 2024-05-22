@@ -1,0 +1,4 @@
+author: Mucker
+changes:
+  - {bugfix: Fixed the nullsuit rig sprite.}
+delete-after: true

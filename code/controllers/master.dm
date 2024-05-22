@@ -84,7 +84,7 @@ var/global/datum/controller/master/Master = new
 			qdel(Master)
 		else
 			var/list/subsytem_types = subtypesof(/datum/controller/subsystem)
-			sortTim(subsytem_types, /proc/cmp_subsystem_init)
+			sortTim(subsytem_types, GLOBAL_PROC_REF(cmp_subsystem_init))
 			for(var/I in subsytem_types)
 				_subsystems += new I
 		Master = src
@@ -98,7 +98,7 @@ var/global/datum/controller/master/Master = new
 
 /datum/controller/master/Shutdown()
 	processing = FALSE
-	sortTim(subsystems, /proc/cmp_subsystem_init)
+	sortTim(subsystems, GLOBAL_PROC_REF(cmp_subsystem_init))
 	reverseRange(subsystems)
 	for(var/datum/controller/subsystem/ss in subsystems)
 		if (ss.flags & SS_NEEDS_SHUTDOWN)
@@ -188,7 +188,7 @@ var/global/datum/controller/master/Master = new
 	initializing = TRUE
 
 	// Sort subsystems by init_order, so they initialize in the correct order.
-	sortTim(subsystems, /proc/cmp_subsystem_init)
+	sortTim(subsystems, GLOBAL_PROC_REF(cmp_subsystem_init))
 
 	current_ticklimit = tick_limit_init
 	for (var/datum/controller/subsystem/SS in subsystems)
@@ -209,7 +209,7 @@ var/global/datum/controller/master/Master = new
 		SetRunLevel(RUNLEVEL_LOBBY)
 
 	// Sort subsystems by display setting for easy access.
-	sortTim(subsystems, /proc/cmp_subsystem_display)
+	sortTim(subsystems, GLOBAL_PROC_REF(cmp_subsystem_display))
 	// Set world options.
 #ifdef UNIT_TEST
 	world.sleep_offline = FALSE
@@ -289,9 +289,9 @@ var/global/datum/controller/master/Master = new
 	queue_tail = null
 	//these sort by lower priorities first to reduce the number of loops needed to add subsequent SS's to the queue
 	//(higher subsystems will be sooner in the queue, adding them later in the loop means we don't have to loop thru them next queue add)
-	sortTim(tickersubsystems, /proc/cmp_subsystem_priority)
+	sortTim(tickersubsystems, GLOBAL_PROC_REF(cmp_subsystem_priority))
 	for(var/level in runlevel_sorted_subsystems)
-		sortTim(level, /proc/cmp_subsystem_priority)
+		sortTim(level, GLOBAL_PROC_REF(cmp_subsystem_priority))
 		level += tickersubsystems
 
 	var/cached_runlevel = current_runlevel
@@ -345,14 +345,15 @@ var/global/datum/controller/master/Master = new
 			var/checking_runlevel = current_runlevel
 			if(cached_runlevel != checking_runlevel)
 				//resechedule subsystems
+				var/list/old_subsystems = current_runlevel_subsystems
 				cached_runlevel = checking_runlevel
 				current_runlevel_subsystems = runlevel_sorted_subsystems[cached_runlevel]
-				var/stagger = world.time
-				for(var/I in current_runlevel_subsystems)
-					var/datum/controller/subsystem/SS = I
-					if(SS.next_fire <= world.time)
-						stagger += world.tick_lag * rand(1, 5)
-						SS.next_fire = stagger
+				//now we'll go through all the subsystems we want to offset and give them a next_fire
+				for(var/datum/controller/subsystem/SS as anything in current_runlevel_subsystems)
+					//we only want to offset it if it's new and also behind
+					if(SS.next_fire > world.time || (SS in old_subsystems))
+						continue
+					SS.next_fire = world.time + world.tick_lag * rand(0, min(SS.wait, 2 SECONDS) / world.tick_lag)
 
 			subsystems_to_check = current_runlevel_subsystems
 		else

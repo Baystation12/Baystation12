@@ -22,7 +22,7 @@
 			return FALSE
 		. = ..(c, c.can_use())
 		if(.)
-			ADD_SORTED(cameras, c, /proc/cmp_camera_ctag_asc)
+			ADD_SORTED(cameras, c, GLOBAL_PROC_REF(cmp_camera_ctag_asc))
 	else if(isAI(c))
 		var/mob/living/silicon/AI = c
 		return ..(AI, AI.stat != DEAD)

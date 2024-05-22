@@ -15,14 +15,14 @@
 
 /datum/genetics/side_effect/proc/trigger_side_effect(mob/living/carbon/human/H)
 	if(ishuman(H))
-		addtimer(new Callback(src, .proc/do_side_effect, H), 0)
+		addtimer(new Callback(src, PROC_REF(do_side_effect), H), 0)
 
 /datum/genetics/side_effect/proc/do_side_effect(mob/living/carbon/human/H)
 	var/tp = pick(typesof(/datum/genetics/side_effect) - /datum/genetics/side_effect)
 	var/datum/genetics/side_effect/S = new tp
 
 	S.start(H)
-	addtimer(new Callback(H, /mob/proc/Weaken, rand(0, S.duration / 50)), 20)
+	addtimer(new Callback(H, TYPE_PROC_REF(/mob, Weaken), rand(0, S.duration / 50)), 20)
 	sleep(S.duration)
 	H.SetWeakened(0)
 	S.finish(H)

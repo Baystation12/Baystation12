@@ -84,7 +84,7 @@
 			affecting += AM
 			items_moved++
 	if(length(affecting))
-		addtimer(new Callback(src, .proc/post_process, affecting), 1) // slight delay to prevent infinite propagation due to map order
+		addtimer(new Callback(src, PROC_REF(post_process), affecting), 1) // slight delay to prevent infinite propagation due to map order
 
 /obj/machinery/conveyor/proc/post_process(list/affecting)
 	for(var/A in affecting)
@@ -272,12 +272,13 @@
 	var/id = "" //inherited by the belt
 	matter = list(MATERIAL_STEEL = 400, MATERIAL_PLASTIC = 200)
 
-/obj/item/conveyor_construct/attackby(obj/item/I, mob/user, params)
-	..()
+/obj/item/conveyor_construct/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I, /obj/item/conveyor_switch_construct))
 		to_chat(user, SPAN_NOTICE("You link the switch to the conveyor belt assembly."))
 		var/obj/item/conveyor_switch_construct/C = I
 		id = C.id
+		return TRUE
+	return ..()
 
 /obj/item/conveyor_construct/use_after(atom/A, mob/living/user, click_parameters)
 	if(!istype(A, /turf/simulated/floor) || istype(A, /area/shuttle) || user.incapacitated())

@@ -190,7 +190,7 @@
 		record.update_marker_icon()
 
 		var/time_delay = max((SENSOR_TIME_DELAY * get_dist_euclidian(overmap_obj, contact)),1)
-		addtimer(new Callback(record, .proc/ping), time_delay)
+		addtimer(new Callback(record, PROC_REF(ping)), time_delay)
 
 /obj/machinery/shipsensors/use_tool(obj/item/tool, mob/living/user, list/click_params)
 	if (isMultitool(tool))
@@ -201,12 +201,12 @@
 
 		if (tracker in trackers)
 			trackers -= tracker
-			GLOB.destroyed_event.unregister(tracker, src, .proc/remove_tracker)
+			GLOB.destroyed_event.unregister(tracker, src, PROC_REF(remove_tracker))
 			to_chat(user, SPAN_NOTICE("You unlink the tracker in \the [mtool]'s buffer from \the [src]"))
 			return TRUE
 
 		trackers += tracker
-		GLOB.destroyed_event.register(tracker, src, .proc/remove_tracker)
+		GLOB.destroyed_event.register(tracker, src, PROC_REF(remove_tracker))
 		to_chat(user, SPAN_NOTICE("You link the tracker in \the [mtool]'s buffer to \the [src]"))
 		return TRUE
 

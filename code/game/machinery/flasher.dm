@@ -136,7 +136,7 @@
 /singleton/public_access/public_method/flasher_flash
 	name = "flash"
 	desc = "Performs a flash, if possible."
-	call_proc = /obj/machinery/flasher/proc/flash
+	call_proc = TYPE_PROC_REF(/obj/machinery/flasher, flash)
 
 /singleton/stock_part_preset/radio/receiver/flasher
 	frequency = BUTTON_FREQ

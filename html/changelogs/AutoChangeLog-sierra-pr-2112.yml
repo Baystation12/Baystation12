@@ -1,0 +1,4 @@
+author: Sbotkin
+changes:
+  - {rscadd: Added prescription versions of the HUD aviators.}
+delete-after: true

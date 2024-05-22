@@ -107,11 +107,11 @@
 					number = max(number, C.number+1)
 			c_tag = "[A.name][number == 1 ? "" : " #[number]"]"
 		invalidateCameraCache()
-	GLOB.moved_event.register(src, src, .proc/camera_moved)
+	GLOB.moved_event.register(src, src, PROC_REF(camera_moved))
 
 
 /obj/machinery/camera/Destroy()
-	GLOB.moved_event.unregister(src, src, .proc/camera_moved)
+	GLOB.moved_event.unregister(src, src, PROC_REF(camera_moved))
 	deactivate(null, 0) //kick anyone viewing out
 	if(assembly)
 		qdel(assembly)
