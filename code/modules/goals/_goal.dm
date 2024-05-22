@@ -8,7 +8,7 @@
 
 /datum/goal/New(_owner)
 	owner = _owner
-	GLOB.destroyed_event.register(owner, src, /datum/proc/qdel_self)
+	GLOB.destroyed_event.register(owner, src, TYPE_PROC_REF(/datum, qdel_self))
 	if(istype(owner, /datum/mind))
 		var/datum/mind/mind = owner
 		LAZYADD(mind.goals, src)

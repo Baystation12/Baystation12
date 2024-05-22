@@ -24,14 +24,16 @@
 	wires = null
 	return ..()
 
-/obj/item/plastique/attackby(obj/item/I, mob/user)
+/obj/item/plastique/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(isScrewdriver(I))
 		open_panel = !open_panel
 		to_chat(user, SPAN_NOTICE("You [open_panel ? "open" : "close"] the wire panel."))
-	else if(isWirecutter(I) || isMultitool(I) || istype(I, /obj/item/device/assembly/signaler ))
+		return TRUE
+	if (isWirecutter(I) || isMultitool(I) || istype(I, /obj/item/device/assembly/signaler ))
 		wires.Interact(user)
+		return TRUE
 	else
-		..()
+		return ..()
 
 /obj/item/plastique/attack_self(mob/user as mob)
 	var/newtime = input(usr, "Please set the timer.", "Timer", 10) as num
@@ -91,7 +93,7 @@
 		target.CutOverlays(image_overlay)
 	qdel(src)
 
-/obj/item/plastique/proc/run_timer() //Basically exists so the C4 will beep when running. Better idea than putting sleeps in attackby.
+/obj/item/plastique/proc/run_timer()
 	set waitfor = 0
 	var/T = timer
 	while(T > 0)

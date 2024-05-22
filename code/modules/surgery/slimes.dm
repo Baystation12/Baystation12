@@ -142,5 +142,6 @@
 		target.icon_state = "[target.colour] baby slime dead-nocore"
 
 /singleton/surgery_step/slime/saw_core/fail_step(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
-	user.visible_message(SPAN_WARNING("[user]'s hand slips, causing \him to miss the core!"), \
+	var/datum/pronouns/pronouns = user.choose_from_pronouns()
+	user.visible_message(SPAN_WARNING("[user]'s hand slips, causing [pronouns.him] to miss the core!"), \
 	SPAN_WARNING("Your hand slips, causing you to miss the core!"))

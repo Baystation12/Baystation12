@@ -87,13 +87,13 @@ var/global/list/mob_hat_cache = list()
 	if (lock_to_current_z)
 		z_locked = get_z(src)
 
-	GLOB.moved_event.register(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
+	GLOB.moved_event.register(src, src, TYPE_PROC_REF(/mob/living/silicon/robot/drone, on_moved))
 
 /mob/living/silicon/robot/drone/Destroy()
 	if(hat)
 		hat.dropInto(loc)
 		hat = null
-	GLOB.moved_event.unregister(src, src, /mob/living/silicon/robot/drone/proc/on_moved)
+	GLOB.moved_event.unregister(src, src, TYPE_PROC_REF(/mob/living/silicon/robot/drone, on_moved))
 	. = ..()
 
 /mob/living/silicon/robot/drone/proc/on_moved(atom/movable/am, turf/old_loc, turf/new_loc)
@@ -278,7 +278,8 @@ var/global/list/mob_hat_cache = list()
 	clear_inherent_laws()
 	QDEL_NULL(laws)
 	laws = new /datum/ai_laws/syndicate_override
-	set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
+	var/datum/pronouns/pronouns = user.choose_from_pronouns()
+	set_zeroth_law("Only [user.real_name] and people [pronouns.he] designates as being such are operatives.")
 
 //DRONE LIFE/DEATH
 //For some goddamn reason robots have this hardcoded. Redefining it for our fragile friends here.

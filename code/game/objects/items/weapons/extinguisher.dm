@@ -153,10 +153,10 @@
 		var/direction = get_dir(target, src)
 
 		if(user.buckled && isobj(user.buckled))
-			addtimer(new Callback(src, .proc/propel_object, user.buckled, user, direction), 0)
+			addtimer(new Callback(src, PROC_REF(propel_object), user.buckled, user, direction), 0)
 
 		visible_message(SPAN_NOTICE("\The [user] sprays towards \the [target] with \the [src]."))
-		addtimer(new Callback(src, .proc/do_spray, target), 0)
+		addtimer(new Callback(src, PROC_REF(do_spray), target), 0)
 
 		if(!user.check_space_footing())
 			step(user, direction)

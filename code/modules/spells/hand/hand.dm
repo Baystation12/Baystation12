@@ -75,7 +75,7 @@
 /spell/hand/duration/cast(list/targets, mob/user)
 	. = ..()
 	if(.)
-		hand_timer = addtimer(new Callback(src, .proc/cancel_hand), hand_duration, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_NO_HASH_WAIT|TIMER_OVERRIDE)
+		hand_timer = addtimer(new Callback(src, PROC_REF(cancel_hand)), hand_duration, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_NO_HASH_WAIT|TIMER_OVERRIDE)
 
 /spell/hand/duration/cancel_hand()
 	deltimer(hand_timer)

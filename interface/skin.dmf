@@ -364,7 +364,7 @@ window "mapwindow"
 		saved-params = "icon-size"
 		style = ".maptext { font-family: 'Small Fonts'; font-size: 7px; -dm-text-outline: 1px black; color: white; line-height: 1.1; }"
 		on-show = ".winset\"mainwindow.mainvsplit.left=mapwindow\""
-		on-hide = ".winset\"mainwindow.mainvsplit.left=\""
+		style=".center { text-align: center; } .maptext { font-family: 'Small Fonts'; font-size: 7px; -dm-text-outline: 1px black; color: white; line-height: 1.1; } .small { font-size: 6px; } .big { font-size: 8px; } .greentext { color: #00FF00; font-size: 7px; } .redtext { color: #FF0000; font-size: 7px; } .yell { font-weight: bold; } .emote { font-size: 6px; } .italics { font-size: 6px; font-style: italic; }"
 	elem "lobbybrowser"
 		type = BROWSER
 		pos = 0,0

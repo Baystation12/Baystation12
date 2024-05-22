@@ -15,7 +15,7 @@
 	flick(anim, animation)
 	if(do_gibs) gibs(loc, dna)
 
-	addtimer(new Callback(src, .proc/check_delete, animation), 15)
+	addtimer(new Callback(src, PROC_REF(check_delete), animation), 15)
 
 /mob/proc/check_delete(atom/movable/fake_overlay/animation)
 	if(animation)	qdel(animation)
@@ -44,7 +44,7 @@
 	new remains(loc)
 
 	remove_from_dead_mob_list()
-	addtimer(new Callback(src, .proc/check_delete, animation), 15)
+	addtimer(new Callback(src, PROC_REF(check_delete), animation), 15)
 
 
 /mob/proc/death(gibbed,deathmessage="seizes up and falls limp...", show_dead_message = "You have died.")

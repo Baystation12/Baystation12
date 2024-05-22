@@ -247,7 +247,7 @@
 	visible_message(SPAN_DANGER("\The [src]'s back begins to crack and hum!"))
 	playsound(src,'sound/effects/cascade.ogg', 50, 1, -6)
 	var/delay = rand(explosion_delay_lower, explosion_delay_upper)
-	addtimer(new Callback(src, .proc/flash, delay), 0)
+	addtimer(new Callback(src, PROC_REF(flash), delay), 0)
 
 	return ..()
 
@@ -287,14 +287,14 @@
 	target.vis_contents += src
 	flick("shield_raise", src) //Animation on add / spawn
 	set_dir() //the whole dir bit is for rendering, if you dont use this just remove this and the GLOB.dir_set_event stuff
-	GLOB.dir_set_event.register(user, src, /obj/aura/mobshield/proc/update_dir)
+	GLOB.dir_set_event.register(user, src, TYPE_PROC_REF(/obj/aura/mobshield, update_dir))
 
 /obj/aura/mobshield/proc/update_dir(user, old_dir, dir)
 	set_dir(dir) //Theres ways to make vis contents inherit dir but eh
 
 /obj/aura/mobshield/Destroy()
 	if(user)
-		GLOB.dir_set_event.unregister(user, src, /obj/aura/mechshield/proc/update_dir)
+		GLOB.dir_set_event.unregister(user, src, TYPE_PROC_REF(/obj/aura/mechshield, update_dir))
 		user.vis_contents -= src
 	. = ..()
 

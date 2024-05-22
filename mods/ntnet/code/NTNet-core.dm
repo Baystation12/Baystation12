@@ -34,7 +34,7 @@ GLOBAL_LIST_INIT(NTNet_machines, list())
 
 
 /datum/terminal/proc/get_remote_ID(ID)
-	for(var/obj/machinery/R in SSmachines.machinery)
+	for(var/obj/machinery/R as anything in SSmachines.get_all_machinery())
 		if(R.NTNet_id == ID)
 			return R
 	return null

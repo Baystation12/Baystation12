@@ -13,16 +13,14 @@
 	var/scan_duration = 50
 	var/obj/scanned_object
 	var/report_num = 0
-
+	var/list/data = list("screen" = 1)
 /obj/machinery/artifact_analyser/Initialize()
 	. = ..()
-	reconnect_scanner()
+	sync_with_pad()
 
 /obj/machinery/artifact_analyser/proc/reconnect_scanner()
 	//connect to a nearby scanner pad
-	owned_scanner = locate(/obj/machinery/artifact_scanpad) in get_step(src, dir)
-	if(!owned_scanner)
-		owned_scanner = locate(/obj/machinery/artifact_scanpad) in orange(1, src)
+	sync_with_pad()
 
 /obj/machinery/artifact_analyser/DefaultTopicState()
 	return GLOB.physical_state
@@ -31,6 +29,8 @@
 	interact(user)
 	return TRUE
 
+/obj/machinery/artifact_analyser/use_tool(obj/item/I, mob/living/user, list/click_params)
+	return ..()
 /obj/machinery/artifact_analyser/interact(mob/user)
 	var/dat = "<B>Anomalous material analyser</B><BR>"
 	dat += "<HR>"
@@ -48,6 +48,7 @@
 
 	dat += "<br>"
 	dat += "<hr>"
+	dat += "<A href='?src=\ref[src];syncpads=1'>Sync with nearby pad</a><BR>"
 	dat += "<a href='?src=\ref[src];close=1'>Close</a>"
 	var/datum/browser/popup = new(user, "artanalyser", "Artifact Analyzer", 450, 500)
 	popup.set_content(dat)
@@ -120,14 +121,22 @@
 		scan_in_progress = 0
 		src.visible_message("<b>[name]</b> states, \"Scanning halted.\"")
 		. = TOPIC_REFRESH
-
+	else if(href_list["syncpads"])
+		sync_with_pad()
+		. = TOPIC_REFRESH
 	else if(href_list["close"])
 		close_browser(user, "window=artanalyser")
 		return TOPIC_HANDLED
 
 	if(. == TOPIC_REFRESH)
 		interact(user)
-
+/obj/machinery/artifact_analyser/proc/sync_with_pad()
+	for(var/obj/machinery/artifact_scanpad/scanner in range(5, src))
+		owned_scanner = scanner
+		src.visible_message("<b>[name]</b> states, \"Pad located, commencing sync.\"")
+		return
+	src.visible_message("<b>[name]</b> states, \"Scan unsuccessful, could not locate pad.\"")
+	return
 //hardcoded responses, oh well
 /obj/machinery/artifact_analyser/proc/get_scan_info(obj/scanned_obj)
 	switch(scanned_obj.type)

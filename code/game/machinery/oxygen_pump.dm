@@ -26,29 +26,29 @@
 	..()
 	tank = new spawn_type (src)
 	contained = new mask_type (src)
-	GLOB.destroyed_event.register(tank, src, .proc/fix_deleted_tank)
-	GLOB.destroyed_event.register(contained, src, .proc/fix_deleted_mask)
+	GLOB.destroyed_event.register(tank, src, PROC_REF(fix_deleted_tank))
+	GLOB.destroyed_event.register(contained, src, PROC_REF(fix_deleted_mask))
 
 /obj/machinery/oxygen_pump/Destroy()
 	if(breather)
 		detach_mask(breather)
-	GLOB.destroyed_event.unregister(tank, src, .proc/fix_deleted_tank)
-	GLOB.destroyed_event.unregister(contained, src, .proc/fix_deleted_mask)
+	GLOB.destroyed_event.unregister(tank, src, PROC_REF(fix_deleted_tank))
+	GLOB.destroyed_event.unregister(contained, src, PROC_REF(fix_deleted_mask))
 	QDEL_NULL(tank)
 	QDEL_NULL(contained)
 	return ..()
 
 /// Handler for the pump's tank being deleted, for any reason.
 /obj/machinery/oxygen_pump/proc/fix_deleted_tank(obj/item/tank/_tank)
-	GLOB.destroyed_event.unregister(_tank, src, .proc/fix_deleted_tank)
+	GLOB.destroyed_event.unregister(_tank, src, PROC_REF(fix_deleted_tank))
 	tank = new spawn_type(src)
-	GLOB.destroyed_event.register(tank, src, .proc/fix_deleted_tank)
+	GLOB.destroyed_event.register(tank, src, PROC_REF(fix_deleted_tank))
 
 /// Handler for the pump's mask being deleted, for any reason.
 /obj/machinery/oxygen_pump/proc/fix_deleted_mask(obj/item/clothing/mask/breath/_mask)
-	GLOB.destroyed_event.unregister(_mask, src, .proc/fix_deleted_mask)
+	GLOB.destroyed_event.unregister(_mask, src, PROC_REF(fix_deleted_mask))
 	contained = new spawn_type(src)
-	GLOB.destroyed_event.register(contained, src, .proc/fix_deleted_mask)
+	GLOB.destroyed_event.register(contained, src, PROC_REF(fix_deleted_mask))
 
 /obj/machinery/oxygen_pump/MouseDrop(mob/living/carbon/human/target, src_location, over_location)
 	..()
@@ -88,7 +88,7 @@
 		if(tank)
 			tank.forceMove(C)
 		breather = C
-		GLOB.destroyed_event.register(breather, src, .proc/detach_mask)
+		GLOB.destroyed_event.register(breather, src, PROC_REF(detach_mask))
 
 /obj/machinery/oxygen_pump/proc/set_internals(mob/living/carbon/C)
 	if(C && istype(C))
@@ -106,7 +106,7 @@
 		visible_message(SPAN_NOTICE("\The [contained] rapidly retracts back into \the [src]!"))
 	if(breather.internals)
 		breather.internals.icon_state = "internal0"
-	GLOB.destroyed_event.unregister(breather, src, .proc/detach_mask)
+	GLOB.destroyed_event.unregister(breather, src, PROC_REF(detach_mask))
 	breather = null
 	update_use_power(POWER_USE_IDLE)
 

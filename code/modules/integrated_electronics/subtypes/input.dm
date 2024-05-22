@@ -808,7 +808,7 @@
 	. = list()
 	. += "Current selection: [(current_console && current_console.id) || "None"]"
 	. += "Please select a teleporter to lock in on:"
-	for (var/obj/machinery/computer/teleporter/computer in SSmachines.machinery)
+	for (var/obj/machinery/computer/teleporter/computer as anything in SSmachines.get_machinery_of_type(/obj/machinery/computer/teleporter))
 		if (computer.target && computer.operable() && AreConnectedZLevels(get_z(src), get_z(computer)))
 			.["[computer.id] ([computer.active ? "Active" : "Inactive"])"] = "tport=[any2ref(computer)]"
 	.["None (Dangerous)"] = "tport=random"

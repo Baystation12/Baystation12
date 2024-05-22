@@ -10,12 +10,12 @@
 /obj/item/ore/get_material()
 	return material
 
-/obj/item/ore/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/ore/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W,/obj/item/device/core_sampler))
 		var/obj/item/device/core_sampler/C = W
 		C.sample_item(src, user)
-	else
-		return ..()
+		return TRUE
+	return ..()
 
 /obj/item/ore/New(newloc, _mat)
 	if(_mat)

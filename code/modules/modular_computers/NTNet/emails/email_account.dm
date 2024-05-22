@@ -32,7 +32,7 @@
 		fullname = _fullname
 	if(_assignment)
 		assignment = _assignment
-	ADD_SORTED(ntnet_global.email_accounts, src, /proc/cmp_emails_asc)
+	ADD_SORTED(ntnet_global.email_accounts, src, GLOBAL_PROC_REF(cmp_emails_asc))
 	..()
 
 /datum/computer_file/data/email_account/Destroy()

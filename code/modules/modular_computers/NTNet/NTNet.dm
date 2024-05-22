@@ -42,7 +42,7 @@ var/global/datum/ntnet/ntnet_global = new()
 /datum/ntnet/New()
 	if(ntnet_global && (ntnet_global != src))
 		ntnet_global = src // There can be only one.
-	for(var/obj/machinery/ntnet_relay/R in SSmachines.machinery)
+	for(var/obj/machinery/ntnet_relay/R as anything in SSmachines.get_machinery_of_type(/obj/machinery/ntnet_relay))
 		relays += R
 	build_software_lists()
 	build_emails_list()
@@ -143,10 +143,10 @@ var/global/datum/ntnet/ntnet_global = new()
 			if(!category_list)
 				category_list = list()
 				available_software_by_category[prog.category] = category_list
-			ADD_SORTED(available_station_software, prog, /proc/cmp_program)
-			ADD_SORTED(category_list, prog, /proc/cmp_program)
+			ADD_SORTED(available_station_software, prog, GLOBAL_PROC_REF(cmp_program))
+			ADD_SORTED(category_list, prog, GLOBAL_PROC_REF(cmp_program))
 		if(prog.available_on_syndinet)
-			ADD_SORTED(available_antag_software, prog, /proc/cmp_program)
+			ADD_SORTED(available_antag_software, prog, GLOBAL_PROC_REF(cmp_program))
 
 /// Generates service email list.
 /datum/ntnet/proc/build_emails_list()

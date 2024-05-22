@@ -85,11 +85,9 @@
 	icon_state = "campbell-arm-right"
 
 
-/* The icon for this needs work.
-/datum/sprite_accessory/marking/head/tiger
+/datum/sprite_accessory/marking/tattoo/head/tiger
 	name = "Tattoo (Tiger Stripes, Head)"
 	icon_state = "tiger-head"
-*/
 
 
 /datum/sprite_accessory/marking/tattoo/chest/tiger

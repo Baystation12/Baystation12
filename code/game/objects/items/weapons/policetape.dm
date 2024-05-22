@@ -332,7 +332,9 @@ var/global/list/tape_roll_applications = list()
 			crumple()
 	return ..(mover)
 
-/obj/item/tape/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/tape/use_tool(obj/item/item, mob/living/user, list/click_params)
+	if (user.a_intent == I_HELP)
+		return ..()
 	breaktape(user)
 
 /obj/item/tape/attack_hand(mob/user as mob)

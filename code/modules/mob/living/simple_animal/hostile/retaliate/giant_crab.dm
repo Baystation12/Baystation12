@@ -111,7 +111,7 @@
 				return
 
 		if(!C.victim && C.can_special_attack(H))
-			GLOB.destroyed_event.register(C.victim, C, /mob/living/simple_animal/hostile/retaliate/giant_crab/proc/release_grab)
+			GLOB.destroyed_event.register(C.victim, C, TYPE_PROC_REF(/mob/living/simple_animal/hostile/retaliate/giant_crab, release_grab))
 			C.victim = H
 			H.Weaken(C.grab_duration)
 			H.Stun(C.grab_duration)

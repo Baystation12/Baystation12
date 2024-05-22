@@ -33,14 +33,14 @@
 	ClearThrowable()
 
 	to_throw = new_throwable
-	GLOB.destroyed_event.register(to_throw, src, /datum/build_mode/throw_at/proc/ClearThrowable)
+	GLOB.destroyed_event.register(to_throw, src, TYPE_PROC_REF(/datum/build_mode/throw_at, ClearThrowable))
 	to_chat(user, SPAN_NOTICE("Will now be throwing \the [to_throw]."))
 
 /datum/build_mode/throw_at/proc/ClearThrowable(feedback)
 	if(!to_throw)
 		return
 
-	GLOB.destroyed_event.unregister(to_throw, src, /datum/build_mode/throw_at/proc/ClearThrowable)
+	GLOB.destroyed_event.unregister(to_throw, src, TYPE_PROC_REF(/datum/build_mode/throw_at, ClearThrowable))
 	to_throw = null
 	if(feedback)
 		Warn("The selected throwing object was deleted.")

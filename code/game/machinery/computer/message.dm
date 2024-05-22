@@ -303,14 +303,16 @@
 	name = "Monitor Decryption Key"
 	var/obj/machinery/message_server/server = null
 
-/obj/item/paper/monitorkey/New()
+/obj/item/paper/monitorkey/Initialize()
 	..()
-	spawn(10)
-		if(message_servers)
-			for(var/obj/machinery/message_server/server in message_servers)
-				if(!isnull(server))
-					if(!isnull(server.decryptkey))
-						info = "<center><h2>Daily Key Reset</h2></center><br>The new message monitor key is '[server.decryptkey]'.<br>This key is only intended for personnel granted access to the messaging server. Keep it safe.<br>If necessary, change the password to a more secure one."
-						info_links = info
-						icon_state = "paper_words"
-						break
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/item/paper/monitorkey/LateInitialize(mapload)
+	if(message_servers)
+		for(var/obj/machinery/message_server/server in message_servers)
+			if(!isnull(server))
+				if(!isnull(server.decryptkey))
+					info = "<center><h2>Daily Key Reset</h2></center><br>The new message monitor key is '[server.decryptkey]'.<br>This key is only intended for personnel granted access to the messaging server. Keep it safe.<br>If necessary, change the password to a more secure one."
+					info_links = info
+					icon_state = "paper_words"
+					break

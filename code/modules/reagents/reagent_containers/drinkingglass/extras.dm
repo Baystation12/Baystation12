@@ -1,28 +1,36 @@
-/obj/item/reagent_containers/food/drinks/glass2/attackby(obj/item/I as obj, mob/user as mob)
-	if(length(extras) >= 2) return ..() // max 2 extras, one on each side of the drink
+/obj/item/reagent_containers/food/drinks/glass2/use_tool(obj/item/I, mob/living/user, list/click_params)
+	if(length(extras) >= 2)
+		return ..() // max 2 extras, one on each side of the drink
 
 	if(istype(I, /obj/item/glass_extra))
 		var/obj/item/glass_extra/GE = I
 		if(can_add_extra(GE))
 			extras += GE
 			if(!user.unEquip(GE, src))
-				return
+				FEEDBACK_UNEQUIP_FAILURE(user, GE)
+				return TRUE
 			to_chat(user, SPAN_NOTICE("You add \the [GE] to \the [src]."))
 			update_icon()
+			return TRUE
 		else
 			to_chat(user, SPAN_WARNING("There's no space to put \the [GE] on \the [src]!"))
+			return TRUE
+
 	else if(istype(I, /obj/item/reagent_containers/food/snacks/fruit_slice))
 		if(!rim_pos)
 			to_chat(user, SPAN_WARNING("There's no space to put \the [I] on \the [src]!"))
-			return
+			return TRUE
 		var/obj/item/reagent_containers/food/snacks/fruit_slice/FS = I
 		extras += FS
 		if(!user.unEquip(FS, src))
-			return
+			FEEDBACK_UNEQUIP_FAILURE(user, FS)
+			return TRUE
 		FS.pixel_x = 0 // Reset its pixel offsets so the icons work!
 		FS.pixel_y = 0
 		to_chat(user, SPAN_NOTICE("You add \the [FS] to \the [src]."))
 		update_icon()
+		return TRUE
+
 	else
 		return ..()
 

@@ -123,7 +123,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	..()
 	files = new
 	if(!id)
-		for(var/obj/machinery/r_n_d/server/centcom/S in SSmachines.machinery)
+		for(var/obj/machinery/r_n_d/server/centcom/S as anything in SSmachines.get_machinery_of_type(/obj/machinery/r_n_d/server/centcom))
 			S.update_connections()
 			break
 
@@ -288,7 +288,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			. = TOPIC_HANDLED
 			spawn(30)
 				if(src)
-					for(var/obj/machinery/r_n_d/server/S in SSmachines.machinery)
+					for(var/obj/machinery/r_n_d/server/S as anything in SSmachines.get_machinery_of_type(/obj/machinery/r_n_d/server))
 						var/server_processed = 0
 						if((id in S.id_with_upload) || istype(S, /obj/machinery/r_n_d/server/centcom))
 							for(var/datum/tech/T in files.known_tech)
@@ -479,7 +479,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	if (!quick_deconstruct)
 		screen = 0.1
 	linked_destroy.icon_state = "d_analyzer_process"
-	addtimer(new Callback(src, .proc/finish_deconstruct, W), 24)
+	addtimer(new Callback(src, PROC_REF(finish_deconstruct), W), 24)
 
 /obj/machinery/computer/rdconsole/proc/finish_deconstruct(weakref/W)
 	CHECK_DESTROY
@@ -730,6 +730,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(2.0)
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A><HR>"
 			dat += "NO DESTRUCTIVE ANALYZER LINKED TO CONSOLE<BR><BR>"
+			dat += "<A href='?src=\ref[src];find_device=1'>Re-sync with Nearby Devices</A><HR>"
 
 		if(2.1)
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A><HR>"
@@ -758,6 +759,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(3.0)
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A><HR>"
 			dat += "NO PROTOLATHE LINKED TO CONSOLE<BR><BR>"
+			dat += "<A href='?src=\ref[src];find_device=1'>Re-sync with Nearby Devices</A><HR>"
 
 		if(3.1)
 			CHECK_LATHE
@@ -869,6 +871,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(4.0)
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A><HR>"
 			dat += "NO CIRCUIT IMPRINTER LINKED TO CONSOLE<BR><BR>"
+			dat += "<A href='?src=\ref[src];find_device=1'>Re-sync with Nearby Devices</A><HR>"
 
 		if(4.1)
 			CHECK_IMPRINTER

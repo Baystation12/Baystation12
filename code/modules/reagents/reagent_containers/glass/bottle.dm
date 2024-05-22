@@ -263,7 +263,7 @@
 /obj/item/reagent_containers/glass/bottle/adminordrazine
 	name = "Adminordrazine Bottle"
 	desc = "A small bottle. Contains the liquid essence of the gods."
-	icon = 'icons/obj/food/drinks.dmi'
+	icon = 'icons/obj/food/drinks/bottles.dmi'
 	icon_state = "holyflask"
 
 

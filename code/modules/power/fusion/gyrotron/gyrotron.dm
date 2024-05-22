@@ -42,10 +42,8 @@
 /obj/machinery/power/emitter/gyrotron/get_burst_delay()
 	return rate * 10
 
-/obj/machinery/power/emitter/gyrotron/get_emitter_beam()
-	var/obj/item/projectile/beam/emitter/E = ..()
-	E.damage = mega_energy * 50
-	return E
+/obj/machinery/power/emitter/gyrotron/get_emitter_damage()
+	return mega_energy * 50
 
 /obj/machinery/power/emitter/gyrotron/on_update_icon()
 	ClearOverlays()

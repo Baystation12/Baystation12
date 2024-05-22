@@ -5,7 +5,7 @@ MRE Stuff
 /obj/item/storage/mre
 	name = "MRE, Menu 1"
 	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package."
-	icon = 'icons/obj/food/food.dmi'
+	icon = 'icons/obj/food/mre.dmi'
 	icon_state = "mre"
 	storage_slots = 7
 	max_w_class = ITEM_SIZE_SMALL
@@ -183,7 +183,7 @@ MRE Stuff
 /obj/item/storage/mrebag
 	name = "main course"
 	desc = "A vacuum-sealed bag containing the MRE's main course. Self-heats when opened."
-	icon = 'icons/obj/food/food.dmi'
+	icon = 'icons/obj/food/mre.dmi'
 	icon_state = "pouch_medium"
 	storage_slots = 1
 	w_class = ITEM_SIZE_SMALL

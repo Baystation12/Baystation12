@@ -299,7 +299,7 @@
 	matter = list(MATERIAL_WOOD = 280)
 	volume = 200
 
-/obj/item/reagent_containers/glass/bucket/attackby(obj/D, mob/user as mob)
+/obj/item/reagent_containers/glass/bucket/use_tool(obj/item/D, mob/living/user, list/click_params)
 	if(istype(D, /obj/item/mop))
 		if(reagents.total_volume < 1)
 			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
@@ -307,7 +307,7 @@
 			reagents.trans_to_obj(D, 5)
 			to_chat(user, SPAN_NOTICE("You wet \the [D] in \the [src]."))
 			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
-		return
+		return TRUE
 	else
 		return ..()
 

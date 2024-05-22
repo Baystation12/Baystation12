@@ -29,10 +29,11 @@
 	if(.)
 		sleeper.ui_interact(user)
 
-/obj/item/mech_equipment/sleeper/attackby(obj/item/I, mob/user)
+/obj/item/mech_equipment/sleeper/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I, /obj/item/reagent_containers/glass))
 		sleeper.use_tool(I, user)
-	else return ..()
+		return TRUE
+	return ..()
 
 /obj/item/mech_equipment/sleeper/afterattack(atom/target, mob/living/user, inrange, params)
 	. = ..()
@@ -124,7 +125,7 @@
 	if (mode == MEDIGEL_SALVE)
 		if (istype(target, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = target
-			var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
+			var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel ? user.zone_sel.selecting : ran_zone())
 
 			if(affecting.is_bandaged() && affecting.is_disinfected() && affecting.is_salved())
 				to_chat(user, SPAN_WARNING("The wounds on \the [H]'s [affecting.name] have already been treated."))

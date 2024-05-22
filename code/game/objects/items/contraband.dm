@@ -28,6 +28,7 @@
 		list(/datum/reagent/drugs/mindbreaker = 10, /datum/reagent/drugs/hextro = 20) = 3,
 		list(/datum/reagent/toxin/carpotoxin = 15)                             = 2,
 		list(/datum/reagent/impedrezene = 15)                                  = 2,
+		list(/datum/reagent/toxin/amatoxin = 15)							   = 2,
 		list(/datum/reagent/toxin/zombiepowder = 10)                           = 1)
 
 /obj/item/reagent_containers/glass/beaker/vial/random/New()
@@ -75,7 +76,7 @@
 
 // Proc to shove them up your nose
 
-/obj/item/reagent_containers/powder/attackby(obj/item/W, mob/living/user)
+/obj/item/reagent_containers/powder/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/glass_extra/straw) || istype(W, /obj/item/paper/cig) || istype(W, /obj/item/spacecash))
 		if(!user.check_has_mouth()) // We dont want dionae or adherents doing lines of cocaine. Probably.
 			to_chat(SPAN_WARNING("Without a nose, you seem unable to snort from \the [src]."))

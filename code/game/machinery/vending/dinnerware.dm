@@ -32,7 +32,7 @@
 		/obj/item/reagent_containers/food/drinks/glass2/carafe = 2,
 		/obj/item/reagent_containers/food/drinks/glass2/square = 8,
 		/obj/item/clothing/suit/chef/classic = 2,
-		/obj/item/storage/lunchbox = 3,
+		/obj/item/storage/lunchbox/rainbow = 3,
 		/obj/item/storage/lunchbox/heart = 3,
 		/obj/item/storage/lunchbox/cat = 3,
 		/obj/item/storage/lunchbox/nt = 3,
