@@ -192,7 +192,7 @@
 			close()
 
 	if(needs_to_close)
-		addtimer(new Callback(src, .proc/attempt_autoclose), 10 SECONDS) //Just in case a fire alarm is turned off while the firedoor is going through an autoclose cycle
+		addtimer(new Callback(src, PROC_REF(attempt_autoclose)), 10 SECONDS) //Just in case a fire alarm is turned off while the firedoor is going through an autoclose cycle
 
 /obj/machinery/door/firedoor/use_tool(obj/item/C, mob/living/user, list/click_params)
 	if(operating)

@@ -129,7 +129,7 @@
 		dormant = FALSE
 
 	if(dormant)
-		GLOB.moved_event.register(src, src, /obj/spider/spiderling/proc/disturbed)
+		GLOB.moved_event.register(src, src, TYPE_PROC_REF(/obj/spider/spiderling, disturbed))
 	else
 		START_PROCESSING(SSobj, src)
 
@@ -147,7 +147,7 @@
 
 /obj/spider/spiderling/Destroy()
 	if(dormant)
-		GLOB.moved_event.unregister(src, src, /obj/spider/spiderling/proc/disturbed)
+		GLOB.moved_event.unregister(src, src, TYPE_PROC_REF(/obj/spider/spiderling, disturbed))
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
@@ -167,7 +167,7 @@
 		return
 	dormant = FALSE
 
-	GLOB.moved_event.unregister(src, src, /obj/spider/spiderling/proc/disturbed)
+	GLOB.moved_event.unregister(src, src, TYPE_PROC_REF(/obj/spider/spiderling, disturbed))
 	START_PROCESSING(SSobj, src)
 
 /obj/spider/spiderling/Bump(atom/user)
@@ -193,7 +193,7 @@
 	if(prob(50))
 		audible_message(SPAN_NOTICE("You hear something squeezing through the ventilation ducts."))
 	forceMove(exit_vent)
-	addtimer(new Callback(src, .proc/end_vent_moving, exit_vent), travel_time)
+	addtimer(new Callback(src, PROC_REF(end_vent_moving), exit_vent), travel_time)
 
 /obj/spider/spiderling/proc/end_vent_moving(obj/machinery/atmospherics/unary/vent_pump/exit_vent)
 	if(check_vent(exit_vent))
@@ -227,7 +227,7 @@
 
 				forceMove(entry_vent)
 				var/travel_time = round(get_dist(loc, exit_vent.loc) / 2)
-				addtimer(new Callback(src, .proc/start_vent_moving, exit_vent, travel_time), travel_time + rand(20,60))
+				addtimer(new Callback(src, PROC_REF(start_vent_moving), exit_vent, travel_time), travel_time + rand(20,60))
 				travelling_in_vent = TRUE
 				return
 			else

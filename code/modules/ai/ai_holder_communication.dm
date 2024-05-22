@@ -134,7 +134,7 @@
 
 // This is to make responses feel a bit more natural and not instant.
 /datum/ai_holder/proc/delayed_say(message, mob/speak_to)
-	addtimer(new Callback(src, .proc/do_delayed_say, message, speak_to), rand(1 SECOND, 2 SECONDS))
+	addtimer(new Callback(src, PROC_REF(do_delayed_say), message, speak_to), rand(1 SECOND, 2 SECONDS))
 
 /datum/ai_holder/proc/do_delayed_say(message, mob/speak_to)
 	if (!src || !holder || !can_act())  // We might've died/got deleted/etc in the meantime.

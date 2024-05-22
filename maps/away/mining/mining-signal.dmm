@@ -403,6 +403,7 @@
 /obj/structure/noticeboard/anomaly{
 	pixel_y = 32
 	},
+/obj/item/storage/pill_bottle/tacks,
 /obj/floor_decal/corner/purple{
 	dir = 5
 	},

@@ -135,8 +135,9 @@
 /obj/item/material/kitchen/rollingpin/use_before(mob/living/target, mob/living/user)
 	. = FALSE
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50) && user.unEquip(src))
+		var/datum/pronouns/pronouns = user.choose_from_pronouns()
 		user.visible_message(
-			SPAN_WARNING("\The [user] manages to hit \himself on the head with \the [src]!"),
+			SPAN_WARNING("\The [user] manages to hit [pronouns.self] on the head with \the [src]!"),
 			SPAN_WARNING("\The [src] slips out of your hand and hits your head!"),
 			SPAN_WARNING("Bonk!")
 		)

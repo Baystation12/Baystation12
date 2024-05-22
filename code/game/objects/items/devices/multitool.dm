@@ -47,7 +47,7 @@
 			unregister_buffer(buffer_object)
 			buffer_object = buffer
 			if(buffer_object)
-				GLOB.destroyed_event.register(buffer_object, src, /obj/item/device/multitool/proc/unregister_buffer)
+				GLOB.destroyed_event.register(buffer_object, src, TYPE_PROC_REF(/obj/item/device/multitool, unregister_buffer))
 
 /obj/item/device/multitool/proc/unregister_buffer(atom/buffer_to_unregister)
 	// Only remove the buffered object, don't reset the name

@@ -109,7 +109,7 @@
 // Never access this proc directly!!!!
 // This will update the chunk and all the surrounding chunks.
 /datum/visualnet/proc/major_chunk_change(atom/source)
-	for_all_chunks_in_range(source, /datum/chunk/proc/visibility_changed, list())
+	for_all_chunks_in_range(source, TYPE_PROC_REF(/datum/chunk, visibility_changed), list())
 
 /datum/visualnet/proc/add_source(atom/source, update_visibility = TRUE, opacity_check = FALSE)
 	if(!(source && is_type_in_list(source, valid_source_types)))
@@ -118,9 +118,9 @@
 	if(source in sources)
 		return FALSE
 	sources += source
-	GLOB.moved_event.register(source, src, /datum/visualnet/proc/source_moved)
-	GLOB.destroyed_event.register(source, src, /datum/visualnet/proc/remove_source)
-	for_all_chunks_in_range(source, /datum/chunk/proc/add_source, list(source))
+	GLOB.moved_event.register(source, src, TYPE_PROC_REF(/datum/visualnet, source_moved))
+	GLOB.destroyed_event.register(source, src, TYPE_PROC_REF(/datum/visualnet, remove_source))
+	for_all_chunks_in_range(source, TYPE_PROC_REF(/datum/chunk, add_source), list(source))
 	if(update_visibility)
 		update_visibility(source, opacity_check)
 	return TRUE
@@ -129,9 +129,9 @@
 	if(!sources.Remove(source))
 		return FALSE
 
-	GLOB.moved_event.unregister(source, src, /datum/visualnet/proc/source_moved)
-	GLOB.destroyed_event.unregister(source, src, /datum/visualnet/proc/remove_source)
-	for_all_chunks_in_range(source, /datum/chunk/proc/remove_source, list(source))
+	GLOB.moved_event.unregister(source, src, TYPE_PROC_REF(/datum/visualnet, source_moved))
+	GLOB.destroyed_event.unregister(source, src, TYPE_PROC_REF(/datum/visualnet, remove_source))
+	for_all_chunks_in_range(source, TYPE_PROC_REF(/datum/chunk, remove_source), list(source))
 	if(update_visibility)
 		update_visibility(source, opacity_check)
 	return TRUE
@@ -146,9 +146,9 @@
 	// A more proper way would be to figure out which chunks have gone out of range, and which have come into range
 	//  and only remove/add to those.
 	if(old_turf)
-		for_all_chunks_in_range(source, /datum/chunk/proc/remove_source, list(source), old_turf)
+		for_all_chunks_in_range(source, TYPE_PROC_REF(/datum/chunk, remove_source), list(source), old_turf)
 	if(new_turf)
-		for_all_chunks_in_range(source, /datum/chunk/proc/add_source, list(source), new_turf)
+		for_all_chunks_in_range(source, TYPE_PROC_REF(/datum/chunk, add_source), list(source), new_turf)
 
 /datum/visualnet/proc/for_all_chunks_in_range(atom/source, proc_call, list/proc_args, turf/T)
 	T = T ? T : get_turf(source)

@@ -90,7 +90,7 @@
 
 /obj/gateway/active/New()
 	..()
-	addtimer(new Callback(src, .proc/create_and_delete), rand(30,60) SECONDS)
+	addtimer(new Callback(src, PROC_REF(create_and_delete)), rand(30,60) SECONDS)
 
 
 /obj/gateway/active/proc/create_and_delete()

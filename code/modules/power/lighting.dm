@@ -400,7 +400,7 @@
 	var/obj/item/light/L = light_type
 	return initial(L.name)
 
-/// Attempts to insert a given light bulb. Called by `attackby()`.
+/// Attempts to insert a given light bulb. Called by `use_tool()`.
 /obj/machinery/light/proc/insert_bulb(obj/item/light/L)
 	L.forceMove(src)
 	lightbulb = L
@@ -554,10 +554,11 @@
 			to_chat(user, SPAN_NOTICE("You telekinetically remove the [get_fitting_name()]."))
 		else if(user.a_intent != I_HELP)
 			var/obj/item/organ/external/hand = H.organs_by_name[user.hand ? BP_L_HAND : BP_R_HAND]
+			var/datum/pronouns/pronouns = H.choose_from_pronouns()
 			if(hand && hand.is_usable() && !hand.can_feel_pain())
 				user.apply_damage(3, DAMAGE_BURN, user.hand ? BP_L_HAND : BP_R_HAND, used_weapon = src)
 				user.visible_message(
-					SPAN_WARNING("\The [user]'s [hand] burns and sizzles as \he touches the hot [get_fitting_name()]."),
+					SPAN_WARNING("\The [user]'s [hand] burns and sizzles as [pronouns.he] touches the hot [get_fitting_name()]."),
 					SPAN_WARNING("Your [hand.name] burns and sizzles as you remove the hot [get_fitting_name()].")
 				)
 		else
@@ -822,7 +823,7 @@
 	update_icon()
 
 // if a syringe, can inject phoron to make it explode
-/obj/item/light/attackby(obj/item/I, mob/user)
+/obj/item/light/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I, /obj/item/reagent_containers/syringe) && status == LIGHT_OK)
 		var/obj/item/reagent_containers/syringe/S = I
 
@@ -833,10 +834,11 @@
 				to_chat(user, SPAN_WARNING("You inject the solution into \the [src]."))
 				if (reagents.get_reagent_amount(/datum/reagent/toxin/phoron) >= LIGHT_PHORON_EXPLODE_THRESHOLD)
 					log_and_message_admins("injected a light with phoron, rigging it to explode.", user)
-				return
+				return TRUE
 			else
 				to_chat(user, SPAN_WARNING("\The [src] is already filled with fluid!"))
-	. = ..()
+				return TRUE
+	return ..()
 
 // shatter light, unless it was an attempt to put it in a light socket
 // now only shatter if the intent was harm
@@ -881,7 +883,7 @@
 			log_and_message_admins("Rigged light explosion, last touched by [fingerprintslast]")
 			var/turf/T = get_turf(loc)
 			set_status(LIGHT_BROKEN)
-			addtimer(new Callback(GLOBAL_PROC, /proc/explosion, T, 3, EX_ACT_LIGHT), 0.5 SECONDS)
+			addtimer(new Callback(GLOBAL_PROC, GLOBAL_PROC_REF(explosion), T, 3, EX_ACT_LIGHT), 0.5 SECONDS)
 		else
 			visible_message(SPAN_WARNING("\The [src] short-circuits as something burns out its filament!"))
 			set_status(LIGHT_BURNED)

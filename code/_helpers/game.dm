@@ -581,6 +581,27 @@
 		viewY = totalviewrange
 	else
 		var/list/viewrangelist = splittext(view,"x")
+		if(length(viewrangelist) != 2)
+			stack_trace("For some reason, client view is not represented as standard values or is null: [view]")
+			viewX = 19
+			viewY = 15
+
 		viewX = text2num(viewrangelist[1])
 		viewY = text2num(viewrangelist[2])
 	return list(viewX, viewY)
+
+/proc/get_view_size_x(view)
+	var/list/view_size = getviewsize(view)
+	return view_size[1]
+
+/proc/get_view_size_y(view)
+	var/list/view_size = getviewsize(view)
+	return view_size[2]
+
+/proc/get_lesser_view_size_component(view)
+	var/list/view_size = getviewsize(view)
+	return min(view_size[1], view_size[2])
+
+/proc/get_greater_view_size_component(view)
+	var/list/view_size = getviewsize(view)
+	return max(view_size[1], view_size[2])

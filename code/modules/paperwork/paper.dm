@@ -360,7 +360,7 @@
 		if(istype(P, /obj/item/flame/lighter/zippo))
 			class = "rose"
 
-		user.visible_message(SPAN_CLASS("[class]", "[user] holds \the [P] up to \the [src], it looks like \he's trying to burn it!"), \
+		user.visible_message(SPAN_CLASS("[class]", "[user] holds \the [P] up to \the [src], trying to burn it!"), \
 		SPAN_CLASS("[class]", "You hold \the [P] up to \the [src], burning it slowly."))
 
 		spawn(20)
@@ -452,8 +452,7 @@
 		update_icon()
 
 
-/obj/item/paper/attackby(obj/item/P as obj, mob/user as mob)
-	..()
+/obj/item/paper/use_tool(obj/item/P, mob/living/user, list/click_params)
 	var/clown = 0
 	if(user.mind && (user.mind.assigned_role == "Clown"))
 		clown = 1
@@ -461,20 +460,21 @@
 	if(istype(P, /obj/item/tape_roll))
 		var/obj/item/tape_roll/tape = P
 		tape.stick(src, user)
-		return
+		return TRUE
 
 	if(istype(P, /obj/item/paper) || istype(P, /obj/item/photo))
 		if(!can_bundle())
-			return
+			USE_FEEDBACK_FAILURE("You cannot bundle these together!")
+			return TRUE
 		var/obj/item/paper/other = P
 		if(istype(other) && !other.can_bundle())
-			return
+			USE_FEEDBACK_FAILURE("You cannot bundle these together!")
+			return TRUE
 		if (istype(P, /obj/item/paper/carbon))
 			var/obj/item/paper/carbon/C = P
 			if (!C.iscopy && !C.copied)
 				to_chat(user, SPAN_NOTICE("Take off the carbon copy first."))
-				add_fingerprint(user)
-				return
+				return TRUE
 		var/obj/item/paper_bundle/B = new(src.loc)
 		if (name != "paper")
 			B.SetName(name)
@@ -482,7 +482,7 @@
 			B.SetName(P.name)
 
 		if(!user.unEquip(P, B) || !user.unEquip(src, B))
-			return
+			return TRUE
 		user.put_in_hands(B)
 
 		to_chat(user, SPAN_NOTICE("You clip the [P.name] to [(src.name == "paper") ? "the paper" : src.name]."))
@@ -490,22 +490,23 @@
 		B.pages.Add(src)
 		B.pages.Add(P)
 		B.update_icon()
+		return TRUE
 
-	else if(istype(P, /obj/item/pen))
+	if (istype(P, /obj/item/pen))
 		if(icon_state == "scrap")
 			to_chat(usr, SPAN_WARNING("\The [src] is too crumpled to write on."))
-			return
+			return TRUE
 
 		var/obj/item/pen/robopen/RP = P
 		if ( istype(RP) && RP.mode == 2 )
 			RP.RenamePaper(user,src)
 		else
 			show_content(user, editable = TRUE)
-		return
+		return TRUE
 
-	else if(istype(P, /obj/item/stamp) || istype(P, /obj/item/clothing/ring/seal))
+	if (istype(P, /obj/item/stamp) || istype(P, /obj/item/clothing/ring/seal))
 		if((!in_range(src, usr) && loc != user && !( istype(loc, /obj/item/material/clipboard) ) && loc.loc != user && user.get_active_hand() != P))
-			return
+			return ..()
 
 		stamps += (stamps=="" ? "<HR>" : "<BR>") + "<i>This paper has been stamped with the [P.name].</i>"
 
@@ -526,7 +527,7 @@
 		if(istype(P, /obj/item/stamp/clown))
 			if(!clown)
 				to_chat(user, SPAN_NOTICE("You are totally unable to use the stamp. HONK!"))
-				return
+				return TRUE
 
 		if(!ico)
 			ico = new
@@ -540,18 +541,22 @@
 
 		playsound(src, 'sound/effects/stamp.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("You stamp the paper with your [P.name]."))
+		return TRUE
 
 	else if(istype(P, /obj/item/flame))
 		burnpaper(P, user)
+		return TRUE
 
-	else if(istype(P, /obj/item/paper_bundle))
+	if (istype(P, /obj/item/paper_bundle))
 		if(!can_bundle())
-			return
+			USE_FEEDBACK_FAILURE("You cannot bundle these together!")
+			return TRUE
 		var/obj/item/paper_bundle/attacking_bundle = P
 		attacking_bundle.insert_sheet_at(user, (length(attacking_bundle.pages))+1, src)
 		attacking_bundle.update_icon()
+		return TRUE
+	return ..()
 
-	add_fingerprint(user)
 
 /obj/item/paper/proc/can_bundle()
 	return TRUE

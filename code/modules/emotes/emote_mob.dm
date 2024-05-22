@@ -138,9 +138,9 @@
 	//do not show NPC animal emotes to ghosts, it turns into hellscape
 	var/check_ghosts = client ? /datum/client_preference/ghost_sight : null
 	if(m_type == VISIBLE_MESSAGE)
-		visible_message(message, checkghosts = check_ghosts)
+		visible_message(message, checkghosts = check_ghosts, runemessage = input)
 	else
-		audible_message(message, checkghosts = check_ghosts)
+		audible_message(message, checkghosts = check_ghosts, runemessage = input)
 
 // Specific mob type exceptions below.
 /mob/living/silicon/ai/emote(act, type, message)

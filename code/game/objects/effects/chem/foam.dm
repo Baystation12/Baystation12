@@ -23,7 +23,7 @@
 	spawn(3 + metal * 3)
 		Process()
 		checkReagents()
-	addtimer(new Callback(src, .proc/remove_foam), 12 SECONDS)
+	addtimer(new Callback(src, PROC_REF(remove_foam)), 12 SECONDS)
 
 /obj/effect/foam/proc/remove_foam()
 	STOP_PROCESSING(SSobj, src)

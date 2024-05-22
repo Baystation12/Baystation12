@@ -1,3 +1,9 @@
+/obj/item/gun/projectile/shotgun
+	abstract_type = /obj/item/gun/projectile/shotgun
+	name = "master shotgun object"
+	desc = "You should not see this."
+	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
+
 /obj/item/gun/projectile/shotgun/pump
 	name = "shotgun"
 	desc = "A mass-produced shotgun by Mars Security Industries. The rugged ZX-870 'Bulldog' is common throughout most frontier worlds. Useful for sweeping alleys or ship corridors."
@@ -171,56 +177,6 @@
 	wielded_item_state = "rshotgun-wielded"
 	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
 
-/obj/item/gun/projectile/shotgun/pump/sawn/attack_self(mob/living/user)
-	if(world.time >= recentpump + 10)
-		if(!is_held_twohanded(user))
-			var/fail_chance = user.skill_fail_chance(SKILL_WEAPONS, 90, SKILL_EXPERIENCED, 0.25)
-			var/drop_chance = user.skill_fail_chance(SKILL_WEAPONS, 50, SKILL_EXPERIENCED, 0.5)
-
-			if (!fail_chance)
-				user.visible_message(
-					SPAN_NOTICE("\The [user] racks \the [src] with one hand."),
-					SPAN_NOTICE("You manage to rack \the [src] with one hand.")
-				)
-				pump(user)
-			else if (prob(fail_chance))
-				if (prob(drop_chance) && user.unEquip(src, user.loc))
-					user.visible_message(
-						SPAN_WARNING("\The [user] attempts to rack \the [src], but it falls out of their hands!"),
-						SPAN_WARNING("You attempt to rack \the [src], but it falls out of your hands!")
-					)
-				else
-					user.visible_message(
-						SPAN_WARNING("\The [user] fails to rack \the [src]!"),
-						SPAN_WARNING("You fail to rack \the [src]!")
-					)
-			else
-				user.visible_message(
-					SPAN_NOTICE("\The [user] manages to akwardly rack \the [src] with one hand."),
-					SPAN_NOTICE("You manage to awkwardly rack \the [src] with one hand.")
-				)
-				pump(user)
-
-		else
-			pump(user)
-		recentpump = world.time + 1 SECOND
-
-/obj/item/gun/projectile/shotgun/pump/sawn/proc/pumpr(mob/living/user)
-	playsound(user, 'sound/weapons/shotgunpump.ogg', 60, 1)
-
-	if(chambered)//We have a shell in the chamber
-		chambered.dropInto(loc)//Eject casing
-		if(length(chambered.fall_sounds))
-			playsound(loc, pick(chambered.fall_sounds), 50, 1)
-		chambered = null
-
-	if(length(loaded))
-		var/obj/item/ammo_casing/AC = loaded[1] //load next casing.
-		loaded -= AC //Remove casing from loaded list.
-		chambered = AC
-
-	update_icon()
-
 
 /obj/item/gun/projectile/shotgun/pump/combat
 	name = "combat shotgun"
@@ -374,6 +330,7 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 1)
 	auto_eject = TRUE
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
+	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
 	one_hand_penalty = 8
 	bulk = GUN_BULK_RIFLE
 	burst_delay = 2

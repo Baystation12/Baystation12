@@ -2,6 +2,10 @@
 // RESOMI UNIT TESTS
 // =================================================================
 
+/mob/living/carbon/human/resomi/Initialize(mapload)
+	head_hair_style = "Resomi Plumage"
+	. = ..(mapload, SPECIES_RESOMI)
+
 /datum/unit_test/mob_damage/resomi
 	name = "MOB: Resomi damage check template"
 	template = /datum/unit_test/mob_damage/resomi

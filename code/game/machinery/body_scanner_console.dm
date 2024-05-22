@@ -45,19 +45,19 @@
 		connected = locate(/obj/machinery/bodyscanner, get_step(src, D))
 		if(connected)
 			break
-		GLOB.destroyed_event.register(connected, src, .proc/unlink_scanner)
+		GLOB.destroyed_event.register(connected, src, PROC_REF(unlink_scanner))
 	update_icon()
 
 /obj/machinery/body_scanconsole/proc/unlink_scanner(obj/machinery/bodyscanner/scanner)
-	GLOB.destroyed_event.unregister(scanner, src, .proc/unlink_scanner)
+	GLOB.destroyed_event.unregister(scanner, src, PROC_REF(unlink_scanner))
 	connected = null
 	update_icon()
 
 /obj/machinery/body_scanconsole/proc/FindDisplays()
-	for(var/obj/machinery/body_scan_display/D in SSmachines.machinery)
+	for(var/obj/machinery/body_scan_display/D as anything in SSmachines.get_machinery_of_type(/obj/machinery/body_scan_display))
 		if (AreConnectedZLevels(D.z, z))
 			connected_displays += D
-			GLOB.destroyed_event.register(D, src, .proc/remove_display)
+			GLOB.destroyed_event.register(D, src, PROC_REF(remove_display))
 	return !!length(connected_displays)
 
 /obj/machinery/body_scanconsole/attack_hand(mob/user)
@@ -162,7 +162,7 @@
 
 /obj/machinery/body_scanconsole/proc/remove_display(obj/machinery/body_scan_display/display)
 	connected_displays -= display
-	GLOB.destroyed_event.unregister(display, src, .proc/remove_display)
+	GLOB.destroyed_event.unregister(display, src, PROC_REF(remove_display))
 
 /obj/machinery/body_scanconsole/Destroy()
 	. = ..()
