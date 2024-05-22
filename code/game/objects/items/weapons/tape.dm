@@ -106,7 +106,6 @@
 
 /obj/item/ducttape/proc/attach(obj/item/W)
 	stuck = W
-	anchored = TRUE
 	W.forceMove(src)
 	icon_state = W.icon_state + "_taped"
 	name = W.name + " (taped)"
@@ -141,6 +140,7 @@
 
 	playsound(src, 'sound/effects/tape.ogg',25)
 	layer = ABOVE_WINDOW_LAYER
+	anchored = TRUE
 
 	if(click_parameters)
 		if(click_parameters["icon-x"])
