@@ -1,4 +1,5 @@
 /singleton/cultural_info/location/human/pluto
+	name = HOME_SYSTEM_PLUTO
 	nickname = "Плутон"
 	distance = "45 а. е"
 	description = "Плутон, номинально являющийся Демократической Республикой - самая маленькая планета в Солнечной \
