@@ -87,14 +87,6 @@
 		to_chat(user, SPAN_WARNING("\The [src] is out of [plural_name]."))
 		return TRUE
 
-<<<<<<< ours
-	if (istype(object, /obj/item))
-		var/obj/item/target = object
-		var/a_used = target.get_storage_cost()
-		if (target.w_class == ITEM_SIZE_NO_CONTAINER || target.w_class == ITEM_SIZE_GARGANTUAN)
-			to_chat(user, SPAN_WARNING("\The [target] is too big to wrap!"))
-=======
-
 /obj/item/stack/package_wrap/use_before(atom/target, mob/living/user)
 	if (isobj(target))
 		var/obj/wrapped_object = target
@@ -105,7 +97,6 @@
 			return TRUE
 		if (wrapped_object.anchored)
 			to_chat(user, SPAN_WARNING("\The [wrapped_object] is bolted down and can't be wrapped."))
->>>>>>> theirs
 			return TRUE
 		if (user.isEquipped(target))
 			to_chat(user, SPAN_WARNING("You must put down \the [target] in order to wrap it."))
