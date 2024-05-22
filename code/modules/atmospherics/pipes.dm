@@ -44,7 +44,7 @@
 			if(parent.network)
 				parent.network.leaks |= src
 	else if (!new_leaking && leaking)
-		update_sound(0)
+		update_sound(FALSE)
 		STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 		leaking = FALSE
 		if(parent)
@@ -54,7 +54,7 @@
 
 /obj/machinery/atmospherics/pipe/proc/update_sound(playing)
 	if(playing && !sound_token)
-		sound_token = GLOB.sound_player.PlayLoopingSound(src, SOUND_ID, "sound/machines/pipeleak.ogg", volume = 8, range = 3, falloff = 1, prefer_mute = TRUE)
+		sound_token = GLOB.sound_player.PlayLoopingSound(src, SOUND_ID, 'sound/machines/pipeleak.ogg', volume = 8, range = 3, falloff = 1, prefer_mute = TRUE)
 	else if(!playing && sound_token)
 		QDEL_NULL(sound_token)
 
@@ -206,9 +206,9 @@
 		parent.mingle_with_turf(loc, volume)
 		var/air = parent.air && parent.air.return_pressure()
 		if(!sound_token && air)
-			update_sound(1)
+			update_sound(TRUE)
 		else if(sound_token && !air)
-			update_sound(0)
+			update_sound(FALSE)
 	else
 		. = PROCESS_KILL
 

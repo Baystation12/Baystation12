@@ -69,7 +69,7 @@
 		to_chat(user, SPAN_NOTICE("Your hacking attempt was succesful!"))
 		user.playsound_local(get_turf(src), 'sound/piano/A#6.ogg', 50)
 		known_targets.Insert(1, target)	// Insert the newly hacked target first,
-		GLOB.destroyed_event.register(target, src, /obj/item/device/multitool/hacktool/proc/on_target_destroy)
+		GLOB.destroyed_event.register(target, src, TYPE_PROC_REF(/obj/item/device/multitool/hacktool, on_target_destroy))
 	else
 		to_chat(user, SPAN_WARNING("Your hacking attempt failed!"))
 	return 1

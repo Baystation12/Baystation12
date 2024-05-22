@@ -71,21 +71,6 @@
 
 
 /obj/item/stack/package_wrap/use_after(obj/object, mob/user)
-	if (!isobj(object))
-		return FALSE
-	if (istype(object, /obj/item/smallDelivery) || istype(object,/obj/structure/bigDelivery) || istype(object, /obj/item/evidencebag))
-		to_chat(user, SPAN_WARNING("\The [object] is already wrapped."))
-		return TRUE
-	if (object.anchored)
-		to_chat(user, SPAN_WARNING("\The [object] is bolted down and can't be wrapped."))
-		return TRUE
-	if (user in object)
-		to_chat(user, SPAN_WARNING("You cannot wrap \the [object] while inside it."))
-		return TRUE
-	var/amount = get_amount()
-	if (amount < 1)
-		to_chat(user, SPAN_WARNING("\The [src] is out of [plural_name]."))
-		return TRUE
 
 /obj/item/stack/package_wrap/use_before(atom/target, mob/living/user)
 	if (isobj(target))
@@ -98,75 +83,93 @@
 		if (wrapped_object.anchored)
 			to_chat(user, SPAN_WARNING("\The [wrapped_object] is bolted down and can't be wrapped."))
 			return TRUE
-		if (user.isEquipped(target))
-			to_chat(user, SPAN_WARNING("You must put down \the [target] in order to wrap it."))
+		if (wrapped_object.anchored)
+			to_chat(user, SPAN_WARNING("\The [wrapped_object] is bolted down and can't be wrapped."))
 			return TRUE
-		if (amount < a_used)
-			USE_FEEDBACK_STACK_NOT_ENOUGH(src, a_used, "to wrap \the [target]!")
+		if (user in wrapped_object)
+			to_chat(user, SPAN_WARNING("You cannot wrap \the [wrapped_object] while inside it."))
 			return TRUE
-		user.visible_message(
-			SPAN_NOTICE("\The [user] starts wrapping \the [target] with \the [src]."),
-			SPAN_NOTICE("You start wrapping \the [target] with \the [src].")
-		)
-		if (!do_after(user, target.w_class SECONDS, target, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(target, src))
+		var/amount = get_amount()
+		if (amount < 1)
+			to_chat(user, SPAN_WARNING("\The [src] is out of [plural_name]."))
 			return TRUE
-		wrap_item(package_type, target, user)
-		return TRUE
 
-	if (istype(object, /obj/structure/closet/crate) || istype(object, /obj/structure/closet))
-		var/item_size
-		var/obj/structure/closet/target = object
-		if (istype(object, /obj/structure/closet/crate))
-			item_size = BASE_STORAGE_COST(ITEM_SIZE_NORMAL)
+		if (istype(target, /obj/item))
+			var/obj/item/wrapped_item = target
+			var/a_used = wrapped_item.get_storage_cost()
+			if (wrapped_item.w_class == ITEM_SIZE_NO_CONTAINER || wrapped_item.w_class == ITEM_SIZE_GARGANTUAN)
+				to_chat(user, SPAN_WARNING("\The [wrapped_item] is too big to wrap!"))
+				return TRUE
+			if (istype(wrapped_item.loc, /obj/item/storage))
+				to_chat(user, SPAN_WARNING("You must take \the [wrapped_item] out of \the [wrapped_item.loc] to wrap it."))
+				return TRUE
+			if (user.isEquipped(wrapped_item))
+				to_chat(user, SPAN_WARNING("You must put down \the [wrapped_item] in order to wrap it."))
+				return TRUE
+			if (amount < a_used)
+				USE_FEEDBACK_STACK_NOT_ENOUGH(src, a_used, "to wrap \the [wrapped_item]!")
+				return TRUE
+			user.visible_message(
+				SPAN_NOTICE("\The [user] starts wrapping \the [wrapped_item] with \the [src]."),
+				SPAN_NOTICE("You start wrapping \the [wrapped_item] with \the [src].")
+			)
+			if (!do_after(user, wrapped_item.w_class SECONDS, wrapped_item, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(wrapped_item, src))
+				return TRUE
+			wrap_item(package_type, wrapped_item, user)
+			return TRUE
+
+		if (istype(target, /obj/structure/closet/crate) || istype(target, /obj/structure/closet))
+			var/item_size
+			var/obj/structure/closet/wrapped_closet = target
+			if (istype(target, /obj/structure/closet/crate))
+				item_size = BASE_STORAGE_COST(ITEM_SIZE_NORMAL)
+			else
+				item_size = BASE_STORAGE_COST(ITEM_SIZE_LARGE)
+			if (amount < item_size)
+				USE_FEEDBACK_STACK_NOT_ENOUGH(src, item_size, "to wrap \the [wrapped_closet]!")
+				return TRUE
+			user.visible_message(
+				SPAN_NOTICE("\The [user] starts wrapping \the [wrapped_closet] with \the [src]."),
+				SPAN_NOTICE("You start wrapping \the [wrapped_closet] with \the [src].")
+			)
+			if (!do_after(user, item_size SECONDS, wrapped_closet, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(wrapped_closet, src))
+				return TRUE
+			wrap_item(package_type, wrapped_closet, user)
+			return TRUE
+
+	if (istype(target, /mob/living/carbon/human))
+		var/mob/living/carbon/human/wrapped_human = target
+		var/a_used = BASE_STORAGE_COST(ITEM_SIZE_LARGE) //get_storage_cost() does not work on mobs, will reproduce same logic here.
+
+		if (get_amount() < a_used)
+			USE_FEEDBACK_STACK_NOT_ENOUGH(src, a_used, "to wrap \the [wrapped_human]!")
+			return TRUE
+		if (!wrapped_human.has_danger_grab(user))
+			to_chat(user, SPAN_WARNING("You need to have a firm grip on \the [wrapped_human] in order to wrap them."))
+			return TRUE
+		wrapped_human.visible_message(
+			SPAN_NOTICE("\The [user] starts wrapping \the [wrapped_human] with \the [src]."),
+			SPAN_NOTICE("You start wrapping \the [wrapped_human] with \the [src].")
+		)
+		if (!do_after(user, ITEM_SIZE_LARGE SECONDS, wrapped_human, DO_PUBLIC_UNIQUE) || !wrapped_human.has_danger_grab(user) || !user.use_sanity_check(wrapped_human, src))
+			return TRUE
+
+		var/obj/structure/bigDelivery/mobpresent/present = new (wrapped_human.loc, wrapped_human, package_type)
+		use(a_used)
+
+		if (user == wrapped_human)
+			user.visible_message(
+				SPAN_DANGER("\The [user] wraps themselves with [get_vague_name(TRUE)]."),
+				SPAN_DANGER("You wrap yourself with [get_exact_name(a_used)].")
+			)
 		else
-			item_size = BASE_STORAGE_COST(ITEM_SIZE_LARGE)
-		if (amount < item_size)
-			USE_FEEDBACK_STACK_NOT_ENOUGH(src, item_size, "to wrap \the [target]!")
-			return TRUE
-		user.visible_message(
-			SPAN_NOTICE("\The [user] starts wrapping \the [target] with \the [src]."),
-			SPAN_NOTICE("You start wrapping \the [target] with \the [src].")
-		)
-		if (!do_after(user, item_size SECONDS, target, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(target, src))
-			return TRUE
-		wrap_item(package_type, target, user)
+			user.visible_message(
+				SPAN_DANGER("\The [user] wraps \the [wrapped_human] with [get_vague_name(TRUE)]."),
+				SPAN_DANGER("You wrap \the [wrapped_human] with [get_exact_name(a_used)].")
+			)
+
+		playsound(user.loc, 'sound/effects/wrap.ogg', 65, 1)
+		present.add_fingerprint(user)
+		wrapped_human.remove_grabs_and_pulls()
+		admin_attack_log(user, wrapped_human, "Used \a [src] to wrap their victim", "Was wrapepd with \a [src]", "used \the [src] to wrap")
 		return TRUE
-
-/obj/item/stack/package_wrap/use_before(mob/living/target, mob/living/user)
-	if (!istype(target, /mob/living/carbon/human))
-		return FALSE
-	var/mob/living/carbon/human/H = target
-	var/a_used = BASE_STORAGE_COST(ITEM_SIZE_LARGE) //get_storage_cost() does not work on mobs, will reproduce same logic here.
-
-	if (get_amount() < a_used)
-		USE_FEEDBACK_STACK_NOT_ENOUGH(src, a_used, "to wrap \the [target]!")
-		return TRUE
-	if (!H.has_danger_grab(user))
-		to_chat(user, SPAN_WARNING("You need to have a firm grip on \the [target] in order to wrap them."))
-		return TRUE
-	H.visible_message(
-		SPAN_NOTICE("\The [H] starts wrapping \the [target] with \the [src]."),
-		SPAN_NOTICE("You start wrapping \the [target] with \the [src].")
-	)
-	if (!do_after(user, ITEM_SIZE_LARGE SECONDS, target, DO_PUBLIC_UNIQUE) || !H.has_danger_grab(user) || !user.use_sanity_check(H, src))
-		return TRUE
-
-	var/obj/structure/bigDelivery/mobpresent/present = new (H.loc, H, package_type)
-	use(a_used)
-
-	if (user == target)
-		user.visible_message(
-			SPAN_DANGER("\The [user] wraps themselves with [get_vague_name(TRUE)]."),
-			SPAN_DANGER("You wrap yourself with [get_exact_name(a_used)].")
-		)
-	else
-		user.visible_message(
-			SPAN_DANGER("\The [user] wraps \the [target] with [get_vague_name(TRUE)]."),
-			SPAN_DANGER("You wrap \the [target] with [get_exact_name(a_used)].")
-		)
-
-	playsound(user.loc, 'sound/effects/wrap.ogg', 65, 1)
-	present.add_fingerprint(user)
-	H.remove_grabs_and_pulls()
-	admin_attack_log(user, H, "Used \a [src] to wrap their victim", "Was wrapepd with \a [src]", "used \the [src] to wrap")
-	return TRUE

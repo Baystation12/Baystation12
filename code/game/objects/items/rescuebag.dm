@@ -29,22 +29,26 @@
 		airtank = null
 	qdel(src)
 
-/obj/item/bodybag/rescue/attackby(obj/item/W, mob/user, click_params)
+/obj/item/bodybag/rescue/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W,/obj/item/tank))
 		if(airtank)
-			to_chat(user, "\The [src] already has an air tank installed.")
-			return 1
-		else if(user.unEquip(W))
-			W.forceMove(src)
-			airtank = W
-			to_chat(user, "You install \the [W] in \the [src].")
-			return 1
+			to_chat(user, SPAN_WARNING("\The [src] already has an air tank installed."))
+			return TRUE
+		if (!user.unEquip(W))
+			FEEDBACK_UNEQUIP_FAILURE(user, W)
+			return TRUE
+		W.forceMove(src)
+		airtank = W
+		to_chat(user, SPAN_NOTICE("You install \the [W] in \the [src]."))
+		return TRUE
+
 	else if(airtank && isScrewdriver(W))
-		to_chat(user, "You remove \the [airtank] from \the [src].")
+		to_chat(user, SPAN_NOTICE("You remove \the [airtank] from \the [src]."))
 		airtank.dropInto(loc)
 		airtank = null
-	else
-		..()
+		return TRUE
+
+	return ..()
 
 /obj/item/bodybag/rescue/examine(mob/user)
 	. = ..()

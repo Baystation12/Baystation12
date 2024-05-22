@@ -167,13 +167,14 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 	interact(user)
 	add_fingerprint(user)
 
-/obj/item/rpd/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/pipe))
-		if(!user.unEquip(W))
-			return
-		recycle(W,user)
-		return
-	..()
+/obj/item/rpd/use_tool(obj/item/item, mob/living/user, list/click_params)
+	if(istype(item, /obj/item/pipe))
+		if(!user.unEquip(item))
+			FEEDBACK_UNEQUIP_FAILURE(user, item)
+			return TRUE
+		recycle(item,user)
+		return TRUE
+	return ..()
 
 /obj/item/rpd/proc/recycle(obj/item/W,mob/user)
 	if(!user.skill_check(SKILL_ATMOS,SKILL_BASIC))

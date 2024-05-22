@@ -25,11 +25,11 @@
 
 /datum/game_mode/meteor/declare_completion()
 	var/eng_status = 0
-	for(var/obj/machinery/atmospherics/unary/engine/E in SSmachines.machinery)
+	for(var/obj/machinery/atmospherics/unary/engine/E as anything in SSmachines.get_machinery_of_type(/obj/machinery/atmospherics/unary/engine))
 		if((get_z(E) in GLOB.using_map.station_levels) && !MACHINE_IS_BROKEN(E))
 			eng_status++
 	var/nav_status = FALSE
-	for(var/obj/machinery/computer/ship/helm/H in SSmachines.machinery)
+	for(var/obj/machinery/computer/ship/helm/H as anything in SSmachines.get_machinery_of_type(/obj/machinery/computer/ship/helm))
 		if((get_z(H) in GLOB.using_map.station_levels) && !MACHINE_IS_BROKEN(H))
 			nav_status = TRUE
 	var/bsd_status = FALSE

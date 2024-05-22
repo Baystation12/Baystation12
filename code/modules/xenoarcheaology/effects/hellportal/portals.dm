@@ -23,7 +23,7 @@
 /obj/gateway/artifact/small/New(turf/T)
 	..()
 
-	addtimer(new Callback(src, .proc/create_and_delete), rand(15, 30) SECONDS)
+	addtimer(new Callback(src, PROC_REF(create_and_delete)), rand(15, 30) SECONDS)
 
 /obj/gateway/artifact/small/proc/create_and_delete()
 	var/mob/living/simple_animal/T = pickweight(spawnable)
@@ -66,7 +66,7 @@
 
 	mob_limit = health * 2
 	SetTransform(scale = size_multiplier)
-	addtimer(new Callback(src, .proc/spawn_monster), rand(30, 60) SECONDS)
+	addtimer(new Callback(src, PROC_REF(spawn_monster)), rand(30, 60) SECONDS)
 	GLOB.sound_player.PlayLoopingSound(src, "\ref[src]", 'sound/effects/Heart Beat.ogg', 70, 6)
 
 /obj/gateway/artifact/big/proc/spawn_monster()
@@ -97,4 +97,4 @@
 		visible_message(SPAN_WARNING("\The [src] deposits \the [T] into the world!"))
 
 
-	addtimer(new Callback(src, .proc/spawn_monster), rand(15, 30) SECONDS)
+	addtimer(new Callback(src, PROC_REF(spawn_monster)), rand(15, 30) SECONDS)

@@ -48,7 +48,7 @@ SUBSYSTEM_DEF(garbage)
 
 /datum/controller/subsystem/garbage/Shutdown()
 	var/list/qdel_log = list()
-	sortTim(details_by_path, cmp = /proc/cmp_qdel_details_time, associative = TRUE)
+	sortTim(details_by_path, cmp = GLOBAL_PROC_REF(cmp_qdel_details_time), associative = TRUE)
 	for (var/path in details_by_path)
 		var/datum/qdel_details/details = details_by_path[path]
 		qdel_log += "Path: [path]"

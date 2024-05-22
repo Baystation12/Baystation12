@@ -214,7 +214,7 @@
 			owner.Paralyse(damage_secondary)
 			owner.Weaken(round(damageTaken, 1))
 			if (prob(30))
-				addtimer(new Callback(src, .proc/brain_damage_callback, damage), rand(6, 20) SECONDS, TIMER_UNIQUE)
+				addtimer(new Callback(src, PROC_REF(brain_damage_callback), damage), rand(6, 20) SECONDS, TIMER_UNIQUE)
 
 /obj/item/organ/internal/brain/proc/brain_damage_callback(damage) //Confuse them as a somewhat uncommon aftershock. Side note: Only here so a spawn isn't used. Also, for the sake of a unique timer.
 	if (!owner || owner.stat == DEAD || (status & ORGAN_DEAD))

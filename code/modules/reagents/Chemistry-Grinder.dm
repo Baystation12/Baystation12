@@ -72,7 +72,7 @@
 	grinding = TRUE
 	update_icon()
 
-	addtimer(new Callback(src, .proc/reset_machine, user), grind_time)
+	addtimer(new Callback(src, PROC_REF(reset_machine), user), grind_time)
 	var/skill_multiplier = CLAMP01(0.5 + (user.get_skill_value(skill) - 1) * 0.167)
 	for (var/obj/item/I in items)
 		if (container.reagents.total_volume >= container.reagents.maximum_volume)

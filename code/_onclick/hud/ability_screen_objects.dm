@@ -136,9 +136,9 @@
 			return A
 	return null
 
-/obj/screen/movable/ability_master/proc/get_ability_by_proc_ref(proc_ref)
+/obj/screen/movable/ability_master/proc/get_ability_by_PROC_REF(PROC_REF)
 	for(var/obj/screen/ability/verb_based/V in ability_objects)
-		if(V.verb_to_call == proc_ref)
+		if(V.verb_to_call == PROC_REF)
 			return V
 	return null
 
@@ -241,7 +241,7 @@
 		message_admins("ERROR: add_verb_ability() was not given an object in its arguments.")
 	if(!verb_given)
 		message_admins("ERROR: add_verb_ability() was not given a verb/proc in its arguments.")
-	if(get_ability_by_proc_ref(verb_given))
+	if(get_ability_by_PROC_REF(verb_given))
 		return // Duplicate
 	var/obj/screen/ability/verb_based/A = new /obj/screen/ability/verb_based()
 	A.ability_master = src
@@ -265,7 +265,7 @@
 		message_admins("ERROR: add_ling_ability() was not given an object in its arguments.")
 	if(!verb_given)
 		message_admins("ERROR: add_ling_ability() was not given a verb/proc in its arguments.")
-	if(get_ability_by_proc_ref(verb_given))
+	if(get_ability_by_PROC_REF(verb_given))
 		return // Duplicate
 	var/obj/screen/ability/verb_based/changeling/A = new /obj/screen/ability/verb_based/changeling()
 	A.ability_master = src

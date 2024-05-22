@@ -313,12 +313,12 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	if (!istype(pda))
 		return
 	LAZYADD(linked_pdas, pda)
-	GLOB.destroyed_event.register(pda, src, .proc/unlink_pda)
+	GLOB.destroyed_event.register(pda, src, PROC_REF(unlink_pda))
 
 
 /obj/machinery/photocopier/faxmachine/proc/unlink_pda(obj/item/modular_computer/pda/pda)
 	LAZYREMOVE(linked_pdas, pda)
-	GLOB.destroyed_event.unregister(pda, src, .proc/unlink_pda)
+	GLOB.destroyed_event.unregister(pda, src, PROC_REF(unlink_pda))
 
 
 /// Retrieves a list of all fax machines matching the given department tag.

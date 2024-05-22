@@ -63,7 +63,7 @@
 
 /datum/alarm/proc/alarm_z()
 	if(origin)
-		last_z_level = origin.get_alarm_z(origin)
+		last_z_level = get_z(origin)
 	return last_z_level
 
 /datum/alarm/proc/alarm_area()
@@ -103,21 +103,6 @@
 
 	return max_severity
 
-/******************
-* Assisting procs *
-******************/
-/**
- * Determines the alarm's z-level.
- *
- * TODO: Possibly redundant. Check how areas respond to `get_z()` and potentially just replace this call with that.
- *
- * Returns integer.
- */
-/atom/proc/get_alarm_z()
-	return get_z(src)
-
-/area/get_alarm_z()
-	return length(contents) ? get_z(contents[1]) : 0
 
 /**
  * Retrieves the atom's area for alarms.

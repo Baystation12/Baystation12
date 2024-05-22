@@ -90,7 +90,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 		set_stat(MACHINE_STAT_EMPED, TRUE)
 		disconnect_computers()
 		var/emp_time = rand(15 SECONDS, 30 SECONDS) / severity
-		addtimer(new Callback(src, .proc/emp_act_end), emp_time, TIMER_UNIQUE | TIMER_OVERRIDE)
+		addtimer(new Callback(src, PROC_REF(emp_act_end)), emp_time, TIMER_UNIQUE | TIMER_OVERRIDE)
 
 
 /obj/machinery/tele_beacon/proc/emp_act_end()
@@ -300,7 +300,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 	switch (index)
 		if (TELEBEACON_WIRE_POWER)
 			tele_beacon.set_power_cut()
-			addtimer(new Callback(src, .proc/ResetPulsed), rand(15 SECONDS, 45 SECONDS), TELEBEACON_WIRE_POWER)
+			addtimer(new Callback(src, PROC_REF(ResetPulsed)), rand(15 SECONDS, 45 SECONDS), TELEBEACON_WIRE_POWER)
 		if (TELEBEACON_WIRE_RELAY)
 			tele_beacon.disconnect_computers()
 		if (TELEBEACON_WIRE_SIGNALLER)

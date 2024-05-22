@@ -173,7 +173,7 @@
 	original = target
 	def_zone = target_zone
 
-	addtimer(new Callback(src, .proc/finalize_launch, curloc, targloc, x_offset, y_offset, angle_offset),0)
+	addtimer(new Callback(src, PROC_REF(finalize_launch), curloc, targloc, x_offset, y_offset, angle_offset),0)
 	return 0
 
 /obj/item/projectile/proc/launch_from_mob(atom/target, mob/user, target_zone, x_offset = 0, y_offset = 0, angle_offset = 0)

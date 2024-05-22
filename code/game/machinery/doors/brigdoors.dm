@@ -36,11 +36,11 @@
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/door_timer/LateInitialize(mapload)
-	for(var/obj/machinery/door/window/brigdoor/M in SSmachines.machinery)
+	for(var/obj/machinery/door/window/brigdoor/M as anything in SSmachines.get_machinery_of_type(/obj/machinery/door/window/brigdoor))
 		if (M.id == src.id)
 			targets += M
 
-	for(var/obj/machinery/flasher/F in SSmachines.machinery)
+	for(var/obj/machinery/flasher/F as anything in SSmachines.get_machinery_of_type(/obj/machinery/door/window/brigdoor))
 		if(F.id_tag == src.id)
 			targets += F
 

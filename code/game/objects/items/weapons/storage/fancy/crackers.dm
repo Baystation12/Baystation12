@@ -1,6 +1,6 @@
 /obj/item/storage/fancy/crackers
 	name = "\improper Getmore Crackers"
-	icon = 'icons/obj/food/food.dmi'
+	icon = 'icons/obj/food/food_storage.dmi'
 	icon_state = "crackerbag"
 	open_sound = 'sound/effects/crinkle.ogg'
 	storage_slots = 6

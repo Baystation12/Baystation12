@@ -15,6 +15,9 @@
 	var/datum/preferences/prefs = null
 	var/adminobs		= null
 
+	// Runechat messages
+	var/list/seen_messages
+
 	///datum that controls the displaying and hiding of tooltips
 	var/datum/tooltip/tooltips
 

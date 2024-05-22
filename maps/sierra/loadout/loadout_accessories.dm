@@ -37,7 +37,7 @@
 	description = "A selection of SCG passports."
 	path = /obj/item/passport/scg
 	flags = GEAR_HAS_TYPE_SELECTION
-	custom_setup_proc = /obj/item/passport/proc/set_info
+	custom_setup_proc = TYPE_PROC_REF(/obj/item/passport, set_info)
 	cost = 0
 
 /datum/gear/passport/iccg
@@ -45,7 +45,7 @@
 	description = "A selection of ICCG passports."
 	path = /obj/item/passport/iccg
 	flags = GEAR_HAS_TYPE_SELECTION
-	custom_setup_proc = /obj/item/passport/proc/set_info
+	custom_setup_proc = TYPE_PROC_REF(/obj/item/passport, set_info)
 	cost = 0
 
 /datum/gear/passport
@@ -53,7 +53,7 @@
 	description = "A selection of independent regions passports."
 	path = /obj/item/passport/independent
 	flags = GEAR_HAS_SUBTYPE_SELECTION
-	custom_setup_proc = /obj/item/passport/proc/set_info
+	custom_setup_proc = TYPE_PROC_REF(/obj/item/passport, set_info)
 	cost = 0
 
 /datum/gear/workvisa

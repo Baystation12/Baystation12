@@ -11,11 +11,11 @@
 		if ("My Z-Level")
 			var/user_z = get_z(user)
 			if (!user_z) return to_chat(user, SPAN_DANGER("Invalid Z-Level!"))
-			for (var/obj/machinery/power/apc/apc in SSmachines.machinery)
+			for (var/obj/machinery/power/apc/apc as anything in SSmachines.get_machinery_of_type(/obj/machinery/power/apc))
 				if (apc.z == user_z) apc.overload_lighting()
 
 		if ("Station")
-			for (var/obj/machinery/power/apc/apc in SSmachines.machinery)
+			for (var/obj/machinery/power/apc/apc as anything in SSmachines.get_machinery_of_type(/obj/machinery/power/apc))
 				if (apc.z in GLOB.using_map.station_levels)
 					apc.overload_lighting()
 
@@ -35,14 +35,14 @@
 		if ("My Z-Level")
 			var/user_z = get_z(user)
 			if (!user_z) return to_chat(user, SPAN_DANGER("Invalid Z-Level!"))
-			for (var/obj/machinery/light/light in SSmachines.machinery)
+			for (var/obj/machinery/light/light as anything in SSmachines.get_machinery_of_type(/obj/machinery/light))
 				if (light.z == user_z) light.fix()
 
 		if ("Station")
-			for (var/obj/machinery/light/light in SSmachines.machinery)
+			for (var/obj/machinery/light/light as anything in SSmachines.get_machinery_of_type(/obj/machinery/light))
 				if (light.z in GLOB.using_map.station_levels)
 					light.fix()
 
 		if ("All lights")
-			for (var/obj/machinery/light/light in SSmachines.machinery)
+			for (var/obj/machinery/light/light as anything in SSmachines.get_machinery_of_type(/obj/machinery/light))
 				light.fix()

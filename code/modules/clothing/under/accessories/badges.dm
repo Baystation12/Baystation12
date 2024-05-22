@@ -131,19 +131,19 @@
 	return 1
 
 
-/obj/item/clothing/accessory/badge/holo/attackby(obj/item/O, mob/user)
+/obj/item/clothing/accessory/badge/holo/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if (istype(O, /obj/item/card/id) || istype(O, /obj/item/modular_computer))
 		var/obj/item/card/id/id_card = O.GetIdCard()
 		if (!id_card)
-			return
+			return ..()
 		if ((badge_access in id_card.access) || emagged)
 			to_chat(user, "You imprint your ID details onto the badge.")
 			set_name(id_card.registered_name)
 			set_desc(user)
 		else
-			to_chat(user, "[src] rejects your ID, and flashes 'Insufficient access!'")
-		return
-	..()
+			to_chat(user, "\The [src] rejects your ID, and flashes 'Insufficient access!'")
+		return TRUE
+	return ..()
 
 
 /obj/item/storage/box/holobadge
