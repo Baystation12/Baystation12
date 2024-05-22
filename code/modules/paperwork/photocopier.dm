@@ -221,6 +221,7 @@
 			toner = 0
 			visible_message(SPAN_NOTICE("A red light on \the [src] flashes, indicating that it is out of toner."))
 			break
+
 		if(istype(W, /obj/item/paper))
 			W = copy(W, need_toner)
 		else if(istype(W, /obj/item/photo))
