@@ -46,6 +46,8 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		/obj/item/clothing/head/pirate,
 		/obj/item/clothing/mask/bandana/red,
 		/obj/item/clothing/head/hgpiratecap,
+		/obj/item/clothing/head/helmet/nvgmount/nvg,
+		/obj/item/clothing/head/helmet/nvgmount/thermal // raiders can have a little nvg, as a treat
 		)
 
 	var/list/raider_suits = list(

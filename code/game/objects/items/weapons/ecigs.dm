@@ -2,7 +2,7 @@
 	name = "electronic cigarette"
 	desc = "Device with modern approach to smoking."
 	icon = 'icons/obj/ecig.dmi'
-	var/active = 0
+	active = 0
 	var/obj/item/cell/cigcell
 	var/cartridge_type = /obj/item/reagent_containers/ecig_cartridge/med_nicotine
 	var/obj/item/reagent_containers/ecig_cartridge/ec_cartridge

@@ -5,19 +5,14 @@
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_eyes_vox.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_eyes_unathi.dmi'
 		)
-	var/hud_type
 	var/prescription = FALSE
-	var/toggleable = FALSE
-	var/off_state = "degoggles"
-	var/active = TRUE
-	var/activation_sound = 'sound/items/goggles_charge.ogg'
-	var/deactivation_sound // set this if you want a sound on deactivation
+	off_state = "degoggles"
+	activation_sound = 'sound/items/goggles_charge.ogg'
+	deactivation_sound = null
 	var/obj/screen/overlay = null
 	var/obj/item/clothing/glasses/hud/hud = null	// Hud glasses, if any
-	var/electric = FALSE //if the glasses should be disrupted by EMP
+	electric = FALSE //if the glasses should be disrupted by EMP
 
-	var/toggle_on_message //set these in initialize if you want messages other than about the optical matrix
-	var/toggle_off_message
 
 /obj/item/clothing/glasses/Initialize()
 	. = ..()
@@ -34,63 +29,6 @@
 /obj/item/clothing/glasses/needs_vision_update()
 	return ..() || overlay || vision_flags || see_invisible || darkness_view
 
-/obj/item/clothing/glasses/proc/activate(mob/user)
-	if(toggleable && !active)
-		active = TRUE
-		flash_protection = initial(flash_protection)
-		tint = initial(tint)
-		if(user)
-			user.update_inv_glasses()
-			user.update_action_buttons()
-			if(activation_sound)
-				sound_to(user, activation_sound)
-			if(toggle_on_message)
-				to_chat(user, toggle_on_message)
-			else
-				to_chat(user, "You activate the optical matrix on \the [src].")
-
-		update_icon()
-		update_clothing_icon()
-		update_vision()
-
-/obj/item/clothing/glasses/proc/deactivate(mob/user, manual = TRUE)
-	if(toggleable && active)
-		active = FALSE
-		if(user)
-			if(manual)
-				if(toggle_off_message)
-					to_chat(user, toggle_off_message)
-				else
-					to_chat(user, "You deactivate the optical matrix on \the [src].")
-				if(deactivation_sound)
-					sound_to(user, deactivation_sound)
-			user.update_inv_glasses()
-			user.update_action_buttons()
-
-		flash_protection = FLASH_PROTECTION_NONE
-		tint = TINT_NONE
-		update_icon()
-		update_clothing_icon()
-		update_vision()
-
-/obj/item/clothing/glasses/emp_act(severity)
-	if(electric && active)
-		if(istype(src.loc, /mob/living/carbon/human))
-			var/mob/living/carbon/human/M = src.loc
-			if(M.glasses != src)
-				to_chat(M, SPAN_DANGER("\The [name] malfunction[gender != PLURAL ? "s":""], releasing a small spark."))
-			else
-				M.eye_blind = 2
-				M.eye_blurry = 4
-				to_chat(M, SPAN_DANGER("\The [name] malfunction[gender != PLURAL ? "s":""], blinding you!"))
-				// Don't cure being nearsighted
-				if(!(M.disabilities & NEARSIGHTED))
-					M.disabilities |= NEARSIGHTED
-					spawn(100)
-						M.disabilities &= ~NEARSIGHTED
-			if(toggleable)
-				deactivate(M, FALSE)
-	..()
 
 /obj/item/clothing/glasses/attack_self(mob/user)
 	if(toggleable && !user.incapacitated())
@@ -98,14 +36,6 @@
 			deactivate(user)
 		else
 			activate(user)
-
-/obj/item/clothing/glasses/inherit_custom_item_data(datum/custom_item/citem)
-	. = ..()
-	if(toggleable)
-		if(citem.additional_data["icon_on"])
-			set_icon_state(citem.additional_data["icon_on"])
-		if(citem.additional_data["icon_off"])
-			off_state = citem.additional_data["icon_off"]
 
 /obj/item/clothing/glasses/meson
 	name = "meson goggles"
@@ -123,6 +53,91 @@
 /obj/item/clothing/glasses/meson/Initialize()
 	. = ..()
 	overlay = GLOB.global_hud.meson
+
+/obj/item/clothing/glasses/ballistic
+	name = "ballistic goggles"
+	desc = "A pair of goggles designed to protect the wearer's eyes from shrapnel."
+	icon_state = "ballistic"
+	origin_tech = list(TECH_COMBAT = 2)
+	siemens_coefficient = 0.6
+	armor = list(
+		melee = ARMOR_MELEE_SMALL,
+		bullet = ARMOR_BALLISTIC_SMALL,
+		bomb = ARMOR_BOMB_MINOR
+	)
+	action_button_name = "Toggle Attachments"
+	valid_accessory_slots = list(ACCESSORY_SLOT_VISION, ACCESSORY_SLOT_HUD)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_VISION, ACCESSORY_SLOT_HUD)
+	var/toggle_mods = list()
+
+/obj/item/clothing/glasses/ballistic/Initialize()
+	. = ..()
+	count_toggle_mods()
+
+/obj/item/clothing/glasses/ballistic/attach_accessory(mob/user, obj/item/clothing/accessory/A)
+	. = ..()
+	if(A.toggleable)
+		toggle_mods += A
+
+/obj/item/clothing/glasses/ballistic/remove_accessory(mob/user, obj/item/clothing/accessory/A)
+	. = ..()
+	if(A.toggleable)
+		toggle_mods -= A
+
+/obj/item/clothing/glasses/ballistic/proc/count_toggle_mods()
+	toggle_mods = list()
+	for (var/obj/item/clothing/accessory/glassesmod/mod in accessories)
+		if(mod.toggleable)
+			toggle_mods += mod
+
+
+/obj/item/clothing/glasses/ballistic/attack_self(mob/user)
+	if(!user.incapacitated())
+		var/obj/item/clothing/accessory/glassesmod/choice = null
+		if (length(toggle_mods) == 1)
+			choice = toggle_mods[1]
+		else if(length(toggle_mods) <= 0)
+			return
+		else
+			input(user, "Toggle which accessory?", "Attachment selection") as null|anything in toggle_mods
+		if (choice.active)
+			choice.deactivate(user)
+		else
+			choice.activate(user)
+		update_vision()
+
+
+/obj/item/clothing/glasses/ballistic/prescription
+	name = "prescription ballistic goggles"
+	desc = "A pair of goggles designed to protect the wearer's eyes from shrapnel. This set has corrective lenses."
+	prescription = 5
+
+
+/obj/item/clothing/glasses/ballistic/fake
+	name = "budget ballistic goggles"
+	desc = "A pair of goggles that probably won't protect the wearer's eyes from shrapnel. At least they make you feel more tacticool."
+	origin_tech = null
+	armor = null
+
+/obj/item/clothing/glasses/ballistic/fake/prescription
+	name = "budget ballistic goggles"
+	desc = "A pair of goggles that probably won't protect the wearer's eyes from shrapnel. At least they make you feel more tacticool. This set has corrective lenses."
+	origin_tech = null
+	armor = null
+	prescription = 5
+
+
+/obj/item/clothing/glasses/ballistic/security
+	accessories = list(
+		/obj/item/clothing/accessory/glassesmod/vision/polarized,
+		/obj/item/clothing/accessory/glassesmod/hud/security
+	)
+
+/obj/item/clothing/glasses/ballistic/medic
+	accessories = list(/obj/item/clothing/accessory/glassesmod/hud/medical)
+
+/obj/item/clothing/glasses/ballistic/engi
+	accessories = list(/obj/item/clothing/accessory/glassesmod/vision/welding)
 
 /obj/item/clothing/glasses/meson/prescription
 	desc = "Used for seeing walls, floors, and stuff through anything. This set has corrective lenses."

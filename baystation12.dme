@@ -1687,6 +1687,7 @@
 #include "code\modules\clothing\under\accessories\fire_overpants.dm"
 #include "code\modules\clothing\under\accessories\flannel_shirt.dm"
 #include "code\modules\clothing\under\accessories\ftu_pin.dm"
+#include "code\modules\clothing\under\accessories\goggle_mods.dm"
 #include "code\modules\clothing\under\accessories\hawaii.dm"
 #include "code\modules\clothing\under\accessories\helmcover.dm"
 #include "code\modules\clothing\under\accessories\helmet_decor.dm"

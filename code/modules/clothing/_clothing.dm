@@ -1,8 +1,10 @@
 /obj/item/clothing
 	name = "clothing"
 	siemens_coefficient = 0.9
-	var/flash_protection = FLASH_PROTECTION_NONE	// Sets the item's level of flash protection.
-	var/tint = TINT_NONE							// Sets the item's level of visual impairment tint.
+	/// Sets the item's level of flash protection.
+	var/flash_protection = FLASH_PROTECTION_NONE
+	/// Sets the item's level of visual impairment tint.
+	var/tint = TINT_NONE
 	var/list/species_restricted = list(
 		"exclude",
 		SPECIES_NABBER
@@ -15,8 +17,27 @@
 	var/ironed_state = WRINKLES_DEFAULT
 	var/smell_state = SMELL_DEFAULT
 	var/volume_multiplier = 1
+	var/hud_type
+	var/vision_flags = 0
+	/// special vision states, such as seeing darkness, seeing mobs through walls, etc
+	var/darkness_view = 0
+	var/see_invisible = -1
+	var/light_protection = 0
+	/// if the clothing should be disrupted by EMP
+	var/electric = FALSE
+	/// used by goggles and HUDs
+	var/toggleable = FALSE
+	var/active = TRUE
+	var/activation_sound
+	/// set this if you want a sound on deactivation
+	var/deactivation_sound
+	/// set these in initialize if you want messages other than about the optical matrix
+	var/toggle_on_message
+	var/toggle_off_message
+	var/off_state = null
 
-	var/move_trail = /obj/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
+	/// if this item covers the feet, the footprints it should leave
+	var/move_trail = /obj/decal/cleanable/blood/tracks/footprints
 
 
 /obj/item/clothing/Initialize()
@@ -25,6 +46,8 @@
 	accessories = list()
 	for (var/path in init_accessories)
 		attach_accessory(null, new path (src))
+	if(toggleable)
+		set_extension(src, /datum/extension/base_icon_state, icon_state)
 
 
 /obj/item/clothing/Destroy()
@@ -260,10 +283,6 @@ BLIND     // can't see anything
 	w_class = ITEM_SIZE_SMALL
 	body_parts_covered = EYES
 	slot_flags = SLOT_EYES
-	var/vision_flags = 0
-	var/darkness_view = 0//Base human is 2
-	var/see_invisible = -1
-	var/light_protection = 0
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_eyes_vox.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_eyes_unathi.dmi',
@@ -275,7 +294,7 @@ BLIND     // can't see anything
 	else
 		return icon_state
 
-/obj/item/clothing/glasses/on_update_icon()
+/obj/item/clothing/on_update_icon()
 	if (toggleable)
 		if (active)
 			var/datum/extension/base_icon_state/BIS = get_extension(src, /datum/extension/base_icon_state)
@@ -285,10 +304,77 @@ BLIND     // can't see anything
 	else
 		icon_state = initial(icon_state)
 
-/obj/item/clothing/glasses/update_clothing_icon()
+/obj/item/clothing/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
 		M.update_inv_glasses()
+
+/obj/item/clothing/proc/activate(mob/user)
+	if (toggleable && !active)
+		active = TRUE
+		flash_protection = initial(flash_protection)
+		tint = initial(tint)
+		if (user)
+			user.update_inv_glasses()
+			user.update_action_buttons()
+			if (activation_sound)
+				sound_to(user, activation_sound)
+			if (toggle_on_message)
+				to_chat(user, SPAN_NOTICE(toggle_on_message))
+			else
+				to_chat(user, "You activate the optical matrix on \the [src].")
+
+		update_icon()
+		update_clothing_icon()
+		update_vision()
+
+/obj/item/clothing/proc/deactivate(mob/user, manual = TRUE)
+	if (toggleable && active)
+		active = FALSE
+		if (user)
+			if (manual)
+				if (toggle_off_message)
+					to_chat(user, toggle_off_message)
+				else
+					to_chat(user, "You deactivate the optical matrix on \the [src].")
+				if (deactivation_sound)
+					sound_to(user, deactivation_sound)
+			user.update_inv_glasses()
+			user.update_action_buttons()
+
+		flash_protection = FLASH_PROTECTION_NONE
+		tint = TINT_NONE
+		update_icon()
+		update_clothing_icon()
+		update_vision()
+
+/obj/item/clothing/emp_act(severity)
+	if (electric && active)
+		if (istype(loc, /mob/living/carbon/human))
+			var/mob/living/carbon/human/M = loc
+			if (M.glasses != src)
+				to_chat(M, SPAN_DANGER("\The [name] malfunction[gender != PLURAL ? "s":""], releasing a small spark."))
+			else
+				M.eye_blind = 2
+				M.eye_blurry = 4
+				to_chat(M, SPAN_DANGER("\The [name] malfunction[gender != PLURAL ? "s":""], blinding you!"))
+				// Don't cure being nearsighted
+				if (!(M.disabilities & NEARSIGHTED))
+					M.disabilities |= NEARSIGHTED
+					spawn(100)
+						M.disabilities &= ~NEARSIGHTED
+			if (toggleable)
+				deactivate(M, FALSE)
+	..()
+
+/obj/item/clothing/inherit_custom_item_data(datum/custom_item/citem)
+	. = ..()
+	if (toggleable)
+		if (citem.additional_data["icon_on"])
+			set_icon_state(citem.additional_data["icon_on"])
+		if (citem.additional_data["icon_off"])
+			off_state = citem.additional_data["icon_off"]
+
 
 ///////////////////////////////////////////////////////////////////////
 //Gloves
