@@ -1,8 +1,10 @@
 /obj/item/clothing
 	name = "clothing"
 	siemens_coefficient = 0.9
-	var/flash_protection = FLASH_PROTECTION_NONE	// Sets the item's level of flash protection.
-	var/tint = TINT_NONE							// Sets the item's level of visual impairment tint.
+	/// Sets the item's level of flash protection.
+	var/flash_protection = FLASH_PROTECTION_NONE
+	/// Sets the item's level of visual impairment tint.
+	var/tint = TINT_NONE
 	var/list/species_restricted = list(
 		"exclude",
 		SPECIES_NABBER
@@ -15,8 +17,27 @@
 	var/ironed_state = WRINKLES_DEFAULT
 	var/smell_state = SMELL_DEFAULT
 	var/volume_multiplier = 1
+	var/hud_type
+	var/vision_flags = 0
+	/// special vision states, such as seeing darkness, seeing mobs through walls, etc
+	var/darkness_view = 0
+	var/see_invisible = -1
+	var/light_protection = 0
+	/// if the clothing should be disrupted by EMP
+	var/electric = FALSE
+	/// used by goggles and HUDs
+	var/toggleable = FALSE
+	var/active = TRUE
+	var/activation_sound
+	/// set this if you want a sound on deactivation
+	var/deactivation_sound
+	/// set these in initialize if you want messages other than about the optical matrix
+	var/toggle_on_message
+	var/toggle_off_message
+	var/off_state = null
 
-	var/move_trail = /obj/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
+	/// if this item covers the feet, the footprints it should leave
+	var/move_trail = /obj/decal/cleanable/blood/tracks/footprints
 
 
 /obj/item/clothing/Initialize()
@@ -25,6 +46,8 @@
 	accessories = list()
 	for (var/path in init_accessories)
 		attach_accessory(null, new path (src))
+	if(toggleable)
+		set_extension(src, /datum/extension/base_icon_state, icon_state)
 
 
 /obj/item/clothing/Destroy()
@@ -260,10 +283,6 @@ BLIND     // can't see anything
 	w_class = ITEM_SIZE_SMALL
 	body_parts_covered = EYES
 	slot_flags = SLOT_EYES
-	var/vision_flags = 0
-	var/darkness_view = 0//Base human is 2
-	var/see_invisible = -1
-	var/light_protection = 0
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_eyes_vox.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_eyes_unathi.dmi',
@@ -275,7 +294,7 @@ BLIND     // can't see anything
 	else
 		return icon_state
 
-/obj/item/clothing/glasses/on_update_icon()
+/obj/item/clothing/on_update_icon()
 	if (toggleable)
 		if (active)
 			var/datum/extension/base_icon_state/BIS = get_extension(src, /datum/extension/base_icon_state)
@@ -285,10 +304,77 @@ BLIND     // can't see anything
 	else
 		icon_state = initial(icon_state)
 
-/obj/item/clothing/glasses/update_clothing_icon()
+/obj/item/clothing/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
 		M.update_inv_glasses()
+
+/obj/item/clothing/proc/activate(mob/user)
+	if (toggleable && !active)
+		active = TRUE
+		flash_protection = initial(flash_protection)
+		tint = initial(tint)
+		if (user)
+			user.update_inv_glasses()
+			user.update_action_buttons()
+			if (activation_sound)
+				sound_to(user, activation_sound)
+			if (toggle_on_message)
+				to_chat(user, SPAN_NOTICE(toggle_on_message))
+			else
+				to_chat(user, "You activate the optical matrix on \the [src].")
+
+		update_icon()
+		update_clothing_icon()
+		update_vision()
+
+/obj/item/clothing/proc/deactivate(mob/user, manual = TRUE)
+	if (toggleable && active)
+		active = FALSE
+		if (user)
+			if (manual)
+				if (toggle_off_message)
+					to_chat(user, toggle_off_message)
+				else
+					to_chat(user, "You deactivate the optical matrix on \the [src].")
+				if (deactivation_sound)
+					sound_to(user, deactivation_sound)
+			user.update_inv_glasses()
+			user.update_action_buttons()
+
+		flash_protection = FLASH_PROTECTION_NONE
+		tint = TINT_NONE
+		update_icon()
+		update_clothing_icon()
+		update_vision()
+
+/obj/item/clothing/emp_act(severity)
+	if (electric && active)
+		if (istype(loc, /mob/living/carbon/human))
+			var/mob/living/carbon/human/M = loc
+			if (M.glasses != src)
+				to_chat(M, SPAN_DANGER("\The [name] malfunction[gender != PLURAL ? "s":""], releasing a small spark."))
+			else
+				M.eye_blind = 2
+				M.eye_blurry = 4
+				to_chat(M, SPAN_DANGER("\The [name] malfunction[gender != PLURAL ? "s":""], blinding you!"))
+				// Don't cure being nearsighted
+				if (!(M.disabilities & NEARSIGHTED))
+					M.disabilities |= NEARSIGHTED
+					spawn(100)
+						M.disabilities &= ~NEARSIGHTED
+			if (toggleable)
+				deactivate(M, FALSE)
+	..()
+
+/obj/item/clothing/inherit_custom_item_data(datum/custom_item/citem)
+	. = ..()
+	if (toggleable)
+		if (citem.additional_data["icon_on"])
+			set_icon_state(citem.additional_data["icon_on"])
+		if (citem.additional_data["icon_off"])
+			off_state = citem.additional_data["icon_off"]
+
 
 ///////////////////////////////////////////////////////////////////////
 //Gloves
@@ -339,7 +425,7 @@ BLIND     // can't see anything
 /obj/item/clothing/gloves/proc/Touch(atom/A, proximity)
 	return 0 // return 1 to cancel attack_hand()
 
-/obj/item/clothing/gloves/attackby(obj/item/W, mob/user)
+/obj/item/clothing/gloves/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if (isWirecutter(W) || istype(W, /obj/item/scalpel))
 		if (clipped)
 			to_chat(user, SPAN_NOTICE("\The [src] have already been modified!"))
@@ -660,13 +746,16 @@ BLIND     // can't see anything
 	..()
 
 
-/obj/item/clothing/shoes/attackby(obj/item/item, mob/living/user)
+/obj/item/clothing/shoes/use_tool(obj/item/item, mob/living/user, list/click_params)
 	if (istype(item, /obj/item/handcuffs))
 		add_cuffs(item, user)
+		return TRUE
 	else if (istype(item, /obj/item/clothing/shoes/magboots))
 		user.equip_to_slot_if_possible(item, slot_shoes)
-	else
-		add_hidden(item, user)
+		return TRUE
+	else if(add_hidden(item, user))
+		return TRUE
+	return ..()
 
 
 /obj/item/clothing/shoes/proc/add_cuffs(obj/item/handcuffs/cuffs, mob/user)
@@ -710,22 +799,24 @@ BLIND     // can't see anything
 /obj/item/clothing/shoes/proc/add_hidden(obj/item/I, mob/user)
 	if (!can_add_hidden_item)
 		to_chat(user, SPAN_WARNING("\The [src] can't hold anything."))
-		return
+		return TRUE
 	if (hidden_item)
 		to_chat(user, SPAN_WARNING("\The [src] already holds \an [hidden_item]."))
-		return
+		return TRUE
 	if (!(I.item_flags & ITEM_FLAG_CAN_HIDE_IN_SHOES) || (I.slot_flags & SLOT_DENYPOCKET))
 		to_chat(user, SPAN_WARNING("\The [src] can't hold the [I]."))
-		return
+		return TRUE
 	if (I.w_class > hidden_item_max_w_class)
 		to_chat(user, SPAN_WARNING("\The [I] is too large to fit in the [src]."))
-		return
+		return TRUE
 	if (do_after(user, 1 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if(!user.unEquip(I, src))
-			return
+			FEEDBACK_UNEQUIP_FAILURE(user, I)
+			return TRUE
 		user.visible_message(SPAN_ITALIC("\The [user] shoves \the [I] into \the [src]."), range = 1)
 		verbs |= /obj/item/clothing/shoes/proc/remove_hidden
 		hidden_item = I
+		return TRUE
 
 /obj/item/clothing/shoes/proc/remove_hidden(mob/user)
 	set name = "Remove Shoe Item"
@@ -995,16 +1086,17 @@ BLIND     // can't see anything
 		return
 	sensor_mode = SUIT_SENSOR_MODES[switchMode]
 
+	var/datum/pronouns/pronouns = user.choose_from_pronouns()
 	if (src.loc == user)
 		switch(sensor_mode)
 			if(SUIT_SENSOR_OFF)
-				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "You disable your suit's remote sensing equipment.")
+				user.visible_message("[user] adjusts the tracking sensor on [pronouns.his] [src.name].", "You disable your suit's remote sensing equipment.")
 			if(SUIT_SENSOR_BINARY)
-				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "Your suit will now report whether you are live or dead.")
+				user.visible_message("[user] adjusts the tracking sensor on [pronouns.his] [src.name].", "Your suit will now report whether you are live or dead.")
 			if(SUIT_SENSOR_VITAL)
-				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "Your suit will now report your vital lifesigns.")
+				user.visible_message("[user] adjusts the tracking sensor on [pronouns.his] [src.name].", "Your suit will now report your vital lifesigns.")
 			if(SUIT_SENSOR_TRACKING)
-				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "Your suit will now report your vital lifesigns as well as your coordinate position.")
+				user.visible_message("[user] adjusts the tracking sensor on [pronouns.his] [src.name].", "Your suit will now report your vital lifesigns as well as your coordinate position.")
 
 	else if (ismob(src.loc))
 		if(sensor_mode == SUIT_SENSOR_OFF)

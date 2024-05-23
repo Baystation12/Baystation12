@@ -51,7 +51,7 @@ GLOBAL_LIST_INIT(skill_verbs, init_subtypes(/datum/skill_verb))
 		return
 	cooling_down = 1
 	update_verb()
-	addtimer(new Callback(src, .proc/remove_cooldown), cooldown)
+	addtimer(new Callback(src, PROC_REF(remove_cooldown)), cooldown)
 /*
 The Instruct verb. buffs untrained -> basic and requires skill in the skill training as well as leadership.
 Robots and antags can instruct.
@@ -90,7 +90,7 @@ Robots and antags can instruct.
 		return
 
 	if(target.too_many_buffs(/datum/skill_buff/instruct))
-		to_chat(src, SPAN_NOTICE("\The [target] exhausted from all the training \he recieved."))
+		to_chat(src, SPAN_NOTICE("\The [target] has had too many lessons and can't receive any more training today."))
 		return
 
 	var/options = list()
@@ -110,7 +110,7 @@ Robots and antags can instruct.
 		to_chat(src, SPAN_NOTICE("[incapacitated() ? "You are in no state to teach right now!" : "\the [target] is in no state to be taught right now!"]"))
 		return
 	if(target.too_many_buffs(/datum/skill_buff/instruct))
-		to_chat(src, SPAN_NOTICE("\The [target] exhausted from all the training \he recieved."))
+		to_chat(src, SPAN_NOTICE("\The [target] has had too many lessons and can't receive any more training today."))
 		return
 	if(target.skill_check(skill.type, SKILL_BASIC))
 		to_chat(src, SPAN_NOTICE("\The [target] is too skilled to gain any benefit from a short lesson."))
@@ -209,13 +209,12 @@ The Appraise verb. Used on objects to estimate their value.
 	set category = "IC"
 	set name = "Detective instinct"
 	set src = usr
-	set popup_menu = 0
-
-	if(incapacitated())
+	set popup_menu = FALSE
+	if (incapacitated())
 		return
-
-	if(!remove_client_color(/datum/client_color/noir))
-		to_chat(src, "You clear your mind and focus on the scene before you.")
-		add_client_color(/datum/client_color/noir)
-	else
+	if (has_client_color(/datum/client_color/noir))
+		remove_client_color(/datum/client_color/noir)
 		to_chat(src, "You stop looking for clues.")
+	else
+		add_client_color(/datum/client_color/noir)
+		to_chat(src, "You clear your mind and focus on the scene before you.")

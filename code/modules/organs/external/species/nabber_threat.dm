@@ -23,11 +23,12 @@
 				if(message == "Cancel")
 					return
 				else if(message == "Yes")
-					owner.visible_message(SPAN_WARNING("[owner]'s skin shifts to a deep red colour with dark chevrons running down in an almost hypnotic \
-						pattern. Standing tall, \he strikes, sharp spikes aimed at those threatening \him, claws whooshing through the air past them."))
+					var/datum/pronouns/pronouns = owner.choose_from_pronouns()
+					owner.visible_message(SPAN_WARNING("\The [owner]'s skin shifts to a deep red colour with dark chevrons running down in an almost hypnotic \
+						pattern. Standing tall, [pronouns.he] strikes, sharp spikes aimed at those threatening [pronouns.him], claws whooshing through the air past them."))
 				playsound(owner.loc, 'sound/effects/angrybug.ogg', 60, 0)
 				owner.skin_state = SKIN_THREAT
 				owner.update_skin()
-				addtimer(new Callback(owner, /mob/living/carbon/human/proc/reset_skin), 10 SECONDS, TIMER_UNIQUE)
+				addtimer(new Callback(owner, TYPE_PROC_REF(/mob/living/carbon/human, reset_skin)), 10 SECONDS, TIMER_UNIQUE)
 		else if(owner.skin_state == SKIN_THREAT)
 			owner.reset_skin()

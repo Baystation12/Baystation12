@@ -1473,6 +1473,12 @@
 	maximum_temperature = (70 CELSIUS) + 100
 	mix_message = "The solution thickens into a steaming brown beverage."
 
+/datum/chemical_reaction/ntella_hot_chocolate
+	name = "NTella hot chocolate"
+	result = /datum/reagent/drink/hot_coco/ntella
+	required_reagents = list(/datum/reagent/drink/milk = 1, /datum/reagent/nutriment/choconutspread = 1, /datum/reagent/drink/milk/cream = 1)
+	result_amount = 3
+
 /datum/chemical_reaction/grapejuice
 	name = "Grape Juice"
 	result = /datum/reagent/drink/juice/grape
@@ -1641,6 +1647,28 @@
 	result_amount = 6
 	mix_message = "The broth of the noodles takes on a hellish red gleam."
 
+/datum/chemical_reaction/peanutbutter
+	name = "Peanut Butter"
+	result = /datum/reagent/nutriment/peanutbutter
+	required_reagents = list(/datum/reagent/nutriment/groundpeanuts = 5, /datum/reagent/sugar = 1, /datum/reagent/sodiumchloride = 1)
+	result_amount = 5
+	mix_message = "The solution thickens into a creamy, nutty spread."
+
+/datum/chemical_reaction/choconutspread
+	name = "Choco-Nut Spread"
+	result = /datum/reagent/nutriment/choconutspread
+	required_reagents = list(/datum/reagent/nutriment/almondmeal = 1, /datum/reagent/sugar = 2, /datum/reagent/nutriment/coco = 1, /datum/reagent/drink/milk/soymilk = 1)
+	result_amount = 4
+	mix_message = "The solution thickens into a creamy, chocolate-y spread."
+
+/datum/chemical_reaction/sprinkles
+	name = "Sprinkles"
+	result = /datum/reagent/nutriment/sprinkles
+	required_reagents = list(/datum/reagent/sugar = 3, /datum/reagent/drink/syrup_vanilla = 1, /datum/reagent/nutriment/cornoil = 1)
+	result_amount = 5
+	mix_message = "The solution thickens and hardens into sugary sprinkles."
+
+
 /* Alcohol */
 
 /datum/chemical_reaction/goldschlager
@@ -1714,6 +1742,14 @@
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 10
 	mix_message = "The solution roils as it rapidly ferments into a rich red liquid."
+
+/datum/chemical_reaction/whitewine
+	name = "White Wine"
+	result = /datum/reagent/ethanol/wine/premium
+	required_reagents = list(/datum/reagent/drink/juice/grape/white = 10)
+	catalysts = list(/datum/reagent/enzyme = 5)
+	result_amount = 10
+	mix_message = "The solution roils as it rapidly ferments into a pale gold liquid."
 
 /datum/chemical_reaction/pwine
 	name = "Poison Wine"
@@ -2257,6 +2293,12 @@
 	result = /datum/reagent/drink/milkshake
 	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/drink/ice = 2, /datum/reagent/drink/milk = 2)
 	result_amount = 5
+
+/datum/chemical_reaction/ntella_shake
+	name = "NTella milkshake"
+	result = /datum/reagent/drink/milkshake/ntella
+	required_reagents = list(/datum/reagent/drink/milkshake = 5, /datum/reagent/nutriment/choconutspread = 1)
+	result_amount = 6
 
 /datum/chemical_reaction/rewriter
 	name = "Rewriter"

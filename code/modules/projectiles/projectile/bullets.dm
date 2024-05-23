@@ -1,7 +1,7 @@
 /obj/item/projectile/bullet
 	name = "bullet"
 	icon_state = "bullet"
-	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
+	fire_sound = null
 	damage = 50
 	damage_type = DAMAGE_BRUTE
 	damage_flags = DAMAGE_FLAG_BULLET | DAMAGE_FLAG_SHARP
@@ -125,7 +125,6 @@
 /* short-casing projectiles, like the kind used in pistols or SMGs */
 
 /obj/item/projectile/bullet/pistol
-	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	damage = 45
 	distance_falloff = 3
 
@@ -135,7 +134,6 @@
 	distance_falloff = 4
 
 /obj/item/projectile/bullet/pistol/strong
-	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
 	damage = 50
 	penetration_modifier = 0.8
 	distance_falloff = 2.5
@@ -154,7 +152,6 @@
 
 //4mm. Tiny, very low damage, does not embed, but has very high penetration. Only to be used for the experimental SMG.
 /obj/item/projectile/bullet/flechette
-	fire_sound = 'sound/weapons/gunshot/gunshot_4mm.ogg'
 	damage = 23
 	penetrating = 1
 	armor_penetration = 40
@@ -165,7 +162,6 @@
 
 /obj/item/projectile/bullet/shotgun
 	name = "slug"
-	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
 	damage = 65
 	armor_penetration = 10
 
@@ -183,7 +179,6 @@
 /obj/item/projectile/bullet/pellet/shotgun
 	name = "shrapnel"
 	icon_state = "pellet"
-	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
 	damage = 30
 	pellets = 6
 	range_step = 1
@@ -192,7 +187,6 @@
 /obj/item/projectile/bullet/pellet/shotgun/flechette
 	name = "flechette"
 	icon_state = "flechette"
-	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
 	damage = 30
 	armor_penetration = 25
 	pellets = 3
@@ -205,14 +199,12 @@
 /* "Rifle" rounds */
 
 /obj/item/projectile/bullet/rifle
-	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
 	damage = 45
 	armor_penetration = 25
 	penetrating = 1
 	distance_falloff = 1
 
 /obj/item/projectile/bullet/rifle/military
-	fire_sound = 'sound/weapons/gunshot/gunshot2.ogg'
 	damage = 40
 	armor_penetration = 35
 

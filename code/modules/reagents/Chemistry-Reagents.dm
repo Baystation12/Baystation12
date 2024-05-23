@@ -38,6 +38,10 @@
 	var/glass_desc = "It's a glass of... what, exactly?"
 	var/list/glass_special = null // null equivalent to list()
 
+	var/condiment_icon_state
+	var/condiment_name
+	var/condiment_desc
+
 	// GAS DATA, generic values copied from base XGM datum type.
 	var/gas_specific_heat = 20
 	var/gas_molar_mass =    0.032

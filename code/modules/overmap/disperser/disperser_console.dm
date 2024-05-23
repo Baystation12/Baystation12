@@ -57,7 +57,7 @@
 	if(is_valid_setup())
 		return TRUE
 
-	for(var/obj/machinery/disperser/front/F in SSmachines.machinery)
+	for(var/obj/machinery/disperser/front/F as anything in SSmachines.get_machinery_of_type(/obj/machinery/disperser/front))
 		if(get_dist(src, F) >= link_range)
 			continue
 		var/backwards = turn(F.dir, 180)
@@ -71,9 +71,9 @@
 		middle = M
 		back = B
 		if(is_valid_setup())
-			GLOB.destroyed_event.register(F, src, .proc/release_links)
-			GLOB.destroyed_event.register(M, src, .proc/release_links)
-			GLOB.destroyed_event.register(B, src, .proc/release_links)
+			GLOB.destroyed_event.register(F, src, PROC_REF(release_links))
+			GLOB.destroyed_event.register(M, src, PROC_REF(release_links))
+			GLOB.destroyed_event.register(B, src, PROC_REF(release_links))
 			return TRUE
 	return FALSE
 
@@ -91,9 +91,9 @@
  * Used for destroying links when unlinked.
  */
 /obj/machinery/computer/ship/disperser/proc/release_links()
-	GLOB.destroyed_event.unregister(front, src, .proc/release_links)
-	GLOB.destroyed_event.unregister(middle, src, .proc/release_links)
-	GLOB.destroyed_event.unregister(back, src, .proc/release_links)
+	GLOB.destroyed_event.unregister(front, src, PROC_REF(release_links))
+	GLOB.destroyed_event.unregister(middle, src, PROC_REF(release_links))
+	GLOB.destroyed_event.unregister(back, src, PROC_REF(release_links))
 	front = null
 	middle = null
 	back = null

@@ -59,7 +59,7 @@
 /decl/submap_archetype/liberia/New()
 	. = ..()
 	GLOB.using_map.map_admin_faxes.Add("FTU Agency")
-	for(var/obj/machinery/photocopier/faxmachine/fax in SSmachines.machinery)
+	for(var/obj/machinery/photocopier/faxmachine/fax as anything in SSmachines.get_machinery_of_type(/obj/machinery/photocopier/faxmachine))
 		GLOB.admin_departments += "FTU Agency"
 
 /obj/machinery/power/apc/liberia

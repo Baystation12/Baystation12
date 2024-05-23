@@ -51,7 +51,7 @@
 		shatter()
 	..()
 
-/obj/item/storage/mirror/attackby(obj/item/I, mob/user)
+/obj/item/storage/mirror/use_tool(obj/item/I, mob/living/user, list/click_params)
 	. = ..()
 	if (!.)
 		return

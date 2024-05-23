@@ -19,7 +19,7 @@
 	selection_method = /proc/unit_test_select_heaviest
 
 /obj/random
-	spawn_method = /obj/random/proc/unit_test_spawn_item
+	spawn_method = TYPE_PROC_REF(/obj/random, unit_test_spawn_item)
 
 GLOBAL_DATUM(unit_test_last_obj_random_creation, /atom/movable)
 /obj/random/proc/unit_test_spawn_item()

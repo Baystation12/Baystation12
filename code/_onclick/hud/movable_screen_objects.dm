@@ -79,7 +79,7 @@
 		. = "CENTER"
 
 /obj/screen/movable/proc/decode_screen_Y(Y, mob/viewer)
-	var/view = viewer.client ? viewer.client.view : world.view
+	var/view = viewer.client ? get_view_size_y(viewer.client.view) : world.view
 	if(findtext(Y,"NORTH-"))
 		var/num = text2num(copytext(Y,7)) //Trim NORTH-
 		if(!num)

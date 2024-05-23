@@ -278,7 +278,7 @@ var/global/const/OVERMAP_SPEED_CONSTANT = (1 SECOND)
 
 /obj/overmap/visitable/ship/populate_sector_objects()
 	..()
-	for(var/obj/machinery/computer/ship/S in SSmachines.machinery)
+	for(var/obj/machinery/computer/ship/S as anything in SSmachines.get_machinery_of_type(/obj/machinery/computer/ship))
 		S.attempt_hook_up(src)
 	for(var/datum/ship_engine/E in ship_engines)
 		if(check_ownership(E.holder))

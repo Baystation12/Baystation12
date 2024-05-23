@@ -159,7 +159,7 @@
 	cameraFollow = target
 	to_chat(src, SPAN_NOTICE("Tracking target ..."))
 	cameraFollow.tracking_initiated()
-	addtimer(new Callback(src, .proc/ai_actual_track_action), 0, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
+	addtimer(new Callback(src, PROC_REF(ai_actual_track_action)), 0, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
 
 
 /mob/living/silicon/ai/proc/ai_actual_track_action()
@@ -168,14 +168,14 @@
 	var/status = cameraFollow.tracking_status()
 	if (status == TRACKING_NO_COVERAGE)
 		to_chat(src, SPAN_WARNING("Target is not near any active cameras."))
-		addtimer(new Callback(src, .proc/ai_actual_track_action), 10 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
+		addtimer(new Callback(src, PROC_REF(ai_actual_track_action)), 10 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
 		return
 	else if (status == TRACKING_TERMINATE)
 		ai_cancel_tracking(TRUE)
 		return
 	if (eyeobj)
 		eyeobj.setLoc(get_turf(cameraFollow), FALSE)
-		addtimer(new Callback(src, .proc/ai_actual_track_action), 1 SECOND, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
+		addtimer(new Callback(src, PROC_REF(ai_actual_track_action)), 1 SECOND, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
 		return
 	view_core()
 

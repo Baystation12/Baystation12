@@ -51,7 +51,7 @@
 /singleton/public_access/public_method/holosign_toggle
 	name = "holosign toggle"
 	desc = "Toggle the holosign's active state."
-	call_proc = /obj/machinery/holosign/proc/toggle
+	call_proc = TYPE_PROC_REF(/obj/machinery/holosign, toggle)
 
 /singleton/stock_part_preset/radio/receiver/holosign
 	frequency = BUTTON_FREQ

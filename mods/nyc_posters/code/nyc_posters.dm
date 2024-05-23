@@ -297,9 +297,6 @@
 	name = "Good Old Times"
 	desc = "A poster with a character from the old days, no one remembers his name, but they usually talk about him in a good way"
 
-/* Resomi....... */
-
-/*
 /singleton/poster/nyc/imperium_we_see
 	// by Derp
 	icon_state = "imperium_we_see"
@@ -329,7 +326,6 @@
 	name = "Together"
 	desc = "A handmade poster. The poster depicts the coat of arms of the new Resomi union in the form \
 	of three multi-colored feathers. The poster says \"Unite, feathers\", \"Let's build a new house\"."
-*/
 
 
 /* OBJECTS */

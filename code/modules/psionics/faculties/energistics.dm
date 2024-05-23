@@ -106,7 +106,8 @@
 	if(.)
 		if(istype(target,/obj/item/clothing/mask/smokable/cigarette))
 			var/obj/item/clothing/mask/smokable/cigarette/S = target
-			S.light("[user] snaps \his fingers and \the [S.name] lights up.")
+			var/datum/pronouns/pronouns = user.choose_from_pronouns()
+			S.light("\The [user] snaps [pronouns.his] fingers and \the [S.name] lights up.")
 			playsound(S.loc, "sparks", 50, 1)
 		else
 			var/datum/effect/spark_spread/sparks = new ()

@@ -2,11 +2,4 @@
 PROCESSING_SUBSYSTEM_DEF(vines)
 	name = "Vines"
 	priority = SS_PRIORITY_VINES
-	wait = 80
-
-	process_proc = /obj/vine/Process
-
-	var/list/vine_list
-
-/datum/controller/subsystem/processing/vines/PreInit()
-	vine_list = processing // Simply setups a more recognizable var name than "processing"
+	wait = 8 SECONDS

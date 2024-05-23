@@ -182,7 +182,7 @@
 
 //Handles repairs (and also upgrades).
 
-/obj/item/clothing/suit/space/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/clothing/suit/space/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W,/obj/item/stack/material))
 		var/repair_power = 0
 		switch(W.get_material_name())
@@ -192,42 +192,42 @@
 				repair_power = 1
 
 		if(!repair_power)
-			return
+			return ..()
 
 		if(istype(loc,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = loc
 			if(H.wear_suit == src)
 				to_chat(user, SPAN_WARNING("You cannot repair \the [src] while it is being worn."))
-				return
+				return TRUE
 
 		if(burn_damage <= 0)
-			to_chat(user, "There is no surface damage on \the [src] to repair.") //maybe change the descriptor to more obvious? idk what
-			return
+			to_chat(user, SPAN_WARNING("There is no surface damage on \the [src] to repair."))
+			return TRUE
 
 		var/obj/item/stack/P = W
 		var/use_amt = min(P.get_amount(), 3)
 		if(use_amt && P.use(use_amt))
 			repair_breaches(DAMAGE_BURN, use_amt * repair_power, user)
-		return
+		return TRUE
 
 	else if(isWelder(W))
-
 		if(istype(loc,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = loc
 			if(H.wear_suit == src)
 				to_chat(user, SPAN_WARNING("You cannot repair \the [src] while it is being worn."))
-				return
+				return TRUE
 
 		if (brute_damage <= 0)
 			to_chat(user, "There is no structural damage on \the [src] to repair.")
-			return
+			return TRUE
 
 		var/obj/item/weldingtool/WT = W
-		if(!WT.remove_fuel(5))
-			return
+		if(!WT.can_use(5, user, "repair \the [src]."))
+			return TRUE
 
+		WT.remove_fuel(5)
 		repair_breaches(DAMAGE_BRUTE, 3, user)
-		return
+		return TRUE
 
 	else if(istype(W, /obj/item/tape_roll))
 		var/datum/breach/target_breach		//Target the largest unpatched breach.
@@ -242,7 +242,7 @@
 		else
 			playsound(src, 'sound/effects/tape.ogg',25)
 			var/mob/living/carbon/human/H = user
-			if(!istype(H)) return
+			if(!istype(H)) return ..()
 			var/is_worn = istype(loc, /mob/living)
 			if(do_after(user, (H.wear_suit == src ? 6 : 3) SECONDS, is_worn ? loc : src, is_worn ? DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS : DO_PUBLIC_UNIQUE)) //Sealing a breach on your own suit is awkward and time consuming
 				user.visible_message(
@@ -252,9 +252,9 @@
 				target_breach.patched = TRUE
 				target_breach.update_descriptor()
 				calc_breach_damage()
-		return
+		return TRUE
 
-	..()
+	return ..()
 
 /obj/item/clothing/suit/space/examine(mob/user)
 	. = ..()

@@ -65,7 +65,7 @@
 			"Track With Camera",
 			"track",
 			/mob/living/silicon/ai/proc/ai_camera_track,
-			list(/mob/living/silicon/ai/proc/trackable_mobs = (AI_BUTTON_PROC_BELONGS_TO_CALLER|AI_BUTTON_INPUT_REQUIRES_SELECTION))
+			list(TYPE_PROC_REF(/mob/living/silicon/ai, trackable_mobs) = (AI_BUTTON_PROC_BELONGS_TO_CALLER|AI_BUTTON_INPUT_REQUIRES_SELECTION))
 			)
 
 	adding += new /obj/screen/ai_button(null,
@@ -80,7 +80,7 @@
 			"Jump to Network",
 			"camera",
 			/mob/living/silicon/ai/proc/ai_network_change,
-			list(/mob/living/silicon/ai/proc/get_camera_network_list = (AI_BUTTON_PROC_BELONGS_TO_CALLER|AI_BUTTON_INPUT_REQUIRES_SELECTION))
+			list(TYPE_PROC_REF(/mob/living/silicon/ai, get_camera_network_list) = (AI_BUTTON_PROC_BELONGS_TO_CALLER|AI_BUTTON_INPUT_REQUIRES_SELECTION))
 			)
 
 	adding += new /obj/screen/ai_button(null,

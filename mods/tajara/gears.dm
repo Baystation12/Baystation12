@@ -4,7 +4,7 @@
 	whitelisted = list(SPECIES_TAJARA)
 	flags = 0
 	sort_category = "Xenowear"
-	custom_setup_proc = /obj/item/passport/proc/set_info
+	custom_setup_proc = TYPE_PROC_REF(/obj/item/passport, set_info)
 	cost = 0
 
 /datum/gear/gloves/dress/modified

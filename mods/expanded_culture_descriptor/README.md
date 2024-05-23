@@ -2,6 +2,7 @@
 #### Список PRов:
 
 - https://github.com/SierraBay/SierraBay12/pull/1442
+- https://github.com/SierraBay/SierraBay12/pull/2159
 <!--
   Ссылки на PRы, связанные с модом:
   - Создание
@@ -49,6 +50,7 @@ ID мода: EXPANDED_CULTURE_DESCRIPTOR
 - `code/modules/culture_descriptor/culture/cultures_serpentid.dm`: `/singleton/cultural_info/culture/nabber/New()`
 - `code/modules/culture_descriptor/location/_location.dm`: `/singleton/cultural_info/location/get_text_details()`
 - `code/modules/species/species.dm`: `/datum/species/New()`
+- `code/modules/species/station/machine.dm`: `/datum/species/machine/var/available_cultural_info`
 <!--
   Если вы редактировали какие-либо процедуры или переменные в кор коде,
   они должны быть указаны здесь.
@@ -74,7 +76,6 @@ ID мода: EXPANDED_CULTURE_DESCRIPTOR
   - `/singleton/cultural_info/culture/human/venusian_upper`
   - `/singleton/cultural_info/culture/human/venusian_surfacer`
   - `/singleton/cultural_info/culture/human/belter`
-  - `/singleton/cultural_info/culture/human/plutonian`
   - `/singleton/cultural_info/culture/human/earthling`
   - `/singleton/cultural_info/culture/human/ceti_north`
   - `/singleton/cultural_info/culture/human/ceti_south`
@@ -169,7 +170,6 @@ ID мода: EXPANDED_CULTURE_DESCRIPTOR
   - `/singleton/cultural_info/location/human/luna`
   - `/singleton/cultural_info/location/human/venus`
   - `/singleton/cultural_info/location/human/ceres`
-  - `/singleton/cultural_info/location/human/pluto`
   - `/singleton/cultural_info/location/human/cetiepsilon`
   - `/singleton/cultural_info/location/human/eos`
   - `/singleton/cultural_info/location/human/terra`

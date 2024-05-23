@@ -114,6 +114,7 @@
 	scope_zoom = 0
 	scoped_accuracy = 0
 	wielded_item_state = "boltaction-wielded"
+	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
 
 /obj/item/gun/projectile/sniper/panther //semi-automatic only
 	name = "marksman rifle"
@@ -140,6 +141,7 @@
 	wielded_item_state = "dmr-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/ltrifle_magout.ogg'
+	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
 
 /obj/item/gun/projectile/sniper/panther/on_update_icon()
 	if(ammo_magazine)
@@ -171,6 +173,7 @@
 	wielded_item_state = "garand-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/garand_magout.ogg'
+	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
 
 /obj/item/gun/projectile/sniper/garand/on_update_icon()
 	if(ammo_magazine && length(ammo_magazine.stored_ammo))
@@ -199,6 +202,7 @@
 	max_shells = 10
 	accuracy = 1
 	wielded_item_state = "semistrip-wielded"
+	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
 
 /obj/item/gun/projectile/sniper/semistrip/on_update_icon()
 	if(ammo_magazine && length(ammo_magazine.stored_ammo))
