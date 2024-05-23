@@ -194,6 +194,9 @@
 /obj/structure/wall_frame/titanium
 	material = MATERIAL_TITANIUM
 
+/obj/structure/wall_frame/ocp
+	material = MATERIAL_OSMIUM_CARBIDE_PLASTEEL
+
 /obj/structure/wall_frame/hull
 	paint_color = COLOR_SOL
 

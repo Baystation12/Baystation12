@@ -80,6 +80,7 @@
 	hardhats["orange hardhat"] = /obj/item/clothing/head/hardhat/orange
 	hardhats["red hardhat"] = /obj/item/clothing/head/hardhat/red
 	hardhats["light damage control helmet"] = /obj/item/clothing/head/hardhat/light
+	hardhats["yellow hardhat"] = /obj/item/clothing/head/hardhat
 	gear_tweaks += new/datum/gear_tweak/path(hardhats)
 
 /datum/gear/head/formalhat

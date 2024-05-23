@@ -6390,14 +6390,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
-"pa" = (
-/obj/wallframe_spawn/reinforced_phoron,
-/obj/machinery/door/blast/regular{
-	id_tag = "SupermatterPort";
-	name = "Reactor Blast Door"
-	},
-/turf/simulated/floor/reinforced,
-/area/engineering/engine_room)
 "pb" = (
 /obj/floor_decal/industrial/warning{
 	dir = 1;
@@ -9576,7 +9568,7 @@
 /turf/simulated/floor/tiled,
 /area/engineering/engineering_bay)
 "xw" = (
-/obj/wingrille_spawn/reinforced_phoron/full,
+/obj/wallframe_spawn/reinforced_phoron/ocp,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
@@ -12018,7 +12010,7 @@
 	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
-/obj/wingrille_spawn/reinforced_phoron/full,
+/obj/wallframe_spawn/reinforced_phoron/ocp,
 /turf/simulated/floor/reinforced,
 /area/vacant/prototype/engine)
 "Ek" = (
@@ -15148,11 +15140,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/vacant/prototype/control)
 "Oj" = (
-/obj/machinery/door/airlock/hatch/maintenance/bolted{
-	frequency = 1379;
-	id_tag = "prototype_interior";
-	name = "Fusion Maintenance"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -15164,6 +15151,11 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/door/airlock/hatch/maintenance{
+	frequency = 1379;
+	id_tag = "prototype_interior";
+	name = "Fusion Maintenance"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/vacant/prototype/control)
@@ -15768,11 +15760,6 @@
 /turf/simulated/floor/plating,
 /area/vacant/prototype/engine)
 "Qj" = (
-/obj/machinery/door/airlock/hatch/maintenance/bolted{
-	frequency = 1379;
-	id_tag = "prototype_exterior";
-	name = "Fusion Maintenance"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -15784,6 +15771,11 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/door/airlock/hatch/maintenance{
+	frequency = 1379;
+	id_tag = "prototype_exterior";
+	name = "Fusion Maintenance"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/vacant/prototype/control)
@@ -16703,7 +16695,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/wingrille_spawn/reinforced_phoron/full,
+/obj/wallframe_spawn/reinforced_phoron/ocp,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
@@ -44933,7 +44925,7 @@ kw
 lj
 lY
 So
-pa
+qc
 Ck
 Uo
 Zo
