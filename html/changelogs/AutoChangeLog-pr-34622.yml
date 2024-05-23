@@ -1,0 +1,4 @@
+author: cuddleandtea
+changes:
+  - {rscadd: admins can change volume for local tracks}
+delete-after: true
