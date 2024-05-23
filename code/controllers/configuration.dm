@@ -81,8 +81,8 @@
 	/// length of voting period (deciseconds, default 1 minute)
 	var/static/vote_period = 600
 
-	/// Time in minutes between checks for ending empty rounds
-	var/static/empty_round_check_interval = 0
+	/// Time in minutes after which a round with no living players ends
+	var/static/empty_round_timeout = 0
 
 	/// Time in minutes before the first autotransfer vote
 	var/static/vote_autotransfer_initial = 120
@@ -587,11 +587,11 @@
 				if (isnull(transfer_vote_block_antag_time) || transfer_vote_block_antag_time < 0)
 					log_misc("Invalid transfer_vote_block_antag_time: [value]")
 					transfer_vote_block_antag_time = 0
-			if ("empty_round_check_interval")
-				empty_round_check_interval = text2num_or_default(value)
-				if (isnull(empty_round_check_interval) || empty_round_check_interval < 0)
-					log_misc("Invalid empty_round_check_interval: [value]")
-					empty_round_check_interval = 0
+			if ("empty_round_timeout")
+				empty_round_timeout = text2num_or_default(value)
+				if (isnull(empty_round_timeout) || empty_round_timeout < 0)
+					log_misc("Invalid empty_round_timeout: [value]")
+					empty_round_timeout = 0
 			if ("vote_autogamemode_timeleft")
 				vote_autogamemode_timeleft = text2num(value)
 			if ("pre_game_time")
