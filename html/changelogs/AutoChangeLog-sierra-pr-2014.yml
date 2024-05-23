@@ -1,7 +1,0 @@
-author: Rootoo807
-changes:
-  - {bugfix: The monitor decryption key in the CE's office no longer spawns in blank.}
-  - {bugfix: She/They and He/They pronouns show up correctly on IDs and crew records.}
-  - {bugfix: GAS threat display's skin overlay is visible and has been updated to
-      match the current GAS sprite.}
-delete-after: true

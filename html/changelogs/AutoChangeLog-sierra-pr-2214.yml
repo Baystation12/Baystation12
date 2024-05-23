@@ -1,5 +1,0 @@
-author: Mewlin1230
-changes:
-  - {bugfix: 'pAIs can now target specific limbs, to allow for the use of certain
-      exosuits modules'}
-delete-after: true

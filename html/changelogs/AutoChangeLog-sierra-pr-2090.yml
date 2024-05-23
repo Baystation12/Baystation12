@@ -1,4 +1,0 @@
-author: Nyvrem
-changes:
-  - {tweak: GAS 'brains' no longer fit in MMIs.}
-delete-after: true

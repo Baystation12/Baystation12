@@ -1,8 +1,0 @@
-author: emmanuelbassil
-changes:
-  - {bugfix: Can wrap boxes again.}
-  - {bugfix: 'Fixed being able to wrap items in storage containers, breaking the entire
-      interaction.'}
-  - {bugfix: Fixes gun-bashing. Clicking on someone while on harm intent with safety
-      enabled will bash with the gun.}
-delete-after: true

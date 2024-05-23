@@ -1,4 +1,0 @@
-author: SierraKomodo
-changes:
-  - {bugfix: Fixes barsigns having an empty string as a selectable sprite option.}
-delete-after: true

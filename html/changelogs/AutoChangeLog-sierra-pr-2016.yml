@@ -1,9 +1,0 @@
-author: Karl Johansson
-changes:
-  - {rscadd: 'Adds ballistic goggles, goggles that provide a small amount of protection
-      against shrapnel and explosions. Also featuring prescription and fake variants.'}
-  - {rscadd: Adds downgraded thermals and night vision accessories that can attach
-      to helmets. Available for tator tots and tight-budgeted mercenaries alike for
-      only 12TC!}
-  - {rscadd: Adds HUDs and custom lenses that can attach to ballistic goggles.}
-delete-after: true
