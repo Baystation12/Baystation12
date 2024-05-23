@@ -41,10 +41,13 @@ var/global/list/sounds_cache = list()
 	set category = "Fun"
 	set name = "Play Local Sound"
 	if(!check_rights(R_SOUNDS))	return
+	var/vol = input("Select a volume for the sound", "Play Local Sound", 50) as num|null
+	if (!vol)
+		return
 
 	log_admin("[key_name(src)] played a local sound [S]")
 	message_admins("[key_name_admin(src)] played a local sound [S]", 1)
-	playsound(get_turf(src.mob), S, 50, 0, 0)
+	playsound(get_turf(src.mob), S, vol, 0, 0)
 
 
 /client/proc/play_server_sound()
