@@ -1,0 +1,4 @@
+author: UEDHighCommand
+changes:
+  - {admin: Портированы фиксы для ксеновайтлист-панели со STAGING-SIERRA.}
+delete-after: true
