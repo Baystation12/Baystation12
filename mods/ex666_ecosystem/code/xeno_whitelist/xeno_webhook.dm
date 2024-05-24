@@ -79,10 +79,10 @@
 		var/list/text = list("diff")
 		for(var/race in check)
 			text += race
-		fields[++length(fields)] = list(
+		fields += list(list(
 			"name" = ckey2,
 			"value" = "```[jointext(text, "\n")]```"
-		)
+		))
 	if(length(fields))
 		desc["fields"] = fields
 	.["embeds"] = list(desc)

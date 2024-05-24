@@ -273,18 +273,18 @@ GLOBAL_DATUM_INIT(xeno_state, /datum/topic_state/admin_state/xeno, new)
 	for(var/list/check in l)
 		if(check["ckey"] == ckey)
 			create = FALSE
-			newckey[++length(newckey)] = check
+			newckey += list(check)
 		else if(findtext(check["ckey"], ckey, 1, length(ckey)+1))
-			insort[++length(insort)] = check
+			insort += list(check)
 		else
-			notinsort[++length(notinsort)] = check
+			notinsort += list(check)
 
 	if(create)
 		var/list/check = list()
 		check["ckey"] = ckey
 		for(var/race in lowerxenoname)
 			check["NO"] += list(race)
-		newckey[++length(newckey)] = check
+		newckey += list(check)
 
 	l.Cut()
 	l.Add(newckey)
@@ -369,7 +369,7 @@ GLOBAL_DATUM_INIT(xeno_state, /datum/topic_state/admin_state/xeno, new)
 			a["race"] = unite[2]
 			ckeys += list(a)
 			if(!(unite[2] in racecheck))
-				racecheck[++length(racecheck)] = unite[2]
+				racecheck += list(unite[2])
 		racecheck = sortList(racecheck)
 		var/list/result = list()
 		for(var/check in racecheck)
@@ -399,7 +399,7 @@ GLOBAL_DATUM_INIT(xeno_state, /datum/topic_state/admin_state/xeno, new)
 //	Если элемент есть в подлисте - вытаскиваем его повыше
 /proc/SortByRace(list/L, race = "ckey")
 	if(!length(L))
-		return
+		return list()
 	L = sortByKey(L, "ckey")
 	if(race && !(race == "ckey"))
 		var/list/insort = list()
@@ -408,13 +408,13 @@ GLOBAL_DATUM_INIT(xeno_state, /datum/topic_state/admin_state/xeno, new)
 		var/list/notinsort = list()
 		for(var/list/s in L)
 			if(lowertext(race) in s["GRANT"])
-				insort[++length(insort)] = s
+				insort += list(s)
 			else if(lowertext(race) in s["REVOKE"])
-				secondsort[++length(secondsort)] = s
+				secondsort += list(s)
 			else if(lowertext(race) in s["YES"])
-				tirhdsort[++length(tirhdsort)] = s
+				tirhdsort += list(s)
 			else
-				notinsort[++length(notinsort)] = s
+				notinsort += list(s)
 		L.Cut()
 		L.Add(insort)
 		L.Add(secondsort)
@@ -426,7 +426,7 @@ GLOBAL_DATUM_INIT(xeno_state, /datum/topic_state/admin_state/xeno, new)
 /proc/ParseXenoWhitelist(list/l, list/allspecies)
 	var/list/A = list()
 	if(!length(l))
-		return
+		return list()
 	A = splittext(pick(l), " - ")
 	if(length(A) >= 2)
 		log_admin("Error: Alien Whitelist SQL usage has been turned on, but list wasn't reloaded.")
