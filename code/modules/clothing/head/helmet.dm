@@ -26,30 +26,28 @@
 	w_class = ITEM_SIZE_NORMAL
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_ADHERENT)
 
+
 /obj/item/clothing/head/helmet/needs_vision_update()
-	for(var/obj/item/clothing/accessory/glassesmod/visor in accessories)
+	for (var/obj/item/clothing/accessory/glassesmod/visor in accessories)
 		return TRUE
-	. = ..()
+	return ..()
+
 
 /obj/item/clothing/head/helmet/verb/toggle_visor()
-
-	set name = "Toggle Helmet Attachments"
+	set name = "Toggle Helmet Visors"
 	set category = "Object"
 	set src in usr
-
-	if (!istype(loc,/mob/living))
+	if (usr.incapacitated())
 		return
-
 	var/toggled = FALSE
-	if (!usr.incapacitated())
-		for (var/obj/item/clothing/accessory/glassesmod/mod in accessories)
-			if (mod.active)
-				mod.deactivate(usr)
-			else
-				mod.activate(usr)
-			toggled = TRUE
-		if (!toggled)
-			to_chat(usr, SPAN_CLASS("danger", "You do not have a visor attached to your helmet!"))
+	for (var/obj/item/clothing/accessory/glassesmod/mod in accessories)
+		if (mod.active)
+			mod.deactivate(usr)
+		else
+			mod.activate(usr)
+		toggled = TRUE
+	if (!toggled)
+		to_chat(usr, SPAN_WARNING("Your helmet has no visors attached."))
 
 
 /obj/item/clothing/head/helmet/nt
