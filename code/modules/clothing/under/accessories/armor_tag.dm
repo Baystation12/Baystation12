@@ -8,7 +8,7 @@
 		slot_wear_suit_str = 'icons/mob/onmob/onmob_modular_armor.dmi'
 	)
 	icon_state = null
-	slot = ACCESSORY_SLOT_ARMOR_M
+	slot = ACCESSORY_SLOT_ARMOR_MISC
 	w_class = ITEM_SIZE_TINY
 
 	sprite_sheets = list(

@@ -17,7 +17,7 @@
 		energy = ARMOR_ENERGY_SMALL,
 		bomb = ARMOR_BOMB_PADDED
 	)
-	slot = ACCESSORY_SLOT_ARMOR_A
+	slot = ACCESSORY_SLOT_ARMOR_ARMS
 	body_location = ARMS
 	flags_inv = CLOTHING_BULKY
 

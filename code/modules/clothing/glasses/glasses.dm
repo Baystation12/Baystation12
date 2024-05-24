@@ -66,8 +66,8 @@
 		bomb = ARMOR_BOMB_MINOR
 	)
 	action_button_name = "Toggle Attachments"
-	valid_accessory_slots = list(ACCESSORY_SLOT_VISION, ACCESSORY_SLOT_HUD)
-	restricted_accessory_slots = list(ACCESSORY_SLOT_VISION, ACCESSORY_SLOT_HUD)
+	valid_accessory_slots = list(ACCESSORY_SLOT_GLASSES_VISION, ACCESSORY_SLOT_GLASSES_HUD)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_GLASSES_VISION, ACCESSORY_SLOT_GLASSES_HUD)
 	var/toggle_mods = list()
 
 /obj/item/clothing/glasses/ballistic/Initialize()

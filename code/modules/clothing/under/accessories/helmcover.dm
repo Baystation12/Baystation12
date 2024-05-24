@@ -8,7 +8,7 @@
 		slot_head_str = 'icons/mob/onmob/onmob_modular_armor.dmi'
 	)
 	icon_state = null
-	slot = ACCESSORY_SLOT_HELM_C
+	slot = ACCESSORY_SLOT_HELMET_COVER
 	body_location = HEAD
 
 	sprite_sheets = list(

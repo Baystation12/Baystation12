@@ -42,7 +42,7 @@
 	name = "thermal sights"
 	desc = "An older set of thermal vision goggles, modified to attach to a helmet."
 	icon_state = "thermals"
-	slot = ACCESSORY_SLOT_VISOR
+	slot = ACCESSORY_SLOT_HELMET_VISOR
 	vision_flags = SEE_MOBS
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	toggleable = TRUE
@@ -58,7 +58,7 @@
 	name = "light-enhancing sights"
 	desc = "An older set of light enhancing goggles, modified to attach to a helmet."
 	icon_state = "nvg"
-	slot = ACCESSORY_SLOT_VISOR
+	slot = ACCESSORY_SLOT_HELMET_VISOR
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	toggleable = TRUE
 	off_state = "nvgoff"
@@ -76,7 +76,7 @@
 	name = "security HUD attachment"
 	desc = "An attachable security HUD for ballistic goggles."
 	icon_state = "sechud"
-	slot = ACCESSORY_SLOT_HUD
+	slot = ACCESSORY_SLOT_GLASSES_HUD
 	hud_type = HUD_SECURITY
 	toggleable = TRUE
 	off_state = "hudoff"
@@ -90,7 +90,7 @@
 	name = "medical HUD attachment"
 	desc = "An attachable security HUD for ballistic goggles."
 	icon_state = "medhud"
-	slot = ACCESSORY_SLOT_HUD
+	slot = ACCESSORY_SLOT_GLASSES_HUD
 	hud_type = HUD_MEDICAL
 	toggleable = TRUE
 	off_state = "hudoff"
@@ -101,7 +101,7 @@
 /obj/item/clothing/accessory/glassesmod/vision/polarized
 	name = "polarized lenses"
 	desc = "A set of flash-resistant lenses that can be clipped onto a pair of ballistic goggles."
-	slot = ACCESSORY_SLOT_VISION
+	slot = ACCESSORY_SLOT_GLASSES_VISION
 	icon_state = "polarized"
 	flash_protection = FLASH_PROTECTION_MODERATE
 	darkness_view = -1
@@ -109,7 +109,7 @@
 /obj/item/clothing/accessory/glassesmod/vision/welding
 	name = "welding lenses"
 	desc = "A set of welding lenses that can be attached to ballistic goggles to protect against arc-eye"
-	slot = ACCESSORY_SLOT_VISION
+	slot = ACCESSORY_SLOT_GLASSES_VISION
 	icon_state = "welding_lenses"
 	off_state = "welding_lenses_up"
 	flash_protection = FLASH_PROTECTION_MAJOR
