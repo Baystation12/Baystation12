@@ -6,8 +6,16 @@
 		slot_l_hand_str = "helmet",
 		slot_r_hand_str = "helmet",
 		)
-	valid_accessory_slots = list(ACCESSORY_SLOT_HELM_C, ACCESSORY_SLOT_HELM_D, ACCESSORY_SLOT_VISOR)
-	restricted_accessory_slots = list(ACCESSORY_SLOT_HELM_C, ACCESSORY_SLOT_HELM_D, ACCESSORY_SLOT_VISOR)
+	valid_accessory_slots = list(
+		ACCESSORY_SLOT_HELMET_COVER,
+		ACCESSORY_SLOT_HELMET_DECOR,
+		ACCESSORY_SLOT_HELMET_VISOR
+	)
+	restricted_accessory_slots = list(
+		ACCESSORY_SLOT_HELMET_COVER,
+		ACCESSORY_SLOT_HELMET_DECOR,
+		ACCESSORY_SLOT_HELMET_VISOR
+	)
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	body_parts_covered = HEAD
 	armor = list(
@@ -116,7 +124,7 @@
 	name = "ablative helmet"
 	desc = "A helmet made from advanced materials which protects against concentrated energy weapons."
 	icon_state = "helmet_reflect"
-	valid_accessory_slots = list(ACCESSORY_SLOT_VISOR)
+	valid_accessory_slots = list(ACCESSORY_SLOT_HELMET_VISOR)
 	armor = list(
 		melee = ARMOR_MELEE_SMALL,
 		bullet = ARMOR_BALLISTIC_MINOR,
@@ -129,7 +137,7 @@
 	name = "ballistic helmet"
 	desc = "A helmet with reinforced plating to protect against ballistic projectiles."
 	icon_state = "helmet_bulletproof"
-	valid_accessory_slots = list(ACCESSORY_SLOT_VISOR)
+	valid_accessory_slots = list(ACCESSORY_SLOT_HELMET_VISOR)
 	armor = list(
 		melee = ARMOR_MELEE_MINOR,
 		bullet = ARMOR_BALLISTIC_AP,
@@ -149,7 +157,7 @@
 		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 		)
-	valid_accessory_slots = list(ACCESSORY_SLOT_VISOR)
+	valid_accessory_slots = list(ACCESSORY_SLOT_HELMET_VISOR)
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.5
@@ -291,8 +299,8 @@
 	name = "model helmet"
 	desc = "A lightweight helmet made of cheap plastic, sporting fiducial marking stickers on either side. You doubt it will provide much protection."
 	icon_state = "nvgmount"
-	valid_accessory_slots = list(ACCESSORY_SLOT_VISOR, ACCESSORY_SLOT_HELM_D)
-	restricted_accessory_slots = list(ACCESSORY_SLOT_VISOR, ACCESSORY_SLOT_HELM_D)
+	valid_accessory_slots = list(ACCESSORY_SLOT_HELMET_VISOR, ACCESSORY_SLOT_HELMET_DECOR)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_HELMET_VISOR, ACCESSORY_SLOT_HELMET_DECOR)
 	armor = list(
 		melee = ARMOR_MELEE_MINOR,
 		)

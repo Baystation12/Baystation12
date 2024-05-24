@@ -10,7 +10,7 @@
 	overlay_state = "error"
 	w_class = ITEM_SIZE_TINY
 	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
-	slot = ACCESSORY_SLOT_HELM_D
+	slot = ACCESSORY_SLOT_HELMET_DECOR
 	body_location = HEAD
 	gender = PLURAL
 

@@ -11,7 +11,7 @@
 		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_MINOR
 		)
-	slot = ACCESSORY_SLOT_ARMOR_C
+	slot = ACCESSORY_SLOT_ARMOR_CHEST
 	flags_inv = CLOTHING_BULKY
 
 

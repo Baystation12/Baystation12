@@ -9,7 +9,7 @@
 	)
 	icon_state = "pouches"
 	gender = PLURAL
-	slot = ACCESSORY_SLOT_ARMOR_S
+	slot = ACCESSORY_SLOT_ARMOR_STORAGE
 	slots = 2 STORAGE_SLOTS
 
 	sprite_sheets = list(
