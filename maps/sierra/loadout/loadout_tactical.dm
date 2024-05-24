@@ -18,6 +18,7 @@
 /datum/gear/tactical/holster/New()
 	allowed_roles = ARMED_ROLES
 	allowed_roles += /datum/job/iaa
+	allowed_roles += /datum/job/adjutant
 	..()
 
 /datum/gear/tactical/holster/New()

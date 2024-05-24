@@ -58,3 +58,9 @@
 		)
 	siemens_coefficient = 0
 	light_overlay = "helmet_light_dual"
+
+/obj/item/clothing/accessory/cloak/colorable/get_mob_overlay(mob/user_mob, slot) //Colorable cloak stuff for voidsuits that dont exist in core code
+	. = ..()
+
+	if(istype(loc, /obj/item/clothing/suit/space/void/exploration) || istype(loc, /obj/item/clothing/suit/space/void/atmos/alt))
+		return overlay_image(accessory_icons[slot], "colorcloak_fat", color, RESET_COLOR)

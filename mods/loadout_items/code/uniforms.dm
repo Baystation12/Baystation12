@@ -490,6 +490,147 @@
 	icon_state = "victorian_twilight"
 	item_state = "victorian_twilight"
 
+// Aurora stuff
+/obj/item/clothing/under/suit_jacket/nt_skirtsuit
+	name = "black skirtsuit"
+	desc = "A black coat with a blue kerchief accompanied by a swept skirt with a tasteful blue stripe. Works for every occasion."
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "nt_skirtsuit"
+	item_state = "bl_suit"
+	worn_state = "nt_skirtsuit"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+
+/obj/item/clothing/under/dress/red_swept_dress
+	name = "red swept dress"
+	desc = "A red dress that sweeps to the side."
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "red_swept_dress"
+	worn_state = "red_swept_dress"
+
+/obj/item/clothing/under/dress/colorable
+	name = "strapless midi dress"
+	desc = "A one-piece fashionable garment."
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "dress"
+	item_state = "dress"
+	worn_state = "dress"
+	body_parts_covered = UPPER_TORSO | LOWER_TORSO
+
+/obj/item/clothing/under/dress/colorable/sleeveless
+	name = "sleeveless A-line dress"
+	icon_state = "shortsleeve_dress"
+	item_state = "shortsleeve_dress"
+	worn_state = "shortsleeve_dress"
+
+/obj/item/clothing/under/dress/colorable/longsleeve
+	name = "longsleeve A-line dress"
+	icon_state = "longsleeve_dress"
+	item_state = "longsleeve_dress"
+	worn_state = "longsleeve_dress"
+	body_parts_covered = UPPER_TORSO | LOWER_TORSO | ARMS
+
+/obj/item/clothing/under/dress/colorable/evening_gown
+	name = "evening gown"
+	icon_state = "evening_gown"
+	item_state = "evening_gown"
+	worn_state = "evening_gown"
+	body_parts_covered = UPPER_TORSO | LOWER_TORSO | LEGS
+
+/obj/item/clothing/under/dress/colorable/tea_dress
+	name = "tea-length dress"
+	icon_state = "tea_dress"
+	item_state = "tea_dress"
+	worn_state = "tea_dress"
+	body_parts_covered = UPPER_TORSO | LOWER_TORSO | LEGS
+
+/obj/item/clothing/under/dress/colorable/open_shoulder
+	name = "open-shoulder dress"
+	icon_state = "open_shoulder_dress"
+	item_state = "open_shoulder_dress"
+	worn_state = "open_shoulder_dress"
+
+/obj/item/clothing/under/dress/colorable/asymmetric
+	name = "asymmetric dress"
+	icon_state = "asymm_dress"
+	item_state = "asymm_dress"
+	worn_state = "asymm_dress"
+
+/obj/item/clothing/under/dominia/dress
+	name = "Avalon noble greatdress"
+	desc = "This is a greatdress in the style of Avalonian nobility. Greatdresses are an Avalonian fashion fad, distinguished from normal dresses by their colourful palettes \
+			and oversized gowns. More modest nobility would define them as excessively gaudy and unreasonable, but it depends on the individual."
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "dom_dress"
+	item_state = "dom_dress"
+
+/obj/item/clothing/under/dominia/dress/noble
+	name = "Avalon noble dress"
+	desc = "A dress commonly worn by Avalonian nobility. While not as gaudy as the greatdress, it is extremely luxurious nonetheless, and a sign of excellent pedigree \
+			and good fortune."
+	icon = 'mods/loadout_items/icons/obj_under.dmi'
+	item_icons = list(slot_w_uniform_str = 'mods/loadout_items/icons/onmob_under.dmi')
+	icon_state = "altdress_imperial"
+	item_state = "altdress_imperial"
+	var/house
+	var/black = FALSE
+
+/obj/item/clothing/under/dominia/dress/noble/Initialize()
+	. = ..()
+	if(house)
+		icon_state = "altdress_[house]"
+		item_state = "altdress_[house]"
+	if(black)
+		icon_state += "b"
+		item_state += "b"
+
+/obj/item/clothing/under/dominia/dress/noble/strelitz
+	name = "Portenas noble dress"
+	house = "strelitz"
+
+/obj/item/clothing/under/dominia/dress/noble/volvalaad
+	name = "West Vujaran noble dress"
+	house = "volvalaad"
+
+/obj/item/clothing/under/dominia/dress/noble/kazhkz
+	name = "East Vujaran noble dress"
+	house = "kazhkz"
+
+/obj/item/clothing/under/dominia/dress/noble/caladius
+	name = "Kvoblau noble dress"
+	house = "caladius"
+
+/obj/item/clothing/under/dominia/dress/noble/zhao
+	name = "Nova-Yorvik noble dress"
+	house = "zhao"
+
+/obj/item/clothing/under/dominia/dress/noble/black
+	name = "black Avalon noble dress"
+	black = TRUE
+
+/obj/item/clothing/under/dominia/dress/noble/black/strelitz
+	name = "black Portenas noble dress"
+	house = "strelitz"
+
+/obj/item/clothing/under/dominia/dress/noble/black/volvalaad
+	name = "black West Vujaran noble dress"
+	house = "volvalaad"
+
+/obj/item/clothing/under/dominia/dress/noble/black/kazhkz
+	name = "black East Vujaran noble dress"
+	house = "kazhkz"
+
+/obj/item/clothing/under/dominia/dress/noble/black/caladius
+	name = "black Kvoblau noble dress"
+	house = "caladius"
+
+/obj/item/clothing/under/dominia/dress/noble/black/zhao
+	name = "black Nova-Yorvik noble dress"
+	house = "zhao"
+
 /obj/item/clothing/under/rank/adjutant
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'mods/loadout_items/icons/unathi/onmob_under_unathi.dmi'

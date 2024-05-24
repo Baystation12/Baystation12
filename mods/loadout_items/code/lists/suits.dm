@@ -60,3 +60,23 @@
 	medicoats["surgical apron"] = /obj/item/clothing/suit/surgicalapron
 	medicoats["medical jacket"] = /obj/item/clothing/suit/storage/toggle/fr_jacket/emrs
 	gear_tweaks += new/datum/gear_tweak/path(medicoats)
+
+//Aurora stuff
+/datum/gear/suit/avalon_coats
+	display_name = "avalon coats selection"
+	path = /obj/item/clothing/suit/storage/dominia
+
+/datum/gear/suit/avalon_coats/New()
+	..()
+	var/avalon_coats = list()
+	avalon_coats["Avalon greatcoat"] = /obj/item/clothing/suit/storage/dominia
+	avalon_coats["Avalon greatcoat (golden trim)"] = /obj/item/clothing/suit/storage/dominia/gold
+	avalon_coats["Avalon greatcoat (black trim)"] = /obj/item/clothing/suit/storage/dominia/black
+	avalon_coats["Avalon coat"] = /obj/item/clothing/suit/storage/dominia/coat
+	avalon_coats["Avalon coat (golden trim)"] = /obj/item/clothing/suit/storage/dominia/coat/gold
+	avalon_coats["Avalon coat (black trim)"] = /obj/item/clothing/suit/storage/dominia/coat/black
+	avalon_coats["Avalon consular's greatcoat (black trim)"] = /obj/item/clothing/suit/storage/dominia/consular
+	avalon_coats["Avalon consular's coat (black trim)"] = /obj/item/clothing/suit/storage/dominia/consular/coat
+	avalon_coats["Avalon consular's greatcoat (red trim)"] = /obj/item/clothing/suit/storage/dominia/consular/red
+	avalon_coats["Avalon consular's coat (red trim)"] = /obj/item/clothing/suit/storage/dominia/consular/coat/red
+	gear_tweaks += new/datum/gear_tweak/path(avalon_coats)

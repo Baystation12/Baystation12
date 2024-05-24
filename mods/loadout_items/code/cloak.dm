@@ -1,6 +1,6 @@
-/obj/item/clothing/accessory/cloak // A colorable cloak
-	name = "blank cloak"
-	desc = "A simple, bland cloak."
+/obj/item/clothing/accessory/cloak
+	name = "cloak"
+	desc = "A cloak."
 	icon = 'mods/loadout_items/icons/obj_accessory.dmi'
 	icon_state = "colorcloak"
 
@@ -28,6 +28,11 @@
 
 	species_restricted = null
 	valid_accessory_slots = null
+
+/obj/item/clothing/accessory/cloak/colorable
+	name = "blank cloak"
+	desc = "A simple, bland cloak."
+	icon_state = "colorcloak"
 
 /obj/item/clothing/accessory/cloak/ce
 	name = "chief engineer's cloak"
@@ -109,6 +114,16 @@
 	desc = "This cape is so much aged that you can almost think it's a relic."
 	icon_state = "antiquated_cape"
 
+/obj/item/clothing/accessory/cloak/zpci
+	name = "ZPCI cloak"
+	desc = "A formal cape of a ZPCI operative, used as part of the Order's parade uniform. Usually worn on one shoulder."
+	icon_state = "zpci_cloak"
+	slot = ACCESSORY_SLOT_INSIGNIA
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'mods/loadout_items/icons/unathi/onmob_accessory_unathi.dmi'
+	)
+
+
 /obj/item/clothing/accessory/cloak/hooded
 	var/obj/item/clothing/head/hood
 	var/hoodtype = null
@@ -189,3 +204,50 @@
 	icon_state = "crimson_cloak_hood"
 	flags_inv = BLOCKHEADHAIR
 	body_parts_covered = HEAD
+
+//Aurora stuff
+
+/obj/item/clothing/accessory/cloak/dominia/red
+	name = "Avalon grand mantle"
+	desc = "A heavy cape, found usually upon shoulders of the richest - and most conceited - among the Avalonian nobles."
+	icon = 'mods/loadout_items/icons/obj_accessory.dmi'
+	accessory_icons = list(
+		slot_w_uniform_str = 'mods/loadout_items/icons/onmob_accessory.dmi', \
+		slot_tie_str = 'mods/loadout_items/icons/onmob_accessory.dmi', \
+		slot_wear_suit_str = 'mods/loadout_items/icons/onmob_accessory.dmi')
+	item_icons = list(
+		slot_wear_suit_str = 'mods/loadout_items/icons/onmob_accessory.dmi')
+	icon_state = "dominian_cape_red"
+	item_state = "dominian_cape_red"
+	overlay_state = "dominian_cape_red"
+	slot = ACCESSORY_SLOT_INSIGNIA
+	icon_override = null
+	var/rolled = FALSE
+
+/obj/item/clothing/accessory/cloak/dominia/red/update_clothing_icon()
+	if(ismob(loc))
+		var/mob/M = loc
+		M.update_inv_wear_suit()
+	get_mob_overlay(TRUE)
+	get_inv_overlay(TRUE)
+
+/obj/item/clothing/accessory/cloak/dominia/red/verb/roll_up_mantle()
+	set name = "Roll Up Cape Mantle"
+	set desc = "Roll up your cape's mantle."
+	set category = "Object"
+	set src in usr
+
+	var/list/icon_states = icon_states(icon)
+	var/initial_state = initial(icon_state)
+	var/new_state = "[initial_state]_h"
+	if(!(new_state in icon_states))
+		to_chat(usr, SPAN_WARNING("Your cape doesn't allow this!"))
+		return
+
+	rolled = !rolled
+	to_chat(usr, SPAN_NOTICE("You roll your cape's mantle [rolled ? "up" : "down"]."))
+	icon_state = rolled ? new_state : initial_state
+	item_state = rolled ? new_state : initial_state
+	overlay_state = rolled ? new_state : initial_state
+	update_icon()
+	update_clothing_icon()

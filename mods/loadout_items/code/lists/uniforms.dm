@@ -173,3 +173,51 @@
 	informal["denim vest"] = /obj/item/clothing/under/informal/denimvest
 	informal["rhumba outfit"] = /obj/item/clothing/under/informal/cuban_suit
 	gear_tweaks += new/datum/gear_tweak/path(informal)
+
+//Aurora stuff
+/datum/gear/uniform/black_skirtsuit
+	display_name = "black skirtsuit"
+	path = /obj/item/clothing/under/suit_jacket/nt_skirtsuit
+
+/datum/gear/uniform/red_swept_dress
+	display_name = "red swept dress"
+	path = /obj/item/clothing/under/dress/red_swept_dress
+
+/datum/gear/uniform/colorable_dress
+	display_name = "colorable dress selection"
+	path = /obj/item/clothing/under/dress/colorable
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/uniform/colorable_dress/New()
+	..()
+	var/dresses = list()
+	dresses["strapless midi dress"] = /obj/item/clothing/under/dress/colorable
+	dresses["sleeveless A-line dress"] = /obj/item/clothing/under/dress/colorable/sleeveless
+	dresses["longsleeve A-line dress"] = /obj/item/clothing/under/dress/colorable/longsleeve
+	dresses["evening gown"] = /obj/item/clothing/under/dress/colorable/evening_gown
+	dresses["tea-length dress"] = /obj/item/clothing/under/dress/colorable/tea_dress
+	dresses["open-shoulder dress"] = /obj/item/clothing/under/dress/colorable/open_shoulder
+	dresses["asymmetric dress"] = /obj/item/clothing/under/dress/colorable/asymmetric
+	gear_tweaks += new/datum/gear_tweak/path(dresses)
+
+/datum/gear/uniform/avalon_dress
+	display_name = "avalon noble dress selection"
+	path = /obj/item/clothing/under/dominia/dress
+
+/datum/gear/uniform/avalon_dress/New()
+	..()
+	var/dresses = list()
+	dresses["Avalon noble greatdress"] = /obj/item/clothing/under/dominia/dress
+	dresses["Avalon noble dress"] = /obj/item/clothing/under/dominia/dress/noble
+	dresses["Portenas noble dress"] = /obj/item/clothing/under/dominia/dress/noble/strelitz
+	dresses["West Vujaran noble dress"] = /obj/item/clothing/under/dominia/dress/noble/volvalaad
+	dresses["East Vujaran noble dress"] = /obj/item/clothing/under/dominia/dress/noble/kazhkz
+	dresses["Kvoblau noble dress"] = /obj/item/clothing/under/dominia/dress/noble/caladius
+	dresses["Nova-Yorvik noble dress"] = /obj/item/clothing/under/dominia/dress/noble/zhao
+	dresses["black Avalon noble dress"] = /obj/item/clothing/under/dominia/dress/noble/black
+	dresses["black Portenas noble dress"] = /obj/item/clothing/under/dominia/dress/noble/black/strelitz
+	dresses["black West Vujaran noble dress"] = /obj/item/clothing/under/dominia/dress/noble/black/volvalaad
+	dresses["black East Vujaran noble dress"] = /obj/item/clothing/under/dominia/dress/noble/black/kazhkz
+	dresses["black Kvoblau noble dress"] = /obj/item/clothing/under/dominia/dress/noble/black/caladius
+	dresses["black Nova-Yorvik noble dress"] = /obj/item/clothing/under/dominia/dress/noble/black/zhao
+	gear_tweaks += new/datum/gear_tweak/path(dresses)

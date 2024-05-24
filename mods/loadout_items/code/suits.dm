@@ -89,7 +89,7 @@
 	name = "old pullover"
 	desc = "old style pullover"
 	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
-	item_icons = list(slot_head_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
+	item_icons = list(slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
 	icon_state = "pullover"
 	item_state = "pullover"
 
@@ -99,7 +99,7 @@
 	name = "long coat"
 	desc = "Just a blank fabric black longcoat. It's surprisingly light."
 	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
-	item_icons = list(slot_head_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
+	item_icons = list(slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
 	icon_state = "long_coat"
 	item_state = "long_coat"
 
@@ -107,7 +107,7 @@
 	name = "gentlecoat"
 	desc = "A tweed tailcoat purposed for some wannabe gentleman."
 	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
-	item_icons = list(slot_head_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
+	item_icons = list(slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
 	icon_state = "gentlecoat"
 	item_state = "gentlecoat"
 
@@ -115,7 +115,7 @@
 	name = "tailcoat"
 	desc = "A very delicate tailcoat, it imbues its wearer with vibe of snobbery and excessive self-importance."
 	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
-	item_icons = list(slot_head_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
+	item_icons = list(slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
 	icon_state = "papaleroy_tailcoat"
 	item_state = "papaleroy_tailcoat"
 
@@ -123,7 +123,7 @@
 	name = "short trenchcoat"
 	desc = "You may've never asked for this."
 	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
-	item_icons = list(slot_head_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
+	item_icons = list(slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
 	icon_state = "jensencoat"
 	item_state = "jensencoat"
 
@@ -133,7 +133,7 @@
 	name = "kimono"
 	desc = "Traditional Japanese garb, purposed for wearing by women."
 	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
-	item_icons = list(slot_head_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
+	item_icons = list(slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
 	icon_state = "kimono"
 	item_state = "kimono"
 	body_parts_covered = UPPER_TORSO
@@ -142,7 +142,7 @@
 	name = "blue kimono"
 	desc = "Traditional Japanese garb, purposed for wearing by women."
 	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
-	item_icons = list(slot_head_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
+	item_icons = list(slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
 	icon_state = "blue_kimono"
 	item_state = "blue_kimono"
 
@@ -150,7 +150,7 @@
 	name = "red short kimono"
 	desc = "Traditional Japanese garb, purposed for wearing by women. This one is shortened for some extra style points."
 	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
-	item_icons = list(slot_head_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
+	item_icons = list(slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
 	icon_state = "red_short_kimono"
 	item_state = "red_short_kimono"
 
@@ -158,7 +158,7 @@
 	name = "black kimono"
 	desc = "Traditional Japanese garb, purposed for wearing by women."
 	icon = 'maps/sierra/icons/obj/clothing/obj_suit.dmi'
-	item_icons = list(slot_head_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
+	item_icons = list(slot_wear_suit_str = 'maps/sierra/icons/mob/onmob/onmob_suit.dmi')
 	icon_state = "black_kimono"
 	item_state = "black_kimono"
 
@@ -201,4 +201,53 @@
 	siemens_coefficient = 0.9
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	
+//Aurora stuff
+/obj/item/clothing/suit/storage/dominia
+	name = "Avalon greatcoat"
+	desc = "This is a great coat in the style of Avalon nobility. It's the latest fashion across the Kingdom's territories."
+	icon = 'mods/loadout_items/icons/obj_suit.dmi'
+	item_icons = list(slot_wear_suit_str = 'mods/loadout_items/icons/onmob_suit.dmi')
+	icon_state = "greatcoat_red"
+	item_state = "greatcoat_red"
 
+/obj/item/clothing/suit/storage/dominia/gold
+	icon_state = "greatcoat_gold"
+	item_state = "greatcoat_gold"
+
+/obj/item/clothing/suit/storage/dominia/black
+	icon_state = "greatcoat_black"
+	item_state = "greatcoat_black"
+
+/obj/item/clothing/suit/storage/dominia/coat
+	name = "Avalon coat"
+	desc = "This is a coat in the style of Avalon nobility. It's the latest fashion across the Kingdom's territories."
+	icon_state = "coat_red"
+	item_state = "coat_red"
+
+/obj/item/clothing/suit/storage/dominia/coat/gold
+	icon_state = "coat_gold"
+	item_state = "coat_gold"
+
+/obj/item/clothing/suit/storage/dominia/coat/black
+	icon_state = "coat_black"
+	item_state = "coat_black"
+
+/obj/item/clothing/suit/storage/dominia/consular
+	name = "Avalon consular's greatcoat"
+	desc = "An Avalon greatcoat issued to members of His Majesty's Chancellery, designed in the typical Avalonian fashion."
+	icon_state = "dominia_consular_greatcoat"
+	item_state = "dominia_consular_greatcoat"
+
+/obj/item/clothing/suit/storage/dominia/consular/coat
+	name = "Avalon consular's coat"
+	desc = "An Avalon coat issued to members of His Majesty's Chancellery, designed in the typical Avalonian fashion."
+	icon_state = "dominia_consular_coat"
+	item_state = "dominia_consular_coat"
+
+/obj/item/clothing/suit/storage/dominia/consular/red
+	icon_state = "dominia_consular_greatcoat_red"
+	item_state = "dominia_consular_greatcoat_red"
+
+/obj/item/clothing/suit/storage/dominia/consular/coat/red
+	icon_state = "dominia_consular_coat_red"
+	item_state = "dominia_consular_coat_red"

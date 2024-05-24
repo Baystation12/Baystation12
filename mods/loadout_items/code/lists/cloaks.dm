@@ -1,6 +1,6 @@
 /datum/gear/clothing/cloak_custom // common cloak
 	display_name = "cloak, colorable"
-	path = /obj/item/clothing/accessory/cloak
+	path = /obj/item/clothing/accessory/cloak/colorable
 	flags = GEAR_HAS_COLOR_SELECTION
 
 //command cloaks
@@ -81,3 +81,18 @@
 /datum/gear/clothing/cloak_hooded
 	display_name = "cloak, hooded"
 	path = /obj/item/clothing/accessory/cloak/hooded
+
+//Faction cloaks
+
+/datum/gear/clothing/cloak_zpci
+	display_name = "cloak, ZPCI"
+	path = /obj/item/clothing/accessory/cloak/zpci
+	allowed_branches = list(/datum/mil_branch/contractor)
+	allowed_factions = list(FACTION_ZPCI)
+
+//Aurora stuff
+/datum/gear/clothing/cloak_avalon
+	display_name = "mantle, Avalon"
+	path = /obj/item/clothing/accessory/cloak/dominia/red
+
+//Misc cloaks
