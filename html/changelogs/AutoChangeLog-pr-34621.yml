@@ -1,0 +1,4 @@
+author: Mucker
+changes:
+  - {tweak: Audible emotes with sounds can no longer be spammed.}
+delete-after: true
