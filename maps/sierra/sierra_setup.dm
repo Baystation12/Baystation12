@@ -1,7 +1,7 @@
 /datum/map/sierra/setup_map()
 	..()
 	system_name = generate_system_name()
-	minor_announcement = new(new_sound = sound('sound/AI/torch/commandreport.ogg', volume = 45))
+	minor_announcement = new(new_sound = sound(ANNOUNCER_COMMANDREPORT, volume = 45))
 
 /datum/map/sierra/map_info(victim)
 	to_chat(victim, "<h2>Информация о карте</h2>")
@@ -51,4 +51,4 @@
 	post_comm_message("NSV Sierra Sensor Readings", welcome_text)
 	minor_announcement.Announce(message = "Сканирование сектора завершено. Информация передана в базу данных консолей связи.")
 	sleep(2 SECONDS)
-	minor_announcement.Announce(message = "Текущая система: [system_name]. Приятной смены на борту [station_name].")
+	minor_announcement.Announce(message = "Текущая система: [system_name]. Приятной смены на борту [station_name].", new_sound = 'sound/misc/notice2.ogg')

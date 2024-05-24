@@ -62,3 +62,23 @@
 #define SPECIES_RESOMI  "Resomi"
 #define LANGUAGE_RESOMI "Schechi"
 // RESOMI - End
+
+// ERIS_ANNOUNCER - Start
+///Announcer audio keys
+#define ANNOUNCER_ALIENS 'mods/eris_announcer/sound/announcements/life_signatures.ogg'
+#define ANNOUNCER_METEORS 'mods/eris_announcer/sound/announcements/meteors_1.ogg'
+#define ANNOUNCER_OUTBREAK5 'mods/eris_announcer/sound/announcements/biohazard_level_5.ogg'
+#define ANNOUNCER_OUTBREAK7 'mods/eris_announcer/sound/announcements/biohazard_level_7.ogg'
+#define ANNOUNCER_POWEROFF 'mods/eris_announcer/sound/announcements/electricity_off.ogg'
+#define ANNOUNCER_POWERON 'mods/eris_announcer/sound/announcements/electricity_on.ogg'
+#define ANNOUNCER_RADIATION 'mods/eris_announcer/sound/announcements/radiation.ogg'
+#define ANNOUNCER_SPANOMALIES 'mods/eris_announcer/sound/announcements/anomaly_gravity.ogg'
+#define ANNOUNCER_WELCOME 'mods/eris_announcer/sound/announcements/welcome_1.ogg'
+#define ANNOUNCER_COMMANDREPORT 'mods/eris_announcer/sound/announcements/command_report.ogg'
+#define ANNOUNCER_ABANDONSHIP 'mods/eris_announcer/sound/announcements/evacuation.ogg'
+#define ANNOUNCER_ELECTRICALSTORM_MOD 'mods/eris_announcer/sound/announcements/electrical_storm_normal.ogg'
+#define ANNOUNCER_ELECTRICALSTORM_MAJ 'mods/eris_announcer/sound/announcements/electrical_storm_high.ogg'
+#define ANNOUNCER_BLUESPACEJUMP_INIT 'mods/eris_announcer/sound/announcements/bluespacejump_initialization.ogg'
+#define ANNOUNCER_BLUESPACEJUMP_PREP 'mods/eris_announcer/sound/announcements/bluespacejump_prepare.ogg'
+#define ANNOUNCER_BLUESPACEJUMP_START 'mods/eris_announcer/sound/announcements/bluespacejump_start.ogg'
+// ERIS_ANNOUNCER - End

@@ -96,7 +96,10 @@ var/global/datum/evacuation_controller/evacuation_controller
 			GLOB.using_map.emergency_shuttle_called_announcement()
 	else
 		if(!skip_announce)
-			priority_announcement.Announce(replacetext(replacetext(GLOB.using_map.shuttle_called_message, "%dock_name%", "[GLOB.using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60,0.5)] minute\s"))
+			// [SIERRA-EDIT] - ERIS_ANNOUNCER
+			// priority_announcement.Announce(replacetext(replacetext(GLOB.using_map.shuttle_called_message, "%dock_name%", "[GLOB.using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60,0.5)] minute\s")) // SIERRA-EDIT - ORIGINAL
+			priority_announcement.Announce(replacetext(replacetext(GLOB.using_map.shuttle_called_message, "%dock_name%", "[GLOB.using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60,0.5)] minute\s"), new_sound = GLOB.using_map.shuttle_called_sound)
+			// [/SIERRA-EDIT]
 
 	return 1
 
@@ -134,7 +137,10 @@ var/global/datum/evacuation_controller/evacuation_controller
 	if (emergency_evacuation)
 		evac_waiting.Announce(replacetext(GLOB.using_map.emergency_shuttle_docked_message, "%ETD%", "[estimated_time] minute\s"), new_sound = sound('sound/effects/Evacuation.ogg', volume = 30))
 	else
-		priority_announcement.Announce(replacetext(replacetext(GLOB.using_map.shuttle_docked_message, "%dock_name%", "[GLOB.using_map.dock_name]"),  "%ETD%", "[estimated_time] minute\s"))
+		// [SIERRA-EDIT] - ERIS_ANNOUNCER
+		// priority_announcement.Announce(replacetext(replacetext(GLOB.using_map.shuttle_docked_message, "%dock_name%", "[GLOB.using_map.dock_name]"),  "%ETD%", "[estimated_time] minute\s")) // SIERRA-EDIT - ORIGINAL
+		priority_announcement.Announce(replacetext(replacetext(GLOB.using_map.shuttle_docked_message, "%dock_name%", "[GLOB.using_map.dock_name]"),  "%ETD%", "[estimated_time] minute\s"), new_sound = GLOB.using_map.shuttle_docked_sound)
+		// [/SIERRA-EDIT]
 	if(config.announce_evac_to_irc)
 		send2mainirc("Evacuation has started. It will end in approximately [estimated_time] minute\s.")
 
@@ -148,7 +154,10 @@ var/global/datum/evacuation_controller/evacuation_controller
 	if (emergency_evacuation)
 		priority_announcement.Announce(replacetext(replacetext(GLOB.using_map.emergency_shuttle_leaving_dock, "%dock_name%", "[GLOB.using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60,0.5)] minute\s"))
 	else
-		priority_announcement.Announce(replacetext(replacetext(GLOB.using_map.shuttle_leaving_dock, "%dock_name%", "[GLOB.using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60,0.5)] minute\s"))
+		// [SIERRA-EDIT] - ERIS_ANNOUNCER
+		// priority_announcement.Announce(replacetext(replacetext(GLOB.using_map.shuttle_leaving_dock, "%dock_name%", "[GLOB.using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60,0.5)] minute\s")) // SIERRA-EDIT - ORIGINAL
+		priority_announcement.Announce(replacetext(replacetext(GLOB.using_map.shuttle_leaving_dock, "%dock_name%", "[GLOB.using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60,0.5)] minute\s"), new_sound = GLOB.using_map.shuttle_leaving_dock_sound)
+		// [/SIERRA-EDIT]
 
 	return 1
 

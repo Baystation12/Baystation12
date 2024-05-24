@@ -1,3 +1,9 @@
+/datum/map
+	var/shuttle_docked_sound
+	var/shuttle_leaving_dock_sound
+	var/shuttle_called_sound
+	var/shuttle_recall_sound
+
 /datum/map/New()
 	. = ..()
 	base_lobby_html = file2text('mods/lobbyscreen/html/lobby.html')
