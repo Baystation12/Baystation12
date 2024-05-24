@@ -1,0 +1,5 @@
+author: UEDHighCommand
+changes:
+  - {bugfix: Исправлен двойной анонс отчёта командования при объявлении текущей системы.}
+  - {soundadd: Портирована русская озвучка анонсера с ветки staging-sierra.}
+delete-after: true
