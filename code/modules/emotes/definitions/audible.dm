@@ -5,11 +5,18 @@
 	var/list/emote_sound
 
 /singleton/emote/audible/do_extra(atom/user)
-	if(emote_sound)
-		var/playable = emote_sound
-		if (islist(emote_sound))
-			playable = pick(emote_sound)
-		playsound(user.loc, playable, 50, 0)
+	if(!emote_sound)
+		return
+	if (ismob(user))
+		var/mob/M = user
+		if (world.time < M.next_audible_emote_time)
+			M.next_audible_emote_time = world.time + M.audible_emote_cooldown
+			return
+		M.next_audible_emote_time = world.time + M.audible_emote_cooldown
+	var/playable = emote_sound
+	if (islist(emote_sound))
+		playable = pick(emote_sound)
+	playsound(user.loc, playable, 50, 0)
 
 /singleton/emote/audible/deathgasp_alien
 	key = "deathgasp"

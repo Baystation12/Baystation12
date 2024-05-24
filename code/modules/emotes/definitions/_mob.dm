@@ -1,5 +1,7 @@
 /mob/var/list/default_emotes = list()
 /mob/var/list/usable_emotes = list()
+/mob/var/next_audible_emote_time = 0
+/mob/var/audible_emote_cooldown = 0.5 SECONDS
 
 /mob/proc/update_emotes(skip_sort)
 	usable_emotes.Cut()
