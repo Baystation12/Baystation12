@@ -1,5 +1,0 @@
-author: UEDHighCommand
-changes:
-  - {bugfix: Исправлен баг отображения спрайтов войдсьютов для таяра}
-  - {imageadd: Возвращены спрайты ИКСа ЛЭКа для таяра}
-delete-after: true
