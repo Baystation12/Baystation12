@@ -143,6 +143,8 @@
 /obj/wallframe_spawn/reinforced_phoron/hull
 	frame_path = /obj/structure/wall_frame/hull
 
+/obj/wallframe_spawn/reinforced_phoron/ocp
+	frame_path = /obj/structure/wall_frame/ocp
 
 /obj/wallframe_spawn/reinforced/polarized
 	name = "polarized reinforced wall frame window spawner"
