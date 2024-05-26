@@ -1,0 +1,4 @@
+author: ddorou
+changes:
+  - {bugfix: Чинит открытие напитков}
+delete-after: true
