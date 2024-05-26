@@ -56,7 +56,10 @@
 
 	var/binoc_check
 	if(client)
-		binoc_check = client.view == world.view
+		var/list/client_view = getviewsize(client.view)
+		var/view_x = client_view[1]
+		var/view_y = client_view[2]
+		binoc_check = view_x <= 19 && view_y <= 15
 	else
 		binoc_check = TRUE
 
