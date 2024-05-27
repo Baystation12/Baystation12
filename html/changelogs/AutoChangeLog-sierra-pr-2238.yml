@@ -1,4 +1,0 @@
-author: Builder13
-changes:
-  - {bugfix: Защита от сварки и флешей вновь должна нормально работать}
-delete-after: true
