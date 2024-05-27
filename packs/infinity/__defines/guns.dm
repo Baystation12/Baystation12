@@ -8,7 +8,7 @@
 
 #define CALIBER_PISTOL_TINY         "5.6mmP"
 //#define CALIBER_PISTOL            "10mm"
-#define CALIBER_PISTOL_FAST         "5.7mmP"
+//#define CALIBER_PISTOL_FAST         "5.7mmP"
 //#define CALIBER_PISTOL_SMALL      "7mm"
 #define CALIBER_PISTOL_SMALL_MAGNUM "9mmR"
 //#define CALIBER_PISTOL_MAGNUM     "15mm"

@@ -12,6 +12,7 @@
 	throwforce = 5.0
 	throw_range = 15
 	throw_speed = 3
+	matter = list(MATERIAL_GLASS = 200)
 
 
 /obj/item/device/binoculars/attack_self(mob/user)

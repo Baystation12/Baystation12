@@ -138,3 +138,11 @@
 /datum/fabricator_recipe/arms_ammo/hidden/beandrum
 	name = "ammunition (drum magazine, beanbag)"
 	path = /obj/item/ammo_magazine/shotgunmag/beanbag
+
+/datum/fabricator_recipe/arms_ammo/hidden/nt10mag
+	name = "ammunition (NT41)"
+	path = /obj/item/ammo_magazine/n10mm
+
+/datum/fabricator_recipe/arms_ammo/hidden/shotgun_flechette
+	name = "ammunition (flechette, shotgun)"
+	path = /obj/item/ammo_casing/shotgun/flechette

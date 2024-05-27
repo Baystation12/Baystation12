@@ -283,3 +283,9 @@
 	pixel_x = rand(-10,10)
 	pixel_y = rand(-10,10)
 	..()
+
+/obj/item/projectile/bullet/pistol/fast
+	fire_sound = 'sound/weapons/gunshot/gunshot_smg.ogg'
+	damage = 45 //4.6x30 mm, 5.7x28 mm
+	armor_penetration = 7.5
+	distance_falloff = 2
