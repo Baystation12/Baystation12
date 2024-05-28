@@ -113,7 +113,7 @@
 		new /obj/item/material/shard(src.loc)
 		qdel(src)
 	else
-		if (length(reagents.reagent_list) > 0 && is_open_container())
+		if ((length(reagents.reagent_list) > 0) && (is_open_container() | isnull(is_open_container())))
 			visible_message(
 				SPAN_DANGER("\The [src] bounces and spills all its contents!"),
 				SPAN_WARNING("You hear the sound of glass hitting something.")
