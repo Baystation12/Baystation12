@@ -1,17 +1,14 @@
-#define NEXT_PAGE_ID "__next__"
-#define DEFAULT_CHECK_DELAY 20
-
-var/global/list/radial_menus = list()
-
-/obj/screen/radial/Destroy()
-	parent = null
-	return ..()
+GLOBAL_LIST_EMPTY(radial_menus)
 
 /obj/screen/radial
 	icon = 'icons/screen/radial.dmi'
 	layer = HUD_ABOVE_ITEM_LAYER
 	plane = HUD_PLANE
 	var/datum/radial_menu/parent
+
+/obj/screen/radial/Destroy()
+	parent = null
+	return ..()
 
 /obj/screen/radial/slice
 	icon_state = "radial_slice"
@@ -55,6 +52,9 @@ var/global/list/radial_menus = list()
 		parent.finished = TRUE
 
 /datum/radial_menu
+	var/const/NEXT_PAGE_ID = "__next__"
+	var/const/DEFAULT_CHECK_DELAY = 2 SECONDS
+
 	var/list/choices = list() //List of choice id's
 	var/list/choices_icons = list() //choice_id -> icon
 	var/list/choices_values = list() //choice_id -> choice
@@ -316,14 +316,14 @@ var/global/list/radial_menus = list()
 		for(var/atom/thing in check_locs)
 			check_locs[thing] = thing.loc
 
-	if(global.radial_menus[uniqueid])
+	if(GLOB.radial_menus[uniqueid])
 		if(!no_repeat_close)
-			var/datum/radial_menu/menu = global.radial_menus[uniqueid]
+			var/datum/radial_menu/menu = GLOB.radial_menus[uniqueid]
 			menu.finished = TRUE
 		return
 
 	var/datum/radial_menu/menu = new
-	global.radial_menus[uniqueid] = menu
+	GLOB.radial_menus[uniqueid] = menu
 	if(radius)
 		menu.radius = radius
 	if(istype(custom_check))
@@ -335,7 +335,7 @@ var/global/list/radial_menus = list()
 	menu.wait(user, anchor, require_near, check_locs)
 	var/answer = menu.selected_choice
 	qdel(menu)
-	global.radial_menus -= uniqueid
+	GLOB.radial_menus -= uniqueid
 	return answer
 
 #define RADIAL_INPUT(user, choices) show_radial_menu(user, user, choices)
