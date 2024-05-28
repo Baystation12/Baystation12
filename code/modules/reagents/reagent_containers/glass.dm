@@ -90,7 +90,7 @@
 /obj/item/reagent_containers/glass/throw_impact(atom/hit_atom)
 	if (QDELETED(src))
 		return
-	if (!LAZYISIN(matter, MATERIAL_GLASS) & length(reagents.reagent_list) > 0) // Не стеклянные предметы просто проливают содержимое на пол/моба, если содержимое есть
+	if (!LAZYISIN(matter, MATERIAL_GLASS) && (length(reagents.reagent_list) > 0)) // Не стеклянные предметы просто проливают содержимое на пол/моба, если содержимое есть
 //		if (length(reagents.reagent_list) > 0)
 		visible_message(
 			SPAN_DANGER("\The [src] bounces and spills all its contents!")
@@ -113,7 +113,7 @@
 		new /obj/item/material/shard(src.loc)
 		qdel(src)
 	else
-		if ((length(reagents.reagent_list) > 0) && (is_open_container() | isnull(is_open_container())))
+		if ((length(reagents.reagent_list) > 0) && (is_open_container() || isnull(is_open_container())))
 			visible_message(
 				SPAN_DANGER("\The [src] bounces and spills all its contents!"),
 				SPAN_WARNING("You hear the sound of glass hitting something.")
