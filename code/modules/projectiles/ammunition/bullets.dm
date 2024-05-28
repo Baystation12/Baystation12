@@ -205,3 +205,9 @@
 	spent_icon = "empshell-spent"
 	projectile_type  = /obj/item/projectile/ion
 	matter = list(MATERIAL_STEEL = 160, MATERIAL_URANIUM = 160)
+
+/obj/item/ammo_casing/nt28mm
+	name = "5.7x28 bullet casing"
+	desc = "A casing used in NT submachine guns."
+	caliber = CALIBER_PISTOL_FAST
+	projectile_type = /obj/item/projectile/bullet/pistol/fast

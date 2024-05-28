@@ -113,3 +113,6 @@
 
 /datum/fabricator_recipe/toolbox
 	path = /obj/item/storage/toolbox
+
+/datum/fabricator_recipe/binoculars
+	path = /obj/item/device/binoculars
