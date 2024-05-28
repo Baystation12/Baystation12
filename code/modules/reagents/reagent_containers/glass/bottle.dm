@@ -11,7 +11,7 @@
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = 0
 	volume = 60
-
+	matter = list(MATERIAL_GLASS = 500)
 
 /obj/item/reagent_containers/glass/bottle/on_reagent_change()
 	update_icon()
