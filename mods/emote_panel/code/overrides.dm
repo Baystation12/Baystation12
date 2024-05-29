@@ -345,3 +345,86 @@
 /singleton/emote/visible/tilt
 	key = "tilt"
 	emote_message_3p = "USER наклоняет свою голову."
+
+/singleton/emote/audible/laugh
+	key ="laugh"
+	emote_message_3p = "USER смеётся."
+
+/singleton/emote/audible/sigh
+	key = "sigh"
+	emote_message_3p = "USER вздыхает."
+
+/singleton/emote/audible/gasp
+	key ="gasp"
+	emote_message_3p = "USER задыхается."
+	conscious = 0
+
+/singleton/emote/audible/grunt
+	key = "grunt"
+	emote_message_3p = "USER ворчит."
+
+/singleton/emote/audible/groan
+	key = "groan"
+	emote_message_3p = "USER болезненно стонет!"
+	conscious = 0
+
+/singleton/emote/audible/yawn
+	key = "yawn"
+	emote_message_3p = "USER зевает."
+
+/singleton/emote/audible/cough
+	key = "cough"
+	emote_message_3p = "USER кашляет!"
+	conscious = 0
+
+/singleton/emote/audible/cry
+	key = "cry"
+	emote_message_3p = "USER плачет."
+
+/singleton/emote/audible/choke
+	key ="choke"
+	emote_message_3p = "USER чем-то давится."
+	conscious = 0
+
+/singleton/emote/audible/sniff
+	key = "sniff"
+	emote_message_3p = "USER нюхает."
+
+/singleton/emote/audible/moan
+	key = "moan"
+	emote_message_3p = "USER стонет!"
+	conscious = 0
+
+/singleton/emote/audible/giggle
+	key = "giggle"
+	emote_message_3p = "USER хихикает."
+
+/singleton/emote/audible/clap
+	key = "clap"
+	emote_message_3p = "USER хлопает в ладоши."
+
+/singleton/emote/audible/whimper
+	key ="whimper"
+	emote_message_3p = "USER хнычет."
+
+/singleton/emote/audible/snore
+	key = "snore"
+	emote_message_3p = "USER храпит."
+	conscious = 0
+
+/singleton/emote/audible/sneeze
+	key = "sneeze"
+	emote_message_3p = "USER чихает."
+
+/singleton/emote/audible/chuckle
+	key = "chuckle"
+	emote_message_3p = "USER усмехается."
+
+/singleton/emote/visible/airguitar
+	key = "airguitar"
+	check_restraints = TRUE
+	emote_message_3p = "USER исполняет сумасшедшее соло на невидимой гитаре."
+
+/singleton/emote/audible/whistle
+	key = "whistle"
+	emote_message_3p = "USER свистит."

@@ -162,6 +162,9 @@
 	/singleton/emote/visible/tfist,
 	/singleton/emote/visible/tilt,
 	/singleton/emote/visible/atten,
+	/singleton/emote/audible/whistle,
+	/singleton/emote/visible/scratch,
+	/singleton/emote/audible/finger_snap,
 )
 
 /mob/living/carbon/human/monkey/default_emotes = list(

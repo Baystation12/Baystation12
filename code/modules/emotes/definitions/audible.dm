@@ -64,7 +64,7 @@
 
 /singleton/emote/audible/whistle
 	key = "whistle"
-	emote_message_1p = "You whistle."
+	// emote_message_1p = "You whistle." Закоменченно, чтобы не было путаницы с тем, что у свистуна и присутствующих эмоут отображается по-разному
 	emote_message_3p = "USER whistles."
 
 /singleton/emote/audible/boop
