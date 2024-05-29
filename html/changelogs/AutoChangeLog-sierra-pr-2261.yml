@@ -1,0 +1,4 @@
+author: BOT Eeshee
+changes:
+  - {bugfix: Пофикшена логика работы хоткея Е.}
+delete-after: true
