@@ -103,7 +103,7 @@
 	if((. = ..()))
 		return
 	if(O.is_open_container())
-		return TRUE
+		return FALSE
 	if(panel_open)
 		to_chat(user, SPAN_NOTICE("You can't load \the [src] while it's opened."))
 		return TRUE
