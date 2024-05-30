@@ -55,9 +55,6 @@
 	sleep(1)
 	update_skybox(rebuild)
 
-/mob/Login()
-	..()
-	client.deferred_skybox_update(TRUE)
 
 /mob/Move()
 	var/old_z = get_z(src)
