@@ -1,0 +1,4 @@
+author: Vladisvell
+changes:
+  - {bugfix: 'Устранены некоторые лаги, связанные с заходом игрока в игру.'}
+delete-after: true
