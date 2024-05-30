@@ -1,5 +1,15 @@
 /datum/gear
 	var/list/allowed_factions //Background factions required to spawn with this item.
+	/// Donation tier the player should have to access this gear
+	var/donation_tier = DONATION_TIER_NONE
+
+/datum/gear/proc/has_donation_tier(mob/user)
+	ASSERT(user && user.client)
+	ASSERT(user.client.donator_info)
+	if(donation_tier && !user.client.donator_info.donation_tier_available(donation_tier))
+		return FALSE
+
+	return TRUE
 
 /datum/gear/plush_toy
 	var/list/toy_list = list(

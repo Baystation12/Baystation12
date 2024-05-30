@@ -176,7 +176,20 @@ var/global/list/gear_datums = list()
 		var/list/entry = list()
 		var/datum/gear/G = LC.gear[gear_name]
 		var/ticked = (G.display_name in pref.gear_list[pref.gear_slot])
-		entry += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=\ref[G]'>[G.display_name]</a></td>"
+
+		// [SIERRA-ADD] - LOADOUT_ITEMS
+
+		var/list/gear_link_class = list()
+		if(ticked)
+			gear_link_class.Add("linkOn")
+		if(!(G.donation_tier == DONATION_TIER_NONE))
+			gear_link_class.Add("gold")
+		gear_link_class = jointext(gear_link_class, " ")
+		// [/SIERRA-ADD]
+		// [SIERRA-EDIT] - LOADOUT-ITEMS
+		// entry += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=\ref[G]'>[G.display_name]</a></td>" // SIERRA-EDIT - ORIGINAL
+		entry += "<tr style='vertical-align:top;'><td><a style='white-space:normal;' class='[gear_link_class]' href='?src=\ref[src];toggle_gear=\ref[G]'>[G.display_name]</a></td>" //inf, was: entry += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=\ref[G]'>[G.display_name]</a></td>"
+		// [/SIERRA-EDIT]
 		entry += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		entry += "<td>[FONT_NORMAL(G.get_description(get_gear_metadata(G,1)))]"
 		var/allowed = 1
@@ -236,6 +249,30 @@ var/global/list/gear_datums = list()
 				skill_checks += skill_entry
 
 			entry += "[english_list(skill_checks)]</i>"
+
+		// [SIERRA-ADD] - LOADOUT-ITEMS
+		if(allowed && G.allowed_factions)
+			var/good_background = 0
+			var/singleton/cultural_info/background = SSculture.get_culture(pref.cultural_info[TAG_FACTION])
+			var/bgndname = background ? background.name : "Unset"
+			entry += "<br><i>"
+
+			var/list/backgroundchecks = list()
+
+			if(bgndname in G.allowed_factions)
+				backgroundchecks += "<font color=55cc55>[bgndname]</font>"
+				good_background = 1
+			else
+				backgroundchecks += "<font color=cc5555>[bgndname]</font>"
+			allowed = good_background
+			entry += "[english_list(backgroundchecks)]</i>"
+
+		if(allowed && (!(G.has_donation_tier(pref))))
+			entry += "<br><i>"
+			var/list/requiredtier = list()
+			requiredtier += "<font color=ffd700>Requires Donation [G.donation_tier] or above</font>"
+			entry += "[english_list(requiredtier)]</i>"
+		// [/SIERRA-ADD]
 
 		entry += "</tr>"
 		if(ticked)

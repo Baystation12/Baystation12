@@ -18,5 +18,8 @@
 #include "code/lists/suits.dm"
 #include "code/lists/xenowear.dm"
 #include "code/loadout/loadout.dm"
+#include "code/loadout/donations.dm"
+#include "code/loadout/donator.dm"
+#include "code/loadout/preferences.dm"
 
 #endif
