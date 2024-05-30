@@ -1,0 +1,4 @@
+author: Merlin1230
+changes:
+  - {bugfix: The protolathe will now actually accept chemicals}
+delete-after: true
