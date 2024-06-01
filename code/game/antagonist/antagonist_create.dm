@@ -26,6 +26,10 @@
 	else
 		M = new /mob/living/carbon/human(get_turf(source))
 	M.ckey = source.ckey
+
+	if(!M.ckey && source.mind)
+		M.ckey = source.mind.key
+
 	add_antagonist(M.mind, 1, 0, 1) // Equip them and move them to spawn.
 	return M
 
