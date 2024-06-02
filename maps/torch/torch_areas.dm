@@ -772,6 +772,7 @@
 /area/vacant
 	name = "\improper Vacant Area"
 	icon_state = "construction"
+	area_flags = AREA_FLAG_RAD_SHIELDED
 
 /area/vacant/armory
 	name = "\improper Vacant Armory"
@@ -798,17 +799,6 @@
 /area/vacant/monitoring
 	name = "\improper Auxiliary Monitoring Room"
 	icon_state = "engine_monitoring"
-
-/area/vacant/prototype
-	req_access = list(access_engine)
-
-/area/vacant/prototype/control
-	name = "\improper Prototype Fusion Reactor Control Room"
-	icon_state = "engine_monitoring"
-
-/area/vacant/prototype/engine
-	name = "\improper Prototype Fusion Reactor Chamber"
-	icon_state = "rust_reactor"
 
 /area/vacant/cargo
 	name = "\improper Requisitions Office"
@@ -1547,6 +1537,17 @@
 	name = "\improper Engine Monitoring Room"
 	icon_state = "engine_monitoring"
 	req_access = list(access_engine, access_engine_equip)
+
+/area/engineering/prototype
+	req_access = list(access_engine)
+
+/area/engineering/prototype/control
+	name = "\improper Prototype Fusion Reactor Control Room"
+	icon_state = "engine_monitoring"
+
+/area/engineering/prototype/engine
+	name = "\improper Prototype Fusion Reactor Chamber"
+	icon_state = "rust_reactor"
 
 /area/engineering/engine_smes
 	name = "\improper Engineering SMES"
