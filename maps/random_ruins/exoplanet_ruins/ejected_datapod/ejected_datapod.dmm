@@ -5,7 +5,7 @@
 "b" = (
 /obj/paint/black,
 /turf/simulated/wall/ocp_wall,
-/area/map_template/datacapsule)
+/area/map_template/ejected_datapod)
 "c" = (
 /obj/landmark/scorcher,
 /turf/template_noop,
@@ -13,14 +13,14 @@
 "d" = (
 /obj/machinery/door/blast/shutters,
 /turf/simulated/floor/reinforced,
-/area/map_template/datacapsule)
+/area/map_template/ejected_datapod)
 "f" = (
 /turf/simulated/floor/reinforced,
-/area/map_template/datacapsule)
+/area/map_template/ejected_datapod)
 "g" = (
 /obj/landmark/map_load_mark/ejected_datapod,
 /turf/simulated/floor/reinforced,
-/area/map_template/datacapsule)
+/area/map_template/ejected_datapod)
 
 (1,1,1) = {"
 a
