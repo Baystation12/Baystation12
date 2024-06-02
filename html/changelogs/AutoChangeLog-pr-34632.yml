@@ -1,0 +1,5 @@
+author: Merlin1230
+changes:
+  - {bugfix: The maintenance rooms are now actually shielded from radiation like the
+      rest of maintence}
+delete-after: true
