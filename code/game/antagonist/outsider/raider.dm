@@ -21,7 +21,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	faction = "pirate"
 	no_prior_faction = TRUE
 
-	base_to_load = /datum/map_template/ruin/antag_spawn/heist
+	base_to_load = /singleton/map_template/ruin/antag_spawn/heist
 
 	var/list/raider_uniforms = list(
 		/obj/item/clothing/under/soviet,

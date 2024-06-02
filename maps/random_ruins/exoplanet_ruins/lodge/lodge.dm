@@ -1,4 +1,4 @@
-/datum/map_template/ruin/exoplanet/lodge
+/singleton/map_template/ruin/exoplanet/lodge
 	name = "lodge"
 	id = "lodge"
 	description = "A wood cabin."

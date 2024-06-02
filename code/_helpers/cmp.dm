@@ -49,7 +49,7 @@
 /proc/cmp_text_dsc(a,b)
 	return sorttext(a, b)
 
-/proc/cmp_ruincost_priority(datum/map_template/ruin/A, datum/map_template/ruin/B)
+/proc/cmp_ruincost_priority(singleton/map_template/ruin/A, singleton/map_template/ruin/B)
 	return initial(A.spawn_cost) - initial(B.spawn_cost)
 
 /proc/cmp_power_component_priority(obj/item/stock_parts/power/A, obj/item/stock_parts/power/B)

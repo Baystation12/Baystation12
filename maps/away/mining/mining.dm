@@ -28,7 +28,7 @@
 	res.SetTransform(scale = 0.5)
 	return res
 
-/datum/map_template/ruin/away_site/mining_asteroid
+/singleton/map_template/ruin/away_site/mining_asteroid
 	name = "Mining - Asteroid"
 	id = "awaysite_mining_asteroid"
 	description = "A medium-sized asteroid full of minerals."
@@ -100,7 +100,7 @@
 	res.SetTransform(scale = 0.3)
 	return res
 
-/datum/map_template/ruin/away_site/mining_signal
+/singleton/map_template/ruin/away_site/mining_signal
 	name = "Mining - Dwarf Planet"
 	id = "awaysite_mining_signal"
 	description = "A mineral-rich, formerly-volcanic site on a dwarf planet."
@@ -169,7 +169,7 @@
 	res.pixel_y = rand(256,512)
 	return res
 
-/datum/map_template/ruin/away_site/orb
+/singleton/map_template/ruin/away_site/orb
 	name = "Mining - Orb"
 	id = "awaysite_mining_orb"
 	description = "A sort of circular asteroid with a bird."

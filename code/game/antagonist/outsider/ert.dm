@@ -25,7 +25,7 @@ GLOBAL_DATUM_INIT(ert, /datum/antagonist/ert, new)
 	faction = "emergency"
 	no_prior_faction = TRUE
 
-	base_to_load = /datum/map_template/ruin/antag_spawn/ert
+	base_to_load = /singleton/map_template/ruin/antag_spawn/ert
 
 	var/reason = ""
 

@@ -1,4 +1,4 @@
-/datum/map_template/ruin/exoplanet/datacapsule
+/singleton/map_template/ruin/exoplanet/datacapsule
 	name = "ejected data capsule"
 	id = "datacapsule"
 	description = "A damaged capsule with some strange contents."
@@ -81,19 +81,19 @@
 
 /obj/landmark/map_load_mark/ejected_datapod
 	name = "random datapod contents"
-	templates = list(/datum/map_template/ejected_datapod_contents, /datum/map_template/ejected_datapod_contents/type2, /datum/map_template/ejected_datapod_contents/type3)
+	templates = list(/singleton/map_template/ejected_datapod_contents, /singleton/map_template/ejected_datapod_contents/type2, /singleton/map_template/ejected_datapod_contents/type3)
 
-/datum/map_template/ejected_datapod_contents
+/singleton/map_template/ejected_datapod_contents
 	name = "random datapod contents #1 (chem vials)"
 	id = "datapod_1"
 	mappaths = list("maps/random_ruins/exoplanet_ruins/datacapsule/contents_1.dmm")
 
-/datum/map_template/ejected_datapod_contents/type2
+/singleton/map_template/ejected_datapod_contents/type2
 	name = "random datapod contents #2 (servers)"
 	id = "datapod_2"
 	mappaths = list("maps/random_ruins/exoplanet_ruins/datacapsule/contents_2.dmm")
 
-/datum/map_template/ejected_datapod_contents/type3
+/singleton/map_template/ejected_datapod_contents/type3
 	name = "random datapod contents #2 (spiders)"
 	id = "datapod_3"
 	mappaths = list("maps/random_ruins/exoplanet_ruins/datacapsule/contents_3.dmm")

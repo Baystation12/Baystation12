@@ -854,6 +854,9 @@
 	dir = 4;
 	icon_state = "warningcorner"
 	},
+/obj/machinery/computer/cryopod{
+	pixel_y = 28
+	},
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},

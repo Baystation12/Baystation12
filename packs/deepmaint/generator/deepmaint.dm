@@ -11,14 +11,14 @@ GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 /proc/populateDeepMaintMapLists()
 	if(length(GLOB.big_deepmaint_room_templates) || length(GLOB.small_deepmaint_room_templates))
 		return
-	for(var/item in subtypesof(/datum/map_template/deepmaint_template/room))
-		var/datum/map_template/deepmaint_template/temp = item
-		var/datum/map_template/deepmaint_template/S = new temp()
+	for(var/item in subtypesof(/singleton/map_template/deepmaint_template/room))
+		var/singleton/map_template/deepmaint_template/temp = item
+		var/singleton/map_template/deepmaint_template/S = new temp()
 		GLOB.small_deepmaint_room_templates += S
 
-	for(var/item in subtypesof(/datum/map_template/deepmaint_template/big))
-		var/datum/map_template/deepmaint_template/temp = item
-		var/datum/map_template/deepmaint_template/S = new temp()
+	for(var/item in subtypesof(/singleton/map_template/deepmaint_template/big))
+		var/singleton/map_template/deepmaint_template/temp = item
+		var/singleton/map_template/deepmaint_template/S = new temp()
 		GLOB.big_deepmaint_room_templates += S
 
 /obj/procedural/jp_dungeonroom/preexist/square/submap/deepmaint

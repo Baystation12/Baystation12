@@ -619,11 +619,6 @@
 	frequency = 1380;
 	id_tag = "merc_shuttle_base_inner"
 	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -2198,7 +2193,8 @@
 	dir = 1;
 	health_max = 150;
 	name = "The Box";
-	req_access = list("ACCESS_SYNDICATE")
+	req_access = list("ACCESS_SYNDICATE");
+	autoset_access = 0
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle)

@@ -1,4 +1,4 @@
-/datum/map_template/ruin/exoplanet/tar_anomaly
+/singleton/map_template/ruin/exoplanet/tar_anomaly
 	name = "tar anomaly"
 	id = "tar_anomaly"
 	description = "An anomaly in the center of a ring of tar."
