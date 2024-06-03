@@ -1,0 +1,5 @@
+author: Spookerton
+changes:
+  - {tweak: Liquid Corruption returns to exoplanet datapod spawns at a much reduced
+      rate of about 1.67%}
+delete-after: true
