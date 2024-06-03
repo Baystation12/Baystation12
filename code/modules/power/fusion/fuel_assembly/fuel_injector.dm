@@ -27,9 +27,12 @@
 
 /obj/machinery/fusion_fuel_injector/on_update_icon()
 	ClearOverlays()
-	if(panel_open)
+	if (panel_open)
 		AddOverlays("[icon_state]_panel")
-	if(injecting && cur_assembly)
+	if (injecting && cur_assembly)
+		AddOverlays(emissive_appearance(icon, "[icon_state]_lights_emitting"))
+		AddOverlays("[icon_state]_lights_emitting")
+	else
 		AddOverlays(emissive_appearance(icon, "[icon_state]_lights"))
 		AddOverlays("[icon_state]_lights")
 
@@ -131,11 +134,8 @@
 					amount_left += cur_assembly.rod_quantities[reagent]
 		if(cur_assembly)
 			cur_assembly.percent_depleted = amount_left / cur_assembly.initial_amount
-		AddOverlays(emissive_appearance(icon, "[icon_state]_lights_emitting"))
-		AddOverlays("[icon_state]_lights_emitting")
 	else
 		StopInjecting()
-		update_icon()
 
 /obj/machinery/fusion_fuel_injector/verb/rotate_clock()
 	set category = "Object"
