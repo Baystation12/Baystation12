@@ -6932,7 +6932,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "pS" = (
-/obj/landmark/corpse/zombiescience,
+/obj/landmark/corpse/anomalist,
 /obj/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/vault)

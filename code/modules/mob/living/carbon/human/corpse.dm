@@ -201,3 +201,7 @@
 /obj/landmark/corpse/syndicate/commando
 	name = "Syndicate Commando"
 	corpse_outfits = list(/singleton/hierarchy/outfit/mercenary/syndicate/commando)
+
+/obj/landmark/corpse/anomalist
+	name = "Dead Anomalist"
+	corpse_outfits = list(/singleton/hierarchy/outfit/anomalist)
