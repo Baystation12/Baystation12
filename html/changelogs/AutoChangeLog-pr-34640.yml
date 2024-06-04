@@ -1,5 +1,0 @@
-author: Spookerton
-changes:
-  - {bugfix: Fusion fuel injectors no longer negatively impact rendering performance
-      over time.}
-delete-after: true
