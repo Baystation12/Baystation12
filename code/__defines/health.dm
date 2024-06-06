@@ -97,3 +97,5 @@
 /// Health Flags for `/atom/var/health_flags`.
 /// The atom is 'breakable', and considered broken upon reaching 1/2 health.
 #define HEALTH_FLAG_BREAKABLE FLAG(0)
+/// The atom should be treated as a structure for damage calculations.
+#define HEALTH_FLAG_STRUCTURE FLAG(1)

@@ -3,6 +3,8 @@
 	w_class = ITEM_SIZE_NO_CONTAINER
 	layer = STRUCTURE_LAYER
 
+	health_flags = HEALTH_FLAG_STRUCTURE
+
 	var/fragile
 	var/parts
 	var/list/connections = list("0", "0", "0", "0")
