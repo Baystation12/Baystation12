@@ -94,7 +94,6 @@
 
 	if (health_max)
 		health_current = health_max
-		health_dead = FALSE
 
 	return INITIALIZE_HINT_NORMAL
 
@@ -294,7 +293,7 @@
 	. = 0
 	if (get_max_health())
 		var/damage = P.damage
-		if (istype(src, /obj/structure) || istype(src, /turf/simulated/wall) || istype(src, /obj/machinery)) // TODO Better conditions for non-structures that want to use structure damage
+		if (GET_FLAGS(health_flags, HEALTH_FLAG_STRUCTURE))
 			damage = P.get_structure_damage()
 		if (!can_damage_health(damage, P.damage_type, P.damage_flags))
 			return

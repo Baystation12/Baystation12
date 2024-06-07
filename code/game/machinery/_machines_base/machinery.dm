@@ -15,6 +15,7 @@
 	throw_range = 5
 
 	health_resistances = DAMAGE_RESIST_ELECTRICAL
+	health_flags = HEALTH_FLAG_STRUCTURE
 
 	/// Boolean. Whether or not the machine has been emagged.
 	var/emagged = FALSE
