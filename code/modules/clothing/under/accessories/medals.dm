@@ -56,3 +56,30 @@
 	name = "corporate merit medal"
 	desc = "An iron medal awarded to employees for merit."
 	icon_state = "iron_nt"
+
+//fancy boxes for fancy storage purposes
+/obj/item/storage/medalbox
+	name = "medal box"
+	desc = "A small lacquered wooden box for holding decorations."
+	icon = 'icons/obj/medalbox.dmi'
+	icon_state = "medalbox"
+	w_class = ITEM_SIZE_SMALL
+	max_w_class = ITEM_SIZE_SMALL
+	max_storage_space = 3
+	contents_allowed = list(
+		/obj/item/clothing/accessory/medal,
+		/obj/item/clothing/accessory/ribbon,
+		/obj/item/clothing/accessory/solgov/specialty
+	)
+
+/obj/item/storage/medalbox/corp_command
+	startswith = list(/obj/item/clothing/accessory/medal/gold/nanotrasen)
+
+/obj/item/storage/medalbox/corp_service
+	startswith = list(/obj/item/clothing/accessory/medal/silver/nanotrasen)
+
+/obj/item/storage/medalbox/corp_science
+	startswith = list(/obj/item/clothing/accessory/medal/bronze/nanotrasen)
+
+/obj/item/storage/medalbox/corp_merit
+	startswith = list(/obj/item/clothing/accessory/medal/iron/nanotrasen)

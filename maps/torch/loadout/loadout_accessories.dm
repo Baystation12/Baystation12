@@ -1,37 +1,37 @@
 /datum/gear/accessory/solgov_award_military
 	display_name = "SolGov military award selection"
 	description = "A selection of military awards awarded by the Sol Central Government."
-	path = /obj/item/clothing/accessory/medal/solgov/mil
-	cost = 8
+	path = /obj/item/storage/medalbox/sol
+	cost = 6
 	allowed_branches = SOLGOV_BRANCHES
 	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/accessory/solgov_award_military/New()
 	..()
 	var/solmilitary = list()
-	solmilitary["Bronze Heart"] = /obj/item/clothing/accessory/medal/solgov/mil/bronze_heart
-	solmilitary["Home Guard medal"] = /obj/item/clothing/accessory/medal/solgov/mil/home_guard
-	solmilitary["Iron Star"] = /obj/item/clothing/accessory/medal/solgov/mil/iron_star
-	solmilitary["Combat Medical Award"] = /obj/item/clothing/accessory/medal/solgov/mil/medical
-	solmilitary["Armed Forces medal"] = /obj/item/clothing/accessory/medal/solgov/mil/armed_forces
-	solmilitary["Silver Sword"] = /obj/item/clothing/accessory/medal/solgov/mil/silver_sword
-	solmilitary["Superior Service Cross"] = /obj/item/clothing/accessory/medal/solgov/mil/service_cross
-	solmilitary["Medal of Honor"] = /obj/item/clothing/accessory/medal/solgov/mil/medal_of_honor
+	solmilitary["Bronze Heart"] = /obj/item/storage/medalbox/sol/bronze_heart
+	solmilitary["Home Guard medal"] = /obj/item/storage/medalbox/sol/home_guard
+	solmilitary["Iron Star"] = /obj/item/storage/medalbox/sol/iron_star
+	solmilitary["Combat Medical Award"] = /obj/item/storage/medalbox/sol/medical
+	solmilitary["Armed Forces medal"] = /obj/item/storage/medalbox/sol/armed_forces
+	solmilitary["Silver Sword"] = /obj/item/storage/medalbox/sol/silver_sword
+	solmilitary["Superior Service Cross"] = /obj/item/storage/medalbox/sol/service_cross
+	solmilitary["Medal of Honor"] = /obj/item/storage/medalbox/sol/medal_of_honor
 	gear_tweaks += new/datum/gear_tweak/path(solmilitary)
 
 /datum/gear/accessory/solgov_award_civilian
 	display_name = "SolGov civilian award selection"
 	description = "A selection of civilian awards awarded by the Sol Central Government."
-	path = /obj/item/clothing/accessory/medal/solgov/civ
-	cost = 5
+	path = /obj/item/storage/medalbox/sol
+	cost = 3
 	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/accessory/solgov_award_civilian/New()
 	..()
 	var/solcivilian = list()
-	solcivilian["Expeditionary Medal"] = /obj/item/clothing/accessory/medal/solgov/civ/expeditionary
-	solcivilian["Sapientarian Peace Award"] = /obj/item/clothing/accessory/medal/solgov/civ/sapientarian
-	solcivilian["Distinguished Service Medal"] = /obj/item/clothing/accessory/medal/solgov/civ/service
+	solcivilian["Expeditionary Medal"] = /obj/item/storage/medalbox/sol/expeditionary
+	solcivilian["Sapientarian Peace Award"] = /obj/item/storage/medalbox/sol/sapientarian
+	solcivilian["Distinguished Service Medal"] = /obj/item/storage/medalbox/sol/service
 	gear_tweaks += new/datum/gear_tweak/path(solcivilian)
 
 /datum/gear/accessory/solgov_award_ribbons
@@ -52,18 +52,6 @@
 	solribbons["Combat Action ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/combat
 	solribbons["Gaia Conflict ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/gaiaconflict
 	solribbons["Distinguished unit ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/distinguished_unit
-	//medal ribbons
-	solribbons["Bronze Heart ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/bronze_heart
-	solribbons["Home Guard ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/home_guard
-	solribbons["Iron Star ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/iron_star
-	solribbons["Armed Forces ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/armed_forces
-	solribbons["Silver Sword ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/silver_sword
-	solribbons["Superior Service ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/service_cross
-	solribbons["Medal of Honor ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/medal_of_honor
-	solribbons["Expeditionary Ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/expeditionary_medal
-	solribbons["Sapientarian ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/sapientarian
-	solribbons["Distinguished Service ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/service
-	solribbons["Combat Medical ribbon (medal)"] = /obj/item/clothing/accessory/ribbon/solgov/medal/medical
 	gear_tweaks += new/datum/gear_tweak/path(solribbons)
 
 /datum/gear/accessory/tags
