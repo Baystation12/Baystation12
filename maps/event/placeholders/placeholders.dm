@@ -282,6 +282,13 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	speed = 0.2
 
 
+/obj/overmap/visitable/placeholder/scg_shikra
+	name = "Shikra-Model Recon Fighter"
+	desc = "A strike craft made to fill in the gap between the Kestrel, and the Eagle-II. It has since been shifted into a recon role, with its mini-AWACS suite and EM stealth capabilities, sacrificing some of its payload."
+	icon = 'scg-32.dmi'
+	icon_state = "sf-shikra"
+	speed = 0.1
+
 /obj/overmap/visitable/placeholder/scg_hermes
 	name = "Hermes-Model Utility Pod"
 	desc = "A tiny workhorse found across human space, able to carry a pilot and some cargo a short distance."
