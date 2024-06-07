@@ -45,14 +45,31 @@
 	down_icon_state = "steriledown"
 	pull_mask = 1
 
+
 /obj/item/clothing/mask/fakemoustache
 	name = "fake moustache"
 	desc = "Warning: moustache is fake."
 	icon_state = "fake-moustache"
 	item_state = "fake-moustache"
 	flags_inv = HIDEFACE
-	body_parts_covered = 0
+	body_parts_covered = EMPTY_BITFIELD
 	visible_name = "Scoundrel"
+	w_class = ITEM_SIZE_SMALL
+
+
+/obj/item/clothing/mask/fakemoustache/verb/ChangeVisibleName()
+	set name = "Change Visible Name"
+	set src in usr
+	if (usr.incapacitated())
+		return
+	var/response = input(usr, null, "Change Visible Name", visible_name) as null | text
+	response = sanitizeName(response, MAX_NAME_LEN, TRUE, FALSE)
+	if (!response)
+		return
+	if (usr.incapacitated() || !(src in usr))
+		return
+	visible_name = response
+
 
 /obj/item/clothing/mask/snorkel
 	name = "snorkel"
