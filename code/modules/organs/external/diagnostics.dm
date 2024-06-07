@@ -171,6 +171,8 @@
 	if(!length(sounds))
 		if(owner.pulse())
 			sounds += "faint pulse"
+	if(status & ORGAN_ARTERY_CUT)
+		sounds += "rushing liquid"
 	return sounds
 
 /singleton/diagnostic_sign
