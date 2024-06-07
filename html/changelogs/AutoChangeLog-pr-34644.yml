@@ -1,0 +1,5 @@
+author: sdtwbaj
+changes:
+  - {tweak: Using a stethoscope on a body part with arterial bleeding reports "rushing
+      liquid".}
+delete-after: true
