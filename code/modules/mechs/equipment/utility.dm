@@ -790,7 +790,6 @@
 	update_icon()
 
 /obj/item/mech_equipment/ionjets/on_update_icon()
-	. = ..()
 	if (active)
 		icon_state = "mech_jet_on"
 		set_light(1, 1, l_color = COLOR_LIGHT_CYAN)

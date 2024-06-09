@@ -145,7 +145,6 @@
 		GLOB.dir_set_event.register(owner, src, .proc/on_turned)
 
 /obj/item/mech_equipment/atmos_shields/on_update_icon()
-	. = ..()
 	icon_state = "mech_atmoshield[active ? "_on" : "_off"]"
 
 /obj/item/mech_equipment/atmos_shields/deactivate()

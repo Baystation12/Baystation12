@@ -245,7 +245,7 @@
 		)
 
 /obj/item/flamethrower/full/on_update_icon()
-	. = ..()
+	..()
 	item_state_slots[slot_l_hand_str] = "humanoid body-slot_l_hand_[lit]"
 	item_state_slots[slot_r_hand_str] = "humanoid body-slot_r_hand_[lit]"
 

@@ -24,10 +24,10 @@
 		to_chat(user, "Magnetic chains hold it in place. Somebody isn't taking any risks with this one.")
 
 /obj/structure/decorative/ed209/on_update_icon()
-	. = ..()
 	if(anchored)
 		pixel_z = 8
-	else pixel_z = 0
+	else
+		pixel_z = 0
 
 
 /obj/structure/decorative/ed209/use_tool(obj/item/tool, mob/user, list/click_params)

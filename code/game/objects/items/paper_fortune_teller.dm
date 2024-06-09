@@ -33,7 +33,6 @@
 	. = ..()
 
 /obj/item/paper_fortune_teller/on_update_icon()
-	. = ..()
 	var/datum/state_machine/fsm = get_state_machine(src, /datum/state_machine/paper_fortune)
 	if(fsm && istype(fsm.current_state, /singleton/state/paper_fortune))
 		var/singleton/state/paper_fortune/fsm_state = fsm.current_state

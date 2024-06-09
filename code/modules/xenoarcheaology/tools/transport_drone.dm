@@ -116,7 +116,6 @@
 		QDEL_NULL(current_flight)
 
 /obj/machinery/drone_pad/on_update_icon()
-	. = ..()
 	ClearOverlays()
 	if (current_flight)
 		AddOverlays(list(

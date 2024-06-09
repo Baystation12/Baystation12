@@ -27,7 +27,6 @@
 
 
 /obj/item/melee/energy/on_update_icon()
-	. = ..()
 	if(active)
 		icon_state = active_icon
 	else

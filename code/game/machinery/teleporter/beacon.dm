@@ -135,10 +135,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 
 
 /obj/machinery/tele_beacon/on_update_icon()
-	. = ..()
-
 	icon_state = initial(icon_state)
-
 	if (panel_open)
 		icon_state += "_open"
 	else if (functioning())

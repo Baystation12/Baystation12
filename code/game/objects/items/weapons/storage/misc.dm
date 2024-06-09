@@ -195,7 +195,6 @@
 	startswith = list(/obj/item/clothing/mask/chewable/candy/lolli/weak_meds = 15)
 
 /obj/item/storage/medical_lolli_jar/on_update_icon()
-	. = ..()
 	if(length(contents))
 		icon_state = "lollijar"
 	else

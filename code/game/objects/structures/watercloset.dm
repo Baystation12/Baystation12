@@ -710,7 +710,6 @@
 	update_icon()
 
 /obj/structure/hygiene/faucet/on_update_icon()
-	. = ..()
 	icon_state = icon_state = "[initial(icon_state)][open ? "-on" : ""]"
 
 /obj/item/faucet

@@ -110,7 +110,6 @@
 	..()
 
 /obj/item/mech_equipment/shields/on_update_icon()
-	. = ..()
 	if(!aura)
 		return
 	if(aura.active)
@@ -186,7 +185,6 @@
 
 
 /obj/aura/mechshield/on_update_icon()
-	. = ..()
 	if(active)
 		icon_state = "shield"
 	else
@@ -581,7 +579,6 @@
 	return ..()
 
 /obj/item/mech_equipment/mounted_system/flamethrower/on_update_icon()
-	. = ..()
 	if(owner && holding)
 		var/obj/item/flamethrower/full/mech/FM = holding
 		if(istype(FM))

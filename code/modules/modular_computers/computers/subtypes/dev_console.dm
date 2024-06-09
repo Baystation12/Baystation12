@@ -44,7 +44,7 @@
 	return TRUE
 
 /obj/machinery/computer/modular/on_update_icon()
-	. = ..()
+	..()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
 		if(os.on)
