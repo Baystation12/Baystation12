@@ -1,0 +1,5 @@
+author: Karl Johansson
+changes:
+  - {tweak: Riot helmets can attach visors.}
+  - {bugfix: Visors don't show on mob when in storage.}
+delete-after: true
