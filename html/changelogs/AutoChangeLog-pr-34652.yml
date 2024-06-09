@@ -1,0 +1,4 @@
+author: Karl Johansson
+changes:
+  - {bugfix: Exosuits no longer incorrectly pretend to be fleshy.}
+delete-after: true
