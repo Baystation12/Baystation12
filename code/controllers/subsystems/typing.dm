@@ -172,7 +172,7 @@ SUBSYSTEM_DEF(typing)
 	icon_state = "typing"
 	plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	layer = SPEECH_INDICATOR_LAYER
-	mouse_opacity = XMOUSE_OPACITY_NEVER
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	simulated = FALSE
 	anchored = TRUE
 

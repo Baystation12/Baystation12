@@ -105,11 +105,11 @@
 	..()
 	if (buckled_mob)
 		set_density(TRUE)
-		mouse_opacity = XMOUSE_OPACITY_ALWAYS
+		mouse_opacity = MOUSE_OPACITY_PRIORITY
 		deployed = TRUE
 	else
 		set_density(FALSE)
-		mouse_opacity = XMOUSE_OPACITY_DEFAULT
+		mouse_opacity = MOUSE_OPACITY_NORMAL
 		deployed = FALSE
 	update_icon()
 

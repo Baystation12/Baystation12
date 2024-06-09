@@ -205,6 +205,11 @@
 /mutable_appearance/appearance_flags = DEFAULT_APPEARANCE_FLAGS // Inherits /image but re docs, subject to change
 
 
+// Consider these images/atoms as part of the UI/HUD
+#define APPEARANCE_UI (RESET_COLOR | RESET_TRANSFORM | NO_CLIENT_COLOR)
+#define APPEARANCE_UI_IGNORE_ALPHA (APPEARANCE_UI | RESET_ALPHA)
+
+
 /image/proc/plating_decal_layerise()
 	plane = DEFAULT_PLANE
 	layer = DECAL_PLATING_LAYER

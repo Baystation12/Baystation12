@@ -127,11 +127,11 @@
 	. = ..()
 	if (target == buckled_mob)
 		set_density(TRUE)
-		mouse_opacity = XMOUSE_OPACITY_ALWAYS
+		mouse_opacity = MOUSE_OPACITY_PRIORITY
 		update_icon()
 	else
 		set_density(FALSE)
-		mouse_opacity = XMOUSE_OPACITY_DEFAULT
+		mouse_opacity = MOUSE_OPACITY_NORMAL
 		if (drip_active)
 			RipDrip()
 		update_icon()
