@@ -5,7 +5,7 @@
 	handle_admin_logout()
 	if(my_client)
 		my_client.screen -= darksight
-	RemoveRenderers()
+	ClearRenderers()
 
 	QDEL_NULL(darksight)
 	hide_client_images()
