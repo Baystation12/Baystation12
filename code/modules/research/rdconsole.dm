@@ -52,19 +52,21 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	base_type = /obj/machinery/computer/rdconsole/core
 	machine_name = "\improper R&D control console"
 	machine_desc = "Used to operate an R&D setup, including protolathes, circuit imprinters, and destructive analyzers. Can be configured with a screwdriver."
+	req_access = list(access_research)	//Data and setting manipulation requires scientist access.
+
 	var/datum/research/files							//Stores all the collected research data.
 	var/obj/item/disk/tech_disk/t_disk = null	//Stores the technology disk.
 	var/obj/item/disk/design_disk/d_disk = null	//Stores the design disk.
+	/// Stores any serialized codes for manufactured items
+	var/obj/item/device/tape/tape
 
 	var/obj/machinery/r_n_d/destructive_analyzer/linked_destroy = null	//Linked Destructive Analyzer
 	var/obj/machinery/r_n_d/protolathe/linked_lathe = null				//Linked Protolathe
 	var/obj/machinery/r_n_d/circuit_imprinter/linked_imprinter = null	//Linked Circuit Imprinter
-
 	var/screen = 1.0	//Which screen is currently showing.
 	var/id = 0			//ID of the computer (for server restrictions).
 	var/sync = 1		//If sync = 0, it doesn't show up on Server Control Console
 	var/can_analyze = TRUE //If the console is allowed to use destructive analyzers
-
 	var/list/saved_origins = list()
 	var/protolathe_show_tech = TRUE
 	var/protolathe_search = ""
@@ -72,7 +74,17 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	var/imprinter_search = ""
 	var/quick_deconstruct = FALSE
 
-	req_access = list(access_research)	//Data and setting manipulation requires scientist access.
+
+/obj/machinery/computer/rdconsole/Destroy()
+	files = null
+	QDEL_NULL(t_disk)
+	QDEL_NULL(d_disk)
+	QDEL_NULL(tape)
+	linked_destroy = null
+	linked_lathe = null
+	linked_imprinter = null
+	return ..()
+
 
 /obj/machinery/computer/rdconsole/proc/CallMaterialName(ID)
 	var/return_name = ID
@@ -129,12 +141,14 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 /obj/machinery/computer/rdconsole/Initialize()
 	SyncRDevices()
+	tape = new /obj/item/device/tape()
 	. = ..()
+
 
 /obj/machinery/computer/rdconsole/use_tool(obj/item/D, mob/living/user, list/click_params)
 	if(istype(D, /obj/item/disk))
 		if(t_disk || d_disk)
-			to_chat(user, "A disk is already loaded into the machine.")
+			to_chat(user, "A disk is already loaded into \the [src].")
 			return TRUE
 		if(!user.canUnEquip(D))
 			return TRUE
@@ -143,14 +157,42 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		else if (istype(D, /obj/item/disk/design_disk))
 			d_disk = D
 		else
-			to_chat(user, SPAN_NOTICE("Machine cannot accept disks in that format."))
+			to_chat(user, SPAN_NOTICE("\The [src] cannot accept disks in that format."))
 			return TRUE
 		user.drop_from_inventory(D, src)
-		to_chat(user, SPAN_NOTICE("You add \the [D] to the machine."))
+		to_chat(user, SPAN_NOTICE("You add \the [D] to \the [src]."))
 		updateUsrDialog()
 		return TRUE
 
+	if(istype(D, /obj/item/device/tape))
+		if(!user.canUnEquip(D))
+			return TRUE
+		if(tape)
+			to_chat(user, "\The [tape] is already loaded into \the [src].")
+			return TRUE
+
+		user.drop_from_inventory(D, src)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] adds \a [D] to \the [src]."),
+			SPAN_NOTICE("You add \the [D] to \the [src].")
+		)
+		tape = D
+		return TRUE
+
+	if(istype(D, /obj/item/pen))
+		if (!tape)
+			to_chat(user, SPAN_WARNING("\The [src] has no tape to remove."))
+			return TRUE
+		user.put_in_hands(tape)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] ejects \a [tape] from \the [src] with \a [D]."),
+			SPAN_NOTICE("You eject \the [tape] from \the [src] with the tip of \the [D].")
+		)
+		tape = null
+		return TRUE
+
 	return ..()
+
 
 /obj/machinery/computer/rdconsole/emag_act(remaining_charges, mob/user)
 	if(!emagged)

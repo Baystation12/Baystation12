@@ -149,6 +149,7 @@
 	caliber = CALIBER_SHOTGUN
 	one_hand_penalty = 5
 	accuracy = -3
+	serial = EMPTY_BITFIELD
 
 /obj/item/gun/projectile/shotgun/cane/examine(mob/user, distance)
 	. = ..()

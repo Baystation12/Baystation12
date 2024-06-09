@@ -38,6 +38,7 @@
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="skrell_pistol_shock"),
 		list(mode_name="kill", projectile_type=/obj/item/projectile/beam, modifystate="skrell_pistol_kill"),
 		)
+	serial = EMPTY_BITFIELD
 
 /obj/item/gun/energy/gun/small
 	name = "small energy gun"

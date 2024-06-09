@@ -16,6 +16,8 @@
 	charge_meter = 0
 	var/required_antag_type = MODE_WIZARD
 
+	serial = EMPTY_BITFIELD
+
 /obj/item/gun/energy/staff/special_check(mob/user)
 	if(required_antag_type)
 		var/datum/antagonist/antag = get_antag_data(required_antag_type)

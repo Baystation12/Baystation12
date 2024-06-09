@@ -89,7 +89,7 @@
 	var/list/darts = list()
 	var/max_darts = 1
 	var/obj/item/syringe_cartridge/next
-
+	serial = EMPTY_BITFIELD
 
 /obj/item/gun/launcher/syringe/examine(mob/user, distance)
 	. = ..()

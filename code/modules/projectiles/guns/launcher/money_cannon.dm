@@ -15,6 +15,7 @@
 
 	var/receptacle_value = 0
 	var/dispensing = 20
+	serial = EMPTY_BITFIELD
 
 /obj/item/gun/launcher/money/hacked
 	emagged = TRUE

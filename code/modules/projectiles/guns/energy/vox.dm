@@ -35,6 +35,8 @@
 		list(mode_name="scatter burst", burst=8, fire_delay=null, move_delay=4, burst_accuracy=list(0, 0, 0, 0, 0, 0, 0, 0), dispersion=list(0, 1, 2, 2, 3, 3, 3, 3, 3), projectile_type=/obj/item/projectile/energy/darkmatter, charge_cost = 10),
 		)
 
+	serial = EMPTY_BITFIELD
+
 /obj/item/gun/energy/darkmatter/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/voxform)
@@ -58,6 +60,7 @@
 		list(mode_name="normal", projectile_type=/obj/item/projectile/energy/plasmastun/sonic/weak, charge_cost = 50),
 		list(mode_name="overcharge", projectile_type=/obj/item/projectile/energy/plasmastun/sonic/strong, charge_cost = 200),
 		)
+	serial = EMPTY_BITFIELD
 
 /obj/item/gun/energy/sonic/Initialize()
 	. = ..()

@@ -13,6 +13,8 @@
 	machine_name = "protolathe"
 	machine_desc = "Uses raw materials to produce prototypes. Part of an R&D network."
 
+	var/lathe_serial
+
 	var/max_material_storage = 250000
 
 	var/list/datum/design/queue = list()
@@ -21,9 +23,18 @@
 	var/mat_efficiency = 1
 	var/speed = 1
 
-/obj/machinery/r_n_d/protolathe/New()
+
+/obj/machinery/r_n_d/protolathe/Initialize()
+	. = ..()
 	materials = default_material_composition.Copy()
-	..()
+	lathe_serial = "S[copytext(md5(ref(src)), 1, 5)]"
+
+
+/obj/machinery/r_n_d/protolathe/examine(mob/user, distance)
+	. = ..()
+	if (distance < 2 || isobserver(user))
+		to_chat(user, {"The serial "[lathe_serial]" is engraved by the material slots."})
+
 
 /obj/machinery/r_n_d/protolathe/Process()
 	..()
@@ -173,6 +184,12 @@
 
 	if(D.build_path)
 		var/obj/new_item = D.Fabricate(loc, src)
+		var/item_serial = new_item.GetSerial(src)
+		if(linked_console.tape)
+			var/message = {"Produced a "[new_item.name]""}
+			if (item_serial)
+				message += {" with serial "[item_serial]""}
+			linked_console.tape.record_speech(message)
 		if(mat_efficiency != 1) // No matter out of nowhere
 			if(new_item.matter && length(new_item.matter) > 0)
 				for(var/i in new_item.matter)

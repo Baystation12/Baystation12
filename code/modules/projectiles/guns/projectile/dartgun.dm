@@ -201,6 +201,7 @@
 /obj/item/gun/projectile/dartgun/vox
 	name = "alien dart gun"
 	desc = "A small gas-powered dartgun, fitted for nonhuman hands."
+	serial = EMPTY_BITFIELD
 
 /obj/item/gun/projectile/dartgun/vox/medical
 	starting_chems = list(/datum/reagent/kelotane,/datum/reagent/bicaridine,/datum/reagent/dylovene)

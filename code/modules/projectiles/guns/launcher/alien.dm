@@ -5,6 +5,7 @@
 	var/ammo = 3
 	var/ammo_type
 	var/ammo_name
+	serial = EMPTY_BITFIELD
 
 /obj/item/gun/launcher/alien/Initialize()
 	. = ..()

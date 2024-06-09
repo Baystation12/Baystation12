@@ -74,6 +74,8 @@
 		list(mode_name="induce specific mutations", projectile_type=/obj/item/projectile/energy/floramut/gene, modifystate="floramut"),
 		)
 
+	serial = EMPTY_BITFIELD
+
 /obj/item/gun/energy/floragun/use_before(atom/target, mob/living/user, click_parameters)
 	if (!istype(target, /obj/machinery/portable_atmospherics/hydroponics))
 		return FALSE
@@ -119,6 +121,8 @@
 	charge_meter = 0
 	combustion = 0
 
+	serial = EMPTY_BITFIELD
+
 /obj/item/gun/energy/meteorgun/pen
 	name = "meteor pen"
 	desc = "The pen is mightier than the sword."
@@ -135,6 +139,8 @@
 	icon_state = "xray"
 	origin_tech = list(TECH_COMBAT = 5, TECH_MAGNET = 4)
 	projectile_type = /obj/item/projectile/beam/mindflayer
+
+	serial = EMPTY_BITFIELD
 
 /obj/item/gun/energy/toxgun
 	name = "phoron pistol"
@@ -166,6 +172,8 @@
 	// As an industrial tool the plasma cutter's safety training falls under construction.
 	gun_skill = SKILL_CONSTRUCTION
 	safety_skill = SKILL_TRAINED
+
+	serial = EMPTY_BITFIELD
 
 /obj/item/gun/energy/plasmacutter/mounted
 	name = "mounted plasma cutter"
@@ -209,6 +217,7 @@
 	matter = list(MATERIAL_ALUMINIUM = 1000, MATERIAL_PLASTIC = 500, MATERIAL_DIAMOND = 500)
 	projectile_type = /obj/item/projectile/beam/incendiary_laser
 	max_shots = 4
+	serial = OBJ_SERIAL_DEFACED
 
 
 /obj/item/gun/energy/laser/xenofauna
