@@ -30,7 +30,6 @@
 #include "code\__defines\antagonists.dm"
 #include "code\__defines\ao.dm"
 #include "code\__defines\ao_misc.dm"
-#include "code\__defines\appearance.dm"
 #include "code\__defines\armor.dm"
 #include "code\__defines\atmos.dm"
 #include "code\__defines\atmospherics.dm"
