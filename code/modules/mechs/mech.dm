@@ -90,6 +90,9 @@
 /mob/living/exosuit/is_flooded(lying_mob, absolute)
 	. = (body && body.pilot_coverage >= 100 && hatch_closed) ? FALSE : ..()
 
+/mob/living/exosuit/isSynthetic()
+	return TRUE
+
 /mob/living/exosuit/Initialize(mapload, obj/structure/heavy_vehicle_frame/source_frame)
 	. = ..()
 
