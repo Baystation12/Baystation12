@@ -150,7 +150,6 @@
 		M.client.images -= I
 
 /obj/machinery/ship_map/on_update_icon()
-	. = ..()
 	ClearOverlays()
 	if(MACHINE_IS_BROKEN(src))
 		icon_state = "station_mapb"

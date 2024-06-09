@@ -153,7 +153,6 @@
 
 //Equivalent to /obj/ebeam, except it also adds an emissive layer
 /obj/ebeam/emissive/on_update_icon()
-	. = ..()
 	var/mutable_appearance/emissive_overlay = emissive_appearance(icon, icon_state, src)
 	AddOverlays(emissive_overlay)
 

@@ -65,7 +65,7 @@
 	update_icon()
 
 /obj/item/gun/magnetic/on_update_icon()
-	. = ..()
+	..()
 	var/list/overlays_to_add = list()
 	if(removable_components)
 		if(cell)

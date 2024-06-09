@@ -15,12 +15,11 @@
 		to_chat(user, "One of the ends is capped off by a filter.")
 
 /obj/item/clothing/mask/smokable/cigarette/rolled/on_update_icon()
-	. = ..()
+	..()
 	if(!lit)
 		icon_state = filter ? "cigoff" : "cigroll"
-/////////// //Ported Straight from TG. I am not sorry. - BloodyMan  //YOU SHOULD BE
-//ROLLING//
-///////////
+
+
 /obj/item/paper/cig
 	name = "rolling paper"
 	desc = "A thin piece of paper used to make smokeables."

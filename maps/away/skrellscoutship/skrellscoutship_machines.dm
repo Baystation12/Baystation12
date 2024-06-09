@@ -29,8 +29,6 @@
 	update_icon()
 
 /obj/machinery/power/skrell_reactor/on_update_icon()
-	. = ..()
-
 	if(!field_image)
 		field_image = image(icon = 'icons/obj/machines/power/fusion_core.dmi', icon_state = "emfield_s1")
 		field_image.color = COLOR_CYAN

@@ -189,7 +189,7 @@
 	return ..()
 
 /obj/item/inducer/borg/on_update_icon()
-	. = ..()
+	..()
 	AddOverlays(image("icons/obj/guns/gui.dmi","safety[safety()]"))
 
 /obj/item/inducer/borg/verb/toggle_safety(mob/user)

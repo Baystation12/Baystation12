@@ -33,7 +33,6 @@
 	return ..()
 
 /obj/item/flora/pottedplantsmall/fern/on_update_icon()
-	. = ..()
 	if (trimmed)
 		name = "fancy trimmed ferny potted plant"
 		desc = "This leafy desk fern seems to have been trimmed too much."

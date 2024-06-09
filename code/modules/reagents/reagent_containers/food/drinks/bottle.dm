@@ -492,7 +492,7 @@
 
 
 /obj/item/reagent_containers/food/drinks/bottle/champagne/on_update_icon()
-	. = ..()
+	..()
 	if(is_open_container())
 		if(sabraged)
 			icon_state = "[initial(icon_state)]_sabrage"

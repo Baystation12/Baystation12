@@ -91,7 +91,6 @@
 		SetTransform(rotation = pick(90, 180, 270))
 
 /obj/decal/cleanable/vomit/on_update_icon()
-	. = ..()
 	color = reagents.get_color()
 
 /obj/decal/cleanable/tomato_smudge

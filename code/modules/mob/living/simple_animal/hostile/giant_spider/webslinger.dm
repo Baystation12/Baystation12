@@ -66,8 +66,6 @@
 	. = ..()
 
 /obj/aura/web/on_update_icon()
-	. = ..()
-
 	icon_state = "web_[clamp(stacks, 1, 4)]"
 	user.update_icon()
 
