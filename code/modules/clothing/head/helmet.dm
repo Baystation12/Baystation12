@@ -101,7 +101,7 @@
 	name = "riot helmet"
 	desc = "It's a helmet specifically designed to protect against close range attacks."
 	icon_state = "helmet_riot"
-	valid_accessory_slots = null
+	valid_accessory_slots = list(ACCESSORY_SLOT_HELMET_VISOR)
 	body_parts_covered = HEAD|FACE|EYES //face shield
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
