@@ -877,3 +877,13 @@
 /datum/sprite_accessory/hair/mullethawk
 	name = "Mullet-Hawk"
 	icon_state = "hair_mullethawk"
+
+/datum/sprite_accessory/hair/maneshort
+	name = "Mane Short"
+	icon_state = "hair_mane_short"
+	flags = HAIR_TIEABLE
+
+/datum/sprite_accessory/hair/manelong
+	name = "Mane Long"
+	icon_state = "hair_mane_long"
+	flags = HAIR_TIEABLE
