@@ -75,6 +75,78 @@ medals
 	desc = "A golden sun medal awarded by the SCG to nonmilitary individuals who have made exceptional contributions to the Sol Central Government."
 	icon_state = "medal_service"
 
+//medal boxes
+/obj/item/storage/medalbox/sol
+	desc = "A small aluminum box for holding decorations, adorned with gold-on-blue ribbons."
+	icon_state = "medalbox_sol"
+
+/obj/item/storage/medalbox/sol/bronze_heart
+	startswith = list(
+		/obj/item/clothing/accessory/medal/solgov/mil/bronze_heart,
+		/obj/item/clothing/accessory/ribbon/solgov/medal/bronze_heart
+	)
+
+/obj/item/storage/medalbox/sol/home_guard
+	startswith = list(
+		/obj/item/clothing/accessory/medal/solgov/mil/home_guard,
+		/obj/item/clothing/accessory/ribbon/solgov/medal/home_guard
+	)
+
+/obj/item/storage/medalbox/sol/iron_star
+	startswith = list(
+		/obj/item/clothing/accessory/medal/solgov/mil/iron_star,
+		/obj/item/clothing/accessory/ribbon/solgov/medal/iron_star
+	)
+
+/obj/item/storage/medalbox/sol/medical
+	startswith = list(
+		/obj/item/clothing/accessory/medal/solgov/mil/medical,
+		/obj/item/clothing/accessory/ribbon/solgov/medal/medical
+	)
+
+/obj/item/storage/medalbox/sol/armed_forces
+	startswith = list(
+		/obj/item/clothing/accessory/medal/solgov/mil/armed_forces,
+		/obj/item/clothing/accessory/ribbon/solgov/medal/armed_forces
+	)
+
+/obj/item/storage/medalbox/sol/silver_sword
+	startswith = list(
+		/obj/item/clothing/accessory/medal/solgov/mil/silver_sword,
+		/obj/item/clothing/accessory/ribbon/solgov/medal/silver_sword
+	)
+
+/obj/item/storage/medalbox/sol/service_cross
+	startswith = list(
+		/obj/item/clothing/accessory/medal/solgov/mil/service_cross,
+		/obj/item/clothing/accessory/ribbon/solgov/medal/service_cross
+	)
+
+/obj/item/storage/medalbox/sol/medal_of_honor
+	startswith = list(
+		/obj/item/clothing/accessory/medal/solgov/mil/medal_of_honor,
+		/obj/item/clothing/accessory/ribbon/solgov/medal/medal_of_honor
+	)
+
+/obj/item/storage/medalbox/sol/expeditionary
+	startswith = list(
+		/obj/item/clothing/accessory/medal/solgov/civ/expeditionary,
+		/obj/item/clothing/accessory/ribbon/solgov/medal/expeditionary_medal
+	)
+
+/obj/item/storage/medalbox/sol/sapientarian
+	startswith = list(
+		/obj/item/clothing/accessory/medal/solgov/civ/sapientarian,
+		/obj/item/clothing/accessory/ribbon/solgov/medal/sapientarian
+	)
+
+/obj/item/storage/medalbox/sol/service
+	startswith = list(
+		/obj/item/clothing/accessory/medal/solgov/civ/service,
+		/obj/item/clothing/accessory/ribbon/solgov/medal/service
+	)
+
+
 /obj/item/clothing/accessory/solgov
 	var/check_codex_val = FACTION_FLEET
 

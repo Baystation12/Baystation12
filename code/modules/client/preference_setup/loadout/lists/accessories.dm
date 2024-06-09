@@ -63,17 +63,17 @@
 /datum/gear/accessory/ntaward
 	display_name = "corporate award selection"
 	description = "A medal or ribbon awarded to corporate personnel for significant accomplishments."
-	path = /obj/item/clothing/accessory/medal
-	cost = 8
+	path = /obj/item/storage/medalbox
+	cost = 6
 	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 
 /datum/gear/accessory/ntaward/New()
 	..()
 	var/ntawards = list()
-	ntawards["sciences medal"] = /obj/item/clothing/accessory/medal/bronze/nanotrasen
-	ntawards["distinguished service"] = /obj/item/clothing/accessory/medal/silver/nanotrasen
-	ntawards["command medal"] = /obj/item/clothing/accessory/medal/gold/nanotrasen
+	ntawards["sciences medal"] = /obj/item/storage/medalbox/corp_science
+	ntawards["distinguished service"] = /obj/item/storage/medalbox/corp_service
+	ntawards["command medal"] = /obj/item/storage/medalbox/corp_command
 	gear_tweaks += new/datum/gear_tweak/path(ntawards)
 
 
