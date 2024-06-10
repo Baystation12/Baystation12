@@ -11,13 +11,18 @@
     <a href="index.html">Space Station 13</a> -
     <a href="index.html#modules">Modules</a> -
     <a href="index.html#types">Types</a>
-</header>
+ &mdash; <a href="code/__defines/_renderer.html#define">Define Details</a></header>
 <main>
 <h1>code/__defines/_renderer.dm 
-            <a href="https://github.com/Baystation12/Baystation12/blob/a7aace8dfb918604c247751f15bf0cf8246f2864/code/__defines/_renderer.dm">
+            <a href="https://github.com/Baystation12/Baystation12/blob/0ad4cd9e668140e33409a0a4a5629da42272195c/code/__defines/_renderer.dm">
         <img src="git.png" width="16" height="16" title="code&#x2F;__defines&#x2F;_renderer.dm"/></a></h1>
 
 <table class="summary" cellspacing="0">
+        <tr><th><a href="code/__defines/_renderer.html#define/RENDERER_MAIN">RENDERER_MAIN</a></th><td>Main renderers are expected to always be on mobs with clients.</td></tr>
+        <tr><th><a href="code/__defines/_renderer.html#define/RENDERER_SHARED">RENDERER_SHARED</a></th><td>Shared renderers have a single instance and are added/removed instead of created/deleted.
+Many renderers can be shared - only ones that depend on the state of the mob seeing them,
+such as effects with preferences, require an owner.</td></tr>
+        <tr><th><a href="code/__defines/_renderer.html#define/RENDERER_SHARED_CUSTOM">RENDERER_SHARED_CUSTOM</a></th><td>Renderers with non-default setup behavior in hook/startup/proc/setup_renderers.</td></tr>
         <tr><th><a href="atom&#x2F;movable&#x2F;renderer.html">&#x2F;atom&#x2F;movable&#x2F;renderer</a></th><td>The base /renderer definition and defaults.</td></tr>
         <tr><th>/<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/<a href="atom/movable/renderer.html">renderer</a>/letterbox</th><td>Handles byond internal letterboxing. Avoid touching.</td></tr>
         <tr><th>/<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/<a href="atom/movable/renderer.html">renderer</a>/observers</th><td>Draws observers; ghosts, camera eyes, etc.</td></tr>
@@ -29,7 +34,7 @@
         <tr><th>/<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/<a href="atom/movable/renderer.html">renderer</a>/screen_group</th><td>Render group for stuff OUTSIDE the typical game context - UI, full screen effects, etc.</td></tr>
         <tr><th>/<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/<a href="atom/movable/renderer.html">renderer</a>/final_group</th><td>Render group for final compositing before user display.</td></tr>
         <tr><th>/<a href="atom.html">atom</a>/<a href="atom/movable.html">movable</a>/<a href="atom/movable/renderer.html">renderer</a>/warp</th><td>Renders the /obj/effect/warp example effect as well as gravity catapult effects</td></tr>
-        <tr><td colspan="2"><p>This system works by exploiting BYONDs color matrix filter to use layers to handle emissive blockers.</p>
+        <tr><td colspan="2"><p>Emmissives work by exploiting BYONDs color matrix filter to use layers to handle emissive blockers.</p>
 <p>Emissive overlays are pasted with an atom color that converts them to be entirely some specific color.
 Emissive blockers are pasted with an atom color that converts them to be entirely some different color.
 Emissive overlays and emissive blockers are put onto the same plane.
@@ -37,10 +42,25 @@ The layers for the emissive overlays and emissive blockers cause them to mask ea
 A color matrix filter is applied to the emissive plane to mask out anything that isn't whatever the emissive color is.
 This is then used to alpha mask the lighting plane.</p>
 <p>This works best if emissive overlays applied only to objects that emit light,
-since luminosity=0 turfs may not be rendered.</p></td></tr></table></main>
+since luminosity=0 turfs may not be rendered.</p></td></tr></table><h2 id="define">Define Details</h2>
+<h3 id="define/RENDERER_MAIN"><aside class="declaration">#define </aside>RENDERER_MAIN
+            <a href="https://github.com/Baystation12/Baystation12/blob/0ad4cd9e668140e33409a0a4a5629da42272195c/code/__defines/_renderer.dm#L12">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__defines&#x2F;_renderer.dm 12"/></a>
+    </h3>
+    <p>Main renderers are expected to always be on mobs with clients.</p><h3 id="define/RENDERER_SHARED"><aside class="declaration">#define </aside>RENDERER_SHARED
+            <a href="https://github.com/Baystation12/Baystation12/blob/0ad4cd9e668140e33409a0a4a5629da42272195c/code/__defines/_renderer.dm#L19">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__defines&#x2F;_renderer.dm 19"/></a>
+    </h3>
+    <p>Shared renderers have a single instance and are added/removed instead of created/deleted.
+Many renderers can be shared - only ones that depend on the state of the mob seeing them,
+such as effects with preferences, require an owner.</p><h3 id="define/RENDERER_SHARED_CUSTOM"><aside class="declaration">#define </aside>RENDERER_SHARED_CUSTOM
+            <a href="https://github.com/Baystation12/Baystation12/blob/0ad4cd9e668140e33409a0a4a5629da42272195c/code/__defines/_renderer.dm#L22">
+        <img src="git.png" width="16" height="16" title="code&#x2F;__defines&#x2F;_renderer.dm 22"/></a>
+    </h3>
+    <p>Renderers with non-default setup behavior in hook/startup/proc/setup_renderers.</p></main>
 <footer>
     baystation12.dme
-    <a href="https://github.com/Baystation12/Baystation12/tree/a7aace8dfb918604c247751f15bf0cf8246f2864">a7aace8</a>
+    <a href="https://github.com/Baystation12/Baystation12/tree/0ad4cd9e668140e33409a0a4a5629da42272195c">0ad4cd9</a>
         (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.7.3</a></footer>
 </body>
 </html>
