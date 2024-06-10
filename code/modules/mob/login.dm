@@ -95,7 +95,7 @@
 	darksight = new()
 	client.screen += darksight
 
-	CreateRenderers()
+	AddDefaultRenderers()
 
 	refresh_client_images()
 	reload_fullscreen() // Reload any fullscreen overlays this mob has.
