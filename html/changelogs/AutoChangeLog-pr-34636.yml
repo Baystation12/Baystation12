@@ -1,0 +1,4 @@
+author: Builder13
+changes:
+  - {bugfix: Add Antagonist vote can now add antags.}
+delete-after: true
