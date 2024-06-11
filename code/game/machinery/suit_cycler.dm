@@ -129,6 +129,8 @@
 	return ..()
 
 /obj/machinery/suit_cycler/proc/move_target_inside(mob/target, mob/user)
+	if (!user_can_move_target_inside(target, user))
+		return
 	visible_message(SPAN_NOTICE("\The [user] starts putting \the [target] into \the [src]."), range = 3)
 	add_fingerprint(user)
 	if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))

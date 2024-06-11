@@ -239,6 +239,8 @@
 	if (occupant)
 		to_chat(user, SPAN_WARNING("\The [src] is already occupied."))
 		return FALSE
+	if (!user_can_move_target_inside(target, user))
+		return
 	if (target == user)
 		visible_message("\The [user] starts climbing into \the [src].")
 	else
