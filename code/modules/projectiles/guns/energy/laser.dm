@@ -164,7 +164,7 @@
 	origin_tech = list(TECH_COMBAT = 1, TECH_MAGNET = 2)
 	self_recharge = 1
 	matter = list(MATERIAL_STEEL = 2000)
-	projectile_type = /obj/item/projectile/beam/lastertag/blue
+	projectile_type = /obj/item/projectile/beam/lasertag/blue
 	var/required_vest
 
 /obj/item/gun/energy/lasertag/special_check(mob/living/carbon/human/M)
@@ -177,11 +177,11 @@
 /obj/item/gun/energy/lasertag/blue
 	icon_state = "bluetag"
 	item_state = "bluetag"
-	projectile_type = /obj/item/projectile/beam/lastertag/blue
+	projectile_type = /obj/item/projectile/beam/lasertag/blue
 	required_vest = /obj/item/clothing/suit/bluetag
 
 /obj/item/gun/energy/lasertag/red
 	icon_state = "redtag"
 	item_state = "redtag"
-	projectile_type = /obj/item/projectile/beam/lastertag/red
+	projectile_type = /obj/item/projectile/beam/lasertag/red
 	required_vest = /obj/item/clothing/suit/redtag
