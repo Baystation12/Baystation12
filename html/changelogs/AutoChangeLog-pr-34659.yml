@@ -1,0 +1,4 @@
+author: Rootoo807, Noreaus
+changes:
+  - {rscadd: Adds new planet-specific posters to spawn.}
+delete-after: true
