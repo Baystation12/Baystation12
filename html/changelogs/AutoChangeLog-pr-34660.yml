@@ -1,0 +1,5 @@
+author: Spookerton
+changes:
+  - {bugfix: Visors no longer crash when people are wearing non-hat items on their
+      heads.}
+delete-after: true
