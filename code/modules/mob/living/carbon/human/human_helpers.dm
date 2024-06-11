@@ -94,7 +94,7 @@
 /mob/living/carbon/human/proc/process_visor(obj/item/clothing/head/hat, obj/item/clothing/glasses/eyewear)
 	remove_client_color(/datum/client_color/monochrome)
 	remove_client_color(/datum/client_color/nvg)
-	if (hat)
+	if (istype(hat))
 		for(var/obj/item/clothing/accessory/glassesmod/mod in hat.accessories)
 			if (mod?.active)
 				equipment_darkness_modifier += mod.darkness_view
@@ -115,7 +115,7 @@
 					add_client_color(/datum/client_color/nvg)
 				add_clothing_protection(mod)
 				mod.process_hud(src)
-	if (eyewear)
+	if (istype(eyewear))
 		for(var/obj/item/clothing/accessory/glassesmod/mod in eyewear.accessories)
 			if (mod?.active)
 				equipment_darkness_modifier += mod.darkness_view
