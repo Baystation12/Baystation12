@@ -136,6 +136,8 @@
 	return TRUE
 
 /obj/machinery/suit_storage_unit/proc/move_target_inside(mob/target, mob/user)
+	if (!user_can_move_target_inside(target, user))
+		return
 	visible_message(SPAN_WARNING("\The [user] starts putting \the [target] into \the [src]."))
 	add_fingerprint(user)
 	if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
