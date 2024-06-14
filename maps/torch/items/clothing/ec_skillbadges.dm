@@ -61,7 +61,7 @@
 /obj/item/clothing/accessory/solgov/skillstripe
 	name = "specialist stripe"
 	desc = "A thin stripe of spaceworthy material with vacuum-rated adhesive, for attaching to the voidsuit. Indicates some sort of specialist training."
-	slot = ACCESSORY_SLOT_INSIGNIA
+	slot = ACCESSORY_SLOT_INSIGNIA_EVA
 	on_rolled_down = ACCESSORY_ROLLED_NONE
 	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
 	icon_state = "ec_stripe"
