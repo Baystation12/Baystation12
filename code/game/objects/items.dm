@@ -694,7 +694,7 @@ var/global/list/slot_flags_enumeration = list(
 	return 1 //we applied blood to the item
 
 GLOBAL_LIST_EMPTY(blood_overlay_cache)
-#define BLOOD_OVERLAY_CACHE_INDEX "[icon]" + icon_state
+#define BLOOD_OVERLAY_CACHE_INDEX "[icon]" + icon_state + blood_color
 
 /obj/item/proc/generate_blood_overlay(force = FALSE)
 	if(blood_overlay && !force)
