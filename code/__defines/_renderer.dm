@@ -102,27 +102,29 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 * to share them globally.
 */
 
-/// The map of (instance = plane) renderers in use by this mob.
-/mob/var/list/atom/movable/renderer/renderers
+/// A map of (instance = plane) renderers in use by this mob.
+/mob/var/list/atom/movable/renderer/rdr_to_plane
 
-/// A list of non-main types of renderers in use by this mob.
-/mob/var/list/atom/movable/renderer/extra_renderers
+/// A map of (type = instance) renderers in use by this mob.
+/mob/var/list/atom/movable/renderer/rdr_by_type
 
 
 /// Creates the mob's renderers on /Login()
 /mob/proc/AddDefaultRenderers()
-	if (renderers)
+	if (rdr_to_plane)
 		ClearRenderers()
-	renderers = list()
-	extra_renderers = list()
+	rdr_to_plane = list()
+	rdr_by_type = list()
 	for (var/atom/movable/renderer/renderer as anything in GLOB.rdr_main_owned)
 		renderer = new renderer (null, src)
-		renderers[renderer] = renderer.plane
+		rdr_to_plane[renderer] = renderer.plane
+		rdr_by_type[renderer.type] = renderer
 		if (renderer.relay)
 			my_client.screen += renderer.relay
 		my_client.screen += renderer
 	for (var/atom/movable/renderer/renderer as anything in GLOB.rdr_main_shared)
-		renderers[renderer] = renderer.plane
+		rdr_to_plane[renderer] = renderer.plane
+		rdr_by_type[renderer.type] = renderer
 		if (renderer.relay)
 			my_client.screen += renderer.relay
 		my_client.screen += renderer
@@ -131,14 +133,24 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 /// Removes the mob's renderers on /Logout()
 /mob/proc/ClearRenderers()
 	if (my_client)
-		for (var/atom/movable/renderer/renderer as anything in renderers)
+		for (var/atom/movable/renderer/renderer as anything in rdr_to_plane)
 			if (renderer.relay)
 				my_client.screen -= renderer.relay
 			my_client.screen -= renderer
 			if (~renderer.renderer_flags & RENDERER_SHARED)
 				qdel(renderer)
-	extra_renderers = null
-	renderers = null
+	rdr_to_plane = null
+	rdr_by_type = null
+
+
+/// Returns the renderer instance of_type if the mob has one and it is not shared.
+/mob/proc/GetRenderer(atom/movable/renderer/of_type)
+	if (!my_client)
+		return
+	var/atom/movable/renderer/renderer = rdr_by_type[of_type]
+	if (renderer?.renderer_flags & RENDERER_SHARED)
+		return
+	return renderer
 
 
 /// Adds a non-main renderer to the mob by type if the mob doesn't already have it.
@@ -148,7 +160,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 	var/flags = initial(of_type.renderer_flags)
 	if (flags & RENDERER_MAIN)
 		return
-	if (of_type in extra_renderers)
+	if (of_type in rdr_by_type)
 		return
 	var/atom/movable/renderer/renderer
 	if (flags & RENDERER_SHARED)
@@ -158,8 +170,8 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 	if (renderer.relay)
 		my_client.screen += renderer.relay
 	my_client.screen += renderer
-	renderers[renderer] = renderer.plane
-	extra_renderers += of_type
+	rdr_to_plane[renderer] = renderer.plane
+	rdr_by_type[of_type] = renderer
 
 
 /// Removes a non-main renderer to the mob by type.
@@ -169,19 +181,16 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 	var/flags = initial(of_type.renderer_flags)
 	if (flags & RENDERER_MAIN)
 		return
-	if (!(of_type in extra_renderers))
+	var/atom/movable/renderer/renderer = rdr_by_type[of_type]
+	if (!renderer)
 		return
-	for (var/atom/movable/renderer/renderer as anything in renderers)
-		if (renderer.type != of_type)
-			continue
-		extra_renderers -= of_type
-		renderers -= renderer
-		if (renderer.relay)
-			my_client.screen -= renderer.relay
-		my_client.screen -= renderer
-		if (~renderer.renderer_flags & RENDERER_SHARED)
-			qdel(renderer)
-		return
+	if (renderer.relay)
+		my_client.screen -= renderer.relay
+	my_client.screen -= renderer
+	rdr_by_type -= of_type
+	rdr_to_plane -= renderer
+	if (~renderer.renderer_flags & RENDERER_SHARED)
+		qdel(renderer)
 
 
 /* *
@@ -308,7 +317,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 	name = "Scene Group"
 	group = RENDER_GROUP_FINAL
 	plane = RENDER_GROUP_SCENE
-	renderer_flags = RENDERER_MAIN | RENDERER_SHARED
+	renderer_flags = RENDERER_MAIN
 
 
 /// Render group for stuff OUTSIDE the typical game context - UI, full screen effects, etc.

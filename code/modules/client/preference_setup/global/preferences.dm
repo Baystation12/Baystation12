@@ -271,9 +271,9 @@ var/global/list/_client_preferences_by_type
 	default_value = GLOB.PREF_HIGH
 
 /datum/client_preference/graphics_quality/changed(mob/preference_mob, new_value)
-	if(preference_mob?.client)
-		for(var/atom/movable/renderer/R as anything in preference_mob.renderers)
-			R.GraphicsUpdate()
+	if (preference_mob?.client)
+		for (var/atom/movable/renderer/renderer as anything in preference_mob.rdr_to_plane)
+			renderer.GraphicsUpdate()
 
 /datum/client_preference/goonchat
 	description = "Use Goon Chat"

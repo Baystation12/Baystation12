@@ -76,8 +76,9 @@
 		0, 1, 0,
 		0, 0, 1
 	)
+	var/scene_group = GetRenderer(/atom/movable/renderer/scene_group)
 	if (!length(client_colors))
-		animate(renderers[10], color = initial(color))
+		animate(scene_group, color = initial(color))
 		animate(client, color = initial(color))
 		return
 	var/datum/client_color/top_color
@@ -93,7 +94,7 @@
 		if (entry.override)
 			break
 	if (!top_color.ignore_blood)
-		animate(renderers[10], color = color)
+		animate(scene_group, color = color)
 		animate(client, color = list(
 			1, 0, 0,
 			0, 1, 0,
@@ -101,7 +102,7 @@
 		))
 	else
 		animate(client, color = color)
-		animate(renderers[10], color = list(
+		animate(scene_group, color = list(
 			1, 0, 0,
 			0, 1, 0,
 			0, 0, 1
