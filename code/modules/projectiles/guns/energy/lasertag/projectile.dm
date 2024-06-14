@@ -1,6 +1,6 @@
 /obj/item/projectile/beam/lasertag
 	name = "lasertag beam"
-	icon_state = "bluelaser"
+	icon_state = "lasertag"
 	damage = 0
 	no_attack_log = TRUE
 	damage_type = DAMAGE_BURN
@@ -24,3 +24,20 @@
 	if (team_name == armor.team_name)
 		return
 	human.Weaken(5)
+
+
+/obj/projectile/laser/lasertag/set_color(color)
+	..()
+	set_light(l_color = color)
+
+
+/obj/projectile/laser/lasertag/tracer
+	icon_state = "beam_blue"
+
+
+/obj/projectile/laser/lasertag/muzzle
+	icon_state = "muzzle_blue"
+
+
+/obj/projectile/laser/lasertag/impact
+	icon_state = "impact_blue"
