@@ -140,7 +140,7 @@
 	siemens_coefficient = 0.9
 	randpixel = 0
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
-	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_INSIGNIA_EVA)
 	equip_delay = 5 SECONDS
 
 
