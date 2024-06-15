@@ -86,7 +86,7 @@
 	if(prob(60))
 		S.set_trait(TRAIT_PARASITE, !S.get_trait(TRAIT_PARASITE))
 	if(prob(65))
-		S.set_trait(TRAIT_NUTRIENT_CONSUMPTION, S.get_trait(TRAIT_NUTRIENT_CONSUMPTION)+rand(-0.1,0.1),5,0)
+		S.set_trait(TRAIT_NUTRIENT_CONSUMPTION, S.get_trait(TRAIT_NUTRIENT_CONSUMPTION)+Frand(-0.1,0.1),5,0)
 	if(prob(65))
 		S.set_trait(TRAIT_WATER_CONSUMPTION, S.get_trait(TRAIT_WATER_CONSUMPTION)+rand(-1,1),50,0)
 
