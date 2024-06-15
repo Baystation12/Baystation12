@@ -401,6 +401,7 @@
 		else
 			current_account.deleted.Add(M)
 			current_account.inbox.Remove(M)
+			current_account.outbox.Remove(M)
 			current_account.spam.Remove(M)
 		if(current_message == M)
 			current_message = null
