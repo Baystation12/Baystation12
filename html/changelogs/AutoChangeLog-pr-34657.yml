@@ -1,7 +1,0 @@
-author: SierraKomodo
-changes:
-  - {bugfix: Machinery that can be entered now checks if all conditions are met before
-      starting the "Put person in thing" timer.}
-  - {bugfix: It is no longer possible to put people into disposal bins if they manage
-      to escape or are thrown away from the bin during the timer.}
-delete-after: true
