@@ -81,11 +81,6 @@
 	install_system(new /obj/item/mech_equipment/mounted_system/extinguisher(src), HARDPOINT_RIGHT_HAND)
 	install_system(new /obj/item/mech_equipment/atmos_shields(src), HARDPOINT_BACK)
 
-/obj/item/mech_component/sensors/firefighter/prebuild()
-	..()
-	software = new(src)
-	software.installed_software = list(MECH_SOFTWARE_UTILITY, MECH_SOFTWARE_ENGINEERING)
-
 /mob/living/exosuit/premade/powerloader/old
 	name = "weathered power loader"
 	desc = "An ancient, but well-liked cargo handling exosuit. The paint is starting to flake. Perhaps some maintenance is in order?"
