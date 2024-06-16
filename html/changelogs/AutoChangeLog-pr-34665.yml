@@ -1,0 +1,5 @@
+author: Merlin1230
+changes:
+  - {bugfix: Roundstart exosuits now actually spawn with boards instead of having
+      their software work via black magic}
+delete-after: true
