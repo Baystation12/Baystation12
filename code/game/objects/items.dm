@@ -694,19 +694,22 @@ var/global/list/slot_flags_enumeration = list(
 	return 1 //we applied blood to the item
 
 GLOBAL_LIST_EMPTY(blood_overlay_cache)
+#define BLOOD_OVERLAY_CACHE_INDEX "[icon]" + icon_state + blood_color
 
 /obj/item/proc/generate_blood_overlay(force = FALSE)
 	if(blood_overlay && !force)
 		return
-	if(GLOB.blood_overlay_cache["[icon]" + icon_state])
-		blood_overlay = GLOB.blood_overlay_cache["[icon]" + icon_state]
+	if(GLOB.blood_overlay_cache[BLOOD_OVERLAY_CACHE_INDEX])
+		blood_overlay = GLOB.blood_overlay_cache[BLOOD_OVERLAY_CACHE_INDEX]
 		return
 	var/icon/I = new /icon(icon, icon_state)
 	I.Blend(new /icon('icons/effects/blood.dmi', rgb(255,255,255)),ICON_ADD) //fills the icon_state with white (except where it's transparent)
 	I.Blend(new /icon('icons/effects/blood.dmi', "itemblood"),ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
 	blood_overlay = image(I)
 	blood_overlay.appearance_flags |= NO_CLIENT_COLOR
-	GLOB.blood_overlay_cache["[icon]" + icon_state] = blood_overlay
+	GLOB.blood_overlay_cache[BLOOD_OVERLAY_CACHE_INDEX] = blood_overlay
+
+#undef BLOOD_OVERLAY_CACHE_INDEX
 
 /obj/item/proc/showoff(mob/user)
 	for (var/mob/M in view(user))
