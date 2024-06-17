@@ -678,9 +678,6 @@
 
 	if(client.holder)
 		if(statpanel("MC"))
-			stat("CPU:","[world.cpu]")
-			stat("Instances:","[length(world.contents)]")
-			stat(null)
 			var/time = Uptime()
 			if(Master)
 				Master.UpdateStat(time)
