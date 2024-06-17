@@ -589,13 +589,20 @@ var/global/datum/controller/master/Master = new
 	if (PreventUpdateStat(time))
 		return ..()
 	..({"\
-		Hub: [config.hub_visible ? "Y" : "N"]  \
-		FPS: [world.fps]  \
-		Ticks: [world.time / world.tick_lag]  \
 		Alive: [Master.processing ? "Y" : "N"]  \
+		Ticks: [world.time / world.tick_lag]  \
 		Cycle: [Master.iteration]  \
-		Drift: [Round(Master.tickdrift)] | [Percent(Master.tickdrift, world.time / world.tick_lag, 1)]%
-	"})
+		Drift: [Round(Master.tickdrift)] | [Percent(Master.tickdrift, world.time / world.tick_lag, 1)]%\n\
+		FPS: [world.fps]  \
+		CPU: [round(world.cpu, 0.1)]%  \
+		MAP: [round(world.map_cpu, 0.1)]%  \
+		Atoms: [length(world.contents)]\n\
+		Server: [world.byond_version].[world.byond_build]  \
+		World Size: <[world.maxx],[world.maxy],[world.maxz]>\n\
+		Hub: [config.hub_visible ? "Y" : "N"]  \
+		Reachable: [world.reachable ? "Y" : "N"]  \
+		Address: [world.internet_address]:[world.port]\
+	"}) //515: add 'Compiler: [BYOND_VERSION].[BYOND_BUILD]' after Server
 
 
 /datum/controller/master/StartLoadingMap()
