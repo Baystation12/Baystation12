@@ -1,13 +1,14 @@
 SUBSYSTEM_DEF(misc)
 	name = "Misc Updates"
 	wait = 30 SECONDS
+
+	var/const/STAGE_TRADERS = FLAG(0)
+	var/const/STAGE_SOLARS = FLAG(1)
+
 	var/static/list/queue = list()
 	var/static/stage = STAGE_TRADERS
 	var/static/cost_traders = 0
 	var/static/cost_solars = 0
-
-	var/const/STAGE_TRADERS = FLAG(0)
-	var/const/STAGE_SOLARS = FLAG(1)
 
 
 /datum/controller/subsystem/misc/VV_static()

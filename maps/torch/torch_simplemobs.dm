@@ -266,7 +266,7 @@
 			num_shots = 10
 			fire_desc = "fires a burst"
 			time_last_used_ability = base_attack_cooldown + world.time
-			visible_message(SPAN_MFAUNA("\The [src] pulls up \the machinegun to bear!"))
+			visible_message(SPAN_MFAUNA("\The [src] pulls up a machinegun to bear!"))
 
 	update_icon()
 
