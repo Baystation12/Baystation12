@@ -226,7 +226,7 @@
 					zlevels[1])
 				if (!T)
 					return
-				GLOB.using_map.do_interlude_teleport(mob, T, rand(1, 2.5) MINUTES)
+				GLOB.using_map.do_interlude_teleport(mob, T, Frand(1, 2.5) MINUTES)
 				return
 			if (mob != being)
 				var/source_position = being.loc

@@ -48,7 +48,7 @@
 		spawn(rand(200,250)+B.host.getBrainLoss())
 			if(!B || !B.controlling) return
 
-			B.host.adjustBrainLoss(rand(0.1,0.5))
+			B.host.adjustBrainLoss(Frand(0.1,0.5))
 			to_chat(H, SPAN_DANGER("With an immense exertion of will, you regain control of your body!"))
 			to_chat(B.host, SPAN_DANGER("You feel control of the host brain ripped from your grasp, and retract your probosci before the wild neural impulses can damage you."))
 			B.detatch()

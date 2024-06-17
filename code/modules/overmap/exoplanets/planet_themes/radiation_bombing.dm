@@ -11,7 +11,7 @@
 	return "Hotspots of radiation detected."
 
 /datum/exoplanet_theme/radiation_bombing/after_map_generation(obj/overmap/visitable/sector/exoplanet/E)
-	var/radiation_power = rand(10, 37.5)
+	var/radiation_power = Frand(10, 37.5)
 	var/num_craters = round(min(0.04, rand()) * 0.02 * E.maxx * E.maxy)
 	for (var/i = 1 to num_craters)
 		var/turf/simulated/T = pick_area_turf(E.planetary_area, list(/proc/not_turf_contains_dense_objects))
