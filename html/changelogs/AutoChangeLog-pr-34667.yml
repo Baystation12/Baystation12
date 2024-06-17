@@ -1,0 +1,5 @@
+author: SierraKomodo
+changes:
+  - {bugfix: Blood covered clothing no longer sometimes gets stuck with irremovable
+      blood overlays due to caching shenanigans.}
+delete-after: true
