@@ -1,4 +1,0 @@
-author: Qlonever
-changes:
-  - {tweak: made some instances of randomness return real numbers instead of integers}
-delete-after: true

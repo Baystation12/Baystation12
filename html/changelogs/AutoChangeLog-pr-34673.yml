@@ -1,4 +1,0 @@
-author: Spookerton
-changes:
-  - {admin: The MC tab "main" entry includes extra world state information.}
-delete-after: true
