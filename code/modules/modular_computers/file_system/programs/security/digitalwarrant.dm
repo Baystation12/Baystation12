@@ -169,6 +169,9 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 			var/job = copytext(entry_components[2], 1, length(entry_components[2]))
 			activewarrant.fields["namewarrant"] = name
 			activewarrant.fields["jobwarrant"] = job
+			activewarrant.fields["auth"] = "Unauthorized"
+			activewarrant.fields["idauth"] = "Unauthorized"
+			activewarrant.fields["access"] = list()
 
 	if(href_list["editwarrantnamecustom"])
 		. = TRUE
@@ -179,6 +182,9 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 				return
 			activewarrant.fields["namewarrant"] = new_name
 			activewarrant.fields["jobwarrant"] = new_job
+			activewarrant.fields["auth"] = "Unauthorized"
+			activewarrant.fields["idauth"] = "Unauthorized"
+			activewarrant.fields["access"] = list()
 
 	if(href_list["editwarrantcharges"])
 		. = TRUE
@@ -212,7 +218,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 			to_chat(user, "Lookup error: Unable to locate specified job in access database.")
 			return
 		for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
-			if(CR.get_name() == activewarrant.fields["namewarrant"] && CR.get_job() == J.title)
+			if(CR.get_name() == activewarrant.fields["namewarrant"] && CR.get_job() == activewarrant.fields["jobwarrant"])
 				warrant_subject = CR
 
 		if(!warrant_subject)
