@@ -6,7 +6,6 @@
 	else
 		var/alpha_ratio = alpha/255
 		appearance.color = _EMISSIVE_COLOR(alpha_ratio)
-//	appearance.blend_mode = BLEND_OVERLAY
 	return appearance
 
 /// Produces a mutable appearance glued to the [EMISSIVE_PLANE] dyed to be the [EM_BLOCK_COLOR].
