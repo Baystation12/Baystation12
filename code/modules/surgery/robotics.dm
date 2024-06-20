@@ -463,7 +463,7 @@
 
 /singleton/surgery_step/robotics/detatch_organ_robotic/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/affected = target.get_organ(target_zone)
-	var/obj/removing = target.internal_organs_by_name[LAZYACCESS(target.surgeries_in_progress, target_zone)]
+	var/obj/removing = LAZYACCESS(target.surgeries_in_progress, target_zone)
 	user.visible_message(SPAN_NOTICE("[user] has decoupled \the [removing] from \the [target]'s [affected.name] with \the [tool].") , \
 	SPAN_NOTICE("You have decoupled \the [removing] from \the [target]'s [affected.name] with \the [tool]."))
 
@@ -479,7 +479,7 @@
 //	robotic organ transplant finalization surgery step
 //////////////////////////////////////////////////////////////////
 /singleton/surgery_step/robotics/attach_organ_robotic
-	name = "Reattach prosthetic organ"
+	name = "Attach prosthetic organ"
 	allowed_tools = list(
 		/obj/item/screwdriver = 50,
 		/obj/item/swapper/power_drill = 70,
@@ -504,7 +504,7 @@
 		if (organ.organ_tag in target.internal_organs_by_name)
 			continue
 		var/image/radial_button = image(icon = organ.icon, icon_state = organ.icon_state)
-		radial_button.name = "Reattach \the [organ.name]"
+		radial_button.name = "Attach \the [organ.name]"
 		LAZYSET(candidates, organ, radial_button)
 	if (length(candidates) == 1 && user.get_preference_value(/datum/client_preference/surgery_skip_radial))
 		return candidates[1]
@@ -521,9 +521,9 @@
 
 /singleton/surgery_step/robotics/attach_organ_robotic/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/affected = target.get_organ(target_zone)
-	var/obj/attaching = target.internal_organs_by_name[LAZYACCESS(target.surgeries_in_progress, target_zone)]
-	user.visible_message("[user] begins reattaching \the [attaching] from \the [target]'s [affected.name] with \the [tool].", \
-	"You start reattaching \the [attaching] from \the [target]'s [affected.name] with \the [tool].")
+	var/obj/attaching = LAZYACCESS(target.surgeries_in_progress, target_zone)
+	user.visible_message("[user] begins attaching \the [attaching] to \the [target]'s [affected.name] with \the [tool].", \
+	"You start attaching \the [attaching] to \the [target]'s [affected.name] with \the [tool].")
 	playsound(target.loc, 'sound/items/Screwdriver.ogg', 15, 1)
 	..()
 
@@ -534,8 +534,8 @@
 	attaching.status &= ~ORGAN_CUT_AWAY
 	attaching.replaced(target, affected)
 	user.visible_message(
-		SPAN_NOTICE("\The [user] has reattached \a [target]'s [attaching] with \a [tool]."),
-		SPAN_NOTICE("You have reattached \the [target]'s [attaching] with \the [tool].")
+		SPAN_NOTICE("\The [user] has attached \the [target]'s [attaching.name] with \the [tool]."),
+		SPAN_NOTICE("You have attached \the [target]'s [attaching.name] with \the [tool].")
 	)
 
 

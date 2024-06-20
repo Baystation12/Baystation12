@@ -4,7 +4,7 @@
 	icon_state = "leukosuite"
 	desc = "These stimulators augment the immune system and promote the growth of hunter-killer cells in the presence of a foreign invader, effectively boosting the body's immunity to parasites and disease."
 	action_button_name = "Toggle leukocyte breeder"
-	augment_flags = AUGMENT_BIOLOGICAL
+	augment_flags = AUGMENT_BIOLOGICAL | AUGMENT_SCANNABLE
 	origin_tech = list(TECH_DATA = 2, TECH_BIO = 4)
 	var/active = FALSE
 
