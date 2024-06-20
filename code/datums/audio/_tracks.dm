@@ -91,9 +91,9 @@
 /singleton/audio/track/elibao
 	source = 'sound/music/elibao.ogg'
 	title = "every light is blinking at once"
-	author = "Earthcrusher"
+	author = "Sunbeamstress"
 	license = /singleton/license/cc_by_nc_sa_3_0
-	url = "https://soundcloud.com/alexanderdivine/every-light-is-blinking-at-once"
+	url = "https://soundcloud.com/sunbeamstress/every-light-is-blinking-at-once"
 
 /singleton/audio/track/endless_space
 	source = 'sound/music/space.ogg'
@@ -148,9 +148,9 @@
 /singleton/audio/track/lasers
 	source = 'sound/music/lasers_rip_apart_the_bulkhead.ogg'
 	title = "lasers rip apart the bulkhead"
-	author = "Earthcrusher"
+	author = "Sunbeamstress"
 	license = /singleton/license/cc_by_nc_sa_3_0
-	url = "https://soundcloud.com/alexanderdivine/lasers-rip-apart-the-bulkhead"
+	url = "https://soundcloud.com/sunbeamstress/lasers-rip-apart-the-bulkhead"
 
 /singleton/audio/track/level3_mod
 	display = "Scratch"
@@ -221,9 +221,9 @@
 /singleton/audio/track/pwmur
 	source = 'sound/music/pwmur.ogg'
 	title = "phoron will make us rich"
-	author = "Earthcrusher"
+	author = "Sunbeamstress"
 	license = /singleton/license/cc_by_nc_sa_3_0
-	url = "https://soundcloud.com/alexanderdivine/phoron-will-make-us-rich"
+	url = "https://soundcloud.com/sunbeamstress/phoron-will-make-us-rich"
 
 /singleton/audio/track/rimward_cruise
 	source = 'sound/music/rimward_cruise.ogg'
