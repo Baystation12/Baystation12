@@ -83,6 +83,7 @@
 	icon = 'icons/obj/flora/ausflora.dmi'
 	icon_state = "firstbush_1"
 	anchored = TRUE
+	layer = PLANT_LAYER
 
 /obj/structure/flora/ausbushes/New()
 	..()
