@@ -1,5 +1,0 @@
-author: sick trigger
-changes:
-  - {tweak: Warrant authorization is removed if given a new target}
-  - {bugfix: Warrant access authorization works with alt-titles}
-delete-after: true
