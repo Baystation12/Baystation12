@@ -1,0 +1,4 @@
+author: Spookerton
+changes:
+  - {tweak: Spiders that explode on death no longer spawn naturally.}
+delete-after: true
