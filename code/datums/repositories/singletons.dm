@@ -1,7 +1,7 @@
-var/global/repository/singletons/Singletons = new
+var/global/datum/singleton_manager/Singletons = new
 
 
-/repository/singletons
+/datum/singleton_manager
 	/// A cache of individual singletons as (/singleton/path = Instance, ...)
 	var/static/list/instances = list()
 
@@ -37,7 +37,7 @@ var/global/repository/singletons/Singletons = new
 * Get a singleton instance according to path. Creates it if necessary. Null if abstract or not a singleton.
 * Prefer the GET_SINGLETON macro to minimize proc calls.
 */
-/repository/singletons/proc/GetInstance(singleton/path)
+/datum/singleton_manager/proc/GetInstance(singleton/path)
 	if (!ispath(path, /singleton))
 		return
 	if (resolved_instances[path])
@@ -52,7 +52,7 @@ var/global/repository/singletons/Singletons = new
 
 
 /// Get a (path = instance) map of valid singletons according to paths.
-/repository/singletons/proc/GetMap(list/singleton/paths)
+/datum/singleton_manager/proc/GetMap(list/singleton/paths)
 	var/list/result = list()
 	for (var/path in paths)
 		var/singleton/instance = GetInstance(path)
@@ -63,7 +63,7 @@ var/global/repository/singletons/Singletons = new
 
 
 /// Get a list of valid singletons according to paths.
-/repository/singletons/proc/GetList(list/singleton/paths)
+/datum/singleton_manager/proc/GetList(list/singleton/paths)
 	var/list/result = list()
 	for (var/path in paths)
 		var/singleton/instance = GetInstance(path)
@@ -77,7 +77,7 @@ var/global/repository/singletons/Singletons = new
 * Get a (path = instance) map of valid singletons according to typesof(path).
 * Prefer the GET_SINGLETON_TYPE_MAP macro to minimize proc calls.
 */
-/repository/singletons/proc/GetTypeMap(singleton/path)
+/datum/singleton_manager/proc/GetTypeMap(singleton/path)
 	if (resolved_type_maps[path])
 		return type_maps[path] || list()
 	resolved_type_maps[path] = TRUE
@@ -88,9 +88,9 @@ var/global/repository/singletons/Singletons = new
 
 /**
 * Get a (path = instance) map of valid singletons according to subtypesof(path).
-* Prefer the GET_SINGLETON_TYPE_MAP macro to minimize proc calls.
+* Prefer the GET_SINGLETON_SUBTYPE_MAP macro to minimize proc calls.
 */
-/repository/singletons/proc/GetSubtypeMap(singleton/path)
+/datum/singleton_manager/proc/GetSubtypeMap(singleton/path)
 	if (resolved_subtype_maps[path])
 		return subtype_maps[path] || list()
 	resolved_subtype_maps[path] = TRUE
@@ -103,7 +103,7 @@ var/global/repository/singletons/Singletons = new
 * Get a list of valid singletons according to typesof(path).
 * Prefer the GET_SINGLETON_TYPE_LIST macro to minimize proc calls.
 */
-/repository/singletons/proc/GetTypeList(singleton/path)
+/datum/singleton_manager/proc/GetTypeList(singleton/path)
 	if (resolved_type_lists[path])
 		return type_lists[path] || list()
 	resolved_type_lists[path] = TRUE
@@ -116,7 +116,7 @@ var/global/repository/singletons/Singletons = new
 * Get a list of valid singletons according to subtypesof(path).
 * Prefer the GET_SINGLETON_SUBTYPE_LIST macro to minimize proc calls.
 */
-/repository/singletons/proc/GetSubtypeList(singleton/path)
+/datum/singleton_manager/proc/GetSubtypeList(singleton/path)
 	if (resolved_subtype_lists[path])
 		return subtype_lists[path] || list()
 	resolved_subtype_lists[path] = TRUE
@@ -129,12 +129,13 @@ var/global/repository/singletons/Singletons = new
 	abstract_type = /singleton
 
 
+/singleton/Destroy()
+	SHOULD_CALL_PARENT(FALSE)
+	SHOULD_NOT_OVERRIDE(TRUE)
+	crash_with("Prevented qdel of a singleton: [log_info_line(src)]")
+	return QDEL_HINT_LETMELIVE
+
+
 /singleton/proc/Initialize()
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
-
-
-/singleton/Destroy()
-	SHOULD_CALL_PARENT(FALSE)
-	crash_with("Prevented attempt to delete a singleton instance: [log_info_line(src)]")
-	return QDEL_HINT_LETMELIVE
