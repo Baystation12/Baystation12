@@ -38,6 +38,8 @@
 				desc = M.ore_desc
 			if(icon_state == "dust")
 				slot_flags = SLOT_HOLSTER
+				throwforce = 0
+				force = 0 
 			break
 	. = ..()
 
