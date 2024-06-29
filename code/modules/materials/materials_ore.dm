@@ -1,9 +1,11 @@
 /obj/item/ore
+	force = 5.0
+	throwforce = 5.0
 	name = "ore"
 	icon_state = "lump"
 	icon = 'icons/obj/materials/ore.dmi'
 	randpixel = 8
-	w_class = 2
+	w_class = ITEM_SIZE_SMALL
 	var/material/material
 	var/datum/geosample/geologic_data
 
