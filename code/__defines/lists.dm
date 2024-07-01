@@ -31,6 +31,35 @@
 #define SANITIZE_LIST(L) ( islist(L) ? L : list() )
 
 
+// Helper macros for funny pseudo-list vars that can be a single value or a list of multiple values. These only work for sequential one-dimensional lists.
+/// Checks if `L` contains only 1 item and reduces it to a value if so.
+#define PSEUDO_LAZY_REDUCE_CHECK(L) if (islist(L) && length(L) == 1) { L = L[1]; }
+
+/// Removes I from list L, converts L to I if there's only 1 item left, or to null if empty.
+#define PSEUDO_LAZY_REMOVE(L, I) if (islist(L)) { L -= I; PSEUDO_LAZY_REDUCE_CHECK(L); } else if (L == I) { L = null; }
+
+/// Adds I to L, converting to list format if necessary.
+#define PSEUDO_LAZY_ADD(L, I) if (isnull(L)) { L = I; } else if (islist(L)) { L += I; } else { L = list(L, I); }
+
+/// Adds I to L, converting to list format if necessary, if I is not already in L.
+#define PSEUDO_LAZY_DISTINCT_ADD(L, I) if (isnull(L)) { L = I; } else if (islist(L)) { L |= I; } else if (L != I) { L = list(L, I); }
+
+/// Reads the length of L, understanding a non-list value as a count of 1.
+#define PSUEDO_LAZY_LENGTH(L) (islist(L) ? length(L) : (isnull(L) ? 0 : 1))
+
+/// Safely checks if I is in L.
+#define PSEUDO_LAZY_IS_IN(L, I) (islist(L) ? (I in L) : (L == I ? TRUE : FALSE))
+
+/// Safely checks if I is a valid type or subtype of entries in L.
+#define PSEUDO_LAZY_IS_TYPE(L, I) (islist(L) ? is_type_in_list(I, L) : istype(I, L))
+
+/// Pseudo-list safe List.Cut() and discard.
+#define PSEUDO_LAZY_CLEAR_LIST(L) if (islist(L)) { L.len = 0; } L = null;
+
+/// Reads L as a list, regardless of actual value, even if null. NOTE: Does NOT assign.
+#define PSEUDO_LIST_SANITIZE(L) (islist(L) ? L : (isnull(L) ? list() : list(L)))
+
+
 /****
 * Binary search sorted insert
 * INPUT: Object to be inserted
