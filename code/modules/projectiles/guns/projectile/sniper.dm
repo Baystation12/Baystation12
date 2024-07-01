@@ -71,14 +71,18 @@
 		return 0
 	return ..()
 
-/obj/item/gun/projectile/heavysniper/load_ammo(obj/item/A, mob/user)
-	if(!bolt_open)
-		return
-	..()
+/obj/item/gun/projectile/heavysniper/load_ammo(obj/item/ammo, mob/user)
+	if (!bolt_open)
+		USE_FEEDBACK_FAILURE("\The [src]'s bolt needs to be open before you can reload it.")
+		return TRUE
 
-/obj/item/gun/projectile/heavysniper/unload_ammo(mob/user, allow_dump=1)
-	if(!bolt_open)
+	return ..()
+
+/obj/item/gun/projectile/heavysniper/unload_ammo(mob/user, allow_dump = TRUE)
+	if (!bolt_open)
+		USE_FEEDBACK_FAILURE("\The [src]'s bolt needs to be open before you can unload it.")
 		return
+
 	..()
 
 /obj/item/gun/projectile/heavysniper/getAmmo()
@@ -131,7 +135,7 @@
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/rifle
-	allowed_magazines = /obj/item/ammo_magazine/rifle
+	allowed_magazines = list(/obj/item/ammo_magazine/rifle)
 	one_hand_penalty = 8
 	scoped_accuracy = 8
 	scope_zoom = 1
@@ -163,7 +167,7 @@
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/iclipr
-	allowed_magazines = /obj/item/ammo_magazine/iclipr
+	allowed_magazines = list(/obj/item/ammo_magazine/iclipr)
 	auto_eject = TRUE
 	auto_eject_sound = 'sound/weapons/guns/interaction/garand_magout.ogg'
 	one_hand_penalty = 9

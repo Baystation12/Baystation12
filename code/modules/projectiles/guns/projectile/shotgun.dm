@@ -236,9 +236,6 @@
 	desc = "A double-barreled shotgun meant to fire signal flash shells."
 	ammo_type = /obj/item/ammo_casing/shotgun/flash
 
-/obj/item/gun/projectile/shotgun/doublebarrel/unload_ammo(user, allow_dump)
-	..(user, allow_dump=1)
-
 
 //this is largely hacky and bad :(	-Pete
 /obj/item/gun/projectile/shotgun/doublebarrel/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -321,7 +318,7 @@
 	wielded_item_state = "magshot-wielded"
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/shotgunmag
-	allowed_magazines = /obj/item/ammo_magazine/shotgunmag
+	allowed_magazines = list(/obj/item/ammo_magazine/shotgunmag)
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
