@@ -62,7 +62,7 @@
 	if(load_method & (SINGLE_CASING|SPEEDLOADER))
 		traits += "It can hold [max_shells] rounds."
 
-	if(jam_chance)
+	if(initial(jam_chance))
 		traits += "It's prone to jamming."
 
 	. += jointext(traits, "<br>")
