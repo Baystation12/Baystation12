@@ -1,6 +1,6 @@
 /obj/item/ore
-	force = 5.0
-	throwforce = 5.0
+	force = 5
+	throwforce = 5
 	name = "ore"
 	icon_state = "lump"
 	icon = 'icons/obj/materials/ore.dmi'
