@@ -17,8 +17,7 @@ SUBSYSTEM_DEF(chemistry)
 
 
 /datum/controller/subsystem/chemistry/Initialize(start_uptime)
-	for (var/datum/chemical_reaction/reaction as anything in subtypesof(/datum/chemical_reaction))
-		reaction = new reaction
+	for (var/singleton/reaction/reaction as anything in GET_SINGLETON_SUBTYPE_LIST(/singleton/reaction))
 		var/result = reaction.result
 		var/list/required = reaction.required_reagents
 		if (!reactions_by_result[result])
