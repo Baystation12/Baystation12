@@ -117,7 +117,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 					playsound(my_atom, replace_sound, 80, 1)
 
 		else // Otherwise, collect all possible reactions.
-			eligible_reactions |= SSchemistry.reactions_by_id[R.type]
+			eligible_reactions |= SSchemistry.id_reactions_map[R.type]
 
 	var/list/active_reactions = list()
 
