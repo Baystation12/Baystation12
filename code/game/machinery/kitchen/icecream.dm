@@ -21,6 +21,8 @@
 	var/list/product_types = list()
 	var/dispense_flavour = ICECREAM_VANILLA
 	var/flavour_name = "vanilla"
+	/// `world.time` the next usage can occur. Used to prevent spamming.
+	var/next_use_time = 0
 
 /obj/machinery/icecream_vat/proc/get_ingredient_list(type)
 	switch(type)
@@ -123,6 +125,10 @@
 	return ..()
 
 /obj/machinery/icecream_vat/proc/make(mob/user, make_type, amount)
+	amount = clamp(amount, 1, 5)
+	if (world.time < next_use_time)
+		USE_FEEDBACK_FAILURE("\The [src] isn't ready yet.")
+		return
 	for(var/R in get_ingredient_list(make_type))
 		if(reagents.has_reagent(R, amount))
 			continue
@@ -137,6 +143,7 @@
 			src.visible_message(SPAN_INFO("[user] cooks up some [flavour] cones."))
 		else
 			src.visible_message(SPAN_INFO("[user] whips up some [flavour] icecream."))
+		next_use_time = world.time + 5 SECONDS
 	else
 		to_chat(user, SPAN_WARNING("You don't have the ingredients to make this."))
 
