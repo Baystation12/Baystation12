@@ -1,5 +1,0 @@
-author: SierraKomodo
-changes:
-  - {tweak: Added a ~5-ish second delay between uses of the ice cream maker to prevent
-      excessive spamming.}
-delete-after: true
