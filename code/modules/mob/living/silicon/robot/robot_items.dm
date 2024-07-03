@@ -439,19 +439,27 @@
 	to_chat(user, SPAN_NOTICE("You deploy \a [R]."))
 	R.add_fingerprint(user)
 
-/obj/item/robot_rack/resolve_attackby(obj/O, mob/user, click_params)
-	if(istype(O, object_type))
-		if(length(held) < capacity)
-			to_chat(user, SPAN_NOTICE("You collect \the [O]."))
-			O.forceMove(src)
-			held += O
-			return
-		to_chat(user, SPAN_WARNING("\The [src] is full and can't store any more items."))
-		return
-	if(istype(O, interact_type))
-		O.attack_hand(user)
-		return
-	. = ..()
+
+/obj/item/robot_rack/use_before(atom/target, mob/living/user, click_parameters)
+	// Pick up thing
+	if (istype(target, object_type))
+		if (length(held) >= capacity)
+			USE_FEEDBACK_FAILURE("\The [src] is full and can't store any more items.")
+			return TRUE
+		var/obj/target_obj = target
+		target_obj.forceMove(src)
+		held += target
+		to_chat(user, SPAN_NOTICE("You collect \the [target] with \the [src]."))
+		return TRUE
+
+	// Use the thing
+	if (istype(target, interact_type))
+		var/obj/target_obj = target
+		if (target_obj.attack_hand(user))
+			return TRUE
+
+	return ..()
+
 
 /obj/item/robot_rack/verb/empty_rack()
 	set name = "Empty Rack"

@@ -395,34 +395,34 @@
 	interact_type = /obj/structure/roller_bed
 
 
-/obj/item/robot_rack/roller_bed/resolve_attackby(atom/target, mob/living/user, click_params)
-	if (!target.Adjacent(user))
-		return TRUE
-	if (user.incapacitated())
-		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
-		return TRUE
+/obj/item/robot_rack/roller_bed/use_before(atom/target, mob/living/user, click_parameters)
 	if (!length(held))
 		if (istype(target, object_type))
 			user.visible_message(
-				SPAN_ITALIC("\The [user] scoops \a [target] into their [name]."),
-				SPAN_ITALIC("You scoop \the [target] into your [name]."),
+				SPAN_NOTICE("\The [user] scoops \a [target] into their [name]."),
+				SPAN_NOTICE("You scoop \the [target] into your [name]."),
 				SPAN_ITALIC("You hear metal clattering on metal.")
 			)
-			contents += target
+			var/obj/item/target_item = target
+			target_item.forceMove(src)
 			held += target
-		else if (istype(target, interact_type))
+			return TRUE
+
+		if (istype(target, interact_type))
 			target.MouseDrop(src, over_loc = get_turf(target))
-		return TRUE
+			return TRUE
+
+		return ..()
+
 	if (istype(target, object_type))
-		to_chat(user, SPAN_WARNING("You already have \a [target] in your [name]."))
+		USE_FEEDBACK_FAILURE("\The [src] already has \a [held[1]].")
 		return TRUE
-	if (!isturf(target))
-		return
-	if (target.density)
-		return
+	if (!isturf(target) || target.density)
+		return ..()
+
 	var/blocking = target.turf_is_crowded()
 	if (blocking && !ismob(blocking))
-		to_chat(user, SPAN_WARNING("\The [blocking] is in the way."))
+		USE_FEEDBACK_FAILURE("\The [blocking] is in the way of deploying \the [src]'s [held[1]].")
 		return TRUE
 	var/obj/item/roller_bed/roller = pop(held)
 	roller.dropInto(target)

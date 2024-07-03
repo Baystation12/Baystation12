@@ -35,21 +35,24 @@
 		if(lit)
 			AddOverlays(overlay_image(icon, "[icon_state]_lit", flags=RESET_COLOR))
 
-/obj/item/flame/candle/use_tool(obj/item/W, mob/living/user, list/click_params)
-	if (isFlameOrHeatSource(W))
-		light(user)
+/obj/item/flame/candle/use_tool(obj/item/tool, mob/living/user, list/click_params)
+	// Light the candle
+	if (isFlameOrHeatSource(tool))
+		if (lit)
+			USE_FEEDBACK_FAILURE("\The [src] is already lit.")
+			return TRUE
+		light()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] lights \a [src] with \a [tool]."),
+			SPAN_NOTICE("You light \the [src] with \the [tool].")
+		)
+		return TRUE
+
 	return ..()
 
-/obj/item/flame/candle/resolve_attackby(atom/A, mob/user)
-	. = ..()
-	if (istype(A, /obj/item/flame/candle) && IsHeatSource())
-		var/obj/item/flame/candle/other_candle = A
-		other_candle.light()
-
-/obj/item/flame/candle/proc/light(mob/user)
-	if(!lit)
-		lit = 1
-		visible_message(SPAN_NOTICE("\The [user] lights the [name]."))
+/obj/item/flame/candle/proc/light()
+	if (!lit)
+		lit = TRUE
 		set_light(candle_range, candle_power)
 		START_PROCESSING(SSobj, src)
 
