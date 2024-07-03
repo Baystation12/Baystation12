@@ -168,7 +168,7 @@
 		..()
 
 
-/obj/structure/roller_bed/MouseDrop(atom/over_atom)
+/obj/structure/roller_bed/MouseDrop(atom/over_atom, atom/source_loc, atom/over_loc, source_control, over_control, list/mouse_params)
 	if (!usr)
 		return
 	if (!over_atom)
