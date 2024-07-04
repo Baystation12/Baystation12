@@ -1,8 +1,0 @@
-author: Qlonever
-changes:
-  - {bugfix: Ripping out a roller bed's cannula actually detaches it now.}
-  - {bugfix: Loadout augmentations no longer create phantom copies in the chest.}
-  - {tweak: 'Body scans now detect implanted toolkits, leukocyte breeders, and glare
-      dampeners.'}
-  - {tweak: Various fixes to transplantation/removal surgery text.}
-delete-after: true
