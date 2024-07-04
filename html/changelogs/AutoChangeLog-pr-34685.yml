@@ -1,0 +1,4 @@
+author: Nyvrem
+changes:
+  - {rscadd: Getting hit with ores/rocks now hurts a little.}
+delete-after: true
