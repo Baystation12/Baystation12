@@ -1,10 +1,10 @@
+
 /mob/living/proc/HasTrait(trait_type)
 	SHOULD_NOT_OVERRIDE(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
 	return (trait_type in GetTraits())
 
-///Gets severity level with associated trait. Does not work for traits that have an metaoptions set.
-/mob/living/proc/GetTraitLevel(trait_type, meta_option = FALSE)
+/mob/living/proc/GetTraitLevel(trait_type, meta_option)
 	SHOULD_NOT_OVERRIDE(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
 	var/singleton/trait/trait = GET_SINGLETON(trait_type)
@@ -30,17 +30,26 @@
 		return traits
 	return species.traits
 
+/mob/living/proc/GetMetaOptions(trait_type)
+	RETURN_TYPE(/list)
+	if (!HasTrait(trait_type))
+		return
+	var/singleton/trait/trait = GET_SINGLETON(trait_type)
+	if (!trait.metaoptions)
+		return
+
+	return traits[trait_type]
+
 /mob/living/proc/SetTrait(trait_type, trait_level, meta_option)
 	SHOULD_NOT_SLEEP(TRUE)
 	var/singleton/trait/trait = GET_SINGLETON(trait_type)
 	if(!trait.Validate(trait_level, meta_option))
 		return FALSE
 
-	if (!LAZYISIN(traits, trait_type))
-		for (var/existing_trait_types in traits)
-			var/singleton/trait/existing = GET_SINGLETON(existing_trait_types)
-			if (trait_type in existing.incompatible_traits)
-				return FALSE
+	for (var/existing_trait_types in traits)
+		var/singleton/trait/existing = GET_SINGLETON(existing_trait_types)
+		if (LAZYISIN(existing.incompatible_traits, trait_type) || LAZYISIN(trait.incompatible_traits, existing_trait_types))
+			return FALSE
 
 	if (length(trait.metaoptions))
 		var/list/interim = list()
@@ -75,7 +84,6 @@
 		LAZYREMOVE(interim, additional_option)
 		if (length(interim)) //If there remains other associations with the singleton, stop removing. Else; also remove the singleton.
 			return
-
 	LAZYREMOVE(traits, trait_type)
 
 /mob/living/carbon/human/RemoveTrait(trait_type, additional_option)
@@ -85,6 +93,49 @@
 
 	..(trait_type, additional_option) // Could go through the trouble of nulling the traits list if it's again equal to the species list but eh
 	traits = traits || list() // But we do ensure that humans don't null their traits list, to avoid copying from species again
+
+/proc/LetterizeSeverity(severity)
+	switch (severity)
+		if (TRAIT_LEVEL_EXISTS)
+			severity = "Exists"
+		if (TRAIT_LEVEL_MINOR)
+			severity = "Minor"
+		if (TRAIT_LEVEL_MODERATE)
+			severity = "Moderate"
+		if (TRAIT_LEVEL_MAJOR)
+			severity = "Severe"
+		else
+			crash_with("Inappopriate arguments fed into proc.")
+	return severity
+
+/proc/sanitize_trait_prefs(list/preferences)
+	RETURN_TYPE(/list)
+	var/list/final_preferences = list()
+	if (isnull(preferences))
+		return list()
+	if (!islist(preferences))
+		crash_with("Inappropriate argument fed into proc.")
+		return
+	if (!length(preferences))
+		return list()
+
+	for (var/trait in preferences)
+		var/trait_type = istext(trait) ? text2path(trait) : trait
+		var/singleton/trait/selected = GET_SINGLETON(trait_type)
+		var/severity
+		if (length(selected.metaoptions))
+			var/list/interim = preferences[trait]
+			var/list/final_interim = list()
+			for (var/metaoption in interim)
+				var/metaoption_type = istext(metaoption) ? text2path(metaoption) : metaoption
+				severity = interim[metaoption]
+				LAZYSET(final_interim, metaoption_type, severity)
+			LAZYSET(final_preferences, trait_type, final_interim)
+
+		else
+			severity = preferences[trait]
+			LAZYSET(final_preferences, trait_type, severity)
+	return final_preferences
 
 /singleton/trait
 	var/name
@@ -100,6 +151,11 @@
 	/// These trait types may not co-exist on the same mob/species
 	var/list/incompatible_traits
 	abstract_type = /singleton/trait
+
+	///List of species in which this trait is forbidden.
+	var/list/forbidden_species = list()
+	///Determines if trait can be selected in character setup
+	var/selectable = FALSE
 
 /singleton/trait/New()
 	if(type == abstract_type)

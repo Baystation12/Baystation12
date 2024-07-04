@@ -280,7 +280,7 @@
 	/// When being fed a reagent item, the amount this species eats per bite on help intent.
 	var/ingest_amount = 10
 
-	/// An associative list of /singleton/trait and trait level - See individual traits for valid levels
+	/// An associative list of /singleton/trait and trait level a species starts with by default - See individual traits for valid levels
 	var/list/traits = list()
 
 	/**
@@ -752,6 +752,22 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 			facial_hair_style_by_gender[facialhairstyle] = S
 
 	return facial_hair_style_by_gender
+
+/datum/species/proc/get_selectable_traits()
+	var/list/allowed_traits = list()
+	var/list/trait_list = GET_SINGLETON_SUBTYPE_LIST(/singleton/trait)
+	for (var/singleton/trait/allowed_trait in trait_list)
+		if (!allowed_trait.selectable)
+			continue
+		if (LAZYISIN(traits, allowed_trait.type))
+			continue
+		if (LAZYISIN(allowed_trait.forbidden_species, name))
+			continue
+		if (!allowed_trait.name)
+			continue
+		LAZYSET(allowed_traits, allowed_trait.name, allowed_trait)
+
+	return allowed_traits
 
 /datum/species/proc/get_description(header, append, verbose = TRUE, skip_detail, skip_photo)
 	var/list/damage_types = list(
