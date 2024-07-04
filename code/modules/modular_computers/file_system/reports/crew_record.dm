@@ -62,6 +62,19 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_medRecord((H && H.med_record && !jobban_isbanned(H, "Records") ? html_decode(H.med_record) : "No record supplied"))
 
 	if(H)
+		if (H.HasTrait(/singleton/trait/malus/allergy))
+			var/list/allergies = H.GetMetaOptions(/singleton/trait/malus/allergy)
+			var/list/allergy_data = list()
+			var/severity
+			for (var/datum/reagent/picked as anything in allergies)
+				severity = allergies[picked]
+				if (isnull(severity))
+					continue
+				severity = LetterizeSeverity(severity)
+				allergy_data += "[severity] allergy to [initial(picked.name)]"
+			set_allergies(LAZYLEN(allergy_data)? jointext(allergy_data, "\[*\]") : "No allergies on record")
+
+
 		if(H.isSynthetic())
 			var/organ_data = list("Fully synthetic body")
 			for(var/obj/item/organ/internal/augment/A in H.internal_organs)
@@ -217,6 +230,7 @@ FIELD_LONG("General Notes (Public)", public_record, null, access_bridge)
 FIELD_LIST("Blood Type", bloodtype, GLOB.blood_types, access_medical, access_medical)
 FIELD_LONG("Medical Record", medRecord, access_medical, access_medical)
 FIELD_LONG("Known Implants", implants, access_medical, access_medical)
+FIELD_LONG("Allergies", allergies, access_medical, access_medical)
 
 // SECURITY RECORDS
 FIELD_LIST("Criminal Status", criminalStatus, GLOB.security_statuses, access_security, access_security)

@@ -30,6 +30,7 @@
 		R.clear_reagents()
 	set_nutrition(400)
 	set_hydration(400)
+	stop_allergy()
 	..()
 
 /mob/living/carbon/Move(NewLoc, direct)

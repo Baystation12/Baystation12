@@ -570,19 +570,34 @@
 		if (!istype(target))
 			to_chat(usr, SPAN_WARNING("This can only be done to instances of /mob/living."))
 			return
-		var/list/possible_traits = GET_SINGLETON_SUBTYPE_LIST(/singleton/trait)
-		var/singleton/trait/selected = input("Select a trait to apply to \the [target].", "Add Trait") as null | anything in possible_traits
+
+		var/list/trait_list = GET_SINGLETON_SUBTYPE_LIST(/singleton/trait)
+		var/singleton/trait/selected = input("Select a trait to apply to \the [target].", "Add Trait") as null | anything in trait_list
+
 		if (!selected || !istype(selected) || QDELETED(target))
 			return
 
-		var/list/possible_levels = selected.levels
-		var/selected_level = input("Select the trait's level to apply to \the [target].", "Select Level") as null | anything in possible_levels
+		var/selected_level
+		if (length(selected.levels) > 1)
+			var/list/letterized_levels = list()
+			for (var/severity in selected.levels)
+				LAZYSET(letterized_levels, LetterizeSeverity(severity), severity)
+			var/letter_level = input("Select the trait's level to apply to \the [target].", "Select Level") as null | anything in letterized_levels
+			selected_level = letterized_levels[letter_level]
+		else
+			selected_level = selected.levels[1]
+
 		if (QDELETED(target))
 			return
 
 		var/additional_data
 		if (length(selected.metaoptions))
-			additional_data = input("[selected.addprompt]", "Select Option") as null | anything in selected.metaoptions
+			var/list/sanitized_metaoptions
+			for (var/atom/option as anything in selected.metaoptions)
+				var/named_option = initial(option.name)
+				LAZYSET(sanitized_metaoptions, named_option, option)
+			var/sanitized_additional = input("[selected.addprompt]", "Select Option") as null | anything in sanitized_metaoptions
+			additional_data = sanitized_metaoptions[sanitized_additional]
 
 		if (target.SetTrait(selected.type, selected_level, additional_data))
 			to_chat(usr, SPAN_NOTICE("Successfuly set \the [selected.name] in \the [target]."))
@@ -605,6 +620,9 @@
 		if (length(selected.metaoptions))
 			var/list/interim = target.traits[selected.type]
 			additional_option = input("[selected.remprompt]", "Select Option") as null | anything in interim
+			if (!additional_option)
+				return
+
 		target.RemoveTrait(selected.type, additional_option)
 		to_chat(usr, SPAN_NOTICE("Successfuly removed \the [selected.name] in \the [target]."))
 		return
