@@ -12,7 +12,7 @@
 	if(max_damage)
 		min_bruised_damage = floor(max_damage / 4)
 	..()
-	if(istype(holder))
+	if(istype(holder) && !istype(src, /obj/item/organ/internal/augment))
 		holder.internal_organs |= src
 
 		var/mob/living/carbon/human/H = holder
