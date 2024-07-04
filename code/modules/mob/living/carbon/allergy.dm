@@ -49,16 +49,16 @@ Also checks if medications that stop allergies from triggering are in system. Th
 
 ///Ends allergies and unsets flag. Conditions handled at handle_allergy proc; if you call this directly do your own checks.
 ///If no severity supplied will end all allergies.
-/mob/living/carbon/proc/stop_allergy(allergy_flag = null)
+/mob/living/carbon/proc/stop_allergy(allergy_flag)
 	if (!(trait_flags & (MILD_ALLERGY|SEVERE_ALLERGY)))
 		return
 
-	if ((trait_flags & MILD_ALLERGY) && allergy_flag == (MILD_ALLERGY || null))
+	if ((trait_flags & MILD_ALLERGY) && (!allergy_flag || (allergy_flag & MILD_ALLERGY)))
 		if (!chem_effects[CE_STABLE]) //People with inaprov aren't itching to start with.
 			to_chat(src, SPAN_NOTICE("You feel the itching subside."))
 		trait_flags &= ~MILD_ALLERGY
 
-	if ((trait_flags & SEVERE_ALLERGY) && allergy_flag == (SEVERE_ALLERGY || null))
+	if ((trait_flags & SEVERE_ALLERGY) && (!allergy_flag || (allergy_flag & SEVERE_ALLERGY)))
 		to_chat(src, SPAN_NOTICE("You feel your airways open up and breathing feels easier!"))
 		trait_flags &= ~SEVERE_ALLERGY
 
@@ -84,7 +84,7 @@ Also checks if medications that stop allergies from triggering are in system. Th
 	if ((trait_flags & MILD_ALLERGY) && (!length(active_allergies)))
 		stop_allergy(MILD_ALLERGY)
 
-	if ((trait_flags & SEVERE_ALLERGY) && chem_doses[/datum/reagent/adrenaline] >= 0.2)
+	if ((trait_flags & SEVERE_ALLERGY) && chem_doses[/datum/reagent/adrenaline] >= 1)
 		stop_allergy(SEVERE_ALLERGY)
 
 	run_allergy_symptoms()

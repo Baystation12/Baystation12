@@ -237,6 +237,22 @@ var/global/list/gear_datums = list()
 
 			entry += "[english_list(skill_checks)]</i>"
 
+		if (allowed && G.allowed_traits)
+			var/datum/species/picked_species = all_species[pref.species]
+			var/list/species_traits = picked_species.traits
+			var/trait_checks = list()
+			entry += "<br><i>"
+			for (var/trait_type in G.allowed_traits)
+				var/singleton/trait/trait = GET_SINGLETON(trait_type)
+				var/trait_entry = "[trait.name]"
+				if (LAZYISIN(pref.picked_traits, trait_type) || LAZYISIN(species_traits, trait_type))
+					trait_entry = SPAN_COLOR("#55cc55", "[trait_entry]")
+				else
+					trait_entry = SPAN_COLOR("#cc5555", "[trait_entry]")
+					allowed = FALSE
+				trait_checks += trait_entry
+			entry += "[english_list(trait_checks)]</i>"
+
 		entry += "</tr>"
 		if(ticked)
 			entry += "<tr><td colspan=3>"
@@ -325,6 +341,8 @@ var/global/list/gear_datums = list()
 	var/list/allowed_roles //Roles that can spawn with this item.
 	var/list/allowed_branches //Service branches that can spawn with it.
 	var/list/allowed_skills //Skills required to spawn with this item.
+	///Traits required to spawn with this item.
+	var/list/allowed_traits
 	var/whitelisted        //Term to check the whitelist for..
 	var/sort_category = "General"
 	var/flags              //Special tweaks in New

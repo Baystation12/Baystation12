@@ -215,3 +215,8 @@ Single Use Emergency Pouches
 /obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/adrenaline
 	name = "emergency adrenaline autoinjector"
 	starts_with = list(/datum/reagent/adrenaline = 5)
+
+/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/allergy
+	name = "emergency allergy autoinjector"
+	desc = "The ingredient label reads 1.5 units of epinephrine and 3.5 units of inaprovaline."
+	starts_with = list(/datum/reagent/adrenaline = 1.5, /datum/reagent/inaprovaline = 3.5)
