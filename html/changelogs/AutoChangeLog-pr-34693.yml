@@ -1,5 +1,0 @@
-author: Zenithstar
-changes:
-  - {bugfix: Familiars now use the appropriate sprite when they stop resting or die
-      while resting.}
-delete-after: true

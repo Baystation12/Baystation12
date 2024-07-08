@@ -1,7 +1,0 @@
-author: Builder13
-changes:
-  - {bugfix: Wizard retains all the spells in the hud upon changing/getting body.}
-  - {bugfix: 'It is now possible to spawn wizard packages (examples: scrying orb,
-      mastercrafted armor).'}
-  - {bugfix: 'Fixes for some of the spells, so they are castable again.'}
-delete-after: true
