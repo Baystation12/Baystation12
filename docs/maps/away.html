@@ -1,24 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <base href="../" />
-    <link rel="stylesheet" href="dmdoc.css" />
-    <title>maps&#x2F;away&#x2F;README.md - Space Station 13</title>
-</head>
-<body>
-<header>
-    <a href="index.html">Space Station 13</a> -
-    <a href="index.html#modules">Modules</a> -
-    <a href="index.html#types">Types</a>
-</header>
-<main>
-<h1>Away sites <aside>maps/away/README.md</aside> 
-            <a href="https://github.com/Baystation12/Baystation12/blob/254bab99b49613299066a2362a1ab2e87d0bdd2e/maps/away/README.md">
-        <img src="git.png" width="16" height="16" title="maps&#x2F;away&#x2F;README.md"/></a></h1>
-
-<table class="summary" cellspacing="0">
-        <tr><td colspan="2"><hh2 id="what-exactly-is-an-away-site">What exactly is an away site?</hh2>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><base href="../"><link rel="stylesheet" href="dmdoc.css"><title>maps/away/README.md - Space Station 13</title></head><body><header><a href="index.html">Space Station 13</a> - <a href="index.html#modules">Modules</a> - <a href="index.html#types">Types</a></header><main><h1>Away sites <aside>maps/away/README.md</aside> <a href="https://github.com/Baystation12/Baystation12/blob/e65e6b30c468ee2c1236a96687e43e016b1e93af/maps/away/README.md0"><img src="git.png" width="16" height="16" title="maps/away/README.md0"></a></h1><table class="summary" cellspacing="0"><tr><td colspan="2"><h2 id="what-exactly-is-an-away-site">What exactly is an away site?</h2>
 <p>It's a kind of map template which:</p>
 <ul>
 <li>is placed in its own zlevel (or collection of zlevels),</li>
@@ -26,36 +6,30 @@
 <li>can be randomly picked to be placed automatically during round setup,</li>
 <li>normally has an overmap presence and shuttle landmarks so ships can fly to it.</li>
 </ul>
-<hh3 id="er-whats-a-map-template">Er, what's a map template?</hh3>
+<h3 id="er-whats-a-map-template">Er, what's a map template?</h3>
 <p>It's a datum you can define in the code (<code>/datum/map_template</code>) which points at one or more .dmm map files, and allows the game (or admins) to spawn those map files when and where they please, whether that's into an existing zlevel (like decorating exoplanets with ruins), or on a totally fresh one (like an away site!).</p>
-<hh2 id="how-do-i-make-away-sites">How do I make away sites?</hh2>
+<h2 id="how-do-i-make-away-sites">How do I make away sites?</h2>
 <p>tl;dr you make your .dmm files, then you write a new map template datum (<code>/datum/map_template/ruin/away_site/insert_your_away_site_name_here</code>), then you include whatever file you defined that datum in into <code>torch.dm</code> and <code>away_sites_testing.dm</code>, and you're all set.</p>
 <p>BUT HEED MY RUMINATIONS</p>
-<hh2 id="while-mapping">While mapping</hh2><hh3 id="dont-use-torch-specific-types">Don't use Torch-specific types</hh3>
+<h2 id="while-mapping">While mapping</h2><h3 id="dont-use-torch-specific-types">Don't use Torch-specific types</h3>
 <p>Away maps are expected to work whether you're on Torch, the example map, or anything else you might want to load as the server's main map. That means your map mustn't use areas, turfs, objects, mobs or datums that are specific to any main map.</p>
 <p>e.g. you can use <code>/area/space</code>, or <code>/turf/simulated/wall</code>, because neither are specific to Torch. They live out in the main codebase, are always compiled in, and are available to all maps. But you can't use <code>/obj/random_multi/single_item/punitelly</code>, because Punitelli only exists when Torch is compiled.</p>
 <p>To make life easier, you can uncheck maps/torch/torch.dm (or your regional equivalent), then recompile, to make sure these types aren't available while you're mapping.</p>
-<hh3 id="dont-re-use-area-types-from-other-maps">Don't re-use area types from other maps</hh3>
+<h3 id="dont-re-use-area-types-from-other-maps">Don't re-use area types from other maps</h3>
 <p>Except for, like, <code>/area/space</code>. That one's probably fine.</p>
 <p>(Now that's just areas! Other stuff might be ok. Except very map-specific stuff as noted!)</p>
 <p>Re-using areas is a shortcut, but it's bad for testability, and you can't guarantee that the area you re-use isn't loaded up and in active use on the server - in which case it'll hideously merge together with its brother in terms of stuff like air alarms, APCs, etc. Suddenly your derelict starship is randomly receiving power from another zlevel. Not good. Avoid. Make your own area types!</p>
 <p>If in doubt, ask #codershuttle on IRC/#coding on Discord.</p>
-<hh3 id="if-youre-doing-multi-z-make-a-different-dmm-file-for-each-zlevel">If you're doing multi-z, make a different .dmm file for each zlevel</hh3>
+<h3 id="if-youre-doing-multi-z-make-a-different-dmm-file-for-each-zlevel">If you're doing multi-z, make a different .dmm file for each zlevel</h3>
 <p>Not exactly a technical requirement, but it makes things easier in terms of collaboration. See how it's done with <code>torch-1.dmm</code>, <code>torch-2.dmm</code>, etc.</p>
-<hh2 id="afterwards-or-during-im-not-a-cop">Afterwards (or during, I'm not a cop)</hh2><hh3 id="make-sure-youve-got-a-dm-file-for-all-your-stuff">Make sure you've got a .dm file for all your stuff</hh3>
+<h2 id="afterwards-or-during-im-not-a-cop">Afterwards (or during, I'm not a cop)</h2><h3 id="make-sure-youve-got-a-dm-file-for-all-your-stuff">Make sure you've got a .dm file for all your stuff</h3>
 <p>Like <code>maps/away/derelict/derelict.dm</code>. It's a pretty good place to put all your new types! #include other files here too. This file's going to be the hub of your map's wheel, to cack-hand a metaphor.</p>
-<hh3 id="make-a-map-template-datum-there">Make a map template datum there</hh3>
+<h3 id="make-a-map-template-datum-there">Make a map template datum there</h3>
 <p>The game will read this to learn about your new shiny away sites, including what .dmm files it needs to load, how much it 'costs' to spawn (usually 1, increase for more performance-heavy away sites). Ask devs or read code if unsure.</p>
-<hh3 id="include-your-dm-file-in-any-main-map-file-and-away-sites-testing">Include your .dm file in any main map file, and away sites testing</hh3>
+<h3 id="include-your-dm-file-in-any-main-map-file-and-away-sites-testing">Include your .dm file in any main map file, and away sites testing</h3>
 <p>That's <code>maps/away_sites_testing/away_sites_testing.dm</code>, and probably <code>maps/torch/torch.dm</code>. It goes in the testing one to make sure it is checked during unit testing, and it goes in the Torch one to make it available while we play Torch. If we have since changed map, yell at someone to update this doc.</p>
-<hh3 id="dont-include-it-or-the-dmms-in-the-dme">Don't include it, or the .dmms, in the .dme</hh3>
+<h3 id="dont-include-it-or-the-dmms-in-the-dme">Don't include it, or the .dmms, in the .dme</h3>
 <p>That means don't have any of your away map stuff checked in Dream Maker. It'll get included, as if by magic, via the work you did in the previous step!</p>
 <p>That's it! You're probably done! Unless the unit tests explode on you.</p>
-<hh3 id="some-of-the-stuff-i-put-in-my-map-isnt-behaving-properly">Some of the stuff I put in my map isn't behaving properly!</hh3>
-<p>The map loader works best when everything it's spawning does all its initialisation work in <code>Initialize</code>, instead of in <code>New</code>. Most likely your misbehaving thing is doing more initialisation than is healthy in <code>New</code>. It's fixable! Often not even that hard. Go talk to a dev.</p></td></tr></table></main>
-<footer>
-    baystation12.dme
-    <a href="https://github.com/Baystation12/Baystation12/tree/254bab99b49613299066a2362a1ab2e87d0bdd2e">254bab9</a>
-        (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.7.3</a></footer>
-</body>
-</html>
+<h3 id="some-of-the-stuff-i-put-in-my-map-isnt-behaving-properly">Some of the stuff I put in my map isn't behaving properly!</h3>
+<p>The map loader works best when everything it's spawning does all its initialisation work in <code>Initialize</code>, instead of in <code>New</code>. Most likely your misbehaving thing is doing more initialisation than is healthy in <code>New</code>. It's fixable! Often not even that hard. Go talk to a dev.</p></td></tr></table></main><footer>baystation12.dme <a href="https://github.com/Baystation12/Baystation12/tree/e65e6b30c468ee2c1236a96687e43e016b1e93af">e65e6b3</a> (dev) — <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.9.0</a></footer></body></html>

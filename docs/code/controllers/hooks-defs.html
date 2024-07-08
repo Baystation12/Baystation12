@@ -1,74 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <base href="../../" />
-    <link rel="stylesheet" href="dmdoc.css" />
-    <title>code&#x2F;controllers&#x2F;hooks-defs.dm - Space Station 13</title>
-</head>
-<body>
-<header>
-    <a href="index.html">Space Station 13</a> -
-    <a href="index.html#modules">Modules</a> -
-    <a href="index.html#types">Types</a>
-</header>
-<main>
-<h1>code/controllers/hooks-defs.dm 
-            <a href="https://github.com/Baystation12/Baystation12/blob/254bab99b49613299066a2362a1ab2e87d0bdd2e/code/controllers/hooks-defs.dm">
-        <img src="git.png" width="16" height="16" title="code&#x2F;controllers&#x2F;hooks-defs.dm"/></a></h1>
-
-<table class="summary" cellspacing="0">
-        <tr><th>/hook/global_init</th><td>Global init hook.
-Called in global_init.dm when the server is initialized.</td></tr>
-        <tr><th><a href="hook&#x2F;startup.html">&#x2F;hook&#x2F;startup</a></th><td>Startup hook.
-Called in world.dm when the server starts.</td></tr>
-        <tr><th>/hook/game_ready</th><td>Game Ready hook.
-Called in master.dm once initialization is complete.</td></tr>
-        <tr><th>/hook/roundstart</th><td>Roundstart hook.
-Called in ticker.dm when a round starts.</td></tr>
-        <tr><th>/hook/roundend</th><td>Roundend hook.
-Called in ticker.dm when a round ends.</td></tr>
-        <tr><th>/hook/shutdown</th><td>Shutdown hook.
-Called in world.dm when world/Del is called.</td></tr>
-        <tr><th>/hook/death</th><td>Death hook.
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><base href="../../"><link rel="stylesheet" href="dmdoc.css"><title>code/controllers/hooks-defs.dm - Space Station 13</title></head><body><header><a href="index.html">Space Station 13</a> - <a href="index.html#modules">Modules</a> - <a href="index.html#types">Types</a></header><main><h1>code/controllers/hooks-defs.dm <a href="https://github.com/Baystation12/Baystation12/blob/e65e6b30c468ee2c1236a96687e43e016b1e93af/code/controllers/hooks-defs.dm0"><img src="git.png" width="16" height="16" title="code/controllers/hooks-defs.dm0"></a></h1><table class="summary" cellspacing="0"><tr><th>/hook/global_init</th><td>Global init hook.
+Called in global_init.dm when the server is initialized.</td></tr><tr><th><a href="hook/startup.html">/hook/startup</a></th><td>Startup hook.
+Called in world.dm when the server starts.</td></tr><tr><th>/hook/game_ready</th><td>Game Ready hook.
+Called in master.dm once initialization is complete.</td></tr><tr><th>/hook/roundstart</th><td>Roundstart hook.
+Called in ticker.dm when a round starts.</td></tr><tr><th>/hook/roundend</th><td>Roundend hook.
+Called in ticker.dm when a round ends.</td></tr><tr><th>/hook/shutdown</th><td>Shutdown hook.
+Called in world.dm when world/Del is called.</td></tr><tr><th>/hook/death</th><td>Death hook.
 Called in death.dm when someone dies.
-Parameters: var/mob/living/carbon/human, var/gibbed</td></tr>
-        <tr><th>/hook/clone</th><td>Cloning hook.
+Parameters: var/mob/living/carbon/human, var/gibbed</td></tr><tr><th>/hook/clone</th><td>Cloning hook.
 Called in cloning.dm when someone is brought back by the wonders of modern science.
-Parameters: var/mob/living/carbon/human</td></tr>
-        <tr><th>/hook/debrain</th><td>Debrained hook.
+Parameters: var/mob/living/carbon/human</td></tr><tr><th>/hook/debrain</th><td>Debrained hook.
 Called in brain_item.dm when someone gets debrained.
-Parameters: var/obj/item/organ/internal/brain</td></tr>
-        <tr><th>/hook/borgify</th><td>Borged hook.
+Parameters: var/obj/item/organ/internal/brain</td></tr><tr><th>/hook/borgify</th><td>Borged hook.
 Called in robot_parts.dm when someone gets turned into a cyborg.
-Parameters: var/mob/living/silicon/robot</td></tr>
-        <tr><th>/hook/harvest_podman</th><td>Podman hook.
+Parameters: var/mob/living/silicon/robot</td></tr><tr><th>/hook/harvest_podman</th><td>Podman hook.
 Called in podmen.dm when someone is brought back as a Diona.
-Parameters: var/mob/living/carbon/alien/diona</td></tr>
-        <tr><th>/hook/revoke_payroll</th><td>Payroll revoked hook.
+Parameters: var/mob/living/carbon/alien/diona</td></tr><tr><th>/hook/revoke_payroll</th><td>Payroll revoked hook.
 Called in Accounts_DB.dm when someone's payroll is stolen at the Accounts terminal.
-Parameters: var/datum/money_account</td></tr>
-        <tr><th>/hook/change_account_status</th><td>Account suspension hook.
+Parameters: var/datum/money_account</td></tr><tr><th>/hook/change_account_status</th><td>Account suspension hook.
 Called in Accounts_DB.dm when someone's account is suspended or unsuspended at the Accounts terminal.
-Parameters: var/datum/money_account</td></tr>
-        <tr><th>/hook/reassign_employee</th><td>Employee reassignment hook.
+Parameters: var/datum/money_account</td></tr><tr><th>/hook/reassign_employee</th><td>Employee reassignment hook.
 Called in card.dm when someone's card is reassigned at the HoP's desk.
-Parameters: var/obj/item/card/id</td></tr>
-        <tr><th>/hook/terminate_employee</th><td>Employee terminated hook.
+Parameters: var/obj/item/card/id</td></tr><tr><th>/hook/terminate_employee</th><td>Employee terminated hook.
 Called in card.dm when someone's card is terminated at the HoP's desk.
-Parameters: var/obj/item/card/id</td></tr>
-        <tr><th>/hook/sell_crate</th><td>Crate sold hook.
+Parameters: var/obj/item/card/id</td></tr><tr><th>/hook/sell_crate</th><td>Crate sold hook.
 Called in supplyshuttle.dm when a crate is sold on the shuttle.
-Parameters: var/obj/structure/closet/crate/sold, var/area/shuttle</td></tr>
-        <tr><th>/hook/sell_anomalycage</th><td>Anomaly cage sold hook.
+Parameters: var/obj/structure/closet/crate/sold, var/area/shuttle</td></tr><tr><th>/hook/sell_anomalycage</th><td>Anomaly cage sold hook.
 Called in supplyshuttle.dm when a anomaly container is sold on the shuttle.
-Parameters: var/obj/machinery/anomaly_container/sold, var/area/shuttle</td></tr>
-        <tr><th>/hook/sell_animal</th><td>Animal sold hook.
+Parameters: var/obj/machinery/anomaly_container/sold, var/area/shuttle</td></tr><tr><th>/hook/sell_animal</th><td>Animal sold hook.
 Called in supplyshuttle.dm when a anomaly container is sold on the shuttle.
-Parameters: var/obj/structure/stasis_cage/sold, var/area/shuttle</td></tr></table></main>
-<footer>
-    baystation12.dme
-    <a href="https://github.com/Baystation12/Baystation12/tree/254bab99b49613299066a2362a1ab2e87d0bdd2e">254bab9</a>
-        (dev) &mdash; <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.7.3</a></footer>
-</body>
-</html>
+Parameters: var/obj/structure/stasis_cage/sold, var/area/shuttle</td></tr></table></main><footer>baystation12.dme <a href="https://github.com/Baystation12/Baystation12/tree/e65e6b30c468ee2c1236a96687e43e016b1e93af">e65e6b3</a> (dev) — <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.9.0</a></footer></body></html>
