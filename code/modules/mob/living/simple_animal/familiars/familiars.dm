@@ -132,8 +132,11 @@
 		return FALSE
 	if(!icon_rest)
 		return
-	if(stat == UNCONSCIOUS || resting)
-		icon_state = icon_rest
+	if(stat != DEAD)
+		if(stat == UNCONSCIOUS || resting)
+			icon_state = icon_rest
+		else
+			icon_state = icon_living
 
 /mob/living/simple_animal/familiar/pet/mouse
 	name = "mouse"
