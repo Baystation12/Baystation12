@@ -142,6 +142,9 @@
 	level_max = list(Sp_TOTAL = 1, Sp_SPEED = 1, Sp_POWER = 0)
 	hud_state = "wiz_parrot"
 
+/spell/targeted/shapeshift/avian/check_valid_targets(list/targets)
+	return TRUE
+
 /spell/targeted/shapeshift/corrupt_form
 	name = "Corrupt Form"
 	desc = "This spell shapes the wizard into a terrible, terrible beast."
@@ -164,6 +167,9 @@
 
 	hud_state = "wiz_corrupt"
 	cast_sound = 'sound/magic/disintegrate.ogg'
+
+/spell/targeted/shapeshift/corrupt_form/check_valid_targets(list/targets)
+	return TRUE
 
 /spell/targeted/shapeshift/corrupt_form/empower_spell()
 	if(!..())
@@ -197,3 +203,6 @@
 	toggle = 1
 
 	hud_state = "wiz_carp"
+
+/spell/targeted/shapeshift/familiar/check_valid_targets(list/targets)
+	return TRUE

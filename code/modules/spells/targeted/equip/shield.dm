@@ -31,6 +31,9 @@
 	I.base_block_chance = block_chance
 	return I
 
+/spell/targeted/equip_item/shield/check_valid_targets(list/targets)
+	return TRUE
+
 /spell/targeted/equip_item/shield/empower_spell()
 	if(!..())
 		return 0

@@ -5,11 +5,8 @@
 
 /obj/structure/closet/wizard/New()
 	..()
-	var/obj/structure/bigDelivery/package/package = new /obj/structure/bigDelivery/package(get_turf(src))
-	package.wrapped = src
+	var/obj/structure/bigDelivery/package/package = new (get_turf(src), src, "parcel")
 	package.examtext = "Imported straight from the Wizard Acadamy. Do not lose the contents or suffer a demerit."
-	src.forceMove(package)
-	package.update_icon()
 
 /obj/structure/closet/wizard/armor
 	name = "Mastercrafted Armor Set"
