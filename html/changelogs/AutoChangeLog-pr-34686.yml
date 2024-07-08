@@ -1,0 +1,6 @@
+author: Sbotkin
+changes:
+  - {tweak: 'The forensic microscope can now be clicked with an evidence bag, which
+      will remove the sample from the machine and put it in the bag, no contamination
+      if you have at least basic forensics.'}
+delete-after: true
