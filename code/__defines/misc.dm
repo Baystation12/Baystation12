@@ -320,6 +320,12 @@
 #define ATOM_FLOURESCENCE_ACTVE 2 // Flourescent and actively lit. Helps prevent repeated processing on a flourescent atom by multiple UV lights
 
 
+//NOTE: INTENT_HOTKEY_* defines are not actual intents!
+//they are here to support hotkeys
+#define INTENT_HOTKEY_LEFT  "left"
+#define INTENT_HOTKEY_RIGHT "right"
+
+
 // Helper macro for generating stringified name text for IDs located inside objects, i.e. PDAs or wallets. Used for feedback and interaction messages.
 #define GET_ID_NAME(ID, HOLDER) (ID == HOLDER ? "\the [ID]" : "\the [ID] in \the [HOLDER]")
 
