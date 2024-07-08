@@ -1,6 +1,11 @@
+/datum/gear/trinket/photograph
+	display_name = "photo"
+	description = "A definable photograph. The only limit is your imagination."
+	path = /obj/item/phototrinket
+
 /datum/gear/trinket/scg_challenge_coin
 	display_name = "sol challenge coin selection"
-	description = "A selection of challenge coins for identification, collection or simply bragging rights"
+	description = "A selection of challenge coins for identification, collection or simply bragging rights."
 	path = /obj/item/material/coin/challenge
 	cost = 1
 
@@ -20,7 +25,7 @@
 
 /datum/gear/trinket/misc_challenge_coin
 	display_name = "misc challenge coin selection"
-	description = "A selection of challenge coins for identification, collection or simply bragging rights"
+	description = "A selection of challenge coins for identification, collection or simply bragging rights."
 	path = /obj/item/material/coin/challenge/misc
 	cost = 1
 
