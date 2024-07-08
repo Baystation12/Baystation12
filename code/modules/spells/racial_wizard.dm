@@ -89,6 +89,8 @@
 
 	drop_items = 0
 
+/spell/targeted/shapeshift/true_form/check_valid_targets(list/targets)
+	return TRUE
 
 //UNATHI
 /spell/moghes_blessing

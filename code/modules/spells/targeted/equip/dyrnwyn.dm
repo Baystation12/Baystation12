@@ -29,6 +29,9 @@
 	W.slowdown_per_slot[slot_r_hand] = 0.25
 	return W
 
+/spell/targeted/equip_item/dyrnwyn/check_valid_targets(list/targets)
+	return TRUE
+
 /spell/targeted/equip_item/dyrnwyn/empower_spell()
 	if(!..())
 		return 0

@@ -38,6 +38,10 @@ var/global/list/ghost_traps
 
 // Check for bans, proper atom types, etc.
 /datum/ghosttrap/proc/assess_candidate(mob/observer/ghost/candidate, mob/target, feedback = TRUE)
+	if (!target)
+		to_chat(candidate, "This occupation request is no longer valid.")
+		return FALSE
+
 	if(!candidate.MayRespawn(feedback, minutes_since_death))
 		return FALSE
 
