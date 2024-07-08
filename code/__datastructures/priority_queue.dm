@@ -16,6 +16,7 @@
 
 /// Checks if the queue is currently empty. Returns boolean. Mirrors to `!length(L)`
 /PriorityQueue/proc/IsEmpty()
+	SHOULD_BE_PURE(TRUE)
 	return !length(L)
 
 /// Adds an element to the queue, immediately ordering it to its position using the function defined in `cmp`.
@@ -36,20 +37,25 @@
 
 /// Returns a copy of the queue as a list. Mirrors to `L.Copy()`
 /PriorityQueue/proc/List()
+	RETURN_TYPE(/list)
+	SHOULD_BE_PURE(TRUE)
 	. = L.Copy()
 
 /// Returns the position of an element or `FALSE` if not found. Mirrors to `L.Find(A)`
 /PriorityQueue/proc/Seek(atom/A)
+	SHOULD_BE_PURE(TRUE)
 	. = L.Find(A)
 
 /// Returns the element at position `i` (1-indexed), or `FALSE` if the position does not exist.
 /PriorityQueue/proc/Get(i)
+	SHOULD_BE_PURE(TRUE)
 	if(i > length(L) || i < 1)
 		return FALSE
 	return L[i]
 
 /// Returns the length of the queue. Mirrors to `length(L)`
 /PriorityQueue/proc/Length()
+	SHOULD_BE_PURE(TRUE)
 	. = length(L)
 
 /**
