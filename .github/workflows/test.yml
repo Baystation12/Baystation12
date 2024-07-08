@@ -12,7 +12,7 @@ on:
 env:
   BYOND_MAJOR: "514"
   BYOND_MINOR: "1589"
-  SPACEMAN_DMM_VERSION: suite-1.7.3
+  SPACEMAN_DMM_VERSION: suite-1.9
 
 jobs:
   PreFlight:
