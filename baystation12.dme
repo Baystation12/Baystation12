@@ -3321,5 +3321,6 @@
 #include "interface\skin.dmf"
 #include "maps\_map_include.dm"
 #include "maps\_maps.dm"
+#include "packs\legion\_pack.dm"
 #include "~code\global_init.dm"
 // END_INCLUDE

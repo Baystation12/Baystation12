@@ -127,6 +127,7 @@
 			"warning",
 			"danger",
 			"occult",
+			"legion",
 			"unsafe"
 		)
 	if (!style)
@@ -166,6 +167,7 @@
 			if ("warning") result = SPAN_WARNING(result)
 			if ("danger")  result = SPAN_DANGER(result)
 			if ("occult")  result = SPAN_OCCULT(result)
+			if ("legion")  result = SPAN_LEGION(result)
 		switch (size)
 			if ("small")  result = FONT_SMALL(result)
 			if ("large")  result = FONT_LARGE(result)

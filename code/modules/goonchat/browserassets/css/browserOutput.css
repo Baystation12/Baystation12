@@ -339,6 +339,7 @@ h1.alert, h2.alert		{color: #a4bad6;}
 .notice					{color: #6685f5;}
 .alium					{color: #00ff00;}
 .cult					{color: #aa1c1c;}
+.legion					{color: #e09000; font-weight: bold; font-family: 'Courier New', Courier, monospace}
 
 /* Languages */
 .alien					{color: #855d85;}
