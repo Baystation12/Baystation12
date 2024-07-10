@@ -39,7 +39,6 @@
 		/obj/item/device/radio/headset/heads/cmo,
 		/obj/item/device/radio/headset/heads/cmo/alt,
 		/obj/item/device/flash,
-		/obj/item/gun/energy/confuseray,
 		/obj/item/device/megaphone,
 		/obj/item/reagent_containers/hypospray/vial,
 		/obj/item/storage/fancy/vials,

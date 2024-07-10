@@ -31,7 +31,6 @@
 		/obj/item/tank/oxygen_emergency_extended,
 		/obj/item/clothing/mask/gas,
 		/obj/item/device/flash,
-		/obj/item/gun/energy/confuseray,
 		/obj/item/device/megaphone,
 		/obj/item/device/tape/random = 3,
 		/obj/item/clothing/glasses/welding/superior,

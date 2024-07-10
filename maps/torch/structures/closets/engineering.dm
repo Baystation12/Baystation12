@@ -49,7 +49,6 @@
 		/obj/item/clothing/mask/gas,
 		/obj/item/device/multitool,
 		/obj/item/device/flash,
-		/obj/item/gun/energy/confuseray,
 		/obj/item/taperoll/engineering,
 		/obj/item/device/megaphone,
 		/obj/item/material/twohanded/jack,
