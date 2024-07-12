@@ -1,8 +1,9 @@
-/datum
-	var/weakref/weakref
+/// One-way reference to a `/weakref` instance that refers to this datum, if one exists.
+/datum/var/weakref/weakref
 
-/// Creates a weakref to the given input.
-/// See /weakref's documentation for more information.
+/**
+ * Creates a weakref to the given input. See `/weakref`'s documentation for more information.
+ */
 /proc/weakref(datum/D)
 	RETURN_TYPE(/weakref)
 	if(!istype(D))
@@ -56,10 +57,13 @@
  * will always hard delete.
  */
 /weakref
+	/// String. `\ref[]` reference of the associated `/datum`.
 	var/ref
 
 	// Handy info for debugging
+	/// String. `name` of the associated `/datum`.
 	var/ref_name
+	/// Type path (Type of `/datum`). `type` of the associated `/datum`.
 	var/ref_type
 
 /weakref/New(datum/D)
