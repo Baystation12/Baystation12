@@ -163,7 +163,8 @@
 			return
 		else // non-adjacent click
 			if(W)
-				W.afterattack(A, src, 0, modifiers) // 0: not Adjacent
+				if (!W.use_on_distant(A, src, modifiers, FALSE) && !A.use_distant(W, src, modifiers, FALSE))
+					W.afterattack(A, src, 0, modifiers) // 0: not Adjacent
 			else
 				RangedAttack(A, modifiers)
 

@@ -63,6 +63,12 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		use_call = "use"
 		. = use_after(atom, user, click_params)
 	if (!.)
+		use_call = "distant item"
+		. = use_on_distant(atom, user, click_params, TRUE)
+	if (!.)
+		use_call = "distant"
+		. = atom.use_distant(src, user, click_params, TRUE)
+	if (!.)
 		use_call = null
 	atom.post_use_item(src, user, ., use_call, click_params)
 
@@ -377,6 +383,25 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 	return ..()
 
+
+/**
+ * Interaction handler for using an item on this atom while not adjacent, or if all other `resolve_attackby()` checks
+ * return `FALSE`.
+ *
+ * This is resolved after `/obj/item/proc/use_on_distant()`.
+ *
+ * **Parameters**:
+ * - `tool` - The item being used on this atom.
+ * - `user` - The mob interacting with this atom.
+ * - `click_params` - List of click parameters.
+ * - `adjacent` (Boolean) - Whether or not `src` is adjacent to `user`.
+ *
+ * Returns boolean to indicate whether the interaction was handled or not.
+ */
+/atom/proc/use_distant(obj/item/tool, mob/user, list/click_params, adjacent)
+	return FALSE
+
+
 /**
  * Called when the item is in the active hand and another atom is clicked and `resolve_attackby()` returns FALSE. This is generally called by `ClickOn()`.
  * Works on ranged targets, unlike resolve_attackby()
@@ -422,6 +447,26 @@ avoid code duplication. This includes items that may sometimes act as a standard
  * * - `click_parameters` - List of click parameters. See BYOND's `Click()` documentation.
  */
 /obj/item/proc/use_before(atom/target, mob/living/user, click_parameters)
+	return FALSE
+
+
+/**
+ * Called when an atom is clicked while the item is in the active hand. This is called on click on one of the following
+ * conditions:
+ * - `target` is adjacent and `user.resolve_attackby()` otherwise returns `FALSE`.
+ * - `target` is not adjacent.
+ *
+ * This is resolved before `/atom/proc/use_distant()`.
+ *
+ * **Parameters**:
+ * - `target` - The atom that was clicked.
+ * - `user` - The mob that clicked the target.
+ * - `click_params` - List of click parameters. See BYOND's `Click()` documentation.
+ * - `adjacent` (Boolean) - Whether or not `target` is adjacent to `user`.
+ *
+ * Returns boolen to indicate whether the use call was handled or not.
+ */
+/obj/item/proc/use_on_distant(atom/target, mob/living/user, list/click_params, adjacent)
 	return FALSE
 
 
