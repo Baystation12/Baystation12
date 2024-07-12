@@ -13,8 +13,18 @@
 	holder = null
 	. = ..()
 
-/datum
-	var/list/datum/extension/extensions
+/**
+ * Lazylist (Type paths - Types of `/datum/extension`). List of extensions currently set for this datum.
+ *
+ * Not recommended to set or reference directly. See the following procs instead:
+ * - `/proc/set_extension()`
+ * - `/proc/get_or_create_extension()`
+ * - `/proc/get_extension()`
+ * - `/proc/has_extension()`
+ * - `/proc/construct_extension_instance()`
+ * - `/proc/remove_extension()`
+ */
+/datum/var/list/datum/extension/extensions
 
 //Variadic - Additional positional arguments can be given. Named arguments might not work so well
 /proc/set_extension(datum/source, datum/extension/extension_type)
