@@ -1,6 +1,0 @@
-author: Ryan180602
-changes:
-  - {tweak: Remove disorientor from lockers.}
-  - {tweak: Remove disorientor design from protolathe.}
-  - {tweak: 'Give parapen a 1.5s delay, and only 5u of VB.'}
-delete-after: true
