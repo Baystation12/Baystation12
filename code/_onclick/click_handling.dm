@@ -36,16 +36,16 @@ var/global/const/CLICK_HANDLER_REMOVE_IF_NOT_TOP    = FLAG(1)
 	 *
 	 * See `code\_onclick\click_handling.dm` for valid options.
 	 */
-	var/flags = 0
+	var/flags = EMPTY_BITFIELD
 
 /datum/click_handler/New(mob/user)
 	..()
 	src.user = user
-	if(flags & (CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT))
+	if (HAS_FLAGS(flags, CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT))
 		GLOB.logged_out_event.register(user, src, /datum/click_handler/proc/OnMobLogout)
 
 /datum/click_handler/Destroy()
-	if(flags & (CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT))
+	if (HAS_FLAGS(flags, CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT))
 		GLOB.logged_out_event.unregister(user, src, /datum/click_handler/proc/OnMobLogout)
 	user = null
 	. = ..()
@@ -171,7 +171,7 @@ var/global/const/CLICK_HANDLER_REMOVE_IF_NOT_TOP    = FLAG(1)
 	// No manipulation of the default click handler
 	if(new_click_handler_type == /datum/click_handler/default)
 		return FALSE
-	if((initial(new_click_handler_type.flags) & CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT) && !client)
+	if (HAS_FLAGS(initial(new_click_handler_type.flags), CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT) && !client)
 		return FALSE
 	SETUP_CLICK_HANDLERS
 
@@ -180,7 +180,7 @@ var/global/const/CLICK_HANDLER_REMOVE_IF_NOT_TOP    = FLAG(1)
 		return FALSE // If the top click handler is already the same as the desired one, bow out
 
 	click_handler.Exit()
-	if(click_handler.flags & CLICK_HANDLER_REMOVE_IF_NOT_TOP)
+	if (HAS_FLAGS(click_handler.flags, CLICK_HANDLER_REMOVE_IF_NOT_TOP))
 		click_handlers.Remove(click_handler)
 		qdel(click_handler)
 
