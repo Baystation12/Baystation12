@@ -13,10 +13,8 @@ if(!click_handlers) { \
 	QDEL_NULL_LIST(click_handlers)
 	return ..()
 
-var/global/const/CLICK_HANDLER_NONE                 = EMPTY_BITFIELD
 var/global/const/CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT = FLAG(0)
 var/global/const/CLICK_HANDLER_REMOVE_IF_NOT_TOP    = FLAG(1)
-var/global/const/CLICK_HANDLER_ALL                  = ( CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT | CLICK_HANDLER_REMOVE_IF_NOT_TOP )
 
 /datum/click_handler
 	var/mob/user
