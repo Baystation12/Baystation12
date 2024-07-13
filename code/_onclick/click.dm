@@ -46,19 +46,18 @@
 /turf/allow_click_through(atom/A, params, mob/user)
 	return TRUE
 
-/*
-	Standard mob ClickOn()
-	Handles exceptions: middle click, modified clicks, exosuit actions
 
-	After that, mostly just check your state, check whether you're holding an item,
-	check whether you're adjacent to the target, then pass off the click to whoever
-	is recieving it.
-	The most common are:
-	* mob/UnarmedAttack(atom,adjacent) - used here only when adjacent, with no item in hand; in the case of humans, checks gloves
-	* atom/resolve_attackby(item,user) - used only when adjacent
-	* item/afterattack(atom,user,adjacent,params) - used for ranged; called when resolve_attackby returns FALSE.
-	* mob/RangedAttack(atom,params) - used only ranged, only used for tk and laser eyes but could be changed
-*/
+/**
+ * Handler for when a mob's client clicks on an atom. This is intended to be a general wrapper for sanity checks, then
+ * calling relevant interaction procs down the line. `resolve_attackby()`, `afterattack()`, `RangedAttack()`,
+ * `UnarmedAttack()`, the various `*ClickOn()`, etc all originate here.
+ *
+ * **Parameters**:
+ * - `A` - The atom that was clicked on.
+ * - `params` (String) - Click parameters presented by Byond in href format (`name=value&name2=value2`)
+ *
+ * Has no return value.
+ */
 /mob/proc/ClickOn(atom/A, params)
 
 	if(world.time <= next_click) // Hard check, before anything else, to avoid crashing
