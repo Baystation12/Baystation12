@@ -5,7 +5,7 @@
 	augment_slots = AUGMENT_HAND
 	var/list/items = list()
 	var/list/paths = list() //We may lose them
-	augment_flags = AUGMENT_MECHANICAL
+	augment_flags = AUGMENT_MECHANICAL | AUGMENT_SCANNABLE
 
 
 /obj/item/organ/internal/augment/active/polytool/Initialize()

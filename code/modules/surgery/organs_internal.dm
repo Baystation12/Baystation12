@@ -107,7 +107,7 @@
 		if (I && !(I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
 			var/image/radial_button = image(icon = I.icon, icon_state = I.icon_state)
 			radial_button.name = "Detach \the [I.name]"
-			attached_organs[I.organ_tag] = radial_button
+			attached_organs[I] = radial_button
 	if (!length(attached_organs))
 		to_chat(user, SPAN_WARNING("You can't find any organs to separate."))
 		return FALSE
@@ -119,17 +119,17 @@
 	return FALSE
 
 /singleton/surgery_step/internal/detatch_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message("[user] starts to separate [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].", \
-	"You start to separate [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool]." )
-	target.custom_pain("Someone's ripping out your [LAZYACCESS(target.surgeries_in_progress, target_zone)]!",100)
+	var/obj/item/organ/detaching = LAZYACCESS(target.surgeries_in_progress, target_zone)
+	user.visible_message("[user] starts to separate [target]'s [detaching.name] with \the [tool].", \
+	"You start to separate [target]'s [detaching.name] with \the [tool]." )
+	target.custom_pain("Someone's ripping out your [detaching.name]!",100)
 	playsound(target.loc, 'sound/items/scalpel.ogg', 50, TRUE)
 	..()
 
 /singleton/surgery_step/internal/detatch_organ/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message(SPAN_NOTICE("[user] has separated [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].") , \
-	SPAN_NOTICE("You have separated [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool]."))
-
-	var/obj/item/organ/I = target.internal_organs_by_name[LAZYACCESS(target.surgeries_in_progress, target_zone)]
+	var/obj/item/organ/I = LAZYACCESS(target.surgeries_in_progress, target_zone)
+	user.visible_message(SPAN_NOTICE("[user] has separated [target]'s [I.name] with \the [tool].") , \
+	SPAN_NOTICE("You have separated [target]'s [I.name] with \the [tool]."))
 	if(I && istype(I))
 		I.cut_away(user)
 
@@ -188,19 +188,20 @@
 		return ..()
 
 /singleton/surgery_step/internal/remove_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/removing = LAZYACCESS(target.surgeries_in_progress, target_zone)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("\The [user] starts removing [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].", \
-	"You start removing \the [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].")
+	user.visible_message("\The [user] starts removing [target]'s [removing.name] with \the [tool].", \
+	"You start removing \the [target]'s [removing.name] with \the [tool].")
 	target.custom_pain("The pain in your [affected.name] is living hell!",100,affecting = affected)
 	playsound(target.loc, 'sound/items/hemostat.ogg', 50, TRUE)
 	..()
 
 /singleton/surgery_step/internal/remove_organ/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message(SPAN_NOTICE("\The [user] has removed \the [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool]."), \
-	SPAN_NOTICE("You have removed \the [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool]."))
+	var/obj/item/organ/O = LAZYACCESS(target.surgeries_in_progress, target_zone)
+	user.visible_message(SPAN_NOTICE("\The [user] has removed \the [target]'s [O.name] with \the [tool]."), \
+	SPAN_NOTICE("You have removed \the [target]'s [O.name] with \the [tool]."))
 
 	// Extract the organ!
-	var/obj/item/organ/O = LAZYACCESS(target.surgeries_in_progress, target_zone)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(istype(O) && istype(affected))
 		affected.implants -= O
@@ -282,16 +283,16 @@
 
 /singleton/surgery_step/internal/replace_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] starts [robotic_surgery ? "reinstalling" : "transplanting"] \the [tool] into [target]'s [affected.name].", \
-	"You start [robotic_surgery ? "reinstalling" : "transplanting"] \the [tool] into [target]'s [affected.name].")
+	user.visible_message("[user] starts [robotic_surgery ? "installing" : "transplanting"] \the [tool] into [target]'s [affected.name].", \
+	"You start [robotic_surgery ? "installing" : "transplanting"] \the [tool] into [target]'s [affected.name].")
 	target.custom_pain("Someone's rooting around in your [affected.name]!",100,affecting = affected)
 	playsound(target.loc, 'sound/items/scalpel.ogg', 50, TRUE)
 	..()
 
 /singleton/surgery_step/internal/replace_organ/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_NOTICE("\The [user] has [robotic_surgery ? "reinstalled" : "transplanted"] \the [tool] into [target]'s [affected.name]."), \
-	SPAN_NOTICE("You have [robotic_surgery ? "reinstalled" : "transplanted"] \the [tool] into [target]'s [affected.name]."))
+	user.visible_message(SPAN_NOTICE("\The [user] has [robotic_surgery ? "installed" : "transplanted"] \the [tool] into [target]'s [affected.name]."), \
+	SPAN_NOTICE("You have [robotic_surgery ? "installed" : "transplanted"] \the [tool] into [target]'s [affected.name]."))
 	var/obj/item/organ/O = tool
 	if(istype(O) && user.unEquip(O, target))
 		affected.implants |= O //move the organ into the patient. The organ is properly reattached in the next step
@@ -378,17 +379,18 @@
 	return organ_to_replace
 
 /singleton/surgery_step/internal/attach_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message("[user] begins reattaching [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].", \
-	"You start reattaching [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].")
-	target.custom_pain("Someone's digging needles into your [LAZYACCESS(target.surgeries_in_progress, target_zone)]!",100)
+	var/obj/item/organ/attaching = LAZYACCESS(target.surgeries_in_progress, target_zone)
+	user.visible_message("[user] begins attaching [target]'s [attaching.name] with \the [tool].", \
+	"You start attaching [target]'s [attaching.name] with \the [tool].")
+	target.custom_pain("Someone's digging needles into your [attaching.name]!",100)
 	playsound(target.loc, 'sound/items/fixovein.ogg', 50, TRUE)
 	..()
 
 /singleton/surgery_step/internal/attach_organ/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/I = LAZYACCESS(target.surgeries_in_progress, target_zone)
 
-	user.visible_message(SPAN_NOTICE("[user] has reattached [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].") , \
-	SPAN_NOTICE("You have reattached [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool]."))
+	user.visible_message(SPAN_NOTICE("[user] has attached [target]'s [I.name] with \the [tool].") , \
+	SPAN_NOTICE("You have attached [target]'s [I.name] with \the [tool]."))
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(istype(I) && I.parent_organ == target_zone && affected && (I in affected.implants))

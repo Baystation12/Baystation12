@@ -1,10 +1,10 @@
-/datum/chemical_reaction/nullglass
+/singleton/reaction/nullglass
 	name = "Soulstone"
 	result = null
 	required_reagents = list(/datum/reagent/blood = 15, /datum/reagent/crystal = 1)
 	result_amount = 1
 
-/datum/chemical_reaction/nullglass/get_reaction_flags(datum/reagents/holder)
+/singleton/reaction/nullglass/get_reaction_flags(datum/reagents/holder)
 	for(var/datum/reagent/blood/blood in holder.reagent_list)
 		var/weakref/donor_ref = islist(blood.data) && blood.data["donor"]
 		if(istype(donor_ref))
@@ -12,7 +12,7 @@
 			if(istype(donor) && (donor.psi || (donor.mind && GLOB.wizards.is_antagonist(donor.mind))))
 				return TRUE
 
-/datum/chemical_reaction/nullglass/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
+/singleton/reaction/nullglass/on_reaction(datum/reagents/holder, created_volume, reaction_flags)
 	var/location = get_turf(holder.my_atom)
 	if(reaction_flags)
 		for(var/i = 1, i <= created_volume, i++)

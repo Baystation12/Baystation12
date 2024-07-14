@@ -186,10 +186,10 @@
 	chem_volume = 5
 	smoketime = 300
 	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
-	lightermes = "<span class='notice'>USER manages to light their NAME with FLAME.</span>"
+	lightermes = "<span class='notice'>USER manages to light their NAME with their FLAME.</span>"
 	zippomes = "<span class='rose'>With a flick of their wrist, USER lights their NAME with their FLAME.</span>"
-	weldermes = "<span class='notice'>USER casually lights the NAME with FLAME.</span>"
-	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME.</span>"
+	weldermes = "<span class='notice'>USER casually lights their NAME with their FLAME.</span>"
+	ignitermes = "<span class='notice'>USER fiddles with their FLAME, and manages to light their NAME.</span>"
 	brand = "\improper Trans-Stellar Duty-free"
 	var/list/filling = list(/datum/reagent/tobacco = 1)
 
@@ -336,7 +336,7 @@
 		if (blocked)
 			to_chat(H, SPAN_WARNING("\The [blocked] is in the way!"))
 			return TRUE
-		to_chat(H, SPAN_NOTICE("You take a drag on your [name]."))
+		user.visible_message(SPAN_NOTICE("\The [user] takes a drag from their [name]."))
 		smoke(5)
 		add_trace_DNA(H)
 		return TRUE
@@ -391,10 +391,10 @@
 	smoketime = 1500
 	chem_volume = 15
 	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
-	lightermes = "<span class='notice'>USER manages to offend their NAME by lighting it with FLAME.</span>"
+	lightermes = "<span class='notice'>USER manages to offend their NAME by lighting it with their FLAME.</span>"
 	zippomes = "<span class='rose'>With a flick of their wrist, USER lights their NAME with their FLAME.</span>"
-	weldermes = "<span class='notice'>USER insults NAME by lighting it with FLAME.</span>"
-	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME with the power of science.</span>"
+	weldermes = "<span class='notice'>USER insults their NAME by lighting it with their FLAME.</span>"
+	ignitermes = "<span class='notice'>USER fiddles with their FLAME, and manages to light their NAME with the power of science.</span>"
 	brand = null
 	filling = list(/datum/reagent/tobacco/fine = 5)
 
@@ -472,10 +472,10 @@
 	smoketime = 0
 	chem_volume = 50
 	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
-	lightermes = "<span class='notice'>USER manages to light their NAME with FLAME.</span>"
+	lightermes = "<span class='notice'>USER manages to light their NAME with their FLAME.</span>"
 	zippomes = "<span class='rose'>With much care, USER lights their NAME with their FLAME.</span>"
-	weldermes = "<span class='notice'>USER recklessly lights NAME with FLAME.</span>"
-	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME with the power of science.</span>"
+	weldermes = "<span class='notice'>USER recklessly lights their NAME with their FLAME.</span>"
+	ignitermes = "<span class='notice'>USER fiddles with their FLAME, and manages to light their NAME with the power of science.</span>"
 
 /obj/item/clothing/mask/smokable/pipe/New()
 	..()

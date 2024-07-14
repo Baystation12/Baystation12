@@ -1,9 +1,10 @@
 {
   "recommendations": [
-    "gbasood.byond-dm-language-support",
-    "platymuus.dm-langclient",
+    "stylemistake.auto-comment-blocks",
     "biomejs.biome",
+    "platymuus.dm-langclient",
+    "anturk.dmi-editor",
     "eamodio.gitlens",
-    "anturk.dmi-editor"
+    "oderwat.indent-rainbow"
   ]
 }

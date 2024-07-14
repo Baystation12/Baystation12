@@ -54,7 +54,7 @@
 	set_light(0)
 
 /obj/item/flame/lighter/proc/shutoff_effects(mob/user)
-	user.visible_message(SPAN_NOTICE("[user] quietly shuts off the [src]."))
+	user.visible_message(SPAN_NOTICE("\The [user] quietly shuts off \the [src]."))
 
 /obj/item/flame/lighter/attack_self(mob/living/user)
 	if(!lit)

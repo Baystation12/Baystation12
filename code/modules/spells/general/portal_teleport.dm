@@ -50,6 +50,9 @@
 
 	return
 
+/spell/portal_teleport/check_valid_targets(list/targets)
+	return islist(targets) && length(targets)
+
 /spell/portal_teleport/after_cast()
 	return
 

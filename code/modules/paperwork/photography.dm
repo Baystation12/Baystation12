@@ -100,6 +100,13 @@ var/global/photo_count = 0
 	add_fingerprint(usr)
 	return
 
+/obj/item/phototrinket
+	name = "photo"
+	icon = 'icons/obj/tools/photography.dmi'
+	desc = "A blank photograph. You feel, for some reason, that someone (or something) has forgotten to... describe it?"
+	icon_state = "photo"
+	item_state = "paper"
+	w_class = ITEM_SIZE_TINY
 
 /**************
 * photo album *

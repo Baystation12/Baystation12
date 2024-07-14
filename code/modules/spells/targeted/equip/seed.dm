@@ -19,3 +19,6 @@
 	max_targets = 1
 
 	hud_state = "wiz_seed"
+
+/spell/targeted/equip_item/seed/check_valid_targets(list/targets)
+	return TRUE
