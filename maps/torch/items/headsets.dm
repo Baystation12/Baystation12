@@ -151,10 +151,11 @@
 	item_state = "exp_headset_alt"
 
 /obj/item/device/radio/headset/headset_cargo
-	desc = "A headset used by the Deck Chief and his slaves."
+	desc = "A headset used by the hangar dwellers."
+	ks1type = /obj/item/device/encryptionkey/headset_deck
 
 /obj/item/device/radio/headset/headset_cargo/alt
-	desc = "A bowman headset used by the Deck Chief and his slaves."
+	desc = "A bowman headset used by the hangar dwellers."
 
 /obj/item/device/radio/headset/headset_corpsman
 	name = "medical headset"
