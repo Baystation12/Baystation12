@@ -46,19 +46,18 @@
 /turf/allow_click_through(atom/A, params, mob/user)
 	return TRUE
 
-/*
-	Standard mob ClickOn()
-	Handles exceptions: middle click, modified clicks, exosuit actions
 
-	After that, mostly just check your state, check whether you're holding an item,
-	check whether you're adjacent to the target, then pass off the click to whoever
-	is recieving it.
-	The most common are:
-	* mob/UnarmedAttack(atom,adjacent) - used here only when adjacent, with no item in hand; in the case of humans, checks gloves
-	* atom/resolve_attackby(item,user) - used only when adjacent
-	* item/afterattack(atom,user,adjacent,params) - used for ranged; called when resolve_attackby returns FALSE.
-	* mob/RangedAttack(atom,params) - used only ranged, only used for tk and laser eyes but could be changed
-*/
+/**
+ * Handler for when a mob's client clicks on an atom. This is intended to be a general wrapper for sanity checks, then
+ * calling relevant interaction procs down the line. `resolve_attackby()`, `afterattack()`, `RangedAttack()`,
+ * `UnarmedAttack()`, the various `*ClickOn()`, etc all originate here.
+ *
+ * **Parameters**:
+ * - `A` - The atom that was clicked on.
+ * - `params` (String) - Click parameters presented by Byond in href format (`name=value&name2=value2`)
+ *
+ * Has no return value.
+ */
 /mob/proc/ClickOn(atom/A, params)
 
 	if(world.time <= next_click) // Hard check, before anything else, to avoid crashing
@@ -69,28 +68,28 @@
 	var/list/modifiers = params2list(params)
 	if (modifiers["ctrl"] && modifiers["alt"] && modifiers["shift"])
 		if (CtrlAltShiftClickOn(A))
-			return TRUE
+			return
 	else if (modifiers["shift"] && modifiers["ctrl"])
 		if (CtrlShiftClickOn(A))
-			return TRUE
+			return
 	else if (modifiers["ctrl"] && modifiers["alt"])
 		if (CtrlAltClickOn(A))
-			return TRUE
+			return
 	else if (modifiers["shift"] && modifiers["alt"])
 		if (AltShiftClickOn(A))
-			return TRUE
+			return
 	else if (modifiers["middle"])
 		if (MiddleClickOn(A))
-			return TRUE
+			return
 	else if (modifiers["shift"])
 		if (ShiftClickOn(A))
-			return TRUE
+			return
 	else if (modifiers["alt"])
 		if (AltClickOn(A))
-			return TRUE
+			return
 	else if (modifiers["ctrl"])
 		if (CtrlClickOn(A))
-			return TRUE
+			return
 
 	if(stat || paralysis || stunned || weakened || sleeping)
 		return
@@ -105,13 +104,13 @@
 	if(restrained())
 		setClickCooldown(10)
 		RestrainedClickOn(A)
-		return 1
+		return
 
 	if(in_throw_mode)
 		if(isturf(A) || isturf(A.loc))
 			throw_item(A)
 			trigger_aiming(TARGET_CAN_CLICK)
-			return 1
+			return
 		throw_mode_off()
 
 	var/obj/item/W = get_active_hand()
@@ -123,7 +122,7 @@
 			update_inv_l_hand(0)
 		else
 			update_inv_r_hand(0)
-		return 1
+		return
 
 	//Atoms on your person
 	// A is your location but is not a turf; or is on you (backpack); or is on something on you (box in backpack); sdepth is needed here because contents depth does not equate inventory storage depth.
@@ -139,7 +138,7 @@
 			UnarmedAttack(A, 1)
 
 		trigger_aiming(TARGET_CAN_CLICK)
-		return 1
+		return
 
 	if(!loc.allow_click_through(A, modifiers, src)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
 		return
@@ -168,7 +167,7 @@
 				RangedAttack(A, modifiers)
 
 			trigger_aiming(TARGET_CAN_CLICK)
-	return 1
+	return
 
 /mob/proc/setClickCooldown(timeout)
 	next_move = max(world.time + timeout, next_move)
