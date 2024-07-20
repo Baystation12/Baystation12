@@ -1758,6 +1758,8 @@
 /obj/structure/table/woodentable_reinforced/walnut,
 /obj/random_multi/single_item/memo_command,
 /obj/random_multi/single_item/memo_supply,
+/obj/item/folder/envelope/dcorder,
+/obj/item/folder/envelope/csorder,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/xo)
 "de" = (
@@ -4195,6 +4197,7 @@
 	dir = 6
 	},
 /obj/random_multi/single_item/memo_engineering,
+/obj/item/folder/envelope/ceorder,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/ce)
 "iU" = (
@@ -4896,6 +4899,8 @@
 /obj/random_multi/single_item/memo_command,
 /obj/random_multi/single_item/memo_supply,
 /obj/random_multi/single_item/memo_medical,
+/obj/item/folder/envelope/ndaorder,
+/obj/item/paper/immediateorder,
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "lu" = (
@@ -5387,6 +5392,7 @@
 /area/hallway/primary/bridge/aft)
 "mT" = (
 /obj/structure/table/woodentable/walnut,
+/obj/item/folder/envelope/cmdorder,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/cobed)
 "mV" = (
@@ -7705,6 +7711,7 @@
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
+/obj/item/folder/envelope/cmdorder,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/sgr)
 "tC" = (
@@ -8921,6 +8928,7 @@
 	},
 /obj/item/stamp/cos,
 /obj/random_multi/single_item/memo_security,
+/obj/item/folder/envelope/cosorder,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/cos)
 "wD" = (
@@ -12320,6 +12328,7 @@
 /obj/floor_decal/corner/paleblue/diagonal,
 /obj/structure/table/glass,
 /obj/random_multi/single_item/memo_medical,
+/obj/item/folder/envelope/cmoorder,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
 "Kh" = (
@@ -12625,6 +12634,7 @@
 /obj/floor_decal/corner/research{
 	dir = 5
 	},
+/obj/item/folder/envelope/exploorder,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/rd)
 "Lw" = (
@@ -13279,6 +13289,7 @@
 	pixel_y = -4
 	},
 /obj/item/hand_labeler,
+/obj/item/folder/envelope/clorder,
 /turf/simulated/floor/carpet/green,
 /area/crew_quarters/heads/office/cl/backroom)
 "Ox" = (

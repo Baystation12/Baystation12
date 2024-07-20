@@ -12744,6 +12744,7 @@
 /obj/random_multi/single_item/memo_research,
 /obj/random_multi/single_item/memo_exploration,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/item/folder/envelope/exploorder,
 /turf/simulated/floor/tiled,
 /area/command/pathfinder)
 "QI" = (
@@ -13427,6 +13428,7 @@
 	pixel_x = 32
 	},
 /obj/random_multi/single_item/memo_supply,
+/obj/item/folder/envelope/dcorder,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/deckchief)
 "Sz" = (
