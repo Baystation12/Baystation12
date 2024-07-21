@@ -1,6 +1,0 @@
-author: Ryan180602
-changes:
-  - {rscadd: Added two documents for bridge crew.}
-  - {rscadd: 'Added documents specific for COS, CE, CMO, CSO/Pathfinder, CO/SCGR,
-      XO/DC/CS.'}
-delete-after: true
