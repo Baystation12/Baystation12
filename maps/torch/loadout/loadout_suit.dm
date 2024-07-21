@@ -99,24 +99,33 @@
 /datum/gear/suit/zipper
 	allowed_roles = CASUAL_ROLES
 	allowed_branches = CIVILIAN_BRANCHES
-/datum/gear/suit/labcoat
-	allowed_roles = DOCTOR_ROLES
+
+/datum/gear/suit/labcoat/New()
+	allowed_roles = DOCTOR_ROLES + STERILE_ROLES
+	..()
 
 /datum/gear/suit/labcoat_corp
-	allowed_roles = DOCTOR_ROLES
 	allowed_branches = CIVILIAN_BRANCHES
 
-/datum/gear/suit/labcoat_blue
-	allowed_roles = DOCTOR_ROLES
+/datum/gear/suit/labcoat_corp/New()
+	allowed_roles = DOCTOR_ROLES + STERILE_ROLES
+	..()
+
+/datum/gear/suit/labcoat_blue/New()
+	allowed_roles = DOCTOR_ROLES + STERILE_ROLES
+	..()
 
 /datum/gear/suit/labcoat_ec
 	display_name = "labcoat, Expeditionary Corps"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/science/ec
-	allowed_roles = DOCTOR_ROLES
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps
 	)
 	flags = GEAR_HAS_NO_CUSTOMIZATION
+
+/datum/gear/suit/labcoat_ec/New()
+	allowed_roles = DOCTOR_ROLES + STERILE_ROLES
+	..()
 
 /datum/gear/suit/labcoat_cmo
 	display_name = "labcoat, chief medical officer"
