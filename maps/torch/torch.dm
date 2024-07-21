@@ -2,6 +2,7 @@
 
 	#include "../../packs/deepmaint/_pack.dm"
 	#include "../../packs/event_2022jul30/_pack.dm"
+	#include "../../packs/event_2024jul20/_pack.dm"
 
 	#include "../../packs/factions/commonwealth/_pack.dm"
 	#include "../../packs/factions/fa/_pack.dm"
