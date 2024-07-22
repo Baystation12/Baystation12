@@ -13,7 +13,7 @@
 /datum/gear_tweak/proc/tweak_item(user, obj/item/I, metadata)
 	return
 
-/datum/gear_tweak/proc/tweak_description(description, metadata)
+/datum/gear_tweak/proc/tweak_description(description, metadata, extend_description)
 	return description
 
 /*
@@ -49,6 +49,8 @@
 
 /datum/gear_tweak/path
 	var/list/valid_paths
+	/// Stores extended descriptions by instance type (as opposed to metadata string)
+	var/static/list/extended_description_cache
 
 /datum/gear_tweak/path/New(list/valid_paths)
 	if(!length(valid_paths))
@@ -97,11 +99,40 @@
 		return
 	gear_data.path = valid_paths[metadata]
 
-/datum/gear_tweak/path/tweak_description(description, metadata)
+/datum/gear_tweak/path/tweak_description(description, metadata, extend_description)
+	metadata ||= get_default()
 	if(!(metadata in valid_paths))
 		return ..()
 	var/obj/O = valid_paths[metadata]
-	return initial(O.desc) || description
+	. = initial(O.desc) || description
+	if (extend_description)
+		extended_description_cache ||= new()
+		var/extra_desc = extended_description_cache[O]
+		if (isnull(extra_desc))
+			var/atom/instance = new O(null)
+			// Defaults to a non-null value to avoid initializing a given type more than once,
+			// thanks to the if-check above doing an isnull-check rather than falsy one
+			extended_description_cache[O] = extra_desc = (instance.GetExtendedLoadoutDescription() || "")
+			qdel(instance)
+		if(extra_desc)
+			. += "<br>[extra_desc]"
+
+/atom/proc/GetExtendedLoadoutDescription()
+	return
+
+/obj/item/storage/GetExtendedLoadoutDescription()
+	var/list/description_counts = new()
+	for(var/atom/A in src)
+		description_counts[strip_improper(A.name)+"<br>"+A.desc]++
+
+	var/list/item_descriptions = list("Contains:")
+	if (length(description_counts))
+		for (var/description_count in description_counts)
+			item_descriptions.Add("[description_counts[description_count]]&#215;[description_count]")
+	else
+		item_descriptions.Add("<i>Nothing</i>")
+
+	return FONT_SMALL(jointext(item_descriptions,"<br>"))
 
 /*
 * Content adjustment
