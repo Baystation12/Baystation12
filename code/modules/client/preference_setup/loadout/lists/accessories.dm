@@ -65,7 +65,7 @@
 	description = "A medal or ribbon awarded to corporate personnel for significant accomplishments."
 	path = /obj/item/storage/medalbox
 	cost = 6
-	flags = GEAR_HAS_NO_CUSTOMIZATION
+	flags = GEAR_HAS_NO_CUSTOMIZATION | GEAR_HAS_EXTENDED_DESCRIPTION
 
 
 /datum/gear/accessory/ntaward/New()
