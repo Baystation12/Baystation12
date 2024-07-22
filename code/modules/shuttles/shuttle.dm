@@ -241,6 +241,8 @@
 					if(get_area(TA) in shuttle_area)
 						continue
 					TA.ChangeTurf(ceiling_type, TRUE, TRUE, TRUE)
+					for (var/datum/lighting_corner/C in TD.corners)
+						C.clear_above_ambient()
 
 	// Remove all powernets that were affected, and rebuild them.
 	var/list/cables = list()

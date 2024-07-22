@@ -154,6 +154,8 @@
 	if(href_list["PRG_deletechannel"])
 		. = TOPIC_HANDLED
 		if(channel && ((channel.operator == src) || netadmin_mode))
+			if(ntnet_global)
+				ntnet_global.chat_channels.Remove(channel)
 			qdel(channel)
 			channel = null
 	if(href_list["PRG_setpassword"])
