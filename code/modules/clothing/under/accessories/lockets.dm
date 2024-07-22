@@ -9,6 +9,11 @@
 	var/base_icon
 	var/open
 	var/obj/item/held
+	var/static/list/locket_allowed = list(
+		/obj/item/paper,
+		/obj/item/photo,
+		/obj/item/phototrinket
+	)
 
 
 /obj/item/clothing/accessory/locket/attack_self(mob/user)
@@ -30,19 +35,16 @@
 		icon_state = "[base_icon]"
 
 
-/obj/item/clothing/accessory/locket/use_tool(obj/item/I, mob/living/user, list/click_params)
+/obj/item/clothing/accessory/locket/use_tool(obj/item/item, mob/living/user, list/click_params)
+	if (!is_type_in_list(item, locket_allowed))
+		return ..()
 	if (!open)
-		to_chat(user, "You have to open \the [src] before modifying it.")
-		return TRUE
-
-	if (istype(I, /obj/item/paper) || istype(I, /obj/item/photo))
-		if (held)
-			to_chat(usr, "\The [src] already has something inside it.")
-		else
-			if (!user.unEquip(I, src))
-				FEEDBACK_UNEQUIP_FAILURE(user, I)
-				return TRUE
-			to_chat(usr, "You slip \the [I] into [src].")
-			held = I
-		return TRUE
-	else return..()
+		to_chat(user, SPAN_WARNING("You have to open \the [src] before modifying it."))
+	else if (held)
+		to_chat(user, SPAN_WARNING("\The [src] already holds \a [held]."))
+	else if (!user.unEquip(item, src))
+		FEEDBACK_UNEQUIP_FAILURE(user, item)
+	else
+		to_chat(usr, SPAN_NOTICE("You slip \the [item] into \the [src]."))
+		held = item
+	return TRUE
