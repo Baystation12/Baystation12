@@ -1,6 +1,0 @@
-author: Builder13
-changes:
-  - {bugfix: Fixed lighting for shuttles after transition.}
-  - {bugfix: Fixed Delete channel button for NTNet Relay Chat Client.}
-  - {bugfix: Fixed Take image verb for borgs.}
-delete-after: true
