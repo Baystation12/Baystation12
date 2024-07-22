@@ -1,5 +1,0 @@
-author: SierraKomodo
-changes:
-  - {rscadd: 'Adds the base corrupted hivebot mobs and beacon used during the Legion
-      itnroduction event, for future usage.'}
-delete-after: true
