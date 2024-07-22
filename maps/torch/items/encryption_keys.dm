@@ -28,6 +28,11 @@
 	icon_state = "qm_cypherkey"
 	channels = list("Supply" = 1, "Command" = 1, "Exploration" = 1, "Hailing" = 1)
 
+/obj/item/device/encryptionkey/headset_deck
+	name = "deck technician's encryption key"
+	icon_state = "qm_cypherkey"
+	channels = list("Supply" = 1, "Hailing" = 1)
+
 /obj/item/device/encryptionkey/headset_chief_steward
 	name = "chief steward's encryption key"
 	icon_state = "srv_cypherkey"
@@ -57,7 +62,7 @@
 /obj/item/device/encryptionkey/headset_mining
 	name = "prospector radio encryption key"
 	icon_state = "srv_cypherkey"
-	channels = list("Supply" = 1, "Exploration" = 1)
+	channels = list("Supply" = 1)
 
 /obj/item/storage/box/encryptionkey/exploration
 	name = "box of spare exploration radio keys"
@@ -67,7 +72,7 @@
 /obj/item/device/encryptionkey/pathfinder
 	name = "pathfinder's encryption key"
 	icon_state = "com_cypherkey"
-	channels = list("Exploration" = 1, "Command" = 1, "Science" = 1, "Hailing" = 1)
+	channels = list("Exploration" = 1, "Supply" = 1, "Command" = 1, "Science" = 1, "Hailing" = 1)
 
 /obj/item/storage/box/radiokeys
 	name = "box of radio encryption keys"

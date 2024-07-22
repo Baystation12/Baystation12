@@ -112,6 +112,5 @@
 	access = list(
 		access_mining, access_mining_office, access_mining_station,
 		access_expedition_shuttle, access_guppy, access_hangar,
-		access_guppy_helm, access_solgov_crew, access_eva,
-		access_radio_exp, access_radio_sup
+		access_guppy_helm, access_solgov_crew, access_eva, access_radio_sup
 	)
