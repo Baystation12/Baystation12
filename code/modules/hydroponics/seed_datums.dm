@@ -1560,7 +1560,7 @@
 	name = "hrukhza"
 	seed_name = "hrukhza flower"
 	display_name = "hrukhza flower"
-	chems = list(/datum/reagent/drink/alien/unathijuice = list(10,10), /datum/reagent/nutriment = list(5,5))
+	chems = list(/datum/reagent/drink/unathijuice = list(10,10), /datum/reagent/nutriment = list(5,5))
 
 /datum/seed/hrukhza/New()
 	..()
@@ -1623,7 +1623,7 @@
 	name = "qokkloa"
 	seed_name = "qokk'loa moss"
 	display_name = "qokk'loa moss"
-	chems = list(/datum/reagent/drugs/hextro = list(1,25), /datum/reagent/ethanol/alien/qokkloa = list(10,10) )
+	chems = list(/datum/reagent/drugs/hextro = list(1,25), /datum/reagent/ethanol/qokkloa = list(10,10) )
 
 /datum/seed/qokkloa/New()
 	..()

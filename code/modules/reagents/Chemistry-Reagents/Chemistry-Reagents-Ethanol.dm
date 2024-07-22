@@ -1511,7 +1511,7 @@
 	glass_name = "moscow mule"
 	glass_desc = "A blend of vodka, ginger beer, and lime juice."
 
-/datum/reagent/ethanol/alien/qokkloa
+/datum/reagent/ethanol/qokkloa
 	name = "Qokk'loa"
 	description = "An unrefined hallucinogenic substance, potent to humans and harmless to Skrell."
 	taste_description = "cold, slimey mushroom"
@@ -1521,7 +1521,7 @@
 	glass_name = "qokk'loa"
 	glass_desc = "An unrefined hallucigenic substance, potent to humans and harmless to Skrell."
 
-/datum/reagent/ethanol/alien/qokkloa/affect_ingest(mob/living/carbon/M, removed)
+/datum/reagent/ethanol/qokkloa/affect_ingest(mob/living/carbon/M, removed)
 	..()
 	if(M.HasTrait(/singleton/trait/boon/clear_mind))
 		return
@@ -1539,7 +1539,7 @@
 				L.take_internal_damage(5 * removed, 0)
 				M.adjustToxLoss(10 * removed)
 
-/datum/reagent/ethanol/alien/qokkhrona
+/datum/reagent/ethanol/qokkhrona
 	name = "Qokk'hrona"
 	description = "Delicious Skrellian wine from refined qokk'loa."
 	taste_description = "a thick potion of mushroom, slime, and hard alcohol"

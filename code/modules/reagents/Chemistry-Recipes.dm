@@ -2847,8 +2847,8 @@
 
 /singleton/reaction/skrianhi
 	name = "Skrianhi Tea"
-	result = /datum/reagent/drink/alien/skrianhi
-	required_reagents = list(/datum/reagent/drink/alien/unathijuice = 2, /datum/reagent/water = 1)
+	result = /datum/reagent/drink/skrianhi
+	required_reagents = list(/datum/reagent/drink/unathijuice = 2, /datum/reagent/water = 1)
 	result_amount = 3
 	minimum_temperature = 50 CELSIUS
 	maximum_temperature = (70 CELSIUS) + 100
@@ -2856,22 +2856,22 @@
 
 /singleton/reaction/mumbaksting
 	name = "Mumbak Sting"
-	result = /datum/reagent/drink/alien/mumbaksting
-	required_reagents = list(/datum/reagent/drink/alien/unathijuice = 2, /datum/reagent/toxin = 1)
+	result = /datum/reagent/drink/mumbaksting
+	required_reagents = list(/datum/reagent/drink/unathijuice = 2, /datum/reagent/toxin = 1)
 	result_amount = 3
 	mix_message = "The toxins mix with the juice to create a dark red substance."
 
 /singleton/reaction/wasgaelhi
 	name = "Wasgaelhi"
-	result = /datum/reagent/ethanol/alien/wasgaelhi
-	required_reagents = list(/datum/reagent/drink/alien/unathijuice = 2, /datum/reagent/ethanol/wine = 1)
+	result = /datum/reagent/ethanol/wasgaelhi
+	required_reagents = list(/datum/reagent/drink/unathijuice = 2, /datum/reagent/ethanol/wine = 1)
 	result_amount = 3
 	mix_message = "The mixture turns a dull purple."
 
 /singleton/reaction/kzkzaa
 	name = "Kzkzaa"
-	result = /datum/reagent/drink/alien/kzkzaa
-	required_reagents = list(/datum/reagent/drink/alien/unathijuice = 2, /datum/reagent/nutriment/protein = 1)
+	result = /datum/reagent/drink/kzkzaa
+	required_reagents = list(/datum/reagent/drink/unathijuice = 2, /datum/reagent/nutriment/protein = 1)
 	result_amount = 3
 	mix_message = "The mixture turns a deep orange."
 
@@ -2879,8 +2879,8 @@
 
 /singleton/reaction/qokkhrona
 	name = "Qokk'Hrona"
-	result = /datum/reagent/ethanol/alien/qokkhrona
-	required_reagents = list(/datum/reagent/ethanol/alien/qokkloa = 2, /datum/reagent/ethanol/wine = 1)
+	result = /datum/reagent/ethanol/qokkhrona
+	required_reagents = list(/datum/reagent/ethanol/qokkloa = 2, /datum/reagent/ethanol/wine = 1)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 3
 	mix_message = "The mixture turns a soft red, bubbling faintly"
