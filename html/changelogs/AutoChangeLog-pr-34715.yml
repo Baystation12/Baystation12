@@ -1,0 +1,5 @@
+author: Sbotkin
+changes:
+  - {tweak: 'Miners lose access to the exploration freq, deck technicians gain access
+      to the hailing freq and the Pathfinder gains access to the supply freq.'}
+delete-after: true
