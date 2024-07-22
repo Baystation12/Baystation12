@@ -47,7 +47,7 @@
 
 	if(silicon_camera.in_camera_mode)
 		silicon_camera.camera_mode_off()
-		if(is_component_functioning("camera"))
+		if(is_component_functioning("diagnosis unit"))
 			silicon_camera.captureimage(A, usr)
 		else
 			to_chat(src, SPAN_CLASS("userdanger", "Your camera isn't functional."))

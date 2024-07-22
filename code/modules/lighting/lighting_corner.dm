@@ -357,6 +357,18 @@ var/global/list/REVERSE_LIGHTING_CORNER_DIAGONAL = list(0, 0, 0, 0, 3, 4, 0, 0, 
 	needs_update = TRUE
 	SSlighting.corner_queue += src
 
+/datum/lighting_corner/proc/clear_above_ambient()
+	above_ambient_r = 0
+	above_ambient_g = 0
+	above_ambient_b = 0
+
+	UPDATE_APPARENT(src, r)
+	UPDATE_APPARENT(src, g)
+	UPDATE_APPARENT(src, b)
+
+	needs_update = TRUE
+	SSlighting.corner_queue += src
+
 #undef UPDATE_APPARENT
 
 /datum/lighting_corner/proc/update_overlays(now = FALSE)
