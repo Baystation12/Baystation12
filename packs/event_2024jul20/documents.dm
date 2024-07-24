@@ -39,14 +39,14 @@
 <p>This is an important advisory for members of the command staff aboard the vessel. With the discovery of a new, potentially hostile body - it is of the utmost importance that information be disseminated in a controlled, and calculated manner.</p>
 <p>It is crucial to keep in mind that hysteria and fearmongering is still a valid concern for the masses of the Solar state. While this is not the first time that we have conducted first contact, contextually, this has been of the equivalance of first contacts with the Vox.</p>
 <p>As such, in an effort to maintain operational security, as well as ensure that non-Solar actors do not gain access to the information and experience that you have gathered - the Bureau of Public Information has imposed a ship-wide C-Notice on exchange of verbal information relating to this incident.</p>
-<p>We have authorised both independent, and government observers to board the Torch for information. Those observers belonging to the Fleet, DIA, Expeditionary Corps, or any of the branches of the Solar government, are to be first verified by on-board command and security.</p>
-<p>Verification can be conducted via a fax to EXCOM, from a present Representative, or line officer, with the details of the individual involved, and their representative branch. Upon verification, full dissemination of information may be conducted to them, only.</p>
-<p>Civilian and independent observers must be verified via the same way, and only the most basic of information must be released. The facts that can be talked about are:</p>
-<p>1. That it was a hostile encounter.</p>
-<p>2. That the crew has suffered losses.</p>
-<p>3. That the hostiles in question are <strong>unconfirmed</strong> to be synthetic assimilators in origin. Ensure that you keep their disposition and details as vague as possible. Sentience is to not be confirmed, under any circumstances.</p>
+<p>We have authorised both independent, and government observers to board the Torch for information. All observers and/or journalists must have their identity and source of representation be verified by command or security.</p>
+<p>Verification can be conducted via a fax to EXCOM, from a present Representative, or line officer, with the details of the individual involved, and their representative branch.</p>
+<p>Those representing branches of the Solar Government can be given full details as needed. However, for independent civilian journalists and contracted observers, the information must be regulated. The guidelines to follow for them, are:</p>
+<p>1. It may be disseminated that the encounter was hostile in nature.</p>
+<p>2. It may be disseminated that the crew has suffered losses.</p>
+<p>3. It may be disseminated that the hostiles in question are <strong>unconfirmed</strong> to be synthetic assimilators in origin. Ensure that you keep their disposition and details as vague as possible. Sentience is to not be confirmed, under any circumstances.</p>
 <p>Any other extraneous facts can be confirmed via a present Representative, or a fax to EXCOM, per context.</p>
-<p>Ensure that all crew is briefed on the basic details entailed in this notice. They must not disseminate unneeded information to non-crew personnel. Breach of this notice's directives is punishable by <strong>Espionage</strong>, or <strong>Sedition</strong>, at the discretion of the attending <strong>Chief of Security</strong>.</p>
+<p>Ensure that all those on the ship's manifest are briefed on the basic details entailed in this notice. They must not disseminate information outside of the guidelines to those not on the ship's manifest, and may not propagate it to those who are not representatives of the Solar Government. Breach of this notice's directives is punishable by <strong>Espionage</strong>, or <strong>Sedition</strong>, at the discretion of the attending <strong>Chief of Security</strong>.</p>
 <hr />
 <p>&nbsp;<em>This paper has been stamped with the insignia of the Admiral Henry Lau.</em></p>
 <hr /><center><img src="eclogo.png" /></center>
