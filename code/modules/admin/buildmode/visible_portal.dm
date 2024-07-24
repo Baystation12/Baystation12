@@ -8,6 +8,7 @@
 Left Click          - Add portal entrance segment
 Left Click + Ctrl   - Add portal exit segment
 Right Click         - Delete current work
+Right Click + Ctrl  - Delete a portal in world -> THIS WILL DELETE ALL CONNECTED PORTAL TURFS
 
 Right click the icon when you're done creating both portals to finish
 
@@ -21,6 +22,12 @@ Tool doesnt provide validation!
 	icon = 'icons/effects/map_effects.dmi'
 
 /datum/build_mode/visible_portals/proc/AddMarker(turf/T, dir, entry)
+	var/obj/effect/map_effect/temp/portal_marker/existingMarker = locate() in T
+	var/obj/effect/map_effect/portal/existingPortal = locate() in T
+	if (existingPortal || existingMarker)
+		to_chat(user, SPAN_WARNING("Theres something already there!"))
+		return
+
 	var/obj/effect/map_effect/temp/portal_marker/PM = new(T)
 	PM.dir = dir
 	if (entry)
@@ -70,9 +77,33 @@ Tool doesnt provide validation!
 	var/turf/location = get_turf(A)
 	if (parameters["ctrl"])
 		if (parameters["left"])
-			AddMarker(location, GLOB.reverse_dir[user.dir], FALSE)
+			AddMarker(location, host.dir, FALSE)
+		if (parameters["right"])
+			//There is no guaranteed safe way to delete a segment of a placed portal as they become tightly coupled
+			//If people want to do that, VV exists
+			//Delete it and counterpart
+			var/obj/effect/map_effect/portal/existingPortal = locate() in location
+			if (existingPortal)
+				var/obj/effect/map_effect/portal/master/master = null
+				if (istype(existingPortal, /obj/effect/map_effect/portal/master))
+					master = existingPortal
+				else
+					var/obj/effect/map_effect/portal/line/line = existingPortal
+					master = line.my_master
+
+				if (master)
+					var/id = master.portal_id
+
+					if (id)
+						for(var/thing in GLOB.all_portal_masters)
+							var/obj/effect/map_effect/portal/master/M = thing
+							if (M.portal_id == id)
+								qdel(M)
+				else
+					qdel(existingPortal)
+
 	else if (parameters["left"] )
-		AddMarker(location, GLOB.reverse_dir[user.dir], TRUE)
+		AddMarker(location, host.dir, TRUE)
 	else if (parameters["right"])
 		var/choice = alert("Delete in progress portal", "Delete All", "Yes", "No")
 		if (choice == "Yes")

@@ -1,6 +1,7 @@
 GLOBAL_LIST_EMPTY(all_portal_masters)
 
-/*
+/**
+ * # Portals
 
 Portal map effects allow a mapper to join two distant places together, while looking somewhat seamlessly connected.
 This can allow for very strange PoIs that twist and turn in what appear to be physically impossible ways.
@@ -48,19 +49,22 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 	name = "portal subtype"
 	invisibility = 0
 	opacity = TRUE
-	plane = DEFAULT_PLANE
 	layer = ABOVE_AO_LAYER
-	appearance_flags = PIXEL_SCALE|KEEP_TOGETHER|TILE_BOUND // Readdded TILE_BOUND so that non visible portal's contents remain hidden from the viewer.
+	// Readdded TILE_BOUND so that non visible portal's contents remain hidden from the viewer.
+	appearance_flags = PIXEL_SCALE|KEEP_TOGETHER|TILE_BOUND
 
-	var/obj/effect/map_effect/portal/counterpart = null // The portal line or master that this is connected to, on the 'other side'.
+	// The portal line or master that this is connected to, on the 'other side'.
+	var/obj/effect/map_effect/portal/counterpart = null
 
-	// Information used to apply `pixel_[x|y]` offsets so that the visuals line up.
-	// Set automatically by `calculate_dimensions()`.
-	var/total_height = 0 // Measured in tiles.
+	/** Information used to apply `pixel_[x|y]` offsets so that the visuals line up.
+	Set automatically by `calculate_dimensions()`. Measured in tiles */
+	var/total_height = 0
 	var/total_width = 0
 
-	var/portal_distance_x = 0 // How far the portal is from the left edge, in tiles.
-	var/portal_distance_y = 0 // How far the portal is from the top edge.
+	/// How far the portal is from the left edge, in tiles.
+	var/portal_distance_x = 0
+	/// How far the portal is from the top edge.
+	var/portal_distance_y = 0
 
 /obj/effect/map_effect/portal/Destroy()
 	vis_contents = null
@@ -70,34 +74,35 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 
 	return ..()
 
-// Called when something touches the portal, and usually teleports them to the other side.
-/obj/effect/map_effect/portal/Crossed(atom/movable/AM)
+/// Called when something touches the portal, and usually teleports them to the other side.
+/obj/effect/map_effect/portal/Crossed(atom/movable/atom)
 	//Todo, some check for incorporeal stuff or virtual mobs perhaps
 	..()
 
-	if(!AM)
+	if(!atom)
 		return
 	if(!counterpart)
 		return
 
-	go_through_portal(AM)
+	go_through_portal(atom)
 
 
-/obj/effect/map_effect/portal/proc/go_through_portal(atom/movable/AM)
+/obj/effect/map_effect/portal/proc/go_through_portal(atom/movable/atom)
 	var/turf/T = counterpart.get_focused_turf()
-	AM.forceMove(T)
-	if(isliving(AM))
-		var/mob/living/L = AM
+	atom.forceMove(T)
+	if(isliving(atom))
+		var/mob/living/L = atom
 		if(L.pulling)
-			var/atom/movable/AMP = L.pulling
-			AMP.forceMove(T)
+			var/atom/movable/pulling = L.pulling
+			pulling.forceMove(T)
 
-// 'Focused turf' is the turf directly in front of a portal,
-// and it is used both as the destination when crossing, as well as the PoV for visuals.
+/** 'Focused turf' is the turf directly in front of a portal,
+ and it is used both as the destination when crossing, as well as the PoV for visuals.
+ */
 /obj/effect/map_effect/portal/proc/get_focused_turf()
 	return get_step(get_turf(src), dir)
 
-// Determines the size of the block of turfs inside `vis_contents`, and where the portal is in relation to that.
+/// Determines the size of the block of turfs inside `vis_contents`, and where the portal is in relation to that.
 /obj/effect/map_effect/portal/proc/calculate_dimensions()
 	var/highest_x = 0
 	var/lowest_x = 0
@@ -106,8 +111,7 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 	var/lowest_y = 0
 
 	// First pass is for finding the top right corner.
-	for(var/thing in vis_contents)
-		var/turf/T = thing
+	for(var/turf/T in vis_contents)
 		if(T.x > highest_x)
 			highest_x = T.x
 		if(T.y > highest_y)
@@ -134,8 +138,8 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 	portal_distance_y = lowest_y - focused_T.y
 
 
-// Portal masters manage everything else involving portals.
-// This is the base type. Use `/side_a` or `/side_b` with matching IDs for actual portals.
+/**  Portal masters manage everything else involving portals.
+  This is the base type. Use `/side_a` or `/side_b` with matching IDs for actual portals. */
 /obj/effect/map_effect/portal/master
 	name = "portal master"
 	var/portal_id = "test" // For a portal to be made, both the A and B sides need to share the same ID value.
@@ -169,6 +173,7 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 		qdel(thing)
 	return ..()
 
+/// Called to determine which adjacent turfs master forms lines from
 /obj/effect/map_effect/portal/master/proc/find_lines()
 	var/list/dirs_to_search = list( turn(dir, 90), turn(dir, -90) )
 
@@ -183,7 +188,7 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 			else
 				break
 
-// Connects both sides of a portal together.
+/// Connects both sides of a portal together.
 /obj/effect/map_effect/portal/master/proc/find_counterparts()
 	for(var/thing in GLOB.all_portal_masters)
 		var/obj/effect/map_effect/portal/master/M = thing
@@ -206,6 +211,7 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 	if(!counterpart)
 		crash_with("Portal master [type] ([x],[y],[z]) could not find another portal master with a matching portal_id ([portal_id]).")
 
+/// Generates vis content list for the line and master portals
 /obj/effect/map_effect/portal/master/proc/make_visuals()
 	var/list/observed_turfs = list()
 	for(var/thing in portal_lines + src)
@@ -221,17 +227,18 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 
 		var/list/things = dview(world.view, T)
 		for(var/turf/turf in things)
-			if(!(get_dir(turf, T) & GLOB.reverse_dir[P.dir])) //dont grab things behind but sides should be fine
-				if(turf in observed_turfs) // Avoid showing the same turf twice or more for improved performance.
-					continue
+			if(get_dir(turf, T) & GLOB.reverse_dir[P.dir]) //dont grab things behind but sides should be fine
+				continue
+			if(turf in observed_turfs) // Avoid showing the same turf twice or more for improved performance.
+				continue
 
-				P.vis_contents += turf
-				observed_turfs += turf
+			P.vis_contents += turf
+			observed_turfs += turf
 
 		P.calculate_dimensions()
 
-// Shifts the portal's pixels in order to line up properly, as BYOND offsets the sprite when it holds multiple turfs inside `vis_contents`.
-// This undos the shift that BYOND did.
+/** Shifts the portal's pixels in order to line up properly, as BYOND offsets the sprite when it holds multiple turfs inside `vis_contents`.
+	This undos the shift that BYOND did.  */
 /obj/effect/map_effect/portal/master/proc/apply_offset()
 	for(var/thing in portal_lines + src)
 		var/obj/effect/map_effect/portal/P = thing
@@ -239,8 +246,8 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 		P.pixel_x = WORLD_ICON_SIZE * P.portal_distance_x
 		P.pixel_y = WORLD_ICON_SIZE * P.portal_distance_y
 
-// Allows portals to transfer emotes.
-// Only portal masters do this to avoid flooding the other side with duplicate messages.
+/**  Allows portals to transfer emotes.
+	Only portal masters do this to avoid flooding the other side with duplicate messages.*/
 /obj/effect/map_effect/portal/master/see_emote(mob/M, text)
 	if(!counterpart)
 		return
@@ -256,7 +263,7 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 
 	..()
 
-// Allows portals to transfer visible messages.
+/// Allows portals to transfer visible messages.
 /obj/effect/map_effect/portal/master/show_message(msg, type, alt, alt_type)
 	if(!counterpart)
 		return
@@ -271,11 +278,11 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 
 	..()
 
-// Allows portals to transfer speech.
-/obj/effect/map_effect/portal/master/hear_talk(mob/M, text, verb, datum/language_speaking)
+/// Allows portals to transfer speech.
+/obj/effect/map_effect/portal/master/hear_talk(mob/speaker, text, verb, datum/language_speaking)
 	if(!counterpart)
 		return
-	var/mob/living/L = M
+	var/mob/living/lspeaker = speaker
 	var/turf/T = counterpart.get_focused_turf()
 	var/list/mobs_to_relay = list()
 	var/list/objs = list()
@@ -283,7 +290,7 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 
 	for(var/thing in mobs_to_relay)
 		var/mob/mob = thing
-		mob.hear_say(text, verb, language_speaking, istype(L) ? L.GetVoice() : null, null, M) //clunky, unifying chat arguments would be ideal.
+		mob.hear_say(text, verb, language_speaking, istype(lspeaker) ? lspeaker.GetVoice() : null, null, speaker) //clunky, unifying chat arguments would be ideal.
 
 	..()
 
@@ -328,9 +335,9 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 
 
 
-// Portal lines extend out from the sides of portal masters,
-// They let portals be longer than 1x1.
-// Both sides MUST be the same length, meaning if side A is 1x3, side B must also be 1x3.
+/** Portal lines extend out from the sides of portal masters,
+ 	They let portals be longer than 1x1.
+	Both sides MUST be the same length, meaning if side A is 1x3, side B must also be 1x3. */
 /obj/effect/map_effect/portal/line
 	name = "portal line"
 	var/obj/effect/map_effect/portal/master/my_master = null
