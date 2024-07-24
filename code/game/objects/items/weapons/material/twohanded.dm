@@ -113,7 +113,7 @@
 	base_icon = "spearglass"
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
-	max_force = 20	//for wielded
+	max_force = 30	//for wielded
 	applies_material_colour = 0
 	force_multiplier = 0.33 // 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
 	unwielded_force_divisor = 0.20
@@ -127,11 +127,6 @@
 	worth_multiplier = 7
 	base_parry_chance = 30
 
-/obj/item/material/twohanded/spear/shatter(consumed)
-	if(!consumed)
-		new /obj/item/stack/material/rods(get_turf(src), 1)
-		new /obj/item/stack/cable_coil(get_turf(src), 3)
-	..()
 
 /obj/item/material/twohanded/baseballbat
 	name = "bat"

@@ -1,5 +1,5 @@
 /datum/job/pathfinder
-	title = "Pathfinder"
+	title = "Clone Commander"
 	department = "Exploration"
 	department_flag = EXP
 	total_positions = 1
@@ -44,7 +44,7 @@
 	return "You are the Pathfinder. Your duty is to organize and lead the expeditions to away sites, carrying out the EC's Primary Mission. You command Explorers. You make sure that expedition has the supplies and personnel it needs. You can pilot Charon if nobody else provides a pilot. Once on the away mission, your duty is to ensure that anything of scientific interest is brought back to the ship and passed to the relevant research lab."
 
 /datum/job/nt_pilot
-	title = "Shuttle Pilot"
+	title = "Clone Pilot"
 	supervisors = "the Pathfinder"
 	department = "Exploration"
 	department_flag = EXP
@@ -85,11 +85,11 @@
 	)
 
 /datum/job/explorer
-	title = "Explorer"
+	title = "Clone Trooper"
 	department = "Exploration"
 	department_flag = EXP
-	total_positions = 5
-	spawn_positions = 5
+	total_positions = 7
+	spawn_positions = 7
 	supervisors = "the Pathfinder"
 	selection_color = "#68099e"
 	minimum_character_age = list(SPECIES_HUMAN = 18)

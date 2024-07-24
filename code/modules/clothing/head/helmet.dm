@@ -121,10 +121,10 @@
 	update_clothing_icon()
 
 /obj/item/clothing/head/helmet/ablative
-	name = "ablative helmet"
+	name = "clone trooper helmet"
 	desc = "A helmet made from advanced materials which protects against concentrated energy weapons."
 	icon_state = "helmet_reflect"
-	valid_accessory_slots = list(ACCESSORY_SLOT_HELMET_VISOR)
+	valid_accessory_slots = list(ACCESSORY_SLOT_HELMET_COVER)
 	armor = list(
 		melee = ARMOR_MELEE_SMALL,
 		bullet = ARMOR_BALLISTIC_MINOR,

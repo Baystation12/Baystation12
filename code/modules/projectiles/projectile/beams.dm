@@ -96,7 +96,7 @@
 	name = "pulse"
 	icon_state = "u_laser"
 	fire_sound='sound/weapons/pulse.ogg'
-	damage = 15 //lower damage, but fires in bursts
+	damage = 30 //lower damage, but fires in bursts
 	armor_penetration = 25
 	distance_falloff = 1.5
 	damage_falloff_list = list(
@@ -131,8 +131,8 @@
 
 /obj/item/projectile/beam/pulse/destroy
 	name = "destroyer pulse"
-	damage = 100 //badmins be badmins I don't give a fuck
-	armor_penetration = 100
+	damage = 30 //badmins be badmins I don't give a fuck
+	armor_penetration = 30
 	damage_falloff_list = list(
 		list(6, 0.99),
 		list(9, 0.98),
@@ -223,8 +223,8 @@
 	name = "sniper beam"
 	icon_state = "xray"
 	fire_sound = 'sound/weapons/marauder.ogg'
-	damage = 35
-	armor_penetration = 10
+	damage = 40
+	armor_penetration = 40
 	damage_falloff_list = null
 
 	muzzle_type = /obj/projectile/laser/xray/muzzle

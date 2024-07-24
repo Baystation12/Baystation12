@@ -48,8 +48,7 @@
 	gluttonous = GLUT_TINY|GLUT_ITEM_NORMAL
 	stomach_capacity = 12
 
-	breath_type = GAS_NITROGEN
-	poison_types = list(GAS_OXYGEN = TRUE)
+	breath_type = GAS_OXYGEN
 	siemens_coefficient = 0.2
 
 	species_flags = SPECIES_FLAG_NO_SCAN

@@ -370,7 +370,7 @@
 	multiple_sprites = TRUE
 
 /obj/item/ammo_magazine/box/minigun
-	name = "minigun box"
+	name = "rotary cannon gas canister"
 	icon_state = "minigun"
 	origin_tech = list(TECH_COMBAT = 4)
 	mag_type = MAGAZINE

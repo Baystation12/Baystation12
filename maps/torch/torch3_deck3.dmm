@@ -1593,7 +1593,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "dM" = (
-/obj/machinery/suit_storage_unit/atmos/alt/sol,
 /obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/hardstorage)

@@ -414,7 +414,7 @@
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/suit/armor/laserproof
-	name = "ablative vest"
+	name = "clone trooper vest"
 	desc = "An armored vest with advanced shielding to protect against energy weapons."
 	icon = 'icons/obj/clothing/obj_suit_modular_armor.dmi'
 	item_icons = list(slot_wear_suit_str = 'icons/mob/onmob/onmob_modular_armor.dmi')

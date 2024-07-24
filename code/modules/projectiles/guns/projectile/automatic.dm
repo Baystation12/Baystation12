@@ -414,8 +414,8 @@
 		wielded_item_state = "battlerifle-wielded-empty"
 
 /obj/item/gun/projectile/automatic/minigun
-	name = "minigun"
-	desc = "A man-portable minigun lacking any branding on it. It fires small 7mm projectiles at an obscene rate of fire. Six barrels of fun."
+	name = "rotary blaster cannon"
+	desc = "A man-portable Z-6 rotary blster cannon. Six barrels of fun. Requires gas canisters for reload, and discharged gas cartridges."
 	icon = 'icons/obj/guns/minigun.dmi'
 	icon_state = "minigun"
 	item_state = "l6closedmag" /// Onmob is WIP sprite

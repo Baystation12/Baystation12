@@ -61,3 +61,8 @@
 	name = "\improper LEAD helmet cover"
 	desc = "A fabric cover for armored helmets. This one has gold stripes to denote a fireteam leader."
 	icon_state = "helmcover_lead"
+
+/obj/item/clothing/accessory/helmet_cover/clone
+	name = "helmet personalisation stripe"
+	desc = "Helmet accessory to personalise! (Call an admin to set the colour.)"
+	icon_state = "helmcover_clone"

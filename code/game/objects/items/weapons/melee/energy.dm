@@ -8,7 +8,8 @@
 	var/lighting_color
 	var/active_attack_verb
 	var/inactive_attack_verb = list()
-	armor_penetration = 50
+	armor_penetration = 20
+	base_parry_chance = 40
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
 
 
@@ -54,6 +55,8 @@
 
 	if (user)
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
+		if (istype(src, /obj/item/melee/energy/sword/double))
+			playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("\The [src] is now energised."))
 	set_light(2, 0.8, lighting_color)
 
@@ -148,12 +151,14 @@
 	icon_state = "axe0"
 	active_icon = "axe1"
 	lighting_color = COLOR_SABER_AXE
-	active_force = 60
+	active_force = 30
 	active_throwforce = 35
 	force = 20
 	throwforce = 10
 	throw_speed = 1
 	throw_range = 5
+	armor_penetration = 50
+	base_parry_chance = 60
 	w_class = ITEM_SIZE_NORMAL
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -175,7 +180,7 @@
  */
 /obj/item/melee/energy/sword
 	icon = 'icons/obj/weapons/melee_energy.dmi'
-	name = "energy sword"
+	name = "light sabre"
 	desc = "May the force be within you."
 	icon_state = "sword0"
 	active_force = 30
@@ -189,7 +194,6 @@
 	origin_tech = list(TECH_MAGNET = 3, TECH_ESOTERIC = 4)
 	sharp = TRUE
 	edge = TRUE
-	base_parry_chance = 50
 	active_attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	hitsound = 'sound/weapons/blade1.ogg'
 	var/blade_color
@@ -226,6 +230,18 @@
 	blade_color = "purple"
 
 
+/obj/item/melee/energy/sword/double
+	name = "double-edged light sabre"
+	desc = "For those well-vested in the arts of light sabre dueling."
+	blade_color = "double"
+	active_force = 50
+	base_parry_chance = 60
+	active_throwforce = 40
+	armor_penetration = 40
+	throw_speed = 1.5
+	throw_range = 10
+
+
 /obj/item/melee/energy/sword/dropped(mob/user)
 	..()
 	if(!istype(loc,/mob))
@@ -247,8 +263,8 @@
 
 /obj/item/melee/energy/sword/pirate
 	icon = 'icons/obj/weapons/melee_energy.dmi'
-	name = "energy cutlass"
-	desc = "Arrrr matey."
+	name = "curved-hilt light sabre"
+	desc = "A curved hilted light sabre. Odd looking."
 	icon_state = "cutlass0"
 	active_icon = "cutlass1"
 	lighting_color = COLOR_SABER_CUTLASS
@@ -263,7 +279,7 @@
  */
 /obj/item/melee/energy/blade
 	icon = 'icons/obj/weapons/melee_energy.dmi'
-	name = "energy blade"
+	name = "light sabre shoto"
 	desc = "A concentrated beam of energy in the shape of a blade. Very stylish... and lethal."
 	icon_state = "blade"
 	active_icon = "blade"	//It's all energy, so it should always be visible.

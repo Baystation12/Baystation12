@@ -1,5 +1,5 @@
 /datum/job/warden
-	title = "Brig Chief"
+	title = "Psidi Master"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief of Security"
@@ -42,7 +42,7 @@
 							 /datum/computer_file/program/camera_monitor)
 
 /datum/job/detective
-	title = "Forensic Technician"
+	title = "Republic Intelligence Officer"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief of Security"
@@ -94,7 +94,7 @@
 							 /datum/computer_file/program/camera_monitor)
 
 /datum/job/officer
-	title = "Master at Arms"
+	title = "Psidi Knight"
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "the Chief of Security"

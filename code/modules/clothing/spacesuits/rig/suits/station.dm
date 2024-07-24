@@ -387,20 +387,21 @@
 	)
 
 /obj/item/rig/hazard
-	name = "hazard hardsuit control module"
+	name = "beskar suit"
 	suit_type = "hazard hardsuit"
-	desc = "A security hardsuit designed for prolonged EVA in dangerous environments."
+	desc = "A beskar-made suit of armour. Often worn by the Mandalorians.."
 	icon_state = "hazard_rig"
+	online_slowdown = 1
 	armor = list(
 		melee = ARMOR_MELEE_MAJOR,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_HANDGUNS,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
+		laser = ARMOR_LASER_MAJOR,
 		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_RESISTANT,
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 	)
-	offline_vision_restriction = TINT_BLIND
+	offline_vision_restriction = TINT_NONE
 
 	chest_type = /obj/item/clothing/suit/space/rig/hazard
 	helm_type = /obj/item/clothing/head/helmet/space/rig/hazard
@@ -434,11 +435,13 @@
 /obj/item/rig/hazard/equipped
 
 	initial_modules = list(
-		/obj/item/rig_module/vision/sechud,
 		/obj/item/rig_module/maneuvering_jets,
-		/obj/item/rig_module/grenade_launcher,
+		/obj/item/rig_module/grenade_launcher/ninja,
 		/obj/item/rig_module/mounted/energy/taser,
-		/obj/item/rig_module/cooling_unit
+		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/mounted/energy,
+		/obj/item/rig_module/vision,
+		/obj/item/rig_module/actuators
 	)
 
 /obj/item/rig/zero

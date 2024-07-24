@@ -186,8 +186,8 @@
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/gun/projectile/pistol/broomstick
-	name = "broomstick"
-	desc = "An antique gun that makes you want to yell 'IT BELONGS IN A MUSEUM!'. There appears to be some thing scratched next to the fireselector, though you cant make it out."
+	name = "antique blaster pistol"
+	desc = "An antique DL-44 blaster pistol. Requires constant reloading of the gas cartridge."
 	icon = 'icons/obj/guns/broomstick.dmi'
 	icon_state = "broomstick"
 	accuracy_power = 6

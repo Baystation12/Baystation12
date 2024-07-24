@@ -18,12 +18,12 @@
 		)
 
 /obj/item/gun/energy/gun/skrell
-	name = "skrellian handgun"
-	desc = "A common Skrellian side-arm, the Xuxquu*'Voom-5, or XV-5, is a more traditional energy weapon, tuned to dispense beams in three different wavelengths."
+	name = "blaster pistol"
+	desc = "A commonly seen DC-17 blaster pistol. Majorly used by the Clone Trooper."
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
-	icon = 'icons/obj/guns/skrell_pistol.dmi'
-	icon_state = "skrell_pistol_stun100"
+	icon = 'icons/obj/guns/energy_gun.dmi'
+	icon_state = "energykill"
 	max_shots = 10
 	fire_delay = 6
 	one_hand_penalty = 1
@@ -31,13 +31,7 @@
 
 	projectile_type = /obj/item/projectile/beam/stun
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 5, TECH_POWER = 3)
-	modifystate = "skrell_pistol_stun"
-
-	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="skrell_pistol_stun"),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="skrell_pistol_shock"),
-		list(mode_name="kill", projectile_type=/obj/item/projectile/beam, modifystate="skrell_pistol_kill"),
-		)
+	modifystate = "energykill"
 
 /obj/item/gun/energy/gun/small
 	name = "small energy gun"

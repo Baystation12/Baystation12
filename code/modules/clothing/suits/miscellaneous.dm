@@ -390,10 +390,17 @@
 	icon_state = "mbill"
 
 /obj/item/clothing/suit/poncho/roles/security
-	name = "security poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is black and red, which are standard Security colors."
+	name = "psidi poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is black and red, which are standard Psidi colors."
 	species_restricted = null
 	icon_state = "secponcho"
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_MAJOR,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED
+	)
 
 /obj/item/clothing/suit/poncho/roles/medical
 	name = "medical poncho"

@@ -1,6 +1,6 @@
 /obj/item/melee/cultblade
-	name = "cult blade"
-	desc = "An arcane weapon wielded by the followers of Nar-Sie."
+	name = "dark sabre"
+	desc = "An arcane weapon wielded by the Dark Psidi."
 	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "cultblade"
 	item_state = "cultblade"
@@ -46,23 +46,26 @@
 
 
 /obj/item/clothing/head/culthood
-	name = "cult hood"
+	name = "psidi hood"
 	icon_state = "culthood"
-	desc = "A hood worn by the followers of Nar-Sie."
+	desc = "A hood worn by the Knights of the Psidi Order."
 	flags_inv = HIDEFACE
 	body_parts_covered = HEAD
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_SMALL
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_MAJOR,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED
 	)
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
-	siemens_coefficient = 0.8 //That's a pretty cool opening in the hood. Also: Cloth making physical contact to the skull.
+	siemens_coefficient = 0.2 //That's a pretty cool opening in the hood. Also: Cloth making physical contact to the skull.
 
 /obj/item/clothing/head/culthood/magus
-	name = "magus helm"
+	name = "psidi helm"
 	icon_state = "magus"
-	desc = "A helm worn by the followers of Nar-Sie."
+	desc = "A helm worn by the generals of the Psidi Order."
 	flags_inv = HIDEFACE | BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 	armor = list(
@@ -76,62 +79,61 @@
 	icon_state = "cult_hoodalt"
 
 /obj/item/clothing/suit/cultrobes
-	name = "cult robes"
-	desc = "A set of durable robes worn by the followers of Nar-Sie."
+	name = "psidi knight robes"
+	desc = "Robes won by those of the Psidi Order."
 	icon_state = "cultrobes"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	allowed = list(/obj/item/book/tome,/obj/item/melee/cultblade)
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_SMALL,
+		laser = ARMOR_LASER_MAJOR,
 		energy = ARMOR_ENERGY_SMALL,
 		bomb = ARMOR_BOMB_PADDED
 	)
-	flags_inv = HIDEJUMPSUIT
-	siemens_coefficient = 0.6
+	siemens_coefficient = 0.2
 
 /obj/item/clothing/suit/cultrobes/alt
 	icon_state = "cultrobesalt"
 
 /obj/item/clothing/suit/cultrobes/magusred
-	name = "magus robes"
-	desc = "A set of plated robes worn by the followers of Nar-Sie."
+	name = "psidi general robes"
+	desc = "A set of plated robes worn by the General of the Psidi Order."
 	icon_state = "magusred"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
 		bullet = ARMOR_BALLISTIC_RIFLE,
-		laser = ARMOR_LASER_HANDGUNS,
+		laser = ARMOR_LASER_MAJOR,
 		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 	)
 
 /obj/item/clothing/head/helmet/space/cult
-	name = "cult helmet"
-	desc = "A space worthy helmet used by the followers of Nar-Sie."
+	name = "psidi helmet"
+	desc = "A space worthy helmet used by the Masters of the Psidi Order."
 	icon_state = "cult_helmet"
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_RIFLE,
-		laser = ARMOR_LASER_HANDGUNS,
+		laser = ARMOR_LASER_RIFLES,
 		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_PADDED,
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 	) //Real tanky shit.
-	siemens_coefficient = 0.3 //Bone is not very conducive to electricity.
+	siemens_coefficient = 0.2 //Bone is not very conducive to electricity.
 
 /obj/item/clothing/suit/space/cult
-	name = "cult armour"
+	name = "psidi armour"
 	icon_state = "cult_armour"
-	desc = "A bulky suit of armour, bristling with spikes. It looks space proof."
+	desc = "A bulky suit of armour, bristling with spikes. It looks space proof. Often used by the Masters of the Psidi Order"
 	allowed = list(/obj/item/book/tome,/obj/item/melee/cultblade,/obj/item/tank,/obj/item/device/suit_cooling_unit)
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_RIFLE,
-		laser = ARMOR_LASER_HANDGUNS,
+		laser = ARMOR_LASER_RIFLES,
 		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_PADDED,
 		bio = ARMOR_BIO_SHIELDED,

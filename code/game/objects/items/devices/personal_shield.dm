@@ -1,17 +1,17 @@
 /obj/item/device/personal_shield
-	name = "personal shield"
-	desc = "Truly a life-saver: this device protects its user from being hit by objects moving very, very fast, as long as it holds a charge."
+	name = "psi shield emitter"
+	desc = "A psi-shield caster for Psidi Generals to channel their Phorce through."
 	icon = 'icons/obj/tools/batterer.dmi'
 	icon_state = "battereroff"
 	slot_flags = SLOT_BELT
 	var/open = FALSE
 	var/obj/item/cell/power_cell = /obj/item/cell/high
 	var/shield_type = /obj/aura/personal_shield/device
-	var/shield_power_cost = 1000
+	var/shield_power_cost = 500
 	var/obj/aura/personal_shield/device/shield
 
-	VAR_PRIVATE/currently_stored_power = 0
-	VAR_PRIVATE/max_stored_power = 3000
+	VAR_PRIVATE/currently_stored_power = 5000
+	VAR_PRIVATE/max_stored_power = 5000
 	VAR_PRIVATE/restored_power_per_tick = 5
 	VAR_PRIVATE/enable_when_powered = FALSE
 

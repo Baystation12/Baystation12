@@ -1,5 +1,5 @@
 /datum/job/liaison
-	title = "Workplace Liaison"
+	title = "Displaced Noble"
 	department = "Support"
 	department_flag = SPT
 	total_positions = 1
@@ -9,12 +9,6 @@
 	economic_power = 18
 	minimal_player_age = 0
 	minimum_character_age = list(SPECIES_HUMAN = 25)
-	alt_titles = list(
-		"Corporate Liaison",
-		"Union Representative",
-		"Corporate Representative",
-		"Corporate Executive"
-		)
 	outfit_type = /singleton/hierarchy/outfit/job/torch/passenger/workplace_liaison
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)

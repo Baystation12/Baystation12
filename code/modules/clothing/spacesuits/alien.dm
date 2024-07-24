@@ -85,7 +85,7 @@
 	desc = "An almost organic looking nonhuman pressure suit."
 
 /obj/item/clothing/suit/space/vox/raider
-	name = "advanced alien armour"
+	name = "advanced Fosh armour"
 	icon_state = "vox-raider"
 	desc = "A sleek, greyish suit of armor over a tight bodysuit. Lighter than it looks."
 	allowed = list(/obj/item/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/melee/baton,/obj/item/melee/energy/sword,/obj/item/handcuffs,/obj/item/tank,/obj/item/storage/toolbox,/obj/item/storage/briefcase/inflatable,/obj/item/inflatable_dispenser,/obj/item/rcd)
@@ -101,7 +101,7 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 
 /obj/item/clothing/head/helmet/space/vox/raider
-	name = "advanced alien helmet"
+	name = "advanced Fosh helmet"
 	icon_state = "vox-raider"
 	desc = "A tight-fitting, beaked mask with three menacing eyeslits."
 	armor = list(

@@ -85,19 +85,15 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/mining
-	title = "Prospector"
+	title = "Mercenary"
 	department = "Supply"
 	department_flag = SUP
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 4
+	spawn_positions = 4
 	supervisors = "the Deck Chief"
 	economic_power = 7
 	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 25
-	alt_titles = list(
-		"Drill Technician",
-		"Shaft Miner",
-		"Salvage Technician")
 	min_skill = list( // 3 points
 		SKILL_HAULING = SKILL_TRAINED, // 2 points
 		SKILL_EVA = SKILL_BASIC // 1 point

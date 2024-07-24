@@ -1,9 +1,9 @@
 /obj/item/projectile/bullet
 	name = "bullet"
-	icon_state = "bullet"
+	icon_state = "laser"
 	fire_sound = null
 	damage = 50
-	damage_type = DAMAGE_BRUTE
+	damage_type = DAMAGE_BURN
 	damage_flags = DAMAGE_FLAG_BULLET | DAMAGE_FLAG_SHARP
 	embed = TRUE
 	penetration_modifier = 1.0
@@ -125,11 +125,11 @@
 /* short-casing projectiles, like the kind used in pistols or SMGs */
 
 /obj/item/projectile/bullet/pistol
-	damage = 45
+	damage = 30
 	distance_falloff = 3
 
 /obj/item/projectile/bullet/pistol/holdout
-	damage = 40
+	damage = 30
 	penetration_modifier = 1.2
 	distance_falloff = 4
 

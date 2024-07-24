@@ -4,5 +4,6 @@
 	selection_options = list(
 		"Standard Pilot's Helmet" = /obj/item/clothing/head/helmet/solgov/pilot,
 		"Corporate Pilot's Helmet" = /obj/item/clothing/head/helmet/nt/pilot,
-		"Fleet Pilot's Helmet" = /obj/item/clothing/head/helmet/solgov/pilot/fleet
+		"Fleet Pilot's Helmet" = /obj/item/clothing/head/helmet/solgov/pilot/fleet,
+		"Clone Pilot's Helmet" = /obj/item/clothing/head/helmet/solgov/pilot/fleet/clone
 	)

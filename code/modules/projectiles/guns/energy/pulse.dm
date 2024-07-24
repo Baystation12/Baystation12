@@ -35,8 +35,8 @@
 	accuracy = 0
 
 /obj/item/gun/energy/pulse_rifle/pistol
-	name = "pulse pistol"
-	desc = "A weapon that uses advanced pulse-based beam generation technology to emit powerful laser blasts. Even smaller than the carbine."
+	name = "heavy blaster pistol"
+	desc = "The DL-44 heavy blaster pistol. Often seen in special use by high ranking Republic officers. Not often seen in use by those of the Psidi Order - but in desperate times.."
 	icon = 'icons/obj/guns/pulse_pistol.dmi'
 	icon_state = "pulse_pistol"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
@@ -57,8 +57,8 @@
 	has_safety = FALSE
 
 /obj/item/gun/energy/pulse_rifle/destroyer
-	name = "pulse destroyer"
-	desc = "A heavy-duty, pulse-based energy weapon. Because of its complexity and cost, it is rarely seen in use except by specialists."
+	name = "heavy blaster carbine"
+	desc = "An uncommon DLT-19 heavy blaster rifle, often seen in use by Clone Commanders. A rather recent addition to the arsenal."
 	cell_type = /obj/item/cell/super
 	fire_delay = 25
 	projectile_type=/obj/item/projectile/beam/pulse/destroy
@@ -68,12 +68,12 @@
 	to_chat(user, SPAN_WARNING("[src.name] has three settings, and they are all DESTROY."))
 
 /obj/item/gun/energy/pulse_rifle/skrell
-	name = "skrellian carbine"
-	icon = 'icons/obj/guns/skrell_carbine.dmi'
-	icon_state = "skrell_carbine"
-	item_state = "skrell_carbine"
+	name = "blaster carbine"
+	icon = 'icons/obj/guns/freezegun.dmi'
+	icon_state = "freezegun"
+	item_state = "freezegun"
 	slot_flags = SLOT_BACK|SLOT_BELT
-	desc = "The Vuu'Xqu*ix T-3, known as 'VT-3' by SolGov. Rarely seen out in the wild by anyone outside of a Skrellian SDTF."
+	desc = "A DC-15A blaster carbine, in regular use by Republic Clone Troopers."
 	cell_type = /obj/item/cell/high
 	self_recharge = 1
 	move_delay = 2
@@ -82,7 +82,7 @@
 	one_hand_penalty = 3
 	burst=1
 	burst_delay=null
-	wielded_item_state = "skrell_carbine-wielded"
+	wielded_item_state = "freezegun-wielded"
 	accuracy = 1
 
 	firemodes = list(

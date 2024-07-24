@@ -24,7 +24,7 @@
 	)
 
 /obj/structure/closet/secure_closet/pathfinder
-	name = "pathfinder's locker"
+	name = "clone commander's locker"
 	req_access = list(access_pathfinder)
 	closet_appearance = /singleton/closet_appearance/secure_closet/torch/exploration/pathfinder
 
@@ -39,6 +39,7 @@
 		/obj/item/taperoll/research,
 		/obj/item/material/hatchet/machete/deluxe,
 		/obj/item/storage/belt/holster/machete,
+		/obj/item/storage/belt/holster/security/tactical,
 		/obj/item/shuttle_beacon,
 		/obj/item/clothing/accessory/storage/webbing_large,
 		/obj/item/device/taperecorder,
@@ -52,11 +53,19 @@
 		/obj/item/clothing/accessory/buddy_tag,
 		/obj/item/storage/firstaid/light,
 		/obj/item/storage/backpack/dufflebag,
-		/obj/item/device/flashlight/flare
+		/obj/item/device/flashlight/flare,
+		/obj/item/gun/energy/gun/skrell,
+		/obj/item/grenade/frag = 4,
+		/obj/item/clothing/suit/armor/laserproof,
+		/obj/item/clothing/head/helmet/ablative,
+		/obj/item/gun/energy/pulse_rifle/destroyer,
+		/obj/item/gun/energy/sniperrifle,
+		/obj/item/gun/projectile/automatic/minigun,
+		/obj/item/ammo_magazine/box/minigun = 3
 	)
 
 /obj/structure/closet/secure_closet/explorer
-	name = "explorer's locker"
+	name = "clone trooper's locker"
 	req_access = list(access_explorer)
 	closet_appearance = /singleton/closet_appearance/secure_closet/torch/exploration
 
@@ -66,6 +75,7 @@
 		/obj/item/device/gps,
 		/obj/item/taperoll/research,
 		/obj/item/storage/belt/holster/machete,
+		/obj/item/storage/belt/holster/security/tactical,
 		/obj/item/shuttle_beacon,
 		/obj/item/clothing/accessory/storage/webbing_large,
 		/obj/item/device/scanner/gas,
@@ -77,11 +87,17 @@
 		/obj/item/material/knife/folding/swiss/explorer,
 		/obj/item/device/camera,
 		/obj/item/storage/backpack/dufflebag,
-		/obj/item/device/flashlight/flare
+		/obj/item/device/flashlight/flare,
+		/obj/item/gun/energy/gun/skrell,
+		/obj/item/gun/energy/pulse_rifle/skrell,
+		/obj/item/grenade/frag = 2,
+		/obj/item/clothing/suit/armor/laserproof,
+		/obj/item/clothing/head/helmet/ablative,
+		/obj/item/clothing/accessory/helmet_cover/clone
 	)
 
 /obj/structure/closet/secure_closet/pilot
-	name = "pilot's locker"
+	name = "clone pilot's locker"
 	req_access = list(access_pilot)
 	closet_appearance = /singleton/closet_appearance/secure_closet/torch/exploration/pilot
 
@@ -90,6 +106,7 @@
 		/obj/item/device/radio,
 		/obj/item/device/gps,
 		/obj/item/storage/belt/utility/full,
+		/obj/item/storage/belt/holster/security/tactical,
 		/obj/item/shuttle_beacon,
 		/obj/item/clothing/accessory/storage/webbing_large,
 		/obj/item/device/scanner/gas,
@@ -98,9 +115,12 @@
 		/obj/item/device/binoculars,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/suit/storage/hazardvest/blue,
-		/obj/item/selection/pilot_helmet,
+		/obj/item/clothing/head/helmet/solgov/pilot/fleet/clone,
 		/obj/item/storage/firstaid/light,
 		/obj/item/material/knife/folding/swiss/explorer,
 		/obj/item/storage/backpack/dufflebag,
-		/obj/item/device/flashlight/flare
+		/obj/item/device/flashlight/flare,
+		/obj/item/gun/energy/gun/skrell,
+		/obj/item/grenade/frag = 2,
+		/obj/item/clothing/suit/armor/laserproof
 	)

@@ -1,6 +1,6 @@
 /obj/item/gun/energy/laser
-	name = "laser carbine"
-	desc = "A Hephaestus Industries G40E carbine, designed to kill with concentrated energy blasts."
+	name = "blaster rifle"
+	desc = "A280 blaster rifles, often seen in use by non-Republic elements."
 	icon = 'icons/obj/guns/laser_carbine.dmi'
 	icon_state = "laser"
 	item_state = "laser"
@@ -130,8 +130,8 @@
 	fire_delay = 10
 
 /obj/item/gun/energy/sniperrifle
-	name = "marksman energy rifle"
-	desc = "The HI DMR 9E is an older design of Hephaestus Industries. A designated marksman rifle capable of shooting powerful ionized beams, this is a weapon to kill from a distance."
+	name = "blaster sniper rifle"
+	desc = "A DC-15x sniper rifle often wielded by Clone Sharpshooters."
 	icon = 'icons/obj/guns/laser_sniper.dmi'
 	icon_state = "sniper"
 	item_state = "laser"

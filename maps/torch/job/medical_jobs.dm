@@ -224,7 +224,7 @@
 	return "You are the Pharmacist. You make medicine and other useful substances. You are not a doctor or medic; you should not be treating patients, but rather providing the medicine to do so. You are subordinate to Physicians and Medical Technicians."
 
 /datum/job/psychiatrist
-	title = "Counselor"
+	title = "Psidi Healer"
 	total_positions = 1
 	spawn_positions = 1
 	ideal_character_age = 40
@@ -233,11 +233,6 @@
 	minimal_player_age = 0
 	supervisors = "the Chief Medical Officer"
 	outfit_type = /singleton/hierarchy/outfit/job/torch/crew/medical/counselor
-	alt_titles = list(
-		"Psychiatrist",
-		"Psychologist",
-		"Mentalist"
-	)
 
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
