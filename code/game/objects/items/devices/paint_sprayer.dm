@@ -83,7 +83,6 @@
 /obj/item/device/paint_sprayer/on_update_icon()
 	ClearOverlays()
 	AddOverlays(overlay_image(icon, "paint_sprayer_color", paint_color))
-	update_held_icon()
 
 /obj/item/device/paint_sprayer/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
