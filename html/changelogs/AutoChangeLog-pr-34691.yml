@@ -1,0 +1,7 @@
+author: SierraKomodo
+changes:
+  - {bugfix: Broken emags now retain all fingerprint and fibre information from their
+      unbroken form.}
+  - {tweak: Broken emags now remain in your hand instead of dropping to the floor.}
+  - {tweak: Hacking tools no longer act as multi tools while enabled.}
+delete-after: true
