@@ -37,7 +37,6 @@
 	else
 		wielded = 0
 		force = force_unwielded
-	update_icon()
 	..()
 
 /obj/item/material/twohanded/update_force()

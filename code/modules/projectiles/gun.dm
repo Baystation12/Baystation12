@@ -139,11 +139,6 @@
 	if(scope_zoom)
 		verbs += /obj/item/gun/proc/scope
 
-/obj/item/gun/update_twohanding()
-	if(one_hand_penalty)
-		update_icon() // In case item_state is set somewhere else.
-	..()
-
 /obj/item/gun/on_update_icon()
 	var/mob/living/M = loc
 	ClearOverlays()
