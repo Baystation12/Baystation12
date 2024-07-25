@@ -127,13 +127,13 @@
 		)
 
 /obj/item/gun/projectile/automatic/assault_rifle/on_update_icon()
-	..()
 	if(ammo_magazine)
 		icon_state = "arifle"
 		wielded_item_state = "arifle-wielded"
 	else
 		icon_state = "arifle-empty"
 		wielded_item_state = "arifle-wielded-empty"
+	..()
 
 /obj/item/gun/projectile/automatic/sec_smg
 	name = "submachine gun"
