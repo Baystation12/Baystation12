@@ -56,15 +56,16 @@
 		GLOB.destroyed_event.unregister(buffer_object, src)
 		buffer_object = null
 
-/obj/item/device/multitool/resolve_attackby(atom/A, mob/user, params)
-	if(!isobj(A))
+
+/obj/item/device/multitool/use_before(atom/target, mob/living/user, click_parameters)
+	if (!isobj(target))
 		return ..()
 
-	var/obj/O = A
-	var/datum/extension/interactive/multitool/MT = get_extension(O, /datum/extension/interactive/multitool)
-	if(!MT)
+	var/obj/target_obj = target
+	var/datum/extension/interactive/multitool/multiool_interaction = get_extension(target_obj, /datum/extension/interactive/multitool)
+	if (!multiool_interaction)
 		return ..()
 
 	user.AddTopicPrint(src)
-	MT.interact(src, user)
-	return 1
+	multiool_interaction.interact(src, user)
+	return TRUE

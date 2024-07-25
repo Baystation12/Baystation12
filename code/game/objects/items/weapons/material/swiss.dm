@@ -102,19 +102,28 @@
 /obj/item/material/knife/folding/swiss/IsHatchet()
 	return active_tool == SWISSKNF_WBLADE
 
-/obj/item/material/knife/folding/swiss/resolve_attackby(obj/target, mob/user)
-	if((istype(target, /obj/structure/window) || istype(target, /obj/structure/grille)) && active_tool == SWISSKNF_GBLADE)
-		force = force * 8
-		. = ..()
-		update_force()
-		return
-	if(istype(target, /obj/item))
-		if(target.w_class <= ITEM_SIZE_HUGE)
+
+/obj/item/material/knife/folding/swiss/use_before(atom/target, mob/living/user, click_parameters)
+	// Damage increase for windows and grilles
+	if (active_tool == SWISSKNF_GBLADE && (istype(target, /obj/structure/window) || istype(target, /obj/structure/grille)))
+		force *= 8
+
+	// Allow usage on huge or smaller items
+	if (isitem(target))
+		var/obj/item/target_item = target
+		if (target_item.w_class <= ITEM_SIZE_HUGE)
 			can_use_tools = TRUE
-			. = ..()
-			can_use_tools = FALSE
-			return
+
 	return ..()
+
+
+/obj/item/material/knife/folding/swiss/use_after(atom/target, mob/living/user, click_parameters)
+	// Reset per-use vars
+	update_force()
+	can_use_tools = FALSE
+
+	return ..()
+
 
 /obj/item/material/knife/folding/swiss/officer
 	name = "officer's combi-knife"

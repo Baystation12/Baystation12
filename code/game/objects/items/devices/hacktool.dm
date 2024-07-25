@@ -38,14 +38,18 @@
 	return ..()
 
 
-/obj/item/device/multitool/hacktool/resolve_attackby(atom/A, mob/user)
+/obj/item/device/multitool/hacktool/use_before(atom/target, mob/living/user, click_parameters)
 	sanity_check()
 
-	if(!in_hack_mode || !attempt_hack(user, A)) //will still show the unable to hack message, oh well
+	if (!in_hack_mode)
 		return ..()
 
-	A.ui_interact(user, state = hack_state)
-	return 1
+	if (!attempt_hack(user, target))
+		return TRUE
+
+	target.ui_interact(user, state = hack_state)
+	return TRUE
+
 
 /obj/item/device/multitool/hacktool/proc/attempt_hack(mob/user, atom/target)
 	if(is_hacking)
