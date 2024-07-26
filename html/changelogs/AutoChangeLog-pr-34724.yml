@@ -1,4 +1,0 @@
-author: Sbotkin
-changes:
-  - {tweak: Envelopes and folders are shreddable.}
-delete-after: true
