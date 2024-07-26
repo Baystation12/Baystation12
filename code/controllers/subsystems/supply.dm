@@ -169,16 +169,16 @@ SUBSYSTEM_DEF(supply)
 				callHook("sell_animal", list(SC, subarea))
 				if (SC.contained)
 					var/mob/living/simple_animal/CA = SC.contained
-					if (istype(CA, /mob/living/simple_animal/hostile/human)) // Centcomm's not running a prison service
+					if (istype(CA, /mob/living/simple_animal/hostile/human))
 						continue
 					if (istype(CA, /mob/living/simple_animal/hostile))
 						points_per_animal *= 2
-					if (istype(CA, /mob/living/simple_animal/hostile/retaliate/beast)) // Exoplanet life gives more
+					if (istype(CA, /mob/living/simple_animal/hostile/retaliate/beast))
 						points_per_animal *= 2
 					if (CA.stat != DEAD) //Alive gives more.
 						points_per_animal *= 2
 
-					qdel(SC.contained) // Stop the mob coming back on the next shuttle
+					qdel(SC.contained)
 					add_points_from_source(points_per_animal, "animal")
 
 			qdel(AM)
