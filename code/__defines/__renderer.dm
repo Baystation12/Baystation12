@@ -73,6 +73,7 @@
 	#define MOUSETRAP_LAYER             2.12
 	#define PLANT_LAYER                 2.13
 	#define AO_LAYER                    2.14
+	#define ABOVE_AO_LAYER              2.141
 	//HIDING MOB
 	#define HIDING_MOB_LAYER            2.15
 	#define SHALLOW_FLUID_LAYER         2.16

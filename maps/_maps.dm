@@ -52,3 +52,4 @@ GLOBAL_DATUM_INIT(using_map, /datum/map, new using_map_DATUM)
 #include "random_ruins\exoplanet_ruins\crashed_shuttle\crashed_shuttle.dm"
 #include "random_ruins\exoplanet_ruins\skrell_biodome\skrell_biodome.dm"
 #include "random_ruins\space_ruins\space_ruins.dm"
+#include "map_tools_showcase\portal_showcase.dm"
