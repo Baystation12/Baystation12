@@ -27,6 +27,7 @@ SUBSYSTEM_DEF(supply)
 		"crate" = "From exported crates",
 		"gep" = "From uploaded good explorer points",
 		"anomaly" = "From scanned and categorized anomalies",
+		"animal" = "From captured exotic alien fauna",
 		"total" = "Total" // If you're adding additional point sources, add it here in a new line. Don't forget to put a comma after the old last line.
 	)
 
@@ -121,10 +122,11 @@ SUBSYSTEM_DEF(supply)
 			// Sell artefacts (in anomaly cages)
 			if (istype(AM, /obj/machinery/anomaly_container))
 				var/obj/machinery/anomaly_container/AC = AM
+				var/points_per_anomaly = 10
 				callHook("sell_anomalycage", list(AC, subarea))
 				if (AC.contained)
 					var/obj/machinery/artifact/C = AC.contained
-					var/list/my_effects
+					var/list/my_effects = list()
 					if (C.my_effect)
 						var/datum/artifact_effect/eone = C.my_effect
 						my_effects += eone
@@ -140,25 +142,25 @@ SUBSYSTEM_DEF(supply)
 								for (var/datum/artifact_effect/E in my_effects)
 									switch (E.effect_type)
 										if (EFFECT_UNKNOWN, EFFECT_PSIONIC)
-											points += 20
+											points_per_anomaly += 10
 										if (EFFECT_ENERGY, EFFECT_ELECTRO)
-											points += 30
+											points_per_anomaly += 20
 										if (EFFECT_ORGANIC, EFFECT_SYNTH)
-											points += 40
+											points_per_anomaly += 30
 										if (EFFECT_BLUESPACE, EFFECT_PARTICLE)
-											points += 50
+											points_per_anomaly += 40
 										else
-											points += 10
+											points_per_anomaly += 10
 											//In case there's ever a broken artifact, it's still worth SOMETHING
 									switch (E.trigger.trigger_type)
 										if (TRIGGER_SIMPLE)
-											points += 5
+											points_per_anomaly += 5
 										if (TRIGGER_COMPLEX)
-											points += 10
+											points_per_anomaly += 10
 										else
-											points += 2
+											points_per_anomaly += 2
 
-				add_points_from_source(points, "anomaly")
+								add_points_from_source(points_per_anomaly, "anomaly")
 
 			//Only for animals in stasis cages.
 			if (istype(AM, /obj/machinery/stasis_cage))
@@ -167,17 +169,17 @@ SUBSYSTEM_DEF(supply)
 				callHook("sell_animal", list(SC, subarea))
 				if (SC.contained)
 					var/mob/living/simple_animal/CA = SC.contained
-					if (istype(CA, /mob/living/simple_animal/hostile/human))
-						return
-					if (istype(CA, /mob/living/simple_animal/passive))
-						add_points_from_source(points_per_animal, "animal")
-					if (istype(CA, /mob/living/simple_animal/hostile/retaliate/beast))
-						add_points_from_source((points_per_animal * 2), "animal")
-						return //So that it doesn't give points twice for beasts
+					if (istype(CA, /mob/living/simple_animal/hostile/human)) // Centcomm's not running a prison service
+						continue
 					if (istype(CA, /mob/living/simple_animal/hostile))
-						add_points_from_source((points_per_animal * 4), "animal")
+						points_per_animal *= 2
+					if (istype(CA, /mob/living/simple_animal/hostile/retaliate/beast)) // Exoplanet life gives more
+						points_per_animal *= 2
 					if (CA.stat != DEAD) //Alive gives more.
-						add_points_from_source((point_sources["animal"] * 2), "animal")
+						points_per_animal *= 2
+
+					qdel(SC.contained) // Stop the mob coming back on the next shuttle
+					add_points_from_source(points_per_animal, "animal")
 
 			qdel(AM)
 
