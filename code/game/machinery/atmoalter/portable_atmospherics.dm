@@ -155,7 +155,7 @@
 /obj/machinery/portable_atmospherics/powered/components_are_accessible(path)
 	return panel_open
 
-/obj/machinery/portable_atmospherics/proc/log_open()
+/obj/machinery/portable_atmospherics/proc/log_open(mob/user)
 	if(length(air_contents.gas) == 0)
 		return
 
@@ -165,7 +165,7 @@
 			gases += ", [gas]"
 		else
 			gases = gas
-	log_and_message_admins("opened [src.name], containing [gases].")
+	log_and_message_admins("opened [src.name], containing [gases].", user)
 
 /obj/machinery/portable_atmospherics/powered/dismantle()
 	if(isturf(loc))

@@ -29,7 +29,7 @@
 		var/move_duration = input(user, "How many seconds will this jump take?") as num
 
 		S.long_jump(destination, transition, move_duration)
-		log_and_message_admins("has initiated a jump to [destination] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[destination.x];Y=[destination.y];Z=[destination.z]'>JMP</a>) lasting [move_duration] seconds in transit at [transition] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[transition.x];Y=[transition.y];Z=[transition.z]'>JMP</a>) for the [shuttle_tag] shuttle")
+		log_and_message_admins("has initiated a jump to [destination] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[destination.x];Y=[destination.y];Z=[destination.z]'>JMP</a>) lasting [move_duration] seconds in transit at [transition] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[transition.x];Y=[transition.y];Z=[transition.z]'>JMP</a>) for the [shuttle_tag] shuttle", user)
 	else
 		S.short_jump(destination)
-		log_and_message_admins("has initiated a jump to [destination] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[destination.x];Y=[destination.y];Z=[destination.z]'>JMP</a>) for the [shuttle_tag] shuttle")
+		log_and_message_admins("has initiated a jump to [destination] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[destination.x];Y=[destination.y];Z=[destination.z]'>JMP</a>) for the [shuttle_tag] shuttle", user)

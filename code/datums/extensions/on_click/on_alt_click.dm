@@ -24,7 +24,7 @@
 		return FALSE
 
 	call(living_holder, death_proc)()
-	log_and_message_admins("killed [key_name]")
+	log_and_message_admins("killed [key_name]", user)
 
 	return TRUE
 

@@ -74,7 +74,7 @@
 	if((round_duration_in_ticks >= next_wave) && (alert_sent == 1))
 		on_enter_field()
 	if((round_duration_in_ticks >= METEOR_FAILSAFE_THRESHOLD) && (meteor_severity < 15) && !failsafe_triggered)
-		log_and_message_admins("Meteor mode severity failsafe triggered: Severity forced to 15.")
+		log_and_message_admins("Meteor mode severity failsafe triggered: Severity forced to 15.", null)
 		meteor_severity = 15
 		failsafe_triggered = 1
 
@@ -88,7 +88,7 @@
 			meteor_severity++
 			escalated = TRUE
 		if(send_admin_broadcasts)
-			log_and_message_admins("Meteor: Wave fired. Escalation: [escalated ? "Yes" : "No"]. Severity: [meteor_severity]/[maximal_severity]")
+			log_and_message_admins("Meteor: Wave fired. Escalation: [escalated ? "Yes" : "No"]. Severity: [meteor_severity]/[maximal_severity]",  null)
 
 /datum/game_mode/meteor/proc/get_meteor_types()
 	switch(meteor_severity)

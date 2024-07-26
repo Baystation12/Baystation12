@@ -133,7 +133,7 @@
 		fabricator = all_fabricators[choice]
 
 	if(user && fabricator && !(!fabricator.is_powered() || !fabricator.produce_drones || fabricator.drone_progress < 100))
-		log_and_message_admins("has joined the round as a maintenance drone.")
+		log_and_message_admins("has joined the round as a maintenance drone.", user)
 		var/mob/drone = fabricator.create_drone(user.client)
 		if(drone)
 			drone.status_flags |= NO_ANTAG

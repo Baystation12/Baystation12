@@ -120,10 +120,10 @@
 	playsound(loc, 'sound/items/countdown.ogg', 75, 1, -3)
 	if(ismob(imp_in))
 		imp_in.audible_message(SPAN_WARNING("Something beeps inside [imp_in][part ? "'s [part.name]" : ""]!"))
-		log_and_message_admins("Explosive implant triggered in [imp_in] ([imp_in.key]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[imp_in.x];Y=[imp_in.y];Z=[imp_in.z]'>JMP</a>) ")
+		log_and_message_admins("Explosive implant triggered in [imp_in] ([imp_in.key])", null, imp_in)
 	else
 		audible_message(SPAN_WARNING("[src] beeps omniously!"))
-		log_and_message_admins("Explosive implant triggered in [T.loc]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>) ")
+		log_and_message_admins("Explosive implant triggered in [T.loc]", null, imp_in)
 
 	if(!elevel)
 		elevel = "Full Explosion"

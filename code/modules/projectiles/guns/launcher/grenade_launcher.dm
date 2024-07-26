@@ -99,7 +99,7 @@
 	return chambered
 
 /obj/item/gun/launcher/grenade/handle_post_fire(mob/user)
-	log_and_message_admins("fired a grenade ([chambered.name]) from a grenade launcher.")
+	log_and_message_admins("fired a grenade ([chambered.name]) from a grenade launcher.", user)
 
 	chambered = null
 	..()

@@ -1038,4 +1038,4 @@ Ccomp's first proc.
 			S.shuttle_tag = name
 			S.name = "[name] Control Console"
 
-	log_and_message_admins("renamed \the [original_name] ship to [name].", )
+	log_and_message_admins("renamed \the [original_name] ship to [name].")

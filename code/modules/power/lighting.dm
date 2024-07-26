@@ -880,7 +880,7 @@
 				SPAN_DANGER("\The [src] flares brilliantly!"),
 				SPAN_DANGER("You hear a loud crack!")
 			)
-			log_and_message_admins("Rigged light explosion, last touched by [fingerprintslast]")
+			log_and_message_admins("Rigged light explosion, last touched by [fingerprintslast]", null, src)
 			var/turf/T = get_turf(loc)
 			set_status(LIGHT_BROKEN)
 			addtimer(new Callback(GLOBAL_PROC, /proc/explosion, T, 3, EX_ACT_LIGHT), 0.5 SECONDS)

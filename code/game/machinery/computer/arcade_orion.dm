@@ -187,7 +187,7 @@
 				event_desc = "You and your crew were killed on the way to Orion, your ship left abandoned for scavengers to find."
 				next_event = ORION_TRAIL_GAMEOVER
 			if(port == 9)
-				win()
+				win(user)
 				return TOPIC_REFRESH
 			var/travel = min(rand(1000,10000),distance)
 			if(href_list["fix"])
@@ -461,11 +461,11 @@
 		newgame(1)
 		src.updateUsrDialog()
 
-/obj/machinery/computer/arcade/orion_trail/proc/win()
+/obj/machinery/computer/arcade/orion_trail/proc/win(mob/user)
 	src.visible_message("\The [src] plays a triumpant tune, stating 'CONGRATULATIONS, YOU HAVE MADE IT TO ORION.'")
 	if(emagged)
 		new /obj/item/orion_ship(src.loc)
-		log_and_message_admins("made it to Orion on an emagged machine and got an explosive toy ship.")
+		log_and_message_admins("made it to Orion on an emagged machine and got an explosive toy ship.", user)
 	else
 		prizevend()
 	event = null

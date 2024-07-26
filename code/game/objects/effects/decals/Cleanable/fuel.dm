@@ -27,7 +27,7 @@
 
 /obj/decal/cleanable/liquid_fuel/Initialize(mapload, amt=1, nologs=FALSE)
 	if(!nologs && !mapload)
-		log_and_message_admins(" - Liquid fuel has been spilled in [get_area(loc)]", location = loc)
+		log_and_message_admins(" - Liquid fuel has been spilled in [get_area(loc)].", user = null, location = loc)
 	src.amount = amt
 	var/has_spread = 0
 	//Be absorbed by any other liquid fuel in the tile.

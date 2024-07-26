@@ -85,7 +85,7 @@
 		to_chat(user, "Escape procedures already in progress.")
 		return
 	if (evacuation_controller.call_evacuation(user, 1))
-		log_and_message_admins("[user? key_name(user) : "Autotransfer"] has initiated abandonment of the spacecraft.")
+		log_and_message_admins("has initiated abandonment of the spacecraft.", user)
 
 /datum/evacuation_option/bluespace_jump
 	option_text = "Initiate bluespace jump"
@@ -107,7 +107,7 @@
 		to_chat(user, "Jump preparation already in progress.")
 		return
 	if (evacuation_controller.call_evacuation(user, 0))
-		log_and_message_admins("[user? key_name(user) : "Autotransfer"] has initiated bluespace jump preparation.")
+		log_and_message_admins("has initiated bluespace jump preparation.", user)
 
 /datum/evacuation_option/cancel_abandon_ship
 	option_text = "Cancel abandonment"
@@ -118,7 +118,7 @@
 
 /datum/evacuation_option/cancel_abandon_ship/execute(mob/user)
 	if (evacuation_controller && evacuation_controller.cancel_evacuation())
-		log_and_message_admins("[key_name(user)] has cancelled abandonment of the spacecraft.")
+		log_and_message_admins("has cancelled abandonment of the spacecraft.", user)
 
 /datum/evacuation_option/cancel_bluespace_jump
 	option_text = "Cancel bluespace jump"
@@ -129,7 +129,7 @@
 
 /datum/evacuation_option/cancel_bluespace_jump/execute(mob/user)
 	if (evacuation_controller && evacuation_controller.cancel_evacuation())
-		log_and_message_admins("[key_name(user)] has cancelled the bluespace jump.")
+		log_and_message_admins("has cancelled the bluespace jump.", user)
 
 #undef EVAC_OPT_ABANDON_SHIP
 #undef EVAC_OPT_BLUESPACE_JUMP
