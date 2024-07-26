@@ -5,7 +5,7 @@
 	icon_state = "xenoarch_console"
 	anchored = TRUE
 	density = TRUE
-	var/scan_in_progress = 0
+	var/scan_in_progress = FALSE
 	var/scan_num = 0
 	var/obj/scanned_obj
 	var/obj/machinery/artifact_scanpad/owned_scanner = null
@@ -17,6 +17,10 @@
 /obj/machinery/artifact_analyser/Initialize()
 	. = ..()
 	sync_with_pad()
+
+/obj/machinery/artifact_analyser/Destroy()
+	stop_scanning()
+	return ..()
 
 /obj/machinery/artifact_analyser/proc/reconnect_scanner()
 	//connect to a nearby scanner pad
@@ -58,9 +62,6 @@
 
 /obj/machinery/artifact_analyser/Process()
 	if(scan_in_progress && world.time > scan_completion_time)
-		scan_in_progress = 0
-		updateDialog()
-
 		var/results = ""
 		if(!owned_scanner)
 			reconnect_scanner()
@@ -81,36 +82,43 @@
 		P.queue_icon_update()
 		P.is_copy = FALSE
 
-		if(scanned_object && istype(scanned_object, /obj/machinery/artifact))
-			var/obj/machinery/artifact/A = scanned_object
-			A.anchored = FALSE
-			A.being_used = 0
-			scanned_object = null
+		stop_scanning()
+		updateDialog()
+
+/obj/machinery/artifact_analyser/proc/stop_scanning()
+	scan_in_progress = FALSE
+	if(!scanned_object)
+		return
+	if(istype(scanned_object, /obj/machinery/artifact))
+		var/obj/machinery/artifact/artifact = scanned_object
+		artifact.anchored = FALSE
+		artifact.being_used = FALSE
+	scanned_object = null
 
 /obj/machinery/artifact_analyser/OnTopic(user, href_list)
 	if(href_list["begin_scan"])
 		if(!owned_scanner)
 			reconnect_scanner()
 		if(owned_scanner)
-			var/artifact_in_use = 0
+			var/artifact_in_use = FALSE
 			for(var/obj/O in owned_scanner.loc)
 				if(O == owned_scanner)
 					continue
 				if(O.invisibility)
 					continue
 				if(istype(O, /obj/machinery/artifact))
-					var/obj/machinery/artifact/A = O
-					if(A.being_used)
-						artifact_in_use = 1
+					var/obj/machinery/artifact/artifact = O
+					if(artifact.being_used)
+						artifact_in_use = TRUE
 					else
-						A.anchored = TRUE
-						A.being_used = 1
+						artifact.anchored = TRUE
+						artifact.being_used = TRUE
 
 				if(artifact_in_use)
 					src.visible_message("<b>[name]</b> states, \"Cannot scan. Too much interference.\"")
 				else
 					scanned_object = O
-					scan_in_progress = 1
+					scan_in_progress = TRUE
 					scan_completion_time = world.time + scan_duration
 					src.visible_message("<b>[name]</b> states, \"Scanning begun.\"")
 				break
@@ -118,7 +126,7 @@
 				src.visible_message("<b>[name]</b> states, \"Unable to isolate scan target.\"")
 		. = TOPIC_REFRESH
 	else if(href_list["halt_scan"])
-		scan_in_progress = 0
+		stop_scanning()
 		src.visible_message("<b>[name]</b> states, \"Scanning halted.\"")
 		. = TOPIC_REFRESH
 	else if(href_list["syncpads"])
