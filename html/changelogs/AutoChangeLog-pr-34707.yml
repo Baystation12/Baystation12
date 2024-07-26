@@ -1,0 +1,4 @@
+author: Sbotkin
+changes:
+  - {bugfix: Artifacts no longer break on scan halting.}
+delete-after: true
