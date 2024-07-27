@@ -287,12 +287,6 @@
 		to_chat(user, SPAN_WARNING("\The [src]'s control panel looks fried."))
 
 
-/obj/machinery/door/set_broken(new_state)
-	. = ..()
-	if(. && new_state)
-		visible_message(SPAN_WARNING("\The [src.name] breaks!"))
-
-
 /obj/machinery/door/on_update_icon()
 	update_dir()
 	if(density)
