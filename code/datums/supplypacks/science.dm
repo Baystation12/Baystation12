@@ -87,3 +87,10 @@
 	contains = list(/obj/machinery/anomaly_container)
 	containertype = /obj/structure/largecrate
 	containername = "anomaly container crate"
+
+/singleton/hierarchy/supply_pack/science/stasiscage_crate
+	name = "Equipment - Stasis Cage"
+	cost = 20
+	contains = list(/obj/machinery/stasis_cage)
+	containertype = /obj/structure/largecrate
+	containername = "stasis cage crate"
