@@ -19,15 +19,6 @@
 	containername = "security armor crate"
 	access = access_security
 
-/singleton/hierarchy/supply_pack/security/solarmor
-	name = "Armor - Peacekeeper"
-	contains = list(/obj/item/clothing/suit/armor/pcarrier/blue/sol = 2,
-					/obj/item/clothing/head/helmet/solgov =2)
-	cost = 30
-	containertype = /obj/structure/closet/crate/secure
-	containername = "peacekeeper armor crate"
-	access = access_emergency_armory
-
 /singleton/hierarchy/supply_pack/security/comarmor
 	name = "Armor - Command"
 	contains = list(/obj/item/clothing/suit/armor/pcarrier/medium/command = 2,
@@ -36,24 +27,6 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "command armor crate"
 	access = access_heads
-
-/singleton/hierarchy/supply_pack/security/nanoarmor
-	name = "Armor - Corporate"
-	contains = list(/obj/item/clothing/suit/armor/pcarrier/medium/nt = 2,
-					/obj/item/clothing/head/helmet/nt/guard =2)
-	cost = 20
-	containertype = /obj/structure/closet/crate/secure
-	containername = "corporate armor crate"
-	access = access_nanotrasen
-
-/singleton/hierarchy/supply_pack/security/lightnanoarmor
-	name = "Armor - Corporate light"
-	contains = list(/obj/item/clothing/suit/armor/pcarrier/light/nt = 2,
-					/obj/item/clothing/head/helmet/nt/guard =2)
-	cost = 15
-	containertype = /obj/structure/closet/crate/secure
-	containername = "corporate light armor crate"
-	access = access_nanotrasen
 
 /singleton/hierarchy/supply_pack/security/pistol
 	name = "Weapons - Ballistic sidearms"

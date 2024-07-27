@@ -105,7 +105,7 @@
 /obj/machinery/door/blast/shutters{
 	dir = 2;
 	id_tag = "do_office";
-	name = "DO Office Shutters"
+	name = "privacy shutters"
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/deckchief)
@@ -4644,8 +4644,8 @@
 /obj/floor_decal/corner/brown{
 	dir = 5
 	},
-/obj/machinery/computer/guestpass{
-	pixel_y = 32
+/obj/structure/bed/chair/comfy/brown{
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/deckchief)
@@ -4962,6 +4962,9 @@
 "ru" = (
 /obj/floor_decal/corner/brown/half{
 	dir = 1
+	},
+/obj/machinery/computer/guestpass{
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/aft)
@@ -7698,9 +7701,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/security/hangcheck)
 "zM" = (
-/obj/structure/bed/chair/padded/brown{
-	dir = 8
-	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/deckchief)
 "zP" = (
@@ -12170,9 +12170,9 @@
 /obj/machinery/door/blast/shutters{
 	dir = 2;
 	id_tag = "do_office";
-	name = "DO Office Shutters"
+	name = "privacy shutters"
 	},
-/obj/wallframe_spawn/no_grille,
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/quartermaster/deckchief)
 "Pc" = (
@@ -12683,7 +12683,7 @@
 /area/crew_quarters/lounge)
 "Qu" = (
 /obj/structure/table/standard,
-/obj/item/device/megaphone,
+/obj/item/folder/envelope/dcorder,
 /turf/simulated/floor/tiled,
 /area/quartermaster/deckchief)
 "Qy" = (
@@ -13428,7 +13428,6 @@
 	pixel_x = 32
 	},
 /obj/random_multi/single_item/memo_supply,
-/obj/item/folder/envelope/dcorder,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/deckchief)
 "Sz" = (
@@ -13665,7 +13664,6 @@
 	pixel_x = -3;
 	pixel_y = 7
 	},
-/obj/random/clipboard,
 /obj/item/stamp/deckoff,
 /obj/item/pen{
 	pixel_x = 4;
@@ -13682,9 +13680,9 @@
 	pixel_y = 24
 	},
 /obj/floor_decal/corner/brown/mono,
-/obj/item/device/radio/intercom/department/security{
+/obj/item/device/radio/intercom{
 	dir = 8;
-	pixel_x = 21
+	pixel_x = 22
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/deckchief)
@@ -38893,7 +38891,7 @@ bx
 MI
 Vi
 vK
-qf
+xn
 PT
 Pj
 ZQ
@@ -39297,7 +39295,7 @@ gq
 SO
 WS
 au
-xn
+qf
 zM
 Ad
 Lx

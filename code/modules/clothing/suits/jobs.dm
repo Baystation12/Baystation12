@@ -176,7 +176,9 @@
 		/obj/item/tank/oxygen_emergency_extended,
 		/obj/item/tank/nitrogen_emergency,
 		/obj/item/clothing/mask/gas,
-		/obj/item/taperoll/engineering
+		/obj/item/taperoll/engineering,
+		/obj/item/clothing/head/deckcrew,
+		/obj/item/clothing/head/hardhat
 	)
 	body_parts_covered = UPPER_TORSO
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
