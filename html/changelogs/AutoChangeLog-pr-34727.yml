@@ -1,0 +1,5 @@
+author: sick trigger
+changes:
+  - {rscadd: Supply can purchase stasis cages}
+  - {bugfix: Fixes for selling artifacts and animals}
+delete-after: true
