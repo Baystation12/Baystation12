@@ -1,9 +1,0 @@
-author: SierraKomodo
-changes:
-  - {rscadd: 'Airlocks can now be further damaged after the panel breaks with a sufficiently
-      strong weapon, allowing you to fully break the airlock open by force instead
-      of prying it or (if the door was bolted at the time it broke) going through
-      the process of cutting through the bolts and cover.'}
-  - {rscadd: 'Fully broken doors can be dismantled with a welding tool, giving back
-      a small amount of resources.'}
-delete-after: true
