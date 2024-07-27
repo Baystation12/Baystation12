@@ -13,6 +13,11 @@
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
 		)
 
+/obj/item/gun/energy/taser/disposable
+	name = "disposable electrolaser"
+	desc = "The NT Mk30 NL is a small, low capacity gun used for non-lethal takedowns. This is a cheap, disposable model commonly issued to police forces to supplement their service weapons. It can switch between high and low intensity stun shots."
+	disposable = TRUE
+
 /obj/item/gun/energy/taser/carbine
 	name = "electrolaser carbine"
 	desc = "The NT Mk44 NL is a high capacity gun used for non-lethal takedowns. It can switch between high and low intensity stun shots."
