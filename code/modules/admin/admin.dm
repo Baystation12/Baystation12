@@ -90,6 +90,8 @@ var/global/floorIsLava = 0
 		<A HREF='?src=\ref[src];connections=\ref[M]'>Check Connections</A> |
 		<A HREF='?src=\ref[src];bans=\ref[M]'>Check Bans</A> |
 	"}
+	if (M.ckey)
+		body += {"<a target="_blank" href="https://www.byond.com/members/[M.ckey]">View Byond Account</a> | "}
 
 	if (!istype(M, /mob/new_player) && !istype(M, /mob/observer))
 		body += "<A HREF='?src=\ref[src];cryo=\ref[M]'>Cryo Character</A> | "
