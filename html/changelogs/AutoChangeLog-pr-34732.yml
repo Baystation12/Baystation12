@@ -1,7 +1,0 @@
-author: Sbotkin
-changes:
-  - {maptweak: 'Various changes to the supply department, most notable: DC office
-      and the warehouse lights.'}
-  - {tweak: Deck crew helmets and hardhats can be worn in the hazard vest's suit slot.}
-  - {tweak: Minor shuffles in the orderable goods.}
-delete-after: true
