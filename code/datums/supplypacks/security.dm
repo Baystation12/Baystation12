@@ -122,9 +122,16 @@
 	name = "Weapons - Security basic"
 	contains = list(/obj/item/device/flash = 4,
 					/obj/item/reagent_containers/spray/pepper = 4,
-					/obj/item/melee/baton/loaded = 4,
-					/obj/item/gun/energy/taser = 4)
-	cost = 50
+					/obj/item/melee/baton/loaded = 4)
+	cost = 30
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "weapons crate"
+	access = access_security
+
+/singleton/hierarchy/supply_pack/security/weapons
+	name = "Weapons - Disposable tasers"
+	contains = list(/obj/item/gun/energy/taser/disposable = 4)
+	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "weapons crate"
 	access = access_security

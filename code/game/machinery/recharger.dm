@@ -31,7 +31,7 @@
 			return TRUE
 		if (istype(G, /obj/item/gun/energy))
 			var/obj/item/gun/energy/E = G
-			if(E.self_recharge)
+			if(E.self_recharge || E.disposable)
 				to_chat(user, SPAN_NOTICE("You can't find a charging port on \the [E]."))
 				return TRUE
 		if(!G.get_cell())

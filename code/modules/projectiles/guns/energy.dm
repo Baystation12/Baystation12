@@ -14,6 +14,7 @@
 	var/projectile_type = /obj/item/projectile/beam/practice
 	var/modifystate
 	var/charge_meter = 1	//if set, the icon state will be chosen based on the current charge
+	var/disposable = FALSE //If set, this weapon cannot be recharged
 
 	//self-recharging
 	var/self_recharge = 0	//if set, the weapon will recharge itself
