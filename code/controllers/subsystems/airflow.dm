@@ -106,6 +106,14 @@ SUBSYSTEM_DEF(airflow)
 #undef CLEAR_OBJECT
 
 
+/datum/controller/subsystem/airflow/StartLoadingMap()
+	suspend()
+
+
+/datum/controller/subsystem/airflow/StopLoadingMap()
+	wake()
+
+
 /atom/movable/var/airflow_xo
 /atom/movable/var/airflow_yo
 /atom/movable/var/airflow_od

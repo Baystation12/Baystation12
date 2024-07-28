@@ -65,6 +65,11 @@ var/global/list/ventcrawl_machinery = list(
 		return carried_item.w_class <= ITEM_SIZE_NORMAL
 	return ..()
 
+/mob/living/simple_animal/is_allowed_vent_crawl_item(obj/item/carried_item)
+	if(get_natural_weapon() == carried_item)
+		return TRUE
+	return ..()
+
 /mob/living/proc/ventcrawl_carry()
 	for(var/atom/A in contents)
 		if(!is_allowed_vent_crawl_item(A))

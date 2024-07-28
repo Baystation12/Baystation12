@@ -269,6 +269,15 @@ Geometry processing completed in [(Uptime() - start_uptime)/10] seconds!
 		else if (MC_TICK_CHECK)
 			return
 
+
+/datum/controller/subsystem/air/StartLoadingMap()
+	suspend()
+
+
+/datum/controller/subsystem/air/StopLoadingMap()
+	wake()
+
+
 /datum/controller/subsystem/air/proc/add_zone(zone/z)
 	zones += z
 	z.name = "Zone [next_id++]"

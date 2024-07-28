@@ -4211,7 +4211,7 @@
 	bitesize = 2
 /obj/item/reagent_containers/food/snacks/venus/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/capsaicin = 5)
+	reagents.add_reagent(/datum/reagent/capsaicin, 5)
 
 /obj/item/reagent_containers/food/snacks/oort
 	name = "oort cloud rocks"
@@ -4225,7 +4225,7 @@
 	bitesize = 2
 /obj/item/reagent_containers/food/snacks/oort/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/frostoil = 5)
+	reagents.add_reagent(/datum/reagent/frostoil, 5)
 
 //weebo vend! So japanese it hurts
 
@@ -4255,7 +4255,7 @@
 	bitesize = 2
 /obj/item/reagent_containers/food/snacks/weebonuts/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/capsaicin = 1)
+	reagents.add_reagent(/datum/reagent/capsaicin, 1)
 	reagents.add_reagent(/datum/reagent/nutriment/groundpeanuts, 4)
 
 /obj/item/reagent_containers/food/snacks/chocobanana
