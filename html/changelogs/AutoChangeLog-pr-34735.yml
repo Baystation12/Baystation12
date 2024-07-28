@@ -1,0 +1,4 @@
+author: Spookerton
+changes:
+  - {admin: Added a "View Byond Account" link to player panel when the mob has a ckey.}
+delete-after: true
