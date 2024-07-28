@@ -1,0 +1,4 @@
+author: sick trigger
+changes:
+  - {rscadd: Plant potency affects the brightness of bioluminescent plants}
+delete-after: true
