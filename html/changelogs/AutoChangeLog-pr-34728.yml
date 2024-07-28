@@ -1,0 +1,6 @@
+author: Builder13
+changes:
+  - {bugfix: Fixed atmospherics for late loaded away sites.}
+  - {bugfix: Fixed ventcrawl for animals once they attacked somebody (example:borers).}
+  - {bugfix: Fixed a lack of the specific reagents for some of the snacks.}
+delete-after: true
