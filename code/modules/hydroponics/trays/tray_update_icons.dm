@@ -71,7 +71,8 @@
 
 	// Update bioluminescence.
 	if(seed && seed.get_trait(TRAIT_BIOLUM))
-		set_light(3, 0.5, l_color = seed.get_trait(TRAIT_BIOLUM_COLOUR))
+		var/biolum_power = seed.get_potency_curve()
+		set_light(6 * biolum_power, biolum_power, l_color = seed.get_trait(TRAIT_BIOLUM_COLOUR))
 	else
 		set_light(0)
 
