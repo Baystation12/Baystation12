@@ -248,3 +248,14 @@
 	containername = "engineering voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_engine
+
+/singleton/hierarchy/supply_pack/engineering/robotics
+	name = "Parts - Robotics"
+	contains = list(/obj/item/device/assembly/prox_sensor = 3,
+					/obj/item/storage/toolbox/electrical,
+					/obj/item/device/flash = 4,
+					/obj/item/cell/high = 2)
+	cost = 10
+	containertype = /obj/structure/closet/crate/secure/gear
+	containername = "robotics assembly crate"
+	access = access_robotics

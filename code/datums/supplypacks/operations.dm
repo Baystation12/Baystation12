@@ -31,10 +31,9 @@
 	containername = "Ore box crate"
 
 /singleton/hierarchy/supply_pack/operations/webbing
-	name = "Gear - Webbing, vests, holsters."
+	name = "Gear - Webbing, vests"
 	num_contained = 4
-	contains = list(/obj/item/clothing/accessory/storage/holster,
-					/obj/item/clothing/accessory/storage/black_vest,
+	contains = list(/obj/item/clothing/accessory/storage/black_vest,
 					/obj/item/clothing/accessory/storage/brown_vest,
 					/obj/item/clothing/accessory/storage/white_vest,
 					/obj/item/clothing/accessory/storage/black_drop,
@@ -95,3 +94,24 @@
 	cost = 15
 	containertype = /obj/structure/closet/crate/large
 	containername = "office supplies crate"
+
+/singleton/hierarchy/supply_pack/operations/minergear
+	name = "Shaft miner equipment"
+	contains = list(/obj/item/storage/backpack/industrial,
+					/obj/item/storage/backpack/satchel/eng,
+					/obj/item/device/radio/headset/headset_cargo,
+					/obj/item/clothing/under/rank/miner,
+					/obj/item/clothing/gloves/thick,
+					/obj/item/clothing/shoes/black,
+					/obj/item/device/scanner/gas,
+					/obj/item/storage/ore,
+					/obj/item/device/flashlight/lantern,
+					/obj/item/shovel,
+					/obj/item/pickaxe,
+					/obj/item/device/scanner/mining,
+					/obj/item/clothing/glasses/material,
+					/obj/item/clothing/glasses/meson)
+	cost = 15
+	containertype = /obj/structure/closet/crate/secure
+	containername = "shaft miner equipment crate"
+	access = access_mining

@@ -3764,15 +3764,6 @@
 /obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
-"iR" = (
-/obj/floor_decal/industrial/outline/yellow,
-/obj/machinery/light/small{
-	dir = 1
-	},
-/obj/machinery/mech_recharger,
-/mob/living/exosuit/premade/powerloader/old,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/quartermaster/storage)
 "iS" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
@@ -3849,8 +3840,8 @@
 /obj/floor_decal/industrial/warning{
 	dir = 8
 	},
-/obj/machinery/computer/guestpass{
-	pixel_y = 32
+/obj/machinery/light/spot{
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/storage)
@@ -3969,11 +3960,11 @@
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov,
 /obj/item/tape_roll,
-/obj/machinery/light/small,
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25
 	},
+/obj/machinery/light/spot,
 /turf/simulated/floor/tiled,
 /area/quartermaster/storage)
 "jo" = (
@@ -3992,8 +3983,8 @@
 /area/maintenance/fifthdeck/fore)
 "jp" = (
 /obj/floor_decal/industrial/outline/yellow,
-/obj/machinery/light/small,
 /obj/structure/closet/crate/freezer/rations,
+/obj/machinery/light/spot,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/storage)
 "jq" = (
@@ -14302,9 +14293,6 @@
 /obj/structure/closet/medical_wall/filled{
 	pixel_y = 32
 	},
-/obj/machinery/light/small{
-	dir = 1
-	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/storage)
 "MX" = (
@@ -16160,13 +16148,9 @@
 /obj/item/stack/material/glass/reinforced{
 	amount = 30
 	},
-/obj/item/stack/material/glass/reinforced{
-	amount = 30
-	},
-/obj/item/stack/material/glass/reinforced{
-	amount = 30
-	},
 /obj/floor_decal/industrial/outline/yellow,
+/obj/item/stack/material/glass,
+/obj/item/stack/material/glass,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/storage)
 "UM" = (
@@ -38392,7 +38376,7 @@ Fk
 Em
 Em
 Em
-Em
+hy
 hE
 hE
 Em
@@ -38591,8 +38575,8 @@ lh
 Vz
 xl
 TL
-hy
-iR
+Em
+ou
 ou
 oy
 if
