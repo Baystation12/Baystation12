@@ -1,0 +1,9 @@
+author: PurplePineapple
+changes:
+  - {rscadd: Adds a variable to energy weapons allowing them to be marked as "disposable"
+      guns. Energy guns with disposable set to true are not able to be charged or
+      used with an inducer.}
+  - {tweak: Security basic supply packs no longer contain electrolasers. They can
+      be purchased separately with a cheaper supply pack that contains disposable
+      electrolasers.}
+delete-after: true
