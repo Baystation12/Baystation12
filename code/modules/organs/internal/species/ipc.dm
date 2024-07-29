@@ -76,6 +76,40 @@
 			return
 		start_search(user)
 
+
+/obj/item/organ/internal/posibrain/use_tool(obj/item/item, mob/living/user, list/click_params)
+	if (istype(item, /obj/item/stack/nanopaste))
+		if (!damage)
+			to_chat(user, SPAN_WARNING("\The [src] has no damage to repair."))
+			return TRUE
+
+		if (HAS_FLAGS(status, ORGAN_DEAD))
+			to_chat(user, SPAN_WARNING("\The [src] is damaged beyond repair."))
+			return TRUE
+
+		if (!user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED))
+			to_chat(user, SPAN_WARNING("You don't know how to fix \the [src]."))
+			return TRUE
+
+		var/obj/item/stack/paste = item
+
+		if (!paste.use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(paste, 1, "to repair \the [src]")
+			return TRUE
+
+		to_chat(user, SPAN_NOTICE("You begin to repair \the [src]."))
+		if (!do_after(user, 2 SECOND, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, item))
+			return TRUE
+
+		damage -= 10
+		visible_message(
+			SPAN_NOTICE("\The [user] repairs some of \the [src]'s damage with \a [item]."),
+			SPAN_NOTICE("You repair some of \the [src]'s damage with \the [item].")
+		)
+		return TRUE
+	. = ..()
+
+
 /obj/item/organ/internal/posibrain/proc/start_search(mob/user)
 	if (!brainmob)
 		return
