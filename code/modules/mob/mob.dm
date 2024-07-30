@@ -208,17 +208,18 @@
 	return -1
 
 
-/mob/proc/movement_delay()
+/mob/proc/movement_delay(singleton/move_intent/using_intent = move_intent)
 	. = 0
-	if(istype(loc, /turf))
-		var/turf/T = loc
-		. += T.movement_delay
-
+	if(isturf(loc))
+		var/turf/turf = loc
+		. += turf.movement_delay
 	if (drowsyness > 0)
 		. += 6
 	if(lying) //Crawling, it's slower
 		. += (8 + ((weakened * 3) + (confused * 2)))
-	. += move_intent.move_delay
+	if (ispath(using_intent))
+		using_intent = GET_SINGLETON(using_intent)
+	. += using_intent.move_delay
 	. += encumbrance() * (0.5 + 1.5 * (SKILL_MAX - get_skill_value(SKILL_HAULING))/(SKILL_MAX - SKILL_MIN)) //Varies between 0.5 and 2, depending on skill
 
 //How much the stuff the mob is pulling contributes to its movement delay.

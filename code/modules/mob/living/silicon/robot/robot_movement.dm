@@ -16,7 +16,7 @@
 	. = ..()
 
 
-/mob/living/silicon/robot/movement_delay()
+/mob/living/silicon/robot/movement_delay(singleton/move_intent/using_intent = move_intent)
 	var/tally = ..()
 
 	// Subtract 1 to match Human base movement_delay of -1

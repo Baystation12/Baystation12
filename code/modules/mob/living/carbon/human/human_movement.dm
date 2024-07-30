@@ -1,7 +1,7 @@
 /mob/living/carbon/human
 	move_intents = list(/singleton/move_intent/walk)
 
-/mob/living/carbon/human/movement_delay()
+/mob/living/carbon/human/movement_delay(singleton/move_intent/using_intent = move_intent)
 	var/tally = ..()
 
 	var/obj/item/organ/external/H = get_organ(BP_GROIN) // gets species slowdown, which can be reset by robotize()

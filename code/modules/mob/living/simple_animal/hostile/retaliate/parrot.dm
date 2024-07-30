@@ -529,7 +529,7 @@
  * Procs
  */
 
-/mob/living/simple_animal/hostile/retaliate/parrot/movement_delay()
+/mob/living/simple_animal/hostile/retaliate/parrot/movement_delay(singleton/move_intent/using_intent = move_intent)
 	if(client && stat == CONSCIOUS && parrot_state != "parrot_fly")
 		icon_state = "[icon_set]_fly"
 	..()

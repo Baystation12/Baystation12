@@ -12,7 +12,7 @@
 	var/obj/item/holding = null
 	var/obj/item/device/bot_controller/controller = null
 
-/mob/living/bot/remotebot/movement_delay()
+/mob/living/bot/remotebot/movement_delay(singleton/move_intent/using_intent = move_intent)
 	var/tally = ..()
 	tally += speed
 	if(holding)
