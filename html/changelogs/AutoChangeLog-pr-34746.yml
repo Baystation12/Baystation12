@@ -1,0 +1,4 @@
+author: Spookerton
+changes:
+  - {bugfix: Wheelchairs are subject to regular mob slowdowns.}
+delete-after: true
