@@ -77,6 +77,8 @@
 	step(src, direction)
 	if(buckled_mob) // Make sure it stays beneath the occupant
 		Move(buckled_mob.loc)
+		var/datum/movement_handler/delay/delay = GetMovementHandler(/datum/movement_handler/delay)
+		delay.SetDelay(buckled_mob.movement_delay(/singleton/move_intent/walk))
 	set_dir(direction)
 	if(pulling) // Driver
 		if(pulling.loc == src.loc) // We moved onto the wheelchair? Revert!

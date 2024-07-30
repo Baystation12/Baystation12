@@ -332,7 +332,7 @@
 	else if(movement_sound && old_turf != get_turf(src)) // Playing both sounds at the same time generally sounds bad.
 		playsound(src, movement_sound, 50, 1)
 
-/mob/living/simple_animal/movement_delay()
+/mob/living/simple_animal/movement_delay(singleton/move_intent/using_intent = move_intent)
 	. = movement_cooldown
 
 	// Turf related slowdown

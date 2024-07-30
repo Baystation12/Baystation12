@@ -172,12 +172,8 @@
 	if (web)
 		web.remove_webbing(owner)
 
-/mob/living/movement_delay()
+/mob/living/movement_delay(singleton/move_intent/using_intent = move_intent)
 	. = ..()
-
-	if (!auras)
-		return .
-
 	for (var/obj/aura/web/W in auras)
 		var/tally = W.stacks * 2
 		return . + tally
