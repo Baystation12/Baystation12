@@ -6,6 +6,11 @@
 	machine_name = "long range shuttle console"
 	machine_desc = "Used to control spacecraft that are designed to move between local sectors in open space."
 
+
+/obj/machinery/computer/shuttle_control/explore/is_valid_shuttle(datum/shuttle/shuttle)
+	return istype(shuttle, /datum/shuttle/autodock/overmap)
+
+
 /obj/machinery/computer/shuttle_control/explore/get_ui_data(datum/shuttle/autodock/overmap/shuttle)
 	. = ..()
 	if(istype(shuttle))

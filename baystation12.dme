@@ -319,7 +319,6 @@
 #include "code\datums\extensions\multitool\store.dm"
 #include "code\datums\extensions\multitool\circuitboards\buildtype_select.dm"
 #include "code\datums\extensions\multitool\circuitboards\circuitboards.dm"
-#include "code\datums\extensions\multitool\circuitboards\shuttle_console.dm"
 #include "code\datums\extensions\multitool\circuitboards\stationalert.dm"
 #include "code\datums\extensions\multitool\items\clothing.dm"
 #include "code\datums\extensions\multitool\items\items.dm"
