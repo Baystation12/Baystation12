@@ -1436,7 +1436,7 @@
 
 // Alien Drinks
 
-/datum/reagent/drink/alien/unathijuice
+/datum/reagent/drink/unathijuice
 	name = "Hrukhza Leaf Extract"
 	description = "A bitter liquid used in most recipes on Moghes."
 	taste_description = "bland, disgusting bitterness"
@@ -1444,7 +1444,7 @@
 	glass_name = "hrukhza leaf extract"
 	glass_desc = "A bitter extract from the hrukhza."
 
-/datum/reagent/drink/alien/kzkzaa
+/datum/reagent/drink/kzkzaa
 	name = "Kzkzaa"
 	description = "Fish extract from Moghes."
 	taste_description = "fishy fish"
@@ -1452,7 +1452,7 @@
 	glass_name = "kzkzaa"
 	glass_desc = "A glass of Kzkzaa, fish extract, commonly drank on Moghes."
 
-/datum/reagent/drink/alien/mumbaksting
+/datum/reagent/drink/mumbaksting
 	name = "Mumbak Sting"
 	description = "A drink made from the venom of the Yuum."
 	taste_description = "harsh and stinging sweetness"
@@ -1460,7 +1460,7 @@
 	glass_name = "Mumbak sting"
 	glass_desc = "A drink made from the venom of the Yuum."
 
-/datum/reagent/ethanol/alien/wasgaelhi
+/datum/reagent/ethanol/wasgaelhi
 	name = "Wasgaelhi"
 	description = "Wine made from various fruits from the swamps of Moghes."
 	taste_description = "swampy fruit"
@@ -1469,7 +1469,7 @@
 	glass_name = "wasgaelhi"
 	glass_desc = "Wine made from various fruits from the swamps of Moghes."
 
-/datum/reagent/drink/alien/skrianhi
+/datum/reagent/drink/skrianhi
 	name = "Skrianhi Tea"
 	description = "A blend of teas from Moghes, commonly drank by Unathi."
 	taste_description = "bitter energising tea"

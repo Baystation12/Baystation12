@@ -737,7 +737,7 @@
 
 /obj/item/reagent_containers/food/drinks/bottle/unathijuice/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/alien/unathijuice, 100)
+	reagents.add_reagent(/datum/reagent/drink/unathijuice, 100)
 
 
 /obj/item/reagent_containers/food/drinks/bottle/lemonjuice
