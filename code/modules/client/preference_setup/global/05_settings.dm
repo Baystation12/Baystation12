@@ -87,8 +87,6 @@
 			return prefs.preference_values[cp.key]
 		else
 			return null
-	else
-		log_error("Client is lacking preferences: [log_info_line(src)]")
 
 /client/proc/set_preference(preference, set_preference)
 	var/datum/client_preference/cp = get_client_preference(preference)
