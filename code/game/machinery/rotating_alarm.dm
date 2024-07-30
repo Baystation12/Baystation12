@@ -17,7 +17,7 @@
 	alpha = 200
 
 	//Rays start rotated which made synchronizing the scaling a bit difficult, so let's move it 45 degrees
-	var matrix/m = new
+	var/matrix/m = new
 	var/matrix/test = new
 	test.Turn(-45)
 	var/matrix/squished = new

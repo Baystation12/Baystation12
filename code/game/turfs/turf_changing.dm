@@ -1,5 +1,5 @@
 /turf/proc/ReplaceWithLattice(material)
-	var base_turf = get_base_turf_by_area(src, TRUE)
+	var/base_turf = get_base_turf_by_area(src, TRUE)
 	if(type != base_turf)
 		src.ChangeTurf(get_base_turf_by_area(src, TRUE))
 	if(!locate(/obj/structure/lattice) in src)

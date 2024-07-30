@@ -270,7 +270,7 @@
 				channels[chan_name] |= FREQ_LISTENING
 		. = TRUE
 	else if(href_list["spec_freq"])
-		var freq = href_list["spec_freq"]
+		var/freq = href_list["spec_freq"]
 		if(has_channel_access(usr, freq))
 			set_frequency(text2num(freq))
 		. = TRUE

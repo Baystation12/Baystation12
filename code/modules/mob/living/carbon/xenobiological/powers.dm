@@ -7,7 +7,7 @@
 		to_chat(src, "I am already feeding...")
 		return
 
-	var t = invalidFeedTarget(M)
+	var/t = invalidFeedTarget(M)
 	if (t)
 		to_chat(src, t)
 		return
