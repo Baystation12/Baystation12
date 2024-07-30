@@ -22,6 +22,11 @@
 		sync_shuttle()
 
 
+/obj/machinery/computer/shuttle_control/on_update_icon()
+	icon_screen = shuttle_tag ? initial(icon_screen) : "shuttle_error"
+	..()
+
+
 /// Sets `shuttle_tag` to a new value based on the computer's current area, or to `null` if the area is not a valid shuttle.
 /obj/machinery/computer/shuttle_control/proc/sync_shuttle()
 	shuttle_tag = null
