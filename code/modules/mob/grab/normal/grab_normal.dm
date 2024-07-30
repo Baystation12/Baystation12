@@ -138,7 +138,7 @@
 		return FALSE
 
 /datum/grab/normal/resolve_openhand_attack(obj/item/grab/G)
-	if(G.assailant.a_intent != I_HELP)
+	if(G.assailant.a_intent == I_HURT)
 		if(G.assailant.zone_sel.selecting == BP_HEAD)
 			if(headbutt(G))
 				if(drop_headbutt)
@@ -147,7 +147,41 @@
 		else if(G.assailant.zone_sel.selecting == BP_EYES)
 			if(attack_eye(G))
 				return TRUE
-	return 0
+
+	if (G.assailant.a_intent == I_GRAB)
+		if (!G.affecting.lying)
+			return FALSE
+		if (!G.assailant.zone_sel.selecting == BP_CHEST)
+			return FALSE
+		if (!istype(G.assailant.wear_suit, /obj/item/clothing/suit/space/rig))
+			if (istype(G.affecting.wear_suit, /obj/item/clothing/suit/space/rig))
+				to_chat(G.assailant, SPAN_WARNING("\The [G.affecting] is too heavy for you in the hardsuit!"))
+				return FALSE
+			if (G.assailant.species.strength < G.affecting.species.strength || G.assailant.species.strength < STR_HIGH && G.affecting.isSynthetic()) // If target is heavier or a FBP
+				to_chat(G.assailant, SPAN_WARNING("\The [G.affecting] is too heavy for you!"))
+				return FALSE
+		if (G.affecting.species.name == SPECIES_ADHERENT || G.affecting.species.name == SPECIES_NABBER)
+			to_chat(G.assailant, SPAN_WARNING("You cannot carry \the [G.affecting]!"))
+			return FALSE
+
+		var/skilltime = 2 SECONDS + G.assailant.skill_delay_mult(SKILL_HAULING, 0.3)
+		G.assailant.visible_message(SPAN_NOTICE("\The [G.assailant] is beginning to lift \the [G.affecting] over their shoulder!"))
+
+		if (!do_after(G.assailant, skilltime, G.affecting, DO_PUBLIC_UNIQUE))
+			G.assailant.visible_message(SPAN_WARNING("\The [G.assailant] fails to lift \the [G.affecting]!"))
+			return FALSE
+
+		G.assailant.visible_message(SPAN_WARNING("\The [G.assailant] lifts up \the [G.affecting]!"))
+		same_tile = TRUE
+		grab_slowdown = 2
+		shift = 12
+		G.draw_affecting_over()
+		G.affecting.forceMove(G.assailant.loc)
+		G.affecting.Weaken(4)
+		return TRUE
+	return FALSE
+
+
 
 /datum/grab/normal/proc/attack_eye(obj/item/grab/G)
 	var/mob/living/carbon/human/attacker = G.assailant
