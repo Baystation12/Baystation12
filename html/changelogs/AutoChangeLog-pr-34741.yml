@@ -1,0 +1,4 @@
+author: SierraKomodo
+changes:
+  - {bugfix: Fixed borg bottle racks not being able to pick anything up.}
+delete-after: true
