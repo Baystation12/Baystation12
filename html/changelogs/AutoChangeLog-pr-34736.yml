@@ -1,0 +1,4 @@
+author: PurplePineapple
+changes:
+  - {tweak: Disposable tasers have 10 shots now.}
+delete-after: true
