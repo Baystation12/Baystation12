@@ -38,7 +38,7 @@
 
 /// Determines whether the given shuttle datum is valid for this computer.
 /obj/machinery/computer/shuttle_control/proc/is_valid_shuttle(datum/shuttle/shuttle)
-	return TRUE
+	return !istype(shuttle, /datum/shuttle/autodock/overmap)
 
 
 /obj/machinery/computer/shuttle_control/interface_interact(mob/user)
