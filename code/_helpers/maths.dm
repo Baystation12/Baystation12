@@ -198,9 +198,9 @@
 	return min + gauss.Rand() * (max - min)
 
 /proc/gaussian(mean=0, stddev=1)
-	var u1 = rand()
-	var u2 = rand()
-	var z0 = sqrt(-2 * log(u1)) * cos(2 * PI * u2)
+	var/u1 = rand()
+	var/u2 = rand()
+	var/z0 = sqrt(-2 * log(u1)) * cos(2 * PI * u2)
 	return z0 * stddev + mean
 
 
@@ -208,7 +208,7 @@
 	var/final_temp = min + rand() * (max - min)
 
 	for (var/runs = 1 to 10)
-		var temp = gaussian(mean, stddev)
+		var/temp = gaussian(mean, stddev)
 
 		if (temp < min || temp > max)
 			continue
@@ -221,7 +221,7 @@
 	var/final_temp = min + rand() * (max - min)
 
 	for (var/runs = 1 to 10)
-		var temp = gaussian() ** skew
+		var/temp = gaussian() ** skew
 		temp = temp * (max - min) + min
 
 		if (temp < min || temp > max)

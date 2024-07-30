@@ -90,7 +90,7 @@
 		if(!t)
 			return
 
-		var last_fields_value = fields
+		var/last_fields_value = fields
 
 		unformatedText = t
 

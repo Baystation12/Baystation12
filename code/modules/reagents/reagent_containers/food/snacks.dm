@@ -3150,7 +3150,7 @@
 
 	else if(istype(W, /obj/item/reagent_containers/food/snacks))
 		var/obj/item/reagent_containers/food/snacks/F = W
-		var /obj/item/reagent_containers/food/snacks/customburger/C = new(src)
+		var/obj/item/reagent_containers/food/snacks/customburger/C = new(src)
 		C.SetName("[F.name]-burger")
 		C.filling_color = F.filling_color
 		var/image/I = image(C.icon, "customburger_filling")

@@ -90,7 +90,7 @@
 	return SPAN_CLASS("name", "[lname]")
 
 /singleton/dsay_communication/proc/get_message(client/C, mob/M, message)
-	var say_verb = pick("complains","moans","whines","laments","blubbers")
+	var/say_verb = pick("complains","moans","whines","laments","blubbers")
 	return "[get_name(C, M)] [say_verb], [SPAN_CLASS("message linkify", "\"[message]\"")]"
 
 /singleton/dsay_communication/emote/get_message(client/C, mob/M, message)

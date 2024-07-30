@@ -255,7 +255,7 @@
 	return TRUE
 
 /obj/item/rig_module/mounted/ballistic/accepts_item(obj/item/input, mob/living/user)
-	var /obj/item/rig/rig = get_rig(src)
+	var/obj/item/rig/rig = get_rig(src)
 
 	if (!istype(input) || !istype(user) || !rig)
 		return FALSE
