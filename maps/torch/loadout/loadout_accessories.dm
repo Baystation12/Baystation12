@@ -4,7 +4,7 @@
 	path = /obj/item/storage/medalbox/sol
 	cost = 6
 	allowed_branches = SOLGOV_BRANCHES
-	flags = GEAR_HAS_NO_CUSTOMIZATION | GEAR_HAS_EXTENDED_DESCRIPTION
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/accessory/solgov_award_military/New()
 	..()
@@ -24,7 +24,7 @@
 	description = "A selection of civilian awards awarded by the Sol Central Government."
 	path = /obj/item/storage/medalbox/sol
 	cost = 3
-	flags = GEAR_HAS_NO_CUSTOMIZATION | GEAR_HAS_EXTENDED_DESCRIPTION
+	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/accessory/solgov_award_civilian/New()
 	..()
