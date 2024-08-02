@@ -184,8 +184,8 @@ var/global/list/organ_cache = list()
 		if (antibiotics < 5 && parent.germ_level < germ_level && ( parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(owner.immunity_weakness() * 0.3) ))
 			parent.germ_level++
 
-		if (prob(3))	//about once every 30 seconds
-			take_general_damage(1,silent=prob(30))
+		if (prob(30))	//2 organ damage that has a 30% chance of occuring every tick
+			take_general_damage(2,silent=prob(30))
 
 /obj/item/organ/proc/handle_rejection()
 	// Process unsuitable transplants. TODO: consider some kind of
