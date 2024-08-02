@@ -630,7 +630,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		for(var/datum/wound/W in wounds)
 			//Infected wounds raise the organ's germ level
 			if (W.germ_level > germ_level || prob(min(W.germ_level, 30)))
-				germ_level += 4
+				germ_level += 3
 				break	//limit increase to a maximum of four per second
 
 /obj/item/organ/external/handle_germ_effects()
@@ -658,19 +658,19 @@ Note that amputating the affected organ does in fact remove the infection from t
 				target_organ = pick(candidate_organs)
 
 		if (target_organ)
-			target_organ.germ_level += 5
+			target_organ.germ_level += 4
 
 		//spread the infection to child and parent organs
 		if (children)
 			for (var/obj/item/organ/external/child in children)
 				if (child.germ_level < germ_level && !BP_IS_ROBOTIC(child))
 					if (child.germ_level < INFECTION_LEVEL_ONE*2 || prob(30))
-						child.germ_level += 5
+						child.germ_level += 4
 
 		if (parent)
 			if (parent.germ_level < germ_level && !BP_IS_ROBOTIC(parent))
 				if (parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30))
-					parent.germ_level += 5
+					parent.germ_level += 4
 
 	if(germ_level >= INFECTION_LEVEL_THREE && antibiotics < REAGENTS_OVERDOSE)	//overdosing is necessary to stop severe infections
 		if (!(status & ORGAN_DEAD))
