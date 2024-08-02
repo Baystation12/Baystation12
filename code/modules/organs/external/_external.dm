@@ -631,7 +631,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			//Infected wounds raise the organ's germ level
 			if (W.germ_level > germ_level || prob(min(W.germ_level, 30)))
 				germ_level += 3
-				break	//limit increase to a maximum of four per second
+				break	//limit increase to a maximum of three per second
 
 /obj/item/organ/external/handle_germ_effects()
 
