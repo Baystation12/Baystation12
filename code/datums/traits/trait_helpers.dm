@@ -31,3 +31,6 @@
 		C.emote(pick("twitch", "drool"))
 	if(effective_dose > 20 && prob(10))
 		C.SelfMove(pick(GLOB.cardinal))
+	if(effective_dose > 50 && prob(60))
+		var/obj/item/organ/internal/brain/O = C.internal_organs_by_name[BP_BRAIN]
+		O?.take_internal_damage(10, FALSE)
