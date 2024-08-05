@@ -214,71 +214,68 @@
 	interact(user)
 	return TRUE
 
-/*******************
-*   Microwave Menu
-********************/
 
-/obj/machinery/microwave/interact(mob/user as mob) // The microwave Menu
+/obj/machinery/microwave/interact(mob/user)
+	if (isobserver(user))
+		if (!isadmin(user))
+			return
+	else if (!ishuman(user) && !isrobot(user))
+		return
 	user.set_machine(src)
 	var/dat = list()
 	if(broken > 0)
-		dat += "<TT><b><i>This microwave is very broken. You'll need to fix it before you can use it again.</i></b></TT>"
-	else if(operating)
-		dat += "<TT>Microwaving in progress!<BR>Please wait...!</TT>"
-	else if(dirtiness == 100)
-		dat += "<TT><b><i>This microwave is covered in muck. You'll need to wipe it down or clean it out before you can use it again.</i></b></TT>"
+		dat += "<tt><b><i>This microwave is very broken. You'll need to fix it before you can use it again.</i></b></tt>"
+	else if (operating)
+		dat += "<tt>Microwaving in progress!<BR>Please wait...!</tt>"
+	else if (dirtiness == 100)
+		dat += "<tt><b><i>This microwave is covered in muck. You'll need to wipe it down or clean it out before you can use it again.</i></b></tt>"
 	else
-		playsound(loc, 'sound/machines/pda_click.ogg', 50, 1)
+		playsound(loc, 'sound/machines/pda_click.ogg', 50, TRUE)
 		if (!length(ingredients) && !length(reagents.reagent_list))
 			dat += "<B>The microwave is empty.</B>"
 		else
 			dat += "<b>Ingredients:</b><br>"
-			var/list/items_counts = new
-			var/list/items_measures = new
-			var/list/items_measures_p = new
-			for (var/obj/O in ingredients)
-				var/display_name = O.name
-				if (istype(O,/obj/item/reagent_containers/food/snacks/egg))
+			var/list/items_counts = list()
+			var/list/items_measures = list()
+			var/list/items_measures_p = list()
+			for (var/obj/obj in ingredients)
+				var/display_name = obj.name
+				if (istype(obj,/obj/item/reagent_containers/food/snacks/egg))
 					items_measures[display_name] = "egg"
 					items_measures_p[display_name] = "eggs"
-				if (istype(O,/obj/item/reagent_containers/food/snacks/tofu))
+				if (istype(obj,/obj/item/reagent_containers/food/snacks/tofu))
 					items_measures[display_name] = "tofu chunk"
 					items_measures_p[display_name] = "tofu chunks"
-				if (istype(O,/obj/item/reagent_containers/food/snacks/meat)) //any meat
+				if (istype(obj,/obj/item/reagent_containers/food/snacks/meat)) //any meat
 					items_measures[display_name] = "slab of meat"
 					items_measures_p[display_name] = "slabs of meat"
-				if (istype(O,/obj/item/reagent_containers/food/snacks/donkpocket))
+				if (istype(obj,/obj/item/reagent_containers/food/snacks/donkpocket))
 					display_name = "Turnovers"
 					items_measures[display_name] = "turnover"
 					items_measures_p[display_name] = "turnovers"
-				if (istype(O,/obj/item/reagent_containers/food/snacks/fish))
+				if (istype(obj,/obj/item/reagent_containers/food/snacks/fish))
 					items_measures[display_name] = "fillet of fish"
 					items_measures_p[display_name] = "fillets of fish"
 				items_counts[display_name]++
-			for (var/O in items_counts)
-				var/N = items_counts[O]
-				if (!(O in items_measures))
-					dat += "<B>[capitalize(O)]:</B> [N] [lowertext(O)]\s"
-				else
-					if (N==1)
-						dat += "<B>[capitalize(O)]:</B> [N] [items_measures[O]]"
+			for (var/name in items_counts)
+				var/count = items_counts[name]
+				if (name in items_measures)
+					if (count == 1)
+						dat += "<b>[capitalize(name)]:</b> [count] [items_measures[name]]"
 					else
-						dat += "<B>[capitalize(O)]:</B> [N] [items_measures_p[O]]"
-
-			for (var/datum/reagent/R in reagents.reagent_list)
-				var/display_name = R.name
-				if (R.type == /datum/reagent/capsaicin)
+						dat += "<b>[capitalize(name)]:</b> [count] [items_measures_p[name]]"
+				else
+					dat += "<b>[capitalize(name)]:</b> [count] [lowertext(name)]\s"
+			for (var/datum/reagent/reagent in reagents.reagent_list)
+				var/display_name = reagent.name
+				if (reagent.type == /datum/reagent/capsaicin)
 					display_name = "Hotsauce"
-				if (R.type == /datum/reagent/frostoil)
+				if (reagent.type == /datum/reagent/frostoil)
 					display_name = "Coldsauce"
-				dat += "<B>[display_name]:</B> [R.volume] unit\s"
-
-		dat += "<HR><BR><A href='?src=\ref[src];action=cook'>Turn on!<BR><A href='?src=\ref[src];action=dispose'>Eject ingredients!"
-
-	show_browser(user, "<HEAD><TITLE>Microwave Controls</TITLE></HEAD><TT>[jointext(dat,"<br>")]</TT>", "window=microwave")
+				dat += "<b>[display_name]:</b> [reagent.volume] unit\s"
+		dat += "<hr><br><a href='?src=\ref[src];action=cook'>Turn on!<br><a href='?src=\ref[src];action=dispose'>Eject ingredients!"
+	show_browser(user, "<head><title>Microwave Controls</title></head><tt>[jointext(dat,"<br>")]</tt>", "window=microwave")
 	onclose(user, "microwave")
-	return
-
 
 
 /***********************************
