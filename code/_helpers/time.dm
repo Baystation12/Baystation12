@@ -10,6 +10,31 @@
 #define DAY *864000
 #define DAYS *864000
 
+GLOBAL_LIST_INIT(month_names, list(
+	"January", "February", "March",
+	"April", "May", "June",
+	"July", "August", "September",
+	"October", "November", "December"
+))
+
+GLOBAL_LIST_INIT(month_names_short, list(
+	"Jan", "Feb", "Mar",
+	"Apr", "May", "Jun",
+	"Jul", "Aug", "Sep",
+	"Oct", "Nov", "Dec"
+))
+
+GLOBAL_LIST_INIT(day_names, list(
+	"Monday", "Tuesday", "Wednesday",
+	"Thursday","Friday", "Saturday",
+	"Sunday"
+))
+
+GLOBAL_LIST_INIT(day_names_short, list(
+	"Mon", "Tue", "Wed",
+	"Thu","Fri", "Sat",
+	"Sun"
+))
 
 /// Real time since the server started. Same concept as REALTIMEOFDAY.
 /proc/Uptime(from_zero)
