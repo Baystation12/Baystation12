@@ -1,5 +1,0 @@
-author: Spookerton
-changes:
-  - {bugfix: 'Mobs that are not human, robot, or an admin observer cannot interact
-      with microwaves.'}
-delete-after: true
