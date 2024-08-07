@@ -21,7 +21,8 @@
 	if(psi)
 		. += get_extension(psi, /datum/extension/armor)
 
-/mob/living/bullet_act(obj/item/projectile/P, def_zone)
+/// Returns the amount of damage dealt
+/mob/living/bullet_act(obj/item/projectile/P, def_zone, p_damage_dealt)
 	if (status_flags & GODMODE)
 		return PROJECTILE_FORCE_MISS
 
@@ -38,6 +39,7 @@
 	var/damaged
 	if(!P.nodamage)
 		damaged = apply_damage(damage, P.damage_type, def_zone, flags, P, P.armor_penetration)
+		*p_damage_dealt = damaged
 		bullet_impact_visuals(P, def_zone, damaged)
 	if(damaged || P.nodamage) // Run the block computation if we did damage or if we only use armor for effects (nodamage)
 		. = get_blocked_ratio(def_zone, P.damage_type, flags, P.armor_penetration, P.damage)
@@ -100,6 +102,20 @@
 			. = FALSE
 		if(result & AURA_CANCEL)
 			break
+
+/mob/living/proc/aura_post_check(type)
+	if(!auras)
+		return TRUE
+	var/list/newargs = args - args[1]
+	for(var/obj/aura/aura as anything in auras)
+		switch(type)
+			if(AURA_TYPE_WEAPON)
+				aura.aura_post_weapon(arglist(newargs))
+			if(AURA_TYPE_BULLET)
+				aura.aura_post_bullet(arglist(newargs))
+			if(AURA_TYPE_THROWN)
+				aura.aura_post_thrown(arglist(newargs))
+
 
 
 //Handles the effects of "stun" weapons
@@ -171,7 +187,7 @@
 			return
 
 		visible_message(SPAN_WARNING("\The [src] has been hit by \the [O]."))
-		apply_damage(throw_damage, dtype, null, O.damage_flags(), O)
+		aura_post_check(AURA_TYPE_THROWN, AM, TT, apply_damage(throw_damage, dtype, null, O.damage_flags(), O))
 
 		if(TT.thrower)
 			var/client/assailant = TT.thrower.client

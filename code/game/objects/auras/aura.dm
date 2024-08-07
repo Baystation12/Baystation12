@@ -49,6 +49,10 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 /obj/aura/proc/aura_check_weapon(obj/item/weapon, mob/attacker, click_params)
 	return EMPTY_BITFIELD
 
+/// Called after a succesfull weapon hit on the owner
+/obj/aura/proc/aura_post_weapon(obj/item/weapon, mob/attacker, click_params, damage_dealt)
+	return EMPTY_BITFIELD
+
 /**
  * Called when the associated mob is impacted by a projectile.
  *
@@ -63,6 +67,10 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 /obj/aura/proc/aura_check_bullet(obj/item/projectile/proj, def_zone)
 	return EMPTY_BITFIELD
 
+/// Called after a succesfull bullet hit on the owner
+/obj/aura/proc/aura_post_bullet(obj/item/projectile/proj , def_zone, damage_dealt)
+	return EMPTY_BITFIELD
+
 /**
  * Called when the associated mob is hit by a thrown atom.
  *
@@ -75,6 +83,10 @@ They should also be used for when you want to effect the ENTIRE mob, like having
  * Returns bitfield (Any of `AURA_*`). See `code\__defines\mobs.dm`.
  */
 /obj/aura/proc/aura_check_thrown(atom/movable/thrown_atom, datum/thrownthing/thrown_datum)
+	return EMPTY_BITFIELD
+
+/// Calle after something thrown hits the owner
+/obj/aura/proc/aura_post_thrown(atom/movable/thrown_atom, datum/thrownthing/thrown_datum, damage_dealt)
 	return EMPTY_BITFIELD
 
 /obj/aura/debug

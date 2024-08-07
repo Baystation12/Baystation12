@@ -246,11 +246,12 @@
 	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1 || original != target_mob)) //if the projectile hits a target we weren't originally aiming at then retain the chance to miss
 
 	var/result = PROJECTILE_FORCE_MISS
+	var/damage_dealt = 0
 	if(hit_zone)
 		def_zone = hit_zone //set def_zone, so if the projectile ends up hitting someone else later (to be implemented), it is more likely to hit the same part
 		if(!target_mob.aura_check(AURA_TYPE_BULLET, src,def_zone))
 			return 1
-		result = target_mob.bullet_act(src, def_zone)
+		result = target_mob.bullet_act(src, def_zone, &damage_dealt)
 
 	if(result == PROJECTILE_FORCE_MISS)
 		if(!silenced)
@@ -258,6 +259,9 @@
 			if(LAZYLEN(miss_sounds))
 				playsound(target_mob.loc, pick(miss_sounds), 60, 1)
 		return 0
+
+	if(damage_dealt)
+		target_mob.aura_post_check(AURA_TYPE_BULLET, src, def_zone, damage_dealt)
 
 	//hit messages
 	if(silenced)

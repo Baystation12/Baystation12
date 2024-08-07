@@ -109,6 +109,11 @@
 /obj/aura/regenerating/human/proc/can_regenerate_organs()
 	return TRUE
 
+/// Any damage that goes past this through armor will cause a reduction in regeneration.
+#define UNATHI_DAMAGE_REGEN_MALUS_THRESHOLD 15
+/// Any damage past the malus threshold will give damage/divider amount of regen malus stacks , rounded down. Heavy hits will give a big malus
+#define UNATHI_REGEN_MALUS_DAMAGE_DIVIDER 10
+
 /obj/aura/regenerating/human/unathi
 	nutrition_damage_mult = 2
 	brute_mult = 2
@@ -117,23 +122,26 @@
 	grow_chance = 2
 	grow_threshold = 150
 	ignore_tag = BP_HEAD
-	var/toggle_blocked_until = 0 // A time
+	/// Regen Malus , incremented by every attack.
+	var/regeneration_malus = 0
+	/// The upper limit of the regeneration malus ,at this point it will be debuffed by 75%
+	var/regeneration_malus_cap = 20
 
 /obj/aura/regenerating/human/unathi/can_toggle()
 	return FALSE
 
 // Default return; we're just logging.
-/obj/aura/regenerating/human/unathi/aura_check_weapon(obj/item/weapon, mob/attacker, click_params)
-	toggle_blocked_until = max(world.time + 1 MINUTE, toggle_blocked_until)
-	return EMPTY_BITFIELD
+/obj/aura/regenerating/human/unathi/aura_post_weapon(obj/item/weapon, mob/attacker, click_params, damage_dealt)
+	if(weapon.force > UNATHI_DAMAGE_REGEN_MALUS_THRESHOLD)
+		regeneration_malus += round(damage_dealt / UNATHI_REGEN_MALUS_DAMAGE_DIVIDER)
 
-/obj/aura/regenerating/human/unathi/aura_check_thrown(atom/movable/thrown_atom, datum/thrownthing/thrown_datum)
-	toggle_blocked_until = max(world.time + 1 MINUTE, toggle_blocked_until)
-	return EMPTY_BITFIELD
+/obj/aura/regenerating/human/unathi/aura_post_thrown(atom/movable/thrown_atom, datum/thrownthing/thrown_datum, damage_dealt)
+	if(damage_dealt > UNATHI_DAMAGE_REGEN_MALUS_THRESHOLD)
+		regeneration_malus += round(damage_dealt / UNATHI_REGEN_MALUS_DAMAGE_DIVIDER)
 
-/obj/aura/regenerating/human/unathi/aura_check_bullet(obj/item/projectile/proj, def_zone)
-	toggle_blocked_until = max(world.time + 1 MINUTE, toggle_blocked_until)
-	return EMPTY_BITFIELD
+/obj/aura/regenerating/human/unathi/aura_post_bullet(obj/item/projectile/proj, def_zone, damage_dealt)
+	if(!proj.nodamage && damage_dealt > UNATHI_DAMAGE_REGEN_MALUS_THRESHOLD)
+		regeneration_malus += round(damage_dealt / UNATHI_REGEN_MALUS_DAMAGE_DIVIDER)
 
 /obj/aura/regenerating/human/unathi/aura_check_life()
 	var/mob/living/carbon/human/H = user
@@ -145,18 +153,20 @@
 		H.apply_damage(5, DAMAGE_TOXIN)
 		H.adjust_nutrition(3)
 		return AURA_FALSE
-	if(toggle_blocked_until > world.time)
-		return AURA_CANCEL
-	nutrition_damage_mult = 2
-	brute_mult = 2
-	organ_mult = 4
-	grow_chance = 2
+	// min of 25% guaranteed
+	var/regen_mult = max(0.25, 1 - (regeneration_malus ? 0 : (regeneration_malus / regeneration_malus_cap)))
+	regeneration_malus = max(0, regeneration_malus - 1)
+	// Yes you can.. damage yourself to avoid regen damage ? call it unathi adrenaline!
+	nutrition_damage_mult = 2 * regen_mult
+	brute_mult = 2 * regen_mult
+	organ_mult = 4 * regen_mult
+	grow_chance = 2 * regen_mult
 	var/obj/machinery/optable/optable = locate() in get_turf(H)
 	if (optable?.suppressing && H.sleeping)
-		nutrition_damage_mult = 1
-		brute_mult = 1
-		organ_mult = 2
-		grow_chance = 1
+		nutrition_damage_mult = 1 * regen_mult
+		brute_mult = 1 * regen_mult
+		organ_mult = 2 * regen_mult
+		grow_chance = 1 * regen_mult
 
 	return ..()
 

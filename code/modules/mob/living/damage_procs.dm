@@ -6,6 +6,7 @@
 
 	Returns
 	standard 0 if fail
+	damage dealt if succesfull
 */
 /mob/living/proc/apply_damage(damage = 0, damagetype = DAMAGE_BRUTE, def_zone = null, damage_flags = EMPTY_BITFIELD, used_weapon, armor_pen, silent = FALSE)
 	if(!damage)
@@ -49,7 +50,7 @@
 			adjustBrainLoss(damage)
 
 	updatehealth()
-	return TRUE
+	return damage
 
 
 /mob/living/proc/apply_radiation(damage = 0)

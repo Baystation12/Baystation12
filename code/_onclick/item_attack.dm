@@ -277,7 +277,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if (weapon.force > 0 && get_max_health() && !HAS_FLAGS(weapon.item_flags, ITEM_FLAG_NO_BLUDGEON))
 		user.setClickCooldown(user.get_attack_speed(weapon))
 		user.do_attack_animation(src)
-		if (!aura_check(AURA_TYPE_WEAPON, weapon, user))
+		if (!aura_check(AURA_TYPE_WEAPON, weapon, user, click_params))
 			return TRUE
 		var/damage_flags = weapon.damage_flags()
 		var/weapon_mention
@@ -328,9 +328,10 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		if (istype(result))
 			if (result.hit_zone)
 				var/mob/living/victim = result.attackee ? result.attackee : src
-				weapon.apply_hit_effect(victim, user, result.hit_zone)
+				aura_post_check(AURA_TYPE_WEAPON, weapon, user, click_params, weapon.apply_hit_effect(victim, user, result.hit_zone))
 				return TRUE
 		if (hit_zone)
+			aura_post_check(AURA_TYPE_WEAPON, weapon, user, click_params, weapon.apply_hit_effect(src, user, hit_zone))
 			weapon.apply_hit_effect(src, user, hit_zone)
 		return TRUE
 	return ..()
