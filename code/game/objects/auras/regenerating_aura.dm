@@ -145,6 +145,8 @@
 		H.apply_damage(5, DAMAGE_TOXIN)
 		H.adjust_nutrition(3)
 		return AURA_FALSE
+	if(toggle_blocked_until > world.time)
+		return AURA_CANCEL
 	nutrition_damage_mult = 2
 	brute_mult = 2
 	organ_mult = 4
