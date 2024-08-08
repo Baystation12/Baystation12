@@ -171,6 +171,7 @@
 
 		var/datum/supply_order/O = new /datum/supply_order()
 		O.ordernum = SSsupply.ordernum
+		O.timestamp = stationtime2text()
 		O.object = P
 		O.orderedby = idname
 		O.reason = reason
@@ -358,6 +359,7 @@
 /datum/nano_module/supply/proc/order_to_nanoui(datum/supply_order/SO, list_id)
 	return list(list(
 		"id" = SO.ordernum,
+		"time" = SO.timestamp,
 		"object" = SO.object.name,
 		"orderer" = SO.orderedby,
 		"cost" = SO.object.cost,
@@ -378,6 +380,7 @@
 	var/t = ""
 	t += "<h3>[GLOB.using_map.station_name] Supply Requisition Reciept</h3><hr>"
 	t += "INDEX: #[O.ordernum]<br>"
+	t += "TIME: [O.timestamp]<br>"
 	t += "REQUESTED BY: [O.orderedby]<br>"
 	t += "RANK: [O.orderedrank]<br>"
 	t += "REASON: [O.reason]<br>"

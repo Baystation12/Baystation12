@@ -266,6 +266,7 @@ SUBSYSTEM_DEF(supply)
 
 /datum/supply_order
 	var/ordernum
+	var/timestamp
 	var/singleton/hierarchy/supply_pack/object = null
 	var/orderedby = null
 	var/comment = null
