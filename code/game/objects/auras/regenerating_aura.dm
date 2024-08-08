@@ -154,6 +154,7 @@
 		H.adjust_nutrition(3)
 		return AURA_FALSE
 	// min of 25% guaranteed
+	regeneration_malus = min(regeneration_malus,  regeneration_malus_cap)
 	var/regen_mult = max(0.25, 1 - (regeneration_malus ? 0 : (regeneration_malus / regeneration_malus_cap)))
 	regeneration_malus = max(0, regeneration_malus - 1)
 	// Yes you can.. damage yourself to avoid regen damage ? call it unathi adrenaline!
