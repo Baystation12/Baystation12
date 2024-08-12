@@ -1,0 +1,10 @@
+author: SierraKomodo
+changes:
+  - {bugfix: Shuttle control consoles can no longer be synced to shuttles if not actually
+      on the shuttle.}
+  - {bugfix: 'Regular non-overmap shuttle control consoles will no longer function
+      on overmap shuttles, and vice-versa.'}
+  - {tweak: "Shuttle control consoles now automatically sync to the shuttle they're
+      built on when created, instead of needing to be set by multitooling the board
+      before creation."}
+delete-after: true
